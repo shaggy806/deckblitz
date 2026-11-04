@@ -12,6 +12,19 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **An any-number group "other" than an earlier slot offers nothing that slot took** (2026-11-04), a bug since the card landed: Graceful Takedown could be offered, or silently cast with, an illegal target.
+- **Two players searching, each in turn** (2026-11-04), `for-each-target` over `search-library`, the bots' polarity reading every member: Scheming Symmetry.
+- **Repeated searches with one shuffle** (2026-11-04), no engine code: Claim Jumper.
+- **A permanent that can't be attacked** (2026-11-04), `cant-be-attacked`, not binding a creature put onto the battlefield attacking (rule 508.4c): The Aetherspark.
+- **A comparison with each other player** (2026-11-04), no engine code: Battle Angels of Tyr.
+- **All colors, and P/T per card of the same name** (2026-11-04), no engine code: Leyline of the Guildpact, Mirror Box.
+- **A spell copied an additional time, placed among the copies** (2026-11-04), `would-copy-spell`, `choose-number`'s `placeCopy`: Twinning Staff.
+- **Copies of tokens that entered this turn** (2026-11-04), no engine code: Renewed Solidarity.
+- **A one-use graveyard cast permission, and mana from this source** (2026-11-04), no engine code: Chainer, Nightmare Adept; Brass's Tunnel-Grinder.
+- **Cards from hand taking {2} off a spell** (2026-11-04), `additionalCost.exileFromHandReduces`, the popup allowing only a legal mix with delve: March of Swirling Mist, March of Wretched Sorrow, March of Otherworldly Light.
+- **What a source exiled into the graveyard as one event** (2026-11-04), `return-exiled-by-source`'s `linked: "graveyard"`: Valakut Exploration, Pinnacle Starcage, Gravegouger.
+- **A die row that may roll again** (2026-11-04), `mayRollAgain` (rule 706.3c), the bots reading a roll's average: Delina, Wild Mage.
+- **Devotion in a defining ability, fame or fortune, is-chosen-type** (2026-11-04), no engine code: Daxos, Seize the Spotlight, Adaptive Automaton.
 - **A spell's own ceiling on X** (2026-11-04), `maxX` and `{ playersInGame: true }`: Open the Way.
 - **"Do this only once each turn"** (2026-11-04), no engine code: Ondu Spiritdancer.
 - **The total power of the creatures that died together** (2026-11-04), a batched `dies`'s `batchValue`, and a token's base P/T unclamped (rule 107.1b): The Skullspore Nexus.

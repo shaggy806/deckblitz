@@ -57,7 +57,10 @@ for:
   `top-commander-cards.txt` (the top 5000 Commander cards by EDHREC rank against the pool, fully
   triaged), re-marked in place by `npm run cards:mark -w engine`; new cards now come from the
   Oracle EDHREC ranks past it.
-  **The current authoring priority is set by set, whole sets, newest set first** (the
+  **The work now is the freed cards** (since 2026-11-04, the user's call): the `author-freed` skill,
+  one batch of ~150 a session off `cards:needs -- --stale --next 150`, until that queue is empty.
+  Building the remaining need keys (`build-family`) comes last. The set walks below are done.
+  **The authoring priority before that was set by set, whole sets, newest set first** (the
   `author-by-set` skill since 2026-10-14; `npm run cards:sets -w engine -- --sets | --next 60`):
   every set's Commander-legal first printings, going back first over the sets whose top half was
   walked before; and the same walk the other way, oldest set first and forward in time (the

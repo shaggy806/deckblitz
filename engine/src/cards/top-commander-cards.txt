@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4410 already implemented / 590 missing (marks refreshed 2026-11-04)
+4426 already implemented / 574 missing (marks refreshed 2026-11-04)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1573,7 +1573,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1580  Resourceful Defense                      {2}{W}           Enchantment
 [x]  1581  Bloodforged Battle-Axe                   {1}              Artifact — Equipment
 [x]  1582  Exploration Broodship                    {G}              Artifact — Spacecraft
-[ ]  1583  Brass's Tunnel-Grinder // Tecutlan, the Searing Rift {3}              Legendary Artifact // Legendary Land — Cave
+[x]  1583  Brass's Tunnel-Grinder // Tecutlan, the Searing Rift {3}              Legendary Artifact // Legendary Land — Cave
 [x]  1584  Awakening Zone                           {2}{G}           Enchantment
 [x]  1585  Desynchronization                        {2}{U}{U}        Instant
 [x]  1586  Deserted Temple                          {0}              Land
@@ -1582,7 +1582,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1589  Whirlwind of Thought                     {1}{U}{R}{W}     Enchantment
 [x]  1590  Goblin Welder                            {R}              Creature — Goblin Artificer
 [x]  1591  Kiora's Follower                         {G}{U}           Creature — Merfolk
-[ ]  1592  March of Swirling Mist                   {X}{U}           Instant
+[x]  1592  March of Swirling Mist                   {X}{U}           Instant
 [x]  1593  Losheel, Clockwork Scholar               {2}{W}           Legendary Creature — Elephant Artificer
 [x]  1594  Surrak and Goreclaw                      {4}{G}{G}        Legendary Creature — Human Bear
 [x]  1595  Cultivator Colossus                      {4}{G}{G}{G}     Creature — Plant Beast
@@ -1590,7 +1590,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1597  Eldrazi Conscription                     {8}              Kindred Enchantment — Eldrazi Aura
 [x]  1598  Sword of Vengeance                       {3}              Artifact — Equipment
 [x]  1599  Fiery Confluence                         {2}{R}{R}        Sorcery
-[ ]  1600  Valakut Exploration                      {2}{R}           Enchantment
+[x]  1600  Valakut Exploration                      {2}{R}           Enchantment
 [x]  1601  Rhox Faithmender                         {3}{W}           Creature — Rhino Monk
 [x]  1602  Return to Dust                           {2}{W}{W}        Instant
 [x]  1603  Scavenging Ooze                          {1}{G}           Creature — Ooze
@@ -1613,7 +1613,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1620  Stitch Together                          {B}{B}           Sorcery
 [x]  1621  Urza's Ruinous Blast                     {4}{W}           Legendary Sorcery
 [x]  1622  Ophidian Eye                             {2}{U}           Enchantment — Aura
-[ ]  1623  Chainer, Nightmare Adept                 {2}{B}{R}        Legendary Creature — Human Minion
+[x]  1623  Chainer, Nightmare Adept                 {2}{B}{R}        Legendary Creature — Human Minion
 [x]  1624  Elvish Warmaster                         {1}{G}           Creature — Elf Warrior
 [ ]  1625  Defiler of Vigor                         {3}{G}{G}        Creature — Phyrexian Wurm
 [x]  1626  Golgari Guildgate                        {0}              Land — Gate
@@ -1695,7 +1695,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1702  Extraplanar Lens                         {3}              Artifact
 [x]  1703  Timely Ward                              {2}{W}           Enchantment — Aura
 [x]  1704  Oversold Cemetery                        {1}{B}           Enchantment
-[ ]  1705  Mirror Box                               {3}              Artifact
+[x]  1705  Mirror Box                               {3}              Artifact
 [x]  1706  Sublime Epiphany                         {4}{U}{U}        Instant
 [x]  1707  Hornet Queen                             {4}{G}{G}{G}     Creature — Insect
 [x]  1708  Overrun                                  {2}{G}{G}{G}     Sorcery
@@ -1709,7 +1709,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1716  Crypt of Agadeem                         {0}              Land
 [x]  1717  Jin-Gitaxias, Core Augur                 {8}{U}{U}        Legendary Creature — Phyrexian Praetor
 [x]  1718  Gala Greeters                            {1}{G}           Creature — Elf Druid
-[ ]  1719  Twinning Staff                           {3}              Artifact
+[x]  1719  Twinning Staff                           {3}              Artifact
 [x]  1720  Painful Truths                           {2}{B}           Sorcery
 [x]  1721  Overlord of the Hauntwoods               {3}{G}{G}        Enchantment Creature — Avatar Horror
 [x]  1722  Fate Unraveler                           {3}{B}           Enchantment Creature — Hag
@@ -1722,15 +1722,15 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1729  Thermo-Alchemist                         {1}{R}           Creature — Human Shaman
 [x]  1730  Bountiful Landscape                      {0}              Land
 [x]  1731  Death Baron                              {1}{B}{B}        Creature — Zombie Wizard
-[ ]  1732  Renewed Solidarity                       {2}{W}           Enchantment
-[ ]  1733  Delina, Wild Mage                        {3}{R}           Legendary Creature — Elf Shaman
+[x]  1732  Renewed Solidarity                       {2}{W}           Enchantment
+[x]  1733  Delina, Wild Mage                        {3}{R}           Legendary Creature — Elf Shaman
 [x]  1734  Jin-Gitaxias, Progress Tyrant            {5}{U}{U}        Legendary Creature — Phyrexian Praetor
 [x]  1735  Molten Duplication                       {1}{R}           Sorcery
 [x]  1736  Flame of Anor                            {1}{U}{R}        Instant
 [x]  1737  Ancient Brass Dragon                     {5}{B}{B}        Creature — Elder Dragon
 [x]  1738  Tezzeret the Seeker                      {3}{U}{U}        Legendary Planeswalker — Tezzeret
 [x]  1739  Voltaic Key                              {1}              Artifact
-[ ]  1740  Leyline of the Guildpact                 {G/W}{G/U}{B/G}{R/G} Enchantment
+[x]  1740  Leyline of the Guildpact                 {G/W}{G/U}{B/G}{R/G} Enchantment
 [x]  1741  Alesha, Who Laughs at Fate               {1}{B}{R}        Legendary Creature — Human Warrior
 [x]  1742  Blue Sun's Zenith                        {X}{U}{U}{U}     Instant
 [x]  1743  Fable of the Mirror-Breaker // Reflection of Kiki-Jiki {3}              Enchantment — Saga // Enchantment Creature — Goblin Shaman
@@ -1744,19 +1744,19 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  1751  Season of Gathering                      {4}{G}{G}        Sorcery
 [x]  1752  Vorinclex, Voice of Hunger               {6}{G}{G}        Legendary Creature — Phyrexian Praetor
 [x]  1753  Barad-dûr                                {0}              Legendary Land
-[ ]  1754  Seize the Spotlight                      {2}{R}           Sorcery
+[x]  1754  Seize the Spotlight                      {2}{R}           Sorcery
 [x]  1755  Mana Leak                                {1}{U}           Instant
 [x]  1756  Proft's Eidetic Memory                   {1}{U}           Legendary Enchantment
 [x]  1757  Sacred Peaks                             {0}              Land — Mountain Plains
 [x]  1758  Teval's Judgment                         {2}{B}           Enchantment
-[ ]  1759  Daxos, Blessed by the Sun                {W}{W}           Legendary Enchantment Creature — Demigod
+[x]  1759  Daxos, Blessed by the Sun                {W}{W}           Legendary Enchantment Creature — Demigod
 [x]  1760  Tomb of the Spirit Dragon                {0}              Land
 [x]  1761  Nyx Lotus                                {4}              Legendary Artifact
 [ ]  1762  Ugin, Eye of the Storms                  {7}              Legendary Planeswalker — Ugin
 [x]  1763  Retreat to Coralhelm                     {2}{U}           Enchantment
 [x]  1764  Vengeful Bloodwitch                      {1}{B}           Creature — Vampire Warlock
 [x]  1765  Satyr Wayfinder                          {1}{G}           Creature — Satyr
-[ ]  1766  Adaptive Automaton                       {3}              Artifact Creature — Construct
+[x]  1766  Adaptive Automaton                       {3}              Artifact Creature — Construct
 [x]  1767  Supernatural Stamina                     {B}              Instant
 [x]  1768  Sunlit Marsh                             {0}              Land — Plains Swamp
 [x]  1769  Quantum Misalignment                     {4}{U}           Sorcery
@@ -1771,7 +1771,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  1778  Walk-In Closet // Forgotten Cellar       {2}{G} // {3}{G}{G} Enchantment — Room // Enchantment — Room
 [x]  1779  Ilysian Caryatid                         {1}{G}           Creature — Plant
 [x]  1780  Urabrask the Hidden                      {3}{R}{R}        Legendary Creature — Phyrexian Praetor
-[ ]  1781  Battle Angels of Tyr                     {2}{W}{W}        Creature — Angel Knight
+[x]  1781  Battle Angels of Tyr                     {2}{W}{W}        Creature — Angel Knight
 [x]  1782  Lion Sash                                {1}{W}           Artifact Creature — Equipment Cat
 [x]  1783  Psychic Corrosion                        {2}{U}           Enchantment
 [x]  1784  Aurelia, the Law Above                   {3}{R}{W}        Legendary Creature — Angel
@@ -1825,7 +1825,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1832  True Conviction                          {3}{W}{W}{W}     Enchantment
 [ ]  1833  The Eternal Wanderer                     {4}{W}{W}        Legendary Planeswalker
 [x]  1834  Sage's Reverie                           {3}{W}           Enchantment — Aura
-[ ]  1835  Scheming Symmetry                        {B}              Sorcery
+[x]  1835  Scheming Symmetry                        {B}              Sorcery
 [x]  1836  Bennie Bracks, Zoologist                 {3}{W}           Legendary Creature — Elf Druid
 [x]  1837  Susur Secundi, Void Altar                {0}              Land — Planet
 [x]  1838  Korvold, Fae-Cursed King                 {2}{B}{R}{G}     Legendary Creature — Dragon Noble
@@ -1837,7 +1837,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1844  Emrakul, the Promised End                {13}             Legendary Creature — Eldrazi
 [x]  1845  Wooded Ridgeline                         {0}              Land — Mountain Forest
 [x]  1846  Boros Guildgate                          {0}              Land — Gate
-[ ]  1847  Claim Jumper                             {2}{W}           Creature — Rabbit Mercenary
+[x]  1847  Claim Jumper                             {2}{W}           Creature — Rabbit Mercenary
 [x]  1848  Doom Whisperer                           {3}{B}{B}        Creature — Nightmare Demon
 [ ]  1849  Contagion Engine                         {6}              Artifact
 [x]  1850  Containment Construct                    {2}              Artifact Creature — Construct
@@ -1847,7 +1847,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1854  Razorgrass Ambush // Razorgrass Field    {2}              Instant // Land
 [x]  1855  Knuckles the Echidna                     {2}{R}{R}        Legendary Creature — Echidna Warrior
 [x]  1856  Origin of Metalbending                   {1}{G}           Instant — Lesson
-[ ]  1857  The Aetherspark                          {4}              Legendary Artifact Planeswalker — Equipment
+[x]  1857  The Aetherspark                          {4}              Legendary Artifact Planeswalker — Equipment
 [x]  1858  Junk Winder                              {5}{U}{U}        Creature — Serpent
 [x]  1859  Multani, Yavimaya's Avatar               {4}{G}{G}        Legendary Creature — Elemental Avatar
 [x]  1860  Darkness                                 {B}              Instant

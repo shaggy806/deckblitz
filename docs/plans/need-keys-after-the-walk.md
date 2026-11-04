@@ -905,8 +905,10 @@ missing. Re-run `--greedy` for Phase 2's order.
   Dead, Banner of Kinship, Unbreakable Formation, Padeem, Mechanized Production and Grasp of Fate needed no engine code. 42 by-rank cards built
   from Gemstone Caverns (rank 181) to Vigor (rank 1318). Then, by rank: Full Throttle, Final Fortune, Endurance, Cavern-Hoard Dragon, Drown in
   the Loch, Case of the Locked Hothouse, Feldon of the Third Path, Scroll Rack, Comet Storm, Baral, All Will Be One, Dour Port-Mage, Echoes of
-  Eternity, Kozilek, Ulamog, Ashling, Phelia, Sting, The Skullspore Nexus, Ondu Spiritdancer and Open the Way; Full Throttle, Final Fortune, the
-  Hothouse, Feldon, Ashling and Ondu Spiritdancer needed no engine code.
+  Eternity, Kozilek, Ulamog, Ashling, Phelia, Sting, The Skullspore Nexus, Ondu Spiritdancer, Open the Way, Delina, Daxos, Seize the Spotlight,
+  Adaptive Automaton, Brass's Tunnel-Grinder, Valakut Exploration, March of Swirling Mist, Chainer, Renewed Solidarity, Twinning Staff, Mirror Box,
+  Leyline of the Guildpact, Battle Angels of Tyr, The Aetherspark, Claim Jumper and Scheming Symmetry. **Then the order changed (the user's call,
+  2026-11-04): the freed cards are authored next, with `author-freed`, and building the remaining keys comes last.**
 
 ## Rough size
 

@@ -491,8 +491,11 @@ section keeps only what to do next.
   Ozai). Narrow keys: Ludevic and Curse of Leeches (a choice while transforming, `replacement:as-transforms`'s field can't ask), Defilers of
   Vigor and Faith (an optional additional cost), Geth's Summons (`condition:per-opponent-target-slot-condition`), Valki, Halo Fountain
   (`cost:untap-cost`), Full Throttle, Final Fortune, Endurance, Cavern-Hoard Dragon, Drown in the Loch, Case of the Locked Hothouse, Feldon of the
-  Third Path, Scroll Rack, Comet Storm, Baral, All Will Be One, Dour Port-Mage, Echoes of Eternity, Kozilek, Ulamog, Ashling, Phelia, Sting, The Skullspore Nexus, Ondu Spiritdancer, Open the Way. **Next by rank: Brass's
-  Tunnel-Grinder, Valakut Exploration, March of Swirling Mist, Chainer, Renewed Solidarity.** `--stale` 1,756 (the sweep's queue); top-5000 4410/5000, commanders 465/500; the greedy order's best unit now frees 4.
+  Third Path, Scroll Rack, Comet Storm, Baral, All Will Be One, Dour Port-Mage, Echoes of Eternity, Kozilek, Ulamog, Ashling, Phelia, Sting, The Skullspore Nexus, Ondu Spiritdancer, Open the Way, Delina, Daxos, Seize the Spotlight,
+  Adaptive Automaton, Brass's Tunnel-Grinder, Valakut Exploration, March of Swirling Mist, Chainer, Renewed Solidarity, Twinning Staff, Mirror Box, Leyline of the
+  Guildpact, Battle Angels of Tyr, The Aetherspark, Claim Jumper, Scheming Symmetry. **Next: the freed cards, with `author-freed`, batch by batch from a fresh
+  session; the remaining keys come after that queue is empty (the user's call, 2026-11-04).** `--stale` 1,758; top-5000 4426/5000, commanders 465/500. When
+  key building resumes, the order is `--by-rank`.
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
