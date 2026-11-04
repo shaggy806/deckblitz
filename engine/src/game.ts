@@ -237,6 +237,7 @@ import { scry } from "./decisions/scry.js";
 import { CREATURE_TYPES } from "./creature-types.js";
 import {
   amountValue,
+  signedAmountValue,
   applyEffectSpec,
   isCountScalableEffect,
   mayBeDone,
@@ -4137,6 +4138,8 @@ export class Game {
     readonly triggerObject?: ObjectId;
     readonly targetZones?: readonly (ZoneType | null)[];
     readonly lastKnownRefs?: LastKnownRefs;
+    /** As it stands, a negative power included, for a comparison. */
+    readonly signed?: true;
   }): (amount: EffectAmount) => number {
     let ctx: ResolutionContext | undefined;
     return (amount) => {
@@ -4152,7 +4155,7 @@ export class Game {
         env.targetZones ?? [],
         env.lastKnownRefs,
       );
-      return amountValue(amount, ctx);
+      return env.signed === true ? signedAmountValue(amount, ctx) : amountValue(amount, ctx);
     };
   }
 
@@ -30240,6 +30243,15 @@ export class Game {
     return staticConditionMet(this.state, this.registry, source, condition, {
       includeSelf: true,
       outsideFold: true,
+      amounts: this.filterAmounts({
+        source: source.id,
+        controller: source.controller,
+        signed: true,
+        ...(x !== undefined ? { x } : {}),
+        ...(triggerObject !== undefined ? { triggerObject } : {}),
+        // The spell that fired it, gone from the stack since (608.2h).
+        ...(triggerSpellStint !== undefined ? { lastKnownRefs: { triggerSpell: triggerSpellStint } } : {}),
+      }),
       ...(thatPlayer !== undefined ? { thatPlayer } : {}),
       ...(sourceTimestamp !== undefined ? { sourceTimestamp } : {}),
       ...(sourceLastKnown !== undefined ? { sourceLastKnown } : {}),
@@ -32135,6 +32147,16 @@ export class Game {
           includeSelf: true,
           outsideFold: true,
           targets,
+          amounts: this.filterAmounts({
+            source,
+            controller,
+            targets,
+            x,
+            triggerValue,
+            signed: true,
+            ...(triggerObject !== undefined ? { triggerObject } : {}),
+            lastKnownRefs: refs,
+          }),
           // "If that player has 10 or less life" (Ezio Auditore da Firenze),
           // "each opponent who has three or more poison counters" (Ixhel),
           // an `of-player`: the player this effect is about.

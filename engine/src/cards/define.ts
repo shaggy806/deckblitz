@@ -1533,6 +1533,25 @@ export type StaticCondition =
    */
   | { readonly kind: "trigger-object"; readonly filter: CardFilter }
   /**
+   * One amount against another, each read the way the ability reads an amount
+   * — Liberator, Urza's Battlethopter's "if the amount of mana spent to cast
+   * that spell is greater than Liberator's power", ED-E, Lonesome Eyebot's "if
+   * the number of attacking creatures is greater than the number of quest
+   * counters on ED-E". As they stand: a comparison isn't a calculation that
+   * rule 107.1b turns to zero, so a power of −1 is below 0.
+   *
+   * Meaningful in a triggered ability, as its intervening-if `condition` (rule
+   * 603.4, asked as it triggers and again as it resolves) or inside a
+   * `conditional` effect. A *static* ability has nothing to read them in and
+   * this is always false there.
+   */
+  | {
+      readonly kind: "amounts";
+      readonly left: EffectAmount;
+      readonly op: NumCompare["op"];
+      readonly right: EffectAmount;
+    }
+  /**
    * The object in target slot `index` matches `filter` — Scavenging Ooze's
    * "Exile target card from a graveyard. **If it was a creature card**, put a
    * +1/+1 counter on this creature and you gain 1 life."

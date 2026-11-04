@@ -6341,6 +6341,7 @@ clause (section 9):
   the resolving triggered ability (its `{ triggerValue: true }` amount):
   "if you won" off a `clashes` trigger is `{ op: "gte", n: 1 }` (Rebellion
   of the Flamekin, Entangling Trap). Only a resolution can answer it.
+- `{ kind: "amounts", left, op, right }` — one amount against another, unclamped, as a trigger's intervening-if or in a `conditional`: "if the amount of mana spent to cast that spell is greater than Liberator's power" (`{ manaSpentOf: "trigger-object" }`, `"gt"`, `{ powerOf: "source" }`), ED-E, Lonesome Eyebot's attackers against its quest counters. False in a static ability.
 - `{ kind: "x", compare }` — "if X is 10 or more" (Finale of Devastation:
   `{ op: "gte", n: 10 }`): the X the resolving spell or ability was cast or
   activated with. A resolution answers it, and so does a triggered ability's

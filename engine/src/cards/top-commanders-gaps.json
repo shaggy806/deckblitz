@@ -1778,7 +1778,9 @@
   "effect:win-game",
   "effect:put-arrived-all-tapped",
   "amount:target-player-counters",
-  "replacement:as-transforms"
+  "replacement:as-transforms",
+  "replacement:as-transforms",
+  "condition:intervening-if-amounts"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

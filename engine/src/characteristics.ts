@@ -400,6 +400,12 @@ export interface ConditionOptions {
    */
   readonly triggerObject?: ObjectId;
   /**
+   * Reads an amount as the ability asking does, for an `amounts` condition.
+   * Passed by the intervening-if checks and a resolving `conditional`; a static
+   * ability has none.
+   */
+  readonly amounts?: (amount: EffectAmount) => number;
+  /**
    * Which stint on the stack of `triggerObject` — a spell whose casting fired
    * the ability — it means (`LastKnownRefs.triggerSpell`), for a
    * `trigger-spell-first` condition asked as it resolves. As it triggers, the
@@ -1420,6 +1426,11 @@ function evalStaticCondition(
         lastKnown: state.objects[id]?.zone !== "stack",
       });
     }
+    case "amounts":
+      return (
+        opts.amounts !== undefined &&
+        compareNum(opts.amounts(condition.left), { op: condition.op, n: opts.amounts(condition.right) })
+      );
     case "target":
     case "target-chosen":
     case "sacrificed":

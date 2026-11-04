@@ -14499,7 +14499,7 @@ export function ptChangeValue(
 }
 
 /** {@link amountValue} before its clamp: the calculation as written. */
-function signedAmountValue(
+export function signedAmountValue(
   amount: EffectAmount,
   ctx: ResolutionContext,
   each?: PlayerId,
