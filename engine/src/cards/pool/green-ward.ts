@@ -17,7 +17,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "attached" },
-      protection: { colors: ["G"] },
+      protection: { colors: ["G"], doesntRemoveSource: true },
       text: STATIC_TEXT,
     },
   ],

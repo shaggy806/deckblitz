@@ -168,7 +168,7 @@ export function protectionBlocks(
     const colors = new Set(sparing.otherColors);
     const types = new Set(sparing.otherTypes);
     for (const instance of sparing.instances) {
-      if (instance.aura !== enchanting) {
+      if (instance.aura !== "all" && instance.aura !== enchanting) {
         for (const c of instance.colors) colors.add(c);
         for (const t of instance.types) types.add(t);
       }

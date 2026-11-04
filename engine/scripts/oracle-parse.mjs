@@ -12329,6 +12329,28 @@ function parseFaceAsWritten(face, ctx = {}) {
       });
       continue;
     }
+    // The same with colours (White Ward, Pentarch Ward, Pledge of Loyalty), and
+    // every Aura spared (Spectra Ward).
+    if (
+      (m = /^Enchanted creature (?:gets ([+-]\d+)\/([+-]\d+) and )?has protection from (white|blue|black|red|green|the chosen color|each color|each color among permanents you control)\. This effect doesn't remove (this Aura|~|Auras)\.$/.exec(line))
+    ) {
+      out.static.push({
+        affects: { scope: "attached" },
+        ...(m[1] !== undefined ? { grantPt: [Number(m[1]), Number(m[2])] } : {}),
+        protection: {
+          ...(m[3] === "the chosen color"
+            ? { chosenColor: true }
+            : m[3] === "each color"
+              ? { colors: ["W", "U", "B", "R", "G"] }
+              : m[3] === "each color among permanents you control"
+                ? { colorsAmong: { controlledBy: "you" } }
+                : { colors: [COLOR_WORD[m[3]]] }),
+          ...(m[4] === "Auras" ? { doesntRemoveAuras: true } : { doesntRemoveSource: true }),
+        },
+        text: printed(raw),
+      });
+      continue;
+    }
     // "You have protection from the chosen card name" (Runed Halo).
     if (out.chooseCardNameOnEnter !== undefined && line.startsWith("You have protection from the chosen card name.")) {
       out.chooseCardNameOnEnter = { ...out.chooseCardNameOnEnter, aim: "opponent-permanents" };

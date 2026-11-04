@@ -5438,7 +5438,7 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   (`supertypesOf`). A storm copy is a token once it resolves (rule 707.10f).
   `affects` is irrelevant.
 - `protection: { outsideCommanderIdentity? }` — Commander's Plate's "each color that's not in your commander's color identity", the static's controller's as it is now: nothing with no commander (rule 903.4f), every colour with a colourless one. Beside the rest of the shape:
-- `protection: { colors?, types?, filter?, chosenColor?, chosenCardType?, exiledCardTypes?, fromPlayers?, doesntRemoveSource? }` — rule 702.16 (White Knight: `{ colors:
+- `protection: { colors?, types?, filter?, chosenColor?, chosenCardType?, exiledCardTypes?, colorsAmong?, fromPlayers?, doesntRemoveSource?, doesntRemoveAuras? }` — rule 702.16 (White Knight: `{ colors:
   ["B"] }`; a `filter` for what neither names — Basri's Lieutenant's
   multicolored, Baneslayer Angel's `{ anyOf: [{ subtype: "Demon" }, { subtype:
   "Dragon" }] }`, `{}` for everything, 702.16j — Vexilus Praetor over `scope:
@@ -5458,7 +5458,7 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   chosen color**", the colour the source named as it entered (`chooseOnEnter`
   over the five — Flickering Ward), `chosenCardType` "from the chosen card
   type" (`chooseOnEnter: [...CARD_TYPE_CHOICES]` — Serra's Emissary);
-  `doesntRemoveSource` is "This effect
+  `colorsAmong` is "each color among permanents you control" (a filter, Pledge of Loyalty); `doesntRemoveAuras` is "This effect doesn't remove Auras", every one of them (Spectra Ward); `doesntRemoveSource` is "This effect
   doesn't remove this Aura" (rule 702.16n): that instance doesn't make its own
   Aura fall off, though it stops everything else and another instance of the
   same colour or card type removes the Aura as normal (Tattoo Ward). Granting

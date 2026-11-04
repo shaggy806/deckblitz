@@ -1526,7 +1526,8 @@ export interface Characteristics {
       readonly otherColors: ReadonlySet<Color>;
       readonly otherTypes: ReadonlySet<CardType>;
       readonly instances: readonly {
-        readonly aura: ObjectId;
+        /** The Aura it spares, or `"all"` of them (Spectra Ward). */
+        readonly aura: ObjectId | "all";
         readonly colors: readonly Color[];
         readonly types: readonly CardType[];
       }[];
@@ -1625,6 +1626,8 @@ function staticProtection(
     p.chosenColor !== true &&
     p.chosenCardType !== true &&
     p.doesntRemoveSource !== true &&
+    p.doesntRemoveAuras !== true &&
+    p.colorsAmong === undefined &&
     p.filter === undefined &&
     p.fromPlayers === undefined &&
     p.exiledCardTypes !== true &&
@@ -1639,6 +1642,10 @@ function staticProtection(
     const identity = state.players[source.controller]?.commanderIdentity ?? [];
     colors.push(...COLORS.filter((c) => !identity.includes(c)));
   }
+  // Colours are layer 5, so protection (layer 6) reads them finished.
+  if (p.colorsAmong !== undefined) {
+    colors.push(...colorSetAmongPermanents(state, registry, source.controller, p.colorsAmong));
+  }
   const exiledTypes =
     p.exiledCardTypes === true
       ? (liveReferenceObjects(state, registry, "exiled-with-source", { you: source.controller, source: source.id }) ?? []).flatMap(
@@ -1651,6 +1658,7 @@ function staticProtection(
     ...(p.filter !== undefined ? { filter: p.filter, filterSource: source.id } : {}),
     ...(p.fromPlayers !== undefined ? { players: protectionPlayers(state, p.fromPlayers, source) } : {}),
     ...(p.doesntRemoveSource === true ? { sparesAura: source.id } : {}),
+    ...(p.doesntRemoveAuras === true ? { sparesAura: "all" as const } : {}),
   };
 }
 
@@ -3650,6 +3658,17 @@ export function colorsAmongPermanents(
   filter: CardFilter,
   except: readonly ObjectId[] = [],
 ): number {
+  return colorSetAmongPermanents(state, registry, you, filter, except).size;
+}
+
+/** The colours {@link colorsAmongPermanents} counts. */
+function colorSetAmongPermanents(
+  state: GameState,
+  registry: CardRegistry,
+  you: PlayerId,
+  filter: CardFilter,
+  except: readonly ObjectId[] = [],
+): ReadonlySet<Color> {
   const colors = new Set<Color>();
   const matches = weightedMatches(
     state,
@@ -3660,7 +3679,7 @@ export function colorsAmongPermanents(
   for (const { id } of matches) {
     for (const color of effectiveColors(state, registry, state.objects[id])) colors.add(color);
   }
-  return colors.size;
+  return colors;
 }
 
 /**
@@ -4612,7 +4631,7 @@ interface AppliedEffect {
     /** Protection from these players (702.16k). */
     players?: readonly PlayerId[];
     /** The Aura this instance doesn't remove (702.16n). */
-    sparesAura?: ObjectId;
+    sparesAura?: ObjectId | "all";
   } | null;
   /** "Hexproof from …" it grants — the same shape as `protection`, with the
    * qualifiers of a printed "can't be the target of …". */
@@ -5286,7 +5305,7 @@ function computeCharacteristicsUncached(
   const protBoundFilters: { filter: CardFilter; source: ObjectId }[] = [];
   const protPlayers = new Set<PlayerId>();
   // 702.16n's instances, and every other instance's qualities (`sparing`).
-  const protSparing: { aura: ObjectId; colors: readonly Color[]; types: readonly CardType[] }[] = [];
+  const protSparing: { aura: ObjectId | "all"; colors: readonly Color[]; types: readonly CardType[] }[] = [];
   const protOtherColors = new Set<Color>();
   const protOtherTypes = new Set<CardType>();
   const hexColors = new Set<Color>();

@@ -15,5 +15,5 @@ export default defineCard({
   subtypes: ["Aura"],
   text: `Enchant creature\n${TEXT}`,
   targets: ["creature"],
-  static: [{ affects: { scope: "attached" }, protection: { colors: ["U"] }, text: TEXT }],
+  static: [{ affects: { scope: "attached" }, protection: { colors: ["U"], doesntRemoveSource: true }, text: TEXT }],
 });

@@ -1562,7 +1562,8 @@
   "condition:condition-lands-same-name",
   "condition:control-distinct-names-count",
   "static:cant-search-library",
-  "static:damage-life-floor"
+  "static:damage-life-floor",
+  "static:protection-doesnt-remove-source"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

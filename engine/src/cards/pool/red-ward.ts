@@ -15,7 +15,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "attached" },
-      protection: { colors: ["R"] },
+      protection: { colors: ["R"], doesntRemoveSource: true },
       text: "Enchanted creature has protection from red. This effect doesn't remove this Aura.",
     },
   ],

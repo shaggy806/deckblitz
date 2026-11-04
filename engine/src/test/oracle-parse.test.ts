@@ -3665,6 +3665,20 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       grantPt: [1, 1],
       protection: { types: ["enchantment"], doesntRemoveSource: true },
     });
+    const ward = (quality: string, spares = "this Aura") =>
+      qualities(`Enchant creature\nEnchanted creature has protection from ${quality}. This effect doesn't remove ${spares}.`, "Enchantment — Aura").static[0];
+    expect(ward("white").protection).toEqual({ colors: ["W"], doesntRemoveSource: true });
+    expect(ward("the chosen color").protection).toEqual({ chosenColor: true, doesntRemoveSource: true });
+    expect(ward("each color among permanents you control").protection).toEqual({
+      colorsAmong: { controlledBy: "you" },
+      doesntRemoveSource: true,
+    });
+    expect(
+      qualities("Enchant creature\nEnchanted creature gets +2/+2 and has protection from each color. This effect doesn't remove Auras.", "Enchantment — Aura").static[0],
+    ).toMatchObject({
+      grantPt: [2, 2],
+      protection: { colors: ["W", "U", "B", "R", "G"], doesntRemoveAuras: true },
+    });
     const grant = (quality: string) =>
       qualities(`{T}: Target permanent you control gains protection from ${quality} until end of turn.`).activated[0].effect;
     expect(grant("each of your opponents")).toMatchObject({ kind: "grant-protection", from: { fromPlayers: "opponents" }, duration: "end-of-turn" });

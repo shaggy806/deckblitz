@@ -3648,6 +3648,15 @@ export interface StaticAbility {
      * instance of the same quality removes the Aura as normal. Reads its
      * colours and card types (Tattoo Ward), not a filter. */
     readonly doesntRemoveSource?: true;
+    /** "This effect **doesn't remove Auras**" (rule 702.16n — Spectra Ward):
+     * the same for every Aura on the creature, not this one alone; another
+     * instance of the same quality still removes them, and an Aura spell still
+     * can't target it. */
+    readonly doesntRemoveAuras?: true;
+    /** "Protection from **each color among permanents you control**" (Pledge of
+     * Loyalty): the colours of the permanents matching this filter, from the
+     * static's controller's side, as they are now. */
+    readonly colorsAmong?: CardFilter;
   };
   /** Hexproof from a quality (rule 702.11d-e) — the affected permanent can't
    * be the target of a matching spell, or an ability from a matching source,
