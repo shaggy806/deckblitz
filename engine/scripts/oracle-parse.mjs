@@ -2752,6 +2752,10 @@ export function parseSentence(sentence, ctx) {
   if ((m = /^counter that spell or ability unless its controller pays (\{\d+\})\.$/i.exec(s))) {
     return { kind: "ward", cost: { mana: m[1] } };
   }
+  // "Players can't search libraries this turn" (Shadow of Doubt).
+  if (/^players can't search libraries this turn\.$/i.test(s)) {
+    return { kind: "player-effect", duration: "end-of-turn", cantSearchLibraries: "each-player" };
+  }
   // "Until end of turn, if you tap a land you control for mana, it produces
   // {U} instead of any other type" (Deep Water — rule 106.12).
   if ((m = /^until end of turn, if you tap a land you control for mana, it produces \{([WUBRGC])\} instead of any other type\.$/i.exec(s))) {
@@ -12283,6 +12287,44 @@ function parseFaceAsWritten(face, ctx = {}) {
         affects: { scope: "attached" },
         ...(m[1] !== undefined ? { grantPt: [Number(m[1]), Number(m[2])] } : {}),
         protection: { types: [m[3].slice(0, -1)], doesntRemoveSource: true },
+        text: printed(raw),
+      });
+      continue;
+    }
+    // "Players can't search libraries" and its narrower kin (`cantSearchLibraries`).
+    const noSearch = {
+      "Players can't search libraries.": { who: "any-player" },
+      "Your opponents can't search libraries.": { who: "opponent" },
+      "Spells and abilities your opponents control can't cause their controller to search their library.": {
+        who: "opponent",
+        causedByThemselves: true,
+      },
+      "Players can't search libraries. Any player may pay {2} for that player to ignore this effect until end of turn.": {
+        who: "any-player",
+        ignoreCost: "{2}",
+      },
+    }[line];
+    if (noSearch !== undefined) {
+      out.static.push({ affects: { scope: "self" }, cantSearchLibraries: noSearch, text: printed(raw) });
+      continue;
+    }
+    // "Damage that would reduce your life total to less than N reduces it to N
+    // instead" (`damageLifeFloor` — Ali from Cairo, Worship, Elderscale Wurm).
+    if (
+      (m = /^(If you control a creature, |As long as you have \d+ or more life, )?[Dd]amage that would reduce your life total to less than (\d+) reduces it to (\d+) instead\.$/.exec(line)) &&
+      m[2] === m[3] &&
+      (m[1] === undefined || m[1].startsWith("If") || m[1] === `As long as you have ${m[2]} or more life, `)
+    ) {
+      out.static.push({
+        affects: { scope: "self" },
+        ...(m[1] === undefined
+          ? {}
+          : {
+              condition: m[1].startsWith("If")
+                ? { kind: "controls", filter: { type: "creature" }, atLeast: 1, countsSelf: true }
+                : { kind: "life-total", atLeast: Number(m[2]) },
+            }),
+        damageLifeFloor: Number(m[2]),
         text: printed(raw),
       });
       continue;

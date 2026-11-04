@@ -40,6 +40,8 @@ const SEEN_DESTINATIONS: ReadonlySet<string> = new Set(["hand", "battlefield", "
 export function forcedZoneChoice(state: GameState): { readonly player: PlayerId; readonly chosen: readonly ObjectId[] } | null {
   const a = state.awaiting;
   if (a === null || a.kind !== "choose-from-zone") return null;
+  // A search that can't happen and has nothing else to find: nothing to see.
+  if (a.searchForbidden === true && a.ids.length === 0) return { player: a.player, chosen: [] };
   const forced =
     a.ids.length > 0 &&
     a.eligible.length === a.ids.length &&

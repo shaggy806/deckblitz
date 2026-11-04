@@ -6888,3 +6888,17 @@ These boards start before the first turn (the builder's `openingHands`), with th
 
 - **Do:** Cast Ashling's Prerogative and click odd. Then cast Llanowar Elves and Grizzly Bears.
 - **Expect:** The banner says "choose odd or even", and the enchantment then shows odd. Llanowar Elves enters untapped and has haste; Grizzly Bears enters tapped and has no haste.
+### Leonin Arbiter: paying to ignore an opponent's
+
+- **Do:** Click Bob's Leonin Arbiter and choose "Ignore its effect until end of turn — pay {2}". Then cast Demonic Tutor.
+- **Expect:** Two lands tap, nothing goes on the stack, and the log says you paid. The tutor offers Grizzly Bears.
+
+### Leonin Arbiter: a search finds nothing without paying
+
+- **Do:** Cast Demonic Tutor without clicking the Arbiter.
+- **Expect:** No popup opens. Demonic Tutor goes to your graveyard, Grizzly Bears stays in your library, and your hand doesn't grow.
+
+### Leonin Arbiter: four players, paying for yourself alone
+
+- **Do:** Click Bob's Leonin Arbiter, choose "Ignore its effect until end of turn", then cast Demonic Tutor.
+- **Expect:** Two lands tap and you keep priority. The tutor finds Grizzly Bears. The menu doesn't offer the payment a second time this turn.

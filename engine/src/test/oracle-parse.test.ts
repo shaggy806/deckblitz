@@ -24,6 +24,45 @@ import { parseEffect, parseFace, parseTrigger, parseCost, parseSentence, parseTy
 // @ts-expect-error — as above.
 import { checkPool } from "../../scripts/oracle-parse-check.mjs";
 
+describe("players who can't search libraries, and a floor under a life total", () => {
+  const read = (type_line: string, oracle_text: string) =>
+    parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{1}", colors: [] });
+  const search = (text: string) => read("Artifact", text).static[0].cantSearchLibraries;
+  it("reads who can't search, as a static", () => {
+    expect(search("Players can't search libraries.")).toEqual({ who: "any-player" });
+    expect(search("Your opponents can't search libraries.")).toEqual({ who: "opponent" });
+    expect(search("Spells and abilities your opponents control can't cause their controller to search their library.")).toEqual({
+      who: "opponent",
+      causedByThemselves: true,
+    });
+    expect(
+      search("Players can't search libraries. Any player may pay {2} for that player to ignore this effect until end of turn."),
+    ).toEqual({ who: "any-player", ignoreCost: "{2}" });
+  });
+  it("reads it for this turn, on a spell", () => {
+    expect(read("Instant", "Players can't search libraries this turn.\nDraw a card.").effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "player-effect", duration: "end-of-turn", cantSearchLibraries: "each-player" },
+        { kind: "draw", amount: 1 },
+      ],
+    });
+  });
+  it("reads the floor, with its conditions", () => {
+    const floor = (text: string) => read("Creature — Human", text).static[0];
+    expect(floor("Damage that would reduce your life total to less than 1 reduces it to 1 instead.")).toMatchObject({
+      damageLifeFloor: 1,
+    });
+    expect(floor("If you control a creature, damage that would reduce your life total to less than 1 reduces it to 1 instead.")).toMatchObject({
+      condition: { kind: "controls", filter: { type: "creature" } },
+      damageLifeFloor: 1,
+    });
+    expect(
+      floor("As long as you have 7 or more life, damage that would reduce your life total to less than 7 reduces it to 7 instead."),
+    ).toMatchObject({ condition: { kind: "life-total", atLeast: 7 }, damageLifeFloor: 7 });
+  });
+});
+
 describe("a cost removing all of a kind of counter, the number the X", () => {
   const read = (oracle_text: string) =>
     parseFace({ name: "Card", type_line: "Artifact", oracle_text }, { tokenFor: (d: string) => d }).activated[0];

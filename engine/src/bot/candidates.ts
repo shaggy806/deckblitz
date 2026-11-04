@@ -326,6 +326,10 @@ export function candidateActions(
     // from a host about to die, say).
     case "end-licid-effect":
       return [{ type: "end-licid-effect", player, permanent: legal.permanent }];
+    // Paying to ignore Leonin Arbiter: weighed like any other play, which only
+    // a search it lets through can make worth the mana.
+    case "ignore-static-effect":
+      return [{ type: "ignore-static-effect", player, permanent: legal.permanent }];
     case "cycle":
       return [{ type: "cycle", player, card: legal.card }];
     default:

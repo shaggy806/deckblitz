@@ -147,6 +147,10 @@ import {
   spellCantBeCountered,
   playerCantLoseGame,
   playerCantLoseLife,
+  playerCantSearchLibrary,
+  playerDamageLifeFloor,
+  playerIgnoresStatic,
+  staticIgnoreCost,
   playerCantWinGame,
   playerHasProtectionFromEverything,
   playerLifeCantChange,
@@ -2439,6 +2443,9 @@ export class Game {
       case "end-licid-effect":
         this.endLicidEffect(action.player, action.permanent);
         break;
+      case "ignore-static-effect":
+        this.ignoreStaticEffect(action.player, action.permanent);
+        break;
       case "cycle":
         this.cycleCard(action.player, action.card);
         break;
@@ -2680,6 +2687,8 @@ export class Game {
         return this.whyCannotUnlock(action.player, action.permanent, action.door);
       case "end-licid-effect":
         return this.whyCannotEndLicidEffect(action.player, action.permanent);
+      case "ignore-static-effect":
+        return this.whyCannotIgnoreStatic(action.player, action.permanent);
       case "cycle":
         return this.whyCannotCycle(action.player, action.card);
       case "cast-spell":
@@ -3491,6 +3500,14 @@ export class Game {
       if (licid === undefined || licid.controller !== player) continue;
       if (this.whyCannotEndLicidEffect(player, id) !== null) continue;
       out.push({ kind: "end-licid-effect", permanent: id, cardName: printedCardName(this.state.objects[id]), cost: licid.endCost });
+    }
+
+    // Ignoring a permanent's static effect until end of turn (rule 116.2d):
+    // any time its player has priority, whoever controls the permanent.
+    for (const id of this.state.zones.shared.battlefield) {
+      const cost = staticIgnoreCost(this.state, this.registry, this.state.objects[id]);
+      if (cost === null || this.whyCannotIgnoreStatic(player, id) !== null) continue;
+      out.push({ kind: "ignore-static-effect", permanent: id, cardName: printedCardName(this.state.objects[id]), cost });
     }
 
     this.pushActivations(player, out);
@@ -24887,6 +24904,7 @@ export class Game {
     } else {
       delete this.state.resolvingSource;
     }
+    if (top !== undefined) this.state.resolvingController = top.controller;
     this.resolveTopObject();
     this.holdResolutionOpen(parked);
     this.endResolutionIfDone();
@@ -24967,6 +24985,7 @@ export class Game {
     if (this.state.suspendedResolutions.length === 0) {
       delete this.state.resolutionSince;
       delete this.state.resolvingSource;
+      delete this.state.resolvingController;
     }
   }
 
@@ -33812,10 +33831,14 @@ export class Game {
         });
       },
       cardsIn: (player, zone) => [...(this.state.zones.perPlayer[player]?.[zone] ?? [])],
+      cantSearchLibrary: (player, owner) => this.cantSearchLibrary(player, owner),
       castableWhileSearching: (player) =>
-        (this.state.zones.perPlayer[player]?.library ?? []).filter(
-          (id) => this.registry.get(this.state.objects[id].cardName).castWhileSearchingLibrary === true,
-        ),
+        // Not searching, no "while you're searching".
+        this.cantSearchLibrary(player, player)
+          ? []
+          : (this.state.zones.perPlayer[player]?.library ?? []).filter(
+              (id) => this.registry.get(this.state.objects[id].cardName).castWhileSearchingLibrary === true,
+            ),
       allowCastLinkedExile: (spell, free, more) => {
         const holder = this.state.objects[source];
         const stint = refs.source ?? (holder?.zone === "battlefield" ? (holder.zoneChangeCount ?? 0) : undefined);
@@ -35394,6 +35417,13 @@ export class Game {
     };
   }
 
+  /** Whether `searcher` can't search `owner`'s library in what's resolving now
+   * (`playerCantSearchLibrary`), which is what "caused" the search whoever is
+   * doing it — Ashiok's opponents may be told to by Ashiok's controller. */
+  private cantSearchLibrary(searcher: PlayerId, owner: PlayerId): boolean {
+    return playerCantSearchLibrary(this.state, this.registry, searcher, owner, this.state.resolvingController ?? searcher);
+  }
+
   /** See the `"search-library"` {@link EffectSpec}. Lists only the matching
    * cards (a real search reveals the whole library, but the only decision is
    * which matching card to take); `leftover: "shuffle"` shuffles the whole
@@ -35428,7 +35458,13 @@ export class Game {
     // 701.23j): its owner's sideboard alone, or beside the zones searched.
     const outsideOnly = more?.outside === "only";
     const searched = SEARCHED_ZONES[zones];
-    const library = searched.library && !outsideOnly;
+    // "Players can't search libraries": its cards can't be found, while the
+    // other zones still can be. "Search your library … then shuffle" still
+    // shuffles (the rulings); "if you search your library this way, shuffle",
+    // all a search of several zones says, doesn't.
+    const forbidden = searched.library && this.cantSearchLibrary(player, owner);
+    const library = searched.library && !outsideOnly && !forbidden;
+    const shuffles = library || (forbidden && zones === "library" && !outsideOnly);
     const inGraveyard = searched.graveyard && !outsideOnly ? matching("graveyard") : [];
     const inHand = searched.hand && !outsideOnly ? matching("hand") : [];
     const fits = (id: ObjectId): boolean => matchesFilter(this.state, this.registry, id, filter, { you: player, x });
@@ -35487,7 +35523,7 @@ export class Game {
             ...more.instead,
             to: destination,
             ...(enterTapped && destination === "battlefield" ? { toTapped: true as const } : {}),
-            shuffle: library ? owner : null,
+            shuffle: shuffles ? owner : null,
             x,
           }
         : undefined;
@@ -35496,6 +35532,7 @@ export class Game {
         kind: "choose-from-zone",
         player,
         ...(owner !== player ? { forPlayer: owner } : {}),
+        ...(forbidden ? { searchForbidden: true as const } : {}),
         ids: eligible,
         eligible,
         min: Math.min(least, most, eligible.length),
@@ -35515,6 +35552,7 @@ export class Game {
       kind: "choose-from-zone",
       player,
       ...(owner !== player ? { forPlayer: owner } : {}),
+      ...(forbidden ? { searchForbidden: true as const } : {}),
       ids: eligible,
       eligible,
       min: Math.min(least, most, eligible.length),
@@ -35524,7 +35562,7 @@ export class Game {
       // "If you search your library this way, shuffle" — "then that player
       // shuffles": the library's owner (rule 701.24a). "And exile the rest"
       // (Doomsday): gone, with no shuffle.
-      leftover: more?.exileRest === true ? "exile" : library ? "shuffle" : "stay",
+      leftover: more?.exileRest === true ? "exile" : shuffles ? "shuffle" : "stay",
       ...(more?.inAnyOrder === true && destination === "library-top" ? { findsInAnyOrder: true } : {}),
       // "…with an additional +1/+1 counter on it" (Neoform).
       ...(more?.withCounters !== undefined && destination === "battlefield"
@@ -44014,6 +44052,38 @@ export class Game {
     this.afterPlayerAction(player);
   }
 
+  private whyCannotIgnoreStatic(player: PlayerId, id: ObjectId): string | null {
+    const blocked = this.whyCannotAct(player);
+    if (blocked !== null) return blocked;
+    const object = this.state.objects[id];
+    const cost = object === undefined ? null : staticIgnoreCost(this.state, this.registry, object);
+    if (cost === null) return "that has no effect to ignore";
+    if (playerIgnoresStatic(this.state, player, object)) return `${player} is already ignoring that effect`;
+    if (this.payMana(player, parseManaCost(cost)) === null) return `${player} cannot pay ${cost}`;
+    return null;
+  }
+
+  /** "Any player may pay {2} for that player to ignore this effect until end of
+   * turn" (Leonin Arbiter): a special action, so nothing can respond (rule
+   * 116.2d) and the player keeps priority (116.3). It covers this permanent's
+   * effect alone, for this player alone, and only while it's the same permanent. */
+  private ignoreStaticEffect(player: PlayerId, id: ObjectId): void {
+    const why = this.whyCannotIgnoreStatic(player, id);
+    if (why !== null) throw new Error(why);
+    const object = this.state.objects[id];
+    const cost = staticIgnoreCost(this.state, this.registry, object) ?? "";
+    const payment = this.payMana(player, parseManaCost(cost));
+    if (payment === null) throw new Error(`${player} cannot pay ${cost}`);
+    this.executePayment(player, payment);
+    this.state.playerEffects = [
+      ...(this.state.playerEffects ?? []),
+      { owner: player, expires: { kind: "end-of-turn" }, ignoresStatic: { source: id, stint: object.zoneChangeCount ?? 0 } },
+    ];
+    invalidateComputedCache();
+    this.emit({ type: "static-effect-ignored", player, object: id, cost });
+    this.afterPlayerAction(player);
+  }
+
   /** Turn a face-down permanent face up (rules 701.40b, 702.37e): show
    * everyone the card, pay the cost, and it has its own characteristics
    * again — the same permanent, so it doesn't enter the battlefield (708.8)
@@ -48503,11 +48573,7 @@ export class Game {
    * (the ruling). The highest floor among several applies.
    */
   private lifeLossFromDamage(player: PlayerId, amount: number): number {
-    let floor: number | null = null;
-    for (const effect of this.state.playerEffects ?? []) {
-      const held = effect.damageLifeFloor;
-      if (held !== undefined && held.players.includes(player)) floor = Math.max(floor ?? held.floor, held.floor);
-    }
+    const floor = playerDamageLifeFloor(this.state, this.registry, player);
     const life = this.state.players[player].life;
     if (floor === null || life < floor) return amount;
     return Math.min(amount, life - floor);

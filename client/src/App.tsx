@@ -2005,6 +2005,13 @@ function Table({
     for (const a of actions) if (a.kind === 'end-licid-effect') m.set(a.permanent, a)
     return m
   }, [actions])
+  // A permanent's effect this seat may pay to ignore until end of turn (Leonin
+  // Arbiter): a special action, offered in that permanent's menu, whoever's it is.
+  const ignoreEffectBySource = useMemo(() => {
+    const m = new Map<ObjectId, Extract<LegalAction, { kind: 'ignore-static-effect' }>>()
+    for (const a of actions) if (a.kind === 'ignore-static-effect') m.set(a.permanent, a)
+    return m
+  }, [actions])
   // Every way to turn each face-down permanent face up: its mana cost, its
   // morph or disguise cost, or both (a manifested card with morph).
   const faceUpBySource = useMemo(() => {
@@ -3436,6 +3443,7 @@ function Table({
           faceUpBySource.has(id) ||
           unlockBySource.has(id) ||
           licidEndBySource.has(id) ||
+          ignoreEffectBySource.has(id) ||
           preparedCastsBySource.has(id))
       ) {
         setSelectedSource((cur) => (cur === id ? null : id))
@@ -3446,6 +3454,7 @@ function Table({
       faceUpBySource,
       unlockBySource,
       licidEndBySource,
+      ignoreEffectBySource,
       preparedCastsBySource,
       assignDamageAction,
       attackAction,
@@ -3874,8 +3883,13 @@ function Table({
           faceUpBySource.has(i) ||
           unlockBySource.has(i) ||
           licidEndBySource.has(i) ||
+          ignoreEffectBySource.has(i) ||
           preparedCastsBySource.has(i),
       )
+      selected = selectedSource !== null && ids.includes(selectedSource)
+    } else if (mode === 'priority' && ids.some((i) => ignoreEffectBySource.has(i))) {
+      // Another player's Leonin Arbiter: any player may pay to ignore it.
+      activatable = true
       selected = selectedSource !== null && ids.includes(selectedSource)
     }
     // A plotted card on its owner's board (rule 702.170): marked, and cast
@@ -6480,6 +6494,7 @@ function Table({
   const selectedFaceUp = selectedSource ? faceUpBySource.get(selectedSource) : undefined
   const selectedUnlocks = selectedSource ? (unlockBySource.get(selectedSource) ?? []) : []
   const selectedLicidEnd = selectedSource ? licidEndBySource.get(selectedSource) : undefined
+  const selectedIgnoreEffect = selectedSource ? ignoreEffectBySource.get(selectedSource) : undefined
   const selectedPreparedCasts = selectedSource ? (preparedCastsBySource.get(selectedSource) ?? []) : []
   // A commander whose tile opened the menu (it has an ability that works from
   // the command zone) is still cast from it.
@@ -7193,6 +7208,7 @@ function Table({
         selectedFaceUp !== undefined ||
         selectedUnlocks.length > 0 ||
         selectedLicidEnd !== undefined ||
+        selectedIgnoreEffect !== undefined ||
         selectedPreparedCasts.length > 0) ? (
         <AbilityMenu
           source={selectedSource}
@@ -7248,6 +7264,18 @@ function Table({
                     onSelect: () => {
                       setSelectedSource(null)
                       game.dispatch({ type: 'end-licid-effect', player: seat, permanent: selectedLicidEnd.permanent })
+                    },
+                  },
+                ]
+              : []),
+            ...(selectedIgnoreEffect !== undefined
+              ? [
+                  {
+                    key: 'ignore-static-effect',
+                    label: `Ignore its effect until end of turn — pay ${selectedIgnoreEffect.cost}`,
+                    onSelect: () => {
+                      setSelectedSource(null)
+                      game.dispatch({ type: 'ignore-static-effect', player: seat, permanent: selectedIgnoreEffect.permanent })
                     },
                   },
                 ]

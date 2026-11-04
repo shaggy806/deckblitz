@@ -3209,6 +3209,37 @@ export interface StaticAbility {
   readonly cantWinGame?: boolean;
   readonly opponentsCantLoseGame?: boolean;
   /**
+   * "**Players can't search libraries**" (Mindlock Orb, `who: "any-player"`),
+   * "**Your opponents can't search libraries**" (Stranglehold, `"opponent"`):
+   * whoever it names can't look through a library, whoever's it is and whoever's
+   * effect told them to (`playerCantSearchLibrary`). "Search your library … then
+   * shuffle" still shuffles, and "you may search" can't be chosen (the rulings);
+   * only the word "search" is stopped, so a library's top still reads.
+   * `causedByThemselves`: "Spells and abilities your opponents control **can't
+   * cause their controller to search their library**" (Ashiok, Dream Render) —
+   * only a search of their own library, by an effect they control. `ignoreCost`:
+   * "**Any player may pay {2} for that player to ignore this effect until end of
+   * turn**" (Leonin Arbiter): a special action (rule 116.2d, the
+   * `ignore-static-effect` action), one permanent's effect at a time.
+   * Like `playerHexproof`, a property of the player; `affects` is ignored.
+   */
+  readonly cantSearchLibraries?: {
+    readonly who: "any-player" | "opponent";
+    readonly causedByThemselves?: true;
+    readonly ignoreCost?: string;
+  };
+  /**
+   * "**Damage that would reduce your life total to less than N reduces it to N
+   * instead**" (Ali from Cairo, 1; Elderscale Wurm, 7), for this permanent's
+   * controller: the static form of `player-effect`'s `damageLifeFloor`, read
+   * by `playerDamageLifeFloor` as damage is dealt. The damage is still dealt in
+   * full, a total already below N drops as normal (which is all Elderscale
+   * Wurm's "as long as you have 7 or more life" says), and a loss or payment of
+   * life isn't damage. `condition` for Worship's "if you control a creature".
+   * `affects` is ignored.
+   */
+  readonly damageLifeFloor?: number;
+  /**
    * "Creatures can't attack you unless their controller pays {N} for each
    * creature they control that's attacking you" (Ghostly Prison,
    * Propaganda): a cost to attack this permanent's controller (rule

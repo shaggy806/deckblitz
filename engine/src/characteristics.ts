@@ -2082,7 +2082,7 @@ export function playerHasHexproof(state: GameState, registry: CardRegistry, play
 function playerStaticHolds(
   state: GameState,
   registry: CardRegistry,
-  test: (ability: StaticAbility, controller: PlayerId) => boolean,
+  test: (ability: StaticAbility, controller: PlayerId, source: GameObject) => boolean,
 ): boolean {
   for (const id of state.zones.shared.battlefield) {
     const source = state.objects[id];
@@ -2091,7 +2091,7 @@ function playerStaticHolds(
     const own = hasLostAbilities(state, registry, source) ? [] : registry.get(rulesTextName(source)).static;
     for (const ability of [...own, ...grantedStatics(state, registry, source)]) {
       if (
-        test(ability, source.controller) &&
+        test(ability, source.controller, source) &&
         (ability.condition === undefined || staticConditionMet(state, registry, source, ability.condition))
       ) {
         return true;
@@ -2100,7 +2100,7 @@ function playerStaticHolds(
   }
   for (const { source, ability } of emblemStatics(state)) {
     if (
-      test(ability, source.controller) &&
+      test(ability, source.controller, source) &&
       (ability.condition === undefined || staticConditionMet(state, registry, source, ability.condition))
     ) {
       return true;
@@ -2172,6 +2172,77 @@ export function playerCantWinGame(state: GameState, registry: CardRegistry, play
       // "You can't win the game" (Abyssal Persecutor).
       (ability.cantWinGame === true && controller === player),
   );
+}
+
+/** Whether `searcher` can't search `owner`'s library right now, for a search
+ * `causedBy` a spell or ability that player controls: "players can't search
+ * libraries" (Mindlock Orb, Shadow of Doubt's "this turn"), "your opponents
+ * can't" (Stranglehold), or a search of their own library by their own effect
+ * (Ashiok, Dream Render) — unless they paid to ignore that permanent's effect
+ * this turn (rule 116.2d — Leonin Arbiter), which is one permanent's effect at a
+ * time, and covers any library (the rulings). */
+export function playerCantSearchLibrary(
+  state: GameState,
+  registry: CardRegistry,
+  searcher: PlayerId,
+  owner: PlayerId,
+  causedBy: PlayerId,
+): boolean {
+  if ((state.playerEffects ?? []).some((e) => e.cantSearchLibraries?.includes(searcher) === true)) return true;
+  return playerStaticHolds(state, registry, (ability, controller, source) => {
+    const rule = ability.cantSearchLibraries;
+    if (rule === undefined || (rule.who === "opponent" && controller === searcher)) return false;
+    if (rule.causedByThemselves === true && (causedBy !== searcher || owner !== searcher)) return false;
+    return !playerIgnoresStatic(state, searcher, source);
+  });
+}
+
+/** Whether `player` has paid to ignore `source`'s static effect this turn
+ * (rule 116.2d). A permanent that left and came back is a new one (400.7). */
+export function playerIgnoresStatic(state: GameState, player: PlayerId, source: GameObject): boolean {
+  return (state.playerEffects ?? []).some(
+    (e) =>
+      e.owner === player &&
+      e.ignoresStatic?.source === source.id &&
+      e.ignoresStatic.stint === (source.zoneChangeCount ?? 0),
+  );
+}
+
+/** What it costs to ignore `source`'s effect (rule 116.2d — `cantSearchLibraries`'
+ * `ignoreCost`), while it has one that's on: `null` otherwise. */
+export function staticIgnoreCost(state: GameState, registry: CardRegistry, source: GameObject): string | null {
+  if (source.zone !== "battlefield" || hasLostAbilities(state, registry, source)) return null;
+  for (const ability of registry.get(rulesTextName(source)).static) {
+    const cost = ability.cantSearchLibraries?.ignoreCost;
+    if (cost !== undefined && (ability.condition === undefined || staticConditionMet(state, registry, source, ability.condition))) {
+      return cost;
+    }
+  }
+  return null;
+}
+
+/** The floor under `player`'s life total against damage (`damageLifeFloor` —
+ * Angel's Grace's until end of turn, Ali from Cairo's static): the highest of
+ * them, or `null` for none. */
+export function playerDamageLifeFloor(state: GameState, registry: CardRegistry, player: PlayerId): number | null {
+  let floor: number | null = null;
+  for (const effect of state.playerEffects ?? []) {
+    const held = effect.damageLifeFloor;
+    if (held !== undefined && held.players.includes(player)) floor = Math.max(floor ?? held.floor, held.floor);
+  }
+  const raise = (source: GameObject, ability: StaticAbility): void => {
+    const at = ability.damageLifeFloor;
+    if (at === undefined || (floor !== null && at <= floor)) return;
+    if (ability.condition === undefined || staticConditionMet(state, registry, source, ability.condition)) floor = at;
+  };
+  for (const id of state.zones.shared.battlefield) {
+    const source = state.objects[id];
+    if (source === undefined || source.controller !== player) continue;
+    const own = hasLostAbilities(state, registry, source) ? [] : registry.get(rulesTextName(source)).static;
+    for (const ability of [...own, ...grantedStatics(state, registry, source)]) raise(source, ability);
+  }
+  for (const { source, ability } of emblemStatics(state, player)) raise(source, ability);
+  return floor;
 }
 
 /** Whether `player` can't lose life (rule 119.8 — Everybody Lives!'s "players

@@ -341,6 +341,14 @@ export type GameEvent =
       readonly level: number;
     })
   | (Base & {
+      readonly type: "static-effect-ignored";
+      /** `player` paid `cost` to ignore `object`'s effect until end of turn
+       * (rule 116.2d — Leonin Arbiter). */
+      readonly player: PlayerId;
+      readonly object: ObjectId;
+      readonly cost: string;
+    })
+  | (Base & {
       readonly type: "door-unlocked";
       /** A Room was given an unlocked designation (rule 709.5h): its `door`
        * (the card's left or right half), by `player` — as it entered with the

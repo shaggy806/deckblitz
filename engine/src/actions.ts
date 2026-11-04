@@ -463,6 +463,14 @@ export type Action =
       readonly permanent: ObjectId;
     }
   | {
+      /** Ignore a permanent's static effect until end of turn (rule 116.2d —
+       * Leonin Arbiter's "any player may pay {2} …"): a special action any time
+       * you have priority, whoever controls the permanent. */
+      readonly type: "ignore-static-effect";
+      readonly player: PlayerId;
+      readonly permanent: ObjectId;
+    }
+  | {
       /** Cycle a card from hand (rule 702.29): pay its cycling cost, discard
        * it, draw a card. Any time you could cast an instant. */
       readonly type: "cycle";
@@ -1111,6 +1119,14 @@ export type LegalAction =
   | {
       /** A Licid's Aura effect you may end (rule 116.2c) by paying `cost`. */
       readonly kind: "end-licid-effect";
+      readonly permanent: ObjectId;
+      readonly cardName: string;
+      readonly cost: string;
+    }
+  | {
+      /** A permanent's static effect you may ignore until end of turn (rule
+       * 116.2d) by paying `cost`. */
+      readonly kind: "ignore-static-effect";
       readonly permanent: ObjectId;
       readonly cardName: string;
       readonly cost: string;

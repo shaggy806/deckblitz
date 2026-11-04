@@ -162,6 +162,8 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       return `${who(event.player)} takes an extra turn after this one`
     case 'turn-skipped':
       return `${who(event.player)} skips a turn`
+    case 'static-effect-ignored':
+      return `${who(event.player)} pays ${event.cost} to ignore ${name(event.object)}'s effect until end of turn`
     case 'player-control-began':
       return `${who(event.controller)} controls ${who(event.controlled)} this ${event.during === 'next-combat' ? 'combat' : 'turn'}`
     case 'untap-step-skipped':

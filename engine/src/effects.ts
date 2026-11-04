@@ -6001,6 +6001,9 @@ export type EffectSpec =
       readonly cantLoseGame?: PlayerScope;
       readonly cantWinGame?: PlayerScope;
       readonly cantLoseLife?: PlayerScope;
+      /** "Players can't search libraries this turn" (Shadow of Doubt —
+       * `"each-player"`): see the static's `cantSearchLibraries`. */
+      readonly cantSearchLibraries?: PlayerScope;
       /** "Until your next turn, your opponents can't cast spells from
        * anywhere other than their hands" (Avatar's Wrath — `"each-opponent"`,
        * fixed as it resolves): a rule about casting (101.2), so no
@@ -10677,6 +10680,9 @@ export interface EffectApi {
   /** The cards in `player`'s library they may cast while searching it
    * (`CardDefinition.castWhileSearchingLibrary`). */
   castableWhileSearching(player: PlayerId): readonly ObjectId[];
+  /** Whether `player` can't search `owner`'s library in what's resolving now
+   * (`playerCantSearchLibrary`). */
+  cantSearchLibrary(player: PlayerId, owner: PlayerId): boolean;
   /** See the `"allow-cast-linked-exile"` {@link EffectSpec}. */
   allowCastLinkedExile(
     spell: CardFilter | undefined,
@@ -12518,6 +12524,8 @@ function applyEachPlayerMay(
     const player = toAsk[0];
     asked = [...asked, player];
     toAsk = toAsk.slice(1);
+    // "That player may search" where they can't: not theirs to choose.
+    if (eachPlayerMaySearchForbidden(spec, player, ctx)) continue;
     const parked = ctx.parkedCount();
     const pendingBefore = ctx.decisionPending();
     ctx.askEachPlayerMay(player, spec, deferred);
@@ -13925,6 +13933,59 @@ function resolveEnterAttacking(
   return { player: effectPlayer(how.player, ctx), orTheirPlaneswalker: how.orTheirPlaneswalker === true };
 }
 
+/** Who makes a `search-library`: its controller by default, or who its `who`
+ * names (`null`: nobody, so no search). */
+function searchingPlayer(spec: Extract<EffectSpec, { kind: "search-library" }>, ctx: ResolutionContext): PlayerId | null {
+  if (spec.who === undefined) return ctx.controller;
+  if (spec.who === "that-player") return ctx.playersInScope("that-player")[0] ?? null;
+  const of = ctx.targets[spec.who.controllerOfTarget];
+  // A target that has already gone (Path to Exile exiles first) still names
+  // its last-known controller; nothing at all means no search.
+  return (of === undefined ? undefined : ctx.controllerOf(of)) ?? null;
+}
+
+/** Whether a `search-library` is only of a library `searcher` can't search, so
+ * that it can't be chosen (`playerCantSearchLibrary`). A search of another zone
+ * as well, or of what's outside the game, still can be. */
+function cantSearchThisLibrary(
+  spec: Extract<EffectSpec, { kind: "search-library" }>,
+  searcher: PlayerId,
+  ctx: ResolutionContext,
+): boolean {
+  if ((spec.zones ?? "library") !== "library" || spec.outside !== undefined) return false;
+  const owner = spec.whose === undefined ? searcher : (effectPlayer(spec.whose, ctx) ?? searcher);
+  return ctx.cantSearchLibrary(searcher, owner);
+}
+
+/** A resolution-time `modal`'s modes, without the library alone where "search
+ * your library and/or graveyard" (its other modes searching other zones) meets
+ * a library that can't be searched: it's a choice of where to search, and it
+ * shuffles only "if you search your library this way". */
+function searchableModes<Mode extends { readonly effect: EffectSpec }>(modes: readonly Mode[], ctx: ResolutionContext): readonly Mode[] {
+  const andOr = modes.some((m) => m.effect.kind === "search-library" && (m.effect.zones ?? "library") !== "library");
+  if (!andOr) return modes;
+  return modes.filter((m) => {
+    if (m.effect.kind !== "search-library") return true;
+    const searcher = searchingPlayer(m.effect, ctx);
+    return searcher === null || !cantSearchThisLibrary(m.effect, searcher, ctx);
+  });
+}
+
+/** Whether what `player` is asked by an `each-player-may` is a search they
+ * can't make (`mayBeDone`'s "may", in that player's name). */
+function eachPlayerMaySearchForbidden(
+  spec: Extract<EffectSpec, { kind: "each-player-may" }>,
+  player: PlayerId,
+  ctx: ResolutionContext,
+): boolean {
+  const first = (effect: EffectSpec | undefined): EffectSpec | undefined =>
+    effect?.kind === "sequence" ? effect.effects[0] : effect;
+  const action = first(spec.effect) ?? first(spec.ifDid);
+  if (action?.kind !== "search-library") return false;
+  const searcher = typeof action.who === "object" ? searchingPlayer(action, ctx) : player;
+  return searcher !== null && cantSearchThisLibrary(action, searcher, ctx);
+}
+
 function effectPlayer(ref: EffectPlayerRef, ctx: ResolutionContext): PlayerId | undefined {
   if (ref === "you") return ctx.controller;
   if (ref === "source-owner") {
@@ -14377,6 +14438,12 @@ function scopedOrTargetedPlayers(
 export function mayBeDone(effect: EffectSpec, ctx: ResolutionContext): boolean {
   const action = effect.kind === "sequence" ? effect.effects[0] : effect;
   if (action === undefined) return true;
+  // "You may search your library … then shuffle" under "players can't search
+  // libraries": they can't choose to, so they won't shuffle (the rulings).
+  if (action.kind === "search-library") {
+    const searcher = searchingPlayer(action, ctx);
+    return searcher === null || !cantSearchThisLibrary(action, searcher, ctx);
+  }
   // "You may put a card from your hand on top of your library": not with none.
   // An amount is "all of them", which none satisfies (Manabond).
   if (action.kind === "look-and-choose" && action.zone === "hand" && action.player === undefined && typeof action.min === "number") {
@@ -16918,6 +16985,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ...(spec.cantLoseGame !== undefined ? { cantLoseGame: ctx.playersInScope(spec.cantLoseGame) } : {}),
         ...(spec.cantWinGame !== undefined ? { cantWinGame: ctx.playersInScope(spec.cantWinGame) } : {}),
         ...(spec.cantLoseLife !== undefined ? { cantLoseLife: ctx.playersInScope(spec.cantLoseLife) } : {}),
+        ...(spec.cantSearchLibraries !== undefined
+          ? { cantSearchLibraries: ctx.playersInScope(spec.cantSearchLibraries) }
+          : {}),
         ...(spec.castOnlyFromHand !== undefined
           ? { castOnlyFromHand: ctx.playersInScope(spec.castOnlyFromHand) }
           : {}),
@@ -18195,7 +18265,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.chooseModes(
         spec.minModes,
         amountValue(spec.maxModes, ctx),
-        spec.modes,
+        searchableModes(spec.modes, ctx),
         undefined,
         undefined,
         spec.notChosenBefore === true ? "ever" : spec.notChosenThisTurn === true,
@@ -18601,18 +18671,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     case "search-library": {
       let searcher: PlayerId | null = null;
-      if (spec.who === "that-player") {
-        // The player an `each-player-may`'s `ifDid` is about: nobody, no search.
-        const them = ctx.playersInScope("that-player")[0];
-        if (them === undefined) return;
-        searcher = them;
-      } else if (spec.who !== undefined) {
-        const of = ctx.targets[spec.who.controllerOfTarget];
-        // A target that has already gone (Path to Exile exiles first) still
-        // names its last-known controller; nothing at all means no search.
-        const who = of === undefined ? undefined : ctx.controllerOf(of);
-        if (who === undefined) return;
-        searcher = who;
+      if (spec.who !== undefined) {
+        // Nobody: no search.
+        searcher = searchingPlayer(spec, ctx);
+        if (searcher === null) return;
       }
       // "Search target opponent's library": nobody there, nothing searched.
       const owner = spec.whose === undefined ? undefined : effectPlayer(spec.whose, ctx);

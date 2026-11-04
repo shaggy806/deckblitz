@@ -2087,6 +2087,15 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   A pact is a `delayed-trigger` at `"your-next-upkeep"` of an `unless` with
   `chooser: "you"`, a mana option and `otherwise: { kind: "lose-game" }`
   (Pact of Negation, Summoner's Pact).
+- **"Players can't search libraries"** is a static, `cantSearchLibraries: { who: "any-player" | "opponent",
+  causedByThemselves?, ignoreCost? }` (Mindlock Orb, Stranglehold; Ashiok, Dream Render's own-library-by-own-effect;
+  Leonin Arbiter's `{2}`, the `ignore-static-effect` special action, rule 116.2d); "this turn" is a
+  `player-effect`'s `cantSearchLibraries` (Shadow of Doubt). Every `search-library` obeys it unwritten: it finds
+  nothing and still shuffles, a `may` or `each-player-may` around it isn't asked, and an and/or `modal` loses
+  its library-alone mode.
+- **"Damage that would reduce your life total to less than N reduces it to N instead"** is a static,
+  `damageLifeFloor: N` (Ali from Cairo; with a `condition`, Worship, Elderscale Wurm), or for a while a
+  `player-effect`'s `damageLifeFloor` (Angel's Grace).
 - **"You can't lose the game and your opponents can't win the game"** is a
   static (§10, `cantLoseGame` / `opponentsCantWinGame` — Platinum Angel);
   "this turn" is a `player-effect`'s `cantLoseGame` / `cantWinGame` (Angel's

@@ -10304,6 +10304,27 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    "Leonin Arbiter: paying to ignore an opponent's",
+    board({
+      you: { bf: ['Swamp*4'], hand: ['Demonic Tutor'], lib: ['Grizzly Bears'] },
+      opp: [{ bf: ['Leonin Arbiter'] }],
+    }),
+  ),
+  preset(
+    'Leonin Arbiter: a search finds nothing without paying',
+    board({
+      you: { bf: ['Swamp*2'], hand: ['Demonic Tutor'], lib: ['Grizzly Bears'] },
+      opp: [{ bf: ['Leonin Arbiter'] }],
+    }),
+  ),
+  preset(
+    'Leonin Arbiter: four players, paying for yourself alone',
+    board({
+      you: { bf: ['Swamp*4'], hand: ['Demonic Tutor'], lib: ['Grizzly Bears'] },
+      opp: [{ bf: ['Leonin Arbiter'] }, { bf: ['Savannah Lions'] }, { bf: ['Savannah Lions'] }],
+    }),
+  ),
+  preset(
     'Thunderwave: choosing the creature to spare',
     board({
       you: { bf: ['Mountain*4', 'Grizzly Bears'], hand: ['Thunderwave'] },

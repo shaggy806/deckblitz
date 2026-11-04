@@ -3312,6 +3312,10 @@ export type AwaitingDecision =
        * opponent picking the card from your graveyard that goes to your hand
        * (Tasigur, the Golden Fang). Only what the chooser is told. */
       readonly forPlayer?: PlayerId;
+      /** A search of a library that "can't" be searched (`cantSearchLibraries`):
+       * with nothing else found there's nothing to look at or answer, so it's
+       * answered for them (`forcedZoneChoice`). */
+      readonly searchForbidden?: true;
       /** Candidates already revealed to `player`, in their original zone order. */
       readonly ids: readonly ObjectId[];
       /** The subset of `ids` that may actually be chosen — narrower than
@@ -5397,6 +5401,13 @@ export interface PlayerEffect {
    * they lose life does nothing, and a cost that has them pay life (more
    * than 0, rule 119.4b) can't be paid. See `playerCantLoseLife`. */
   readonly cantLoseLife?: readonly PlayerId[];
+  /** These players can't search libraries ("Players can't search libraries
+   * this turn" — Shadow of Doubt). See `playerCantSearchLibrary`. */
+  readonly cantSearchLibraries?: readonly PlayerId[];
+  /** `owner` paid to ignore this permanent's static effect until end of turn
+   * (rule 116.2d — Leonin Arbiter's "any player may pay {2} for that player to
+   * ignore this effect"): the permanent, in the stint it was paid for. */
+  readonly ignoresStatic?: { readonly source: ObjectId; readonly stint: number };
   /** These players can't cast spells from anywhere other than their hands
    * (Avatar's Wrath) — see `whyProhibitedFromCasting`. */
   readonly castOnlyFromHand?: readonly PlayerId[];
@@ -6108,6 +6119,10 @@ export interface GameState {
    * a permanent it puts onto the battlefield records as `entry.by`. Absent
    * while a spell resolves, and between resolutions. */
   resolvingSource?: { readonly source: ObjectId; readonly timestamp: number };
+  /** While a spell or ability resolves (across the decisions it waits on, like
+   * `resolutionSince`): who controls it — not whoever part of it is being done
+   * by, a "that player may search" running in that player's name. */
+  resolvingController?: PlayerId;
   /**
    * An effect has ended the turn or the combat phase (rule 724): every trigger
    * waiting has ceased to exist and the stack has been exiled, and what's left
