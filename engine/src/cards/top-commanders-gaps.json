@@ -1608,7 +1608,11 @@
   "trigger:activates-power-up",
   "effect:exile-becomes-foretold",
   "effect:exile-from-hand-face-down-linked",
-  "effect:look-at-face-down-permanents"
+  "effect:look-at-face-down-permanents",
+  "filter:same-name-as-exiled-with-source",
+  "condition:cards-currently-exiled-with-source-condition",
+  "condition:linked-exile-currently-exiled",
+  "condition:card-types-among-exiled-with-source"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

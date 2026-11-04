@@ -13578,4 +13578,35 @@ describe("how one player's state compares with another's", () => {
     expect(net.targets).toEqual(["player"]);
     expect(JSON.stringify(net.effect)).toContain('"look-at-face-down"');
   });
+
+  it("the cards still exiled with this, and their names", () => {
+    const curator = read(
+      "Creature — Raccoon Scout",
+      "As long as there are four or more card types among cards exiled with this creature, it gets +4/+4 and has trample.\n{1}: Exile target card from a graveyard.",
+    );
+    expect(curator.complete).toBe(true);
+    expect(curator.static[0].condition).toEqual({ kind: "exiled-with-source", atLeast: 4, now: true, cardTypes: true });
+    expect(curator.activated[0].effect).toEqual({ kind: "exile", target: 0, linked: true });
+    expect(
+      read("Creature — Human Survivor", "As long as there are three or more cards exiled with this creature, it gets +3/+3 and has hexproof.").static[0].condition,
+    ).toEqual({ kind: "exiled-with-source", atLeast: 3, now: true });
+    const jacker = read(
+      "Creature — Djinn Wizard Rogue",
+      "Whenever this creature attacks, if a card is exiled with it, you may cast the exiled card without paying its mana cost.",
+    );
+    expect(jacker.triggered[0].condition).toEqual({ kind: "exiled-with-source", atLeast: 1, now: true });
+    expect(jacker.triggered[0].effect).toEqual({ kind: "cast-now", from: "exiled-with-source", free: true });
+    expect(
+      read("Enchantment", "Whenever an opponent casts a Vampire spell with the same name as a card exiled with this enchantment, you gain 2 life.").triggered[0].trigger,
+    ).toEqual({ on: "cast-spell", who: "opponent", filter: { subtype: "Vampire", sameNameWith: "exiled-with-source" } });
+    const reaver = read(
+      "Creature — Human Wizard",
+      "{U}{U}, Sacrifice this creature: Counter target spell with the same name as a card exiled with this creature.",
+    );
+    expect(reaver.activated[0].targets).toEqual([{ kind: "spell", filter: { sameNameWith: "exiled-with-source" } }]);
+    expect(reaver.activated[0].effect).toEqual({ kind: "counter", target: 0 });
+    expect(
+      read("Legendary Artifact — Equipment", "Your opponents can't cast spells with the same name as a card exiled with this Equipment.").static[0].prohibits,
+    ).toEqual({ who: "opponents", spells: { sameNameWith: "exiled-with-source" } });
+  });
 });

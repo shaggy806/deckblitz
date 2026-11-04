@@ -2012,7 +2012,9 @@ export function matchesFilter(
     const names = live !== undefined ? namesOf(registry, live) : lastKnownNames(registry, lki!);
     const shared = others.some((other) => {
       const object = state.objects[other];
-      return object !== undefined && namesOf(registry, object).some((n) => names.includes(n));
+      // A card exiled face down has no name to share (rule 406.3a).
+      if (object === undefined || object.exiledFaceDown !== undefined || object.foretold === true) return false;
+      return namesOf(registry, object).some((n) => names.includes(n));
     });
     if (!shared) return false;
   }

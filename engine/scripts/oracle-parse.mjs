@@ -2205,6 +2205,13 @@ export function parseTrigger(clause) {
     const graveyard = m[3] === "your" ? { graveyard: { ownedBy: "you" } } : { graveyard: {}, itsController: true };
     return [{ on: "cast-spell", who, filter: { ...filter, sameNameWith: graveyard } }];
   }
+  // "… with the same name as a card exiled with ~" (Circle of Confinement).
+  if ((m = /^Whenever (you|an opponent|a player) casts? an? (.+?) spell with the same name as a card exiled with ~$/.exec(c))) {
+    const who = { you: "you", "an opponent": "opponent", "a player": "any" }[m[1]];
+    const filter = parseTypePhrase(m[2]);
+    if (filter === null) return null;
+    return [{ on: "cast-spell", who, filter: { ...filter, sameNameWith: "exiled-with-source" } }];
+  }
   // "Whenever you cast an instant spell from your hand" (Ojer Pakpatiq).
   if ((m = /^Whenever you cast an? (?:(.+?) )?spell from your (hand|graveyard)$/.exec(c))) {
     const filter = m[1] === undefined ? undefined : parseTypePhrase(m[1]);
@@ -3631,6 +3638,15 @@ export function parseSentence(sentence, ctx) {
   // On): one of them, chosen as this resolves.
   if (re(`(?:return|put) a card exiled with ~ (?:to|into) its owner's hand`).test(s)) {
     return { kind: "look-and-choose", zone: "exiled-with-source", min: 1, max: 1, destination: "hand", leftover: "stay" };
+  }
+  // "Counter target spell with the same name as a card exiled with ~" (Mindreaver).
+  if (re(`counter target spell with the same name as a card exiled with ~`).test(s)) {
+    return { kind: "counter", target: ctx.target({ kind: "spell", filter: { sameNameWith: "exiled-with-source" } }) };
+  }
+  // "You may cast the exiled card without paying its mana cost" (Smirking
+  // Spelljacker), alone.
+  if (re(`you may cast the exiled card without paying its mana cost`).test(s)) {
+    return { kind: "cast-now", from: "exiled-with-source", free: true };
   }
   // "Return a card you own exiled with ~ to your hand" (Gustha's Scepter).
   if (re(`return a card you own exiled with ~ to your hand`).test(s)) {
@@ -12463,9 +12479,9 @@ function parseFaceAsWritten(face, ctx = {}) {
     // card" (Ixalan's Binding, Exclusion Ritual — the card's own exile, rule
     // 607.2a) or "a nontoken permanent" (Cornered Market's spells and
     // nonbasic lands).
-    if ((m = /^(Your opponents|Players) can't (cast spells|play nonbasic lands) with the same name as (the exiled card|a nontoken permanent)\.$/.exec(line))) {
+    if ((m = /^(Your opponents|Players) can't (cast spells|play nonbasic lands) with the same name as (the exiled card|a card exiled with ~|a nontoken permanent)\.$/.exec(line))) {
       const who = m[1] === "Players" ? "each-player" : "opponents";
-      const sameNameWith = m[3] === "the exiled card" ? "exiled-with-source" : { permanents: { token: false } };
+      const sameNameWith = m[3] !== "a nontoken permanent" ? "exiled-with-source" : { permanents: { token: false } };
       const prohibits =
         m[2] === "cast spells" ? { who, spells: { sameNameWith } } : { who, lands: { notSupertype: "basic", sameNameWith } };
       out.static.push({ affects: { scope: "self" }, prohibits, text: printed(raw) });
@@ -13694,6 +13710,12 @@ const STATIC_CONDITION_PREFIXES = [
   // Murders at Karlov Manor's "five or more mana values among cards in your
   // graveyard" (Aven Heartstabber): a `distinct` aggregate there.
   ["As long as there are five or more mana values among cards in your graveyard, ", FIVE_MANA_VALUES],
+  // Cards still exiled with this object (rule 607.2a): how many, and the card
+  // types among them (Veteran Survivor, Keen-Eyed Curator).
+  ...["two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"].flatMap((word, i) => [
+    [`As long as there are ${word} or more cards exiled with ~, `, { kind: "exiled-with-source", atLeast: i + 2, now: true }],
+    [`As long as there are ${word} or more card types among cards exiled with ~, `, { kind: "exiled-with-source", atLeast: i + 2, now: true, cardTypes: true }],
+  ]),
 ];
 
 /** "If you've discarded a card this turn" — the turn history's discards. */
@@ -13857,6 +13879,9 @@ const INTERVENING_IFS = {
   "if tribute wasn't paid,": { kind: "tribute-not-paid" },
   // Rule 726 / 309.7 (Battle for Baldur's Gate, Adventures in the Forgotten Realms).
   "if you have the initiative,": { kind: "initiative", who: "you" },
+  // Still exiled with it, not ever (Smirking Spelljacker, Evercoat Ursine).
+  "if a card is exiled with it,": { kind: "exiled-with-source", atLeast: 1, now: true },
+  "if there are cards exiled with it,": { kind: "exiled-with-source", atLeast: 1, now: true },
   "if you've completed a dungeon,": { kind: "completed-dungeon" },
   // Rule 700.8c (Zendikar Rising).
   "if you have a full party,": { kind: "full-party" },

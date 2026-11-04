@@ -1849,6 +1849,17 @@ it matches (Revealing Wind's "each face-down creature that's attacking or blocki
 asks nothing. "Any time" is a static's `visibility` (Keeper of the Lens), or a `grant-static` of it
 for a turn (Lumbering Laundry).
 
+**What a source reads off the cards exiled with it** (rule 607.2a). The condition `{ kind:
+"exiled-with-source", atLeast, now: true }` counts those still in exile, for a static (Veteran
+Survivor's "three or more cards exiled with this creature"), an intervening if (Smirking Spelljacker's
+"if a card is exiled with it") or an amount's `ifCondition` (Ugin's Labyrinth's "add {C}{C} instead");
+without `now` it's every card ever exiled with it this stint (Colfenor's Urn). `filter` narrows `now`,
+and `cardTypes: true` counts the card types among them instead (Keen-Eyed Curator's "four or more card
+types"); a face-down card has no type. `sameNameWith: "exiled-with-source"` in a trigger's filter
+(Circle of Confinement), a prohibition (Circu, Ixalan's Binding) or a target (Mindreaver, which still
+reads it with the source sacrificed for the cost) is "the same name as a card exiled with this"; a
+face-down card has no name to share (rule 406.3a).
+
 `end-the-turn` is "End the turn" (rule 724.1: Time Stop, Ultima, Glorious End)
 and `end-the-combat-phase` "End the combat phase" (724.2: Mandate of Peace, the
 one card), neither with a field. Every trigger waiting ceases to exist and the

@@ -1214,6 +1214,15 @@ function evalStaticCondition(
       if (condition.now === true) {
         const cards = liveReferenceObjects(state, registry, "exiled-with-source", { you, source: source.id }) ?? [];
         const { filter } = condition;
+        if (condition.cardTypes === true) {
+          const types = new Set<string>();
+          for (const id of cards) {
+            const card = state.objects[id];
+            if (card.exiledFaceDown !== undefined || card.foretold === true) continue;
+            for (const type of registry.get(printedCardName(card)).types) types.add(type);
+          }
+          return types.size >= condition.atLeast;
+        }
         // A card exiled face down has no characteristics (rule 406.3a): it's of no kind.
         const n = cards.filter(
           (id) =>

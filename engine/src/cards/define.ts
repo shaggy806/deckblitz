@@ -1394,6 +1394,11 @@ export type StaticCondition =
        * exiled with it" (Redemptor Dreadnought) — narrowed by `filter`. */
       readonly now?: true;
       readonly filter?: CardFilter;
+      /** With `now`: `atLeast` counts the **card types** among them, not the
+       * cards — Keen-Eyed Curator's "four or more card types among cards exiled
+       * with this creature" (rule 205.2a; supertypes and subtypes aren't). A
+       * card exiled face down has none (406.3a). */
+      readonly cardTypes?: true;
     }
   /** The negation of another condition — Titan Hunter's "**if no creatures
    * died this turn**". Cheaper than a `no-` variant of every condition, and
