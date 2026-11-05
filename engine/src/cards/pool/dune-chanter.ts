@@ -17,7 +17,7 @@ export default defineCard({
   text: `Reach\n${DESERT_TEXT}\n${MANA_TEXT}\n${MILL_TEXT}`,
   static: [
     {
-      affects: { scope: "lands-you-control" },
+      affects: { scope: "filter", filter: { type: "land", controlledBy: "you" } },
       addSubtypes: ["Desert"],
       typesOutsideBattlefield: { ofType: "land", addSubtypes: ["Desert"] },
       text: DESERT_TEXT,
