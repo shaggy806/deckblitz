@@ -1,0 +1,1064 @@
+{
+ "batch": "B260",
+ "status": "done",
+ "ranks": "Need-keys Phase 2: cards freed by random-card-from-hand through static:add-color-to-attached (the families built 2026-10-29 to 2026-10-31; two agents of 75 cards, one blind reviewer)",
+ "authored": [
+  {
+   "name": "Rona, Herald of Invasion",
+   "files": [
+    "engine/src/cards/pool/rona-herald-of-invasion.ts",
+    "engine/src/cards/pool/rona-tolarian-obliterator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wand of Ith",
+   "files": [
+    "engine/src/cards/pool/wand-of-ith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Omenpath Journey",
+   "files": [
+    "engine/src/cards/pool/omenpath-journey.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ore-Rich Stalactite // Cosmium Catalyst",
+   "files": [
+    "engine/src/cards/pool/ore-rich-stalactite.ts",
+    "engine/src/cards/pool/cosmium-catalyst.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brilliance Unleashed",
+   "files": [
+    "engine/src/cards/pool/brilliance-unleashed.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dance of the Manse",
+   "files": [
+    "engine/src/cards/pool/dance-of-the-manse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nexus Mentality",
+   "files": [
+    "engine/src/cards/pool/nexus-mentality.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Purging Stormbrood // Absorb Essence",
+   "files": [
+    "engine/src/cards/pool/purging-stormbrood.ts",
+    "engine/src/cards/pool/absorb-essence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Relic Amulet",
+   "files": [
+    "engine/src/cards/pool/relic-amulet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Replicating Ring",
+   "files": [
+    "engine/src/cards/pool/replicating-ring.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aurification",
+   "files": [
+    "engine/src/cards/pool/aurification.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fraying Line",
+   "files": [
+    "engine/src/cards/pool/fraying-line.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mine Layer",
+   "files": [
+    "engine/src/cards/pool/mine-layer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sporogenesis",
+   "files": [
+    "engine/src/cards/pool/sporogenesis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Temporal Distortion",
+   "files": [
+    "engine/src/cards/pool/temporal-distortion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glissa Sunslayer",
+   "files": [
+    "engine/src/cards/pool/glissa-sunslayer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heartless Act",
+   "files": [
+    "engine/src/cards/pool/heartless-act.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leatherhead, Swamp Stalker",
+   "files": [
+    "engine/src/cards/pool/leatherhead-swamp-stalker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mabel, Bitter Recluse",
+   "files": [
+    "engine/src/cards/pool/mabel-bitter-recluse.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rhys, the Evermore",
+   "files": [
+    "engine/src/cards/pool/rhys-the-evermore.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slumbering Walker",
+   "files": [
+    "engine/src/cards/pool/slumbering-walker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spinal Parasite",
+   "files": [
+    "engine/src/cards/pool/spinal-parasite.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Thornmantle Striker",
+   "files": [
+    "engine/src/cards/pool/thornmantle-striker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oriss, Samite Guardian",
+   "files": [
+    "engine/src/cards/pool/oriss-samite-guardian.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chemister's Trick",
+   "files": [
+    "engine/src/cards/pool/chemisters-trick.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Incite Hysteria",
+   "files": [
+    "engine/src/cards/pool/incite-hysteria.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Motherlode, Excavator",
+   "files": [
+    "engine/src/cards/pool/the-motherlode-excavator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mysterious Limousine",
+   "files": [
+    "engine/src/cards/pool/mysterious-limousine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chainer, Dementia Master",
+   "files": [
+    "engine/src/cards/pool/chainer-dementia-master.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ever After",
+   "files": [
+    "engine/src/cards/pool/ever-after.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grave Betrayal",
+   "files": [
+    "engine/src/cards/pool/grave-betrayal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Liliana, Death's Majesty",
+   "files": [
+    "engine/src/cards/pool/liliana-deaths-majesty.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Archdruid's Charm",
+   "files": [
+    "engine/src/cards/pool/archdruids-charm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nazahn, Revered Bladesmith",
+   "files": [
+    "engine/src/cards/pool/nazahn-revered-bladesmith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Treasure Chest",
+   "files": [
+    "engine/src/cards/pool/treasure-chest.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Caravan Vigil",
+   "files": [
+    "engine/src/cards/pool/caravan-vigil.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scholar of New Horizons",
+   "files": [
+    "engine/src/cards/pool/scholar-of-new-horizons.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sovereigns of Lost Alara",
+   "files": [
+    "engine/src/cards/pool/sovereigns-of-lost-alara.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bard's Company",
+   "files": [
+    "engine/src/cards/pool/bards-company.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Colossal Rattlewurm",
+   "files": [
+    "engine/src/cards/pool/colossal-rattlewurm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dragon Grip",
+   "files": [
+    "engine/src/cards/pool/dragon-grip.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fated Clash",
+   "files": [
+    "engine/src/cards/pool/fated-clash.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Illusion Spinners",
+   "files": [
+    "engine/src/cards/pool/illusion-spinners.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mutual Destruction",
+   "files": [
+    "engine/src/cards/pool/mutual-destruction.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Serpent of the Pass",
+   "files": [
+    "engine/src/cards/pool/serpent-of-the-pass.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Supernatural Rescue",
+   "files": [
+    "engine/src/cards/pool/supernatural-rescue.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Take for a Ride",
+   "files": [
+    "engine/src/cards/pool/take-for-a-ride.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Belligerent Yearling",
+   "files": [
+    "engine/src/cards/pool/belligerent-yearling.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crater Elemental",
+   "files": [
+    "engine/src/cards/pool/crater-elemental.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "PuPu UFO",
+   "files": [
+    "engine/src/cards/pool/pupu-ufo.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vhati il-Dal",
+   "files": [
+    "engine/src/cards/pool/vhati-il-dal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rooting Kavu",
+   "files": [
+    "engine/src/cards/pool/rooting-kavu.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Krosan Reclamation",
+   "files": [
+    "engine/src/cards/pool/krosan-reclamation.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Memory's Journey",
+   "files": [
+    "engine/src/cards/pool/memorys-journey.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Stream of Consciousness",
+   "files": [
+    "engine/src/cards/pool/stream-of-consciousness.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Bath Song",
+   "files": [
+    "engine/src/cards/pool/the-bath-song.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ravener",
+   "files": [
+    "engine/src/cards/pool/ravener.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Arc Spitter",
+   "files": [
+    "engine/src/cards/pool/arc-spitter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Barbed-Back Wurm",
+   "files": [
+    "engine/src/cards/pool/barbed-back-wurm.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Lesser Werewolf",
+   "files": [
+    "engine/src/cards/pool/lesser-werewolf.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "The Wretched",
+   "files": [
+    "engine/src/cards/pool/the-wretched.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wall of Vipers",
+   "files": [
+    "engine/src/cards/pool/wall-of-vipers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Snowman",
+   "files": [
+    "engine/src/cards/pool/goblin-snowman.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sentinel",
+   "files": [
+    "engine/src/cards/pool/sentinel.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Éomer, King of Rohan",
+   "files": [
+    "engine/src/cards/pool/eomer-king-of-rohan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Daring Thief",
+   "files": [
+    "engine/src/cards/pool/daring-thief.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gauntlets of Chaos",
+   "files": [
+    "engine/src/cards/pool/gauntlets-of-chaos.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Return from Extinction",
+   "files": [
+    "engine/src/cards/pool/return-from-extinction.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Trickster-God's Heist",
+   "files": [
+    "engine/src/cards/pool/the-trickster-gods-heist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Unbury",
+   "files": [
+    "engine/src/cards/pool/unbury.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mischievous Quanar",
+   "files": [
+    "engine/src/cards/pool/mischievous-quanar.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Obscuring Aether",
+   "files": [
+    "engine/src/cards/pool/obscuring-aether.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skittish Valesk",
+   "files": [
+    "engine/src/cards/pool/skittish-valesk.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fulgent Distraction",
+   "files": [
+    "engine/src/cards/pool/fulgent-distraction.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Silence the Believers",
+   "files": [
+    "engine/src/cards/pool/silence-the-believers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Defiant Vanguard",
+   "files": [
+    "engine/src/cards/pool/defiant-vanguard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Alms Beast",
+   "files": [
+    "engine/src/cards/pool/alms-beast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cromat",
+   "files": [
+    "engine/src/cards/pool/cromat.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Greater Werewolf",
+   "files": [
+    "engine/src/cards/pool/greater-werewolf.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sisters of Stone Death",
+   "files": [
+    "engine/src/cards/pool/sisters-of-stone-death.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spitting Slug",
+   "files": [
+    "engine/src/cards/pool/spitting-slug.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Steadfast Armasaur",
+   "files": [
+    "engine/src/cards/pool/steadfast-armasaur.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Circle of Affliction",
+   "files": [
+    "engine/src/cards/pool/circle-of-affliction.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mangara's Equity",
+   "files": [
+    "engine/src/cards/pool/mangaras-equity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Psychic Allergy",
+   "files": [
+    "engine/src/cards/pool/psychic-allergy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Street Urchin",
+   "files": [
+    "engine/src/cards/pool/street-urchin.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Continue?",
+   "files": [
+    "engine/src/cards/pool/continue.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fell Shepherd",
+   "files": [
+    "engine/src/cards/pool/fell-shepherd.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Moira, Urborg Haunt",
+   "files": [
+    "engine/src/cards/pool/moira-urborg-haunt.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Revivify",
+   "files": [
+    "engine/src/cards/pool/revivify.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Samwise the Stouthearted",
+   "files": [
+    "engine/src/cards/pool/samwise-the-stouthearted.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Retraced Image",
+   "files": [
+    "engine/src/cards/pool/retraced-image.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spirit-Sister's Call",
+   "files": [
+    "engine/src/cards/pool/spirit-sisters-call.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Call to the Kindred",
+   "files": [
+    "engine/src/cards/pool/call-to-the-kindred.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Crown of Awe",
+   "files": [
+    "engine/src/cards/pool/crown-of-awe.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Crown of Fury",
+   "files": [
+    "engine/src/cards/pool/crown-of-fury.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Raise the Draugr",
+   "files": [
+    "engine/src/cards/pool/raise-the-draugr.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Turtle Van",
+   "files": [
+    "engine/src/cards/pool/turtle-van.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Balduvian Berserker",
+   "files": [
+    "engine/src/cards/pool/balduvian-berserker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Keldon Flamesage",
+   "files": [
+    "engine/src/cards/pool/keldon-flamesage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Niv-Mizzet, Guildpact",
+   "files": [
+    "engine/src/cards/pool/niv-mizzet-guildpact.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dwarven Lightsmith",
+   "files": [
+    "engine/src/cards/pool/dwarven-lightsmith.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Huddle Up",
+   "files": [
+    "engine/src/cards/pool/huddle-up.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Play of the Game",
+   "files": [
+    "engine/src/cards/pool/play-of-the-game.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Skystreamer",
+   "files": [
+    "engine/src/cards/pool/skystreamer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "The Crowd Goes Wild",
+   "files": [
+    "engine/src/cards/pool/the-crowd-goes-wild.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vampire Charmseeker",
+   "files": [
+    "engine/src/cards/pool/vampire-charmseeker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cybership",
+   "files": [
+    "engine/src/cards/pool/cybership.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Death in Heaven",
+   "files": [
+    "engine/src/cards/pool/death-in-heaven.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Missy",
+   "files": [
+    "engine/src/cards/pool/missy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Cyber-Controller",
+   "files": [
+    "engine/src/cards/pool/the-cyber-controller.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thieving Amalgam",
+   "files": [
+    "engine/src/cards/pool/thieving-amalgam.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Whisperwood Elemental",
+   "files": [
+    "engine/src/cards/pool/whisperwood-elemental.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ragnarok, Divine Deliverance",
+   "files": [
+    "engine/src/cards/pool/ragnarok-divine-deliverance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Titania, Gaea Incarnate",
+   "files": [
+    "engine/src/cards/pool/titania-gaea-incarnate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Titania, Voice of Gaea",
+   "files": [
+    "engine/src/cards/pool/titania-voice-of-gaea.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vanille, Cheerful l'Cie",
+   "files": [
+    "engine/src/cards/pool/vanille-cheerful-lcie.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Astonishing Spider-Man",
+   "files": [
+    "engine/src/cards/pool/astonishing-spider-man.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dihada's Ploy",
+   "files": [
+    "engine/src/cards/pool/dihadas-ploy.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ragged Recluse",
+   "files": [
+    "engine/src/cards/pool/ragged-recluse.ts",
+    "engine/src/cards/pool/odious-witch.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dimir Strandcatcher",
+   "files": [
+    "engine/src/cards/pool/dimir-strandcatcher.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Anzrag's Rampage",
+   "files": [
+    "engine/src/cards/pool/anzrags-rampage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invasion of Azgol // Ashen Reaper",
+   "files": [
+    "engine/src/cards/pool/invasion-of-azgol.ts",
+    "engine/src/cards/pool/ashen-reaper.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kami of Transience",
+   "files": [
+    "engine/src/cards/pool/kami-of-transience.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Angelic Armaments",
+   "files": [
+    "engine/src/cards/pool/angelic-armaments.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Gorex, the Tombshell",
+   "needs": [
+    "cost:exile-from-graveyard-reduces-cost"
+   ],
+   "why": "`additionalCost.exileFromGraveyard` has no 'this spell costs {2} less for each card exiled this way'; only `exileFromHandReduces` reduces per card."
+  },
+  {
+   "name": "Etched Slith",
+   "needs": [
+    "effect:reflexive-trigger-per-counter-put"
+   ],
+   "why": "Its ruling: the 'when you do' reflexive trigger fires once per +1/+1 counter put (Doubling Season); nothing counts the counters put this way (`thisWay: \"counters-put\"` counts permanents)."
+  },
+  {
+   "name": "Silver Scrutiny",
+   "needs": [
+    "effect:flash-if-x-at-most"
+   ],
+   "why": "`flashIf`'s condition is read before X is announced, so 'as though it had flash if X is 3 or less' can't read X."
+  },
+  {
+   "name": "Balduvian Shaman",
+   "needs": [
+    "filter:has-cumulative-upkeep"
+   ],
+   "why": "Its target 'white enchantment you control that doesn't have cumulative upkeep': cumulative upkeep is a helper trigger, not a keyword a filter reads."
+  },
+  {
+   "name": "Swirl the Mists",
+   "needs": [
+    "static:text-change-all-color-words"
+   ],
+   "why": "'Change the text of all spells and permanents by replacing every colour word with the chosen one': `change-text` is a one-shot on a target, never a static over everything."
+  },
+  {
+   "name": "Backslide",
+   "needs": [
+    "filter:has-morph"
+   ],
+   "why": "Its target 'creature with a morph ability': no filter reads a morph ability."
+  },
+  {
+   "name": "Illithid Harvester // Plant Tadpoles",
+   "needs": [
+    "effect:face-down-as-any-characteristics"
+   ],
+   "why": "'It's a 2/2 Horror creature': `FaceDownAs` is a closed union of three shapes, none a Horror."
+  },
+  {
+   "name": "Ixidron",
+   "needs": [
+    "replacement:as-enters-turn-others-face-down"
+   ],
+   "why": "'As this enters, turn all other nontoken creatures face down' can't be said as an as-enters action."
+  },
+  {
+   "name": "Master of the Veil",
+   "needs": [
+    "filter:has-morph"
+   ],
+   "why": "'Turn target creature with a morph ability face down': no filter reads a morph ability."
+  },
+  {
+   "name": "Vesuvan Shapeshifter",
+   "needs": [
+    "effect:become-copy-until-turned-face-down"
+   ],
+   "why": "A copy that lasts until it's turned face down, the upkeep trigger the copy keeps, and the choice as it's turned face up."
+  },
+  {
+   "name": "Weaver of Lies",
+   "needs": [
+    "filter:has-morph"
+   ],
+   "why": "'Turn any number of target creatures with morph abilities other than this one face down': no filter reads a morph ability."
+  },
+  {
+   "name": "Dread Wight",
+   "needs": [
+    "effect:doesnt-untap-while-counter-grant"
+   ],
+   "why": "Paralyzation counters: 'doesn't untap for as long as it has a paralyzation counter on it' and the granted '{4}: Remove a paralyzation counter' on each of those creatures."
+  },
+  {
+   "name": "Trial // Error",
+   "needs": [
+    "filter:blocking-relation-of-target"
+   ],
+   "why": "Error's 'creature blocking or blocked by target creature': `blockingRelation.of` reads the source, its host or the trigger object, never a target slot."
+  },
+  {
+   "name": "Tidal Flats",
+   "needs": [
+    "filter:blocking-relation-of-target"
+   ],
+   "why": "'Each creature without flying blocking it… for each attacking creature': the blocking relation keyed to each attacking creature, with a payment asked per attacker."
+  },
+  {
+   "name": "Zombie Boa",
+   "needs": [
+    "decision:remember-chosen-color-on-resolution"
+   ],
+   "why": "The colour chosen as the ability resolves must feed that turn's trigger; two activations with different colours would collide."
+  },
+  {
+   "name": "Sudden Salvation",
+   "needs": [
+    "amount:opponents-controlling-this-way"
+   ],
+   "why": "'Each opponent who controls one or more of those permanents draws two cards': no amount or scope reads the opponents controlling the permanents returned this way."
+  },
+  {
+   "name": "Luxurious Locomotive",
+   "needs": [
+    "amount:creatures-crewed-it-this-turn"
+   ],
+   "why": "'Create a Treasure for each creature that crewed it this turn': no amount counts them, including those that have left (its ruling)."
+  },
+  {
+   "name": "Gift of Doom",
+   "needs": [
+    "replacement:as-turned-face-up-attach-aura"
+   ],
+   "why": "'As this is turned face up, you may attach it to a creature': `asTurnedFaceUp` takes only counters."
+  },
+  {
+   "name": "Illusionary Mask",
+   "needs": [
+    "effect:cast-face-down-by-mana-spent"
+   ],
+   "why": "Casting a creature card face down for X with the mana spent on it, and the replacement turning it face up as it would assign or deal damage, be dealt damage or become tapped."
+  },
+  {
+   "name": "Kozilek, the Broken Reality",
+   "needs": [
+    "effect:manifest-from-target-players-hands"
+   ],
+   "why": "'Up to two target players each manifest two cards from their hands' and 'for each card manifested this way, you draw a card': manifest reads only a library, and no count reads the cards manifested from hands."
+  },
+  {
+   "name": "Primordial Mist",
+   "needs": [
+    "cost:exile-face-down-permanent-face-up"
+   ],
+   "why": "'Exile a face-down permanent you control face up: you may play that card this turn': no cost exiles a face-down permanent face up with a play permission."
+  },
+  {
+   "name": "Mishra, Claimed by Gix",
+   "needs": [
+    "effect:meld-enters-attacking"
+   ],
+   "why": "Its meld puts Mishra, Lost to Phyrexia onto the battlefield tapped and attacking: the `meld` effect has no attacking entry."
+  },
+  {
+   "name": "Mishra, Lost to Phyrexia",
+   "needs": [
+    "effect:meld-enters-attacking"
+   ],
+   "why": "The melded back face, reached only through Mishra, Claimed by Gix's attacking meld."
+  },
+  {
+   "name": "Urza, Lord Protector",
+   "needs": [
+    "static:loyalty-twice-self-only"
+   ],
+   "why": "It melds only into Urza, Planeswalker, which waits on the self-only loyalty grant."
+  },
+  {
+   "name": "Urza, Planeswalker",
+   "needs": [
+    "static:loyalty-twice-self-only"
+   ],
+   "why": "'You may activate the loyalty abilities of Urza, Planeswalker twice each turn': `loyaltyActivationsEachTurn` covers every planeswalker you control."
+  }
+ ]
+}

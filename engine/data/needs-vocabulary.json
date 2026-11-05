@@ -14967,6 +14967,96 @@
    "family": "effect:sacrificed-object-lki",
    "description": "'You may cast the discarded card' must also reach a card madness exiled as it was discarded; cast-now with from: graveyard and thisWay: discarded doesn't offer it.",
    "example": "Malcolm, Alluring Scoundrel"
+  },
+  "cost:exile-from-graveyard-reduces-cost": {
+   "family": "cost:exile-from-graveyard-additional",
+   "description": "An optional additional cost exiling any number of matching graveyard cards, the spell costing {N} less for each card exiled this way.",
+   "example": "Gorex, the Tombshell"
+  },
+  "effect:reflexive-trigger-per-counter-put": {
+   "family": "effect:remove-counters-any-kind",
+   "description": "A 'when you do' reflexive trigger that fires once per counter actually put (Doubling Season puts two, so it triggers twice).",
+   "example": "Etched Slith"
+  },
+  "effect:flash-if-x-at-most": {
+   "family": "effect:cast-and-activate-restrictions",
+   "description": "'You may cast this spell as though it had flash if X is N or less': flashIf is read before X is announced.",
+   "example": "Silver Scrutiny"
+  },
+  "filter:has-cumulative-upkeep": {
+   "family": "effect:text-change-color-or-land-words",
+   "description": "A filter for a permanent that has (or lacks) cumulative upkeep: it is a helper trigger, not a keyword a filter reads.",
+   "example": "Balduvian Shaman"
+  },
+  "static:text-change-all-color-words": {
+   "family": "effect:text-change-color-or-land-words",
+   "description": "A lasting effect replacing every colour word in all spells and permanents with a chosen one; change-text is a one-shot on a target.",
+   "example": "Swirl the Mists"
+  },
+  "effect:face-down-as-any-characteristics": {
+   "family": "mechanic:face-down",
+   "description": "Face down as a 2/2 of any listed creature type ('it's a 2/2 Horror creature'): FaceDownAs is a closed union of three shapes.",
+   "example": "Illithid Harvester // Plant Tadpoles"
+  },
+  "replacement:as-enters-turn-others-face-down": {
+   "family": "mechanic:face-down",
+   "description": "'As this enters, turn all other nontoken creatures face down' as an as-enters action.",
+   "example": "Ixidron"
+  },
+  "effect:become-copy-until-turned-face-down": {
+   "family": "mechanic:face-down",
+   "description": "A copy effect lasting until the permanent is turned face down, with the choice made as it is turned face up.",
+   "example": "Vesuvan Shapeshifter"
+  },
+  "replacement:as-turned-face-up-attach-aura": {
+   "family": "mechanic:face-down",
+   "description": "'As this is turned face up, you may attach it to a creature': asTurnedFaceUp takes only counters.",
+   "example": "Gift of Doom"
+  },
+  "effect:cast-face-down-by-mana-spent": {
+   "family": "mechanic:face-down",
+   "description": "Casting a creature card face down paid by X mana spent, and the replacement turning it face up as it would deal or be dealt damage or become tapped.",
+   "example": "Illusionary Mask"
+  },
+  "effect:manifest-from-target-players-hands": {
+   "family": "mechanic:face-down",
+   "description": "Target players each manifest cards from their own hands, and a count of the cards manifested this way.",
+   "example": "Kozilek, the Broken Reality"
+  },
+  "cost:exile-face-down-permanent-face-up": {
+   "family": "mechanic:face-down",
+   "description": "A cost exiling a face-down permanent you control face up, with a play permission for that card this turn.",
+   "example": "Primordial Mist"
+  },
+  "filter:blocking-relation-of-target": {
+   "family": "filter:blocking-or-blocked-by-source",
+   "description": "blockingRelation keyed to a target slot ('creature blocking or blocked by target creature'); its `of` reads only the source, its host or the trigger object.",
+   "example": "Trial // Error"
+  },
+  "effect:doesnt-untap-while-counter-grant": {
+   "family": "effect:doesnt-untap-next-untap-step",
+   "description": "'Doesn't untap for as long as it has a [kind] counter on it' on the creatures an effect names, with an ability granted to each of them.",
+   "example": "Dread Wight"
+  },
+  "amount:creatures-crewed-it-this-turn": {
+   "family": "keyword:crew",
+   "description": "The number of creatures that crewed this Vehicle this turn, those that have left included.",
+   "example": "Luxurious Locomotive"
+  },
+  "amount:opponents-controlling-this-way": {
+   "family": "effect:amount-new-variants",
+   "description": "The opponents who control one or more of the permanents an effect returned this way, as an amount or a scope.",
+   "example": "Sudden Salvation"
+  },
+  "effect:meld-enters-attacking": {
+   "family": "mechanic:meld",
+   "description": "The meld effect putting the melded permanent onto the battlefield tapped and attacking.",
+   "example": "Mishra, Claimed by Gix"
+  },
+  "static:loyalty-twice-self-only": {
+   "family": "effect:cast-and-activate-restrictions",
+   "description": "'You may activate the loyalty abilities of this planeswalker twice each turn': loyaltyActivationsEachTurn covers every planeswalker you control.",
+   "example": "Urza, Planeswalker"
   }
  },
  "groups": [
