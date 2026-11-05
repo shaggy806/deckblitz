@@ -150,6 +150,7 @@ import _poolChaosTheEndless from "../pool/chaos-the-endless.js";
 import _poolChaplainsBlessing from "../pool/chaplains-blessing.js";
 import _poolChromaticOrrery from "../pool/chromatic-orrery.js";
 import _poolChromescaleDrake from "../pool/chromescale-drake.js";
+import _poolCidTimelessArtificer from "../pool/cid-timeless-artificer.js";
 import _poolCircleOfDespair from "../pool/circle-of-despair.js";
 import _poolCircleOfProtectionGreen from "../pool/circle-of-protection-green.js";
 import _poolCityOfBrass from "../pool/city-of-brass.js";
@@ -808,6 +809,7 @@ import _poolTangleKelp from "../pool/tangle-kelp.js";
 import _poolTatsunariToadRider from "../pool/tatsunari-toad-rider.js";
 import _poolTawnossTinkering from "../pool/tawnoss-tinkering.js";
 import _poolTeapotSlinger from "../pool/teapot-slinger.js";
+import _poolTempestHawk from "../pool/tempest-hawk.js";
 import _poolTemporalTrespass from "../pool/temporal-trespass.js";
 import _poolTerminalCriticism from "../pool/terminal-criticism.js";
 import _poolTerrianWorldTyrant from "../pool/terrian-world-tyrant.js";
@@ -1115,6 +1117,7 @@ const shard: CardShard = {
     _poolChaplainsBlessing,
     _poolChromaticOrrery,
     _poolChromescaleDrake,
+    _poolCidTimelessArtificer,
     _poolCircleOfDespair,
     _poolCircleOfProtectionGreen,
     _poolCityOfBrass,
@@ -1773,6 +1776,7 @@ const shard: CardShard = {
     _poolTatsunariToadRider,
     _poolTawnossTinkering,
     _poolTeapotSlinger,
+    _poolTempestHawk,
     _poolTemporalTrespass,
     _poolTerminalCriticism,
     _poolTerrianWorldTyrant,

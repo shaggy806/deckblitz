@@ -225,6 +225,7 @@ import _poolDiningRoom from "../pool/dining-room.js";
 import _poolDireFleetInterloper from "../pool/dire-fleet-interloper.js";
 import _poolDiscipleOfGrace from "../pool/disciple-of-grace.js";
 import _poolDiscipleOfLaw from "../pool/disciple-of-law.js";
+import _poolDiscipleOfPhenax from "../pool/disciple-of-phenax.js";
 import _poolDismissivePyromancer from "../pool/dismissive-pyromancer.js";
 import _poolDispatch from "../pool/dispatch.js";
 import _poolDispenseJustice from "../pool/dispense-justice.js";
@@ -365,6 +366,7 @@ import _poolGuildlessCommons from "../pool/guildless-commons.js";
 import _poolGurmagAngler from "../pool/gurmag-angler.js";
 import _poolGustOfWind from "../pool/gust-of-wind.js";
 import _poolGutlessGhoul from "../pool/gutless-ghoul.js";
+import _poolGyrudaDoomOfDepths from "../pool/gyruda-doom-of-depths.js";
 import _poolHaggle from "../pool/haggle.js";
 import _poolHallowedHaunting from "../pool/hallowed-haunting.js";
 import _poolHallowedRespite from "../pool/hallowed-respite.js";
@@ -1197,6 +1199,7 @@ const shard: CardShard = {
     _poolDireFleetInterloper,
     _poolDiscipleOfGrace,
     _poolDiscipleOfLaw,
+    _poolDiscipleOfPhenax,
     _poolDismissivePyromancer,
     _poolDispatch,
     _poolDispenseJustice,
@@ -1337,6 +1340,7 @@ const shard: CardShard = {
     _poolGurmagAngler,
     _poolGustOfWind,
     _poolGutlessGhoul,
+    _poolGyrudaDoomOfDepths,
     _poolHaggle,
     _poolHallowedHaunting,
     _poolHallowedRespite,

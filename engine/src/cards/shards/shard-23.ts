@@ -304,6 +304,7 @@ import _poolFrontierSiege from "../pool/frontier-siege.js";
 import _poolFrostwielder from "../pool/frostwielder.js";
 import _poolFuneralCharm from "../pool/funeral-charm.js";
 import _poolFuneralRites from "../pool/funeral-rites.js";
+import _poolFyndhornDruid from "../pool/fyndhorn-druid.js";
 import _poolGandalfGoblinsBane from "../pool/gandalf-goblins-bane.js";
 import _poolGarzasAssassin from "../pool/garzas-assassin.js";
 import _poolGempalmPolluter from "../pool/gempalm-polluter.js";
@@ -508,6 +509,7 @@ import _poolMindsDesire from "../pool/minds-desire.js";
 import _poolMinionMissile from "../pool/minion-missile.js";
 import _poolMinotaurRoxxonCeo from "../pool/minotaur-roxxon-ceo.js";
 import _poolMireShade from "../pool/mire-shade.js";
+import _poolMirkoVoskMindDrinker from "../pool/mirko-vosk-mind-drinker.js";
 import _poolMisfortuneTeller from "../pool/misfortune-teller.js";
 import _poolMistformShrieker from "../pool/mistform-shrieker.js";
 import _poolMistyKnightHeroForHire from "../pool/misty-knight-hero-for-hire.js";
@@ -1267,6 +1269,7 @@ const shard: CardShard = {
     _poolFrostwielder,
     _poolFuneralCharm,
     _poolFuneralRites,
+    _poolFyndhornDruid,
     _poolGandalfGoblinsBane,
     _poolGarzasAssassin,
     _poolGempalmPolluter,
@@ -1471,6 +1474,7 @@ const shard: CardShard = {
     _poolMinionMissile,
     _poolMinotaurRoxxonCeo,
     _poolMireShade,
+    _poolMirkoVoskMindDrinker,
     _poolMisfortuneTeller,
     _poolMistformShrieker,
     _poolMistyKnightHeroForHire,

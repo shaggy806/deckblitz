@@ -235,6 +235,7 @@ import _poolDwarvenMauler from "../pool/dwarven-mauler.js";
 import _poolDwarvenThaumaturgist from "../pool/dwarven-thaumaturgist.js";
 import _poolEarthrumbler from "../pool/earthrumbler.js";
 import _poolEchoCirclet from "../pool/echo-circlet.js";
+import _poolEcologicalAppreciation from "../pool/ecological-appreciation.js";
 import _poolEiganjoDynastorian from "../pool/eiganjo-dynastorian.js";
 import _poolEldritchPact from "../pool/eldritch-pact.js";
 import _poolElectricEel from "../pool/electric-eel.js";
@@ -688,6 +689,7 @@ import _poolSabotender from "../pool/sabotender.js";
 import _poolSadisticSkymarcher from "../pool/sadistic-skymarcher.js";
 import _poolSageEyeAvengers from "../pool/sage-eye-avengers.js";
 import _poolSaguPummeler from "../pool/sagu-pummeler.js";
+import _poolSaheeliTheGifted from "../pool/saheeli-the-gifted.js";
 import _poolSaid from "../pool/said.js";
 import _poolSailIntoTheWest from "../pool/sail-into-the-west.js";
 import _poolSamiShipsEngineer from "../pool/sami-ships-engineer.js";
@@ -917,6 +919,7 @@ import _poolWarmWelcome from "../pool/warm-welcome.js";
 import _poolWaryThespian from "../pool/wary-thespian.js";
 import _poolWastelandViper from "../pool/wasteland-viper.js";
 import _poolWaterloggedHulk from "../pool/waterlogged-hulk.js";
+import _poolWaterspoutElemental from "../pool/waterspout-elemental.js";
 import _poolWaterwhirl from "../pool/waterwhirl.js";
 import _poolWeaverOfCurrents from "../pool/weaver-of-currents.js";
 import _poolWeaverOfHarmony from "../pool/weaver-of-harmony.js";
@@ -959,6 +962,7 @@ import _poolZephyrSpirit from "../pool/zephyr-spirit.js";
 import _poolZhangLiaoHeroOfHefei from "../pool/zhang-liao-hero-of-hefei.js";
 import _poolZuoCiTheMockingSage from "../pool/zuo-ci-the-mocking-sage.js";
 import _tokens55DjinnArtifactToken from "../tokens/5-5-djinn-artifact-token.js";
+import _tokensBeastTokenCantAttackOrBlockAlone from "../tokens/beast-token-cant-attack-or-block-alone.js";
 import _tokensClericToken from "../tokens/cleric-token.js";
 import _tokensElementalTokenResearchDevelopment from "../tokens/elemental-token-research-development.js";
 import _tokensElementalTokenWildfireAwakener from "../tokens/elemental-token-wildfire-awakener.js";
@@ -1212,6 +1216,7 @@ const shard: CardShard = {
     _poolDwarvenThaumaturgist,
     _poolEarthrumbler,
     _poolEchoCirclet,
+    _poolEcologicalAppreciation,
     _poolEiganjoDynastorian,
     _poolEldritchPact,
     _poolElectricEel,
@@ -1665,6 +1670,7 @@ const shard: CardShard = {
     _poolSadisticSkymarcher,
     _poolSageEyeAvengers,
     _poolSaguPummeler,
+    _poolSaheeliTheGifted,
     _poolSaid,
     _poolSailIntoTheWest,
     _poolSamiShipsEngineer,
@@ -1894,6 +1900,7 @@ const shard: CardShard = {
     _poolWaryThespian,
     _poolWastelandViper,
     _poolWaterloggedHulk,
+    _poolWaterspoutElemental,
     _poolWaterwhirl,
     _poolWeaverOfCurrents,
     _poolWeaverOfHarmony,
@@ -1938,6 +1945,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokens55DjinnArtifactToken,
+    _tokensBeastTokenCantAttackOrBlockAlone,
     _tokensClericToken,
     _tokensElementalTokenResearchDevelopment,
     _tokensElementalTokenWildfireAwakener,

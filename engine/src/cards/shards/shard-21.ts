@@ -137,6 +137,7 @@ import _poolChimericStaff from "../pool/chimeric-staff.js";
 import _poolChlorophant from "../pool/chlorophant.js";
 import _poolChokingTethers from "../pool/choking-tethers.js";
 import _poolChromaticLantern from "../pool/chromatic-lantern.js";
+import _poolChronosavant from "../pool/chronosavant.js";
 import _poolCircleOfFlame from "../pool/circle-of-flame.js";
 import _poolCitizenVHelmutZemo from "../pool/citizen-v-helmut-zemo.js";
 import _poolCityscapeLeveler from "../pool/cityscape-leveler.js";
@@ -299,6 +300,7 @@ import _poolGandalfWhiteRider from "../pool/gandalf-white-rider.js";
 import _poolGarrukTheVeilCursed from "../pool/garruk-the-veil-cursed.js";
 import _poolGetawayGlamer from "../pool/getaway-glamer.js";
 import _poolGevScaledScorch from "../pool/gev-scaled-scorch.js";
+import _poolGhastlyMimicry from "../pool/ghastly-mimicry.js";
 import _poolGhostlyKeybearer from "../pool/ghostly-keybearer.js";
 import _poolGiantCaterpillar from "../pool/giant-caterpillar.js";
 import _poolGiganticBigBear from "../pool/gigantic-big-bear.js";
@@ -420,6 +422,7 @@ import _poolLakesideShack from "../pool/lakeside-shack.js";
 import _poolLambholtHarrier from "../pool/lambholt-harrier.js";
 import _poolLastBreath from "../pool/last-breath.js";
 import _poolLavacoreElemental from "../pool/lavacore-elemental.js";
+import _poolLazotepConvert from "../pool/lazotep-convert.js";
 import _poolLazotepSliver from "../pool/lazotep-sliver.js";
 import _poolLeagueGuildmage from "../pool/league-guildmage.js";
 import _poolLeinoreAutumnSovereign from "../pool/leinore-autumn-sovereign.js";
@@ -820,6 +823,7 @@ import _poolTuyaBearclaw from "../pool/tuya-bearclaw.js";
 import _poolTymaretCallsTheDead from "../pool/tymaret-calls-the-dead.js";
 import _poolTyvarJubilantBrawler from "../pool/tyvar-jubilant-brawler.js";
 import _poolUginTheSpiritDragon from "../pool/ugin-the-spirit-dragon.js";
+import _poolUginsMastery from "../pool/ugins-mastery.js";
 import _poolUmaraEntangler from "../pool/umara-entangler.js";
 import _poolUnctussRetrofitter from "../pool/unctuss-retrofitter.js";
 import _poolUndeadGladiator from "../pool/undead-gladiator.js";
@@ -1049,6 +1053,7 @@ const shard: CardShard = {
     _poolChlorophant,
     _poolChokingTethers,
     _poolChromaticLantern,
+    _poolChronosavant,
     _poolCircleOfFlame,
     _poolCitizenVHelmutZemo,
     _poolCityscapeLeveler,
@@ -1211,6 +1216,7 @@ const shard: CardShard = {
     _poolGarrukTheVeilCursed,
     _poolGetawayGlamer,
     _poolGevScaledScorch,
+    _poolGhastlyMimicry,
     _poolGhostlyKeybearer,
     _poolGiantCaterpillar,
     _poolGiganticBigBear,
@@ -1332,6 +1338,7 @@ const shard: CardShard = {
     _poolLambholtHarrier,
     _poolLastBreath,
     _poolLavacoreElemental,
+    _poolLazotepConvert,
     _poolLazotepSliver,
     _poolLeagueGuildmage,
     _poolLeinoreAutumnSovereign,
@@ -1732,6 +1739,7 @@ const shard: CardShard = {
     _poolTymaretCallsTheDead,
     _poolTyvarJubilantBrawler,
     _poolUginTheSpiritDragon,
+    _poolUginsMastery,
     _poolUmaraEntangler,
     _poolUnctussRetrofitter,
     _poolUndeadGladiator,

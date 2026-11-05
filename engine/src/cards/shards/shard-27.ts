@@ -429,6 +429,7 @@ import _poolLightshellDuo from "../pool/lightshell-duo.js";
 import _poolLilianaTheFaultless from "../pool/liliana-the-faultless.js";
 import _poolLilianaUntouchedByDeath from "../pool/liliana-untouched-by-death.js";
 import _poolLisetteDeanOfTheRoot from "../pool/lisette-dean-of-the-root.js";
+import _poolLivingLaser from "../pool/living-laser.js";
 import _poolLlanowarStalker from "../pool/llanowar-stalker.js";
 import _poolLoamcrafterFaun from "../pool/loamcrafter-faun.js";
 import _poolLodestoneNeedle from "../pool/lodestone-needle.js";
@@ -872,6 +873,7 @@ import _poolVilespawnSpider from "../pool/vilespawn-spider.js";
 import _poolVirulentEmissary from "../pool/virulent-emissary.js";
 import _poolVisceraSeer from "../pool/viscera-seer.js";
 import _poolVisionQuest from "../pool/vision-quest.js";
+import _poolVizierOfDeferment from "../pool/vizier-of-deferment.js";
 import _poolVodalianMerchant from "../pool/vodalian-merchant.js";
 import _poolVoiceOfTheWoods from "../pool/voice-of-the-woods.js";
 import _poolVolcanicFissure from "../pool/volcanic-fissure.js";
@@ -1368,6 +1370,7 @@ const shard: CardShard = {
     _poolLilianaTheFaultless,
     _poolLilianaUntouchedByDeath,
     _poolLisetteDeanOfTheRoot,
+    _poolLivingLaser,
     _poolLlanowarStalker,
     _poolLoamcrafterFaun,
     _poolLodestoneNeedle,
@@ -1811,6 +1814,7 @@ const shard: CardShard = {
     _poolVirulentEmissary,
     _poolVisceraSeer,
     _poolVisionQuest,
+    _poolVizierOfDeferment,
     _poolVodalianMerchant,
     _poolVoiceOfTheWoods,
     _poolVolcanicFissure,

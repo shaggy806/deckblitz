@@ -367,6 +367,7 @@ import _poolHarvesterDruid from "../pool/harvester-druid.js";
 import _poolHarvesterOfMisery from "../pool/harvester-of-misery.js";
 import _poolHatutZerazeStrikeForce from "../pool/hatut-zeraze-strike-force.js";
 import _poolHauntedGuardian from "../pool/haunted-guardian.js";
+import _poolHeadlinerScarlett from "../pool/headliner-scarlett.js";
 import _poolHeartfireImmolator from "../pool/heartfire-immolator.js";
 import _poolHenchfiendOfUkor from "../pool/henchfiend-of-ukor.js";
 import _poolHermitOfTheNatterknolls from "../pool/hermit-of-the-natterknolls.js";
@@ -578,6 +579,7 @@ import _poolPhantomBeast from "../pool/phantom-beast.js";
 import _poolPhylathWorldSculptor from "../pool/phylath-world-sculptor.js";
 import _poolPhyrexianAltar from "../pool/phyrexian-altar.js";
 import _poolPhyrexianBoon from "../pool/phyrexian-boon.js";
+import _poolPhyrexianCensor from "../pool/phyrexian-censor.js";
 import _poolPhyrexianSlayer from "../pool/phyrexian-slayer.js";
 import _poolPitilessPlunderer from "../pool/pitiless-plunderer.js";
 import _poolPlanarIncision from "../pool/planar-incision.js";
@@ -822,6 +824,7 @@ import _poolThunderStrike from "../pool/thunder-strike.js";
 import _poolThunderblust from "../pool/thunderblust.js";
 import _poolThunderousMight from "../pool/thunderous-might.js";
 import _poolTidalVisionary from "../pool/tidal-visionary.js";
+import _poolTigerTribeHunter from "../pool/tiger-tribe-hunter.js";
 import _poolTimeElemental from "../pool/time-elemental.js";
 import _poolTinStreetMarket from "../pool/tin-street-market.js";
 import _poolTitanHunter from "../pool/titan-hunter.js";
@@ -902,6 +905,7 @@ import _poolWondrousRevival from "../pool/wondrous-revival.js";
 import _poolWoodedBastion from "../pool/wooded-bastion.js";
 import _poolWretchedThrong from "../pool/wretched-throng.js";
 import _poolWurmcoilLarva from "../pool/wurmcoil-larva.js";
+import _poolYorionSkyNomad from "../pool/yorion-sky-nomad.js";
 import _poolZanikevLocust from "../pool/zanikev-locust.js";
 import _poolZephyrSentinel from "../pool/zephyr-sentinel.js";
 import _poolZhaoZilongTigerGeneral from "../pool/zhao-zilong-tiger-general.js";
@@ -1302,6 +1306,7 @@ const shard: CardShard = {
     _poolHarvesterOfMisery,
     _poolHatutZerazeStrikeForce,
     _poolHauntedGuardian,
+    _poolHeadlinerScarlett,
     _poolHeartfireImmolator,
     _poolHenchfiendOfUkor,
     _poolHermitOfTheNatterknolls,
@@ -1513,6 +1518,7 @@ const shard: CardShard = {
     _poolPhylathWorldSculptor,
     _poolPhyrexianAltar,
     _poolPhyrexianBoon,
+    _poolPhyrexianCensor,
     _poolPhyrexianSlayer,
     _poolPitilessPlunderer,
     _poolPlanarIncision,
@@ -1757,6 +1763,7 @@ const shard: CardShard = {
     _poolThunderblust,
     _poolThunderousMight,
     _poolTidalVisionary,
+    _poolTigerTribeHunter,
     _poolTimeElemental,
     _poolTinStreetMarket,
     _poolTitanHunter,
@@ -1837,6 +1844,7 @@ const shard: CardShard = {
     _poolWoodedBastion,
     _poolWretchedThrong,
     _poolWurmcoilLarva,
+    _poolYorionSkyNomad,
     _poolZanikevLocust,
     _poolZephyrSentinel,
     _poolZhaoZilongTigerGeneral,

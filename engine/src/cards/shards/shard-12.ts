@@ -115,6 +115,7 @@ import _poolBruteSuit from "../pool/brute-suit.js";
 import _poolBurnAtTheStake from "../pool/burn-at-the-stake.js";
 import _poolBurningOfXinye from "../pool/burning-of-xinye.js";
 import _poolBushmeatPoacher from "../pool/bushmeat-poacher.js";
+import _poolBustle from "../pool/bustle.js";
 import _poolCaetusSeaTyrantOfSegovia from "../pool/caetus-sea-tyrant-of-segovia.js";
 import _poolCalibratedBlast from "../pool/calibrated-blast.js";
 import _poolCanyonDrake from "../pool/canyon-drake.js";
@@ -409,6 +410,7 @@ import _poolInfernalIdol from "../pool/infernal-idol.js";
 import _poolInfernalOffering from "../pool/infernal-offering.js";
 import _poolInfernalRebirth from "../pool/infernal-rebirth.js";
 import _poolIngotChewer from "../pool/ingot-chewer.js";
+import _poolInnocuousResearcher from "../pool/innocuous-researcher.js";
 import _poolInspiringVantage from "../pool/inspiring-vantage.js";
 import _poolInstillFuror from "../pool/instill-furor.js";
 import _poolIridescentAngel from "../pool/iridescent-angel.js";
@@ -923,6 +925,7 @@ import _poolWretchedDoll from "../pool/wretched-doll.js";
 import _poolWyrmsCrossingPatrol from "../pool/wyrms-crossing-patrol.js";
 import _poolXavierSalInfestedCaptain from "../pool/xavier-sal-infested-captain.js";
 import _poolZealotsConviction from "../pool/zealots-conviction.js";
+import _poolZirdaTheDawnwaker from "../pool/zirda-the-dawnwaker.js";
 import _poolZombieAssassin from "../pool/zombie-assassin.js";
 import _tokens01BlueStarfishToken from "../tokens/0-1-blue-starfish-token.js";
 import _tokensBoarToken from "../tokens/boar-token.js";
@@ -1061,6 +1064,7 @@ const shard: CardShard = {
     _poolBurnAtTheStake,
     _poolBurningOfXinye,
     _poolBushmeatPoacher,
+    _poolBustle,
     _poolCaetusSeaTyrantOfSegovia,
     _poolCalibratedBlast,
     _poolCanyonDrake,
@@ -1355,6 +1359,7 @@ const shard: CardShard = {
     _poolInfernalOffering,
     _poolInfernalRebirth,
     _poolIngotChewer,
+    _poolInnocuousResearcher,
     _poolInspiringVantage,
     _poolInstillFuror,
     _poolIridescentAngel,
@@ -1869,6 +1874,7 @@ const shard: CardShard = {
     _poolWyrmsCrossingPatrol,
     _poolXavierSalInfestedCaptain,
     _poolZealotsConviction,
+    _poolZirdaTheDawnwaker,
     _poolZombieAssassin,
   ],
   tokens: [

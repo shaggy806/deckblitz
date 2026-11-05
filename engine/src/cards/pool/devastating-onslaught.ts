@@ -1,0 +1,18 @@
+import { defineCard } from "../define.js";
+
+export default defineCard({
+  name: "Devastating Onslaught",
+  manaCost: "{X}{X}{R}",
+  colors: ["R"],
+  types: ["sorcery"],
+  text: "Create X tokens that are copies of target artifact or creature you control. Those tokens gain haste until end of turn. Sacrifice them at the beginning of the next end step.",
+  targets: [{ kind: "permanent", whose: "you", filter: { typesAnyOf: ["artifact", "creature"] } }],
+  effect: {
+    kind: "create-token-copy",
+    of: 0,
+    count: "x",
+    who: "you",
+    gainUntilEndOfTurn: ["haste"],
+    sacrificeAtEndStep: true,
+  },
+});

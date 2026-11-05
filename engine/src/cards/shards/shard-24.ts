@@ -177,6 +177,7 @@ import _poolConvalescence from "../pool/convalescence.js";
 import _poolConvolute from "../pool/convolute.js";
 import _poolConvulsingLicid from "../pool/convulsing-licid.js";
 import _poolCoralEel from "../pool/coral-eel.js";
+import _poolCourageousResolve from "../pool/courageous-resolve.js";
 import _poolCovetedJewel from "../pool/coveted-jewel.js";
 import _poolCracklingCyclops from "../pool/crackling-cyclops.js";
 import _poolCrash from "../pool/crash.js";
@@ -461,6 +462,7 @@ import _poolLiesaForgottenArchangel from "../pool/liesa-forgotten-archangel.js";
 import _poolLightningBolt from "../pool/lightning-bolt.js";
 import _poolLightningDragon from "../pool/lightning-dragon.js";
 import _poolLightningHounds from "../pool/lightning-hounds.js";
+import _poolLimitedResources from "../pool/limited-resources.js";
 import _poolLluwenImperfectNaturalist from "../pool/lluwen-imperfect-naturalist.js";
 import _poolLoneWolfOfTheNatterknolls from "../pool/lone-wolf-of-the-natterknolls.js";
 import _poolLotusPetal from "../pool/lotus-petal.js";
@@ -596,6 +598,7 @@ import _poolQuietContemplation from "../pool/quiet-contemplation.js";
 import _poolRadagastOfRhosgobel from "../pool/radagast-of-rhosgobel.js";
 import _poolRaggedShortSpear from "../pool/ragged-short-spear.js";
 import _poolRakdosLordOfRiots from "../pool/rakdos-lord-of-riots.js";
+import _poolRalLeylineProdigy from "../pool/ral-leyline-prodigy.js";
 import _poolRamosianLieutenant from "../pool/ramosian-lieutenant.js";
 import _poolRampagingFerocidon from "../pool/rampaging-ferocidon.js";
 import _poolRampagingWarMammoth from "../pool/rampaging-war-mammoth.js";
@@ -818,6 +821,7 @@ import _poolTianaShipsCaretaker from "../pool/tiana-ships-caretaker.js";
 import _poolTibaltsRager from "../pool/tibalts-rager.js";
 import _poolTidalForce from "../pool/tidal-force.js";
 import _poolTimeVault from "../pool/time-vault.js";
+import _poolTobyBeastieBefriender from "../pool/toby-beastie-befriender.js";
 import _poolTolariaWest from "../pool/tolaria-west.js";
 import _poolTonicPeddler from "../pool/tonic-peddler.js";
 import _poolTonyStark from "../pool/tony-stark.js";
@@ -1129,6 +1133,7 @@ const shard: CardShard = {
     _poolConvolute,
     _poolConvulsingLicid,
     _poolCoralEel,
+    _poolCourageousResolve,
     _poolCovetedJewel,
     _poolCracklingCyclops,
     _poolCrash,
@@ -1413,6 +1418,7 @@ const shard: CardShard = {
     _poolLightningBolt,
     _poolLightningDragon,
     _poolLightningHounds,
+    _poolLimitedResources,
     _poolLluwenImperfectNaturalist,
     _poolLoneWolfOfTheNatterknolls,
     _poolLotusPetal,
@@ -1548,6 +1554,7 @@ const shard: CardShard = {
     _poolRadagastOfRhosgobel,
     _poolRaggedShortSpear,
     _poolRakdosLordOfRiots,
+    _poolRalLeylineProdigy,
     _poolRamosianLieutenant,
     _poolRampagingFerocidon,
     _poolRampagingWarMammoth,
@@ -1770,6 +1777,7 @@ const shard: CardShard = {
     _poolTibaltsRager,
     _poolTidalForce,
     _poolTimeVault,
+    _poolTobyBeastieBefriender,
     _poolTolariaWest,
     _poolTonicPeddler,
     _poolTonyStark,
