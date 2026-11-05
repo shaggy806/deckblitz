@@ -18,7 +18,7 @@ describe("a trigger for a player who left in the same event", () => {
     // Both at once, by one check of state-based actions (rule 704.3).
     game.state.players[A].life = 0;
     game.state.objects[bears].damageMarked = 2;
-    game.tick();
+    game.advanceUntil((s) => s.players[A].hasLost === true);
     settle(game);
     expect(game.state.players[A].hasLost).toBe(true);
     // Valentin was there as the bears died, so its replacement exiled them.
