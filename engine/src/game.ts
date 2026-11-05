@@ -46946,7 +46946,7 @@ export class Game {
     // One that can't enter transformed stays put (rule 712.14a), unasked.
     if (transformed && !this.isDoubleFacedCard(target.object)) return false;
     // "…attached to that creature": an Aura that can't go there stays.
-    if (attachTo !== undefined && !this.readyToEnterAttached(target.object, attachTo, under ?? object.owner)) {
+    if (attachTo !== undefined && !this.readyToEnterAttached(target.object, attachTo, under ?? object.owner, transformed)) {
       return false;
     }
     // Its "as this enters" choices first (rule 614.12 — a reanimated Clone
@@ -47006,12 +47006,15 @@ export class Game {
    * limited to the filter), an Equipment's `attachHost`. Anything else
    * enters, an Equipment attached as it does (`attachEntered`), anything
    * else unattached (303.4h). Asked again when an entry resumes after a
-   * choice, so it never undoes one.
+   * choice, so it never undoes one. One entering `transformed` is judged as
+   * its back face (rule 712.14: Vengeful Strangler returns as Strangling
+   * Grasp, an Aura).
    */
-  private readyToEnterAttached(id: ObjectId, host: EnterAttachHost, player: PlayerId): boolean {
+  private readyToEnterAttached(id: ObjectId, host: EnterAttachHost, player: PlayerId, transformed = false): boolean {
     const card = this.state.objects[id];
     if (card === undefined) return false;
-    const def = this.registry.get(printedCardName(card));
+    const back = transformed && this.isTransformingDfc(id) ? card.faces?.[1] : undefined;
+    const def = this.registry.get(back ?? printedCardName(card));
     const aura = def.subtypes.includes("Aura");
     if (host !== null && typeof host === "object" && "among" in host) {
       if (aura || def.subtypes.includes("Equipment")) {
