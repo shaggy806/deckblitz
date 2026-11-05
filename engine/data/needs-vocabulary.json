@@ -2005,6 +2005,7 @@
    "example": "Glissa's Retriever: 'X is the number of opponents who have three or more poison counters' — a count of players meeting a poison-counter test"
   },
   "decision:name-a-card": {
+   "description": "Not several players naming before a shared reveal (decision:each-player-names-before-reveals), nor a non-target player naming (decision:trigger-player-names-after-hidden-search).",
    "example": "Demonic Consultation: \"Choose a card name.\"",
    "checked": "2026-10-27: missing"
   },
@@ -2195,7 +2196,7 @@
    "family": "effect:attach-extensions",
    "example": "Gift of Immortality: The Aura returning attached to the returned creature.",
    "checked": "2026-10-27: partial",
-   "description": "Still missing (2026-10-27 check): Radiant Grace's Aura returning attached to a player: attachHost gives null for a player slot (rule 303.4i) Already there: src/effects.ts put-onto-battlefield attachedTo (EffectTargetRef) and attachHost(); returning an Aura attached to a returned creature works (Gift of Immortality, Next of Kin)"
+   "description": "Still missing (2026-10-27 check): Radiant Grace's Aura returning attached to a player: attachHost gives null for a player slot (rule 303.4i) Already there: src/effects.ts put-onto-battlefield attachedTo (EffectTargetRef) and attachHost(); returning an Aura attached to a returned creature works (Gift of Immortality, Next of Kin) Not a flicker of a host and its Auras: effect:flicker-host-and-auras-return-attached."
   },
   "effect:batched-dies-total-power": {
    "family": "effect:amount-aggregate",
@@ -2499,7 +2500,7 @@
    "family": "effect:divide-among-targets",
    "example": "Monstrous Onslaught: 'X damage divided as you choose among any number of target creatures, where X is the greatest power among creatures you control as you cast this spell' — divided.total is a fixed number.",
    "checked": "2026-10-27: partial",
-   "description": "Still missing (2026-10-27 check): A divided total read from a game value at cast or activation (Monstrous Onslaught's greatest power, Ravenous Gigantotherium's own power): divided.total is a fixed number, or X for a spell only Already there: src/cards/define.ts CardDefinition.divided {total, slot, x}; src/abilities.ts divided (fixed total; byTriggerValue/byTurnStat for triggers only); src/effects.ts case damage-divided"
+   "description": "Still missing (2026-10-27 check): A divided total read from a game value at cast or activation (Monstrous Onslaught's greatest power, Ravenous Gigantotherium's own power): divided.total is a fixed number, or X for a spell only Already there: src/cards/define.ts CardDefinition.divided {total, slot, x}; src/abilities.ts divided (fixed total; byTriggerValue/byTurnStat for triggers only); src/effects.ts case damage-divided Not a total that reads X or a kicker: effect:divided-total-reading-x, effect:divided-total-by-kicker."
   },
   "effect:doesnt-untap-next-all": {
    "example": "Tangle: doesntUntapNext exists only on single-target tap; nothing marks every attacking creature without tapping it"
@@ -2780,6 +2781,7 @@
    "example": "Timely Ward: 'As though it had flash if it targets a commander'."
   },
   "effect:flash-permission-this-turn": {
+   "description": "grant-spells-this-turn's trigger lasts only while it's a spell: effect:spell-gains-ability-kept-by-permanent.",
    "family": "effect:cast-and-activate-restrictions",
    "example": "Emergence Zone: 'You may cast spells this turn as though they had flash' — castAsThoughFlash is a static, with no one-shot this-turn form.",
    "checked": "2026-10-27: missing"
@@ -3160,7 +3162,7 @@
    "family": "effect:put-onto-battlefield-options",
    "example": "Emperor of Bones: No effect puts a creature card exiled with the source onto the battlefield (with finality counter, haste, end-step sacrifice).",
    "checked": "2026-10-27: partial",
-   "description": "Still missing (2026-10-27 check): riders (finality counter, haste, end-step sacrifice) and controller other than owner (Underworld Sentinel) are not options on return-exiled-by-source Already there: engine/src/effects.ts kind return-exiled-by-source, linked: \"battlefield\" (Colfenor's Urn) puts linked cards onto the battlefield under owners' control"
+   "description": "Still missing (2026-10-27 check): riders (finality counter, haste, end-step sacrifice) and controller other than owner (Underworld Sentinel) are not options on return-exiled-by-source Already there: engine/src/effects.ts kind return-exiled-by-source, linked: \"battlefield\" (Colfenor's Urn) puts linked cards onto the battlefield under owners' control Does not link cards a replacement exiled: replacement:exile-instead-linked."
   },
   "effect:put-from-opponent-graveyard-untargeted": {
    "family": "effect:put-onto-battlefield-options",
@@ -5837,7 +5839,7 @@
    "family": "effect:modifier-grants-activated",
    "example": "Hellish Rebuke: opponents' permanents gain 'When this permanent deals damage to the player who cast Hellish Rebuke, …' — the granted ability must remember its caster (Grothama: the granting permanent).",
    "checked": "2026-10-27: partial",
-   "description": "Still missing (2026-10-27 check): the granted triggered ability cannot name the permanent or player that granted it; sacrifice-source sacrifices the bearer, and Hellish Rebuke's caster is not reachable (Spare Dagger, Trickster's Talisman, Grothama) Already there: engine/src/effects.ts kind \"grant-triggered\" (target, ability: TriggeredAbility, duration) and kind \"sacrifice-source\""
+   "description": "Still missing (2026-10-27 check): the granted triggered ability cannot name the permanent or player that granted it; sacrifice-source sacrifices the bearer, and Hellish Rebuke's caster is not reachable (Spare Dagger, Trickster's Talisman, Grothama) Already there: engine/src/effects.ts kind \"grant-triggered\" (target, ability: TriggeredAbility, duration) and kind \"sacrifice-source\" Acting on the granter only: filter:not-the-granter, trigger:granted-deals-damage-to-spell-caster."
   },
   "effect:amount-count-in-exile": {
    "family": "effect:amount-new-variants",
@@ -6321,6 +6323,7 @@
    "example": "Slumbering Trudge: 'If X is 2 or less, it enters tapped' — an enters-tapped replacement conditioned on the X it was cast with (tappedUnless gets no X)."
   },
   "effect:copy-spell-grants": {
+   "description": "The copy only, not the original: effect:spell-on-stack-gains-keyword.",
    "family": "effect:copy-spell-extensions",
    "example": "Choreographed Sparks: 'Copy target creature spell you control. The copy gains haste and \"At the beginning of the end step, sacrifice this token.\"' — copy-spell has no grants for the resulting token."
   },
@@ -6835,6 +6838,7 @@
    "example": "Koh, the Face Stealer: Koh, the Face Stealer: an activated 'choose a creature card exiled with this' that records the choice, and a static giving the source all activated and triggered abilities of the last chosen card."
   },
   "effect:granted-activated-refers-to-granter": {
+   "description": "No tap cost (cost:tap-granter) and no granter's controller (effect:granter-controller-player-ref).",
    "family": "effect:modifier-grants-activated",
    "example": "Trusty Boomerang: An activated ability a static grants (Equipment's 'Equipped creature has \"…\"') whose effect names the granting permanent rather than the one it's on — Trusty Boomerang's 'Return Trusty Boomerang to its owner's hand'. The activated twin of effect:granted-trigger-refers-to-granter."
   },
@@ -8637,6 +8641,7 @@
    "example": "Gale's Redirection"
   },
   "effect:look-and-choose-one-each": {
+   "description": "One destination for all of them: effect:look-one-each-then-one-onto-battlefield.",
    "family": "decision:choose-from-zone-extensions",
    "example": "Harper Recruiter"
   },
@@ -9933,6 +9938,7 @@
    "example": "Jade Statue"
   },
   "effect:cant-be-regenerated-this-turn": {
+   "description": "One-shot only, no static: static:cant-be-regenerated-damaged-by-source.",
    "example": "Disintegrate",
    "checked": "2026-10-27: missing"
   },
@@ -10916,6 +10922,7 @@
    "description": "Still missing (2026-10-27 check): a morph cost that reveals a card from hand: MorphCost.also has payLife, sacrifice, discard and returnToHand, but no reveal Already there: engine/src/cards/define.ts MorphCost.also"
   },
   "decision:opponent-chooses-target": {
+   "description": "Spells and activated abilities only, not triggers (target:triggered-opponents-choice), and no tie to an earlier target's controller (decision:target-chooser-is-controller-of-earlier-target).",
    "family": "effect:choices-by-other-players",
    "example": "Volcanic Offering: an opponent you pick as you cast it chooses two of the spell's targets.",
    "checked": "2026-10-27: missing"
@@ -11061,6 +11068,7 @@
    "family": "cost:mana-ability-complex-costs"
   },
   "decision:opponent-chooses-mode": {
+   "description": "Not a chosen mode with targets: decision:opponent-chosen-mode-with-targets.",
    "example": "Library of Lat-Nam",
    "family": "effect:choices-by-other-players"
   },
@@ -14799,6 +14807,166 @@
    "family": "decision:choose-player",
    "description": "Two different players chosen as it enters: choosePlayerOnEnter keeps one, and nothing reads \"the other chosen player\".",
    "example": "Sower of Discord: as this creature enters, choose two players"
+  },
+  "decision:zone-choice-card-types-among": {
+   "family": "decision:choose-from-zone-extensions",
+   "description": "The zone choice's `variety` rule exists in zone-choice-together.ts, but no definition field reaches it: SearchTogether has no form for it, so 'any number of cards with four or more card types among them' can't be said on a choice.",
+   "example": "Winter, Cynical Opportunist"
+  },
+  "effect:impulse-exile-cast-one-spell-of-type": {
+   "family": "cost:loyalty-x",
+   "description": "'You may cast an instant or sorcery spell from among those exiled cards' is one spell in total until the end of your next turn; impulse-exile has all of them or oncePerTurn, and the ruling lets an Adventure's spell half qualify on a creature card.",
+   "example": "Chandra, Hope's Beacon"
+  },
+  "effect:divided-total-reading-x": {
+   "family": "effect:divide-among-targets",
+   "description": "An activated ability's divided has no x: true, and a total of 'x' is read at X 0 in the offer whenever X varies, capping the group at no targets.",
+   "example": "Huatli, Warrior Poet"
+  },
+  "effect:divided-total-by-kicker": {
+   "family": "effect:prevention-divided",
+   "description": "The kicker takes targets and effect but no divided, and the offer's total is read before kicked is known.",
+   "example": "Pollen Remedy"
+  },
+  "replacement:target-creature-multiply-combat-damage-to-your-opponents": {
+   "family": "cost:loyalty-x",
+   "description": "A one-shot 'until your next turn' multiplier on one target creature with 'your opponents' fixed to Jeska's controller; a granted would-deal-damage static reads the creature's controller, wrong on an opponent's creature.",
+   "example": "Jeska, Thrice Reborn"
+  },
+  "filter:shares-color-with-source": {
+   "family": "cost:loyalty-x",
+   "description": "The −8 searches for 'shares a color with this planeswalker', the activating walker when the ability is granted (ruling); sharesColorWithTarget takes only a target slot.",
+   "example": "Kasmina, Enigma Sage"
+  },
+  "decision:opponent-chosen-mode-with-targets": {
+   "family": "effect:choices-by-other-players",
+   "description": "castModal.chosenBy modes may not take targets, and the mode needs 'up to two target creatures that player controls' chosen after it.",
+   "example": "Fatal Lore"
+  },
+  "decision:target-chooser-is-controller-of-earlier-target": {
+   "family": "effect:choices-by-other-players",
+   "description": "'That opponent' must control the first target; otherChooser accepts any opponent, wrong past two players.",
+   "example": "Mogg Assassin"
+  },
+  "effect:flicker-host-and-auras-return-attached": {
+   "family": "effect:attach-extensions",
+   "description": "Exiles the creature and all its Auras together; at the end step the card returns first, then the Auras attached to it under their owners' control, and nothing returns for a token.",
+   "example": "Flickerform"
+  },
+  "decision:choose-from-hand-or-command-zone": {
+   "family": "effect:attach-extensions",
+   "description": "One choice across hand and command zone: look-and-choose takes one zone, and hand-or-graveyard doesn't cover the command zone.",
+   "example": "Next of Kin"
+  },
+  "static:cant-be-regenerated-damaged-by-source": {
+   "family": "effect:cant-be-regenerated-this-turn",
+   "description": "The gained ability is a static applying as damage is dealt and to damage dealt earlier in the turn; prohibit is one-shot and a trigger would resolve after state-based actions.",
+   "example": "Bone Shaman"
+  },
+  "effect:spell-on-stack-gains-keyword": {
+   "family": "effect:copy-spell-extensions",
+   "description": "'Those spells gain wither' includes the original; gains reaches only the copy.",
+   "example": "Spinerock Tyrant"
+  },
+  "effect:spell-gains-ability-kept-by-permanent": {
+   "family": "effect:cast-and-activate-restrictions",
+   "description": "grant-spells-this-turn's triggered doesn't stay on the permanent, so the fight never triggered (written and tested, then removed).",
+   "example": "Cherished Hatchling"
+  },
+  "cost:tap-granter": {
+   "family": "effect:modifier-grants-activated",
+   "description": "A granted cost of 'Tap Fishing Pole': sacrifice and unattach have a 'granter' form, tapping doesn't.",
+   "example": "Fishing Pole"
+  },
+  "effect:granter-controller-player-ref": {
+   "family": "effect:modifier-grants-activated",
+   "description": "'Hold for Ransom's controller draws a card' needs a player ref for the granter's controller; neither EffectPlayerRef nor PlayerScope has one.",
+   "example": "Hold for Ransom"
+  },
+  "effect:look-one-each-then-one-onto-battlefield": {
+   "family": "decision:choose-from-zone-extensions",
+   "description": "One card per keyword, then one of those onto the battlefield and the rest to hand: oneEach has one destination, and secondPick doesn't share the set.",
+   "example": "Selective Adaptation"
+  },
+  "effect:play-cards-exiled-this-way-until-next-turn": {
+   "family": "cost:may-cost-non-mana",
+   "description": "A play permission on cards a resolution exiled from hands, lasting until the end of your next turn; allow-cast-from-exile and ExilePermission offer this turn or while exiled.",
+   "example": "Wheel of Potential"
+  },
+  "replacement:as-enters-put-exiled-cards-into-graveyards": {
+   "family": "cost:put-opponent-exiled-card-into-graveyard",
+   "description": "AsEntersAction can exile or return, but can't put opponents' exiled cards into graveyards with counters riding on it.",
+   "example": "Ulamog's Despoiler"
+  },
+  "decision:each-player-names-before-reveals": {
+   "family": "decision:name-a-card",
+   "description": "Every player names a card, then all reveal at once; a for-each-player would show each reveal before the next player names.",
+   "example": "Conundrum Sphinx"
+  },
+  "decision:trigger-player-names-after-hidden-search": {
+   "family": "decision:name-a-card",
+   "description": "choose-card-name's chooser is only a target slot, so the damaged player can't name while 'you' keeps the may-put.",
+   "example": "Sphinx Ambassador"
+  },
+  "amount:greatest-among-cards-left-graveyard": {
+   "family": "effect:amount-aggregate",
+   "description": "An aggregate can't read a leaves-graveyard batch once the cards are in a hand or library.",
+   "example": "Amzu, Swarm's Hunger"
+  },
+  "static:cast-from-any-graveyard-put-from-library-this-turn": {
+   "family": "zone:graveyard-cast-permissions",
+   "description": "Static castFromGraveyard reads only your own graveyard with no 'a land and a spell' allowance; whose exists only on the resolved player-effect.",
+   "example": "Coram, the Undertaker"
+  },
+  "effect:aura-enchants-card-in-graveyard": {
+   "family": "effect:attach-extensions",
+   "description": "An Aura whose enchant is a graveyard card, which then swaps to the creature it returned.",
+   "example": "Animate Dead"
+  },
+  "effect:reflexive-attach-one-of-put-this-way": {
+   "family": "effect:attach-extensions",
+   "description": "A reflexive trigger's about carries one object, not the set put this way, and the ruling needs a real reflexive ability ordered against job select.",
+   "example": "Gilgamesh, Master-at-Arms"
+  },
+  "cost:x-fixed-by-count-as-cast": {
+   "family": "effect:distribute-counters",
+   "description": "X fixed to an exact count as cast, of an opponent's graveyard: maxX is only a ceiling, and the ruling says exactly.",
+   "example": "Spoils of War"
+  },
+  "effect:distribute-counters-among-source-and-chosen": {
+   "family": "effect:distribute-counters",
+   "description": "'Among it and any number': counters-distributed lets the player choose no recipients and lose the counters, and can't require the source.",
+   "example": "Stumpsquall Hydra"
+  },
+  "filter:not-the-granter": {
+   "family": "effect:modifier-grants-activated",
+   "description": "'An artifact other than Dire Blunderbuss' needs a filter excluding the granter; notName would also wrongly exclude a second copy.",
+   "example": "Dire Flail // Dire Blunderbuss"
+  },
+  "trigger:granted-deals-damage-to-spell-caster": {
+   "family": "effect:modifier-grants-activated",
+   "description": "The granted trigger must fire only on damage to the player who cast the spell; deals-damage's to can't name that player, which matters in multiplayer.",
+   "example": "Hellish Rebuke"
+  },
+  "target:any-number-group-before-targeting-mode": {
+   "family": "decision:variable-target-count",
+   "description": "With both modes chosen, the first mode's any-number group of lands comes before the second mode's target creature; a group must be its list's last slot, and swapping the modes would deal the damage before the lands animate.",
+   "example": "Kamahl's Will"
+  },
+  "replacement:damage-replaced-not-prevented": {
+   "family": "effect:this-way-results",
+   "description": "Its ruling: the damage is replaced, not prevented, so it replaces damage that can't be prevented; would-deal-damage's prevent: true lets unpreventable damage through.",
+   "example": "Delaying Shield"
+  },
+  "amount:aggregate-sum-unclamped": {
+   "family": "effect:amount-aggregate",
+   "description": "The −11's rulings subtract a negative-power creature from the total, and a survivor's power counts as it is now: an aggregate sum clamps at 0 on its own, so a surviving negative-power creature doesn't reduce the destroyed creatures' power.",
+   "example": "Angrath, Minotaur Pirate"
+  },
+  "effect:cast-discarded-card-exiled-by-madness": {
+   "family": "effect:sacrificed-object-lki",
+   "description": "'You may cast the discarded card' must also reach a card madness exiled as it was discarded; cast-now with from: graveyard and thisWay: discarded doesn't offer it.",
+   "example": "Malcolm, Alluring Scoundrel"
   }
  },
  "groups": [

@@ -1,0 +1,1063 @@
+{
+ "batch": "B259",
+ "status": "done",
+ "ranks": "Need-keys Phase 2: cards freed by the cost:loyalty-x, cost and decision families through effect:random-card-from-hand (two agents of 75 and 74 cards, one blind reviewer)",
+ "authored": [
+  {
+   "name": "Chandra, Chill of Compliance",
+   "files": [
+    "engine/src/cards/pool/chandra-chill-of-compliance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jace, the Perfected Mind",
+   "files": [
+    "engine/src/cards/pool/jace-the-perfected-mind.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Liliana, Heretical Healer",
+   "files": [
+    "engine/src/cards/pool/liliana-heretical-healer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nahiri, Storm of Stone",
+   "files": [
+    "engine/src/cards/pool/nahiri-storm-of-stone.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sorin, Grim Nemesis",
+   "files": [
+    "engine/src/cards/pool/sorin-grim-nemesis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sorin, Vengeful Bloodlord",
+   "files": [
+    "engine/src/cards/pool/sorin-vengeful-bloodlord.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tamiyo, Compleated Sage",
+   "files": [
+    "engine/src/cards/pool/tamiyo-compleated-sage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ugin, the Spirit Dragon",
+   "files": [
+    "engine/src/cards/pool/ugin-the-spirit-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bonny Pall, Clearcutter",
+   "files": [
+    "engine/src/cards/pool/bonny-pall-clearcutter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dread Tiller",
+   "files": [
+    "engine/src/cards/pool/dread-tiller.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Final Parting",
+   "files": [
+    "engine/src/cards/pool/final-parting.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Haunting Voyage",
+   "files": [
+    "engine/src/cards/pool/haunting-voyage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Portent of Calamity",
+   "files": [
+    "engine/src/cards/pool/portent-of-calamity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Curse of Inertia",
+   "files": [
+    "engine/src/cards/pool/curse-of-inertia.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Diaochan, Artful Beauty",
+   "files": [
+    "engine/src/cards/pool/diaochan-artful-beauty.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Echo Chamber",
+   "files": [
+    "engine/src/cards/pool/echo-chamber.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hapatra, the Desert Fang",
+   "files": [
+    "engine/src/cards/pool/hapatra-the-desert-fang.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kraven's Last Hunt",
+   "files": [
+    "engine/src/cards/pool/kravens-last-hunt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skanos Dragonheart",
+   "files": [
+    "engine/src/cards/pool/skanos-dragonheart.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wick's Patrol",
+   "files": [
+    "engine/src/cards/pool/wicks-patrol.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Halsin, Emerald Archdruid",
+   "files": [
+    "engine/src/cards/pool/halsin-emerald-archdruid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hunting Wilds",
+   "files": [
+    "engine/src/cards/pool/hunting-wilds.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shadow Puppeteers",
+   "files": [
+    "engine/src/cards/pool/shadow-puppeteers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aloy, Savior of Meridian",
+   "files": [
+    "engine/src/cards/pool/aloy-savior-of-meridian.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gift of Immortality",
+   "files": [
+    "engine/src/cards/pool/gift-of-immortality.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reins of the Vinesteed",
+   "files": [
+    "engine/src/cards/pool/reins-of-the-vinesteed.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jaya Ballard, Task Mage",
+   "files": [
+    "engine/src/cards/pool/jaya-ballard-task-mage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lim-Dûl's Cohort",
+   "files": [
+    "engine/src/cards/pool/lim-duls-cohort.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Orcish Healer",
+   "files": [
+    "engine/src/cards/pool/orcish-healer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scorching Lava",
+   "files": [
+    "engine/src/cards/pool/scorching-lava.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mizzix, Replica Rider",
+   "files": [
+    "engine/src/cards/pool/mizzix-replica-rider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spider-Verse",
+   "files": [
+    "engine/src/cards/pool/spider-verse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chandra, Legacy of Fire",
+   "files": [
+    "engine/src/cards/pool/chandra-legacy-of-fire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Coalition Relic",
+   "files": [
+    "engine/src/cards/pool/coalition-relic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ingenious Prodigy",
+   "files": [
+    "engine/src/cards/pool/ingenious-prodigy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lily Bowen, Raging Grandma",
+   "files": [
+    "engine/src/cards/pool/lily-bowen-raging-grandma.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Magnanimous Magistrate",
+   "files": [
+    "engine/src/cards/pool/magnanimous-magistrate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aurelia's Fury",
+   "files": [
+    "engine/src/cards/pool/aurelias-fury.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Living Inferno",
+   "files": [
+    "engine/src/cards/pool/living-inferno.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ravenous Gigantotherium",
+   "files": [
+    "engine/src/cards/pool/ravenous-gigantotherium.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Case of the Gateway Express",
+   "files": [
+    "engine/src/cards/pool/case-of-the-gateway-express.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sarkhan the Masterless",
+   "files": [
+    "engine/src/cards/pool/sarkhan-the-masterless.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Bears of Littjara",
+   "files": [
+    "engine/src/cards/pool/the-bears-of-littjara.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Complete the Circuit",
+   "files": [
+    "engine/src/cards/pool/complete-the-circuit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rakdos Riteknife",
+   "files": [
+    "engine/src/cards/pool/rakdos-riteknife.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sizzling Soloist",
+   "files": [
+    "engine/src/cards/pool/sizzling-soloist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deliver Unto Evil",
+   "files": [
+    "engine/src/cards/pool/deliver-unto-evil.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Serra's Hymn",
+   "files": [
+    "engine/src/cards/pool/serras-hymn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Yggdrasil, Rebirth Engine",
+   "files": [
+    "engine/src/cards/pool/yggdrasil-rebirth-engine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blex, Vexing Pest // Search for Blex",
+   "files": [
+    "engine/src/cards/pool/blex-vexing-pest.ts",
+    "engine/src/cards/pool/search-for-blex.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inscribed Tablet",
+   "files": [
+    "engine/src/cards/pool/inscribed-tablet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ashcloud Phoenix",
+   "files": [
+    "engine/src/cards/pool/ashcloud-phoenix.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dementia Sliver",
+   "files": [
+    "engine/src/cards/pool/dementia-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Friendly Fire",
+   "files": [
+    "engine/src/cards/pool/friendly-fire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aether Spike",
+   "files": [
+    "engine/src/cards/pool/aether-spike.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Localized Destruction",
+   "files": [
+    "engine/src/cards/pool/localized-destruction.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pia Nalaar, Chief Mechanic",
+   "files": [
+    "engine/src/cards/pool/pia-nalaar-chief-mechanic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rampaging Aetherhood",
+   "files": [
+    "engine/src/cards/pool/rampaging-aetherhood.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Suppression Ray // Orderly Plaza",
+   "files": [
+    "engine/src/cards/pool/suppression-ray.ts",
+    "engine/src/cards/pool/orderly-plaza.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vault 112: Sadistic Simulation",
+   "files": [
+    "engine/src/cards/pool/vault-112-sadistic-simulation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blight Herder",
+   "files": [
+    "engine/src/cards/pool/blight-herder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Disaster Radius",
+   "files": [
+    "engine/src/cards/pool/disaster-radius.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Surtland Elementalist",
+   "files": [
+    "engine/src/cards/pool/surtland-elementalist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kyscu Drake",
+   "files": [
+    "engine/src/cards/pool/kyscu-drake.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Demonic Consultation",
+   "files": [
+    "engine/src/cards/pool/demonic-consultation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Liar's Pendulum",
+   "files": [
+    "engine/src/cards/pool/liars-pendulum.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Petra Sphinx",
+   "files": [
+    "engine/src/cards/pool/petra-sphinx.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spoils of the Vault",
+   "files": [
+    "engine/src/cards/pool/spoils-of-the-vault.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thought Hemorrhage",
+   "files": [
+    "engine/src/cards/pool/thought-hemorrhage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tolarian Contempt",
+   "files": [
+    "engine/src/cards/pool/tolarian-contempt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Possessed Goat",
+   "files": [
+    "engine/src/cards/pool/possessed-goat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Backstreet Bruiser",
+   "files": [
+    "engine/src/cards/pool/backstreet-bruiser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hydra Trainer",
+   "files": [
+    "engine/src/cards/pool/hydra-trainer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dragon Man, Reformed Robot",
+   "files": [
+    "engine/src/cards/pool/dragon-man-reformed-robot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lux Artillery",
+   "files": [
+    "engine/src/cards/pool/lux-artillery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Breath of Fury",
+   "files": [
+    "engine/src/cards/pool/breath-of-fury.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Holy Avenger",
+   "files": [
+    "engine/src/cards/pool/holy-avenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inventory Management",
+   "files": [
+    "engine/src/cards/pool/inventory-management.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mantle of the Ancients",
+   "files": [
+    "engine/src/cards/pool/mantle-of-the-ancients.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nim Deathmantle",
+   "files": [
+    "engine/src/cards/pool/nim-deathmantle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Preston Garvey, Minuteman",
+   "files": [
+    "engine/src/cards/pool/preston-garvey-minuteman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ring of Valkas",
+   "files": [
+    "engine/src/cards/pool/ring-of-valkas.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jackal, Genius Geneticist",
+   "files": [
+    "engine/src/cards/pool/jackal-genius-geneticist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Storm of Saruman",
+   "files": [
+    "engine/src/cards/pool/storm-of-saruman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Clone Saga",
+   "files": [
+    "engine/src/cards/pool/the-clone-saga.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Sixth Doctor",
+   "files": [
+    "engine/src/cards/pool/the-sixth-doctor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hisoka, Minamo Sensei",
+   "files": [
+    "engine/src/cards/pool/hisoka-minamo-sensei.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slumbering Tora",
+   "files": [
+    "engine/src/cards/pool/slumbering-tora.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fire Juggler",
+   "files": [
+    "engine/src/cards/pool/fire-juggler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crashing Wave",
+   "files": [
+    "engine/src/cards/pool/crashing-wave.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invoke Justice",
+   "files": [
+    "engine/src/cards/pool/invoke-justice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Numa, Joraga Chieftain",
+   "files": [
+    "engine/src/cards/pool/numa-joraga-chieftain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Yannik, Scavenging Sentinel",
+   "files": [
+    "engine/src/cards/pool/yannik-scavenging-sentinel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Akroan War",
+   "files": [
+    "engine/src/cards/pool/the-akroan-war.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lukka, Coppercoat Outcast",
+   "files": [
+    "engine/src/cards/pool/lukka-coppercoat-outcast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nissa's Judgment",
+   "files": [
+    "engine/src/cards/pool/nissas-judgment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sarkhan the Mad",
+   "files": [
+    "engine/src/cards/pool/sarkhan-the-mad.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Path of the Schemer",
+   "files": [
+    "engine/src/cards/pool/path-of-the-schemer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The War in Heaven",
+   "files": [
+    "engine/src/cards/pool/the-war-in-heaven.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Clear the Land",
+   "files": [
+    "engine/src/cards/pool/clear-the-land.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Journey to the Lost City",
+   "files": [
+    "engine/src/cards/pool/journey-to-the-lost-city.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tezzeret, Master of the Bridge",
+   "files": [
+    "engine/src/cards/pool/tezzeret-master-of-the-bridge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Xenagos, the Reveler",
+   "files": [
+    "engine/src/cards/pool/xenagos-the-reveler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trickster's Talisman",
+   "files": [
+    "engine/src/cards/pool/tricksters-talisman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ride the Avalanche",
+   "files": [
+    "engine/src/cards/pool/ride-the-avalanche.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Palliation Accord",
+   "files": [
+    "engine/src/cards/pool/palliation-accord.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bruna, Light of Alabaster",
+   "files": [
+    "engine/src/cards/pool/bruna-light-of-alabaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Emperor of Bones",
+   "files": [
+    "engine/src/cards/pool/emperor-of-bones.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ghost Vacuum",
+   "files": [
+    "engine/src/cards/pool/ghost-vacuum.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Profane Procession // Tomb of the Dusk Rose",
+   "files": [
+    "engine/src/cards/pool/profane-procession.ts",
+    "engine/src/cards/pool/tomb-of-the-dusk-rose.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Throne of the Grim Captain // The Grim Captain",
+   "files": [
+    "engine/src/cards/pool/throne-of-the-grim-captain.ts",
+    "engine/src/cards/pool/the-grim-captain.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Winter, Cynical Opportunist",
+   "needs": [
+    "decision:zone-choice-card-types-among"
+   ],
+   "why": "The zone choice's `variety` rule exists in zone-choice-together.ts, but no definition field reaches it: SearchTogether has no form for it, so 'any number of cards with four or more card types among them' can't be said on a choice."
+  },
+  {
+   "name": "Chandra, Hope's Beacon",
+   "needs": [
+    "effect:impulse-exile-cast-one-spell-of-type"
+   ],
+   "why": "'You may cast an instant or sorcery spell from among those exiled cards' is one spell in total until the end of your next turn; impulse-exile has all of them or oncePerTurn, and the ruling lets an Adventure's spell half qualify on a creature card."
+  },
+  {
+   "name": "Huatli, Warrior Poet",
+   "needs": [
+    "effect:divided-total-reading-x"
+   ],
+   "why": "An activated ability's divided has no x: true, and a total of 'x' is read at X 0 in the offer whenever X varies, capping the group at no targets."
+  },
+  {
+   "name": "Meteor Shower",
+   "needs": [
+    "effect:divided-total-reading-x"
+   ],
+   "why": "'X plus 1' divided: the CardDefinition.divided doc says such a total isn't offered right yet."
+  },
+  {
+   "name": "Avacyn's Judgment",
+   "needs": [
+    "effect:divided-total-reading-x"
+   ],
+   "why": "The total is 2, or X if the madness cost was paid: the same offer problem."
+  },
+  {
+   "name": "Shatterskull Smashing // Shatterskull, the Hammer Pass",
+   "needs": [
+    "effect:divided-total-reading-x"
+   ],
+   "why": "'Twice X if X is 6 or more' must be the total being divided (its ruling): the same offer problem."
+  },
+  {
+   "name": "Pollen Remedy",
+   "needs": [
+    "effect:divided-total-by-kicker"
+   ],
+   "why": "The kicker takes targets and effect but no divided, and the offer's total is read before kicked is known."
+  },
+  {
+   "name": "Jeska, Thrice Reborn",
+   "needs": [
+    "replacement:target-creature-multiply-combat-damage-to-your-opponents"
+   ],
+   "why": "A one-shot 'until your next turn' multiplier on one target creature with 'your opponents' fixed to Jeska's controller; a granted would-deal-damage static reads the creature's controller, wrong on an opponent's creature."
+  },
+  {
+   "name": "Kasmina, Enigma Sage",
+   "needs": [
+    "filter:shares-color-with-source"
+   ],
+   "why": "The −8 searches for 'shares a color with this planeswalker', the activating walker when the ability is granted (ruling); sharesColorWithTarget takes only a target slot."
+  },
+  {
+   "name": "Fatal Lore",
+   "needs": [
+    "decision:opponent-chosen-mode-with-targets"
+   ],
+   "why": "castModal.chosenBy modes may not take targets, and the mode needs 'up to two target creatures that player controls' chosen after it."
+  },
+  {
+   "name": "Mausoleum Turnkey",
+   "needs": [
+    "target:triggered-opponents-choice"
+   ],
+   "why": "targetsChosenBy has trigger-player, active-player and trigger-object-controller only; opponentChoosesTargets isn't on triggers."
+  },
+  {
+   "name": "Mogg Assassin",
+   "needs": [
+    "decision:target-chooser-is-controller-of-earlier-target"
+   ],
+   "why": "'That opponent' must control the first target; otherChooser accepts any opponent, wrong past two players."
+  },
+  {
+   "name": "Flickerform",
+   "needs": [
+    "effect:flicker-host-and-auras-return-attached"
+   ],
+   "why": "Exiles the creature and all its Auras together; at the end step the card returns first, then the Auras attached to it under their owners' control, and nothing returns for a token."
+  },
+  {
+   "name": "Next of Kin",
+   "needs": [
+    "decision:choose-from-hand-or-command-zone"
+   ],
+   "why": "One choice across hand and command zone: look-and-choose takes one zone, and hand-or-graveyard doesn't cover the command zone."
+  },
+  {
+   "name": "Bone Shaman",
+   "needs": [
+    "static:cant-be-regenerated-damaged-by-source"
+   ],
+   "why": "The gained ability is a static applying as damage is dealt and to damage dealt earlier in the turn; prohibit is one-shot and a trigger would resolve after state-based actions."
+  },
+  {
+   "name": "Whippoorwill",
+   "needs": [
+    "effect:damage-cant-be-redirected"
+   ],
+   "why": "Damage to that creature this turn can't be prevented or dealt instead to another permanent or player; damage-cant-be-prevented is global, and nothing stops redirection."
+  },
+  {
+   "name": "Spinerock Tyrant",
+   "needs": [
+    "effect:spell-on-stack-gains-keyword"
+   ],
+   "why": "'Those spells gain wither' includes the original; gains reaches only the copy."
+  },
+  {
+   "name": "Cherished Hatchling",
+   "needs": [
+    "effect:spell-gains-ability-kept-by-permanent"
+   ],
+   "why": "grant-spells-this-turn's triggered doesn't stay on the permanent, so the fight never triggered (written and tested, then removed)."
+  },
+  {
+   "name": "Fishing Pole",
+   "needs": [
+    "cost:tap-granter"
+   ],
+   "why": "A granted cost of 'Tap Fishing Pole': sacrifice and unattach have a 'granter' form, tapping doesn't."
+  },
+  {
+   "name": "Hold for Ransom",
+   "needs": [
+    "effect:granter-controller-player-ref"
+   ],
+   "why": "'Hold for Ransom's controller draws a card' needs a player ref for the granter's controller; neither EffectPlayerRef nor PlayerScope has one."
+  },
+  {
+   "name": "Selective Adaptation",
+   "needs": [
+    "effect:look-one-each-then-one-onto-battlefield"
+   ],
+   "why": "One card per keyword, then one of those onto the battlefield and the rest to hand: oneEach has one destination, and secondPick doesn't share the set."
+  },
+  {
+   "name": "Wheel of Potential",
+   "needs": [
+    "effect:play-cards-exiled-this-way-until-next-turn"
+   ],
+   "why": "A play permission on cards a resolution exiled from hands, lasting until the end of your next turn; allow-cast-from-exile and ExilePermission offer this turn or while exiled."
+  },
+  {
+   "name": "Ulamog's Despoiler",
+   "needs": [
+    "replacement:as-enters-put-exiled-cards-into-graveyards"
+   ],
+   "why": "AsEntersAction can exile or return, but can't put opponents' exiled cards into graveyards with counters riding on it."
+  },
+  {
+   "name": "Conundrum Sphinx",
+   "needs": [
+    "decision:each-player-names-before-reveals"
+   ],
+   "why": "Every player names a card, then all reveal at once; a for-each-player would show each reveal before the next player names."
+  },
+  {
+   "name": "Sphinx Ambassador",
+   "needs": [
+    "decision:trigger-player-names-after-hidden-search"
+   ],
+   "why": "choose-card-name's chooser is only a target slot, so the damaged player can't name while 'you' keeps the may-put."
+  },
+  {
+   "name": "Amzu, Swarm's Hunger",
+   "needs": [
+    "amount:greatest-among-cards-left-graveyard"
+   ],
+   "why": "An aggregate can't read a leaves-graveyard batch once the cards are in a hand or library."
+  },
+  {
+   "name": "Coram, the Undertaker",
+   "needs": [
+    "static:cast-from-any-graveyard-put-from-library-this-turn"
+   ],
+   "why": "Static castFromGraveyard reads only your own graveyard with no 'a land and a spell' allowance; whose exists only on the resolved player-effect."
+  },
+  {
+   "name": "Animate Dead",
+   "needs": [
+    "effect:aura-enchants-card-in-graveyard"
+   ],
+   "why": "An Aura whose enchant is a graveyard card, which then swaps to the creature it returned."
+  },
+  {
+   "name": "Necromancy",
+   "needs": [
+    "effect:enchantment-becomes-aura"
+   ],
+   "why": "A non-Aura becoming an Aura with 'enchant creature put onto the battlefield with this'."
+  },
+  {
+   "name": "Gilgamesh, Master-at-Arms",
+   "needs": [
+    "effect:reflexive-attach-one-of-put-this-way"
+   ],
+   "why": "A reflexive trigger's about carries one object, not the set put this way, and the ruling needs a real reflexive ability ordered against job select."
+  },
+  {
+   "name": "Spoils of War",
+   "needs": [
+    "cost:x-fixed-by-count-as-cast"
+   ],
+   "why": "X fixed to an exact count as cast, of an opponent's graveyard: maxX is only a ceiling, and the ruling says exactly."
+  },
+  {
+   "name": "Stumpsquall Hydra",
+   "needs": [
+    "effect:distribute-counters-among-source-and-chosen"
+   ],
+   "why": "'Among it and any number': counters-distributed lets the player choose no recipients and lose the counters, and can't require the source."
+  },
+  {
+   "name": "Dire Flail // Dire Blunderbuss",
+   "needs": [
+    "filter:not-the-granter"
+   ],
+   "why": "'An artifact other than Dire Blunderbuss' needs a filter excluding the granter; notName would also wrongly exclude a second copy."
+  },
+  {
+   "name": "Hellish Rebuke",
+   "needs": [
+    "trigger:granted-deals-damage-to-spell-caster"
+   ],
+   "why": "The granted trigger must fire only on damage to the player who cast the spell; deals-damage's to can't name that player, which matters in multiplayer."
+  },
+  {
+   "name": "The Darkness Crystal",
+   "needs": [
+    "replacement:exile-instead-linked"
+   ],
+   "why": "The would-be-put-into-graveyard exile can't link to the source, so 'exiled with' finds nothing."
+  },
+  {
+   "name": "Kamahl's Will",
+   "needs": [
+    "target:any-number-group-before-targeting-mode"
+   ],
+   "why": "With both modes chosen, the first mode's any-number group of lands comes before the second mode's target creature; a group must be its list's last slot, and swapping the modes would deal the damage before the lands animate."
+  },
+  {
+   "name": "Delaying Shield",
+   "needs": [
+    "replacement:damage-replaced-not-prevented"
+   ],
+   "why": "Its ruling: the damage is replaced, not prevented, so it replaces damage that can't be prevented; would-deal-damage's prevent: true lets unpreventable damage through."
+  },
+  {
+   "name": "Angrath, Minotaur Pirate",
+   "needs": [
+    "amount:aggregate-sum-unclamped"
+   ],
+   "why": "The −11's rulings subtract a negative-power creature from the total, and a survivor's power counts as it is now: an aggregate sum clamps at 0 on its own, so a surviving negative-power creature doesn't reduce the destroyed creatures' power."
+  },
+  {
+   "name": "Malcolm, Alluring Scoundrel",
+   "needs": [
+    "effect:cast-discarded-card-exiled-by-madness"
+   ],
+   "why": "'You may cast the discarded card' must also reach a card madness exiled as it was discarded; cast-now with from: graveyard and thisWay: discarded doesn't offer it."
+  }
+ ]
+}
