@@ -10,7 +10,7 @@
 //   ... --workers N          threads (default: the cores less one, at most 6)
 //   ... --timeout S          per scenario, seconds (default 30; five times that with the cache check)
 //   ... --cache-check-every N   check the computed-value cache in every Nth
-//                            scenario by seed (default 4; 1 = all, 0 = none)
+//                            scenario by seed (default 10; 1 = all, 0 = none)
 //
 // Why: a full random game runs 80-130 turns (random players rarely finish
 // anyone off) to play a new card a handful of times, and a card's bugs nearly
@@ -26,7 +26,7 @@
 // state: no throw, no step cap reached, a plain state that survives a JSON
 // round trip with the same legal actions, every seat's view hiding hands and
 // libraries, and the computed-value cache agreeing (MTG_CACHE_CHECK — in one
-// scenario in four, as it costs ~5x).
+// scenario in ten, as it costs ~5x).
 //
 // Scenario k of a run is seed `--seed` + k (default 1), the same scenario on
 // every machine; a failure prints the card, its seed, the board and the
@@ -87,7 +87,7 @@ const timeoutMs = (opts.timeout ?? 30) * 1000;
 // one board (Enemy of Enlightenment, seed 24) 56 times slower, 0.47 s to 27 s,
 // and under six workers' load that passed 30 s.
 const limitOf = (job) => (job.cacheCheck ? 5 : 1) * timeoutMs;
-const cacheEvery = opts["cache-check-every"] ?? 4;
+const cacheEvery = opts["cache-check-every"] ?? 10;
 const cacheChecked = (seed) => cacheEvery > 0 && seed % cacheEvery === 0;
 
 // Card by card within each seed, so every card is under way from the start.
