@@ -401,6 +401,7 @@ import _poolHighFaeTrickster from "../pool/high-fae-trickster.js";
 import _poolHighspireArtisan from "../pool/highspire-artisan.js";
 import _poolHigureTheStillWind from "../pool/higure-the-still-wind.js";
 import _poolHinterlandScourge from "../pool/hinterland-scourge.js";
+import _poolHoardingBroodlord from "../pool/hoarding-broodlord.js";
 import _poolHoardingOgre from "../pool/hoarding-ogre.js";
 import _poolHokoriDustDrinker from "../pool/hokori-dust-drinker.js";
 import _poolHonestRutstein from "../pool/honest-rutstein.js";
@@ -789,6 +790,7 @@ import _poolTanufelRimespeaker from "../pool/tanufel-rimespeaker.js";
 import _poolTaskMageAssembly from "../pool/task-mage-assembly.js";
 import _poolTeachingsOfTheKirin from "../pool/teachings-of-the-kirin.js";
 import _poolTeeterpeakAmbusher from "../pool/teeterpeak-ambusher.js";
+import _poolTeferisTalent from "../pool/teferis-talent.js";
 import _poolTelimtor from "../pool/telimtor.js";
 import _poolTelimtorsDarts from "../pool/telimtors-darts.js";
 import _poolTempestHart from "../pool/tempest-hart.js";
@@ -1346,6 +1348,7 @@ const shard: CardShard = {
     _poolHighspireArtisan,
     _poolHigureTheStillWind,
     _poolHinterlandScourge,
+    _poolHoardingBroodlord,
     _poolHoardingOgre,
     _poolHokoriDustDrinker,
     _poolHonestRutstein,
@@ -1734,6 +1737,7 @@ const shard: CardShard = {
     _poolTaskMageAssembly,
     _poolTeachingsOfTheKirin,
     _poolTeeterpeakAmbusher,
+    _poolTeferisTalent,
     _poolTelimtor,
     _poolTelimtorsDarts,
     _poolTempestHart,

@@ -15057,6 +15057,221 @@
    "family": "effect:cast-and-activate-restrictions",
    "description": "'You may activate the loyalty abilities of this planeswalker twice each turn': loyaltyActivationsEachTurn covers every planeswalker you control.",
    "example": "Urza, Planeswalker"
+  },
+  "effect:permanents-you-control-untargetable-this-turn": {
+   "family": "keyword:hexproof-from-colors",
+   "description": "Mode 2 is a turn-long rule covering permanents that arrive later; player-effect has no targeting restriction.",
+   "example": "Display of Dominance"
+  },
+  "static:keywords-from-graveyard-creature-cards": {
+   "family": "static:gain-abilities-from-graveyard",
+   "description": "grantsActivatedOf gives only activated abilities, not the keywords (every landwalk and protection) it has as long as a creature card with them is in a graveyard.",
+   "example": "Cairn Wanderer"
+  },
+  "static:gain-activated-abilities-of-chosen-permanent": {
+   "family": "decision:choose-permanent",
+   "description": "grantsActivatedOf has no 'the chosen permanent' zone, and nothing stops the chosen permanent's activated abilities.",
+   "example": "Scheming Fence"
+  },
+  "effect:each-opponent-exiles-card-from-hand-or-permanent": {
+   "family": "static:gain-abilities-from-graveyard",
+   "description": "The +1's per-opponent choice between a card from hand and a permanent they control is missing.",
+   "example": "Nicol Bolas, Dragon-God"
+  },
+  "effect:target-player-next-spell-grant": {
+   "family": "static:grant-abilities-to-spells",
+   "description": "The granted ability gives the target player mana and that player's next spell cascade; grant-spells-this-turn binds only its controller.",
+   "example": "Bigger on the Inside"
+  },
+  "effect:next-spell-has-improvise": {
+   "family": "static:grant-abilities-to-spells",
+   "description": "grant-spells-this-turn has convoke but no improvise.",
+   "example": "Archway of Innovation"
+  },
+  "static:granted-static-cost-modification": {
+   "family": "static:grant-static-ability",
+   "description": "A costModification inside grantsStatic isn't applied (tested: the Dragon cost the full {4}{R}{R}).",
+   "example": "Acolyte of Bahamut"
+  },
+  "static:attach-as-granted-equipment": {
+   "family": "static:grant-static-ability",
+   "description": "A Blood token made an Equipment by addSubtypes offers the granted equip, but it resolves attaching nothing (tested).",
+   "example": "Arterial Alchemy"
+  },
+  "static:granted-static-replacement": {
+   "family": "static:grant-static-ability",
+   "description": "A granted 'prevent all damage that would be dealt to this creature' replacement isn't applied (tested).",
+   "example": "Caduceus, Staff of Hermes"
+  },
+  "static:granted-static-combat-tax": {
+   "family": "cost:attack-tax",
+   "description": "A combatTax given by grant-static isn't charged (tested: the creature attacked unpaid).",
+   "example": "Whipgrass Entangler"
+  },
+  "cost:graveyard-cast-remove-counters-among": {
+   "family": "zone:graveyard-cast-permissions",
+   "description": "GraveyardCastCosts has no 'remove N counters from among creatures you control'.",
+   "example": "Quilled Greatwurm"
+  },
+  "cost:graveyard-cast-sacrifice-count": {
+   "family": "zone:graveyard-cast-permissions",
+   "description": "GraveyardCastCosts.sacrifice takes one permanent; it sacrifices two creatures.",
+   "example": "Scourge of Nel Toth"
+  },
+  "condition:cast-via-own-graveyard-alt-cost": {
+   "family": "zone:graveyard-cast-permissions",
+   "description": "'If you do, it enters with two +1/+1 counters': castVia graveyard-permission can't tell its own {W}{U}{B}{R}{G} cast from another permission's.",
+   "example": "Worldheart Phoenix"
+  },
+  "zone:grant-cast-self-from-graveyard-this-turn": {
+   "family": "zone:graveyard-cast-permissions",
+   "description": "grant-graveyard-cast takes only a target slot, not the source: no this-turn self permission from a landfall trigger.",
+   "example": "Skyclave Shade"
+  },
+  "effect:play-milled-card-this-turn": {
+   "family": "zone:graveyard-cast-permissions",
+   "description": "'Mill a card. You may play that card this turn' needs a one-shot play permission for the milled card in the graveyard.",
+   "example": "Ark of Hunger"
+  },
+  "effect:cast-now-once-each-turn": {
+   "family": "zone:graveyard-cast-permissions",
+   "description": "'Do this only once each turn' must count only an actual cast; 'one or more opponents lose life' batching is unproven too.",
+   "example": "Emet-Selch of the Third Seat"
+  },
+  "zone:graveyard-play-once-shared-land-or-permanent": {
+   "family": "zone:graveyard-cast-permissions",
+   "description": "One once-each-turn allowance covering both a land play and a permanent cast from the graveyard.",
+   "example": "Kagha, Shadow Archdruid"
+  },
+  "filter:milled-this-turn": {
+   "family": "zone:graveyard-cast-permissions",
+   "description": "The ruling separates milled cards from other library-to-graveyard moves, which putIntoGraveyardThisTurn doesn't.",
+   "example": "Raul, Trouble Shooter"
+  },
+  "zone:graveyard-cast-forage-with-finality": {
+   "family": "zone:graveyard-cast-permissions",
+   "description": "A forage cost for casting creature cards from the graveyard, each entering with a finality counter.",
+   "example": "Osteomancer Adept"
+  },
+  "effect:grant-graveyard-cast-chosen-untargeted": {
+   "family": "zone:graveyard-cast-permissions",
+   "description": "It chooses a card rather than targeting one; grant-graveyard-cast is target-only.",
+   "example": "Mission Briefing"
+  },
+  "cost:granted-graveyard-cast-increase-unless-targets": {
+   "family": "cost:cost-modification-extensions",
+   "description": "grant-graveyard-cast has no '{8} more unless it targets a creature you control'.",
+   "example": "Mavinda, Students' Advocate"
+  },
+  "effect:exile-target-spell-plotted": {
+   "family": "cost:cost-modification-extensions",
+   "description": "Its cost half is expressible, but no pool card exiles a target spell, and exile then become-plotted on a spell is unproven.",
+   "example": "Aven Interrupter"
+  },
+  "cost:player-effect-reduce-spells-cast-from-exile": {
+   "family": "cost:cost-modification-extensions",
+   "description": "This-turn reductions for spells cast from exile, and X the number of players being attacked.",
+   "example": "Commander Liara Portyr"
+  },
+  "effect:return-from-graveyard-set-types-food": {
+   "family": "condition:return-cards-put-in-graveyard-from-battlefield-this-turn",
+   "description": "The returned cards must become Food artifacts and lose their other types for good.",
+   "example": "Supper for Spiders"
+  },
+  "effect:impulse-exile-play-one-of-those": {
+   "family": "cost:alt-cost-pay-life-equal-mana-value",
+   "description": "'You may play one of those cards': only one of the exiled cards.",
+   "example": "Nashi, Moon Sage's Scion"
+  },
+  "cost:attack-tax-phyrexian-mana": {
+   "family": "cost:attack-tax",
+   "description": "attackTax takes generic mana or life, not {W/P}.",
+   "example": "Norn's Annex"
+  },
+  "cost:cost-reduction-life-below-starting": {
+   "family": "effect:amount-new-variants",
+   "description": "CostReductionAmount has no starting-life-minus-life count.",
+   "example": "Shadow of Mortality"
+  },
+  "cost:exile-creature-cost-linked": {
+   "family": "cost:exile-creature-cost",
+   "description": "The creature exiled for the additional cost isn't linked to the permanent the spell becomes, so 'each card exiled with it' misses it (rule 607.2q).",
+   "example": "Fear of Abduction"
+  },
+  "amount:exiled-as-cost-spell-mana-value": {
+   "family": "cost:exile-spell-you-control",
+   "description": "No amount reads the mana value of the spell exiled as the cost, which the reveal-until's '1 plus' filter needs.",
+   "example": "Synthesis Pod"
+  },
+  "cost:flashback-cost-modification-static": {
+   "family": "cost:cost-modification-extensions",
+   "description": "No static changes only flashback costs, for you or for opponents.",
+   "example": "Catalyst Stone"
+  },
+  "zone:cast-from-library-top-pay-life-mana-value": {
+   "family": "zone:cast-from-library-top",
+   "description": "castFromLibraryTop has no mandatory 'pay life equal to its mana value rather than its mana cost' for spells cast that way.",
+   "example": "Bolas's Citadel"
+  },
+  "cost:sacrifice-any-number-copy-for-each": {
+   "family": "cost:sacrifice-multiple",
+   "description": "'When you do, copy this spell for each creature sacrificed' (AUTHORING §15).",
+   "example": "Plumb the Forbidden"
+  },
+  "effect:repeated-punisher-choices-held": {
+   "family": "cost:sacrifice-multiple",
+   "description": "For each blight counter, each opponent makes all their choices, then everything happens at once (rulings); repeating each-player-may does them one at a time.",
+   "example": "Rottenmouth Viper"
+  },
+  "cost:self-reduction-per-instant-sorcery-cast-this-turn": {
+   "family": "cost:cost-modification-extensions",
+   "description": "No cost-reduction amount counts the instant and sorcery spells you've cast this turn.",
+   "example": "Demilich"
+  },
+  "effect:token-copy-up-to-n-lore-counters": {
+   "family": "decision:choose-number",
+   "description": "No shape for 'if it's a Saga, put up to three lore counters on it' (a chosen number) on the token copy.",
+   "example": "Terra, Magical Adept"
+  },
+  "decision:owner-orders-library-bottom": {
+   "family": "effect:choose-card-exiled-with-source",
+   "description": "In chapter III each owner orders their own cards on the bottom (ruling); look-and-choose's rest is ordered by the chooser or at random.",
+   "example": "Vault 13: Dweller's Journey"
+  },
+  "decision:choose-hand-card-or-target-permanent": {
+   "family": "decision:choose-from-zone-extensions",
+   "description": "One choice across the revealed hand's nonland cards and the targeted creature, exiled until it leaves.",
+   "example": "Cloak and Dagger, Entwined"
+  },
+  "cost:flash-by-tapping-creatures": {
+   "family": "effect:cast-and-activate-restrictions",
+   "description": "Flash for an extra cost takes only mana, not 'tap three untapped creatures with flying'.",
+   "example": "Tegwyll's Scouring"
+  },
+  "effect:look-and-choose-enters-with-counters-if": {
+   "family": "effect:look-and-choose-second-pick",
+   "description": "withCounters can't be conditioned on the chosen card's mana value (3 or less).",
+   "example": "Turntimber Symbiosis"
+  },
+  "effect:look-and-choose-destination-choice": {
+   "family": "effect:look-and-choose-second-pick",
+   "description": "At X 5 or more, one hand-or-battlefield choice for the chosen cards, made after seeing them.",
+   "example": "Green Sun's Twilight"
+  },
+  "effect:loyalty-abilities-twice-this-turn": {
+   "family": "effect:cast-and-activate-restrictions",
+   "description": "Only the static form exists; no one-shot 'twice this turn' for one planeswalker.",
+   "example": "Kaito, Dancing Shadow"
+  },
+  "effect:remove-all-counters-from-player": {
+   "family": "effect:temporary-player-effect",
+   "description": "remove-player-counters takes one kind; no 'remove all counters' from a player, energy included.",
+   "example": "Mutated Cultist"
+  },
+  "cost:self-cost-increase-not-your-turn": {
+   "family": "effect:end-the-turn",
+   "description": "No cost increase printed on a spell itself; cost:cost-increase-not-your-turn is Defense Grid's static on other spells.",
+   "example": "Hurkyl's Final Meditation"
   }
  },
  "groups": [

@@ -244,6 +244,7 @@ import _poolEchoingReturn from "../pool/echoing-return.js";
 import _poolEclipsedRealms from "../pool/eclipsed-realms.js";
 import _poolEddytrailHawk from "../pool/eddytrail-hawk.js";
 import _poolEidolonOfBlossoms from "../pool/eidolon-of-blossoms.js";
+import _poolEivorWolfKissed from "../pool/eivor-wolf-kissed.js";
 import _poolElderCathar from "../pool/elder-cathar.js";
 import _poolEldritchImmunity from "../pool/eldritch-immunity.js";
 import _poolElectrosiphon from "../pool/electrosiphon.js";
@@ -325,6 +326,7 @@ import _poolGeistHonoredMonk from "../pool/geist-honored-monk.js";
 import _poolGeneralMarhaultElsdragon from "../pool/general-marhault-elsdragon.js";
 import _poolGenerousSoul from "../pool/generous-soul.js";
 import _poolGeralfVisionaryStitcher from "../pool/geralf-visionary-stitcher.js";
+import _poolGerrardWeatherlightHero from "../pool/gerrard-weatherlight-hero.js";
 import _poolGerrardsIrregulars from "../pool/gerrards-irregulars.js";
 import _poolGertAndOldLaceRunaways from "../pool/gert-and-old-lace-runaways.js";
 import _poolGhituFireEater from "../pool/ghitu-fire-eater.js";
@@ -740,6 +742,7 @@ import _poolSoulRead from "../pool/soul-read.js";
 import _poolSoulStairExpedition from "../pool/soul-stair-expedition.js";
 import _poolSpawningBreath from "../pool/spawning-breath.js";
 import _poolSpectralLynx from "../pool/spectral-lynx.js";
+import _poolSpectralShield from "../pool/spectral-shield.js";
 import _poolSpidersilkNet from "../pool/spidersilk-net.js";
 import _poolSpikeJester from "../pool/spike-jester.js";
 import _poolSpinalGraft from "../pool/spinal-graft.js";
@@ -823,6 +826,7 @@ import _poolTimeLordRegeneration from "../pool/time-lord-regeneration.js";
 import _poolTimecrafting from "../pool/timecrafting.js";
 import _poolToilsOfNightAndDay from "../pool/toils-of-night-and-day.js";
 import _poolTomikWielderOfLaw from "../pool/tomik-wielder-of-law.js";
+import _poolTorgaarFamineIncarnate from "../pool/torgaar-famine-incarnate.js";
 import _poolTotemGuideHartebeest from "../pool/totem-guide-hartebeest.js";
 import _poolTowashiSongshaper from "../pool/towashi-songshaper.js";
 import _poolTowerOfCoireall from "../pool/tower-of-coireall.js";
@@ -915,6 +919,7 @@ import _poolWoollyLoxodon from "../pool/woolly-loxodon.js";
 import _poolWoollyThoctar from "../pool/woolly-thoctar.js";
 import _poolWritOfPassage from "../pool/writ-of-passage.js";
 import _poolYannikScavengingSentinel from "../pool/yannik-scavenging-sentinel.js";
+import _poolYunasDecision from "../pool/yunas-decision.js";
 import _poolZektarShrineExpedition from "../pool/zektar-shrine-expedition.js";
 import _poolZephidsEmbrace from "../pool/zephids-embrace.js";
 import _poolZhouYuChiefCommander from "../pool/zhou-yu-chief-commander.js";
@@ -931,6 +936,7 @@ import _tokensGolemToken from "../tokens/golem-token.js";
 import _tokensGreenElementalToken77Trample from "../tokens/green-elemental-token-7-7-trample.js";
 import _tokensKnightTokenChivalricAlliance from "../tokens/knight-token-chivalric-alliance.js";
 import _tokensKorAllyToken from "../tokens/kor-ally-token.js";
+import _tokensLandMineToken from "../tokens/land-mine-token.js";
 import _tokensPilotTokenCrewsVehicles from "../tokens/pilot-token-crews-vehicles.js";
 import _tokensRedHumanTokenHaste from "../tokens/red-human-token-haste.js";
 import _tokensSalamanderWarriorToken from "../tokens/salamander-warrior-token.js";
@@ -1179,6 +1185,7 @@ const shard: CardShard = {
     _poolEclipsedRealms,
     _poolEddytrailHawk,
     _poolEidolonOfBlossoms,
+    _poolEivorWolfKissed,
     _poolElderCathar,
     _poolEldritchImmunity,
     _poolElectrosiphon,
@@ -1260,6 +1267,7 @@ const shard: CardShard = {
     _poolGeneralMarhaultElsdragon,
     _poolGenerousSoul,
     _poolGeralfVisionaryStitcher,
+    _poolGerrardWeatherlightHero,
     _poolGerrardsIrregulars,
     _poolGertAndOldLaceRunaways,
     _poolGhituFireEater,
@@ -1675,6 +1683,7 @@ const shard: CardShard = {
     _poolSoulStairExpedition,
     _poolSpawningBreath,
     _poolSpectralLynx,
+    _poolSpectralShield,
     _poolSpidersilkNet,
     _poolSpikeJester,
     _poolSpinalGraft,
@@ -1758,6 +1767,7 @@ const shard: CardShard = {
     _poolTimecrafting,
     _poolToilsOfNightAndDay,
     _poolTomikWielderOfLaw,
+    _poolTorgaarFamineIncarnate,
     _poolTotemGuideHartebeest,
     _poolTowashiSongshaper,
     _poolTowerOfCoireall,
@@ -1850,6 +1860,7 @@ const shard: CardShard = {
     _poolWoollyThoctar,
     _poolWritOfPassage,
     _poolYannikScavengingSentinel,
+    _poolYunasDecision,
     _poolZektarShrineExpedition,
     _poolZephidsEmbrace,
     _poolZhouYuChiefCommander,
@@ -1868,6 +1879,7 @@ const shard: CardShard = {
     _tokensGreenElementalToken77Trample,
     _tokensKnightTokenChivalricAlliance,
     _tokensKorAllyToken,
+    _tokensLandMineToken,
     _tokensPilotTokenCrewsVehicles,
     _tokensRedHumanTokenHaste,
     _tokensSalamanderWarriorToken,

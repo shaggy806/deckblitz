@@ -141,6 +141,7 @@ import _poolDarkBargain from "../pool/dark-bargain.js";
 import _poolDarksteelMutation from "../pool/darksteel-mutation.js";
 import _poolDaruEncampment from "../pool/daru-encampment.js";
 import _poolDawnOfTheDead from "../pool/dawn-of-the-dead.js";
+import _poolDazzlingTheater from "../pool/dazzling-theater.js";
 import _poolDeadlockTrap from "../pool/deadlock-trap.js";
 import _poolDeadlyDerision from "../pool/deadly-derision.js";
 import _poolDeadlyVisit from "../pool/deadly-visit.js";
@@ -415,6 +416,7 @@ import _poolLambholtRaconteur from "../pool/lambholt-raconteur.js";
 import _poolLazotepChancellor from "../pool/lazotep-chancellor.js";
 import _poolLiberatedDwarf from "../pool/liberated-dwarf.js";
 import _poolLiberatorUrzasBattlethopter from "../pool/liberator-urzas-battlethopter.js";
+import _poolLichKnightsConquest from "../pool/lich-knights-conquest.js";
 import _poolLifeChisel from "../pool/life-chisel.js";
 import _poolLilianaTheNecromancer from "../pool/liliana-the-necromancer.js";
 import _poolLinvalaThePreserver from "../pool/linvala-the-preserver.js";
@@ -560,6 +562,7 @@ import _poolRelentlessAssault from "../pool/relentless-assault.js";
 import _poolRenewal from "../pool/renewal.js";
 import _poolReplicationTechnique from "../pool/replication-technique.js";
 import _poolResculpt from "../pool/resculpt.js";
+import _poolResonanceTechnician from "../pool/resonance-technician.js";
 import _poolRestlessApparition from "../pool/restless-apparition.js";
 import _poolRhysticLightning from "../pool/rhystic-lightning.js";
 import _poolRighteousBlow from "../pool/righteous-blow.js";
@@ -696,6 +699,7 @@ import _poolStoneSeederHierophant from "../pool/stone-seeder-hierophant.js";
 import _poolStrandwalker from "../pool/strandwalker.js";
 import _poolStrangle from "../pool/strangle.js";
 import _poolStrangledCemetery from "../pool/strangled-cemetery.js";
+import _poolStranglingGrasp from "../pool/strangling-grasp.js";
 import _poolStrengthOfSolidarity from "../pool/strength-of-solidarity.js";
 import _poolStromgaldCrusader from "../pool/stromgald-crusader.js";
 import _poolStromkirkCaptain from "../pool/stromkirk-captain.js";
@@ -838,6 +842,7 @@ import _poolWorldspineWurm from "../pool/worldspine-wurm.js";
 import _poolWornPowerstone from "../pool/worn-powerstone.js";
 import _poolWraithViciousVigilante from "../pool/wraith-vicious-vigilante.js";
 import _poolWreckageWickerfolk from "../pool/wreckage-wickerfolk.js";
+import _poolWrennAndRealmbreaker from "../pool/wrenn-and-realmbreaker.js";
 import _poolYorvoLordOfGarenbrig from "../pool/yorvo-lord-of-garenbrig.js";
 import _poolYoungRedDragon from "../pool/young-red-dragon.js";
 import _poolYoungWeiRecruits from "../pool/young-wei-recruits.js";
@@ -1009,6 +1014,7 @@ const shard: CardShard = {
     _poolDarksteelMutation,
     _poolDaruEncampment,
     _poolDawnOfTheDead,
+    _poolDazzlingTheater,
     _poolDeadlockTrap,
     _poolDeadlyDerision,
     _poolDeadlyVisit,
@@ -1283,6 +1289,7 @@ const shard: CardShard = {
     _poolLazotepChancellor,
     _poolLiberatedDwarf,
     _poolLiberatorUrzasBattlethopter,
+    _poolLichKnightsConquest,
     _poolLifeChisel,
     _poolLilianaTheNecromancer,
     _poolLinvalaThePreserver,
@@ -1428,6 +1435,7 @@ const shard: CardShard = {
     _poolRenewal,
     _poolReplicationTechnique,
     _poolResculpt,
+    _poolResonanceTechnician,
     _poolRestlessApparition,
     _poolRhysticLightning,
     _poolRighteousBlow,
@@ -1564,6 +1572,7 @@ const shard: CardShard = {
     _poolStrandwalker,
     _poolStrangle,
     _poolStrangledCemetery,
+    _poolStranglingGrasp,
     _poolStrengthOfSolidarity,
     _poolStromgaldCrusader,
     _poolStromkirkCaptain,
@@ -1706,6 +1715,7 @@ const shard: CardShard = {
     _poolWornPowerstone,
     _poolWraithViciousVigilante,
     _poolWreckageWickerfolk,
+    _poolWrennAndRealmbreaker,
     _poolYorvoLordOfGarenbrig,
     _poolYoungRedDragon,
     _poolYoungWeiRecruits,

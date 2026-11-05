@@ -177,6 +177,7 @@ import _poolDeadwoodTreefolk from "../pool/deadwood-treefolk.js";
 import _poolDeathMatch from "../pool/death-match.js";
 import _poolDeathToOurEnemies from "../pool/death-to-our-enemies.js";
 import _poolDeathpactAngel from "../pool/deathpact-angel.js";
+import _poolDeepSpawn from "../pool/deep-spawn.js";
 import _poolDeepcavernImp from "../pool/deepcavern-imp.js";
 import _poolDeepmuckDesperado from "../pool/deepmuck-desperado.js";
 import _poolDeeprootElite from "../pool/deeproot-elite.js";
@@ -338,6 +339,7 @@ import _poolGlisteningSphere from "../pool/glistening-sphere.js";
 import _poolGlitterfang from "../pool/glitterfang.js";
 import _poolGluttonousSlug from "../pool/gluttonous-slug.js";
 import _poolGoblinChirurgeon from "../pool/goblin-chirurgeon.js";
+import _poolGoldenTailTrainer from "../pool/golden-tail-trainer.js";
 import _poolGolgariDecoy from "../pool/golgari-decoy.js";
 import _poolGorionWiseMentor from "../pool/gorion-wise-mentor.js";
 import _poolGracefulAntelope from "../pool/graceful-antelope.js";
@@ -616,6 +618,7 @@ import _poolPitImp from "../pool/pit-imp.js";
 import _poolPitOfOfferings from "../pool/pit-of-offerings.js";
 import _poolPithDriller from "../pool/pith-driller.js";
 import _poolPizzaFaceGastromancer from "../pool/pizza-face-gastromancer.js";
+import _poolPlateArmor from "../pool/plate-armor.js";
 import _poolPlatinumAngel from "../pool/platinum-angel.js";
 import _poolPlumecreedMentor from "../pool/plumecreed-mentor.js";
 import _poolPolisCrusher from "../pool/polis-crusher.js";
@@ -829,6 +832,7 @@ import _poolTarfire from "../pool/tarfire.js";
 import _poolTauntingElf from "../pool/taunting-elf.js";
 import _poolTavernRuffian from "../pool/tavern-ruffian.js";
 import _poolTectonicReformation from "../pool/tectonic-reformation.js";
+import _poolTeferiAkosaOfZhalfir from "../pool/teferi-akosa-of-zhalfir.js";
 import _poolTempleOfPower from "../pool/temple-of-power.js";
 import _poolTemporalSpring from "../pool/temporal-spring.js";
 import _poolTemptingWitch from "../pool/tempting-witch.js";
@@ -942,6 +946,7 @@ import _poolVonasHunger from "../pool/vonas-hunger.js";
 import _poolVraskaRegalGorgon from "../pool/vraska-regal-gorgon.js";
 import _poolWailOfTheForgotten from "../pool/wail-of-the-forgotten.js";
 import _poolWaildrifter from "../pool/waildrifter.js";
+import _poolWakandaForever from "../pool/wakanda-forever.js";
 import _poolWakeOfVultures from "../pool/wake-of-vultures.js";
 import _poolWalkingSarcophagus from "../pool/walking-sarcophagus.js";
 import _poolWallOfGranite from "../pool/wall-of-granite.js";
@@ -961,6 +966,7 @@ import _poolWaterspoutWeavers from "../pool/waterspout-weavers.js";
 import _poolWeaponsManufacturing from "../pool/weapons-manufacturing.js";
 import _poolWeatheredBodyguards from "../pool/weathered-bodyguards.js";
 import _poolWellOfLife from "../pool/well-of-life.js";
+import _poolWellOfLostDreams from "../pool/well-of-lost-dreams.js";
 import _poolWellspring from "../pool/wellspring.js";
 import _poolWerewolfOfAncientHunger from "../pool/werewolf-of-ancient-hunger.js";
 import _poolWhenWeWereYoung from "../pool/when-we-were-young.js";
@@ -1198,6 +1204,7 @@ const shard: CardShard = {
     _poolDeathMatch,
     _poolDeathToOurEnemies,
     _poolDeathpactAngel,
+    _poolDeepSpawn,
     _poolDeepcavernImp,
     _poolDeepmuckDesperado,
     _poolDeeprootElite,
@@ -1359,6 +1366,7 @@ const shard: CardShard = {
     _poolGlitterfang,
     _poolGluttonousSlug,
     _poolGoblinChirurgeon,
+    _poolGoldenTailTrainer,
     _poolGolgariDecoy,
     _poolGorionWiseMentor,
     _poolGracefulAntelope,
@@ -1637,6 +1645,7 @@ const shard: CardShard = {
     _poolPitOfOfferings,
     _poolPithDriller,
     _poolPizzaFaceGastromancer,
+    _poolPlateArmor,
     _poolPlatinumAngel,
     _poolPlumecreedMentor,
     _poolPolisCrusher,
@@ -1850,6 +1859,7 @@ const shard: CardShard = {
     _poolTauntingElf,
     _poolTavernRuffian,
     _poolTectonicReformation,
+    _poolTeferiAkosaOfZhalfir,
     _poolTempleOfPower,
     _poolTemporalSpring,
     _poolTemptingWitch,
@@ -1963,6 +1973,7 @@ const shard: CardShard = {
     _poolVraskaRegalGorgon,
     _poolWailOfTheForgotten,
     _poolWaildrifter,
+    _poolWakandaForever,
     _poolWakeOfVultures,
     _poolWalkingSarcophagus,
     _poolWallOfGranite,
@@ -1982,6 +1993,7 @@ const shard: CardShard = {
     _poolWeaponsManufacturing,
     _poolWeatheredBodyguards,
     _poolWellOfLife,
+    _poolWellOfLostDreams,
     _poolWellspring,
     _poolWerewolfOfAncientHunger,
     _poolWhenWeWereYoung,

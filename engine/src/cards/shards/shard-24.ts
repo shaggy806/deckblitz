@@ -86,11 +86,13 @@ import _poolBlackOakOfOdunos from "../pool/black-oak-of-odunos.js";
 import _poolBlackPoplarShaman from "../pool/black-poplar-shaman.js";
 import _poolBlacksmithsSkill from "../pool/blacksmiths-skill.js";
 import _poolBladeBanish from "../pool/blade-banish.js";
+import _poolBlasterHulk from "../pool/blaster-hulk.js";
 import _poolBlastoderm from "../pool/blastoderm.js";
 import _poolBlessingOfLeeches from "../pool/blessing-of-leeches.js";
 import _poolBlinkOfAnEye from "../pool/blink-of-an-eye.js";
 import _poolBlinkingSpirit from "../pool/blinking-spirit.js";
 import _poolBlinkmothInfusion from "../pool/blinkmoth-infusion.js";
+import _poolBloodForTheBloodGod from "../pool/blood-for-the-blood-god.js";
 import _poolBloodthornFlail from "../pool/bloodthorn-flail.js";
 import _poolBlur from "../pool/blur.js";
 import _poolBoggartShenanigans from "../pool/boggart-shenanigans.js";
@@ -387,6 +389,7 @@ import _poolHomicidalSeclusion from "../pool/homicidal-seclusion.js";
 import _poolHomingSliver from "../pool/homing-sliver.js";
 import _poolHondenOfLifesWeb from "../pool/honden-of-lifes-web.js";
 import _poolHoodwink from "../pool/hoodwink.js";
+import _poolHordeOfNotions from "../pool/horde-of-notions.js";
 import _poolHotDogCart from "../pool/hot-dog-cart.js";
 import _poolHotfootGnome from "../pool/hotfoot-gnome.js";
 import _poolHumility from "../pool/humility.js";
@@ -944,6 +947,7 @@ import _tokensRhinoToken from "../tokens/rhino-token.js";
 import _tokensSoldierAllyToken from "../tokens/soldier-ally-token.js";
 import _tokensSquidToken from "../tokens/squid-token.js";
 import _tokensStormCrowToken from "../tokens/storm-crow-token.js";
+import _tokensTreefolkTokenReachLands from "../tokens/treefolk-token-reach-lands.js";
 import _tokensWallTokenArtifactDefender from "../tokens/wall-token-artifact-defender.js";
 import _tokensXXReflectionTokenWhite from "../tokens/x-x-reflection-token-white.js";
 
@@ -1032,11 +1036,13 @@ const shard: CardShard = {
     _poolBlackPoplarShaman,
     _poolBlacksmithsSkill,
     _poolBladeBanish,
+    _poolBlasterHulk,
     _poolBlastoderm,
     _poolBlessingOfLeeches,
     _poolBlinkOfAnEye,
     _poolBlinkingSpirit,
     _poolBlinkmothInfusion,
+    _poolBloodForTheBloodGod,
     _poolBloodthornFlail,
     _poolBlur,
     _poolBoggartShenanigans,
@@ -1333,6 +1339,7 @@ const shard: CardShard = {
     _poolHomingSliver,
     _poolHondenOfLifesWeb,
     _poolHoodwink,
+    _poolHordeOfNotions,
     _poolHotDogCart,
     _poolHotfootGnome,
     _poolHumility,
@@ -1892,6 +1899,7 @@ const shard: CardShard = {
     _tokensSoldierAllyToken,
     _tokensSquidToken,
     _tokensStormCrowToken,
+    _tokensTreefolkTokenReachLands,
     _tokensWallTokenArtifactDefender,
     _tokensXXReflectionTokenWhite,
   ],

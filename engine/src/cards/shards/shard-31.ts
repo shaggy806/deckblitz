@@ -175,6 +175,7 @@ import _poolCouncilOfTheAbsolute from "../pool/council-of-the-absolute.js";
 import _poolCounterspell from "../pool/counterspell.js";
 import _poolCovetousGeist from "../pool/covetous-geist.js";
 import _poolCrackOpen from "../pool/crack-open.js";
+import _poolCrampedVents from "../pool/cramped-vents.js";
 import _poolCrestingMosasaurus from "../pool/cresting-mosasaurus.js";
 import _poolCriminalEnterprise from "../pool/criminal-enterprise.js";
 import _poolCrimsonFleetCommodore from "../pool/crimson-fleet-commodore.js";
@@ -421,6 +422,7 @@ import _poolHungryRidgewolf from "../pool/hungry-ridgewolf.js";
 import _poolHuntedHorror from "../pool/hunted-horror.js";
 import _poolHuntingMoa from "../pool/hunting-moa.js";
 import _poolHydroelectricLaboratory from "../pool/hydroelectric-laboratory.js";
+import _poolHypnox from "../pool/hypnox.js";
 import _poolIcehideTroll from "../pool/icehide-troll.js";
 import _poolIcewindElemental from "../pool/icewind-elemental.js";
 import _poolIcyPrison from "../pool/icy-prison.js";
@@ -521,6 +523,7 @@ import _poolLizardWarrior from "../pool/lizard-warrior.js";
 import _poolLlanowarDruid from "../pool/llanowar-druid.js";
 import _poolLlanowarReborn from "../pool/llanowar-reborn.js";
 import _poolLoathsomeCatoblepas from "../pool/loathsome-catoblepas.js";
+import _poolLobeliaSackvilleBaggins from "../pool/lobelia-sackville-baggins.js";
 import _poolLockjawSlobberingTeleporter from "../pool/lockjaw-slobbering-teleporter.js";
 import _poolLockjawSnapper from "../pool/lockjaw-snapper.js";
 import _poolLocustMiser from "../pool/locust-miser.js";
@@ -642,6 +645,7 @@ import _poolPendelhavenElder from "../pool/pendelhaven-elder.js";
 import _poolPendelhaven from "../pool/pendelhaven.js";
 import _poolPeregrineGriffin from "../pool/peregrine-griffin.js";
 import _poolPerfectedForm from "../pool/perfected-form.js";
+import _poolPeriBrown from "../pool/peri-brown.js";
 import _poolPermafrostTrap from "../pool/permafrost-trap.js";
 import _poolPersecute from "../pool/persecute.js";
 import _poolPestFriend from "../pool/pest-friend.js";
@@ -804,6 +808,7 @@ import _poolSpreadingInsurrection from "../pool/spreading-insurrection.js";
 import _poolSpriteDragon from "../pool/sprite-dragon.js";
 import _poolSpyNetwork from "../pool/spy-network.js";
 import _poolSquallmonger from "../pool/squallmonger.js";
+import _poolSqueeDubiousMonarch from "../pool/squee-dubious-monarch.js";
 import _poolStadiumVendors from "../pool/stadium-vendors.js";
 import _poolStalwartAven from "../pool/stalwart-aven.js";
 import _poolStandstill from "../pool/standstill.js";
@@ -924,6 +929,7 @@ import _poolVaynesTreachery from "../pool/vaynes-treachery.js";
 import _poolVectisAgents from "../pool/vectis-agents.js";
 import _poolVengefulCreeper from "../pool/vengeful-creeper.js";
 import _poolVenomousDragonfly from "../pool/venomous-dragonfly.js";
+import _poolVeronicaDissidentScribe from "../pool/veronica-dissident-scribe.js";
 import _poolVesselOfParamnesia from "../pool/vessel-of-paramnesia.js";
 import _poolViashinoShanktail from "../pool/viashino-shanktail.js";
 import _poolViashinoSpearhunter from "../pool/viashino-spearhunter.js";
@@ -1179,6 +1185,7 @@ const shard: CardShard = {
     _poolCounterspell,
     _poolCovetousGeist,
     _poolCrackOpen,
+    _poolCrampedVents,
     _poolCrestingMosasaurus,
     _poolCriminalEnterprise,
     _poolCrimsonFleetCommodore,
@@ -1425,6 +1432,7 @@ const shard: CardShard = {
     _poolHuntedHorror,
     _poolHuntingMoa,
     _poolHydroelectricLaboratory,
+    _poolHypnox,
     _poolIcehideTroll,
     _poolIcewindElemental,
     _poolIcyPrison,
@@ -1525,6 +1533,7 @@ const shard: CardShard = {
     _poolLlanowarDruid,
     _poolLlanowarReborn,
     _poolLoathsomeCatoblepas,
+    _poolLobeliaSackvilleBaggins,
     _poolLockjawSlobberingTeleporter,
     _poolLockjawSnapper,
     _poolLocustMiser,
@@ -1646,6 +1655,7 @@ const shard: CardShard = {
     _poolPendelhaven,
     _poolPeregrineGriffin,
     _poolPerfectedForm,
+    _poolPeriBrown,
     _poolPermafrostTrap,
     _poolPersecute,
     _poolPestFriend,
@@ -1808,6 +1818,7 @@ const shard: CardShard = {
     _poolSpriteDragon,
     _poolSpyNetwork,
     _poolSquallmonger,
+    _poolSqueeDubiousMonarch,
     _poolStadiumVendors,
     _poolStalwartAven,
     _poolStandstill,
@@ -1928,6 +1939,7 @@ const shard: CardShard = {
     _poolVectisAgents,
     _poolVengefulCreeper,
     _poolVenomousDragonfly,
+    _poolVeronicaDissidentScribe,
     _poolVesselOfParamnesia,
     _poolViashinoShanktail,
     _poolViashinoSpearhunter,

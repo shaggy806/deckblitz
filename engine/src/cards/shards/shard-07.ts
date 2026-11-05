@@ -37,6 +37,7 @@ import _poolArchonOfFallingStars from "../pool/archon-of-falling-stars.js";
 import _poolArdozCobblerOfWar from "../pool/ardoz-cobbler-of-war.js";
 import _poolArenaOfTheAncients from "../pool/arena-of-the-ancients.js";
 import _poolArmasaurGuide from "../pool/armasaur-guide.js";
+import _poolArtifactWard from "../pool/artifact-ward.js";
 import _poolAshcloudPhoenix from "../pool/ashcloud-phoenix.js";
 import _poolAshenmoorLiege from "../pool/ashenmoor-liege.js";
 import _poolAshnodsBattleGear from "../pool/ashnods-battle-gear.js";
@@ -411,6 +412,7 @@ import _poolKappaCannoneer from "../pool/kappa-cannoneer.js";
 import _poolKarganDragonlord from "../pool/kargan-dragonlord.js";
 import _poolKariZevSkyshipRaider from "../pool/kari-zev-skyship-raider.js";
 import _poolKarma from "../pool/karma.js";
+import _poolKarplusanYeti from "../pool/karplusan-yeti.js";
 import _poolKarvanistaLoyalLupari from "../pool/karvanista-loyal-lupari.js";
 import _poolKeigaTheTideStar from "../pool/keiga-the-tide-star.js";
 import _poolKeldonVandals from "../pool/keldon-vandals.js";
@@ -502,6 +504,7 @@ import _poolMedicineBag from "../pool/medicine-bag.js";
 import _poolMemoryLapse from "../pool/memory-lapse.js";
 import _poolMemorySluice from "../pool/memory-sluice.js";
 import _poolMerchantOfSecrets from "../pool/merchant-of-secrets.js";
+import _poolMerchantsDockhand from "../pool/merchants-dockhand.js";
 import _poolMercilessJavelineer from "../pool/merciless-javelineer.js";
 import _poolMercyKilling from "../pool/mercy-killing.js";
 import _poolMidnightDuelist from "../pool/midnight-duelist.js";
@@ -636,6 +639,7 @@ import _poolRavenousRobots from "../pool/ravenous-robots.js";
 import _poolRazorfieldRhino from "../pool/razorfield-rhino.js";
 import _poolRealmOfKoh from "../pool/realm-of-koh.js";
 import _poolReanimate from "../pool/reanimate.js";
+import _poolRebelInformer from "../pool/rebel-informer.js";
 import _poolRecklessOne from "../pool/reckless-one.js";
 import _poolReconnaissanceMission from "../pool/reconnaissance-mission.js";
 import _poolRecruitmentOfficer from "../pool/recruitment-officer.js";
@@ -1012,6 +1016,7 @@ const shard: CardShard = {
     _poolArdozCobblerOfWar,
     _poolArenaOfTheAncients,
     _poolArmasaurGuide,
+    _poolArtifactWard,
     _poolAshcloudPhoenix,
     _poolAshenmoorLiege,
     _poolAshnodsBattleGear,
@@ -1386,6 +1391,7 @@ const shard: CardShard = {
     _poolKarganDragonlord,
     _poolKariZevSkyshipRaider,
     _poolKarma,
+    _poolKarplusanYeti,
     _poolKarvanistaLoyalLupari,
     _poolKeigaTheTideStar,
     _poolKeldonVandals,
@@ -1477,6 +1483,7 @@ const shard: CardShard = {
     _poolMemoryLapse,
     _poolMemorySluice,
     _poolMerchantOfSecrets,
+    _poolMerchantsDockhand,
     _poolMercilessJavelineer,
     _poolMercyKilling,
     _poolMidnightDuelist,
@@ -1611,6 +1618,7 @@ const shard: CardShard = {
     _poolRazorfieldRhino,
     _poolRealmOfKoh,
     _poolReanimate,
+    _poolRebelInformer,
     _poolRecklessOne,
     _poolReconnaissanceMission,
     _poolRecruitmentOfficer,

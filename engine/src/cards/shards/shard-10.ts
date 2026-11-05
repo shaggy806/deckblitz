@@ -163,6 +163,7 @@ import _poolCountervailingWinds from "../pool/countervailing-winds.js";
 import _poolCourtHussar from "../pool/court-hussar.js";
 import _poolCovertTechnician from "../pool/covert-technician.js";
 import _poolCovetousUrge from "../pool/covetous-urge.js";
+import _poolCrampedVentsAccessMaze from "../pool/cramped-vents-access-maze.js";
 import _poolCrawlingChorus from "../pool/crawling-chorus.js";
 import _poolCreditVoucher from "../pool/credit-voucher.js";
 import _poolCrescendoOfWar from "../pool/crescendo-of-war.js";
@@ -328,6 +329,7 @@ import _poolGlacialChasm from "../pool/glacial-chasm.js";
 import _poolGlacialDragonhunt from "../pool/glacial-dragonhunt.js";
 import _poolGladiolusAmicitia from "../pool/gladiolus-amicitia.js";
 import _poolGlassCasket from "../pool/glass-casket.js";
+import _poolGleamOfDeath from "../pool/gleam-of-death.js";
 import _poolGlittermonger from "../pool/glittermonger.js";
 import _poolGloryBoundInitiate from "../pool/glory-bound-initiate.js";
 import _poolGoblinBurrows from "../pool/goblin-burrows.js";
@@ -413,6 +415,7 @@ import _poolItDoesntAddUp from "../pool/it-doesnt-add-up.js";
 import _poolJacesSentinel from "../pool/jaces-sentinel.js";
 import _poolJackalPup from "../pool/jackal-pup.js";
 import _poolJaradsOrders from "../pool/jarads-orders.js";
+import _poolJayasImmolatingInferno from "../pool/jayas-immolating-inferno.js";
 import _poolJeskaiBanner from "../pool/jeskai-banner.js";
 import _poolJeweledLotus from "../pool/jeweled-lotus.js";
 import _poolJhoiraWeatherlightCaptain from "../pool/jhoira-weatherlight-captain.js";
@@ -1112,6 +1115,7 @@ const shard: CardShard = {
     _poolCourtHussar,
     _poolCovertTechnician,
     _poolCovetousUrge,
+    _poolCrampedVentsAccessMaze,
     _poolCrawlingChorus,
     _poolCreditVoucher,
     _poolCrescendoOfWar,
@@ -1277,6 +1281,7 @@ const shard: CardShard = {
     _poolGlacialDragonhunt,
     _poolGladiolusAmicitia,
     _poolGlassCasket,
+    _poolGleamOfDeath,
     _poolGlittermonger,
     _poolGloryBoundInitiate,
     _poolGoblinBurrows,
@@ -1362,6 +1367,7 @@ const shard: CardShard = {
     _poolJacesSentinel,
     _poolJackalPup,
     _poolJaradsOrders,
+    _poolJayasImmolatingInferno,
     _poolJeskaiBanner,
     _poolJeweledLotus,
     _poolJhoiraWeatherlightCaptain,

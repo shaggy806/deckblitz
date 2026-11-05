@@ -59,6 +59,7 @@ import _poolArcanisTheOmnipotent from "../pool/arcanis-the-omnipotent.js";
 import _poolArchdemonOfUnx from "../pool/archdemon-of-unx.js";
 import _poolArchitectOfTheUntamed from "../pool/architect-of-the-untamed.js";
 import _poolArchiveTrap from "../pool/archive-trap.js";
+import _poolArchonOfEmeria from "../pool/archon-of-emeria.js";
 import _poolArgothianPixies from "../pool/argothian-pixies.js";
 import _poolArmadaWurm from "../pool/armada-wurm.js";
 import _poolArtificersAssistant from "../pool/artificers-assistant.js";
@@ -323,6 +324,7 @@ import _poolGarbageFire from "../pool/garbage-fire.js";
 import _poolGargoyleFlock from "../pool/gargoyle-flock.js";
 import _poolGarruksWarsteed from "../pool/garruks-warsteed.js";
 import _poolGeneralLeoCristophe from "../pool/general-leo-cristophe.js";
+import _poolGeralfsMasterpiece from "../pool/geralfs-masterpiece.js";
 import _poolGhostLantern from "../pool/ghost-lantern.js";
 import _poolGhostlyTouch from "../pool/ghostly-touch.js";
 import _poolGhoulcallersBell from "../pool/ghoulcallers-bell.js";
@@ -517,6 +519,7 @@ import _poolLurkingDeadeye from "../pool/lurking-deadeye.js";
 import _poolMaelstromArchangel from "../pool/maelstrom-archangel.js";
 import _poolMagesAttendant from "../pool/mages-attendant.js";
 import _poolMagetasBoon from "../pool/magetas-boon.js";
+import _poolMagisterOfWorth from "../pool/magister-of-worth.js";
 import _poolMagistratesVeto from "../pool/magistrates-veto.js";
 import _poolMalakirCullblade from "../pool/malakir-cullblade.js";
 import _poolManaChains from "../pool/mana-chains.js";
@@ -804,6 +807,7 @@ import _poolSplashPortal from "../pool/splash-portal.js";
 import _poolSporewebWeaver from "../pool/sporeweb-weaver.js";
 import _poolSpriteNoble from "../pool/sprite-noble.js";
 import _poolSproutingRenewal from "../pool/sprouting-renewal.js";
+import _poolStarportSecurity from "../pool/starport-security.js";
 import _poolStealTheShow from "../pool/steal-the-show.js";
 import _poolSteamclaw from "../pool/steamclaw.js";
 import _poolSteelswarmOperator from "../pool/steelswarm-operator.js";
@@ -904,6 +908,7 @@ import _poolUnwind from "../pool/unwind.js";
 import _poolUpriserRenegade from "../pool/upriser-renegade.js";
 import _poolUrborgVolcano from "../pool/urborg-volcano.js";
 import _poolUreniTheSongUnending from "../pool/ureni-the-song-unending.js";
+import _poolUrzasSylex from "../pool/urzas-sylex.js";
 import _poolUsherOfTheFallen from "../pool/usher-of-the-fallen.js";
 import _poolUtvaraHellkite from "../pool/utvara-hellkite.js";
 import _poolVagrantPlowbeasts from "../pool/vagrant-plowbeasts.js";
@@ -988,6 +993,7 @@ import _tokensKnightTokenGuardedHeir from "../tokens/knight-token-guarded-heir.j
 import _tokensLeviathanToken from "../tokens/leviathan-token.js";
 import _tokensMaskToken from "../tokens/mask-token.js";
 import _tokensOtterToken from "../tokens/otter-token.js";
+import _tokensPirateTokenCantBlockCreaturesAttack from "../tokens/pirate-token-cant-block-creatures-attack.js";
 import _tokensReflectionTokenWhite22 from "../tokens/reflection-token-white-2-2.js";
 import _tokensSerfToken from "../tokens/serf-token.js";
 import _tokensSnakeTokenPatagiaViper from "../tokens/snake-token-patagia-viper.js";
@@ -1056,6 +1062,7 @@ const shard: CardShard = {
     _poolArchdemonOfUnx,
     _poolArchitectOfTheUntamed,
     _poolArchiveTrap,
+    _poolArchonOfEmeria,
     _poolArgothianPixies,
     _poolArmadaWurm,
     _poolArtificersAssistant,
@@ -1320,6 +1327,7 @@ const shard: CardShard = {
     _poolGargoyleFlock,
     _poolGarruksWarsteed,
     _poolGeneralLeoCristophe,
+    _poolGeralfsMasterpiece,
     _poolGhostLantern,
     _poolGhostlyTouch,
     _poolGhoulcallersBell,
@@ -1514,6 +1522,7 @@ const shard: CardShard = {
     _poolMaelstromArchangel,
     _poolMagesAttendant,
     _poolMagetasBoon,
+    _poolMagisterOfWorth,
     _poolMagistratesVeto,
     _poolMalakirCullblade,
     _poolManaChains,
@@ -1801,6 +1810,7 @@ const shard: CardShard = {
     _poolSporewebWeaver,
     _poolSpriteNoble,
     _poolSproutingRenewal,
+    _poolStarportSecurity,
     _poolStealTheShow,
     _poolSteamclaw,
     _poolSteelswarmOperator,
@@ -1901,6 +1911,7 @@ const shard: CardShard = {
     _poolUpriserRenegade,
     _poolUrborgVolcano,
     _poolUreniTheSongUnending,
+    _poolUrzasSylex,
     _poolUsherOfTheFallen,
     _poolUtvaraHellkite,
     _poolVagrantPlowbeasts,
@@ -1987,6 +1998,7 @@ const shard: CardShard = {
     _tokensLeviathanToken,
     _tokensMaskToken,
     _tokensOtterToken,
+    _tokensPirateTokenCantBlockCreaturesAttack,
     _tokensReflectionTokenWhite22,
     _tokensSerfToken,
     _tokensSnakeTokenPatagiaViper,

@@ -667,6 +667,7 @@ import _poolSealOfPrimordium from "../pool/seal-of-primordium.js";
 import _poolSeasideHaven from "../pool/seaside-haven.js";
 import _poolSeedbornMuse from "../pool/seedborn-muse.js";
 import _poolSelflessSpirit from "../pool/selfless-spirit.js";
+import _poolSentryBot from "../pool/sentry-bot.js";
 import _poolSepticRats from "../pool/septic-rats.js";
 import _poolSerraRedeemer from "../pool/serra-redeemer.js";
 import _poolServantOfVolrath from "../pool/servant-of-volrath.js";
@@ -837,6 +838,7 @@ import _poolVolcanoImp from "../pool/volcano-imp.js";
 import _poolVolrathsGardens from "../pool/volraths-gardens.js";
 import _poolVoraciousVermin from "../pool/voracious-vermin.js";
 import _poolVorapede from "../pool/vorapede.js";
+import _poolVraskaRelicSeeker from "../pool/vraska-relic-seeker.js";
 import _poolVraskasFinalMercy from "../pool/vraskas-final-mercy.js";
 import _poolWalkThePlank from "../pool/walk-the-plank.js";
 import _poolWandOfDenial from "../pool/wand-of-denial.js";
@@ -1568,6 +1570,7 @@ const shard: CardShard = {
     _poolSeasideHaven,
     _poolSeedbornMuse,
     _poolSelflessSpirit,
+    _poolSentryBot,
     _poolSepticRats,
     _poolSerraRedeemer,
     _poolServantOfVolrath,
@@ -1738,6 +1741,7 @@ const shard: CardShard = {
     _poolVolrathsGardens,
     _poolVoraciousVermin,
     _poolVorapede,
+    _poolVraskaRelicSeeker,
     _poolVraskasFinalMercy,
     _poolWalkThePlank,
     _poolWandOfDenial,

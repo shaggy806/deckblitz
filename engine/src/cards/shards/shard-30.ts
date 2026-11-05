@@ -9,6 +9,7 @@ import _poolAangsDefense from "../pool/aangs-defense.js";
 import _poolAbsolvingLammasu from "../pool/absolving-lammasu.js";
 import _poolAbyssalHorror from "../pool/abyssal-horror.js";
 import _poolAcademicProbation from "../pool/academic-probation.js";
+import _poolAccessMaze from "../pool/access-maze.js";
 import _poolAdarkarWastes from "../pool/adarkar-wastes.js";
 import _poolAdderStaffBoggart from "../pool/adder-staff-boggart.js";
 import _poolAdventurersInn from "../pool/adventurers-inn.js";
@@ -23,6 +24,7 @@ import _poolAlaniasPathmaker from "../pool/alanias-pathmaker.js";
 import _poolAlphinaudLeveilleur from "../pool/alphinaud-leveilleur.js";
 import _poolAltarOfBone from "../pool/altar-of-bone.js";
 import _poolAltarOfThePantheon from "../pool/altar-of-the-pantheon.js";
+import _poolAmaliaBenavidesAguirre from "../pool/amalia-benavides-aguirre.js";
 import _poolAmbitiousDragonborn from "../pool/ambitious-dragonborn.js";
 import _poolAmprynTactician from "../pool/ampryn-tactician.js";
 import _poolAnabaShaman from "../pool/anaba-shaman.js";
@@ -170,6 +172,7 @@ import _poolCuriousHerd from "../pool/curious-herd.js";
 import _poolCurseOfChaos from "../pool/curse-of-chaos.js";
 import _poolCutADeal from "../pool/cut-a-deal.js";
 import _poolCutRibbons from "../pool/cut-ribbons.js";
+import _poolDancersChakrams from "../pool/dancers-chakrams.js";
 import _poolDarettiScrapSavant from "../pool/daretti-scrap-savant.js";
 import _poolDaringDiscovery from "../pool/daring-discovery.js";
 import _poolDauthiTrapper from "../pool/dauthi-trapper.js";
@@ -220,6 +223,7 @@ import _poolDredge from "../pool/dredge.js";
 import _poolDredgersInsight from "../pool/dredgers-insight.js";
 import _poolDrillTooDeep from "../pool/drill-too-deep.js";
 import _poolDromokaWarrior from "../pool/dromoka-warrior.js";
+import _poolDruidicRitual from "../pool/druidic-ritual.js";
 import _poolDuneMover from "../pool/dune-mover.js";
 import _poolDungeoneersPack from "../pool/dungeoneers-pack.js";
 import _poolDwarvenArmory from "../pool/dwarven-armory.js";
@@ -421,6 +425,7 @@ import _poolIronFistHeroForHire from "../pool/iron-fist-hero-for-hire.js";
 import _poolIronFistPulverizer from "../pool/iron-fist-pulverizer.js";
 import _poolIronManTonyStark from "../pool/iron-man-tony-stark.js";
 import _poolIronhoofOx from "../pool/ironhoof-ox.js";
+import _poolIsiluCarrierOfTwilight from "../pool/isilu-carrier-of-twilight.js";
 import _poolIsochronScepter from "../pool/isochron-scepter.js";
 import _poolItOfTheHorridSwarm from "../pool/it-of-the-horrid-swarm.js";
 import _poolIxallisKeeper from "../pool/ixallis-keeper.js";
@@ -518,6 +523,7 @@ import _poolMeditationPools from "../pool/meditation-pools.js";
 import _poolMeldedMoxite from "../pool/melded-moxite.js";
 import _poolMerEkNightblade from "../pool/mer-ek-nightblade.js";
 import _poolMerfolkAssassin from "../pool/merfolk-assassin.js";
+import _poolMesmericFiend from "../pool/mesmeric-fiend.js";
 import _poolMessengerFalcons from "../pool/messenger-falcons.js";
 import _poolMetalhead from "../pool/metalhead.js";
 import _poolMetastaticEvangel from "../pool/metastatic-evangel.js";
@@ -971,6 +977,7 @@ const shard: CardShard = {
     _poolAbsolvingLammasu,
     _poolAbyssalHorror,
     _poolAcademicProbation,
+    _poolAccessMaze,
     _poolAdarkarWastes,
     _poolAdderStaffBoggart,
     _poolAdventurersInn,
@@ -985,6 +992,7 @@ const shard: CardShard = {
     _poolAlphinaudLeveilleur,
     _poolAltarOfBone,
     _poolAltarOfThePantheon,
+    _poolAmaliaBenavidesAguirre,
     _poolAmbitiousDragonborn,
     _poolAmprynTactician,
     _poolAnabaShaman,
@@ -1132,6 +1140,7 @@ const shard: CardShard = {
     _poolCurseOfChaos,
     _poolCutADeal,
     _poolCutRibbons,
+    _poolDancersChakrams,
     _poolDarettiScrapSavant,
     _poolDaringDiscovery,
     _poolDauthiTrapper,
@@ -1182,6 +1191,7 @@ const shard: CardShard = {
     _poolDredgersInsight,
     _poolDrillTooDeep,
     _poolDromokaWarrior,
+    _poolDruidicRitual,
     _poolDuneMover,
     _poolDungeoneersPack,
     _poolDwarvenArmory,
@@ -1383,6 +1393,7 @@ const shard: CardShard = {
     _poolIronFistPulverizer,
     _poolIronManTonyStark,
     _poolIronhoofOx,
+    _poolIsiluCarrierOfTwilight,
     _poolIsochronScepter,
     _poolItOfTheHorridSwarm,
     _poolIxallisKeeper,
@@ -1480,6 +1491,7 @@ const shard: CardShard = {
     _poolMeldedMoxite,
     _poolMerEkNightblade,
     _poolMerfolkAssassin,
+    _poolMesmericFiend,
     _poolMessengerFalcons,
     _poolMetalhead,
     _poolMetastaticEvangel,

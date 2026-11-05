@@ -441,6 +441,7 @@ import _poolLiegeOfTheTangle from "../pool/liege-of-the-tangle.js";
 import _poolLifespinner from "../pool/lifespinner.js";
 import _poolLightOfJudgment from "../pool/light-of-judgment.js";
 import _poolLightningCloud from "../pool/lightning-cloud.js";
+import _poolLivingBreakthrough from "../pool/living-breakthrough.js";
 import _poolLivingLore from "../pool/living-lore.js";
 import _poolLivingWall from "../pool/living-wall.js";
 import _poolLlanowarKnight from "../pool/llanowar-knight.js";
@@ -518,6 +519,7 @@ import _poolMurderInvestigation from "../pool/murder-investigation.js";
 import _poolMurderousRedcap from "../pool/murderous-redcap.js";
 import _poolMutableExplorer from "../pool/mutable-explorer.js";
 import _poolMutantTownMusicians from "../pool/mutant-town-musicians.js";
+import _poolMyojinOfCleansingFire from "../pool/myojin-of-cleansing-fire.js";
 import _poolMyojinOfLifesWeb from "../pool/myojin-of-lifes-web.js";
 import _poolMyrkulLordOfBones from "../pool/myrkul-lord-of-bones.js";
 import _poolMysticMonastery from "../pool/mystic-monastery.js";
@@ -600,6 +602,7 @@ import _poolPropaganda from "../pool/propaganda.js";
 import _poolProtectorOfTheWastes from "../pool/protector-of-the-wastes.js";
 import _poolProvenCombatant from "../pool/proven-combatant.js";
 import _poolPryingBlade from "../pool/prying-blade.js";
+import _poolPursuedWhale from "../pool/pursued-whale.js";
 import _poolPygmyPyrosaur from "../pool/pygmy-pyrosaur.js";
 import _poolQarsiHighPriest from "../pool/qarsi-high-priest.js";
 import _poolQuagFeast from "../pool/quag-feast.js";
@@ -1411,6 +1414,7 @@ const shard: CardShard = {
     _poolLifespinner,
     _poolLightOfJudgment,
     _poolLightningCloud,
+    _poolLivingBreakthrough,
     _poolLivingLore,
     _poolLivingWall,
     _poolLlanowarKnight,
@@ -1488,6 +1492,7 @@ const shard: CardShard = {
     _poolMurderousRedcap,
     _poolMutableExplorer,
     _poolMutantTownMusicians,
+    _poolMyojinOfCleansingFire,
     _poolMyojinOfLifesWeb,
     _poolMyrkulLordOfBones,
     _poolMysticMonastery,
@@ -1570,6 +1575,7 @@ const shard: CardShard = {
     _poolProtectorOfTheWastes,
     _poolProvenCombatant,
     _poolPryingBlade,
+    _poolPursuedWhale,
     _poolPygmyPyrosaur,
     _poolQarsiHighPriest,
     _poolQuagFeast,

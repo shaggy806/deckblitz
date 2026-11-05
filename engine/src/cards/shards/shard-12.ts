@@ -115,6 +115,7 @@ import _poolBruteSuit from "../pool/brute-suit.js";
 import _poolBurnAtTheStake from "../pool/burn-at-the-stake.js";
 import _poolBurningOfXinye from "../pool/burning-of-xinye.js";
 import _poolBushmeatPoacher from "../pool/bushmeat-poacher.js";
+import _poolCaetusSeaTyrantOfSegovia from "../pool/caetus-sea-tyrant-of-segovia.js";
 import _poolCalibratedBlast from "../pool/calibrated-blast.js";
 import _poolCanyonDrake from "../pool/canyon-drake.js";
 import _poolCarefreeSwinemaster from "../pool/carefree-swinemaster.js";
@@ -1059,6 +1060,7 @@ const shard: CardShard = {
     _poolBurnAtTheStake,
     _poolBurningOfXinye,
     _poolBushmeatPoacher,
+    _poolCaetusSeaTyrantOfSegovia,
     _poolCalibratedBlast,
     _poolCanyonDrake,
     _poolCarefreeSwinemaster,

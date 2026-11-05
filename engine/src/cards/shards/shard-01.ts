@@ -14,6 +14,7 @@ import _poolAggressiveNegotiations from "../pool/aggressive-negotiations.js";
 import _poolAgitatorAnt from "../pool/agitator-ant.js";
 import _poolAgrusKosWojekVeteran from "../pool/agrus-kos-wojek-veteran.js";
 import _poolAinokTracker from "../pool/ainok-tracker.js";
+import _poolAjaniGoldmane from "../pool/ajani-goldmane.js";
 import _poolAjanisPridemate from "../pool/ajanis-pridemate.js";
 import _poolAkimTheSoaringWind from "../pool/akim-the-soaring-wind.js";
 import _poolAlabasterPotion from "../pool/alabaster-potion.js";
@@ -205,6 +206,7 @@ import _poolDuskSight from "../pool/dusk-sight.js";
 import _poolDutifulReplicator from "../pool/dutiful-replicator.js";
 import _poolDwarfholdChampion from "../pool/dwarfhold-champion.js";
 import _poolEagleVision from "../pool/eagle-vision.js";
+import _poolEdgarsAwakening from "../pool/edgars-awakening.js";
 import _poolEdgeOfAutumn from "../pool/edge-of-autumn.js";
 import _poolEldraziMimic from "../pool/eldrazi-mimic.js";
 import _poolEldraziMonument from "../pool/eldrazi-monument.js";
@@ -290,6 +292,7 @@ import _poolGibberingBarricade from "../pool/gibbering-barricade.js";
 import _poolGiftOfStrands from "../pool/gift-of-strands.js";
 import _poolGiltBladeProwler from "../pool/gilt-blade-prowler.js";
 import _poolGiltLeafWinnower from "../pool/gilt-leaf-winnower.js";
+import _poolGlacianPowerstoneEngineer from "../pool/glacian-powerstone-engineer.js";
 import _poolGladehartCavalry from "../pool/gladehart-cavalry.js";
 import _poolGlareOfHeresy from "../pool/glare-of-heresy.js";
 import _poolGlareOfSubdual from "../pool/glare-of-subdual.js";
@@ -402,6 +405,7 @@ import _poolKaradorGhostChieftain from "../pool/karador-ghost-chieftain.js";
 import _poolKarakas from "../pool/karakas.js";
 import _poolKarrthusTyrantOfJund from "../pool/karrthus-tyrant-of-jund.js";
 import _poolKarstoderm from "../pool/karstoderm.js";
+import _poolKasminaEnigmaticMentor from "../pool/kasmina-enigmatic-mentor.js";
 import _poolKavuGlider from "../pool/kavu-glider.js";
 import _poolKazanduBlademaster from "../pool/kazandu-blademaster.js";
 import _poolKeeperOfTheLens from "../pool/keeper-of-the-lens.js";
@@ -955,6 +959,7 @@ const shard: CardShard = {
     _poolAgitatorAnt,
     _poolAgrusKosWojekVeteran,
     _poolAinokTracker,
+    _poolAjaniGoldmane,
     _poolAjanisPridemate,
     _poolAkimTheSoaringWind,
     _poolAlabasterPotion,
@@ -1146,6 +1151,7 @@ const shard: CardShard = {
     _poolDutifulReplicator,
     _poolDwarfholdChampion,
     _poolEagleVision,
+    _poolEdgarsAwakening,
     _poolEdgeOfAutumn,
     _poolEldraziMimic,
     _poolEldraziMonument,
@@ -1231,6 +1237,7 @@ const shard: CardShard = {
     _poolGiftOfStrands,
     _poolGiltBladeProwler,
     _poolGiltLeafWinnower,
+    _poolGlacianPowerstoneEngineer,
     _poolGladehartCavalry,
     _poolGlareOfHeresy,
     _poolGlareOfSubdual,
@@ -1343,6 +1350,7 @@ const shard: CardShard = {
     _poolKarakas,
     _poolKarrthusTyrantOfJund,
     _poolKarstoderm,
+    _poolKasminaEnigmaticMentor,
     _poolKavuGlider,
     _poolKazanduBlademaster,
     _poolKeeperOfTheLens,

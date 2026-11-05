@@ -712,6 +712,7 @@ import _poolSlayersPlate from "../pool/slayers-plate.js";
 import _poolSlimefootsSurvey from "../pool/slimefoots-survey.js";
 import _poolSlipstreamEel from "../pool/slipstream-eel.js";
 import _poolSloppityBilepiper from "../pool/sloppity-bilepiper.js";
+import _poolSludgeTitan from "../pool/sludge-titan.js";
 import _poolSmother from "../pool/smother.js";
 import _poolSmugglerCaptain from "../pool/smuggler-captain.js";
 import _poolSnap from "../pool/snap.js";
@@ -1655,6 +1656,7 @@ const shard: CardShard = {
     _poolSlimefootsSurvey,
     _poolSlipstreamEel,
     _poolSloppityBilepiper,
+    _poolSludgeTitan,
     _poolSmother,
     _poolSmugglerCaptain,
     _poolSnap,

@@ -558,6 +558,7 @@ import _poolPrinceImrahilTheFair from "../pool/prince-imrahil-the-fair.js";
 import _poolPrismaticBoon from "../pool/prismatic-boon.js";
 import _poolPrivilegedPosition from "../pool/privileged-position.js";
 import _poolProftSinisterMastermind from "../pool/proft-sinister-mastermind.js";
+import _poolPropRoom from "../pool/prop-room.js";
 import _poolProphetOfKruphix from "../pool/prophet-of-kruphix.js";
 import _poolProvoke from "../pool/provoke.js";
 import _poolPryingQuestions from "../pool/prying-questions.js";
@@ -639,6 +640,7 @@ import _poolSadisticShellGame from "../pool/sadistic-shell-game.js";
 import _poolSagesKnowledge from "../pool/sages-knowledge.js";
 import _poolSaguMauler from "../pool/sagu-mauler.js";
 import _poolSanctumGuardian from "../pool/sanctum-guardian.js";
+import _poolSandGolem from "../pool/sand-golem.js";
 import _poolSangriteBacklash from "../pool/sangrite-backlash.js";
 import _poolSavageOffensive from "../pool/savage-offensive.js";
 import _poolSavannahSage from "../pool/savannah-sage.js";
@@ -752,6 +754,7 @@ import _poolSultaiScavenger from "../pool/sultai-scavenger.js";
 import _poolSummonTheSchool from "../pool/summon-the-school.js";
 import _poolSunCeYoungConquerer from "../pool/sun-ce-young-conquerer.js";
 import _poolSunderFromWithin from "../pool/sunder-from-within.js";
+import _poolSunflareShaman from "../pool/sunflare-shaman.js";
 import _poolSuperVillainLockup from "../pool/super-villain-lockup.js";
 import _poolSurveyMechan from "../pool/survey-mechan.js";
 import _poolSustainingSpirit from "../pool/sustaining-spirit.js";
@@ -1492,6 +1495,7 @@ const shard: CardShard = {
     _poolPrismaticBoon,
     _poolPrivilegedPosition,
     _poolProftSinisterMastermind,
+    _poolPropRoom,
     _poolProphetOfKruphix,
     _poolProvoke,
     _poolPryingQuestions,
@@ -1573,6 +1577,7 @@ const shard: CardShard = {
     _poolSagesKnowledge,
     _poolSaguMauler,
     _poolSanctumGuardian,
+    _poolSandGolem,
     _poolSangriteBacklash,
     _poolSavageOffensive,
     _poolSavannahSage,
@@ -1686,6 +1691,7 @@ const shard: CardShard = {
     _poolSummonTheSchool,
     _poolSunCeYoungConquerer,
     _poolSunderFromWithin,
+    _poolSunflareShaman,
     _poolSuperVillainLockup,
     _poolSurveyMechan,
     _poolSustainingSpirit,

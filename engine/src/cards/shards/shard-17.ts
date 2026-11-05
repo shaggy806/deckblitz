@@ -74,6 +74,7 @@ import _poolBattleScarredGoblin from "../pool/battle-scarred-goblin.js";
 import _poolBattleflightEagle from "../pool/battleflight-eagle.js";
 import _poolBattlewiseValor from "../pool/battlewise-valor.js";
 import _poolBaylenTheHaymaker from "../pool/baylen-the-haymaker.js";
+import _poolBelisariusCawl from "../pool/belisarius-cawl.js";
 import _poolBelligerentBrontodon from "../pool/belligerent-brontodon.js";
 import _poolBelltowerSphinx from "../pool/belltower-sphinx.js";
 import _poolBeyondTheQuiet from "../pool/beyond-the-quiet.js";
@@ -316,6 +317,7 @@ import _poolGerrardsVerdict from "../pool/gerrards-verdict.js";
 import _poolGhostLitWarder from "../pool/ghost-lit-warder.js";
 import _poolGiantAmbushBeetle from "../pool/giant-ambush-beetle.js";
 import _poolGiantGrowth from "../pool/giant-growth.js";
+import _poolGideonBattleForged from "../pool/gideon-battle-forged.js";
 import _poolGideonsBattleCry from "../pool/gideons-battle-cry.js";
 import _poolGideonsResolve from "../pool/gideons-resolve.js";
 import _poolGiftOfOrzhova from "../pool/gift-of-orzhova.js";
@@ -490,6 +492,7 @@ import _poolMagmaSliver from "../pool/magma-sliver.js";
 import _poolMagmaticSprinter from "../pool/magmatic-sprinter.js";
 import _poolManaVapors from "../pool/mana-vapors.js";
 import _poolManamorphose from "../pool/manamorphose.js";
+import _poolMangarasBlessing from "../pool/mangaras-blessing.js";
 import _poolMapTheWastes from "../pool/map-the-wastes.js";
 import _poolMarket from "../pool/market.js";
 import _poolMarketwatchPhantom from "../pool/marketwatch-phantom.js";
@@ -1031,6 +1034,7 @@ const shard: CardShard = {
     _poolBattleflightEagle,
     _poolBattlewiseValor,
     _poolBaylenTheHaymaker,
+    _poolBelisariusCawl,
     _poolBelligerentBrontodon,
     _poolBelltowerSphinx,
     _poolBeyondTheQuiet,
@@ -1273,6 +1277,7 @@ const shard: CardShard = {
     _poolGhostLitWarder,
     _poolGiantAmbushBeetle,
     _poolGiantGrowth,
+    _poolGideonBattleForged,
     _poolGideonsBattleCry,
     _poolGideonsResolve,
     _poolGiftOfOrzhova,
@@ -1447,6 +1452,7 @@ const shard: CardShard = {
     _poolMagmaticSprinter,
     _poolManaVapors,
     _poolManamorphose,
+    _poolMangarasBlessing,
     _poolMapTheWastes,
     _poolMarket,
     _poolMarketwatchPhantom,

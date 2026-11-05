@@ -30,6 +30,7 @@ import _poolArchwingDragon from "../pool/archwing-dragon.js";
 import _poolArgentumMasticore from "../pool/argentum-masticore.js";
 import _poolArgothianSprite from "../pool/argothian-sprite.js";
 import _poolArlinnsWolf from "../pool/arlinns-wolf.js";
+import _poolArmMountedAnchor from "../pool/arm-mounted-anchor.js";
 import _poolArmorcraftJudge from "../pool/armorcraft-judge.js";
 import _poolArmoredWhirlTurtle from "../pool/armored-whirl-turtle.js";
 import _poolArmoryAutomaton from "../pool/armory-automaton.js";
@@ -68,6 +69,7 @@ import _poolBestialBloodline from "../pool/bestial-bloodline.js";
 import _poolBestialIncursion from "../pool/bestial-incursion.js";
 import _poolBetrayal from "../pool/betrayal.js";
 import _poolBlackMarketConnections from "../pool/black-market-connections.js";
+import _poolBladeOfTheOni from "../pool/blade-of-the-oni.js";
 import _poolBlasphemousEdict from "../pool/blasphemous-edict.js";
 import _poolBlazingShoal from "../pool/blazing-shoal.js";
 import _poolBlessedBreath from "../pool/blessed-breath.js";
@@ -379,8 +381,10 @@ import _poolImpracticalJoke from "../pool/impractical-joke.js";
 import _poolInSearchOfGreatness from "../pool/in-search-of-greatness.js";
 import _poolIngeniousLeonin from "../pool/ingenious-leonin.js";
 import _poolInquisitorExarch from "../pool/inquisitor-exarch.js";
+import _poolIntercessorsArrest from "../pool/intercessors-arrest.js";
 import _poolInvasionOfEldraine from "../pool/invasion-of-eldraine.js";
 import _poolInvasionOfKylem from "../pool/invasion-of-kylem.js";
+import _poolInvasionOfSegovia from "../pool/invasion-of-segovia.js";
 import _poolIridescentBlademaster from "../pool/iridescent-blademaster.js";
 import _poolIronHillsStalwart from "../pool/iron-hills-stalwart.js";
 import _poolIronStar from "../pool/iron-star.js";
@@ -691,6 +695,7 @@ import _poolSolphimMayhemDominus from "../pool/solphim-mayhem-dominus.js";
 import _poolSomberwaldSage from "../pool/somberwald-sage.js";
 import _poolSongOfInspiration from "../pool/song-of-inspiration.js";
 import _poolSontaranGeneral from "../pool/sontaran-general.js";
+import _poolSoulOfEternity from "../pool/soul-of-eternity.js";
 import _poolSoulbrightFlamekin from "../pool/soulbright-flamekin.js";
 import _poolSouthWindAvatar from "../pool/south-wind-avatar.js";
 import _poolSparksmith from "../pool/sparksmith.js";
@@ -811,6 +816,7 @@ import _poolTurbulentFen from "../pool/turbulent-fen.js";
 import _poolTurbulentSteppe from "../pool/turbulent-steppe.js";
 import _poolTuyaBearclaw from "../pool/tuya-bearclaw.js";
 import _poolTymaretCallsTheDead from "../pool/tymaret-calls-the-dead.js";
+import _poolTyvarJubilantBrawler from "../pool/tyvar-jubilant-brawler.js";
 import _poolUginTheSpiritDragon from "../pool/ugin-the-spirit-dragon.js";
 import _poolUmaraEntangler from "../pool/umara-entangler.js";
 import _poolUnctussRetrofitter from "../pool/unctuss-retrofitter.js";
@@ -934,6 +940,7 @@ const shard: CardShard = {
     _poolArgentumMasticore,
     _poolArgothianSprite,
     _poolArlinnsWolf,
+    _poolArmMountedAnchor,
     _poolArmorcraftJudge,
     _poolArmoredWhirlTurtle,
     _poolArmoryAutomaton,
@@ -972,6 +979,7 @@ const shard: CardShard = {
     _poolBestialIncursion,
     _poolBetrayal,
     _poolBlackMarketConnections,
+    _poolBladeOfTheOni,
     _poolBlasphemousEdict,
     _poolBlazingShoal,
     _poolBlessedBreath,
@@ -1283,8 +1291,10 @@ const shard: CardShard = {
     _poolInSearchOfGreatness,
     _poolIngeniousLeonin,
     _poolInquisitorExarch,
+    _poolIntercessorsArrest,
     _poolInvasionOfEldraine,
     _poolInvasionOfKylem,
+    _poolInvasionOfSegovia,
     _poolIridescentBlademaster,
     _poolIronHillsStalwart,
     _poolIronStar,
@@ -1595,6 +1605,7 @@ const shard: CardShard = {
     _poolSomberwaldSage,
     _poolSongOfInspiration,
     _poolSontaranGeneral,
+    _poolSoulOfEternity,
     _poolSoulbrightFlamekin,
     _poolSouthWindAvatar,
     _poolSparksmith,
@@ -1715,6 +1726,7 @@ const shard: CardShard = {
     _poolTurbulentSteppe,
     _poolTuyaBearclaw,
     _poolTymaretCallsTheDead,
+    _poolTyvarJubilantBrawler,
     _poolUginTheSpiritDragon,
     _poolUmaraEntangler,
     _poolUnctussRetrofitter,

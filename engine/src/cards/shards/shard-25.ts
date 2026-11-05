@@ -120,6 +120,7 @@ import _poolBrinkOfMadness from "../pool/brink-of-madness.js";
 import _poolBristlingBoar from "../pool/bristling-boar.js";
 import _poolBrokenVisage from "../pool/broken-visage.js";
 import _poolBrotherhoodSpy from "../pool/brotherhood-spy.js";
+import _poolBroughtBack from "../pool/brought-back.js";
 import _poolBubbleSmuggler from "../pool/bubble-smuggler.js";
 import _poolBumbleflowersSharepot from "../pool/bumbleflowers-sharepot.js";
 import _poolBumpInTheNight from "../pool/bump-in-the-night.js";
@@ -324,6 +325,7 @@ import _poolGideonMartialParagon from "../pool/gideon-martial-paragon.js";
 import _poolGideonTheOathless from "../pool/gideon-the-oathless.js";
 import _poolGilanraCallerOfWirewood from "../pool/gilanra-caller-of-wirewood.js";
 import _poolGiveInToViolence from "../pool/give-in-to-violence.js";
+import _poolGlamdringFoeHammer from "../pool/glamdring-foe-hammer.js";
 import _poolGlisteningDeluge from "../pool/glistening-deluge.js";
 import _poolGloomdrifter from "../pool/gloomdrifter.js";
 import _poolGloriousDecay from "../pool/glorious-decay.js";
@@ -734,6 +736,7 @@ import _poolSlayersStronghold from "../pool/slayers-stronghold.js";
 import _poolSlimyPiper from "../pool/slimy-piper.js";
 import _poolSlingshotGoblin from "../pool/slingshot-goblin.js";
 import _poolSlithBloodletter from "../pool/slith-bloodletter.js";
+import _poolSmolderingStagecoach from "../pool/smoldering-stagecoach.js";
 import _poolSmotheringTithe from "../pool/smothering-tithe.js";
 import _poolSolemnity from "../pool/solemnity.js";
 import _poolSolidarity from "../pool/solidarity.js";
@@ -1048,6 +1051,7 @@ const shard: CardShard = {
     _poolBristlingBoar,
     _poolBrokenVisage,
     _poolBrotherhoodSpy,
+    _poolBroughtBack,
     _poolBubbleSmuggler,
     _poolBumbleflowersSharepot,
     _poolBumpInTheNight,
@@ -1252,6 +1256,7 @@ const shard: CardShard = {
     _poolGideonTheOathless,
     _poolGilanraCallerOfWirewood,
     _poolGiveInToViolence,
+    _poolGlamdringFoeHammer,
     _poolGlisteningDeluge,
     _poolGloomdrifter,
     _poolGloriousDecay,
@@ -1662,6 +1667,7 @@ const shard: CardShard = {
     _poolSlimyPiper,
     _poolSlingshotGoblin,
     _poolSlithBloodletter,
+    _poolSmolderingStagecoach,
     _poolSmotheringTithe,
     _poolSolemnity,
     _poolSolidarity,

@@ -389,6 +389,7 @@ import _poolIncitedRabble from "../pool/incited-rabble.js";
 import _poolIncurableOgre from "../pool/incurable-ogre.js";
 import _poolInfernalCaptor from "../pool/infernal-captor.js";
 import _poolIntegrityIntervention from "../pool/integrity-intervention.js";
+import _poolInvasionOfNewPhyrexia from "../pool/invasion-of-new-phyrexia.js";
 import _poolIronLadDivergingDestiny from "../pool/iron-lad-diverging-destiny.js";
 import _poolIronpawAspirant from "../pool/ironpaw-aspirant.js";
 import _poolIsolationZone from "../pool/isolation-zone.js";
@@ -787,6 +788,7 @@ import _poolSuddenReclamation from "../pool/sudden-reclamation.js";
 import _poolSuicidalCharge from "../pool/suicidal-charge.js";
 import _poolSulfuricVapors from "../pool/sulfuric-vapors.js";
 import _poolSummitApes from "../pool/summit-apes.js";
+import _poolSummonYojimbo from "../pool/summon-yojimbo.js";
 import _poolSunBlessedHealer from "../pool/sun-blessed-healer.js";
 import _poolSunTitan from "../pool/sun-titan.js";
 import _poolSuncrusher from "../pool/suncrusher.js";
@@ -1344,6 +1346,7 @@ const shard: CardShard = {
     _poolIncurableOgre,
     _poolInfernalCaptor,
     _poolIntegrityIntervention,
+    _poolInvasionOfNewPhyrexia,
     _poolIronLadDivergingDestiny,
     _poolIronpawAspirant,
     _poolIsolationZone,
@@ -1742,6 +1745,7 @@ const shard: CardShard = {
     _poolSuicidalCharge,
     _poolSulfuricVapors,
     _poolSummitApes,
+    _poolSummonYojimbo,
     _poolSunBlessedHealer,
     _poolSunTitan,
     _poolSuncrusher,

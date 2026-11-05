@@ -170,6 +170,7 @@ import _poolColdSnap from "../pool/cold-snap.js";
 import _poolCombatTutorial from "../pool/combat-tutorial.js";
 import _poolCompleteDisregard from "../pool/complete-disregard.js";
 import _poolConquerorsFlail from "../pool/conquerors-flail.js";
+import _poolConspicuousSnoop from "../pool/conspicuous-snoop.js";
 import _poolConsulateCrackdown from "../pool/consulate-crackdown.js";
 import _poolConsulateSkygate from "../pool/consulate-skygate.js";
 import _poolContagionEngine from "../pool/contagion-engine.js";
@@ -826,6 +827,7 @@ import _poolTiamat from "../pool/tiamat.js";
 import _poolTillerEngine from "../pool/tiller-engine.js";
 import _poolTimeSpiral from "../pool/time-spiral.js";
 import _poolTinderFarm from "../pool/tinder-farm.js";
+import _poolTinybonesTrinketThief from "../pool/tinybones-trinket-thief.js";
 import _poolTitanOfLittjara from "../pool/titan-of-littjara.js";
 import _poolTithebearerGiant from "../pool/tithebearer-giant.js";
 import _poolTokkaRahzarTerribleTwos from "../pool/tokka-rahzar-terrible-twos.js";
@@ -860,6 +862,7 @@ import _poolVampireNoble from "../pool/vampire-noble.js";
 import _poolVampiresZeal from "../pool/vampires-zeal.js";
 import _poolVatEmergence from "../pool/vat-emergence.js";
 import _poolVelomachusLorehold from "../pool/velomachus-lorehold.js";
+import _poolVengefulStrangler from "../pool/vengeful-strangler.js";
 import _poolVenomousChangeling from "../pool/venomous-changeling.js";
 import _poolVentureDeeper from "../pool/venture-deeper.js";
 import _poolVerdantRebirth from "../pool/verdant-rebirth.js";
@@ -1108,6 +1111,7 @@ const shard: CardShard = {
     _poolCombatTutorial,
     _poolCompleteDisregard,
     _poolConquerorsFlail,
+    _poolConspicuousSnoop,
     _poolConsulateCrackdown,
     _poolConsulateSkygate,
     _poolContagionEngine,
@@ -1764,6 +1768,7 @@ const shard: CardShard = {
     _poolTillerEngine,
     _poolTimeSpiral,
     _poolTinderFarm,
+    _poolTinybonesTrinketThief,
     _poolTitanOfLittjara,
     _poolTithebearerGiant,
     _poolTokkaRahzarTerribleTwos,
@@ -1798,6 +1803,7 @@ const shard: CardShard = {
     _poolVampiresZeal,
     _poolVatEmergence,
     _poolVelomachusLorehold,
+    _poolVengefulStrangler,
     _poolVenomousChangeling,
     _poolVentureDeeper,
     _poolVerdantRebirth,

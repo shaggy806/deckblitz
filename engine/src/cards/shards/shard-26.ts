@@ -187,6 +187,7 @@ import _poolDarkheartSliver from "../pool/darkheart-sliver.js";
 import _poolDarlingOfTheMasses from "../pool/darling-of-the-masses.js";
 import _poolDauthiJackal from "../pool/dauthi-jackal.js";
 import _poolDaxosOfMeletis from "../pool/daxos-of-meletis.js";
+import _poolDeathRattleOni from "../pool/death-rattle-oni.js";
 import _poolDecreeOfPain from "../pool/decree-of-pain.js";
 import _poolDefensiveManeuvers from "../pool/defensive-maneuvers.js";
 import _poolDelifsCone from "../pool/delifs-cone.js";
@@ -242,6 +243,7 @@ import _poolEncaseInIce from "../pool/encase-in-ice.js";
 import _poolEnduringCuriosity from "../pool/enduring-curiosity.js";
 import _poolEnforcerGriffin from "../pool/enforcer-griffin.js";
 import _poolEntrancingLyre from "../pool/entrancing-lyre.js";
+import _poolEntropicBattlecruiser from "../pool/entropic-battlecruiser.js";
 import _poolEnvironmentalSciences from "../pool/environmental-sciences.js";
 import _poolEpfPointSquad from "../pool/epf-point-squad.js";
 import _poolErrandRiderOfGondor from "../pool/errand-rider-of-gondor.js";
@@ -696,6 +698,7 @@ import _poolSerenity from "../pool/serenity.js";
 import _poolSerpentineAmbush from "../pool/serpentine-ambush.js";
 import _poolSetonsDesire from "../pool/setons-desire.js";
 import _poolShackleSlinger from "../pool/shackle-slinger.js";
+import _poolShamanOfForgottenWays from "../pool/shaman-of-forgotten-ways.js";
 import _poolShangChiMartialMentor from "../pool/shang-chi-martial-mentor.js";
 import _poolShanodinDryads from "../pool/shanodin-dryads.js";
 import _poolSharedTrauma from "../pool/shared-trauma.js";
@@ -840,6 +843,7 @@ import _poolTimelessLotus from "../pool/timeless-lotus.js";
 import _poolTinker from "../pool/tinker.js";
 import _poolTirelessTracker from "../pool/tireless-tracker.js";
 import _poolTitanForge from "../pool/titan-forge.js";
+import _poolTitheTaker from "../pool/tithe-taker.js";
 import _poolToArms from "../pool/to-arms.js";
 import _poolTorrentOfFire from "../pool/torrent-of-fire.js";
 import _poolTorrentialGearhulk from "../pool/torrential-gearhulk.js";
@@ -1144,6 +1148,7 @@ const shard: CardShard = {
     _poolDarlingOfTheMasses,
     _poolDauthiJackal,
     _poolDaxosOfMeletis,
+    _poolDeathRattleOni,
     _poolDecreeOfPain,
     _poolDefensiveManeuvers,
     _poolDelifsCone,
@@ -1199,6 +1204,7 @@ const shard: CardShard = {
     _poolEnduringCuriosity,
     _poolEnforcerGriffin,
     _poolEntrancingLyre,
+    _poolEntropicBattlecruiser,
     _poolEnvironmentalSciences,
     _poolEpfPointSquad,
     _poolErrandRiderOfGondor,
@@ -1653,6 +1659,7 @@ const shard: CardShard = {
     _poolSerpentineAmbush,
     _poolSetonsDesire,
     _poolShackleSlinger,
+    _poolShamanOfForgottenWays,
     _poolShangChiMartialMentor,
     _poolShanodinDryads,
     _poolSharedTrauma,
@@ -1797,6 +1804,7 @@ const shard: CardShard = {
     _poolTinker,
     _poolTirelessTracker,
     _poolTitanForge,
+    _poolTitheTaker,
     _poolToArms,
     _poolTorrentOfFire,
     _poolTorrentialGearhulk,

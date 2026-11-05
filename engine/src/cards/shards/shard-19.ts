@@ -116,6 +116,7 @@ import _poolCabarettiCharm from "../pool/cabaretti-charm.js";
 import _poolCaelornaCoralTyrant from "../pool/caelorna-coral-tyrant.js";
 import _poolCagedZombie from "../pool/caged-zombie.js";
 import _poolCallDamageControl from "../pool/call-damage-control.js";
+import _poolCallapheBelovedOfTheSea from "../pool/callaphe-beloved-of-the-sea.js";
 import _poolCalmingVerse from "../pool/calming-verse.js";
 import _poolCanalDredger from "../pool/canal-dredger.js";
 import _poolCaptainHowlerSeaScourge from "../pool/captain-howler-sea-scourge.js";
@@ -585,6 +586,7 @@ import _poolMuddleTheMixture from "../pool/muddle-the-mixture.js";
 import _poolMuragandaRaceway from "../pool/muraganda-raceway.js";
 import _poolMushroomWatchdogs from "../pool/mushroom-watchdogs.js";
 import _poolMycoidShepherd from "../pool/mycoid-shepherd.js";
+import _poolMysticalTether from "../pool/mystical-tether.js";
 import _poolMythRealized from "../pool/myth-realized.js";
 import _poolNagaFleshcrafter from "../pool/naga-fleshcrafter.js";
 import _poolNaktamunLorespinner from "../pool/naktamun-lorespinner.js";
@@ -1117,6 +1119,7 @@ const shard: CardShard = {
     _poolCaelornaCoralTyrant,
     _poolCagedZombie,
     _poolCallDamageControl,
+    _poolCallapheBelovedOfTheSea,
     _poolCalmingVerse,
     _poolCanalDredger,
     _poolCaptainHowlerSeaScourge,
@@ -1586,6 +1589,7 @@ const shard: CardShard = {
     _poolMuragandaRaceway,
     _poolMushroomWatchdogs,
     _poolMycoidShepherd,
+    _poolMysticalTether,
     _poolMythRealized,
     _poolNagaFleshcrafter,
     _poolNaktamunLorespinner,

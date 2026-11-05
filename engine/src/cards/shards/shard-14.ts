@@ -17,6 +17,7 @@ import _poolAgadeemTheUndercrypt from "../pool/agadeem-the-undercrypt.js";
 import _poolAgeGracedChapel from "../pool/age-graced-chapel.js";
 import _poolAgnaQela from "../pool/agna-qela.js";
 import _poolAgonizingSyphon from "../pool/agonizing-syphon.js";
+import _poolAjanisLastStand from "../pool/ajanis-last-stand.js";
 import _poolAjanisWelcome from "../pool/ajanis-welcome.js";
 import _poolAlchorsTomb from "../pool/alchors-tomb.js";
 import _poolAllFatesStalker from "../pool/all-fates-stalker.js";
@@ -128,6 +129,7 @@ import _poolChalkOutline from "../pool/chalk-outline.js";
 import _poolChandrasOutburst from "../pool/chandras-outburst.js";
 import _poolChannelTheSuns from "../pool/channel-the-suns.js";
 import _poolCharforger from "../pool/charforger.js";
+import _poolCharixTheRagingIsle from "../pool/charix-the-raging-isle.js";
 import _poolChiefOfTheScale from "../pool/chief-of-the-scale.js";
 import _poolChillingShade from "../pool/chilling-shade.js";
 import _poolChocoboRacetrack from "../pool/chocobo-racetrack.js";
@@ -885,6 +887,7 @@ import _poolVeteranArmorsmith from "../pool/veteran-armorsmith.js";
 import _poolVillageBellRinger from "../pool/village-bell-ringer.js";
 import _poolVinereapMentor from "../pool/vinereap-mentor.js";
 import _poolViolentUltimatum from "../pool/violent-ultimatum.js";
+import _poolVisionOfTheUnspeakable from "../pool/vision-of-the-unspeakable.js";
 import _poolVitasporeThallid from "../pool/vitaspore-thallid.js";
 import _poolVnwxtVerboseHost from "../pool/vnwxt-verbose-host.js";
 import _poolVodalianSerpent from "../pool/vodalian-serpent.js";
@@ -918,6 +921,7 @@ import _poolWitchsClinic from "../pool/witchs-clinic.js";
 import _poolWitherbloomCharm from "../pool/witherbloom-charm.js";
 import _poolWizardsLightning from "../pool/wizards-lightning.js";
 import _poolWojekEmbermage from "../pool/wojek-embermage.js";
+import _poolWormfangBehemoth from "../pool/wormfang-behemoth.js";
 import _poolWrathOfTheSkies from "../pool/wrath-of-the-skies.js";
 import _poolYahennisExpertise from "../pool/yahennis-expertise.js";
 import _poolYavimayaScion from "../pool/yavimaya-scion.js";
@@ -930,6 +934,7 @@ import _poolZhalfirinCommander from "../pool/zhalfirin-commander.js";
 import _poolZopandrelHungerDominus from "../pool/zopandrel-hunger-dominus.js";
 import _poolZukosOffense from "../pool/zukos-offense.js";
 import _tokensApeToken from "../tokens/ape-token.js";
+import _tokensAvatarToken44Flying from "../tokens/avatar-token-4-4-flying.js";
 import _tokensBlueBlackFaerieRogueToken from "../tokens/blue-black-faerie-rogue-token.js";
 import _tokensCrabToken from "../tokens/crab-token.js";
 import _tokensDeathtouchRatToken from "../tokens/deathtouch-rat-token.js";
@@ -970,6 +975,7 @@ const shard: CardShard = {
     _poolAgeGracedChapel,
     _poolAgnaQela,
     _poolAgonizingSyphon,
+    _poolAjanisLastStand,
     _poolAjanisWelcome,
     _poolAlchorsTomb,
     _poolAllFatesStalker,
@@ -1081,6 +1087,7 @@ const shard: CardShard = {
     _poolChandrasOutburst,
     _poolChannelTheSuns,
     _poolCharforger,
+    _poolCharixTheRagingIsle,
     _poolChiefOfTheScale,
     _poolChillingShade,
     _poolChocoboRacetrack,
@@ -1838,6 +1845,7 @@ const shard: CardShard = {
     _poolVillageBellRinger,
     _poolVinereapMentor,
     _poolViolentUltimatum,
+    _poolVisionOfTheUnspeakable,
     _poolVitasporeThallid,
     _poolVnwxtVerboseHost,
     _poolVodalianSerpent,
@@ -1871,6 +1879,7 @@ const shard: CardShard = {
     _poolWitherbloomCharm,
     _poolWizardsLightning,
     _poolWojekEmbermage,
+    _poolWormfangBehemoth,
     _poolWrathOfTheSkies,
     _poolYahennisExpertise,
     _poolYavimayaScion,
@@ -1885,6 +1894,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokensApeToken,
+    _tokensAvatarToken44Flying,
     _tokensBlueBlackFaerieRogueToken,
     _tokensCrabToken,
     _tokensDeathtouchRatToken,

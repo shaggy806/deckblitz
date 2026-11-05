@@ -74,6 +74,7 @@ import _poolBearCub from "../pool/bear-cub.js";
 import _poolBeastbreakerOfBalaGed from "../pool/beastbreaker-of-bala-ged.js";
 import _poolBecomeBrutes from "../pool/become-brutes.js";
 import _poolBedeck from "../pool/bedeck.js";
+import _poolBeholdTheUnspeakable from "../pool/behold-the-unspeakable.js";
 import _poolBeornsHospitality from "../pool/beorns-hospitality.js";
 import _poolBewilderingBlizzard from "../pool/bewildering-blizzard.js";
 import _poolBilbosRing from "../pool/bilbos-ring.js";
@@ -889,6 +890,7 @@ import _poolUnrulyKrasis from "../pool/unruly-krasis.js";
 import _poolUrborgUprising from "../pool/urborg-uprising.js";
 import _poolValleyDasher from "../pool/valley-dasher.js";
 import _poolValleyFloodcaller from "../pool/valley-floodcaller.js";
+import _poolValorsFlagship from "../pool/valors-flagship.js";
 import _poolVampireCharmseeker from "../pool/vampire-charmseeker.js";
 import _poolVampireSlayer from "../pool/vampire-slayer.js";
 import _poolVampireSovereign from "../pool/vampire-sovereign.js";
@@ -955,6 +957,7 @@ import _poolZimoneAllQuestioning from "../pool/zimone-all-questioning.js";
 import _poolZofShade from "../pool/zof-shade.js";
 import _tokensArmyToken from "../tokens/army-token.js";
 import _tokensAssassinToken from "../tokens/assassin-token.js";
+import _tokensAvatarToken from "../tokens/avatar-token.js";
 import _tokensBirdTokenHermesOverseerOfElpis from "../tokens/bird-token-hermes-overseer-of-elpis.js";
 import _tokensBlackEnchantmentZombieToken22 from "../tokens/black-enchantment-zombie-token-2-2.js";
 import _tokensBoarTokenWolfsQuarry from "../tokens/boar-token-wolfs-quarry.js";
@@ -1054,6 +1057,7 @@ const shard: CardShard = {
     _poolBeastbreakerOfBalaGed,
     _poolBecomeBrutes,
     _poolBedeck,
+    _poolBeholdTheUnspeakable,
     _poolBeornsHospitality,
     _poolBewilderingBlizzard,
     _poolBilbosRing,
@@ -1869,6 +1873,7 @@ const shard: CardShard = {
     _poolUrborgUprising,
     _poolValleyDasher,
     _poolValleyFloodcaller,
+    _poolValorsFlagship,
     _poolVampireCharmseeker,
     _poolVampireSlayer,
     _poolVampireSovereign,
@@ -1937,6 +1942,7 @@ const shard: CardShard = {
   tokens: [
     _tokensArmyToken,
     _tokensAssassinToken,
+    _tokensAvatarToken,
     _tokensBirdTokenHermesOverseerOfElpis,
     _tokensBlackEnchantmentZombieToken22,
     _tokensBoarTokenWolfsQuarry,

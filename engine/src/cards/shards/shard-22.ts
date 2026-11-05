@@ -226,6 +226,7 @@ import _poolElectryte from "../pool/electryte.js";
 import _poolElementalMasterpiece from "../pool/elemental-masterpiece.js";
 import _poolElephantGrass from "../pool/elephant-grass.js";
 import _poolEliteSpellbinder from "../pool/elite-spellbinder.js";
+import _poolElspethResplendent from "../pool/elspeth-resplendent.js";
 import _poolElvishFury from "../pool/elvish-fury.js";
 import _poolEmbargo from "../pool/embargo.js";
 import _poolEmeriaShatteredSkyclave from "../pool/emeria-shattered-skyclave.js";
@@ -412,6 +413,7 @@ import _poolKnollspineInvocation from "../pool/knollspine-invocation.js";
 import _poolKonstrariAnnex from "../pool/konstrari-annex.js";
 import _poolKorEntanglers from "../pool/kor-entanglers.js";
 import _poolKrotiqNestguard from "../pool/krotiq-nestguard.js";
+import _poolKytheonHeroOfAkros from "../pool/kytheon-hero-of-akros.js";
 import _poolLanternsLift from "../pool/lanterns-lift.js";
 import _poolLaserScrewdriver from "../pool/laser-screwdriver.js";
 import _poolLashOfTheBalrog from "../pool/lash-of-the-balrog.js";
@@ -530,6 +532,7 @@ import _poolOliviaOpulentOutlaw from "../pool/olivia-opulent-outlaw.js";
 import _poolOltecCloudGuard from "../pool/oltec-cloud-guard.js";
 import _poolOmnivorousFlytrap from "../pool/omnivorous-flytrap.js";
 import _poolOrcishBloodpainter from "../pool/orcish-bloodpainter.js";
+import _poolOrcishMine from "../pool/orcish-mine.js";
 import _poolOrcusPrinceOfUndeath from "../pool/orcus-prince-of-undeath.js";
 import _poolOrderOfTheMirror from "../pool/order-of-the-mirror.js";
 import _poolOrochiRanger from "../pool/orochi-ranger.js";
@@ -776,6 +779,7 @@ import _poolSwarmGuildmage from "../pool/swarm-guildmage.js";
 import _poolSwashbuckling from "../pool/swashbuckling.js";
 import _poolSwordOfWarAndPeace from "../pool/sword-of-war-and-peace.js";
 import _poolSyphonEssence from "../pool/syphon-essence.js";
+import _poolSyrElenoraTheDiscerning from "../pool/syr-elenora-the-discerning.js";
 import _poolTaigamsScheming from "../pool/taigams-scheming.js";
 import _poolTaintedField from "../pool/tainted-field.js";
 import _poolTakeInventory from "../pool/take-inventory.js";
@@ -885,6 +889,7 @@ import _poolVigorMortis from "../pool/vigor-mortis.js";
 import _poolVillagePillagers from "../pool/village-pillagers.js";
 import _poolVirtuousCharge from "../pool/virtuous-charge.js";
 import _poolVirulentSwipe from "../pool/virulent-swipe.js";
+import _poolVisionsOfDuplicity from "../pool/visions-of-duplicity.js";
 import _poolVithianStinger from "../pool/vithian-stinger.js";
 import _poolViviensInvocation from "../pool/viviens-invocation.js";
 import _poolViviensJaguar from "../pool/viviens-jaguar.js";
@@ -1189,6 +1194,7 @@ const shard: CardShard = {
     _poolElementalMasterpiece,
     _poolElephantGrass,
     _poolEliteSpellbinder,
+    _poolElspethResplendent,
     _poolElvishFury,
     _poolEmbargo,
     _poolEmeriaShatteredSkyclave,
@@ -1375,6 +1381,7 @@ const shard: CardShard = {
     _poolKonstrariAnnex,
     _poolKorEntanglers,
     _poolKrotiqNestguard,
+    _poolKytheonHeroOfAkros,
     _poolLanternsLift,
     _poolLaserScrewdriver,
     _poolLashOfTheBalrog,
@@ -1493,6 +1500,7 @@ const shard: CardShard = {
     _poolOltecCloudGuard,
     _poolOmnivorousFlytrap,
     _poolOrcishBloodpainter,
+    _poolOrcishMine,
     _poolOrcusPrinceOfUndeath,
     _poolOrderOfTheMirror,
     _poolOrochiRanger,
@@ -1739,6 +1747,7 @@ const shard: CardShard = {
     _poolSwashbuckling,
     _poolSwordOfWarAndPeace,
     _poolSyphonEssence,
+    _poolSyrElenoraTheDiscerning,
     _poolTaigamsScheming,
     _poolTaintedField,
     _poolTakeInventory,
@@ -1848,6 +1857,7 @@ const shard: CardShard = {
     _poolVillagePillagers,
     _poolVirtuousCharge,
     _poolVirulentSwipe,
+    _poolVisionsOfDuplicity,
     _poolVithianStinger,
     _poolViviensInvocation,
     _poolViviensJaguar,

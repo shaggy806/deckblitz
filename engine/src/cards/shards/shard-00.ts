@@ -21,6 +21,7 @@ import _poolAirliftChaplain from "../pool/airlift-chaplain.js";
 import _poolAkkiRaider from "../pool/akki-raider.js";
 import _poolAkoumFlameseeker from "../pool/akoum-flameseeker.js";
 import _poolAleshaWhoLaughsAtFate from "../pool/alesha-who-laughs-at-fate.js";
+import _poolAlienSymbiosis from "../pool/alien-symbiosis.js";
 import _poolAllianceOfArms from "../pool/alliance-of-arms.js";
 import _poolAlliesAtLast from "../pool/allies-at-last.js";
 import _poolAlloyMyr from "../pool/alloy-myr.js";
@@ -430,6 +431,7 @@ import _poolKeldonFirebombers from "../pool/keldon-firebombers.js";
 import _poolKellanInquisitiveProdigy from "../pool/kellan-inquisitive-prodigy.js";
 import _poolKessigWolfRun from "../pool/kessig-wolf-run.js";
 import _poolKindledFury from "../pool/kindled-fury.js";
+import _poolKindredDiscovery from "../pool/kindred-discovery.js";
 import _poolKingSolomonsFrogs from "../pool/king-solomons-frogs.js";
 import _poolKithkinShielddare from "../pool/kithkin-shielddare.js";
 import _poolKnucklesTheEchidna from "../pool/knuckles-the-echidna.js";
@@ -693,6 +695,7 @@ import _poolSerpentineSpike from "../pool/serpentine-spike.js";
 import _poolSetonKrosanProtector from "../pool/seton-krosan-protector.js";
 import _poolSewerVeillanceCam from "../pool/sewer-veillance-cam.js";
 import _poolShadowOfTheGrave from "../pool/shadow-of-the-grave.js";
+import _poolShangChiMasterOfKungFu from "../pool/shang-chi-master-of-kung-fu.js";
 import _poolSharpshooterElf from "../pool/sharpshooter-elf.js";
 import _poolShatterTheSky from "../pool/shatter-the-sky.js";
 import _poolShatterskullMinotaur from "../pool/shatterskull-minotaur.js";
@@ -784,6 +787,7 @@ import _poolSwordwiseCentaur from "../pool/swordwise-centaur.js";
 import _poolTajuruParagon from "../pool/tajuru-paragon.js";
 import _poolTalonTrooper from "../pool/talon-trooper.js";
 import _poolTaoistHermit from "../pool/taoist-hermit.js";
+import _poolTardis from "../pool/tardis.js";
 import _poolTarielReckonerOfSouls from "../pool/tariel-reckoner-of-souls.js";
 import _poolTauntingChallenge from "../pool/taunting-challenge.js";
 import _poolTavernSmasher from "../pool/tavern-smasher.js";
@@ -979,6 +983,7 @@ const shard: CardShard = {
     _poolAkkiRaider,
     _poolAkoumFlameseeker,
     _poolAleshaWhoLaughsAtFate,
+    _poolAlienSymbiosis,
     _poolAllianceOfArms,
     _poolAlliesAtLast,
     _poolAlloyMyr,
@@ -1388,6 +1393,7 @@ const shard: CardShard = {
     _poolKellanInquisitiveProdigy,
     _poolKessigWolfRun,
     _poolKindledFury,
+    _poolKindredDiscovery,
     _poolKingSolomonsFrogs,
     _poolKithkinShielddare,
     _poolKnucklesTheEchidna,
@@ -1651,6 +1657,7 @@ const shard: CardShard = {
     _poolSetonKrosanProtector,
     _poolSewerVeillanceCam,
     _poolShadowOfTheGrave,
+    _poolShangChiMasterOfKungFu,
     _poolSharpshooterElf,
     _poolShatterTheSky,
     _poolShatterskullMinotaur,
@@ -1742,6 +1749,7 @@ const shard: CardShard = {
     _poolTajuruParagon,
     _poolTalonTrooper,
     _poolTaoistHermit,
+    _poolTardis,
     _poolTarielReckonerOfSouls,
     _poolTauntingChallenge,
     _poolTavernSmasher,

@@ -225,6 +225,7 @@ import _poolDwarvenBerserker from "../pool/dwarven-berserker.js";
 import _poolEarthKingdomJailer from "../pool/earth-kingdom-jailer.js";
 import _poolEchoTracer from "../pool/echo-tracer.js";
 import _poolEddieBrock from "../pool/eddie-brock.js";
+import _poolEirduCarrierOfDawn from "../pool/eirdu-carrier-of-dawn.js";
 import _poolElderLandWurm from "../pool/elder-land-wurm.js";
 import _poolEldraziTemple from "../pool/eldrazi-temple.js";
 import _poolElsha from "../pool/elsha.js";
@@ -1146,6 +1147,7 @@ const shard: CardShard = {
     _poolEarthKingdomJailer,
     _poolEchoTracer,
     _poolEddieBrock,
+    _poolEirduCarrierOfDawn,
     _poolElderLandWurm,
     _poolEldraziTemple,
     _poolElsha,

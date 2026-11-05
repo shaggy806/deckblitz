@@ -286,6 +286,7 @@ import _poolGaeasBounty from "../pool/gaeas-bounty.js";
 import _poolGaeasCradle from "../pool/gaeas-cradle.js";
 import _poolGalacticWayfarer from "../pool/galactic-wayfarer.js";
 import _poolGalliaOfTheEndlessDance from "../pool/gallia-of-the-endless-dance.js";
+import _poolGalvanicDischarge from "../pool/galvanic-discharge.js";
 import _poolGaseousForm from "../pool/gaseous-form.js";
 import _poolGatekeeperGargoyle from "../pool/gatekeeper-gargoyle.js";
 import _poolGeistlightSnare from "../pool/geistlight-snare.js";
@@ -619,6 +620,7 @@ import _poolRhinosRampage from "../pool/rhinos-rampage.js";
 import _poolRhonassStalwart from "../pool/rhonass-stalwart.js";
 import _poolRhovanionRampager from "../pool/rhovanion-rampager.js";
 import _poolRidgeRannet from "../pool/ridge-rannet.js";
+import _poolRimeChill from "../pool/rime-chill.js";
 import _poolRiptideEntrancer from "../pool/riptide-entrancer.js";
 import _poolRitualOfSteel from "../pool/ritual-of-steel.js";
 import _poolRobberFly from "../pool/robber-fly.js";
@@ -885,6 +887,7 @@ import _poolWarpedDevotion from "../pool/warped-devotion.js";
 import _poolWasteManagement from "../pool/waste-management.js";
 import _poolWaxWaneWitness from "../pool/wax-wane-witness.js";
 import _poolWayspeakerBodyguard from "../pool/wayspeaker-bodyguard.js";
+import _poolWeRideAtDawn from "../pool/we-ride-at-dawn.js";
 import _poolWeaverOfLightning from "../pool/weaver-of-lightning.js";
 import _poolWheelOfFortune from "../pool/wheel-of-fortune.js";
 import _poolWhirlpoolWhelm from "../pool/whirlpool-whelm.js";
@@ -922,6 +925,7 @@ import _tokensGremlinToken from "../tokens/gremlin-token.js";
 import _tokensHorrorTokenProfaneTransfusion from "../tokens/horror-token-profane-transfusion.js";
 import _tokensInsectTokenBlack01 from "../tokens/insect-token-black-0-1.js";
 import _tokensKnightTokenFirstStrike from "../tokens/knight-token-first-strike.js";
+import _tokensKrakenTokenTrample from "../tokens/kraken-token-trample.js";
 import _tokensPhyrexianMyrToken from "../tokens/phyrexian-myr-token.js";
 import _tokensSandWarriorToken from "../tokens/sand-warrior-token.js";
 import _tokensSculptureTreasureToken from "../tokens/sculpture-treasure-token.js";
@@ -1219,6 +1223,7 @@ const shard: CardShard = {
     _poolGaeasCradle,
     _poolGalacticWayfarer,
     _poolGalliaOfTheEndlessDance,
+    _poolGalvanicDischarge,
     _poolGaseousForm,
     _poolGatekeeperGargoyle,
     _poolGeistlightSnare,
@@ -1552,6 +1557,7 @@ const shard: CardShard = {
     _poolRhonassStalwart,
     _poolRhovanionRampager,
     _poolRidgeRannet,
+    _poolRimeChill,
     _poolRiptideEntrancer,
     _poolRitualOfSteel,
     _poolRobberFly,
@@ -1818,6 +1824,7 @@ const shard: CardShard = {
     _poolWasteManagement,
     _poolWaxWaneWitness,
     _poolWayspeakerBodyguard,
+    _poolWeRideAtDawn,
     _poolWeaverOfLightning,
     _poolWheelOfFortune,
     _poolWhirlpoolWhelm,
@@ -1857,6 +1864,7 @@ const shard: CardShard = {
     _tokensHorrorTokenProfaneTransfusion,
     _tokensInsectTokenBlack01,
     _tokensKnightTokenFirstStrike,
+    _tokensKrakenTokenTrample,
     _tokensPhyrexianMyrToken,
     _tokensSandWarriorToken,
     _tokensSculptureTreasureToken,
