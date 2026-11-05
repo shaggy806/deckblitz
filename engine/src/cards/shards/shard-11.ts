@@ -93,6 +93,7 @@ import _poolBloodhuskRitualist from "../pool/bloodhusk-ritualist.js";
 import _poolBloodmarkMentor from "../pool/bloodmark-mentor.js";
 import _poolBloodsoakedReveler from "../pool/bloodsoaked-reveler.js";
 import _poolBlueSunsZenith from "../pool/blue-suns-zenith.js";
+import _poolBoneOffering from "../pool/bone-offering.js";
 import _poolBonehoard from "../pool/bonehoard.js";
 import _poolBoneshardSlasher from "../pool/boneshard-slasher.js";
 import _poolBookBurning from "../pool/book-burning.js";
@@ -242,6 +243,7 @@ import _poolElvishRegrower from "../pool/elvish-regrower.js";
 import _poolEmberwildeAugur from "../pool/emberwilde-augur.js";
 import _poolEmeritusOfWoe from "../pool/emeritus-of-woe.js";
 import _poolEmissaryOfHope from "../pool/emissary-of-hope.js";
+import _poolEmpyrialArmor from "../pool/empyrial-armor.js";
 import _poolEnchantedEvening from "../pool/enchanted-evening.js";
 import _poolEnduringCourage from "../pool/enduring-courage.js";
 import _poolEnduringVitality from "../pool/enduring-vitality.js";
@@ -430,6 +432,8 @@ import _poolJokulmorder from "../pool/jokulmorder.js";
 import _poolJustFate from "../pool/just-fate.js";
 import _poolJusticiarsPortal from "../pool/justiciars-portal.js";
 import _poolKangeesLieutenant from "../pool/kangees-lieutenant.js";
+import _poolKarolinaDeanRunaway from "../pool/karolina-dean-runaway.js";
+import _poolKarplusanStrider from "../pool/karplusan-strider.js";
 import _poolKashiTribeElite from "../pool/kashi-tribe-elite.js";
 import _poolKaslemsStonetree from "../pool/kaslems-stonetree.js";
 import _poolKedissEmberclawFamiliar from "../pool/kediss-emberclaw-familiar.js";
@@ -452,6 +456,7 @@ import _poolKrosanDrover from "../pool/krosan-drover.js";
 import _poolKyrenGlider from "../pool/kyren-glider.js";
 import _poolLadyOctopusInspiredInventor from "../pool/lady-octopus-inspired-inventor.js";
 import _poolLancersEnKor from "../pool/lancers-en-kor.js";
+import _poolLastChance from "../pool/last-chance.js";
 import _poolLeeryFogbeast from "../pool/leery-fogbeast.js";
 import _poolLegionConquistador from "../pool/legion-conquistador.js";
 import _poolLegolasGreenleaf from "../pool/legolas-greenleaf.js";
@@ -499,6 +504,7 @@ import _poolMinasMorgulDarkFortress from "../pool/minas-morgul-dark-fortress.js"
 import _poolMindDrain from "../pool/mind-drain.js";
 import _poolMindwrackLiege from "../pool/mindwrack-liege.js";
 import _poolMirkwoodBats from "../pool/mirkwood-bats.js";
+import _poolMirranSafehouse from "../pool/mirran-safehouse.js";
 import _poolMirrorImage from "../pool/mirror-image.js";
 import _poolMirrorShield from "../pool/mirror-shield.js";
 import _poolMistcutterHydra from "../pool/mistcutter-hydra.js";
@@ -546,6 +552,7 @@ import _poolNighthaze from "../pool/nighthaze.js";
 import _poolNightskyMimic from "../pool/nightsky-mimic.js";
 import _poolNightstalkerEngine from "../pool/nightstalker-engine.js";
 import _poolNivMizzetTheFiremind from "../pool/niv-mizzet-the-firemind.js";
+import _poolNoRestForTheWicked from "../pool/no-rest-for-the-wicked.js";
 import _poolNogiDracoZealot from "../pool/nogi-draco-zealot.js";
 import _poolNullChampion from "../pool/null-champion.js";
 import _poolNullElementalBlast from "../pool/null-elemental-blast.js";
@@ -590,6 +597,7 @@ import _poolPhyrexianRebirth from "../pool/phyrexian-rebirth.js";
 import _poolPhyrexianSkyflayer from "../pool/phyrexian-skyflayer.js";
 import _poolPiannaNomadCaptain from "../pool/pianna-nomad-captain.js";
 import _poolPigmentWrangler from "../pool/pigment-wrangler.js";
+import _poolPilgrimOfJustice from "../pool/pilgrim-of-justice.js";
 import _poolPincerSpider from "../pool/pincer-spider.js";
 import _poolPlanarGenesis from "../pool/planar-genesis.js";
 import _poolPlatedSeastrider from "../pool/plated-seastrider.js";
@@ -762,6 +770,7 @@ import _poolStormfistCrusader from "../pool/stormfist-crusader.js";
 import _poolStreetbreakerWurm from "../pool/streetbreaker-wurm.js";
 import _poolStrengthOfNight from "../pool/strength-of-night.js";
 import _poolStrengthOfTheHarvest from "../pool/strength-of-the-harvest.js";
+import _poolStripBare from "../pool/strip-bare.js";
 import _poolSummonPrimalOdin from "../pool/summon-primal-odin.js";
 import _poolSummonShiva from "../pool/summon-shiva.js";
 import _poolSummonersGrimoire from "../pool/summoners-grimoire.js";
@@ -853,6 +862,7 @@ import _poolUrzasAvenger from "../pool/urzas-avenger.js";
 import _poolUthrosTitanicGodcore from "../pool/uthros-titanic-godcore.js";
 import _poolUtterInsignificance from "../pool/utter-insignificance.js";
 import _poolUyoSilentProphet from "../pool/uyo-silent-prophet.js";
+import _poolVampireBats from "../pool/vampire-bats.js";
 import _poolVampiricEmbrace from "../pool/vampiric-embrace.js";
 import _poolVantressGargoyle from "../pool/vantress-gargoyle.js";
 import _poolVaultOfWhispers from "../pool/vault-of-whispers.js";
@@ -1023,6 +1033,7 @@ const shard: CardShard = {
     _poolBloodmarkMentor,
     _poolBloodsoakedReveler,
     _poolBlueSunsZenith,
+    _poolBoneOffering,
     _poolBonehoard,
     _poolBoneshardSlasher,
     _poolBookBurning,
@@ -1172,6 +1183,7 @@ const shard: CardShard = {
     _poolEmberwildeAugur,
     _poolEmeritusOfWoe,
     _poolEmissaryOfHope,
+    _poolEmpyrialArmor,
     _poolEnchantedEvening,
     _poolEnduringCourage,
     _poolEnduringVitality,
@@ -1360,6 +1372,8 @@ const shard: CardShard = {
     _poolJustFate,
     _poolJusticiarsPortal,
     _poolKangeesLieutenant,
+    _poolKarolinaDeanRunaway,
+    _poolKarplusanStrider,
     _poolKashiTribeElite,
     _poolKaslemsStonetree,
     _poolKedissEmberclawFamiliar,
@@ -1382,6 +1396,7 @@ const shard: CardShard = {
     _poolKyrenGlider,
     _poolLadyOctopusInspiredInventor,
     _poolLancersEnKor,
+    _poolLastChance,
     _poolLeeryFogbeast,
     _poolLegionConquistador,
     _poolLegolasGreenleaf,
@@ -1429,6 +1444,7 @@ const shard: CardShard = {
     _poolMindDrain,
     _poolMindwrackLiege,
     _poolMirkwoodBats,
+    _poolMirranSafehouse,
     _poolMirrorImage,
     _poolMirrorShield,
     _poolMistcutterHydra,
@@ -1476,6 +1492,7 @@ const shard: CardShard = {
     _poolNightskyMimic,
     _poolNightstalkerEngine,
     _poolNivMizzetTheFiremind,
+    _poolNoRestForTheWicked,
     _poolNogiDracoZealot,
     _poolNullChampion,
     _poolNullElementalBlast,
@@ -1520,6 +1537,7 @@ const shard: CardShard = {
     _poolPhyrexianSkyflayer,
     _poolPiannaNomadCaptain,
     _poolPigmentWrangler,
+    _poolPilgrimOfJustice,
     _poolPincerSpider,
     _poolPlanarGenesis,
     _poolPlatedSeastrider,
@@ -1692,6 +1710,7 @@ const shard: CardShard = {
     _poolStreetbreakerWurm,
     _poolStrengthOfNight,
     _poolStrengthOfTheHarvest,
+    _poolStripBare,
     _poolSummonPrimalOdin,
     _poolSummonShiva,
     _poolSummonersGrimoire,
@@ -1783,6 +1802,7 @@ const shard: CardShard = {
     _poolUthrosTitanicGodcore,
     _poolUtterInsignificance,
     _poolUyoSilentProphet,
+    _poolVampireBats,
     _poolVampiricEmbrace,
     _poolVantressGargoyle,
     _poolVaultOfWhispers,

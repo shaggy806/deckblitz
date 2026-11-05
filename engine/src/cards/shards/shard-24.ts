@@ -46,8 +46,10 @@ import _poolArrest from "../pool/arrest.js";
 import _poolAshlingsCommand from "../pool/ashlings-command.js";
 import _poolAssaultronDominator from "../pool/assaultron-dominator.js";
 import _poolAssembleTheEntmoot from "../pool/assemble-the-entmoot.js";
+import _poolAudaciousReshapers from "../pool/audacious-reshapers.js";
 import _poolAuraBarbs from "../pool/aura-barbs.js";
 import _poolAvacynsCollar from "../pool/avacyns-collar.js";
+import _poolAvatarOfGrowth from "../pool/avatar-of-growth.js";
 import _poolAvenEternal from "../pool/aven-eternal.js";
 import _poolAvenFateshaper from "../pool/aven-fateshaper.js";
 import _poolAvenSquire from "../pool/aven-squire.js";
@@ -162,6 +164,7 @@ import _poolConeOfFlame from "../pool/cone-of-flame.js";
 import _poolConfessionDial from "../pool/confession-dial.js";
 import _poolConfidenceFromStrength from "../pool/confidence-from-strength.js";
 import _poolConjurersMantle from "../pool/conjurers-mantle.js";
+import _poolConnectingTheDots from "../pool/connecting-the-dots.js";
 import _poolContainmentMembrane from "../pool/containment-membrane.js";
 import _poolConvalescence from "../pool/convalescence.js";
 import _poolConvolute from "../pool/convolute.js";
@@ -244,6 +247,7 @@ import _poolElementalSpectacle from "../pool/elemental-spectacle.js";
 import _poolEleshNornGrandCenobite from "../pool/elesh-norn-grand-cenobite.js";
 import _poolElvishHunter from "../pool/elvish-hunter.js";
 import _poolElvishVisionary from "../pool/elvish-visionary.js";
+import _poolEmpyrialPlate from "../pool/empyrial-plate.js";
 import _poolEndlessAtlas from "../pool/endless-atlas.js";
 import _poolEndoskeleton from "../pool/endoskeleton.js";
 import _poolEndure from "../pool/endure.js";
@@ -254,6 +258,8 @@ import _poolEntrancingMelody from "../pool/entrancing-melody.js";
 import _poolEntsFury from "../pool/ents-fury.js";
 import _poolErode from "../pool/erode.js";
 import _poolErraticMutation from "../pool/erratic-mutation.js";
+import _poolEtherealWhiskergill from "../pool/ethereal-whiskergill.js";
+import _poolEvenTheScore from "../pool/even-the-score.js";
 import _poolExcruciator from "../pool/excruciator.js";
 import _poolExecute from "../pool/execute.js";
 import _poolExile from "../pool/exile.js";
@@ -447,6 +453,7 @@ import _poolLluwenImperfectNaturalist from "../pool/lluwen-imperfect-naturalist.
 import _poolLoneWolfOfTheNatterknolls from "../pool/lone-wolf-of-the-natterknolls.js";
 import _poolLotusPetal from "../pool/lotus-petal.js";
 import _poolLotusguardDisciple from "../pool/lotusguard-disciple.js";
+import _poolLoxodonSmiter from "../pool/loxodon-smiter.js";
 import _poolLumberknot from "../pool/lumberknot.js";
 import _poolLumithreadField from "../pool/lumithread-field.js";
 import _poolMaestrosCharm from "../pool/maestros-charm.js";
@@ -495,6 +502,7 @@ import _poolMortuary from "../pool/mortuary.js";
 import _poolMostDecrepitOldBird from "../pool/most-decrepit-old-bird.js";
 import _poolMurkfiendLiege from "../pool/murkfiend-liege.js";
 import _poolMycoloth from "../pool/mycoloth.js";
+import _poolMyrAdapter from "../pool/myr-adapter.js";
 import _poolMyrGalvanizer from "../pool/myr-galvanizer.js";
 import _poolMysticDecree from "../pool/mystic-decree.js";
 import _poolNarsetsRebuke from "../pool/narsets-rebuke.js";
@@ -687,9 +695,11 @@ import _poolSkyshroudBlessing from "../pool/skyshroud-blessing.js";
 import _poolSlagFiend from "../pool/slag-fiend.js";
 import _poolSlaveOfBolas from "../pool/slave-of-bolas.js";
 import _poolSlay from "../pool/slay.js";
+import _poolSlipstreamSerpent from "../pool/slipstream-serpent.js";
 import _poolSlitherhead from "../pool/slitherhead.js";
 import _poolSliverLegion from "../pool/sliver-legion.js";
 import _poolSmashToDust from "../pool/smash-to-dust.js";
+import _poolSnowFortress from "../pool/snow-fortress.js";
 import _poolSoShiny from "../pool/so-shiny.js";
 import _poolSojournersCompanion from "../pool/sojourners-companion.js";
 import _poolSokenzanBruiser from "../pool/sokenzan-bruiser.js";
@@ -697,6 +707,7 @@ import _poolSolarion from "../pool/solarion.js";
 import _poolSolsticeZealot from "../pool/solstice-zealot.js";
 import _poolSongOfSerenity from "../pool/song-of-serenity.js";
 import _poolSoothsayerAdept from "../pool/soothsayer-adept.js";
+import _poolSorinMarkov from "../pool/sorin-markov.js";
 import _poolSorinsVengeance from "../pool/sorins-vengeance.js";
 import _poolSoulTithe from "../pool/soul-tithe.js";
 import _poolSparkMage from "../pool/spark-mage.js";
@@ -709,6 +720,7 @@ import _poolSpikeTailedCeratops from "../pool/spike-tailed-ceratops.js";
 import _poolSpikeshotGoblin from "../pool/spikeshot-goblin.js";
 import _poolSpiralingEmbers from "../pool/spiraling-embers.js";
 import _poolSpiresOfOrazca from "../pool/spires-of-orazca.js";
+import _poolSplinterTheMentor from "../pool/splinter-the-mentor.js";
 import _poolSplitTailMiko from "../pool/split-tail-miko.js";
 import _poolSpoilsOfBlood from "../pool/spoils-of-blood.js";
 import _poolSpontaneousFlight from "../pool/spontaneous-flight.js";
@@ -968,8 +980,10 @@ const shard: CardShard = {
     _poolAshlingsCommand,
     _poolAssaultronDominator,
     _poolAssembleTheEntmoot,
+    _poolAudaciousReshapers,
     _poolAuraBarbs,
     _poolAvacynsCollar,
+    _poolAvatarOfGrowth,
     _poolAvenEternal,
     _poolAvenFateshaper,
     _poolAvenSquire,
@@ -1084,6 +1098,7 @@ const shard: CardShard = {
     _poolConfessionDial,
     _poolConfidenceFromStrength,
     _poolConjurersMantle,
+    _poolConnectingTheDots,
     _poolContainmentMembrane,
     _poolConvalescence,
     _poolConvolute,
@@ -1166,6 +1181,7 @@ const shard: CardShard = {
     _poolEleshNornGrandCenobite,
     _poolElvishHunter,
     _poolElvishVisionary,
+    _poolEmpyrialPlate,
     _poolEndlessAtlas,
     _poolEndoskeleton,
     _poolEndure,
@@ -1176,6 +1192,8 @@ const shard: CardShard = {
     _poolEntsFury,
     _poolErode,
     _poolErraticMutation,
+    _poolEtherealWhiskergill,
+    _poolEvenTheScore,
     _poolExcruciator,
     _poolExecute,
     _poolExile,
@@ -1369,6 +1387,7 @@ const shard: CardShard = {
     _poolLoneWolfOfTheNatterknolls,
     _poolLotusPetal,
     _poolLotusguardDisciple,
+    _poolLoxodonSmiter,
     _poolLumberknot,
     _poolLumithreadField,
     _poolMaestrosCharm,
@@ -1417,6 +1436,7 @@ const shard: CardShard = {
     _poolMostDecrepitOldBird,
     _poolMurkfiendLiege,
     _poolMycoloth,
+    _poolMyrAdapter,
     _poolMyrGalvanizer,
     _poolMysticDecree,
     _poolNarsetsRebuke,
@@ -1609,9 +1629,11 @@ const shard: CardShard = {
     _poolSlagFiend,
     _poolSlaveOfBolas,
     _poolSlay,
+    _poolSlipstreamSerpent,
     _poolSlitherhead,
     _poolSliverLegion,
     _poolSmashToDust,
+    _poolSnowFortress,
     _poolSoShiny,
     _poolSojournersCompanion,
     _poolSokenzanBruiser,
@@ -1619,6 +1641,7 @@ const shard: CardShard = {
     _poolSolsticeZealot,
     _poolSongOfSerenity,
     _poolSoothsayerAdept,
+    _poolSorinMarkov,
     _poolSorinsVengeance,
     _poolSoulTithe,
     _poolSparkMage,
@@ -1631,6 +1654,7 @@ const shard: CardShard = {
     _poolSpikeshotGoblin,
     _poolSpiralingEmbers,
     _poolSpiresOfOrazca,
+    _poolSplinterTheMentor,
     _poolSplitTailMiko,
     _poolSpoilsOfBlood,
     _poolSpontaneousFlight,

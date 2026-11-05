@@ -202,6 +202,7 @@ import _poolDragonTyrant from "../pool/dragon-tyrant.js";
 import _poolDragonlordDromoka from "../pool/dragonlord-dromoka.js";
 import _poolDrakewingKrasis from "../pool/drakewing-krasis.js";
 import _poolDreadbringerLampads from "../pool/dreadbringer-lampads.js";
+import _poolDregscapeSliver from "../pool/dregscape-sliver.js";
 import _poolDrizztDourden from "../pool/drizzt-dourden.js";
 import _poolDrogskolArmaments from "../pool/drogskol-armaments.js";
 import _poolDromokaDunecaster from "../pool/dromoka-dunecaster.js";
@@ -248,6 +249,7 @@ import _poolExtinguishTheLight from "../pool/extinguish-the-light.js";
 import _poolEzurisPredation from "../pool/ezuris-predation.js";
 import _poolFadingHope from "../pool/fading-hope.js";
 import _poolFaithOfTheDevoted from "../pool/faith-of-the-devoted.js";
+import _poolFanFavorite from "../pool/fan-favorite.js";
 import _poolFarAway from "../pool/far-away.js";
 import _poolFateTransfer from "../pool/fate-transfer.js";
 import _poolFblthpImpossiblyLost from "../pool/fblthp-impossibly-lost.js";
@@ -322,6 +324,7 @@ import _poolGodsWilling from "../pool/gods-willing.js";
 import _poolGolemFoundry from "../pool/golem-foundry.js";
 import _poolGolgariFindbroker from "../pool/golgari-findbroker.js";
 import _poolGoliathBeetle from "../pool/goliath-beetle.js";
+import _poolGorillaPack from "../pool/gorilla-pack.js";
 import _poolGossamerChains from "../pool/gossamer-chains.js";
 import _poolGrandBallGuest from "../pool/grand-ball-guest.js";
 import _poolGrandMasterOfFlowers from "../pool/grand-master-of-flowers.js";
@@ -485,6 +488,7 @@ import _poolMindMeanderer from "../pool/mind-meanderer.js";
 import _poolMirageMockery from "../pool/mirage-mockery.js";
 import _poolMirrorMockery from "../pool/mirror-mockery.js";
 import _poolMirrorSigilSergeant from "../pool/mirror-sigil-sergeant.js";
+import _poolMisfortunesGain from "../pool/misfortunes-gain.js";
 import _poolMistCloakedHerald from "../pool/mist-cloaked-herald.js";
 import _poolMolderingGymWeightRoom from "../pool/moldering-gym-weight-room.js";
 import _poolMoltenTide from "../pool/molten-tide.js";
@@ -517,6 +521,7 @@ import _poolNephaliaMoondrakes from "../pool/nephalia-moondrakes.js";
 import _poolNetherTraitor from "../pool/nether-traitor.js";
 import _poolNeurokHoversail from "../pool/neurok-hoversail.js";
 import _poolNeutralize from "../pool/neutralize.js";
+import _poolNeverHappened from "../pool/never-happened.js";
 import _poolNightsnare from "../pool/nightsnare.js";
 import _poolNimraiserPaladin from "../pool/nimraiser-paladin.js";
 import _poolNinThePainArtist from "../pool/nin-the-pain-artist.js";
@@ -563,6 +568,7 @@ import _poolPikemen from "../pool/pikemen.js";
 import _poolPilferedPlans from "../pool/pilfered-plans.js";
 import _poolPillarOfTheParuns from "../pool/pillar-of-the-paruns.js";
 import _poolPilloryOfTheSleepless from "../pool/pillory-of-the-sleepless.js";
+import _poolPirateShip from "../pool/pirate-ship.js";
 import _poolPixieQueen from "../pool/pixie-queen.js";
 import _poolPlanarAtlas from "../pool/planar-atlas.js";
 import _poolPlanarDisruption from "../pool/planar-disruption.js";
@@ -658,6 +664,7 @@ import _poolScornfulEgotist from "../pool/scornful-egotist.js";
 import _poolScourgeOfNumai from "../pool/scourge-of-numai.js";
 import _poolScrapCompactor from "../pool/scrap-compactor.js";
 import _poolScreamingSeahawk from "../pool/screaming-seahawk.js";
+import _poolSeaMonster from "../pool/sea-monster.js";
 import _poolSeahunter from "../pool/seahunter.js";
 import _poolSealOfDoom from "../pool/seal-of-doom.js";
 import _poolSeance from "../pool/seance.js";
@@ -677,6 +684,7 @@ import _poolSetonsDesire from "../pool/setons-desire.js";
 import _poolShackleSlinger from "../pool/shackle-slinger.js";
 import _poolShangChiMartialMentor from "../pool/shang-chi-martial-mentor.js";
 import _poolShanodinDryads from "../pool/shanodin-dryads.js";
+import _poolSharedTrauma from "../pool/shared-trauma.js";
 import _poolShatteredAcolyte from "../pool/shattered-acolyte.js";
 import _poolShatteredLandscape from "../pool/shattered-landscape.js";
 import _poolShefetArchfiend from "../pool/shefet-archfiend.js";
@@ -699,6 +707,7 @@ import _poolSilvergillDouser from "../pool/silvergill-douser.js";
 import _poolSilverskinArmor from "../pool/silverskin-armor.js";
 import _poolSilverstrike from "../pool/silverstrike.js";
 import _poolSimicLocket from "../pool/simic-locket.js";
+import _poolSingingTree from "../pool/singing-tree.js";
 import _poolSivrissNightmareSpeaker from "../pool/sivriss-nightmare-speaker.js";
 import _poolSkeletalChangeling from "../pool/skeletal-changeling.js";
 import _poolSkred from "../pool/skred.js";
@@ -1130,6 +1139,7 @@ const shard: CardShard = {
     _poolDragonlordDromoka,
     _poolDrakewingKrasis,
     _poolDreadbringerLampads,
+    _poolDregscapeSliver,
     _poolDrizztDourden,
     _poolDrogskolArmaments,
     _poolDromokaDunecaster,
@@ -1176,6 +1186,7 @@ const shard: CardShard = {
     _poolEzurisPredation,
     _poolFadingHope,
     _poolFaithOfTheDevoted,
+    _poolFanFavorite,
     _poolFarAway,
     _poolFateTransfer,
     _poolFblthpImpossiblyLost,
@@ -1250,6 +1261,7 @@ const shard: CardShard = {
     _poolGolemFoundry,
     _poolGolgariFindbroker,
     _poolGoliathBeetle,
+    _poolGorillaPack,
     _poolGossamerChains,
     _poolGrandBallGuest,
     _poolGrandMasterOfFlowers,
@@ -1413,6 +1425,7 @@ const shard: CardShard = {
     _poolMirageMockery,
     _poolMirrorMockery,
     _poolMirrorSigilSergeant,
+    _poolMisfortunesGain,
     _poolMistCloakedHerald,
     _poolMolderingGymWeightRoom,
     _poolMoltenTide,
@@ -1445,6 +1458,7 @@ const shard: CardShard = {
     _poolNetherTraitor,
     _poolNeurokHoversail,
     _poolNeutralize,
+    _poolNeverHappened,
     _poolNightsnare,
     _poolNimraiserPaladin,
     _poolNinThePainArtist,
@@ -1491,6 +1505,7 @@ const shard: CardShard = {
     _poolPilferedPlans,
     _poolPillarOfTheParuns,
     _poolPilloryOfTheSleepless,
+    _poolPirateShip,
     _poolPixieQueen,
     _poolPlanarAtlas,
     _poolPlanarDisruption,
@@ -1586,6 +1601,7 @@ const shard: CardShard = {
     _poolScourgeOfNumai,
     _poolScrapCompactor,
     _poolScreamingSeahawk,
+    _poolSeaMonster,
     _poolSeahunter,
     _poolSealOfDoom,
     _poolSeance,
@@ -1605,6 +1621,7 @@ const shard: CardShard = {
     _poolShackleSlinger,
     _poolShangChiMartialMentor,
     _poolShanodinDryads,
+    _poolSharedTrauma,
     _poolShatteredAcolyte,
     _poolShatteredLandscape,
     _poolShefetArchfiend,
@@ -1627,6 +1644,7 @@ const shard: CardShard = {
     _poolSilverskinArmor,
     _poolSilverstrike,
     _poolSimicLocket,
+    _poolSingingTree,
     _poolSivrissNightmareSpeaker,
     _poolSkeletalChangeling,
     _poolSkred,

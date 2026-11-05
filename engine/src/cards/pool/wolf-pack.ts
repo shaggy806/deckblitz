@@ -1,0 +1,21 @@
+import { defineCard } from "../define.js";
+
+// EDHREC rank 27734.
+
+export default defineCard({
+  name: "Wolf Pack",
+  manaCost: "{6}{G}{G}",
+  colors: ["G"],
+  types: ["creature"],
+  subtypes: ["Wolf"],
+  power: 7,
+  toughness: 6,
+  text: "You may have this creature assign its combat damage as though it weren't blocked.",
+  static: [
+    {
+      affects: { scope: "self" },
+      assignAsThoughUnblocked: true,
+      text: "You may have this creature assign its combat damage as though it weren't blocked.",
+    },
+  ],
+});

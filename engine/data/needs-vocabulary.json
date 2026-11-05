@@ -14575,6 +14575,31 @@
    "description": "A would-deal-damage replacement scoped to \"the chosen player or a permanent they control\": its `to` has no chosen-player value and toFilter never matches a player.",
    "example": "Sawhorn Nemesis: if a source would deal damage to the chosen player or a permanent they control, it deals double"
   },
+  "effect:text-change-token-colors": {
+   "family": "effect:text-change-color-or-land-words",
+   "description": "A token made by changed text takes the changed colour word (rules 612.1, 612.4): create-token uses its token definition's colours, whatever the text now says.",
+   "example": "Glamerdye: a permanent's \"create a white Soldier\" changed to \"blue\" still makes a white token"
+  },
+  "static:cant-be-targeted-by-source-controllers-opponents": {
+   "family": "keyword:hexproof-from-colors",
+   "description": "\"Can't be the target of spells or abilities your opponents control\" judged from the Aura's controller: hexproofFrom judges from the enchanted creature's controller.",
+   "example": "Shielding Plax: on an opponent's creature, its effect comes out reversed"
+  },
+  "replacement:land-mana-instead-tapper-chooses": {
+   "family": "replacement:land-mana-type-replacement",
+   "description": "A land with two basic types under land-mana replacements lets its tapper choose the colour: landManaInsteadFor keeps one entry per land.",
+   "example": "Naked Singularity: a Plains Island tapped for mana, red or blue by the ruling"
+  },
+  "replacement:prevent-damage-by-spell-or-permanent-it-becomes": {
+   "family": "replacement:damage-modification",
+   "description": "damage-rule's prevention following a permanent spell onto the battlefield: addDamageRule never sets the shield's orBecomes.",
+   "example": "Shieldmage Elder: the target spell becomes a permanent, whose damage this turn is prevented too"
+  },
+  "mechanic:opening-hand-enter-choice": {
+   "family": "new:leyline-opening-hand",
+   "description": "An as-enters choice for a card begun on the battlefield: applyOpeningHand moves it with a bare moveObject, and only askEnterChoice asks.",
+   "example": "Leyline of Transformation: begun on the battlefield it never chooses a creature type"
+  },
   "decision:choose-two-players-on-enter": {
    "family": "decision:choose-player",
    "description": "Two different players chosen as it enters: choosePlayerOnEnter keeps one, and nothing reads \"the other chosen player\".",

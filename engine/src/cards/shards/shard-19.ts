@@ -39,6 +39,7 @@ import _poolArashinCleric from "../pool/arashin-cleric.js";
 import _poolArboretumElemental from "../pool/arboretum-elemental.js";
 import _poolArcaneMelee from "../pool/arcane-melee.js";
 import _poolArcboundSlasher from "../pool/arcbound-slasher.js";
+import _poolArchetypeOfAggression from "../pool/archetype-of-aggression.js";
 import _poolArgothSanctumOfNature from "../pool/argoth-sanctum-of-nature.js";
 import _poolArmedResponse from "../pool/armed-response.js";
 import _poolArmillarySphere from "../pool/armillary-sphere.js";
@@ -57,6 +58,7 @@ import _poolBalemurkLeech from "../pool/balemurk-leech.js";
 import _poolBallynockCohort from "../pool/ballynock-cohort.js";
 import _poolBanishingSlash from "../pool/banishing-slash.js";
 import _poolBarbarianHorde from "../pool/barbarian-horde.js";
+import _poolBarkweaveCrusher from "../pool/barkweave-crusher.js";
 import _poolBarteredCow from "../pool/bartered-cow.js";
 import _poolBasalSliver from "../pool/basal-sliver.js";
 import _poolBattleAngelsOfTyr from "../pool/battle-angels-of-tyr.js";
@@ -157,6 +159,7 @@ import _poolClockworkDragon from "../pool/clockwork-dragon.js";
 import _poolCloudDjinn from "../pool/cloud-djinn.js";
 import _poolCloudSpirit from "../pool/cloud-spirit.js";
 import _poolCloutOfTheDominus from "../pool/clout-of-the-dominus.js";
+import _poolCoalitionSkyknight from "../pool/coalition-skyknight.js";
 import _poolCoastalPeak from "../pool/coastal-peak.js";
 import _poolColorstormStallion from "../pool/colorstorm-stallion.js";
 import _poolColossusOfSardia from "../pool/colossus-of-sardia.js";
@@ -199,6 +202,7 @@ import _poolDarkRemedy from "../pool/dark-remedy.js";
 import _poolDarkwaterCatacombs from "../pool/darkwater-catacombs.js";
 import _poolDawngladeRegent from "../pool/dawnglade-regent.js";
 import _poolDaze from "../pool/daze.js";
+import _poolDeadlyVanity from "../pool/deadly-vanity.js";
 import _poolDeathknellKami from "../pool/deathknell-kami.js";
 import _poolDecanterOfEndlessWater from "../pool/decanter-of-endless-water.js";
 import _poolDecimatorWeb from "../pool/decimator-web.js";
@@ -350,6 +354,7 @@ import _poolGlaciers from "../pool/glaciers.js";
 import _poolGlassGolem from "../pool/glass-golem.js";
 import _poolGlimpseOfFreedom from "../pool/glimpse-of-freedom.js";
 import _poolGlistenerElf from "../pool/glistener-elf.js";
+import _poolGlyphOfDoom from "../pool/glyph-of-doom.js";
 import _poolGoblinGlider from "../pool/goblin-glider.js";
 import _poolGoblinHeelcutter from "../pool/goblin-heelcutter.js";
 import _poolGoblinLookout from "../pool/goblin-lookout.js";
@@ -426,6 +431,7 @@ import _poolImmortalCoil from "../pool/immortal-coil.js";
 import _poolImpale from "../pool/impale.js";
 import _poolImplode from "../pool/implode.js";
 import _poolImpostorSyndrome from "../pool/impostor-syndrome.js";
+import _poolInciteWar from "../pool/incite-war.js";
 import _poolIncreasingAmbition from "../pool/increasing-ambition.js";
 import _poolInfernalHarvest from "../pool/infernal-harvest.js";
 import _poolInfernoJet from "../pool/inferno-jet.js";
@@ -495,7 +501,9 @@ import _poolLifeOfTheParty from "../pool/life-of-the-party.js";
 import _poolLifecraftersBestiary from "../pool/lifecrafters-bestiary.js";
 import _poolLifelink from "../pool/lifelink.js";
 import _poolLightningMauler from "../pool/lightning-mauler.js";
+import _poolLinebreakerBaloth from "../pool/linebreaker-baloth.js";
 import _poolLlanowarAugur from "../pool/llanowar-augur.js";
+import _poolLoneWolf from "../pool/lone-wolf.js";
 import _poolLoranDiscipleOfHistory from "../pool/loran-disciple-of-history.js";
 import _poolLoreWeaver from "../pool/lore-weaver.js";
 import _poolLoreholdCharm from "../pool/lorehold-charm.js";
@@ -725,6 +733,7 @@ import _poolScholarOfTheAges from "../pool/scholar-of-the-ages.js";
 import _poolScionOfOona from "../pool/scion-of-oona.js";
 import _poolScorchedRuins from "../pool/scorched-ruins.js";
 import _poolScorchedRusalka from "../pool/scorched-rusalka.js";
+import _poolScour from "../pool/scour.js";
 import _poolScreamPuff from "../pool/scream-puff.js";
 import _poolScreechingDrake from "../pool/screeching-drake.js";
 import _poolScuttlingDoomEngine from "../pool/scuttling-doom-engine.js";
@@ -1012,6 +1021,7 @@ const shard: CardShard = {
     _poolArboretumElemental,
     _poolArcaneMelee,
     _poolArcboundSlasher,
+    _poolArchetypeOfAggression,
     _poolArgothSanctumOfNature,
     _poolArmedResponse,
     _poolArmillarySphere,
@@ -1030,6 +1040,7 @@ const shard: CardShard = {
     _poolBallynockCohort,
     _poolBanishingSlash,
     _poolBarbarianHorde,
+    _poolBarkweaveCrusher,
     _poolBarteredCow,
     _poolBasalSliver,
     _poolBattleAngelsOfTyr,
@@ -1130,6 +1141,7 @@ const shard: CardShard = {
     _poolCloudDjinn,
     _poolCloudSpirit,
     _poolCloutOfTheDominus,
+    _poolCoalitionSkyknight,
     _poolCoastalPeak,
     _poolColorstormStallion,
     _poolColossusOfSardia,
@@ -1172,6 +1184,7 @@ const shard: CardShard = {
     _poolDarkwaterCatacombs,
     _poolDawngladeRegent,
     _poolDaze,
+    _poolDeadlyVanity,
     _poolDeathknellKami,
     _poolDecanterOfEndlessWater,
     _poolDecimatorWeb,
@@ -1323,6 +1336,7 @@ const shard: CardShard = {
     _poolGlassGolem,
     _poolGlimpseOfFreedom,
     _poolGlistenerElf,
+    _poolGlyphOfDoom,
     _poolGoblinGlider,
     _poolGoblinHeelcutter,
     _poolGoblinLookout,
@@ -1399,6 +1413,7 @@ const shard: CardShard = {
     _poolImpale,
     _poolImplode,
     _poolImpostorSyndrome,
+    _poolInciteWar,
     _poolIncreasingAmbition,
     _poolInfernalHarvest,
     _poolInfernoJet,
@@ -1468,7 +1483,9 @@ const shard: CardShard = {
     _poolLifecraftersBestiary,
     _poolLifelink,
     _poolLightningMauler,
+    _poolLinebreakerBaloth,
     _poolLlanowarAugur,
+    _poolLoneWolf,
     _poolLoranDiscipleOfHistory,
     _poolLoreWeaver,
     _poolLoreholdCharm,
@@ -1698,6 +1715,7 @@ const shard: CardShard = {
     _poolScionOfOona,
     _poolScorchedRuins,
     _poolScorchedRusalka,
+    _poolScour,
     _poolScreamPuff,
     _poolScreechingDrake,
     _poolScuttlingDoomEngine,
