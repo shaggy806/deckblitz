@@ -917,6 +917,7 @@ missing. Re-run `--greedy` for Phase 2's order.
 - **2026-11-05: `author-freed`, batch 259.** 111 of the queue's next 150 authored, 39 given narrow keys, by agents of 75 and 74 cards with a blind reader over all of it; 832 left.
 - **2026-11-05: `author-freed`, batch 260.** 125 of the queue's next 150 authored, 25 given narrow keys (seven on `mechanic:face-down`'s), by two agents of 75 with a blind reader that found nothing wrong; 682 left.
 - **2026-11-05: `author-freed`, batch 261.** 102 of the queue's next 150 authored, 48 given 43 narrow keys (eleven under `zone:graveyard-cast-permissions`, five under `static:grant-static-ability`), by two agents of 75 with a blind reader that found nothing wrong; 532 left. The rest goes to parallel cloud sessions on frozen lists (the user's call).
+- **2026-11-05: `author-freed`, batch 262 (frozen list F1).** 94 of 131 authored, 37 given 36 narrow keys, by two agents of 66 and 65 with a blind reader (who found only Lurrus's X reading); the lead authored Memory Vessel, Katilda, Dawnhart Martyr and Ral, Monsoon Mage.
 - **2026-11-05: `author-freed`, batch 263 (frozen list F2 of the parallel round).** 108 of 133 authored, 25 given narrow keys (22 new; three under `cost:mana-spending-rules`, two under `cost:choose-cards-as-cost`); three engine fixes (a delayed `perCard` discard watch, `nextSpell` read without its source, `choose-permanents` without its source).
 
 ## Rough size

@@ -14,6 +14,7 @@ import _poolAegarTheFreezingFlame from "../pool/aegar-the-freezing-flame.js";
 import _poolAerialModification from "../pool/aerial-modification.js";
 import _poolAetherMembrane from "../pool/aether-membrane.js";
 import _poolAetherTradewinds from "../pool/aether-tradewinds.js";
+import _poolAggressiveBiomancy from "../pool/aggressive-biomancy.js";
 import _poolAirbendersReversal from "../pool/airbenders-reversal.js";
 import _poolAirborneAid from "../pool/airborne-aid.js";
 import _poolAjaniAdversaryOfTyrants from "../pool/ajani-adversary-of-tyrants.js";
@@ -978,6 +979,7 @@ const shard: CardShard = {
     _poolAerialModification,
     _poolAetherMembrane,
     _poolAetherTradewinds,
+    _poolAggressiveBiomancy,
     _poolAirbendersReversal,
     _poolAirborneAid,
     _poolAjaniAdversaryOfTyrants,

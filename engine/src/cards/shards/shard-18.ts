@@ -79,6 +79,7 @@ import _poolBogBadger from "../pool/bog-badger.js";
 import _poolBogardanLancer from "../pool/bogardan-lancer.js";
 import _poolBoldwyrIntimidator from "../pool/boldwyr-intimidator.js";
 import _poolBomatBazaarBarge from "../pool/bomat-bazaar-barge.js";
+import _poolBoneDancer from "../pool/bone-dancer.js";
 import _poolBonePitBrute from "../pool/bone-pit-brute.js";
 import _poolBoneSaw from "../pool/bone-saw.js";
 import _poolBoonweaverGiant from "../pool/boonweaver-giant.js";
@@ -163,6 +164,7 @@ import _poolCyclopeanGiant from "../pool/cyclopean-giant.js";
 import _poolCyclopsSuperconductor from "../pool/cyclops-superconductor.js";
 import _poolDakmorGhoul from "../pool/dakmor-ghoul.js";
 import _poolDalkovanPackbeasts from "../pool/dalkovan-packbeasts.js";
+import _poolDampingMatrix from "../pool/damping-matrix.js";
 import _poolDaruMender from "../pool/daru-mender.js";
 import _poolDeathbringerLiege from "../pool/deathbringer-liege.js";
 import _poolDeathknellBerserker from "../pool/deathknell-berserker.js";
@@ -483,6 +485,7 @@ import _poolMichikosReignOfTruth from "../pool/michikos-reign-of-truth.js";
 import _poolMiglozMazeCrusher from "../pool/migloz-maze-crusher.js";
 import _poolMillicentRestlessRevenant from "../pool/millicent-restless-revenant.js";
 import _poolMimingSlime from "../pool/miming-slime.js";
+import _poolMindFuneral from "../pool/mind-funeral.js";
 import _poolMindOverMatter from "../pool/mind-over-matter.js";
 import _poolMindspringMerfolk from "../pool/mindspring-merfolk.js";
 import _poolMindstabThrull from "../pool/mindstab-thrull.js";
@@ -921,6 +924,7 @@ import _poolYshtolaNightsBlessed from "../pool/yshtola-nights-blessed.js";
 import _poolYuanShaosInfantry from "../pool/yuan-shaos-infantry.js";
 import _poolYukiOnna from "../pool/yuki-onna.js";
 import _poolZaxaraTheExemplary from "../pool/zaxara-the-exemplary.js";
+import _poolZenithChronicler from "../pool/zenith-chronicler.js";
 import _poolZimoneAndDina from "../pool/zimone-and-dina.js";
 import _poolZodiacRat from "../pool/zodiac-rat.js";
 import _poolZooEscapees from "../pool/zoo-escapees.js";
@@ -931,6 +935,7 @@ import _tokensCatTokenJolraelMwonvuliRecluse from "../tokens/cat-token-jolrael-m
 import _tokensCatToken from "../tokens/cat-token.js";
 import _tokensFaerieRogueToken from "../tokens/faerie-rogue-token.js";
 import _tokensFishTokenReefWorm from "../tokens/fish-token-reef-worm.js";
+import _tokensFrogToken from "../tokens/frog-token.js";
 import _tokensGolemTokenMastersGuideMuralMastersManufactory from "../tokens/golem-token-masters-guide-mural-masters-manufactory.js";
 import _tokensHumanKnightToken from "../tokens/human-knight-token.js";
 import _tokensInklingToken from "../tokens/inkling-token.js";
@@ -1030,6 +1035,7 @@ const shard: CardShard = {
     _poolBogardanLancer,
     _poolBoldwyrIntimidator,
     _poolBomatBazaarBarge,
+    _poolBoneDancer,
     _poolBonePitBrute,
     _poolBoneSaw,
     _poolBoonweaverGiant,
@@ -1114,6 +1120,7 @@ const shard: CardShard = {
     _poolCyclopsSuperconductor,
     _poolDakmorGhoul,
     _poolDalkovanPackbeasts,
+    _poolDampingMatrix,
     _poolDaruMender,
     _poolDeathbringerLiege,
     _poolDeathknellBerserker,
@@ -1434,6 +1441,7 @@ const shard: CardShard = {
     _poolMiglozMazeCrusher,
     _poolMillicentRestlessRevenant,
     _poolMimingSlime,
+    _poolMindFuneral,
     _poolMindOverMatter,
     _poolMindspringMerfolk,
     _poolMindstabThrull,
@@ -1872,6 +1880,7 @@ const shard: CardShard = {
     _poolYuanShaosInfantry,
     _poolYukiOnna,
     _poolZaxaraTheExemplary,
+    _poolZenithChronicler,
     _poolZimoneAndDina,
     _poolZodiacRat,
     _poolZooEscapees,
@@ -1884,6 +1893,7 @@ const shard: CardShard = {
     _tokensCatToken,
     _tokensFaerieRogueToken,
     _tokensFishTokenReefWorm,
+    _tokensFrogToken,
     _tokensGolemTokenMastersGuideMuralMastersManufactory,
     _tokensHumanKnightToken,
     _tokensInklingToken,

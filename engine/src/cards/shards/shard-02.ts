@@ -361,6 +361,7 @@ import _poolGuardianOfTheForgotten from "../pool/guardian-of-the-forgotten.js";
 import _poolGuardianOfTheGateless from "../pool/guardian-of-the-gateless.js";
 import _poolGwendlynDiCorci from "../pool/gwendlyn-di-corci.js";
 import _poolHalvarGodOfBattle from "../pool/halvar-god-of-battle.js";
+import _poolHandToHand from "../pool/hand-to-hand.js";
 import _poolHangarScrounger from "../pool/hangar-scrounger.js";
 import _poolHanweirMilitiaCaptain from "../pool/hanweir-militia-captain.js";
 import _poolHarshDeceiver from "../pool/harsh-deceiver.js";
@@ -410,6 +411,7 @@ import _poolInsideSource from "../pool/inside-source.js";
 import _poolIntoTheVoid from "../pool/into-the-void.js";
 import _poolIntuition from "../pool/intuition.js";
 import _poolInvasionOfKaladesh from "../pool/invasion-of-kaladesh.js";
+import _poolInvasionOfTheGiants from "../pool/invasion-of-the-giants.js";
 import _poolInventorsAxe from "../pool/inventors-axe.js";
 import _poolInvigoratingBoon from "../pool/invigorating-boon.js";
 import _poolInvigoratingFalls from "../pool/invigorating-falls.js";
@@ -445,6 +447,7 @@ import _poolKirtarsWrath from "../pool/kirtars-wrath.js";
 import _poolKitesailApprentice from "../pool/kitesail-apprentice.js";
 import _poolKnightOfDusk from "../pool/knight-of-dusk.js";
 import _poolKnightOfStromgald from "../pool/knight-of-stromgald.js";
+import _poolKnightOfTheHolyNimbus from "../pool/knight-of-the-holy-nimbus.js";
 import _poolKnighthood from "../pool/knighthood.js";
 import _poolKomaCosmosSerpent from "../pool/koma-cosmos-serpent.js";
 import _poolKomasFaithful from "../pool/komas-faithful.js";
@@ -479,6 +482,7 @@ import _poolLostInTheMist from "../pool/lost-in-the-mist.js";
 import _poolLoxodonRestorer from "../pool/loxodon-restorer.js";
 import _poolLoyalPegasus from "../pool/loyal-pegasus.js";
 import _poolLumberingWorldwagon from "../pool/lumbering-worldwagon.js";
+import _poolLurker from "../pool/lurker.js";
 import _poolLyraTolarianArchangel from "../pool/lyra-tolarian-archangel.js";
 import _poolMadameHydra from "../pool/madame-hydra.js";
 import _poolMadrushCyclops from "../pool/madrush-cyclops.js";
@@ -576,6 +580,7 @@ import _poolPeculiarLighthouse from "../pool/peculiar-lighthouse.js";
 import _poolPenumbraWurm from "../pool/penumbra-wurm.js";
 import _poolPerilousVault from "../pool/perilous-vault.js";
 import _poolPerishTheThought from "../pool/perish-the-thought.js";
+import _poolPersistentPetitioners from "../pool/persistent-petitioners.js";
 import _poolPewterGolem from "../pool/pewter-golem.js";
 import _poolPhalanxLeader from "../pool/phalanx-leader.js";
 import _poolPharagaxGiant from "../pool/pharagax-giant.js";
@@ -1307,6 +1312,7 @@ const shard: CardShard = {
     _poolGuardianOfTheGateless,
     _poolGwendlynDiCorci,
     _poolHalvarGodOfBattle,
+    _poolHandToHand,
     _poolHangarScrounger,
     _poolHanweirMilitiaCaptain,
     _poolHarshDeceiver,
@@ -1356,6 +1362,7 @@ const shard: CardShard = {
     _poolIntoTheVoid,
     _poolIntuition,
     _poolInvasionOfKaladesh,
+    _poolInvasionOfTheGiants,
     _poolInventorsAxe,
     _poolInvigoratingBoon,
     _poolInvigoratingFalls,
@@ -1391,6 +1398,7 @@ const shard: CardShard = {
     _poolKitesailApprentice,
     _poolKnightOfDusk,
     _poolKnightOfStromgald,
+    _poolKnightOfTheHolyNimbus,
     _poolKnighthood,
     _poolKomaCosmosSerpent,
     _poolKomasFaithful,
@@ -1425,6 +1433,7 @@ const shard: CardShard = {
     _poolLoxodonRestorer,
     _poolLoyalPegasus,
     _poolLumberingWorldwagon,
+    _poolLurker,
     _poolLyraTolarianArchangel,
     _poolMadameHydra,
     _poolMadrushCyclops,
@@ -1522,6 +1531,7 @@ const shard: CardShard = {
     _poolPenumbraWurm,
     _poolPerilousVault,
     _poolPerishTheThought,
+    _poolPersistentPetitioners,
     _poolPewterGolem,
     _poolPhalanxLeader,
     _poolPharagaxGiant,

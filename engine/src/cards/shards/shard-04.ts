@@ -36,6 +36,7 @@ import _poolAtarkaMonument from "../pool/atarka-monument.js";
 import _poolAthreosShroudVeiled from "../pool/athreos-shroud-veiled.js";
 import _poolAtraxaGrandUnifier from "../pool/atraxa-grand-unifier.js";
 import _poolAtraxasSkitterfang from "../pool/atraxas-skitterfang.js";
+import _poolAugustaOrderReturned from "../pool/augusta-order-returned.js";
 import _poolAuntiesSnitch from "../pool/aunties-snitch.js";
 import _poolAuroralProcession from "../pool/auroral-procession.js";
 import _poolAutomatedArtificer from "../pool/automated-artificer.js";
@@ -336,6 +337,7 @@ import _poolHarabazDruid from "../pool/harabaz-druid.js";
 import _poolHaraldKingOfSkemfar from "../pool/harald-king-of-skemfar.js";
 import _poolHardHittingQuestion from "../pool/hard-hitting-question.js";
 import _poolHardlightContainment from "../pool/hardlight-containment.js";
+import _poolHareApparent from "../pool/hare-apparent.js";
 import _poolHazardousConditions from "../pool/hazardous-conditions.js";
 import _poolHazeriderDrake from "../pool/hazerider-drake.js";
 import _poolHeadlessSkaab from "../pool/headless-skaab.js";
@@ -443,6 +445,7 @@ import _poolLeadersTalent from "../pool/leaders-talent.js";
 import _poolLeafcrownDryad from "../pool/leafcrown-dryad.js";
 import _poolLeavesFromTheVine from "../pool/leaves-from-the-vine.js";
 import _poolLesserMasticore from "../pool/lesser-masticore.js";
+import _poolLeylineOfResonance from "../pool/leyline-of-resonance.js";
 import _poolLiability from "../pool/liability.js";
 import _poolLichsRelic from "../pool/lichs-relic.js";
 import _poolLifeMatrix from "../pool/life-matrix.js";
@@ -460,6 +463,7 @@ import _poolLordWindgrace from "../pool/lord-windgrace.js";
 import _poolLotlethTroll from "../pool/lotleth-troll.js";
 import _poolLotuslightDancers from "../pool/lotuslight-dancers.js";
 import _poolLoyalSubordinate from "../pool/loyal-subordinate.js";
+import _poolLutriTheSpellchaser from "../pool/lutri-the-spellchaser.js";
 import _poolLuxArtillery from "../pool/lux-artillery.js";
 import _poolLuxiorGiadasGift from "../pool/luxior-giadas-gift.js";
 import _poolMacabreWaltz from "../pool/macabre-waltz.js";
@@ -698,6 +702,7 @@ import _poolSkitteringSkirge from "../pool/skittering-skirge.js";
 import _poolSkyTerror from "../pool/sky-terror.js";
 import _poolSkybladesBoon from "../pool/skyblades-boon.js";
 import _poolSkyblinderStaff from "../pool/skyblinder-staff.js";
+import _poolSkyserpentSeeker from "../pool/skyserpent-seeker.js";
 import _poolSkystinger from "../pool/skystinger.js";
 import _poolSlashOfTalons from "../pool/slash-of-talons.js";
 import _poolSlaughterTheStrong from "../pool/slaughter-the-strong.js";
@@ -715,6 +720,7 @@ import _poolSonicAssault from "../pool/sonic-assault.js";
 import _poolSonicShrieker from "../pool/sonic-shrieker.js";
 import _poolSorinSolemnVisitor from "../pool/sorin-solemn-visitor.js";
 import _poolSoulNova from "../pool/soul-nova.js";
+import _poolSoulRansom from "../pool/soul-ransom.js";
 import _poolSoulSpike from "../pool/soul-spike.js";
 import _poolSparringMummy from "../pool/sparring-mummy.js";
 import _poolSpectralBinding from "../pool/spectral-binding.js";
@@ -896,6 +902,7 @@ import _poolWhispersilkCloak from "../pool/whispersilk-cloak.js";
 import _poolWhiteGloveGourmand from "../pool/white-glove-gourmand.js";
 import _poolWickedVisitor from "../pool/wicked-visitor.js";
 import _poolWildGuess from "../pool/wild-guess.js";
+import _poolWildfireDevils from "../pool/wildfire-devils.js";
 import _poolWildwoodTracker from "../pool/wildwood-tracker.js";
 import _poolWingSplicer from "../pool/wing-splicer.js";
 import _poolWingsOfVelisVel from "../pool/wings-of-velis-vel.js";
@@ -974,6 +981,7 @@ const shard: CardShard = {
     _poolAthreosShroudVeiled,
     _poolAtraxaGrandUnifier,
     _poolAtraxasSkitterfang,
+    _poolAugustaOrderReturned,
     _poolAuntiesSnitch,
     _poolAuroralProcession,
     _poolAutomatedArtificer,
@@ -1274,6 +1282,7 @@ const shard: CardShard = {
     _poolHaraldKingOfSkemfar,
     _poolHardHittingQuestion,
     _poolHardlightContainment,
+    _poolHareApparent,
     _poolHazardousConditions,
     _poolHazeriderDrake,
     _poolHeadlessSkaab,
@@ -1381,6 +1390,7 @@ const shard: CardShard = {
     _poolLeafcrownDryad,
     _poolLeavesFromTheVine,
     _poolLesserMasticore,
+    _poolLeylineOfResonance,
     _poolLiability,
     _poolLichsRelic,
     _poolLifeMatrix,
@@ -1398,6 +1408,7 @@ const shard: CardShard = {
     _poolLotlethTroll,
     _poolLotuslightDancers,
     _poolLoyalSubordinate,
+    _poolLutriTheSpellchaser,
     _poolLuxArtillery,
     _poolLuxiorGiadasGift,
     _poolMacabreWaltz,
@@ -1636,6 +1647,7 @@ const shard: CardShard = {
     _poolSkyTerror,
     _poolSkybladesBoon,
     _poolSkyblinderStaff,
+    _poolSkyserpentSeeker,
     _poolSkystinger,
     _poolSlashOfTalons,
     _poolSlaughterTheStrong,
@@ -1653,6 +1665,7 @@ const shard: CardShard = {
     _poolSonicShrieker,
     _poolSorinSolemnVisitor,
     _poolSoulNova,
+    _poolSoulRansom,
     _poolSoulSpike,
     _poolSparringMummy,
     _poolSpectralBinding,
@@ -1834,6 +1847,7 @@ const shard: CardShard = {
     _poolWhiteGloveGourmand,
     _poolWickedVisitor,
     _poolWildGuess,
+    _poolWildfireDevils,
     _poolWildwoodTracker,
     _poolWingSplicer,
     _poolWingsOfVelisVel,

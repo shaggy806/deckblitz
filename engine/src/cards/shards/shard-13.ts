@@ -147,6 +147,7 @@ import _poolCinderGiant from "../pool/cinder-giant.js";
 import _poolClackbridgeTroll from "../pool/clackbridge-troll.js";
 import _poolClamorShaman from "../pool/clamor-shaman.js";
 import _poolCleavingSliver from "../pool/cleaving-sliver.js";
+import _poolClergyOfTheHolyNimbus from "../pool/clergy-of-the-holy-nimbus.js";
 import _poolCloakwoodHermit from "../pool/cloakwood-hermit.js";
 import _poolCloudfinRaptor from "../pool/cloudfin-raptor.js";
 import _poolCloudreaderSphinx from "../pool/cloudreader-sphinx.js";
@@ -404,6 +405,7 @@ import _poolJuniperOrderRanger from "../pool/juniper-order-ranger.js";
 import _poolKaervekTheSpiteful from "../pool/kaervek-the-spiteful.js";
 import _poolKamahlsDruidicVow from "../pool/kamahls-druidic-vow.js";
 import _poolKashiTribeReaver from "../pool/kashi-tribe-reaver.js";
+import _poolKatildaDawnhartMartyr from "../pool/katilda-dawnhart-martyr.js";
 import _poolKeenGlidemaster from "../pool/keen-glidemaster.js";
 import _poolKeeperOfSecrets from "../pool/keeper-of-secrets.js";
 import _poolKeeperOfTheMind from "../pool/keeper-of-the-mind.js";
@@ -486,6 +488,7 @@ import _poolMoggSquad from "../pool/mogg-squad.js";
 import _poolMomentOfHeroism from "../pool/moment-of-heroism.js";
 import _poolMonstrousCarabid from "../pool/monstrous-carabid.js";
 import _poolMonstrousStep from "../pool/monstrous-step.js";
+import _poolMoonhold from "../pool/moonhold.js";
 import _poolMoonmist from "../pool/moonmist.js";
 import _poolMoonrageBrute from "../pool/moonrage-brute.js";
 import _poolMorphling from "../pool/morphling.js";
@@ -1077,6 +1080,7 @@ const shard: CardShard = {
     _poolClackbridgeTroll,
     _poolClamorShaman,
     _poolCleavingSliver,
+    _poolClergyOfTheHolyNimbus,
     _poolCloakwoodHermit,
     _poolCloudfinRaptor,
     _poolCloudreaderSphinx,
@@ -1334,6 +1338,7 @@ const shard: CardShard = {
     _poolKaervekTheSpiteful,
     _poolKamahlsDruidicVow,
     _poolKashiTribeReaver,
+    _poolKatildaDawnhartMartyr,
     _poolKeenGlidemaster,
     _poolKeeperOfSecrets,
     _poolKeeperOfTheMind,
@@ -1416,6 +1421,7 @@ const shard: CardShard = {
     _poolMomentOfHeroism,
     _poolMonstrousCarabid,
     _poolMonstrousStep,
+    _poolMoonhold,
     _poolMoonmist,
     _poolMoonrageBrute,
     _poolMorphling,

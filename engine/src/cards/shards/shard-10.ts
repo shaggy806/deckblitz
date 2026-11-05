@@ -229,7 +229,9 @@ import _poolDisrupt from "../pool/disrupt.js";
 import _poolDissolve from "../pool/dissolve.js";
 import _poolDivinerOfMist from "../pool/diviner-of-mist.js";
 import _poolDivinersLockbox from "../pool/diviners-lockbox.js";
+import _poolDiviningWitch from "../pool/divining-witch.js";
 import _poolDonate from "../pool/donate.js";
+import _poolDoppelgang from "../pool/doppelgang.js";
 import _poolDovinsDismissal from "../pool/dovins-dismissal.js";
 import _poolDownInTheValley from "../pool/down-in-the-valley.js";
 import _poolDragonbackAssault from "../pool/dragonback-assault.js";
@@ -910,6 +912,7 @@ import _poolWaxingMoon from "../pool/waxing-moon.js";
 import _poolWayfaringGiant from "../pool/wayfaring-giant.js";
 import _poolWeddingAnnouncement from "../pool/wedding-announcement.js";
 import _poolWelcomingVampire from "../pool/welcoming-vampire.js";
+import _poolWerewolfPackLeader from "../pool/werewolf-pack-leader.js";
 import _poolWhetwheel from "../pool/whetwheel.js";
 import _poolWhiskervaleForerunner from "../pool/whiskervale-forerunner.js";
 import _poolWhisperBloodLiturgist from "../pool/whisper-blood-liturgist.js";
@@ -919,6 +922,7 @@ import _poolWickedWolf from "../pool/wicked-wolf.js";
 import _poolWickerfolkIndomitable from "../pool/wickerfolk-indomitable.js";
 import _poolWildwoodRebirth from "../pool/wildwood-rebirth.js";
 import _poolWillowElf from "../pool/willow-elf.js";
+import _poolWiltLeafLiege from "../pool/wilt-leaf-liege.js";
 import _poolWindDancer from "../pool/wind-dancer.js";
 import _poolWinterCursedRider from "../pool/winter-cursed-rider.js";
 import _poolWinterTeamPlayer from "../pool/winter-team-player.js";
@@ -1184,7 +1188,9 @@ const shard: CardShard = {
     _poolDissolve,
     _poolDivinerOfMist,
     _poolDivinersLockbox,
+    _poolDiviningWitch,
     _poolDonate,
+    _poolDoppelgang,
     _poolDovinsDismissal,
     _poolDownInTheValley,
     _poolDragonbackAssault,
@@ -1865,6 +1871,7 @@ const shard: CardShard = {
     _poolWayfaringGiant,
     _poolWeddingAnnouncement,
     _poolWelcomingVampire,
+    _poolWerewolfPackLeader,
     _poolWhetwheel,
     _poolWhiskervaleForerunner,
     _poolWhisperBloodLiturgist,
@@ -1874,6 +1881,7 @@ const shard: CardShard = {
     _poolWickerfolkIndomitable,
     _poolWildwoodRebirth,
     _poolWillowElf,
+    _poolWiltLeafLiege,
     _poolWindDancer,
     _poolWinterCursedRider,
     _poolWinterTeamPlayer,

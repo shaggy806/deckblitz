@@ -15273,6 +15273,186 @@
    "description": "No cost increase printed on a spell itself; cost:cost-increase-not-your-turn is Defense Grid's static on other spells.",
    "example": "Hurkyl's Final Meditation"
   },
+  "effect:opponent-picks-n-from-own-hand-you-may-cast": {
+   "family": "effect:choices-by-other-players",
+   "description": "A target opponent chooses X cards from their own hand; you look at them and may cast one without paying its mana cost: no shape has the opponent pick from their hand for you to cast from.",
+   "example": "Extract Brain"
+  },
+  "effect:alternating-picks-from-revealed": {
+   "family": "effect:choices-by-other-players",
+   "description": "Alternating picks between you and a chosen opponent over one revealed pile: look-and-choose has no alternation.",
+   "example": "Memories Returning"
+  },
+  "effect:mutual-graveyard-choice-return": {
+   "family": "effect:choices-by-other-players",
+   "description": "You choose a creature card in an opponent's graveyard, then that opponent chooses one in yours, then you may return both: no paired cross-graveyard choice.",
+   "example": "Dawnbreak Reclaimer"
+  },
+  "effect:repeat-opponent-choice-last-chosen": {
+   "family": "effect:choices-by-other-players",
+   "description": "repeat's mayAgain cost exists, but nothing keeps the opponent's earlier picks unmoved, bars re-choosing them and puts only the last one into hand.",
+   "example": "Forgotten Lore"
+  },
+  "effect:top-n-of-graveyard-opponent-chooses": {
+   "family": "effect:aggregate-over-graveyard",
+   "description": "top-of-graveyard gives one card; nothing offers the top two for an opponent to choose between.",
+   "example": "Phyrexian Grimoire"
+  },
+  "zone:cast-from-top-of-graveyard": {
+   "family": "zone:graveyard-cast-permissions",
+   "description": "A graveyard cast permission limited to the top card of the graveyard (and exile it if it would go to a graveyard): castFromGraveyard has no top-card-only option.",
+   "example": "Bösium Strip"
+  },
+  "cost:alternative-cost-exile-top-of-graveyard": {
+   "family": "effect:aggregate-over-graveyard",
+   "description": "An alternative cost exiling the top three black cards of your graveyard: the alternativeCost's exileFromGraveyard has no fromTop; only an ability cost has it.",
+   "example": "Spinning Darkness"
+  },
+  "effect:each-player-other-than-source-owner": {
+   "family": "effect:player-scope-extensions",
+   "description": "'Each other player' than the dead permanent's owner: no scope, and for-each-player.except takes object refs only. The opponents-may-activate half exists.",
+   "example": "Oft-Nabbed Goat"
+  },
+  "static:grant-flash-to-owned-cards-outside-battlefield": {
+   "family": "effect:cast-and-activate-restrictions",
+   "description": "'Creature cards you own that aren't on the battlefield have flash' is a keyword the cards get (seen by other effects), not castAsThoughFlash's caster permission. Its opponents' sorcery-timing half exists.",
+   "example": "Teferi, Mage of Zhalfir"
+  },
+  "effect:prohibit-loyalty-abilities-one-shot": {
+   "family": "effect:cast-and-activate-restrictions",
+   "description": "The prohibit effect's abilities is all-or-nothing; only the static prohibits has onlyLoyaltyAbilities, and Revel in Silence's 'this turn' is a one-shot.",
+   "example": "Flamescroll Celebrant // Revel in Silence"
+  },
+  "effect:prohibit-non-mana-abilities-one-shot": {
+   "family": "effect:cast-and-activate-restrictions",
+   "description": "The prohibit effect (this turn, target player) has no exceptManaAbilities; only the static has it.",
+   "example": "Abeyance"
+  },
+  "effect:discard-chosen-reveals-exile-may-cast": {
+   "family": "effect:discard-chosen-from-revealed-hand",
+   "description": "discard-chosen's mayCast is documented 'not with reveals', and the card needs an instant-or-sorcery filter and a 'for as long as you control' duration.",
+   "example": "Taster of Wares"
+  },
+  "effect:reveal-until-count-put-any-number": {
+   "family": "effect:reveal-until",
+   "description": "reveal-until-count puts every found card; it can't put 'any number of' them.",
+   "example": "Aurora Awakener"
+  },
+  "effect:reveal-until-count-put-graveyard": {
+   "family": "effect:reveal-until",
+   "description": "put is battlefield, hand or with-rest; nothing sends the found cards to the graveyard while the rest go to the bottom at random.",
+   "example": "Old Stickfingers"
+  },
+  "effect:for-each-target-apnap-order": {
+   "family": "effect:player-scope-extensions",
+   "description": "Its ruling processes the targets in turn order (APNAP); for-each-target uses the order they were chosen.",
+   "example": "Kaboom!"
+  },
+  "cost:exile-from-graveyard-beside-sacrifice-several": {
+   "family": "cost:cost-modification-extensions",
+   "description": "An ability cost's exileFromGraveyard is documented not beside a sacrifice of several.",
+   "example": "Tawnos, Solemn Survivor"
+  },
+  "static:discard-self-any-time-instant-speed": {
+   "family": "zone:activated-ability-zones",
+   "description": "'You may discard this card any time you could cast an instant' — a special action from the hand; nothing expresses it.",
+   "example": "Circling Vultures"
+  },
+  "effect:turn-face-up-or-exile-and-cast": {
+   "family": "mechanic:face-down",
+   "description": "The granted ability turns the face-down permanent up, and if it can't, exiles it and you may cast it: no can't-turn-up fallback.",
+   "example": "Etrata, Deadly Fugitive"
+  },
+  "condition:face-down-is-creature-card": {
+   "family": "mechanic:face-down",
+   "description": "Reveal a face-down permanent and turn it up only if it's a creature card: a condition sees the face-down 2/2, not the hidden card's types.",
+   "example": "Hauntwoods Shrieker"
+  },
+  "effect:each-opponent-may-single-result": {
+   "family": "effect:choices-by-other-players",
+   "description": "Each opponent may tap an untapped creature; if any player does, you get one Fish (the ruling): each-player-may's ifDid runs once per player who did.",
+   "example": "Reservoir Kraken"
+  },
+  "effect:return-from-graveyard-per-died-under-last-blocked-controller": {
+   "family": "condition:filter-this-turn-history",
+   "description": "For each creature that died, return a creature card from the graveyard of whoever controlled it when it was blocked.",
+   "example": "Glyph of Reincarnation"
+  },
+  "filter:target-blocked-by-other-target": {
+   "family": "trigger:combat-trigger-extensions",
+   "description": "A target slot filtered on 'blocked by that target Wall this turn': blockedThisTurn.of binds only as an effect applies, so in a target slot it matches nothing.",
+   "example": "Glyph of Delusion"
+  },
+  "keyword:imprint-two-cast-copy-other": {
+   "family": "keyword:imprint-same-name",
+   "description": "Two imprinted sorceries; when a card with one's name is cast, copy the other exiled card and you may cast the copy.",
+   "example": "Spellweaver Helix"
+  },
+  "condition:life-above-starting-static": {
+   "family": "effect:amount-new-variants",
+   "description": "A static 'as long as you have at least 7 life more than your starting life total': life-total takes only fixed numbers and an amounts condition is always false in a static.",
+   "example": "Leyline of Hope"
+  },
+  "effect:mana-cant-pay-generic": {
+   "family": "cost:mana-spending-rules",
+   "description": "Mana that can't be spent to pay generic mana costs: ManaSpendOnly has no such restriction.",
+   "example": "Jegantha, the Wellspring"
+  },
+  "effect:add-mana-of-source-colors": {
+   "family": "effect:mana-ability-dynamic-amount",
+   "description": "'Add one mana of any of this creature's colors' isn't an add-mana option.",
+   "example": "Katilda, Dawnhart Prime"
+  },
+  "cost:granted-ability-exile-granter": {
+   "family": "effect:modifier-grants-activated",
+   "description": "A granted ability whose cost exiles the Equipment that grants it: 'granter' covers only sacrifice.",
+   "example": "The Dominion Bracelet"
+  },
+  "mechanic:control-player-while-resolving": {
+   "family": "mechanic:control-player",
+   "description": "Control of a player only while a chosen card is played, with its own mana-ability limits (rule 723.2).",
+   "example": "Word of Command"
+  },
+  "replacement:copy-on-enter-exile-two-counters-from-other": {
+   "family": "replacement:copy-on-enter-options",
+   "description": "Exile two graveyard creature cards as it enters, copy one, and get +1/+1 counters equal to the other's power.",
+   "example": "The Mimeoplasm"
+  },
+  "replacement:becomes-on-turned-face-up": {
+   "family": "replacement:copy-on-enter-options",
+   "description": "The 5/1-or-1/5 choice also as it's turned face up; becomesOnEnter covers only entering.",
+   "example": "Aquamorph Entity"
+  },
+  "replacement:token-creation-optional-substitute-choice": {
+   "family": "replacement:token-creation-additive",
+   "description": "'You may instead' create Cats or Dogs, asked as the tokens would be created: no optional substitute or choice between the two.",
+   "example": "Jinnie Fay, Jetmir's Second"
+  },
+  "condition:dealt-damage-by-n-creatures-this-turn": {
+   "family": "stat:object-damage-history",
+   "description": "The alternative cost needs 'two or more creatures dealt damage to you this turn': nothing counts distinct creatures that did.",
+   "example": "Inferno Trap"
+  },
+  "effect:enter-as-set-subtypes": {
+   "family": "effect:put-onto-battlefield-options",
+   "description": "Returns as 'a Spirit Detective (no longer a Human)': EnterTypes has no setSubtypes, and changing them after it enters shows it as a Human to enter triggers.",
+   "example": "Otherworldly Escort"
+  },
+  "cost:attack-tap-untapped-creature-not-declared": {
+   "family": "static:attack-cost-for-creature",
+   "description": "Attacking or blocking costs tapping an untapped creature you control that isn't attacking/blocking, chosen as attackers/blockers are declared.",
+   "example": "Hollow Warrior"
+  },
+  "effect:flicker-return-at-owners-next-end-step": {
+   "family": "effect:flicker-generalized",
+   "description": "The +1 returns the card at its owner's next end step: flicker's returnAt has no per-owner turn.",
+   "example": "The Eternal Wanderer"
+  },
+  "zone:graveyard-cast-mana-value-on-stack": {
+   "family": "zone:graveyard-cast-permissions",
+   "description": "Its graveyard permission is judged on the spell's mana value with X chosen (the ruling: {X}{W} castable with X 1, not 2); castFromGraveyard's filter reads the card with X as 0.",
+   "example": "Lurrus of the Dream-Den"
+  },
   "static:cost-reduction-targeting-enchanted-player": {
    "family": "static:static-over-enchanted-player",
    "description": "A cost reduction for spells that target the enchanted player: costModification.targeting filters objects only, with no player or enchanted-player target.",

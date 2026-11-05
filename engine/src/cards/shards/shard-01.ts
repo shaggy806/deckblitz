@@ -336,6 +336,7 @@ import _poolHaywireMite from "../pool/haywire-mite.js";
 import _poolHazoretGodseeker from "../pool/hazoret-godseeker.js";
 import _poolHazoretTheFervent from "../pool/hazoret-the-fervent.js";
 import _poolHeadhunter from "../pool/headhunter.js";
+import _poolHeatStroke from "../pool/heat-stroke.js";
 import _poolHedronCrab from "../pool/hedron-crab.js";
 import _poolHedronDetonator from "../pool/hedron-detonator.js";
 import _poolHeidarRimewindMaster from "../pool/heidar-rimewind-master.js";
@@ -357,6 +358,7 @@ import _poolHuntTheWeak from "../pool/hunt-the-weak.js";
 import _poolHuntersAxe from "../pool/hunters-axe.js";
 import _poolHuntersTalent from "../pool/hunters-talent.js";
 import _poolHurkylMasterWizard from "../pool/hurkyl-master-wizard.js";
+import _poolHustleBustle from "../pool/hustle-bustle.js";
 import _poolHylderblade from "../pool/hylderblade.js";
 import _poolHypervoltGrasp from "../pool/hypervolt-grasp.js";
 import _poolHypnoticSpecter from "../pool/hypnotic-specter.js";
@@ -1283,6 +1285,7 @@ const shard: CardShard = {
     _poolHazoretGodseeker,
     _poolHazoretTheFervent,
     _poolHeadhunter,
+    _poolHeatStroke,
     _poolHedronCrab,
     _poolHedronDetonator,
     _poolHeidarRimewindMaster,
@@ -1304,6 +1307,7 @@ const shard: CardShard = {
     _poolHuntersAxe,
     _poolHuntersTalent,
     _poolHurkylMasterWizard,
+    _poolHustleBustle,
     _poolHylderblade,
     _poolHypervoltGrasp,
     _poolHypnoticSpecter,

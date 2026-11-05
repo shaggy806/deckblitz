@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-468 already implemented / 32 missing
+470 already implemented / 30 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -133,7 +133,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  127  Captain America, First Avenger                 15988 decks  {R}{W}{U}        Legendary Creature — Human Soldier Hero
 [x]  128  Kynaios and Tiro of Meletis                    15854 decks  {R}{G}{W}{U}     Legendary Creature — Human Soldier
 [x]  129  Tovolar, Dire Overlord                         15803 decks  {1}{R}{G}        Legendary Creature — Human Werewolf // Legendary Creature — Werewolf
-[ ]  130  Zimone, Mystery Unraveler                      15788 decks  {2}{G}{U}        Legendary Creature — Human Wizard
+[x]  130  Zimone, Mystery Unraveler                      15788 decks  {2}{G}{U}        Legendary Creature — Human Wizard
 [x]  131  Niv-Mizzet, Parun                              15769 decks  {U}{U}{U}{R}{R}{R} Legendary Creature — Dragon Wizard
 [x]  132  Zada, Hedron Grinder                           15692 decks  {3}{R}           Legendary Creature — Goblin Ally
 [x]  133  Be'lakor, the Dark Master                      15648 decks  {3}{U}{B}{R}     Legendary Creature — Demon Noble
@@ -422,7 +422,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  416  Jenova, Ancient Calamity                        7056 decks  {2}{B}{G}        Legendary Creature — Alien
 [x]  417  Raised by Giants                                7033 decks  {5}{G}           Legendary Enchantment — Background
 [ ]  418  The Mimeoplasm                                  7024 decks  {2}{B}{G}{U}     Legendary Creature — Ooze
-[ ]  419  Ral, Monsoon Mage                               7014 decks  {1}{R}           Legendary Creature — Human Wizard // Legendary Planeswalker — Ral
+[x]  419  Ral, Monsoon Mage                               7014 decks  {1}{R}           Legendary Creature — Human Wizard // Legendary Planeswalker — Ral
 [x]  420  Duskana, the Rage Mother                        7001 decks  {2}{R}{G}{W}     Legendary Creature — Bear
 [x]  421  Hinata, Dawn-Crowned                            6990 decks  {1}{U}{R}{W}     Legendary Creature — Kirin Spirit
 [x]  422  Talrand, Sky Summoner                           6986 decks  {2}{U}{U}        Legendary Creature — Merfolk Wizard

@@ -173,6 +173,17 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     ) {
       v.touch(n.who.target, "harm", MAJOR);
     }
+    // "Target player exiles a card from their graveyard" (Scrabbling Claws):
+    // a card they might have used again.
+    if (
+      typeof n.who === "object" &&
+      "target" in n.who &&
+      n.effect.kind === "look-and-choose" &&
+      n.effect.zone === "graveyard" &&
+      n.effect.destination === "exile"
+    ) {
+      v.touch(n.who.target, "harm", MINOR);
+    }
   },
   // A vote names no target, unless it's a targeted player's own choice ("target
   // opponent chooses a creature they control": Wei Assassins). What's done with
@@ -655,9 +666,13 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
       r === "blocked-by-at-most-one";
     const helps = n.restrictions.some(lure) || n.cantBeBlockedBy !== undefined;
     const hurts = n.restrictions.some((r) => !lure(r));
-    v.touch(n.target, helps && hurts ? "either" : helps ? "help" : "harm", MINOR);
+    const side = helps && hurts ? "either" : helps ? "help" : "harm";
+    v.touch(n.target, side, MINOR);
+    // "Creatures target player controls can't block this turn" (Headliner
+    // Scarlett): the same lean, on the player whose creatures it binds.
+    if (n.controlledByTarget !== undefined) v.touch(n.controlledByTarget, side, MINOR);
   },
-  "grant-flashback": (n, v) => v.touch(n.target, "help", MAJOR),
+  "grant-flashback":(n, v) => v.touch(n.target, "help", MAJOR),
   "grant-flashback-all": none,
   "grant-graveyard-keyword": (n, v) => {
     if (n.target !== undefined) v.touch(n.target, "help", MAJOR);
