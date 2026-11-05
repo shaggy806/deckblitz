@@ -14596,7 +14596,7 @@
    "example": "Shieldmage Elder: the target spell becomes a permanent, whose damage this turn is prevented too"
   },
   "mechanic:opening-hand-enter-choice": {
-   "family": "new:leyline-opening-hand",
+   "family": "mechanic:leyline-opening-hand",
    "description": "An as-enters choice for a card begun on the battlefield: applyOpeningHand moves it with a bare moveObject, and only askEnterChoice asks.",
    "example": "Leyline of Transformation: begun on the battlefield it never chooses a creature type"
   },

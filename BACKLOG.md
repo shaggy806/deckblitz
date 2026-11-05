@@ -498,7 +498,7 @@ section keeps only what to do next.
   from a fresh session; the remaining keys come after that queue is empty (the user's call, 2026-11-04).** Batches: B255 (2026-11-04: 134 of 150 authored, 16 still blocked,
   three on the new `effect:separate-exiled-cards-into-piles`, two on `effect:choose-from-revealed-hand-without-moving`, the rest one each; fixed piles naming "an opponent" too early).
   B256 (2026-11-04, not `author-freed`: the scaffolder over the whole snapshot, every finished card reviewed: 373 of 383 authored, 10 still blocked, three on the new
-  `effect:text-change-token-colors`, two on the mana-ability discard cost, the rest one each; 19 need keys its review showed already run marked built). `--stale` 1,289.
+  `effect:text-change-token-colors`, two on the mana-ability discard cost, the rest one each; 19 need keys its review showed already run marked built). `--stale` 1,289; top-5000 4474/5000, commanders 465/500.
   When key building resumes, the order is `--by-rank`, from Abundance, Temur Sabertooth, Inti, Skrelv's Hive, Tempt with Bunnies.
   Narrow keys `author-freed` should give, from that last run's reports: Liberated Livestock (Auras onto each token), Splintering Wind (its token's cumulative upkeep and
   leave trigger), Cait, Cage Brawler (two simultaneous discards; no scope names "you and defending player"), The Last Agni Kai ("until end of turn" mana keeping), Curse of
