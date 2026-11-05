@@ -288,6 +288,7 @@ import _poolFirebendingLesson from "../pool/firebending-lesson.js";
 import _poolFistsOfFlame from "../pool/fists-of-flame.js";
 import _poolFlameBlessedBolt from "../pool/flame-blessed-bolt.js";
 import _poolFlameWreathedPhoenix from "../pool/flame-wreathed-phoenix.js";
+import _poolFlamesOfTheRazeBoar from "../pool/flames-of-the-raze-boar.js";
 import _poolFlamingSword from "../pool/flaming-sword.js";
 import _poolFlowstoneChanneler from "../pool/flowstone-channeler.js";
 import _poolFlux from "../pool/flux.js";
@@ -330,6 +331,7 @@ import _poolGerrardWeatherlightHero from "../pool/gerrard-weatherlight-hero.js";
 import _poolGerrardsIrregulars from "../pool/gerrards-irregulars.js";
 import _poolGertAndOldLaceRunaways from "../pool/gert-and-old-lace-runaways.js";
 import _poolGhituFireEater from "../pool/ghitu-fire-eater.js";
+import _poolGhostSpider from "../pool/ghost-spider.js";
 import _poolGhostbladeEidolon from "../pool/ghostblade-eidolon.js";
 import _poolGhoulcallersHarvest from "../pool/ghoulcallers-harvest.js";
 import _poolGiantAnkheg from "../pool/giant-ankheg.js";
@@ -718,6 +720,7 @@ import _poolSinCollector from "../pool/sin-collector.js";
 import _poolSinisterStarfish from "../pool/sinister-starfish.js";
 import _poolSirenOfTheSilentSong from "../pool/siren-of-the-silent-song.js";
 import _poolSkeletalSnake from "../pool/skeletal-snake.js";
+import _poolSkeletalSwarming from "../pool/skeletal-swarming.js";
 import _poolSkemfarShadowsage from "../pool/skemfar-shadowsage.js";
 import _poolSkulkingGhost from "../pool/skulking-ghost.js";
 import _poolSkullsnatcher from "../pool/skullsnatcher.js";
@@ -786,6 +789,7 @@ import _poolSwordOfTheSqueak from "../pool/sword-of-the-squeak.js";
 import _poolSwordsToPlowshares from "../pool/swords-to-plowshares.js";
 import _poolSylvanOffering from "../pool/sylvan-offering.js";
 import _poolSymbolOfUnsummoning from "../pool/symbol-of-unsummoning.js";
+import _poolTamiyoSeasonedScholar from "../pool/tamiyo-seasoned-scholar.js";
 import _poolTangle from "../pool/tangle.js";
 import _poolTanglesap from "../pool/tanglesap.js";
 import _poolTaoistMystic from "../pool/taoist-mystic.js";
@@ -827,6 +831,7 @@ import _poolTimecrafting from "../pool/timecrafting.js";
 import _poolToilsOfNightAndDay from "../pool/toils-of-night-and-day.js";
 import _poolTomikWielderOfLaw from "../pool/tomik-wielder-of-law.js";
 import _poolTorgaarFamineIncarnate from "../pool/torgaar-famine-incarnate.js";
+import _poolTortureChamber from "../pool/torture-chamber.js";
 import _poolTotemGuideHartebeest from "../pool/totem-guide-hartebeest.js";
 import _poolTowashiSongshaper from "../pool/towashi-songshaper.js";
 import _poolTowerOfCoireall from "../pool/tower-of-coireall.js";
@@ -1229,6 +1234,7 @@ const shard: CardShard = {
     _poolFistsOfFlame,
     _poolFlameBlessedBolt,
     _poolFlameWreathedPhoenix,
+    _poolFlamesOfTheRazeBoar,
     _poolFlamingSword,
     _poolFlowstoneChanneler,
     _poolFlux,
@@ -1271,6 +1277,7 @@ const shard: CardShard = {
     _poolGerrardsIrregulars,
     _poolGertAndOldLaceRunaways,
     _poolGhituFireEater,
+    _poolGhostSpider,
     _poolGhostbladeEidolon,
     _poolGhoulcallersHarvest,
     _poolGiantAnkheg,
@@ -1659,6 +1666,7 @@ const shard: CardShard = {
     _poolSinisterStarfish,
     _poolSirenOfTheSilentSong,
     _poolSkeletalSnake,
+    _poolSkeletalSwarming,
     _poolSkemfarShadowsage,
     _poolSkulkingGhost,
     _poolSkullsnatcher,
@@ -1727,6 +1735,7 @@ const shard: CardShard = {
     _poolSwordsToPlowshares,
     _poolSylvanOffering,
     _poolSymbolOfUnsummoning,
+    _poolTamiyoSeasonedScholar,
     _poolTangle,
     _poolTanglesap,
     _poolTaoistMystic,
@@ -1768,6 +1777,7 @@ const shard: CardShard = {
     _poolToilsOfNightAndDay,
     _poolTomikWielderOfLaw,
     _poolTorgaarFamineIncarnate,
+    _poolTortureChamber,
     _poolTotemGuideHartebeest,
     _poolTowashiSongshaper,
     _poolTowerOfCoireall,

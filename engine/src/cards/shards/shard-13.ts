@@ -248,11 +248,13 @@ import _poolFadeFromHistory from "../pool/fade-from-history.js";
 import _poolFaerieNoble from "../pool/faerie-noble.js";
 import _poolFallOfTheGavel from "../pool/fall-of-the-gavel.js";
 import _poolFallToEarth from "../pool/fall-to-earth.js";
+import _poolFalseCure from "../pool/false-cure.js";
 import _poolFamishedWorldsire from "../pool/famished-worldsire.js";
 import _poolFatalFumes from "../pool/fatal-fumes.js";
 import _poolFatestitcher from "../pool/fatestitcher.js";
 import _poolFavorOfTheWoods from "../pool/favor-of-the-woods.js";
 import _poolFearOfBeingHunted from "../pool/fear-of-being-hunted.js";
+import _poolFearOfExposure from "../pool/fear-of-exposure.js";
 import _poolFeastOfBlood from "../pool/feast-of-blood.js";
 import _poolFelhideMinotaur from "../pool/felhide-minotaur.js";
 import _poolFelidarGuardian from "../pool/felidar-guardian.js";
@@ -305,6 +307,7 @@ import _poolGauntletsOfChaos from "../pool/gauntlets-of-chaos.js";
 import _poolGeneralTazri from "../pool/general-tazri.js";
 import _poolGhoulsteed from "../pool/ghoulsteed.js";
 import _poolGiantsBoulder from "../pool/giants-boulder.js";
+import _poolGideonTheOathsworn from "../pool/gideon-the-oathsworn.js";
 import _poolGiftOfParadise from "../pool/gift-of-paradise.js";
 import _poolGigantoad from "../pool/gigantoad.js";
 import _poolGleamOfAuthority from "../pool/gleam-of-authority.js";
@@ -328,6 +331,7 @@ import _poolGulpingScraptrap from "../pool/gulping-scraptrap.js";
 import _poolGurmagDrowner from "../pool/gurmag-drowner.js";
 import _poolGustcloakSkirmisher from "../pool/gustcloak-skirmisher.js";
 import _poolGusthasScepter from "../pool/gusthas-scepter.js";
+import _poolGutterSkulker from "../pool/gutter-skulker.js";
 import _poolHaazdaVigilante from "../pool/haazda-vigilante.js";
 import _poolHadaFreeblade from "../pool/hada-freeblade.js";
 import _poolHajarLoyalBodyguard from "../pool/hajar-loyal-bodyguard.js";
@@ -517,6 +521,7 @@ import _poolOathOfMages from "../pool/oath-of-mages.js";
 import _poolOathOfScholars from "../pool/oath-of-scholars.js";
 import _poolOgreSavant from "../pool/ogre-savant.js";
 import _poolOhabiCaleria from "../pool/ohabi-caleria.js";
+import _poolOjerPakpatiqDeepestEpoch from "../pool/ojer-pakpatiq-deepest-epoch.js";
 import _poolOkinaTempleToTheGrandfathers from "../pool/okina-temple-to-the-grandfathers.js";
 import _poolOmenOfTheHunt from "../pool/omen-of-the-hunt.js";
 import _poolOmitVariables from "../pool/omit-variables.js";
@@ -690,6 +695,7 @@ import _poolSilverbladePaladin from "../pool/silverblade-paladin.js";
 import _poolSimianSpiritGuide from "../pool/simian-spirit-guide.js";
 import _poolSirocco from "../pool/sirocco.js";
 import _poolSisterRepentia from "../pool/sister-repentia.js";
+import _poolSitaVarmaMaskedRacer from "../pool/sita-varma-masked-racer.js";
 import _poolSkullCollector from "../pool/skull-collector.js";
 import _poolSkullOfRamos from "../pool/skull-of-ramos.js";
 import _poolSledgeClassSeedship from "../pool/sledge-class-seedship.js";
@@ -858,6 +864,7 @@ import _poolVolleyOfBoulders from "../pool/volley-of-boulders.js";
 import _poolVoltaicWhip from "../pool/voltaic-whip.js";
 import _poolVoraciousCobra from "../pool/voracious-cobra.js";
 import _poolVowToErebor from "../pool/vow-to-erebor.js";
+import _poolVrestinMenoptraLeader from "../pool/vrestin-menoptra-leader.js";
 import _poolVulshokMorningstar from "../pool/vulshok-morningstar.js";
 import _poolVulshokReplica from "../pool/vulshok-replica.js";
 import _poolWallOfStolenIdentity from "../pool/wall-of-stolen-identity.js";
@@ -900,6 +907,7 @@ import _poolZephyrSinger from "../pool/zephyr-singer.js";
 import _poolZndrspltEyeOfWisdom from "../pool/zndrsplt-eye-of-wisdom.js";
 import _poolZombieMob from "../pool/zombie-mob.js";
 import _poolZombieOutlander from "../pool/zombie-outlander.js";
+import _tokensAlienInsectToken from "../tokens/alien-insect-token.js";
 import _tokensAlienSalamanderToken from "../tokens/alien-salamander-token.js";
 import _tokensBatToken from "../tokens/bat-token.js";
 import _tokensBlueEnchantmentBirdToken22 from "../tokens/blue-enchantment-bird-token-2-2.js";
@@ -1170,11 +1178,13 @@ const shard: CardShard = {
     _poolFaerieNoble,
     _poolFallOfTheGavel,
     _poolFallToEarth,
+    _poolFalseCure,
     _poolFamishedWorldsire,
     _poolFatalFumes,
     _poolFatestitcher,
     _poolFavorOfTheWoods,
     _poolFearOfBeingHunted,
+    _poolFearOfExposure,
     _poolFeastOfBlood,
     _poolFelhideMinotaur,
     _poolFelidarGuardian,
@@ -1227,6 +1237,7 @@ const shard: CardShard = {
     _poolGeneralTazri,
     _poolGhoulsteed,
     _poolGiantsBoulder,
+    _poolGideonTheOathsworn,
     _poolGiftOfParadise,
     _poolGigantoad,
     _poolGleamOfAuthority,
@@ -1250,6 +1261,7 @@ const shard: CardShard = {
     _poolGurmagDrowner,
     _poolGustcloakSkirmisher,
     _poolGusthasScepter,
+    _poolGutterSkulker,
     _poolHaazdaVigilante,
     _poolHadaFreeblade,
     _poolHajarLoyalBodyguard,
@@ -1439,6 +1451,7 @@ const shard: CardShard = {
     _poolOathOfScholars,
     _poolOgreSavant,
     _poolOhabiCaleria,
+    _poolOjerPakpatiqDeepestEpoch,
     _poolOkinaTempleToTheGrandfathers,
     _poolOmenOfTheHunt,
     _poolOmitVariables,
@@ -1612,6 +1625,7 @@ const shard: CardShard = {
     _poolSimianSpiritGuide,
     _poolSirocco,
     _poolSisterRepentia,
+    _poolSitaVarmaMaskedRacer,
     _poolSkullCollector,
     _poolSkullOfRamos,
     _poolSledgeClassSeedship,
@@ -1780,6 +1794,7 @@ const shard: CardShard = {
     _poolVoltaicWhip,
     _poolVoraciousCobra,
     _poolVowToErebor,
+    _poolVrestinMenoptraLeader,
     _poolVulshokMorningstar,
     _poolVulshokReplica,
     _poolWallOfStolenIdentity,
@@ -1824,6 +1839,7 @@ const shard: CardShard = {
     _poolZombieOutlander,
   ],
   tokens: [
+    _tokensAlienInsectToken,
     _tokensAlienSalamanderToken,
     _tokensBatToken,
     _tokensBlueEnchantmentBirdToken22,

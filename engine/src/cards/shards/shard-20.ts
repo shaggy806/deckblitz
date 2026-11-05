@@ -672,6 +672,7 @@ import _poolRecklessAssault from "../pool/reckless-assault.js";
 import _poolRecklessRage from "../pool/reckless-rage.js";
 import _poolRedcapHeelslasher from "../pool/redcap-heelslasher.js";
 import _poolRefresh from "../pool/refresh.js";
+import _poolRekindledFlame from "../pool/rekindled-flame.js";
 import _poolReliefCaptain from "../pool/relief-captain.js";
 import _poolRenderSpeechless from "../pool/render-speechless.js";
 import _poolRenounce from "../pool/renounce.js";
@@ -837,6 +838,7 @@ import _poolTalismanOfHierarchy from "../pool/talisman-of-hierarchy.js";
 import _poolTalonGatesOfMadara from "../pool/talon-gates-of-madara.js";
 import _poolTalruumChampion from "../pool/talruum-champion.js";
 import _poolTamiyosEpiphany from "../pool/tamiyos-epiphany.js";
+import _poolTangletroveKelp from "../pool/tangletrove-kelp.js";
 import _poolTasteForMayhem from "../pool/taste-for-mayhem.js";
 import _poolTatyova from "../pool/tatyova.js";
 import _poolTauntingSliver from "../pool/taunting-sliver.js";
@@ -854,6 +856,7 @@ import _poolThaliaGuardianOfThraben from "../pool/thalia-guardian-of-thraben.js"
 import _poolTheEleventhDoctor from "../pool/the-eleventh-doctor.js";
 import _poolTheEmperorOfPalamecia from "../pool/the-emperor-of-palamecia.js";
 import _poolTheFaceOfBoe from "../pool/the-face-of-boe.js";
+import _poolTheGoldenGearColossus from "../pool/the-golden-gear-colossus.js";
 import _poolTheGreatGoblin from "../pool/the-great-goblin.js";
 import _poolTheGreatMound from "../pool/the-great-mound.js";
 import _poolTheRuinousWreckingCrew from "../pool/the-ruinous-wrecking-crew.js";
@@ -980,6 +983,7 @@ import _poolWuEliteCavalry from "../pool/wu-elite-cavalry.js";
 import _poolYargleGoliathOfOtaria from "../pool/yargle-goliath-of-otaria.js";
 import _poolYasovaDragonclaw from "../pool/yasova-dragonclaw.js";
 import _poolYellowScarvesGeneral from "../pool/yellow-scarves-general.js";
+import _poolYennaRedtoothRegent from "../pool/yenna-redtooth-regent.js";
 import _poolYoungNecromancer from "../pool/young-necromancer.js";
 import _poolZagothCrystal from "../pool/zagoth-crystal.js";
 import _poolZellDincht from "../pool/zell-dincht.js";
@@ -1676,6 +1680,7 @@ const shard: CardShard = {
     _poolRecklessRage,
     _poolRedcapHeelslasher,
     _poolRefresh,
+    _poolRekindledFlame,
     _poolReliefCaptain,
     _poolRenderSpeechless,
     _poolRenounce,
@@ -1841,6 +1846,7 @@ const shard: CardShard = {
     _poolTalonGatesOfMadara,
     _poolTalruumChampion,
     _poolTamiyosEpiphany,
+    _poolTangletroveKelp,
     _poolTasteForMayhem,
     _poolTatyova,
     _poolTauntingSliver,
@@ -1858,6 +1864,7 @@ const shard: CardShard = {
     _poolTheEleventhDoctor,
     _poolTheEmperorOfPalamecia,
     _poolTheFaceOfBoe,
+    _poolTheGoldenGearColossus,
     _poolTheGreatGoblin,
     _poolTheGreatMound,
     _poolTheRuinousWreckingCrew,
@@ -1984,6 +1991,7 @@ const shard: CardShard = {
     _poolYargleGoliathOfOtaria,
     _poolYasovaDragonclaw,
     _poolYellowScarvesGeneral,
+    _poolYennaRedtoothRegent,
     _poolYoungNecromancer,
     _poolZagothCrystal,
     _poolZellDincht,

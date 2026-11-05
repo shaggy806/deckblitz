@@ -150,6 +150,7 @@ import _poolCivicWayfinder from "../pool/civic-wayfinder.js";
 import _poolClearTheLand from "../pool/clear-the-land.js";
 import _poolCoastlineChimera from "../pool/coastline-chimera.js";
 import _poolColossusHammer from "../pool/colossus-hammer.js";
+import _poolCombatResearch from "../pool/combat-research.js";
 import _poolCompellingArgument from "../pool/compelling-argument.js";
 import _poolConniveConcoct from "../pool/connive-concoct.js";
 import _poolContainmentConstruct from "../pool/containment-construct.js";
@@ -274,6 +275,7 @@ import _poolEvilEyeOfUrborg from "../pool/evil-eye-of-urborg.js";
 import _poolExcavatedWall from "../pool/excavated-wall.js";
 import _poolExtinguisherBattleship from "../pool/extinguisher-battleship.js";
 import _poolFairgroundsWarden from "../pool/fairgrounds-warden.js";
+import _poolFaithboundJudge from "../pool/faithbound-judge.js";
 import _poolFathomFleetCutthroat from "../pool/fathom-fleet-cutthroat.js";
 import _poolFearlessFledgling from "../pool/fearless-fledgling.js";
 import _poolFecundity from "../pool/fecundity.js";
@@ -757,6 +759,7 @@ import _poolSoultetherGolem from "../pool/soultether-golem.js";
 import _poolSozinsComet from "../pool/sozins-comet.js";
 import _poolSpatialContortion from "../pool/spatial-contortion.js";
 import _poolSpectacularSkywhale from "../pool/spectacular-skywhale.js";
+import _poolSpectralAdversary from "../pool/spectral-adversary.js";
 import _poolSpectralGrasp from "../pool/spectral-grasp.js";
 import _poolSpellrunePainter from "../pool/spellrune-painter.js";
 import _poolSphinxOfEnlightenment from "../pool/sphinx-of-enlightenment.js";
@@ -1102,6 +1105,7 @@ const shard: CardShard = {
     _poolClearTheLand,
     _poolCoastlineChimera,
     _poolColossusHammer,
+    _poolCombatResearch,
     _poolCompellingArgument,
     _poolConniveConcoct,
     _poolContainmentConstruct,
@@ -1226,6 +1230,7 @@ const shard: CardShard = {
     _poolExcavatedWall,
     _poolExtinguisherBattleship,
     _poolFairgroundsWarden,
+    _poolFaithboundJudge,
     _poolFathomFleetCutthroat,
     _poolFearlessFledgling,
     _poolFecundity,
@@ -1709,6 +1714,7 @@ const shard: CardShard = {
     _poolSozinsComet,
     _poolSpatialContortion,
     _poolSpectacularSkywhale,
+    _poolSpectralAdversary,
     _poolSpectralGrasp,
     _poolSpellrunePainter,
     _poolSphinxOfEnlightenment,

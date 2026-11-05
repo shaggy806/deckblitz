@@ -341,6 +341,7 @@ import _poolHazeriderDrake from "../pool/hazerider-drake.js";
 import _poolHeadlessSkaab from "../pool/headless-skaab.js";
 import _poolHealerOfThePride from "../pool/healer-of-the-pride.js";
 import _poolHeapDoll from "../pool/heap-doll.js";
+import _poolHeartseeker from "../pool/heartseeker.js";
 import _poolHeartwoodTreefolk from "../pool/heartwood-treefolk.js";
 import _poolHellionEruption from "../pool/hellion-eruption.js";
 import _poolHerdGnarr from "../pool/herd-gnarr.js";
@@ -1278,6 +1279,7 @@ const shard: CardShard = {
     _poolHeadlessSkaab,
     _poolHealerOfThePride,
     _poolHeapDoll,
+    _poolHeartseeker,
     _poolHeartwoodTreefolk,
     _poolHellionEruption,
     _poolHerdGnarr,

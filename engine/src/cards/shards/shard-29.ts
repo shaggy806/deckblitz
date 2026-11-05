@@ -205,6 +205,7 @@ import _poolEarlyWinter from "../pool/early-winter.js";
 import _poolEarthKingdomProtectors from "../pool/earth-kingdom-protectors.js";
 import _poolEchoInspector from "../pool/echo-inspector.js";
 import _poolEdgewallInnkeeper from "../pool/edgewall-innkeeper.js";
+import _poolEladamriKorvecdal from "../pool/eladamri-korvecdal.js";
 import _poolElementalAppeal from "../pool/elemental-appeal.js";
 import _poolElementalMascot from "../pool/elemental-mascot.js";
 import _poolElephantResurgence from "../pool/elephant-resurgence.js";
@@ -667,6 +668,7 @@ import _poolScavengingGhoul from "../pool/scavenging-ghoul.js";
 import _poolSchoolDaze from "../pool/school-daze.js";
 import _poolScorpionSeethingStriker from "../pool/scorpion-seething-striker.js";
 import _poolScoutTheBorders from "../pool/scout-the-borders.js";
+import _poolScytheOfTheWretched from "../pool/scythe-of-the-wretched.js";
 import _poolSeaSpirit from "../pool/sea-spirit.js";
 import _poolSeaSprite from "../pool/sea-sprite.js";
 import _poolSearchForSurvivors from "../pool/search-for-survivors.js";
@@ -851,6 +853,7 @@ import _poolUnholyAnnexRitualChamber from "../pool/unholy-annex-ritual-chamber.j
 import _poolUnifiedStrike from "../pool/unified-strike.js";
 import _poolUnsettlingTwins from "../pool/unsettling-twins.js";
 import _poolUnsparingBoltcaster from "../pool/unsparing-boltcaster.js";
+import _poolUnstableAmulet from "../pool/unstable-amulet.js";
 import _poolUnstoppableOgre from "../pool/unstoppable-ogre.js";
 import _poolUroTitanOfNaturesWrath from "../pool/uro-titan-of-natures-wrath.js";
 import _poolUrzasEngine from "../pool/urzas-engine.js";
@@ -920,6 +923,7 @@ import _poolZoanthrope from "../pool/zoanthrope.js";
 import _poolZombieCutthroat from "../pool/zombie-cutthroat.js";
 import _poolZombieInfestation from "../pool/zombie-infestation.js";
 import _poolZookeeperMechan from "../pool/zookeeper-mechan.js";
+import _poolZoyowasJustice from "../pool/zoyowas-justice.js";
 import _tokensAngelWarriorToken from "../tokens/angel-warrior-token.js";
 import _tokensBirdSoldierToken from "../tokens/bird-soldier-token.js";
 import _tokensElementalToken44WhiteFlying from "../tokens/elemental-token-4-4-white-flying.js";
@@ -1149,6 +1153,7 @@ const shard: CardShard = {
     _poolEarthKingdomProtectors,
     _poolEchoInspector,
     _poolEdgewallInnkeeper,
+    _poolEladamriKorvecdal,
     _poolElementalAppeal,
     _poolElementalMascot,
     _poolElephantResurgence,
@@ -1611,6 +1616,7 @@ const shard: CardShard = {
     _poolSchoolDaze,
     _poolScorpionSeethingStriker,
     _poolScoutTheBorders,
+    _poolScytheOfTheWretched,
     _poolSeaSpirit,
     _poolSeaSprite,
     _poolSearchForSurvivors,
@@ -1795,6 +1801,7 @@ const shard: CardShard = {
     _poolUnifiedStrike,
     _poolUnsettlingTwins,
     _poolUnsparingBoltcaster,
+    _poolUnstableAmulet,
     _poolUnstoppableOgre,
     _poolUroTitanOfNaturesWrath,
     _poolUrzasEngine,
@@ -1864,6 +1871,7 @@ const shard: CardShard = {
     _poolZombieCutthroat,
     _poolZombieInfestation,
     _poolZookeeperMechan,
+    _poolZoyowasJustice,
   ],
   tokens: [
     _tokensAngelWarriorToken,

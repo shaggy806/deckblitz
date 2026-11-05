@@ -331,6 +331,7 @@ import _poolGrayMerchantOfAsphodel from "../pool/gray-merchant-of-asphodel.js";
 import _poolGreatArashinCity from "../pool/great-arashin-city.js";
 import _poolGreatWhale from "../pool/great-whale.js";
 import _poolGreenwoodSentinel from "../pool/greenwood-sentinel.js";
+import _poolGrevenPredatorCaptain from "../pool/greven-predator-captain.js";
 import _poolGrimDraugr from "../pool/grim-draugr.js";
 import _poolGuardianOfTheGuildpact from "../pool/guardian-of-the-guildpact.js";
 import _poolGuma from "../pool/guma.js";
@@ -362,6 +363,7 @@ import _poolHiredBlade from "../pool/hired-blade.js";
 import _poolHobble from "../pool/hobble.js";
 import _poolHobgoblinDragoon from "../pool/hobgoblin-dragoon.js";
 import _poolHoldTheGates from "../pool/hold-the-gates.js";
+import _poolHolyFrazzleCannon from "../pool/holy-frazzle-cannon.js";
 import _poolHomewardPath from "../pool/homeward-path.js";
 import _poolHopeTender from "../pool/hope-tender.js";
 import _poolHorizonSeeker from "../pool/horizon-seeker.js";
@@ -389,6 +391,7 @@ import _poolIncitedRabble from "../pool/incited-rabble.js";
 import _poolIncurableOgre from "../pool/incurable-ogre.js";
 import _poolInfernalCaptor from "../pool/infernal-captor.js";
 import _poolIntegrityIntervention from "../pool/integrity-intervention.js";
+import _poolInvasionOfNewCapenna from "../pool/invasion-of-new-capenna.js";
 import _poolInvasionOfNewPhyrexia from "../pool/invasion-of-new-phyrexia.js";
 import _poolIronLadDivergingDestiny from "../pool/iron-lad-diverging-destiny.js";
 import _poolIronpawAspirant from "../pool/ironpaw-aspirant.js";
@@ -659,12 +662,14 @@ import _poolRoarOfTheFifthPeople from "../pool/roar-of-the-fifth-people.js";
 import _poolRoarOfTheKha from "../pool/roar-of-the-kha.js";
 import _poolRoaringSlagwurm from "../pool/roaring-slagwurm.js";
 import _poolRoilingCanopy from "../pool/roiling-canopy.js";
+import _poolRoninShadowStalker from "../pool/ronin-shadow-stalker.js";
 import _poolRooftopAssassin from "../pool/rooftop-assassin.js";
 import _poolRoryWilliams from "../pool/rory-williams.js";
 import _poolRotCurseRakshasa from "../pool/rot-curse-rakshasa.js";
 import _poolRotFarmMortipede from "../pool/rot-farm-mortipede.js";
 import _poolRottedHulk from "../pool/rotted-hulk.js";
 import _poolRowansStalwarts from "../pool/rowans-stalwarts.js";
+import _poolRukarumelBiologist from "../pool/rukarumel-biologist.js";
 import _poolRuneBrandJuggler from "../pool/rune-brand-juggler.js";
 import _poolRuneScarredDemon from "../pool/rune-scarred-demon.js";
 import _poolSadisticAugermage from "../pool/sadistic-augermage.js";
@@ -956,6 +961,7 @@ import _tokensRedElementalToken33 from "../tokens/red-elemental-token-3-3.js";
 import _tokensSpellgorgerWeirdToken from "../tokens/spellgorger-weird-token.js";
 import _tokensSwordToken from "../tokens/sword-token.js";
 import _tokensVampireToken11 from "../tokens/vampire-token-1-1.js";
+import _tokensWastelandSurvivalGuideToken from "../tokens/wasteland-survival-guide-token.js";
 import _tokensWeirdToken from "../tokens/weird-token.js";
 
 const shard: CardShard = {
@@ -1288,6 +1294,7 @@ const shard: CardShard = {
     _poolGreatArashinCity,
     _poolGreatWhale,
     _poolGreenwoodSentinel,
+    _poolGrevenPredatorCaptain,
     _poolGrimDraugr,
     _poolGuardianOfTheGuildpact,
     _poolGuma,
@@ -1319,6 +1326,7 @@ const shard: CardShard = {
     _poolHobble,
     _poolHobgoblinDragoon,
     _poolHoldTheGates,
+    _poolHolyFrazzleCannon,
     _poolHomewardPath,
     _poolHopeTender,
     _poolHorizonSeeker,
@@ -1346,6 +1354,7 @@ const shard: CardShard = {
     _poolIncurableOgre,
     _poolInfernalCaptor,
     _poolIntegrityIntervention,
+    _poolInvasionOfNewCapenna,
     _poolInvasionOfNewPhyrexia,
     _poolIronLadDivergingDestiny,
     _poolIronpawAspirant,
@@ -1616,12 +1625,14 @@ const shard: CardShard = {
     _poolRoarOfTheKha,
     _poolRoaringSlagwurm,
     _poolRoilingCanopy,
+    _poolRoninShadowStalker,
     _poolRooftopAssassin,
     _poolRoryWilliams,
     _poolRotCurseRakshasa,
     _poolRotFarmMortipede,
     _poolRottedHulk,
     _poolRowansStalwarts,
+    _poolRukarumelBiologist,
     _poolRuneBrandJuggler,
     _poolRuneScarredDemon,
     _poolSadisticAugermage,
@@ -1915,6 +1926,7 @@ const shard: CardShard = {
     _tokensSpellgorgerWeirdToken,
     _tokensSwordToken,
     _tokensVampireToken11,
+    _tokensWastelandSurvivalGuideToken,
     _tokensWeirdToken,
   ],
 };

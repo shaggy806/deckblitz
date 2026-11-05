@@ -74,6 +74,7 @@ import _poolBlackMagesRod from "../pool/black-mages-rod.js";
 import _poolBlacklanceParagon from "../pool/blacklance-paragon.js";
 import _poolBladebackSliver from "../pool/bladeback-sliver.js";
 import _poolBlanchwoodProwler from "../pool/blanchwood-prowler.js";
+import _poolBlazingSunsteel from "../pool/blazing-sunsteel.js";
 import _poolBlexVexingPest from "../pool/blex-vexing-pest.js";
 import _poolBlightTitan from "../pool/blight-titan.js";
 import _poolBloodHypnotist from "../pool/blood-hypnotist.js";
@@ -806,6 +807,7 @@ import _poolTheftOfDreams from "../pool/theft-of-dreams.js";
 import _poolThermopod from "../pool/thermopod.js";
 import _poolThicketBasilisk from "../pool/thicket-basilisk.js";
 import _poolThievesGuildEnforcer from "../pool/thieves-guild-enforcer.js";
+import _poolThorGodOfThunder from "../pool/thor-god-of-thunder.js";
 import _poolThoughtShucker from "../pool/thought-shucker.js";
 import _poolThoughtcast from "../pool/thoughtcast.js";
 import _poolThranForge from "../pool/thran-forge.js";
@@ -1019,6 +1021,7 @@ const shard: CardShard = {
     _poolBlacklanceParagon,
     _poolBladebackSliver,
     _poolBlanchwoodProwler,
+    _poolBlazingSunsteel,
     _poolBlexVexingPest,
     _poolBlightTitan,
     _poolBloodHypnotist,
@@ -1751,6 +1754,7 @@ const shard: CardShard = {
     _poolThermopod,
     _poolThicketBasilisk,
     _poolThievesGuildEnforcer,
+    _poolThorGodOfThunder,
     _poolThoughtShucker,
     _poolThoughtcast,
     _poolThranForge,

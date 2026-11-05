@@ -435,6 +435,7 @@ import _poolJackalopeHerd from "../pool/jackalope-herd.js";
 import _poolJadeBearer from "../pool/jade-bearer.js";
 import _poolJadeOrbOfDragonkind from "../pool/jade-orb-of-dragonkind.js";
 import _poolJanJansenChaosCrafter from "../pool/jan-jansen-chaos-crafter.js";
+import _poolJarOfEyeballs from "../pool/jar-of-eyeballs.js";
 import _poolJayemdaeTome from "../pool/jayemdae-tome.js";
 import _poolJazalGoldmane from "../pool/jazal-goldmane.js";
 import _poolJechtReluctantGuardian from "../pool/jecht-reluctant-guardian.js";
@@ -708,6 +709,7 @@ import _poolRockyRoads from "../pool/rocky-roads.js";
 import _poolRoilsRetribution from "../pool/roils-retribution.js";
 import _poolRoofstalkerWight from "../pool/roofstalker-wight.js";
 import _poolRootMaze from "../pool/root-maze.js";
+import _poolRoshanHiddenMagister from "../pool/roshan-hidden-magister.js";
 import _poolRuinGhost from "../pool/ruin-ghost.js";
 import _poolRushOfInspiration from "../pool/rush-of-inspiration.js";
 import _poolSageOfTheMaze from "../pool/sage-of-the-maze.js";
@@ -780,6 +782,7 @@ import _poolSleep from "../pool/sleep.js";
 import _poolSlickshotLockpicker from "../pool/slickshot-lockpicker.js";
 import _poolSlickshotShowOff from "../pool/slickshot-show-off.js";
 import _poolSlimyKavu from "../pool/slimy-kavu.js";
+import _poolSliverGravemother from "../pool/sliver-gravemother.js";
 import _poolSluicewayScorpion from "../pool/sluiceway-scorpion.js";
 import _poolSmelt from "../pool/smelt.js";
 import _poolSnag from "../pool/snag.js";
@@ -843,6 +846,7 @@ import _poolTangleHulk from "../pool/tangle-hulk.js";
 import _poolTeeteringPeaks from "../pool/teetering-peaks.js";
 import _poolTegwyllDukeOfSplendor from "../pool/tegwyll-duke-of-splendor.js";
 import _poolTemmetNaktamunsWill from "../pool/temmet-naktamuns-will.js";
+import _poolTemurCharger from "../pool/temur-charger.js";
 import _poolTemurDevotee from "../pool/temur-devotee.js";
 import _poolTenuredConcocter from "../pool/tenured-concocter.js";
 import _poolTerminus from "../pool/terminus.js";
@@ -1438,6 +1442,7 @@ const shard: CardShard = {
     _poolJadeBearer,
     _poolJadeOrbOfDragonkind,
     _poolJanJansenChaosCrafter,
+    _poolJarOfEyeballs,
     _poolJayemdaeTome,
     _poolJazalGoldmane,
     _poolJechtReluctantGuardian,
@@ -1711,6 +1716,7 @@ const shard: CardShard = {
     _poolRoilsRetribution,
     _poolRoofstalkerWight,
     _poolRootMaze,
+    _poolRoshanHiddenMagister,
     _poolRuinGhost,
     _poolRushOfInspiration,
     _poolSageOfTheMaze,
@@ -1783,6 +1789,7 @@ const shard: CardShard = {
     _poolSlickshotLockpicker,
     _poolSlickshotShowOff,
     _poolSlimyKavu,
+    _poolSliverGravemother,
     _poolSluicewayScorpion,
     _poolSmelt,
     _poolSnag,
@@ -1846,6 +1853,7 @@ const shard: CardShard = {
     _poolTeeteringPeaks,
     _poolTegwyllDukeOfSplendor,
     _poolTemmetNaktamunsWill,
+    _poolTemurCharger,
     _poolTemurDevotee,
     _poolTenuredConcocter,
     _poolTerminus,

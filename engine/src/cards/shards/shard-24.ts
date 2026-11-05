@@ -105,6 +105,7 @@ import _poolBountyOfTheLuxa from "../pool/bounty-of-the-luxa.js";
 import _poolBrambleweftBehemoth from "../pool/brambleweft-behemoth.js";
 import _poolBranchsnapLorian from "../pool/branchsnap-lorian.js";
 import _poolBrashTaunter from "../pool/brash-taunter.js";
+import _poolBrassKnuckles from "../pool/brass-knuckles.js";
 import _poolBreach from "../pool/breach.js";
 import _poolBribersPurse from "../pool/bribers-purse.js";
 import _poolBrineGiant from "../pool/brine-giant.js";
@@ -749,6 +750,7 @@ import _poolSteelHellkite from "../pool/steel-hellkite.js";
 import _poolSteelSabotage from "../pool/steel-sabotage.js";
 import _poolSteelWall from "../pool/steel-wall.js";
 import _poolStolenGoods from "../pool/stolen-goods.js";
+import _poolStoneforgeMasterwork from "../pool/stoneforge-masterwork.js";
 import _poolStoneshakerShaman from "../pool/stoneshaker-shaman.js";
 import _poolStormFleetSpy from "../pool/storm-fleet-spy.js";
 import _poolStormQueenOfWakanda from "../pool/storm-queen-of-wakanda.js";
@@ -1055,6 +1057,7 @@ const shard: CardShard = {
     _poolBrambleweftBehemoth,
     _poolBranchsnapLorian,
     _poolBrashTaunter,
+    _poolBrassKnuckles,
     _poolBreach,
     _poolBribersPurse,
     _poolBrineGiant,
@@ -1699,6 +1702,7 @@ const shard: CardShard = {
     _poolSteelSabotage,
     _poolSteelWall,
     _poolStolenGoods,
+    _poolStoneforgeMasterwork,
     _poolStoneshakerShaman,
     _poolStormFleetSpy,
     _poolStormQueenOfWakanda,

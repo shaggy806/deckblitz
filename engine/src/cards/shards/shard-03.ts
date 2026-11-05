@@ -233,6 +233,7 @@ import _poolEyeGouge from "../pool/eye-gouge.js";
 import _poolEyelessWatcher from "../pool/eyeless-watcher.js";
 import _poolFaerieDuelist from "../pool/faerie-duelist.js";
 import _poolFaerieMechanist from "../pool/faerie-mechanist.js";
+import _poolFallOfTheImpostor from "../pool/fall-of-the-impostor.js";
 import _poolFallOfTheThran from "../pool/fall-of-the-thran.js";
 import _poolFallowWurm from "../pool/fallow-wurm.js";
 import _poolFanBearer from "../pool/fan-bearer.js";
@@ -1106,6 +1107,7 @@ const shard: CardShard = {
     _poolEyelessWatcher,
     _poolFaerieDuelist,
     _poolFaerieMechanist,
+    _poolFallOfTheImpostor,
     _poolFallOfTheThran,
     _poolFallowWurm,
     _poolFanBearer,

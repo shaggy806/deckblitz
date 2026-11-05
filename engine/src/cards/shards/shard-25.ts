@@ -614,6 +614,7 @@ import _poolRaphaelToughTurtle from "../pool/raphael-tough-turtle.js";
 import _poolRathiFiend from "../pool/rathi-fiend.js";
 import _poolRaucousAudience from "../pool/raucous-audience.js";
 import _poolRavagesOfWar from "../pool/ravages-of-war.js";
+import _poolRazorfieldRipper from "../pool/razorfield-ripper.js";
 import _poolReachForTheSky from "../pool/reach-for-the-sky.js";
 import _poolReason from "../pool/reason.js";
 import _poolRebelliousStrike from "../pool/rebellious-strike.js";
@@ -906,6 +907,7 @@ import _tokensApeVillainToken from "../tokens/ape-villain-token.js";
 import _tokensClericToken01Black from "../tokens/cleric-token-0-1-black.js";
 import _tokensConstructTokenAncientStoneIdol from "../tokens/construct-token-ancient-stone-idol.js";
 import _tokensConstructTokenRetrofitterFoundry from "../tokens/construct-token-retrofitter-foundry.js";
+import _tokensDragonSpiritTokenSacrificeOnDamage from "../tokens/dragon-spirit-token-sacrifice-on-damage.js";
 import _tokensElfWarriorToken from "../tokens/elf-warrior-token.js";
 import _tokensFaerieTokenFaerieSlumberParty from "../tokens/faerie-token-faerie-slumber-party.js";
 import _tokensFaerieTokenIntoTheFaeCourt from "../tokens/faerie-token-into-the-fae-court.js";
@@ -1545,6 +1547,7 @@ const shard: CardShard = {
     _poolRathiFiend,
     _poolRaucousAudience,
     _poolRavagesOfWar,
+    _poolRazorfieldRipper,
     _poolReachForTheSky,
     _poolReason,
     _poolRebelliousStrike,
@@ -1839,6 +1842,7 @@ const shard: CardShard = {
     _tokensClericToken01Black,
     _tokensConstructTokenAncientStoneIdol,
     _tokensConstructTokenRetrofitterFoundry,
+    _tokensDragonSpiritTokenSacrificeOnDamage,
     _tokensElfWarriorToken,
     _tokensFaerieTokenFaerieSlumberParty,
     _tokensFaerieTokenIntoTheFaeCourt,

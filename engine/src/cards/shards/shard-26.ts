@@ -351,6 +351,7 @@ import _poolGroundedForLife from "../pool/grounded-for-life.js";
 import _poolGruulScrapper from "../pool/gruul-scrapper.js";
 import _poolGutterSkulk from "../pool/gutter-skulk.js";
 import _poolGuulDrazOverseer from "../pool/guul-draz-overseer.js";
+import _poolGwenStacy from "../pool/gwen-stacy.js";
 import _poolHaakonStromgaldScourge from "../pool/haakon-stromgald-scourge.js";
 import _poolHagraConstrictor from "../pool/hagra-constrictor.js";
 import _poolHammerOfBogardan from "../pool/hammer-of-bogardan.js";
@@ -493,6 +494,7 @@ import _poolMetathranElite from "../pool/metathran-elite.js";
 import _poolMidnightScavengers from "../pool/midnight-scavengers.js";
 import _poolMightOfOldKrosa from "../pool/might-of-old-krosa.js";
 import _poolMightOfTheMasses from "../pool/might-of-the-masses.js";
+import _poolMilesMorales from "../pool/miles-morales.js";
 import _poolMilitantInquisitor from "../pool/militant-inquisitor.js";
 import _poolMilitiasPride from "../pool/militias-pride.js";
 import _poolMimeofacture from "../pool/mimeofacture.js";
@@ -928,6 +930,7 @@ import _poolWindingWay from "../pool/winding-way.js";
 import _poolWindreaver from "../pool/windreaver.js";
 import _poolWineOfBloodAndIron from "../pool/wine-of-blood-and-iron.js";
 import _poolWingsOfHope from "../pool/wings-of-hope.js";
+import _poolWinterSoldierIcyAssassin from "../pool/winter-soldier-icy-assassin.js";
 import _poolWitchEnchanter from "../pool/witch-enchanter.js";
 import _poolWitnessTheEnd from "../pool/witness-the-end.js";
 import _poolWolfCoveVillager from "../pool/wolf-cove-villager.js";
@@ -1312,6 +1315,7 @@ const shard: CardShard = {
     _poolGruulScrapper,
     _poolGutterSkulk,
     _poolGuulDrazOverseer,
+    _poolGwenStacy,
     _poolHaakonStromgaldScourge,
     _poolHagraConstrictor,
     _poolHammerOfBogardan,
@@ -1454,6 +1458,7 @@ const shard: CardShard = {
     _poolMidnightScavengers,
     _poolMightOfOldKrosa,
     _poolMightOfTheMasses,
+    _poolMilesMorales,
     _poolMilitantInquisitor,
     _poolMilitiasPride,
     _poolMimeofacture,
@@ -1889,6 +1894,7 @@ const shard: CardShard = {
     _poolWindreaver,
     _poolWineOfBloodAndIron,
     _poolWingsOfHope,
+    _poolWinterSoldierIcyAssassin,
     _poolWitchEnchanter,
     _poolWitnessTheEnd,
     _poolWolfCoveVillager,

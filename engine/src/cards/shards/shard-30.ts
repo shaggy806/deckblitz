@@ -213,6 +213,7 @@ import _poolDisperse from "../pool/disperse.js";
 import _poolDominatingLicid from "../pool/dominating-licid.js";
 import _poolDonatelloMutantMechanic from "../pool/donatello-mutant-mechanic.js";
 import _poolDraconicLore from "../pool/draconic-lore.js";
+import _poolDragonshift from "../pool/dragonshift.js";
 import _poolDragonsoulKnight from "../pool/dragonsoul-knight.js";
 import _poolDreadOfNight from "../pool/dread-of-night.js";
 import _poolDreadhordeInvasion from "../pool/dreadhorde-invasion.js";
@@ -332,6 +333,7 @@ import _poolGiftOfTheDeity from "../pool/gift-of-the-deity.js";
 import _poolGimlisRecklessMight from "../pool/gimlis-reckless-might.js";
 import _poolGixYawgmothPraetor from "../pool/gix-yawgmoth-praetor.js";
 import _poolGlimmerpost from "../pool/glimmerpost.js";
+import _poolGlintRaker from "../pool/glint-raker.js";
 import _poolGlisteningGoremonger from "../pool/glistening-goremonger.js";
 import _poolGloriousEnd from "../pool/glorious-end.js";
 import _poolGnarledEffigy from "../pool/gnarled-effigy.js";
@@ -431,6 +433,7 @@ import _poolItOfTheHorridSwarm from "../pool/it-of-the-horrid-swarm.js";
 import _poolIxallisKeeper from "../pool/ixallis-keeper.js";
 import _poolIxidorRealitySculptor from "../pool/ixidor-reality-sculptor.js";
 import _poolIxidorsWill from "../pool/ixidors-will.js";
+import _poolJaceRealitySculptor from "../pool/jace-reality-sculptor.js";
 import _poolJackalFamiliar from "../pool/jackal-familiar.js";
 import _poolJadeGuardian from "../pool/jade-guardian.js";
 import _poolJadeLeech from "../pool/jade-leech.js";
@@ -562,6 +565,7 @@ import _poolNeckBreaker from "../pool/neck-breaker.js";
 import _poolNecratog from "../pool/necratog.js";
 import _poolNessianBoar from "../pool/nessian-boar.js";
 import _poolNestingWurm from "../pool/nesting-wurm.js";
+import _poolNexos from "../pool/nexos.js";
 import _poolNickValentinePrivateEye from "../pool/nick-valentine-private-eye.js";
 import _poolNightMarketGuard from "../pool/night-market-guard.js";
 import _poolNightcreep from "../pool/nightcreep.js";
@@ -828,6 +832,7 @@ import _poolTheLonelyMountain from "../pool/the-lonely-mountain.js";
 import _poolTheMightyThorJaneFoster from "../pool/the-mighty-thor-jane-foster.js";
 import _poolTheMonumentalFacade from "../pool/the-monumental-facade.js";
 import _poolThePrydwenSteelFlagship from "../pool/the-prydwen-steel-flagship.js";
+import _poolTheRealityChip from "../pool/the-reality-chip.js";
 import _poolTheRevelationsOfEzio from "../pool/the-revelations-of-ezio.js";
 import _poolTheaterOfHorrors from "../pool/theater-of-horrors.js";
 import _poolTheoristsSanctum from "../pool/theorists-sanctum.js";
@@ -866,6 +871,7 @@ import _poolTwinflameTravelers from "../pool/twinflame-travelers.js";
 import _poolTyrantOfKherRidges from "../pool/tyrant-of-kher-ridges.js";
 import _poolTyrantsChoice from "../pool/tyrants-choice.js";
 import _poolUlamogTheInfiniteGyre from "../pool/ulamog-the-infinite-gyre.js";
+import _poolUltimateSpiderMan from "../pool/ultimate-spider-man.js";
 import _poolUmbrisFearManifest from "../pool/umbris-fear-manifest.js";
 import _poolUncivilUnrest from "../pool/uncivil-unrest.js";
 import _poolUndergrowthScavenger from "../pool/undergrowth-scavenger.js";
@@ -1181,6 +1187,7 @@ const shard: CardShard = {
     _poolDominatingLicid,
     _poolDonatelloMutantMechanic,
     _poolDraconicLore,
+    _poolDragonshift,
     _poolDragonsoulKnight,
     _poolDreadOfNight,
     _poolDreadhordeInvasion,
@@ -1300,6 +1307,7 @@ const shard: CardShard = {
     _poolGimlisRecklessMight,
     _poolGixYawgmothPraetor,
     _poolGlimmerpost,
+    _poolGlintRaker,
     _poolGlisteningGoremonger,
     _poolGloriousEnd,
     _poolGnarledEffigy,
@@ -1399,6 +1407,7 @@ const shard: CardShard = {
     _poolIxallisKeeper,
     _poolIxidorRealitySculptor,
     _poolIxidorsWill,
+    _poolJaceRealitySculptor,
     _poolJackalFamiliar,
     _poolJadeGuardian,
     _poolJadeLeech,
@@ -1530,6 +1539,7 @@ const shard: CardShard = {
     _poolNecratog,
     _poolNessianBoar,
     _poolNestingWurm,
+    _poolNexos,
     _poolNickValentinePrivateEye,
     _poolNightMarketGuard,
     _poolNightcreep,
@@ -1796,6 +1806,7 @@ const shard: CardShard = {
     _poolTheMightyThorJaneFoster,
     _poolTheMonumentalFacade,
     _poolThePrydwenSteelFlagship,
+    _poolTheRealityChip,
     _poolTheRevelationsOfEzio,
     _poolTheaterOfHorrors,
     _poolTheoristsSanctum,
@@ -1834,6 +1845,7 @@ const shard: CardShard = {
     _poolTyrantOfKherRidges,
     _poolTyrantsChoice,
     _poolUlamogTheInfiniteGyre,
+    _poolUltimateSpiderMan,
     _poolUmbrisFearManifest,
     _poolUncivilUnrest,
     _poolUndergrowthScavenger,

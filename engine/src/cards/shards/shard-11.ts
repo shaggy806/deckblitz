@@ -787,6 +787,7 @@ import _poolStoicSphinx from "../pool/stoic-sphinx.js";
 import _poolStomperCub from "../pool/stomper-cub.js";
 import _poolStoneBySunlight from "../pool/stone-by-sunlight.js";
 import _poolStoneIdolTrap from "../pool/stone-idol-trap.js";
+import _poolStoneTongueBasilisk from "../pool/stone-tongue-basilisk.js";
 import _poolStormfistCrusader from "../pool/stormfist-crusader.js";
 import _poolStreamOfConsciousness from "../pool/stream-of-consciousness.js";
 import _poolStreetbreakerWurm from "../pool/streetbreaker-wurm.js";
@@ -801,6 +802,7 @@ import _poolSunderingGrowth from "../pool/sundering-growth.js";
 import _poolSunfrillImitator from "../pool/sunfrill-imitator.js";
 import _poolSungoldBarrage from "../pool/sungold-barrage.js";
 import _poolSurgeNode from "../pool/surge-node.js";
+import _poolSurgeOfStrength from "../pool/surge-of-strength.js";
 import _poolSwampsnareTrap from "../pool/swampsnare-trap.js";
 import _poolSweepingCleave from "../pool/sweeping-cleave.js";
 import _poolSwordOfTheAnimist from "../pool/sword-of-the-animist.js";
@@ -1757,6 +1759,7 @@ const shard: CardShard = {
     _poolStomperCub,
     _poolStoneBySunlight,
     _poolStoneIdolTrap,
+    _poolStoneTongueBasilisk,
     _poolStormfistCrusader,
     _poolStreamOfConsciousness,
     _poolStreetbreakerWurm,
@@ -1771,6 +1774,7 @@ const shard: CardShard = {
     _poolSunfrillImitator,
     _poolSungoldBarrage,
     _poolSurgeNode,
+    _poolSurgeOfStrength,
     _poolSwampsnareTrap,
     _poolSweepingCleave,
     _poolSwordOfTheAnimist,

@@ -261,6 +261,7 @@ import _poolFalthisShadowcatFamiliar from "../pool/falthis-shadowcat-familiar.js
 import _poolFamishedPaladin from "../pool/famished-paladin.js";
 import _poolFathomFleetBoarder from "../pool/fathom-fleet-boarder.js";
 import _poolFavoredOfIroas from "../pool/favored-of-iroas.js";
+import _poolFearFireFoes from "../pool/fear-fire-foes.js";
 import _poolFear from "../pool/fear.js";
 import _poolFearlessPup from "../pool/fearless-pup.js";
 import _poolFearlessSkald from "../pool/fearless-skald.js";
@@ -416,6 +417,7 @@ import _poolKarplusanYeti from "../pool/karplusan-yeti.js";
 import _poolKarvanistaLoyalLupari from "../pool/karvanista-loyal-lupari.js";
 import _poolKeigaTheTideStar from "../pool/keiga-the-tide-star.js";
 import _poolKeldonVandals from "../pool/keldon-vandals.js";
+import _poolKenzoTheHardhearted from "../pool/kenzo-the-hardhearted.js";
 import _poolKerugaTheMacrosage from "../pool/keruga-the-macrosage.js";
 import _poolKindercatch from "../pool/kindercatch.js";
 import _poolKineticOoze from "../pool/kinetic-ooze.js";
@@ -543,6 +545,7 @@ import _poolMysticPenitent from "../pool/mystic-penitent.js";
 import _poolMysticSpeculation from "../pool/mystic-speculation.js";
 import _poolNamelessOne from "../pool/nameless-one.js";
 import _poolNantukoShaman from "../pool/nantuko-shaman.js";
+import _poolNarsetTranscendent from "../pool/narset-transcendent.js";
 import _poolNaturalEmergence from "../pool/natural-emergence.js";
 import _poolNaturalState from "../pool/natural-state.js";
 import _poolNazahnReveredBladesmith from "../pool/nazahn-revered-bladesmith.js";
@@ -921,6 +924,7 @@ import _poolWildMongrel from "../pool/wild-mongrel.js";
 import _poolWildSwing from "../pool/wild-swing.js";
 import _poolWildfireAwakener from "../pool/wildfire-awakener.js";
 import _poolWillowDryad from "../pool/willow-dryad.js";
+import _poolWithGreatPower from "../pool/with-great-power.js";
 import _poolWitheringGaze from "../pool/withering-gaze.js";
 import _poolWoebearer from "../pool/woebearer.js";
 import _poolWolfwillowHaven from "../pool/wolfwillow-haven.js";
@@ -1240,6 +1244,7 @@ const shard: CardShard = {
     _poolFamishedPaladin,
     _poolFathomFleetBoarder,
     _poolFavoredOfIroas,
+    _poolFearFireFoes,
     _poolFear,
     _poolFearlessPup,
     _poolFearlessSkald,
@@ -1395,6 +1400,7 @@ const shard: CardShard = {
     _poolKarvanistaLoyalLupari,
     _poolKeigaTheTideStar,
     _poolKeldonVandals,
+    _poolKenzoTheHardhearted,
     _poolKerugaTheMacrosage,
     _poolKindercatch,
     _poolKineticOoze,
@@ -1522,6 +1528,7 @@ const shard: CardShard = {
     _poolMysticSpeculation,
     _poolNamelessOne,
     _poolNantukoShaman,
+    _poolNarsetTranscendent,
     _poolNaturalEmergence,
     _poolNaturalState,
     _poolNazahnReveredBladesmith,
@@ -1900,6 +1907,7 @@ const shard: CardShard = {
     _poolWildSwing,
     _poolWildfireAwakener,
     _poolWillowDryad,
+    _poolWithGreatPower,
     _poolWitheringGaze,
     _poolWoebearer,
     _poolWolfwillowHaven,

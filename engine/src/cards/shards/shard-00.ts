@@ -11,6 +11,7 @@ import _poolAdelbertSteiner from "../pool/adelbert-steiner.js";
 import _poolAdornedCrocodile from "../pool/adorned-crocodile.js";
 import _poolAerialFormation from "../pool/aerial-formation.js";
 import _poolAeromunculus from "../pool/aeromunculus.js";
+import _poolAetherTide from "../pool/aether-tide.js";
 import _poolAetherling from "../pool/aetherling.js";
 import _poolAfflict from "../pool/afflict.js";
 import _poolAfiyaGrove from "../pool/afiya-grove.js";
@@ -237,6 +238,7 @@ import _poolDreadhordeTwins from "../pool/dreadhorde-twins.js";
 import _poolDreadlightMonstrosity from "../pool/dreadlight-monstrosity.js";
 import _poolDreamSeizer from "../pool/dream-seizer.js";
 import _poolDrogskolShieldmate from "../pool/drogskol-shieldmate.js";
+import _poolDuneChanter from "../pool/dune-chanter.js";
 import _poolDusyutEarthcarver from "../pool/dusyut-earthcarver.js";
 import _poolDyingToServe from "../pool/dying-to-serve.js";
 import _poolEagerTrufflesnout from "../pool/eager-trufflesnout.js";
@@ -356,6 +358,7 @@ import _poolGuardianAutomaton from "../pool/guardian-automaton.js";
 import _poolGuardianZendikon from "../pool/guardian-zendikon.js";
 import _poolGuidelightPathmaker from "../pool/guidelight-pathmaker.js";
 import _poolGustWalker from "../pool/gust-walker.js";
+import _poolGutterShortcut from "../pool/gutter-shortcut.js";
 import _poolGwaihirTheWindlord from "../pool/gwaihir-the-windlord.js";
 import _poolGyreSage from "../pool/gyre-sage.js";
 import _poolHallOfStormGiants from "../pool/hall-of-storm-giants.js";
@@ -628,6 +631,7 @@ import _poolRelicBane from "../pool/relic-bane.js";
 import _poolReliquaryMonk from "../pool/reliquary-monk.js";
 import _poolReliquaryTower from "../pool/reliquary-tower.js";
 import _poolReminisce from "../pool/reminisce.js";
+import _poolRenetTemporalApprentice from "../pool/renet-temporal-apprentice.js";
 import _poolRenownedWeaponsmith from "../pool/renowned-weaponsmith.js";
 import _poolReset from "../pool/reset.js";
 import _poolRestlessFortress from "../pool/restless-fortress.js";
@@ -973,6 +977,7 @@ const shard: CardShard = {
     _poolAdornedCrocodile,
     _poolAerialFormation,
     _poolAeromunculus,
+    _poolAetherTide,
     _poolAetherling,
     _poolAfflict,
     _poolAfiyaGrove,
@@ -1199,6 +1204,7 @@ const shard: CardShard = {
     _poolDreadlightMonstrosity,
     _poolDreamSeizer,
     _poolDrogskolShieldmate,
+    _poolDuneChanter,
     _poolDusyutEarthcarver,
     _poolDyingToServe,
     _poolEagerTrufflesnout,
@@ -1318,6 +1324,7 @@ const shard: CardShard = {
     _poolGuardianZendikon,
     _poolGuidelightPathmaker,
     _poolGustWalker,
+    _poolGutterShortcut,
     _poolGwaihirTheWindlord,
     _poolGyreSage,
     _poolHallOfStormGiants,
@@ -1590,6 +1597,7 @@ const shard: CardShard = {
     _poolReliquaryMonk,
     _poolReliquaryTower,
     _poolReminisce,
+    _poolRenetTemporalApprentice,
     _poolRenownedWeaponsmith,
     _poolReset,
     _poolRestlessFortress,
