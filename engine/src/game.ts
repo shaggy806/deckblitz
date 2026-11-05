@@ -29963,6 +29963,8 @@ export class Game {
         if (event.type !== "land-played" && event.type !== "spell-cast") return false;
         if (!this.matchesWhoPlayer(spec.who, event.player, self)) return false;
         if (spec.from !== undefined && event.from !== spec.from) return false;
+        // A copy of a card cast isn't a card played (Recycle's ruling).
+        if (event.type === "spell-cast" && this.state.objects[event.object]?.isCopy === true) return false;
         // The card played: the land on the battlefield, the spell on the stack.
         return this.triggerFilterOk(spec.filter, event.object, self);
       }

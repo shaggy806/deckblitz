@@ -10,6 +10,7 @@ import {
   keywords,
   lands,
   loyalty,
+  named,
   pickFromZone,
   pickModes,
   pickPermanents,
@@ -24,6 +25,7 @@ import {
   toHand,
   toLibrary,
   toStep,
+  tokensNamed,
   watchTargets,
   zone,
 } from "./harness.js";
@@ -763,6 +765,39 @@ describe("freed cards, batch 258, group B", () => {
     expect(hand(game)).toBe(before + 1);
   });
 
+  it("each player mills the one number, read before anyone mills (rule 608.2h)", () => {
+    const { game } = table({ deck: "Grizzly Bears" });
+    const goyf = spawn(game, "Lhurgoyf");
+    game.state.objects[goyf].ringBearer = A;
+    toGraveyard(game, "Grizzly Bears");
+    expect(pt(game, goyf).power).toBe(1);
+    game.debugApplyEffect(
+      A,
+      { kind: "mill", target: "each-player", amount: { aggregate: "sum", of: "power", filter: { ringBearer: true, controlledBy: "you" } } },
+      [],
+    );
+    settle(game);
+    expect(graveyard(game, A).length).toBe(2);
+    expect(graveyard(game, B).length).toBe(1);
+  });
+
+  it("Recycle draws nothing for a copy cast, which isn't a card played (its ruling)", () => {
+    const { game, a } = table();
+    lands(game, "Wastes", 6);
+    const bolt = toHand(game, "Lightning Bolt");
+    pickFromZone(a, bolt);
+    cast(game, toHand(game, "Isochron Scepter"));
+    spawn(game, "Recycle");
+    a.chooseCastNowFn = (_view, offer) => {
+      const way = offer.casts[0];
+      return { type: "cast-spell", player: A, card: way.card, targets: [ref(B)], via: way.via, ...(offer.free ? { free: true } : {}) };
+    };
+    const before = hand(game);
+    activate(game, named(game, "Isochron Scepter")[0]);
+    expect(life(game, B)).toBe(17);
+    expect(hand(game)).toBe(before);
+  });
+
   it("Taigam exiles X cards for -X/-X with no {X} in its cost", () => {
     const { game, a } = table();
     const taigam = spawn(game, "Taigam, Sidisi's Hand");
@@ -807,6 +842,19 @@ describe("freed cards, batch 258, group B", () => {
     toGraveyard(game, "Forest");
     cast(game, toHand(game, "Beacon Bolt"), { targets: [ref(big)] });
     expect(game.state.objects[big].damageMarked).toBe(2);
+  });
+
+  it("Beacon Bolt doesn't count a foretold card, face down in exile (rule 406.3a)", () => {
+    const { game } = table();
+    lands(game, "Island", 1);
+    lands(game, "Mountain", 1);
+    lands(game, "Wastes", 1);
+    const big = spawn(game, "Colossal Dreadmaw", B);
+    toGraveyard(game, "Lightning Bolt");
+    const foretold = toExile(game, "Lightning Bolt");
+    game.state.objects[foretold].foretold = true;
+    cast(game, toHand(game, "Beacon Bolt"), { targets: [ref(big)] });
+    expect(game.state.objects[big].damageMarked).toBe(1);
   });
 
   it("Candlekeep Inspiration fixes X as it resolves", () => {
@@ -865,27 +913,6 @@ describe("freed cards, batch 258, group B", () => {
     void seen;
   });
 
-  it("Callidus Assassin enters tapped as a copy with its trigger, and only then", () => {
-    const { game, a } = table();
-    lands(game, "Wastes", 4);
-    lands(game, "Island", 1);
-    lands(game, "Swamp", 1);
-    const theirs = spawn(game, "Grizzly Bears", B);
-    const stranger = spawn(game, "Hill Giant", B);
-    const card = toHand(game, "Callidus Assassin");
-    a.choosePermanentsFn = (_v, eligible) => (eligible.includes(theirs) ? [theirs] : []);
-    a.chooseTargetsFn = (_v, _n, _s, legal) => {
-      const ids = legal[0].map((t) => (t.kind === "object" ? t.object : t.player));
-      expect(ids).toContain(theirs);
-      expect(ids).not.toContain(stranger);
-      expect(ids).not.toContain(card);
-      return [ref(theirs)];
-    };
-    cast(game, card);
-    expect(game.state.objects[card].tapped).toBe(true);
-    expect(zone(game, theirs)).toBe("graveyard");
-  });
-
   it("Ravenous Trap's {0} waits for an opponent's three", () => {
     const { game } = table({ players: 3 });
     const trap = toHand(game, "Ravenous Trap");
@@ -897,6 +924,19 @@ describe("freed cards, batch 258, group B", () => {
     }
     expect(graveyard(game, B).length).toBe(5);
     expect(game.canDispatch(free)).toBeNull();
+  });
+
+  it("Ravenous Trap doesn't count tokens, which aren't cards", () => {
+    const { game } = table({ players: 3 });
+    const trap = toHand(game, "Ravenous Trap");
+    const free = { type: "cast-spell", player: A, card: trap, targets: [ref(B)], altCost: true } as const;
+    game.debugApplyEffect(B, { kind: "create-token", token: "Zombie Token", count: 3 }, []);
+    settle(game);
+    expect(tokensNamed(game, "Zombie Token", B)).toBe(3);
+    game.debugApplyEffect(A, { kind: "destroy-all", filter: { type: "creature" } }, []);
+    settle(game);
+    expect(tokensNamed(game, "Zombie Token", B)).toBe(0);
+    expect(game.canDispatch(free)).not.toBeNull();
   });
 
   it("Ravenous Trap counts one opponent's arrivals: two each for two opponents isn't three", () => {

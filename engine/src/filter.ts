@@ -3245,7 +3245,8 @@ export function aggregateMatches(
         for (const id of state.zones.shared.exile) {
           const object = state.objects[id];
           if (object === undefined || object.isToken) continue;
-          if (object.exiledFaceDown !== undefined && !ownerOnly(filter)) continue;
+          // Face down, foretold cards among them, it has no characteristics (rule 406.3a).
+          if ((object.exiledFaceDown !== undefined || object.foretold === true) && !ownerOnly(filter)) continue;
           if (matchesFilter(state, registry, id, filter, { you })) push({ id, weight: 1 });
         }
         for (const id of reads.stillInExile ?? []) {

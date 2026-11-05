@@ -17293,12 +17293,15 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "mill": {
+      // Each player's number is read before anyone mills (rule 608.2h: The One
+      // Ring to Rule Them All's Lhurgoyf grows with the first player's cards).
+      const milled: (readonly [TargetRef, number])[] = [];
       for (const slot of scopedOrTargetedPlayers(spec.target, ctx)) {
         const who = slot.kind === "player" ? slot.player : ctx.controllerOf(slot);
         if (who === undefined) continue;
-        const target: TargetRef = { kind: "player", player: who };
-        ctx.mill(target, amountValue(spec.amount, ctx, who));
+        milled.push([{ kind: "player", player: who }, amountValue(spec.amount, ctx, who)]);
       }
+      for (const [target, count] of milled) ctx.mill(target, count);
       return;
     }
     case "skip-next-untap": {

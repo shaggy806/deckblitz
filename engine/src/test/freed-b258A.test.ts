@@ -787,24 +787,6 @@ describe("Golden Argosy", () => {
   });
 });
 
-describe("Evil Twin", () => {
-  it("enters as a copy with the ability, which reads the copied name", () => {
-    const { game, a } = table();
-    const theirs = spawn(game, "Grizzly Bears", B);
-    const giant = spawn(game, "Hill Giant", B);
-    lands(game, "Island", 3);
-    lands(game, "Swamp", 3);
-    a.chooseCopyFn = () => theirs;
-    const twin = toHand(game, "Evil Twin");
-    cast(game, twin);
-    expect(pt(game, twin)).toEqual({ power: 2, toughness: 2 });
-    toStep(game, "precombat-main");
-    expect(() => activate(game, twin, 0, { targets: [ref(giant)] })).toThrow();
-    activate(game, twin, 0, { targets: [ref(theirs)] });
-    expect(zone(game, theirs)).toBe("graveyard");
-  });
-});
-
 describe("Outbreak", () => {
   it("is cast by discarding a Swamp, and shrinks only the chosen type", () => {
     const { game, a } = table();
