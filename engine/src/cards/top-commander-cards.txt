@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4510 already implemented / 490 missing (marks refreshed 2026-11-05)
+4526 already implemented / 474 missing (marks refreshed 2026-11-05)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -887,7 +887,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   891  Temur Ascendancy                         {G}{U}{R}        Enchantment
 [x]   892  Grim Hireling                            {3}{B}           Creature — Tiefling Rogue
 [x]   893  Loot, Exuberant Explorer                 {2}{G}           Legendary Creature — Beast Noble
-[ ]   894  Demonic Consultation                     {B}              Instant
+[x]   894  Demonic Consultation                     {B}              Instant
 [x]   895  Rite of Replication                      {2}{U}{U}        Sorcery
 [x]   896  Xorn                                     {2}{R}           Creature — Elemental
 [x]   897  Forsaken Monument                        {5}              Legendary Artifact
@@ -1399,7 +1399,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1406  Decree of Pain                           {6}{B}{B}        Sorcery
 [x]  1407  Delayed Blast Fireball                   {1}{R}{R}        Instant
 [x]  1408  Baleful Mastery                          {3}{B}           Instant
-[ ]  1409  Mantle of the Ancients                   {3}{W}{W}        Enchantment — Aura
+[x]  1409  Mantle of the Ancients                   {3}{W}{W}        Enchantment — Aura
 [x]  1410  Lindblum, Industrial Regency // Mage Siege {2}{R}           Land — Town // Instant — Adventure
 [x]  1411  Darkslick Shores                         {0}              Land
 [x]  1412  Ominous Seas                             {1}{U}           Enchantment
@@ -1606,7 +1606,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1613  Consuming Aberration                     {3}{U}{B}        Creature — Horror
 [x]  1614  Unmarked Grave                           {1}{B}           Sorcery
 [x]  1615  Golgari Charm                            {B}{G}           Instant
-[ ]  1616  Ugin, the Spirit Dragon                  {8}              Legendary Planeswalker — Ugin
+[x]  1616  Ugin, the Spirit Dragon                  {8}              Legendary Planeswalker — Ugin
 [x]  1617  Ondu Spiritdancer                        {4}{W}           Creature — Kor Cleric
 [ ]  1618  Replicating Ring                         {3}              Snow Artifact
 [x]  1619  Masterwork of Ingenuity                  {1}              Artifact — Equipment
@@ -1879,7 +1879,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1886  Dragonlord Dromoka                       {4}{G}{W}        Legendary Creature — Elder Dragon
 [x]  1887  Tormenting Voice                         {1}{R}           Sorcery
 [x]  1888  Refute                                   {1}{U}{U}        Instant
-[ ]  1889  Gift of Immortality                      {2}{W}           Enchantment — Aura
+[x]  1889  Gift of Immortality                      {2}{W}           Enchantment — Aura
 [x]  1890  Temple Bell                              {3}              Artifact
 [x]  1891  Monster Manual // Zoological Study       {3}{G} // {2}{G} Artifact — Book // Sorcery — Adventure
 [x]  1892  Bronze Guardian                          {4}{W}           Artifact Creature — Golem
@@ -2605,7 +2605,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2612  Kabira Takedown // Kabira Plateau        {2}              Instant // Land
 [x]  2613  Blood Seeker                             {1}{B}           Creature — Vampire Shaman
 [ ]  2614  Unbound Flourishing                      {2}{G}           Enchantment
-[ ]  2615  Final Parting                            {3}{B}{B}        Sorcery
+[x]  2615  Final Parting                            {3}{B}{B}        Sorcery
 [x]  2616  Vraska Joins Up                          {B}{G}           Legendary Enchantment
 [ ]  2617  Ghoulish Impetus                         {2}{B}           Enchantment — Aura
 [x]  2618  Ancient Bronze Dragon                    {5}{G}{G}        Creature — Elder Dragon
@@ -3204,7 +3204,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3211  Favorable Winds                          {1}{U}           Enchantment
 [x]  3212  Endrek Sahr, Master Breeder              {4}{B}           Legendary Creature — Human Wizard
 [x]  3213  Woodland Chasm                           {0}              Snow Land — Swamp Forest
-[ ]  3214  Tezzeret, Master of the Bridge           {4}{U}{B}        Legendary Planeswalker — Tezzeret
+[x]  3214  Tezzeret, Master of the Bridge           {4}{U}{B}        Legendary Planeswalker — Tezzeret
 [ ]  3215  Oviya, Automech Artisan                  {3}{G}           Legendary Creature — Human Artificer
 [x]  3216  Promising Vein                           {0}              Land — Cave
 [x]  3217  Keeper of Fables                         {3}{G}{G}        Creature — Cat
@@ -3217,7 +3217,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3224  Strong Back                              {2}{G}           Enchantment — Aura
 [x]  3225  Emeritus of Woe // Demonic Tutor         {3}{B} // {1}{B} Creature — Vampire Warlock // Sorcery
 [x]  3226  Parhelion II                             {6}{W}{W}        Legendary Artifact — Vehicle
-[ ]  3227  Ingenious Prodigy                        {X}{U}           Creature — Human Wizard
+[x]  3227  Ingenious Prodigy                        {X}{U}           Creature — Human Wizard
 [x]  3228  Marang River Regent // Coil and Catch    {4}{U}{U} // {3}{U} Creature — Dragon // Instant — Omen
 [x]  3229  Tangled Florahedron // Tangled Vale      {2}              Creature — Elemental // Land
 [x]  3230  Hanweir Battlements                      {0}              Land
@@ -3291,7 +3291,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3298  Chocobo Racetrack                        {3}{G}{G}        Artifact
 [ ]  3299  Hope of Ghirapur                         {1}              Legendary Artifact Creature — Thopter
 [x]  3300  Court of Ire                             {3}{R}{R}        Enchantment
-[ ]  3301  Ghost Vacuum                             {1}              Artifact
+[x]  3301  Ghost Vacuum                             {1}              Artifact
 [x]  3302  Commit // Memory                         {3}{U} // {4}{U}{U} Instant // Sorcery
 [x]  3303  Tiller Engine                            {2}              Artifact Creature — Construct
 [x]  3304  Sunscorched Desert                       {0}              Land — Desert
@@ -3366,7 +3366,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3373  Sphinx's Revelation                      {X}{W}{U}{U}     Instant
 [x]  3374  Aragorn, the Uniter                      {R}{G}{W}{U}     Legendary Creature — Human Noble
 [x]  3375  Heat Shimmer                             {2}{R}           Sorcery
-[ ]  3376  Inventory Management                     {R}{W}           Instant
+[x]  3376  Inventory Management                     {R}{W}           Instant
 [x]  3377  Ensnared by the Mara                     {2}{R}{R}        Sorcery
 [x]  3378  Stinging Study                           {4}{B}           Instant
 [x]  3379  Court of Locthwain                       {2}{B}{B}        Enchantment
@@ -3449,7 +3449,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3456  Echoing Assault                          {4}{R}           Enchantment
 [x]  3457  Ulamog's Crusher                         {8}              Creature — Eldrazi
 [x]  3458  River Kelpie                             {3}{U}{U}        Creature — Beast
-[ ]  3459  Bonny Pall, Clearcutter                  {3}{G}{U}{U}     Legendary Creature — Giant Scout
+[x]  3459  Bonny Pall, Clearcutter                  {3}{G}{U}{U}     Legendary Creature — Giant Scout
 [x]  3460  Ignite the Future                        {3}{R}           Sorcery
 [x]  3461  Golgari Thug                             {1}{B}           Creature — Human Warrior
 [x]  3462  Devilish Valet                           {2}{R}           Creature — Devil Warrior
@@ -3468,7 +3468,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3475  Blasting Station                         {3}              Artifact
 [ ]  3476  Burning Inquiry                          {R}              Sorcery
 [ ]  3477  Master of Cruelties                      {3}{B}{R}        Creature — Demon
-[ ]  3478  Coalition Relic                          {3}              Artifact
+[x]  3478  Coalition Relic                          {3}              Artifact
 [x]  3479  Kaalia of the Vast                       {1}{R}{W}{B}     Legendary Creature — Human Cleric
 [x]  3480  Berserk                                  {G}              Instant
 [x]  3481  Scion of Oona                            {2}{U}           Creature — Faerie Soldier
@@ -3506,7 +3506,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3513  Invasion of Zendikar // Awakened Skyclave {4}              Battle — Siege // Creature — Elemental
 [x]  3514  Steel of the Godhead                     {2}{W/U}         Enchantment — Aura
 [x]  3515  Deep Forest Hermit                       {3}{G}{G}        Creature — Elf Druid
-[ ]  3516  Nim Deathmantle                          {2}              Artifact — Equipment
+[x]  3516  Nim Deathmantle                          {2}              Artifact — Equipment
 [x]  3517  Agent Frank Horrigan                     {5}{B}{G}        Legendary Creature — Mutant Warrior
 [x]  3518  Karumonix, the Rat King                  {1}{B}{B}        Legendary Creature — Phyrexian Rat
 [ ]  3519  Leyline of Transformation                {2}{U}{U}        Enchantment
@@ -3622,7 +3622,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3629  Sporemound                               {3}{G}{G}        Creature — Fungus
 [x]  3630  Clone Legion                             {7}{U}{U}        Sorcery
 [x]  3631  Alisaie Leveilleur                       {2}{W}           Legendary Creature — Elf Wizard
-[ ]  3632  Storm of Saruman                         {4}{U}{U}        Enchantment
+[x]  3632  Storm of Saruman                         {4}{U}{U}        Enchantment
 [x]  3633  Bristling Backwoods                      {0}              Land — Desert
 [x]  3634  Dragonborn Champion                      {2}{R}{G}        Creature — Dragon Warrior
 [x]  3635  Calix, Guided by Fate                    {1}{G}{W}        Legendary Enchantment Creature — Human Druid
@@ -3679,7 +3679,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3686  Jazal Goldmane                           {2}{W}{W}        Legendary Creature — Cat Warrior
 [x]  3687  Deathsprout                              {1}{B}{B}{G}     Instant
 [x]  3688  Behemoth Sledge                          {1}{G}{W}        Artifact — Equipment
-[ ]  3689  Lux Artillery                            {4}              Artifact
+[x]  3689  Lux Artillery                            {4}              Artifact
 [x]  3690  Plague Belcher                           {2}{B}           Creature — Zombie Beast
 [x]  3691  Magus of the Candelabra                  {G}              Creature — Human Wizard
 [x]  3692  Liquimetal Coating                       {2}              Artifact
@@ -3695,7 +3695,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3702  The Wise Mothman                         {1}{B}{G}{U}     Legendary Creature — Insect Mutant
 [x]  3703  Astarion's Thirst                        {3}{B}           Instant
 [x]  3704  Ambition's Cost                          {3}{B}           Sorcery
-[ ]  3705  Haunting Voyage                          {4}{B}{B}        Sorcery
+[x]  3705  Haunting Voyage                          {4}{B}{B}        Sorcery
 [ ]  3706  Screaming Nemesis                        {2}{R}           Creature — Spirit
 [x]  3707  Fire Lord Azula                          {1}{U}{B}{R}     Legendary Creature — Human Noble
 [ ]  3708  The Second Doctor                        {2}{W}{U}        Legendary Creature — Time Lord Doctor
@@ -4498,7 +4498,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4505  Securitron Squadron                      {1}{W}           Artifact Creature — Robot
 [x]  4506  Beacon of Unrest                         {3}{B}{B}        Sorcery
 [ ]  4507  Senu, Keen-Eyed Protector                {1}{W}           Legendary Creature — Bird Scout
-[ ]  4508  Liliana, Heretical Healer // Liliana, Defiant Necromancer {3}              Legendary Creature — Human Cleric // Legendary Planeswalker — Liliana
+[x]  4508  Liliana, Heretical Healer // Liliana, Defiant Necromancer {3}              Legendary Creature — Human Cleric // Legendary Planeswalker — Liliana
 [x]  4509  Archetype of Courage                     {1}{W}{W}        Enchantment Creature — Human Soldier
 [x]  4510  Zodiark, Umbral God                      {B}{B}{B}{B}{B}  Legendary Creature — God
 [x]  4511  Cerulean Wisps                           {U}              Instant
