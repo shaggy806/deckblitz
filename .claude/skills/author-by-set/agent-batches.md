@@ -51,6 +51,16 @@ card with a condition and expect to read more. Wall time is the other side:
 B258's two agents spent 26.5M tokens over 36 minutes, B257's four 39.8M over 29.
 One batch each, so these are a direction, not a law.
 
+**B259 (2026-11-05) held to that ceiling**, agents of 75 and 74 with a test on every
+card, and five of their 114 cards were still wrong, none of them among the seven
+`batch-review.mjs` flagged: Nissa's Judgment and Kamahl's Will put an any-number group
+before a later target slot, which `any-number-targets.test.ts` guards but an agent's
+`pool.test` run doesn't reach; the others passed tests that never tried the clause at
+fault. One fresh reader over the whole `review.txt` found them, read-only, at 0.36M tokens
+against the two agents' 1.12M (the harness's usage counts, not the table's). So give the
+review to a reader like that, then check what it reports against the code. One batch, so
+a direction too.
+
 ## A feature alongside the agents
 
 Building the feature first left five agents' worth of cards waiting on it:

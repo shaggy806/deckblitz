@@ -914,6 +914,7 @@ missing. Re-run `--greedy` for Phase 2's order.
 - **2026-11-04: the scaffolder's sweep, batch 256.** `--auto-scan --all` over the whole snapshot, every finished card reviewed: 373 authored, 10 blocked, 19 over-counted keys marked built; 1,289 left on the queue.
 - **2026-11-04: `author-freed`, batch 257.** 125 of the queue's next 150 authored, 25 given narrow keys, by agents of 20, 30, 40 and 60 cards; 1,132 left.
 - **2026-11-04: `author-freed`, batch 258.** 135 of the queue's next 150 authored, 15 given narrow keys, by agents of 50 and 100 cards; 982 left.
+- **2026-11-05: `author-freed`, batch 259.** 111 of the queue's next 150 authored, 39 given narrow keys, by agents of 75 and 74 cards with a blind reader over all of it; 832 left.
 
 ## Rough size
 
