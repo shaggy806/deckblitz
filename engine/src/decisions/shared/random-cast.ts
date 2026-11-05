@@ -7,7 +7,7 @@
  */
 
 import type { Action, CastSpellOffer } from "../../actions.js";
-import { convokeProofFor, delvePicks } from "../../actions.js";
+import { convokeProofFor, delvePicks, tapPicksPower } from "../../actions.js";
 import type { ObjectId, PlayerId } from "../../primitives.js";
 import type { TargetRef, TargetSpec } from "../../target.js";
 import { fitTargetCount, maxXForTargets, minXForTargets, targetsWithinTaxes } from "../../target-count.js";
@@ -93,11 +93,20 @@ export function randomCast(
   const sac = legal.sacrifice;
   const tap: ObjectId[] = [];
   if (legal.tapCost !== undefined) {
+    const offer = legal.tapCost;
     const pool: ObjectId[] = [];
-    for (const id of legal.tapCost.choices) {
-      for (let i = 0; i < (legal.tapCost.copies?.[id] ?? 1); i += 1) pool.push(id);
+    for (const id of offer.choices) {
+      // A total-power cost (teamwork, as a kicker): a creature with no power
+      // to give would only lower the total.
+      if (offer.totalPower !== undefined && (offer.power?.[id] ?? 0) <= 0) continue;
+      for (let i = 0; i < (offer.copies?.[id] ?? 1); i += 1) pool.push(id);
     }
-    for (let i = 0; i < legal.tapCost.count && pool.length > 0; i += 1) {
+    // Its `count` is 0: creatures at random until their power is enough
+    // (`randomTapPicks`'s crew rule) — the count alone tapped none, an answer
+    // the cast refused (Wizard's Spellbook copying Team Tactics, B265).
+    const more = (): boolean =>
+      offer.totalPower !== undefined ? tapPicksPower(offer, tap) < offer.totalPower : tap.length < offer.count;
+    while (more() && pool.length > 0) {
       tap.push(pool.splice(rng.pickIndex(pool.length), 1)[0]);
     }
   }
