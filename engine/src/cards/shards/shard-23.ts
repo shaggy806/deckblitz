@@ -135,6 +135,7 @@ import _poolCaveTiger from "../pool/cave-tiger.js";
 import _poolCenoteScout from "../pool/cenote-scout.js";
 import _poolCephalidScout from "../pool/cephalid-scout.js";
 import _poolCerebralDownload from "../pool/cerebral-download.js";
+import _poolChainsaw from "../pool/chainsaw.js";
 import _poolChamberOfManipulation from "../pool/chamber-of-manipulation.js";
 import _poolChandraNalaar from "../pool/chandra-nalaar.js";
 import _poolChaosWand from "../pool/chaos-wand.js";
@@ -258,6 +259,7 @@ import _poolEvendoWakingHaven from "../pool/evendo-waking-haven.js";
 import _poolEvolvingAdaptive from "../pool/evolving-adaptive.js";
 import _poolExclusionMage from "../pool/exclusion-mage.js";
 import _poolExpeditionHealer from "../pool/expedition-healer.js";
+import _poolExperimentalLabStaffRoom from "../pool/experimental-lab-staff-room.js";
 import _poolExtraplanarLens from "../pool/extraplanar-lens.js";
 import _poolExtravagantSpirit from "../pool/extravagant-spirit.js";
 import _poolEyesOfTheWatcher from "../pool/eyes-of-the-watcher.js";
@@ -324,6 +326,7 @@ import _poolGoblinEngineer from "../pool/goblin-engineer.js";
 import _poolGoblinGaveleer from "../pool/goblin-gaveleer.js";
 import _poolGoblinMatron from "../pool/goblin-matron.js";
 import _poolGoblinTraprunner from "../pool/goblin-traprunner.js";
+import _poolGodsend from "../pool/godsend.js";
 import _poolGodtoucher from "../pool/godtoucher.js";
 import _poolGoryosVengeance from "../pool/goryos-vengeance.js";
 import _poolGovernTheGuildless from "../pool/govern-the-guildless.js";
@@ -332,6 +335,7 @@ import _poolGrayMerchantOfAsphodel from "../pool/gray-merchant-of-asphodel.js";
 import _poolGreatArashinCity from "../pool/great-arashin-city.js";
 import _poolGreatWhale from "../pool/great-whale.js";
 import _poolGreenwoodSentinel from "../pool/greenwood-sentinel.js";
+import _poolGrevenPredatorCaptain from "../pool/greven-predator-captain.js";
 import _poolGrimDraugr from "../pool/grim-draugr.js";
 import _poolGuardianOfTheGuildpact from "../pool/guardian-of-the-guildpact.js";
 import _poolGuma from "../pool/guma.js";
@@ -364,6 +368,7 @@ import _poolHiredBlade from "../pool/hired-blade.js";
 import _poolHobble from "../pool/hobble.js";
 import _poolHobgoblinDragoon from "../pool/hobgoblin-dragoon.js";
 import _poolHoldTheGates from "../pool/hold-the-gates.js";
+import _poolHolyFrazzleCannon from "../pool/holy-frazzle-cannon.js";
 import _poolHomewardPath from "../pool/homeward-path.js";
 import _poolHopeTender from "../pool/hope-tender.js";
 import _poolHorizonSeeker from "../pool/horizon-seeker.js";
@@ -391,6 +396,7 @@ import _poolIncitedRabble from "../pool/incited-rabble.js";
 import _poolIncurableOgre from "../pool/incurable-ogre.js";
 import _poolInfernalCaptor from "../pool/infernal-captor.js";
 import _poolIntegrityIntervention from "../pool/integrity-intervention.js";
+import _poolInvasionOfNewCapenna from "../pool/invasion-of-new-capenna.js";
 import _poolInvasionOfNewPhyrexia from "../pool/invasion-of-new-phyrexia.js";
 import _poolIronLadDivergingDestiny from "../pool/iron-lad-diverging-destiny.js";
 import _poolIronpawAspirant from "../pool/ironpaw-aspirant.js";
@@ -651,6 +657,7 @@ import _poolRenegadeTroops from "../pool/renegade-troops.js";
 import _poolReprisal from "../pool/reprisal.js";
 import _poolReturnToTheEarth from "../pool/return-to-the-earth.js";
 import _poolReviveTheFallen from "../pool/revive-the-fallen.js";
+import _poolRewriteHistory from "../pool/rewrite-history.js";
 import _poolRhoxPummeler from "../pool/rhox-pummeler.js";
 import _poolRhysTheEvermore from "../pool/rhys-the-evermore.js";
 import _poolRicochetTrap from "../pool/ricochet-trap.js";
@@ -663,12 +670,14 @@ import _poolRoarOfTheFifthPeople from "../pool/roar-of-the-fifth-people.js";
 import _poolRoarOfTheKha from "../pool/roar-of-the-kha.js";
 import _poolRoaringSlagwurm from "../pool/roaring-slagwurm.js";
 import _poolRoilingCanopy from "../pool/roiling-canopy.js";
+import _poolRoninShadowStalker from "../pool/ronin-shadow-stalker.js";
 import _poolRooftopAssassin from "../pool/rooftop-assassin.js";
 import _poolRoryWilliams from "../pool/rory-williams.js";
 import _poolRotCurseRakshasa from "../pool/rot-curse-rakshasa.js";
 import _poolRotFarmMortipede from "../pool/rot-farm-mortipede.js";
 import _poolRottedHulk from "../pool/rotted-hulk.js";
 import _poolRowansStalwarts from "../pool/rowans-stalwarts.js";
+import _poolRukarumelBiologist from "../pool/rukarumel-biologist.js";
 import _poolRuneBrandJuggler from "../pool/rune-brand-juggler.js";
 import _poolRuneScarredDemon from "../pool/rune-scarred-demon.js";
 import _poolSadisticAugermage from "../pool/sadistic-augermage.js";
@@ -860,6 +869,7 @@ import _poolTrappedInTheScreen from "../pool/trapped-in-the-screen.js";
 import _poolTraumaticCritique from "../pool/traumatic-critique.js";
 import _poolTravelingBotanist from "../pool/traveling-botanist.js";
 import _poolTreacherousBlessing from "../pool/treacherous-blessing.js";
+import _poolTreacherousGreed from "../pool/treacherous-greed.js";
 import _poolTreetopAmbusher from "../pool/treetop-ambusher.js";
 import _poolTrokinHighGuard from "../pool/trokin-high-guard.js";
 import _poolTrollOfKhazadDum from "../pool/troll-of-khazad-dum.js";
@@ -939,6 +949,7 @@ import _poolWoodbornBehemoth from "../pool/woodborn-behemoth.js";
 import _poolWoodwraithStrangler from "../pool/woodwraith-strangler.js";
 import _poolWrangle from "../pool/wrangle.js";
 import _poolWrathfulRaptors from "../pool/wrathful-raptors.js";
+import _poolXandersPact from "../pool/xanders-pact.js";
 import _poolYavimayaSteelcrusher from "../pool/yavimaya-steelcrusher.js";
 import _poolYoshimaruBelovedCompanion from "../pool/yoshimaru-beloved-companion.js";
 import _poolYouCannotPass from "../pool/you-cannot-pass.js";
@@ -961,6 +972,7 @@ import _tokensRedElementalToken33 from "../tokens/red-elemental-token-3-3.js";
 import _tokensSpellgorgerWeirdToken from "../tokens/spellgorger-weird-token.js";
 import _tokensSwordToken from "../tokens/sword-token.js";
 import _tokensVampireToken11 from "../tokens/vampire-token-1-1.js";
+import _tokensWastelandSurvivalGuideToken from "../tokens/wasteland-survival-guide-token.js";
 import _tokensWeirdToken from "../tokens/weird-token.js";
 
 const shard: CardShard = {
@@ -1097,6 +1109,7 @@ const shard: CardShard = {
     _poolCenoteScout,
     _poolCephalidScout,
     _poolCerebralDownload,
+    _poolChainsaw,
     _poolChamberOfManipulation,
     _poolChandraNalaar,
     _poolChaosWand,
@@ -1220,6 +1233,7 @@ const shard: CardShard = {
     _poolEvolvingAdaptive,
     _poolExclusionMage,
     _poolExpeditionHealer,
+    _poolExperimentalLabStaffRoom,
     _poolExtraplanarLens,
     _poolExtravagantSpirit,
     _poolEyesOfTheWatcher,
@@ -1286,6 +1300,7 @@ const shard: CardShard = {
     _poolGoblinGaveleer,
     _poolGoblinMatron,
     _poolGoblinTraprunner,
+    _poolGodsend,
     _poolGodtoucher,
     _poolGoryosVengeance,
     _poolGovernTheGuildless,
@@ -1294,6 +1309,7 @@ const shard: CardShard = {
     _poolGreatArashinCity,
     _poolGreatWhale,
     _poolGreenwoodSentinel,
+    _poolGrevenPredatorCaptain,
     _poolGrimDraugr,
     _poolGuardianOfTheGuildpact,
     _poolGuma,
@@ -1326,6 +1342,7 @@ const shard: CardShard = {
     _poolHobble,
     _poolHobgoblinDragoon,
     _poolHoldTheGates,
+    _poolHolyFrazzleCannon,
     _poolHomewardPath,
     _poolHopeTender,
     _poolHorizonSeeker,
@@ -1353,6 +1370,7 @@ const shard: CardShard = {
     _poolIncurableOgre,
     _poolInfernalCaptor,
     _poolIntegrityIntervention,
+    _poolInvasionOfNewCapenna,
     _poolInvasionOfNewPhyrexia,
     _poolIronLadDivergingDestiny,
     _poolIronpawAspirant,
@@ -1613,6 +1631,7 @@ const shard: CardShard = {
     _poolReprisal,
     _poolReturnToTheEarth,
     _poolReviveTheFallen,
+    _poolRewriteHistory,
     _poolRhoxPummeler,
     _poolRhysTheEvermore,
     _poolRicochetTrap,
@@ -1625,12 +1644,14 @@ const shard: CardShard = {
     _poolRoarOfTheKha,
     _poolRoaringSlagwurm,
     _poolRoilingCanopy,
+    _poolRoninShadowStalker,
     _poolRooftopAssassin,
     _poolRoryWilliams,
     _poolRotCurseRakshasa,
     _poolRotFarmMortipede,
     _poolRottedHulk,
     _poolRowansStalwarts,
+    _poolRukarumelBiologist,
     _poolRuneBrandJuggler,
     _poolRuneScarredDemon,
     _poolSadisticAugermage,
@@ -1822,6 +1843,7 @@ const shard: CardShard = {
     _poolTraumaticCritique,
     _poolTravelingBotanist,
     _poolTreacherousBlessing,
+    _poolTreacherousGreed,
     _poolTreetopAmbusher,
     _poolTrokinHighGuard,
     _poolTrollOfKhazadDum,
@@ -1901,6 +1923,7 @@ const shard: CardShard = {
     _poolWoodwraithStrangler,
     _poolWrangle,
     _poolWrathfulRaptors,
+    _poolXandersPact,
     _poolYavimayaSteelcrusher,
     _poolYoshimaruBelovedCompanion,
     _poolYouCannotPass,
@@ -1925,6 +1948,7 @@ const shard: CardShard = {
     _tokensSpellgorgerWeirdToken,
     _tokensSwordToken,
     _tokensVampireToken11,
+    _tokensWastelandSurvivalGuideToken,
     _tokensWeirdToken,
   ],
 };

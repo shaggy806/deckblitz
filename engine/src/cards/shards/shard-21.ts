@@ -7,6 +7,7 @@ import _poolAangAtTheCrossroads from "../pool/aang-at-the-crossroads.js";
 import _poolAboshansDesire from "../pool/aboshans-desire.js";
 import _poolAbueloAncestralEcho from "../pool/abuelo-ancestral-echo.js";
 import _poolAbyssalNocturnus from "../pool/abyssal-nocturnus.js";
+import _poolAcesBaseballBat from "../pool/aces-baseball-bat.js";
 import _poolAcquisitionOctopus from "../pool/acquisition-octopus.js";
 import _poolAeridKonstrari from "../pool/aerid-konstrari.js";
 import _poolAetherStorm from "../pool/aether-storm.js";
@@ -213,6 +214,7 @@ import _poolDjeruAndHazoret from "../pool/djeru-and-hazoret.js";
 import _poolDjerusResolve from "../pool/djerus-resolve.js";
 import _poolDocOckSinisterScientist from "../pool/doc-ock-sinister-scientist.js";
 import _poolDown from "../pool/down.js";
+import _poolDragonsEyeSavants from "../pool/dragons-eye-savants.js";
 import _poolDragonsparkReactor from "../pool/dragonspark-reactor.js";
 import _poolDranasChosen from "../pool/dranas-chosen.js";
 import _poolDreadshipReef from "../pool/dreadship-reef.js";
@@ -393,6 +395,7 @@ import _poolInvasionOfSegovia from "../pool/invasion-of-segovia.js";
 import _poolIridescentBlademaster from "../pool/iridescent-blademaster.js";
 import _poolIronHillsStalwart from "../pool/iron-hills-stalwart.js";
 import _poolIronStar from "../pool/iron-star.js";
+import _poolJaceVrynsProdigy from "../pool/jace-vryns-prodigy.js";
 import _poolJacesErasure from "../pool/jaces-erasure.js";
 import _poolJaradGolgariLichLord from "../pool/jarad-golgari-lich-lord.js";
 import _poolJasperaSentinel from "../pool/jaspera-sentinel.js";
@@ -512,6 +515,7 @@ import _poolNecrosquito from "../pool/necrosquito.js";
 import _poolNephaliaSmuggler from "../pool/nephalia-smuggler.js";
 import _poolNetcasterSpider from "../pool/netcaster-spider.js";
 import _poolNeurokProdigy from "../pool/neurok-prodigy.js";
+import _poolNexusOfBecoming from "../pool/nexus-of-becoming.js";
 import _poolNexusOfFate from "../pool/nexus-of-fate.js";
 import _poolNezahalPrimalTide from "../pool/nezahal-primal-tide.js";
 import _poolNiallSilvain from "../pool/niall-silvain.js";
@@ -751,6 +755,7 @@ import _poolSwordOfFeastAndFamine from "../pool/sword-of-feast-and-famine.js";
 import _poolSylvokBattleChair from "../pool/sylvok-battle-chair.js";
 import _poolSylvokReplica from "../pool/sylvok-replica.js";
 import _poolSymbioticBeast from "../pool/symbiotic-beast.js";
+import _poolTaintedAdversary from "../pool/tainted-adversary.js";
 import _poolTamiyosLogbook from "../pool/tamiyos-logbook.js";
 import _poolTangleTumbler from "../pool/tangle-tumbler.js";
 import _poolTanglebloom from "../pool/tanglebloom.js";
@@ -924,6 +929,7 @@ const shard: CardShard = {
     _poolAboshansDesire,
     _poolAbueloAncestralEcho,
     _poolAbyssalNocturnus,
+    _poolAcesBaseballBat,
     _poolAcquisitionOctopus,
     _poolAeridKonstrari,
     _poolAetherStorm,
@@ -1130,6 +1136,7 @@ const shard: CardShard = {
     _poolDjerusResolve,
     _poolDocOckSinisterScientist,
     _poolDown,
+    _poolDragonsEyeSavants,
     _poolDragonsparkReactor,
     _poolDranasChosen,
     _poolDreadshipReef,
@@ -1310,6 +1317,7 @@ const shard: CardShard = {
     _poolIridescentBlademaster,
     _poolIronHillsStalwart,
     _poolIronStar,
+    _poolJaceVrynsProdigy,
     _poolJacesErasure,
     _poolJaradGolgariLichLord,
     _poolJasperaSentinel,
@@ -1429,6 +1437,7 @@ const shard: CardShard = {
     _poolNephaliaSmuggler,
     _poolNetcasterSpider,
     _poolNeurokProdigy,
+    _poolNexusOfBecoming,
     _poolNexusOfFate,
     _poolNezahalPrimalTide,
     _poolNiallSilvain,
@@ -1668,6 +1677,7 @@ const shard: CardShard = {
     _poolSylvokBattleChair,
     _poolSylvokReplica,
     _poolSymbioticBeast,
+    _poolTaintedAdversary,
     _poolTamiyosLogbook,
     _poolTangleTumbler,
     _poolTanglebloom,

@@ -28431,6 +28431,25 @@ export class Game {
             }
           : { delayed: trigger }),
       };
+      // "Whenever … causes you to discard cards this turn, return those
+      // cards" (Pure Intentions): once per discarded card, each its own
+      // trigger object followed to where the discard put it — as a printed
+      // `perCard` discard trigger is.
+      if (at.whenever.on === "discards" && at.whenever.perCard === true && event.type === "cards-discarded") {
+        for (const card of this.discardedMatching(at.whenever, event.objects, object, event.unrevealed)) {
+          const { triggerValue: _count, ...single } = pending;
+          this.state.pendingTriggers.push({
+            ...single,
+            triggerObject: card,
+            lastKnownRefs: {
+              ...(pending.lastKnownRefs ?? {}),
+              triggerObjectAfterLeaving: this.state.objects[card]?.zoneChangeCount ?? 0,
+            },
+          });
+          if (at.once === true) break;
+        }
+        continue;
+      }
       // A token stack in the event is a permanent per token (rule 603.2).
       const times =
         at.once === true ? 1 : Math.min(this.eventMultiplier(at.whenever, event, trigger.source), Game.MAX_EFFECT_INSTANCES);
@@ -31040,6 +31059,15 @@ export class Game {
    * were — or, when a player who orders their own is asked to first
    * (`order-triggers`), that the decision was raised. */
   private placePendingTriggers(): boolean {
+    if (this.state.pendingTriggers.length === 0) return false;
+    // A player who has left the game controls nothing (rule 800.4a): what
+    // triggered for them in the same event they left in — a creature dying
+    // by the same state-based actions that make them lose, replaced by their
+    // Valentin, Dean of the Vein, whose "when you do" is theirs — ceases to
+    // exist. `leaveGame` drops what was already waiting; this, what came after.
+    this.state.pendingTriggers = this.state.pendingTriggers.filter(
+      (t) => this.state.players[t.controller]?.hasLost !== true,
+    );
     if (this.state.pendingTriggers.length === 0) return false;
     if (this.askMiracleReveal()) return true;
     if (this.state.pendingTriggers.length === 0) return false;
@@ -45314,7 +45342,9 @@ export class Game {
     thenTargets?: ResolvedTargets,
     thenTogether?: true,
   ): void {
-    const matching = this.battlefieldMatching(player, filter).filter(
+    // With the source, for a filter about it: "equipped creature" (Hand of
+    // Vecna's `hostOfSource`), "attached to this".
+    const matching = this.battlefieldMatching(player, filter, x, source).filter(
       (id) => (!exceptSource || id !== source) && !except.includes(id),
     );
     const together = togetherRule === undefined ? undefined : this.searchTogether(togetherRule, matching, player, x);
@@ -48539,7 +48569,10 @@ export class Game {
         "nextSpell" in t.at &&
         t.at.turn === this.state.turn.number &&
         t.controller === event.player &&
-        matchesFilter(this.state, this.registry, event.object, t.at.nextSpell, { you: t.controller }),
+        // The source too, for "a spell with the chosen name" (Medomai's
+        // Prophecy): `chosenName` reads the names its source chose, from its
+        // last-known information once the Saga is gone.
+        matchesFilter(this.state, this.registry, event.object, t.at.nextSpell, { you: t.controller, source: t.source }),
     );
     if (firing.length === 0) return;
     this.state.delayedTriggers = this.state.delayedTriggers.filter((t) => !firing.includes(t));

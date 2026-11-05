@@ -217,6 +217,7 @@ import _poolEasterlingVanguard from "../pool/easterling-vanguard.js";
 import _poolEchoingCalm from "../pool/echoing-calm.js";
 import _poolEiganjoUprising from "../pool/eiganjo-uprising.js";
 import _poolElderDruid from "../pool/elder-druid.js";
+import _poolElectroAssaultingBattery from "../pool/electro-assaulting-battery.js";
 import _poolElgaudShieldmate from "../pool/elgaud-shieldmate.js";
 import _poolEliminateTheCompetition from "../pool/eliminate-the-competition.js";
 import _poolElvishMystic from "../pool/elvish-mystic.js";
@@ -391,6 +392,7 @@ import _poolInspiringLeader from "../pool/inspiring-leader.js";
 import _poolInvasionOfMercadia from "../pool/invasion-of-mercadia.js";
 import _poolInvasionOfMuraganda from "../pool/invasion-of-muraganda.js";
 import _poolInventiveWingsmith from "../pool/inventive-wingsmith.js";
+import _poolInvertPolarity from "../pool/invert-polarity.js";
 import _poolIrenicussVileDuplication from "../pool/irenicuss-vile-duplication.js";
 import _poolIronHeartChimera from "../pool/iron-heart-chimera.js";
 import _poolIronHillsBlacksmith from "../pool/iron-hills-blacksmith.js";
@@ -538,6 +540,7 @@ import _poolNeurokSpy from "../pool/neurok-spy.js";
 import _poolNeverendingTorment from "../pool/neverending-torment.js";
 import _poolNeyamShaiMurad from "../pool/neyam-shai-murad.js";
 import _poolNiblisOfTheUrn from "../pool/niblis-of-the-urn.js";
+import _poolNicolBolasGodPharaoh from "../pool/nicol-bolas-god-pharaoh.js";
 import _poolNightRevelers from "../pool/night-revelers.js";
 import _poolNimbusOfTheIsles from "../pool/nimbus-of-the-isles.js";
 import _poolNoMore from "../pool/no-more.js";
@@ -709,6 +712,7 @@ import _poolSolidGround from "../pool/solid-ground.js";
 import _poolSoltariFootSoldier from "../pool/soltari-foot-soldier.js";
 import _poolSoulGuideLantern from "../pool/soul-guide-lantern.js";
 import _poolSoulWarden from "../pool/soul-warden.js";
+import _poolSparasAdjudicators from "../pool/sparas-adjudicators.js";
 import _poolSpartanVeteran from "../pool/spartan-veteran.js";
 import _poolSpawnwrithe from "../pool/spawnwrithe.js";
 import _poolSpellSatchel from "../pool/spell-satchel.js";
@@ -866,6 +870,7 @@ import _poolWistfulThinking from "../pool/wistful-thinking.js";
 import _poolWitchKingOfAngmar from "../pool/witch-king-of-angmar.js";
 import _poolWitchsMist from "../pool/witchs-mist.js";
 import _poolWitnessProtection from "../pool/witness-protection.js";
+import _poolWordsOfWind from "../pool/words-of-wind.js";
 import _poolWormfangManta from "../pool/wormfang-manta.js";
 import _poolWorstFears from "../pool/worst-fears.js";
 import _poolWorthyKnight from "../pool/worthy-knight.js";
@@ -1126,6 +1131,7 @@ const shard: CardShard = {
     _poolEchoingCalm,
     _poolEiganjoUprising,
     _poolElderDruid,
+    _poolElectroAssaultingBattery,
     _poolElgaudShieldmate,
     _poolEliminateTheCompetition,
     _poolElvishMystic,
@@ -1300,6 +1306,7 @@ const shard: CardShard = {
     _poolInvasionOfMercadia,
     _poolInvasionOfMuraganda,
     _poolInventiveWingsmith,
+    _poolInvertPolarity,
     _poolIrenicussVileDuplication,
     _poolIronHeartChimera,
     _poolIronHillsBlacksmith,
@@ -1447,6 +1454,7 @@ const shard: CardShard = {
     _poolNeverendingTorment,
     _poolNeyamShaiMurad,
     _poolNiblisOfTheUrn,
+    _poolNicolBolasGodPharaoh,
     _poolNightRevelers,
     _poolNimbusOfTheIsles,
     _poolNoMore,
@@ -1618,6 +1626,7 @@ const shard: CardShard = {
     _poolSoltariFootSoldier,
     _poolSoulGuideLantern,
     _poolSoulWarden,
+    _poolSparasAdjudicators,
     _poolSpartanVeteran,
     _poolSpawnwrithe,
     _poolSpellSatchel,
@@ -1775,6 +1784,7 @@ const shard: CardShard = {
     _poolWitchKingOfAngmar,
     _poolWitchsMist,
     _poolWitnessProtection,
+    _poolWordsOfWind,
     _poolWormfangManta,
     _poolWorstFears,
     _poolWorthyKnight,

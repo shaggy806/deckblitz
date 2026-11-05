@@ -378,6 +378,7 @@ import _poolGrovetenderDruids from "../pool/grovetender-druids.js";
 import _poolGrowExtraArms from "../pool/grow-extra-arms.js";
 import _poolGuardianOfNewBenalia from "../pool/guardian-of-new-benalia.js";
 import _poolGuardianOfTheGreatConduit from "../pool/guardian-of-the-great-conduit.js";
+import _poolGuardianOfTheGreatDoor from "../pool/guardian-of-the-great-door.js";
 import _poolGuardiansMagemark from "../pool/guardians-magemark.js";
 import _poolGuidingBolt from "../pool/guiding-bolt.js";
 import _poolGuildSummit from "../pool/guild-summit.js";
@@ -393,6 +394,7 @@ import _poolHandOfEnlightenment from "../pool/hand-of-enlightenment.js";
 import _poolHarbingerOfTheSeas from "../pool/harbinger-of-the-seas.js";
 import _poolHardCover from "../pool/hard-cover.js";
 import _poolHarmoniousArchon from "../pool/harmonious-archon.js";
+import _poolHawkeyeMasterMarksman from "../pool/hawkeye-master-marksman.js";
 import _poolHeartOfYavimaya from "../pool/heart-of-yavimaya.js";
 import _poolHeartflameSlash from "../pool/heartflame-slash.js";
 import _poolHeartwoodCrafter from "../pool/heartwood-crafter.js";
@@ -643,6 +645,7 @@ import _poolParcelbeast from "../pool/parcelbeast.js";
 import _poolPardicDragon from "../pool/pardic-dragon.js";
 import _poolPardicMiner from "../pool/pardic-miner.js";
 import _poolPatriarsSeal from "../pool/patriars-seal.js";
+import _poolPatronOfTheOrochi from "../pool/patron-of-the-orochi.js";
 import _poolPearlShard from "../pool/pearl-shard.js";
 import _poolPedanticLearning from "../pool/pedantic-learning.js";
 import _poolPendelhavenElder from "../pool/pendelhaven-elder.js";
@@ -683,11 +686,13 @@ import _poolRamosianGreatsword from "../pool/ramosian-greatsword.js";
 import _poolRampageOfTheClans from "../pool/rampage-of-the-clans.js";
 import _poolRampantElephant from "../pool/rampant-elephant.js";
 import _poolRangerCaptainOfEos from "../pool/ranger-captain-of-eos.js";
+import _poolRavagerOfTheFells from "../pool/ravager-of-the-fells.js";
 import _poolRavenform from "../pool/ravenform.js";
 import _poolReapersTalisman from "../pool/reapers-talisman.js";
 import _poolRebornHope from "../pool/reborn-hope.js";
 import _poolRedCliffsArmada from "../pool/red-cliffs-armada.js";
 import _poolRedDragon from "../pool/red-dragon.js";
+import _poolRegnasSanction from "../pool/regnas-sanction.js";
 import _poolRegrowth from "../pool/regrowth.js";
 import _poolReignOfTerror from "../pool/reign-of-terror.js";
 import _poolRemorsefulCleric from "../pool/remorseful-cleric.js";
@@ -944,6 +949,7 @@ import _poolViashinoSpearhunter from "../pool/viashino-spearhunter.js";
 import _poolViashinoWeaponsmith from "../pool/viashino-weaponsmith.js";
 import _poolViolentUrge from "../pool/violent-urge.js";
 import _poolVirulentSilencer from "../pool/virulent-silencer.js";
+import _poolVishgrazTheDoomhive from "../pool/vishgraz-the-doomhive.js";
 import _poolVisionsOfVillainy from "../pool/visions-of-villainy.js";
 import _poolVivienMonstersAdvocate from "../pool/vivien-monsters-advocate.js";
 import _poolVoidHelix from "../pool/void-helix.js";
@@ -1397,6 +1403,7 @@ const shard: CardShard = {
     _poolGrowExtraArms,
     _poolGuardianOfNewBenalia,
     _poolGuardianOfTheGreatConduit,
+    _poolGuardianOfTheGreatDoor,
     _poolGuardiansMagemark,
     _poolGuidingBolt,
     _poolGuildSummit,
@@ -1412,6 +1419,7 @@ const shard: CardShard = {
     _poolHarbingerOfTheSeas,
     _poolHardCover,
     _poolHarmoniousArchon,
+    _poolHawkeyeMasterMarksman,
     _poolHeartOfYavimaya,
     _poolHeartflameSlash,
     _poolHeartwoodCrafter,
@@ -1662,6 +1670,7 @@ const shard: CardShard = {
     _poolPardicDragon,
     _poolPardicMiner,
     _poolPatriarsSeal,
+    _poolPatronOfTheOrochi,
     _poolPearlShard,
     _poolPedanticLearning,
     _poolPendelhavenElder,
@@ -1702,11 +1711,13 @@ const shard: CardShard = {
     _poolRampageOfTheClans,
     _poolRampantElephant,
     _poolRangerCaptainOfEos,
+    _poolRavagerOfTheFells,
     _poolRavenform,
     _poolReapersTalisman,
     _poolRebornHope,
     _poolRedCliffsArmada,
     _poolRedDragon,
+    _poolRegnasSanction,
     _poolRegrowth,
     _poolReignOfTerror,
     _poolRemorsefulCleric,
@@ -1963,6 +1974,7 @@ const shard: CardShard = {
     _poolViashinoWeaponsmith,
     _poolViolentUrge,
     _poolVirulentSilencer,
+    _poolVishgrazTheDoomhive,
     _poolVisionsOfVillainy,
     _poolVivienMonstersAdvocate,
     _poolVoidHelix,

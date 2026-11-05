@@ -861,7 +861,6 @@ export const SAMPLE_DECKS: readonly SampleDeck[] = [
       ["Winged Words", 1],
     ],
     substitutions: [
-      sub("Gideon Jura", "Ajani, Caller of the Pride", "White planeswalker; its -3 grants flying."),
     ],
   }),
   precon({

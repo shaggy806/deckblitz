@@ -237,6 +237,7 @@ import _poolEyeGouge from "../pool/eye-gouge.js";
 import _poolEyelessWatcher from "../pool/eyeless-watcher.js";
 import _poolFaerieDuelist from "../pool/faerie-duelist.js";
 import _poolFaerieMechanist from "../pool/faerie-mechanist.js";
+import _poolFallOfTheImpostor from "../pool/fall-of-the-impostor.js";
 import _poolFallOfTheThran from "../pool/fall-of-the-thran.js";
 import _poolFallowWurm from "../pool/fallow-wurm.js";
 import _poolFanBearer from "../pool/fan-bearer.js";
@@ -374,6 +375,7 @@ import _poolIsshinTwoHeavensAsOne from "../pool/isshin-two-heavens-as-one.js";
 import _poolIvorytuskFortress from "../pool/ivorytusk-fortress.js";
 import _poolIvyGleefulSpellthief from "../pool/ivy-gleeful-spellthief.js";
 import _poolIxhelScionOfAtraxa from "../pool/ixhel-scion-of-atraxa.js";
+import _poolJaceReawakened from "../pool/jace-reawakened.js";
 import _poolJacesProjection from "../pool/jaces-projection.js";
 import _poolJadedSellSword from "../pool/jaded-sell-sword.js";
 import _poolJandorsSaddlebags from "../pool/jandors-saddlebags.js";
@@ -571,6 +573,7 @@ import _poolReplicationTechnique from "../pool/replication-technique.js";
 import _poolResculpt from "../pool/resculpt.js";
 import _poolResonanceTechnician from "../pool/resonance-technician.js";
 import _poolRestlessApparition from "../pool/restless-apparition.js";
+import _poolRhodaGeistAvenger from "../pool/rhoda-geist-avenger.js";
 import _poolRhysticLightning from "../pool/rhystic-lightning.js";
 import _poolRighteousBlow from "../pool/righteous-blow.js";
 import _poolRingOfKalonia from "../pool/ring-of-kalonia.js";
@@ -817,6 +820,7 @@ import _poolVolleyVeteran from "../pool/volley-veteran.js";
 import _poolVonaButcherOfMagan from "../pool/vona-butcher-of-magan.js";
 import _poolVoraciousDragon from "../pool/voracious-dragon.js";
 import _poolVraskasContempt from "../pool/vraskas-contempt.js";
+import _poolWalkInClosetForgottenCellar from "../pool/walk-in-closet-forgotten-cellar.js";
 import _poolWalkingDesecration from "../pool/walking-desecration.js";
 import _poolWallOfCorpses from "../pool/wall-of-corpses.js";
 import _poolWallOfRoots from "../pool/wall-of-roots.js";
@@ -1121,6 +1125,7 @@ const shard: CardShard = {
     _poolEyelessWatcher,
     _poolFaerieDuelist,
     _poolFaerieMechanist,
+    _poolFallOfTheImpostor,
     _poolFallOfTheThran,
     _poolFallowWurm,
     _poolFanBearer,
@@ -1258,6 +1263,7 @@ const shard: CardShard = {
     _poolIvorytuskFortress,
     _poolIvyGleefulSpellthief,
     _poolIxhelScionOfAtraxa,
+    _poolJaceReawakened,
     _poolJacesProjection,
     _poolJadedSellSword,
     _poolJandorsSaddlebags,
@@ -1455,6 +1461,7 @@ const shard: CardShard = {
     _poolResculpt,
     _poolResonanceTechnician,
     _poolRestlessApparition,
+    _poolRhodaGeistAvenger,
     _poolRhysticLightning,
     _poolRighteousBlow,
     _poolRingOfKalonia,
@@ -1701,6 +1708,7 @@ const shard: CardShard = {
     _poolVonaButcherOfMagan,
     _poolVoraciousDragon,
     _poolVraskasContempt,
+    _poolWalkInClosetForgottenCellar,
     _poolWalkingDesecration,
     _poolWallOfCorpses,
     _poolWallOfRoots,

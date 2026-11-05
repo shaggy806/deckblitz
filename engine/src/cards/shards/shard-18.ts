@@ -33,6 +33,7 @@ import _poolArchmagesCharm from "../pool/archmages-charm.js";
 import _poolArchpriestOfShadows from "../pool/archpriest-of-shadows.js";
 import _poolArclightPhoenix from "../pool/arclight-phoenix.js";
 import _poolArdentDustspeaker from "../pool/ardent-dustspeaker.js";
+import _poolArdynTheUsurper from "../pool/ardyn-the-usurper.js";
 import _poolArgothianTreefolk from "../pool/argothian-treefolk.js";
 import _poolArrowVolleyTrap from "../pool/arrow-volley-trap.js";
 import _poolAstrolabe from "../pool/astrolabe.js";
@@ -168,6 +169,7 @@ import _poolDaruMender from "../pool/daru-mender.js";
 import _poolDeathbringerLiege from "../pool/deathbringer-liege.js";
 import _poolDeathknellBerserker from "../pool/deathknell-berserker.js";
 import _poolDecadentDragon from "../pool/decadent-dragon.js";
+import _poolDecreeOfAnnihilation from "../pool/decree-of-annihilation.js";
 import _poolDeepGoblinSkulltaker from "../pool/deep-goblin-skulltaker.js";
 import _poolDeepSlumberTitan from "../pool/deep-slumber-titan.js";
 import _poolDeeprootChampion from "../pool/deeproot-champion.js";
@@ -345,6 +347,7 @@ import _poolHelmOfObedience from "../pool/helm-of-obedience.js";
 import _poolHengeWalker from "../pool/henge-walker.js";
 import _poolHeraldsHorn from "../pool/heralds-horn.js";
 import _poolHeraldsOfTzeentch from "../pool/heralds-of-tzeentch.js";
+import _poolHeroesPodium from "../pool/heroes-podium.js";
 import _poolHeroicDefiance from "../pool/heroic-defiance.js";
 import _poolHeroicFeast from "../pool/heroic-feast.js";
 import _poolHeronBlessedGeist from "../pool/heron-blessed-geist.js";
@@ -763,6 +766,7 @@ import _poolSummonAlexander from "../pool/summon-alexander.js";
 import _poolSummonKujata from "../pool/summon-kujata.js";
 import _poolSunforger from "../pool/sunforger.js";
 import _poolSunhomeEnforcer from "../pool/sunhome-enforcer.js";
+import _poolSuperiorFoesOfSpiderMan from "../pool/superior-foes-of-spider-man.js";
 import _poolSupernaturalRescue from "../pool/supernatural-rescue.js";
 import _poolSuqataLancer from "../pool/suqata-lancer.js";
 import _poolSureFootedInfiltrator from "../pool/sure-footed-infiltrator.js";
@@ -990,6 +994,7 @@ const shard: CardShard = {
     _poolArchpriestOfShadows,
     _poolArclightPhoenix,
     _poolArdentDustspeaker,
+    _poolArdynTheUsurper,
     _poolArgothianTreefolk,
     _poolArrowVolleyTrap,
     _poolAstrolabe,
@@ -1125,6 +1130,7 @@ const shard: CardShard = {
     _poolDeathbringerLiege,
     _poolDeathknellBerserker,
     _poolDecadentDragon,
+    _poolDecreeOfAnnihilation,
     _poolDeepGoblinSkulltaker,
     _poolDeepSlumberTitan,
     _poolDeeprootChampion,
@@ -1302,6 +1308,7 @@ const shard: CardShard = {
     _poolHengeWalker,
     _poolHeraldsHorn,
     _poolHeraldsOfTzeentch,
+    _poolHeroesPodium,
     _poolHeroicDefiance,
     _poolHeroicFeast,
     _poolHeronBlessedGeist,
@@ -1720,6 +1727,7 @@ const shard: CardShard = {
     _poolSummonKujata,
     _poolSunforger,
     _poolSunhomeEnforcer,
+    _poolSuperiorFoesOfSpiderMan,
     _poolSupernaturalRescue,
     _poolSuqataLancer,
     _poolSureFootedInfiltrator,

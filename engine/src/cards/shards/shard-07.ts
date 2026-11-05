@@ -244,6 +244,7 @@ import _poolEmbraalBruiser from "../pool/embraal-bruiser.js";
 import _poolEmeraldDragonfly from "../pool/emerald-dragonfly.js";
 import _poolEncroachingWastes from "../pool/encroaching-wastes.js";
 import _poolEndBlazeEpiphany from "../pool/end-blaze-epiphany.js";
+import _poolEnormousEnergyBlade from "../pool/enormous-energy-blade.js";
 import _poolEnterTheEnigma from "../pool/enter-the-enigma.js";
 import _poolErebosGodOfTheDead from "../pool/erebos-god-of-the-dead.js";
 import _poolErithizon from "../pool/erithizon.js";
@@ -265,6 +266,7 @@ import _poolFamishedPaladin from "../pool/famished-paladin.js";
 import _poolFathomFleetBoarder from "../pool/fathom-fleet-boarder.js";
 import _poolFavoredOfIroas from "../pool/favored-of-iroas.js";
 import _poolFblthpKnowsTheWay from "../pool/fblthp-knows-the-way.js";
+import _poolFearFireFoes from "../pool/fear-fire-foes.js";
 import _poolFear from "../pool/fear.js";
 import _poolFearlessPup from "../pool/fearless-pup.js";
 import _poolFearlessSkald from "../pool/fearless-skald.js";
@@ -420,6 +422,7 @@ import _poolKarplusanYeti from "../pool/karplusan-yeti.js";
 import _poolKarvanistaLoyalLupari from "../pool/karvanista-loyal-lupari.js";
 import _poolKeigaTheTideStar from "../pool/keiga-the-tide-star.js";
 import _poolKeldonVandals from "../pool/keldon-vandals.js";
+import _poolKenzoTheHardhearted from "../pool/kenzo-the-hardhearted.js";
 import _poolKerugaTheMacrosage from "../pool/keruga-the-macrosage.js";
 import _poolKindercatch from "../pool/kindercatch.js";
 import _poolKineticOoze from "../pool/kinetic-ooze.js";
@@ -446,6 +449,7 @@ import _poolLadySun from "../pool/lady-sun.js";
 import _poolLagonnaBandTrailblazer from "../pool/lagonna-band-trailblazer.js";
 import _poolLashweedLurker from "../pool/lashweed-lurker.js";
 import _poolLastWord from "../pool/last-word.js";
+import _poolLastingFayth from "../pool/lasting-fayth.js";
 import _poolLatNamAdept from "../pool/lat-nam-adept.js";
 import _poolLatullasOrders from "../pool/latullas-orders.js";
 import _poolLavaFieldOverlord from "../pool/lava-field-overlord.js";
@@ -547,6 +551,7 @@ import _poolMysticPenitent from "../pool/mystic-penitent.js";
 import _poolMysticSpeculation from "../pool/mystic-speculation.js";
 import _poolNamelessOne from "../pool/nameless-one.js";
 import _poolNantukoShaman from "../pool/nantuko-shaman.js";
+import _poolNarsetTranscendent from "../pool/narset-transcendent.js";
 import _poolNaturalEmergence from "../pool/natural-emergence.js";
 import _poolNaturalState from "../pool/natural-state.js";
 import _poolNazahnReveredBladesmith from "../pool/nazahn-revered-bladesmith.js";
@@ -927,6 +932,7 @@ import _poolWildMongrel from "../pool/wild-mongrel.js";
 import _poolWildSwing from "../pool/wild-swing.js";
 import _poolWildfireAwakener from "../pool/wildfire-awakener.js";
 import _poolWillowDryad from "../pool/willow-dryad.js";
+import _poolWithGreatPower from "../pool/with-great-power.js";
 import _poolWitheringGaze from "../pool/withering-gaze.js";
 import _poolWoebearer from "../pool/woebearer.js";
 import _poolWolfwillowHaven from "../pool/wolfwillow-haven.js";
@@ -1229,6 +1235,7 @@ const shard: CardShard = {
     _poolEmeraldDragonfly,
     _poolEncroachingWastes,
     _poolEndBlazeEpiphany,
+    _poolEnormousEnergyBlade,
     _poolEnterTheEnigma,
     _poolErebosGodOfTheDead,
     _poolErithizon,
@@ -1250,6 +1257,7 @@ const shard: CardShard = {
     _poolFathomFleetBoarder,
     _poolFavoredOfIroas,
     _poolFblthpKnowsTheWay,
+    _poolFearFireFoes,
     _poolFear,
     _poolFearlessPup,
     _poolFearlessSkald,
@@ -1405,6 +1413,7 @@ const shard: CardShard = {
     _poolKarvanistaLoyalLupari,
     _poolKeigaTheTideStar,
     _poolKeldonVandals,
+    _poolKenzoTheHardhearted,
     _poolKerugaTheMacrosage,
     _poolKindercatch,
     _poolKineticOoze,
@@ -1431,6 +1440,7 @@ const shard: CardShard = {
     _poolLagonnaBandTrailblazer,
     _poolLashweedLurker,
     _poolLastWord,
+    _poolLastingFayth,
     _poolLatNamAdept,
     _poolLatullasOrders,
     _poolLavaFieldOverlord,
@@ -1532,6 +1542,7 @@ const shard: CardShard = {
     _poolMysticSpeculation,
     _poolNamelessOne,
     _poolNantukoShaman,
+    _poolNarsetTranscendent,
     _poolNaturalEmergence,
     _poolNaturalState,
     _poolNazahnReveredBladesmith,
@@ -1912,6 +1923,7 @@ const shard: CardShard = {
     _poolWildSwing,
     _poolWildfireAwakener,
     _poolWillowDryad,
+    _poolWithGreatPower,
     _poolWitheringGaze,
     _poolWoebearer,
     _poolWolfwillowHaven,

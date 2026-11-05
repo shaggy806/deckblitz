@@ -150,6 +150,7 @@ import _poolCivicWayfinder from "../pool/civic-wayfinder.js";
 import _poolClearTheLand from "../pool/clear-the-land.js";
 import _poolCoastlineChimera from "../pool/coastline-chimera.js";
 import _poolColossusHammer from "../pool/colossus-hammer.js";
+import _poolCombatResearch from "../pool/combat-research.js";
 import _poolCompellingArgument from "../pool/compelling-argument.js";
 import _poolConniveConcoct from "../pool/connive-concoct.js";
 import _poolContainmentConstruct from "../pool/containment-construct.js";
@@ -276,6 +277,7 @@ import _poolEvilEyeOfUrborg from "../pool/evil-eye-of-urborg.js";
 import _poolExcavatedWall from "../pool/excavated-wall.js";
 import _poolExtinguisherBattleship from "../pool/extinguisher-battleship.js";
 import _poolFairgroundsWarden from "../pool/fairgrounds-warden.js";
+import _poolFaithboundJudge from "../pool/faithbound-judge.js";
 import _poolFathomFleetCutthroat from "../pool/fathom-fleet-cutthroat.js";
 import _poolFearlessFledgling from "../pool/fearless-fledgling.js";
 import _poolFecundity from "../pool/fecundity.js";
@@ -564,10 +566,12 @@ import _poolOnduGiant from "../pool/ondu-giant.js";
 import _poolOneEyedScarecrow from "../pool/one-eyed-scarecrow.js";
 import _poolOranRiefTheVastwood from "../pool/oran-rief-the-vastwood.js";
 import _poolOrcishSiegemaster from "../pool/orcish-siegemaster.js";
+import _poolOutlawsMerriment from "../pool/outlaws-merriment.js";
 import _poolOvertaker from "../pool/overtaker.js";
 import _poolOzaisCruelty from "../pool/ozais-cruelty.js";
 import _poolPaintersStudioDefacedGallery from "../pool/painters-studio-defaced-gallery.js";
 import _poolPatriotYoungAvenger from "../pool/patriot-young-avenger.js";
+import _poolPatronOfTheMoon from "../pool/patron-of-the-moon.js";
 import _poolPatronOfTheValiant from "../pool/patron-of-the-valiant.js";
 import _poolPerchProtection from "../pool/perch-protection.js";
 import _poolPerimeterPatrol from "../pool/perimeter-patrol.js";
@@ -655,6 +659,7 @@ import _poolRoninCavekeeper from "../pool/ronin-cavekeeper.js";
 import _poolRoonOfTheHiddenRealm from "../pool/roon-of-the-hidden-realm.js";
 import _poolRootManipulation from "../pool/root-manipulation.js";
 import _poolRootSpider from "../pool/root-spider.js";
+import _poolRosieCottonOfSouthLane from "../pool/rosie-cotton-of-south-lane.js";
 import _poolRotatingFireplace from "../pool/rotating-fireplace.js";
 import _poolRottenheartGhoul from "../pool/rottenheart-ghoul.js";
 import _poolRumblingSentry from "../pool/rumbling-sentry.js";
@@ -761,6 +766,7 @@ import _poolSoultetherGolem from "../pool/soultether-golem.js";
 import _poolSozinsComet from "../pool/sozins-comet.js";
 import _poolSpatialContortion from "../pool/spatial-contortion.js";
 import _poolSpectacularSkywhale from "../pool/spectacular-skywhale.js";
+import _poolSpectralAdversary from "../pool/spectral-adversary.js";
 import _poolSpectralGrasp from "../pool/spectral-grasp.js";
 import _poolSpellrunePainter from "../pool/spellrune-painter.js";
 import _poolSphinxOfEnlightenment from "../pool/sphinx-of-enlightenment.js";
@@ -1109,6 +1115,7 @@ const shard: CardShard = {
     _poolClearTheLand,
     _poolCoastlineChimera,
     _poolColossusHammer,
+    _poolCombatResearch,
     _poolCompellingArgument,
     _poolConniveConcoct,
     _poolContainmentConstruct,
@@ -1235,6 +1242,7 @@ const shard: CardShard = {
     _poolExcavatedWall,
     _poolExtinguisherBattleship,
     _poolFairgroundsWarden,
+    _poolFaithboundJudge,
     _poolFathomFleetCutthroat,
     _poolFearlessFledgling,
     _poolFecundity,
@@ -1523,10 +1531,12 @@ const shard: CardShard = {
     _poolOneEyedScarecrow,
     _poolOranRiefTheVastwood,
     _poolOrcishSiegemaster,
+    _poolOutlawsMerriment,
     _poolOvertaker,
     _poolOzaisCruelty,
     _poolPaintersStudioDefacedGallery,
     _poolPatriotYoungAvenger,
+    _poolPatronOfTheMoon,
     _poolPatronOfTheValiant,
     _poolPerchProtection,
     _poolPerimeterPatrol,
@@ -1614,6 +1624,7 @@ const shard: CardShard = {
     _poolRoonOfTheHiddenRealm,
     _poolRootManipulation,
     _poolRootSpider,
+    _poolRosieCottonOfSouthLane,
     _poolRotatingFireplace,
     _poolRottenheartGhoul,
     _poolRumblingSentry,
@@ -1720,6 +1731,7 @@ const shard: CardShard = {
     _poolSozinsComet,
     _poolSpatialContortion,
     _poolSpectacularSkywhale,
+    _poolSpectralAdversary,
     _poolSpectralGrasp,
     _poolSpellrunePainter,
     _poolSphinxOfEnlightenment,

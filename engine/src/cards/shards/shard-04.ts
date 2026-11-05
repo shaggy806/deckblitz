@@ -343,6 +343,7 @@ import _poolHazeriderDrake from "../pool/hazerider-drake.js";
 import _poolHeadlessSkaab from "../pool/headless-skaab.js";
 import _poolHealerOfThePride from "../pool/healer-of-the-pride.js";
 import _poolHeapDoll from "../pool/heap-doll.js";
+import _poolHeartseeker from "../pool/heartseeker.js";
 import _poolHeartwoodTreefolk from "../pool/heartwood-treefolk.js";
 import _poolHellionEruption from "../pool/hellion-eruption.js";
 import _poolHerdGnarr from "../pool/herd-gnarr.js";
@@ -624,6 +625,7 @@ import _poolRevivingDose from "../pool/reviving-dose.js";
 import _poolRhinosRampage from "../pool/rhinos-rampage.js";
 import _poolRhonassStalwart from "../pool/rhonass-stalwart.js";
 import _poolRhovanionRampager from "../pool/rhovanion-rampager.js";
+import _poolRiddlesInTheDark from "../pool/riddles-in-the-dark.js";
 import _poolRidgeRannet from "../pool/ridge-rannet.js";
 import _poolRimeChill from "../pool/rime-chill.js";
 import _poolRiptideEntrancer from "../pool/riptide-entrancer.js";
@@ -880,6 +882,7 @@ import _poolVoidmageApprentice from "../pool/voidmage-apprentice.js";
 import _poolVolsheTideturner from "../pool/volshe-tideturner.js";
 import _poolVoltaicServant from "../pool/voltaic-servant.js";
 import _poolWakeTheReflections from "../pool/wake-the-reflections.js";
+import _poolWalkInCloset from "../pool/walk-in-closet.js";
 import _poolWalkerOfTheGrove from "../pool/walker-of-the-grove.js";
 import _poolWallOfDeceit from "../pool/wall-of-deceit.js";
 import _poolWallOfJunk from "../pool/wall-of-junk.js";
@@ -892,6 +895,7 @@ import _poolWarden from "../pool/warden.js";
 import _poolWarehouseThief from "../pool/warehouse-thief.js";
 import _poolWarmth from "../pool/warmth.js";
 import _poolWarpedDevotion from "../pool/warped-devotion.js";
+import _poolWarsToll from "../pool/wars-toll.js";
 import _poolWasteManagement from "../pool/waste-management.js";
 import _poolWaxWaneWitness from "../pool/wax-wane-witness.js";
 import _poolWayspeakerBodyguard from "../pool/wayspeaker-bodyguard.js";
@@ -932,6 +936,7 @@ import _tokensEldraziAngelToken from "../tokens/eldrazi-angel-token.js";
 import _tokensGoblinWizardToken from "../tokens/goblin-wizard-token.js";
 import _tokensGremlinToken from "../tokens/gremlin-token.js";
 import _tokensHorrorTokenProfaneTransfusion from "../tokens/horror-token-profane-transfusion.js";
+import _tokensHumanClericToken21LifelinkHaste from "../tokens/human-cleric-token-2-1-lifelink-haste.js";
 import _tokensInsectTokenBlack01 from "../tokens/insect-token-black-0-1.js";
 import _tokensKnightTokenFirstStrike from "../tokens/knight-token-first-strike.js";
 import _tokensKrakenTokenTrample from "../tokens/kraken-token-trample.js";
@@ -1289,6 +1294,7 @@ const shard: CardShard = {
     _poolHeadlessSkaab,
     _poolHealerOfThePride,
     _poolHeapDoll,
+    _poolHeartseeker,
     _poolHeartwoodTreefolk,
     _poolHellionEruption,
     _poolHerdGnarr,
@@ -1570,6 +1576,7 @@ const shard: CardShard = {
     _poolRhinosRampage,
     _poolRhonassStalwart,
     _poolRhovanionRampager,
+    _poolRiddlesInTheDark,
     _poolRidgeRannet,
     _poolRimeChill,
     _poolRiptideEntrancer,
@@ -1826,6 +1833,7 @@ const shard: CardShard = {
     _poolVolsheTideturner,
     _poolVoltaicServant,
     _poolWakeTheReflections,
+    _poolWalkInCloset,
     _poolWalkerOfTheGrove,
     _poolWallOfDeceit,
     _poolWallOfJunk,
@@ -1838,6 +1846,7 @@ const shard: CardShard = {
     _poolWarehouseThief,
     _poolWarmth,
     _poolWarpedDevotion,
+    _poolWarsToll,
     _poolWasteManagement,
     _poolWaxWaneWitness,
     _poolWayspeakerBodyguard,
@@ -1880,6 +1889,7 @@ const shard: CardShard = {
     _tokensGoblinWizardToken,
     _tokensGremlinToken,
     _tokensHorrorTokenProfaneTransfusion,
+    _tokensHumanClericToken21LifelinkHaste,
     _tokensInsectTokenBlack01,
     _tokensKnightTokenFirstStrike,
     _tokensKrakenTokenTrample,

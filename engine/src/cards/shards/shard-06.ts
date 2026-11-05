@@ -332,6 +332,7 @@ import _poolFrozenShade from "../pool/frozen-shade.js";
 import _poolFumarole from "../pool/fumarole.js";
 import _poolFuneralPyre from "../pool/funeral-pyre.js";
 import _poolFurybornHellkite from "../pool/furyborn-hellkite.js";
+import _poolFurystokeGiant from "../pool/furystoke-giant.js";
 import _poolFyndhornElves from "../pool/fyndhorn-elves.js";
 import _poolGalvanicBlast from "../pool/galvanic-blast.js";
 import _poolGalvanize from "../pool/galvanize.js";
@@ -421,6 +422,7 @@ import _poolHypnoticGrifter from "../pool/hypnotic-grifter.js";
 import _poolHypnoticSiren from "../pool/hypnotic-siren.js";
 import _poolIcatianJavelineers from "../pool/icatian-javelineers.js";
 import _poolIllumination from "../pool/illumination.js";
+import _poolImbrahamDeanOfTheory from "../pool/imbraham-dean-of-theory.js";
 import _poolImiStatue from "../pool/imi-statue.js";
 import _poolImmovableRod from "../pool/immovable-rod.js";
 import _poolImperialAerosaur from "../pool/imperial-aerosaur.js";
@@ -547,6 +549,7 @@ import _poolNaturesChosen from "../pool/natures-chosen.js";
 import _poolNayaSojourners from "../pool/naya-sojourners.js";
 import _poolNecrogenRotpriest from "../pool/necrogen-rotpriest.js";
 import _poolNeedlepeakSpider from "../pool/needlepeak-spider.js";
+import _poolNegativeZonePortal from "../pool/negative-zone-portal.js";
 import _poolNessianAsp from "../pool/nessian-asp.js";
 import _poolNettletoothDjinn from "../pool/nettletooth-djinn.js";
 import _poolNevinyrralUrborgTyrant from "../pool/nevinyrral-urborg-tyrant.js";
@@ -623,6 +626,7 @@ import _poolQuandrixCommand from "../pool/quandrix-command.js";
 import _poolQuestForRenewal from "../pool/quest-for-renewal.js";
 import _poolQuezaAugurOfAgonies from "../pool/queza-augur-of-agonies.js";
 import _poolQuicksilverFisher from "../pool/quicksilver-fisher.js";
+import _poolQuintoriusKand from "../pool/quintorius-kand.js";
 import _poolRackling from "../pool/rackling.js";
 import _poolRadiantStrike from "../pool/radiant-strike.js";
 import _poolRadjanSpirit from "../pool/radjan-spirit.js";
@@ -1287,6 +1291,7 @@ const shard: CardShard = {
     _poolFumarole,
     _poolFuneralPyre,
     _poolFurybornHellkite,
+    _poolFurystokeGiant,
     _poolFyndhornElves,
     _poolGalvanicBlast,
     _poolGalvanize,
@@ -1376,6 +1381,7 @@ const shard: CardShard = {
     _poolHypnoticSiren,
     _poolIcatianJavelineers,
     _poolIllumination,
+    _poolImbrahamDeanOfTheory,
     _poolImiStatue,
     _poolImmovableRod,
     _poolImperialAerosaur,
@@ -1502,6 +1508,7 @@ const shard: CardShard = {
     _poolNayaSojourners,
     _poolNecrogenRotpriest,
     _poolNeedlepeakSpider,
+    _poolNegativeZonePortal,
     _poolNessianAsp,
     _poolNettletoothDjinn,
     _poolNevinyrralUrborgTyrant,
@@ -1578,6 +1585,7 @@ const shard: CardShard = {
     _poolQuestForRenewal,
     _poolQuezaAugurOfAgonies,
     _poolQuicksilverFisher,
+    _poolQuintoriusKand,
     _poolRackling,
     _poolRadiantStrike,
     _poolRadjanSpirit,

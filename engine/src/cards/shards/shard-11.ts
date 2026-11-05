@@ -188,6 +188,7 @@ import _poolCrevasse from "../pool/crevasse.js";
 import _poolCripplingBlight from "../pool/crippling-blight.js";
 import _poolCripplingFear from "../pool/crippling-fear.js";
 import _poolCryOfContrition from "../pool/cry-of-contrition.js";
+import _poolCryOfTheCarnarium from "../pool/cry-of-the-carnarium.js";
 import _poolCryptoplasm from "../pool/cryptoplasm.js";
 import _poolCrystallineCrawler from "../pool/crystalline-crawler.js";
 import _poolCunningRhetoric from "../pool/cunning-rhetoric.js";
@@ -541,6 +542,7 @@ import _poolMondoGecko from "../pool/mondo-gecko.js";
 import _poolMondrakGloryDominus from "../pool/mondrak-glory-dominus.js";
 import _poolMonologueTax from "../pool/monologue-tax.js";
 import _poolMonssGoblinRaiders from "../pool/monss-goblin-raiders.js";
+import _poolMoonringIsland from "../pool/moonring-island.js";
 import _poolMoonriseCleric from "../pool/moonrise-cleric.js";
 import _poolMoonsnarePrototype from "../pool/moonsnare-prototype.js";
 import _poolMoonstoneEulogist from "../pool/moonstone-eulogist.js";
@@ -796,6 +798,7 @@ import _poolStoicSphinx from "../pool/stoic-sphinx.js";
 import _poolStomperCub from "../pool/stomper-cub.js";
 import _poolStoneBySunlight from "../pool/stone-by-sunlight.js";
 import _poolStoneIdolTrap from "../pool/stone-idol-trap.js";
+import _poolStoneTongueBasilisk from "../pool/stone-tongue-basilisk.js";
 import _poolStormfistCrusader from "../pool/stormfist-crusader.js";
 import _poolStreamOfConsciousness from "../pool/stream-of-consciousness.js";
 import _poolStreetbreakerWurm from "../pool/streetbreaker-wurm.js";
@@ -811,6 +814,7 @@ import _poolSunfireTorch from "../pool/sunfire-torch.js";
 import _poolSunfrillImitator from "../pool/sunfrill-imitator.js";
 import _poolSungoldBarrage from "../pool/sungold-barrage.js";
 import _poolSurgeNode from "../pool/surge-node.js";
+import _poolSurgeOfStrength from "../pool/surge-of-strength.js";
 import _poolSwampsnareTrap from "../pool/swampsnare-trap.js";
 import _poolSweepingCleave from "../pool/sweeping-cleave.js";
 import _poolSwordOfTheAnimist from "../pool/sword-of-the-animist.js";
@@ -1169,6 +1173,7 @@ const shard: CardShard = {
     _poolCripplingBlight,
     _poolCripplingFear,
     _poolCryOfContrition,
+    _poolCryOfTheCarnarium,
     _poolCryptoplasm,
     _poolCrystallineCrawler,
     _poolCunningRhetoric,
@@ -1522,6 +1527,7 @@ const shard: CardShard = {
     _poolMondrakGloryDominus,
     _poolMonologueTax,
     _poolMonssGoblinRaiders,
+    _poolMoonringIsland,
     _poolMoonriseCleric,
     _poolMoonsnarePrototype,
     _poolMoonstoneEulogist,
@@ -1777,6 +1783,7 @@ const shard: CardShard = {
     _poolStomperCub,
     _poolStoneBySunlight,
     _poolStoneIdolTrap,
+    _poolStoneTongueBasilisk,
     _poolStormfistCrusader,
     _poolStreamOfConsciousness,
     _poolStreetbreakerWurm,
@@ -1792,6 +1799,7 @@ const shard: CardShard = {
     _poolSunfrillImitator,
     _poolSungoldBarrage,
     _poolSurgeNode,
+    _poolSurgeOfStrength,
     _poolSwampsnareTrap,
     _poolSweepingCleave,
     _poolSwordOfTheAnimist,

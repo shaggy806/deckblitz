@@ -105,6 +105,7 @@ import _poolBountyOfTheLuxa from "../pool/bounty-of-the-luxa.js";
 import _poolBrambleweftBehemoth from "../pool/brambleweft-behemoth.js";
 import _poolBranchsnapLorian from "../pool/branchsnap-lorian.js";
 import _poolBrashTaunter from "../pool/brash-taunter.js";
+import _poolBrassKnuckles from "../pool/brass-knuckles.js";
 import _poolBreach from "../pool/breach.js";
 import _poolBribersPurse from "../pool/bribers-purse.js";
 import _poolBrineGiant from "../pool/brine-giant.js";
@@ -411,6 +412,7 @@ import _poolInvasiveSpecies from "../pool/invasive-species.js";
 import _poolIrresistiblePrey from "../pool/irresistible-prey.js";
 import _poolIvySeer from "../pool/ivy-seer.js";
 import _poolIzzetGuildmage from "../pool/izzet-guildmage.js";
+import _poolJadziOracleOfArcavios from "../pool/jadzi-oracle-of-arcavios.js";
 import _poolJasmineBorealOfTheSeven from "../pool/jasmine-boreal-of-the-seven.js";
 import _poolJiangYangguAlone from "../pool/jiang-yanggu-alone.js";
 import _poolJoriEnRuinDiver from "../pool/jori-en-ruin-diver.js";
@@ -672,6 +674,7 @@ import _poolSearingSpearAskari from "../pool/searing-spear-askari.js";
 import _poolSeasonedCathar from "../pool/seasoned-cathar.js";
 import _poolSeasonedHallowblade from "../pool/seasoned-hallowblade.js";
 import _poolSeedshipImpact from "../pool/seedship-impact.js";
+import _poolSeersVision from "../pool/seers-vision.js";
 import _poolSeiferAlmasy from "../pool/seifer-almasy.js";
 import _poolSelfAssembler from "../pool/self-assembler.js";
 import _poolSelflessPoliceCaptain from "../pool/selfless-police-captain.js";
@@ -754,6 +757,7 @@ import _poolSteelHellkite from "../pool/steel-hellkite.js";
 import _poolSteelSabotage from "../pool/steel-sabotage.js";
 import _poolSteelWall from "../pool/steel-wall.js";
 import _poolStolenGoods from "../pool/stolen-goods.js";
+import _poolStoneforgeMasterwork from "../pool/stoneforge-masterwork.js";
 import _poolStoneshakerShaman from "../pool/stoneshaker-shaman.js";
 import _poolStormFleetSpy from "../pool/storm-fleet-spy.js";
 import _poolStormQueenOfWakanda from "../pool/storm-queen-of-wakanda.js";
@@ -1063,6 +1067,7 @@ const shard: CardShard = {
     _poolBrambleweftBehemoth,
     _poolBranchsnapLorian,
     _poolBrashTaunter,
+    _poolBrassKnuckles,
     _poolBreach,
     _poolBribersPurse,
     _poolBrineGiant,
@@ -1369,6 +1374,7 @@ const shard: CardShard = {
     _poolIrresistiblePrey,
     _poolIvySeer,
     _poolIzzetGuildmage,
+    _poolJadziOracleOfArcavios,
     _poolJasmineBorealOfTheSeven,
     _poolJiangYangguAlone,
     _poolJoriEnRuinDiver,
@@ -1630,6 +1636,7 @@ const shard: CardShard = {
     _poolSeasonedCathar,
     _poolSeasonedHallowblade,
     _poolSeedshipImpact,
+    _poolSeersVision,
     _poolSeiferAlmasy,
     _poolSelfAssembler,
     _poolSelflessPoliceCaptain,
@@ -1712,6 +1719,7 @@ const shard: CardShard = {
     _poolSteelSabotage,
     _poolSteelWall,
     _poolStolenGoods,
+    _poolStoneforgeMasterwork,
     _poolStoneshakerShaman,
     _poolStormFleetSpy,
     _poolStormQueenOfWakanda,

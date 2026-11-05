@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _poolAangAirbendingMaster from "../pool/aang-airbending-master.js";
 import _poolAangTheLastAirbender from "../pool/aang-the-last-airbender.js";
 import _poolAbandonedOutpost from "../pool/abandoned-outpost.js";
 import _poolAbstractPerformance from "../pool/abstract-performance.js";
@@ -26,6 +27,7 @@ import _poolAkutaBornOfAsh from "../pool/akuta-born-of-ash.js";
 import _poolAlabasterDragon from "../pool/alabaster-dragon.js";
 import _poolAlabornCavalier from "../pool/alaborn-cavalier.js";
 import _poolAleshasVanguard from "../pool/aleshas-vanguard.js";
+import _poolAlhammarretsArchive from "../pool/alhammarrets-archive.js";
 import _poolAloraMerryThief from "../pool/alora-merry-thief.js";
 import _poolAmaranthineWall from "../pool/amaranthine-wall.js";
 import _poolAmbushViper from "../pool/ambush-viper.js";
@@ -45,6 +47,7 @@ import _poolArcboundBruiser from "../pool/arcbound-bruiser.js";
 import _poolArchiveHaunt from "../pool/archive-haunt.js";
 import _poolArchwayAngel from "../pool/archway-angel.js";
 import _poolArcticTreeline from "../pool/arctic-treeline.js";
+import _poolArcumsWhistle from "../pool/arcums-whistle.js";
 import _poolArdentElectromancer from "../pool/ardent-electromancer.js";
 import _poolArdentRecruit from "../pool/ardent-recruit.js";
 import _poolAscendantAcolyte from "../pool/ascendant-acolyte.js";
@@ -54,6 +57,7 @@ import _poolAshlingTheExtinguisher from "../pool/ashling-the-extinguisher.js";
 import _poolAstralCornucopia from "../pool/astral-cornucopia.js";
 import _poolAtreusImpulsiveSon from "../pool/atreus-impulsive-son.js";
 import _poolAttendedSocialite from "../pool/attended-socialite.js";
+import _poolAureliasVindicator from "../pool/aurelias-vindicator.js";
 import _poolAuspiciousAncestor from "../pool/auspicious-ancestor.js";
 import _poolAvenAugur from "../pool/aven-augur.js";
 import _poolAvengerOfTheFallen from "../pool/avenger-of-the-fallen.js";
@@ -376,6 +380,7 @@ import _poolHeadlessHorseman from "../pool/headless-horseman.js";
 import _poolHeartfireHero from "../pool/heartfire-hero.js";
 import _poolHearthKami from "../pool/hearth-kami.js";
 import _poolHeatedArgument from "../pool/heated-argument.js";
+import _poolHeavenlyBlademaster from "../pool/heavenly-blademaster.js";
 import _poolHedgeMaze from "../pool/hedge-maze.js";
 import _poolHeiBaiSpiritOfBalance from "../pool/hei-bai-spirit-of-balance.js";
 import _poolHeliodsIntervention from "../pool/heliods-intervention.js";
@@ -524,6 +529,7 @@ import _poolMinnWilyIllusionist from "../pool/minn-wily-illusionist.js";
 import _poolMinotaurSkullcleaver from "../pool/minotaur-skullcleaver.js";
 import _poolMirkwoodChanneler from "../pool/mirkwood-channeler.js";
 import _poolMisdirection from "../pool/misdirection.js";
+import _poolMistformWarchief from "../pool/mistform-warchief.js";
 import _poolMistgatePathway from "../pool/mistgate-pathway.js";
 import _poolMistsOfLittjara from "../pool/mists-of-littjara.js";
 import _poolMistwaySpy from "../pool/mistway-spy.js";
@@ -796,6 +802,7 @@ import _poolSynchronizedSpellcraft from "../pool/synchronized-spellcraft.js";
 import _poolTaintedIsle from "../pool/tainted-isle.js";
 import _poolTallymanOfNurgle from "../pool/tallyman-of-nurgle.js";
 import _poolTalusPaladin from "../pool/talus-paladin.js";
+import _poolTamiyoInquisitiveStudent from "../pool/tamiyo-inquisitive-student.js";
 import _poolTaranikaAkroanVeteran from "../pool/taranika-akroan-veteran.js";
 import _poolTatteredApparition from "../pool/tattered-apparition.js";
 import _poolTeethingWurmlet from "../pool/teething-wurmlet.js";
@@ -967,6 +974,7 @@ import _tokensXXElementalTokenFlyingHaste from "../tokens/x-x-elemental-token-fl
 
 const shard: CardShard = {
   pool: [
+    _poolAangAirbendingMaster,
     _poolAangTheLastAirbender,
     _poolAbandonedOutpost,
     _poolAbstractPerformance,
@@ -990,6 +998,7 @@ const shard: CardShard = {
     _poolAlabasterDragon,
     _poolAlabornCavalier,
     _poolAleshasVanguard,
+    _poolAlhammarretsArchive,
     _poolAloraMerryThief,
     _poolAmaranthineWall,
     _poolAmbushViper,
@@ -1009,6 +1018,7 @@ const shard: CardShard = {
     _poolArchiveHaunt,
     _poolArchwayAngel,
     _poolArcticTreeline,
+    _poolArcumsWhistle,
     _poolArdentElectromancer,
     _poolArdentRecruit,
     _poolAscendantAcolyte,
@@ -1018,6 +1028,7 @@ const shard: CardShard = {
     _poolAstralCornucopia,
     _poolAtreusImpulsiveSon,
     _poolAttendedSocialite,
+    _poolAureliasVindicator,
     _poolAuspiciousAncestor,
     _poolAvenAugur,
     _poolAvengerOfTheFallen,
@@ -1340,6 +1351,7 @@ const shard: CardShard = {
     _poolHeartfireHero,
     _poolHearthKami,
     _poolHeatedArgument,
+    _poolHeavenlyBlademaster,
     _poolHedgeMaze,
     _poolHeiBaiSpiritOfBalance,
     _poolHeliodsIntervention,
@@ -1488,6 +1500,7 @@ const shard: CardShard = {
     _poolMinotaurSkullcleaver,
     _poolMirkwoodChanneler,
     _poolMisdirection,
+    _poolMistformWarchief,
     _poolMistgatePathway,
     _poolMistsOfLittjara,
     _poolMistwaySpy,
@@ -1760,6 +1773,7 @@ const shard: CardShard = {
     _poolTaintedIsle,
     _poolTallymanOfNurgle,
     _poolTalusPaladin,
+    _poolTamiyoInquisitiveStudent,
     _poolTaranikaAkroanVeteran,
     _poolTatteredApparition,
     _poolTeethingWurmlet,

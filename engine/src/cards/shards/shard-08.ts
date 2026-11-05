@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _poolAangAndLaOceansFury from "../pool/aang-and-la-oceans-fury.js";
 import _poolAbattoirGhoul from "../pool/abattoir-ghoul.js";
 import _poolAbnormalEndurance from "../pool/abnormal-endurance.js";
 import _poolAbrade from "../pool/abrade.js";
@@ -295,6 +296,7 @@ import _poolFallajiExcavation from "../pool/fallaji-excavation.js";
 import _poolFallajiVanguard from "../pool/fallaji-vanguard.js";
 import _poolFangFearlessLcie from "../pool/fang-fearless-lcie.js";
 import _poolFatalMutation from "../pool/fatal-mutation.js";
+import _poolFearOfIsolation from "../pool/fear-of-isolation.js";
 import _poolFearsomeTemper from "../pool/fearsome-temper.js";
 import _poolFeastingHobbit from "../pool/feasting-hobbit.js";
 import _poolFellingBlow from "../pool/felling-blow.js";
@@ -440,6 +442,7 @@ import _poolJackalopeHerd from "../pool/jackalope-herd.js";
 import _poolJadeBearer from "../pool/jade-bearer.js";
 import _poolJadeOrbOfDragonkind from "../pool/jade-orb-of-dragonkind.js";
 import _poolJanJansenChaosCrafter from "../pool/jan-jansen-chaos-crafter.js";
+import _poolJarOfEyeballs from "../pool/jar-of-eyeballs.js";
 import _poolJayemdaeTome from "../pool/jayemdae-tome.js";
 import _poolJazalGoldmane from "../pool/jazal-goldmane.js";
 import _poolJechtReluctantGuardian from "../pool/jecht-reluctant-guardian.js";
@@ -714,6 +717,8 @@ import _poolRockyRoads from "../pool/rocky-roads.js";
 import _poolRoilsRetribution from "../pool/roils-retribution.js";
 import _poolRoofstalkerWight from "../pool/roofstalker-wight.js";
 import _poolRootMaze from "../pool/root-maze.js";
+import _poolRootcoilCreeper from "../pool/rootcoil-creeper.js";
+import _poolRoshanHiddenMagister from "../pool/roshan-hidden-magister.js";
 import _poolRuinGhost from "../pool/ruin-ghost.js";
 import _poolRushOfInspiration from "../pool/rush-of-inspiration.js";
 import _poolSageOfTheMaze from "../pool/sage-of-the-maze.js";
@@ -732,6 +737,7 @@ import _poolSeaEagle from "../pool/sea-eagle.js";
 import _poolSeaHag from "../pool/sea-hag.js";
 import _poolSeaScryer from "../pool/sea-scryer.js";
 import _poolSearchWarrant from "../pool/search-warrant.js";
+import _poolSeasonOfWeaving from "../pool/season-of-weaving.js";
 import _poolSeasonalRitual from "../pool/seasonal-ritual.js";
 import _poolSecretRendezvous from "../pool/secret-rendezvous.js";
 import _poolSecretsOfTheGoldenCity from "../pool/secrets-of-the-golden-city.js";
@@ -741,6 +747,7 @@ import _poolSegovianAngel from "../pool/segovian-angel.js";
 import _poolSeizeTheInitiative from "../pool/seize-the-initiative.js";
 import _poolSellerOfSongbirds from "../pool/seller-of-songbirds.js";
 import _poolSemesterForeseer from "../pool/semester-foreseer.js";
+import _poolSentinelOfLostLore from "../pool/sentinel-of-lost-lore.js";
 import _poolSerendibDjinn from "../pool/serendib-djinn.js";
 import _poolSerpentsGift from "../pool/serpents-gift.js";
 import _poolShadowGuildmage from "../pool/shadow-guildmage.js";
@@ -786,6 +793,7 @@ import _poolSleep from "../pool/sleep.js";
 import _poolSlickshotLockpicker from "../pool/slickshot-lockpicker.js";
 import _poolSlickshotShowOff from "../pool/slickshot-show-off.js";
 import _poolSlimyKavu from "../pool/slimy-kavu.js";
+import _poolSliverGravemother from "../pool/sliver-gravemother.js";
 import _poolSluicewayScorpion from "../pool/sluiceway-scorpion.js";
 import _poolSmelt from "../pool/smelt.js";
 import _poolSnag from "../pool/snag.js";
@@ -849,6 +857,7 @@ import _poolTangleHulk from "../pool/tangle-hulk.js";
 import _poolTeeteringPeaks from "../pool/teetering-peaks.js";
 import _poolTegwyllDukeOfSplendor from "../pool/tegwyll-duke-of-splendor.js";
 import _poolTemmetNaktamunsWill from "../pool/temmet-naktamuns-will.js";
+import _poolTemurCharger from "../pool/temur-charger.js";
 import _poolTemurDevotee from "../pool/temur-devotee.js";
 import _poolTenuredConcocter from "../pool/tenured-concocter.js";
 import _poolTerminus from "../pool/terminus.js";
@@ -992,6 +1001,7 @@ import _tokensElfWarriorTokenRhysTheRedeemed from "../tokens/elf-warrior-token-r
 import _tokensFishTokenExpendableLackey from "../tokens/fish-token-expendable-lackey.js";
 import _tokensFoodToken from "../tokens/food-token.js";
 import _tokensHorrorToken from "../tokens/horror-token.js";
+import _tokensHumanWarriorToken31TrampleHaste from "../tokens/human-warrior-token-3-1-trample-haste.js";
 import _tokensHumanWizardToken from "../tokens/human-wizard-token.js";
 import _tokensJellyfishToken from "../tokens/jellyfish-token.js";
 import _tokensKelpToken from "../tokens/kelp-token.js";
@@ -1012,6 +1022,7 @@ import _tokensZombieTokenCurseOfTheRestlessDead from "../tokens/zombie-token-cur
 
 const shard: CardShard = {
   pool: [
+    _poolAangAndLaOceansFury,
     _poolAbattoirGhoul,
     _poolAbnormalEndurance,
     _poolAbrade,
@@ -1304,6 +1315,7 @@ const shard: CardShard = {
     _poolFallajiVanguard,
     _poolFangFearlessLcie,
     _poolFatalMutation,
+    _poolFearOfIsolation,
     _poolFearsomeTemper,
     _poolFeastingHobbit,
     _poolFellingBlow,
@@ -1449,6 +1461,7 @@ const shard: CardShard = {
     _poolJadeBearer,
     _poolJadeOrbOfDragonkind,
     _poolJanJansenChaosCrafter,
+    _poolJarOfEyeballs,
     _poolJayemdaeTome,
     _poolJazalGoldmane,
     _poolJechtReluctantGuardian,
@@ -1723,6 +1736,8 @@ const shard: CardShard = {
     _poolRoilsRetribution,
     _poolRoofstalkerWight,
     _poolRootMaze,
+    _poolRootcoilCreeper,
+    _poolRoshanHiddenMagister,
     _poolRuinGhost,
     _poolRushOfInspiration,
     _poolSageOfTheMaze,
@@ -1741,6 +1756,7 @@ const shard: CardShard = {
     _poolSeaHag,
     _poolSeaScryer,
     _poolSearchWarrant,
+    _poolSeasonOfWeaving,
     _poolSeasonalRitual,
     _poolSecretRendezvous,
     _poolSecretsOfTheGoldenCity,
@@ -1750,6 +1766,7 @@ const shard: CardShard = {
     _poolSeizeTheInitiative,
     _poolSellerOfSongbirds,
     _poolSemesterForeseer,
+    _poolSentinelOfLostLore,
     _poolSerendibDjinn,
     _poolSerpentsGift,
     _poolShadowGuildmage,
@@ -1795,6 +1812,7 @@ const shard: CardShard = {
     _poolSlickshotLockpicker,
     _poolSlickshotShowOff,
     _poolSlimyKavu,
+    _poolSliverGravemother,
     _poolSluicewayScorpion,
     _poolSmelt,
     _poolSnag,
@@ -1858,6 +1876,7 @@ const shard: CardShard = {
     _poolTeeteringPeaks,
     _poolTegwyllDukeOfSplendor,
     _poolTemmetNaktamunsWill,
+    _poolTemurCharger,
     _poolTemurDevotee,
     _poolTenuredConcocter,
     _poolTerminus,
@@ -2003,6 +2022,7 @@ const shard: CardShard = {
     _tokensFishTokenExpendableLackey,
     _tokensFoodToken,
     _tokensHorrorToken,
+    _tokensHumanWarriorToken31TrampleHaste,
     _tokensHumanWizardToken,
     _tokensJellyfishToken,
     _tokensKelpToken,

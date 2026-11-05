@@ -431,6 +431,7 @@ import _poolLeoninSurveyor from "../pool/leonin-surveyor.js";
 import _poolLightshellDuo from "../pool/lightshell-duo.js";
 import _poolLilianaTheFaultless from "../pool/liliana-the-faultless.js";
 import _poolLilianaUntouchedByDeath from "../pool/liliana-untouched-by-death.js";
+import _poolLisetteDeanOfTheRoot from "../pool/lisette-dean-of-the-root.js";
 import _poolLivingLaser from "../pool/living-laser.js";
 import _poolLlanowarStalker from "../pool/llanowar-stalker.js";
 import _poolLoamcrafterFaun from "../pool/loamcrafter-faun.js";
@@ -488,6 +489,7 @@ import _poolMomoPlayfulPet from "../pool/momo-playful-pet.js";
 import _poolMonstrosityOfTheLake from "../pool/monstrosity-of-the-lake.js";
 import _poolMonstrousHound from "../pool/monstrous-hound.js";
 import _poolMoonlitWake from "../pool/moonlit-wake.js";
+import _poolMoonstoneHarshMistress from "../pool/moonstone-harsh-mistress.js";
 import _poolMorinfen from "../pool/morinfen.js";
 import _poolMorkrutNecropod from "../pool/morkrut-necropod.js";
 import _poolMosscoatGoriak from "../pool/mosscoat-goriak.js";
@@ -529,6 +531,7 @@ import _poolOreskosSwiftclaw from "../pool/oreskos-swiftclaw.js";
 import _poolOriginOfTheHulk from "../pool/origin-of-the-hulk.js";
 import _poolOrissSamiteGuardian from "../pool/oriss-samite-guardian.js";
 import _poolOstiaryThrull from "../pool/ostiary-thrull.js";
+import _poolOverburden from "../pool/overburden.js";
 import _poolOverlordOfTheBoilerbilges from "../pool/overlord-of-the-boilerbilges.js";
 import _poolPainfulMemories from "../pool/painful-memories.js";
 import _poolParallelEvolution from "../pool/parallel-evolution.js";
@@ -884,6 +887,7 @@ import _poolVoyagerGlidecar from "../pool/voyager-glidecar.js";
 import _poolVraskaSchemingGorgon from "../pool/vraska-scheming-gorgon.js";
 import _poolWalkTheAeons from "../pool/walk-the-aeons.js";
 import _poolWallOfStone from "../pool/wall-of-stone.js";
+import _poolWandOfWonder from "../pool/wand-of-wonder.js";
 import _poolWanderingFumarole from "../pool/wandering-fumarole.js";
 import _poolWarriorsHonor from "../pool/warriors-honor.js";
 import _poolWastescapeBattlemage from "../pool/wastescape-battlemage.js";
@@ -1374,6 +1378,7 @@ const shard: CardShard = {
     _poolLightshellDuo,
     _poolLilianaTheFaultless,
     _poolLilianaUntouchedByDeath,
+    _poolLisetteDeanOfTheRoot,
     _poolLivingLaser,
     _poolLlanowarStalker,
     _poolLoamcrafterFaun,
@@ -1431,6 +1436,7 @@ const shard: CardShard = {
     _poolMonstrosityOfTheLake,
     _poolMonstrousHound,
     _poolMoonlitWake,
+    _poolMoonstoneHarshMistress,
     _poolMorinfen,
     _poolMorkrutNecropod,
     _poolMosscoatGoriak,
@@ -1472,6 +1478,7 @@ const shard: CardShard = {
     _poolOriginOfTheHulk,
     _poolOrissSamiteGuardian,
     _poolOstiaryThrull,
+    _poolOverburden,
     _poolOverlordOfTheBoilerbilges,
     _poolPainfulMemories,
     _poolParallelEvolution,
@@ -1827,6 +1834,7 @@ const shard: CardShard = {
     _poolVraskaSchemingGorgon,
     _poolWalkTheAeons,
     _poolWallOfStone,
+    _poolWandOfWonder,
     _poolWanderingFumarole,
     _poolWarriorsHonor,
     _poolWastescapeBattlemage,

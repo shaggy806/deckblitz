@@ -74,6 +74,7 @@ import _poolBlackMagesRod from "../pool/black-mages-rod.js";
 import _poolBlacklanceParagon from "../pool/blacklance-paragon.js";
 import _poolBladebackSliver from "../pool/bladeback-sliver.js";
 import _poolBlanchwoodProwler from "../pool/blanchwood-prowler.js";
+import _poolBlazingSunsteel from "../pool/blazing-sunsteel.js";
 import _poolBlexVexingPest from "../pool/blex-vexing-pest.js";
 import _poolBlightTitan from "../pool/blight-titan.js";
 import _poolBloodHypnotist from "../pool/blood-hypnotist.js";
@@ -306,6 +307,7 @@ import _poolGoblinMasons from "../pool/goblin-masons.js";
 import _poolGoblinPsychopath from "../pool/goblin-psychopath.js";
 import _poolGoblinRaider from "../pool/goblin-raider.js";
 import _poolGodEternalBontu from "../pool/god-eternal-bontu.js";
+import _poolGogoMysteriousMime from "../pool/gogo-mysterious-mime.js";
 import _poolGoldenArgosy from "../pool/golden-argosy.js";
 import _poolGolgariGuildmage from "../pool/golgari-guildmage.js";
 import _poolGorgonFlail from "../pool/gorgon-flail.js";
@@ -809,6 +811,7 @@ import _poolTheftOfDreams from "../pool/theft-of-dreams.js";
 import _poolThermopod from "../pool/thermopod.js";
 import _poolThicketBasilisk from "../pool/thicket-basilisk.js";
 import _poolThievesGuildEnforcer from "../pool/thieves-guild-enforcer.js";
+import _poolThorGodOfThunder from "../pool/thor-god-of-thunder.js";
 import _poolThoughtShucker from "../pool/thought-shucker.js";
 import _poolThoughtcast from "../pool/thoughtcast.js";
 import _poolThranForge from "../pool/thran-forge.js";
@@ -930,6 +933,7 @@ import _poolYavimayaHollow from "../pool/yavimaya-hollow.js";
 import _poolYavimayaSojourner from "../pool/yavimaya-sojourner.js";
 import _poolYavimayasEmbrace from "../pool/yavimayas-embrace.js";
 import _poolYawgmothsBargain from "../pool/yawgmoths-bargain.js";
+import _poolYdwenEfreet from "../pool/ydwen-efreet.js";
 import _poolYgraEaterOfAll from "../pool/ygra-eater-of-all.js";
 import _poolYoseiTheMorningStar from "../pool/yosei-the-morning-star.js";
 import _poolYoureAmbushedOnTheRoad from "../pool/youre-ambushed-on-the-road.js";
@@ -1022,6 +1026,7 @@ const shard: CardShard = {
     _poolBlacklanceParagon,
     _poolBladebackSliver,
     _poolBlanchwoodProwler,
+    _poolBlazingSunsteel,
     _poolBlexVexingPest,
     _poolBlightTitan,
     _poolBloodHypnotist,
@@ -1254,6 +1259,7 @@ const shard: CardShard = {
     _poolGoblinPsychopath,
     _poolGoblinRaider,
     _poolGodEternalBontu,
+    _poolGogoMysteriousMime,
     _poolGoldenArgosy,
     _poolGolgariGuildmage,
     _poolGorgonFlail,
@@ -1757,6 +1763,7 @@ const shard: CardShard = {
     _poolThermopod,
     _poolThicketBasilisk,
     _poolThievesGuildEnforcer,
+    _poolThorGodOfThunder,
     _poolThoughtShucker,
     _poolThoughtcast,
     _poolThranForge,
@@ -1878,6 +1885,7 @@ const shard: CardShard = {
     _poolYavimayaSojourner,
     _poolYavimayasEmbrace,
     _poolYawgmothsBargain,
+    _poolYdwenEfreet,
     _poolYgraEaterOfAll,
     _poolYoseiTheMorningStar,
     _poolYoureAmbushedOnTheRoad,

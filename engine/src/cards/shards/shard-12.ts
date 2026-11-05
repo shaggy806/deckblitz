@@ -7,6 +7,7 @@ import _poolAbaddonTheDespoiler from "../pool/abaddon-the-despoiler.js";
 import _poolAbandonedAirTemple from "../pool/abandoned-air-temple.js";
 import _poolAbbotOfKeralKeep from "../pool/abbot-of-keral-keep.js";
 import _poolAberrantResearcher from "../pool/aberrant-researcher.js";
+import _poolAbyssalHarvester from "../pool/abyssal-harvester.js";
 import _poolAcademyRaider from "../pool/academy-raider.js";
 import _poolAcquiredMutation from "../pool/acquired-mutation.js";
 import _poolActivatedSleeper from "../pool/activated-sleeper.js";
@@ -232,6 +233,7 @@ import _poolDroolingOgre from "../pool/drooling-ogre.js";
 import _poolDrossHopper from "../pool/dross-hopper.js";
 import _poolDrownyardLurker from "../pool/drownyard-lurker.js";
 import _poolDuelistOfDeepFaith from "../pool/duelist-of-deep-faith.js";
+import _poolDuelistsFlame from "../pool/duelists-flame.js";
 import _poolDunedainRangers from "../pool/dunedain-rangers.js";
 import _poolDuskLegionDuelist from "../pool/dusk-legion-duelist.js";
 import _poolEagleOfTheWatch from "../pool/eagle-of-the-watch.js";
@@ -428,6 +430,7 @@ import _poolJessicaJonesPrivateEye from "../pool/jessica-jones-private-eye.js";
 import _poolJilt from "../pool/jilt.js";
 import _poolJodahArchmageEternal from "../pool/jodah-archmage-eternal.js";
 import _poolJoinTheMaestros from "../pool/join-the-maestros.js";
+import _poolJolraelEmpressOfBeasts from "../pool/jolrael-empress-of-beasts.js";
 import _poolJolraelMwonvuliRecluse from "../pool/jolrael-mwonvuli-recluse.js";
 import _poolJolraelsFavor from "../pool/jolraels-favor.js";
 import _poolJunkyoBell from "../pool/junkyo-bell.js";
@@ -606,6 +609,7 @@ import _poolPolukranosEngineOfRuin from "../pool/polukranos-engine-of-ruin.js";
 import _poolPoolingVenom from "../pool/pooling-venom.js";
 import _poolPortableHole from "../pool/portable-hole.js";
 import _poolPortalToPhyrexia from "../pool/portal-to-phyrexia.js";
+import _poolPossessedSkaab from "../pool/possessed-skaab.js";
 import _poolPostmortemLunge from "../pool/postmortem-lunge.js";
 import _poolPreciseStrike from "../pool/precise-strike.js";
 import _poolPretendingPoxbearers from "../pool/pretending-poxbearers.js";
@@ -631,6 +635,7 @@ import _poolQuickchange from "../pool/quickchange.js";
 import _poolQuicksilverBrashBlur from "../pool/quicksilver-brash-blur.js";
 import _poolRabbitResponse from "../pool/rabbit-response.js";
 import _poolRadhaCoalitionWarlord from "../pool/radha-coalition-warlord.js";
+import _poolRadiantGrace from "../pool/radiant-grace.js";
 import _poolRageIntoTheValley from "../pool/rage-into-the-valley.js";
 import _poolRagingBattleMouse from "../pool/raging-battle-mouse.js";
 import _poolRaidersWake from "../pool/raiders-wake.js";
@@ -649,6 +654,7 @@ import _poolRelentlessRats from "../pool/relentless-rats.js";
 import _poolRelentlessXAtm092 from "../pool/relentless-x-atm092.js";
 import _poolRelicRobber from "../pool/relic-robber.js";
 import _poolRemnantOfTheRisingStar from "../pool/remnant-of-the-rising-star.js";
+import _poolRepentantVampire from "../pool/repentant-vampire.js";
 import _poolRescue from "../pool/rescue.js";
 import _poolResearchThief from "../pool/research-thief.js";
 import _poolResearch from "../pool/research.js";
@@ -731,6 +737,7 @@ import _poolSilvergladePathfinder from "../pool/silverglade-pathfinder.js";
 import _poolSilverpeltWerewolf from "../pool/silverpelt-werewolf.js";
 import _poolSilverquillPledgemage from "../pool/silverquill-pledgemage.js";
 import _poolSimaYiWeiFieldMarshal from "../pool/sima-yi-wei-field-marshal.js";
+import _poolSimicBasilisk from "../pool/simic-basilisk.js";
 import _poolSimoon from "../pool/simoon.js";
 import _poolSimulacrumShaper from "../pool/simulacrum-shaper.js";
 import _poolSinewSliver from "../pool/sinew-sliver.js";
@@ -856,6 +863,7 @@ import _poolTrevasAttendant from "../pool/trevas-attendant.js";
 import _poolTrickShot from "../pool/trick-shot.js";
 import _poolTriplicateSpirits from "../pool/triplicate-spirits.js";
 import _poolTriumphOfGerrard from "../pool/triumph-of-gerrard.js";
+import _poolTropicalStorm from "../pool/tropical-storm.js";
 import _poolTuneUp from "../pool/tune-up.js";
 import _poolTwincast from "../pool/twincast.js";
 import _poolTyrantGuard from "../pool/tyrant-guard.js";
@@ -961,6 +969,7 @@ const shard: CardShard = {
     _poolAbandonedAirTemple,
     _poolAbbotOfKeralKeep,
     _poolAberrantResearcher,
+    _poolAbyssalHarvester,
     _poolAcademyRaider,
     _poolAcquiredMutation,
     _poolActivatedSleeper,
@@ -1186,6 +1195,7 @@ const shard: CardShard = {
     _poolDrossHopper,
     _poolDrownyardLurker,
     _poolDuelistOfDeepFaith,
+    _poolDuelistsFlame,
     _poolDunedainRangers,
     _poolDuskLegionDuelist,
     _poolEagleOfTheWatch,
@@ -1382,6 +1392,7 @@ const shard: CardShard = {
     _poolJilt,
     _poolJodahArchmageEternal,
     _poolJoinTheMaestros,
+    _poolJolraelEmpressOfBeasts,
     _poolJolraelMwonvuliRecluse,
     _poolJolraelsFavor,
     _poolJunkyoBell,
@@ -1560,6 +1571,7 @@ const shard: CardShard = {
     _poolPoolingVenom,
     _poolPortableHole,
     _poolPortalToPhyrexia,
+    _poolPossessedSkaab,
     _poolPostmortemLunge,
     _poolPreciseStrike,
     _poolPretendingPoxbearers,
@@ -1585,6 +1597,7 @@ const shard: CardShard = {
     _poolQuicksilverBrashBlur,
     _poolRabbitResponse,
     _poolRadhaCoalitionWarlord,
+    _poolRadiantGrace,
     _poolRageIntoTheValley,
     _poolRagingBattleMouse,
     _poolRaidersWake,
@@ -1603,6 +1616,7 @@ const shard: CardShard = {
     _poolRelentlessXAtm092,
     _poolRelicRobber,
     _poolRemnantOfTheRisingStar,
+    _poolRepentantVampire,
     _poolRescue,
     _poolResearchThief,
     _poolResearch,
@@ -1685,6 +1699,7 @@ const shard: CardShard = {
     _poolSilverpeltWerewolf,
     _poolSilverquillPledgemage,
     _poolSimaYiWeiFieldMarshal,
+    _poolSimicBasilisk,
     _poolSimoon,
     _poolSimulacrumShaper,
     _poolSinewSliver,
@@ -1810,6 +1825,7 @@ const shard: CardShard = {
     _poolTrickShot,
     _poolTriplicateSpirits,
     _poolTriumphOfGerrard,
+    _poolTropicalStorm,
     _poolTuneUp,
     _poolTwincast,
     _poolTyrantGuard,

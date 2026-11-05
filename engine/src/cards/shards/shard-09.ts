@@ -79,6 +79,7 @@ import _poolBeornsHospitality from "../pool/beorns-hospitality.js";
 import _poolBewilderingBlizzard from "../pool/bewildering-blizzard.js";
 import _poolBilbosRing from "../pool/bilbos-ring.js";
 import _poolBillThePony from "../pool/bill-the-pony.js";
+import _poolBiotransference from "../pool/biotransference.js";
 import _poolBitterthornNissasAnimus from "../pool/bitterthorn-nissas-animus.js";
 import _poolBlindingSpray from "../pool/blinding-spray.js";
 import _poolBlink from "../pool/blink.js";
@@ -190,6 +191,7 @@ import _poolDesiccatedNaga from "../pool/desiccated-naga.js";
 import _poolDevastatingDreams from "../pool/devastating-dreams.js";
 import _poolDiamondPickAxe from "../pool/diamond-pick-axe.js";
 import _poolDieYoung from "../pool/die-young.js";
+import _poolDiligentZookeeper from "../pool/diligent-zookeeper.js";
 import _poolDionBahamutsDominant from "../pool/dion-bahamuts-dominant.js";
 import _poolDiregrafScavenger from "../pool/diregraf-scavenger.js";
 import _poolDirgeOfDread from "../pool/dirge-of-dread.js";
@@ -352,6 +354,7 @@ import _poolGroupProject from "../pool/group-project.js";
 import _poolGroveOfTheGuardian from "../pool/grove-of-the-guardian.js";
 import _poolGuardianGladewalker from "../pool/guardian-gladewalker.js";
 import _poolGuardiansOfKoilos from "../pool/guardians-of-koilos.js";
+import _poolGunnerConscript from "../pool/gunner-conscript.js";
 import _poolGwafaHazidProfiteer from "../pool/gwafa-hazid-profiteer.js";
 import _poolHammerheimDeadeye from "../pool/hammerheim-deadeye.js";
 import _poolHamperingSnare from "../pool/hampering-snare.js";
@@ -572,6 +575,7 @@ import _poolParalyzingGrasp from "../pool/paralyzing-grasp.js";
 import _poolParapetWatchers from "../pool/parapet-watchers.js";
 import _poolParhelionPatrol from "../pool/parhelion-patrol.js";
 import _poolPathOfPeace from "../pool/path-of-peace.js";
+import _poolPatronOfTheNezumi from "../pool/patron-of-the-nezumi.js";
 import _poolPawnOfUlamog from "../pool/pawn-of-ulamog.js";
 import _poolPeachGardenOath from "../pool/peach-garden-oath.js";
 import _poolPeltCollector from "../pool/pelt-collector.js";
@@ -1063,6 +1067,7 @@ const shard: CardShard = {
     _poolBewilderingBlizzard,
     _poolBilbosRing,
     _poolBillThePony,
+    _poolBiotransference,
     _poolBitterthornNissasAnimus,
     _poolBlindingSpray,
     _poolBlink,
@@ -1174,6 +1179,7 @@ const shard: CardShard = {
     _poolDevastatingDreams,
     _poolDiamondPickAxe,
     _poolDieYoung,
+    _poolDiligentZookeeper,
     _poolDionBahamutsDominant,
     _poolDiregrafScavenger,
     _poolDirgeOfDread,
@@ -1336,6 +1342,7 @@ const shard: CardShard = {
     _poolGroveOfTheGuardian,
     _poolGuardianGladewalker,
     _poolGuardiansOfKoilos,
+    _poolGunnerConscript,
     _poolGwafaHazidProfiteer,
     _poolHammerheimDeadeye,
     _poolHamperingSnare,
@@ -1556,6 +1563,7 @@ const shard: CardShard = {
     _poolParapetWatchers,
     _poolParhelionPatrol,
     _poolPathOfPeace,
+    _poolPatronOfTheNezumi,
     _poolPawnOfUlamog,
     _poolPeachGardenOath,
     _poolPeltCollector,

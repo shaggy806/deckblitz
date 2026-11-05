@@ -170,6 +170,7 @@ import _poolCrypticCoat from "../pool/cryptic-coat.js";
 import _poolCrystalInhumanPrincess from "../pool/crystal-inhuman-princess.js";
 import _poolCrystallizedSerah from "../pool/crystallized-serah.js";
 import _poolCullingRitual from "../pool/culling-ritual.js";
+import _poolCuriousColossus from "../pool/curious-colossus.js";
 import _poolCurseOfDisturbance from "../pool/curse-of-disturbance.js";
 import _poolCurseOfExhaustion from "../pool/curse-of-exhaustion.js";
 import _poolCursedMirror from "../pool/cursed-mirror.js";
@@ -402,6 +403,7 @@ import _poolJungleDelver from "../pool/jungle-delver.js";
 import _poolJwarIsleAvenger from "../pool/jwar-isle-avenger.js";
 import _poolK9MarkI from "../pool/k-9-mark-i.js";
 import _poolKaervekTheMerciless from "../pool/kaervek-the-merciless.js";
+import _poolKangDynasty from "../pool/kang-dynasty.js";
 import _poolKarametraGodOfHarvests from "../pool/karametra-god-of-harvests.js";
 import _poolKazaRoilChaser from "../pool/kaza-roil-chaser.js";
 import _poolKelethSunmaneFamiliar from "../pool/keleth-sunmane-familiar.js";
@@ -490,6 +492,7 @@ import _poolMistyRainforest from "../pool/misty-rainforest.js";
 import _poolMitoticSlime from "../pool/mitotic-slime.js";
 import _poolMizziumMortars from "../pool/mizzium-mortars.js";
 import _poolMoggAlarm from "../pool/mogg-alarm.js";
+import _poolMoiraBrownGuideAuthor from "../pool/moira-brown-guide-author.js";
 import _poolMoltenVortex from "../pool/molten-vortex.js";
 import _poolMongrelPack from "../pool/mongrel-pack.js";
 import _poolMonsoon from "../pool/monsoon.js";
@@ -505,6 +508,7 @@ import _poolNausea from "../pool/nausea.js";
 import _poolNavigationOrb from "../pool/navigation-orb.js";
 import _poolNecrodominance from "../pool/necrodominance.js";
 import _poolNecromanticSummons from "../pool/necromantic-summons.js";
+import _poolNecropotence from "../pool/necropotence.js";
 import _poolNecroticFumes from "../pool/necrotic-fumes.js";
 import _poolNeedlethornDrake from "../pool/needlethorn-drake.js";
 import _poolNekoTe from "../pool/neko-te.js";
@@ -669,6 +673,7 @@ import _poolSavageConception from "../pool/savage-conception.js";
 import _poolSavvyHunter from "../pool/savvy-hunter.js";
 import _poolSawItComing from "../pool/saw-it-coming.js";
 import _poolScaleTheHeights from "../pool/scale-the-heights.js";
+import _poolScaleUp from "../pool/scale-up.js";
 import _poolScarecrone from "../pool/scarecrone.js";
 import _poolScavengingScarab from "../pool/scavenging-scarab.js";
 import _poolSchemingSilvertongue from "../pool/scheming-silvertongue.js";
@@ -796,6 +801,7 @@ import _poolTake from "../pool/take.js";
 import _poolTakenumaBleeder from "../pool/takenuma-bleeder.js";
 import _poolTalesOfMasterSeshiro from "../pool/tales-of-master-seshiro.js";
 import _poolTalismanOfUnity from "../pool/talisman-of-unity.js";
+import _poolTanazirQuandrix from "../pool/tanazir-quandrix.js";
 import _poolTangleAsp from "../pool/tangle-asp.js";
 import _poolTangleclawWerewolf from "../pool/tangleclaw-werewolf.js";
 import _poolTangleroot from "../pool/tangleroot.js";
@@ -854,6 +860,7 @@ import _poolTranscendentMaster from "../pool/transcendent-master.js";
 import _poolTraumaticRevelation from "../pool/traumatic-revelation.js";
 import _poolTravelersAmulet from "../pool/travelers-amulet.js";
 import _poolTravelingChocobo from "../pool/traveling-chocobo.js";
+import _poolTreasureNabber from "../pool/treasure-nabber.js";
 import _poolTreeguardDuo from "../pool/treeguard-duo.js";
 import _poolTreetopRangers from "../pool/treetop-rangers.js";
 import _poolTreetopScout from "../pool/treetop-scout.js";
@@ -1147,6 +1154,7 @@ const shard: CardShard = {
     _poolCrystalInhumanPrincess,
     _poolCrystallizedSerah,
     _poolCullingRitual,
+    _poolCuriousColossus,
     _poolCurseOfDisturbance,
     _poolCurseOfExhaustion,
     _poolCursedMirror,
@@ -1379,6 +1387,7 @@ const shard: CardShard = {
     _poolJwarIsleAvenger,
     _poolK9MarkI,
     _poolKaervekTheMerciless,
+    _poolKangDynasty,
     _poolKarametraGodOfHarvests,
     _poolKazaRoilChaser,
     _poolKelethSunmaneFamiliar,
@@ -1467,6 +1476,7 @@ const shard: CardShard = {
     _poolMitoticSlime,
     _poolMizziumMortars,
     _poolMoggAlarm,
+    _poolMoiraBrownGuideAuthor,
     _poolMoltenVortex,
     _poolMongrelPack,
     _poolMonsoon,
@@ -1482,6 +1492,7 @@ const shard: CardShard = {
     _poolNavigationOrb,
     _poolNecrodominance,
     _poolNecromanticSummons,
+    _poolNecropotence,
     _poolNecroticFumes,
     _poolNeedlethornDrake,
     _poolNekoTe,
@@ -1646,6 +1657,7 @@ const shard: CardShard = {
     _poolSavvyHunter,
     _poolSawItComing,
     _poolScaleTheHeights,
+    _poolScaleUp,
     _poolScarecrone,
     _poolScavengingScarab,
     _poolSchemingSilvertongue,
@@ -1773,6 +1785,7 @@ const shard: CardShard = {
     _poolTakenumaBleeder,
     _poolTalesOfMasterSeshiro,
     _poolTalismanOfUnity,
+    _poolTanazirQuandrix,
     _poolTangleAsp,
     _poolTangleclawWerewolf,
     _poolTangleroot,
@@ -1831,6 +1844,7 @@ const shard: CardShard = {
     _poolTraumaticRevelation,
     _poolTravelersAmulet,
     _poolTravelingChocobo,
+    _poolTreasureNabber,
     _poolTreeguardDuo,
     _poolTreetopRangers,
     _poolTreetopScout,

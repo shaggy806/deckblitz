@@ -111,6 +111,7 @@ import _poolBrutalCathar from "../pool/brutal-cathar.js";
 import _poolBuckyBarnesEagerAlly from "../pool/bucky-barnes-eager-ally.js";
 import _poolBurdenOfProof from "../pool/burden-of-proof.js";
 import _poolBurningRuneDemon from "../pool/burning-rune-demon.js";
+import _poolBushiTenderfoot from "../pool/bushi-tenderfoot.js";
 import _poolCadaverLab from "../pool/cadaver-lab.js";
 import _poolCallTheBloodline from "../pool/call-the-bloodline.js";
 import _poolCallToHeel from "../pool/call-to-heel.js";
@@ -422,6 +423,7 @@ import _poolJaddiLifestrider from "../pool/jaddi-lifestrider.js";
 import _poolJadedResponse from "../pool/jaded-response.js";
 import _poolJennikaBadAppleBigSister from "../pool/jennika-bad-apple-big-sister.js";
 import _poolJennyFlint from "../pool/jenny-flint.js";
+import _poolJoGrant from "../pool/jo-grant.js";
 import _poolJungleWeaver from "../pool/jungle-weaver.js";
 import _poolJwariShapeshifter from "../pool/jwari-shapeshifter.js";
 import _poolKalastriaHealer from "../pool/kalastria-healer.js";
@@ -469,6 +471,7 @@ import _poolLilyBowenRagingGrandma from "../pool/lily-bowen-raging-grandma.js";
 import _poolLiminalHold from "../pool/liminal-hold.js";
 import _poolLionsEyeDiamond from "../pool/lions-eye-diamond.js";
 import _poolLiquimetalTorque from "../pool/liquimetal-torque.js";
+import _poolLittjaraKinseekers from "../pool/littjara-kinseekers.js";
 import _poolLivingHistory from "../pool/living-history.js";
 import _poolLobberCrew from "../pool/lobber-crew.js";
 import _poolLodestoneGolem from "../pool/lodestone-golem.js";
@@ -633,6 +636,7 @@ import _poolPrimevalSpawn from "../pool/primeval-spawn.js";
 import _poolPrismabasher from "../pool/prismabasher.js";
 import _poolProwcatcherSpecialist from "../pool/prowcatcher-specialist.js";
 import _poolPsionicBlast from "../pool/psionic-blast.js";
+import _poolPureIntentions from "../pool/pure-intentions.js";
 import _poolPureReflection from "../pool/pure-reflection.js";
 import _poolPurelace from "../pool/purelace.js";
 import _poolPurity from "../pool/purity.js";
@@ -739,6 +743,7 @@ import _poolShriekingDrake from "../pool/shrieking-drake.js";
 import _poolShrineOfLimitlessPower from "../pool/shrine-of-limitless-power.js";
 import _poolShrink from "../pool/shrink.js";
 import _poolShroudedShepherd from "../pool/shrouded-shepherd.js";
+import _poolSigardianZealot from "../pool/sigardian-zealot.js";
 import _poolSigilBlessing from "../pool/sigil-blessing.js";
 import _poolSigilOfMyrkul from "../pool/sigil-of-myrkul.js";
 import _poolSilkenStrength from "../pool/silken-strength.js";
@@ -748,6 +753,7 @@ import _poolSilvergladeElemental from "../pool/silverglade-elemental.js";
 import _poolSilverquillCommand from "../pool/silverquill-command.js";
 import _poolSilverwingSquadron from "../pool/silverwing-squadron.js";
 import _poolSilvosRogueElemental from "../pool/silvos-rogue-elemental.js";
+import _poolSinnersJudgment from "../pool/sinners-judgment.js";
 import _poolSinsOfThePast from "../pool/sins-of-the-past.js";
 import _poolSirenStormtamer from "../pool/siren-stormtamer.js";
 import _poolSisterhoodOfKarn from "../pool/sisterhood-of-karn.js";
@@ -1142,6 +1148,7 @@ const shard: CardShard = {
     _poolBuckyBarnesEagerAlly,
     _poolBurdenOfProof,
     _poolBurningRuneDemon,
+    _poolBushiTenderfoot,
     _poolCadaverLab,
     _poolCallTheBloodline,
     _poolCallToHeel,
@@ -1453,6 +1460,7 @@ const shard: CardShard = {
     _poolJadedResponse,
     _poolJennikaBadAppleBigSister,
     _poolJennyFlint,
+    _poolJoGrant,
     _poolJungleWeaver,
     _poolJwariShapeshifter,
     _poolKalastriaHealer,
@@ -1500,6 +1508,7 @@ const shard: CardShard = {
     _poolLiminalHold,
     _poolLionsEyeDiamond,
     _poolLiquimetalTorque,
+    _poolLittjaraKinseekers,
     _poolLivingHistory,
     _poolLobberCrew,
     _poolLodestoneGolem,
@@ -1664,6 +1673,7 @@ const shard: CardShard = {
     _poolPrismabasher,
     _poolProwcatcherSpecialist,
     _poolPsionicBlast,
+    _poolPureIntentions,
     _poolPureReflection,
     _poolPurelace,
     _poolPurity,
@@ -1770,6 +1780,7 @@ const shard: CardShard = {
     _poolShrineOfLimitlessPower,
     _poolShrink,
     _poolShroudedShepherd,
+    _poolSigardianZealot,
     _poolSigilBlessing,
     _poolSigilOfMyrkul,
     _poolSilkenStrength,
@@ -1779,6 +1790,7 @@ const shard: CardShard = {
     _poolSilverquillCommand,
     _poolSilverwingSquadron,
     _poolSilvosRogueElemental,
+    _poolSinnersJudgment,
     _poolSinsOfThePast,
     _poolSirenStormtamer,
     _poolSisterhoodOfKarn,

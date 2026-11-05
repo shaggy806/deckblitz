@@ -47,6 +47,7 @@ import _poolArnimZolaBioFanatic from "../pool/arnim-zola-bio-fanatic.js";
 import _poolArrogantPoet from "../pool/arrogant-poet.js";
 import _poolArtificersIntuition from "../pool/artificers-intuition.js";
 import _poolAshenMonstrosity from "../pool/ashen-monstrosity.js";
+import _poolAshioksErasure from "../pool/ashioks-erasure.js";
 import _poolAssaultIntercessor from "../pool/assault-intercessor.js";
 import _poolAssaultZeppelid from "../pool/assault-zeppelid.js";
 import _poolAssimilateEssence from "../pool/assimilate-essence.js";
@@ -235,6 +236,7 @@ import _poolDruidicSatchel from "../pool/druidic-satchel.js";
 import _poolDugganPrivateDetective from "../pool/duggan-private-detective.js";
 import _poolDwarvenHold from "../pool/dwarven-hold.js";
 import _poolEccentricPestfinder from "../pool/eccentric-pestfinder.js";
+import _poolEchocastingSymposium from "../pool/echocasting-symposium.js";
 import _poolEcstaticAwakener from "../pool/ecstatic-awakener.js";
 import _poolEcstaticBeauty from "../pool/ecstatic-beauty.js";
 import _poolEdgarAncientBloodlord from "../pool/edgar-ancient-bloodlord.js";
@@ -321,6 +323,7 @@ import _poolGerrardCapashen from "../pool/gerrard-capashen.js";
 import _poolGhostWarden from "../pool/ghost-warden.js";
 import _poolGiantAdephage from "../pool/giant-adephage.js";
 import _poolGiantDustwasp from "../pool/giant-dustwasp.js";
+import _poolGideonJura from "../pool/gideon-jura.js";
 import _poolGideonMartialParagon from "../pool/gideon-martial-paragon.js";
 import _poolGideonTheOathless from "../pool/gideon-the-oathless.js";
 import _poolGilanraCallerOfWirewood from "../pool/gilanra-caller-of-wirewood.js";
@@ -617,6 +620,8 @@ import _poolRaphaelToughTurtle from "../pool/raphael-tough-turtle.js";
 import _poolRathiFiend from "../pool/rathi-fiend.js";
 import _poolRaucousAudience from "../pool/raucous-audience.js";
 import _poolRavagesOfWar from "../pool/ravages-of-war.js";
+import _poolRayneAcademyChancellor from "../pool/rayne-academy-chancellor.js";
+import _poolRazorfieldRipper from "../pool/razorfield-ripper.js";
 import _poolReachForTheSky from "../pool/reach-for-the-sky.js";
 import _poolReason from "../pool/reason.js";
 import _poolRebelliousStrike from "../pool/rebellious-strike.js";
@@ -911,6 +916,7 @@ import _tokensApeVillainToken from "../tokens/ape-villain-token.js";
 import _tokensClericToken01Black from "../tokens/cleric-token-0-1-black.js";
 import _tokensConstructTokenAncientStoneIdol from "../tokens/construct-token-ancient-stone-idol.js";
 import _tokensConstructTokenRetrofitterFoundry from "../tokens/construct-token-retrofitter-foundry.js";
+import _tokensDragonSpiritTokenSacrificeOnDamage from "../tokens/dragon-spirit-token-sacrifice-on-damage.js";
 import _tokensElfWarriorToken from "../tokens/elf-warrior-token.js";
 import _tokensFaerieTokenFaerieSlumberParty from "../tokens/faerie-token-faerie-slumber-party.js";
 import _tokensFaerieTokenIntoTheFaeCourt from "../tokens/faerie-token-into-the-fae-court.js";
@@ -983,6 +989,7 @@ const shard: CardShard = {
     _poolArrogantPoet,
     _poolArtificersIntuition,
     _poolAshenMonstrosity,
+    _poolAshioksErasure,
     _poolAssaultIntercessor,
     _poolAssaultZeppelid,
     _poolAssimilateEssence,
@@ -1171,6 +1178,7 @@ const shard: CardShard = {
     _poolDugganPrivateDetective,
     _poolDwarvenHold,
     _poolEccentricPestfinder,
+    _poolEchocastingSymposium,
     _poolEcstaticAwakener,
     _poolEcstaticBeauty,
     _poolEdgarAncientBloodlord,
@@ -1257,6 +1265,7 @@ const shard: CardShard = {
     _poolGhostWarden,
     _poolGiantAdephage,
     _poolGiantDustwasp,
+    _poolGideonJura,
     _poolGideonMartialParagon,
     _poolGideonTheOathless,
     _poolGilanraCallerOfWirewood,
@@ -1553,6 +1562,8 @@ const shard: CardShard = {
     _poolRathiFiend,
     _poolRaucousAudience,
     _poolRavagesOfWar,
+    _poolRayneAcademyChancellor,
+    _poolRazorfieldRipper,
     _poolReachForTheSky,
     _poolReason,
     _poolRebelliousStrike,
@@ -1849,6 +1860,7 @@ const shard: CardShard = {
     _tokensClericToken01Black,
     _tokensConstructTokenAncientStoneIdol,
     _tokensConstructTokenRetrofitterFoundry,
+    _tokensDragonSpiritTokenSacrificeOnDamage,
     _tokensElfWarriorToken,
     _tokensFaerieTokenFaerieSlumberParty,
     _tokensFaerieTokenIntoTheFaeCourt,
