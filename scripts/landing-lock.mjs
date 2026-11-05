@@ -20,9 +20,10 @@
 // acquire exits 0 holding the lock, 1 when it's held and --wait wasn't given;
 // --wait polls every minute until it's free (run it in the background).
 //
-// ENABLED on again (2026-11-05) for the freed-cards round F1-F4 (B262-B265).
-// It was off from 2026-10-28 for single-session need-keys work; when off,
-// every command is a no-op that exits 0 and touches nothing on origin.
+// ENABLED off (2026-11-05, after the freed-cards round B262-B265): one
+// session at a time builds the need keys, so every command is a no-op that
+// exits 0 and touches nothing on origin. Turn it back on before running
+// parallel sessions again.
 import { spawnSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -31,7 +32,7 @@ const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const REF = "refs/heads/landing-lock";
 const SEEN = "refs/landing-lock/seen";
 const MINE = "refs/landing-lock/mine";
-const ENABLED = true;
+const ENABLED = false;
 const STALE_MINUTES = 45;
 const POLL_MS = 60_000;
 
