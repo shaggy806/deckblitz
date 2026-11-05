@@ -915,6 +915,7 @@ missing. Re-run `--greedy` for Phase 2's order.
 - **2026-11-04: `author-freed`, batch 257.** 125 of the queue's next 150 authored, 25 given narrow keys, by agents of 20, 30, 40 and 60 cards; 1,132 left.
 - **2026-11-04: `author-freed`, batch 258.** 135 of the queue's next 150 authored, 15 given narrow keys, by agents of 50 and 100 cards; 982 left.
 - **2026-11-05: `author-freed`, batch 259.** 111 of the queue's next 150 authored, 39 given narrow keys, by agents of 75 and 74 cards with a blind reader over all of it; 832 left.
+- **2026-11-05: `author-freed`, batch 260.** 125 of the queue's next 150 authored, 25 given narrow keys (seven on `mechanic:face-down`'s), by two agents of 75 with a blind reader that found nothing wrong; 682 left.
 
 ## Rough size
 

@@ -502,6 +502,7 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Batch 260, the next of the freed cards: 125 of 150 authored** (2026-11-05, `f4fb7ab23`, `f13d7efee`, `c6fc81e75`, `2c3b28559`, `bd10ab3bd`) — the random-pick, counter-removal, restriction, search-destination, flash-condition, base-P/T, graveyard-shuffle, blocking-relation, shared-type, face-down, enlist, assist, meld and turn-stat families, among them Liliana, Death's Majesty, Glissa Sunslayer, Heartless Act, Niv-Mizzet, Guildpact and Whisperwood Elemental. A return from graveyards now puts its cards face down when its `enterAs` says so (rule 708.3; both battlefield paths read only the types). 25 go back on narrow keys.
 - **Batch 259, the next of the freed cards: 111 of 150 authored** (2026-11-05, `282b14057`, `eefa1107d`) — the loyalty-X, energy, naming, aggregate and each-permanent-deals-damage families' cards, among them Ugin, the Spirit Dragon, Demonic Consultation, Kraven's Last Hunt and Sorin, Vengeful Bloodlord. A source's lifelink and deathtouch now work on any source, not only a creature (rules 702.15b, 702.2b). 39 go back on narrow keys.
 - **Batch 258, the next of the freed cards: 135 of 150 authored** (2026-11-04, `a4c154886`, `cd2c3a27e`, `26dec2625`) — the outside-the-game, repeat-modes, skip-draw, shuffle-hand-and-graveyard and
   look-and-choose-target families, among them Jace, the Mind Sculptor, Vendilion Clique, Price of Progress and Time Spiral. By agents of 50 and 100 cards: the 100 went a third
