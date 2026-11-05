@@ -117,16 +117,29 @@ describe("B257 group C", () => {
   });
 
   it("Arcum's Sleigh needs combat and a defending player's snow land", () => {
-    const { game, a } = table({ players: 3 });
+    const { game } = table({ players: 3 });
     const sleigh = spawn(game, "Arcum's Sleigh", A);
     lands(game, "Wastes", 2, A);
-    lands(game, "Snow-Covered Forest", 1, C);
+    lands(game, "Snow-Covered Forest", 1, A);
     const bears = spawn(game, "Grizzly Bears", A);
     const offer = { type: "activate-ability", player: A, source: sleigh, abilityIndex: 0, targets: [ref(bears)] } as const;
-    expect(game.canDispatch(offer)).not.toBeNull();
-    // Attacking the player without one: no.
-    a.declareAttackersFn = () => [{ attacker: bears, defender: B }];
-    afterAttackers(game);
+    // Before combat, even with an opponent's snow land: no.
+    lands(game, "Snow-Covered Forest", 1, C);
+    toStep(game, "precombat-main", A);
+    expect(game.canDispatch(offer)).toMatch(/condition/);
+    // At the beginning of combat, the one window where vigilance helps an attacker: yes.
+    toStep(game, "begin-combat", A);
+    expect(game.canDispatch(offer)).toBeNull();
+  });
+
+  it("Arcum's Sleigh ignores the attacking player's own snow land", () => {
+    const { game } = table({ players: 3 });
+    const sleigh = spawn(game, "Arcum's Sleigh", A);
+    lands(game, "Wastes", 2, A);
+    lands(game, "Snow-Covered Forest", 1, A);
+    const bears = spawn(game, "Grizzly Bears", A);
+    toStep(game, "begin-combat", A);
+    const offer = { type: "activate-ability", player: A, source: sleigh, abilityIndex: 0, targets: [ref(bears)] } as const;
     expect(game.canDispatch(offer)).toMatch(/condition/);
   });
 

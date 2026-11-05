@@ -14720,6 +14720,11 @@
    "description": "A player ref naming the player a creature in a slot attacks (508.5a).",
    "example": "Mercadia's Downfall: Each attacker needs its own defending player (508.5a), and no player ref names the defender of the creature in a slot."
   },
+  "amount:aggregate-graveyards-except-spell-being-cast": {
+   "family": "effect:count-distinct-mana-values",
+   "description": "An aggregate over graveyard cards leaving out the spell being cast: aggregateMatches ignores except for graveyards, so a card cast from its graveyard counts itself as its cost is totalled (601.2a, 601.2f).",
+   "example": "Oskar, Rubbish Reclaimer: cast from your graveyard with Muldrotha, it counts its own mana value"
+  },
   "decision:choose-two-players-on-enter": {
    "family": "decision:choose-player",
    "description": "Two different players chosen as it enters: choosePlayerOnEnter keeps one, and nothing reads \"the other chosen player\".",

@@ -19,7 +19,6 @@ import {
   counters,
   destroy,
   enter,
-  graveyard,
   hand,
   keywords,
   lands,
@@ -613,45 +612,6 @@ describe("Killmonger, Ruthless Usurper", () => {
     spawn(game, "Sol Ring", B);
     attack(game, a, [killmonger], walker);
     expect(pt(game, killmonger).power).toBe(4);
-  });
-});
-
-describe("Oskar, Rubbish Reclaimer", () => {
-  it("costs {1} less for each different mana value in your graveyard, a land's 0 among them", () => {
-    const { game } = table();
-    spawn(game, "Island");
-    spawn(game, "Swamp");
-    const oskar = toHand(game, "Oskar, Rubbish Reclaimer");
-    toGraveyard(game, "Lightning Bolt");
-    toGraveyard(game, "Lightning Bolt");
-    toGraveyard(game, "Grizzly Bears");
-    toGraveyard(game, "Grizzly Bears", B);
-    expect(castable(game, oskar)).toBe(false);
-    toGraveyard(game, "Wastes");
-    expect(castable(game, oskar)).toBe(true);
-  });
-
-  it("may cast a discarded nonland card from the graveyard, paying for it", () => {
-    const { game, a } = table();
-    spawn(game, "Oskar, Rubbish Reclaimer");
-    spawn(game, "Mountain");
-    const bolt = toHand(game, "Lightning Bolt");
-    const land = toHand(game, "Wastes");
-    let asked = 0;
-    a.chooseCastNowFn = (_v, offer) => {
-      asked += 1;
-      return { type: "cast-spell", player: A, card: offer.cards[0], targets: [{ kind: "player", player: B }], via: "effect" };
-    };
-    a.chooseDiscardsFn = () => [bolt];
-    game.debugApplyEffect(A, { kind: "discard", target: 0, amount: 1 }, [ref(A)]);
-    settle(game);
-    expect(asked).toBe(1);
-    expect(life(game, B)).toBe(17);
-    expect(graveyard(game, A)).toContain(bolt);
-    a.chooseDiscardsFn = () => [land];
-    game.debugApplyEffect(A, { kind: "discard", target: 0, amount: 1 }, [ref(A)]);
-    settle(game);
-    expect(asked).toBe(1);
   });
 });
 

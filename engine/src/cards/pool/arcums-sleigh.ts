@@ -20,11 +20,16 @@ export default defineCard({
         kind: "all",
         of: [
           { kind: "turn-structure", duringCombat: true },
+          // Every opponent of the active player is a defending player from the start of
+          // combat, attackers or not (rules 506.2, 802.2), and any one of them will do (802.2a).
           {
-            kind: "controls",
-            filter: { type: "land", supertype: "snow", controlledByDefendingPlayer: true },
-            atLeast: 1,
-            anyController: true,
+            kind: "of-player",
+            player: "active-player",
+            condition: {
+              kind: "of-player",
+              player: "an-opponent",
+              condition: { kind: "controls", filter: { type: "land", supertype: "snow" }, atLeast: 1 },
+            },
           },
         ],
       },

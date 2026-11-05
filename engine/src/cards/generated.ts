@@ -17659,7 +17659,6 @@ import _poolOsaiVultures from "./pool/osai-vultures.js";
 import _poolOscorpIndustries from "./pool/oscorp-industries.js";
 import _poolOscorpResearchTeam from "./pool/oscorp-research-team.js";
 import _poolOsgoodOperationDouble from "./pool/osgood-operation-double.js";
-import _poolOskarRubbishReclaimer from "./pool/oskar-rubbish-reclaimer.js";
 import _poolOsseousExhale from "./pool/osseous-exhale.js";
 import _poolOsseousSticktwister from "./pool/osseous-sticktwister.js";
 import _poolOssification from "./pool/ossification.js";
@@ -47660,7 +47659,6 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolOscorpIndustries,
   _poolOscorpResearchTeam,
   _poolOsgoodOperationDouble,
-  _poolOskarRubbishReclaimer,
   _poolOsseousExhale,
   _poolOsseousSticktwister,
   _poolOssification,
@@ -77674,7 +77672,6 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/oscorp-industries": _poolOscorpIndustries,
   "pool/oscorp-research-team": _poolOscorpResearchTeam,
   "pool/osgood-operation-double": _poolOsgoodOperationDouble,
-  "pool/oskar-rubbish-reclaimer": _poolOskarRubbishReclaimer,
   "pool/osseous-exhale": _poolOsseousExhale,
   "pool/osseous-sticktwister": _poolOsseousSticktwister,
   "pool/ossification": _poolOssification,

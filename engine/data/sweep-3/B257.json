@@ -569,13 +569,6 @@
    "tested": true
   },
   {
-   "name": "Oskar, Rubbish Reclaimer",
-   "files": [
-    "engine/src/cards/pool/oskar-rubbish-reclaimer.ts"
-   ],
-   "tested": true
-  },
-  {
    "name": "Pact of the Serpent",
    "files": [
     "engine/src/cards/pool/pact-of-the-serpent.ts"
@@ -987,6 +980,13 @@
     "target:filter-from-chooser-side"
    ],
    "why": "targetsChosenBy keeps legality on the controller's side, so \"their opponents\" can't be said from the chooser's."
+  },
+  {
+   "name": "Oskar, Rubbish Reclaimer",
+   "needs": [
+    "amount:aggregate-graveyards-except-spell-being-cast"
+   ],
+   "why": "Cast from your graveyard it counts its own mana value as its cost is totalled (601.2a, 601.2f), and aggregateMatches ignores except for graveyards."
   },
   {
    "name": "Preacher",
