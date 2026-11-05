@@ -357,6 +357,7 @@ import _poolHussarPatrol from "../pool/hussar-patrol.js";
 import _poolIdyllicGrange from "../pool/idyllic-grange.js";
 import _poolIizukaTheRuthless from "../pool/iizuka-the-ruthless.js";
 import _poolImpendingDoom from "../pool/impending-doom.js";
+import _poolIncendiaryOracle from "../pool/incendiary-oracle.js";
 import _poolIncendiary from "../pool/incendiary.js";
 import _poolIncrementalBlight from "../pool/incremental-blight.js";
 import _poolInfernalPhantom from "../pool/infernal-phantom.js";
@@ -452,6 +453,7 @@ import _poolMesmericGlare from "../pool/mesmeric-glare.js";
 import _poolMidnightHaunting from "../pool/midnight-haunting.js";
 import _poolMilitiaBugler from "../pool/militia-bugler.js";
 import _poolMinamoSightbender from "../pool/minamo-sightbender.js";
+import _poolMindleechGhoul from "../pool/mindleech-ghoul.js";
 import _poolMindsDilation from "../pool/minds-dilation.js";
 import _poolMireKavu from "../pool/mire-kavu.js";
 import _poolMischievousPup from "../pool/mischievous-pup.js";
@@ -689,6 +691,7 @@ import _poolSoulreaperOfMogis from "../pool/soulreaper-of-mogis.js";
 import _poolSoulsMajesty from "../pool/souls-majesty.js";
 import _poolSoulswornJury from "../pool/soulsworn-jury.js";
 import _poolSparkElemental from "../pool/spark-elemental.js";
+import _poolSpectersShriek from "../pool/specters-shriek.js";
 import _poolSpectraWard from "../pool/spectra-ward.js";
 import _poolSpectralSnatcher from "../pool/spectral-snatcher.js";
 import _poolSpellBlast from "../pool/spell-blast.js";
@@ -846,6 +849,7 @@ import _poolVoyagerGlidecar from "../pool/voyager-glidecar.js";
 import _poolVraskaSchemingGorgon from "../pool/vraska-scheming-gorgon.js";
 import _poolWalkTheAeons from "../pool/walk-the-aeons.js";
 import _poolWallOfStone from "../pool/wall-of-stone.js";
+import _poolWanderingFumarole from "../pool/wandering-fumarole.js";
 import _poolWarriorsHonor from "../pool/warriors-honor.js";
 import _poolWastescapeBattlemage from "../pool/wastescape-battlemage.js";
 import _poolWatcherInTheWeb from "../pool/watcher-in-the-web.js";
@@ -1257,6 +1261,7 @@ const shard: CardShard = {
     _poolIdyllicGrange,
     _poolIizukaTheRuthless,
     _poolImpendingDoom,
+    _poolIncendiaryOracle,
     _poolIncendiary,
     _poolIncrementalBlight,
     _poolInfernalPhantom,
@@ -1352,6 +1357,7 @@ const shard: CardShard = {
     _poolMidnightHaunting,
     _poolMilitiaBugler,
     _poolMinamoSightbender,
+    _poolMindleechGhoul,
     _poolMindsDilation,
     _poolMireKavu,
     _poolMischievousPup,
@@ -1589,6 +1595,7 @@ const shard: CardShard = {
     _poolSoulsMajesty,
     _poolSoulswornJury,
     _poolSparkElemental,
+    _poolSpectersShriek,
     _poolSpectraWard,
     _poolSpectralSnatcher,
     _poolSpellBlast,
@@ -1746,6 +1753,7 @@ const shard: CardShard = {
     _poolVraskaSchemingGorgon,
     _poolWalkTheAeons,
     _poolWallOfStone,
+    _poolWanderingFumarole,
     _poolWarriorsHonor,
     _poolWastescapeBattlemage,
     _poolWatcherInTheWeb,

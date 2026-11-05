@@ -266,6 +266,7 @@ import _poolEyeOfJace from "../pool/eye-of-jace.js";
 import _poolEzioBrashNovice from "../pool/ezio-brash-novice.js";
 import _poolFaerieArtisans from "../pool/faerie-artisans.js";
 import _poolFaerieTrickery from "../pool/faerie-trickery.js";
+import _poolFallersFaithful from "../pool/fallers-faithful.js";
 import _poolFatedRetribution from "../pool/fated-retribution.js";
 import _poolFatefulTempest from "../pool/fateful-tempest.js";
 import _poolFeedTheCauldron from "../pool/feed-the-cauldron.js";
@@ -699,6 +700,7 @@ import _poolSoothsayerAdept from "../pool/soothsayer-adept.js";
 import _poolSorinsVengeance from "../pool/sorins-vengeance.js";
 import _poolSoulTithe from "../pool/soul-tithe.js";
 import _poolSparkMage from "../pool/spark-mage.js";
+import _poolSphinxOfClearSkies from "../pool/sphinx-of-clear-skies.js";
 import _poolSphinxOfMagosi from "../pool/sphinx-of-magosi.js";
 import _poolSpideryGrasp from "../pool/spidery-grasp.js";
 import _poolSpikeFeeder from "../pool/spike-feeder.js";
@@ -1186,6 +1188,7 @@ const shard: CardShard = {
     _poolEzioBrashNovice,
     _poolFaerieArtisans,
     _poolFaerieTrickery,
+    _poolFallersFaithful,
     _poolFatedRetribution,
     _poolFatefulTempest,
     _poolFeedTheCauldron,
@@ -1619,6 +1622,7 @@ const shard: CardShard = {
     _poolSorinsVengeance,
     _poolSoulTithe,
     _poolSparkMage,
+    _poolSphinxOfClearSkies,
     _poolSphinxOfMagosi,
     _poolSpideryGrasp,
     _poolSpikeFeeder,

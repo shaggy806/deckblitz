@@ -15,6 +15,7 @@ import _poolAdmonitionAngel from "../pool/admonition-angel.js";
 import _poolAdventureAwaits from "../pool/adventure-awaits.js";
 import _poolAdventurousImpulse from "../pool/adventurous-impulse.js";
 import _poolAegisSculptor from "../pool/aegis-sculptor.js";
+import _poolAeromoeba from "../pool/aeromoeba.js";
 import _poolAetherFigment from "../pool/aether-figment.js";
 import _poolAetherize from "../pool/aetherize.js";
 import _poolAetherjacket from "../pool/aetherjacket.js";
@@ -153,6 +154,7 @@ import _poolChillingChronicle from "../pool/chilling-chronicle.js";
 import _poolChillingTrap from "../pool/chilling-trap.js";
 import _poolChimilTheInnerSun from "../pool/chimil-the-inner-sun.js";
 import _poolChimneyRabble from "../pool/chimney-rabble.js";
+import _poolChitteringRats from "../pool/chittering-rats.js";
 import _poolChordOfCalling from "../pool/chord-of-calling.js";
 import _poolChorusOfTheTides from "../pool/chorus-of-the-tides.js";
 import _poolCitanulWoodreaders from "../pool/citanul-woodreaders.js";
@@ -216,6 +218,7 @@ import _poolDayOfTheMoon from "../pool/day-of-the-moon.js";
 import _poolDeadfall from "../pool/deadfall.js";
 import _poolDeadlyRiposte from "../pool/deadly-riposte.js";
 import _poolDeathgazer from "../pool/deathgazer.js";
+import _poolDeepSeaSerpent from "../pool/deep-sea-serpent.js";
 import _poolDeepSight from "../pool/deep-sight.js";
 import _poolDefilingTears from "../pool/defiling-tears.js";
 import _poolDeflection from "../pool/deflection.js";
@@ -227,6 +230,7 @@ import _poolDesynchronization from "../pool/desynchronization.js";
 import _poolDevoutInvocation from "../pool/devout-invocation.js";
 import _poolDictateOfTheTwinGods from "../pool/dictate-of-the-twin-gods.js";
 import _poolDihadaBinderOfWills from "../pool/dihada-binder-of-wills.js";
+import _poolDinrovaHorror from "../pool/dinrova-horror.js";
 import _poolDisembowel from "../pool/disembowel.js";
 import _poolDivineSmite from "../pool/divine-smite.js";
 import _poolDjinnOfTheLamp from "../pool/djinn-of-the-lamp.js";
@@ -524,6 +528,7 @@ import _poolNettletoothDjinn from "../pool/nettletooth-djinn.js";
 import _poolNevinyrralUrborgTyrant from "../pool/nevinyrral-urborg-tyrant.js";
 import _poolNiambiEsteemedSpeaker from "../pool/niambi-esteemed-speaker.js";
 import _poolNickFurySpymaster from "../pool/nick-fury-spymaster.js";
+import _poolNightTerrors from "../pool/night-terrors.js";
 import _poolNightshadeDryad from "../pool/nightshade-dryad.js";
 import _poolNightveilSprite from "../pool/nightveil-sprite.js";
 import _poolNimLasher from "../pool/nim-lasher.js";
@@ -803,6 +808,7 @@ import _poolTreeMonkey from "../pool/tree-monkey.js";
 import _poolTriceratonCommander from "../pool/triceraton-commander.js";
 import _poolTurnAside from "../pool/turn-aside.js";
 import _poolTurntimberGrove from "../pool/turntimber-grove.js";
+import _poolTwistedReflection from "../pool/twisted-reflection.js";
 import _poolTwoHeadedSliver from "../pool/two-headed-sliver.js";
 import _poolTyrantsFamiliar from "../pool/tyrants-familiar.js";
 import _poolUchuulon from "../pool/uchuulon.js";
@@ -814,6 +820,7 @@ import _poolUndercityScrounger from "../pool/undercity-scrounger.js";
 import _poolUnfinishedBusiness from "../pool/unfinished-business.js";
 import _poolUnnerve from "../pool/unnerve.js";
 import _poolUnrulyMob from "../pool/unruly-mob.js";
+import _poolUnscrupulousAgent from "../pool/unscrupulous-agent.js";
 import _poolUnstableFrontier from "../pool/unstable-frontier.js";
 import _poolUnstoppableAsh from "../pool/unstoppable-ash.js";
 import _poolUnyieldingGatekeeper from "../pool/unyielding-gatekeeper.js";
@@ -924,6 +931,7 @@ const shard: CardShard = {
     _poolAdventureAwaits,
     _poolAdventurousImpulse,
     _poolAegisSculptor,
+    _poolAeromoeba,
     _poolAetherFigment,
     _poolAetherize,
     _poolAetherjacket,
@@ -1062,6 +1070,7 @@ const shard: CardShard = {
     _poolChillingTrap,
     _poolChimilTheInnerSun,
     _poolChimneyRabble,
+    _poolChitteringRats,
     _poolChordOfCalling,
     _poolChorusOfTheTides,
     _poolCitanulWoodreaders,
@@ -1125,6 +1134,7 @@ const shard: CardShard = {
     _poolDeadfall,
     _poolDeadlyRiposte,
     _poolDeathgazer,
+    _poolDeepSeaSerpent,
     _poolDeepSight,
     _poolDefilingTears,
     _poolDeflection,
@@ -1136,6 +1146,7 @@ const shard: CardShard = {
     _poolDevoutInvocation,
     _poolDictateOfTheTwinGods,
     _poolDihadaBinderOfWills,
+    _poolDinrovaHorror,
     _poolDisembowel,
     _poolDivineSmite,
     _poolDjinnOfTheLamp,
@@ -1433,6 +1444,7 @@ const shard: CardShard = {
     _poolNevinyrralUrborgTyrant,
     _poolNiambiEsteemedSpeaker,
     _poolNickFurySpymaster,
+    _poolNightTerrors,
     _poolNightshadeDryad,
     _poolNightveilSprite,
     _poolNimLasher,
@@ -1712,6 +1724,7 @@ const shard: CardShard = {
     _poolTriceratonCommander,
     _poolTurnAside,
     _poolTurntimberGrove,
+    _poolTwistedReflection,
     _poolTwoHeadedSliver,
     _poolTyrantsFamiliar,
     _poolUchuulon,
@@ -1723,6 +1736,7 @@ const shard: CardShard = {
     _poolUnfinishedBusiness,
     _poolUnnerve,
     _poolUnrulyMob,
+    _poolUnscrupulousAgent,
     _poolUnstableFrontier,
     _poolUnstoppableAsh,
     _poolUnyieldingGatekeeper,

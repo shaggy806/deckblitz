@@ -5,6 +5,7 @@ import type { CardShard } from "../card-shards.js";
 
 import _poolAbandonedCampground from "../pool/abandoned-campground.js";
 import _poolAcademyJourneymage from "../pool/academy-journeymage.js";
+import _poolAcidicSoil from "../pool/acidic-soil.js";
 import _poolActionNewsCrew from "../pool/action-news-crew.js";
 import _poolAdaptiveShimmerer from "../pool/adaptive-shimmerer.js";
 import _poolAdmiralsOrder from "../pool/admirals-order.js";
@@ -40,6 +41,7 @@ import _poolAshnodsBattleGear from "../pool/ashnods-battle-gear.js";
 import _poolAspiringChampion from "../pool/aspiring-champion.js";
 import _poolAssassinInitiate from "../pool/assassin-initiate.js";
 import _poolAstorBearerOfBlades from "../pool/astor-bearer-of-blades.js";
+import _poolAtrisOracleOfHalfTruths from "../pool/atris-oracle-of-half-truths.js";
 import _poolAuraFinesse from "../pool/aura-finesse.js";
 import _poolAuriokChampion from "../pool/auriok-champion.js";
 import _poolAuspiciousStarrix from "../pool/auspicious-starrix.js";
@@ -159,6 +161,7 @@ import _poolCreosoteHeath from "../pool/creosote-heath.js";
 import _poolCrossroadsConsecrator from "../pool/crossroads-consecrator.js";
 import _poolCrushOfWurms from "../pool/crush-of-wurms.js";
 import _poolCunningBandit from "../pool/cunning-bandit.js";
+import _poolCuombajjWitches from "../pool/cuombajj-witches.js";
 import _poolCurate from "../pool/curate.js";
 import _poolCuratorOfSunsCreation from "../pool/curator-of-suns-creation.js";
 import _poolCuriousPair from "../pool/curious-pair.js";
@@ -187,6 +190,7 @@ import _poolDemonOfFatesDesign from "../pool/demon-of-fates-design.js";
 import _poolDemonicRuckus from "../pool/demonic-ruckus.js";
 import _poolDepose from "../pool/depose.js";
 import _poolDescentIntoAvernus from "../pool/descent-into-avernus.js";
+import _poolDesecratedEarth from "../pool/desecrated-earth.js";
 import _poolDesperateFuturescribe from "../pool/desperate-futurescribe.js";
 import _poolDestructiveDigger from "../pool/destructive-digger.js";
 import _poolDevilsPlay from "../pool/devils-play.js";
@@ -367,6 +371,7 @@ import _poolImmersturmPredator from "../pool/immersturm-predator.js";
 import _poolInTheDarknessBindThem from "../pool/in-the-darkness-bind-them.js";
 import _poolInameLifeAspect from "../pool/iname-life-aspect.js";
 import _poolIncisorGlider from "../pool/incisor-glider.js";
+import _poolInciteRebellion from "../pool/incite-rebellion.js";
 import _poolIndestructibleAura from "../pool/indestructible-aura.js";
 import _poolInfantryVeteran from "../pool/infantry-veteran.js";
 import _poolInfectedDefector from "../pool/infected-defector.js";
@@ -416,6 +421,7 @@ import _poolKrarkClanShaman from "../pool/krark-clan-shaman.js";
 import _poolKrosanAvenger from "../pool/krosan-avenger.js";
 import _poolKumenaTyrantOfOrazca from "../pool/kumena-tyrant-of-orazca.js";
 import _poolKurosTaken from "../pool/kuros-taken.js";
+import _poolKyokiSanitysEclipse from "../pool/kyoki-sanitys-eclipse.js";
 import _poolKyoshiWarriorGuard from "../pool/kyoshi-warrior-guard.js";
 import _poolLabyrinthAdversary from "../pool/labyrinth-adversary.js";
 import _poolLadySun from "../pool/lady-sun.js";
@@ -945,6 +951,7 @@ const shard: CardShard = {
   pool: [
     _poolAbandonedCampground,
     _poolAcademyJourneymage,
+    _poolAcidicSoil,
     _poolActionNewsCrew,
     _poolAdaptiveShimmerer,
     _poolAdmiralsOrder,
@@ -980,6 +987,7 @@ const shard: CardShard = {
     _poolAspiringChampion,
     _poolAssassinInitiate,
     _poolAstorBearerOfBlades,
+    _poolAtrisOracleOfHalfTruths,
     _poolAuraFinesse,
     _poolAuriokChampion,
     _poolAuspiciousStarrix,
@@ -1099,6 +1107,7 @@ const shard: CardShard = {
     _poolCrossroadsConsecrator,
     _poolCrushOfWurms,
     _poolCunningBandit,
+    _poolCuombajjWitches,
     _poolCurate,
     _poolCuratorOfSunsCreation,
     _poolCuriousPair,
@@ -1127,6 +1136,7 @@ const shard: CardShard = {
     _poolDemonicRuckus,
     _poolDepose,
     _poolDescentIntoAvernus,
+    _poolDesecratedEarth,
     _poolDesperateFuturescribe,
     _poolDestructiveDigger,
     _poolDevilsPlay,
@@ -1307,6 +1317,7 @@ const shard: CardShard = {
     _poolInTheDarknessBindThem,
     _poolInameLifeAspect,
     _poolIncisorGlider,
+    _poolInciteRebellion,
     _poolIndestructibleAura,
     _poolInfantryVeteran,
     _poolInfectedDefector,
@@ -1356,6 +1367,7 @@ const shard: CardShard = {
     _poolKrosanAvenger,
     _poolKumenaTyrantOfOrazca,
     _poolKurosTaken,
+    _poolKyokiSanitysEclipse,
     _poolKyoshiWarriorGuard,
     _poolLabyrinthAdversary,
     _poolLadySun,

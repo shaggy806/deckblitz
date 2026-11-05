@@ -13,6 +13,7 @@ import _poolAdelizTheCinderWind from "../pool/adeliz-the-cinder-wind.js";
 import _poolAerieBowmasters from "../pool/aerie-bowmasters.js";
 import _poolAgelessGuardian from "../pool/ageless-guardian.js";
 import _poolAgentsOfHydra from "../pool/agents-of-hydra.js";
+import _poolAimForTheHead from "../pool/aim-for-the-head.js";
 import _poolAirdropAeronauts from "../pool/airdrop-aeronauts.js";
 import _poolAirshipEngineRoom from "../pool/airship-engine-room.js";
 import _poolAirtightAlibi from "../pool/airtight-alibi.js";
@@ -188,6 +189,7 @@ import _poolDawnsTruce from "../pool/dawns-truce.js";
 import _poolDeadlyWanderings from "../pool/deadly-wanderings.js";
 import _poolDeathDenied from "../pool/death-denied.js";
 import _poolDeathbonnetSprout from "../pool/deathbonnet-sprout.js";
+import _poolDebtToTheKami from "../pool/debt-to-the-kami.js";
 import _poolDeepglowSkate from "../pool/deepglow-skate.js";
 import _poolDefibrillatingCurrent from "../pool/defibrillating-current.js";
 import _poolDefossilize from "../pool/defossilize.js";
@@ -220,6 +222,7 @@ import _poolDruidsFamiliar from "../pool/druids-familiar.js";
 import _poolDunedainBlade from "../pool/dunedain-blade.js";
 import _poolDuskMangler from "../pool/dusk-mangler.js";
 import _poolDwarvenMauler from "../pool/dwarven-mauler.js";
+import _poolDwarvenThaumaturgist from "../pool/dwarven-thaumaturgist.js";
 import _poolEarthrumbler from "../pool/earthrumbler.js";
 import _poolEchoCirclet from "../pool/echo-circlet.js";
 import _poolEiganjoDynastorian from "../pool/eiganjo-dynastorian.js";
@@ -523,6 +526,7 @@ import _poolNorthernPaladin from "../pool/northern-paladin.js";
 import _poolNoyanDarRoilShaper from "../pool/noyan-dar-roil-shaper.js";
 import _poolNyamiClassMotherShip from "../pool/nyami-class-mother-ship.js";
 import _poolOakenSiren from "../pool/oaken-siren.js";
+import _poolObNixilisTheHateTwisted from "../pool/ob-nixilis-the-hate-twisted.js";
 import _poolOblivionCrown from "../pool/oblivion-crown.js";
 import _poolOctomancer from "../pool/octomancer.js";
 import _poolOctopusForm from "../pool/octopus-form.js";
@@ -946,6 +950,7 @@ const shard: CardShard = {
     _poolAerieBowmasters,
     _poolAgelessGuardian,
     _poolAgentsOfHydra,
+    _poolAimForTheHead,
     _poolAirdropAeronauts,
     _poolAirshipEngineRoom,
     _poolAirtightAlibi,
@@ -1121,6 +1126,7 @@ const shard: CardShard = {
     _poolDeadlyWanderings,
     _poolDeathDenied,
     _poolDeathbonnetSprout,
+    _poolDebtToTheKami,
     _poolDeepglowSkate,
     _poolDefibrillatingCurrent,
     _poolDefossilize,
@@ -1153,6 +1159,7 @@ const shard: CardShard = {
     _poolDunedainBlade,
     _poolDuskMangler,
     _poolDwarvenMauler,
+    _poolDwarvenThaumaturgist,
     _poolEarthrumbler,
     _poolEchoCirclet,
     _poolEiganjoDynastorian,
@@ -1456,6 +1463,7 @@ const shard: CardShard = {
     _poolNoyanDarRoilShaper,
     _poolNyamiClassMotherShip,
     _poolOakenSiren,
+    _poolObNixilisTheHateTwisted,
     _poolOblivionCrown,
     _poolOctomancer,
     _poolOctopusForm,

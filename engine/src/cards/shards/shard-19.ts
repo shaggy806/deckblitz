@@ -4,6 +4,7 @@
 import type { CardShard } from "../card-shards.js";
 
 import _poolAbolish from "../pool/abolish.js";
+import _poolAboutFace from "../pool/about-face.js";
 import _poolAbyssalGorestalker from "../pool/abyssal-gorestalker.js";
 import _poolAcademyWall from "../pool/academy-wall.js";
 import _poolAccessTunnel from "../pool/access-tunnel.js";
@@ -71,6 +72,7 @@ import _poolBhaalsInvoker from "../pool/bhaals-invoker.js";
 import _poolBiblioplexAssistant from "../pool/biblioplex-assistant.js";
 import _poolBiosynthicBurst from "../pool/biosynthic-burst.js";
 import _poolBirninZanaPlaza from "../pool/birnin-zana-plaza.js";
+import _poolBitingPalmNinja from "../pool/biting-palm-ninja.js";
 import _poolBitterReunion from "../pool/bitter-reunion.js";
 import _poolBladeJuggler from "../pool/blade-juggler.js";
 import _poolBlademaneBaku from "../pool/blademane-baku.js";
@@ -975,6 +977,7 @@ import _tokensSpiritTokenUnwillingVessel from "../tokens/spirit-token-unwilling-
 const shard: CardShard = {
   pool: [
     _poolAbolish,
+    _poolAboutFace,
     _poolAbyssalGorestalker,
     _poolAcademyWall,
     _poolAccessTunnel,
@@ -1042,6 +1045,7 @@ const shard: CardShard = {
     _poolBiblioplexAssistant,
     _poolBiosynthicBurst,
     _poolBirninZanaPlaza,
+    _poolBitingPalmNinja,
     _poolBitterReunion,
     _poolBladeJuggler,
     _poolBlademaneBaku,

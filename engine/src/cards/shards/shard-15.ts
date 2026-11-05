@@ -208,6 +208,7 @@ import _poolEliminateTheCompetition from "../pool/eliminate-the-competition.js";
 import _poolElvishMystic from "../pool/elvish-mystic.js";
 import _poolEmbalmedBrawler from "../pool/embalmed-brawler.js";
 import _poolEmbraceTheUnknown from "../pool/embrace-the-unknown.js";
+import _poolEmissaryOfDespair from "../pool/emissary-of-despair.js";
 import _poolEnergyVortex from "../pool/energy-vortex.js";
 import _poolEpicStruggle from "../pool/epic-struggle.js";
 import _poolErinisGloomStalker from "../pool/erinis-gloom-stalker.js";
@@ -781,6 +782,7 @@ import _poolUnitedBattlefront from "../pool/united-battlefront.js";
 import _poolUnmarkedGrave from "../pool/unmarked-grave.js";
 import _poolUrzasFactory from "../pool/urzas-factory.js";
 import _poolVadrokApexOfThunder from "../pool/vadrok-apex-of-thunder.js";
+import _poolValakutFireboar from "../pool/valakut-fireboar.js";
 import _poolVampireSoulcaller from "../pool/vampire-soulcaller.js";
 import _poolVandalsEdit from "../pool/vandals-edit.js";
 import _poolVastlandsScavenger from "../pool/vastlands-scavenger.js";
@@ -1076,6 +1078,7 @@ const shard: CardShard = {
     _poolElvishMystic,
     _poolEmbalmedBrawler,
     _poolEmbraceTheUnknown,
+    _poolEmissaryOfDespair,
     _poolEnergyVortex,
     _poolEpicStruggle,
     _poolErinisGloomStalker,
@@ -1649,6 +1652,7 @@ const shard: CardShard = {
     _poolUnmarkedGrave,
     _poolUrzasFactory,
     _poolVadrokApexOfThunder,
+    _poolValakutFireboar,
     _poolVampireSoulcaller,
     _poolVandalsEdit,
     _poolVastlandsScavenger,

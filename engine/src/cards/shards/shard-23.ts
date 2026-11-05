@@ -290,6 +290,7 @@ import _poolFreyaliseLlanowarsFury from "../pool/freyalise-llanowars-fury.js";
 import _poolFrogButler from "../pool/frog-butler.js";
 import _poolFrontierMastodon from "../pool/frontier-mastodon.js";
 import _poolFrontierSiege from "../pool/frontier-siege.js";
+import _poolFrostwielder from "../pool/frostwielder.js";
 import _poolFuneralCharm from "../pool/funeral-charm.js";
 import _poolFuneralRites from "../pool/funeral-rites.js";
 import _poolGandalfGoblinsBane from "../pool/gandalf-goblins-bane.js";
@@ -536,6 +537,7 @@ import _poolObscuraCharm from "../pool/obscura-charm.js";
 import _poolOchranAssassin from "../pool/ochran-assassin.js";
 import _poolOhranFrostfang from "../pool/ohran-frostfang.js";
 import _poolOhranViper from "../pool/ohran-viper.js";
+import _poolOlorinsSearingLight from "../pool/olorins-searing-light.js";
 import _poolOmenOfTheForge from "../pool/omen-of-the-forge.js";
 import _poolOminousSphinx from "../pool/ominous-sphinx.js";
 import _poolOrderOfTheGoldenCricket from "../pool/order-of-the-golden-cricket.js";
@@ -557,6 +559,7 @@ import _poolPermeatingMass from "../pool/permeating-mass.js";
 import _poolPestermite from "../pool/pestermite.js";
 import _poolPhlageTitanOfFiresFury from "../pool/phlage-titan-of-fires-fury.js";
 import _poolPhyrexianMonitor from "../pool/phyrexian-monitor.js";
+import _poolPickTheBrain from "../pool/pick-the-brain.js";
 import _poolPierceTheSky from "../pool/pierce-the-sky.js";
 import _poolPinkHorror from "../pool/pink-horror.js";
 import _poolPiousEvangel from "../pool/pious-evangel.js";
@@ -592,6 +595,7 @@ import _poolQuicksmithRebel from "../pool/quicksmith-rebel.js";
 import _poolRainOfBlades from "../pool/rain-of-blades.js";
 import _poolRainOfFilth from "../pool/rain-of-filth.js";
 import _poolRaiseThePalisade from "../pool/raise-the-palisade.js";
+import _poolRakdossReturn from "../pool/rakdoss-return.js";
 import _poolRakingClaws from "../pool/raking-claws.js";
 import _poolRally from "../pool/rally.js";
 import _poolRalsStaticaster from "../pool/rals-staticaster.js";
@@ -658,6 +662,7 @@ import _poolScorchedGeyser from "../pool/scorched-geyser.js";
 import _poolScourgeOfGeierReach from "../pool/scourge-of-geier-reach.js";
 import _poolScoutingTrek from "../pool/scouting-trek.js";
 import _poolScrollboost from "../pool/scrollboost.js";
+import _poolSearingRays from "../pool/searing-rays.js";
 import _poolSecondChance from "../pool/second-chance.js";
 import _poolSeeBeyond from "../pool/see-beyond.js";
 import _poolSeeRed from "../pool/see-red.js";
@@ -750,6 +755,7 @@ import _poolStormHerd from "../pool/storm-herd.js";
 import _poolStormbloodBerserker from "../pool/stormblood-berserker.js";
 import _poolStormchaserChimera from "../pool/stormchaser-chimera.js";
 import _poolStormscaleAnarch from "../pool/stormscale-anarch.js";
+import _poolStrategicBetrayal from "../pool/strategic-betrayal.js";
 import _poolStrawSoldiers from "../pool/straw-soldiers.js";
 import _poolStreamOfThought from "../pool/stream-of-thought.js";
 import _poolStripedRiverwinder from "../pool/striped-riverwinder.js";
@@ -890,6 +896,7 @@ import _poolWindZendikon from "../pool/wind-zendikon.js";
 import _poolWindriderEel from "../pool/windrider-eel.js";
 import _poolWindurstFederationCenter from "../pool/windurst-federation-center.js";
 import _poolWingShredder from "../pool/wing-shredder.js";
+import _poolWingStorm from "../pool/wing-storm.js";
 import _poolWingmateRoc from "../pool/wingmate-roc.js";
 import _poolWinterflame from "../pool/winterflame.js";
 import _poolWirewoodHivemaster from "../pool/wirewood-hivemaster.js";
@@ -1212,6 +1219,7 @@ const shard: CardShard = {
     _poolFrogButler,
     _poolFrontierMastodon,
     _poolFrontierSiege,
+    _poolFrostwielder,
     _poolFuneralCharm,
     _poolFuneralRites,
     _poolGandalfGoblinsBane,
@@ -1458,6 +1466,7 @@ const shard: CardShard = {
     _poolOchranAssassin,
     _poolOhranFrostfang,
     _poolOhranViper,
+    _poolOlorinsSearingLight,
     _poolOmenOfTheForge,
     _poolOminousSphinx,
     _poolOrderOfTheGoldenCricket,
@@ -1479,6 +1488,7 @@ const shard: CardShard = {
     _poolPestermite,
     _poolPhlageTitanOfFiresFury,
     _poolPhyrexianMonitor,
+    _poolPickTheBrain,
     _poolPierceTheSky,
     _poolPinkHorror,
     _poolPiousEvangel,
@@ -1514,6 +1524,7 @@ const shard: CardShard = {
     _poolRainOfBlades,
     _poolRainOfFilth,
     _poolRaiseThePalisade,
+    _poolRakdossReturn,
     _poolRakingClaws,
     _poolRally,
     _poolRalsStaticaster,
@@ -1580,6 +1591,7 @@ const shard: CardShard = {
     _poolScourgeOfGeierReach,
     _poolScoutingTrek,
     _poolScrollboost,
+    _poolSearingRays,
     _poolSecondChance,
     _poolSeeBeyond,
     _poolSeeRed,
@@ -1672,6 +1684,7 @@ const shard: CardShard = {
     _poolStormbloodBerserker,
     _poolStormchaserChimera,
     _poolStormscaleAnarch,
+    _poolStrategicBetrayal,
     _poolStrawSoldiers,
     _poolStreamOfThought,
     _poolStripedRiverwinder,
@@ -1812,6 +1825,7 @@ const shard: CardShard = {
     _poolWindriderEel,
     _poolWindurstFederationCenter,
     _poolWingShredder,
+    _poolWingStorm,
     _poolWingmateRoc,
     _poolWinterflame,
     _poolWirewoodHivemaster,

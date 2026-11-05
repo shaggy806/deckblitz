@@ -702,6 +702,7 @@ import _poolSkyTether from "../pool/sky-tether.js";
 import _poolSkycloudEgg from "../pool/skycloud-egg.js";
 import _poolSkymarcherAspirant from "../pool/skymarcher-aspirant.js";
 import _poolSkyshroudArcher from "../pool/skyshroud-archer.js";
+import _poolSkyshroudWarBeast from "../pool/skyshroud-war-beast.js";
 import _poolSkywinderDrake from "../pool/skywinder-drake.js";
 import _poolSlashTheRanks from "../pool/slash-the-ranks.js";
 import _poolSlaughterPact from "../pool/slaughter-pact.js";
@@ -745,6 +746,7 @@ import _poolSquirrelSovereign from "../pool/squirrel-sovereign.js";
 import _poolStadiumTidalmage from "../pool/stadium-tidalmage.js";
 import _poolStaunchThroneguard from "../pool/staunch-throneguard.js";
 import _poolSteadyAim from "../pool/steady-aim.js";
+import _poolSteamAugury from "../pool/steam-augury.js";
 import _poolSteelPlumeMarshal from "../pool/steel-plume-marshal.js";
 import _poolSteelgazeGriffin from "../pool/steelgaze-griffin.js";
 import _poolStingingLionfish from "../pool/stinging-lionfish.js";
@@ -1618,6 +1620,7 @@ const shard: CardShard = {
     _poolSkycloudEgg,
     _poolSkymarcherAspirant,
     _poolSkyshroudArcher,
+    _poolSkyshroudWarBeast,
     _poolSkywinderDrake,
     _poolSlashTheRanks,
     _poolSlaughterPact,
@@ -1661,6 +1664,7 @@ const shard: CardShard = {
     _poolStadiumTidalmage,
     _poolStaunchThroneguard,
     _poolSteadyAim,
+    _poolSteamAugury,
     _poolSteelPlumeMarshal,
     _poolSteelgazeGriffin,
     _poolStingingLionfish,

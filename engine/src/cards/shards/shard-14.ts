@@ -221,6 +221,7 @@ import _poolDrannithRuins from "../pool/drannith-ruins.js";
 import _poolDrasticRevelation from "../pool/drastic-revelation.js";
 import _poolDreadwurm from "../pool/dreadwurm.js";
 import _poolDreamCache from "../pool/dream-cache.js";
+import _poolDreamFracture from "../pool/dream-fracture.js";
 import _poolDromokaTheEternal from "../pool/dromoka-the-eternal.js";
 import _poolDrossCrocodile from "../pool/dross-crocodile.js";
 import _poolDrossGolem from "../pool/dross-golem.js";
@@ -332,6 +333,7 @@ import _poolGliderStaff from "../pool/glider-staff.js";
 import _poolGlimpseTheCore from "../pool/glimpse-the-core.js";
 import _poolGlitchGhostSurveyor from "../pool/glitch-ghost-surveyor.js";
 import _poolGlitchInterpreter from "../pool/glitch-interpreter.js";
+import _poolGloomlance from "../pool/gloomlance.js";
 import _poolGlory from "../pool/glory.js";
 import _poolGnarlidColony from "../pool/gnarlid-colony.js";
 import _poolGobblingOoze from "../pool/gobbling-ooze.js";
@@ -550,6 +552,7 @@ import _poolNecrogenMists from "../pool/necrogen-mists.js";
 import _poolNecrogenScudder from "../pool/necrogen-scudder.js";
 import _poolNettleGuard from "../pool/nettle-guard.js";
 import _poolNiblisOfTheBreath from "../pool/niblis-of-the-breath.js";
+import _poolNicolBolasPlaneswalker from "../pool/nicol-bolas-planeswalker.js";
 import _poolNikyaOfTheOldWays from "../pool/nikya-of-the-old-ways.js";
 import _poolNivMizzetParun from "../pool/niv-mizzet-parun.js";
 import _poolNoMercy from "../pool/no-mercy.js";
@@ -807,6 +810,7 @@ import _poolTournamentGrounds from "../pool/tournament-grounds.js";
 import _poolTrainedJackal from "../pool/trained-jackal.js";
 import _poolTranceKujaFateDefied from "../pool/trance-kuja-fate-defied.js";
 import _poolTranquilPath from "../pool/tranquil-path.js";
+import _poolTransmutation from "../pool/transmutation.js";
 import _poolTreasureKeeper from "../pool/treasure-keeper.js";
 import _poolTreasureTrove from "../pool/treasure-trove.js";
 import _poolTreefolkUmbra from "../pool/treefolk-umbra.js";
@@ -868,6 +872,7 @@ import _poolWargRider from "../pool/warg-rider.js";
 import _poolWarleadersHelix from "../pool/warleaders-helix.js";
 import _poolWeakness from "../pool/weakness.js";
 import _poolWeddingInvitation from "../pool/wedding-invitation.js";
+import _poolWeiAssassins from "../pool/wei-assassins.js";
 import _poolWeiNightRaiders from "../pool/wei-night-raiders.js";
 import _poolWelcomeToTheFold from "../pool/welcome-to-the-fold.js";
 import _poolWellgabberApothecary from "../pool/wellgabber-apothecary.js";
@@ -1138,6 +1143,7 @@ const shard: CardShard = {
     _poolDrasticRevelation,
     _poolDreadwurm,
     _poolDreamCache,
+    _poolDreamFracture,
     _poolDromokaTheEternal,
     _poolDrossCrocodile,
     _poolDrossGolem,
@@ -1249,6 +1255,7 @@ const shard: CardShard = {
     _poolGlimpseTheCore,
     _poolGlitchGhostSurveyor,
     _poolGlitchInterpreter,
+    _poolGloomlance,
     _poolGlory,
     _poolGnarlidColony,
     _poolGobblingOoze,
@@ -1467,6 +1474,7 @@ const shard: CardShard = {
     _poolNecrogenScudder,
     _poolNettleGuard,
     _poolNiblisOfTheBreath,
+    _poolNicolBolasPlaneswalker,
     _poolNikyaOfTheOldWays,
     _poolNivMizzetParun,
     _poolNoMercy,
@@ -1724,6 +1732,7 @@ const shard: CardShard = {
     _poolTrainedJackal,
     _poolTranceKujaFateDefied,
     _poolTranquilPath,
+    _poolTransmutation,
     _poolTreasureKeeper,
     _poolTreasureTrove,
     _poolTreefolkUmbra,
@@ -1785,6 +1794,7 @@ const shard: CardShard = {
     _poolWarleadersHelix,
     _poolWeakness,
     _poolWeddingInvitation,
+    _poolWeiAssassins,
     _poolWeiNightRaiders,
     _poolWelcomeToTheFold,
     _poolWellgabberApothecary,

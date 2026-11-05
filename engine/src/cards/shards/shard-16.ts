@@ -11,6 +11,7 @@ import _poolAdventOfTheWurm from "../pool/advent-of-the-wurm.js";
 import _poolAesiTyrantOfGyreStrait from "../pool/aesi-tyrant-of-gyre-strait.js";
 import _poolAetherVial from "../pool/aether-vial.js";
 import _poolAgelessSentinels from "../pool/ageless-sentinels.js";
+import _poolAgonizingMemories from "../pool/agonizing-memories.js";
 import _poolAkroanCrusader from "../pool/akroan-crusader.js";
 import _poolAkroanJailer from "../pool/akroan-jailer.js";
 import _poolAkroanSergeant from "../pool/akroan-sergeant.js";
@@ -130,6 +131,7 @@ import _poolChainLightning from "../pool/chain-lightning.js";
 import _poolChandrasIncinerator from "../pool/chandras-incinerator.js";
 import _poolChargeThrough from "../pool/charge-through.js";
 import _poolChargingWarBoar from "../pool/charging-war-boar.js";
+import _poolCheckForTraps from "../pool/check-for-traps.js";
 import _poolChildOfNight from "../pool/child-of-night.js";
 import _poolChillingApparition from "../pool/chilling-apparition.js";
 import _poolChillingGrasp from "../pool/chilling-grasp.js";
@@ -170,6 +172,7 @@ import _poolDayOfDestiny from "../pool/day-of-destiny.js";
 import _poolDaybreakCoronet from "../pool/daybreak-coronet.js";
 import _poolDazzlingRamparts from "../pool/dazzling-ramparts.js";
 import _poolDeadwoodTreefolk from "../pool/deadwood-treefolk.js";
+import _poolDeathMatch from "../pool/death-match.js";
 import _poolDeathToOurEnemies from "../pool/death-to-our-enemies.js";
 import _poolDeathpactAngel from "../pool/deathpact-angel.js";
 import _poolDeepcavernImp from "../pool/deepcavern-imp.js";
@@ -391,6 +394,7 @@ import _poolInspiritedVanguard from "../pool/inspirited-vanguard.js";
 import _poolIntimidatorInitiate from "../pool/intimidator-initiate.js";
 import _poolInvasionReinforcements from "../pool/invasion-reinforcements.js";
 import _poolInventorsFair from "../pool/inventors-fair.js";
+import _poolInversionBehemoth from "../pool/inversion-behemoth.js";
 import _poolInvincibleHymn from "../pool/invincible-hymn.js";
 import _poolInvisibleStalker from "../pool/invisible-stalker.js";
 import _poolIpnuRivulet from "../pool/ipnu-rivulet.js";
@@ -566,6 +570,7 @@ import _poolOvergrowth from "../pool/overgrowth.js";
 import _poolPackMastiff from "../pool/pack-mastiff.js";
 import _poolPainDistributor from "../pool/pain-distributor.js";
 import _poolPalladiumMyr from "../pool/palladium-myr.js";
+import _poolPandemonium from "../pool/pandemonium.js";
 import _poolPanglacialWurm from "../pool/panglacial-wurm.js";
 import _poolParadoxZone from "../pool/paradox-zone.js";
 import _poolParagonOfOpenGraves from "../pool/paragon-of-open-graves.js";
@@ -787,6 +792,7 @@ import _poolSurviveTheNight from "../pool/survive-the-night.js";
 import _poolSutureSpirit from "../pool/suture-spirit.js";
 import _poolSwitcheroo from "../pool/switcheroo.js";
 import _poolSwordsmansSteel from "../pool/swordsmans-steel.js";
+import _poolSyggsCommand from "../pool/syggs-command.js";
 import _poolSylviaBrightspear from "../pool/sylvia-brightspear.js";
 import _poolSymmetryMatrix from "../pool/symmetry-matrix.js";
 import _poolTahngarthTalruumHero from "../pool/tahngarth-talruum-hero.js";
@@ -945,6 +951,7 @@ import _poolWindsOfQalSisma from "../pool/winds-of-qal-sisma.js";
 import _poolWingCommando from "../pool/wing-commando.js";
 import _poolWingbeatWarrior from "../pool/wingbeat-warrior.js";
 import _poolWintersRest from "../pool/winters-rest.js";
+import _poolWishclawTalisman from "../pool/wishclaw-talisman.js";
 import _poolWitchsWeb from "../pool/witchs-web.js";
 import _poolWitheringBoon from "../pool/withering-boon.js";
 import _poolWizardsSchool from "../pool/wizards-school.js";
@@ -999,6 +1006,7 @@ const shard: CardShard = {
     _poolAesiTyrantOfGyreStrait,
     _poolAetherVial,
     _poolAgelessSentinels,
+    _poolAgonizingMemories,
     _poolAkroanCrusader,
     _poolAkroanJailer,
     _poolAkroanSergeant,
@@ -1118,6 +1126,7 @@ const shard: CardShard = {
     _poolChandrasIncinerator,
     _poolChargeThrough,
     _poolChargingWarBoar,
+    _poolCheckForTraps,
     _poolChildOfNight,
     _poolChillingApparition,
     _poolChillingGrasp,
@@ -1158,6 +1167,7 @@ const shard: CardShard = {
     _poolDaybreakCoronet,
     _poolDazzlingRamparts,
     _poolDeadwoodTreefolk,
+    _poolDeathMatch,
     _poolDeathToOurEnemies,
     _poolDeathpactAngel,
     _poolDeepcavernImp,
@@ -1379,6 +1389,7 @@ const shard: CardShard = {
     _poolIntimidatorInitiate,
     _poolInvasionReinforcements,
     _poolInventorsFair,
+    _poolInversionBehemoth,
     _poolInvincibleHymn,
     _poolInvisibleStalker,
     _poolIpnuRivulet,
@@ -1554,6 +1565,7 @@ const shard: CardShard = {
     _poolPackMastiff,
     _poolPainDistributor,
     _poolPalladiumMyr,
+    _poolPandemonium,
     _poolPanglacialWurm,
     _poolParadoxZone,
     _poolParagonOfOpenGraves,
@@ -1775,6 +1787,7 @@ const shard: CardShard = {
     _poolSutureSpirit,
     _poolSwitcheroo,
     _poolSwordsmansSteel,
+    _poolSyggsCommand,
     _poolSylviaBrightspear,
     _poolSymmetryMatrix,
     _poolTahngarthTalruumHero,
@@ -1933,6 +1946,7 @@ const shard: CardShard = {
     _poolWingCommando,
     _poolWingbeatWarrior,
     _poolWintersRest,
+    _poolWishclawTalisman,
     _poolWitchsWeb,
     _poolWitheringBoon,
     _poolWizardsSchool,

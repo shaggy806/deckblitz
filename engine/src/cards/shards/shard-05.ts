@@ -33,6 +33,7 @@ import _poolAnimistsMight from "../pool/animists-might.js";
 import _poolAphemiaTheCacophony from "../pool/aphemia-the-cacophony.js";
 import _poolAphettoGrifter from "../pool/aphetto-grifter.js";
 import _poolApocalypseDemon from "../pool/apocalypse-demon.js";
+import _poolAquamoeba from "../pool/aquamoeba.js";
 import _poolAquaticIncursion from "../pool/aquatic-incursion.js";
 import _poolArcboundCrusher from "../pool/arcbound-crusher.js";
 import _poolArcboundTracker from "../pool/arcbound-tracker.js";
@@ -222,6 +223,7 @@ import _poolDireStrainDemolisher from "../pool/dire-strain-demolisher.js";
 import _poolDismember from "../pool/dismember.js";
 import _poolDiveDown from "../pool/dive-down.js";
 import _poolDiverSkaab from "../pool/diver-skaab.js";
+import _poolDoomfall from "../pool/doomfall.js";
 import _poolDormantGrove from "../pool/dormant-grove.js";
 import _poolDragonclawStrike from "../pool/dragonclaw-strike.js";
 import _poolDragonkinBerserker from "../pool/dragonkin-berserker.js";
@@ -303,6 +305,7 @@ import _poolFleshlessGladiator from "../pool/fleshless-gladiator.js";
 import _poolFlightOfEquenauts from "../pool/flight-of-equenauts.js";
 import _poolForbiddenOrchard from "../pool/forbidden-orchard.js";
 import _poolFrenziedDevils from "../pool/frenzied-devils.js";
+import _poolFrightfulDelusion from "../pool/frightful-delusion.js";
 import _poolFrostWalker from "../pool/frost-walker.js";
 import _poolFrostling from "../pool/frostling.js";
 import _poolFruitOfTheFirstTree from "../pool/fruit-of-the-first-tree.js";
@@ -616,6 +619,7 @@ import _poolRazorHippogriff from "../pool/razor-hippogriff.js";
 import _poolRazorgrassScreen from "../pool/razorgrass-screen.js";
 import _poolRealmsUncharted from "../pool/realms-uncharted.js";
 import _poolRealmwright from "../pool/realmwright.js";
+import _poolReapIntellect from "../pool/reap-intellect.js";
 import _poolRecklessPangolin from "../pool/reckless-pangolin.js";
 import _poolReclaimingVines from "../pool/reclaiming-vines.js";
 import _poolRefurbishedFamiliar from "../pool/refurbished-familiar.js";
@@ -936,6 +940,7 @@ const shard: CardShard = {
     _poolAphemiaTheCacophony,
     _poolAphettoGrifter,
     _poolApocalypseDemon,
+    _poolAquamoeba,
     _poolAquaticIncursion,
     _poolArcboundCrusher,
     _poolArcboundTracker,
@@ -1125,6 +1130,7 @@ const shard: CardShard = {
     _poolDismember,
     _poolDiveDown,
     _poolDiverSkaab,
+    _poolDoomfall,
     _poolDormantGrove,
     _poolDragonclawStrike,
     _poolDragonkinBerserker,
@@ -1206,6 +1212,7 @@ const shard: CardShard = {
     _poolFlightOfEquenauts,
     _poolForbiddenOrchard,
     _poolFrenziedDevils,
+    _poolFrightfulDelusion,
     _poolFrostWalker,
     _poolFrostling,
     _poolFruitOfTheFirstTree,
@@ -1519,6 +1526,7 @@ const shard: CardShard = {
     _poolRazorgrassScreen,
     _poolRealmsUncharted,
     _poolRealmwright,
+    _poolReapIntellect,
     _poolRecklessPangolin,
     _poolReclaimingVines,
     _poolRefurbishedFamiliar,

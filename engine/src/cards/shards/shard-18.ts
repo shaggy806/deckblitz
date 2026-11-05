@@ -98,6 +98,7 @@ import _poolCalderaHellion from "../pool/caldera-hellion.js";
 import _poolCallOfTheHerd from "../pool/call-of-the-herd.js";
 import _poolCaptainMarvelEarthsProtector from "../pool/captain-marvel-earths-protector.js";
 import _poolCarrionHowler from "../pool/carrion-howler.js";
+import _poolCastigate from "../pool/castigate.js";
 import _poolCastleDoom from "../pool/castle-doom.js";
 import _poolCateranKidnappers from "../pool/cateran-kidnappers.js";
 import _poolCatharticAdept from "../pool/cathartic-adept.js";
@@ -508,6 +509,7 @@ import _poolNecravolver from "../pool/necravolver.js";
 import _poolNecromancersCovenant from "../pool/necromancers-covenant.js";
 import _poolNerivHeartOfTheStorm from "../pool/neriv-heart-of-the-storm.js";
 import _poolNestingDovehawk from "../pool/nesting-dovehawk.js";
+import _poolNetherbornPhalanx from "../pool/netherborn-phalanx.js";
 import _poolNineLives from "../pool/nine-lives.js";
 import _poolNineTailWhiteFox from "../pool/nine-tail-white-fox.js";
 import _poolNovelNunchaku from "../pool/novel-nunchaku.js";
@@ -684,6 +686,7 @@ import _poolSongsOfTheDamned from "../pool/songs-of-the-damned.js";
 import _poolSorcerousSquall from "../pool/sorcerous-squall.js";
 import _poolSorinImperiousBloodlord from "../pool/sorin-imperious-bloodlord.js";
 import _poolSoulLink from "../pool/soul-link.js";
+import _poolSoulSearch from "../pool/soul-search.js";
 import _poolSoulSeizer from "../pool/soul-seizer.js";
 import _poolSoulShackledZombie from "../pool/soul-shackled-zombie.js";
 import _poolSoulTether from "../pool/soul-tether.js";
@@ -757,6 +760,7 @@ import _poolTestOfFaith from "../pool/test-of-faith.js";
 import _poolThallidSoothsayer from "../pool/thallid-soothsayer.js";
 import _poolThassaDeepDwelling from "../pool/thassa-deep-dwelling.js";
 import _poolThatcherRevolt from "../pool/thatcher-revolt.js";
+import _poolTheBlackGate from "../pool/the-black-gate.js";
 import _poolTheCrystalsChosen from "../pool/the-crystals-chosen.js";
 import _poolTheEarthCrystal from "../pool/the-earth-crystal.js";
 import _poolTheElderspell from "../pool/the-elderspell.js";
@@ -819,6 +823,7 @@ import _poolUnderworldHermit from "../pool/underworld-hermit.js";
 import _poolUnholyAnnex from "../pool/unholy-annex.js";
 import _poolUnnervingGrasp from "../pool/unnerving-grasp.js";
 import _poolUnquestionedAuthority from "../pool/unquestioned-authority.js";
+import _poolUnscytheKillerOfKings from "../pool/unscythe-killer-of-kings.js";
 import _poolUtterEnd from "../pool/utter-end.js";
 import _poolVadmirNewBlood from "../pool/vadmir-new-blood.js";
 import _poolValgavothHarrowerOfSouls from "../pool/valgavoth-harrower-of-souls.js";
@@ -846,6 +851,7 @@ import _poolVolunteerReserves from "../pool/volunteer-reserves.js";
 import _poolVraskaGolgariQueen from "../pool/vraska-golgari-queen.js";
 import _poolVraskaTheUnseen from "../pool/vraska-the-unseen.js";
 import _poolVulshokSorcerer from "../pool/vulshok-sorcerer.js";
+import _poolWaitingInTheWeeds from "../pool/waiting-in-the-weeds.js";
 import _poolWakandanTusker from "../pool/wakandan-tusker.js";
 import _poolWallCrawl from "../pool/wall-crawl.js";
 import _poolWallOfAir from "../pool/wall-of-air.js";
@@ -1013,6 +1019,7 @@ const shard: CardShard = {
     _poolCallOfTheHerd,
     _poolCaptainMarvelEarthsProtector,
     _poolCarrionHowler,
+    _poolCastigate,
     _poolCastleDoom,
     _poolCateranKidnappers,
     _poolCatharticAdept,
@@ -1423,6 +1430,7 @@ const shard: CardShard = {
     _poolNecromancersCovenant,
     _poolNerivHeartOfTheStorm,
     _poolNestingDovehawk,
+    _poolNetherbornPhalanx,
     _poolNineLives,
     _poolNineTailWhiteFox,
     _poolNovelNunchaku,
@@ -1599,6 +1607,7 @@ const shard: CardShard = {
     _poolSorcerousSquall,
     _poolSorinImperiousBloodlord,
     _poolSoulLink,
+    _poolSoulSearch,
     _poolSoulSeizer,
     _poolSoulShackledZombie,
     _poolSoulTether,
@@ -1672,6 +1681,7 @@ const shard: CardShard = {
     _poolThallidSoothsayer,
     _poolThassaDeepDwelling,
     _poolThatcherRevolt,
+    _poolTheBlackGate,
     _poolTheCrystalsChosen,
     _poolTheEarthCrystal,
     _poolTheElderspell,
@@ -1734,6 +1744,7 @@ const shard: CardShard = {
     _poolUnholyAnnex,
     _poolUnnervingGrasp,
     _poolUnquestionedAuthority,
+    _poolUnscytheKillerOfKings,
     _poolUtterEnd,
     _poolVadmirNewBlood,
     _poolValgavothHarrowerOfSouls,
@@ -1761,6 +1772,7 @@ const shard: CardShard = {
     _poolVraskaGolgariQueen,
     _poolVraskaTheUnseen,
     _poolVulshokSorcerer,
+    _poolWaitingInTheWeeds,
     _poolWakandanTusker,
     _poolWallCrawl,
     _poolWallOfAir,

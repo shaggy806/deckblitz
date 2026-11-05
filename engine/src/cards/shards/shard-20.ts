@@ -90,6 +90,7 @@ import _poolBlackCatCunningThief from "../pool/black-cat-cunning-thief.js";
 import _poolBlanchwoodTreefolk from "../pool/blanchwood-treefolk.js";
 import _poolBlazingBomb from "../pool/blazing-bomb.js";
 import _poolBlazingFiresinger from "../pool/blazing-firesinger.js";
+import _poolBlimComedicGenius from "../pool/blim-comedic-genius.js";
 import _poolBloodBaronOfVizkopa from "../pool/blood-baron-of-vizkopa.js";
 import _poolBloodletting from "../pool/bloodletting.js";
 import _poolBloodsoakedAltar from "../pool/bloodsoaked-altar.js";
@@ -194,6 +195,7 @@ import _poolCrush from "../pool/crush.js";
 import _poolCrushingPain from "../pool/crushing-pain.js";
 import _poolCrystalDragon from "../pool/crystal-dragon.js";
 import _poolCullingMark from "../pool/culling-mark.js";
+import _poolDandan from "../pool/dandan.js";
 import _poolDanithaNewBenaliasLight from "../pool/danitha-new-benalias-light.js";
 import _poolDauntlessAvenger from "../pool/dauntless-avenger.js";
 import _poolDauntlessScrapbot from "../pool/dauntless-scrapbot.js";
@@ -530,6 +532,7 @@ import _poolMorticianBeetle from "../pool/mortician-beetle.js";
 import _poolMoxJasper from "../pool/mox-jasper.js";
 import _poolMutantsPrey from "../pool/mutants-prey.js";
 import _poolMyojinOfSeeingWinds from "../pool/myojin-of-seeing-winds.js";
+import _poolMyrQuadropod from "../pool/myr-quadropod.js";
 import _poolMyrkulsEdict from "../pool/myrkuls-edict.js";
 import _poolMysticCompass from "../pool/mystic-compass.js";
 import _poolMysticMeditation from "../pool/mystic-meditation.js";
@@ -678,6 +681,7 @@ import _poolRubyMedallion from "../pool/ruby-medallion.js";
 import _poolRuleOfLaw from "../pool/rule-of-law.js";
 import _poolRustsporeRam from "../pool/rustspore-ram.js";
 import _poolRuthlessKnave from "../pool/ruthless-knave.js";
+import _poolRuthlessNegotiation from "../pool/ruthless-negotiation.js";
 import _poolRuthlessSniper from "../pool/ruthless-sniper.js";
 import _poolSaltRoadQuartermasters from "../pool/salt-road-quartermasters.js";
 import _poolSanarUnfinishedGenius from "../pool/sanar-unfinished-genius.js";
@@ -1064,6 +1068,7 @@ const shard: CardShard = {
     _poolBlanchwoodTreefolk,
     _poolBlazingBomb,
     _poolBlazingFiresinger,
+    _poolBlimComedicGenius,
     _poolBloodBaronOfVizkopa,
     _poolBloodletting,
     _poolBloodsoakedAltar,
@@ -1168,6 +1173,7 @@ const shard: CardShard = {
     _poolCrushingPain,
     _poolCrystalDragon,
     _poolCullingMark,
+    _poolDandan,
     _poolDanithaNewBenaliasLight,
     _poolDauntlessAvenger,
     _poolDauntlessScrapbot,
@@ -1504,6 +1510,7 @@ const shard: CardShard = {
     _poolMoxJasper,
     _poolMutantsPrey,
     _poolMyojinOfSeeingWinds,
+    _poolMyrQuadropod,
     _poolMyrkulsEdict,
     _poolMysticCompass,
     _poolMysticMeditation,
@@ -1652,6 +1659,7 @@ const shard: CardShard = {
     _poolRuleOfLaw,
     _poolRustsporeRam,
     _poolRuthlessKnave,
+    _poolRuthlessNegotiation,
     _poolRuthlessSniper,
     _poolSaltRoadQuartermasters,
     _poolSanarUnfinishedGenius,

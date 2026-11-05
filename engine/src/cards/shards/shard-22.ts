@@ -264,6 +264,7 @@ import _poolFirebirdBlazingRanger from "../pool/firebird-blazing-ranger.js";
 import _poolFireforgersPuzzleknot from "../pool/fireforgers-puzzleknot.js";
 import _poolFirestormHellkite from "../pool/firestorm-hellkite.js";
 import _poolFlashfreeze from "../pool/flashfreeze.js";
+import _poolFlatman from "../pool/flatman.js";
 import _poolFlickerOfFate from "../pool/flicker-of-fate.js";
 import _poolFloatingDreamZubera from "../pool/floating-dream-zubera.js";
 import _poolFlowstoneShambler from "../pool/flowstone-shambler.js";
@@ -531,6 +532,7 @@ import _poolOyobiWhoSplitTheHeavens from "../pool/oyobi-who-split-the-heavens.js
 import _poolPainfulTruths from "../pool/painful-truths.js";
 import _poolPainwrackerOni from "../pool/painwracker-oni.js";
 import _poolPalaceSiege from "../pool/palace-siege.js";
+import _poolPalantirOfOrthanc from "../pool/palantir-of-orthanc.js";
 import _poolParagonOfEternalWilds from "../pool/paragon-of-eternal-wilds.js";
 import _poolPathrazerOfUlamog from "../pool/pathrazer-of-ulamog.js";
 import _poolPeakEruption from "../pool/peak-eruption.js";
@@ -725,6 +727,7 @@ import _poolStarkIndustriesExecutive from "../pool/stark-industries-executive.js
 import _poolStarvingRevenant from "../pool/starving-revenant.js";
 import _poolSteadfastSentinel from "../pool/steadfast-sentinel.js";
 import _poolSterlingGrove from "../pool/sterling-grove.js";
+import _poolSternJudge from "../pool/stern-judge.js";
 import _poolSternScolding from "../pool/stern-scolding.js";
 import _poolStockmanMadFlyEntist from "../pool/stockman-mad-fly-entist.js";
 import _poolStoneGolem from "../pool/stone-golem.js";
@@ -1198,6 +1201,7 @@ const shard: CardShard = {
     _poolFireforgersPuzzleknot,
     _poolFirestormHellkite,
     _poolFlashfreeze,
+    _poolFlatman,
     _poolFlickerOfFate,
     _poolFloatingDreamZubera,
     _poolFlowstoneShambler,
@@ -1465,6 +1469,7 @@ const shard: CardShard = {
     _poolPainfulTruths,
     _poolPainwrackerOni,
     _poolPalaceSiege,
+    _poolPalantirOfOrthanc,
     _poolParagonOfEternalWilds,
     _poolPathrazerOfUlamog,
     _poolPeakEruption,
@@ -1659,6 +1664,7 @@ const shard: CardShard = {
     _poolStarvingRevenant,
     _poolSteadfastSentinel,
     _poolSterlingGrove,
+    _poolSternJudge,
     _poolSternScolding,
     _poolStockmanMadFlyEntist,
     _poolStoneGolem,

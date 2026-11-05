@@ -10,6 +10,7 @@ import _poolAdarkarWindform from "../pool/adarkar-windform.js";
 import _poolAdvocateOfTheBeast from "../pool/advocate-of-the-beast.js";
 import _poolAegisOfTheGods from "../pool/aegis-of-the-gods.js";
 import _poolAetherfluxConduit from "../pool/aetherflux-conduit.js";
+import _poolAggressiveNegotiations from "../pool/aggressive-negotiations.js";
 import _poolAgitatorAnt from "../pool/agitator-ant.js";
 import _poolAgrusKosWojekVeteran from "../pool/agrus-kos-wojek-veteran.js";
 import _poolAinokTracker from "../pool/ainok-tracker.js";
@@ -78,6 +79,7 @@ import _poolBoneMask from "../pool/bone-mask.js";
 import _poolBontusLastReckoning from "../pool/bontus-last-reckoning.js";
 import _poolBoobyTrap from "../pool/booby-trap.js";
 import _poolBorealGriffin from "../pool/boreal-griffin.js";
+import _poolBoreasCharger from "../pool/boreas-charger.js";
 import _poolBorosStrikeCaptain from "../pool/boros-strike-captain.js";
 import _poolBosssChauffeur from "../pool/bosss-chauffeur.js";
 import _poolBoundInSilence from "../pool/bound-in-silence.js";
@@ -204,6 +206,7 @@ import _poolElvishDreadlord from "../pool/elvish-dreadlord.js";
 import _poolElvishFarmer from "../pool/elvish-farmer.js";
 import _poolEmbodimentOfSpring from "../pool/embodiment-of-spring.js";
 import _poolEnchantersBane from "../pool/enchanters-bane.js";
+import _poolEndOfTheHunt from "../pool/end-of-the-hunt.js";
 import _poolEndrekSahrMasterBreeder from "../pool/endrek-sahr-master-breeder.js";
 import _poolEnduringBondwarden from "../pool/enduring-bondwarden.js";
 import _poolEnslave from "../pool/enslave.js";
@@ -358,6 +361,7 @@ import _poolInsufferableBalladeer from "../pool/insufferable-balladeer.js";
 import _poolIntellectDevourer from "../pool/intellect-devourer.js";
 import _poolInundate from "../pool/inundate.js";
 import _poolInvasionOfZendikar from "../pool/invasion-of-zendikar.js";
+import _poolInvert from "../pool/invert.js";
 import _poolInvestigatorsJournal from "../pool/investigators-journal.js";
 import _poolInvokeDespair from "../pool/invoke-despair.js";
 import _poolIreShaman from "../pool/ire-shaman.js";
@@ -702,6 +706,7 @@ import _poolSpellgorgerBarbarian from "../pool/spellgorger-barbarian.js";
 import _poolSpewFlame from "../pool/spew-flame.js";
 import _poolSphereOfGrace from "../pool/sphere-of-grace.js";
 import _poolSphinxOfTheFinalWord from "../pool/sphinx-of-the-final-word.js";
+import _poolSphinxOfUthuun from "../pool/sphinx-of-uthuun.js";
 import _poolSphinxsHerald from "../pool/sphinxs-herald.js";
 import _poolSphinxsInsight from "../pool/sphinxs-insight.js";
 import _poolSpikeColony from "../pool/spike-colony.js";
@@ -724,6 +729,7 @@ import _poolSulfurElemental from "../pool/sulfur-elemental.js";
 import _poolSunderflock from "../pool/sunderflock.js";
 import _poolSungrassPrairie from "../pool/sungrass-prairie.js";
 import _poolSunscapeMaster from "../pool/sunscape-master.js";
+import _poolSunspineLynx from "../pool/sunspine-lynx.js";
 import _poolSuperState from "../pool/super-state.js";
 import _poolSurgeOfThoughtweft from "../pool/surge-of-thoughtweft.js";
 import _poolSwarmShambler from "../pool/swarm-shambler.js";
@@ -793,6 +799,7 @@ import _poolTrespassersCurse from "../pool/trespassers-curse.js";
 import _poolTribalGolem from "../pool/tribal-golem.js";
 import _poolTroublesomeSpirit from "../pool/troublesome-spirit.js";
 import _poolTrustedForcemage from "../pool/trusted-forcemage.js";
+import _poolTruthOrTale from "../pool/truth-or-tale.js";
 import _poolTunnelRats from "../pool/tunnel-rats.js";
 import _poolTurbulentShore from "../pool/turbulent-shore.js";
 import _poolTurnToDust from "../pool/turn-to-dust.js";
@@ -803,6 +810,7 @@ import _poolUltronsAuxiliary from "../pool/ultrons-auxiliary.js";
 import _poolUlvenwaldTracker from "../pool/ulvenwald-tracker.js";
 import _poolUncleIstvan from "../pool/uncle-istvan.js";
 import _poolUndeadExecutioner from "../pool/undead-executioner.js";
+import _poolUneshCriosphinxSovereign from "../pool/unesh-criosphinx-sovereign.js";
 import _poolUnexpectedWindfall from "../pool/unexpected-windfall.js";
 import _poolUnseenWalker from "../pool/unseen-walker.js";
 import _poolUnshakableTail from "../pool/unshakable-tail.js";
@@ -906,6 +914,7 @@ const shard: CardShard = {
     _poolAdvocateOfTheBeast,
     _poolAegisOfTheGods,
     _poolAetherfluxConduit,
+    _poolAggressiveNegotiations,
     _poolAgitatorAnt,
     _poolAgrusKosWojekVeteran,
     _poolAinokTracker,
@@ -974,6 +983,7 @@ const shard: CardShard = {
     _poolBontusLastReckoning,
     _poolBoobyTrap,
     _poolBorealGriffin,
+    _poolBoreasCharger,
     _poolBorosStrikeCaptain,
     _poolBosssChauffeur,
     _poolBoundInSilence,
@@ -1100,6 +1110,7 @@ const shard: CardShard = {
     _poolElvishFarmer,
     _poolEmbodimentOfSpring,
     _poolEnchantersBane,
+    _poolEndOfTheHunt,
     _poolEndrekSahrMasterBreeder,
     _poolEnduringBondwarden,
     _poolEnslave,
@@ -1254,6 +1265,7 @@ const shard: CardShard = {
     _poolIntellectDevourer,
     _poolInundate,
     _poolInvasionOfZendikar,
+    _poolInvert,
     _poolInvestigatorsJournal,
     _poolInvokeDespair,
     _poolIreShaman,
@@ -1598,6 +1610,7 @@ const shard: CardShard = {
     _poolSpewFlame,
     _poolSphereOfGrace,
     _poolSphinxOfTheFinalWord,
+    _poolSphinxOfUthuun,
     _poolSphinxsHerald,
     _poolSphinxsInsight,
     _poolSpikeColony,
@@ -1620,6 +1633,7 @@ const shard: CardShard = {
     _poolSunderflock,
     _poolSungrassPrairie,
     _poolSunscapeMaster,
+    _poolSunspineLynx,
     _poolSuperState,
     _poolSurgeOfThoughtweft,
     _poolSwarmShambler,
@@ -1689,6 +1703,7 @@ const shard: CardShard = {
     _poolTribalGolem,
     _poolTroublesomeSpirit,
     _poolTrustedForcemage,
+    _poolTruthOrTale,
     _poolTunnelRats,
     _poolTurbulentShore,
     _poolTurnToDust,
@@ -1699,6 +1714,7 @@ const shard: CardShard = {
     _poolUlvenwaldTracker,
     _poolUncleIstvan,
     _poolUndeadExecutioner,
+    _poolUneshCriosphinxSovereign,
     _poolUnexpectedWindfall,
     _poolUnseenWalker,
     _poolUnshakableTail,

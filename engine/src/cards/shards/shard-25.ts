@@ -383,6 +383,7 @@ import _poolInnerDemonsGangsters from "../pool/inner-demons-gangsters.js";
 import _poolInnerFire from "../pool/inner-fire.js";
 import _poolInspiringPaladin from "../pool/inspiring-paladin.js";
 import _poolInspiringRefrain from "../pool/inspiring-refrain.js";
+import _poolInvokeCalamity from "../pool/invoke-calamity.js";
 import _poolIonaShieldOfEmeria from "../pool/iona-shield-of-emeria.js";
 import _poolIsperiaTheInscrutable from "../pool/isperia-the-inscrutable.js";
 import _poolJacesTriumph from "../pool/jaces-triumph.js";
@@ -652,6 +653,7 @@ import _poolSandsower from "../pool/sandsower.js";
 import _poolSanguineSacrament from "../pool/sanguine-sacrament.js";
 import _poolSarkhansUnsealing from "../pool/sarkhans-unsealing.js";
 import _poolSauronDinoDevotee from "../pool/sauron-dino-devotee.js";
+import _poolSauronsRansom from "../pool/saurons-ransom.js";
 import _poolScabClanMauler from "../pool/scab-clan-mauler.js";
 import _poolScavengersTalent from "../pool/scavengers-talent.js";
 import _poolScorchRider from "../pool/scorch-rider.js";
@@ -790,10 +792,12 @@ import _poolTorchTheWitness from "../pool/torch-the-witness.js";
 import _poolToshiroUmezawa from "../pool/toshiro-umezawa.js";
 import _poolTrailOfEvidence from "../pool/trail-of-evidence.js";
 import _poolTranquilDomain from "../pool/tranquil-domain.js";
+import _poolTreacherousUrge from "../pool/treacherous-urge.js";
 import _poolTreadUpon from "../pool/tread-upon.js";
 import _poolTrespasserIlVec from "../pool/trespasser-il-vec.js";
 import _poolTrigonOfInfestation from "../pool/trigon-of-infestation.js";
 import _poolTrygonPrime from "../pool/trygon-prime.js";
+import _poolTurtleshellChangeling from "../pool/turtleshell-changeling.js";
 import _poolTuskguardCaptain from "../pool/tuskguard-captain.js";
 import _poolTyvarThePummeler from "../pool/tyvar-the-pummeler.js";
 import _poolUltimeciaOmnipotent from "../pool/ultimecia-omnipotent.js";
@@ -1273,6 +1277,7 @@ const shard: CardShard = {
     _poolInnerFire,
     _poolInspiringPaladin,
     _poolInspiringRefrain,
+    _poolInvokeCalamity,
     _poolIonaShieldOfEmeria,
     _poolIsperiaTheInscrutable,
     _poolJacesTriumph,
@@ -1542,6 +1547,7 @@ const shard: CardShard = {
     _poolSanguineSacrament,
     _poolSarkhansUnsealing,
     _poolSauronDinoDevotee,
+    _poolSauronsRansom,
     _poolScabClanMauler,
     _poolScavengersTalent,
     _poolScorchRider,
@@ -1680,10 +1686,12 @@ const shard: CardShard = {
     _poolToshiroUmezawa,
     _poolTrailOfEvidence,
     _poolTranquilDomain,
+    _poolTreacherousUrge,
     _poolTreadUpon,
     _poolTrespasserIlVec,
     _poolTrigonOfInfestation,
     _poolTrygonPrime,
+    _poolTurtleshellChangeling,
     _poolTuskguardCaptain,
     _poolTyvarThePummeler,
     _poolUltimeciaOmnipotent,

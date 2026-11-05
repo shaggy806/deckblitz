@@ -1,0 +1,1062 @@
+{
+ "batch": "B255",
+ "status": "done",
+ "ranks": "Need-keys Phase 2: cards freed by the look-and-choose total mana value, per-player and chosen-player counts, choose-player, separate-into-piles, its controller draws/discards, hand-exile, switch-pt, target-opponent-chooses, hand-to-library-top, damaged-by-this-source and defending-player attack restriction families",
+ "authored": [
+  {
+   "name": "Abattoir Ghoul",
+   "files": [
+    "engine/src/cards/pool/abattoir-ghoul.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "About Face",
+   "files": [
+    "engine/src/cards/pool/about-face.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Acidic Soil",
+   "files": [
+    "engine/src/cards/pool/acidic-soil.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aeromoeba",
+   "files": [
+    "engine/src/cards/pool/aeromoeba.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Aggressive Negotiations",
+   "files": [
+    "engine/src/cards/pool/aggressive-negotiations.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Agonizing Memories",
+   "files": [
+    "engine/src/cards/pool/agonizing-memories.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aim for the Head",
+   "files": [
+    "engine/src/cards/pool/aim-for-the-head.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Appetite for Brains",
+   "files": [
+    "engine/src/cards/pool/appetite-for-brains.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aquamoeba",
+   "files": [
+    "engine/src/cards/pool/aquamoeba.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Armored Galleon",
+   "files": [
+    "engine/src/cards/pool/armored-galleon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Atris, Oracle of Half-Truths",
+   "files": [
+    "engine/src/cards/pool/atris-oracle-of-half-truths.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Baleful Mastery",
+   "files": [
+    "engine/src/cards/pool/baleful-mastery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Biting-Palm Ninja",
+   "files": [
+    "engine/src/cards/pool/biting-palm-ninja.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blim, Comedic Genius",
+   "files": [
+    "engine/src/cards/pool/blim-comedic-genius.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bog Serpent",
+   "files": [
+    "engine/src/cards/pool/bog-serpent.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Boreas Charger",
+   "files": [
+    "engine/src/cards/pool/boreas-charger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Burning of Xinye",
+   "files": [
+    "engine/src/cards/pool/burning-of-xinye.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Calcite Snapper",
+   "files": [
+    "engine/src/cards/pool/calcite-snapper.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Castigate",
+   "files": [
+    "engine/src/cards/pool/castigate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chained Throatseeker",
+   "files": [
+    "engine/src/cards/pool/chained-throatseeker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Check for Traps",
+   "files": [
+    "engine/src/cards/pool/check-for-traps.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chimney Imp",
+   "files": [
+    "engine/src/cards/pool/chimney-imp.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chittering Rats",
+   "files": [
+    "engine/src/cards/pool/chittering-rats.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crag Puca",
+   "files": [
+    "engine/src/cards/pool/crag-puca.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Crookclaw Transmuter",
+   "files": [
+    "engine/src/cards/pool/crookclaw-transmuter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cuombajj Witches",
+   "files": [
+    "engine/src/cards/pool/cuombajj-witches.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dandân",
+   "files": [
+    "engine/src/cards/pool/dandan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Death Match",
+   "files": [
+    "engine/src/cards/pool/death-match.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Debt to the Kami",
+   "files": [
+    "engine/src/cards/pool/debt-to-the-kami.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deep-Sea Serpent",
+   "files": [
+    "engine/src/cards/pool/deep-sea-serpent.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Desecrated Earth",
+   "files": [
+    "engine/src/cards/pool/desecrated-earth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dinrova Horror",
+   "files": [
+    "engine/src/cards/pool/dinrova-horror.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dismal Failure",
+   "files": [
+    "engine/src/cards/pool/dismal-failure.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Do or Die",
+   "files": [
+    "engine/src/cards/pool/do-or-die.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Doomfall",
+   "files": [
+    "engine/src/cards/pool/doomfall.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dream Fracture",
+   "files": [
+    "engine/src/cards/pool/dream-fracture.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dwarven Thaumaturgist",
+   "files": [
+    "engine/src/cards/pool/dwarven-thaumaturgist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Early Winter",
+   "files": [
+    "engine/src/cards/pool/early-winter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Emissary of Despair",
+   "files": [
+    "engine/src/cards/pool/emissary-of-despair.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "End of the Hunt",
+   "files": [
+    "engine/src/cards/pool/end-of-the-hunt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Epiphany at the Drownyard",
+   "files": [
+    "engine/src/cards/pool/epiphany-at-the-drownyard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ertai Resurrected",
+   "files": [
+    "engine/src/cards/pool/ertai-resurrected.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eunuchs' Intrigues",
+   "files": [
+    "engine/src/cards/pool/eunuchs-intrigues.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Faller's Faithful",
+   "files": [
+    "engine/src/cards/pool/fallers-faithful.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Flatman",
+   "files": [
+    "engine/src/cards/pool/flatman.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fluxcharger",
+   "files": [
+    "engine/src/cards/pool/fluxcharger.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fortune's Favor",
+   "files": [
+    "engine/src/cards/pool/fortunes-favor.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Frightful Delusion",
+   "files": [
+    "engine/src/cards/pool/frightful-delusion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frostwielder",
+   "files": [
+    "engine/src/cards/pool/frostwielder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gloomlance",
+   "files": [
+    "engine/src/cards/pool/gloomlance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Lyre",
+   "files": [
+    "engine/src/cards/pool/goblin-lyre.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Goblin Mutant",
+   "files": [
+    "engine/src/cards/pool/goblin-mutant.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Goblin War Cry",
+   "files": [
+    "engine/src/cards/pool/goblin-war-cry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gwafa Hazid, Profiteer",
+   "files": [
+    "engine/src/cards/pool/gwafa-hazid-profiteer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Haunting Apparition",
+   "files": [
+    "engine/src/cards/pool/haunting-apparition.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hunted Nightmare",
+   "files": [
+    "engine/src/cards/pool/hunted-nightmare.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Incendiary Oracle",
+   "files": [
+    "engine/src/cards/pool/incendiary-oracle.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Incite Rebellion",
+   "files": [
+    "engine/src/cards/pool/incite-rebellion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inside Out",
+   "files": [
+    "engine/src/cards/pool/inside-out.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Intimidation Tactics",
+   "files": [
+    "engine/src/cards/pool/intimidation-tactics.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Introduction to Annihilation",
+   "files": [
+    "engine/src/cards/pool/introduction-to-annihilation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inversion Behemoth",
+   "files": [
+    "engine/src/cards/pool/inversion-behemoth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invert // Invent",
+   "files": [
+    "engine/src/cards/pool/invert-invent.ts",
+    "engine/src/cards/pool/invert.ts",
+    "engine/src/cards/pool/invent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invoke Calamity",
+   "files": [
+    "engine/src/cards/pool/invoke-calamity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kumano, Master Yamabushi",
+   "files": [
+    "engine/src/cards/pool/kumano-master-yamabushi.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kyoki, Sanity's Eclipse",
+   "files": [
+    "engine/src/cards/pool/kyoki-sanitys-eclipse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lifebane Zombie",
+   "files": [
+    "engine/src/cards/pool/lifebane-zombie.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Merfolk Thaumaturgist",
+   "files": [
+    "engine/src/cards/pool/merfolk-thaumaturgist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mindleech Ghoul",
+   "files": [
+    "engine/src/cards/pool/mindleech-ghoul.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mindmelter",
+   "files": [
+    "engine/src/cards/pool/mindmelter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Multiple Choice",
+   "files": [
+    "engine/src/cards/pool/multiple-choice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Myr Quadropod",
+   "files": [
+    "engine/src/cards/pool/myr-quadropod.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Netherborn Phalanx",
+   "files": [
+    "engine/src/cards/pool/netherborn-phalanx.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nicol Bolas, Planeswalker",
+   "files": [
+    "engine/src/cards/pool/nicol-bolas-planeswalker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Night Terrors",
+   "files": [
+    "engine/src/cards/pool/night-terrors.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Nimble Larcenist",
+   "files": [
+    "engine/src/cards/pool/nimble-larcenist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nin, the Pain Artist",
+   "files": [
+    "engine/src/cards/pool/nin-the-pain-artist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ob Nixilis, the Hate-Twisted",
+   "files": [
+    "engine/src/cards/pool/ob-nixilis-the-hate-twisted.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Olórin's Searing Light",
+   "files": [
+    "engine/src/cards/pool/olorins-searing-light.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Omen of Fire",
+   "files": [
+    "engine/src/cards/pool/omen-of-fire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Palantír of Orthanc",
+   "files": [
+    "engine/src/cards/pool/palantir-of-orthanc.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pallimud",
+   "files": [
+    "engine/src/cards/pool/pallimud.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pandemonium",
+   "files": [
+    "engine/src/cards/pool/pandemonium.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Parallax Nexus",
+   "files": [
+    "engine/src/cards/pool/parallax-nexus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phantasmal Fiend",
+   "files": [
+    "engine/src/cards/pool/phantasmal-fiend.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pick the Brain",
+   "files": [
+    "engine/src/cards/pool/pick-the-brain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Prophesied End",
+   "files": [
+    "engine/src/cards/pool/prophesied-end.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Psychic Theft",
+   "files": [
+    "engine/src/cards/pool/psychic-theft.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rakdos's Return",
+   "files": [
+    "engine/src/cards/pool/rakdoss-return.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reap Intellect",
+   "files": [
+    "engine/src/cards/pool/reap-intellect.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Red Death, Shipwrecker",
+   "files": [
+    "engine/src/cards/pool/red-death-shipwrecker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ruthless Negotiation",
+   "files": [
+    "engine/src/cards/pool/ruthless-negotiation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sakashima's Will",
+   "files": [
+    "engine/src/cards/pool/sakashimas-will.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sauron's Ransom",
+   "files": [
+    "engine/src/cards/pool/saurons-ransom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Savage Alliance",
+   "files": [
+    "engine/src/cards/pool/savage-alliance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Searing Rays",
+   "files": [
+    "engine/src/cards/pool/searing-rays.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Severance Priest",
+   "files": [
+    "engine/src/cards/pool/severance-priest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sewer Nemesis",
+   "files": [
+    "engine/src/cards/pool/sewer-nemesis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sin Collector",
+   "files": [
+    "engine/src/cards/pool/sin-collector.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Skyshroud War Beast",
+   "files": [
+    "engine/src/cards/pool/skyshroud-war-beast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soul Search",
+   "files": [
+    "engine/src/cards/pool/soul-search.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Specter's Shriek",
+   "files": [
+    "engine/src/cards/pool/specters-shriek.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sphinx of Clear Skies",
+   "files": [
+    "engine/src/cards/pool/sphinx-of-clear-skies.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sphinx of Uthuun",
+   "files": [
+    "engine/src/cards/pool/sphinx-of-uthuun.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Stadium Vendors",
+   "files": [
+    "engine/src/cards/pool/stadium-vendors.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Steam Augury",
+   "files": [
+    "engine/src/cards/pool/steam-augury.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stern Judge",
+   "files": [
+    "engine/src/cards/pool/stern-judge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Strange Inversion",
+   "files": [
+    "engine/src/cards/pool/strange-inversion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Strategic Betrayal",
+   "files": [
+    "engine/src/cards/pool/strategic-betrayal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stronghold Discipline",
+   "files": [
+    "engine/src/cards/pool/stronghold-discipline.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stuffy Doll",
+   "files": [
+    "engine/src/cards/pool/stuffy-doll.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sunspine Lynx",
+   "files": [
+    "engine/src/cards/pool/sunspine-lynx.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sygg's Command",
+   "files": [
+    "engine/src/cards/pool/syggs-command.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tataru Taru",
+   "files": [
+    "engine/src/cards/pool/tataru-taru.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Black Gate",
+   "files": [
+    "engine/src/cards/pool/the-black-gate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Torrent of Souls",
+   "files": [
+    "engine/src/cards/pool/torrent-of-souls.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Transgress the Mind",
+   "files": [
+    "engine/src/cards/pool/transgress-the-mind.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Transmutation",
+   "files": [
+    "engine/src/cards/pool/transmutation.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Treacherous Urge",
+   "files": [
+    "engine/src/cards/pool/treacherous-urge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Truth or Tale",
+   "files": [
+    "engine/src/cards/pool/truth-or-tale.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Turtleshell Changeling",
+   "files": [
+    "engine/src/cards/pool/turtleshell-changeling.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Twisted Reflection",
+   "files": [
+    "engine/src/cards/pool/twisted-reflection.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unesh, Criosphinx Sovereign",
+   "files": [
+    "engine/src/cards/pool/unesh-criosphinx-sovereign.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unscrupulous Agent",
+   "files": [
+    "engine/src/cards/pool/unscrupulous-agent.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Unscythe, Killer of Kings",
+   "files": [
+    "engine/src/cards/pool/unscythe-killer-of-kings.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Valakut Fireboar",
+   "files": [
+    "engine/src/cards/pool/valakut-fireboar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vessel of Malignity",
+   "files": [
+    "engine/src/cards/pool/vessel-of-malignity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Waiting in the Weeds",
+   "files": [
+    "engine/src/cards/pool/waiting-in-the-weeds.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wandering Fumarole",
+   "files": [
+    "engine/src/cards/pool/wandering-fumarole.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wei Assassins",
+   "files": [
+    "engine/src/cards/pool/wei-assassins.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Windreaver",
+   "files": [
+    "engine/src/cards/pool/windreaver.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wing Storm",
+   "files": [
+    "engine/src/cards/pool/wing-storm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wishclaw Talisman",
+   "files": [
+    "engine/src/cards/pool/wishclaw-talisman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Witness the End",
+   "files": [
+    "engine/src/cards/pool/witness-the-end.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Sawhorn Nemesis",
+   "needs": [
+    "replacement:damage-double-to-chosen-player-side"
+   ],
+   "why": "The doubling can't be scoped to the chosen player or a permanent they control."
+  },
+  {
+   "name": "Split the Spoils",
+   "needs": [
+    "effect:separate-exiled-cards-into-piles"
+   ],
+   "why": "Exiles its targets, then separates them: piles over targets keep only cards still in a graveyard."
+  },
+  {
+   "name": "Boneyard Parley",
+   "needs": [
+    "effect:separate-exiled-cards-into-piles"
+   ],
+   "why": "Exiles its targets, then an opponent separates those cards."
+  },
+  {
+   "name": "Brilliant Ultimatum",
+   "needs": [
+    "effect:separate-exiled-cards-into-piles"
+   ],
+   "why": "Exiles the top five, then separates them; playing from exile is what the rest reads."
+  },
+  {
+   "name": "Jace, Architect of Thought",
+   "needs": [
+    "decision:search-each-library-before-choosing",
+    "effect:pile-fate-library-bottom-any-order"
+   ],
+   "why": "The -8 looks through every library before any choice is final; the -2 puts a pile on the bottom in any order."
+  },
+  {
+   "name": "Stand or Fall",
+   "needs": [
+    "effect:only-chosen-pile-can-block"
+   ],
+   "why": "Binds creatures that enter after the piles are made."
+  },
+  {
+   "name": "Fight or Flight",
+   "needs": [
+    "effect:only-chosen-pile-can-attack"
+   ],
+   "why": "Binds creatures that enter or become creatures after it resolves (the ruling)."
+  },
+  {
+   "name": "Shimian Specter",
+   "needs": [
+    "effect:choose-from-revealed-hand-without-moving"
+   ],
+   "why": "The chosen card stays in hand for the search, which may decline to find it; exiling it first is two events and no choice."
+  },
+  {
+   "name": "Lobotomy",
+   "needs": [
+    "effect:choose-from-revealed-hand-without-moving"
+   ],
+   "why": "As Shimian Specter."
+  },
+  {
+   "name": "Sower of Discord",
+   "needs": [
+    "decision:choose-two-players-on-enter"
+   ],
+   "why": "Two chosen players, and \"the other chosen player\"."
+  },
+  {
+   "name": "Victory Chimes",
+   "needs": [
+    "effect:mana-ability-chosen-player-adds"
+   ],
+   "why": "A mana ability can't use the stack to name who adds the mana."
+  },
+  {
+   "name": "Lost Hours",
+   "needs": [
+    "effect:chosen-hand-card-to-library-nth-from-top"
+   ],
+   "why": "Third from the top of a library, from a hand you chose from."
+  },
+  {
+   "name": "Whims of the Fates",
+   "needs": [
+    "effect:separate-into-three-piles"
+   ],
+   "why": "Three piles, one chosen at random."
+  },
+  {
+   "name": "Bend or Break",
+   "needs": [
+    "effect:each-player-separates-piles-together"
+   ],
+   "why": "Every player's lands destroyed and tapped together, after all piles are chosen."
+  },
+  {
+   "name": "Camouflage",
+   "needs": [
+    "effect:defenders-divide-creatures-into-block-piles"
+   ],
+   "why": "Replaces declaring blockers."
+  },
+  {
+   "name": "Raging River",
+   "needs": [
+    "effect:block-restricted-to-labeled-pile"
+   ],
+   "why": "Labeled piles, and each attacker limited to one label."
+  }
+ ]
+}

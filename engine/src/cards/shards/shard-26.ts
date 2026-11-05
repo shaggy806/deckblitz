@@ -519,6 +519,7 @@ import _poolNeurokHoversail from "../pool/neurok-hoversail.js";
 import _poolNeutralize from "../pool/neutralize.js";
 import _poolNightsnare from "../pool/nightsnare.js";
 import _poolNimraiserPaladin from "../pool/nimraiser-paladin.js";
+import _poolNinThePainArtist from "../pool/nin-the-pain-artist.js";
 import _poolNineRingedBo from "../pool/nine-ringed-bo.js";
 import _poolNirkanaRevenant from "../pool/nirkana-revenant.js";
 import _poolNoAdmittance from "../pool/no-admittance.js";
@@ -751,6 +752,7 @@ import _poolStoicChampion from "../pool/stoic-champion.js";
 import _poolStomp from "../pool/stomp.js";
 import _poolStoneOfErech from "../pool/stone-of-erech.js";
 import _poolStormboundGeist from "../pool/stormbound-geist.js";
+import _poolStrangeInversion from "../pool/strange-inversion.js";
 import _poolStrokeOfMidnight from "../pool/stroke-of-midnight.js";
 import _poolStromkirkCondemned from "../pool/stromkirk-condemned.js";
 import _poolSubterraneanHangar from "../pool/subterranean-hangar.js";
@@ -815,6 +817,7 @@ import _poolTorrentialGearhulk from "../pool/torrential-gearhulk.js";
 import _poolTrainedCheetah from "../pool/trained-cheetah.js";
 import _poolTraitorousGreed from "../pool/traitorous-greed.js";
 import _poolTransformativeCommons from "../pool/transformative-commons.js";
+import _poolTransgressTheMind from "../pool/transgress-the-mind.js";
 import _poolTreacherousLink from "../pool/treacherous-link.js";
 import _poolTreasureHunter from "../pool/treasure-hunter.js";
 import _poolTreebeardGraciousHost from "../pool/treebeard-gracious-host.js";
@@ -889,9 +892,11 @@ import _poolWhispergearSneak from "../pool/whispergear-sneak.js";
 import _poolWhispersteelDagger from "../pool/whispersteel-dagger.js";
 import _poolWildRoads from "../pool/wild-roads.js";
 import _poolWindingWay from "../pool/winding-way.js";
+import _poolWindreaver from "../pool/windreaver.js";
 import _poolWineOfBloodAndIron from "../pool/wine-of-blood-and-iron.js";
 import _poolWingsOfHope from "../pool/wings-of-hope.js";
 import _poolWitchEnchanter from "../pool/witch-enchanter.js";
+import _poolWitnessTheEnd from "../pool/witness-the-end.js";
 import _poolWolfCoveVillager from "../pool/wolf-cove-villager.js";
 import _poolWormfangNewt from "../pool/wormfang-newt.js";
 import _poolWreckingOgre from "../pool/wrecking-ogre.js";
@@ -1442,6 +1447,7 @@ const shard: CardShard = {
     _poolNeutralize,
     _poolNightsnare,
     _poolNimraiserPaladin,
+    _poolNinThePainArtist,
     _poolNineRingedBo,
     _poolNirkanaRevenant,
     _poolNoAdmittance,
@@ -1674,6 +1680,7 @@ const shard: CardShard = {
     _poolStomp,
     _poolStoneOfErech,
     _poolStormboundGeist,
+    _poolStrangeInversion,
     _poolStrokeOfMidnight,
     _poolStromkirkCondemned,
     _poolSubterraneanHangar,
@@ -1738,6 +1745,7 @@ const shard: CardShard = {
     _poolTrainedCheetah,
     _poolTraitorousGreed,
     _poolTransformativeCommons,
+    _poolTransgressTheMind,
     _poolTreacherousLink,
     _poolTreasureHunter,
     _poolTreebeardGraciousHost,
@@ -1812,9 +1820,11 @@ const shard: CardShard = {
     _poolWhispersteelDagger,
     _poolWildRoads,
     _poolWindingWay,
+    _poolWindreaver,
     _poolWineOfBloodAndIron,
     _poolWingsOfHope,
     _poolWitchEnchanter,
+    _poolWitnessTheEnd,
     _poolWolfCoveVillager,
     _poolWormfangNewt,
     _poolWreckingOgre,

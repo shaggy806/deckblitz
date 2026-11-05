@@ -39,6 +39,7 @@ import _poolAngelicVoices from "../pool/angelic-voices.js";
 import _poolAngerOfTheGods from "../pool/anger-of-the-gods.js";
 import _poolAnnex from "../pool/annex.js";
 import _poolAnticausalVestige from "../pool/anticausal-vestige.js";
+import _poolAppetiteForBrains from "../pool/appetite-for-brains.js";
 import _poolAprilReporterOfTheWeird from "../pool/april-reporter-of-the-weird.js";
 import _poolAquitectsWill from "../pool/aquitects-will.js";
 import _poolArachnusSpinner from "../pool/arachnus-spinner.js";
@@ -200,6 +201,7 @@ import _poolDestroyEvil from "../pool/destroy-evil.js";
 import _poolDiabolicEdict from "../pool/diabolic-edict.js";
 import _poolDigUpTheBody from "../pool/dig-up-the-body.js";
 import _poolDimensionalExile from "../pool/dimensional-exile.js";
+import _poolDismalFailure from "../pool/dismal-failure.js";
 import _poolDivergentEquation from "../pool/divergent-equation.js";
 import _poolDivinerSpirit from "../pool/diviner-spirit.js";
 import _poolDoctorDoomUnrivaled from "../pool/doctor-doom-unrivaled.js";
@@ -302,6 +304,7 @@ import _poolGleamOfAuthority from "../pool/gleam-of-authority.js";
 import _poolGleamOfResistance from "../pool/gleam-of-resistance.js";
 import _poolGoblinBalloonBrigade from "../pool/goblin-balloon-brigade.js";
 import _poolGoblinDarkDwellers from "../pool/goblin-dark-dwellers.js";
+import _poolGoblinMutant from "../pool/goblin-mutant.js";
 import _poolGoblinPiker from "../pool/goblin-piker.js";
 import _poolGoblinRazerunners from "../pool/goblin-razerunners.js";
 import _poolGoblinTaskmaster from "../pool/goblin-taskmaster.js";
@@ -366,6 +369,7 @@ import _poolInspiringBard from "../pool/inspiring-bard.js";
 import _poolInstantRamen from "../pool/instant-ramen.js";
 import _poolIntoTheWilds from "../pool/into-the-wilds.js";
 import _poolInvasionSubmersible from "../pool/invasion-submersible.js";
+import _poolInvent from "../pool/invent.js";
 import _poolInvokeTheWinds from "../pool/invoke-the-winds.js";
 import _poolIsolatedChapel from "../pool/isolated-chapel.js";
 import _poolIzoniCenterOfTheWeb from "../pool/izoni-center-of-the-web.js";
@@ -518,6 +522,7 @@ import _poolOverflowingInsight from "../pool/overflowing-insight.js";
 import _poolOverloadedMageRing from "../pool/overloaded-mage-ring.js";
 import _poolOwlinSpiralmancer from "../pool/owlin-spiralmancer.js";
 import _poolPaladinElizabethTaggerdy from "../pool/paladin-elizabeth-taggerdy.js";
+import _poolPallimud from "../pool/pallimud.js";
 import _poolPathOfPeril from "../pool/path-of-peril.js";
 import _poolPeelFromReality from "../pool/peel-from-reality.js";
 import _poolPersonalTutor from "../pool/personal-tutor.js";
@@ -618,6 +623,7 @@ import _poolSaradocMasterOfBuckland from "../pool/saradoc-master-of-buckland.js"
 import _poolSarevoksTome from "../pool/sarevoks-tome.js";
 import _poolSarumansTrickery from "../pool/sarumans-trickery.js";
 import _poolSatyrNyxSmith from "../pool/satyr-nyx-smith.js";
+import _poolSavageAlliance from "../pool/savage-alliance.js";
 import _poolSavorTheMoment from "../pool/savor-the-moment.js";
 import _poolSawtoothThresher from "../pool/sawtooth-thresher.js";
 import _poolSawtuskDemolisher from "../pool/sawtusk-demolisher.js";
@@ -929,6 +935,7 @@ const shard: CardShard = {
     _poolAngerOfTheGods,
     _poolAnnex,
     _poolAnticausalVestige,
+    _poolAppetiteForBrains,
     _poolAprilReporterOfTheWeird,
     _poolAquitectsWill,
     _poolArachnusSpinner,
@@ -1090,6 +1097,7 @@ const shard: CardShard = {
     _poolDiabolicEdict,
     _poolDigUpTheBody,
     _poolDimensionalExile,
+    _poolDismalFailure,
     _poolDivergentEquation,
     _poolDivinerSpirit,
     _poolDoctorDoomUnrivaled,
@@ -1192,6 +1200,7 @@ const shard: CardShard = {
     _poolGleamOfResistance,
     _poolGoblinBalloonBrigade,
     _poolGoblinDarkDwellers,
+    _poolGoblinMutant,
     _poolGoblinPiker,
     _poolGoblinRazerunners,
     _poolGoblinTaskmaster,
@@ -1256,6 +1265,7 @@ const shard: CardShard = {
     _poolInstantRamen,
     _poolIntoTheWilds,
     _poolInvasionSubmersible,
+    _poolInvent,
     _poolInvokeTheWinds,
     _poolIsolatedChapel,
     _poolIzoniCenterOfTheWeb,
@@ -1408,6 +1418,7 @@ const shard: CardShard = {
     _poolOverloadedMageRing,
     _poolOwlinSpiralmancer,
     _poolPaladinElizabethTaggerdy,
+    _poolPallimud,
     _poolPathOfPeril,
     _poolPeelFromReality,
     _poolPersonalTutor,
@@ -1508,6 +1519,7 @@ const shard: CardShard = {
     _poolSarevoksTome,
     _poolSarumansTrickery,
     _poolSatyrNyxSmith,
+    _poolSavageAlliance,
     _poolSavorTheMoment,
     _poolSawtoothThresher,
     _poolSawtuskDemolisher,

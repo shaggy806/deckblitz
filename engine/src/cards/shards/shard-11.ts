@@ -173,6 +173,7 @@ import _poolCountermand from "../pool/countermand.js";
 import _poolCounterpoint from "../pool/counterpoint.js";
 import _poolCrackleburr from "../pool/crackleburr.js";
 import _poolCracklingFalls from "../pool/crackling-falls.js";
+import _poolCragPuca from "../pool/crag-puca.js";
 import _poolCrashTheParty from "../pool/crash-the-party.js";
 import _poolCrashTheRamparts from "../pool/crash-the-ramparts.js";
 import _poolCrestedCraghorn from "../pool/crested-craghorn.js";
@@ -250,6 +251,7 @@ import _poolEpicureOfBlood from "../pool/epicure-of-blood.js";
 import _poolEpistolaryLibrarian from "../pool/epistolary-librarian.js";
 import _poolEssenceBottle from "../pool/essence-bottle.js";
 import _poolEther from "../pool/ether.js";
+import _poolEunuchsIntrigues from "../pool/eunuchs-intrigues.js";
 import _poolEverglades from "../pool/everglades.js";
 import _poolExaltedAngel from "../pool/exalted-angel.js";
 import _poolExtractPower from "../pool/extract-power.js";
@@ -403,6 +405,7 @@ import _poolInsideInformation from "../pool/inside-information.js";
 import _poolInsight from "../pool/insight.js";
 import _poolInspiringOverseer from "../pool/inspiring-overseer.js";
 import _poolInterplanarBeacon from "../pool/interplanar-beacon.js";
+import _poolIntimidationTactics from "../pool/intimidation-tactics.js";
 import _poolIntoTheNorth from "../pool/into-the-north.js";
 import _poolIntrudingSoulrager from "../pool/intruding-soulrager.js";
 import _poolInvasionOfInnistrad from "../pool/invasion-of-innistrad.js";
@@ -456,6 +459,7 @@ import _poolLeonardoBigBrother from "../pool/leonardo-big-brother.js";
 import _poolLeoninIconoclast from "../pool/leonin-iconoclast.js";
 import _poolLeoninSkyhunter from "../pool/leonin-skyhunter.js";
 import _poolLeshracsRite from "../pool/leshracs-rite.js";
+import _poolLifebaneZombie from "../pool/lifebane-zombie.js";
 import _poolLightTheWay from "../pool/light-the-way.js";
 import _poolLightningSurge from "../pool/lightning-surge.js";
 import _poolLilianasContract from "../pool/lilianas-contract.js";
@@ -1099,6 +1103,7 @@ const shard: CardShard = {
     _poolCounterpoint,
     _poolCrackleburr,
     _poolCracklingFalls,
+    _poolCragPuca,
     _poolCrashTheParty,
     _poolCrashTheRamparts,
     _poolCrestedCraghorn,
@@ -1176,6 +1181,7 @@ const shard: CardShard = {
     _poolEpistolaryLibrarian,
     _poolEssenceBottle,
     _poolEther,
+    _poolEunuchsIntrigues,
     _poolEverglades,
     _poolExaltedAngel,
     _poolExtractPower,
@@ -1329,6 +1335,7 @@ const shard: CardShard = {
     _poolInsight,
     _poolInspiringOverseer,
     _poolInterplanarBeacon,
+    _poolIntimidationTactics,
     _poolIntoTheNorth,
     _poolIntrudingSoulrager,
     _poolInvasionOfInnistrad,
@@ -1382,6 +1389,7 @@ const shard: CardShard = {
     _poolLeoninIconoclast,
     _poolLeoninSkyhunter,
     _poolLeshracsRite,
+    _poolLifebaneZombie,
     _poolLightTheWay,
     _poolLightningSurge,
     _poolLilianasContract,

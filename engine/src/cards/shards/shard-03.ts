@@ -31,6 +31,7 @@ import _poolArcboundSlith from "../pool/arcbound-slith.js";
 import _poolArchonOfCruelty from "../pool/archon-of-cruelty.js";
 import _poolArchonsGlory from "../pool/archons-glory.js";
 import _poolArgentMutation from "../pool/argent-mutation.js";
+import _poolArmoredGalleon from "../pool/armored-galleon.js";
 import _poolArmyOfTheDamned from "../pool/army-of-the-damned.js";
 import _poolArtificersDragon from "../pool/artificers-dragon.js";
 import _poolAscendingAven from "../pool/ascending-aven.js";
@@ -168,6 +169,7 @@ import _poolDiscipleOfTheOldWays from "../pool/disciple-of-the-old-ways.js";
 import _poolDisplacementWave from "../pool/displacement-wave.js";
 import _poolDistrictGuide from "../pool/district-guide.js";
 import _poolDivebomberGriffin from "../pool/divebomber-griffin.js";
+import _poolDoOrDie from "../pool/do-or-die.js";
 import _poolDocksideExtortionist from "../pool/dockside-extortionist.js";
 import _poolDoctorDoomKingOfLatveria from "../pool/doctor-doom-king-of-latveria.js";
 import _poolDoctorDoom from "../pool/doctor-doom.js";
@@ -392,6 +394,7 @@ import _poolKozilekTheGreatDistortion from "../pool/kozilek-the-great-distortion
 import _poolKrarkClanStoker from "../pool/krark-clan-stoker.js";
 import _poolKraulForagers from "../pool/kraul-foragers.js";
 import _poolKravensCats from "../pool/kravens-cats.js";
+import _poolKumanoMasterYamabushi from "../pool/kumano-master-yamabushi.js";
 import _poolKumanosBlessing from "../pool/kumanos-blessing.js";
 import _poolKumanosPupils from "../pool/kumanos-pupils.js";
 import _poolKurkeshOnakkeAncient from "../pool/kurkesh-onakke-ancient.js";
@@ -569,6 +572,7 @@ import _poolSacredPrey from "../pool/sacred-prey.js";
 import _poolSadisticHypnotist from "../pool/sadistic-hypnotist.js";
 import _poolSagesReverie from "../pool/sages-reverie.js";
 import _poolSaguWildling from "../pool/sagu-wildling.js";
+import _poolSakashimasWill from "../pool/sakashimas-will.js";
 import _poolSakuraTribeScout from "../pool/sakura-tribe-scout.js";
 import _poolSalvagedManaworker from "../pool/salvaged-manaworker.js";
 import _poolSanitariumSkeleton from "../pool/sanitarium-skeleton.js";
@@ -681,6 +685,7 @@ import _poolStrengthOfSolidarity from "../pool/strength-of-solidarity.js";
 import _poolStromgaldCrusader from "../pool/stromgald-crusader.js";
 import _poolStromkirkCaptain from "../pool/stromkirk-captain.js";
 import _poolStromkirkPatrol from "../pool/stromkirk-patrol.js";
+import _poolStrongholdDiscipline from "../pool/stronghold-discipline.js";
 import _poolStudentOfWarfare from "../pool/student-of-warfare.js";
 import _poolStunningStrike from "../pool/stunning-strike.js";
 import _poolSulfurVent from "../pool/sulfur-vent.js";
@@ -871,6 +876,7 @@ const shard: CardShard = {
     _poolArchonOfCruelty,
     _poolArchonsGlory,
     _poolArgentMutation,
+    _poolArmoredGalleon,
     _poolArmyOfTheDamned,
     _poolArtificersDragon,
     _poolAscendingAven,
@@ -1008,6 +1014,7 @@ const shard: CardShard = {
     _poolDisplacementWave,
     _poolDistrictGuide,
     _poolDivebomberGriffin,
+    _poolDoOrDie,
     _poolDocksideExtortionist,
     _poolDoctorDoomKingOfLatveria,
     _poolDoctorDoom,
@@ -1232,6 +1239,7 @@ const shard: CardShard = {
     _poolKrarkClanStoker,
     _poolKraulForagers,
     _poolKravensCats,
+    _poolKumanoMasterYamabushi,
     _poolKumanosBlessing,
     _poolKumanosPupils,
     _poolKurkeshOnakkeAncient,
@@ -1409,6 +1417,7 @@ const shard: CardShard = {
     _poolSadisticHypnotist,
     _poolSagesReverie,
     _poolSaguWildling,
+    _poolSakashimasWill,
     _poolSakuraTribeScout,
     _poolSalvagedManaworker,
     _poolSanitariumSkeleton,
@@ -1521,6 +1530,7 @@ const shard: CardShard = {
     _poolStromgaldCrusader,
     _poolStromkirkCaptain,
     _poolStromkirkPatrol,
+    _poolStrongholdDiscipline,
     _poolStudentOfWarfare,
     _poolStunningStrike,
     _poolSulfurVent,

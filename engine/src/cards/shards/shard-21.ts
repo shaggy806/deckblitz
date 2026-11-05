@@ -506,6 +506,7 @@ import _poolOgreHeadHelm from "../pool/ogre-head-helm.js";
 import _poolOjutaisBreath from "../pool/ojutais-breath.js";
 import _poolOjutaisSummons from "../pool/ojutais-summons.js";
 import _poolOldHobAlleycatBlues from "../pool/old-hob-alleycat-blues.js";
+import _poolOmenOfFire from "../pool/omen-of-fire.js";
 import _poolOpposition from "../pool/opposition.js";
 import _poolOrazcaRaptor from "../pool/orazca-raptor.js";
 import _poolOrcGeneral from "../pool/orc-general.js";
@@ -1381,6 +1382,7 @@ const shard: CardShard = {
     _poolOjutaisBreath,
     _poolOjutaisSummons,
     _poolOldHobAlleycatBlues,
+    _poolOmenOfFire,
     _poolOpposition,
     _poolOrazcaRaptor,
     _poolOrcGeneral,

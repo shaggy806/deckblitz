@@ -265,6 +265,7 @@ import _poolForgingTheTyriteSword from "../pool/forging-the-tyrite-sword.js";
 import _poolForgottenHarvest from "../pool/forgotten-harvest.js";
 import _poolForsakeTheWorldly from "../pool/forsake-the-worldly.js";
 import _poolForsakenSanctuary from "../pool/forsaken-sanctuary.js";
+import _poolFortunesFavor from "../pool/fortunes-favor.js";
 import _poolFractalize from "../pool/fractalize.js";
 import _poolFreeTheFae from "../pool/free-the-fae.js";
 import _poolFromBeyond from "../pool/from-beyond.js";
@@ -295,6 +296,7 @@ import _poolGoblinAnarchomancer from "../pool/goblin-anarchomancer.js";
 import _poolGoblinClearcutter from "../pool/goblin-clearcutter.js";
 import _poolGoblinDeathraiders from "../pool/goblin-deathraiders.js";
 import _poolGoblinDynamo from "../pool/goblin-dynamo.js";
+import _poolGoblinLyre from "../pool/goblin-lyre.js";
 import _poolGoblinOutlander from "../pool/goblin-outlander.js";
 import _poolGoblinPiledriver from "../pool/goblin-piledriver.js";
 import _poolGoblinSpelunkers from "../pool/goblin-spelunkers.js";
@@ -644,6 +646,7 @@ import _poolSelkieHedgeMage from "../pool/selkie-hedge-mage.js";
 import _poolSeraph from "../pool/seraph.js";
 import _poolSereneRemembrance from "../pool/serene-remembrance.js";
 import _poolSerraAviary from "../pool/serra-aviary.js";
+import _poolSeverancePriest from "../pool/severance-priest.js";
 import _poolShadowRift from "../pool/shadow-rift.js";
 import _poolShadowyBackstreet from "../pool/shadowy-backstreet.js";
 import _poolShamelessCharlatan from "../pool/shameless-charlatan.js";
@@ -819,6 +822,7 @@ import _poolVenomizedCat from "../pool/venomized-cat.js";
 import _poolVenomousFangs from "../pool/venomous-fangs.js";
 import _poolVergeRangers from "../pool/verge-rangers.js";
 import _poolVernalEquinox from "../pool/vernal-equinox.js";
+import _poolVesselOfMalignity from "../pool/vessel-of-malignity.js";
 import _poolVeteranOfTheDepths from "../pool/veteran-of-the-depths.js";
 import _poolVexingGull from "../pool/vexing-gull.js";
 import _poolViashinoBladescout from "../pool/viashino-bladescout.js";
@@ -1166,6 +1170,7 @@ const shard: CardShard = {
     _poolForgottenHarvest,
     _poolForsakeTheWorldly,
     _poolForsakenSanctuary,
+    _poolFortunesFavor,
     _poolFractalize,
     _poolFreeTheFae,
     _poolFromBeyond,
@@ -1196,6 +1201,7 @@ const shard: CardShard = {
     _poolGoblinClearcutter,
     _poolGoblinDeathraiders,
     _poolGoblinDynamo,
+    _poolGoblinLyre,
     _poolGoblinOutlander,
     _poolGoblinPiledriver,
     _poolGoblinSpelunkers,
@@ -1545,6 +1551,7 @@ const shard: CardShard = {
     _poolSeraph,
     _poolSereneRemembrance,
     _poolSerraAviary,
+    _poolSeverancePriest,
     _poolShadowRift,
     _poolShadowyBackstreet,
     _poolShamelessCharlatan,
@@ -1720,6 +1727,7 @@ const shard: CardShard = {
     _poolVenomousFangs,
     _poolVergeRangers,
     _poolVernalEquinox,
+    _poolVesselOfMalignity,
     _poolVeteranOfTheDepths,
     _poolVexingGull,
     _poolViashinoBladescout,

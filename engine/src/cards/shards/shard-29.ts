@@ -198,6 +198,7 @@ import _poolDwarvenBloodboiler from "../pool/dwarven-bloodboiler.js";
 import _poolDwellOnThePast from "../pool/dwell-on-the-past.js";
 import _poolDyingWish from "../pool/dying-wish.js";
 import _poolDynavoltTower from "../pool/dynavolt-tower.js";
+import _poolEarlyWinter from "../pool/early-winter.js";
 import _poolEarthKingdomProtectors from "../pool/earth-kingdom-protectors.js";
 import _poolEchoInspector from "../pool/echo-inspector.js";
 import _poolEdgewallInnkeeper from "../pool/edgewall-innkeeper.js";
@@ -568,6 +569,7 @@ import _poolPrizedUnicorn from "../pool/prized-unicorn.js";
 import _poolProsperousPartnership from "../pool/prosperous-partnership.js";
 import _poolProudPackRhino from "../pool/proud-pack-rhino.js";
 import _poolProwlingNightstalker from "../pool/prowling-nightstalker.js";
+import _poolPsychicTheft from "../pool/psychic-theft.js";
 import _poolPsychoticFury from "../pool/psychotic-fury.js";
 import _poolPsychotropeThallid from "../pool/psychotrope-thallid.js";
 import _poolPunctureBlast from "../pool/puncture-blast.js";
@@ -668,6 +670,7 @@ import _poolSenseisDiviningTop from "../pool/senseis-divining-top.js";
 import _poolSerpentSpecialist from "../pool/serpent-specialist.js";
 import _poolSerpentsSoulJar from "../pool/serpents-soul-jar.js";
 import _poolSerraBestiary from "../pool/serra-bestiary.js";
+import _poolSewerNemesis from "../pool/sewer-nemesis.js";
 import _poolShadowcloakVampire from "../pool/shadowcloak-vampire.js";
 import _poolSharedAnimosity from "../pool/shared-animosity.js";
 import _poolShieldOfTheRealm from "../pool/shield-of-the-realm.js";
@@ -749,6 +752,7 @@ import _poolStormfrontPegasus from "../pool/stormfront-pegasus.js";
 import _poolStormkeldProwler from "../pool/stormkeld-prowler.js";
 import _poolStreetWraith from "../pool/street-wraith.js";
 import _poolStrengthTestingHammer from "../pool/strength-testing-hammer.js";
+import _poolStuffyDoll from "../pool/stuffy-doll.js";
 import _poolSubterraneanShambler from "../pool/subterranean-shambler.js";
 import _poolSuccumbToTemptation from "../pool/succumb-to-temptation.js";
 import _poolSummonersPact from "../pool/summoners-pact.js";
@@ -1116,6 +1120,7 @@ const shard: CardShard = {
     _poolDwellOnThePast,
     _poolDyingWish,
     _poolDynavoltTower,
+    _poolEarlyWinter,
     _poolEarthKingdomProtectors,
     _poolEchoInspector,
     _poolEdgewallInnkeeper,
@@ -1486,6 +1491,7 @@ const shard: CardShard = {
     _poolProsperousPartnership,
     _poolProudPackRhino,
     _poolProwlingNightstalker,
+    _poolPsychicTheft,
     _poolPsychoticFury,
     _poolPsychotropeThallid,
     _poolPunctureBlast,
@@ -1586,6 +1592,7 @@ const shard: CardShard = {
     _poolSerpentSpecialist,
     _poolSerpentsSoulJar,
     _poolSerraBestiary,
+    _poolSewerNemesis,
     _poolShadowcloakVampire,
     _poolSharedAnimosity,
     _poolShieldOfTheRealm,
@@ -1667,6 +1674,7 @@ const shard: CardShard = {
     _poolStormkeldProwler,
     _poolStreetWraith,
     _poolStrengthTestingHammer,
+    _poolStuffyDoll,
     _poolSubterraneanShambler,
     _poolSuccumbToTemptation,
     _poolSummonersPact,

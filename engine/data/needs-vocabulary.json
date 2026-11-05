@@ -1264,10 +1264,22 @@
   "static:grant-scavenge-to-graveyard": "keyword:scavenge"
  },
  "features": {
-  "effect:double-player-counters": {"family":"mechanic:player-counters","example":"Aetheric Amplifier: \"double the number of each kind of counter you have\" — double-counters works only on a permanent."},
-  "cost:spell-additional-cost-remove-counters": {"family":"cost:remove-counters-from-chosen","example":"Hierophant Bio-Titan: \"you may remove any number of +1/+1 counters from among creatures you control. This spell costs {2} less for each\" — a spell additional cost choosing counters, with a cost reduction per counter."},
-  "amount:additional-land-drop-amount": {"family":"effect:amount-fields-dynamic","example":"Nahiri's Lithoforming: \"you may play X additional lands this turn\" — additional-land-drop takes a fixed number."},
-  "replacement:enters-with-counters-per-cast-trigger-sacrifice": {"family":"effect:amount-fields-dynamic","example":"Gluttonous Hellkite: \"enters with two +1/+1 counters for each creature sacrificed this way\" — its cast trigger's sacrifice count read by its enters replacement."},
+  "effect:double-player-counters": {
+   "family": "mechanic:player-counters",
+   "example": "Aetheric Amplifier: \"double the number of each kind of counter you have\" — double-counters works only on a permanent."
+  },
+  "cost:spell-additional-cost-remove-counters": {
+   "family": "cost:remove-counters-from-chosen",
+   "example": "Hierophant Bio-Titan: \"you may remove any number of +1/+1 counters from among creatures you control. This spell costs {2} less for each\" — a spell additional cost choosing counters, with a cost reduction per counter."
+  },
+  "amount:additional-land-drop-amount": {
+   "family": "effect:amount-fields-dynamic",
+   "example": "Nahiri's Lithoforming: \"you may play X additional lands this turn\" — additional-land-drop takes a fixed number."
+  },
+  "replacement:enters-with-counters-per-cast-trigger-sacrifice": {
+   "family": "effect:amount-fields-dynamic",
+   "example": "Gluttonous Hellkite: \"enters with two +1/+1 counters for each creature sacrificed this way\" — its cast trigger's sacrifice count read by its enters replacement."
+  },
   "amount:coin-flips-won-this-way": {
    "family": "effect:amount-new-variants",
    "example": "Crazed Firecat: flip until you lose, then one placement of a +1/+1 counter for each flip won — flip-coin's untilLose applies its won effect once per win."
@@ -2020,7 +2032,8 @@
   },
   "decision:separate-into-piles": {
    "example": "Liliana of the Veil: -6 pile separation and choice has no effect vocabulary.",
-   "checked": "2026-10-27: missing"
+   "checked": "2026-10-27: missing",
+   "description": "Two piles, made in the objects' own zone, each with a zone or per-object fate. Not: exiled cards (effect:separate-exiled-cards-into-piles), a library fate (effect:pile-fate-library-bottom-any-order), a turn-wide restriction (effect:only-chosen-pile-can-attack, -block), three piles (effect:separate-into-three-piles)."
   },
   "decision:target-count-amount": {
    "family": "decision:variable-target-count",
@@ -14501,6 +14514,71 @@
   "decision:choose-two-basic-land-types-on-enter": {
    "family": "decision:choose-permanent",
    "example": "Illusionary Terrain: \"choose two basic land types\" as it enters, in order — \"Basic lands of the first chosen type are the second chosen type.\""
+  },
+  "effect:separate-exiled-cards-into-piles": {
+   "family": "decision:separate-into-piles",
+   "description": "`separate-into-piles` over cards exiled first: PileObjects has no exiled-this-way form, and \"targets\" keeps only cards still in a graveyard.",
+   "example": "Split the Spoils: exile up to five target permanent cards from your graveyard and separate them into two piles"
+  },
+  "effect:pile-fate-library-bottom-any-order": {
+   "family": "decision:separate-into-piles",
+   "description": "A pile put on the bottom of a library in any order: PileFate has no library destination.",
+   "example": "Jace, Architect of Thought: put one pile into your hand and the other on the bottom of your library in any order"
+  },
+  "decision:search-each-library-before-choosing": {
+   "family": "decision:separate-into-piles",
+   "description": "Looking through several libraries before finalising a choice in any of them: for-each-player over search-library finishes and shuffles each in turn.",
+   "example": "Jace, Architect of Thought: for each player, search that player's library for a nonland card and exile it"
+  },
+  "effect:only-chosen-pile-can-block": {
+   "family": "decision:separate-into-piles",
+   "description": "A turn-wide block restriction leaving out one pile: it binds creatures that arrive later, which a fate on the other pile does not.",
+   "example": "Stand or Fall: only creatures in the chosen piles can block this turn"
+  },
+  "effect:only-chosen-pile-can-attack": {
+   "family": "decision:separate-into-piles",
+   "description": "A turn-wide attack restriction leaving out one pile: it binds creatures that arrive later, which a fate on the other pile does not (the ruling).",
+   "example": "Fight or Flight: only creatures in the pile of their choice can attack this turn"
+  },
+  "effect:separate-into-three-piles": {
+   "family": "decision:separate-into-piles",
+   "description": "More than two piles, and one chosen at random: `separate-into-piles` makes two.",
+   "example": "Whims of the Fates: each player separates all permanents they control into three piles"
+  },
+  "effect:each-player-separates-piles-together": {
+   "family": "decision:separate-into-piles",
+   "description": "Each player making and having piles chosen, all the fates at once: a for-each-player resolves them one player at a time.",
+   "example": "Bend or Break: each player separates all nontoken lands they control into two piles"
+  },
+  "effect:defenders-divide-creatures-into-block-piles": {
+   "family": "decision:separate-into-piles",
+   "description": "Blocks made by piles a defender divides and the attacker assigns: nothing replaces declaring blockers.",
+   "example": "Camouflage: instead of declaring blockers, each defending player divides creatures into piles"
+  },
+  "effect:block-restricted-to-labeled-pile": {
+   "family": "decision:separate-into-piles",
+   "description": "Piles labeled and each attacker restricted to one label's blockers this combat.",
+   "example": "Raging River: creatures without flying divided into a \"left\" and a \"right\" pile"
+  },
+  "effect:choose-from-revealed-hand-without-moving": {
+   "family": "effect:discard-chosen-from-revealed-hand",
+   "description": "\"You choose a card from it\", the card staying in hand for a same-name search: discard-chosen always moves it, and exiling it first takes away the searcher's right to leave it and splits one exile into two events.",
+   "example": "Lobotomy: you choose a card other than a basic land card from it. Search that player's graveyard, hand, and library"
+  },
+  "effect:chosen-hand-card-to-library-nth-from-top": {
+   "family": "effect:discard-chosen-from-revealed-hand",
+   "description": "discard-chosen's destination has only the library's top and bottom, no Nth from the top.",
+   "example": "Lost Hours: that player puts that card into their library third from the top"
+  },
+  "replacement:damage-double-to-chosen-player-side": {
+   "family": "decision:choose-player",
+   "description": "A would-deal-damage replacement scoped to \"the chosen player or a permanent they control\": its `to` has no chosen-player value and toFilter never matches a player.",
+   "example": "Sawhorn Nemesis: if a source would deal damage to the chosen player or a permanent they control, it deals double"
+  },
+  "decision:choose-two-players-on-enter": {
+   "family": "decision:choose-player",
+   "description": "Two different players chosen as it enters: choosePlayerOnEnter keeps one, and nothing reads \"the other chosen player\".",
+   "example": "Sower of Discord: as this creature enters, choose two players"
   }
  },
  "groups": [

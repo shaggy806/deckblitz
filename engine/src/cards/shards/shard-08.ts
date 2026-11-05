@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _poolAbattoirGhoul from "../pool/abattoir-ghoul.js";
 import _poolAbnormalEndurance from "../pool/abnormal-endurance.js";
 import _poolAbrade from "../pool/abrade.js";
 import _poolAbzanRunemark from "../pool/abzan-runemark.js";
@@ -333,6 +334,7 @@ import _poolGoblinMachinist from "../pool/goblin-machinist.js";
 import _poolGoblinOriflamme from "../pool/goblin-oriflamme.js";
 import _poolGoblinPicker from "../pool/goblin-picker.js";
 import _poolGoblinSpy from "../pool/goblin-spy.js";
+import _poolGoblinWarCry from "../pool/goblin-war-cry.js";
 import _poolGoldenTailDisciple from "../pool/golden-tail-disciple.js";
 import _poolGolgariRotwurm from "../pool/golgari-rotwurm.js";
 import _poolGolgariThug from "../pool/golgari-thug.js";
@@ -379,6 +381,7 @@ import _poolHourOfEternity from "../pool/hour-of-eternity.js";
 import _poolHowlFromBeyond from "../pool/howl-from-beyond.js";
 import _poolHuatlisSpurring from "../pool/huatlis-spurring.js";
 import _poolHuntedDragon from "../pool/hunted-dragon.js";
+import _poolHuntedNightmare from "../pool/hunted-nightmare.js";
 import _poolHuntingTriad from "../pool/hunting-triad.js";
 import _poolHurlyBurly from "../pool/hurly-burly.js";
 import _poolHyalopterousLemure from "../pool/hyalopterous-lemure.js";
@@ -964,6 +967,7 @@ import _tokensZombieTokenCurseOfTheRestlessDead from "../tokens/zombie-token-cur
 
 const shard: CardShard = {
   pool: [
+    _poolAbattoirGhoul,
     _poolAbnormalEndurance,
     _poolAbrade,
     _poolAbzanRunemark,
@@ -1294,6 +1298,7 @@ const shard: CardShard = {
     _poolGoblinOriflamme,
     _poolGoblinPicker,
     _poolGoblinSpy,
+    _poolGoblinWarCry,
     _poolGoldenTailDisciple,
     _poolGolgariRotwurm,
     _poolGolgariThug,
@@ -1340,6 +1345,7 @@ const shard: CardShard = {
     _poolHowlFromBeyond,
     _poolHuatlisSpurring,
     _poolHuntedDragon,
+    _poolHuntedNightmare,
     _poolHuntingTriad,
     _poolHurlyBurly,
     _poolHyalopterousLemure,

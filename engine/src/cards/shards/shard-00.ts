@@ -91,6 +91,7 @@ import _poolBloodthirster from "../pool/bloodthirster.js";
 import _poolBlowflyInfestation from "../pool/blowfly-infestation.js";
 import _poolBoarUmbra from "../pool/boar-umbra.js";
 import _poolBogHoodlums from "../pool/bog-hoodlums.js";
+import _poolBogSerpent from "../pool/bog-serpent.js";
 import _poolBogbrewWitch from "../pool/bogbrew-witch.js";
 import _poolBondedConstruct from "../pool/bonded-construct.js";
 import _poolBonecrusherGiant from "../pool/bonecrusher-giant.js";
@@ -138,6 +139,7 @@ import _poolCataclysm from "../pool/cataclysm.js";
 import _poolCaveOfTemptation from "../pool/cave-of-temptation.js";
 import _poolCelestialKirin from "../pool/celestial-kirin.js";
 import _poolCephalidShrine from "../pool/cephalid-shrine.js";
+import _poolChainedThroatseeker from "../pool/chained-throatseeker.js";
 import _poolChiefWargsCompany from "../pool/chief-wargs-company.js";
 import _poolChildOfGaea from "../pool/child-of-gaea.js";
 import _poolChildOfThorns from "../pool/child-of-thorns.js";
@@ -273,6 +275,7 @@ import _poolFlayerDrone from "../pool/flayer-drone.js";
 import _poolFloodpitsDrowner from "../pool/floodpits-drowner.js";
 import _poolFlowState from "../pool/flow-state.js";
 import _poolFlowstoneThopter from "../pool/flowstone-thopter.js";
+import _poolFluxcharger from "../pool/fluxcharger.js";
 import _poolFootHeadquarters from "../pool/foot-headquarters.js";
 import _poolForest from "../pool/forest.js";
 import _poolFormationBreaker from "../pool/formation-breaker.js";
@@ -477,6 +480,7 @@ import _poolMesaCavalier from "../pool/mesa-cavalier.js";
 import _poolMidnightGuard from "../pool/midnight-guard.js";
 import _poolMinasTirithGarrison from "../pool/minas-tirith-garrison.js";
 import _poolMindShatter from "../pool/mind-shatter.js";
+import _poolMindmelter from "../pool/mindmelter.js";
 import _poolMindwhisker from "../pool/mindwhisker.js";
 import _poolMinionsMurmurs from "../pool/minions-murmurs.js";
 import _poolMireBlight from "../pool/mire-blight.js";
@@ -499,6 +503,7 @@ import _poolMortivore from "../pool/mortivore.js";
 import _poolMountainTitan from "../pool/mountain-titan.js";
 import _poolMourning from "../pool/mourning.js";
 import _poolMultaniMaroSorcerer from "../pool/multani-maro-sorcerer.js";
+import _poolMultipleChoice from "../pool/multiple-choice.js";
 import _poolMurasaPyromancer from "../pool/murasa-pyromancer.js";
 import _poolNaliaDearnise from "../pool/nalia-dearnise.js";
 import _poolNaturesLore from "../pool/natures-lore.js";
@@ -1014,6 +1019,7 @@ const shard: CardShard = {
     _poolBlowflyInfestation,
     _poolBoarUmbra,
     _poolBogHoodlums,
+    _poolBogSerpent,
     _poolBogbrewWitch,
     _poolBondedConstruct,
     _poolBonecrusherGiant,
@@ -1061,6 +1067,7 @@ const shard: CardShard = {
     _poolCaveOfTemptation,
     _poolCelestialKirin,
     _poolCephalidShrine,
+    _poolChainedThroatseeker,
     _poolChiefWargsCompany,
     _poolChildOfGaea,
     _poolChildOfThorns,
@@ -1196,6 +1203,7 @@ const shard: CardShard = {
     _poolFloodpitsDrowner,
     _poolFlowState,
     _poolFlowstoneThopter,
+    _poolFluxcharger,
     _poolFootHeadquarters,
     _poolForest,
     _poolFormationBreaker,
@@ -1400,6 +1408,7 @@ const shard: CardShard = {
     _poolMidnightGuard,
     _poolMinasTirithGarrison,
     _poolMindShatter,
+    _poolMindmelter,
     _poolMindwhisker,
     _poolMinionsMurmurs,
     _poolMireBlight,
@@ -1422,6 +1431,7 @@ const shard: CardShard = {
     _poolMountainTitan,
     _poolMourning,
     _poolMultaniMaroSorcerer,
+    _poolMultipleChoice,
     _poolMurasaPyromancer,
     _poolNaliaDearnise,
     _poolNaturesLore,

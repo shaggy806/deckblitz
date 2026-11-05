@@ -239,6 +239,7 @@ import _poolEreborFlamesmith from "../pool/erebor-flamesmith.js";
 import _poolEriettesLullaby from "../pool/eriettes-lullaby.js";
 import _poolErosion from "../pool/erosion.js";
 import _poolErraticApparition from "../pool/erratic-apparition.js";
+import _poolErtaiResurrected from "../pool/ertai-resurrected.js";
 import _poolEsperzoa from "../pool/esperzoa.js";
 import _poolEssenceAnchor from "../pool/essence-anchor.js";
 import _poolEssenceBurn from "../pool/essence-burn.js";
@@ -355,6 +356,7 @@ import _poolHammerhand from "../pool/hammerhand.js";
 import _poolHardenedScaleArmor from "../pool/hardened-scale-armor.js";
 import _poolHarriedSpearguard from "../pool/harried-spearguard.js";
 import _poolHarvesterOfSouls from "../pool/harvester-of-souls.js";
+import _poolHauntingApparition from "../pool/haunting-apparition.js";
 import _poolHavenOfTheHarvest from "../pool/haven-of-the-harvest.js";
 import _poolHavoc from "../pool/havoc.js";
 import _poolHazoretsUndyingFury from "../pool/hazorets-undying-fury.js";
@@ -399,6 +401,7 @@ import _poolInsidiousDreams from "../pool/insidious-dreams.js";
 import _poolInspiringCall from "../pool/inspiring-call.js";
 import _poolIntetTheDreamer from "../pool/intet-the-dreamer.js";
 import _poolIntimidation from "../pool/intimidation.js";
+import _poolIntroductionToAnnihilation from "../pool/introduction-to-annihilation.js";
 import _poolInvasionOfVryn from "../pool/invasion-of-vryn.js";
 import _poolIroassBlessing from "../pool/iroass-blessing.js";
 import _poolIrohGrandLotus from "../pool/iroh-grand-lotus.js";
@@ -577,6 +580,7 @@ import _poolPatchUp from "../pool/patch-up.js";
 import _poolPeek from "../pool/peek.js";
 import _poolPeregrination from "../pool/peregrination.js";
 import _poolPestilentSpirit from "../pool/pestilent-spirit.js";
+import _poolPhantasmalFiend from "../pool/phantasmal-fiend.js";
 import _poolPhantasmalShieldback from "../pool/phantasmal-shieldback.js";
 import _poolPhyrexianTribute from "../pool/phyrexian-tribute.js";
 import _poolPiaDeterminedRebuilder from "../pool/pia-determined-rebuilder.js";
@@ -772,6 +776,7 @@ import _poolTajicBladeOfTheLegion from "../pool/tajic-blade-of-the-legion.js";
 import _poolTajuruStalwart from "../pool/tajuru-stalwart.js";
 import _poolTalonSliver from "../pool/talon-sliver.js";
 import _poolTangleMantis from "../pool/tangle-mantis.js";
+import _poolTataruTaru from "../pool/tataru-taru.js";
 import _poolTectonicFiend from "../pool/tectonic-fiend.js";
 import _poolTeferiTemporalArchmage from "../pool/teferi-temporal-archmage.js";
 import _poolTeferisAgelessInsight from "../pool/teferis-ageless-insight.js";
@@ -806,6 +811,7 @@ import _poolToilTrouble from "../pool/toil-trouble.js";
 import _poolTopazDragon from "../pool/topaz-dragon.js";
 import _poolTophTheFirstMetalbender from "../pool/toph-the-first-metalbender.js";
 import _poolTormentedPariah from "../pool/tormented-pariah.js";
+import _poolTorrentOfSouls from "../pool/torrent-of-souls.js";
 import _poolTourachDreadCantor from "../pool/tourach-dread-cantor.js";
 import _poolTowerGargoyle from "../pool/tower-gargoyle.js";
 import _poolTowerOfEons from "../pool/tower-of-eons.js";
@@ -1161,6 +1167,7 @@ const shard: CardShard = {
     _poolEriettesLullaby,
     _poolErosion,
     _poolErraticApparition,
+    _poolErtaiResurrected,
     _poolEsperzoa,
     _poolEssenceAnchor,
     _poolEssenceBurn,
@@ -1277,6 +1284,7 @@ const shard: CardShard = {
     _poolHardenedScaleArmor,
     _poolHarriedSpearguard,
     _poolHarvesterOfSouls,
+    _poolHauntingApparition,
     _poolHavenOfTheHarvest,
     _poolHavoc,
     _poolHazoretsUndyingFury,
@@ -1321,6 +1329,7 @@ const shard: CardShard = {
     _poolInspiringCall,
     _poolIntetTheDreamer,
     _poolIntimidation,
+    _poolIntroductionToAnnihilation,
     _poolInvasionOfVryn,
     _poolIroassBlessing,
     _poolIrohGrandLotus,
@@ -1499,6 +1508,7 @@ const shard: CardShard = {
     _poolPeek,
     _poolPeregrination,
     _poolPestilentSpirit,
+    _poolPhantasmalFiend,
     _poolPhantasmalShieldback,
     _poolPhyrexianTribute,
     _poolPiaDeterminedRebuilder,
@@ -1694,6 +1704,7 @@ const shard: CardShard = {
     _poolTajuruStalwart,
     _poolTalonSliver,
     _poolTangleMantis,
+    _poolTataruTaru,
     _poolTectonicFiend,
     _poolTeferiTemporalArchmage,
     _poolTeferisAgelessInsight,
@@ -1728,6 +1739,7 @@ const shard: CardShard = {
     _poolTopazDragon,
     _poolTophTheFirstMetalbender,
     _poolTormentedPariah,
+    _poolTorrentOfSouls,
     _poolTourachDreadCantor,
     _poolTowerGargoyle,
     _poolTowerOfEons,

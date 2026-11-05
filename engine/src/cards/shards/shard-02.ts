@@ -120,6 +120,7 @@ import _poolChangelingOutcast from "../pool/changeling-outcast.js";
 import _poolCharitableLevy from "../pool/charitable-levy.js";
 import _poolCharmPeddler from "../pool/charm-peddler.js";
 import _poolCharmedGriffin from "../pool/charmed-griffin.js";
+import _poolChimneyImp from "../pool/chimney-imp.js";
 import _poolCinderPyromancer from "../pool/cinder-pyromancer.js";
 import _poolCinderStrike from "../pool/cinder-strike.js";
 import _poolCircleOfProtectionArtifacts from "../pool/circle-of-protection-artifacts.js";
@@ -687,6 +688,7 @@ import _poolSilkWebWeaver from "../pool/silk-web-weaver.js";
 import _poolSilumgarMonument from "../pool/silumgar-monument.js";
 import _poolSilverflameSquire from "../pool/silverflame-squire.js";
 import _poolSimianSimulacrum from "../pool/simian-simulacrum.js";
+import _poolSinCollector from "../pool/sin-collector.js";
 import _poolSinisterStarfish from "../pool/sinister-starfish.js";
 import _poolSirenOfTheSilentSong from "../pool/siren-of-the-silent-song.js";
 import _poolSkeletalSnake from "../pool/skeletal-snake.js";
@@ -1021,6 +1023,7 @@ const shard: CardShard = {
     _poolCharitableLevy,
     _poolCharmPeddler,
     _poolCharmedGriffin,
+    _poolChimneyImp,
     _poolCinderPyromancer,
     _poolCinderStrike,
     _poolCircleOfProtectionArtifacts,
@@ -1588,6 +1591,7 @@ const shard: CardShard = {
     _poolSilumgarMonument,
     _poolSilverflameSquire,
     _poolSimianSimulacrum,
+    _poolSinCollector,
     _poolSinisterStarfish,
     _poolSirenOfTheSilentSong,
     _poolSkeletalSnake,

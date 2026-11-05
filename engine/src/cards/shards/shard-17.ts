@@ -492,6 +492,7 @@ import _poolMephidrossVampire from "../pool/mephidross-vampire.js";
 import _poolMephiticOoze from "../pool/mephitic-ooze.js";
 import _poolMerfolkBranchwalker from "../pool/merfolk-branchwalker.js";
 import _poolMerfolkRaiders from "../pool/merfolk-raiders.js";
+import _poolMerfolkThaumaturgist from "../pool/merfolk-thaumaturgist.js";
 import _poolMeriasOutrider from "../pool/merias-outrider.js";
 import _poolMessengerHawk from "../pool/messenger-hawk.js";
 import _poolMiasmicMummy from "../pool/miasmic-mummy.js";
@@ -535,6 +536,7 @@ import _poolNightOfTheSweetsRevenge from "../pool/night-of-the-sweets-revenge.js
 import _poolNightbirdsClutches from "../pool/nightbirds-clutches.js";
 import _poolNimanaSellSword from "../pool/nimana-sell-sword.js";
 import _poolNimanaSkydancer from "../pool/nimana-skydancer.js";
+import _poolNimbleLarcenist from "../pool/nimble-larcenist.js";
 import _poolNissaGenesisMage from "../pool/nissa-genesis-mage.js";
 import _poolNissaWorldsoulSpeaker from "../pool/nissa-worldsoul-speaker.js";
 import _poolNornsInquisitor from "../pool/norns-inquisitor.js";
@@ -569,6 +571,7 @@ import _poolOvergrownZealot from "../pool/overgrown-zealot.js";
 import _poolOverrule from "../pool/overrule.js";
 import _poolPaladinOfPredation from "../pool/paladin-of-predation.js";
 import _poolPalianoTheHighCity from "../pool/paliano-the-high-city.js";
+import _poolParallaxNexus from "../pool/parallax-nexus.js";
 import _poolPassagewaySeer from "../pool/passageway-seer.js";
 import _poolPathOfTheEnigma from "../pool/path-of-the-enigma.js";
 import _poolPatrolHound from "../pool/patrol-hound.js";
@@ -627,6 +630,7 @@ import _poolReaperFromTheAbyss from "../pool/reaper-from-the-abyss.js";
 import _poolReasonBelieve from "../pool/reason-believe.js";
 import _poolRecruiterOfTheGuard from "../pool/recruiter-of-the-guard.js";
 import _poolRecuperate from "../pool/recuperate.js";
+import _poolRedDeathShipwrecker from "../pool/red-death-shipwrecker.js";
 import _poolRedGuardianSuperSoldier from "../pool/red-guardian-super-soldier.js";
 import _poolRedMagesRapier from "../pool/red-mages-rapier.js";
 import _poolRedirect from "../pool/redirect.js";
@@ -1419,6 +1423,7 @@ const shard: CardShard = {
     _poolMephiticOoze,
     _poolMerfolkBranchwalker,
     _poolMerfolkRaiders,
+    _poolMerfolkThaumaturgist,
     _poolMeriasOutrider,
     _poolMessengerHawk,
     _poolMiasmicMummy,
@@ -1462,6 +1467,7 @@ const shard: CardShard = {
     _poolNightbirdsClutches,
     _poolNimanaSellSword,
     _poolNimanaSkydancer,
+    _poolNimbleLarcenist,
     _poolNissaGenesisMage,
     _poolNissaWorldsoulSpeaker,
     _poolNornsInquisitor,
@@ -1496,6 +1502,7 @@ const shard: CardShard = {
     _poolOverrule,
     _poolPaladinOfPredation,
     _poolPalianoTheHighCity,
+    _poolParallaxNexus,
     _poolPassagewaySeer,
     _poolPathOfTheEnigma,
     _poolPatrolHound,
@@ -1554,6 +1561,7 @@ const shard: CardShard = {
     _poolReasonBelieve,
     _poolRecruiterOfTheGuard,
     _poolRecuperate,
+    _poolRedDeathShipwrecker,
     _poolRedGuardianSuperSoldier,
     _poolRedMagesRapier,
     _poolRedirect,

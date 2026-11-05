@@ -62,6 +62,7 @@ import _poolAzraSmokeshaper from "../pool/azra-smokeshaper.js";
 import _poolAzureBeastbinder from "../pool/azure-beastbinder.js";
 import _poolBalanWanderingKnight from "../pool/balan-wandering-knight.js";
 import _poolBalduvianWarMakers from "../pool/balduvian-war-makers.js";
+import _poolBalefulMastery from "../pool/baleful-mastery.js";
 import _poolBallroom from "../pool/ballroom.js";
 import _poolBalshanBeguiler from "../pool/balshan-beguiler.js";
 import _poolBanshee from "../pool/banshee.js";
@@ -112,6 +113,7 @@ import _poolBroodMonitor from "../pool/brood-monitor.js";
 import _poolBrotherhoodAmbushers from "../pool/brotherhood-ambushers.js";
 import _poolBulwark from "../pool/bulwark.js";
 import _poolBurnFromWithin from "../pool/burn-from-within.js";
+import _poolCalciteSnapper from "../pool/calcite-snapper.js";
 import _poolCallOfTheFullMoon from "../pool/call-of-the-full-moon.js";
 import _poolCallOfTheWild from "../pool/call-of-the-wild.js";
 import _poolCallousDismissal from "../pool/callous-dismissal.js";
@@ -174,6 +176,7 @@ import _poolCrackOpen from "../pool/crack-open.js";
 import _poolCrestingMosasaurus from "../pool/cresting-mosasaurus.js";
 import _poolCriminalEnterprise from "../pool/criminal-enterprise.js";
 import _poolCrimsonFleetCommodore from "../pool/crimson-fleet-commodore.js";
+import _poolCrookclawTransmuter from "../pool/crookclaw-transmuter.js";
 import _poolCruelAdministrator from "../pool/cruel-administrator.js";
 import _poolCrumble from "../pool/crumble.js";
 import _poolCryptek from "../pool/cryptek.js";
@@ -433,6 +436,7 @@ import _poolInterfaceAce from "../pool/interface-ace.js";
 import _poolIntoTheMawOfHell from "../pool/into-the-maw-of-hell.js";
 import _poolIntruderAlarm from "../pool/intruder-alarm.js";
 import _poolInvaderParasite from "../pool/invader-parasite.js";
+import _poolInvertInvent from "../pool/invert-invent.js";
 import _poolIonasBlessing from "../pool/ionas-blessing.js";
 import _poolIronBully from "../pool/iron-bully.js";
 import _poolIronCrawCrusher from "../pool/iron-craw-crusher.js";
@@ -643,6 +647,7 @@ import _poolPriestsOfNorn from "../pool/priests-of-norn.js";
 import _poolPrimalVigor from "../pool/primal-vigor.js";
 import _poolPrisonSentence from "../pool/prison-sentence.js";
 import _poolPromiseOfAclazotz from "../pool/promise-of-aclazotz.js";
+import _poolProphesiedEnd from "../pool/prophesied-end.js";
 import _poolPsychicBarrier from "../pool/psychic-barrier.js";
 import _poolPsychomancer from "../pool/psychomancer.js";
 import _poolPunishTheEnemy from "../pool/punish-the-enemy.js";
@@ -780,6 +785,7 @@ import _poolSpreadingInsurrection from "../pool/spreading-insurrection.js";
 import _poolSpriteDragon from "../pool/sprite-dragon.js";
 import _poolSpyNetwork from "../pool/spy-network.js";
 import _poolSquallmonger from "../pool/squallmonger.js";
+import _poolStadiumVendors from "../pool/stadium-vendors.js";
 import _poolStalwartAven from "../pool/stalwart-aven.js";
 import _poolStandstill from "../pool/standstill.js";
 import _poolStart from "../pool/start.js";
@@ -1038,6 +1044,7 @@ const shard: CardShard = {
     _poolAzureBeastbinder,
     _poolBalanWanderingKnight,
     _poolBalduvianWarMakers,
+    _poolBalefulMastery,
     _poolBallroom,
     _poolBalshanBeguiler,
     _poolBanshee,
@@ -1088,6 +1095,7 @@ const shard: CardShard = {
     _poolBrotherhoodAmbushers,
     _poolBulwark,
     _poolBurnFromWithin,
+    _poolCalciteSnapper,
     _poolCallOfTheFullMoon,
     _poolCallOfTheWild,
     _poolCallousDismissal,
@@ -1150,6 +1158,7 @@ const shard: CardShard = {
     _poolCrestingMosasaurus,
     _poolCriminalEnterprise,
     _poolCrimsonFleetCommodore,
+    _poolCrookclawTransmuter,
     _poolCruelAdministrator,
     _poolCrumble,
     _poolCryptek,
@@ -1409,6 +1418,7 @@ const shard: CardShard = {
     _poolIntoTheMawOfHell,
     _poolIntruderAlarm,
     _poolInvaderParasite,
+    _poolInvertInvent,
     _poolIonasBlessing,
     _poolIronBully,
     _poolIronCrawCrusher,
@@ -1619,6 +1629,7 @@ const shard: CardShard = {
     _poolPrimalVigor,
     _poolPrisonSentence,
     _poolPromiseOfAclazotz,
+    _poolProphesiedEnd,
     _poolPsychicBarrier,
     _poolPsychomancer,
     _poolPunishTheEnemy,
@@ -1756,6 +1767,7 @@ const shard: CardShard = {
     _poolSpriteDragon,
     _poolSpyNetwork,
     _poolSquallmonger,
+    _poolStadiumVendors,
     _poolStalwartAven,
     _poolStandstill,
     _poolStart,

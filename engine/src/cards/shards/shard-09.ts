@@ -221,6 +221,7 @@ import _poolEmergeUnscathed from "../pool/emerge-unscathed.js";
 import _poolEmmaraSoulOfTheAccord from "../pool/emmara-soul-of-the-accord.js";
 import _poolEntropicDecay from "../pool/entropic-decay.js";
 import _poolEpharasRadiance from "../pool/epharas-radiance.js";
+import _poolEpiphanyAtTheDrownyard from "../pool/epiphany-at-the-drownyard.js";
 import _poolEronTheRelentless from "../pool/eron-the-relentless.js";
 import _poolErrantStreetArtist from "../pool/errant-street-artist.js";
 import _poolErstwhileTrooper from "../pool/erstwhile-trooper.js";
@@ -342,6 +343,7 @@ import _poolGroupProject from "../pool/group-project.js";
 import _poolGroveOfTheGuardian from "../pool/grove-of-the-guardian.js";
 import _poolGuardianGladewalker from "../pool/guardian-gladewalker.js";
 import _poolGuardiansOfKoilos from "../pool/guardians-of-koilos.js";
+import _poolGwafaHazidProfiteer from "../pool/gwafa-hazid-profiteer.js";
 import _poolHammerheimDeadeye from "../pool/hammerheim-deadeye.js";
 import _poolHamperingSnare from "../pool/hampering-snare.js";
 import _poolHappyHoganBodyguard from "../pool/happy-hogan-bodyguard.js";
@@ -392,6 +394,7 @@ import _poolInfernalPlunge from "../pool/infernal-plunge.js";
 import _poolInkTreaderNephilim from "../pool/ink-treader-nephilim.js";
 import _poolInkfathomWitch from "../pool/inkfathom-witch.js";
 import _poolInsatiableSouleater from "../pool/insatiable-souleater.js";
+import _poolInsideOut from "../pool/inside-out.js";
 import _poolInspiredSkypainter from "../pool/inspired-skypainter.js";
 import _poolInvasionOfDominaria from "../pool/invasion-of-dominaria.js";
 import _poolInvasionOfUlgrotha from "../pool/invasion-of-ulgrotha.js";
@@ -1173,6 +1176,7 @@ const shard: CardShard = {
     _poolEmmaraSoulOfTheAccord,
     _poolEntropicDecay,
     _poolEpharasRadiance,
+    _poolEpiphanyAtTheDrownyard,
     _poolEronTheRelentless,
     _poolErrantStreetArtist,
     _poolErstwhileTrooper,
@@ -1294,6 +1298,7 @@ const shard: CardShard = {
     _poolGroveOfTheGuardian,
     _poolGuardianGladewalker,
     _poolGuardiansOfKoilos,
+    _poolGwafaHazidProfiteer,
     _poolHammerheimDeadeye,
     _poolHamperingSnare,
     _poolHappyHoganBodyguard,
@@ -1344,6 +1349,7 @@ const shard: CardShard = {
     _poolInkTreaderNephilim,
     _poolInkfathomWitch,
     _poolInsatiableSouleater,
+    _poolInsideOut,
     _poolInspiredSkypainter,
     _poolInvasionOfDominaria,
     _poolInvasionOfUlgrotha,
