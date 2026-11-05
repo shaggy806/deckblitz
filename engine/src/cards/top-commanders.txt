@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-465 already implemented / 35 missing
+467 already implemented / 33 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -97,7 +97,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   91  Eriette of the Charmed Apple                   19038 decks  {1}{W}{B}        Legendary Creature — Human Warlock
 [x]   92  Henzie "Toolbox" Torre                         18773 decks  {B}{R}{G}        Legendary Creature — Devil Rogue
 [x]   93  Ragost, Deft Gastronaut                        18756 decks  {R}{W}           Legendary Creature — Lobster Citizen
-[ ]   94  Vial Smasher the Fierce                        18699 decks  {1}{B}{R}        Legendary Creature — Goblin Berserker
+[x]   94  Vial Smasher the Fierce                        18699 decks  {1}{B}{R}        Legendary Creature — Goblin Berserker
 [x]   95  Omnath, Locus of Creation                      18632 decks  {R}{G}{W}{U}     Legendary Creature — Elemental
 [x]   96  Norman Osborn                                  18576 decks  {1}{U}           Legendary Creature — Human Scientist Villain // Legendary Creature — Goblin Human Villain
 [x]   97  Captain N'ghathrod                             18527 decks  {3}{U}{B}        Legendary Creature — Horror Pirate
@@ -348,7 +348,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  342  Talion, the Kindly Lord                         8105 decks  {2}{U}{B}        Legendary Creature — Faerie Noble
 [x]  343  Maelstrom Wanderer                              8102 decks  {5}{G}{U}{R}     Legendary Creature — Elemental
 [x]  344  Sen Triplets                                    8043 decks  {2}{W}{U}{B}     Legendary Artifact Creature — Human Wizard
-[ ]  345  Xavier Sal, Infested Captain                    8040 decks  {B}{G}{U}        Legendary Creature — Human Fungus Pirate
+[x]  345  Xavier Sal, Infested Captain                    8040 decks  {B}{G}{U}        Legendary Creature — Human Fungus Pirate
 [x]  346  Elesh Norn, Mother of Machines                  8031 decks  {4}{W}           Legendary Creature — Phyrexian Praetor
 [x]  347  Tuvasa the Sunlit                               8030 decks  {G}{W}{U}        Legendary Creature — Merfolk Shaman
 [x]  348  Grist, the Hunger Tide                          8023 decks  {1}{B}{G}        Legendary Planeswalker — Grist

@@ -217,8 +217,10 @@ describe("slot polarity", () => {
       slotStrengths(effect, specs.length).forEach((strength, slot) => {
         slots += 1;
         const spec = specs[slot];
-        // `gatedOpponents`: the spec picked the side.
-        const gated = typeof spec === "object" && spec.kind === "opponent-compared";
+        // `gatedOpponents`, or only opponents to name: the spec picked the side.
+        const gated =
+          spec === "opponent" ||
+          (typeof spec === "object" && (spec.kind === "opponent-compared" || (spec.kind === "any-number" && spec.of === "opponent")));
         if (strength === null && !gated && !(firstIsRated && slot === 0)) unrated.push(name);
       });
     };
@@ -231,8 +233,8 @@ describe("slot polarity", () => {
       for (const ability of def.triggered) read(def.name, ability.effect, ability.targets);
     }
     expect(slots).toBeGreaterThan(1500);
-    // 0.75% on 2026-11-02: 91 of 12,164.
-    expect(unrated.length / slots, unrated.slice(0, 40).join("; ")).toBeLessThan(0.0076);
+    // 0.59% on 2026-11-04: 76 of 12,862, with the slots whose spec picked the side left out.
+    expect(unrated.length / slots, unrated.slice(0, 40).join("; ")).toBeLessThan(0.006);
   });
 
   it("rates every member of a for-each-target, not just the slot it binds", () => {
