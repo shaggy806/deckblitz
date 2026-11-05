@@ -137,6 +137,16 @@ export function loadVocabulary() {
 function builtDates(built) {
   const dates = new Map();
   try {
+    // A shallow clone (a cloud session's) dates every key and record inside its
+    // last few commits, so `--stale` reads as empty with nothing to say why.
+    const shallow = execFileSync("git", ["rev-parse", "--is-shallow-repository"], { cwd: ENGINE, encoding: "utf8" });
+    if (shallow.trim() === "true") {
+      console.error("warning: a shallow clone — build and triage dates are wrong, so --stale is too. Run `git fetch --unshallow origin main` first.");
+    }
+  } catch {
+    // No git: handled below.
+  }
+  try {
     const out = execFileSync(
       "git",
       ["log", "-p", "--reverse", "-U0", "--format=DATE %cs", "--", "src/cards/top-commanders-gaps.json"],

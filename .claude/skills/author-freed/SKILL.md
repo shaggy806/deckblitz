@@ -36,7 +36,10 @@ landed on `main` before the next starts), and one batch a session.
 - **Unmerged work first**: the SessionStart hook prints
   `scripts/unmerged-branches.mjs`. Merge any branch it lists, or ask
   whether it's abandoned. `git fetch origin main && git status -sb`: be
-  level with `origin/main`.
+  level with `origin/main`. **A cloud session's clone is shallow** (50
+  commits): `git fetch --unshallow origin main` first, or `cards:needs
+  --stale` dates every key inside that window and lists nothing (B260; it
+  now warns).
 - `BACKLOG.md`'s "Next: work down the need keys" block: how far the queue has
   got, and its lines "Narrow keys `author-freed` should give", leads for cards
   already known to need more than their built key. Check a lead, then use it.
