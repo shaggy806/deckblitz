@@ -31041,6 +31041,15 @@ export class Game {
    * (`order-triggers`), that the decision was raised. */
   private placePendingTriggers(): boolean {
     if (this.state.pendingTriggers.length === 0) return false;
+    // A player who has left the game controls nothing (rule 800.4a): what
+    // triggered for them in the same event they left in — a creature dying
+    // by the same state-based actions that make them lose, replaced by their
+    // Valentin, Dean of the Vein, whose "when you do" is theirs — ceases to
+    // exist. `leaveGame` drops what was already waiting; this, what came after.
+    this.state.pendingTriggers = this.state.pendingTriggers.filter(
+      (t) => this.state.players[t.controller]?.hasLost !== true,
+    );
+    if (this.state.pendingTriggers.length === 0) return false;
     if (this.askMiracleReveal()) return true;
     if (this.state.pendingTriggers.length === 0) return false;
     const pending = this.state.pendingTriggers;
