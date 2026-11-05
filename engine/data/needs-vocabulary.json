@@ -14790,6 +14790,11 @@
    "description": "A kicker's additional discard of a filtered card: KickerAlsoCost.discard is a count.",
    "example": "Dralnu's Pet: KickerAlsoCost.discard is only a count, so \"Discard a creature card\" can't be said."
   },
+  "filter:same-name-as-source-last-known": {
+   "family": "condition:filter-same-name-as-source",
+   "description": "sameNameAsSource reading the source as it last existed once it has left (rules 113.7a, 608.2h): it reads the live object, so a copy killed in response no longer has the name.",
+   "example": "Callidus Assassin: killed in response, its target goes illegal and survives"
+  },
   "decision:choose-two-players-on-enter": {
    "family": "decision:choose-player",
    "description": "Two different players chosen as it enters: choosePlayerOnEnter keeps one, and nothing reads \"the other chosen player\".",

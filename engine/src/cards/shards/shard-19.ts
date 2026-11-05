@@ -283,7 +283,6 @@ import _poolEternalOfHarshTruths from "../pool/eternal-of-harsh-truths.js";
 import _poolEusocialEngineering from "../pool/eusocial-engineering.js";
 import _poolEutropiaTheTwiceFavored from "../pool/eutropia-the-twice-favored.js";
 import _poolEvangelOfHeliod from "../pool/evangel-of-heliod.js";
-import _poolEvilTwin from "../pool/evil-twin.js";
 import _poolExemplarOfStrength from "../pool/exemplar-of-strength.js";
 import _poolExperimentTwelve from "../pool/experiment-twelve.js";
 import _poolExploreTheVastlands from "../pool/explore-the-vastlands.js";
@@ -1278,7 +1277,6 @@ const shard: CardShard = {
     _poolEusocialEngineering,
     _poolEutropiaTheTwiceFavored,
     _poolEvangelOfHeliod,
-    _poolEvilTwin,
     _poolExemplarOfStrength,
     _poolExperimentTwelve,
     _poolExploreTheVastlands,

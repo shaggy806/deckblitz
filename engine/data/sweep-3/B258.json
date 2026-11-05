@@ -116,13 +116,6 @@
    "tested": true
   },
   {
-   "name": "Callidus Assassin",
-   "files": [
-    "engine/src/cards/pool/callidus-assassin.ts"
-   ],
-   "tested": true
-  },
-  {
    "name": "Candlekeep Inspiration",
    "files": [
     "engine/src/cards/pool/candlekeep-inspiration.ts"
@@ -277,13 +270,6 @@
     "engine/src/cards/pool/essence-reliquary.ts"
    ],
    "tested": false
-  },
-  {
-   "name": "Evil Twin",
-   "files": [
-    "engine/src/cards/pool/evil-twin.ts"
-   ],
-   "tested": true
   },
   {
    "name": "Fae of Wishes // Granted",
@@ -981,6 +967,13 @@
    "why": "The rulings need the crewer as it was when tapped, and crewedSource reads the creature now."
   },
   {
+   "name": "Callidus Assassin",
+   "needs": [
+    "filter:same-name-as-source-last-known"
+   ],
+   "why": "Killed in response, its trigger's \"same name as this\" reads the source live, so the target goes illegal and survives, against rules 113.7a and 608.2h."
+  },
+  {
    "name": "Colfenor's Plans",
    "needs": [
     "effect:exile-face-down-lookers-follow-source-controller"
@@ -1000,6 +993,13 @@
     "cost:kicker-discard-filtered"
    ],
    "why": "KickerAlsoCost.discard is only a count, so \"Discard a creature card\" can't be said."
+  },
+  {
+   "name": "Evil Twin",
+   "needs": [
+    "filter:same-name-as-source-last-known"
+   ],
+   "why": "Killed in response, its ability's \"same name as this\" reads the source live, so the target goes illegal and survives, against rules 113.7a and 608.2h."
   },
   {
    "name": "Extrapolate the Impossible",

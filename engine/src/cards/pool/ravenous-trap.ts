@@ -13,7 +13,8 @@ export default defineCard({
     condition: {
       kind: "of-player",
       player: "an-opponent",
-      condition: { kind: "turn-history", what: "to-graveyard", atLeast: 3 },
+      // A token isn't a card (rule 111.1).
+      condition: { kind: "turn-history", what: "to-graveyard", atLeast: 3, filter: { token: false } },
     },
   },
   targets: ["player"],

@@ -3520,7 +3520,6 @@ import _poolCallerOfGales from "./pool/caller-of-gales.js";
 import _poolCallerOfTheClaw from "./pool/caller-of-the-claw.js";
 import _poolCallerOfThePack from "./pool/caller-of-the-pack.js";
 import _poolCallerOfTheUntamed from "./pool/caller-of-the-untamed.js";
-import _poolCallidusAssassin from "./pool/callidus-assassin.js";
 import _poolCallousBloodmage from "./pool/callous-bloodmage.js";
 import _poolCallousDeceiver from "./pool/callous-deceiver.js";
 import _poolCallousDismissal from "./pool/callous-dismissal.js";
@@ -7975,7 +7974,6 @@ import _poolEvilEyeOfOrmsByGore from "./pool/evil-eye-of-orms-by-gore.js";
 import _poolEvilEyeOfUrborg from "./pool/evil-eye-of-urborg.js";
 import _poolEvilPresence from "./pool/evil-presence.js";
 import _poolEvilReawakened from "./pool/evil-reawakened.js";
-import _poolEvilTwin from "./pool/evil-twin.js";
 import _poolEvincarsJustice from "./pool/evincars-justice.js";
 import _poolEviscerate from "./pool/eviscerate.js";
 import _poolEviscerator from "./pool/eviscerator.js";
@@ -33668,7 +33666,6 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCallerOfTheClaw,
   _poolCallerOfThePack,
   _poolCallerOfTheUntamed,
-  _poolCallidusAssassin,
   _poolCallousBloodmage,
   _poolCallousDeceiver,
   _poolCallousDismissal,
@@ -38123,7 +38120,6 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEvilEyeOfUrborg,
   _poolEvilPresence,
   _poolEvilReawakened,
-  _poolEvilTwin,
   _poolEvincarsJustice,
   _poolEviscerate,
   _poolEviscerator,
@@ -63829,7 +63825,6 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/caller-of-the-claw": _poolCallerOfTheClaw,
   "pool/caller-of-the-pack": _poolCallerOfThePack,
   "pool/caller-of-the-untamed": _poolCallerOfTheUntamed,
-  "pool/callidus-assassin": _poolCallidusAssassin,
   "pool/callous-bloodmage": _poolCallousBloodmage,
   "pool/callous-deceiver": _poolCallousDeceiver,
   "pool/callous-dismissal": _poolCallousDismissal,
@@ -68284,7 +68279,6 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/evil-eye-of-urborg": _poolEvilEyeOfUrborg,
   "pool/evil-presence": _poolEvilPresence,
   "pool/evil-reawakened": _poolEvilReawakened,
-  "pool/evil-twin": _poolEvilTwin,
   "pool/evincars-justice": _poolEvincarsJustice,
   "pool/eviscerate": _poolEviscerate,
   "pool/eviscerator": _poolEviscerator,
