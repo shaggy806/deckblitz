@@ -911,6 +911,7 @@ missing. Re-run `--greedy` for Phase 2's order.
   Traveling Chocobo, Urabrask, Sheoldred, Commandeer, Jace's Archivist, Halo Fountain, Mutavault, Defense Grid and Anticausal Vestige. **Then the order
   changed (the user's call, 2026-11-04): the freed cards are authored next, with `author-freed`, and building the remaining keys comes last.**
 - **2026-11-04: `author-freed`, batch 255.** 134 of the queue's oldest 150 authored, 16 given narrow keys; 1,611 left.
+- **2026-11-04: the scaffolder's sweep, batch 256.** `--auto-scan --all` over the whole snapshot, every finished card reviewed: 373 authored, 10 blocked, 19 over-counted keys marked built; 1,289 left on the queue.
 
 ## Rough size
 

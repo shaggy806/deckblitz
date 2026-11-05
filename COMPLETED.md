@@ -502,6 +502,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Batch 256, the scaffolder over the whole snapshot: 373 of 383 authored** (2026-11-04, `6e68c6096`, `b056d7d6a`) — every Commander-legal
+  card the parser reads whole, each reviewed against its Oracle text and rulings, among them Yawgmoth's Will, Gisela and Bruna, Terminus and
+  Time Reversal. Fixed with it: the scaffolder's emitter dropped 14 fields the parser had read (`exileOnResolve`, `castOnlyIf`, `moreCycling`, …).
+  19 need keys the review showed already run marked built. Detail in `docs/card-blockers.md`.
 - **Batch 255, the first of the freed cards: 134 of 150 authored** (2026-11-04, `7e508b2fc`, `77fcd18d7`) — the oldest of
   `cards:needs -- --stale`: switch-pt, piles, hand-exile, its-controller draws and discards, chosen-player and per-player counts,
   among them Wishclaw Talisman, Palantír of Orthanc, Stuffy Doll, The Black Gate and Tataru Taru. 43 as the scaffolder finished

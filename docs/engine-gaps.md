@@ -479,8 +479,9 @@ that needs it is authored.
   as it's activated, like any other's. `Game.activateAbility` checks a `cost.discard` can be paid
   but takes the discard only on the stack path (where `discardByEffect` asks); the
   `isManaAbility` branch resolves the mana and returns first, so the mana comes free. It refuses
-  a mana ability's graveyard-exile or multi-sacrifice cost outright, but not a discard. No pool
-  card has one; blocks Bog Witch (`cost:mana-ability-discard`). Found by an authoring agent,
+  a mana ability's graveyard-exile or multi-sacrifice cost outright, but not a discard. Overeager
+  Apprentice is in the pool and has one: checked 2026-11-04, it makes {B}{B}{B} and the hand stays
+  as it was. Blocks Bog Witch (`cost:mana-ability-discard`). Found by an authoring agent,
   2026-10-23 (B144).
 - **A token with devour never devours.** Rule 702.82a: devour is a replacement as the permanent
   enters. It's asked through `askEnterChoice`, which a spell resolving, a reanimation and a blink

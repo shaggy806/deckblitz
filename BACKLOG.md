@@ -497,7 +497,8 @@ section keeps only what to do next.
   Sheoldred, Commandeer, Jace's Archivist, Halo Fountain, Mutavault, Defense Grid, Anticausal Vestige. **Next: the freed cards, with `author-freed`, batch by batch
   from a fresh session; the remaining keys come after that queue is empty (the user's call, 2026-11-04).** Batches: B255 (2026-11-04: 134 of 150 authored, 16 still blocked,
   three on the new `effect:separate-exiled-cards-into-piles`, two on `effect:choose-from-revealed-hand-without-moving`, the rest one each; fixed piles naming "an opponent" too early).
-  `--stale` 1,611; top-5000 4452/5000, commanders 465/500.
+  B256 (2026-11-04, not `author-freed`: the scaffolder over the whole snapshot, every finished card reviewed: 373 of 383 authored, 10 still blocked, three on the new
+  `effect:text-change-token-colors`, two on the mana-ability discard cost, the rest one each; 19 need keys its review showed already run marked built). `--stale` 1,289.
   When key building resumes, the order is `--by-rank`, from Abundance, Temur Sabertooth, Inti, Skrelv's Hive, Tempt with Bunnies.
   Narrow keys `author-freed` should give, from that last run's reports: Liberated Livestock (Auras onto each token), Splintering Wind (its token's cumulative upkeep and
   leave trigger), Cait, Cage Brawler (two simultaneous discards; no scope names "you and defending player"), The Last Agni Kai ("until end of turn" mana keeping), Curse of
@@ -595,7 +596,7 @@ there and move this line to `COMPLETED.md`.
 - **A must-block creature's only companion can't legally join it** — `withinBlockCompany` (`combat/blocking.ts`) can answer with an illegal `[]`, as with an attacker that can't be blocked by more than one; a person would have no legal declaration.
 - **A target tax's offers are approximate in two corners** — `target-count.ts`'s sum over a `targeting` tax and a two-slot `targetCostReduction` beside a tax mis-offer, never mis-charge.
 - **An activation count restarts on a control change**: `activated-this-turn` keys on the object's timestamp, so Dragon Whelp taken mid-turn counts from zero; `timesEachTurn` doesn't (`docs/engine-gaps.md`).
-- **A text change misses a token's colours and a resolving spell's colour change**: a token made by changed text keeps its definition's colours (612.1, 612.4); `becomeColor` on a permanent spell is dropped as it resolves (400.7a); no all-objects text-change static (Swirl the Mists) (`docs/engine-gaps.md`).
+- **A text change misses a token's colours and a resolving spell's colour change**: a token made by changed text keeps its definition's colours (612.1, 612.4; Glamerdye, Trait Doctoring and Whim of Volrath wait on `effect:text-change-token-colors`, while Sleight of Mind and Crystal Spray are in the pool with it); `becomeColor` on a permanent spell is dropped as it resolves (400.7a); no all-objects text-change static (Swirl the Mists) (`docs/engine-gaps.md`).
 - **A spell's copy keeps none of its cost references**: rule 707.10 copies additional-cost decisions, but a copy of Fling, Volrath the Fallen or Induce Despair reads no sacrificed, discarded or revealed card (`docs/engine-gaps.md`).
 - **Buyback always beats an "exile it instead" replacement**: rule 616.1 gives the owner the choice; and no turn-long graveyard-to-exile `player-effect` — Yawgmoth's Will (`docs/engine-gaps.md`).
 - **A static can't require attacking one player**: `attack-requirement` is an effect's rule of the game; Public Enemy's "all creatures attack enchanted creature's controller each combat if able" needs a static form, Galactus a most-life opponent, Silver Surfer "until the end of your next turn".
@@ -649,7 +650,8 @@ there and move this line to `COMPLETED.md`.
 Latent: the engine departs from the rules here, but no pool card reaches it yet. Fix each
 when a card that needs it is authored.
 
-- **A mana ability's discard cost is never paid** (605.3b): the mana ability path returns before the discard — Bog Witch waits (`cost:mana-ability-discard`).
+- **A mana ability's discard cost is never paid** (605.3b): the mana ability path returns before the discard, so Overeager Apprentice, in the pool, is wrong today — Bog Witch waits (`cost:mana-ability-discard`).
+- **"A Zombie … dies" is read as a Zombie creature**: rule 700.4's "dies" takes any permanent, so a noncreature Kindred permanent with that subtype is missed. The parser and the 42 pool cards agree on `type: "creature"`, so a fix changes them together.
 - **A token with devour never devours** (702.82a): token creation never calls `askEnterChoice` — Dragon Broodmother waits (`mechanic:token-devour`).
 - **Convoke with a target-dependent cost.**
 - **A ceased token's last-known information lasts only the turn** (`ceasedTokens`).
