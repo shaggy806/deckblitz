@@ -331,6 +331,7 @@ import _poolGuiltfeeder from "../pool/guiltfeeder.js";
 import _poolGuiltyConscience from "../pool/guilty-conscience.js";
 import _poolGyrusWakerOfCorpses from "../pool/gyrus-waker-of-corpses.js";
 import _poolHaloHunter from "../pool/halo-hunter.js";
+import _poolHansEriksson from "../pool/hans-eriksson.js";
 import _poolHarvestGwyllion from "../pool/harvest-gwyllion.js";
 import _poolHarvestHand from "../pool/harvest-hand.js";
 import _poolHateWeaver from "../pool/hate-weaver.js";
@@ -1268,6 +1269,7 @@ const shard: CardShard = {
     _poolGuiltyConscience,
     _poolGyrusWakerOfCorpses,
     _poolHaloHunter,
+    _poolHansEriksson,
     _poolHarvestGwyllion,
     _poolHarvestHand,
     _poolHateWeaver,

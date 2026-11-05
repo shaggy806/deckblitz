@@ -202,6 +202,7 @@ import _poolDeflectingPalm from "../pool/deflecting-palm.js";
 import _poolDegaSanctuary from "../pool/dega-sanctuary.js";
 import _poolDehydration from "../pool/dehydration.js";
 import _poolDemotion from "../pool/demotion.js";
+import _poolDenizenOfTheDeep from "../pool/denizen-of-the-deep.js";
 import _poolDenziloreFatehold from "../pool/denzilore-fatehold.js";
 import _poolDeputyOfAcquittals from "../pool/deputy-of-acquittals.js";
 import _poolDesertCerodon from "../pool/desert-cerodon.js";
@@ -1205,6 +1206,7 @@ const shard: CardShard = {
     _poolDegaSanctuary,
     _poolDehydration,
     _poolDemotion,
+    _poolDenizenOfTheDeep,
     _poolDenziloreFatehold,
     _poolDeputyOfAcquittals,
     _poolDesertCerodon,

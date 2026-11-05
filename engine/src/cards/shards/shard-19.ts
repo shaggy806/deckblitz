@@ -108,6 +108,7 @@ import _poolBrigidsCommand from "../pool/brigids-command.js";
 import _poolBrigoneSoldierOfMeletis from "../pool/brigone-soldier-of-meletis.js";
 import _poolBrimstoneDragon from "../pool/brimstone-dragon.js";
 import _poolBroodmateDragon from "../pool/broodmate-dragon.js";
+import _poolBumiKingOfThreeTrials from "../pool/bumi-king-of-three-trials.js";
 import _poolBuoyancy from "../pool/buoyancy.js";
 import _poolBurningTreeShaman from "../pool/burning-tree-shaman.js";
 import _poolButchDeloriaTunnelSnake from "../pool/butch-deloria-tunnel-snake.js";
@@ -1111,6 +1112,7 @@ const shard: CardShard = {
     _poolBrigoneSoldierOfMeletis,
     _poolBrimstoneDragon,
     _poolBroodmateDragon,
+    _poolBumiKingOfThreeTrials,
     _poolBuoyancy,
     _poolBurningTreeShaman,
     _poolButchDeloriaTunnelSnake,

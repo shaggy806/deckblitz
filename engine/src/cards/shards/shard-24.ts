@@ -433,6 +433,7 @@ import _poolKinnanBonderProdigy from "../pool/kinnan-bonder-prodigy.js";
 import _poolKirtarsDesire from "../pool/kirtars-desire.js";
 import _poolKitesailCorsair from "../pool/kitesail-corsair.js";
 import _poolKnightOfGlory from "../pool/knight-of-glory.js";
+import _poolKoglaAndYidaro from "../pool/kogla-and-yidaro.js";
 import _poolKoglaTheTitanApe from "../pool/kogla-the-titan-ape.js";
 import _poolKolvoriGodOfKinship from "../pool/kolvori-god-of-kinship.js";
 import _poolKondasBanner from "../pool/kondas-banner.js";
@@ -805,6 +806,7 @@ import _poolTheWorldTree from "../pool/the-world-tree.js";
 import _poolThornado from "../pool/thornado.js";
 import _poolThornwealdArcher from "../pool/thornweald-archer.js";
 import _poolThoughtMonitor from "../pool/thought-monitor.js";
+import _poolThousandWinds from "../pool/thousand-winds.js";
 import _poolThrabenInspector from "../pool/thraben-inspector.js";
 import _poolThraximundar from "../pool/thraximundar.js";
 import _poolThroneOfTheHighCity from "../pool/throne-of-the-high-city.js";
@@ -1383,6 +1385,7 @@ const shard: CardShard = {
     _poolKirtarsDesire,
     _poolKitesailCorsair,
     _poolKnightOfGlory,
+    _poolKoglaAndYidaro,
     _poolKoglaTheTitanApe,
     _poolKolvoriGodOfKinship,
     _poolKondasBanner,
@@ -1755,6 +1758,7 @@ const shard: CardShard = {
     _poolThornado,
     _poolThornwealdArcher,
     _poolThoughtMonitor,
+    _poolThousandWinds,
     _poolThrabenInspector,
     _poolThraximundar,
     _poolThroneOfTheHighCity,

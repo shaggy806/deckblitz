@@ -11,6 +11,7 @@ import _poolAcademyRaider from "../pool/academy-raider.js";
 import _poolAcquiredMutation from "../pool/acquired-mutation.js";
 import _poolActivatedSleeper from "../pool/activated-sleeper.js";
 import _poolAethershieldArtificer from "../pool/aethershield-artificer.js";
+import _poolAgencyOutfitter from "../pool/agency-outfitter.js";
 import _poolAgent13SharonCarter from "../pool/agent-13-sharon-carter.js";
 import _poolAgentFrankHorrigan from "../pool/agent-frank-horrigan.js";
 import _poolAirResponseUnit from "../pool/air-response-unit.js";
@@ -427,12 +428,14 @@ import _poolJoinTheMaestros from "../pool/join-the-maestros.js";
 import _poolJolraelMwonvuliRecluse from "../pool/jolrael-mwonvuli-recluse.js";
 import _poolJolraelsFavor from "../pool/jolraels-favor.js";
 import _poolJunkyoBell from "../pool/junkyo-bell.js";
+import _poolJuntuStakes from "../pool/juntu-stakes.js";
 import _poolJuriMasterOfTheRevue from "../pool/juri-master-of-the-revue.js";
 import _poolKaleidoscorch from "../pool/kaleidoscorch.js";
 import _poolKappaTechWrecker from "../pool/kappa-tech-wrecker.js";
 import _poolKarlachFuryOfAvernus from "../pool/karlach-fury-of-avernus.js";
 import _poolKarmicGuide from "../pool/karmic-guide.js";
 import _poolKarplusanHound from "../pool/karplusan-hound.js";
+import _poolKassandraEagleBearer from "../pool/kassandra-eagle-bearer.js";
 import _poolKayasGhostform from "../pool/kayas-ghostform.js";
 import _poolKazuulTyrantOfTheCliffs from "../pool/kazuul-tyrant-of-the-cliffs.js";
 import _poolKeensightMentor from "../pool/keensight-mentor.js";
@@ -956,6 +959,7 @@ const shard: CardShard = {
     _poolAcquiredMutation,
     _poolActivatedSleeper,
     _poolAethershieldArtificer,
+    _poolAgencyOutfitter,
     _poolAgent13SharonCarter,
     _poolAgentFrankHorrigan,
     _poolAirResponseUnit,
@@ -1372,12 +1376,14 @@ const shard: CardShard = {
     _poolJolraelMwonvuliRecluse,
     _poolJolraelsFavor,
     _poolJunkyoBell,
+    _poolJuntuStakes,
     _poolJuriMasterOfTheRevue,
     _poolKaleidoscorch,
     _poolKappaTechWrecker,
     _poolKarlachFuryOfAvernus,
     _poolKarmicGuide,
     _poolKarplusanHound,
+    _poolKassandraEagleBearer,
     _poolKayasGhostform,
     _poolKazuulTyrantOfTheCliffs,
     _poolKeensightMentor,

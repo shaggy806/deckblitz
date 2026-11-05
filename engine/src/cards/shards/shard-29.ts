@@ -321,6 +321,7 @@ import _poolGrafRats from "../pool/graf-rats.js";
 import _poolGraveBramble from "../pool/grave-bramble.js";
 import _poolGravelgillScoundrel from "../pool/gravelgill-scoundrel.js";
 import _poolGraveshifter from "../pool/graveshifter.js";
+import _poolGraveyardShovel from "../pool/graveyard-shovel.js";
 import _poolGrayOgre from "../pool/gray-ogre.js";
 import _poolGrazingGladehart from "../pool/grazing-gladehart.js";
 import _poolGreatHallOfStarnheim from "../pool/great-hall-of-starnheim.js";
@@ -799,6 +800,7 @@ import _poolTheArchimandrite from "../pool/the-archimandrite.js";
 import _poolTheBlackstaffOfWaterdeep from "../pool/the-blackstaff-of-waterdeep.js";
 import _poolTheFirstSliver from "../pool/the-first-sliver.js";
 import _poolTheMasterOfKeys from "../pool/the-master-of-keys.js";
+import _poolTheNiptonLottery from "../pool/the-nipton-lottery.js";
 import _poolTheQueenOfDale from "../pool/the-queen-of-dale.js";
 import _poolTheSentryGoldenGuardian from "../pool/the-sentry-golden-guardian.js";
 import _poolTheUrDragon from "../pool/the-ur-dragon.js";
@@ -1265,6 +1267,7 @@ const shard: CardShard = {
     _poolGraveBramble,
     _poolGravelgillScoundrel,
     _poolGraveshifter,
+    _poolGraveyardShovel,
     _poolGrayOgre,
     _poolGrazingGladehart,
     _poolGreatHallOfStarnheim,
@@ -1743,6 +1746,7 @@ const shard: CardShard = {
     _poolTheBlackstaffOfWaterdeep,
     _poolTheFirstSliver,
     _poolTheMasterOfKeys,
+    _poolTheNiptonLottery,
     _poolTheQueenOfDale,
     _poolTheSentryGoldenGuardian,
     _poolTheUrDragon,

@@ -88,6 +88,7 @@ import _poolBellowingBruiser from "../pool/bellowing-bruiser.js";
 import _poolBenalishInfantry from "../pool/benalish-infantry.js";
 import _poolBenalishKnight from "../pool/benalish-knight.js";
 import _poolBenthicCriminologists from "../pool/benthic-criminologists.js";
+import _poolBeseechTheMirror from "../pool/beseech-the-mirror.js";
 import _poolBessSoulNourisher from "../pool/bess-soul-nourisher.js";
 import _poolBessieTheDoctorsRoadster from "../pool/bessie-the-doctors-roadster.js";
 import _poolBestialMenace from "../pool/bestial-menace.js";
@@ -702,6 +703,7 @@ import _poolServantOfTheStinger from "../pool/servant-of-the-stinger.js";
 import _poolSetessanChampion from "../pool/setessan-champion.js";
 import _poolSetessanTactics from "../pool/setessan-tactics.js";
 import _poolSeymourFlux from "../pool/seymour-flux.js";
+import _poolShadesBreath from "../pool/shades-breath.js";
 import _poolShadowLance from "../pool/shadow-lance.js";
 import _poolShambleshark from "../pool/shambleshark.js";
 import _poolShenanigans from "../pool/shenanigans.js";
@@ -833,6 +835,7 @@ import _poolTrashTheTown from "../pool/trash-the-town.js";
 import _poolTraverseTheOutlands from "../pool/traverse-the-outlands.js";
 import _poolTreeMonkey from "../pool/tree-monkey.js";
 import _poolTriceratonCommander from "../pool/triceraton-commander.js";
+import _poolTroubleInPairs from "../pool/trouble-in-pairs.js";
 import _poolTsabosDecree from "../pool/tsabos-decree.js";
 import _poolTurnAside from "../pool/turn-aside.js";
 import _poolTurnToSlag from "../pool/turn-to-slag.js";
@@ -1035,6 +1038,7 @@ const shard: CardShard = {
     _poolBenalishInfantry,
     _poolBenalishKnight,
     _poolBenthicCriminologists,
+    _poolBeseechTheMirror,
     _poolBessSoulNourisher,
     _poolBessieTheDoctorsRoadster,
     _poolBestialMenace,
@@ -1649,6 +1653,7 @@ const shard: CardShard = {
     _poolSetessanChampion,
     _poolSetessanTactics,
     _poolSeymourFlux,
+    _poolShadesBreath,
     _poolShadowLance,
     _poolShambleshark,
     _poolShenanigans,
@@ -1780,6 +1785,7 @@ const shard: CardShard = {
     _poolTraverseTheOutlands,
     _poolTreeMonkey,
     _poolTriceratonCommander,
+    _poolTroubleInPairs,
     _poolTsabosDecree,
     _poolTurnAside,
     _poolTurnToSlag,

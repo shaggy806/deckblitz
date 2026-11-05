@@ -335,6 +335,7 @@ import _poolHeirloomAuntie from "../pool/heirloom-auntie.js";
 import _poolHeirloomBlade from "../pool/heirloom-blade.js";
 import _poolHelicaGlider from "../pool/helica-glider.js";
 import _poolHellSwarm from "../pool/hell-swarm.js";
+import _poolHellcarverDemon from "../pool/hellcarver-demon.js";
 import _poolHeroOfIroas from "../pool/hero-of-iroas.js";
 import _poolHeroesBane from "../pool/heroes-bane.js";
 import _poolHeroesReunion from "../pool/heroes-reunion.js";
@@ -475,6 +476,7 @@ import _poolMintstrosity from "../pool/mintstrosity.js";
 import _poolMirenTheMoaningWell from "../pool/miren-the-moaning-well.js";
 import _poolMirrorWall from "../pool/mirror-wall.js";
 import _poolMistformStalker from "../pool/mistform-stalker.js";
+import _poolMistformWakecaster from "../pool/mistform-wakecaster.js";
 import _poolMistmeadowWitch from "../pool/mistmeadow-witch.js";
 import _poolMistyMountainsRaider from "../pool/misty-mountains-raider.js";
 import _poolMistyRainforest from "../pool/misty-rainforest.js";
@@ -1303,6 +1305,7 @@ const shard: CardShard = {
     _poolHeirloomBlade,
     _poolHelicaGlider,
     _poolHellSwarm,
+    _poolHellcarverDemon,
     _poolHeroOfIroas,
     _poolHeroesBane,
     _poolHeroesReunion,
@@ -1443,6 +1446,7 @@ const shard: CardShard = {
     _poolMirenTheMoaningWell,
     _poolMirrorWall,
     _poolMistformStalker,
+    _poolMistformWakecaster,
     _poolMistmeadowWitch,
     _poolMistyMountainsRaider,
     _poolMistyRainforest,

@@ -814,6 +814,7 @@ import _poolTangleMantis from "../pool/tangle-mantis.js";
 import _poolTataruTaru from "../pool/tataru-taru.js";
 import _poolTectonicFiend from "../pool/tectonic-fiend.js";
 import _poolTeferiTemporalArchmage from "../pool/teferi-temporal-archmage.js";
+import _poolTeferiTemporalPilgrim from "../pool/teferi-temporal-pilgrim.js";
 import _poolTeferisAgelessInsight from "../pool/teferis-ageless-insight.js";
 import _poolTeleport from "../pool/teleport.js";
 import _poolTempleOfCivilization from "../pool/temple-of-civilization.js";
@@ -1782,6 +1783,7 @@ const shard: CardShard = {
     _poolTataruTaru,
     _poolTectonicFiend,
     _poolTeferiTemporalArchmage,
+    _poolTeferiTemporalPilgrim,
     _poolTeferisAgelessInsight,
     _poolTeleport,
     _poolTempleOfCivilization,

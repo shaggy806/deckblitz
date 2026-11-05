@@ -453,6 +453,7 @@ import _poolKeeperOfTheLight from "../pool/keeper-of-the-light.js";
 import _poolKeldonFlamesage from "../pool/keldon-flamesage.js";
 import _poolKetriaCrystal from "../pool/ketria-crystal.js";
 import _poolKhalniGarden from "../pool/khalni-garden.js";
+import _poolKillSwitch from "../pool/kill-switch.js";
 import _poolKillerBees from "../pool/killer-bees.js";
 import _poolKirdApe from "../pool/kird-ape.js";
 import _poolKithkinBillyrider from "../pool/kithkin-billyrider.js";
@@ -471,6 +472,7 @@ import _poolKyrenGlider from "../pool/kyren-glider.js";
 import _poolLadyOctopusInspiredInventor from "../pool/lady-octopus-inspired-inventor.js";
 import _poolLancersEnKor from "../pool/lancers-en-kor.js";
 import _poolLastChance from "../pool/last-chance.js";
+import _poolLastOneStanding from "../pool/last-one-standing.js";
 import _poolLeeryFogbeast from "../pool/leery-fogbeast.js";
 import _poolLegionConquistador from "../pool/legion-conquistador.js";
 import _poolLegolasGreenleaf from "../pool/legolas-greenleaf.js";
@@ -670,6 +672,7 @@ import _poolRipSpawnHunter from "../pool/rip-spawn-hunter.js";
 import _poolRiseToTheChallenge from "../pool/rise-to-the-challenge.js";
 import _poolRitualOfRejuvenation from "../pool/ritual-of-rejuvenation.js";
 import _poolRiverKaijin from "../pool/river-kaijin.js";
+import _poolRoadsGoEverEverOn from "../pool/roads-go-ever-ever-on.js";
 import _poolRockcasterPlatoon from "../pool/rockcaster-platoon.js";
 import _poolRofellossGift from "../pool/rofelloss-gift.js";
 import _poolRollingEarthquake from "../pool/rolling-earthquake.js";
@@ -697,6 +700,7 @@ import _poolScrawlingCrawler from "../pool/scrawling-crawler.js";
 import _poolScreechingSoulbreaker from "../pool/screeching-soulbreaker.js";
 import _poolScrollOfAvacyn from "../pool/scroll-of-avacyn.js";
 import _poolScuteMob from "../pool/scute-mob.js";
+import _poolSeaGateRestoration from "../pool/sea-gate-restoration.js";
 import _poolSeaGodsScorn from "../pool/sea-gods-scorn.js";
 import _poolSeaTroll from "../pool/sea-troll.js";
 import _poolSearchlightGeist from "../pool/searchlight-geist.js";
@@ -960,6 +964,7 @@ import _tokensPhyrexianBeastTokenEzurisPredation from "../tokens/phyrexian-beast
 import _tokensSettlementToken from "../tokens/settlement-token.js";
 import _tokensSnailToken from "../tokens/snail-token.js";
 import _tokensSpiderToken22Reach from "../tokens/spider-token-2-2-reach.js";
+import _tokensSpiritTokenVigilanceGrowsOnDraw from "../tokens/spirit-token-vigilance-grows-on-draw.js";
 import _tokensTheAtropal from "../tokens/the-atropal.js";
 import _tokensTiny from "../tokens/tiny.js";
 import _tokensTriskelaviteToken from "../tokens/triskelavite-token.js";
@@ -1423,6 +1428,7 @@ const shard: CardShard = {
     _poolKeldonFlamesage,
     _poolKetriaCrystal,
     _poolKhalniGarden,
+    _poolKillSwitch,
     _poolKillerBees,
     _poolKirdApe,
     _poolKithkinBillyrider,
@@ -1441,6 +1447,7 @@ const shard: CardShard = {
     _poolLadyOctopusInspiredInventor,
     _poolLancersEnKor,
     _poolLastChance,
+    _poolLastOneStanding,
     _poolLeeryFogbeast,
     _poolLegionConquistador,
     _poolLegolasGreenleaf,
@@ -1640,6 +1647,7 @@ const shard: CardShard = {
     _poolRiseToTheChallenge,
     _poolRitualOfRejuvenation,
     _poolRiverKaijin,
+    _poolRoadsGoEverEverOn,
     _poolRockcasterPlatoon,
     _poolRofellossGift,
     _poolRollingEarthquake,
@@ -1667,6 +1675,7 @@ const shard: CardShard = {
     _poolScreechingSoulbreaker,
     _poolScrollOfAvacyn,
     _poolScuteMob,
+    _poolSeaGateRestoration,
     _poolSeaGodsScorn,
     _poolSeaTroll,
     _poolSearchlightGeist,
@@ -1932,6 +1941,7 @@ const shard: CardShard = {
     _tokensSettlementToken,
     _tokensSnailToken,
     _tokensSpiderToken22Reach,
+    _tokensSpiritTokenVigilanceGrowsOnDraw,
     _tokensTheAtropal,
     _tokensTiny,
     _tokensTriskelaviteToken,

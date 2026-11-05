@@ -295,6 +295,7 @@ import _poolFallOfTheFirstCivilization from "../pool/fall-of-the-first-civilizat
 import _poolFamiliarGround from "../pool/familiar-ground.js";
 import _poolFatalFrenzy from "../pool/fatal-frenzy.js";
 import _poolFateUnraveler from "../pool/fate-unraveler.js";
+import _poolFeastOfWorms from "../pool/feast-of-worms.js";
 import _poolFeastOrFamine from "../pool/feast-or-famine.js";
 import _poolFeasterOfFools from "../pool/feaster-of-fools.js";
 import _poolFeed from "../pool/feed.js";
@@ -351,6 +352,7 @@ import _poolGixianInfiltrator from "../pool/gixian-infiltrator.js";
 import _poolGlacialRevelation from "../pool/glacial-revelation.js";
 import _poolGlenElendraPranksters from "../pool/glen-elendra-pranksters.js";
 import _poolGlimmerbell from "../pool/glimmerbell.js";
+import _poolGlissaHeraldOfPredation from "../pool/glissa-herald-of-predation.js";
 import _poolGlisterBairn from "../pool/glister-bairn.js";
 import _poolGloriousEnforcer from "../pool/glorious-enforcer.js";
 import _poolGlorySeeker from "../pool/glory-seeker.js";
@@ -370,6 +372,7 @@ import _poolGostaDirk from "../pool/gosta-dirk.js";
 import _poolGrandCrescendo from "../pool/grand-crescendo.js";
 import _poolGrappleWithThePast from "../pool/grapple-with-the-past.js";
 import _poolGrasslands from "../pool/grasslands.js";
+import _poolGraveBirthing from "../pool/grave-birthing.js";
 import _poolGraveShellScarab from "../pool/grave-shell-scarab.js";
 import _poolGravespawnSovereign from "../pool/gravespawn-sovereign.js";
 import _poolGraySlaad from "../pool/gray-slaad.js";
@@ -478,6 +481,7 @@ import _poolKitesailCleric from "../pool/kitesail-cleric.js";
 import _poolKnightedMyr from "../pool/knighted-myr.js";
 import _poolKolaghanForerunners from "../pool/kolaghan-forerunners.js";
 import _poolKopalaWardenOfWaves from "../pool/kopala-warden-of-waves.js";
+import _poolKozileksCommand from "../pool/kozileks-command.js";
 import _poolKozileksShrieker from "../pool/kozileks-shrieker.js";
 import _poolKravenProudPredator from "../pool/kraven-proud-predator.js";
 import _poolLairDelve from "../pool/lair-delve.js";
@@ -573,6 +577,7 @@ import _poolNirkanaCutthroat from "../pool/nirkana-cutthroat.js";
 import _poolNobleHierarch from "../pool/noble-hierarch.js";
 import _poolNorinTheWary from "../pool/norin-the-wary.js";
 import _poolNorritt from "../pool/norritt.js";
+import _poolNorthamptonFarm from "../pool/northampton-farm.js";
 import _poolNovaCleric from "../pool/nova-cleric.js";
 import _poolNoviceOccultist from "../pool/novice-occultist.js";
 import _poolNurglesConscription from "../pool/nurgles-conscription.js";
@@ -699,6 +704,7 @@ import _poolScreechingGriffin from "../pool/screeching-griffin.js";
 import _poolScreechingSliver from "../pool/screeching-sliver.js";
 import _poolScrollOfTheMasters from "../pool/scroll-of-the-masters.js";
 import _poolScythecatCub from "../pool/scythecat-cub.js";
+import _poolSeaGateReborn from "../pool/sea-gate-reborn.js";
 import _poolSearingTouch from "../pool/searing-touch.js";
 import _poolSeasonedWarrenguard from "../pool/seasoned-warrenguard.js";
 import _poolSecretTunnel from "../pool/secret-tunnel.js";
@@ -1236,6 +1242,7 @@ const shard: CardShard = {
     _poolFamiliarGround,
     _poolFatalFrenzy,
     _poolFateUnraveler,
+    _poolFeastOfWorms,
     _poolFeastOrFamine,
     _poolFeasterOfFools,
     _poolFeed,
@@ -1292,6 +1299,7 @@ const shard: CardShard = {
     _poolGlacialRevelation,
     _poolGlenElendraPranksters,
     _poolGlimmerbell,
+    _poolGlissaHeraldOfPredation,
     _poolGlisterBairn,
     _poolGloriousEnforcer,
     _poolGlorySeeker,
@@ -1311,6 +1319,7 @@ const shard: CardShard = {
     _poolGrandCrescendo,
     _poolGrappleWithThePast,
     _poolGrasslands,
+    _poolGraveBirthing,
     _poolGraveShellScarab,
     _poolGravespawnSovereign,
     _poolGraySlaad,
@@ -1419,6 +1428,7 @@ const shard: CardShard = {
     _poolKnightedMyr,
     _poolKolaghanForerunners,
     _poolKopalaWardenOfWaves,
+    _poolKozileksCommand,
     _poolKozileksShrieker,
     _poolKravenProudPredator,
     _poolLairDelve,
@@ -1514,6 +1524,7 @@ const shard: CardShard = {
     _poolNobleHierarch,
     _poolNorinTheWary,
     _poolNorritt,
+    _poolNorthamptonFarm,
     _poolNovaCleric,
     _poolNoviceOccultist,
     _poolNurglesConscription,
@@ -1640,6 +1651,7 @@ const shard: CardShard = {
     _poolScreechingSliver,
     _poolScrollOfTheMasters,
     _poolScythecatCub,
+    _poolSeaGateReborn,
     _poolSearingTouch,
     _poolSeasonedWarrenguard,
     _poolSecretTunnel,

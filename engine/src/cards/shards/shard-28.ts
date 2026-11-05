@@ -78,6 +78,7 @@ import _poolBelovedBeggar from "../pool/beloved-beggar.js";
 import _poolBeneathTheSands from "../pool/beneath-the-sands.js";
 import _poolBesmirch from "../pool/besmirch.js";
 import _poolBilbosDeadlySlice from "../pool/bilbos-deadly-slice.js";
+import _poolBillFernyBreeSwindler from "../pool/bill-ferny-bree-swindler.js";
 import _poolBiogenicOoze from "../pool/biogenic-ooze.js";
 import _poolBiomassMutation from "../pool/biomass-mutation.js";
 import _poolBitingTether from "../pool/biting-tether.js";
@@ -273,6 +274,7 @@ import _poolFestergloom from "../pool/festergloom.js";
 import _poolFestiveFuneral from "../pool/festive-funeral.js";
 import _poolFeySteed from "../pool/fey-steed.js";
 import _poolFinalIteration from "../pool/final-iteration.js";
+import _poolFinaleOfRevelation from "../pool/finale-of-revelation.js";
 import _poolFinestHour from "../pool/finest-hour.js";
 import _poolFireNationWarship from "../pool/fire-nation-warship.js";
 import _poolFireServant from "../pool/fire-servant.js";
@@ -349,6 +351,7 @@ import _poolHellMongrel from "../pool/hell-mongrel.js";
 import _poolHeraldOfFaith from "../pool/herald-of-faith.js";
 import _poolHerdMigration from "../pool/herd-migration.js";
 import _poolHermiticHerbalist from "../pool/hermitic-herbalist.js";
+import _poolHeroism from "../pool/heroism.js";
 import _poolHewedStoneRetainers from "../pool/hewed-stone-retainers.js";
 import _poolHighSocietyHunter from "../pool/high-society-hunter.js";
 import _poolHighbornVampire from "../pool/highborn-vampire.js";
@@ -627,6 +630,7 @@ import _poolRavagingRiftwurm from "../pool/ravaging-riftwurm.js";
 import _poolRazortideBridge from "../pool/razortide-bridge.js";
 import _poolRazortrapGorge from "../pool/razortrap-gorge.js";
 import _poolRazorvergeThicket from "../pool/razorverge-thicket.js";
+import _poolReachTheHorizon from "../pool/reach-the-horizon.js";
 import _poolRebellionOfTheFlamekin from "../pool/rebellion-of-the-flamekin.js";
 import _poolRecklessImpulse from "../pool/reckless-impulse.js";
 import _poolRecurringInsight from "../pool/recurring-insight.js";
@@ -674,6 +678,7 @@ import _poolRoterothopter from "../pool/roterothopter.js";
 import _poolRoyalDecree from "../pool/royal-decree.js";
 import _poolRubblebeltRioters from "../pool/rubblebelt-rioters.js";
 import _poolRuneclawBear from "../pool/runeclaw-bear.js";
+import _poolRunedCrown from "../pool/runed-crown.js";
 import _poolRunehornHellkite from "../pool/runehorn-hellkite.js";
 import _poolRushOfBlood from "../pool/rush-of-blood.js";
 import _poolRushwoodHerbalist from "../pool/rushwood-herbalist.js";
@@ -1051,6 +1056,7 @@ const shard: CardShard = {
     _poolBeneathTheSands,
     _poolBesmirch,
     _poolBilbosDeadlySlice,
+    _poolBillFernyBreeSwindler,
     _poolBiogenicOoze,
     _poolBiomassMutation,
     _poolBitingTether,
@@ -1246,6 +1252,7 @@ const shard: CardShard = {
     _poolFestiveFuneral,
     _poolFeySteed,
     _poolFinalIteration,
+    _poolFinaleOfRevelation,
     _poolFinestHour,
     _poolFireNationWarship,
     _poolFireServant,
@@ -1322,6 +1329,7 @@ const shard: CardShard = {
     _poolHeraldOfFaith,
     _poolHerdMigration,
     _poolHermiticHerbalist,
+    _poolHeroism,
     _poolHewedStoneRetainers,
     _poolHighSocietyHunter,
     _poolHighbornVampire,
@@ -1600,6 +1608,7 @@ const shard: CardShard = {
     _poolRazortideBridge,
     _poolRazortrapGorge,
     _poolRazorvergeThicket,
+    _poolReachTheHorizon,
     _poolRebellionOfTheFlamekin,
     _poolRecklessImpulse,
     _poolRecurringInsight,
@@ -1647,6 +1656,7 @@ const shard: CardShard = {
     _poolRoyalDecree,
     _poolRubblebeltRioters,
     _poolRuneclawBear,
+    _poolRunedCrown,
     _poolRunehornHellkite,
     _poolRushOfBlood,
     _poolRushwoodHerbalist,

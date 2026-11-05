@@ -772,6 +772,7 @@ import _poolSproutingPhytohydra from "../pool/sprouting-phytohydra.js";
 import _poolSpyglassSiren from "../pool/spyglass-siren.js";
 import _poolSquirrelSovereign from "../pool/squirrel-sovereign.js";
 import _poolStadiumTidalmage from "../pool/stadium-tidalmage.js";
+import _poolStandardize from "../pool/standardize.js";
 import _poolStaunchThroneguard from "../pool/staunch-throneguard.js";
 import _poolSteadyAim from "../pool/steady-aim.js";
 import _poolSteamAugury from "../pool/steam-augury.js";
@@ -1724,6 +1725,7 @@ const shard: CardShard = {
     _poolSpyglassSiren,
     _poolSquirrelSovereign,
     _poolStadiumTidalmage,
+    _poolStandardize,
     _poolStaunchThroneguard,
     _poolSteadyAim,
     _poolSteamAugury,

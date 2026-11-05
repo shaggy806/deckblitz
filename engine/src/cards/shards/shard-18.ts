@@ -195,6 +195,7 @@ import _poolDragonlordsServant from "../pool/dragonlords-servant.js";
 import _poolDragonscaleBoon from "../pool/dragonscale-boon.js";
 import _poolDragonwingGlider from "../pool/dragonwing-glider.js";
 import _poolDramaticEntrance from "../pool/dramatic-entrance.js";
+import _poolDreadCacodemon from "../pool/dread-cacodemon.js";
 import _poolDreadmawsIre from "../pool/dreadmaws-ire.js";
 import _poolDreamStrix from "../pool/dream-strix.js";
 import _poolDreamcallerSiren from "../pool/dreamcaller-siren.js";
@@ -240,6 +241,7 @@ import _poolEsikasChariot from "../pool/esikas-chariot.js";
 import _poolEssenceExtraction from "../pool/essence-extraction.js";
 import _poolEternalIsolation from "../pool/eternal-isolation.js";
 import _poolEvangelOfSynthesis from "../pool/evangel-of-synthesis.js";
+import _poolEvilsThrall from "../pool/evils-thrall.js";
 import _poolExcavatingAnurid from "../pool/excavating-anurid.js";
 import _poolExpandingOoze from "../pool/expanding-ooze.js";
 import _poolExpansion from "../pool/expansion.js";
@@ -474,6 +476,7 @@ import _poolMelancholicPoet from "../pool/melancholic-poet.js";
 import _poolMemorialToFolly from "../pool/memorial-to-folly.js";
 import _poolMenagerieLiberator from "../pool/menagerie-liberator.js";
 import _poolMetrognome from "../pool/metrognome.js";
+import _poolMetzaliTowerOfTriumph from "../pool/metzali-tower-of-triumph.js";
 import _poolMichelangeloTheHeart from "../pool/michelangelo-the-heart.js";
 import _poolMichelangeloWeirdnessTo11 from "../pool/michelangelo-weirdness-to-11.js";
 import _poolMichikosReignOfTruth from "../pool/michikos-reign-of-truth.js";
@@ -790,6 +793,7 @@ import _poolTheElderspell from "../pool/the-elderspell.js";
 import _poolTheHive from "../pool/the-hive.js";
 import _poolTheMechanistAerialArtisan from "../pool/the-mechanist-aerial-artisan.js";
 import _poolTheOneRing from "../pool/the-one-ring.js";
+import _poolTheRollercrusherRide from "../pool/the-rollercrusher-ride.js";
 import _poolTheTenthDoctor from "../pool/the-tenth-doctor.js";
 import _poolTheWaspJanetVanDyne from "../pool/the-wasp-janet-van-dyne.js";
 import _poolTheloniteHermit from "../pool/thelonite-hermit.js";
@@ -1142,6 +1146,7 @@ const shard: CardShard = {
     _poolDragonscaleBoon,
     _poolDragonwingGlider,
     _poolDramaticEntrance,
+    _poolDreadCacodemon,
     _poolDreadmawsIre,
     _poolDreamStrix,
     _poolDreamcallerSiren,
@@ -1187,6 +1192,7 @@ const shard: CardShard = {
     _poolEssenceExtraction,
     _poolEternalIsolation,
     _poolEvangelOfSynthesis,
+    _poolEvilsThrall,
     _poolExcavatingAnurid,
     _poolExpandingOoze,
     _poolExpansion,
@@ -1421,6 +1427,7 @@ const shard: CardShard = {
     _poolMemorialToFolly,
     _poolMenagerieLiberator,
     _poolMetrognome,
+    _poolMetzaliTowerOfTriumph,
     _poolMichelangeloTheHeart,
     _poolMichelangeloWeirdnessTo11,
     _poolMichikosReignOfTruth,
@@ -1737,6 +1744,7 @@ const shard: CardShard = {
     _poolTheHive,
     _poolTheMechanistAerialArtisan,
     _poolTheOneRing,
+    _poolTheRollercrusherRide,
     _poolTheTenthDoctor,
     _poolTheWaspJanetVanDyne,
     _poolTheloniteHermit,

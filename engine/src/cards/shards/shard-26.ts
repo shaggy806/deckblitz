@@ -589,6 +589,7 @@ import _poolPonybackBrigade from "../pool/ponyback-brigade.js";
 import _poolPorcuparrot from "../pool/porcuparrot.js";
 import _poolPortTown from "../pool/port-town.js";
 import _poolPostmortemProfessor from "../pool/postmortem-professor.js";
+import _poolPowerOfPersuasion from "../pool/power-of-persuasion.js";
 import _poolPowerTaint from "../pool/power-taint.js";
 import _poolPrayerOfBinding from "../pool/prayer-of-binding.js";
 import _poolPredatorsHour from "../pool/predators-hour.js";
@@ -863,6 +864,7 @@ import _poolTurntimberRanger from "../pool/turntimber-ranger.js";
 import _poolTurretOgre from "../pool/turret-ogre.js";
 import _poolTwinshotSniper from "../pool/twinshot-sniper.js";
 import _poolTwistedFates from "../pool/twisted-fates.js";
+import _poolTyrantOfDiscord from "../pool/tyrant-of-discord.js";
 import _poolUktabiEfreet from "../pool/uktabi-efreet.js";
 import _poolUktabiOrangutan from "../pool/uktabi-orangutan.js";
 import _poolUlashtTheHateSeed from "../pool/ulasht-the-hate-seed.js";
@@ -1550,6 +1552,7 @@ const shard: CardShard = {
     _poolPorcuparrot,
     _poolPortTown,
     _poolPostmortemProfessor,
+    _poolPowerOfPersuasion,
     _poolPowerTaint,
     _poolPrayerOfBinding,
     _poolPredatorsHour,
@@ -1824,6 +1827,7 @@ const shard: CardShard = {
     _poolTurretOgre,
     _poolTwinshotSniper,
     _poolTwistedFates,
+    _poolTyrantOfDiscord,
     _poolUktabiEfreet,
     _poolUktabiOrangutan,
     _poolUlashtTheHateSeed,

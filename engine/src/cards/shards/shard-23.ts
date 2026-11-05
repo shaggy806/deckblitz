@@ -338,6 +338,7 @@ import _poolGustSkimmer from "../pool/gust-skimmer.js";
 import _poolGuulDrazVampire from "../pool/guul-draz-vampire.js";
 import _poolHalanaAndAlenaPartners from "../pool/halana-and-alena-partners.js";
 import _poolHaloScarab from "../pool/halo-scarab.js";
+import _poolHaphazardBombardment from "../pool/haphazard-bombardment.js";
 import _poolHarmonicConvergence from "../pool/harmonic-convergence.js";
 import _poolHarvestWurm from "../pool/harvest-wurm.js";
 import _poolHauntedAngel from "../pool/haunted-angel.js";
@@ -428,6 +429,7 @@ import _poolKillianInkDuelist from "../pool/killian-ink-duelist.js";
 import _poolKirolHistoryBuff from "../pool/kirol-history-buff.js";
 import _poolKithkeeper from "../pool/kithkeeper.js";
 import _poolKitsuneBonesetter from "../pool/kitsune-bonesetter.js";
+import _poolKitsuneMystic from "../pool/kitsune-mystic.js";
 import _poolKnightOfObligation from "../pool/knight-of-obligation.js";
 import _poolKodamasMight from "../pool/kodamas-might.js";
 import _poolKodamasReach from "../pool/kodamas-reach.js";
@@ -1295,6 +1297,7 @@ const shard: CardShard = {
     _poolGuulDrazVampire,
     _poolHalanaAndAlenaPartners,
     _poolHaloScarab,
+    _poolHaphazardBombardment,
     _poolHarmonicConvergence,
     _poolHarvestWurm,
     _poolHauntedAngel,
@@ -1385,6 +1388,7 @@ const shard: CardShard = {
     _poolKirolHistoryBuff,
     _poolKithkeeper,
     _poolKitsuneBonesetter,
+    _poolKitsuneMystic,
     _poolKnightOfObligation,
     _poolKodamasMight,
     _poolKodamasReach,

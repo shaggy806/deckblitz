@@ -56,6 +56,7 @@ import _poolAzorsElocutors from "../pool/azors-elocutors.js";
 import _poolBalaGedSanctuary from "../pool/bala-ged-sanctuary.js";
 import _poolBallistaSquad from "../pool/ballista-squad.js";
 import _poolBallroomBrawlers from "../pool/ballroom-brawlers.js";
+import _poolBalthorTheDefiled from "../pool/balthor-the-defiled.js";
 import _poolBanditsHaul from "../pool/bandits-haul.js";
 import _poolBaneOfProgress from "../pool/bane-of-progress.js";
 import _poolBarbedField from "../pool/barbed-field.js";
@@ -966,6 +967,7 @@ const shard: CardShard = {
     _poolBalaGedSanctuary,
     _poolBallistaSquad,
     _poolBallroomBrawlers,
+    _poolBalthorTheDefiled,
     _poolBanditsHaul,
     _poolBaneOfProgress,
     _poolBarbedField,

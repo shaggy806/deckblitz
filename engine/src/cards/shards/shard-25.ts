@@ -473,6 +473,7 @@ import _poolMaiJadedEdge from "../pool/mai-jaded-edge.js";
 import _poolMaladyInvoker from "../pool/malady-invoker.js";
 import _poolMalevolentChandelier from "../pool/malevolent-chandelier.js";
 import _poolMalfunction from "../pool/malfunction.js";
+import _poolManipulateFate from "../pool/manipulate-fate.js";
 import _poolMantisRider from "../pool/mantis-rider.js";
 import _poolMaraudingBoneslasher from "../pool/marauding-boneslasher.js";
 import _poolMaritLagesSlumber from "../pool/marit-lages-slumber.js";
@@ -1404,6 +1405,7 @@ const shard: CardShard = {
     _poolMaladyInvoker,
     _poolMalevolentChandelier,
     _poolMalfunction,
+    _poolManipulateFate,
     _poolMantisRider,
     _poolMaraudingBoneslasher,
     _poolMaritLagesSlumber,

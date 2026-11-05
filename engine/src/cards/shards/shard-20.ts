@@ -42,6 +42,7 @@ import _poolAnimalMagnetism from "../pool/animal-magnetism.js";
 import _poolAnnihilate from "../pool/annihilate.js";
 import _poolAntQueen from "../pool/ant-queen.js";
 import _poolAnthroplasm from "../pool/anthroplasm.js";
+import _poolAnvilOfBogardan from "../pool/anvil-of-bogardan.js";
 import _poolAphettoAlchemist from "../pool/aphetto-alchemist.js";
 import _poolArbalestElite from "../pool/arbalest-elite.js";
 import _poolArborbackStomper from "../pool/arborback-stomper.js";
@@ -438,6 +439,7 @@ import _poolItllQuenchYa from "../pool/itll-quench-ya.js";
 import _poolIzzetBoilerworks from "../pool/izzet-boilerworks.js";
 import _poolIzzetStaticaster from "../pool/izzet-staticaster.js";
 import _poolJackhammer from "../pool/jackhammer.js";
+import _poolJailbreak from "../pool/jailbreak.js";
 import _poolJaliraMasterPolymorphist from "../pool/jalira-master-polymorphist.js";
 import _poolJawboneSkulkin from "../pool/jawbone-skulkin.js";
 import _poolJaxisTheTroublemaker from "../pool/jaxis-the-troublemaker.js";
@@ -656,6 +658,7 @@ import _poolRancorousArchaic from "../pool/rancorous-archaic.js";
 import _poolRankAndFile from "../pool/rank-and-file.js";
 import _poolRatcatcherTrainee from "../pool/ratcatcher-trainee.js";
 import _poolRatcatcher from "../pool/ratcatcher.js";
+import _poolRatonhnhakeTon from "../pool/ratonhnhake-ton.js";
 import _poolRattlebackApothecary from "../pool/rattleback-apothecary.js";
 import _poolRavagingHorde from "../pool/ravaging-horde.js";
 import _poolRavenClanWarAxe from "../pool/raven-clan-war-axe.js";
@@ -1046,6 +1049,7 @@ const shard: CardShard = {
     _poolAnnihilate,
     _poolAntQueen,
     _poolAnthroplasm,
+    _poolAnvilOfBogardan,
     _poolAphettoAlchemist,
     _poolArbalestElite,
     _poolArborbackStomper,
@@ -1442,6 +1446,7 @@ const shard: CardShard = {
     _poolIzzetBoilerworks,
     _poolIzzetStaticaster,
     _poolJackhammer,
+    _poolJailbreak,
     _poolJaliraMasterPolymorphist,
     _poolJawboneSkulkin,
     _poolJaxisTheTroublemaker,
@@ -1660,6 +1665,7 @@ const shard: CardShard = {
     _poolRankAndFile,
     _poolRatcatcherTrainee,
     _poolRatcatcher,
+    _poolRatonhnhakeTon,
     _poolRattlebackApothecary,
     _poolRavagingHorde,
     _poolRavenClanWarAxe,

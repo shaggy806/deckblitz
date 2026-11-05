@@ -44,6 +44,7 @@ import _poolArtisanOfKozilek from "../pool/artisan-of-kozilek.js";
 import _poolAshenReaper from "../pool/ashen-reaper.js";
 import _poolAshiokNightmareWeaver from "../pool/ashiok-nightmare-weaver.js";
 import _poolAtsushiTheBlazingSky from "../pool/atsushi-the-blazing-sky.js";
+import _poolAutumnTailKitsuneSage from "../pool/autumn-tail-kitsune-sage.js";
 import _poolAzimaetDrake from "../pool/azimaet-drake.js";
 import _poolBalthorTheStout from "../pool/balthor-the-stout.js";
 import _poolBansheesBlade from "../pool/banshees-blade.js";
@@ -292,6 +293,7 @@ import _poolGetOut from "../pool/get-out.js";
 import _poolGeyserGlider from "../pool/geyser-glider.js";
 import _poolGhostLitNourisher from "../pool/ghost-lit-nourisher.js";
 import _poolGiantOctopus from "../pool/giant-octopus.js";
+import _poolGiantShark from "../pool/giant-shark.js";
 import _poolGideonsReproach from "../pool/gideons-reproach.js";
 import _poolGigantosaurus from "../pool/gigantosaurus.js";
 import _poolGiltLeafsEmbrace from "../pool/gilt-leafs-embrace.js";
@@ -947,6 +949,7 @@ const shard: CardShard = {
     _poolAshenReaper,
     _poolAshiokNightmareWeaver,
     _poolAtsushiTheBlazingSky,
+    _poolAutumnTailKitsuneSage,
     _poolAzimaetDrake,
     _poolBalthorTheStout,
     _poolBansheesBlade,
@@ -1195,6 +1198,7 @@ const shard: CardShard = {
     _poolGeyserGlider,
     _poolGhostLitNourisher,
     _poolGiantOctopus,
+    _poolGiantShark,
     _poolGideonsReproach,
     _poolGigantosaurus,
     _poolGiltLeafsEmbrace,

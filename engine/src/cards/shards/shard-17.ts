@@ -831,6 +831,7 @@ import _poolTitanOfEternalFire from "../pool/titan-of-eternal-fire.js";
 import _poolTitaniaNaturesForce from "../pool/titania-natures-force.js";
 import _poolTolarianEntrancer from "../pool/tolarian-entrancer.js";
 import _poolTombRobber from "../pool/tomb-robber.js";
+import _poolTorWaukiTheYounger from "../pool/tor-wauki-the-younger.js";
 import _poolToriiWatchward from "../pool/torii-watchward.js";
 import _poolTragicLesson from "../pool/tragic-lesson.js";
 import _poolTrailblazersTorch from "../pool/trailblazers-torch.js";
@@ -862,6 +863,7 @@ import _poolUnearthlyBlizzard from "../pool/unearthly-blizzard.js";
 import _poolUnholyOfficiant from "../pool/unholy-officiant.js";
 import _poolUnknownShores from "../pool/unknown-shores.js";
 import _poolUnsummon from "../pool/unsummon.js";
+import _poolUrzaLordHighArtificer from "../pool/urza-lord-high-artificer.js";
 import _poolVadrikAstralArchmage from "../pool/vadrik-astral-archmage.js";
 import _poolVanguardOfBrimaz from "../pool/vanguard-of-brimaz.js";
 import _poolVedalkenInfiltrator from "../pool/vedalken-infiltrator.js";
@@ -909,6 +911,7 @@ import _poolWindreaperFalcon from "../pool/windreaper-falcon.js";
 import _poolWingsteedRider from "../pool/wingsteed-rider.js";
 import _poolWinterSoldierBuckyBarnes from "../pool/winter-soldier-bucky-barnes.js";
 import _poolWirewoodChanneler from "../pool/wirewood-channeler.js";
+import _poolWisdomOfAges from "../pool/wisdom-of-ages.js";
 import _poolWitchbaneOrb from "../pool/witchbane-orb.js";
 import _poolWitchsFamiliar from "../pool/witchs-familiar.js";
 import _poolWizenedCenn from "../pool/wizened-cenn.js";
@@ -1791,6 +1794,7 @@ const shard: CardShard = {
     _poolTitaniaNaturesForce,
     _poolTolarianEntrancer,
     _poolTombRobber,
+    _poolTorWaukiTheYounger,
     _poolToriiWatchward,
     _poolTragicLesson,
     _poolTrailblazersTorch,
@@ -1822,6 +1826,7 @@ const shard: CardShard = {
     _poolUnholyOfficiant,
     _poolUnknownShores,
     _poolUnsummon,
+    _poolUrzaLordHighArtificer,
     _poolVadrikAstralArchmage,
     _poolVanguardOfBrimaz,
     _poolVedalkenInfiltrator,
@@ -1869,6 +1874,7 @@ const shard: CardShard = {
     _poolWingsteedRider,
     _poolWinterSoldierBuckyBarnes,
     _poolWirewoodChanneler,
+    _poolWisdomOfAges,
     _poolWitchbaneOrb,
     _poolWitchsFamiliar,
     _poolWizenedCenn,

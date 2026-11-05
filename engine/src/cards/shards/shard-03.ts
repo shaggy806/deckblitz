@@ -16,6 +16,7 @@ import _poolAmberPrison from "../pool/amber-prison.js";
 import _poolAnafenzaTheForemost from "../pool/anafenza-the-foremost.js";
 import _poolAncestralAnger from "../pool/ancestral-anger.js";
 import _poolAncientHydra from "../pool/ancient-hydra.js";
+import _poolAncientSilverDragon from "../pool/ancient-silver-dragon.js";
 import _poolAngelOfGrace from "../pool/angel-of-grace.js";
 import _poolAngelsFeather from "../pool/angels-feather.js";
 import _poolAngelsong from "../pool/angelsong.js";
@@ -527,6 +528,7 @@ import _poolPopularEgotist from "../pool/popular-egotist.js";
 import _poolPoxwalkers from "../pool/poxwalkers.js";
 import _poolPredationSteward from "../pool/predation-steward.js";
 import _poolPressTheEnemy from "../pool/press-the-enemy.js";
+import _poolPriceOfKnowledge from "../pool/price-of-knowledge.js";
 import _poolPrismariTheInspiration from "../pool/prismari-the-inspiration.js";
 import _poolProfaneMemento from "../pool/profane-memento.js";
 import _poolProsshSkyraiderOfKher from "../pool/prossh-skyraider-of-kher.js";
@@ -774,6 +776,7 @@ import _poolTormentOfHailfire from "../pool/torment-of-hailfire.js";
 import _poolTowerOfTheMagistrate from "../pool/tower-of-the-magistrate.js";
 import _poolTreacherousTerrain from "../pool/treacherous-terrain.js";
 import _poolTreetopSentries from "../pool/treetop-sentries.js";
+import _poolTrenchGorger from "../pool/trench-gorger.js";
 import _poolTriumphantSurge from "../pool/triumphant-surge.js";
 import _poolTrumpetingHerd from "../pool/trumpeting-herd.js";
 import _poolTurnTheTide from "../pool/turn-the-tide.js";
@@ -889,6 +892,7 @@ const shard: CardShard = {
     _poolAnafenzaTheForemost,
     _poolAncestralAnger,
     _poolAncientHydra,
+    _poolAncientSilverDragon,
     _poolAngelOfGrace,
     _poolAngelsFeather,
     _poolAngelsong,
@@ -1400,6 +1404,7 @@ const shard: CardShard = {
     _poolPoxwalkers,
     _poolPredationSteward,
     _poolPressTheEnemy,
+    _poolPriceOfKnowledge,
     _poolPrismariTheInspiration,
     _poolProfaneMemento,
     _poolProsshSkyraiderOfKher,
@@ -1647,6 +1652,7 @@ const shard: CardShard = {
     _poolTowerOfTheMagistrate,
     _poolTreacherousTerrain,
     _poolTreetopSentries,
+    _poolTrenchGorger,
     _poolTriumphantSurge,
     _poolTrumpetingHerd,
     _poolTurnTheTide,

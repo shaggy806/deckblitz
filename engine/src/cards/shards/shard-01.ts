@@ -239,6 +239,7 @@ import _poolExpel from "../pool/expel.js";
 import _poolEyeOfYawgmoth from "../pool/eye-of-yawgmoth.js";
 import _poolEyekite from "../pool/eyekite.js";
 import _poolEzekielSimsSpiderTotem from "../pool/ezekiel-sims-spider-totem.js";
+import _poolFaceYourself from "../pool/face-yourself.js";
 import _poolFaithfulWatchdog from "../pool/faithful-watchdog.js";
 import _poolFaldornDreadWolfHerald from "../pool/faldorn-dread-wolf-herald.js";
 import _poolFallOfGilGalad from "../pool/fall-of-gil-galad.js";
@@ -1184,6 +1185,7 @@ const shard: CardShard = {
     _poolEyeOfYawgmoth,
     _poolEyekite,
     _poolEzekielSimsSpiderTotem,
+    _poolFaceYourself,
     _poolFaithfulWatchdog,
     _poolFaldornDreadWolfHerald,
     _poolFallOfGilGalad,

@@ -888,6 +888,7 @@ import _poolVillageBellRinger from "../pool/village-bell-ringer.js";
 import _poolVinereapMentor from "../pool/vinereap-mentor.js";
 import _poolViolentUltimatum from "../pool/violent-ultimatum.js";
 import _poolVisionOfTheUnspeakable from "../pool/vision-of-the-unspeakable.js";
+import _poolVisions from "../pool/visions.js";
 import _poolVitasporeThallid from "../pool/vitaspore-thallid.js";
 import _poolVnwxtVerboseHost from "../pool/vnwxt-verbose-host.js";
 import _poolVodalianSerpent from "../pool/vodalian-serpent.js";
@@ -1846,6 +1847,7 @@ const shard: CardShard = {
     _poolVinereapMentor,
     _poolViolentUltimatum,
     _poolVisionOfTheUnspeakable,
+    _poolVisions,
     _poolVitasporeThallid,
     _poolVnwxtVerboseHost,
     _poolVodalianSerpent,

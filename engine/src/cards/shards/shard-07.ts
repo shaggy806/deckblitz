@@ -261,6 +261,7 @@ import _poolFalthisShadowcatFamiliar from "../pool/falthis-shadowcat-familiar.js
 import _poolFamishedPaladin from "../pool/famished-paladin.js";
 import _poolFathomFleetBoarder from "../pool/fathom-fleet-boarder.js";
 import _poolFavoredOfIroas from "../pool/favored-of-iroas.js";
+import _poolFblthpKnowsTheWay from "../pool/fblthp-knows-the-way.js";
 import _poolFear from "../pool/fear.js";
 import _poolFearlessPup from "../pool/fearless-pup.js";
 import _poolFearlessSkald from "../pool/fearless-skald.js";
@@ -864,6 +865,7 @@ import _poolUlvenwaldCaptive from "../pool/ulvenwald-captive.js";
 import _poolUnchainedBerserker from "../pool/unchained-berserker.js";
 import _poolUnchartedHaven from "../pool/uncharted-haven.js";
 import _poolUndyingEvil from "../pool/undying-evil.js";
+import _poolUnexpectedRequest from "../pool/unexpected-request.js";
 import _poolUnlikelyAlliance from "../pool/unlikely-alliance.js";
 import _poolUnyieldingKrumar from "../pool/unyielding-krumar.js";
 import _poolUrzasBlueprints from "../pool/urzas-blueprints.js";
@@ -1240,6 +1242,7 @@ const shard: CardShard = {
     _poolFamishedPaladin,
     _poolFathomFleetBoarder,
     _poolFavoredOfIroas,
+    _poolFblthpKnowsTheWay,
     _poolFear,
     _poolFearlessPup,
     _poolFearlessSkald,
@@ -1843,6 +1846,7 @@ const shard: CardShard = {
     _poolUnchainedBerserker,
     _poolUnchartedHaven,
     _poolUndyingEvil,
+    _poolUnexpectedRequest,
     _poolUnlikelyAlliance,
     _poolUnyieldingKrumar,
     _poolUrzasBlueprints,

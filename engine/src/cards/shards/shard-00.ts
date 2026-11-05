@@ -478,6 +478,7 @@ import _poolMagnify from "../pool/magnify.js";
 import _poolMahaItsFeathersNight from "../pool/maha-its-feathers-night.js";
 import _poolMalcatorPurityOverseer from "../pool/malcator-purity-overseer.js";
 import _poolMalcatorsWatcher from "../pool/malcators-watcher.js";
+import _poolManaSeverance from "../pool/mana-severance.js";
 import _poolManakin from "../pool/manakin.js";
 import _poolManiacalRage from "../pool/maniacal-rage.js";
 import _poolMartyrOfDusk from "../pool/martyr-of-dusk.js";
@@ -564,6 +565,7 @@ import _poolPaleWayfarer from "../pool/pale-wayfarer.js";
 import _poolParadiseDruid from "../pool/paradise-druid.js";
 import _poolParadoxGardens from "../pool/paradox-gardens.js";
 import _poolPasswallAdept from "../pool/passwall-adept.js";
+import _poolPathOfMettle from "../pool/path-of-mettle.js";
 import _poolPeaceStrider from "../pool/peace-strider.js";
 import _poolPettyTheft from "../pool/petty-theft.js";
 import _poolPhalanxTactics from "../pool/phalanx-tactics.js";
@@ -742,6 +744,7 @@ import _poolSpectralShepherd from "../pool/spectral-shepherd.js";
 import _poolSpellShrivel from "../pool/spell-shrivel.js";
 import _poolSpellStutter from "../pool/spell-stutter.js";
 import _poolSpinedMegalodon from "../pool/spined-megalodon.js";
+import _poolSpiritWaterRevival from "../pool/spirit-water-revival.js";
 import _poolSpoilsOfTheHunt from "../pool/spoils-of-the-hunt.js";
 import _poolSpringLoadedSawblades from "../pool/spring-loaded-sawblades.js";
 import _poolSquealingDevil from "../pool/squealing-devil.js";
@@ -1440,6 +1443,7 @@ const shard: CardShard = {
     _poolMahaItsFeathersNight,
     _poolMalcatorPurityOverseer,
     _poolMalcatorsWatcher,
+    _poolManaSeverance,
     _poolManakin,
     _poolManiacalRage,
     _poolMartyrOfDusk,
@@ -1526,6 +1530,7 @@ const shard: CardShard = {
     _poolParadiseDruid,
     _poolParadoxGardens,
     _poolPasswallAdept,
+    _poolPathOfMettle,
     _poolPeaceStrider,
     _poolPettyTheft,
     _poolPhalanxTactics,
@@ -1704,6 +1709,7 @@ const shard: CardShard = {
     _poolSpellShrivel,
     _poolSpellStutter,
     _poolSpinedMegalodon,
+    _poolSpiritWaterRevival,
     _poolSpoilsOfTheHunt,
     _poolSpringLoadedSawblades,
     _poolSquealingDevil,
