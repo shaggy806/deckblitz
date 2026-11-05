@@ -918,7 +918,7 @@ missing. Re-run `--greedy` for Phase 2's order.
 - **2026-11-05: `author-freed`, batch 260.** 125 of the queue's next 150 authored, 25 given narrow keys (seven on `mechanic:face-down`'s), by two agents of 75 with a blind reader that found nothing wrong; 682 left.
 - **2026-11-05: `author-freed`, batch 261.** 102 of the queue's next 150 authored, 48 given 43 narrow keys (eleven under `zone:graveyard-cast-permissions`, five under `static:grant-static-ability`), by two agents of 75 with a blind reader that found nothing wrong; 532 left. The rest goes to parallel cloud sessions on frozen lists (the user's call).
 - **2026-11-05: `author-freed`, batch 262 (frozen list F1).** 94 of 131 authored, 37 given 36 narrow keys, by two agents of 66 and 65 with a blind reader (who found only Lurrus's X reading); the lead authored Memory Vessel, Katilda, Dawnhart Martyr and Ral, Monsoon Mage.
-- **2026-11-05: `author-freed`, batch 264 (frozen list F3).** 111 of 135 authored, 24 given 22 new narrow keys and one open one, by two agents of 68 and 67 with a blind reader that found two wrong (Haphazard Bombardment's random pick skipping indestructible permanents, Prismatic Strands' colour chosen as it was cast), both fixed; one engine fix (`isSource` in a mass tap or bounce).
+- **2026-11-05: `author-freed`, batch 264 (frozen list F3).** 111 of 135 authored, 24 given 22 new narrow keys and one open one, by two agents of 68 and 67 with a blind reader that found two wrong (Haphazard Bombardment's random pick skipping indestructible permanents, Prismatic Strands' colour chosen as it was cast), both fixed; two engine fixes (`isSource` in a mass tap or bounce, and a random choice of permanents over a token stack).
 
 ## Rough size
 
