@@ -230,13 +230,16 @@ describe("exile until this leaves the battlefield", () => {
   // leaves — rule 610.3's one-shot effect, not a triggered ability. A
   // `leaves-battlefield` ability running `return-exiled-by-source` beside it
   // would be a second, empty trigger on the stack (and one that card text
-  // like Banishing Light's doesn't have).
+  // like Banishing Light's doesn't have). A return of the *other* cards
+  // exiled with it (`others`, Mysterious Limousine's "return each other card
+  // exiled with this Vehicle") is a different instruction and passes.
   it("no card that exiles this way also carries a return trigger", () => {
     const untilLeaves = /"kind":"exile"[^{}]*"untilSourceLeaves":true/;
+    const returnsAll = /"kind":"return-exiled-by-source"(?![^{}]*"others":true)/;
     const doubled = [...POOL_CARDS, ...TOKEN_CARDS]
       .filter((def) => {
         const json = JSON.stringify(def);
-        return untilLeaves.test(json) && json.includes('"return-exiled-by-source"');
+        return untilLeaves.test(json) && returnsAll.test(json);
       })
       .map((def) => def.name);
     expect(doubled).toEqual([]);
