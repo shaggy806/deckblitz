@@ -406,6 +406,7 @@ import _poolInfestedFleshcutter from "../pool/infested-fleshcutter.js";
 import _poolInkDissolver from "../pool/ink-dissolver.js";
 import _poolInstrumentsOfWar from "../pool/instruments-of-war.js";
 import _poolInterceptorShadowsHound from "../pool/interceptor-shadows-hound.js";
+import _poolInvasionOfAmonkhet from "../pool/invasion-of-amonkhet.js";
 import _poolIridescentDrake from "../pool/iridescent-drake.js";
 import _poolIronLance from "../pool/iron-lance.js";
 import _poolIronSuitcase from "../pool/iron-suitcase.js";
@@ -499,6 +500,7 @@ import _poolMindmelter from "../pool/mindmelter.js";
 import _poolMindwhisker from "../pool/mindwhisker.js";
 import _poolMinionsMurmurs from "../pool/minions-murmurs.js";
 import _poolMireBlight from "../pool/mire-blight.js";
+import _poolMirrorhallMimic from "../pool/mirrorhall-mimic.js";
 import _poolMirrormereGuardian from "../pool/mirrormere-guardian.js";
 import _poolMissy from "../pool/missy.js";
 import _poolMjolnirsMight from "../pool/mjolnirs-might.js";
@@ -942,6 +944,7 @@ import _poolYourFateEndsHere from "../pool/your-fate-ends-here.js";
 import _poolYouthfulKnight from "../pool/youthful-knight.js";
 import _poolYouthfulValkyrie from "../pool/youthful-valkyrie.js";
 import _poolZhaoTheSeethingFlame from "../pool/zhao-the-seething-flame.js";
+import _poolZimoneMysteryUnraveler from "../pool/zimone-mystery-unraveler.js";
 import _poolZukoExiledPrince from "../pool/zuko-exiled-prince.js";
 import _poolZukosConviction from "../pool/zukos-conviction.js";
 import _poolZurEternalSchemer from "../pool/zur-eternal-schemer.js";
@@ -1368,6 +1371,7 @@ const shard: CardShard = {
     _poolInkDissolver,
     _poolInstrumentsOfWar,
     _poolInterceptorShadowsHound,
+    _poolInvasionOfAmonkhet,
     _poolIridescentDrake,
     _poolIronLance,
     _poolIronSuitcase,
@@ -1461,6 +1465,7 @@ const shard: CardShard = {
     _poolMindwhisker,
     _poolMinionsMurmurs,
     _poolMireBlight,
+    _poolMirrorhallMimic,
     _poolMirrormereGuardian,
     _poolMissy,
     _poolMjolnirsMight,
@@ -1904,6 +1909,7 @@ const shard: CardShard = {
     _poolYouthfulKnight,
     _poolYouthfulValkyrie,
     _poolZhaoTheSeethingFlame,
+    _poolZimoneMysteryUnraveler,
     _poolZukoExiledPrince,
     _poolZukosConviction,
     _poolZurEternalSchemer,

@@ -146,6 +146,7 @@ import _poolCombatCourier from "../pool/combat-courier.js";
 import _poolCommuneWithNature from "../pool/commune-with-nature.js";
 import _poolConclaveEvangelist from "../pool/conclave-evangelist.js";
 import _poolConsign from "../pool/consign.js";
+import _poolConstructACosmicCube from "../pool/construct-a-cosmic-cube.js";
 import _poolConsumeStrength from "../pool/consume-strength.js";
 import _poolConsumingVortex from "../pool/consuming-vortex.js";
 import _poolContestedWarZone from "../pool/contested-war-zone.js";
@@ -290,9 +291,11 @@ import _poolGargosViciousWatcher from "../pool/gargos-vicious-watcher.js";
 import _poolGarrukSavageHerald from "../pool/garruk-savage-herald.js";
 import _poolGatherTheTownsfolk from "../pool/gather-the-townsfolk.js";
 import _poolGatstafShepherd from "../pool/gatstaf-shepherd.js";
+import _poolGazeOfTheGorgon from "../pool/gaze-of-the-gorgon.js";
 import _poolGenestealerLocus from "../pool/genestealer-locus.js";
 import _poolGhastlyDemise from "../pool/ghastly-demise.js";
 import _poolGhostform from "../pool/ghostform.js";
+import _poolGideonsTriumph from "../pool/gideons-triumph.js";
 import _poolGlacialFortress from "../pool/glacial-fortress.js";
 import _poolGlamorousOutlaw from "../pool/glamorous-outlaw.js";
 import _poolGlazeFiend from "../pool/glaze-fiend.js";
@@ -359,6 +362,7 @@ import _poolHowlingMoon from "../pool/howling-moon.js";
 import _poolHuntingCheetah from "../pool/hunting-cheetah.js";
 import _poolHurlIntoHistory from "../pool/hurl-into-history.js";
 import _poolHurloonBattleHymn from "../pool/hurloon-battle-hymn.js";
+import _poolHustle from "../pool/hustle.js";
 import _poolHydraOmnivore from "../pool/hydra-omnivore.js";
 import _poolHydraulicHelper from "../pool/hydraulic-helper.js";
 import _poolHypnoticCloud from "../pool/hypnotic-cloud.js";
@@ -379,6 +383,7 @@ import _poolIntoTheFray from "../pool/into-the-fray.js";
 import _poolIntoThinAir from "../pool/into-thin-air.js";
 import _poolIntrepidTenderfoot from "../pool/intrepid-tenderfoot.js";
 import _poolIntrusivePackbeast from "../pool/intrusive-packbeast.js";
+import _poolInvasionOfTarkir from "../pool/invasion-of-tarkir.js";
 import _poolInvasionOfTolvada from "../pool/invasion-of-tolvada.js";
 import _poolInvigoratedRampage from "../pool/invigorated-rampage.js";
 import _poolIronwillForger from "../pool/ironwill-forger.js";
@@ -408,6 +413,7 @@ import _poolKindredCharge from "../pool/kindred-charge.js";
 import _poolKindredDominance from "../pool/kindred-dominance.js";
 import _poolKithkinHealer from "../pool/kithkin-healer.js";
 import _poolKlawMasterOfSound from "../pool/klaw-master-of-sound.js";
+import _poolKlawSonicSubjugator from "../pool/klaw-sonic-subjugator.js";
 import _poolKnightOfTheWhiteOrchid from "../pool/knight-of-the-white-orchid.js";
 import _poolKnollspineInvocation from "../pool/knollspine-invocation.js";
 import _poolKonstrariAnnex from "../pool/konstrari-annex.js";
@@ -1114,6 +1120,7 @@ const shard: CardShard = {
     _poolCommuneWithNature,
     _poolConclaveEvangelist,
     _poolConsign,
+    _poolConstructACosmicCube,
     _poolConsumeStrength,
     _poolConsumingVortex,
     _poolContestedWarZone,
@@ -1258,9 +1265,11 @@ const shard: CardShard = {
     _poolGarrukSavageHerald,
     _poolGatherTheTownsfolk,
     _poolGatstafShepherd,
+    _poolGazeOfTheGorgon,
     _poolGenestealerLocus,
     _poolGhastlyDemise,
     _poolGhostform,
+    _poolGideonsTriumph,
     _poolGlacialFortress,
     _poolGlamorousOutlaw,
     _poolGlazeFiend,
@@ -1327,6 +1336,7 @@ const shard: CardShard = {
     _poolHuntingCheetah,
     _poolHurlIntoHistory,
     _poolHurloonBattleHymn,
+    _poolHustle,
     _poolHydraOmnivore,
     _poolHydraulicHelper,
     _poolHypnoticCloud,
@@ -1347,6 +1357,7 @@ const shard: CardShard = {
     _poolIntoThinAir,
     _poolIntrepidTenderfoot,
     _poolIntrusivePackbeast,
+    _poolInvasionOfTarkir,
     _poolInvasionOfTolvada,
     _poolInvigoratedRampage,
     _poolIronwillForger,
@@ -1376,6 +1387,7 @@ const shard: CardShard = {
     _poolKindredDominance,
     _poolKithkinHealer,
     _poolKlawMasterOfSound,
+    _poolKlawSonicSubjugator,
     _poolKnightOfTheWhiteOrchid,
     _poolKnollspineInvocation,
     _poolKonstrariAnnex,

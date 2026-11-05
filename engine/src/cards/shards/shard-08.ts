@@ -135,6 +135,7 @@ import _poolCarthTheLion from "../pool/carth-the-lion.js";
 import _poolCartoucheOfZeal from "../pool/cartouche-of-zeal.js";
 import _poolCateranOverlord from "../pool/cateran-overlord.js";
 import _poolCatharCommando from "../pool/cathar-commando.js";
+import _poolCathedralMembrane from "../pool/cathedral-membrane.js";
 import _poolCease from "../pool/cease.js";
 import _poolCessation from "../pool/cessation.js";
 import _poolChaosCharm from "../pool/chaos-charm.js";
@@ -532,6 +533,7 @@ import _poolMassDiminish from "../pool/mass-diminish.js";
 import _poolMatsuTribeDecoy from "../pool/matsu-tribe-decoy.js";
 import _poolMattMurdockJusticeSeeker from "../pool/matt-murdock-justice-seeker.js";
 import _poolMemnite from "../pool/memnite.js";
+import _poolMemoryVessel from "../pool/memory-vessel.js";
 import _poolMercurialGeists from "../pool/mercurial-geists.js";
 import _poolMesaFalcon from "../pool/mesa-falcon.js";
 import _poolMetallicRebuke from "../pool/metallic-rebuke.js";
@@ -1138,6 +1140,7 @@ const shard: CardShard = {
     _poolCartoucheOfZeal,
     _poolCateranOverlord,
     _poolCatharCommando,
+    _poolCathedralMembrane,
     _poolCease,
     _poolCessation,
     _poolChaosCharm,
@@ -1535,6 +1538,7 @@ const shard: CardShard = {
     _poolMatsuTribeDecoy,
     _poolMattMurdockJusticeSeeker,
     _poolMemnite,
+    _poolMemoryVessel,
     _poolMercurialGeists,
     _poolMesaFalcon,
     _poolMetallicRebuke,

@@ -109,6 +109,7 @@ import _poolBoonReflection from "../pool/boon-reflection.js";
 import _poolBorosLocket from "../pool/boros-locket.js";
 import _poolBothersomeQuasit from "../pool/bothersome-quasit.js";
 import _poolBounceOff from "../pool/bounce-off.js";
+import _poolBoundInGold from "../pool/bound-in-gold.js";
 import _poolBragoKingEternal from "../pool/brago-king-eternal.js";
 import _poolBrambleSovereign from "../pool/bramble-sovereign.js";
 import _poolBrassSecretary from "../pool/brass-secretary.js";
@@ -167,6 +168,7 @@ import _poolConcertedDefense from "../pool/concerted-defense.js";
 import _poolConcussiveBolt from "../pool/concussive-bolt.js";
 import _poolConduitOfStorms from "../pool/conduit-of-storms.js";
 import _poolConsulateDreadnought from "../pool/consulate-dreadnought.js";
+import _poolConsulateSurveillance from "../pool/consulate-surveillance.js";
 import _poolConsumeTheMeek from "../pool/consume-the-meek.js";
 import _poolContagionClasp from "../pool/contagion-clasp.js";
 import _poolCooperation from "../pool/cooperation.js";
@@ -729,6 +731,7 @@ import _poolSerendibEfreet from "../pool/serendib-efreet.js";
 import _poolSerumCoreChimera from "../pool/serum-core-chimera.js";
 import _poolServe from "../pool/serve.js";
 import _poolSevinnesReclamation from "../pool/sevinnes-reclamation.js";
+import _poolShadowbornApostle from "../pool/shadowborn-apostle.js";
 import _poolShadowsOfThePast from "../pool/shadows-of-the-past.js";
 import _poolShalaiAndHallar from "../pool/shalai-and-hallar.js";
 import _poolShaleskinPlower from "../pool/shaleskin-plower.js";
@@ -1113,6 +1116,7 @@ const shard: CardShard = {
     _poolBorosLocket,
     _poolBothersomeQuasit,
     _poolBounceOff,
+    _poolBoundInGold,
     _poolBragoKingEternal,
     _poolBrambleSovereign,
     _poolBrassSecretary,
@@ -1171,6 +1175,7 @@ const shard: CardShard = {
     _poolConcussiveBolt,
     _poolConduitOfStorms,
     _poolConsulateDreadnought,
+    _poolConsulateSurveillance,
     _poolConsumeTheMeek,
     _poolContagionClasp,
     _poolCooperation,
@@ -1733,6 +1738,7 @@ const shard: CardShard = {
     _poolSerumCoreChimera,
     _poolServe,
     _poolSevinnesReclamation,
+    _poolShadowbornApostle,
     _poolShadowsOfThePast,
     _poolShalaiAndHallar,
     _poolShaleskinPlower,

@@ -32,6 +32,7 @@ import _poolArcboundSlith from "../pool/arcbound-slith.js";
 import _poolArchonOfCruelty from "../pool/archon-of-cruelty.js";
 import _poolArchonsGlory from "../pool/archons-glory.js";
 import _poolArgentMutation from "../pool/argent-mutation.js";
+import _poolArmageddonClock from "../pool/armageddon-clock.js";
 import _poolArmoredGalleon from "../pool/armored-galleon.js";
 import _poolArmyOfTheDamned from "../pool/army-of-the-damned.js";
 import _poolArtificersDragon from "../pool/artificers-dragon.js";
@@ -456,6 +457,7 @@ import _poolMerfolkCaveDiver from "../pool/merfolk-cave-diver.js";
 import _poolMerfolkCoralsmith from "../pool/merfolk-coralsmith.js";
 import _poolMetallicSliver from "../pool/metallic-sliver.js";
 import _poolMightSliver from "../pool/might-sliver.js";
+import _poolMinionOfTheMighty from "../pool/minion-of-the-mighty.js";
 import _poolMinionReflector from "../pool/minion-reflector.js";
 import _poolMinotaurAggressor from "../pool/minotaur-aggressor.js";
 import _poolMirrorSheen from "../pool/mirror-sheen.js";
@@ -556,6 +558,7 @@ import _poolReachOfBranches from "../pool/reach-of-branches.js";
 import _poolReadTheTides from "../pool/read-the-tides.js";
 import _poolRealityShift from "../pool/reality-shift.js";
 import _poolRecklessEndeavor from "../pool/reckless-endeavor.js";
+import _poolRecrossThePaths from "../pool/recross-the-paths.js";
 import _poolRegalForce from "../pool/regal-force.js";
 import _poolRejuvenatingSprings from "../pool/rejuvenating-springs.js";
 import _poolRelentlessAssault from "../pool/relentless-assault.js";
@@ -737,6 +740,7 @@ import _poolTaunt from "../pool/taunt.js";
 import _poolTazeemRaptor from "../pool/tazeem-raptor.js";
 import _poolTcriBuilding from "../pool/tcri-building.js";
 import _poolTeferisRealm from "../pool/teferis-realm.js";
+import _poolTemplarKnight from "../pool/templar-knight.js";
 import _poolTempleOfTheFalseGod from "../pool/temple-of-the-false-god.js";
 import _poolTemurAscendancy from "../pool/temur-ascendancy.js";
 import _poolTemurMonument from "../pool/temur-monument.js";
@@ -905,6 +909,7 @@ const shard: CardShard = {
     _poolArchonOfCruelty,
     _poolArchonsGlory,
     _poolArgentMutation,
+    _poolArmageddonClock,
     _poolArmoredGalleon,
     _poolArmyOfTheDamned,
     _poolArtificersDragon,
@@ -1329,6 +1334,7 @@ const shard: CardShard = {
     _poolMerfolkCoralsmith,
     _poolMetallicSliver,
     _poolMightSliver,
+    _poolMinionOfTheMighty,
     _poolMinionReflector,
     _poolMinotaurAggressor,
     _poolMirrorSheen,
@@ -1429,6 +1435,7 @@ const shard: CardShard = {
     _poolReadTheTides,
     _poolRealityShift,
     _poolRecklessEndeavor,
+    _poolRecrossThePaths,
     _poolRegalForce,
     _poolRejuvenatingSprings,
     _poolRelentlessAssault,
@@ -1610,6 +1617,7 @@ const shard: CardShard = {
     _poolTazeemRaptor,
     _poolTcriBuilding,
     _poolTeferisRealm,
+    _poolTemplarKnight,
     _poolTempleOfTheFalseGod,
     _poolTemurAscendancy,
     _poolTemurMonument,

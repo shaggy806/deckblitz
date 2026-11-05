@@ -628,6 +628,7 @@ import _poolQuicksilverAmulet from "../pool/quicksilver-amulet.js";
 import _poolQuicksilverPietroMaximoff from "../pool/quicksilver-pietro-maximoff.js";
 import _poolRaccoonRallier from "../pool/raccoon-rallier.js";
 import _poolRakdosShredFreak from "../pool/rakdos-shred-freak.js";
+import _poolRalMonsoonMage from "../pool/ral-monsoon-mage.js";
 import _poolRallyTheTroops from "../pool/rally-the-troops.js";
 import _poolRampartSmasher from "../pool/rampart-smasher.js";
 import _poolRaphaelMostAttitude from "../pool/raphael-most-attitude.js";
@@ -815,6 +816,7 @@ import _poolTheGoldSaucer from "../pool/the-gold-saucer.js";
 import _poolTheHorusHeresy from "../pool/the-horus-heresy.js";
 import _poolTheLadyOfTheMountain from "../pool/the-lady-of-the-mountain.js";
 import _poolTheOzolith from "../pool/the-ozolith.js";
+import _poolTheRingGoesSouth from "../pool/the-ring-goes-south.js";
 import _poolTheThanosCopter from "../pool/the-thanos-copter.js";
 import _poolTheWaterCrystal from "../pool/the-water-crystal.js";
 import _poolThievesFortune from "../pool/thieves-fortune.js";
@@ -856,6 +858,7 @@ import _poolUndergrowthStadium from "../pool/undergrowth-stadium.js";
 import _poolUninvitedGeist from "../pool/uninvited-geist.js";
 import _poolUnnaturalAggression from "../pool/unnatural-aggression.js";
 import _poolUnnaturalMoonrise from "../pool/unnatural-moonrise.js";
+import _poolUnstableHulk from "../pool/unstable-hulk.js";
 import _poolUrborgSkeleton from "../pool/urborg-skeleton.js";
 import _poolUrilTheMiststalker from "../pool/uril-the-miststalker.js";
 import _poolVampireNoble from "../pool/vampire-noble.js";
@@ -1569,6 +1572,7 @@ const shard: CardShard = {
     _poolQuicksilverPietroMaximoff,
     _poolRaccoonRallier,
     _poolRakdosShredFreak,
+    _poolRalMonsoonMage,
     _poolRallyTheTroops,
     _poolRampartSmasher,
     _poolRaphaelMostAttitude,
@@ -1756,6 +1760,7 @@ const shard: CardShard = {
     _poolTheHorusHeresy,
     _poolTheLadyOfTheMountain,
     _poolTheOzolith,
+    _poolTheRingGoesSouth,
     _poolTheThanosCopter,
     _poolTheWaterCrystal,
     _poolThievesFortune,
@@ -1797,6 +1802,7 @@ const shard: CardShard = {
     _poolUninvitedGeist,
     _poolUnnaturalAggression,
     _poolUnnaturalMoonrise,
+    _poolUnstableHulk,
     _poolUrborgSkeleton,
     _poolUrilTheMiststalker,
     _poolVampireNoble,

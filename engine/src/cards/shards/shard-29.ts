@@ -277,6 +277,7 @@ import _poolFlowstoneSculpture from "../pool/flowstone-sculpture.js";
 import _poolFocusFire from "../pool/focus-fire.js";
 import _poolFoeRazerRegent from "../pool/foe-razer-regent.js";
 import _poolFollowTheBodies from "../pool/follow-the-bodies.js";
+import _poolForTheCommonGood from "../pool/for-the-common-good.js";
 import _poolForTheFamily from "../pool/for-the-family.js";
 import _poolForbiddenAlchemy from "../pool/forbidden-alchemy.js";
 import _poolForcedAdaptation from "../pool/forced-adaptation.js";
@@ -551,6 +552,7 @@ import _poolPhageTheUntouchable from "../pool/phage-the-untouchable.js";
 import _poolPhalanxVanguard from "../pool/phalanx-vanguard.js";
 import _poolPhantasmalSphere from "../pool/phantasmal-sphere.js";
 import _poolPhantomNomad from "../pool/phantom-nomad.js";
+import _poolPhantomSteed from "../pool/phantom-steed.js";
 import _poolPharikaGodOfAffliction from "../pool/pharika-god-of-affliction.js";
 import _poolPhyrexianInfiltrator from "../pool/phyrexian-infiltrator.js";
 import _poolPileatedProvisioner from "../pool/pileated-provisioner.js";
@@ -643,6 +645,7 @@ import _poolRunedServitor from "../pool/runed-servitor.js";
 import _poolRustlerRampage from "../pool/rustler-rampage.js";
 import _poolRuthlessRipper from "../pool/ruthless-ripper.js";
 import _poolSacredArmory from "../pool/sacred-armory.js";
+import _poolSacredGuide from "../pool/sacred-guide.js";
 import _poolSacredMesa from "../pool/sacred-mesa.js";
 import _poolSaddleOfTheCavalier from "../pool/saddle-of-the-cavalier.js";
 import _poolSaheeliRadiantCreator from "../pool/saheeli-radiant-creator.js";
@@ -1221,6 +1224,7 @@ const shard: CardShard = {
     _poolFocusFire,
     _poolFoeRazerRegent,
     _poolFollowTheBodies,
+    _poolForTheCommonGood,
     _poolForTheFamily,
     _poolForbiddenAlchemy,
     _poolForcedAdaptation,
@@ -1495,6 +1499,7 @@ const shard: CardShard = {
     _poolPhalanxVanguard,
     _poolPhantasmalSphere,
     _poolPhantomNomad,
+    _poolPhantomSteed,
     _poolPharikaGodOfAffliction,
     _poolPhyrexianInfiltrator,
     _poolPileatedProvisioner,
@@ -1587,6 +1592,7 @@ const shard: CardShard = {
     _poolRustlerRampage,
     _poolRuthlessRipper,
     _poolSacredArmory,
+    _poolSacredGuide,
     _poolSacredMesa,
     _poolSaddleOfTheCavalier,
     _poolSaheeliRadiantCreator,
