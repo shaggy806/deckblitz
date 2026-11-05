@@ -502,7 +502,7 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
-- **Batch 257, the next of the freed cards: 125 of 150 authored** (2026-11-04) — the attack-restriction, chosen-by-other-player, dealt-damage-dies,
+- **Batch 257, the next of the freed cards: 125 of 150 authored** (2026-11-04, `7044d47f1`, `a5cffa774`) — the attack-restriction, chosen-by-other-player, dealt-damage-dies,
   per-player condition, on-resolution choice, choose-permanent and per-player count families, among them The Abyss, Oona, Queen of the Fae, Vampiric Sliver
   and Ajani, Strength of the Pride. By agents of 20, 30, 40 and 60 cards: the largest cost least per card, and a blind review found no more wrong in its share.
 - **Batch 256, the scaffolder over the whole snapshot: 373 of 383 authored** (2026-11-04, `6e68c6096`, `b056d7d6a`) — every Commander-legal
