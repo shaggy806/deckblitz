@@ -1,7 +1,7 @@
 import { defineCard } from "../define.js";
 
 // You look and separate; the face-down pile is yours alone to see, the
-// face-up pile everyone's (rule 700.3). The opponent you choose chooses a
+// face-up pile everyone's (rule 700.3). The opponent you then choose chooses a
 // pile without seeing the face-down one.
 
 const ETB_TEXT =
@@ -23,15 +23,12 @@ export default defineCard({
       trigger: { on: "enters-battlefield", who: "self" },
       targets: [],
       effect: {
-        kind: "choose-opponent",
-        then: {
-          kind: "separate-into-piles",
-          objects: { libraryTop: 5 },
-          faceDown: true,
-          chooser: "that-player",
-          chosen: "hand",
-          rest: "graveyard",
-        },
+        kind: "separate-into-piles",
+        objects: { libraryTop: 5 },
+        faceDown: true,
+        chooser: "an-opponent",
+        chosen: "hand",
+        rest: "graveyard",
       },
       resolve: null,
       text: ETB_TEXT,

@@ -12785,7 +12785,6 @@ function chosenValueAt(sentences, i, ctx) {
 function pilesAt(sentences, i, ctx) {
   const s = (k) => sentences[i + k] ?? "";
   const handGraveyard = { chosen: "hand", rest: "graveyard" };
-  const opponentChooses = (inner) => ({ kind: "choose-opponent", then: inner });
   // Not piles, but sentences that make one effect: Awakening of Vitu-Ghazi's "Put
   // N +1/+1 counters on target land you control. It becomes a legendary 0/0
   // Elemental creature with haste named Vitu-Ghazi. It's still a land."
@@ -12902,13 +12901,13 @@ function pilesAt(sentences, i, ctx) {
     const n = numberOf(m[1]);
     if (typeof n !== "number") return null;
     return {
-      effect: opponentChooses({
+      effect: {
         kind: "separate-into-piles",
         objects: { libraryTop: n, reveal: true },
-        separator: "that-player",
+        separator: "an-opponent",
         chooser: "you",
         ...handGraveyard,
-      }),
+      },
       used: 3,
     };
   }
@@ -12931,13 +12930,13 @@ function pilesAt(sentences, i, ctx) {
     // card says that, and the shape isn't read.
     if (typeof n !== "number" || reveal === faceDown) return null;
     return {
-      effect: opponentChooses({
+      effect: {
         kind: "separate-into-piles",
         objects: reveal ? { libraryTop: n, reveal: true } : { libraryTop: n },
         ...(faceDown ? { faceDown: true } : {}),
-        chooser: "that-player",
+        chooser: "an-opponent",
         ...handGraveyard,
-      }),
+      },
       used: 3,
     };
   }
@@ -12997,13 +12996,13 @@ function pilesAt(sentences, i, ctx) {
     /^exile the pile of an opponent's choice and return the other to the battlefield\.$/i.test(s(1))
   ) {
     return {
-      effect: opponentChooses({
+      effect: {
         kind: "separate-into-piles",
         objects: { graveyard: { type: "creature" } },
-        chooser: "that-player",
+        chooser: "an-opponent",
         chosen: "exile",
         rest: "battlefield",
-      }),
+      },
       used: 2,
     };
   }

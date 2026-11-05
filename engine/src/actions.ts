@@ -2108,6 +2108,9 @@ export type LegalAction =
       readonly objects: readonly ObjectId[];
       /** Who will choose a pile. */
       readonly chooser: PlayerId;
+      /** `chooser` only stands in: you'll name the opponent once the piles
+       * are made. */
+      readonly anOpponentChooses?: true;
       /** Pile 0 is face down, pile 1 face up. */
       readonly faceDown?: true;
       /** What happens to the chosen pile and to the other. */

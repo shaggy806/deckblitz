@@ -9685,14 +9685,18 @@ export type EffectSpec =
        * what's in it. The objects never leave their zone while they're
        * separated (700.3c) — a revealed card is still in the library until
        * its pile's fate moves it. "An opponent separates" / "an opponent
-       * chooses" is a `choose-opponent` around this, naming `"that-player"`.
+       * chooses" is `"an-opponent"` on that field: which opponent is asked as
+       * the text reaches them (rule 608.2c), so after the reveal and, for a
+       * chooser, after the piles are made. "Choose an opponent. They look …"
+       * (Sauron's Ransom) comes first, so that's a `choose-opponent` around
+       * this, naming `"that-player"`.
        */
       readonly kind: "separate-into-piles";
       readonly objects: PileObjects;
       /** Who separates: the effect's controller when absent. */
-      readonly separator?: EffectPlayerRef;
+      readonly separator?: EffectPlayerRef | "an-opponent";
       /** Who chooses one of the piles. */
-      readonly chooser: EffectPlayerRef;
+      readonly chooser: EffectPlayerRef | "an-opponent";
       /**
        * "Separate them into **a face-down pile and a face-up pile**" (Curator
        * of Destinies, Fortune's Favor): the first pile stays hidden from all
@@ -9706,11 +9710,13 @@ export type EffectSpec =
       /** What happens to the other pile's — nothing when absent (Liliana's
        * other pile stays). */
       readonly rest?: PileFate;
-      /** Set only by the engine, between the separation and the choice. */
+      /** Set only by the engine, between the separation and the choice.
+       * `separator` is absent until the piles are asked for, and `chooser`
+       * until it's known: an `"an-opponent"` of several is named later. */
       readonly progress?: {
         readonly objects: readonly ObjectId[];
-        readonly separator: PlayerId;
-        readonly chooser: PlayerId;
+        readonly separator?: PlayerId;
+        readonly chooser?: PlayerId;
         readonly lookers: readonly PlayerId[];
         readonly piles?: readonly (readonly ObjectId[])[];
       };
@@ -10855,8 +10861,7 @@ export interface ExilePileSpec {
 /**
  * A `PileFate` in one word, for whoever is asked to separate or choose: where
  * the cards go, or `"lose"` for an effect that takes the objects away (a
- * sacrifice, destruction, exile, a bounce) and `"other"` for anything else
- * (Fight or Flight's "only creatures in the chosen pile can attack").
+ * sacrifice, destruction, exile, a bounce) and `"other"` for anything else.
  * `"turned-face-up"`: Hostile Negotiations' "turn a pile of your choice face
  * up". `"cast-or-hand"`: one spell from it may be cast free, the rest go to the
  * hand (Abstract Performance).
@@ -12099,6 +12104,9 @@ export interface EffectApi {
     chooser: PlayerId,
     faceDown: boolean,
     fates: { readonly chosen: PileFateWord; readonly rest?: PileFateWord },
+    /** `chooser` only stands in for an opponent to be named once the piles
+     * are made. */
+    anOpponentChooses?: boolean,
   ): boolean;
   /** The piles the last `askSeparatePiles` answer made, taken (and cleared). */
   takePiles(): readonly (readonly ObjectId[])[] | undefined;
@@ -19905,9 +19913,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       const faceDown = spec.faceDown === true;
       const progress = spec.progress;
       if (progress === undefined) {
-        const separator = effectPlayer(spec.separator ?? "you", ctx);
-        const chooser = effectPlayer(spec.chooser, ctx);
-        if (separator === undefined || chooser === undefined) return;
+        // An opponent to separate is named after the reveal, which is
+        // nobody's look to take: a look has its separator named beforehand.
+        const separator = spec.separator === "an-opponent" ? ctx.controller : effectPlayer(spec.separator ?? "you", ctx);
+        if (separator === undefined) return;
         const what = spec.objects;
         const begun = ctx.beginPiles(
           what === "targets"
@@ -19921,16 +19930,43 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         );
         // Nothing to separate: two empty piles, and nothing to do to either.
         if (begun.objects.length === 0) return;
-        const fates = { chosen: pileFateWord(spec.chosen), ...(spec.rest !== undefined ? { rest: pileFateWord(spec.rest) } : {}) };
-        if (ctx.askSeparatePiles(separator, begun.objects, chooser, faceDown, fates)) {
-          ctx.resumeAfterDecisions({ ...spec, progress: { objects: begun.objects, separator, chooser, lookers: begun.lookers } }, below);
+        applyEffectSpec({ ...spec, progress: { objects: begun.objects, lookers: begun.lookers } }, ctx);
+        return;
+      }
+      const fates = { chosen: pileFateWord(spec.chosen), ...(spec.rest !== undefined ? { rest: pileFateWord(spec.rest) } : {}) };
+      if (progress.separator === undefined) {
+        if (spec.separator === "an-opponent") {
+          applyEffectSpec({ kind: "choose-opponent", then: { ...spec, separator: "that-player" } }, ctx);
+          return;
+        }
+        const separator = effectPlayer(spec.separator ?? "you", ctx);
+        if (separator === undefined) return;
+        // One opponent is that opponent from the start. Of several, the first
+        // stands in on the offer until the piles are made.
+        const opponents = spec.chooser === "an-opponent" ? ctx.playersInScope("each-opponent") : [];
+        const chooser = spec.chooser === "an-opponent" ? opponents[0] : effectPlayer(spec.chooser, ctx);
+        if (chooser === undefined) return;
+        const named = opponents.length > 1 ? {} : { chooser };
+        if (ctx.askSeparatePiles(separator, progress.objects, chooser, faceDown, fates, opponents.length > 1)) {
+          ctx.resumeAfterDecisions({ ...spec, progress: { ...progress, separator, ...named } }, below);
         }
         return;
       }
       let piles = progress.piles;
-      if (piles === undefined) {
-        piles = ctx.takePiles() ?? [[], [...progress.objects]];
-        const fates = { chosen: pileFateWord(spec.chosen), ...(spec.rest !== undefined ? { rest: pileFateWord(spec.rest) } : {}) };
+      if (piles === undefined) piles = ctx.takePiles() ?? [[], [...progress.objects]];
+      if (progress.chooser === undefined) {
+        if (spec.chooser === "an-opponent") {
+          applyEffectSpec({ kind: "choose-opponent", then: { ...spec, chooser: "that-player", progress: { ...progress, piles } } }, ctx);
+          return;
+        }
+        const chooser = effectPlayer(spec.chooser, ctx);
+        if (chooser === undefined) return;
+        if (ctx.askChoosePile(chooser, progress.separator, piles, faceDown, progress.lookers, fates)) {
+          ctx.resumeAfterDecisions({ ...spec, progress: { ...progress, piles, chooser } }, below);
+        }
+        return;
+      }
+      if (progress.piles === undefined) {
         if (ctx.askChoosePile(progress.chooser, progress.separator, piles, faceDown, progress.lookers, fates)) {
           ctx.resumeAfterDecisions({ ...spec, progress: { ...progress, piles } }, below);
         }

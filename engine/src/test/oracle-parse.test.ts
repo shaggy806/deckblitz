@@ -5633,24 +5633,21 @@ describe("damage by this source, switches, defending-player restrictions, a targ
       "Reveal the top five cards of your library. An opponent separates those cards into two piles. Put one pile into your hand and the other into your graveyard.",
     );
     expect(fof.effect).toEqual({
-      kind: "choose-opponent",
-      then: {
-        kind: "separate-into-piles",
-        objects: { libraryTop: 5, reveal: true },
-        separator: "that-player",
-        chooser: "you",
-        chosen: "hand",
-        rest: "graveyard",
-      },
+      kind: "separate-into-piles",
+      objects: { libraryTop: 5, reveal: true },
+      separator: "an-opponent",
+      chooser: "you",
+      chosen: "hand",
+      rest: "graveyard",
     });
     const augury = face(
       "Instant",
       "Reveal the top five cards of your library and separate them into two piles. An opponent chooses one of those piles. Put that pile into your hand and the other into your graveyard.",
     );
-    expect(augury.effect.then).toEqual({
+    expect(augury.effect).toEqual({
       kind: "separate-into-piles",
       objects: { libraryTop: 5, reveal: true },
-      chooser: "that-player",
+      chooser: "an-opponent",
       chosen: "hand",
       rest: "graveyard",
     });

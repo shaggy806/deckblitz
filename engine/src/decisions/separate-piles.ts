@@ -28,6 +28,7 @@ export const separatePiles = defineDecision({
       source: awaiting.source,
       objects: [...awaiting.objects],
       chooser: awaiting.chooser,
+      ...(awaiting.anOpponentChooses === true ? { anOpponentChooses: true } : {}),
       ...(awaiting.faceDown === true ? { faceDown: true } : {}),
       fates: awaiting.fates,
       worth: pileWorth(ctx, awaiting.objects),

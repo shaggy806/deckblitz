@@ -5366,7 +5366,9 @@ function Table({
     )
   } else if (mode === 'separate-piles' && separatePilesAction) {
     const source = view.decisionSource ? `${view.decisionSource.cardName}: ` : ''
-    const chooser = separatePilesAction.chooser === seat ? 'you choose' : `${playerLabel(separatePilesAction.chooser, game.seats)} chooses`
+    const chooser = separatePilesAction.anOpponentChooses
+      ? 'an opponent chooses'
+      : separatePilesAction.chooser === seat ? 'you choose' : `${playerLabel(separatePilesAction.chooser, game.seats)} chooses`
     if (pilesOnBoard) {
       const first = pilePicks.length
       const second = separatePilesAction.objects.length - first
@@ -7608,7 +7610,9 @@ function Table({
       {mode === 'separate-piles' && separatePilesAction && !pilesOnBoard ? (
         <PileViewer
           title={`${view.decisionSource?.cardName ?? 'Piles'} — separate into two piles: ${
-            separatePilesAction.chooser === seat ? 'you choose' : `${playerLabel(separatePilesAction.chooser, game.seats)} chooses`
+            separatePilesAction.anOpponentChooses
+              ? 'an opponent chooses'
+              : separatePilesAction.chooser === seat ? 'you choose' : `${playerLabel(separatePilesAction.chooser, game.seats)} chooses`
           } one, and ${pileFatesText(separatePilesAction.fates)}`}
           resolve={(id) => view.objects[id]}
           labels={pileLabels}

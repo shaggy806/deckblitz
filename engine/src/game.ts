@@ -30486,6 +30486,8 @@ export class Game {
           // offered `"opponent"` here, but the match never handled it, so a
           // card written that way type-checked and silently never fired.
           (spec.who === "opponent" && event.player !== self.controller) ||
+          // Sewer Nemesis's "whenever the chosen player casts a spell".
+          (spec.who === "chosen-player" && event.player === self.chosenPlayer) ||
           // A Curse's "whenever enchanted player casts a spell" (Curse of
           // Silence): the player it enchants.
           (spec.who === "attached" && self.attachedToPlayer !== undefined && event.player === self.attachedToPlayer);
@@ -34816,7 +34818,7 @@ export class Game {
         // The spell's own target cards, still in a graveyard (rule 608.2b).
         return { objects: what.cards.filter((id) => this.state.objects[id]?.zone === "graveyard"), lookers: everyone };
       },
-      askSeparatePiles: (separator, objects, chooser, faceDown, fates) => {
+      askSeparatePiles: (separator, objects, chooser, faceDown, fates, anOpponentChooses) => {
         if (this.state.players[separator]?.hasLost !== false) return false;
         this.state.awaiting = {
           kind: "separate-piles",
@@ -34824,6 +34826,7 @@ export class Game {
           source,
           objects: [...objects],
           chooser,
+          ...(anOpponentChooses === true ? { anOpponentChooses: true } : {}),
           ...(faceDown ? { faceDown: true } : {}),
           fates,
         };

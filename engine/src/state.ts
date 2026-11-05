@@ -3506,6 +3506,9 @@ export type AwaitingDecision =
       readonly source: ObjectId;
       readonly objects: readonly ObjectId[];
       readonly chooser: PlayerId;
+      /** `chooser` only stands in for an opponent to be named once the piles
+       * are made ("an opponent chooses one of those piles"). */
+      readonly anOpponentChooses?: true;
       readonly faceDown?: true;
       readonly fates: { readonly chosen: PileFateWord; readonly rest?: PileFateWord };
     }
