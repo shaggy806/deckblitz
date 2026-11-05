@@ -38,7 +38,7 @@ export default defineCard({
       effect: {
         kind: "choose-permanents",
         random: true,
-        filter: { ...AIMED, notKeyword: "indestructible" },
+        filter: AIMED,
         upTo: 1,
         prompt: "A permanent you don't control with an aim counter, at random",
         then: { kind: "destroy", target: 0 },

@@ -720,7 +720,7 @@
    "files": [
     "engine/src/cards/pool/armed-and-armored.ts"
    ],
-   "tested": false
+   "tested": true
   },
   {
    "name": "Visions of Dread",

@@ -401,7 +401,7 @@ describe("Prismatic Strands", () => {
     const { game, a } = table();
     lands(game, "Plains", 3);
     lands(game, "Mountain", 2);
-    pickModes(a, 3);
+    a.chooseCreatureTypeFn = () => "R";
     cast(game, toHand(game, "Prismatic Strands"));
     cast(game, toHand(game, "Shock"), { targets: [ref(B)] });
     expect(life(game, B)).toBe(20);

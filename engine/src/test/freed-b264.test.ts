@@ -73,3 +73,30 @@ describe("a mass effect's `isSource: false` spares its source", () => {
     expect(game.state.objects[theirs]?.zone ?? "gone").not.toBe("battlefield");
   });
 });
+
+describe("Armed and Armored", () => {
+  it("attaches the Equipment chosen as it resolves to the Dwarf chosen before them", async () => {
+    const { table, spawn, lands, cast, toHand } = await import("./harness.js");
+    const { game, a } = table();
+    lands(game, "Plains", 2);
+    const dwarf = spawn(game, "Aerial Responder");
+    const bears = spawn(game, "Grizzly Bears");
+    const splitter = spawn(game, "Bonesplitter");
+    const sword = spawn(game, "Short Sword");
+    let call = 0;
+    a.choosePermanentsFn = (_view, eligible) => {
+      call += 1;
+      if (call === 1) {
+        expect(eligible).toEqual([dwarf]);
+        return [dwarf];
+      }
+      expect([...eligible].sort()).toEqual([splitter, sword].sort());
+      return [splitter, sword];
+    };
+    cast(game, toHand(game, "Armed and Armored"));
+    expect(call).toBe(2);
+    expect(game.state.objects[splitter].attachedTo).toBe(dwarf);
+    expect(game.state.objects[sword].attachedTo).toBe(dwarf);
+    expect(game.state.objects[bears].attachedTo).toBeUndefined();
+  });
+});
