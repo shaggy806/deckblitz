@@ -206,6 +206,7 @@ import _poolDarkwaterCatacombs from "../pool/darkwater-catacombs.js";
 import _poolDawngladeRegent from "../pool/dawnglade-regent.js";
 import _poolDaze from "../pool/daze.js";
 import _poolDeadlyVanity from "../pool/deadly-vanity.js";
+import _poolDeathInHeaven from "../pool/death-in-heaven.js";
 import _poolDeathknellKami from "../pool/deathknell-kami.js";
 import _poolDecanterOfEndlessWater from "../pool/decanter-of-endless-water.js";
 import _poolDecimatorWeb from "../pool/decimator-web.js";
@@ -1206,6 +1207,7 @@ const shard: CardShard = {
     _poolDawngladeRegent,
     _poolDaze,
     _poolDeadlyVanity,
+    _poolDeathInHeaven,
     _poolDeathknellKami,
     _poolDecanterOfEndlessWater,
     _poolDecimatorWeb,

@@ -189,6 +189,7 @@ import _poolDromokasCommand from "../pool/dromokas-command.js";
 import _poolDruidsCall from "../pool/druids-call.js";
 import _poolDustBowl from "../pool/dust-bowl.js";
 import _poolDwarvenDemolitionTeam from "../pool/dwarven-demolition-team.js";
+import _poolDwarvenLightsmith from "../pool/dwarven-lightsmith.js";
 import _poolDwarvenPriest from "../pool/dwarven-priest.js";
 import _poolDwarvenScorcher from "../pool/dwarven-scorcher.js";
 import _poolDwarvenShrine from "../pool/dwarven-shrine.js";
@@ -586,6 +587,7 @@ import _poolSaguWildling from "../pool/sagu-wildling.js";
 import _poolSakashimasWill from "../pool/sakashimas-will.js";
 import _poolSakuraTribeScout from "../pool/sakura-tribe-scout.js";
 import _poolSalvagedManaworker from "../pool/salvaged-manaworker.js";
+import _poolSamwiseTheStouthearted from "../pool/samwise-the-stouthearted.js";
 import _poolSanitariumSkeleton from "../pool/sanitarium-skeleton.js";
 import _poolSaprazzanLegate from "../pool/saprazzan-legate.js";
 import _poolSatyrHoplite from "../pool/satyr-hoplite.js";
@@ -667,6 +669,7 @@ import _poolSpiderManNoir from "../pool/spider-man-noir.js";
 import _poolSpikedCorridor from "../pool/spiked-corridor.js";
 import _poolSpiritMascot from "../pool/spirit-mascot.js";
 import _poolSpiritOfTheHunt from "../pool/spirit-of-the-hunt.js";
+import _poolSpiritSistersCall from "../pool/spirit-sisters-call.js";
 import _poolSpitefulSquad from "../pool/spiteful-squad.js";
 import _poolSpitfireHandler from "../pool/spitfire-handler.js";
 import _poolSplendidReclamation from "../pool/splendid-reclamation.js";
@@ -750,6 +753,7 @@ import _poolTheSpearOfBashenga from "../pool/the-spear-of-bashenga.js";
 import _poolTheUnspeakable from "../pool/the-unspeakable.js";
 import _poolTheorixCharm from "../pool/theorix-charm.js";
 import _poolTheorixMetamage from "../pool/theorix-metamage.js";
+import _poolThievingAmalgam from "../pool/thieving-amalgam.js";
 import _poolThornedMoloch from "../pool/thorned-moloch.js";
 import _poolThoughtpickerWitch from "../pool/thoughtpicker-witch.js";
 import _poolThrabenGargoyle from "../pool/thraben-gargoyle.js";
@@ -1053,6 +1057,7 @@ const shard: CardShard = {
     _poolDruidsCall,
     _poolDustBowl,
     _poolDwarvenDemolitionTeam,
+    _poolDwarvenLightsmith,
     _poolDwarvenPriest,
     _poolDwarvenScorcher,
     _poolDwarvenShrine,
@@ -1450,6 +1455,7 @@ const shard: CardShard = {
     _poolSakashimasWill,
     _poolSakuraTribeScout,
     _poolSalvagedManaworker,
+    _poolSamwiseTheStouthearted,
     _poolSanitariumSkeleton,
     _poolSaprazzanLegate,
     _poolSatyrHoplite,
@@ -1531,6 +1537,7 @@ const shard: CardShard = {
     _poolSpikedCorridor,
     _poolSpiritMascot,
     _poolSpiritOfTheHunt,
+    _poolSpiritSistersCall,
     _poolSpitefulSquad,
     _poolSpitfireHandler,
     _poolSplendidReclamation,
@@ -1614,6 +1621,7 @@ const shard: CardShard = {
     _poolTheUnspeakable,
     _poolTheorixCharm,
     _poolTheorixMetamage,
+    _poolThievingAmalgam,
     _poolThornedMoloch,
     _poolThoughtpickerWitch,
     _poolThrabenGargoyle,

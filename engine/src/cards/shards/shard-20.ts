@@ -70,6 +70,7 @@ import _poolAzoriusHerald from "../pool/azorius-herald.js";
 import _poolBackForSeconds from "../pool/back-for-seconds.js";
 import _poolBalothPup from "../pool/baloth-pup.js";
 import _poolBalshanCollaborator from "../pool/balshan-collaborator.js";
+import _poolBarbedBackWurm from "../pool/barbed-back-wurm.js";
 import _poolBarkchannelPathway from "../pool/barkchannel-pathway.js";
 import _poolBasriKet from "../pool/basri-ket.js";
 import _poolBastionInventor from "../pool/bastion-inventor.js";
@@ -226,6 +227,7 @@ import _poolDesperateCastaways from "../pool/desperate-castaways.js";
 import _poolDetentionSphere from "../pool/detention-sphere.js";
 import _poolDigUp from "../pool/dig-up.js";
 import _poolDigsiteConservator from "../pool/digsite-conservator.js";
+import _poolDihadasPloy from "../pool/dihadas-ploy.js";
 import _poolDimirLocket from "../pool/dimir-locket.js";
 import _poolDinosaurHunter from "../pool/dinosaur-hunter.js";
 import _poolDismissIntoDream from "../pool/dismiss-into-dream.js";
@@ -466,6 +468,7 @@ import _poolKorDirge from "../pool/kor-dirge.js";
 import _poolKorozdaGuildmage from "../pool/korozda-guildmage.js";
 import _poolKrangUtromWarlord from "../pool/krang-utrom-warlord.js";
 import _poolKraulStinger from "../pool/kraul-stinger.js";
+import _poolKrosanReclamation from "../pool/krosan-reclamation.js";
 import _poolKruinStriker from "../pool/kruin-striker.js";
 import _poolKyrenFlamewright from "../pool/kyren-flamewright.js";
 import _poolLabyrinthOfSkophos from "../pool/labyrinth-of-skophos.js";
@@ -481,6 +484,7 @@ import _poolLegionSEnd from "../pool/legion-s-end.js";
 import _poolLeonardoTheBalance from "../pool/leonardo-the-balance.js";
 import _poolLeoninAbunas from "../pool/leonin-abunas.js";
 import _poolLeoninArmorguard from "../pool/leonin-armorguard.js";
+import _poolLesserWerewolf from "../pool/lesser-werewolf.js";
 import _poolLieutenantsOfTheGuard from "../pool/lieutenants-of-the-guard.js";
 import _poolLifeGoesOn from "../pool/life-goes-on.js";
 import _poolLifesFinale from "../pool/lifes-finale.js";
@@ -771,6 +775,7 @@ import _poolSorcererOfTheFang from "../pool/sorcerer-of-the-fang.js";
 import _poolSorcerersWand from "../pool/sorcerers-wand.js";
 import _poolSoulcageFiend from "../pool/soulcage-fiend.js";
 import _poolSourbreadAuntie from "../pool/sourbread-auntie.js";
+import _poolSovereignsOfLostAlara from "../pool/sovereigns-of-lost-alara.js";
 import _poolSpaceTimeAnomaly from "../pool/space-time-anomaly.js";
 import _poolSparringCollar from "../pool/sparring-collar.js";
 import _poolSpearbreakerBehemoth from "../pool/spearbreaker-behemoth.js";
@@ -1068,6 +1073,7 @@ const shard: CardShard = {
     _poolBackForSeconds,
     _poolBalothPup,
     _poolBalshanCollaborator,
+    _poolBarbedBackWurm,
     _poolBarkchannelPathway,
     _poolBasriKet,
     _poolBastionInventor,
@@ -1224,6 +1230,7 @@ const shard: CardShard = {
     _poolDetentionSphere,
     _poolDigUp,
     _poolDigsiteConservator,
+    _poolDihadasPloy,
     _poolDimirLocket,
     _poolDinosaurHunter,
     _poolDismissIntoDream,
@@ -1464,6 +1471,7 @@ const shard: CardShard = {
     _poolKorozdaGuildmage,
     _poolKrangUtromWarlord,
     _poolKraulStinger,
+    _poolKrosanReclamation,
     _poolKruinStriker,
     _poolKyrenFlamewright,
     _poolLabyrinthOfSkophos,
@@ -1479,6 +1487,7 @@ const shard: CardShard = {
     _poolLeonardoTheBalance,
     _poolLeoninAbunas,
     _poolLeoninArmorguard,
+    _poolLesserWerewolf,
     _poolLieutenantsOfTheGuard,
     _poolLifeGoesOn,
     _poolLifesFinale,
@@ -1769,6 +1778,7 @@ const shard: CardShard = {
     _poolSorcerersWand,
     _poolSoulcageFiend,
     _poolSourbreadAuntie,
+    _poolSovereignsOfLostAlara,
     _poolSpaceTimeAnomaly,
     _poolSparringCollar,
     _poolSpearbreakerBehemoth,

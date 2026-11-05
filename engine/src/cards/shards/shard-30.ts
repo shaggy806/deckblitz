@@ -654,6 +654,7 @@ import _poolRegnaTheRedeemer from "../pool/regna-the-redeemer.js";
 import _poolRejuvenate from "../pool/rejuvenate.js";
 import _poolRelease from "../pool/release.js";
 import _poolRelentlessAdvance from "../pool/relentless-advance.js";
+import _poolRelicAmulet from "../pool/relic-amulet.js";
 import _poolReluctantRoleModel from "../pool/reluctant-role-model.js";
 import _poolRenderSilent from "../pool/render-silent.js";
 import _poolRepairAndRecharge from "../pool/repair-and-recharge.js";
@@ -811,6 +812,7 @@ import _poolTeferisAgelessInsight from "../pool/teferis-ageless-insight.js";
 import _poolTeleport from "../pool/teleport.js";
 import _poolTempleOfCivilization from "../pool/temple-of-civilization.js";
 import _poolTempleOfMalice from "../pool/temple-of-malice.js";
+import _poolTemporalDistortion from "../pool/temporal-distortion.js";
 import _poolTemporalFirestorm from "../pool/temporal-firestorm.js";
 import _poolTheAkroanWar from "../pool/the-akroan-war.js";
 import _poolTheBalrogOfMoria from "../pool/the-balrog-of-moria.js";
@@ -1614,6 +1616,7 @@ const shard: CardShard = {
     _poolRejuvenate,
     _poolRelease,
     _poolRelentlessAdvance,
+    _poolRelicAmulet,
     _poolReluctantRoleModel,
     _poolRenderSilent,
     _poolRepairAndRecharge,
@@ -1771,6 +1774,7 @@ const shard: CardShard = {
     _poolTeleport,
     _poolTempleOfCivilization,
     _poolTempleOfMalice,
+    _poolTemporalDistortion,
     _poolTemporalFirestorm,
     _poolTheAkroanWar,
     _poolTheBalrogOfMoria,

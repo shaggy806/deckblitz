@@ -266,6 +266,7 @@ import _poolExultantCultist from "../pool/exultant-cultist.js";
 import _poolFaithlessLooting from "../pool/faithless-looting.js";
 import _poolFaithlessSalvaging from "../pool/faithless-salvaging.js";
 import _poolFangrenPathcutter from "../pool/fangren-pathcutter.js";
+import _poolFatedClash from "../pool/fated-clash.js";
 import _poolFearfulVillager from "../pool/fearful-villager.js";
 import _poolFearlessHalberdier from "../pool/fearless-halberdier.js";
 import _poolFearsomeWerewolf from "../pool/fearsome-werewolf.js";
@@ -497,6 +498,7 @@ import _poolMindwhisker from "../pool/mindwhisker.js";
 import _poolMinionsMurmurs from "../pool/minions-murmurs.js";
 import _poolMireBlight from "../pool/mire-blight.js";
 import _poolMirrormereGuardian from "../pool/mirrormere-guardian.js";
+import _poolMissy from "../pool/missy.js";
 import _poolMjolnirsMight from "../pool/mjolnirs-might.js";
 import _poolMoatPiranhas from "../pool/moat-piranhas.js";
 import _poolMobilization from "../pool/mobilization.js";
@@ -1222,6 +1224,7 @@ const shard: CardShard = {
     _poolFaithlessLooting,
     _poolFaithlessSalvaging,
     _poolFangrenPathcutter,
+    _poolFatedClash,
     _poolFearfulVillager,
     _poolFearlessHalberdier,
     _poolFearsomeWerewolf,
@@ -1453,6 +1456,7 @@ const shard: CardShard = {
     _poolMinionsMurmurs,
     _poolMireBlight,
     _poolMirrormereGuardian,
+    _poolMissy,
     _poolMjolnirsMight,
     _poolMoatPiranhas,
     _poolMobilization,

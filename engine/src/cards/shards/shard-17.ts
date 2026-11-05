@@ -553,6 +553,7 @@ import _poolNimanaSkydancer from "../pool/nimana-skydancer.js";
 import _poolNimbleLarcenist from "../pool/nimble-larcenist.js";
 import _poolNissaGenesisMage from "../pool/nissa-genesis-mage.js";
 import _poolNissaWorldsoulSpeaker from "../pool/nissa-worldsoul-speaker.js";
+import _poolNivMizzetGuildpact from "../pool/niv-mizzet-guildpact.js";
 import _poolNornsInquisitor from "../pool/norns-inquisitor.js";
 import _poolNosyGoblin from "../pool/nosy-goblin.js";
 import _poolNoxiousGrasp from "../pool/noxious-grasp.js";
@@ -632,6 +633,7 @@ import _poolRadiantKavu from "../pool/radiant-kavu.js";
 import _poolRaffineSchemingSeer from "../pool/raffine-scheming-seer.js";
 import _poolRafiqOfTheMany from "../pool/rafiq-of-the-many.js";
 import _poolRainOfTears from "../pool/rain-of-tears.js";
+import _poolRaiseTheDraugr from "../pool/raise-the-draugr.js";
 import _poolRamosianCommander from "../pool/ramosian-commander.js";
 import _poolRattleclawMystic from "../pool/rattleclaw-mystic.js";
 import _poolRaucousCarnival from "../pool/raucous-carnival.js";
@@ -724,6 +726,7 @@ import _poolSkitteringHorror from "../pool/skittering-horror.js";
 import _poolSkylasher from "../pool/skylasher.js";
 import _poolSkymarchBloodletter from "../pool/skymarch-bloodletter.js";
 import _poolSkyshroudTroopers from "../pool/skyshroud-troopers.js";
+import _poolSkystreamer from "../pool/skystreamer.js";
 import _poolSnapdaxApexOfTheHunt from "../pool/snapdax-apex-of-the-hunt.js";
 import _poolSnarlingWolf from "../pool/snarling-wolf.js";
 import _poolSoaringSandwing from "../pool/soaring-sandwing.js";
@@ -1507,6 +1510,7 @@ const shard: CardShard = {
     _poolNimbleLarcenist,
     _poolNissaGenesisMage,
     _poolNissaWorldsoulSpeaker,
+    _poolNivMizzetGuildpact,
     _poolNornsInquisitor,
     _poolNosyGoblin,
     _poolNoxiousGrasp,
@@ -1586,6 +1590,7 @@ const shard: CardShard = {
     _poolRaffineSchemingSeer,
     _poolRafiqOfTheMany,
     _poolRainOfTears,
+    _poolRaiseTheDraugr,
     _poolRamosianCommander,
     _poolRattleclawMystic,
     _poolRaucousCarnival,
@@ -1678,6 +1683,7 @@ const shard: CardShard = {
     _poolSkylasher,
     _poolSkymarchBloodletter,
     _poolSkyshroudTroopers,
+    _poolSkystreamer,
     _poolSnapdaxApexOfTheHunt,
     _poolSnarlingWolf,
     _poolSoaringSandwing,

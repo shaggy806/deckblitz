@@ -300,6 +300,7 @@ import _poolGarnaBloodfistOfKeld from "../pool/garna-bloodfist-of-keld.js";
 import _poolGarrisonExcavator from "../pool/garrison-excavator.js";
 import _poolGatesOfIstfell from "../pool/gates-of-istfell.js";
 import _poolGatheringPlace from "../pool/gathering-place.js";
+import _poolGauntletsOfChaos from "../pool/gauntlets-of-chaos.js";
 import _poolGeneralTazri from "../pool/general-tazri.js";
 import _poolGhoulsteed from "../pool/ghoulsteed.js";
 import _poolGiantsBoulder from "../pool/giants-boulder.js";
@@ -440,6 +441,7 @@ import _poolLordSkittersButcher from "../pool/lord-skitters-butcher.js";
 import _poolLoxodonSurveyor from "../pool/loxodon-surveyor.js";
 import _poolLuminousBroodmoth from "../pool/luminous-broodmoth.js";
 import _poolLurkingChupacabra from "../pool/lurking-chupacabra.js";
+import _poolMabelBitterRecluse from "../pool/mabel-bitter-recluse.js";
 import _poolMadRatter from "../pool/mad-ratter.js";
 import _poolMagesContest from "../pool/mages-contest.js";
 import _poolMagmakinArtillerist from "../pool/magmakin-artillerist.js";
@@ -557,6 +559,7 @@ import _poolPrideOfTheRoad from "../pool/pride-of-the-road.js";
 import _poolPridemalkin from "../pool/pridemalkin.js";
 import _poolPrisonRealm from "../pool/prison-realm.js";
 import _poolProtectionMagic from "../pool/protection-magic.js";
+import _poolPupuUfo from "../pool/pupu-ufo.js";
 import _poolQuash from "../pool/quash.js";
 import _poolQuestingPhelddagrif from "../pool/questing-phelddagrif.js";
 import _poolRabidAttack from "../pool/rabid-attack.js";
@@ -604,6 +607,7 @@ import _poolRivenTurnbull from "../pool/riven-turnbull.js";
 import _poolRixMaadiReveler from "../pool/rix-maadi-reveler.js";
 import _poolRobotDomination from "../pool/robot-domination.js";
 import _poolRoboticsMastery from "../pool/robotics-mastery.js";
+import _poolRonaHeraldOfInvasion from "../pool/rona-herald-of-invasion.js";
 import _poolRope from "../pool/rope.js";
 import _poolRosethornHalberd from "../pool/rosethorn-halberd.js";
 import _poolRottingMastodon from "../pool/rotting-mastodon.js";
@@ -659,6 +663,7 @@ import _poolSeedtime from "../pool/seedtime.js";
 import _poolSeethingPathblazer from "../pool/seething-pathblazer.js";
 import _poolSelflessCathar from "../pool/selfless-cathar.js";
 import _poolSenselessRage from "../pool/senseless-rage.js";
+import _poolSentinel from "../pool/sentinel.js";
 import _poolSereneHeart from "../pool/serene-heart.js";
 import _poolSerraAvatar from "../pool/serra-avatar.js";
 import _poolSerratedBiskelion from "../pool/serrated-biskelion.js";
@@ -1216,6 +1221,7 @@ const shard: CardShard = {
     _poolGarrisonExcavator,
     _poolGatesOfIstfell,
     _poolGatheringPlace,
+    _poolGauntletsOfChaos,
     _poolGeneralTazri,
     _poolGhoulsteed,
     _poolGiantsBoulder,
@@ -1356,6 +1362,7 @@ const shard: CardShard = {
     _poolLoxodonSurveyor,
     _poolLuminousBroodmoth,
     _poolLurkingChupacabra,
+    _poolMabelBitterRecluse,
     _poolMadRatter,
     _poolMagesContest,
     _poolMagmakinArtillerist,
@@ -1473,6 +1480,7 @@ const shard: CardShard = {
     _poolPridemalkin,
     _poolPrisonRealm,
     _poolProtectionMagic,
+    _poolPupuUfo,
     _poolQuash,
     _poolQuestingPhelddagrif,
     _poolRabidAttack,
@@ -1520,6 +1528,7 @@ const shard: CardShard = {
     _poolRixMaadiReveler,
     _poolRobotDomination,
     _poolRoboticsMastery,
+    _poolRonaHeraldOfInvasion,
     _poolRope,
     _poolRosethornHalberd,
     _poolRottingMastodon,
@@ -1575,6 +1584,7 @@ const shard: CardShard = {
     _poolSeethingPathblazer,
     _poolSelflessCathar,
     _poolSenselessRage,
+    _poolSentinel,
     _poolSereneHeart,
     _poolSerraAvatar,
     _poolSerratedBiskelion,

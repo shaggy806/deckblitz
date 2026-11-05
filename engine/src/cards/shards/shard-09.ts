@@ -627,6 +627,7 @@ import _poolQuicksilverBehemoth from "../pool/quicksilver-behemoth.js";
 import _poolQuilledCharger from "../pool/quilled-charger.js";
 import _poolQuirionExplorer from "../pool/quirion-explorer.js";
 import _poolRageReflection from "../pool/rage-reflection.js";
+import _poolRagnarokDivineDeliverance from "../pool/ragnarok-divine-deliverance.js";
 import _poolRainSlickedCopse from "../pool/rain-slicked-copse.js";
 import _poolRakkaMar from "../pool/rakka-mar.js";
 import _poolRakshasasBargain from "../pool/rakshasas-bargain.js";
@@ -888,6 +889,7 @@ import _poolUnrulyKrasis from "../pool/unruly-krasis.js";
 import _poolUrborgUprising from "../pool/urborg-uprising.js";
 import _poolValleyDasher from "../pool/valley-dasher.js";
 import _poolValleyFloodcaller from "../pool/valley-floodcaller.js";
+import _poolVampireCharmseeker from "../pool/vampire-charmseeker.js";
 import _poolVampireSlayer from "../pool/vampire-slayer.js";
 import _poolVampireSovereign from "../pool/vampire-sovereign.js";
 import _poolVanquishTheWeak from "../pool/vanquish-the-weak.js";
@@ -1605,6 +1607,7 @@ const shard: CardShard = {
     _poolQuilledCharger,
     _poolQuirionExplorer,
     _poolRageReflection,
+    _poolRagnarokDivineDeliverance,
     _poolRainSlickedCopse,
     _poolRakkaMar,
     _poolRakshasasBargain,
@@ -1866,6 +1869,7 @@ const shard: CardShard = {
     _poolUrborgUprising,
     _poolValleyDasher,
     _poolValleyFloodcaller,
+    _poolVampireCharmseeker,
     _poolVampireSlayer,
     _poolVampireSovereign,
     _poolVanquishTheWeak,

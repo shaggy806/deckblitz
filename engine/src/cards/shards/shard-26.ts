@@ -45,6 +45,7 @@ import _poolApexDevastator from "../pool/apex-devastator.js";
 import _poolApocalypseHydra from "../pool/apocalypse-hydra.js";
 import _poolAranaHeartOfTheSpider from "../pool/arana-heart-of-the-spider.js";
 import _poolArborealAlliance from "../pool/arboreal-alliance.js";
+import _poolArcSpitter from "../pool/arc-spitter.js";
 import _poolArcumsAstrolabe from "../pool/arcums-astrolabe.js";
 import _poolArdenvaleFealty from "../pool/ardenvale-fealty.js";
 import _poolArgivianBlacksmith from "../pool/argivian-blacksmith.js";
@@ -627,6 +628,7 @@ import _poolReluctantDounguard from "../pool/reluctant-dounguard.js";
 import _poolRenegadeFreighter from "../pool/renegade-freighter.js";
 import _poolRepopulate from "../pool/repopulate.js";
 import _poolReshapeTheEarth from "../pool/reshape-the-earth.js";
+import _poolRetracedImage from "../pool/retraced-image.js";
 import _poolRetrievalAgent from "../pool/retrieval-agent.js";
 import _poolRevenant from "../pool/revenant.js";
 import _poolRevengeOfTheDrowned from "../pool/revenge-of-the-drowned.js";
@@ -755,6 +757,7 @@ import _poolSpinyStarfish from "../pool/spiny-starfish.js";
 import _poolSpite from "../pool/spite.js";
 import _poolSpitebellows from "../pool/spitebellows.js";
 import _poolSpittingSliver from "../pool/spitting-sliver.js";
+import _poolSpittingSlug from "../pool/spitting-slug.js";
 import _poolSporeSwarm from "../pool/spore-swarm.js";
 import _poolSpreadingSeas from "../pool/spreading-seas.js";
 import _poolSpringMind from "../pool/spring-mind.js";
@@ -999,6 +1002,7 @@ const shard: CardShard = {
     _poolApocalypseHydra,
     _poolAranaHeartOfTheSpider,
     _poolArborealAlliance,
+    _poolArcSpitter,
     _poolArcumsAstrolabe,
     _poolArdenvaleFealty,
     _poolArgivianBlacksmith,
@@ -1581,6 +1585,7 @@ const shard: CardShard = {
     _poolRenegadeFreighter,
     _poolRepopulate,
     _poolReshapeTheEarth,
+    _poolRetracedImage,
     _poolRetrievalAgent,
     _poolRevenant,
     _poolRevengeOfTheDrowned,
@@ -1709,6 +1714,7 @@ const shard: CardShard = {
     _poolSpite,
     _poolSpitebellows,
     _poolSpittingSliver,
+    _poolSpittingSlug,
     _poolSporeSwarm,
     _poolSpreadingSeas,
     _poolSpringMind,

@@ -116,6 +116,7 @@ import _poolBurningCloak from "../pool/burning-cloak.js";
 import _poolBurrowguardMentor from "../pool/burrowguard-mentor.js";
 import _poolButcherOfMalakir from "../pool/butcher-of-malakir.js";
 import _poolCabalPatriarch from "../pool/cabal-patriarch.js";
+import _poolCallToTheKindred from "../pool/call-to-the-kindred.js";
 import _poolCampusGuide from "../pool/campus-guide.js";
 import _poolCaptainSisay from "../pool/captain-sisay.js";
 import _poolCaptainStormCosmiumRaider from "../pool/captain-storm-cosmium-raider.js";
@@ -574,6 +575,7 @@ import _poolPrimalOrder from "../pool/primal-order.js";
 import _poolPrologueToPhyresis from "../pool/prologue-to-phyresis.js";
 import _poolProtectiveBubble from "../pool/protective-bubble.js";
 import _poolProwlingFelidar from "../pool/prowling-felidar.js";
+import _poolPsychicAllergy from "../pool/psychic-allergy.js";
 import _poolPullFromTheGrave from "../pool/pull-from-the-grave.js";
 import _poolPullingTeeth from "../pool/pulling-teeth.js";
 import _poolPuncturingBlow from "../pool/puncturing-blow.js";
@@ -1060,6 +1062,7 @@ const shard: CardShard = {
     _poolBurrowguardMentor,
     _poolButcherOfMalakir,
     _poolCabalPatriarch,
+    _poolCallToTheKindred,
     _poolCampusGuide,
     _poolCaptainSisay,
     _poolCaptainStormCosmiumRaider,
@@ -1518,6 +1521,7 @@ const shard: CardShard = {
     _poolPrologueToPhyresis,
     _poolProtectiveBubble,
     _poolProwlingFelidar,
+    _poolPsychicAllergy,
     _poolPullFromTheGrave,
     _poolPullingTeeth,
     _poolPuncturingBlow,

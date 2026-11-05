@@ -41,6 +41,7 @@ import _poolArmorSliver from "../pool/armor-sliver.js";
 import _poolArmorWars from "../pool/armor-wars.js";
 import _poolArmoryMice from "../pool/armory-mice.js";
 import _poolArtisanOfKozilek from "../pool/artisan-of-kozilek.js";
+import _poolAshenReaper from "../pool/ashen-reaper.js";
 import _poolAshiokNightmareWeaver from "../pool/ashiok-nightmare-weaver.js";
 import _poolAtsushiTheBlazingSky from "../pool/atsushi-the-blazing-sky.js";
 import _poolAzimaetDrake from "../pool/azimaet-drake.js";
@@ -219,6 +220,7 @@ import _poolEmbalmedBrawler from "../pool/embalmed-brawler.js";
 import _poolEmbraceTheUnknown from "../pool/embrace-the-unknown.js";
 import _poolEmissaryOfDespair from "../pool/emissary-of-despair.js";
 import _poolEnergyVortex from "../pool/energy-vortex.js";
+import _poolEomerKingOfRohan from "../pool/eomer-king-of-rohan.js";
 import _poolEpicStruggle from "../pool/epic-struggle.js";
 import _poolErinisGloomStalker from "../pool/erinis-gloom-stalker.js";
 import _poolEssenceCapture from "../pool/essence-capture.js";
@@ -307,6 +309,7 @@ import _poolGoblinCohort from "../pool/goblin-cohort.js";
 import _poolGoblinFireleaper from "../pool/goblin-fireleaper.js";
 import _poolGoblinRecruiter from "../pool/goblin-recruiter.js";
 import _poolGoblinSledder from "../pool/goblin-sledder.js";
+import _poolGoblinSnowman from "../pool/goblin-snowman.js";
 import _poolGodheadOfAwe from "../pool/godhead-of-awe.js";
 import _poolGoldRush from "../pool/gold-rush.js";
 import _poolGoldenGuardian from "../pool/golden-guardian.js";
@@ -488,6 +491,7 @@ import _poolMidnightPathlighter from "../pool/midnight-pathlighter.js";
 import _poolMindbreakTrap from "../pool/mindbreak-trap.js";
 import _poolMindculling from "../pool/mindculling.js";
 import _poolMineBearer from "../pool/mine-bearer.js";
+import _poolMineLayer from "../pool/mine-layer.js";
 import _poolMirari from "../pool/mirari.js";
 import _poolMirrormade from "../pool/mirrormade.js";
 import _poolMirrorwoodTreefolk from "../pool/mirrorwood-treefolk.js";
@@ -762,6 +766,7 @@ import _poolTheNightOfTheDoctor from "../pool/the-night-of-the-doctor.js";
 import _poolTheOoze from "../pool/the-ooze.js";
 import _poolTheRack from "../pool/the-rack.js";
 import _poolTheTerrorOfSerpentsPass from "../pool/the-terror-of-serpents-pass.js";
+import _poolTheTricksterGodsHeist from "../pool/the-trickster-gods-heist.js";
 import _poolThermokarst from "../pool/thermokarst.js";
 import _poolThinkTwice from "../pool/think-twice.js";
 import _poolThornLieutenant from "../pool/thorn-lieutenant.js";
@@ -937,6 +942,7 @@ const shard: CardShard = {
     _poolArmorWars,
     _poolArmoryMice,
     _poolArtisanOfKozilek,
+    _poolAshenReaper,
     _poolAshiokNightmareWeaver,
     _poolAtsushiTheBlazingSky,
     _poolAzimaetDrake,
@@ -1115,6 +1121,7 @@ const shard: CardShard = {
     _poolEmbraceTheUnknown,
     _poolEmissaryOfDespair,
     _poolEnergyVortex,
+    _poolEomerKingOfRohan,
     _poolEpicStruggle,
     _poolErinisGloomStalker,
     _poolEssenceCapture,
@@ -1203,6 +1210,7 @@ const shard: CardShard = {
     _poolGoblinFireleaper,
     _poolGoblinRecruiter,
     _poolGoblinSledder,
+    _poolGoblinSnowman,
     _poolGodheadOfAwe,
     _poolGoldRush,
     _poolGoldenGuardian,
@@ -1384,6 +1392,7 @@ const shard: CardShard = {
     _poolMindbreakTrap,
     _poolMindculling,
     _poolMineBearer,
+    _poolMineLayer,
     _poolMirari,
     _poolMirrormade,
     _poolMirrorwoodTreefolk,
@@ -1658,6 +1667,7 @@ const shard: CardShard = {
     _poolTheOoze,
     _poolTheRack,
     _poolTheTerrorOfSerpentsPass,
+    _poolTheTricksterGodsHeist,
     _poolThermokarst,
     _poolThinkTwice,
     _poolThornLieutenant,

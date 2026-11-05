@@ -64,6 +64,7 @@ import _poolAvenSurveyor from "../pool/aven-surveyor.js";
 import _poolAvengingHunter from "../pool/avenging-hunter.js";
 import _poolAvishkarRaceway from "../pool/avishkar-raceway.js";
 import _poolAxgardCavalry from "../pool/axgard-cavalry.js";
+import _poolBalduvianBerserker from "../pool/balduvian-berserker.js";
 import _poolBallotBroker from "../pool/ballot-broker.js";
 import _poolBarrelDownSokenzan from "../pool/barrel-down-sokenzan.js";
 import _poolBartolomeDelPresidio from "../pool/bartolome-del-presidio.js";
@@ -156,6 +157,7 @@ import _poolCodeOfConstraint from "../pool/code-of-constraint.js";
 import _poolCogworkArchivist from "../pool/cogwork-archivist.js";
 import _poolCoilingRebirth from "../pool/coiling-rebirth.js";
 import _poolCoilsOfTheMedusa from "../pool/coils-of-the-medusa.js";
+import _poolColossalRattlewurm from "../pool/colossal-rattlewurm.js";
 import _poolColossus from "../pool/colossus.js";
 import _poolCombust from "../pool/combust.js";
 import _poolCommit from "../pool/commit.js";
@@ -497,6 +499,7 @@ import _poolMinecartDaredevil from "../pool/minecart-daredevil.js";
 import _poolMinotaurTactician from "../pool/minotaur-tactician.js";
 import _poolMirrorStrike from "../pool/mirror-strike.js";
 import _poolMirrorworks from "../pool/mirrorworks.js";
+import _poolMischievousQuanar from "../pool/mischievous-quanar.js";
 import _poolMistfireAdept from "../pool/mistfire-adept.js";
 import _poolMizziumTank from "../pool/mizzium-tank.js";
 import _poolMobileFort from "../pool/mobile-fort.js";
@@ -639,6 +642,7 @@ import _poolResplendentMentor from "../pool/resplendent-mentor.js";
 import _poolRestlessReef from "../pool/restless-reef.js";
 import _poolRestorationSpecialist from "../pool/restoration-specialist.js";
 import _poolRestoreThePeace from "../pool/restore-the-peace.js";
+import _poolReturnFromExtinction from "../pool/return-from-extinction.js";
 import _poolReturnToTheRanks from "../pool/return-to-the-ranks.js";
 import _poolReturnedPhalanx from "../pool/returned-phalanx.js";
 import _poolReveillark from "../pool/reveillark.js";
@@ -659,6 +663,7 @@ import _poolRollingThunder from "../pool/rolling-thunder.js";
 import _poolRoostSeek from "../pool/roost-seek.js";
 import _poolRootKinAlly from "../pool/root-kin-ally.js";
 import _poolRootbreakerWurm from "../pool/rootbreaker-wurm.js";
+import _poolRootingKavu from "../pool/rooting-kavu.js";
 import _poolRootwalla from "../pool/rootwalla.js";
 import _poolRoseTyler from "../pool/rose-tyler.js";
 import _poolRotHulk from "../pool/rot-hulk.js";
@@ -723,6 +728,7 @@ import _poolSifsSpearmaster from "../pool/sifs-spearmaster.js";
 import _poolSigardasSummons from "../pool/sigardas-summons.js";
 import _poolSightlessBrawler from "../pool/sightless-brawler.js";
 import _poolSigiledStarfish from "../pool/sigiled-starfish.js";
+import _poolSilenceTheBelievers from "../pool/silence-the-believers.js";
 import _poolSilentSentinel from "../pool/silent-sentinel.js";
 import _poolSilverclawGriffin from "../pool/silverclaw-griffin.js";
 import _poolSilverquillApprentice from "../pool/silverquill-apprentice.js";
@@ -1028,6 +1034,7 @@ const shard: CardShard = {
     _poolAvengingHunter,
     _poolAvishkarRaceway,
     _poolAxgardCavalry,
+    _poolBalduvianBerserker,
     _poolBallotBroker,
     _poolBarrelDownSokenzan,
     _poolBartolomeDelPresidio,
@@ -1120,6 +1127,7 @@ const shard: CardShard = {
     _poolCogworkArchivist,
     _poolCoilingRebirth,
     _poolCoilsOfTheMedusa,
+    _poolColossalRattlewurm,
     _poolColossus,
     _poolCombust,
     _poolCommit,
@@ -1461,6 +1469,7 @@ const shard: CardShard = {
     _poolMinotaurTactician,
     _poolMirrorStrike,
     _poolMirrorworks,
+    _poolMischievousQuanar,
     _poolMistfireAdept,
     _poolMizziumTank,
     _poolMobileFort,
@@ -1603,6 +1612,7 @@ const shard: CardShard = {
     _poolRestlessReef,
     _poolRestorationSpecialist,
     _poolRestoreThePeace,
+    _poolReturnFromExtinction,
     _poolReturnToTheRanks,
     _poolReturnedPhalanx,
     _poolReveillark,
@@ -1623,6 +1633,7 @@ const shard: CardShard = {
     _poolRoostSeek,
     _poolRootKinAlly,
     _poolRootbreakerWurm,
+    _poolRootingKavu,
     _poolRootwalla,
     _poolRoseTyler,
     _poolRotHulk,
@@ -1687,6 +1698,7 @@ const shard: CardShard = {
     _poolSigardasSummons,
     _poolSightlessBrawler,
     _poolSigiledStarfish,
+    _poolSilenceTheBelievers,
     _poolSilentSentinel,
     _poolSilverclawGriffin,
     _poolSilverquillApprentice,

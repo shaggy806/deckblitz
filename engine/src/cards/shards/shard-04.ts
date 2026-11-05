@@ -476,6 +476,7 @@ import _poolMasterOfTheHunt from "../pool/master-of-the-hunt.js";
 import _poolMawcor from "../pool/mawcor.js";
 import _poolMeetingOfTheFive from "../pool/meeting-of-the-five.js";
 import _poolMemnarchTheWarden from "../pool/memnarch-the-warden.js";
+import _poolMemorysJourney from "../pool/memorys-journey.js";
 import _poolMentalNote from "../pool/mental-note.js";
 import _poolMerfolkSeer from "../pool/merfolk-seer.js";
 import _poolMeriadocBrandybuck from "../pool/meriadoc-brandybuck.js";
@@ -501,6 +502,7 @@ import _poolMultanisAcolyte from "../pool/multanis-acolyte.js";
 import _poolMuscleBurst from "../pool/muscle-burst.js";
 import _poolMwonvuliAcidMoss from "../pool/mwonvuli-acid-moss.js";
 import _poolMysteriosMirage from "../pool/mysterios-mirage.js";
+import _poolMysteriousLimousine from "../pool/mysterious-limousine.js";
 import _poolMysticSubdual from "../pool/mystic-subdual.js";
 import _poolNaggingThoughts from "../pool/nagging-thoughts.js";
 import _poolNashiMoonsLegacy from "../pool/nashi-moons-legacy.js";
@@ -736,6 +738,7 @@ import _poolSqueesToy from "../pool/squees-toy.js";
 import _poolSquirrelMob from "../pool/squirrel-mob.js";
 import _poolSquirrelNest from "../pool/squirrel-nest.js";
 import _poolStartle from "../pool/startle.js";
+import _poolSteadfastArmasaur from "../pool/steadfast-armasaur.js";
 import _poolSteelingStance from "../pool/steeling-stance.js";
 import _poolStellaLeeWildCard from "../pool/stella-lee-wild-card.js";
 import _poolStingcasterMage from "../pool/stingcaster-mage.js";
@@ -1406,6 +1409,7 @@ const shard: CardShard = {
     _poolMawcor,
     _poolMeetingOfTheFive,
     _poolMemnarchTheWarden,
+    _poolMemorysJourney,
     _poolMentalNote,
     _poolMerfolkSeer,
     _poolMeriadocBrandybuck,
@@ -1431,6 +1435,7 @@ const shard: CardShard = {
     _poolMuscleBurst,
     _poolMwonvuliAcidMoss,
     _poolMysteriosMirage,
+    _poolMysteriousLimousine,
     _poolMysticSubdual,
     _poolNaggingThoughts,
     _poolNashiMoonsLegacy,
@@ -1666,6 +1671,7 @@ const shard: CardShard = {
     _poolSquirrelMob,
     _poolSquirrelNest,
     _poolStartle,
+    _poolSteadfastArmasaur,
     _poolSteelingStance,
     _poolStellaLeeWildCard,
     _poolStingcasterMage,

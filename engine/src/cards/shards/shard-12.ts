@@ -180,6 +180,7 @@ import _poolCutOfTheProfits from "../pool/cut-of-the-profits.js";
 import _poolCutthroatManeuver from "../pool/cutthroat-maneuver.js";
 import _poolCyclopeanMummy from "../pool/cyclopean-mummy.js";
 import _poolDaringFiendbonder from "../pool/daring-fiendbonder.js";
+import _poolDaringThief from "../pool/daring-thief.js";
 import _poolDarkmossBridge from "../pool/darkmoss-bridge.js";
 import _poolDarksteelGargoyle from "../pool/darksteel-gargoyle.js";
 import _poolDawnrayArcher from "../pool/dawnray-archer.js";
@@ -614,6 +615,7 @@ import _poolPugnaciousHammerskull from "../pool/pugnacious-hammerskull.js";
 import _poolPullUnder from "../pool/pull-under.js";
 import _poolPunishIgnorance from "../pool/punish-ignorance.js";
 import _poolPunishingFire from "../pool/punishing-fire.js";
+import _poolPurgingStormbrood from "../pool/purging-stormbrood.js";
 import _poolPurphorossEmissary from "../pool/purphoross-emissary.js";
 import _poolPursuitOfFlight from "../pool/pursuit-of-flight.js";
 import _poolPyroceratops from "../pool/pyroceratops.js";
@@ -683,6 +685,7 @@ import _poolSavaiSabertooth from "../pool/savai-sabertooth.js";
 import _poolSavor from "../pool/savor.js";
 import _poolScar from "../pool/scar.js";
 import _poolScarletWitchWandaMaximoff from "../pool/scarlet-witch-wanda-maximoff.js";
+import _poolScholarOfNewHorizons from "../pool/scholar-of-new-horizons.js";
 import _poolScrollThief from "../pool/scroll-thief.js";
 import _poolSeaGateWreckage from "../pool/sea-gate-wreckage.js";
 import _poolSeascapeAerialist from "../pool/seascape-aerialist.js";
@@ -1121,6 +1124,7 @@ const shard: CardShard = {
     _poolCutthroatManeuver,
     _poolCyclopeanMummy,
     _poolDaringFiendbonder,
+    _poolDaringThief,
     _poolDarkmossBridge,
     _poolDarksteelGargoyle,
     _poolDawnrayArcher,
@@ -1555,6 +1559,7 @@ const shard: CardShard = {
     _poolPullUnder,
     _poolPunishIgnorance,
     _poolPunishingFire,
+    _poolPurgingStormbrood,
     _poolPurphorossEmissary,
     _poolPursuitOfFlight,
     _poolPyroceratops,
@@ -1624,6 +1629,7 @@ const shard: CardShard = {
     _poolSavor,
     _poolScar,
     _poolScarletWitchWandaMaximoff,
+    _poolScholarOfNewHorizons,
     _poolScrollThief,
     _poolSeaGateWreckage,
     _poolSeascapeAerialist,

@@ -164,6 +164,7 @@ import _poolCrazedSkirge from "../pool/crazed-skirge.js";
 import _poolCreeperhulk from "../pool/creeperhulk.js";
 import _poolCreosoteHeath from "../pool/creosote-heath.js";
 import _poolCrossroadsConsecrator from "../pool/crossroads-consecrator.js";
+import _poolCrownOfFury from "../pool/crown-of-fury.js";
 import _poolCrushOfWurms from "../pool/crush-of-wurms.js";
 import _poolCunningBandit from "../pool/cunning-bandit.js";
 import _poolCuombajjWitches from "../pool/cuombajj-witches.js";
@@ -244,6 +245,7 @@ import _poolErebosGodOfTheDead from "../pool/erebos-god-of-the-dead.js";
 import _poolErithizon from "../pool/erithizon.js";
 import _poolEscarpmentFortress from "../pool/escarpment-fortress.js";
 import _poolEssenceVortex from "../pool/essence-vortex.js";
+import _poolEverAfter from "../pool/ever-after.js";
 import _poolExaltedFlamerOfTzeentch from "../pool/exalted-flamer-of-tzeentch.js";
 import _poolExpelFromOrazca from "../pool/expel-from-orazca.js";
 import _poolExponentialGrowth from "../pool/exponential-growth.js";
@@ -540,6 +542,7 @@ import _poolNamelessOne from "../pool/nameless-one.js";
 import _poolNantukoShaman from "../pool/nantuko-shaman.js";
 import _poolNaturalEmergence from "../pool/natural-emergence.js";
 import _poolNaturalState from "../pool/natural-state.js";
+import _poolNazahnReveredBladesmith from "../pool/nazahn-revered-bladesmith.js";
 import _poolNecroticHex from "../pool/necrotic-hex.js";
 import _poolNestOfScarabs from "../pool/nest-of-scarabs.js";
 import _poolNewPrahvGuildmage from "../pool/new-prahv-guildmage.js";
@@ -1136,6 +1139,7 @@ const shard: CardShard = {
     _poolCreeperhulk,
     _poolCreosoteHeath,
     _poolCrossroadsConsecrator,
+    _poolCrownOfFury,
     _poolCrushOfWurms,
     _poolCunningBandit,
     _poolCuombajjWitches,
@@ -1216,6 +1220,7 @@ const shard: CardShard = {
     _poolErithizon,
     _poolEscarpmentFortress,
     _poolEssenceVortex,
+    _poolEverAfter,
     _poolExaltedFlamerOfTzeentch,
     _poolExpelFromOrazca,
     _poolExponentialGrowth,
@@ -1512,6 +1517,7 @@ const shard: CardShard = {
     _poolNantukoShaman,
     _poolNaturalEmergence,
     _poolNaturalState,
+    _poolNazahnReveredBladesmith,
     _poolNecroticHex,
     _poolNestOfScarabs,
     _poolNewPrahvGuildmage,

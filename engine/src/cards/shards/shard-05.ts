@@ -53,6 +53,7 @@ import _poolAstarionTheDecadent from "../pool/astarion-the-decadent.js";
 import _poolAstralDragon from "../pool/astral-dragon.js";
 import _poolAudaciousThief from "../pool/audacious-thief.js";
 import _poolAuraGnarlid from "../pool/aura-gnarlid.js";
+import _poolAurification from "../pool/aurification.js";
 import _poolAvacynAngelOfHorror from "../pool/avacyn-angel-of-horror.js";
 import _poolAvacynsPilgrim from "../pool/avacyns-pilgrim.js";
 import _poolAvatarOfDiscord from "../pool/avatar-of-discord.js";
@@ -311,6 +312,7 @@ import _poolFlawlessManeuver from "../pool/flawless-maneuver.js";
 import _poolFleshlessGladiator from "../pool/fleshless-gladiator.js";
 import _poolFlightOfEquenauts from "../pool/flight-of-equenauts.js";
 import _poolForbiddenOrchard from "../pool/forbidden-orchard.js";
+import _poolFrayingLine from "../pool/fraying-line.js";
 import _poolFrenziedDevils from "../pool/frenzied-devils.js";
 import _poolFrightfulDelusion from "../pool/frightful-delusion.js";
 import _poolFrostWalker from "../pool/frost-walker.js";
@@ -989,6 +991,7 @@ const shard: CardShard = {
     _poolAstralDragon,
     _poolAudaciousThief,
     _poolAuraGnarlid,
+    _poolAurification,
     _poolAvacynAngelOfHorror,
     _poolAvacynsPilgrim,
     _poolAvatarOfDiscord,
@@ -1247,6 +1250,7 @@ const shard: CardShard = {
     _poolFleshlessGladiator,
     _poolFlightOfEquenauts,
     _poolForbiddenOrchard,
+    _poolFrayingLine,
     _poolFrenziedDevils,
     _poolFrightfulDelusion,
     _poolFrostWalker,

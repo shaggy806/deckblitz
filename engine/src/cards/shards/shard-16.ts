@@ -388,6 +388,7 @@ import _poolHydrasGrowth from "../pool/hydras-growth.js";
 import _poolHydroChanneler from "../pool/hydro-channeler.js";
 import _poolIchorspitBasilisk from "../pool/ichorspit-basilisk.js";
 import _poolIkraShidiqiTheUsurper from "../pool/ikra-shidiqi-the-usurper.js";
+import _poolIllusionSpinners from "../pool/illusion-spinners.js";
 import _poolIllusionaryWall from "../pool/illusionary-wall.js";
 import _poolImmolatingSouleater from "../pool/immolating-souleater.js";
 import _poolImperialHellkite from "../pool/imperial-hellkite.js";
@@ -401,6 +402,7 @@ import _poolInspiredInventor from "../pool/inspired-inventor.js";
 import _poolInspiredSprite from "../pool/inspired-sprite.js";
 import _poolInspiritedVanguard from "../pool/inspirited-vanguard.js";
 import _poolIntimidatorInitiate from "../pool/intimidator-initiate.js";
+import _poolInvasionOfAzgol from "../pool/invasion-of-azgol.js";
 import _poolInvasionReinforcements from "../pool/invasion-reinforcements.js";
 import _poolInventorsFair from "../pool/inventors-fair.js";
 import _poolInversionBehemoth from "../pool/inversion-behemoth.js";
@@ -451,11 +453,13 @@ import _poolLashOfThorns from "../pool/lash-of-thorns.js";
 import _poolLastDitchEffort from "../pool/last-ditch-effort.js";
 import _poolLastingTarfire from "../pool/lasting-tarfire.js";
 import _poolLayBareTheHeart from "../pool/lay-bare-the-heart.js";
+import _poolLeatherheadSwampStalker from "../pool/leatherhead-swamp-stalker.js";
 import _poolLibrary from "../pool/library.js";
 import _poolLidlessGaze from "../pool/lidless-gaze.js";
 import _poolLifecreedDuo from "../pool/lifecreed-duo.js";
 import _poolLightmineField from "../pool/lightmine-field.js";
 import _poolLightningProwess from "../pool/lightning-prowess.js";
+import _poolLilianaDeathsMajesty from "../pool/liliana-deaths-majesty.js";
 import _poolLilianasInfluence from "../pool/lilianas-influence.js";
 import _poolLilyBowenRagingGrandma from "../pool/lily-bowen-raging-grandma.js";
 import _poolLiminalHold from "../pool/liminal-hold.js";
@@ -740,6 +744,7 @@ import _poolSilvosRogueElemental from "../pool/silvos-rogue-elemental.js";
 import _poolSinsOfThePast from "../pool/sins-of-the-past.js";
 import _poolSirenStormtamer from "../pool/siren-stormtamer.js";
 import _poolSisterhoodOfKarn from "../pool/sisterhood-of-karn.js";
+import _poolSistersOfStoneDeath from "../pool/sisters-of-stone-death.js";
 import _poolSkarrganHellkite from "../pool/skarrgan-hellkite.js";
 import _poolSkeletalGrimace from "../pool/skeletal-grimace.js";
 import _poolSkeletalKathari from "../pool/skeletal-kathari.js";
@@ -834,6 +839,7 @@ import _poolTerohsFaithful from "../pool/terohs-faithful.js";
 import _poolTerrorOfKruinPass from "../pool/terror-of-kruin-pass.js";
 import _poolTethmosHighPriest from "../pool/tethmos-high-priest.js";
 import _poolTeyoTheShieldmage from "../pool/teyo-the-shieldmage.js";
+import _poolTheCyberController from "../pool/the-cyber-controller.js";
 import _poolTheFalconSamWilson from "../pool/the-falcon-sam-wilson.js";
 import _poolTheLastRonin from "../pool/the-last-ronin.js";
 import _poolTheLastRoninsTechnique from "../pool/the-last-ronins-technique.js";
@@ -1403,6 +1409,7 @@ const shard: CardShard = {
     _poolHydroChanneler,
     _poolIchorspitBasilisk,
     _poolIkraShidiqiTheUsurper,
+    _poolIllusionSpinners,
     _poolIllusionaryWall,
     _poolImmolatingSouleater,
     _poolImperialHellkite,
@@ -1416,6 +1423,7 @@ const shard: CardShard = {
     _poolInspiredSprite,
     _poolInspiritedVanguard,
     _poolIntimidatorInitiate,
+    _poolInvasionOfAzgol,
     _poolInvasionReinforcements,
     _poolInventorsFair,
     _poolInversionBehemoth,
@@ -1466,11 +1474,13 @@ const shard: CardShard = {
     _poolLastDitchEffort,
     _poolLastingTarfire,
     _poolLayBareTheHeart,
+    _poolLeatherheadSwampStalker,
     _poolLibrary,
     _poolLidlessGaze,
     _poolLifecreedDuo,
     _poolLightmineField,
     _poolLightningProwess,
+    _poolLilianaDeathsMajesty,
     _poolLilianasInfluence,
     _poolLilyBowenRagingGrandma,
     _poolLiminalHold,
@@ -1755,6 +1765,7 @@ const shard: CardShard = {
     _poolSinsOfThePast,
     _poolSirenStormtamer,
     _poolSisterhoodOfKarn,
+    _poolSistersOfStoneDeath,
     _poolSkarrganHellkite,
     _poolSkeletalGrimace,
     _poolSkeletalKathari,
@@ -1849,6 +1860,7 @@ const shard: CardShard = {
     _poolTerrorOfKruinPass,
     _poolTethmosHighPriest,
     _poolTeyoTheShieldmage,
+    _poolTheCyberController,
     _poolTheFalconSamWilson,
     _poolTheLastRonin,
     _poolTheLastRoninsTechnique,

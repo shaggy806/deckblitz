@@ -743,6 +743,7 @@ import _poolSealOfFire from "../pool/seal-of-fire.js";
 import _poolSecureTheScene from "../pool/secure-the-scene.js";
 import _poolSeedpodCaretaker from "../pool/seedpod-caretaker.js";
 import _poolSeismicAssault from "../pool/seismic-assault.js";
+import _poolSerpentOfThePass from "../pool/serpent-of-the-pass.js";
 import _poolServantOfTymaret from "../pool/servant-of-tymaret.js";
 import _poolSeveredLegion from "../pool/severed-legion.js";
 import _poolShannaPurifyingBlade from "../pool/shanna-purifying-blade.js";
@@ -777,6 +778,7 @@ import _poolSkyswimmerKoi from "../pool/skyswimmer-koi.js";
 import _poolSlaughterSpecialist from "../pool/slaughter-specialist.js";
 import _poolSleepWithTheFishes from "../pool/sleep-with-the-fishes.js";
 import _poolSliceInTwain from "../pool/slice-in-twain.js";
+import _poolSlumberingWalker from "../pool/slumbering-walker.js";
 import _poolSmokeSpiritsAid from "../pool/smoke-spirits-aid.js";
 import _poolSmokespewInvoker from "../pool/smokespew-invoker.js";
 import _poolSnarespinner from "../pool/snarespinner.js";
@@ -940,6 +942,7 @@ import _poolWalkingAtlas from "../pool/walking-atlas.js";
 import _poolWallOfMist from "../pool/wall-of-mist.js";
 import _poolWallOfWood from "../pool/wall-of-wood.js";
 import _poolWaltzOfRage from "../pool/waltz-of-rage.js";
+import _poolWandOfIth from "../pool/wand-of-ith.js";
 import _poolWarmakerGunship from "../pool/warmaker-gunship.js";
 import _poolWarmongersChariot from "../pool/warmongers-chariot.js";
 import _poolWaspOfTheBitterEnd from "../pool/wasp-of-the-bitter-end.js";
@@ -1744,6 +1747,7 @@ const shard: CardShard = {
     _poolSecureTheScene,
     _poolSeedpodCaretaker,
     _poolSeismicAssault,
+    _poolSerpentOfThePass,
     _poolServantOfTymaret,
     _poolSeveredLegion,
     _poolShannaPurifyingBlade,
@@ -1778,6 +1782,7 @@ const shard: CardShard = {
     _poolSlaughterSpecialist,
     _poolSleepWithTheFishes,
     _poolSliceInTwain,
+    _poolSlumberingWalker,
     _poolSmokeSpiritsAid,
     _poolSmokespewInvoker,
     _poolSnarespinner,
@@ -1941,6 +1946,7 @@ const shard: CardShard = {
     _poolWallOfMist,
     _poolWallOfWood,
     _poolWaltzOfRage,
+    _poolWandOfIth,
     _poolWarmakerGunship,
     _poolWarmongersChariot,
     _poolWaspOfTheBitterEnd,

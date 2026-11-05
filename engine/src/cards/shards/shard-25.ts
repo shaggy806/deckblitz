@@ -114,6 +114,7 @@ import _poolBreakerOfCreation from "../pool/breaker-of-creation.js";
 import _poolBreathOfDarigaaz from "../pool/breath-of-darigaaz.js";
 import _poolBrightspearZealot from "../pool/brightspear-zealot.js";
 import _poolBrightstoneRitual from "../pool/brightstone-ritual.js";
+import _poolBrillianceUnleashed from "../pool/brilliance-unleashed.js";
 import _poolBrinebarrowIntruder from "../pool/brinebarrow-intruder.js";
 import _poolBrinkOfMadness from "../pool/brink-of-madness.js";
 import _poolBristlingBoar from "../pool/bristling-boar.js";
@@ -546,6 +547,7 @@ import _poolOdricBloodCursed from "../pool/odric-blood-cursed.js";
 import _poolOldGrowthGrove from "../pool/old-growth-grove.js";
 import _poolOliviaMobilizedForWar from "../pool/olivia-mobilized-for-war.js";
 import _poolOmashuCity from "../pool/omashu-city.js";
+import _poolOmenpathJourney from "../pool/omenpath-journey.js";
 import _poolOnduKnotmaster from "../pool/ondu-knotmaster.js";
 import _poolOpportunisticDragon from "../pool/opportunistic-dragon.js";
 import _poolOppression from "../pool/oppression.js";
@@ -747,6 +749,7 @@ import _poolSpectralShift from "../pool/spectral-shift.js";
 import _poolSpiderManBrooklynVisionary from "../pool/spider-man-brooklyn-visionary.js";
 import _poolSpiderManNoMore from "../pool/spider-man-no-more.js";
 import _poolSpiderUmbra from "../pool/spider-umbra.js";
+import _poolSpinalParasite from "../pool/spinal-parasite.js";
 import _poolSpineOfIshSah from "../pool/spine-of-ish-sah.js";
 import _poolSpinedBasher from "../pool/spined-basher.js";
 import _poolSpireOfIndustry from "../pool/spire-of-industry.js";
@@ -763,6 +766,7 @@ import _poolStingerquillVoxmancer from "../pool/stingerquill-voxmancer.js";
 import _poolStormCrow from "../pool/storm-crow.js";
 import _poolStormTheCitadel from "../pool/storm-the-citadel.js";
 import _poolStorySeeker from "../pool/story-seeker.js";
+import _poolStreetUrchin from "../pool/street-urchin.js";
 import _poolStrengthOfIsolation from "../pool/strength-of-isolation.js";
 import _poolStridehangarAutomaton from "../pool/stridehangar-automaton.js";
 import _poolStrionicResonator from "../pool/strionic-resonator.js";
@@ -801,6 +805,7 @@ import _poolTheLegendOfRoku from "../pool/the-legend-of-roku.js";
 import _poolTheMasterOfLakeTown from "../pool/the-master-of-lake-town.js";
 import _poolThePartingOfTheWays from "../pool/the-parting-of-the-ways.js";
 import _poolThopterSpyNetwork from "../pool/thopter-spy-network.js";
+import _poolThornmantleStriker from "../pool/thornmantle-striker.js";
 import _poolThoughtCollapse from "../pool/thought-collapse.js";
 import _poolThoughtDistortion from "../pool/thought-distortion.js";
 import _poolThoughtlace from "../pool/thoughtlace.js";
@@ -822,6 +827,7 @@ import _poolTrailOfEvidence from "../pool/trail-of-evidence.js";
 import _poolTranquilDomain from "../pool/tranquil-domain.js";
 import _poolTreacherousUrge from "../pool/treacherous-urge.js";
 import _poolTreadUpon from "../pool/tread-upon.js";
+import _poolTreasureChest from "../pool/treasure-chest.js";
 import _poolTrespasserIlVec from "../pool/trespasser-il-vec.js";
 import _poolTrigonOfInfestation from "../pool/trigon-of-infestation.js";
 import _poolTrygonPrime from "../pool/trygon-prime.js";
@@ -1036,6 +1042,7 @@ const shard: CardShard = {
     _poolBreathOfDarigaaz,
     _poolBrightspearZealot,
     _poolBrightstoneRitual,
+    _poolBrillianceUnleashed,
     _poolBrinebarrowIntruder,
     _poolBrinkOfMadness,
     _poolBristlingBoar,
@@ -1468,6 +1475,7 @@ const shard: CardShard = {
     _poolOldGrowthGrove,
     _poolOliviaMobilizedForWar,
     _poolOmashuCity,
+    _poolOmenpathJourney,
     _poolOnduKnotmaster,
     _poolOpportunisticDragon,
     _poolOppression,
@@ -1669,6 +1677,7 @@ const shard: CardShard = {
     _poolSpiderManBrooklynVisionary,
     _poolSpiderManNoMore,
     _poolSpiderUmbra,
+    _poolSpinalParasite,
     _poolSpineOfIshSah,
     _poolSpinedBasher,
     _poolSpireOfIndustry,
@@ -1685,6 +1694,7 @@ const shard: CardShard = {
     _poolStormCrow,
     _poolStormTheCitadel,
     _poolStorySeeker,
+    _poolStreetUrchin,
     _poolStrengthOfIsolation,
     _poolStridehangarAutomaton,
     _poolStrionicResonator,
@@ -1723,6 +1733,7 @@ const shard: CardShard = {
     _poolTheMasterOfLakeTown,
     _poolThePartingOfTheWays,
     _poolThopterSpyNetwork,
+    _poolThornmantleStriker,
     _poolThoughtCollapse,
     _poolThoughtDistortion,
     _poolThoughtlace,
@@ -1744,6 +1755,7 @@ const shard: CardShard = {
     _poolTranquilDomain,
     _poolTreacherousUrge,
     _poolTreadUpon,
+    _poolTreasureChest,
     _poolTrespasserIlVec,
     _poolTrigonOfInfestation,
     _poolTrygonPrime,

@@ -113,6 +113,7 @@ import _poolCalderaKavu from "../pool/caldera-kavu.js";
 import _poolCanalMonitor from "../pool/canal-monitor.js";
 import _poolCaptainAmericaSteveRogers from "../pool/captain-america-steve-rogers.js";
 import _poolCaptainAmericasMotorcycle from "../pool/captain-americas-motorcycle.js";
+import _poolCaravanVigil from "../pool/caravan-vigil.js";
 import _poolCarbonize from "../pool/carbonize.js";
 import _poolCareeningMineCart from "../pool/careening-mine-cart.js";
 import _poolCartographersHawk from "../pool/cartographers-hawk.js";
@@ -121,6 +122,7 @@ import _poolCaseOfTheUneatenFeast from "../pool/case-of-the-uneaten-feast.js";
 import _poolCatharticReunion from "../pool/cathartic-reunion.js";
 import _poolCentaurVeteran from "../pool/centaur-veteran.js";
 import _poolCephalidConstable from "../pool/cephalid-constable.js";
+import _poolChainerDementiaMaster from "../pool/chainer-dementia-master.js";
 import _poolChameleonColossus from "../pool/chameleon-colossus.js";
 import _poolChargingCinderhorn from "../pool/charging-cinderhorn.js";
 import _poolChillerpillar from "../pool/chillerpillar.js";
@@ -181,6 +183,7 @@ import _poolDeathbloomGardener from "../pool/deathbloom-gardener.js";
 import _poolDeathcapGlade from "../pool/deathcap-glade.js";
 import _poolDeathsHeadBuzzard from "../pool/deaths-head-buzzard.js";
 import _poolDeepwoodElder from "../pool/deepwood-elder.js";
+import _poolDefiantVanguard from "../pool/defiant-vanguard.js";
 import _poolDeliverUntoEvil from "../pool/deliver-unto-evil.js";
 import _poolDelugeVirtuoso from "../pool/deluge-virtuoso.js";
 import _poolDemonOfWailingAgonies from "../pool/demon-of-wailing-agonies.js";
@@ -364,6 +367,7 @@ import _poolIgnorantBliss from "../pool/ignorant-bliss.js";
 import _poolIllnessInTheRanks from "../pool/illness-in-the-ranks.js";
 import _poolIllvoiLightJammer from "../pool/illvoi-light-jammer.js";
 import _poolImpulsivePilferer from "../pool/impulsive-pilferer.js";
+import _poolInciteHysteria from "../pool/incite-hysteria.js";
 import _poolIncongruity from "../pool/incongruity.js";
 import _poolIncreasingSavagery from "../pool/increasing-savagery.js";
 import _poolInexorableTide from "../pool/inexorable-tide.js";
@@ -797,6 +801,7 @@ import _poolTezzeretTheSeeker from "../pool/tezzeret-the-seeker.js";
 import _poolThaliaAndTheGitrogMonster from "../pool/thalia-and-the-gitrog-monster.js";
 import _poolThassasBounty from "../pool/thassas-bounty.js";
 import _poolThassasEmissary from "../pool/thassas-emissary.js";
+import _poolTheBathSong from "../pool/the-bath-song.js";
 import _poolTheBiblioplex from "../pool/the-biblioplex.js";
 import _poolTheFleshIsWeak from "../pool/the-flesh-is-weak.js";
 import _poolTheFugitiveDoctor from "../pool/the-fugitive-doctor.js";
@@ -873,6 +878,7 @@ import _poolVeilingOddity from "../pool/veiling-oddity.js";
 import _poolVenerableKnight from "../pool/venerable-knight.js";
 import _poolVeteranSurvivor from "../pool/veteran-survivor.js";
 import _poolVexingDevil from "../pool/vexing-devil.js";
+import _poolVhatiIlDal from "../pool/vhati-il-dal.js";
 import _poolViashinoRacketeer from "../pool/viashino-racketeer.js";
 import _poolViciousKavu from "../pool/vicious-kavu.js";
 import _poolVigorMortis from "../pool/vigor-mortis.js";
@@ -1070,6 +1076,7 @@ const shard: CardShard = {
     _poolCanalMonitor,
     _poolCaptainAmericaSteveRogers,
     _poolCaptainAmericasMotorcycle,
+    _poolCaravanVigil,
     _poolCarbonize,
     _poolCareeningMineCart,
     _poolCartographersHawk,
@@ -1078,6 +1085,7 @@ const shard: CardShard = {
     _poolCatharticReunion,
     _poolCentaurVeteran,
     _poolCephalidConstable,
+    _poolChainerDementiaMaster,
     _poolChameleonColossus,
     _poolChargingCinderhorn,
     _poolChillerpillar,
@@ -1138,6 +1146,7 @@ const shard: CardShard = {
     _poolDeathcapGlade,
     _poolDeathsHeadBuzzard,
     _poolDeepwoodElder,
+    _poolDefiantVanguard,
     _poolDeliverUntoEvil,
     _poolDelugeVirtuoso,
     _poolDemonOfWailingAgonies,
@@ -1321,6 +1330,7 @@ const shard: CardShard = {
     _poolIllnessInTheRanks,
     _poolIllvoiLightJammer,
     _poolImpulsivePilferer,
+    _poolInciteHysteria,
     _poolIncongruity,
     _poolIncreasingSavagery,
     _poolInexorableTide,
@@ -1754,6 +1764,7 @@ const shard: CardShard = {
     _poolThaliaAndTheGitrogMonster,
     _poolThassasBounty,
     _poolThassasEmissary,
+    _poolTheBathSong,
     _poolTheBiblioplex,
     _poolTheFleshIsWeak,
     _poolTheFugitiveDoctor,
@@ -1830,6 +1841,7 @@ const shard: CardShard = {
     _poolVenerableKnight,
     _poolVeteranSurvivor,
     _poolVexingDevil,
+    _poolVhatiIlDal,
     _poolViashinoRacketeer,
     _poolViciousKavu,
     _poolVigorMortis,

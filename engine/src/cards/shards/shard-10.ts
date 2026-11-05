@@ -139,6 +139,7 @@ import _poolChangelingWayfinder from "../pool/changeling-wayfinder.js";
 import _poolChaosMutation from "../pool/chaos-mutation.js";
 import _poolChapelGeist from "../pool/chapel-geist.js";
 import _poolChargeAcrossTheAraba from "../pool/charge-across-the-araba.js";
+import _poolChemistersTrick from "../pool/chemisters-trick.js";
 import _poolChildOfThePack from "../pool/child-of-the-pack.js";
 import _poolChimericEgg from "../pool/chimeric-egg.js";
 import _poolCinderclasm from "../pool/cinderclasm.js";
@@ -341,6 +342,7 @@ import _poolGodosIrregulars from "../pool/godos-irregulars.js";
 import _poolGohamDjinn from "../pool/goham-djinn.js";
 import _poolGolgariCluestone from "../pool/golgari-cluestone.js";
 import _poolGracefulAdept from "../pool/graceful-adept.js";
+import _poolGraveBetrayal from "../pool/grave-betrayal.js";
 import _poolGraveyardShift from "../pool/graveyard-shift.js";
 import _poolGraviticPunch from "../pool/gravitic-punch.js";
 import _poolGravitySphere from "../pool/gravity-sphere.js";
@@ -814,8 +816,10 @@ import _poolTheDestinedThief from "../pool/the-destined-thief.js";
 import _poolTheMastersOfEvil from "../pool/the-masters-of-evil.js";
 import _poolTheMindskinner from "../pool/the-mindskinner.js";
 import _poolTheMistyMountainsCold from "../pool/the-misty-mountains-cold.js";
+import _poolTheMotherlodeExcavator from "../pool/the-motherlode-excavator.js";
 import _poolTheSeriema from "../pool/the-seriema.js";
 import _poolTheWondrousWasp from "../pool/the-wondrous-wasp.js";
+import _poolTheWretched from "../pool/the-wretched.js";
 import _poolThermalBlast from "../pool/thermal-blast.js";
 import _poolThisTownAintBigEnough from "../pool/this-town-aint-big-enough.js";
 import _poolThopterArchitect from "../pool/thopter-architect.js";
@@ -827,6 +831,7 @@ import _poolTigereyeCameo from "../pool/tigereye-cameo.js";
 import _poolTinkersTote from "../pool/tinkers-tote.js";
 import _poolTirelessMissionaries from "../pool/tireless-missionaries.js";
 import _poolTirelessTribe from "../pool/tireless-tribe.js";
+import _poolTitaniaVoiceOfGaea from "../pool/titania-voice-of-gaea.js";
 import _poolTitaniumGolem from "../pool/titanium-golem.js";
 import _poolTolarianSerpent from "../pool/tolarian-serpent.js";
 import _poolTomakulScrapsmith from "../pool/tomakul-scrapsmith.js";
@@ -847,6 +852,7 @@ import _poolTriarchStalker from "../pool/triarch-stalker.js";
 import _poolTrollNegotiations from "../pool/troll-negotiations.js";
 import _poolTrueAncestry from "../pool/true-ancestry.js";
 import _poolTuraKennerudSkyknight from "../pool/tura-kennerud-skyknight.js";
+import _poolTurtleVan from "../pool/turtle-van.js";
 import _poolTwinflameTyrant from "../pool/twinflame-tyrant.js";
 import _poolTwiningTwins from "../pool/twining-twins.js";
 import _poolTwitch from "../pool/twitch.js";
@@ -1082,6 +1088,7 @@ const shard: CardShard = {
     _poolChaosMutation,
     _poolChapelGeist,
     _poolChargeAcrossTheAraba,
+    _poolChemistersTrick,
     _poolChildOfThePack,
     _poolChimericEgg,
     _poolCinderclasm,
@@ -1284,6 +1291,7 @@ const shard: CardShard = {
     _poolGohamDjinn,
     _poolGolgariCluestone,
     _poolGracefulAdept,
+    _poolGraveBetrayal,
     _poolGraveyardShift,
     _poolGraviticPunch,
     _poolGravitySphere,
@@ -1757,8 +1765,10 @@ const shard: CardShard = {
     _poolTheMastersOfEvil,
     _poolTheMindskinner,
     _poolTheMistyMountainsCold,
+    _poolTheMotherlodeExcavator,
     _poolTheSeriema,
     _poolTheWondrousWasp,
+    _poolTheWretched,
     _poolThermalBlast,
     _poolThisTownAintBigEnough,
     _poolThopterArchitect,
@@ -1770,6 +1780,7 @@ const shard: CardShard = {
     _poolTinkersTote,
     _poolTirelessMissionaries,
     _poolTirelessTribe,
+    _poolTitaniaVoiceOfGaea,
     _poolTitaniumGolem,
     _poolTolarianSerpent,
     _poolTomakulScrapsmith,
@@ -1790,6 +1801,7 @@ const shard: CardShard = {
     _poolTrollNegotiations,
     _poolTrueAncestry,
     _poolTuraKennerudSkyknight,
+    _poolTurtleVan,
     _poolTwinflameTyrant,
     _poolTwiningTwins,
     _poolTwitch,

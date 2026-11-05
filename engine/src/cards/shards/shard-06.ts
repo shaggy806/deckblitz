@@ -43,6 +43,7 @@ import _poolArborAdherent from "../pool/arbor-adherent.js";
 import _poolArcaneSavant from "../pool/arcane-savant.js";
 import _poolArcboundShikari from "../pool/arcbound-shikari.js";
 import _poolArchangel from "../pool/archangel.js";
+import _poolArchdruidsCharm from "../pool/archdruids-charm.js";
 import _poolArcusAcolyte from "../pool/arcus-acolyte.js";
 import _poolAriaOfFlame from "../pool/aria-of-flame.js";
 import _poolArmamentMaster from "../pool/armament-master.js";
@@ -246,6 +247,7 @@ import _poolDomrisNodorog from "../pool/domris-nodorog.js";
 import _poolDoomsTimePlatform from "../pool/dooms-time-platform.js";
 import _poolDragToTheBottom from "../pool/drag-to-the-bottom.js";
 import _poolDragToTheRoots from "../pool/drag-to-the-roots.js";
+import _poolDragonGrip from "../pool/dragon-grip.js";
 import _poolDragonlordKolaghan from "../pool/dragonlord-kolaghan.js";
 import _poolDrainTheWell from "../pool/drain-the-well.js";
 import _poolDrakusethMawOfFlames from "../pool/drakuseth-maw-of-flames.js";
@@ -360,6 +362,7 @@ import _poolGleancrawler from "../pool/gleancrawler.js";
 import _poolGlimmerOfGenius from "../pool/glimmer-of-genius.js";
 import _poolGlimmervoid from "../pool/glimmervoid.js";
 import _poolGlimpseTheFuture from "../pool/glimpse-the-future.js";
+import _poolGlissaSunslayer from "../pool/glissa-sunslayer.js";
 import _poolGnatAlleyCreeper from "../pool/gnat-alley-creeper.js";
 import _poolGnawingZombie from "../pool/gnawing-zombie.js";
 import _poolGoblinGangLeader from "../pool/goblin-gang-leader.js";
@@ -369,6 +372,7 @@ import _poolGoblinTurncoat from "../pool/goblin-turncoat.js";
 import _poolGraftSurgeon from "../pool/graft-surgeon.js";
 import _poolGraveUpheaval from "../pool/grave-upheaval.js";
 import _poolGravitationalShift from "../pool/gravitational-shift.js";
+import _poolGreaterWerewolf from "../pool/greater-werewolf.js";
 import _poolGreenScarab from "../pool/green-scarab.js";
 import _poolGretaSweettoothScourge from "../pool/greta-sweettooth-scourge.js";
 import _poolGreyHavensNavigator from "../pool/grey-havens-navigator.js";
@@ -407,6 +411,7 @@ import _poolHostileTakeover from "../pool/hostile-takeover.js";
 import _poolHourOfReckoning from "../pool/hour-of-reckoning.js";
 import _poolHowlingGalefang from "../pool/howling-galefang.js";
 import _poolHuatliRadiantChampion from "../pool/huatli-radiant-champion.js";
+import _poolHuddleUp from "../pool/huddle-up.js";
 import _poolHuntersFeast from "../pool/hunters-feast.js";
 import _poolHypnoticGrifter from "../pool/hypnotic-grifter.js";
 import _poolHypnoticSiren from "../pool/hypnotic-siren.js";
@@ -983,6 +988,7 @@ const shard: CardShard = {
     _poolArcaneSavant,
     _poolArcboundShikari,
     _poolArchangel,
+    _poolArchdruidsCharm,
     _poolArcusAcolyte,
     _poolAriaOfFlame,
     _poolArmamentMaster,
@@ -1186,6 +1192,7 @@ const shard: CardShard = {
     _poolDoomsTimePlatform,
     _poolDragToTheBottom,
     _poolDragToTheRoots,
+    _poolDragonGrip,
     _poolDragonlordKolaghan,
     _poolDrainTheWell,
     _poolDrakusethMawOfFlames,
@@ -1300,6 +1307,7 @@ const shard: CardShard = {
     _poolGlimmerOfGenius,
     _poolGlimmervoid,
     _poolGlimpseTheFuture,
+    _poolGlissaSunslayer,
     _poolGnatAlleyCreeper,
     _poolGnawingZombie,
     _poolGoblinGangLeader,
@@ -1309,6 +1317,7 @@ const shard: CardShard = {
     _poolGraftSurgeon,
     _poolGraveUpheaval,
     _poolGravitationalShift,
+    _poolGreaterWerewolf,
     _poolGreenScarab,
     _poolGretaSweettoothScourge,
     _poolGreyHavensNavigator,
@@ -1347,6 +1356,7 @@ const shard: CardShard = {
     _poolHourOfReckoning,
     _poolHowlingGalefang,
     _poolHuatliRadiantChampion,
+    _poolHuddleUp,
     _poolHuntersFeast,
     _poolHypnoticGrifter,
     _poolHypnoticSiren,

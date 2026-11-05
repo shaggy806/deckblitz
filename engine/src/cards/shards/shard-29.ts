@@ -118,6 +118,7 @@ import _poolChimericMass from "../pool/chimeric-mass.js";
 import _poolChooseYourWeapon from "../pool/choose-your-weapon.js";
 import _poolChoraleOfTheVoid from "../pool/chorale-of-the-void.js";
 import _poolCinderElemental from "../pool/cinder-elemental.js";
+import _poolCircleOfAffliction from "../pool/circle-of-affliction.js";
 import _poolCityOfDeath from "../pool/city-of-death.js";
 import _poolCleansingRay from "../pool/cleansing-ray.js";
 import _poolCleverImpersonator from "../pool/clever-impersonator.js";
@@ -623,6 +624,7 @@ import _poolRetchedWretch from "../pool/retched-wretch.js";
 import _poolRetributionOfTheAncients from "../pool/retribution-of-the-ancients.js";
 import _poolRevealingEye from "../pool/revealing-eye.js";
 import _poolRevekaWizardSavant from "../pool/reveka-wizard-savant.js";
+import _poolRevivify from "../pool/revivify.js";
 import _poolRevivingMelody from "../pool/reviving-melody.js";
 import _poolRhysticTutor from "../pool/rhystic-tutor.js";
 import _poolRingwraiths from "../pool/ringwraiths.js";
@@ -1059,6 +1061,7 @@ const shard: CardShard = {
     _poolChooseYourWeapon,
     _poolChoraleOfTheVoid,
     _poolCinderElemental,
+    _poolCircleOfAffliction,
     _poolCityOfDeath,
     _poolCleansingRay,
     _poolCleverImpersonator,
@@ -1564,6 +1567,7 @@ const shard: CardShard = {
     _poolRetributionOfTheAncients,
     _poolRevealingEye,
     _poolRevekaWizardSavant,
+    _poolRevivify,
     _poolRevivingMelody,
     _poolRhysticTutor,
     _poolRingwraiths,

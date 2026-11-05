@@ -62,6 +62,7 @@ import _poolBedlamReveler from "../pool/bedlam-reveler.js";
 import _poolBehemothsHerald from "../pool/behemoths-herald.js";
 import _poolBeholdTheBeyond from "../pool/behold-the-beyond.js";
 import _poolBelenonWarAnthem from "../pool/belenon-war-anthem.js";
+import _poolBelligerentYearling from "../pool/belligerent-yearling.js";
 import _poolBellowsLizard from "../pool/bellows-lizard.js";
 import _poolBespokeBo from "../pool/bespoke-bo.js";
 import _poolBestialFury from "../pool/bestial-fury.js";
@@ -142,6 +143,7 @@ import _poolConchHorn from "../pool/conch-horn.js";
 import _poolConformerShuriken from "../pool/conformer-shuriken.js";
 import _poolConsignToThePit from "../pool/consign-to-the-pit.js";
 import _poolConsume from "../pool/consume.js";
+import _poolContinue from "../pool/continue.js";
 import _poolControlMagic from "../pool/control-magic.js";
 import _poolCoordinatedBarrage from "../pool/coordinated-barrage.js";
 import _poolCorpseConnoisseur from "../pool/corpse-connoisseur.js";
@@ -509,6 +511,7 @@ import _poolMountainGoat from "../pool/mountain-goat.js";
 import _poolMrOrfeoTheBoulder from "../pool/mr-orfeo-the-boulder.js";
 import _poolMuerraTrashTactician from "../pool/muerra-trash-tactician.js";
 import _poolMurkwaterPathway from "../pool/murkwater-pathway.js";
+import _poolMutualDestruction from "../pool/mutual-destruction.js";
 import _poolMysticOfTheHiddenWay from "../pool/mystic-of-the-hidden-way.js";
 import _poolMysticalTeachings from "../pool/mystical-teachings.js";
 import _poolNamazuTrader from "../pool/namazu-trader.js";
@@ -533,6 +536,7 @@ import _poolNotDeadAfterAll from "../pool/not-dead-after-all.js";
 import _poolNotOfThisWorld from "../pool/not-of-this-world.js";
 import _poolNumaJoragaChieftain from "../pool/numa-joraga-chieftain.js";
 import _poolNyxbornWolf from "../pool/nyxborn-wolf.js";
+import _poolOdiousWitch from "../pool/odious-witch.js";
 import _poolOgnis from "../pool/ognis.js";
 import _poolOgreTaskmaster from "../pool/ogre-taskmaster.js";
 import _poolOminousCemetery from "../pool/ominous-cemetery.js";
@@ -999,6 +1003,7 @@ const shard: CardShard = {
     _poolBehemothsHerald,
     _poolBeholdTheBeyond,
     _poolBelenonWarAnthem,
+    _poolBelligerentYearling,
     _poolBellowsLizard,
     _poolBespokeBo,
     _poolBestialFury,
@@ -1079,6 +1084,7 @@ const shard: CardShard = {
     _poolConformerShuriken,
     _poolConsignToThePit,
     _poolConsume,
+    _poolContinue,
     _poolControlMagic,
     _poolCoordinatedBarrage,
     _poolCorpseConnoisseur,
@@ -1446,6 +1452,7 @@ const shard: CardShard = {
     _poolMrOrfeoTheBoulder,
     _poolMuerraTrashTactician,
     _poolMurkwaterPathway,
+    _poolMutualDestruction,
     _poolMysticOfTheHiddenWay,
     _poolMysticalTeachings,
     _poolNamazuTrader,
@@ -1470,6 +1477,7 @@ const shard: CardShard = {
     _poolNotOfThisWorld,
     _poolNumaJoragaChieftain,
     _poolNyxbornWolf,
+    _poolOdiousWitch,
     _poolOgnis,
     _poolOgreTaskmaster,
     _poolOminousCemetery,

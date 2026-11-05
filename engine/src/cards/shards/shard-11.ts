@@ -24,6 +24,7 @@ import _poolAlchemistsVial from "../pool/alchemists-vial.js";
 import _poolAliciaMastersSkilledSculptor from "../pool/alicia-masters-skilled-sculptor.js";
 import _poolAlignedHeart from "../pool/aligned-heart.js";
 import _poolAlloyAnimist from "../pool/alloy-animist.js";
+import _poolAlmsBeast from "../pool/alms-beast.js";
 import _poolAlpineMeadow from "../pool/alpine-meadow.js";
 import _poolAmorphousAxe from "../pool/amorphous-axe.js";
 import _poolAncestralTribute from "../pool/ancestral-tribute.js";
@@ -70,6 +71,7 @@ import _poolBarbarianLunatic from "../pool/barbarian-lunatic.js";
 import _poolBarbaryApes from "../pool/barbary-apes.js";
 import _poolBarbedBatterfist from "../pool/barbed-batterfist.js";
 import _poolBarbedServitor from "../pool/barbed-servitor.js";
+import _poolBardsCompany from "../pool/bards-company.js";
 import _poolBarretAvalancheLeader from "../pool/barret-avalanche-leader.js";
 import _poolBasilicaGuards from "../pool/basilica-guards.js";
 import _poolBasrisLieutenant from "../pool/basris-lieutenant.js";
@@ -444,6 +446,7 @@ import _poolKashiTribeElite from "../pool/kashi-tribe-elite.js";
 import _poolKaslemsStonetree from "../pool/kaslems-stonetree.js";
 import _poolKedissEmberclawFamiliar from "../pool/kediss-emberclaw-familiar.js";
 import _poolKeeperOfTheLight from "../pool/keeper-of-the-light.js";
+import _poolKeldonFlamesage from "../pool/keldon-flamesage.js";
 import _poolKetriaCrystal from "../pool/ketria-crystal.js";
 import _poolKhalniGarden from "../pool/khalni-garden.js";
 import _poolKillerBees from "../pool/killer-bees.js";
@@ -489,6 +492,7 @@ import _poolMagusOfTheJar from "../pool/magus-of-the-jar.js";
 import _poolMakeAWish from "../pool/make-a-wish.js";
 import _poolManaCylix from "../pool/mana-cylix.js";
 import _poolManaMatrix from "../pool/mana-matrix.js";
+import _poolMangarasEquity from "../pool/mangaras-equity.js";
 import _poolManifestationSage from "../pool/manifestation-sage.js";
 import _poolMaraudingMako from "../pool/marauding-mako.js";
 import _poolMarchOfSwirlingMist from "../pool/march-of-swirling-mist.js";
@@ -777,6 +781,7 @@ import _poolStomperCub from "../pool/stomper-cub.js";
 import _poolStoneBySunlight from "../pool/stone-by-sunlight.js";
 import _poolStoneIdolTrap from "../pool/stone-idol-trap.js";
 import _poolStormfistCrusader from "../pool/stormfist-crusader.js";
+import _poolStreamOfConsciousness from "../pool/stream-of-consciousness.js";
 import _poolStreetbreakerWurm from "../pool/streetbreaker-wurm.js";
 import _poolStrengthOfNight from "../pool/strength-of-night.js";
 import _poolStrengthOfTheHarvest from "../pool/strength-of-the-harvest.js";
@@ -891,6 +896,7 @@ import _poolVolcanicFallout from "../pool/volcanic-fallout.js";
 import _poolVolcanicSubmersion from "../pool/volcanic-submersion.js";
 import _poolVulshokBattlemaster from "../pool/vulshok-battlemaster.js";
 import _poolVulshokFactory from "../pool/vulshok-factory.js";
+import _poolWallOfVipers from "../pool/wall-of-vipers.js";
 import _poolWanderingChampion from "../pool/wandering-champion.js";
 import _poolWarmongerHellkite from "../pool/warmonger-hellkite.js";
 import _poolWarpArtifact from "../pool/warp-artifact.js";
@@ -976,6 +982,7 @@ const shard: CardShard = {
     _poolAliciaMastersSkilledSculptor,
     _poolAlignedHeart,
     _poolAlloyAnimist,
+    _poolAlmsBeast,
     _poolAlpineMeadow,
     _poolAmorphousAxe,
     _poolAncestralTribute,
@@ -1022,6 +1029,7 @@ const shard: CardShard = {
     _poolBarbaryApes,
     _poolBarbedBatterfist,
     _poolBarbedServitor,
+    _poolBardsCompany,
     _poolBarretAvalancheLeader,
     _poolBasilicaGuards,
     _poolBasrisLieutenant,
@@ -1396,6 +1404,7 @@ const shard: CardShard = {
     _poolKaslemsStonetree,
     _poolKedissEmberclawFamiliar,
     _poolKeeperOfTheLight,
+    _poolKeldonFlamesage,
     _poolKetriaCrystal,
     _poolKhalniGarden,
     _poolKillerBees,
@@ -1441,6 +1450,7 @@ const shard: CardShard = {
     _poolMakeAWish,
     _poolManaCylix,
     _poolManaMatrix,
+    _poolMangarasEquity,
     _poolManifestationSage,
     _poolMaraudingMako,
     _poolMarchOfSwirlingMist,
@@ -1729,6 +1739,7 @@ const shard: CardShard = {
     _poolStoneBySunlight,
     _poolStoneIdolTrap,
     _poolStormfistCrusader,
+    _poolStreamOfConsciousness,
     _poolStreetbreakerWurm,
     _poolStrengthOfNight,
     _poolStrengthOfTheHarvest,
@@ -1843,6 +1854,7 @@ const shard: CardShard = {
     _poolVolcanicSubmersion,
     _poolVulshokBattlemaster,
     _poolVulshokFactory,
+    _poolWallOfVipers,
     _poolWanderingChampion,
     _poolWarmongerHellkite,
     _poolWarpArtifact,

@@ -27,6 +27,7 @@ import _poolAngelicShield from "../pool/angelic-shield.js";
 import _poolAngrathTheFlameChained from "../pool/angrath-the-flame-chained.js";
 import _poolAngrathsAmbusher from "../pool/angraths-ambusher.js";
 import _poolAngrathsRampage from "../pool/angraths-rampage.js";
+import _poolAnzragsRampage from "../pool/anzrags-rampage.js";
 import _poolApothecaryStomper from "../pool/apothecary-stomper.js";
 import _poolAragornTheUniter from "../pool/aragorn-the-uniter.js";
 import _poolArastaOfTheEndlessWeb from "../pool/arasta-of-the-endless-web.js";
@@ -165,6 +166,7 @@ import _poolCounterlash from "../pool/counterlash.js";
 import _poolCovetousElegy from "../pool/covetous-elegy.js";
 import _poolCracklingSpellslinger from "../pool/crackling-spellslinger.js";
 import _poolCradleGuard from "../pool/cradle-guard.js";
+import _poolCraterElemental from "../pool/crater-elemental.js";
 import _poolCreepingBloodsucker from "../pool/creeping-bloodsucker.js";
 import _poolCropSigil from "../pool/crop-sigil.js";
 import _poolCrossbowAmbush from "../pool/crossbow-ambush.js";
@@ -268,6 +270,7 @@ import _poolFateholdChronologist from "../pool/fatehold-chronologist.js";
 import _poolFearOfImmobility from "../pool/fear-of-immobility.js";
 import _poolFeastOfFlesh from "../pool/feast-of-flesh.js";
 import _poolFeedThePack from "../pool/feed-the-pack.js";
+import _poolFellShepherd from "../pool/fell-shepherd.js";
 import _poolFendOff from "../pool/fend-off.js";
 import _poolFiendishDuo from "../pool/fiendish-duo.js";
 import _poolFightToTheDeath from "../pool/fight-to-the-death.js";
@@ -535,6 +538,7 @@ import _poolNemataGroveGuardian from "../pool/nemata-grove-guardian.js";
 import _poolNeoExdeathDimensionsEnd from "../pool/neo-exdeath-dimensions-end.js";
 import _poolNerdRage from "../pool/nerd-rage.js";
 import _poolNewsHelicopter from "../pool/news-helicopter.js";
+import _poolNexusMentality from "../pool/nexus-mentality.js";
 import _poolNeyaliSunsVanguard from "../pool/neyali-suns-vanguard.js";
 import _poolNezumiLinkbreaker from "../pool/nezumi-linkbreaker.js";
 import _poolNightMarket from "../pool/night-market.js";
@@ -579,6 +583,7 @@ import _poolPierceTheSky from "../pool/pierce-the-sky.js";
 import _poolPinkHorror from "../pool/pink-horror.js";
 import _poolPiousEvangel from "../pool/pious-evangel.js";
 import _poolPlasmancer from "../pool/plasmancer.js";
+import _poolPlayOfTheGame from "../pool/play-of-the-game.js";
 import _poolPledgeOfLoyalty from "../pool/pledge-of-loyalty.js";
 import _poolPoisonBladeMentor from "../pool/poison-blade-mentor.js";
 import _poolPollenShieldHare from "../pool/pollen-shield-hare.js";
@@ -642,6 +647,7 @@ import _poolReprisal from "../pool/reprisal.js";
 import _poolReturnToTheEarth from "../pool/return-to-the-earth.js";
 import _poolReviveTheFallen from "../pool/revive-the-fallen.js";
 import _poolRhoxPummeler from "../pool/rhox-pummeler.js";
+import _poolRhysTheEvermore from "../pool/rhys-the-evermore.js";
 import _poolRicochetTrap from "../pool/ricochet-trap.js";
 import _poolRidingRedHare from "../pool/riding-red-hare.js";
 import _poolRile from "../pool/rile.js";
@@ -812,6 +818,7 @@ import _poolTerraStomper from "../pool/terra-stomper.js";
 import _poolTerrainGenerator from "../pool/terrain-generator.js";
 import _poolTheBearsOfLittjara from "../pool/the-bears-of-littjara.js";
 import _poolTheChaseIsOn from "../pool/the-chase-is-on.js";
+import _poolTheCrowdGoesWild from "../pool/the-crowd-goes-wild.js";
 import _poolTheCrueltyOfGix from "../pool/the-cruelty-of-gix.js";
 import _poolTheFinalDays from "../pool/the-final-days.js";
 import _poolTheLordMasterOfHell from "../pool/the-lord-master-of-hell.js";
@@ -975,6 +982,7 @@ const shard: CardShard = {
     _poolAngrathTheFlameChained,
     _poolAngrathsAmbusher,
     _poolAngrathsRampage,
+    _poolAnzragsRampage,
     _poolApothecaryStomper,
     _poolAragornTheUniter,
     _poolArastaOfTheEndlessWeb,
@@ -1113,6 +1121,7 @@ const shard: CardShard = {
     _poolCovetousElegy,
     _poolCracklingSpellslinger,
     _poolCradleGuard,
+    _poolCraterElemental,
     _poolCreepingBloodsucker,
     _poolCropSigil,
     _poolCrossbowAmbush,
@@ -1216,6 +1225,7 @@ const shard: CardShard = {
     _poolFearOfImmobility,
     _poolFeastOfFlesh,
     _poolFeedThePack,
+    _poolFellShepherd,
     _poolFendOff,
     _poolFiendishDuo,
     _poolFightToTheDeath,
@@ -1483,6 +1493,7 @@ const shard: CardShard = {
     _poolNeoExdeathDimensionsEnd,
     _poolNerdRage,
     _poolNewsHelicopter,
+    _poolNexusMentality,
     _poolNeyaliSunsVanguard,
     _poolNezumiLinkbreaker,
     _poolNightMarket,
@@ -1527,6 +1538,7 @@ const shard: CardShard = {
     _poolPinkHorror,
     _poolPiousEvangel,
     _poolPlasmancer,
+    _poolPlayOfTheGame,
     _poolPledgeOfLoyalty,
     _poolPoisonBladeMentor,
     _poolPollenShieldHare,
@@ -1590,6 +1602,7 @@ const shard: CardShard = {
     _poolReturnToTheEarth,
     _poolReviveTheFallen,
     _poolRhoxPummeler,
+    _poolRhysTheEvermore,
     _poolRicochetTrap,
     _poolRidingRedHare,
     _poolRile,
@@ -1760,6 +1773,7 @@ const shard: CardShard = {
     _poolTerrainGenerator,
     _poolTheBearsOfLittjara,
     _poolTheChaseIsOn,
+    _poolTheCrowdGoesWild,
     _poolTheCrueltyOfGix,
     _poolTheFinalDays,
     _poolTheLordMasterOfHell,

@@ -149,6 +149,7 @@ import _poolCorruptEunuchs from "../pool/corrupt-eunuchs.js";
 import _poolCorruptingLicid from "../pool/corrupting-licid.js";
 import _poolCosisRavager from "../pool/cosis-ravager.js";
 import _poolCosmicEpiphany from "../pool/cosmic-epiphany.js";
+import _poolCosmiumCatalyst from "../pool/cosmium-catalyst.js";
 import _poolCourageInCrisis from "../pool/courage-in-crisis.js";
 import _poolCourtOfIre from "../pool/court-of-ire.js";
 import _poolCowabunga from "../pool/cowabunga.js";
@@ -522,6 +523,7 @@ import _poolOrdealOfPurphoros from "../pool/ordeal-of-purphoros.js";
 import _poolOrderOfLeitbur from "../pool/order-of-leitbur.js";
 import _poolOreskosSwiftclaw from "../pool/oreskos-swiftclaw.js";
 import _poolOriginOfTheHulk from "../pool/origin-of-the-hulk.js";
+import _poolOrissSamiteGuardian from "../pool/oriss-samite-guardian.js";
 import _poolOstiaryThrull from "../pool/ostiary-thrull.js";
 import _poolOverlordOfTheBoilerbilges from "../pool/overlord-of-the-boilerbilges.js";
 import _poolPainfulMemories from "../pool/painful-memories.js";
@@ -599,6 +601,7 @@ import _poolReinforcements from "../pool/reinforcements.js";
 import _poolRejoinder from "../pool/rejoinder.js";
 import _poolRelicBind from "../pool/relic-bind.js";
 import _poolRelicSeeker from "../pool/relic-seeker.js";
+import _poolReplicatingRing from "../pool/replicating-ring.js";
 import _poolResoluteArchangel from "../pool/resolute-archangel.js";
 import _poolResoundingThunder from "../pool/resounding-thunder.js";
 import _poolRestlessCottage from "../pool/restless-cottage.js";
@@ -923,6 +926,7 @@ import _tokensPhyrexianBeastTokenToxic from "../tokens/phyrexian-beast-token-tox
 import _tokensPhyrexianGoblinTokenHaste from "../tokens/phyrexian-goblin-token-haste.js";
 import _tokensPhyrexianSaprolingToken from "../tokens/phyrexian-saproling-token.js";
 import _tokensRaccoonToken from "../tokens/raccoon-token.js";
+import _tokensReplicatedRingToken from "../tokens/replicated-ring-token.js";
 import _tokensScionOfTheDeepToken from "../tokens/scion-of-the-deep-token.js";
 import _tokensShrineToken from "../tokens/shrine-token.js";
 import _tokensSpiritWarriorToken from "../tokens/spirit-warrior-token.js";
@@ -1079,6 +1083,7 @@ const shard: CardShard = {
     _poolCorruptingLicid,
     _poolCosisRavager,
     _poolCosmicEpiphany,
+    _poolCosmiumCatalyst,
     _poolCourageInCrisis,
     _poolCourtOfIre,
     _poolCowabunga,
@@ -1452,6 +1457,7 @@ const shard: CardShard = {
     _poolOrderOfLeitbur,
     _poolOreskosSwiftclaw,
     _poolOriginOfTheHulk,
+    _poolOrissSamiteGuardian,
     _poolOstiaryThrull,
     _poolOverlordOfTheBoilerbilges,
     _poolPainfulMemories,
@@ -1529,6 +1535,7 @@ const shard: CardShard = {
     _poolRejoinder,
     _poolRelicBind,
     _poolRelicSeeker,
+    _poolReplicatingRing,
     _poolResoluteArchangel,
     _poolResoundingThunder,
     _poolRestlessCottage,
@@ -1855,6 +1862,7 @@ const shard: CardShard = {
     _tokensPhyrexianGoblinTokenHaste,
     _tokensPhyrexianSaprolingToken,
     _tokensRaccoonToken,
+    _tokensReplicatedRingToken,
     _tokensScionOfTheDeepToken,
     _tokensShrineToken,
     _tokensSpiritWarriorToken,

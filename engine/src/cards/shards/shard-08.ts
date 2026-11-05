@@ -46,6 +46,7 @@ import _poolAnaraWolvidFamiliar from "../pool/anara-wolvid-familiar.js";
 import _poolAncientKavu from "../pool/ancient-kavu.js";
 import _poolAncientVendetta from "../pool/ancient-vendetta.js";
 import _poolAngelOfSalvation from "../pool/angel-of-salvation.js";
+import _poolAngelicArmaments from "../pool/angelic-armaments.js";
 import _poolAngelicCub from "../pool/angelic-cub.js";
 import _poolAngelicQuartermaster from "../pool/angelic-quartermaster.js";
 import _poolAngrathsFury from "../pool/angraths-fury.js";
@@ -178,6 +179,7 @@ import _poolCrystalRod from "../pool/crystal-rod.js";
 import _poolCurseOfConformity from "../pool/curse-of-conformity.js";
 import _poolCurseOfOblivion from "../pool/curse-of-oblivion.js";
 import _poolCursebreak from "../pool/cursebreak.js";
+import _poolCybership from "../pool/cybership.js";
 import _poolCycleOfLife from "../pool/cycle-of-life.js";
 import _poolDaghatarTheAdamant from "../pool/daghatar-the-adamant.js";
 import _poolDainsCompany from "../pool/dains-company.js";
@@ -584,6 +586,7 @@ import _poolOakhameRanger from "../pool/oakhame-ranger.js";
 import _poolOathOfGideon from "../pool/oath-of-gideon.js";
 import _poolObNixilisUnshackled from "../pool/ob-nixilis-unshackled.js";
 import _poolObeliskOfEsper from "../pool/obelisk-of-esper.js";
+import _poolObscuringAether from "../pool/obscuring-aether.js";
 import _poolObstinateGargoyle from "../pool/obstinate-gargoyle.js";
 import _poolOgreBattlecaster from "../pool/ogre-battlecaster.js";
 import _poolOgreChitterlord from "../pool/ogre-chitterlord.js";
@@ -827,6 +830,7 @@ import _poolSylvanBasilisk from "../pool/sylvan-basilisk.js";
 import _poolSyphonFuel from "../pool/syphon-fuel.js";
 import _poolSyrCarahTheBold from "../pool/syr-carah-the-bold.js";
 import _poolTaigamOjutaiMaster from "../pool/taigam-ojutai-master.js";
+import _poolTakeForARide from "../pool/take-for-a-ride.js";
 import _poolTalarasBattalion from "../pool/talaras-battalion.js";
 import _poolTalasWarrior from "../pool/talas-warrior.js";
 import _poolTalismanOfImpulse from "../pool/talisman-of-impulse.js";
@@ -864,6 +868,7 @@ import _poolThunderdrumSoloist from "../pool/thunderdrum-soloist.js";
 import _poolTidalCourier from "../pool/tidal-courier.js";
 import _poolTidehollowStrix from "../pool/tidehollow-strix.js";
 import _poolTimelyHordemate from "../pool/timely-hordemate.js";
+import _poolTitaniaGaeaIncarnate from "../pool/titania-gaea-incarnate.js";
 import _poolTocasiasDigSite from "../pool/tocasias-dig-site.js";
 import _poolTowerWorker from "../pool/tower-worker.js";
 import _poolTownSentry from "../pool/town-sentry.js";
@@ -906,6 +911,7 @@ import _poolValakutPredator from "../pool/valakut-predator.js";
 import _poolValgavothsOnslaught from "../pool/valgavoths-onslaught.js";
 import _poolValkyrieAerialUnit from "../pool/valkyrie-aerial-unit.js";
 import _poolVampireWarlord from "../pool/vampire-warlord.js";
+import _poolVanilleCheerfulLcie from "../pool/vanille-cheerful-lcie.js";
 import _poolVantressTransmuter from "../pool/vantress-transmuter.js";
 import _poolVantressVisions from "../pool/vantress-visions.js";
 import _poolVastwoodZendikon from "../pool/vastwood-zendikon.js";
@@ -1037,6 +1043,7 @@ const shard: CardShard = {
     _poolAncientKavu,
     _poolAncientVendetta,
     _poolAngelOfSalvation,
+    _poolAngelicArmaments,
     _poolAngelicCub,
     _poolAngelicQuartermaster,
     _poolAngrathsFury,
@@ -1169,6 +1176,7 @@ const shard: CardShard = {
     _poolCurseOfConformity,
     _poolCurseOfOblivion,
     _poolCursebreak,
+    _poolCybership,
     _poolCycleOfLife,
     _poolDaghatarTheAdamant,
     _poolDainsCompany,
@@ -1575,6 +1583,7 @@ const shard: CardShard = {
     _poolOathOfGideon,
     _poolObNixilisUnshackled,
     _poolObeliskOfEsper,
+    _poolObscuringAether,
     _poolObstinateGargoyle,
     _poolOgreBattlecaster,
     _poolOgreChitterlord,
@@ -1818,6 +1827,7 @@ const shard: CardShard = {
     _poolSyphonFuel,
     _poolSyrCarahTheBold,
     _poolTaigamOjutaiMaster,
+    _poolTakeForARide,
     _poolTalarasBattalion,
     _poolTalasWarrior,
     _poolTalismanOfImpulse,
@@ -1855,6 +1865,7 @@ const shard: CardShard = {
     _poolTidalCourier,
     _poolTidehollowStrix,
     _poolTimelyHordemate,
+    _poolTitaniaGaeaIncarnate,
     _poolTocasiasDigSite,
     _poolTowerWorker,
     _poolTownSentry,
@@ -1897,6 +1908,7 @@ const shard: CardShard = {
     _poolValgavothsOnslaught,
     _poolValkyrieAerialUnit,
     _poolVampireWarlord,
+    _poolVanilleCheerfulLcie,
     _poolVantressTransmuter,
     _poolVantressVisions,
     _poolVastwoodZendikon,

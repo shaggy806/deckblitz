@@ -164,6 +164,7 @@ import _poolCouriersCapsule from "../pool/couriers-capsule.js";
 import _poolCourtOfArdenvale from "../pool/court-of-ardenvale.js";
 import _poolCravenGiant from "../pool/craven-giant.js";
 import _poolCrime from "../pool/crime.js";
+import _poolCromat from "../pool/cromat.js";
 import _poolCrovaxAscendantHero from "../pool/crovax-ascendant-hero.js";
 import _poolCrystalShard from "../pool/crystal-shard.js";
 import _poolCrystallization from "../pool/crystallization.js";
@@ -859,6 +860,7 @@ import _poolWeightOfMemory from "../pool/weight-of-memory.js";
 import _poolWeldfastMonitor from "../pool/weldfast-monitor.js";
 import _poolWhirlpoolRider from "../pool/whirlpool-rider.js";
 import _poolWhiskerquillScribe from "../pool/whiskerquill-scribe.js";
+import _poolWhisperwoodElemental from "../pool/whisperwood-elemental.js";
 import _poolWhiteDragon from "../pool/white-dragon.js";
 import _poolWildEndeavor from "../pool/wild-endeavor.js";
 import _poolWillOfTheSultai from "../pool/will-of-the-sultai.js";
@@ -1066,6 +1068,7 @@ const shard: CardShard = {
     _poolCourtOfArdenvale,
     _poolCravenGiant,
     _poolCrime,
+    _poolCromat,
     _poolCrovaxAscendantHero,
     _poolCrystalShard,
     _poolCrystallization,
@@ -1761,6 +1764,7 @@ const shard: CardShard = {
     _poolWeldfastMonitor,
     _poolWhirlpoolRider,
     _poolWhiskerquillScribe,
+    _poolWhisperwoodElemental,
     _poolWhiteDragon,
     _poolWildEndeavor,
     _poolWillOfTheSultai,

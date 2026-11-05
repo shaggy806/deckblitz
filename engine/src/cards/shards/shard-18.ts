@@ -148,6 +148,7 @@ import _poolCourserOfKruphix from "../pool/courser-of-kruphix.js";
 import _poolCrashingFootfalls from "../pool/crashing-footfalls.js";
 import _poolCrimePunishment from "../pool/crime-punishment.js";
 import _poolCrimsonRoc from "../pool/crimson-roc.js";
+import _poolCrownOfAwe from "../pool/crown-of-awe.js";
 import _poolCrownOfSuspicion from "../pool/crown-of-suspicion.js";
 import _poolCrucibleOfWorlds from "../pool/crucible-of-worlds.js";
 import _poolCruelTutor from "../pool/cruel-tutor.js";
@@ -688,6 +689,7 @@ import _poolSimicCluestone from "../pool/simic-cluestone.js";
 import _poolSivitriScarzam from "../pool/sivitri-scarzam.js";
 import _poolSkeletalCrocodile from "../pool/skeletal-crocodile.js";
 import _poolSkitteringHeartstopper from "../pool/skittering-heartstopper.js";
+import _poolSkittishValesk from "../pool/skittish-valesk.js";
 import _poolSkullCatapult from "../pool/skull-catapult.js";
 import _poolSkullRaid from "../pool/skull-raid.js";
 import _poolSkyclaveApparition from "../pool/skyclave-apparition.js";
@@ -753,6 +755,7 @@ import _poolSummonAlexander from "../pool/summon-alexander.js";
 import _poolSummonKujata from "../pool/summon-kujata.js";
 import _poolSunforger from "../pool/sunforger.js";
 import _poolSunhomeEnforcer from "../pool/sunhome-enforcer.js";
+import _poolSupernaturalRescue from "../pool/supernatural-rescue.js";
 import _poolSuqataLancer from "../pool/suqata-lancer.js";
 import _poolSureFootedInfiltrator from "../pool/sure-footed-infiltrator.js";
 import _poolSurgeOfZeal from "../pool/surge-of-zeal.js";
@@ -1091,6 +1094,7 @@ const shard: CardShard = {
     _poolCrashingFootfalls,
     _poolCrimePunishment,
     _poolCrimsonRoc,
+    _poolCrownOfAwe,
     _poolCrownOfSuspicion,
     _poolCrucibleOfWorlds,
     _poolCruelTutor,
@@ -1631,6 +1635,7 @@ const shard: CardShard = {
     _poolSivitriScarzam,
     _poolSkeletalCrocodile,
     _poolSkitteringHeartstopper,
+    _poolSkittishValesk,
     _poolSkullCatapult,
     _poolSkullRaid,
     _poolSkyclaveApparition,
@@ -1696,6 +1701,7 @@ const shard: CardShard = {
     _poolSummonKujata,
     _poolSunforger,
     _poolSunhomeEnforcer,
+    _poolSupernaturalRescue,
     _poolSuqataLancer,
     _poolSureFootedInfiltrator,
     _poolSurgeOfZeal,

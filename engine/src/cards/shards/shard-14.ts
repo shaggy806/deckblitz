@@ -386,6 +386,7 @@ import _poolHarshSustenance from "../pool/harsh-sustenance.js";
 import _poolHazardOfTheDunes from "../pool/hazard-of-the-dunes.js";
 import _poolHazezonShaperOfSand from "../pool/hazezon-shaper-of-sand.js";
 import _poolHeartOfRamos from "../pool/heart-of-ramos.js";
+import _poolHeartlessAct from "../pool/heartless-act.js";
 import _poolHeartlessHidetsugu from "../pool/heartless-hidetsugu.js";
 import _poolHeaven from "../pool/heaven.js";
 import _poolHedronFieldPurists from "../pool/hedron-field-purists.js";
@@ -454,6 +455,7 @@ import _poolKainTraitorousDragoon from "../pool/kain-traitorous-dragoon.js";
 import _poolKaitoShizuki from "../pool/kaito-shizuki.js";
 import _poolKamiOfIndustry from "../pool/kami-of-industry.js";
 import _poolKamiOfRestlessShadows from "../pool/kami-of-restless-shadows.js";
+import _poolKamiOfTransience from "../pool/kami-of-transience.js";
 import _poolKarfellHarbinger from "../pool/karfell-harbinger.js";
 import _poolKarganWarleader from "../pool/kargan-warleader.js";
 import _poolKasetoOrochiArchmage from "../pool/kaseto-orochi-archmage.js";
@@ -541,6 +543,7 @@ import _poolMistwalker from "../pool/mistwalker.js";
 import _poolMizzixReplicaRider from "../pool/mizzix-replica-rider.js";
 import _poolMnemonicSphere from "../pool/mnemonic-sphere.js";
 import _poolMoggJailer from "../pool/mogg-jailer.js";
+import _poolMoiraUrborgHaunt from "../pool/moira-urborg-haunt.js";
 import _poolMoldgrafMillipede from "../pool/moldgraf-millipede.js";
 import _poolMoltenDuplication from "../pool/molten-duplication.js";
 import _poolMoltenNursery from "../pool/molten-nursery.js";
@@ -640,6 +643,7 @@ import _poolRagDealer from "../pool/rag-dealer.js";
 import _poolRakdosCharm from "../pool/rakdos-charm.js";
 import _poolRampagingAetherhood from "../pool/rampaging-aetherhood.js";
 import _poolRancidRats from "../pool/rancid-rats.js";
+import _poolRavener from "../pool/ravener.js";
 import _poolRayOfEnfeeblement from "../pool/ray-of-enfeeblement.js";
 import _poolRecklessAbandon from "../pool/reckless-abandon.js";
 import _poolRecklessWaif from "../pool/reckless-waif.js";
@@ -1335,6 +1339,7 @@ const shard: CardShard = {
     _poolHazardOfTheDunes,
     _poolHazezonShaperOfSand,
     _poolHeartOfRamos,
+    _poolHeartlessAct,
     _poolHeartlessHidetsugu,
     _poolHeaven,
     _poolHedronFieldPurists,
@@ -1403,6 +1408,7 @@ const shard: CardShard = {
     _poolKaitoShizuki,
     _poolKamiOfIndustry,
     _poolKamiOfRestlessShadows,
+    _poolKamiOfTransience,
     _poolKarfellHarbinger,
     _poolKarganWarleader,
     _poolKasetoOrochiArchmage,
@@ -1490,6 +1496,7 @@ const shard: CardShard = {
     _poolMizzixReplicaRider,
     _poolMnemonicSphere,
     _poolMoggJailer,
+    _poolMoiraUrborgHaunt,
     _poolMoldgrafMillipede,
     _poolMoltenDuplication,
     _poolMoltenNursery,
@@ -1589,6 +1596,7 @@ const shard: CardShard = {
     _poolRakdosCharm,
     _poolRampagingAetherhood,
     _poolRancidRats,
+    _poolRavener,
     _poolRayOfEnfeeblement,
     _poolRecklessAbandon,
     _poolRecklessWaif,
