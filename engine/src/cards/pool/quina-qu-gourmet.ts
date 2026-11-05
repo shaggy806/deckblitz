@@ -23,7 +23,7 @@ export default defineCard({
   ],
   activated: [
     {
-      cost: { mana: "{2}", tap: false, sacrifice: { filter: { subtype: "Frog", controlledBy: "you" }, count: 1 } },
+      cost: { mana: "{2}", tap: false, sacrifice: { filter: { subtype: "Frog" } } },
       targets: [],
       effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
       resolve: null,

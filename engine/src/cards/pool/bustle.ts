@@ -28,6 +28,7 @@ export default defineCard({
       {
         kind: "choose-permanents",
         filter: FACE_DOWN_YOURS,
+        min: 0,
         upTo: 1,
         then: { kind: "turn-face-up", target: 0 },
         prompt: "You may turn a creature you control face up",

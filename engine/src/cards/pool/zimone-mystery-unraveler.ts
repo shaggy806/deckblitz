@@ -24,6 +24,7 @@ export default defineCard({
         else: {
           kind: "choose-permanents",
           filter: { controlledBy: "you", faceDown: true },
+          min: 0,
           upTo: 1,
           then: { kind: "turn-face-up", target: 0 },
           prompt: "You may turn a permanent you control face up",
