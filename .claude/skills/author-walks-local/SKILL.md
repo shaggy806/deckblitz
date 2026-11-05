@@ -34,8 +34,8 @@ the whole machine** — one verify at a time, no typecheck or build beside it. `
 takes it on its own, so the children queue their verifies without being told; a wait of
 several minutes for "another verify on this machine" is the gate working.
 
-So a round is **three children, at most four `card-author` agents each** (twelve agents; batches
-of ~70–100 cards, groups of ~18–25). A round in which no child reports an out-of-memory kill
+So a round is **three children, at most two `card-author` agents each** (six agents; batches
+of ~70–150 cards, groups of 60–75). A round in which no child reports an out-of-memory kill
 (exit 137) or a typecheck wait past ~5 minutes can go to four children next time; record the
 result here.
 

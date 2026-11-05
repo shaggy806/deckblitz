@@ -11,20 +11,18 @@ cards that don't need it, and the lead builds the feature while they work
 ## Sizing
 
 By the `feedback_agents_only_over_15_cards` memory: ≤15 authorable cards the
-lead does alone; 16–39 one agent; 40+ split into groups of **~18 cards**, as
-many agents as that takes **up to six** (five on a cloud session — "On a
-cloud session" below) — a set's tail of commons (100–150 cards) is five or
-six agents, not four. Smaller groups finish sooner at about the same
-tokens per card (an agent re-reads its whole context every turn, so a shorter
-list keeps every turn cheaper); past six, the machine's cores set the pace,
-not the agents (B143's four agents of 27 took 14–22 minutes on a 4-core
-cloud session). Each is a **`card-author`** agent (`subagent_type`;
+lead does alone; 16–75 one agent; past that, split into groups of **60–75 cards**
+(the user's call, 2026-11-05, on the measures below), so a batch of 150 is two or
+three agents. Dealing the cards in rank order across the groups gives each the
+same mix. Smaller groups finish sooner but cost more per card, so more of them only
+when the batch is in a hurry. Each is a **`card-author`** agent (`subagent_type`;
 `.claude/agents/card-author.md`: only the file and shell tools, so a smaller
 fixed context on every turn than the general-purpose agent's) in
 `isolation: "worktree"`, started in the background, all in one message.
 
-**Measured against that advice, B257 (2026-11-04)**: one batch of 150 dealt to
-four agents of 20, 30, 40 and 60 cards at once, with the same mix of the queue:
+**The default was ~18 cards until B257 (2026-11-04)**, on the belief that a shorter
+list keeps every turn cheaper. One batch of 150 dealt to four agents of 20, 30, 40
+and 60 cards at once, with the same mix of the queue:
 
 | Cards | Turns | Minutes | Tokens | Per card | Peak context | Blind review |
 |---|---|---|---|---|---|---|
@@ -34,9 +32,8 @@ four agents of 20, 30, 40 and 60 cards at once, with the same mix of the queue:
 | 60 | 40 | 29 | 13.3M | 0.22M | 459K | 0 of 20 |
 
 Turns hardly grew with the cards, and a large part of every agent's context is
-the same digest and guide, so a longer list spread that cost over more cards,
-the opposite of the older claim above. None was compacted, and the 60's tests
-covered as much as the rest.
+the same digest and guide, so a longer list spread that cost over more cards.
+None was compacted, and the 60's tests covered as much as the rest.
 
 **B258 (2026-11-04) pushed it further**, two agents on the next 150:
 
@@ -49,8 +46,8 @@ So the saving keeps shrinking and the agent's own care goes first: at 100 a thir
 of the cards went untested, where up to 60 it was a tenth or less, but for one
 group of 40 at 5 of 31. Of the 5 wrong, one was plainly the author's miss (Ravenous
 Trap counting tokens), three were engine bugs a test on that clause might have
-shown, and one a gap. **60-75 is the sensible ceiling**; past it, ask for a test on
-every card with a condition and expect to read more. Wall time is the other side:
+shown, and one a gap. **So 60–75 is the ceiling**; past it, ask for a test on every
+card with a condition and expect to read more. Wall time is the other side:
 B258's two agents spent 26.5M tokens over 36 minutes, B257's four 39.8M over 29.
 One batch each, so these are a direction, not a law.
 

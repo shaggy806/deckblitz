@@ -64,8 +64,8 @@ are all in the Oracle snapshot.
    `-- --set <code>` for the set the hand-off names: seconds, where a large
    `--next` can outrun a two-minute Bash timeout). An old
    expansion is often 100–250 cards left. Take **one whole set per batch**
-   (the `feedback_whole_set_batches` memory) across 4–5 agents of ~25 cards
-   each, or split a 250-card set into two batches.
+   (the `feedback_whole_set_batches` memory) across agents of 60–75 cards
+   each (`agent-batches.md`), or split a 250-card set into two batches.
 3. Then as `author-by-set` steps 1.3–1.4: **scaffold the whole batch first**,
    read every `review/` card against its Oracle text and rulings, and sort the
    rest into authorable and blocked (need keys from `top-commanders-gaps.json`

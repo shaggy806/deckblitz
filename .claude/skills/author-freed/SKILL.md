@@ -68,7 +68,7 @@ landed on `main` before the next starts), and one batch a session.
    description, add a clause to that description saying what it does *not*
    cover, pointing at the new key.
 4. **Agents**: the authorable cards past ~15 go to `card-author` agents as
-   in `agent-batches.md` (groups of ~18-25, up to six; five on a cloud
+   in `agent-batches.md` (groups of 60–75, so two or three agents; the same on a cloud
    session). `fill-brief.mjs` takes `--set-names "cards freed by the
    <families> families" --set-code FREED --test-prefix freed-b<N>`. The
    batch's `notes.md` names each feature the cards wait on, its shape and a
