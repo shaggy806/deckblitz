@@ -502,6 +502,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Batch 255, the first of the freed cards: 134 of 150 authored** (2026-11-04, `7e508b2fc`, `77fcd18d7`) — the oldest of
+  `cards:needs -- --stale`: switch-pt, piles, hand-exile, its-controller draws and discards, chosen-player and per-player counts,
+  among them Wishclaw Talisman, Palantír of Orthanc, Stuffy Doll, The Black Gate and Tataru Taru. 43 as the scaffolder finished
+  them, 91 by six `card-author` agents. Fixed with it: `separate-into-piles`' `"an-opponent"`, naming the opponent after the reveal
+  and, for a chooser, after the piles (rule 608.2c), which every "an opponent" pile card had asked first at three players or more;
+  and a `cast-spell` trigger's `who: "chosen-player"`, which never fired.
 - **The need-key recheck: 44 keys, 49 cards** (2026-11-02, `da62c56c7`, `34c4a2709`) — re-reading the open keys whose notes
   claim the vocabulary lacks something. No engine change, each run on a real card in `need-key-recheck.test.ts`:
   effect:search-to-linked-exile, effect:exile-all-hands, effect:token-copy-each-of-target-players,

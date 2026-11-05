@@ -8623,6 +8623,28 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
   ),
   // --- Separating into piles (2026-10-29, build-family) ---
   preset(
+    "Fact or Fiction: of two opponents, you name who separates once you've seen the cards",
+    board({
+      you: {
+        bf: ['Island*4'],
+        hand: ['Fact or Fiction'],
+        lib: ['Grizzly Bears', 'Shock', 'Counterspell', 'Llanowar Elves', 'Craw Wurm'],
+      },
+      opp: [{}, {}],
+    }),
+  ),
+  preset(
+    'Steam Augury: of two opponents, you name who chooses once the piles are made',
+    board({
+      you: {
+        bf: ['Island*2', 'Mountain*2'],
+        hand: ['Steam Augury'],
+        lib: ['Grizzly Bears', 'Shock', 'Counterspell', 'Llanowar Elves', 'Craw Wurm'],
+      },
+      opp: [{}, {}],
+    }),
+  ),
+  preset(
     'Fact or Fiction: choose the pile for your hand',
     board({
       you: {

@@ -495,7 +495,9 @@ section keeps only what to do next.
   Adaptive Automaton, Brass's Tunnel-Grinder, Valakut Exploration, March of Swirling Mist, Chainer, Renewed Solidarity, Twinning Staff, Mirror Box, Leyline of the
   Guildpact, Battle Angels of Tyr, The Aetherspark, Claim Jumper, Scheming Symmetry, Contagion Engine, Wedding Ring, Lazotep Quarry, Traveling Chocobo, Urabrask,
   Sheoldred, Commandeer, Jace's Archivist, Halo Fountain, Mutavault, Defense Grid, Anticausal Vestige. **Next: the freed cards, with `author-freed`, batch by batch
-  from a fresh session; the remaining keys come after that queue is empty (the user's call, 2026-11-04).** `--stale` 1,761; top-5000 4439/5000, commanders 465/500.
+  from a fresh session; the remaining keys come after that queue is empty (the user's call, 2026-11-04).** Batches: B255 (2026-11-04: 134 of 150 authored, 16 still blocked,
+  three on the new `effect:separate-exiled-cards-into-piles`, two on `effect:choose-from-revealed-hand-without-moving`, the rest one each; fixed piles naming "an opponent" too early).
+  `--stale` 1,611; top-5000 and commanders as `cards:mark` last re-marked them.
   When key building resumes, the order is `--by-rank`, from Abundance, Temur Sabertooth, Inti, Skrelv's Hive, Tempt with Bunnies.
   Narrow keys `author-freed` should give, from that last run's reports: Liberated Livestock (Auras onto each token), Splintering Wind (its token's cumulative upkeep and
   leave trigger), Cait, Cage Brawler (two simultaneous discards; no scope names "you and defending player"), The Last Agni Kai ("until end of turn" mana keeping), Curse of

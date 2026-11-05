@@ -910,6 +910,7 @@ missing. Re-run `--greedy` for Phase 2's order.
   Leyline of the Guildpact, Battle Angels of Tyr, The Aetherspark, Claim Jumper, Scheming Symmetry, Contagion Engine, Wedding Ring, Lazotep Quarry,
   Traveling Chocobo, Urabrask, Sheoldred, Commandeer, Jace's Archivist, Halo Fountain, Mutavault, Defense Grid and Anticausal Vestige. **Then the order
   changed (the user's call, 2026-11-04): the freed cards are authored next, with `author-freed`, and building the remaining keys comes last.**
+- **2026-11-04: `author-freed`, batch 255.** 134 of the queue's oldest 150 authored, 16 given narrow keys; 1,611 left.
 
 ## Rough size
 

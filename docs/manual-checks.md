@@ -5731,6 +5731,16 @@ engine terms. A second thing to check is a second test.
 - **Do:** Attack Bob with Erithizon. Switch to Bob when asked.
 - **Expect:** As Bob, the banner reads "Choose the target of another player's Erithizon", and both Erithizon and Bob's Grizzly Bears can be picked. The +1/+1 counter goes on the creature Bob picked.
 
+### Fact or Fiction: of two opponents, you name who separates once you've seen the cards
+
+- **Do:** Cast Fact or Fiction.
+- **Expect:** The five cards are revealed first, then you're asked "Choose Bob" or "Choose Carol". Only the one you name separates them.
+
+### Steam Augury: of two opponents, you name who chooses once the piles are made
+
+- **Do:** Cast Steam Augury. Make the two piles and confirm.
+- **Expect:** While you separate, the popup says "an opponent chooses one". Only after you confirm are you asked "Choose Bob" or "Choose Carol", and the one you name chooses.
+
 ### Fact or Fiction: choose the pile for your hand
 - **Do:** Cast Fact or Fiction. The bot separates the five cards; choose a pile.
 - **Expect:** A popup titled "Fact or Fiction — Bob separated these" shows Pile 1 and Pile 2, each with a "Choose pile" button. The pile you choose goes to your hand and the other to your graveyard.
