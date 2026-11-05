@@ -60,7 +60,15 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "exile-from-library", amount: 10 },
-          { kind: "put-exiled-this-way-onto-battlefield", filter: { type: "artifact" } },
+          {
+            kind: "look-and-choose",
+            zone: "exile",
+            min: 10,
+            max: 10,
+            filter: { thisWay: "exiled", type: "artifact" },
+            destination: "battlefield",
+            leftover: "stay",
+          },
         ],
       },
       resolve: null,

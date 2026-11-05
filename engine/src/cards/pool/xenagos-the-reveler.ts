@@ -47,10 +47,10 @@ export default defineCard({
           { kind: "exile-from-library", amount: 7 },
           {
             kind: "look-and-choose",
-            zone: "exiled-this-way",
+            zone: "exile",
             min: 0,
             max: 7,
-            filter: { typesAnyOf: ["creature", "land"] },
+            filter: { thisWay: "exiled", typesAnyOf: ["creature", "land"] },
             destination: "battlefield",
             leftover: "stay",
           },
