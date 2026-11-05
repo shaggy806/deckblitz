@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4439 already implemented / 561 missing (marks refreshed 2026-11-04)
+4452 already implemented / 548 missing (marks refreshed 2026-11-05)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -516,7 +516,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   517  Blasphemous Edict                        {3}{B}{B}        Sorcery
 [x]   518  Terror of the Peaks                      {3}{R}{R}        Creature — Dragon
 [x]   519  Tainted Isle                             {0}              Land
-[ ]   520  Wishclaw Talisman                        {1}{B}           Artifact
+[x]   520  Wishclaw Talisman                        {1}{B}           Artifact
 [x]   521  Chord of Calling                         {X}{G}{G}{G}     Instant
 [x]   522  Voice of Victory                         {1}{W}           Creature — Human Bard
 [x]   523  Culling the Weak                         {B}              Instant
@@ -1074,7 +1074,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1078  Fertile Ground                           {1}{G}           Enchantment — Aura
 [x]  1079  Blossoming Sands                         {0}              Land
 [x]  1080  Selesnya Signet                          {2}              Artifact
-[ ]  1081  Tataru Taru                              {1}{W}           Legendary Creature — Dwarf Advisor
+[x]  1081  Tataru Taru                              {1}{W}           Legendary Creature — Dwarf Advisor
 [x]  1082  Door of Destinies                        {4}              Artifact
 [x]  1083  Marvin, Murderous Mimic                  {2}              Legendary Artifact Creature — Toy
 [x]  1084  Genji Glove                              {5}              Artifact — Equipment
@@ -1171,7 +1171,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1176  Tarrian's Soulcleaver                    {1}              Legendary Artifact — Equipment
 [x]  1177  Thriving Grove                           {0}              Land
 [x]  1178  Mikokoro, Center of the Sea              {0}              Legendary Land
-[ ]  1179  The Black Gate                           {0}              Legendary Land — Gate
+[x]  1179  The Black Gate                           {0}              Legendary Land — Gate
 [x]  1180  Triumph of the Hordes                    {2}{G}{G}        Sorcery
 [x]  1181  Goblin Engineer                          {1}{R}           Creature — Goblin Artificer
 [x]  1182  Steel Hellkite                           {6}              Artifact Creature — Dragon
@@ -1332,7 +1332,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1339  Shimmer Myr                              {3}              Artifact Creature — Myr
 [x]  1340  Rootborn Defenses                        {2}{W}           Instant
 [x]  1341  Ulamog, the Ceaseless Hunger             {10}             Legendary Creature — Eldrazi
-[ ]  1342  Palantír of Orthanc                      {3}              Legendary Artifact
+[x]  1342  Palantír of Orthanc                      {3}              Legendary Artifact
 [x]  1343  Skirk Prospector                         {R}              Creature — Goblin
 [x]  1344  Ad Nauseam                               {3}{B}{B}        Instant
 [x]  1345  Dolmen Gate                              {2}              Artifact
@@ -1398,7 +1398,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1405  Call of the Ring                         {1}{B}           Enchantment
 [x]  1406  Decree of Pain                           {6}{B}{B}        Sorcery
 [x]  1407  Delayed Blast Fireball                   {1}{R}{R}        Instant
-[ ]  1408  Baleful Mastery                          {3}{B}           Instant
+[x]  1408  Baleful Mastery                          {3}{B}           Instant
 [ ]  1409  Mantle of the Ancients                   {3}{W}{W}        Enchantment — Aura
 [x]  1410  Lindblum, Industrial Regency // Mage Siege {2}{R}           Land — Town // Instant — Adventure
 [x]  1411  Darkslick Shores                         {0}              Land
@@ -2233,7 +2233,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2240  Bloodthirsty Blade                       {2}              Artifact — Equipment
 [x]  2241  Assemble the Legion                      {3}{R}{W}        Enchantment
 [x]  2242  Idyllic Beachfront                       {0}              Land — Plains Island
-[ ]  2243  Stuffy Doll                              {5}              Artifact Creature — Construct
+[x]  2243  Stuffy Doll                              {5}              Artifact Creature — Construct
 [x]  2244  Sword of Light and Shadow                {3}              Artifact — Equipment
 [ ]  2245  Dragonhawk, Fate's Tempest               {3}{R}{R}        Legendary Creature — Bird Dragon
 [x]  2246  Llanowar Tribe                           {G}{G}{G}        Creature — Elf Druid
@@ -2849,7 +2849,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2856  Headless Rider                           {2}{B}           Creature — Zombie
 [x]  2857  Ratadrabik of Urborg                     {2}{W}{B}        Legendary Creature — Zombie Wizard
 [ ]  2858  Wyll's Reversal                          {2}{R}           Instant
-[ ]  2859  Sunspine Lynx                            {2}{R}{R}        Creature — Elemental Cat
+[x]  2859  Sunspine Lynx                            {2}{R}{R}        Creature — Elemental Cat
 [x]  2860  Hell to Pay                              {X}{R}           Sorcery
 [x]  2861  Ichormoon Gauntlet                       {2}{U}           Artifact
 [x]  2862  Drift of Phantasms                       {2}{U}           Creature — Spirit
@@ -3420,7 +3420,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3427  Eidolon of Countless Battles             {1}{W}{W}        Enchantment Creature — Spirit
 [x]  3428  Costly Plunder                           {1}{B}           Instant
 [x]  3429  Aether Hub                               {0}              Land
-[ ]  3430  Ertai Resurrected                        {2}{U}{B}        Legendary Creature — Phyrexian Human Wizard
+[x]  3430  Ertai Resurrected                        {2}{U}{B}        Legendary Creature — Phyrexian Human Wizard
 [x]  3431  Reckless Endeavor                        {5}{R}{R}        Sorcery
 [ ]  3432  Serra Paragon                            {2}{W}{W}        Creature — Angel
 [x]  3433  General's Enforcer                       {W}{B}           Creature — Human Soldier
@@ -4076,7 +4076,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4083  Necropolis Regent                        {3}{B}{B}{B}     Creature — Vampire
 [x]  4084  Bloodline Necromancer                    {4}{B}           Creature — Vampire Wizard
 [x]  4085  Badgermole                               {4}{G}           Creature — Badger Mole
-[ ]  4086  Invoke Calamity                          {1}{R}{R}{R}{R}  Instant
+[x]  4086  Invoke Calamity                          {1}{R}{R}{R}{R}  Instant
 [x]  4087  Birthday Escape                          {U}              Sorcery
 [x]  4088  Karn's Temporal Sundering                {4}{U}{U}        Legendary Sorcery
 [x]  4089  Spawning Kraken                          {5}{U}           Creature — Kraken
@@ -4121,7 +4121,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4128  Pentad Prism                             {2}              Artifact
 [x]  4129  Teferi, Hero of Dominaria                {3}{W}{U}        Legendary Planeswalker — Teferi
 [ ]  4130  Mirror March                             {5}{R}           Enchantment
-[ ]  4131  Ob Nixilis, the Hate-Twisted             {3}{B}{B}        Legendary Planeswalker — Nixilis
+[x]  4131  Ob Nixilis, the Hate-Twisted             {3}{B}{B}        Legendary Planeswalker — Nixilis
 [x]  4132  Crucible of the Spirit Dragon            {0}              Land
 [x]  4133  Tectonic Edge                            {0}              Land
 [x]  4134  Cathartic Pyre                           {1}{R}           Instant
@@ -4419,7 +4419,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4426  Zuko, Exiled Prince                      {3}{R}           Legendary Creature — Human Noble
 [x]  4427  Titan's Strength                         {R}              Instant
 [ ]  4428  The Golden Throne                        {4}              Legendary Artifact
-[ ]  4429  Dream Fracture                           {1}{U}{U}        Instant
+[x]  4429  Dream Fracture                           {1}{U}{U}        Instant
 [x]  4430  Jade Orb of Dragonkind                   {2}{G}           Artifact
 [x]  4431  Impervious Greatwurm                     {7}{G}{G}{G}     Creature — Wurm
 [x]  4432  Luxior, Giada's Gift                     {1}              Legendary Artifact — Equipment
@@ -4727,7 +4727,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4734  Plague Stinger                           {1}{B}           Creature — Phyrexian Insect Horror
 [x]  4735  World Breaker                            {6}{G}           Creature — Eldrazi
 [ ]  4736  Displaced Dinosaurs                      {5}{G}{G}        Creature — Dinosaur
-[ ]  4737  Olórin's Searing Light                   {2}{R}{W}        Instant
+[x]  4737  Olórin's Searing Light                   {2}{R}{W}        Instant
 [x]  4738  Nogi, Draco-Zealot                       {1}{R}{R}        Legendary Creature — Kobold Shaman
 [x]  4739  Ichorclaw Myr                            {2}              Artifact Creature — Phyrexian Myr
 [x]  4740  Reject Imperfection                      {1}{U}{U}        Instant
@@ -4969,7 +4969,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4976  Michelangelo, Weirdness to 11            {1}{G}           Legendary Creature — Mutant Ninja Turtle
 [x]  4977  Undergrowth Recon                        {1}{G}{G}        Enchantment
 [x]  4978  Storm of Souls                           {4}{W}{W}        Sorcery
-[ ]  4979  Sauron's Ransom                          {1}{U}{B}        Instant
+[x]  4979  Sauron's Ransom                          {1}{U}{B}        Instant
 [x]  4980  Cruel Somnophage // Can't Wake Up        {1}{B} // {1}{U} Creature — Nightmare // Sorcery — Adventure
 [x]  4981  Profane Command                          {X}{B}{B}        Sorcery
 [x]  4982  Lingering Souls                          {2}{W}           Sorcery

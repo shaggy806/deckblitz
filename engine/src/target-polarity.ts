@@ -163,10 +163,24 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     ) {
       v.touch(n.who.target, "harm", MINOR);
     }
+    // "Target opponent exiles a card from their hand" (Unscrupulous Agent).
+    if (
+      typeof n.who === "object" &&
+      "target" in n.who &&
+      n.effect.kind === "look-and-choose" &&
+      n.effect.zone === "hand" &&
+      n.effect.destination === "exile"
+    ) {
+      v.touch(n.who.target, "harm", MAJOR);
+    }
   },
-  // A vote names no target; a `for-each-voted`'s slot 0 is a permanent voted
-  // for, not the spell's target 0.
-  vote: none,
+  // A vote names no target, unless it's a targeted player's own choice ("target
+  // opponent chooses a creature they control": Wei Assassins). What's done with
+  // the choice says which way that goes, and a `for-each-voted`'s slot 0 is a
+  // permanent voted for, not the spell's target 0.
+  vote: (n, v) => {
+    if (n.choose === true && typeof n.who === "object" && "target" in n.who) v.touch(n.who.target, "either", MINOR);
+  },
   "cast-vote": none,
   // Everyone may pay or bid: what follows says who it helps.
   "players-pay-any-amount": (n, v) => {
@@ -218,6 +232,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // slot 1 (Crush Underfoot).
   "choose-permanents": (n, v) => {
     if (n.keepTargets === true) v.childAfterFound(n.then);
+    // "Target opponent destroys four lands they control" (Burning of Xinye).
+    if (typeof n.chooser === "object" && "target" in n.chooser) v.touch(n.chooser.target, "either", MINOR);
   },
   // Its `then` reads the blighted creature as target 0. "Target opponent
   // blights 2" harms the player in that slot.

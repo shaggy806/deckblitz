@@ -6,7 +6,7 @@
  */
 import { describe, expect, it } from "vitest";
 
-import type { ObjectId } from "../state.js";
+import type { ObjectId } from "../primitives.js";
 import { A, B, C, cast, graveyard, hand, lands, table, toHand, toLibrary } from "./harness.js";
 
 function topFive(game: Parameters<typeof toLibrary>[0]): ObjectId[] {
