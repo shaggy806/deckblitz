@@ -532,6 +532,7 @@ import _poolOsaiVultures from "../pool/osai-vultures.js";
 import _poolOtharriSunsGlory from "../pool/otharri-suns-glory.js";
 import _poolOutcasterTrailblazer from "../pool/outcaster-trailblazer.js";
 import _poolOverride from "../pool/override.js";
+import _poolOverture from "../pool/overture.js";
 import _poolOwlinHistorian from "../pool/owlin-historian.js";
 import _poolPackHunt from "../pool/pack-hunt.js";
 import _poolPain101 from "../pool/pain-101.js";
@@ -1476,6 +1477,7 @@ const shard: CardShard = {
     _poolOtharriSunsGlory,
     _poolOutcasterTrailblazer,
     _poolOverride,
+    _poolOverture,
     _poolOwlinHistorian,
     _poolPackHunt,
     _poolPain101,

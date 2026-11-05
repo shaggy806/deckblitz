@@ -428,6 +428,7 @@ import _poolLeoninSurveyor from "../pool/leonin-surveyor.js";
 import _poolLightshellDuo from "../pool/lightshell-duo.js";
 import _poolLilianaTheFaultless from "../pool/liliana-the-faultless.js";
 import _poolLilianaUntouchedByDeath from "../pool/liliana-untouched-by-death.js";
+import _poolLisetteDeanOfTheRoot from "../pool/lisette-dean-of-the-root.js";
 import _poolLlanowarStalker from "../pool/llanowar-stalker.js";
 import _poolLoamcrafterFaun from "../pool/loamcrafter-faun.js";
 import _poolLodestoneNeedle from "../pool/lodestone-needle.js";
@@ -525,6 +526,7 @@ import _poolOreskosSwiftclaw from "../pool/oreskos-swiftclaw.js";
 import _poolOriginOfTheHulk from "../pool/origin-of-the-hulk.js";
 import _poolOrissSamiteGuardian from "../pool/oriss-samite-guardian.js";
 import _poolOstiaryThrull from "../pool/ostiary-thrull.js";
+import _poolOverburden from "../pool/overburden.js";
 import _poolOverlordOfTheBoilerbilges from "../pool/overlord-of-the-boilerbilges.js";
 import _poolPainfulMemories from "../pool/painful-memories.js";
 import _poolParallelEvolution from "../pool/parallel-evolution.js";
@@ -1365,6 +1367,7 @@ const shard: CardShard = {
     _poolLightshellDuo,
     _poolLilianaTheFaultless,
     _poolLilianaUntouchedByDeath,
+    _poolLisetteDeanOfTheRoot,
     _poolLlanowarStalker,
     _poolLoamcrafterFaun,
     _poolLodestoneNeedle,
@@ -1462,6 +1465,7 @@ const shard: CardShard = {
     _poolOriginOfTheHulk,
     _poolOrissSamiteGuardian,
     _poolOstiaryThrull,
+    _poolOverburden,
     _poolOverlordOfTheBoilerbilges,
     _poolPainfulMemories,
     _poolParallelEvolution,

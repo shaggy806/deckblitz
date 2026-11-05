@@ -76,6 +76,7 @@ import _poolBloodfireEnforcers from "../pool/bloodfire-enforcers.js";
 import _poolBloodhunterBat from "../pool/bloodhunter-bat.js";
 import _poolBloodscent from "../pool/bloodscent.js";
 import _poolBloodyBetrayal from "../pool/bloody-betrayal.js";
+import _poolBoardedWindow from "../pool/boarded-window.js";
 import _poolBoartuskLiege from "../pool/boartusk-liege.js";
 import _poolBodyDouble from "../pool/body-double.js";
 import _poolBogWraith from "../pool/bog-wraith.js";
@@ -228,6 +229,7 @@ import _poolDreadWarlock from "../pool/dread-warlock.js";
 import _poolDreamChisel from "../pool/dream-chisel.js";
 import _poolDrogskolReinforcements from "../pool/drogskol-reinforcements.js";
 import _poolDrownyardTemple from "../pool/drownyard-temple.js";
+import _poolDualNature from "../pool/dual-nature.js";
 import _poolDuneBeetle from "../pool/dune-beetle.js";
 import _poolDungeonGeists from "../pool/dungeon-geists.js";
 import _poolDurableHandicraft from "../pool/durable-handicraft.js";
@@ -342,6 +344,7 @@ import _poolGodhunterOctopus from "../pool/godhunter-octopus.js";
 import _poolGoldForgeGarrison from "../pool/gold-forge-garrison.js";
 import _poolGolgariLocket from "../pool/golgari-locket.js";
 import _poolGorehornRaider from "../pool/gorehorn-raider.js";
+import _poolGornogTheRedReaper from "../pool/gornog-the-red-reaper.js";
 import _poolGravedig from "../pool/gravedig.js";
 import _poolGrayscaledGharial from "../pool/grayscaled-gharial.js";
 import _poolGreatFurnace from "../pool/great-furnace.js";
@@ -461,6 +464,7 @@ import _poolLatticeLibrary from "../pool/lattice-library.js";
 import _poolLavaStorm from "../pool/lava-storm.js";
 import _poolLavaleaper from "../pool/lavaleaper.js";
 import _poolLawmagesBinding from "../pool/lawmages-binding.js";
+import _poolLeovoldEmissaryOfTrest from "../pool/leovold-emissary-of-trest.js";
 import _poolLichsCaress from "../pool/lichs-caress.js";
 import _poolLifespringDruid from "../pool/lifespring-druid.js";
 import _poolLilianasCaress from "../pool/lilianas-caress.js";
@@ -773,6 +777,7 @@ import _poolSulfurFalls from "../pool/sulfur-falls.js";
 import _poolSultaiFlayer from "../pool/sultai-flayer.js";
 import _poolSummaryDismissal from "../pool/summary-dismissal.js";
 import _poolSummonEsperRamuh from "../pool/summon-esper-ramuh.js";
+import _poolSummonEsperValigarmanda from "../pool/summon-esper-valigarmanda.js";
 import _poolSunmanePegasus from "../pool/sunmane-pegasus.js";
 import _poolSunpearlKirin from "../pool/sunpearl-kirin.js";
 import _poolSurrakarSpellblade from "../pool/surrakar-spellblade.js";
@@ -865,6 +870,7 @@ import _poolUrzasArmor from "../pool/urzas-armor.js";
 import _poolUrzasRage from "../pool/urzas-rage.js";
 import _poolUrzasWorkshop from "../pool/urzas-workshop.js";
 import _poolUtilityKnife from "../pool/utility-knife.js";
+import _poolValentinDeanOfTheVein from "../pool/valentin-dean-of-the-vein.js";
 import _poolValorousStance from "../pool/valorous-stance.js";
 import _poolVampireEnvoy from "../pool/vampire-envoy.js";
 import _poolVampireGourmand from "../pool/vampire-gourmand.js";
@@ -1017,6 +1023,7 @@ const shard: CardShard = {
     _poolBloodhunterBat,
     _poolBloodscent,
     _poolBloodyBetrayal,
+    _poolBoardedWindow,
     _poolBoartuskLiege,
     _poolBodyDouble,
     _poolBogWraith,
@@ -1169,6 +1176,7 @@ const shard: CardShard = {
     _poolDreamChisel,
     _poolDrogskolReinforcements,
     _poolDrownyardTemple,
+    _poolDualNature,
     _poolDuneBeetle,
     _poolDungeonGeists,
     _poolDurableHandicraft,
@@ -1283,6 +1291,7 @@ const shard: CardShard = {
     _poolGoldForgeGarrison,
     _poolGolgariLocket,
     _poolGorehornRaider,
+    _poolGornogTheRedReaper,
     _poolGravedig,
     _poolGrayscaledGharial,
     _poolGreatFurnace,
@@ -1402,6 +1411,7 @@ const shard: CardShard = {
     _poolLavaStorm,
     _poolLavaleaper,
     _poolLawmagesBinding,
+    _poolLeovoldEmissaryOfTrest,
     _poolLichsCaress,
     _poolLifespringDruid,
     _poolLilianasCaress,
@@ -1714,6 +1724,7 @@ const shard: CardShard = {
     _poolSultaiFlayer,
     _poolSummaryDismissal,
     _poolSummonEsperRamuh,
+    _poolSummonEsperValigarmanda,
     _poolSunmanePegasus,
     _poolSunpearlKirin,
     _poolSurrakarSpellblade,
@@ -1806,6 +1817,7 @@ const shard: CardShard = {
     _poolUrzasRage,
     _poolUrzasWorkshop,
     _poolUtilityKnife,
+    _poolValentinDeanOfTheVein,
     _poolValorousStance,
     _poolVampireEnvoy,
     _poolVampireGourmand,

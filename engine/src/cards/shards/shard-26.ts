@@ -429,6 +429,7 @@ import _poolKelsFightFixer from "../pool/kels-fight-fixer.js";
 import _poolKestiaTheCultivator from "../pool/kestia-the-cultivator.js";
 import _poolKhalniAmbush from "../pool/khalni-ambush.js";
 import _poolKhalniHydra from "../pool/khalni-hydra.js";
+import _poolKianneDeanOfSubstance from "../pool/kianne-dean-of-substance.js";
 import _poolKinTreeSeverance from "../pool/kin-tree-severance.js";
 import _poolKingMacarTheGoldCursed from "../pool/king-macar-the-gold-cursed.js";
 import _poolKitnap from "../pool/kitnap.js";
@@ -457,6 +458,7 @@ import _poolLivingPlane from "../pool/living-plane.js";
 import _poolLoss from "../pool/loss.js";
 import _poolLostIsleCalling from "../pool/lost-isle-calling.js";
 import _poolLothlorienLookout from "../pool/lothlorien-lookout.js";
+import _poolLouisoixsSacrifice from "../pool/louisoixs-sacrifice.js";
 import _poolLoxodonHierarch from "../pool/loxodon-hierarch.js";
 import _poolLoyalGryff from "../pool/loyal-gryff.js";
 import _poolLumengridSentinel from "../pool/lumengrid-sentinel.js";
@@ -904,6 +906,7 @@ import _poolVoidMirror from "../pool/void-mirror.js";
 import _poolVoidwalk from "../pool/voidwalk.js";
 import _poolVolatileFjord from "../pool/volatile-fjord.js";
 import _poolVolcanicRush from "../pool/volcanic-rush.js";
+import _poolVoldarenBloodcaster from "../pool/voldaren-bloodcaster.js";
 import _poolVoltaicKey from "../pool/voltaic-key.js";
 import _poolVoraciousGreatshark from "../pool/voracious-greatshark.js";
 import _poolVoraciousHatchling from "../pool/voracious-hatchling.js";
@@ -941,6 +944,7 @@ import _poolYokedOx from "../pool/yoked-ox.js";
 import _poolZagothTriome from "../pool/zagoth-triome.js";
 import _poolZarielArchdukeOfAvernus from "../pool/zariel-archduke-of-avernus.js";
 import _poolZealotOfTheGodPharaoh from "../pool/zealot-of-the-god-pharaoh.js";
+import _poolZndrspltsJudgment from "../pool/zndrsplts-judgment.js";
 import _poolZombieApocalypse from "../pool/zombie-apocalypse.js";
 import _tokensDinosaurEggToken from "../tokens/dinosaur-egg-token.js";
 import _tokensDragonElementalToken from "../tokens/dragon-elemental-token.js";
@@ -1390,6 +1394,7 @@ const shard: CardShard = {
     _poolKestiaTheCultivator,
     _poolKhalniAmbush,
     _poolKhalniHydra,
+    _poolKianneDeanOfSubstance,
     _poolKinTreeSeverance,
     _poolKingMacarTheGoldCursed,
     _poolKitnap,
@@ -1418,6 +1423,7 @@ const shard: CardShard = {
     _poolLoss,
     _poolLostIsleCalling,
     _poolLothlorienLookout,
+    _poolLouisoixsSacrifice,
     _poolLoxodonHierarch,
     _poolLoyalGryff,
     _poolLumengridSentinel,
@@ -1865,6 +1871,7 @@ const shard: CardShard = {
     _poolVoidwalk,
     _poolVolatileFjord,
     _poolVolcanicRush,
+    _poolVoldarenBloodcaster,
     _poolVoltaicKey,
     _poolVoraciousGreatshark,
     _poolVoraciousHatchling,
@@ -1902,6 +1909,7 @@ const shard: CardShard = {
     _poolZagothTriome,
     _poolZarielArchdukeOfAvernus,
     _poolZealotOfTheGodPharaoh,
+    _poolZndrspltsJudgment,
     _poolZombieApocalypse,
   ],
   tokens: [

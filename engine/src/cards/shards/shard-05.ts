@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _poolAangSwiftSavior from "../pool/aang-swift-savior.js";
 import _poolAbandonThePost from "../pool/abandon-the-post.js";
 import _poolAbsorbingManAndTitania from "../pool/absorbing-man-and-titania.js";
 import _poolAccorderPaladin from "../pool/accorder-paladin.js";
@@ -49,6 +50,7 @@ import _poolAscendantDustspeaker from "../pool/ascendant-dustspeaker.js";
 import _poolAshmouthDragon from "../pool/ashmouth-dragon.js";
 import _poolAssaultOnOsgiliath from "../pool/assault-on-osgiliath.js";
 import _poolAssaultStrobe from "../pool/assault-strobe.js";
+import _poolAssimilationAegis from "../pool/assimilation-aegis.js";
 import _poolAstarionTheDecadent from "../pool/astarion-the-decadent.js";
 import _poolAstralDragon from "../pool/astral-dragon.js";
 import _poolAudaciousThief from "../pool/audacious-thief.js";
@@ -67,6 +69,7 @@ import _poolBalanceOfPower from "../pool/balance-of-power.js";
 import _poolBarbarianRing from "../pool/barbarian-ring.js";
 import _poolBarktoothWarbeard from "../pool/barktooth-warbeard.js";
 import _poolBaronSengir from "../pool/baron-sengir.js";
+import _poolBarrelingAttack from "../pool/barreling-attack.js";
 import _poolBasalThrull from "../pool/basal-thrull.js";
 import _poolBasilicaBellHaunt from "../pool/basilica-bell-haunt.js";
 import _poolBasilicaScreecher from "../pool/basilica-screecher.js";
@@ -337,6 +340,7 @@ import _poolGeierReachSanitarium from "../pool/geier-reach-sanitarium.js";
 import _poolGeistOfTheLonelyVigil from "../pool/geist-of-the-lonely-vigil.js";
 import _poolGenemorphImago from "../pool/genemorph-imago.js";
 import _poolGenjiGlove from "../pool/genji-glove.js";
+import _poolGenjuOfTheRealm from "../pool/genju-of-the-realm.js";
 import _poolGhituAmplifier from "../pool/ghitu-amplifier.js";
 import _poolGhostCouncilOfOrzhova from "../pool/ghost-council-of-orzhova.js";
 import _poolGhostlyChangeling from "../pool/ghostly-changeling.js";
@@ -451,6 +455,7 @@ import _poolInvokeTheDivine from "../pool/invoke-the-divine.js";
 import _poolIonize from "../pool/ionize.js";
 import _poolIrohTeaMaster from "../pool/iroh-tea-master.js";
 import _poolIsaoEnlightenedBushi from "../pool/isao-enlightened-bushi.js";
+import _poolIshgardTheHolySee from "../pool/ishgard-the-holy-see.js";
 import _poolIsolationCell from "../pool/isolation-cell.js";
 import _poolIthHighArcanist from "../pool/ith-high-arcanist.js";
 import _poolIxalansBinding from "../pool/ixalans-binding.js";
@@ -833,6 +838,7 @@ import _poolTithebearerGiant from "../pool/tithebearer-giant.js";
 import _poolTokkaRahzarTerribleTwos from "../pool/tokka-rahzar-terrible-twos.js";
 import _poolTolaria from "../pool/tolaria.js";
 import _poolTolarianContempt from "../pool/tolarian-contempt.js";
+import _poolTombstoneStairwell from "../pool/tombstone-stairwell.js";
 import _poolTomeRaider from "../pool/tome-raider.js";
 import _poolToolcraftExemplar from "../pool/toolcraft-exemplar.js";
 import _poolTopiaryLecturer from "../pool/topiary-lecturer.js";
@@ -944,6 +950,7 @@ import _tokensZombieTokenOnWingsOfGold from "../tokens/zombie-token-on-wings-of-
 
 const shard: CardShard = {
   pool: [
+    _poolAangSwiftSavior,
     _poolAbandonThePost,
     _poolAbsorbingManAndTitania,
     _poolAccorderPaladin,
@@ -990,6 +997,7 @@ const shard: CardShard = {
     _poolAshmouthDragon,
     _poolAssaultOnOsgiliath,
     _poolAssaultStrobe,
+    _poolAssimilationAegis,
     _poolAstarionTheDecadent,
     _poolAstralDragon,
     _poolAudaciousThief,
@@ -1008,6 +1016,7 @@ const shard: CardShard = {
     _poolBarbarianRing,
     _poolBarktoothWarbeard,
     _poolBaronSengir,
+    _poolBarrelingAttack,
     _poolBasalThrull,
     _poolBasilicaBellHaunt,
     _poolBasilicaScreecher,
@@ -1278,6 +1287,7 @@ const shard: CardShard = {
     _poolGeistOfTheLonelyVigil,
     _poolGenemorphImago,
     _poolGenjiGlove,
+    _poolGenjuOfTheRealm,
     _poolGhituAmplifier,
     _poolGhostCouncilOfOrzhova,
     _poolGhostlyChangeling,
@@ -1392,6 +1402,7 @@ const shard: CardShard = {
     _poolIonize,
     _poolIrohTeaMaster,
     _poolIsaoEnlightenedBushi,
+    _poolIshgardTheHolySee,
     _poolIsolationCell,
     _poolIthHighArcanist,
     _poolIxalansBinding,
@@ -1774,6 +1785,7 @@ const shard: CardShard = {
     _poolTokkaRahzarTerribleTwos,
     _poolTolaria,
     _poolTolarianContempt,
+    _poolTombstoneStairwell,
     _poolTomeRaider,
     _poolToolcraftExemplar,
     _poolTopiaryLecturer,

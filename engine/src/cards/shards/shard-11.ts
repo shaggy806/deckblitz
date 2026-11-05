@@ -187,6 +187,7 @@ import _poolCrevasse from "../pool/crevasse.js";
 import _poolCripplingBlight from "../pool/crippling-blight.js";
 import _poolCripplingFear from "../pool/crippling-fear.js";
 import _poolCryOfContrition from "../pool/cry-of-contrition.js";
+import _poolCryOfTheCarnarium from "../pool/cry-of-the-carnarium.js";
 import _poolCryptoplasm from "../pool/cryptoplasm.js";
 import _poolCrystallineCrawler from "../pool/crystalline-crawler.js";
 import _poolCunningRhetoric from "../pool/cunning-rhetoric.js";
@@ -534,6 +535,7 @@ import _poolMondoGecko from "../pool/mondo-gecko.js";
 import _poolMondrakGloryDominus from "../pool/mondrak-glory-dominus.js";
 import _poolMonologueTax from "../pool/monologue-tax.js";
 import _poolMonssGoblinRaiders from "../pool/monss-goblin-raiders.js";
+import _poolMoonringIsland from "../pool/moonring-island.js";
 import _poolMoonriseCleric from "../pool/moonrise-cleric.js";
 import _poolMoonsnarePrototype from "../pool/moonsnare-prototype.js";
 import _poolMoonstoneEulogist from "../pool/moonstone-eulogist.js";
@@ -1157,6 +1159,7 @@ const shard: CardShard = {
     _poolCripplingBlight,
     _poolCripplingFear,
     _poolCryOfContrition,
+    _poolCryOfTheCarnarium,
     _poolCryptoplasm,
     _poolCrystallineCrawler,
     _poolCunningRhetoric,
@@ -1504,6 +1507,7 @@ const shard: CardShard = {
     _poolMondrakGloryDominus,
     _poolMonologueTax,
     _poolMonssGoblinRaiders,
+    _poolMoonringIsland,
     _poolMoonriseCleric,
     _poolMoonsnarePrototype,
     _poolMoonstoneEulogist,

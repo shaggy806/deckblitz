@@ -418,6 +418,7 @@ import _poolHypnoticGrifter from "../pool/hypnotic-grifter.js";
 import _poolHypnoticSiren from "../pool/hypnotic-siren.js";
 import _poolIcatianJavelineers from "../pool/icatian-javelineers.js";
 import _poolIllumination from "../pool/illumination.js";
+import _poolImbrahamDeanOfTheory from "../pool/imbraham-dean-of-theory.js";
 import _poolImiStatue from "../pool/imi-statue.js";
 import _poolImmovableRod from "../pool/immovable-rod.js";
 import _poolImperialAerosaur from "../pool/imperial-aerosaur.js";
@@ -1365,6 +1366,7 @@ const shard: CardShard = {
     _poolHypnoticSiren,
     _poolIcatianJavelineers,
     _poolIllumination,
+    _poolImbrahamDeanOfTheory,
     _poolImiStatue,
     _poolImmovableRod,
     _poolImperialAerosaur,

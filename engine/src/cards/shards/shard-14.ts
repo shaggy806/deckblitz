@@ -87,6 +87,7 @@ import _poolBlackTomCassidy from "../pool/black-tom-cassidy.js";
 import _poolBlightedBurgeoning from "../pool/blighted-burgeoning.js";
 import _poolBlinkmothNexus from "../pool/blinkmoth-nexus.js";
 import _poolBlisterspitGremlin from "../pool/blisterspit-gremlin.js";
+import _poolBloodbatSummoner from "../pool/bloodbat-summoner.js";
 import _poolBloodchiefsThirst from "../pool/bloodchiefs-thirst.js";
 import _poolBloodletterOfAclazotz from "../pool/bloodletter-of-aclazotz.js";
 import _poolBloodstokeHowler from "../pool/bloodstoke-howler.js";
@@ -278,6 +279,7 @@ import _poolExplorationBroodship from "../pool/exploration-broodship.js";
 import _poolExplosiveImpact from "../pool/explosive-impact.js";
 import _poolEzurisArchers from "../pool/ezuris-archers.js";
 import _poolFaerieFormation from "../pool/faerie-formation.js";
+import _poolFaithGrief from "../pool/faith-grief.js";
 import _poolFalkenrathTorturer from "../pool/falkenrath-torturer.js";
 import _poolFallowsage from "../pool/fallowsage.js";
 import _poolFame from "../pool/fame.js";
@@ -446,6 +448,7 @@ import _poolIsperiaSupremeJudge from "../pool/isperia-supreme-judge.js";
 import _poolIvoraInsatiableHeir from "../pool/ivora-insatiable-heir.js";
 import _poolJJonahJameson from "../pool/j-jonah-jameson.js";
 import _poolJeditsDragoons from "../pool/jedits-dragoons.js";
+import _poolJidoorAristocraticCapital from "../pool/jidoor-aristocratic-capital.js";
 import _poolJinGitaxiasCoreAugur from "../pool/jin-gitaxias-core-augur.js";
 import _poolJolraelsCentaur from "../pool/jolraels-centaur.js";
 import _poolJolt from "../pool/jolt.js";
@@ -925,6 +928,7 @@ import _poolWormfangBehemoth from "../pool/wormfang-behemoth.js";
 import _poolWrathOfTheSkies from "../pool/wrath-of-the-skies.js";
 import _poolYahennisExpertise from "../pool/yahennis-expertise.js";
 import _poolYavimayaScion from "../pool/yavimaya-scion.js";
+import _poolYouLookUponTheTarrasque from "../pool/you-look-upon-the-tarrasque.js";
 import _poolYoureConfrontedByRobbers from "../pool/youre-confronted-by-robbers.js";
 import _poolYunaHopeOfSpira from "../pool/yuna-hope-of-spira.js";
 import _poolYurikoBladeOfTheMighty from "../pool/yuriko-blade-of-the-mighty.js";
@@ -948,6 +952,7 @@ import _tokensGoldmeadowHarrierToken from "../tokens/goldmeadow-harrier-token.js
 import _tokensGolemEnchantmentArtifactToken from "../tokens/golem-enchantment-artifact-token.js";
 import _tokensGolemVigilanceToken from "../tokens/golem-vigilance-token.js";
 import _tokensGreenEnchantmentSpiderTokenReach from "../tokens/green-enchantment-spider-token-reach.js";
+import _tokensHumanRogueToken12HastePing from "../tokens/human-rogue-token-1-2-haste-ping.js";
 import _tokensKrakenToken from "../tokens/kraken-token.js";
 import _tokensMetallicSliverToken from "../tokens/metallic-sliver-token.js";
 import _tokensNinjaTokenKaitoShizuki from "../tokens/ninja-token-kaito-shizuki.js";
@@ -956,6 +961,7 @@ import _tokensSandToken from "../tokens/sand-token.js";
 import _tokensScorpionDragonToken from "../tokens/scorpion-dragon-token.js";
 import _tokensSpiritTokenGhostlyDancers from "../tokens/spirit-token-ghostly-dancers.js";
 import _tokensTentacleToken from "../tokens/tentacle-token.js";
+import _tokensTombspawn from "../tokens/tombspawn.js";
 import _tokensTreefolkToken from "../tokens/treefolk-token.js";
 import _tokensWallTokenRammasEchorAncientShield from "../tokens/wall-token-rammas-echor-ancient-shield.js";
 
@@ -1045,6 +1051,7 @@ const shard: CardShard = {
     _poolBlightedBurgeoning,
     _poolBlinkmothNexus,
     _poolBlisterspitGremlin,
+    _poolBloodbatSummoner,
     _poolBloodchiefsThirst,
     _poolBloodletterOfAclazotz,
     _poolBloodstokeHowler,
@@ -1236,6 +1243,7 @@ const shard: CardShard = {
     _poolExplosiveImpact,
     _poolEzurisArchers,
     _poolFaerieFormation,
+    _poolFaithGrief,
     _poolFalkenrathTorturer,
     _poolFallowsage,
     _poolFame,
@@ -1404,6 +1412,7 @@ const shard: CardShard = {
     _poolIvoraInsatiableHeir,
     _poolJJonahJameson,
     _poolJeditsDragoons,
+    _poolJidoorAristocraticCapital,
     _poolJinGitaxiasCoreAugur,
     _poolJolraelsCentaur,
     _poolJolt,
@@ -1883,6 +1892,7 @@ const shard: CardShard = {
     _poolWrathOfTheSkies,
     _poolYahennisExpertise,
     _poolYavimayaScion,
+    _poolYouLookUponTheTarrasque,
     _poolYoureConfrontedByRobbers,
     _poolYunaHopeOfSpira,
     _poolYurikoBladeOfTheMighty,
@@ -1908,6 +1918,7 @@ const shard: CardShard = {
     _tokensGolemEnchantmentArtifactToken,
     _tokensGolemVigilanceToken,
     _tokensGreenEnchantmentSpiderTokenReach,
+    _tokensHumanRogueToken12HastePing,
     _tokensKrakenToken,
     _tokensMetallicSliverToken,
     _tokensNinjaTokenKaitoShizuki,
@@ -1916,6 +1927,7 @@ const shard: CardShard = {
     _tokensScorpionDragonToken,
     _tokensSpiritTokenGhostlyDancers,
     _tokensTentacleToken,
+    _tokensTombspawn,
     _tokensTreefolkToken,
     _tokensWallTokenRammasEchorAncientShield,
   ],

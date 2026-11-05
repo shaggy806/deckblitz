@@ -47,6 +47,7 @@ import _poolArnimZolaBioFanatic from "../pool/arnim-zola-bio-fanatic.js";
 import _poolArrogantPoet from "../pool/arrogant-poet.js";
 import _poolArtificersIntuition from "../pool/artificers-intuition.js";
 import _poolAshenMonstrosity from "../pool/ashen-monstrosity.js";
+import _poolAshioksErasure from "../pool/ashioks-erasure.js";
 import _poolAssaultIntercessor from "../pool/assault-intercessor.js";
 import _poolAssaultZeppelid from "../pool/assault-zeppelid.js";
 import _poolAssimilateEssence from "../pool/assimilate-essence.js";
@@ -235,6 +236,7 @@ import _poolDruidicSatchel from "../pool/druidic-satchel.js";
 import _poolDugganPrivateDetective from "../pool/duggan-private-detective.js";
 import _poolDwarvenHold from "../pool/dwarven-hold.js";
 import _poolEccentricPestfinder from "../pool/eccentric-pestfinder.js";
+import _poolEchocastingSymposium from "../pool/echocasting-symposium.js";
 import _poolEcstaticAwakener from "../pool/ecstatic-awakener.js";
 import _poolEcstaticBeauty from "../pool/ecstatic-beauty.js";
 import _poolEdgarAncientBloodlord from "../pool/edgar-ancient-bloodlord.js";
@@ -321,6 +323,7 @@ import _poolGerrardCapashen from "../pool/gerrard-capashen.js";
 import _poolGhostWarden from "../pool/ghost-warden.js";
 import _poolGiantAdephage from "../pool/giant-adephage.js";
 import _poolGiantDustwasp from "../pool/giant-dustwasp.js";
+import _poolGideonJura from "../pool/gideon-jura.js";
 import _poolGideonMartialParagon from "../pool/gideon-martial-paragon.js";
 import _poolGideonTheOathless from "../pool/gideon-the-oathless.js";
 import _poolGilanraCallerOfWirewood from "../pool/gilanra-caller-of-wirewood.js";
@@ -614,6 +617,7 @@ import _poolRaphaelToughTurtle from "../pool/raphael-tough-turtle.js";
 import _poolRathiFiend from "../pool/rathi-fiend.js";
 import _poolRaucousAudience from "../pool/raucous-audience.js";
 import _poolRavagesOfWar from "../pool/ravages-of-war.js";
+import _poolRayneAcademyChancellor from "../pool/rayne-academy-chancellor.js";
 import _poolReachForTheSky from "../pool/reach-for-the-sky.js";
 import _poolReason from "../pool/reason.js";
 import _poolRebelliousStrike from "../pool/rebellious-strike.js";
@@ -978,6 +982,7 @@ const shard: CardShard = {
     _poolArrogantPoet,
     _poolArtificersIntuition,
     _poolAshenMonstrosity,
+    _poolAshioksErasure,
     _poolAssaultIntercessor,
     _poolAssaultZeppelid,
     _poolAssimilateEssence,
@@ -1166,6 +1171,7 @@ const shard: CardShard = {
     _poolDugganPrivateDetective,
     _poolDwarvenHold,
     _poolEccentricPestfinder,
+    _poolEchocastingSymposium,
     _poolEcstaticAwakener,
     _poolEcstaticBeauty,
     _poolEdgarAncientBloodlord,
@@ -1252,6 +1258,7 @@ const shard: CardShard = {
     _poolGhostWarden,
     _poolGiantAdephage,
     _poolGiantDustwasp,
+    _poolGideonJura,
     _poolGideonMartialParagon,
     _poolGideonTheOathless,
     _poolGilanraCallerOfWirewood,
@@ -1545,6 +1552,7 @@ const shard: CardShard = {
     _poolRathiFiend,
     _poolRaucousAudience,
     _poolRavagesOfWar,
+    _poolRayneAcademyChancellor,
     _poolReachForTheSky,
     _poolReason,
     _poolRebelliousStrike,

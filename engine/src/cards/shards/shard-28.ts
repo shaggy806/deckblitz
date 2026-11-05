@@ -119,6 +119,7 @@ import _poolBurningSunsFury from "../pool/burning-suns-fury.js";
 import _poolBurnout from "../pool/burnout.js";
 import _poolBurrentonForgeTender from "../pool/burrenton-forge-tender.js";
 import _poolCacklingCulprit from "../pool/cackling-culprit.js";
+import _poolCacophonyUnleashed from "../pool/cacophony-unleashed.js";
 import _poolCalamityBearer from "../pool/calamity-bearer.js";
 import _poolCalculatedDismissal from "../pool/calculated-dismissal.js";
 import _poolCallOfTheConclave from "../pool/call-of-the-conclave.js";
@@ -203,6 +204,7 @@ import _poolDefossilize from "../pool/defossilize.js";
 import _poolDemonsHerald from "../pool/demons-herald.js";
 import _poolDenryKlinEditorInChief from "../pool/denry-klin-editor-in-chief.js";
 import _poolDiamondKnight from "../pool/diamond-knight.js";
+import _poolDinoDna from "../pool/dino-dna.js";
 import _poolDiregrafGhoul from "../pool/diregraf-ghoul.js";
 import _poolDismantlingWave from "../pool/dismantling-wave.js";
 import _poolDispersalTechnician from "../pool/dispersal-technician.js";
@@ -254,6 +256,7 @@ import _poolEsperSojourners from "../pool/esper-sojourners.js";
 import _poolEternalSkylord from "../pool/eternal-skylord.js";
 import _poolEtherealValkyrie from "../pool/ethereal-valkyrie.js";
 import _poolExoticOrchard from "../pool/exotic-orchard.js";
+import _poolExperimentalLab from "../pool/experimental-lab.js";
 import _poolExplore from "../pool/explore.js";
 import _poolExplosiveShot from "../pool/explosive-shot.js";
 import _poolExtractorDemon from "../pool/extractor-demon.js";
@@ -302,6 +305,7 @@ import _poolGenjuOfTheFens from "../pool/genju-of-the-fens.js";
 import _poolGethLordOfTheVault from "../pool/geth-lord-of-the-vault.js";
 import _poolGhiredConclaveExile from "../pool/ghired-conclave-exile.js";
 import _poolGhostLitStalker from "../pool/ghost-lit-stalker.js";
+import _poolGiantTrapDoorSpider from "../pool/giant-trap-door-spider.js";
 import _poolGibberingKami from "../pool/gibbering-kami.js";
 import _poolGideonChampionOfJustice from "../pool/gideon-champion-of-justice.js";
 import _poolGigantiform from "../pool/gigantiform.js";
@@ -1092,6 +1096,7 @@ const shard: CardShard = {
     _poolBurnout,
     _poolBurrentonForgeTender,
     _poolCacklingCulprit,
+    _poolCacophonyUnleashed,
     _poolCalamityBearer,
     _poolCalculatedDismissal,
     _poolCallOfTheConclave,
@@ -1176,6 +1181,7 @@ const shard: CardShard = {
     _poolDemonsHerald,
     _poolDenryKlinEditorInChief,
     _poolDiamondKnight,
+    _poolDinoDna,
     _poolDiregrafGhoul,
     _poolDismantlingWave,
     _poolDispersalTechnician,
@@ -1227,6 +1233,7 @@ const shard: CardShard = {
     _poolEternalSkylord,
     _poolEtherealValkyrie,
     _poolExoticOrchard,
+    _poolExperimentalLab,
     _poolExplore,
     _poolExplosiveShot,
     _poolExtractorDemon,
@@ -1275,6 +1282,7 @@ const shard: CardShard = {
     _poolGethLordOfTheVault,
     _poolGhiredConclaveExile,
     _poolGhostLitStalker,
+    _poolGiantTrapDoorSpider,
     _poolGibberingKami,
     _poolGideonChampionOfJustice,
     _poolGigantiform,

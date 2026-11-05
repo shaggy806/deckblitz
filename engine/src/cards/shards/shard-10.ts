@@ -561,10 +561,12 @@ import _poolOnduGiant from "../pool/ondu-giant.js";
 import _poolOneEyedScarecrow from "../pool/one-eyed-scarecrow.js";
 import _poolOranRiefTheVastwood from "../pool/oran-rief-the-vastwood.js";
 import _poolOrcishSiegemaster from "../pool/orcish-siegemaster.js";
+import _poolOutlawsMerriment from "../pool/outlaws-merriment.js";
 import _poolOvertaker from "../pool/overtaker.js";
 import _poolOzaisCruelty from "../pool/ozais-cruelty.js";
 import _poolPaintersStudioDefacedGallery from "../pool/painters-studio-defaced-gallery.js";
 import _poolPatriotYoungAvenger from "../pool/patriot-young-avenger.js";
+import _poolPatronOfTheMoon from "../pool/patron-of-the-moon.js";
 import _poolPatronOfTheValiant from "../pool/patron-of-the-valiant.js";
 import _poolPerchProtection from "../pool/perch-protection.js";
 import _poolPerimeterPatrol from "../pool/perimeter-patrol.js";
@@ -651,6 +653,7 @@ import _poolRoninCavekeeper from "../pool/ronin-cavekeeper.js";
 import _poolRoonOfTheHiddenRealm from "../pool/roon-of-the-hidden-realm.js";
 import _poolRootManipulation from "../pool/root-manipulation.js";
 import _poolRootSpider from "../pool/root-spider.js";
+import _poolRosieCottonOfSouthLane from "../pool/rosie-cotton-of-south-lane.js";
 import _poolRotatingFireplace from "../pool/rotating-fireplace.js";
 import _poolRottenheartGhoul from "../pool/rottenheart-ghoul.js";
 import _poolRumblingSentry from "../pool/rumbling-sentry.js";
@@ -1513,10 +1516,12 @@ const shard: CardShard = {
     _poolOneEyedScarecrow,
     _poolOranRiefTheVastwood,
     _poolOrcishSiegemaster,
+    _poolOutlawsMerriment,
     _poolOvertaker,
     _poolOzaisCruelty,
     _poolPaintersStudioDefacedGallery,
     _poolPatriotYoungAvenger,
+    _poolPatronOfTheMoon,
     _poolPatronOfTheValiant,
     _poolPerchProtection,
     _poolPerimeterPatrol,
@@ -1603,6 +1608,7 @@ const shard: CardShard = {
     _poolRoonOfTheHiddenRealm,
     _poolRootManipulation,
     _poolRootSpider,
+    _poolRosieCottonOfSouthLane,
     _poolRotatingFireplace,
     _poolRottenheartGhoul,
     _poolRumblingSentry,

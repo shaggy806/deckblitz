@@ -305,6 +305,7 @@ import _poolGoblinMasons from "../pool/goblin-masons.js";
 import _poolGoblinPsychopath from "../pool/goblin-psychopath.js";
 import _poolGoblinRaider from "../pool/goblin-raider.js";
 import _poolGodEternalBontu from "../pool/god-eternal-bontu.js";
+import _poolGogoMysteriousMime from "../pool/gogo-mysterious-mime.js";
 import _poolGoldenArgosy from "../pool/golden-argosy.js";
 import _poolGolgariGuildmage from "../pool/golgari-guildmage.js";
 import _poolGorgonFlail from "../pool/gorgon-flail.js";
@@ -927,6 +928,7 @@ import _poolYavimayaHollow from "../pool/yavimaya-hollow.js";
 import _poolYavimayaSojourner from "../pool/yavimaya-sojourner.js";
 import _poolYavimayasEmbrace from "../pool/yavimayas-embrace.js";
 import _poolYawgmothsBargain from "../pool/yawgmoths-bargain.js";
+import _poolYdwenEfreet from "../pool/ydwen-efreet.js";
 import _poolYgraEaterOfAll from "../pool/ygra-eater-of-all.js";
 import _poolYoseiTheMorningStar from "../pool/yosei-the-morning-star.js";
 import _poolYoureAmbushedOnTheRoad from "../pool/youre-ambushed-on-the-road.js";
@@ -1250,6 +1252,7 @@ const shard: CardShard = {
     _poolGoblinPsychopath,
     _poolGoblinRaider,
     _poolGodEternalBontu,
+    _poolGogoMysteriousMime,
     _poolGoldenArgosy,
     _poolGolgariGuildmage,
     _poolGorgonFlail,
@@ -1872,6 +1875,7 @@ const shard: CardShard = {
     _poolYavimayaSojourner,
     _poolYavimayasEmbrace,
     _poolYawgmothsBargain,
+    _poolYdwenEfreet,
     _poolYgraEaterOfAll,
     _poolYoseiTheMorningStar,
     _poolYoureAmbushedOnTheRoad,

@@ -571,6 +571,7 @@ import _poolParalyzingGrasp from "../pool/paralyzing-grasp.js";
 import _poolParapetWatchers from "../pool/parapet-watchers.js";
 import _poolParhelionPatrol from "../pool/parhelion-patrol.js";
 import _poolPathOfPeace from "../pool/path-of-peace.js";
+import _poolPatronOfTheNezumi from "../pool/patron-of-the-nezumi.js";
 import _poolPawnOfUlamog from "../pool/pawn-of-ulamog.js";
 import _poolPeachGardenOath from "../pool/peach-garden-oath.js";
 import _poolPeltCollector from "../pool/pelt-collector.js";
@@ -1554,6 +1555,7 @@ const shard: CardShard = {
     _poolParapetWatchers,
     _poolParhelionPatrol,
     _poolPathOfPeace,
+    _poolPatronOfTheNezumi,
     _poolPawnOfUlamog,
     _poolPeachGardenOath,
     _poolPeltCollector,
