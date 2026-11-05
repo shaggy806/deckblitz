@@ -46,6 +46,7 @@ import _poolAshiokNightmareWeaver from "../pool/ashiok-nightmare-weaver.js";
 import _poolAtsushiTheBlazingSky from "../pool/atsushi-the-blazing-sky.js";
 import _poolAutumnTailKitsuneSage from "../pool/autumn-tail-kitsune-sage.js";
 import _poolAzimaetDrake from "../pool/azimaet-drake.js";
+import _poolBalaGedThief from "../pool/bala-ged-thief.js";
 import _poolBalthorTheStout from "../pool/balthor-the-stout.js";
 import _poolBansheesBlade from "../pool/banshees-blade.js";
 import _poolBartelRuneaxe from "../pool/bartel-runeaxe.js";
@@ -373,6 +374,7 @@ import _poolHystrodon from "../pool/hystrodon.js";
 import _poolIcemanAndFirestar from "../pool/iceman-and-firestar.js";
 import _poolIdentityThief from "../pool/identity-thief.js";
 import _poolIdleThoughts from "../pool/idle-thoughts.js";
+import _poolIfhBiffEfreet from "../pool/ifh-biff-efreet.js";
 import _poolImmobilizingInk from "../pool/immobilizing-ink.js";
 import _poolImpedeMomentum from "../pool/impede-momentum.js";
 import _poolImpossibleInferno from "../pool/impossible-inferno.js";
@@ -953,6 +955,7 @@ const shard: CardShard = {
     _poolAtsushiTheBlazingSky,
     _poolAutumnTailKitsuneSage,
     _poolAzimaetDrake,
+    _poolBalaGedThief,
     _poolBalthorTheStout,
     _poolBansheesBlade,
     _poolBartelRuneaxe,
@@ -1280,6 +1283,7 @@ const shard: CardShard = {
     _poolIcemanAndFirestar,
     _poolIdentityThief,
     _poolIdleThoughts,
+    _poolIfhBiffEfreet,
     _poolImmobilizingInk,
     _poolImpedeMomentum,
     _poolImpossibleInferno,

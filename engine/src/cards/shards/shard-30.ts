@@ -476,6 +476,7 @@ import _poolLaunchMishap from "../pool/launch-mishap.js";
 import _poolLaunchParty from "../pool/launch-party.js";
 import _poolLavaCoil from "../pool/lava-coil.js";
 import _poolLavaglidePathway from "../pool/lavaglide-pathway.js";
+import _poolLethalVapors from "../pool/lethal-vapors.js";
 import _poolLeylineBinding from "../pool/leyline-binding.js";
 import _poolLeylineOfLightning from "../pool/leyline-of-lightning.js";
 import _poolLightOfHope from "../pool/light-of-hope.js";
@@ -573,6 +574,7 @@ import _poolNimbusChampion from "../pool/nimbus-champion.js";
 import _poolNishobaBrawler from "../pool/nishoba-brawler.js";
 import _poolNobody from "../pool/nobody.js";
 import _poolNomadsAssembly from "../pool/nomads-assembly.js";
+import _poolNullhideFerox from "../pool/nullhide-ferox.js";
 import _poolNurturingLicid from "../pool/nurturing-licid.js";
 import _poolOakaTravelingMerchant from "../pool/oaka-traveling-merchant.js";
 import _poolOathOfTheAncientWood from "../pool/oath-of-the-ancient-wood.js";
@@ -1446,6 +1448,7 @@ const shard: CardShard = {
     _poolLaunchParty,
     _poolLavaCoil,
     _poolLavaglidePathway,
+    _poolLethalVapors,
     _poolLeylineBinding,
     _poolLeylineOfLightning,
     _poolLightOfHope,
@@ -1543,6 +1546,7 @@ const shard: CardShard = {
     _poolNishobaBrawler,
     _poolNobody,
     _poolNomadsAssembly,
+    _poolNullhideFerox,
     _poolNurturingLicid,
     _poolOakaTravelingMerchant,
     _poolOathOfTheAncientWood,

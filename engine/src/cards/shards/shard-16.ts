@@ -45,6 +45,7 @@ import _poolAshnodFleshMechanist from "../pool/ashnod-flesh-mechanist.js";
 import _poolAssembleTheLegion from "../pool/assemble-the-legion.js";
 import _poolAssembledAlphas from "../pool/assembled-alphas.js";
 import _poolAtlaPalaniNestTender from "../pool/atla-palani-nest-tender.js";
+import _poolAudaciousSwap from "../pool/audacious-swap.js";
 import _poolAugustaDeanOfOrder from "../pool/augusta-dean-of-order.js";
 import _poolAuraGraft from "../pool/aura-graft.js";
 import _poolAuraOfSilence from "../pool/aura-of-silence.js";
@@ -109,6 +110,7 @@ import _poolBrokersInitiate from "../pool/brokers-initiate.js";
 import _poolBrutalCathar from "../pool/brutal-cathar.js";
 import _poolBuckyBarnesEagerAlly from "../pool/bucky-barnes-eager-ally.js";
 import _poolBurdenOfProof from "../pool/burden-of-proof.js";
+import _poolBurningRuneDemon from "../pool/burning-rune-demon.js";
 import _poolCadaverLab from "../pool/cadaver-lab.js";
 import _poolCallTheBloodline from "../pool/call-the-bloodline.js";
 import _poolCallToHeel from "../pool/call-to-heel.js";
@@ -643,6 +645,7 @@ import _poolQuandrixTheProof from "../pool/quandrix-the-proof.js";
 import _poolQueensBayPaladin from "../pool/queens-bay-paladin.js";
 import _poolQuicksandWhirlpool from "../pool/quicksand-whirlpool.js";
 import _poolQuillspike from "../pool/quillspike.js";
+import _poolQuinaQuGourmet from "../pool/quina-qu-gourmet.js";
 import _poolQutrubForayer from "../pool/qutrub-forayer.js";
 import _poolRabanastreRoyalCity from "../pool/rabanastre-royal-city.js";
 import _poolRaffWeatherlightStalwart from "../pool/raff-weatherlight-stalwart.js";
@@ -1073,6 +1076,7 @@ const shard: CardShard = {
     _poolAssembleTheLegion,
     _poolAssembledAlphas,
     _poolAtlaPalaniNestTender,
+    _poolAudaciousSwap,
     _poolAugustaDeanOfOrder,
     _poolAuraGraft,
     _poolAuraOfSilence,
@@ -1137,6 +1141,7 @@ const shard: CardShard = {
     _poolBrutalCathar,
     _poolBuckyBarnesEagerAlly,
     _poolBurdenOfProof,
+    _poolBurningRuneDemon,
     _poolCadaverLab,
     _poolCallTheBloodline,
     _poolCallToHeel,
@@ -1671,6 +1676,7 @@ const shard: CardShard = {
     _poolQueensBayPaladin,
     _poolQuicksandWhirlpool,
     _poolQuillspike,
+    _poolQuinaQuGourmet,
     _poolQutrubForayer,
     _poolRabanastreRoyalCity,
     _poolRaffWeatherlightStalwart,

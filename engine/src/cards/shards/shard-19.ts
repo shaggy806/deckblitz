@@ -150,6 +150,7 @@ import _poolChiefEngineer from "../pool/chief-engineer.js";
 import _poolChokingSands from "../pool/choking-sands.js";
 import _poolChromeHostHulk from "../pool/chrome-host-hulk.js";
 import _poolChromeMox from "../pool/chrome-mox.js";
+import _poolChronatogTotem from "../pool/chronatog-totem.js";
 import _poolChronicFlooding from "../pool/chronic-flooding.js";
 import _poolClaustrophobia from "../pool/claustrophobia.js";
 import _poolClawsOut from "../pool/claws-out.js";
@@ -271,6 +272,7 @@ import _poolElvenRaftSteerer from "../pool/elven-raft-steerer.js";
 import _poolElvishHealer from "../pool/elvish-healer.js";
 import _poolEmrakulsMessenger from "../pool/emrakuls-messenger.js";
 import _poolEndbringersRevel from "../pool/endbringers-revel.js";
+import _poolEndlessEvil from "../pool/endless-evil.js";
 import _poolEnrage from "../pool/enrage.js";
 import _poolEnslavedDwarf from "../pool/enslaved-dwarf.js";
 import _poolEntering from "../pool/entering.js";
@@ -1155,6 +1157,7 @@ const shard: CardShard = {
     _poolChokingSands,
     _poolChromeHostHulk,
     _poolChromeMox,
+    _poolChronatogTotem,
     _poolChronicFlooding,
     _poolClaustrophobia,
     _poolClawsOut,
@@ -1276,6 +1279,7 @@ const shard: CardShard = {
     _poolElvishHealer,
     _poolEmrakulsMessenger,
     _poolEndbringersRevel,
+    _poolEndlessEvil,
     _poolEnrage,
     _poolEnslavedDwarf,
     _poolEntering,

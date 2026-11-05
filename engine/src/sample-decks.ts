@@ -1027,7 +1027,6 @@ export const SAMPLE_DECKS: readonly SampleDeck[] = [
     ],
     substitutions: [
       sub("Explosion of Riches", "Fireball", "Top-end damage spell aimed at opponents."),
-      sub("Wildfire Devils", "Cinder Elemental", "Four-mana red creature that turns into damage."),
     ],
   }),
   precon({
@@ -1288,7 +1287,6 @@ export const SAMPLE_DECKS: readonly SampleDeck[] = [
     ],
     substitutions: [
       sub("Dragonhawk, Fate's Tempest", "Demanding Dragon", "Five-mana red flying Dragon."),
-      sub("Minion of the Mighty", "Dragonkin Berserker", "Cheap red creature that pays off Dragons."),
     ],
   }),
   precon({

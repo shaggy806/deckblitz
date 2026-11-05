@@ -11,6 +11,7 @@ import _poolAboshanCephalidEmperor from "../pool/aboshan-cephalid-emperor.js";
 import _poolAbzanBanner from "../pool/abzan-banner.js";
 import _poolAcademyManufactor from "../pool/academy-manufactor.js";
 import _poolAcolyteOfAclazotz from "../pool/acolyte-of-aclazotz.js";
+import _poolAcquisitionsExpert from "../pool/acquisitions-expert.js";
 import _poolActOnImpulse from "../pool/act-on-impulse.js";
 import _poolAerialGuide from "../pool/aerial-guide.js";
 import _poolAetherShockwave from "../pool/aether-shockwave.js";
@@ -434,6 +435,7 @@ import _poolImaginaryThreats from "../pool/imaginary-threats.js";
 import _poolImmersturmRaider from "../pool/immersturm-raider.js";
 import _poolImpalerShrike from "../pool/impaler-shrike.js";
 import _poolInactionInjunction from "../pool/inaction-injunction.js";
+import _poolInfernoHellion from "../pool/inferno-hellion.js";
 import _poolInfestationExpert from "../pool/infestation-expert.js";
 import _poolInfiniteHourglass from "../pool/infinite-hourglass.js";
 import _poolInfuseWithTheElements from "../pool/infuse-with-the-elements.js";
@@ -472,6 +474,7 @@ import _poolKalonianTwingrove from "../pool/kalonian-twingrove.js";
 import _poolKarganIntimidator from "../pool/kargan-intimidator.js";
 import _poolKarplusanForest from "../pool/karplusan-forest.js";
 import _poolKathariScreecher from "../pool/kathari-screecher.js";
+import _poolKatildasRisingDawn from "../pool/katildas-rising-dawn.js";
 import _poolKavuAggressor from "../pool/kavu-aggressor.js";
 import _poolKavuPredator from "../pool/kavu-predator.js";
 import _poolKaylasMusicBox from "../pool/kaylas-music-box.js";
@@ -757,6 +760,7 @@ import _poolShardlessAgent from "../pool/shardless-agent.js";
 import _poolShaunRebeccaAgents from "../pool/shaun-rebecca-agents.js";
 import _poolSheHulkJenniferWalters from "../pool/she-hulk-jennifer-walters.js";
 import _poolShieldMare from "../pool/shield-mare.js";
+import _poolShieldmageAdvocate from "../pool/shieldmage-advocate.js";
 import _poolShimmeringBarrier from "../pool/shimmering-barrier.js";
 import _poolShimmerscaleDrake from "../pool/shimmerscale-drake.js";
 import _poolShinenOfStarsLight from "../pool/shinen-of-stars-light.js";
@@ -913,6 +917,7 @@ import _poolTwinningStaff from "../pool/twinning-staff.js";
 import _poolUltimateMagicMeteor from "../pool/ultimate-magic-meteor.js";
 import _poolUlvenwaldMystics from "../pool/ulvenwald-mystics.js";
 import _poolUmbralJuke from "../pool/umbral-juke.js";
+import _poolUmoriTheCollector from "../pool/umori-the-collector.js";
 import _poolUndercityShade from "../pool/undercity-shade.js";
 import _poolUnexplainedAbsence from "../pool/unexplained-absence.js";
 import _poolUnfathomableTruths from "../pool/unfathomable-truths.js";
@@ -971,6 +976,7 @@ import _poolWipeClean from "../pool/wipe-clean.js";
 import _poolWispweaverAngel from "../pool/wispweaver-angel.js";
 import _poolWoodlandLiege from "../pool/woodland-liege.js";
 import _poolWorldfire from "../pool/worldfire.js";
+import _poolWorldwalkerHelm from "../pool/worldwalker-helm.js";
 import _poolWormHarvest from "../pool/worm-harvest.js";
 import _poolWormwoodDryad from "../pool/wormwood-dryad.js";
 import _poolWormwoodTreefolk from "../pool/wormwood-treefolk.js";
@@ -1024,6 +1030,7 @@ const shard: CardShard = {
     _poolAbzanBanner,
     _poolAcademyManufactor,
     _poolAcolyteOfAclazotz,
+    _poolAcquisitionsExpert,
     _poolActOnImpulse,
     _poolAerialGuide,
     _poolAetherShockwave,
@@ -1447,6 +1454,7 @@ const shard: CardShard = {
     _poolImmersturmRaider,
     _poolImpalerShrike,
     _poolInactionInjunction,
+    _poolInfernoHellion,
     _poolInfestationExpert,
     _poolInfiniteHourglass,
     _poolInfuseWithTheElements,
@@ -1485,6 +1493,7 @@ const shard: CardShard = {
     _poolKarganIntimidator,
     _poolKarplusanForest,
     _poolKathariScreecher,
+    _poolKatildasRisingDawn,
     _poolKavuAggressor,
     _poolKavuPredator,
     _poolKaylasMusicBox,
@@ -1770,6 +1779,7 @@ const shard: CardShard = {
     _poolShaunRebeccaAgents,
     _poolSheHulkJenniferWalters,
     _poolShieldMare,
+    _poolShieldmageAdvocate,
     _poolShimmeringBarrier,
     _poolShimmerscaleDrake,
     _poolShinenOfStarsLight,
@@ -1926,6 +1936,7 @@ const shard: CardShard = {
     _poolUltimateMagicMeteor,
     _poolUlvenwaldMystics,
     _poolUmbralJuke,
+    _poolUmoriTheCollector,
     _poolUndercityShade,
     _poolUnexplainedAbsence,
     _poolUnfathomableTruths,
@@ -1984,6 +1995,7 @@ const shard: CardShard = {
     _poolWispweaverAngel,
     _poolWoodlandLiege,
     _poolWorldfire,
+    _poolWorldwalkerHelm,
     _poolWormHarvest,
     _poolWormwoodDryad,
     _poolWormwoodTreefolk,

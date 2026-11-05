@@ -144,6 +144,7 @@ import _poolCloudshredderSliver from "../pool/cloudshredder-sliver.js";
 import _poolCobaltGolem from "../pool/cobalt-golem.js";
 import _poolCoffinQueen from "../pool/coffin-queen.js";
 import _poolCollectiveInferno from "../pool/collective-inferno.js";
+import _poolCollectiveVoyage from "../pool/collective-voyage.js";
 import _poolCollectorsCage from "../pool/collectors-cage.js";
 import _poolCombatThresher from "../pool/combat-thresher.js";
 import _poolCommandersAuthority from "../pool/commanders-authority.js";
@@ -202,6 +203,7 @@ import _poolDesecrationPlague from "../pool/desecration-plague.js";
 import _poolDesertOfTheIndomitable from "../pool/desert-of-the-indomitable.js";
 import _poolDesperateRavings from "../pool/desperate-ravings.js";
 import _poolDestructiveUrge from "../pool/destructive-urge.js";
+import _poolDevastatingOnslaught from "../pool/devastating-onslaught.js";
 import _poolDevotedCropMate from "../pool/devoted-crop-mate.js";
 import _poolDevourIntellect from "../pool/devour-intellect.js";
 import _poolDevouringLight from "../pool/devouring-light.js";
@@ -541,6 +543,7 @@ import _poolMirrorOfGaladriel from "../pool/mirror-of-galadriel.js";
 import _poolMischievousSneakling from "../pool/mischievous-sneakling.js";
 import _poolMistformMask from "../pool/mistform-mask.js";
 import _poolMistformWall from "../pool/mistform-wall.js";
+import _poolMistmoonGriffin from "../pool/mistmoon-griffin.js";
 import _poolMistwalker from "../pool/mistwalker.js";
 import _poolMizzixReplicaRider from "../pool/mizzix-replica-rider.js";
 import _poolMnemonicSphere from "../pool/mnemonic-sphere.js";
@@ -598,6 +601,7 @@ import _poolParasiticGrasp from "../pool/parasitic-grasp.js";
 import _poolParasiticImpetus from "../pool/parasitic-impetus.js";
 import _poolPatrolSignaler from "../pool/patrol-signaler.js";
 import _poolPearledUnicorn from "../pool/pearled-unicorn.js";
+import _poolPeerlessSamurai from "../pool/peerless-samurai.js";
 import _poolPegasusGuardian from "../pool/pegasus-guardian.js";
 import _poolPenumbraSpider from "../pool/penumbra-spider.js";
 import _poolPerilousShadow from "../pool/perilous-shadow.js";
@@ -618,6 +622,7 @@ import _poolPlasmaBolt from "../pool/plasma-bolt.js";
 import _poolPlumesOfPeace from "../pool/plumes-of-peace.js";
 import _poolPredictivePreparations from "../pool/predictive-preparations.js";
 import _poolPrestonGarveyMinuteman from "../pool/preston-garvey-minuteman.js";
+import _poolPrimalPlasma from "../pool/primal-plasma.js";
 import _poolPrimeSpeakerVannifar from "../pool/prime-speaker-vannifar.js";
 import _poolPrimevalBounty from "../pool/primeval-bounty.js";
 import _poolPrismite from "../pool/prismite.js";
@@ -1105,6 +1110,7 @@ const shard: CardShard = {
     _poolCobaltGolem,
     _poolCoffinQueen,
     _poolCollectiveInferno,
+    _poolCollectiveVoyage,
     _poolCollectorsCage,
     _poolCombatThresher,
     _poolCommandersAuthority,
@@ -1163,6 +1169,7 @@ const shard: CardShard = {
     _poolDesertOfTheIndomitable,
     _poolDesperateRavings,
     _poolDestructiveUrge,
+    _poolDevastatingOnslaught,
     _poolDevotedCropMate,
     _poolDevourIntellect,
     _poolDevouringLight,
@@ -1502,6 +1509,7 @@ const shard: CardShard = {
     _poolMischievousSneakling,
     _poolMistformMask,
     _poolMistformWall,
+    _poolMistmoonGriffin,
     _poolMistwalker,
     _poolMizzixReplicaRider,
     _poolMnemonicSphere,
@@ -1559,6 +1567,7 @@ const shard: CardShard = {
     _poolParasiticImpetus,
     _poolPatrolSignaler,
     _poolPearledUnicorn,
+    _poolPeerlessSamurai,
     _poolPegasusGuardian,
     _poolPenumbraSpider,
     _poolPerilousShadow,
@@ -1579,6 +1588,7 @@ const shard: CardShard = {
     _poolPlumesOfPeace,
     _poolPredictivePreparations,
     _poolPrestonGarveyMinuteman,
+    _poolPrimalPlasma,
     _poolPrimeSpeakerVannifar,
     _poolPrimevalBounty,
     _poolPrismite,

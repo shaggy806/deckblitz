@@ -144,6 +144,7 @@ import _poolCapriciousEfreet from "../pool/capricious-efreet.js";
 import _poolCapriciousSliver from "../pool/capricious-sliver.js";
 import _poolCaptureOfJingzhou from "../pool/capture-of-jingzhou.js";
 import _poolCaradoraHeartOfAlacria from "../pool/caradora-heart-of-alacria.js";
+import _poolCaseOfThePilferedProof from "../pool/case-of-the-pilfered-proof.js";
 import _poolCasualtiesOfWar from "../pool/casualties-of-war.js";
 import _poolCazurRuthlessStalker from "../pool/cazur-ruthless-stalker.js";
 import _poolCemeteryGatekeeper from "../pool/cemetery-gatekeeper.js";
@@ -174,6 +175,7 @@ import _poolCloudchaserEagle from "../pool/cloudchaser-eagle.js";
 import _poolClutchOfUndeath from "../pool/clutch-of-undeath.js";
 import _poolComfortingCounsel from "../pool/comforting-counsel.js";
 import _poolCommandeer from "../pool/commandeer.js";
+import _poolCompellingDeterrence from "../pool/compelling-deterrence.js";
 import _poolCompleteTheCircuit from "../pool/complete-the-circuit.js";
 import _poolCompulsion from "../pool/compulsion.js";
 import _poolConductElectricity from "../pool/conduct-electricity.js";
@@ -688,6 +690,7 @@ import _poolScepterOfInsight from "../pool/scepter-of-insight.js";
 import _poolScionOfCalamity from "../pool/scion-of-calamity.js";
 import _poolScorchingSpear from "../pool/scorching-spear.js";
 import _poolScourgeServant from "../pool/scourge-servant.js";
+import _poolScrabblingClaws from "../pool/scrabbling-claws.js";
 import _poolScrapskinDrake from "../pool/scrapskin-drake.js";
 import _poolSeaKingsBlessing from "../pool/sea-kings-blessing.js";
 import _poolSeanceBoard from "../pool/seance-board.js";
@@ -1096,6 +1099,7 @@ const shard: CardShard = {
     _poolCapriciousSliver,
     _poolCaptureOfJingzhou,
     _poolCaradoraHeartOfAlacria,
+    _poolCaseOfThePilferedProof,
     _poolCasualtiesOfWar,
     _poolCazurRuthlessStalker,
     _poolCemeteryGatekeeper,
@@ -1126,6 +1130,7 @@ const shard: CardShard = {
     _poolClutchOfUndeath,
     _poolComfortingCounsel,
     _poolCommandeer,
+    _poolCompellingDeterrence,
     _poolCompleteTheCircuit,
     _poolCompulsion,
     _poolConductElectricity,
@@ -1640,6 +1645,7 @@ const shard: CardShard = {
     _poolScionOfCalamity,
     _poolScorchingSpear,
     _poolScourgeServant,
+    _poolScrabblingClaws,
     _poolScrapskinDrake,
     _poolSeaKingsBlessing,
     _poolSeanceBoard,
