@@ -1,0 +1,961 @@
+{
+ "batch": "B264",
+ "status": "done",
+ "ranks": "Need-keys Phase 2: cards freed by the families built 2026-11-02 to 2026-11-03 (frozen list F3, 135 cards; two agents of 68 and 67, one blind reviewer)",
+ "authored": [
+  {
+   "name": "Ancient Silver Dragon",
+   "files": [
+    "engine/src/cards/pool/ancient-silver-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Finale of Revelation",
+   "files": [
+    "engine/src/cards/pool/finale-of-revelation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sea Gate Restoration // Sea Gate, Reborn",
+   "files": [
+    "engine/src/cards/pool/sea-gate-reborn.ts",
+    "engine/src/cards/pool/sea-gate-restoration.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spirit Water Revival",
+   "files": [
+    "engine/src/cards/pool/spirit-water-revival.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wisdom of Ages",
+   "files": [
+    "engine/src/cards/pool/wisdom-of-ages.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Haphazard Bombardment",
+   "files": [
+    "engine/src/cards/pool/haphazard-bombardment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Last One Standing",
+   "files": [
+    "engine/src/cards/pool/last-one-standing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Path of Mettle // Metzali, Tower of Triumph",
+   "files": [
+    "engine/src/cards/pool/metzali-tower-of-triumph.ts",
+    "engine/src/cards/pool/path-of-mettle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Nipton Lottery",
+   "files": [
+    "engine/src/cards/pool/the-nipton-lottery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tyrant of Discord",
+   "files": [
+    "engine/src/cards/pool/tyrant-of-discord.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hans Eriksson",
+   "files": [
+    "engine/src/cards/pool/hans-eriksson.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jailbreak",
+   "files": [
+    "engine/src/cards/pool/jailbreak.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ratonhnhaké꞉ton",
+   "files": [
+    "engine/src/cards/pool/ratonhnhake-ton.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Balthor the Defiled",
+   "files": [
+    "engine/src/cards/pool/balthor-the-defiled.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Northampton Farm",
+   "files": [
+    "engine/src/cards/pool/northampton-farm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Denizen of the Deep",
+   "files": [
+    "engine/src/cards/pool/denizen-of-the-deep.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thousand Winds",
+   "files": [
+    "engine/src/cards/pool/thousand-winds.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hellcarver Demon",
+   "files": [
+    "engine/src/cards/pool/hellcarver-demon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Feast of Worms",
+   "files": [
+    "engine/src/cards/pool/feast-of-worms.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fblthp, Knows the Way",
+   "files": [
+    "engine/src/cards/pool/fblthp-knows-the-way.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reach the Horizon",
+   "files": [
+    "engine/src/cards/pool/reach-the-horizon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Agency Outfitter",
+   "files": [
+    "engine/src/cards/pool/agency-outfitter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kassandra, Eagle Bearer",
+   "files": [
+    "engine/src/cards/pool/kassandra-eagle-bearer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Runed Crown",
+   "files": [
+    "engine/src/cards/pool/runed-crown.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mana Severance",
+   "files": [
+    "engine/src/cards/pool/mana-severance.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Manipulate Fate",
+   "files": [
+    "engine/src/cards/pool/manipulate-fate.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Trench Gorger",
+   "files": [
+    "engine/src/cards/pool/trench-gorger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Beseech the Mirror",
+   "files": [
+    "engine/src/cards/pool/beseech-the-mirror.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Endless Horizons",
+   "files": [
+    "engine/src/cards/pool/endless-horizons.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Roads Go Ever, Ever On",
+   "files": [
+    "engine/src/cards/pool/roads-go-ever-ever-on.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shade's Breath",
+   "files": [
+    "engine/src/cards/pool/shades-breath.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mistform Wakecaster",
+   "files": [
+    "engine/src/cards/pool/mistform-wakecaster.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Standardize",
+   "files": [
+    "engine/src/cards/pool/standardize.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Teferi, Temporal Pilgrim",
+   "files": [
+    "engine/src/cards/pool/teferi-temporal-pilgrim.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kogla and Yidaro",
+   "files": [
+    "engine/src/cards/pool/kogla-and-yidaro.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Urza, Lord High Artificer",
+   "files": [
+    "engine/src/cards/pool/urza-lord-high-artificer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Visions",
+   "files": [
+    "engine/src/cards/pool/visions.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dread Cacodemon",
+   "files": [
+    "engine/src/cards/pool/dread-cacodemon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kill Switch",
+   "files": [
+    "engine/src/cards/pool/kill-switch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grave Birthing",
+   "files": [
+    "engine/src/cards/pool/grave-birthing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Graveyard Shovel",
+   "files": [
+    "engine/src/cards/pool/graveyard-shovel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bumi, King of Three Trials",
+   "files": [
+    "engine/src/cards/pool/bumi-king-of-three-trials.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kozilek's Command",
+   "files": [
+    "engine/src/cards/pool/kozileks-command.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bill Ferny, Bree Swindler",
+   "files": [
+    "engine/src/cards/pool/bill-ferny-bree-swindler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Face Yourself",
+   "files": [
+    "engine/src/cards/pool/face-yourself.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glissa, Herald of Predation",
+   "files": [
+    "engine/src/cards/pool/glissa-herald-of-predation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unexpected Request",
+   "files": [
+    "engine/src/cards/pool/unexpected-request.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heroism",
+   "files": [
+    "engine/src/cards/pool/heroism.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Evil's Thrall",
+   "files": [
+    "engine/src/cards/pool/evils-thrall.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Power of Persuasion",
+   "files": [
+    "engine/src/cards/pool/power-of-persuasion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kitsune Mystic // Autumn-Tail, Kitsune Sage",
+   "files": [
+    "engine/src/cards/pool/autumn-tail-kitsune-sage.ts",
+    "engine/src/cards/pool/kitsune-mystic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Rollercrusher Ride",
+   "files": [
+    "engine/src/cards/pool/the-rollercrusher-ride.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tor Wauki the Younger",
+   "files": [
+    "engine/src/cards/pool/tor-wauki-the-younger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trouble in Pairs",
+   "files": [
+    "engine/src/cards/pool/trouble-in-pairs.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Giant Shark",
+   "files": [
+    "engine/src/cards/pool/giant-shark.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Anvil of Bogardan",
+   "files": [
+    "engine/src/cards/pool/anvil-of-bogardan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Price of Knowledge",
+   "files": [
+    "engine/src/cards/pool/price-of-knowledge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Juntu Stakes",
+   "files": [
+    "engine/src/cards/pool/juntu-stakes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Super-Soldier Serum",
+   "files": [
+    "engine/src/cards/pool/super-soldier-serum.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sanctum of All",
+   "files": [
+    "engine/src/cards/pool/sanctum-of-all.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Frenzied Gorespawn",
+   "files": [
+    "engine/src/cards/pool/frenzied-gorespawn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bitter Work",
+   "files": [
+    "engine/src/cards/pool/bitter-work.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Whirlwind, Killer Cyclone",
+   "files": [
+    "engine/src/cards/pool/whirlwind-killer-cyclone.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Captain America, Skybound",
+   "files": [
+    "engine/src/cards/pool/captain-america-skybound.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Omarthis, Ghostfire Initiate",
+   "files": [
+    "engine/src/cards/pool/omarthis-ghostfire-initiate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wildwood Scourge",
+   "files": [
+    "engine/src/cards/pool/wildwood-scourge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Black Widow, Super Spy",
+   "files": [
+    "engine/src/cards/pool/black-widow-super-spy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reno and Rude",
+   "files": [
+    "engine/src/cards/pool/reno-and-rude.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aerial Extortionist",
+   "files": [
+    "engine/src/cards/pool/aerial-extortionist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Extraordinary Journey",
+   "files": [
+    "engine/src/cards/pool/extraordinary-journey.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invasion of Gobakhan // Lightshield Array",
+   "files": [
+    "engine/src/cards/pool/invasion-of-gobakhan.ts",
+    "engine/src/cards/pool/lightshield-array.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Urianger Augurelt",
+   "files": [
+    "engine/src/cards/pool/urianger-augurelt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sanity Grinding",
+   "files": [
+    "engine/src/cards/pool/sanity-grinding.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Clockwork Avian",
+   "files": [
+    "engine/src/cards/pool/clockwork-avian.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Mazzy, Truesword Paladin",
+   "files": [
+    "engine/src/cards/pool/mazzy-truesword-paladin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oviya, Automech Artisan",
+   "files": [
+    "engine/src/cards/pool/oviya-automech-artisan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scriv, the Obligator",
+   "files": [
+    "engine/src/cards/pool/scriv-the-obligator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Evercoat Ursine",
+   "files": [
+    "engine/src/cards/pool/evercoat-ursine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Swat Away",
+   "files": [
+    "engine/src/cards/pool/swat-away.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hardy Outlander",
+   "files": [
+    "engine/src/cards/pool/hardy-outlander.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Veteran Soldier",
+   "files": [
+    "engine/src/cards/pool/veteran-soldier.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Quiet Speculation",
+   "files": [
+    "engine/src/cards/pool/quiet-speculation.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tombfire",
+   "files": [
+    "engine/src/cards/pool/tombfire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heidegger, Shinra Executive",
+   "files": [
+    "engine/src/cards/pool/heidegger-shinra-executive.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tithe",
+   "files": [
+    "engine/src/cards/pool/tithe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Prismatic Strands",
+   "files": [
+    "engine/src/cards/pool/prismatic-strands.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vhal, Candlekeep Researcher",
+   "files": [
+    "engine/src/cards/pool/vhal-candlekeep-researcher.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Citizen's Crowbar",
+   "files": [
+    "engine/src/cards/pool/citizens-crowbar.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Deconstruction Hammer",
+   "files": [
+    "engine/src/cards/pool/deconstruction-hammer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sunfire Torch",
+   "files": [
+    "engine/src/cards/pool/sunfire-torch.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tourach's Gate",
+   "files": [
+    "engine/src/cards/pool/tourachs-gate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Veteran's Voice",
+   "files": [
+    "engine/src/cards/pool/veterans-voice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cannibalize",
+   "files": [
+    "engine/src/cards/pool/cannibalize.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mutinous Massacre",
+   "files": [
+    "engine/src/cards/pool/mutinous-massacre.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thanos, the Mad Titan",
+   "files": [
+    "engine/src/cards/pool/thanos-the-mad-titan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ajani, Nacatl Pariah",
+   "files": [
+    "engine/src/cards/pool/ajani-nacatl-pariah.ts",
+    "engine/src/cards/pool/ajani-nacatl-avenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arcane Endeavor",
+   "files": [
+    "engine/src/cards/pool/arcane-endeavor.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Grave Endeavor",
+   "files": [
+    "engine/src/cards/pool/grave-endeavor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Evie Frye",
+   "files": [
+    "engine/src/cards/pool/evie-frye.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Say Its Name",
+   "files": [
+    "engine/src/cards/pool/say-its-name.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Component Pouch",
+   "files": [
+    "engine/src/cards/pool/component-pouch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Armed and Armored",
+   "files": [
+    "engine/src/cards/pool/armed-and-armored.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Visions of Dread",
+   "files": [
+    "engine/src/cards/pool/visions-of-dread.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Beastmaster's Magemark",
+   "files": [
+    "engine/src/cards/pool/beastmasters-magemark.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "You've Been Caught Stealing",
+   "files": [
+    "engine/src/cards/pool/youve-been-caught-stealing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glorfindel, Dauntless Rescuer",
+   "files": [
+    "engine/src/cards/pool/glorfindel-dauntless-rescuer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Arlinn Kord",
+   "files": [
+    "engine/src/cards/pool/arlinn-kord.ts",
+    "engine/src/cards/pool/arlinn-embraced-by-the-moon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Duplicity",
+   "files": [
+    "engine/src/cards/pool/duplicity.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Jeleva, Nephalia's Scourge",
+   "files": [
+    "engine/src/cards/pool/jeleva-nephalias-scourge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dance of Many",
+   "files": [
+    "engine/src/cards/pool/dance-of-many.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lens of Clarity",
+   "files": [
+    "engine/src/cards/pool/lens-of-clarity.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Infectious Rage",
+   "needs": [
+    "effect:random-permanent-it-can-enchant"
+   ],
+   "why": "A random choose-permanents can't limit itself to creatures the Aura can legally enchant."
+  },
+  {
+   "name": "Emergent Ultimatum",
+   "needs": [
+    "effect:opponent-chooses-among-exiled-shuffle-in"
+   ],
+   "why": "search-library's instead sends the opponent's pick straight to the library; it's never exiled first."
+  },
+  {
+   "name": "Akiri, Fearless Voyager",
+   "needs": [
+    "effect:unattached-from-creature-ref"
+   ],
+   "why": "Nothing names the creature the Equipment was unattached from, to tap it."
+  },
+  {
+   "name": "Spider-Punk",
+   "needs": [
+    "static:spells-and-abilities-cant-be-countered"
+   ],
+   "why": "grantsToSpells.cantBeCountered covers spells, not abilities."
+  },
+  {
+   "name": "Ral Zarek, Guest Lecturer",
+   "needs": [
+    "effect:flip-coins-count-until-lose"
+   ],
+   "why": "Flip five coins with the heads counted: flip-coin has no count."
+  },
+  {
+   "name": "Ugin's Nexus",
+   "needs": [
+    "replacement:would-die-exile-and-extra-turn"
+   ],
+   "why": "'Instead exile it and take an extra turn after this one' has no shape."
+  },
+  {
+   "name": "Chandra, Heart of Fire",
+   "needs": [
+    "effect:search-finds-castable-this-turn"
+   ],
+   "why": "The −9's finds may be cast this turn, later; the built key casts only during resolution."
+  },
+  {
+   "name": "Ugin, Eye of the Storms",
+   "needs": [
+    "effect:search-finds-castable-this-turn"
+   ],
+   "why": "The −11's finds may be cast free this turn, later; the built key casts only during resolution."
+  },
+  {
+   "name": "Decoy Gambit",
+   "needs": [
+    "effect:unless-per-target-held"
+   ],
+   "why": "Per-target unless answered in turn order, then all draws and returns together; for-each-unless can't run over targets."
+  },
+  {
+   "name": "Thorin, Mountain-king",
+   "needs": [
+    "effect:this-way-attached"
+   ],
+   "why": "'When one or more Equipment become attached this way' needs a this-way record of attachments."
+  },
+  {
+   "name": "Frontier Warmonger",
+   "needs": [
+    "trigger:attack-batch-per-defender-or-their-planeswalkers"
+   ],
+   "why": "attacks-player fires per attacked player, not for attacks on their planeswalkers."
+  },
+  {
+   "name": "Dollmaker's Shop // Porcelain Gallery",
+   "needs": [
+    "static:set-base-pt-others-from-count"
+   ],
+   "why": "Porcelain Gallery sets other creatures' base P/T from a count; setBasePtFromCount works only on the card itself."
+  },
+  {
+   "name": "Krovikan Vampire",
+   "needs": [
+    "effect:return-died-cards-dealt-damage-by-source"
+   ],
+   "why": "Nothing names the creatures it damaged this turn that died, to put them onto the battlefield."
+  },
+  {
+   "name": "Azula, Cunning Usurper",
+   "needs": [
+    "zone:linked-exile-cast-as-though-flash"
+   ],
+   "why": "playFromExile has no flash option; castAsThoughFlash can't single out cards exiled with the source."
+  },
+  {
+   "name": "Kheru Mind-Eater",
+   "needs": [
+    "effect:face-down-linked-exile-source-controller-looks"
+   ],
+   "why": "The face-down card lists only the damaged player as a looker, so Kheru's controller can't look at or play it."
+  },
+  {
+   "name": "Grimoire Thief",
+   "needs": [
+    "effect:face-down-linked-exile-source-controller-looks"
+   ],
+   "why": "faceDown lets nobody or only the exiler look; the Thief's controller must."
+  },
+  {
+   "name": "Dawnhand Dissident",
+   "needs": [
+    "cost:linked-exile-cast-additional-remove-counters"
+   ],
+   "why": "playFromExile takes no additional cost."
+  },
+  {
+   "name": "Valgavoth, Terror Eater",
+   "needs": [
+    "zone:linked-exile-play-pay-life-alternative",
+    "replacement:exile-instead-cards-you-didnt-control"
+   ],
+   "why": "playFromExile can't pay life instead of mana; no graveyard-replacement filter says 'a card you didn't control'."
+  },
+  {
+   "name": "Qasali Ambusher",
+   "needs": [
+    "effect:free-cast-as-though-flash-if-condition"
+   ],
+   "why": "freeCastIf and flashIf are separate permissions, so together they'd allow a paid flash cast."
+  },
+  {
+   "name": "Bribe Taker",
+   "needs": [
+    "effect:for-each-counter-kind-among-permanents"
+   ],
+   "why": "No loop over each kind of counter among your permanents."
+  },
+  {
+   "name": "Stronghold Gambit",
+   "needs": [
+    "decision:secret-card-choice-from-hand"
+   ],
+   "why": "Secret choice covers opponents, types and numbers, not a card in hand."
+  },
+  {
+   "name": "The Toymaker's Trap",
+   "needs": [
+    "decision:secret-number-opponent-guesses"
+   ],
+   "why": "A secret number never chosen before, then an opponent's guess."
+  },
+  {
+   "name": "Ob Nixilis of the Black Oath",
+   "needs": [
+    "effect:emblem-own-activated-ability"
+   ],
+   "why": "create-emblem carries no activated ability of its own."
+  },
+  {
+   "name": "Push the Limit",
+   "needs": [
+    "effect:delayed-sacrifice-each-returned-this-way"
+   ],
+   "why": "A delayed sacrifice of every card the mass return put onto the battlefield is unproven over several objects."
+  }
+ ]
+}

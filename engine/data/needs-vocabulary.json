@@ -2607,7 +2607,8 @@
   "effect:emblem-grants-activated": {
    "family": "effect:emblem-triggered-abilities",
    "example": "Liliana of the Dark Realms: +X/+X or -X/-X chosen as it resolves, and an emblem granting Swamps an ability.",
-   "checked": "2026-10-27: missing"
+   "checked": "2026-10-27: missing",
+   "description": "Does not cover an emblem with an activated ability of its own (effect:emblem-own-activated-ability)."
   },
   "effect:emblem-grants-to-spells": {
    "family": "effect:emblem-triggered-abilities",
@@ -3611,7 +3612,7 @@
    "family": "effect:attach-extensions",
    "example": "Akiri, Fearless Voyager: Unattaching an Equipment as an effect.",
    "checked": "2026-10-27: partial",
-   "description": "Still missing (2026-10-27 check): Disarm's 'unattach every Equipment attached to target creature': unattach takes one target, no mass form Already there: src/effects.ts kind \"unattach\" (target) and its case at ~line 10987; used by src/cards/pool/acquisition-octopus.ts"
+   "description": "Still missing (2026-10-27 check): Disarm's 'unattach every Equipment attached to target creature': unattach takes one target, no mass form Already there: src/effects.ts kind \"unattach\" (target) and its case at ~line 10987; used by src/cards/pool/acquisition-octopus.ts Does not name the creature it came off afterwards (effect:unattached-from-creature-ref)."
   },
   "effect:unless-if-they-do": {
    "example": "Don't Make a Sound: The 'unless' effect has no 'if they do' (surveil 2 when paid)."
@@ -4980,7 +4981,8 @@
   },
   "trigger:attack-batch-per-defender-those-creatures": {
    "family": "trigger:combat-trigger-extensions",
-   "example": "Frontier Warmonger: no 'one or more creatures attack one of your opponents' trigger per defending opponent acting on those creatures"
+   "example": "Frontier Warmonger: no 'one or more creatures attack one of your opponents' trigger per defending opponent acting on those creatures",
+   "description": "Does not count attacks on a defender's planeswalkers (trigger:attack-batch-per-defender-or-their-planeswalkers)."
   },
   "trigger:attack-on-player-or-their-planeswalker-trigger": {
    "family": "trigger:combat-trigger-extensions",
@@ -5464,7 +5466,8 @@
   },
   "effect:search-to-exile-then-cast": {
    "family": "effect:cast-during-resolution",
-   "example": "Bring to Light: search-library has no exile destination that a cast-now then reads (Beseech the Mirror, Sunforger, Ugin's -11)."
+   "example": "Bring to Light: search-library has no exile destination that a cast-now then reads (Beseech the Mirror, Sunforger, Ugin's -11).",
+   "description": "Does not cover a permission to cast the finds later this turn (effect:search-finds-castable-this-turn)."
   },
   "effect:cast-commander-from-command-zone": {
    "family": "effect:cast-during-resolution",
@@ -6414,7 +6417,7 @@
    "family": "zone:impulse-permission-options",
    "example": "Azula, Cunning Usurper: \"during your turn, you may cast cards exiled with Azula as though they had flash\", mana of any type — a standing cast permission over the source's linked exile.",
    "checked": "2026-10-27: partial",
-   "description": "Still missing (2026-10-27 check): No standing permission over the source's linked exile: allow-cast-from-exile takes one target, and castAsThoughFlash and spendManaAs filter spells by card filter, not by link (Azula, Draugr Necromancer, King Narfi). Already there: src/effects.ts allow-cast-from-exile (~L2774); src/cards/define.ts castAsThoughFlash (~L1486), spendManaAs (~L2062)."
+   "description": "Still missing (2026-10-27 check): No standing permission over the source's linked exile: allow-cast-from-exile takes one target, and castAsThoughFlash and spendManaAs filter spells by card filter, not by link (Azula, Draugr Necromancer, King Narfi). Already there: src/effects.ts allow-cast-from-exile (~L2774); src/cards/define.ts castAsThoughFlash (~L1486), spendManaAs (~L2062). Does not cover casting them as though they had flash (zone:linked-exile-cast-as-though-flash)."
   },
   "static:set-name": {
    "family": "static:set-characteristics",
@@ -7404,7 +7407,8 @@
   "effect:random-permanent": {
    "family": "effect:choices-by-other-players",
    "example": "The Nipton Lottery: 'choose a creature at random' on the battlefield, untargeted, then act on it (and on all others) — choose-random-card reads only a graveyard.",
-   "checked": "2026-10-27: missing"
+   "checked": "2026-10-27: missing",
+   "description": "Does not limit the pick to what an Aura could enchant (effect:random-permanent-it-can-enchant)."
   },
   "effect:reveal-cards-from-hand": {
    "family": "effect:target-spec-additions",
@@ -15272,6 +15276,116 @@
    "family": "effect:end-the-turn",
    "description": "No cost increase printed on a spell itself; cost:cost-increase-not-your-turn is Defense Grid's static on other spells.",
    "example": "Hurkyl's Final Meditation"
+  },
+  "effect:random-permanent-it-can-enchant": {
+   "family": "effect:choices-by-other-players",
+   "description": "An Aura's random choice limited to what it could legally enchant ('choose a creature at random this Aura can enchant').",
+   "example": "Infectious Rage: choose-permanents at random can't restrict itself to legal hosts, so the Aura could pick a creature with protection and stay in the graveyard."
+  },
+  "effect:opponent-chooses-among-exiled-shuffle-in": {
+   "family": "effect:choices-by-other-players",
+   "description": "Search finds exiled, then an opponent picks one exiled card to shuffle into the library, the rest cast free.",
+   "example": "Emergent Ultimatum: search-library's instead sends the chosen card straight to the library and never exiles it."
+  },
+  "effect:unattached-from-creature-ref": {
+   "family": "effect:attach-extensions",
+   "description": "Referring to the creature an Equipment was just unattached from ('tap that creature').",
+   "example": "Akiri, Fearless Voyager: unattach-effect has no way to name the creature afterwards."
+  },
+  "static:spells-and-abilities-cant-be-countered": {
+   "family": "static:grant-abilities-to-spells",
+   "description": "Spells and abilities of a filter can't be countered — abilities as well as spells.",
+   "example": "Spider-Punk: grantsToSpells.cantBeCountered covers spells only."
+  },
+  "replacement:would-die-exile-and-extra-turn": {
+   "family": "replacement:new-event-replacements",
+   "description": "A self-replacement putting it into exile instead of the graveyard and granting an extra turn after this one.",
+   "example": "Ugin's Nexus: its skip-extra-turns line works; 'instead exile it and take an extra turn' has no shape."
+  },
+  "effect:search-finds-castable-this-turn": {
+   "family": "effect:cast-during-resolution",
+   "description": "Each of several exiled search finds may be cast later this turn (free, for Ugin), not only during resolution.",
+   "example": "Chandra, Heart of Fire −9: search-to-exile-then-cast casts during resolution only; allow-cast-from-exile takes one target and nothing loops over a search's finds."
+  },
+  "effect:unless-per-target-held": {
+   "family": "effect:unless-target-controller",
+   "description": "A per-target 'unless its controller does X', each answered in turn order, every result held until all have answered, then applied together.",
+   "example": "Decoy Gambit: for-each-unless can't run over targets, and an unless option's doing happens as soon as it's answered."
+  },
+  "effect:this-way-attached": {
+   "family": "effect:reflexive-trigger",
+   "description": "A this-way record of attachments ('when one or more Equipment become attached this way').",
+   "example": "Thorin, Mountain-king: this-way has no attached kind."
+  },
+  "trigger:attack-batch-per-defender-or-their-planeswalkers": {
+   "family": "trigger:combat-trigger-extensions",
+   "description": "An attack-batch trigger per defending player counting attacks on that player or planeswalkers they control.",
+   "example": "Frontier Warmonger: attacks-player fires once per attacked player only, not for their planeswalkers."
+  },
+  "static:set-base-pt-others-from-count": {
+   "family": "static:set-base-pt-others",
+   "description": "Other creatures' base P/T set from a count ('creatures you control have base P/T equal to the number of creatures you control').",
+   "example": "Porcelain Gallery (Dollmaker's Shop's back): setBasePtFromCount works only on the card itself."
+  },
+  "effect:return-died-cards-dealt-damage-by-source": {
+   "family": "trigger:damage-trigger-extensions",
+   "description": "At end step, each creature this damaged this turn that died returns under your control.",
+   "example": "Krovikan Vampire: nothing names the set of cards it damaged that died this turn."
+  },
+  "zone:linked-exile-cast-as-though-flash": {
+   "family": "zone:impulse-permission-options",
+   "description": "A play-from-linked-exile permission that also lets them be cast as though they had flash.",
+   "example": "Azula, Cunning Usurper: playFromExile has no flash option and castAsThoughFlash can't single out cards exiled with the source."
+  },
+  "effect:face-down-linked-exile-source-controller-looks": {
+   "family": "mechanic:face-down",
+   "description": "Face-down exiled cards the source's current controller may look at (and play), not just the exiler or chooser.",
+   "example": "Grimoire Thief: exile-from-library faceDown lets nobody look or only the exiler; Kheru Mind-Eater's look-and-choose lists only the chooser."
+  },
+  "cost:linked-exile-cast-additional-remove-counters": {
+   "family": "zone:impulse-permission-options",
+   "description": "A play-from-linked-exile permission with an additional cost (removing counters).",
+   "example": "Dawnhand Dissident: playFromExile takes no additional cost."
+  },
+  "zone:linked-exile-play-pay-life-alternative": {
+   "family": "zone:impulse-permission-options",
+   "description": "Playing a card exiled with the source by paying life equal to its mana value instead of its mana cost.",
+   "example": "Valgavoth, Terror Eater: playFromExile can't pay life instead of the mana cost."
+  },
+  "replacement:exile-instead-cards-you-didnt-control": {
+   "family": "replacement:exile-instead",
+   "description": "A graveyard replacement filtered to 'a card you didn't control' going to an opponent's graveyard.",
+   "example": "Valgavoth, Terror Eater: no graveyard-replacement filter says a card you didn't control."
+  },
+  "effect:free-cast-as-though-flash-if-condition": {
+   "family": "effect:cast-and-activate-restrictions",
+   "description": "Casting it free and as though it had flash only together, under one condition.",
+   "example": "Qasali Ambusher: freeCastIf and flashIf are separate permissions, so together they'd also allow a flash cast paying mana."
+  },
+  "effect:for-each-counter-kind-among-permanents": {
+   "family": "decision:choose-counter-kind",
+   "description": "A loop over each kind of counter among your permanents, with a per-kind action.",
+   "example": "Bribe Taker: nothing iterates the counter kinds among permanents."
+  },
+  "decision:secret-card-choice-from-hand": {
+   "family": "decision:choose-creature-type-on-resolution",
+   "description": "Each player secretly chooses a card in their hand, then all are revealed.",
+   "example": "Stronghold Gambit: secret-choice covers opponents, types and numbers, not a card in hand."
+  },
+  "decision:secret-number-opponent-guesses": {
+   "family": "decision:choose-creature-type-on-resolution",
+   "description": "A secret number never chosen before for this source, then an opponent guesses it.",
+   "example": "The Toymaker's Trap: secret-choice has no 'not chosen before' memory and no guess."
+  },
+  "effect:emblem-own-activated-ability": {
+   "family": "effect:emblem-triggered-abilities",
+   "description": "An emblem with an activated ability of its own (not one it grants permanents).",
+   "example": "Ob Nixilis of the Black Oath: create-emblem carries statics and triggers but no activated ability."
+  },
+  "effect:delayed-sacrifice-each-returned-this-way": {
+   "family": "effect:delayed-trigger-extensions",
+   "description": "A delayed trigger sacrificing every card a mass graveyard return put onto the battlefield.",
+   "example": "Push the Limit: a delayed trigger's about over several objects from a mass return is unproven."
   }
  },
  "groups": [
