@@ -102,7 +102,13 @@ describe("\"you may search\" — the pool", () => {
         for (const value of Object.values(node)) searches(value, inMay || kind === "may", out);
       }
     };
-    const cards = POOL_CARDS.filter((card) => /you may search/i.test(card.text ?? ""));
+    // "Search … for a Plains card. If …, you may search your library for an
+    // additional Plains card" is one search for up to two, not an optional
+    // second search: the first is mandatory, and one shuffle ends both.
+    const ADDITIONAL_TO_A_SEARCH = new Set(["Tithe"]);
+    const cards = POOL_CARDS.filter(
+      (card) => /you may search/i.test(card.text ?? "") && !ADDITIONAL_TO_A_SEARCH.has(card.name),
+    );
     expect(cards.length).toBeGreaterThanOrEqual(60);
     const wrong = cards.filter((card) => {
       const found: Found[] = [];

@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-470 already implemented / 30 missing
+471 already implemented / 29 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -74,7 +74,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   68  Shorikai, Genesis Engine                       20987 decks  {2}{W}{U}        Legendary Artifact — Vehicle
 [x]   69  Zurgo Stormrender                              20864 decks  {R}{W}{B}        Legendary Creature — Orc Warrior
 [x]   70  Go-Shintai of Life's Origin                    20615 decks  {3}{G}           Legendary Enchantment Creature — Shrine
-[ ]   71  Urza, Lord High Artificer                      20594 decks  {2}{U}{U}        Legendary Creature — Human Artificer
+[x]   71  Urza, Lord High Artificer                      20594 decks  {2}{U}{U}        Legendary Creature — Human Artificer
 [x]   72  Felothar the Steadfast                         20517 decks  {1}{W}{B}{G}     Legendary Creature — Human Warrior
 [x]   73  Queen Marchesa                                 20464 decks  {1}{R}{W}{B}     Legendary Creature — Human Assassin
 [x]   74  K'rrik, Son of Yawgmoth                        20441 decks  {4}{B/P}{B/P}{B/P} Legendary Creature — Phyrexian Horror Minion

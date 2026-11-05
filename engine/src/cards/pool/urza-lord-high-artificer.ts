@@ -30,7 +30,7 @@ export default defineCard({
   ],
   activated: [
     {
-      cost: { mana: null, tap: false, tapOthers: { count: 1, filter: { type: "artifact", controlledBy: "you" } } },
+      cost: { mana: null, tap: false, tapOthers: { count: 1, filter: { type: "artifact", controlledBy: "you" }, includeSelf: true } },
       targets: [],
       effect: { kind: "add-mana", mana: "U", amount: 1 },
       resolve: null,
