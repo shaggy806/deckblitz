@@ -498,7 +498,7 @@ section keeps only what to do next.
   from a fresh session; the remaining keys come after that queue is empty (the user's call, 2026-11-04).** Batches: B255 (2026-11-04: 134 of 150 authored, 16 still blocked,
   three on the new `effect:separate-exiled-cards-into-piles`, two on `effect:choose-from-revealed-hand-without-moving`, the rest one each; fixed piles naming "an opponent" too early).
   B256 (2026-11-04, not `author-freed`: the scaffolder over the whole snapshot, every finished card reviewed: 373 of 383 authored, 10 still blocked, three on the new
-  `effect:text-change-token-colors`, two on the mana-ability discard cost, the rest one each; 19 need keys its review showed already run marked built). B257 (2026-11-04: 125 of 150 authored, 25 still blocked, six on `amount:attached-to-source-last-known`, two on `decision:damage-redirect-order`, the rest on keys of their own; agents of 20, 30, 40 and 60 cards, measured in `agent-batches.md`). B258 (2026-11-04: 135 of 150 authored, 15 still blocked, two on `filter:same-name-as-source-last-known`, the rest on keys of their own; agents of 50 and 100 cards; fixed a cast copy counting as a card played, a foretold card counted in exile, and each player's mill read between mills). `--stale` 982.
+  `effect:text-change-token-colors`, two on the mana-ability discard cost, the rest one each; 19 need keys its review showed already run marked built). B257 (2026-11-04: 125 of 150 authored, 25 still blocked, six on `amount:attached-to-source-last-known`, two on `decision:damage-redirect-order`, the rest on keys of their own; agents of 20, 30, 40 and 60 cards, measured in `agent-batches.md`). B258 (2026-11-04: 135 of 150 authored, 15 still blocked, two on `filter:same-name-as-source-last-known`, the rest on keys of their own; agents of 50 and 100 cards; fixed a cast copy counting as a card played, a foretold card counted in exile, and each player's mill read between mills). `--stale` 982; top-5000 4510/5000, commanders 467/500.
   When key building resumes, the order is `--by-rank`, from Abundance, Temur Sabertooth, Inti, Skrelv's Hive, Tempt with Bunnies.
   Narrow keys `author-freed` should give, from that last run's reports: Liberated Livestock (Auras onto each token), Splintering Wind (its token's cumulative upkeep and
   leave trigger), Cait, Cage Brawler (two simultaneous discards; no scope names "you and defending player"), The Last Agni Kai ("until end of turn" mana keeping), Curse of
@@ -508,7 +508,7 @@ section keeps only what to do next.
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
   untriaged cards by rank: rank 8207 on (batch 148 took 7949–8197). Batches run 4-5 agents, ~30 cards each, with the
-  leading features built alongside in worktrees. The nine other starter precons' 17 stand-ins
+  leading features built alongside in worktrees. The nine other starter precons' 11 stand-ins
   (`engine/data/sweep-3/PC-*.json`) go as their originals land.
 - **Build what blocks the most.** Every card triaged so far needs engine work. **Next:**
   banding (`keyword:banding` — 36, every one on nothing else, 2026-10-23; rule 702.22, and the
