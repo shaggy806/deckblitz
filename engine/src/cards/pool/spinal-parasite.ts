@@ -1,4 +1,5 @@
 import { defineCard } from "../define.js";
+import { sunburst } from "../helpers.js";
 
 // EDHREC rank 26959.
 //
@@ -27,16 +28,7 @@ export default defineCard({
   power: -1,
   toughness: -1,
   text: `${SUNBURST_TEXT}\n${REMOVE_TEXT}`,
-  static: [
-    {
-      affects: { scope: "self" },
-      replacement: {
-        event: "enters-battlefield",
-        counters: { kind: "+1/+1", amount: { colorsSpentOf: "source" } },
-      },
-      text: SUNBURST_TEXT,
-    },
-  ],
+  static: [sunburst("creature")],
   activated: [
     {
       cost: { mana: null, tap: false, removeCounter: { kind: "+1/+1", count: 2 } },

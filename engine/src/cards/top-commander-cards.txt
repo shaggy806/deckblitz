@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4526 already implemented / 474 missing (marks refreshed 2026-11-05)
+4539 already implemented / 461 missing (marks refreshed 2026-11-05)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -616,7 +616,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   617  Simic Signet                             {2}              Artifact
 [x]   618  Shizo, Death's Storehouse                {0}              Legendary Land
 [x]   619  Stitcher's Supplier                      {B}              Creature — Zombie
-[ ]   620  Archdruid's Charm                        {G}{G}{G}        Instant
+[x]   620  Archdruid's Charm                        {G}{G}{G}        Instant
 [x]   621  Banner of Kinship                        {5}              Artifact
 [x]   622  Torment of Hailfire                      {X}{B}{B}        Sorcery
 [x]   623  Icetill Explorer                         {2}{G}{G}        Creature — Insect Scout
@@ -1365,7 +1365,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1372  Coiling Oracle                           {G}{U}           Creature — Snake Elf Druid
 [x]  1373  Scroll Rack                              {2}              Artifact
 [x]  1374  Agatha's Soul Cauldron                   {2}              Legendary Artifact
-[ ]  1375  Glissa Sunslayer                         {1}{B}{G}        Legendary Creature — Phyrexian Zombie Elf
+[x]  1375  Glissa Sunslayer                         {1}{B}{G}        Legendary Creature — Phyrexian Zombie Elf
 [x]  1376  Enthusiastic Mechanaut                   {U}{R}           Artifact Creature — Goblin Artificer
 [x]  1377  Sephara, Sky's Blade                     {4}{W}{W}{W}     Legendary Creature — Angel
 [x]  1378  Tangled Islet                            {0}              Land — Forest Island
@@ -1608,7 +1608,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1615  Golgari Charm                            {B}{G}           Instant
 [x]  1616  Ugin, the Spirit Dragon                  {8}              Legendary Planeswalker — Ugin
 [x]  1617  Ondu Spiritdancer                        {4}{W}           Creature — Kor Cleric
-[ ]  1618  Replicating Ring                         {3}              Snow Artifact
+[x]  1618  Replicating Ring                         {3}              Snow Artifact
 [x]  1619  Masterwork of Ingenuity                  {1}              Artifact — Equipment
 [x]  1620  Stitch Together                          {B}{B}           Sorcery
 [x]  1621  Urza's Ruinous Blast                     {4}{W}           Legendary Sorcery
@@ -2074,7 +2074,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2081  Vengeful Ancestor                        {2}{R}{R}        Creature — Spirit Dragon
 [x]  2082  Sowing Mycospawn                         {3}{G}           Creature — Eldrazi Fungus
 [ ]  2083  Sudden Spoiling                          {1}{B}{B}        Instant
-[ ]  2084  Liliana, Death's Majesty                 {3}{B}{B}        Legendary Planeswalker — Liliana
+[x]  2084  Liliana, Death's Majesty                 {3}{B}{B}        Legendary Planeswalker — Liliana
 [x]  2085  Deathreap Ritual                         {2}{B}{G}        Enchantment
 [x]  2086  Nissa, Resurgent Animist                 {2}{G}           Legendary Creature — Elf Scout
 [x]  2087  Body of Knowledge                        {3}{U}{U}        Creature — Avatar
@@ -2548,7 +2548,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2555  Titan of Industry                        {4}{G}{G}{G}     Creature — Elemental
 [x]  2556  Tamiyo's Journal                         {5}              Legendary Artifact — Book
 [x]  2557  Saheeli, Sublime Artificer               {1}{U/R}{U/R}    Legendary Planeswalker — Saheeli
-[ ]  2558  PuPu UFO                                 {2}              Artifact Creature — Construct Alien
+[x]  2558  PuPu UFO                                 {2}              Artifact Creature — Construct Alien
 [x]  2559  Black Dragon Gate                        {0}              Land — Gate
 [x]  2560  Reiterate                                {1}{R}{R}        Instant
 [x]  2561  Baldur's Gate                            {0}              Legendary Land — Gate
@@ -2639,7 +2639,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2646  Eldrazi Confluence                       {2}{C}{C}        Instant
 [x]  2647  Voyager Quickwelder                      {2}{W}           Artifact Creature — Robot Artificer
 [x]  2648  Cursed Totem                             {2}              Artifact
-[ ]  2649  Scholar of New Horizons                  {1}{W}           Creature — Human Scout
+[x]  2649  Scholar of New Horizons                  {1}{W}           Creature — Human Scout
 [ ]  2650  Firebender Ascension                     {1}{R}           Enchantment
 [x]  2651  Quick Study                              {2}{U}           Instant
 [x]  2652  Thousand-Faced Shadow                    {U}              Creature — Human Ninja
@@ -2794,7 +2794,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2801  Peerless Recycling                       {1}{G}           Instant
 [x]  2802  Hornet Nest                              {2}{G}           Creature — Insect
 [x]  2803  Graypelt Refuge                          {0}              Land
-[ ]  2804  Dance of the Manse                       {X}{W}{U}        Sorcery
+[x]  2804  Dance of the Manse                       {X}{W}{U}        Sorcery
 [x]  2805  Uncharted Haven                          {0}              Land
 [x]  2806  Cemetery Tampering                       {2}{B}           Enchantment
 [x]  2807  Mirror Room // Fractured Realm           {2}{U} // {5}{U}{U} Enchantment — Room // Enchantment — Room
@@ -3472,7 +3472,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3479  Kaalia of the Vast                       {1}{R}{W}{B}     Legendary Creature — Human Cleric
 [x]  3480  Berserk                                  {G}              Instant
 [x]  3481  Scion of Oona                            {2}{U}           Creature — Faerie Soldier
-[ ]  3482  Rona, Herald of Invasion // Rona, Tolarian Obliterator {2}              Legendary Creature — Human Wizard // Legendary Creature — Phyrexian Wizard
+[x]  3482  Rona, Herald of Invasion // Rona, Tolarian Obliterator {2}              Legendary Creature — Human Wizard // Legendary Creature — Phyrexian Wizard
 [x]  3483  Wirewood Channeler                       {3}{G}           Creature — Elf Druid
 [x]  3484  Torpor Orb                               {2}              Artifact
 [x]  3485  Jace, the Mind Sculptor                  {2}{U}{U}        Legendary Planeswalker — Jace
@@ -4763,7 +4763,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4770  Bonus Round                              {1}{R}{R}        Sorcery
 [x]  4771  Two-Headed Hellkite                      {1}{W}{U}{B}{R}{G} Creature — Dragon
 [x]  4772  Camaraderie                              {4}{G}{W}        Sorcery
-[ ]  4773  Grave Betrayal                           {5}{B}{B}        Enchantment
+[x]  4773  Grave Betrayal                           {5}{B}{B}        Enchantment
 [x]  4774  Twinblade Blessing                       {1}{W}{W}        Enchantment — Aura
 [x]  4775  Sylvan Offering                          {X}{G}           Sorcery
 [ ]  4776  Faramir, Prince of Ithilien              {2}{W}{U}        Legendary Creature — Human Noble
@@ -4776,7 +4776,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4783  Fade from History                        {2}{G}{G}        Sorcery
 [x]  4784  Volcanic Vision                          {5}{R}{R}        Sorcery
 [x]  4785  Prishe's Wanderings                      {2}{G}           Instant
-[ ]  4786  Heartless Act                            {1}{B}           Instant
+[x]  4786  Heartless Act                            {1}{B}           Instant
 [x]  4787  Mindless Automaton                       {4}              Artifact Creature — Construct
 [x]  4788  Nullpriest of Oblivion                   {1}{B}           Creature — Vampire Cleric
 [x]  4789  Tithing Blade // Consuming Sepulcher     {2}              Artifact // Artifact
@@ -4799,7 +4799,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4806  Aminatou, the Fateshifter                {W}{U}{B}        Legendary Planeswalker — Aminatou
 [x]  4807  Lilysplash Mentor                        {2}{G}{U}        Creature — Frog Druid
 [x]  4808  Gyome, Master Chef                       {2}{B}{G}        Legendary Creature — Troll Warlock
-[ ]  4809  Éomer, King of Rohan                     {3}{R}{W}        Legendary Creature — Human Noble
+[x]  4809  Éomer, King of Rohan                     {3}{R}{W}        Legendary Creature — Human Noble
 [ ]  4810  Ultron, Artificial Malevolence           {3}              Legendary Artifact Creature — Robot Villain
 [x]  4811  Act of Treason                           {2}{R}           Sorcery
 [x]  4812  Nemata, Primeval Warden                  {2}{B}{G}        Legendary Creature — Treefolk
@@ -4867,7 +4867,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4874  Faerie Artisans                          {3}{U}           Creature — Faerie Artificer
 [ ]  4875  Arvinox, the Mind Flail                  {4}{B}{B}{B}     Legendary Enchantment Creature — Horror
 [x]  4876  Balefire Liege                           {2}{R/W}{R/W}{R/W} Creature — Spirit Horror
-[ ]  4877  Treasure Chest                           {3}              Artifact
+[x]  4877  Treasure Chest                           {3}              Artifact
 [x]  4878  Zara, Renegade Recruiter                 {3}{U}{R}        Legendary Creature — Human Pirate
 [ ]  4879  Izzet Generatorium                       {U}{R}           Artifact
 [x]  4880  Biomass Mutation                         {X}{G/U}{G/U}    Instant
@@ -4920,7 +4920,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4927  Tunneling Geopede                        {2}{R}           Creature — Insect
 [x]  4928  Suspended Sentence                       {3}{B}           Instant
 [x]  4929  Drifting Meadow                          {0}              Land
-[ ]  4930  The Bath Song                            {3}{U}           Enchantment — Saga
+[x]  4930  The Bath Song                            {3}{U}           Enchantment — Saga
 [x]  4931  Black Sun's Twilight                     {X}{B}           Instant
 [x]  4932  Digsite Engineer                         {2}{W}           Creature — Dwarf Artificer
 [x]  4933  Nissa, Vital Force                       {3}{G}{G}        Legendary Planeswalker — Nissa
