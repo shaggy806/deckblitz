@@ -18,6 +18,7 @@ const LEGENDARY_GREEN = {
 
 export default defineCard({
   name: "Argoth, Sanctum of Nature",
+  meldCard: true,
   colors: [],
   types: ["land"],
   text: `This land enters tapped unless you control a legendary green creature.\n{T}: Add {G}.\n${BEAR_TEXT}\n(Melds with Titania, Voice of Gaea.)`,

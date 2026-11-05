@@ -16,6 +16,7 @@ const TEXT =
 
 export default defineCard({
   name: "Fang, Fearless l'Cie",
+  meldCard: true,
   manaCost: "{2}{B}",
   colors: ["B"],
   supertypes: ["legendary"],
