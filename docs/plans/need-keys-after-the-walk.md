@@ -917,7 +917,7 @@ missing. Re-run `--greedy` for Phase 2's order.
 - **2026-11-05: `author-freed`, batch 259.** 111 of the queue's next 150 authored, 39 given narrow keys, by agents of 75 and 74 cards with a blind reader over all of it; 832 left.
 - **2026-11-05: `author-freed`, batch 260.** 125 of the queue's next 150 authored, 25 given narrow keys (seven on `mechanic:face-down`'s), by two agents of 75 with a blind reader that found nothing wrong; 682 left.
 - **2026-11-05: `author-freed`, batch 261.** 102 of the queue's next 150 authored, 48 given 43 narrow keys (eleven under `zone:graveyard-cast-permissions`, five under `static:grant-static-ability`), by two agents of 75 with a blind reader that found nothing wrong; 532 left. The rest goes to parallel cloud sessions on frozen lists (the user's call).
-- **2026-11-05: `author-freed`, batch 265 (list F4 of the parallel round).** 80 of 133 authored, 53 given 40 new narrow keys and 9 existing, by two agents of 66 and a blind reader; one engine fix (a look-and-choose filter's bare X).
+- **2026-11-05: `author-freed`, batch 265 (list F4 of the parallel round).** 80 of 133 authored, 53 given 40 new narrow keys and 9 existing, by two agents of 66 and a blind reader; two engine fixes (a look-and-choose filter's bare X; a trigger for a player who left in the same event) and a fuzzer fix (a random teamwork cast).
 
 ## Rough size
 
