@@ -11843,6 +11843,8 @@ function counterAbilityAt(sentences, i, ctx) {
   const noun = m[1].toLowerCase();
   const sourceTypes = [m[3], m[4]].filter((t) => t !== undefined).map((t) => t.toLowerCase());
   if (noun.startsWith("spell") && (m[2] !== undefined || sourceTypes.length > 0)) return null;
+  // `sourceTypes` lists card types: "from a noncreature source" (Emerald Dragon) isn't one.
+  if (sourceTypes.some((t) => t.startsWith("non"))) return null;
   const spec = noun.startsWith("spell")
     ? { kind: "stack", spells: "any", abilities: true }
     : noun === "activated or triggered ability" && m[2] === undefined && sourceTypes.length === 0

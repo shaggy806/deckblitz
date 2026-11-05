@@ -131,6 +131,9 @@ const frontArt = (printing) =>
 
 const BASIC_MANA = { Plains: "W", Island: "U", Swamp: "B", Mountain: "R", Forest: "G" };
 
+/** What `parseFace` returns about the reading rather than the card. */
+const PARSER_BOOKKEEPING = new Set(["complete", "todo", "effectHints", "enchant"]);
+
 /**
  * One face's file, from `parseFace` (oracle-parse.mjs). `face` is the snapshot
  * face (or the whole entry for a single-faced card); `ctx` carries the
@@ -271,7 +274,13 @@ function faceSource(face, ctx) {
     prepareSpell: ctx.prepareSpell,
     prepareSpellOnly: ctx.prepareSpellOnly,
     meldOf: ctx.meldOf,
+    meldCard: ctx.meldCard,
   };
+  // Every other field the parser read, so a template's field can't be read and
+  // then left out of the file (`castOnlyIf`, `exileOnResolve`, `moreCycling`, …).
+  for (const [key, value] of Object.entries(parsed)) {
+    if (!(key in def) && !PARSER_BOOKKEEPING.has(key)) def[key] = value;
+  }
   const body = toSource(def).replace(/\n}$/, "");
   const todos = [
     ...notes,
@@ -481,6 +490,8 @@ function scaffoldCard(name, { autoOnly = false, ignoreScaffolded = false } = {})
       prepareSpell: prepare && i === 0 ? faces[1].name : undefined,
       prepareSpellOnly: prepare && i > 0 ? true : undefined,
       meldOf,
+      // A meld pair's front face: nothing melds into it (rule 712.4).
+      meldCard: entry.layout === "meld" && melder === undefined ? true : undefined,
       layoutNote,
       rulings: i === 0 ? (entry.rulings ?? []) : [],
       headerNotes: [

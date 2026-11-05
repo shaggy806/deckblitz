@@ -24,6 +24,16 @@ import { parseEffect, parseFace, parseTrigger, parseCost, parseSentence, parseTy
 // @ts-expect-error — as above.
 import { checkPool } from "../../scripts/oracle-parse-check.mjs";
 
+describe("counter target ability from a source", () => {
+  it("reads a card type, and leaves a negative one to a person (Emerald Dragon)", () => {
+    const line = (text: string) => parseFace({ name: "Test Card", type_line: "Instant", oracle_text: text });
+    expect(line("Counter target activated ability from an artifact source.").targets).toEqual([
+      { kind: "ability", abilityKind: "activated", sourceTypes: ["artifact"] },
+    ]);
+    expect(line("Counter target activated or triggered ability from a noncreature source.").complete).toBe(false);
+  });
+});
+
 describe("what an ability goes on to say about its token", () => {
   it("Feldon of the Third Path's copy of a graveyard card", () => {
     const parsed = parseFace({
