@@ -104,6 +104,8 @@ import _poolBuddingInsurgent from "../pool/budding-insurgent.js";
 import _poolBuriedInTheGarden from "../pool/buried-in-the-garden.js";
 import _poolBurlfistOak from "../pool/burlfist-oak.js";
 import _poolBurrowingRazormaw from "../pool/burrowing-razormaw.js";
+import _poolCallidusAssassin from "../pool/callidus-assassin.js";
+import _poolCandlekeepInspiration from "../pool/candlekeep-inspiration.js";
 import _poolCanopyCrawler from "../pool/canopy-crawler.js";
 import _poolCapennaExpress from "../pool/capenna-express.js";
 import _poolCaptainAmericaFirstAvenger from "../pool/captain-america-first-avenger.js";
@@ -238,6 +240,7 @@ import _poolElementalUprising from "../pool/elemental-uprising.js";
 import _poolElephantGraveyard from "../pool/elephant-graveyard.js";
 import _poolElspethSunsChampion from "../pool/elspeth-suns-champion.js";
 import _poolEmblemOfTheWarmind from "../pool/emblem-of-the-warmind.js";
+import _poolEnergyArc from "../pool/energy-arc.js";
 import _poolEnergyField from "../pool/energy-field.js";
 import _poolEngineeredPlague from "../pool/engineered-plague.js";
 import _poolEnsoulArtifact from "../pool/ensoul-artifact.js";
@@ -396,6 +399,7 @@ import _poolHuntmasterLiger from "../pool/huntmaster-liger.js";
 import _poolHushwoodVerge from "../pool/hushwood-verge.js";
 import _poolHydroidKrasis from "../pool/hydroid-krasis.js";
 import _poolHypochondria from "../pool/hypochondria.js";
+import _poolHypothesizzle from "../pool/hypothesizzle.js";
 import _poolIgneousPouncer from "../pool/igneous-pouncer.js";
 import _poolIllTemperedLoner from "../pool/ill-tempered-loner.js";
 import _poolImodaneThePyrohammer from "../pool/imodane-the-pyrohammer.js";
@@ -1050,6 +1054,8 @@ const shard: CardShard = {
     _poolBuriedInTheGarden,
     _poolBurlfistOak,
     _poolBurrowingRazormaw,
+    _poolCallidusAssassin,
+    _poolCandlekeepInspiration,
     _poolCanopyCrawler,
     _poolCapennaExpress,
     _poolCaptainAmericaFirstAvenger,
@@ -1184,6 +1190,7 @@ const shard: CardShard = {
     _poolElephantGraveyard,
     _poolElspethSunsChampion,
     _poolEmblemOfTheWarmind,
+    _poolEnergyArc,
     _poolEnergyField,
     _poolEngineeredPlague,
     _poolEnsoulArtifact,
@@ -1342,6 +1349,7 @@ const shard: CardShard = {
     _poolHushwoodVerge,
     _poolHydroidKrasis,
     _poolHypochondria,
+    _poolHypothesizzle,
     _poolIgneousPouncer,
     _poolIllTemperedLoner,
     _poolImodaneThePyrohammer,

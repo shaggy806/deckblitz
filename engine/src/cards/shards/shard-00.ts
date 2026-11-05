@@ -542,6 +542,7 @@ import _poolOraxid from "../pool/oraxid.js";
 import _poolOreadOfMountainsBlaze from "../pool/oread-of-mountains-blaze.js";
 import _poolOriginOfMetalbending from "../pool/origin-of-metalbending.js";
 import _poolOrmendahlTheCorrupter from "../pool/ormendahl-the-corrupter.js";
+import _poolOrzhovCharm from "../pool/orzhov-charm.js";
 import _poolOsgoodOperationDouble from "../pool/osgood-operation-double.js";
 import _poolOutOfTheWay from "../pool/out-of-the-way.js";
 import _poolOutrageousRobbery from "../pool/outrageous-robbery.js";
@@ -744,6 +745,7 @@ import _poolStarfieldMystic from "../pool/starfield-mystic.js";
 import _poolStarfighterPilot from "../pool/starfighter-pilot.js";
 import _poolStarkIndustries from "../pool/stark-industries.js";
 import _poolStenchskipper from "../pool/stenchskipper.js";
+import _poolStepBetweenWorlds from "../pool/step-between-worlds.js";
 import _poolSterlingKeykeeper from "../pool/sterling-keykeeper.js";
 import _poolStewardOfSolidarity from "../pool/steward-of-solidarity.js";
 import _poolStitchInTime from "../pool/stitch-in-time.js";
@@ -803,9 +805,11 @@ import _poolTheLongReachOfNight from "../pool/the-long-reach-of-night.js";
 import _poolTheMightstoneAndWeakstone from "../pool/the-mightstone-and-weakstone.js";
 import _poolTheMoment from "../pool/the-moment.js";
 import _poolTheMycotyrant from "../pool/the-mycotyrant.js";
+import _poolTheRavensWarning from "../pool/the-ravens-warning.js";
 import _poolTheSpiritOasis from "../pool/the-spirit-oasis.js";
 import _poolTheTheoristJaceBeleren from "../pool/the-theorist-jace-beleren.js";
 import _poolTheWeatherseedTreaty from "../pool/the-weatherseed-treaty.js";
+import _poolTheWeddingOfRiverSong from "../pool/the-wedding-of-river-song.js";
 import _poolTheWindCrystal from "../pool/the-wind-crystal.js";
 import _poolThirdPathSavant from "../pool/third-path-savant.js";
 import _poolThirstForIdentity from "../pool/thirst-for-identity.js";
@@ -1492,6 +1496,7 @@ const shard: CardShard = {
     _poolOreadOfMountainsBlaze,
     _poolOriginOfMetalbending,
     _poolOrmendahlTheCorrupter,
+    _poolOrzhovCharm,
     _poolOsgoodOperationDouble,
     _poolOutOfTheWay,
     _poolOutrageousRobbery,
@@ -1694,6 +1699,7 @@ const shard: CardShard = {
     _poolStarfighterPilot,
     _poolStarkIndustries,
     _poolStenchskipper,
+    _poolStepBetweenWorlds,
     _poolSterlingKeykeeper,
     _poolStewardOfSolidarity,
     _poolStitchInTime,
@@ -1753,9 +1759,11 @@ const shard: CardShard = {
     _poolTheMightstoneAndWeakstone,
     _poolTheMoment,
     _poolTheMycotyrant,
+    _poolTheRavensWarning,
     _poolTheSpiritOasis,
     _poolTheTheoristJaceBeleren,
     _poolTheWeatherseedTreaty,
+    _poolTheWeddingOfRiverSong,
     _poolTheWindCrystal,
     _poolThirdPathSavant,
     _poolThirstForIdentity,

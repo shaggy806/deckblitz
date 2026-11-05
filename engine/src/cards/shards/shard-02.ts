@@ -408,6 +408,7 @@ import _poolInvisibleWoman from "../pool/invisible-woman.js";
 import _poolIonasJudgment from "../pool/ionas-judgment.js";
 import _poolIroasGodOfVictory from "../pool/iroas-god-of-victory.js";
 import _poolIronFistLivingWeapon from "../pool/iron-fist-living-weapon.js";
+import _poolIvoryGargoyle from "../pool/ivory-gargoyle.js";
 import _poolJackdaw from "../pool/jackdaw.js";
 import _poolJadarGhoulcallerOfNephalia from "../pool/jadar-ghoulcaller-of-nephalia.js";
 import _poolJamuraanLion from "../pool/jamuraan-lion.js";
@@ -853,6 +854,7 @@ import _poolVanguardOfTheRestless from "../pool/vanguard-of-the-restless.js";
 import _poolVassalSoul from "../pool/vassal-soul.js";
 import _poolVelukanDragon from "../pool/velukan-dragon.js";
 import _poolVerixBladewing from "../pool/verix-bladewing.js";
+import _poolVexingArcanix from "../pool/vexing-arcanix.js";
 import _poolViashinoCutthroat from "../pool/viashino-cutthroat.js";
 import _poolViashinoSandstalker from "../pool/viashino-sandstalker.js";
 import _poolViashinoSandswimmer from "../pool/viashino-sandswimmer.js";
@@ -1326,6 +1328,7 @@ const shard: CardShard = {
     _poolIonasJudgment,
     _poolIroasGodOfVictory,
     _poolIronFistLivingWeapon,
+    _poolIvoryGargoyle,
     _poolJackdaw,
     _poolJadarGhoulcallerOfNephalia,
     _poolJamuraanLion,
@@ -1771,6 +1774,7 @@ const shard: CardShard = {
     _poolVassalSoul,
     _poolVelukanDragon,
     _poolVerixBladewing,
+    _poolVexingArcanix,
     _poolViashinoCutthroat,
     _poolViashinoSandstalker,
     _poolViashinoSandswimmer,

@@ -45,6 +45,7 @@ import _poolAshioksForerunner from "../pool/ashioks-forerunner.js";
 import _poolAspectOfGorgon from "../pool/aspect-of-gorgon.js";
 import _poolAtzocanSeer from "../pool/atzocan-seer.js";
 import _poolAugurOfAutumn from "../pool/augur-of-autumn.js";
+import _poolAuriokSteelshaper from "../pool/auriok-steelshaper.js";
 import _poolAuriokTransfixer from "../pool/auriok-transfixer.js";
 import _poolAvacynianPriest from "../pool/avacynian-priest.js";
 import _poolAvenFisher from "../pool/aven-fisher.js";
@@ -111,6 +112,7 @@ import _poolCameraLauncher from "../pool/camera-launcher.js";
 import _poolCandyTrail from "../pool/candy-trail.js";
 import _poolCapsizingWave from "../pool/capsizing-wave.js";
 import _poolCarapaceForger from "../pool/carapace-forger.js";
+import _poolCaseTheJoint from "../pool/case-the-joint.js";
 import _poolCastOut from "../pool/cast-out.js";
 import _poolCaveSense from "../pool/cave-sense.js";
 import _poolCeaseDesist from "../pool/cease-desist.js";
@@ -188,6 +190,7 @@ import _poolDefeat from "../pool/defeat.js";
 import _poolDefendTheRider from "../pool/defend-the-rider.js";
 import _poolDeftDuelist from "../pool/deft-duelist.js";
 import _poolDeliberate from "../pool/deliberate.js";
+import _poolDelirium from "../pool/delirium.js";
 import _poolDemand from "../pool/demand.js";
 import _poolDemolish from "../pool/demolish.js";
 import _poolDemonicBargain from "../pool/demonic-bargain.js";
@@ -341,6 +344,7 @@ import _poolGraftedIdentity from "../pool/grafted-identity.js";
 import _poolGravePact from "../pool/grave-pact.js";
 import _poolGreasewrenchGoblin from "../pool/greasewrench-goblin.js";
 import _poolGreatIntelligencesPlan from "../pool/great-intelligences-plan.js";
+import _poolGreatUncleanOne from "../pool/great-unclean-one.js";
 import _poolGreaterForgeling from "../pool/greater-forgeling.js";
 import _poolGreenWard from "../pool/green-ward.js";
 import _poolGrenzosRuffians from "../pool/grenzos-ruffians.js";
@@ -616,6 +620,7 @@ import _poolPoxPlague from "../pool/pox-plague.js";
 import _poolPrakhataPillarBug from "../pool/prakhata-pillar-bug.js";
 import _poolPrehistoricPet from "../pool/prehistoric-pet.js";
 import _poolPresumedDead from "../pool/presumed-dead.js";
+import _poolPriceOfProgress from "../pool/price-of-progress.js";
 import _poolPrimalSurge from "../pool/primal-surge.js";
 import _poolPropellerPioneer from "../pool/propeller-pioneer.js";
 import _poolProtectorOfTheCrown from "../pool/protector-of-the-crown.js";
@@ -912,6 +917,7 @@ import _poolWhiteSunsTwilight from "../pool/white-suns-twilight.js";
 import _poolWickedPact from "../pool/wicked-pact.js";
 import _poolWightOfTheReliquary from "../pool/wight-of-the-reliquary.js";
 import _poolWildRicochet from "../pool/wild-ricochet.js";
+import _poolWildWasteland from "../pool/wild-wasteland.js";
 import _poolWildwoodPatrol from "../pool/wildwood-patrol.js";
 import _poolWindStrider from "../pool/wind-strider.js";
 import _poolWindsOfRath from "../pool/winds-of-rath.js";
@@ -992,6 +998,7 @@ const shard: CardShard = {
     _poolAspectOfGorgon,
     _poolAtzocanSeer,
     _poolAugurOfAutumn,
+    _poolAuriokSteelshaper,
     _poolAuriokTransfixer,
     _poolAvacynianPriest,
     _poolAvenFisher,
@@ -1058,6 +1065,7 @@ const shard: CardShard = {
     _poolCandyTrail,
     _poolCapsizingWave,
     _poolCarapaceForger,
+    _poolCaseTheJoint,
     _poolCastOut,
     _poolCaveSense,
     _poolCeaseDesist,
@@ -1135,6 +1143,7 @@ const shard: CardShard = {
     _poolDefendTheRider,
     _poolDeftDuelist,
     _poolDeliberate,
+    _poolDelirium,
     _poolDemand,
     _poolDemolish,
     _poolDemonicBargain,
@@ -1288,6 +1297,7 @@ const shard: CardShard = {
     _poolGravePact,
     _poolGreasewrenchGoblin,
     _poolGreatIntelligencesPlan,
+    _poolGreatUncleanOne,
     _poolGreaterForgeling,
     _poolGreenWard,
     _poolGrenzosRuffians,
@@ -1563,6 +1573,7 @@ const shard: CardShard = {
     _poolPrakhataPillarBug,
     _poolPrehistoricPet,
     _poolPresumedDead,
+    _poolPriceOfProgress,
     _poolPrimalSurge,
     _poolPropellerPioneer,
     _poolProtectorOfTheCrown,
@@ -1859,6 +1870,7 @@ const shard: CardShard = {
     _poolWickedPact,
     _poolWightOfTheReliquary,
     _poolWildRicochet,
+    _poolWildWasteland,
     _poolWildwoodPatrol,
     _poolWindStrider,
     _poolWindsOfRath,

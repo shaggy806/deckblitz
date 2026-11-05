@@ -285,6 +285,7 @@ import _poolFallajiExcavation from "../pool/fallaji-excavation.js";
 import _poolFallajiVanguard from "../pool/fallaji-vanguard.js";
 import _poolFangFearlessLcie from "../pool/fang-fearless-lcie.js";
 import _poolFatalMutation from "../pool/fatal-mutation.js";
+import _poolFearsomeTemper from "../pool/fearsome-temper.js";
 import _poolFeastingHobbit from "../pool/feasting-hobbit.js";
 import _poolFellingBlow from "../pool/felling-blow.js";
 import _poolFemerefKnight from "../pool/femeref-knight.js";
@@ -398,6 +399,7 @@ import _poolIlhargTheRazeBoar from "../pool/ilharg-the-raze-boar.js";
 import _poolIlluminatedFolio from "../pool/illuminated-folio.js";
 import _poolImmaculateMagistrate from "../pool/immaculate-magistrate.js";
 import _poolImmoralBargain from "../pool/immoral-bargain.js";
+import _poolImmortusMasterOfEternity from "../pool/immortus-master-of-eternity.js";
 import _poolImprisonedInTheMoon from "../pool/imprisoned-in-the-moon.js";
 import _poolIndebtedSamurai from "../pool/indebted-samurai.js";
 import _poolIndomitableAncients from "../pool/indomitable-ancients.js";
@@ -538,8 +540,10 @@ import _poolMirrisGuile from "../pool/mirris-guile.js";
 import _poolMirrorStyleMaster from "../pool/mirror-style-master.js";
 import _poolMistSyndicateNaga from "../pool/mist-syndicate-naga.js";
 import _poolMistformSeaswift from "../pool/mistform-seaswift.js";
+import _poolMjolnirStormHammer from "../pool/mjolnir-storm-hammer.js";
 import _poolMobVerdict from "../pool/mob-verdict.js";
 import _poolMoggFlunkies from "../pool/mogg-flunkies.js";
+import _poolMoltenPsyche from "../pool/molten-psyche.js";
 import _poolMoonsilverSpear from "../pool/moonsilver-spear.js";
 import _poolMordorMuster from "../pool/mordor-muster.js";
 import _poolMorskaUnderseaSleuth from "../pool/morska-undersea-sleuth.js";
@@ -687,6 +691,7 @@ import _poolRishadanPort from "../pool/rishadan-port.js";
 import _poolRisingPopulace from "../pool/rising-populace.js";
 import _poolRiteOfPassage from "../pool/rite-of-passage.js";
 import _poolRiverwheelSweep from "../pool/riverwheel-sweep.js";
+import _poolRiveteersConfluence from "../pool/riveteers-confluence.js";
 import _poolRobaranMercenaries from "../pool/robaran-mercenaries.js";
 import _poolRockyRoads from "../pool/rocky-roads.js";
 import _poolRoilsRetribution from "../pool/roils-retribution.js";
@@ -746,6 +751,7 @@ import _poolSilkenfistFighter from "../pool/silkenfist-fighter.js";
 import _poolSilverMyr from "../pool/silver-myr.js";
 import _poolSinkIntoTakenuma from "../pool/sink-into-takenuma.js";
 import _poolSinuousBenthisaur from "../pool/sinuous-benthisaur.js";
+import _poolSiphonInsight from "../pool/siphon-insight.js";
 import _poolSkarrganPitSkulk from "../pool/skarrgan-pit-skulk.js";
 import _poolSkatewingSpy from "../pool/skatewing-spy.js";
 import _poolSkilledBattlecarver from "../pool/skilled-battlecarver.js";
@@ -765,6 +771,7 @@ import _poolSlickshotShowOff from "../pool/slickshot-show-off.js";
 import _poolSlimyKavu from "../pool/slimy-kavu.js";
 import _poolSluicewayScorpion from "../pool/sluiceway-scorpion.js";
 import _poolSmelt from "../pool/smelt.js";
+import _poolSnag from "../pool/snag.js";
 import _poolSoaringThoughtThief from "../pool/soaring-thought-thief.js";
 import _poolSokkasHaiku from "../pool/sokkas-haiku.js";
 import _poolSoldierOfThePantheon from "../pool/soldier-of-the-pantheon.js";
@@ -1264,6 +1271,7 @@ const shard: CardShard = {
     _poolFallajiVanguard,
     _poolFangFearlessLcie,
     _poolFatalMutation,
+    _poolFearsomeTemper,
     _poolFeastingHobbit,
     _poolFellingBlow,
     _poolFemerefKnight,
@@ -1377,6 +1385,7 @@ const shard: CardShard = {
     _poolIlluminatedFolio,
     _poolImmaculateMagistrate,
     _poolImmoralBargain,
+    _poolImmortusMasterOfEternity,
     _poolImprisonedInTheMoon,
     _poolIndebtedSamurai,
     _poolIndomitableAncients,
@@ -1517,8 +1526,10 @@ const shard: CardShard = {
     _poolMirrorStyleMaster,
     _poolMistSyndicateNaga,
     _poolMistformSeaswift,
+    _poolMjolnirStormHammer,
     _poolMobVerdict,
     _poolMoggFlunkies,
+    _poolMoltenPsyche,
     _poolMoonsilverSpear,
     _poolMordorMuster,
     _poolMorskaUnderseaSleuth,
@@ -1666,6 +1677,7 @@ const shard: CardShard = {
     _poolRisingPopulace,
     _poolRiteOfPassage,
     _poolRiverwheelSweep,
+    _poolRiveteersConfluence,
     _poolRobaranMercenaries,
     _poolRockyRoads,
     _poolRoilsRetribution,
@@ -1725,6 +1737,7 @@ const shard: CardShard = {
     _poolSilverMyr,
     _poolSinkIntoTakenuma,
     _poolSinuousBenthisaur,
+    _poolSiphonInsight,
     _poolSkarrganPitSkulk,
     _poolSkatewingSpy,
     _poolSkilledBattlecarver,
@@ -1744,6 +1757,7 @@ const shard: CardShard = {
     _poolSlimyKavu,
     _poolSluicewayScorpion,
     _poolSmelt,
+    _poolSnag,
     _poolSoaringThoughtThief,
     _poolSokkasHaiku,
     _poolSoldierOfThePantheon,

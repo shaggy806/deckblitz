@@ -133,7 +133,9 @@ import _poolCecilDarkKnight from "../pool/cecil-dark-knight.js";
 import _poolCelestialCrusader from "../pool/celestial-crusader.js";
 import _poolCemeteryReaper from "../pool/cemetery-reaper.js";
 import _poolCephalidColiseum from "../pool/cephalid-coliseum.js";
+import _poolCephalidIllusionist from "../pool/cephalid-illusionist.js";
 import _poolCerodonYearling from "../pool/cerodon-yearling.js";
+import _poolChainOfSilence from "../pool/chain-of-silence.js";
 import _poolChampionOfLambholt from "../pool/champion-of-lambholt.js";
 import _poolChampionOfThePerished from "../pool/champion-of-the-perished.js";
 import _poolChanceEncounter from "../pool/chance-encounter.js";
@@ -249,6 +251,7 @@ import _poolElementalSpectacle from "../pool/elemental-spectacle.js";
 import _poolEleshNornGrandCenobite from "../pool/elesh-norn-grand-cenobite.js";
 import _poolElvishHunter from "../pool/elvish-hunter.js";
 import _poolElvishVisionary from "../pool/elvish-visionary.js";
+import _poolEmilVastlandsRoamer from "../pool/emil-vastlands-roamer.js";
 import _poolEmpyrialPlate from "../pool/empyrial-plate.js";
 import _poolEndlessAtlas from "../pool/endless-atlas.js";
 import _poolEndoskeleton from "../pool/endoskeleton.js";
@@ -284,6 +287,7 @@ import _poolFeralProwler from "../pool/feral-prowler.js";
 import _poolFeralRidgewolf from "../pool/feral-ridgewolf.js";
 import _poolFerocity from "../pool/ferocity.js";
 import _poolFerrousLake from "../pool/ferrous-lake.js";
+import _poolFerventChampion from "../pool/fervent-champion.js";
 import _poolFierceGuardianship from "../pool/fierce-guardianship.js";
 import _poolFilth from "../pool/filth.js";
 import _poolFinalShowdown from "../pool/final-showdown.js";
@@ -417,6 +421,7 @@ import _poolKasimirTheLoneWolf from "../pool/kasimir-the-lone-wolf.js";
 import _poolKatildaAndLier from "../pool/katilda-and-lier.js";
 import _poolKeeperOfKookus from "../pool/keeper-of-kookus.js";
 import _poolKelloggDangerousMind from "../pool/kellogg-dangerous-mind.js";
+import _poolKeyToTheSideDoor from "../pool/key-to-the-side-door.js";
 import _poolKhenraScrapper from "../pool/khenra-scrapper.js";
 import _poolKillingGlare from "../pool/killing-glare.js";
 import _poolKingSuleiman from "../pool/king-suleiman.js";
@@ -1070,7 +1075,9 @@ const shard: CardShard = {
     _poolCelestialCrusader,
     _poolCemeteryReaper,
     _poolCephalidColiseum,
+    _poolCephalidIllusionist,
     _poolCerodonYearling,
+    _poolChainOfSilence,
     _poolChampionOfLambholt,
     _poolChampionOfThePerished,
     _poolChanceEncounter,
@@ -1186,6 +1193,7 @@ const shard: CardShard = {
     _poolEleshNornGrandCenobite,
     _poolElvishHunter,
     _poolElvishVisionary,
+    _poolEmilVastlandsRoamer,
     _poolEmpyrialPlate,
     _poolEndlessAtlas,
     _poolEndoskeleton,
@@ -1221,6 +1229,7 @@ const shard: CardShard = {
     _poolFeralRidgewolf,
     _poolFerocity,
     _poolFerrousLake,
+    _poolFerventChampion,
     _poolFierceGuardianship,
     _poolFilth,
     _poolFinalShowdown,
@@ -1354,6 +1363,7 @@ const shard: CardShard = {
     _poolKatildaAndLier,
     _poolKeeperOfKookus,
     _poolKelloggDangerousMind,
+    _poolKeyToTheSideDoor,
     _poolKhenraScrapper,
     _poolKillingGlare,
     _poolKingSuleiman,

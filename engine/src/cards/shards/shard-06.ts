@@ -70,6 +70,7 @@ import _poolBalambTRexaur from "../pool/balamb-t-rexaur.js";
 import _poolBallLightning from "../pool/ball-lightning.js";
 import _poolBalloonPeddler from "../pool/balloon-peddler.js";
 import _poolBalothPrime from "../pool/baloth-prime.js";
+import _poolBamboozle from "../pool/bamboozle.js";
 import _poolBaneslayerAngel from "../pool/baneslayer-angel.js";
 import _poolBanishment from "../pool/banishment.js";
 import _poolBantBattlemage from "../pool/bant-battlemage.js";
@@ -92,6 +93,7 @@ import _poolBestialMenace from "../pool/bestial-menace.js";
 import _poolBifurMelodicRider from "../pool/bifur-melodic-rider.js";
 import _poolBigApple3AM from "../pool/big-apple-3-a-m.js";
 import _poolBladeTribeBerserkers from "../pool/blade-tribe-berserkers.js";
+import _poolBlazingTorch from "../pool/blazing-torch.js";
 import _poolBlessedOrator from "../pool/blessed-orator.js";
 import _poolBlightRot from "../pool/blight-rot.js";
 import _poolBlindCreeper from "../pool/blind-creeper.js";
@@ -294,6 +296,7 @@ import _poolFeastingTrollKing from "../pool/feasting-troll-king.js";
 import _poolFelidarSovereign from "../pool/felidar-sovereign.js";
 import _poolFerociousWerefox from "../pool/ferocious-werefox.js";
 import _poolFesteringNewt from "../pool/festering-newt.js";
+import _poolFighterClass from "../pool/fighter-class.js";
 import _poolFiligreeFracture from "../pool/filigree-fracture.js";
 import _poolFireNationCadets from "../pool/fire-nation-cadets.js";
 import _poolFireNationSoldier from "../pool/fire-nation-soldier.js";
@@ -496,6 +499,7 @@ import _poolMarduBanner from "../pool/mardu-banner.js";
 import _poolMaritimeGuard from "../pool/maritime-guard.js";
 import _poolMarkedByHonor from "../pool/marked-by-honor.js";
 import _poolMayhemPatrol from "../pool/mayhem-patrol.js";
+import _poolMazeOfShadows from "../pool/maze-of-shadows.js";
 import _poolMeadowboon from "../pool/meadowboon.js";
 import _poolMeetingOfMinds from "../pool/meeting-of-minds.js";
 import _poolMeletisCharlatan from "../pool/meletis-charlatan.js";
@@ -770,6 +774,7 @@ import _poolSwordOfLightAndShadow from "../pool/sword-of-light-and-shadow.js";
 import _poolSylvanHierophant from "../pool/sylvan-hierophant.js";
 import _poolSyndicateMessenger from "../pool/syndicate-messenger.js";
 import _poolTackleArtist from "../pool/tackle-artist.js";
+import _poolTaigamSidisisHand from "../pool/taigam-sidisis-hand.js";
 import _poolTakeHeart from "../pool/take-heart.js";
 import _poolTakenumaAbandonedMire from "../pool/takenuma-abandoned-mire.js";
 import _poolTalesOfTheAncestors from "../pool/tales-of-the-ancestors.js";
@@ -819,6 +824,7 @@ import _poolTrashTheTown from "../pool/trash-the-town.js";
 import _poolTraverseTheOutlands from "../pool/traverse-the-outlands.js";
 import _poolTreeMonkey from "../pool/tree-monkey.js";
 import _poolTriceratonCommander from "../pool/triceraton-commander.js";
+import _poolTsabosDecree from "../pool/tsabos-decree.js";
 import _poolTurnAside from "../pool/turn-aside.js";
 import _poolTurnToSlag from "../pool/turn-to-slag.js";
 import _poolTurntimberGrove from "../pool/turntimber-grove.js";
@@ -1001,6 +1007,7 @@ const shard: CardShard = {
     _poolBallLightning,
     _poolBalloonPeddler,
     _poolBalothPrime,
+    _poolBamboozle,
     _poolBaneslayerAngel,
     _poolBanishment,
     _poolBantBattlemage,
@@ -1023,6 +1030,7 @@ const shard: CardShard = {
     _poolBifurMelodicRider,
     _poolBigApple3AM,
     _poolBladeTribeBerserkers,
+    _poolBlazingTorch,
     _poolBlessedOrator,
     _poolBlightRot,
     _poolBlindCreeper,
@@ -1225,6 +1233,7 @@ const shard: CardShard = {
     _poolFelidarSovereign,
     _poolFerociousWerefox,
     _poolFesteringNewt,
+    _poolFighterClass,
     _poolFiligreeFracture,
     _poolFireNationCadets,
     _poolFireNationSoldier,
@@ -1427,6 +1436,7 @@ const shard: CardShard = {
     _poolMaritimeGuard,
     _poolMarkedByHonor,
     _poolMayhemPatrol,
+    _poolMazeOfShadows,
     _poolMeadowboon,
     _poolMeetingOfMinds,
     _poolMeletisCharlatan,
@@ -1701,6 +1711,7 @@ const shard: CardShard = {
     _poolSylvanHierophant,
     _poolSyndicateMessenger,
     _poolTackleArtist,
+    _poolTaigamSidisisHand,
     _poolTakeHeart,
     _poolTakenumaAbandonedMire,
     _poolTalesOfTheAncestors,
@@ -1750,6 +1761,7 @@ const shard: CardShard = {
     _poolTraverseTheOutlands,
     _poolTreeMonkey,
     _poolTriceratonCommander,
+    _poolTsabosDecree,
     _poolTurnAside,
     _poolTurnToSlag,
     _poolTurntimberGrove,

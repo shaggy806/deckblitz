@@ -16,6 +16,7 @@ import _poolAirNomadLegacy from "../pool/air-nomad-legacy.js";
 import _poolAjaniTheGreathearted from "../pool/ajani-the-greathearted.js";
 import _poolAlchemistsRefuge from "../pool/alchemists-refuge.js";
 import _poolAlienInvasion from "../pool/alien-invasion.js";
+import _poolAllFatesScroll from "../pool/all-fates-scroll.js";
 import _poolAmbitionsCost from "../pool/ambitions-cost.js";
 import _poolAnafenzaKinTreeSpirit from "../pool/anafenza-kin-tree-spirit.js";
 import _poolAnaxHardenedInTheForge from "../pool/anax-hardened-in-the-forge.js";
@@ -198,6 +199,7 @@ import _poolDhundOperative from "../pool/dhund-operative.js";
 import _poolDisarm from "../pool/disarm.js";
 import _poolDisciplinedDuelist from "../pool/disciplined-duelist.js";
 import _poolDisinformationCampaign from "../pool/disinformation-campaign.js";
+import _poolDisruptingShoal from "../pool/disrupting-shoal.js";
 import _poolDistinguishedConjurer from "../pool/distinguished-conjurer.js";
 import _poolDisturbingPlot from "../pool/disturbing-plot.js";
 import _poolDiviningDuelist from "../pool/divining-duelist.js";
@@ -487,6 +489,7 @@ import _poolMercilessEviction from "../pool/merciless-eviction.js";
 import _poolMesaUnicorn from "../pool/mesa-unicorn.js";
 import _poolMetamorphicWurm from "../pool/metamorphic-wurm.js";
 import _poolMetathranSoldier from "../pool/metathran-soldier.js";
+import _poolMidnightClock from "../pool/midnight-clock.js";
 import _poolMiirymSentinelWyrm from "../pool/miirym-sentinel-wyrm.js";
 import _poolMinamoSchoolAtWatersEdge from "../pool/minamo-school-at-waters-edge.js";
 import _poolMindlessConscription from "../pool/mindless-conscription.js";
@@ -956,6 +959,7 @@ const shard: CardShard = {
     _poolAjaniTheGreathearted,
     _poolAlchemistsRefuge,
     _poolAlienInvasion,
+    _poolAllFatesScroll,
     _poolAmbitionsCost,
     _poolAnafenzaKinTreeSpirit,
     _poolAnaxHardenedInTheForge,
@@ -1138,6 +1142,7 @@ const shard: CardShard = {
     _poolDisarm,
     _poolDisciplinedDuelist,
     _poolDisinformationCampaign,
+    _poolDisruptingShoal,
     _poolDistinguishedConjurer,
     _poolDisturbingPlot,
     _poolDiviningDuelist,
@@ -1427,6 +1432,7 @@ const shard: CardShard = {
     _poolMesaUnicorn,
     _poolMetamorphicWurm,
     _poolMetathranSoldier,
+    _poolMidnightClock,
     _poolMiirymSentinelWyrm,
     _poolMinamoSchoolAtWatersEdge,
     _poolMindlessConscription,

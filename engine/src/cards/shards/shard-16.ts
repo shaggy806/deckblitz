@@ -370,6 +370,7 @@ import _poolHearthElemental from "../pool/hearth-elemental.js";
 import _poolHearthcageGiant from "../pool/hearthcage-giant.js";
 import _poolHeartstone from "../pool/heartstone.js";
 import _poolHeatWave from "../pool/heat-wave.js";
+import _poolHelitrooper from "../pool/helitrooper.js";
 import _poolHellfireMongrel from "../pool/hellfire-mongrel.js";
 import _poolHematiteGolem from "../pool/hematite-golem.js";
 import _poolHewTheEntwood from "../pool/hew-the-entwood.js";
@@ -766,6 +767,7 @@ import _poolSphinxOfTheGuildpact from "../pool/sphinx-of-the-guildpact.js";
 import _poolSphinxsDisciple from "../pool/sphinxs-disciple.js";
 import _poolSpinedKarok from "../pool/spined-karok.js";
 import _poolSpinningWheel from "../pool/spinning-wheel.js";
+import _poolSpitefulRepossession from "../pool/spiteful-repossession.js";
 import _poolSpitefulVisions from "../pool/spiteful-visions.js";
 import _poolSprout from "../pool/sprout.js";
 import _poolSpurnmageAdvocate from "../pool/spurnmage-advocate.js";
@@ -882,6 +884,7 @@ import _poolTunnelingGeopede from "../pool/tunneling-geopede.js";
 import _poolTurnStones from "../pool/turn-stones.js";
 import _poolTurnToMist from "../pool/turn-to-mist.js";
 import _poolTurtleSeals from "../pool/turtle-seals.js";
+import _poolTurtlesInTime from "../pool/turtles-in-time.js";
 import _poolTwinSilkSpider from "../pool/twin-silk-spider.js";
 import _poolTwinscrollShaman from "../pool/twinscroll-shaman.js";
 import _poolTwistedExperiment from "../pool/twisted-experiment.js";
@@ -1379,6 +1382,7 @@ const shard: CardShard = {
     _poolHearthcageGiant,
     _poolHeartstone,
     _poolHeatWave,
+    _poolHelitrooper,
     _poolHellfireMongrel,
     _poolHematiteGolem,
     _poolHewTheEntwood,
@@ -1775,6 +1779,7 @@ const shard: CardShard = {
     _poolSphinxsDisciple,
     _poolSpinedKarok,
     _poolSpinningWheel,
+    _poolSpitefulRepossession,
     _poolSpitefulVisions,
     _poolSprout,
     _poolSpurnmageAdvocate,
@@ -1891,6 +1896,7 @@ const shard: CardShard = {
     _poolTurnStones,
     _poolTurnToMist,
     _poolTurtleSeals,
+    _poolTurtlesInTime,
     _poolTwinSilkSpider,
     _poolTwinscrollShaman,
     _poolTwistedExperiment,

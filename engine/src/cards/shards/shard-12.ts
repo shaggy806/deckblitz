@@ -67,6 +67,7 @@ import _poolBattleBrawler from "../pool/battle-brawler.js";
 import _poolBattlegroundGeist from "../pool/battleground-geist.js";
 import _poolBattlewiseHoplite from "../pool/battlewise-hoplite.js";
 import _poolBayekOfSiwa from "../pool/bayek-of-siwa.js";
+import _poolBeaconBolt from "../pool/beacon-bolt.js";
 import _poolBearerOfGlory from "../pool/bearer-of-glory.js";
 import _poolBeastsOfBogardan from "../pool/beasts-of-bogardan.js";
 import _poolBedazzle from "../pool/bedazzle.js";
@@ -245,6 +246,7 @@ import _poolElvishHerder from "../pool/elvish-herder.js";
 import _poolEmberShot from "../pool/ember-shot.js";
 import _poolEmberethPaladin from "../pool/embereth-paladin.js";
 import _poolEmbodimentOfAgonies from "../pool/embodiment-of-agonies.js";
+import _poolEmergencyPowers from "../pool/emergency-powers.js";
 import _poolEmpressGalina from "../pool/empress-galina.js";
 import _poolEnchantedBeing from "../pool/enchanted-being.js";
 import _poolEncroach from "../pool/encroach.js";
@@ -364,6 +366,7 @@ import _poolGrimRoustabout from "../pool/grim-roustabout.js";
 import _poolGroomsFinery from "../pool/grooms-finery.js";
 import _poolGrotagBugCatcher from "../pool/grotag-bug-catcher.js";
 import _poolGrowthCycle from "../pool/growth-cycle.js";
+import _poolGrubsCommand from "../pool/grubs-command.js";
 import _poolGruesomeScourger from "../pool/gruesome-scourger.js";
 import _poolGrunnTheLonelyKing from "../pool/grunn-the-lonely-king.js";
 import _poolGuerrillaGorilla from "../pool/guerrilla-gorilla.js";
@@ -481,6 +484,7 @@ import _poolMaskOfTheMimic from "../pool/mask-of-the-mimic.js";
 import _poolMassacre from "../pool/massacre.js";
 import _poolMasterfulReplication from "../pool/masterful-replication.js";
 import _poolMasticore from "../pool/masticore.js";
+import _poolMatzalantliTheGreatDoor from "../pool/matzalantli-the-great-door.js";
 import _poolMelokuTheCloudedMirror from "../pool/meloku-the-clouded-mirror.js";
 import _poolMendingTouch from "../pool/mending-touch.js";
 import _poolMentorsGuidance from "../pool/mentors-guidance.js";
@@ -631,10 +635,12 @@ import _poolRecklessWurm from "../pool/reckless-wurm.js";
 import _poolReclaim from "../pool/reclaim.js";
 import _poolReduceToDreams from "../pool/reduce-to-dreams.js";
 import _poolRelentlessRats from "../pool/relentless-rats.js";
+import _poolRelentlessXAtm092 from "../pool/relentless-x-atm092.js";
 import _poolRelicRobber from "../pool/relic-robber.js";
 import _poolRemnantOfTheRisingStar from "../pool/remnant-of-the-rising-star.js";
 import _poolRescue from "../pool/rescue.js";
 import _poolResearchThief from "../pool/research-thief.js";
+import _poolResearch from "../pool/research.js";
 import _poolRestlessDead from "../pool/restless-dead.js";
 import _poolReveredUnicorn from "../pool/revered-unicorn.js";
 import _poolRevitalize from "../pool/revitalize.js";
@@ -777,6 +783,7 @@ import _poolSunscapeFamiliar from "../pool/sunscape-familiar.js";
 import _poolSunstarLightsmith from "../pool/sunstar-lightsmith.js";
 import _poolSupernaturalStamina from "../pool/supernatural-stamina.js";
 import _poolSurrakTheHuntCaller from "../pool/surrak-the-hunt-caller.js";
+import _poolSurveyorsScope from "../pool/surveyors-scope.js";
 import _poolSusurianVoidborn from "../pool/susurian-voidborn.js";
 import _poolSwayOfTheStars from "../pool/sway-of-the-stars.js";
 import _poolSwordCoastSailor from "../pool/sword-coast-sailor.js";
@@ -997,6 +1004,7 @@ const shard: CardShard = {
     _poolBattlegroundGeist,
     _poolBattlewiseHoplite,
     _poolBayekOfSiwa,
+    _poolBeaconBolt,
     _poolBearerOfGlory,
     _poolBeastsOfBogardan,
     _poolBedazzle,
@@ -1175,6 +1183,7 @@ const shard: CardShard = {
     _poolEmberShot,
     _poolEmberethPaladin,
     _poolEmbodimentOfAgonies,
+    _poolEmergencyPowers,
     _poolEmpressGalina,
     _poolEnchantedBeing,
     _poolEncroach,
@@ -1294,6 +1303,7 @@ const shard: CardShard = {
     _poolGroomsFinery,
     _poolGrotagBugCatcher,
     _poolGrowthCycle,
+    _poolGrubsCommand,
     _poolGruesomeScourger,
     _poolGrunnTheLonelyKing,
     _poolGuerrillaGorilla,
@@ -1411,6 +1421,7 @@ const shard: CardShard = {
     _poolMassacre,
     _poolMasterfulReplication,
     _poolMasticore,
+    _poolMatzalantliTheGreatDoor,
     _poolMelokuTheCloudedMirror,
     _poolMendingTouch,
     _poolMentorsGuidance,
@@ -1561,10 +1572,12 @@ const shard: CardShard = {
     _poolReclaim,
     _poolReduceToDreams,
     _poolRelentlessRats,
+    _poolRelentlessXAtm092,
     _poolRelicRobber,
     _poolRemnantOfTheRisingStar,
     _poolRescue,
     _poolResearchThief,
+    _poolResearch,
     _poolRestlessDead,
     _poolReveredUnicorn,
     _poolRevitalize,
@@ -1707,6 +1720,7 @@ const shard: CardShard = {
     _poolSunstarLightsmith,
     _poolSupernaturalStamina,
     _poolSurrakTheHuntCaller,
+    _poolSurveyorsScope,
     _poolSusurianVoidborn,
     _poolSwayOfTheStars,
     _poolSwordCoastSailor,

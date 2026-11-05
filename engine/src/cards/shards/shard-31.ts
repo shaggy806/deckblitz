@@ -224,6 +224,7 @@ import _poolDireUndercurrents from "../pool/dire-undercurrents.js";
 import _poolDiregrafEscort from "../pool/diregraf-escort.js";
 import _poolDirgeBat from "../pool/dirge-bat.js";
 import _poolDiscerningPeddler from "../pool/discerning-peddler.js";
+import _poolDiscipleOfDeceit from "../pool/disciple-of-deceit.js";
 import _poolDiscreetRetreat from "../pool/discreet-retreat.js";
 import _poolDisturbedSlumber from "../pool/disturbed-slumber.js";
 import _poolDivineArrow from "../pool/divine-arrow.js";
@@ -435,6 +436,7 @@ import _poolInfiniteHourglass from "../pool/infinite-hourglass.js";
 import _poolInfuseWithTheElements from "../pool/infuse-with-the-elements.js";
 import _poolInheritedEnvelope from "../pool/inherited-envelope.js";
 import _poolInheritedFiend from "../pool/inherited-fiend.js";
+import _poolInquisitorsSnare from "../pool/inquisitors-snare.js";
 import _poolInsatiableHemophage from "../pool/insatiable-hemophage.js";
 import _poolInspirit from "../pool/inspirit.js";
 import _poolInterfaceAce from "../pool/interface-ace.js";
@@ -452,6 +454,7 @@ import _poolItThatBetrays from "../pool/it-that-betrays.js";
 import _poolIthilienKingfisher from "../pool/ithilien-kingfisher.js";
 import _poolIymrithDesertDoom from "../pool/iymrith-desert-doom.js";
 import _poolIzzetSignet from "../pool/izzet-signet.js";
+import _poolJaceTheLivingGuildpact from "../pool/jace-the-living-guildpact.js";
 import _poolJerrardOfTheClosedFist from "../pool/jerrard-of-the-closed-fist.js";
 import _poolJeskaiStudent from "../pool/jeskai-student.js";
 import _poolJhessianBalmgiver from "../pool/jhessian-balmgiver.js";
@@ -791,6 +794,7 @@ import _poolSpelunking from "../pool/spelunking.js";
 import _poolSphereOfReason from "../pool/sphere-of-reason.js";
 import _poolSphinxOfJwarIsle from "../pool/sphinx-of-jwar-isle.js";
 import _poolSpinelessThug from "../pool/spineless-thug.js";
+import _poolSpirespine from "../pool/spirespine.js";
 import _poolSpitfireBastion from "../pool/spitfire-bastion.js";
 import _poolSpittingHydra from "../pool/spitting-hydra.js";
 import _poolSpreadingInsurrection from "../pool/spreading-insurrection.js";
@@ -912,6 +916,7 @@ import _poolVampireCutthroat from "../pool/vampire-cutthroat.js";
 import _poolVampiresBite from "../pool/vampires-bite.js";
 import _poolVanguardSuppressor from "../pool/vanguard-suppressor.js";
 import _poolVaultOfCatlacan from "../pool/vault-of-catlacan.js";
+import _poolVaynesTreachery from "../pool/vaynes-treachery.js";
 import _poolVectisAgents from "../pool/vectis-agents.js";
 import _poolVengefulCreeper from "../pool/vengeful-creeper.js";
 import _poolVenomousDragonfly from "../pool/venomous-dragonfly.js";
@@ -1218,6 +1223,7 @@ const shard: CardShard = {
     _poolDiregrafEscort,
     _poolDirgeBat,
     _poolDiscerningPeddler,
+    _poolDiscipleOfDeceit,
     _poolDiscreetRetreat,
     _poolDisturbedSlumber,
     _poolDivineArrow,
@@ -1429,6 +1435,7 @@ const shard: CardShard = {
     _poolInfuseWithTheElements,
     _poolInheritedEnvelope,
     _poolInheritedFiend,
+    _poolInquisitorsSnare,
     _poolInsatiableHemophage,
     _poolInspirit,
     _poolInterfaceAce,
@@ -1446,6 +1453,7 @@ const shard: CardShard = {
     _poolIthilienKingfisher,
     _poolIymrithDesertDoom,
     _poolIzzetSignet,
+    _poolJaceTheLivingGuildpact,
     _poolJerrardOfTheClosedFist,
     _poolJeskaiStudent,
     _poolJhessianBalmgiver,
@@ -1785,6 +1793,7 @@ const shard: CardShard = {
     _poolSphereOfReason,
     _poolSphinxOfJwarIsle,
     _poolSpinelessThug,
+    _poolSpirespine,
     _poolSpitfireBastion,
     _poolSpittingHydra,
     _poolSpreadingInsurrection,
@@ -1906,6 +1915,7 @@ const shard: CardShard = {
     _poolVampiresBite,
     _poolVanguardSuppressor,
     _poolVaultOfCatlacan,
+    _poolVaynesTreachery,
     _poolVectisAgents,
     _poolVengefulCreeper,
     _poolVenomousDragonfly,

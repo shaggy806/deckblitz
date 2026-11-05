@@ -53,6 +53,7 @@ import _poolAvalanche from "../pool/avalanche.js";
 import _poolAvenHeartstabber from "../pool/aven-heartstabber.js";
 import _poolAvengersDisassembled from "../pool/avengers-disassembled.js";
 import _poolAvengersQuinjet from "../pool/avengers-quinjet.js";
+import _poolAyeshaTanakaArmorer from "../pool/ayesha-tanaka-armorer.js";
 import _poolAysenAbbey from "../pool/aysen-abbey.js";
 import _poolBacklash from "../pool/backlash.js";
 import _poolBadlands from "../pool/badlands.js";
@@ -70,6 +71,7 @@ import _poolBaseballBat from "../pool/baseball-bat.js";
 import _poolBasrisSolidarity from "../pool/basris-solidarity.js";
 import _poolBattleMenu from "../pool/battle-menu.js";
 import _poolBattlefieldForge from "../pool/battlefield-forge.js";
+import _poolBatwingBrume from "../pool/batwing-brume.js";
 import _poolBeastriderVanguard from "../pool/beastrider-vanguard.js";
 import _poolBelligerentHatchling from "../pool/belligerent-hatchling.js";
 import _poolBenalishVeteran from "../pool/benalish-veteran.js";
@@ -168,6 +170,7 @@ import _poolCrownOfAscension from "../pool/crown-of-ascension.js";
 import _poolCrushContraband from "../pool/crush-contraband.js";
 import _poolCrypsis from "../pool/crypsis.js";
 import _poolCryptCobra from "../pool/crypt-cobra.js";
+import _poolCryptLurker from "../pool/crypt-lurker.js";
 import _poolCryptOfAgadeem from "../pool/crypt-of-agadeem.js";
 import _poolCrystallineSliver from "../pool/crystalline-sliver.js";
 import _poolCultConscript from "../pool/cult-conscript.js";
@@ -207,6 +210,7 @@ import _poolDenOfTheBugbear from "../pool/den-of-the-bugbear.js";
 import _poolDeprive from "../pool/deprive.js";
 import _poolDescendantOfMasumaro from "../pool/descendant-of-masumaro.js";
 import _poolDesertWarfare from "../pool/desert-warfare.js";
+import _poolDevelopment from "../pool/development.js";
 import _poolDiamondMare from "../pool/diamond-mare.js";
 import _poolDictateOfErebos from "../pool/dictate-of-erebos.js";
 import _poolDigSiteInventory from "../pool/dig-site-inventory.js";
@@ -393,6 +397,7 @@ import _poolIndathaCrystal from "../pool/indatha-crystal.js";
 import _poolIndestructibility from "../pool/indestructibility.js";
 import _poolInescapableBlaze from "../pool/inescapable-blaze.js";
 import _poolInescapableBrute from "../pool/inescapable-brute.js";
+import _poolInfernalSovereign from "../pool/infernal-sovereign.js";
 import _poolInformationDealer from "../pool/information-dealer.js";
 import _poolInspiringRoar from "../pool/inspiring-roar.js";
 import _poolInvocationOfSaintTraft from "../pool/invocation-of-saint-traft.js";
@@ -571,9 +576,11 @@ import _poolPlagueMare from "../pool/plague-mare.js";
 import _poolPlagueNurse from "../pool/plague-nurse.js";
 import _poolPlanarBridge from "../pool/planar-bridge.js";
 import _poolPlaneswalkersMirth from "../pool/planeswalkers-mirth.js";
+import _poolPlanewideCelebration from "../pool/planewide-celebration.js";
 import _poolPlatedSpider from "../pool/plated-spider.js";
 import _poolPoetsQuill from "../pool/poets-quill.js";
 import _poolPoisonTheWaters from "../pool/poison-the-waters.js";
+import _poolPortalOfSanctuary from "../pool/portal-of-sanctuary.js";
 import _poolPossessedAven from "../pool/possessed-aven.js";
 import _poolPouncingShoreshark from "../pool/pouncing-shoreshark.js";
 import _poolPowerbalance from "../pool/powerbalance.js";
@@ -986,6 +993,7 @@ const shard: CardShard = {
     _poolAvenHeartstabber,
     _poolAvengersDisassembled,
     _poolAvengersQuinjet,
+    _poolAyeshaTanakaArmorer,
     _poolAysenAbbey,
     _poolBacklash,
     _poolBadlands,
@@ -1003,6 +1011,7 @@ const shard: CardShard = {
     _poolBasrisSolidarity,
     _poolBattleMenu,
     _poolBattlefieldForge,
+    _poolBatwingBrume,
     _poolBeastriderVanguard,
     _poolBelligerentHatchling,
     _poolBenalishVeteran,
@@ -1101,6 +1110,7 @@ const shard: CardShard = {
     _poolCrushContraband,
     _poolCrypsis,
     _poolCryptCobra,
+    _poolCryptLurker,
     _poolCryptOfAgadeem,
     _poolCrystallineSliver,
     _poolCultConscript,
@@ -1140,6 +1150,7 @@ const shard: CardShard = {
     _poolDeprive,
     _poolDescendantOfMasumaro,
     _poolDesertWarfare,
+    _poolDevelopment,
     _poolDiamondMare,
     _poolDictateOfErebos,
     _poolDigSiteInventory,
@@ -1326,6 +1337,7 @@ const shard: CardShard = {
     _poolIndestructibility,
     _poolInescapableBlaze,
     _poolInescapableBrute,
+    _poolInfernalSovereign,
     _poolInformationDealer,
     _poolInspiringRoar,
     _poolInvocationOfSaintTraft,
@@ -1504,9 +1516,11 @@ const shard: CardShard = {
     _poolPlagueNurse,
     _poolPlanarBridge,
     _poolPlaneswalkersMirth,
+    _poolPlanewideCelebration,
     _poolPlatedSpider,
     _poolPoetsQuill,
     _poolPoisonTheWaters,
+    _poolPortalOfSanctuary,
     _poolPossessedAven,
     _poolPouncingShoreshark,
     _poolPowerbalance,

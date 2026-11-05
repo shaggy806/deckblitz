@@ -227,6 +227,7 @@ import _poolDireStrainDemolisher from "../pool/dire-strain-demolisher.js";
 import _poolDismember from "../pool/dismember.js";
 import _poolDiveDown from "../pool/dive-down.js";
 import _poolDiverSkaab from "../pool/diver-skaab.js";
+import _poolDokuchiSilencer from "../pool/dokuchi-silencer.js";
 import _poolDoomfall from "../pool/doomfall.js";
 import _poolDormantGrove from "../pool/dormant-grove.js";
 import _poolDragonclawStrike from "../pool/dragonclaw-strike.js";
@@ -442,6 +443,7 @@ import _poolInvasionOfMoag from "../pool/invasion-of-moag.js";
 import _poolInvasionOfShandalar from "../pool/invasion-of-shandalar.js";
 import _poolInvasiveSurgery from "../pool/invasive-surgery.js";
 import _poolInventorsApprentice from "../pool/inventors-apprentice.js";
+import _poolInvocationOfTheFounders from "../pool/invocation-of-the-founders.js";
 import _poolInvokeTheDivine from "../pool/invoke-the-divine.js";
 import _poolIonize from "../pool/ionize.js";
 import _poolIrohTeaMaster from "../pool/iroh-tea-master.js";
@@ -672,6 +674,7 @@ import _poolRushingTideZubera from "../pool/rushing-tide-zubera.js";
 import _poolRustHarvester from "../pool/rust-harvester.js";
 import _poolRuthlessRadrat from "../pool/ruthless-radrat.js";
 import _poolSageOfTheFang from "../pool/sage-of-the-fang.js";
+import _poolSailorsBane from "../pool/sailors-bane.js";
 import _poolSaltFlats from "../pool/salt-flats.js";
 import _poolSamutsSprint from "../pool/samuts-sprint.js";
 import _poolSandSquid from "../pool/sand-squid.js";
@@ -764,6 +767,7 @@ import _poolSteamcoreWeird from "../pool/steamcore-weird.js";
 import _poolSteelformSliver from "../pool/steelform-sliver.js";
 import _poolStegronTheDinosaurMan from "../pool/stegron-the-dinosaur-man.js";
 import _poolStolenStarkTech from "../pool/stolen-stark-tech.js";
+import _poolStompedByTheFoot from "../pool/stomped-by-the-foot.js";
 import _poolStoneIdolGenerator from "../pool/stone-idol-generator.js";
 import _poolStonespeakerCrystal from "../pool/stonespeaker-crystal.js";
 import _poolStonySilence from "../pool/stony-silence.js";
@@ -817,6 +821,7 @@ import _poolThrivingGrubs from "../pool/thriving-grubs.js";
 import _poolThrowFromTheSaddle from "../pool/throw-from-the-saddle.js";
 import _poolTiamat from "../pool/tiamat.js";
 import _poolTillerEngine from "../pool/tiller-engine.js";
+import _poolTimeSpiral from "../pool/time-spiral.js";
 import _poolTinderFarm from "../pool/tinder-farm.js";
 import _poolTitanOfLittjara from "../pool/titan-of-littjara.js";
 import _poolTithebearerGiant from "../pool/tithebearer-giant.js";
@@ -1156,6 +1161,7 @@ const shard: CardShard = {
     _poolDismember,
     _poolDiveDown,
     _poolDiverSkaab,
+    _poolDokuchiSilencer,
     _poolDoomfall,
     _poolDormantGrove,
     _poolDragonclawStrike,
@@ -1371,6 +1377,7 @@ const shard: CardShard = {
     _poolInvasionOfShandalar,
     _poolInvasiveSurgery,
     _poolInventorsApprentice,
+    _poolInvocationOfTheFounders,
     _poolInvokeTheDivine,
     _poolIonize,
     _poolIrohTeaMaster,
@@ -1601,6 +1608,7 @@ const shard: CardShard = {
     _poolRustHarvester,
     _poolRuthlessRadrat,
     _poolSageOfTheFang,
+    _poolSailorsBane,
     _poolSaltFlats,
     _poolSamutsSprint,
     _poolSandSquid,
@@ -1693,6 +1701,7 @@ const shard: CardShard = {
     _poolSteelformSliver,
     _poolStegronTheDinosaurMan,
     _poolStolenStarkTech,
+    _poolStompedByTheFoot,
     _poolStoneIdolGenerator,
     _poolStonespeakerCrystal,
     _poolStonySilence,
@@ -1746,6 +1755,7 @@ const shard: CardShard = {
     _poolThrowFromTheSaddle,
     _poolTiamat,
     _poolTillerEngine,
+    _poolTimeSpiral,
     _poolTinderFarm,
     _poolTitanOfLittjara,
     _poolTithebearerGiant,

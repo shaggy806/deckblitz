@@ -69,6 +69,7 @@ import _poolBestialIncursion from "../pool/bestial-incursion.js";
 import _poolBetrayal from "../pool/betrayal.js";
 import _poolBlackMarketConnections from "../pool/black-market-connections.js";
 import _poolBlasphemousEdict from "../pool/blasphemous-edict.js";
+import _poolBlazingShoal from "../pool/blazing-shoal.js";
 import _poolBlessedBreath from "../pool/blessed-breath.js";
 import _poolBlightGrenade from "../pool/blight-grenade.js";
 import _poolBloatedContaminator from "../pool/bloated-contaminator.js";
@@ -304,6 +305,7 @@ import _poolGleefulSabotage from "../pool/gleeful-sabotage.js";
 import _poolGliderKids from "../pool/glider-kids.js";
 import _poolGlintNestCrane from "../pool/glint-nest-crane.js";
 import _poolGlintWeaver from "../pool/glint-weaver.js";
+import _poolGlitteringWish from "../pool/glittering-wish.js";
 import _poolGloriousCharge from "../pool/glorious-charge.js";
 import _poolGloriousProtector from "../pool/glorious-protector.js";
 import _poolGnarledProfessor from "../pool/gnarled-professor.js";
@@ -569,6 +571,7 @@ import _poolProclamationOfRebirth from "../pool/proclamation-of-rebirth.js";
 import _poolProctorsGaze from "../pool/proctors-gaze.js";
 import _poolPromisingStairs from "../pool/promising-stairs.js";
 import _poolPromisingVein from "../pool/promising-vein.js";
+import _poolProudWildbonder from "../pool/proud-wildbonder.js";
 import _poolPsychicSpear from "../pool/psychic-spear.js";
 import _poolPullFromTheDeep from "../pool/pull-from-the-deep.js";
 import _poolPulseOfTheDross from "../pool/pulse-of-the-dross.js";
@@ -964,6 +967,7 @@ const shard: CardShard = {
     _poolBetrayal,
     _poolBlackMarketConnections,
     _poolBlasphemousEdict,
+    _poolBlazingShoal,
     _poolBlessedBreath,
     _poolBlightGrenade,
     _poolBloatedContaminator,
@@ -1199,6 +1203,7 @@ const shard: CardShard = {
     _poolGliderKids,
     _poolGlintNestCrane,
     _poolGlintWeaver,
+    _poolGlitteringWish,
     _poolGloriousCharge,
     _poolGloriousProtector,
     _poolGnarledProfessor,
@@ -1464,6 +1469,7 @@ const shard: CardShard = {
     _poolProctorsGaze,
     _poolPromisingStairs,
     _poolPromisingVein,
+    _poolProudWildbonder,
     _poolPsychicSpear,
     _poolPullFromTheDeep,
     _poolPulseOfTheDross,

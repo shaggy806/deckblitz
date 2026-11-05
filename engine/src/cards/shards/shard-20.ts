@@ -184,6 +184,7 @@ import _poolCreepingCorrosion from "../pool/creeping-corrosion.js";
 import _poolCreepingRenaissance from "../pool/creeping-renaissance.js";
 import _poolCrestedSunmare from "../pool/crested-sunmare.js";
 import _poolCrimsonCowlMasterOfEvil from "../pool/crimson-cowl-master-of-evil.js";
+import _poolCrosisThePurger from "../pool/crosis-the-purger.js";
 import _poolCrosstownCourier from "../pool/crosstown-courier.js";
 import _poolCrosswayTroublemakers from "../pool/crossway-troublemakers.js";
 import _poolCrowdsFavor from "../pool/crowds-favor.js";
@@ -356,6 +357,7 @@ import _poolGollumPatientPlotter from "../pool/gollum-patient-plotter.js";
 import _poolGoodFortuneUnicorn from "../pool/good-fortune-unicorn.js";
 import _poolGoretuskFirebeast from "../pool/goretusk-firebeast.js";
 import _poolGranGran from "../pool/gran-gran.js";
+import _poolGranted from "../pool/granted.js";
 import _poolGravedigger from "../pool/gravedigger.js";
 import _poolGraveyardMarshal from "../pool/graveyard-marshal.js";
 import _poolGrazilaxxIllithidScholar from "../pool/grazilaxx-illithid-scholar.js";
@@ -435,6 +437,7 @@ import _poolJawboneSkulkin from "../pool/jawbone-skulkin.js";
 import _poolJaxisTheTroublemaker from "../pool/jaxis-the-troublemaker.js";
 import _poolJhessianInfiltrator from "../pool/jhessian-infiltrator.js";
 import _poolJoltedAwake from "../pool/jolted-awake.js";
+import _poolJourneyOn from "../pool/journey-on.js";
 import _poolJoyousRespite from "../pool/joyous-respite.js";
 import _poolJudgmentBolt from "../pool/judgment-bolt.js";
 import _poolJuniperOrderRootweaver from "../pool/juniper-order-rootweaver.js";
@@ -715,6 +718,7 @@ import _poolSeismicShift from "../pool/seismic-shift.js";
 import _poolSelectForInspection from "../pool/select-for-inspection.js";
 import _poolSelhoffOccultist from "../pool/selhoff-occultist.js";
 import _poolSerendibEfreet from "../pool/serendib-efreet.js";
+import _poolSerumCoreChimera from "../pool/serum-core-chimera.js";
 import _poolServe from "../pool/serve.js";
 import _poolSevinnesReclamation from "../pool/sevinnes-reclamation.js";
 import _poolShadowsOfThePast from "../pool/shadows-of-the-past.js";
@@ -1174,6 +1178,7 @@ const shard: CardShard = {
     _poolCreepingRenaissance,
     _poolCrestedSunmare,
     _poolCrimsonCowlMasterOfEvil,
+    _poolCrosisThePurger,
     _poolCrosstownCourier,
     _poolCrosswayTroublemakers,
     _poolCrowdsFavor,
@@ -1346,6 +1351,7 @@ const shard: CardShard = {
     _poolGoodFortuneUnicorn,
     _poolGoretuskFirebeast,
     _poolGranGran,
+    _poolGranted,
     _poolGravedigger,
     _poolGraveyardMarshal,
     _poolGrazilaxxIllithidScholar,
@@ -1425,6 +1431,7 @@ const shard: CardShard = {
     _poolJaxisTheTroublemaker,
     _poolJhessianInfiltrator,
     _poolJoltedAwake,
+    _poolJourneyOn,
     _poolJoyousRespite,
     _poolJudgmentBolt,
     _poolJuniperOrderRootweaver,
@@ -1705,6 +1712,7 @@ const shard: CardShard = {
     _poolSelectForInspection,
     _poolSelhoffOccultist,
     _poolSerendibEfreet,
+    _poolSerumCoreChimera,
     _poolServe,
     _poolSevinnesReclamation,
     _poolShadowsOfThePast,

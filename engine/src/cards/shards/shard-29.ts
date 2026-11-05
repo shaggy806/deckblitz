@@ -524,6 +524,7 @@ import _poolOrcishMedicine from "../pool/orcish-medicine.js";
 import _poolOrcishSpy from "../pool/orcish-spy.js";
 import _poolOrdealOfThassa from "../pool/ordeal-of-thassa.js";
 import _poolOreskosSunGuide from "../pool/oreskos-sun-guide.js";
+import _poolOriginOfBlackWidow from "../pool/origin-of-black-widow.js";
 import _poolOriginSpellbomb from "../pool/origin-spellbomb.js";
 import _poolOrimsCure from "../pool/orims-cure.js";
 import _poolOsaiVultures from "../pool/osai-vultures.js";
@@ -654,6 +655,7 @@ import _poolSandstormVerge from "../pool/sandstorm-verge.js";
 import _poolSarythTheVipersFang from "../pool/saryth-the-vipers-fang.js";
 import _poolSavaiTriome from "../pool/savai-triome.js";
 import _poolSavantiRomeroTimesExile from "../pool/savanti-romero-times-exile.js";
+import _poolScarabOfTheUnseen from "../pool/scarab-of-the-unseen.js";
 import _poolScarlandThrinax from "../pool/scarland-thrinax.js";
 import _poolScatterArc from "../pool/scatter-arc.js";
 import _poolScatterRay from "../pool/scatter-ray.js";
@@ -1460,6 +1462,7 @@ const shard: CardShard = {
     _poolOrcishSpy,
     _poolOrdealOfThassa,
     _poolOreskosSunGuide,
+    _poolOriginOfBlackWidow,
     _poolOriginSpellbomb,
     _poolOrimsCure,
     _poolOsaiVultures,
@@ -1590,6 +1593,7 @@ const shard: CardShard = {
     _poolSarythTheVipersFang,
     _poolSavaiTriome,
     _poolSavantiRomeroTimesExile,
+    _poolScarabOfTheUnseen,
     _poolScarlandThrinax,
     _poolScatterArc,
     _poolScatterRay,

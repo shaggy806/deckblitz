@@ -283,6 +283,7 @@ import _poolEternalOfHarshTruths from "../pool/eternal-of-harsh-truths.js";
 import _poolEusocialEngineering from "../pool/eusocial-engineering.js";
 import _poolEutropiaTheTwiceFavored from "../pool/eutropia-the-twice-favored.js";
 import _poolEvangelOfHeliod from "../pool/evangel-of-heliod.js";
+import _poolEvilTwin from "../pool/evil-twin.js";
 import _poolExemplarOfStrength from "../pool/exemplar-of-strength.js";
 import _poolExperimentTwelve from "../pool/experiment-twelve.js";
 import _poolExploreTheVastlands from "../pool/explore-the-vastlands.js";
@@ -335,6 +336,7 @@ import _poolFractalAnomaly from "../pool/fractal-anomaly.js";
 import _poolFractalSummoning from "../pool/fractal-summoning.js";
 import _poolFracturingGust from "../pool/fracturing-gust.js";
 import _poolFugue from "../pool/fugue.js";
+import _poolFungalColossus from "../pool/fungal-colossus.js";
 import _poolFurtiveCourier from "../pool/furtive-courier.js";
 import _poolFuryOfTheHorde from "../pool/fury-of-the-horde.js";
 import _poolGaladrielOfLothlorien from "../pool/galadriel-of-lothlorien.js";
@@ -472,6 +474,7 @@ import _poolKardurDoomscourge from "../pool/kardur-doomscourge.js";
 import _poolKarnArgentDefender from "../pool/karn-argent-defender.js";
 import _poolKarokWrangler from "../pool/karok-wrangler.js";
 import _poolKataraSeekingRevenge from "../pool/katara-seeking-revenge.js";
+import _poolKayaOrzhovUsurper from "../pool/kaya-orzhov-usurper.js";
 import _poolKeldonMantle from "../pool/keldon-mantle.js";
 import _poolKelpieGuide from "../pool/kelpie-guide.js";
 import _poolKelsienThePlague from "../pool/kelsien-the-plague.js";
@@ -659,6 +662,7 @@ import _poolPoisonersApprentice from "../pool/poisoners-apprentice.js";
 import _poolPolarKraken from "../pool/polar-kraken.js";
 import _poolPolymorph from "../pool/polymorph.js";
 import _poolPolyraptor from "../pool/polyraptor.js";
+import _poolPortent from "../pool/portent.js";
 import _poolPraetorsGrasp from "../pool/praetors-grasp.js";
 import _poolPrideOfConquerors from "../pool/pride-of-conquerors.js";
 import _poolPrinceOfThralls from "../pool/prince-of-thralls.js";
@@ -858,6 +862,7 @@ import _poolTeleportal from "../pool/teleportal.js";
 import _poolTezzeretsGatebreaker from "../pool/tezzerets-gatebreaker.js";
 import _poolTheBalrogFlameOfUdun from "../pool/the-balrog-flame-of-udun.js";
 import _poolTheDestinedWhiteMage from "../pool/the-destined-white-mage.js";
+import _poolTheGreatAurora from "../pool/the-great-aurora.js";
 import _poolTheLegendOfYangchen from "../pool/the-legend-of-yangchen.js";
 import _poolTheMendingOfDominaria from "../pool/the-mending-of-dominaria.js";
 import _poolTheMountainKingsReturn from "../pool/the-mountain-kings-return.js";
@@ -959,6 +964,8 @@ import _poolWitchsCottage from "../pool/witchs-cottage.js";
 import _poolWoodlandChangeling from "../pool/woodland-changeling.js";
 import _poolWordOfBinding from "../pool/word-of-binding.js";
 import _poolWreckAndRebuild from "../pool/wreck-and-rebuild.js";
+import _poolWretchedConfluence from "../pool/wretched-confluence.js";
+import _poolWuSpy from "../pool/wu-spy.js";
 import _poolWyluliWolf from "../pool/wyluli-wolf.js";
 import _poolYathanTombguard from "../pool/yathan-tombguard.js";
 import _poolYavimayaWurm from "../pool/yavimaya-wurm.js";
@@ -1271,6 +1278,7 @@ const shard: CardShard = {
     _poolEusocialEngineering,
     _poolEutropiaTheTwiceFavored,
     _poolEvangelOfHeliod,
+    _poolEvilTwin,
     _poolExemplarOfStrength,
     _poolExperimentTwelve,
     _poolExploreTheVastlands,
@@ -1323,6 +1331,7 @@ const shard: CardShard = {
     _poolFractalSummoning,
     _poolFracturingGust,
     _poolFugue,
+    _poolFungalColossus,
     _poolFurtiveCourier,
     _poolFuryOfTheHorde,
     _poolGaladrielOfLothlorien,
@@ -1460,6 +1469,7 @@ const shard: CardShard = {
     _poolKarnArgentDefender,
     _poolKarokWrangler,
     _poolKataraSeekingRevenge,
+    _poolKayaOrzhovUsurper,
     _poolKeldonMantle,
     _poolKelpieGuide,
     _poolKelsienThePlague,
@@ -1647,6 +1657,7 @@ const shard: CardShard = {
     _poolPolarKraken,
     _poolPolymorph,
     _poolPolyraptor,
+    _poolPortent,
     _poolPraetorsGrasp,
     _poolPrideOfConquerors,
     _poolPrinceOfThralls,
@@ -1846,6 +1857,7 @@ const shard: CardShard = {
     _poolTezzeretsGatebreaker,
     _poolTheBalrogFlameOfUdun,
     _poolTheDestinedWhiteMage,
+    _poolTheGreatAurora,
     _poolTheLegendOfYangchen,
     _poolTheMendingOfDominaria,
     _poolTheMountainKingsReturn,
@@ -1947,6 +1959,8 @@ const shard: CardShard = {
     _poolWoodlandChangeling,
     _poolWordOfBinding,
     _poolWreckAndRebuild,
+    _poolWretchedConfluence,
+    _poolWuSpy,
     _poolWyluliWolf,
     _poolYathanTombguard,
     _poolYavimayaWurm,

@@ -371,6 +371,7 @@ import _poolImpendingDoom from "../pool/impending-doom.js";
 import _poolIncendiaryOracle from "../pool/incendiary-oracle.js";
 import _poolIncendiary from "../pool/incendiary.js";
 import _poolIncrementalBlight from "../pool/incremental-blight.js";
+import _poolInfernalKirin from "../pool/infernal-kirin.js";
 import _poolInfernalPhantom from "../pool/infernal-phantom.js";
 import _poolInfuse from "../pool/infuse.js";
 import _poolInspiredTethermage from "../pool/inspired-tethermage.js";
@@ -425,6 +426,7 @@ import _poolLightshellDuo from "../pool/lightshell-duo.js";
 import _poolLilianaTheFaultless from "../pool/liliana-the-faultless.js";
 import _poolLilianaUntouchedByDeath from "../pool/liliana-untouched-by-death.js";
 import _poolLlanowarStalker from "../pool/llanowar-stalker.js";
+import _poolLoamcrafterFaun from "../pool/loamcrafter-faun.js";
 import _poolLodestoneNeedle from "../pool/lodestone-needle.js";
 import _poolLongRangeSensor from "../pool/long-range-sensor.js";
 import _poolLordOfTheForsaken from "../pool/lord-of-the-forsaken.js";
@@ -746,6 +748,7 @@ import _poolSummonTheSchool from "../pool/summon-the-school.js";
 import _poolSunCeYoungConquerer from "../pool/sun-ce-young-conquerer.js";
 import _poolSunderFromWithin from "../pool/sunder-from-within.js";
 import _poolSuperVillainLockup from "../pool/super-villain-lockup.js";
+import _poolSurveyMechan from "../pool/survey-mechan.js";
 import _poolSustainingSpirit from "../pool/sustaining-spirit.js";
 import _poolSwashbucklersWhip from "../pool/swashbucklers-whip.js";
 import _poolSwornDefender from "../pool/sworn-defender.js";
@@ -795,6 +798,7 @@ import _poolTolarianAcademy from "../pool/tolarian-academy.js";
 import _poolTolarianScholar from "../pool/tolarian-scholar.js";
 import _poolTopanFreeblade from "../pool/topan-freeblade.js";
 import _poolTopiaryPanther from "../pool/topiary-panther.js";
+import _poolTornadoElemental from "../pool/tornado-elemental.js";
 import _poolTorpidMoloch from "../pool/torpid-moloch.js";
 import _poolTotemSpeaker from "../pool/totem-speaker.js";
 import _poolToweringViewpoint from "../pool/towering-viewpoint.js";
@@ -1294,6 +1298,7 @@ const shard: CardShard = {
     _poolIncendiaryOracle,
     _poolIncendiary,
     _poolIncrementalBlight,
+    _poolInfernalKirin,
     _poolInfernalPhantom,
     _poolInfuse,
     _poolInspiredTethermage,
@@ -1348,6 +1353,7 @@ const shard: CardShard = {
     _poolLilianaTheFaultless,
     _poolLilianaUntouchedByDeath,
     _poolLlanowarStalker,
+    _poolLoamcrafterFaun,
     _poolLodestoneNeedle,
     _poolLongRangeSensor,
     _poolLordOfTheForsaken,
@@ -1669,6 +1675,7 @@ const shard: CardShard = {
     _poolSunCeYoungConquerer,
     _poolSunderFromWithin,
     _poolSuperVillainLockup,
+    _poolSurveyMechan,
     _poolSustainingSpirit,
     _poolSwashbucklersWhip,
     _poolSwornDefender,
@@ -1718,6 +1725,7 @@ const shard: CardShard = {
     _poolTolarianScholar,
     _poolTopanFreeblade,
     _poolTopiaryPanther,
+    _poolTornadoElemental,
     _poolTorpidMoloch,
     _poolTotemSpeaker,
     _poolToweringViewpoint,

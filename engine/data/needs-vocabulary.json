@@ -14725,6 +14725,71 @@
    "description": "An aggregate over graveyard cards leaving out the spell being cast: aggregateMatches ignores except for graveyards, so a card cast from its graveyard counts itself as its cost is totalled (601.2a, 601.2f).",
    "example": "Oskar, Rubbish Reclaimer: cast from your graveyard with Muldrotha, it counts its own mana value"
   },
+  "cost:self-cost-reduction-cap": {
+   "family": "effect:amount-new-variants",
+   "description": "A cap on what a card's own cost reduction may take off: CostReductionAmount has none.",
+   "example": "Valiant Changeling: \"Can't reduce the amount of mana this spell costs by more than {5}\": a cost increase raises the generic above 5, and CostReductionAmount has no cap."
+  },
+  "effect:search-instead-rest-to-library": {
+   "family": "mechanic:outside-the-game",
+   "description": "search-library's rest going to the library, finds from outside the game included: destination has no library, only instead does.",
+   "example": "Turtles Forever: \"Put the chosen cards into your hand and shuffle the rest into your library\" needs the rest to go to the library, finds from outside the game included."
+  },
+  "effect:cast-modal-x-modes": {
+   "family": "effect:modal-repeat-modes",
+   "description": "castModal with \"Choose X\" and repeats, chosen as it's cast: min and max modes are numbers.",
+   "example": "Doomsday Confluence: castModal's min and max modes are numbers, so \"Choose X\" with repeats, chosen as it's cast, can't be said."
+  },
+  "decision:opponent-chooses-from-outside-the-game": {
+   "family": "mechanic:outside-the-game",
+   "description": "Revealing cards from outside the game for an opponent to pick among.",
+   "example": "Extrapolate the Impossible: Nothing reveals exactly two differently named sideboard cards and lets an opponent pick one."
+  },
+  "effect:cast-copy-of-named-card": {
+   "family": "mechanic:outside-the-game",
+   "description": "A paid cast of a copy of a card by name: cast-now's copyOfCardNamed is engine-only.",
+   "example": "Garth One-Eye: cast-now's copyOfCardNamed is engine-only, and Garth's copy pays its costs."
+  },
+  "effect:cast-from-outside-the-game": {
+   "family": "mechanic:outside-the-game",
+   "description": "cast-now with an outside-the-game source.",
+   "example": "Spawnsire of Ulamog: cast-now has no outside-the-game source."
+  },
+  "effect:play-from-outside-the-game": {
+   "family": "mechanic:outside-the-game",
+   "description": "A permission to play a card from outside the game for the turn.",
+   "example": "Wish: No permission to play a sideboard card for the turn, chosen as it's played by the ruling."
+  },
+  "effect:exile-face-down-lookers-follow-source-controller": {
+   "family": "static:skip-draw-step",
+   "description": "A face-down exile whose looker and player follow the source's controller: faceDown looked fixes them.",
+   "example": "Colfenor's Plans: faceDown looked fixes the looker to the original controller, so whoever steals the enchantment can't look at or play the cards."
+  },
+  "replacement:may-skip-draw-step": {
+   "family": "static:skip-draw-step",
+   "description": "An optional skip of a step with a reward: skipsSteps is mandatory.",
+   "example": "Fasting: \"You may skip that step instead. If you do, you gain 2 life\": skipsSteps is mandatory."
+  },
+  "condition:crewed-by-filter-as-tapped": {
+   "family": "keyword:crew",
+   "description": "A condition on the crewer as it was when tapped: crewedSource reads it now.",
+   "example": "Adrestia: The rulings need the crewer as it was when tapped, and crewedSource reads the creature now."
+  },
+  "effect:copy-exception-subtype-if-creature": {
+   "family": "condition:filter-card-property-clauses",
+   "description": "A copy exception's added subtype only if it enters as a creature.",
+   "example": "Pirated Copy: CopyExceptions.addSubtypes is unconditional, and by the ruling there's no Pirate if it doesn't enter as a creature."
+  },
+  "amount:chosen-source-shield-x": {
+   "family": "cost:alt-cost-exile-from-hand",
+   "description": "prevent-damage-from-chosen-source with a computed amount.",
+   "example": "Shining Shoal: prevent-damage-from-chosen-source's amount takes a fixed number, not X, and the ruling has the player choose which damage is redirected."
+  },
+  "cost:kicker-discard-filtered": {
+   "family": "cost:kicker-nonmana-cost",
+   "description": "A kicker's additional discard of a filtered card: KickerAlsoCost.discard is a count.",
+   "example": "Dralnu's Pet: KickerAlsoCost.discard is only a count, so \"Discard a creature card\" can't be said."
+  },
   "decision:choose-two-players-on-enter": {
    "family": "decision:choose-player",
    "description": "Two different players chosen as it enters: choosePlayerOnEnter keeps one, and nothing reads \"the other chosen player\".",

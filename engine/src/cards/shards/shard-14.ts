@@ -110,6 +110,7 @@ import _poolBubbleSnare from "../pool/bubble-snare.js";
 import _poolBurdenedStoneback from "../pool/burdened-stoneback.js";
 import _poolBurnishedHart from "../pool/burnished-hart.js";
 import _poolBuzzBots from "../pool/buzz-bots.js";
+import _poolCabarettiConfluence from "../pool/cabaretti-confluence.js";
 import _poolCapashenUnicorn from "../pool/capashen-unicorn.js";
 import _poolCaptivatingCrew from "../pool/captivating-crew.js";
 import _poolCaptiveFlame from "../pool/captive-flame.js";
@@ -429,6 +430,7 @@ import _poolInsidiousWill from "../pool/insidious-will.js";
 import _poolIntoTheNight from "../pool/into-the-night.js";
 import _poolIntrepidOutlander from "../pool/intrepid-outlander.js";
 import _poolInvadeTheCity from "../pool/invade-the-city.js";
+import _poolInvasionOfIkoria from "../pool/invasion-of-ikoria.js";
 import _poolInvasionOfIxalan from "../pool/invasion-of-ixalan.js";
 import _poolInviolability from "../pool/inviolability.js";
 import _poolInvisibility from "../pool/invisibility.js";
@@ -512,6 +514,7 @@ import _poolMaximumCarnage from "../pool/maximum-carnage.js";
 import _poolMedusaInhumanQueen from "../pool/medusa-inhuman-queen.js";
 import _poolMeltstridersResolve from "../pool/meltstriders-resolve.js";
 import _poolMemoryDeluge from "../pool/memory-deluge.js";
+import _poolMemory from "../pool/memory.js";
 import _poolMentalModulation from "../pool/mental-modulation.js";
 import _poolMerchantScroll from "../pool/merchant-scroll.js";
 import _poolMercilessResolve from "../pool/merciless-resolve.js";
@@ -637,6 +640,7 @@ import _poolRancidRats from "../pool/rancid-rats.js";
 import _poolRayOfEnfeeblement from "../pool/ray-of-enfeeblement.js";
 import _poolRecklessAbandon from "../pool/reckless-abandon.js";
 import _poolRecklessWaif from "../pool/reckless-waif.js";
+import _poolRecycle from "../pool/recycle.js";
 import _poolRegenesis from "../pool/regenesis.js";
 import _poolRegress from "../pool/regress.js";
 import _poolRelicRunner from "../pool/relic-runner.js";
@@ -678,6 +682,7 @@ import _poolRuneTailsEssence from "../pool/rune-tails-essence.js";
 import _poolRunescaleStormbrood from "../pool/runescale-stormbrood.js";
 import _poolSaheelisArtistry from "../pool/saheelis-artistry.js";
 import _poolSaheelisSilverwing from "../pool/saheelis-silverwing.js";
+import _poolSanctuaryWarden from "../pool/sanctuary-warden.js";
 import _poolSandmansQuicksand from "../pool/sandmans-quicksand.js";
 import _poolSandsteppeCitadel from "../pool/sandsteppe-citadel.js";
 import _poolSarinthSteelseeker from "../pool/sarinth-steelseeker.js";
@@ -865,6 +870,7 @@ import _poolVampireScrivener from "../pool/vampire-scrivener.js";
 import _poolVanguardOfTheRose from "../pool/vanguard-of-the-rose.js";
 import _poolVanguardsShield from "../pool/vanguards-shield.js";
 import _poolVeilOfSecrecy from "../pool/veil-of-secrecy.js";
+import _poolVendilionClique from "../pool/vendilion-clique.js";
 import _poolVengefulArchon from "../pool/vengeful-archon.js";
 import _poolVengefulTownsfolk from "../pool/vengeful-townsfolk.js";
 import _poolVengefulVillagers from "../pool/vengeful-villagers.js";
@@ -924,6 +930,7 @@ import _tokensDemonToken55 from "../tokens/demon-token-5-5.js";
 import _tokensElementalTokenDanceOfTheTumbleweeds from "../tokens/elemental-token-dance-of-the-tumbleweeds.js";
 import _tokensElfKnightToken from "../tokens/elf-knight-token.js";
 import _tokensFishToken from "../tokens/fish-token.js";
+import _tokensGingerbruteToken from "../tokens/gingerbrute-token.js";
 import _tokensGoblinConstructToken from "../tokens/goblin-construct-token.js";
 import _tokensGoldmeadowHarrierToken from "../tokens/goldmeadow-harrier-token.js";
 import _tokensGolemEnchantmentArtifactToken from "../tokens/golem-enchantment-artifact-token.js";
@@ -1049,6 +1056,7 @@ const shard: CardShard = {
     _poolBurdenedStoneback,
     _poolBurnishedHart,
     _poolBuzzBots,
+    _poolCabarettiConfluence,
     _poolCapashenUnicorn,
     _poolCaptivatingCrew,
     _poolCaptiveFlame,
@@ -1368,6 +1376,7 @@ const shard: CardShard = {
     _poolIntoTheNight,
     _poolIntrepidOutlander,
     _poolInvadeTheCity,
+    _poolInvasionOfIkoria,
     _poolInvasionOfIxalan,
     _poolInviolability,
     _poolInvisibility,
@@ -1451,6 +1460,7 @@ const shard: CardShard = {
     _poolMedusaInhumanQueen,
     _poolMeltstridersResolve,
     _poolMemoryDeluge,
+    _poolMemory,
     _poolMentalModulation,
     _poolMerchantScroll,
     _poolMercilessResolve,
@@ -1576,6 +1586,7 @@ const shard: CardShard = {
     _poolRayOfEnfeeblement,
     _poolRecklessAbandon,
     _poolRecklessWaif,
+    _poolRecycle,
     _poolRegenesis,
     _poolRegress,
     _poolRelicRunner,
@@ -1617,6 +1628,7 @@ const shard: CardShard = {
     _poolRunescaleStormbrood,
     _poolSaheelisArtistry,
     _poolSaheelisSilverwing,
+    _poolSanctuaryWarden,
     _poolSandmansQuicksand,
     _poolSandsteppeCitadel,
     _poolSarinthSteelseeker,
@@ -1804,6 +1816,7 @@ const shard: CardShard = {
     _poolVanguardOfTheRose,
     _poolVanguardsShield,
     _poolVeilOfSecrecy,
+    _poolVendilionClique,
     _poolVengefulArchon,
     _poolVengefulTownsfolk,
     _poolVengefulVillagers,
@@ -1865,6 +1878,7 @@ const shard: CardShard = {
     _tokensElementalTokenDanceOfTheTumbleweeds,
     _tokensElfKnightToken,
     _tokensFishToken,
+    _tokensGingerbruteToken,
     _tokensGoblinConstructToken,
     _tokensGoldmeadowHarrierToken,
     _tokensGolemEnchantmentArtifactToken,

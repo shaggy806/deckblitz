@@ -410,6 +410,7 @@ import _poolIronfang from "../pool/ironfang.js";
 import _poolIronheartCleverChampion from "../pool/ironheart-clever-champion.js";
 import _poolIronhoofBoar from "../pool/ironhoof-boar.js";
 import _poolIrrigatedFarmland from "../pool/irrigated-farmland.js";
+import _poolJaceTheMindSculptor from "../pool/jace-the-mind-sculptor.js";
 import _poolJackedRabbit from "../pool/jacked-rabbit.js";
 import _poolJalumTome from "../pool/jalum-tome.js";
 import _poolJasmineDragonTeaShop from "../pool/jasmine-dragon-tea-shop.js";
@@ -710,6 +711,7 @@ import _poolSelvalaExplorerReturned from "../pool/selvala-explorer-returned.js";
 import _poolSensorSplicer from "../pool/sensor-splicer.js";
 import _poolSephirothPlanetsHeir from "../pool/sephiroth-planets-heir.js";
 import _poolSeraphOfDawn from "../pool/seraph-of-dawn.js";
+import _poolSerpentineCurve from "../pool/serpentine-curve.js";
 import _poolSerrasSanctum from "../pool/serras-sanctum.js";
 import _poolSerratedArrows from "../pool/serrated-arrows.js";
 import _poolSettleBeyondReality from "../pool/settle-beyond-reality.js";
@@ -1382,6 +1384,7 @@ const shard: CardShard = {
     _poolIronheartCleverChampion,
     _poolIronhoofBoar,
     _poolIrrigatedFarmland,
+    _poolJaceTheMindSculptor,
     _poolJackedRabbit,
     _poolJalumTome,
     _poolJasmineDragonTeaShop,
@@ -1682,6 +1685,7 @@ const shard: CardShard = {
     _poolSensorSplicer,
     _poolSephirothPlanetsHeir,
     _poolSeraphOfDawn,
+    _poolSerpentineCurve,
     _poolSerrasSanctum,
     _poolSerratedArrows,
     _poolSettleBeyondReality,

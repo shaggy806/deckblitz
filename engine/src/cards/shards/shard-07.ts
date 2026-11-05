@@ -79,6 +79,7 @@ import _poolBloodTollHarpy from "../pool/blood-toll-harpy.js";
 import _poolBlood from "../pool/blood.js";
 import _poolBloodsoakedChampion from "../pool/bloodsoaked-champion.js";
 import _poolBlueSunsTwilight from "../pool/blue-suns-twilight.js";
+import _poolBodySnatcher from "../pool/body-snatcher.js";
 import _poolBoilingSeas from "../pool/boiling-seas.js";
 import _poolBojukaBog from "../pool/bojuka-bog.js";
 import _poolBoldBiochemist from "../pool/bold-biochemist.js";
@@ -121,6 +122,7 @@ import _poolCateranSummons from "../pool/cateran-summons.js";
 import _poolCatharsis from "../pool/catharsis.js";
 import _poolCavernLampad from "../pool/cavern-lampad.js";
 import _poolCemeteryProtector from "../pool/cemetery-protector.js";
+import _poolChandraAwakenedInferno from "../pool/chandra-awakened-inferno.js";
 import _poolChandrasEmberling from "../pool/chandras-emberling.js";
 import _poolChandrasFiremaw from "../pool/chandras-firemaw.js";
 import _poolChandrasPhoenix from "../pool/chandras-phoenix.js";
@@ -246,6 +248,7 @@ import _poolExpelFromOrazca from "../pool/expel-from-orazca.js";
 import _poolExponentialGrowth from "../pool/exponential-growth.js";
 import _poolExultantSkymarcher from "../pool/exultant-skymarcher.js";
 import _poolEyeOfNidhogg from "../pool/eye-of-nidhogg.js";
+import _poolFaeOfWishes from "../pool/fae-of-wishes.js";
 import _poolFaerieHarbinger from "../pool/faerie-harbinger.js";
 import _poolFailureComply from "../pool/failure-comply.js";
 import _poolFairgroundsTrumpeter from "../pool/fairgrounds-trumpeter.js";
@@ -544,6 +547,8 @@ import _poolNikoLightOfHope from "../pool/niko-light-of-hope.js";
 import _poolNimbleclawAdept from "../pool/nimbleclaw-adept.js";
 import _poolNocturnalRaid from "../pool/nocturnal-raid.js";
 import _poolNoggleBandit from "../pool/noggle-bandit.js";
+import _poolNorthWindAvatar from "../pool/north-wind-avatar.js";
+import _poolNullProfusion from "../pool/null-profusion.js";
 import _poolNurturingBristleback from "../pool/nurturing-bristleback.js";
 import _poolNutCollector from "../pool/nut-collector.js";
 import _poolNyleaKeenEyed from "../pool/nylea-keen-eyed.js";
@@ -557,6 +562,7 @@ import _poolOnTheTrail from "../pool/on-the-trail.js";
 import _poolOnakkeOgre from "../pool/onakke-ogre.js";
 import _poolOnduRising from "../pool/ondu-rising.js";
 import _poolOnduWarCleric from "../pool/ondu-war-cleric.js";
+import _poolOneRingToRuleThemAll from "../pool/one-ring-to-rule-them-all.js";
 import _poolOniPossession from "../pool/oni-possession.js";
 import _poolOpenFire from "../pool/open-fire.js";
 import _poolOreGorger from "../pool/ore-gorger.js";
@@ -635,6 +641,7 @@ import _poolRegalCaracal from "../pool/regal-caracal.js";
 import _poolRegenerationsRestored from "../pool/regenerations-restored.js";
 import _poolRelicOfLegends from "../pool/relic-of-legends.js";
 import _poolRepositorySkaab from "../pool/repository-skaab.js";
+import _poolResearchDevelopment from "../pool/research-development.js";
 import _poolRestoreWithEmpathy from "../pool/restore-with-empathy.js";
 import _poolResurrectionOrb from "../pool/resurrection-orb.js";
 import _poolRetrievePrey from "../pool/retrieve-prey.js";
@@ -657,6 +664,7 @@ import _poolRoguesGloves from "../pool/rogues-gloves.js";
 import _poolRonasVortex from "../pool/ronas-vortex.js";
 import _poolRootCage from "../pool/root-cage.js";
 import _poolRootbornDefenses from "../pool/rootborn-defenses.js";
+import _poolRootcastApprenticeship from "../pool/rootcast-apprenticeship.js";
 import _poolRosemaneCentaur from "../pool/rosemane-centaur.js";
 import _poolRottingGiant from "../pool/rotting-giant.js";
 import _poolRoyalTrooper from "../pool/royal-trooper.js";
@@ -1038,6 +1046,7 @@ const shard: CardShard = {
     _poolBlood,
     _poolBloodsoakedChampion,
     _poolBlueSunsTwilight,
+    _poolBodySnatcher,
     _poolBoilingSeas,
     _poolBojukaBog,
     _poolBoldBiochemist,
@@ -1080,6 +1089,7 @@ const shard: CardShard = {
     _poolCatharsis,
     _poolCavernLampad,
     _poolCemeteryProtector,
+    _poolChandraAwakenedInferno,
     _poolChandrasEmberling,
     _poolChandrasFiremaw,
     _poolChandrasPhoenix,
@@ -1205,6 +1215,7 @@ const shard: CardShard = {
     _poolExponentialGrowth,
     _poolExultantSkymarcher,
     _poolEyeOfNidhogg,
+    _poolFaeOfWishes,
     _poolFaerieHarbinger,
     _poolFailureComply,
     _poolFairgroundsTrumpeter,
@@ -1503,6 +1514,8 @@ const shard: CardShard = {
     _poolNimbleclawAdept,
     _poolNocturnalRaid,
     _poolNoggleBandit,
+    _poolNorthWindAvatar,
+    _poolNullProfusion,
     _poolNurturingBristleback,
     _poolNutCollector,
     _poolNyleaKeenEyed,
@@ -1516,6 +1529,7 @@ const shard: CardShard = {
     _poolOnakkeOgre,
     _poolOnduRising,
     _poolOnduWarCleric,
+    _poolOneRingToRuleThemAll,
     _poolOniPossession,
     _poolOpenFire,
     _poolOreGorger,
@@ -1594,6 +1608,7 @@ const shard: CardShard = {
     _poolRegenerationsRestored,
     _poolRelicOfLegends,
     _poolRepositorySkaab,
+    _poolResearchDevelopment,
     _poolRestoreWithEmpathy,
     _poolResurrectionOrb,
     _poolRetrievePrey,
@@ -1616,6 +1631,7 @@ const shard: CardShard = {
     _poolRonasVortex,
     _poolRootCage,
     _poolRootbornDefenses,
+    _poolRootcastApprenticeship,
     _poolRosemaneCentaur,
     _poolRottingGiant,
     _poolRoyalTrooper,

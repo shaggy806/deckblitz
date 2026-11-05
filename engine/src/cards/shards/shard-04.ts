@@ -226,6 +226,7 @@ import _poolEngineRat from "../pool/engine-rat.js";
 import _poolEnragedGiant from "../pool/enraged-giant.js";
 import _poolEnthrallingVictor from "../pool/enthralling-victor.js";
 import _poolEntomberExarch from "../pool/entomber-exarch.js";
+import _poolEowynLadyOfRohan from "../pool/eowyn-lady-of-rohan.js";
 import _poolEphemeron from "../pool/ephemeron.js";
 import _poolEraOfEnlightenment from "../pool/era-of-enlightenment.js";
 import _poolEsotericDuplicator from "../pool/esoteric-duplicator.js";
@@ -810,6 +811,7 @@ import _poolTransplantTheorist from "../pool/transplant-theorist.js";
 import _poolTrapjawTyrant from "../pool/trapjaw-tyrant.js";
 import _poolTreachery from "../pool/treachery.js";
 import _poolTrelasarraMoonDancer from "../pool/trelasarra-moon-dancer.js";
+import _poolTrenzaloreClocktower from "../pool/trenzalore-clocktower.js";
 import _poolTrevaTheRenewer from "../pool/treva-the-renewer.js";
 import _poolTritonWaverider from "../pool/triton-waverider.js";
 import _poolTriumphantChomp from "../pool/triumphant-chomp.js";
@@ -900,6 +902,7 @@ import _poolYomijiWhoBarsTheWay from "../pool/yomiji-who-bars-the-way.js";
 import _poolYoungBlueDragon from "../pool/young-blue-dragon.js";
 import _poolZealotIlVec from "../pool/zealot-il-vec.js";
 import _poolZephyrFalcon from "../pool/zephyr-falcon.js";
+import _poolZilorthaApexOfIkoria from "../pool/zilortha-apex-of-ikoria.js";
 import _poolZofBloodbog from "../pool/zof-bloodbog.js";
 import _poolZulaportEnforcer from "../pool/zulaport-enforcer.js";
 import _poolZygonInfiltrator from "../pool/zygon-infiltrator.js";
@@ -1150,6 +1153,7 @@ const shard: CardShard = {
     _poolEnragedGiant,
     _poolEnthrallingVictor,
     _poolEntomberExarch,
+    _poolEowynLadyOfRohan,
     _poolEphemeron,
     _poolEraOfEnlightenment,
     _poolEsotericDuplicator,
@@ -1734,6 +1738,7 @@ const shard: CardShard = {
     _poolTrapjawTyrant,
     _poolTreachery,
     _poolTrelasarraMoonDancer,
+    _poolTrenzaloreClocktower,
     _poolTrevaTheRenewer,
     _poolTritonWaverider,
     _poolTriumphantChomp,
@@ -1824,6 +1829,7 @@ const shard: CardShard = {
     _poolYoungBlueDragon,
     _poolZealotIlVec,
     _poolZephyrFalcon,
+    _poolZilorthaApexOfIkoria,
     _poolZofBloodbog,
     _poolZulaportEnforcer,
     _poolZygonInfiltrator,

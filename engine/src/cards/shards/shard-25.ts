@@ -148,7 +148,9 @@ import _poolClayFiredBricks from "../pool/clay-fired-bricks.js";
 import _poolCliffhavenVampire from "../pool/cliffhaven-vampire.js";
 import _poolClosingStatement from "../pool/closing-statement.js";
 import _poolCloudCrusader from "../pool/cloud-crusader.js";
+import _poolCloudPlanetsChampion from "../pool/cloud-planets-champion.js";
 import _poolCombatCelebrant from "../pool/combat-celebrant.js";
+import _poolCommitMemory from "../pool/commit-memory.js";
 import _poolConcertedCare from "../pool/concerted-care.js";
 import _poolConclaveSledgeCaptain from "../pool/conclave-sledge-captain.js";
 import _poolConductorOfCacophony from "../pool/conductor-of-cacophony.js";
@@ -274,6 +276,7 @@ import _poolFerventStrike from "../pool/fervent-strike.js";
 import _poolFeveredStrength from "../pool/fevered-strength.js";
 import _poolFieryFinish from "../pool/fiery-finish.js";
 import _poolFilthyCur from "../pool/filthy-cur.js";
+import _poolFinalFlourish from "../pool/final-flourish.js";
 import _poolFinaleOfDevastation from "../pool/finale-of-devastation.js";
 import _poolFirbolgFlutist from "../pool/firbolg-flutist.js";
 import _poolFireDiamond from "../pool/fire-diamond.js";
@@ -1063,7 +1066,9 @@ const shard: CardShard = {
     _poolCliffhavenVampire,
     _poolClosingStatement,
     _poolCloudCrusader,
+    _poolCloudPlanetsChampion,
     _poolCombatCelebrant,
+    _poolCommitMemory,
     _poolConcertedCare,
     _poolConclaveSledgeCaptain,
     _poolConductorOfCacophony,
@@ -1189,6 +1194,7 @@ const shard: CardShard = {
     _poolFeveredStrength,
     _poolFieryFinish,
     _poolFilthyCur,
+    _poolFinalFlourish,
     _poolFinaleOfDevastation,
     _poolFirbolgFlutist,
     _poolFireDiamond,

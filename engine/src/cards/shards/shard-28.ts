@@ -143,6 +143,7 @@ import _poolChanneledDragonfire from "../pool/channeled-dragonfire.js";
 import _poolChevillBaneOfMonsters from "../pool/chevill-bane-of-monsters.js";
 import _poolChimericSphere from "../pool/chimeric-sphere.js";
 import _poolChitteringHarvester from "../pool/chittering-harvester.js";
+import _poolChocoboKick from "../pool/chocobo-kick.js";
 import _poolChokingFumes from "../pool/choking-fumes.js";
 import _poolCinderWall from "../pool/cinder-wall.js";
 import _poolCleonMerryChampion from "../pool/cleon-merry-champion.js";
@@ -157,6 +158,7 @@ import _poolCoilingRebirth from "../pool/coiling-rebirth.js";
 import _poolCoilsOfTheMedusa from "../pool/coils-of-the-medusa.js";
 import _poolColossus from "../pool/colossus.js";
 import _poolCombust from "../pool/combust.js";
+import _poolCommit from "../pool/commit.js";
 import _poolConcealedCourtyard from "../pool/concealed-courtyard.js";
 import _poolConcordWithTheKami from "../pool/concord-with-the-kami.js";
 import _poolContestOfClaws from "../pool/contest-of-claws.js";
@@ -414,6 +416,7 @@ import _poolKithkinSpellduster from "../pool/kithkin-spellduster.js";
 import _poolKnotvineMystic from "../pool/knotvine-mystic.js";
 import _poolKozileksSentinel from "../pool/kozileks-sentinel.js";
 import _poolKrosanGroundshaker from "../pool/krosan-groundshaker.js";
+import _poolKryShield from "../pool/kry-shield.js";
 import _poolKumanoFacesKakkazan from "../pool/kumano-faces-kakkazan.js";
 import _poolLaccolithRig from "../pool/laccolith-rig.js";
 import _poolLaccolithWarrior from "../pool/laccolith-warrior.js";
@@ -431,6 +434,7 @@ import _poolLevitatingStatue from "../pool/levitating-statue.js";
 import _poolLeylineOfTheGuildpact from "../pool/leyline-of-the-guildpact.js";
 import _poolLiegeOfTheTangle from "../pool/liege-of-the-tangle.js";
 import _poolLifespinner from "../pool/lifespinner.js";
+import _poolLightOfJudgment from "../pool/light-of-judgment.js";
 import _poolLightningCloud from "../pool/lightning-cloud.js";
 import _poolLivingLore from "../pool/living-lore.js";
 import _poolLivingWall from "../pool/living-wall.js";
@@ -496,6 +500,7 @@ import _poolMobileFort from "../pool/mobile-fort.js";
 import _poolMoleManMoloidMaster from "../pool/mole-man-moloid-master.js";
 import _poolMoltenManInfernoIncarnate from "../pool/molten-man-inferno-incarnate.js";
 import _poolMoltenRain from "../pool/molten-rain.js";
+import _poolMomentOfReckoning from "../pool/moment-of-reckoning.js";
 import _poolMonasteryMessenger from "../pool/monastery-messenger.js";
 import _poolMoriaMarauder from "../pool/moria-marauder.js";
 import _poolMortalsArdor from "../pool/mortals-ardor.js";
@@ -744,6 +749,7 @@ import _poolSolTalisman from "../pool/sol-talisman.js";
 import _poolSoldeviSteamBeast from "../pool/soldevi-steam-beast.js";
 import _poolSolitaryCamel from "../pool/solitary-camel.js";
 import _poolSoratamiMindsweeper from "../pool/soratami-mindsweeper.js";
+import _poolSoulParry from "../pool/soul-parry.js";
 import _poolSoulsFire from "../pool/souls-fire.js";
 import _poolSoulstinger from "../pool/soulstinger.js";
 import _poolSpDrPilotedByPeni from "../pool/sp-dr-piloted-by-peni.js";
@@ -915,6 +921,8 @@ import _poolWindscouter from "../pool/windscouter.js";
 import _poolWindswiftSlice from "../pool/windswift-slice.js";
 import _poolWingsOfAesthir from "../pool/wings-of-aesthir.js";
 import _poolWirecat from "../pool/wirecat.js";
+import _poolWolverineClawsOut from "../pool/wolverine-claws-out.js";
+import _poolWordOfUndoing from "../pool/word-of-undoing.js";
 import _poolWorldChampionCelestialWeapon from "../pool/world-champion-celestial-weapon.js";
 import _poolWreathOfGeists from "../pool/wreath-of-geists.js";
 import _poolWrenchMind from "../pool/wrench-mind.js";
@@ -1095,6 +1103,7 @@ const shard: CardShard = {
     _poolChevillBaneOfMonsters,
     _poolChimericSphere,
     _poolChitteringHarvester,
+    _poolChocoboKick,
     _poolChokingFumes,
     _poolCinderWall,
     _poolCleonMerryChampion,
@@ -1109,6 +1118,7 @@ const shard: CardShard = {
     _poolCoilsOfTheMedusa,
     _poolColossus,
     _poolCombust,
+    _poolCommit,
     _poolConcealedCourtyard,
     _poolConcordWithTheKami,
     _poolContestOfClaws,
@@ -1366,6 +1376,7 @@ const shard: CardShard = {
     _poolKnotvineMystic,
     _poolKozileksSentinel,
     _poolKrosanGroundshaker,
+    _poolKryShield,
     _poolKumanoFacesKakkazan,
     _poolLaccolithRig,
     _poolLaccolithWarrior,
@@ -1383,6 +1394,7 @@ const shard: CardShard = {
     _poolLeylineOfTheGuildpact,
     _poolLiegeOfTheTangle,
     _poolLifespinner,
+    _poolLightOfJudgment,
     _poolLightningCloud,
     _poolLivingLore,
     _poolLivingWall,
@@ -1448,6 +1460,7 @@ const shard: CardShard = {
     _poolMoleManMoloidMaster,
     _poolMoltenManInfernoIncarnate,
     _poolMoltenRain,
+    _poolMomentOfReckoning,
     _poolMonasteryMessenger,
     _poolMoriaMarauder,
     _poolMortalsArdor,
@@ -1696,6 +1709,7 @@ const shard: CardShard = {
     _poolSoldeviSteamBeast,
     _poolSolitaryCamel,
     _poolSoratamiMindsweeper,
+    _poolSoulParry,
     _poolSoulsFire,
     _poolSoulstinger,
     _poolSpDrPilotedByPeni,
@@ -1867,6 +1881,8 @@ const shard: CardShard = {
     _poolWindswiftSlice,
     _poolWingsOfAesthir,
     _poolWirecat,
+    _poolWolverineClawsOut,
+    _poolWordOfUndoing,
     _poolWorldChampionCelestialWeapon,
     _poolWreathOfGeists,
     _poolWrenchMind,

@@ -45,6 +45,7 @@ import _poolAstelliReclaimer from "../pool/astelli-reclaimer.js";
 import _poolAvenMindcensor from "../pool/aven-mindcensor.js";
 import _poolAvenge from "../pool/avenge.js";
 import _poolAwakenTheBear from "../pool/awaken-the-bear.js";
+import _poolAwakenTheSleeper from "../pool/awaken-the-sleeper.js";
 import _poolAzureDrake from "../pool/azure-drake.js";
 import _poolBackdraft from "../pool/backdraft.js";
 import _poolBambooGroveArcher from "../pool/bamboo-grove-archer.js";
@@ -297,6 +298,7 @@ import _poolGoblinMasons from "../pool/goblin-masons.js";
 import _poolGoblinPsychopath from "../pool/goblin-psychopath.js";
 import _poolGoblinRaider from "../pool/goblin-raider.js";
 import _poolGodEternalBontu from "../pool/god-eternal-bontu.js";
+import _poolGoldenArgosy from "../pool/golden-argosy.js";
 import _poolGolgariGuildmage from "../pool/golgari-guildmage.js";
 import _poolGorgonFlail from "../pool/gorgon-flail.js";
 import _poolGorillaShaman from "../pool/gorilla-shaman.js";
@@ -371,6 +373,7 @@ import _poolInsubordination from "../pool/insubordination.js";
 import _poolInsufferableBalladeer from "../pool/insufferable-balladeer.js";
 import _poolIntellectDevourer from "../pool/intellect-devourer.js";
 import _poolInundate from "../pool/inundate.js";
+import _poolInvasionOfArcavios from "../pool/invasion-of-arcavios.js";
 import _poolInvasionOfZendikar from "../pool/invasion-of-zendikar.js";
 import _poolInvert from "../pool/invert.js";
 import _poolInvestigatorsJournal from "../pool/investigators-journal.js";
@@ -594,6 +597,7 @@ import _poolRakdosJoinsUp from "../pool/rakdos-joins-up.js";
 import _poolRakishRevelers from "../pool/rakish-revelers.js";
 import _poolRavenEagle from "../pool/raven-eagle.js";
 import _poolRavenousRotbelly from "../pool/ravenous-rotbelly.js";
+import _poolRavenousTrap from "../pool/ravenous-trap.js";
 import _poolRazorgrassInvoker from "../pool/razorgrass-invoker.js";
 import _poolRealitySpasm from "../pool/reality-spasm.js";
 import _poolRealmCloakedGiant from "../pool/realm-cloaked-giant.js";
@@ -909,6 +913,7 @@ import _poolYamabushisStorm from "../pool/yamabushis-storm.js";
 import _poolYavimayaHollow from "../pool/yavimaya-hollow.js";
 import _poolYavimayaSojourner from "../pool/yavimaya-sojourner.js";
 import _poolYavimayasEmbrace from "../pool/yavimayas-embrace.js";
+import _poolYawgmothsBargain from "../pool/yawgmoths-bargain.js";
 import _poolYgraEaterOfAll from "../pool/ygra-eater-of-all.js";
 import _poolYoseiTheMorningStar from "../pool/yosei-the-morning-star.js";
 import _poolYoureAmbushedOnTheRoad from "../pool/youre-ambushed-on-the-road.js";
@@ -972,6 +977,7 @@ const shard: CardShard = {
     _poolAvenMindcensor,
     _poolAvenge,
     _poolAwakenTheBear,
+    _poolAwakenTheSleeper,
     _poolAzureDrake,
     _poolBackdraft,
     _poolBambooGroveArcher,
@@ -1224,6 +1230,7 @@ const shard: CardShard = {
     _poolGoblinPsychopath,
     _poolGoblinRaider,
     _poolGodEternalBontu,
+    _poolGoldenArgosy,
     _poolGolgariGuildmage,
     _poolGorgonFlail,
     _poolGorillaShaman,
@@ -1298,6 +1305,7 @@ const shard: CardShard = {
     _poolInsufferableBalladeer,
     _poolIntellectDevourer,
     _poolInundate,
+    _poolInvasionOfArcavios,
     _poolInvasionOfZendikar,
     _poolInvert,
     _poolInvestigatorsJournal,
@@ -1521,6 +1529,7 @@ const shard: CardShard = {
     _poolRakishRevelers,
     _poolRavenEagle,
     _poolRavenousRotbelly,
+    _poolRavenousTrap,
     _poolRazorgrassInvoker,
     _poolRealitySpasm,
     _poolRealmCloakedGiant,
@@ -1836,6 +1845,7 @@ const shard: CardShard = {
     _poolYavimayaHollow,
     _poolYavimayaSojourner,
     _poolYavimayasEmbrace,
+    _poolYawgmothsBargain,
     _poolYgraEaterOfAll,
     _poolYoseiTheMorningStar,
     _poolYoureAmbushedOnTheRoad,

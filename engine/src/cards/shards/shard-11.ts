@@ -196,6 +196,7 @@ import _poolDaringSaboteur from "../pool/daring-saboteur.js";
 import _poolDarksteelForge from "../pool/darksteel-forge.js";
 import _poolDawnhartMentor from "../pool/dawnhart-mentor.js";
 import _poolDawnsireSunstarDreadnought from "../pool/dawnsire-sunstar-dreadnought.js";
+import _poolDazzlingReflection from "../pool/dazzling-reflection.js";
 import _poolDeadeyeBrawler from "../pool/deadeye-brawler.js";
 import _poolDebtorsPulpit from "../pool/debtors-pulpit.js";
 import _poolDecommission from "../pool/decommission.js";
@@ -480,6 +481,7 @@ import _poolLootDispute from "../pool/loot-dispute.js";
 import _poolLootTheKeyToEverything from "../pool/loot-the-key-to-everything.js";
 import _poolLorthosTheTidemaker from "../pool/lorthos-the-tidemaker.js";
 import _poolLysAlanaScarblade from "../pool/lys-alana-scarblade.js";
+import _poolMaestrosConfluence from "../pool/maestros-confluence.js";
 import _poolMagmaGiant from "../pool/magma-giant.js";
 import _poolMagusOfTheJar from "../pool/magus-of-the-jar.js";
 import _poolMakeAWish from "../pool/make-a-wish.js";
@@ -877,6 +879,7 @@ import _poolViashinoSlaughtermaster from "../pool/viashino-slaughtermaster.js";
 import _poolVincentVengefulAtoner from "../pool/vincent-vengeful-atoner.js";
 import _poolVisionsOfBrutality from "../pool/visions-of-brutality.js";
 import _poolVitalSplicer from "../pool/vital-splicer.js";
+import _poolVivienArkbowRanger from "../pool/vivien-arkbow-ranger.js";
 import _poolVodalianHypnotist from "../pool/vodalian-hypnotist.js";
 import _poolVodalianMindsinger from "../pool/vodalian-mindsinger.js";
 import _poolVoiceOfResurgence from "../pool/voice-of-resurgence.js";
@@ -1140,6 +1143,7 @@ const shard: CardShard = {
     _poolDarksteelForge,
     _poolDawnhartMentor,
     _poolDawnsireSunstarDreadnought,
+    _poolDazzlingReflection,
     _poolDeadeyeBrawler,
     _poolDebtorsPulpit,
     _poolDecommission,
@@ -1424,6 +1428,7 @@ const shard: CardShard = {
     _poolLootTheKeyToEverything,
     _poolLorthosTheTidemaker,
     _poolLysAlanaScarblade,
+    _poolMaestrosConfluence,
     _poolMagmaGiant,
     _poolMagusOfTheJar,
     _poolMakeAWish,
@@ -1821,6 +1826,7 @@ const shard: CardShard = {
     _poolVincentVengefulAtoner,
     _poolVisionsOfBrutality,
     _poolVitalSplicer,
+    _poolVivienArkbowRanger,
     _poolVodalianHypnotist,
     _poolVodalianMindsinger,
     _poolVoiceOfResurgence,

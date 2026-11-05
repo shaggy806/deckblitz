@@ -281,6 +281,7 @@ import _poolFrontlineSage from "../pool/frontline-sage.js";
 import _poolFrostfistStrider from "../pool/frostfist-strider.js";
 import _poolFulminatorMage from "../pool/fulminator-mage.js";
 import _poolGargosViciousWatcher from "../pool/gargos-vicious-watcher.js";
+import _poolGarrukSavageHerald from "../pool/garruk-savage-herald.js";
 import _poolGatherTheTownsfolk from "../pool/gather-the-townsfolk.js";
 import _poolGatstafShepherd from "../pool/gatstaf-shepherd.js";
 import _poolGenestealerLocus from "../pool/genestealer-locus.js";
@@ -485,6 +486,7 @@ import _poolNadiersNightblade from "../pool/nadiers-nightblade.js";
 import _poolNagaOracle from "../pool/naga-oracle.js";
 import _poolNausea from "../pool/nausea.js";
 import _poolNavigationOrb from "../pool/navigation-orb.js";
+import _poolNecrodominance from "../pool/necrodominance.js";
 import _poolNecromanticSummons from "../pool/necromantic-summons.js";
 import _poolNecroticFumes from "../pool/necrotic-fumes.js";
 import _poolNeedlethornDrake from "../pool/needlethorn-drake.js";
@@ -550,6 +552,7 @@ import _poolPhantomInterference from "../pool/phantom-interference.js";
 import _poolPhoenixFleetAirship from "../pool/phoenix-fleet-airship.js";
 import _poolPhyresis from "../pool/phyresis.js";
 import _poolPhyrexianAtlas from "../pool/phyrexian-atlas.js";
+import _poolPhyrexianColossus from "../pool/phyrexian-colossus.js";
 import _poolPhyrexianMarauder from "../pool/phyrexian-marauder.js";
 import _poolPhyrexianProwler from "../pool/phyrexian-prowler.js";
 import _poolPillarOfLight from "../pool/pillar-of-light.js";
@@ -1232,6 +1235,7 @@ const shard: CardShard = {
     _poolFrostfistStrider,
     _poolFulminatorMage,
     _poolGargosViciousWatcher,
+    _poolGarrukSavageHerald,
     _poolGatherTheTownsfolk,
     _poolGatstafShepherd,
     _poolGenestealerLocus,
@@ -1436,6 +1440,7 @@ const shard: CardShard = {
     _poolNagaOracle,
     _poolNausea,
     _poolNavigationOrb,
+    _poolNecrodominance,
     _poolNecromanticSummons,
     _poolNecroticFumes,
     _poolNeedlethornDrake,
@@ -1501,6 +1506,7 @@ const shard: CardShard = {
     _poolPhoenixFleetAirship,
     _poolPhyresis,
     _poolPhyrexianAtlas,
+    _poolPhyrexianColossus,
     _poolPhyrexianMarauder,
     _poolPhyrexianProwler,
     _poolPillarOfLight,

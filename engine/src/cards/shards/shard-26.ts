@@ -118,6 +118,7 @@ import _poolBuildersBane from "../pool/builders-bane.js";
 import _poolBulwarkOx from "../pool/bulwark-ox.js";
 import _poolBurnTogether from "../pool/burn-together.js";
 import _poolByrkeLongEarOfTheLaw from "../pool/byrke-long-ear-of-the-law.js";
+import _poolCabalTherapist from "../pool/cabal-therapist.js";
 import _poolCactusPreserve from "../pool/cactus-preserve.js";
 import _poolCalamitousCaveIn from "../pool/calamitous-cave-in.js";
 import _poolCallToTheFeast from "../pool/call-to-the-feast.js";
@@ -162,6 +163,7 @@ import _poolConsumingTide from "../pool/consuming-tide.js";
 import _poolControlledInstincts from "../pool/controlled-instincts.js";
 import _poolCoralHelm from "../pool/coral-helm.js";
 import _poolCorpseKnight from "../pool/corpse-knight.js";
+import _poolCosmiumConfluence from "../pool/cosmium-confluence.js";
 import _poolCountOnLuck from "../pool/count-on-luck.js";
 import _poolCrackedEarthTechnique from "../pool/cracked-earth-technique.js";
 import _poolCracklingDoom from "../pool/crackling-doom.js";
@@ -416,6 +418,7 @@ import _poolKavuMonarch from "../pool/kavu-monarch.js";
 import _poolKavuTitan from "../pool/kavu-titan.js";
 import _poolKederektCreeper from "../pool/kederekt-creeper.js";
 import _poolKefkaCourtMage from "../pool/kefka-court-mage.js";
+import _poolKellanDaringTraveler from "../pool/kellan-daring-traveler.js";
 import _poolKelsFightFixer from "../pool/kels-fight-fixer.js";
 import _poolKestiaTheCultivator from "../pool/kestia-the-cultivator.js";
 import _poolKhalniAmbush from "../pool/khalni-ambush.js";
@@ -629,6 +632,7 @@ import _poolReverseEngineer from "../pool/reverse-engineer.js";
 import _poolRhoxCharger from "../pool/rhox-charger.js";
 import _poolRhoxOracle from "../pool/rhox-oracle.js";
 import _poolRiderInNeed from "../pool/rider-in-need.js";
+import _poolRingOfMaruf from "../pool/ring-of-maruf.js";
 import _poolRiteOfRuin from "../pool/rite-of-ruin.js";
 import _poolRiteOfTheRagingStorm from "../pool/rite-of-the-raging-storm.js";
 import _poolRiverpyreVerge from "../pool/riverpyre-verge.js";
@@ -650,6 +654,7 @@ import _poolSaffiEriksdotter from "../pool/saffi-eriksdotter.js";
 import _poolSageOfAncientLore from "../pool/sage-of-ancient-lore.js";
 import _poolSaltfieldRecluse from "../pool/saltfield-recluse.js";
 import _poolSandAugury from "../pool/sand-augury.js";
+import _poolSandsOfTime from "../pool/sands-of-time.js";
 import _poolSandsteppeScavenger from "../pool/sandsteppe-scavenger.js";
 import _poolSanguineGlorifier from "../pool/sanguine-glorifier.js";
 import _poolSaplingOfColfenor from "../pool/sapling-of-colfenor.js";
@@ -737,6 +742,7 @@ import _poolSpearSpewer from "../pool/spear-spewer.js";
 import _poolSpectralArcanist from "../pool/spectral-arcanist.js";
 import _poolSpectralReserves from "../pool/spectral-reserves.js";
 import _poolSpectralSteel from "../pool/spectral-steel.js";
+import _poolSpeedYoungAvenger from "../pool/speed-young-avenger.js";
 import _poolSphereOfPurity from "../pool/sphere-of-purity.js";
 import _poolSphereOfResistance from "../pool/sphere-of-resistance.js";
 import _poolSpiderByteWebWarden from "../pool/spider-byte-web-warden.js";
@@ -1062,6 +1068,7 @@ const shard: CardShard = {
     _poolBulwarkOx,
     _poolBurnTogether,
     _poolByrkeLongEarOfTheLaw,
+    _poolCabalTherapist,
     _poolCactusPreserve,
     _poolCalamitousCaveIn,
     _poolCallToTheFeast,
@@ -1106,6 +1113,7 @@ const shard: CardShard = {
     _poolControlledInstincts,
     _poolCoralHelm,
     _poolCorpseKnight,
+    _poolCosmiumConfluence,
     _poolCountOnLuck,
     _poolCrackedEarthTechnique,
     _poolCracklingDoom,
@@ -1360,6 +1368,7 @@ const shard: CardShard = {
     _poolKavuTitan,
     _poolKederektCreeper,
     _poolKefkaCourtMage,
+    _poolKellanDaringTraveler,
     _poolKelsFightFixer,
     _poolKestiaTheCultivator,
     _poolKhalniAmbush,
@@ -1573,6 +1582,7 @@ const shard: CardShard = {
     _poolRhoxCharger,
     _poolRhoxOracle,
     _poolRiderInNeed,
+    _poolRingOfMaruf,
     _poolRiteOfRuin,
     _poolRiteOfTheRagingStorm,
     _poolRiverpyreVerge,
@@ -1594,6 +1604,7 @@ const shard: CardShard = {
     _poolSageOfAncientLore,
     _poolSaltfieldRecluse,
     _poolSandAugury,
+    _poolSandsOfTime,
     _poolSandsteppeScavenger,
     _poolSanguineGlorifier,
     _poolSaplingOfColfenor,
@@ -1681,6 +1692,7 @@ const shard: CardShard = {
     _poolSpectralArcanist,
     _poolSpectralReserves,
     _poolSpectralSteel,
+    _poolSpeedYoungAvenger,
     _poolSphereOfPurity,
     _poolSphereOfResistance,
     _poolSpiderByteWebWarden,

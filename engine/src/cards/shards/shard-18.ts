@@ -211,6 +211,7 @@ import _poolEerieProcession from "../pool/eerie-procession.js";
 import _poolEerieSoultender from "../pool/eerie-soultender.js";
 import _poolElderGargaroth from "../pool/elder-gargaroth.js";
 import _poolElderOfLaurels from "../pool/elder-of-laurels.js";
+import _poolEldraziConfluence from "../pool/eldrazi-confluence.js";
 import _poolEldraziRavager from "../pool/eldrazi-ravager.js";
 import _poolElektraDaughterOfTheHand from "../pool/elektra-daughter-of-the-hand.js";
 import _poolElementalTeachings from "../pool/elemental-teachings.js";
@@ -525,6 +526,7 @@ import _poolNovelNunchaku from "../pool/novel-nunchaku.js";
 import _poolNykthosShrineToNyx from "../pool/nykthos-shrine-to-nyx.js";
 import _poolONaginata from "../pool/o-naginata.js";
 import _poolOakgnarlWarrior from "../pool/oakgnarl-warrior.js";
+import _poolObscuraConfluence from "../pool/obscura-confluence.js";
 import _poolObsessivePursuit from "../pool/obsessive-pursuit.js";
 import _poolOffBalance from "../pool/off-balance.js";
 import _poolOgreJailbreaker from "../pool/ogre-jailbreaker.js";
@@ -538,6 +540,7 @@ import _poolOrbsOfWarding from "../pool/orbs-of-warding.js";
 import _poolOrcishFarmer from "../pool/orcish-farmer.js";
 import _poolOrderedMigration from "../pool/ordered-migration.js";
 import _poolOtawaraSoaringCity from "../pool/otawara-soaring-city.js";
+import _poolOutbreak from "../pool/outbreak.js";
 import _poolOutlandLiberator from "../pool/outland-liberator.js";
 import _poolOverwhelmingSurge from "../pool/overwhelming-surge.js";
 import _poolOzolithTheShatteredSpire from "../pool/ozolith-the-shattered-spire.js";
@@ -1147,6 +1150,7 @@ const shard: CardShard = {
     _poolEerieSoultender,
     _poolElderGargaroth,
     _poolElderOfLaurels,
+    _poolEldraziConfluence,
     _poolEldraziRavager,
     _poolElektraDaughterOfTheHand,
     _poolElementalTeachings,
@@ -1461,6 +1465,7 @@ const shard: CardShard = {
     _poolNykthosShrineToNyx,
     _poolONaginata,
     _poolOakgnarlWarrior,
+    _poolObscuraConfluence,
     _poolObsessivePursuit,
     _poolOffBalance,
     _poolOgreJailbreaker,
@@ -1474,6 +1479,7 @@ const shard: CardShard = {
     _poolOrcishFarmer,
     _poolOrderedMigration,
     _poolOtawaraSoaringCity,
+    _poolOutbreak,
     _poolOutlandLiberator,
     _poolOverwhelmingSurge,
     _poolOzolithTheShatteredSpire,

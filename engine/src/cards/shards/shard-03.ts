@@ -36,6 +36,7 @@ import _poolArmoredGalleon from "../pool/armored-galleon.js";
 import _poolArmyOfTheDamned from "../pool/army-of-the-damned.js";
 import _poolArtificersDragon from "../pool/artificers-dragon.js";
 import _poolAscendingAven from "../pool/ascending-aven.js";
+import _poolAshnodsCylix from "../pool/ashnods-cylix.js";
 import _poolAtarkaWorldRender from "../pool/atarka-world-render.js";
 import _poolAutonomousAssembler from "../pool/autonomous-assembler.js";
 import _poolAvacynAngelOfHope from "../pool/avacyn-angel-of-hope.js";
@@ -76,6 +77,7 @@ import _poolBurdenOfGreed from "../pool/burden-of-greed.js";
 import _poolBurglarsPlot from "../pool/burglars-plot.js";
 import _poolBurnDownTheHouse from "../pool/burn-down-the-house.js";
 import _poolBurningSands from "../pool/burning-sands.js";
+import _poolBurningTreeBloodscale from "../pool/burning-tree-bloodscale.js";
 import _poolBurstOfStrength from "../pool/burst-of-strength.js";
 import _poolBuzzardWaspColony from "../pool/buzzard-wasp-colony.js";
 import _poolByInvitationOnly from "../pool/by-invitation-only.js";
@@ -183,6 +185,7 @@ import _poolDreadOsseosaur from "../pool/dread-osseosaur.js";
 import _poolDreadWanderer from "../pool/dread-wanderer.js";
 import _poolDreadhound from "../pool/dreadhound.js";
 import _poolDreamTwist from "../pool/dream-twist.js";
+import _poolDromokasCommand from "../pool/dromokas-command.js";
 import _poolDruidsCall from "../pool/druids-call.js";
 import _poolDustBowl from "../pool/dust-bowl.js";
 import _poolDwarvenDemolitionTeam from "../pool/dwarven-demolition-team.js";
@@ -718,6 +721,7 @@ import _poolSylvanShepherd from "../pool/sylvan-shepherd.js";
 import _poolSymbioticWurm from "../pool/symbiotic-wurm.js";
 import _poolSynodArtificer from "../pool/synod-artificer.js";
 import _poolTakeAGlance from "../pool/take-a-glance.js";
+import _poolTamThePossibility from "../pool/tam-the-possibility.js";
 import _poolTangledIslet from "../pool/tangled-islet.js";
 import _poolTarpan from "../pool/tarpan.js";
 import _poolTaunt from "../pool/taunt.js";
@@ -734,6 +738,7 @@ import _poolTesharAncestorsApostle from "../pool/teshar-ancestors-apostle.js";
 import _poolTetzimocPrimalDeath from "../pool/tetzimoc-primal-death.js";
 import _poolTezzeretAgentOfBolas from "../pool/tezzeret-agent-of-bolas.js";
 import _poolTezzeretsStrider from "../pool/tezzerets-strider.js";
+import _poolTheCore from "../pool/the-core.js";
 import _poolTheFantasticFour from "../pool/the-fantastic-four.js";
 import _poolTheGaffer from "../pool/the-gaffer.js";
 import _poolTheImmortalSun from "../pool/the-immortal-sun.js";
@@ -744,6 +749,7 @@ import _poolTheUnspeakable from "../pool/the-unspeakable.js";
 import _poolTheorixCharm from "../pool/theorix-charm.js";
 import _poolTheorixMetamage from "../pool/theorix-metamage.js";
 import _poolThornedMoloch from "../pool/thorned-moloch.js";
+import _poolThoughtpickerWitch from "../pool/thoughtpicker-witch.js";
 import _poolThrabenGargoyle from "../pool/thraben-gargoyle.js";
 import _poolThrillOfTheHunt from "../pool/thrill-of-the-hunt.js";
 import _poolThrivingBluff from "../pool/thriving-bluff.js";
@@ -891,6 +897,7 @@ const shard: CardShard = {
     _poolArmyOfTheDamned,
     _poolArtificersDragon,
     _poolAscendingAven,
+    _poolAshnodsCylix,
     _poolAtarkaWorldRender,
     _poolAutonomousAssembler,
     _poolAvacynAngelOfHope,
@@ -931,6 +938,7 @@ const shard: CardShard = {
     _poolBurglarsPlot,
     _poolBurnDownTheHouse,
     _poolBurningSands,
+    _poolBurningTreeBloodscale,
     _poolBurstOfStrength,
     _poolBuzzardWaspColony,
     _poolByInvitationOnly,
@@ -1038,6 +1046,7 @@ const shard: CardShard = {
     _poolDreadWanderer,
     _poolDreadhound,
     _poolDreamTwist,
+    _poolDromokasCommand,
     _poolDruidsCall,
     _poolDustBowl,
     _poolDwarvenDemolitionTeam,
@@ -1573,6 +1582,7 @@ const shard: CardShard = {
     _poolSymbioticWurm,
     _poolSynodArtificer,
     _poolTakeAGlance,
+    _poolTamThePossibility,
     _poolTangledIslet,
     _poolTarpan,
     _poolTaunt,
@@ -1589,6 +1599,7 @@ const shard: CardShard = {
     _poolTetzimocPrimalDeath,
     _poolTezzeretAgentOfBolas,
     _poolTezzeretsStrider,
+    _poolTheCore,
     _poolTheFantasticFour,
     _poolTheGaffer,
     _poolTheImmortalSun,
@@ -1599,6 +1610,7 @@ const shard: CardShard = {
     _poolTheorixCharm,
     _poolTheorixMetamage,
     _poolThornedMoloch,
+    _poolThoughtpickerWitch,
     _poolThrabenGargoyle,
     _poolThrillOfTheHunt,
     _poolThrivingBluff,
