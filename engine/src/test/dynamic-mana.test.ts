@@ -393,7 +393,7 @@ describe("bots and the fuzzer with live-amount mana sources", () => {
       };
       expect(() => play((p, s) => new RandomController(p, rng(s)), seed)).not.toThrow();
     }
-  });
+  }, 60_000); // Long under a full suite's load (9 s alone): it asks that the games finish, not how fast.
 
   it("HeuristicBotController games run to turn 30 or an end", () => {
     for (const seed of [1, 2]) {

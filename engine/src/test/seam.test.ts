@@ -534,7 +534,7 @@ describe("random play", () => {
       expect(game.isOver).toBe(true);
       expect(game.state.awaiting).toBeNull();
     }
-  });
+  }, 60_000); // Long under a full suite's load (9 s alone): it asks that the games finish, not how fast.
 
   it("a ScriptedController still drives combat through the new actions", () => {
     const attacker = new ScriptedController(A);
