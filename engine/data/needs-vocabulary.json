@@ -15272,6 +15272,206 @@
    "family": "effect:end-the-turn",
    "description": "No cost increase printed on a spell itself; cost:cost-increase-not-your-turn is Defense Grid's static on other spells.",
    "example": "Hurkyl's Final Meditation"
+  },
+  "effect:reselect-attack-target-chosen-player": {
+   "family": "effect:reselect-attack-target",
+   "description": "Makes the chosen attackers attack a player named in another target slot, with no choice left to the caster.",
+   "example": "Portal Manipulator"
+  },
+  "amount:cards-put-on-library-this-way": {
+   "family": "effect:target-player-puts-cards-from-hand-on-library",
+   "description": "\"Search that player's library for that many cards\": no count of the cards put on top this way.",
+   "example": "Head Games"
+  },
+  "filter:didnt-attack-in-trigger-declaration": {
+   "family": "filter:controlled-continuously-since-turn-start",
+   "description": "\"Didn't attack\" means in that declaration (the trigger's), not this turn.",
+   "example": "Total War"
+  },
+  "static:unblockable-while-defender-controls": {
+   "family": "keyword:artifact-landwalk",
+   "description": "Unblockable as long as the defending player controls an artifact land: not landwalk.",
+   "example": "Tanglewalker"
+  },
+  "trigger:first-time-tapped-checked-on-resolution": {
+   "family": "trigger:becomes-tapped-first-time-your-turn",
+   "description": "Its intervening-if must be checked again as the trigger resolves.",
+   "example": "Captain America, Living Legend"
+  },
+  "amount:excess-damage-of-trigger-event": {
+   "family": "trigger:excess-damage-trigger",
+   "description": "\"X is that excess damage\": the trigger carries no excess amount.",
+   "example": "Overclocked Electromancer"
+  },
+  "effect:remove-blocker-then-must-block": {
+   "family": "effect:remove-blocker-unblock-and-reblock",
+   "description": "\"Then it blocks an attacking creature of your choice\" is mandatory; thenMayBlock lets the player choose none.",
+   "example": "Balduvian Warlord"
+  },
+  "effect:swap-blockers": {
+   "family": "effect:remove-blocker-unblock-and-reblock",
+   "description": "Swap what two blockers block, each checked as able to block the other's attackers.",
+   "example": "Sorrow's Path"
+  },
+  "trigger:dies-while-blocking-source": {
+   "family": "filter:blocking-trigger-object",
+   "description": "\"Whenever a creature blocking this creature dies\": blockingRelation needs the creature still in combat on the battlefield.",
+   "example": "Baneblade Scoundrel"
+  },
+  "effect:delayed-whenever-until-end-of-next-turn": {
+   "family": "keyword:pawprint-modes",
+   "description": "A delayed \"whenever\" lasting until the end of your next turn (only until your next turn begins exists).",
+   "example": "Season of the Bold"
+  },
+  "static:cda-life-difference-most-opponent": {
+   "family": "static:cda-life-total",
+   "description": "P/T equal to your life total minus the life total of an opponent with the most life.",
+   "example": "Roiling Horror"
+  },
+  "static:grants-replacement-effect": {
+   "family": "static:grants-static-ability",
+   "description": "A would-draw replacement granted through grantsStatic never applied (tested).",
+   "example": "Scion of Halaster"
+  },
+  "replacement:next-draw-this-turn-carries-x": {
+   "family": "replacement:next-draw-this-turn",
+   "description": "The activation's X isn't carried into nextDrawInstead's effect (its look-and-choose saw 0 cards, tested).",
+   "example": "Aladdin's Lamp"
+  },
+  "effect:add-mana-combination-of-card-colors": {
+   "family": "replacement:mana-pool-emptying",
+   "description": "Add mana in any combination of the revealed card's colors.",
+   "example": "Omnath, Locus of All"
+  },
+  "target:other-than-trigger-object": {
+   "family": "trigger:excess-damage-trigger",
+   "description": "\"Any target other than that permanent\", and the excess amount.",
+   "example": "Toralf, God of Fury"
+  },
+  "trigger:becomes-target-once-per-spell": {
+   "family": "trigger:player-becomes-target",
+   "description": "\"You and/or at least one permanent you control\" triggers once per spell; the engine fires once per target.",
+   "example": "Leyline of Combustion"
+  },
+  "stat:lands-played-not-from-hand-this-turn": {
+   "family": "stat:spells-cast-not-from-hand-this-turn",
+   "description": "Nothing records where a played land came from.",
+   "example": "Spider-Man 2099"
+  },
+  "filter:same-name-as-target-in-search": {
+   "family": "condition:same-name-as-target-off-battlefield",
+   "description": "A library search for a card with the target's name.",
+   "example": "March of Burgeoning Life"
+  },
+  "effect:look-and-choose-then-always": {
+   "family": "decision:choose-face-up-exiled-card",
+   "description": "look-and-choose's then doesn't run with nothing chosen, but the library exile must.",
+   "example": "Mirror of Fate"
+  },
+  "effect:animate-remove-supertype": {
+   "family": "effect:animate-add-supertype",
+   "description": "\"No longer snow\": addSupertypes has no inverse.",
+   "example": "Arcum's Weathervane"
+  },
+  "replacement:as-transforms-choice": {
+   "family": "replacement:as-transforms",
+   "description": "Choosing the exiled card to copy as it transforms.",
+   "example": "Ludevic, Necrogenius"
+  },
+  "effect:become-copy-of-card-moved-this-way": {
+   "family": "effect:become-copy-of-card",
+   "description": "Becomes a copy of the revealed card just put into the graveyard.",
+   "example": "Shapeshifter's Marrow"
+  },
+  "static:aura-enchanted-is-copy-of-chosen": {
+   "family": "effect:become-copy-while-source",
+   "description": "A static copy that follows the Aura's enchanted creature.",
+   "example": "Metamorphic Alteration"
+  },
+  "effect:exile-spell-as-it-resolves-with-counter": {
+   "family": "effect:cast-now-exiled-with-counter",
+   "description": "exile-spell-as-it-resolves can't add a dream counter.",
+   "example": "Goliath Daydreamer"
+  },
+  "effect:cast-now-from-hand-graveyard-or-owned-exile": {
+   "family": "effect:cast-now-from-hand-or-graveyard",
+   "description": "Cast from hand, graveyard or cards you own in exile: from.zones takes only hand and graveyard.",
+   "example": "Kaya the Inexorable"
+  },
+  "effect:aura-onto-each-created-token": {
+   "family": "effect:created-token-reference",
+   "description": "Put an Aura onto each token created this way.",
+   "example": "Liberated Livestock"
+  },
+  "effect:created-token-gains-triggered": {
+   "family": "effect:created-token-reference",
+   "description": "The token's cumulative upkeep and its leave trigger.",
+   "example": "Splintering Wind"
+  },
+  "effect:exile-from-revealed-hand-per-opponent-until-leaves": {
+   "family": "effect:exile-until-leaves-per-opponent",
+   "description": "Each opponent reveals, you exile a creature card from each until Valki leaves; plus its copy ability.",
+   "example": "Valki, God of Lies"
+  },
+  "effect:you-and-defending-player-loot-compare": {
+   "family": "effect:greatest-among-discarded",
+   "description": "Two simultaneous draws and discards; no scope for \"you and defending player\".",
+   "example": "Cait, Cage Brawler"
+  },
+  "mechanic:two-pairing-abilities": {
+   "family": "effect:remove-time-counters-chosen-suspended",
+   "description": "CardDefinition.pairing holds only one pairing ability.",
+   "example": "Amy Pond"
+  },
+  "mechanic:face-down-piles-exile-one-search-other": {
+   "family": "mechanic:face-down-piles-opponent-chooses",
+   "description": "Exile one face-down pile, search the other for a card.",
+   "example": "Phyrexian Portal"
+  },
+  "replacement:keep-unspent-mana-until-end-of-turn": {
+   "family": "replacement:mana-persistence-color",
+   "description": "Mana that doesn't empty until end of turn.",
+   "example": "The Last Agni Kai"
+  },
+  "effect:becomes-named-with-granted-static": {
+   "family": "static:set-name",
+   "description": "Becomes a named legendary with a granted static.",
+   "example": "Tenth District Hero"
+  },
+  "effect:for-each-player-destroy-then-token-per-destroyed-controller": {
+   "family": "static:set-name",
+   "description": "Chapter I: each player destroys, then a token for each controller of a destroyed creature.",
+   "example": "The Curse of Fenric"
+  },
+  "zone:cast-one-from-milled-until-end-of-turn": {
+   "family": "zone:cast-from-milled-cards",
+   "description": "Cast one of the milled cards until end of turn.",
+   "example": "Locke, Treasure Hunter"
+  },
+  "effect:cast-one-per-player-from-milled": {
+   "family": "zone:cast-from-milled-cards",
+   "description": "Cast one card milled from each player.",
+   "example": "The Ur-Sphinx"
+  },
+  "trigger:aura-becomes-attached-to-permanent": {
+   "family": "trigger:becomes-attached",
+   "description": "\"Whenever an Aura becomes attached to this\": becomes-attached takes only the attaching Equipment's own view.",
+   "example": "Bramble Elemental"
+  },
+  "zone:play-from-graveyard-this-turn-enters-tapped": {
+   "family": "replacement:enters-modifier-via-permission",
+   "description": "Play (lands too) from a graveyard this turn, entering tapped.",
+   "example": "Jorn, God of Winter"
+  },
+  "replacement:enters-with-counter-via-static-graveyard-permission": {
+   "family": "replacement:enters-modifier-via-permission",
+   "description": "A graveyard cast permission with a finality-counter rider, told apart from others.",
+   "example": "Leonardo, Sewer Samurai"
+  },
+  "effect:each-player-chooses-permanents-exile-until-leaves": {
+   "family": "effect:each-player-chooses-then-all-act",
+   "description": "Each player chooses permanents, exiled until it leaves.",
+   "example": "Foreboding Steamboat"
   }
  },
  "groups": [
