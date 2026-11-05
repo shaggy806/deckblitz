@@ -14600,6 +14600,126 @@
    "description": "An as-enters choice for a card begun on the battlefield: applyOpeningHand moves it with a bare moveObject, and only askEnterChoice asks.",
    "example": "Leyline of Transformation: begun on the battlefield it never chooses a creature type"
   },
+  "filter:damaged-this-turn-by-target": {
+   "family": "trigger:damage-trigger-extensions",
+   "description": "damagedThisTurnBy naming the creature in a target slot, for a delayed trigger: its source says only this or host.",
+   "example": "Touch of Moonglove: damagedThisTurnBy.source names only this or host, so a delayed trigger can't say \"dealt damage by that creature\"."
+  },
+  "cost:x-fixed-by-counters-on-source": {
+   "family": "decision:choose-color-on-resolution",
+   "description": "A cost of {X} where X is read off the game, not chosen: X is always the player's.",
+   "example": "Chromatic Armor: {X} is always the player's choice, and \"the last chosen color\" can't be updated on activation."
+  },
+  "decision:remember-chosen-color-on-resolution": {
+   "family": "decision:choose-color-on-resolution",
+   "description": "A colour chosen as an ability resolves and kept on the permanent for later: choose-value's remember holds numbers.",
+   "example": "Chromatic Armor: {X} is always the player's choice, and \"the last chosen color\" can't be updated on activation."
+  },
+  "amount:count-excluding-granter": {
+   "family": "effect:amount-new-variants",
+   "description": "A count of what's attached, less the one Aura granting the ability, not other copies of it by name.",
+   "example": "Animal Friend: \"Other than Animal Friend\" means the granting Aura only, and a count of what's attached reads 0 once the host has left."
+  },
+  "amount:attached-to-source-last-known": {
+   "family": "effect:amount-new-variants",
+   "description": "A count of what's attached to the source as it last existed (608.2h): attachedTo isSource reads the board now, so 0 once it has left.",
+   "example": "Animal Friend: \"Other than Animal Friend\" means the granting Aura only, and a count of what's attached reads 0 once the host has left."
+  },
+  "duration:while-source-tapped-since-activation": {
+   "family": "effect:choices-by-other-players",
+   "description": "A duration ended by any untap since activation: while-source-tapped reads only the current state.",
+   "example": "Preacher: By its ruling an untap at any point before resolution ends it, even if tapped again; while-source-tapped reads only the moment of resolution."
+  },
+  "effect:keep-targets-last-known": {
+   "family": "decision:choose-counter-kind",
+   "description": "choose-permanents' keepTargets shifting targetZones with the slots, so a then can read a target that has left.",
+   "example": "Dismantle: Inside choose-permanents' keepTargets the target's zone isn't shifted with its slot, so the counters on the destroyed artifact read 0."
+  },
+  "decision:damage-redirect-order": {
+   "family": "replacement:damage-modification",
+   "description": "The affected player choosing among overlapping damage redirections (616.1): bestDamageOrder chooses for them.",
+   "example": "Gideon's Sacrifice: With two in one turn the damage goes to the one of your choice (616.1); the engine orders them itself."
+  },
+  "effect:choose-permanents-this-way": {
+   "family": "decision:choose-permanent",
+   "description": "A then or later step of modify-pt-all reading the permanents choose-permanents chose, with X read once.",
+   "example": "Spry and Mighty: X is read once for both pumps; modify-pt-all's thisWay chosen matches nothing after choose-permanents, and per-slot modify-pt reads X again."
+  },
+  "static:cda-count-defending-player": {
+   "family": "effect:amount-new-variants",
+   "description": "setBasePtFromCount read from one defending player's side, not every defending player's.",
+   "example": "Gaea's Liege: setBasePtFromCount can't count from the defending player's side, and a filter counts every defending player at a table of 3 or more."
+  },
+  "static:pt-per-graveyard-with-n-cards": {
+   "family": "effect:amount-new-variants",
+   "description": "grantPtPerCount counting players by their graveyards.",
+   "example": "Master's Councillors: grantPtPerCount has no count of players, and an amounts condition is always false in a static."
+  },
+  "condition:this-ability-did-this-turn": {
+   "family": "effect:amount-new-variants",
+   "description": "An intervening if on this ability already having resolved this turn: may's oncePerTurn stops only the effect.",
+   "example": "Carpet of Flowers: may's oncePerTurn stops the mana, but the ability still triggers and targets at the next main phase, where its intervening if says it shouldn't."
+  },
+  "trigger:loses-coin-flip": {
+   "family": "keyword:cumulative-upkeep",
+   "description": "A trigger on losing a flip: only wins-coin-flip exists.",
+   "example": "Karplusan Minotaur: Only wins-coin-flip exists, cumulativeUpkeep takes no flip, and targetsChosenBy has no \"an opponent\"."
+  },
+  "keyword:cumulative-upkeep-flip-coin": {
+   "family": "keyword:cumulative-upkeep",
+   "description": "Cumulative upkeep paid by flipping a coin: cumulativeUpkeep takes mana, life or a sacrifice.",
+   "example": "Karplusan Minotaur: Only wins-coin-flip exists, cumulativeUpkeep takes no flip, and targetsChosenBy has no \"an opponent\"."
+  },
+  "target:triggered-opponents-choice": {
+   "family": "keyword:cumulative-upkeep",
+   "description": "targetsChosenBy naming an opponent of the controller's choice.",
+   "example": "Karplusan Minotaur: Only wins-coin-flip exists, cumulativeUpkeep takes no flip, and targetsChosenBy has no \"an opponent\"."
+  },
+  "target:filter-from-chooser-side": {
+   "family": "effect:choices-by-other-players",
+   "description": "A targetsChosenBy filter read from the chooser's side (\"their opponents\"): legality stays on the controller's.",
+   "example": "Necrotic Plague: targetsChosenBy keeps legality on the controller's side, so \"their opponents\" can't be said from the chooser's."
+  },
+  "filter:controller-controls-count": {
+   "family": "condition:player-state-thresholds",
+   "description": "A filter on the count of a type each affected permanent's controller controls.",
+   "example": "Sheltering Prayers: \"As long as that player controls three or fewer lands\" needs a per-affected-controller read."
+  },
+  "amount:cards-in-target-hand-matching": {
+   "family": "decision:choose-color-on-resolution",
+   "description": "A count of the cards matching a filter in a target player's hand: hand-size bounds are fixed numbers.",
+   "example": "Scrying Glass: No amount counts a filtered hand, so \"exactly the chosen number of the chosen color\" can't compare against x."
+  },
+  "effect:flip-coins-count-until-lose": {
+   "family": "decision:choose-color-on-resolution",
+   "description": "Flipping a set number of times or until a loss, with the flips won readable.",
+   "example": "Squee's Revenge: flip-coin is one flip or an unbounded untilLose, and nothing reads flips won."
+  },
+  "decision:choose-different-players": {
+   "family": "decision:choose-player",
+   "description": "Several players chosen in turn, each different from the last: nested choose-opponent shadows and remembers one.",
+   "example": "Gluntch, the Bestower: Nested choose-opponent can't exclude earlier choices, so three different players can't be written."
+  },
+  "trigger:chosen-player-loses-game": {
+   "family": "decision:choose-permanent",
+   "description": "A trigger on a player losing the game, and on the chosen one: none exists.",
+   "example": "Zenos yae Galvus: No trigger for a player losing, and an enters-resolution choice isn't remembered for a later leaves trigger."
+  },
+  "decision:remember-chosen-permanent-on-resolution": {
+   "family": "decision:choose-permanent",
+   "description": "A permanent chosen as an enters ability resolves and kept for a later trigger.",
+   "example": "Zenos yae Galvus: No trigger for a player losing, and an enters-resolution choice isn't remembered for a later leaves trigger."
+  },
+  "trigger:chosen-permanent-leaves": {
+   "family": "decision:choose-permanent",
+   "description": "A trigger on a permanent remembered by a choice leaving the battlefield.",
+   "example": "Zenos yae Galvus: No trigger for a player losing, and an enters-resolution choice isn't remembered for a later leaves trigger."
+  },
+  "amount:defending-player-of-each-attacker": {
+   "family": "effect:amount-new-variants",
+   "description": "A player ref naming the player a creature in a slot attacks (508.5a).",
+   "example": "Mercadia's Downfall: Each attacker needs its own defending player (508.5a), and no player ref names the defender of the creature in a slot."
+  },
   "decision:choose-two-players-on-enter": {
    "family": "decision:choose-player",
    "description": "Two different players chosen as it enters: choosePlayerOnEnter keeps one, and nothing reads \"the other chosen player\".",

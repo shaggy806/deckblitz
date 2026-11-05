@@ -104,6 +104,7 @@ import _poolBodyLaunderer from "../pool/body-launderer.js";
 import _poolBoilingBlood from "../pool/boiling-blood.js";
 import _poolBorosElite from "../pool/boros-elite.js";
 import _poolBorosKeyrune from "../pool/boros-keyrune.js";
+import _poolBorrowedKnowledge from "../pool/borrowed-knowledge.js";
 import _poolBrambleWurm from "../pool/bramble-wurm.js";
 import _poolBrambleguardCaptain from "../pool/brambleguard-captain.js";
 import _poolBranchOfBoseiju from "../pool/branch-of-boseiju.js";
@@ -199,9 +200,11 @@ import _poolDictateOfKruphix from "../pool/dictate-of-kruphix.js";
 import _poolDimirCutpurse from "../pool/dimir-cutpurse.js";
 import _poolDimirKeyrune from "../pool/dimir-keyrune.js";
 import _poolDiscipleOfFreyalise from "../pool/disciple-of-freyalise.js";
+import _poolDisorder from "../pool/disorder.js";
 import _poolDissectionTools from "../pool/dissection-tools.js";
 import _poolDistendedMindbender from "../pool/distended-mindbender.js";
 import _poolDjeruWithEyesOpen from "../pool/djeru-with-eyes-open.js";
+import _poolDoctorStrangeSurgeon from "../pool/doctor-strange-surgeon.js";
 import _poolDoggedPursuit from "../pool/dogged-pursuit.js";
 import _poolDomesticatedHydra from "../pool/domesticated-hydra.js";
 import _poolDonAndresTheRenegade from "../pool/don-andres-the-renegade.js";
@@ -242,6 +245,7 @@ import _poolEndlessRanksOfHydra from "../pool/endless-ranks-of-hydra.js";
 import _poolEnduringVictory from "../pool/enduring-victory.js";
 import _poolEnragedHuorn from "../pool/enraged-huorn.js";
 import _poolEnvoyOfOkinecAhau from "../pool/envoy-of-okinec-ahau.js";
+import _poolErisRoarOfTheStorm from "../pool/eris-roar-of-the-storm.js";
 import _poolErraticPortal from "../pool/erratic-portal.js";
 import _poolErtaisTrickery from "../pool/ertais-trickery.js";
 import _poolEscapeFromOrthanc from "../pool/escape-from-orthanc.js";
@@ -307,6 +311,7 @@ import _poolGateToTheAether from "../pool/gate-to-the-aether.js";
 import _poolGenasiEnforcers from "../pool/genasi-enforcers.js";
 import _poolGenesis from "../pool/genesis.js";
 import _poolGeothermalBog from "../pool/geothermal-bog.js";
+import _poolGerrardCapashen from "../pool/gerrard-capashen.js";
 import _poolGhostWarden from "../pool/ghost-warden.js";
 import _poolGiantAdephage from "../pool/giant-adephage.js";
 import _poolGiantDustwasp from "../pool/giant-dustwasp.js";
@@ -363,6 +368,7 @@ import _poolHipparion from "../pool/hipparion.js";
 import _poolHobgoblinCaptain from "../pool/hobgoblin-captain.js";
 import _poolHordeOfBoggarts from "../pool/horde-of-boggarts.js";
 import _poolHourOfPromise from "../pool/hour-of-promise.js";
+import _poolHourOfRevelation from "../pool/hour-of-revelation.js";
 import _poolHumblerOfMortals from "../pool/humbler-of-mortals.js";
 import _poolHydaelynTheMothercrystal from "../pool/hydaelyn-the-mothercrystal.js";
 import _poolHydroblast from "../pool/hydroblast.js";
@@ -453,6 +459,7 @@ import _poolLotusCobra from "../pool/lotus-cobra.js";
 import _poolLoyalApprentice from "../pool/loyal-apprentice.js";
 import _poolLuXunScholarGeneral from "../pool/lu-xun-scholar-general.js";
 import _poolMachinistsArsenal from "../pool/machinists-arsenal.js";
+import _poolMadameVastra from "../pool/madame-vastra.js";
 import _poolMagmaHellion from "../pool/magma-hellion.js";
 import _poolMaiJadedEdge from "../pool/mai-jaded-edge.js";
 import _poolMaladyInvoker from "../pool/malady-invoker.js";
@@ -784,6 +791,7 @@ import _poolThatsMine from "../pool/thats-mine.js";
 import _poolTheBlueSpirit from "../pool/the-blue-spirit.js";
 import _poolTheDestinedBlackMage from "../pool/the-destined-black-mage.js";
 import _poolTheLegendOfRoku from "../pool/the-legend-of-roku.js";
+import _poolTheMasterOfLakeTown from "../pool/the-master-of-lake-town.js";
 import _poolThePartingOfTheWays from "../pool/the-parting-of-the-ways.js";
 import _poolThopterSpyNetwork from "../pool/thopter-spy-network.js";
 import _poolThoughtCollapse from "../pool/thought-collapse.js";
@@ -1011,6 +1019,7 @@ const shard: CardShard = {
     _poolBoilingBlood,
     _poolBorosElite,
     _poolBorosKeyrune,
+    _poolBorrowedKnowledge,
     _poolBrambleWurm,
     _poolBrambleguardCaptain,
     _poolBranchOfBoseiju,
@@ -1106,9 +1115,11 @@ const shard: CardShard = {
     _poolDimirCutpurse,
     _poolDimirKeyrune,
     _poolDiscipleOfFreyalise,
+    _poolDisorder,
     _poolDissectionTools,
     _poolDistendedMindbender,
     _poolDjeruWithEyesOpen,
+    _poolDoctorStrangeSurgeon,
     _poolDoggedPursuit,
     _poolDomesticatedHydra,
     _poolDonAndresTheRenegade,
@@ -1149,6 +1160,7 @@ const shard: CardShard = {
     _poolEnduringVictory,
     _poolEnragedHuorn,
     _poolEnvoyOfOkinecAhau,
+    _poolErisRoarOfTheStorm,
     _poolErraticPortal,
     _poolErtaisTrickery,
     _poolEscapeFromOrthanc,
@@ -1214,6 +1226,7 @@ const shard: CardShard = {
     _poolGenasiEnforcers,
     _poolGenesis,
     _poolGeothermalBog,
+    _poolGerrardCapashen,
     _poolGhostWarden,
     _poolGiantAdephage,
     _poolGiantDustwasp,
@@ -1270,6 +1283,7 @@ const shard: CardShard = {
     _poolHobgoblinCaptain,
     _poolHordeOfBoggarts,
     _poolHourOfPromise,
+    _poolHourOfRevelation,
     _poolHumblerOfMortals,
     _poolHydaelynTheMothercrystal,
     _poolHydroblast,
@@ -1360,6 +1374,7 @@ const shard: CardShard = {
     _poolLoyalApprentice,
     _poolLuXunScholarGeneral,
     _poolMachinistsArsenal,
+    _poolMadameVastra,
     _poolMagmaHellion,
     _poolMaiJadedEdge,
     _poolMaladyInvoker,
@@ -1691,6 +1706,7 @@ const shard: CardShard = {
     _poolTheBlueSpirit,
     _poolTheDestinedBlackMage,
     _poolTheLegendOfRoku,
+    _poolTheMasterOfLakeTown,
     _poolThePartingOfTheWays,
     _poolThopterSpyNetwork,
     _poolThoughtCollapse,

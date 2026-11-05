@@ -9,6 +9,7 @@ import _poolAcclaimedContender from "../pool/acclaimed-contender.js";
 import _poolAcidicSlime from "../pool/acidic-slime.js";
 import _poolAdantoTheFirstFort from "../pool/adanto-the-first-fort.js";
 import _poolAdventurousEater from "../pool/adventurous-eater.js";
+import _poolAdviceFromTheFae from "../pool/advice-from-the-fae.js";
 import _poolAerialAssault from "../pool/aerial-assault.js";
 import _poolAesthirGlider from "../pool/aesthir-glider.js";
 import _poolAetherCharge from "../pool/aether-charge.js";
@@ -46,6 +47,7 @@ import _poolArrest from "../pool/arrest.js";
 import _poolAshlingsCommand from "../pool/ashlings-command.js";
 import _poolAssaultronDominator from "../pool/assaultron-dominator.js";
 import _poolAssembleTheEntmoot from "../pool/assemble-the-entmoot.js";
+import _poolAtemsisAllSeeing from "../pool/atemsis-all-seeing.js";
 import _poolAudaciousReshapers from "../pool/audacious-reshapers.js";
 import _poolAuraBarbs from "../pool/aura-barbs.js";
 import _poolAvacynsCollar from "../pool/avacyns-collar.js";
@@ -775,6 +777,7 @@ import _poolTenuredTethermage from "../pool/tenured-tethermage.js";
 import _poolTerminalMoraine from "../pool/terminal-moraine.js";
 import _poolTethermagesAdvantage from "../pool/tethermages-advantage.js";
 import _poolTevalArbiterOfVirtue from "../pool/teval-arbiter-of-virtue.js";
+import _poolTheAbyss from "../pool/the-abyss.js";
 import _poolTheBrokenSky from "../pool/the-broken-sky.js";
 import _poolTheFabulousFrogMan from "../pool/the-fabulous-frog-man.js";
 import _poolTheFairBasilica from "../pool/the-fair-basilica.js";
@@ -943,6 +946,7 @@ const shard: CardShard = {
     _poolAcidicSlime,
     _poolAdantoTheFirstFort,
     _poolAdventurousEater,
+    _poolAdviceFromTheFae,
     _poolAerialAssault,
     _poolAesthirGlider,
     _poolAetherCharge,
@@ -980,6 +984,7 @@ const shard: CardShard = {
     _poolAshlingsCommand,
     _poolAssaultronDominator,
     _poolAssembleTheEntmoot,
+    _poolAtemsisAllSeeing,
     _poolAudaciousReshapers,
     _poolAuraBarbs,
     _poolAvacynsCollar,
@@ -1709,6 +1714,7 @@ const shard: CardShard = {
     _poolTerminalMoraine,
     _poolTethermagesAdvantage,
     _poolTevalArbiterOfVirtue,
+    _poolTheAbyss,
     _poolTheBrokenSky,
     _poolTheFabulousFrogMan,
     _poolTheFairBasilica,

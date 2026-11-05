@@ -21,6 +21,7 @@ import _poolAjaniCallerOfThePride from "../pool/ajani-caller-of-the-pride.js";
 import _poolAkkiCoalflinger from "../pool/akki-coalflinger.js";
 import _poolAkrasanSquire from "../pool/akrasan-squire.js";
 import _poolAkroanLineBreaker from "../pool/akroan-line-breaker.js";
+import _poolAkutaBornOfAsh from "../pool/akuta-born-of-ash.js";
 import _poolAlabasterDragon from "../pool/alabaster-dragon.js";
 import _poolAlabornCavalier from "../pool/alaborn-cavalier.js";
 import _poolAleshasVanguard from "../pool/aleshas-vanguard.js";
@@ -174,6 +175,7 @@ import _poolDarigaazsCharm from "../pool/darigaazs-charm.js";
 import _poolDaringArchaeologist from "../pool/daring-archaeologist.js";
 import _poolDarkDepths from "../pool/dark-depths.js";
 import _poolDarkthicketWolf from "../pool/darkthicket-wolf.js";
+import _poolDavrosDalekCreator from "../pool/davros-dalek-creator.js";
 import _poolDeadOfWinter from "../pool/dead-of-winter.js";
 import _poolDeadapult from "../pool/deadapult.js";
 import _poolDeadeyeNavigator from "../pool/deadeye-navigator.js";
@@ -361,6 +363,7 @@ import _poolHashepOasis from "../pool/hashep-oasis.js";
 import _poolHasranOgress from "../pool/hasran-ogress.js";
 import _poolHatred from "../pool/hatred.js";
 import _poolHauntedCrossroads from "../pool/haunted-crossroads.js";
+import _poolHawkeyeAvengingArcher from "../pool/hawkeye-avenging-archer.js";
 import _poolHazeOfRage from "../pool/haze-of-rage.js";
 import _poolHeadOfTheHomestead from "../pool/head-of-the-homestead.js";
 import _poolHeadlessHorseman from "../pool/headless-horseman.js";
@@ -379,6 +382,7 @@ import _poolHexgoldSlash from "../pool/hexgold-slash.js";
 import _poolHighspireBellRinger from "../pool/highspire-bell-ringer.js";
 import _poolHijack from "../pool/hijack.js";
 import _poolHollowDogs from "../pool/hollow-dogs.js";
+import _poolHollowbornBarghest from "../pool/hollowborn-barghest.js";
 import _poolHomaridSpawningBed from "../pool/homarid-spawning-bed.js";
 import _poolHomesteadCourage from "../pool/homestead-courage.js";
 import _poolHondenOfNightsReach from "../pool/honden-of-nights-reach.js";
@@ -963,6 +967,7 @@ const shard: CardShard = {
     _poolAkkiCoalflinger,
     _poolAkrasanSquire,
     _poolAkroanLineBreaker,
+    _poolAkutaBornOfAsh,
     _poolAlabasterDragon,
     _poolAlabornCavalier,
     _poolAleshasVanguard,
@@ -1116,6 +1121,7 @@ const shard: CardShard = {
     _poolDaringArchaeologist,
     _poolDarkDepths,
     _poolDarkthicketWolf,
+    _poolDavrosDalekCreator,
     _poolDeadOfWinter,
     _poolDeadapult,
     _poolDeadeyeNavigator,
@@ -1303,6 +1309,7 @@ const shard: CardShard = {
     _poolHasranOgress,
     _poolHatred,
     _poolHauntedCrossroads,
+    _poolHawkeyeAvengingArcher,
     _poolHazeOfRage,
     _poolHeadOfTheHomestead,
     _poolHeadlessHorseman,
@@ -1321,6 +1328,7 @@ const shard: CardShard = {
     _poolHighspireBellRinger,
     _poolHijack,
     _poolHollowDogs,
+    _poolHollowbornBarghest,
     _poolHomaridSpawningBed,
     _poolHomesteadCourage,
     _poolHondenOfNightsReach,

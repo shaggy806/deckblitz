@@ -21,6 +21,7 @@ import _poolAlliedAssault from "../pool/allied-assault.js";
 import _poolAllosaurusShepherd from "../pool/allosaurus-shepherd.js";
 import _poolAmbitiousAssault from "../pool/ambitious-assault.js";
 import _poolAnchorToReality from "../pool/anchor-to-reality.js";
+import _poolAngelOfDestiny from "../pool/angel-of-destiny.js";
 import _poolAngelOfGlorysRise from "../pool/angel-of-glorys-rise.js";
 import _poolAngelicAberration from "../pool/angelic-aberration.js";
 import _poolAngelicPurge from "../pool/angelic-purge.js";
@@ -777,6 +778,7 @@ import _poolTakeUpTheShield from "../pool/take-up-the-shield.js";
 import _poolTalionsMessenger from "../pool/talions-messenger.js";
 import _poolTangleAngler from "../pool/tangle-angler.js";
 import _poolTangledSkyline from "../pool/tangled-skyline.js";
+import _poolTeachingsOfTheArchaics from "../pool/teachings-of-the-archaics.js";
 import _poolTectonicEdge from "../pool/tectonic-edge.js";
 import _poolTeferiHeroOfDominaria from "../pool/teferi-hero-of-dominaria.js";
 import _poolTemperedInSolitude from "../pool/tempered-in-solitude.js";
@@ -955,6 +957,7 @@ const shard: CardShard = {
     _poolAllosaurusShepherd,
     _poolAmbitiousAssault,
     _poolAnchorToReality,
+    _poolAngelOfDestiny,
     _poolAngelOfGlorysRise,
     _poolAngelicAberration,
     _poolAngelicPurge,
@@ -1711,6 +1714,7 @@ const shard: CardShard = {
     _poolTalionsMessenger,
     _poolTangleAngler,
     _poolTangledSkyline,
+    _poolTeachingsOfTheArchaics,
     _poolTectonicEdge,
     _poolTeferiHeroOfDominaria,
     _poolTemperedInSolitude,

@@ -40,6 +40,7 @@ import _poolArboretumElemental from "../pool/arboretum-elemental.js";
 import _poolArcaneMelee from "../pool/arcane-melee.js";
 import _poolArcboundSlasher from "../pool/arcbound-slasher.js";
 import _poolArchetypeOfAggression from "../pool/archetype-of-aggression.js";
+import _poolArcumsSleigh from "../pool/arcums-sleigh.js";
 import _poolArgothSanctumOfNature from "../pool/argoth-sanctum-of-nature.js";
 import _poolArmedResponse from "../pool/armed-response.js";
 import _poolArmillarySphere from "../pool/armillary-sphere.js";
@@ -52,6 +53,7 @@ import _poolAtrociousExperiment from "../pool/atrocious-experiment.js";
 import _poolAvatarEnthusiasts from "../pool/avatar-enthusiasts.js";
 import _poolAwakenTheAges from "../pool/awaken-the-ages.js";
 import _poolAwakenTheWoods from "../pool/awaken-the-woods.js";
+import _poolAyliEternalPilgrim from "../pool/ayli-eternal-pilgrim.js";
 import _poolBackwoodsSurvivalists from "../pool/backwoods-survivalists.js";
 import _poolBalduvianFrostwaker from "../pool/balduvian-frostwaker.js";
 import _poolBalemurkLeech from "../pool/balemurk-leech.js";
@@ -155,6 +157,7 @@ import _poolClergyEnVec from "../pool/clergy-en-vec.js";
 import _poolCliffhavenKitesail from "../pool/cliffhaven-kitesail.js";
 import _poolCliffsideRescuer from "../pool/cliffside-rescuer.js";
 import _poolCloakedSiren from "../pool/cloaked-siren.js";
+import _poolClockspinning from "../pool/clockspinning.js";
 import _poolClockworkDragon from "../pool/clockwork-dragon.js";
 import _poolCloudDjinn from "../pool/cloud-djinn.js";
 import _poolCloudSpirit from "../pool/cloud-spirit.js";
@@ -476,6 +479,7 @@ import _poolKenrithsTransformation from "../pool/kenriths-transformation.js";
 import _poolKessigDireSwine from "../pool/kessig-dire-swine.js";
 import _poolKhenraSpellspear from "../pool/khenra-spellspear.js";
 import _poolKillerWhale from "../pool/killer-whale.js";
+import _poolKillmongerRuthlessUsurper from "../pool/killmonger-ruthless-usurper.js";
 import _poolKinjallisDawnrunner from "../pool/kinjallis-dawnrunner.js";
 import _poolKinsbaileAspirant from "../pool/kinsbaile-aspirant.js";
 import _poolKiyomaroFirstToStand from "../pool/kiyomaro-first-to-stand.js";
@@ -709,6 +713,7 @@ import _poolRoguesPassage from "../pool/rogues-passage.js";
 import _poolRollingSpoil from "../pool/rolling-spoil.js";
 import _poolRoninCliffrider from "../pool/ronin-cliffrider.js";
 import _poolRoninHoundmaster from "../pool/ronin-houndmaster.js";
+import _poolRonomSerpent from "../pool/ronom-serpent.js";
 import _poolRootwaterAlligator from "../pool/rootwater-alligator.js";
 import _poolRoughTumble from "../pool/rough-tumble.js";
 import _poolRovingActuator from "../pool/roving-actuator.js";
@@ -740,6 +745,7 @@ import _poolScuttlingDoomEngine from "../pool/scuttling-doom-engine.js";
 import _poolSeaGateOracle from "../pool/sea-gate-oracle.js";
 import _poolSearingBarb from "../pool/searing-barb.js";
 import _poolSecludedSteppe from "../pool/secluded-steppe.js";
+import _poolSecretkeeper from "../pool/secretkeeper.js";
 import _poolSeekerOfSunlight from "../pool/seeker-of-sunlight.js";
 import _poolSeekersSquire from "../pool/seekers-squire.js";
 import _poolSeerOfStolenSight from "../pool/seer-of-stolen-sight.js";
@@ -1022,6 +1028,7 @@ const shard: CardShard = {
     _poolArcaneMelee,
     _poolArcboundSlasher,
     _poolArchetypeOfAggression,
+    _poolArcumsSleigh,
     _poolArgothSanctumOfNature,
     _poolArmedResponse,
     _poolArmillarySphere,
@@ -1034,6 +1041,7 @@ const shard: CardShard = {
     _poolAvatarEnthusiasts,
     _poolAwakenTheAges,
     _poolAwakenTheWoods,
+    _poolAyliEternalPilgrim,
     _poolBackwoodsSurvivalists,
     _poolBalduvianFrostwaker,
     _poolBalemurkLeech,
@@ -1137,6 +1145,7 @@ const shard: CardShard = {
     _poolCliffhavenKitesail,
     _poolCliffsideRescuer,
     _poolCloakedSiren,
+    _poolClockspinning,
     _poolClockworkDragon,
     _poolCloudDjinn,
     _poolCloudSpirit,
@@ -1458,6 +1467,7 @@ const shard: CardShard = {
     _poolKessigDireSwine,
     _poolKhenraSpellspear,
     _poolKillerWhale,
+    _poolKillmongerRuthlessUsurper,
     _poolKinjallisDawnrunner,
     _poolKinsbaileAspirant,
     _poolKiyomaroFirstToStand,
@@ -1691,6 +1701,7 @@ const shard: CardShard = {
     _poolRollingSpoil,
     _poolRoninCliffrider,
     _poolRoninHoundmaster,
+    _poolRonomSerpent,
     _poolRootwaterAlligator,
     _poolRoughTumble,
     _poolRovingActuator,
@@ -1722,6 +1733,7 @@ const shard: CardShard = {
     _poolSeaGateOracle,
     _poolSearingBarb,
     _poolSecludedSteppe,
+    _poolSecretkeeper,
     _poolSeekerOfSunlight,
     _poolSeekersSquire,
     _poolSeerOfStolenSight,

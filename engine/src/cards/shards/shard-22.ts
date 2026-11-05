@@ -205,6 +205,7 @@ import _poolDragonstalker from "../pool/dragonstalker.js";
 import _poolDrakeHaven from "../pool/drake-haven.js";
 import _poolDramaticReversal from "../pool/dramatic-reversal.js";
 import _poolDreadLinnorm from "../pool/dread-linnorm.js";
+import _poolDreadSlaver from "../pool/dread-slaver.js";
 import _poolDrogskolCavalry from "../pool/drogskol-cavalry.js";
 import _poolDruidOfTheSpade from "../pool/druid-of-the-spade.js";
 import _poolDuchessWaywardTavernkeep from "../pool/duchess-wayward-tavernkeep.js";
@@ -565,6 +566,7 @@ import _poolPowerfulBroker from "../pool/powerful-broker.js";
 import _poolPreacherOfTheSchism from "../pool/preacher-of-the-schism.js";
 import _poolPrecisionBolt from "../pool/precision-bolt.js";
 import _poolPredatorsStrike from "../pool/predators-strike.js";
+import _poolPrickleFaeries from "../pool/prickle-faeries.js";
 import _poolPrimordialHydra from "../pool/primordial-hydra.js";
 import _poolPrishesWanderings from "../pool/prishes-wanderings.js";
 import _poolPrismwakeMerrow from "../pool/prismwake-merrow.js";
@@ -718,10 +720,12 @@ import _poolSouthernElephant from "../pool/southern-elephant.js";
 import _poolSovereignsMacuahuitl from "../pool/sovereigns-macuahuitl.js";
 import _poolSpawnOfThraxes from "../pool/spawn-of-thraxes.js";
 import _poolSpeciesSpecialist from "../pool/species-specialist.js";
+import _poolSpectralForce from "../pool/spectral-force.js";
 import _poolSpellgorgerWeird from "../pool/spellgorger-weird.js";
 import _poolSphinxsRevelation from "../pool/sphinxs-revelation.js";
 import _poolSpiderManifestation from "../pool/spider-manifestation.js";
 import _poolSplinterTwin from "../pool/splinter-twin.js";
+import _poolSpoilsOfEvil from "../pool/spoils-of-evil.js";
 import _poolSpotterThopter from "../pool/spotter-thopter.js";
 import _poolSpreadTheSickness from "../pool/spread-the-sickness.js";
 import _poolSquall from "../pool/squall.js";
@@ -908,6 +912,7 @@ import _poolWitheringWisps from "../pool/withering-wisps.js";
 import _poolWitnessOfTheAges from "../pool/witness-of-the-ages.js";
 import _poolWizenedSnitches from "../pool/wizened-snitches.js";
 import _poolWolfPack from "../pool/wolf-pack.js";
+import _poolWolfcallersHowl from "../pool/wolfcallers-howl.js";
 import _poolWorldAtWar from "../pool/world-at-war.js";
 import _poolWormfangTurtle from "../pool/wormfang-turtle.js";
 import _poolWrathfulJailbreaker from "../pool/wrathful-jailbreaker.js";
@@ -1151,6 +1156,7 @@ const shard: CardShard = {
     _poolDrakeHaven,
     _poolDramaticReversal,
     _poolDreadLinnorm,
+    _poolDreadSlaver,
     _poolDrogskolCavalry,
     _poolDruidOfTheSpade,
     _poolDuchessWaywardTavernkeep,
@@ -1511,6 +1517,7 @@ const shard: CardShard = {
     _poolPreacherOfTheSchism,
     _poolPrecisionBolt,
     _poolPredatorsStrike,
+    _poolPrickleFaeries,
     _poolPrimordialHydra,
     _poolPrishesWanderings,
     _poolPrismwakeMerrow,
@@ -1664,10 +1671,12 @@ const shard: CardShard = {
     _poolSovereignsMacuahuitl,
     _poolSpawnOfThraxes,
     _poolSpeciesSpecialist,
+    _poolSpectralForce,
     _poolSpellgorgerWeird,
     _poolSphinxsRevelation,
     _poolSpiderManifestation,
     _poolSplinterTwin,
+    _poolSpoilsOfEvil,
     _poolSpotterThopter,
     _poolSpreadTheSickness,
     _poolSquall,
@@ -1854,6 +1863,7 @@ const shard: CardShard = {
     _poolWitnessOfTheAges,
     _poolWizenedSnitches,
     _poolWolfPack,
+    _poolWolfcallersHowl,
     _poolWorldAtWar,
     _poolWormfangTurtle,
     _poolWrathfulJailbreaker,

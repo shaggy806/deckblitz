@@ -65,6 +65,7 @@ import _poolAuntieOolCursewretch from "../pool/auntie-ool-cursewretch.js";
 import _poolAutonSoldier from "../pool/auton-soldier.js";
 import _poolAvariceAmulet from "../pool/avarice-amulet.js";
 import _poolAvenBrigadier from "../pool/aven-brigadier.js";
+import _poolAvenCourier from "../pool/aven-courier.js";
 import _poolAvenWarhawk from "../pool/aven-warhawk.js";
 import _poolAvenWindreader from "../pool/aven-windreader.js";
 import _poolAwakenTheInferno from "../pool/awaken-the-inferno.js";
@@ -157,6 +158,7 @@ import _poolCompassionateHealer from "../pool/compassionate-healer.js";
 import _poolCompleatDevotion from "../pool/compleat-devotion.js";
 import _poolConclaveEquenaut from "../pool/conclave-equenaut.js";
 import _poolConquer from "../pool/conquer.js";
+import _poolConsumingTide from "../pool/consuming-tide.js";
 import _poolControlledInstincts from "../pool/controlled-instincts.js";
 import _poolCoralHelm from "../pool/coral-helm.js";
 import _poolCorpseKnight from "../pool/corpse-knight.js";
@@ -334,6 +336,7 @@ import _poolGravelgillDuo from "../pool/gravelgill-duo.js";
 import _poolGreatOakGuardian from "../pool/great-oak-guardian.js";
 import _poolGreatSableStag from "../pool/great-sable-stag.js";
 import _poolGreed from "../pool/greed.js";
+import _poolGreenerPastures from "../pool/greener-pastures.js";
 import _poolGriffinProtector from "../pool/griffin-protector.js";
 import _poolGrimLavamancer from "../pool/grim-lavamancer.js";
 import _poolGroundedForLife from "../pool/grounded-for-life.js";
@@ -556,6 +559,7 @@ import _poolPanicSpellbomb from "../pool/panic-spellbomb.js";
 import _poolParallaxTide from "../pool/parallax-tide.js";
 import _poolParasiticImplant from "../pool/parasitic-implant.js";
 import _poolPariah from "../pool/pariah.js";
+import _poolPaupersCage from "../pool/paupers-cage.js";
 import _poolPeaceOfMind from "../pool/peace-of-mind.js";
 import _poolPearlMedallion from "../pool/pearl-medallion.js";
 import _poolPeerThroughDepths from "../pool/peer-through-depths.js";
@@ -712,6 +716,7 @@ import _poolSivrissNightmareSpeaker from "../pool/sivriss-nightmare-speaker.js";
 import _poolSkeletalChangeling from "../pool/skeletal-changeling.js";
 import _poolSkred from "../pool/skred.js";
 import _poolSkulkingKnight from "../pool/skulking-knight.js";
+import _poolSkullcage from "../pool/skullcage.js";
 import _poolSkyWeaver from "../pool/sky-weaver.js";
 import _poolSkyclaveRelic from "../pool/skyclave-relic.js";
 import _poolSlickImitator from "../pool/slick-imitator.js";
@@ -746,6 +751,7 @@ import _poolSpreadingSeas from "../pool/spreading-seas.js";
 import _poolSpringMind from "../pool/spring-mind.js";
 import _poolSpringmaneCervin from "../pool/springmane-cervin.js";
 import _poolSquiresDevotion from "../pool/squires-devotion.js";
+import _poolStabwhiskerTheOdious from "../pool/stabwhisker-the-odious.js";
 import _poolStaffOfDomination from "../pool/staff-of-domination.js";
 import _poolStaffOfTitania from "../pool/staff-of-titania.js";
 import _poolStalwartValkyrie from "../pool/stalwart-valkyrie.js";
@@ -795,6 +801,7 @@ import _poolTheEchoverseFulcrum from "../pool/the-echoverse-fulcrum.js";
 import _poolTheFireCrystal from "../pool/the-fire-crystal.js";
 import _poolTheGreatHenge from "../pool/the-great-henge.js";
 import _poolTheMagicMirror from "../pool/the-magic-mirror.js";
+import _poolTheMouthOfSauron from "../pool/the-mouth-of-sauron.js";
 import _poolTheRavenMan from "../pool/the-raven-man.js";
 import _poolTheSeedcore from "../pool/the-seedcore.js";
 import _poolTheSoulStone from "../pool/the-soul-stone.js";
@@ -1002,6 +1009,7 @@ const shard: CardShard = {
     _poolAutonSoldier,
     _poolAvariceAmulet,
     _poolAvenBrigadier,
+    _poolAvenCourier,
     _poolAvenWarhawk,
     _poolAvenWindreader,
     _poolAwakenTheInferno,
@@ -1094,6 +1102,7 @@ const shard: CardShard = {
     _poolCompleatDevotion,
     _poolConclaveEquenaut,
     _poolConquer,
+    _poolConsumingTide,
     _poolControlledInstincts,
     _poolCoralHelm,
     _poolCorpseKnight,
@@ -1271,6 +1280,7 @@ const shard: CardShard = {
     _poolGreatOakGuardian,
     _poolGreatSableStag,
     _poolGreed,
+    _poolGreenerPastures,
     _poolGriffinProtector,
     _poolGrimLavamancer,
     _poolGroundedForLife,
@@ -1493,6 +1503,7 @@ const shard: CardShard = {
     _poolParallaxTide,
     _poolParasiticImplant,
     _poolPariah,
+    _poolPaupersCage,
     _poolPeaceOfMind,
     _poolPearlMedallion,
     _poolPeerThroughDepths,
@@ -1649,6 +1660,7 @@ const shard: CardShard = {
     _poolSkeletalChangeling,
     _poolSkred,
     _poolSkulkingKnight,
+    _poolSkullcage,
     _poolSkyWeaver,
     _poolSkyclaveRelic,
     _poolSlickImitator,
@@ -1683,6 +1695,7 @@ const shard: CardShard = {
     _poolSpringMind,
     _poolSpringmaneCervin,
     _poolSquiresDevotion,
+    _poolStabwhiskerTheOdious,
     _poolStaffOfDomination,
     _poolStaffOfTitania,
     _poolStalwartValkyrie,
@@ -1732,6 +1745,7 @@ const shard: CardShard = {
     _poolTheFireCrystal,
     _poolTheGreatHenge,
     _poolTheMagicMirror,
+    _poolTheMouthOfSauron,
     _poolTheRavenMan,
     _poolTheSeedcore,
     _poolTheSoulStone,

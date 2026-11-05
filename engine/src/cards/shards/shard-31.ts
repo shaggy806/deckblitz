@@ -19,6 +19,7 @@ import _poolAirCultElemental from "../pool/air-cult-elemental.js";
 import _poolAjanisPresence from "../pool/ajanis-presence.js";
 import _poolAkkiBattleSquad from "../pool/akki-battle-squad.js";
 import _poolAkromasDevoted from "../pool/akromas-devoted.js";
+import _poolAllSeeingArbiter from "../pool/all-seeing-arbiter.js";
 import _poolAllyEncampment from "../pool/ally-encampment.js";
 import _poolAlongTheCrookedWay from "../pool/along-the-crooked-way.js";
 import _poolAlphaMyr from "../pool/alpha-myr.js";
@@ -56,6 +57,7 @@ import _poolAuriokBladewarden from "../pool/auriok-bladewarden.js";
 import _poolAvatarRokuFirebender from "../pool/avatar-roku-firebender.js";
 import _poolAvenFarseer from "../pool/aven-farseer.js";
 import _poolAvengersTower from "../pool/avengers-tower.js";
+import _poolAxelrodGunnarson from "../pool/axelrod-gunnarson.js";
 import _poolAzamukiTreacheryIncarnate from "../pool/azamuki-treachery-incarnate.js";
 import _poolAzoriusGuildmage from "../pool/azorius-guildmage.js";
 import _poolAzraSmokeshaper from "../pool/azra-smokeshaper.js";
@@ -454,6 +456,7 @@ import _poolJerrardOfTheClosedFist from "../pool/jerrard-of-the-closed-fist.js";
 import _poolJeskaiStudent from "../pool/jeskai-student.js";
 import _poolJhessianBalmgiver from "../pool/jhessian-balmgiver.js";
 import _poolJhoirasToolbox from "../pool/jhoiras-toolbox.js";
+import _poolJoinedResearchers from "../pool/joined-researchers.js";
 import _poolJuganTheRisingStar from "../pool/jugan-the-rising-star.js";
 import _poolJukaiTrainee from "../pool/jukai-trainee.js";
 import _poolJungleBarrier from "../pool/jungle-barrier.js";
@@ -1010,6 +1013,7 @@ const shard: CardShard = {
     _poolAjanisPresence,
     _poolAkkiBattleSquad,
     _poolAkromasDevoted,
+    _poolAllSeeingArbiter,
     _poolAllyEncampment,
     _poolAlongTheCrookedWay,
     _poolAlphaMyr,
@@ -1047,6 +1051,7 @@ const shard: CardShard = {
     _poolAvatarRokuFirebender,
     _poolAvenFarseer,
     _poolAvengersTower,
+    _poolAxelrodGunnarson,
     _poolAzamukiTreacheryIncarnate,
     _poolAzoriusGuildmage,
     _poolAzraSmokeshaper,
@@ -1445,6 +1450,7 @@ const shard: CardShard = {
     _poolJeskaiStudent,
     _poolJhessianBalmgiver,
     _poolJhoirasToolbox,
+    _poolJoinedResearchers,
     _poolJuganTheRisingStar,
     _poolJukaiTrainee,
     _poolJungleBarrier,

@@ -45,6 +45,7 @@ import _poolArcboundShikari from "../pool/arcbound-shikari.js";
 import _poolArchangel from "../pool/archangel.js";
 import _poolArcusAcolyte from "../pool/arcus-acolyte.js";
 import _poolAriaOfFlame from "../pool/aria-of-flame.js";
+import _poolArmamentMaster from "../pool/armament-master.js";
 import _poolArmamentOfNyx from "../pool/armament-of-nyx.js";
 import _poolArmistice from "../pool/armistice.js";
 import _poolArmoredGriffin from "../pool/armored-griffin.js";
@@ -334,6 +335,7 @@ import _poolGatheringOfDarkness from "../pool/gathering-of-darkness.js";
 import _poolGeistOfTheArchives from "../pool/geist-of-the-archives.js";
 import _poolGeistTrappers from "../pool/geist-trappers.js";
 import _poolGenerousEnt from "../pool/generous-ent.js";
+import _poolGenerousPlunderer from "../pool/generous-plunderer.js";
 import _poolGenerousPup from "../pool/generous-pup.js";
 import _poolGenjuOfTheSpires from "../pool/genju-of-the-spires.js";
 import _poolGeometersArthropod from "../pool/geometers-arthropod.js";
@@ -392,6 +394,7 @@ import _poolHighspireArtisan from "../pool/highspire-artisan.js";
 import _poolHigureTheStillWind from "../pool/higure-the-still-wind.js";
 import _poolHinterlandScourge from "../pool/hinterland-scourge.js";
 import _poolHoardingOgre from "../pool/hoarding-ogre.js";
+import _poolHokoriDustDrinker from "../pool/hokori-dust-drinker.js";
 import _poolHonestRutstein from "../pool/honest-rutstein.js";
 import _poolHonorTheGodPharaoh from "../pool/honor-the-god-pharaoh.js";
 import _poolHoodedBlightfang from "../pool/hooded-blightfang.js";
@@ -791,6 +794,7 @@ import _poolTheWanderer from "../pool/the-wanderer.js";
 import _poolThopterEngineer from "../pool/thopter-engineer.js";
 import _poolThopterFabricator from "../pool/thopter-fabricator.js";
 import _poolThornbiteStaff from "../pool/thornbite-staff.js";
+import _poolThoughtStalkerWarlock from "../pool/thought-stalker-warlock.js";
 import _poolThrabenValiant from "../pool/thraben-valiant.js";
 import _poolThranduilTheElvenking from "../pool/thranduil-the-elvenking.js";
 import _poolThreaten from "../pool/threaten.js";
@@ -839,6 +843,7 @@ import _poolUrgorosTheEmptyOne from "../pool/urgoros-the-empty-one.js";
 import _poolVault11VotersDilemma from "../pool/vault-11-voters-dilemma.js";
 import _poolVebulid from "../pool/vebulid.js";
 import _poolVecTownships from "../pool/vec-townships.js";
+import _poolVeinDrinker from "../pool/vein-drinker.js";
 import _poolVenomLethalProtector from "../pool/venom-lethal-protector.js";
 import _poolVenomcrawler from "../pool/venomcrawler.js";
 import _poolVerdantEmbrace from "../pool/verdant-embrace.js";
@@ -971,6 +976,7 @@ const shard: CardShard = {
     _poolArchangel,
     _poolArcusAcolyte,
     _poolAriaOfFlame,
+    _poolArmamentMaster,
     _poolArmamentOfNyx,
     _poolArmistice,
     _poolArmoredGriffin,
@@ -1260,6 +1266,7 @@ const shard: CardShard = {
     _poolGeistOfTheArchives,
     _poolGeistTrappers,
     _poolGenerousEnt,
+    _poolGenerousPlunderer,
     _poolGenerousPup,
     _poolGenjuOfTheSpires,
     _poolGeometersArthropod,
@@ -1318,6 +1325,7 @@ const shard: CardShard = {
     _poolHigureTheStillWind,
     _poolHinterlandScourge,
     _poolHoardingOgre,
+    _poolHokoriDustDrinker,
     _poolHonestRutstein,
     _poolHonorTheGodPharaoh,
     _poolHoodedBlightfang,
@@ -1717,6 +1725,7 @@ const shard: CardShard = {
     _poolThopterEngineer,
     _poolThopterFabricator,
     _poolThornbiteStaff,
+    _poolThoughtStalkerWarlock,
     _poolThrabenValiant,
     _poolThranduilTheElvenking,
     _poolThreaten,
@@ -1765,6 +1774,7 @@ const shard: CardShard = {
     _poolVault11VotersDilemma,
     _poolVebulid,
     _poolVecTownships,
+    _poolVeinDrinker,
     _poolVenomLethalProtector,
     _poolVenomcrawler,
     _poolVerdantEmbrace,

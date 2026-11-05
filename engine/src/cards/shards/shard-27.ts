@@ -21,6 +21,7 @@ import _poolAethermagesTouch from "../pool/aethermages-touch.js";
 import _poolAhnCropCrasher from "../pool/ahn-crop-crasher.js";
 import _poolAhriman from "../pool/ahriman.js";
 import _poolAirdropCondor from "../pool/airdrop-condor.js";
+import _poolAjaniStrengthOfThePride from "../pool/ajani-strength-of-the-pride.js";
 import _poolAjanisAnguish from "../pool/ajanis-anguish.js";
 import _poolAkroanPhalanx from "../pool/akroan-phalanx.js";
 import _poolAlabornTrooper from "../pool/alaborn-trooper.js";
@@ -65,6 +66,7 @@ import _poolBattleHurda from "../pool/battle-hurda.js";
 import _poolBattlefieldImprovisation from "../pool/battlefield-improvisation.js";
 import _poolBeamingDefiance from "../pool/beaming-defiance.js";
 import _poolBenalishFaithbonder from "../pool/benalish-faithbonder.js";
+import _poolBenevolentOffering from "../pool/benevolent-offering.js";
 import _poolBeskirShieldmate from "../pool/beskir-shieldmate.js";
 import _poolBeyeenCoast from "../pool/beyeen-coast.js";
 import _poolBioshift from "../pool/bioshift.js";
@@ -200,6 +202,7 @@ import _poolDoorkeeper from "../pool/doorkeeper.js";
 import _poolDoorman from "../pool/doorman.js";
 import _poolDragonCursedHalls from "../pool/dragon-cursed-halls.js";
 import _poolDragonEgg from "../pool/dragon-egg.js";
+import _poolDragonlordsPrerogative from "../pool/dragonlords-prerogative.js";
 import _poolDranaAndLinvala from "../pool/drana-and-linvala.js";
 import _poolDreamProwler from "../pool/dream-prowler.js";
 import _poolDrillworksMole from "../pool/drillworks-mole.js";
@@ -807,6 +810,7 @@ import _poolTrickbind from "../pool/trickbind.js";
 import _poolTripWire from "../pool/trip-wire.js";
 import _poolTriskaidekaphile from "../pool/triskaidekaphile.js";
 import _poolTriumphOfCruelty from "../pool/triumph-of-cruelty.js";
+import _poolTrophyHunter from "../pool/trophy-hunter.js";
 import _poolTrophyMage from "../pool/trophy-mage.js";
 import _poolTrueConviction from "../pool/true-conviction.js";
 import _poolTrueNameNemesis from "../pool/true-name-nemesis.js";
@@ -872,6 +876,7 @@ import _poolWaywardServant from "../pool/wayward-servant.js";
 import _poolWeatheredSentinels from "../pool/weathered-sentinels.js";
 import _poolWeddingRing from "../pool/wedding-ring.js";
 import _poolWeirdHarvest from "../pool/weird-harvest.js";
+import _poolWhimwader from "../pool/whimwader.js";
 import _poolWillowGeist from "../pool/willow-geist.js";
 import _poolWillowduskEssenceSeer from "../pool/willowdusk-essence-seer.js";
 import _poolWindsOfChange from "../pool/winds-of-change.js";
@@ -895,6 +900,7 @@ import _poolZhurTaaSwine from "../pool/zhur-taa-swine.js";
 import _poolZiatorasProvingGround from "../pool/ziatoras-proving-ground.js";
 import _poolZodiacRabbit from "../pool/zodiac-rabbit.js";
 import _poolZombieCannibal from "../pool/zombie-cannibal.js";
+import _poolZurgoHelmsmasher from "../pool/zurgo-helmsmasher.js";
 import _tokensAngelTokenBlack33Flying from "../tokens/angel-token-black-3-3-flying.js";
 import _tokensClownRobotToken from "../tokens/clown-robot-token.js";
 import _tokensConstructTokenTheFantasticar from "../tokens/construct-token-the-fantasticar.js";
@@ -938,6 +944,7 @@ const shard: CardShard = {
     _poolAhnCropCrasher,
     _poolAhriman,
     _poolAirdropCondor,
+    _poolAjaniStrengthOfThePride,
     _poolAjanisAnguish,
     _poolAkroanPhalanx,
     _poolAlabornTrooper,
@@ -982,6 +989,7 @@ const shard: CardShard = {
     _poolBattlefieldImprovisation,
     _poolBeamingDefiance,
     _poolBenalishFaithbonder,
+    _poolBenevolentOffering,
     _poolBeskirShieldmate,
     _poolBeyeenCoast,
     _poolBioshift,
@@ -1117,6 +1125,7 @@ const shard: CardShard = {
     _poolDoorman,
     _poolDragonCursedHalls,
     _poolDragonEgg,
+    _poolDragonlordsPrerogative,
     _poolDranaAndLinvala,
     _poolDreamProwler,
     _poolDrillworksMole,
@@ -1724,6 +1733,7 @@ const shard: CardShard = {
     _poolTripWire,
     _poolTriskaidekaphile,
     _poolTriumphOfCruelty,
+    _poolTrophyHunter,
     _poolTrophyMage,
     _poolTrueConviction,
     _poolTrueNameNemesis,
@@ -1789,6 +1799,7 @@ const shard: CardShard = {
     _poolWeatheredSentinels,
     _poolWeddingRing,
     _poolWeirdHarvest,
+    _poolWhimwader,
     _poolWillowGeist,
     _poolWillowduskEssenceSeer,
     _poolWindsOfChange,
@@ -1812,6 +1823,7 @@ const shard: CardShard = {
     _poolZiatorasProvingGround,
     _poolZodiacRabbit,
     _poolZombieCannibal,
+    _poolZurgoHelmsmasher,
   ],
   tokens: [
     _tokensAngelTokenBlack33Flying,

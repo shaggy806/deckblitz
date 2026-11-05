@@ -168,6 +168,7 @@ import _poolConjurersBan from "../pool/conjurers-ban.js";
 import _poolConsecratedSphinx from "../pool/consecrated-sphinx.js";
 import _poolConversionApparatus from "../pool/conversion-apparatus.js";
 import _poolCosmicCube from "../pool/cosmic-cube.js";
+import _poolCosmosElixir from "../pool/cosmos-elixir.js";
 import _poolCountNefaria from "../pool/count-nefaria.js";
 import _poolCounterintelligence from "../pool/counterintelligence.js";
 import _poolCowardice from "../pool/cowardice.js";
@@ -192,6 +193,7 @@ import _poolCyclopsElectromancer from "../pool/cyclops-electromancer.js";
 import _poolDanithaBenaliasHope from "../pool/danitha-benalias-hope.js";
 import _poolDarkIntimations from "../pool/dark-intimations.js";
 import _poolDarkTutelage from "../pool/dark-tutelage.js";
+import _poolDavrielRogueShadowmage from "../pool/davriel-rogue-shadowmage.js";
 import _poolDawnstrider from "../pool/dawnstrider.js";
 import _poolDazzlingSphinx from "../pool/dazzling-sphinx.js";
 import _poolDeadlyDispute from "../pool/deadly-dispute.js";
@@ -688,17 +690,20 @@ import _poolSetonKrosanProtector from "../pool/seton-krosan-protector.js";
 import _poolSewerVeillanceCam from "../pool/sewer-veillance-cam.js";
 import _poolShadowOfTheGrave from "../pool/shadow-of-the-grave.js";
 import _poolSharpshooterElf from "../pool/sharpshooter-elf.js";
+import _poolShatterTheSky from "../pool/shatter-the-sky.js";
 import _poolShatterskullMinotaur from "../pool/shatterskull-minotaur.js";
 import _poolShaukuEndbringer from "../pool/shauku-endbringer.js";
 import _poolShiftingSliver from "../pool/shifting-sliver.js";
 import _poolShikoParagonOfTheWay from "../pool/shiko-paragon-of-the-way.js";
 import _poolShinkaTheBloodsoakedKeep from "../pool/shinka-the-bloodsoaked-keep.js";
 import _poolShreddersTechnique from "../pool/shredders-technique.js";
+import _poolShriekingAffliction from "../pool/shrieking-affliction.js";
 import _poolShrillHowler from "../pool/shrill-howler.js";
 import _poolSickAndTired from "../pool/sick-and-tired.js";
 import _poolSidewinderNaga from "../pool/sidewinder-naga.js";
 import _poolSiegeSmash from "../pool/siege-smash.js";
 import _poolSierraNukasBiggestFan from "../pool/sierra-nukas-biggest-fan.js";
+import _poolSilumgarsScorn from "../pool/silumgars-scorn.js";
 import _poolSilvanussInvoker from "../pool/silvanuss-invoker.js";
 import _poolSinewDancer from "../pool/sinew-dancer.js";
 import _poolSingerOfSwiftRivers from "../pool/singer-of-swift-rivers.js";
@@ -794,6 +799,7 @@ import _poolTerritorialHellkite from "../pool/territorial-hellkite.js";
 import _poolTheBindingOfTheTitans from "../pool/the-binding-of-the-titans.js";
 import _poolTheComingOfGalactus from "../pool/the-coming-of-galactus.js";
 import _poolTheImmortalWeapons from "../pool/the-immortal-weapons.js";
+import _poolTheLongReachOfNight from "../pool/the-long-reach-of-night.js";
 import _poolTheMightstoneAndWeakstone from "../pool/the-mightstone-and-weakstone.js";
 import _poolTheMoment from "../pool/the-moment.js";
 import _poolTheMycotyrant from "../pool/the-mycotyrant.js";
@@ -1112,6 +1118,7 @@ const shard: CardShard = {
     _poolConsecratedSphinx,
     _poolConversionApparatus,
     _poolCosmicCube,
+    _poolCosmosElixir,
     _poolCountNefaria,
     _poolCounterintelligence,
     _poolCowardice,
@@ -1136,6 +1143,7 @@ const shard: CardShard = {
     _poolDanithaBenaliasHope,
     _poolDarkIntimations,
     _poolDarkTutelage,
+    _poolDavrielRogueShadowmage,
     _poolDawnstrider,
     _poolDazzlingSphinx,
     _poolDeadlyDispute,
@@ -1632,17 +1640,20 @@ const shard: CardShard = {
     _poolSewerVeillanceCam,
     _poolShadowOfTheGrave,
     _poolSharpshooterElf,
+    _poolShatterTheSky,
     _poolShatterskullMinotaur,
     _poolShaukuEndbringer,
     _poolShiftingSliver,
     _poolShikoParagonOfTheWay,
     _poolShinkaTheBloodsoakedKeep,
     _poolShreddersTechnique,
+    _poolShriekingAffliction,
     _poolShrillHowler,
     _poolSickAndTired,
     _poolSidewinderNaga,
     _poolSiegeSmash,
     _poolSierraNukasBiggestFan,
+    _poolSilumgarsScorn,
     _poolSilvanussInvoker,
     _poolSinewDancer,
     _poolSingerOfSwiftRivers,
@@ -1738,6 +1749,7 @@ const shard: CardShard = {
     _poolTheBindingOfTheTitans,
     _poolTheComingOfGalactus,
     _poolTheImmortalWeapons,
+    _poolTheLongReachOfNight,
     _poolTheMightstoneAndWeakstone,
     _poolTheMoment,
     _poolTheMycotyrant,

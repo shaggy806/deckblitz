@@ -121,6 +121,7 @@ import _poolCabalPaladin from "../pool/cabal-paladin.js";
 import _poolCabalRitual from "../pool/cabal-ritual.js";
 import _poolCabalShrine from "../pool/cabal-shrine.js";
 import _poolCabarettiCourtyard from "../pool/cabaretti-courtyard.js";
+import _poolCalixGuidedByFate from "../pool/calix-guided-by-fate.js";
 import _poolCallToGlory from "../pool/call-to-glory.js";
 import _poolCallerOfGales from "../pool/caller-of-gales.js";
 import _poolCallerOfTheClaw from "../pool/caller-of-the-claw.js";
@@ -139,6 +140,7 @@ import _poolCensor from "../pool/censor.js";
 import _poolCerebralConfiscation from "../pool/cerebral-confiscation.js";
 import _poolChainedBrute from "../pool/chained-brute.js";
 import _poolChainsOfCustody from "../pool/chains-of-custody.js";
+import _poolChaliceOfLife from "../pool/chalice-of-life.js";
 import _poolChaosChanneler from "../pool/chaos-channeler.js";
 import _poolChaseSteinRunaway from "../pool/chase-stein-runaway.js";
 import _poolChosenByHeliod from "../pool/chosen-by-heliod.js";
@@ -236,6 +238,7 @@ import _poolDruidsDeliverance from "../pool/druids-deliverance.js";
 import _poolEarthenGoo from "../pool/earthen-goo.js";
 import _poolEarthlink from "../pool/earthlink.js";
 import _poolEarthquakeDragon from "../pool/earthquake-dragon.js";
+import _poolEbonyOwlNetsuke from "../pool/ebony-owl-netsuke.js";
 import _poolEidolonOfPhilosophy from "../pool/eidolon-of-philosophy.js";
 import _poolElectricRevelation from "../pool/electric-revelation.js";
 import _poolEliminate from "../pool/eliminate.js";
@@ -507,6 +510,7 @@ import _poolMirkwoodBats from "../pool/mirkwood-bats.js";
 import _poolMirranSafehouse from "../pool/mirran-safehouse.js";
 import _poolMirrorImage from "../pool/mirror-image.js";
 import _poolMirrorShield from "../pool/mirror-shield.js";
+import _poolMisersCage from "../pool/misers-cage.js";
 import _poolMistcutterHydra from "../pool/mistcutter-hydra.js";
 import _poolMisterGutsy from "../pool/mister-gutsy.js";
 import _poolMistfordRiverTurtle from "../pool/mistford-river-turtle.js";
@@ -1061,6 +1065,7 @@ const shard: CardShard = {
     _poolCabalRitual,
     _poolCabalShrine,
     _poolCabarettiCourtyard,
+    _poolCalixGuidedByFate,
     _poolCallToGlory,
     _poolCallerOfGales,
     _poolCallerOfTheClaw,
@@ -1079,6 +1084,7 @@ const shard: CardShard = {
     _poolCerebralConfiscation,
     _poolChainedBrute,
     _poolChainsOfCustody,
+    _poolChaliceOfLife,
     _poolChaosChanneler,
     _poolChaseSteinRunaway,
     _poolChosenByHeliod,
@@ -1176,6 +1182,7 @@ const shard: CardShard = {
     _poolEarthenGoo,
     _poolEarthlink,
     _poolEarthquakeDragon,
+    _poolEbonyOwlNetsuke,
     _poolEidolonOfPhilosophy,
     _poolElectricRevelation,
     _poolEliminate,
@@ -1447,6 +1454,7 @@ const shard: CardShard = {
     _poolMirranSafehouse,
     _poolMirrorImage,
     _poolMirrorShield,
+    _poolMisersCage,
     _poolMistcutterHydra,
     _poolMisterGutsy,
     _poolMistfordRiverTurtle,

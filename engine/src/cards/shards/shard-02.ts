@@ -331,6 +331,7 @@ import _poolGlaringFleshraker from "../pool/glaring-fleshraker.js";
 import _poolGlenElendrasAnswer from "../pool/glen-elendras-answer.js";
 import _poolGlimmerburst from "../pool/glimmerburst.js";
 import _poolGloomshrieker from "../pool/gloomshrieker.js";
+import _poolGodhunterOctopus from "../pool/godhunter-octopus.js";
 import _poolGoldForgeGarrison from "../pool/gold-forge-garrison.js";
 import _poolGolgariLocket from "../pool/golgari-locket.js";
 import _poolGorehornRaider from "../pool/gorehorn-raider.js";
@@ -523,6 +524,7 @@ import _poolNemesisTrap from "../pool/nemesis-trap.js";
 import _poolNestInvader from "../pool/nest-invader.js";
 import _poolNettlingCurse from "../pool/nettling-curse.js";
 import _poolNicolBolasTheArisen from "../pool/nicol-bolas-the-arisen.js";
+import _poolNighteyesTheDesecrator from "../pool/nighteyes-the-desecrator.js";
 import _poolNightmareSower from "../pool/nightmare-sower.js";
 import _poolNinjaOfTheNewMoon from "../pool/ninja-of-the-new-moon.js";
 import _poolNissaLeylineTamer from "../pool/nissa-leyline-tamer.js";
@@ -576,6 +578,7 @@ import _poolPlatypusBear from "../pool/platypus-bear.js";
 import _poolPlunderingPredator from "../pool/plundering-predator.js";
 import _poolPoisonbellyOgre from "../pool/poisonbelly-ogre.js";
 import _poolPolymorphousRush from "../pool/polymorphous-rush.js";
+import _poolPortcullis from "../pool/portcullis.js";
 import _poolPredatorsGambit from "../pool/predators-gambit.js";
 import _poolPredatoryRampage from "../pool/predatory-rampage.js";
 import _poolPressTheAdvantage from "../pool/press-the-advantage.js";
@@ -594,6 +597,7 @@ import _poolPyromatics from "../pool/pyromatics.js";
 import _poolPyrotechnics from "../pool/pyrotechnics.js";
 import _poolQuantumEntanglement from "../pool/quantum-entanglement.js";
 import _poolQuestForTheHolyRelic from "../pool/quest-for-the-holy-relic.js";
+import _poolQuestForTheNihilStone from "../pool/quest-for-the-nihil-stone.js";
 import _poolQuillBladeLaureate from "../pool/quill-blade-laureate.js";
 import _poolQuillmaneBaku from "../pool/quillmane-baku.js";
 import _poolRacersScoreboard from "../pool/racers-scoreboard.js";
@@ -745,6 +749,7 @@ import _poolStonecoilSerpent from "../pool/stonecoil-serpent.js";
 import _poolStudentOfElements from "../pool/student-of-elements.js";
 import _poolSublimeEpiphany from "../pool/sublime-epiphany.js";
 import _poolSubtleStrike from "../pool/subtle-strike.js";
+import _poolSuddenInsight from "../pool/sudden-insight.js";
 import _poolSuffering from "../pool/suffering.js";
 import _poolSukiKyoshiWarrior from "../pool/suki-kyoshi-warrior.js";
 import _poolSulfurFalls from "../pool/sulfur-falls.js";
@@ -877,6 +882,7 @@ import _poolWhiptailWurm from "../pool/whiptail-wurm.js";
 import _poolWhispersOfEmrakul from "../pool/whispers-of-emrakul.js";
 import _poolWhiteAuracite from "../pool/white-auracite.js";
 import _poolWhiteShieldCrusader from "../pool/white-shield-crusader.js";
+import _poolWight from "../pool/wight.js";
 import _poolWildCelebrants from "../pool/wild-celebrants.js";
 import _poolWildElephant from "../pool/wild-elephant.js";
 import _poolWildNacatl from "../pool/wild-nacatl.js";
@@ -1243,6 +1249,7 @@ const shard: CardShard = {
     _poolGlenElendrasAnswer,
     _poolGlimmerburst,
     _poolGloomshrieker,
+    _poolGodhunterOctopus,
     _poolGoldForgeGarrison,
     _poolGolgariLocket,
     _poolGorehornRaider,
@@ -1435,6 +1442,7 @@ const shard: CardShard = {
     _poolNestInvader,
     _poolNettlingCurse,
     _poolNicolBolasTheArisen,
+    _poolNighteyesTheDesecrator,
     _poolNightmareSower,
     _poolNinjaOfTheNewMoon,
     _poolNissaLeylineTamer,
@@ -1488,6 +1496,7 @@ const shard: CardShard = {
     _poolPlunderingPredator,
     _poolPoisonbellyOgre,
     _poolPolymorphousRush,
+    _poolPortcullis,
     _poolPredatorsGambit,
     _poolPredatoryRampage,
     _poolPressTheAdvantage,
@@ -1506,6 +1515,7 @@ const shard: CardShard = {
     _poolPyrotechnics,
     _poolQuantumEntanglement,
     _poolQuestForTheHolyRelic,
+    _poolQuestForTheNihilStone,
     _poolQuillBladeLaureate,
     _poolQuillmaneBaku,
     _poolRacersScoreboard,
@@ -1657,6 +1667,7 @@ const shard: CardShard = {
     _poolStudentOfElements,
     _poolSublimeEpiphany,
     _poolSubtleStrike,
+    _poolSuddenInsight,
     _poolSuffering,
     _poolSukiKyoshiWarrior,
     _poolSulfurFalls,
@@ -1789,6 +1800,7 @@ const shard: CardShard = {
     _poolWhispersOfEmrakul,
     _poolWhiteAuracite,
     _poolWhiteShieldCrusader,
+    _poolWight,
     _poolWildCelebrants,
     _poolWildElephant,
     _poolWildNacatl,

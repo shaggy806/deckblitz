@@ -205,6 +205,7 @@ import _poolDelete from "../pool/delete.js";
 import _poolDeltaBloodflies from "../pool/delta-bloodflies.js";
 import _poolDenOfTheBugbear from "../pool/den-of-the-bugbear.js";
 import _poolDeprive from "../pool/deprive.js";
+import _poolDescendantOfMasumaro from "../pool/descendant-of-masumaro.js";
 import _poolDesertWarfare from "../pool/desert-warfare.js";
 import _poolDiamondMare from "../pool/diamond-mare.js";
 import _poolDictateOfErebos from "../pool/dictate-of-erebos.js";
@@ -472,6 +473,7 @@ import _poolMarbleTitan from "../pool/marble-titan.js";
 import _poolMarduDevotee from "../pool/mardu-devotee.js";
 import _poolMarduHateblade from "../pool/mardu-hateblade.js";
 import _poolMarduScout from "../pool/mardu-scout.js";
+import _poolMarjhan from "../pool/marjhan.js";
 import _poolMarut from "../pool/marut.js";
 import _poolMascotInterception from "../pool/mascot-interception.js";
 import _poolMathemagics from "../pool/mathemagics.js";
@@ -547,6 +549,7 @@ import _poolOnduGiant from "../pool/ondu-giant.js";
 import _poolOneEyedScarecrow from "../pool/one-eyed-scarecrow.js";
 import _poolOranRiefTheVastwood from "../pool/oran-rief-the-vastwood.js";
 import _poolOrcishSiegemaster from "../pool/orcish-siegemaster.js";
+import _poolOskarRubbishReclaimer from "../pool/oskar-rubbish-reclaimer.js";
 import _poolOvertaker from "../pool/overtaker.js";
 import _poolOzaisCruelty from "../pool/ozais-cruelty.js";
 import _poolPaintersStudioDefacedGallery from "../pool/painters-studio-defaced-gallery.js";
@@ -1136,6 +1139,7 @@ const shard: CardShard = {
     _poolDeltaBloodflies,
     _poolDenOfTheBugbear,
     _poolDeprive,
+    _poolDescendantOfMasumaro,
     _poolDesertWarfare,
     _poolDiamondMare,
     _poolDictateOfErebos,
@@ -1403,6 +1407,7 @@ const shard: CardShard = {
     _poolMarduDevotee,
     _poolMarduHateblade,
     _poolMarduScout,
+    _poolMarjhan,
     _poolMarut,
     _poolMascotInterception,
     _poolMathemagics,
@@ -1478,6 +1483,7 @@ const shard: CardShard = {
     _poolOneEyedScarecrow,
     _poolOranRiefTheVastwood,
     _poolOrcishSiegemaster,
+    _poolOskarRubbishReclaimer,
     _poolOvertaker,
     _poolOzaisCruelty,
     _poolPaintersStudioDefacedGallery,

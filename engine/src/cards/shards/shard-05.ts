@@ -62,8 +62,10 @@ import _poolAvenSunstriker from "../pool/aven-sunstriker.js";
 import _poolAvengersAssemble from "../pool/avengers-assemble.js";
 import _poolAvizoa from "../pool/avizoa.js";
 import _poolBairdArgivianRecruiter from "../pool/baird-argivian-recruiter.js";
+import _poolBalanceOfPower from "../pool/balance-of-power.js";
 import _poolBarbarianRing from "../pool/barbarian-ring.js";
 import _poolBarktoothWarbeard from "../pool/barktooth-warbeard.js";
+import _poolBaronSengir from "../pool/baron-sengir.js";
 import _poolBasalThrull from "../pool/basal-thrull.js";
 import _poolBasilicaBellHaunt from "../pool/basilica-bell-haunt.js";
 import _poolBasilicaScreecher from "../pool/basilica-screecher.js";
@@ -725,6 +727,7 @@ import _poolSipOfHemlock from "../pool/sip-of-hemlock.js";
 import _poolSirenOfTheFangedCoast from "../pool/siren-of-the-fanged-coast.js";
 import _poolSkeletonArcher from "../pool/skeleton-archer.js";
 import _poolSkorpekhLord from "../pool/skorpekh-lord.js";
+import _poolSkrelvDefectorMite from "../pool/skrelv-defector-mite.js";
 import _poolSkyTheaterStrix from "../pool/sky-theater-strix.js";
 import _poolSkyclawThrash from "../pool/skyclaw-thrash.js";
 import _poolSkycoachConductor from "../pool/skycoach-conductor.js";
@@ -771,6 +774,7 @@ import _poolSubdue from "../pool/subdue.js";
 import _poolSuburbanSanctuary from "../pool/suburban-sanctuary.js";
 import _poolSuddenEdict from "../pool/sudden-edict.js";
 import _poolSugarRush from "../pool/sugar-rush.js";
+import _poolSungoldSentinel from "../pool/sungold-sentinel.js";
 import _poolSunscorchedDesert from "../pool/sunscorched-desert.js";
 import _poolSunweb from "../pool/sunweb.js";
 import _poolSuperStrength from "../pool/super-strength.js";
@@ -851,6 +855,7 @@ import _poolVenomousChangeling from "../pool/venomous-changeling.js";
 import _poolVentureDeeper from "../pool/venture-deeper.js";
 import _poolVerdantRebirth from "../pool/verdant-rebirth.js";
 import _poolVialOfDragonfire from "../pool/vial-of-dragonfire.js";
+import _poolVialSmasherTheFierce from "../pool/vial-smasher-the-fierce.js";
 import _poolVindictiveWarden from "../pool/vindictive-warden.js";
 import _poolVinesOfTheRecluse from "../pool/vines-of-the-recluse.js";
 import _poolVintaraElephant from "../pool/vintara-elephant.js";
@@ -986,8 +991,10 @@ const shard: CardShard = {
     _poolAvengersAssemble,
     _poolAvizoa,
     _poolBairdArgivianRecruiter,
+    _poolBalanceOfPower,
     _poolBarbarianRing,
     _poolBarktoothWarbeard,
+    _poolBaronSengir,
     _poolBasalThrull,
     _poolBasilicaBellHaunt,
     _poolBasilicaScreecher,
@@ -1649,6 +1656,7 @@ const shard: CardShard = {
     _poolSirenOfTheFangedCoast,
     _poolSkeletonArcher,
     _poolSkorpekhLord,
+    _poolSkrelvDefectorMite,
     _poolSkyTheaterStrix,
     _poolSkyclawThrash,
     _poolSkycoachConductor,
@@ -1695,6 +1703,7 @@ const shard: CardShard = {
     _poolSuburbanSanctuary,
     _poolSuddenEdict,
     _poolSugarRush,
+    _poolSungoldSentinel,
     _poolSunscorchedDesert,
     _poolSunweb,
     _poolSuperStrength,
@@ -1775,6 +1784,7 @@ const shard: CardShard = {
     _poolVentureDeeper,
     _poolVerdantRebirth,
     _poolVialOfDragonfire,
+    _poolVialSmasherTheFierce,
     _poolVindictiveWarden,
     _poolVinesOfTheRecluse,
     _poolVintaraElephant,

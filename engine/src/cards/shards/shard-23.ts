@@ -420,6 +420,7 @@ import _poolKeranosGodOfStorms from "../pool/keranos-god-of-storms.js";
 import _poolKillianInkDuelist from "../pool/killian-ink-duelist.js";
 import _poolKirolHistoryBuff from "../pool/kirol-history-buff.js";
 import _poolKithkeeper from "../pool/kithkeeper.js";
+import _poolKitsuneBonesetter from "../pool/kitsune-bonesetter.js";
 import _poolKnightOfObligation from "../pool/knight-of-obligation.js";
 import _poolKodamasMight from "../pool/kodamas-might.js";
 import _poolKodamasReach from "../pool/kodamas-reach.js";
@@ -451,6 +452,7 @@ import _poolLightningBlast from "../pool/lightning-blast.js";
 import _poolLightningBlow from "../pool/lightning-blow.js";
 import _poolLilianaOfTheVeil from "../pool/liliana-of-the-veil.js";
 import _poolLivingTsunami from "../pool/living-tsunami.js";
+import _poolLolthSpiderQueen from "../pool/lolth-spider-queen.js";
 import _poolLostLegion from "../pool/lost-legion.js";
 import _poolLotusGuardian from "../pool/lotus-guardian.js";
 import _poolLoxodonLifechanter from "../pool/loxodon-lifechanter.js";
@@ -1358,6 +1360,7 @@ const shard: CardShard = {
     _poolKillianInkDuelist,
     _poolKirolHistoryBuff,
     _poolKithkeeper,
+    _poolKitsuneBonesetter,
     _poolKnightOfObligation,
     _poolKodamasMight,
     _poolKodamasReach,
@@ -1389,6 +1392,7 @@ const shard: CardShard = {
     _poolLightningBlow,
     _poolLilianaOfTheVeil,
     _poolLivingTsunami,
+    _poolLolthSpiderQueen,
     _poolLostLegion,
     _poolLotusGuardian,
     _poolLoxodonLifechanter,

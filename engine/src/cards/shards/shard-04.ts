@@ -31,6 +31,7 @@ import _poolArmoryVeteran from "../pool/armory-veteran.js";
 import _poolAshlingTheLimitless from "../pool/ashling-the-limitless.js";
 import _poolAshnodsHarvester from "../pool/ashnods-harvester.js";
 import _poolAssassinsBlade from "../pool/assassins-blade.js";
+import _poolAstarionsThirst from "../pool/astarions-thirst.js";
 import _poolAtarkaMonument from "../pool/atarka-monument.js";
 import _poolAthreosShroudVeiled from "../pool/athreos-shroud-veiled.js";
 import _poolAtraxaGrandUnifier from "../pool/atraxa-grand-unifier.js";
@@ -288,6 +289,7 @@ import _poolGatekeeperGargoyle from "../pool/gatekeeper-gargoyle.js";
 import _poolGeistlightSnare from "../pool/geistlight-snare.js";
 import _poolGenjuOfTheFalls from "../pool/genju-of-the-falls.js";
 import _poolGeodeRager from "../pool/geode-rager.js";
+import _poolGhirapurOrrery from "../pool/ghirapur-orrery.js";
 import _poolGhostQuarter from "../pool/ghost-quarter.js";
 import _poolGiantCrab from "../pool/giant-crab.js";
 import _poolGibberingDescent from "../pool/gibbering-descent.js";
@@ -461,6 +463,7 @@ import _poolMagnifyingGlass from "../pool/magnifying-glass.js";
 import _poolMalcolmKeenEyedNavigator from "../pool/malcolm-keen-eyed-navigator.js";
 import _poolMaliciousAffliction from "../pool/malicious-affliction.js";
 import _poolManaConfluence from "../pool/mana-confluence.js";
+import _poolMantaRay from "../pool/manta-ray.js";
 import _poolMarkovRetribution from "../pool/markov-retribution.js";
 import _poolMarneusCalgar from "../pool/marneus-calgar.js";
 import _poolMartyrsCry from "../pool/martyrs-cry.js";
@@ -952,6 +955,7 @@ const shard: CardShard = {
     _poolAshlingTheLimitless,
     _poolAshnodsHarvester,
     _poolAssassinsBlade,
+    _poolAstarionsThirst,
     _poolAtarkaMonument,
     _poolAthreosShroudVeiled,
     _poolAtraxaGrandUnifier,
@@ -1209,6 +1213,7 @@ const shard: CardShard = {
     _poolGeistlightSnare,
     _poolGenjuOfTheFalls,
     _poolGeodeRager,
+    _poolGhirapurOrrery,
     _poolGhostQuarter,
     _poolGiantCrab,
     _poolGibberingDescent,
@@ -1382,6 +1387,7 @@ const shard: CardShard = {
     _poolMalcolmKeenEyedNavigator,
     _poolMaliciousAffliction,
     _poolManaConfluence,
+    _poolMantaRay,
     _poolMarkovRetribution,
     _poolMarneusCalgar,
     _poolMartyrsCry,

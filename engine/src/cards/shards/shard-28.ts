@@ -615,6 +615,7 @@ import _poolRazortrapGorge from "../pool/razortrap-gorge.js";
 import _poolRazorvergeThicket from "../pool/razorverge-thicket.js";
 import _poolRebellionOfTheFlamekin from "../pool/rebellion-of-the-flamekin.js";
 import _poolRecklessImpulse from "../pool/reckless-impulse.js";
+import _poolRecurringInsight from "../pool/recurring-insight.js";
 import _poolRedSunsZenith from "../pool/red-suns-zenith.js";
 import _poolRedcapThief from "../pool/redcap-thief.js";
 import _poolReedRichardsSmartestMan from "../pool/reed-richards-smartest-man.js";
@@ -905,6 +906,7 @@ import _poolWhisperAgent from "../pool/whisper-agent.js";
 import _poolWhiteOrchidPhantom from "../pool/white-orchid-phantom.js";
 import _poolWildHunger from "../pool/wild-hunger.js";
 import _poolWildInstincts from "../pool/wild-instincts.js";
+import _poolWildMammoth from "../pool/wild-mammoth.js";
 import _poolWildernessElemental from "../pool/wilderness-elemental.js";
 import _poolWildwoodGeist from "../pool/wildwood-geist.js";
 import _poolWillScholarOfFrost from "../pool/will-scholar-of-frost.js";
@@ -1565,6 +1567,7 @@ const shard: CardShard = {
     _poolRazorvergeThicket,
     _poolRebellionOfTheFlamekin,
     _poolRecklessImpulse,
+    _poolRecurringInsight,
     _poolRedSunsZenith,
     _poolRedcapThief,
     _poolReedRichardsSmartestMan,
@@ -1855,6 +1858,7 @@ const shard: CardShard = {
     _poolWhiteOrchidPhantom,
     _poolWildHunger,
     _poolWildInstincts,
+    _poolWildMammoth,
     _poolWildernessElemental,
     _poolWildwoodGeist,
     _poolWillScholarOfFrost,

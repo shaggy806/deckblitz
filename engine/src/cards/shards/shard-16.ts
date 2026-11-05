@@ -35,6 +35,7 @@ import _poolAqueousForm from "../pool/aqueous-form.js";
 import _poolArborElf from "../pool/arbor-elf.js";
 import _poolArcaneAmphisbaena from "../pool/arcane-amphisbaena.js";
 import _poolArchpriestOfIona from "../pool/archpriest-of-iona.js";
+import _poolArcticFoxes from "../pool/arctic-foxes.js";
 import _poolArgothianElder from "../pool/argothian-elder.js";
 import _poolArnynDeathbloomBotanist from "../pool/arnyn-deathbloom-botanist.js";
 import _poolArtfulTakedown from "../pool/artful-takedown.js";
@@ -186,6 +187,7 @@ import _poolDelightedHalfling from "../pool/delighted-halfling.js";
 import _poolDemonicDread from "../pool/demonic-dread.js";
 import _poolDerangedHermit from "../pool/deranged-hermit.js";
 import _poolDerelor from "../pool/derelor.js";
+import _poolDescendantOfKiyomaro from "../pool/descendant-of-kiyomaro.js";
 import _poolDesolateLighthouse from "../pool/desolate-lighthouse.js";
 import _poolDevouringStrossus from "../pool/devouring-strossus.js";
 import _poolDewdropSpy from "../pool/dewdrop-spy.js";
@@ -368,6 +370,7 @@ import _poolHearthElemental from "../pool/hearth-elemental.js";
 import _poolHearthcageGiant from "../pool/hearthcage-giant.js";
 import _poolHeartstone from "../pool/heartstone.js";
 import _poolHeatWave from "../pool/heat-wave.js";
+import _poolHellfireMongrel from "../pool/hellfire-mongrel.js";
 import _poolHematiteGolem from "../pool/hematite-golem.js";
 import _poolHewTheEntwood from "../pool/hew-the-entwood.js";
 import _poolHideousFleshwheeler from "../pool/hideous-fleshwheeler.js";
@@ -1041,6 +1044,7 @@ const shard: CardShard = {
     _poolArborElf,
     _poolArcaneAmphisbaena,
     _poolArchpriestOfIona,
+    _poolArcticFoxes,
     _poolArgothianElder,
     _poolArnynDeathbloomBotanist,
     _poolArtfulTakedown,
@@ -1192,6 +1196,7 @@ const shard: CardShard = {
     _poolDemonicDread,
     _poolDerangedHermit,
     _poolDerelor,
+    _poolDescendantOfKiyomaro,
     _poolDesolateLighthouse,
     _poolDevouringStrossus,
     _poolDewdropSpy,
@@ -1374,6 +1379,7 @@ const shard: CardShard = {
     _poolHearthcageGiant,
     _poolHeartstone,
     _poolHeatWave,
+    _poolHellfireMongrel,
     _poolHematiteGolem,
     _poolHewTheEntwood,
     _poolHideousFleshwheeler,

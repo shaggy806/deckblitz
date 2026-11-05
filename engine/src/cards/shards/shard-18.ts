@@ -24,6 +24,7 @@ import _poolAnarchist from "../pool/anarchist.js";
 import _poolAncientCornucopia from "../pool/ancient-cornucopia.js";
 import _poolAncientRunes from "../pool/ancient-runes.js";
 import _poolAndraditeLeech from "../pool/andradite-leech.js";
+import _poolAnimusOfNightsReach from "../pool/animus-of-nights-reach.js";
 import _poolAppliedGeometry from "../pool/applied-geometry.js";
 import _poolArchaicsAgony from "../pool/archaics-agony.js";
 import _poolArchfiendOfDespair from "../pool/archfiend-of-despair.js";
@@ -517,6 +518,7 @@ import _poolNecromancersCovenant from "../pool/necromancers-covenant.js";
 import _poolNerivHeartOfTheStorm from "../pool/neriv-heart-of-the-storm.js";
 import _poolNestingDovehawk from "../pool/nesting-dovehawk.js";
 import _poolNetherbornPhalanx from "../pool/netherborn-phalanx.js";
+import _poolNezumiGraverobber from "../pool/nezumi-graverobber.js";
 import _poolNineLives from "../pool/nine-lives.js";
 import _poolNineTailWhiteFox from "../pool/nine-tail-white-fox.js";
 import _poolNovelNunchaku from "../pool/novel-nunchaku.js";
@@ -958,6 +960,7 @@ const shard: CardShard = {
     _poolAncientCornucopia,
     _poolAncientRunes,
     _poolAndraditeLeech,
+    _poolAnimusOfNightsReach,
     _poolAppliedGeometry,
     _poolArchaicsAgony,
     _poolArchfiendOfDespair,
@@ -1451,6 +1454,7 @@ const shard: CardShard = {
     _poolNerivHeartOfTheStorm,
     _poolNestingDovehawk,
     _poolNetherbornPhalanx,
+    _poolNezumiGraverobber,
     _poolNineLives,
     _poolNineTailWhiteFox,
     _poolNovelNunchaku,

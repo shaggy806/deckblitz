@@ -120,6 +120,7 @@ import _poolCarrionFeeder from "../pool/carrion-feeder.js";
 import _poolCartelAristocrat from "../pool/cartel-aristocrat.js";
 import _poolCastleLocthwain from "../pool/castle-locthwain.js";
 import _poolCatch from "../pool/catch.js";
+import _poolCelebrateTheHarvest from "../pool/celebrate-the-harvest.js";
 import _poolCelebrateTheMountainKing from "../pool/celebrate-the-mountain-king.js";
 import _poolCetaSanctuary from "../pool/ceta-sanctuary.js";
 import _poolChampionOfDusan from "../pool/champion-of-dusan.js";
@@ -562,6 +563,7 @@ import _poolPageLooseLeaf from "../pool/page-loose-leaf.js";
 import _poolPantlazaSunFavored from "../pool/pantlaza-sun-favored.js";
 import _poolPaperfinRascal from "../pool/paperfin-rascal.js";
 import _poolPatagiaGolem from "../pool/patagia-golem.js";
+import _poolPathOfBravery from "../pool/path-of-bravery.js";
 import _poolPathToTheFestival from "../pool/path-to-the-festival.js";
 import _poolPathbreakerIbex from "../pool/pathbreaker-ibex.js";
 import _poolPatronOfTheKitsune from "../pool/patron-of-the-kitsune.js";
@@ -903,6 +905,7 @@ import _poolWrathfulRedDragon from "../pool/wrathful-red-dragon.js";
 import _poolWreckingBeast from "../pool/wrecking-beast.js";
 import _poolWretchedDoll from "../pool/wretched-doll.js";
 import _poolWyrmsCrossingPatrol from "../pool/wyrms-crossing-patrol.js";
+import _poolXavierSalInfestedCaptain from "../pool/xavier-sal-infested-captain.js";
 import _poolZealotsConviction from "../pool/zealots-conviction.js";
 import _poolZombieAssassin from "../pool/zombie-assassin.js";
 import _tokens01BlueStarfishToken from "../tokens/0-1-blue-starfish-token.js";
@@ -1047,6 +1050,7 @@ const shard: CardShard = {
     _poolCartelAristocrat,
     _poolCastleLocthwain,
     _poolCatch,
+    _poolCelebrateTheHarvest,
     _poolCelebrateTheMountainKing,
     _poolCetaSanctuary,
     _poolChampionOfDusan,
@@ -1489,6 +1493,7 @@ const shard: CardShard = {
     _poolPantlazaSunFavored,
     _poolPaperfinRascal,
     _poolPatagiaGolem,
+    _poolPathOfBravery,
     _poolPathToTheFestival,
     _poolPathbreakerIbex,
     _poolPatronOfTheKitsune,
@@ -1830,6 +1835,7 @@ const shard: CardShard = {
     _poolWreckingBeast,
     _poolWretchedDoll,
     _poolWyrmsCrossingPatrol,
+    _poolXavierSalInfestedCaptain,
     _poolZealotsConviction,
     _poolZombieAssassin,
   ],

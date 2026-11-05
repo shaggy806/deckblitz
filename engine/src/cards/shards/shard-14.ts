@@ -400,6 +400,7 @@ import _poolHieromancersCage from "../pool/hieromancers-cage.js";
 import _poolHikariTwilightGuardian from "../pool/hikari-twilight-guardian.js";
 import _poolHistoryOfBenalia from "../pool/history-of-benalia.js";
 import _poolHoarShade from "../pool/hoar-shade.js";
+import _poolHoardHauler from "../pool/hoard-hauler.js";
 import _poolHollowScavenger from "../pool/hollow-scavenger.js";
 import _poolHollowsage from "../pool/hollowsage.js";
 import _poolHomicideInvestigator from "../pool/homicide-investigator.js";
@@ -580,6 +581,7 @@ import _poolOpportunist from "../pool/opportunist.js";
 import _poolOranRiefSurvivalist from "../pool/oran-rief-survivalist.js";
 import _poolOvergrownPest from "../pool/overgrown-pest.js";
 import _poolOxDrover from "../pool/ox-drover.js";
+import _poolPactOfTheSerpent from "../pool/pact-of-the-serpent.js";
 import _poolPactdollTerror from "../pool/pactdoll-terror.js";
 import _poolPaladinDanseSteelMaverick from "../pool/paladin-danse-steel-maverick.js";
 import _poolPanacea from "../pool/panacea.js";
@@ -915,6 +917,7 @@ import _poolZhalfirinCommander from "../pool/zhalfirin-commander.js";
 import _poolZopandrelHungerDominus from "../pool/zopandrel-hunger-dominus.js";
 import _poolZukosOffense from "../pool/zukos-offense.js";
 import _tokensApeToken from "../tokens/ape-token.js";
+import _tokensBlueBlackFaerieRogueToken from "../tokens/blue-black-faerie-rogue-token.js";
 import _tokensCrabToken from "../tokens/crab-token.js";
 import _tokensDeathtouchRatToken from "../tokens/deathtouch-rat-token.js";
 import _tokensDemonToken55 from "../tokens/demon-token-5-5.js";
@@ -1336,6 +1339,7 @@ const shard: CardShard = {
     _poolHikariTwilightGuardian,
     _poolHistoryOfBenalia,
     _poolHoarShade,
+    _poolHoardHauler,
     _poolHollowScavenger,
     _poolHollowsage,
     _poolHomicideInvestigator,
@@ -1516,6 +1520,7 @@ const shard: CardShard = {
     _poolOranRiefSurvivalist,
     _poolOvergrownPest,
     _poolOxDrover,
+    _poolPactOfTheSerpent,
     _poolPactdollTerror,
     _poolPaladinDanseSteelMaverick,
     _poolPanacea,
@@ -1853,6 +1858,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokensApeToken,
+    _tokensBlueBlackFaerieRogueToken,
     _tokensCrabToken,
     _tokensDeathtouchRatToken,
     _tokensDemonToken55,

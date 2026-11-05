@@ -242,6 +242,7 @@ import _poolExposeEvil from "../pool/expose-evil.js";
 import _poolExquisiteHuntmaster from "../pool/exquisite-huntmaster.js";
 import _poolExtinguish from "../pool/extinguish.js";
 import _poolEyeblightMassacre from "../pool/eyeblight-massacre.js";
+import _poolFadeFromHistory from "../pool/fade-from-history.js";
 import _poolFaerieNoble from "../pool/faerie-noble.js";
 import _poolFallOfTheGavel from "../pool/fall-of-the-gavel.js";
 import _poolFallToEarth from "../pool/fall-to-earth.js";
@@ -428,10 +429,12 @@ import _poolLegionLoyalty from "../pool/legion-loyalty.js";
 import _poolLeylineDowser from "../pool/leyline-dowser.js";
 import _poolLightningHelix from "../pool/lightning-helix.js";
 import _poolLightningReflexes from "../pool/lightning-reflexes.js";
+import _poolLilianaDeathMage from "../pool/liliana-death-mage.js";
 import _poolLilianasIndignation from "../pool/lilianas-indignation.js";
 import _poolLivingEnd from "../pool/living-end.js";
 import _poolLlanowarSentinel from "../pool/llanowar-sentinel.js";
 import _poolLoathsomeCurator from "../pool/loathsome-curator.js";
+import _poolLootTheNexus from "../pool/loot-the-nexus.js";
 import _poolLordSkittersButcher from "../pool/lord-skitters-butcher.js";
 import _poolLoxodonSurveyor from "../pool/loxodon-surveyor.js";
 import _poolLuminousBroodmoth from "../pool/luminous-broodmoth.js";
@@ -592,6 +595,7 @@ import _poolRimewoodFalls from "../pool/rimewood-falls.js";
 import _poolRipscalePredator from "../pool/ripscale-predator.js";
 import _poolRiseFromTheWreck from "../pool/rise-from-the-wreck.js";
 import _poolRiseOfTheHobgoblins from "../pool/rise-of-the-hobgoblins.js";
+import _poolRisingWaters from "../pool/rising-waters.js";
 import _poolRitesOfFlourishing from "../pool/rites-of-flourishing.js";
 import _poolRivalsDuel from "../pool/rivals-duel.js";
 import _poolRivenTurnbull from "../pool/riven-turnbull.js";
@@ -774,6 +778,7 @@ import _poolTenthDistrictVeteran from "../pool/tenth-district-veteran.js";
 import _poolTerrarion from "../pool/terrarion.js";
 import _poolTevalsJudgment from "../pool/tevals-judgment.js";
 import _poolThalakosMistfolk from "../pool/thalakos-mistfolk.js";
+import _poolTheCavesOfAndrozani from "../pool/the-caves-of-androzani.js";
 import _poolTheDrossPits from "../pool/the-dross-pits.js";
 import _poolTheGirlInTheFireplace from "../pool/the-girl-in-the-fireplace.js";
 import _poolTheJollyBalloonMan from "../pool/the-jolly-balloon-man.js";
@@ -792,6 +797,7 @@ import _poolTitaniasChosen from "../pool/titanias-chosen.js";
 import _poolTitanothRex from "../pool/titanoth-rex.js";
 import _poolTizerusCharger from "../pool/tizerus-charger.js";
 import _poolTogetherAsOne from "../pool/together-as-one.js";
+import _poolTombBlade from "../pool/tomb-blade.js";
 import _poolTomeOfLegends from "../pool/tome-of-legends.js";
 import _poolToothOfChissGoria from "../pool/tooth-of-chiss-goria.js";
 import _poolTouchstone from "../pool/touchstone.js";
@@ -1149,6 +1155,7 @@ const shard: CardShard = {
     _poolExquisiteHuntmaster,
     _poolExtinguish,
     _poolEyeblightMassacre,
+    _poolFadeFromHistory,
     _poolFaerieNoble,
     _poolFallOfTheGavel,
     _poolFallToEarth,
@@ -1335,10 +1342,12 @@ const shard: CardShard = {
     _poolLeylineDowser,
     _poolLightningHelix,
     _poolLightningReflexes,
+    _poolLilianaDeathMage,
     _poolLilianasIndignation,
     _poolLivingEnd,
     _poolLlanowarSentinel,
     _poolLoathsomeCurator,
+    _poolLootTheNexus,
     _poolLordSkittersButcher,
     _poolLoxodonSurveyor,
     _poolLuminousBroodmoth,
@@ -1499,6 +1508,7 @@ const shard: CardShard = {
     _poolRipscalePredator,
     _poolRiseFromTheWreck,
     _poolRiseOfTheHobgoblins,
+    _poolRisingWaters,
     _poolRitesOfFlourishing,
     _poolRivalsDuel,
     _poolRivenTurnbull,
@@ -1681,6 +1691,7 @@ const shard: CardShard = {
     _poolTerrarion,
     _poolTevalsJudgment,
     _poolThalakosMistfolk,
+    _poolTheCavesOfAndrozani,
     _poolTheDrossPits,
     _poolTheGirlInTheFireplace,
     _poolTheJollyBalloonMan,
@@ -1699,6 +1710,7 @@ const shard: CardShard = {
     _poolTitanothRex,
     _poolTizerusCharger,
     _poolTogetherAsOne,
+    _poolTombBlade,
     _poolTomeOfLegends,
     _poolToothOfChissGoria,
     _poolTouchstone,

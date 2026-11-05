@@ -263,6 +263,7 @@ import _poolFerropede from "../pool/ferropede.js";
 import _poolFertileFootsteps from "../pool/fertile-footsteps.js";
 import _poolFestivalOfTrokin from "../pool/festival-of-trokin.js";
 import _poolFettergeist from "../pool/fettergeist.js";
+import _poolFeveredVisions from "../pool/fevered-visions.js";
 import _poolFieryImpulse from "../pool/fiery-impulse.js";
 import _poolFight from "../pool/fight.js";
 import _poolFinality from "../pool/finality.js";
@@ -390,6 +391,7 @@ import _poolIcequake from "../pool/icequake.js";
 import _poolIcyReception from "../pool/icy-reception.js";
 import _poolIllegitimateBusiness from "../pool/illegitimate-business.js";
 import _poolImmolatingGyre from "../pool/immolating-gyre.js";
+import _poolImpendingDisaster from "../pool/impending-disaster.js";
 import _poolImposingGrandeur from "../pool/imposing-grandeur.js";
 import _poolImprobableAlliance from "../pool/improbable-alliance.js";
 import _poolIncubation from "../pool/incubation.js";
@@ -855,6 +857,7 @@ import _poolTombOfHorrorsAdventurer from "../pool/tomb-of-horrors-adventurer.js"
 import _poolTombTyrant from "../pool/tomb-tyrant.js";
 import _poolTorporDust from "../pool/torpor-dust.js";
 import _poolTovolarDireOverlord from "../pool/tovolar-dire-overlord.js";
+import _poolTragicArrogance from "../pool/tragic-arrogance.js";
 import _poolTrailOfMystery from "../pool/trail-of-mystery.js";
 import _poolTrainedPronghorn from "../pool/trained-pronghorn.js";
 import _poolTraitorsClutch from "../pool/traitors-clutch.js";
@@ -1232,6 +1235,7 @@ const shard: CardShard = {
     _poolFertileFootsteps,
     _poolFestivalOfTrokin,
     _poolFettergeist,
+    _poolFeveredVisions,
     _poolFieryImpulse,
     _poolFight,
     _poolFinality,
@@ -1359,6 +1363,7 @@ const shard: CardShard = {
     _poolIcyReception,
     _poolIllegitimateBusiness,
     _poolImmolatingGyre,
+    _poolImpendingDisaster,
     _poolImposingGrandeur,
     _poolImprobableAlliance,
     _poolIncubation,
@@ -1824,6 +1829,7 @@ const shard: CardShard = {
     _poolTombTyrant,
     _poolTorporDust,
     _poolTovolarDireOverlord,
+    _poolTragicArrogance,
     _poolTrailOfMystery,
     _poolTrainedPronghorn,
     _poolTraitorsClutch,

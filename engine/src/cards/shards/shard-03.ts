@@ -259,6 +259,7 @@ import _poolFracturedLoyalty from "../pool/fractured-loyalty.js";
 import _poolFrightcrawler from "../pool/frightcrawler.js";
 import _poolFrogmyrEnforcer from "../pool/frogmyr-enforcer.js";
 import _poolFrostRaptor from "../pool/frost-raptor.js";
+import _poolFurnacePunisher from "../pool/furnace-punisher.js";
 import _poolFurybladeVampire from "../pool/furyblade-vampire.js";
 import _poolFyndhornBow from "../pool/fyndhorn-bow.js";
 import _poolFyndhornPollen from "../pool/fyndhorn-pollen.js";
@@ -480,6 +481,7 @@ import _poolNecronDeathmark from "../pool/necron-deathmark.js";
 import _poolNettleSwine from "../pool/nettle-swine.js";
 import _poolNevermaker from "../pool/nevermaker.js";
 import _poolNezumiRoadCaptain from "../pool/nezumi-road-captain.js";
+import _poolNezumiShortfang from "../pool/nezumi-shortfang.js";
 import _poolNicanzilCurrentConductor from "../pool/nicanzil-current-conductor.js";
 import _poolNimbusWings from "../pool/nimbus-wings.js";
 import _poolNoblePanther from "../pool/noble-panther.js";
@@ -1112,6 +1114,7 @@ const shard: CardShard = {
     _poolFrightcrawler,
     _poolFrogmyrEnforcer,
     _poolFrostRaptor,
+    _poolFurnacePunisher,
     _poolFurybladeVampire,
     _poolFyndhornBow,
     _poolFyndhornPollen,
@@ -1333,6 +1336,7 @@ const shard: CardShard = {
     _poolNettleSwine,
     _poolNevermaker,
     _poolNezumiRoadCaptain,
+    _poolNezumiShortfang,
     _poolNicanzilCurrentConductor,
     _poolNimbusWings,
     _poolNoblePanther,

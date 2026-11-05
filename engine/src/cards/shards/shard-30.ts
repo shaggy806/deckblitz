@@ -573,6 +573,7 @@ import _poolOmenOfTheSun from "../pool/omen-of-the-sun.js";
 import _poolOmen from "../pool/omen.js";
 import _poolOmniscience from "../pool/omniscience.js";
 import _poolOnduInversion from "../pool/ondu-inversion.js";
+import _poolOonaQueenOfTheFae from "../pool/oona-queen-of-the-fae.js";
 import _poolOrcishBowmasters from "../pool/orcish-bowmasters.js";
 import _poolOrdealOfHeliod from "../pool/ordeal-of-heliod.js";
 import _poolOrdealOfNylea from "../pool/ordeal-of-nylea.js";
@@ -1519,6 +1520,7 @@ const shard: CardShard = {
     _poolOmen,
     _poolOmniscience,
     _poolOnduInversion,
+    _poolOonaQueenOfTheFae,
     _poolOrcishBowmasters,
     _poolOrdealOfHeliod,
     _poolOrdealOfNylea,

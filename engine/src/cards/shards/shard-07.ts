@@ -183,6 +183,7 @@ import _poolDazzlingAngel from "../pool/dazzling-angel.js";
 import _poolDead from "../pool/dead.js";
 import _poolDeadlyAllure from "../pool/deadly-allure.js";
 import _poolDeadshot from "../pool/deadshot.js";
+import _poolDeathbringerRegent from "../pool/deathbringer-regent.js";
 import _poolDeathcultRogue from "../pool/deathcult-rogue.js";
 import _poolDeepchannelMentor from "../pool/deepchannel-mentor.js";
 import _poolDefenderOfChaos from "../pool/defender-of-chaos.js";
@@ -386,6 +387,7 @@ import _poolIntoTheCore from "../pool/into-the-core.js";
 import _poolIntoTheFaeCourt from "../pool/into-the-fae-court.js";
 import _poolIrregularCohort from "../pool/irregular-cohort.js";
 import _poolIsamaruHoundOfKonda from "../pool/isamaru-hound-of-konda.js";
+import _poolIslandFishJasconius from "../pool/island-fish-jasconius.js";
 import _poolItsClobberinTime from "../pool/its-clobberin-time.js";
 import _poolJacesArchivist from "../pool/jaces-archivist.js";
 import _poolJacesRuse from "../pool/jaces-ruse.js";
@@ -499,10 +501,12 @@ import _poolMidnightDuelist from "../pool/midnight-duelist.js";
 import _poolMidnightSnack from "../pool/midnight-snack.js";
 import _poolMightyLeap from "../pool/mighty-leap.js";
 import _poolMinasTirith from "../pool/minas-tirith.js";
+import _poolMindblaze from "../pool/mindblaze.js";
 import _poolMindeyeDrake from "../pool/mindeye-drake.js";
 import _poolMirkwoodTrapper from "../pool/mirkwood-trapper.js";
 import _poolMirrodinAvenged from "../pool/mirrodin-avenged.js";
 import _poolMishrasHelix from "../pool/mishras-helix.js";
+import _poolMistOfStagnation from "../pool/mist-of-stagnation.js";
 import _poolMoggWarMarshal from "../pool/mogg-war-marshal.js";
 import _poolMoldgrafScavenger from "../pool/moldgraf-scavenger.js";
 import _poolMolimoMaroSorcerer from "../pool/molimo-maro-sorcerer.js";
@@ -1138,6 +1142,7 @@ const shard: CardShard = {
     _poolDead,
     _poolDeadlyAllure,
     _poolDeadshot,
+    _poolDeathbringerRegent,
     _poolDeathcultRogue,
     _poolDeepchannelMentor,
     _poolDefenderOfChaos,
@@ -1341,6 +1346,7 @@ const shard: CardShard = {
     _poolIntoTheFaeCourt,
     _poolIrregularCohort,
     _poolIsamaruHoundOfKonda,
+    _poolIslandFishJasconius,
     _poolItsClobberinTime,
     _poolJacesArchivist,
     _poolJacesRuse,
@@ -1454,10 +1460,12 @@ const shard: CardShard = {
     _poolMidnightSnack,
     _poolMightyLeap,
     _poolMinasTirith,
+    _poolMindblaze,
     _poolMindeyeDrake,
     _poolMirkwoodTrapper,
     _poolMirrodinAvenged,
     _poolMishrasHelix,
+    _poolMistOfStagnation,
     _poolMoggWarMarshal,
     _poolMoldgrafScavenger,
     _poolMolimoMaroSorcerer,

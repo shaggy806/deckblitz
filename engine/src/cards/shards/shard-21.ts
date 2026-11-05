@@ -141,6 +141,7 @@ import _poolCleavingReaper from "../pool/cleaving-reaper.js";
 import _poolCleavingSkyrider from "../pool/cleaving-skyrider.js";
 import _poolClockworkCondor from "../pool/clockwork-condor.js";
 import _poolClockworkServant from "../pool/clockwork-servant.js";
+import _poolCoastlineMarauders from "../pool/coastline-marauders.js";
 import _poolCockatrice from "../pool/cockatrice.js";
 import _poolCoercion from "../pool/coercion.js";
 import _poolColossusOfAkros from "../pool/colossus-of-akros.js";
@@ -153,6 +154,7 @@ import _poolConclaveTribunal from "../pool/conclave-tribunal.js";
 import _poolConclavesBlessing from "../pool/conclaves-blessing.js";
 import _poolConsignToDust from "../pool/consign-to-dust.js";
 import _poolConsultTheStarCharts from "../pool/consult-the-star-charts.js";
+import _poolContractualSafeguard from "../pool/contractual-safeguard.js";
 import _poolConviction from "../pool/conviction.js";
 import _poolCorneredCrook from "../pool/cornered-crook.js";
 import _poolCosmicLarva from "../pool/cosmic-larva.js";
@@ -176,6 +178,7 @@ import _poolDaredevilManWithoutFear from "../pool/daredevil-man-without-fear.js"
 import _poolDarkFavor from "../pool/dark-favor.js";
 import _poolDarkNourishment from "../pool/dark-nourishment.js";
 import _poolDaybreakRanger from "../pool/daybreak-ranger.js";
+import _poolDeathOfAThousandStings from "../pool/death-of-a-thousand-stings.js";
 import _poolDeathWard from "../pool/death-ward.js";
 import _poolDeathgreeter from "../pool/deathgreeter.js";
 import _poolDeceptiveFrostkite from "../pool/deceptive-frostkite.js";
@@ -373,6 +376,7 @@ import _poolImpracticalJoke from "../pool/impractical-joke.js";
 import _poolInSearchOfGreatness from "../pool/in-search-of-greatness.js";
 import _poolIngeniousLeonin from "../pool/ingenious-leonin.js";
 import _poolInquisitorExarch from "../pool/inquisitor-exarch.js";
+import _poolInvasionOfEldraine from "../pool/invasion-of-eldraine.js";
 import _poolInvasionOfKylem from "../pool/invasion-of-kylem.js";
 import _poolIridescentBlademaster from "../pool/iridescent-blademaster.js";
 import _poolIronHillsStalwart from "../pool/iron-hills-stalwart.js";
@@ -437,6 +441,7 @@ import _poolMangaraTheDiplomat from "../pool/mangara-the-diplomat.js";
 import _poolMaraxusOfKeld from "../pool/maraxus-of-keld.js";
 import _poolMarduShadowspear from "../pool/mardu-shadowspear.js";
 import _poolMarkovBaron from "../pool/markov-baron.js";
+import _poolMartyrOfFrost from "../pool/martyr-of-frost.js";
 import _poolMarwynTheNurturer from "../pool/marwyn-the-nurturer.js";
 import _poolMaskOfImmolation from "../pool/mask-of-immolation.js";
 import _poolMasterOfDiversion from "../pool/master-of-diversion.js";
@@ -635,6 +640,7 @@ import _poolScreamingShield from "../pool/screaming-shield.js";
 import _poolScrubland from "../pool/scrubland.js";
 import _poolSculptingSteel from "../pool/sculpting-steel.js";
 import _poolSeaDasherOctopus from "../pool/sea-dasher-octopus.js";
+import _poolSealockMonster from "../pool/sealock-monster.js";
 import _poolSeethingSong from "../pool/seething-song.js";
 import _poolSeismicElemental from "../pool/seismic-elemental.js";
 import _poolSeismicShudder from "../pool/seismic-shudder.js";
@@ -714,6 +720,7 @@ import _poolStymiedHopes from "../pool/stymied-hopes.js";
 import _poolSubmergedBoneyard from "../pool/submerged-boneyard.js";
 import _poolSuddenSetback from "../pool/sudden-setback.js";
 import _poolSukiCourageousRescuer from "../pool/suki-courageous-rescuer.js";
+import _poolSummonValefor from "../pool/summon-valefor.js";
 import _poolSunastianFalconer from "../pool/sunastian-falconer.js";
 import _poolSunfireBalm from "../pool/sunfire-balm.js";
 import _poolSunkenCitadel from "../pool/sunken-citadel.js";
@@ -763,6 +770,7 @@ import _poolTheMasterMesmerist from "../pool/the-master-mesmerist.js";
 import _poolTheRegalia from "../pool/the-regalia.js";
 import _poolTheSibsigCeremony from "../pool/the-sibsig-ceremony.js";
 import _poolTheoreticalDuplication from "../pool/theoretical-duplication.js";
+import _poolThornbowArcher from "../pool/thornbow-archer.js";
 import _poolThornwoodFalls from "../pool/thornwood-falls.js";
 import _poolThoughtErasure from "../pool/thought-erasure.js";
 import _poolThrashOfRaptors from "../pool/thrash-of-raptors.js";
@@ -1028,6 +1036,7 @@ const shard: CardShard = {
     _poolCleavingSkyrider,
     _poolClockworkCondor,
     _poolClockworkServant,
+    _poolCoastlineMarauders,
     _poolCockatrice,
     _poolCoercion,
     _poolColossusOfAkros,
@@ -1040,6 +1049,7 @@ const shard: CardShard = {
     _poolConclavesBlessing,
     _poolConsignToDust,
     _poolConsultTheStarCharts,
+    _poolContractualSafeguard,
     _poolConviction,
     _poolCorneredCrook,
     _poolCosmicLarva,
@@ -1063,6 +1073,7 @@ const shard: CardShard = {
     _poolDarkFavor,
     _poolDarkNourishment,
     _poolDaybreakRanger,
+    _poolDeathOfAThousandStings,
     _poolDeathWard,
     _poolDeathgreeter,
     _poolDeceptiveFrostkite,
@@ -1260,6 +1271,7 @@ const shard: CardShard = {
     _poolInSearchOfGreatness,
     _poolIngeniousLeonin,
     _poolInquisitorExarch,
+    _poolInvasionOfEldraine,
     _poolInvasionOfKylem,
     _poolIridescentBlademaster,
     _poolIronHillsStalwart,
@@ -1324,6 +1336,7 @@ const shard: CardShard = {
     _poolMaraxusOfKeld,
     _poolMarduShadowspear,
     _poolMarkovBaron,
+    _poolMartyrOfFrost,
     _poolMarwynTheNurturer,
     _poolMaskOfImmolation,
     _poolMasterOfDiversion,
@@ -1522,6 +1535,7 @@ const shard: CardShard = {
     _poolScrubland,
     _poolSculptingSteel,
     _poolSeaDasherOctopus,
+    _poolSealockMonster,
     _poolSeethingSong,
     _poolSeismicElemental,
     _poolSeismicShudder,
@@ -1601,6 +1615,7 @@ const shard: CardShard = {
     _poolSubmergedBoneyard,
     _poolSuddenSetback,
     _poolSukiCourageousRescuer,
+    _poolSummonValefor,
     _poolSunastianFalconer,
     _poolSunfireBalm,
     _poolSunkenCitadel,
@@ -1650,6 +1665,7 @@ const shard: CardShard = {
     _poolTheRegalia,
     _poolTheSibsigCeremony,
     _poolTheoreticalDuplication,
+    _poolThornbowArcher,
     _poolThornwoodFalls,
     _poolThoughtErasure,
     _poolThrashOfRaptors,

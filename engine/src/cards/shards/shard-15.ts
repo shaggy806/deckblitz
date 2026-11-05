@@ -74,6 +74,7 @@ import _poolBoilingRockRioter from "../pool/boiling-rock-rioter.js";
 import _poolBolracClanCrusher from "../pool/bolrac-clan-crusher.js";
 import _poolBoltwave from "../pool/boltwave.js";
 import _poolBondBeetle from "../pool/bond-beetle.js";
+import _poolBondersOrnament from "../pool/bonders-ornament.js";
 import _poolBoneMiser from "../pool/bone-miser.js";
 import _poolBorealElemental from "../pool/boreal-elemental.js";
 import _poolBorosReckoner from "../pool/boros-reckoner.js";
@@ -461,6 +462,7 @@ import _poolManticoreOfTheGauntlet from "../pool/manticore-of-the-gauntlet.js";
 import _poolMarblePriest from "../pool/marble-priest.js";
 import _poolMarchFromTheTomb from "../pool/march-from-the-tomb.js";
 import _poolMarketFestival from "../pool/market-festival.js";
+import _poolMarkovEnforcer from "../pool/markov-enforcer.js";
 import _poolMarrowBats from "../pool/marrow-bats.js";
 import _poolMarshLurker from "../pool/marsh-lurker.js";
 import _poolMartyrOfAshes from "../pool/martyr-of-ashes.js";
@@ -600,6 +602,7 @@ import _poolRayOfDistortion from "../pool/ray-of-distortion.js";
 import _poolRayOfErasure from "../pool/ray-of-erasure.js";
 import _poolRazakethsRite from "../pool/razakeths-rite.js";
 import _poolRazorGolem from "../pool/razor-golem.js";
+import _poolRazorPendulum from "../pool/razor-pendulum.js";
 import _poolRazormaneMasticore from "../pool/razormane-masticore.js";
 import _poolReapTheSeagraf from "../pool/reap-the-seagraf.js";
 import _poolReasonableDoubt from "../pool/reasonable-doubt.js";
@@ -661,6 +664,7 @@ import _poolShaleskinBruiser from "../pool/shaleskin-bruiser.js";
 import _poolSharkTyphoon from "../pool/shark-typhoon.js";
 import _poolSheoldredTheApocalypse from "../pool/sheoldred-the-apocalypse.js";
 import _poolShiftingLoyalties from "../pool/shifting-loyalties.js";
+import _poolSiegeDragon from "../pool/siege-dragon.js";
 import _poolSilumgarTheDriftingDeath from "../pool/silumgar-the-drifting-death.js";
 import _poolSilverbackApe from "../pool/silverback-ape.js";
 import _poolSilvercoatLion from "../pool/silvercoat-lion.js";
@@ -957,6 +961,7 @@ const shard: CardShard = {
     _poolBolracClanCrusher,
     _poolBoltwave,
     _poolBondBeetle,
+    _poolBondersOrnament,
     _poolBoneMiser,
     _poolBorealElemental,
     _poolBorosReckoner,
@@ -1344,6 +1349,7 @@ const shard: CardShard = {
     _poolMarblePriest,
     _poolMarchFromTheTomb,
     _poolMarketFestival,
+    _poolMarkovEnforcer,
     _poolMarrowBats,
     _poolMarshLurker,
     _poolMartyrOfAshes,
@@ -1483,6 +1489,7 @@ const shard: CardShard = {
     _poolRayOfErasure,
     _poolRazakethsRite,
     _poolRazorGolem,
+    _poolRazorPendulum,
     _poolRazormaneMasticore,
     _poolReapTheSeagraf,
     _poolReasonableDoubt,
@@ -1544,6 +1551,7 @@ const shard: CardShard = {
     _poolSharkTyphoon,
     _poolSheoldredTheApocalypse,
     _poolShiftingLoyalties,
+    _poolSiegeDragon,
     _poolSilumgarTheDriftingDeath,
     _poolSilverbackApe,
     _poolSilvercoatLion,

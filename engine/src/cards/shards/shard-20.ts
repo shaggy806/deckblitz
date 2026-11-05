@@ -571,6 +571,7 @@ import _poolObservedStasis from "../pool/observed-stasis.js";
 import _poolObuunMulDayaAncestor from "../pool/obuun-mul-daya-ancestor.js";
 import _poolOfOneMind from "../pool/of-one-mind.js";
 import _poolOketrasAttendant from "../pool/oketras-attendant.js";
+import _poolOkinaNightwatch from "../pool/okina-nightwatch.js";
 import _poolOmnathLocusOfRage from "../pool/omnath-locus-of-rage.js";
 import _poolOmniCheesePizza from "../pool/omni-cheese-pizza.js";
 import _poolOneWithNothing from "../pool/one-with-nothing.js";
@@ -1560,6 +1561,7 @@ const shard: CardShard = {
     _poolObuunMulDayaAncestor,
     _poolOfOneMind,
     _poolOketrasAttendant,
+    _poolOkinaNightwatch,
     _poolOmnathLocusOfRage,
     _poolOmniCheesePizza,
     _poolOneWithNothing,

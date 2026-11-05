@@ -1,0 +1,1071 @@
+{
+ "batch": "B257",
+ "status": "done",
+ "ranks": "Need-keys Phase 2: cards freed by the attack-restriction, chosen-by-other-player, dealt-damage-dies, per-player condition, on-resolution choice, choose-permanent and per-player count families (agents of 20, 30, 40 and 60 cards, a measure of group size)",
+ "authored": [
+  {
+   "name": "Advice from the Fae",
+   "files": [
+    "engine/src/cards/pool/advice-from-the-fae.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ajani, Strength of the Pride",
+   "files": [
+    "engine/src/cards/pool/ajani-strength-of-the-pride.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Akuta, Born of Ash",
+   "files": [
+    "engine/src/cards/pool/akuta-born-of-ash.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "All-Seeing Arbiter",
+   "files": [
+    "engine/src/cards/pool/all-seeing-arbiter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Angel of Destiny",
+   "files": [
+    "engine/src/cards/pool/angel-of-destiny.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arctic Foxes",
+   "files": [
+    "engine/src/cards/pool/arctic-foxes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arcum's Sleigh",
+   "files": [
+    "engine/src/cards/pool/arcums-sleigh.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Armament Master",
+   "files": [
+    "engine/src/cards/pool/armament-master.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Astarion's Thirst",
+   "files": [
+    "engine/src/cards/pool/astarions-thirst.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Atemsis, All-Seeing",
+   "files": [
+    "engine/src/cards/pool/atemsis-all-seeing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aven Courier",
+   "files": [
+    "engine/src/cards/pool/aven-courier.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Axelrod Gunnarson",
+   "files": [
+    "engine/src/cards/pool/axelrod-gunnarson.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ayli, Eternal Pilgrim",
+   "files": [
+    "engine/src/cards/pool/ayli-eternal-pilgrim.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Balance of Power",
+   "files": [
+    "engine/src/cards/pool/balance-of-power.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Baron Sengir",
+   "files": [
+    "engine/src/cards/pool/baron-sengir.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Benevolent Offering",
+   "files": [
+    "engine/src/cards/pool/benevolent-offering.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bloodvial Purveyor",
+   "files": [
+    "engine/src/cards/pool/bloodvial-purveyor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bonder's Ornament",
+   "files": [
+    "engine/src/cards/pool/bonders-ornament.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Borrowed Knowledge",
+   "files": [
+    "engine/src/cards/pool/borrowed-knowledge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Calix, Guided by Fate",
+   "files": [
+    "engine/src/cards/pool/calix-guided-by-fate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Call the Coppercoats",
+   "files": [
+    "engine/src/cards/pool/call-the-coppercoats.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Celebrate the Harvest",
+   "files": [
+    "engine/src/cards/pool/celebrate-the-harvest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chalice of Life // Chalice of Death",
+   "files": [
+    "engine/src/cards/pool/chalice-of-life.ts",
+    "engine/src/cards/pool/chalice-of-death.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Clockspinning",
+   "files": [
+    "engine/src/cards/pool/clockspinning.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Coastline Marauders",
+   "files": [
+    "engine/src/cards/pool/coastline-marauders.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Consuming Tide",
+   "files": [
+    "engine/src/cards/pool/consuming-tide.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Contractual Safeguard",
+   "files": [
+    "engine/src/cards/pool/contractual-safeguard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cosmos Elixir",
+   "files": [
+    "engine/src/cards/pool/cosmos-elixir.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Davriel, Rogue Shadowmage",
+   "files": [
+    "engine/src/cards/pool/davriel-rogue-shadowmage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Davros, Dalek Creator",
+   "files": [
+    "engine/src/cards/pool/davros-dalek-creator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Death of a Thousand Stings",
+   "files": [
+    "engine/src/cards/pool/death-of-a-thousand-stings.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deathbringer Regent",
+   "files": [
+    "engine/src/cards/pool/deathbringer-regent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Descendant of Kiyomaro",
+   "files": [
+    "engine/src/cards/pool/descendant-of-kiyomaro.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Descendant of Masumaro",
+   "files": [
+    "engine/src/cards/pool/descendant-of-masumaro.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Disorder",
+   "files": [
+    "engine/src/cards/pool/disorder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Doctor Strange, Surgeon",
+   "files": [
+    "engine/src/cards/pool/doctor-strange-surgeon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dragonlord's Prerogative",
+   "files": [
+    "engine/src/cards/pool/dragonlords-prerogative.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dread Slaver",
+   "files": [
+    "engine/src/cards/pool/dread-slaver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ebony Owl Netsuke",
+   "files": [
+    "engine/src/cards/pool/ebony-owl-netsuke.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Eris, Roar of the Storm",
+   "files": [
+    "engine/src/cards/pool/eris-roar-of-the-storm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Exile into Darkness",
+   "files": [
+    "engine/src/cards/pool/exile-into-darkness.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fade from History",
+   "files": [
+    "engine/src/cards/pool/fade-from-history.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fevered Visions",
+   "files": [
+    "engine/src/cards/pool/fevered-visions.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Furnace Punisher",
+   "files": [
+    "engine/src/cards/pool/furnace-punisher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Generous Plunderer",
+   "files": [
+    "engine/src/cards/pool/generous-plunderer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gerrard Capashen",
+   "files": [
+    "engine/src/cards/pool/gerrard-capashen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ghirapur Orrery",
+   "files": [
+    "engine/src/cards/pool/ghirapur-orrery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Godhunter Octopus",
+   "files": [
+    "engine/src/cards/pool/godhunter-octopus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Greener Pastures",
+   "files": [
+    "engine/src/cards/pool/greener-pastures.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Guard Dogs",
+   "files": [
+    "engine/src/cards/pool/guard-dogs.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hawkeye, Avenging Archer",
+   "files": [
+    "engine/src/cards/pool/hawkeye-avenging-archer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hellfire Mongrel",
+   "files": [
+    "engine/src/cards/pool/hellfire-mongrel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hoard Hauler",
+   "files": [
+    "engine/src/cards/pool/hoard-hauler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hokori, Dust Drinker",
+   "files": [
+    "engine/src/cards/pool/hokori-dust-drinker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hollowborn Barghest",
+   "files": [
+    "engine/src/cards/pool/hollowborn-barghest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hour of Revelation",
+   "files": [
+    "engine/src/cards/pool/hour-of-revelation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Impending Disaster",
+   "files": [
+    "engine/src/cards/pool/impending-disaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invasion of Eldraine // Prickle Faeries",
+   "files": [
+    "engine/src/cards/pool/invasion-of-eldraine.ts",
+    "engine/src/cards/pool/prickle-faeries.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Island Fish Jasconius",
+   "files": [
+    "engine/src/cards/pool/island-fish-jasconius.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Joined Researchers // Secret Rendezvous",
+   "files": [
+    "engine/src/cards/pool/joined-researchers.ts",
+    "engine/src/cards/pool/secret-rendezvous.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Killmonger, Ruthless Usurper",
+   "files": [
+    "engine/src/cards/pool/killmonger-ruthless-usurper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kitsune Bonesetter",
+   "files": [
+    "engine/src/cards/pool/kitsune-bonesetter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kjeldoran Guard",
+   "files": [
+    "engine/src/cards/pool/kjeldoran-guard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ley Line",
+   "files": [
+    "engine/src/cards/pool/ley-line.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Liliana, Death Mage",
+   "files": [
+    "engine/src/cards/pool/liliana-death-mage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lolth, Spider Queen",
+   "files": [
+    "engine/src/cards/pool/lolth-spider-queen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Loot, the Nexus",
+   "files": [
+    "engine/src/cards/pool/loot-the-nexus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Madame Vastra",
+   "files": [
+    "engine/src/cards/pool/madame-vastra.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Manta Ray",
+   "files": [
+    "engine/src/cards/pool/manta-ray.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Marjhan",
+   "files": [
+    "engine/src/cards/pool/marjhan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Markov Enforcer",
+   "files": [
+    "engine/src/cards/pool/markov-enforcer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Martyr of Frost",
+   "files": [
+    "engine/src/cards/pool/martyr-of-frost.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mindblaze",
+   "files": [
+    "engine/src/cards/pool/mindblaze.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Misers' Cage",
+   "files": [
+    "engine/src/cards/pool/misers-cage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mist of Stagnation",
+   "files": [
+    "engine/src/cards/pool/mist-of-stagnation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nezumi Graverobber // Nighteyes the Desecrator",
+   "files": [
+    "engine/src/cards/pool/nezumi-graverobber.ts",
+    "engine/src/cards/pool/nighteyes-the-desecrator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nezumi Shortfang // Stabwhisker the Odious",
+   "files": [
+    "engine/src/cards/pool/nezumi-shortfang.ts",
+    "engine/src/cards/pool/stabwhisker-the-odious.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "No Witnesses",
+   "files": [
+    "engine/src/cards/pool/no-witnesses.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Okina Nightwatch",
+   "files": [
+    "engine/src/cards/pool/okina-nightwatch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oona, Queen of the Fae",
+   "files": [
+    "engine/src/cards/pool/oona-queen-of-the-fae.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Oskar, Rubbish Reclaimer",
+   "files": [
+    "engine/src/cards/pool/oskar-rubbish-reclaimer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pact of the Serpent",
+   "files": [
+    "engine/src/cards/pool/pact-of-the-serpent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Path of Bravery",
+   "files": [
+    "engine/src/cards/pool/path-of-bravery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Paupers' Cage",
+   "files": [
+    "engine/src/cards/pool/paupers-cage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Portcullis",
+   "files": [
+    "engine/src/cards/pool/portcullis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Quest for the Nihil Stone",
+   "files": [
+    "engine/src/cards/pool/quest-for-the-nihil-stone.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Razor Pendulum",
+   "files": [
+    "engine/src/cards/pool/razor-pendulum.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Recurring Insight",
+   "files": [
+    "engine/src/cards/pool/recurring-insight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rising Waters",
+   "files": [
+    "engine/src/cards/pool/rising-waters.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Robber of the Rich",
+   "files": [
+    "engine/src/cards/pool/robber-of-the-rich.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ronom Serpent",
+   "files": [
+    "engine/src/cards/pool/ronom-serpent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sealock Monster",
+   "files": [
+    "engine/src/cards/pool/sealock-monster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Secretkeeper",
+   "files": [
+    "engine/src/cards/pool/secretkeeper.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Selvala, Eager Trailblazer",
+   "files": [
+    "engine/src/cards/pool/selvala-eager-trailblazer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Serpent of the Endless Sea",
+   "files": [
+    "engine/src/cards/pool/serpent-of-the-endless-sea.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shatter the Sky",
+   "files": [
+    "engine/src/cards/pool/shatter-the-sky.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shrieking Affliction",
+   "files": [
+    "engine/src/cards/pool/shrieking-affliction.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Siege Dragon",
+   "files": [
+    "engine/src/cards/pool/siege-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Silumgar's Scorn",
+   "files": [
+    "engine/src/cards/pool/silumgars-scorn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skrelv, Defector Mite",
+   "files": [
+    "engine/src/cards/pool/skrelv-defector-mite.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skullcage",
+   "files": [
+    "engine/src/cards/pool/skullcage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spectral Force",
+   "files": [
+    "engine/src/cards/pool/spectral-force.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spoils of Evil",
+   "files": [
+    "engine/src/cards/pool/spoils-of-evil.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sudden Insight",
+   "files": [
+    "engine/src/cards/pool/sudden-insight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Summon: Valefor",
+   "files": [
+    "engine/src/cards/pool/summon-valefor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sungold Sentinel",
+   "files": [
+    "engine/src/cards/pool/sungold-sentinel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Teachings of the Archaics",
+   "files": [
+    "engine/src/cards/pool/teachings-of-the-archaics.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Abyss",
+   "files": [
+    "engine/src/cards/pool/the-abyss.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Caves of Androzani",
+   "files": [
+    "engine/src/cards/pool/the-caves-of-androzani.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Long Reach of Night",
+   "files": [
+    "engine/src/cards/pool/the-long-reach-of-night.ts",
+    "engine/src/cards/pool/animus-of-nights-reach.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Master of Lake-town",
+   "files": [
+    "engine/src/cards/pool/the-master-of-lake-town.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Mouth of Sauron",
+   "files": [
+    "engine/src/cards/pool/the-mouth-of-sauron.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thornbow Archer",
+   "files": [
+    "engine/src/cards/pool/thornbow-archer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thought-Stalker Warlock",
+   "files": [
+    "engine/src/cards/pool/thought-stalker-warlock.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tomb Blade",
+   "files": [
+    "engine/src/cards/pool/tomb-blade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tragic Arrogance",
+   "files": [
+    "engine/src/cards/pool/tragic-arrogance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trophy Hunter",
+   "files": [
+    "engine/src/cards/pool/trophy-hunter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vampiric Sliver",
+   "files": [
+    "engine/src/cards/pool/vampiric-sliver.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vein Drinker",
+   "files": [
+    "engine/src/cards/pool/vein-drinker.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vial Smasher the Fierce",
+   "files": [
+    "engine/src/cards/pool/vial-smasher-the-fierce.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Whimwader",
+   "files": [
+    "engine/src/cards/pool/whimwader.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wight",
+   "files": [
+    "engine/src/cards/pool/wight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wild Mammoth",
+   "files": [
+    "engine/src/cards/pool/wild-mammoth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wolfcaller's Howl",
+   "files": [
+    "engine/src/cards/pool/wolfcallers-howl.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Xavier Sal, Infested Captain",
+   "files": [
+    "engine/src/cards/pool/xavier-sal-infested-captain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zurgo Helmsmasher",
+   "files": [
+    "engine/src/cards/pool/zurgo-helmsmasher.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Animal Friend",
+   "needs": [
+    "amount:count-excluding-granter",
+    "amount:attached-to-source-last-known"
+   ],
+   "why": "\"Other than Animal Friend\" means the granting Aura only, and a count of what's attached reads 0 once the host has left."
+  },
+  {
+   "name": "Ascent of the Worthy",
+   "needs": [
+    "decision:damage-redirect-order"
+   ],
+   "why": "Two shields can overlap through proliferate or a second copy, and the engine orders them itself (616.1)."
+  },
+  {
+   "name": "Captain America, Liberator",
+   "needs": [
+    "amount:attached-to-source-last-known"
+   ],
+   "why": "Rule 608.2h: with him gone in response it makes 0 Soldiers instead of 1."
+  },
+  {
+   "name": "Carpet of Flowers",
+   "needs": [
+    "condition:this-ability-did-this-turn"
+   ],
+   "why": "may's oncePerTurn stops the mana, but the ability still triggers and targets at the next main phase, where its intervening if says it shouldn't."
+  },
+  {
+   "name": "Chromatic Armor",
+   "needs": [
+    "cost:x-fixed-by-counters-on-source",
+    "decision:remember-chosen-color-on-resolution"
+   ],
+   "why": "{X} is always the player's choice, and \"the last chosen color\" can't be updated on activation."
+  },
+  {
+   "name": "Dismantle",
+   "needs": [
+    "effect:keep-targets-last-known"
+   ],
+   "why": "Inside choose-permanents' keepTargets the target's zone isn't shifted with its slot, so the counters on the destroyed artifact read 0."
+  },
+  {
+   "name": "Gaea's Liege",
+   "needs": [
+    "static:cda-count-defending-player"
+   ],
+   "why": "setBasePtFromCount can't count from the defending player's side, and a filter counts every defending player at a table of 3 or more."
+  },
+  {
+   "name": "Gideon's Sacrifice",
+   "needs": [
+    "decision:damage-redirect-order"
+   ],
+   "why": "With two in one turn the damage goes to the one of your choice (616.1); the engine orders them itself."
+  },
+  {
+   "name": "Gluntch, the Bestower",
+   "needs": [
+    "decision:choose-different-players"
+   ],
+   "why": "Nested choose-opponent can't exclude earlier choices, so three different players can't be written."
+  },
+  {
+   "name": "Karplusan Minotaur",
+   "needs": [
+    "trigger:loses-coin-flip",
+    "keyword:cumulative-upkeep-flip-coin",
+    "target:triggered-opponents-choice"
+   ],
+   "why": "Only wins-coin-flip exists, cumulativeUpkeep takes no flip, and targetsChosenBy has no \"an opponent\"."
+  },
+  {
+   "name": "Master's Councillors",
+   "needs": [
+    "static:pt-per-graveyard-with-n-cards"
+   ],
+   "why": "grantPtPerCount has no count of players, and an amounts condition is always false in a static."
+  },
+  {
+   "name": "Mercadia's Downfall",
+   "needs": [
+    "amount:defending-player-of-each-attacker"
+   ],
+   "why": "Each attacker needs its own defending player (508.5a), and no player ref names the defender of the creature in a slot."
+  },
+  {
+   "name": "Necrotic Plague",
+   "needs": [
+    "target:filter-from-chooser-side"
+   ],
+   "why": "targetsChosenBy keeps legality on the controller's side, so \"their opponents\" can't be said from the chooser's."
+  },
+  {
+   "name": "Preacher",
+   "needs": [
+    "duration:while-source-tapped-since-activation"
+   ],
+   "why": "By its ruling an untap at any point before resolution ends it, even if tapped again; while-source-tapped reads only the moment of resolution."
+  },
+  {
+   "name": "Scrying Glass",
+   "needs": [
+    "amount:cards-in-target-hand-matching"
+   ],
+   "why": "No amount counts a filtered hand, so \"exactly the chosen number of the chosen color\" can't compare against x."
+  },
+  {
+   "name": "Shagrat, Loot Bearer",
+   "needs": [
+    "amount:attached-to-source-last-known"
+   ],
+   "why": "Rule 608.2h: with him gone in response no Army is made where X should be 1."
+  },
+  {
+   "name": "Sheltering Prayers",
+   "needs": [
+    "filter:controller-controls-count"
+   ],
+   "why": "\"As long as that player controls three or fewer lands\" needs a per-affected-controller read."
+  },
+  {
+   "name": "Spry and Mighty",
+   "needs": [
+    "effect:choose-permanents-this-way"
+   ],
+   "why": "X is read once for both pumps; modify-pt-all's thisWay chosen matches nothing after choose-permanents, and per-slot modify-pt reads X again."
+  },
+  {
+   "name": "Squee's Revenge",
+   "needs": [
+    "effect:flip-coins-count-until-lose"
+   ],
+   "why": "flip-coin is one flip or an unbounded untilLose, and nothing reads flips won."
+  },
+  {
+   "name": "Touch of Moonglove",
+   "needs": [
+    "filter:damaged-this-turn-by-target"
+   ],
+   "why": "damagedThisTurnBy.source names only this or host, so a delayed trigger can't say \"dealt damage by that creature\"."
+  },
+  {
+   "name": "Valduk, Keeper of the Flame",
+   "needs": [
+    "amount:attached-to-source-last-known"
+   ],
+   "why": "By its ruling, what was last attached if Valduk has left; the count reads 0."
+  },
+  {
+   "name": "Whiplash, Vengeful Engineer",
+   "needs": [
+    "amount:attached-to-source-last-known"
+   ],
+   "why": "With him gone in response nothing is drained, where rule 608.2h gives X as last existed."
+  },
+  {
+   "name": "Wyleth, Soul of Steel",
+   "needs": [
+    "amount:attached-to-source-last-known"
+   ],
+   "why": "By its ruling, as it last existed on the battlefield; with her gone in response it draws 0 instead of 1."
+  },
+  {
+   "name": "Zenos yae Galvus",
+   "needs": [
+    "trigger:chosen-player-loses-game",
+    "decision:remember-chosen-permanent-on-resolution",
+    "trigger:chosen-permanent-leaves"
+   ],
+   "why": "No trigger for a player losing, and an enters-resolution choice isn't remembered for a later leaves trigger."
+  }
+ ]
+}
