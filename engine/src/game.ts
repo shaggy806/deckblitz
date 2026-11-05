@@ -33251,7 +33251,7 @@ export class Game {
           this.regenerateByEffect({ kind: "object", object: id });
         }
       },
-      returnToHandAll: (filter, scopeTo) => this.returnToHandAllByEffect(scopeTo ?? controller, filter, x),
+      returnToHandAll: (filter, scopeTo) => this.returnToHandAllByEffect(scopeTo ?? controller, filter, x, source),
       exileAll: (filter, airbend, except, untilSourceLeaves, linked, scopeTo) => {
         if (untilSourceLeaves !== true) {
           // "Exile … with this" (rule 607.2a): linked to the stint the
@@ -36611,7 +36611,7 @@ export class Game {
         }
       },
       tapAll: (filter, doesntUntapNext, onlyDoesntUntap, scopeTo, untapStepOfScope, doesntUntapSteps) => {
-        for (const id of this.battlefieldMatching(scopeTo ?? controller, filter)) {
+        for (const id of this.battlefieldMatching(scopeTo ?? controller, filter, undefined, source)) {
           const object = this.state.objects[id];
           if (!object.tapped && !(doesntUntapNext === true && onlyDoesntUntap === true)) {
             object.tapped = true;
@@ -46267,13 +46267,13 @@ export class Game {
     });
   }
 
-  private returnToHandAllByEffect(you: PlayerId, filter: CardFilter, x = 0): void {
+  private returnToHandAllByEffect(you: PlayerId, filter: CardFilter, x = 0, source?: ObjectId): void {
     // One event, so each bounced permanent's leaves-the-battlefield ability
     // sees the rest go too (rule 603.10a). Snapshot: `returnToHandByEffect`
     // mutates the battlefield array as it goes. `x`: a filter's "mana value X
     // or less" (Displacement Wave), as `destroyAllByEffect` reads it.
     this.withLeaveBatch(() => {
-      const victims = this.battlefieldMatching(you, filter, x);
+      const victims = this.battlefieldMatching(you, filter, x, source);
       this.snapshotLeaving(victims);
       for (const id of victims) {
         this.returnToHandByEffect({ kind: "object", object: id }, false);
