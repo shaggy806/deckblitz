@@ -291,10 +291,13 @@ export const choosePermanents = defineDecision({
       }
       return { type: "choose-permanents", player, permanents };
     }
-    const count = legal.min + rng.pickIndex(Math.min(legal.max, pool.length) - legal.min + 1);
+    // A compacted token stack is named once per token it can give, so "tap
+    // two other creatures" with only a stack of tokens names it twice.
+    const units = expand(legal.eligible, legal.copies);
+    const count = legal.min + rng.pickIndex(Math.max(0, Math.min(legal.max, units.length) - legal.min) + 1);
     const permanents: ObjectId[] = [];
-    while (permanents.length < count && pool.length > 0) {
-      permanents.push(pool.splice(rng.pickIndex(pool.length), 1)[0]);
+    while (permanents.length < count && units.length > 0) {
+      permanents.push(units.splice(rng.pickIndex(units.length), 1)[0]);
     }
     return {
       type: "choose-permanents",

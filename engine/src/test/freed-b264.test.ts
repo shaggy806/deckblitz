@@ -100,3 +100,37 @@ describe("Armed and Armored", () => {
     expect(game.state.objects[bears].attachedTo ?? null).toBeNull();
   });
 });
+
+describe("a random answer to a choice of permanents names a token stack once per token", () => {
+  // Batch 264's situation fuzzer: Tidal Terror's "tap two other untapped
+  // creatures" with only a stack of Ovika's Goblin tokens to tap had the
+  // random answer name the stack once, an illegal answer that stopped play.
+  it("can pick two from one stack of three", async () => {
+    const { table, spawn } = await import("./harness.js");
+    const { choosePermanents } = await import("../decisions/choose-permanents.js");
+    const { game } = table();
+    const stack = spawn(game, "Grizzly Bears");
+    game.state.objects[stack].isToken = true;
+    game.state.objects[stack].stackCount = 3;
+    game.debugApplyEffect(A, {
+      kind: "choose-permanents",
+      filter: { type: "creature", controlledBy: "you" },
+      min: 2,
+      upTo: 2,
+      then: { kind: "tap", target: 0 },
+      prompt: "Tap two creatures you control",
+    });
+    game.advanceUntil((s) => s.awaiting?.kind === "choose-permanents");
+    const offer = game.legalActions(A).find((a) => a.kind === "choose-permanents");
+    if (offer === undefined || offer.kind !== "choose-permanents") throw new Error("no choose-permanents offer");
+    let draw = 0.13;
+    const rng = {
+      random: () => (draw = (draw + 0.37) % 1),
+      pickIndex: (length: number) => Math.floor((draw = (draw + 0.37) % 1) * length),
+    } as unknown as Parameters<NonNullable<typeof choosePermanents.randomAnswer>>[2];
+    for (let i = 0; i < 10; i += 1) {
+      const answer = choosePermanents.randomAnswer!(offer, A, rng);
+      expect(game.canDispatch(answer)).toBeNull();
+    }
+  });
+});
