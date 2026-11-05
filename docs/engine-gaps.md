@@ -475,6 +475,22 @@ that needs it is authored.
   front-face reading kept an instant or sorcery card from entering transformed — Startled Awake —
   until batch 151.)
 
+- **A count of what's attached to a source that has left reads 0.** Rule 608.2h: `countOf` with
+  `attachedTo: { isSource: true }` reads the board now, and the Equipment is already unattached.
+  Tests for Wyleth, Valduk, Captain America, Shagrat and Whiplash each got 0. Kemba, Kha Regent's
+  upkeep trigger, in the pool, has the same read and is unchecked. Six cards wait
+  (`amount:attached-to-source-last-known`). Found by batch 257.
+- **Overlapping damage redirections are ordered without asking.** Rule 616.1: the affected player
+  chooses; `bestDamageOrder` chooses for them. Saving Grace, in the pool, has it. Gideon's
+  Sacrifice's ruling asks for the choice (`decision:damage-redirect-order`). Found by batch 257.
+- **Smaller leads from batch 257, none traced further than the agent's report.** `applyChoosePermanents`
+  builds a fresh context, so `{ manaValueOf: "trigger-object" }` in its `then` reads 0. `keepTargets`
+  moves a target to slot 1 without shifting `targetZones`. An impulse `gate` is evaluated from the
+  exiled card's side (`game.ts` ~39618), so "you" is its owner on another player's card. `isSource`
+  in an `exile-all` filter's `anyOf` left Ajani on the battlefield. `{ amounts, left: { countersOn: 0 } }`
+  on a destroyed target never ran its branch where plain `{ countersOn: 0 }` read 3. `while-source-tapped`
+  reads only the current state. `choose-value`'s `among: {}` offers an opponent's counter kinds, against
+  its doc. `card:find`'s printed shapes drop a required `text` on `unless` options and `reveal` costs.
 - **A mana ability's discard cost is never paid.** Rule 605.3b: a mana ability's costs are paid
   as it's activated, like any other's. `Game.activateAbility` checks a `cost.discard` can be paid
   but takes the discard only on the stack path (where `discardByEffect` asks); the

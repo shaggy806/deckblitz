@@ -23,6 +23,22 @@ cloud session). Each is a **`card-author`** agent (`subagent_type`;
 fixed context on every turn than the general-purpose agent's) in
 `isolation: "worktree"`, started in the background, all in one message.
 
+**Measured against that advice, B257 (2026-11-04)**: one batch of 150 dealt to
+four agents of 20, 30, 40 and 60 cards at once, with the same mix of the queue:
+
+| Cards | Turns | Minutes | Tokens | Per card | Peak context | Blind review |
+|---|---|---|---|---|---|---|
+| 20 | 38 | 18 | 9.1M | 0.46M | 293K | 0 wrong of 20 |
+| 30 | 27 | 22 | 8.2M | 0.27M | 388K | 1 of 20 |
+| 40 | 30 | 29 | 9.2M | 0.23M | 411K | 1 of 20 |
+| 60 | 40 | 29 | 13.3M | 0.22M | 459K | 0 of 20 |
+
+Turns hardly grew with the cards, and a large part of every agent's context is
+the same digest and guide, so a longer list spread that cost over more cards,
+the opposite of the older claim above. None was compacted, and the 60's tests
+covered as much as the rest. One batch each, so read it as "60 did no harm", not
+as a limit: nothing above 60 has been tried.
+
 ## A feature alongside the agents
 
 Building the feature first left five agents' worth of cards waiting on it:
