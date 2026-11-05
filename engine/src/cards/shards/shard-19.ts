@@ -163,6 +163,7 @@ import _poolClockspinning from "../pool/clockspinning.js";
 import _poolClockworkDragon from "../pool/clockwork-dragon.js";
 import _poolCloudDjinn from "../pool/cloud-djinn.js";
 import _poolCloudSpirit from "../pool/cloud-spirit.js";
+import _poolCloudspireCoordinator from "../pool/cloudspire-coordinator.js";
 import _poolCloutOfTheDominus from "../pool/clout-of-the-dominus.js";
 import _poolCoalitionSkyknight from "../pool/coalition-skyknight.js";
 import _poolCoastalPeak from "../pool/coastal-peak.js";
@@ -287,6 +288,7 @@ import _poolEternalOfHarshTruths from "../pool/eternal-of-harsh-truths.js";
 import _poolEusocialEngineering from "../pool/eusocial-engineering.js";
 import _poolEutropiaTheTwiceFavored from "../pool/eutropia-the-twice-favored.js";
 import _poolEvangelOfHeliod from "../pool/evangel-of-heliod.js";
+import _poolEvershrike from "../pool/evershrike.js";
 import _poolExemplarOfStrength from "../pool/exemplar-of-strength.js";
 import _poolExperimentTwelve from "../pool/experiment-twelve.js";
 import _poolExploreTheVastlands from "../pool/explore-the-vastlands.js";
@@ -470,6 +472,7 @@ import _poolJeskaiBarricade from "../pool/jeskai-barricade.js";
 import _poolJetsam from "../pool/jetsam.js";
 import _poolJodahsAvenger from "../pool/jodahs-avenger.js";
 import _poolJoinShields from "../pool/join-shields.js";
+import _poolJourneyToTheOracle from "../pool/journey-to-the-oracle.js";
 import _poolJoustThrough from "../pool/joust-through.js";
 import _poolJundHackblade from "../pool/jund-hackblade.js";
 import _poolJungleTroll from "../pool/jungle-troll.js";
@@ -958,6 +961,7 @@ import _poolWhiskAway from "../pool/whisk-away.js";
 import _poolWhiteLotusTile from "../pool/white-lotus-tile.js";
 import _poolWhiteTigerAvaAyala from "../pool/white-tiger-ava-ayala.js";
 import _poolWickerWitch from "../pool/wicker-witch.js";
+import _poolWildEvocation from "../pool/wild-evocation.js";
 import _poolWildernessHypnotist from "../pool/wilderness-hypnotist.js";
 import _poolWillOfTheAllHunter from "../pool/will-of-the-all-hunter.js";
 import _poolWilling from "../pool/willing.js";
@@ -971,6 +975,7 @@ import _poolWinternightStories from "../pool/winternight-stories.js";
 import _poolWintersIntervention from "../pool/winters-intervention.js";
 import _poolWishfulMerfolk from "../pool/wishful-merfolk.js";
 import _poolWitchsCottage from "../pool/witchs-cottage.js";
+import _poolWizardsSpellbook from "../pool/wizards-spellbook.js";
 import _poolWoodlandChangeling from "../pool/woodland-changeling.js";
 import _poolWordOfBinding from "../pool/word-of-binding.js";
 import _poolWreckAndRebuild from "../pool/wreck-and-rebuild.js";
@@ -982,6 +987,7 @@ import _poolYavimayaWurm from "../pool/yavimaya-wurm.js";
 import _poolYawgmothsVileOffering from "../pool/yawgmoths-vile-offering.js";
 import _poolYoreTillerNephilim from "../pool/yore-tiller-nephilim.js";
 import _poolYouHappenOnAGlade from "../pool/you-happen-on-a-glade.js";
+import _poolZanarkandAncientMetropolis from "../pool/zanarkand-ancient-metropolis.js";
 import _poolZenithFestival from "../pool/zenith-festival.js";
 import _poolZhalfirinCrusader from "../pool/zhalfirin-crusader.js";
 import _poolZombieBrute from "../pool/zombie-brute.js";
@@ -1168,6 +1174,7 @@ const shard: CardShard = {
     _poolClockworkDragon,
     _poolCloudDjinn,
     _poolCloudSpirit,
+    _poolCloudspireCoordinator,
     _poolCloutOfTheDominus,
     _poolCoalitionSkyknight,
     _poolCoastalPeak,
@@ -1292,6 +1299,7 @@ const shard: CardShard = {
     _poolEusocialEngineering,
     _poolEutropiaTheTwiceFavored,
     _poolEvangelOfHeliod,
+    _poolEvershrike,
     _poolExemplarOfStrength,
     _poolExperimentTwelve,
     _poolExploreTheVastlands,
@@ -1475,6 +1483,7 @@ const shard: CardShard = {
     _poolJetsam,
     _poolJodahsAvenger,
     _poolJoinShields,
+    _poolJourneyToTheOracle,
     _poolJoustThrough,
     _poolJundHackblade,
     _poolJungleTroll,
@@ -1963,6 +1972,7 @@ const shard: CardShard = {
     _poolWhiteLotusTile,
     _poolWhiteTigerAvaAyala,
     _poolWickerWitch,
+    _poolWildEvocation,
     _poolWildernessHypnotist,
     _poolWillOfTheAllHunter,
     _poolWilling,
@@ -1976,6 +1986,7 @@ const shard: CardShard = {
     _poolWintersIntervention,
     _poolWishfulMerfolk,
     _poolWitchsCottage,
+    _poolWizardsSpellbook,
     _poolWoodlandChangeling,
     _poolWordOfBinding,
     _poolWreckAndRebuild,
@@ -1987,6 +1998,7 @@ const shard: CardShard = {
     _poolYawgmothsVileOffering,
     _poolYoreTillerNephilim,
     _poolYouHappenOnAGlade,
+    _poolZanarkandAncientMetropolis,
     _poolZenithFestival,
     _poolZhalfirinCrusader,
     _poolZombieBrute,

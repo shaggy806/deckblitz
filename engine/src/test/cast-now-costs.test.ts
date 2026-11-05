@@ -5,13 +5,14 @@
  * (`graveyardOf`, `zones`, `exiledOwnedWithCounter`), plus "if able" (`mustCast`).
  */
 import { describe, expect, it } from "vitest";
-import type { LegalAction } from "../actions.js";
+import type { CastSpellOffer, LegalAction } from "../actions.js";
 import { EvalBotController } from "../bot/eval-bot.js";
 import { HeuristicBotController, RandomController, type PlayerController } from "../controller.js";
 import { castNow } from "../decisions/cast-now.js";
-import { fillCast } from "../decisions/shared/random-cast.js";
+import { fillCast, randomCast } from "../decisions/shared/random-cast.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
+import { asObjectId } from "../primitives.js";
 import {
   A,
   B,
@@ -599,5 +600,35 @@ describe("mustCast (Omen Machine; Spelltwine)", () => {
     cast(game, toHand(game, "Spelltwine"), { targets: [ref(mine), ref(theirs)] });
     expect(hand(game, A).length).toBe(handBefore + 2);
     expect(exiledNamed(game, "Murder")).toEqual([theirs]);
+  });
+});
+
+describe("the random answer to a teamwork cast", () => {
+  it("taps creatures with enough total power, not the tap cost's count of 0", () => {
+    // Wizard's Spellbook's copy of Team Tactics, cast kicked for teamwork 1 (the
+    // situation fuzzer, batch 265): `randomCast` tapped `count` creatures — none.
+    const ours = asObjectId("ours");
+    const weak = asObjectId("weak");
+    const card = asObjectId("team-tactics");
+    const offer: CastSpellOffer = {
+      kind: "cast-spell",
+      card,
+      cardName: "Team Tactics",
+      targetSpecs: ["creature"],
+      targetOptions: [[{ kind: "object", object: ours }]],
+      via: "effect",
+      kicked: true,
+      kickerCost: "",
+      kickerKeyword: "teamwork",
+      tapCost: { count: 0, choices: [weak, ours], totalPower: 1, power: { [weak]: 0, [ours]: 1 } },
+    };
+    for (const draw of [0, 0.5, 0.99]) {
+      const cast = randomCast(offer, B, {
+        random: () => draw,
+        pickIndex: (n) => Math.min(n - 1, Math.floor(draw * n)),
+        pickTargets: (options) => options.map((slot) => slot[0] ?? null),
+      });
+      expect(cast?.tap).toEqual([ours]);
+    }
   });
 });

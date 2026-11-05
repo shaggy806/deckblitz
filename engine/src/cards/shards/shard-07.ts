@@ -242,6 +242,7 @@ import _poolEmbraalBruiser from "../pool/embraal-bruiser.js";
 import _poolEmeraldDragonfly from "../pool/emerald-dragonfly.js";
 import _poolEncroachingWastes from "../pool/encroaching-wastes.js";
 import _poolEndBlazeEpiphany from "../pool/end-blaze-epiphany.js";
+import _poolEnormousEnergyBlade from "../pool/enormous-energy-blade.js";
 import _poolEnterTheEnigma from "../pool/enter-the-enigma.js";
 import _poolErebosGodOfTheDead from "../pool/erebos-god-of-the-dead.js";
 import _poolErithizon from "../pool/erithizon.js";
@@ -445,6 +446,7 @@ import _poolLadySun from "../pool/lady-sun.js";
 import _poolLagonnaBandTrailblazer from "../pool/lagonna-band-trailblazer.js";
 import _poolLashweedLurker from "../pool/lashweed-lurker.js";
 import _poolLastWord from "../pool/last-word.js";
+import _poolLastingFayth from "../pool/lasting-fayth.js";
 import _poolLatNamAdept from "../pool/lat-nam-adept.js";
 import _poolLatullasOrders from "../pool/latullas-orders.js";
 import _poolLavaFieldOverlord from "../pool/lava-field-overlord.js";
@@ -1226,6 +1228,7 @@ const shard: CardShard = {
     _poolEmeraldDragonfly,
     _poolEncroachingWastes,
     _poolEndBlazeEpiphany,
+    _poolEnormousEnergyBlade,
     _poolEnterTheEnigma,
     _poolErebosGodOfTheDead,
     _poolErithizon,
@@ -1429,6 +1432,7 @@ const shard: CardShard = {
     _poolLagonnaBandTrailblazer,
     _poolLashweedLurker,
     _poolLastWord,
+    _poolLastingFayth,
     _poolLatNamAdept,
     _poolLatullasOrders,
     _poolLavaFieldOverlord,

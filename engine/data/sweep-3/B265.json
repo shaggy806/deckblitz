@@ -1,0 +1,957 @@
+{
+ "batch": "B265",
+ "status": "done",
+ "ranks": "Need-keys Phase 2: cards freed by the built need-key families, the parallel round's frozen list F4 (engine/data/freed/F4.txt, 133 cards; two agents of 66 and the lead, one blind reviewer)",
+ "authored": [
+  {
+   "name": "Moonring Island",
+   "files": [
+    "engine/src/cards/pool/moonring-island.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Experimental Lab // Staff Room",
+   "files": [
+    "engine/src/cards/pool/experimental-lab-staff-room.ts",
+    "engine/src/cards/pool/experimental-lab.ts",
+    "engine/src/cards/pool/staff-room.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "You Look Upon the Tarrasque",
+   "files": [
+    "engine/src/cards/pool/you-look-upon-the-tarrasque.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Outlaws' Merriment",
+   "files": [
+    "engine/src/cards/pool/outlaws-merriment.ts",
+    "engine/src/cards/tokens/human-cleric-token-2-1-lifelink-haste.ts",
+    "engine/src/cards/tokens/human-rogue-token-1-2-haste-ping.ts",
+    "engine/src/cards/tokens/human-warrior-token-3-1-trample-haste.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ydwen Efreet",
+   "files": [
+    "engine/src/cards/pool/ydwen-efreet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unexpected Results",
+   "files": [
+    "engine/src/cards/pool/unexpected-results.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sentinel of Lost Lore",
+   "files": [
+    "engine/src/cards/pool/sentinel-of-lost-lore.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dual Nature",
+   "files": [
+    "engine/src/cards/pool/dual-nature.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tombstone Stairwell",
+   "files": [
+    "engine/src/cards/pool/tombstone-stairwell.ts",
+    "engine/src/cards/tokens/tombspawn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Boarded Window",
+   "files": [
+    "engine/src/cards/pool/boarded-window.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Giant Trap Door Spider",
+   "files": [
+    "engine/src/cards/pool/giant-trap-door-spider.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ice Floe",
+   "files": [
+    "engine/src/cards/pool/ice-floe.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Arcum's Whistle",
+   "files": [
+    "engine/src/cards/pool/arcums-whistle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ashiok's Erasure",
+   "files": [
+    "engine/src/cards/pool/ashioks-erasure.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Godsend",
+   "files": [
+    "engine/src/cards/pool/godsend.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Patron of the Moon",
+   "files": [
+    "engine/src/cards/pool/patron-of-the-moon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Patron of the Nezumi",
+   "files": [
+    "engine/src/cards/pool/patron-of-the-nezumi.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Patron of the Orochi",
+   "files": [
+    "engine/src/cards/pool/patron-of-the-orochi.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Echocasting Symposium",
+   "files": [
+    "engine/src/cards/pool/echocasting-symposium.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Season of Gathering",
+   "files": [
+    "engine/src/cards/pool/season-of-gathering.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Season of Weaving",
+   "files": [
+    "engine/src/cards/pool/season-of-weaving.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Regna's Sanction",
+   "files": [
+    "engine/src/cards/pool/regnas-sanction.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zndrsplt's Judgment",
+   "files": [
+    "engine/src/cards/pool/zndrsplts-judgment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ishgard, the Holy See // Faith & Grief",
+   "files": [
+    "engine/src/cards/pool/faith-grief.ts",
+    "engine/src/cards/pool/ishgard-the-holy-see.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jidoor, Aristocratic Capital // Overture",
+   "files": [
+    "engine/src/cards/pool/jidoor-aristocratic-capital.ts",
+    "engine/src/cards/pool/overture.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zanarkand, Ancient Metropolis",
+   "files": [
+    "engine/src/cards/pool/lasting-fayth.ts",
+    "engine/src/cards/pool/zanarkand-ancient-metropolis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fungal Behemoth",
+   "files": [
+    "engine/src/cards/pool/fungal-behemoth.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Alhammarret's Archive",
+   "files": [
+    "engine/src/cards/pool/alhammarrets-archive.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Valentin, Dean of the Vein // Lisette, Dean of the Root",
+   "files": [
+    "engine/src/cards/pool/lisette-dean-of-the-root.ts",
+    "engine/src/cards/pool/valentin-dean-of-the-vein.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Walk-In Closet // Forgotten Cellar",
+   "files": [
+    "engine/src/cards/pool/forgotten-cellar.ts",
+    "engine/src/cards/pool/walk-in-closet-forgotten-cellar.ts",
+    "engine/src/cards/pool/walk-in-closet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Electro, Assaulting Battery",
+   "files": [
+    "engine/src/cards/pool/electro-assaulting-battery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Words of Wind",
+   "files": [
+    "engine/src/cards/pool/words-of-wind.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Possessed Skaab",
+   "files": [
+    "engine/src/cards/pool/possessed-skaab.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cry of the Carnarium",
+   "files": [
+    "engine/src/cards/pool/cry-of-the-carnarium.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gogo, Mysterious Mime",
+   "files": [
+    "engine/src/cards/pool/gogo-mysterious-mime.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gornog, the Red Reaper",
+   "files": [
+    "engine/src/cards/pool/gornog-the-red-reaper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "War's Toll",
+   "files": [
+    "engine/src/cards/pool/wars-toll.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leovold, Emissary of Trest",
+   "files": [
+    "engine/src/cards/pool/leovold-emissary-of-trest.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ace's Baseball Bat",
+   "files": [
+    "engine/src/cards/pool/aces-baseball-bat.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gideon Jura",
+   "files": [
+    "engine/src/cards/pool/gideon-jura.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dino DNA",
+   "files": [
+    "engine/src/cards/pool/dino-dna.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rootcoil Creeper",
+   "files": [
+    "engine/src/cards/pool/rootcoil-creeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nicol Bolas, God-Pharaoh",
+   "files": [
+    "engine/src/cards/pool/nicol-bolas-god-pharaoh.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Consign to Memory",
+   "files": [
+    "engine/src/cards/pool/consign-to-memory.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Louisoix's Sacrifice",
+   "files": [
+    "engine/src/cards/pool/louisoixs-sacrifice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rewrite History",
+   "files": [
+    "engine/src/cards/pool/rewrite-history.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rhoda, Geist Avenger",
+   "files": [
+    "engine/src/cards/pool/rhoda-geist-avenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blood Spatter Analysis",
+   "files": [
+    "engine/src/cards/pool/blood-spatter-analysis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chainsaw",
+   "files": [
+    "engine/src/cards/pool/chainsaw.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rayne, Academy Chancellor",
+   "files": [
+    "engine/src/cards/pool/rayne-academy-chancellor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rosie Cotton of South Lane",
+   "files": [
+    "engine/src/cards/pool/rosie-cotton-of-south-lane.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Voldaren Bloodcaster // Bloodbat Summoner",
+   "files": [
+    "engine/src/cards/pool/bloodbat-summoner.ts",
+    "engine/src/cards/pool/voldaren-bloodcaster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Evershrike",
+   "files": [
+    "engine/src/cards/pool/evershrike.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Treacherous Greed",
+   "files": [
+    "engine/src/cards/pool/treacherous-greed.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jace Reawakened",
+   "files": [
+    "engine/src/cards/pool/jace-reawakened.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Disappearing Act",
+   "files": [
+    "engine/src/cards/pool/disappearing-act.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fear of Isolation",
+   "files": [
+    "engine/src/cards/pool/fear-of-isolation.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Kianne, Dean of Substance // Imbraham, Dean of Theory",
+   "files": [
+    "engine/src/cards/pool/imbraham-dean-of-theory.ts",
+    "engine/src/cards/pool/kianne-dean-of-substance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cacophony Unleashed",
+   "files": [
+    "engine/src/cards/pool/cacophony-unleashed.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Genju of the Realm",
+   "files": [
+    "engine/src/cards/pool/genju-of-the-realm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Origin of Spider-Man",
+   "files": [
+    "engine/src/cards/pool/origin-of-spider-man.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Assimilation Aegis",
+   "files": [
+    "engine/src/cards/pool/assimilation-aegis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jadzi, Oracle of Arcavios // Journey to the Oracle",
+   "files": [
+    "engine/src/cards/pool/jadzi-oracle-of-arcavios.ts",
+    "engine/src/cards/pool/journey-to-the-oracle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wizard's Spellbook",
+   "files": [
+    "engine/src/cards/pool/wizards-spellbook.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Xander's Pact",
+   "files": [
+    "engine/src/cards/pool/xanders-pact.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Summon: Esper Valigarmanda",
+   "files": [
+    "engine/src/cards/pool/summon-esper-valigarmanda.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Barreling Attack",
+   "files": [
+    "engine/src/cards/pool/barreling-attack.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Invert Polarity",
+   "files": [
+    "engine/src/cards/pool/invert-polarity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spara's Adjudicators",
+   "files": [
+    "engine/src/cards/pool/sparas-adjudicators.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Wild Evocation",
+   "files": [
+    "engine/src/cards/pool/wild-evocation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Overburden",
+   "files": [
+    "engine/src/cards/pool/overburden.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Riddles in the Dark",
+   "files": [
+    "engine/src/cards/pool/riddles-in-the-dark.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cloudspire Coordinator",
+   "files": [
+    "engine/src/cards/pool/cloudspire-coordinator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seer's Vision",
+   "files": [
+    "engine/src/cards/pool/seers-vision.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Aang, Swift Savior",
+   "files": [
+    "engine/src/cards/pool/aang-and-la-oceans-fury.ts",
+    "engine/src/cards/pool/aang-swift-savior.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Timebender",
+   "files": [
+    "engine/src/cards/pool/timebender.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Venser's Diffusion",
+   "files": [
+    "engine/src/cards/pool/vensers-diffusion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Enormous Energy Blade",
+   "files": [
+    "engine/src/cards/pool/enormous-energy-blade.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aang, Airbending Master",
+   "files": [
+    "engine/src/cards/pool/aang-airbending-master.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jace, Vryn's Prodigy // Jace, Telepath Unbound",
+   "files": [
+    "engine/src/cards/pool/jace-telepath-unbound.ts",
+    "engine/src/cards/pool/jace-vryns-prodigy.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Portal Manipulator",
+   "needs": [
+    "effect:reselect-attack-target-chosen-player"
+   ],
+   "why": "Makes the chosen attackers attack a player named in another target slot, with no choice left to the caster."
+  },
+  {
+   "name": "Head Games",
+   "needs": [
+    "amount:cards-put-on-library-this-way"
+   ],
+   "why": "\"Search that player's library for that many cards\": no count of the cards put on top this way."
+  },
+  {
+   "name": "Jester's Mask",
+   "needs": [
+    "amount:cards-put-on-library-this-way"
+   ],
+   "why": "As Head Games: search for that many, no this-way count of cards put on the library."
+  },
+  {
+   "name": "Total War",
+   "needs": [
+    "filter:didnt-attack-in-trigger-declaration"
+   ],
+   "why": "\"Didn't attack\" means in that declaration (the trigger's), not this turn."
+  },
+  {
+   "name": "Tanglewalker",
+   "needs": [
+    "static:unblockable-while-defender-controls"
+   ],
+   "why": "Unblockable as long as the defending player controls an artifact land: not landwalk."
+  },
+  {
+   "name": "Captain America, Living Legend",
+   "needs": [
+    "trigger:first-time-tapped-checked-on-resolution"
+   ],
+   "why": "Its intervening-if must be checked again as the trigger resolves."
+  },
+  {
+   "name": "Overclocked Electromancer",
+   "needs": [
+    "amount:excess-damage-of-trigger-event"
+   ],
+   "why": "\"X is that excess damage\": the trigger carries no excess amount."
+  },
+  {
+   "name": "Balduvian Warlord",
+   "needs": [
+    "effect:remove-blocker-then-must-block"
+   ],
+   "why": "\"Then it blocks an attacking creature of your choice\" is mandatory; thenMayBlock lets the player choose none."
+  },
+  {
+   "name": "Sorrow's Path",
+   "needs": [
+    "effect:swap-blockers"
+   ],
+   "why": "Swap what two blockers block, each checked as able to block the other's attackers."
+  },
+  {
+   "name": "Baneblade Scoundrel",
+   "needs": [
+    "trigger:dies-while-blocking-source"
+   ],
+   "why": "\"Whenever a creature blocking this creature dies\": blockingRelation needs the creature still in combat on the battlefield."
+  },
+  {
+   "name": "Improvisation Capstone",
+   "needs": [
+    "effect:reveal-until-total-mana-value"
+   ],
+   "why": "Paradigm is built; exiling until the total mana value reaches 4 isn't."
+  },
+  {
+   "name": "Season of the Bold",
+   "needs": [
+    "effect:delayed-whenever-until-end-of-next-turn"
+   ],
+   "why": "A delayed \"whenever\" lasting until the end of your next turn (only until your next turn begins exists)."
+  },
+  {
+   "name": "Roiling Horror",
+   "needs": [
+    "static:cda-life-difference-most-opponent"
+   ],
+   "why": "P/T equal to your life total minus the life total of an opponent with the most life."
+  },
+  {
+   "name": "Scion of Halaster",
+   "needs": [
+    "static:grants-replacement-effect"
+   ],
+   "why": "A would-draw replacement granted through grantsStatic never applied (tested)."
+  },
+  {
+   "name": "Aladdin's Lamp",
+   "needs": [
+    "replacement:next-draw-this-turn-carries-x"
+   ],
+   "why": "The activation's X isn't carried into nextDrawInstead's effect (its look-and-choose saw 0 cards, tested)."
+  },
+  {
+   "name": "Omnath, Locus of All",
+   "needs": [
+    "effect:add-mana-combination-of-card-colors"
+   ],
+   "why": "Add mana in any combination of the revealed card's colors."
+  },
+  {
+   "name": "Kira, Great Glass-Spinner",
+   "needs": [
+    "effect:counter-targeting-spell-or-ability"
+   ],
+   "why": "Only ward reaches the targeting spell or ability, always with a cost."
+  },
+  {
+   "name": "Afterburner Expert",
+   "needs": [
+    "trigger:activates-ability-from-graveyard"
+   ],
+   "why": "With fromGraveyard, the exhaust trigger never fired (tested)."
+  },
+  {
+   "name": "Toralf, God of Fury",
+   "needs": [
+    "target:other-than-trigger-object"
+   ],
+   "why": "\"Any target other than that permanent\", and the excess amount."
+  },
+  {
+   "name": "Leyline of Combustion",
+   "needs": [
+    "trigger:becomes-target-once-per-spell"
+   ],
+   "why": "\"You and/or at least one permanent you control\" triggers once per spell; the engine fires once per target."
+  },
+  {
+   "name": "Spider-Man 2099",
+   "needs": [
+    "stat:lands-played-not-from-hand-this-turn"
+   ],
+   "why": "Nothing records where a played land came from."
+  },
+  {
+   "name": "March of Burgeoning Life",
+   "needs": [
+    "filter:same-name-as-target-in-search"
+   ],
+   "why": "A library search for a card with the target's name."
+  },
+  {
+   "name": "Defiler of Faith",
+   "needs": [
+    "cost:optional-life-additional-cost-for-spells"
+   ],
+   "why": "An optional 2-life additional cost replacing a pip on other spells; payLifeForPips is a different mechanic."
+  },
+  {
+   "name": "Defiler of Vigor",
+   "needs": [
+    "cost:optional-life-additional-cost-for-spells"
+   ],
+   "why": "As Defiler of Faith."
+  },
+  {
+   "name": "Mirror of Fate",
+   "needs": [
+    "effect:look-and-choose-then-always"
+   ],
+   "why": "look-and-choose's then doesn't run with nothing chosen, but the library exile must."
+  },
+  {
+   "name": "Arcum's Weathervane",
+   "needs": [
+    "effect:animate-remove-supertype"
+   ],
+   "why": "\"No longer snow\": addSupertypes has no inverse."
+  },
+  {
+   "name": "Ludevic, Necrogenius",
+   "needs": [
+    "replacement:as-transforms-choice"
+   ],
+   "why": "Choosing the exiled card to copy as it transforms."
+  },
+  {
+   "name": "Shapeshifter's Marrow",
+   "needs": [
+    "effect:become-copy-of-card-moved-this-way"
+   ],
+   "why": "Becomes a copy of the revealed card just put into the graveyard."
+  },
+  {
+   "name": "Metamorphic Alteration",
+   "needs": [
+    "static:aura-enchanted-is-copy-of-chosen"
+   ],
+   "why": "A static copy that follows the Aura's enchanted creature."
+  },
+  {
+   "name": "Goliath Daydreamer",
+   "needs": [
+    "effect:exile-spell-as-it-resolves-with-counter"
+   ],
+   "why": "exile-spell-as-it-resolves can't add a dream counter."
+  },
+  {
+   "name": "Kaya the Inexorable",
+   "needs": [
+    "effect:cast-now-from-hand-graveyard-or-owned-exile"
+   ],
+   "why": "Cast from hand, graveyard or cards you own in exile: from.zones takes only hand and graveyard."
+  },
+  {
+   "name": "Liberated Livestock",
+   "needs": [
+    "effect:aura-onto-each-created-token"
+   ],
+   "why": "Put an Aura onto each token created this way."
+  },
+  {
+   "name": "Splintering Wind",
+   "needs": [
+    "effect:created-token-gains-triggered"
+   ],
+   "why": "The token's cumulative upkeep and its leave trigger."
+  },
+  {
+   "name": "Valki, God of Lies",
+   "needs": [
+    "effect:exile-from-revealed-hand-per-opponent-until-leaves"
+   ],
+   "why": "Each opponent reveals, you exile a creature card from each until Valki leaves; plus its copy ability."
+  },
+  {
+   "name": "Sudden Substitution",
+   "needs": [
+    "effect:exchange-control-permanent-and-spell"
+   ],
+   "why": "An exchange of a spell and a creature."
+  },
+  {
+   "name": "Cait, Cage Brawler",
+   "needs": [
+    "effect:you-and-defending-player-loot-compare"
+   ],
+   "why": "Two simultaneous draws and discards; no scope for \"you and defending player\"."
+  },
+  {
+   "name": "Amy Pond",
+   "needs": [
+    "mechanic:two-pairing-abilities"
+   ],
+   "why": "CardDefinition.pairing holds only one pairing ability."
+  },
+  {
+   "name": "Phyrexian Portal",
+   "needs": [
+    "mechanic:face-down-piles-exile-one-search-other"
+   ],
+   "why": "Exile one face-down pile, search the other for a card."
+  },
+  {
+   "name": "The Last Agni Kai",
+   "needs": [
+    "replacement:keep-unspent-mana-until-end-of-turn"
+   ],
+   "why": "Mana that doesn't empty until end of turn."
+  },
+  {
+   "name": "Tenth District Hero",
+   "needs": [
+    "effect:becomes-named-with-granted-static"
+   ],
+   "why": "Becomes a named legendary with a granted static."
+  },
+  {
+   "name": "The Curse of Fenric",
+   "needs": [
+    "effect:for-each-player-destroy-then-token-per-destroyed-controller"
+   ],
+   "why": "Chapter I: each player destroys, then a token for each controller of a destroyed creature."
+  },
+  {
+   "name": "Locke, Treasure Hunter",
+   "needs": [
+    "zone:cast-one-from-milled-until-end-of-turn"
+   ],
+   "why": "Cast one of the milled cards until end of turn."
+  },
+  {
+   "name": "The Ur-Sphinx",
+   "needs": [
+    "effect:cast-one-per-player-from-milled"
+   ],
+   "why": "Cast one card milled from each player."
+  },
+  {
+   "name": "Bramble Elemental",
+   "needs": [
+    "trigger:aura-becomes-attached-to-permanent"
+   ],
+   "why": "\"Whenever an Aura becomes attached to this\": becomes-attached takes only the attaching Equipment's own view."
+  },
+  {
+   "name": "Brood Keeper",
+   "needs": [
+    "trigger:aura-becomes-attached-to-permanent"
+   ],
+   "why": "As Bramble Elemental."
+  },
+  {
+   "name": "Siona, Captain of the Pyleas",
+   "needs": [
+    "trigger:aura-becomes-attached-to-permanent"
+   ],
+   "why": "As Bramble Elemental."
+  },
+  {
+   "name": "Jorn, God of Winter // Kaldring, the Rimestaff",
+   "needs": [
+    "zone:play-from-graveyard-this-turn-enters-tapped"
+   ],
+   "why": "Play (lands too) from a graveyard this turn, entering tapped."
+  },
+  {
+   "name": "Leonardo, Sewer Samurai",
+   "needs": [
+    "replacement:enters-with-counter-via-static-graveyard-permission"
+   ],
+   "why": "A graveyard cast permission with a finality-counter rider, told apart from others."
+  },
+  {
+   "name": "Noctis, Prince of Lucis",
+   "needs": [
+    "replacement:enters-with-counter-via-static-graveyard-permission"
+   ],
+   "why": "As Leonardo."
+  },
+  {
+   "name": "Mul Daya Channelers",
+   "needs": [
+    "condition:top-card-of-library-matches"
+   ],
+   "why": "A static condition on the top card of your library."
+  },
+  {
+   "name": "Foreboding Steamboat",
+   "needs": [
+    "effect:each-player-chooses-permanents-exile-until-leaves"
+   ],
+   "why": "Each player chooses permanents, exiled until it leaves."
+  },
+  {
+   "name": "Armed with Proof",
+   "needs": [
+    "static:attach-as-granted-equipment"
+   ],
+   "why": "The granted equip attaches nothing (attachPermanent reads printed subtypes)."
+  },
+  {
+   "name": "Dan Lewis",
+   "needs": [
+    "static:attach-as-granted-equipment"
+   ],
+   "why": "As Armed with Proof."
+  }
+ ]
+}

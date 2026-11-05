@@ -604,6 +604,7 @@ import _poolPolukranosEngineOfRuin from "../pool/polukranos-engine-of-ruin.js";
 import _poolPoolingVenom from "../pool/pooling-venom.js";
 import _poolPortableHole from "../pool/portable-hole.js";
 import _poolPortalToPhyrexia from "../pool/portal-to-phyrexia.js";
+import _poolPossessedSkaab from "../pool/possessed-skaab.js";
 import _poolPostmortemLunge from "../pool/postmortem-lunge.js";
 import _poolPreciseStrike from "../pool/precise-strike.js";
 import _poolPretendingPoxbearers from "../pool/pretending-poxbearers.js";
@@ -1559,6 +1560,7 @@ const shard: CardShard = {
     _poolPoolingVenom,
     _poolPortableHole,
     _poolPortalToPhyrexia,
+    _poolPossessedSkaab,
     _poolPostmortemLunge,
     _poolPreciseStrike,
     _poolPretendingPoxbearers,

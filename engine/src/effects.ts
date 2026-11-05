@@ -21,6 +21,7 @@ import type {
   TurnStat,
 } from "./cards.js";
 import type { AggregateSpec, CardFilter, DamageSourceClause, ShareReference, SharedTypes } from "./filter.js";
+import { filterAtX } from "./filter.js";
 import type { CardNameAim, CardNameFilter } from "./card-names.js";
 import { differentManaSplits, manaOriginMatches, type Color, type LandManaInstead, type ManaCastFrom, type ManaFromSpec, type ManaOrigin, type ManaSpendPurpose, type ManaType, type SpendAs } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
@@ -20433,7 +20434,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         amountValue(spec.max, ctx),
         spec.destination,
         spec.leftover,
-        spec.filter,
+        // A bare `n: "x"` is this resolution's X: the filter is matched later,
+        // as the choice is offered and answered, where no X is at hand.
+        spec.filter === undefined ? undefined : filterAtX(spec.filter, ctx.x),
         spec.enterTapped === true,
         spec.then,
         spec.reveal ?? false,
@@ -20441,7 +20444,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.secondPick === undefined
           ? undefined
           : {
-              ...(spec.secondPick.filter !== undefined ? { filter: spec.secondPick.filter } : {}),
+              ...(spec.secondPick.filter !== undefined ? { filter: filterAtX(spec.secondPick.filter, ctx.x) } : {}),
               min: spec.secondPick.min,
               max: amountValue(spec.secondPick.max, ctx),
               destination: spec.secondPick.destination,

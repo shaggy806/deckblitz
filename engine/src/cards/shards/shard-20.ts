@@ -315,12 +315,14 @@ import _poolFlowstoneStrike from "../pool/flowstone-strike.js";
 import _poolFoggySwampHunters from "../pool/foggy-swamp-hunters.js";
 import _poolFolkOfAnHavva from "../pool/folk-of-an-havva.js";
 import _poolForbiddingSpirit from "../pool/forbidding-spirit.js";
+import _poolForgottenCellar from "../pool/forgotten-cellar.js";
 import _poolFortifiedArea from "../pool/fortified-area.js";
 import _poolFossilFind from "../pool/fossil-find.js";
 import _poolFrodoDeterminedHero from "../pool/frodo-determined-hero.js";
 import _poolFrostwalla from "../pool/frostwalla.js";
 import _poolFugitiveDroid from "../pool/fugitive-droid.js";
 import _poolFullyGrown from "../pool/fully-grown.js";
+import _poolFungalBehemoth from "../pool/fungal-behemoth.js";
 import _poolFungalRebirth from "../pool/fungal-rebirth.js";
 import _poolFurnaceSpirit from "../pool/furnace-spirit.js";
 import _poolGaeasEmbrace from "../pool/gaeas-embrace.js";
@@ -801,6 +803,7 @@ import _poolSquirrelSanctuary from "../pool/squirrel-sanctuary.js";
 import _poolSquirrelanoids from "../pool/squirrelanoids.js";
 import _poolStaffOfTheMindMagus from "../pool/staff-of-the-mind-magus.js";
 import _poolStaffOfTheSunMagus from "../pool/staff-of-the-sun-magus.js";
+import _poolStaffRoom from "../pool/staff-room.js";
 import _poolStarfall from "../pool/starfall.js";
 import _poolStargaze from "../pool/stargaze.js";
 import _poolStarnheimAspirant from "../pool/starnheim-aspirant.js";
@@ -888,6 +891,7 @@ import _poolTibaltsTrickery from "../pool/tibalts-trickery.js";
 import _poolTidalBarracuda from "../pool/tidal-barracuda.js";
 import _poolTimberProtector from "../pool/timber-protector.js";
 import _poolTimberwatchElf from "../pool/timberwatch-elf.js";
+import _poolTimebender from "../pool/timebender.js";
 import _poolTiminYouthfulGeist from "../pool/timin-youthful-geist.js";
 import _poolTishanaVoiceOfThunder from "../pool/tishana-voice-of-thunder.js";
 import _poolTitanOfIndustry from "../pool/titan-of-industry.js";
@@ -1326,12 +1330,14 @@ const shard: CardShard = {
     _poolFoggySwampHunters,
     _poolFolkOfAnHavva,
     _poolForbiddingSpirit,
+    _poolForgottenCellar,
     _poolFortifiedArea,
     _poolFossilFind,
     _poolFrodoDeterminedHero,
     _poolFrostwalla,
     _poolFugitiveDroid,
     _poolFullyGrown,
+    _poolFungalBehemoth,
     _poolFungalRebirth,
     _poolFurnaceSpirit,
     _poolGaeasEmbrace,
@@ -1812,6 +1818,7 @@ const shard: CardShard = {
     _poolSquirrelanoids,
     _poolStaffOfTheMindMagus,
     _poolStaffOfTheSunMagus,
+    _poolStaffRoom,
     _poolStarfall,
     _poolStargaze,
     _poolStarnheimAspirant,
@@ -1899,6 +1906,7 @@ const shard: CardShard = {
     _poolTidalBarracuda,
     _poolTimberProtector,
     _poolTimberwatchElf,
+    _poolTimebender,
     _poolTiminYouthfulGeist,
     _poolTishanaVoiceOfThunder,
     _poolTitanOfIndustry,

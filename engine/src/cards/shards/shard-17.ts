@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _poolAangAirbendingMaster from "../pool/aang-airbending-master.js";
 import _poolAangTheLastAirbender from "../pool/aang-the-last-airbender.js";
 import _poolAbandonedOutpost from "../pool/abandoned-outpost.js";
 import _poolAbstractPerformance from "../pool/abstract-performance.js";
@@ -26,6 +27,7 @@ import _poolAkutaBornOfAsh from "../pool/akuta-born-of-ash.js";
 import _poolAlabasterDragon from "../pool/alabaster-dragon.js";
 import _poolAlabornCavalier from "../pool/alaborn-cavalier.js";
 import _poolAleshasVanguard from "../pool/aleshas-vanguard.js";
+import _poolAlhammarretsArchive from "../pool/alhammarrets-archive.js";
 import _poolAloraMerryThief from "../pool/alora-merry-thief.js";
 import _poolAmaranthineWall from "../pool/amaranthine-wall.js";
 import _poolAmbushViper from "../pool/ambush-viper.js";
@@ -45,6 +47,7 @@ import _poolArcboundBruiser from "../pool/arcbound-bruiser.js";
 import _poolArchiveHaunt from "../pool/archive-haunt.js";
 import _poolArchwayAngel from "../pool/archway-angel.js";
 import _poolArcticTreeline from "../pool/arctic-treeline.js";
+import _poolArcumsWhistle from "../pool/arcums-whistle.js";
 import _poolArdentElectromancer from "../pool/ardent-electromancer.js";
 import _poolArdentRecruit from "../pool/ardent-recruit.js";
 import _poolAscendantAcolyte from "../pool/ascendant-acolyte.js";
@@ -968,6 +971,7 @@ import _tokensXXElementalTokenFlyingHaste from "../tokens/x-x-elemental-token-fl
 
 const shard: CardShard = {
   pool: [
+    _poolAangAirbendingMaster,
     _poolAangTheLastAirbender,
     _poolAbandonedOutpost,
     _poolAbstractPerformance,
@@ -991,6 +995,7 @@ const shard: CardShard = {
     _poolAlabasterDragon,
     _poolAlabornCavalier,
     _poolAleshasVanguard,
+    _poolAlhammarretsArchive,
     _poolAloraMerryThief,
     _poolAmaranthineWall,
     _poolAmbushViper,
@@ -1010,6 +1015,7 @@ const shard: CardShard = {
     _poolArchiveHaunt,
     _poolArchwayAngel,
     _poolArcticTreeline,
+    _poolArcumsWhistle,
     _poolArdentElectromancer,
     _poolArdentRecruit,
     _poolAscendantAcolyte,

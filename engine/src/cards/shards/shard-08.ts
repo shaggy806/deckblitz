@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _poolAangAndLaOceansFury from "../pool/aang-and-la-oceans-fury.js";
 import _poolAbattoirGhoul from "../pool/abattoir-ghoul.js";
 import _poolAbnormalEndurance from "../pool/abnormal-endurance.js";
 import _poolAbrade from "../pool/abrade.js";
@@ -291,6 +292,7 @@ import _poolFallajiExcavation from "../pool/fallaji-excavation.js";
 import _poolFallajiVanguard from "../pool/fallaji-vanguard.js";
 import _poolFangFearlessLcie from "../pool/fang-fearless-lcie.js";
 import _poolFatalMutation from "../pool/fatal-mutation.js";
+import _poolFearOfIsolation from "../pool/fear-of-isolation.js";
 import _poolFearsomeTemper from "../pool/fearsome-temper.js";
 import _poolFeastingHobbit from "../pool/feasting-hobbit.js";
 import _poolFellingBlow from "../pool/felling-blow.js";
@@ -711,6 +713,7 @@ import _poolRockyRoads from "../pool/rocky-roads.js";
 import _poolRoilsRetribution from "../pool/roils-retribution.js";
 import _poolRoofstalkerWight from "../pool/roofstalker-wight.js";
 import _poolRootMaze from "../pool/root-maze.js";
+import _poolRootcoilCreeper from "../pool/rootcoil-creeper.js";
 import _poolRoshanHiddenMagister from "../pool/roshan-hidden-magister.js";
 import _poolRuinGhost from "../pool/ruin-ghost.js";
 import _poolRushOfInspiration from "../pool/rush-of-inspiration.js";
@@ -730,6 +733,7 @@ import _poolSeaEagle from "../pool/sea-eagle.js";
 import _poolSeaHag from "../pool/sea-hag.js";
 import _poolSeaScryer from "../pool/sea-scryer.js";
 import _poolSearchWarrant from "../pool/search-warrant.js";
+import _poolSeasonOfWeaving from "../pool/season-of-weaving.js";
 import _poolSeasonalRitual from "../pool/seasonal-ritual.js";
 import _poolSecretRendezvous from "../pool/secret-rendezvous.js";
 import _poolSecretsOfTheGoldenCity from "../pool/secrets-of-the-golden-city.js";
@@ -739,6 +743,7 @@ import _poolSegovianAngel from "../pool/segovian-angel.js";
 import _poolSeizeTheInitiative from "../pool/seize-the-initiative.js";
 import _poolSellerOfSongbirds from "../pool/seller-of-songbirds.js";
 import _poolSemesterForeseer from "../pool/semester-foreseer.js";
+import _poolSentinelOfLostLore from "../pool/sentinel-of-lost-lore.js";
 import _poolSerendibDjinn from "../pool/serendib-djinn.js";
 import _poolSerpentsGift from "../pool/serpents-gift.js";
 import _poolShadowGuildmage from "../pool/shadow-guildmage.js";
@@ -992,6 +997,7 @@ import _tokensElfWarriorTokenRhysTheRedeemed from "../tokens/elf-warrior-token-r
 import _tokensFishTokenExpendableLackey from "../tokens/fish-token-expendable-lackey.js";
 import _tokensFoodToken from "../tokens/food-token.js";
 import _tokensHorrorToken from "../tokens/horror-token.js";
+import _tokensHumanWarriorToken31TrampleHaste from "../tokens/human-warrior-token-3-1-trample-haste.js";
 import _tokensHumanWizardToken from "../tokens/human-wizard-token.js";
 import _tokensJellyfishToken from "../tokens/jellyfish-token.js";
 import _tokensKelpToken from "../tokens/kelp-token.js";
@@ -1012,6 +1018,7 @@ import _tokensZombieTokenCurseOfTheRestlessDead from "../tokens/zombie-token-cur
 
 const shard: CardShard = {
   pool: [
+    _poolAangAndLaOceansFury,
     _poolAbattoirGhoul,
     _poolAbnormalEndurance,
     _poolAbrade,
@@ -1300,6 +1307,7 @@ const shard: CardShard = {
     _poolFallajiVanguard,
     _poolFangFearlessLcie,
     _poolFatalMutation,
+    _poolFearOfIsolation,
     _poolFearsomeTemper,
     _poolFeastingHobbit,
     _poolFellingBlow,
@@ -1720,6 +1728,7 @@ const shard: CardShard = {
     _poolRoilsRetribution,
     _poolRoofstalkerWight,
     _poolRootMaze,
+    _poolRootcoilCreeper,
     _poolRoshanHiddenMagister,
     _poolRuinGhost,
     _poolRushOfInspiration,
@@ -1739,6 +1748,7 @@ const shard: CardShard = {
     _poolSeaHag,
     _poolSeaScryer,
     _poolSearchWarrant,
+    _poolSeasonOfWeaving,
     _poolSeasonalRitual,
     _poolSecretRendezvous,
     _poolSecretsOfTheGoldenCity,
@@ -1748,6 +1758,7 @@ const shard: CardShard = {
     _poolSeizeTheInitiative,
     _poolSellerOfSongbirds,
     _poolSemesterForeseer,
+    _poolSentinelOfLostLore,
     _poolSerendibDjinn,
     _poolSerpentsGift,
     _poolShadowGuildmage,
@@ -2003,6 +2014,7 @@ const shard: CardShard = {
     _tokensFishTokenExpendableLackey,
     _tokensFoodToken,
     _tokensHorrorToken,
+    _tokensHumanWarriorToken31TrampleHaste,
     _tokensHumanWizardToken,
     _tokensJellyfishToken,
     _tokensKelpToken,

@@ -151,6 +151,7 @@ import _poolCometStorm from "../pool/comet-storm.js";
 import _poolConclaveNaturalists from "../pool/conclave-naturalists.js";
 import _poolConduitPylons from "../pool/conduit-pylons.js";
 import _poolConjurersBauble from "../pool/conjurers-bauble.js";
+import _poolConsignToMemory from "../pool/consign-to-memory.js";
 import _poolContaminatedDrink from "../pool/contaminated-drink.js";
 import _poolConvincingMirage from "../pool/convincing-mirage.js";
 import _poolCorneredByBlackMages from "../pool/cornered-by-black-mages.js";
@@ -209,6 +210,7 @@ import _poolDimirDoppelganger from "../pool/dimir-doppelganger.js";
 import _poolDireFleetPoisoner from "../pool/dire-fleet-poisoner.js";
 import _poolDiregrafColossus from "../pool/diregraf-colossus.js";
 import _poolDirtwaterWraith from "../pool/dirtwater-wraith.js";
+import _poolDisappearingAct from "../pool/disappearing-act.js";
 import _poolDisperse from "../pool/disperse.js";
 import _poolDominatingLicid from "../pool/dominating-licid.js";
 import _poolDonatelloMutantMechanic from "../pool/donatello-mutant-mechanic.js";
@@ -401,6 +403,7 @@ import _poolHulkStrongestThereIs from "../pool/hulk-strongest-there-is.js";
 import _poolHurlerCyclops from "../pool/hurler-cyclops.js";
 import _poolHydraDisintegrator from "../pool/hydra-disintegrator.js";
 import _poolHydraTrainer from "../pool/hydra-trainer.js";
+import _poolIceFloe from "../pool/ice-floe.js";
 import _poolIcyBlast from "../pool/icy-blast.js";
 import _poolIfritWardenOfInferno from "../pool/ifrit-warden-of-inferno.js";
 import _poolIgniteMemories from "../pool/ignite-memories.js";
@@ -434,6 +437,7 @@ import _poolIxallisKeeper from "../pool/ixallis-keeper.js";
 import _poolIxidorRealitySculptor from "../pool/ixidor-reality-sculptor.js";
 import _poolIxidorsWill from "../pool/ixidors-will.js";
 import _poolJaceRealitySculptor from "../pool/jace-reality-sculptor.js";
+import _poolJaceTelepathUnbound from "../pool/jace-telepath-unbound.js";
 import _poolJackalFamiliar from "../pool/jackal-familiar.js";
 import _poolJadeGuardian from "../pool/jade-guardian.js";
 import _poolJadeLeech from "../pool/jade-leech.js";
@@ -1127,6 +1131,7 @@ const shard: CardShard = {
     _poolConclaveNaturalists,
     _poolConduitPylons,
     _poolConjurersBauble,
+    _poolConsignToMemory,
     _poolContaminatedDrink,
     _poolConvincingMirage,
     _poolCorneredByBlackMages,
@@ -1185,6 +1190,7 @@ const shard: CardShard = {
     _poolDireFleetPoisoner,
     _poolDiregrafColossus,
     _poolDirtwaterWraith,
+    _poolDisappearingAct,
     _poolDisperse,
     _poolDominatingLicid,
     _poolDonatelloMutantMechanic,
@@ -1377,6 +1383,7 @@ const shard: CardShard = {
     _poolHurlerCyclops,
     _poolHydraDisintegrator,
     _poolHydraTrainer,
+    _poolIceFloe,
     _poolIcyBlast,
     _poolIfritWardenOfInferno,
     _poolIgniteMemories,
@@ -1410,6 +1417,7 @@ const shard: CardShard = {
     _poolIxidorRealitySculptor,
     _poolIxidorsWill,
     _poolJaceRealitySculptor,
+    _poolJaceTelepathUnbound,
     _poolJackalFamiliar,
     _poolJadeGuardian,
     _poolJadeLeech,

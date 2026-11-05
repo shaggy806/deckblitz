@@ -7,6 +7,7 @@ import _poolAangAtTheCrossroads from "../pool/aang-at-the-crossroads.js";
 import _poolAboshansDesire from "../pool/aboshans-desire.js";
 import _poolAbueloAncestralEcho from "../pool/abuelo-ancestral-echo.js";
 import _poolAbyssalNocturnus from "../pool/abyssal-nocturnus.js";
+import _poolAcesBaseballBat from "../pool/aces-baseball-bat.js";
 import _poolAcquisitionOctopus from "../pool/acquisition-octopus.js";
 import _poolAeridKonstrari from "../pool/aerid-konstrari.js";
 import _poolAetherStorm from "../pool/aether-storm.js";
@@ -391,6 +392,7 @@ import _poolInvasionOfSegovia from "../pool/invasion-of-segovia.js";
 import _poolIridescentBlademaster from "../pool/iridescent-blademaster.js";
 import _poolIronHillsStalwart from "../pool/iron-hills-stalwart.js";
 import _poolIronStar from "../pool/iron-star.js";
+import _poolJaceVrynsProdigy from "../pool/jace-vryns-prodigy.js";
 import _poolJacesErasure from "../pool/jaces-erasure.js";
 import _poolJaradGolgariLichLord from "../pool/jarad-golgari-lich-lord.js";
 import _poolJasperaSentinel from "../pool/jaspera-sentinel.js";
@@ -924,6 +926,7 @@ const shard: CardShard = {
     _poolAboshansDesire,
     _poolAbueloAncestralEcho,
     _poolAbyssalNocturnus,
+    _poolAcesBaseballBat,
     _poolAcquisitionOctopus,
     _poolAeridKonstrari,
     _poolAetherStorm,
@@ -1308,6 +1311,7 @@ const shard: CardShard = {
     _poolIridescentBlademaster,
     _poolIronHillsStalwart,
     _poolIronStar,
+    _poolJaceVrynsProdigy,
     _poolJacesErasure,
     _poolJaradGolgariLichLord,
     _poolJasperaSentinel,

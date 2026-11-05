@@ -411,6 +411,7 @@ import _poolInvasiveSpecies from "../pool/invasive-species.js";
 import _poolIrresistiblePrey from "../pool/irresistible-prey.js";
 import _poolIvySeer from "../pool/ivy-seer.js";
 import _poolIzzetGuildmage from "../pool/izzet-guildmage.js";
+import _poolJadziOracleOfArcavios from "../pool/jadzi-oracle-of-arcavios.js";
 import _poolJasmineBorealOfTheSeven from "../pool/jasmine-boreal-of-the-seven.js";
 import _poolJiangYangguAlone from "../pool/jiang-yanggu-alone.js";
 import _poolJoriEnRuinDiver from "../pool/jori-en-ruin-diver.js";
@@ -671,6 +672,7 @@ import _poolSearingSpearAskari from "../pool/searing-spear-askari.js";
 import _poolSeasonedCathar from "../pool/seasoned-cathar.js";
 import _poolSeasonedHallowblade from "../pool/seasoned-hallowblade.js";
 import _poolSeedshipImpact from "../pool/seedship-impact.js";
+import _poolSeersVision from "../pool/seers-vision.js";
 import _poolSeiferAlmasy from "../pool/seifer-almasy.js";
 import _poolSelfAssembler from "../pool/self-assembler.js";
 import _poolSelflessPoliceCaptain from "../pool/selfless-police-captain.js";
@@ -1367,6 +1369,7 @@ const shard: CardShard = {
     _poolIrresistiblePrey,
     _poolIvySeer,
     _poolIzzetGuildmage,
+    _poolJadziOracleOfArcavios,
     _poolJasmineBorealOfTheSeven,
     _poolJiangYangguAlone,
     _poolJoriEnRuinDiver,
@@ -1627,6 +1630,7 @@ const shard: CardShard = {
     _poolSeasonedCathar,
     _poolSeasonedHallowblade,
     _poolSeedshipImpact,
+    _poolSeersVision,
     _poolSeiferAlmasy,
     _poolSelfAssembler,
     _poolSelflessPoliceCaptain,

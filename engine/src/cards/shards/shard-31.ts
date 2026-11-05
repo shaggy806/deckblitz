@@ -644,6 +644,7 @@ import _poolParcelbeast from "../pool/parcelbeast.js";
 import _poolPardicDragon from "../pool/pardic-dragon.js";
 import _poolPardicMiner from "../pool/pardic-miner.js";
 import _poolPatriarsSeal from "../pool/patriars-seal.js";
+import _poolPatronOfTheOrochi from "../pool/patron-of-the-orochi.js";
 import _poolPearlShard from "../pool/pearl-shard.js";
 import _poolPedanticLearning from "../pool/pedantic-learning.js";
 import _poolPendelhavenElder from "../pool/pendelhaven-elder.js";
@@ -690,6 +691,7 @@ import _poolReapersTalisman from "../pool/reapers-talisman.js";
 import _poolRebornHope from "../pool/reborn-hope.js";
 import _poolRedCliffsArmada from "../pool/red-cliffs-armada.js";
 import _poolRedDragon from "../pool/red-dragon.js";
+import _poolRegnasSanction from "../pool/regnas-sanction.js";
 import _poolRegrowth from "../pool/regrowth.js";
 import _poolReignOfTerror from "../pool/reign-of-terror.js";
 import _poolRemorsefulCleric from "../pool/remorseful-cleric.js";
@@ -1664,6 +1666,7 @@ const shard: CardShard = {
     _poolPardicDragon,
     _poolPardicMiner,
     _poolPatriarsSeal,
+    _poolPatronOfTheOrochi,
     _poolPearlShard,
     _poolPedanticLearning,
     _poolPendelhavenElder,
@@ -1710,6 +1713,7 @@ const shard: CardShard = {
     _poolRebornHope,
     _poolRedCliffsArmada,
     _poolRedDragon,
+    _poolRegnasSanction,
     _poolRegrowth,
     _poolReignOfTerror,
     _poolRemorsefulCleric,

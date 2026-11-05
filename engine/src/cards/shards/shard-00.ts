@@ -84,6 +84,7 @@ import _poolBleakCovenVampires from "../pool/bleak-coven-vampires.js";
 import _poolBlindObedience from "../pool/blind-obedience.js";
 import _poolBlindingFlare from "../pool/blinding-flare.js";
 import _poolBloodMoon from "../pool/blood-moon.js";
+import _poolBloodSpatterAnalysis from "../pool/blood-spatter-analysis.js";
 import _poolBloodTribute from "../pool/blood-tribute.js";
 import _poolBloodcrazedNeonate from "../pool/bloodcrazed-neonate.js";
 import _poolBloodcurdler from "../pool/bloodcurdler.js";
@@ -551,6 +552,7 @@ import _poolOpulentPalace from "../pool/opulent-palace.js";
 import _poolOraxid from "../pool/oraxid.js";
 import _poolOreadOfMountainsBlaze from "../pool/oread-of-mountains-blaze.js";
 import _poolOriginOfMetalbending from "../pool/origin-of-metalbending.js";
+import _poolOriginOfSpiderMan from "../pool/origin-of-spider-man.js";
 import _poolOrmendahlTheCorrupter from "../pool/ormendahl-the-corrupter.js";
 import _poolOrzhovCharm from "../pool/orzhov-charm.js";
 import _poolOsgoodOperationDouble from "../pool/osgood-operation-double.js";
@@ -690,6 +692,7 @@ import _poolScroungerOfSouls from "../pool/scrounger-of-souls.js";
 import _poolScuttlingDeath from "../pool/scuttling-death.js";
 import _poolSeaGateColossus from "../pool/sea-gate-colossus.js";
 import _poolSearingWind from "../pool/searing-wind.js";
+import _poolSeasonOfGathering from "../pool/season-of-gathering.js";
 import _poolSeasonedCryomancer from "../pool/seasoned-cryomancer.js";
 import _poolSecondBreakfast from "../pool/second-breakfast.js";
 import _poolSeersSundial from "../pool/seers-sundial.js";
@@ -873,6 +876,7 @@ import _poolUglukOfTheWhiteHand from "../pool/ugluk-of-the-white-hand.js";
 import _poolUktabiWildcats from "../pool/uktabi-wildcats.js";
 import _poolUltramarinesHonourGuard from "../pool/ultramarines-honour-guard.js";
 import _poolUmaroRagingYeti from "../pool/umaro-raging-yeti.js";
+import _poolUnexpectedResults from "../pool/unexpected-results.js";
 import _poolUnspeakableSymbol from "../pool/unspeakable-symbol.js";
 import _poolUnstableObelisk from "../pool/unstable-obelisk.js";
 import _poolUnstoppableSlasher from "../pool/unstoppable-slasher.js";
@@ -1053,6 +1057,7 @@ const shard: CardShard = {
     _poolBlindObedience,
     _poolBlindingFlare,
     _poolBloodMoon,
+    _poolBloodSpatterAnalysis,
     _poolBloodTribute,
     _poolBloodcrazedNeonate,
     _poolBloodcurdler,
@@ -1520,6 +1525,7 @@ const shard: CardShard = {
     _poolOraxid,
     _poolOreadOfMountainsBlaze,
     _poolOriginOfMetalbending,
+    _poolOriginOfSpiderMan,
     _poolOrmendahlTheCorrupter,
     _poolOrzhovCharm,
     _poolOsgoodOperationDouble,
@@ -1659,6 +1665,7 @@ const shard: CardShard = {
     _poolScuttlingDeath,
     _poolSeaGateColossus,
     _poolSearingWind,
+    _poolSeasonOfGathering,
     _poolSeasonedCryomancer,
     _poolSecondBreakfast,
     _poolSeersSundial,
@@ -1842,6 +1849,7 @@ const shard: CardShard = {
     _poolUktabiWildcats,
     _poolUltramarinesHonourGuard,
     _poolUmaroRagingYeti,
+    _poolUnexpectedResults,
     _poolUnspeakableSymbol,
     _poolUnstableObelisk,
     _poolUnstoppableSlasher,
