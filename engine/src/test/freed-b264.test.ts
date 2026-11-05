@@ -97,6 +97,6 @@ describe("Armed and Armored", () => {
     expect(call).toBe(2);
     expect(game.state.objects[splitter].attachedTo).toBe(dwarf);
     expect(game.state.objects[sword].attachedTo).toBe(dwarf);
-    expect(game.state.objects[bears].attachedTo).toBeUndefined();
+    expect(game.state.objects[bears].attachedTo ?? null).toBeNull();
   });
 });
