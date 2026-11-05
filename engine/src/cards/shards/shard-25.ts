@@ -221,6 +221,7 @@ import _poolDragonScales from "../pool/dragon-scales.js";
 import _poolDragonbroodsRelic from "../pool/dragonbroods-relic.js";
 import _poolDragonologist from "../pool/dragonologist.js";
 import _poolDrakeSkullCameo from "../pool/drake-skull-cameo.js";
+import _poolDreadTiller from "../pool/dread-tiller.js";
 import _poolDreadbore from "../pool/dreadbore.js";
 import _poolDreadmobile from "../pool/dreadmobile.js";
 import _poolDreamsOfTheDead from "../pool/dreams-of-the-dead.js";
@@ -402,6 +403,7 @@ import _poolInspiringRefrain from "../pool/inspiring-refrain.js";
 import _poolInvokeCalamity from "../pool/invoke-calamity.js";
 import _poolIonaShieldOfEmeria from "../pool/iona-shield-of-emeria.js";
 import _poolIsperiaTheInscrutable from "../pool/isperia-the-inscrutable.js";
+import _poolJaceThePerfectedMind from "../pool/jace-the-perfected-mind.js";
 import _poolJacesTriumph from "../pool/jaces-triumph.js";
 import _poolJaggedLightning from "../pool/jagged-lightning.js";
 import _poolJetMedallion from "../pool/jet-medallion.js";
@@ -518,6 +520,7 @@ import _poolMycosynthGolem from "../pool/mycosynth-golem.js";
 import _poolMyrkulsInvoker from "../pool/myrkuls-invoker.js";
 import _poolMysteriousPathlighter from "../pool/mysterious-pathlighter.js";
 import _poolMysticArchaeologist from "../pool/mystic-archaeologist.js";
+import _poolNahiriStormOfStone from "../pool/nahiri-storm-of-stone.js";
 import _poolNaiadOfHiddenCoves from "../pool/naiad-of-hidden-coves.js";
 import _poolNathsElite from "../pool/naths-elite.js";
 import _poolNecromancersFamiliar from "../pool/necromancers-familiar.js";
@@ -686,6 +689,7 @@ import _poolScreechingBat from "../pool/screeching-bat.js";
 import _poolScuteSwarm from "../pool/scute-swarm.js";
 import _poolScuttlingSliver from "../pool/scuttling-sliver.js";
 import _poolSeaGateStormcaller from "../pool/sea-gate-stormcaller.js";
+import _poolSearchForBlex from "../pool/search-for-blex.js";
 import _poolSearchPartyCaptain from "../pool/search-party-captain.js";
 import _poolSeasonOfRenewal from "../pool/season-of-renewal.js";
 import _poolSecretPassage from "../pool/secret-passage.js";
@@ -1139,6 +1143,7 @@ const shard: CardShard = {
     _poolDragonbroodsRelic,
     _poolDragonologist,
     _poolDrakeSkullCameo,
+    _poolDreadTiller,
     _poolDreadbore,
     _poolDreadmobile,
     _poolDreamsOfTheDead,
@@ -1320,6 +1325,7 @@ const shard: CardShard = {
     _poolInvokeCalamity,
     _poolIonaShieldOfEmeria,
     _poolIsperiaTheInscrutable,
+    _poolJaceThePerfectedMind,
     _poolJacesTriumph,
     _poolJaggedLightning,
     _poolJetMedallion,
@@ -1436,6 +1442,7 @@ const shard: CardShard = {
     _poolMyrkulsInvoker,
     _poolMysteriousPathlighter,
     _poolMysticArchaeologist,
+    _poolNahiriStormOfStone,
     _poolNaiadOfHiddenCoves,
     _poolNathsElite,
     _poolNecromancersFamiliar,
@@ -1604,6 +1611,7 @@ const shard: CardShard = {
     _poolScuteSwarm,
     _poolScuttlingSliver,
     _poolSeaGateStormcaller,
+    _poolSearchForBlex,
     _poolSearchPartyCaptain,
     _poolSeasonOfRenewal,
     _poolSecretPassage,

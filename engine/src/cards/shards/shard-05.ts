@@ -638,6 +638,7 @@ import _poolReapIntellect from "../pool/reap-intellect.js";
 import _poolRecklessPangolin from "../pool/reckless-pangolin.js";
 import _poolReclaimingVines from "../pool/reclaiming-vines.js";
 import _poolRefurbishedFamiliar from "../pool/refurbished-familiar.js";
+import _poolReinsOfTheVinesteed from "../pool/reins-of-the-vinesteed.js";
 import _poolReinterpret from "../pool/reinterpret.js";
 import _poolRejuvenationChamber from "../pool/rejuvenation-chamber.js";
 import _poolRememberTheFallen from "../pool/remember-the-fallen.js";
@@ -827,6 +828,7 @@ import _poolTitanOfLittjara from "../pool/titan-of-littjara.js";
 import _poolTithebearerGiant from "../pool/tithebearer-giant.js";
 import _poolTokkaRahzarTerribleTwos from "../pool/tokka-rahzar-terrible-twos.js";
 import _poolTolaria from "../pool/tolaria.js";
+import _poolTolarianContempt from "../pool/tolarian-contempt.js";
 import _poolTomeRaider from "../pool/tome-raider.js";
 import _poolToolcraftExemplar from "../pool/toolcraft-exemplar.js";
 import _poolTopiaryLecturer from "../pool/topiary-lecturer.js";
@@ -1572,6 +1574,7 @@ const shard: CardShard = {
     _poolRecklessPangolin,
     _poolReclaimingVines,
     _poolRefurbishedFamiliar,
+    _poolReinsOfTheVinesteed,
     _poolReinterpret,
     _poolRejuvenationChamber,
     _poolRememberTheFallen,
@@ -1761,6 +1764,7 @@ const shard: CardShard = {
     _poolTithebearerGiant,
     _poolTokkaRahzarTerribleTwos,
     _poolTolaria,
+    _poolTolarianContempt,
     _poolTomeRaider,
     _poolToolcraftExemplar,
     _poolTopiaryLecturer,

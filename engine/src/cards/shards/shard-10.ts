@@ -146,6 +146,7 @@ import _poolCinderingCutthroat from "../pool/cindering-cutthroat.js";
 import _poolCircleOfProtectionRed from "../pool/circle-of-protection-red.js";
 import _poolCitanulHierophants from "../pool/citanul-hierophants.js";
 import _poolCivicWayfinder from "../pool/civic-wayfinder.js";
+import _poolClearTheLand from "../pool/clear-the-land.js";
 import _poolCoastlineChimera from "../pool/coastline-chimera.js";
 import _poolColossusHammer from "../pool/colossus-hammer.js";
 import _poolCompellingArgument from "../pool/compelling-argument.js";
@@ -212,6 +213,7 @@ import _poolDescendantOfMasumaro from "../pool/descendant-of-masumaro.js";
 import _poolDesertWarfare from "../pool/desert-warfare.js";
 import _poolDevelopment from "../pool/development.js";
 import _poolDiamondMare from "../pool/diamond-mare.js";
+import _poolDiaochanArtfulBeauty from "../pool/diaochan-artful-beauty.js";
 import _poolDictateOfErebos from "../pool/dictate-of-erebos.js";
 import _poolDigSiteInventory from "../pool/dig-site-inventory.js";
 import _poolDimirGuildgate from "../pool/dimir-guildgate.js";
@@ -581,6 +583,7 @@ import _poolPlatedSpider from "../pool/plated-spider.js";
 import _poolPoetsQuill from "../pool/poets-quill.js";
 import _poolPoisonTheWaters from "../pool/poison-the-waters.js";
 import _poolPortalOfSanctuary from "../pool/portal-of-sanctuary.js";
+import _poolPortentOfCalamity from "../pool/portent-of-calamity.js";
 import _poolPossessedAven from "../pool/possessed-aven.js";
 import _poolPouncingShoreshark from "../pool/pouncing-shoreshark.js";
 import _poolPowerbalance from "../pool/powerbalance.js";
@@ -1086,6 +1089,7 @@ const shard: CardShard = {
     _poolCircleOfProtectionRed,
     _poolCitanulHierophants,
     _poolCivicWayfinder,
+    _poolClearTheLand,
     _poolCoastlineChimera,
     _poolColossusHammer,
     _poolCompellingArgument,
@@ -1152,6 +1156,7 @@ const shard: CardShard = {
     _poolDesertWarfare,
     _poolDevelopment,
     _poolDiamondMare,
+    _poolDiaochanArtfulBeauty,
     _poolDictateOfErebos,
     _poolDigSiteInventory,
     _poolDimirGuildgate,
@@ -1521,6 +1526,7 @@ const shard: CardShard = {
     _poolPoetsQuill,
     _poolPoisonTheWaters,
     _poolPortalOfSanctuary,
+    _poolPortentOfCalamity,
     _poolPossessedAven,
     _poolPouncingShoreshark,
     _poolPowerbalance,

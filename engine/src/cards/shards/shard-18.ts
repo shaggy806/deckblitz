@@ -8,6 +8,7 @@ import _poolAcererakTheArchlich from "../pool/acererak-the-archlich.js";
 import _poolAdaptiveOmnitool from "../pool/adaptive-omnitool.js";
 import _poolAerithGainsborough from "../pool/aerith-gainsborough.js";
 import _poolAeronautAdmiral from "../pool/aeronaut-admiral.js";
+import _poolAetherSpike from "../pool/aether-spike.js";
 import _poolAgadeemsAwakening from "../pool/agadeems-awakening.js";
 import _poolAgonizingDemise from "../pool/agonizing-demise.js";
 import _poolAjaniMentorOfHeroes from "../pool/ajani-mentor-of-heroes.js";
@@ -328,6 +329,7 @@ import _poolHardenedTactician from "../pool/hardened-tactician.js";
 import _poolHarvesterTroll from "../pool/harvester-troll.js";
 import _poolHauntTheNetwork from "../pool/haunt-the-network.js";
 import _poolHauntedCloak from "../pool/haunted-cloak.js";
+import _poolHauntingVoyage from "../pool/haunting-voyage.js";
 import _poolHearthCharm from "../pool/hearth-charm.js";
 import _poolHearthbornBattler from "../pool/hearthborn-battler.js";
 import _poolHedronMatrix from "../pool/hedron-matrix.js";
@@ -539,6 +541,7 @@ import _poolOranRiefInvoker from "../pool/oran-rief-invoker.js";
 import _poolOrbsOfWarding from "../pool/orbs-of-warding.js";
 import _poolOrcishFarmer from "../pool/orcish-farmer.js";
 import _poolOrderedMigration from "../pool/ordered-migration.js";
+import _poolOrderlyPlaza from "../pool/orderly-plaza.js";
 import _poolOtawaraSoaringCity from "../pool/otawara-soaring-city.js";
 import _poolOutbreak from "../pool/outbreak.js";
 import _poolOutlandLiberator from "../pool/outland-liberator.js";
@@ -663,6 +666,7 @@ import _poolSecurityBlockade from "../pool/security-blockade.js";
 import _poolSelesnyaKeyrune from "../pool/selesnya-keyrune.js";
 import _poolSelvalaHeartOfTheWilds from "../pool/selvala-heart-of-the-wilds.js";
 import _poolSentinelSpider from "../pool/sentinel-spider.js";
+import _poolSerrasHymn from "../pool/serras-hymn.js";
 import _poolSevenDwarves from "../pool/seven-dwarves.js";
 import _poolSeveredStrands from "../pool/severed-strands.js";
 import _poolShalaisAcolyte from "../pool/shalais-acolyte.js";
@@ -947,6 +951,7 @@ const shard: CardShard = {
     _poolAdaptiveOmnitool,
     _poolAerithGainsborough,
     _poolAeronautAdmiral,
+    _poolAetherSpike,
     _poolAgadeemsAwakening,
     _poolAgonizingDemise,
     _poolAjaniMentorOfHeroes,
@@ -1267,6 +1272,7 @@ const shard: CardShard = {
     _poolHarvesterTroll,
     _poolHauntTheNetwork,
     _poolHauntedCloak,
+    _poolHauntingVoyage,
     _poolHearthCharm,
     _poolHearthbornBattler,
     _poolHedronMatrix,
@@ -1478,6 +1484,7 @@ const shard: CardShard = {
     _poolOrbsOfWarding,
     _poolOrcishFarmer,
     _poolOrderedMigration,
+    _poolOrderlyPlaza,
     _poolOtawaraSoaringCity,
     _poolOutbreak,
     _poolOutlandLiberator,
@@ -1602,6 +1609,7 @@ const shard: CardShard = {
     _poolSelesnyaKeyrune,
     _poolSelvalaHeartOfTheWilds,
     _poolSentinelSpider,
+    _poolSerrasHymn,
     _poolSevenDwarves,
     _poolSeveredStrands,
     _poolShalaisAcolyte,

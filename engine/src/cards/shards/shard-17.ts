@@ -160,6 +160,7 @@ import _poolCrackedSkull from "../pool/cracked-skull.js";
 import _poolCraftWithPride from "../pool/craft-with-pride.js";
 import _poolCragSaurian from "../pool/crag-saurian.js";
 import _poolCrashThrough from "../pool/crash-through.js";
+import _poolCrashingWave from "../pool/crashing-wave.js";
 import _poolCrimsonMuckwader from "../pool/crimson-muckwader.js";
 import _poolCrosissAttendant from "../pool/crosiss-attendant.js";
 import _poolCrumblingColossus from "../pool/crumbling-colossus.js";
@@ -394,6 +395,7 @@ import _poolHowlgeist from "../pool/howlgeist.js";
 import _poolHundingGjornersen from "../pool/hunding-gjornersen.js";
 import _poolHungryMist from "../pool/hungry-mist.js";
 import _poolHuntingKavu from "../pool/hunting-kavu.js";
+import _poolHuntingWilds from "../pool/hunting-wilds.js";
 import _poolHuntmasterLiger from "../pool/huntmaster-liger.js";
 import _poolHushwoodVerge from "../pool/hushwood-verge.js";
 import _poolHydroidKrasis from "../pool/hydroid-krasis.js";
@@ -796,6 +798,7 @@ import _poolTelekinesis from "../pool/telekinesis.js";
 import _poolTemporaryTruce from "../pool/temporary-truce.js";
 import _poolTemptWithDiscovery from "../pool/tempt-with-discovery.js";
 import _poolTestOfTalents from "../pool/test-of-talents.js";
+import _poolTezzeretMasterOfTheBridge from "../pool/tezzeret-master-of-the-bridge.js";
 import _poolTezzeretsTouch from "../pool/tezzerets-touch.js";
 import _poolThaumaturgesFamiliar from "../pool/thaumaturges-familiar.js";
 import _poolTheAstonishingAntMan from "../pool/the-astonishing-ant-man.js";
@@ -831,6 +834,7 @@ import _poolTreefolkHarbinger from "../pool/treefolk-harbinger.js";
 import _poolTrestleTroll from "../pool/trestle-troll.js";
 import _poolTrialOfAmbition from "../pool/trial-of-ambition.js";
 import _poolTriarchPraetorian from "../pool/triarch-praetorian.js";
+import _poolTrickstersTalisman from "../pool/tricksters-talisman.js";
 import _poolTroubledHealer from "../pool/troubled-healer.js";
 import _poolTrueIdentity from "../pool/true-identity.js";
 import _poolTsaboTavoc from "../pool/tsabo-tavoc.js";
@@ -913,6 +917,7 @@ import _poolYawgmothsAgenda from "../pool/yawgmoths-agenda.js";
 import _poolYawgmothsWill from "../pool/yawgmoths-will.js";
 import _poolYawningFissure from "../pool/yawning-fissure.js";
 import _poolYevasForcemage from "../pool/yevas-forcemage.js";
+import _poolYggdrasilRebirthEngine from "../pool/yggdrasil-rebirth-engine.js";
 import _poolYotianTactician from "../pool/yotian-tactician.js";
 import _poolYouMeetInATavern from "../pool/you-meet-in-a-tavern.js";
 import _poolYourTempleIsUnderAttack from "../pool/your-temple-is-under-attack.js";
@@ -1109,6 +1114,7 @@ const shard: CardShard = {
     _poolCraftWithPride,
     _poolCragSaurian,
     _poolCrashThrough,
+    _poolCrashingWave,
     _poolCrimsonMuckwader,
     _poolCrosissAttendant,
     _poolCrumblingColossus,
@@ -1343,6 +1349,7 @@ const shard: CardShard = {
     _poolHundingGjornersen,
     _poolHungryMist,
     _poolHuntingKavu,
+    _poolHuntingWilds,
     _poolHuntmasterLiger,
     _poolHushwoodVerge,
     _poolHydroidKrasis,
@@ -1745,6 +1752,7 @@ const shard: CardShard = {
     _poolTemporaryTruce,
     _poolTemptWithDiscovery,
     _poolTestOfTalents,
+    _poolTezzeretMasterOfTheBridge,
     _poolTezzeretsTouch,
     _poolThaumaturgesFamiliar,
     _poolTheAstonishingAntMan,
@@ -1780,6 +1788,7 @@ const shard: CardShard = {
     _poolTrestleTroll,
     _poolTrialOfAmbition,
     _poolTriarchPraetorian,
+    _poolTrickstersTalisman,
     _poolTroubledHealer,
     _poolTrueIdentity,
     _poolTsaboTavoc,
@@ -1862,6 +1871,7 @@ const shard: CardShard = {
     _poolYawgmothsWill,
     _poolYawningFissure,
     _poolYevasForcemage,
+    _poolYggdrasilRebirthEngine,
     _poolYotianTactician,
     _poolYouMeetInATavern,
     _poolYourTempleIsUnderAttack,

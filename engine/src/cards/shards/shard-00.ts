@@ -184,6 +184,7 @@ import _poolCrushingCanopy from "../pool/crushing-canopy.js";
 import _poolCryptcallerChariot from "../pool/cryptcaller-chariot.js";
 import _poolCultOfTheWaxingMoon from "../pool/cult-of-the-waxing-moon.js";
 import _poolCunningCoyote from "../pool/cunning-coyote.js";
+import _poolCurseOfInertia from "../pool/curse-of-inertia.js";
 import _poolCurseOfWizardry from "../pool/curse-of-wizardry.js";
 import _poolCursedMinotaur from "../pool/cursed-minotaur.js";
 import _poolCursedRecording from "../pool/cursed-recording.js";
@@ -808,6 +809,7 @@ import _poolTheMycotyrant from "../pool/the-mycotyrant.js";
 import _poolTheRavensWarning from "../pool/the-ravens-warning.js";
 import _poolTheSpiritOasis from "../pool/the-spirit-oasis.js";
 import _poolTheTheoristJaceBeleren from "../pool/the-theorist-jace-beleren.js";
+import _poolTheWarInHeaven from "../pool/the-war-in-heaven.js";
 import _poolTheWeatherseedTreaty from "../pool/the-weatherseed-treaty.js";
 import _poolTheWeddingOfRiverSong from "../pool/the-wedding-of-river-song.js";
 import _poolTheWindCrystal from "../pool/the-wind-crystal.js";
@@ -1138,6 +1140,7 @@ const shard: CardShard = {
     _poolCryptcallerChariot,
     _poolCultOfTheWaxingMoon,
     _poolCunningCoyote,
+    _poolCurseOfInertia,
     _poolCurseOfWizardry,
     _poolCursedMinotaur,
     _poolCursedRecording,
@@ -1762,6 +1765,7 @@ const shard: CardShard = {
     _poolTheRavensWarning,
     _poolTheSpiritOasis,
     _poolTheTheoristJaceBeleren,
+    _poolTheWarInHeaven,
     _poolTheWeatherseedTreaty,
     _poolTheWeddingOfRiverSong,
     _poolTheWindCrystal,

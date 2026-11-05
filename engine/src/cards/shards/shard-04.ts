@@ -105,6 +105,7 @@ import _poolCetavolver from "../pool/cetavolver.js";
 import _poolChainOfAcid from "../pool/chain-of-acid.js";
 import _poolChainersEdict from "../pool/chainers-edict.js";
 import _poolChakramRetriever from "../pool/chakram-retriever.js";
+import _poolChandraChillOfCompliance from "../pool/chandra-chill-of-compliance.js";
 import _poolChangelingBerserker from "../pool/changeling-berserker.js";
 import _poolChaoticStrike from "../pool/chaotic-strike.js";
 import _poolChardalynDragon from "../pool/chardalyn-dragon.js";
@@ -457,6 +458,7 @@ import _poolLordWindgrace from "../pool/lord-windgrace.js";
 import _poolLotlethTroll from "../pool/lotleth-troll.js";
 import _poolLotuslightDancers from "../pool/lotuslight-dancers.js";
 import _poolLoyalSubordinate from "../pool/loyal-subordinate.js";
+import _poolLuxArtillery from "../pool/lux-artillery.js";
 import _poolLuxiorGiadasGift from "../pool/luxior-giadas-gift.js";
 import _poolMacabreWaltz from "../pool/macabre-waltz.js";
 import _poolMagebaneArmor from "../pool/magebane-armor.js";
@@ -645,6 +647,7 @@ import _poolSanguimancy from "../pool/sanguimancy.js";
 import _poolSanguineMorass from "../pool/sanguine-morass.js";
 import _poolSanityGnawers from "../pool/sanity-gnawers.js";
 import _poolSaprazzanRaider from "../pool/saprazzan-raider.js";
+import _poolSarkhanTheMad from "../pool/sarkhan-the-mad.js";
 import _poolSarkhansRage from "../pool/sarkhans-rage.js";
 import _poolSarkhansTriumph from "../pool/sarkhans-triumph.js";
 import _poolScarbladeScout from "../pool/scarblade-scout.js";
@@ -1032,6 +1035,7 @@ const shard: CardShard = {
     _poolChainOfAcid,
     _poolChainersEdict,
     _poolChakramRetriever,
+    _poolChandraChillOfCompliance,
     _poolChangelingBerserker,
     _poolChaoticStrike,
     _poolChardalynDragon,
@@ -1384,6 +1388,7 @@ const shard: CardShard = {
     _poolLotlethTroll,
     _poolLotuslightDancers,
     _poolLoyalSubordinate,
+    _poolLuxArtillery,
     _poolLuxiorGiadasGift,
     _poolMacabreWaltz,
     _poolMagebaneArmor,
@@ -1572,6 +1577,7 @@ const shard: CardShard = {
     _poolSanguineMorass,
     _poolSanityGnawers,
     _poolSaprazzanRaider,
+    _poolSarkhanTheMad,
     _poolSarkhansRage,
     _poolSarkhansTriumph,
     _poolScarbladeScout,

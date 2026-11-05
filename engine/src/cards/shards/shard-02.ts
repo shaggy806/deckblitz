@@ -415,6 +415,7 @@ import _poolJamuraanLion from "../pool/jamuraan-lion.js";
 import _poolJawsOfDefeat from "../pool/jaws-of-defeat.js";
 import _poolJeskaiBrushmaster from "../pool/jeskai-brushmaster.js";
 import _poolJibbirikOmnivore from "../pool/jibbirik-omnivore.js";
+import _poolJourneyToTheLostCity from "../pool/journey-to-the-lost-city.js";
 import _poolJundBattlemage from "../pool/jund-battlemage.js";
 import _poolKaaliaOfTheVast from "../pool/kaalia-of-the-vast.js";
 import _poolKaimaTheFracturedCalm from "../pool/kaima-the-fractured-calm.js";
@@ -458,6 +459,7 @@ import _poolLifespringDruid from "../pool/lifespring-druid.js";
 import _poolLilianasCaress from "../pool/lilianas-caress.js";
 import _poolLilypadVillage from "../pool/lilypad-village.js";
 import _poolLimDulsPaladin from "../pool/lim-duls-paladin.js";
+import _poolLocalizedDestruction from "../pool/localized-destruction.js";
 import _poolLokiTheDeceiver from "../pool/loki-the-deceiver.js";
 import _poolLonisGeneticsExpert from "../pool/lonis-genetics-expert.js";
 import _poolLoreBroker from "../pool/lore-broker.js";
@@ -556,6 +558,7 @@ import _poolOrzhovRacketeers from "../pool/orzhov-racketeers.js";
 import _poolOrzhovaTheChurchOfDeals from "../pool/orzhova-the-church-of-deals.js";
 import _poolPainsReward from "../pool/pains-reward.js";
 import _poolPaleBears from "../pool/pale-bears.js";
+import _poolPalliationAccord from "../pool/palliation-accord.js";
 import _poolPathOfThePyromancer from "../pool/path-of-the-pyromancer.js";
 import _poolPavelMaliki from "../pool/pavel-maliki.js";
 import _poolPearlDragon from "../pool/pearl-dragon.js";
@@ -605,6 +608,7 @@ import _poolRacersScoreboard from "../pool/racers-scoreboard.js";
 import _poolRageOfWinter from "../pool/rage-of-winter.js";
 import _poolRagingKronch from "../pool/raging-kronch.js";
 import _poolRainOfRust from "../pool/rain-of-rust.js";
+import _poolRakdosRiteknife from "../pool/rakdos-riteknife.js";
 import _poolRakshasaDeathdealer from "../pool/rakshasa-deathdealer.js";
 import _poolRampagingBaloths from "../pool/rampaging-baloths.js";
 import _poolRamsesOverdark from "../pool/ramses-overdark.js";
@@ -900,6 +904,7 @@ import _poolWoodlandSleuth from "../pool/woodland-sleuth.js";
 import _poolWoollyLoxodon from "../pool/woolly-loxodon.js";
 import _poolWoollyThoctar from "../pool/woolly-thoctar.js";
 import _poolWritOfPassage from "../pool/writ-of-passage.js";
+import _poolYannikScavengingSentinel from "../pool/yannik-scavenging-sentinel.js";
 import _poolZektarShrineExpedition from "../pool/zektar-shrine-expedition.js";
 import _poolZephidsEmbrace from "../pool/zephids-embrace.js";
 import _poolZhouYuChiefCommander from "../pool/zhou-yu-chief-commander.js";
@@ -1335,6 +1340,7 @@ const shard: CardShard = {
     _poolJawsOfDefeat,
     _poolJeskaiBrushmaster,
     _poolJibbirikOmnivore,
+    _poolJourneyToTheLostCity,
     _poolJundBattlemage,
     _poolKaaliaOfTheVast,
     _poolKaimaTheFracturedCalm,
@@ -1378,6 +1384,7 @@ const shard: CardShard = {
     _poolLilianasCaress,
     _poolLilypadVillage,
     _poolLimDulsPaladin,
+    _poolLocalizedDestruction,
     _poolLokiTheDeceiver,
     _poolLonisGeneticsExpert,
     _poolLoreBroker,
@@ -1476,6 +1483,7 @@ const shard: CardShard = {
     _poolOrzhovaTheChurchOfDeals,
     _poolPainsReward,
     _poolPaleBears,
+    _poolPalliationAccord,
     _poolPathOfThePyromancer,
     _poolPavelMaliki,
     _poolPearlDragon,
@@ -1525,6 +1533,7 @@ const shard: CardShard = {
     _poolRageOfWinter,
     _poolRagingKronch,
     _poolRainOfRust,
+    _poolRakdosRiteknife,
     _poolRakshasaDeathdealer,
     _poolRampagingBaloths,
     _poolRamsesOverdark,
@@ -1820,6 +1829,7 @@ const shard: CardShard = {
     _poolWoollyLoxodon,
     _poolWoollyThoctar,
     _poolWritOfPassage,
+    _poolYannikScavengingSentinel,
     _poolZektarShrineExpedition,
     _poolZephidsEmbrace,
     _poolZhouYuChiefCommander,

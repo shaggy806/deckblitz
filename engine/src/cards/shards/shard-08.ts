@@ -38,6 +38,7 @@ import _poolAlhammarretHighArbiter from "../pool/alhammarret-high-arbiter.js";
 import _poolAllIsDust from "../pool/all-is-dust.js";
 import _poolAlliedReinforcements from "../pool/allied-reinforcements.js";
 import _poolAloeAlchemist from "../pool/aloe-alchemist.js";
+import _poolAloySaviorOfMeridian from "../pool/aloy-savior-of-meridian.js";
 import _poolAlphaTyrranax from "../pool/alpha-tyrranax.js";
 import _poolAmbushParatrooper from "../pool/ambush-paratrooper.js";
 import _poolAmpedRaptor from "../pool/amped-raptor.js";
@@ -146,6 +147,7 @@ import _poolChronomancer from "../pool/chronomancer.js";
 import _poolCircuDimirLobotomist from "../pool/circu-dimir-lobotomist.js";
 import _poolCloakOfTheBat from "../pool/cloak-of-the-bat.js";
 import _poolClownCar from "../pool/clown-car.js";
+import _poolCoalitionRelic from "../pool/coalition-relic.js";
 import _poolColdEyedSelkie from "../pool/cold-eyed-selkie.js";
 import _poolColossalWhale from "../pool/colossal-whale.js";
 import _poolCommanderGrevenIlVec from "../pool/commander-greven-il-vec.js";
@@ -360,6 +362,7 @@ import _poolGrixisSlavedriver from "../pool/grixis-slavedriver.js";
 import _poolGrizzledOutcasts from "../pool/grizzled-outcasts.js";
 import _poolGuildThief from "../pool/guild-thief.js";
 import _poolHagiMob from "../pool/hagi-mob.js";
+import _poolHapatraTheDesertFang from "../pool/hapatra-the-desert-fang.js";
 import _poolHarmattanEfreet from "../pool/harmattan-efreet.js";
 import _poolHarshMentor from "../pool/harsh-mentor.js";
 import _poolHarvestFear from "../pool/harvest-fear.js";
@@ -408,6 +411,7 @@ import _poolInfest from "../pool/infest.js";
 import _poolInformedInkwright from "../pool/informed-inkwright.js";
 import _poolInnerDemon from "../pool/inner-demon.js";
 import _poolInnerSanctum from "../pool/inner-sanctum.js";
+import _poolInscribedTablet from "../pool/inscribed-tablet.js";
 import _poolInsidiousFungus from "../pool/insidious-fungus.js";
 import _poolInspirationFromBeyond from "../pool/inspiration-from-beyond.js";
 import _poolInstigatorGang from "../pool/instigator-gang.js";
@@ -685,6 +689,7 @@ import _poolRhonassLastStand from "../pool/rhonass-last-stand.js";
 import _poolRicketyGazebo from "../pool/rickety-gazebo.js";
 import _poolRighteousAvengers from "../pool/righteous-avengers.js";
 import _poolRimeTender from "../pool/rime-tender.js";
+import _poolRingOfValkas from "../pool/ring-of-valkas.js";
 import _poolRisenNecroregent from "../pool/risen-necroregent.js";
 import _poolRishadanFootpad from "../pool/rishadan-footpad.js";
 import _poolRishadanPort from "../pool/rishadan-port.js";
@@ -1024,6 +1029,7 @@ const shard: CardShard = {
     _poolAllIsDust,
     _poolAlliedReinforcements,
     _poolAloeAlchemist,
+    _poolAloySaviorOfMeridian,
     _poolAlphaTyrranax,
     _poolAmbushParatrooper,
     _poolAmpedRaptor,
@@ -1132,6 +1138,7 @@ const shard: CardShard = {
     _poolCircuDimirLobotomist,
     _poolCloakOfTheBat,
     _poolClownCar,
+    _poolCoalitionRelic,
     _poolColdEyedSelkie,
     _poolColossalWhale,
     _poolCommanderGrevenIlVec,
@@ -1346,6 +1353,7 @@ const shard: CardShard = {
     _poolGrizzledOutcasts,
     _poolGuildThief,
     _poolHagiMob,
+    _poolHapatraTheDesertFang,
     _poolHarmattanEfreet,
     _poolHarshMentor,
     _poolHarvestFear,
@@ -1394,6 +1402,7 @@ const shard: CardShard = {
     _poolInformedInkwright,
     _poolInnerDemon,
     _poolInnerSanctum,
+    _poolInscribedTablet,
     _poolInsidiousFungus,
     _poolInspirationFromBeyond,
     _poolInstigatorGang,
@@ -1671,6 +1680,7 @@ const shard: CardShard = {
     _poolRicketyGazebo,
     _poolRighteousAvengers,
     _poolRimeTender,
+    _poolRingOfValkas,
     _poolRisenNecroregent,
     _poolRishadanFootpad,
     _poolRishadanPort,

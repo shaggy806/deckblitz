@@ -304,6 +304,7 @@ import _poolFrayingOmnipotence from "../pool/fraying-omnipotence.js";
 import _poolFreestriderCommando from "../pool/freestrider-commando.js";
 import _poolFreneticOgre from "../pool/frenetic-ogre.js";
 import _poolFrenziedRaptor from "../pool/frenzied-raptor.js";
+import _poolFriendlyFire from "../pool/friendly-fire.js";
 import _poolFriendlyNeighborhood from "../pool/friendly-neighborhood.js";
 import _poolFrogSquirrels from "../pool/frog-squirrels.js";
 import _poolFrostLynx from "../pool/frost-lynx.js";
@@ -393,6 +394,7 @@ import _poolHuatlisRaptor from "../pool/huatlis-raptor.js";
 import _poolHulkStrongestThereIs from "../pool/hulk-strongest-there-is.js";
 import _poolHurlerCyclops from "../pool/hurler-cyclops.js";
 import _poolHydraDisintegrator from "../pool/hydra-disintegrator.js";
+import _poolHydraTrainer from "../pool/hydra-trainer.js";
 import _poolIcyBlast from "../pool/icy-blast.js";
 import _poolIfritWardenOfInferno from "../pool/ifrit-warden-of-inferno.js";
 import _poolIgniteMemories from "../pool/ignite-memories.js";
@@ -412,6 +414,7 @@ import _poolIntetTheDreamer from "../pool/intet-the-dreamer.js";
 import _poolIntimidation from "../pool/intimidation.js";
 import _poolIntroductionToAnnihilation from "../pool/introduction-to-annihilation.js";
 import _poolInvasionOfVryn from "../pool/invasion-of-vryn.js";
+import _poolInventoryManagement from "../pool/inventory-management.js";
 import _poolIroassBlessing from "../pool/iroass-blessing.js";
 import _poolIrohGrandLotus from "../pool/iroh-grand-lotus.js";
 import _poolIronFistHeroForHire from "../pool/iron-fist-hero-for-hire.js";
@@ -473,6 +476,7 @@ import _poolLightOfHope from "../pool/light-of-hope.js";
 import _poolLightningVolley from "../pool/lightning-volley.js";
 import _poolLightwielderPaladin from "../pool/lightwielder-paladin.js";
 import _poolLilianaTheLastHope from "../pool/liliana-the-last-hope.js";
+import _poolLimDulsCohort from "../pool/lim-duls-cohort.js";
 import _poolLimitsOfSolidarity from "../pool/limits-of-solidarity.js";
 import _poolLinSivviDefiantHero from "../pool/lin-sivvi-defiant-hero.js";
 import _poolLinvalaShieldOfSeaGate from "../pool/linvala-shield-of-sea-gate.js";
@@ -487,6 +491,7 @@ import _poolLostMonarchOfIfnir from "../pool/lost-monarch-of-ifnir.js";
 import _poolLoveSongOfNightAndDay from "../pool/love-song-of-night-and-day.js";
 import _poolLoxodonEavesdropper from "../pool/loxodon-eavesdropper.js";
 import _poolLoyalTutor from "../pool/loyal-tutor.js";
+import _poolLukkaCoppercoatOutcast from "../pool/lukka-coppercoat-outcast.js";
 import _poolLumengridGargoyle from "../pool/lumengrid-gargoyle.js";
 import _poolMadameMasque from "../pool/madame-masque.js";
 import _poolMageTowerReferee from "../pool/mage-tower-referee.js";
@@ -807,6 +812,7 @@ import _poolTeleport from "../pool/teleport.js";
 import _poolTempleOfCivilization from "../pool/temple-of-civilization.js";
 import _poolTempleOfMalice from "../pool/temple-of-malice.js";
 import _poolTemporalFirestorm from "../pool/temporal-firestorm.js";
+import _poolTheAkroanWar from "../pool/the-akroan-war.js";
 import _poolTheBalrogOfMoria from "../pool/the-balrog-of-moria.js";
 import _poolTheFirstIroanGames from "../pool/the-first-iroan-games.js";
 import _poolTheFloodOfMars from "../pool/the-flood-of-mars.js";
@@ -933,6 +939,7 @@ import _poolWoodlurkerMimic from "../pool/woodlurker-mimic.js";
 import _poolWoodripper from "../pool/woodripper.js";
 import _poolWordsOfWisdom from "../pool/words-of-wisdom.js";
 import _poolWrennAndSix from "../pool/wrenn-and-six.js";
+import _poolXenagosTheReveler from "../pool/xenagos-the-reveler.js";
 import _poolYathanRoadwatcher from "../pool/yathan-roadwatcher.js";
 import _poolYesManPersonalSecuritron from "../pool/yes-man-personal-securitron.js";
 import _poolZahidDjinnOfTheLamp from "../pool/zahid-djinn-of-the-lamp.js";
@@ -1257,6 +1264,7 @@ const shard: CardShard = {
     _poolFreestriderCommando,
     _poolFreneticOgre,
     _poolFrenziedRaptor,
+    _poolFriendlyFire,
     _poolFriendlyNeighborhood,
     _poolFrogSquirrels,
     _poolFrostLynx,
@@ -1346,6 +1354,7 @@ const shard: CardShard = {
     _poolHulkStrongestThereIs,
     _poolHurlerCyclops,
     _poolHydraDisintegrator,
+    _poolHydraTrainer,
     _poolIcyBlast,
     _poolIfritWardenOfInferno,
     _poolIgniteMemories,
@@ -1365,6 +1374,7 @@ const shard: CardShard = {
     _poolIntimidation,
     _poolIntroductionToAnnihilation,
     _poolInvasionOfVryn,
+    _poolInventoryManagement,
     _poolIroassBlessing,
     _poolIrohGrandLotus,
     _poolIronFistHeroForHire,
@@ -1426,6 +1436,7 @@ const shard: CardShard = {
     _poolLightningVolley,
     _poolLightwielderPaladin,
     _poolLilianaTheLastHope,
+    _poolLimDulsCohort,
     _poolLimitsOfSolidarity,
     _poolLinSivviDefiantHero,
     _poolLinvalaShieldOfSeaGate,
@@ -1440,6 +1451,7 @@ const shard: CardShard = {
     _poolLoveSongOfNightAndDay,
     _poolLoxodonEavesdropper,
     _poolLoyalTutor,
+    _poolLukkaCoppercoatOutcast,
     _poolLumengridGargoyle,
     _poolMadameMasque,
     _poolMageTowerReferee,
@@ -1760,6 +1772,7 @@ const shard: CardShard = {
     _poolTempleOfCivilization,
     _poolTempleOfMalice,
     _poolTemporalFirestorm,
+    _poolTheAkroanWar,
     _poolTheBalrogOfMoria,
     _poolTheFirstIroanGames,
     _poolTheFloodOfMars,
@@ -1886,6 +1899,7 @@ const shard: CardShard = {
     _poolWoodripper,
     _poolWordsOfWisdom,
     _poolWrennAndSix,
+    _poolXenagosTheReveler,
     _poolYathanRoadwatcher,
     _poolYesManPersonalSecuritron,
     _poolZahidDjinnOfTheLamp,

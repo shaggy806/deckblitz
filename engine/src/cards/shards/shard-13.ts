@@ -196,6 +196,7 @@ import _poolDebtToTheDeathless from "../pool/debt-to-the-deathless.js";
 import _poolDeepwoodDenizen from "../pool/deepwood-denizen.js";
 import _poolDefyGravity from "../pool/defy-gravity.js";
 import _poolDeityOfScars from "../pool/deity-of-scars.js";
+import _poolDemonicConsultation from "../pool/demonic-consultation.js";
 import _poolDeputizedProtester from "../pool/deputized-protester.js";
 import _poolDesertOfTheMindful from "../pool/desert-of-the-mindful.js";
 import _poolDesperateLunge from "../pool/desperate-lunge.js";
@@ -549,6 +550,7 @@ import _poolPiranhaFly from "../pool/piranha-fly.js";
 import _poolPlanarAlly from "../pool/planar-ally.js";
 import _poolPlanarVoid from "../pool/planar-void.js";
 import _poolPoppetStitcher from "../pool/poppet-stitcher.js";
+import _poolPossessedGoat from "../pool/possessed-goat.js";
 import _poolPoulticeSliver from "../pool/poultice-sliver.js";
 import _poolPrideOfTheClouds from "../pool/pride-of-the-clouds.js";
 import _poolPrideOfTheRoad from "../pool/pride-of-the-road.js";
@@ -906,6 +908,7 @@ import _tokensHumanWarriorToken from "../tokens/human-warrior-token.js";
 import _tokensMerfolkTokenSilvergillMentor from "../tokens/merfolk-token-silvergill-mentor.js";
 import _tokensMonkTokenCrescentIslandTemple from "../tokens/monk-token-crescent-island-temple.js";
 import _tokensMonkeyToken from "../tokens/monkey-token.js";
+import _tokensNalaarAetherjetToken from "../tokens/nalaar-aetherjet-token.js";
 import _tokensPegasusToken22 from "../tokens/pegasus-token-2-2.js";
 import _tokensPirateTokenNettlingNuisance from "../tokens/pirate-token-nettling-nuisance.js";
 import _tokensSatyrToken from "../tokens/satyr-token.js";
@@ -1109,6 +1112,7 @@ const shard: CardShard = {
     _poolDeepwoodDenizen,
     _poolDefyGravity,
     _poolDeityOfScars,
+    _poolDemonicConsultation,
     _poolDeputizedProtester,
     _poolDesertOfTheMindful,
     _poolDesperateLunge,
@@ -1462,6 +1466,7 @@ const shard: CardShard = {
     _poolPlanarAlly,
     _poolPlanarVoid,
     _poolPoppetStitcher,
+    _poolPossessedGoat,
     _poolPoulticeSliver,
     _poolPrideOfTheClouds,
     _poolPrideOfTheRoad,
@@ -1821,6 +1826,7 @@ const shard: CardShard = {
     _tokensMerfolkTokenSilvergillMentor,
     _tokensMonkTokenCrescentIslandTemple,
     _tokensMonkeyToken,
+    _tokensNalaarAetherjetToken,
     _tokensPegasusToken22,
     _tokensPirateTokenNettlingNuisance,
     _tokensSatyrToken,

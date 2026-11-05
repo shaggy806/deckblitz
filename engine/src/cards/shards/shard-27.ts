@@ -111,6 +111,7 @@ import _poolCandlelitCavalry from "../pool/candlelit-cavalry.js";
 import _poolCantWakeUp from "../pool/cant-wake-up.js";
 import _poolCaptainAmericaTeamLeader from "../pool/captain-america-team-leader.js";
 import _poolCarrionCall from "../pool/carrion-call.js";
+import _poolCaseOfTheGatewayExpress from "../pool/case-of-the-gateway-express.js";
 import _poolCavalierOfNight from "../pool/cavalier-of-night.js";
 import _poolCaythFamedMechanist from "../pool/cayth-famed-mechanist.js";
 import _poolCelebrityFencer from "../pool/celebrity-fencer.js";
@@ -267,6 +268,7 @@ import _poolFieryFall from "../pool/fiery-fall.js";
 import _poolFieryJustice from "../pool/fiery-justice.js";
 import _poolFieryTemper from "../pool/fiery-temper.js";
 import _poolFiliThePathfinder from "../pool/fili-the-pathfinder.js";
+import _poolFireJuggler from "../pool/fire-juggler.js";
 import _poolFirefistStriker from "../pool/firefist-striker.js";
 import _poolFistsOfTheDemigod from "../pool/fists-of-the-demigod.js";
 import _poolFiveAlarmFire from "../pool/five-alarm-fire.js";
@@ -785,6 +787,7 @@ import _poolTheFlux from "../pool/the-flux.js";
 import _poolTheKeyToTheVault from "../pool/the-key-to-the-vault.js";
 import _poolTheLionTurtle from "../pool/the-lion-turtle.js";
 import _poolTheOddAcornGang from "../pool/the-odd-acorn-gang.js";
+import _poolTheSixthDoctor from "../pool/the-sixth-doctor.js";
 import _poolTheUnderworldCookbook from "../pool/the-underworld-cookbook.js";
 import _poolTheWanderingMinstrel from "../pool/the-wandering-minstrel.js";
 import _poolThreeTreeRootweaver from "../pool/three-tree-rootweaver.js";
@@ -1038,6 +1041,7 @@ const shard: CardShard = {
     _poolCantWakeUp,
     _poolCaptainAmericaTeamLeader,
     _poolCarrionCall,
+    _poolCaseOfTheGatewayExpress,
     _poolCavalierOfNight,
     _poolCaythFamedMechanist,
     _poolCelebrityFencer,
@@ -1194,6 +1198,7 @@ const shard: CardShard = {
     _poolFieryJustice,
     _poolFieryTemper,
     _poolFiliThePathfinder,
+    _poolFireJuggler,
     _poolFirefistStriker,
     _poolFistsOfTheDemigod,
     _poolFiveAlarmFire,
@@ -1712,6 +1717,7 @@ const shard: CardShard = {
     _poolTheKeyToTheVault,
     _poolTheLionTurtle,
     _poolTheOddAcornGang,
+    _poolTheSixthDoctor,
     _poolTheUnderworldCookbook,
     _poolTheWanderingMinstrel,
     _poolThreeTreeRootweaver,

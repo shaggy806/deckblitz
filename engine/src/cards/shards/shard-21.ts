@@ -440,6 +440,7 @@ import _poolMakeshiftMannequin from "../pool/makeshift-mannequin.js";
 import _poolMalevolentWhispers from "../pool/malevolent-whispers.js";
 import _poolManaSeism from "../pool/mana-seism.js";
 import _poolMangaraTheDiplomat from "../pool/mangara-the-diplomat.js";
+import _poolMantleOfTheAncients from "../pool/mantle-of-the-ancients.js";
 import _poolMaraxusOfKeld from "../pool/maraxus-of-keld.js";
 import _poolMarduShadowspear from "../pool/mardu-shadowspear.js";
 import _poolMarkovBaron from "../pool/markov-baron.js";
@@ -610,6 +611,7 @@ import _poolRevengeOfRavens from "../pool/revenge-of-ravens.js";
 import _poolRewriteRegrets from "../pool/rewrite-regrets.js";
 import _poolRhoxPikemaster from "../pool/rhox-pikemaster.js";
 import _poolRiddleform from "../pool/riddleform.js";
+import _poolRideTheAvalanche from "../pool/ride-the-avalanche.js";
 import _poolRipchainRazorkin from "../pool/ripchain-razorkin.js";
 import _poolRiteOfTheMoth from "../pool/rite-of-the-moth.js";
 import _poolRoilingRegrowth from "../pool/roiling-regrowth.js";
@@ -730,6 +732,7 @@ import _poolSunkenCitadel from "../pool/sunken-citadel.js";
 import _poolSunkenHope from "../pool/sunken-hope.js";
 import _poolSunsetStrikemaster from "../pool/sunset-strikemaster.js";
 import _poolSuperSuit from "../pool/super-suit.js";
+import _poolSurtlandElementalist from "../pool/surtland-elementalist.js";
 import _poolSwarmOfBloodflies from "../pool/swarm-of-bloodflies.js";
 import _poolSwiftJustice from "../pool/swift-justice.js";
 import _poolSwordOfFeastAndFamine from "../pool/sword-of-feast-and-famine.js";
@@ -807,6 +810,7 @@ import _poolTurbulentFen from "../pool/turbulent-fen.js";
 import _poolTurbulentSteppe from "../pool/turbulent-steppe.js";
 import _poolTuyaBearclaw from "../pool/tuya-bearclaw.js";
 import _poolTymaretCallsTheDead from "../pool/tymaret-calls-the-dead.js";
+import _poolUginTheSpiritDragon from "../pool/ugin-the-spirit-dragon.js";
 import _poolUmaraEntangler from "../pool/umara-entangler.js";
 import _poolUnctussRetrofitter from "../pool/unctuss-retrofitter.js";
 import _poolUndeadGladiator from "../pool/undead-gladiator.js";
@@ -1338,6 +1342,7 @@ const shard: CardShard = {
     _poolMalevolentWhispers,
     _poolManaSeism,
     _poolMangaraTheDiplomat,
+    _poolMantleOfTheAncients,
     _poolMaraxusOfKeld,
     _poolMarduShadowspear,
     _poolMarkovBaron,
@@ -1508,6 +1513,7 @@ const shard: CardShard = {
     _poolRewriteRegrets,
     _poolRhoxPikemaster,
     _poolRiddleform,
+    _poolRideTheAvalanche,
     _poolRipchainRazorkin,
     _poolRiteOfTheMoth,
     _poolRoilingRegrowth,
@@ -1628,6 +1634,7 @@ const shard: CardShard = {
     _poolSunkenHope,
     _poolSunsetStrikemaster,
     _poolSuperSuit,
+    _poolSurtlandElementalist,
     _poolSwarmOfBloodflies,
     _poolSwiftJustice,
     _poolSwordOfFeastAndFamine,
@@ -1705,6 +1712,7 @@ const shard: CardShard = {
     _poolTurbulentSteppe,
     _poolTuyaBearclaw,
     _poolTymaretCallsTheDead,
+    _poolUginTheSpiritDragon,
     _poolUmaraEntangler,
     _poolUnctussRetrofitter,
     _poolUndeadGladiator,

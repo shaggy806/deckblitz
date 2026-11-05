@@ -508,6 +508,7 @@ import _poolLeoninDenGuard from "../pool/leonin-den-guard.js";
 import _poolLeoninLightbringer from "../pool/leonin-lightbringer.js";
 import _poolLeylineAxe from "../pool/leyline-axe.js";
 import _poolLeylineOfTheVoid from "../pool/leyline-of-the-void.js";
+import _poolLiarsPendulum from "../pool/liars-pendulum.js";
 import _poolLilianaDreadhordeGeneral from "../pool/liliana-dreadhorde-general.js";
 import _poolLilianasSpoils from "../pool/lilianas-spoils.js";
 import _poolLilysplashMentor from "../pool/lilysplash-mentor.js";
@@ -854,6 +855,7 @@ import _poolTheApprenticesFolly from "../pool/the-apprentices-folly.js";
 import _poolTheBattleOfBywater from "../pool/the-battle-of-bywater.js";
 import _poolTheCaveOfTwoLovers from "../pool/the-cave-of-two-lovers.js";
 import _poolTheCircleOfLoyalty from "../pool/the-circle-of-loyalty.js";
+import _poolTheCloneSaga from "../pool/the-clone-saga.js";
 import _poolTheEarthKing from "../pool/the-earth-king.js";
 import _poolTheEverChangingDane from "../pool/the-ever-changing-dane.js";
 import _poolThePrincessTakesFlight from "../pool/the-princess-takes-flight.js";
@@ -1507,6 +1509,7 @@ const shard: CardShard = {
     _poolLeoninLightbringer,
     _poolLeylineAxe,
     _poolLeylineOfTheVoid,
+    _poolLiarsPendulum,
     _poolLilianaDreadhordeGeneral,
     _poolLilianasSpoils,
     _poolLilysplashMentor,
@@ -1853,6 +1856,7 @@ const shard: CardShard = {
     _poolTheBattleOfBywater,
     _poolTheCaveOfTwoLovers,
     _poolTheCircleOfLoyalty,
+    _poolTheCloneSaga,
     _poolTheEarthKing,
     _poolTheEverChangingDane,
     _poolThePrincessTakesFlight,

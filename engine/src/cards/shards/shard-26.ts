@@ -62,6 +62,7 @@ import _poolAtzocanArcher from "../pool/atzocan-archer.js";
 import _poolAugmenterPugilist from "../pool/augmenter-pugilist.js";
 import _poolAugurOfSkulls from "../pool/augur-of-skulls.js";
 import _poolAuntieOolCursewretch from "../pool/auntie-ool-cursewretch.js";
+import _poolAureliasFury from "../pool/aurelias-fury.js";
 import _poolAutonSoldier from "../pool/auton-soldier.js";
 import _poolAvariceAmulet from "../pool/avarice-amulet.js";
 import _poolAvenBrigadier from "../pool/aven-brigadier.js";
@@ -103,6 +104,7 @@ import _poolBogardanDragonheart from "../pool/bogardan-dragonheart.js";
 import _poolBoldImpaler from "../pool/bold-impaler.js";
 import _poolBondOfRevival from "../pool/bond-of-revival.js";
 import _poolBoneyardLurker from "../pool/boneyard-lurker.js";
+import _poolBonnyPallClearcutter from "../pool/bonny-pall-clearcutter.js";
 import _poolBorborygmosEnraged from "../pool/borborygmos-enraged.js";
 import _poolBorealShelf from "../pool/boreal-shelf.js";
 import _poolBorosMastiff from "../pool/boros-mastiff.js";
@@ -140,6 +142,7 @@ import _poolCathedralOfWar from "../pool/cathedral-of-war.js";
 import _poolCaughtInTheBrights from "../pool/caught-in-the-brights.js";
 import _poolChampionsOfMinasTirith from "../pool/champions-of-minas-tirith.js";
 import _poolChandler from "../pool/chandler.js";
+import _poolChandraLegacyOfFire from "../pool/chandra-legacy-of-fire.js";
 import _poolChangeOfHeart from "../pool/change-of-heart.js";
 import _poolChanneledForce from "../pool/channeled-force.js";
 import _poolChaosTheEndless from "../pool/chaos-the-endless.js";
@@ -825,6 +828,7 @@ import _poolThrillKillDisciple from "../pool/thrill-kill-disciple.js";
 import _poolThrissNantukoPrimus from "../pool/thriss-nantuko-primus.js";
 import _poolThrivingRats from "../pool/thriving-rats.js";
 import _poolThroneOfBone from "../pool/throne-of-bone.js";
+import _poolThroneOfTheGrimCaptain from "../pool/throne-of-the-grim-captain.js";
 import _poolThunderSalvo from "../pool/thunder-salvo.js";
 import _poolThunderingDjinn from "../pool/thundering-djinn.js";
 import _poolTideShaper from "../pool/tide-shaper.js";
@@ -1012,6 +1016,7 @@ const shard: CardShard = {
     _poolAugmenterPugilist,
     _poolAugurOfSkulls,
     _poolAuntieOolCursewretch,
+    _poolAureliasFury,
     _poolAutonSoldier,
     _poolAvariceAmulet,
     _poolAvenBrigadier,
@@ -1053,6 +1058,7 @@ const shard: CardShard = {
     _poolBoldImpaler,
     _poolBondOfRevival,
     _poolBoneyardLurker,
+    _poolBonnyPallClearcutter,
     _poolBorborygmosEnraged,
     _poolBorealShelf,
     _poolBorosMastiff,
@@ -1090,6 +1096,7 @@ const shard: CardShard = {
     _poolCaughtInTheBrights,
     _poolChampionsOfMinasTirith,
     _poolChandler,
+    _poolChandraLegacyOfFire,
     _poolChangeOfHeart,
     _poolChanneledForce,
     _poolChaosTheEndless,
@@ -1775,6 +1782,7 @@ const shard: CardShard = {
     _poolThrissNantukoPrimus,
     _poolThrivingRats,
     _poolThroneOfBone,
+    _poolThroneOfTheGrimCaptain,
     _poolThunderSalvo,
     _poolThunderingDjinn,
     _poolTideShaper,

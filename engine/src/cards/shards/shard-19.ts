@@ -349,6 +349,7 @@ import _poolGenesisUltimatum from "../pool/genesis-ultimatum.js";
 import _poolGerrardsWisdom from "../pool/gerrards-wisdom.js";
 import _poolGeyserDrake from "../pool/geyser-drake.js";
 import _poolGhostLitRaider from "../pool/ghost-lit-raider.js";
+import _poolGhostVacuum from "../pool/ghost-vacuum.js";
 import _poolGiantFly from "../pool/giant-fly.js";
 import _poolGiantOpportunity from "../pool/giant-opportunity.js";
 import _poolGiantSpider from "../pool/giant-spider.js";
@@ -459,6 +460,7 @@ import _poolItemShopkeep from "../pool/item-shopkeep.js";
 import _poolIvoryGiant from "../pool/ivory-giant.js";
 import _poolIxallisDiviner from "../pool/ixallis-diviner.js";
 import _poolIzzetChronarch from "../pool/izzet-chronarch.js";
+import _poolJackalGeniusGeneticist from "../pool/jackal-genius-geneticist.js";
 import _poolJadedAnalyst from "../pool/jaded-analyst.js";
 import _poolJeskaiBarricade from "../pool/jeskai-barricade.js";
 import _poolJetsam from "../pool/jetsam.js";
@@ -529,6 +531,7 @@ import _poolMadcapSkills from "../pool/madcap-skills.js";
 import _poolMageSlayer from "../pool/mage-slayer.js";
 import _poolMagefireWings from "../pool/magefire-wings.js";
 import _poolMagmaticSinkhole from "../pool/magmatic-sinkhole.js";
+import _poolMagnanimousMagistrate from "../pool/magnanimous-magistrate.js";
 import _poolMagusOfTheBridge from "../pool/magus-of-the-bridge.js";
 import _poolMagusOfTheCandelabra from "../pool/magus-of-the-candelabra.js";
 import _poolMagusOfTheMoat from "../pool/magus-of-the-moat.js";
@@ -683,6 +686,7 @@ import _poolRandomEncounter from "../pool/random-encounter.js";
 import _poolRaphaelNinjaDestroyer from "../pool/raphael-ninja-destroyer.js";
 import _poolRaptorHatchling from "../pool/raptor-hatchling.js";
 import _poolRassilonTheWarPresident from "../pool/rassilon-the-war-president.js";
+import _poolRavenousGigantotherium from "../pool/ravenous-gigantotherium.js";
 import _poolRazorBoomerang from "../pool/razor-boomerang.js";
 import _poolReality from "../pool/reality.js";
 import _poolReapingWillow from "../pool/reaping-willow.js";
@@ -798,6 +802,7 @@ import _poolSoaringSeacliff from "../pool/soaring-seacliff.js";
 import _poolSokkaTenaciousTactician from "../pool/sokka-tenacious-tactician.js";
 import _poolSoldeviSimulacrum from "../pool/soldevi-simulacrum.js";
 import _poolSomberwaldDryad from "../pool/somberwald-dryad.js";
+import _poolSorinGrimNemesis from "../pool/sorin-grim-nemesis.js";
 import _poolSoulChanneling from "../pool/soul-channeling.js";
 import _poolSoulsMight from "../pool/souls-might.js";
 import _poolSpaceMarineScout from "../pool/space-marine-scout.js";
@@ -862,6 +867,7 @@ import _poolTezzeretsGatebreaker from "../pool/tezzerets-gatebreaker.js";
 import _poolTheBalrogFlameOfUdun from "../pool/the-balrog-flame-of-udun.js";
 import _poolTheDestinedWhiteMage from "../pool/the-destined-white-mage.js";
 import _poolTheGreatAurora from "../pool/the-great-aurora.js";
+import _poolTheGrimCaptain from "../pool/the-grim-captain.js";
 import _poolTheLegendOfYangchen from "../pool/the-legend-of-yangchen.js";
 import _poolTheMendingOfDominaria from "../pool/the-mending-of-dominaria.js";
 import _poolTheMountainKingsReturn from "../pool/the-mountain-kings-return.js";
@@ -1343,6 +1349,7 @@ const shard: CardShard = {
     _poolGerrardsWisdom,
     _poolGeyserDrake,
     _poolGhostLitRaider,
+    _poolGhostVacuum,
     _poolGiantFly,
     _poolGiantOpportunity,
     _poolGiantSpider,
@@ -1453,6 +1460,7 @@ const shard: CardShard = {
     _poolIvoryGiant,
     _poolIxallisDiviner,
     _poolIzzetChronarch,
+    _poolJackalGeniusGeneticist,
     _poolJadedAnalyst,
     _poolJeskaiBarricade,
     _poolJetsam,
@@ -1523,6 +1531,7 @@ const shard: CardShard = {
     _poolMageSlayer,
     _poolMagefireWings,
     _poolMagmaticSinkhole,
+    _poolMagnanimousMagistrate,
     _poolMagusOfTheBridge,
     _poolMagusOfTheCandelabra,
     _poolMagusOfTheMoat,
@@ -1677,6 +1686,7 @@ const shard: CardShard = {
     _poolRaphaelNinjaDestroyer,
     _poolRaptorHatchling,
     _poolRassilonTheWarPresident,
+    _poolRavenousGigantotherium,
     _poolRazorBoomerang,
     _poolReality,
     _poolReapingWillow,
@@ -1792,6 +1802,7 @@ const shard: CardShard = {
     _poolSokkaTenaciousTactician,
     _poolSoldeviSimulacrum,
     _poolSomberwaldDryad,
+    _poolSorinGrimNemesis,
     _poolSoulChanneling,
     _poolSoulsMight,
     _poolSpaceMarineScout,
@@ -1856,6 +1867,7 @@ const shard: CardShard = {
     _poolTheBalrogFlameOfUdun,
     _poolTheDestinedWhiteMage,
     _poolTheGreatAurora,
+    _poolTheGrimCaptain,
     _poolTheLegendOfYangchen,
     _poolTheMendingOfDominaria,
     _poolTheMountainKingsReturn,

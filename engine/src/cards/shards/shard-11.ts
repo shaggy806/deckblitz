@@ -204,6 +204,7 @@ import _poolDeemWorthy from "../pool/deem-worthy.js";
 import _poolDefacingDuskmage from "../pool/defacing-duskmage.js";
 import _poolDefendersOfHumanity from "../pool/defenders-of-humanity.js";
 import _poolDelusionsOfMediocrity from "../pool/delusions-of-mediocrity.js";
+import _poolDementiaSliver from "../pool/dementia-sliver.js";
 import _poolDemystify from "../pool/demystify.js";
 import _poolDepartedSoulkeeper from "../pool/departed-soulkeeper.js";
 import _poolDepthChargeColossus from "../pool/depth-charge-colossus.js";
@@ -321,6 +322,7 @@ import _poolGhostHounds from "../pool/ghost-hounds.js";
 import _poolGhostlyDancers from "../pool/ghostly-dancers.js";
 import _poolGhoulishProcession from "../pool/ghoulish-procession.js";
 import _poolGiantStrength from "../pool/giant-strength.js";
+import _poolGiftOfImmortality from "../pool/gift-of-immortality.js";
 import _poolGiftOfTheViper from "../pool/gift-of-the-viper.js";
 import _poolGildedAssaultCart from "../pool/gilded-assault-cart.js";
 import _poolGildedGoose from "../pool/gilded-goose.js";
@@ -601,6 +603,7 @@ import _poolPhyrexianGargantua from "../pool/phyrexian-gargantua.js";
 import _poolPhyrexianJuggernaut from "../pool/phyrexian-juggernaut.js";
 import _poolPhyrexianRebirth from "../pool/phyrexian-rebirth.js";
 import _poolPhyrexianSkyflayer from "../pool/phyrexian-skyflayer.js";
+import _poolPiaNalaarChiefMechanic from "../pool/pia-nalaar-chief-mechanic.js";
 import _poolPiannaNomadCaptain from "../pool/pianna-nomad-captain.js";
 import _poolPigmentWrangler from "../pool/pigment-wrangler.js";
 import _poolPilgrimOfJustice from "../pool/pilgrim-of-justice.js";
@@ -754,6 +757,7 @@ import _poolSpiritMantle from "../pool/spirit-mantle.js";
 import _poolSpiritMirror from "../pool/spirit-mirror.js";
 import _poolSplashySpellcaster from "../pool/splashy-spellcaster.js";
 import _poolSplitskinDoll from "../pool/splitskin-doll.js";
+import _poolSpoilsOfTheVault from "../pool/spoils-of-the-vault.js";
 import _poolSporecrownThallid from "../pool/sporecrown-thallid.js";
 import _poolSporemound from "../pool/sporemound.js";
 import _poolSpringsageRitual from "../pool/springsage-ritual.js";
@@ -936,6 +940,7 @@ import _tokensHeroTokenBlackMagesRod from "../tokens/hero-token-black-mages-rod.
 import _tokensNecronWarriorToken from "../tokens/necron-warrior-token.js";
 import _tokensOgreToken from "../tokens/ogre-token.js";
 import _tokensPhyrexianBeastTokenEzurisPredation from "../tokens/phyrexian-beast-token-ezuris-predation.js";
+import _tokensSettlementToken from "../tokens/settlement-token.js";
 import _tokensSnailToken from "../tokens/snail-token.js";
 import _tokensSpiderToken22Reach from "../tokens/spider-token-2-2-reach.js";
 import _tokensTheAtropal from "../tokens/the-atropal.js";
@@ -1151,6 +1156,7 @@ const shard: CardShard = {
     _poolDefacingDuskmage,
     _poolDefendersOfHumanity,
     _poolDelusionsOfMediocrity,
+    _poolDementiaSliver,
     _poolDemystify,
     _poolDepartedSoulkeeper,
     _poolDepthChargeColossus,
@@ -1268,6 +1274,7 @@ const shard: CardShard = {
     _poolGhostlyDancers,
     _poolGhoulishProcession,
     _poolGiantStrength,
+    _poolGiftOfImmortality,
     _poolGiftOfTheViper,
     _poolGildedAssaultCart,
     _poolGildedGoose,
@@ -1548,6 +1555,7 @@ const shard: CardShard = {
     _poolPhyrexianJuggernaut,
     _poolPhyrexianRebirth,
     _poolPhyrexianSkyflayer,
+    _poolPiaNalaarChiefMechanic,
     _poolPiannaNomadCaptain,
     _poolPigmentWrangler,
     _poolPilgrimOfJustice,
@@ -1701,6 +1709,7 @@ const shard: CardShard = {
     _poolSpiritMirror,
     _poolSplashySpellcaster,
     _poolSplitskinDoll,
+    _poolSpoilsOfTheVault,
     _poolSporecrownThallid,
     _poolSporemound,
     _poolSpringsageRitual,
@@ -1885,6 +1894,7 @@ const shard: CardShard = {
     _tokensNecronWarriorToken,
     _tokensOgreToken,
     _tokensPhyrexianBeastTokenEzurisPredation,
+    _tokensSettlementToken,
     _tokensSnailToken,
     _tokensSpiderToken22Reach,
     _tokensTheAtropal,

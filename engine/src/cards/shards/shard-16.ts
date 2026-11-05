@@ -191,6 +191,7 @@ import _poolDescendantOfKiyomaro from "../pool/descendant-of-kiyomaro.js";
 import _poolDesolateLighthouse from "../pool/desolate-lighthouse.js";
 import _poolDevouringStrossus from "../pool/devouring-strossus.js";
 import _poolDewdropSpy from "../pool/dewdrop-spy.js";
+import _poolDisasterRadius from "../pool/disaster-radius.js";
 import _poolDiscipleOfMalice from "../pool/disciple-of-malice.js";
 import _poolDisturbingConversion from "../pool/disturbing-conversion.js";
 import _poolDivineGambit from "../pool/divine-gambit.js";
@@ -456,6 +457,7 @@ import _poolLifecreedDuo from "../pool/lifecreed-duo.js";
 import _poolLightmineField from "../pool/lightmine-field.js";
 import _poolLightningProwess from "../pool/lightning-prowess.js";
 import _poolLilianasInfluence from "../pool/lilianas-influence.js";
+import _poolLilyBowenRagingGrandma from "../pool/lily-bowen-raging-grandma.js";
 import _poolLiminalHold from "../pool/liminal-hold.js";
 import _poolLionsEyeDiamond from "../pool/lions-eye-diamond.js";
 import _poolLiquimetalTorque from "../pool/liquimetal-torque.js";
@@ -817,6 +819,7 @@ import _poolTakeToTheStreets from "../pool/take-to-the-streets.js";
 import _poolTakeVengeance from "../pool/take-vengeance.js";
 import _poolTalasScout from "../pool/talas-scout.js";
 import _poolTalismanOfResilience from "../pool/talisman-of-resilience.js";
+import _poolTamiyoCompleatedSage from "../pool/tamiyo-compleated-sage.js";
 import _poolTarfire from "../pool/tarfire.js";
 import _poolTauntingElf from "../pool/taunting-elf.js";
 import _poolTavernRuffian from "../pool/tavern-ruffian.js";
@@ -1203,6 +1206,7 @@ const shard: CardShard = {
     _poolDesolateLighthouse,
     _poolDevouringStrossus,
     _poolDewdropSpy,
+    _poolDisasterRadius,
     _poolDiscipleOfMalice,
     _poolDisturbingConversion,
     _poolDivineGambit,
@@ -1468,6 +1472,7 @@ const shard: CardShard = {
     _poolLightmineField,
     _poolLightningProwess,
     _poolLilianasInfluence,
+    _poolLilyBowenRagingGrandma,
     _poolLiminalHold,
     _poolLionsEyeDiamond,
     _poolLiquimetalTorque,
@@ -1829,6 +1834,7 @@ const shard: CardShard = {
     _poolTakeVengeance,
     _poolTalasScout,
     _poolTalismanOfResilience,
+    _poolTamiyoCompleatedSage,
     _poolTarfire,
     _poolTauntingElf,
     _poolTavernRuffian,

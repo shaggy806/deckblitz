@@ -172,6 +172,7 @@ import _poolCloudchaserEagle from "../pool/cloudchaser-eagle.js";
 import _poolClutchOfUndeath from "../pool/clutch-of-undeath.js";
 import _poolComfortingCounsel from "../pool/comforting-counsel.js";
 import _poolCommandeer from "../pool/commandeer.js";
+import _poolCompleteTheCircuit from "../pool/complete-the-circuit.js";
 import _poolCompulsion from "../pool/compulsion.js";
 import _poolConductElectricity from "../pool/conduct-electricity.js";
 import _poolConsecrateConsume from "../pool/consecrate-consume.js";
@@ -544,6 +545,7 @@ import _poolNickFurySpymaster from "../pool/nick-fury-spymaster.js";
 import _poolNightTerrors from "../pool/night-terrors.js";
 import _poolNightshadeDryad from "../pool/nightshade-dryad.js";
 import _poolNightveilSprite from "../pool/nightveil-sprite.js";
+import _poolNimDeathmantle from "../pool/nim-deathmantle.js";
 import _poolNimLasher from "../pool/nim-lasher.js";
 import _poolNissasDefeat from "../pool/nissas-defeat.js";
 import _poolNiveousWisps from "../pool/niveous-wisps.js";
@@ -934,6 +936,7 @@ import _tokensPowerstoneToken from "../tokens/powerstone-token.js";
 import _tokensShardToken from "../tokens/shard-token.js";
 import _tokensSkeletonRegeneratingToken from "../tokens/skeleton-regenerating-token.js";
 import _tokensSpiderToken21MenaceReach from "../tokens/spider-token-2-1-menace-reach.js";
+import _tokensTamiyosNotebookToken from "../tokens/tamiyos-notebook-token.js";
 import _tokensTheVoid from "../tokens/the-void.js";
 import _tokensTreefolkShamanToken from "../tokens/treefolk-shaman-token.js";
 import _tokensWizardTokenGuff from "../tokens/wizard-token-guff.js";
@@ -1109,6 +1112,7 @@ const shard: CardShard = {
     _poolClutchOfUndeath,
     _poolComfortingCounsel,
     _poolCommandeer,
+    _poolCompleteTheCircuit,
     _poolCompulsion,
     _poolConductElectricity,
     _poolConsecrateConsume,
@@ -1481,6 +1485,7 @@ const shard: CardShard = {
     _poolNightTerrors,
     _poolNightshadeDryad,
     _poolNightveilSprite,
+    _poolNimDeathmantle,
     _poolNimLasher,
     _poolNissasDefeat,
     _poolNiveousWisps,
@@ -1873,6 +1878,7 @@ const shard: CardShard = {
     _tokensShardToken,
     _tokensSkeletonRegeneratingToken,
     _tokensSpiderToken21MenaceReach,
+    _tokensTamiyosNotebookToken,
     _tokensTheVoid,
     _tokensTreefolkShamanToken,
     _tokensWizardTokenGuff,

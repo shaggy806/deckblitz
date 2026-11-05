@@ -52181,8 +52181,7 @@ export class Game {
    * work from whatever zone the source deals damage from (rules 702.80c,
    * 702.90e): the spell, permanent or card as it is, or, given its
    * last-known information, as it last existed (702.80b, 702.90d). Unlike
-   * `sourceHasKeyword`, not only a creature's, nor only on the battlefield
-   * or the stack.
+   * `sourceHasKeyword`, not only on the battlefield or the stack.
    */
   private sourceHasDamageKeyword(
     source: ObjectId,
@@ -52226,14 +52225,14 @@ export class Game {
     keyword: Keyword,
     sourceLastKnown?: LastKnownInfo,
   ): boolean {
-    if (sourceLastKnown !== undefined) {
-      return sourceLastKnown.types.includes("creature") && sourceLastKnown.keywords.includes(keyword);
-    }
+    // Any source's, not only a creature's: rule 702.15b's "a source with
+    // lifelink" and 702.2b's "a source with deathtouch" (Sorin, Vengeful
+    // Bloodlord's lifelink on his own +2, and on it after he's left).
+    if (sourceLastKnown !== undefined) return sourceLastKnown.keywords.includes(keyword);
     const object = this.state.objects[source];
     // A spell's own — printed or granted (Judith's deathtouch and lifelink).
     if (object?.zone === "stack" && object.kind === "card") return this.objHasKeyword(source, keyword);
     if (object === undefined || object.zone !== "battlefield") return false;
-    if (this.creatureDef(source) === null) return false;
     return this.objHasKeyword(source, keyword);
   }
 

@@ -91,6 +91,7 @@ import _poolBladesOfVelisVel from "../pool/blades-of-velis-vel.js";
 import _poolBlechLoafingPest from "../pool/blech-loafing-pest.js";
 import _poolBlessedSpirits from "../pool/blessed-spirits.js";
 import _poolBlessingOfBelzenlok from "../pool/blessing-of-belzenlok.js";
+import _poolBlightHerder from "../pool/blight-herder.js";
 import _poolBlightedSteppe from "../pool/blighted-steppe.js";
 import _poolBlockbuster from "../pool/blockbuster.js";
 import _poolBloodForBones from "../pool/blood-for-bones.js";
@@ -431,6 +432,7 @@ import _poolKorCelebrant from "../pool/kor-celebrant.js";
 import _poolKorChant from "../pool/kor-chant.js";
 import _poolKorSkyfisher from "../pool/kor-skyfisher.js";
 import _poolKorlashHeirToBlackblade from "../pool/korlash-heir-to-blackblade.js";
+import _poolKravensLastHunt from "../pool/kravens-last-hunt.js";
 import _poolKrovikanMist from "../pool/krovikan-mist.js";
 import _poolKukemssaPirates from "../pool/kukemssa-pirates.js";
 import _poolKuldothaRebirth from "../pool/kuldotha-rebirth.js";
@@ -452,6 +454,7 @@ import _poolLhurgoyf from "../pool/lhurgoyf.js";
 import _poolLifeFindsAWay from "../pool/life-finds-a-way.js";
 import _poolLightningBlast from "../pool/lightning-blast.js";
 import _poolLightningBlow from "../pool/lightning-blow.js";
+import _poolLilianaDefiantNecromancer from "../pool/liliana-defiant-necromancer.js";
 import _poolLilianaOfTheVeil from "../pool/liliana-of-the-veil.js";
 import _poolLivingTsunami from "../pool/living-tsunami.js";
 import _poolLolthSpiderQueen from "../pool/lolth-spider-queen.js";
@@ -807,6 +810,7 @@ import _poolTemporaryLockdown from "../pool/temporary-lockdown.js";
 import _poolTeremkoGriffin from "../pool/teremko-griffin.js";
 import _poolTerraStomper from "../pool/terra-stomper.js";
 import _poolTerrainGenerator from "../pool/terrain-generator.js";
+import _poolTheBearsOfLittjara from "../pool/the-bears-of-littjara.js";
 import _poolTheChaseIsOn from "../pool/the-chase-is-on.js";
 import _poolTheCrueltyOfGix from "../pool/the-cruelty-of-gix.js";
 import _poolTheFinalDays from "../pool/the-final-days.js";
@@ -832,6 +836,7 @@ import _poolTimeBeetle from "../pool/time-beetle.js";
 import _poolTimelineInquiry from "../pool/timeline-inquiry.js";
 import _poolTimelyWard from "../pool/timely-ward.js";
 import _poolTolarianSentinel from "../pool/tolarian-sentinel.js";
+import _poolTombOfTheDuskRose from "../pool/tomb-of-the-dusk-rose.js";
 import _poolTorchTheTower from "../pool/torch-the-tower.js";
 import _poolToriDavenantFuryRider from "../pool/tori-davenant-fury-rider.js";
 import _poolToxicStench from "../pool/toxic-stench.js";
@@ -1034,6 +1039,7 @@ const shard: CardShard = {
     _poolBlechLoafingPest,
     _poolBlessedSpirits,
     _poolBlessingOfBelzenlok,
+    _poolBlightHerder,
     _poolBlightedSteppe,
     _poolBlockbuster,
     _poolBloodForBones,
@@ -1374,6 +1380,7 @@ const shard: CardShard = {
     _poolKorChant,
     _poolKorSkyfisher,
     _poolKorlashHeirToBlackblade,
+    _poolKravensLastHunt,
     _poolKrovikanMist,
     _poolKukemssaPirates,
     _poolKuldothaRebirth,
@@ -1395,6 +1402,7 @@ const shard: CardShard = {
     _poolLifeFindsAWay,
     _poolLightningBlast,
     _poolLightningBlow,
+    _poolLilianaDefiantNecromancer,
     _poolLilianaOfTheVeil,
     _poolLivingTsunami,
     _poolLolthSpiderQueen,
@@ -1750,6 +1758,7 @@ const shard: CardShard = {
     _poolTeremkoGriffin,
     _poolTerraStomper,
     _poolTerrainGenerator,
+    _poolTheBearsOfLittjara,
     _poolTheChaseIsOn,
     _poolTheCrueltyOfGix,
     _poolTheFinalDays,
@@ -1775,6 +1784,7 @@ const shard: CardShard = {
     _poolTimelineInquiry,
     _poolTimelyWard,
     _poolTolarianSentinel,
+    _poolTombOfTheDuskRose,
     _poolTorchTheTower,
     _poolToriDavenantFuryRider,
     _poolToxicStench,

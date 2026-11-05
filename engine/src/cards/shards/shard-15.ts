@@ -442,6 +442,7 @@ import _poolLilianasScrounger from "../pool/lilianas-scrounger.js";
 import _poolLimDulTheNecromancer from "../pool/lim-dul-the-necromancer.js";
 import _poolLingeringPhantom from "../pool/lingering-phantom.js";
 import _poolLivelyDirge from "../pool/lively-dirge.js";
+import _poolLivingInferno from "../pool/living-inferno.js";
 import _poolLlanowarLoamspeaker from "../pool/llanowar-loamspeaker.js";
 import _poolLlawanCephalidEmpress from "../pool/llawan-cephalid-empress.js";
 import _poolLochmereSerpent from "../pool/lochmere-serpent.js";
@@ -557,6 +558,7 @@ import _poolPatagiaTiger from "../pool/patagia-tiger.js";
 import _poolPauseForReflection from "../pool/pause-for-reflection.js";
 import _poolPearlOfWisdom from "../pool/pearl-of-wisdom.js";
 import _poolPersonalSanctuary from "../pool/personal-sanctuary.js";
+import _poolPetraSphinx from "../pool/petra-sphinx.js";
 import _poolPetrifyingMeddler from "../pool/petrifying-meddler.js";
 import _poolPhyrexianScriptures from "../pool/phyrexian-scriptures.js";
 import _poolPhyrexianScuta from "../pool/phyrexian-scuta.js";
@@ -1336,6 +1338,7 @@ const shard: CardShard = {
     _poolLimDulTheNecromancer,
     _poolLingeringPhantom,
     _poolLivelyDirge,
+    _poolLivingInferno,
     _poolLlanowarLoamspeaker,
     _poolLlawanCephalidEmpress,
     _poolLochmereSerpent,
@@ -1451,6 +1454,7 @@ const shard: CardShard = {
     _poolPauseForReflection,
     _poolPearlOfWisdom,
     _poolPersonalSanctuary,
+    _poolPetraSphinx,
     _poolPetrifyingMeddler,
     _poolPhyrexianScriptures,
     _poolPhyrexianScuta,

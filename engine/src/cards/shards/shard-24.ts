@@ -539,6 +539,7 @@ import _poolOnTheJob from "../pool/on-the-job.js";
 import _poolOpalCaryatid from "../pool/opal-caryatid.js";
 import _poolOrazcaPuzzleDoor from "../pool/orazca-puzzle-door.js";
 import _poolOrcaSiegeDemon from "../pool/orca-siege-demon.js";
+import _poolOrcishHealer from "../pool/orcish-healer.js";
 import _poolOrcishHellraiser from "../pool/orcish-hellraiser.js";
 import _poolOrderOfYawgmoth from "../pool/order-of-yawgmoth.js";
 import _poolOriginOfCaptainAmerica from "../pool/origin-of-captain-america.js";
@@ -690,6 +691,7 @@ import _poolSilverquillSilencer from "../pool/silverquill-silencer.js";
 import _poolSimicGuildgate from "../pool/simic-guildgate.js";
 import _poolSinkhole from "../pool/sinkhole.js";
 import _poolSirensCall from "../pool/sirens-call.js";
+import _poolSizzlingSoloist from "../pool/sizzling-soloist.js";
 import _poolSkeletonize from "../pool/skeletonize.js";
 import _poolSkinrender from "../pool/skinrender.js";
 import _poolSkirsdagHighPriest from "../pool/skirsdag-high-priest.js";
@@ -1481,6 +1483,7 @@ const shard: CardShard = {
     _poolOpalCaryatid,
     _poolOrazcaPuzzleDoor,
     _poolOrcaSiegeDemon,
+    _poolOrcishHealer,
     _poolOrcishHellraiser,
     _poolOrderOfYawgmoth,
     _poolOriginOfCaptainAmerica,
@@ -1632,6 +1635,7 @@ const shard: CardShard = {
     _poolSimicGuildgate,
     _poolSinkhole,
     _poolSirensCall,
+    _poolSizzlingSoloist,
     _poolSkeletonize,
     _poolSkinrender,
     _poolSkirsdagHighPriest,

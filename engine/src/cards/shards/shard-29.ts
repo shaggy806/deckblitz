@@ -570,6 +570,7 @@ import _poolPriestOfAncientLore from "../pool/priest-of-ancient-lore.js";
 import _poolPrimalCocoon from "../pool/primal-cocoon.js";
 import _poolPrimalWhisperer from "../pool/primal-whisperer.js";
 import _poolPrizedUnicorn from "../pool/prized-unicorn.js";
+import _poolProfaneProcession from "../pool/profane-procession.js";
 import _poolProsperousPartnership from "../pool/prosperous-partnership.js";
 import _poolProudPackRhino from "../pool/proud-pack-rhino.js";
 import _poolProwlingNightstalker from "../pool/prowling-nightstalker.js";
@@ -652,6 +653,7 @@ import _poolSanctumOfShatteredHeights from "../pool/sanctum-of-shattered-heights
 import _poolSandSilos from "../pool/sand-silos.js";
 import _poolSandsteppeMastodon from "../pool/sandsteppe-mastodon.js";
 import _poolSandstormVerge from "../pool/sandstorm-verge.js";
+import _poolSarkhanTheMasterless from "../pool/sarkhan-the-masterless.js";
 import _poolSarythTheVipersFang from "../pool/saryth-the-vipers-fang.js";
 import _poolSavaiTriome from "../pool/savai-triome.js";
 import _poolSavantiRomeroTimesExile from "../pool/savanti-romero-times-exile.js";
@@ -890,6 +892,7 @@ import _poolWeirdedVampire from "../pool/weirded-vampire.js";
 import _poolWharfInfiltrator from "../pool/wharf-infiltrator.js";
 import _poolWhirlwindAdept from "../pool/whirlwind-adept.js";
 import _poolWhiteWidowYelenaBelova from "../pool/white-widow-yelena-belova.js";
+import _poolWicksPatrol from "../pool/wicks-patrol.js";
 import _poolWildRide from "../pool/wild-ride.js";
 import _poolWingsOfTheCosmos from "../pool/wings-of-the-cosmos.js";
 import _poolWinnowing from "../pool/winnowing.js";
@@ -1508,6 +1511,7 @@ const shard: CardShard = {
     _poolPrimalCocoon,
     _poolPrimalWhisperer,
     _poolPrizedUnicorn,
+    _poolProfaneProcession,
     _poolProsperousPartnership,
     _poolProudPackRhino,
     _poolProwlingNightstalker,
@@ -1590,6 +1594,7 @@ const shard: CardShard = {
     _poolSandSilos,
     _poolSandsteppeMastodon,
     _poolSandstormVerge,
+    _poolSarkhanTheMasterless,
     _poolSarythTheVipersFang,
     _poolSavaiTriome,
     _poolSavantiRomeroTimesExile,
@@ -1828,6 +1833,7 @@ const shard: CardShard = {
     _poolWharfInfiltrator,
     _poolWhirlwindAdept,
     _poolWhiteWidowYelenaBelova,
+    _poolWicksPatrol,
     _poolWildRide,
     _poolWingsOfTheCosmos,
     _poolWinnowing,

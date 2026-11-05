@@ -37,6 +37,7 @@ import _poolArchonOfFallingStars from "../pool/archon-of-falling-stars.js";
 import _poolArdozCobblerOfWar from "../pool/ardoz-cobbler-of-war.js";
 import _poolArenaOfTheAncients from "../pool/arena-of-the-ancients.js";
 import _poolArmasaurGuide from "../pool/armasaur-guide.js";
+import _poolAshcloudPhoenix from "../pool/ashcloud-phoenix.js";
 import _poolAshenmoorLiege from "../pool/ashenmoor-liege.js";
 import _poolAshnodsBattleGear from "../pool/ashnods-battle-gear.js";
 import _poolAspiringChampion from "../pool/aspiring-champion.js";
@@ -431,6 +432,7 @@ import _poolKumenaTyrantOfOrazca from "../pool/kumena-tyrant-of-orazca.js";
 import _poolKurosTaken from "../pool/kuros-taken.js";
 import _poolKyokiSanitysEclipse from "../pool/kyoki-sanitys-eclipse.js";
 import _poolKyoshiWarriorGuard from "../pool/kyoshi-warrior-guard.js";
+import _poolKyscuDrake from "../pool/kyscu-drake.js";
 import _poolLabyrinthAdversary from "../pool/labyrinth-adversary.js";
 import _poolLadySun from "../pool/lady-sun.js";
 import _poolLagonnaBandTrailblazer from "../pool/lagonna-band-trailblazer.js";
@@ -580,6 +582,7 @@ import _poolOversoldCemetery from "../pool/oversold-cemetery.js";
 import _poolOverzealousMuscle from "../pool/overzealous-muscle.js";
 import _poolParishBladeTrainee from "../pool/parish-blade-trainee.js";
 import _poolPassionateArchaeologist from "../pool/passionate-archaeologist.js";
+import _poolPathOfTheSchemer from "../pool/path-of-the-schemer.js";
 import _poolPeacekeeper from "../pool/peacekeeper.js";
 import _poolPendantOfProsperity from "../pool/pendant-of-prosperity.js";
 import _poolPerilousVoyage from "../pool/perilous-voyage.js";
@@ -721,6 +724,7 @@ import _poolShuYunTheSilentTempest from "../pool/shu-yun-the-silent-tempest.js";
 import _poolSibsigMuckdraggers from "../pool/sibsig-muckdraggers.js";
 import _poolSimianGrunts from "../pool/simian-grunts.js";
 import _poolSimicCharm from "../pool/simic-charm.js";
+import _poolSkanosDragonheart from "../pool/skanos-dragonheart.js";
 import _poolSkitterOfLizards from "../pool/skitter-of-lizards.js";
 import _poolSkittishKavu from "../pool/skittish-kavu.js";
 import _poolSkullStorm from "../pool/skull-storm.js";
@@ -739,6 +743,7 @@ import _poolSnowhornRider from "../pool/snowhorn-rider.js";
 import _poolSoaringLightbringer from "../pool/soaring-lightbringer.js";
 import _poolSokkasSwordTraining from "../pool/sokkas-sword-training.js";
 import _poolSoldOut from "../pool/sold-out.js";
+import _poolSorinVengefulBloodlord from "../pool/sorin-vengeful-bloodlord.js";
 import _poolSoulGuideGryff from "../pool/soul-guide-gryff.js";
 import _poolSoulOfMigration from "../pool/soul-of-migration.js";
 import _poolSoulSnare from "../pool/soul-snare.js";
@@ -1004,6 +1009,7 @@ const shard: CardShard = {
     _poolArdozCobblerOfWar,
     _poolArenaOfTheAncients,
     _poolArmasaurGuide,
+    _poolAshcloudPhoenix,
     _poolAshenmoorLiege,
     _poolAshnodsBattleGear,
     _poolAspiringChampion,
@@ -1398,6 +1404,7 @@ const shard: CardShard = {
     _poolKurosTaken,
     _poolKyokiSanitysEclipse,
     _poolKyoshiWarriorGuard,
+    _poolKyscuDrake,
     _poolLabyrinthAdversary,
     _poolLadySun,
     _poolLagonnaBandTrailblazer,
@@ -1547,6 +1554,7 @@ const shard: CardShard = {
     _poolOverzealousMuscle,
     _poolParishBladeTrainee,
     _poolPassionateArchaeologist,
+    _poolPathOfTheSchemer,
     _poolPeacekeeper,
     _poolPendantOfProsperity,
     _poolPerilousVoyage,
@@ -1688,6 +1696,7 @@ const shard: CardShard = {
     _poolSibsigMuckdraggers,
     _poolSimianGrunts,
     _poolSimicCharm,
+    _poolSkanosDragonheart,
     _poolSkitterOfLizards,
     _poolSkittishKavu,
     _poolSkullStorm,
@@ -1706,6 +1715,7 @@ const shard: CardShard = {
     _poolSoaringLightbringer,
     _poolSokkasSwordTraining,
     _poolSoldOut,
+    _poolSorinVengefulBloodlord,
     _poolSoulGuideGryff,
     _poolSoulOfMigration,
     _poolSoulSnare,

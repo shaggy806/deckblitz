@@ -48,6 +48,7 @@ import _poolAwakenTheBear from "../pool/awaken-the-bear.js";
 import _poolAwakenTheSleeper from "../pool/awaken-the-sleeper.js";
 import _poolAzureDrake from "../pool/azure-drake.js";
 import _poolBackdraft from "../pool/backdraft.js";
+import _poolBackstreetBruiser from "../pool/backstreet-bruiser.js";
 import _poolBambooGroveArcher from "../pool/bamboo-grove-archer.js";
 import _poolBanesInvoker from "../pool/banes-invoker.js";
 import _poolBantCharm from "../pool/bant-charm.js";
@@ -71,6 +72,7 @@ import _poolBlackMagesRod from "../pool/black-mages-rod.js";
 import _poolBlacklanceParagon from "../pool/blacklance-paragon.js";
 import _poolBladebackSliver from "../pool/bladeback-sliver.js";
 import _poolBlanchwoodProwler from "../pool/blanchwood-prowler.js";
+import _poolBlexVexingPest from "../pool/blex-vexing-pest.js";
 import _poolBlightTitan from "../pool/blight-titan.js";
 import _poolBloodHypnotist from "../pool/blood-hypnotist.js";
 import _poolBloodtracker from "../pool/bloodtracker.js";
@@ -338,6 +340,7 @@ import _poolHeroesOfTheRevel from "../pool/heroes-of-the-revel.js";
 import _poolHeroesRemembered from "../pool/heroes-remembered.js";
 import _poolHeroicReinforcements from "../pool/heroic-reinforcements.js";
 import _poolHighlandGiant from "../pool/highland-giant.js";
+import _poolHolyAvenger from "../pool/holy-avenger.js";
 import _poolHomaridShaman from "../pool/homarid-shaman.js";
 import _poolHonorableScout from "../pool/honorable-scout.js";
 import _poolHordelingOutburst from "../pool/hordeling-outburst.js";
@@ -528,6 +531,7 @@ import _poolNornsWellspring from "../pool/norns-wellspring.js";
 import _poolNorwoodPriestess from "../pool/norwood-priestess.js";
 import _poolNotDeadAfterAll from "../pool/not-dead-after-all.js";
 import _poolNotOfThisWorld from "../pool/not-of-this-world.js";
+import _poolNumaJoragaChieftain from "../pool/numa-joraga-chieftain.js";
 import _poolNyxbornWolf from "../pool/nyxborn-wolf.js";
 import _poolOgnis from "../pool/ognis.js";
 import _poolOgreTaskmaster from "../pool/ogre-taskmaster.js";
@@ -711,6 +715,7 @@ import _poolSleepersGuile from "../pool/sleepers-guile.js";
 import _poolSliceFromTheShadows from "../pool/slice-from-the-shadows.js";
 import _poolSliversmith from "../pool/sliversmith.js";
 import _poolSlogurkTheOverslime from "../pool/slogurk-the-overslime.js";
+import _poolSlumberingTora from "../pool/slumbering-tora.js";
 import _poolSmolderingSpires from "../pool/smoldering-spires.js";
 import _poolSmugglersBuggy from "../pool/smugglers-buggy.js";
 import _poolSnowCoveredSwamp from "../pool/snow-covered-swamp.js";
@@ -980,6 +985,7 @@ const shard: CardShard = {
     _poolAwakenTheSleeper,
     _poolAzureDrake,
     _poolBackdraft,
+    _poolBackstreetBruiser,
     _poolBambooGroveArcher,
     _poolBanesInvoker,
     _poolBantCharm,
@@ -1003,6 +1009,7 @@ const shard: CardShard = {
     _poolBlacklanceParagon,
     _poolBladebackSliver,
     _poolBlanchwoodProwler,
+    _poolBlexVexingPest,
     _poolBlightTitan,
     _poolBloodHypnotist,
     _poolBloodtracker,
@@ -1270,6 +1277,7 @@ const shard: CardShard = {
     _poolHeroesRemembered,
     _poolHeroicReinforcements,
     _poolHighlandGiant,
+    _poolHolyAvenger,
     _poolHomaridShaman,
     _poolHonorableScout,
     _poolHordelingOutburst,
@@ -1460,6 +1468,7 @@ const shard: CardShard = {
     _poolNorwoodPriestess,
     _poolNotDeadAfterAll,
     _poolNotOfThisWorld,
+    _poolNumaJoragaChieftain,
     _poolNyxbornWolf,
     _poolOgnis,
     _poolOgreTaskmaster,
@@ -1643,6 +1652,7 @@ const shard: CardShard = {
     _poolSliceFromTheShadows,
     _poolSliversmith,
     _poolSlogurkTheOverslime,
+    _poolSlumberingTora,
     _poolSmolderingSpires,
     _poolSmugglersBuggy,
     _poolSnowCoveredSwamp,

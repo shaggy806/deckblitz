@@ -208,6 +208,7 @@ import _poolEmbolden from "../pool/embolden.js";
 import _poolEmergencyEject from "../pool/emergency-eject.js";
 import _poolEmeriaAngel from "../pool/emeria-angel.js";
 import _poolEmeritusOfIdeation from "../pool/emeritus-of-ideation.js";
+import _poolEmperorOfBones from "../pool/emperor-of-bones.js";
 import _poolEmrakulsInfluence from "../pool/emrakuls-influence.js";
 import _poolEndHostilities from "../pool/end-hostilities.js";
 import _poolEndlessOne from "../pool/endless-one.js";
@@ -591,6 +592,7 @@ import _poolSatyrHoplite from "../pool/satyr-hoplite.js";
 import _poolScamperingSurveyor from "../pool/scampering-surveyor.js";
 import _poolScavengedBlade from "../pool/scavenged-blade.js";
 import _poolScepterOfEmpires from "../pool/scepter-of-empires.js";
+import _poolScorchingLava from "../pool/scorching-lava.js";
 import _poolScrapTrawler from "../pool/scrap-trawler.js";
 import _poolScytheSpecter from "../pool/scythe-specter.js";
 import _poolSeaGate from "../pool/sea-gate.js";
@@ -838,6 +840,7 @@ import _poolYoungWeiRecruits from "../pool/young-wei-recruits.js";
 import _poolZaraRenegadeRecruiter from "../pool/zara-renegade-recruiter.js";
 import _poolZhalfirinLancer from "../pool/zhalfirin-lancer.js";
 import _tokens44RedBirdToken from "../tokens/4-4-red-bird-token.js";
+import _tokensBeauToken from "../tokens/beau-token.js";
 import _tokensBirdToken from "../tokens/bird-token.js";
 import _tokensBoo from "../tokens/boo.js";
 import _tokensCamaridToken from "../tokens/camarid-token.js";
@@ -1069,6 +1072,7 @@ const shard: CardShard = {
     _poolEmergencyEject,
     _poolEmeriaAngel,
     _poolEmeritusOfIdeation,
+    _poolEmperorOfBones,
     _poolEmrakulsInfluence,
     _poolEndHostilities,
     _poolEndlessOne,
@@ -1452,6 +1456,7 @@ const shard: CardShard = {
     _poolScamperingSurveyor,
     _poolScavengedBlade,
     _poolScepterOfEmpires,
+    _poolScorchingLava,
     _poolScrapTrawler,
     _poolScytheSpecter,
     _poolSeaGate,
@@ -1701,6 +1706,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokens44RedBirdToken,
+    _tokensBeauToken,
     _tokensBirdToken,
     _tokensBoo,
     _tokensCamaridToken,

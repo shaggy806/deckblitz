@@ -181,6 +181,7 @@ import _poolDeathbloomGardener from "../pool/deathbloom-gardener.js";
 import _poolDeathcapGlade from "../pool/deathcap-glade.js";
 import _poolDeathsHeadBuzzard from "../pool/deaths-head-buzzard.js";
 import _poolDeepwoodElder from "../pool/deepwood-elder.js";
+import _poolDeliverUntoEvil from "../pool/deliver-unto-evil.js";
 import _poolDelugeVirtuoso from "../pool/deluge-virtuoso.js";
 import _poolDemonOfWailingAgonies from "../pool/demon-of-wailing-agonies.js";
 import _poolDemonicAppetite from "../pool/demonic-appetite.js";
@@ -214,6 +215,7 @@ import _poolDustToDust from "../pool/dust-to-dust.js";
 import _poolDwarvenGrunt from "../pool/dwarven-grunt.js";
 import _poolEarthRift from "../pool/earth-rift.js";
 import _poolEaterOfTheDead from "../pool/eater-of-the-dead.js";
+import _poolEchoChamber from "../pool/echo-chamber.js";
 import _poolEidolonOfObstruction from "../pool/eidolon-of-obstruction.js";
 import _poolEidolonOfRhetoric from "../pool/eidolon-of-rhetoric.js";
 import _poolEject from "../pool/eject.js";
@@ -810,6 +812,7 @@ import _poolThievingSprite from "../pool/thieving-sprite.js";
 import _poolThingInTheIce from "../pool/thing-in-the-ice.js";
 import _poolThornOfTheBlackRose from "../pool/thorn-of-the-black-rose.js";
 import _poolThornling from "../pool/thornling.js";
+import _poolThoughtHemorrhage from "../pool/thought-hemorrhage.js";
 import _poolThrabenCharm from "../pool/thraben-charm.js";
 import _poolThrillOfPossibility from "../pool/thrill-of-possibility.js";
 import _poolThroneOfDeath from "../pool/throne-of-death.js";
@@ -1135,6 +1138,7 @@ const shard: CardShard = {
     _poolDeathcapGlade,
     _poolDeathsHeadBuzzard,
     _poolDeepwoodElder,
+    _poolDeliverUntoEvil,
     _poolDelugeVirtuoso,
     _poolDemonOfWailingAgonies,
     _poolDemonicAppetite,
@@ -1168,6 +1172,7 @@ const shard: CardShard = {
     _poolDwarvenGrunt,
     _poolEarthRift,
     _poolEaterOfTheDead,
+    _poolEchoChamber,
     _poolEidolonOfObstruction,
     _poolEidolonOfRhetoric,
     _poolEject,
@@ -1764,6 +1769,7 @@ const shard: CardShard = {
     _poolThingInTheIce,
     _poolThornOfTheBlackRose,
     _poolThornling,
+    _poolThoughtHemorrhage,
     _poolThrabenCharm,
     _poolThrillOfPossibility,
     _poolThroneOfDeath,

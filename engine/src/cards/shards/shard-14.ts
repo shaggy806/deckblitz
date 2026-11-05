@@ -538,6 +538,7 @@ import _poolMischievousSneakling from "../pool/mischievous-sneakling.js";
 import _poolMistformMask from "../pool/mistform-mask.js";
 import _poolMistformWall from "../pool/mistform-wall.js";
 import _poolMistwalker from "../pool/mistwalker.js";
+import _poolMizzixReplicaRider from "../pool/mizzix-replica-rider.js";
 import _poolMnemonicSphere from "../pool/mnemonic-sphere.js";
 import _poolMoggJailer from "../pool/mogg-jailer.js";
 import _poolMoldgrafMillipede from "../pool/moldgraf-millipede.js";
@@ -611,6 +612,7 @@ import _poolPlaneswalkersMischief from "../pool/planeswalkers-mischief.js";
 import _poolPlasmaBolt from "../pool/plasma-bolt.js";
 import _poolPlumesOfPeace from "../pool/plumes-of-peace.js";
 import _poolPredictivePreparations from "../pool/predictive-preparations.js";
+import _poolPrestonGarveyMinuteman from "../pool/preston-garvey-minuteman.js";
 import _poolPrimeSpeakerVannifar from "../pool/prime-speaker-vannifar.js";
 import _poolPrimevalBounty from "../pool/primeval-bounty.js";
 import _poolPrismite from "../pool/prismite.js";
@@ -636,6 +638,7 @@ import _poolRabbleRousing from "../pool/rabble-rousing.js";
 import _poolRadioactiveMan from "../pool/radioactive-man.js";
 import _poolRagDealer from "../pool/rag-dealer.js";
 import _poolRakdosCharm from "../pool/rakdos-charm.js";
+import _poolRampagingAetherhood from "../pool/rampaging-aetherhood.js";
 import _poolRancidRats from "../pool/rancid-rats.js";
 import _poolRayOfEnfeeblement from "../pool/ray-of-enfeeblement.js";
 import _poolRecklessAbandon from "../pool/reckless-abandon.js";
@@ -1484,6 +1487,7 @@ const shard: CardShard = {
     _poolMistformMask,
     _poolMistformWall,
     _poolMistwalker,
+    _poolMizzixReplicaRider,
     _poolMnemonicSphere,
     _poolMoggJailer,
     _poolMoldgrafMillipede,
@@ -1557,6 +1561,7 @@ const shard: CardShard = {
     _poolPlasmaBolt,
     _poolPlumesOfPeace,
     _poolPredictivePreparations,
+    _poolPrestonGarveyMinuteman,
     _poolPrimeSpeakerVannifar,
     _poolPrimevalBounty,
     _poolPrismite,
@@ -1582,6 +1587,7 @@ const shard: CardShard = {
     _poolRadioactiveMan,
     _poolRagDealer,
     _poolRakdosCharm,
+    _poolRampagingAetherhood,
     _poolRancidRats,
     _poolRayOfEnfeeblement,
     _poolRecklessAbandon,

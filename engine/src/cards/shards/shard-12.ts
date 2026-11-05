@@ -106,6 +106,7 @@ import _poolBraidsConjurerAdept from "../pool/braids-conjurer-adept.js";
 import _poolBrainwash from "../pool/brainwash.js";
 import _poolBravado from "../pool/bravado.js";
 import _poolBreathOfFire from "../pool/breath-of-fire.js";
+import _poolBreathOfFury from "../pool/breath-of-fury.js";
 import _poolBridesGown from "../pool/brides-gown.js";
 import _poolBrightglassGearhulk from "../pool/brightglass-gearhulk.js";
 import _poolBristlebaneBattler from "../pool/bristlebane-battler.js";
@@ -699,6 +700,7 @@ import _poolSetessanOathsworn from "../pool/setessan-oathsworn.js";
 import _poolSettlementBlacksmith from "../pool/settlement-blacksmith.js";
 import _poolSevenTailMentor from "../pool/seven-tail-mentor.js";
 import _poolShacklegeist from "../pool/shacklegeist.js";
+import _poolShadowPuppeteers from "../pool/shadow-puppeteers.js";
 import _poolShardOfTheNightbringer from "../pool/shard-of-the-nightbringer.js";
 import _poolShardmagesRescue from "../pool/shardmages-rescue.js";
 import _poolShatteredSeraph from "../pool/shattered-seraph.js";
@@ -754,6 +756,7 @@ import _poolSpellSnare from "../pool/spell-snare.js";
 import _poolSpellbook from "../pool/spellbook.js";
 import _poolSpellgyre from "../pool/spellgyre.js";
 import _poolSpiderFood from "../pool/spider-food.js";
+import _poolSpiderVerse from "../pool/spider-verse.js";
 import _poolSpireMangler from "../pool/spire-mangler.js";
 import _poolSpitefulReturned from "../pool/spiteful-returned.js";
 import _poolSplitTheParty from "../pool/split-the-party.js";
@@ -782,6 +785,7 @@ import _poolSunbakedCanyon from "../pool/sunbaked-canyon.js";
 import _poolSunscapeFamiliar from "../pool/sunscape-familiar.js";
 import _poolSunstarLightsmith from "../pool/sunstar-lightsmith.js";
 import _poolSupernaturalStamina from "../pool/supernatural-stamina.js";
+import _poolSuppressionRay from "../pool/suppression-ray.js";
 import _poolSurrakTheHuntCaller from "../pool/surrak-the-hunt-caller.js";
 import _poolSurveyorsScope from "../pool/surveyors-scope.js";
 import _poolSusurianVoidborn from "../pool/susurian-voidborn.js";
@@ -1043,6 +1047,7 @@ const shard: CardShard = {
     _poolBrainwash,
     _poolBravado,
     _poolBreathOfFire,
+    _poolBreathOfFury,
     _poolBridesGown,
     _poolBrightglassGearhulk,
     _poolBristlebaneBattler,
@@ -1636,6 +1641,7 @@ const shard: CardShard = {
     _poolSettlementBlacksmith,
     _poolSevenTailMentor,
     _poolShacklegeist,
+    _poolShadowPuppeteers,
     _poolShardOfTheNightbringer,
     _poolShardmagesRescue,
     _poolShatteredSeraph,
@@ -1691,6 +1697,7 @@ const shard: CardShard = {
     _poolSpellbook,
     _poolSpellgyre,
     _poolSpiderFood,
+    _poolSpiderVerse,
     _poolSpireMangler,
     _poolSpitefulReturned,
     _poolSplitTheParty,
@@ -1719,6 +1726,7 @@ const shard: CardShard = {
     _poolSunscapeFamiliar,
     _poolSunstarLightsmith,
     _poolSupernaturalStamina,
+    _poolSuppressionRay,
     _poolSurrakTheHuntCaller,
     _poolSurveyorsScope,
     _poolSusurianVoidborn,

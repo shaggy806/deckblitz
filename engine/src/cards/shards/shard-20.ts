@@ -239,6 +239,7 @@ import _poolDoraMilajeElite from "../pool/dora-milaje-elite.js";
 import _poolDoubleCleave from "../pool/double-cleave.js";
 import _poolDoublingSeason from "../pool/doubling-season.js";
 import _poolDraconicDestiny from "../pool/draconic-destiny.js";
+import _poolDragonManReformedRobot from "../pool/dragon-man-reformed-robot.js";
 import _poolDragoonsLance from "../pool/dragoons-lance.js";
 import _poolDramatistsPuppet from "../pool/dramatists-puppet.js";
 import _poolDreadhordeArcanist from "../pool/dreadhorde-arcanist.js";
@@ -293,6 +294,7 @@ import _poolFerocification from "../pool/ferocification.js";
 import _poolFeywildTrickster from "../pool/feywild-trickster.js";
 import _poolFierceWitchstalker from "../pool/fierce-witchstalker.js";
 import _poolFieryConfluence from "../pool/fiery-confluence.js";
+import _poolFinalParting from "../pool/final-parting.js";
 import _poolFireNationAmbushers from "../pool/fire-nation-ambushers.js";
 import _poolFiresOfUndeath from "../pool/fires-of-undeath.js";
 import _poolFirjasRetribution from "../pool/firjas-retribution.js";
@@ -422,6 +424,7 @@ import _poolImmersturmSkullcairn from "../pool/immersturm-skullcairn.js";
 import _poolImpulse from "../pool/impulse.js";
 import _poolIncorrigibleYouths from "../pool/incorrigible-youths.js";
 import _poolInfernalGenesis from "../pool/infernal-genesis.js";
+import _poolIngeniousProdigy from "../pool/ingenious-prodigy.js";
 import _poolIngeniousThief from "../pool/ingenious-thief.js";
 import _poolInnerFlameAcolyte from "../pool/inner-flame-acolyte.js";
 import _poolInnovativeCommons from "../pool/innovative-commons.js";
@@ -913,6 +916,7 @@ import _poolUrzasTome from "../pool/urzas-tome.js";
 import _poolUtromMonitor from "../pool/utrom-monitor.js";
 import _poolValentinaAllegraDeFontaine from "../pool/valentina-allegra-de-fontaine.js";
 import _poolVancesBlastingCannons from "../pool/vances-blasting-cannons.js";
+import _poolVault112SadisticSimulation from "../pool/vault-112-sadistic-simulation.js";
 import _poolVeloheartBike from "../pool/veloheart-bike.js";
 import _poolVengefulFirebrand from "../pool/vengeful-firebrand.js";
 import _poolVenusTornBetweenWorlds from "../pool/venus-torn-between-worlds.js";
@@ -1233,6 +1237,7 @@ const shard: CardShard = {
     _poolDoubleCleave,
     _poolDoublingSeason,
     _poolDraconicDestiny,
+    _poolDragonManReformedRobot,
     _poolDragoonsLance,
     _poolDramatistsPuppet,
     _poolDreadhordeArcanist,
@@ -1287,6 +1292,7 @@ const shard: CardShard = {
     _poolFeywildTrickster,
     _poolFierceWitchstalker,
     _poolFieryConfluence,
+    _poolFinalParting,
     _poolFireNationAmbushers,
     _poolFiresOfUndeath,
     _poolFirjasRetribution,
@@ -1416,6 +1422,7 @@ const shard: CardShard = {
     _poolImpulse,
     _poolIncorrigibleYouths,
     _poolInfernalGenesis,
+    _poolIngeniousProdigy,
     _poolIngeniousThief,
     _poolInnerFlameAcolyte,
     _poolInnovativeCommons,
@@ -1907,6 +1914,7 @@ const shard: CardShard = {
     _poolUtromMonitor,
     _poolValentinaAllegraDeFontaine,
     _poolVancesBlastingCannons,
+    _poolVault112SadisticSimulation,
     _poolVeloheartBike,
     _poolVengefulFirebrand,
     _poolVenusTornBetweenWorlds,

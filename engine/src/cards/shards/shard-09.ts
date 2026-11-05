@@ -109,6 +109,7 @@ import _poolBrokenFall from "../pool/broken-fall.js";
 import _poolBroodhatchNantuko from "../pool/broodhatch-nantuko.js";
 import _poolBrothersOfFire from "../pool/brothers-of-fire.js";
 import _poolBrudicladTelchorEngineer from "../pool/brudiclad-telchor-engineer.js";
+import _poolBrunaLightOfAlabaster from "../pool/bruna-light-of-alabaster.js";
 import _poolBrunaTheFadingLight from "../pool/bruna-the-fading-light.js";
 import _poolBruseTarlRovingRancher from "../pool/bruse-tarl-roving-rancher.js";
 import _poolBurdenOfGuilt from "../pool/burden-of-guilt.js";
@@ -415,6 +416,7 @@ import _poolJackedRabbit from "../pool/jacked-rabbit.js";
 import _poolJalumTome from "../pool/jalum-tome.js";
 import _poolJasmineDragonTeaShop from "../pool/jasmine-dragon-tea-shop.js";
 import _poolJasonBrightGlowingProphet from "../pool/jason-bright-glowing-prophet.js";
+import _poolJayaBallardTaskMage from "../pool/jaya-ballard-task-mage.js";
 import _poolJennyGeneratedAnomaly from "../pool/jenny-generated-anomaly.js";
 import _poolJeskaWarriorAdept from "../pool/jeska-warrior-adept.js";
 import _poolJeskaiAscendancy from "../pool/jeskai-ascendancy.js";
@@ -462,6 +464,7 @@ import _poolLieInWait from "../pool/lie-in-wait.js";
 import _poolLifebloodHydra from "../pool/lifeblood-hydra.js";
 import _poolLightningArmyOfOne from "../pool/lightning-army-of-one.js";
 import _poolLilianaDeathWielder from "../pool/liliana-death-wielder.js";
+import _poolLilianaHereticalHealer from "../pool/liliana-heretical-healer.js";
 import _poolLivingTerrain from "../pool/living-terrain.js";
 import _poolLivingTotem from "../pool/living-totem.js";
 import _poolLocthwainLancer from "../pool/locthwain-lancer.js";
@@ -536,6 +539,7 @@ import _poolNightsWhisper from "../pool/nights-whisper.js";
 import _poolNightsquadCommando from "../pool/nightsquad-commando.js";
 import _poolNinjaPizza from "../pool/ninja-pizza.js";
 import _poolNissaStewardOfElements from "../pool/nissa-steward-of-elements.js";
+import _poolNissasJudgment from "../pool/nissas-judgment.js";
 import _poolNobleSteeds from "../pool/noble-steeds.js";
 import _poolNorikaYamazakiThePoet from "../pool/norika-yamazaki-the-poet.js";
 import _poolNornsChoirmaster from "../pool/norns-choirmaster.js";
@@ -1083,6 +1087,7 @@ const shard: CardShard = {
     _poolBroodhatchNantuko,
     _poolBrothersOfFire,
     _poolBrudicladTelchorEngineer,
+    _poolBrunaLightOfAlabaster,
     _poolBrunaTheFadingLight,
     _poolBruseTarlRovingRancher,
     _poolBurdenOfGuilt,
@@ -1389,6 +1394,7 @@ const shard: CardShard = {
     _poolJalumTome,
     _poolJasmineDragonTeaShop,
     _poolJasonBrightGlowingProphet,
+    _poolJayaBallardTaskMage,
     _poolJennyGeneratedAnomaly,
     _poolJeskaWarriorAdept,
     _poolJeskaiAscendancy,
@@ -1436,6 +1442,7 @@ const shard: CardShard = {
     _poolLifebloodHydra,
     _poolLightningArmyOfOne,
     _poolLilianaDeathWielder,
+    _poolLilianaHereticalHealer,
     _poolLivingTerrain,
     _poolLivingTotem,
     _poolLocthwainLancer,
@@ -1510,6 +1517,7 @@ const shard: CardShard = {
     _poolNightsquadCommando,
     _poolNinjaPizza,
     _poolNissaStewardOfElements,
+    _poolNissasJudgment,
     _poolNobleSteeds,
     _poolNorikaYamazakiThePoet,
     _poolNornsChoirmaster,

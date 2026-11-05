@@ -335,6 +335,7 @@ import _poolGrowthChamberGuardian from "../pool/growth-chamber-guardian.js";
 import _poolGurmagSwiftwing from "../pool/gurmag-swiftwing.js";
 import _poolHaazdaShieldMate from "../pool/haazda-shield-mate.js";
 import _poolHakbalOfTheSurgingSoul from "../pool/hakbal-of-the-surging-soul.js";
+import _poolHalsinEmeraldArchdruid from "../pool/halsin-emerald-archdruid.js";
 import _poolHapatraTheDesertFrost from "../pool/hapatra-the-desert-frost.js";
 import _poolHardyVeteran from "../pool/hardy-veteran.js";
 import _poolHareRaising from "../pool/hare-raising.js";
@@ -352,6 +353,7 @@ import _poolHighbornVampire from "../pool/highborn-vampire.js";
 import _poolHighwayRobber from "../pool/highway-robber.js";
 import _poolHindervines from "../pool/hindervines.js";
 import _poolHiredPoisoner from "../pool/hired-poisoner.js";
+import _poolHisokaMinamoSensei from "../pool/hisoka-minamo-sensei.js";
 import _poolHivisOfTheScale from "../pool/hivis-of-the-scale.js";
 import _poolHobgoblinBanditLord from "../pool/hobgoblin-bandit-lord.js";
 import _poolHolyArmor from "../pool/holy-armor.js";
@@ -384,6 +386,7 @@ import _poolIntervention from "../pool/intervention.js";
 import _poolIntoTheFire from "../pool/into-the-fire.js";
 import _poolIntrepidRabbit from "../pool/intrepid-rabbit.js";
 import _poolInvisibleWomanSueStorm from "../pool/invisible-woman-sue-storm.js";
+import _poolInvokeJustice from "../pool/invoke-justice.js";
 import _poolInvulnerability from "../pool/invulnerability.js";
 import _poolIridescentVinelasher from "../pool/iridescent-vinelasher.js";
 import _poolIrohsDemonstration from "../pool/irohs-demonstration.js";
@@ -774,6 +777,7 @@ import _poolSteelshaperApprentice from "../pool/steelshaper-apprentice.js";
 import _poolStickyFingers from "../pool/sticky-fingers.js";
 import _poolStonehewerGiant from "../pool/stonehewer-giant.js";
 import _poolStonybrookBanneret from "../pool/stonybrook-banneret.js";
+import _poolStormOfSaruman from "../pool/storm-of-saruman.js";
 import _poolStormSculptor from "../pool/storm-sculptor.js";
 import _poolStormclawRager from "../pool/stormclaw-rager.js";
 import _poolStormwildCapridor from "../pool/stormwild-capridor.js";
@@ -1295,6 +1299,7 @@ const shard: CardShard = {
     _poolGurmagSwiftwing,
     _poolHaazdaShieldMate,
     _poolHakbalOfTheSurgingSoul,
+    _poolHalsinEmeraldArchdruid,
     _poolHapatraTheDesertFrost,
     _poolHardyVeteran,
     _poolHareRaising,
@@ -1312,6 +1317,7 @@ const shard: CardShard = {
     _poolHighwayRobber,
     _poolHindervines,
     _poolHiredPoisoner,
+    _poolHisokaMinamoSensei,
     _poolHivisOfTheScale,
     _poolHobgoblinBanditLord,
     _poolHolyArmor,
@@ -1344,6 +1350,7 @@ const shard: CardShard = {
     _poolIntoTheFire,
     _poolIntrepidRabbit,
     _poolInvisibleWomanSueStorm,
+    _poolInvokeJustice,
     _poolInvulnerability,
     _poolIridescentVinelasher,
     _poolIrohsDemonstration,
@@ -1734,6 +1741,7 @@ const shard: CardShard = {
     _poolStickyFingers,
     _poolStonehewerGiant,
     _poolStonybrookBanneret,
+    _poolStormOfSaruman,
     _poolStormSculptor,
     _poolStormclawRager,
     _poolStormwildCapridor,
