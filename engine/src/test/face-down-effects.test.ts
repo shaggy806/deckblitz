@@ -160,6 +160,34 @@ describe("entering face down by an effect", () => {
     expect(hand(game).length).toBe(before - 2);
     expect(graveyard(game)).not.toContain(bolt);
   });
+
+  // `return-from-graveyard`'s `enterAs.faceDown` went unread on both of its
+  // battlefield paths (batch 260): the cards entered face up.
+  it.each([
+    ["from your graveyard", {}],
+    ["from each graveyard, under their owners", { from: "each-graveyard" as const }],
+  ])("a return %s puts the cards face down when its enterAs says so", (_label, from) => {
+    const { game } = table();
+    const bears = spawn(game, "Grizzly Bears");
+    destroy(game, bears);
+    settle(game);
+    game.debugApplyEffect(
+      A,
+      {
+        kind: "return-from-graveyard",
+        filter: { types: ["creature"] },
+        destination: "battlefield",
+        count: "all",
+        ...from,
+        enterAs: { faceDown: "2/2 Cyberman artifact creature" },
+      },
+      [],
+    );
+    settle(game);
+    expect(zone(game, bears)).toBe("battlefield");
+    expect(game.state.objects[bears].faceDown).toMatchObject({ kind: "effect", as: "2/2 Cyberman artifact creature" });
+    expect(types(game, bears)).toEqual(["artifact", "creature"]);
+  });
 });
 
 describe("from another player's library onto the battlefield face down (Cybership's shape)", () => {

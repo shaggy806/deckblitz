@@ -50494,6 +50494,7 @@ export class Game {
               tapped: enterTapped,
               ...(under !== undefined ? { under } : {}),
               ...enterTypesEntry(enterAs),
+              ...faceDownEntry(enterAs),
             });
             const entered = this.state.objects[id];
             if (moved && under !== undefined && entered?.zone === "battlefield" && entered.controller !== under) {
@@ -50960,7 +50961,7 @@ export class Game {
     tapped = false,
   ): void {
     const under = to !== undefined && to !== this.state.objects[id]?.owner ? to : undefined;
-    if (!this.moveObject(id, "battlefield", { ...(tapped ? { tapped } : {}), ...(under !== undefined ? { under } : {}), ...enterTypesEntry(enterAs) })) return;
+    if (!this.moveObject(id, "battlefield", { ...(tapped ? { tapped } : {}), ...(under !== undefined ? { under } : {}), ...enterTypesEntry(enterAs), ...faceDownEntry(enterAs) })) return;
     // Kept there by a control effect, as a reanimation "under your control"
     // is (see `putOntoBattlefieldByEffect`).
     const entered = this.state.objects[id];
