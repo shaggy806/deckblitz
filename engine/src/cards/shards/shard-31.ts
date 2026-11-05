@@ -346,6 +346,7 @@ import _poolGiftOfGrowth from "../pool/gift-of-growth.js";
 import _poolGimlisFury from "../pool/gimlis-fury.js";
 import _poolGixianSkullflayer from "../pool/gixian-skullflayer.js";
 import _poolGlisteningDawn from "../pool/glistening-dawn.js";
+import _poolGlorfindelDauntlessRescuer from "../pool/glorfindel-dauntless-rescuer.js";
 import _poolGnarlbarkElm from "../pool/gnarlbark-elm.js";
 import _poolGnarlrootTrapper from "../pool/gnarlroot-trapper.js";
 import _poolGnathosaur from "../pool/gnathosaur.js";
@@ -729,6 +730,7 @@ import _poolSamuraisKatana from "../pool/samurais-katana.js";
 import _poolSanctifiedCharge from "../pool/sanctified-charge.js";
 import _poolSandbarSerpent from "../pool/sandbar-serpent.js";
 import _poolSanguinaryPriest from "../pool/sanguinary-priest.js";
+import _poolSanityGrinding from "../pool/sanity-grinding.js";
 import _poolSapseepForest from "../pool/sapseep-forest.js";
 import _poolSawtoothOgre from "../pool/sawtooth-ogre.js";
 import _poolSazhKatzroy from "../pool/sazh-katzroy.js";
@@ -857,6 +859,7 @@ import _poolTerrapactIntimidator from "../pool/terrapact-intimidator.js";
 import _poolTerrorBallista from "../pool/terror-ballista.js";
 import _poolTetheredGriffin from "../pool/tethered-griffin.js";
 import _poolThalakosDreamsower from "../pool/thalakos-dreamsower.js";
+import _poolThanosTheMadTitan from "../pool/thanos-the-mad-titan.js";
 import _poolThaumaticCompass from "../pool/thaumatic-compass.js";
 import _poolTheApprenticesFolly from "../pool/the-apprentices-folly.js";
 import _poolTheBattleOfBywater from "../pool/the-battle-of-bywater.js";
@@ -1356,6 +1359,7 @@ const shard: CardShard = {
     _poolGimlisFury,
     _poolGixianSkullflayer,
     _poolGlisteningDawn,
+    _poolGlorfindelDauntlessRescuer,
     _poolGnarlbarkElm,
     _poolGnarlrootTrapper,
     _poolGnathosaur,
@@ -1739,6 +1743,7 @@ const shard: CardShard = {
     _poolSanctifiedCharge,
     _poolSandbarSerpent,
     _poolSanguinaryPriest,
+    _poolSanityGrinding,
     _poolSapseepForest,
     _poolSawtoothOgre,
     _poolSazhKatzroy,
@@ -1867,6 +1872,7 @@ const shard: CardShard = {
     _poolTerrorBallista,
     _poolTetheredGriffin,
     _poolThalakosDreamsower,
+    _poolThanosTheMadTitan,
     _poolThaumaticCompass,
     _poolTheApprenticesFolly,
     _poolTheBattleOfBywater,

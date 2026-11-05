@@ -604,6 +604,7 @@ import _poolRedeemTheLost from "../pool/redeem-the-lost.js";
 import _poolRedemptorDreadnought from "../pool/redemptor-dreadnought.js";
 import _poolRedtoothVanguard from "../pool/redtooth-vanguard.js";
 import _poolReflectiveGolem from "../pool/reflective-golem.js";
+import _poolRenoAndRude from "../pool/reno-and-rude.js";
 import _poolReplicate from "../pool/replicate.js";
 import _poolRequitingHex from "../pool/requiting-hex.js";
 import _poolResearchAssistant from "../pool/research-assistant.js";
@@ -853,6 +854,7 @@ import _poolVernalEquinox from "../pool/vernal-equinox.js";
 import _poolVesselOfMalignity from "../pool/vessel-of-malignity.js";
 import _poolVeteranOfTheDepths from "../pool/veteran-of-the-depths.js";
 import _poolVexingGull from "../pool/vexing-gull.js";
+import _poolVhalCandlekeepResearcher from "../pool/vhal-candlekeep-researcher.js";
 import _poolViashinoBladescout from "../pool/viashino-bladescout.js";
 import _poolVibrantIdea from "../pool/vibrant-idea.js";
 import _poolViciousClown from "../pool/vicious-clown.js";
@@ -1541,6 +1543,7 @@ const shard: CardShard = {
     _poolRedemptorDreadnought,
     _poolRedtoothVanguard,
     _poolReflectiveGolem,
+    _poolRenoAndRude,
     _poolReplicate,
     _poolRequitingHex,
     _poolResearchAssistant,
@@ -1790,6 +1793,7 @@ const shard: CardShard = {
     _poolVesselOfMalignity,
     _poolVeteranOfTheDepths,
     _poolVexingGull,
+    _poolVhalCandlekeepResearcher,
     _poolViashinoBladescout,
     _poolVibrantIdea,
     _poolViciousClown,

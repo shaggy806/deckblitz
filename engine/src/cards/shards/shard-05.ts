@@ -835,6 +835,7 @@ import _poolTimeSpiral from "../pool/time-spiral.js";
 import _poolTinderFarm from "../pool/tinder-farm.js";
 import _poolTinybonesTrinketThief from "../pool/tinybones-trinket-thief.js";
 import _poolTitanOfLittjara from "../pool/titan-of-littjara.js";
+import _poolTithe from "../pool/tithe.js";
 import _poolTithebearerGiant from "../pool/tithebearer-giant.js";
 import _poolTokkaRahzarTerribleTwos from "../pool/tokka-rahzar-terrible-twos.js";
 import _poolTolaria from "../pool/tolaria.js";
@@ -1782,6 +1783,7 @@ const shard: CardShard = {
     _poolTinderFarm,
     _poolTinybonesTrinketThief,
     _poolTitanOfLittjara,
+    _poolTithe,
     _poolTithebearerGiant,
     _poolTokkaRahzarTerribleTwos,
     _poolTolaria,

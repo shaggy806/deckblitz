@@ -912,6 +912,7 @@ import _poolUnleashTheInferno from "../pool/unleash-the-inferno.js";
 import _poolUnstableShapeshifter from "../pool/unstable-shapeshifter.js";
 import _poolUnsubtleMockery from "../pool/unsubtle-mockery.js";
 import _poolUrborgDrake from "../pool/urborg-drake.js";
+import _poolUriangerAugurelt from "../pool/urianger-augurelt.js";
 import _poolUrzaPrinceOfKroog from "../pool/urza-prince-of-kroog.js";
 import _poolUtopiaMycon from "../pool/utopia-mycon.js";
 import _poolVampiricSpirit from "../pool/vampiric-spirit.js";
@@ -1916,6 +1917,7 @@ const shard: CardShard = {
     _poolUnstableShapeshifter,
     _poolUnsubtleMockery,
     _poolUrborgDrake,
+    _poolUriangerAugurelt,
     _poolUrzaPrinceOfKroog,
     _poolUtopiaMycon,
     _poolVampiricSpirit,

@@ -406,6 +406,7 @@ import _poolInescapableBrute from "../pool/inescapable-brute.js";
 import _poolInfernalSovereign from "../pool/infernal-sovereign.js";
 import _poolInformationDealer from "../pool/information-dealer.js";
 import _poolInspiringRoar from "../pool/inspiring-roar.js";
+import _poolInvasionOfGobakhan from "../pool/invasion-of-gobakhan.js";
 import _poolInvocationOfSaintTraft from "../pool/invocation-of-saint-traft.js";
 import _poolIrencragPyromancer from "../pool/irencrag-pyromancer.js";
 import _poolIronVerdict from "../pool/iron-verdict.js";
@@ -601,6 +602,7 @@ import _poolPriestOfUrabrask from "../pool/priest-of-urabrask.js";
 import _poolPrismaticEnding from "../pool/prismatic-ending.js";
 import _poolPrismaticGeoscope from "../pool/prismatic-geoscope.js";
 import _poolPrismaticOmen from "../pool/prismatic-omen.js";
+import _poolPrismaticStrands from "../pool/prismatic-strands.js";
 import _poolPropagatorDrone from "../pool/propagator-drone.js";
 import _poolProwlersHelm from "../pool/prowlers-helm.js";
 import _poolPunkFrogs from "../pool/punk-frogs.js";
@@ -1359,6 +1361,7 @@ const shard: CardShard = {
     _poolInfernalSovereign,
     _poolInformationDealer,
     _poolInspiringRoar,
+    _poolInvasionOfGobakhan,
     _poolInvocationOfSaintTraft,
     _poolIrencragPyromancer,
     _poolIronVerdict,
@@ -1554,6 +1557,7 @@ const shard: CardShard = {
     _poolPrismaticEnding,
     _poolPrismaticGeoscope,
     _poolPrismaticOmen,
+    _poolPrismaticStrands,
     _poolPropagatorDrone,
     _poolProwlersHelm,
     _poolPunkFrogs,

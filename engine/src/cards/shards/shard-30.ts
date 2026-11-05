@@ -259,6 +259,7 @@ import _poolEtalisFavor from "../pool/etalis-favor.js";
 import _poolEtherwroughtPage from "../pool/etherwrought-page.js";
 import _poolEvaporate from "../pool/evaporate.js";
 import _poolEverythingPizza from "../pool/everything-pizza.js";
+import _poolEvieFrye from "../pool/evie-frye.js";
 import _poolExcavator from "../pool/excavator.js";
 import _poolExecutionersHood from "../pool/executioners-hood.js";
 import _poolExhumerThrull from "../pool/exhumer-thrull.js";
@@ -1228,6 +1229,7 @@ const shard: CardShard = {
     _poolEtherwroughtPage,
     _poolEvaporate,
     _poolEverythingPizza,
+    _poolEvieFrye,
     _poolExcavator,
     _poolExecutionersHood,
     _poolExhumerThrull,

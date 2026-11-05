@@ -692,6 +692,7 @@ import _poolRunescaleStormbrood from "../pool/runescale-stormbrood.js";
 import _poolSaheelisArtistry from "../pool/saheelis-artistry.js";
 import _poolSaheelisSilverwing from "../pool/saheelis-silverwing.js";
 import _poolSanctuaryWarden from "../pool/sanctuary-warden.js";
+import _poolSanctumOfAll from "../pool/sanctum-of-all.js";
 import _poolSandmansQuicksand from "../pool/sandmans-quicksand.js";
 import _poolSandsteppeCitadel from "../pool/sandsteppe-citadel.js";
 import _poolSarinthSteelseeker from "../pool/sarinth-steelseeker.js";
@@ -937,6 +938,7 @@ import _poolZukosOffense from "../pool/zukos-offense.js";
 import _tokensApeToken from "../tokens/ape-token.js";
 import _tokensAvatarToken44Flying from "../tokens/avatar-token-4-4-flying.js";
 import _tokensBlueBlackFaerieRogueToken from "../tokens/blue-black-faerie-rogue-token.js";
+import _tokensContractToken from "../tokens/contract-token.js";
 import _tokensCrabToken from "../tokens/crab-token.js";
 import _tokensDeathtouchRatToken from "../tokens/deathtouch-rat-token.js";
 import _tokensDemonToken55 from "../tokens/demon-token-5-5.js";
@@ -1651,6 +1653,7 @@ const shard: CardShard = {
     _poolSaheelisArtistry,
     _poolSaheelisSilverwing,
     _poolSanctuaryWarden,
+    _poolSanctumOfAll,
     _poolSandmansQuicksand,
     _poolSandsteppeCitadel,
     _poolSarinthSteelseeker,
@@ -1898,6 +1901,7 @@ const shard: CardShard = {
     _tokensApeToken,
     _tokensAvatarToken44Flying,
     _tokensBlueBlackFaerieRogueToken,
+    _tokensContractToken,
     _tokensCrabToken,
     _tokensDeathtouchRatToken,
     _tokensDemonToken55,

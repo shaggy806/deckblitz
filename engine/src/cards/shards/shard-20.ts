@@ -282,6 +282,7 @@ import _poolEssenceHarvest from "../pool/essence-harvest.js";
 import _poolEtaliPrimalStorm from "../pool/etali-primal-storm.js";
 import _poolEternitySnare from "../pool/eternity-snare.js";
 import _poolEtherealArmor from "../pool/ethereal-armor.js";
+import _poolEvercoatUrsine from "../pool/evercoat-ursine.js";
 import _poolExcavationExplosion from "../pool/excavation-explosion.js";
 import _poolExplosiveProdigy from "../pool/explosive-prodigy.js";
 import _poolExquisiteFirecraft from "../pool/exquisite-firecraft.js";
@@ -316,6 +317,7 @@ import _poolFolkOfAnHavva from "../pool/folk-of-an-havva.js";
 import _poolForbiddingSpirit from "../pool/forbidding-spirit.js";
 import _poolFortifiedArea from "../pool/fortified-area.js";
 import _poolFossilFind from "../pool/fossil-find.js";
+import _poolFrenziedGorespawn from "../pool/frenzied-gorespawn.js";
 import _poolFrodoDeterminedHero from "../pool/frodo-determined-hero.js";
 import _poolFrostwalla from "../pool/frostwalla.js";
 import _poolFugitiveDroid from "../pool/fugitive-droid.js";
@@ -1289,6 +1291,7 @@ const shard: CardShard = {
     _poolEtaliPrimalStorm,
     _poolEternitySnare,
     _poolEtherealArmor,
+    _poolEvercoatUrsine,
     _poolExcavationExplosion,
     _poolExplosiveProdigy,
     _poolExquisiteFirecraft,
@@ -1323,6 +1326,7 @@ const shard: CardShard = {
     _poolForbiddingSpirit,
     _poolFortifiedArea,
     _poolFossilFind,
+    _poolFrenziedGorespawn,
     _poolFrodoDeterminedHero,
     _poolFrostwalla,
     _poolFugitiveDroid,

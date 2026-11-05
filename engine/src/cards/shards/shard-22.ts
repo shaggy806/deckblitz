@@ -421,6 +421,7 @@ import _poolLashOfTheBalrog from "../pool/lash-of-the-balrog.js";
 import _poolLashwhipPredator from "../pool/lashwhip-predator.js";
 import _poolLastMarchOfTheEnts from "../pool/last-march-of-the-ents.js";
 import _poolLavaBlister from "../pool/lava-blister.js";
+import _poolLensOfClarity from "../pool/lens-of-clarity.js";
 import _poolLesserGargadon from "../pool/lesser-gargadon.js";
 import _poolLethalScheme from "../pool/lethal-scheme.js";
 import _poolLibertyPrimeRecharged from "../pool/liberty-prime-recharged.js";
@@ -1391,6 +1392,7 @@ const shard: CardShard = {
     _poolLashwhipPredator,
     _poolLastMarchOfTheEnts,
     _poolLavaBlister,
+    _poolLensOfClarity,
     _poolLesserGargadon,
     _poolLethalScheme,
     _poolLibertyPrimeRecharged,

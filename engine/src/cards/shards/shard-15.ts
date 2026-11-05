@@ -58,6 +58,7 @@ import _poolBetrayersBargain from "../pool/betrayers-bargain.js";
 import _poolBetrothTheBeast from "../pool/betroth-the-beast.js";
 import _poolBiblioplexKraken from "../pool/biblioplex-kraken.js";
 import _poolBileBlight from "../pool/bile-blight.js";
+import _poolBlackWidowSuperSpy from "../pool/black-widow-super-spy.js";
 import _poolBladeOfTheSixthPride from "../pool/blade-of-the-sixth-pride.js";
 import _poolBleedingWoods from "../pool/bleeding-woods.js";
 import _poolBlessedHippogriff from "../pool/blessed-hippogriff.js";
@@ -163,6 +164,7 @@ import _poolDauntlessOnslaught from "../pool/dauntless-onslaught.js";
 import _poolDeathBomb from "../pool/death-bomb.js";
 import _poolDeathTyrant from "../pool/death-tyrant.js";
 import _poolDeathcoilWurm from "../pool/deathcoil-wurm.js";
+import _poolDeconstructionHammer from "../pool/deconstruction-hammer.js";
 import _poolDecorumDissertation from "../pool/decorum-dissertation.js";
 import _poolDefiantBloodlord from "../pool/defiant-bloodlord.js";
 import _poolDelugeOfDoom from "../pool/deluge-of-doom.js";
@@ -963,6 +965,7 @@ const shard: CardShard = {
     _poolBetrothTheBeast,
     _poolBiblioplexKraken,
     _poolBileBlight,
+    _poolBlackWidowSuperSpy,
     _poolBladeOfTheSixthPride,
     _poolBleedingWoods,
     _poolBlessedHippogriff,
@@ -1068,6 +1071,7 @@ const shard: CardShard = {
     _poolDeathBomb,
     _poolDeathTyrant,
     _poolDeathcoilWurm,
+    _poolDeconstructionHammer,
     _poolDecorumDissertation,
     _poolDefiantBloodlord,
     _poolDelugeOfDoom,

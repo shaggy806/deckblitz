@@ -108,6 +108,7 @@ import _poolCallToTheNetherworld from "../pool/call-to-the-netherworld.js";
 import _poolCancel from "../pool/cancel.js";
 import _poolCandlelightVigil from "../pool/candlelight-vigil.js";
 import _poolCandlelitCavalry from "../pool/candlelit-cavalry.js";
+import _poolCannibalize from "../pool/cannibalize.js";
 import _poolCantWakeUp from "../pool/cant-wake-up.js";
 import _poolCaptainAmericaTeamLeader from "../pool/captain-america-team-leader.js";
 import _poolCarrionCall from "../pool/carrion-call.js";
@@ -137,6 +138,7 @@ import _poolCoffinPuppets from "../pool/coffin-puppets.js";
 import _poolCommandersPlate from "../pool/commanders-plate.js";
 import _poolCommercialDistrict from "../pool/commercial-district.js";
 import _poolCommuneWithEvil from "../pool/commune-with-evil.js";
+import _poolComponentPouch from "../pool/component-pouch.js";
 import _poolConnive from "../pool/connive.js";
 import _poolConstantMists from "../pool/constant-mists.js";
 import _poolConsumingCorruption from "../pool/consuming-corruption.js";
@@ -906,6 +908,7 @@ import _poolWuAdmiral from "../pool/wu-admiral.js";
 import _poolWuScout from "../pool/wu-scout.js";
 import _poolXathridSlyblade from "../pool/xathrid-slyblade.js";
 import _poolYotianMedic from "../pool/yotian-medic.js";
+import _poolYouveBeenCaughtStealing from "../pool/youve-been-caught-stealing.js";
 import _poolYueTheMoonSpirit from "../pool/yue-the-moon-spirit.js";
 import _poolZealousPersecution from "../pool/zealous-persecution.js";
 import _poolZendikarsRoil from "../pool/zendikars-roil.js";
@@ -1046,6 +1049,7 @@ const shard: CardShard = {
     _poolCancel,
     _poolCandlelightVigil,
     _poolCandlelitCavalry,
+    _poolCannibalize,
     _poolCantWakeUp,
     _poolCaptainAmericaTeamLeader,
     _poolCarrionCall,
@@ -1075,6 +1079,7 @@ const shard: CardShard = {
     _poolCommandersPlate,
     _poolCommercialDistrict,
     _poolCommuneWithEvil,
+    _poolComponentPouch,
     _poolConnive,
     _poolConstantMists,
     _poolConsumingCorruption,
@@ -1844,6 +1849,7 @@ const shard: CardShard = {
     _poolWuScout,
     _poolXathridSlyblade,
     _poolYotianMedic,
+    _poolYouveBeenCaughtStealing,
     _poolYueTheMoonSpirit,
     _poolZealousPersecution,
     _poolZendikarsRoil,

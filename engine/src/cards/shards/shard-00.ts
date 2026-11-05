@@ -487,6 +487,7 @@ import _poolMassacreGirlKnownKiller from "../pool/massacre-girl-known-killer.js"
 import _poolMasterOfCeremonies from "../pool/master-of-ceremonies.js";
 import _poolMasterOfTheFeast from "../pool/master-of-the-feast.js";
 import _poolMatterReshaper from "../pool/matter-reshaper.js";
+import _poolMazzyTrueswordPaladin from "../pool/mazzy-truesword-paladin.js";
 import _poolMechanizedProduction from "../pool/mechanized-production.js";
 import _poolMegrim from "../pool/megrim.js";
 import _poolMengHuosHorde from "../pool/meng-huos-horde.js";
@@ -538,6 +539,7 @@ import _poolNyleasForerunner from "../pool/nyleas-forerunner.js";
 import _poolNyxbornRollicker from "../pool/nyxborn-rollicker.js";
 import _poolOinTheBrave from "../pool/oin-the-brave.js";
 import _poolOkosHospitality from "../pool/okos-hospitality.js";
+import _poolOmarthisGhostfireInitiate from "../pool/omarthis-ghostfire-initiate.js";
 import _poolOmegaHeartlessEvolution from "../pool/omega-heartless-evolution.js";
 import _poolOminousParcel from "../pool/ominous-parcel.js";
 import _poolOnceAndFuture from "../pool/once-and-future.js";
@@ -1452,6 +1454,7 @@ const shard: CardShard = {
     _poolMasterOfCeremonies,
     _poolMasterOfTheFeast,
     _poolMatterReshaper,
+    _poolMazzyTrueswordPaladin,
     _poolMechanizedProduction,
     _poolMegrim,
     _poolMengHuosHorde,
@@ -1503,6 +1506,7 @@ const shard: CardShard = {
     _poolNyxbornRollicker,
     _poolOinTheBrave,
     _poolOkosHospitality,
+    _poolOmarthisGhostfireInitiate,
     _poolOmegaHeartlessEvolution,
     _poolOminousParcel,
     _poolOnceAndFuture,

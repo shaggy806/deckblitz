@@ -82,6 +82,7 @@ import _poolBillFernyBreeSwindler from "../pool/bill-ferny-bree-swindler.js";
 import _poolBiogenicOoze from "../pool/biogenic-ooze.js";
 import _poolBiomassMutation from "../pool/biomass-mutation.js";
 import _poolBitingTether from "../pool/biting-tether.js";
+import _poolBitterWork from "../pool/bitter-work.js";
 import _poolBlackMarket from "../pool/black-market.js";
 import _poolBlackPantherHopeEnduring from "../pool/black-panther-hope-enduring.js";
 import _poolBlastFurnaceHellkite from "../pool/blast-furnace-hellkite.js";
@@ -611,6 +612,7 @@ import _poolQarsiHighPriest from "../pool/qarsi-high-priest.js";
 import _poolQuagFeast from "../pool/quag-feast.js";
 import _poolQuagnoth from "../pool/quagnoth.js";
 import _poolQuarrelsEnd from "../pool/quarrels-end.js";
+import _poolQuietSpeculation from "../pool/quiet-speculation.js";
 import _poolQuirionTrailblazer from "../pool/quirion-trailblazer.js";
 import _poolQumulox from "../pool/qumulox.js";
 import _poolRadiantFlames from "../pool/radiant-flames.js";
@@ -807,6 +809,7 @@ import _poolSunstarExpansionist from "../pool/sunstar-expansionist.js";
 import _poolSurgeMare from "../pool/surge-mare.js";
 import _poolSurveillancePhantasm from "../pool/surveillance-phantasm.js";
 import _poolSwallowedByLeviathan from "../pool/swallowed-by-leviathan.js";
+import _poolSwatAway from "../pool/swat-away.js";
 import _poolSycoraxCommander from "../pool/sycorax-commander.js";
 import _poolSyndicateGuildmage from "../pool/syndicate-guildmage.js";
 import _poolSynthesizerLabship from "../pool/synthesizer-labship.js";
@@ -1060,6 +1063,7 @@ const shard: CardShard = {
     _poolBiogenicOoze,
     _poolBiomassMutation,
     _poolBitingTether,
+    _poolBitterWork,
     _poolBlackMarket,
     _poolBlackPantherHopeEnduring,
     _poolBlastFurnaceHellkite,
@@ -1589,6 +1593,7 @@ const shard: CardShard = {
     _poolQuagFeast,
     _poolQuagnoth,
     _poolQuarrelsEnd,
+    _poolQuietSpeculation,
     _poolQuirionTrailblazer,
     _poolQumulox,
     _poolRadiantFlames,
@@ -1785,6 +1790,7 @@ const shard: CardShard = {
     _poolSurgeMare,
     _poolSurveillancePhantasm,
     _poolSwallowedByLeviathan,
+    _poolSwatAway,
     _poolSycoraxCommander,
     _poolSyndicateGuildmage,
     _poolSynthesizerLabship,

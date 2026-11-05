@@ -12,6 +12,7 @@ import _poolAccursedHorde from "../pool/accursed-horde.js";
 import _poolAdamaroFirstToDesire from "../pool/adamaro-first-to-desire.js";
 import _poolAegisOfHonor from "../pool/aegis-of-honor.js";
 import _poolAerialDoombot from "../pool/aerial-doombot.js";
+import _poolAerialExtortionist from "../pool/aerial-extortionist.js";
 import _poolAerialResponder from "../pool/aerial-responder.js";
 import _poolAetherInspector from "../pool/aether-inspector.js";
 import _poolAetherSting from "../pool/aether-sting.js";
@@ -148,6 +149,7 @@ import _poolClackbridgeTroll from "../pool/clackbridge-troll.js";
 import _poolClamorShaman from "../pool/clamor-shaman.js";
 import _poolCleavingSliver from "../pool/cleaving-sliver.js";
 import _poolCloakwoodHermit from "../pool/cloakwood-hermit.js";
+import _poolClockworkAvian from "../pool/clockwork-avian.js";
 import _poolCloudfinRaptor from "../pool/cloudfin-raptor.js";
 import _poolCloudreaderSphinx from "../pool/cloudreader-sphinx.js";
 import _poolCloudstoneCurio from "../pool/cloudstone-curio.js";
@@ -332,6 +334,7 @@ import _poolGusthasScepter from "../pool/gusthas-scepter.js";
 import _poolHaazdaVigilante from "../pool/haazda-vigilante.js";
 import _poolHadaFreeblade from "../pool/hada-freeblade.js";
 import _poolHajarLoyalBodyguard from "../pool/hajar-loyal-bodyguard.js";
+import _poolHardyOutlander from "../pool/hardy-outlander.js";
 import _poolHarmonyOfNature from "../pool/harmony-of-nature.js";
 import _poolHarnesserOfStorms from "../pool/harnesser-of-storms.js";
 import _poolHauntedLibrary from "../pool/haunted-library.js";
@@ -645,6 +648,7 @@ import _poolSavageAlliance from "../pool/savage-alliance.js";
 import _poolSavorTheMoment from "../pool/savor-the-moment.js";
 import _poolSawtoothThresher from "../pool/sawtooth-thresher.js";
 import _poolSawtuskDemolisher from "../pool/sawtusk-demolisher.js";
+import _poolSayItsName from "../pool/say-its-name.js";
 import _poolScarwoodGoblins from "../pool/scarwood-goblins.js";
 import _poolSchemingSymmetry from "../pool/scheming-symmetry.js";
 import _poolScionSummoner from "../pool/scion-summoner.js";
@@ -935,6 +939,7 @@ const shard: CardShard = {
     _poolAdamaroFirstToDesire,
     _poolAegisOfHonor,
     _poolAerialDoombot,
+    _poolAerialExtortionist,
     _poolAerialResponder,
     _poolAetherInspector,
     _poolAetherSting,
@@ -1071,6 +1076,7 @@ const shard: CardShard = {
     _poolClamorShaman,
     _poolCleavingSliver,
     _poolCloakwoodHermit,
+    _poolClockworkAvian,
     _poolCloudfinRaptor,
     _poolCloudreaderSphinx,
     _poolCloudstoneCurio,
@@ -1255,6 +1261,7 @@ const shard: CardShard = {
     _poolHaazdaVigilante,
     _poolHadaFreeblade,
     _poolHajarLoyalBodyguard,
+    _poolHardyOutlander,
     _poolHarmonyOfNature,
     _poolHarnesserOfStorms,
     _poolHauntedLibrary,
@@ -1568,6 +1575,7 @@ const shard: CardShard = {
     _poolSavorTheMoment,
     _poolSawtoothThresher,
     _poolSawtuskDemolisher,
+    _poolSayItsName,
     _poolScarwoodGoblins,
     _poolSchemingSymmetry,
     _poolScionSummoner,

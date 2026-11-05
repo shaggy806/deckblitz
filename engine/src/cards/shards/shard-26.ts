@@ -848,6 +848,7 @@ import _poolTitheTaker from "../pool/tithe-taker.js";
 import _poolToArms from "../pool/to-arms.js";
 import _poolTorrentOfFire from "../pool/torrent-of-fire.js";
 import _poolTorrentialGearhulk from "../pool/torrential-gearhulk.js";
+import _poolTourachsGate from "../pool/tourachs-gate.js";
 import _poolTrainedCheetah from "../pool/trained-cheetah.js";
 import _poolTraitorousGreed from "../pool/traitorous-greed.js";
 import _poolTransformativeCommons from "../pool/transformative-commons.js";
@@ -1811,6 +1812,7 @@ const shard: CardShard = {
     _poolToArms,
     _poolTorrentOfFire,
     _poolTorrentialGearhulk,
+    _poolTourachsGate,
     _poolTrainedCheetah,
     _poolTraitorousGreed,
     _poolTransformativeCommons,

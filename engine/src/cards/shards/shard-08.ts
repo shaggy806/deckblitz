@@ -30,6 +30,7 @@ import _poolAggravatedAssault from "../pool/aggravated-assault.js";
 import _poolAidTheFallen from "../pool/aid-the-fallen.js";
 import _poolAinokArtillerist from "../pool/ainok-artillerist.js";
 import _poolAinokWayfarer from "../pool/ainok-wayfarer.js";
+import _poolAjaniNacatlPariah from "../pool/ajani-nacatl-pariah.js";
 import _poolAkoumHellkite from "../pool/akoum-hellkite.js";
 import _poolAlabasterMage from "../pool/alabaster-mage.js";
 import _poolAlacrianArmory from "../pool/alacrian-armory.js";
@@ -129,6 +130,7 @@ import _poolCandlegroveWitch from "../pool/candlegrove-witch.js";
 import _poolCandlestick from "../pool/candlestick.js";
 import _poolCaoRenWeiCommander from "../pool/cao-ren-wei-commander.js";
 import _poolCapriciousSorcerer from "../pool/capricious-sorcerer.js";
+import _poolCaptainAmericaSkybound from "../pool/captain-america-skybound.js";
 import _poolCaptiveWeird from "../pool/captive-weird.js";
 import _poolCarnageAltar from "../pool/carnage-altar.js";
 import _poolCarthTheLion from "../pool/carth-the-lion.js";
@@ -184,6 +186,7 @@ import _poolCybership from "../pool/cybership.js";
 import _poolCycleOfLife from "../pool/cycle-of-life.js";
 import _poolDaghatarTheAdamant from "../pool/daghatar-the-adamant.js";
 import _poolDainsCompany from "../pool/dains-company.js";
+import _poolDanceOfMany from "../pool/dance-of-many.js";
 import _poolDanithaSpearOfAgony from "../pool/danitha-spear-of-agony.js";
 import _poolDarigaazsCaldera from "../pool/darigaazs-caldera.js";
 import _poolDarkDabbling from "../pool/dark-dabbling.js";
@@ -1034,6 +1037,7 @@ const shard: CardShard = {
     _poolAidTheFallen,
     _poolAinokArtillerist,
     _poolAinokWayfarer,
+    _poolAjaniNacatlPariah,
     _poolAkoumHellkite,
     _poolAlabasterMage,
     _poolAlacrianArmory,
@@ -1133,6 +1137,7 @@ const shard: CardShard = {
     _poolCandlestick,
     _poolCaoRenWeiCommander,
     _poolCapriciousSorcerer,
+    _poolCaptainAmericaSkybound,
     _poolCaptiveWeird,
     _poolCarnageAltar,
     _poolCarthTheLion,
@@ -1188,6 +1193,7 @@ const shard: CardShard = {
     _poolCycleOfLife,
     _poolDaghatarTheAdamant,
     _poolDainsCompany,
+    _poolDanceOfMany,
     _poolDanithaSpearOfAgony,
     _poolDarigaazsCaldera,
     _poolDarkDabbling,

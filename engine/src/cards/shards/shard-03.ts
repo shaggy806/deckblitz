@@ -27,6 +27,7 @@ import _poolArachnoform from "../pool/arachnoform.js";
 import _poolAradaraExpress from "../pool/aradara-express.js";
 import _poolAragornAndArwenWed from "../pool/aragorn-and-arwen-wed.js";
 import _poolArboreaPegasus from "../pool/arborea-pegasus.js";
+import _poolArcaneEndeavor from "../pool/arcane-endeavor.js";
 import _poolArcaneEpiphany from "../pool/arcane-epiphany.js";
 import _poolArcaneProxy from "../pool/arcane-proxy.js";
 import _poolArcboundSlith from "../pool/arcbound-slith.js";
@@ -49,6 +50,7 @@ import _poolBakeIntoAPie from "../pool/bake-into-a-pie.js";
 import _poolBaronStruckerHydraOverlord from "../pool/baron-strucker-hydra-overlord.js";
 import _poolBattlefrontKrushok from "../pool/battlefront-krushok.js";
 import _poolBeastWithin from "../pool/beast-within.js";
+import _poolBeastmastersMagemark from "../pool/beastmasters-magemark.js";
 import _poolBehemothSledge from "../pool/behemoth-sledge.js";
 import _poolBellowingAegisaur from "../pool/bellowing-aegisaur.js";
 import _poolBellowingSaddlebrute from "../pool/bellowing-saddlebrute.js";
@@ -715,6 +717,7 @@ import _poolSunSpiderNimbleWebber from "../pool/sun-spider-nimble-webber.js";
 import _poolSunderingArchaic from "../pool/sundering-archaic.js";
 import _poolSunspireGriffin from "../pool/sunspire-griffin.js";
 import _poolSuperIntelligence from "../pool/super-intelligence.js";
+import _poolSuperSoldierSerum from "../pool/super-soldier-serum.js";
 import _poolSupplyDemand from "../pool/supply-demand.js";
 import _poolSupplyLineCranes from "../pool/supply-line-cranes.js";
 import _poolSuqataFirewalker from "../pool/suqata-firewalker.js";
@@ -802,6 +805,7 @@ import _poolVineweft from "../pool/vineweft.js";
 import _poolVintaraSnapper from "../pool/vintara-snapper.js";
 import _poolViridianLongbow from "../pool/viridian-longbow.js";
 import _poolViridianScout from "../pool/viridian-scout.js";
+import _poolVisionsOfDread from "../pool/visions-of-dread.js";
 import _poolVitalityHunter from "../pool/vitality-hunter.js";
 import _poolVodalianKnights from "../pool/vodalian-knights.js";
 import _poolVoiceOfTruth from "../pool/voice-of-truth.js";
@@ -903,6 +907,7 @@ const shard: CardShard = {
     _poolAradaraExpress,
     _poolAragornAndArwenWed,
     _poolArboreaPegasus,
+    _poolArcaneEndeavor,
     _poolArcaneEpiphany,
     _poolArcaneProxy,
     _poolArcboundSlith,
@@ -925,6 +930,7 @@ const shard: CardShard = {
     _poolBaronStruckerHydraOverlord,
     _poolBattlefrontKrushok,
     _poolBeastWithin,
+    _poolBeastmastersMagemark,
     _poolBehemothSledge,
     _poolBellowingAegisaur,
     _poolBellowingSaddlebrute,
@@ -1591,6 +1597,7 @@ const shard: CardShard = {
     _poolSunderingArchaic,
     _poolSunspireGriffin,
     _poolSuperIntelligence,
+    _poolSuperSoldierSerum,
     _poolSupplyDemand,
     _poolSupplyLineCranes,
     _poolSuqataFirewalker,
@@ -1678,6 +1685,7 @@ const shard: CardShard = {
     _poolVintaraSnapper,
     _poolViridianLongbow,
     _poolViridianScout,
+    _poolVisionsOfDread,
     _poolVitalityHunter,
     _poolVodalianKnights,
     _poolVoiceOfTruth,

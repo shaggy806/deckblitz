@@ -202,6 +202,7 @@ import _poolDreamcallerSiren from "../pool/dreamcaller-siren.js";
 import _poolDrelnoch from "../pool/drelnoch.js";
 import _poolDroverGrizzly from "../pool/drover-grizzly.js";
 import _poolDuneBroodNephilim from "../pool/dune-brood-nephilim.js";
+import _poolDuplicity from "../pool/duplicity.js";
 import _poolDuskCharger from "../pool/dusk-charger.js";
 import _poolDuskmantleOperative from "../pool/duskmantle-operative.js";
 import _poolDutyBoundDead from "../pool/duty-bound-dead.js";
@@ -1153,6 +1154,7 @@ const shard: CardShard = {
     _poolDrelnoch,
     _poolDroverGrizzly,
     _poolDuneBroodNephilim,
+    _poolDuplicity,
     _poolDuskCharger,
     _poolDuskmantleOperative,
     _poolDutyBoundDead,

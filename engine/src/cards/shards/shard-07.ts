@@ -16,6 +16,7 @@ import _poolAgentBishopManInBlack from "../pool/agent-bishop-man-in-black.js";
 import _poolAgentVenom from "../pool/agent-venom.js";
 import _poolAgonasaurRex from "../pool/agonasaur-rex.js";
 import _poolAinokSurvivalist from "../pool/ainok-survivalist.js";
+import _poolAjaniNacatlAvenger from "../pool/ajani-nacatl-avenger.js";
 import _poolAjanisMantra from "../pool/ajanis-mantra.js";
 import _poolAkkiUnderling from "../pool/akki-underling.js";
 import _poolAkronLegionnaire from "../pool/akron-legionnaire.js";
@@ -37,6 +38,7 @@ import _poolArchonOfFallingStars from "../pool/archon-of-falling-stars.js";
 import _poolArdozCobblerOfWar from "../pool/ardoz-cobbler-of-war.js";
 import _poolArenaOfTheAncients from "../pool/arena-of-the-ancients.js";
 import _poolArmasaurGuide from "../pool/armasaur-guide.js";
+import _poolArmedAndArmored from "../pool/armed-and-armored.js";
 import _poolArtifactWard from "../pool/artifact-ward.js";
 import _poolAshcloudPhoenix from "../pool/ashcloud-phoenix.js";
 import _poolAshenmoorLiege from "../pool/ashenmoor-liege.js";
@@ -843,6 +845,7 @@ import _poolTimbermawLarva from "../pool/timbermaw-larva.js";
 import _poolTimeWipe from "../pool/time-wipe.js";
 import _poolTimelyReinforcements from "../pool/timely-reinforcements.js";
 import _poolTombFortress from "../pool/tomb-fortress.js";
+import _poolTombfire from "../pool/tombfire.js";
 import _poolTomeShredder from "../pool/tome-shredder.js";
 import _poolToothyImaginaryFriend from "../pool/toothy-imaginary-friend.js";
 import _poolTopple from "../pool/topple.js";
@@ -997,6 +1000,7 @@ const shard: CardShard = {
     _poolAgentVenom,
     _poolAgonasaurRex,
     _poolAinokSurvivalist,
+    _poolAjaniNacatlAvenger,
     _poolAjanisMantra,
     _poolAkkiUnderling,
     _poolAkronLegionnaire,
@@ -1018,6 +1022,7 @@ const shard: CardShard = {
     _poolArdozCobblerOfWar,
     _poolArenaOfTheAncients,
     _poolArmasaurGuide,
+    _poolArmedAndArmored,
     _poolArtifactWard,
     _poolAshcloudPhoenix,
     _poolAshenmoorLiege,
@@ -1824,6 +1829,7 @@ const shard: CardShard = {
     _poolTimeWipe,
     _poolTimelyReinforcements,
     _poolTombFortress,
+    _poolTombfire,
     _poolTomeShredder,
     _poolToothyImaginaryFriend,
     _poolTopple,

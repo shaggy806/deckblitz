@@ -29,6 +29,7 @@ import _poolArchetypeOfCourage from "../pool/archetype-of-courage.js";
 import _poolArchwingDragon from "../pool/archwing-dragon.js";
 import _poolArgentumMasticore from "../pool/argentum-masticore.js";
 import _poolArgothianSprite from "../pool/argothian-sprite.js";
+import _poolArlinnEmbracedByTheMoon from "../pool/arlinn-embraced-by-the-moon.js";
 import _poolArlinnsWolf from "../pool/arlinns-wolf.js";
 import _poolArmMountedAnchor from "../pool/arm-mounted-anchor.js";
 import _poolArmorcraftJudge from "../pool/armorcraft-judge.js";
@@ -139,6 +140,7 @@ import _poolChokingTethers from "../pool/choking-tethers.js";
 import _poolChromaticLantern from "../pool/chromatic-lantern.js";
 import _poolCircleOfFlame from "../pool/circle-of-flame.js";
 import _poolCitizenVHelmutZemo from "../pool/citizen-v-helmut-zemo.js";
+import _poolCitizensCrowbar from "../pool/citizens-crowbar.js";
 import _poolCityscapeLeveler from "../pool/cityscape-leveler.js";
 import _poolClavilenoFirstOfTheBlessed from "../pool/clavileno-first-of-the-blessed.js";
 import _poolCleavingReaper from "../pool/cleaving-reaper.js";
@@ -940,6 +942,7 @@ const shard: CardShard = {
     _poolArchwingDragon,
     _poolArgentumMasticore,
     _poolArgothianSprite,
+    _poolArlinnEmbracedByTheMoon,
     _poolArlinnsWolf,
     _poolArmMountedAnchor,
     _poolArmorcraftJudge,
@@ -1050,6 +1053,7 @@ const shard: CardShard = {
     _poolChromaticLantern,
     _poolCircleOfFlame,
     _poolCitizenVHelmutZemo,
+    _poolCitizensCrowbar,
     _poolCityscapeLeveler,
     _poolClavilenoFirstOfTheBlessed,
     _poolCleavingReaper,

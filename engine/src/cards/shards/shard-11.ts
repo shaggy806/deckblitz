@@ -48,6 +48,7 @@ import _poolArchetypeOfImagination from "../pool/archetype-of-imagination.js";
 import _poolArchipelagore from "../pool/archipelagore.js";
 import _poolArchivistOfOghma from "../pool/archivist-of-oghma.js";
 import _poolArenaRector from "../pool/arena-rector.js";
+import _poolArlinnKord from "../pool/arlinn-kord.js";
 import _poolArmamentDragon from "../pool/armament-dragon.js";
 import _poolArmsDealer from "../pool/arms-dealer.js";
 import _poolArrowStorm from "../pool/arrow-storm.js";
@@ -266,6 +267,7 @@ import _poolEunuchsIntrigues from "../pool/eunuchs-intrigues.js";
 import _poolEverglades from "../pool/everglades.js";
 import _poolExaltedAngel from "../pool/exalted-angel.js";
 import _poolExtractPower from "../pool/extract-power.js";
+import _poolExtraordinaryJourney from "../pool/extraordinary-journey.js";
 import _poolEyesEverywhere from "../pool/eyes-everywhere.js";
 import _poolFacetReader from "../pool/facet-reader.js";
 import _poolFailedFording from "../pool/failed-fording.js";
@@ -483,6 +485,7 @@ import _poolLeshracsRite from "../pool/leshracs-rite.js";
 import _poolLifebaneZombie from "../pool/lifebane-zombie.js";
 import _poolLightTheWay from "../pool/light-the-way.js";
 import _poolLightningSurge from "../pool/lightning-surge.js";
+import _poolLightshieldArray from "../pool/lightshield-array.js";
 import _poolLilianasContract from "../pool/lilianas-contract.js";
 import _poolLilianasSteward from "../pool/lilianas-steward.js";
 import _poolLionHeart from "../pool/lion-heart.js";
@@ -802,6 +805,7 @@ import _poolSummonShiva from "../pool/summon-shiva.js";
 import _poolSummonersGrimoire from "../pool/summoners-grimoire.js";
 import _poolSunbathingRootwalla from "../pool/sunbathing-rootwalla.js";
 import _poolSunderingGrowth from "../pool/sundering-growth.js";
+import _poolSunfireTorch from "../pool/sunfire-torch.js";
 import _poolSunfrillImitator from "../pool/sunfrill-imitator.js";
 import _poolSungoldBarrage from "../pool/sungold-barrage.js";
 import _poolSurgeNode from "../pool/surge-node.js";
@@ -1023,6 +1027,7 @@ const shard: CardShard = {
     _poolArchipelagore,
     _poolArchivistOfOghma,
     _poolArenaRector,
+    _poolArlinnKord,
     _poolArmamentDragon,
     _poolArmsDealer,
     _poolArrowStorm,
@@ -1241,6 +1246,7 @@ const shard: CardShard = {
     _poolEverglades,
     _poolExaltedAngel,
     _poolExtractPower,
+    _poolExtraordinaryJourney,
     _poolEyesEverywhere,
     _poolFacetReader,
     _poolFailedFording,
@@ -1458,6 +1464,7 @@ const shard: CardShard = {
     _poolLifebaneZombie,
     _poolLightTheWay,
     _poolLightningSurge,
+    _poolLightshieldArray,
     _poolLilianasContract,
     _poolLilianasSteward,
     _poolLionHeart,
@@ -1777,6 +1784,7 @@ const shard: CardShard = {
     _poolSummonersGrimoire,
     _poolSunbathingRootwalla,
     _poolSunderingGrowth,
+    _poolSunfireTorch,
     _poolSunfrillImitator,
     _poolSungoldBarrage,
     _poolSurgeNode,

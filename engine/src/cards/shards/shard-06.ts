@@ -440,6 +440,7 @@ import _poolIvoryCup from "../pool/ivory-cup.js";
 import _poolIvoryGuardians from "../pool/ivory-guardians.js";
 import _poolJadeSeedstones from "../pool/jade-seedstones.js";
 import _poolJarvisEarthsMightiestButler from "../pool/jarvis-earths-mightiest-butler.js";
+import _poolJelevaNephaliasScourge from "../pool/jeleva-nephalias-scourge.js";
 import _poolJerrenCorruptedBishop from "../pool/jerren-corrupted-bishop.js";
 import _poolJinGitaxiasProgressTyrant from "../pool/jin-gitaxias-progress-tyrant.js";
 import _poolJungleLion from "../pool/jungle-lion.js";
@@ -866,6 +867,7 @@ import _poolVenomLethalProtector from "../pool/venom-lethal-protector.js";
 import _poolVenomcrawler from "../pool/venomcrawler.js";
 import _poolVerdantEmbrace from "../pool/verdant-embrace.js";
 import _poolVeteranAdventurer from "../pool/veteran-adventurer.js";
+import _poolVeteranSoldier from "../pool/veteran-soldier.js";
 import _poolVictoriousDestruction from "../pool/victorious-destruction.js";
 import _poolVizierOfTumblingSands from "../pool/vizier-of-tumbling-sands.js";
 import _poolVoiceOfDuty from "../pool/voice-of-duty.js";
@@ -1390,6 +1392,7 @@ const shard: CardShard = {
     _poolIvoryGuardians,
     _poolJadeSeedstones,
     _poolJarvisEarthsMightiestButler,
+    _poolJelevaNephaliasScourge,
     _poolJerrenCorruptedBishop,
     _poolJinGitaxiasProgressTyrant,
     _poolJungleLion,
@@ -1816,6 +1819,7 @@ const shard: CardShard = {
     _poolVenomcrawler,
     _poolVerdantEmbrace,
     _poolVeteranAdventurer,
+    _poolVeteranSoldier,
     _poolVictoriousDestruction,
     _poolVizierOfTumblingSands,
     _poolVoiceOfDuty,

@@ -364,6 +364,7 @@ import _poolGoneFishing from "../pool/gone-fishing.js";
 import _poolGoobbueGardener from "../pool/goobbue-gardener.js";
 import _poolGorillaChieftain from "../pool/gorilla-chieftain.js";
 import _poolGrabThePrize from "../pool/grab-the-prize.js";
+import _poolGraveEndeavor from "../pool/grave-endeavor.js";
 import _poolGreaterAuramancy from "../pool/greater-auramancy.js";
 import _poolGremlinTamer from "../pool/gremlin-tamer.js";
 import _poolGrimRoustabout from "../pool/grim-roustabout.js";
@@ -521,6 +522,7 @@ import _poolMurmuringBosk from "../pool/murmuring-bosk.js";
 import _poolMurmuringMystic from "../pool/murmuring-mystic.js";
 import _poolMutavault from "../pool/mutavault.js";
 import _poolMutilate from "../pool/mutilate.js";
+import _poolMutinousMassacre from "../pool/mutinous-massacre.js";
 import _poolMuzzle from "../pool/muzzle.js";
 import _poolMyrConvert from "../pool/myr-convert.js";
 import _poolMyrKinsmith from "../pool/myr-kinsmith.js";
@@ -875,6 +877,7 @@ import _poolVenserTheSojourner from "../pool/venser-the-sojourner.js";
 import _poolVerdantCatacombs from "../pool/verdant-catacombs.js";
 import _poolVerdantTouch from "../pool/verdant-touch.js";
 import _poolVernadiShieldmate from "../pool/vernadi-shieldmate.js";
+import _poolVeteransVoice from "../pool/veterans-voice.js";
 import _poolVexilusPraetor from "../pool/vexilus-praetor.js";
 import _poolVictorValgavothsSeneschal from "../pool/victor-valgavoths-seneschal.js";
 import _poolVineTrellis from "../pool/vine-trellis.js";
@@ -1312,6 +1315,7 @@ const shard: CardShard = {
     _poolGoobbueGardener,
     _poolGorillaChieftain,
     _poolGrabThePrize,
+    _poolGraveEndeavor,
     _poolGreaterAuramancy,
     _poolGremlinTamer,
     _poolGrimRoustabout,
@@ -1469,6 +1473,7 @@ const shard: CardShard = {
     _poolMurmuringMystic,
     _poolMutavault,
     _poolMutilate,
+    _poolMutinousMassacre,
     _poolMuzzle,
     _poolMyrConvert,
     _poolMyrKinsmith,
@@ -1823,6 +1828,7 @@ const shard: CardShard = {
     _poolVerdantCatacombs,
     _poolVerdantTouch,
     _poolVernadiShieldmate,
+    _poolVeteransVoice,
     _poolVexilusPraetor,
     _poolVictorValgavothsSeneschal,
     _poolVineTrellis,

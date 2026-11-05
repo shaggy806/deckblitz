@@ -365,6 +365,7 @@ import _poolHazyHomunculus from "../pool/hazy-homunculus.js";
 import _poolHeartPiercerBow from "../pool/heart-piercer-bow.js";
 import _poolHeartWarden from "../pool/heart-warden.js";
 import _poolHeavenSent from "../pool/heaven-sent.js";
+import _poolHeideggerShinraExecutive from "../pool/heidegger-shinra-executive.js";
 import _poolHeirOfTheWilds from "../pool/heir-of-the-wilds.js";
 import _poolHekmaSentinels from "../pool/hekma-sentinels.js";
 import _poolHelgaSkittishSeer from "../pool/helga-skittish-seer.js";
@@ -906,6 +907,7 @@ import _poolWildPackSquad from "../pool/wild-pack-squad.js";
 import _poolWildShape from "../pool/wild-shape.js";
 import _poolWildfireCerberus from "../pool/wildfire-cerberus.js";
 import _poolWildgrowthWalker from "../pool/wildgrowth-walker.js";
+import _poolWildwoodScourge from "../pool/wildwood-scourge.js";
 import _poolWillowWind from "../pool/willow-wind.js";
 import _poolWindbriskHeights from "../pool/windbrisk-heights.js";
 import _poolWindbriskRaptor from "../pool/windbrisk-raptor.js";
@@ -1317,6 +1319,7 @@ const shard: CardShard = {
     _poolHeartPiercerBow,
     _poolHeartWarden,
     _poolHeavenSent,
+    _poolHeideggerShinraExecutive,
     _poolHeirOfTheWilds,
     _poolHekmaSentinels,
     _poolHelgaSkittishSeer,
@@ -1858,6 +1861,7 @@ const shard: CardShard = {
     _poolWildShape,
     _poolWildfireCerberus,
     _poolWildgrowthWalker,
+    _poolWildwoodScourge,
     _poolWillowWind,
     _poolWindbriskHeights,
     _poolWindbriskRaptor,

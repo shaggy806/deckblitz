@@ -707,6 +707,7 @@ import _poolScaldingCauldron from "../pool/scalding-cauldron.js";
 import _poolScatterTheSeeds from "../pool/scatter-the-seeds.js";
 import _poolScentOfNightshade from "../pool/scent-of-nightshade.js";
 import _poolScrapheapScrounger from "../pool/scrapheap-scrounger.js";
+import _poolScrivTheObligator from "../pool/scriv-the-obligator.js";
 import _poolScroungeForEternity from "../pool/scrounge-for-eternity.js";
 import _poolScroungingBandar from "../pool/scrounging-bandar.js";
 import _poolScurryOak from "../pool/scurry-oak.js";
@@ -1734,6 +1735,7 @@ const shard: CardShard = {
     _poolScatterTheSeeds,
     _poolScentOfNightshade,
     _poolScrapheapScrounger,
+    _poolScrivTheObligator,
     _poolScroungeForEternity,
     _poolScroungingBandar,
     _poolScurryOak,
