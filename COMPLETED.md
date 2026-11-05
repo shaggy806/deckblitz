@@ -502,6 +502,10 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Batch 258, the next of the freed cards: 135 of 150 authored** (2026-11-04) — the outside-the-game, repeat-modes, skip-draw, shuffle-hand-and-graveyard and
+  look-and-choose-target families, among them Jace, the Mind Sculptor, Vendilion Clique, Price of Progress and Time Spiral. By agents of 50 and 100 cards: the 100 went a third
+  untested, measured in `agent-batches.md`. Fixed with it: a cast copy no longer counts as a card played (12 pool cards), a foretold card no longer counts in an exile aggregate, and
+  "each player mills" reads every number first.
 - **Batch 257, the next of the freed cards: 125 of 150 authored** (2026-11-04, `7044d47f1`, `a5cffa774`) — the attack-restriction, chosen-by-other-player, dealt-damage-dies,
   per-player condition, on-resolution choice, choose-permanent and per-player count families, among them The Abyss, Oona, Queen of the Fae, Vampiric Sliver
   and Ajani, Strength of the Pride. By agents of 20, 30, 40 and 60 cards: the largest cost least per card, and a blind review found no more wrong in its share.

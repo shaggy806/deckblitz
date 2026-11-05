@@ -483,6 +483,14 @@ that needs it is authored.
 - **Overlapping damage redirections are ordered without asking.** Rule 616.1: the affected player
   chooses; `bestDamageOrder` chooses for them. Saving Grace, in the pool, has it. Gideon's
   Sacrifice's ruling asks for the choice (`decision:damage-redirect-order`). Found by batch 257.
+- **Smaller leads from batch 258, none traced further than the report.** A `look-and-choose` filter's
+  `manaValue: { op: "eq", n: "x" }` matched nothing on Ashiok's −X, where `{ n: { amount: "x" } }` works.
+  `reveal: "chosen"` does nothing for `zone: "hand"` (`game.ts` ~37677, library only), though the type
+  allows it. `sameNameAsSource` reads a source that has left live (rules 113.7a, 608.2h): Callidus
+  Assassin and Evil Twin wait on `filter:same-name-as-source-last-known`, and four pool cards use the
+  read. AUTHORING §15's "no damage redirection to a third object" looks stale beside `redirectTo`.
+  `card:find`'s shapes also drop `text` on `castModal` modes, `alternativeCost`'s `discard` and
+  `exileFromHand`, `kicker.also` and `nextDrawInstead`.
 - **Smaller leads from batch 257, none traced further than the agent's report.** `applyChoosePermanents`
   builds a fresh context, so `{ manaValueOf: "trigger-object" }` in its `then` reads 0. `keepTargets`
   moves a target to slot 1 without shifting `targetZones`. An impulse `gate` is evaluated from the

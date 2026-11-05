@@ -36,8 +36,23 @@ four agents of 20, 30, 40 and 60 cards at once, with the same mix of the queue:
 Turns hardly grew with the cards, and a large part of every agent's context is
 the same digest and guide, so a longer list spread that cost over more cards,
 the opposite of the older claim above. None was compacted, and the 60's tests
-covered as much as the rest. One batch each, so read it as "60 did no harm", not
-as a limit: nothing above 60 has been tried.
+covered as much as the rest.
+
+**B258 (2026-11-04) pushed it further**, two agents on the next 150:
+
+| Cards | Turns | Minutes | Tokens | Per card | Peak context | Untested | Reviewed wrong |
+|---|---|---|---|---|---|---|---|
+| 50 | 28 | 29 | 9.5M | 0.19M | 473K | 5 of 48 | 0 of 40 sampled |
+| 100 | 40 | 36 | 17.0M | 0.17M | 612K | 30 of 89 | 5 of 89, all read |
+
+So the saving keeps shrinking and the agent's own care goes first: at 100 a third
+of the cards went untested, where up to 60 it was a tenth or less, but for one
+group of 40 at 5 of 31. Of the 5 wrong, one was plainly the author's miss (Ravenous
+Trap counting tokens), three were engine bugs a test on that clause might have
+shown, and one a gap. **60-75 is the sensible ceiling**; past it, ask for a test on
+every card with a condition and expect to read more. Wall time is the other side:
+B258's two agents spent 26.5M tokens over 36 minutes, B257's four 39.8M over 29.
+One batch each, so these are a direction, not a law.
 
 ## A feature alongside the agents
 
