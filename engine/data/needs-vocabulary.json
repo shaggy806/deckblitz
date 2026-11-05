@@ -15272,6 +15272,116 @@
    "family": "effect:end-the-turn",
    "description": "No cost increase printed on a spell itself; cost:cost-increase-not-your-turn is Defense Grid's static on other spells.",
    "example": "Hurkyl's Final Meditation"
+  },
+  "static:cost-reduction-targeting-enchanted-player": {
+   "family": "static:static-over-enchanted-player",
+   "description": "A cost reduction for spells that target the enchanted player: costModification.targeting filters objects only, with no player or enchanted-player target.",
+   "example": "Accursed Witch"
+  },
+  "effect:choose-exiled-card-cast-copies": {
+   "family": "effect:cast-during-resolution",
+   "description": "Choose one card among those exiled this way, then cast copies of that one card (cast-now's copies copy each exiled card, with no single choice first).",
+   "example": "Chandra, Pyromaster"
+  },
+  "condition:was-attacking-or-blocking-alone-lki": {
+   "family": "condition:attacking-alone-condition",
+   "description": "\"If it was attacking or blocking alone\" judged as combat stood just before it died (last-known), not by the attackers left afterwards.",
+   "example": "Thijarian Witness"
+  },
+  "effect:delayed-exiled-unplayed-to-graveyard": {
+   "family": "zone:impulse-permission-options",
+   "description": "\"At the beginning of the next end step, if that player hasn't played it, put the exiled card into its owner's graveyard\": a delayed move conditional on the card not having been played.",
+   "example": "Elkin Lair"
+  },
+  "cost:cost-reduction-cast-not-from-your-hand": {
+   "family": "cost:cost-modification-extensions",
+   "description": "A cost change for spells cast from anywhere but their caster's own hand (costModification.castFrom lists zones, so an opponent's hand would be missed).",
+   "example": "Advanced Reconstruction"
+  },
+  "effect:prevent-damage-gain-life-as-prevented": {
+   "family": "amount:damage-prevented-this-way",
+   "description": "A prevention shield that gains its controller life as the damage is actually prevented (prevent-damage has no gain-life option; damagePreventedThisWay is read at resolution).",
+   "example": "Candles' Glow"
+  },
+  "cost:cost-reduction-per-tapped-for-cost": {
+   "family": "cost:choose-cards-as-cost",
+   "description": "\"As an additional cost, you may tap any number of untapped creatures you control. This spell costs {1} less for each creature tapped this way\": tapAnyNumber exists, the reduction per creature doesn't.",
+   "example": "Explosive Singularity"
+  },
+  "amount:discarded-as-cost-total-mana-value": {
+   "family": "cost:choose-cards-as-cost",
+   "description": "The total mana value of the X cards discarded as a cost (the \"discarded\" reference reads a single card).",
+   "example": "Nahiri's Wrath"
+  },
+  "decision:each-opponent-may-pay-life-for-revealed-card": {
+   "family": "cost:dynamic-life-cost",
+   "description": "Each opponent may pay life equal to the revealed card's mana value; then it's exiled or put into your hand (may.costLife asks only the effect's controller).",
+   "example": "Protection Racket"
+  },
+  "cost:spend-only-color-on-x": {
+   "family": "cost:mana-spending-rules",
+   "description": "\"Spend only white mana on X\": a colour restriction on the mana paying X.",
+   "example": "Atalya, Samite Master"
+  },
+  "cost:mana-ability-reveal-any-number": {
+   "family": "cost:mana-ability-complex-costs",
+   "description": "A mana ability that reveals any number of cards with {X} in their costs and makes that much mana.",
+   "example": "Rosheen, Roaring Prophet"
+  },
+  "static:grant-optional-x-additional-cost-to-spells": {
+   "family": "cost:conditional-alternative-cost",
+   "description": "A static giving other creature spells an optional additional cost of any amount, which becomes +1/+1 counters as they enter (the built key covers only a card's own cost).",
+   "example": "Chorus of the Conclave"
+  },
+  "cost:spend-only-face-down-spells-and-morph": {
+   "family": "cost:mana-spending-rules",
+   "description": "Mana spendable only to cast a face-down spell, manifest, or turn a morph face up (the turn-face-up purpose admits disguise and cloak too; restricted mana can't pay a face-down cast).",
+   "example": "Qarsi Deceiver"
+  },
+  "cost:spend-only-face-down-spells": {
+   "family": "cost:mana-spending-rules",
+   "description": "Mana spendable only on face-down spells or to turn creatures face up (mana payment never reads faceDown; the spell filter is matched against the card in hand).",
+   "example": "Tin Street Gossip"
+  },
+  "condition:unattached-from-filter": {
+   "family": "cost:unattach-cost",
+   "description": "\"Unless it was unattached from a Ninja\": what the Equipment was unattached from, as the unattach cost is paid.",
+   "example": "Shuriken"
+  },
+  "effect:opponent-chooses-exiled-this-way-excluded": {
+   "family": "effect:choices-by-other-players",
+   "description": "An opponent chooses one of the cards exiled this way, and the free cast then leaves that one out.",
+   "example": "Plargg and Nassari"
+  },
+  "effect:destroy-all-not-chosen": {
+   "family": "decision:choose-from-zone-extensions",
+   "description": "\"Destroy each creature not chosen this way\": choose-permanents records no chosen set to act on the rest.",
+   "example": "Celestial Judgment"
+  },
+  "amount:trigger-batch-total-power-last-known": {
+   "family": "effect:attack-batch-those-creatures",
+   "description": "The total power of the trigger's batch of creatures with last-known values (triggerBatch drops creatures that have left).",
+   "example": "Witch-king, Sky Scourge"
+  },
+  "effect:remove-counters-placed-by-source": {
+   "family": "effect:delayed-trigger-rest-of-game",
+   "description": "Counters tracked by the permanent that put them (\"a mire counter put on a land with Cyclopean Tomb\"), removed one land each upkeep.",
+   "example": "Cyclopean Tomb"
+  },
+  "condition:exiled-with-source-distinct-mana-values": {
+   "family": "effect:count-distinct-mana-values",
+   "description": "The number of distinct mana values among the cards exiled with the source (exiled-with-source has cardTypes, no distinct count).",
+   "example": "Azor's Gateway"
+  },
+  "condition:face-down-dies-card-characteristics": {
+   "family": "effect:exile-may-cast-until-your-next-turn",
+   "description": "A dies trigger's condition on what a face-down creature was (its card, once revealed), not its face-down last-known information.",
+   "example": "Cryptic Pursuit"
+  },
+  "trigger:delayed-first-time-this-turn-chosen-name": {
+   "family": "decision:choose-card-name",
+   "description": "\"When you cast a spell with the chosen name for the first time this turn\": a delayed trigger that counts the same name cast earlier this turn (nextSpell fires on the next such spell).",
+   "example": "Medomai's Prophecy"
   }
  },
  "groups": [
