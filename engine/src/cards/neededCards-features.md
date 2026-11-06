@@ -378,8 +378,9 @@ zone:cast-from-library-top-pay-life-mana-value.
 ### "If you haven't done it with this ability this turn" — built 2026-11-05
 
 By EDHREC rank: Carpet of Flowers (1325). The `this-ability-did-this-turn`
-condition reads the record a `may`'s `oncePerTurn` keeps of being taken, by
-the ability's per-turn key, which the intervening-if checks (rule 603.4) and a
+condition reads `GameState.abilitiesDoneThisTurn`, which an `add-mana` with
+`marksAbilityDone` adds to only when it added at least one mana (rule 107.1b:
+X = 0 adds none), by the ability's per-turn key, which the intervening-if checks (rule 603.4) and a
 resolving `conditional` now pass (`ConditionOptions.abilityKey`): asked as it
 triggers, so once it's added mana the ability doesn't trigger again that turn,
 and again as it resolves. "Each of your main phases" is two entries joined by

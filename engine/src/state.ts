@@ -6128,6 +6128,14 @@ export interface GameState {
    * cleared as a turn begins.
    */
   modesChosenThisTurn?: Record<string, number[]>;
+  /**
+   * The abilities that have done their thing this turn, keyed like
+   * `abilityResolutionsThisTurn` — for `StaticCondition`
+   * `this-ability-did-this-turn`. Added to by an `add-mana` with
+   * `marksAbilityDone` that added at least one mana (Carpet of Flowers; rule
+   * 107.1b: an amount of 0 adds none). Turn-scoped, cleared as a turn begins.
+   */
+  abilitiesDoneThisTurn?: string[];
   /** The same, never cleared — for "choose one that hasn't been chosen"
    * (`modal`'s `notChosenBefore` — Silent Hallcreeper). The key carries the
    * permanent's timestamp, which it gets as it enters, so a permanent that

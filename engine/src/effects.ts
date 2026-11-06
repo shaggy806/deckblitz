@@ -3057,6 +3057,12 @@ export type EffectSpec =
        * Karplusan Forest deals 1 damage to you."). The auto-payer prefers a
        * painless option and only reaches for this when it must. */
       readonly painToController?: number;
+      /** Mana added this way marks the ability as having done its thing this
+       * turn (`GameState.abilitiesDoneThisTurn`, read by the
+       * `this-ability-did-this-turn` condition) — Carpet of Flowers' "if you
+       * haven't added mana with this ability this turn". Only when at least
+       * one mana is added: an amount of 0 adds no mana (rule 107.1b). */
+      readonly marksAbilityDone?: true;
       /**
        * "Spend this mana only to cast a creature spell of the chosen type"
        * (Cavern of Souls, Unclaimed Territory) and its relatives — rule

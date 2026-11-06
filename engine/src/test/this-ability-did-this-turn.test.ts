@@ -6,9 +6,10 @@ import { A, B, lands, nextTurn, settle, spawn, table, toStep } from "./harness.j
 
 // "If you haven't added mana with this ability this turn" (Carpet of
 // Flowers): an intervening if (rule 603.4) on the `this-ability-did-this-turn`
-// condition, which reads the record the ability's `may` (`oncePerTurn`) keeps
-// of being taken. "Each of your main phases" is two trigger events of one
-// ability (`sameAbilityAs`), sharing that record.
+// condition, which reads the record its `add-mana` (`marksAbilityDone`) keeps
+// when it added at least one mana — X = 0 adds none (rule 107.1b). "Each of
+// your main phases" is two trigger events of one ability (`sameAbilityAs`),
+// sharing that record.
 
 /** Answer Carpet's "you may" with `yes`, counting the questions; the colour
  * (asked as modes too) is the first offered. */
@@ -68,6 +69,21 @@ describe("Carpet of Flowers", () => {
     settle(game);
     expect(seen.asked).toBe(2);
     expect(pool(game)).toBe(3);
+  });
+
+  it("X = 0 adds no mana (rule 107.1b): an Island later, it triggers again and adds 1", () => {
+    const { game, a } = table({ step: "upkeep" });
+    spawn(game, "Carpet of Flowers");
+    const seen = answerMays(a, () => true);
+    toStep(game, "precombat-main");
+    settle(game);
+    expect(seen.asked).toBe(1);
+    expect(pool(game)).toBe(0);
+    lands(game, "Island", 1, B);
+    toStep(game, "postcombat-main");
+    settle(game);
+    expect(seen.asked).toBe(2);
+    expect(pool(game)).toBe(1);
   });
 
   it("starts again the next turn of yours", () => {

@@ -4,9 +4,10 @@ import { defineCard } from "../define.js";
 
 // Urza's Saga (USG). EDHREC rank 1325. "Each of your main phases" is two
 // trigger events of one ability (`sameAbilityAs`), so they share one record:
-// the `may`'s `oncePerTurn` keeps whether mana was added with it this turn,
-// and the intervening if (rule 603.4) reads that record
-// (`this-ability-did-this-turn`) as it triggers and as it resolves — once
+// the `add-mana`'s `marksAbilityDone` keeps whether mana was added with it
+// this turn — only when at least one was, since X = 0 adds no mana (rule
+// 107.1b) — and the intervening if (rule 603.4) reads that record
+// (`this-ability-did-this-turn`) as it triggers and as it resolves: once
 // it's added mana, the ability doesn't trigger again that turn. Not a mana
 // ability (its ruling): it uses the stack and targets. X counts the Islands
 // the target opponent controls as it resolves.
@@ -18,8 +19,7 @@ const ISLANDS = { countOf: { subtype: "Island", controlledBy: "you" }, forTarget
 const ADD: EffectSpec = {
   kind: "may",
   prompt: "Add X mana of any one color (X = the Islands target opponent controls)?",
-  oncePerTurn: true,
-  effect: { kind: "add-mana", mana: "any-color", amount: ISLANDS },
+  effect: { kind: "add-mana", mana: "any-color", amount: ISLANDS, marksAbilityDone: true },
 };
 
 const ability = (step: "precombat-main" | "postcombat-main"): TriggeredAbility => ({

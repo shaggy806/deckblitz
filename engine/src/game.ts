@@ -8581,6 +8581,7 @@ export class Game {
     this.state.abilityResolutionsThisTurn = {};
     delete this.state.abilityActivationsThisTurn;
     delete this.state.modesChosenThisTurn;
+    delete this.state.abilitiesDoneThisTurn;
     // Those lasting "until your next turn" or while an object stays go on
     // (below); "this turn" ones lapse.
     this.state.preventionShields = this.state.preventionShields.filter(
@@ -33371,7 +33372,7 @@ export class Game {
       gainLife: (player, amount) => this.changeLife(player, amount),
       loseLife: (player, amount) => this.loseLifeTallied(player, amount),
       manaTypesOf: (mana) => this.manaOneOf(mana, controller, source),
-      addMana: (player, mana, amount, spec) =>
+      addMana: (player, mana, amount, spec) => {
         this.addMana(
           player,
           typeof mana === "object" && !("oneOf" in mana)
@@ -33383,7 +33384,16 @@ export class Game {
           // types off — and what the mana is from.
           spec === undefined ? undefined : this.manaTagFor(this.state.objects[source], spec),
           this.manaOriginOf(source),
-        ),
+        );
+        // "If you haven't added mana with this ability this turn" (Carpet of
+        // Flowers): recorded only when some was added — an amount of 0 adds
+        // no mana (rule 107.1b's Viridian Joiner).
+        const key = opts.abilityKey;
+        if (spec?.marksAbilityDone === true && amount > 0 && key !== undefined) {
+          const done = (this.state.abilitiesDoneThisTurn ??= []);
+          if (!done.includes(key)) done.push(key);
+        }
+      },
       tapPermanent: (target, doesntUntapNext, onlyDoesntUntap, doesntUntapSteps, untapStepOf) => {
         if (doesntUntapNext !== true || target.kind !== "object") {
           this.setTapped(target, true);

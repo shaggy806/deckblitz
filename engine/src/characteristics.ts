@@ -710,9 +710,9 @@ function evalStaticCondition(
       return n >= (condition.atLeast ?? 1) && (condition.atMost === undefined || n <= condition.atMost);
     }
     case "this-ability-did-this-turn": {
-      // The record a `may`'s `oncePerTurn` keeps of being taken.
+      // Recorded as it did it (`GameState.abilitiesDoneThisTurn`).
       const key = opts.abilityKey;
-      return key !== undefined && (state.modesChosenThisTurn?.[key]?.length ?? 0) > 0;
+      return key !== undefined && (state.abilitiesDoneThisTurn?.includes(key) ?? false);
     }
     case "trigger-spell-first": {
       // Its own record — which cast of that card, by its stint on the stack —
