@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4633 already implemented / 367 missing (marks refreshed 2026-11-06)
+4638 already implemented / 362 missing (marks refreshed 2026-11-06)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1389,7 +1389,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1396  Martial Coup                             {X}{W}{W}        Sorcery
 [x]  1397  Razorverge Thicket                       {0}              Land
 [x]  1398  Rankle, Master of Pranks                 {2}{B}{B}        Legendary Creature — Faerie Rogue
-[ ]  1399  Shatterskull Smashing // Shatterskull, the Hammer Pass {2}              Sorcery // Land
+[x]  1399  Shatterskull Smashing // Shatterskull, the Hammer Pass {2}              Sorcery // Land
 [x]  1400  Grave Titan                              {4}{B}{B}        Creature — Giant
 [x]  1401  Weftstalker Ardent                       {2}{R}           Creature — Drix Artificer
 [x]  1402  Thousand-Year Storm                      {4}{U}{R}        Enchantment
@@ -1425,7 +1425,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1432  Muraganda Raceway                        {0}              Land
 [x]  1433  Rugged Highlands                         {0}              Land
 [x]  1434  Grab the Prize                           {1}{R}           Sorcery
-[ ]  1435  Caduceus, Staff of Hermes                {2}{W}           Legendary Artifact — Equipment
+[x]  1435  Caduceus, Staff of Hermes                {2}{W}           Legendary Artifact — Equipment
 [x]  1436  Flare of Denial                          {1}{U}{U}        Instant
 [x]  1437  Corpse Knight                            {W}{B}           Creature — Zombie Knight
 [x]  1438  Weathered Wayfarer                       {W}              Creature — Human Nomad Cleric
@@ -1556,7 +1556,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1563  Relentless Assault                       {2}{R}{R}        Sorcery
 [x]  1564  Gifts Ungiven                            {3}{U}           Instant
 [x]  1565  Null Elemental Blast                     {C}              Instant
-[ ]  1566  Malcolm, Alluring Scoundrel              {1}{U}           Legendary Creature — Siren Pirate
+[x]  1566  Malcolm, Alluring Scoundrel              {1}{U}           Legendary Creature — Siren Pirate
 [x]  1567  Kozilek, the Great Distortion            {8}{C}{C}        Legendary Creature — Eldrazi
 [x]  1568  Freed from the Real                      {2}{U}           Enchantment — Aura
 [x]  1569  Ulamog, the Defiler                      {10}             Legendary Creature — Eldrazi
@@ -1752,7 +1752,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1759  Daxos, Blessed by the Sun                {W}{W}           Legendary Enchantment Creature — Demigod
 [x]  1760  Tomb of the Spirit Dragon                {0}              Land
 [x]  1761  Nyx Lotus                                {4}              Legendary Artifact
-[ ]  1762  Ugin, Eye of the Storms                  {7}              Legendary Planeswalker — Ugin
+[x]  1762  Ugin, Eye of the Storms                  {7}              Legendary Planeswalker — Ugin
 [x]  1763  Retreat to Coralhelm                     {2}{U}           Enchantment
 [x]  1764  Vengeful Bloodwitch                      {1}{B}           Creature — Vampire Warlock
 [x]  1765  Satyr Wayfinder                          {1}{G}           Creature — Satyr
@@ -1823,7 +1823,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1830  Tormod's Crypt                           {0}              Artifact
 [x]  1831  Dragon's Rage Channeler                  {R}              Creature — Human Shaman
 [x]  1832  True Conviction                          {3}{W}{W}{W}     Enchantment
-[ ]  1833  The Eternal Wanderer                     {4}{W}{W}        Legendary Planeswalker
+[x]  1833  The Eternal Wanderer                     {4}{W}{W}        Legendary Planeswalker
 [x]  1834  Sage's Reverie                           {3}{W}           Enchantment — Aura
 [x]  1835  Scheming Symmetry                        {B}              Sorcery
 [x]  1836  Bennie Bracks, Zoologist                 {3}{W}           Legendary Creature — Elf Druid

@@ -157,10 +157,13 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   (`removeAllCountersFrom`, 2026-10-31; 616.1).
 - **Enlist leftovers.** Enlist ×N (702.154d) isn't built, and an attack tax paid by auto-tapping a
   mana creature is paid before enlist is asked, so it can tap the creature meant to be enlisted.
-- **Granted statics don't reach cost changes or prevention.** `StaticAbility.grantsStatic` (built
-  2026-10-31) reaches the layer fold, "can't lose the game", untap and block rules, but not
-  cost modifications or prevention replacements: Acolyte of Bahamut, Caduceus, Staff of Hermes,
-  Arterial Alchemy, Dancer's Chakrams and Lymph Sliver wait on it.
+- **Granted statics and cost changes, untested.** Since 2026-11-05 (Caduceus, Staff of Hermes)
+  `Game.staticsOfSource` lists a permanent's granted statics after its own, so damage
+  replacements and prevention, cost modifications, play permissions and prohibitions all read
+  them. Only prevention is proved by a card. Acolyte of Bahamut
+  (`static:granted-static-cost-modification`) likely runs through the same path; an untested draft
+  is at `engine/.cache/acolyte-of-bahamut.ts.draft` on the PC. Arterial Alchemy and Dancer's
+  Chakrams need checking the same way; Lymph Sliver needs absorb (rule 702.64).
 - **A split card's two names aren't both compared.** `sameNameAsAny` (built 2026-10-31) compares
   one name, so a split card's second name (rule 201.2a) never matches "the same name as".
 - **An optional non-mana cost paid as a permanent enters.** Ulamog's Despoiler's "As this

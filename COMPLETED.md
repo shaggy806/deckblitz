@@ -12,6 +12,18 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Four more need keys by EDHREC rank** (2026-11-05), each card's own: Ugin, Eye of the Storms and
+  Chandra, Heart of Fire (`search-library`'s `playable` takes any exile permission, so a search's
+  exiled finds are castable later this turn, free only for Ugin, rule 118.9); The Eternal Wanderer
+  (`flicker`'s `returnOnOwnersTurn`: one delayed return per owner, each at that owner's next end
+  step, rule 603.7e; a new Samurai token); Malcolm, Alluring Scoundrel (`cast-now`'s `from:
+  "discarded-this-way"`, offering the discarded card in its public zone, madness's exile included,
+  rules 400.7j and 702.35a); Caduceus, Staff of Hermes (`Game.staticsOfSource` lists granted statics
+  after a permanent's own, so prevention and replacements read them, rule 613.7 for one granted after
+  the abilities were lost). Keys: `effect:search-finds-castable-this-turn`,
+  `effect:flicker-return-at-owners-next-end-step`, `effect:cast-discarded-card-exiled-by-madness`,
+  `static:granted-static-replacement`; no other cards freed.
+
 - **Seven need keys by EDHREC rank, from three agents** (2026-11-05), each card's own keys:
   Bolas's Citadel (`castFromLibraryTop.payLifeManaValue`, the only way to cast from the top unless
   another permission reaches the card, X 0 by rule 107.3b); Archway of Innovation (`improvise` on
