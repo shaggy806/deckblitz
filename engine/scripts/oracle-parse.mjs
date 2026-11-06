@@ -6700,7 +6700,7 @@ export function parseSentence(sentence, ctx) {
       ],
     };
   }
-  if ((m = re(`you draw a card and you lose ${N} life`).exec(s))) {
+  if ((m = re(`you draw a card and (?:you )?lose ${N} life`).exec(s))) {
     return { kind: "sequence", effects: [{ kind: "draw", amount: 1 }, { kind: "lose-life", amount: amount(m[1]) }] };
   }
   if (re("draw a card at the beginning of the next turn's upkeep").test(s)) {
@@ -13979,6 +13979,16 @@ function parseFaceAsWritten(face, ctx = {}) {
       (m = /^As an additional cost to cast ~, you may exile any number of (white|blue|black|red|green) cards from your hand\. ~ costs \{(\d+)\} less to cast for each card exiled this way\.$/.exec(line))
     ) {
       out.additionalCost = { exileFromHandReduces: { filter: { colors: [COLOR_WORD[m[1]]] }, each: Number(m[2]) } };
+      continue;
+    }
+    // Plumb the Forbidden: a sacrifice of X (none included) and one reflexive
+    // trigger making X copies.
+    if (
+      isSpell &&
+      line ===
+        "As an additional cost to cast ~, you may sacrifice one or more creatures. When you do, copy ~ for each creature sacrificed this way."
+    ) {
+      out.additionalCost = { sacrifice: { type: "creature" }, sacrificeCount: "x", copyForEachSacrificed: true };
       continue;
     }
     if (isSpell && line === "As an additional cost to cast ~, sacrifice a creature.") {

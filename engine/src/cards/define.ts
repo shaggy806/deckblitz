@@ -4503,6 +4503,16 @@ export interface CardDefinition {
     readonly sacrificeCount?: number | "x";
     readonly sacrificeReduces?: number;
     /**
+     * With `sacrificeCount: "x"`: "you may sacrifice one or more creatures.
+     * **When you do, copy this spell for each creature sacrificed this way**"
+     * (Plumb the Forbidden) — a reflexive trigger (rule 603.12) of the
+     * casting, there only when X is 1 or more, making X copies as it resolves
+     * — with the original's targets, as the text offers no new ones (rule
+     * 707.10c). One trigger, not one per creature: replicate's shape (rule
+     * 702.56a).
+     */
+    readonly copyForEachSacrificed?: true;
+    /**
      * "As an additional cost to cast this spell, you may **exile any number of
      * blue cards from your hand. This spell costs {2} less to cast for each
      * card exiled this way**" (the March cycle — Kamigawa: Neon Dynasty): named
@@ -6174,6 +6184,7 @@ interface CardDraft {
     readonly exilesSacrifice?: true;
     readonly sacrificeCount?: number | "x";
     readonly sacrificeReduces?: number;
+    readonly copyForEachSacrificed?: true;
     readonly exileFromHandReduces?: { readonly filter: CardFilter; readonly each: number };
     readonly discard?: number | "x";
     readonly discardAtRandom?: boolean;

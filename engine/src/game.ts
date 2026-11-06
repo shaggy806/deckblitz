@@ -20249,6 +20249,18 @@ export class Game {
     }
     if (kicked && def.kicker?.keyword === "gift") this.queueGift(player, cardId, priorityTo);
     if (kicked && def.kicker?.keyword === "replicate") this.queueReplicate(player, cardId);
+    // "You may sacrifice one or more creatures. When you do, copy this spell
+    // for each creature sacrificed this way" (Plumb the Forbidden): a
+    // reflexive trigger of the casting (rule 603.12), there only when any
+    // were — X is how many, every one of them sacrificed as the cost is paid
+    // (rule 601.2h).
+    if (def.additionalCost?.copyForEachSacrificed === true && chosenX > 0) {
+      const spell = this.state.objects[cardId];
+      if (spell !== undefined && spell.zone === "stack") {
+        const text = `Copy ${nameOf(spell)} for each creature sacrificed to cast it (${chosenX}).`;
+        this.queuePaidCostCopy(spell, player, text, `sacrificed-copies-${this.state.nextObjectSeq}`, chosenX, false);
+      }
+    }
     this.queueCasualty(player, cardId, priorityTo);
     this.queueConspire(player, cardId, priorityTo);
     this.afterPlayerAction(priorityTo);
@@ -20440,8 +20452,9 @@ export class Game {
    * cost was paid, copy it. If the spell has any targets, you may choose new
    * targets for the copy" (rules 702.153a, 702.78a), triggered as the cost
    * is paid. It's of no card's ability list, so it carries its own record,
-   * as a mana-spend rider does. */
-  private queuePaidCostCopy(spell: GameObject, player: PlayerId, text: string, id: string, count = 1): void {
+   * as a mana-spend rider does. `newTargets: false` for a text that doesn't
+   * let the copies' targets change (rule 707.10c — Plumb the Forbidden). */
+  private queuePaidCostCopy(spell: GameObject, player: PlayerId, text: string, id: string, count = 1, newTargets = true): void {
     this.state.pendingTriggers.push({
       sourceObjectId: spell.id,
       cardName: printedCardName(spell),
@@ -20460,7 +20473,12 @@ export class Game {
         source: spell.id,
         sourceName: printedCardName(spell),
         targets: [],
-        effect: { kind: "copy-spell", target: "trigger-spell", newTargets: true, ...(count !== 1 ? { count } : {}) },
+        effect: {
+          kind: "copy-spell",
+          target: "trigger-spell",
+          ...(newTargets ? { newTargets: true } : {}),
+          ...(count !== 1 ? { count } : {}),
+        },
         text,
       },
     });

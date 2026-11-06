@@ -22,7 +22,7 @@ export default defineCard({
       text: ZOMBIE_TEXT,
     },
     {
-      cost: { mana: null, tap: false, tapOthers: { count: 3, filter: { subtype: "Zombie" }, includeSelf: true } },
+      cost: { mana: null, tap: false, tapOthers: { count: 3, filter: { subtype: "Zombie", controlledBy: "you" }, includeSelf: true } },
       targets: [],
       effect: {
         kind: "sequence",

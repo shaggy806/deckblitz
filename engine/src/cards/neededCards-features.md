@@ -223,8 +223,9 @@ Garenbrig (717)
   on Fire and Fiery Emancipation were authored 2026-09-29. Solphim still
   waits on "Discard two cards" as a cost.
 - **Convoke**: Clever Concealment (phasing).
-- **Additional costs**: an optional, repeatable cost — Plumb the Forbidden,
-  Dargo ("sacrifice one or more creatures"). Redirect Lightning needs a
+- **Additional costs**: an optional, repeatable cost — Plumb the Forbidden
+  and Dargo ("sacrifice one or more creatures") are built
+  (`copyForEachSacrificed`, `sacrificeReduces`). Redirect Lightning needs a
   change-the-target effect.
 - **Global land-type statics**: Urborg, Tomb of Yawgmoth and Yavimaya, Cradle
   of Growth — `effectiveSubtypes` is deliberately given no `GameState`, so a
@@ -374,6 +375,16 @@ still paid; beside a permission without it (Future Sight) the card may be cast
 either way. An impulse's or the Citadel's forced pay-life cast of a card with
 an alternative cost of its own (Gush) no longer pays that one too. Key:
 zone:cast-from-library-top-pay-life-mana-value.
+### A copy of the spell for each creature sacrificed to cast it — built 2026-11-05
+
+By EDHREC rank: Plumb the Forbidden (1148). "You may sacrifice one or more
+creatures" is the sacrifice of X (`sacrificeCount: "x"`, Vicious Betrayal's);
+`additionalCost.copyForEachSacrificed` adds "when you do, copy this spell for
+each creature sacrificed this way": one reflexive trigger as the cast finishes
+(rule 603.12), only when X is 1 or more, making X copies with the original's
+targets — replicate's record (`queuePaidCostCopy`, now with `newTargets`
+off). The scaffolder reads the line, and "you draw a card and lose N life".
+Proving card: Plumb the Forbidden. Key: cost:sacrifice-any-number-copy-for-each.
 
 ### An Aura on a graveyard card, and an enchant ability an effect gives — built 2026-11-05
 
@@ -3291,8 +3302,9 @@ is chosen, off the stack, rule 605.3b); "any number of" and "one or more" are `"
 and `minX`; `flashback.sacrifice.count: "x"`. "X mana of any one color" is offered
 per colour. `regeneratesInstead` is rule 701.19b. Proving: Springjack Pasture,
 Emrakul's Evangel, Glass-Cast Heart, Transmutation Font, Firecat Blitz, Mossbridge
-Troll. Left on the key's cards: "up to three" (`maxX`, Baba Lysaga), a spell's
-Plumb the Forbidden copies, Lich-Knights' Conquest's sacrifice as an effect.
+Troll. Left on the key's cards: "up to three" (`maxX`, Baba Lysaga), Lich-Knights'
+Conquest's sacrifice as an effect. (Plumb the Forbidden's copies were built
+2026-11-05, `copyForEachSacrificed`.)
 
 ### A graveyard's order — built 2026-11-01
 

@@ -16087,3 +16087,25 @@ describe("an Aura enchanting a card in a graveyard", () => {
     expect(face.enchant).toEqual({ kind: "card-in-graveyard", whose: "any", filter: { type: "creature" } });
   });
 });
+
+describe("a copy of the spell for each creature sacrificed", () => {
+  it("reads Plumb the Forbidden whole", () => {
+    const plumb = parseFace({
+      name: "Plumb the Forbidden",
+      type_line: "Instant",
+      mana_cost: "{1}{B}",
+      colors: ["B"],
+      oracle_text:
+        "As an additional cost to cast this spell, you may sacrifice one or more creatures. When you do, copy this spell for each creature sacrificed this way.\nYou draw a card and lose 1 life.",
+    });
+    expect(plumb.complete).toBe(true);
+    expect(plumb.additionalCost).toEqual({ sacrifice: { type: "creature" }, sacrificeCount: "x", copyForEachSacrificed: true });
+    expect(plumb.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "draw", amount: 1 },
+        { kind: "lose-life", amount: 1 },
+      ],
+    });
+  });
+});
