@@ -561,3 +561,20 @@ that needs it is authored.
   which ends with the turn anyway, keeping the lasting counter — the better choice unless being
   tapped and removed from combat matters. Latent: no pool card regenerates a shielded permanent
   on purpose (found 2026-10-19, building shield counters).
+
+**"Each player may" acts on each answer before asking the next.** Rule 101.4: players choosing
+at the same time decide in APNAP order, then the actions happen together. `each-player-may`
+(`effects.ts`, near line 9561) carries out each player's draw or token before the next decides,
+so a choice raised by one player's draw (dredge, a draw replacement) comes before a later player
+answers. The seven tempting offers (Tempt with Bunnies among them) and Kwain share the shape.
+Found 2026-11-06, building Tempt with Bunnies.
+
+**An optional additional life payment isn't offered on a spell cast by an effect.** Defiler of
+Vigor's "you may pay 2 life" is a cast offer of its own on a normal cast, but `cast-now` (cascade,
+"cast it without paying") never offers it; declining is always legal, so nothing illegal happens,
+but a choice the player has is missing. Found 2026-11-06, building Defiler of Vigor.
+
+**Only the first mandatory draw replacement is offered beside an optional one.** With Abundance
+and two mandatory "instead of drawing" replacements (Underrealm Lich and another), rule 616.1
+lets the player pick any of them; `Game.optionalDrawReplacementAsked` offers the first mandatory
+one in battlefield order, as the draw did before. Found 2026-11-06, building Abundance.

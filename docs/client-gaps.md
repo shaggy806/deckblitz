@@ -248,3 +248,10 @@ cards (hovering one highlights the other, as an Aura's host is) would do.
 **Split cards look like double-faced cards in the library**
 
 The user, 2026-10-28: "the display for split cards in the library is odd. Presents them as mdfcs." A split card (rule 709) is one card with two halves side by side, not two faces; the library page (`client/src/library/LibraryPage.tsx`) shows it the way it shows a modal double-faced card.
+
+**X is picked before targets, blind to a target's cost reduction**
+
+A cast offer's `maxXUnreduced` says the largest X only a cost-reducing target (Spellwild Ouphe's
+"spells that target it cost {2} less") pays for; the client asks for X before targets and doesn't
+read it, so a player can pick an X the targets they then choose can't pay, and the engine refuses
+the cast. Found 2026-11-06, re-landing Shatterskull Smashing.

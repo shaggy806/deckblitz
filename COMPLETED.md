@@ -12,6 +12,29 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Twelve need keys by EDHREC rank, from five agents** (2026-11-06, `/build-family overnight`):
+  Shatterskull Smashing and Meteor Shower (a divided total read from X, re-landed with the fix that
+  reverted it: the X-group cast offer now carries `maxXUnreduced`, so X past what's payable is offered
+  only with the cost-reducing target); Defiler of Vigor and Defiler of Dreams (an optional life
+  payment as an additional cost, each way to pay its own cast offer, rules 118.3 and 119.4); Norn's
+  Annex (an attack tax in {W/P}, `declare-attackers`' `phyrexianLife`, rule 107.4f); Winds of Abandon
+  (`for-each-player`'s `whoseAmount`; a search's amount read for its searcher); The Last Agni Kai
+  (`player-effect`'s `keepsUnspentMana`, emptying as cleanup ends, rule 500.5); Abundance, Pavel
+  Chekov, First Posting and Obstinate Familiar (an optional `would-draw` replacement, asked draw by
+  draw, rule 616.1); Skrelv's Hive (a filter scoped by toxic, granted toxic included, rule 613.8);
+  and, needing no engine code, Inti, Seneschal of the Sun, Aven Interrupter, Thirst for Knowledge,
+  Temur Sabertooth, Summon: Fenrir, Mutational Advantage, Tempt with Bunnies, Wild Magic Surge and
+  Reweave. A fix with them: the "discard two unless one of a kind" prompt names its kind, and the bots
+  see the one-card answer. Keys: `effect:divided-total-reading-x`,
+  `cost:optional-life-additional-cost-for-spells`, `cost:attack-tax-phyrexian-mana`,
+  `keyword:overload-per-controller-search`, `replacement:keep-unspent-mana-until-end-of-turn`,
+  `trigger:discards-batch-trigger`, `replacement:draw-replacement-optional-skip`,
+  `static:static-scoped-by-has-toxic`, `effect:exile-target-spell-plotted`,
+  `effect:discard-unless-land`, `effect:may-return-if-you-do`,
+  `effect:next-creature-enters-with-counter`, `effect:prevent-damage-each-matching-at-resolution`,
+  `effect:tempting-offer`, `effect:reveal-until-shares-type`. Freed for `author-freed`: Defiler of
+  Faith, Flesh and Instinct, and Chaotic Transformation.
+
 - **Four more need keys by EDHREC rank** (2026-11-05), each card's own: Ugin, Eye of the Storms and
   Chandra, Heart of Fire (`search-library`'s `playable` takes any exile permission, so a search's
   exiled finds are castable later this turn, free only for Ugin, rule 118.9); The Eternal Wanderer
