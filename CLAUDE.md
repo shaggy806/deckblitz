@@ -74,7 +74,7 @@ for:
   `npm run cards:needs -w engine -- --next 60` lists the next untriaged cards by rank, `-- --rank`
   what blocks the most triaged ones). The bots' decks' stand-ins (the
   substitution tables in `engine/src/sample-decks.ts`) go as their originals land. The pool is
-  ~5,400 real cards (`npm run card:verify -w engine` prints the current count of definitions,
+  ~29,400 real cards (2026-11-06) (`npm run card:verify -w engine` prints the current count of definitions,
   which is a little higher: each face of a double-faced card is its own).
 - **`docs/manual-checks.md`** — quick tests to play by hand in the scenario builder: a new player
   decision or a careful rules call, **one thing per test** — a `###` title, a one- or two-step
