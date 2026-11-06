@@ -6043,12 +6043,20 @@ export function parseSentence(sentence, ctx) {
       duration: "end-of-turn",
     };
   }
-  if ((m = re(`(other )?creatures you control gain ${KW}(?: and ${KW})? until end of turn`).exec(s))) {
+  // "Permanents you control gain hexproof and indestructible until end of
+  // turn" (Heroic Intervention); "… with counters on them …" (Mutational
+  // Advantage, Tyrant Guard).
+  if ((m = re(`(other )?(creatures|permanents) you control( with counters on them)? gain ${KW}(?: and ${KW})? until end of turn`).exec(s))) {
     if (m[1] && !otherMeansSource(ctx)) return null;
-    const kws = [m[2], m[3]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]);
+    const kws = [m[4], m[5]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]);
+    const filter = {
+      ...(m[2].toLowerCase() === "creatures" ? { type: "creature" } : {}),
+      controlledBy: "you",
+      ...(m[3] ? { counters: { compare: { op: "gte", n: 1 } } } : {}),
+    };
     const one = (keyword) => ({
       kind: "grant-keyword-all",
-      filter: { type: "creature", controlledBy: "you" },
+      filter,
       keyword,
       duration: "end-of-turn",
       ...(m[1] ? { exceptSource: true } : {}),
@@ -10004,6 +10012,29 @@ export function parseEffect(text, outer) {
     if (/^(?:they|those creatures) can't be regenerated\.$/i.test(sentence) && parsed.at(-1)?.kind === "destroy-all") {
       parsed[parsed.length - 1] = { ...parsed.at(-1), cantBeRegenerated: true };
       continue;
+    }
+    // "Prevent all damage that would be dealt to those permanents this
+    // turn." after a mass grant (Mutational Advantage): the same permanents,
+    // fixed as it resolves (the ruling) — a shield on each, not a rule asked
+    // of whatever matches as damage would be dealt.
+    if (/^prevent all damage that would be dealt to (?:those (?:permanents|creatures)|them) this turn\.$/i.test(sentence)) {
+      const last = parsed.at(-1);
+      const grants = last?.kind === "sequence" ? last.effects : last === undefined ? [] : [last];
+      const filter = grants[0]?.filter;
+      if (
+        grants.length > 0 &&
+        grants.every((g) => g.kind === "grant-keyword-all" && g.exceptSource === undefined && JSON.stringify(g.filter) === JSON.stringify(filter))
+      ) {
+        const shields = {
+          kind: "for-each-permanent",
+          filter,
+          simultaneous: true,
+          effect: { kind: "prevent-damage", target: 0, amount: "all" },
+        };
+        parsed.push(shields);
+        hints.push({ sentence, effect: shields });
+        continue;
+      }
     }
     // "Its controller loses N life." after the one sentence that targeted:
     // that target's controller, as it last existed (Countersquall).

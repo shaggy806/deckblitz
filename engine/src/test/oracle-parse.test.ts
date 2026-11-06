@@ -16372,3 +16372,52 @@ describe("you may return a permanent you control; if you do", () => {
     });
   });
 });
+
+describe("prevention over the permanents a mass grant reached", () => {
+  const withCounters = { controlledBy: "you", counters: { compare: { op: "gte", n: 1 } } };
+  const grant = (filter: object, keyword: string) => ({ kind: "grant-keyword-all", filter, keyword, duration: "end-of-turn" });
+
+  it("reads Mutational Advantage whole: a shield on each of those permanents, fixed as it resolves", () => {
+    const face = parseFace({
+      name: "Mutational Advantage",
+      type_line: "Instant",
+      oracle_text:
+        "Permanents you control with counters on them gain hexproof and indestructible until end of turn. Prevent all damage that would be dealt to those permanents this turn. Proliferate. (Choose any number of permanents and/or players, then give each another counter of each kind already there.)",
+    });
+    expect(face.complete).toBe(true);
+    expect(face.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "sequence", effects: [grant(withCounters, "hexproof"), grant(withCounters, "indestructible")] },
+        {
+          kind: "for-each-permanent",
+          filter: withCounters,
+          simultaneous: true,
+          effect: { kind: "prevent-damage", target: 0, amount: "all" },
+        },
+        { kind: "proliferate" },
+      ],
+    });
+  });
+
+  it("reads permanents you control as a mass grant (Heroic Intervention)", () => {
+    const face = parseFace({
+      name: "Heroic Intervention",
+      type_line: "Instant",
+      oracle_text: "Permanents you control gain hexproof and indestructible until end of turn.",
+    });
+    expect(face.effect).toEqual({
+      kind: "sequence",
+      effects: [grant({ controlledBy: "you" }, "hexproof"), grant({ controlledBy: "you" }, "indestructible")],
+    });
+  });
+
+  it("leaves the prevention alone after anything but a mass grant", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Instant",
+      oracle_text: "Draw a card. Prevent all damage that would be dealt to those permanents this turn.",
+    });
+    expect(face.complete).toBe(false);
+  });
+});

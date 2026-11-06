@@ -524,6 +524,18 @@ targets — replicate's record (`queuePaidCostCopy`, now with `newTargets`
 off). The scaffolder reads the line, and "you draw a card and lose N life".
 Proving card: Plumb the Forbidden. Key: cost:sacrifice-any-number-copy-for-each.
 
+### Prevention over the permanents matching as it resolves — already built, 2026-11-06
+
+By EDHREC rank: Mutational Advantage (1973). No engine code: "prevent all
+damage that would be dealt to those permanents this turn" names the set the
+spell's grants reached, fixed as it resolves (the ruling), so it is a
+`for-each-permanent` putting a `prevent-damage` `"all"` shield on each, not a
+`damage-rule` asked as the damage would be dealt. The scaffolder now reads
+"permanents you control [with counters on them] gain … and … until end of
+turn" and the "those permanents" prevention after such a grant. Proving card:
+Mutational Advantage (`prevent-damage-each-matching.test.ts`). Key:
+effect:prevent-damage-each-matching-at-resolution.
+
 ### "For each creature exiled this way, its controller searches" — built 2026-11-06
 
 By EDHREC rank: Winds of Abandon (1940). `for-each-player`'s `whoseAmount`
