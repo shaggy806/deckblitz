@@ -85,7 +85,13 @@ import { CardRegistry } from "./cards/card-registry.js";
 import { defaultRegistry } from "./cards/default-registry.js";
 import { EMBLEM_CARD } from "./cards/emblem.js";
 import { embalmAbility, encoreAbility, ninjutsu, unearth } from "./cards/helpers.js";
-import { bestowedDefinition, licidDefinition, readsGraveyardOrder } from "./cards/define.js";
+import {
+  becameAuraDefinition,
+  bestowedDefinition,
+  enchantsGraveyardCard,
+  licidDefinition,
+  readsGraveyardOrder,
+} from "./cards/define.js";
 import type { CyclingAbility, KickerAlsoCost, MorphCost, Supertype } from "./cards/define.js";
 import { DUNGEONS } from "./cards/dungeons.js";
 import { MADNESS_EFFECT, MADNESS_TEXT } from "./cards/madness.js";
@@ -14252,7 +14258,7 @@ export class Game {
         // "…attached to a creature you control" (Nomad Mythmaker): only
         // those, of what it could enchant (rule 303.4f), and no player.
         const among = object.enterChoice?.attachAmong;
-        const options = this.state.zones.shared.battlefield.filter(
+        const options = this.enchantableObjects(next.as).filter(
           (host) =>
             this.canEnchant(id, host, chooser, next.as) &&
             (among === undefined ||
@@ -14342,22 +14348,65 @@ export class Game {
     const def = this.registry.get(printedCardName(object));
     if (!def.subtypes.includes("Aura")) return true;
     return (
-      this.state.zones.shared.battlefield.some((host) => this.canEnchant(card, host, object.owner, def)) ||
+      this.enchantableObjects(def).some((host) => this.canEnchant(card, host, object.owner, def)) ||
       this.state.turnOrder.some((player) => this.canEnchantPlayer(card, player, object.owner, def))
     );
+  }
+
+  /** The objects an Aura of `def` could be attached to, before asking
+   * `canEnchant` of each: the permanents, or — "Enchant creature card in a
+   * graveyard" (Animate Dead) — the cards in every graveyard. */
+  private enchantableObjects(def: CardDefinition): readonly ObjectId[] {
+    if (!enchantsGraveyardCard(def)) return this.state.zones.shared.battlefield;
+    return this.state.turnOrder.flatMap((player) => this.state.zones.perPlayer[player].graveyard);
+  }
+
+  /** The definition an attached permanent's Aura and Equipment questions
+   * are asked of: a bestowed Aura's (rule 702.103b), a Licid's that became
+   * an Aura, a permanent's that became one with "enchant creature put onto
+   * the battlefield with [it]" or another enchant ability (Necromancy,
+   * Cloudform — `enchantSwap`), or its printed one. */
+  private attachmentDefinition(object: GameObject): CardDefinition {
+    const printed = this.registry.get(printedCardName(object));
+    if (object.bestowed === true) return bestowedDefinition(printed);
+    if (object.licid !== undefined) return licidDefinition(printed);
+    if (object.enchantSwap?.becameAura === true) return becameAuraDefinition(printed);
+    return printed;
   }
 
   private canEnchant(aura: ObjectId, host: ObjectId, controller: PlayerId, def: CardDefinition): boolean {
     if (host === aura) return false;
     const target = this.state.objects[host];
-    if (target === undefined || target.zone !== "battlefield" || !this.inGame(target)) return false;
-    const spec = def.targets[0];
-    if (spec === undefined) return false;
-    const onBattlefield = this.state.objects[aura]?.zone === "battlefield";
+    if (target === undefined || !this.inGame(target)) return false;
+    const auraObject = this.state.objects[aura];
+    const onBattlefield = auraObject?.zone === "battlefield";
     if (this.enteringAuraTypes(aura, def).includes("creature")) return false;
-    const ref: TargetRef = { kind: "object", object: host };
-    if (!isLegalTarget(this.state, this.registry, spec, ref, controller, undefined, { notTargeted: true })) {
-      return false;
+    const swap = onBattlefield ? auraObject.enchantSwap : undefined;
+    if (swap?.put !== undefined) {
+      // "Enchant creature put onto the battlefield with this Aura" (Animate
+      // Dead): that one permanent, in that stint (rule 400.7), while it's a
+      // creature — its ruling: "can't be attached to anything other than it".
+      if (target.zone !== "battlefield" || swap.put.object !== host) return false;
+      if ((target.zoneChangeCount ?? 0) !== swap.put.stint) return false;
+      if (!effectiveTypes(this.state, this.registry, target).includes("creature")) return false;
+    } else {
+      // An enchant ability an effect gave it ("becomes an Aura with enchant
+      // creature" — Cloudform), or its own: the slot its spell targets.
+      const spec = swap?.spec ?? def.targets[0];
+      if (spec === undefined) return false;
+      // "Enchant creature card in a graveyard" (rule 303.4a's enchant
+      // ability is the slot its spell targets) reaches a card there; every
+      // other enchant ability, a permanent.
+      const graveyardSlot = typeof spec === "object" && spec.kind === "card-in-graveyard";
+      if (target.zone !== (graveyardSlot ? "graveyard" : "battlefield")) return false;
+      const ref: TargetRef = { kind: "object", object: host };
+      if (!isLegalTarget(this.state, this.registry, spec, ref, controller, undefined, { notTargeted: true })) {
+        return false;
+      }
+      // Protection works only on the battlefield (rule 702.16 — Animate
+      // Dead's ruling: a card with protection from black can be enchanted
+      // in a graveyard).
+      if (target.zone === "graveyard") return true;
     }
     const source = onBattlefield ? this.permanentSource(aura) : this.enteringSource(def, aura);
     return !protectionBlocks(this.state, this.registry, host, source, aura, controller);
@@ -32308,6 +32357,10 @@ export class Game {
       const was = attachedWas();
       if (was === undefined) return undefined;
       const on = this.state.objects[was.host];
+      // "Enchanted creature card" of an Aura still enchanting a card in a
+      // graveyard (Animate Dead): an Aura is unattached as soon as that card
+      // leaves (`detachFrom`), so it's the same card.
+      if (was.stint === undefined && on?.zone === "graveyard") return was.host;
       if (on?.zone !== "battlefield" || (was.stint !== undefined && on.zoneChangeCount !== was.stint)) return undefined;
       return was.host;
     };
@@ -36861,6 +36914,31 @@ export class Game {
         const object = this.state.objects[target.object];
         if (object === undefined || object.zone !== "battlefield") return;
         this.unattachNow(target.object);
+      },
+      swapEnchant: (enchant, becomeAura) => {
+        const object = this.state.objects[source];
+        if (object === undefined || object.zone !== "battlefield") return;
+        // A layer-4 effect (becoming an Aura) and a layer-6 one (the enchant
+        // ability swapped) from now (rule 613.7).
+        this.state.timestampSeq += 1;
+        let swapped: Pick<NonNullable<GameObject["enchantSwap"]>, "put" | "spec">;
+        if ("spec" in enchant) {
+          swapped = { spec: enchant.spec };
+        } else {
+          const host = enchant.put === undefined ? undefined : this.state.objects[enchant.put];
+          swapped = {
+            put: {
+              object: enchant.put !== undefined && host?.zone === "battlefield" ? enchant.put : null,
+              stint: host?.zoneChangeCount ?? 0,
+            },
+          };
+        }
+        object.enchantSwap = {
+          at: this.state.timestampSeq,
+          ...swapped,
+          ...(becomeAura || object.enchantSwap?.becameAura === true ? { becameAura: true as const } : {}),
+        };
+        invalidateComputedCache();
       },
       becomeLicidAura: (target, endCost) => {
         const object = this.state.objects[source];
@@ -42465,15 +42543,9 @@ export class Game {
     const sourceObject = this.state.objects[source];
     if (sourceObject === undefined || sourceObject.zone !== "battlefield") return;
     if (sourceObject.attachedTo === targetId) return;
-    const printed = this.registry.get(printedCardName(sourceObject));
     // A bestowed Aura moves as an Aura (rule 702.103b), and so does a Licid
-    // that became one.
-    const def =
-      sourceObject.bestowed === true
-        ? bestowedDefinition(printed)
-        : sourceObject.licid !== undefined
-          ? licidDefinition(printed)
-          : printed;
+    // or a Necromancy that became one.
+    const def = this.attachmentDefinition(sourceObject);
     const legal = def.subtypes.includes("Aura")
       ? this.canEnchant(source, targetId, sourceObject.controller, def)
       : def.subtypes.includes("Equipment") && this.canEquip(source, targetId, true, planeswalkerToo);
@@ -47123,13 +47195,7 @@ export class Game {
   private attachableHosts(attachment: ObjectId, filter: CardFilter, player: PlayerId, another: boolean): ObjectId[] {
     const object = this.state.objects[attachment];
     if (object === undefined || object.zone !== "battlefield") return [];
-    const printed = this.registry.get(printedCardName(object));
-    const def =
-      object.bestowed === true
-        ? bestowedDefinition(printed)
-        : object.licid !== undefined
-          ? licidDefinition(printed)
-          : printed;
+    const def = this.attachmentDefinition(object);
     const aura = def.subtypes.includes("Aura");
     if (!aura && !def.subtypes.includes("Equipment")) return [];
     return this.battlefieldMatching(player, filter).filter(
@@ -53248,7 +53314,7 @@ export class Game {
         }
         if (object.attachedTo === null || !this.inGame(object)) continue;
         const subtypes = this.registry.get(printedCardName(object)).subtypes;
-        if (subtypes.includes("Aura") || object.licid !== undefined) continue;
+        if (subtypes.includes("Aura") || object.licid !== undefined || object.enchantSwap?.becameAura === true) continue;
         if (subtypes.includes("Equipment") && this.canEquip(id, object.attachedTo)) continue;
         const from = object.attachedTo;
         object.attachedTo = null;
@@ -53746,9 +53812,9 @@ export class Game {
     // check — as it would at a table.
     for (const id of battlefield) {
       const object = this.state.objects[id];
-      const printed = this.registry.get(printedCardName(object));
-      // A Licid that became an Aura (`GameObject.licid`) is one like any other.
-      const def = object.licid !== undefined ? licidDefinition(printed) : printed;
+      // A Licid or a Necromancy that became an Aura is one like any other. (A
+      // bestowed one becomes a creature again instead — 702.103f, above.)
+      const def = object.bestowed === true ? this.registry.get(printedCardName(object)) : this.attachmentDefinition(object);
       if (!def.subtypes.includes("Aura")) continue;
       if (object.attachedTo !== null && this.canEnchant(id, object.attachedTo, object.controller, def)) continue;
       // A Curse on a player who has left the game, or one it can no longer
@@ -55949,6 +56015,11 @@ export class Game {
       object.zone === "graveyard" && to !== "graveyard" && !object.isToken && !alreadyAnnounced
         ? this.graveyardSnapshot(id)
         : undefined;
+    // An Aura enchanting this card in a graveyard (Animate Dead) is attached
+    // to nothing once it leaves: wherever it goes, it's a new object (rule
+    // 400.7), and the state-based check puts the Aura into its owner's
+    // graveyard (704.5m) — unless an effect attaches it again first.
+    if (object.zone === "graveyard" && to !== "graveyard") this.detachFrom(id);
     const previousZone = object.zone;
     // How it gets onto the battlefield (`EntryRecord`), read before the
     // resets below hand it back to its owner: from where, whether it was
@@ -56178,8 +56249,15 @@ export class Game {
       // An Aura enters attached to what it enchants (rule 303.4) — if that is
       // still on the battlefield; if not, it's attached to nothing, and the
       // state-based check puts it into the graveyard (704.5m).
+      // An Aura that enchants a card in a graveyard (Animate Dead) enters
+      // attached to that card, if it's still there.
       const host = enterChoice.enchant ?? null;
-      if (host !== null && this.state.objects[host]?.zone === "battlefield") {
+      const hostZone = host === null ? undefined : this.state.objects[host]?.zone;
+      if (
+        host !== null &&
+        (hostZone === "battlefield" ||
+          (hostZone === "graveyard" && enchantsGraveyardCard(this.registry.get(printedCardName(object)))))
+      ) {
         object.attachedTo = host;
         this.emit({ type: "permanent-attached", source: id, target: host });
       }
@@ -56326,8 +56404,10 @@ export class Game {
     // A bestowed Aura spell becomes a bestowed Aura (rule 702.103b); any
     // other move ends it.
     if (!(previousZone === "stack" && to === "battlefield")) object.bestowed = undefined;
-    // A Licid's Aura effect was this permanent's (rule 400.7).
+    // A Licid's Aura effect was this permanent's (rule 400.7), and so was
+    // an enchant ability an effect gave it (`swap-enchant`).
     delete object.licid;
+    delete object.enchantSwap;
     // Graveyard permissions: a card's own "you may cast it this turn" belongs
     // to that object in that graveyard, and a grantor's spent allowances to
     // that object on the battlefield — a card that comes back is a new object

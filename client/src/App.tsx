@@ -3699,6 +3699,12 @@ function Table({
       ? [o.object]
       : [],
   )
+  // The same for what an entering Aura enchants, when that's a card in a
+  // graveyard (Animate Dead's "enchant creature card in a graveyard").
+  const enchantGraveyardIds =
+    mode === 'choose-enchant' && enchantAction
+      ? enchantAction.options.filter((id) => !view.zones.battlefield.includes(id))
+      : []
   const zoneTargetKey = activeTargeting
     ? `${activeTargeting.kind}:${activeTargeting.source}:${activeTargeting.abilityIndex}:${activeTargeting.picked.length}`
     : null
@@ -4551,8 +4557,13 @@ function Table({
       <div className="controls">
         <span>
           {view.decisionSource?.cardName ?? game.nameOf(enchantAction.source)} is entering the
-          battlefield — click {(enchantAction.players ?? []).length > 0 ? 'the player' : 'what'} it enchants.
+          battlefield — {enchantGraveyardIds.length > 0 ? 'choose the card' : `click ${(enchantAction.players ?? []).length > 0 ? 'the player' : 'what'}`} it enchants.
         </span>
+        {enchantGraveyardIds.length > 0 && decisionCollapsed ? (
+          <button type="button" onClick={() => setDecisionCollapsed(false)}>
+            Show choices
+          </button>
+        ) : null}
       </div>
     )
   } else if (mode === 'order-triggers' && triggerOrderAction) {
@@ -7737,6 +7748,28 @@ function Table({
           }}
           collapsed={zoneTargetCollapsed}
           onCollapse={() => setZoneTargetHidden(zoneTargetKey)}
+        />
+      ) : null}
+
+      {mode === 'choose-enchant' && enchantAction && enchantGraveyardIds.length > 0 ? (
+        // "Enchant creature card in a graveyard" (Animate Dead put onto the
+        // battlefield by Replenish, Sun Titan): the cards it could enchant
+        // aren't on the board, so they're picked from a popup of just those.
+        <ZoneViewer
+          key={`enchant:${enchantAction.source}`}
+          title={`${view.decisionSource?.cardName ?? game.nameOf(enchantAction.source)} — choose the card it enchants`}
+          ids={enchantGraveyardIds}
+          resolve={(id) => view.objects[id]}
+          selection={{
+            min: 1,
+            max: 1,
+            eligible: enchantGraveyardIds,
+            onConfirm: (chosen) => {
+              if (chosen[0] !== undefined) game.dispatch({ type: 'choose-enchant', player: seat, enchant: chosen[0] })
+            },
+          }}
+          collapsed={decisionCollapsed}
+          onCollapse={() => setDecisionCollapsed(true)}
         />
       ) : null}
 

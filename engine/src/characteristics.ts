@@ -3174,13 +3174,33 @@ function licidModifier(object: GameObject): PtModifier | null {
   };
 }
 
-/** The object's layer-4 modifiers, reconfigure's and a Licid's among them,
- * in timestamp order. */
+/**
+ * Necromancy's "it becomes an Aura with 'enchant creature put onto the
+ * battlefield with Necromancy'", Cloudform's "with enchant creature"
+ * (`GameObject.enchantSwap`'s `becameAura`): the subtype Aura, at the timestamp its ability resolved
+ * (613.7), for as long as it stays on the battlefield.
+ */
+function becameAuraModifier(object: GameObject): PtModifier | null {
+  const swap = object.enchantSwap;
+  if (swap?.becameAura !== true) return null;
+  return {
+    power: 0,
+    toughness: 0,
+    keywords: [],
+    untilEndOfTurn: false,
+    addSubtypes: ["Aura"],
+    timestamp: swap.at,
+  };
+}
+
+/** The object's layer-4 modifiers, reconfigure's, a Licid's and a
+ * Necromancy's among them, in timestamp order. */
 function typeModifiers(object: GameObject): readonly PtModifier[] {
   const reconfigured = reconfiguredModifier(object);
   const licid = licidModifier(object);
-  if (reconfigured === null && licid === null) return object.modifiers;
-  const extra = [reconfigured, licid].filter((m): m is PtModifier => m !== null);
+  const becameAura = becameAuraModifier(object);
+  if (reconfigured === null && licid === null && becameAura === null) return object.modifiers;
+  const extra = [reconfigured, licid, becameAura].filter((m): m is PtModifier => m !== null);
   return [...object.modifiers, ...extra].sort((a, b) => modifierKey(a) - modifierKey(b));
 }
 
@@ -4243,7 +4263,9 @@ export function staticAffects(
   const subtypesNow = (): readonly string[] =>
     view.subtypes ?? effectiveSubtypes(state, registry, target);
   if (affects.scope === "self") return source.id === target.id;
-  if (affects.scope === "attached") return source.attachedTo === target.id;
+  // An Aura enchanting a card in a graveyard (Animate Dead, before its
+  // ability returns it) gives that card nothing: statics reach permanents.
+  if (affects.scope === "attached") return source.attachedTo === target.id && target.zone !== "graveyard";
   if (affects.scope === "chosen") {
     const chosen = source.chosenPermanent;
     return (

@@ -8631,6 +8631,25 @@ export type EffectSpec =
       readonly attaching?: TargetRef;
     }
   | {
+      /** The source loses its enchant ability and gains `enchant`'s, or —
+       * `becomeAura` — becomes an Aura with it. `"put-this-way"` is "enchant
+       * creature put onto the battlefield with this Aura" (Animate Dead's
+       * swap; Necromancy with `becomeAura`): only the creature an earlier step
+       * of this resolution put onto the battlefield (manifested too), in that
+       * stint (rule 400.7) and while it's a creature — the ruling's "can't be
+       * attached to anything other than it" — or, with none put, nothing,
+       * and the state-based check puts it into its owner's graveyard
+       * (704.5m). A {@link TargetSpec} is any enchant ability, read as an
+       * Aura's target slot is but without targeting: Cloudform's "it becomes
+       * an Aura with enchant creature" is `"creature"`. Lasts until the source
+       * leaves (`GameObject.enchantSwap`). Goes after the
+       * `put-onto-battlefield` (or `manifest`) and before the `attach` to
+       * `"put-this-way"`. Nothing if the source has left. */
+      readonly kind: "swap-enchant";
+      readonly enchant: "put-this-way" | TargetSpec;
+      readonly becomeAura?: true;
+    }
+  | {
       /** Unattach `target` (an Aura or Equipment) from whatever it's attached
        * to — reconfigure's second ability (rule 702.151a), "Unattach this
        * permanent"; it stays on the battlefield. Nothing for one that isn't
@@ -12810,6 +12829,10 @@ export interface EffectApi {
   attach(target: TargetRef, attachment?: TargetRef, planeswalkerToo?: boolean): void;
   /** Unattach `target` — see the `"unattach"` {@link EffectSpec}. */
   unattach(target: TargetRef): void;
+  /** The source's enchant ability becomes `enchant`: "enchant creature put
+   * onto the battlefield with [it]", naming `put` (or nothing), or a spec —
+   * see the `"swap-enchant"` {@link EffectSpec}. */
+  swapEnchant(enchant: { readonly put: ObjectId | undefined } | { readonly spec: TargetSpec }, becomeAura: boolean): void;
   /** The source becomes a Licid's Aura and is attached to `target` — see
    * the `"become-licid-aura"` {@link EffectSpec}. */
   becomeLicidAura(target: TargetRef, endCost: string): void;
@@ -19382,6 +19405,15 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (ctx.sourceLost === true) return;
       const target = resolveEffectTarget(spec.target, ctx);
       if (target !== undefined) ctx.becomeLicidAura(target, spec.endCost);
+      return;
+    }
+    case "swap-enchant": {
+      if (spec.enchant === "put-this-way") {
+        const put = putThisWay(ctx);
+        ctx.swapEnchant({ put: put?.kind === "object" ? put.object : undefined }, spec.becomeAura === true);
+      } else {
+        ctx.swapEnchant({ spec: spec.enchant }, spec.becomeAura === true);
+      }
       return;
     }
     case "attach": {

@@ -13405,6 +13405,13 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.enchant = targetOf(`target ${m[1]}`);
       continue;
     }
+    // "Enchant creature card in a graveyard" (Animate Dead, Dance of the
+    // Dead; Spellweaver Volute's instant card): the Aura's target slot is a
+    // card there (rule 303.4a, `enchantsGraveyardCard`).
+    if ((m = /^Enchant (creature|instant|sorcery|artifact|enchantment|land) card in a graveyard$/.exec(line))) {
+      out.enchant = { kind: "card-in-graveyard", whose: "any", filter: { type: m[1] } };
+      continue;
+    }
     const equipReduced = /^Equip \{/.test(line) ? abilityReductionOf(line) : null;
     if ((m = /^Equip ((?:\{[^}]+\})+)\.?$/.exec(equipReduced?.rest ?? line))) {
       out.activated.push({

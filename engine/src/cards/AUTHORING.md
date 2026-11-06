@@ -3764,6 +3764,21 @@ have all become illegal is countered by the game (fizzles).
 
 An Aura uses `targets: ["creature"]` (or whatever it enchants) — it attaches to
 its target on resolution automatically because it has the `"Aura"` subtype.
+**"Enchant creature card in a graveyard"** (Animate Dead, Dance of the Dead) is
+`targets: [{ kind: "card-in-graveyard", whose: "any", filter: { type: "creature" } }]`:
+it enters attached to that card (put onto the battlefield another way, its
+controller chooses one, 303.4f), stays legal while the card is there, is
+unattached the moment the card leaves, and its statics don't reach it there.
+Its enters ability is `conditional` on `source-on-battlefield` around
+`put-onto-battlefield { target: "attached" }`, then **`swap-enchant { enchant:
+"put-this-way" }`** ("loses 'enchant creature card in a graveyard' and gains
+'enchant creature put onto the battlefield with this Aura'" — `GameObject.enchantSwap`),
+then `attach { target: "put-this-way" }`, then the "leaves" ability as a
+`delayed-trigger` at `{ leaves: "source" }` with `about: "put-onto-battlefield"`
+(the ruling: it's keyed to the creature returned). `swap-enchant`'s
+`becomeAura: true` is an enchantment that "becomes an Aura with …" (Necromancy;
+Cloudform's `enchant: "creature"` after a `manifest`). Pool:
+`pool/animate-dead.ts`, `pool/necromancy.ts`, `pool/cloudform.ts`.
 "Enchant player" / "Enchant opponent" (a Curse, rule 303.4) is `targets:
 ["player"]` / `["opponent"]`: it resolves attached to that player
 (`GameObject.attachedToPlayer`, never with `attachedTo`), entering any other way

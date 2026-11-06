@@ -183,6 +183,7 @@ import _poolCunningEvasion from "../pool/cunning-evasion.js";
 import _poolCutOfTheProfits from "../pool/cut-of-the-profits.js";
 import _poolCutthroatManeuver from "../pool/cutthroat-maneuver.js";
 import _poolCyclopeanMummy from "../pool/cyclopean-mummy.js";
+import _poolDanceOfTheDead from "../pool/dance-of-the-dead.js";
 import _poolDaringFiendbonder from "../pool/daring-fiendbonder.js";
 import _poolDaringThief from "../pool/daring-thief.js";
 import _poolDarkmossBridge from "../pool/darkmoss-bridge.js";
@@ -1145,6 +1146,7 @@ const shard: CardShard = {
     _poolCutOfTheProfits,
     _poolCutthroatManeuver,
     _poolCyclopeanMummy,
+    _poolDanceOfTheDead,
     _poolDaringFiendbonder,
     _poolDaringThief,
     _poolDarkmossBridge,

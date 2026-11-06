@@ -6423,6 +6423,35 @@ export function licidDefinition(def: CardDefinition): CardDefinition {
   return licid;
 }
 
+const becameAuraDefinitions = new WeakMap<CardDefinition, CardDefinition>();
+
+/**
+ * A permanent that "becomes an Aura with 'enchant creature put onto the
+ * battlefield with [it]'" (Necromancy; Cloudform's "with enchant creature" — `GameObject.enchantSwap`'s
+ * `becameAura`): its own definition with the subtype Aura added, what the
+ * Aura questions (`Game.canEnchant`, the Aura state-based actions) are asked
+ * of. Its enchant ability is `enchantSwap`'s, not its target slot; the
+ * layer fold adds the subtype at the effect's timestamp (`characteristics.ts`).
+ */
+export function becameAuraDefinition(def: CardDefinition): CardDefinition {
+  const known = becameAuraDefinitions.get(def);
+  if (known !== undefined) return known;
+  const aura: CardDefinition = { ...def, subtypes: def.subtypes.includes("Aura") ? def.subtypes : [...def.subtypes, "Aura"] };
+  becameAuraDefinitions.set(def, aura);
+  return aura;
+}
+
+/**
+ * Whether an Aura's enchant ability — the slot its spell targets (rule
+ * 303.4a) — is a card in a graveyard, not a permanent or a player: Animate
+ * Dead's "Enchant creature card in a graveyard". Such an Aura enters
+ * attached to that card, and is legally attached to it while it's there.
+ */
+export function enchantsGraveyardCard(def: CardDefinition): boolean {
+  const spec = def.targets[0];
+  return typeof spec === "object" && spec.kind === "card-in-graveyard";
+}
+
 const GRAVEYARD_ORDER_READERS = new WeakMap<CardDefinition, boolean>();
 
 /** Whether a card's text says "the top card of a graveyard" — the

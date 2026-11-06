@@ -1768,6 +1768,20 @@ export interface GameObject {
    * to end the effect (a special action, rule 116.2c — `end-licid-effect`)
    * or it leaves the battlefield. */
   licid?: { readonly controller: PlayerId; readonly endCost: string; readonly at: number };
+  /** An enchant ability an effect gave it (the `swap-enchant` effect): from
+   * `at`, what this permanent may enchant is `put` — "enchant creature put
+   * onto the battlefield with this Aura" (Animate Dead's swap, Necromancy):
+   * that one object, in its battlefield stint `stint` (rule 400.7), while
+   * it's a creature, nothing at all when `object` is null — or else `spec`,
+   * read as an Aura's target slot is but without targeting ("it becomes an
+   * Aura with enchant creature" — Cloudform). `becameAura`: from `at` it's
+   * an Aura too (layer 4 at that timestamp, rule 613.7). Ends when it leaves. */
+  enchantSwap?: {
+    readonly at: number;
+    readonly becameAura?: true;
+    readonly put?: { readonly object: ObjectId | null; readonly stint: number };
+    readonly spec?: TargetSpec;
+  };
   /** The player this Aura is attached to — a Curse's "Enchant player" (rule
    * 303.4: an Aura can be attached to a player). Set instead of
    * `attachedTo`, never with it; cleared on any zone change. */

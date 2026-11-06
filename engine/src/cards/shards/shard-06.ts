@@ -548,6 +548,7 @@ import _poolNaturalConnection from "../pool/natural-connection.js";
 import _poolNaturesChosen from "../pool/natures-chosen.js";
 import _poolNayaSojourners from "../pool/naya-sojourners.js";
 import _poolNecrogenRotpriest from "../pool/necrogen-rotpriest.js";
+import _poolNecromancy from "../pool/necromancy.js";
 import _poolNeedlepeakSpider from "../pool/needlepeak-spider.js";
 import _poolNegativeZonePortal from "../pool/negative-zone-portal.js";
 import _poolNessianAsp from "../pool/nessian-asp.js";
@@ -1507,6 +1508,7 @@ const shard: CardShard = {
     _poolNaturesChosen,
     _poolNayaSojourners,
     _poolNecrogenRotpriest,
+    _poolNecromancy,
     _poolNeedlepeakSpider,
     _poolNegativeZonePortal,
     _poolNessianAsp,

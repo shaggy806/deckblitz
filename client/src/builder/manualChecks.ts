@@ -11242,4 +11242,25 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Halo Fountain', "Avacyn's Pilgrim"] },
     }),
   ),
+  preset(
+    "Animate Dead: cast on a card in an opponent's graveyard",
+    board({
+      you: { bf: ['Swamp*2'], hand: ['Animate Dead'] },
+      opp: { gy: ['Hill Giant'] },
+    }),
+  ),
+  preset(
+    'Animate Dead: returned by Replenish, you choose the graveyard card it enchants',
+    board({
+      you: { bf: ['Plains*4'], hand: ['Replenish'], gy: ['Animate Dead', 'Grizzly Bears'] },
+      opp: { gy: ['Hill Giant'] },
+    }),
+  ),
+  preset(
+    'Animate Dead: returned by Replenish, you choose the graveyard card it enchants, four players',
+    board({
+      you: { bf: ['Plains*4'], hand: ['Replenish'], gy: ['Animate Dead', 'Grizzly Bears'] },
+      opp: [{ gy: ['Hill Giant'] }, { gy: [] }, { gy: ['Craw Wurm'] }],
+    }),
+  ),
 ]

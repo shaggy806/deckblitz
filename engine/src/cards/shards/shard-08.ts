@@ -152,6 +152,7 @@ import _poolChromeSteed from "../pool/chrome-steed.js";
 import _poolChronomancer from "../pool/chronomancer.js";
 import _poolCircuDimirLobotomist from "../pool/circu-dimir-lobotomist.js";
 import _poolCloakOfTheBat from "../pool/cloak-of-the-bat.js";
+import _poolCloudform from "../pool/cloudform.js";
 import _poolClownCar from "../pool/clown-car.js";
 import _poolCoalitionRelic from "../pool/coalition-relic.js";
 import _poolColdEyedSelkie from "../pool/cold-eyed-selkie.js";
@@ -1171,6 +1172,7 @@ const shard: CardShard = {
     _poolChronomancer,
     _poolCircuDimirLobotomist,
     _poolCloakOfTheBat,
+    _poolCloudform,
     _poolClownCar,
     _poolCoalitionRelic,
     _poolColdEyedSelkie,

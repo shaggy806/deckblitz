@@ -333,6 +333,19 @@ fails to pay. An emblem's own activated ability (Ob Nixilis of the Black Oath) i
 not built: nothing offers an ability of an object in the command zone that isn't
 its card's. Keys: effect:emblem-grants-activated, effect:emblem-grants-to-spells.
 
+### An Aura on a graveyard card, and an enchant ability an effect gives — built 2026-11-05
+
+By EDHREC rank: Animate Dead (223) and Necromancy (1030). An Aura whose target
+slot is `card-in-graveyard` (`enchantsGraveyardCard`) enters attached to that
+card — cast, or chosen as it's put onto the battlefield (303.4f) — and is
+unattached when the card leaves the graveyard; statics don't reach the card
+there. The `swap-enchant` effect gives the source an enchant ability
+(`GameObject.enchantSwap`): "enchant creature put onto the battlefield with
+this" (`"put-this-way"`, that object in that stint) or any spec, and with
+`becomeAura` makes it an Aura (layer 4). Proving cards: Animate Dead, Dance of
+the Dead, Necromancy, Cloudform, Lightform, Rageform. Keys:
+effect:aura-enchants-card-in-graveyard, effect:enchantment-becomes-aura.
+
 ### Exile with its own way back — built 2026-11-04
 
 The need-keys family `effect:exile-any-number-until-leaves`' top unit. Glorious

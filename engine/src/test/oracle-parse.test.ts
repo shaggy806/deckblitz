@@ -16012,3 +16012,16 @@ describe("what a doubled trigger's cause is, and playing from the top by type", 
     expect(krang.static[0].doubleTriggers).toEqual({ cause: "draws" });
   });
 });
+
+describe("an Aura enchanting a card in a graveyard", () => {
+  it("reads Animate Dead's enchant line as a graveyard-card slot", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Enchantment — Aura",
+      mana_cost: "{1}{B}",
+      colors: ["B"],
+      oracle_text: "Enchant creature card in a graveyard\nEnchanted creature gets -1/-0.",
+    });
+    expect(face.enchant).toEqual({ kind: "card-in-graveyard", whose: "any", filter: { type: "creature" } });
+  });
+});

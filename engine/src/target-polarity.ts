@@ -34,7 +34,7 @@ import type { ActivatedAbility, TriggeredAbility } from "./abilities.js";
 import type { LegalAction } from "./actions.js";
 import type { CardRegistry } from "./cards.js";
 import type { CardDefinition } from "./cards/define.js";
-import { bestowedDefinition, licidDefinition } from "./cards/define.js";
+import { bestowedDefinition, enchantsGraveyardCard, licidDefinition } from "./cards/define.js";
 import { computeCharacteristics, playerCantLoseGame, playerCantLoseLife } from "./characteristics.js";
 import { matchesFilter } from "./filter.js";
 import type { CardFilter } from "./filter.js";
@@ -833,6 +833,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   },
   // Reconfigure's unattach is its own source: no target to place.
   unattach: none,
+  // Animate Dead's enchant swap touches only its own source.
+  "swap-enchant": none,
   // A Licid's: which way depends on what the Aura does — `offerPolarities`
   // reads its statics for that (`auraPolarity`).
   "become-licid-aura": (n, v) => v.touch(n.target, "either", MINOR),
@@ -1190,6 +1192,10 @@ function grantedTriggerHarms(ability: { readonly effect: EffectSpec | null }): b
 }
 
 export function auraPolarity(def: CardDefinition): Polarity {
+  // "Enchant creature card in a graveyard" (Animate Dead): the card comes
+  // back under our control, whoever's graveyard it's in — a reanimation's
+  // pick, whatever its statics then do to it.
+  if (enchantsGraveyardCard(def)) return "take";
   if (def.controlEnchanted) return "harm";
   if ((def.subtypes ?? []).includes("Curse")) return "harm";
   let harm = false;

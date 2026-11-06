@@ -433,6 +433,7 @@ import _poolLeinoreAutumnSovereign from "../pool/leinore-autumn-sovereign.js";
 import _poolLensFlare from "../pool/lens-flare.js";
 import _poolLeonardoLeaderInBlue from "../pool/leonardo-leader-in-blue.js";
 import _poolLibraryLarcenist from "../pool/library-larcenist.js";
+import _poolLightform from "../pool/lightform.js";
 import _poolLightningRunner from "../pool/lightning-runner.js";
 import _poolLithobraking from "../pool/lithobraking.js";
 import _poolLoomingShade from "../pool/looming-shade.js";
@@ -1355,6 +1356,7 @@ const shard: CardShard = {
     _poolLensFlare,
     _poolLeonardoLeaderInBlue,
     _poolLibraryLarcenist,
+    _poolLightform,
     _poolLightningRunner,
     _poolLithobraking,
     _poolLoomingShade,

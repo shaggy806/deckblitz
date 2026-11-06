@@ -877,6 +877,7 @@ import _poolAnimalBoneyard from "./pool/animal-boneyard.js";
 import _poolAnimalMagnetism from "./pool/animal-magnetism.js";
 import _poolAnimalSanctuary from "./pool/animal-sanctuary.js";
 import _poolAnimarSoulOfElements from "./pool/animar-soul-of-elements.js";
+import _poolAnimateDead from "./pool/animate-dead.js";
 import _poolAnimateLand from "./pool/animate-land.js";
 import _poolAnimateWall from "./pool/animate-wall.js";
 import _poolAnimatingFaerie from "./pool/animating-faerie.js";
@@ -4581,6 +4582,7 @@ import _poolCloudchaserKestrel from "./pool/cloudchaser-kestrel.js";
 import _poolCloudcrestLake from "./pool/cloudcrest-lake.js";
 import _poolCloudcrownOak from "./pool/cloudcrown-oak.js";
 import _poolCloudfinRaptor from "./pool/cloudfin-raptor.js";
+import _poolCloudform from "./pool/cloudform.js";
 import _poolCloudgoatRanger from "./pool/cloudgoat-ranger.js";
 import _poolCloudheathDrake from "./pool/cloudheath-drake.js";
 import _poolCloudhoofKirin from "./pool/cloudhoof-kirin.js";
@@ -5653,6 +5655,7 @@ import _poolDampingField from "./pool/damping-field.js";
 import _poolDampingMatrix from "./pool/damping-matrix.js";
 import _poolDanceOfMany from "./pool/dance-of-many.js";
 import _poolDanceOfShadows from "./pool/dance-of-shadows.js";
+import _poolDanceOfTheDead from "./pool/dance-of-the-dead.js";
 import _poolDanceOfTheManse from "./pool/dance-of-the-manse.js";
 import _poolDanceOfTheSkywise from "./pool/dance-of-the-skywise.js";
 import _poolDanceOfTheTumbleweeds from "./pool/dance-of-the-tumbleweeds.js";
@@ -14790,6 +14793,7 @@ import _poolLightUpTheStage from "./pool/light-up-the-stage.js";
 import _poolLightbringer from "./pool/lightbringer.js";
 import _poolLightfootRogue from "./pool/lightfoot-rogue.js";
 import _poolLightfootTechnique from "./pool/lightfoot-technique.js";
+import _poolLightform from "./pool/lightform.js";
 import _poolLighthouseChronologist from "./pool/lighthouse-chronologist.js";
 import _poolLightkeeperOfEmeria from "./pool/lightkeeper-of-emeria.js";
 import _poolLightlessEvangel from "./pool/lightless-evangel.js";
@@ -17213,6 +17217,7 @@ import _poolNecromancersAssistant from "./pool/necromancers-assistant.js";
 import _poolNecromancersCovenant from "./pool/necromancers-covenant.js";
 import _poolNecromancersFamiliar from "./pool/necromancers-familiar.js";
 import _poolNecromancersStockpile from "./pool/necromancers-stockpile.js";
+import _poolNecromancy from "./pool/necromancy.js";
 import _poolNecromanticSelection from "./pool/necromantic-selection.js";
 import _poolNecromanticSummons from "./pool/necromantic-summons.js";
 import _poolNecromanticThirst from "./pool/necromantic-thirst.js";
@@ -19887,6 +19892,7 @@ import _poolRageWeaver from "./pool/rage-weaver.js";
 import _poolRagebloodShaman from "./pool/rageblood-shaman.js";
 import _poolRagefireHellkite from "./pool/ragefire-hellkite.js";
 import _poolRagefire from "./pool/ragefire.js";
+import _poolRageform from "./pool/rageform.js";
 import _poolRagemonger from "./pool/ragemonger.js";
 import _poolRaggadraggaGoregutsBoss from "./pool/raggadragga-goreguts-boss.js";
 import _poolRaggedPlaymate from "./pool/ragged-playmate.js";
@@ -31836,6 +31842,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAnimalMagnetism,
   _poolAnimalSanctuary,
   _poolAnimarSoulOfElements,
+  _poolAnimateDead,
   _poolAnimateLand,
   _poolAnimateWall,
   _poolAnimatingFaerie,
@@ -35540,6 +35547,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCloudcrestLake,
   _poolCloudcrownOak,
   _poolCloudfinRaptor,
+  _poolCloudform,
   _poolCloudgoatRanger,
   _poolCloudheathDrake,
   _poolCloudhoofKirin,
@@ -36612,6 +36620,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDampingMatrix,
   _poolDanceOfMany,
   _poolDanceOfShadows,
+  _poolDanceOfTheDead,
   _poolDanceOfTheManse,
   _poolDanceOfTheSkywise,
   _poolDanceOfTheTumbleweeds,
@@ -45749,6 +45758,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLightbringer,
   _poolLightfootRogue,
   _poolLightfootTechnique,
+  _poolLightform,
   _poolLighthouseChronologist,
   _poolLightkeeperOfEmeria,
   _poolLightlessEvangel,
@@ -48172,6 +48182,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNecromancersCovenant,
   _poolNecromancersFamiliar,
   _poolNecromancersStockpile,
+  _poolNecromancy,
   _poolNecromanticSelection,
   _poolNecromanticSummons,
   _poolNecromanticThirst,
@@ -50846,6 +50857,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRagebloodShaman,
   _poolRagefireHellkite,
   _poolRagefire,
+  _poolRageform,
   _poolRagemonger,
   _poolRaggadraggaGoregutsBoss,
   _poolRaggedPlaymate,
@@ -62808,6 +62820,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/animal-magnetism": _poolAnimalMagnetism,
   "pool/animal-sanctuary": _poolAnimalSanctuary,
   "pool/animar-soul-of-elements": _poolAnimarSoulOfElements,
+  "pool/animate-dead": _poolAnimateDead,
   "pool/animate-land": _poolAnimateLand,
   "pool/animate-wall": _poolAnimateWall,
   "pool/animating-faerie": _poolAnimatingFaerie,
@@ -66512,6 +66525,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cloudcrest-lake": _poolCloudcrestLake,
   "pool/cloudcrown-oak": _poolCloudcrownOak,
   "pool/cloudfin-raptor": _poolCloudfinRaptor,
+  "pool/cloudform": _poolCloudform,
   "pool/cloudgoat-ranger": _poolCloudgoatRanger,
   "pool/cloudheath-drake": _poolCloudheathDrake,
   "pool/cloudhoof-kirin": _poolCloudhoofKirin,
@@ -67584,6 +67598,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/damping-matrix": _poolDampingMatrix,
   "pool/dance-of-many": _poolDanceOfMany,
   "pool/dance-of-shadows": _poolDanceOfShadows,
+  "pool/dance-of-the-dead": _poolDanceOfTheDead,
   "pool/dance-of-the-manse": _poolDanceOfTheManse,
   "pool/dance-of-the-skywise": _poolDanceOfTheSkywise,
   "pool/dance-of-the-tumbleweeds": _poolDanceOfTheTumbleweeds,
@@ -76721,6 +76736,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/lightbringer": _poolLightbringer,
   "pool/lightfoot-rogue": _poolLightfootRogue,
   "pool/lightfoot-technique": _poolLightfootTechnique,
+  "pool/lightform": _poolLightform,
   "pool/lighthouse-chronologist": _poolLighthouseChronologist,
   "pool/lightkeeper-of-emeria": _poolLightkeeperOfEmeria,
   "pool/lightless-evangel": _poolLightlessEvangel,
@@ -79144,6 +79160,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/necromancers-covenant": _poolNecromancersCovenant,
   "pool/necromancers-familiar": _poolNecromancersFamiliar,
   "pool/necromancers-stockpile": _poolNecromancersStockpile,
+  "pool/necromancy": _poolNecromancy,
   "pool/necromantic-selection": _poolNecromanticSelection,
   "pool/necromantic-summons": _poolNecromanticSummons,
   "pool/necromantic-thirst": _poolNecromanticThirst,
@@ -81818,6 +81835,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rageblood-shaman": _poolRagebloodShaman,
   "pool/ragefire-hellkite": _poolRagefireHellkite,
   "pool/ragefire": _poolRagefire,
+  "pool/rageform": _poolRageform,
   "pool/ragemonger": _poolRagemonger,
   "pool/raggadragga-goreguts-boss": _poolRaggadraggaGoregutsBoss,
   "pool/ragged-playmate": _poolRaggedPlaymate,

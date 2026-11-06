@@ -617,6 +617,7 @@ import _poolQuantumMisalignment from "../pool/quantum-misalignment.js";
 import _poolRabbleRouser from "../pool/rabble-rouser.js";
 import _poolRacersRing from "../pool/racers-ring.js";
 import _poolRafterDemon from "../pool/rafter-demon.js";
+import _poolRageform from "../pool/rageform.js";
 import _poolRainOfRiches from "../pool/rain-of-riches.js";
 import _poolRakavolver from "../pool/rakavolver.js";
 import _poolRampagingGrowth from "../pool/rampaging-growth.js";
@@ -1582,6 +1583,7 @@ const shard: CardShard = {
     _poolRabbleRouser,
     _poolRacersRing,
     _poolRafterDemon,
+    _poolRageform,
     _poolRainOfRiches,
     _poolRakavolver,
     _poolRampagingGrowth,
