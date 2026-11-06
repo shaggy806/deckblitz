@@ -412,6 +412,16 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   slots are alike, as here), and a skipped optional first slot still needs the cast refused or the
   random controller kept from skipping it. Found 2026-10-23, batch 151's checks.
 
+**A static's own-type condition may read printed types** (suspected, 2026-11-06). Batch 266's
+agent authored Romulan Bird-of-Prey (Star Trek: a Spacecraft with station; "as long as this
+isn't a creature, it has hexproof") as a static with `condition: { kind: "source", filter: {
+notTypes: ["creature"] } }`, and its test found the hexproof still on at 8+ charge counters,
+where the station band has made it an artifact creature (layer 4). Hexproof is granted in
+layer 6, so the condition should see the layer-4 types (rules 613.1d, 613.1f). Unconfirmed: the
+card was dropped and the failing test went with it, so the first step is to rebuild that test
+and see whether the condition, the station band, or the agent's definition is at fault. Blocks
+Romulan Bird-of-Prey (`bug:static-condition-reads-printed-types`).
+
 **An all-your-life payment is only offered at even life, 2 to 20.** Rule 119.4 lets a player pay exactly their total. `Game.offersFor` adds
 those offers (K'rrik's {B}, a Phyrexian pip) at even life from 2 to 20, to spare a second enumeration, so with life already reserved by the
 cost (Liesa's commander tax) an odd total isn't offered. Above 20 no offer is added; that would take more than ten pips. Found 2026-11-04.

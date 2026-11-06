@@ -57,6 +57,12 @@ What blocks each unimplemented card, and which cards a built feature may have un
 the per-card JSON records in `engine/data/sweep-2/` and `sweep-3/`). Card lists go there; this
 section keeps only what to do next.
 
+- **Star Trek, from its previews** (`author-by-set`, the user's call 2026-11-06; out 2026-11-13):
+  batch 266 took TRK's top 120 by rank and the Beam me up and face a dilemma cards (114 authored).
+  **Next:** TRK's other ~157 cards (`cards:sets -w engine -- --set trk`, two agents), then
+  Star Trek Commander (TRC, 172; `--set trc`), whose Borg want `mechanic:assimilate` (8 cards
+  across both sets) — build it with that batch. After release, `gen:oracle` again: it drops the
+  `preview` lines, brings the rulings, and `card:verify` shows any card whose text changed.
 - **Next: work down the need keys** (the set walk ended 2026-10-27 with batch 234; its record moved to `COMPLETED.md`) (`docs/plans/need-keys-after-the-walk.md`,
   in progress; the tooling, the model trial, and Phase 1's merge and existence check landed
   2026-10-27): next, Phase 1 step 2, the recheck round. 863 cards were frozen 2026-10-27 into nine
@@ -573,6 +579,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **A static's own-type condition may read printed types** (suspected, 2026-11-06: Romulan Bird-of-Prey's hexproof "as long as this isn't a creature" held after station made it one; unconfirmed).
 - **An all-your-life payment is only offered at even life, 2 to 20** (K'rrik, Phyrexian pips: an odd total reached through Liesa's tax isn't offered).
 - **`withMain` from a precombat main runs M C+ C M M** (the rules say M C+ M C M; no pool ability reaches it yet).
 - **Panglacial Wurm under Opposition Agent** (the cast-while-searching offer comes before the search control begins, so the searcher answers it).
