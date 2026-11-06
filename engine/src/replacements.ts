@@ -555,6 +555,14 @@ export interface GraveyardExileReplacement {
    * moving object's controller picks another exile that could apply (rule
    * 616.1). Not with `self`. */
   readonly then?: EffectSpec;
+  /** The card is exiled **with this permanent** (rule 607.2a —
+   * `GameObject.exiledWith`), in the battlefield stint it has as the card
+   * arrives, so a linked ability of it finds the card: The Darkness Crystal's
+   * "put target creature card exiled with The Darkness Crystal onto the
+   * battlefield", Valgavoth, Terror Eater's "you may play cards exiled with
+   * Valgavoth". Like `then`, given up when the moving object's controller
+   * picks another exile that could apply (rule 616.1). Not with `self`. */
+  readonly linked?: true;
   /** "If **this** would be put into a graveyard from anywhere, exile it
    * instead" — a disturb back face's (Hook-Haunt Drifter, rule 702.146):
    * the object's own ability, not an external one, so it catches only the

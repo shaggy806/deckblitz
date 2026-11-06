@@ -6624,7 +6624,13 @@ clause (section 9):
   what it does beside the exile, its controller's, once per token of a stack:
   "instead exile that card and create a 2/2 black Zombie" (Kalitas, Traitor of
   Ghet — an instruction of the replacement), or a `reflexive-trigger` for "exile
-  it instead. When you do, create …" (Head of the Hunt). For a turn rather than
+  it instead. When you do, create …" (Head of the Hunt). `linked: true` exiles
+  the card **with** this permanent (rule 607.2a, `GameObject.exiledWith`), so its
+  "exiled with ~" abilities find it: The Darkness Crystal (`then: { kind:
+  "gain-life", amount: 2 }`, and a `card-in-exile { linked: true }` target for
+  its return), Gisa, Glorious Resurrector (`return-exiled-by-source { linked:
+  "battlefield", under: "you" }` at upkeep). Set it only when the card says
+  "exiled with" somewhere. For a turn rather than
   a permanent, it's `player-effect`'s `graveyardExile`, §6. When
   another replacement would exile the card too — Rest in Peace, a finality
   counter, flashback, a disturb face's own, a Kess-style permission — the affected
@@ -6632,7 +6638,8 @@ clause (section 9):
   which applies (rule 616.1), and the two differ only in the counter: it's
   put on only when one of the replacements putting it is the chooser's own,
   the one choice that serves them (an opponent's flashback spell is exiled
-  by flashback, with no void counter). `self: true` is a disturb back face's
+  by flashback, with no void counter) — and so are `then` and `linked` (Rest
+  in Peace beside The Darkness Crystal: no life, nothing linked). `self: true` is a disturb back face's
   "If ~ would be put into a graveyard from anywhere, exile it instead"
   (Hook-Haunt Drifter, rule 702.146): the face's own ability, catching only
   the object it's on (a token too), on the stack or the battlefield — so a

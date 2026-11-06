@@ -1857,7 +1857,8 @@
   "static:trigger-doubling-filter",
   "static:trigger-doubler-draw-cause",
   "effect:aura-enchants-card-in-graveyard",
-  "effect:enchantment-becomes-aura"
+  "effect:enchantment-becomes-aura",
+  "replacement:exile-instead-linked"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

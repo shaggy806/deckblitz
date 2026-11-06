@@ -14358,6 +14358,28 @@ describe("what would go to a graveyard going elsewhere", () => {
     });
     expect(zombie.static[0].replacement).toEqual({ event: "would-be-put-into-graveyard", instead: "library-top", self: true, from: "battlefield" });
   });
+  it("reads a would-die exile linked to the source when the card says 'exiled with', and its life gain", () => {
+    const card = (oracle_text: string) =>
+      parseFace({ name: "Test Card", type_line: "Legendary Artifact", oracle_text, mana_cost: "{2}{B}{B}", colors: ["B"] });
+    const crystal = card(
+      "If a nontoken creature an opponent controls would die, instead exile it and you gain 2 life.\n{4}{B}{B}, {T}: Put target creature card exiled with Test Card onto the battlefield tapped under your control.",
+    );
+    expect(crystal.static[0].replacement).toEqual({
+      event: "would-be-put-into-graveyard",
+      instead: "exile",
+      from: "battlefield",
+      filter: { type: "creature", controlledBy: "opponent", token: false },
+      then: { kind: "gain-life", amount: 2 },
+      linked: true,
+    });
+    // No "exiled with" on the card: nothing to link to (Garruk's, Liesa's).
+    expect(card("If a creature an opponent controls would die, exile it instead.").static[0].replacement).toEqual({
+      event: "would-be-put-into-graveyard",
+      instead: "exile",
+      from: "battlefield",
+      filter: { type: "creature", controlledBy: "opponent" },
+    });
+  });
 });
 
 describe("a countered spell's destination, and a counter replaced", () => {

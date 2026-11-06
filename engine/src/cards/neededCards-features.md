@@ -333,6 +333,17 @@ fails to pay. An emblem's own activated ability (Ob Nixilis of the Black Oath) i
 not built: nothing offers an ability of an object in the command zone that isn't
 its card's. Keys: effect:emblem-grants-activated, effect:emblem-grants-to-spells.
 
+### A would-die exile linked to its permanent — built 2026-11-05
+
+By EDHREC rank: The Darkness Crystal (1159). A graveyard-exile replacement's
+`linked` exiles the card **with** its permanent (rule 607.2a,
+`GameObject.exiledWith`, in the stint it has as the card arrives — or last had,
+gone in the same event), so "exiled with ~" finds it; given up, as `then` and a
+void counter are, when the moving object's controller picks another exile that
+could apply (616.1 — Rest in Peace). The scaffolder sets it on a card that says
+"exiled with" anywhere. Proving cards: The Darkness Crystal, Gisa, Glorious
+Resurrector (`exile-instead-linked.test.ts`). Key: replacement:exile-instead-linked.
+
 ### An Aura on a graveyard card, and an enchant ability an effect gives — built 2026-11-05
 
 By EDHREC rank: Animate Dead (223) and Necromancy (1030). An Aura whose target

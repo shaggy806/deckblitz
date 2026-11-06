@@ -2092,6 +2092,9 @@ export class Game {
     ObjectId,
     { readonly effect: EffectSpec; readonly source: ObjectId; readonly controller: PlayerId; readonly times: number }
   >();
+  /** A card on its way to exile by a replacement that exiles it **with** its
+   * permanent, for the span of its `moveObject` — `GraveyardExileReplacement.linked`. */
+  private readonly exiledLinkedTo = new Map<ObjectId, ObjectId>();
   /** While one simultaneous damage event is dealt source by source (a combat
    * damage step — rule 510.2), the permanents whose shield counter already
    * went: the counter's prevention is one replacement on the event (rules
@@ -55169,7 +55172,9 @@ export class Game {
    * those is theirs, and none otherwise — an opponent's flashback spell is
    * exiled by flashback, with no void counter on it. So too for what one does
    * beside the exile (`GraveyardExileReplacement.then`): Head of the Hunt's Wolf
-   * doesn't come when Rest in Peace could exile the creature instead.
+   * doesn't come when Rest in Peace could exile the creature instead — and
+   * for exiling it **with** the permanent (`linked`): the card Rest in Peace
+   * could exile isn't The Darkness Crystal's to return.
    *
    * Returns the replacement that says more than "exile it", if that's the one
    * picked.
@@ -55177,7 +55182,9 @@ export class Game {
   private exileReplacementChosen<
     S extends { readonly replacement: GraveyardExileReplacement; readonly controller: PlayerId },
   >(object: GameObject, statics: readonly S[], otherExile: boolean): S | undefined {
-    const saying = statics.filter((s) => s.replacement.withCounters !== undefined || s.replacement.then !== undefined);
+    const saying = statics.filter(
+      (s) => s.replacement.withCounters !== undefined || s.replacement.then !== undefined || s.replacement.linked === true,
+    );
     if (saying.length === 0) return undefined;
     if (!otherExile && saying.length === statics.length) return saying[0];
     const chooser = object.zone === "battlefield" || object.zone === "stack" ? object.controller : object.owner;
@@ -55384,6 +55391,18 @@ export class Game {
     if (toReturn !== undefined) {
       this.exiledToReturn.delete(id);
       if (now === "exile") this.returnAtNextEndStep(id, toReturn.source, toReturn.controller);
+    }
+    // Exiled with the replacement's permanent (rule 607.2a), in the stint it
+    // has now — or, gone in the same event (`leaveBatch`), the one it last had.
+    const linkedTo = this.exiledLinkedTo.get(id);
+    if (linkedTo !== undefined) {
+      this.exiledLinkedTo.delete(id);
+      const holder = this.state.objects[linkedTo];
+      const stint = holder?.zone === "battlefield" ? (holder.zoneChangeCount ?? 0) : holder?.lastKnown?.zoneChangeCount;
+      if (now === "exile" && stint !== undefined) {
+        this.state.objects[id].exiledWith = { source: linkedTo, zoneChangeCount: stint };
+        invalidateComputedCache();
+      }
     }
     // "…and create a 2/2 black Zombie" (Kalitas), "When you do, …" (Head of the
     // Hunt): once it's in exile, one for each token of a stack.
@@ -55770,6 +55789,10 @@ export class Game {
             object.exileIfWouldGoToGraveyard === true,
         );
         exileCounters = chosen?.replacement.withCounters;
+        // "Exiled with The Darkness Crystal" (rule 607.2a): linked once it's there.
+        if (chosen?.replacement.linked === true && chosen.source !== undefined) {
+          this.exiledLinkedTo.set(id, chosen.source);
+        }
         if (chosen?.replacement.then !== undefined && chosen.source !== undefined) {
           this.exiledThen.set(id, {
             effect: chosen.replacement.then,

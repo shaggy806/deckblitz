@@ -15422,6 +15422,12 @@ function parseFaceAsWritten(face, ctx = {}) {
       }
     };
     [...out.activated, ...out.triggered].forEach((a) => linkedExile(a.effect));
+    // So is a graveyard replacement's "exile it instead" (The Darkness
+    // Crystal, Gisa, Glorious Resurrector — `GraveyardExileReplacement.linked`).
+    for (const s of out.static) {
+      const r = s.replacement;
+      if (r?.event === "would-be-put-into-graveyard" && r.instead === "exile" && r.self !== true) r.linked = true;
+    }
   }
   // A card with bestow can be an Aura: its own "dies" leave-triggers read as
   // their rules do, "put into a graveyard from the battlefield" (afterlife,
@@ -17391,12 +17397,13 @@ function selfCreatureWhileOf(line, text) {
 /**
  * "If a creature an opponent controls would die, exile it instead. When you do,
  * create …" (Head of the Hunt), "If a nontoken creature an opponent controls
- * would die, instead exile that card and create …" (Kalitas): the exile, and
+ * would die, instead exile that card and create …" (Kalitas), "… instead exile
+ * it and you gain 2 life" (The Darkness Crystal): the exile, and
  * what it does beside it (`GraveyardExileReplacement.then`). `null` for any
  * other line, or one whose token isn't read.
  */
 function exileReplacementOf(line, text, tokenFor) {
-  const m = /^If a (nontoken )?creature an opponent controls would die, (?:exile it instead|instead exile that card and (create .+?))\.(?: When you do, (create .+\.))?$/.exec(line);
+  const m = /^If a (nontoken )?creature an opponent controls would die, (?:exile it instead|instead exile (?:that card|it) and (create .+?|you gain \d+ life))\.(?: When you do, (create .+\.))?$/.exec(line);
   if (m === null) return null;
   const clause = m[2] === undefined ? m[3] : `${m[2]}.`;
   const read =
