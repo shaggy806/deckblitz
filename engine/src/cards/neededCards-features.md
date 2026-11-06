@@ -334,6 +334,19 @@ fails to pay. An emblem's own activated ability (Ob Nixilis of the Black Oath) i
 not built: nothing offers an ability of an object in the command zone that isn't
 its card's. Keys: effect:emblem-grants-activated, effect:emblem-grants-to-spells.
 
+### "You may cast the discarded card", madness's exile too — built 2026-11-05
+
+By EDHREC rank: Malcolm, Alluring Scoundrel (1572). `cast-now`'s
+`from: "discarded-this-way"` is the cards this resolution had discarded, found
+where the discard put them if that's a public zone (rule 400.7j): the graveyard,
+or the exile madness put one in instead (702.35a), cast from there before
+madness's own trigger, which then finds nothing (declined, madness still offers
+it). Not a card Library of Leng put on top of the library, a hidden zone. The
+scaffolder reads the line (not after a cost's discard, whose "discarded card" is
+the cost's) and "if there are N or more X counters on ~, …" mid-ability as a
+`self-counters` conditional. Proving card: Malcolm, Alluring Scoundrel
+(`cast-discarded-card.test.ts`). Key: effect:cast-discarded-card-exiled-by-madness.
+
 ### Playing linked exiled cards for life, and "a card you didn't control" — built 2026-11-05
 
 By EDHREC rank: Valgavoth, Terror Eater (1299). A `playFromExile` static's

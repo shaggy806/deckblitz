@@ -1868,7 +1868,8 @@
   "cost:sacrifice-any-number-copy-for-each",
   "condition:this-ability-did-this-turn",
   "effect:search-finds-castable-this-turn",
-  "effect:flicker-return-at-owners-next-end-step"
+  "effect:flicker-return-at-owners-next-end-step",
+  "effect:cast-discarded-card-exiled-by-madness"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

@@ -14992,6 +14992,36 @@ describe("a cast as this resolves, on its own terms", () => {
     });
   });
 
+  it("reads \"you may cast the discarded card\" as the card this resolution discarded", () => {
+    const malcolm = parseFace({
+      name: "Malcolm, Alluring Scoundrel",
+      type_line: "Legendary Creature — Siren Pirate",
+      oracle_text:
+        "Whenever Malcolm deals combat damage to a player, put a chorus counter on it. Draw a card, then discard a card. If there are four or more chorus counters on Malcolm, you may cast the discarded card without paying its mana cost.",
+      mana_cost: "{1}{U}",
+      colors: ["U"],
+    });
+    expect(malcolm.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "add-counter", target: "source", counter: "chorus", amount: 1 },
+        {
+          kind: "sequence",
+          effects: [
+            { kind: "draw", amount: 1 },
+            { kind: "discard", target: "you", amount: 1 },
+          ],
+        },
+        {
+          kind: "conditional",
+          condition: { kind: "self-counters", counter: "chorus", compare: { op: "gte", n: 4 } },
+          then: { kind: "cast-now", from: "discarded-this-way", free: true },
+        },
+      ],
+    });
+    expect(malcolm.complete).toBe(true);
+  });
+
   it("reads a land's ability until this card is cast from exile", () => {
     const outlaw = read(
       "Creature — Vampire Rogue",

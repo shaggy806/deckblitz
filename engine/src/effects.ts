@@ -4838,6 +4838,15 @@ export type EffectSpec =
          * still in their hand — the Mad Wizard's Lair's "draw three cards
          * and reveal them. You may cast one of them". */
         | "drawn-this-way"
+        /** The cards this resolution had a player discard, still where the
+         * discard put them if that's a public zone — their graveyard, or the
+         * exile madness put one in instead (rule 702.35a), since an effect
+         * that moves an object to a public zone can find it there (rule
+         * 400.7j): Malcolm, Alluring Scoundrel's "draw a card, then discard a
+         * card. … you may cast **the discarded card**". Not one put on top of
+         * a library instead (Library of Leng), a hidden zone. Controlled by
+         * the caster, owned as before (rule 108.3). */
+        | "discarded-this-way"
         /** The ability's own source, if this resolution exiled it from the
          * battlefield and it's still in exile — a Siege's "exile it, then
          * you may cast it transformed" (rule 310.12b). */
@@ -11702,6 +11711,10 @@ export interface EffectApi {
   /** The cards this resolution has had the effect's controller draw, still
    * in their hand — a `cast-now`'s `"drawn-this-way"`. */
   cardsDrawnThisWay(): readonly ObjectId[];
+  /** The cards this resolution has had any player discard, still in the
+   * graveyard or exile the discard put them in — a `cast-now`'s
+   * `"discarded-this-way"` (rules 400.7j, 702.35a). */
+  cardsDiscardedThisWay(): readonly ObjectId[];
   /** Show every player the cards this resolution has had each player draw,
    * those still in their hand — the `reveal-drawn` effect. */
   revealDrawn(): void;
@@ -14463,6 +14476,8 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
       cards = ctx.thisWay("milled", undefined, undefined).map((entry) => entry.object);
     } else if (from === "drawn-this-way") {
       cards = ctx.cardsDrawnThisWay();
+    } else if (from === "discarded-this-way") {
+      cards = ctx.cardsDiscardedThisWay();
     } else if (from === "source-exiled-this-way") {
       cards = ctx.sourceExiledThisWay();
     } else if (from === "face-up-exile-opponents-own") {

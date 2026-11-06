@@ -3926,6 +3926,13 @@ export function parseSentence(sentence, ctx) {
   if (re(`you may cast the exiled card without paying its mana cost`).test(s)) {
     return { kind: "cast-now", from: "exiled-with-source", free: true };
   }
+  // "Draw a card, then discard a card. … You may cast the discarded card
+  // without paying its mana cost" (Malcolm, Alluring Scoundrel): the card this
+  // resolution discarded, where the discard put it — madness's exile too. Not
+  // after a cost's discard, whose "discarded card" is the cost's.
+  if (ctx?.costDiscarded !== true && re(`you may cast the discarded card without paying its mana cost`).test(s)) {
+    return { kind: "cast-now", from: "discarded-this-way", free: true };
+  }
   // "Return a card you own exiled with ~ to your hand" (Gustha's Scepter).
   if (re(`return a card you own exiled with ~ to your hand`).test(s)) {
     return { kind: "look-and-choose", zone: "exiled-with-source", min: 1, max: 1, filter: { ownedBy: "you" }, destination: "hand", leftover: "stay" };
@@ -9711,6 +9718,25 @@ export function parseEffect(text, outer) {
               { kind: "turn-structure", steps: ["precombat-main", "postcombat-main"] },
             ],
           },
+          then,
+        };
+        parsed.push(effect);
+        hints.push({ sentence, effect });
+        continue;
+      }
+    }
+    // "If there are four or more chorus counters on Malcolm, you may cast the
+    // discarded card …" (Malcolm, Alluring Scoundrel): its own counters as the
+    // instruction comes up (rule 608.2c), last known once it has left.
+    const selfCountersM = /^(?:then )?if there are (\w+) or more (\S+) counters on ~, (.+)$/i.exec(sentence);
+    const selfCountersN = selfCountersM === null ? null : numberOf(selfCountersM[1]);
+    if (selfCountersM !== null && selfCountersN !== null) {
+      const said = selfCountersM[3];
+      const then = parseSentence(`${said[0].toUpperCase()}${said.slice(1)}`, ctx);
+      if (then !== null && !containsUndefined(then)) {
+        const effect = {
+          kind: "conditional",
+          condition: { kind: "self-counters", counter: selfCountersM[2], compare: { op: "gte", n: selfCountersN } },
           then,
         };
         parsed.push(effect);

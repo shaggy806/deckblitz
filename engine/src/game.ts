@@ -36298,6 +36298,16 @@ export class Game {
           .filter((e) => e.player === controller)
           .map((e) => e.object)
           .filter((id) => this.state.zones.perPlayer[controller]?.hand.includes(id) === true),
+      // "The discarded card" where the discard put it, a public zone (rule
+      // 400.7j): the graveyard, or the exile madness put it in instead
+      // (702.35a) — not a library top a replacement chose (Library of Leng).
+      cardsDiscardedThisWay: () =>
+        thisWayEntries(this.state, "discarded", since)
+          .map((e) => e.object)
+          .filter((id) => {
+            const zone = this.state.objects[id]?.zone;
+            return zone === "graveyard" || zone === "exile";
+          }),
       revealDrawn: () => {
         const byPlayer = new Map<PlayerId, ObjectId[]>();
         for (const e of thisWayEntries(this.state, "drawn", since)) {
