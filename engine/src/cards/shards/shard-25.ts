@@ -180,6 +180,7 @@ import _poolCrudeBentBlade from "../pool/crude-bent-blade.js";
 import _poolCruelEdict from "../pool/cruel-edict.js";
 import _poolCruelWitness from "../pool/cruel-witness.js";
 import _poolCryogenRelic from "../pool/cryogen-relic.js";
+import _poolDaharMaster from "../pool/dahar-master.js";
 import _poolDanithaCapashenParagon from "../pool/danitha-capashen-paragon.js";
 import _poolDanseMacabre from "../pool/danse-macabre.js";
 import _poolDaringSleuth from "../pool/daring-sleuth.js";
@@ -379,6 +380,7 @@ import _poolHexbaneTortoise from "../pool/hexbane-tortoise.js";
 import _poolHideInPlainSight from "../pool/hide-in-plain-sight.js";
 import _poolHipparion from "../pool/hipparion.js";
 import _poolHobgoblinCaptain from "../pool/hobgoblin-captain.js";
+import _poolHologramJaneway from "../pool/hologram-janeway.js";
 import _poolHordeOfBoggarts from "../pool/horde-of-boggarts.js";
 import _poolHourOfPromise from "../pool/hour-of-promise.js";
 import _poolHourOfRevelation from "../pool/hour-of-revelation.js";
@@ -670,6 +672,7 @@ import _poolRockyRebuke from "../pool/rocky-rebuke.js";
 import _poolRograkhSonOfRohgahh from "../pool/rograkh-son-of-rohgahh.js";
 import _poolRogueClass from "../pool/rogue-class.js";
 import _poolRoilingDragonstorm from "../pool/roiling-dragonstorm.js";
+import _poolRokTahkBuddingScientist from "../pool/rok-tahk-budding-scientist.js";
 import _poolRollingHamsphere from "../pool/rolling-hamsphere.js";
 import _poolRomanticRendezvous from "../pool/romantic-rendezvous.js";
 import _poolRonaDiscipleOfGix from "../pool/rona-disciple-of-gix.js";
@@ -731,6 +734,7 @@ import _poolShireShirriff from "../pool/shire-shirriff.js";
 import _poolShivanDragon from "../pool/shivan-dragon.js";
 import _poolShrineOfBoundlessGrowth from "../pool/shrine-of-boundless-growth.js";
 import _poolShuGeneral from "../pool/shu-general.js";
+import _poolSickbay from "../pool/sickbay.js";
 import _poolSidarJabari from "../pool/sidar-jabari.js";
 import _poolSilundiVision from "../pool/silundi-vision.js";
 import _poolSilverSeraph from "../pool/silver-seraph.js";
@@ -846,11 +850,13 @@ import _poolTreacherousUrge from "../pool/treacherous-urge.js";
 import _poolTreadUpon from "../pool/tread-upon.js";
 import _poolTreasureChest from "../pool/treasure-chest.js";
 import _poolTrespasserIlVec from "../pool/trespasser-il-vec.js";
+import _poolTricorder from "../pool/tricorder.js";
 import _poolTrigonOfInfestation from "../pool/trigon-of-infestation.js";
 import _poolTrygonPrime from "../pool/trygon-prime.js";
 import _poolTurtleshellChangeling from "../pool/turtleshell-changeling.js";
 import _poolTuskguardCaptain from "../pool/tuskguard-captain.js";
 import _poolTyvarThePummeler from "../pool/tyvar-the-pummeler.js";
+import _poolUSSCerritosFollowingUp from "../pool/u-s-s-cerritos-following-up.js";
 import _poolUltimeciaOmnipotent from "../pool/ultimecia-omnipotent.js";
 import _poolUltimoCivilizationsEnd from "../pool/ultimo-civilizations-end.js";
 import _poolUltronDrone from "../pool/ultron-drone.js";
@@ -896,6 +902,7 @@ import _poolWarrenWeirding from "../pool/warren-weirding.js";
 import _poolWastefulHarvest from "../pool/wasteful-harvest.js";
 import _poolWaywardDisciple from "../pool/wayward-disciple.js";
 import _poolWeaveFate from "../pool/weave-fate.js";
+import _poolWesleyCrusherStarfleetCadet from "../pool/wesley-crusher-starfleet-cadet.js";
 import _poolWhipflare from "../pool/whipflare.js";
 import _poolWickedReward from "../pool/wicked-reward.js";
 import _poolWildcall from "../pool/wildcall.js";
@@ -1127,6 +1134,7 @@ const shard: CardShard = {
     _poolCruelEdict,
     _poolCruelWitness,
     _poolCryogenRelic,
+    _poolDaharMaster,
     _poolDanithaCapashenParagon,
     _poolDanseMacabre,
     _poolDaringSleuth,
@@ -1326,6 +1334,7 @@ const shard: CardShard = {
     _poolHideInPlainSight,
     _poolHipparion,
     _poolHobgoblinCaptain,
+    _poolHologramJaneway,
     _poolHordeOfBoggarts,
     _poolHourOfPromise,
     _poolHourOfRevelation,
@@ -1617,6 +1626,7 @@ const shard: CardShard = {
     _poolRograkhSonOfRohgahh,
     _poolRogueClass,
     _poolRoilingDragonstorm,
+    _poolRokTahkBuddingScientist,
     _poolRollingHamsphere,
     _poolRomanticRendezvous,
     _poolRonaDiscipleOfGix,
@@ -1678,6 +1688,7 @@ const shard: CardShard = {
     _poolShivanDragon,
     _poolShrineOfBoundlessGrowth,
     _poolShuGeneral,
+    _poolSickbay,
     _poolSidarJabari,
     _poolSilundiVision,
     _poolSilverSeraph,
@@ -1793,11 +1804,13 @@ const shard: CardShard = {
     _poolTreadUpon,
     _poolTreasureChest,
     _poolTrespasserIlVec,
+    _poolTricorder,
     _poolTrigonOfInfestation,
     _poolTrygonPrime,
     _poolTurtleshellChangeling,
     _poolTuskguardCaptain,
     _poolTyvarThePummeler,
+    _poolUSSCerritosFollowingUp,
     _poolUltimeciaOmnipotent,
     _poolUltimoCivilizationsEnd,
     _poolUltronDrone,
@@ -1843,6 +1856,7 @@ const shard: CardShard = {
     _poolWastefulHarvest,
     _poolWaywardDisciple,
     _poolWeaveFate,
+    _poolWesleyCrusherStarfleetCadet,
     _poolWhipflare,
     _poolWickedReward,
     _poolWildcall,

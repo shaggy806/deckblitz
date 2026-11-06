@@ -123,6 +123,7 @@ import _poolCabalConditioning from "../pool/cabal-conditioning.js";
 import _poolCabalInitiate from "../pool/cabal-initiate.js";
 import _poolCalmingLicid from "../pool/calming-licid.js";
 import _poolCapashenStandard from "../pool/capashen-standard.js";
+import _poolCaptainJonathanArcher from "../pool/captain-jonathan-archer.js";
 import _poolCarefulConsideration from "../pool/careful-consideration.js";
 import _poolCarmenCruelSkymarcher from "../pool/carmen-cruel-skymarcher.js";
 import _poolCartographersCompanion from "../pool/cartographers-companion.js";
@@ -209,6 +210,7 @@ import _poolDisturbingPlot from "../pool/disturbing-plot.js";
 import _poolDiviningDuelist from "../pool/divining-duelist.js";
 import _poolDokuchiShadowWalker from "../pool/dokuchi-shadow-walker.js";
 import _poolDolmenGate from "../pool/dolmen-gate.js";
+import _poolDominionInfiltration from "../pool/dominion-infiltration.js";
 import _poolDoomgape from "../pool/doomgape.js";
 import _poolDoublecast from "../pool/doublecast.js";
 import _poolDownpour from "../pool/downpour.js";
@@ -240,8 +242,10 @@ import _poolElderAuntie from "../pool/elder-auntie.js";
 import _poolEldraziConscription from "../pool/eldrazi-conscription.js";
 import _poolElementalMastery from "../pool/elemental-mastery.js";
 import _poolEmbersmith from "../pool/embersmith.js";
+import _poolEmergencyHolographicCrew from "../pool/emergency-holographic-crew.js";
 import _poolEmperorCrocodile from "../pool/emperor-crocodile.js";
 import _poolEncampmentKeeper from "../pool/encampment-keeper.js";
+import _poolEncounterTheUnknown from "../pool/encounter-the-unknown.js";
 import _poolEncouragingAviator from "../pool/encouraging-aviator.js";
 import _poolEndlessObedience from "../pool/endless-obedience.js";
 import _poolEnfeeblement from "../pool/enfeeblement.js";
@@ -433,6 +437,7 @@ import _poolKeldonStrikeTeam from "../pool/keldon-strike-team.js";
 import _poolKembasBanner from "../pool/kembas-banner.js";
 import _poolKembasSkyguard from "../pool/kembas-skyguard.js";
 import _poolKeranosGodOfStorms from "../pool/keranos-god-of-storms.js";
+import _poolKhanDespotByDesign from "../pool/khan-despot-by-design.js";
 import _poolKillianInkDuelist from "../pool/killian-ink-duelist.js";
 import _poolKirolHistoryBuff from "../pool/kirol-history-buff.js";
 import _poolKithkeeper from "../pool/kithkeeper.js";
@@ -903,6 +908,7 @@ import _poolVedalkenShackles from "../pool/vedalken-shackles.js";
 import _poolVeinRipper from "../pool/vein-ripper.js";
 import _poolVeldraneOfSengir from "../pool/veldrane-of-sengir.js";
 import _poolVelvetwingButterflies from "../pool/velvetwing-butterflies.js";
+import _poolVengeanceMission from "../pool/vengeance-mission.js";
 import _poolVenomousBreath from "../pool/venomous-breath.js";
 import _poolVentureForth from "../pool/venture-forth.js";
 import _poolVerdantConfluence from "../pool/verdant-confluence.js";
@@ -1100,6 +1106,7 @@ const shard: CardShard = {
     _poolCabalInitiate,
     _poolCalmingLicid,
     _poolCapashenStandard,
+    _poolCaptainJonathanArcher,
     _poolCarefulConsideration,
     _poolCarmenCruelSkymarcher,
     _poolCartographersCompanion,
@@ -1186,6 +1193,7 @@ const shard: CardShard = {
     _poolDiviningDuelist,
     _poolDokuchiShadowWalker,
     _poolDolmenGate,
+    _poolDominionInfiltration,
     _poolDoomgape,
     _poolDoublecast,
     _poolDownpour,
@@ -1217,8 +1225,10 @@ const shard: CardShard = {
     _poolEldraziConscription,
     _poolElementalMastery,
     _poolEmbersmith,
+    _poolEmergencyHolographicCrew,
     _poolEmperorCrocodile,
     _poolEncampmentKeeper,
+    _poolEncounterTheUnknown,
     _poolEncouragingAviator,
     _poolEndlessObedience,
     _poolEnfeeblement,
@@ -1410,6 +1420,7 @@ const shard: CardShard = {
     _poolKembasBanner,
     _poolKembasSkyguard,
     _poolKeranosGodOfStorms,
+    _poolKhanDespotByDesign,
     _poolKillianInkDuelist,
     _poolKirolHistoryBuff,
     _poolKithkeeper,
@@ -1880,6 +1891,7 @@ const shard: CardShard = {
     _poolVeinRipper,
     _poolVeldraneOfSengir,
     _poolVelvetwingButterflies,
+    _poolVengeanceMission,
     _poolVenomousBreath,
     _poolVentureForth,
     _poolVerdantConfluence,

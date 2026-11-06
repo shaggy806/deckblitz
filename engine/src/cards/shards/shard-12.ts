@@ -47,6 +47,7 @@ import _poolAuratog from "../pool/auratog.js";
 import _poolAureliaTheWarleader from "../pool/aurelia-the-warleader.js";
 import _poolAuriokEdgewright from "../pool/auriok-edgewright.js";
 import _poolAuronsInspiration from "../pool/aurons-inspiration.js";
+import _poolAutomatedWarfareSystem from "../pool/automated-warfare-system.js";
 import _poolAvalancheTusker from "../pool/avalanche-tusker.js";
 import _poolAvatarOfBurgeoningEchoes from "../pool/avatar-of-burgeoning-echoes.js";
 import _poolAvenFlock from "../pool/aven-flock.js";
@@ -227,6 +228,7 @@ import _poolDoorToNothingness from "../pool/door-to-nothingness.js";
 import _poolDoriBearerOfFriends from "../pool/dori-bearer-of-friends.js";
 import _poolDoubtlessOne from "../pool/doubtless-one.js";
 import _poolDownsize from "../pool/downsize.js";
+import _poolDrLeonardBonesMccoy from "../pool/dr-leonard-bones-mccoy.js";
 import _poolDragonBreath from "../pool/dragon-breath.js";
 import _poolDragonHatchling from "../pool/dragon-hatchling.js";
 import _poolDragonMage from "../pool/dragon-mage.js";
@@ -460,6 +462,7 @@ import _poolKorAeronaut from "../pool/kor-aeronaut.js";
 import _poolKotisTheFangkeeper from "../pool/kotis-the-fangkeeper.js";
 import _poolKuldothaRingleader from "../pool/kuldotha-ringleader.js";
 import _poolKunLunWarrior from "../pool/kun-lun-warrior.js";
+import _poolLaanNoonienSinghSecurity from "../pool/laan-noonien-singh-security.js";
 import _poolLaccolithGrunt from "../pool/laccolith-grunt.js";
 import _poolLastGasp from "../pool/last-gasp.js";
 import _poolLaughingMad from "../pool/laughing-mad.js";
@@ -517,6 +520,7 @@ import _poolMindUnbound from "../pool/mind-unbound.js";
 import _poolMinesOfMoria from "../pool/mines-of-moria.js";
 import _poolMireTriton from "../pool/mire-triton.js";
 import _poolMiriamHerdWhisperer from "../pool/miriam-herd-whisperer.js";
+import _poolMirrorUniverseIntrusion from "../pool/mirror-universe-intrusion.js";
 import _poolMirrorweave from "../pool/mirrorweave.js";
 import _poolMishrasWarMachine from "../pool/mishras-war-machine.js";
 import _poolMishrasWorkshop from "../pool/mishras-workshop.js";
@@ -676,6 +680,7 @@ import _poolRisa from "../pool/risa.js";
 import _poolRiseAgain from "../pool/rise-again.js";
 import _poolRoarOfTheCrowd from "../pool/roar-of-the-crowd.js";
 import _poolRogueRefiner from "../pool/rogue-refiner.js";
+import _poolRomulus from "../pool/romulus.js";
 import _poolRorixBladewing from "../pool/rorix-bladewing.js";
 import _poolRoseRoomTreasurer from "../pool/rose-room-treasurer.js";
 import _poolRottingLegion from "../pool/rotting-legion.js";
@@ -685,6 +690,7 @@ import _poolRuneOfFlight from "../pool/rune-of-flight.js";
 import _poolRunicArmasaur from "../pool/runic-armasaur.js";
 import _poolRuricTharBiomagus from "../pool/ruric-thar-biomagus.js";
 import _poolRuricThar from "../pool/ruric-thar.js";
+import _poolRutherfordUpgradedEnsign from "../pool/rutherford-upgraded-ensign.js";
 import _poolRuthlessInstincts from "../pool/ruthless-instincts.js";
 import _poolRuthlessInvasion from "../pool/ruthless-invasion.js";
 import _poolRydiaSummonerOfMist from "../pool/rydia-summoner-of-mist.js";
@@ -1015,6 +1021,7 @@ const shard: CardShard = {
     _poolAureliaTheWarleader,
     _poolAuriokEdgewright,
     _poolAuronsInspiration,
+    _poolAutomatedWarfareSystem,
     _poolAvalancheTusker,
     _poolAvatarOfBurgeoningEchoes,
     _poolAvenFlock,
@@ -1195,6 +1202,7 @@ const shard: CardShard = {
     _poolDoriBearerOfFriends,
     _poolDoubtlessOne,
     _poolDownsize,
+    _poolDrLeonardBonesMccoy,
     _poolDragonBreath,
     _poolDragonHatchling,
     _poolDragonMage,
@@ -1428,6 +1436,7 @@ const shard: CardShard = {
     _poolKotisTheFangkeeper,
     _poolKuldothaRingleader,
     _poolKunLunWarrior,
+    _poolLaanNoonienSinghSecurity,
     _poolLaccolithGrunt,
     _poolLastGasp,
     _poolLaughingMad,
@@ -1485,6 +1494,7 @@ const shard: CardShard = {
     _poolMinesOfMoria,
     _poolMireTriton,
     _poolMiriamHerdWhisperer,
+    _poolMirrorUniverseIntrusion,
     _poolMirrorweave,
     _poolMishrasWarMachine,
     _poolMishrasWorkshop,
@@ -1644,6 +1654,7 @@ const shard: CardShard = {
     _poolRiseAgain,
     _poolRoarOfTheCrowd,
     _poolRogueRefiner,
+    _poolRomulus,
     _poolRorixBladewing,
     _poolRoseRoomTreasurer,
     _poolRottingLegion,
@@ -1653,6 +1664,7 @@ const shard: CardShard = {
     _poolRunicArmasaur,
     _poolRuricTharBiomagus,
     _poolRuricThar,
+    _poolRutherfordUpgradedEnsign,
     _poolRuthlessInstincts,
     _poolRuthlessInvasion,
     _poolRydiaSummonerOfMist,

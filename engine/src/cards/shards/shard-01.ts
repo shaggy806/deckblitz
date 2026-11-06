@@ -24,6 +24,7 @@ import _poolAlgaeGharial from "../pool/algae-gharial.js";
 import _poolAltarOfTheBrood from "../pool/altar-of-the-brood.js";
 import _poolAmarethTheLustrous from "../pool/amareth-the-lustrous.js";
 import _poolAmassTheComponents from "../pool/amass-the-components.js";
+import _poolAndromedanAutomatons from "../pool/andromedan-automatons.js";
 import _poolAngelOfFinality from "../pool/angel-of-finality.js";
 import _poolAngelfireIgnition from "../pool/angelfire-ignition.js";
 import _poolAngelicEdict from "../pool/angelic-edict.js";
@@ -328,6 +329,7 @@ import _poolGrotesqueDemise from "../pool/grotesque-demise.js";
 import _poolGrowingRitesOfItlimoc from "../pool/growing-rites-of-itlimoc.js";
 import _poolGuardDogs from "../pool/guard-dogs.js";
 import _poolGuardiansOfAkrasa from "../pool/guardians-of-akrasa.js";
+import _poolGuidanceFailure from "../pool/guidance-failure.js";
 import _poolGuttersnipe from "../pool/guttersnipe.js";
 import _poolGuyInTheChair from "../pool/guy-in-the-chair.js";
 import _poolHallOfTheBanditLord from "../pool/hall-of-the-bandit-lord.js";
@@ -351,6 +353,7 @@ import _poolHeroesOfTheRevel from "../pool/heroes-of-the-revel.js";
 import _poolHeroesRemembered from "../pool/heroes-remembered.js";
 import _poolHeroicReinforcements from "../pool/heroic-reinforcements.js";
 import _poolHighlandGiant from "../pool/highland-giant.js";
+import _poolHoloEngineer from "../pool/holo-engineer.js";
 import _poolHolyAvenger from "../pool/holy-avenger.js";
 import _poolHomaridShaman from "../pool/homarid-shaman.js";
 import _poolHonorableScout from "../pool/honorable-scout.js";
@@ -673,6 +676,7 @@ import _poolSamutTyrantOfNaktamun from "../pool/samut-tyrant-of-naktamun.js";
 import _poolSanctumOfTranquilLight from "../pool/sanctum-of-tranquil-light.js";
 import _poolSaprazzanOutrigger from "../pool/saprazzan-outrigger.js";
 import _poolSarcomancy from "../pool/sarcomancy.js";
+import _poolSarcophagusShipOfTheDead from "../pool/sarcophagus-ship-of-the-dead.js";
 import _poolSarevokDeathbringer from "../pool/sarevok-deathbringer.js";
 import _poolSarkhansWhelp from "../pool/sarkhans-whelp.js";
 import _poolSaruliGatekeepers from "../pool/saruli-gatekeepers.js";
@@ -713,6 +717,7 @@ import _poolShatteredYard from "../pool/shattered-yard.js";
 import _poolShinenOfFurysFire from "../pool/shinen-of-furys-fire.js";
 import _poolShoreSnapper from "../pool/shore-snapper.js";
 import _poolShrineOfBurningRage from "../pool/shrine-of-burning-rage.js";
+import _poolShuttleAce from "../pool/shuttle-ace.js";
 import _poolSigardasImprisonment from "../pool/sigardas-imprisonment.js";
 import _poolSignpostScarecrow from "../pool/signpost-scarecrow.js";
 import _poolSigridGodFavored from "../pool/sigrid-god-favored.js";
@@ -854,6 +859,7 @@ import _poolTurbulentShore from "../pool/turbulent-shore.js";
 import _poolTurnToDust from "../pool/turn-to-dust.js";
 import _poolTwiceTheRage from "../pool/twice-the-rage.js";
 import _poolTwilightPanther from "../pool/twilight-panther.js";
+import _poolType2Phaser from "../pool/type-2-phaser.js";
 import _poolUlnaAlleyShopkeep from "../pool/ulna-alley-shopkeep.js";
 import _poolUltronsAuxiliary from "../pool/ultrons-auxiliary.js";
 import _poolUlvenwaldTracker from "../pool/ulvenwald-tracker.js";
@@ -874,6 +880,7 @@ import _poolVampireInterloper from "../pool/vampire-interloper.js";
 import _poolVampiricFeast from "../pool/vampiric-feast.js";
 import _poolVampiricSliver from "../pool/vampiric-sliver.js";
 import _poolVanquishTheHorde from "../pool/vanquish-the-horde.js";
+import _poolVashFreelanceArchaeologist from "../pool/vash-freelance-archaeologist.js";
 import _poolVaultGuardsman from "../pool/vault-guardsman.js";
 import _poolVedalkenEntrancer from "../pool/vedalken-entrancer.js";
 import _poolVeiledApparition from "../pool/veiled-apparition.js";
@@ -980,6 +987,7 @@ const shard: CardShard = {
     _poolAltarOfTheBrood,
     _poolAmarethTheLustrous,
     _poolAmassTheComponents,
+    _poolAndromedanAutomatons,
     _poolAngelOfFinality,
     _poolAngelfireIgnition,
     _poolAngelicEdict,
@@ -1284,6 +1292,7 @@ const shard: CardShard = {
     _poolGrowingRitesOfItlimoc,
     _poolGuardDogs,
     _poolGuardiansOfAkrasa,
+    _poolGuidanceFailure,
     _poolGuttersnipe,
     _poolGuyInTheChair,
     _poolHallOfTheBanditLord,
@@ -1307,6 +1316,7 @@ const shard: CardShard = {
     _poolHeroesRemembered,
     _poolHeroicReinforcements,
     _poolHighlandGiant,
+    _poolHoloEngineer,
     _poolHolyAvenger,
     _poolHomaridShaman,
     _poolHonorableScout,
@@ -1629,6 +1639,7 @@ const shard: CardShard = {
     _poolSanctumOfTranquilLight,
     _poolSaprazzanOutrigger,
     _poolSarcomancy,
+    _poolSarcophagusShipOfTheDead,
     _poolSarevokDeathbringer,
     _poolSarkhansWhelp,
     _poolSaruliGatekeepers,
@@ -1669,6 +1680,7 @@ const shard: CardShard = {
     _poolShinenOfFurysFire,
     _poolShoreSnapper,
     _poolShrineOfBurningRage,
+    _poolShuttleAce,
     _poolSigardasImprisonment,
     _poolSignpostScarecrow,
     _poolSigridGodFavored,
@@ -1810,6 +1822,7 @@ const shard: CardShard = {
     _poolTurnToDust,
     _poolTwiceTheRage,
     _poolTwilightPanther,
+    _poolType2Phaser,
     _poolUlnaAlleyShopkeep,
     _poolUltronsAuxiliary,
     _poolUlvenwaldTracker,
@@ -1830,6 +1843,7 @@ const shard: CardShard = {
     _poolVampiricFeast,
     _poolVampiricSliver,
     _poolVanquishTheHorde,
+    _poolVashFreelanceArchaeologist,
     _poolVaultGuardsman,
     _poolVedalkenEntrancer,
     _poolVeiledApparition,

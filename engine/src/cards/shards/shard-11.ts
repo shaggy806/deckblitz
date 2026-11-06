@@ -236,6 +236,7 @@ import _poolDisplacerBeast from "../pool/displacer-beast.js";
 import _poolDivineTransformation from "../pool/divine-transformation.js";
 import _poolDivineVerdict from "../pool/divine-verdict.js";
 import _poolDoomedArtisan from "../pool/doomed-artisan.js";
+import _poolDot7RepairSquad from "../pool/dot-7-repair-squad.js";
 import _poolDraconicIntervention from "../pool/draconic-intervention.js";
 import _poolDragonWhisperer from "../pool/dragon-whisperer.js";
 import _poolDranaLiberatorOfMalakir from "../pool/drana-liberator-of-malakir.js";
@@ -459,6 +460,7 @@ import _poolKedissEmberclawFamiliar from "../pool/kediss-emberclaw-familiar.js";
 import _poolKeeperOfTheLight from "../pool/keeper-of-the-light.js";
 import _poolKeldonFlamesage from "../pool/keldon-flamesage.js";
 import _poolKetriaCrystal from "../pool/ketria-crystal.js";
+import _poolKhaaaaaaaaaaaannn from "../pool/khaaaaaaaaaaaannn.js";
 import _poolKhalniGarden from "../pool/khalni-garden.js";
 import _poolKillSwitch from "../pool/kill-switch.js";
 import _poolKillerBees from "../pool/killer-bees.js";
@@ -839,6 +841,7 @@ import _poolTechnodrome from "../pool/technodrome.js";
 import _poolTeferisIsle from "../pool/teferis-isle.js";
 import _poolTeferisProtection from "../pool/teferis-protection.js";
 import _poolTempestTechnique from "../pool/tempest-technique.js";
+import _poolTemporalConqueror from "../pool/temporal-conqueror.js";
 import _poolTemporalIsolation from "../pool/temporal-isolation.js";
 import _poolTenzaGodosMaul from "../pool/tenza-godos-maul.js";
 import _poolTerrorOfThePeaks from "../pool/terror-of-the-peaks.js";
@@ -1225,6 +1228,7 @@ const shard: CardShard = {
     _poolDivineTransformation,
     _poolDivineVerdict,
     _poolDoomedArtisan,
+    _poolDot7RepairSquad,
     _poolDraconicIntervention,
     _poolDragonWhisperer,
     _poolDranaLiberatorOfMalakir,
@@ -1448,6 +1452,7 @@ const shard: CardShard = {
     _poolKeeperOfTheLight,
     _poolKeldonFlamesage,
     _poolKetriaCrystal,
+    _poolKhaaaaaaaaaaaannn,
     _poolKhalniGarden,
     _poolKillSwitch,
     _poolKillerBees,
@@ -1828,6 +1833,7 @@ const shard: CardShard = {
     _poolTeferisIsle,
     _poolTeferisProtection,
     _poolTempestTechnique,
+    _poolTemporalConqueror,
     _poolTemporalIsolation,
     _poolTenzaGodosMaul,
     _poolTerrorOfThePeaks,

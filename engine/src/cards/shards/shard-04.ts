@@ -57,6 +57,7 @@ import _poolBarricadeBreaker from "../pool/barricade-breaker.js";
 import _poolBarrinMasterWizard from "../pool/barrin-master-wizard.js";
 import _poolBashToBits from "../pool/bash-to-bits.js";
 import _poolBatrocTheLeaper from "../pool/batroc-the-leaper.js";
+import _poolBattleScarredSurvivalist from "../pool/battle-scarred-survivalist.js";
 import _poolBattlewandOak from "../pool/battlewand-oak.js";
 import _poolBedrockTortoise from "../pool/bedrock-tortoise.js";
 import _poolBiliousSkulldweller from "../pool/bilious-skulldweller.js";
@@ -139,6 +140,7 @@ import _poolCrusaderOfOdric from "../pool/crusader-of-odric.js";
 import _poolCryptbornHorror from "../pool/cryptborn-horror.js";
 import _poolCrystallineNautilus from "../pool/crystalline-nautilus.js";
 import _poolCubwarden from "../pool/cubwarden.js";
+import _poolCulberAndStametsStarCrossed from "../pool/culber-and-stamets-star-crossed.js";
 import _poolCultistOfTheAbsolute from "../pool/cultist-of-the-absolute.js";
 import _poolCurseOfShallowGraves from "../pool/curse-of-shallow-graves.js";
 import _poolCurseOfVitality from "../pool/curse-of-vitality.js";
@@ -516,6 +518,7 @@ import _poolNashiMoonsLegacy from "../pool/nashi-moons-legacy.js";
 import _poolNecrosynthesis from "../pool/necrosynthesis.js";
 import _poolNeedleSpecter from "../pool/needle-specter.js";
 import _poolNeedletoothRaptor from "../pool/needletooth-raptor.js";
+import _poolNeelixMoralSupport from "../pool/neelix-moral-support.js";
 import _poolNeverwinterDryad from "../pool/neverwinter-dryad.js";
 import _poolNimanaSkitterSneak from "../pool/nimana-skitter-sneak.js";
 import _poolNimbleBladeKhenra from "../pool/nimble-blade-khenra.js";
@@ -797,6 +800,7 @@ import _poolTemptingWurm from "../pool/tempting-wurm.js";
 import _poolTerisianMindbreaker from "../pool/terisian-mindbreaker.js";
 import _poolTerminate from "../pool/terminate.js";
 import _poolTerritorialDispute from "../pool/territorial-dispute.js";
+import _poolTestOfIdentity from "../pool/test-of-identity.js";
 import _poolTestOfLoyalty from "../pool/test-of-loyalty.js";
 import _poolTheFiligreeSylex from "../pool/the-filigree-sylex.js";
 import _poolTheLordOfTheEagles from "../pool/the-lord-of-the-eagles.js";
@@ -944,6 +948,7 @@ import _tokensInsectTokenBlack01 from "../tokens/insect-token-black-0-1.js";
 import _tokensKnightTokenFirstStrike from "../tokens/knight-token-first-strike.js";
 import _tokensKrakenTokenTrample from "../tokens/kraken-token-trample.js";
 import _tokensPhyrexianMyrToken from "../tokens/phyrexian-myr-token.js";
+import _tokensPorthos from "../tokens/porthos.js";
 import _tokensSandWarriorToken from "../tokens/sand-warrior-token.js";
 import _tokensSculptureTreasureToken from "../tokens/sculpture-treasure-token.js";
 import _tokensSoldierToken from "../tokens/soldier-token.js";
@@ -1011,6 +1016,7 @@ const shard: CardShard = {
     _poolBarrinMasterWizard,
     _poolBashToBits,
     _poolBatrocTheLeaper,
+    _poolBattleScarredSurvivalist,
     _poolBattlewandOak,
     _poolBedrockTortoise,
     _poolBiliousSkulldweller,
@@ -1093,6 +1099,7 @@ const shard: CardShard = {
     _poolCryptbornHorror,
     _poolCrystallineNautilus,
     _poolCubwarden,
+    _poolCulberAndStametsStarCrossed,
     _poolCultistOfTheAbsolute,
     _poolCurseOfShallowGraves,
     _poolCurseOfVitality,
@@ -1470,6 +1477,7 @@ const shard: CardShard = {
     _poolNecrosynthesis,
     _poolNeedleSpecter,
     _poolNeedletoothRaptor,
+    _poolNeelixMoralSupport,
     _poolNeverwinterDryad,
     _poolNimanaSkitterSneak,
     _poolNimbleBladeKhenra,
@@ -1751,6 +1759,7 @@ const shard: CardShard = {
     _poolTerisianMindbreaker,
     _poolTerminate,
     _poolTerritorialDispute,
+    _poolTestOfIdentity,
     _poolTestOfLoyalty,
     _poolTheFiligreeSylex,
     _poolTheLordOfTheEagles,
@@ -1900,6 +1909,7 @@ const shard: CardShard = {
     _tokensKnightTokenFirstStrike,
     _tokensKrakenTokenTrample,
     _tokensPhyrexianMyrToken,
+    _tokensPorthos,
     _tokensSandWarriorToken,
     _tokensSculptureTreasureToken,
     _tokensSoldierToken,

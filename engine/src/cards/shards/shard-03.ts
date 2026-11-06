@@ -100,6 +100,7 @@ import _poolCemeteryRecruitment from "../pool/cemetery-recruitment.js";
 import _poolCentaurBattlemaster from "../pool/centaur-battlemaster.js";
 import _poolCentaurOmenreader from "../pool/centaur-omenreader.js";
 import _poolCentaurRootcaster from "../pool/centaur-rootcaster.js";
+import _poolChadichInvestigator from "../pool/chadich-investigator.js";
 import _poolChancellorOfTheDross from "../pool/chancellor-of-the-dross.js";
 import _poolChangelingTitan from "../pool/changeling-titan.js";
 import _poolCharisma from "../pool/charisma.js";
@@ -397,6 +398,7 @@ import _poolKefnetsMonument from "../pool/kefnets-monument.js";
 import _poolKeskitTheFleshSculptor from "../pool/keskit-the-flesh-sculptor.js";
 import _poolKickInTheDoor from "../pool/kick-in-the-door.js";
 import _poolKilnWalker from "../pool/kiln-walker.js";
+import _poolKirkCommandingOfficer from "../pool/kirk-commanding-officer.js";
 import _poolKnightOfTheStampede from "../pool/knight-of-the-stampede.js";
 import _poolKnightPaladin from "../pool/knight-paladin.js";
 import _poolKnockoutBlow from "../pool/knockout-blow.js";
@@ -858,6 +860,7 @@ import _poolWornPowerstone from "../pool/worn-powerstone.js";
 import _poolWraithViciousVigilante from "../pool/wraith-vicious-vigilante.js";
 import _poolWreckageWickerfolk from "../pool/wreckage-wickerfolk.js";
 import _poolWrennAndRealmbreaker from "../pool/wrenn-and-realmbreaker.js";
+import _poolXindiSurveyors from "../pool/xindi-surveyors.js";
 import _poolYorvoLordOfGarenbrig from "../pool/yorvo-lord-of-garenbrig.js";
 import _poolYoungRedDragon from "../pool/young-red-dragon.js";
 import _poolYoungWeiRecruits from "../pool/young-wei-recruits.js";
@@ -988,6 +991,7 @@ const shard: CardShard = {
     _poolCentaurBattlemaster,
     _poolCentaurOmenreader,
     _poolCentaurRootcaster,
+    _poolChadichInvestigator,
     _poolChancellorOfTheDross,
     _poolChangelingTitan,
     _poolCharisma,
@@ -1285,6 +1289,7 @@ const shard: CardShard = {
     _poolKeskitTheFleshSculptor,
     _poolKickInTheDoor,
     _poolKilnWalker,
+    _poolKirkCommandingOfficer,
     _poolKnightOfTheStampede,
     _poolKnightPaladin,
     _poolKnockoutBlow,
@@ -1746,6 +1751,7 @@ const shard: CardShard = {
     _poolWraithViciousVigilante,
     _poolWreckageWickerfolk,
     _poolWrennAndRealmbreaker,
+    _poolXindiSurveyors,
     _poolYorvoLordOfGarenbrig,
     _poolYoungRedDragon,
     _poolYoungWeiRecruits,

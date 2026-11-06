@@ -118,6 +118,7 @@ import _poolCallToHeel from "../pool/call-to-heel.js";
 import _poolCallToTheGrave from "../pool/call-to-the-grave.js";
 import _poolCanoptekTombSentinel from "../pool/canoptek-tomb-sentinel.js";
 import _poolCapricopian from "../pool/capricopian.js";
+import _poolCaptainsTutelage from "../pool/captains-tutelage.js";
 import _poolCarnivorousMossBeast from "../pool/carnivorous-moss-beast.js";
 import _poolCarrierThrall from "../pool/carrier-thrall.js";
 import _poolCartoucheOfKnowledge from "../pool/cartouche-of-knowledge.js";
@@ -244,6 +245,7 @@ import _poolEnlightenedConfidant from "../pool/enlightened-confidant.js";
 import _poolEnlightenedTutor from "../pool/enlightened-tutor.js";
 import _poolEpicConfrontation from "../pool/epic-confrontation.js";
 import _poolEpitaphGolem from "../pool/epitaph-golem.js";
+import _poolEricaOrtegasPluckyPilot from "../pool/erica-ortegas-plucky-pilot.js";
 import _poolErodedCanyon from "../pool/eroded-canyon.js";
 import _poolErrantAndGiada from "../pool/errant-and-giada.js";
 import _poolErraticCyclops from "../pool/erratic-cyclops.js";
@@ -347,6 +349,7 @@ import _poolGoblinChirurgeon from "../pool/goblin-chirurgeon.js";
 import _poolGoldenTailTrainer from "../pool/golden-tail-trainer.js";
 import _poolGolgariDecoy from "../pool/golgari-decoy.js";
 import _poolGorionWiseMentor from "../pool/gorion-wise-mentor.js";
+import _poolGowronEagerForBattle from "../pool/gowron-eager-for-battle.js";
 import _poolGracefulAntelope from "../pool/graceful-antelope.js";
 import _poolGrafReaver from "../pool/graf-reaver.js";
 import _poolGrapeshot from "../pool/grapeshot.js";
@@ -1159,6 +1162,7 @@ const shard: CardShard = {
     _poolCallToTheGrave,
     _poolCanoptekTombSentinel,
     _poolCapricopian,
+    _poolCaptainsTutelage,
     _poolCarnivorousMossBeast,
     _poolCarrierThrall,
     _poolCartoucheOfKnowledge,
@@ -1285,6 +1289,7 @@ const shard: CardShard = {
     _poolEnlightenedTutor,
     _poolEpicConfrontation,
     _poolEpitaphGolem,
+    _poolEricaOrtegasPluckyPilot,
     _poolErodedCanyon,
     _poolErrantAndGiada,
     _poolErraticCyclops,
@@ -1388,6 +1393,7 @@ const shard: CardShard = {
     _poolGoldenTailTrainer,
     _poolGolgariDecoy,
     _poolGorionWiseMentor,
+    _poolGowronEagerForBattle,
     _poolGracefulAntelope,
     _poolGrafReaver,
     _poolGrapeshot,

@@ -231,6 +231,7 @@ import _poolDissolve from "../pool/dissolve.js";
 import _poolDivinerOfMist from "../pool/diviner-of-mist.js";
 import _poolDivinersLockbox from "../pool/diviners-lockbox.js";
 import _poolDiviningWitch from "../pool/divining-witch.js";
+import _poolDominionAssaultForce from "../pool/dominion-assault-force.js";
 import _poolDonate from "../pool/donate.js";
 import _poolDoppelgang from "../pool/doppelgang.js";
 import _poolDovinsDismissal from "../pool/dovins-dismissal.js";
@@ -379,6 +380,7 @@ import _poolHeraldOfWar from "../pool/herald-of-war.js";
 import _poolHermitDruid from "../pool/hermit-druid.js";
 import _poolHeroOfTheWinds from "../pool/hero-of-the-winds.js";
 import _poolHeroicIntervention from "../pool/heroic-intervention.js";
+import _poolHesDeadJim from "../pool/hes-dead-jim.js";
 import _poolHex from "../pool/hex.js";
 import _poolHexmarkDestroyer from "../pool/hexmark-destroyer.js";
 import _poolHinterlandLogger from "../pool/hinterland-logger.js";
@@ -657,6 +659,7 @@ import _poolRiverwalkTechnique from "../pool/riverwalk-technique.js";
 import _poolRiveteersDecoy from "../pool/riveteers-decoy.js";
 import _poolRoamingThrone from "../pool/roaming-throne.js";
 import _poolRobTheArchives from "../pool/rob-the-archives.js";
+import _poolRogueArtificialIntelligence from "../pool/rogue-artificial-intelligence.js";
 import _poolRogueKavu from "../pool/rogue-kavu.js";
 import _poolRohgahhOfKherKeep from "../pool/rohgahh-of-kher-keep.js";
 import _poolRollRollRollRoll from "../pool/roll-roll-roll-roll.js";
@@ -808,6 +811,7 @@ import _poolSurgicalSuiteHospitalRoom from "../pool/surgical-suite-hospital-room
 import _poolSurveillingSprite from "../pool/surveilling-sprite.js";
 import _poolSustenance from "../pool/sustenance.js";
 import _poolSusurianDirgecraft from "../pool/susurian-dirgecraft.js";
+import _poolSuusMahnaPractitioner from "../pool/suus-mahna-practitioner.js";
 import _poolSwarmIntelligence from "../pool/swarm-intelligence.js";
 import _poolSwirlingTorrent from "../pool/swirling-torrent.js";
 import _poolSwordOfTruthAndJustice from "../pool/sword-of-truth-and-justice.js";
@@ -968,6 +972,7 @@ import _tokensKnightToken31 from "../tokens/knight-token-3-1.js";
 import _tokensKomasCoil from "../tokens/komas-coil.js";
 import _tokensOozeTokenConsumingBlob from "../tokens/ooze-token-consuming-blob.js";
 import _tokensPhyrexianInsectToken from "../tokens/phyrexian-insect-token.js";
+import _tokensRomulanToken from "../tokens/romulan-token.js";
 import _tokensSkeletonTokenGutTrueSoulZealot from "../tokens/skeleton-token-gut-true-soul-zealot.js";
 import _tokensTreefolkTokenSylvanOffering from "../tokens/treefolk-token-sylvan-offering.js";
 import _tokensVampireTokenHungryForMore from "../tokens/vampire-token-hungry-for-more.js";
@@ -1203,6 +1208,7 @@ const shard: CardShard = {
     _poolDivinerOfMist,
     _poolDivinersLockbox,
     _poolDiviningWitch,
+    _poolDominionAssaultForce,
     _poolDonate,
     _poolDoppelgang,
     _poolDovinsDismissal,
@@ -1351,6 +1357,7 @@ const shard: CardShard = {
     _poolHermitDruid,
     _poolHeroOfTheWinds,
     _poolHeroicIntervention,
+    _poolHesDeadJim,
     _poolHex,
     _poolHexmarkDestroyer,
     _poolHinterlandLogger,
@@ -1629,6 +1636,7 @@ const shard: CardShard = {
     _poolRiveteersDecoy,
     _poolRoamingThrone,
     _poolRobTheArchives,
+    _poolRogueArtificialIntelligence,
     _poolRogueKavu,
     _poolRohgahhOfKherKeep,
     _poolRollRollRollRoll,
@@ -1780,6 +1788,7 @@ const shard: CardShard = {
     _poolSurveillingSprite,
     _poolSustenance,
     _poolSusurianDirgecraft,
+    _poolSuusMahnaPractitioner,
     _poolSwarmIntelligence,
     _poolSwirlingTorrent,
     _poolSwordOfTruthAndJustice,
@@ -1942,6 +1951,7 @@ const shard: CardShard = {
     _tokensKomasCoil,
     _tokensOozeTokenConsumingBlob,
     _tokensPhyrexianInsectToken,
+    _tokensRomulanToken,
     _tokensSkeletonTokenGutTrueSoulZealot,
     _tokensTreefolkTokenSylvanOffering,
     _tokensVampireTokenHungryForMore,

@@ -322,6 +322,7 @@ import _poolGaeasAvenger from "../pool/gaeas-avenger.js";
 import _poolGallifreyCouncilChamber from "../pool/gallifrey-council-chamber.js";
 import _poolGargoyleCastle from "../pool/gargoyle-castle.js";
 import _poolGarnetPrincessOfAlexandria from "../pool/garnet-princess-of-alexandria.js";
+import _poolGaseousAnomaly from "../pool/gaseous-anomaly.js";
 import _poolGastalThrillseeker from "../pool/gastal-thrillseeker.js";
 import _poolGatewatchBeacon from "../pool/gatewatch-beacon.js";
 import _poolGatherTheWhiteLotus from "../pool/gather-the-white-lotus.js";
@@ -337,6 +338,7 @@ import _poolGenesisChamber from "../pool/genesis-chamber.js";
 import _poolGhastlyDiscovery from "../pool/ghastly-discovery.js";
 import _poolGhastlyHaunting from "../pool/ghastly-haunting.js";
 import _poolGhorClanSavage from "../pool/ghor-clan-savage.js";
+import _poolGhostOfIllyria from "../pool/ghost-of-illyria.js";
 import _poolGhosthelmCourier from "../pool/ghosthelm-courier.js";
 import _poolGhostlyFlicker from "../pool/ghostly-flicker.js";
 import _poolGiantsGrasp from "../pool/giants-grasp.js";
@@ -537,6 +539,7 @@ import _poolLocustMiser from "../pool/locust-miser.js";
 import _poolLoftyDreams from "../pool/lofty-dreams.js";
 import _poolLongshotRebelBowman from "../pool/longshot-rebel-bowman.js";
 import _poolLoomingHoverguard from "../pool/looming-hoverguard.js";
+import _poolLorePositronicProvocateur from "../pool/lore-positronic-provocateur.js";
 import _poolLostInTheWoods from "../pool/lost-in-the-woods.js";
 import _poolLostJitte from "../pool/lost-jitte.js";
 import _poolLtCmdrGeordiLaForge from "../pool/lt-cmdr-geordi-la-forge.js";
@@ -878,11 +881,13 @@ import _poolTheBattleOfBywater from "../pool/the-battle-of-bywater.js";
 import _poolTheCaveOfTwoLovers from "../pool/the-cave-of-two-lovers.js";
 import _poolTheCircleOfLoyalty from "../pool/the-circle-of-loyalty.js";
 import _poolTheCloneSaga from "../pool/the-clone-saga.js";
+import _poolTheDoctorEmh from "../pool/the-doctor-emh.js";
 import _poolTheEarthKing from "../pool/the-earth-king.js";
 import _poolTheEverChangingDane from "../pool/the-ever-changing-dane.js";
 import _poolThePrincessTakesFlight from "../pool/the-princess-takes-flight.js";
 import _poolTheReaverCleaver from "../pool/the-reaver-cleaver.js";
 import _poolTheSwarmlord from "../pool/the-swarmlord.js";
+import _poolTheTraveler from "../pool/the-traveler.js";
 import _poolTheWanderingEmperor from "../pool/the-wandering-emperor.js";
 import _poolTheWatcherInTheWater from "../pool/the-watcher-in-the-water.js";
 import _poolTheyCameFromThePipes from "../pool/they-came-from-the-pipes.js";
@@ -962,6 +967,7 @@ import _poolVolatileRig from "../pool/volatile-rig.js";
 import _poolVolrathsDungeon from "../pool/volraths-dungeon.js";
 import _poolVowOfWildness from "../pool/vow-of-wildness.js";
 import _poolVraskasConquistador from "../pool/vraskas-conquistador.js";
+import _poolVulcanMindMeld from "../pool/vulcan-mind-meld.js";
 import _poolWalkingAtlas from "../pool/walking-atlas.js";
 import _poolWallOfMist from "../pool/wall-of-mist.js";
 import _poolWallOfWood from "../pool/wall-of-wood.js";
@@ -1352,6 +1358,7 @@ const shard: CardShard = {
     _poolGallifreyCouncilChamber,
     _poolGargoyleCastle,
     _poolGarnetPrincessOfAlexandria,
+    _poolGaseousAnomaly,
     _poolGastalThrillseeker,
     _poolGatewatchBeacon,
     _poolGatherTheWhiteLotus,
@@ -1367,6 +1374,7 @@ const shard: CardShard = {
     _poolGhastlyDiscovery,
     _poolGhastlyHaunting,
     _poolGhorClanSavage,
+    _poolGhostOfIllyria,
     _poolGhosthelmCourier,
     _poolGhostlyFlicker,
     _poolGiantsGrasp,
@@ -1567,6 +1575,7 @@ const shard: CardShard = {
     _poolLoftyDreams,
     _poolLongshotRebelBowman,
     _poolLoomingHoverguard,
+    _poolLorePositronicProvocateur,
     _poolLostInTheWoods,
     _poolLostJitte,
     _poolLtCmdrGeordiLaForge,
@@ -1908,11 +1917,13 @@ const shard: CardShard = {
     _poolTheCaveOfTwoLovers,
     _poolTheCircleOfLoyalty,
     _poolTheCloneSaga,
+    _poolTheDoctorEmh,
     _poolTheEarthKing,
     _poolTheEverChangingDane,
     _poolThePrincessTakesFlight,
     _poolTheReaverCleaver,
     _poolTheSwarmlord,
+    _poolTheTraveler,
     _poolTheWanderingEmperor,
     _poolTheWatcherInTheWater,
     _poolTheyCameFromThePipes,
@@ -1992,6 +2003,7 @@ const shard: CardShard = {
     _poolVolrathsDungeon,
     _poolVowOfWildness,
     _poolVraskasConquistador,
+    _poolVulcanMindMeld,
     _poolWalkingAtlas,
     _poolWallOfMist,
     _poolWallOfWood,

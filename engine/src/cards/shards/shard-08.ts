@@ -156,6 +156,7 @@ import _poolCloakOfTheBat from "../pool/cloak-of-the-bat.js";
 import _poolCloudform from "../pool/cloudform.js";
 import _poolClownCar from "../pool/clown-car.js";
 import _poolCoalitionRelic from "../pool/coalition-relic.js";
+import _poolColdBloodedCrew from "../pool/cold-blooded-crew.js";
 import _poolColdEyedSelkie from "../pool/cold-eyed-selkie.js";
 import _poolColossalWhale from "../pool/colossal-whale.js";
 import _poolCommanderGrevenIlVec from "../pool/commander-greven-il-vec.js";
@@ -198,6 +199,7 @@ import _poolDarkMaze from "../pool/dark-maze.js";
 import _poolDarksteelAxe from "../pool/darksteel-axe.js";
 import _poolDavenantArcher from "../pool/davenant-archer.js";
 import _poolDawnhartWardens from "../pool/dawnhart-wardens.js";
+import _poolDeEvolve from "../pool/de-evolve.js";
 import _poolDeathPriestOfMyrkul from "../pool/death-priest-of-myrkul.js";
 import _poolDeathbellowWarCry from "../pool/deathbellow-war-cry.js";
 import _poolDeathcurseOgre from "../pool/deathcurse-ogre.js";
@@ -428,6 +430,7 @@ import _poolInscribedTablet from "../pool/inscribed-tablet.js";
 import _poolInsidiousFungus from "../pool/insidious-fungus.js";
 import _poolInspirationFromBeyond from "../pool/inspiration-from-beyond.js";
 import _poolInstigatorGang from "../pool/instigator-gang.js";
+import _poolInterstellarEffigy from "../pool/interstellar-effigy.js";
 import _poolIntimidationCampaign from "../pool/intimidation-campaign.js";
 import _poolInvasionOfErgamon from "../pool/invasion-of-ergamon.js";
 import _poolInvasionOfLorwyn from "../pool/invasion-of-lorwyn.js";
@@ -833,6 +836,7 @@ import _poolStockingThePantry from "../pool/stocking-the-pantry.js";
 import _poolStokeTheFlames from "../pool/stoke-the-flames.js";
 import _poolStolenIdentity from "../pool/stolen-identity.js";
 import _poolStonebrowKrosanHero from "../pool/stonebrow-krosan-hero.js";
+import _poolStoriedVeteran from "../pool/storied-veteran.js";
 import _poolStormStrike from "../pool/storm-strike.js";
 import _poolStormtideLeviathan from "../pool/stormtide-leviathan.js";
 import _poolStormwingEntity from "../pool/stormwing-entity.js";
@@ -963,6 +967,7 @@ import _poolVoyagerStaff from "../pool/voyager-staff.js";
 import _poolVronosMaskedInquisitor from "../pool/vronos-masked-inquisitor.js";
 import _poolVulpineHarvester from "../pool/vulpine-harvester.js";
 import _poolVulshokSplitter from "../pool/vulshok-splitter.js";
+import _poolWarpSpeed from "../pool/warp-speed.js";
 import _poolWatchwolf from "../pool/watchwolf.js";
 import _poolWaterkinShaman from "../pool/waterkin-shaman.js";
 import _poolWaxWane from "../pool/wax-wane.js";
@@ -988,10 +993,12 @@ import _poolXerexStrobeKnight from "../pool/xerex-strobe-knight.js";
 import _poolYaroksWavecrasher from "../pool/yaroks-wavecrasher.js";
 import _poolYasminKhan from "../pool/yasmin-khan.js";
 import _poolYavimayaCoast from "../pool/yavimaya-coast.js";
+import _poolYearOfHell from "../pool/year-of-hell.js";
 import _poolYouFindSomePrisoners from "../pool/you-find-some-prisoners.js";
 import _poolZealousDisplay from "../pool/zealous-display.js";
 import _poolZealousStrike from "../pool/zealous-strike.js";
 import _poolZephyrWinder from "../pool/zephyr-winder.js";
+import _poolZeroIncorporealSensate from "../pool/zero-incorporeal-sensate.js";
 import _poolZimoneParadoxSculptor from "../pool/zimone-paradox-sculptor.js";
 import _poolZodiacDragon from "../pool/zodiac-dragon.js";
 import _poolZodiacOx from "../pool/zodiac-ox.js";
@@ -1179,6 +1186,7 @@ const shard: CardShard = {
     _poolCloudform,
     _poolClownCar,
     _poolCoalitionRelic,
+    _poolColdBloodedCrew,
     _poolColdEyedSelkie,
     _poolColossalWhale,
     _poolCommanderGrevenIlVec,
@@ -1221,6 +1229,7 @@ const shard: CardShard = {
     _poolDarksteelAxe,
     _poolDavenantArcher,
     _poolDawnhartWardens,
+    _poolDeEvolve,
     _poolDeathPriestOfMyrkul,
     _poolDeathbellowWarCry,
     _poolDeathcurseOgre,
@@ -1451,6 +1460,7 @@ const shard: CardShard = {
     _poolInsidiousFungus,
     _poolInspirationFromBeyond,
     _poolInstigatorGang,
+    _poolInterstellarEffigy,
     _poolIntimidationCampaign,
     _poolInvasionOfErgamon,
     _poolInvasionOfLorwyn,
@@ -1856,6 +1866,7 @@ const shard: CardShard = {
     _poolStokeTheFlames,
     _poolStolenIdentity,
     _poolStonebrowKrosanHero,
+    _poolStoriedVeteran,
     _poolStormStrike,
     _poolStormtideLeviathan,
     _poolStormwingEntity,
@@ -1986,6 +1997,7 @@ const shard: CardShard = {
     _poolVronosMaskedInquisitor,
     _poolVulpineHarvester,
     _poolVulshokSplitter,
+    _poolWarpSpeed,
     _poolWatchwolf,
     _poolWaterkinShaman,
     _poolWaxWane,
@@ -2011,10 +2023,12 @@ const shard: CardShard = {
     _poolYaroksWavecrasher,
     _poolYasminKhan,
     _poolYavimayaCoast,
+    _poolYearOfHell,
     _poolYouFindSomePrisoners,
     _poolZealousDisplay,
     _poolZealousStrike,
     _poolZephyrWinder,
+    _poolZeroIncorporealSensate,
     _poolZimoneParadoxSculptor,
     _poolZodiacDragon,
     _poolZodiacOx,

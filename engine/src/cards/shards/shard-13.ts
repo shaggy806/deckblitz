@@ -225,6 +225,7 @@ import _poolDualSunAdepts from "../pool/dual-sun-adepts.js";
 import _poolDungeonCrawler from "../pool/dungeon-crawler.js";
 import _poolDuskanaTheRageMother from "../pool/duskana-the-rage-mother.js";
 import _poolDuskriderFalcon from "../pool/duskrider-falcon.js";
+import _poolDvanaTendiOptimisticEnsign from "../pool/dvana-tendi-optimistic-ensign.js";
 import _poolDwarvenBerserker from "../pool/dwarven-berserker.js";
 import _poolEarthKingdomJailer from "../pool/earth-kingdom-jailer.js";
 import _poolEchoTracer from "../pool/echo-tracer.js";
@@ -452,6 +453,7 @@ import _poolLoathsomeCurator from "../pool/loathsome-curator.js";
 import _poolLootTheNexus from "../pool/loot-the-nexus.js";
 import _poolLordSkittersButcher from "../pool/lord-skitters-butcher.js";
 import _poolLoxodonSurveyor from "../pool/loxodon-surveyor.js";
+import _poolLrellFierceVisionary from "../pool/lrell-fierce-visionary.js";
 import _poolLuminousBroodmoth from "../pool/luminous-broodmoth.js";
 import _poolLurkingChupacabra from "../pool/lurking-chupacabra.js";
 import _poolMabelBitterRecluse from "../pool/mabel-bitter-recluse.js";
@@ -568,6 +570,7 @@ import _poolPiousInterdiction from "../pool/pious-interdiction.js";
 import _poolPiranhaFly from "../pool/piranha-fly.js";
 import _poolPlanarAlly from "../pool/planar-ally.js";
 import _poolPlanarVoid from "../pool/planar-void.js";
+import _poolPlasmaCascade from "../pool/plasma-cascade.js";
 import _poolPoppetStitcher from "../pool/poppet-stitcher.js";
 import _poolPossessedGoat from "../pool/possessed-goat.js";
 import _poolPoulticeSliver from "../pool/poultice-sliver.js";
@@ -1169,6 +1172,7 @@ const shard: CardShard = {
     _poolDungeonCrawler,
     _poolDuskanaTheRageMother,
     _poolDuskriderFalcon,
+    _poolDvanaTendiOptimisticEnsign,
     _poolDwarvenBerserker,
     _poolEarthKingdomJailer,
     _poolEchoTracer,
@@ -1396,6 +1400,7 @@ const shard: CardShard = {
     _poolLootTheNexus,
     _poolLordSkittersButcher,
     _poolLoxodonSurveyor,
+    _poolLrellFierceVisionary,
     _poolLuminousBroodmoth,
     _poolLurkingChupacabra,
     _poolMabelBitterRecluse,
@@ -1512,6 +1517,7 @@ const shard: CardShard = {
     _poolPiranhaFly,
     _poolPlanarAlly,
     _poolPlanarVoid,
+    _poolPlasmaCascade,
     _poolPoppetStitcher,
     _poolPossessedGoat,
     _poolPoulticeSliver,

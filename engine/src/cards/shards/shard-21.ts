@@ -18,6 +18,7 @@ import _poolAlpineWatchdog from "../pool/alpine-watchdog.js";
 import _poolAlseidOfLifesBounty from "../pool/alseid-of-lifes-bounty.js";
 import _poolAmyRose from "../pool/amy-rose.js";
 import _poolAncientHellkite from "../pool/ancient-hellkite.js";
+import _poolAndoria from "../pool/andoria.js";
 import _poolAngelOfSanctions from "../pool/angel-of-sanctions.js";
 import _poolAngelsTrumpet from "../pool/angels-trumpet.js";
 import _poolAnimateLand from "../pool/animate-land.js";
@@ -125,6 +126,7 @@ import _poolCarrionGrub from "../pool/carrion-grub.js";
 import _poolCementShoes from "../pool/cement-shoes.js";
 import _poolCephalidFacetaker from "../pool/cephalid-facetaker.js";
 import _poolCeremoniousRejection from "../pool/ceremonious-rejection.js";
+import _poolCetaceanOps from "../pool/cetacean-ops.js";
 import _poolChainReaction from "../pool/chain-reaction.js";
 import _poolChampionOfTheWeird from "../pool/champion-of-the-weird.js";
 import _poolChandrasMagmutt from "../pool/chandras-magmutt.js";
@@ -398,6 +400,7 @@ import _poolIronHillsStalwart from "../pool/iron-hills-stalwart.js";
 import _poolIronStar from "../pool/iron-star.js";
 import _poolJaceVrynsProdigy from "../pool/jace-vryns-prodigy.js";
 import _poolJacesErasure from "../pool/jaces-erasure.js";
+import _poolJakeSiskoWarCorrespondent from "../pool/jake-sisko-war-correspondent.js";
 import _poolJaradGolgariLichLord from "../pool/jarad-golgari-lich-lord.js";
 import _poolJasperaSentinel from "../pool/jaspera-sentinel.js";
 import _poolJeskaiShrinekeeper from "../pool/jeskai-shrinekeeper.js";
@@ -618,6 +621,7 @@ import _poolRedHerring from "../pool/red-herring.js";
 import _poolRedeem from "../pool/redeem.js";
 import _poolRefuse from "../pool/refuse.js";
 import _poolRejoinTheFight from "../pool/rejoin-the-fight.js";
+import _poolRelentlessDrednok from "../pool/relentless-drednok.js";
 import _poolRelicPutrescence from "../pool/relic-putrescence.js";
 import _poolRendmawCreakingNest from "../pool/rendmaw-creaking-nest.js";
 import _poolRenegadeRallier from "../pool/renegade-rallier.js";
@@ -918,6 +922,7 @@ import _tokensHumanRogueToken from "../tokens/human-rogue-token.js";
 import _tokensIncubatorToken from "../tokens/incubator-token.js";
 import _tokensKnightTokenRasputinTheOneiromancer from "../tokens/knight-token-rasputin-the-oneiromancer.js";
 import _tokensMoogleToken from "../tokens/moogle-token.js";
+import _tokensNeurofluxHeirloomToken from "../tokens/neuroflux-heirloom-token.js";
 import _tokensPhyrexianGoblinToken from "../tokens/phyrexian-goblin-token.js";
 import _tokensPirateToken from "../tokens/pirate-token.js";
 import _tokensPlantWarriorToken from "../tokens/plant-warrior-token.js";
@@ -944,6 +949,7 @@ const shard: CardShard = {
     _poolAlseidOfLifesBounty,
     _poolAmyRose,
     _poolAncientHellkite,
+    _poolAndoria,
     _poolAngelOfSanctions,
     _poolAngelsTrumpet,
     _poolAnimateLand,
@@ -1051,6 +1057,7 @@ const shard: CardShard = {
     _poolCementShoes,
     _poolCephalidFacetaker,
     _poolCeremoniousRejection,
+    _poolCetaceanOps,
     _poolChainReaction,
     _poolChampionOfTheWeird,
     _poolChandrasMagmutt,
@@ -1324,6 +1331,7 @@ const shard: CardShard = {
     _poolIronStar,
     _poolJaceVrynsProdigy,
     _poolJacesErasure,
+    _poolJakeSiskoWarCorrespondent,
     _poolJaradGolgariLichLord,
     _poolJasperaSentinel,
     _poolJeskaiShrinekeeper,
@@ -1544,6 +1552,7 @@ const shard: CardShard = {
     _poolRedeem,
     _poolRefuse,
     _poolRejoinTheFight,
+    _poolRelentlessDrednok,
     _poolRelicPutrescence,
     _poolRendmawCreakingNest,
     _poolRenegadeRallier,
@@ -1846,6 +1855,7 @@ const shard: CardShard = {
     _tokensIncubatorToken,
     _tokensKnightTokenRasputinTheOneiromancer,
     _tokensMoogleToken,
+    _tokensNeurofluxHeirloomToken,
     _tokensPhyrexianGoblinToken,
     _tokensPirateToken,
     _tokensPlantWarriorToken,

@@ -6,6 +6,7 @@ import type { CardShard } from "../card-shards.js";
 import _poolATaleForTheAges from "../pool/a-tale-for-the-ages.js";
 import _poolAbyssalSpecter from "../pool/abyssal-specter.js";
 import _poolAcademyDrake from "../pool/academy-drake.js";
+import _poolAcademyInstructor from "../pool/academy-instructor.js";
 import _poolAccursedSpirit from "../pool/accursed-spirit.js";
 import _poolAcolyteHybrid from "../pool/acolyte-hybrid.js";
 import _poolAdantoVanguard from "../pool/adanto-vanguard.js";
@@ -195,6 +196,7 @@ import _poolDarkWithering from "../pool/dark-withering.js";
 import _poolDarksteelCitadel from "../pool/darksteel-citadel.js";
 import _poolDarksteelSentinel from "../pool/darksteel-sentinel.js";
 import _poolDaruHealer from "../pool/daru-healer.js";
+import _poolDathonAndPicardAtElAdrel from "../pool/dathon-and-picard-at-el-adrel.js";
 import _poolDawningAngel from "../pool/dawning-angel.js";
 import _poolDawnsTruce from "../pool/dawns-truce.js";
 import _poolDeadlyWanderings from "../pool/deadly-wanderings.js";
@@ -241,6 +243,7 @@ import _poolEarthrumbler from "../pool/earthrumbler.js";
 import _poolEchoCirclet from "../pool/echo-circlet.js";
 import _poolEcologicalAppreciation from "../pool/ecological-appreciation.js";
 import _poolEiganjoDynastorian from "../pool/eiganjo-dynastorian.js";
+import _poolEjectTheWarpCore from "../pool/eject-the-warp-core.js";
 import _poolEldritchPact from "../pool/eldritch-pact.js";
 import _poolElectricEel from "../pool/electric-eel.js";
 import _poolElminstersSimulacrum from "../pool/elminsters-simulacrum.js";
@@ -1005,6 +1008,7 @@ const shard: CardShard = {
     _poolATaleForTheAges,
     _poolAbyssalSpecter,
     _poolAcademyDrake,
+    _poolAcademyInstructor,
     _poolAccursedSpirit,
     _poolAcolyteHybrid,
     _poolAdantoVanguard,
@@ -1194,6 +1198,7 @@ const shard: CardShard = {
     _poolDarksteelCitadel,
     _poolDarksteelSentinel,
     _poolDaruHealer,
+    _poolDathonAndPicardAtElAdrel,
     _poolDawningAngel,
     _poolDawnsTruce,
     _poolDeadlyWanderings,
@@ -1240,6 +1245,7 @@ const shard: CardShard = {
     _poolEchoCirclet,
     _poolEcologicalAppreciation,
     _poolEiganjoDynastorian,
+    _poolEjectTheWarpCore,
     _poolEldritchPact,
     _poolElectricEel,
     _poolElminstersSimulacrum,

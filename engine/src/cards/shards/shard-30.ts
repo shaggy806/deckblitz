@@ -72,6 +72,7 @@ import _poolBattleSliver from "../pool/battle-sliver.js";
 import _poolBazaarTrader from "../pool/bazaar-trader.js";
 import _poolBeaconOfDestruction from "../pool/beacon-of-destruction.js";
 import _poolBearUmbra from "../pool/bear-umbra.js";
+import _poolBeckettMarinerImpetuousEnsign from "../pool/beckett-mariner-impetuous-ensign.js";
 import _poolBeetleformMage from "../pool/beetleform-mage.js";
 import _poolBelunaGrandsquall from "../pool/beluna-grandsquall.js";
 import _poolBenevolentRiverSpirit from "../pool/benevolent-river-spirit.js";
@@ -143,6 +144,7 @@ import _poolClaimOfErebos from "../pool/claim-of-erebos.js";
 import _poolClawsOfValakut from "../pool/claws-of-valakut.js";
 import _poolClearShot from "../pool/clear-shot.js";
 import _poolClockOfOmens from "../pool/clock-of-omens.js";
+import _poolCloisteredTelepath from "../pool/cloistered-telepath.js";
 import _poolCloudOfDarkness from "../pool/cloud-of-darkness.js";
 import _poolCloudOfFaeries from "../pool/cloud-of-faeries.js";
 import _poolCloudshift from "../pool/cloudshift.js";
@@ -334,6 +336,7 @@ import _poolGargadon from "../pool/gargadon.js";
 import _poolGarrukPrimalHunter from "../pool/garruk-primal-hunter.js";
 import _poolGatheringThrong from "../pool/gathering-throng.js";
 import _poolGeistOfSaintTraft from "../pool/geist-of-saint-traft.js";
+import _poolGenesisEffect from "../pool/genesis-effect.js";
 import _poolGenjuOfTheCedars from "../pool/genju-of-the-cedars.js";
 import _poolGiantbaiting from "../pool/giantbaiting.js";
 import _poolGiftOfTheDeity from "../pool/gift-of-the-deity.js";
@@ -511,6 +514,7 @@ import _poolLoxodonEavesdropper from "../pool/loxodon-eavesdropper.js";
 import _poolLoyalTutor from "../pool/loyal-tutor.js";
 import _poolLukkaCoppercoatOutcast from "../pool/lukka-coppercoat-outcast.js";
 import _poolLumengridGargoyle from "../pool/lumengrid-gargoyle.js";
+import _poolMacoStrikeTeam from "../pool/maco-strike-team.js";
 import _poolMadameMasque from "../pool/madame-masque.js";
 import _poolMageTowerReferee from "../pool/mage-tower-referee.js";
 import _poolMagmaticHellkite from "../pool/magmatic-hellkite.js";
@@ -656,6 +660,7 @@ import _poolPull from "../pool/pull.js";
 import _poolPumpkinBombardment from "../pool/pumpkin-bombardment.js";
 import _poolPurify from "../pool/purify.js";
 import _poolPurpleCrystalCrab from "../pool/purple-crystal-crab.js";
+import _poolQonos from "../pool/qonos.js";
 import _poolQuicksand from "../pool/quicksand.js";
 import _poolQuietDisrepair from "../pool/quiet-disrepair.js";
 import _poolQuilledSliver from "../pool/quilled-sliver.js";
@@ -772,6 +777,7 @@ import _poolSoothingBalm from "../pool/soothing-balm.js";
 import _poolSoulbladeRenewer from "../pool/soulblade-renewer.js";
 import _poolSoulcatchersAerie from "../pool/soulcatchers-aerie.js";
 import _poolSouthernAirTemple from "../pool/southern-air-temple.js";
+import _poolSpatialAnomaly from "../pool/spatial-anomaly.js";
 import _poolSpawnOfMayhem from "../pool/spawn-of-mayhem.js";
 import _poolSpawningKraken from "../pool/spawning-kraken.js";
 import _poolSpectralBears from "../pool/spectral-bears.js";
@@ -1060,6 +1066,7 @@ const shard: CardShard = {
     _poolBazaarTrader,
     _poolBeaconOfDestruction,
     _poolBearUmbra,
+    _poolBeckettMarinerImpetuousEnsign,
     _poolBeetleformMage,
     _poolBelunaGrandsquall,
     _poolBenevolentRiverSpirit,
@@ -1131,6 +1138,7 @@ const shard: CardShard = {
     _poolClawsOfValakut,
     _poolClearShot,
     _poolClockOfOmens,
+    _poolCloisteredTelepath,
     _poolCloudOfDarkness,
     _poolCloudOfFaeries,
     _poolCloudshift,
@@ -1322,6 +1330,7 @@ const shard: CardShard = {
     _poolGarrukPrimalHunter,
     _poolGatheringThrong,
     _poolGeistOfSaintTraft,
+    _poolGenesisEffect,
     _poolGenjuOfTheCedars,
     _poolGiantbaiting,
     _poolGiftOfTheDeity,
@@ -1499,6 +1508,7 @@ const shard: CardShard = {
     _poolLoyalTutor,
     _poolLukkaCoppercoatOutcast,
     _poolLumengridGargoyle,
+    _poolMacoStrikeTeam,
     _poolMadameMasque,
     _poolMageTowerReferee,
     _poolMagmaticHellkite,
@@ -1644,6 +1654,7 @@ const shard: CardShard = {
     _poolPumpkinBombardment,
     _poolPurify,
     _poolPurpleCrystalCrab,
+    _poolQonos,
     _poolQuicksand,
     _poolQuietDisrepair,
     _poolQuilledSliver,
@@ -1760,6 +1771,7 @@ const shard: CardShard = {
     _poolSoulbladeRenewer,
     _poolSoulcatchersAerie,
     _poolSouthernAirTemple,
+    _poolSpatialAnomaly,
     _poolSpawnOfMayhem,
     _poolSpawningKraken,
     _poolSpectralBears,

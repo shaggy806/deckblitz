@@ -402,6 +402,7 @@ import _poolIceFangCoatl from "../pool/ice-fang-coatl.js";
 import _poolIllicitAuction from "../pool/illicit-auction.js";
 import _poolIllusionReality from "../pool/illusion-reality.js";
 import _poolImpoliteEntrance from "../pool/impolite-entrance.js";
+import _poolInThePaleMoonlight from "../pool/in-the-pale-moonlight.js";
 import _poolIncubationSac from "../pool/incubation-sac.js";
 import _poolInduceParanoia from "../pool/induce-paranoia.js";
 import _poolInfernalReckoning from "../pool/infernal-reckoning.js";
@@ -701,6 +702,7 @@ import _poolSidequestRaiseAChocobo from "../pool/sidequest-raise-a-chocobo.js";
 import _poolSidisiBroodTyrant from "../pool/sidisi-brood-tyrant.js";
 import _poolSigiledContender from "../pool/sigiled-contender.js";
 import _poolSilhanaStarfletcher from "../pool/silhana-starfletcher.js";
+import _poolSilicateSurveyor from "../pool/silicate-surveyor.js";
 import _poolSilverSableMercenaryLeader from "../pool/silver-sable-mercenary-leader.js";
 import _poolSilverquillSilencer from "../pool/silverquill-silencer.js";
 import _poolSimicGuildgate from "../pool/simic-guildgate.js";
@@ -1370,6 +1372,7 @@ const shard: CardShard = {
     _poolIllicitAuction,
     _poolIllusionReality,
     _poolImpoliteEntrance,
+    _poolInThePaleMoonlight,
     _poolIncubationSac,
     _poolInduceParanoia,
     _poolInfernalReckoning,
@@ -1669,6 +1672,7 @@ const shard: CardShard = {
     _poolSidisiBroodTyrant,
     _poolSigiledContender,
     _poolSilhanaStarfletcher,
+    _poolSilicateSurveyor,
     _poolSilverSableMercenaryLeader,
     _poolSilverquillSilencer,
     _poolSimicGuildgate,

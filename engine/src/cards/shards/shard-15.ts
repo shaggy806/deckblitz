@@ -665,6 +665,7 @@ import _poolRuthlessCullblade from "../pool/ruthless-cullblade.js";
 import _poolSageAven from "../pool/sage-aven.js";
 import _poolSageOfTheUnknowable from "../pool/sage-of-the-unknowable.js";
 import _poolSaheeliJewelOfAvishkar from "../pool/saheeli-jewel-of-avishkar.js";
+import _poolSaltVampire from "../pool/salt-vampire.js";
 import _poolSanctuaryWall from "../pool/sanctuary-wall.js";
 import _poolSanctumOfEternity from "../pool/sanctum-of-eternity.js";
 import _poolSangromancer from "../pool/sangromancer.js";
@@ -738,6 +739,7 @@ import _poolSquareUp from "../pool/square-up.js";
 import _poolSqueakingPieSneak from "../pool/squeaking-pie-sneak.js";
 import _poolSquelchingLeeches from "../pool/squelching-leeches.js";
 import _poolStampedingHorncrest from "../pool/stampeding-horncrest.js";
+import _poolStarfleetSecurity from "../pool/starfleet-security.js";
 import _poolStatureYoungAvenger from "../pool/stature-young-avenger.js";
 import _poolStatus from "../pool/status.js";
 import _poolStingingVitriol from "../pool/stinging-vitriol.js";
@@ -1584,6 +1586,7 @@ const shard: CardShard = {
     _poolSageAven,
     _poolSageOfTheUnknowable,
     _poolSaheeliJewelOfAvishkar,
+    _poolSaltVampire,
     _poolSanctuaryWall,
     _poolSanctumOfEternity,
     _poolSangromancer,
@@ -1657,6 +1660,7 @@ const shard: CardShard = {
     _poolSqueakingPieSneak,
     _poolSquelchingLeeches,
     _poolStampedingHorncrest,
+    _poolStarfleetSecurity,
     _poolStatureYoungAvenger,
     _poolStatus,
     _poolStingingVitriol,

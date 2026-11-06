@@ -3411,7 +3411,9 @@ function distinctValuesOf(
   if (of === "permanent-type") return c.types.filter((t) => PERMANENT_TYPES.includes(t));
   if (!c.types.includes(of.subtypesOf)) return [];
   if (of.subtypesOf === "creature") {
-    return hasSubtype(c.subtypes, EVERY_CREATURE_TYPE) ? CREATURE_TYPES : c.subtypes.filter(isCreatureType);
+    // The marker itself (changeling, rule 702.73a), not `hasSubtype`: asked about
+    // the marker, `hasSubtype` means "has any creature type", which every Goblin has.
+    return c.subtypes.includes(EVERY_CREATURE_TYPE) ? CREATURE_TYPES : c.subtypes.filter(isCreatureType);
   }
   return c.subtypes.filter((s) => !isTypeMarker(s) && !isCreatureType(s) && !isLandType(s));
 }

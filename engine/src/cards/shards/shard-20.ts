@@ -55,6 +55,7 @@ import _poolArmoredWarhorse from "../pool/armored-warhorse.js";
 import _poolArmoryOfIroas from "../pool/armory-of-iroas.js";
 import _poolArniRenownedChampion from "../pool/arni-renowned-champion.js";
 import _poolArtfulManeuver from "../pool/artful-maneuver.js";
+import _poolArtificialAnomaly from "../pool/artificial-anomaly.js";
 import _poolAsForetold from "../pool/as-foretold.js";
 import _poolAscendedLawmage from "../pool/ascended-lawmage.js";
 import _poolAshiokSculptorOfFears from "../pool/ashiok-sculptor-of-fears.js";
@@ -275,6 +276,7 @@ import _poolElminster from "../pool/elminster.js";
 import _poolEmancipationAngel from "../pool/emancipation-angel.js";
 import _poolEmberIslandProduction from "../pool/ember-island-production.js";
 import _poolEmberethShieldbreaker from "../pool/embereth-shieldbreaker.js";
+import _poolEmergencyMedicalHologram from "../pool/emergency-medical-hologram.js";
 import _poolEmeriasCall from "../pool/emerias-call.js";
 import _poolEmrakulTheWorldAnew from "../pool/emrakul-the-world-anew.js";
 import _poolEnchantedRiversGrasp from "../pool/enchanted-rivers-grasp.js";
@@ -622,6 +624,7 @@ import _poolPeemaAetherSeer from "../pool/peema-aether-seer.js";
 import _poolPeerPastTheVeil from "../pool/peer-past-the-veil.js";
 import _poolPensiveProfessor from "../pool/pensive-professor.js";
 import _poolPerilousForays from "../pool/perilous-forays.js";
+import _poolPerilsOfThePast from "../pool/perils-of-the-past.js";
 import _poolPestSummoning from "../pool/pest-summoning.js";
 import _poolPhyrexianTower from "../pool/phyrexian-tower.js";
 import _poolPiaNalaarConsulOfRevival from "../pool/pia-nalaar-consul-of-revival.js";
@@ -1080,6 +1083,7 @@ const shard: CardShard = {
     _poolArmoryOfIroas,
     _poolArniRenownedChampion,
     _poolArtfulManeuver,
+    _poolArtificialAnomaly,
     _poolAsForetold,
     _poolAscendedLawmage,
     _poolAshiokSculptorOfFears,
@@ -1300,6 +1304,7 @@ const shard: CardShard = {
     _poolEmancipationAngel,
     _poolEmberIslandProduction,
     _poolEmberethShieldbreaker,
+    _poolEmergencyMedicalHologram,
     _poolEmeriasCall,
     _poolEmrakulTheWorldAnew,
     _poolEnchantedRiversGrasp,
@@ -1647,6 +1652,7 @@ const shard: CardShard = {
     _poolPeerPastTheVeil,
     _poolPensiveProfessor,
     _poolPerilousForays,
+    _poolPerilsOfThePast,
     _poolPestSummoning,
     _poolPhyrexianTower,
     _poolPiaNalaarConsulOfRevival,

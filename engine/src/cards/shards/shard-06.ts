@@ -690,6 +690,7 @@ import _poolSaltcrustedSteppe from "../pool/saltcrusted-steppe.js";
 import _poolSalvageScuttler from "../pool/salvage-scuttler.js";
 import _poolSandbarMerfolk from "../pool/sandbar-merfolk.js";
 import _poolSavageGorilla from "../pool/savage-gorilla.js";
+import _poolSavvyProfiteer from "../pool/savvy-profiteer.js";
 import _poolSawInHalf from "../pool/saw-in-half.js";
 import _poolSawbladeSlinger from "../pool/sawblade-slinger.js";
 import _poolScaledNurturer from "../pool/scaled-nurturer.js";
@@ -861,6 +862,7 @@ import _poolTyrantsFamiliar from "../pool/tyrants-familiar.js";
 import _poolUchuulon from "../pool/uchuulon.js";
 import _poolUginsConjurant from "../pool/ugins-conjurant.js";
 import _poolUldarosTheorix from "../pool/uldaros-theorix.js";
+import _poolUnaChinRileyNumberOne from "../pool/una-chin-riley-number-one.js";
 import _poolUnbreathingHorde from "../pool/unbreathing-horde.js";
 import _poolUncoveredClues from "../pool/uncovered-clues.js";
 import _poolUndercityScrounger from "../pool/undercity-scrounger.js";
@@ -1657,6 +1659,7 @@ const shard: CardShard = {
     _poolSalvageScuttler,
     _poolSandbarMerfolk,
     _poolSavageGorilla,
+    _poolSavvyProfiteer,
     _poolSawInHalf,
     _poolSawbladeSlinger,
     _poolScaledNurturer,
@@ -1828,6 +1831,7 @@ const shard: CardShard = {
     _poolUchuulon,
     _poolUginsConjurant,
     _poolUldarosTheorix,
+    _poolUnaChinRileyNumberOne,
     _poolUnbreathingHorde,
     _poolUncoveredClues,
     _poolUndercityScrounger,

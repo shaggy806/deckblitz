@@ -152,6 +152,7 @@ import _poolChokingMiasma from "../pool/choking-miasma.js";
 import _poolChosenOfMarkov from "../pool/chosen-of-markov.js";
 import _poolClanCrafter from "../pool/clan-crafter.js";
 import _poolCleansingScreech from "../pool/cleansing-screech.js";
+import _poolClevelandBookerEmpath from "../pool/cleveland-booker-empath.js";
 import _poolCloakAndDagger from "../pool/cloak-and-dagger.js";
 import _poolCloakOfFeathers from "../pool/cloak-of-feathers.js";
 import _poolCloisteredYouth from "../pool/cloistered-youth.js";
@@ -169,6 +170,7 @@ import _poolConductiveMachete from "../pool/conductive-machete.js";
 import _poolConjuredCurrency from "../pool/conjured-currency.js";
 import _poolConjurersBan from "../pool/conjurers-ban.js";
 import _poolConsecratedSphinx from "../pool/consecrated-sphinx.js";
+import _poolConstableOdo from "../pool/constable-odo.js";
 import _poolConversionApparatus from "../pool/conversion-apparatus.js";
 import _poolCosmicCube from "../pool/cosmic-cube.js";
 import _poolCosmosElixir from "../pool/cosmos-elixir.js";
@@ -822,11 +824,14 @@ import _poolTerritorialBoar from "../pool/territorial-boar.js";
 import _poolTerritorialHellkite from "../pool/territorial-hellkite.js";
 import _poolTheBindingOfTheTitans from "../pool/the-binding-of-the-titans.js";
 import _poolTheComingOfGalactus from "../pool/the-coming-of-galactus.js";
+import _poolTheDestructionOfPraxis from "../pool/the-destruction-of-praxis.js";
 import _poolTheImmortalWeapons from "../pool/the-immortal-weapons.js";
+import _poolTheInnerLight from "../pool/the-inner-light.js";
 import _poolTheLongReachOfNight from "../pool/the-long-reach-of-night.js";
 import _poolTheMightstoneAndWeakstone from "../pool/the-mightstone-and-weakstone.js";
 import _poolTheMoment from "../pool/the-moment.js";
 import _poolTheMycotyrant from "../pool/the-mycotyrant.js";
+import _poolTheNakedTime from "../pool/the-naked-time.js";
 import _poolTheRavensWarning from "../pool/the-ravens-warning.js";
 import _poolTheSpiritOasis from "../pool/the-spirit-oasis.js";
 import _poolTheTheoristJaceBeleren from "../pool/the-theorist-jace-beleren.js";
@@ -1131,6 +1136,7 @@ const shard: CardShard = {
     _poolChosenOfMarkov,
     _poolClanCrafter,
     _poolCleansingScreech,
+    _poolClevelandBookerEmpath,
     _poolCloakAndDagger,
     _poolCloakOfFeathers,
     _poolCloisteredYouth,
@@ -1148,6 +1154,7 @@ const shard: CardShard = {
     _poolConjuredCurrency,
     _poolConjurersBan,
     _poolConsecratedSphinx,
+    _poolConstableOdo,
     _poolConversionApparatus,
     _poolCosmicCube,
     _poolCosmosElixir,
@@ -1801,11 +1808,14 @@ const shard: CardShard = {
     _poolTerritorialHellkite,
     _poolTheBindingOfTheTitans,
     _poolTheComingOfGalactus,
+    _poolTheDestructionOfPraxis,
     _poolTheImmortalWeapons,
+    _poolTheInnerLight,
     _poolTheLongReachOfNight,
     _poolTheMightstoneAndWeakstone,
     _poolTheMoment,
     _poolTheMycotyrant,
+    _poolTheNakedTime,
     _poolTheRavensWarning,
     _poolTheSpiritOasis,
     _poolTheTheoristJaceBeleren,

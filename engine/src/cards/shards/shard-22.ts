@@ -296,6 +296,7 @@ import _poolGarrukSavageHerald from "../pool/garruk-savage-herald.js";
 import _poolGatherTheTownsfolk from "../pool/gather-the-townsfolk.js";
 import _poolGatstafShepherd from "../pool/gatstaf-shepherd.js";
 import _poolGazeOfTheGorgon from "../pool/gaze-of-the-gorgon.js";
+import _poolGeneralChangColdWarrior from "../pool/general-chang-cold-warrior.js";
 import _poolGenestealerLocus from "../pool/genestealer-locus.js";
 import _poolGhastlyDemise from "../pool/ghastly-demise.js";
 import _poolGhostform from "../pool/ghostform.js";
@@ -365,6 +366,7 @@ import _poolHostileDesert from "../pool/hostile-desert.js";
 import _poolHourOfVictory from "../pool/hour-of-victory.js";
 import _poolHoverBarrier from "../pool/hover-barrier.js";
 import _poolHowlingMoon from "../pool/howling-moon.js";
+import _poolHumpbackWhales from "../pool/humpback-whales.js";
 import _poolHuntingCheetah from "../pool/hunting-cheetah.js";
 import _poolHurlIntoHistory from "../pool/hurl-into-history.js";
 import _poolHurloonBattleHymn from "../pool/hurloon-battle-hymn.js";
@@ -501,6 +503,7 @@ import _poolMoltenVortex from "../pool/molten-vortex.js";
 import _poolMongrelPack from "../pool/mongrel-pack.js";
 import _poolMonsoon from "../pool/monsoon.js";
 import _poolMonstrify from "../pool/monstrify.js";
+import _poolMoopsy from "../pool/moopsy.js";
 import _poolMourningPatrol from "../pool/mourning-patrol.js";
 import _poolMouseTrapper from "../pool/mouse-trapper.js";
 import _poolMouthFeed from "../pool/mouth-feed.js";
@@ -749,6 +752,7 @@ import _poolSoratamiSeer from "../pool/soratami-seer.js";
 import _poolSouthernElephant from "../pool/southern-elephant.js";
 import _poolSovereignsMacuahuitl from "../pool/sovereigns-macuahuitl.js";
 import _poolSpawnOfThraxes from "../pool/spawn-of-thraxes.js";
+import _poolSpecies8472 from "../pool/species-8472.js";
 import _poolSpeciesSpecialist from "../pool/species-specialist.js";
 import _poolSpectralForce from "../pool/spectral-force.js";
 import _poolSpellgorgerWeird from "../pool/spellgorger-weird.js";
@@ -902,6 +906,7 @@ import _poolVeilingOddity from "../pool/veiling-oddity.js";
 import _poolVenerableKnight from "../pool/venerable-knight.js";
 import _poolVeteranSurvivor from "../pool/veteran-survivor.js";
 import _poolVexingDevil from "../pool/vexing-devil.js";
+import _poolVexingDrone from "../pool/vexing-drone.js";
 import _poolVhatiIlDal from "../pool/vhati-il-dal.js";
 import _poolViashinoRacketeer from "../pool/viashino-racketeer.js";
 import _poolViciousKavu from "../pool/vicious-kavu.js";
@@ -951,6 +956,7 @@ import _poolWitnessOfTheAges from "../pool/witness-of-the-ages.js";
 import _poolWizenedSnitches from "../pool/wizened-snitches.js";
 import _poolWolfPack from "../pool/wolf-pack.js";
 import _poolWolfcallersHowl from "../pool/wolfcallers-howl.js";
+import _poolWorfHonorBoundWarrior from "../pool/worf-honor-bound-warrior.js";
 import _poolWorldAtWar from "../pool/world-at-war.js";
 import _poolWormfangTurtle from "../pool/wormfang-turtle.js";
 import _poolWrathfulJailbreaker from "../pool/wrathful-jailbreaker.js";
@@ -970,6 +976,7 @@ import _poolYurikoTheTigersShadow from "../pool/yuriko-the-tigers-shadow.js";
 import _poolZagothMamba from "../pool/zagoth-mamba.js";
 import _poolZiatoraTheIncinerator from "../pool/ziatora-the-incinerator.js";
 import _tokens11OozeToken from "../tokens/1-1-ooze-token.js";
+import _tokens22RedGreenWormToken from "../tokens/2-2-red-green-worm-token.js";
 import _tokensAlienTokenAlienInvasion from "../tokens/alien-token-alien-invasion.js";
 import _tokensAxeToken from "../tokens/axe-token.js";
 import _tokensCloudSpriteToken from "../tokens/cloud-sprite-token.js";
@@ -982,6 +989,7 @@ import _tokensHarpyToken from "../tokens/harpy-token.js";
 import _tokensIllusionToken33Artifact from "../tokens/illusion-token-3-3-artifact.js";
 import _tokensLifelinkCatToken from "../tokens/lifelink-cat-token.js";
 import _tokensMercenaryToken from "../tokens/mercenary-token.js";
+import _tokensMurfToken from "../tokens/murf-token.js";
 import _tokensPhobos from "../tokens/phobos.js";
 import _tokensRatTokenGenkuFutureShaper from "../tokens/rat-token-genku-future-shaper.js";
 import _tokensRedMinotaurTokenHaste from "../tokens/red-minotaur-token-haste.js";
@@ -1286,6 +1294,7 @@ const shard: CardShard = {
     _poolGatherTheTownsfolk,
     _poolGatstafShepherd,
     _poolGazeOfTheGorgon,
+    _poolGeneralChangColdWarrior,
     _poolGenestealerLocus,
     _poolGhastlyDemise,
     _poolGhostform,
@@ -1355,6 +1364,7 @@ const shard: CardShard = {
     _poolHourOfVictory,
     _poolHoverBarrier,
     _poolHowlingMoon,
+    _poolHumpbackWhales,
     _poolHuntingCheetah,
     _poolHurlIntoHistory,
     _poolHurloonBattleHymn,
@@ -1491,6 +1501,7 @@ const shard: CardShard = {
     _poolMongrelPack,
     _poolMonsoon,
     _poolMonstrify,
+    _poolMoopsy,
     _poolMourningPatrol,
     _poolMouseTrapper,
     _poolMouthFeed,
@@ -1739,6 +1750,7 @@ const shard: CardShard = {
     _poolSouthernElephant,
     _poolSovereignsMacuahuitl,
     _poolSpawnOfThraxes,
+    _poolSpecies8472,
     _poolSpeciesSpecialist,
     _poolSpectralForce,
     _poolSpellgorgerWeird,
@@ -1892,6 +1904,7 @@ const shard: CardShard = {
     _poolVenerableKnight,
     _poolVeteranSurvivor,
     _poolVexingDevil,
+    _poolVexingDrone,
     _poolVhatiIlDal,
     _poolViashinoRacketeer,
     _poolViciousKavu,
@@ -1941,6 +1954,7 @@ const shard: CardShard = {
     _poolWizenedSnitches,
     _poolWolfPack,
     _poolWolfcallersHowl,
+    _poolWorfHonorBoundWarrior,
     _poolWorldAtWar,
     _poolWormfangTurtle,
     _poolWrathfulJailbreaker,
@@ -1962,6 +1976,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokens11OozeToken,
+    _tokens22RedGreenWormToken,
     _tokensAlienTokenAlienInvasion,
     _tokensAxeToken,
     _tokensCloudSpriteToken,
@@ -1974,6 +1989,7 @@ const shard: CardShard = {
     _tokensIllusionToken33Artifact,
     _tokensLifelinkCatToken,
     _tokensMercenaryToken,
+    _tokensMurfToken,
     _tokensPhobos,
     _tokensRatTokenGenkuFutureShaper,
     _tokensRedMinotaurTokenHaste,

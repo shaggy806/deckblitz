@@ -173,6 +173,7 @@ import _poolClingToDust from "../pool/cling-to-dust.js";
 import _poolClockworkFox from "../pool/clockwork-fox.js";
 import _poolCloudManta from "../pool/cloud-manta.js";
 import _poolColdSnap from "../pool/cold-snap.js";
+import _poolCombadge from "../pool/combadge.js";
 import _poolCombatTutorial from "../pool/combat-tutorial.js";
 import _poolCompleteDisregard from "../pool/complete-disregard.js";
 import _poolConquerorsFlail from "../pool/conquerors-flail.js";
@@ -377,6 +378,7 @@ import _poolGorillaBerserkers from "../pool/gorilla-berserkers.js";
 import _poolGoringWarplow from "../pool/goring-warplow.js";
 import _poolGostaDirk from "../pool/gosta-dirk.js";
 import _poolGrandCrescendo from "../pool/grand-crescendo.js";
+import _poolGrandNagusZek from "../pool/grand-nagus-zek.js";
 import _poolGrappleWithThePast from "../pool/grapple-with-the-past.js";
 import _poolGrasslands from "../pool/grasslands.js";
 import _poolGraveBirthing from "../pool/grave-birthing.js";
@@ -693,6 +695,7 @@ import _poolRuptureSpire from "../pool/rupture-spire.js";
 import _poolRushingTideZubera from "../pool/rushing-tide-zubera.js";
 import _poolRustHarvester from "../pool/rust-harvester.js";
 import _poolRuthlessRadrat from "../pool/ruthless-radrat.js";
+import _poolSaavikStoicStudent from "../pool/saavik-stoic-student.js";
 import _poolSageOfTheFang from "../pool/sage-of-the-fang.js";
 import _poolSailorsBane from "../pool/sailors-bane.js";
 import _poolSaltFlats from "../pool/salt-flats.js";
@@ -779,9 +782,11 @@ import _poolSpiritOfTheLabyrinth from "../pool/spirit-of-the-labyrinth.js";
 import _poolSpiritSummoning from "../pool/spirit-summoning.js";
 import _poolSpiteMalice from "../pool/spite-malice.js";
 import _poolSpitefulBully from "../pool/spiteful-bully.js";
+import _poolSpockAlwaysYourFriend from "../pool/spock-always-your-friend.js";
 import _poolSporolothAncient from "../pool/sporoloth-ancient.js";
 import _poolSqueesEmbrace from "../pool/squees-embrace.js";
 import _poolStarOfExtinction from "../pool/star-of-extinction.js";
+import _poolStarfleetSpannerJockey from "../pool/starfleet-spanner-jockey.js";
 import _poolStatusStatue from "../pool/status-statue.js";
 import _poolStealerOfSecrets from "../pool/stealer-of-secrets.js";
 import _poolSteamBlast from "../pool/steam-blast.js";
@@ -796,6 +801,7 @@ import _poolStonySilence from "../pool/stony-silence.js";
 import _poolStormFront from "../pool/storm-front.js";
 import _poolStorytellerPixie from "../pool/storyteller-pixie.js";
 import _poolStudyHall from "../pool/study-hall.js";
+import _poolSubcommanderTpol from "../pool/subcommander-tpol.js";
 import _poolSubdue from "../pool/subdue.js";
 import _poolSuburbanSanctuary from "../pool/suburban-sanctuary.js";
 import _poolSuddenEdict from "../pool/sudden-edict.js";
@@ -820,6 +826,7 @@ import _poolSylvanEchoes from "../pool/sylvan-echoes.js";
 import _poolSylvanParadise from "../pool/sylvan-paradise.js";
 import _poolTaboraxHopesDemise from "../pool/taborax-hopes-demise.js";
 import _poolTailSwipe from "../pool/tail-swipe.js";
+import _poolTalShiarAnalyst from "../pool/tal-shiar-analyst.js";
 import _poolTandemTakedown from "../pool/tandem-takedown.js";
 import _poolTarmogoyfNest from "../pool/tarmogoyf-nest.js";
 import _poolTarmogoyf from "../pool/tarmogoyf.js";
@@ -875,6 +882,7 @@ import _poolUmezawasJitte from "../pool/umezawas-jitte.js";
 import _poolUndergrowthChampion from "../pool/undergrowth-champion.js";
 import _poolUndergrowthRecon from "../pool/undergrowth-recon.js";
 import _poolUndergrowthStadium from "../pool/undergrowth-stadium.js";
+import _poolUnexploredTerritory from "../pool/unexplored-territory.js";
 import _poolUninvitedGeist from "../pool/uninvited-geist.js";
 import _poolUnnaturalAggression from "../pool/unnatural-aggression.js";
 import _poolUnnaturalMoonrise from "../pool/unnatural-moonrise.js";
@@ -1137,6 +1145,7 @@ const shard: CardShard = {
     _poolClockworkFox,
     _poolCloudManta,
     _poolColdSnap,
+    _poolCombadge,
     _poolCombatTutorial,
     _poolCompleteDisregard,
     _poolConquerorsFlail,
@@ -1341,6 +1350,7 @@ const shard: CardShard = {
     _poolGoringWarplow,
     _poolGostaDirk,
     _poolGrandCrescendo,
+    _poolGrandNagusZek,
     _poolGrappleWithThePast,
     _poolGrasslands,
     _poolGraveBirthing,
@@ -1657,6 +1667,7 @@ const shard: CardShard = {
     _poolRushingTideZubera,
     _poolRustHarvester,
     _poolRuthlessRadrat,
+    _poolSaavikStoicStudent,
     _poolSageOfTheFang,
     _poolSailorsBane,
     _poolSaltFlats,
@@ -1743,9 +1754,11 @@ const shard: CardShard = {
     _poolSpiritSummoning,
     _poolSpiteMalice,
     _poolSpitefulBully,
+    _poolSpockAlwaysYourFriend,
     _poolSporolothAncient,
     _poolSqueesEmbrace,
     _poolStarOfExtinction,
+    _poolStarfleetSpannerJockey,
     _poolStatusStatue,
     _poolStealerOfSecrets,
     _poolSteamBlast,
@@ -1760,6 +1773,7 @@ const shard: CardShard = {
     _poolStormFront,
     _poolStorytellerPixie,
     _poolStudyHall,
+    _poolSubcommanderTpol,
     _poolSubdue,
     _poolSuburbanSanctuary,
     _poolSuddenEdict,
@@ -1784,6 +1798,7 @@ const shard: CardShard = {
     _poolSylvanParadise,
     _poolTaboraxHopesDemise,
     _poolTailSwipe,
+    _poolTalShiarAnalyst,
     _poolTandemTakedown,
     _poolTarmogoyfNest,
     _poolTarmogoyf,
@@ -1839,6 +1854,7 @@ const shard: CardShard = {
     _poolUndergrowthChampion,
     _poolUndergrowthRecon,
     _poolUndergrowthStadium,
+    _poolUnexploredTerritory,
     _poolUninvitedGeist,
     _poolUnnaturalAggression,
     _poolUnnaturalMoonrise,

@@ -263,6 +263,7 @@ import _poolFeastOfTheUnicorn from "../pool/feast-of-the-unicorn.js";
 import _poolFellSpecter from "../pool/fell-specter.js";
 import _poolFenStalker from "../pool/fen-stalker.js";
 import _poolFeralMaaka from "../pool/feral-maaka.js";
+import _poolFerenginar from "../pool/ferenginar.js";
 import _poolFeverCharm from "../pool/fever-charm.js";
 import _poolFieldOfRuin from "../pool/field-of-ruin.js";
 import _poolFierceRetribution from "../pool/fierce-retribution.js";
@@ -328,6 +329,7 @@ import _poolGrinningDemon from "../pool/grinning-demon.js";
 import _poolGroundlingPouncer from "../pool/groundling-pouncer.js";
 import _poolGuidelightMatrix from "../pool/guidelight-matrix.js";
 import _poolGuildpactInformant from "../pool/guildpact-informant.js";
+import _poolGulDukatColonialPrefect from "../pool/gul-dukat-colonial-prefect.js";
 import _poolGush from "../pool/gush.js";
 import _poolGustcloakSavior from "../pool/gustcloak-savior.js";
 import _poolHall from "../pool/hall.js";
@@ -362,6 +364,7 @@ import _poolHoardingRecluse from "../pool/hoarding-recluse.js";
 import _poolHonorTheFallen from "../pool/honor-the-fallen.js";
 import _poolHopefulEidolon from "../pool/hopeful-eidolon.js";
 import _poolHornOfGondor from "../pool/horn-of-gondor.js";
+import _poolHoshiSatoExolinguist from "../pool/hoshi-sato-exolinguist.js";
 import _poolHotshotInvestigators from "../pool/hotshot-investigators.js";
 import _poolHowlpackAlpha from "../pool/howlpack-alpha.js";
 import _poolHundredHandedOne from "../pool/hundred-handed-one.js";
@@ -372,6 +375,7 @@ import _poolIbHalfheartGoblinTactician from "../pool/ib-halfheart-goblin-tactici
 import _poolIcetillExplorer from "../pool/icetill-explorer.js";
 import _poolIcewindStalwart from "../pool/icewind-stalwart.js";
 import _poolIllvoiInfiltrator from "../pool/illvoi-infiltrator.js";
+import _poolImADoctorNotA from "../pool/im-a-doctor-not-a.js";
 import _poolImperialSubduer from "../pool/imperial-subduer.js";
 import _poolIncriminate from "../pool/incriminate.js";
 import _poolIncursionSpecialist from "../pool/incursion-specialist.js";
@@ -556,12 +560,14 @@ import _poolOrbsOfWarding from "../pool/orbs-of-warding.js";
 import _poolOrcishFarmer from "../pool/orcish-farmer.js";
 import _poolOrderedMigration from "../pool/ordered-migration.js";
 import _poolOrderlyPlaza from "../pool/orderly-plaza.js";
+import _poolOrion from "../pool/orion.js";
 import _poolOtawaraSoaringCity from "../pool/otawara-soaring-city.js";
 import _poolOutbreak from "../pool/outbreak.js";
 import _poolOutlandLiberator from "../pool/outland-liberator.js";
 import _poolOverwhelmingSurge from "../pool/overwhelming-surge.js";
 import _poolOzolithTheShatteredSpire from "../pool/ozolith-the-shattered-spire.js";
 import _poolPacksDisdain from "../pool/packs-disdain.js";
+import _poolPahWraith from "../pool/pah-wraith.js";
 import _poolPangTongYoungPhoenix from "../pool/pang-tong-young-phoenix.js";
 import _poolParasiticBond from "../pool/parasitic-bond.js";
 import _poolParoxysm from "../pool/paroxysm.js";
@@ -802,6 +808,7 @@ import _poolTheCrystalsChosen from "../pool/the-crystals-chosen.js";
 import _poolTheEarthCrystal from "../pool/the-earth-crystal.js";
 import _poolTheElderspell from "../pool/the-elderspell.js";
 import _poolTheHive from "../pool/the-hive.js";
+import _poolTheMeasureOfAMan from "../pool/the-measure-of-a-man.js";
 import _poolTheMechanistAerialArtisan from "../pool/the-mechanist-aerial-artisan.js";
 import _poolTheOneRing from "../pool/the-one-ring.js";
 import _poolTheRollercrusherRide from "../pool/the-rollercrusher-ride.js";
@@ -1228,6 +1235,7 @@ const shard: CardShard = {
     _poolFellSpecter,
     _poolFenStalker,
     _poolFeralMaaka,
+    _poolFerenginar,
     _poolFeverCharm,
     _poolFieldOfRuin,
     _poolFierceRetribution,
@@ -1293,6 +1301,7 @@ const shard: CardShard = {
     _poolGroundlingPouncer,
     _poolGuidelightMatrix,
     _poolGuildpactInformant,
+    _poolGulDukatColonialPrefect,
     _poolGush,
     _poolGustcloakSavior,
     _poolHall,
@@ -1327,6 +1336,7 @@ const shard: CardShard = {
     _poolHonorTheFallen,
     _poolHopefulEidolon,
     _poolHornOfGondor,
+    _poolHoshiSatoExolinguist,
     _poolHotshotInvestigators,
     _poolHowlpackAlpha,
     _poolHundredHandedOne,
@@ -1337,6 +1347,7 @@ const shard: CardShard = {
     _poolIcetillExplorer,
     _poolIcewindStalwart,
     _poolIllvoiInfiltrator,
+    _poolImADoctorNotA,
     _poolImperialSubduer,
     _poolIncriminate,
     _poolIncursionSpecialist,
@@ -1521,12 +1532,14 @@ const shard: CardShard = {
     _poolOrcishFarmer,
     _poolOrderedMigration,
     _poolOrderlyPlaza,
+    _poolOrion,
     _poolOtawaraSoaringCity,
     _poolOutbreak,
     _poolOutlandLiberator,
     _poolOverwhelmingSurge,
     _poolOzolithTheShatteredSpire,
     _poolPacksDisdain,
+    _poolPahWraith,
     _poolPangTongYoungPhoenix,
     _poolParasiticBond,
     _poolParoxysm,
@@ -1767,6 +1780,7 @@ const shard: CardShard = {
     _poolTheEarthCrystal,
     _poolTheElderspell,
     _poolTheHive,
+    _poolTheMeasureOfAMan,
     _poolTheMechanistAerialArtisan,
     _poolTheOneRing,
     _poolTheRollercrusherRide,

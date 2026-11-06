@@ -56,6 +56,7 @@ import _poolAshenmoorCohort from "../pool/ashenmoor-cohort.js";
 import _poolAshioksAdept from "../pool/ashioks-adept.js";
 import _poolAsmiraHolyAvenger from "../pool/asmira-holy-avenger.js";
 import _poolAssertAuthority from "../pool/assert-authority.js";
+import _poolAstuteTerraformer from "../pool/astute-terraformer.js";
 import _poolAtarkaEfreet from "../pool/atarka-efreet.js";
 import _poolAtarkaPummeler from "../pool/atarka-pummeler.js";
 import _poolAtomize from "../pool/atomize.js";
@@ -791,6 +792,7 @@ import _poolStomp from "../pool/stomp.js";
 import _poolStoneOfErech from "../pool/stone-of-erech.js";
 import _poolStormboundGeist from "../pool/stormbound-geist.js";
 import _poolStrangeInversion from "../pool/strange-inversion.js";
+import _poolStrayFromHistory from "../pool/stray-from-history.js";
 import _poolStrokeOfMidnight from "../pool/stroke-of-midnight.js";
 import _poolStromkirkCondemned from "../pool/stromkirk-condemned.js";
 import _poolSubterraneanHangar from "../pool/subterranean-hangar.js";
@@ -807,11 +809,13 @@ import _poolTajuruBlightblade from "../pool/tajuru-blightblade.js";
 import _poolTakeDown from "../pool/take-down.js";
 import _poolTakeItBack from "../pool/take-it-back.js";
 import _poolTakeTheFall from "../pool/take-the-fall.js";
+import _poolTalShiarOperative from "../pool/tal-shiar-operative.js";
 import _poolTaleOfKataraAndToph from "../pool/tale-of-katara-and-toph.js";
 import _poolTalismanOfProgress from "../pool/talisman-of-progress.js";
 import _poolTamiyoFieldResearcher from "../pool/tamiyo-field-researcher.js";
 import _poolTamiyoMeetsTheStoryCircle from "../pool/tamiyo-meets-the-story-circle.js";
 import _poolTangleKelp from "../pool/tangle-kelp.js";
+import _poolTashaYarOutOfTime from "../pool/tasha-yar-out-of-time.js";
 import _poolTatsunariToadRider from "../pool/tatsunari-toad-rider.js";
 import _poolTawnossTinkering from "../pool/tawnoss-tinkering.js";
 import _poolTeapotSlinger from "../pool/teapot-slinger.js";
@@ -1036,6 +1040,7 @@ const shard: CardShard = {
     _poolAshioksAdept,
     _poolAsmiraHolyAvenger,
     _poolAssertAuthority,
+    _poolAstuteTerraformer,
     _poolAtarkaEfreet,
     _poolAtarkaPummeler,
     _poolAtomize,
@@ -1771,6 +1776,7 @@ const shard: CardShard = {
     _poolStoneOfErech,
     _poolStormboundGeist,
     _poolStrangeInversion,
+    _poolStrayFromHistory,
     _poolStrokeOfMidnight,
     _poolStromkirkCondemned,
     _poolSubterraneanHangar,
@@ -1787,11 +1793,13 @@ const shard: CardShard = {
     _poolTakeDown,
     _poolTakeItBack,
     _poolTakeTheFall,
+    _poolTalShiarOperative,
     _poolTaleOfKataraAndToph,
     _poolTalismanOfProgress,
     _poolTamiyoFieldResearcher,
     _poolTamiyoMeetsTheStoryCircle,
     _poolTangleKelp,
+    _poolTashaYarOutOfTime,
     _poolTatsunariToadRider,
     _poolTawnossTinkering,
     _poolTeapotSlinger,

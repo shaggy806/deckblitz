@@ -122,10 +122,12 @@ import _poolCircleOfAffliction from "../pool/circle-of-affliction.js";
 import _poolCityOfDeath from "../pool/city-of-death.js";
 import _poolCleansingRay from "../pool/cleansing-ray.js";
 import _poolCleverImpersonator from "../pool/clever-impersonator.js";
+import _poolCloakAndPhaser from "../pool/cloak-and-phaser.js";
 import _poolCloudDragon from "../pool/cloud-dragon.js";
 import _poolCodieVociferousCodex from "../pool/codie-vociferous-codex.js";
 import _poolColorfulFeiyiSparrow from "../pool/colorful-feiyi-sparrow.js";
 import _poolColossalDreadmask from "../pool/colossal-dreadmask.js";
+import _poolCommanderRaffiMusiker from "../pool/commander-raffi-musiker.js";
 import _poolCompleatedConjurer from "../pool/compleated-conjurer.js";
 import _poolConcealingCurtains from "../pool/concealing-curtains.js";
 import _poolConfirmSuspicions from "../pool/confirm-suspicions.js";
@@ -360,6 +362,7 @@ import _poolHithlainKnots from "../pool/hithlain-knots.js";
 import _poolHobbitHole from "../pool/hobbit-hole.js";
 import _poolHorizonSeed from "../pool/horizon-seed.js";
 import _poolHorizonStone from "../pool/horizon-stone.js";
+import _poolHorta from "../pool/horta.js";
 import _poolHostileNegotiations from "../pool/hostile-negotiations.js";
 import _poolHowToStartARiot from "../pool/how-to-start-a-riot.js";
 import _poolHowlersHeavy from "../pool/howlers-heavy.js";
@@ -495,6 +498,7 @@ import _poolMountVelusManticore from "../pool/mount-velus-manticore.js";
 import _poolMoxRuby from "../pool/mox-ruby.js";
 import _poolMulldrifter from "../pool/mulldrifter.js";
 import _poolMultiversalPassage from "../pool/multiversal-passage.js";
+import _poolMunitionsEnthusiast from "../pool/munitions-enthusiast.js";
 import _poolMurdocksCrusade from "../pool/murdocks-crusade.js";
 import _poolMurmursFromBeyond from "../pool/murmurs-from-beyond.js";
 import _poolMyrLandshaper from "../pool/myr-landshaper.js";
@@ -666,6 +670,7 @@ import _poolSandSilos from "../pool/sand-silos.js";
 import _poolSandsteppeMastodon from "../pool/sandsteppe-mastodon.js";
 import _poolSandstormVerge from "../pool/sandstorm-verge.js";
 import _poolSarkhanTheMasterless from "../pool/sarkhan-the-masterless.js";
+import _poolSaruUnthreatened from "../pool/saru-unthreatened.js";
 import _poolSarythTheVipersFang from "../pool/saryth-the-vipers-fang.js";
 import _poolSavaiTriome from "../pool/savai-triome.js";
 import _poolSavantiRomeroTimesExile from "../pool/savanti-romero-times-exile.js";
@@ -1082,10 +1087,12 @@ const shard: CardShard = {
     _poolCityOfDeath,
     _poolCleansingRay,
     _poolCleverImpersonator,
+    _poolCloakAndPhaser,
     _poolCloudDragon,
     _poolCodieVociferousCodex,
     _poolColorfulFeiyiSparrow,
     _poolColossalDreadmask,
+    _poolCommanderRaffiMusiker,
     _poolCompleatedConjurer,
     _poolConcealingCurtains,
     _poolConfirmSuspicions,
@@ -1320,6 +1327,7 @@ const shard: CardShard = {
     _poolHobbitHole,
     _poolHorizonSeed,
     _poolHorizonStone,
+    _poolHorta,
     _poolHostileNegotiations,
     _poolHowToStartARiot,
     _poolHowlersHeavy,
@@ -1455,6 +1463,7 @@ const shard: CardShard = {
     _poolMoxRuby,
     _poolMulldrifter,
     _poolMultiversalPassage,
+    _poolMunitionsEnthusiast,
     _poolMurdocksCrusade,
     _poolMurmursFromBeyond,
     _poolMyrLandshaper,
@@ -1626,6 +1635,7 @@ const shard: CardShard = {
     _poolSandsteppeMastodon,
     _poolSandstormVerge,
     _poolSarkhanTheMasterless,
+    _poolSaruUnthreatened,
     _poolSarythTheVipersFang,
     _poolSavaiTriome,
     _poolSavantiRomeroTimesExile,

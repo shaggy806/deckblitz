@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _poolAGoodDayToDie from "../pool/a-good-day-to-die.js";
 import _poolAangsJourney from "../pool/aangs-journey.js";
 import _poolAbomination from "../pool/abomination.js";
 import _poolAbsorbEssence from "../pool/absorb-essence.js";
@@ -36,6 +37,7 @@ import _poolArtisticRefusal from "../pool/artistic-refusal.js";
 import _poolAshadTheLoneCyberman from "../pool/ashad-the-lone-cyberman.js";
 import _poolAshePrincessOfDalmasca from "../pool/ashe-princess-of-dalmasca.js";
 import _poolAshnodsAltar from "../pool/ashnods-altar.js";
+import _poolAssemblySpecialist from "../pool/assembly-specialist.js";
 import _poolAstonishingSpiderMan from "../pool/astonishing-spider-man.js";
 import _poolAttemptedMurder from "../pool/attempted-murder.js";
 import _poolAttumaAtlanteanWarlord from "../pool/attuma-atlantean-warlord.js";
@@ -285,6 +287,7 @@ import _poolFangedFlames from "../pool/fanged-flames.js";
 import _poolFangkeepersFamiliar from "../pool/fangkeepers-familiar.js";
 import _poolFarfinder from "../pool/farfinder.js";
 import _poolFearOfBurningAlive from "../pool/fear-of-burning-alive.js";
+import _poolFederationFieldMedic from "../pool/federation-field-medic.js";
 import _poolFederationOutpost from "../pool/federation-outpost.js";
 import _poolFeedback from "../pool/feedback.js";
 import _poolFelhidePetrifier from "../pool/felhide-petrifier.js";
@@ -309,6 +312,7 @@ import _poolFormOfTheDragon from "../pool/form-of-the-dragon.js";
 import _poolFortressCyclops from "../pool/fortress-cyclops.js";
 import _poolFoundryStreetDenizen from "../pool/foundry-street-denizen.js";
 import _poolFranticSearch from "../pool/frantic-search.js";
+import _poolFreeBorgRevolutionaries from "../pool/free-borg-revolutionaries.js";
 import _poolFreewindFalcon from "../pool/freewind-falcon.js";
 import _poolFreezeInPlace from "../pool/freeze-in-place.js";
 import _poolFrenziedFugue from "../pool/frenzied-fugue.js";
@@ -318,6 +322,7 @@ import _poolFrodoBaggins from "../pool/frodo-baggins.js";
 import _poolFrogmite from "../pool/frogmite.js";
 import _poolFrontlineRebel from "../pool/frontline-rebel.js";
 import _poolFrostTrickster from "../pool/frost-trickster.js";
+import _poolFugitiveListener from "../pool/fugitive-listener.js";
 import _poolFulgentDistraction from "../pool/fulgent-distraction.js";
 import _poolFungalFortitude from "../pool/fungal-fortitude.js";
 import _poolFungusSliver from "../pool/fungus-sliver.js";
@@ -352,6 +357,7 @@ import _poolGolgariLocket from "../pool/golgari-locket.js";
 import _poolGorehornRaider from "../pool/gorehorn-raider.js";
 import _poolGornogTheRedReaper from "../pool/gornog-the-red-reaper.js";
 import _poolGravedig from "../pool/gravedig.js";
+import _poolGrayAndAdiraForeverJoined from "../pool/gray-and-adira-forever-joined.js";
 import _poolGrayscaledGharial from "../pool/grayscaled-gharial.js";
 import _poolGreatFurnace from "../pool/great-furnace.js";
 import _poolGreatWall from "../pool/great-wall.js";
@@ -409,6 +415,7 @@ import _poolImpulsivity from "../pool/impulsivity.js";
 import _poolIncubatorDrone from "../pool/incubator-drone.js";
 import _poolIndomitableArchangel from "../pool/indomitable-archangel.js";
 import _poolInfectiousHost from "../pool/infectious-host.js";
+import _poolInfiniteDiversity from "../pool/infinite-diversity.js";
 import _poolIngrisStingerquill from "../pool/ingris-stingerquill.js";
 import _poolInkfathomInfiltrator from "../pool/inkfathom-infiltrator.js";
 import _poolInnkeepersTalent from "../pool/innkeepers-talent.js";
@@ -595,6 +602,7 @@ import _poolPewterGolem from "../pool/pewter-golem.js";
 import _poolPhalanxLeader from "../pool/phalanx-leader.js";
 import _poolPharagaxGiant from "../pool/pharagax-giant.js";
 import _poolPheresBandRaiders from "../pool/pheres-band-raiders.js";
+import _poolPhotosyntheticPhysician from "../pool/photosynthetic-physician.js";
 import _poolPhyrexianPlaguelord from "../pool/phyrexian-plaguelord.js";
 import _poolPiratesPrize from "../pool/pirates-prize.js";
 import _poolPitRaptor from "../pool/pit-raptor.js";
@@ -818,6 +826,7 @@ import _poolTemptingLicid from "../pool/tempting-licid.js";
 import _poolTenaciousHunter from "../pool/tenacious-hunter.js";
 import _poolTezzeretsBetrayal from "../pool/tezzerets-betrayal.js";
 import _poolThalakosLowlands from "../pool/thalakos-lowlands.js";
+import _poolTheDurasSisters from "../pool/the-duras-sisters.js";
 import _poolTheFantasticar from "../pool/the-fantasticar.js";
 import _poolTheFireNationDrill from "../pool/the-fire-nation-drill.js";
 import _poolThePrimaVista from "../pool/the-prima-vista.js";
@@ -834,6 +843,7 @@ import _poolThiefOfHope from "../pool/thief-of-hope.js";
 import _poolThopterArrest from "../pool/thopter-arrest.js";
 import _poolThopterSquadron from "../pool/thopter-squadron.js";
 import _poolThornwatchScarecrow from "../pool/thornwatch-scarecrow.js";
+import _poolThoseOldScientists from "../pool/those-old-scientists.js";
 import _poolThoughtweftGambit from "../pool/thoughtweft-gambit.js";
 import _poolThousandMoonsInfantry from "../pool/thousand-moons-infantry.js";
 import _poolThousandYearElixir from "../pool/thousand-year-elixir.js";
@@ -966,6 +976,7 @@ import _tokensUnicornToken from "../tokens/unicorn-token.js";
 
 const shard: CardShard = {
   pool: [
+    _poolAGoodDayToDie,
     _poolAangsJourney,
     _poolAbomination,
     _poolAbsorbEssence,
@@ -999,6 +1010,7 @@ const shard: CardShard = {
     _poolAshadTheLoneCyberman,
     _poolAshePrincessOfDalmasca,
     _poolAshnodsAltar,
+    _poolAssemblySpecialist,
     _poolAstonishingSpiderMan,
     _poolAttemptedMurder,
     _poolAttumaAtlanteanWarlord,
@@ -1248,6 +1260,7 @@ const shard: CardShard = {
     _poolFangkeepersFamiliar,
     _poolFarfinder,
     _poolFearOfBurningAlive,
+    _poolFederationFieldMedic,
     _poolFederationOutpost,
     _poolFeedback,
     _poolFelhidePetrifier,
@@ -1272,6 +1285,7 @@ const shard: CardShard = {
     _poolFortressCyclops,
     _poolFoundryStreetDenizen,
     _poolFranticSearch,
+    _poolFreeBorgRevolutionaries,
     _poolFreewindFalcon,
     _poolFreezeInPlace,
     _poolFrenziedFugue,
@@ -1281,6 +1295,7 @@ const shard: CardShard = {
     _poolFrogmite,
     _poolFrontlineRebel,
     _poolFrostTrickster,
+    _poolFugitiveListener,
     _poolFulgentDistraction,
     _poolFungalFortitude,
     _poolFungusSliver,
@@ -1315,6 +1330,7 @@ const shard: CardShard = {
     _poolGorehornRaider,
     _poolGornogTheRedReaper,
     _poolGravedig,
+    _poolGrayAndAdiraForeverJoined,
     _poolGrayscaledGharial,
     _poolGreatFurnace,
     _poolGreatWall,
@@ -1372,6 +1388,7 @@ const shard: CardShard = {
     _poolIncubatorDrone,
     _poolIndomitableArchangel,
     _poolInfectiousHost,
+    _poolInfiniteDiversity,
     _poolIngrisStingerquill,
     _poolInkfathomInfiltrator,
     _poolInnkeepersTalent,
@@ -1558,6 +1575,7 @@ const shard: CardShard = {
     _poolPhalanxLeader,
     _poolPharagaxGiant,
     _poolPheresBandRaiders,
+    _poolPhotosyntheticPhysician,
     _poolPhyrexianPlaguelord,
     _poolPiratesPrize,
     _poolPitRaptor,
@@ -1781,6 +1799,7 @@ const shard: CardShard = {
     _poolTenaciousHunter,
     _poolTezzeretsBetrayal,
     _poolThalakosLowlands,
+    _poolTheDurasSisters,
     _poolTheFantasticar,
     _poolTheFireNationDrill,
     _poolThePrimaVista,
@@ -1797,6 +1816,7 @@ const shard: CardShard = {
     _poolThopterArrest,
     _poolThopterSquadron,
     _poolThornwatchScarecrow,
+    _poolThoseOldScientists,
     _poolThoughtweftGambit,
     _poolThousandMoonsInfantry,
     _poolThousandYearElixir,

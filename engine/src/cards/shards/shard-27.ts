@@ -546,6 +546,7 @@ import _poolPearlspearCourier from "../pool/pearlspear-courier.js";
 import _poolPerilousResearch from "../pool/perilous-research.js";
 import _poolPerimeterSergeant from "../pool/perimeter-sergeant.js";
 import _poolPestilence from "../pool/pestilence.js";
+import _poolPetSehlat from "../pool/pet-sehlat.js";
 import _poolPetrifiedWoodKin from "../pool/petrified-wood-kin.js";
 import _poolPheresBandTromper from "../pool/pheres-band-tromper.js";
 import _poolPhyrexianMissionary from "../pool/phyrexian-missionary.js";
@@ -1496,6 +1497,7 @@ const shard: CardShard = {
     _poolPerilousResearch,
     _poolPerimeterSergeant,
     _poolPestilence,
+    _poolPetSehlat,
     _poolPetrifiedWoodKin,
     _poolPheresBandTromper,
     _poolPhyrexianMissionary,

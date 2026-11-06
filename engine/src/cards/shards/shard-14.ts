@@ -67,6 +67,7 @@ import _poolBarrageOfBoulders from "../pool/barrage-of-boulders.js";
 import _poolBarrinsCodex from "../pool/barrins-codex.js";
 import _poolBartizanBats from "../pool/bartizan-bats.js";
 import _poolBastPantherGoddess from "../pool/bast-panther-goddess.js";
+import _poolBatleth from "../pool/batleth.js";
 import _poolBatteredGolem from "../pool/battered-golem.js";
 import _poolBattery from "../pool/battery.js";
 import _poolBattleForBretagard from "../pool/battle-for-bretagard.js";
@@ -409,12 +410,14 @@ import _poolHeroOfTheGames from "../pool/hero-of-the-games.js";
 import _poolHexplateWallbreaker from "../pool/hexplate-wallbreaker.js";
 import _poolHiddenCataract from "../pool/hidden-cataract.js";
 import _poolHieromancersCage from "../pool/hieromancers-cage.js";
+import _poolHighlyIllogical from "../pool/highly-illogical.js";
 import _poolHikariTwilightGuardian from "../pool/hikari-twilight-guardian.js";
 import _poolHistoryOfBenalia from "../pool/history-of-benalia.js";
 import _poolHoarShade from "../pool/hoar-shade.js";
 import _poolHoardHauler from "../pool/hoard-hauler.js";
 import _poolHollowScavenger from "../pool/hollow-scavenger.js";
 import _poolHollowsage from "../pool/hollowsage.js";
+import _poolHologramStalker from "../pool/hologram-stalker.js";
 import _poolHomicideInvestigator from "../pool/homicide-investigator.js";
 import _poolHonoredHydra from "../pool/honored-hydra.js";
 import _poolHotheadedGiant from "../pool/hotheaded-giant.js";
@@ -628,6 +631,7 @@ import _poolPlagueSliver from "../pool/plague-sliver.js";
 import _poolPlagueSpitter from "../pool/plague-spitter.js";
 import _poolPlaguebearer from "../pool/plaguebearer.js";
 import _poolPlaneswalkersMischief from "../pool/planeswalkers-mischief.js";
+import _poolPlanetaryBombardment from "../pool/planetary-bombardment.js";
 import _poolPlasmaBolt from "../pool/plasma-bolt.js";
 import _poolPlumesOfPeace from "../pool/plumes-of-peace.js";
 import _poolPredictivePreparations from "../pool/predictive-preparations.js";
@@ -815,6 +819,7 @@ import _poolSurrealMemoir from "../pool/surreal-memoir.js";
 import _poolSuspiciousShambler from "../pool/suspicious-shambler.js";
 import _poolSwaggeringCorsair from "../pool/swaggering-corsair.js";
 import _poolSwordOfTheMeek from "../pool/sword-of-the-meek.js";
+import _poolSylviaTillyJoyOfDiscovery from "../pool/sylvia-tilly-joy-of-discovery.js";
 import _poolTahCropSkirmisher from "../pool/tah-crop-skirmisher.js";
 import _poolTailSlash from "../pool/tail-slash.js";
 import _poolTalesEnd from "../pool/tales-end.js";
@@ -829,7 +834,10 @@ import _poolTemperedSteel from "../pool/tempered-steel.js";
 import _poolTempleOfCyclicalTime from "../pool/temple-of-cyclical-time.js";
 import _poolTempleOfSilence from "../pool/temple-of-silence.js";
 import _poolTempleOfTriumph from "../pool/temple-of-triumph.js";
+import _poolTemporalAnomaly from "../pool/temporal-anomaly.js";
+import _poolTenaciousDrone from "../pool/tenacious-drone.js";
 import _poolTenuredInkcaster from "../pool/tenured-inkcaster.js";
+import _poolTestOfCourage from "../pool/test-of-courage.js";
 import _poolTeyoDiamondbladeMage from "../pool/teyo-diamondblade-mage.js";
 import _poolThalisseReverentMedium from "../pool/thalisse-reverent-medium.js";
 import _poolThancredWaters from "../pool/thancred-waters.js";
@@ -1049,6 +1057,7 @@ const shard: CardShard = {
     _poolBarrinsCodex,
     _poolBartizanBats,
     _poolBastPantherGoddess,
+    _poolBatleth,
     _poolBatteredGolem,
     _poolBattery,
     _poolBattleForBretagard,
@@ -1391,12 +1400,14 @@ const shard: CardShard = {
     _poolHexplateWallbreaker,
     _poolHiddenCataract,
     _poolHieromancersCage,
+    _poolHighlyIllogical,
     _poolHikariTwilightGuardian,
     _poolHistoryOfBenalia,
     _poolHoarShade,
     _poolHoardHauler,
     _poolHollowScavenger,
     _poolHollowsage,
+    _poolHologramStalker,
     _poolHomicideInvestigator,
     _poolHonoredHydra,
     _poolHotheadedGiant,
@@ -1610,6 +1621,7 @@ const shard: CardShard = {
     _poolPlagueSpitter,
     _poolPlaguebearer,
     _poolPlaneswalkersMischief,
+    _poolPlanetaryBombardment,
     _poolPlasmaBolt,
     _poolPlumesOfPeace,
     _poolPredictivePreparations,
@@ -1797,6 +1809,7 @@ const shard: CardShard = {
     _poolSuspiciousShambler,
     _poolSwaggeringCorsair,
     _poolSwordOfTheMeek,
+    _poolSylviaTillyJoyOfDiscovery,
     _poolTahCropSkirmisher,
     _poolTailSlash,
     _poolTalesEnd,
@@ -1811,7 +1824,10 @@ const shard: CardShard = {
     _poolTempleOfCyclicalTime,
     _poolTempleOfSilence,
     _poolTempleOfTriumph,
+    _poolTemporalAnomaly,
+    _poolTenaciousDrone,
     _poolTenuredInkcaster,
+    _poolTestOfCourage,
     _poolTeyoDiamondbladeMage,
     _poolThalisseReverentMedium,
     _poolThancredWaters,

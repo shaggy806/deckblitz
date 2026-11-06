@@ -120,6 +120,7 @@ import _poolCallDamageControl from "../pool/call-damage-control.js";
 import _poolCallapheBelovedOfTheSea from "../pool/callaphe-beloved-of-the-sea.js";
 import _poolCalmingVerse from "../pool/calming-verse.js";
 import _poolCanalDredger from "../pool/canal-dredger.js";
+import _poolCantankerousCaptain from "../pool/cantankerous-captain.js";
 import _poolCaptainHowlerSeaScourge from "../pool/captain-howler-sea-scourge.js";
 import _poolCapturedSunlight from "../pool/captured-sunlight.js";
 import _poolCarnelianOrbOfDragonkind from "../pool/carnelian-orb-of-dragonkind.js";
@@ -207,6 +208,7 @@ import _poolDangerous from "../pool/dangerous.js";
 import _poolDaringApprentice from "../pool/daring-apprentice.js";
 import _poolDarkRemedy from "../pool/dark-remedy.js";
 import _poolDarkwaterCatacombs from "../pool/darkwater-catacombs.js";
+import _poolDavidAndCarolMarcusCreators from "../pool/david-and-carol-marcus-creators.js";
 import _poolDawngladeRegent from "../pool/dawnglade-regent.js";
 import _poolDaze from "../pool/daze.js";
 import _poolDeadlyVanity from "../pool/deadly-vanity.js";
@@ -667,6 +669,7 @@ import _poolPiratesCutlass from "../pool/pirates-cutlass.js";
 import _poolPitilessFists from "../pool/pitiless-fists.js";
 import _poolPlagueMyr from "../pool/plague-myr.js";
 import _poolPlanForAllOutcomes from "../pool/plan-for-all-outcomes.js";
+import _poolPlanetaryPatrol from "../pool/planetary-patrol.js";
 import _poolPlaxmanta from "../pool/plaxmanta.js";
 import _poolPlayWithFire from "../pool/play-with-fire.js";
 import _poolPlayfulShove from "../pool/playful-shove.js";
@@ -768,6 +771,7 @@ import _poolSecretkeeper from "../pool/secretkeeper.js";
 import _poolSeekerOfSunlight from "../pool/seeker-of-sunlight.js";
 import _poolSeekersSquire from "../pool/seekers-squire.js";
 import _poolSeerOfStolenSight from "../pool/seer-of-stolen-sight.js";
+import _poolSelaTalShiarParadox from "../pool/sela-tal-shiar-paradox.js";
 import _poolSelesnyaSanctuary from "../pool/selesnya-sanctuary.js";
 import _poolSelfInflictedWound from "../pool/self-inflicted-wound.js";
 import _poolSensationGorger from "../pool/sensation-gorger.js";
@@ -1137,6 +1141,7 @@ const shard: CardShard = {
     _poolCallapheBelovedOfTheSea,
     _poolCalmingVerse,
     _poolCanalDredger,
+    _poolCantankerousCaptain,
     _poolCaptainHowlerSeaScourge,
     _poolCapturedSunlight,
     _poolCarnelianOrbOfDragonkind,
@@ -1224,6 +1229,7 @@ const shard: CardShard = {
     _poolDaringApprentice,
     _poolDarkRemedy,
     _poolDarkwaterCatacombs,
+    _poolDavidAndCarolMarcusCreators,
     _poolDawngladeRegent,
     _poolDaze,
     _poolDeadlyVanity,
@@ -1684,6 +1690,7 @@ const shard: CardShard = {
     _poolPitilessFists,
     _poolPlagueMyr,
     _poolPlanForAllOutcomes,
+    _poolPlanetaryPatrol,
     _poolPlaxmanta,
     _poolPlayWithFire,
     _poolPlayfulShove,
@@ -1785,6 +1792,7 @@ const shard: CardShard = {
     _poolSeekerOfSunlight,
     _poolSeekersSquire,
     _poolSeerOfStolenSight,
+    _poolSelaTalShiarParadox,
     _poolSelesnyaSanctuary,
     _poolSelfInflictedWound,
     _poolSensationGorger,

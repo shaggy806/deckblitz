@@ -153,6 +153,7 @@ import _poolCollectorOuphe from "../pool/collector-ouphe.js";
 import _poolColossapede from "../pool/colossapede.js";
 import _poolComaVeil from "../pool/coma-veil.js";
 import _poolComeuppance from "../pool/comeuppance.js";
+import _poolCommonGoal from "../pool/common-goal.js";
 import _poolConclaveCavalier from "../pool/conclave-cavalier.js";
 import _poolConduitOfEmrakul from "../pool/conduit-of-emrakul.js";
 import _poolConflagrate from "../pool/conflagrate.js";
@@ -948,6 +949,7 @@ import _poolWorthyCost from "../pool/worthy-cost.js";
 import _poolWretchedGryff from "../pool/wretched-gryff.js";
 import _poolWrithingChrysalis from "../pool/writhing-chrysalis.js";
 import _poolXandeDarkMage from "../pool/xande-dark-mage.js";
+import _poolXenobotanist from "../pool/xenobotanist.js";
 import _poolXolatoyacTheSmilingFlood from "../pool/xolatoyac-the-smiling-flood.js";
 import _poolYavimayaAncients from "../pool/yavimaya-ancients.js";
 import _poolYavimayaGnats from "../pool/yavimaya-gnats.js";
@@ -1147,6 +1149,7 @@ const shard: CardShard = {
     _poolColossapede,
     _poolComaVeil,
     _poolComeuppance,
+    _poolCommonGoal,
     _poolConclaveCavalier,
     _poolConduitOfEmrakul,
     _poolConflagrate,
@@ -1942,6 +1945,7 @@ const shard: CardShard = {
     _poolWretchedGryff,
     _poolWrithingChrysalis,
     _poolXandeDarkMage,
+    _poolXenobotanist,
     _poolXolatoyacTheSmilingFlood,
     _poolYavimayaAncients,
     _poolYavimayaGnats,
