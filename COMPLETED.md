@@ -532,6 +532,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Marvel: Darkhold Destiny's previews (MDD 7, MDC 1) and Mystery Booster Commander Edition (MBC
+  69) whole: 42 of 77 new cards authored** (2026-11-06, batch 269; `engine/data/sweep-3/B269.json`)
+  — one card-author agent of 70 and the lead's seven the scaffolder finished. 35 blocked: nine on
+  conjure (`effect:conjure`, digital-only and not in the Comprehensive Rules, so not built), eight
+  rulebreaker commanders (`mechanic:rulebreaker`), the rest on narrow new keys.
 - **Star Trek Commander (TRC) whole, from its previews: 158 of 172 new cards authored** (2026-11-06,
   batch 268; `engine/data/sweep-3/B268.json`) — three card-author agents of 55, 55 and 56 and the
   lead, who built assimilate alongside them (`EnterTypes.setSubtypes`, `ASSIMILATE`, a scaffolder

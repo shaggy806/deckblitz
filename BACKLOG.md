@@ -59,10 +59,12 @@ section keeps only what to do next.
 
 - **The set walk, upcoming sets first** (`author-by-set`): Star Trek (TRK) and Star Trek Commander
   (TRC) are whole from their previews (batches 266-268, `COMPLETED.md`; assimilate built,
-  `ASSIMILATE` in `helpers.ts`). **Next, batch 269: Marvel: Darkhold Destiny's 8 previews (MDD 7,
-  MDC 1, out 2027-04-09) and then Mystery Booster Commander (MBC, 69, out 2026-10-19), the newest
-  released set still open** — 77 cards, one agent (`cards:sets -- --next 80`, or `--set mdd`, `--set
-  mdc`, `--set mbc`). **After Star Trek's release (2026-11-13)**: `npm run gen:oracle -w engine`
+  `ASSIMILATE` in `helpers.ts`), and so are Marvel: Darkhold Destiny's previews (MDD, MDC) and
+  Mystery Booster Commander (MBC) (batch 269). **The walk is caught up**: every released and
+  previewed set is whole but TRC's two below, and Nauctis (NAU, out 2027-02-05) has no cards in the
+  snapshot yet. **Next: refresh the snapshot** (`npm run gen:oracle -w engine`) once new previews
+  are out, then `cards:sets -- --sets` picks up what it brings. MDD's Hela and Magik wait on
+  release rulings (`mechanic:vengeance`, `B269.json`). **After Star Trek's release (2026-11-13)**: `npm run gen:oracle -w engine`
   drops the `preview` lines and brings the rulings; `card:verify -- --offline` then shows any card
   whose text changed. Then author TRC's two left: Worf, Chief Tactical Officer (left out of B268:
   its preview text is only "Vigilance" on a 3-mana legendary, which looked incomplete) and

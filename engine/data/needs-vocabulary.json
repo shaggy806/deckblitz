@@ -15991,6 +15991,82 @@
   "effect:saga-chapter-links-permanent": {
    "family": "effect:linked-exiled-card",
    "example": "The Best of Both Worlds (Star Trek Commander): chapter III exiles and returns \"the Borg assimilated with this Saga\" — a link from the Saga to the permanent chapter I took."
+  },
+  "mechanic:vengeance": {
+   "family": "zone:graveyard-cast-permissions",
+   "example": "Hela, Mistress of Darkness // Dark Tutor (MDD): a Vengeance sorcery face, cast only from your graveyard, then exiled."
+  },
+  "effect:reveal-until-exile-play-all": {
+   "family": "effect:reveal-until",
+   "example": "Darkchild, Demon Uncaged (MDD): exile until a nonland card, then you may play every card exiled that way."
+  },
+  "mechanic:rulebreaker": {
+   "family": "deck:copy-limit-exception",
+   "example": "The Everforger, Maular, Grizzlegom, Seluma, Valko Indorian, Tolabow, Whtz (MBC): rulebreaker commanders that change deck construction."
+  },
+  "condition:starting-deck-size": {
+   "family": "deck:copy-limit-exception",
+   "example": "Whtz, the Bibliophile (MBC): a cost reduction read from the starting deck's size."
+  },
+  "effect:create-aura-token-attached-to-player": {
+   "family": "effect:attach-extensions",
+   "example": "Selenia, the Cursed Heart (MBC): an Aura token created attached to a player."
+  },
+  "static:grant-assist-to-first-spell": {
+   "family": "mechanic:assist",
+   "example": "Yume, Chronicler of Valor (MBC): the first spell each turn has assist."
+  },
+  "trigger:cards-exiled-from-opponent-library-by-you": {
+   "family": "effect:impulse-exile-other-libraries",
+   "example": "The Madcap Jester (MBC): whenever you exile cards from an opponent's library."
+  },
+  "effect:opponent-casts-from-your-exiled-cards": {
+   "family": "effect:choices-by-other-players",
+   "example": "Itazura, Lingering Wick (MBC): a secret number vote, then the winning opponent may cast free from your exiled cards."
+  },
+  "trigger:random-action": {
+   "family": "effect:random-choice",
+   "example": "Chira, All In (MBC): whenever something is chosen at random, a coin flipped or a die rolled."
+  },
+  "static:grant-saddle": {
+   "family": "keyword:saddle",
+   "example": "Jandor, Fortuned Traveler (MBC): creatures you control are Mounts and have saddle."
+  },
+  "trigger:player-loses-game-copy-permanents": {
+   "family": "trigger:player-loses-game-trigger",
+   "example": "Miss Highwater (MBC): when a contracted player loses the game, copy the permanents they controlled."
+  },
+  "cost:unless-combined-costs": {
+   "family": "cost:may-cost-non-mana",
+   "example": "Tresserhorn's Lord, Returned (MBC): an unless-cost made of several costs paid together."
+  },
+  "effect:set-x-value": {
+   "family": "effect:amount-new-variants",
+   "example": "Glava, Five-Advents Mage (MBC): X is fixed for spells."
+  },
+  "filter:wasnt-cast-from-hand-entering": {
+   "family": "condition:entry-provenance",
+   "example": "Venser, Visionary Traveler (MBC): enters with additional counters if it wasn't cast from your hand."
+  },
+  "trigger:lose-exactly-n-life-caused-by-you": {
+   "family": "trigger:life-change-amount",
+   "example": "Sahir, Visitor in Darkness (MBC): a player loses exactly 1 life from a source you control."
+  },
+  "trigger:deals-damage-event-any-recipient-exactly": {
+   "family": "trigger:damage-trigger-extensions",
+   "example": "Matoc, Lavamancer (MBC): once per damage event, if any recipient was dealt exactly 2."
+  },
+  "replacement:optional-token-replacement": {
+   "family": "replacement:token-creation-additive",
+   "example": "Flitwing, Lyev Detective (MBC): you may create that many Clues instead."
+  },
+  "effect:conjure": {
+   "family": "mechanic:outside-the-game",
+   "example": "Conjure (digital-only, not in the Comprehensive Rules): Euru, Overcooked, Case of the Lost Witness, Perforator Crocodile and the five Collectors (MBC)."
+  },
+  "effect:perpetually": {
+   "family": "mechanic:outside-the-game",
+   "example": "Perpetually (digital-only, not in the Comprehensive Rules): Pearl Collector (MBC)."
   }
  },
  "groups": [

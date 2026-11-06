@@ -1,0 +1,554 @@
+{
+ "batch": "B269",
+ "status": "done",
+ "ranks": "Marvel: Darkhold Destiny (MDD, 7) and Darkhold Destiny Commander (MDC, 1), out 2027-04-09, previews with no rulings yet: whole; then Mystery Booster Commander Edition (MBC, 2026-10-19): whole set, 69 cards. 77 cards: one card-author agent of 70 and the lead's seven the scaffolder finished.",
+ "authored": [
+  {
+   "name": "Arzakon",
+   "files": [
+    "engine/src/cards/pool/arzakon.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ashaya's Enduring Bond",
+   "files": [
+    "engine/src/cards/pool/ashayas-enduring-bond.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Autumn Willow, Harmony",
+   "files": [
+    "engine/src/cards/pool/autumn-willow-harmony.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Balefang the Unslayable",
+   "files": [
+    "engine/src/cards/pool/balefang-the-unslayable.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blor the Impervious",
+   "files": [
+    "engine/src/cards/pool/blor-the-impervious.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Boss Uramon, Shadow's Reach",
+   "files": [
+    "engine/src/cards/pool/boss-uramon-shadows-reach.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Chief Magistrate of Mercadia",
+   "files": [
+    "engine/src/cards/pool/chief-magistrate-of-mercadia.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Davvol, Evincar of Rath",
+   "files": [
+    "engine/src/cards/pool/davvol-evincar-of-rath.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dragon's Smile",
+   "files": [
+    "engine/src/cards/pool/dragons-smile.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dyfed, the Guiding Hand",
+   "files": [
+    "engine/src/cards/pool/dyfed-the-guiding-hand.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ekthi, Contaminator Priest",
+   "files": [
+    "engine/src/cards/pool/ekthi-contaminator-priest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elda, Conjurer of Spectacle",
+   "files": [
+    "engine/src/cards/pool/elda-conjurer-of-spectacle.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Feroz, Ulgrotha's Warden",
+   "files": [
+    "engine/src/cards/pool/feroz-ulgrothas-warden.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gargantos, the Endbringer",
+   "files": [
+    "engine/src/cards/pool/gargantos-the-endbringer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grakk the Pacifist",
+   "files": [
+    "engine/src/cards/pool/grakk-the-pacifist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Grandmother Goby",
+   "files": [
+    "engine/src/cards/pool/grandmother-goby.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Greensleeves",
+   "files": [
+    "engine/src/cards/pool/greensleeves.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gustha Ebbasdotter",
+   "files": [
+    "engine/src/cards/pool/gustha-ebbasdotter.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hela's Arcanum",
+   "files": [
+    "engine/src/cards/pool/helas-arcanum.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Homer, the Hermit",
+   "files": [
+    "engine/src/cards/pool/homer-the-hermit.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Istvan, Butcher of Eln",
+   "files": [
+    "engine/src/cards/pool/istvan-butcher-of-eln.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Jabs, Mistress of Mockery",
+   "files": [
+    "engine/src/cards/pool/jabs-mistress-of-mockery.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Joven and Chandler",
+   "files": [
+    "engine/src/cards/pool/joven-and-chandler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kuroki, Thief of Talents",
+   "files": [
+    "engine/src/cards/pool/kuroki-thief-of-talents.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lyna, Veil of Vengeance",
+   "files": [
+    "engine/src/cards/pool/lyna-veil-of-vengeance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Meatsqueak, Hoard Lord",
+   "files": [
+    "engine/src/cards/pool/meatsqueak-hoard-lord.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nephilim Epochal",
+   "files": [
+    "engine/src/cards/pool/nephilim-epochal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nivea, Beloved Battlemage",
+   "files": [
+    "engine/src/cards/pool/nivea-beloved-battlemage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Olag and Miau, New Friends",
+   "files": [
+    "engine/src/cards/pool/olag-and-miau-new-friends.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Olinda the Oblivious",
+   "files": [
+    "engine/src/cards/pool/olinda-the-oblivious.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Penance Stare",
+   "files": [
+    "engine/src/cards/pool/penance-stare.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rikala, Homarid King",
+   "files": [
+    "engine/src/cards/pool/rikala-homarid-king.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rise from the Nether",
+   "files": [
+    "engine/src/cards/pool/rise-from-the-nether.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sash and Waistcoat, Unmen",
+   "files": [
+    "engine/src/cards/pool/sash-and-waistcoat-unmen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sifa Grent",
+   "files": [
+    "engine/src/cards/pool/sifa-grent.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Temple of Khonshu",
+   "files": [
+    "engine/src/cards/pool/temple-of-khonshu.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Darkhold",
+   "files": [
+    "engine/src/cards/pool/the-darkhold.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Weaver King",
+   "files": [
+    "engine/src/cards/pool/the-weaver-king.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thomil, the Destroyer",
+   "files": [
+    "engine/src/cards/pool/thomil-the-destroyer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tsagan, Raider Warlord",
+   "files": [
+    "engine/src/cards/pool/tsagan-raider-warlord.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Uugguu, the Omniplasm",
+   "files": [
+    "engine/src/cards/pool/uugguu-the-omniplasm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Worzel, the Protector",
+   "files": [
+    "engine/src/cards/pool/worzel-the-protector.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Hela, Mistress of Darkness // Dark Tutor",
+   "needs": [
+    "mechanic:vengeance"
+   ],
+   "why": "The back face is a Vengeance sorcery (\"cast only from your graveyard, then exile it\"), a new MDD mechanic with no rules or rulings yet."
+  },
+  {
+   "name": "Magik, Illyana Rasputin // Darkchild, Demon Uncaged",
+   "needs": [
+    "effect:reveal-until-exile-play-all"
+   ],
+   "why": "Darkchild exiles until a nonland card and lets you play every card exiled that way, lands included; reveal-until grants only the card found."
+  },
+  {
+   "name": "Whtz, the Bibliophile",
+   "needs": [
+    "mechanic:rulebreaker",
+    "condition:starting-deck-size"
+   ],
+   "why": "No maximum deck size, and a cost reduction that reads the starting deck's size."
+  },
+  {
+   "name": "The Everforger",
+   "needs": [
+    "mechanic:rulebreaker"
+   ],
+   "why": "Changes deck construction (a rulebreaker: color identity, card counts or land cards in the deck), which deck validation can't express."
+  },
+  {
+   "name": "Maular, the Next Evolution",
+   "needs": [
+    "mechanic:rulebreaker"
+   ],
+   "why": "Changes deck construction (a rulebreaker: color identity, card counts or land cards in the deck), which deck validation can't express."
+  },
+  {
+   "name": "Grizzlegom, Hurloon Hero",
+   "needs": [
+    "mechanic:rulebreaker"
+   ],
+   "why": "Changes deck construction (a rulebreaker: color identity, card counts or land cards in the deck), which deck validation can't express."
+  },
+  {
+   "name": "Seluma, Light of Aysen",
+   "needs": [
+    "mechanic:rulebreaker"
+   ],
+   "why": "Changes deck construction (a rulebreaker: color identity, card counts or land cards in the deck), which deck validation can't express."
+  },
+  {
+   "name": "Valko Indorian",
+   "needs": [
+    "mechanic:rulebreaker"
+   ],
+   "why": "Changes deck construction (a rulebreaker: color identity, card counts or land cards in the deck), which deck validation can't express."
+  },
+  {
+   "name": "Tolabow, Loch Rascal",
+   "needs": [
+    "mechanic:rulebreaker"
+   ],
+   "why": "Changes deck construction (a rulebreaker: color identity, card counts or land cards in the deck), which deck validation can't express. It also needs an extra color chosen."
+  },
+  {
+   "name": "The Unluckiest Planeswalker",
+   "needs": [
+    "mechanic:rulebreaker",
+    "effect:create-aura-token-attached-to-player"
+   ],
+   "why": "Changes deck construction (a rulebreaker: color identity, card counts or land cards in the deck), which deck validation can't express. It also attaches Auras to players."
+  },
+  {
+   "name": "Massimo, the Magician",
+   "needs": [
+    "effect:linked-exiled-card",
+    "effect:granted-trigger-refers-to-granter"
+   ],
+   "why": "The granted trigger copies \"the exiled card\" the granting trigger exiled."
+  },
+  {
+   "name": "The Muckslinger Gang",
+   "needs": [
+    "static:grant-to-cards-outside-battlefield"
+   ],
+   "why": "+3/+3 for creature spells and creature cards outside the battlefield."
+  },
+  {
+   "name": "Selenia, the Cursed Heart",
+   "needs": [
+    "effect:create-aura-token-attached-to-player"
+   ],
+   "why": "Creates an Aura token attached to a player; create-token's attachedTo takes permanents only."
+  },
+  {
+   "name": "Yume, Chronicler of Valor",
+   "needs": [
+    "mechanic:assist",
+    "static:grant-assist-to-first-spell"
+   ],
+   "why": "Grants assist to the first spell each turn; assist isn't built."
+  },
+  {
+   "name": "The Madcap Jester",
+   "needs": [
+    "trigger:cards-exiled-from-opponent-library-by-you"
+   ],
+   "why": "Triggers on cards you exile from an opponent's library."
+  },
+  {
+   "name": "Itazura, Lingering Wick",
+   "needs": [
+    "effect:opponent-casts-from-your-exiled-cards"
+   ],
+   "why": "Opponents secretly choose numbers, you pick among the highest, that opponent may cast free from your exiled cards and you take one that wasn't cast."
+  },
+  {
+   "name": "Zagorka, Mother of Sanctum",
+   "needs": [
+    "effect:player-cant-attack-you-next-turn"
+   ],
+   "why": "A player can't attack you during their next turn."
+  },
+  {
+   "name": "Chira, All In",
+   "needs": [
+    "trigger:random-action"
+   ],
+   "why": "Triggers on random actions: discard at random, random targets or modes, coin flips, dice."
+  },
+  {
+   "name": "Jandor, Fortuned Traveler",
+   "needs": [
+    "keyword:saddle",
+    "static:grant-saddle"
+   ],
+   "why": "Grants saddle and makes creatures Mounts; nothing grants saddle."
+  },
+  {
+   "name": "Miss Highwater",
+   "needs": [
+    "trigger:player-loses-game-copy-permanents"
+   ],
+   "why": "A contract counter, then \"when they lose the game\", copies of what they controlled."
+  },
+  {
+   "name": "Tresserhorn's Lord, Returned",
+   "needs": [
+    "cost:unless-combined-costs"
+   ],
+   "why": "An unless-cost of three creatures, 3 life and an opponent drawing three as one option; UnlessOption sets one field."
+  },
+  {
+   "name": "Glava, Five-Advents Mage",
+   "needs": [
+    "effect:set-x-value"
+   ],
+   "why": "Sets X for spells; no effect fixes a spell's X."
+  },
+  {
+   "name": "Venser, Visionary Traveler",
+   "needs": [
+    "filter:wasnt-cast-from-hand-entering"
+   ],
+   "why": "An enters-with-counters replacement reads \"wasn't cast from your hand\" as the creature enters."
+  },
+  {
+   "name": "Sahir, Visitor in Darkness",
+   "needs": [
+    "trigger:lose-exactly-n-life-caused-by-you"
+   ],
+   "why": "Triggers when a player loses exactly 1 life from a spell or ability you control."
+  },
+  {
+   "name": "Matoc, Lavamancer",
+   "needs": [
+    "trigger:deals-damage-event-any-recipient-exactly"
+   ],
+   "why": "One trigger per damage event if at least one recipient was dealt exactly 2; deals-damage with exactly fires per recipient."
+  },
+  {
+   "name": "Flitwing, Lyev Detective",
+   "needs": [
+    "replacement:optional-token-replacement"
+   ],
+   "why": "\"You may create that many Clues instead\": would-create-token has no optional form."
+  },
+  {
+   "name": "Euru, Acorn Scrounger",
+   "needs": [
+    "effect:conjure"
+   ],
+   "why": "Conjure, a digital-only mechanic the Comprehensive Rules don't have: creates a card from nothing."
+  },
+  {
+   "name": "Overcooked",
+   "needs": [
+    "effect:conjure"
+   ],
+   "why": "Conjure, a digital-only mechanic the Comprehensive Rules don't have: creates a card from nothing."
+  },
+  {
+   "name": "Case of the Lost Witness",
+   "needs": [
+    "effect:conjure"
+   ],
+   "why": "Conjure, a digital-only mechanic the Comprehensive Rules don't have: creates a card from nothing."
+  },
+  {
+   "name": "Perforator Crocodile",
+   "needs": [
+    "effect:conjure"
+   ],
+   "why": "Conjure, a digital-only mechanic the Comprehensive Rules don't have: creates a card from nothing."
+  },
+  {
+   "name": "Jet Collector",
+   "needs": [
+    "effect:conjure"
+   ],
+   "why": "Conjure, a digital-only mechanic the Comprehensive Rules don't have: creates a card from nothing."
+  },
+  {
+   "name": "Sapphire Collector",
+   "needs": [
+    "effect:conjure"
+   ],
+   "why": "Conjure, a digital-only mechanic the Comprehensive Rules don't have: creates a card from nothing."
+  },
+  {
+   "name": "Ruby Collector",
+   "needs": [
+    "effect:conjure"
+   ],
+   "why": "Conjure, a digital-only mechanic the Comprehensive Rules don't have: creates a card from nothing."
+  },
+  {
+   "name": "Emerald Collector",
+   "needs": [
+    "effect:conjure"
+   ],
+   "why": "Conjure, a digital-only mechanic the Comprehensive Rules don't have: creates a card from nothing."
+  },
+  {
+   "name": "Pearl Collector",
+   "needs": [
+    "effect:conjure",
+    "effect:perpetually"
+   ],
+   "why": "Conjure, a digital-only mechanic the Comprehensive Rules don't have: creates a card from nothing. \"Perpetually\" is digital-only too."
+  }
+ ]
+}
