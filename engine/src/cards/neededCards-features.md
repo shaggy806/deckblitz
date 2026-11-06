@@ -524,6 +524,17 @@ targets — replicate's record (`queuePaidCostCopy`, now with `newTargets`
 off). The scaffolder reads the line, and "you draw a card and lose N life".
 Proving card: Plumb the Forbidden. Key: cost:sacrifice-any-number-copy-for-each.
 
+### Tempting offer — already built, 2026-11-06
+
+By EDHREC rank: Tempt with Bunnies (1979). No engine code: the pool's six
+tempting offers (Tempt with Vengeance, Glory, Discovery, Immortality,
+Reflections, Mayhem) are `each-player-may` of each opponent in turn order, the
+offer theirs to do, and `ifDid` yours once per taker; Bunnies' offer is a draw
+and a Rabbit. The scaffolder now reads a tempting offer whose offer can't be
+taken and not done (draws, tokens, counters, life; no targets) whole —
+Vengeance, Glory and Bunnies. Proving card: Tempt with Bunnies
+(`tempting-offer.test.ts`). Key: effect:tempting-offer.
+
 ### Prevention over the permanents matching as it resolves — already built, 2026-11-06
 
 By EDHREC rank: Mutational Advantage (1973). No engine code: "prevent all

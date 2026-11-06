@@ -16421,3 +16421,60 @@ describe("prevention over the permanents a mass grant reached", () => {
     expect(face.complete).toBe(false);
   });
 });
+
+describe("a tempting offer whose offer is always done once taken", () => {
+  const tokenFor = (d: string) => (/rabbit/i.test(d) ? "Rabbit Token" : null);
+  const bunnies = {
+    kind: "sequence",
+    effects: [
+      { kind: "draw", amount: 1 },
+      { kind: "create-token", token: "Rabbit Token", count: 1 },
+    ],
+  };
+
+  it("reads Tempt with Bunnies whole: yours, each opponent's may, yours again per taker", () => {
+    const face = parseFace(
+      {
+        name: "Tempt with Bunnies",
+        type_line: "Sorcery",
+        oracle_text:
+          "Tempting Offer — Draw a card and create a 1/1 white Rabbit creature token. Then each opponent may draw a card and create a 1/1 white Rabbit creature token. For each opponent who does, you draw a card and you create a 1/1 white Rabbit creature token.",
+      },
+      { tokenFor },
+    );
+    expect(face.complete).toBe(true);
+    expect(face.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        bunnies,
+        {
+          kind: "each-player-may",
+          who: "each-opponent",
+          prompt: "Draw a card and create a 1/1 white Rabbit creature token?",
+          effect: bunnies,
+          ifDid: bunnies,
+        },
+      ],
+    });
+  });
+
+  it("reads the opponent's half from their side (Tempt with Glory's \"they control\")", () => {
+    const face = parseFace({
+      name: "Tempt with Glory",
+      type_line: "Sorcery",
+      oracle_text:
+        "Tempting offer — Put a +1/+1 counter on each creature you control. Each opponent may put a +1/+1 counter on each creature they control. For each opponent who does, put a +1/+1 counter on each creature you control.",
+    });
+    expect(face.effect.effects[1].prompt).toBe("Put a +1/+1 counter on each creature you control?");
+  });
+
+  it("leaves an offer that can be taken and not done to a person (Tempt with Immortality)", () => {
+    const face = parseFace({
+      name: "Tempt with Immortality",
+      type_line: "Sorcery",
+      oracle_text:
+        "Tempting offer — Return a creature card from your graveyard to the battlefield. Each opponent may return a creature card from their graveyard to the battlefield. For each opponent who does, return a creature card from your graveyard to the battlefield.",
+    });
+    expect(face.complete).toBe(false);
+  });
+});

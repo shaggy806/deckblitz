@@ -8360,6 +8360,48 @@ function splitAsCastSentence(text) {
   return null;
 }
 
+/**
+ * A tempting offer whose offer is always done once taken (Tempt with
+ * Vengeance, Tempt with Glory, Tempt with Bunnies): "[X]. [Then] each opponent
+ * may [X]. For each opponent who does, [X]." — X once for you, an
+ * `each-player-may` of X for each opponent (theirs: "they control" is "you
+ * control" there), and X again for you per one who took it (`ifDid`). Only an
+ * offer of draws, tokens, counters or life, which can't be taken and not done;
+ * no targets (Tempt with Reflections). "Draw a card and create a … token" is
+ * read as its two halves.
+ */
+function temptingOfferOf(text, outer) {
+  const m = /^(.+?)\. (?:Then )?[Ee]ach opponent may (.+?)\. For each opponent who does, (.+?)\.$/.exec(text);
+  if (m === null || outer.targets.length > 0) return null;
+  const cap = (s) => s[0].toUpperCase() + s.slice(1);
+  const SAFE = new Set(["draw", "create-token", "add-counter-all", "gain-life"]);
+  const safe = (effect) =>
+    effect.kind === "sequence" ? !effect.simultaneous && effect.effects.every(safe) : SAFE.has(effect.kind);
+  const read = (phrase) => {
+    const tries = [`${cap(phrase)}.`];
+    const halves = /^(.+?) and (.+)$/.exec(phrase);
+    if (halves !== null) tries.push(`${cap(halves[1])}. ${cap(halves[2])}.`);
+    for (const sentence of tries) {
+      const targets = [];
+      const got = parseEffect(sentence, { ...outer, targets });
+      if (got.effect !== null && got.todo.length === 0 && targets.length === 0 && safe(got.effect)) return got.effect;
+    }
+    return null;
+  };
+  const theirs = m[2].replace(/\bthey control\b/g, "you control").replace(/\btheir\b/g, "your");
+  const yours = m[3].replace(/^you /, "").replace(/ and you /g, " and ");
+  const first = read(m[1]);
+  const offer = read(theirs);
+  const again = read(yours);
+  if (first === null || offer === null || again === null) return null;
+  const same = JSON.stringify(first);
+  if (JSON.stringify(offer) !== same || JSON.stringify(again) !== same) return null;
+  return {
+    kind: "sequence",
+    effects: [first, { kind: "each-player-may", who: "each-opponent", prompt: `${cap(theirs)}?`, effect: offer, ifDid: again }],
+  };
+}
+
 export function parseEffect(text, outer) {
   // Each target a sentence names takes the next slot of the ability's list.
   const ctx = { ...outer, target: (spec) => outer.targets.push(spec) - 1 };
@@ -8372,6 +8414,8 @@ export function parseEffect(text, outer) {
   if (becomes !== null) return { effect: becomes, todo: [], hints: [] };
   // Mythos of Snapdax's two sentences: the second rewrites who chooses.
   if (text === SNAPDAX_LINE) return { effect: SNAPDAX_EFFECT, todo: [], hints: [] };
+  const tempting = temptingOfferOf(text, outer);
+  if (tempting !== null) return { effect: tempting, todo: [], hints: [] };
 
   // "Exile target spell. It becomes plotted." (Aven Interrupter — rule
   // 702.170c): the spell exiled, then the card plotted for its owner.

@@ -2585,7 +2585,11 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   "that-player" }`), Wernog, Rider's Chaplain's "each opponent who doesn't
   loses 1 life. You investigate for each opponent who investigated this
   way" (an `ifDidnt` `lose-life` of `"that-player"`, an `ifDid`
-  investigate), a tempting offer's "for each opponent who does, you …".
+  investigate), a tempting offer's "for each opponent who does, you …"
+  (Tempt with Bunnies: the same draw-and-Rabbit `sequence` as yours, the
+  opponents' `effect` and the `ifDid`; an offer that can be taken and not
+  done, as Tempt with Immortality's return, checks it in `ifDid` with a
+  `this-way` condition of `"that-player"`).
   `resultsFor` keeps the follow-ups to a scope: Kynaios and Tiro's "then each
   **opponent** who didn't draws a card" asks `"each-player"` with
   `resultsFor: "each-opponent"`. A player with nothing they could take isn't
