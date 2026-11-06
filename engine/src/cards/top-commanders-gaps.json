@@ -1870,8 +1870,6 @@
   "effect:search-finds-castable-this-turn",
   "effect:flicker-return-at-owners-next-end-step",
   "effect:cast-discarded-card-exiled-by-madness",
-  "effect:divided-total-reading-x",
-  "effect:divided-total-reading-x",
   "static:granted-static-replacement"
  ],
  "features": {

@@ -706,7 +706,6 @@ import _poolShadyTraveler from "../pool/shady-traveler.js";
 import _poolShapeshifter from "../pool/shapeshifter.js";
 import _poolShardOfBrokenGlass from "../pool/shard-of-broken-glass.js";
 import _poolShatteredYard from "../pool/shattered-yard.js";
-import _poolShatterskullTheHammerPass from "../pool/shatterskull-the-hammer-pass.js";
 import _poolShinenOfFurysFire from "../pool/shinen-of-furys-fire.js";
 import _poolShoreSnapper from "../pool/shore-snapper.js";
 import _poolShrineOfBurningRage from "../pool/shrine-of-burning-rage.js";
@@ -1659,7 +1658,6 @@ const shard: CardShard = {
     _poolShapeshifter,
     _poolShardOfBrokenGlass,
     _poolShatteredYard,
-    _poolShatterskullTheHammerPass,
     _poolShinenOfFurysFire,
     _poolShoreSnapper,
     _poolShrineOfBurningRage,

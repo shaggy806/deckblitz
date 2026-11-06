@@ -5884,11 +5884,8 @@ export interface CardDefinition {
    * "the greatest power among creatures you control as you cast this spell"
    * (Monstrous Onslaught) — and fixed from then on. Give its group no `max`:
    * the total caps it (at least 1 each). An amount reading X other than a
-   * plain X — Meteor Shower's "X plus 1" (`{ sum: ["x", 1] }`), Shatterskull
-   * Smashing's "twice X if X is 6 or more" (an `ifCondition` on `{ kind:
-   * "x" }`) — is read at the X the spell is cast with; the offer carries it
-   * at every X (`divide.totalByX`), and the number of targets each X allows
-   * (`xCost.minXByTargetCount`: at least 1 each).
+   * plain X (Meteor Shower's "X plus 1") isn't offered right yet: the offer
+   * names a number or `x`.
    */
   readonly divided: { readonly total: EffectAmount; readonly slot: number; readonly of?: string; readonly x?: true } | null;
   /** The partner-family ability that lets this card be one of *two*

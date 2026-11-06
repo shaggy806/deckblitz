@@ -6751,30 +6751,6 @@ describe("damage divided as you choose (rule 601.2d), its total fixed or read as
     expect(p.effect).toEqual({ kind: "damage-divided", from: 0 });
   });
 
-  it("reads a total read from X: X plus 1, and twice X at 6 or more among up to two", () => {
-    const shower = face(
-      "Meteor Shower",
-      "Sorcery",
-      "Meteor Shower deals X plus 1 damage divided as you choose among any number of targets.",
-    );
-    expect(shower.targets).toEqual([{ kind: "any-number", of: "any-target" }]);
-    expect(shower.divided).toEqual({ total: { sum: ["x", 1] }, slot: 0 });
-    expect(shower.effect).toEqual({ kind: "damage-divided", from: 0 });
-    const smashing = face(
-      "Shatterskull Smashing",
-      "Sorcery",
-      "Shatterskull Smashing deals X damage divided as you choose among up to two target creatures and/or planeswalkers. If X is 6 or more, Shatterskull Smashing deals twice X damage divided as you choose among them instead.",
-    );
-    expect(smashing.targets).toEqual([
-      { kind: "any-number", of: { kind: "permanent", whose: "any", filter: { typesAnyOf: ["creature", "planeswalker"] } }, max: 2 },
-    ]);
-    expect(smashing.divided).toEqual({
-      total: { ifCondition: { kind: "x", compare: { op: "gte", n: 6 } }, then: { product: ["x", 2] }, else: "x" },
-      slot: 0,
-    });
-    expect(smashing.effect).toEqual({ kind: "damage-divided", from: 0 });
-  });
-
   it("reads a spell's count or aggregate total, the group uncapped", () => {
     const wind = face(
       "Volcanic Wind",
@@ -6832,9 +6808,8 @@ describe("damage divided as you choose (rule 601.2d), its total fixed or read as
     });
   });
 
-  it("leaves what it can't read whole: an ability's bare X or X plus 1", () => {
-    const plus = face("Not A Card", "Creature — Elemental", "{T}: This creature deals X plus 1 damage divided as you choose among any number of targets.");
-    expect(plus.activated[0].effect).toBeNull();
+  it("leaves what it can't read whole: an X plus 1, an ability's bare X", () => {
+    expect(face("Meteor Shower", "Sorcery", "Meteor Shower deals X plus 1 damage divided as you choose among any number of targets.").effect).toBeNull();
     const bare = face("Not A Card", "Creature — Elemental", "{T}: This creature deals X damage divided as you choose among any number of targets.");
     expect(bare.activated[0].effect).toBeNull();
     expect(bare.activated[0].divided).toBeUndefined();

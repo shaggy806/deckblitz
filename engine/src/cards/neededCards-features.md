@@ -426,6 +426,7 @@ when its own timing allows, the ruling), Chandra, Heart of Fire's "you may
 cast them this turn" `{ duration: "end-of-turn" }`. The scaffolder reads both
 lines (`searchExileCastLaterAt`). Proving cards: Ugin, Eye of the Storms;
 Chandra, Heart of Fire. Key: effect:search-finds-castable-this-turn.
+
 ### A granted static that replaces or prevents — built 2026-11-05
 
 By EDHREC rank: Caduceus, Staff of Hermes (1438). `Game.staticsOfSource` now
@@ -437,23 +438,6 @@ statics granted a permanent after it lost its abilities (613.7). Proving card:
 Caduceus, Staff of Hermes. Key: static:granted-static-replacement. Acolyte of
 Bahamut (`static:granted-static-cost-modification`) likely runs now through
 the same path but wasn't tested.
-
-### A divided total read from X beyond plain X — built 2026-11-05
-
-By EDHREC rank: Shatterskull Smashing (1413). A spell's `divided.total` that
-reads X other than as plain X — Meteor Shower's "X plus 1" (`{ sum: ["x", 1]
-}`), Shatterskull Smashing's "twice X if X is 6 or more" (an `ifCondition` on
-`{ kind: "x" }`; its ruling: twice X is what's divided) — was always read at
-the X cast, but the offer named the X = 0 total and capped the group by it.
-Now the cast offer carries the total at every X (`divide.totalByX`,
-`Game.dividedTotalsByX`), which the client's division step reads at the X
-chosen, and `xGroupOffer` bounds the number of targets by it as it does "up to
-X" (`xCost.minXByTargetCount`: at least 1 each, rule 601.2d) and by the
-group's own `max`. The scaffolder reads "X plus N … among any number of", "X
-… among up to two/three target …" (a total of `"x"`) and the "If X is N or
-more, ~ deals twice X damage … instead." sentence. Proving cards: Shatterskull
-Smashing, Meteor Shower. Key: effect:divided-total-reading-x. An activated
-ability's total read from X is still offered at one X only.
 
 ### A copy of the spell for each creature sacrificed to cast it — built 2026-11-05
 
@@ -1490,11 +1474,11 @@ and split announced as it's put on the stack (603.12). The scaffolder reads
 "~/it deals N / X / damage equal to its power divided as you choose among
 …, where X is …". Keys: divided-dynamic-total, reflexive-divided-damage.
 Proving cards: Volcanic Wind, Monstrous Onslaught, Lukka, Bound to Ruin,
-Ureni, the Song Unending, Orca, Siege Demon, Death to Our Enemies. An
-X-reading total beyond a plain X (Meteor Shower's "X plus 1", Shatterskull
-Smashing's "twice X if X is 6 or more") was built 2026-11-05
-(`divide.totalByX`, above). Still open: the scaffolder doesn't read "When you
-do" at all.
+Ureni, the Song Unending, Orca, Siege Demon, Death to Our Enemies. Still
+open: an X-reading total beyond a plain X (Meteor Shower's "X plus 1",
+Shatterskull Smashing's "twice X if X is 6 or more") — the offer names a
+number or `x`, so the client would need the amount; the scaffolder doesn't
+read "When you do" at all.
 
 ### Attack triggers narrowed by attackers and the player attacked — built 2026-11-01
 

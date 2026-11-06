@@ -495,7 +495,6 @@ import _poolMemoryGuardian from "../pool/memory-guardian.js";
 import _poolMerfolkFalconer from "../pool/merfolk-falconer.js";
 import _poolMesmerizingBenthid from "../pool/mesmerizing-benthid.js";
 import _poolMessengerJays from "../pool/messenger-jays.js";
-import _poolMeteorShower from "../pool/meteor-shower.js";
 import _poolMilitiaRallier from "../pool/militia-rallier.js";
 import _poolMineRaider from "../pool/mine-raider.js";
 import _poolMinisterOfPain from "../pool/minister-of-pain.js";
@@ -1439,7 +1438,6 @@ const shard: CardShard = {
     _poolMerfolkFalconer,
     _poolMesmerizingBenthid,
     _poolMessengerJays,
-    _poolMeteorShower,
     _poolMilitiaRallier,
     _poolMineRaider,
     _poolMinisterOfPain,
