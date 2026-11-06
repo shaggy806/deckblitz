@@ -1860,7 +1860,8 @@
   "effect:enchantment-becomes-aura",
   "replacement:exile-instead-linked",
   "zone:linked-exile-play-pay-life-alternative",
-  "replacement:exile-instead-cards-you-didnt-control"
+  "replacement:exile-instead-cards-you-didnt-control",
+  "zone:cast-from-library-top-pay-life-mana-value"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

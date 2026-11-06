@@ -3712,8 +3712,20 @@ export interface StaticAbility {
    * any time" is the card's `looksAtOwnLibraryTop`. `gainsHaste` is
    * "if you cast a creature spell this way, it gains haste until end of
    * turn" (Thundermane Dragon). `affects` is ignored.
+   *
+   * `payLifeManaValue` is "if you cast a spell this way, pay life equal to
+   * its mana value rather than pay its mana cost" (Bolas's Citadel): the
+   * only way this permission lets it be cast — an alternative cost (rule
+   * 118.9), so no other one goes with it, though additional costs and cost
+   * increases still do (the rulings), and X is 0 (107.3b). Another
+   * permission without it still lets the card be cast for its mana cost
+   * (Future Sight beside the Citadel): the caster picks which applies.
    */
-  readonly castFromLibraryTop?: { readonly filter: CardFilter; readonly gainsHaste?: boolean };
+  readonly castFromLibraryTop?: {
+    readonly filter: CardFilter;
+    readonly gainsHaste?: boolean;
+    readonly payLifeManaValue?: true;
+  };
   /**
    * A permission (rule 601.3) — while this permanent is on the battlefield
    * its controller may play lands and cast spells from among the cards in

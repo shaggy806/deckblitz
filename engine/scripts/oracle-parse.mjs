@@ -19375,12 +19375,16 @@ function parseStatic(line, text) {
       text,
     };
   }
-  // Future Sight, Traveling Chocobo's Birds.
-  if ((m = /^You may play lands and cast (?:([A-Z][a-z]+) )?spells from the top of your library\.$/.exec(line))) {
+  // Future Sight, Traveling Chocobo's Birds; Bolas's Citadel's "… pay life
+  // equal to its mana value rather than pay its mana cost".
+  if ((m = /^You may play lands and cast (?:([A-Z][a-z]+) )?spells from the top of your library\.( If you cast a spell this way, pay life equal to its mana value rather than pay its mana cost\.)?$/.exec(line))) {
     return {
       affects: { scope: "self" },
       playFromLibraryTop: { type: "land" },
-      castFromLibraryTop: { filter: m[1] === undefined ? {} : { subtype: m[1] } },
+      castFromLibraryTop: {
+        filter: m[1] === undefined ? {} : { subtype: m[1] },
+        ...(m[2] !== undefined ? { payLifeManaValue: true } : {}),
+      },
       text,
     };
   }

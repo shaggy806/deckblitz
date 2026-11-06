@@ -5845,7 +5845,7 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   play. Distinct from `revealsOwnLibraryTop` (the "play with the top card
   revealed" half, which only affects `viewFor`). It plays **lands** only; a
   spell from the top is `castFromLibraryTop`'s.
-- `castFromLibraryTop: { filter, gainsHaste? }` — while this permanent is on
+- `castFromLibraryTop: { filter, gainsHaste?, payLifeManaValue? }` — while this permanent is on
   the battlefield its controller may *cast* the top card of their library if
   the spell it would be matches `filter` (rule 601.3, judged as in 601.3e):
   Sigarda, Font of Blessings' "Angel spells and Human spells" is `{ subtypes:
@@ -5863,7 +5863,13 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   end of turn, Thundermane or no (rules 400.7b, 611.3d). Pair it with the card's `looksAtOwnLibraryTop` for "you may look
   at the top card of your library any time", and with `playFromLibraryTop`
   for the lands of "play lands and cast spells" (Glarb). `affects` is
-  ignored. `cast-from-library-top.test.ts`.
+  ignored. `cast-from-library-top.test.ts`. `payLifeManaValue: true` is
+  Bolas's Citadel's "if you cast a spell this way, pay life equal to its mana
+  value rather than pay its mana cost": the only way that permission casts it
+  (an alternative cost, 118.9 — no other one with it, X 0 by 107.3b,
+  additional costs still paid), offered as an `altCost` variant "pay N life";
+  beside a permission without it (Future Sight) the mana cost is offered too.
+  `library-top-pay-life.test.ts`.
 - `playFromExile: { filter, exiledByYou?, spells?, castOnly?, yourTurnOnly?,
   spendAs? }` — while this permanent is on the battlefield its controller
   may play lands and cast spells from among the cards in exile matching

@@ -356,6 +356,16 @@ void counter are, when the moving object's controller picks another exile that
 could apply (616.1 — Rest in Peace). The scaffolder sets it on a card that says
 "exiled with" anywhere. Proving cards: The Darkness Crystal, Gisa, Glorious
 Resurrector (`exile-instead-linked.test.ts`). Key: replacement:exile-instead-linked.
+### Spells off the top of the library for life — built 2026-11-05
+
+By EDHREC rank: Bolas's Citadel (274). A `castFromLibraryTop` permission's
+`payLifeManaValue` is "if you cast a spell this way, pay life equal to its mana
+value rather than pay its mana cost": the alternative cost (118.9) that
+permission allows and no other, X 0 (107.3b), additional costs and increases
+still paid; beside a permission without it (Future Sight) the card may be cast
+either way. An impulse's or the Citadel's forced pay-life cast of a card with
+an alternative cost of its own (Gush) no longer pays that one too. Key:
+zone:cast-from-library-top-pay-life-mana-value.
 
 ### An Aura on a graveyard card, and an enchant ability an effect gives — built 2026-11-05
 

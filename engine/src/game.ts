@@ -4465,6 +4465,11 @@ export class Game {
     ) {
       variants.length = 0;
     }
+    // So is a library-top permission's (Bolas's Citadel), unless another
+    // permission lets the card be cast from there as usual.
+    if (via === "library-top" && this.libraryTopPaysLifeOnly(player, card, face ?? 0)) {
+      variants.length = 0;
+    }
     if (!warp && impulseFree !== "only") {
       // A variant per alternative cost (rules 118.9a, 601.2b), with kicker
       // paid on top of it where the card has it (118.9d).
@@ -13009,12 +13014,16 @@ export class Game {
    * permanents they control, active and with their abilities, whose filter
    * the spell it would be matches (601.3e — that face, its mana value
    * counting `x`, 202.3e). Empty when none applies, or it isn't on top.
+   * `which` keeps to the permissions that let it be paid for as usual
+   * (`"paid"`) or to those that say "pay life equal to its mana value rather
+   * than pay its mana cost" (`"pay-life"` — Bolas's Citadel).
    */
   private libraryTopCastPermissions(
     player: PlayerId,
     cardId: ObjectId,
     face: number,
     x = 0,
+    which?: "paid" | "pay-life",
   ): NonNullable<StaticAbility["castFromLibraryTop"]>[] {
     if (this.state.zones.perPlayer[player]?.library[0] !== cardId) return [];
     const out: NonNullable<StaticAbility["castFromLibraryTop"]>[] = [];
@@ -13024,6 +13033,7 @@ export class Game {
       for (const ability of this.registry.get(rulesTextName(source)).static) {
         const permission = ability.castFromLibraryTop;
         if (permission === undefined || !this.staticActive(source, ability)) continue;
+        if (which !== undefined && (permission.payLifeManaValue === true) !== (which === "pay-life")) continue;
         const fits = this.withFace(cardId, face, () =>
           matchesFilter(this.state, this.registry, cardId, permission.filter, { you: player, castX: x, source: id }),
         );
@@ -13122,11 +13132,31 @@ export class Game {
     return pips > 0 && this.canPayLife(player, 2) ? { phyrexianPips: pips } : {};
   }
 
-  private libraryTopMinX(player: PlayerId, cardId: ObjectId, face: number, ceiling: number): number | null {
+  private libraryTopMinX(
+    player: PlayerId,
+    cardId: ObjectId,
+    face: number,
+    ceiling: number,
+    which?: "paid" | "pay-life",
+  ): number | null {
     for (let x = 0; x <= ceiling; x += 1) {
-      if (this.libraryTopCastPermissions(player, cardId, face, x).length > 0) return x;
+      if (this.libraryTopCastPermissions(player, cardId, face, x, which).length > 0) return x;
     }
     return null;
+  }
+
+  /**
+   * Whether `player` may cast `cardId`, the top card of their library, as
+   * `face` only by paying life equal to its mana value rather than its mana
+   * cost (Bolas's Citadel — an alternative cost, rule 118.9, X 0 by 107.3b):
+   * a `payLifeManaValue` permission reaches it, and no other does at any X
+   * (Future Sight beside it lets it be paid for as usual).
+   */
+  private libraryTopPaysLifeOnly(player: PlayerId, cardId: ObjectId, face: number): boolean {
+    if (this.libraryTopCastPermissions(player, cardId, face, 0, "pay-life").length === 0) return false;
+    const cost = this.faceDef(cardId, face).manaCost;
+    const ceiling = cost !== null && parseManaCost(cost).x > 0 ? this.xPaymentCeiling(player) : 0;
+    return this.libraryTopMinX(player, cardId, face, ceiling, "paid") === null;
   }
 
   /**
@@ -17554,6 +17584,9 @@ export class Game {
         this.exileStaticLifeCast(player, cardId, face ?? 0) === "only")
     ) {
       return `${def.name} may be cast from exile only by paying life equal to its mana value`;
+    }
+    if (via === "library-top" && !altCost && this.libraryTopPaysLifeOnly(player, cardId, face)) {
+      return `${def.name} may be cast from the top of the library only by paying life equal to its mana value`;
     }
     if (
       free &&
@@ -49468,7 +49501,17 @@ export class Game {
       via === "impulse" && caster !== undefined
         ? this.exileStaticLifeCast(caster, cardId, Math.max(0, card?.faces?.indexOf(def.name) ?? 0))
         : null;
-    if (staticLife === "only") return [{ mana: "{0}", payLifeManaValue: true }];
+    if (staticLife === "only") return payLifeOnly();
+    // The same from the top of the library (Bolas's Citadel) — the only way
+    // when no other permission reaches the card; beside one that does
+    // (Future Sight), one more way, after every other.
+    const libraryTopFace = Math.max(0, card?.faces?.indexOf(def.name) ?? 0);
+    const libraryTopPayLife =
+      via === "library-top" && caster !== undefined &&
+      this.libraryTopCastPermissions(caster, cardId, libraryTopFace, 0, "pay-life").length > 0;
+    if (libraryTopPayLife && this.libraryTopPaysLifeOnly(caster!, cardId, libraryTopFace)) {
+      return payLifeOnly();
+    }
     const out: (AlternativeCostOffer | null)[] =
       def.alternativeCost !== null ? [...this.ownAlternativeCosts(cardId, def.alternativeCost, caster)] : [];
     // Flashback, escape, foretell, disturb, a suspend or cascade cast are
@@ -49553,6 +49596,9 @@ export class Game {
       out.push({ mana: "{0}", payLifeManaValue: true });
     }
     if (staticLife === "may") out.push({ mana: "{0}", payLifeManaValue: true });
+    // Bolas's Citadel beside Future Sight: cast under the Citadel's
+    // permission, for life (see above).
+    if (libraryTopPayLife) out.push({ mana: "{0}", payLifeManaValue: true });
     return out;
   }
 

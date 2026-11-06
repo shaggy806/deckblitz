@@ -16040,6 +16040,21 @@ describe("what a doubled trigger's cause is, and playing from the top by type", 
     });
   });
 
+  it("reads Bolas's Citadel whole: spells off the top for life", () => {
+    const citadel = parseFace({
+      name: "Bolas's Citadel",
+      type_line: "Legendary Artifact",
+      mana_cost: "{3}{B}{B}{B}",
+      oracle_text:
+        "You may look at the top card of your library any time.\nYou may play lands and cast spells from the top of your library. If you cast a spell this way, pay life equal to its mana value rather than pay its mana cost.\n{T}, Sacrifice ten nonland permanents: Each opponent loses 10 life.",
+    });
+    expect(citadel.static[0]).toMatchObject({
+      playFromLibraryTop: { type: "land" },
+      castFromLibraryTop: { filter: {}, payLifeManaValue: true },
+    });
+    expect(citadel.complete).toBe(true);
+  });
+
   it("reads Krang's draw", () => {
     const krang = parseFace({
       name: "Krang, the All-Powerful",
