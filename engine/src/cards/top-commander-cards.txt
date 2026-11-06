@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4623 already implemented / 377 missing (marks refreshed 2026-11-05)
+4626 already implemented / 374 missing (marks refreshed 2026-11-06)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -219,7 +219,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   220  Ornithopter of Paradise                  {2}              Artifact Creature — Thopter
 [x]   221  Rhythm of the Wild                       {1}{R}{G}        Enchantment
 [x]   222  Karplusan Forest                         {0}              Land
-[ ]   223  Animate Dead                             {1}{B}           Enchantment — Aura
+[x]   223  Animate Dead                             {1}{B}           Enchantment — Aura
 [x]   224  Terminate                                {B}{R}           Instant
 [x]   225  Pitiless Plunderer                       {3}{B}           Creature — Human Pirate
 [x]   226  Rockfall Vale                            {0}              Land
@@ -1010,7 +1010,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1014  Talisman of Unity                        {2}              Artifact
 [x]  1015  Rewind                                   {2}{U}{U}        Instant
 [x]  1016  Managorger Hydra                         {2}{G}           Creature — Hydra
-[ ]  1017  Necromancy                               {2}{B}           Enchantment
+[x]  1017  Necromancy                               {2}{B}           Enchantment
 [x]  1018  Arasta of the Endless Web                {2}{G}{G}        Legendary Enchantment Creature — Spider
 [x]  1019  Nyxbloom Ancient                         {4}{G}{G}{G}     Enchantment Creature — Elemental
 [x]  1020  Bloodghast                               {B}{B}           Creature — Vampire Spirit
@@ -2274,7 +2274,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2281  Fighter Class                            {R}{W}           Enchantment — Class
 [x]  2282  Glittering Stockpile                     {2}{R}           Artifact — Treasure
 [x]  2283  Thrumming Stone                          {5}              Legendary Artifact
-[ ]  2284  Dance of the Dead                        {1}{B}           Enchantment — Aura
+[x]  2284  Dance of the Dead                        {1}{B}           Enchantment — Aura
 [x]  2285  Blacksmith's Skill                       {W}              Instant
 [x]  2286  Agent of the Iron Throne                 {2}{B}           Legendary Enchantment — Background
 [x]  2287  Neoform                                  {G}{U}           Sorcery
