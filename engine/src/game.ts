@@ -49425,9 +49425,18 @@ export class Game {
   }
 
   /** The static abilities an object of {@link staticSourceIds} has: a
-   * permanent's text, or an emblem's (`EmblemState`, not its definition). */
+   * permanent's text, then those granted it (`grantedStatics` — Caduceus,
+   * Staff of Hermes's equipped creature's "Prevent all damage that would be
+   * dealt to this creature", working from that creature, rule 113.10), or an
+   * emblem's (`EmblemState`, not its definition). So every scan through here
+   * — damage replacements and prevention, cost modifications, play
+   * permissions, prohibitions — reads a granted static as its own. */
   private staticsOfSource(source: GameObject): readonly StaticAbility[] {
-    if (source.kind !== "emblem") return this.registry.get(rulesTextName(source)).static;
+    if (source.kind !== "emblem") {
+      const own = this.registry.get(rulesTextName(source)).static;
+      const granted = grantedStatics(this.state, this.registry, source);
+      return granted.length === 0 ? own : [...own, ...granted];
+    }
     const emblem = this.state.emblems.find((e) => e.object === source.id);
     return emblem === undefined ? [] : staticsOfEmblem(emblem);
   }
@@ -51723,11 +51732,17 @@ export class Game {
     const applying: { readonly by: GameObject; readonly r: DamageMultiplierReplacement; readonly key: string }[] = [];
     for (const id of this.staticSourceIds()) {
       const object = this.state.objects[id];
-      if (object === undefined || hasLostAbilities(this.state, this.registry,object)) continue;
-      this.staticsOfSource(object).forEach((ability, index) => {
+      if (object === undefined) continue;
+      // One that has lost its abilities keeps those granted it after the
+      // loss (rule 613.7 — `grantedStatics` judges that), numbered after
+      // its own as `staticsOfSource` lists them.
+      const lost = hasLostAbilities(this.state, this.registry, object);
+      const statics = lost ? grantedStatics(this.state, this.registry, object) : this.staticsOfSource(object);
+      const from = lost ? this.registry.get(rulesTextName(object)).static.length : 0;
+      statics.forEach((ability, i) => {
         const r = ability.replacement;
         if (r === undefined || r.event !== "would-deal-damage") return;
-        const key = `${id}:${object.zoneChangeCount ?? 0}:${index}`;
+        const key = `${id}:${object.zoneChangeCount ?? 0}:${from + i}`;
         if (applied.statics.includes(key)) return;
         if (!this.staticActive(object, ability)) return;
         if (!this.damageReplacementReaches(r, object, source, target, combat, sourceLastKnown)) return;

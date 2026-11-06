@@ -2841,8 +2841,10 @@ export interface StaticAbility {
    * the grant takes it away (613.7). Read through `grantedStatics`, so every
    * scan that reads a `grant-static`'s statics reads these: P/T, keywords and
    * restrictions in the layer fold, "you can't lose the game", untap
-   * restrictions and block rules. Not a layer-4 part (no card grants one), a
-   * cost modification, or another `grantsStatic`.
+   * restrictions and block rules, and (through `Game.staticsOfSource`) damage
+   * replacements and prevention (Caduceus, Staff of Hermes), cost
+   * modifications, play permissions and prohibitions. Not a layer-4 part (no
+   * card grants one), or another `grantsStatic`.
    */
   readonly grantsStatic?: readonly StaticAbility[];
   /**

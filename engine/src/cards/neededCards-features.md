@@ -426,6 +426,18 @@ when its own timing allows, the ruling), Chandra, Heart of Fire's "you may
 cast them this turn" `{ duration: "end-of-turn" }`. The scaffolder reads both
 lines (`searchExileCastLaterAt`). Proving cards: Ugin, Eye of the Storms;
 Chandra, Heart of Fire. Key: effect:search-finds-castable-this-turn.
+### A granted static that replaces or prevents — built 2026-11-05
+
+By EDHREC rank: Caduceus, Staff of Hermes (1438). `Game.staticsOfSource` now
+lists a permanent's granted statics (`grantedStatics`) after its own, so every
+scan through it — damage replacements and prevention (`damageSteps`), cost
+modifications, play permissions, prohibitions — reads a granted static as the
+object's own, working from it (rule 113.10). `damageSteps` also reads the
+statics granted a permanent after it lost its abilities (613.7). Proving card:
+Caduceus, Staff of Hermes. Key: static:granted-static-replacement. Acolyte of
+Bahamut (`static:granted-static-cost-modification`) likely runs now through
+the same path but wasn't tested.
+
 ### A divided total read from X beyond plain X — built 2026-11-05
 
 By EDHREC rank: Shatterskull Smashing (1413). A spell's `divided.total` that
