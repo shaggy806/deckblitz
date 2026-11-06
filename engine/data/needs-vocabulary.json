@@ -15924,6 +15924,41 @@
    "family": "effect:delayed-trigger-extensions",
    "description": "A delayed trigger sacrificing every card a mass graveyard return put onto the battlefield.",
    "example": "Push the Limit: a delayed trigger's about over several objects from a mass return is unproven."
+  },
+  "static:grant-beam-me-up-to-graveyard": {
+   "family": "static:grant-to-cards-outside-battlefield",
+   "description": "A static granting Beam me up to cards in your graveyard, its cost their mana cost, with its own timing and returned-creature limits.",
+   "example": "Scotty, Miracle Worker: beam me up exists only as a card's own flashback-style keyword; nothing grants it to graveyard cards, limits it to your main phase or excludes the returned creature."
+  },
+  "effect:draw-former-controller-of-target": {
+   "family": "effect:control-change-extensions",
+   "description": "An effect after a control change naming the target's controller from before it, not its current one.",
+   "example": "Rules of Acquisition: \"that opponent draws three cards\" after you gain control; `controllerOfTarget` reads the new controller, you."
+  },
+  "static:granted-static-land-permissions": {
+   "family": "static:grant-static-ability",
+   "description": "A granted static's extra land drop (`extraLandsPerTurn`) counted by the land-play limit, which reads only printed statics.",
+   "example": "Nog, Ambitious Cadet: \"you may play an additional land on each of your turns\" granted by its ability; `maxLandsFor` ignores granted statics."
+  },
+  "effect:each-opponent-exiles-top-you-choose-one-playable": {
+   "family": "effect:impulse-exile-other-libraries",
+   "description": "Each opponent exiles their top X; you choose one land card from each player's own exiled cards and may play it.",
+   "example": "Ensign Pavel Chekov: no choice is kept to one player's own exiled cards within a for-each."
+  },
+  "static:cant-be-beamed-up": {
+   "family": "mechanic:beam-me-up",
+   "description": "A static stopping a permanent being returned to hand to pay a Beam me up cost.",
+   "example": "Marooned: the enchanted permanent can't be returned for beam me up."
+  },
+  "amount:count-per-n-rounded-down": {
+   "family": "effect:amount-new-variants",
+   "description": "An amount of one per N of a count, rounded down (\"a card for every five\").",
+   "example": "Sarek, Federation Ambassador: a card for every five creature types among non-Borg creatures you control."
+  },
+  "condition:exiled-with-source-share-card-type": {
+   "family": "condition:exiled-with-source-count",
+   "description": "A condition that every card exiled with the source shares a card type.",
+   "example": "All Good Things...: \"if all cards exiled with it share a card type\" (zero or one card awaits rulings)."
   }
  },
  "groups": [

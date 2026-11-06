@@ -1,0 +1,1151 @@
+{
+ "batch": "B267",
+ "status": "done",
+ "ranks": "Star Trek (TRK, out 2026-11-13; preview cards from the snapshot, no rulings yet): the rest of the set, the 162 cards below its top 120 by EDHREC rank (three card-author agents of 54, the lead four Federation cards after fixing the creature-type count)",
+ "authored": [
+  {
+   "name": "A Good Day to Die",
+   "files": [
+    "engine/src/cards/pool/a-good-day-to-die.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Academy Instructor",
+   "files": [
+    "engine/src/cards/pool/academy-instructor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Andoria",
+   "files": [
+    "engine/src/cards/pool/andoria.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Andromedan Automatons",
+   "files": [
+    "engine/src/cards/pool/andromedan-automatons.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Armus, Skin of Evil",
+   "files": [
+    "engine/src/cards/pool/armus-skin-of-evil.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Artificial Anomaly",
+   "files": [
+    "engine/src/cards/pool/artificial-anomaly.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Assembly Specialist",
+   "files": [
+    "engine/src/cards/pool/assembly-specialist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Astute Terraformer",
+   "files": [
+    "engine/src/cards/pool/astute-terraformer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Automated Warfare System",
+   "files": [
+    "engine/src/cards/pool/automated-warfare-system.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Bat'leth",
+   "files": [
+    "engine/src/cards/pool/batleth.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Battle-Scarred Survivalist",
+   "files": [
+    "engine/src/cards/pool/battle-scarred-survivalist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Beckett Mariner, Impetuous Ensign",
+   "files": [
+    "engine/src/cards/pool/beckett-mariner-impetuous-ensign.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blastoneuron",
+   "files": [
+    "engine/src/cards/pool/blastoneuron.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cantankerous Captain",
+   "files": [
+    "engine/src/cards/pool/cantankerous-captain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Captain Jonathan Archer",
+   "files": [
+    "engine/src/cards/pool/captain-jonathan-archer.ts",
+    "engine/src/cards/tokens/porthos.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Captain's Tutelage",
+   "files": [
+    "engine/src/cards/pool/captains-tutelage.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cardassia Prime",
+   "files": [
+    "engine/src/cards/pool/cardassia-prime.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cetacean Ops",
+   "files": [
+    "engine/src/cards/pool/cetacean-ops.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cha'DIch Investigator",
+   "files": [
+    "engine/src/cards/pool/chadich-investigator.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cleveland Booker, Empath",
+   "files": [
+    "engine/src/cards/pool/cleveland-booker-empath.ts",
+    "engine/src/cards/tokens/2-2-red-green-worm-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cloak and Phaser",
+   "files": [
+    "engine/src/cards/pool/cloak-and-phaser.ts",
+    "engine/src/cards/tokens/romulan-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cloistered Telepath",
+   "files": [
+    "engine/src/cards/pool/cloistered-telepath.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Cold-Blooded Crew",
+   "files": [
+    "engine/src/cards/pool/cold-blooded-crew.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Combadge",
+   "files": [
+    "engine/src/cards/pool/combadge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Commander Raffi Musiker",
+   "files": [
+    "engine/src/cards/pool/commander-raffi-musiker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Common Goal",
+   "files": [
+    "engine/src/cards/pool/common-goal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Constable Odo",
+   "files": [
+    "engine/src/cards/pool/constable-odo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Culber and Stamets, Star-Crossed",
+   "files": [
+    "engine/src/cards/pool/culber-and-stamets-star-crossed.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dahar Master",
+   "files": [
+    "engine/src/cards/pool/dahar-master.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dathon and Picard at El-Adrel",
+   "files": [
+    "engine/src/cards/pool/dathon-and-picard-at-el-adrel.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "David and Carol Marcus, Creators",
+   "files": [
+    "engine/src/cards/pool/david-and-carol-marcus-creators.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "De-evolve",
+   "files": [
+    "engine/src/cards/pool/de-evolve.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dominion Assault Force",
+   "files": [
+    "engine/src/cards/pool/dominion-assault-force.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dominion Infiltration",
+   "files": [
+    "engine/src/cards/pool/dominion-infiltration.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "DOT-7 Repair Squad",
+   "files": [
+    "engine/src/cards/pool/dot-7-repair-squad.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dr. Leonard \"Bones\" McCoy",
+   "files": [
+    "engine/src/cards/pool/dr-leonard-bones-mccoy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "D'Vana Tendi, Optimistic Ensign",
+   "files": [
+    "engine/src/cards/pool/dvana-tendi-optimistic-ensign.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Eject the Warp Core",
+   "files": [
+    "engine/src/cards/pool/eject-the-warp-core.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Emergency Holographic Crew",
+   "files": [
+    "engine/src/cards/pool/emergency-holographic-crew.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Emergency Medical Hologram",
+   "files": [
+    "engine/src/cards/pool/emergency-medical-hologram.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Encounter the Unknown",
+   "files": [
+    "engine/src/cards/pool/encounter-the-unknown.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Erica Ortegas, Plucky Pilot",
+   "files": [
+    "engine/src/cards/pool/erica-ortegas-plucky-pilot.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Federation Field Medic",
+   "files": [
+    "engine/src/cards/pool/federation-field-medic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ferenginar",
+   "files": [
+    "engine/src/cards/pool/ferenginar.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Free Borg Revolutionaries",
+   "files": [
+    "engine/src/cards/pool/free-borg-revolutionaries.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Fugitive Listener",
+   "files": [
+    "engine/src/cards/pool/fugitive-listener.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gaseous Anomaly",
+   "files": [
+    "engine/src/cards/pool/gaseous-anomaly.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "General Chang, Cold Warrior",
+   "files": [
+    "engine/src/cards/pool/general-chang-cold-warrior.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Genesis Effect",
+   "files": [
+    "engine/src/cards/pool/genesis-effect.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ghost of Illyria",
+   "files": [
+    "engine/src/cards/pool/ghost-of-illyria.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Gowron, Eager for Battle",
+   "files": [
+    "engine/src/cards/pool/gowron-eager-for-battle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grand Nagus Zek",
+   "files": [
+    "engine/src/cards/pool/grand-nagus-zek.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gray and Adira, Forever Joined",
+   "files": [
+    "engine/src/cards/pool/gray-and-adira-forever-joined.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Guidance Failure",
+   "files": [
+    "engine/src/cards/pool/guidance-failure.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gul Dukat, Colonial Prefect",
+   "files": [
+    "engine/src/cards/pool/gul-dukat-colonial-prefect.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gwyndala, the Progeny",
+   "files": [
+    "engine/src/cards/pool/gwyndala-the-progeny.ts",
+    "engine/src/cards/tokens/neuroflux-heirloom-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "He's Dead, Jim",
+   "files": [
+    "engine/src/cards/pool/hes-dead-jim.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Highly Illogical",
+   "files": [
+    "engine/src/cards/pool/highly-illogical.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Holo-Engineer",
+   "files": [
+    "engine/src/cards/pool/holo-engineer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hologram Janeway",
+   "files": [
+    "engine/src/cards/pool/hologram-janeway.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hologram Stalker",
+   "files": [
+    "engine/src/cards/pool/hologram-stalker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Horta",
+   "files": [
+    "engine/src/cards/pool/horta.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Hoshi Sato, Exolinguist",
+   "files": [
+    "engine/src/cards/pool/hoshi-sato-exolinguist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Humpback Whales",
+   "files": [
+    "engine/src/cards/pool/humpback-whales.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "I'm a Doctor, Not a . . .",
+   "files": [
+    "engine/src/cards/pool/im-a-doctor-not-a.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "In the Pale Moonlight",
+   "files": [
+    "engine/src/cards/pool/in-the-pale-moonlight.ts",
+    "engine/src/cards/tokens/romulan-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Infinite Diversity",
+   "files": [
+    "engine/src/cards/pool/infinite-diversity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Interstellar Effigy",
+   "files": [
+    "engine/src/cards/pool/interstellar-effigy.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Jake Sisko, War Correspondent",
+   "files": [
+    "engine/src/cards/pool/jake-sisko-war-correspondent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Khaaaaaaaaaaaannn!",
+   "files": [
+    "engine/src/cards/pool/khaaaaaaaaaaaannn.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Khan, Despot by Design",
+   "files": [
+    "engine/src/cards/pool/khan-despot-by-design.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kirk, Commanding Officer",
+   "files": [
+    "engine/src/cards/pool/kirk-commanding-officer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "La'An Noonien-Singh, Security",
+   "files": [
+    "engine/src/cards/pool/laan-noonien-singh-security.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lore, Positronic Provocateur",
+   "files": [
+    "engine/src/cards/pool/lore-positronic-provocateur.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "L'Rell, Fierce Visionary",
+   "files": [
+    "engine/src/cards/pool/lrell-fierce-visionary.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "MACO Strike Team",
+   "files": [
+    "engine/src/cards/pool/maco-strike-team.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mirror Universe Intrusion",
+   "files": [
+    "engine/src/cards/pool/mirror-universe-intrusion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Moopsy",
+   "files": [
+    "engine/src/cards/pool/moopsy.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Munitions Enthusiast",
+   "files": [
+    "engine/src/cards/pool/munitions-enthusiast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Neelix, Moral Support",
+   "files": [
+    "engine/src/cards/pool/neelix-moral-support.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Orion",
+   "files": [
+    "engine/src/cards/pool/orion.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pah-Wraith",
+   "files": [
+    "engine/src/cards/pool/pah-wraith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Perils of the Past",
+   "files": [
+    "engine/src/cards/pool/perils-of-the-past.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Pet Sehlat",
+   "files": [
+    "engine/src/cards/pool/pet-sehlat.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Phlox, Unorthodox Doctor",
+   "files": [
+    "engine/src/cards/pool/phlox-unorthodox-doctor.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Photosynthetic Physician",
+   "files": [
+    "engine/src/cards/pool/photosynthetic-physician.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Planetary Bombardment",
+   "files": [
+    "engine/src/cards/pool/planetary-bombardment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Planetary Patrol",
+   "files": [
+    "engine/src/cards/pool/planetary-patrol.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Plasma Cascade",
+   "files": [
+    "engine/src/cards/pool/plasma-cascade.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Qo'noS",
+   "files": [
+    "engine/src/cards/pool/qonos.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Ravenous Cosmozoan",
+   "files": [
+    "engine/src/cards/pool/ravenous-cosmozoan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Red Alert!",
+   "files": [
+    "engine/src/cards/pool/red-alert.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Relentless Drednok",
+   "files": [
+    "engine/src/cards/pool/relentless-drednok.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rogue Artificial Intelligence",
+   "files": [
+    "engine/src/cards/pool/rogue-artificial-intelligence.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rok-Tahk, Budding Scientist",
+   "files": [
+    "engine/src/cards/pool/rok-tahk-budding-scientist.ts",
+    "engine/src/cards/tokens/murf-token.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Romulus",
+   "files": [
+    "engine/src/cards/pool/romulus.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rutherford, Upgraded Ensign",
+   "files": [
+    "engine/src/cards/pool/rutherford-upgraded-ensign.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Saavik, Stoic Student",
+   "files": [
+    "engine/src/cards/pool/saavik-stoic-student.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Salt Vampire",
+   "files": [
+    "engine/src/cards/pool/salt-vampire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sarcophagus, Ship of the Dead",
+   "files": [
+    "engine/src/cards/pool/sarcophagus-ship-of-the-dead.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Saru, Unthreatened",
+   "files": [
+    "engine/src/cards/pool/saru-unthreatened.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Savvy Profiteer",
+   "files": [
+    "engine/src/cards/pool/savvy-profiteer.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sela, Tal Shiar Paradox",
+   "files": [
+    "engine/src/cards/pool/sela-tal-shiar-paradox.ts",
+    "engine/src/cards/tokens/romulan-token.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Shuttle Ace",
+   "files": [
+    "engine/src/cards/pool/shuttle-ace.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Sickbay",
+   "files": [
+    "engine/src/cards/pool/sickbay.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Silicate Surveyor",
+   "files": [
+    "engine/src/cards/pool/silicate-surveyor.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spatial Anomaly",
+   "files": [
+    "engine/src/cards/pool/spatial-anomaly.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Species 8472",
+   "files": [
+    "engine/src/cards/pool/species-8472.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spock, Always Your Friend",
+   "files": [
+    "engine/src/cards/pool/spock-always-your-friend.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Starfleet Security",
+   "files": [
+    "engine/src/cards/pool/starfleet-security.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Starfleet Spanner Jockey",
+   "files": [
+    "engine/src/cards/pool/starfleet-spanner-jockey.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Storied Veteran",
+   "files": [
+    "engine/src/cards/pool/storied-veteran.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stray from History",
+   "files": [
+    "engine/src/cards/pool/stray-from-history.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Subcommander T'Pol",
+   "files": [
+    "engine/src/cards/pool/subcommander-tpol.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Suus Mahna Practitioner",
+   "files": [
+    "engine/src/cards/pool/suus-mahna-practitioner.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sylvia Tilly, Joy of Discovery",
+   "files": [
+    "engine/src/cards/pool/sylvia-tilly-joy-of-discovery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tal Shiar Analyst",
+   "files": [
+    "engine/src/cards/pool/tal-shiar-analyst.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tal Shiar Operative",
+   "files": [
+    "engine/src/cards/pool/tal-shiar-operative.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Targ Wrangler",
+   "files": [
+    "engine/src/cards/pool/targ-wrangler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tasha Yar, Out of Time",
+   "files": [
+    "engine/src/cards/pool/tasha-yar-out-of-time.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Temporal Anomaly",
+   "files": [
+    "engine/src/cards/pool/temporal-anomaly.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Temporal Conqueror",
+   "files": [
+    "engine/src/cards/pool/temporal-conqueror.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tenacious Drone",
+   "files": [
+    "engine/src/cards/pool/tenacious-drone.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Test of Courage",
+   "files": [
+    "engine/src/cards/pool/test-of-courage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Test of Identity",
+   "files": [
+    "engine/src/cards/pool/test-of-identity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Destruction of Praxis",
+   "files": [
+    "engine/src/cards/pool/the-destruction-of-praxis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Doctor, EMH",
+   "files": [
+    "engine/src/cards/pool/the-doctor-emh.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Duras Sisters",
+   "files": [
+    "engine/src/cards/pool/the-duras-sisters.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "The Inner Light",
+   "files": [
+    "engine/src/cards/pool/the-inner-light.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Measure of a Man",
+   "files": [
+    "engine/src/cards/pool/the-measure-of-a-man.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Naked Time",
+   "files": [
+    "engine/src/cards/pool/the-naked-time.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Traveler",
+   "files": [
+    "engine/src/cards/pool/the-traveler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Those Old Scientists",
+   "files": [
+    "engine/src/cards/pool/those-old-scientists.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Tricorder",
+   "files": [
+    "engine/src/cards/pool/tricorder.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Type-2 Phaser",
+   "files": [
+    "engine/src/cards/pool/type-2-phaser.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "U.S.S. Cerritos, Following Up",
+   "files": [
+    "engine/src/cards/pool/u-s-s-cerritos-following-up.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Una Chin-Riley, Number One",
+   "files": [
+    "engine/src/cards/pool/una-chin-riley-number-one.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Unexplored Territory",
+   "files": [
+    "engine/src/cards/pool/unexplored-territory.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Vash, Freelance Archaeologist",
+   "files": [
+    "engine/src/cards/pool/vash-freelance-archaeologist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vengeance Mission",
+   "files": [
+    "engine/src/cards/pool/vengeance-mission.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vexing Drone",
+   "files": [
+    "engine/src/cards/pool/vexing-drone.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vulcan Mind-Meld",
+   "files": [
+    "engine/src/cards/pool/vulcan-mind-meld.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Warp Speed",
+   "files": [
+    "engine/src/cards/pool/warp-speed.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wesley Crusher, Starfleet Cadet",
+   "files": [
+    "engine/src/cards/pool/wesley-crusher-starfleet-cadet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Worf, Honor-Bound Warrior",
+   "files": [
+    "engine/src/cards/pool/worf-honor-bound-warrior.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Xenobotanist",
+   "files": [
+    "engine/src/cards/pool/xenobotanist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Xindi Surveyors",
+   "files": [
+    "engine/src/cards/pool/xindi-surveyors.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Year of Hell",
+   "files": [
+    "engine/src/cards/pool/year-of-hell.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zero, Incorporeal Sensate",
+   "files": [
+    "engine/src/cards/pool/zero-incorporeal-sensate.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "The City on the Edge of Forever",
+   "needs": [
+    "static:permanents-cant-phase-in"
+   ],
+   "why": "Chapter I's Human token has \"Permanents can't phase in\"; the engine has nothing for it."
+  },
+  {
+   "name": "Kai Winn, Faithless Leader",
+   "needs": [
+    "trigger:activates-mana-ability"
+   ],
+   "why": "`activates-ability` never fires for a mana ability, and its source filter sees only battlefield permanents."
+  },
+  {
+   "name": "Scotty, Miracle Worker",
+   "needs": [
+    "static:grant-beam-me-up-to-graveyard"
+   ],
+   "why": "Beam me up is only a card's own keyword: nothing grants it to graveyard cards at their mana cost, in your main phase, excluding Scotty as the returned creature."
+  },
+  {
+   "name": "Rules of Acquisition",
+   "needs": [
+    "effect:draw-former-controller-of-target"
+   ],
+   "why": "\"That opponent draws three cards\" after you gain control: `controllerOfTarget` reads the new controller; drawing first would reorder draw triggers."
+  },
+  {
+   "name": "Nog, Ambitious Cadet",
+   "needs": [
+    "static:granted-static-land-permissions"
+   ],
+   "why": "A granted static's `extraLandsPerTurn` does nothing: `maxLandsFor` reads only printed statics."
+  },
+  {
+   "name": "Ensign Pavel Chekov",
+   "needs": [
+    "effect:each-opponent-exiles-top-you-choose-one-playable"
+   ],
+   "why": "Each opponent exiles their top X and you choose a land card among each one's own exiled cards, playable while exiled: no choice is kept to one player's cards."
+  },
+  {
+   "name": "The Caretaker",
+   "needs": [
+    "amount:dilemmas-faced-this-turn"
+   ],
+   "why": "\"If you faced a dilemma this turn\" has no condition; only the faces-dilemma trigger exists."
+  },
+  {
+   "name": "First Contact",
+   "needs": [
+    "condition:first-spell-cast-this-game"
+   ],
+   "why": "No condition for the first spell you've cast this game."
+  },
+  {
+   "name": "Marooned",
+   "needs": [
+    "static:cant-be-beamed-up"
+   ],
+   "why": "Nothing stops the enchanted permanent being returned for a beam me up cost."
+  },
+  {
+   "name": "Miles O'Brien, Transporter Ops",
+   "needs": [
+    "condition:permanent-put-into-hand-from-battlefield-this-turn"
+   ],
+   "why": "No turn-history record of a permanent returned to its owner's hand: \"left\" is by controller and doesn't say where it went."
+  },
+  {
+   "name": "Sarek, Federation Ambassador",
+   "needs": [
+    "amount:count-per-n-rounded-down",
+    "effect:drawn-this-way-count"
+   ],
+   "why": "\"A card for every five\" creature types has no amount; \"if you draw three or more cards this way\" needs the effect's own draw count."
+  },
+  {
+   "name": "All Good Things...",
+   "needs": [
+    "condition:exiled-with-source-share-card-type"
+   ],
+   "why": "No condition for \"all cards exiled with it share a card type\"; zero or one exiled card awaits rulings."
+  },
+  {
+   "name": "Daniels, Temporal Agent",
+   "needs": [
+    "cost:put-self-on-library-bottom"
+   ],
+   "why": "No activated-ability cost puts the card from the graveyard on the bottom of its owner's library."
+  }
+ ]
+}
