@@ -2241,16 +2241,26 @@ export class Game {
       attackTaxOf: (defender) => this.attackTaxOn(defender),
       attackTaxBudget: (player, attackers) => this.attackTaxBudget(player, attackers),
       attackTaxLifeBudget: (player) => (this.canPayLife(player, 1) ? this.state.players[player].life : 0),
-      whyCannotPayAttackTax: (player, declarations) => {
+      whyCannotPayAttackTax: (player, declarations, phyrexianLife) => {
         const owed = this.attackCostParts(declarations);
         if (!this.attackCostPartsPayable(player, owed)) {
           const { tax, count } = owed[0];
           return `${player} can't ${tax.do} the ${count === 1 ? tax.noun : `${count} ${tax.noun}s`} it costs to attack`;
         }
-        const { generic, life } = this.attackTaxTotal(declarations);
-        if (generic === 0 && life === 0) return null;
-        const payment = generic === 0 ? null : this.attackTaxPayment(player, declarations, generic);
-        if (generic > 0 && payment === null) return `${player} can't pay the {${generic}} it costs to attack`;
+        const { life, phyrexian, mana } = this.attackTaxTotal(declarations);
+        // The Phyrexian pips paid in life (Norn's Annex): the attacker's
+        // choice, pip by pip (rule 107.4f), no more than there are.
+        const pips = phyrexian.length === 0 ? 0 : phyrexian.split("{").length - 1;
+        if (phyrexianLife !== undefined && (!Number.isInteger(phyrexianLife) || phyrexianLife < 0 || phyrexianLife > pips)) {
+          return `${player} has ${pips} Phyrexian mana to pay to attack, not ${phyrexianLife}`;
+        }
+        if (mana === "" && life === 0) return null;
+        if (phyrexianLife !== undefined && phyrexianLife > 0 && !this.canPayLife(player, life + 2 * phyrexianLife)) {
+          return `${player} can't pay ${2 * phyrexianLife} life for Phyrexian mana to attack`;
+        }
+        const payment =
+          mana === "" ? null : this.withLifeChoice(phyrexianLife, () => this.attackTaxPayment(player, declarations, mana));
+        if (mana !== "" && payment === null) return `${player} can't pay the ${mana} it costs to attack`;
         // A mana source paying in life draws on the same total (rule 119.4).
         return this.canPayLife(player, life + (payment?.life ?? 0))
           ? null
@@ -2294,7 +2304,7 @@ export class Game {
       applyPutOnBottom: (player, cards) => this.applyPutOnBottom(player, cards),
       applyMulliganHandAbility: (player, card) => this.applyMulliganHandAbility(player, card),
       applyAssignCombatDamage: (p, a, forAll, unblocked) => this.applyAssignCombatDamage(p, a, forAll, unblocked),
-      applyAttackerDeclarations: (p, d) => this.applyAttackerDeclarations(p, d),
+      applyAttackerDeclarations: (p, d, life) => this.applyAttackerDeclarations(p, d, life),
       applyBlockerDeclarations: (p, b) => this.applyBlockerDeclarations(p, b),
       applyChooseTargets: (p, t, d) => this.applyChooseTargets(p, t, d),
       applyCastNow: (p, cast) => this.applyCastNow(p, cast),
@@ -8063,14 +8073,17 @@ export class Game {
    * being protected controls, and every `attackTax` player effect, that covers
    * this defender, added up — two Ghostly Prisons are {4} a creature. A
    * planeswalker isn't "you" (Ghostly Prison's ruling), so what covers it is
-   * only what says so; a battle is neither. */
-  private attackTaxOn(defender: PlayerId | ObjectId): { generic: number; life: number } {
+   * only what says so; a battle is neither. `phyrexian` is the Phyrexian
+   * pips it costs as well, as symbols — Norn's Annex's "{W/P}", two of them
+   * under two Annexes — each paid with its mana or 2 life (rule 107.4f). */
+  private attackTaxOn(defender: PlayerId | ObjectId): { generic: number; life: number; phyrexian: string } {
     const isPlayer = this.state.players[defender as PlayerId] !== undefined;
     const guarded = isPlayer ? (defender as PlayerId) : this.state.objects[defender as ObjectId]?.controller;
     const covered = (covers: "you" | "you-and-planeswalkers" | "planeswalkers" | "all", owner: PlayerId): boolean =>
       attackCovers(this.state, this.registry, covers, owner, defender);
     let generic = 0;
     let life = 0;
+    let phyrexian = "";
     if (guarded !== undefined) {
       for (const { source, ability } of this.activeStaticsOf(guarded, (a) => a.attackTax !== undefined)) {
         const tax = ability.attackTax!;
@@ -8078,6 +8091,7 @@ export class Game {
         const amount = tax.generic ?? 0;
         generic += typeof amount === "number" ? amount : countValue(amount, this.state, this.registry, source.controller);
         life += tax.life ?? 0;
+        if (tax.phyrexian !== undefined) phyrexian += `{${tax.phyrexian}/P}`;
       }
     }
     for (const { owner, attackTax } of this.state.playerEffects ?? []) {
@@ -8085,25 +8099,32 @@ export class Game {
       generic += attackTax.generic;
       life += attackTax.life;
     }
-    return { generic, life };
+    return { generic, life, phyrexian };
   }
 
   /** What `declarations` cost to attack in all (rule 508.1h): each creature's
    * tax for the defender it attacks and its own (`creatureAttackTax`), a token
-   * stack's per token. */
-  private attackTaxTotal(declarations: readonly AttackerDeclaration[]): { generic: number; life: number } {
-    const total = { generic: 0, life: 0 };
+   * stack's per token. `mana` is the whole mana cost as symbols, the
+   * Phyrexian pips (Norn's Annex) beside the generic. */
+  private attackTaxTotal(declarations: readonly AttackerDeclaration[]): {
+    generic: number;
+    life: number;
+    phyrexian: string;
+    mana: string;
+  } {
+    const total = { generic: 0, life: 0, phyrexian: "" };
     for (const { attacker, defender, count } of declarations) {
       const on = this.attackTaxOn(defender);
       const own = creatureAttackTax(this.state, this.registry, attacker, defender);
       const generic = on.generic + own.generic;
       const life = on.life + own.life;
-      if (generic === 0 && life === 0) continue;
+      if (generic === 0 && life === 0 && on.phyrexian === "") continue;
       const creatures = count ?? this.state.objects[attacker]?.stackCount ?? 1;
       total.generic += generic * creatures;
       total.life += life * creatures;
+      total.phyrexian += on.phyrexian.repeat(creatures);
     }
-    return total;
+    return { ...total, mana: `${total.generic > 0 ? `{${total.generic}}` : ""}${total.phyrexian}` };
   }
 
   /** What `declarations` cost to attack in permanents (rule 508.1h —
@@ -8144,12 +8165,12 @@ export class Game {
   private attackTaxPayment(
     player: PlayerId,
     declarations: readonly AttackerDeclaration[],
-    total: number,
+    mana: string,
   ): ManaPayment | null {
     const tapping = new Set(
       declarations.map((d) => d.attacker).filter((id) => !this.objHasKeyword(id, "vigilance")),
     );
-    return this.payMana(player, parseManaCost(`{${total}}`), undefined, undefined, null, { withheld: tapping });
+    return this.payMana(player, parseManaCost(mana), undefined, undefined, null, { withheld: tapping });
   }
 
   /** The attack tax `player` can surely pay — see `AttackOffer.attackTax`:
@@ -11708,8 +11729,13 @@ export class Game {
   private whyCannotDeclareAttackers(
     player: PlayerId,
     declarations: readonly AttackerDeclaration[],
+    phyrexianLife?: number,
   ): string | null {
-    return attackers.whyCannot(this.decisionCtx, { type: "declare-attackers", player, attackers: declarations }, player);
+    return attackers.whyCannot(
+      this.decisionCtx,
+      { type: "declare-attackers", player, attackers: declarations, ...(phyrexianLife !== undefined ? { phyrexianLife } : {}) },
+      player,
+    );
   }
 
 
@@ -11725,11 +11751,14 @@ export class Game {
   private applyAttackerDeclarations(
     player: PlayerId,
     declarations: readonly AttackerDeclaration[],
+    /** How many of the attack's Phyrexian pips go in life (Norn's Annex —
+     * the action's `phyrexianLife`); omitted, mana pays what it can. */
+    phyrexianLife?: number,
   ): void {
     // A creature that must attack if able — "attacks each combat if able",
     // goad, encore — is in the declaration, at a defender its controller
     // chose: the validator refuses one that leaves it out (rule 508.1d).
-    const why = this.whyCannotDeclareAttackers(player, declarations);
+    const why = this.whyCannotDeclareAttackers(player, declarations, phyrexianLife);
     if (why !== null) throw new Error(why);
     // "You choose which creatures attack this turn" (Master Warcraft): its
     // chooser names the group, then the active player sends each one, says its
@@ -11849,9 +11878,11 @@ export class Game {
         0,
       ),
     };
-    if (tax.generic > 0) {
-      const payment = this.payMana(player, parseManaCost(`{${tax.generic}}`));
-      if (payment === null) throw new Error(`${player} can't pay the {${tax.generic}} it costs to attack`);
+    if (tax.mana !== "") {
+      // Phyrexian pips (Norn's Annex) as the attacker chose: that many in
+      // life, the rest in mana (rule 107.4f).
+      const payment = this.withLifeChoice(phyrexianLife, () => this.payMana(player, parseManaCost(tax.mana)));
+      if (payment === null) throw new Error(`${player} can't pay the ${tax.mana} it costs to attack`);
       this.executePayment(player, payment);
     }
     if (tax.life > 0) this.changeLife(player, -tax.life);
@@ -43754,8 +43785,8 @@ export class Game {
     return declarations.some(({ attacker }) => {
       const defenders = defendersForAttacker(this.state, this.registry, player, attacker);
       const taxed = defenders.some((defender) => {
-        const { generic, life } = this.attackTaxOn(defender);
-        return generic > 0 || life > 0;
+        const { generic, life, phyrexian } = this.attackTaxOn(defender);
+        return generic > 0 || life > 0 || phyrexian !== "";
       });
       const banding = bandingAbilitiesOf(this.state, this.registry, attacker);
       return (

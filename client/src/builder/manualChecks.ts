@@ -11340,4 +11340,19 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Craw Wurm', 'Hill Giant'] },
     }),
   ),
+  // --- An attack tax in Phyrexian mana (2026-11-06) --------------------------
+  preset(
+    "Norn's Annex: paying its {W/P} with life rather than your Plains",
+    board({
+      you: { bf: ['Plains', 'Grizzly Bears'] },
+      opp: { bf: ["Norn's Annex"] },
+    }),
+  ),
+  preset(
+    "Norn's Annex: two attackers at two Annex players, four players",
+    board({
+      you: { bf: ['Plains', 'Grizzly Bears', 'Hill Giant'] },
+      opp: [{ bf: ["Norn's Annex"] }, {}, { bf: ["Norn's Annex"] }],
+    }),
+  ),
 ]

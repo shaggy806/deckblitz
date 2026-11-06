@@ -53,8 +53,8 @@ import type { DecisionReadCtx } from "./contract.js";
 /** Whether `attacker` attacking `defender` costs nothing at all (rule 508.1d:
  * a creature that must attack isn't obliged to pay to). */
 function attackIsFree(ctx: DecisionReadCtx, attacker: ObjectId, defender: PlayerId | ObjectId): boolean {
-  const { generic, life } = ctx.attackTaxOf(defender);
-  if (generic !== 0 || life !== 0) return false;
+  const { generic, life, phyrexian } = ctx.attackTaxOf(defender);
+  if (generic !== 0 || life !== 0 || phyrexian !== "") return false;
   const own = creatureAttackTax(ctx.state, ctx.registry, attacker, defender);
   return own.generic === 0 && own.life === 0 && own.permanents === undefined;
 }
@@ -108,15 +108,21 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
   const eligible = Object.keys(defendersFor) as ObjectId[];
   const perCreature: Record<string, number> = {};
   const lifePerCreature: Record<string, number> = {};
+  const phyrexianPerCreature: Record<string, string> = {};
   for (const d of defenders) {
-    const { generic, life } = ctx.attackTaxOf(d);
+    const { generic, life, phyrexian } = ctx.attackTaxOf(d);
     if (generic > 0) perCreature[d] = generic;
     if (life > 0) lifePerCreature[d] = life;
+    if (phyrexian !== "") phyrexianPerCreature[d] = phyrexian;
   }
   // What a creature costs on its own (Brainwash, Nils), on top of those.
   const perAttacker = creatureAttackTaxes(ctx.state, ctx.registry, defendersFor);
   const creatureTaxed = Object.keys(perAttacker).length > 0;
+  const phyrexianTaxed = Object.keys(phyrexianPerCreature).length > 0;
+  // A Phyrexian pip may go in life (rule 107.4f), so its offer carries the
+  // life budget too.
   const lifeTaxed =
+    phyrexianTaxed ||
     Object.keys(lifePerCreature).length > 0 ||
     Object.values(perAttacker).some((rates) => Object.values(rates).some((cost) => cost.life > 0));
   const taxed = lifeTaxed || creatureTaxed || Object.keys(perCreature).length > 0;
@@ -193,6 +199,7 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
       ? {
           attackTax: {
             perCreature,
+            ...(phyrexianTaxed ? { phyrexianPerCreature } : {}),
             ...(creatureTaxed ? { perAttacker } : {}),
             budget: ctx.attackTaxBudget(player, eligible),
             ...(lifeTaxed ? { lifePerCreature, lifeBudget: ctx.attackTaxLifeBudget(player) } : {}),
@@ -323,12 +330,12 @@ export const attackers = defineDecision({
     );
     if (badBands !== null) return badBands;
     // The second step pays, once it's been said who goes where.
-    return naming ? null : ctx.whyCannotPayAttackTax(player, action.attackers);
+    return naming ? null : ctx.whyCannotPayAttackTax(player, action.attackers, action.phyrexianLife);
   },
 
   apply: (host, action): void => {
     if (action.type !== "declare-attackers") return;
-    host.applyAttackerDeclarations(action.player, action.attackers);
+    host.applyAttackerDeclarations(action.player, action.attackers, action.phyrexianLife);
   },
 
   // A controller that leaves out a creature that must attack — a bot's

@@ -4720,9 +4720,12 @@ instead (rule 119.4; Sivitri). `covers: "you-and-planeswalkers"` is "you or plan
 control" (Baird), `"planeswalkers"` the planeswalkers alone (Onakke Oathkeeper); a `condition`
 turns it on and off. For a while: the `player-effect` effect's `attackTax` (`generic` and `life`
 as `EffectAmount`s, fixed as it resolves), with `covers: "all"` for "creatures can't attack
-unless …" with no "you" (War Tax: every attack by anyone, its controller's too). Not here yet:
-a Phyrexian tax (Norn's Annex's {W/P}, paying which needs a choice the declaration doesn't
-carry).
+unless …" with no "you" (War Tax: every attack by anyone, its controller's too). `phyrexian:
+"W"` is one {W/P} a creature as well (Norn's Annex; two Annexes two pips): each pip {W} or 2
+life (rule 107.4f), the attacker's choice for each, which the declaration's `phyrexianLife`
+carries (how many in life; the client asks as it does a spell's); omitted, mana pays what it
+can. The offer names the pips (`attackTax.phyrexianPerCreature`), and `withinAttackTax` counts
+each as 2 life against the life budget. A tax for a while has no `phyrexian` yet.
 
 `combatTax: { on, generic, life, perCounter, covers, attacker }` is the same cost on the creatures
 the static's `affects` reaches, where `attackTax` is on attacking a player whatever attacks:

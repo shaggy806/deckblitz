@@ -7558,3 +7558,13 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Shatterskull Smashing: twice X divided when X is 6 or more
 - **Do:** Cast Shatterskull Smashing (its spell face) with X = 6, targeting Bob's Craw Wurm and Hill Giant. Leave the split at 6 each.
 - **Expect:** The division step shares out 12, not 6, and both creatures die.
+
+## An attack tax in Phyrexian mana (2026-11-06)
+
+### Norn's Annex: paying its {W/P} with life rather than your Plains
+- **Do:** Go to combat, attack Bob with Grizzly Bears and confirm. When asked, pick "1 with life (2 life)".
+- **Expect:** The attack bar reads "costs {W/P} to attack". The Bears attack, you go to 38, and your Plains stays untapped.
+
+### Norn's Annex: two attackers at two Annex players, four players
+- **Do:** Go to combat, attack Bob with Grizzly Bears and Dave with Hill Giant, and confirm. When asked, pick "Mana".
+- **Expect:** The bar reads "costs {W/P}{W/P}". Both attack; your Plains taps for one pip and you lose 2 life for the other, going to 38.

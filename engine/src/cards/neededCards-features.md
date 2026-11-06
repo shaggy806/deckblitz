@@ -428,6 +428,20 @@ and again as it resolves. "Each of your main phases" is two entries joined by
 `sameAbilityAs`. No scaffolder template: the line is Carpet's alone. Proving
 card: Carpet of Flowers. Key: condition:this-ability-did-this-turn.
 
+### An attack tax in Phyrexian mana — built 2026-11-06
+
+By EDHREC rank: Norn's Annex (1923). The `attackTax` static's `phyrexian: "W"`
+is one {W/P} a creature attacking what it covers (rule 508.1h), two Annexes two
+pips: each paid with {W} or 2 life (rule 107.4f), the attacker choosing for
+each (its ruling) through `declare-attackers`'s new `phyrexianLife` (how many
+in life), which the client asks with the spells' Phyrexian prompt; omitted,
+mana pays what it can and life the rest. The offer's
+`attackTax.phyrexianPerCreature` names the pips, and `withinAttackTax` counts
+each as 2 life against the life budget. The scaffolder reads "pays {C/P} for
+each …" in `ATTACK_TAX_LINE`. Proving card: Norn's Annex. Key:
+cost:attack-tax-phyrexian-mana. A Phyrexian tax for a while (a
+`player-effect`) and one on a creature (`combatTax`) aren't built.
+
 ### A flicker that returns at its owner's next end step — built 2026-11-05
 
 By EDHREC rank: The Eternal Wanderer (1806). `flicker`'s `returnOnOwnersTurn` with a

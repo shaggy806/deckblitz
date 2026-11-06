@@ -348,10 +348,14 @@ function taxOn(offer: AttackOffer, attacker: ObjectId, defender: string): number
   return (tax?.perCreature[defender] ?? 0) + (tax?.perAttacker?.[attacker]?.[defender]?.generic ?? 0);
 }
 
-/** The life `attacker` attacking `defender` costs under `offer`'s attack tax. */
+/** The life `attacker` attacking `defender` costs under `offer`'s attack tax,
+ * each Phyrexian pip (Norn's Annex) counted as the 2 life it may be paid
+ * with (rule 107.4f): within the life budget, the payment always goes
+ * through, mana paying what it can. */
 function lifeTaxOn(offer: AttackOffer, attacker: ObjectId, defender: string): number {
   const tax = offer.attackTax;
-  return (tax?.lifePerCreature?.[defender] ?? 0) + (tax?.perAttacker?.[attacker]?.[defender]?.life ?? 0);
+  const pips = (tax?.phyrexianPerCreature?.[defender]?.split("{").length ?? 1) - 1;
+  return (tax?.lifePerCreature?.[defender] ?? 0) + (tax?.perAttacker?.[attacker]?.[defender]?.life ?? 0) + 2 * pips;
 }
 
 /** What `attacker` attacking `defender` costs in permanents under `offer`. */

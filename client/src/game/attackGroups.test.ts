@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { attackTaxCost, isOwnDefender } from './attackGroups.ts'
+import { attackTaxCost, isOwnDefender, phyrexianPipCount } from './attackGroups.ts'
 import type { ObjectId } from 'engine/client'
 import type { AttackAssign } from './attackGroups.ts'
 
@@ -18,7 +18,13 @@ describe('isOwnDefender', () => {
 
 describe('attackTaxCost', () => {
   it('is nothing without a tax', () => {
-    expect(attackTaxCost(assign({ a: 'bob' }), undefined)).toEqual({ mana: 0, life: 0, permanents: [], overBudget: false })
+    expect(attackTaxCost(assign({ a: 'bob' }), undefined)).toEqual({
+      mana: 0,
+      life: 0,
+      phyrexian: '',
+      permanents: [],
+      overBudget: false,
+    })
   })
 
   it('reads a planeswalker defender at its own rate', () => {
@@ -26,6 +32,7 @@ describe('attackTaxCost', () => {
     expect(attackTaxCost(assign({ a: 'bob', b: 'walker', c: 'carol' }), tax)).toEqual({
       mana: 4,
       life: 0,
+      phyrexian: '',
       permanents: [],
       overBudget: false,
     })
@@ -47,6 +54,7 @@ describe('attackTaxCost', () => {
     expect(attackTaxCost(assign({ a: 'bob', b: 'bob', c: 'bob' }), tax)).toEqual({
       mana: 1,
       life: 0,
+      phyrexian: '',
       permanents: ['sacrifice 2 lands'],
       overBudget: false,
     })
@@ -56,7 +64,21 @@ describe('attackTaxCost', () => {
 
   it('adds a tax in life beside the mana', () => {
     const tax = { perCreature: { bob: 2 }, budget: 2, lifePerCreature: { bob: 2, walker: 2 }, lifeBudget: 20 }
-    expect(attackTaxCost(assign({ a: 'bob', b: 'walker' }), tax)).toEqual({ mana: 2, life: 4, permanents: [], overBudget: false })
+    expect(attackTaxCost(assign({ a: 'bob', b: 'walker' }), tax)).toEqual({
+      mana: 2,
+      life: 4,
+      phyrexian: '',
+      permanents: [],
+      overBudget: false,
+    })
+  })
+
+  it('adds Phyrexian pips beside the mana, a creature at a time (Norn\'s Annex)', () => {
+    const tax = { perCreature: {}, budget: 0, phyrexianPerCreature: { bob: '{W/P}', walker: '{W/P}{W/P}' }, lifeBudget: 20 }
+    const cost = attackTaxCost(assign({ a: 'bob', b: 'walker', c: 'carol' }), tax)
+    expect(cost.phyrexian).toBe('{W/P}{W/P}{W/P}')
+    expect(phyrexianPipCount(cost.phyrexian)).toBe(3)
+    expect(phyrexianPipCount('')).toBe(0)
   })
 
   it('warns past either budget', () => {

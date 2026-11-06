@@ -9517,6 +9517,16 @@ describe("attack taxes", () => {
     expect(tax("you unless their controller pays {2} for each creature they control that's attacking a planeswalker you control.")).toBeNull();
   });
 
+  it("reads a Phyrexian pip a creature (Norn's Annex)", () => {
+    expect(tax("you or planeswalkers you control unless their controller pays {W/P} for each of those creatures.")).toEqual({
+      phyrexian: "W",
+      covers: "you-and-planeswalkers",
+    });
+    expect(tax("you unless their controller pays {B/P} for each creature they control that's attacking you.")).toEqual({
+      phyrexian: "B",
+    });
+  });
+
   it("reads a tax for a while, in mana or in life", () => {
     const plus = parseEffect(
       "Until your next turn, creatures can't attack you or planeswalkers you control unless their controller pays 2 life for each of those creatures.",

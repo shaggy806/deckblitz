@@ -3434,6 +3434,11 @@ export interface StaticAbility {
    *   from this permanent's controller's side (Sphere of Safety's "where X is
    *   the number of enchantments you control", Collective Restraint's domain).
    * - `life`: that much life a creature instead, or as well (rule 119.4).
+   * - `phyrexian`: one Phyrexian mana pip of that colour a creature, as
+   *   well (Norn's Annex's "pays {W/P} for each of those creatures"): each
+   *   paid with that mana or 2 life (rule 107.4f), the attacker choosing
+   *   for each (its ruling) — the declaration's `phyrexianLife` says how
+   *   many go in life; omitted, mana pays what it can.
    * - `covers`: which attacks it taxes. Absent, `"you"`: only the player, so
    *   a creature attacking their planeswalker pays nothing (Ghostly Prison's
    *   ruling). `"you-and-planeswalkers"` is "you or planeswalkers you control"
@@ -3446,6 +3451,7 @@ export interface StaticAbility {
   readonly attackTax?: {
     readonly generic?: number | CountSpec;
     readonly life?: number;
+    readonly phyrexian?: Color;
     readonly covers?: "you" | "you-and-planeswalkers" | "planeswalkers";
   };
   /**

@@ -234,8 +234,13 @@ export interface DecisionReadCtx {
   readonly whyCannotPlayLandNow: (land: Extract<Action, { type: "play-land" }>) => string | null;
   /** What one creature attacking `defender` costs (Ghostly Prison) in
    * generic mana and in life: 0 of each for a defender nothing taxes. Statics
-   * and player effects only `Game` can read. */
-  readonly attackTaxOf: (defender: PlayerId | ObjectId) => { readonly generic: number; readonly life: number };
+   * and player effects only `Game` can read. `phyrexian`: the Phyrexian pips
+   * it costs as well, as symbols (Norn's Annex's "{W/P}"), "" for none. */
+  readonly attackTaxOf: (defender: PlayerId | ObjectId) => {
+    readonly generic: number;
+    readonly life: number;
+    readonly phyrexian: string;
+  };
   /** The life `player` can pay (rule 119.4): their life total, or 0 when they
    * can't pay life at all (119.4b). See `AttackOffer.attackTax.lifeBudget`. */
   readonly attackTaxLifeBudget: (player: PlayerId) => number;
@@ -246,10 +251,13 @@ export interface DecisionReadCtx {
    * they can or it's free. */
   readonly whyCannotPayBlockTax: (player: PlayerId, cost: CombatCost) => string | null;
   /** Why `player` can't pay what `declarations` cost to attack (rule
-   * 508.1h–j), or `null` when they can or it's free. */
+   * 508.1h–j), or `null` when they can or it's free — `phyrexianLife` of its
+   * Phyrexian pips paid in life (Norn's Annex; rule 107.4f), the
+   * declaration's. */
   readonly whyCannotPayAttackTax: (
     player: PlayerId,
     declarations: readonly AttackerDeclaration[],
+    phyrexianLife?: number,
   ) => string | null;
 }
 
@@ -306,7 +314,11 @@ export interface DecisionHost {
     forAll?: boolean,
     asThoughUnblocked?: boolean,
   ) => void;
-  readonly applyAttackerDeclarations: (player: PlayerId, declarations: readonly AttackerDeclaration[]) => void;
+  readonly applyAttackerDeclarations: (
+    player: PlayerId,
+    declarations: readonly AttackerDeclaration[],
+    phyrexianLife?: number,
+  ) => void;
   readonly applyBlockerDeclarations: (player: PlayerId, blocks: readonly BlockerDeclaration[]) => void;
   readonly applyChooseTargets: (
     player: PlayerId,

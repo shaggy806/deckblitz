@@ -66,7 +66,14 @@ import type { ResolveAims } from './game/resolveAims.ts'
 import { Symbols } from './ui/Symbols.tsx'
 import type { BoardEntry } from './game/board.ts'
 import { blockPairs, freeBlocker, leastBlocked, setPairCount } from './game/blockGroups.ts'
-import { attackPairs, attackTaxCost, freeAttacker, isOwnDefender, setAttackPairCount } from './game/attackGroups.ts'
+import {
+  attackPairs,
+  attackTaxCost,
+  freeAttacker,
+  isOwnDefender,
+  phyrexianPipCount,
+  setAttackPairCount,
+} from './game/attackGroups.ts'
 import {
   collapseAttacks,
   blockEntries,
@@ -2386,7 +2393,7 @@ function Table({
           ? 'choose-pile'
         : chooseNumberAction
           ? 'choose-number'
-        : pendingPhyrexian !== null && modesChoiceAction
+        : pendingPhyrexian !== null && (modesChoiceAction || attackAction)
           ? 'choose-phyrexian'
         : modesChoiceAction
           ? 'choose-modes'
@@ -3629,15 +3636,19 @@ function Table({
     attackBands.forEach((band, i) => {
       for (const id of band) bandOf.set(id, i + 1)
     })
-    game.dispatch({
-      type: 'declare-attackers',
-      player: seat,
-      attackers: collapseAttacks(attackAssignments, stackMembers).map((d) => {
-        const band = bandOf.get(d.attacker)
-        return band === undefined ? d : { ...d, band }
-      }),
+    const attackers = collapseAttacks(attackAssignments, stackMembers).map((d) => {
+      const band = bandOf.get(d.attacker)
+      return band === undefined ? d : { ...d, band }
     })
-  }, [attackAssignments, attackBands, enterAttackingAction, game, seat, stackMembers])
+    // Phyrexian mana to attack (Norn's Annex's {W/P} a creature): how many
+    // pips go in life is the attacker's call (rule 107.4f), asked as a
+    // spell's are, when they could pay life at all.
+    const tax = attackAction?.attackTax
+    const pips = phyrexianPipCount(attackTaxCost(attackAssignments, tax).phyrexian)
+    askLifeThen((tax?.lifeBudget ?? 0) >= 2 ? { phyrexianPips: pips } : {}, (life) =>
+      game.dispatch({ type: 'declare-attackers', player: seat, attackers, ...life }),
+    )
+  }, [attackAction, attackAssignments, attackBands, enterAttackingAction, game, seat, stackMembers])
 
   const confirmBlockers = useCallback(() => {
     game.dispatch({
@@ -6023,6 +6034,8 @@ function Table({
     const pairs = attackPairs(attackAssignments, attackPicks, defendersFor, tileOf)
     // What attacking costs (Ghostly Prison, Propaganda, Sivitri's life).
     const attackTax = attackTaxCost(attackAssignments, attackAction.attackTax)
+    // Its mana as symbols: the generic, then any Phyrexian pips (Norn's Annex).
+    const attackManaText = `${attackTax.mana > 0 ? `{${attackTax.mana}}` : ''}${attackTax.phyrexian}`
     // Picking attackers to aim says so ("2 selected · click who they
     // attack"). With more than one defender to aim at, that has a line of its
     // own from the start, so picking doesn't wrap the prompt and grow the
@@ -6047,15 +6060,15 @@ function Table({
             ? ` · ${unmetMusts.map((id) => game.nameOf(id)).join(', ')} must attack`
             : ''}
           {attackAtWrong ? ' · not whom the lesson asked: press Clear to start again' : ''}
-          {attackTax.mana > 0 || attackTax.life > 0 || attackTax.permanents.length > 0 ? (
+          {attackManaText !== '' || attackTax.life > 0 || attackTax.permanents.length > 0 ? (
             <>
               {' '}
-              · {attackTax.mana > 0 || attackTax.life > 0 ? 'costs ' : ''}
-              {attackTax.mana > 0 ? <Symbols text={`{${attackTax.mana}}`} /> : null}
-              {attackTax.mana > 0 && attackTax.life > 0 ? ' and ' : ''}
+              · {attackManaText !== '' || attackTax.life > 0 ? 'costs ' : ''}
+              {attackManaText !== '' ? <Symbols text={attackManaText} /> : null}
+              {attackManaText !== '' && attackTax.life > 0 ? ' and ' : ''}
               {attackTax.life > 0 ? `${attackTax.life} life` : ''}
               {attackTax.permanents.length > 0
-                ? `${attackTax.mana > 0 || attackTax.life > 0 ? ' and ' : ''}${attackTax.permanents.join(' and ')}`
+                ? `${attackManaText !== '' || attackTax.life > 0 ? ' and ' : ''}${attackTax.permanents.join(' and ')}`
                 : ''}{' '}
               to attack
               {attackTax.overBudget ? ' — more than you can surely pay' : ''}

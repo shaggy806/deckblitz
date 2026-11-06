@@ -25,6 +25,14 @@ export interface AttackTaxRates {
   readonly lifePerCreature?: Readonly<Record<string, number>>
   readonly lifeBudget?: number
   readonly perAttacker?: Readonly<Record<string, Readonly<Record<string, AttackCost>>>>
+  /** The Phyrexian mana a creature attacking that defender costs (Norn's
+   * Annex's "{W/P}"), as symbols. */
+  readonly phyrexianPerCreature?: Readonly<Record<string, string>>
+}
+
+/** How many Phyrexian pips `symbols` ("{W/P}{W/P}") holds. */
+export function phyrexianPipCount(symbols: string): number {
+  return symbols.split('/P}').length - 1
 }
 
 /** What the attack as assigned so far costs (rule 508.1h): each creature sent
@@ -33,23 +41,27 @@ export interface AttackTaxRates {
  * (Brainwash), which can be in permanents (Exalted Dragon's "sacrifice a land":
  * `permanents`, one phrase a kind). `overBudget`: more than the attacker can
  * surely pay. Past the mana budget the engine checks exactly, so this warns
- * rather than blocks. */
+ * rather than blocks. `phyrexian`: the Phyrexian pips owed as well (Norn's
+ * Annex), as symbols, each its mana or 2 life (rule 107.4f). */
 export function attackTaxCost(
   assign: AttackAssign,
   tax: AttackTaxRates | undefined,
 ): {
   readonly mana: number
   readonly life: number
+  readonly phyrexian: string
   readonly permanents: readonly string[]
   readonly overBudget: boolean
 } {
   let mana = 0
   let life = 0
+  let phyrexian = ''
   const owed = new Map<string, { verb: string; noun: string; count: number; among: number }>()
   for (const [attacker, defender] of Object.entries(assign)) {
     const own = tax?.perAttacker?.[attacker]?.[defender]
     mana += (tax?.perCreature[defender] ?? 0) + (own?.generic ?? 0)
     life += (tax?.lifePerCreature?.[defender] ?? 0) + (own?.life ?? 0)
+    phyrexian += tax?.phyrexianPerCreature?.[defender] ?? ''
     for (const cost of own?.permanents ?? []) {
       const key = `${cost.do} ${cost.noun}`
       const before = owed.get(key)
@@ -65,6 +77,7 @@ export function attackTaxCost(
   return {
     mana,
     life,
+    phyrexian,
     permanents: [...owed.values()].map((p) => {
       const one = `${/^[aeiou]/i.test(p.noun) ? 'an' : 'a'} ${p.noun}`
       return `${p.verb} ${p.count === 1 ? one : `${p.count} ${p.noun}s`}`

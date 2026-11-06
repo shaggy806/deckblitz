@@ -713,6 +713,12 @@ export type Action =
       readonly type: "declare-attackers";
       readonly player: PlayerId;
       readonly attackers: readonly AttackerDeclaration[];
+      /** How many of what attacking costs in Phyrexian mana (Norn's Annex's
+       * {W/P} a creature — the offer's `attackTax.phyrexianPerCreature`) to
+       * pay with 2 life each rather than its mana (rule 107.4f; the attacker
+       * chooses for each, its ruling). Omitted, life pays a pip only when
+       * mana can't. */
+      readonly phyrexianLife?: number;
     }
   | {
       readonly type: "declare-blockers";
@@ -1734,10 +1740,17 @@ export type LegalAction =
        * creature costs on its own, on top of its defender's rate (Brainwash,
        * Nils — `StaticAbility.combatTax`): per attacker, per defender, only
        * the pairs that cost something, permanents included (Exalted Dragon).
+       * `phyrexianPerCreature` is the Phyrexian mana a creature attacking
+       * that defender costs as well, as symbols (Norn's Annex's "{W/P}"):
+       * each pip that colour's mana or 2 life (rule 107.4f), the
+       * declaration's `phyrexianLife` saying how many go in life; a driver
+       * that doesn't choose counts each as 2 life against `lifeBudget`,
+       * which is then present, and mana pays what it can.
        * Absent when nothing is taxed.
        */
       readonly attackTax?: {
         readonly perCreature: Readonly<Record<string, number>>;
+        readonly phyrexianPerCreature?: Readonly<Record<string, string>>;
         readonly perAttacker?: Readonly<Record<ObjectId, Readonly<Record<string, AttackCost>>>>;
         readonly budget: number;
         readonly lifePerCreature?: Readonly<Record<string, number>>;

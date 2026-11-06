@@ -17216,7 +17216,7 @@ function perAmountStaticOf(line, text) {
 /** An attack tax's sentence: who it guards, the {N} or {X}, what "each" says,
  * and {X}'s count. */
 const ATTACK_TAX_LINE =
-  /^(?:Domain — )?Creatures can't attack (you|you or planeswalkers you control|planeswalkers you control) unless their controller pays \{(\d+|X)\} for each (of those creatures|creature they control that's attacking (?:you|a planeswalker you control))(?:, where X is the number of (.+?))?\.$/;
+  /^(?:Domain — )?Creatures can't attack (you|you or planeswalkers you control|planeswalkers you control) unless their controller pays \{(\d+|X|[WUBRG]\/P)\} for each (of those creatures|creature they control that's attacking (?:you|a planeswalker you control))(?:, where X is the number of (.+?))?\.$/;
 
 /** The `covers` of an attack tax guarding `guards`, when what the sentence
  * charges for says the same; `null` otherwise. */
@@ -18884,10 +18884,16 @@ function parseStatic(line, text) {
   // unless their controller pays {2} for each creature they control that's
   // attacking you" (Ghostly Prison), "you or planeswalkers you control …
   // for each of those creatures" (Baird), "planeswalkers you control" (Onakke
-  // Oathkeeper), and {X} by a count (Sphere of Safety, Collective Restraint).
+  // Oathkeeper), {X} by a count (Sphere of Safety, Collective Restraint),
+  // and a Phyrexian pip (Norn's Annex's {W/P}).
   if ((m = ATTACK_TAX_LINE.exec(line))) {
     const covers = attackTaxCovers(m[1], m[3]);
-    const generic = m[2] === "X" ? attackTaxCount(m[4]) : m[4] === undefined ? Number(m[2]) : null;
+    const phyrexian = /^([WUBRG])\/P$/.exec(m[2])?.[1];
+    if (phyrexian !== undefined && covers !== null && m[4] === undefined) {
+      return { affects: { scope: "self" }, attackTax: { phyrexian, ...(covers === "you" ? {} : { covers }) }, text };
+    }
+    const generic =
+      phyrexian !== undefined ? null : m[2] === "X" ? attackTaxCount(m[4]) : m[4] === undefined ? Number(m[2]) : null;
     if (covers !== null && generic !== null) {
       return { affects: { scope: "self" }, attackTax: { generic, ...(covers === "you" ? {} : { covers }) }, text };
     }
