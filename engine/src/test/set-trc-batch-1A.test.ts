@@ -5,7 +5,6 @@
  */
 import { describe, expect, it } from "vitest";
 
-import { restrictionsOf } from "../characteristics.js";
 import type { ScriptedController } from "../controller.js";
 import type { Game } from "../game.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
@@ -400,7 +399,7 @@ describe("Officers", () => {
     expect(game.state.objects[bears].tapped).toBe(true);
     expect(game.state.objects[janeway].tapped).toBe(false);
     spawn(game, "Grizzly Bears", B);
-    expect(restrictionsOf(game.state, game.registry, janeway).has("cant-be-blocked")).toBe(true);
+    expect(keywords(game, janeway).has("unblockable")).toBe(true);
     // With no legal block, bob is never asked: combat runs straight to damage.
     a.declareAttackersFn = () => [{ attacker: janeway, defender: B }];
     game.advanceUntil((s) => s.awaiting?.kind === "blockers" || s.turn.step === "postcombat-main");

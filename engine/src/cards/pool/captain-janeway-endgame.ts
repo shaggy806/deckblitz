@@ -37,7 +37,7 @@ export default defineCard({
         tapOthers: { count: 1, filter: { type: "creature", controlledBy: "you" }, includeSelf: true },
       },
       targets: [],
-      effect: { kind: "restrict", target: "source", restrictions: ["cant-be-blocked"] },
+      effect: { kind: "grant-keyword", target: "source", keyword: "unblockable", duration: "end-of-turn" },
       resolve: null,
       text: EVADE_TEXT,
     },
