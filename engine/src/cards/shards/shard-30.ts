@@ -854,6 +854,7 @@ import _poolTheAkroanWar from "../pool/the-akroan-war.js";
 import _poolTheBalrogOfMoria from "../pool/the-balrog-of-moria.js";
 import _poolTheFirstIroanGames from "../pool/the-first-iroan-games.js";
 import _poolTheFloodOfMars from "../pool/the-flood-of-mars.js";
+import _poolTheLastAgniKai from "../pool/the-last-agni-kai.js";
 import _poolTheLonelyMountain from "../pool/the-lonely-mountain.js";
 import _poolTheMightyThorJaneFoster from "../pool/the-mighty-thor-jane-foster.js";
 import _poolTheMonumentalFacade from "../pool/the-monumental-facade.js";
@@ -1856,6 +1857,7 @@ const shard: CardShard = {
     _poolTheBalrogOfMoria,
     _poolTheFirstIroanGames,
     _poolTheFloodOfMars,
+    _poolTheLastAgniKai,
     _poolTheLonelyMountain,
     _poolTheMightyThorJaneFoster,
     _poolTheMonumentalFacade,

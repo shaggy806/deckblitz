@@ -945,6 +945,7 @@ import _poolWildsize from "../pool/wildsize.js";
 import _poolWildvinePummeler from "../pool/wildvine-pummeler.js";
 import _poolWilheltTheRotcleaver from "../pool/wilhelt-the-rotcleaver.js";
 import _poolWindcallerAven from "../pool/windcaller-aven.js";
+import _poolWindsOfAbandon from "../pool/winds-of-abandon.js";
 import _poolWitchBlessedMeadow from "../pool/witch-blessed-meadow.js";
 import _poolWitherbloomCommand from "../pool/witherbloom-command.js";
 import _poolWitheringCurse from "../pool/withering-curse.js";
@@ -1928,6 +1929,7 @@ const shard: CardShard = {
     _poolWildvinePummeler,
     _poolWilheltTheRotcleaver,
     _poolWindcallerAven,
+    _poolWindsOfAbandon,
     _poolWitchBlessedMeadow,
     _poolWitherbloomCommand,
     _poolWitheringCurse,

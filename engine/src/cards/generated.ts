@@ -13177,6 +13177,7 @@ import _poolIntervene from "./pool/intervene.js";
 import _poolInterventionPact from "./pool/intervention-pact.js";
 import _poolIntervention from "./pool/intervention.js";
 import _poolIntetTheDreamer from "./pool/intet-the-dreamer.js";
+import _poolIntiSeneschalOfTheSun from "./pool/inti-seneschal-of-the-sun.js";
 import _poolIntimidationCampaign from "./pool/intimidation-campaign.js";
 import _poolIntimidationTactics from "./pool/intimidation-tactics.js";
 import _poolIntimidation from "./pool/intimidation.js";
@@ -26687,6 +26688,7 @@ import _poolTheKamiWar from "./pool/the-kami-war.js";
 import _poolTheKeyToTheVault from "./pool/the-key-to-the-vault.js";
 import _poolTheLadyOfOtaria from "./pool/the-lady-of-otaria.js";
 import _poolTheLadyOfTheMountain from "./pool/the-lady-of-the-mountain.js";
+import _poolTheLastAgniKai from "./pool/the-last-agni-kai.js";
 import _poolTheLastRide from "./pool/the-last-ride.js";
 import _poolTheLastRonin from "./pool/the-last-ronin.js";
 import _poolTheLastRoninsTechnique from "./pool/the-last-ronins-technique.js";
@@ -30024,6 +30026,7 @@ import _poolWindreaver from "./pool/windreaver.js";
 import _poolWindriderEel from "./pool/windrider-eel.js";
 import _poolWindriderPatrol from "./pool/windrider-patrol.js";
 import _poolWindriderWizard from "./pool/windrider-wizard.js";
+import _poolWindsOfAbandon from "./pool/winds-of-abandon.js";
 import _poolWindsOfChange from "./pool/winds-of-change.js";
 import _poolWindsOfQalSisma from "./pool/winds-of-qal-sisma.js";
 import _poolWindsOfRath from "./pool/winds-of-rath.js";
@@ -44640,6 +44643,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolInterventionPact,
   _poolIntervention,
   _poolIntetTheDreamer,
+  _poolIntiSeneschalOfTheSun,
   _poolIntimidationCampaign,
   _poolIntimidationTactics,
   _poolIntimidation,
@@ -58150,6 +58154,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheKeyToTheVault,
   _poolTheLadyOfOtaria,
   _poolTheLadyOfTheMountain,
+  _poolTheLastAgniKai,
   _poolTheLastRide,
   _poolTheLastRonin,
   _poolTheLastRoninsTechnique,
@@ -61487,6 +61492,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWindriderEel,
   _poolWindriderPatrol,
   _poolWindriderWizard,
+  _poolWindsOfAbandon,
   _poolWindsOfChange,
   _poolWindsOfQalSisma,
   _poolWindsOfRath,
@@ -76116,6 +76122,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/intervention-pact": _poolInterventionPact,
   "pool/intervention": _poolIntervention,
   "pool/intet-the-dreamer": _poolIntetTheDreamer,
+  "pool/inti-seneschal-of-the-sun": _poolIntiSeneschalOfTheSun,
   "pool/intimidation-campaign": _poolIntimidationCampaign,
   "pool/intimidation-tactics": _poolIntimidationTactics,
   "pool/intimidation": _poolIntimidation,
@@ -89626,6 +89633,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-key-to-the-vault": _poolTheKeyToTheVault,
   "pool/the-lady-of-otaria": _poolTheLadyOfOtaria,
   "pool/the-lady-of-the-mountain": _poolTheLadyOfTheMountain,
+  "pool/the-last-agni-kai": _poolTheLastAgniKai,
   "pool/the-last-ride": _poolTheLastRide,
   "pool/the-last-ronin": _poolTheLastRonin,
   "pool/the-last-ronins-technique": _poolTheLastRoninsTechnique,
@@ -92963,6 +92971,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/windrider-eel": _poolWindriderEel,
   "pool/windrider-patrol": _poolWindriderPatrol,
   "pool/windrider-wizard": _poolWindriderWizard,
+  "pool/winds-of-abandon": _poolWindsOfAbandon,
   "pool/winds-of-change": _poolWindsOfChange,
   "pool/winds-of-qal-sisma": _poolWindsOfQalSisma,
   "pool/winds-of-rath": _poolWindsOfRath,
