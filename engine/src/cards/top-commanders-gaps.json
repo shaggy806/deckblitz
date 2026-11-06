@@ -1864,7 +1864,9 @@
   "zone:cast-from-library-top-pay-life-mana-value",
   "zone:cast-from-library-top-pay-life-mana-value",
   "effect:next-spell-has-improvise",
-  "cost:sacrifice-any-number-copy-for-each"
+  "cost:sacrifice-any-number-copy-for-each",
+  "cost:sacrifice-any-number-copy-for-each",
+  "condition:this-ability-did-this-turn"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

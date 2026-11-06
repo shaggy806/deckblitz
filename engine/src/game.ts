@@ -27965,6 +27965,7 @@ export class Game {
           object.xValue ?? 0,
           object.lastKnownRefs?.triggerSpell,
           object.lastKnownRefs?.player,
+          condition === undefined ? undefined : this.abilityTurnKey(object),
         ) ||
         !this.attackConditionsStillHold(ability, object)
       ) {
@@ -28206,20 +28207,30 @@ export class Game {
    * `mintAbilityObject` records). */
   private pendingTriggerTurnKey(trigger: PendingTrigger): string | undefined {
     if (trigger.delayed !== undefined || trigger.reflexive !== undefined) return undefined;
-    const granted = trigger.grantedAbility;
-    const source = this.state.objects[trigger.sourceObjectId];
+    return this.triggerTurnKey(trigger.sourceObjectId, trigger.abilityIndex, trigger.grantedAbility, trigger.chapter === true);
+  }
+
+  /** `pendingTriggerTurnKey` for one ability of a source, before anything is
+   * pending — as an intervening if is asked as it triggers. */
+  private triggerTurnKey(
+    sourceId: ObjectId,
+    abilityIndex: number,
+    granted: PendingTrigger["grantedAbility"],
+    chapter: boolean,
+  ): string {
+    const source = this.state.objects[sourceId];
     // One ability written as two entries counts as one (`sameAbilityAs`), as
     // `abilityTurnKey` does — "When ~ enters and whenever …, choose one that
     // hasn't been chosen this turn" (The Fantastic Four).
     const same =
-      !trigger.chapter && granted === undefined && source !== undefined
-        ? this.registry.get(printedCardName(source)).triggered[trigger.abilityIndex]?.sameAbilityAs
+      !chapter && granted === undefined && source !== undefined
+        ? this.registry.get(printedCardName(source)).triggered[abilityIndex]?.sameAbilityAs
         : undefined;
     const which =
       granted?.kind === "static"
         ? `static:${granted.cardName}:${granted.staticIndex}:${granted.list}:${granted.index}`
-        : `${trigger.chapter ? "chapter" : "triggered"}:${same ?? trigger.abilityIndex}`;
-    return `${trigger.sourceObjectId}@${source?.timestamp ?? 0}#${which}`;
+        : `${chapter ? "chapter" : "triggered"}:${same ?? abilityIndex}`;
+    return `${sourceId}@${source?.timestamp ?? 0}#${which}`;
   }
 
   private abilityTurnKey(object: GameObject): string | undefined {
@@ -28828,6 +28839,11 @@ export class Game {
             ability.condition === undefined
               ? undefined
               : this.refsAtTrigger(live, lastSeen, event, this.eventTriggerObject(ability.trigger, event))?.player,
+            // "If you haven't added mana with this ability this turn" (Carpet
+            // of Flowers): the key the ability will have on the stack.
+            ability.condition === undefined
+              ? undefined
+              : this.triggerTurnKey(id, index, ref, false),
           ) &&
           // "Whenever … while …" — part of the trigger condition, asked only
           // now (rule 603.1), never again as it resolves. "That player" is the
@@ -30768,6 +30784,8 @@ export class Game {
     /** "That player" — see `ConditionOptions.thatPlayer`: the trigger's
      * refs' `player`, as it triggers and as it resolves. */
     thatPlayer?: PlayerId,
+    /** Which ability it is — see `ConditionOptions.abilityKey`. */
+    abilityKey?: string,
   ): boolean {
     if (condition === undefined) return true;
     return staticConditionMet(this.state, this.registry, source, condition, {
@@ -30783,6 +30801,7 @@ export class Game {
         ...(triggerSpellStint !== undefined ? { lastKnownRefs: { triggerSpell: triggerSpellStint } } : {}),
       }),
       ...(thatPlayer !== undefined ? { thatPlayer } : {}),
+      ...(abilityKey !== undefined ? { abilityKey } : {}),
       ...(sourceTimestamp !== undefined ? { sourceTimestamp } : {}),
       ...(sourceLastKnown !== undefined ? { sourceLastKnown } : {}),
       ...(triggerObject !== undefined ? { triggerObject } : {}),
@@ -32705,6 +32724,7 @@ export class Game {
           // an `of-player`: the player this effect is about.
           ...(refs.player !== undefined ? { thatPlayer: refs.player } : {}),
           ...(sourceLastKnown !== undefined ? { sourceLastKnown } : {}),
+          ...(opts.abilityKey !== undefined ? { abilityKey: opts.abilityKey } : {}),
         })
       );
     };

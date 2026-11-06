@@ -375,6 +375,17 @@ still paid; beside a permission without it (Future Sight) the card may be cast
 either way. An impulse's or the Citadel's forced pay-life cast of a card with
 an alternative cost of its own (Gush) no longer pays that one too. Key:
 zone:cast-from-library-top-pay-life-mana-value.
+### "If you haven't done it with this ability this turn" — built 2026-11-05
+
+By EDHREC rank: Carpet of Flowers (1325). The `this-ability-did-this-turn`
+condition reads the record a `may`'s `oncePerTurn` keeps of being taken, by
+the ability's per-turn key, which the intervening-if checks (rule 603.4) and a
+resolving `conditional` now pass (`ConditionOptions.abilityKey`): asked as it
+triggers, so once it's added mana the ability doesn't trigger again that turn,
+and again as it resolves. "Each of your main phases" is two entries joined by
+`sameAbilityAs`. No scaffolder template: the line is Carpet's alone. Proving
+card: Carpet of Flowers. Key: condition:this-ability-did-this-turn.
+
 ### A copy of the spell for each creature sacrificed to cast it — built 2026-11-05
 
 By EDHREC rank: Plumb the Forbidden (1148). "You may sacrifice one or more

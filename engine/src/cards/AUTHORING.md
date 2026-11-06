@@ -6416,6 +6416,16 @@ clause (section 9):
   Every activation counts as it's made, resolved or not, the resolving one
   included; per ability of one object, restarting each turn and with a zone
   change. Only meaningful inside the activated ability's own `conditional`.
+- `{ kind: "this-ability-did-this-turn" }` — this ability's `may` with
+  `oncePerTurn: true` was taken this turn (or a mode of its
+  `notChosenThisTurn` modal chosen): it reads that record, so the `may` must
+  set `oncePerTurn`. Its `not` as a triggered ability's `condition` is Carpet
+  of Flowers' "if you **haven't added mana with this ability this turn**", an
+  intervening if (rule 603.4) asked as it triggers and as it resolves. Per
+  ability of one object (entries joined by `sameAbilityAs` share it —
+  "at the beginning of each of your main phases" is two), restarting each turn
+  and with a zone change. Answered for a triggered ability's `condition` and a
+  `conditional` inside the ability.
 - `{ kind: "source-on-battlefield" }` — "if ~ is still on the battlefield":
   the resolving ability's source is there as the same object it was (rule
   400.7). Shirei, Shizo's Caretaker's delayed return. Only a resolution can

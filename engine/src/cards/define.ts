@@ -1623,6 +1623,19 @@ export type StaticCondition =
    */
   | { readonly kind: "resolved-this-turn"; readonly n: number }
   /**
+   * This ability has done its optional thing this turn: its `may` with
+   * `oncePerTurn` was taken (or a mode of its `notChosenThisTurn` modal
+   * chosen), as that record keeps it. Its `not` is Carpet of Flowers' "if you
+   * **haven't added mana with this ability this turn**", an intervening if
+   * (rule 603.4): asked as the ability triggers, so a second one doesn't
+   * trigger at all, and again as it resolves. Kept per ability of one object
+   * (two entries joined by `sameAbilityAs` are one), so a permanent that
+   * leaves and comes back starts again (rule 400.7). Answered for a
+   * triggered ability's `condition` and a `conditional` inside it; false
+   * anywhere else.
+   */
+  | { readonly kind: "this-ability-did-this-turn" }
+  /**
    * "If this ability has been activated **four or more times this turn**"
    * (Dragon Whelp): every activation counts as it's activated, whether or
    * not the earlier ones resolved, and the one resolving is among them. Kept

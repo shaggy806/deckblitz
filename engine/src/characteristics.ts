@@ -414,6 +414,13 @@ export interface ConditionOptions {
    */
   readonly triggerSpellStint?: number;
   /**
+   * Which ability of which object is asking, as the per-turn records key it
+   * (`ResolutionContext.abilityKey`) — for a `this-ability-did-this-turn`
+   * condition. Passed by the intervening-if checks and a resolving
+   * `conditional`.
+   */
+  readonly abilityKey?: string;
+  /**
    * The X the triggered ability asking was put on the stack with — a
    * permanent's own enters trigger's (rule 107.3m) or a cast trigger's — for
    * an `x` condition: ravenous's "if X is 5 or more" (rule 702.156a). Passed
@@ -701,6 +708,11 @@ function evalStaticCondition(
         }
       }
       return n >= (condition.atLeast ?? 1) && (condition.atMost === undefined || n <= condition.atMost);
+    }
+    case "this-ability-did-this-turn": {
+      // The record a `may`'s `oncePerTurn` keeps of being taken.
+      const key = opts.abilityKey;
+      return key !== undefined && (state.modesChosenThisTurn?.[key]?.length ?? 0) > 0;
     }
     case "trigger-spell-first": {
       // Its own record — which cast of that card, by its stint on the stack —
