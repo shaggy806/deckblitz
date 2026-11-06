@@ -17226,6 +17226,7 @@ import _poolMutantSurveyor from "./pool/mutant-surveyor.js";
 import _poolMutantTownMusicians from "./pool/mutant-town-musicians.js";
 import _poolMutantTown from "./pool/mutant-town.js";
 import _poolMutantsPrey from "./pool/mutants-prey.js";
+import _poolMutationalAdvantage from "./pool/mutational-advantage.js";
 import _poolMutavault from "./pool/mutavault.js";
 import _poolMutilate from "./pool/mutilate.js";
 import _poolMutinousMassacre from "./pool/mutinous-massacre.js";
@@ -21145,6 +21146,7 @@ import _poolRevolutionaryRebuff from "./pool/revolutionary-rebuff.js";
 import _poolRevolutionist from "./pool/revolutionist.js";
 import _poolRewardTheFaithful from "./pool/reward-the-faithful.js";
 import _poolRewardsOfDiversity from "./pool/rewards-of-diversity.js";
+import _poolReweave from "./pool/reweave.js";
 import _poolRewind from "./pool/rewind.js";
 import _poolRewriteHistory from "./pool/rewrite-history.js";
 import _poolRewriteRegrets from "./pool/rewrite-regrets.js";
@@ -26364,6 +26366,7 @@ import _poolTemporalTribulation from "./pool/temporal-tribulation.js";
 import _poolTemporaryInsanity from "./pool/temporary-insanity.js";
 import _poolTemporaryLockdown from "./pool/temporary-lockdown.js";
 import _poolTemporaryTruce from "./pool/temporary-truce.js";
+import _poolTemptWithBunnies from "./pool/tempt-with-bunnies.js";
 import _poolTemptWithDiscovery from "./pool/tempt-with-discovery.js";
 import _poolTemptWithGlory from "./pool/tempt-with-glory.js";
 import _poolTemptWithImmortality from "./pool/tempt-with-immortality.js";
@@ -29928,6 +29931,7 @@ import _poolWildInstincts from "./pool/wild-instincts.js";
 import _poolWildJhovall from "./pool/wild-jhovall.js";
 import _poolWildLeotau from "./pool/wild-leotau.js";
 import _poolWildMagicSorcerer from "./pool/wild-magic-sorcerer.js";
+import _poolWildMagicSurge from "./pool/wild-magic-surge.js";
 import _poolWildMammoth from "./pool/wild-mammoth.js";
 import _poolWildMight from "./pool/wild-might.js";
 import _poolWildMongrel from "./pool/wild-mongrel.js";
@@ -48706,6 +48710,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMutantTownMusicians,
   _poolMutantTown,
   _poolMutantsPrey,
+  _poolMutationalAdvantage,
   _poolMutavault,
   _poolMutilate,
   _poolMutinousMassacre,
@@ -52625,6 +52630,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRevolutionist,
   _poolRewardTheFaithful,
   _poolRewardsOfDiversity,
+  _poolReweave,
   _poolRewind,
   _poolRewriteHistory,
   _poolRewriteRegrets,
@@ -57844,6 +57850,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTemporaryInsanity,
   _poolTemporaryLockdown,
   _poolTemporaryTruce,
+  _poolTemptWithBunnies,
   _poolTemptWithDiscovery,
   _poolTemptWithGlory,
   _poolTemptWithImmortality,
@@ -61408,6 +61415,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWildJhovall,
   _poolWildLeotau,
   _poolWildMagicSorcerer,
+  _poolWildMagicSurge,
   _poolWildMammoth,
   _poolWildMight,
   _poolWildMongrel,
@@ -80199,6 +80207,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mutant-town-musicians": _poolMutantTownMusicians,
   "pool/mutant-town": _poolMutantTown,
   "pool/mutants-prey": _poolMutantsPrey,
+  "pool/mutational-advantage": _poolMutationalAdvantage,
   "pool/mutavault": _poolMutavault,
   "pool/mutilate": _poolMutilate,
   "pool/mutinous-massacre": _poolMutinousMassacre,
@@ -84118,6 +84127,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/revolutionist": _poolRevolutionist,
   "pool/reward-the-faithful": _poolRewardTheFaithful,
   "pool/rewards-of-diversity": _poolRewardsOfDiversity,
+  "pool/reweave": _poolReweave,
   "pool/rewind": _poolRewind,
   "pool/rewrite-history": _poolRewriteHistory,
   "pool/rewrite-regrets": _poolRewriteRegrets,
@@ -89337,6 +89347,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/temporary-insanity": _poolTemporaryInsanity,
   "pool/temporary-lockdown": _poolTemporaryLockdown,
   "pool/temporary-truce": _poolTemporaryTruce,
+  "pool/tempt-with-bunnies": _poolTemptWithBunnies,
   "pool/tempt-with-discovery": _poolTemptWithDiscovery,
   "pool/tempt-with-glory": _poolTemptWithGlory,
   "pool/tempt-with-immortality": _poolTemptWithImmortality,
@@ -92901,6 +92912,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/wild-jhovall": _poolWildJhovall,
   "pool/wild-leotau": _poolWildLeotau,
   "pool/wild-magic-sorcerer": _poolWildMagicSorcerer,
+  "pool/wild-magic-surge": _poolWildMagicSurge,
   "pool/wild-mammoth": _poolWildMammoth,
   "pool/wild-might": _poolWildMight,
   "pool/wild-mongrel": _poolWildMongrel,

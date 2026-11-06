@@ -687,6 +687,7 @@ import _poolReturnUponTheTide from "../pool/return-upon-the-tide.js";
 import _poolReverseDamage from "../pool/reverse-damage.js";
 import _poolReverseThePolarity from "../pool/reverse-the-polarity.js";
 import _poolRevivingVapors from "../pool/reviving-vapors.js";
+import _poolReweave from "../pool/reweave.js";
 import _poolRewind from "../pool/rewind.js";
 import _poolRibbons from "../pool/ribbons.js";
 import _poolRinAndSeriInseparable from "../pool/rin-and-seri-inseparable.js";
@@ -1683,6 +1684,7 @@ const shard: CardShard = {
     _poolReverseDamage,
     _poolReverseThePolarity,
     _poolRevivingVapors,
+    _poolReweave,
     _poolRewind,
     _poolRibbons,
     _poolRinAndSeriInseparable,

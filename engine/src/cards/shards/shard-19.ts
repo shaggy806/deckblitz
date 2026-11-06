@@ -883,6 +883,7 @@ import _poolTaskmasterMercenaryMimic from "../pool/taskmaster-mercenary-mimic.js
 import _poolTasteOfDeath from "../pool/taste-of-death.js";
 import _poolTazeemRoilmage from "../pool/tazeem-roilmage.js";
 import _poolTeleportal from "../pool/teleportal.js";
+import _poolTemptWithBunnies from "../pool/tempt-with-bunnies.js";
 import _poolTenaciousTosk from "../pool/tenacious-tosk.js";
 import _poolTezzeretsGatebreaker from "../pool/tezzerets-gatebreaker.js";
 import _poolTheBalrogFlameOfUdun from "../pool/the-balrog-flame-of-udun.js";
@@ -1911,6 +1912,7 @@ const shard: CardShard = {
     _poolTasteOfDeath,
     _poolTazeemRoilmage,
     _poolTeleportal,
+    _poolTemptWithBunnies,
     _poolTenaciousTosk,
     _poolTezzeretsGatebreaker,
     _poolTheBalrogFlameOfUdun,

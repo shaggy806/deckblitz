@@ -551,6 +551,7 @@ import _poolMortusStrider from "../pool/mortus-strider.js";
 import _poolMotherOfRunes from "../pool/mother-of-runes.js";
 import _poolMountain from "../pool/mountain.js";
 import _poolMutalithVortexBeast from "../pool/mutalith-vortex-beast.js";
+import _poolMutationalAdvantage from "../pool/mutational-advantage.js";
 import _poolMycosynthWellspring from "../pool/mycosynth-wellspring.js";
 import _poolMyojinOfToweringMight from "../pool/myojin-of-towering-might.js";
 import _poolMysticGenesis from "../pool/mystic-genesis.js";
@@ -1536,6 +1537,7 @@ const shard: CardShard = {
     _poolMotherOfRunes,
     _poolMountain,
     _poolMutalithVortexBeast,
+    _poolMutationalAdvantage,
     _poolMycosynthWellspring,
     _poolMyojinOfToweringMight,
     _poolMysticGenesis,

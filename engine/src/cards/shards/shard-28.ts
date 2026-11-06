@@ -958,6 +958,7 @@ import _poolWhisperAgent from "../pool/whisper-agent.js";
 import _poolWhiteOrchidPhantom from "../pool/white-orchid-phantom.js";
 import _poolWildHunger from "../pool/wild-hunger.js";
 import _poolWildInstincts from "../pool/wild-instincts.js";
+import _poolWildMagicSurge from "../pool/wild-magic-surge.js";
 import _poolWildMammoth from "../pool/wild-mammoth.js";
 import _poolWildernessElemental from "../pool/wilderness-elemental.js";
 import _poolWildwoodGeist from "../pool/wildwood-geist.js";
@@ -1967,6 +1968,7 @@ const shard: CardShard = {
     _poolWhiteOrchidPhantom,
     _poolWildHunger,
     _poolWildInstincts,
+    _poolWildMagicSurge,
     _poolWildMammoth,
     _poolWildernessElemental,
     _poolWildwoodGeist,
