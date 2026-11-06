@@ -1,6 +1,7 @@
 import { commanderPrintings, listPickableDecks } from '../deck-builder/decks.ts'
 import type { PickableDeck } from '../deck-builder/decks.ts'
 import { CommanderArt } from './CommanderArt.tsx'
+import { DeckIdentityPips } from '../ui/DeckIdentityPips.tsx'
 import './lobby.css'
 
 /**
@@ -91,6 +92,7 @@ function DeckPickerRow({
           <span className="deck-picker-row-commander muted">{deck.cards.length} cards</span>
         )}
       </span>
+      <DeckIdentityPips commanders={deck.commanders} />
     </button>
   )
 }

@@ -137,37 +137,45 @@ export function MotionControl({
           {botSpeed ? (
             <>
               <div className="motion-heading">Bots</div>
-              <div className="motion-row" role="group" aria-label="Bot speed">
+              <label className="motion-row">
                 <span className="motion-label">Speed</span>
-                {BOT_SPEEDS.map((s) => (
-                  <button
-                    key={s.speed}
-                    type="button"
-                    className={`motion-option${s.speed === botSpeed.speed ? ' active' : ''}`}
-                    aria-pressed={s.speed === botSpeed.speed}
-                    onClick={() => botSpeed.onChange(s.speed)}
-                  >
-                    {s.label}
-                  </button>
-                ))}
-              </div>
+                <select
+                  className="motion-select"
+                  aria-label="Bot speed"
+                  value={botSpeed.speed}
+                  onChange={(e) => {
+                    const picked = BOT_SPEEDS.find((s) => s.speed === e.target.value)
+                    if (picked) botSpeed.onChange(picked.speed)
+                  }}
+                >
+                  {BOT_SPEEDS.map((s) => (
+                    <option key={s.speed} value={s.speed}>
+                      {s.label}
+                    </option>
+                  ))}
+                </select>
+              </label>
             </>
           ) : null}
           <div className="motion-heading">Animations</div>
-          <div className="motion-row" role="group" aria-label="Animation speed">
+          <label className="motion-row">
             <span className="motion-label">Speed</span>
-            {[...ANIM_SCALES].sort((a, b) => b - a).map((s) => (
-              <button
-                key={s}
-                type="button"
-                className={`motion-option${s === prefs.animScale ? ' active' : ''}`}
-                aria-pressed={s === prefs.animScale}
-                onClick={() => setMotionSettings({ animScale: s })}
-              >
-                {SPEED_LABEL[s]}
-              </button>
-            ))}
-          </div>
+            <select
+              className="motion-select"
+              aria-label="Animation speed"
+              value={String(prefs.animScale)}
+              onChange={(e) => {
+                const picked = ANIM_SCALES.find((s) => String(s) === e.target.value)
+                if (picked !== undefined) setMotionSettings({ animScale: picked })
+              }}
+            >
+              {[...ANIM_SCALES].sort((a, b) => b - a).map((s) => (
+                <option key={s} value={String(s)}>
+                  {SPEED_LABEL[s]}
+                </option>
+              ))}
+            </select>
+          </label>
           <label className="motion-row">
             <input
               type="checkbox"

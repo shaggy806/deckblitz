@@ -1,0 +1,13 @@
+/* A deck row's colour identity (`DeckIdentityPips`): at the row's right end,
+   ahead of anything after it (the deck builder's "active" badge). */
+.deck-identity-pips {
+  margin-left: auto;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+  white-space: nowrap;
+}
+.deck-identity-pips + .db-active-badge {
+  margin-left: 0;
+}

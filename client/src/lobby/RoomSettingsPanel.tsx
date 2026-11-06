@@ -129,21 +129,25 @@ export function RoomSettingsPanel({
         </div>
 
         <div className="rs-field">
-          <span className="rs-label">Bot speed</span>
+          <label className="rs-label" htmlFor="rs-bot-speed">
+            Bot speed
+          </label>
           {host ? (
-            <div className="rs-options" role="group" aria-label="Bot speed">
+            <select
+              id="rs-bot-speed"
+              className="rs-select"
+              value={game.botSpeed}
+              onChange={(e) => {
+                const picked = BOT_SPEEDS.find((s) => s.speed === e.target.value)
+                if (picked) game.setBotSpeed(picked.speed)
+              }}
+            >
               {BOT_SPEEDS.map((s) => (
-                <button
-                  key={s.speed}
-                  type="button"
-                  className={`seg-option${s.speed === game.botSpeed ? ' active' : ''}`}
-                  aria-pressed={s.speed === game.botSpeed}
-                  onClick={() => game.setBotSpeed(s.speed)}
-                >
+                <option key={s.speed} value={s.speed}>
                   {s.label}
-                </button>
+                </option>
               ))}
-            </div>
+            </select>
           ) : (
             <span className="rs-value">{speedLabel}</span>
           )}

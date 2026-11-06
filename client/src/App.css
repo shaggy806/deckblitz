@@ -176,11 +176,15 @@
   color: var(--muted);
   margin-right: 2px;
 }
-.ts-menu .motion-option.active {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: var(--accent-bg);
-  box-shadow: var(--bevel-pressed);
+/* A setting picked from a few named levels (animation and bot speed): a
+   dropdown, the user's call (2026-11-06), styled as the room settings' are. */
+.motion-select {
+  padding: 3px 6px;
+  font: inherit;
+  color: var(--text);
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 0;
 }
 .motion-note {
   color: var(--muted);

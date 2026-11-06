@@ -19,6 +19,7 @@ import { importDecklist, resolveImport } from './importDeck.ts'
 import type { ImportProgress, ImportReport } from './importDeck.ts'
 import { ReplacementReview } from './ReplacementReview.tsx'
 import { StableLabel } from '../ui/StableLabel.tsx'
+import { DeckIdentityPips } from '../ui/DeckIdentityPips.tsx'
 import { CONFIDENCE_LABEL } from './replacement-labels.ts'
 import './deck-builder.css'
 import { SiteNotice } from '../legal/SiteNotice.tsx'
@@ -142,6 +143,7 @@ export function DeckBuilderPage() {
                   onClick={() => selectDeck({ kind: 'saved', id: d.id })}
                 >
                   {d.name}
+                  <DeckIdentityPips commanders={d.commanders} />
                   {isActive({ kind: 'saved', id: d.id }) ? <span className="db-active-badge">active</span> : null}
                 </button>
               </li>
@@ -168,6 +170,7 @@ export function DeckBuilderPage() {
                     <span>{d.name}</span>
                     <span className="db-starter-commander">{commandersOf(d).join(' & ')}</span>
                   </span>
+                  <DeckIdentityPips commanders={commandersOf(d)} />
                   {isActive({ kind: 'starter', index: i }) ? <span className="db-active-badge">active</span> : null}
                 </button>
               </li>
