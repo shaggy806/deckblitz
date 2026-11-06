@@ -829,28 +829,9 @@ delete its detail there and move this line to `COMPLETED.md`.
 - **Blitzing a deck immediately saves it to your locally stored list of decks** (the user, 2026-11-02): it shouldn't; explore offering to save the deck after the game instead.
 - **No way to ask the card replacer for one card while building a deck** (the user, 2026-11-02): right-clicking a card in the deck builder should offer a "suggest replacement" button, so players can use the automatic card replacer to modify their deck.
 - **Animation follow-ups** (re-measure bot speeds, static buffs, library put-backs, the exile filter, the crown's flight, merged tokens, folding tokens with counters, dies-trigger pulses, history highlights, real sounds): `docs/plans/legibility-of-play.md`, "Follow-ups".
-- **Swap the animation and bot speed checkboxes to dropdown menus** (user, 2026-11-06): the
-  motion and bot-speed settings are checkboxes/option rows now (`client/src/ui/MotionControl.tsx`,
-  the room's "Bot speed" in `client/src/lobby/RoomSettingsPanel.tsx`); make each a dropdown.
-- **The library can't show the cards missing from the pool** (user, 2026-11-06): wanted, a filter
-  that shows only the cards not yet in the pool. The library page (`client/src/library/LibraryPage.tsx`)
-  lists `cardPool` from `client/src/cards/cardData.ts`, the engine's definitions alone, so it has no
-  unimplemented cards to show yet: they'd need a source (the Oracle snapshot,
-  `engine/data/oracle/cards.jsonl`, too big to bundle whole) before the filter can exist.
-- **Decks don't show their color identity** (user, 2026-11-06): wanted, color identity pips on each
-  deck in the deck builder's list (`client/src/deck-builder/DeckBuilderPage.tsx`) and in the lobby's
-  deck selector (`client/src/lobby/DeckPickerModal.tsx`).
 
 ## Tooling / docs
 
-- **A sacrifice cost's bare filter type-checks but throws** (batch 268, TRC group C):
-  `cost: { sacrifice: { subtype: "Food" } }` passes `tsc`, then `matchesFilter` reads an undefined
-  filter at runtime (game.ts ~20777, "reading 'sharesCardTypeWith'"); the right shape is
-  `sacrifice: { filter: { subtype: "Food" } }`. Tighten `AbilityCost.sacrifice`'s type so the bare
-  shape fails to compile.
-- **`batch-review.mjs` reads a card's first `name:`** (batch 268): Captain Kirk, Boldly Going
-  was compared as Starship Enterprise, the name in its search filter. Take the `defineCard`'s
-  top-level `name`.
 - **Confirm the box's room cap of 6 with a load test there** (2026-10-18): `MAX_ROOMS_PER_SHARD`
   went from 8 to 6 on the dev PC's measurement of the bots' one-second budget
   (`docs/plans/room-shards.md`, "The one-second budget"); run `npm run load-test -w server` on the

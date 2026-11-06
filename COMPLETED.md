@@ -3163,6 +3163,18 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Client / UI
 
+- **The library shows the cards missing from the pool** (the user, 2026-11-06): a "Show: Not in
+  the pool yet" dropdown lists every Commander-legal card the pool lacks (2,825 that day) as its
+  Scryfall face, linked to Scryfall, through the same search, type, colour, sort and Set filters.
+  The source is `client/public/missing-cards.json` (~120 KB gzipped, fetched only when asked),
+  written from the Oracle snapshot by `npm run gen:missing-cards -w engine` and refreshed by
+  verify's marks step; the library also drops any name its pool has gained since.
+- **Decks show their colour identity** (the user, 2026-11-06): `ui/DeckIdentityPips` draws the
+  commanders' identity as mana pips on every deck in the deck builder's list and the lobby's deck
+  picker, from the commanders' own shards (the lobby never loads the pool).
+- **The animation and bot speed settings are dropdowns** (the user, 2026-11-06): the Settings
+  panel's animation and bot speeds and the room settings' bot speed, each a `<select>` instead of
+  a row of option buttons.
 - **The log names a hidden card by its id** (2026-11-04): the compact log and the event log now share `logNameAt`, so a card gone somewhere hidden reads as hidden, not "obj-161". The target banner's "choose 1 target" reads singular too.
 - **Learn Commander's first game** (2026-11-02: f1322a3f, 3658a8f8): a whole game for someone who
   has never played, won on turn 7 (`learn-commander`, replacing the proof lesson), which can't be
@@ -3268,6 +3280,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Tooling / docs
 
+- **`batch-review.mjs` reads a card's own name** (2026-11-06): it searched from the
+  `import { defineCard }` line, so a helper above the call could lend its `name:` (Captain Kirk,
+  Boldly Going read as Starship Enterprise; 47 pool cards in all, mostly "Chandra's X" cards named
+  as their planeswalker). It now takes the `defineCard({…})` call's top-level `name`, and a
+  helper-built card's first argument (`painLand("Adarkar Wastes", …)`, 228 that read as "?").
+- **A sacrifice cost's bare filter** (2026-11-06, checked, no change): `sacrifice: { subtype:
+  "Food" }` already fails to compile against `AbilityCost` (TS2353). Batch 268's agent saw the
+  runtime throw first because the card-author agents run their tests before they type-check.
 - **The need-keys plan's Phase 1, steps 3 and 4** (2026-10-27, `docs/plans/need-keys-after-the-walk.md`
   → *Phase 1 progress*). The merge ran as 84 Haiku jobs. It applied 23 aliases after review,
   which took the open keys from 2,602 to 2,579, and recorded 617 generalisation groups in the
