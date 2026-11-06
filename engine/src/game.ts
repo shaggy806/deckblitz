@@ -47900,8 +47900,19 @@ export class Game {
     // Minted only once something is actually exiled: a trigger that finds
     // nothing to exile leaves no trace.
     let link: string | undefined;
-    const linkNow = (): string | undefined =>
-      delayed === undefined ? undefined : (link ??= `flicker-${this.state.nextObjectSeq++}`);
+    // "At the beginning of that player's next end step" (The Eternal
+    // Wanderer): a link, and a delayed return, for each owner.
+    const perOwner = delayed !== undefined && options.returnOnOwnersTurn === true;
+    const ownerLinks: { readonly owner: PlayerId; readonly link: string }[] = [];
+    const linkNow = (owner: PlayerId): string | undefined => {
+      if (delayed === undefined) return undefined;
+      if (!perOwner) return (link ??= `flicker-${this.state.nextObjectSeq++}`);
+      const known = ownerLinks.find((l) => l.owner === owner);
+      if (known !== undefined) return known.link;
+      const minted = { owner, link: `flicker-${this.state.nextObjectSeq++}` };
+      ownerLinks.push(minted);
+      return minted.link;
+    };
     const exiled: ObjectId[] = [];
     const seen = new Set<ObjectId>();
     // Exiling them all is one event (rule 603.2c — Brago, Eerie Interlude):
@@ -47931,7 +47942,6 @@ export class Game {
         this.emit({ type: "permanent-exiled", object: id });
         if (isToken) continue;
         // After the move: `moveObject` clears the link on the way.
-        const exileLink = linkNow();
         // A merged or melded permanent became several cards, and the return
         // finds every one of them (730.3c; the meld ruling: "if an effect
         // moves a melded permanent to a new zone and then affects 'that
@@ -47939,6 +47949,7 @@ export class Game {
         // own, front face up.
         for (const card of [id, ...(this.state.objects[id].leftWith ?? [])]) {
           if (this.state.objects[card]?.zone !== "exile") continue;
+          const exileLink = linkNow(this.state.objects[card].owner);
           if (exileLink !== undefined) this.state.objects[card].flickerLink = exileLink;
           exiled.push(card);
         }
@@ -47980,23 +47991,32 @@ export class Game {
       return null;
     }
     // No link means nothing was exiled (or is waiting to be): no return.
-    if (link === undefined) return null;
-    const returns: EffectSpec = {
-      kind: "return-flickered",
-      link,
-      ...(options.thenCounters !== undefined ? { thenCounters: options.thenCounters } : {}),
-      ...(returnUnder !== undefined ? { underPlayer: returnUnder } : {}),
-      ...(options.transformed === true ? { transformed: true } : {}),
-      ...(options.tapped === true ? { tapped: true } : {}),
-    };
-    this.createDelayedTrigger(
-      source,
-      controller,
-      delayed,
-      options.returnThen === undefined ? returns : { kind: "sequence", effects: [returns, options.returnThen] },
-      options.returnText ?? "Return the exiled card to the battlefield.",
-      [],
-    );
+    const links: readonly { readonly owner?: PlayerId; readonly link: string }[] = perOwner
+      ? ownerLinks
+      : link === undefined
+        ? []
+        : [{ link }];
+    for (const each of links) {
+      const returns: EffectSpec = {
+        kind: "return-flickered",
+        link: each.link,
+        ...(options.thenCounters !== undefined ? { thenCounters: options.thenCounters } : {}),
+        ...(returnUnder !== undefined ? { underPlayer: returnUnder } : {}),
+        ...(options.transformed === true ? { transformed: true } : {}),
+        ...(options.tapped === true ? { tapped: true } : {}),
+      };
+      this.createDelayedTrigger(
+        source,
+        controller,
+        delayed,
+        options.returnThen === undefined ? returns : { kind: "sequence", effects: [returns, options.returnThen] },
+        options.returnText ?? "Return the exiled card to the battlefield.",
+        [],
+        [],
+        // The owner's turn, the ability still the controller's (rule 603.7e).
+        each.owner !== undefined ? { turnOf: each.owner } : {},
+      );
+    }
     return null;
   }
 

@@ -666,6 +666,8 @@ export interface FlickerOptions {
   /** It returns at once, face down (Shorecrasher Elemental). */
   readonly faceDown?: boolean;
   readonly returnAt?: DelayedTriggerTiming;
+  /** See `flicker`'s `returnOnOwnersTurn`. */
+  readonly returnOnOwnersTurn?: boolean;
   readonly returnText?: string;
   /** See `flicker`'s `returnThen`. */
   readonly returnThen?: EffectSpec;
@@ -4289,6 +4291,14 @@ export type EffectSpec =
        * nothing was exiled.
        */
       readonly returnAt?: DelayedTriggerTiming;
+      /** With a `"your-…"` `returnAt`: the turn it waits for is **each
+       * card's owner's**, not the controller's — The Eternal Wanderer's
+       * "return that card to the battlefield under its owner's control at the
+       * beginning of **that player's** next end step". One delayed ability
+       * per owner among the cards exiled, each still the controller's (rule
+       * 603.7e), and each the end step of this turn when it's that owner's
+       * and the end step hasn't begun. */
+      readonly returnOnOwnersTurn?: true;
       /** "…return it to the battlefield **transformed**" (Clive, Ifrit's
        * Dominant) — a transforming double-faced card comes back with its
        * back face up (rule 712.14); anything else returns as usual. */
@@ -17270,6 +17280,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ...(spec.underYourControl === true ? { underYourControl: true } : {}),
         ...(returnUnder !== undefined ? { returnUnder } : {}),
         ...(spec.returnAt !== undefined ? { returnAt: spec.returnAt } : {}),
+        ...(spec.returnOnOwnersTurn === true ? { returnOnOwnersTurn: true } : {}),
         ...(spec.returnText !== undefined ? { returnText: spec.returnText } : {}),
         ...(spec.returnThen !== undefined ? { returnThen: spec.returnThen } : {}),
         ...(spec.transformed === true ? { transformed: true } : {}),

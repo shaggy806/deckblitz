@@ -1867,7 +1867,8 @@
   "cost:sacrifice-any-number-copy-for-each",
   "cost:sacrifice-any-number-copy-for-each",
   "condition:this-ability-did-this-turn",
-  "effect:search-finds-castable-this-turn"
+  "effect:search-finds-castable-this-turn",
+  "effect:flicker-return-at-owners-next-end-step"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

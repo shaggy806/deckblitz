@@ -387,6 +387,21 @@ and again as it resolves. "Each of your main phases" is two entries joined by
 `sameAbilityAs`. No scaffolder template: the line is Carpet's alone. Proving
 card: Carpet of Flowers. Key: condition:this-ability-did-this-turn.
 
+### A flicker that returns at its owner's next end step — built 2026-11-05
+
+By EDHREC rank: The Eternal Wanderer (1806). `flicker`'s `returnOnOwnersTurn` with a
+`"your-…"` `returnAt` waits for each exiled card's owner's turn, not the
+controller's: "return that card to the battlefield under its owner's control
+at the beginning of that player's next end step" is `returnAt:
+"your-next-end-step", returnOnOwnersTurn: true` — one delayed return per owner
+(a link each, `DelayedTrigger.turnOf`), still the controller's (rule 603.7e);
+this turn's end step when the card is the controller's own. The rest of the
+Wanderer was there: `attackLimit` on itself, and the −4 a `vote` of `choose`
+`about: "each-player"` `keep` then `sacrifice-all` of `notThisWay: "chosen"`.
+No scaffolder template: the scaffolder reads no delayed-return flicker yet, and
+the owner's-turn line is the Wanderer's alone. Proving card: The Eternal
+Wanderer. Key: effect:flicker-return-at-owners-next-end-step.
+
 ### A search's exiled finds castable later this turn — built 2026-11-05
 
 By EDHREC rank: Ugin, Eye of the Storms (1710). `search-library`'s `playable`
