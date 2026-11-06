@@ -1,0 +1,1224 @@
+{
+ "batch": "B268",
+ "status": "done",
+ "ranks": "Star Trek Commander (TRC, out 2026-11-13; preview cards from the snapshot, no rulings yet): whole set, 172 cards (three card-author agents of 55, 55 and 56; the lead assimilate, built with it, and Ezri Dax after the creature-type catalog fix). Worf, Chief Tactical Officer left untriaged: its preview text (only \"Vigilance\" on a 3-mana legendary) looks incomplete. Jean-Luc Picard, Luminary isn't in the snapshot. Borg Cube and Death Is Irrelevant are Star Trek's (B266), re-triaged here.",
+ "authored": [
+  {
+   "name": "Alexander, Ship's Fool",
+   "files": [
+    "engine/src/cards/pool/alexander-ships-fool.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Amanda Grayson, Logic's Link",
+   "files": [
+    "engine/src/cards/pool/amanda-grayson-logics-link.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ambassador K'Ehleyr",
+   "files": [
+    "engine/src/cards/pool/ambassador-kehleyr.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ambulatory Reactor",
+   "files": [
+    "engine/src/cards/pool/ambulatory-reactor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Assimilate the Wounded",
+   "files": [
+    "engine/src/cards/pool/assimilate-the-wounded.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Assimilation Assessor",
+   "files": [
+    "engine/src/cards/pool/assimilation-assessor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "B'Elanna Torres, Scrapper",
+   "files": [
+    "engine/src/cards/pool/belanna-torres-scrapper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Badgey, Malicious Glitch",
+   "files": [
+    "engine/src/cards/pool/badgey-malicious-glitch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Balance of Terror",
+   "files": [
+    "engine/src/cards/pool/balance-of-terror.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Battle of Wolf 359",
+   "files": [
+    "engine/src/cards/pool/battle-of-wolf-359.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Benjamin Sisko, Besieged",
+   "files": [
+    "engine/src/cards/pool/benjamin-sisko-besieged.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Beverly Crusher, Ship's Doctor",
+   "files": [
+    "engine/src/cards/pool/beverly-crusher-ships-doctor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bio-Asset Allocator",
+   "files": [
+    "engine/src/cards/pool/bio-asset-allocator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blood-Sport Champion",
+   "files": [
+    "engine/src/cards/pool/blood-sport-champion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Borg Incursion",
+   "files": [
+    "engine/src/cards/pool/borg-incursion.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Borg Queen, Perfection Manifest",
+   "files": [
+    "engine/src/cards/pool/borg-queen-perfection-manifest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Borg Scout Sphere",
+   "files": [
+    "engine/src/cards/pool/borg-scout-sphere.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Captain Janeway, Endgame",
+   "files": [
+    "engine/src/cards/pool/captain-janeway-endgame.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Captain Kirk, Boldly Going",
+   "files": [
+    "engine/src/cards/pool/captain-kirk-boldly-going.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ceti Eel",
+   "files": [
+    "engine/src/cards/pool/ceti-eel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chancellor Gorkon",
+   "files": [
+    "engine/src/cards/pool/chancellor-gorkon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chekov and McCoy",
+   "files": [
+    "engine/src/cards/pool/chekov-and-mccoy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chief Kyle, Transporter Tech",
+   "files": [
+    "engine/src/cards/pool/chief-kyle-transporter-tech.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Chief Miles O'Brien",
+   "files": [
+    "engine/src/cards/pool/chief-miles-obrien.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Christine Chapel, Combat Medic",
+   "files": [
+    "engine/src/cards/pool/christine-chapel-combat-medic.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Class-4 Tactical Cube",
+   "files": [
+    "engine/src/cards/pool/class-4-tactical-cube.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Co-Option Adjutant",
+   "files": [
+    "engine/src/cards/pool/co-option-adjutant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Collective Override",
+   "files": [
+    "engine/src/cards/pool/collective-override.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Colossal Clone Master",
+   "files": [
+    "engine/src/cards/pool/colossal-clone-master.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Command Chair",
+   "files": [
+    "engine/src/cards/pool/command-chair.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Commander Spock",
+   "files": [
+    "engine/src/cards/pool/commander-spock.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Commander William Riker",
+   "files": [
+    "engine/src/cards/pool/commander-william-riker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cryogenic Stasis",
+   "files": [
+    "engine/src/cards/pool/cryogenic-stasis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Curzon Dax, Bound by Blood",
+   "files": [
+    "engine/src/cards/pool/curzon-dax-bound-by-blood.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Data, Exploring Humanity",
+   "files": [
+    "engine/src/cards/pool/data-exploring-humanity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Data, Professor of Humanities",
+   "files": [
+    "engine/src/cards/pool/data-professor-of-humanities.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Death Is Irrelevant",
+   "files": [
+    "engine/src/cards/pool/death-is-irrelevant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Defense Force Aggressor",
+   "files": [
+    "engine/src/cards/pool/defense-force-aggressor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Deliver from Chaos",
+   "files": [
+    "engine/src/cards/pool/deliver-from-chaos.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Direct Hit",
+   "files": [
+    "engine/src/cards/pool/direct-hit.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Disruptor Pistol",
+   "files": [
+    "engine/src/cards/pool/disruptor-pistol.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Dr. Pulaski, Cynical Clinician",
+   "files": [
+    "engine/src/cards/pool/dr-pulaski-cynical-clinician.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Emergency Regeneration",
+   "files": [
+    "engine/src/cards/pool/emergency-regeneration.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ensign Harry Kim, Operations",
+   "files": [
+    "engine/src/cards/pool/ensign-harry-kim-operations.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Evasive Maneuvers",
+   "files": [
+    "engine/src/cards/pool/evasive-maneuvers.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Exocomp",
+   "files": [
+    "engine/src/cards/pool/exocomp.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Extraction Integrant",
+   "files": [
+    "engine/src/cards/pool/extraction-integrant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ezri Dax, Newly Joined",
+   "files": [
+    "engine/src/cards/pool/ezri-dax-newly-joined.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ferocious Colonist",
+   "files": [
+    "engine/src/cards/pool/ferocious-colonist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fleet Captain Christopher Pike",
+   "files": [
+    "engine/src/cards/pool/fleet-captain-christopher-pike.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gagh Slinger",
+   "files": [
+    "engine/src/cards/pool/gagh-slinger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Galvanizing Tenor",
+   "files": [
+    "engine/src/cards/pool/galvanizing-tenor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Geordi La Forge, Innovator",
+   "files": [
+    "engine/src/cards/pool/geordi-la-forge-innovator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Giant Space Amoeba",
+   "files": [
+    "engine/src/cards/pool/giant-space-amoeba.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gin'tak Charge",
+   "files": [
+    "engine/src/cards/pool/gintak-charge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glory to the Empire!",
+   "files": [
+    "engine/src/cards/pool/glory-to-the-empire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gnarling Targ",
+   "files": [
+    "engine/src/cards/pool/gnarling-targ.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gorn Captain",
+   "files": [
+    "engine/src/cards/pool/gorn-captain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Grilka, Widowed Warrior",
+   "files": [
+    "engine/src/cards/pool/grilka-widowed-warrior.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gumato",
+   "files": [
+    "engine/src/cards/pool/gumato.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Head of Security",
+   "files": [
+    "engine/src/cards/pool/head-of-security.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "I.K.S. Negh'Var, Imperial Flagship",
+   "files": [
+    "engine/src/cards/pool/i-k-s-neghvar-imperial-flagship.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Imperial Hullbreachers",
+   "files": [
+    "engine/src/cards/pool/imperial-hullbreachers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Indelicate Healer",
+   "files": [
+    "engine/src/cards/pool/indelicate-healer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Janice Rand, Essential Aide",
+   "files": [
+    "engine/src/cards/pool/janice-rand-essential-aide.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jean-Luc, Mon Capitaine",
+   "files": [
+    "engine/src/cards/pool/jean-luc-mon-capitaine.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jefferies Tube",
+   "files": [
+    "engine/src/cards/pool/jefferies-tube.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Join the Collective",
+   "files": [
+    "engine/src/cards/pool/join-the-collective.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Julian Bashir, Frontier Doctor",
+   "files": [
+    "engine/src/cards/pool/julian-bashir-frontier-doctor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jurati, Cordial Queen",
+   "files": [
+    "engine/src/cards/pool/jurati-cordial-queen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "K'Vort-Class Raider",
+   "files": [
+    "engine/src/cards/pool/kvort-class-raider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "K't'inga-Class Battle Cruiser",
+   "files": [
+    "engine/src/cards/pool/ktinga-class-battle-cruiser.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kang, Suspicious Captain",
+   "files": [
+    "engine/src/cards/pool/kang-suspicious-captain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kes, Evolving Telepath",
+   "files": [
+    "engine/src/cards/pool/kes-evolving-telepath.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kirk, Enterprising Captain",
+   "files": [
+    "engine/src/cards/pool/kirk-enterprising-captain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kirk, Man of Action",
+   "files": [
+    "engine/src/cards/pool/kirk-man-of-action.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Klingon Strike Force",
+   "files": [
+    "engine/src/cards/pool/klingon-strike-force.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kolinahr Priest",
+   "files": [
+    "engine/src/cards/pool/kolinahr-priest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Koloth, Tribble Hunter",
+   "files": [
+    "engine/src/cards/pool/koloth-tribble-hunter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kor, Cause of Vengeance",
+   "files": [
+    "engine/src/cards/pool/kor-cause-of-vengeance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Korok, Liberated Rage",
+   "files": [
+    "engine/src/cards/pool/korok-liberated-rage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kruge, Genesis Seeker",
+   "files": [
+    "engine/src/cards/pool/kruge-genesis-seeker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kurn, Son of Mogh",
+   "files": [
+    "engine/src/cards/pool/kurn-son-of-mogh.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "La Forge, Perceptive Engineer",
+   "files": [
+    "engine/src/cards/pool/la-forge-perceptive-engineer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lieutenant Hikaru Sulu",
+   "files": [
+    "engine/src/cards/pool/lieutenant-hikaru-sulu.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lieutenant Nyota Uhura",
+   "files": [
+    "engine/src/cards/pool/lieutenant-nyota-uhura.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Locutus of Borg",
+   "files": [
+    "engine/src/cards/pool/locutus-of-borg.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Lt. Arex, Ever-Adapting",
+   "files": [
+    "engine/src/cards/pool/lt-arex-ever-adapting.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "M'Ress, Crew Coordinator",
+   "files": [
+    "engine/src/cards/pool/mress-crew-coordinator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Martok, Hero of the Empire",
+   "files": [
+    "engine/src/cards/pool/martok-hero-of-the-empire.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Maturation Chamber",
+   "files": [
+    "engine/src/cards/pool/maturation-chamber.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "McCoy, Not a Bricklayer",
+   "files": [
+    "engine/src/cards/pool/mccoy-not-a-bricklayer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mek'leth Berserker",
+   "files": [
+    "engine/src/cards/pool/mekleth-berserker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Merciful Mandate",
+   "files": [
+    "engine/src/cards/pool/merciful-mandate.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "On the Shoulders of Giants",
+   "files": [
+    "engine/src/cards/pool/on-the-shoulders-of-giants.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "One, Borg Evolved",
+   "files": [
+    "engine/src/cards/pool/one-borg-evolved.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Operations Officer",
+   "files": [
+    "engine/src/cards/pool/operations-officer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Optimization Annex",
+   "files": [
+    "engine/src/cards/pool/optimization-annex.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Own the Day",
+   "files": [
+    "engine/src/cards/pool/own-the-day.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pelia, Immortal Innovator",
+   "files": [
+    "engine/src/cards/pool/pelia-immortal-innovator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Picard, Steadfast Captain",
+   "files": [
+    "engine/src/cards/pool/picard-steadfast-captain.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Planet Killer",
+   "files": [
+    "engine/src/cards/pool/planet-killer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Q, Your Illustrious Host",
+   "files": [
+    "engine/src/cards/pool/q-your-illustrious-host.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Qo'noS Quartermaster",
+   "files": [
+    "engine/src/cards/pool/qonos-quartermaster.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Queen's Diamond",
+   "files": [
+    "engine/src/cards/pool/queens-diamond.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reclamation Specialist",
+   "files": [
+    "engine/src/cards/pool/reclamation-specialist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reconnaissance Partition",
+   "files": [
+    "engine/src/cards/pool/reconnaissance-partition.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Reg Barclay, Fidgety Fantasist",
+   "files": [
+    "engine/src/cards/pool/reg-barclay-fidgety-fantasist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Right of Vengeance",
+   "files": [
+    "engine/src/cards/pool/right-of-vengeance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rite of Ascension",
+   "files": [
+    "engine/src/cards/pool/rite-of-ascension.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ro Laren, Double Agent",
+   "files": [
+    "engine/src/cards/pool/ro-laren-double-agent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rom and Leeta, Unlikely Pair",
+   "files": [
+    "engine/src/cards/pool/rom-and-leeta-unlikely-pair.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "S.S. Botany Bay",
+   "files": [
+    "engine/src/cards/pool/s-s-botany-bay.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sam Kirk, Xenoanthropologist",
+   "files": [
+    "engine/src/cards/pool/sam-kirk-xenoanthropologist.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Scotty, Chief Engineer",
+   "files": [
+    "engine/src/cards/pool/scotty-chief-engineer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Seven of Nine, Tertiary Adjunct",
+   "files": [
+    "engine/src/cards/pool/seven-of-nine-tertiary-adjunct.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shore Leave Planet",
+   "files": [
+    "engine/src/cards/pool/shore-leave-planet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shuttle Crew",
+   "files": [
+    "engine/src/cards/pool/shuttle-crew.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shuttlecraft Galileo",
+   "files": [
+    "engine/src/cards/pool/shuttlecraft-galileo.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sickbay Orderly",
+   "files": [
+    "engine/src/cards/pool/sickbay-orderly.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sins of the Father",
+   "files": [
+    "engine/src/cards/pool/sins-of-the-father.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spock, Logical Choice",
+   "files": [
+    "engine/src/cards/pool/spock-logical-choice.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Spock, Voice of Reason",
+   "files": [
+    "engine/src/cards/pool/spock-voice-of-reason.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Spot, Felis catus",
+   "files": [
+    "engine/src/cards/pool/spot-felis-catus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Starfleet Communicator",
+   "files": [
+    "engine/src/cards/pool/starfleet-communicator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Starfleet Crew",
+   "files": [
+    "engine/src/cards/pool/starfleet-crew.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Starship Enterprise",
+   "files": [
+    "engine/src/cards/pool/starship-enterprise.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stratagem Emulator",
+   "files": [
+    "engine/src/cards/pool/stratagem-emulator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Supplementation Node",
+   "files": [
+    "engine/src/cards/pool/supplementation-node.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "T'Pol, Vulcan Representative",
+   "files": [
+    "engine/src/cards/pool/tpol-vulcan-representative.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Talarian Hook Spider",
+   "files": [
+    "engine/src/cards/pool/talarian-hook-spider.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Temporal Tribulation",
+   "files": [
+    "engine/src/cards/pool/temporal-tribulation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tenacious Tosk",
+   "files": [
+    "engine/src/cards/pool/tenacious-tosk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Beacon of Kahless",
+   "files": [
+    "engine/src/cards/pool/the-beacon-of-kahless.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Borg Queen",
+   "files": [
+    "engine/src/cards/pool/the-borg-queen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Promise of Kahless",
+   "files": [
+    "engine/src/cards/pool/the-promise-of-kahless.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Sword of Kahless",
+   "files": [
+    "engine/src/cards/pool/the-sword-of-kahless.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tom Paris, Risk-Taker",
+   "files": [
+    "engine/src/cards/pool/tom-paris-risk-taker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Transwarp Hub",
+   "files": [
+    "engine/src/cards/pool/transwarp-hub.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Trelane, Squire of Gothos",
+   "files": [
+    "engine/src/cards/pool/trelane-squire-of-gothos.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tribble Cluster",
+   "files": [
+    "engine/src/cards/pool/tribble-cluster.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Troi, Winging It",
+   "files": [
+    "engine/src/cards/pool/troi-winging-it.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tuvok, Chief Tactical Officer",
+   "files": [
+    "engine/src/cards/pool/tuvok-chief-tactical-officer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Type-03 Borg Vessel",
+   "files": [
+    "engine/src/cards/pool/type-03-borg-vessel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "U.S.S. Defiant, Mirror Migrant",
+   "files": [
+    "engine/src/cards/pool/u-s-s-defiant-mirror-migrant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "U.S.S. Defiant, Tough Little Ship",
+   "files": [
+    "engine/src/cards/pool/u-s-s-defiant-tough-little-ship.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "U.S.S. Enterprise-C, Time-Tossed",
+   "files": [
+    "engine/src/cards/pool/u-s-s-enterprise-c-time-tossed.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "U.S.S. Enterprise-E, Sovereign",
+   "files": [
+    "engine/src/cards/pool/u-s-s-enterprise-e-sovereign.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "U.S.S. Prometheus, Prototype",
+   "files": [
+    "engine/src/cards/pool/u-s-s-prometheus-prototype.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "U.S.S. Stargazer, Here and There",
+   "files": [
+    "engine/src/cards/pool/u-s-s-stargazer-here-and-there.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Uhura, Xenolinguist",
+   "files": [
+    "engine/src/cards/pool/uhura-xenolinguist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unification",
+   "files": [
+    "engine/src/cards/pool/unification.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vic Fontaine, One Night Only",
+   "files": [
+    "engine/src/cards/pool/vic-fontaine-one-night-only.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Voq, Torchbearer",
+   "files": [
+    "engine/src/cards/pool/voq-torchbearer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Warship Flight Crew",
+   "files": [
+    "engine/src/cards/pool/warship-flight-crew.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Will Riker, Assuming Command",
+   "files": [
+    "engine/src/cards/pool/will-riker-assuming-command.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Worf, Defiant Commander",
+   "files": [
+    "engine/src/cards/pool/worf-defiant-commander.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Worf, Son of Mogh",
+   "files": [
+    "engine/src/cards/pool/worf-son-of-mogh.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Worf, Still Not Merry",
+   "files": [
+    "engine/src/cards/pool/worf-still-not-merry.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Pavel Chekov, First Posting",
+   "needs": [
+    "replacement:draw-replacement-optional-skip",
+    "replacement:draw-replacement-reveal"
+   ],
+   "why": "\"You may … instead\" of a draw: the engine's would-draw replacement always applies, so declining and drawing normally can't be offered."
+  },
+  {
+   "name": "The Guardian of Forever",
+   "needs": [
+    "effect:delayed-return-sacrificed-card"
+   ],
+   "why": "A delayed end-step trigger can't refer to the card sacrificed as the activation's cost."
+  },
+  {
+   "name": "Hugh, First of Many",
+   "needs": [
+    "static:grant-replicate"
+   ],
+   "why": "Nothing gives spells you cast replicate; it exists only as a card's own keyword."
+  },
+  {
+   "name": "Võx, Child of the Collective",
+   "needs": [
+    "effect:grant-undaunted-next-spell"
+   ],
+   "why": "Undaunted granted to a spell counts opponents as it's cast; grant-spells-this-turn fixes its reduction as the trigger resolves. Also waits on rulings (a spell that's both kinds)."
+  },
+  {
+   "name": "U.S.S. Farragut, Bold Explorer",
+   "needs": [
+    "condition:this-way-put-on-bottom-from-battlefield"
+   ],
+   "why": "\"Put it on the bottom of your library. When you do, draw a card\": the put-on-bottom this-way record covers cards from a hand only."
+  },
+  {
+   "name": "La Forge, Thoughtful as Ever",
+   "needs": [
+    "amount:permanents-you-put-counters-on-this-turn"
+   ],
+   "why": "Counts the permanents you put counters on this turn; countersPutThisTurn counts counters."
+  },
+  {
+   "name": "Cmdr. Troi, Outgoing Empath",
+   "needs": [
+    "effect:copy-spells-cast-this-way"
+   ],
+   "why": "\"You copy that spell\" — the spell an opponent cast through the cast-now; copy-spell points only at a target slot, the trigger's spell or the source."
+  },
+  {
+   "name": "Guinan, Ancient Advisor",
+   "needs": [
+    "effect:counters-put-this-way"
+   ],
+   "why": "\"If you put two or more +1/+1 counters\" counts counters; thisWay counters-put counts permanents (a doubler makes them differ)."
+  },
+  {
+   "name": "Sulu, Heroic Helmsman",
+   "needs": [
+    "static:crews-as-though-power",
+    "static:stations-as-though-power"
+   ],
+   "why": "crewsAs has no multiplier, and nothing changes the power a station counts."
+  },
+  {
+   "name": "Chief Montgomery Scott",
+   "needs": [
+    "effect:look-and-choose-enters-with-counters-if",
+    "effect:enters-with-counters-dynamic"
+   ],
+   "why": "look-and-choose's withCounters is one fixed kind and number; the card needs X, and a different kind for a creature than a Spacecraft."
+  },
+  {
+   "name": "T'Pring, Never Parted",
+   "needs": [
+    "condition:filter-fought-this-turn",
+    "trigger:fought-this-way-dies-this-turn"
+   ],
+   "why": "\"Whenever a creature that fought this way dies this turn, you draw a card\": no trigger on the creatures a fight involved."
+  },
+  {
+   "name": "Gift of Perfection",
+   "needs": [
+    "effect:assimilate-one-of-each-opponents-reveal"
+   ],
+   "why": "Each opponent reveals until a creature card; you assimilate ONE of all the creature cards revealed, and the rest (the other found creatures too) go to the bottom: a choice across every player's reveal."
+  },
+  {
+   "name": "The Best of Both Worlds",
+   "needs": [
+    "effect:saga-chapter-links-permanent"
+   ],
+   "why": "Chapter III exiles \"the Borg assimilated with this Saga\": nothing links a permanent chapter I gained control of to the Saga (chapter I is expressible: gain-control, add-counter, add-types)."
+  },
+  {
+   "name": "Borg Cube",
+   "needs": [
+    "condition:linked-exile-currently-exiled"
+   ],
+   "why": "\"Assimilate a creature card exiled with it. If you can't, exile up to one target creature\": no condition for whether a creature card exiled with it can be put onto the battlefield (assimilate itself is built)."
+  }
+ ]
+}

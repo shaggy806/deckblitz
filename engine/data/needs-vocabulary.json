@@ -15959,6 +15959,38 @@
    "family": "condition:exiled-with-source-count",
    "description": "A condition that every card exiled with the source shares a card type.",
    "example": "All Good Things...: \"if all cards exiled with it share a card type\" (zero or one card awaits rulings)."
+  },
+  "effect:delayed-return-sacrificed-card": {
+   "family": "effect:sacrificed-object-lki",
+   "example": "The Guardian of Forever (Star Trek Commander): a delayed end-step trigger returns the card sacrificed as the activation's cost; nothing refers to a cost-sacrificed card later."
+  },
+  "effect:grant-undaunted-next-spell": {
+   "family": "keyword:undaunted",
+   "example": "Võx, Child of the Collective (Star Trek Commander): the next spell gains undaunted, its reduction counted as it's cast, not as the trigger resolves."
+  },
+  "condition:this-way-put-on-bottom-from-battlefield": {
+   "family": "effect:this-way-results",
+   "example": "U.S.S. Farragut, Bold Explorer (Star Trek Commander): \"put it on the bottom of your library. When you do, draw a card\" — the put-on-bottom this-way record covers cards from a hand only."
+  },
+  "amount:permanents-you-put-counters-on-this-turn": {
+   "family": "trigger:counters-put",
+   "example": "La Forge, Thoughtful as Ever (Star Trek Commander): the number of permanents you put counters on this turn (countersPutThisTurn counts counters)."
+  },
+  "static:stations-as-though-power": {
+   "family": "mechanic:station",
+   "example": "Sulu, Heroic Helmsman (Star Trek Commander): creatures station as though their power were greater."
+  },
+  "trigger:fought-this-way-dies-this-turn": {
+   "family": "condition:filter-this-turn-history",
+   "example": "T'Pring, Never Parted (Star Trek Commander): \"whenever a creature that fought this way dies this turn, you draw a card\"."
+  },
+  "effect:assimilate-one-of-each-opponents-reveal": {
+   "family": "effect:reveal-until",
+   "example": "Gift of Perfection (Star Trek Commander): each opponent reveals until a creature card; you choose one of all the creature cards revealed, and every other revealed card goes to the bottom."
+  },
+  "effect:saga-chapter-links-permanent": {
+   "family": "effect:linked-exiled-card",
+   "example": "The Best of Both Worlds (Star Trek Commander): chapter III exiles and returns \"the Borg assimilated with this Saga\" — a link from the Saga to the permanent chapter I took."
   }
  },
  "groups": [

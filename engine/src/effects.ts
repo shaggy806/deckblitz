@@ -2997,9 +2997,10 @@ export type EffectSpec =
        * cost payment the planner picks the colour it needs; a mana ability
        * activated on its own makes the colour the player picked (the
        * action's `manaColors`). Anywhere else — a spell or a triggered
-       * ability resolving — nothing is asked and it makes white, so a card
-       * that adds "one mana of any color" as it resolves spells the choice
-       * out as a `modal` over the five (Lotus Cobra, Manamorphose).
+       * ability resolving — the player chooses the colour as it resolves
+       * (rule 608.2d, `addManaChoice`), so a card that adds "one mana of any
+       * color" there needs no `modal` of its own (older ones, Lotus Cobra and
+       * Manamorphose, still spell it out).
        * `mana: { oneOf: [...] }` — `amount` mana in any combination of the
        * listed colours, each unit independently chosen (Orcish Lumberjack:
        * "three mana in any combination of {R} and/or {G}" —

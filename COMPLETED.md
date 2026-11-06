@@ -532,6 +532,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Card backlog
 
+- **Star Trek Commander (TRC) whole, from its previews: 158 of 172 new cards authored** (2026-11-06,
+  batch 268; `engine/data/sweep-3/B268.json`) — three card-author agents of 55, 55 and 56 and the
+  lead, who built assimilate alongside them (`EnterTypes.setSubtypes`, `ASSIMILATE`, a scaffolder
+  template; The Borg Queen, Borg Queen, Perfection Manifest, Assimilation Assessor, Assimilate the
+  Wounded, and TRK's Death Is Irrelevant) and regenerated the creature-type catalog (27 Star Trek
+  types were missing, so Federation undercounted). 13 blocked; Worf, Chief Tactical Officer and
+  Jean-Luc Picard, Luminary wait for the post-release snapshot.
 - **Star Trek (TRK) whole, from its previews: 263 of 294 new cards authored** (2026-11-06, batches 266-267; `engine/data/sweep-3/B266.json`, `B267.json`) — batch 266 the top 120 by rank and the cards Beam me up and face a dilemma unlocked (114 authored, the two mechanics built), batch 267 the other 162 (149 authored, with a fix to Federation's creature-type count: a creature with any creature type counted as a changeling). 31 blocked, `mechanic:assimilate` the most (two cards here, most of TRC's Borg). The walk goes on with Star Trek Commander (TRC).
 - **The freed-cards queue emptied in one parallel round, B262–B265: 393 of 532 authored** (2026-11-05, `6e9b85d01` froze the lists) — the 532 cards `cards:needs -- --stale` listed, frozen in its order into `engine/data/freed/F1.txt` … `F4.txt` and worked by four cloud sessions under `author-freed`, coordinated with `author-walks-parallel`'s recheck-round shape and the landing lock (on for the round, off again after): F1 → B262 (94 of 131), F2 → B263 (108 of 133), F3 → B264 (111 of 135), F4 → B265 (80 of 133); 139 still blocked on narrow keys. Started 19:51 UTC, all four on `main` by 23:30. `--stale` lists nothing afterwards.
 - **Batch 264, the freed cards of frozen list F3: 111 of 135 authored** (2026-11-05, `4701cc60e` and the batch's card commits) — the cards freed by the families built 2026-11-02 and 2026-11-03 (random permanents, no maximum hand size, searches to exile, set types, secret choices, odd or even, emblems granting abilities, face-down looks), among them Ancient Silver Dragon, The Nipton Lottery, Thanos, the Mad Titan, Arlinn Kord, Teferi, Temporal Pilgrim and Urza, Lord High Artificer. `tap-all` and `return-to-hand-all` now read their filter with the effect's source, so `isSource: false` spares it; the random answer to a choice of permanents names a token stack once per token (the situation fuzzer stopped on Tidal Terror's "tap two" over a stack). 24 go back on 22 narrow keys and one open one.

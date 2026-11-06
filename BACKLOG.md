@@ -57,31 +57,18 @@ What blocks each unimplemented card, and which cards a built feature may have un
 the per-card JSON records in `engine/data/sweep-2/` and `sweep-3/`). Card lists go there; this
 section keeps only what to do next.
 
-- **Star Trek, from its previews** (`author-by-set`, the user's call 2026-11-06; out 2026-11-13):
-  TRK is whole (batches 266-267, `COMPLETED.md`). Federation ("the number of creature types among
-  non-Borg creatures you control") is `{ aggregate: "distinct", of: { subtypesOf: "creature" },
-  filter: { …, notSubtypes: ["Borg"] } }` (Captain Jonathan Archer), fixed in batch 267.
-  **Batch 268: Star Trek Commander, 172** (`--set trc`; three agents) —
-  its two new ability words need nothing: **Seek out** is "whenever you draw your second card each
-  turn" (`trigger: { on: "draws", who: "you", nthEachTurn: 2 }`, Tiger-Seal), **Battlefront** is "X
-  is the number of opponents you attacked this turn" (`{ turnStat: "opponents-attacked" }`,
-  Militant Angel); station is built (18 cards). **Build `mechanic:assimilate` with batch 268,
-  alongside its agents** — 8 cards: Borg Cube and Death Is Irrelevant (B266, blocked), The Borg
-  Queen, Borg Queen, Perfection Manifest, Assimilation Assessor, Assimilate the Wounded, Gift of
-  Perfection, The Best of Both Worlds. Researched 2026-11-06: assimilating a *permanent* (The Best
-  of Both Worlds) is already expressible — `gain-control` for good, `add-counter`, then
-  `add-types { addTypes: ["artifact"], setSubtypes: ["Borg"], duration: "permanent" }`
-  (`setSubtypes` replaces creature types only, rule 205.1a). Assimilating a *card* (graveyard,
-  exile, a revealed library card) is `put-onto-battlefield` with `underYourControl`,
-  `withCounters` and `enterAs` (Grave Betrayal's shape), but `EnterTypes` (`effects.ts`) has
-  `addTypes` and no creature-type replacement: add one (a `setSubtypes` read the way
-  `add-types`' is), so the card *enters* as a Borg artifact creature, as Rise from the Grave's
-  Zombie does; then an `assimilate` scaffolder template for the keyword action and its
-  reminder text. The cards' own pickers are separate: a card "exiled with it", one per opponent
-  "put there from the battlefield this turn", reveal/exile-until a creature card. After release,
-  `gen:oracle` again: it drops the `preview` lines, brings the rulings, and `card:verify` shows
-  any card whose text changed. Mystery Booster Commander (MBC, 69, out 2026-10-19) is the newest
-  released set still open.
+- **The set walk, upcoming sets first** (`author-by-set`): Star Trek (TRK) and Star Trek Commander
+  (TRC) are whole from their previews (batches 266-268, `COMPLETED.md`; assimilate built,
+  `ASSIMILATE` in `helpers.ts`). **Next, batch 269: Marvel: Darkhold Destiny's 8 previews (MDD 7,
+  MDC 1, out 2027-04-09) and then Mystery Booster Commander (MBC, 69, out 2026-10-19), the newest
+  released set still open** — 77 cards, one agent (`cards:sets -- --next 80`, or `--set mdd`, `--set
+  mdc`, `--set mbc`). **After Star Trek's release (2026-11-13)**: `npm run gen:oracle -w engine`
+  drops the `preview` lines and brings the rulings; `card:verify -- --offline` then shows any card
+  whose text changed. Then author TRC's two left: Worf, Chief Tactical Officer (left out of B268:
+  its preview text is only "Vigilance" on a 3-mana legendary, which looked incomplete) and
+  Jean-Luc Picard, Luminary (not in the snapshot yet); and re-read the vanilla preview commons
+  (Starfleet Crew, Warship Flight Crew, Defense Force Aggressor) and Võx, Child of the Collective
+  (blocked, also waiting on a ruling) against the released text.
 - **Next: work down the need keys** (the set walk ended 2026-10-27 with batch 234; its record moved to `COMPLETED.md`) (`docs/plans/need-keys-after-the-walk.md`,
   in progress; the tooling, the model trial, and Phase 1's merge and existence check landed
   2026-10-27): next, Phase 1 step 2, the recheck round. 863 cards were frozen 2026-10-27 into nine
@@ -598,6 +585,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **A split card's target offer reads both halves for filter-based protection** (2026-11-06: Malice was offered Guardian of the Guildpact, then refused; the situation fuzzer's Curzon Dax seed 31 fails on it).
 - **A static's own-type condition may read printed types** (suspected, 2026-11-06: Romulan Bird-of-Prey's hexproof "as long as this isn't a creature" held after station made it one; unconfirmed).
 - **An all-your-life payment is only offered at even life, 2 to 20** (K'rrik, Phyrexian pips: an odd total reached through Liesa's tax isn't offered).
 - **`withMain` from a precombat main runs M C+ C M M** (the rules say M C+ M C M; no pool ability reaches it yet).
@@ -846,6 +834,14 @@ delete its detail there and move this line to `COMPLETED.md`.
 
 ## Tooling / docs
 
+- **A sacrifice cost's bare filter type-checks but throws** (batch 268, TRC group C):
+  `cost: { sacrifice: { subtype: "Food" } }` passes `tsc`, then `matchesFilter` reads an undefined
+  filter at runtime (game.ts ~20777, "reading 'sharesCardTypeWith'"); the right shape is
+  `sacrifice: { filter: { subtype: "Food" } }`. Tighten `AbilityCost.sacrifice`'s type so the bare
+  shape fails to compile.
+- **`batch-review.mjs` reads a card's first `name:`** (batch 268): Captain Kirk, Boldly Going
+  was compared as Starship Enterprise, the name in its search filter. Take the `defineCard`'s
+  top-level `name`.
 - **Confirm the box's room cap of 6 with a load test there** (2026-10-18): `MAX_ROOMS_PER_SHARD`
   went from 8 to 6 on the dev PC's measurement of the bots' one-second budget
   (`docs/plans/room-shards.md`, "The one-second budget"); run `npm run load-test -w server` on the

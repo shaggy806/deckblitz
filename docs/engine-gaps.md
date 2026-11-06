@@ -6,6 +6,19 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **A split card's target offer reads both halves for filter-based protection** (found 2026-11-06,
+  batch 268's situation fuzzer: `node scripts/situation-fuzz.mjs --with "Curzon Dax, Bound by Blood"
+  --seed 31 --scenarios 1`, Curzon Dax only on the board). Casting Malice (Spite // Malice), the
+  target offer listed Guardian of the Guildpact (protection from monocolored), and `castSpell`
+  then refused it, "illegal target for Malice". Rule 709.3: a split card cast as one half has only
+  that half's characteristics, so Malice is mono-black and the refusal is right. `castSpell` sets
+  `object.face` up front (game.ts ~19455) before `whyTargetsInvalid`, but the offer paths
+  (`whyCannotCastSpell`'s `legalTargets` ~17706, `castingCostOf` ~15396, `costModificationFor`
+  ~15984) pass `cardSource(def, cardId)` with the card still on its default face. `protectionBlocks`'
+  filter clauses (`matchesFilter` on `source.object`, targeting.ts ~390) then read the card in hand,
+  whose characteristics are both halves (709.4), multicolored. The colour clauses use `def.colors`
+  and are right. Fix: judge the offer as the face being cast, e.g. a face-aware read in
+  `TargetSource` that `matchesFilter` honours, rather than mutating `face` under the computed cache.
 - **Two different "must be blocked by" filters on one attacker merge into one requirement** (found 2026-11-03). An attacker
   under two filtered requirements should have each counted toward the most requirements possible (rule 509.1c).
   `combat/blocking.ts`'s `mustBeBlockedByOneOf` holds one list per attacker, so a blocker matching either filter satisfies both.
