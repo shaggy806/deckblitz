@@ -428,6 +428,18 @@ and again as it resolves. "Each of your main phases" is two entries joined by
 `sameAbilityAs`. No scaffolder template: the line is Carpet's alone. Proving
 card: Carpet of Flowers. Key: condition:this-ability-did-this-turn.
 
+### The next creature spell enters with a counter — built 2026-11-06
+
+By EDHREC rank: Summon: Fenrir (1937). No engine code: "When you next cast a
+creature spell this turn, that creature enters with an additional +1/+1
+counter on it" was already `delayed-trigger` `at: { nextSpell: { type:
+"creature" } }` with `enters-with-counters` on the trigger object (Yuna, Kumano
+Faces Kakkazan; rule 603.7, 614.1c), and Fenrir's III Triumph of Ferocity's
+`controls-greatest` conditional. The scaffolder now reads the sentence (an or N
+counters) as an effect; it reads no Saga chapters yet, so Fenrir isn't
+scaffolded whole. Proving card: Summon: Fenrir. Key:
+effect:next-creature-enters-with-counter.
+
 ### An attack tax in Phyrexian mana — built 2026-11-06
 
 By EDHREC rank: Norn's Annex (1923). The `attackTax` static's `phyrexian: "W"`

@@ -1513,7 +1513,10 @@ Grand Summoner's "when you next cast a creature spell this turn, that creature
 enters with two additional +1/+1 counters on it" is `at: { nextSpell: { type:
 "creature" } }` with `{ kind: "enters-with-counters", target:
 "trigger-object", counter: "+1/+1", amount: 2 }` (counters a spell enters the
-battlefield with as it resolves — before its enters triggers look). Codie,
+battlefield with as it resolves — before its enters triggers look); with
+`amount: 1`, "an additional +1/+1 counter", it's a Saga chapter too (Summon:
+Fenrir's II, Kumano Faces Kakkazan's), and the scaffolder reads the sentence.
+Codie,
 Vociferous Codex's "when you cast your next spell this turn, exile cards from
 the top of your library until you exile an instant or sorcery card with lesser
 mana value. Until end of turn, you may cast that card without paying its mana

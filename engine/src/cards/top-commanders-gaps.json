@@ -1885,7 +1885,8 @@
   "effect:exile-target-spell-plotted",
   "effect:divided-total-reading-x",
   "effect:divided-total-reading-x",
-  "cost:attack-tax-phyrexian-mana"
+  "cost:attack-tax-phyrexian-mana",
+  "effect:next-creature-enters-with-counter"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

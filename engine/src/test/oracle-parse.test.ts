@@ -16246,6 +16246,24 @@ describe("an Aura enchanting a card in a graveyard", () => {
   });
 });
 
+describe("the next creature spell enters with counters", () => {
+  it("reads Summon: Fenrir's chapter II as a delayed trigger on the next creature spell", () => {
+    const line =
+      "When you next cast a creature spell this turn, that creature enters with an additional +1/+1 counter on it.";
+    expect(parseEffect(line, ctx()).effect).toEqual({
+      kind: "delayed-trigger",
+      at: { nextSpell: { type: "creature" } },
+      effect: { kind: "enters-with-counters", target: "trigger-object", counter: "+1/+1", amount: 1 },
+      text: line,
+    });
+    const two = parseEffect(
+      "When you next cast a creature spell this turn, that creature enters with two additional +1/+1 counters on it.",
+      ctx(),
+    ).effect as { effect: { amount: number } };
+    expect(two.effect.amount).toBe(2);
+  });
+});
+
 describe("a copy of the spell for each creature sacrificed", () => {
   it("reads Plumb the Forbidden whole", () => {
     const plumb = parseFace({

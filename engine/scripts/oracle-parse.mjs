@@ -5145,6 +5145,26 @@ export function parseSentence(sentence, ctx) {
       };
     }
   }
+  // "When you next cast a creature spell this turn, that creature enters with
+  // an additional +1/+1 counter on it" (Summon: Fenrir, Kumano Faces
+  // Kakkazan): a delayed trigger on the next such spell (rule 603.7), the
+  // counters put on as it enters (614.1c).
+  if (
+    (m = re(
+      "when you next cast an? ((?:\\w+ )*?creature) spell this turn, that creature enters with (an|\\w+) additional \\+1/\\+1 counters? on it",
+    ).exec(s))
+  ) {
+    const filter = flashSpellsFilter(m[1]);
+    const amount = m[2].toLowerCase() === "an" ? 1 : numberOf(m[2]);
+    if (filter !== null && filter !== true && typeof amount === "number") {
+      return {
+        kind: "delayed-trigger",
+        at: { nextSpell: filter },
+        effect: { kind: "enters-with-counters", target: "trigger-object", counter: "+1/+1", amount },
+        text: s,
+      };
+    }
+  }
   // One slot over a spell or a creature (`one-of`), one over a graveyard or
   // exile: of the returns, only the one from the zone it's in does anything.
   if (re("return target spell or creature to its owner's hand").test(s)) {
