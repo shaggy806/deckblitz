@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4637 already implemented / 363 missing (marks refreshed 2026-11-06)
+4644 already implemented / 356 missing (marks refreshed 2026-11-06)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1615,7 +1615,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1622  Ophidian Eye                             {2}{U}           Enchantment — Aura
 [x]  1623  Chainer, Nightmare Adept                 {2}{B}{R}        Legendary Creature — Human Minion
 [x]  1624  Elvish Warmaster                         {1}{G}           Creature — Elf Warrior
-[ ]  1625  Defiler of Vigor                         {3}{G}{G}        Creature — Phyrexian Wurm
+[x]  1625  Defiler of Vigor                         {3}{G}{G}        Creature — Phyrexian Wurm
 [x]  1626  Golgari Guildgate                        {0}              Land — Gate
 [x]  1627  Call the Coppercoats                     {2}{W}           Instant
 [x]  1628  The Eternity Elevator                    {5}              Legendary Artifact — Spacecraft
@@ -1896,7 +1896,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1903  Loran's Escape                           {W}              Instant
 [x]  1904  Nighthawk Scavenger                      {1}{B}{B}        Creature — Vampire Rogue
 [x]  1905  Sylvan Caryatid                          {1}{G}           Creature — Plant
-[ ]  1906  Aven Interrupter                         {1}{W}{W}        Creature — Bird Rogue
+[x]  1906  Aven Interrupter                         {1}{W}{W}        Creature — Bird Rogue
 [x]  1907  Harvester of Souls                       {4}{B}{B}        Creature — Demon
 [ ]  1908  Abundance                                {2}{G}{G}        Enchantment
 [x]  1909  Smuggler's Copter                        {2}              Artifact — Vehicle
@@ -1923,7 +1923,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1930  Teferi's Puzzle Box                      {4}              Artifact
 [x]  1931  Goldlust Triad                           {4}{R}           Creature — Dragon
 [x]  1932  Cycle of Renewal                         {2}{G}           Instant — Lesson
-[ ]  1933  Inti, Seneschal of the Sun               {1}{R}           Legendary Creature — Human Knight
+[x]  1933  Inti, Seneschal of the Sun               {1}{R}           Legendary Creature — Human Knight
 [x]  1934  Adaptive Omnitool                        {2}              Artifact — Equipment
 [x]  1935  Dreamstone Hedron                        {6}              Artifact
 [x]  1936  One with the Multiverse                  {6}{U}{U}        Enchantment
@@ -1970,7 +1970,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1977  Flashback                                {R}              Instant
 [x]  1978  Inkmoth Nexus                            {0}              Land
 [x]  1979  Mikaeus, the Lunarch                     {X}{W}           Legendary Creature — Human Cleric
-[ ]  1980  Winds of Abandon                         {1}{W}           Sorcery
+[x]  1980  Winds of Abandon                         {1}{W}           Sorcery
 [x]  1981  Horn of Gondor                           {3}              Legendary Artifact
 [x]  1982  Hero's Downfall                          {1}{B}{B}        Instant
 [x]  1983  Time Warp                                {3}{U}{U}        Sorcery
@@ -2033,7 +2033,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2040  Wake the Past                            {5}{R}{W}        Sorcery
 [x]  2041  Homunculus Horde                         {3}{U}           Creature — Homunculus
 [x]  2042  Rakdos Guildgate                         {0}              Land — Gate
-[ ]  2043  The Last Agni Kai                        {1}{R}           Instant
+[x]  2043  The Last Agni Kai                        {1}{R}           Instant
 [x]  2044  Volatile Stormdrake                      {1}{U}           Creature — Drake
 [x]  2045  Crippling Fear                           {2}{B}{B}        Sorcery
 [x]  2046  Trinket Mage                             {2}{U}           Creature — Human Wizard
@@ -2050,7 +2050,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2057  Night of the Sweets' Revenge             {3}{G}           Enchantment
 [x]  2058  Garruk, Primal Hunter                    {2}{G}{G}{G}     Legendary Planeswalker — Garruk
 [x]  2059  Generous Plunderer                       {1}{R}           Creature — Human Rogue
-[ ]  2060  Skrelv's Hive                            {1}{W}           Enchantment
+[x]  2060  Skrelv's Hive                            {1}{W}           Enchantment
 [x]  2061  Thousand Moons Smithy // Barracks of the Thousand {4}              Legendary Artifact // Legendary Artifact Land
 [x]  2062  Abstergo Entertainment                   {0}              Legendary Land
 [x]  2063  Cybermen Squadron                        {7}              Artifact Creature — Cyberman
@@ -4553,7 +4553,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4560  Bloodsoaked Champion                     {B}              Creature — Human Warrior
 [x]  4561  The Ten Rings                            {8}              Legendary Artifact
 [x]  4562  Within Range                             {3}{B}           Enchantment
-[ ]  4563  Defiler of Dreams                        {3}{U}{U}        Creature — Phyrexian Sphinx
+[x]  4563  Defiler of Dreams                        {3}{U}{U}        Creature — Phyrexian Sphinx
 [x]  4564  Retrofitter Foundry                      {1}              Artifact
 [x]  4565  Syr Vondam, Sunstar Exemplar             {W}{B}           Legendary Creature — Human Knight
 [ ]  4566  Everything Comes to Dust                 {7}{W}{W}{W}     Sorcery
