@@ -945,6 +945,7 @@ import _tokensAngelVigilanceToken from "../tokens/angel-vigilance-token.js";
 import _tokensBeastToken42 from "../tokens/beast-token-4-2.js";
 import _tokensBeastTokenBlackDeathtouch from "../tokens/beast-token-black-deathtouch.js";
 import _tokensBlackGreenElfToken from "../tokens/black-green-elf-token.js";
+import _tokensBorgToken from "../tokens/borg-token.js";
 import _tokensDevilToken from "../tokens/devil-token.js";
 import _tokensFrogLizardToken from "../tokens/frog-lizard-token.js";
 import _tokensGravebornToken from "../tokens/graveborn-token.js";
@@ -953,6 +954,7 @@ import _tokensIllusionTokenFreezingBlocker from "../tokens/illusion-token-freezi
 import _tokensKorWarriorToken from "../tokens/kor-warrior-token.js";
 import _tokensLizardToken from "../tokens/lizard-token.js";
 import _tokensMinorDemonToken from "../tokens/minor-demon-token.js";
+import _tokensOfficerToken from "../tokens/officer-token.js";
 import _tokensOrnithopterToken from "../tokens/ornithopter-token.js";
 import _tokensPestToken from "../tokens/pest-token.js";
 import _tokensRhinoToken from "../tokens/rhino-token.js";
@@ -1909,6 +1911,7 @@ const shard: CardShard = {
     _tokensBeastToken42,
     _tokensBeastTokenBlackDeathtouch,
     _tokensBlackGreenElfToken,
+    _tokensBorgToken,
     _tokensDevilToken,
     _tokensFrogLizardToken,
     _tokensGravebornToken,
@@ -1917,6 +1920,7 @@ const shard: CardShard = {
     _tokensKorWarriorToken,
     _tokensLizardToken,
     _tokensMinorDemonToken,
+    _tokensOfficerToken,
     _tokensOrnithopterToken,
     _tokensPestToken,
     _tokensRhinoToken,

@@ -987,6 +987,7 @@ import _tokensIllusionToken22 from "../tokens/illusion-token-2-2.js";
 import _tokensIllusionVillainToken from "../tokens/illusion-villain-token.js";
 import _tokensKithkinToken from "../tokens/kithkin-token.js";
 import _tokensLotus from "../tokens/lotus.js";
+import _tokensNewPlanetToken from "../tokens/new-planet-token.js";
 import _tokensPestTokenAttacks from "../tokens/pest-token-attacks.js";
 import _tokensPhyrexianToken from "../tokens/phyrexian-token.js";
 import _tokensRedGreenSatyrTokenHaste from "../tokens/red-green-satyr-token-haste.js";
@@ -1985,6 +1986,7 @@ const shard: CardShard = {
     _tokensIllusionVillainToken,
     _tokensKithkinToken,
     _tokensLotus,
+    _tokensNewPlanetToken,
     _tokensPestTokenAttacks,
     _tokensPhyrexianToken,
     _tokensRedGreenSatyrTokenHaste,

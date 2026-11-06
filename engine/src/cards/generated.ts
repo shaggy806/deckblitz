@@ -30349,6 +30349,7 @@ import _tokensBoarTokenRuralRecruit from "./tokens/boar-token-rural-recruit.js";
 import _tokensBoarTokenWolfsQuarry from "./tokens/boar-token-wolfs-quarry.js";
 import _tokensBoarToken from "./tokens/boar-token.js";
 import _tokensBoo from "./tokens/boo.js";
+import _tokensBorgToken from "./tokens/borg-token.js";
 import _tokensButterflyToken from "./tokens/butterfly-token.js";
 import _tokensCadet from "./tokens/cadet.js";
 import _tokensCamaridToken from "./tokens/camarid-token.js";
@@ -30611,6 +30612,7 @@ import _tokensKeimi from "./tokens/keimi.js";
 import _tokensKelpToken from "./tokens/kelp-token.js";
 import _tokensKithkinSoldierToken from "./tokens/kithkin-soldier-token.js";
 import _tokensKithkinToken from "./tokens/kithkin-token.js";
+import _tokensKlingonWarriorToken from "./tokens/klingon-warrior-token.js";
 import _tokensKnightAllyToken from "./tokens/knight-ally-token.js";
 import _tokensKnightToken22BlackFlanking from "./tokens/knight-token-2-2-black-flanking.js";
 import _tokensKnightToken31 from "./tokens/knight-token-3-1.js";
@@ -30668,6 +30670,7 @@ import _tokensMutavaultToken from "./tokens/mutavault-token.js";
 import _tokensMyrToken from "./tokens/myr-token.js";
 import _tokensNalaarAetherjetToken from "./tokens/nalaar-aetherjet-token.js";
 import _tokensNecronWarriorToken from "./tokens/necron-warrior-token.js";
+import _tokensNewPlanetToken from "./tokens/new-planet-token.js";
 import _tokensNightmareHorrorToken from "./tokens/nightmare-horror-token.js";
 import _tokensNightmareTokenAshiok from "./tokens/nightmare-token-ashiok.js";
 import _tokensNinjaTokenDarkLeoShredder from "./tokens/ninja-token-dark-leo-shredder.js";
@@ -30676,6 +30679,7 @@ import _tokensNinjaToken from "./tokens/ninja-token.js";
 import _tokensNinjaTurtleSpiritToken from "./tokens/ninja-turtle-spirit-token.js";
 import _tokensNymphToken from "./tokens/nymph-token.js";
 import _tokensOctopusToken from "./tokens/octopus-token.js";
+import _tokensOfficerToken from "./tokens/officer-token.js";
 import _tokensOgreToken from "./tokens/ogre-token.js";
 import _tokensOgreWarriorToken from "./tokens/ogre-warrior-token.js";
 import _tokensOozeToken33 from "./tokens/ooze-token-3-3.js";
@@ -61333,6 +61337,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensBoarTokenWolfsQuarry,
   _tokensBoarToken,
   _tokensBoo,
+  _tokensBorgToken,
   _tokensButterflyToken,
   _tokensCadet,
   _tokensCamaridToken,
@@ -61595,6 +61600,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensKelpToken,
   _tokensKithkinSoldierToken,
   _tokensKithkinToken,
+  _tokensKlingonWarriorToken,
   _tokensKnightAllyToken,
   _tokensKnightToken22BlackFlanking,
   _tokensKnightToken31,
@@ -61652,6 +61658,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensMyrToken,
   _tokensNalaarAetherjetToken,
   _tokensNecronWarriorToken,
+  _tokensNewPlanetToken,
   _tokensNightmareHorrorToken,
   _tokensNightmareTokenAshiok,
   _tokensNinjaTokenDarkLeoShredder,
@@ -61660,6 +61667,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensNinjaTurtleSpiritToken,
   _tokensNymphToken,
   _tokensOctopusToken,
+  _tokensOfficerToken,
   _tokensOgreToken,
   _tokensOgreWarriorToken,
   _tokensOozeToken33,
@@ -92318,6 +92326,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/boar-token-wolfs-quarry": _tokensBoarTokenWolfsQuarry,
   "tokens/boar-token": _tokensBoarToken,
   "tokens/boo": _tokensBoo,
+  "tokens/borg-token": _tokensBorgToken,
   "tokens/butterfly-token": _tokensButterflyToken,
   "tokens/cadet": _tokensCadet,
   "tokens/camarid-token": _tokensCamaridToken,
@@ -92580,6 +92589,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/kelp-token": _tokensKelpToken,
   "tokens/kithkin-soldier-token": _tokensKithkinSoldierToken,
   "tokens/kithkin-token": _tokensKithkinToken,
+  "tokens/klingon-warrior-token": _tokensKlingonWarriorToken,
   "tokens/knight-ally-token": _tokensKnightAllyToken,
   "tokens/knight-token-2-2-black-flanking": _tokensKnightToken22BlackFlanking,
   "tokens/knight-token-3-1": _tokensKnightToken31,
@@ -92637,6 +92647,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/myr-token": _tokensMyrToken,
   "tokens/nalaar-aetherjet-token": _tokensNalaarAetherjetToken,
   "tokens/necron-warrior-token": _tokensNecronWarriorToken,
+  "tokens/new-planet-token": _tokensNewPlanetToken,
   "tokens/nightmare-horror-token": _tokensNightmareHorrorToken,
   "tokens/nightmare-token-ashiok": _tokensNightmareTokenAshiok,
   "tokens/ninja-token-dark-leo-shredder": _tokensNinjaTokenDarkLeoShredder,
@@ -92645,6 +92656,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/ninja-turtle-spirit-token": _tokensNinjaTurtleSpiritToken,
   "tokens/nymph-token": _tokensNymphToken,
   "tokens/octopus-token": _tokensOctopusToken,
+  "tokens/officer-token": _tokensOfficerToken,
   "tokens/ogre-token": _tokensOgreToken,
   "tokens/ogre-warrior-token": _tokensOgreWarriorToken,
   "tokens/ooze-token-3-3": _tokensOozeToken33,

@@ -1007,6 +1007,7 @@ import _tokensHumanWarriorToken31TrampleHaste from "../tokens/human-warrior-toke
 import _tokensHumanWizardToken from "../tokens/human-wizard-token.js";
 import _tokensJellyfishToken from "../tokens/jellyfish-token.js";
 import _tokensKelpToken from "../tokens/kelp-token.js";
+import _tokensKlingonWarriorToken from "../tokens/klingon-warrior-token.js";
 import _tokensKnightTokenGuardedHeir from "../tokens/knight-token-guarded-heir.js";
 import _tokensLeviathanToken from "../tokens/leviathan-token.js";
 import _tokensMaskToken from "../tokens/mask-token.js";
@@ -2030,6 +2031,7 @@ const shard: CardShard = {
     _tokensHumanWizardToken,
     _tokensJellyfishToken,
     _tokensKelpToken,
+    _tokensKlingonWarriorToken,
     _tokensKnightTokenGuardedHeir,
     _tokensLeviathanToken,
     _tokensMaskToken,
