@@ -16478,3 +16478,39 @@ describe("a tempting offer whose offer is always done once taken", () => {
     expect(face.complete).toBe(false);
   });
 });
+
+describe("a reveal for a card sharing a card type with the permanent targeted", () => {
+  it("reads Wild Magic Surge whole: the destroyed permanent's controller's library, its card types", () => {
+    const face = parseFace({
+      name: "Wild Magic Surge",
+      type_line: "Instant",
+      oracle_text:
+        "Destroy target permanent an opponent controls. Its controller reveals cards from the top of their library until they reveal a permanent card that shares a card type with that permanent. They put that card onto the battlefield and the rest on the bottom of their library in a random order.",
+    });
+    expect(face.complete).toBe(true);
+    expect(face.targets).toEqual([{ kind: "permanent", whose: "opponent", filter: {} }]);
+    expect(face.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "destroy", target: 0 },
+        {
+          kind: "reveal-until",
+          whose: { controllerOfTarget: 0 },
+          filter: { typesAnyOf: ["artifact", "creature", "enchantment", "land", "planeswalker", "battle"], sharesCardTypeWith: 0 },
+          put: "battlefield",
+          rest: "bottom-random",
+        },
+      ],
+    });
+  });
+
+  it("not without the sentence that targeted", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Instant",
+      oracle_text:
+        "Its controller reveals cards from the top of their library until they reveal a permanent card that shares a card type with that permanent. They put that card onto the battlefield and the rest on the bottom of their library in a random order.",
+    });
+    expect(face.complete).toBe(false);
+  });
+});

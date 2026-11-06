@@ -1017,6 +1017,9 @@ const TARGET_PHRASES = [
   ["target nonland permanent an opponent controls", "nonland-permanent-an-opponent-controls"],
   ["target nonland permanent you don't control", "nonland-permanent-an-opponent-controls"],
   ["target nonland permanent you control", { kind: "permanent", whose: "you", filter: { notTypes: ["land"] } }],
+  // Deceiver Exarch, Wild Magic Surge.
+  ["target permanent an opponent controls", { kind: "permanent", whose: "opponent", filter: {} }],
+  ["target permanent you don't control", { kind: "permanent", whose: "opponent", filter: {} }],
   ["target creature an opponent controls", "creature-an-opponent-controls"],
   ["target creature you don't control", "creature-an-opponent-controls"],
   ["target artifact an opponent controls", "artifact-an-opponent-controls"],
@@ -12704,6 +12707,29 @@ function revealUntilAt(sentences, i, ctx) {
   const FROM_TOP = "reveal cards from the top of your library until you reveal";
   const REST = "on the bottom of your library in (any|a random) order";
   const restOf = (word) => (word.toLowerCase() === "any" ? "bottom-any-order" : "bottom-random");
+  // After the one sentence that targeted a permanent, its controller's
+  // reveal for a permanent card sharing a card type with it, as it last
+  // existed (rule 608.2h — Wild Magic Surge).
+  if (
+    i > 0 &&
+    ctx.targets.length === 1 &&
+    sentenceRe(`(?:its|that permanent's) controller reveals cards from the top of their library until they reveal a permanent card that shares a card type with (?:that permanent|it)`).test(sentences[i])
+  ) {
+    const close = sentenceRe(`they put that card onto the battlefield and the rest on the bottom of their library in (any|a random) order`).exec(
+      sentences[i + 1] ?? "",
+    );
+    if (close === null) return null;
+    return {
+      effect: {
+        kind: "reveal-until",
+        whose: { controllerOfTarget: 0 },
+        filter: { typesAnyOf: ["artifact", "creature", "enchantment", "land", "planeswalker", "battle"], sharesCardTypeWith: 0 },
+        put: "battlefield",
+        rest: restOf(close[1]),
+      },
+      used: 2,
+    };
+  }
   const whole = sentenceRe(`${FROM_TOP} an? ([\\w-]+) card, then put all cards revealed this way into your hand`).exec(sentences[i]);
   if (whole !== null) {
     const filter = parseTypePhrase(whole[1]);

@@ -524,6 +524,19 @@ targets — replicate's record (`queuePaidCostCopy`, now with `newTargets`
 off). The scaffolder reads the line, and "you draw a card and lose N life".
 Proving card: Plumb the Forbidden. Key: cost:sacrifice-any-number-copy-for-each.
 
+### Reveal until a card sharing a card type with a permanent — already built, 2026-11-06
+
+By EDHREC rank: Wild Magic Surge (1993). No engine code: `reveal-until`'s
+filter takes `sharesCardTypeWith` of the target slot, read as the permanent
+last existed once it has been destroyed or sacrificed (rule 608.2h), and
+`whose: { controllerOfTarget }` is its controller then; "a permanent card" is
+`typesAnyOf` the permanent types. Reweave's "if the player does" is a
+`this-way` `sacrificed` conditional, and its splice gives it its own target
+slice. The scaffolder now reads Wild Magic Surge whole, and "target permanent
+an opponent controls". Proving cards: Wild Magic Surge, Reweave
+(`reveal-until-shares-type.test.ts`). Key: effect:reveal-until-shares-type
+(Chaotic Transformation, its third card, left for `author-freed`).
+
 ### Tempting offer — already built, 2026-11-06
 
 By EDHREC rank: Tempt with Bunnies (1979). No engine code: the pool's six

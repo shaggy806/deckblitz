@@ -3183,7 +3183,10 @@ the host read as the Aura was sacrificed), `"chosen"`, a **target slot**
 type with it" is one `damage-all` of `{ type: "creature",
 sharesCreatureTypeWith: 0 }`; Counterlash's `cast-now` `spell: {
 sharesCardTypeWith: 0 }`; Reality Scramble's `reveal-until` after the target
-went to the library, read as it last existed), `"exiled-with-source"` (the
+went to the library, read as it last existed; Wild Magic Surge's and Reweave's
+"a permanent card that shares a card type with that permanent", destroyed or
+sacrificed, `typesAnyOf` the permanent types beside it, in `whose: {
+controllerOfTarget: 0 }`'s library), `"exiled-with-source"` (the
 cards exiled with it, rule 607.2a, or until it leaves), `{ permanents:
 <filter> }` — every permanent matching it — or `{ controlled: <filter> }`
 — every permanent you control matching it (Hiveheart Shaman's "a basic land
