@@ -1150,6 +1150,7 @@ import _poolArchpriestOfIona from "./pool/archpriest-of-iona.js";
 import _poolArchpriestOfShadows from "./pool/archpriest-of-shadows.js";
 import _poolArchwayAngel from "./pool/archway-angel.js";
 import _poolArchwayCommons from "./pool/archway-commons.js";
+import _poolArchwayOfInnovation from "./pool/archway-of-innovation.js";
 import _poolArchweaver from "./pool/archweaver.js";
 import _poolArchwingDragon from "./pool/archwing-dragon.js";
 import _poolArclightPhoenix from "./pool/arclight-phoenix.js";
@@ -2865,6 +2866,7 @@ import _poolBojukaBog from "./pool/bojuka-bog.js";
 import _poolBojukaBrigand from "./pool/bojuka-brigand.js";
 import _poolBolaSlinger from "./pool/bola-slinger.js";
 import _poolBolaWarrior from "./pool/bola-warrior.js";
+import _poolBolassCitadel from "./pool/bolass-citadel.js";
 import _poolBoldBiochemist from "./pool/bold-biochemist.js";
 import _poolBoldDefense from "./pool/bold-defense.js";
 import _poolBoldImpaler from "./pool/bold-impaler.js";
@@ -3774,6 +3776,7 @@ import _poolCarnivorousMossBeast from "./pool/carnivorous-moss-beast.js";
 import _poolCarnivorousPlant from "./pool/carnivorous-plant.js";
 import _poolCarnophage from "./pool/carnophage.js";
 import _poolCarom from "./pool/carom.js";
+import _poolCarpetOfFlowers from "./pool/carpet-of-flowers.js";
 import _poolCarrierPigeons from "./pool/carrier-pigeons.js";
 import _poolCarrierThrall from "./pool/carrier-thrall.js";
 import _poolCarrionAnts from "./pool/carrion-ants.js";
@@ -19074,6 +19077,7 @@ import _poolPloverKnights from "./pool/plover-knights.js";
 import _poolPlowThroughReito from "./pool/plow-through-reito.js";
 import _poolPlowThrough from "./pool/plow-through.js";
 import _poolPlowUnder from "./pool/plow-under.js";
+import _poolPlumbTheForbidden from "./pool/plumb-the-forbidden.js";
 import _poolPlumecreedEscort from "./pool/plumecreed-escort.js";
 import _poolPlumecreedMentor from "./pool/plumecreed-mentor.js";
 import _poolPlumesOfPeace from "./pool/plumes-of-peace.js";
@@ -32118,6 +32122,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolArchpriestOfShadows,
   _poolArchwayAngel,
   _poolArchwayCommons,
+  _poolArchwayOfInnovation,
   _poolArchweaver,
   _poolArchwingDragon,
   _poolArclightPhoenix,
@@ -33833,6 +33838,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBojukaBrigand,
   _poolBolaSlinger,
   _poolBolaWarrior,
+  _poolBolassCitadel,
   _poolBoldBiochemist,
   _poolBoldDefense,
   _poolBoldImpaler,
@@ -34742,6 +34748,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCarnivorousPlant,
   _poolCarnophage,
   _poolCarom,
+  _poolCarpetOfFlowers,
   _poolCarrierPigeons,
   _poolCarrierThrall,
   _poolCarrionAnts,
@@ -50042,6 +50049,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPlowThroughReito,
   _poolPlowThrough,
   _poolPlowUnder,
+  _poolPlumbTheForbidden,
   _poolPlumecreedEscort,
   _poolPlumecreedMentor,
   _poolPlumesOfPeace,
@@ -63099,6 +63107,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/archpriest-of-shadows": _poolArchpriestOfShadows,
   "pool/archway-angel": _poolArchwayAngel,
   "pool/archway-commons": _poolArchwayCommons,
+  "pool/archway-of-innovation": _poolArchwayOfInnovation,
   "pool/archweaver": _poolArchweaver,
   "pool/archwing-dragon": _poolArchwingDragon,
   "pool/arclight-phoenix": _poolArclightPhoenix,
@@ -64814,6 +64823,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/bojuka-brigand": _poolBojukaBrigand,
   "pool/bola-slinger": _poolBolaSlinger,
   "pool/bola-warrior": _poolBolaWarrior,
+  "pool/bolass-citadel": _poolBolassCitadel,
   "pool/bold-biochemist": _poolBoldBiochemist,
   "pool/bold-defense": _poolBoldDefense,
   "pool/bold-impaler": _poolBoldImpaler,
@@ -65723,6 +65733,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/carnivorous-plant": _poolCarnivorousPlant,
   "pool/carnophage": _poolCarnophage,
   "pool/carom": _poolCarom,
+  "pool/carpet-of-flowers": _poolCarpetOfFlowers,
   "pool/carrier-pigeons": _poolCarrierPigeons,
   "pool/carrier-thrall": _poolCarrierThrall,
   "pool/carrion-ants": _poolCarrionAnts,
@@ -81023,6 +81034,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/plow-through-reito": _poolPlowThroughReito,
   "pool/plow-through": _poolPlowThrough,
   "pool/plow-under": _poolPlowUnder,
+  "pool/plumb-the-forbidden": _poolPlumbTheForbidden,
   "pool/plumecreed-escort": _poolPlumecreedEscort,
   "pool/plumecreed-mentor": _poolPlumecreedMentor,
   "pool/plumes-of-peace": _poolPlumesOfPeace,

@@ -601,6 +601,7 @@ import _poolPlagueStinger from "../pool/plague-stinger.js";
 import _poolPlantBeans from "../pool/plant-beans.js";
 import _poolPlateau from "../pool/plateau.js";
 import _poolPlatedCrusher from "../pool/plated-crusher.js";
+import _poolPlumbTheForbidden from "../pool/plumb-the-forbidden.js";
 import _poolPlumecreedEscort from "../pool/plumecreed-escort.js";
 import _poolPlungeIntoWinter from "../pool/plunge-into-winter.js";
 import _poolPorcelainZealot from "../pool/porcelain-zealot.js";
@@ -1589,6 +1590,7 @@ const shard: CardShard = {
     _poolPlantBeans,
     _poolPlateau,
     _poolPlatedCrusher,
+    _poolPlumbTheForbidden,
     _poolPlumecreedEscort,
     _poolPlungeIntoWinter,
     _poolPorcelainZealot,

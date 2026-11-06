@@ -100,6 +100,7 @@ import _poolCanyonSlough from "../pool/canyon-slough.js";
 import _poolCapashenKnight from "../pool/capashen-knight.js";
 import _poolCaravanEscort from "../pool/caravan-escort.js";
 import _poolCarnassid from "../pool/carnassid.js";
+import _poolCarpetOfFlowers from "../pool/carpet-of-flowers.js";
 import _poolCarrionScreecher from "../pool/carrion-screecher.js";
 import _poolCarrionWall from "../pool/carrion-wall.js";
 import _poolCaseOfTheTrampledGarden from "../pool/case-of-the-trampled-garden.js";
@@ -1014,6 +1015,7 @@ const shard: CardShard = {
     _poolCapashenKnight,
     _poolCaravanEscort,
     _poolCarnassid,
+    _poolCarpetOfFlowers,
     _poolCarrionScreecher,
     _poolCarrionWall,
     _poolCaseOfTheTrampledGarden,

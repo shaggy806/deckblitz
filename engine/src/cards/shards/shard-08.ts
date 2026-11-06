@@ -62,6 +62,7 @@ import _poolArchdemonOfUnx from "../pool/archdemon-of-unx.js";
 import _poolArchitectOfTheUntamed from "../pool/architect-of-the-untamed.js";
 import _poolArchiveTrap from "../pool/archive-trap.js";
 import _poolArchonOfEmeria from "../pool/archon-of-emeria.js";
+import _poolArchwayOfInnovation from "../pool/archway-of-innovation.js";
 import _poolArgothianPixies from "../pool/argothian-pixies.js";
 import _poolArmadaWurm from "../pool/armada-wurm.js";
 import _poolArtificersAssistant from "../pool/artificers-assistant.js";
@@ -1082,6 +1083,7 @@ const shard: CardShard = {
     _poolArchitectOfTheUntamed,
     _poolArchiveTrap,
     _poolArchonOfEmeria,
+    _poolArchwayOfInnovation,
     _poolArgothianPixies,
     _poolArmadaWurm,
     _poolArtificersAssistant,

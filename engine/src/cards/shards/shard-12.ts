@@ -94,6 +94,7 @@ import _poolBloodlordOfVaasgoth from "../pool/bloodlord-of-vaasgoth.js";
 import _poolBlurOfBlades from "../pool/blur-of-blades.js";
 import _poolBogGlider from "../pool/bog-glider.js";
 import _poolBoggartCursecrafter from "../pool/boggart-cursecrafter.js";
+import _poolBolassCitadel from "../pool/bolass-citadel.js";
 import _poolBonecacheOverseer from "../pool/bonecache-overseer.js";
 import _poolBonusRound from "../pool/bonus-round.js";
 import _poolBookDevourer from "../pool/book-devourer.js";
@@ -1057,6 +1058,7 @@ const shard: CardShard = {
     _poolBlurOfBlades,
     _poolBogGlider,
     _poolBoggartCursecrafter,
+    _poolBolassCitadel,
     _poolBonecacheOverseer,
     _poolBonusRound,
     _poolBookDevourer,
