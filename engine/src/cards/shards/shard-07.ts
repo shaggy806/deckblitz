@@ -832,6 +832,7 @@ import _poolTchallaTheBlackPanther from "../pool/tchalla-the-black-panther.js";
 import _poolTectonicBreak from "../pool/tectonic-break.js";
 import _poolTempestHarvester from "../pool/tempest-harvester.js";
 import _poolTemporalAdept from "../pool/temporal-adept.js";
+import _poolTemurSabertooth from "../pool/temur-sabertooth.js";
 import _poolTendoIceBridge from "../pool/tendo-ice-bridge.js";
 import _poolTerraRavager from "../pool/terra-ravager.js";
 import _poolTerritorialAllosaurus from "../pool/territorial-allosaurus.js";
@@ -1838,6 +1839,7 @@ const shard: CardShard = {
     _poolTectonicBreak,
     _poolTempestHarvester,
     _poolTemporalAdept,
+    _poolTemurSabertooth,
     _poolTendoIceBridge,
     _poolTerraRavager,
     _poolTerritorialAllosaurus,

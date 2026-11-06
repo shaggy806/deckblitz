@@ -509,6 +509,7 @@ import _poolNoggleRansacker from "../pool/noggle-ransacker.js";
 import _poolNyleasHuntmaster from "../pool/nyleas-huntmaster.js";
 import _poolNyxbloomAncient from "../pool/nyxbloom-ancient.js";
 import _poolNyxbornBrute from "../pool/nyxborn-brute.js";
+import _poolObstinateFamiliar from "../pool/obstinate-familiar.js";
 import _poolOfferingToAsha from "../pool/offering-to-asha.js";
 import _poolOgreResister from "../pool/ogre-resister.js";
 import _poolOketrasLastMercy from "../pool/oketras-last-mercy.js";
@@ -1407,6 +1408,7 @@ const shard: CardShard = {
     _poolNyleasHuntmaster,
     _poolNyxbloomAncient,
     _poolNyxbornBrute,
+    _poolObstinateFamiliar,
     _poolOfferingToAsha,
     _poolOgreResister,
     _poolOketrasLastMercy,

@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _poolAbundance from "../pool/abundance.js";
 import _poolAbyssalNightstalker from "../pool/abyssal-nightstalker.js";
 import _poolAbzanMonument from "../pool/abzan-monument.js";
 import _poolAcademyRector from "../pool/academy-rector.js";
@@ -1052,6 +1053,7 @@ import _tokensZombieWarriorToken from "../tokens/zombie-warrior-token.js";
 
 const shard: CardShard = {
   pool: [
+    _poolAbundance,
     _poolAbyssalNightstalker,
     _poolAbzanMonument,
     _poolAcademyRector,

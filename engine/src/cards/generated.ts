@@ -89,6 +89,7 @@ import _poolAbuJafar from "./pool/abu-jafar.js";
 import _poolAbueloAncestralEcho from "./pool/abuelo-ancestral-echo.js";
 import _poolAbunaAcolyte from "./pool/abuna-acolyte.js";
 import _poolAbunasChant from "./pool/abunas-chant.js";
+import _poolAbundance from "./pool/abundance.js";
 import _poolAbundantCountryside from "./pool/abundant-countryside.js";
 import _poolAbundantGrowth from "./pool/abundant-growth.js";
 import _poolAbundantHarvest from "./pool/abundant-harvest.js";
@@ -18098,6 +18099,7 @@ import _poolObsidianGiant from "./pool/obsidian-giant.js";
 import _poolObsidianObelisk from "./pool/obsidian-obelisk.js";
 import _poolObsidianOrderOperative from "./pool/obsidian-order-operative.js";
 import _poolObstinateBaloth from "./pool/obstinate-baloth.js";
+import _poolObstinateFamiliar from "./pool/obstinate-familiar.js";
 import _poolObstinateGargoyle from "./pool/obstinate-gargoyle.js";
 import _poolObuunMulDayaAncestor from "./pool/obuun-mul-daya-ancestor.js";
 import _poolObyraDreamingDuelist from "./pool/obyra-dreaming-duelist.js";
@@ -18860,6 +18862,7 @@ import _poolPatternMatcher from "./pool/pattern-matcher.js";
 import _poolPatternOfRebirth from "./pool/pattern-of-rebirth.js";
 import _poolPaupersCage from "./pool/paupers-cage.js";
 import _poolPauseForReflection from "./pool/pause-for-reflection.js";
+import _poolPavelChekovFirstPosting from "./pool/pavel-chekov-first-posting.js";
 import _poolPavelMaliki from "./pool/pavel-maliki.js";
 import _poolPawnOfUlamog from "./pool/pawn-of-ulamog.js";
 import _poolPawpatchFormation from "./pool/pawpatch-formation.js";
@@ -26376,6 +26379,7 @@ import _poolTemurCharm from "./pool/temur-charm.js";
 import _poolTemurDevotee from "./pool/temur-devotee.js";
 import _poolTemurMonument from "./pool/temur-monument.js";
 import _poolTemurRunemark from "./pool/temur-runemark.js";
+import _poolTemurSabertooth from "./pool/temur-sabertooth.js";
 import _poolTemurTawnyback from "./pool/temur-tawnyback.js";
 import _poolTemurWarShaman from "./pool/temur-war-shaman.js";
 import _poolTenaciousDead from "./pool/tenacious-dead.js";
@@ -26896,6 +26900,7 @@ import _poolThirdPathIconoclast from "./pool/third-path-iconoclast.js";
 import _poolThirdPathSavant from "./pool/third-path-savant.js";
 import _poolThirstForDiscovery from "./pool/thirst-for-discovery.js";
 import _poolThirstForIdentity from "./pool/thirst-for-identity.js";
+import _poolThirstForKnowledge from "./pool/thirst-for-knowledge.js";
 import _poolThirstForMeaning from "./pool/thirst-for-meaning.js";
 import _poolThirst from "./pool/thirst.js";
 import _poolThirstingBloodlord from "./pool/thirsting-bloodlord.js";
@@ -31559,6 +31564,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAbueloAncestralEcho,
   _poolAbunaAcolyte,
   _poolAbunasChant,
+  _poolAbundance,
   _poolAbundantCountryside,
   _poolAbundantGrowth,
   _poolAbundantHarvest,
@@ -49568,6 +49574,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolObsidianObelisk,
   _poolObsidianOrderOperative,
   _poolObstinateBaloth,
+  _poolObstinateFamiliar,
   _poolObstinateGargoyle,
   _poolObuunMulDayaAncestor,
   _poolObyraDreamingDuelist,
@@ -50330,6 +50337,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPatternOfRebirth,
   _poolPaupersCage,
   _poolPauseForReflection,
+  _poolPavelChekovFirstPosting,
   _poolPavelMaliki,
   _poolPawnOfUlamog,
   _poolPawpatchFormation,
@@ -57846,6 +57854,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTemurDevotee,
   _poolTemurMonument,
   _poolTemurRunemark,
+  _poolTemurSabertooth,
   _poolTemurTawnyback,
   _poolTemurWarShaman,
   _poolTenaciousDead,
@@ -58366,6 +58375,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolThirdPathSavant,
   _poolThirstForDiscovery,
   _poolThirstForIdentity,
+  _poolThirstForKnowledge,
   _poolThirstForMeaning,
   _poolThirst,
   _poolThirstingBloodlord,
@@ -63042,6 +63052,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/abuelo-ancestral-echo": _poolAbueloAncestralEcho,
   "pool/abuna-acolyte": _poolAbunaAcolyte,
   "pool/abunas-chant": _poolAbunasChant,
+  "pool/abundance": _poolAbundance,
   "pool/abundant-countryside": _poolAbundantCountryside,
   "pool/abundant-growth": _poolAbundantGrowth,
   "pool/abundant-harvest": _poolAbundantHarvest,
@@ -81051,6 +81062,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/obsidian-obelisk": _poolObsidianObelisk,
   "pool/obsidian-order-operative": _poolObsidianOrderOperative,
   "pool/obstinate-baloth": _poolObstinateBaloth,
+  "pool/obstinate-familiar": _poolObstinateFamiliar,
   "pool/obstinate-gargoyle": _poolObstinateGargoyle,
   "pool/obuun-mul-daya-ancestor": _poolObuunMulDayaAncestor,
   "pool/obyra-dreaming-duelist": _poolObyraDreamingDuelist,
@@ -81813,6 +81825,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/pattern-of-rebirth": _poolPatternOfRebirth,
   "pool/paupers-cage": _poolPaupersCage,
   "pool/pause-for-reflection": _poolPauseForReflection,
+  "pool/pavel-chekov-first-posting": _poolPavelChekovFirstPosting,
   "pool/pavel-maliki": _poolPavelMaliki,
   "pool/pawn-of-ulamog": _poolPawnOfUlamog,
   "pool/pawpatch-formation": _poolPawpatchFormation,
@@ -89329,6 +89342,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/temur-devotee": _poolTemurDevotee,
   "pool/temur-monument": _poolTemurMonument,
   "pool/temur-runemark": _poolTemurRunemark,
+  "pool/temur-sabertooth": _poolTemurSabertooth,
   "pool/temur-tawnyback": _poolTemurTawnyback,
   "pool/temur-war-shaman": _poolTemurWarShaman,
   "pool/tenacious-dead": _poolTenaciousDead,
@@ -89849,6 +89863,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/third-path-savant": _poolThirdPathSavant,
   "pool/thirst-for-discovery": _poolThirstForDiscovery,
   "pool/thirst-for-identity": _poolThirstForIdentity,
+  "pool/thirst-for-knowledge": _poolThirstForKnowledge,
   "pool/thirst-for-meaning": _poolThirstForMeaning,
   "pool/thirst": _poolThirst,
   "pool/thirsting-bloodlord": _poolThirstingBloodlord,
