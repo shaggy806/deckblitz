@@ -809,6 +809,9 @@ delete its detail there and move this line to `COMPLETED.md`.
 - **Blitzing a deck immediately saves it to your locally stored list of decks** (the user, 2026-11-02): it shouldn't; explore offering to save the deck after the game instead.
 - **No way to ask the card replacer for one card while building a deck** (the user, 2026-11-02): right-clicking a card in the deck builder should offer a "suggest replacement" button, so players can use the automatic card replacer to modify their deck.
 - **Animation follow-ups** (re-measure bot speeds, static buffs, library put-backs, the exile filter, the crown's flight, merged tokens, folding tokens with counters, dies-trigger pulses, history highlights, real sounds): `docs/plans/legibility-of-play.md`, "Follow-ups".
+- **Swap the animation and bot speed checkboxes to dropdown menus** (user, 2026-11-06): the
+  motion and bot-speed settings are checkboxes/option rows now (`client/src/ui/MotionControl.tsx`,
+  the room's "Bot speed" in `client/src/lobby/RoomSettingsPanel.tsx`); make each a dropdown.
 
 ## Tooling / docs
 

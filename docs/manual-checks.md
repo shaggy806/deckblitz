@@ -7506,3 +7506,13 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Animate Dead: returned by Replenish, you choose the graveyard card it enchants, four players
 - **Do:** Cast Replenish. When Animate Dead enters, pick Dave's Craw Wurm from the popup.
 - **Expect:** The popup offers your Grizzly Bears, Bob's Hill Giant and Dave's Craw Wurm. The Craw Wurm comes onto the battlefield on your side with Animate Dead attached, 5/4.
+
+## Star Trek: Beam me up and face a dilemma (2026-11-06)
+
+### Open Communications: beamed up from the graveyard, returning the creature you pick
+- **Do:** Cast Open Communications from your graveyard (its Beam me up cast, {2}{U}). When asked which creature to return, pick Hill Giant.
+- **Expect:** Hill Giant goes back to your hand, Grizzly Bears stays, you draw a card, and Open Communications ends up in exile, not your graveyard.
+
+### Elim Garak: choosing a charm's mode faces a dilemma
+- **Do:** Cast Izzet Charm, choosing "Draw two cards, then discard two cards."
+- **Expect:** Elim Garak's ability triggers once: Bob loses 2 life and you gain 2.

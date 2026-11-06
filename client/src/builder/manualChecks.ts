@@ -11263,4 +11263,17 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ gy: ['Hill Giant'] }, { gy: [] }, { gy: ['Craw Wurm'] }],
     }),
   ),
+  // --- Star Trek: Beam me up and face a dilemma (2026-11-06) ---------------
+  preset(
+    'Open Communications: beamed up from the graveyard, returning the creature you pick',
+    board({
+      you: { bf: ['Island*3', 'Grizzly Bears', 'Hill Giant'], gy: ['Open Communications'] },
+    }),
+  ),
+  preset(
+    'Elim Garak: choosing a charm\'s mode faces a dilemma',
+    board({
+      you: { bf: ['Elim Garak, Simple Tailor', 'Island', 'Mountain'], hand: ['Izzet Charm'] },
+    }),
+  ),
 ]
