@@ -9133,7 +9133,7 @@ export class Game {
       }
     }
     if (isMainPhase(step)) this.state.turn.mainPhases = (this.state.turn.mainPhases ?? 0) + 1;
-    // Mana empties as each step and phase ends (rule 500.4), except units
+    // Mana empties as each step and phase ends (rule 500.5), except units
     // whose source said otherwise — Savage Ventmaw's "you don't lose this
     // mana as steps and phases end". That permission is for the turn only, so
     // cleanup takes it away with everything else.
