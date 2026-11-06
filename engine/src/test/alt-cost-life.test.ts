@@ -251,6 +251,17 @@ describe("an impulse's only way to cast: Inside Information", () => {
     expect(life(game, A)).toBe(17);
   });
 
+  it("pays only the life for a card with an alternative cost of its own (Gush)", () => {
+    const { game, card } = exiled("Gush");
+    const islands = lands(game, "Island", 2);
+    const [offer, ...rest] = offers(game, card);
+    expect(rest).toEqual([]);
+    expect(offer.altCostText).toBe("pay 5 life");
+    cast(game, card, { targets: [], via: "impulse", altCost: true, altCostIndex: offer.altCostIndex });
+    expect(life(game, A)).toBe(15);
+    expect(islands.map((id) => zone(game, id))).toEqual(["battlefield", "battlefield"]);
+  });
+
   it("plays a land for nothing, with a land drop", () => {
     const { game, card } = exiled("Forest");
     expect(game.legalActions(A).some((a) => a.kind === "play-land" && a.card === card)).toBe(true);

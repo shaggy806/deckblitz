@@ -49454,8 +49454,13 @@ export class Game {
     // An impulse's "pay life equal to its mana value rather than pay its mana
     // cost" (Inside Information): the only way that permission allows, so no
     // other alternative cost goes with it (118.9a, the rulings).
+    // A card's own alternative cost is the one picked at index 0
+    // (`ownAltCost`), so a card with one keeps that place empty here: only
+    // the life is paid (Gush exiled by Inside Information).
+    const payLifeOnly = (): readonly (AlternativeCostOffer | null)[] =>
+      def.alternativeCost !== null ? [null, { mana: "{0}", payLifeManaValue: true }] : [{ mana: "{0}", payLifeManaValue: true }];
     if (via === "impulse" && card?.impulse?.player === caster && card?.impulse?.payLifeManaValue === true) {
-      return [{ mana: "{0}", payLifeManaValue: true }];
+      return payLifeOnly();
     }
     // A `playFromExile` static's (Valgavoth, Terror Eater): the only way, or
     // one more beside what another permission allows.
