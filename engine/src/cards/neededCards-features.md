@@ -333,10 +333,23 @@ fails to pay. An emblem's own activated ability (Ob Nixilis of the Black Oath) i
 not built: nothing offers an ability of an object in the command zone that isn't
 its card's. Keys: effect:emblem-grants-activated, effect:emblem-grants-to-spells.
 
+### Playing linked exiled cards for life, and "a card you didn't control" — built 2026-11-05
+
+By EDHREC rank: Valgavoth, Terror Eater (1299). A `playFromExile` static's
+`payLifeManaValue` is the cast's alternative cost of life equal to its mana
+value (rule 118.9), the only one allowed unless another permission reaches the
+card (`Game.exileStaticLifeCast`). "A card you didn't control" needed no engine
+code: `controlledBy: "opponent"` on the graveyard replacement, since a card off
+the battlefield and the stack is its owner's to control (rule 108.4a), with the
+replacement's `linked`. The scaffolder reads both lines and Rest in Peace's and
+Leyline of the Void's. Proving card: Valgavoth, Terror Eater
+(`exile-play-pay-life.test.ts`). Keys: zone:linked-exile-play-pay-life-alternative,
+replacement:exile-instead-cards-you-didnt-control.
+
 ### A would-die exile linked to its permanent — built 2026-11-05
 
 By EDHREC rank: The Darkness Crystal (1159). A graveyard-exile replacement's
-`linked` exiles the card **with** its permanent (rule 607.2a,
+`linked` exiles the card **with** its permanent (rule 607.2b,
 `GameObject.exiledWith`, in the stint it has as the card arrives — or last had,
 gone in the same event), so "exiled with ~" finds it; given up, as `then` and a
 void counter are, when the moving object's controller picks another exile that

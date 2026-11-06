@@ -5884,7 +5884,12 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   Burglar); `spendAs` is the spending rule below, for those casts alone.
   `linked` is "from among cards exiled with this creature" (Nightveil
   Specter, Intellect Devourer, Rona: `filter: {}`): only this stint's linked
-  cards, rule 607.2a, whoever controls it now.
+  cards, rule 607.2a, whoever controls it now. `payLifeManaValue` is "if you
+  cast a spell this way, pay life equal to its mana value rather than pay its
+  mana cost" (Valgavoth, Terror Eater: `{ filter: {}, linked: true,
+  yourTurnOnly: true, payLifeManaValue: true }`) — the only alternative cost
+  that cast may use, kicker still paid on top; a card another permission also
+  reaches may be cast either way (`exile-play-pay-life.test.ts`).
   `affects` is ignored. `play-from-exile-permission.test.ts`,
   `exile-permission-options.test.ts`.
 - `replacement: { event: "would-proliferate", times }` — "If you would
@@ -6620,12 +6625,16 @@ clause (section 9):
   kind, amount }` is "instead exile it **with a void counter on it**" (Dauthi
   Voidwalker, whose "if a **card** would be put into an opponent's graveyard"
   is `filter: { ownedBy: "opponent", token: false }` — a token isn't a card,
-  and still dies; Rest in Peace's "a card or token" has no filter). `then` is
+  and still dies; Rest in Peace's "a card or token" has no filter; Valgavoth,
+  Terror Eater's "a card **you didn't control**" adds `controlledBy:
+  "opponent"` — a card off the battlefield and the stack is its owner's to
+  control, rule 108.4a, so a discard or a mill is caught and a stolen
+  permanent or a spell you cast from an opponent's cards isn't). `then` is
   what it does beside the exile, its controller's, once per token of a stack:
   "instead exile that card and create a 2/2 black Zombie" (Kalitas, Traitor of
   Ghet — an instruction of the replacement), or a `reflexive-trigger` for "exile
   it instead. When you do, create …" (Head of the Hunt). `linked: true` exiles
-  the card **with** this permanent (rule 607.2a, `GameObject.exiledWith`), so its
+  the card **with** this permanent (rule 607.2b, `GameObject.exiledWith`), so its
   "exiled with ~" abilities find it: The Darkness Crystal (`then: { kind:
   "gain-life", amount: 2 }`, and a `card-in-exile { linked: true }` target for
   its return), Gisa, Glorious Resurrector (`return-exiled-by-source { linked:

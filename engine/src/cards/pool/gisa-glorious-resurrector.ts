@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 
 // Innistrad: Midnight Hunt (MID).
 //
-// The death replacement exiles the card *with* Gisa (rule 607.2a — the replacement's `linked`),
+// The death replacement exiles the card *with* Gisa (rule 607.2b — the replacement's `linked`),
 // so only this Gisa's upkeep trigger finds it: a Gisa that leaves and returns is a new object
 // (rule 400.7) and its trigger finds nothing. A card Rest in Peace could exile instead isn't
 // linked (rule 616.1: the dying creature's controller picks). A token exiled this way ceases to

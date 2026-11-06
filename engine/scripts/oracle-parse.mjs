@@ -17513,6 +17513,21 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // "[During your turn, ]you may play cards exiled with ~[. If you cast a
+  // spell this way, pay life equal to its mana value rather than pay its mana
+  // cost.]" (Valgavoth, Terror Eater).
+  if ((m = /^(During your turn, you|You) may play cards exiled with ~\.( If you cast a spell this way, pay life equal to its mana value rather than pay its mana cost\.)?$/.exec(line))) {
+    return {
+      affects: { scope: "self" },
+      playFromExile: {
+        filter: {},
+        linked: true,
+        ...(m[1] === "You" ? {} : { yourTurnOnly: true }),
+        ...(m[2] === undefined ? {} : { payLifeManaValue: true }),
+      },
+      text,
+    };
+  }
   // Equip abilities' timing and cost: Leonin Shikari, Forge Anew.
   if (line === "You may activate equip abilities any time you could cast an instant.") {
     return { affects: { scope: "self" }, equipAtInstantSpeed: true, text };
@@ -18558,6 +18573,30 @@ function parseStatic(line, text) {
   // Abandoned Sarcophagus's two lines.
   if (line === "You may cast spells that have a cycling ability from your graveyard.") {
     return { affects: { scope: "self" }, castFromGraveyard: { filter: { hasCycling: true } }, text };
+  }
+  // Graveyard hate (rule 614): "If a card or token would be put into a
+  // graveyard from anywhere, exile it instead" (Rest in Peace), "a card …
+  // into an opponent's graveyard" (Leyline of the Void: a token isn't a card),
+  // "a card **you didn't control**" (Valgavoth, Terror Eater: one off the
+  // battlefield and the stack is its owner's to control, rule 108.4a).
+  {
+    const m = /^If a (card or token|card)( you didn't control)? would be put into (a|your|an opponent's) graveyard from anywhere, exile it instead\.$/.exec(line);
+    if (m !== null) {
+      const filter = {
+        ...(m[3] === "your" ? { ownedBy: "you" } : m[3] === "an opponent's" ? { ownedBy: "opponent" } : {}),
+        ...(m[2] === undefined ? {} : { controlledBy: "opponent" }),
+        ...(m[1] === "card" ? { token: false } : {}),
+      };
+      return {
+        affects: { scope: "self" },
+        replacement: {
+          event: "would-be-put-into-graveyard",
+          instead: "exile",
+          ...(Object.keys(filter).length > 0 ? { filter } : {}),
+        },
+        text,
+      };
+    }
   }
   if (line === "If a card that has a cycling ability would be put into your graveyard from anywhere and it wasn't cycled, exile it instead.") {
     return {

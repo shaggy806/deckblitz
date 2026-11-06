@@ -4456,7 +4456,13 @@ export class Game {
     }
     // An impulse's "pay life equal to its mana value rather than pay its mana
     // cost" is the only way it allows (Inside Information): no paid variant.
-    if (via === "impulse" && this.state.objects[card]?.impulse?.payLifeManaValue === true) {
+    // So too a static's, when nothing else lets the card be cast (Valgavoth,
+    // Terror Eater).
+    if (
+      via === "impulse" &&
+      (this.state.objects[card]?.impulse?.payLifeManaValue === true ||
+        this.exileStaticLifeCast(player, card, face ?? 0) === "only")
+    ) {
       variants.length = 0;
     }
     if (!warp && impulseFree !== "only") {
@@ -17541,7 +17547,12 @@ export class Game {
     if (impulseFree === "only" && !free) {
       return `${def.name} may be cast from exile only without paying its mana cost`;
     }
-    if (via === "impulse" && this.state.objects[cardId]?.impulse?.payLifeManaValue === true && !altCost) {
+    if (
+      via === "impulse" &&
+      !altCost &&
+      (this.state.objects[cardId]?.impulse?.payLifeManaValue === true ||
+        this.exileStaticLifeCast(player, cardId, face ?? 0) === "only")
+    ) {
       return `${def.name} may be cast from exile only by paying life equal to its mana value`;
     }
     if (
@@ -39643,6 +39654,24 @@ export class Game {
     this.emit({ type: "graveyard-cast-granted", object: target.object, player: controller });
   }
 
+  /** Whether a `playFromExile` static's "pay life equal to its mana value
+   * rather than pay its mana cost" (Valgavoth, Terror Eater) is how `player`
+   * may cast `cardId` as `face` from exile: `"only"` when every permission
+   * reaching the card says so, `"may"` when another — an impulse permission
+   * on the card, a linked cast grant, another static — lets it be cast the
+   * ordinary way too (the player picks which permission they cast it under,
+   * rule 601.3), `null` when none of those statics reaches it. */
+  private exileStaticLifeCast(player: PlayerId, cardId: ObjectId, face: number): "may" | "only" | null {
+    if (!this.hasPlayFromExileStatic(player)) return null;
+    const permissions = this.exilePermissionsFor(player, cardId, face);
+    if (!permissions.some((p) => p.payLifeManaValue === true)) return null;
+    const otherWay =
+      permissions.some((p) => p.payLifeManaValue !== true) ||
+      this.impulsePlayable(player, cardId) ||
+      this.linkedCastGrantFor(player, cardId, face) !== null;
+    return otherWay ? "may" : "only";
+  }
+
   /** Whether `cardId`'s impulse permission lets it be cast without paying
    * its mana cost (`GameObject.impulse.free`): `"may"`, `"only"` (paying
    * isn't allowed — Narset), or `null`. */
@@ -49428,6 +49457,13 @@ export class Game {
     if (via === "impulse" && card?.impulse?.player === caster && card?.impulse?.payLifeManaValue === true) {
       return [{ mana: "{0}", payLifeManaValue: true }];
     }
+    // A `playFromExile` static's (Valgavoth, Terror Eater): the only way, or
+    // one more beside what another permission allows.
+    const staticLife =
+      via === "impulse" && caster !== undefined
+        ? this.exileStaticLifeCast(caster, cardId, Math.max(0, card?.faces?.indexOf(def.name) ?? 0))
+        : null;
+    if (staticLife === "only") return [{ mana: "{0}", payLifeManaValue: true }];
     const out: (AlternativeCostOffer | null)[] =
       def.alternativeCost !== null ? [...this.ownAlternativeCosts(cardId, def.alternativeCost, caster)] : [];
     // Flashback, escape, foretell, disturb, a suspend or cascade cast are
@@ -49511,6 +49547,7 @@ export class Game {
       g.payLifeManaValue === true && turnCastGrantReaches(this.state, this.registry, g, cardId, caster, from))) {
       out.push({ mana: "{0}", payLifeManaValue: true });
     }
+    if (staticLife === "may") out.push({ mana: "{0}", payLifeManaValue: true });
     return out;
   }
 
@@ -55392,7 +55429,7 @@ export class Game {
       this.exiledToReturn.delete(id);
       if (now === "exile") this.returnAtNextEndStep(id, toReturn.source, toReturn.controller);
     }
-    // Exiled with the replacement's permanent (rule 607.2a), in the stint it
+    // Exiled with the replacement's permanent (rule 607.2b), in the stint it
     // has now — or, gone in the same event (`leaveBatch`), the one it last had.
     const linkedTo = this.exiledLinkedTo.get(id);
     if (linkedTo !== undefined) {
@@ -55789,7 +55826,7 @@ export class Game {
             object.exileIfWouldGoToGraveyard === true,
         );
         exileCounters = chosen?.replacement.withCounters;
-        // "Exiled with The Darkness Crystal" (rule 607.2a): linked once it's there.
+        // "Exiled with The Darkness Crystal" (rule 607.2b): linked once it's there.
         if (chosen?.replacement.linked === true && chosen.source !== undefined) {
           this.exiledLinkedTo.set(id, chosen.source);
         }

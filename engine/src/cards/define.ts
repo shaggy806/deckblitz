@@ -3748,6 +3748,14 @@ export interface StaticAbility {
      * (`GameObject.exiledWith`, or `exiledUntil` — Intellect Devourer's). The
      * ability stops with it, and a thief who gains control may use it. */
     readonly linked?: true;
+    /** "If you cast a spell this way, pay life equal to its mana value
+     * rather than pay its mana cost" (Valgavoth, Terror Eater): an
+     * alternative cost (rule 118.9), and the only one this permission
+     * allows — no other alternative cost goes with it, though additional
+     * costs (kicker) are paid as usual (the rulings). A card another
+     * permission also reaches may be cast either way. Lands are played as
+     * ever. */
+    readonly payLifeManaValue?: true;
   };
   /**
    * "For each {B} in a cost, you may pay 2 life rather than pay that mana"

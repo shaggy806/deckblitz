@@ -1,6 +1,6 @@
 /**
  * A graveyard-exile replacement that exiles the card **with** its permanent
- * (`GraveyardExileReplacement.linked`, rule 607.2a), so that permanent's
+ * (`GraveyardExileReplacement.linked`, rule 607.2b), so that permanent's
  * linked abilities find it:
  *   - The Darkness Crystal: "If a nontoken creature an opponent controls would
  *     die, instead exile it and you gain 2 life", and its "{4}{B}{B}, {T}: Put

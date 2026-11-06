@@ -555,7 +555,7 @@ export interface GraveyardExileReplacement {
    * moving object's controller picks another exile that could apply (rule
    * 616.1). Not with `self`. */
   readonly then?: EffectSpec;
-  /** The card is exiled **with this permanent** (rule 607.2a —
+  /** The card is exiled **with this permanent** (rule 607.2b —
    * `GameObject.exiledWith`), in the battlefield stint it has as the card
    * arrives, so a linked ability of it finds the card: The Darkness Crystal's
    * "put target creature card exiled with The Darkness Crystal onto the

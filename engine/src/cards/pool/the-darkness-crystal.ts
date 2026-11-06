@@ -10,7 +10,7 @@ import { defineCard } from "../define.js";
 //   The cost reduction applies only to generic mana in the total cost of black spells you cast.
 //
 // The exile is part of the replacement, and so is the life (rule 614.1a): nothing on the stack.
-// The card is exiled *with* the Crystal (rule 607.2a — the replacement's `linked`), so the last
+// The card is exiled *with* the Crystal (rule 607.2b — the replacement's `linked`), so the last
 // ability finds it; a card Rest in Peace could exile instead isn't linked (rule 616.1).
 const DISCOUNT_TEXT = "Black spells you cast cost {1} less to cast.";
 const REPLACE_TEXT = "If a nontoken creature an opponent controls would die, instead exile it and you gain 2 life.";

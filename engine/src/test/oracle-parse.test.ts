@@ -14372,6 +14372,24 @@ describe("what would go to a graveyard going elsewhere", () => {
       then: { kind: "gain-life", amount: 2 },
       linked: true,
     });
+    // Valgavoth, Terror Eater: "a card you didn't control", linked, and its
+    // permission to play them for life.
+    const valgavoth = card(
+      "If a card you didn't control would be put into an opponent's graveyard from anywhere, exile it instead.\nDuring your turn, you may play cards exiled with Test Card. If you cast a spell this way, pay life equal to its mana value rather than pay its mana cost.",
+    );
+    expect(valgavoth.static.map((s: { replacement?: unknown; playFromExile?: unknown }) => s.replacement ?? s.playFromExile)).toEqual([
+      {
+        event: "would-be-put-into-graveyard",
+        instead: "exile",
+        filter: { ownedBy: "opponent", controlledBy: "opponent", token: false },
+        linked: true,
+      },
+      { filter: {}, linked: true, yourTurnOnly: true, payLifeManaValue: true },
+    ]);
+    expect(card("If a card or token would be put into a graveyard from anywhere, exile it instead.").static[0].replacement).toEqual({
+      event: "would-be-put-into-graveyard",
+      instead: "exile",
+    });
     // No "exiled with" on the card: nothing to link to (Garruk's, Liesa's).
     expect(card("If a creature an opponent controls would die, exile it instead.").static[0].replacement).toEqual({
       event: "would-be-put-into-graveyard",
