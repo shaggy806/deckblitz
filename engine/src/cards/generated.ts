@@ -1648,6 +1648,7 @@ import _poolAvenFogbringer from "./pool/aven-fogbringer.js";
 import _poolAvenGagglemaster from "./pool/aven-gagglemaster.js";
 import _poolAvenHeartstabber from "./pool/aven-heartstabber.js";
 import _poolAvenInitiate from "./pool/aven-initiate.js";
+import _poolAvenInterrupter from "./pool/aven-interrupter.js";
 import _poolAvenLiberator from "./pool/aven-liberator.js";
 import _poolAvenMimeomancer from "./pool/aven-mimeomancer.js";
 import _poolAvenMindcensor from "./pool/aven-mindcensor.js";
@@ -6253,7 +6254,9 @@ import _poolDefibrillatingCurrent from "./pool/defibrillating-current.js";
 import _poolDefile from "./pool/defile.js";
 import _poolDefiledCryptCadaverLab from "./pool/defiled-crypt-cadaver-lab.js";
 import _poolDefiledCrypt from "./pool/defiled-crypt.js";
+import _poolDefilerOfDreams from "./pool/defiler-of-dreams.js";
 import _poolDefilerOfSouls from "./pool/defiler-of-souls.js";
+import _poolDefilerOfVigor from "./pool/defiler-of-vigor.js";
 import _poolDefilingDaemogoth from "./pool/defiling-daemogoth.js";
 import _poolDefilingTears from "./pool/defiling-tears.js";
 import _poolDeflectingPalm from "./pool/deflecting-palm.js";
@@ -23718,6 +23721,7 @@ import _poolSkorpekhDestroyer from "./pool/skorpekh-destroyer.js";
 import _poolSkorpekhLord from "./pool/skorpekh-lord.js";
 import _poolSkred from "./pool/skred.js";
 import _poolSkrelvDefectorMite from "./pool/skrelv-defector-mite.js";
+import _poolSkrelvsHive from "./pool/skrelvs-hive.js";
 import _poolSkulduggery from "./pool/skulduggery.js";
 import _poolSkulkingFugitive from "./pool/skulking-fugitive.js";
 import _poolSkulkingGhost from "./pool/skulking-ghost.js";
@@ -33114,6 +33118,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAvenGagglemaster,
   _poolAvenHeartstabber,
   _poolAvenInitiate,
+  _poolAvenInterrupter,
   _poolAvenLiberator,
   _poolAvenMimeomancer,
   _poolAvenMindcensor,
@@ -37719,7 +37724,9 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDefile,
   _poolDefiledCryptCadaverLab,
   _poolDefiledCrypt,
+  _poolDefilerOfDreams,
   _poolDefilerOfSouls,
+  _poolDefilerOfVigor,
   _poolDefilingDaemogoth,
   _poolDefilingTears,
   _poolDeflectingPalm,
@@ -55184,6 +55191,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSkorpekhLord,
   _poolSkred,
   _poolSkrelvDefectorMite,
+  _poolSkrelvsHive,
   _poolSkulduggery,
   _poolSkulkingFugitive,
   _poolSkulkingGhost,
@@ -64593,6 +64601,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/aven-gagglemaster": _poolAvenGagglemaster,
   "pool/aven-heartstabber": _poolAvenHeartstabber,
   "pool/aven-initiate": _poolAvenInitiate,
+  "pool/aven-interrupter": _poolAvenInterrupter,
   "pool/aven-liberator": _poolAvenLiberator,
   "pool/aven-mimeomancer": _poolAvenMimeomancer,
   "pool/aven-mindcensor": _poolAvenMindcensor,
@@ -69198,7 +69207,9 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/defile": _poolDefile,
   "pool/defiled-crypt-cadaver-lab": _poolDefiledCryptCadaverLab,
   "pool/defiled-crypt": _poolDefiledCrypt,
+  "pool/defiler-of-dreams": _poolDefilerOfDreams,
   "pool/defiler-of-souls": _poolDefilerOfSouls,
+  "pool/defiler-of-vigor": _poolDefilerOfVigor,
   "pool/defiling-daemogoth": _poolDefilingDaemogoth,
   "pool/defiling-tears": _poolDefilingTears,
   "pool/deflecting-palm": _poolDeflectingPalm,
@@ -86663,6 +86674,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/skorpekh-lord": _poolSkorpekhLord,
   "pool/skred": _poolSkred,
   "pool/skrelv-defector-mite": _poolSkrelvDefectorMite,
+  "pool/skrelvs-hive": _poolSkrelvsHive,
   "pool/skulduggery": _poolSkulduggery,
   "pool/skulking-fugitive": _poolSkulkingFugitive,
   "pool/skulking-ghost": _poolSkulkingGhost,

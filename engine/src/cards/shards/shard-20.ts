@@ -225,6 +225,7 @@ import _poolDeathsPresence from "../pool/deaths-presence.js";
 import _poolDecimatorOfTheProvinces from "../pool/decimator-of-the-provinces.js";
 import _poolDefang from "../pool/defang.js";
 import _poolDefenderOfTheOrder from "../pool/defender-of-the-order.js";
+import _poolDefilerOfVigor from "../pool/defiler-of-vigor.js";
 import _poolDelayedBlastFireball from "../pool/delayed-blast-fireball.js";
 import _poolDenseCanopy from "../pool/dense-canopy.js";
 import _poolDepalaPilotExemplar from "../pool/depala-pilot-exemplar.js";
@@ -780,6 +781,7 @@ import _poolSinuousPredator from "../pool/sinuous-predator.js";
 import _poolSirShandlarOfEberyn from "../pool/sir-shandlar-of-eberyn.js";
 import _poolSkeletalVampire from "../pool/skeletal-vampire.js";
 import _poolSkitteringCrustacean from "../pool/skittering-crustacean.js";
+import _poolSkrelvsHive from "../pool/skrelvs-hive.js";
 import _poolSkullknockerOgre from "../pool/skullknocker-ogre.js";
 import _poolSkyshipStalker from "../pool/skyship-stalker.js";
 import _poolSkyshroudCondor from "../pool/skyshroud-condor.js";
@@ -1258,6 +1260,7 @@ const shard: CardShard = {
     _poolDecimatorOfTheProvinces,
     _poolDefang,
     _poolDefenderOfTheOrder,
+    _poolDefilerOfVigor,
     _poolDelayedBlastFireball,
     _poolDenseCanopy,
     _poolDepalaPilotExemplar,
@@ -1813,6 +1816,7 @@ const shard: CardShard = {
     _poolSirShandlarOfEberyn,
     _poolSkeletalVampire,
     _poolSkitteringCrustacean,
+    _poolSkrelvsHive,
     _poolSkullknockerOgre,
     _poolSkyshipStalker,
     _poolSkyshroudCondor,

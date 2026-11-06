@@ -199,6 +199,7 @@ import _poolDeathcapMarionette from "../pool/deathcap-marionette.js";
 import _poolDeathlessKnight from "../pool/deathless-knight.js";
 import _poolDebtToTheDeathless from "../pool/debt-to-the-deathless.js";
 import _poolDeepwoodDenizen from "../pool/deepwood-denizen.js";
+import _poolDefilerOfDreams from "../pool/defiler-of-dreams.js";
 import _poolDefyGravity from "../pool/defy-gravity.js";
 import _poolDeityOfScars from "../pool/deity-of-scars.js";
 import _poolDemonicConsultation from "../pool/demonic-consultation.js";
@@ -1152,6 +1153,7 @@ const shard: CardShard = {
     _poolDeathlessKnight,
     _poolDebtToTheDeathless,
     _poolDeepwoodDenizen,
+    _poolDefilerOfDreams,
     _poolDefyGravity,
     _poolDeityOfScars,
     _poolDemonicConsultation,
