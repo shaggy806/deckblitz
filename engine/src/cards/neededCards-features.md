@@ -473,6 +473,16 @@ pool empties as that step ends (rule 500.5). The fight's "add that much {R}" is
 card: The Last Agni Kai (`keep-unspent-mana-this-turn.test.ts`). Key:
 replacement:keep-unspent-mana-until-end-of-turn.
 
+### "Whenever you discard one or more cards" — already built, 2026-11-06
+
+By EDHREC rank: Inti, Seneschal of the Sun (1949). No engine code: the
+`discards` trigger already fires once a batch (Rielle, the Everwise), the
+"you may discard a card. When you do, …" is Tether Technician's reflexive
+trigger, and the exile is `impulse-exile` until your next end step. The
+scaffolder now reads "you may play that card until your next end step" (and
+"until your next end step, you may …"). Proving card: Inti, Seneschal of the
+Sun (`discards-batch-impulse.test.ts`). Key: trigger:discards-batch-trigger.
+
 ### An Aura on a graveyard card, and an enchant ability an effect gives — built 2026-11-05
 
 By EDHREC rank: Animate Dead (223) and Necromancy (1030). An Aura whose target

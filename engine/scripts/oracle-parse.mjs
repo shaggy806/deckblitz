@@ -7197,6 +7197,9 @@ function impulseWindowOf(sentence) {
       { duration: "your-next-turn", spendAs: "any-color" },
     ],
     [`during your next turn, you may ${verb} ${it}`, { duration: "your-next-turn-only" }],
+    // Wiccan, Young Avenger; Inti, Seneschal of the Sun.
+    [`until your next end step, you may ${verb} ${it}`, { duration: "your-next-end-step" }],
+    [`you may ${verb} ${it} until your next end step`, { duration: "your-next-end-step" }],
     [`until end of combat on your next turn, you may ${verb} ${it}`, { duration: "until-end-of-combat-your-next-turn" }],
     [`you may ${verb} ${it} until you exile another card with ~`, { duration: "until-next-exile" }],
     [`you may ${verb} ${it} for as long as you control ~`, { duration: "while-you-control" }],

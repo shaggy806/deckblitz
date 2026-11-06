@@ -9317,6 +9317,13 @@ describe("impulse permissions with a window", () => {
 
   it("reads each window", () => {
     expect(trigger("During your next turn, you may play that card.")).toEqual({ ...impulse, duration: "your-next-turn-only" });
+    // Inti, Seneschal of the Sun; Wiccan, Young Avenger.
+    expect(trigger("You may play that card until your next end step.")).toEqual({ ...impulse, duration: "your-next-end-step" });
+    expect(trigger("Until your next end step, you may cast that card.")).toEqual({
+      ...impulse,
+      duration: "your-next-end-step",
+      castOnly: true,
+    });
     expect(trigger("Until end of combat on your next turn, you may play that card.")).toEqual({
       ...impulse,
       duration: "until-end-of-combat-your-next-turn",

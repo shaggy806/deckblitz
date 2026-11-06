@@ -20,7 +20,7 @@ export default defineCard({
   text: TEXT,
   triggered: [
     {
-      trigger: { on: "cast-spell", who: "you", filter: { notTypes: ["creature"] } },
+      trigger: { on: "cast-spell", who: "you", noncreatureOnly: true },
       targets: [],
       effect: { kind: "impulse-exile", amount: 1, duration: "your-next-end-step" },
       resolve: null,
