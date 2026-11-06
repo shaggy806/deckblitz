@@ -11828,6 +11828,39 @@ describe("a search of your own zones", () => {
   });
 });
 
+describe("a search whose exiled finds may be cast later this turn", () => {
+  it("reads Ugin, Eye of the Storms' free cast and Chandra, Heart of Fire's", () => {
+    expect(
+      parseEffect(
+        "Search your library for any number of colorless nonland cards, exile them, then shuffle. Until end of turn, you may cast those cards without paying their mana costs.",
+        ctx(),
+      ).effect,
+    ).toEqual({
+      kind: "search-library",
+      filter: { colorless: true, notTypes: ["land"] },
+      destination: "exile",
+      min: 0,
+      max: { librarySize: "you" },
+      playable: { duration: "end-of-turn", free: true },
+    });
+    const chandra = parseEffect(
+      "Search your graveyard and library for any number of red instant and/or sorcery cards, exile them, then shuffle. You may cast them this turn. Add six {R}.",
+      ctx(),
+    ).effect;
+    expect(chandra.effects[0]).toEqual({
+      kind: "search-library",
+      filter: { colors: ["R"], typesAnyOf: ["instant", "sorcery"] },
+      destination: "exile",
+      zones: "library-and-graveyard",
+      upTo: true,
+      min: 0,
+      max: 999,
+      playable: { duration: "end-of-turn" },
+    });
+    expect(chandra.effects[1]).toEqual({ kind: "add-mana", mana: "R", amount: 6 });
+  });
+});
+
 describe("an effect done to each other permanent", () => {
   const each = (text: string) => parseEffect(text, ctx()).effect;
   it("reads tap, return and lose-flying as for-each-permanent, the source spared", () => {

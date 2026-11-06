@@ -1866,7 +1866,8 @@
   "effect:next-spell-has-improvise",
   "cost:sacrifice-any-number-copy-for-each",
   "cost:sacrifice-any-number-copy-for-each",
-  "condition:this-ability-did-this-turn"
+  "condition:this-ability-did-this-turn",
+  "effect:search-finds-castable-this-turn"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

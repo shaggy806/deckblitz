@@ -38284,6 +38284,12 @@ export class Game {
       ...(exiled && more?.playable === "while-exiled" && exileFor.length === 0
         ? { impulseGrant: { player, expiry: { kind: "while-exiled" as const } } }
         : {}),
+      // "Until end of turn, you may cast those cards without paying their
+      // mana costs" (Ugin, Eye of the Storms): any other window, as `exile`'s
+      // `mayCast` grants it, the searcher's.
+      ...(exiled && more?.playable !== undefined && more.playable !== "while-exiled" && exileFor.length === 0
+        ? { impulseGrant: this.exilePermissionGrant(more.playable, player, more.source, owner, more.playable.play === true) }
+        : {}),
       // Opposition Agent's "You may play those cards …": for the most recently
       // entered's controller, unless they say otherwise (`searchExileChoice`).
       ...(exileFor.length > 0

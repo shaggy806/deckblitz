@@ -9372,7 +9372,11 @@ export function parseEffect(text, outer) {
       hints.push({ sentence, effect: steps[1] });
       continue;
     }
-    const searched = searchOthersAt(sentences, i, ctx) ?? searchInsteadAt(sentences, i) ?? searchZonesAt(sentences, i);
+    const searched =
+      searchOthersAt(sentences, i, ctx) ??
+      searchInsteadAt(sentences, i) ??
+      searchZonesAt(sentences, i) ??
+      searchExileCastLaterAt(sentences, i);
     if (searched !== null) {
       parsed.push(searched.effect);
       hints.push({ sentence, effect: searched.effect });
@@ -10991,6 +10995,43 @@ function searchZonesAt(sentences, i) {
   });
   return {
     effect: m[1] ? { kind: "may", prompt: `Search your ${m[2]} for ${what}?`, effect: search } : search,
+    used: 2,
+  };
+}
+
+/**
+ * A search whose exiled finds may be cast later this turn — the search's
+ * `playable` permission:
+ * - "Search your library for any number of colorless nonland cards, exile
+ *   them, then shuffle. Until end of turn, you may cast those cards without
+ *   paying their mana costs." (Ugin, Eye of the Storms);
+ * - "Search your graveyard and library for any number of red instant and/or
+ *   sorcery cards, exile them, then shuffle. You may cast them this turn."
+ *   (Chandra, Heart of Fire): "any number" may be none in the graveyard too.
+ */
+function searchExileCastLaterAt(sentences, i) {
+  const m = /^search your (library|graveyard and library) for any number of (.+?) cards, exile them, then shuffle\.$/i.exec(sentences[i] ?? "");
+  if (m === null) return null;
+  const next = sentences[i + 1] ?? "";
+  const free = /^until end of turn, you may cast those cards without paying their mana costs\.$/i.test(next);
+  if (!free && !/^you may cast them this turn\.$/i.test(next)) return null;
+  const colored = /^(?:(white|blue|black|red|green|colorless) )?(.+)$/i.exec(m[2]);
+  const typed = parseTypePhrase(colored[2], { cards: true });
+  if (typed === null || typed === undefined) return null;
+  const color = colored[1]?.toLowerCase();
+  const filter =
+    color === undefined ? typed : color === "colorless" ? { colorless: true, ...typed } : { colors: [COLOR_LETTER[color]], ...typed };
+  const library = m[1].toLowerCase() === "library";
+  return {
+    effect: {
+      kind: "search-library",
+      filter,
+      destination: "exile",
+      ...(library ? {} : { zones: "library-and-graveyard", upTo: true }),
+      min: 0,
+      max: library ? { librarySize: "you" } : 999,
+      playable: { duration: "end-of-turn", ...(free ? { free: true } : {}) },
+    },
     used: 2,
   };
 }

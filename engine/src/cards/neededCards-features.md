@@ -387,6 +387,18 @@ and again as it resolves. "Each of your main phases" is two entries joined by
 `sameAbilityAs`. No scaffolder template: the line is Carpet's alone. Proving
 card: Carpet of Flowers. Key: condition:this-ability-did-this-turn.
 
+### A search's exiled finds castable later this turn — built 2026-11-05
+
+By EDHREC rank: Ugin, Eye of the Storms (1710). `search-library`'s `playable`
+takes any `ExilePermission` beside `"while-exiled"`, granted on every exiled
+find as `exile`'s `mayCast` grants it (`exilePermissionGrant`): "until end of
+turn, you may cast those cards without paying their mana costs" is `{
+duration: "end-of-turn", free: true }` (free only, rule 118.9; each find cast
+when its own timing allows, the ruling), Chandra, Heart of Fire's "you may
+cast them this turn" `{ duration: "end-of-turn" }`. The scaffolder reads both
+lines (`searchExileCastLaterAt`). Proving cards: Ugin, Eye of the Storms;
+Chandra, Heart of Fire. Key: effect:search-finds-castable-this-turn.
+
 ### A copy of the spell for each creature sacrificed to cast it — built 2026-11-05
 
 By EDHREC rank: Plumb the Forbidden (1148). "You may sacrifice one or more

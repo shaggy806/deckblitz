@@ -166,7 +166,7 @@ export const SEARCHED_ZONES = {
 export interface SearchMore {
   readonly owner?: PlayerId;
   readonly all?: boolean;
-  readonly playable?: "while-exiled";
+  readonly playable?: "while-exiled" | ExilePermission;
   /** Its `linked`. */
   readonly linked?: true;
   readonly then?: EffectSpec;
@@ -10324,8 +10324,18 @@ export type EffectSpec =
       readonly all?: true;
       /** "You may play that card for as long as it remains exiled" (Praetor's
        * Grasp): with an exile destination, the searcher may play the finds
-       * (rule 305.1 for a land) while they stay in exile. */
-      readonly playable?: "while-exiled";
+       * (rule 305.1 for a land) while they stay in exile.
+       *
+       * Or any {@link ExilePermission}, as `exile`'s `mayCast` grants one, on
+       * every find this search exiled: Ugin, Eye of the Storms' "search your
+       * library for any number of colorless nonland cards, exile them, then
+       * shuffle. **Until end of turn, you may cast those cards without paying
+       * their mana costs**" (`{ duration: "end-of-turn", free: true }`) —
+       * cast later this turn, each when its own timing allows (the ruling),
+       * not only during the resolution; Chandra, Heart of Fire's "you may cast
+       * them this turn". `play` lets a land among them be played too; without
+       * it the finds are only cast. */
+      readonly playable?: "while-exiled" | ExilePermission;
       /** With an exile destination, the finds are exiled **with this
        * source** (rule 607.2a — `GameObject.exiledWith`), as `exile`'s
        * `linked`: Skyship Weatherlight's "search your library for any number
