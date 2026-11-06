@@ -1877,7 +1877,8 @@
   "effect:flicker-return-at-owners-next-end-step",
   "effect:cast-discarded-card-exiled-by-madness",
   "static:granted-static-replacement",
-  "cost:optional-life-additional-cost-for-spells"
+  "cost:optional-life-additional-cost-for-spells",
+  "static:static-scoped-by-has-toxic"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

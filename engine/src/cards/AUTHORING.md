@@ -642,9 +642,11 @@ creature that loses its abilities loses the printed one), and combat damage it
 deals a player gives that player that many poison counters on top of the
 damage (120.3g) — however much damage it was, and never for noncombat damage
 (the rulings). Keep "Toxic N" in `text`. A token with toxic is a token card
-with the field (`Phyrexian Mite Token`). Not yet: "gains toxic N until end of
-turn" (no modifier carries it) and a static scoped to "creatures with toxic"
-(Skrelv's Hive) — toxic is read in the same layer it would have to wait for.
+with the field (`Phyrexian Mite Token`). A static scoped to "creatures you
+control with toxic" is a `filter` scope with `hasToxic: true` (Skrelv's Hive's
+corrupted lifelink): like a keyword-scoped static it waits for the fold's
+other statics, so toxic a static or an effect grants counts too, and a
+creature that lost its abilities has none (rule 613.8).
 
 **Dredge** (rule 702.52) is a field: `dredge: 3` is "Dredge 3" (Life from
 the Loam). Keep the reminder text in `text`. While the card is in its owner's

@@ -16232,3 +16232,19 @@ describe("a copy of the spell for each creature sacrificed", () => {
     });
   });
 });
+
+describe("a corrupted static scoped by toxic", () => {
+  it("reads Skrelv's Hive's lifelink for your creatures with toxic, and the corrupted condition", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Enchantment",
+      oracle_text: "Corrupted — As long as an opponent has three or more poison counters, creatures you control with toxic have lifelink.",
+    });
+    expect(parsed.complete).toBe(true);
+    expect(parsed.static?.[0]).toMatchObject({
+      affects: { scope: "filter", filter: { type: "creature", controlledBy: "you", hasToxic: true } },
+      grantKeywords: ["lifelink"],
+      condition: { kind: "player-counters", counter: "poison", who: "opponent", atLeast: 3 },
+    });
+  });
+});

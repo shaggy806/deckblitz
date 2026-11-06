@@ -1512,6 +1512,9 @@ export interface FilterContext {
     readonly subtypes?: readonly string[] | undefined;
     readonly supertypes?: readonly Supertype[] | undefined;
     readonly keywords?: (() => ReadonlySet<Keyword>) | undefined;
+    /** Its total toxic as the fold has it so far, for a `hasToxic` clause;
+     * absent, printed toxic (less ability loss). */
+    readonly toxic?: (() => number) | undefined;
     readonly hasProtection?: (() => boolean) | undefined;
   };
 }
@@ -3019,13 +3022,17 @@ export function matchesFilter(
 
   if (filter.hasToxic !== undefined) {
     // Its total toxic value (rule 702.164b) above 0 — printed or granted.
-    // Inside the layer fold, only what it prints (no fold within the fold);
-    // something that has left isn't asked (its snapshot keeps no toxic).
+    // Inside the layer fold, as far as the fold has got (a keyword-scoped
+    // static's second pass — Skrelv's Hive), else only what it prints (no fold
+    // within the fold); something that has left isn't asked (its snapshot
+    // keeps no toxic).
     const has =
       live === undefined
         ? false
         : layered !== undefined
-          ? !hasLostAbilities(state, registry, live) && registry.get(rulesTextName(live)).toxic > 0
+          ? layered.toxic !== undefined
+            ? layered.toxic() > 0
+            : !hasLostAbilities(state, registry, live) && registry.get(rulesTextName(live)).toxic > 0
           : computeCharacteristics(state, registry, id).toxic > 0;
     if (has !== filter.hasToxic) return false;
   }

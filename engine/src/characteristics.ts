@@ -4158,6 +4158,9 @@ function filterReadsKeywords(filter: CardFilter): boolean {
     filter.keyword !== undefined ||
     filter.notKeyword !== undefined ||
     filter.hasManaAbility !== undefined ||
+    // "Creatures you control with toxic" (Skrelv's Hive): toxic granted in
+    // layer 6 counts too (rule 613.8).
+    filter.hasToxic !== undefined ||
     (filter.anyOf?.some(filterReadsKeywords) ?? false) ||
     (filter.not !== undefined && filterReadsKeywords(filter.not))
   );
@@ -4228,6 +4231,10 @@ export interface TargetView {
    * one caller; without one, printed keywords (less ability loss).
    */
   readonly keywords?: () => ReadonlySet<Keyword>;
+  /** The target's total toxic (rule 702.164b) as the layer fold has it so far
+   * — printed and granted — for a `hasToxic` clause ("creatures you control
+   * with toxic", Skrelv's Hive). Without one, printed toxic. */
+  readonly toxic?: () => number;
   /** Whether the layer fold has granted the target a protection so far, for a
    * scope asking whether it has any ability (`hasAnyAbility`). */
   readonly hasProtection?: () => boolean;
@@ -4299,7 +4306,7 @@ export function staticAffects(
       // What `ofChosenType` ("of the chosen type") reads the choice off.
       source: source.id,
       ...(view.inFold === true
-        ? { layered: { types: view.types, subtypes: view.subtypes, supertypes: view.supertypes, keywords: view.keywords, hasProtection: view.hasProtection } }
+        ? { layered: { types: view.types, subtypes: view.subtypes, supertypes: view.supertypes, keywords: view.keywords, toxic: view.toxic, hasProtection: view.hasProtection } }
         : {}),
       ...(view.amount !== undefined ? { amount: view.amount } : {}),
       ...(view.enteringUnder !== undefined ? { enteringUnder: view.enteringUnder } : {}),
@@ -5363,6 +5370,23 @@ function collectStaticEffects(
       }
       return keywords;
     };
+    // Its total toxic so far (rule 702.164b): printed, less ability loss, and
+    // every instance granted by the first pass's statics and its own
+    // modifiers, as the main fold adds them up — what "creatures you control
+    // with toxic have lifelink" (Skrelv's Hive) reads (rule 613.8).
+    let toxicSoFar: number | null = null;
+    const targetToxic = (): number => {
+      if (toxicSoFar === null) {
+        const lostAt = target.zone === "battlefield" ? abilitiesLostAt(state, registry, target) : null;
+        let toxic = hasLostAbilities(state, registry, target) ? 0 : registry.get(rulesTextName(target)).toxic;
+        for (const effect of out) if (grantOutlastsLoss(lostAt, effect.timestamp)) toxic += effect.toxic;
+        for (const modifier of target.modifiers) {
+          if (modifier.toxic !== undefined && modifierGrantApplies(modifier, lostAt)) toxic += modifier.toxic;
+        }
+        toxicSoFar = toxic;
+      }
+      return toxicSoFar;
+    };
     const second: AppliedEffect[] = [];
     for (const { source, ability, timestamp } of sources) {
       if (!scopedByKeyword(ability.affects) || scopedByAbilities(ability.affects) || isPtScopedRestriction(ability)) continue;
@@ -5370,6 +5394,7 @@ function collectStaticEffects(
         !staticReaches(state, registry, source, ability, target, {
           inFold: true,
           keywords: targetKeywords,
+          toxic: targetToxic,
         })
       ) {
         continue;
@@ -5391,7 +5416,7 @@ function collectStaticEffects(
     const third: AppliedEffect[] = [];
     for (const { source, ability, timestamp } of sources) {
       if (!scopedByAbilities(ability.affects) || isPtScopedRestriction(ability)) continue;
-      if (!staticReaches(state, registry, source, ability, target, { inFold: true, keywords: targetKeywords, hasProtection })) continue;
+      if (!staticReaches(state, registry, source, ability, target, { inFold: true, keywords: targetKeywords, toxic: targetToxic, hasProtection })) continue;
       const effect = applied(source, ability, timestamp);
       if (effect !== null) third.push(effect);
     }

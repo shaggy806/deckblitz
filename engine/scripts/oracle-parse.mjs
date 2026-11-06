@@ -15811,6 +15811,8 @@ const STATIC_CONDITION_PREFIXES = [
   ["As long as ~ is untapped, ", { kind: "source", filter: { tapped: false } }],
   // Queen Mother Ramonda.
   ["As long as you're the monarch, ", { kind: "monarch", who: "you" }],
+  // Corrupted (an ability word, rule 207.2c): Bonepicker Skirge, Skrelv's Hive.
+  ["As long as an opponent has three or more poison counters, ", { kind: "player-counters", counter: "poison", who: "opponent", atLeast: 3 }],
   // Murders at Karlov Manor's "five or more mana values among cards in your
   // graveyard" (Aven Heartstabber): a `distinct` aggregate there.
   ["As long as there are five or more mana values among cards in your graveyard, ", FIVE_MANA_VALUES],
@@ -19550,6 +19552,15 @@ function parseStatic(line, text) {
     return {
       affects: { scope: "filter", filter: { type: "creature", controlledBy: "opponent" } },
       cantHaveKeywords: [KEYWORDS[m[1].toLowerCase()]],
+      text,
+    };
+  }
+  // "Creatures you control with toxic have lifelink" (Skrelv's Hive): toxic
+  // printed or granted (`hasToxic`, read with the keyword-scoped statics).
+  if ((m = new RegExp(`^creatures you control with toxic have ${KW}(?: and ${KW})?\\.$`, "i").exec(line))) {
+    return {
+      affects: { scope: "filter", filter: { type: "creature", controlledBy: "you", hasToxic: true } },
+      grantKeywords: [m[1], m[2]].filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]),
       text,
     };
   }
