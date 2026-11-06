@@ -7526,6 +7526,16 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Defiler of Vigor: paying 2 life for a green creature, four players
 - **Do:** Click the Grizzly Bears in your hand and choose "Cast Grizzly Bears (paying 2 life for Defiler of Vigor)".
 - **Expect:** You lose 2 life, only one Forest taps, and the Bears enter. Nobody else's life changes.
+## Discard two unless you discard one of a kind (2026-11-06)
+
+### Thirst for Knowledge: the discard prompt names an artifact card
+- **Do:** Cast Thirst for Knowledge. When asked to discard, click Sol Ring, then "Discard".
+- **Expect:** The banner says "Discard 2 cards, or one artifact card". The one Sol Ring is enough: it goes to your graveyard and nothing else is discarded.
+
+### Thirst for Knowledge: the discard prompt names an artifact card, four players
+- **Do:** Cast Thirst for Knowledge. When asked to discard, click Lightning Bolt and Shock, then "Discard".
+- **Expect:** The banner says "Discard 2 cards, or one artifact card". Both go to your graveyard and Sol Ring stays in your hand.
+
 ## A draw you may replace (2026-11-06)
 
 ### Abundance: each draw asks whether to draw or reveal

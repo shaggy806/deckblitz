@@ -1898,6 +1898,9 @@ export type LegalAction =
       /** "…unless they discard a land card": any one of these alone is an
        * answer too (Compulsive Research). */
       readonly orOneOf?: readonly ObjectId[];
+      /** The kind of card `orOneOf` names ("land", "artifact"), when it's one
+       * card type — for the prompt. */
+      readonly orOneKind?: string;
       /** "Discard any number of cards": any number up to `count`, none
        * included (Neheb, Dreadhorde Champion). */
       readonly upTo?: true;

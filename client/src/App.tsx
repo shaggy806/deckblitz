@@ -6323,7 +6323,9 @@ function Table({
                 discardAction.upTo === true ? 'any number of cards' : discardAction.count
               }${discardAction.upTo === true ? '' : ` card${discardAction.count === 1 ? '' : 's'}`}`
             : 'Discard to hand size'}
-          {discardAction.orOneOf !== undefined ? ', or one land card' : ''}{' '}
+          {discardAction.orOneOf !== undefined
+            ? `, or one ${discardAction.orOneKind ?? 'qualifying'} card`
+            : ''}{' '}
           — click cards in your hand · {discardPicks.length}/{discardAction.count}
         </span>
         <button

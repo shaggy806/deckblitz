@@ -51493,7 +51493,11 @@ export class Game {
       ...(filter !== undefined ? { eligible: hand } : {}),
       ...(this.costDiscardFor !== null ? { forCost: this.costDiscardFor } : {}),
       ...(unlessOne !== undefined
-        ? { orOneOf: hand.filter((id) => this.discardCandidates(player, unlessOne).includes(id)) }
+        ? {
+            orOneOf: hand.filter((id) => this.discardCandidates(player, unlessOne).includes(id)),
+            // "…unless they discard an artifact card": the prompt names it.
+            ...(Object.keys(unlessOne).length === 1 && unlessOne.type !== undefined ? { orOneKind: unlessOne.type } : {}),
+          }
         : {}),
     };
   }

@@ -3494,6 +3494,9 @@ export type AwaitingDecision =
       /** "…unless they discard a land card" (Compulsive Research): any one
        * of these on its own is an answer, instead of `count` cards. */
       readonly orOneOf?: readonly ObjectId[];
+      /** The kind of card `orOneOf` names, when it's one card type ("land",
+       * "artifact"), for the prompt; absent for a richer filter. */
+      readonly orOneKind?: string;
       /** "Discard any number of cards" (the `discard` effect's `anyNumber`):
        * any number up to `count` — none included. */
       readonly upTo?: true;

@@ -11304,4 +11304,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}, {}, {}],
     }),
   ),
+  // --- Discard two unless you discard one of a kind (2026-11-06) ------------
+  preset(
+    'Thirst for Knowledge: the discard prompt names an artifact card',
+    board({
+      you: { bf: ['Island*3'], hand: ['Thirst for Knowledge', 'Sol Ring', 'Lightning Bolt', 'Shock'], lib: ['Island*5'] },
+    }),
+  ),
+  preset(
+    'Thirst for Knowledge: the discard prompt names an artifact card, four players',
+    board({
+      you: { bf: ['Island*3'], hand: ['Thirst for Knowledge', 'Sol Ring', 'Lightning Bolt', 'Shock'], lib: ['Island*5'] },
+      opp: [{}, {}, {}],
+    }),
+  ),
 ]

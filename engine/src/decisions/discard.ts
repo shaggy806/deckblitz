@@ -39,6 +39,7 @@ export const discard = defineDecision({
       // creature card") — then only those.
       from: [...(awaiting.eligible ?? ctx.state.zones.perPlayer[player].hand)],
       ...(awaiting.orOneOf !== undefined ? { orOneOf: [...awaiting.orOneOf] } : {}),
+      ...(awaiting.orOneKind !== undefined ? { orOneKind: awaiting.orOneKind } : {}),
       ...(awaiting.upTo === true ? { upTo: true as const } : {}),
     },
   ],
@@ -97,6 +98,13 @@ export const discard = defineDecision({
     // "Any number": every size, smallest first, the cap shared out in order.
     const sizes = legal.upTo === true ? Array.from({ length: legal.count + 1 }, (_, n) => n) : [legal.count];
     const out: Action[] = [];
+    // "…unless they discard a land card": one such card alone is an answer,
+    // the cheapest there is — offered first, in at most half the cap.
+    const singles = Math.min(limit, Math.max(1, Math.floor(limit / 2)));
+    for (const id of worstFirst) {
+      if (out.length >= singles) break;
+      if (legal.orOneOf?.includes(id) === true) out.push({ type: "discard", player, cards: [id] });
+    }
     for (const size of sizes) {
       if (out.length >= limit) break;
       for (const cards of combinations(worstFirst, size, limit - out.length)) out.push({ type: "discard", player, cards });
@@ -105,6 +113,11 @@ export const discard = defineDecision({
   },
 
   randomAnswer: (legal, player, rng): Action => {
+    // "…unless they discard a land card": half the time, one of those alone.
+    const orOneOf = legal.orOneOf ?? [];
+    if (orOneOf.length > 0 && rng.pickIndex(2) === 0) {
+      return { type: "discard", player, cards: [orOneOf[rng.pickIndex(orOneOf.length)]] };
+    }
     const pool = [...legal.from];
     const cards: ObjectId[] = [];
     // "Any number": how many is drawn too.
