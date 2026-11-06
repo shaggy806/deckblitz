@@ -14,12 +14,13 @@
 //   … --refresh       fetch Scryfall's set list and first printings again (cached 3 days)
 //   … --oldest        walk the other way: oldest set first (`--sets N` the oldest N; the
 //                     `author-by-set-oldest` skill's order)
-//   … --upcoming      take in the sets not out yet too (their previewed cards, which
-//                     Scryfall calls not Commander-legal until release: `gen:oracle`
-//                     keeps them as previews). Always on for `--set` of such a set.
+//   … --released-only leave out the paper sets not out yet. By default they're walked
+//                     like any other, newest first, through their previewed cards
+//                     (which Scryfall calls not Commander-legal until release, and
+//                     `gen:oracle` keeps as previews) — the user's call, 2026-11-06.
 //
 // Which sets: Scryfall's paper expansions, core sets, Commander products,
-// draft-innovation sets, masters sets and starter products released by today;
+// draft-innovation sets, masters sets and starter products, out or previewed;
 // a card counts for the set that first printed it (`is:firstprint`). "Done"
 // is a pool card by that name (a double-faced card by its front face too);
 // "triaged" is a record in `data/sweep-*/` that named it, authored or
@@ -51,7 +52,7 @@ const top = Number(option("--top", "100"));
 const withUnranked = !flag("--ranked-only");
 const refresh = flag("--refresh");
 const oldest = flag("--oldest");
-const upcoming = flag("--upcoming");
+const upcoming = !flag("--released-only");
 const today = new Date().toISOString().slice(0, 10);
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -86,12 +87,27 @@ async function getJson(url, tries = 5) {
   return res.json();
 }
 
-/** Every set worth walking, newest first (oldest first with `--oldest`). */
+/** Every set worth walking, newest first (oldest first with `--oldest`). The
+ * sets not out yet come before the released ones, the soonest first — the
+ * one out next week before one a few months off with a handful of cards
+ * previewed — a main set before its Commander set on the same day. */
 async function sets(withUpcoming = upcoming) {
   const all = await cached("sets.json", async () => (await getJson("https://api.scryfall.com/sets")).data);
-  return all
-    .filter((s) => !s.digital && SET_TYPES.has(s.set_type) && s.released_at !== undefined && (withUpcoming || s.released_at <= today))
-    .sort((a, b) => (oldest ? -1 : 1) * b.released_at.localeCompare(a.released_at) || a.code.localeCompare(b.code));
+  const kept = all.filter(
+    (s) => !s.digital && SET_TYPES.has(s.set_type) && s.released_at !== undefined && (withUpcoming || s.released_at <= today),
+  );
+  const byCode = (a, b) => a.code.localeCompare(b.code);
+  if (oldest) return kept.sort((a, b) => a.released_at.localeCompare(b.released_at) || byCode(a, b));
+  const ahead = kept
+    .filter((s) => s.released_at > today)
+    .sort(
+      (a, b) =>
+        a.released_at.localeCompare(b.released_at) ||
+        Number(a.set_type === "commander") - Number(b.set_type === "commander") ||
+        byCode(a, b),
+    );
+  const out = kept.filter((s) => s.released_at <= today).sort((a, b) => b.released_at.localeCompare(a.released_at) || byCode(a, b));
+  return [...ahead, ...out];
 }
 
 /** A set's Commander-legal first printings: name, EDHREC rank (or null), type

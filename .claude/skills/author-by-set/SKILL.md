@@ -24,7 +24,12 @@ is the same walk, picked up by `--next` like any card left.
   by set. The whole set is the default; `--top 50` narrows it to that share of
   the set's ranked cards and `--ranked-only` drops the unranked ones, for a
   quicker pass when asked. `--refresh` refetches Scryfall (cached three days
-  in `engine/.cache/`). Reads `dist/`: build first.
+  in `engine/.cache/`). Reads `dist/`: build first. **Paper sets not out yet
+  come first** (the user's call, 2026-11-06): the soonest release first, a
+  main set before its Commander set, through their previewed cards, then the
+  released sets newest first; `--released-only` leaves them out. A preview has
+  no rulings yet: block a card that turns on one, and refresh the snapshot
+  after release (below).
 - `npm run card:scaffold -w engine -- "A" "B" …` — writes each card from the
   Oracle snapshot; a card whose every line the parser reads goes, finished,
   to `engine/src/cards/review/` (check it, then move it into `pool/`), the rest
@@ -68,9 +73,11 @@ card is a draft like any other — its templates match sentences, not meaning
 - `engine/src/cards/AUTHORING.md` §0-1 and §15 if not already in context
   this session.
 - **The snapshot has the set?** `cards:sets -- --set <code>` flags every card
-  the Oracle snapshot lacks ("not in the snapshot"). A set released since the
-  snapshot was taken needs `npm run gen:oracle -w engine` before its cards can
-  be briefed or scaffolded. That rewrites `data/oracle/cards.jsonl` (new cards,
+  the Oracle snapshot lacks ("not in the snapshot"). A set released or
+  previewed since the snapshot was taken needs `npm run gen:oracle -w engine`
+  before its cards can be briefed or scaffolded (it keeps an upcoming set's
+  previews as legal, each with a `preview` date; the first refresh after
+  release drops those and brings the rulings). That rewrites `data/oracle/cards.jsonl` (new cards,
   and EDHREC ranks moved for the rest): commit it on its own (`Tooling:
   refresh the Oracle snapshot`), after `npm run card:verify -w engine --
   --offline` and the engine suite pass on it.
