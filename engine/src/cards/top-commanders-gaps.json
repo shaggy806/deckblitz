@@ -747,6 +747,7 @@
   "bug:as-enters-choices-any-entry",
   "effect:aura-enters-choice",
   "mechanic:station",
+  "mechanic:assimilate",
   "mechanic:goad-extensions",
   "mechanic:suspect",
   "condition:filter-card-property-clauses",

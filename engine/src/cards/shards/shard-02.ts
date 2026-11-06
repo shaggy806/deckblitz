@@ -38,6 +38,7 @@ import _poolAshadTheLoneCyberman from "../pool/ashad-the-lone-cyberman.js";
 import _poolAshePrincessOfDalmasca from "../pool/ashe-princess-of-dalmasca.js";
 import _poolAshnodsAltar from "../pool/ashnods-altar.js";
 import _poolAssemblySpecialist from "../pool/assembly-specialist.js";
+import _poolAssimilateTheWounded from "../pool/assimilate-the-wounded.js";
 import _poolAstonishingSpiderMan from "../pool/astonishing-spider-man.js";
 import _poolAttemptedMurder from "../pool/attempted-murder.js";
 import _poolAttumaAtlanteanWarlord from "../pool/attuma-atlantean-warlord.js";
@@ -826,6 +827,7 @@ import _poolTemptingLicid from "../pool/tempting-licid.js";
 import _poolTenaciousHunter from "../pool/tenacious-hunter.js";
 import _poolTezzeretsBetrayal from "../pool/tezzerets-betrayal.js";
 import _poolThalakosLowlands from "../pool/thalakos-lowlands.js";
+import _poolTheBorgQueen from "../pool/the-borg-queen.js";
 import _poolTheDurasSisters from "../pool/the-duras-sisters.js";
 import _poolTheFantasticar from "../pool/the-fantasticar.js";
 import _poolTheFireNationDrill from "../pool/the-fire-nation-drill.js";
@@ -1011,6 +1013,7 @@ const shard: CardShard = {
     _poolAshePrincessOfDalmasca,
     _poolAshnodsAltar,
     _poolAssemblySpecialist,
+    _poolAssimilateTheWounded,
     _poolAstonishingSpiderMan,
     _poolAttemptedMurder,
     _poolAttumaAtlanteanWarlord,
@@ -1799,6 +1802,7 @@ const shard: CardShard = {
     _poolTenaciousHunter,
     _poolTezzeretsBetrayal,
     _poolThalakosLowlands,
+    _poolTheBorgQueen,
     _poolTheDurasSisters,
     _poolTheFantasticar,
     _poolTheFireNationDrill,

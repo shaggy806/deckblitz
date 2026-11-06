@@ -97,6 +97,13 @@ const numberOf = (word) => {
 
 export const stripReminder = (line) => line.replace(/\s*\([^)]*\)/g, "").trim();
 
+/** What assimilating a card adds to the effect that puts it onto the
+ * battlefield — `ASSIMILATE` in `src/cards/helpers.ts`. */
+const ASSIMILATE_ENTRY = {
+  withCounters: { kind: "+1/+1", amount: 1 },
+  enterAs: { addTypes: ["artifact", "creature"], setSubtypes: ["Borg"] },
+};
+
 /** The line as the templates read it: reminder text gone, the card's own name
  * (and its short name, "Kibo" for "Kibo, Uktabi Prince" and "Medomai" for
  * "Medomai the Ageless") and "this creature" / "this artifact" / … all written
@@ -5387,6 +5394,29 @@ export function parseSentence(sentence, ctx) {
     if (/\bAura\b/.test(m[1])) return null;
     const i = slot(m[1]);
     return i === undefined ? null : { kind: "put-onto-battlefield", target: i, underYourControl: true };
+  }
+  // Assimilate (Star Trek), a card — its reminder, gone from the line: "put it
+  // onto the battlefield under your control with a +1/+1 counter. It's a Borg
+  // artifact creature and loses all other creature types" (rule 205.1b; the
+  // cards' `ASSIMILATE`). "Assimilate target creature card from a graveyard"
+  // (Death Is Irrelevant), "… from an opponent's graveyard" (Borg Queen,
+  // Perfection Manifest); "assimilate a creature card exiled with it" — one
+  // linked to the source, chosen (Assimilation Assessor).
+  if ((m = /^assimilate (target .+? card from (?:a|an opponent's) graveyard)\.$/i.exec(s))) {
+    const i = slot(m[1]);
+    return i === undefined ? null : { kind: "put-onto-battlefield", target: i, underYourControl: true, ...ASSIMILATE_ENTRY };
+  }
+  if (/^assimilate a creature card exiled with (?:~|it)\.$/i.test(s)) {
+    return {
+      kind: "look-and-choose",
+      zone: "exiled-with-source",
+      min: 1,
+      max: 1,
+      filter: { type: "creature" },
+      destination: "battlefield",
+      ...ASSIMILATE_ENTRY,
+      leftover: "stay",
+    };
   }
   // "… from an opponent's graveyard onto the battlefield tapped under your
   // control" (Geth), "…, then exile that player's graveyard" (Nurgle's

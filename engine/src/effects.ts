@@ -10744,6 +10744,14 @@ export interface EnterTypes {
    * (`addTypes: ["creature"]` with `basePt` and `addSubtypes`). */
   readonly addTypes?: readonly CardType[];
   readonly addSubtypes?: readonly string[];
+  /** Subtypes **instead of** its own of the same kind (rule 205.1a: a
+   * creature type replaces its creature types, its artifact and other
+   * subtypes kept) — assimilate's "It's a Borg artifact creature and loses
+   * all other creature types" (`addTypes: ["artifact", "creature"]`,
+   * `setSubtypes: ["Borg"]`: 205.1b's "[creature type] artifact creature"
+   * keeps every prior type and subtype but its creature types). Applied
+   * before `addSubtypes`. */
+  readonly setSubtypes?: readonly string[];
   /** Its colours instead of its own (layer 5) — Chainer, Dementia Master's
    * "That creature is black and is a Nightmare in addition to its other
    * creature types": "is black", with no "in addition", sets them. */

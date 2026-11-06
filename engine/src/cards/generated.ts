@@ -1436,7 +1436,9 @@ import _poolAssemblyWorker from "./pool/assembly-worker.js";
 import _poolAssertAuthority from "./pool/assert-authority.js";
 import _poolAssertPerfection from "./pool/assert-perfection.js";
 import _poolAssimilateEssence from "./pool/assimilate-essence.js";
+import _poolAssimilateTheWounded from "./pool/assimilate-the-wounded.js";
 import _poolAssimilationAegis from "./pool/assimilation-aegis.js";
+import _poolAssimilationAssessor from "./pool/assimilation-assessor.js";
 import _poolAssureAssemble from "./pool/assure-assemble.js";
 import _poolAssure from "./pool/assure.js";
 import _poolAstarionTheDecadent from "./pool/astarion-the-decadent.js";
@@ -3014,6 +3016,7 @@ import _poolBorealElemental from "./pool/boreal-elemental.js";
 import _poolBorealGriffin from "./pool/boreal-griffin.js";
 import _poolBorealShelf from "./pool/boreal-shelf.js";
 import _poolBoreasCharger from "./pool/boreas-charger.js";
+import _poolBorgQueenPerfectionManifest from "./pool/borg-queen-perfection-manifest.js";
 import _poolBorisDevilboon from "./pool/boris-devilboon.js";
 import _poolBornToDrive from "./pool/born-to-drive.js";
 import _poolBorneUponAWind from "./pool/borne-upon-a-wind.js";
@@ -6014,6 +6017,7 @@ import _poolDeathGreetersChampion from "./pool/death-greeters-champion.js";
 import _poolDeathHoodCobra from "./pool/death-hood-cobra.js";
 import _poolDeathInHeaven from "./pool/death-in-heaven.js";
 import _poolDeathInTheFamily from "./pool/death-in-the-family.js";
+import _poolDeathIsIrrelevant from "./pool/death-is-irrelevant.js";
 import _poolDeathKiss from "./pool/death-kiss.js";
 import _poolDeathMatch from "./pool/death-match.js";
 import _poolDeathMutation from "./pool/death-mutation.js";
@@ -26414,6 +26418,7 @@ import _poolTheBlackstaffOfWaterdeep from "./pool/the-blackstaff-of-waterdeep.js
 import _poolTheBloodskyMassacre from "./pool/the-bloodsky-massacre.js";
 import _poolTheBlueSpirit from "./pool/the-blue-spirit.js";
 import _poolTheBookOfExaltedDeeds from "./pool/the-book-of-exalted-deeds.js";
+import _poolTheBorgQueen from "./pool/the-borg-queen.js";
 import _poolTheBoulderReadyToRumble from "./pool/the-boulder-ready-to-rumble.js";
 import _poolTheBrokenSky from "./pool/the-broken-sky.js";
 import _poolTheBrute from "./pool/the-brute.js";
@@ -32689,7 +32694,9 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAssertAuthority,
   _poolAssertPerfection,
   _poolAssimilateEssence,
+  _poolAssimilateTheWounded,
   _poolAssimilationAegis,
+  _poolAssimilationAssessor,
   _poolAssureAssemble,
   _poolAssure,
   _poolAstarionTheDecadent,
@@ -34267,6 +34274,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBorealGriffin,
   _poolBorealShelf,
   _poolBoreasCharger,
+  _poolBorgQueenPerfectionManifest,
   _poolBorisDevilboon,
   _poolBornToDrive,
   _poolBorneUponAWind,
@@ -37267,6 +37275,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDeathHoodCobra,
   _poolDeathInHeaven,
   _poolDeathInTheFamily,
+  _poolDeathIsIrrelevant,
   _poolDeathKiss,
   _poolDeathMatch,
   _poolDeathMutation,
@@ -57667,6 +57676,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheBloodskyMassacre,
   _poolTheBlueSpirit,
   _poolTheBookOfExaltedDeeds,
+  _poolTheBorgQueen,
   _poolTheBoulderReadyToRumble,
   _poolTheBrokenSky,
   _poolTheBrute,
@@ -63955,7 +63965,9 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/assert-authority": _poolAssertAuthority,
   "pool/assert-perfection": _poolAssertPerfection,
   "pool/assimilate-essence": _poolAssimilateEssence,
+  "pool/assimilate-the-wounded": _poolAssimilateTheWounded,
   "pool/assimilation-aegis": _poolAssimilationAegis,
+  "pool/assimilation-assessor": _poolAssimilationAssessor,
   "pool/assure-assemble": _poolAssureAssemble,
   "pool/assure": _poolAssure,
   "pool/astarion-the-decadent": _poolAstarionTheDecadent,
@@ -65533,6 +65545,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/boreal-griffin": _poolBorealGriffin,
   "pool/boreal-shelf": _poolBorealShelf,
   "pool/boreas-charger": _poolBoreasCharger,
+  "pool/borg-queen-perfection-manifest": _poolBorgQueenPerfectionManifest,
   "pool/boris-devilboon": _poolBorisDevilboon,
   "pool/born-to-drive": _poolBornToDrive,
   "pool/borne-upon-a-wind": _poolBorneUponAWind,
@@ -68533,6 +68546,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/death-hood-cobra": _poolDeathHoodCobra,
   "pool/death-in-heaven": _poolDeathInHeaven,
   "pool/death-in-the-family": _poolDeathInTheFamily,
+  "pool/death-is-irrelevant": _poolDeathIsIrrelevant,
   "pool/death-kiss": _poolDeathKiss,
   "pool/death-match": _poolDeathMatch,
   "pool/death-mutation": _poolDeathMutation,
@@ -88933,6 +88947,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-bloodsky-massacre": _poolTheBloodskyMassacre,
   "pool/the-blue-spirit": _poolTheBlueSpirit,
   "pool/the-book-of-exalted-deeds": _poolTheBookOfExaltedDeeds,
+  "pool/the-borg-queen": _poolTheBorgQueen,
   "pool/the-boulder-ready-to-rumble": _poolTheBoulderReadyToRumble,
   "pool/the-broken-sky": _poolTheBrokenSky,
   "pool/the-brute": _poolTheBrute,

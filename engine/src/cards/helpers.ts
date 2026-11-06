@@ -5,7 +5,7 @@
  */
 
 import type { ActivatedAbility, CraftMaterials, TriggeredAbility, TriggerSpec } from "../abilities.js";
-import { SEARCHED_ZONES, wardCostText, type BoundUnlessOption, type EffectAmount, type EffectSpec, type GiftKind, type SearchZones, type UnlessOption, type WardCost } from "../effects.js";
+import { SEARCHED_ZONES, wardCostText, type BoundUnlessOption, type EffectAmount, type EffectSpec, type EnterTypes, type GiftKind, type SearchZones, type UnlessOption, type WardCost } from "../effects.js";
 import type { CardFilter } from "../filter.js";
 import type { Color, ManaType } from "../mana.js";
 import type { TargetSpec } from "../target.js";
@@ -1933,6 +1933,21 @@ const GIFT_TEXT: Record<GiftKind, string> = {
  * An instant or sorcery spreads `targets` / `effect` for "if the gift was
  * promised" into it; a permanent uses it as is, with `giftTrigger`. */
 export const GIFT_KICKER = { cost: "", keyword: "gift" } as const;
+
+/** Assimilate (Star Trek), a card: "put it onto the battlefield under your
+ * control with a +1/+1 counter. It's a Borg artifact creature and loses all
+ * other creature types." Spread into the effect that puts it there — a
+ * `put-onto-battlefield` (with `underYourControl: true`), or a
+ * `look-and-choose` to the battlefield, which puts another player's card
+ * under the chooser's control already. A "[creature type] artifact
+ * creature" keeps every other type and subtype it had and replaces its
+ * creature types (rule 205.1b), for good, from the moment it enters (rule
+ * 614.12): `addTypes`, `setSubtypes`. Assimilating a permanent is
+ * `gain-control`, `add-counter` and `add-types` with the same parts. */
+export const ASSIMILATE = {
+  withCounters: { kind: "+1/+1", amount: 1 },
+  enterAs: { addTypes: ["artifact", "creature"], setSubtypes: ["Borg"] },
+} as const satisfies { withCounters: { kind: string; amount: number }; enterAs: EnterTypes };
 
 /**
  * Ravenous (rule 702.156a — Jacked Rabbit): "This permanent enters with X

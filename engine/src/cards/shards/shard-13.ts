@@ -54,6 +54,7 @@ import _poolArrowsOfJustice from "../pool/arrows-of-justice.js";
 import _poolAsariCaptain from "../pool/asari-captain.js";
 import _poolAsphyxiate from "../pool/asphyxiate.js";
 import _poolAssaultSuit from "../pool/assault-suit.js";
+import _poolAssimilationAssessor from "../pool/assimilation-assessor.js";
 import _poolAstridPeth from "../pool/astrid-peth.js";
 import _poolAttendedHealer from "../pool/attended-healer.js";
 import _poolAudaciousInfiltrator from "../pool/audacious-infiltrator.js";
@@ -1002,6 +1003,7 @@ const shard: CardShard = {
     _poolAsariCaptain,
     _poolAsphyxiate,
     _poolAssaultSuit,
+    _poolAssimilationAssessor,
     _poolAstridPeth,
     _poolAttendedHealer,
     _poolAudaciousInfiltrator,

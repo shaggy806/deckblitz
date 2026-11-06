@@ -91,6 +91,7 @@ import _poolBoldBiochemist from "../pool/bold-biochemist.js";
 import _poolBondsOfMortality from "../pool/bonds-of-mortality.js";
 import _poolBonePicker from "../pool/bone-picker.js";
 import _poolBoonOfBoseiju from "../pool/boon-of-boseiju.js";
+import _poolBorgQueenPerfectionManifest from "../pool/borg-queen-perfection-manifest.js";
 import _poolBoulderfall from "../pool/boulderfall.js";
 import _poolBountyAgent from "../pool/bounty-agent.js";
 import _poolBraceForImpact from "../pool/brace-for-impact.js";
@@ -1087,6 +1088,7 @@ const shard: CardShard = {
     _poolBondsOfMortality,
     _poolBonePicker,
     _poolBoonOfBoseiju,
+    _poolBorgQueenPerfectionManifest,
     _poolBoulderfall,
     _poolBountyAgent,
     _poolBraceForImpact,

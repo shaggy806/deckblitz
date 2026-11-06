@@ -206,6 +206,7 @@ import _poolDawnsireSunstarDreadnought from "../pool/dawnsire-sunstar-dreadnough
 import _poolDazzlingReflection from "../pool/dazzling-reflection.js";
 import _poolDazzlingTheaterPropRoom from "../pool/dazzling-theater-prop-room.js";
 import _poolDeadeyeBrawler from "../pool/deadeye-brawler.js";
+import _poolDeathIsIrrelevant from "../pool/death-is-irrelevant.js";
 import _poolDebtorsPulpit from "../pool/debtors-pulpit.js";
 import _poolDecommission from "../pool/decommission.js";
 import _poolDeemWorthy from "../pool/deem-worthy.js";
@@ -1198,6 +1199,7 @@ const shard: CardShard = {
     _poolDazzlingReflection,
     _poolDazzlingTheaterPropRoom,
     _poolDeadeyeBrawler,
+    _poolDeathIsIrrelevant,
     _poolDebtorsPulpit,
     _poolDecommission,
     _poolDeemWorthy,

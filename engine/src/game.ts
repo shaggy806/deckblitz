@@ -1181,6 +1181,10 @@ interface EnterOptions {
   /** Subtypes it has in addition to its own, the same way — Portal to
    * Phyrexia's "It's a Phyrexian in addition to its other types." */
   readonly addSubtypes?: readonly string[];
+  /** Subtypes instead of its own of the same kind, the same way (rule
+   * 205.1a) — assimilate's "It's a Borg artifact creature and loses all
+   * other creature types". */
+  readonly setSubtypes?: readonly string[];
   /** Colours it has in addition to its own, the same way (layer 5) —
    * Necromantic Selection's "It's a black Zombie in addition to its other
    * colors and types." */
@@ -1234,13 +1238,14 @@ function enterTypesEntry(
   types: EnterTypes | undefined,
 ): Pick<
   EnterOptions,
-  "setTypes" | "addTypes" | "addSubtypes" | "addColors" | "setColors" | "basePt" | "keywords" | "ifCreature"
+  "setTypes" | "addTypes" | "addSubtypes" | "setSubtypes" | "addColors" | "setColors" | "basePt" | "keywords" | "ifCreature"
 > {
   if (types === undefined) return {};
   return {
     ...(types.setTypes !== undefined ? { setTypes: types.setTypes } : {}),
     ...(types.addTypes !== undefined ? { addTypes: types.addTypes } : {}),
     ...(types.addSubtypes !== undefined ? { addSubtypes: types.addSubtypes } : {}),
+    ...(types.setSubtypes !== undefined ? { setSubtypes: types.setSubtypes } : {}),
     ...(types.addColors !== undefined ? { addColors: types.addColors } : {}),
     ...(types.setColors !== undefined ? { setColors: types.setColors } : {}),
     ...(types.basePt !== undefined ? { basePt: types.basePt } : {}),
@@ -56789,6 +56794,7 @@ export class Game {
         (enter.setTypes !== undefined ||
           enter.addTypes !== undefined ||
           enter.addSubtypes !== undefined ||
+          enter.setSubtypes !== undefined ||
           enter.addColors !== undefined ||
           enter.setColors !== undefined ||
           enter.basePt !== undefined ||
@@ -56803,6 +56809,7 @@ export class Game {
           ...(enter.setTypes !== undefined ? { setTypes: [...enter.setTypes] } : {}),
           ...(enter.addTypes !== undefined ? { addTypes: [...enter.addTypes] } : {}),
           ...(enter.addSubtypes !== undefined ? { addSubtypes: [...enter.addSubtypes] } : {}),
+          ...(enter.setSubtypes !== undefined ? { setSubtypes: [...enter.setSubtypes] } : {}),
           ...(enter.addColors !== undefined ? { addColors: [...enter.addColors] } : {}),
           ...(enter.setColors !== undefined ? { setColors: [...enter.setColors] } : {}),
           ...(enter.basePt !== undefined ? { setPt: [enter.basePt[0], enter.basePt[1]] as [number, number] } : {}),

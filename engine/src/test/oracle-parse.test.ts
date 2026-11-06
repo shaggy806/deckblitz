@@ -9050,6 +9050,25 @@ describe("a player named as the owner of a target or trigger object", () => {
     expect(nurgle.effect.effects[1]).toEqual({ kind: "exile-graveyard", target: { ownerOfTarget: 0 } });
   });
 
+  it("reads assimilate's keyword action, its reminder text gone (Star Trek)", () => {
+    const entry = { withCounters: { kind: "+1/+1", amount: 1 }, enterAs: { addTypes: ["artifact", "creature"], setSubtypes: ["Borg"] } };
+    const queen = face(
+      "Borg Queen, Perfection Manifest",
+      "Legendary Artifact Creature — Borg Noble",
+      "When Borg Queen enters, assimilate target creature card from an opponent's graveyard. (Put it onto the battlefield under your control with a +1/+1 counter. It's a Borg artifact creature and loses all other creature types.)",
+    );
+    expect(queen.complete).toBe(true);
+    expect(queen.triggered[0].effect).toEqual({ kind: "put-onto-battlefield", target: 0, underYourControl: true, ...entry });
+    expect(queen.triggered[0].targets[0]).toMatchObject({ kind: "card-in-graveyard", whose: "opponent" });
+    const assessor = face(
+      "Assimilation Assessor",
+      "Artifact Creature — Borg",
+      "When this creature enters, exile target opponent's graveyard.\nWhenever this creature attacks, assimilate a creature card exiled with it. (Put it onto the battlefield under your control with a +1/+1 counter. It's a Borg artifact creature and loses all other creature types.)",
+    );
+    expect(assessor.complete).toBe(true);
+    expect(assessor.triggered[1].effect).toMatchObject({ kind: "look-and-choose", zone: "exiled-with-source", min: 1, ...entry });
+  });
+
   it("reads 'enchanted creature deals N damage to its owner' and Oblation's shuffle", () => {
     const enslave = face(
       "Test Aura",
