@@ -9175,6 +9175,34 @@ export function parseEffect(text, outer) {
         continue;
       }
     }
+    // "You may return another creature you control to its owner's hand. If
+    // you do, this creature gains indestructible until end of turn." (Temur
+    // Sabertooth, Biblioplex Kraken, Geothermal Kami): the permanent is
+    // chosen as it resolves, not targeted — none declines — and the tail
+    // happens only once one was returned (`returned-to-hand` this way).
+    const mayReturnM = /^you may return (a|an|another) (.+?) you control to its owner's hand\.$/i.exec(sentence);
+    const ifReturnedM = mayReturnM === null ? null : /^if you do, (.+)$/i.exec(sentences[i + 1] ?? "");
+    if (mayReturnM !== null && ifReturnedM !== null) {
+      const filter = parseTypePhrase(mayReturnM[2]);
+      const then = filter === null ? null : parseSentence(`${ifReturnedM[1][0].toUpperCase()}${ifReturnedM[1].slice(1)}`, ctx);
+      if (then !== null && !containsUndefined(then)) {
+        const another = mayReturnM[1].toLowerCase() === "another";
+        const choose = {
+          kind: "choose-permanents",
+          filter: { ...filter, controlledBy: "you" },
+          min: 0,
+          upTo: 1,
+          ...(another ? { exceptSource: true } : {}),
+          then: { kind: "return-to-hand", target: 0 },
+          prompt: `You may return ${mayReturnM[1].toLowerCase()} ${mayReturnM[2]} you control to its owner's hand`,
+        };
+        const conditional = { kind: "conditional", condition: { kind: "this-way", what: "returned-to-hand" }, then };
+        parsed.push(choose, conditional);
+        hints.push({ sentence, effect: choose }, { sentence: sentences[i + 1], effect: conditional });
+        skip = 1;
+        continue;
+      }
+    }
     // "Choose target creature you don't control. Each creature you control
     // that's a Wolf or a Werewolf deals damage equal to its power to that
     // creature." (Moonlight Hunt): the second sentence, read with the target

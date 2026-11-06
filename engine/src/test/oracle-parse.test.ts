@@ -16284,3 +16284,38 @@ describe("discard N unless you discard one card of a kind", () => {
     });
   });
 });
+
+describe("you may return a permanent you control; if you do", () => {
+  it("reads Temur Sabertooth whole", () => {
+    const cat = parseFace({
+      name: "Temur Sabertooth",
+      type_line: "Creature — Cat",
+      mana_cost: "{2}{G}{G}",
+      colors: ["G"],
+      power: "4",
+      toughness: "3",
+      oracle_text:
+        "{1}{G}: You may return another creature you control to its owner's hand. If you do, this creature gains indestructible until end of turn.",
+    });
+    expect(cat.complete).toBe(true);
+    expect(cat.activated[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        {
+          kind: "choose-permanents",
+          filter: { type: "creature", controlledBy: "you" },
+          min: 0,
+          upTo: 1,
+          exceptSource: true,
+          then: { kind: "return-to-hand", target: 0 },
+          prompt: "You may return another creature you control to its owner's hand",
+        },
+        {
+          kind: "conditional",
+          condition: { kind: "this-way", what: "returned-to-hand" },
+          then: { kind: "grant-keyword", target: "source", keyword: "indestructible", duration: "end-of-turn" },
+        },
+      ],
+    });
+  });
+});

@@ -30,7 +30,7 @@ export default defineCard({
             min: 0,
             upTo: 1,
             then: { kind: "return-to-hand", target: 0 },
-            prompt: "Return an enchantment you control to its owner's hand?",
+            prompt: "You may return an enchantment you control to its owner's hand",
           },
           {
             kind: "conditional",

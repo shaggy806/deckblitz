@@ -370,6 +370,13 @@ void counter are, when the moving object's controller picks another exile that
 could apply (616.1 — Rest in Peace). The scaffolder sets it on a card that says
 "exiled with" anywhere. Proving cards: The Darkness Crystal, Gisa, Glorious
 Resurrector (`exile-instead-linked.test.ts`). Key: replacement:exile-instead-linked.
+### "You may return another creature you control … If you do" — built 2026-11-06
+
+By EDHREC rank: Temur Sabertooth (1962). No engine code: a `choose-permanents`
+(min 0) returning to hand, then a `returned-to-hand` this-way conditional
+(Biblioplex Kraken's shape). The scaffolder now reads the pair whole, for any
+permanent kind ("a land", "another permanent"). Key: effect:may-return-if-you-do.
+
 ### "Discard two cards unless you discard an artifact card" — built 2026-11-06
 
 By EDHREC rank: Thirst for Knowledge (1953). No engine code: `discard`'s

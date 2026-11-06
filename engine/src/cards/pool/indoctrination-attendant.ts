@@ -34,7 +34,7 @@ export default defineCard({
             upTo: 1,
             exceptSource: true,
             then: { kind: "return-to-hand", target: 0 },
-            prompt: "Return another permanent you control to its owner's hand?",
+            prompt: "You may return another permanent you control to its owner's hand",
           },
           {
             kind: "conditional",

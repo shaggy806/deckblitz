@@ -1161,7 +1161,10 @@ effect — never a creature dying of damage or to the legend rule), `"died"`
 (destroyed *and* put into a graveyard — Saw in Half's "if that creature dies
 this way", which indestructible, a regeneration shield or a Rest in Peace
 all say no to),
-`"exiled"` (permanents and cards from any zone), `"returned-to-hand"`,
+`"exiled"` (permanents and cards from any zone), `"returned-to-hand"`
+(Temur Sabertooth's "you may return another creature you control to its
+owner's hand. If you do, …": a `choose-permanents` with `min: 0` whose `then`
+is `return-to-hand`, then a `conditional` on it — `may-return-if-you-do.test.ts`),
 `"put-into-hand"` (cards put into a hand from any other zone, never by a
 draw, and still there — a search's find, a look's pick, a milled card taken
 back, a return: Adventure Awaits' "if you didn't put a card into your hand
