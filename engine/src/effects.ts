@@ -6552,6 +6552,11 @@ export type EffectSpec =
        * beside `castFromGraveyard`'s spells; rule 305.9): the land drop is the
        * ordinary one. */
       readonly playLandsFromGraveyard?: true;
+      /** "Until end of turn, you don't lose unspent red mana as steps and
+       * phases end" (The Last Agni Kai — `["R"]`, rule 500.5): the
+       * controller's mana of these types, whenever it was made, stays in
+       * their pool while this lasts, as a `keepsUnspentMana` static's does. */
+      readonly keepsUnspentMana?: readonly ManaType[];
       /** "The next time you would draw a card this turn, [effect] instead"
        * (the Words cycle — rule 614.1a), with `duration: "end-of-turn"`: each
        * resolution sets up one replacement of one of the controller's draws,
@@ -18523,6 +18528,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ...(spec.cantSearchLibraries !== undefined
           ? { cantSearchLibraries: ctx.playersInScope(spec.cantSearchLibraries) }
           : {}),
+        ...(spec.keepsUnspentMana !== undefined ? { keepsUnspentMana: spec.keepsUnspentMana } : {}),
         ...(spec.castOnlyFromHand !== undefined
           ? { castOnlyFromHand: ctx.playersInScope(spec.castOnlyFromHand) }
           : {}),

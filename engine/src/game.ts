@@ -10020,6 +10020,10 @@ export class Game {
         for (const type of ability.keepsUnspentMana) out.add(type);
       }
     }
+    // A resolved one's, for a while (The Last Agni Kai).
+    for (const effect of this.state.playerEffects ?? []) {
+      if (effect.owner === player) for (const type of effect.keepsUnspentMana ?? []) out.add(type);
+    }
     return out;
   }
 

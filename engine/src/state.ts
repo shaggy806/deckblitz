@@ -5815,6 +5815,10 @@ export interface PlayerEffect {
   /** These players can't search libraries ("Players can't search libraries
    * this turn" — Shadow of Doubt). See `playerCantSearchLibrary`. */
   readonly cantSearchLibraries?: readonly PlayerId[];
+  /** `owner` doesn't lose unspent mana of these types as steps and phases
+   * end (rule 500.5 — The Last Agni Kai's "until end of turn, you don't lose
+   * unspent red mana"). See `Game.keptManaTypes`. */
+  readonly keepsUnspentMana?: readonly ManaType[];
   /** `owner` paid to ignore this permanent's static effect until end of turn
    * (rule 116.2d — Leonin Arbiter's "any player may pay {2} for that player to
    * ignore this effect"): the permanent, in the stint it was paid for. */

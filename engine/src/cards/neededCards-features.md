@@ -462,6 +462,17 @@ searches nor shuffles. Overload's "each" half is `exile-all` before the same
 step. Proving card: Winds of Abandon (`per-controller-search.test.ts`). Key:
 keyword:overload-per-controller-search.
 
+### "Until end of turn, you don't lose unspent red mana" — built 2026-11-06
+
+By EDHREC rank: The Last Agni Kai (1942). `player-effect`'s `keepsUnspentMana`
+is the static's keep for a while: `Game.keptManaTypes` reads its owner's
+player effects beside the statics, so every {R} in that pool stays through the
+turn's steps, whenever it was made, until the effect ends at cleanup and the
+pool empties as that step ends (rule 500.5). The fight's "add that much {R}" is
+`add-mana` of Rhino's Rampage's `excessDamageThisWay` with `to: 1`. Proving
+card: The Last Agni Kai (`keep-unspent-mana-this-turn.test.ts`). Key:
+replacement:keep-unspent-mana-until-end-of-turn.
+
 ### An Aura on a graveyard card, and an enchant ability an effect gives — built 2026-11-05
 
 By EDHREC rank: Animate Dead (223) and Necromancy (1030). An Aura whose target

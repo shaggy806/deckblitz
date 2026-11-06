@@ -4815,7 +4815,11 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   controller's pool through every step, cleanup included, so into later turns
   while it's on the battlefield; gone, the mana goes as the current step ends
   (the rulings). Savage Ventmaw's mana for the turn is `add-mana`'s
-  `persists` instead.
+  `persists` instead. A resolving spell's "**until end of turn**, you don't
+  lose unspent red mana" — all of it, whenever made — is a `player-effect`
+  with `duration: "end-of-turn"` and the same `keepsUnspentMana: ["R"]` (The
+  Last Agni Kai); it ends with cleanup, and the mana empties as that step
+  ends.
 - `unspentManaBecomesColorless: true` — Kruphix, God of Horizons' "If you
   would lose unspent mana, that mana becomes colorless instead": every unit
   that would empty stays as `{C}`, its restrictions and riders kept (the
