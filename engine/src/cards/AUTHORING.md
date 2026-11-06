@@ -6191,7 +6191,14 @@ clause (section 9):
   "player-compare", stat: { controls: { type: "land" } }, compare: "at-least",
   than: "each-opponent" }`. **`except`** (a `ChosenPlayerRef`) is "each player
   **other than** …": Fractured Identity's `except: { controllerOfTarget: 0 }`,
-  the controller it had as it was exiled.
+  the controller it had as it was exiled. **`whoseAmount`** keeps only the
+  players for whom an amount read for them is 1 or more: Winds of Abandon's
+  "for each creature exiled this way, its controller searches their library
+  for a basic land card" is `whoseAmount: { thisWay: "exiled", who: "each" }`
+  around a `search-library` of `who: "that-player"` whose `max` is that same
+  amount (a search's `min`/`max` are read for its searcher), with
+  `choicesHeld` — a player none of whose creatures went neither searches nor
+  shuffles.
 - A trigger's **`whileCondition`** reads the player its event named as
   `"that-player"`: Wedding Ring's "an opponent **who controls an artifact named
   Wedding Ring** draws a card **during their turn**" is an `of-player` over

@@ -8244,6 +8244,12 @@ export type EffectSpec =
        * sacrifices two lands": a tied player still sacrifices after the first
        * has). */
       readonly whoIf?: StaticCondition;
+      /** "**For each creature exiled this way, its controller** searches …"
+       * (Winds of Abandon): only the players in `who` for whom this amount,
+       * read for them (a `thisWay` of `who: "each"`), is 1 or more — a player
+       * none of whose creatures went doesn't search, so doesn't shuffle
+       * either. Found as it begins, as `whoIf`'s are. */
+      readonly whoseAmount?: EffectAmount;
       /** "Each player **other than** …": everyone in `who` but this player,
        * found as it begins — Fractured Identity's "each player other than its
        * controller", the controller it had as it was exiled. */
@@ -19317,7 +19323,14 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.remaining !== undefined || spec.found !== undefined || whoIf === undefined
           ? scope
           : scope.filter((p) => ctx.aboutPlayer(p).conditionMet(whoIf))
-      ).filter((p) => p !== excepted);
+      ).filter(
+        (p) =>
+          p !== excepted &&
+          (spec.whoseAmount === undefined ||
+            spec.remaining !== undefined ||
+            spec.found !== undefined ||
+            amountValue(spec.whoseAmount, ctx, p) >= 1),
+      );
       // "Each player who can't": found already, and the instruction done first.
       if (spec.before !== undefined) {
         const { before, ...rest } = spec;
@@ -20426,8 +20439,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         searcher,
         spec.filter,
         spec.destination,
-        amountValue(spec.min, ctx),
-        amountValue(spec.max, ctx),
+        // A per-player amount ("for each creature exiled this way, its
+        // controller searches for a basic land card") is the searcher's own.
+        amountValue(spec.min, ctx, searcher ?? undefined),
+        amountValue(spec.max, ctx, searcher ?? undefined),
         spec.enterTapped === true,
         spec.restDestination,
         spec.reveal === true,

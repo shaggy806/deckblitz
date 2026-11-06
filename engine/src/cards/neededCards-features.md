@@ -450,6 +450,18 @@ targets — replicate's record (`queuePaidCostCopy`, now with `newTargets`
 off). The scaffolder reads the line, and "you draw a card and lose N life".
 Proving card: Plumb the Forbidden. Key: cost:sacrifice-any-number-copy-for-each.
 
+### "For each creature exiled this way, its controller searches" — built 2026-11-06
+
+By EDHREC rank: Winds of Abandon (1940). `for-each-player`'s `whoseAmount`
+keeps only the players for whom an amount read for them is 1 or more (a
+`thisWay` of `who: "each"`: the exiled creatures' controllers as they left),
+and a `search-library`'s `min`/`max` are read for its searcher, so each such
+player searches once for that many basic lands, the finds held and entering
+together (`choicesHeld`), then shuffles; a player who lost nothing neither
+searches nor shuffles. Overload's "each" half is `exile-all` before the same
+step. Proving card: Winds of Abandon (`per-controller-search.test.ts`). Key:
+keyword:overload-per-controller-search.
+
 ### An Aura on a graveyard card, and an enchant ability an effect gives — built 2026-11-05
 
 By EDHREC rank: Animate Dead (223) and Necromancy (1030). An Aura whose target
