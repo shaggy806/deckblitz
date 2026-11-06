@@ -81,11 +81,28 @@ for await (const r of jsonLines(rulingsFile.file)) {
   rulings.get(r.oracle_id).push({ date: r.published_at, source: r.source, text: r.comment });
 }
 
+// A previewed card of a paper set not out yet: Scryfall marks it "not_legal"
+// in every format until its release date, though a paper expansion's or
+// Commander product's cards are Commander-legal from that day (Universes
+// Beyond too, since 2025). It's kept as legal, with a `preview` line naming
+// the release date, so a set can be authored the week before it's out; the
+// first refresh after release drops the line (Scryfall then says "legal"),
+// and a card whose text changed by then shows up in `card:verify`.
+const today = new Date().toISOString().slice(0, 10);
+const PREVIEW_SET_TYPES = new Set(["expansion", "core", "commander", "draft_innovation", "masters", "starter"]);
+const isPreview = (c) =>
+  c.legalities?.commander === "not_legal" &&
+  c.released_at > today &&
+  !c.digital &&
+  (c.games ?? []).includes("paper") &&
+  PREVIEW_SET_TYPES.has(c.set_type);
+
 const cards = [];
 const tokenIds = new Set();
 for await (const c of jsonLines(oracle.file)) {
   const isToken = c.layout === "token" || c.layout === "double_faced_token";
-  const legality = c.legalities?.commander;
+  const preview = !isToken && isPreview(c);
+  const legality = preview ? "legal" : c.legalities?.commander;
   if (!isToken && legality !== "legal" && legality !== "banned") continue;
   const parts = (c.all_parts ?? []).filter((p) => p.component === "token" && p.id !== c.id);
   for (const p of parts) tokenIds.add(p.id);
@@ -98,6 +115,7 @@ for await (const c of jsonLines(oracle.file)) {
     collector_number: c.collector_number,
     layout: c.layout,
     commander: isToken ? "token" : legality,
+    preview: preview ? c.released_at : undefined,
     cmc: c.cmc,
     color_identity: c.color_identity,
     colors: c.colors,

@@ -14,6 +14,9 @@
 //   … --refresh       fetch Scryfall's set list and first printings again (cached 3 days)
 //   … --oldest        walk the other way: oldest set first (`--sets N` the oldest N; the
 //                     `author-by-set-oldest` skill's order)
+//   … --upcoming      take in the sets not out yet too (their previewed cards, which
+//                     Scryfall calls not Commander-legal until release: `gen:oracle`
+//                     keeps them as previews). Always on for `--set` of such a set.
 //
 // Which sets: Scryfall's paper expansions, core sets, Commander products,
 // draft-innovation sets, masters sets and starter products released by today;
@@ -48,6 +51,8 @@ const top = Number(option("--top", "100"));
 const withUnranked = !flag("--ranked-only");
 const refresh = flag("--refresh");
 const oldest = flag("--oldest");
+const upcoming = flag("--upcoming");
+const today = new Date().toISOString().slice(0, 10);
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -82,19 +87,22 @@ async function getJson(url, tries = 5) {
 }
 
 /** Every set worth walking, newest first (oldest first with `--oldest`). */
-async function sets() {
+async function sets(withUpcoming = upcoming) {
   const all = await cached("sets.json", async () => (await getJson("https://api.scryfall.com/sets")).data);
-  const today = new Date().toISOString().slice(0, 10);
   return all
-    .filter((s) => !s.digital && SET_TYPES.has(s.set_type) && s.released_at !== undefined && s.released_at <= today)
+    .filter((s) => !s.digital && SET_TYPES.has(s.set_type) && s.released_at !== undefined && (withUpcoming || s.released_at <= today))
     .sort((a, b) => (oldest ? -1 : 1) * b.released_at.localeCompare(a.released_at) || a.code.localeCompare(b.code));
 }
 
-/** A set's Commander-legal first printings: name, EDHREC rank (or null), type line. */
-async function newCards(code) {
+/** A set's Commander-legal first printings: name, EDHREC rank (or null), type
+ * line. A set not out yet has no legal cards on Scryfall: its paper first
+ * printings stand in (the cards `gen:oracle` keeps as previews). */
+async function newCards(set) {
+  const code = set.code;
+  const preview = set.released_at > today;
   return cached(`${code}.json`, async () => {
     const out = [];
-    const q = encodeURIComponent(`e:${code} is:firstprint legal:commander`);
+    const q = encodeURIComponent(`e:${code} is:firstprint ${preview ? "game:paper" : "legal:commander"}`);
     let url = `https://api.scryfall.com/cards/search?q=${q}&order=edhrec&unique=cards`;
     while (url) {
       const page = await getJson(url);
@@ -142,16 +150,17 @@ const mark = (c) =>
 const all = await sets();
 if (option("--set") !== undefined) {
   const code = option("--set").toLowerCase();
-  const set = all.find((s) => s.code === code);
+  const set = (await sets(true)).find((s) => s.code === code);
   if (set === undefined) throw new Error(`no set ${code} among the sets walked`);
-  const cards = aboveThreshold(await newCards(code));
-  console.log(`${set.name} (${code.toUpperCase()}, ${set.released_at}, ${set.set_type}) — ${cards.length} above the threshold (top ${top}%):`);
+  const cards = aboveThreshold(await newCards(set));
+  const when = set.released_at > today ? `out ${set.released_at}: previews` : set.released_at;
+  console.log(`${set.name} (${code.toUpperCase()}, ${when}, ${set.set_type}) — ${cards.length} above the threshold (top ${top}%):`);
   for (const c of cards) console.log(`  ${String(c.rank ?? "—").padStart(6)}  ${c.name}  — ${c.type}  [${mark(c)}]`);
 } else if (flag("--sets")) {
   const n = Number(option("--sets", "12"));
   console.log(`set        released    new  above  done  triaged  left   (threshold: top ${top}% by EDHREC rank${withUnranked ? ", unranked kept" : ""})`);
   for (const set of all.slice(0, n)) {
-    const cards = await newCards(set.code);
+    const cards = await newCards(set);
     const kept = aboveThreshold(cards);
     const done = kept.filter((c) => inPool(c.name)).length;
     const tri = kept.filter((c) => !inPool(c.name) && isTriaged(c.name)).length;
@@ -164,7 +173,7 @@ if (option("--set") !== undefined) {
   let listed = 0;
   for (const set of all) {
     if (listed >= n) break;
-    const left = aboveThreshold(await newCards(set.code)).filter((c) => !inPool(c.name) && !isTriaged(c.name));
+    const left = aboveThreshold(await newCards(set)).filter((c) => !inPool(c.name) && !isTriaged(c.name));
     if (left.length === 0) continue;
     console.log(`${set.name} (${set.code.toUpperCase()}, ${set.released_at}):`);
     for (const c of left.slice(0, n - listed)) {
