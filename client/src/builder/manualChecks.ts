@@ -11318,4 +11318,26 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{}, {}, {}],
     }),
   ),
+  // --- Divided totals read from X (2026-11-05) ------------------------------
+  preset(
+    'Meteor Shower: X plus 1 damage divided',
+    board({
+      you: { bf: ['Mountain*5'], hand: ['Meteor Shower'] },
+      opp: { bf: ['Grizzly Bears', 'Hill Giant'] },
+    }),
+  ),
+  preset(
+    'Meteor Shower: X plus 1 damage divided, four players',
+    board({
+      you: { bf: ['Mountain*5'], hand: ['Meteor Shower'] },
+      opp: [{ bf: ['Grizzly Bears'] }, { bf: [] }, { bf: ['Hill Giant'] }],
+    }),
+  ),
+  preset(
+    'Shatterskull Smashing: twice X divided when X is 6 or more',
+    board({
+      you: { bf: ['Mountain*8'], hand: ['Shatterskull Smashing'] },
+      opp: { bf: ['Craw Wurm', 'Hill Giant'] },
+    }),
+  ),
 ]

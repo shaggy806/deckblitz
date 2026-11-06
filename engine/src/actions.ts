@@ -1234,12 +1234,19 @@ export type LegalAction =
       readonly targetSpecs: readonly TargetSpec[];
       readonly targetOptions: readonly (readonly TargetRef[])[];
       /** The card divides `total` among the targets of the group at target
-       * slot `slot` — the cast's `division` says how (Magma Opus). */
+       * slot `slot` — the cast's `division` says how (Magma Opus). With
+       * `x`, the total is the X the cast chooses (Fire Covenant). */
       readonly divide?: {
         readonly total: number;
         readonly slot: number;
         readonly of?: string;
         readonly x?: true;
+        /** A total read from X other than plain X — Meteor Shower's "X plus
+         * 1", Shatterskull Smashing's "twice X if X is 6 or more" — at each
+         * X from 0 (index X) to the offer's `xCost.maxX`: the cast with
+         * `xValue` X divides `totalByX[X]` (rule 601.2d, after X is chosen
+         * in 601.2b). `total` is the X = 0 one. */
+        readonly totalByX?: readonly number[];
         /** The shares may add up to less than `total` (each still at least 1). */
         readonly upTo?: true;
       };

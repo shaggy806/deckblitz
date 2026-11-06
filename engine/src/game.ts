@@ -5062,15 +5062,26 @@ export class Game {
             ? permanentCount(this.state, this.battlefieldMatching(player, { ...def.additionalCost.returnToHandX, controlledBy: "you" }))
             : undefined;
       const payableX = xPlan?.maxX ?? sacrificeX ?? discardX;
+      // A divided total that reads X ("X plus 1"): one per X, which bounds
+      // the number of targets as "up to X" does — at least 1 each.
+      const totalByX =
+        def.divided === null || payableX === undefined
+          ? undefined
+          : this.dividedTotalsByX(def.divided, card, player, payableX);
       const xGroup =
-        payableX !== undefined && targetCount === undefined && groupReadsX(specs)
-          ? this.xGroupOffer(specs, options, payableX, xFloor)
+        payableX !== undefined && targetCount === undefined && (groupReadsX(specs) || totalByX !== undefined)
+          ? this.xGroupOffer(specs, options, payableX, xFloor, totalByX)
           : null;
       // No number of targets leaves room for an X at or above the floor.
       if (xGroup === "none") continue;
       // A divided total read as it would be cast (rule 601.2d), capping its
-      // group at one target per point — an X total waits for the X chosen.
-      const divide = def.divided === null ? undefined : this.dividedNow(def.divided, card, player, undefined);
+      // group at one target per point — an X total waits for the X chosen,
+      // and one read from X caps at the most any X gives.
+      const dividedAtZero = def.divided === null ? undefined : this.dividedNow(def.divided, card, player, undefined);
+      const divide =
+        dividedAtZero === undefined || totalByX === undefined ? dividedAtZero : { ...dividedAtZero, totalByX };
+      const capDivide =
+        divide === undefined || totalByX === undefined ? divide : { ...divide, total: Math.max(...totalByX) };
       const offerSpecs = payableX === undefined ? specsAtX(specs, 0) : specs;
       const offer: Extract<LegalAction, { kind: "cast-spell" }> = {
         kind: "cast-spell",
@@ -5078,7 +5089,8 @@ export class Game {
         cardName,
         // Cast with no {X} to pay — free, say — X is 0 (rule 107.3b), and a
         // group tied to it is fixed there.
-        targetSpecs: divide === undefined || divide.x === true ? offerSpecs : specsCappedByDivision(offerSpecs, divide),
+        targetSpecs:
+          capDivide === undefined || capDivide.x === true ? offerSpecs : specsCappedByDivision(offerSpecs, capDivide),
         targetOptions: options,
         ...this.phyrexianPipsOffer(player, variantCost),
         ...(divide !== undefined ? { divide } : {}),
@@ -5402,6 +5414,12 @@ export class Game {
                       maxX: Math.max(...xGroup.maxXByTargetCount),
                       maxXByTargetCount: xGroup.maxXByTargetCount,
                       minXByTargetCount: xGroup.minXByTargetCount,
+                      // Each count's X ceiling counts on a target that takes
+                      // something off (Spellwild Ouphe): without one, X stops
+                      // at the full price's (`maxXForTargets`).
+                      ...(this.spellPricedByTargets(def, player, card)
+                        ? this.unreducedXOffer(player, card, def, cost, face ?? 0, pricedAt, options, xPlan.maxX)
+                        : {}),
                     }
                   : maxXByTargetCount === undefined
                   ? {
@@ -5543,6 +5561,11 @@ export class Game {
     options: readonly (readonly TargetRef[])[],
     payableX: number,
     leastX = 0,
+    /** A divided total read from X (Meteor Shower's "X plus 1"), index X:
+     * each member gets at least 1 of it (rule 601.2d), so a count needs an
+     * X whose total reaches it, and no more members than the group's own
+     * `max` or the largest total. */
+    totalByX?: readonly number[],
   ):
     | {
         targetCount: TargetCountRange;
@@ -5559,13 +5582,27 @@ export class Game {
     // Each member is another than the ones before it (`concreteTargetSpecs`),
     // so a candidate — a token stack too — is named once.
     const members = candidates.length;
-    const most = upTo ? Math.min(members, payableX) : members;
+    const groupMax =
+      totalByX !== undefined && typeof spec === "object" && spec.kind === "any-number" && typeof spec.max === "number"
+        ? spec.max
+        : Number.POSITIVE_INFINITY;
+    const most = Math.min(
+      upTo ? Math.min(members, payableX) : members,
+      groupMax,
+      totalByX === undefined ? Number.POSITIVE_INFINITY : Math.max(...totalByX),
+    );
     const counts = Array.from({ length: most + 1 }, (_v, k) => k);
+    // The least X whose divided total reaches `k` members.
+    const dividedLeastX = (k: number): number => {
+      if (totalByX === undefined || k === 0) return 0;
+      const x = totalByX.findIndex((total) => total >= k);
+      return x < 0 ? Number.POSITIVE_INFINITY : x;
+    };
     // `leastX`: an X below it isn't allowed at all — a cast permission that
     // reads the spell's mana value (Glarb, Calamity's Augur's ruling) — so no
     // count's least X is lower, and a count whose X can't reach it is off
     // the offer. Those left are a run: each bound moves one way with k.
-    const minX = counts.map((k) => Math.max(upTo ? k : 0, leastX));
+    const minX = counts.map((k) => Math.max(upTo ? k : 0, leastX, dividedLeastX(k)));
     const maxX = counts.map((k) => (atLeast ? Math.min(k, payableX) : payableX));
     const open = counts.filter((k) => minX[k] <= maxX[k]);
     if (open.length === 0) return "none";
@@ -32000,6 +32037,23 @@ export class Game {
       ...divided,
       total: Math.max(0, amountValue(divided.total, sacrificed === undefined ? ctx : { ...ctx, sacrificed })),
     };
+  }
+
+  /** A spell's divided total at each X from 0 to `payableX` (index X), for
+   * one that reads X other than as plain X — Meteor Shower's "X plus 1",
+   * Shatterskull Smashing's "twice X if X is 6 or more" (its ruling: twice X
+   * is what's divided) — or `undefined` when it reads the same at every X.
+   * The division is announced after X is (rule 601.2d after 601.2b), so the
+   * offer carries every total the caster could get (`divide.totalByX`). */
+  private dividedTotalsByX(
+    divided: NonNullable<CardDefinition["divided"]>,
+    card: ObjectId,
+    player: PlayerId,
+    payableX: number,
+  ): number[] | undefined {
+    if (divided.x === true || typeof divided.total === "number") return undefined;
+    const totals = Array.from({ length: payableX + 1 }, (_v, x) => this.dividedNow(divided, card, player, x).total);
+    return totals.every((t) => t === totals[0]) ? undefined : totals;
   }
 
   /** A triggered ability's `divided`, its total read as it's put on the

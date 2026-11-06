@@ -7545,3 +7545,16 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Abundance: each draw asks whether to draw or reveal, four players
 - **Do:** Cast Divination. Both times pick "Abundance: choose land or nonland and reveal instead", then "Nonland".
 - **Expect:** Grizzly Bears comes to your hand, then Shock, and the Forest revealed on the way goes to the bottom of your library. Nobody else is asked anything.
+## Divided totals read from X (2026-11-05)
+
+### Meteor Shower: X plus 1 damage divided
+- **Do:** Cast Meteor Shower with X = 2, targeting Bob's Grizzly Bears, Hill Giant and Bob. Give each 1.
+- **Expect:** The division step shares out 3 (X plus 1). Bob goes to 39 and each creature has 1 damage.
+
+### Meteor Shower: X plus 1 damage divided, four players
+- **Do:** Cast Meteor Shower with X = 2, targeting Bob's Grizzly Bears and Dave's Hill Giant. Give the Bears 2 and the Giant 1.
+- **Expect:** The division step shares out 3. The Bears die; the Giant survives with 1 damage.
+
+### Shatterskull Smashing: twice X divided when X is 6 or more
+- **Do:** Cast Shatterskull Smashing (its spell face) with X = 6, targeting Bob's Craw Wurm and Hill Giant. Leave the split at 6 each.
+- **Expect:** The division step shares out 12, not 6, and both creatures die.

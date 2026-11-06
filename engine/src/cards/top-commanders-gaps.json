@@ -1882,7 +1882,8 @@
   "static:granted-static-replacement",
   "cost:optional-life-additional-cost-for-spells",
   "static:static-scoped-by-has-toxic",
-  "effect:exile-target-spell-plotted"
+  "effect:exile-target-spell-plotted",
+  "effect:divided-total-reading-x"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
