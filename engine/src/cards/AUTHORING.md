@@ -1865,7 +1865,8 @@ your hand" (`zone: "hand"`, `leftover: "stay"`), Make Your Own Luck's "exile a n
 from among them" (the library's top three). Nothing chosen, nothing plotted; a card no longer in
 exile or a token does nothing. "Exile target spell. It becomes plotted" (Aven Interrupter's
 enters trigger) is an `exile` of the spell (it leaves the stack uncountered) then a
-`become-plotted` of the same slot.
+`become-plotted` of the same slot: the card's owner may cast it on a later turn, and a cost
+increase still applies to that free cast (the Interrupter's own {2} on an opponent's).
 
 `become-foretold { target, costReducedBy? }` is "it becomes foretold" (rule 702.143d): a card an
 instruction just exiled is a foretold card, face down, its owner's to look at and to cast for any

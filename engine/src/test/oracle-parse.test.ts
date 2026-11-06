@@ -16248,3 +16248,19 @@ describe("a corrupted static scoped by toxic", () => {
     });
   });
 });
+
+describe("exiling a target spell and plotting it", () => {
+  it("reads Aven Interrupter's enters trigger as the exile, then the plot, of one target", () => {
+    const parsed = parseFace({
+      name: "Test Card",
+      type_line: "Creature — Bird Rogue",
+      oracle_text: "When this creature enters, exile target spell. It becomes plotted. (Its owner may cast it as a sorcery on a later turn without paying its mana cost.)",
+    });
+    expect(parsed.complete).toBe(true);
+    expect(parsed.triggered?.[0]).toMatchObject({
+      trigger: { on: "enters-battlefield", who: "self" },
+      targets: ["spell"],
+      effect: { kind: "sequence", effects: [{ kind: "exile", target: 0 }, { kind: "become-plotted", target: 0 }] },
+    });
+  });
+});

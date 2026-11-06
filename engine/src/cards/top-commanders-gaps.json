@@ -1878,7 +1878,8 @@
   "effect:cast-discarded-card-exiled-by-madness",
   "static:granted-static-replacement",
   "cost:optional-life-additional-cost-for-spells",
-  "static:static-scoped-by-has-toxic"
+  "static:static-scoped-by-has-toxic",
+  "effect:exile-target-spell-plotted"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

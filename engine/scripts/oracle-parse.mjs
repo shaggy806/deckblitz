@@ -8318,6 +8318,16 @@ export function parseEffect(text, outer) {
   // Mythos of Snapdax's two sentences: the second rewrites who chooses.
   if (text === SNAPDAX_LINE) return { effect: SNAPDAX_EFFECT, todo: [], hints: [] };
 
+  // "Exile target spell. It becomes plotted." (Aven Interrupter — rule
+  // 702.170c): the spell exiled, then the card plotted for its owner.
+  if (/^Exile target spell\. It becomes plotted\.$/.test(text)) {
+    const target = ctx.target("spell");
+    return {
+      effect: { kind: "sequence", effects: [{ kind: "exile", target }, { kind: "become-plotted", target }] },
+      todo: [],
+      hints: [],
+    };
+  }
   // "For each opponent, exile up to one target nonland permanent that player
   // controls until ~ leaves the battlefield" (Grasp of Fate): one optional slot
   // per seat, exiled together (a game seats at most four).
