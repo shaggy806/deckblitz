@@ -7492,3 +7492,17 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Click Avacyn's Pilgrim and choose its mana ability. Then click Halo Fountain and choose its Citizen ability.
 - **Expect:** The Pilgrim untaps again, since it's the only tapped creature, and a Citizen token appears.
 - **Not a bug:** With nothing tapped, the Fountain's ability isn't offered until the Pilgrim is tapped.
+
+## An Aura that enchants a card in a graveyard (2026-11-05)
+
+### Animate Dead: cast on a card in an opponent's graveyard
+- **Do:** Cast Animate Dead and pick Bob's Hill Giant from the popup of graveyard cards.
+- **Expect:** The Hill Giant comes onto the battlefield on your side with Animate Dead attached, and shows 2/3.
+
+### Animate Dead: returned by Replenish, you choose the graveyard card it enchants
+- **Do:** Cast Replenish. When Animate Dead enters, pick Bob's Hill Giant from the popup.
+- **Expect:** The banner says "Animate Dead is entering the battlefield — choose the card it enchants", and the popup offers your Grizzly Bears and Bob's Hill Giant. The Hill Giant then comes onto the battlefield on your side with Animate Dead attached, 2/3.
+
+### Animate Dead: returned by Replenish, you choose the graveyard card it enchants, four players
+- **Do:** Cast Replenish. When Animate Dead enters, pick Dave's Craw Wurm from the popup.
+- **Expect:** The popup offers your Grizzly Bears, Bob's Hill Giant and Dave's Craw Wurm. The Craw Wurm comes onto the battlefield on your side with Animate Dead attached, 5/4.

@@ -12,6 +12,7 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **An Aura on a graveyard card, and an enchant ability an effect gives** (2026-11-05), by EDHREC rank: "enchant creature card in a graveyard" (`enchantsGraveyardCard` — entered attached to the card, cast or chosen as it's put onto the battlefield, the client's `choose-enchant` popup for graveyard cards), `swap-enchant` (`GameObject.enchantSwap`: "enchant creature put onto the battlefield with this" or any spec, `becomeAura`): Animate Dead, Dance of the Dead, Necromancy, Cloudform, Lightform, Rageform.
 - **Card definitions share a hidden class again** (2026-11-04), a regression from that morning: `defineCard`'s literal reached 128 entries, so the pool's import went from 1.2 s to 5.5 s and a fuzzer game cost 40-45% more per event. Its rare fields moved to `rareCardFields` (import 0.85 s), pinned by `card-definition-shape.test.ts`.
 - **Stealing a spell** (2026-11-04), `gain-control-spell`, `putOnStackBy` and `spellCaster` read by what asks who cast it, seat targets rebound to the new controller (a bug for another player's copy too): Commandeer, Aethersnatch.
 - **Exile, then return it transformed** (2026-11-04), no engine code: Urabrask, Sheoldred. **The greatest among discarded cards**, no engine code: Jace's Archivist, Scythe Specter, Ill-Timed Explosion.
