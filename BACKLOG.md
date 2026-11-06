@@ -694,6 +694,10 @@ Shiko or the other spell, and haste enablers in the crackback).
 - **The autopsies' open bot items** (`docs/plans/deck-autopsies.md`, "Left"): token payoffs
   beyond engines (sacrifice outlets, leaves-the-battlefield); premium removal fired at weak
   targets past the first two rounds.
+- **Explore aiming bot removal by EDHREC rank or salt score** (the user, 2026-11-06): a bot picks
+  removal targets by simulated board value alone; try weighting the pick by how played or how hated
+  a card is (`cards/edhrec-rank.ts` has the rank; salt scores aren't fetched yet). To explore first,
+  not a settled design.
 - **Deeper lookahead** (the user, 2026-10-18): let the bot look further ahead, a clock off, to see
   whether it finds smarter lines. The yardstick is `bot/benchmarks.ts` (`npm run bot:benchmarks -w
   engine`): seventeen hard positions played out over whole turns and judged on the outcome — goals,
