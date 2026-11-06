@@ -58,11 +58,10 @@ the per-card JSON records in `engine/data/sweep-2/` and `sweep-3/`). Card lists 
 section keeps only what to do next.
 
 - **Star Trek, from its previews** (`author-by-set`, the user's call 2026-11-06; out 2026-11-13):
-  batch 266 took TRK's top 120 by rank and the Beam me up and face a dilemma cards (114 authored).
-  **Batch 267: TRK's other 162** (`cards:sets -w engine -- --set trk`; three card-author agents
-  of ~54) — no new mechanic: Sagas, landcycling/typecycling, investigate, surveil, the Planet
-  lands, "Strange new worlds" (an ability word over the built `{ aggregate: "distinct", of:
-  "name" }` land count). **Batch 268: Star Trek Commander, 172** (`--set trc`; three agents) —
+  TRK is whole (batches 266-267, `COMPLETED.md`). Federation ("the number of creature types among
+  non-Borg creatures you control") is `{ aggregate: "distinct", of: { subtypesOf: "creature" },
+  filter: { …, notSubtypes: ["Borg"] } }` (Captain Jonathan Archer), fixed in batch 267.
+  **Batch 268: Star Trek Commander, 172** (`--set trc`; three agents) —
   its two new ability words need nothing: **Seek out** is "whenever you draw your second card each
   turn" (`trigger: { on: "draws", who: "you", nthEachTurn: 2 }`, Tiger-Seal), **Battlefront** is "X
   is the number of opponents you attacked this turn" (`{ turnStat: "opponents-attacked" }`,
@@ -839,6 +838,11 @@ delete its detail there and move this line to `COMPLETED.md`.
 - **Swap the animation and bot speed checkboxes to dropdown menus** (user, 2026-11-06): the
   motion and bot-speed settings are checkboxes/option rows now (`client/src/ui/MotionControl.tsx`,
   the room's "Bot speed" in `client/src/lobby/RoomSettingsPanel.tsx`); make each a dropdown.
+- **The library can't show the cards missing from the pool** (user, 2026-11-06): wanted, a filter
+  that shows only the cards not yet in the pool. The library page (`client/src/library/LibraryPage.tsx`)
+  lists `cardPool` from `client/src/cards/cardData.ts`, the engine's definitions alone, so it has no
+  unimplemented cards to show yet: they'd need a source (the Oracle snapshot,
+  `engine/data/oracle/cards.jsonl`, too big to bundle whole) before the filter can exist.
 
 ## Tooling / docs
 
