@@ -19,6 +19,9 @@ import type { Printing, PrintingPage } from '../deck-builder/printings.ts'
 import { CardImage } from '../ui/CardImage.tsx'
 import { SiteNotice } from '../legal/SiteNotice.tsx'
 import { Symbols } from '../ui/Symbols.tsx'
+import { resolveArtUrl } from '../ui/art.ts'
+import { fetchMissingCards, namesOfMissing } from './missingCards.ts'
+import type { MissingCard } from './missingCards.ts'
 import { fetchSetCards, fetchSets } from './setFilter.ts'
 import type { SetCards, SetInfo, SetPrinting } from './setFilter.ts'
 import './library.css'
@@ -115,13 +118,106 @@ const TYPE_ORDER: readonly CardType[] = [
   'land',
 ]
 
+/** What the filters and sorts read, a pool card's (`Entry`) or a card not in
+ * the pool yet (`MissingEntry`) alike. */
+interface Row {
+  readonly name: string
+  /** The names a chosen set's list can know it by (each face's too). */
+  readonly names: readonly string[]
+  /** Its card types, lowercase, as the type filter names them. */
+  readonly types: readonly string[]
+  readonly haystack: string
+  readonly mv: number
+  readonly edhrec: number
+  readonly colorRank: number
+  readonly typeRank: number
+  readonly colorKeys: readonly ColorFilter[]
+}
+
+/** A card the pool doesn't have yet, from `missing-cards.json`: no definition,
+ * so it shows its Scryfall image and links there. */
+interface MissingEntry extends Row {
+  readonly card: MissingCard
+}
+
+function typeRankOf(types: readonly string[]): number {
+  return Math.min(
+    TYPE_ORDER.length,
+    ...types.map((t) => {
+      const i = TYPE_ORDER.indexOf(t as CardType)
+      return i === -1 ? TYPE_ORDER.length : i
+    }),
+  )
+}
+
+function buildMissingEntry(card: MissingCard): MissingEntry {
+  // The front face's types: a double-faced card's back doesn't make it one.
+  const front = card.typeLine.split(' // ')[0]
+  const types = front.split(' — ')[0].toLowerCase().split(' ').filter(Boolean)
+  const colors = [...card.colors] as Color[]
+  return {
+    card,
+    name: card.name,
+    names: namesOfMissing(card.name),
+    types,
+    haystack: `${card.name} \n ${card.typeLine}`.toLowerCase(),
+    mv: card.manaValue,
+    edhrec: card.edhrecRank ?? Infinity,
+    colorRank: colorRankOf(colors),
+    typeRank: typeRankOf(types),
+    colorKeys: colors.length === 0 ? ['C'] : (colors as ColorFilter[]),
+  }
+}
+
+/** The rows a search and the filters leave. */
+function matchesFilters(
+  e: Row,
+  q: string,
+  typeFilter: CardType | null,
+  colorFilter: readonly ColorFilter[],
+  setCode: string | null,
+  setNames: ReadonlySet<string> | null,
+): boolean {
+  // A set still loading (or that couldn't be) matches nothing yet.
+  if (setCode !== null && (setNames === null || !e.names.some((n) => setNames.has(n)))) return false
+  if (typeFilter !== null && !e.types.includes(typeFilter)) return false
+  if (colorFilter.length > 0 && !e.colorKeys.some((c) => colorFilter.includes(c))) return false
+  return q === '' || e.haystack.includes(q)
+}
+
+/** `rows`, already in name order, in the chosen sort. */
+function sortRows<T extends Row>(rows: readonly T[], sort: Sort, descending: boolean): readonly T[] {
+  const byName = (a: T, b: T) => a.name.localeCompare(b.name)
+  if (sort === 'name') return descending ? [...rows].reverse() : rows
+  const sign = descending ? -1 : 1
+  return [...rows].sort((a, b) => {
+    // Unranked cards (basics, anything too new) sort last either way: the
+    // least-played cards are the ones with the biggest rank, not no rank.
+    if (sort === 'edhrec' && (a.edhrec === Infinity) !== (b.edhrec === Infinity)) {
+      return a.edhrec === Infinity ? 1 : -1
+    }
+    const key =
+      sort === 'mana'
+        ? a.mv - b.mv
+        : sort === 'color'
+          ? a.colorRank - b.colorRank
+          : sort === 'edhrec'
+            ? a.edhrec === b.edhrec
+              ? 0
+              : a.edhrec - b.edhrec
+            : a.typeRank - b.typeRank
+    // Ties stay alphabetical whichever way the sort runs.
+    return key !== 0 ? sign * key : byName(a, b)
+  })
+}
+
 /**
  * One row of the gallery: a card, precomputed for search and sorting. Built
  * once, the first time the page renders (`galleryRows`) — the pool is fixed
  * for the life of the page, so re-deriving a lowercased haystack and a mana
  * value per keystroke across thousands of cards would be pure waste.
  */
-interface Entry {
+interface Entry extends Row {
   readonly def: CardDefinition
   /** The card's other face, if it has one — a transform back, an MDFC's
    * second face, or an adventure's spell half. Its text is searchable and it
@@ -160,6 +256,9 @@ function buildEntry(def: CardDefinition): Entry {
   const other = otherName === null ? null : (cardPool().byName.get(otherName) ?? null)
   return {
     def,
+    name: def.name,
+    names: [def.name],
+    types: def.types,
     other,
     // An adventure's two halves share one printed face, so there's nothing to
     // flip *to* — unlike a transforming DFC or an MDFC, which have a real
@@ -174,12 +273,7 @@ function buildEntry(def: CardDefinition): Entry {
     mv: manaValue(parseManaCost(def.manaCost)),
     edhrec: edhrecRankOf(def.name) ?? Infinity,
     colorRank: colorRankOf(def.colors),
-    typeRank: Math.min(
-      ...def.types.map((t) => {
-        const i = TYPE_ORDER.indexOf(t)
-        return i === -1 ? TYPE_ORDER.length : i
-      }),
-    ),
+    typeRank: typeRankOf(def.types),
     colorKeys: def.colors.length === 0 ? ['C'] : (def.colors as readonly ColorFilter[]),
   }
 }
@@ -361,44 +455,45 @@ export function LibraryPage() {
   const setPrintings = setNow !== null && 'cards' in setNow ? setNow.cards.printings : null
   const setName = sets?.find((s) => s.code === setCode)?.name ?? setCode?.toUpperCase() ?? ''
 
+  // "Not in the pool yet" (the user, 2026-11-06): the Commander-legal cards
+  // the engine doesn't have, from `missing-cards.json`, fetched the first time
+  // it's asked for (`missingCards.ts`).
+  const [showMissing, setShowMissing] = useState(false)
+  const [missing, setMissing] = useState<readonly MissingEntry[] | 'failed' | null>(null)
+  const chooseMissing = (show: boolean) => {
+    setShowMissing(show)
+    // Fetched as it's turned on; after a failure, turning it on again retries.
+    if (!show || (missing !== null && missing !== 'failed')) return
+    setMissing(null)
+    fetchMissingCards((name) => cardsByName.has(name)).then(
+      (cards) => setMissing(cards.map(buildMissingEntry)),
+      () => setMissing('failed'),
+    )
+  }
+  const missingRows = showMissing && missing !== null && missing !== 'failed' ? missing : null
+
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
-    const rows = entries.filter((e) => {
-      // A set still loading (or that couldn't be) matches nothing yet.
-      if (setCode !== null && (setNames === null || !setNames.has(e.def.name))) return false
-      if (e.isToken && !showTokens) return false
-      if (typeFilter !== null && !e.def.types.includes(typeFilter)) return false
-      if (colorFilter.length > 0 && !e.colorKeys.some((c) => colorFilter.includes(c))) return false
-      return q === '' || e.haystack.includes(q)
-    })
-    const byName = (a: Entry, b: Entry) => a.def.name.localeCompare(b.def.name)
-    if (sort === 'name') return descending ? [...rows].reverse() : rows
-    const sign = descending ? -1 : 1
-    return [...rows].sort((a, b) => {
-      // Unranked cards (basics, anything too new) sort last either way: the
-      // least-played cards are the ones with the biggest rank, not no rank.
-      if (sort === 'edhrec' && (a.edhrec === Infinity) !== (b.edhrec === Infinity)) {
-        return a.edhrec === Infinity ? 1 : -1
-      }
-      const key =
-        sort === 'mana'
-          ? a.mv - b.mv
-          : sort === 'color'
-            ? a.colorRank - b.colorRank
-            : sort === 'edhrec'
-              ? a.edhrec === b.edhrec
-                ? 0
-                : a.edhrec - b.edhrec
-              : a.typeRank - b.typeRank
-      // Ties stay alphabetical whichever way the sort runs.
-      return key !== 0 ? sign * key : byName(a, b)
-    })
+    const rows = entries.filter(
+      (e) => (showTokens || !e.isToken) && matchesFilters(e, q, typeFilter, colorFilter, setCode, setNames),
+    )
+    return sortRows(rows, sort, descending)
   }, [entries, query, typeFilter, colorFilter, sort, descending, showTokens, setCode, setNames])
+
+  const missingFiltered = useMemo(() => {
+    if (missingRows === null) return []
+    const q = query.trim().toLowerCase()
+    const rows = missingRows.filter((e) => matchesFilters(e, q, typeFilter, colorFilter, setCode, setNames))
+    return sortRows(rows, sort, descending)
+  }, [missingRows, query, typeFilter, colorFilter, sort, descending, setCode, setNames])
+
+  // What the grid and the pager show: the pool's cards, or the missing ones.
+  const shownCount = showMissing ? missingFiltered.length : filtered.length
 
   const [columns, gridRef] = useGridColumns()
   const pageSize = pageSizeFor(columns)
   const [page, setPage] = useState(0)
-  const pageCount = Math.max(1, Math.ceil(filtered.length / pageSize))
+  const pageCount = Math.max(1, Math.ceil(shownCount / pageSize))
   // Any change to the result set puts you back on page one: staying on page 7
   // of a search that now has two pages shows an empty grid, and the count
   // above it would say otherwise.
@@ -407,7 +502,7 @@ export function LibraryPage() {
   // effect. An effect would commit the stale page first and then immediately
   // re-render (which `react/set-state-in-effect` flags); this is React's
   // documented "adjust state when a prop changes" pattern and repaints once.
-  const filterKey = `${query}|${typeFilter ?? ''}|${[...colorFilter].sort().join(',')}|${sort}|${descending}|${showTokens}|${setCode ?? ''}|${setNames === null ? 0 : setNames.size}`
+  const filterKey = `${query}|${typeFilter ?? ''}|${[...colorFilter].sort().join(',')}|${sort}|${descending}|${showTokens}|${setCode ?? ''}|${setNames === null ? 0 : setNames.size}|${showMissing}|${missingRows === null ? 0 : missingRows.length}`
   const [pagedFor, setPagedFor] = useState(filterKey)
   if (pagedFor !== filterKey) {
     setPagedFor(filterKey)
@@ -415,8 +510,12 @@ export function LibraryPage() {
   }
   const safePage = Math.min(page, pageCount - 1)
   const pageRows = useMemo(
-    () => filtered.slice(safePage * pageSize, safePage * pageSize + pageSize),
-    [filtered, safePage, pageSize],
+    () => (showMissing ? [] : filtered.slice(safePage * pageSize, safePage * pageSize + pageSize)),
+    [showMissing, filtered, safePage, pageSize],
+  )
+  const missingPageRows = useMemo(
+    () => (showMissing ? missingFiltered.slice(safePage * pageSize, safePage * pageSize + pageSize) : []),
+    [showMissing, missingFiltered, safePage, pageSize],
   )
 
   /**
@@ -478,7 +577,9 @@ export function LibraryPage() {
     sort !== 'edhrec' ||
     descending ||
     showTokens ||
-    setCode !== null
+    setCode !== null ||
+    showMissing
+  const missingLoading = showMissing && missing === null
 
   return (
     <div className="lib-page">
@@ -492,7 +593,11 @@ export function LibraryPage() {
             className="lib-search"
             data-tour="lib-search"
             type="search"
-            placeholder={`Search ${cardCount} cards by name, type or rules text…`}
+            placeholder={
+              showMissing
+                ? `Search ${missingRows?.length ?? ''} cards not in the pool by name or type…`
+                : `Search ${cardCount} cards by name, type or rules text…`
+            }
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
@@ -584,6 +689,17 @@ export function LibraryPage() {
             </select>
           </label>
 
+          <label className="lib-sort">
+            Show
+            <select
+              value={showMissing ? 'missing' : 'pool'}
+              onChange={(e) => chooseMissing(e.target.value === 'missing')}
+            >
+              <option value="pool">In the pool</option>
+              <option value="missing">Not in the pool yet</option>
+            </select>
+          </label>
+
           {anyFilter ? (
             <button
               type="button"
@@ -596,6 +712,7 @@ export function LibraryPage() {
                 setDescending(false)
                 setShowTokens(false)
                 chooseSet(null)
+                setShowMissing(false)
               }}
             >
               Clear
@@ -606,21 +723,30 @@ export function LibraryPage() {
 
       <main className="lib-results">
         <p className="lib-count muted mono">
-          {filtered.length} {filtered.length === 1 ? 'card' : 'cards'}
+          {shownCount} {shownCount === 1 ? 'card' : 'cards'}
           {setNow !== null && 'cards' in setNow ? ` of ${setNow.cards.total} in ${setName}` : ''}
+          {showMissing ? (setNow !== null ? ', not in the pool yet' : ' not in the pool yet') : ''}
           {pageCount > 1
-            ? ` — showing ${safePage * pageSize + 1}-${Math.min(filtered.length, (safePage + 1) * pageSize)}`
+            ? ` — showing ${safePage * pageSize + 1}-${Math.min(shownCount, (safePage + 1) * pageSize)}`
             : ''}
         </p>
         {setCode !== null && setNow === null ? (
           <p className="lib-empty muted">Loading {setName}&rsquo;s cards from Scryfall…</p>
         ) : setNow !== null && 'failed' in setNow ? (
           <p className="lib-empty muted">Couldn&rsquo;t load {setName}&rsquo;s cards from Scryfall. Try again later.</p>
-        ) : filtered.length === 0 ? (
+        ) : missingLoading ? (
+          <p className="lib-empty muted">Loading the cards not in the pool yet…</p>
+        ) : showMissing && missing === 'failed' ? (
+          <p className="lib-empty muted">Couldn&rsquo;t load the cards not in the pool yet. Try again later.</p>
+        ) : shownCount === 0 ? (
           <p className="lib-empty muted">
-            {setCode !== null
-              ? `None of ${setName}'s cards match — or none are implemented yet.`
-              : `No cards match. The pool is ${cardCount} implemented cards — try a shorter search.`}
+            {showMissing
+              ? setCode !== null
+                ? `Every one of ${setName}'s cards that matches is in the pool.`
+                : 'No card not in the pool matches — try a shorter search.'
+              : setCode !== null
+                ? `None of ${setName}'s cards match — or none are implemented yet.`
+                : `No cards match. The pool is ${cardCount} implemented cards — try a shorter search.`}
           </p>
         ) : (
           <>
@@ -632,6 +758,9 @@ export function LibraryPage() {
                   printings={setPrintings}
                   onOpen={() => select(e.def.name)}
                 />
+              ))}
+              {missingPageRows.map((e) => (
+                <MissingCardTile key={e.name} entry={e} printings={setPrintings} />
               ))}
             </div>
             {pageCount > 1 ? (
@@ -711,6 +840,47 @@ function GridCard({
           banned
         </span>
       ) : null}
+    </div>
+  )
+}
+
+/**
+ * A card not in the pool yet: its face from Scryfall (the chosen set's
+ * printing while a set is chosen), linking to its Scryfall page in a new tab —
+ * there's no definition to open a page of our own from, and the list carries
+ * no rules text. The name sits under the image until it loads, as
+ * `CardImage`'s does.
+ */
+function MissingCardTile({
+  entry,
+  printings,
+}: {
+  readonly entry: MissingEntry
+  readonly printings: SetPrintings | null
+}) {
+  const [failed, setFailed] = useState(false)
+  const setImage = entry.names.map((n) => printings?.get(n)?.image).find(Boolean)
+  const src = resolveArtUrl(setImage ?? entry.card.printing, entry.name, 'normal')
+  const scryfall = `https://scryfall.com/search?q=${encodeURIComponent(`!"${entry.name}"`)}`
+  return (
+    <div className="lib-card lib-card-missing">
+      <a
+        className="lib-card-open"
+        href={scryfall}
+        target="_blank"
+        rel="noreferrer"
+        title={`${entry.name} — not in the pool yet; opens on Scryfall`}
+      >
+        <span className={failed ? 'card-image placeholder' : 'card-image'}>
+          <span className="card-image-name" aria-hidden="true">
+            {entry.name}
+          </span>
+          {failed ? null : (
+            <img src={src} alt={entry.name} loading="lazy" decoding="async" onError={() => setFailed(true)} />
+          )}
+        </span>
+        <span className="lib-card-caption">{entry.name}</span>
+      </a>
     </div>
   )
 }

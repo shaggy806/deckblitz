@@ -531,8 +531,10 @@ if (!skip.has("marks")) {
   const marks = await Promise.all([
     run("cards:mark", "node", ["scripts/top-commander-cards.mjs", "--refresh"], ENGINE),
     run("cmdrs:mark", "node", ["scripts/top-commanders.mjs", "--refresh"], ENGINE),
+    // The library's "Not in the pool yet" list (client/public/missing-cards.json).
+    run("missing-cards", "node", ["scripts/gen-missing-cards.mjs"], ENGINE),
   ]);
-  for (const m of marks) report(m, grab(m.out, /implemented/));
+  for (const m of marks) report(m, grab(m.out, /implemented|not in the pool/));
   // A sample deck's stand-in for a card that's now in the pool goes (and
   // BACKLOG's count with it) — `sample-decks.test.ts` would fail on it.
   const subs = await run("stand-ins", "node", ["scripts/stand-ins.mjs", "--implemented"], ENGINE);
