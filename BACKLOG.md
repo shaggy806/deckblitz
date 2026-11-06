@@ -59,10 +59,30 @@ section keeps only what to do next.
 
 - **Star Trek, from its previews** (`author-by-set`, the user's call 2026-11-06; out 2026-11-13):
   batch 266 took TRK's top 120 by rank and the Beam me up and face a dilemma cards (114 authored).
-  **Next:** TRK's other ~157 cards (`cards:sets -w engine -- --set trk`, two agents), then
-  Star Trek Commander (TRC, 172; `--set trc`), whose Borg want `mechanic:assimilate` (8 cards
-  across both sets) — build it with that batch. After release, `gen:oracle` again: it drops the
-  `preview` lines, brings the rulings, and `card:verify` shows any card whose text changed.
+  **Batch 267: TRK's other 162** (`cards:sets -w engine -- --set trk`; three card-author agents
+  of ~54) — no new mechanic: Sagas, landcycling/typecycling, investigate, surveil, the Planet
+  lands, "Strange new worlds" (an ability word over the built `{ aggregate: "distinct", of:
+  "name" }` land count). **Batch 268: Star Trek Commander, 172** (`--set trc`; three agents) —
+  its two new ability words need nothing: **Seek out** is "whenever you draw your second card each
+  turn" (`trigger: { on: "draws", who: "you", nthEachTurn: 2 }`, Tiger-Seal), **Battlefront** is "X
+  is the number of opponents you attacked this turn" (`{ turnStat: "opponents-attacked" }`,
+  Militant Angel); station is built (18 cards). **Build `mechanic:assimilate` with batch 268,
+  alongside its agents** — 8 cards: Borg Cube and Death Is Irrelevant (B266, blocked), The Borg
+  Queen, Borg Queen, Perfection Manifest, Assimilation Assessor, Assimilate the Wounded, Gift of
+  Perfection, The Best of Both Worlds. Researched 2026-11-06: assimilating a *permanent* (The Best
+  of Both Worlds) is already expressible — `gain-control` for good, `add-counter`, then
+  `add-types { addTypes: ["artifact"], setSubtypes: ["Borg"], duration: "permanent" }`
+  (`setSubtypes` replaces creature types only, rule 205.1a). Assimilating a *card* (graveyard,
+  exile, a revealed library card) is `put-onto-battlefield` with `underYourControl`,
+  `withCounters` and `enterAs` (Grave Betrayal's shape), but `EnterTypes` (`effects.ts`) has
+  `addTypes` and no creature-type replacement: add one (a `setSubtypes` read the way
+  `add-types`' is), so the card *enters* as a Borg artifact creature, as Rise from the Grave's
+  Zombie does; then an `assimilate` scaffolder template for the keyword action and its
+  reminder text. The cards' own pickers are separate: a card "exiled with it", one per opponent
+  "put there from the battlefield this turn", reveal/exile-until a creature card. After release,
+  `gen:oracle` again: it drops the `preview` lines, brings the rulings, and `card:verify` shows
+  any card whose text changed. Mystery Booster Commander (MBC, 69, out 2026-10-19) is the newest
+  released set still open.
 - **Next: work down the need keys** (the set walk ended 2026-10-27 with batch 234; its record moved to `COMPLETED.md`) (`docs/plans/need-keys-after-the-walk.md`,
   in progress; the tooling, the model trial, and Phase 1's merge and existence check landed
   2026-10-27): next, Phase 1 step 2, the recheck round. 863 cards were frozen 2026-10-27 into nine
