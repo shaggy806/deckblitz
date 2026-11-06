@@ -7229,6 +7229,13 @@ describe("one-shot grants to the next or first matching spell", () => {
       convoke: true,
     });
     expect(
+      face(
+        "Archway of Innovation",
+        "Land",
+        "{U}, {T}: The next spell you cast this turn has improvise. (Your artifacts can help cast that spell. Each artifact you tap after you're done activating mana abilities pays for {1}.)",
+      ).activated?.[0]?.effect,
+    ).toEqual({ kind: "grant-spells-this-turn", next: true, improvise: true });
+    expect(
       face("Overmaster", "Sorcery", "The next instant or sorcery spell you cast this turn can't be countered.\nDraw a card.").effect,
     ).toEqual({
       kind: "sequence",

@@ -356,6 +356,14 @@ void counter are, when the moving object's controller picks another exile that
 could apply (616.1 — Rest in Peace). The scaffolder sets it on a card that says
 "exiled with" anywhere. Proving cards: The Darkness Crystal, Gisa, Glorious
 Resurrector (`exile-instead-linked.test.ts`). Key: replacement:exile-instead-linked.
+### The next spell has improvise — built 2026-11-05
+
+By EDHREC rank: Archway of Innovation (926). `grant-spells-this-turn`'s
+`improvise` gives the next matching spell improvise (702.126a) as it's cast,
+read where convoke's is (`tapPayKinds`); beside a granted or printed convoke,
+creatures convoke and artifacts improvise in one payment. Key:
+effect:next-spell-has-improvise.
+
 ### Spells off the top of the library for life — built 2026-11-05
 
 By EDHREC rank: Bolas's Citadel (274). A `castFromLibraryTop` permission's

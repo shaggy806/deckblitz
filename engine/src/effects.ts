@@ -6050,6 +6050,10 @@ export type EffectSpec =
       readonly cantBeCountered?: true;
       /** The spell has **convoke** (rule 702.51). */
       readonly convoke?: true;
+      /** The spell has **improvise** (rule 702.126 — Archway of
+       * Innovation's "the next spell you cast this turn has improvise"),
+       * judged as `convoke` is. */
+      readonly improvise?: true;
       /** "Put that card into your hand instead of into your graveyard as it
        * resolves" (Soulfire Grand Master, with `next` and `castFrom: ["hand"]`):
        * no trigger, no stack object — the mark goes on the spell as it's cast
@@ -17915,6 +17919,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         triggered: spec.triggered ?? [],
         ...(spec.cantBeCountered === true ? { cantBeCountered: true } : {}),
         ...(spec.convoke === true ? { convoke: true } : {}),
+        ...(spec.improvise === true ? { improvise: true } : {}),
         ...(spec.intoHandAsItResolves === true ? { intoHandAsItResolves: true as const } : {}),
         ...(spec.entersWithCounters !== undefined ? { entersWithCounters: spec.entersWithCounters } : {}),
         ...(spec.reduceGeneric !== undefined ? { reduceGeneric: amountValue(spec.reduceGeneric, ctx) } : {}),

@@ -2437,6 +2437,7 @@ export interface SpellGrantThisTurn {
   readonly triggered: readonly TriggeredAbility[];
   readonly cantBeCountered?: true;
   readonly convoke?: true;
+  readonly improvise?: true;
   /** Into its owner's hand instead of their graveyard as it resolves — see
    * `grant-spells-this-turn`. Goes on the spell as `intoHandAsItResolves`. */
   readonly intoHandAsItResolves?: true;

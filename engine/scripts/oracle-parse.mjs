@@ -649,6 +649,7 @@ const CASCADE_TRIGGER = { trigger: { on: "this-cast" }, targets: [], effect: { k
 function nextSpellGrant(phrase) {
   if (phrase === "has cascade") return { triggered: [CASCADE_TRIGGER] };
   if (phrase === "has convoke") return { convoke: true };
+  if (phrase === "has improvise") return { improvise: true };
   return { cantBeCountered: true };
 }
 
@@ -5062,14 +5063,15 @@ export function parseSentence(sentence, ctx) {
   // with `next`): "the next noncreature spell you cast this turn has
   // cascade" (Dark Apostle), "the next instant or sorcery spell you cast this
   // turn can't be countered" (Overmaster), "the next spell you cast this turn
-  // has convoke" (Wand of the Worldsoul), and "the next instant spell and the
+  // has convoke" (Wand of the Worldsoul), "… has improvise" (Archway of
+  // Innovation), and "the next instant spell and the
   // next sorcery spell you cast this turn each have cascade" (Smoldering
   // Stagecoach — one grant each).
   // Every spell for the rest of the turn, those on the stack too (rule 611.2c).
   if (re("spells you control can't be countered this turn").test(s)) {
     return { kind: "grant-spells-this-turn", cantBeCountered: true };
   }
-  if ((m = re("the next (?:(.+?) )?spell you cast this turn (has cascade|has convoke|can't be countered)").exec(s))) {
+  if ((m = re("the next (?:(.+?) )?spell you cast this turn (has cascade|has convoke|has improvise|can't be countered)").exec(s))) {
     const filter = flashSpellsFilter(m[1]);
     if (filter !== null) {
       return {

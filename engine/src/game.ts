@@ -5591,13 +5591,17 @@ export class Game {
       }
     }
     // "The next spell you cast this turn has convoke" (Wand of the
-    // Worldsoul): an unused grant this spell would use up as it's cast.
-    if (!convoke) {
+    // Worldsoul), "… has improvise" (Archway of Innovation): an unused grant
+    // this spell would use up as it's cast.
+    if (!convoke || !improvise) {
       const object = this.state.objects[card];
       const from = object?.zone === "stack" ? (object.castFrom ?? undefined) : object?.zone;
-      convoke = (this.state.spellGrantsThisTurn ?? []).some(
-        (grant) => grant.convoke === true && turnCastGrantReaches(this.state, this.registry, grant, card, player, from),
-      );
+      for (const grant of this.state.spellGrantsThisTurn ?? []) {
+        if ((convoke || grant.convoke !== true) && (improvise || grant.improvise !== true)) continue;
+        if (!turnCastGrantReaches(this.state, this.registry, grant, card, player, from)) continue;
+        if (grant.convoke === true) convoke = true;
+        if (grant.improvise === true) improvise = true;
+      }
     }
     return { convoke, improvise };
   }
