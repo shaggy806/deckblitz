@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4638 already implemented / 362 missing (marks refreshed 2026-11-06)
+4637 already implemented / 363 missing (marks refreshed 2026-11-06)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -1389,7 +1389,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  1396  Martial Coup                             {X}{W}{W}        Sorcery
 [x]  1397  Razorverge Thicket                       {0}              Land
 [x]  1398  Rankle, Master of Pranks                 {2}{B}{B}        Legendary Creature — Faerie Rogue
-[x]  1399  Shatterskull Smashing // Shatterskull, the Hammer Pass {2}              Sorcery // Land
+[ ]  1399  Shatterskull Smashing // Shatterskull, the Hammer Pass {2}              Sorcery // Land
 [x]  1400  Grave Titan                              {4}{B}{B}        Creature — Giant
 [x]  1401  Weftstalker Ardent                       {2}{R}           Creature — Drix Artificer
 [x]  1402  Thousand-Year Storm                      {4}{U}{R}        Enchantment
