@@ -260,6 +260,7 @@ import _poolFangrenMarauder from "../pool/fangren-marauder.js";
 import _poolFarsightMask from "../pool/farsight-mask.js";
 import _poolFatedReturn from "../pool/fated-return.js";
 import _poolFeralLightning from "../pool/feral-lightning.js";
+import _poolFerociousColonist from "../pool/ferocious-colonist.js";
 import _poolFerraforYoungYew from "../pool/ferrafor-young-yew.js";
 import _poolFertileGround from "../pool/fertile-ground.js";
 import _poolFiendHunter from "../pool/fiend-hunter.js";
@@ -315,6 +316,7 @@ import _poolGlimmeringAngel from "../pool/glimmering-angel.js";
 import _poolGlimmerpointStag from "../pool/glimmerpoint-stag.js";
 import _poolGloryOfWarfare from "../pool/glory-of-warfare.js";
 import _poolGluttonousSlime from "../pool/gluttonous-slime.js";
+import _poolGnarlingTarg from "../pool/gnarling-targ.js";
 import _poolGnollHunter from "../pool/gnoll-hunter.js";
 import _poolGnottvoldSlumbermound from "../pool/gnottvold-slumbermound.js";
 import _poolGoblinArsonist from "../pool/goblin-arsonist.js";
@@ -412,6 +414,7 @@ import _poolJwariDisruption from "../pool/jwari-disruption.js";
 import _poolKamahlsDesire from "../pool/kamahls-desire.js";
 import _poolKamahlsSledge from "../pool/kamahls-sledge.js";
 import _poolKamizObscuraOculus from "../pool/kamiz-obscura-oculus.js";
+import _poolKangSuspiciousCaptain from "../pool/kang-suspicious-captain.js";
 import _poolKavLandseeker from "../pool/kav-landseeker.js";
 import _poolKazanduNectarpot from "../pool/kazandu-nectarpot.js";
 import _poolKazarovSengirPureblood from "../pool/kazarov-sengir-pureblood.js";
@@ -1225,6 +1228,7 @@ const shard: CardShard = {
     _poolFarsightMask,
     _poolFatedReturn,
     _poolFeralLightning,
+    _poolFerociousColonist,
     _poolFerraforYoungYew,
     _poolFertileGround,
     _poolFiendHunter,
@@ -1280,6 +1284,7 @@ const shard: CardShard = {
     _poolGlimmerpointStag,
     _poolGloryOfWarfare,
     _poolGluttonousSlime,
+    _poolGnarlingTarg,
     _poolGnollHunter,
     _poolGnottvoldSlumbermound,
     _poolGoblinArsonist,
@@ -1377,6 +1382,7 @@ const shard: CardShard = {
     _poolKamahlsDesire,
     _poolKamahlsSledge,
     _poolKamizObscuraOculus,
+    _poolKangSuspiciousCaptain,
     _poolKavLandseeker,
     _poolKazanduNectarpot,
     _poolKazarovSengirPureblood,

@@ -80,6 +80,7 @@ import _poolBeornsHospitality from "../pool/beorns-hospitality.js";
 import _poolBewilderingBlizzard from "../pool/bewildering-blizzard.js";
 import _poolBilbosRing from "../pool/bilbos-ring.js";
 import _poolBillThePony from "../pool/bill-the-pony.js";
+import _poolBioAssetAllocator from "../pool/bio-asset-allocator.js";
 import _poolBiotransference from "../pool/biotransference.js";
 import _poolBitterthornNissasAnimus from "../pool/bitterthorn-nissas-animus.js";
 import _poolBlastoneuron from "../pool/blastoneuron.js";
@@ -198,6 +199,7 @@ import _poolDiamondPickAxe from "../pool/diamond-pick-axe.js";
 import _poolDieYoung from "../pool/die-young.js";
 import _poolDiligentZookeeper from "../pool/diligent-zookeeper.js";
 import _poolDionBahamutsDominant from "../pool/dion-bahamuts-dominant.js";
+import _poolDirectHit from "../pool/direct-hit.js";
 import _poolDiregrafScavenger from "../pool/diregraf-scavenger.js";
 import _poolDirgeOfDread from "../pool/dirge-of-dread.js";
 import _poolDiscordantSpirit from "../pool/discordant-spirit.js";
@@ -426,6 +428,7 @@ import _poolIrrigatedFarmland from "../pool/irrigated-farmland.js";
 import _poolJaceTheMindSculptor from "../pool/jace-the-mind-sculptor.js";
 import _poolJackedRabbit from "../pool/jacked-rabbit.js";
 import _poolJalumTome from "../pool/jalum-tome.js";
+import _poolJaniceRandEssentialAide from "../pool/janice-rand-essential-aide.js";
 import _poolJasmineDragonTeaShop from "../pool/jasmine-dragon-tea-shop.js";
 import _poolJasonBrightGlowingProphet from "../pool/jason-bright-glowing-prophet.js";
 import _poolJayaBallardTaskMage from "../pool/jaya-ballard-task-mage.js";
@@ -501,7 +504,9 @@ import _poolManaforceMace from "../pool/manaforce-mace.js";
 import _poolMaraudingMaulhorn from "../pool/marauding-maulhorn.js";
 import _poolMarduRunemark from "../pool/mardu-runemark.js";
 import _poolMartialLaw from "../pool/martial-law.js";
+import _poolMartokHeroOfTheEmpire from "../pool/martok-hero-of-the-empire.js";
 import _poolMarvinMurderousMimic from "../pool/marvin-murderous-mimic.js";
+import _poolMaturationChamber from "../pool/maturation-chamber.js";
 import _poolMaulfistDoorbuster from "../pool/maulfist-doorbuster.js";
 import _poolMausoleumHarpy from "../pool/mausoleum-harpy.js";
 import _poolMegatherium from "../pool/megatherium.js";
@@ -1079,6 +1084,7 @@ const shard: CardShard = {
     _poolBewilderingBlizzard,
     _poolBilbosRing,
     _poolBillThePony,
+    _poolBioAssetAllocator,
     _poolBiotransference,
     _poolBitterthornNissasAnimus,
     _poolBlastoneuron,
@@ -1197,6 +1203,7 @@ const shard: CardShard = {
     _poolDieYoung,
     _poolDiligentZookeeper,
     _poolDionBahamutsDominant,
+    _poolDirectHit,
     _poolDiregrafScavenger,
     _poolDirgeOfDread,
     _poolDiscordantSpirit,
@@ -1425,6 +1432,7 @@ const shard: CardShard = {
     _poolJaceTheMindSculptor,
     _poolJackedRabbit,
     _poolJalumTome,
+    _poolJaniceRandEssentialAide,
     _poolJasmineDragonTeaShop,
     _poolJasonBrightGlowingProphet,
     _poolJayaBallardTaskMage,
@@ -1500,7 +1508,9 @@ const shard: CardShard = {
     _poolMaraudingMaulhorn,
     _poolMarduRunemark,
     _poolMartialLaw,
+    _poolMartokHeroOfTheEmpire,
     _poolMarvinMurderousMimic,
+    _poolMaturationChamber,
     _poolMaulfistDoorbuster,
     _poolMausoleumHarpy,
     _poolMegatherium,

@@ -428,6 +428,7 @@ import _poolKjeldoranHomeGuard from "../pool/kjeldoran-home-guard.js";
 import _poolKnacksawClique from "../pool/knacksaw-clique.js";
 import _poolKnightOfGrace from "../pool/knight-of-grace.js";
 import _poolKnightOfMeadowgrain from "../pool/knight-of-meadowgrain.js";
+import _poolKorCauseOfVengeance from "../pool/kor-cause-of-vengeance.js";
 import _poolKotisSibsigChampion from "../pool/kotis-sibsig-champion.js";
 import _poolKrakenHatchling from "../pool/kraken-hatchling.js";
 import _poolKranioceros from "../pool/kranioceros.js";
@@ -564,6 +565,7 @@ import _poolPhyrexianIronworks from "../pool/phyrexian-ironworks.js";
 import _poolPhyrexianRevoker from "../pool/phyrexian-revoker.js";
 import _poolPhyrexianVivisector from "../pool/phyrexian-vivisector.js";
 import _poolPicardLeadingByExample from "../pool/picard-leading-by-example.js";
+import _poolPicardSteadfastCaptain from "../pool/picard-steadfast-captain.js";
 import _poolPickYourPoison from "../pool/pick-your-poison.js";
 import _poolPillage from "../pool/pillage.js";
 import _poolPinionFeast from "../pool/pinion-feast.js";
@@ -1377,6 +1379,7 @@ const shard: CardShard = {
     _poolKnacksawClique,
     _poolKnightOfGrace,
     _poolKnightOfMeadowgrain,
+    _poolKorCauseOfVengeance,
     _poolKotisSibsigChampion,
     _poolKrakenHatchling,
     _poolKranioceros,
@@ -1513,6 +1516,7 @@ const shard: CardShard = {
     _poolPhyrexianRevoker,
     _poolPhyrexianVivisector,
     _poolPicardLeadingByExample,
+    _poolPicardSteadfastCaptain,
     _poolPickYourPoison,
     _poolPillage,
     _poolPinionFeast,

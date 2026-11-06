@@ -362,6 +362,7 @@ import _poolGhostLitRaider from "../pool/ghost-lit-raider.js";
 import _poolGhostVacuum from "../pool/ghost-vacuum.js";
 import _poolGiantFly from "../pool/giant-fly.js";
 import _poolGiantOpportunity from "../pool/giant-opportunity.js";
+import _poolGiantSpaceAmoeba from "../pool/giant-space-amoeba.js";
 import _poolGiantSpider from "../pool/giant-spider.js";
 import _poolGildedGhoda from "../pool/gilded-ghoda.js";
 import _poolGildedLotus from "../pool/gilded-lotus.js";
@@ -378,6 +379,7 @@ import _poolGoldenhideOx from "../pool/goldenhide-ox.js";
 import _poolGoldmeadowLookout from "../pool/goldmeadow-lookout.js";
 import _poolGoliathMassManipulator from "../pool/goliath-mass-manipulator.js";
 import _poolGorillaTitan from "../pool/gorilla-titan.js";
+import _poolGornCaptain from "../pool/gorn-captain.js";
 import _poolGraniteGrip from "../pool/granite-grip.js";
 import _poolGrapplingKraken from "../pool/grappling-kraken.js";
 import _poolGraspingScoundrel from "../pool/grasping-scoundrel.js";
@@ -692,6 +694,7 @@ import _poolPsychicImpetus from "../pool/psychic-impetus.js";
 import _poolPsychicPuppetry from "../pool/psychic-puppetry.js";
 import _poolPyrewildShaman from "../pool/pyrewild-shaman.js";
 import _poolQiqirnMerchant from "../pool/qiqirn-merchant.js";
+import _poolQueensDiamond from "../pool/queens-diamond.js";
 import _poolQuestingDruid from "../pool/questing-druid.js";
 import _poolRabarooTroop from "../pool/rabaroo-troop.js";
 import _poolRagamuffinRaptor from "../pool/ragamuffin-raptor.js";
@@ -879,6 +882,7 @@ import _poolTaskmasterMercenaryMimic from "../pool/taskmaster-mercenary-mimic.js
 import _poolTasteOfDeath from "../pool/taste-of-death.js";
 import _poolTazeemRoilmage from "../pool/tazeem-roilmage.js";
 import _poolTeleportal from "../pool/teleportal.js";
+import _poolTenaciousTosk from "../pool/tenacious-tosk.js";
 import _poolTezzeretsGatebreaker from "../pool/tezzerets-gatebreaker.js";
 import _poolTheBalrogFlameOfUdun from "../pool/the-balrog-flame-of-udun.js";
 import _poolTheDestinedWhiteMage from "../pool/the-destined-white-mage.js";
@@ -987,6 +991,7 @@ import _poolWitchsCottage from "../pool/witchs-cottage.js";
 import _poolWizardsSpellbook from "../pool/wizards-spellbook.js";
 import _poolWoodlandChangeling from "../pool/woodland-changeling.js";
 import _poolWordOfBinding from "../pool/word-of-binding.js";
+import _poolWorfStillNotMerry from "../pool/worf-still-not-merry.js";
 import _poolWreckAndRebuild from "../pool/wreck-and-rebuild.js";
 import _poolWretchedConfluence from "../pool/wretched-confluence.js";
 import _poolWuSpy from "../pool/wu-spy.js";
@@ -1383,6 +1388,7 @@ const shard: CardShard = {
     _poolGhostVacuum,
     _poolGiantFly,
     _poolGiantOpportunity,
+    _poolGiantSpaceAmoeba,
     _poolGiantSpider,
     _poolGildedGhoda,
     _poolGildedLotus,
@@ -1399,6 +1405,7 @@ const shard: CardShard = {
     _poolGoldmeadowLookout,
     _poolGoliathMassManipulator,
     _poolGorillaTitan,
+    _poolGornCaptain,
     _poolGraniteGrip,
     _poolGrapplingKraken,
     _poolGraspingScoundrel,
@@ -1713,6 +1720,7 @@ const shard: CardShard = {
     _poolPsychicPuppetry,
     _poolPyrewildShaman,
     _poolQiqirnMerchant,
+    _poolQueensDiamond,
     _poolQuestingDruid,
     _poolRabarooTroop,
     _poolRagamuffinRaptor,
@@ -1900,6 +1908,7 @@ const shard: CardShard = {
     _poolTasteOfDeath,
     _poolTazeemRoilmage,
     _poolTeleportal,
+    _poolTenaciousTosk,
     _poolTezzeretsGatebreaker,
     _poolTheBalrogFlameOfUdun,
     _poolTheDestinedWhiteMage,
@@ -2008,6 +2017,7 @@ const shard: CardShard = {
     _poolWizardsSpellbook,
     _poolWoodlandChangeling,
     _poolWordOfBinding,
+    _poolWorfStillNotMerry,
     _poolWreckAndRebuild,
     _poolWretchedConfluence,
     _poolWuSpy,

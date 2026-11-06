@@ -892,6 +892,7 @@ import _poolTwilightProphet from "../pool/twilight-prophet.js";
 import _poolTwinbladeInvocation from "../pool/twinblade-invocation.js";
 import _poolTwistedRiddlekeeper from "../pool/twisted-riddlekeeper.js";
 import _poolTwoHeadedHunter from "../pool/two-headed-hunter.js";
+import _poolType03BorgVessel from "../pool/type-03-borg-vessel.js";
 import _poolTyroxSauridTyrant from "../pool/tyrox-saurid-tyrant.js";
 import _poolUltimateAlliance from "../pool/ultimate-alliance.js";
 import _poolUndeadWarchief from "../pool/undead-warchief.js";
@@ -1885,6 +1886,7 @@ const shard: CardShard = {
     _poolTwinbladeInvocation,
     _poolTwistedRiddlekeeper,
     _poolTwoHeadedHunter,
+    _poolType03BorgVessel,
     _poolTyroxSauridTyrant,
     _poolUltimateAlliance,
     _poolUndeadWarchief,

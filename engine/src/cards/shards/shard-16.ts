@@ -261,6 +261,7 @@ import _poolExplosiveEntry from "../pool/explosive-entry.js";
 import _poolExtravagantReplication from "../pool/extravagant-replication.js";
 import _poolExtruder from "../pool/extruder.js";
 import _poolEyesInTheSkies from "../pool/eyes-in-the-skies.js";
+import _poolEzriDaxNewlyJoined from "../pool/ezri-dax-newly-joined.js";
 import _poolEzrimAgencyChief from "../pool/ezrim-agency-chief.js";
 import _poolFaerieSeer from "../pool/faerie-seer.js";
 import _poolFalconJoaquinTorres from "../pool/falcon-joaquin-torres.js";
@@ -488,6 +489,7 @@ import _poolLoreSeeker from "../pool/lore-seeker.js";
 import _poolLosheelClockworkScholar from "../pool/losheel-clockwork-scholar.js";
 import _poolLowlandBasilisk from "../pool/lowland-basilisk.js";
 import _poolLoxodonLineBreaker from "../pool/loxodon-line-breaker.js";
+import _poolLtArexEverAdapting from "../pool/lt-arex-ever-adapting.js";
 import _poolLunarRejection from "../pool/lunar-rejection.js";
 import _poolLynx from "../pool/lynx.js";
 import _poolLyzoldaTheBloodWitch from "../pool/lyzolda-the-blood-witch.js";
@@ -919,6 +921,7 @@ import _poolTwistedExperiment from "../pool/twisted-experiment.js";
 import _poolTymaretTheMurderKing from "../pool/tymaret-the-murder-king.js";
 import _poolTyrannicalPitlord from "../pool/tyrannical-pitlord.js";
 import _poolUSSDiscoveryAtBlackAlert from "../pool/u-s-s-discovery-at-black-alert.js";
+import _poolUSSPrometheusPrototype from "../pool/u-s-s-prometheus-prototype.js";
 import _poolUlvenwaldMysteries from "../pool/ulvenwald-mysteries.js";
 import _poolUnbenderTine from "../pool/unbender-tine.js";
 import _poolUndermountainAdventurer from "../pool/undermountain-adventurer.js";
@@ -1305,6 +1308,7 @@ const shard: CardShard = {
     _poolExtravagantReplication,
     _poolExtruder,
     _poolEyesInTheSkies,
+    _poolEzriDaxNewlyJoined,
     _poolEzrimAgencyChief,
     _poolFaerieSeer,
     _poolFalconJoaquinTorres,
@@ -1532,6 +1536,7 @@ const shard: CardShard = {
     _poolLosheelClockworkScholar,
     _poolLowlandBasilisk,
     _poolLoxodonLineBreaker,
+    _poolLtArexEverAdapting,
     _poolLunarRejection,
     _poolLynx,
     _poolLyzoldaTheBloodWitch,
@@ -1963,6 +1968,7 @@ const shard: CardShard = {
     _poolTymaretTheMurderKing,
     _poolTyrannicalPitlord,
     _poolUSSDiscoveryAtBlackAlert,
+    _poolUSSPrometheusPrototype,
     _poolUlvenwaldMysteries,
     _poolUnbenderTine,
     _poolUndermountainAdventurer,

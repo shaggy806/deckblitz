@@ -109,6 +109,7 @@ import _poolBolgOfTheNorth from "../pool/bolg-of-the-north.js";
 import _poolBoltOfKeranos from "../pool/bolt-of-keranos.js";
 import _poolBondsOfQuicksilver from "../pool/bonds-of-quicksilver.js";
 import _poolBoonReflection from "../pool/boon-reflection.js";
+import _poolBorgScoutSphere from "../pool/borg-scout-sphere.js";
 import _poolBorosLocket from "../pool/boros-locket.js";
 import _poolBothersomeQuasit from "../pool/bothersome-quasit.js";
 import _poolBounceOff from "../pool/bounce-off.js";
@@ -334,6 +335,7 @@ import _poolFungalBehemoth from "../pool/fungal-behemoth.js";
 import _poolFungalRebirth from "../pool/fungal-rebirth.js";
 import _poolFurnaceSpirit from "../pool/furnace-spirit.js";
 import _poolGaeasEmbrace from "../pool/gaeas-embrace.js";
+import _poolGaghSlinger from "../pool/gagh-slinger.js";
 import _poolGaladrielGiftGiver from "../pool/galadriel-gift-giver.js";
 import _poolGargantuanLeech from "../pool/gargantuan-leech.js";
 import _poolGarrisonCat from "../pool/garrison-cat.js";
@@ -642,6 +644,7 @@ import _poolPunishment from "../pool/punishment.js";
 import _poolPutridGoblin from "../pool/putrid-goblin.js";
 import _poolPyreOfHeroes from "../pool/pyre-of-heroes.js";
 import _poolPyreswipeHawk from "../pool/pyreswipe-hawk.js";
+import _poolQYourIllustriousHost from "../pool/q-your-illustrious-host.js";
 import _poolQasaliPridemage from "../pool/qasali-pridemage.js";
 import _poolQuagSickness from "../pool/quag-sickness.js";
 import _poolQuagmireDruid from "../pool/quagmire-druid.js";
@@ -703,6 +706,7 @@ import _poolReverentHunter from "../pool/reverent-hunter.js";
 import _poolRewardTheFaithful from "../pool/reward-the-faithful.js";
 import _poolReyhanLastOfTheAbzan from "../pool/reyhan-last-of-the-abzan.js";
 import _poolRidgescaleTusker from "../pool/ridgescale-tusker.js";
+import _poolRightOfVengeance from "../pool/right-of-vengeance.js";
 import _poolRiptideMangler from "../pool/riptide-mangler.js";
 import _poolRiseToGlory from "../pool/rise-to-glory.js";
 import _poolRishkarPeemaRenegade from "../pool/rishkar-peema-renegade.js";
@@ -1137,6 +1141,7 @@ const shard: CardShard = {
     _poolBoltOfKeranos,
     _poolBondsOfQuicksilver,
     _poolBoonReflection,
+    _poolBorgScoutSphere,
     _poolBorosLocket,
     _poolBothersomeQuasit,
     _poolBounceOff,
@@ -1362,6 +1367,7 @@ const shard: CardShard = {
     _poolFungalRebirth,
     _poolFurnaceSpirit,
     _poolGaeasEmbrace,
+    _poolGaghSlinger,
     _poolGaladrielGiftGiver,
     _poolGargantuanLeech,
     _poolGarrisonCat,
@@ -1670,6 +1676,7 @@ const shard: CardShard = {
     _poolPutridGoblin,
     _poolPyreOfHeroes,
     _poolPyreswipeHawk,
+    _poolQYourIllustriousHost,
     _poolQasaliPridemage,
     _poolQuagSickness,
     _poolQuagmireDruid,
@@ -1731,6 +1738,7 @@ const shard: CardShard = {
     _poolRewardTheFaithful,
     _poolReyhanLastOfTheAbzan,
     _poolRidgescaleTusker,
+    _poolRightOfVengeance,
     _poolRiptideMangler,
     _poolRiseToGlory,
     _poolRishkarPeemaRenegade,

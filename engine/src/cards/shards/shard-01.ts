@@ -161,6 +161,7 @@ import _poolCripplingChill from "../pool/crippling-chill.js";
 import _poolCrisisOfConscience from "../pool/crisis-of-conscience.js";
 import _poolCroakingCurse from "../pool/croaking-curse.js";
 import _poolCruelDeceiver from "../pool/cruel-deceiver.js";
+import _poolCryogenicStasis from "../pool/cryogenic-stasis.js";
 import _poolCryotheoryAdept from "../pool/cryotheory-adept.js";
 import _poolCryptothrall from "../pool/cryptothrall.js";
 import _poolCurseArtifact from "../pool/curse-artifact.js";
@@ -369,6 +370,7 @@ import _poolHustleBustle from "../pool/hustle-bustle.js";
 import _poolHylderblade from "../pool/hylderblade.js";
 import _poolHypervoltGrasp from "../pool/hypervolt-grasp.js";
 import _poolHypnoticSpecter from "../pool/hypnotic-specter.js";
+import _poolIKSNeghvarImperialFlagship from "../pool/i-k-s-neghvar-imperial-flagship.js";
 import _poolIcatianInfantry from "../pool/icatian-infantry.js";
 import _poolIcebindPillar from "../pool/icebind-pillar.js";
 import _poolIchthyomorphosis from "../pool/ichthyomorphosis.js";
@@ -558,6 +560,7 @@ import _poolOminousCemetery from "../pool/ominous-cemetery.js";
 import _poolOmnipresence from "../pool/omnipresence.js";
 import _poolOpalGargoyle from "../pool/opal-gargoyle.js";
 import _poolOpalPalace from "../pool/opal-palace.js";
+import _poolOperationsOfficer from "../pool/operations-officer.js";
 import _poolOphidian from "../pool/ophidian.js";
 import _poolOrdruunVeteran from "../pool/ordruun-veteran.js";
 import _poolOrnateKanzashi from "../pool/ornate-kanzashi.js";
@@ -692,6 +695,7 @@ import _poolScionOfTheWild from "../pool/scion-of-the-wild.js";
 import _poolScoldingAdministrator from "../pool/scolding-administrator.js";
 import _poolScoriaWurm from "../pool/scoria-wurm.js";
 import _poolScornedVillager from "../pool/scorned-villager.js";
+import _poolScottyChiefEngineer from "../pool/scotty-chief-engineer.js";
 import _poolScourTheLaboratory from "../pool/scour-the-laboratory.js";
 import _poolScrabblingSkullcrab from "../pool/scrabbling-skullcrab.js";
 import _poolScreamingPhantom from "../pool/screaming-phantom.js";
@@ -860,6 +864,7 @@ import _poolTurnToDust from "../pool/turn-to-dust.js";
 import _poolTwiceTheRage from "../pool/twice-the-rage.js";
 import _poolTwilightPanther from "../pool/twilight-panther.js";
 import _poolType2Phaser from "../pool/type-2-phaser.js";
+import _poolUSSEnterpriseCTimeTossed from "../pool/u-s-s-enterprise-c-time-tossed.js";
 import _poolUlnaAlleyShopkeep from "../pool/ulna-alley-shopkeep.js";
 import _poolUltronsAuxiliary from "../pool/ultrons-auxiliary.js";
 import _poolUlvenwaldTracker from "../pool/ulvenwald-tracker.js";
@@ -888,6 +893,7 @@ import _poolVengefulDead from "../pool/vengeful-dead.js";
 import _poolVengefulPossession from "../pool/vengeful-possession.js";
 import _poolVentifactBottle from "../pool/ventifact-bottle.js";
 import _poolVeteranCavalier from "../pool/veteran-cavalier.js";
+import _poolVicFontaineOneNightOnly from "../pool/vic-fontaine-one-night-only.js";
 import _poolVipersKiss from "../pool/vipers-kiss.js";
 import _poolVirusBeetle from "../pool/virus-beetle.js";
 import _poolVisaraTheDreadful from "../pool/visara-the-dreadful.js";
@@ -1124,6 +1130,7 @@ const shard: CardShard = {
     _poolCrisisOfConscience,
     _poolCroakingCurse,
     _poolCruelDeceiver,
+    _poolCryogenicStasis,
     _poolCryotheoryAdept,
     _poolCryptothrall,
     _poolCurseArtifact,
@@ -1332,6 +1339,7 @@ const shard: CardShard = {
     _poolHylderblade,
     _poolHypervoltGrasp,
     _poolHypnoticSpecter,
+    _poolIKSNeghvarImperialFlagship,
     _poolIcatianInfantry,
     _poolIcebindPillar,
     _poolIchthyomorphosis,
@@ -1521,6 +1529,7 @@ const shard: CardShard = {
     _poolOmnipresence,
     _poolOpalGargoyle,
     _poolOpalPalace,
+    _poolOperationsOfficer,
     _poolOphidian,
     _poolOrdruunVeteran,
     _poolOrnateKanzashi,
@@ -1655,6 +1664,7 @@ const shard: CardShard = {
     _poolScoldingAdministrator,
     _poolScoriaWurm,
     _poolScornedVillager,
+    _poolScottyChiefEngineer,
     _poolScourTheLaboratory,
     _poolScrabblingSkullcrab,
     _poolScreamingPhantom,
@@ -1823,6 +1833,7 @@ const shard: CardShard = {
     _poolTwiceTheRage,
     _poolTwilightPanther,
     _poolType2Phaser,
+    _poolUSSEnterpriseCTimeTossed,
     _poolUlnaAlleyShopkeep,
     _poolUltronsAuxiliary,
     _poolUlvenwaldTracker,
@@ -1851,6 +1862,7 @@ const shard: CardShard = {
     _poolVengefulPossession,
     _poolVentifactBottle,
     _poolVeteranCavalier,
+    _poolVicFontaineOneNightOnly,
     _poolVipersKiss,
     _poolVirusBeetle,
     _poolVisaraTheDreadful,

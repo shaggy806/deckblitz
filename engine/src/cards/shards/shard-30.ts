@@ -25,6 +25,7 @@ import _poolAlphinaudLeveilleur from "../pool/alphinaud-leveilleur.js";
 import _poolAltarOfBone from "../pool/altar-of-bone.js";
 import _poolAltarOfThePantheon from "../pool/altar-of-the-pantheon.js";
 import _poolAmaliaBenavidesAguirre from "../pool/amalia-benavides-aguirre.js";
+import _poolAmandaGraysonLogicsLink from "../pool/amanda-grayson-logics-link.js";
 import _poolAmbitiousDragonborn from "../pool/ambitious-dragonborn.js";
 import _poolAmprynTactician from "../pool/ampryn-tactician.js";
 import _poolAnabaShaman from "../pool/anaba-shaman.js";
@@ -60,6 +61,7 @@ import _poolAzoriusGuildgate from "../pool/azorius-guildgate.js";
 import _poolAzulaAlwaysLies from "../pool/azula-always-lies.js";
 import _poolBairdStewardOfArgive from "../pool/baird-steward-of-argive.js";
 import _poolBalambGardenSeedAcademy from "../pool/balamb-garden-seed-academy.js";
+import _poolBalanceOfTerror from "../pool/balance-of-terror.js";
 import _poolBalothNull from "../pool/baloth-null.js";
 import _poolBalothWoodcrasher from "../pool/baloth-woodcrasher.js";
 import _poolBannerhideKrushok from "../pool/bannerhide-krushok.js";
@@ -134,6 +136,7 @@ import _poolChannelerInitiate from "../pool/channeler-initiate.js";
 import _poolChaosImps from "../pool/chaos-imps.js";
 import _poolChariotOfVictory from "../pool/chariot-of-victory.js";
 import _poolChartoothCougar from "../pool/chartooth-cougar.js";
+import _poolChiefMilesObrien from "../pool/chief-miles-obrien.js";
 import _poolChimeOfNight from "../pool/chime-of-night.js";
 import _poolChromaticSphere from "../pool/chromatic-sphere.js";
 import _poolChromiumTheMutable from "../pool/chromium-the-mutable.js";
@@ -181,6 +184,7 @@ import _poolCutRibbons from "../pool/cut-ribbons.js";
 import _poolDancersChakrams from "../pool/dancers-chakrams.js";
 import _poolDarettiScrapSavant from "../pool/daretti-scrap-savant.js";
 import _poolDaringDiscovery from "../pool/daring-discovery.js";
+import _poolDataProfessorOfHumanities from "../pool/data-professor-of-humanities.js";
 import _poolDauthiTrapper from "../pool/dauthi-trapper.js";
 import _poolDawnbringerCleric from "../pool/dawnbringer-cleric.js";
 import _poolDawnfeatherEagle from "../pool/dawnfeather-eagle.js";
@@ -366,6 +370,7 @@ import _poolGreaterForgeling from "../pool/greater-forgeling.js";
 import _poolGreenWard from "../pool/green-ward.js";
 import _poolGrenzosRuffians from "../pool/grenzos-ruffians.js";
 import _poolGridlock from "../pool/gridlock.js";
+import _poolGrilkaWidowedWarrior from "../pool/grilka-widowed-warrior.js";
 import _poolGrishnakhBrashInstigator from "../pool/grishnakh-brash-instigator.js";
 import _poolGrixisCharm from "../pool/grixis-charm.js";
 import _poolGrubStoriedMatriarch from "../pool/grub-storied-matriarch.js";
@@ -886,6 +891,7 @@ import _poolTrickstersStratagem from "../pool/tricksters-stratagem.js";
 import _poolTripNoose from "../pool/trip-noose.js";
 import _poolTrustyCompanion from "../pool/trusty-companion.js";
 import _poolTunnelTipster from "../pool/tunnel-tipster.js";
+import _poolTuvokChiefTacticalOfficer from "../pool/tuvok-chief-tactical-officer.js";
 import _poolTwinflameTravelers from "../pool/twinflame-travelers.js";
 import _poolTyrantOfKherRidges from "../pool/tyrant-of-kher-ridges.js";
 import _poolTyrantsChoice from "../pool/tyrants-choice.js";
@@ -1019,6 +1025,7 @@ const shard: CardShard = {
     _poolAltarOfBone,
     _poolAltarOfThePantheon,
     _poolAmaliaBenavidesAguirre,
+    _poolAmandaGraysonLogicsLink,
     _poolAmbitiousDragonborn,
     _poolAmprynTactician,
     _poolAnabaShaman,
@@ -1054,6 +1061,7 @@ const shard: CardShard = {
     _poolAzulaAlwaysLies,
     _poolBairdStewardOfArgive,
     _poolBalambGardenSeedAcademy,
+    _poolBalanceOfTerror,
     _poolBalothNull,
     _poolBalothWoodcrasher,
     _poolBannerhideKrushok,
@@ -1128,6 +1136,7 @@ const shard: CardShard = {
     _poolChaosImps,
     _poolChariotOfVictory,
     _poolChartoothCougar,
+    _poolChiefMilesObrien,
     _poolChimeOfNight,
     _poolChromaticSphere,
     _poolChromiumTheMutable,
@@ -1175,6 +1184,7 @@ const shard: CardShard = {
     _poolDancersChakrams,
     _poolDarettiScrapSavant,
     _poolDaringDiscovery,
+    _poolDataProfessorOfHumanities,
     _poolDauthiTrapper,
     _poolDawnbringerCleric,
     _poolDawnfeatherEagle,
@@ -1360,6 +1370,7 @@ const shard: CardShard = {
     _poolGreenWard,
     _poolGrenzosRuffians,
     _poolGridlock,
+    _poolGrilkaWidowedWarrior,
     _poolGrishnakhBrashInstigator,
     _poolGrixisCharm,
     _poolGrubStoriedMatriarch,
@@ -1880,6 +1891,7 @@ const shard: CardShard = {
     _poolTripNoose,
     _poolTrustyCompanion,
     _poolTunnelTipster,
+    _poolTuvokChiefTacticalOfficer,
     _poolTwinflameTravelers,
     _poolTyrantOfKherRidges,
     _poolTyrantsChoice,

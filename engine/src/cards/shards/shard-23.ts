@@ -18,6 +18,7 @@ import _poolAlchemistsRefuge from "../pool/alchemists-refuge.js";
 import _poolAlienInvasion from "../pool/alien-invasion.js";
 import _poolAllFatesScroll from "../pool/all-fates-scroll.js";
 import _poolAmbitionsCost from "../pool/ambitions-cost.js";
+import _poolAmbulatoryReactor from "../pool/ambulatory-reactor.js";
 import _poolAnafenzaKinTreeSpirit from "../pool/anafenza-kin-tree-spirit.js";
 import _poolAnaxHardenedInTheForge from "../pool/anax-hardened-in-the-forge.js";
 import _poolAncestorsEmbrace from "../pool/ancestors-embrace.js";
@@ -96,6 +97,7 @@ import _poolBlightHerder from "../pool/blight-herder.js";
 import _poolBlightedSteppe from "../pool/blighted-steppe.js";
 import _poolBlockbuster from "../pool/blockbuster.js";
 import _poolBloodForBones from "../pool/blood-for-bones.js";
+import _poolBloodSportChampion from "../pool/blood-sport-champion.js";
 import _poolBloodcrazedPaladin from "../pool/bloodcrazed-paladin.js";
 import _poolBloodflowConnoisseur from "../pool/bloodflow-connoisseur.js";
 import _poolBloodriteInvoker from "../pool/bloodrite-invoker.js";
@@ -123,6 +125,7 @@ import _poolCabalConditioning from "../pool/cabal-conditioning.js";
 import _poolCabalInitiate from "../pool/cabal-initiate.js";
 import _poolCalmingLicid from "../pool/calming-licid.js";
 import _poolCapashenStandard from "../pool/capashen-standard.js";
+import _poolCaptainJanewayEndgame from "../pool/captain-janeway-endgame.js";
 import _poolCaptainJonathanArcher from "../pool/captain-jonathan-archer.js";
 import _poolCarefulConsideration from "../pool/careful-consideration.js";
 import _poolCarmenCruelSkymarcher from "../pool/carmen-cruel-skymarcher.js";
@@ -148,6 +151,7 @@ import _poolChildOfTheVolcano from "../pool/child-of-the-volcano.js";
 import _poolChoArrimBruiser from "../pool/cho-arrim-bruiser.js";
 import _poolChoke from "../pool/choke.js";
 import _poolChopDown from "../pool/chop-down.js";
+import _poolChristineChapelCombatMedic from "../pool/christine-chapel-combat-medic.js";
 import _poolChurningEddy from "../pool/churning-eddy.js";
 import _poolCliffrunnerBehemoth from "../pool/cliffrunner-behemoth.js";
 import _poolClipWings from "../pool/clip-wings.js";
@@ -157,6 +161,7 @@ import _poolCoalstokeGearhulk from "../pool/coalstoke-gearhulk.js";
 import _poolCoeurl from "../pool/coeurl.js";
 import _poolCogworkAssembler from "../pool/cogwork-assembler.js";
 import _poolCogworkSpy from "../pool/cogwork-spy.js";
+import _poolCommandChair from "../pool/command-chair.js";
 import _poolCommuneWithLava from "../pool/commune-with-lava.js";
 import _poolCommuneWithTheGods from "../pool/commune-with-the-gods.js";
 import _poolCongregationGryff from "../pool/congregation-gryff.js";
@@ -878,6 +883,7 @@ import _poolTravelingBotanist from "../pool/traveling-botanist.js";
 import _poolTreacherousBlessing from "../pool/treacherous-blessing.js";
 import _poolTreacherousGreed from "../pool/treacherous-greed.js";
 import _poolTreetopAmbusher from "../pool/treetop-ambusher.js";
+import _poolTribbleCluster from "../pool/tribble-cluster.js";
 import _poolTrokinHighGuard from "../pool/trokin-high-guard.js";
 import _poolTrollOfKhazadDum from "../pool/troll-of-khazad-dum.js";
 import _poolTrostanisJudgment from "../pool/trostanis-judgment.js";
@@ -1001,6 +1007,7 @@ const shard: CardShard = {
     _poolAlienInvasion,
     _poolAllFatesScroll,
     _poolAmbitionsCost,
+    _poolAmbulatoryReactor,
     _poolAnafenzaKinTreeSpirit,
     _poolAnaxHardenedInTheForge,
     _poolAncestorsEmbrace,
@@ -1079,6 +1086,7 @@ const shard: CardShard = {
     _poolBlightedSteppe,
     _poolBlockbuster,
     _poolBloodForBones,
+    _poolBloodSportChampion,
     _poolBloodcrazedPaladin,
     _poolBloodflowConnoisseur,
     _poolBloodriteInvoker,
@@ -1106,6 +1114,7 @@ const shard: CardShard = {
     _poolCabalInitiate,
     _poolCalmingLicid,
     _poolCapashenStandard,
+    _poolCaptainJanewayEndgame,
     _poolCaptainJonathanArcher,
     _poolCarefulConsideration,
     _poolCarmenCruelSkymarcher,
@@ -1131,6 +1140,7 @@ const shard: CardShard = {
     _poolChoArrimBruiser,
     _poolChoke,
     _poolChopDown,
+    _poolChristineChapelCombatMedic,
     _poolChurningEddy,
     _poolCliffrunnerBehemoth,
     _poolClipWings,
@@ -1140,6 +1150,7 @@ const shard: CardShard = {
     _poolCoeurl,
     _poolCogworkAssembler,
     _poolCogworkSpy,
+    _poolCommandChair,
     _poolCommuneWithLava,
     _poolCommuneWithTheGods,
     _poolCongregationGryff,
@@ -1861,6 +1872,7 @@ const shard: CardShard = {
     _poolTreacherousBlessing,
     _poolTreacherousGreed,
     _poolTreetopAmbusher,
+    _poolTribbleCluster,
     _poolTrokinHighGuard,
     _poolTrollOfKhazadDum,
     _poolTrostanisJudgment,

@@ -322,6 +322,7 @@ import _poolGhoultree from "../pool/ghoultree.js";
 import _poolGhyrsonStarnKelermorph from "../pool/ghyrson-starn-kelermorph.js";
 import _poolGiantMantis from "../pool/giant-mantis.js";
 import _poolGibberingHyenas from "../pool/gibbering-hyenas.js";
+import _poolGintakCharge from "../pool/gintak-charge.js";
 import _poolGitaxianRaptor from "../pool/gitaxian-raptor.js";
 import _poolGiveNoGround from "../pool/give-no-ground.js";
 import _poolGleefulArsonist from "../pool/gleeful-arsonist.js";
@@ -399,6 +400,7 @@ import _poolImmolation from "../pool/immolation.js";
 import _poolImpetuousSunchaser from "../pool/impetuous-sunchaser.js";
 import _poolImprovisedWeaponry from "../pool/improvised-weaponry.js";
 import _poolInThrallToThePit from "../pool/in-thrall-to-the-pit.js";
+import _poolIndelicateHealer from "../pool/indelicate-healer.js";
 import _poolInfectiousBite from "../pool/infectious-bite.js";
 import _poolInklingMascot from "../pool/inkling-mascot.js";
 import _poolInspiredTinkering from "../pool/inspired-tinkering.js";
@@ -416,6 +418,7 @@ import _poolJaredCarthalion from "../pool/jared-carthalion.js";
 import _poolJeditOjanen from "../pool/jedit-ojanen.js";
 import _poolJeeringHomunculus from "../pool/jeering-homunculus.js";
 import _poolJestersCap from "../pool/jesters-cap.js";
+import _poolJoinTheCollective from "../pool/join-the-collective.js";
 import _poolJosuVessLichKnight from "../pool/josu-vess-lich-knight.js";
 import _poolJunglePatrol from "../pool/jungle-patrol.js";
 import _poolKangeeSkyWarden from "../pool/kangee-sky-warden.js";
@@ -1306,6 +1309,7 @@ const shard: CardShard = {
     _poolGhyrsonStarnKelermorph,
     _poolGiantMantis,
     _poolGibberingHyenas,
+    _poolGintakCharge,
     _poolGitaxianRaptor,
     _poolGiveNoGround,
     _poolGleefulArsonist,
@@ -1383,6 +1387,7 @@ const shard: CardShard = {
     _poolImpetuousSunchaser,
     _poolImprovisedWeaponry,
     _poolInThrallToThePit,
+    _poolIndelicateHealer,
     _poolInfectiousBite,
     _poolInklingMascot,
     _poolInspiredTinkering,
@@ -1400,6 +1405,7 @@ const shard: CardShard = {
     _poolJeditOjanen,
     _poolJeeringHomunculus,
     _poolJestersCap,
+    _poolJoinTheCollective,
     _poolJosuVessLichKnight,
     _poolJunglePatrol,
     _poolKangeeSkyWarden,

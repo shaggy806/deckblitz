@@ -11,6 +11,7 @@ import _poolAggressiveMining from "../pool/aggressive-mining.js";
 import _poolAkkiLavarunner from "../pool/akki-lavarunner.js";
 import _poolAkkiWarPaint from "../pool/akki-war-paint.js";
 import _poolAlabornMusketeer from "../pool/alaborn-musketeer.js";
+import _poolAlexanderShipsFool from "../pool/alexander-ships-fool.js";
 import _poolAlibansTower from "../pool/alibans-tower.js";
 import _poolAmberPrison from "../pool/amber-prison.js";
 import _poolAnafenzaTheForemost from "../pool/anafenza-the-foremost.js";
@@ -105,6 +106,7 @@ import _poolChancellorOfTheDross from "../pool/chancellor-of-the-dross.js";
 import _poolChangelingTitan from "../pool/changeling-titan.js";
 import _poolCharisma from "../pool/charisma.js";
 import _poolCharmedClothier from "../pool/charmed-clothier.js";
+import _poolChiefKyleTransporterTech from "../pool/chief-kyle-transporter-tech.js";
 import _poolChitterspitter from "../pool/chitterspitter.js";
 import _poolChivalricAlliance from "../pool/chivalric-alliance.js";
 import _poolChoArrimAlchemist from "../pool/cho-arrim-alchemist.js";
@@ -399,6 +401,7 @@ import _poolKeskitTheFleshSculptor from "../pool/keskit-the-flesh-sculptor.js";
 import _poolKickInTheDoor from "../pool/kick-in-the-door.js";
 import _poolKilnWalker from "../pool/kiln-walker.js";
 import _poolKirkCommandingOfficer from "../pool/kirk-commanding-officer.js";
+import _poolKirkManOfAction from "../pool/kirk-man-of-action.js";
 import _poolKnightOfTheStampede from "../pool/knight-of-the-stampede.js";
 import _poolKnightPaladin from "../pool/knight-paladin.js";
 import _poolKnockoutBlow from "../pool/knockout-blow.js";
@@ -510,6 +513,7 @@ import _poolOgreResister from "../pool/ogre-resister.js";
 import _poolOketrasLastMercy from "../pool/oketras-last-mercy.js";
 import _poolOkoLorwynLiege from "../pool/oko-lorwyn-liege.js";
 import _poolOkoThiefOfCrowns from "../pool/oko-thief-of-crowns.js";
+import _poolOnTheShouldersOfGiants from "../pool/on-the-shoulders-of-giants.js";
 import _poolOonasProwler from "../pool/oonas-prowler.js";
 import _poolOozeGarden from "../pool/ooze-garden.js";
 import _poolOracleOfMulDaya from "../pool/oracle-of-mul-daya.js";
@@ -566,6 +570,7 @@ import _poolReachOfBranches from "../pool/reach-of-branches.js";
 import _poolReadTheTides from "../pool/read-the-tides.js";
 import _poolRealityShift from "../pool/reality-shift.js";
 import _poolRecklessEndeavor from "../pool/reckless-endeavor.js";
+import _poolReconnaissancePartition from "../pool/reconnaissance-partition.js";
 import _poolRecrossThePaths from "../pool/recross-the-paths.js";
 import _poolRegalForce from "../pool/regal-force.js";
 import _poolRejuvenatingSprings from "../pool/rejuvenating-springs.js";
@@ -580,6 +585,7 @@ import _poolRhysticLightning from "../pool/rhystic-lightning.js";
 import _poolRighteousBlow from "../pool/righteous-blow.js";
 import _poolRingOfKalonia from "../pool/ring-of-kalonia.js";
 import _poolRisenExecutioner from "../pool/risen-executioner.js";
+import _poolRiteOfAscension from "../pool/rite-of-ascension.js";
 import _poolRithsAttendant from "../pool/riths-attendant.js";
 import _poolRiverDelta from "../pool/river-delta.js";
 import _poolRoarOfEndlessSong from "../pool/roar-of-endless-song.js";
@@ -902,6 +908,7 @@ const shard: CardShard = {
     _poolAkkiLavarunner,
     _poolAkkiWarPaint,
     _poolAlabornMusketeer,
+    _poolAlexanderShipsFool,
     _poolAlibansTower,
     _poolAmberPrison,
     _poolAnafenzaTheForemost,
@@ -996,6 +1003,7 @@ const shard: CardShard = {
     _poolChangelingTitan,
     _poolCharisma,
     _poolCharmedClothier,
+    _poolChiefKyleTransporterTech,
     _poolChitterspitter,
     _poolChivalricAlliance,
     _poolChoArrimAlchemist,
@@ -1290,6 +1298,7 @@ const shard: CardShard = {
     _poolKickInTheDoor,
     _poolKilnWalker,
     _poolKirkCommandingOfficer,
+    _poolKirkManOfAction,
     _poolKnightOfTheStampede,
     _poolKnightPaladin,
     _poolKnockoutBlow,
@@ -1401,6 +1410,7 @@ const shard: CardShard = {
     _poolOketrasLastMercy,
     _poolOkoLorwynLiege,
     _poolOkoThiefOfCrowns,
+    _poolOnTheShouldersOfGiants,
     _poolOonasProwler,
     _poolOozeGarden,
     _poolOracleOfMulDaya,
@@ -1457,6 +1467,7 @@ const shard: CardShard = {
     _poolReadTheTides,
     _poolRealityShift,
     _poolRecklessEndeavor,
+    _poolReconnaissancePartition,
     _poolRecrossThePaths,
     _poolRegalForce,
     _poolRejuvenatingSprings,
@@ -1471,6 +1482,7 @@ const shard: CardShard = {
     _poolRighteousBlow,
     _poolRingOfKalonia,
     _poolRisenExecutioner,
+    _poolRiteOfAscension,
     _poolRithsAttendant,
     _poolRiverDelta,
     _poolRoarOfEndlessSong,

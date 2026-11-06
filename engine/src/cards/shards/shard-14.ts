@@ -481,6 +481,7 @@ import _poolKindlyStranger from "../pool/kindly-stranger.js";
 import _poolKioraBestsTheSeaGod from "../pool/kiora-bests-the-sea-god.js";
 import _poolKitsuneDawnblade from "../pool/kitsune-dawnblade.js";
 import _poolKjeldoranJavelineer from "../pool/kjeldoran-javelineer.js";
+import _poolKolothTribbleHunter from "../pool/koloth-tribble-hunter.js";
 import _poolKonaRescueBeastie from "../pool/kona-rescue-beastie.js";
 import _poolKorvoldAndTheNobleThief from "../pool/korvold-and-the-noble-thief.js";
 import _poolKrarkTheThumbless from "../pool/krark-the-thumbless.js";
@@ -631,6 +632,7 @@ import _poolPlagueSliver from "../pool/plague-sliver.js";
 import _poolPlagueSpitter from "../pool/plague-spitter.js";
 import _poolPlaguebearer from "../pool/plaguebearer.js";
 import _poolPlaneswalkersMischief from "../pool/planeswalkers-mischief.js";
+import _poolPlanetKiller from "../pool/planet-killer.js";
 import _poolPlanetaryBombardment from "../pool/planetary-bombardment.js";
 import _poolPlasmaBolt from "../pool/plasma-bolt.js";
 import _poolPlumesOfPeace from "../pool/plumes-of-peace.js";
@@ -750,6 +752,7 @@ import _poolShortCircuit from "../pool/short-circuit.js";
 import _poolShriekmaw from "../pool/shriekmaw.js";
 import _poolShrineSteward from "../pool/shrine-steward.js";
 import _poolShuFootSoldiers from "../pool/shu-foot-soldiers.js";
+import _poolSickbayOrderly from "../pool/sickbay-orderly.js";
 import _poolSiegeZombie from "../pool/siege-zombie.js";
 import _poolSiegehornCeratops from "../pool/siegehorn-ceratops.js";
 import _poolSigardaChampionOfLight from "../pool/sigarda-champion-of-light.js";
@@ -803,6 +806,7 @@ import _poolStormFleetNegotiator from "../pool/storm-fleet-negotiator.js";
 import _poolStormShakerOfSkies from "../pool/storm-shaker-of-skies.js";
 import _poolStormchasersTalent from "../pool/stormchasers-talent.js";
 import _poolStrafe from "../pool/strafe.js";
+import _poolStratagemEmulator from "../pool/stratagem-emulator.js";
 import _poolStrategicPlanning from "../pool/strategic-planning.js";
 import _poolStrikeItRich from "../pool/strike-it-rich.js";
 import _poolStrongholdTaskmaster from "../pool/stronghold-taskmaster.js";
@@ -878,6 +882,7 @@ import _poolTrumpetingGnarr from "../pool/trumpeting-gnarr.js";
 import _poolTrustyRetriever from "../pool/trusty-retriever.js";
 import _poolTunnelSurveyor from "../pool/tunnel-surveyor.js";
 import _poolTwinflame from "../pool/twinflame.js";
+import _poolUSSDefiantMirrorMigrant from "../pool/u-s-s-defiant-mirror-migrant.js";
 import _poolUmaraWizard from "../pool/umara-wizard.js";
 import _poolUmbraStalker from "../pool/umbra-stalker.js";
 import _poolUmezawasCharm from "../pool/umezawas-charm.js";
@@ -1471,6 +1476,7 @@ const shard: CardShard = {
     _poolKioraBestsTheSeaGod,
     _poolKitsuneDawnblade,
     _poolKjeldoranJavelineer,
+    _poolKolothTribbleHunter,
     _poolKonaRescueBeastie,
     _poolKorvoldAndTheNobleThief,
     _poolKrarkTheThumbless,
@@ -1621,6 +1627,7 @@ const shard: CardShard = {
     _poolPlagueSpitter,
     _poolPlaguebearer,
     _poolPlaneswalkersMischief,
+    _poolPlanetKiller,
     _poolPlanetaryBombardment,
     _poolPlasmaBolt,
     _poolPlumesOfPeace,
@@ -1740,6 +1747,7 @@ const shard: CardShard = {
     _poolShriekmaw,
     _poolShrineSteward,
     _poolShuFootSoldiers,
+    _poolSickbayOrderly,
     _poolSiegeZombie,
     _poolSiegehornCeratops,
     _poolSigardaChampionOfLight,
@@ -1793,6 +1801,7 @@ const shard: CardShard = {
     _poolStormShakerOfSkies,
     _poolStormchasersTalent,
     _poolStrafe,
+    _poolStratagemEmulator,
     _poolStrategicPlanning,
     _poolStrikeItRich,
     _poolStrongholdTaskmaster,
@@ -1868,6 +1877,7 @@ const shard: CardShard = {
     _poolTrustyRetriever,
     _poolTunnelSurveyor,
     _poolTwinflame,
+    _poolUSSDefiantMirrorMigrant,
     _poolUmaraWizard,
     _poolUmbraStalker,
     _poolUmezawasCharm,

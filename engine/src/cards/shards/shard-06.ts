@@ -243,6 +243,7 @@ import _poolDictateOfTheTwinGods from "../pool/dictate-of-the-twin-gods.js";
 import _poolDihadaBinderOfWills from "../pool/dihada-binder-of-wills.js";
 import _poolDinrovaHorror from "../pool/dinrova-horror.js";
 import _poolDisembowel from "../pool/disembowel.js";
+import _poolDisruptorPistol from "../pool/disruptor-pistol.js";
 import _poolDivineSmite from "../pool/divine-smite.js";
 import _poolDjinnOfTheLamp from "../pool/djinn-of-the-lamp.js";
 import _poolDockworkerDrone from "../pool/dockworker-drone.js";
@@ -451,6 +452,7 @@ import _poolJelevaNephaliasScourge from "../pool/jeleva-nephalias-scourge.js";
 import _poolJerrenCorruptedBishop from "../pool/jerren-corrupted-bishop.js";
 import _poolJinGitaxiasProgressTyrant from "../pool/jin-gitaxias-progress-tyrant.js";
 import _poolJungleLion from "../pool/jungle-lion.js";
+import _poolJuratiCordialQueen from "../pool/jurati-cordial-queen.js";
 import _poolJusticeVanceAstrovik from "../pool/justice-vance-astrovik.js";
 import _poolKagemaroFirstToSuffer from "../pool/kagemaro-first-to-suffer.js";
 import _poolKamiOfLunacy from "../pool/kami-of-lunacy.js";
@@ -469,6 +471,7 @@ import _poolKjeldoranKnight from "../pool/kjeldoran-knight.js";
 import _poolKlauthsWill from "../pool/klauths-will.js";
 import _poolKraulHarpooner from "../pool/kraul-harpooner.js";
 import _poolKreeSentinel from "../pool/kree-sentinel.js";
+import _poolKrugeGenesisSeeker from "../pool/kruge-genesis-seeker.js";
 import _poolKujaGenomeSorcerer from "../pool/kuja-genome-sorcerer.js";
 import _poolKurgadon from "../pool/kurgadon.js";
 import _poolLagoonBreach from "../pool/lagoon-breach.js";
@@ -522,6 +525,7 @@ import _poolMeetingOfMinds from "../pool/meeting-of-minds.js";
 import _poolMeletisCharlatan from "../pool/meletis-charlatan.js";
 import _poolMeliraSylvokOutcast from "../pool/melira-sylvok-outcast.js";
 import _poolMeltTerrain from "../pool/melt-terrain.js";
+import _poolMercifulMandate from "../pool/merciful-mandate.js";
 import _poolMichikoKondaTruthSeeker from "../pool/michiko-konda-truth-seeker.js";
 import _poolMikeyLeoChaosOrder from "../pool/mikey-leo-chaos-order.js";
 import _poolMikokoroCenterOfTheSea from "../pool/mikokoro-center-of-the-sea.js";
@@ -585,6 +589,7 @@ import _poolOutpostSiege from "../pool/outpost-siege.js";
 import _poolOverabundance from "../pool/overabundance.js";
 import _poolOvikaEnigmaGoliath from "../pool/ovika-enigma-goliath.js";
 import _poolOwlbearShepherd from "../pool/owlbear-shepherd.js";
+import _poolOwnTheDay from "../pool/own-the-day.js";
 import _poolPacksFavor from "../pool/packs-favor.js";
 import _poolPaladinOfPrahv from "../pool/paladin-of-prahv.js";
 import _poolPaladinOfTheBloodstained from "../pool/paladin-of-the-bloodstained.js";
@@ -671,6 +676,7 @@ import _poolRiotGear from "../pool/riot-gear.js";
 import _poolRiphookRaider from "../pool/riphook-raider.js";
 import _poolRiptideCrab from "../pool/riptide-crab.js";
 import _poolRivalry from "../pool/rivalry.js";
+import _poolRoLarenDoubleAgent from "../pool/ro-laren-double-agent.js";
 import _poolRoarOfTheWurm from "../pool/roar-of-the-wurm.js";
 import _poolRocketeerBoostbuggy from "../pool/rocketeer-boostbuggy.js";
 import _poolRofellosLlanowarEmissary from "../pool/rofellos-llanowar-emissary.js";
@@ -716,6 +722,7 @@ import _poolServantOfTheConduit from "../pool/servant-of-the-conduit.js";
 import _poolServantOfTheStinger from "../pool/servant-of-the-stinger.js";
 import _poolSetessanChampion from "../pool/setessan-champion.js";
 import _poolSetessanTactics from "../pool/setessan-tactics.js";
+import _poolSevenOfNineTertiaryAdjunct from "../pool/seven-of-nine-tertiary-adjunct.js";
 import _poolSeymourFlux from "../pool/seymour-flux.js";
 import _poolShadesBreath from "../pool/shades-breath.js";
 import _poolShadowLance from "../pool/shadow-lance.js";
@@ -777,6 +784,7 @@ import _poolSquiresLightblade from "../pool/squires-lightblade.js";
 import _poolSquirmingMass from "../pool/squirming-mass.js";
 import _poolStadiumHeadliner from "../pool/stadium-headliner.js";
 import _poolStalkingStones from "../pool/stalking-stones.js";
+import _poolStarshipEnterprise from "../pool/starship-enterprise.js";
 import _poolStoicFarmer from "../pool/stoic-farmer.js";
 import _poolStoneGiantOfHighPass from "../pool/stone-giant-of-high-pass.js";
 import _poolStormFleetSwashbuckler from "../pool/storm-fleet-swashbuckler.js";
@@ -1212,6 +1220,7 @@ const shard: CardShard = {
     _poolDihadaBinderOfWills,
     _poolDinrovaHorror,
     _poolDisembowel,
+    _poolDisruptorPistol,
     _poolDivineSmite,
     _poolDjinnOfTheLamp,
     _poolDockworkerDrone,
@@ -1420,6 +1429,7 @@ const shard: CardShard = {
     _poolJerrenCorruptedBishop,
     _poolJinGitaxiasProgressTyrant,
     _poolJungleLion,
+    _poolJuratiCordialQueen,
     _poolJusticeVanceAstrovik,
     _poolKagemaroFirstToSuffer,
     _poolKamiOfLunacy,
@@ -1438,6 +1448,7 @@ const shard: CardShard = {
     _poolKlauthsWill,
     _poolKraulHarpooner,
     _poolKreeSentinel,
+    _poolKrugeGenesisSeeker,
     _poolKujaGenomeSorcerer,
     _poolKurgadon,
     _poolLagoonBreach,
@@ -1491,6 +1502,7 @@ const shard: CardShard = {
     _poolMeletisCharlatan,
     _poolMeliraSylvokOutcast,
     _poolMeltTerrain,
+    _poolMercifulMandate,
     _poolMichikoKondaTruthSeeker,
     _poolMikeyLeoChaosOrder,
     _poolMikokoroCenterOfTheSea,
@@ -1554,6 +1566,7 @@ const shard: CardShard = {
     _poolOverabundance,
     _poolOvikaEnigmaGoliath,
     _poolOwlbearShepherd,
+    _poolOwnTheDay,
     _poolPacksFavor,
     _poolPaladinOfPrahv,
     _poolPaladinOfTheBloodstained,
@@ -1640,6 +1653,7 @@ const shard: CardShard = {
     _poolRiphookRaider,
     _poolRiptideCrab,
     _poolRivalry,
+    _poolRoLarenDoubleAgent,
     _poolRoarOfTheWurm,
     _poolRocketeerBoostbuggy,
     _poolRofellosLlanowarEmissary,
@@ -1685,6 +1699,7 @@ const shard: CardShard = {
     _poolServantOfTheStinger,
     _poolSetessanChampion,
     _poolSetessanTactics,
+    _poolSevenOfNineTertiaryAdjunct,
     _poolSeymourFlux,
     _poolShadesBreath,
     _poolShadowLance,
@@ -1746,6 +1761,7 @@ const shard: CardShard = {
     _poolSquirmingMass,
     _poolStadiumHeadliner,
     _poolStalkingStones,
+    _poolStarshipEnterprise,
     _poolStoicFarmer,
     _poolStoneGiantOfHighPass,
     _poolStormFleetSwashbuckler,

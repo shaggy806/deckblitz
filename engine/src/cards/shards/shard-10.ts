@@ -278,6 +278,7 @@ import _poolEvacuation from "../pool/evacuation.js";
 import _poolEverflowingChalice from "../pool/everflowing-chalice.js";
 import _poolEvilEyeOfUrborg from "../pool/evil-eye-of-urborg.js";
 import _poolExcavatedWall from "../pool/excavated-wall.js";
+import _poolExocomp from "../pool/exocomp.js";
 import _poolExtinguisherBattleship from "../pool/extinguisher-battleship.js";
 import _poolFairgroundsWarden from "../pool/fairgrounds-warden.js";
 import _poolFaithboundJudge from "../pool/faithbound-judge.js";
@@ -451,6 +452,7 @@ import _poolKnightsCharge from "../pool/knights-charge.js";
 import _poolKrarkClanOgre from "../pool/krark-clan-ogre.js";
 import _poolKratosGodOfWar from "../pool/kratos-god-of-war.js";
 import _poolKraumLudevicsOpus from "../pool/kraum-ludevics-opus.js";
+import _poolKvortClassRaider from "../pool/kvort-class-raider.js";
 import _poolLadyOfLaughter from "../pool/lady-of-laughter.js";
 import _poolLadyOrca from "../pool/lady-orca.js";
 import _poolLateToDinner from "../pool/late-to-dinner.js";
@@ -663,6 +665,7 @@ import _poolRogueArtificialIntelligence from "../pool/rogue-artificial-intellige
 import _poolRogueKavu from "../pool/rogue-kavu.js";
 import _poolRohgahhOfKherKeep from "../pool/rohgahh-of-kher-keep.js";
 import _poolRollRollRollRoll from "../pool/roll-roll-roll-roll.js";
+import _poolRomAndLeetaUnlikelyPair from "../pool/rom-and-leeta-unlikely-pair.js";
 import _poolRoninCavekeeper from "../pool/ronin-cavekeeper.js";
 import _poolRoonOfTheHiddenRealm from "../pool/roon-of-the-hidden-realm.js";
 import _poolRootManipulation from "../pool/root-manipulation.js";
@@ -881,6 +884,7 @@ import _poolTurtleVan from "../pool/turtle-van.js";
 import _poolTwinflameTyrant from "../pool/twinflame-tyrant.js";
 import _poolTwiningTwins from "../pool/twining-twins.js";
 import _poolTwitch from "../pool/twitch.js";
+import _poolUSSStargazerHereAndThere from "../pool/u-s-s-stargazer-here-and-there.js";
 import _poolUltimeciaTimeSorceress from "../pool/ultimecia-time-sorceress.js";
 import _poolUmbralExpanse from "../pool/umbral-expanse.js";
 import _poolUnblinkingObserver from "../pool/unblinking-observer.js";
@@ -1255,6 +1259,7 @@ const shard: CardShard = {
     _poolEverflowingChalice,
     _poolEvilEyeOfUrborg,
     _poolExcavatedWall,
+    _poolExocomp,
     _poolExtinguisherBattleship,
     _poolFairgroundsWarden,
     _poolFaithboundJudge,
@@ -1428,6 +1433,7 @@ const shard: CardShard = {
     _poolKrarkClanOgre,
     _poolKratosGodOfWar,
     _poolKraumLudevicsOpus,
+    _poolKvortClassRaider,
     _poolLadyOfLaughter,
     _poolLadyOrca,
     _poolLateToDinner,
@@ -1640,6 +1646,7 @@ const shard: CardShard = {
     _poolRogueKavu,
     _poolRohgahhOfKherKeep,
     _poolRollRollRollRoll,
+    _poolRomAndLeetaUnlikelyPair,
     _poolRoninCavekeeper,
     _poolRoonOfTheHiddenRealm,
     _poolRootManipulation,
@@ -1858,6 +1865,7 @@ const shard: CardShard = {
     _poolTwinflameTyrant,
     _poolTwiningTwins,
     _poolTwitch,
+    _poolUSSStargazerHereAndThere,
     _poolUltimeciaTimeSorceress,
     _poolUmbralExpanse,
     _poolUnblinkingObserver,

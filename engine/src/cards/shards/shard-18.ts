@@ -376,6 +376,7 @@ import _poolIcetillExplorer from "../pool/icetill-explorer.js";
 import _poolIcewindStalwart from "../pool/icewind-stalwart.js";
 import _poolIllvoiInfiltrator from "../pool/illvoi-infiltrator.js";
 import _poolImADoctorNotA from "../pool/im-a-doctor-not-a.js";
+import _poolImperialHullbreachers from "../pool/imperial-hullbreachers.js";
 import _poolImperialSubduer from "../pool/imperial-subduer.js";
 import _poolIncriminate from "../pool/incriminate.js";
 import _poolIncursionSpecialist from "../pool/incursion-specialist.js";
@@ -398,6 +399,7 @@ import _poolJackOLantern from "../pool/jack-o-lantern.js";
 import _poolJagwaspSwarm from "../pool/jagwasp-swarm.js";
 import _poolJamieMccrimmon from "../pool/jamie-mccrimmon.js";
 import _poolJaredCarthalionTrueHeir from "../pool/jared-carthalion-true-heir.js";
+import _poolJeanLucMonCapitaine from "../pool/jean-luc-mon-capitaine.js";
 import _poolJeditOjanenMercenary from "../pool/jedit-ojanen-mercenary.js";
 import _poolJeditOjanenOfEfrava from "../pool/jedit-ojanen-of-efrava.js";
 import _poolJeweledSpirit from "../pool/jeweled-spirit.js";
@@ -555,6 +557,7 @@ import _poolOmenportVigilante from "../pool/omenport-vigilante.js";
 import _poolOnwardVictory from "../pool/onward-victory.js";
 import _poolOpalineSliver from "../pool/opaline-sliver.js";
 import _poolOpenCommunications from "../pool/open-communications.js";
+import _poolOptimizationAnnex from "../pool/optimization-annex.js";
 import _poolOranRiefInvoker from "../pool/oran-rief-invoker.js";
 import _poolOrbsOfWarding from "../pool/orbs-of-warding.js";
 import _poolOrcishFarmer from "../pool/orcish-farmer.js";
@@ -706,6 +709,7 @@ import _poolSilvercladFerocidons from "../pool/silverclad-ferocidons.js";
 import _poolSilverquillCharm from "../pool/silverquill-charm.js";
 import _poolSilverquillTheDisputant from "../pool/silverquill-the-disputant.js";
 import _poolSimicCluestone from "../pool/simic-cluestone.js";
+import _poolSinsOfTheFather from "../pool/sins-of-the-father.js";
 import _poolSivitriScarzam from "../pool/sivitri-scarzam.js";
 import _poolSkeletalCrocodile from "../pool/skeletal-crocodile.js";
 import _poolSkitteringHeartstopper from "../pool/skittering-heartstopper.js";
@@ -796,6 +800,7 @@ import _poolTeardropKami from "../pool/teardrop-kami.js";
 import _poolTeferisCurse from "../pool/teferis-curse.js";
 import _poolTeferisTimeTwist from "../pool/teferis-time-twist.js";
 import _poolTemporalMastery from "../pool/temporal-mastery.js";
+import _poolTemporalTribulation from "../pool/temporal-tribulation.js";
 import _poolTendrilsOfCorruption from "../pool/tendrils-of-corruption.js";
 import _poolTerastodon from "../pool/terastodon.js";
 import _poolTerraHeraldOfHope from "../pool/terra-herald-of-hope.js";
@@ -1348,6 +1353,7 @@ const shard: CardShard = {
     _poolIcewindStalwart,
     _poolIllvoiInfiltrator,
     _poolImADoctorNotA,
+    _poolImperialHullbreachers,
     _poolImperialSubduer,
     _poolIncriminate,
     _poolIncursionSpecialist,
@@ -1370,6 +1376,7 @@ const shard: CardShard = {
     _poolJagwaspSwarm,
     _poolJamieMccrimmon,
     _poolJaredCarthalionTrueHeir,
+    _poolJeanLucMonCapitaine,
     _poolJeditOjanenMercenary,
     _poolJeditOjanenOfEfrava,
     _poolJeweledSpirit,
@@ -1527,6 +1534,7 @@ const shard: CardShard = {
     _poolOnwardVictory,
     _poolOpalineSliver,
     _poolOpenCommunications,
+    _poolOptimizationAnnex,
     _poolOranRiefInvoker,
     _poolOrbsOfWarding,
     _poolOrcishFarmer,
@@ -1678,6 +1686,7 @@ const shard: CardShard = {
     _poolSilverquillCharm,
     _poolSilverquillTheDisputant,
     _poolSimicCluestone,
+    _poolSinsOfTheFather,
     _poolSivitriScarzam,
     _poolSkeletalCrocodile,
     _poolSkitteringHeartstopper,
@@ -1768,6 +1777,7 @@ const shard: CardShard = {
     _poolTeferisCurse,
     _poolTeferisTimeTwist,
     _poolTemporalMastery,
+    _poolTemporalTribulation,
     _poolTendrilsOfCorruption,
     _poolTerastodon,
     _poolTerraHeraldOfHope,

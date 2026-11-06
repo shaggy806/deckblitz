@@ -123,6 +123,7 @@ import _poolBustle from "../pool/bustle.js";
 import _poolCaetusSeaTyrantOfSegovia from "../pool/caetus-sea-tyrant-of-segovia.js";
 import _poolCalibratedBlast from "../pool/calibrated-blast.js";
 import _poolCanyonDrake from "../pool/canyon-drake.js";
+import _poolCaptainKirkBoldlyGoing from "../pool/captain-kirk-boldly-going.js";
 import _poolCarefreeSwinemaster from "../pool/carefree-swinemaster.js";
 import _poolCarrionFeeder from "../pool/carrion-feeder.js";
 import _poolCartelAristocrat from "../pool/cartel-aristocrat.js";
@@ -131,6 +132,7 @@ import _poolCatch from "../pool/catch.js";
 import _poolCelebrateTheHarvest from "../pool/celebrate-the-harvest.js";
 import _poolCelebrateTheMountainKing from "../pool/celebrate-the-mountain-king.js";
 import _poolCetaSanctuary from "../pool/ceta-sanctuary.js";
+import _poolCetiEel from "../pool/ceti-eel.js";
 import _poolChampionOfDusan from "../pool/champion-of-dusan.js";
 import _poolChampionOfDusk from "../pool/champion-of-dusk.js";
 import _poolChandraFireArtisan from "../pool/chandra-fire-artisan.js";
@@ -183,6 +185,7 @@ import _poolCrystalSeer from "../pool/crystal-seer.js";
 import _poolCrystalSlipper from "../pool/crystal-slipper.js";
 import _poolCrystalSpray from "../pool/crystal-spray.js";
 import _poolCunningEvasion from "../pool/cunning-evasion.js";
+import _poolCurzonDaxBoundByBlood from "../pool/curzon-dax-bound-by-blood.js";
 import _poolCutOfTheProfits from "../pool/cut-of-the-profits.js";
 import _poolCutthroatManeuver from "../pool/cutthroat-maneuver.js";
 import _poolCyclopeanMummy from "../pool/cyclopean-mummy.js";
@@ -265,6 +268,7 @@ import _poolEnchantedBeing from "../pool/enchanted-being.js";
 import _poolEncroach from "../pool/encroach.js";
 import _poolEndlessSands from "../pool/endless-sands.js";
 import _poolEnduranceBobblehead from "../pool/endurance-bobblehead.js";
+import _poolEnsignHarryKimOperations from "../pool/ensign-harry-kim-operations.js";
 import _poolEnterprisingScallywag from "../pool/enterprising-scallywag.js";
 import _poolEntomb from "../pool/entomb.js";
 import _poolEowynShieldmaiden from "../pool/eowyn-shieldmaiden.js";
@@ -274,6 +278,7 @@ import _poolErestorOfTheCouncil from "../pool/erestor-of-the-council.js";
 import _poolErrantry from "../pool/errantry.js";
 import _poolEssenceSliver from "../pool/essence-sliver.js";
 import _poolEtchedHostDoombringer from "../pool/etched-host-doombringer.js";
+import _poolEvasiveManeuvers from "../pool/evasive-maneuvers.js";
 import _poolEverdream from "../pool/everdream.js";
 import _poolEverflameEidolon from "../pool/everflame-eidolon.js";
 import _poolEviscerate from "../pool/eviscerate.js";
@@ -471,6 +476,7 @@ import _poolLeafArrow from "../pool/leaf-arrow.js";
 import _poolLeafCrownedVisionary from "../pool/leaf-crowned-visionary.js";
 import _poolLeechBonder from "../pool/leech-bonder.js";
 import _poolLeylineProwler from "../pool/leyline-prowler.js";
+import _poolLieutenantNyotaUhura from "../pool/lieutenant-nyota-uhura.js";
 import _poolLifecraftersGift from "../pool/lifecrafters-gift.js";
 import _poolLifelace from "../pool/lifelace.js";
 import _poolLightshieldParry from "../pool/lightshield-parry.js";
@@ -568,6 +574,7 @@ import _poolOketraTheTrue from "../pool/oketra-the-true.js";
 import _poolOllenbockEscort from "../pool/ollenbock-escort.js";
 import _poolOmenHawker from "../pool/omen-hawker.js";
 import _poolOminousRoost from "../pool/ominous-roost.js";
+import _poolOneBorgEvolved from "../pool/one-borg-evolved.js";
 import _poolOneOfThePack from "../pool/one-of-the-pack.js";
 import _poolOozeSpill from "../pool/ooze-spill.js";
 import _poolOphidianEye from "../pool/ophidian-eye.js";
@@ -1097,6 +1104,7 @@ const shard: CardShard = {
     _poolCaetusSeaTyrantOfSegovia,
     _poolCalibratedBlast,
     _poolCanyonDrake,
+    _poolCaptainKirkBoldlyGoing,
     _poolCarefreeSwinemaster,
     _poolCarrionFeeder,
     _poolCartelAristocrat,
@@ -1105,6 +1113,7 @@ const shard: CardShard = {
     _poolCelebrateTheHarvest,
     _poolCelebrateTheMountainKing,
     _poolCetaSanctuary,
+    _poolCetiEel,
     _poolChampionOfDusan,
     _poolChampionOfDusk,
     _poolChandraFireArtisan,
@@ -1157,6 +1166,7 @@ const shard: CardShard = {
     _poolCrystalSlipper,
     _poolCrystalSpray,
     _poolCunningEvasion,
+    _poolCurzonDaxBoundByBlood,
     _poolCutOfTheProfits,
     _poolCutthroatManeuver,
     _poolCyclopeanMummy,
@@ -1239,6 +1249,7 @@ const shard: CardShard = {
     _poolEncroach,
     _poolEndlessSands,
     _poolEnduranceBobblehead,
+    _poolEnsignHarryKimOperations,
     _poolEnterprisingScallywag,
     _poolEntomb,
     _poolEowynShieldmaiden,
@@ -1248,6 +1259,7 @@ const shard: CardShard = {
     _poolErrantry,
     _poolEssenceSliver,
     _poolEtchedHostDoombringer,
+    _poolEvasiveManeuvers,
     _poolEverdream,
     _poolEverflameEidolon,
     _poolEviscerate,
@@ -1445,6 +1457,7 @@ const shard: CardShard = {
     _poolLeafCrownedVisionary,
     _poolLeechBonder,
     _poolLeylineProwler,
+    _poolLieutenantNyotaUhura,
     _poolLifecraftersGift,
     _poolLifelace,
     _poolLightshieldParry,
@@ -1542,6 +1555,7 @@ const shard: CardShard = {
     _poolOllenbockEscort,
     _poolOmenHawker,
     _poolOminousRoost,
+    _poolOneBorgEvolved,
     _poolOneOfThePack,
     _poolOozeSpill,
     _poolOphidianEye,

@@ -545,6 +545,7 @@ import _poolMoonlightHunt from "../pool/moonlight-hunt.js";
 import _poolMorningtidesLight from "../pool/morningtides-light.js";
 import _poolMossbridgeTroll from "../pool/mossbridge-troll.js";
 import _poolMountainValley from "../pool/mountain-valley.js";
+import _poolMressCrewCoordinator from "../pool/mress-crew-coordinator.js";
 import _poolMysterioMasterOfIllusion from "../pool/mysterio-master-of-illusion.js";
 import _poolNardoleResourcefulCyborg from "../pool/nardole-resourceful-cyborg.js";
 import _poolNathOfTheGiltLeaf from "../pool/nath-of-the-gilt-leaf.js";
@@ -791,6 +792,7 @@ import _poolSunderTheGateway from "../pool/sunder-the-gateway.js";
 import _poolSundialOfTheInfinite from "../pool/sundial-of-the-infinite.js";
 import _poolSunriseCavalier from "../pool/sunrise-cavalier.js";
 import _poolSuperShredder from "../pool/super-shredder.js";
+import _poolSupplementationNode from "../pool/supplementation-node.js";
 import _poolSupremePhantom from "../pool/supreme-phantom.js";
 import _poolSurgingFlame from "../pool/surging-flame.js";
 import _poolSwarmSurge from "../pool/swarm-surge.js";
@@ -841,6 +843,7 @@ import _poolTideSkimmer from "../pool/tide-skimmer.js";
 import _poolTitanOfEternalFire from "../pool/titan-of-eternal-fire.js";
 import _poolTitaniaNaturesForce from "../pool/titania-natures-force.js";
 import _poolTolarianEntrancer from "../pool/tolarian-entrancer.js";
+import _poolTomParisRiskTaker from "../pool/tom-paris-risk-taker.js";
 import _poolTombRobber from "../pool/tomb-robber.js";
 import _poolTorWaukiTheYounger from "../pool/tor-wauki-the-younger.js";
 import _poolToriiWatchward from "../pool/torii-watchward.js";
@@ -861,6 +864,7 @@ import _poolTurnAgainst from "../pool/turn-against.js";
 import _poolTurntimberAscetic from "../pool/turntimber-ascetic.js";
 import _poolTyranidInvasion from "../pool/tyranid-invasion.js";
 import _poolTyranidPrime from "../pool/tyranid-prime.js";
+import _poolUSSEnterpriseESovereign from "../pool/u-s-s-enterprise-e-sovereign.js";
 import _poolUktabiFaerie from "../pool/uktabi-faerie.js";
 import _poolUlvenwaldBehemoth from "../pool/ulvenwald-behemoth.js";
 import _poolUmaraRaptor from "../pool/umara-raptor.js";
@@ -1519,6 +1523,7 @@ const shard: CardShard = {
     _poolMorningtidesLight,
     _poolMossbridgeTroll,
     _poolMountainValley,
+    _poolMressCrewCoordinator,
     _poolMysterioMasterOfIllusion,
     _poolNardoleResourcefulCyborg,
     _poolNathOfTheGiltLeaf,
@@ -1765,6 +1770,7 @@ const shard: CardShard = {
     _poolSundialOfTheInfinite,
     _poolSunriseCavalier,
     _poolSuperShredder,
+    _poolSupplementationNode,
     _poolSupremePhantom,
     _poolSurgingFlame,
     _poolSwarmSurge,
@@ -1815,6 +1821,7 @@ const shard: CardShard = {
     _poolTitanOfEternalFire,
     _poolTitaniaNaturesForce,
     _poolTolarianEntrancer,
+    _poolTomParisRiskTaker,
     _poolTombRobber,
     _poolTorWaukiTheYounger,
     _poolToriiWatchward,
@@ -1835,6 +1842,7 @@ const shard: CardShard = {
     _poolTurntimberAscetic,
     _poolTyranidInvasion,
     _poolTyranidPrime,
+    _poolUSSEnterpriseESovereign,
     _poolUktabiFaerie,
     _poolUlvenwaldBehemoth,
     _poolUmaraRaptor,

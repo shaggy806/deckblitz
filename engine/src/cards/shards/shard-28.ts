@@ -158,6 +158,7 @@ import _poolCliveIfritsDominant from "../pool/clive-ifrits-dominant.js";
 import _poolClivesHideaway from "../pool/clives-hideaway.js";
 import _poolCloakOfConfusion from "../pool/cloak-of-confusion.js";
 import _poolCloakwoodSwarmkeeper from "../pool/cloakwood-swarmkeeper.js";
+import _poolCoOptionAdjutant from "../pool/co-option-adjutant.js";
 import _poolCodeOfConstraint from "../pool/code-of-constraint.js";
 import _poolCogworkArchivist from "../pool/cogwork-archivist.js";
 import _poolCoilingRebirth from "../pool/coiling-rebirth.js";
@@ -435,7 +436,9 @@ import _poolKhorvathsFury from "../pool/khorvaths-fury.js";
 import _poolKingCrab from "../pool/king-crab.js";
 import _poolKinjallisSunwing from "../pool/kinjallis-sunwing.js";
 import _poolKithkinSpellduster from "../pool/kithkin-spellduster.js";
+import _poolKlingonStrikeForce from "../pool/klingon-strike-force.js";
 import _poolKnotvineMystic from "../pool/knotvine-mystic.js";
+import _poolKorokLiberatedRage from "../pool/korok-liberated-rage.js";
 import _poolKozileksSentinel from "../pool/kozileks-sentinel.js";
 import _poolKrosanGroundshaker from "../pool/krosan-groundshaker.js";
 import _poolKryShield from "../pool/kry-shield.js";
@@ -709,6 +712,7 @@ import _poolSaguPummeler from "../pool/sagu-pummeler.js";
 import _poolSaheeliTheGifted from "../pool/saheeli-the-gifted.js";
 import _poolSaid from "../pool/said.js";
 import _poolSailIntoTheWest from "../pool/sail-into-the-west.js";
+import _poolSamKirkXenoanthropologist from "../pool/sam-kirk-xenoanthropologist.js";
 import _poolSamiShipsEngineer from "../pool/sami-ships-engineer.js";
 import _poolSanctumWeaver from "../pool/sanctum-weaver.js";
 import _poolSandstormCrasher from "../pool/sandstorm-crasher.js";
@@ -1161,6 +1165,7 @@ const shard: CardShard = {
     _poolClivesHideaway,
     _poolCloakOfConfusion,
     _poolCloakwoodSwarmkeeper,
+    _poolCoOptionAdjutant,
     _poolCodeOfConstraint,
     _poolCogworkArchivist,
     _poolCoilingRebirth,
@@ -1438,7 +1443,9 @@ const shard: CardShard = {
     _poolKingCrab,
     _poolKinjallisSunwing,
     _poolKithkinSpellduster,
+    _poolKlingonStrikeForce,
     _poolKnotvineMystic,
+    _poolKorokLiberatedRage,
     _poolKozileksSentinel,
     _poolKrosanGroundshaker,
     _poolKryShield,
@@ -1712,6 +1719,7 @@ const shard: CardShard = {
     _poolSaheeliTheGifted,
     _poolSaid,
     _poolSailIntoTheWest,
+    _poolSamKirkXenoanthropologist,
     _poolSamiShipsEngineer,
     _poolSanctumWeaver,
     _poolSandstormCrasher,

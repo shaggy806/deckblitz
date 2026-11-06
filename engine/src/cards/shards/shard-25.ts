@@ -221,6 +221,7 @@ import _poolDonatelloTurtleTechie from "../pool/donatello-turtle-techie.js";
 import _poolDovescape from "../pool/dovescape.js";
 import _poolDovinBaan from "../pool/dovin-baan.js";
 import _poolDovinsVeto from "../pool/dovins-veto.js";
+import _poolDrPulaskiCynicalClinician from "../pool/dr-pulaski-cynical-clinician.js";
 import _poolDraconicDisciple from "../pool/draconic-disciple.js";
 import _poolDragUnder from "../pool/drag-under.js";
 import _poolDragonScales from "../pool/dragon-scales.js";
@@ -248,6 +249,7 @@ import _poolEldraziDevastator from "../pool/eldrazi-devastator.js";
 import _poolEldraziRepurposer from "../pool/eldrazi-repurposer.js";
 import _poolElvenLyre from "../pool/elven-lyre.js";
 import _poolElvishHexhunter from "../pool/elvish-hexhunter.js";
+import _poolEmergencyRegeneration from "../pool/emergency-regeneration.js";
 import _poolEmergentGrowth from "../pool/emergent-growth.js";
 import _poolEmmaraTandris from "../pool/emmara-tandris.js";
 import _poolEmptyTheWarrens from "../pool/empty-the-warrens.js";
@@ -293,6 +295,7 @@ import _poolFirebrandArcher from "../pool/firebrand-archer.js";
 import _poolFirewingPhoenix from "../pool/firewing-phoenix.js";
 import _poolFlameSlash from "../pool/flame-slash.js";
 import _poolFlameheartWerewolf from "../pool/flameheart-werewolf.js";
+import _poolFleetCaptainChristopherPike from "../pool/fleet-captain-christopher-pike.js";
 import _poolFleetingDistraction from "../pool/fleeting-distraction.js";
 import _poolFlickeringWard from "../pool/flickering-ward.js";
 import _poolFloodOfRecollection from "../pool/flood-of-recollection.js";
@@ -732,6 +735,7 @@ import _poolShipwreckDowser from "../pool/shipwreck-dowser.js";
 import _poolShipwreckSinger from "../pool/shipwreck-singer.js";
 import _poolShireShirriff from "../pool/shire-shirriff.js";
 import _poolShivanDragon from "../pool/shivan-dragon.js";
+import _poolShoreLeavePlanet from "../pool/shore-leave-planet.js";
 import _poolShrineOfBoundlessGrowth from "../pool/shrine-of-boundless-growth.js";
 import _poolShuGeneral from "../pool/shu-general.js";
 import _poolSickbay from "../pool/sickbay.js";
@@ -852,6 +856,7 @@ import _poolTreasureChest from "../pool/treasure-chest.js";
 import _poolTrespasserIlVec from "../pool/trespasser-il-vec.js";
 import _poolTricorder from "../pool/tricorder.js";
 import _poolTrigonOfInfestation from "../pool/trigon-of-infestation.js";
+import _poolTroiWingingIt from "../pool/troi-winging-it.js";
 import _poolTrygonPrime from "../pool/trygon-prime.js";
 import _poolTurtleshellChangeling from "../pool/turtleshell-changeling.js";
 import _poolTuskguardCaptain from "../pool/tuskguard-captain.js";
@@ -917,6 +922,7 @@ import _poolWitherscaleWurm from "../pool/witherscale-wurm.js";
 import _poolWolverinePack from "../pool/wolverine-pack.js";
 import _poolWondrousRevival from "../pool/wondrous-revival.js";
 import _poolWoodedBastion from "../pool/wooded-bastion.js";
+import _poolWorfSonOfMogh from "../pool/worf-son-of-mogh.js";
 import _poolWretchedThrong from "../pool/wretched-throng.js";
 import _poolWurmcoilLarva from "../pool/wurmcoil-larva.js";
 import _poolYorionSkyNomad from "../pool/yorion-sky-nomad.js";
@@ -1175,6 +1181,7 @@ const shard: CardShard = {
     _poolDovescape,
     _poolDovinBaan,
     _poolDovinsVeto,
+    _poolDrPulaskiCynicalClinician,
     _poolDraconicDisciple,
     _poolDragUnder,
     _poolDragonScales,
@@ -1202,6 +1209,7 @@ const shard: CardShard = {
     _poolEldraziRepurposer,
     _poolElvenLyre,
     _poolElvishHexhunter,
+    _poolEmergencyRegeneration,
     _poolEmergentGrowth,
     _poolEmmaraTandris,
     _poolEmptyTheWarrens,
@@ -1247,6 +1255,7 @@ const shard: CardShard = {
     _poolFirewingPhoenix,
     _poolFlameSlash,
     _poolFlameheartWerewolf,
+    _poolFleetCaptainChristopherPike,
     _poolFleetingDistraction,
     _poolFlickeringWard,
     _poolFloodOfRecollection,
@@ -1686,6 +1695,7 @@ const shard: CardShard = {
     _poolShipwreckSinger,
     _poolShireShirriff,
     _poolShivanDragon,
+    _poolShoreLeavePlanet,
     _poolShrineOfBoundlessGrowth,
     _poolShuGeneral,
     _poolSickbay,
@@ -1806,6 +1816,7 @@ const shard: CardShard = {
     _poolTrespasserIlVec,
     _poolTricorder,
     _poolTrigonOfInfestation,
+    _poolTroiWingingIt,
     _poolTrygonPrime,
     _poolTurtleshellChangeling,
     _poolTuskguardCaptain,
@@ -1871,6 +1882,7 @@ const shard: CardShard = {
     _poolWolverinePack,
     _poolWondrousRevival,
     _poolWoodedBastion,
+    _poolWorfSonOfMogh,
     _poolWretchedThrong,
     _poolWurmcoilLarva,
     _poolYorionSkyNomad,

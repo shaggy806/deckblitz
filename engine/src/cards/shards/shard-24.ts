@@ -57,6 +57,7 @@ import _poolAvenFateshaper from "../pool/aven-fateshaper.js";
 import _poolAvenSquire from "../pool/aven-squire.js";
 import _poolAwakenTheSkyTyrant from "../pool/awaken-the-sky-tyrant.js";
 import _poolAxgardBraggart from "../pool/axgard-braggart.js";
+import _poolBadgeyMaliciousGlitch from "../pool/badgey-malicious-glitch.js";
 import _poolBalefulStrix from "../pool/baleful-strix.js";
 import _poolBalthierAndFran from "../pool/balthier-and-fran.js";
 import _poolBandTogether from "../pool/band-together.js";
@@ -152,6 +153,7 @@ import _poolChoMannosBlessing from "../pool/cho-mannos-blessing.js";
 import _poolChromeCourier from "../pool/chrome-courier.js";
 import _poolCivilizedScholar from "../pool/civilized-scholar.js";
 import _poolClandestineMeddler from "../pool/clandestine-meddler.js";
+import _poolClass4TacticalCube from "../pool/class-4-tactical-cube.js";
 import _poolClawsOfGix from "../pool/claws-of-gix.js";
 import _poolClayStatue from "../pool/clay-statue.js";
 import _poolClearAPath from "../pool/clear-a-path.js";
@@ -595,6 +597,7 @@ import _poolPurifyTheGrave from "../pool/purify-the-grave.js";
 import _poolPyrogoyf from "../pool/pyrogoyf.js";
 import _poolPyrrhicBlast from "../pool/pyrrhic-blast.js";
 import _poolQContinuum from "../pool/q-continuum.js";
+import _poolQonosQuartermaster from "../pool/qonos-quartermaster.js";
 import _poolQuarryBeetle from "../pool/quarry-beetle.js";
 import _poolQuickling from "../pool/quickling.js";
 import _poolQuicksilverGeyser from "../pool/quicksilver-geyser.js";
@@ -843,6 +846,7 @@ import _poolTrainedArynx from "../pool/trained-arynx.js";
 import _poolTransmogrifyingWand from "../pool/transmogrifying-wand.js";
 import _poolTreasureVault from "../pool/treasure-vault.js";
 import _poolTreetopFreedomFighters from "../pool/treetop-freedom-fighters.js";
+import _poolTrelaneSquireOfGothos from "../pool/trelane-squire-of-gothos.js";
 import _poolTrepanationBlade from "../pool/trepanation-blade.js";
 import _poolTribalUnity from "../pool/tribal-unity.js";
 import _poolTributeToHunger from "../pool/tribute-to-hunger.js";
@@ -1027,6 +1031,7 @@ const shard: CardShard = {
     _poolAvenSquire,
     _poolAwakenTheSkyTyrant,
     _poolAxgardBraggart,
+    _poolBadgeyMaliciousGlitch,
     _poolBalefulStrix,
     _poolBalthierAndFran,
     _poolBandTogether,
@@ -1122,6 +1127,7 @@ const shard: CardShard = {
     _poolChromeCourier,
     _poolCivilizedScholar,
     _poolClandestineMeddler,
+    _poolClass4TacticalCube,
     _poolClawsOfGix,
     _poolClayStatue,
     _poolClearAPath,
@@ -1565,6 +1571,7 @@ const shard: CardShard = {
     _poolPyrogoyf,
     _poolPyrrhicBlast,
     _poolQContinuum,
+    _poolQonosQuartermaster,
     _poolQuarryBeetle,
     _poolQuickling,
     _poolQuicksilverGeyser,
@@ -1813,6 +1820,7 @@ const shard: CardShard = {
     _poolTransmogrifyingWand,
     _poolTreasureVault,
     _poolTreetopFreedomFighters,
+    _poolTrelaneSquireOfGothos,
     _poolTrepanationBlade,
     _poolTribalUnity,
     _poolTributeToHunger,

@@ -315,6 +315,7 @@ import _poolGiantfall from "../pool/giantfall.js";
 import _poolGiftOfTheFae from "../pool/gift-of-the-fae.js";
 import _poolGithzeraiMonk from "../pool/githzerai-monk.js";
 import _poolGladecoverScout from "../pool/gladecover-scout.js";
+import _poolGloryToTheEmpire from "../pool/glory-to-the-empire.js";
 import _poolGoblinMountaineer from "../pool/goblin-mountaineer.js";
 import _poolGoblinTombRaider from "../pool/goblin-tomb-raider.js";
 import _poolGoldenWish from "../pool/golden-wish.js";
@@ -393,6 +394,7 @@ import _poolJaheirasRespite from "../pool/jaheiras-respite.js";
 import _poolJarlOfTheForsaken from "../pool/jarl-of-the-forsaken.js";
 import _poolJetsBrainwashing from "../pool/jets-brainwashing.js";
 import _poolJohannsStopgap from "../pool/johanns-stopgap.js";
+import _poolJulianBashirFrontierDoctor from "../pool/julian-bashir-frontier-doctor.js";
 import _poolJungleShrine from "../pool/jungle-shrine.js";
 import _poolJunkDiver from "../pool/junk-diver.js";
 import _poolJuvenileGloomwidow from "../pool/juvenile-gloomwidow.js";
@@ -416,6 +418,7 @@ import _poolKomaWorldEater from "../pool/koma-world-eater.js";
 import _poolKoskunKeep from "../pool/koskun-keep.js";
 import _poolKruphixGodOfHorizons from "../pool/kruphix-god-of-horizons.js";
 import _poolKulrathMystic from "../pool/kulrath-mystic.js";
+import _poolKurnSonOfMogh from "../pool/kurn-son-of-mogh.js";
 import _poolKyoshiWarriors from "../pool/kyoshi-warriors.js";
 import _poolLabyrinthGuardian from "../pool/labyrinth-guardian.js";
 import _poolLandsEdge from "../pool/lands-edge.js";
@@ -468,6 +471,7 @@ import _poolMasterDecoy from "../pool/master-decoy.js";
 import _poolMazeAbomination from "../pool/maze-abomination.js";
 import _poolMegaFlare from "../pool/mega-flare.js";
 import _poolMegatog from "../pool/megatog.js";
+import _poolMeklethBerserker from "../pool/mekleth-berserker.js";
 import _poolMemoryErosion from "../pool/memory-erosion.js";
 import _poolMephiticDraught from "../pool/mephitic-draught.js";
 import _poolMercurialChemister from "../pool/mercurial-chemister.js";
@@ -774,6 +778,7 @@ import _poolSylvanBounty from "../pool/sylvan-bounty.js";
 import _poolSynapseNecromage from "../pool/synapse-necromage.js";
 import _poolSzarelGenesisShepherd from "../pool/szarel-genesis-shepherd.js";
 import _poolTaintedTreats from "../pool/tainted-treats.js";
+import _poolTalarianHookSpider from "../pool/talarian-hook-spider.js";
 import _poolTalionTheKindlyLord from "../pool/talion-the-kindly-lord.js";
 import _poolTalismanOfIndulgence from "../pool/talisman-of-indulgence.js";
 import _poolTalruumPiper from "../pool/talruum-piper.js";
@@ -1266,6 +1271,7 @@ const shard: CardShard = {
     _poolGiftOfTheFae,
     _poolGithzeraiMonk,
     _poolGladecoverScout,
+    _poolGloryToTheEmpire,
     _poolGoblinMountaineer,
     _poolGoblinTombRaider,
     _poolGoldenWish,
@@ -1344,6 +1350,7 @@ const shard: CardShard = {
     _poolJarlOfTheForsaken,
     _poolJetsBrainwashing,
     _poolJohannsStopgap,
+    _poolJulianBashirFrontierDoctor,
     _poolJungleShrine,
     _poolJunkDiver,
     _poolJuvenileGloomwidow,
@@ -1367,6 +1374,7 @@ const shard: CardShard = {
     _poolKoskunKeep,
     _poolKruphixGodOfHorizons,
     _poolKulrathMystic,
+    _poolKurnSonOfMogh,
     _poolKyoshiWarriors,
     _poolLabyrinthGuardian,
     _poolLandsEdge,
@@ -1419,6 +1427,7 @@ const shard: CardShard = {
     _poolMazeAbomination,
     _poolMegaFlare,
     _poolMegatog,
+    _poolMeklethBerserker,
     _poolMemoryErosion,
     _poolMephiticDraught,
     _poolMercurialChemister,
@@ -1725,6 +1734,7 @@ const shard: CardShard = {
     _poolSynapseNecromage,
     _poolSzarelGenesisShepherd,
     _poolTaintedTreats,
+    _poolTalarianHookSpider,
     _poolTalionTheKindlyLord,
     _poolTalismanOfIndulgence,
     _poolTalruumPiper,

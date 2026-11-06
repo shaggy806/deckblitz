@@ -305,6 +305,7 @@ import _poolGalaGreeters from "../pool/gala-greeters.js";
 import _poolGalliaTragicHost from "../pool/gallia-tragic-host.js";
 import _poolGandalfWhiteRider from "../pool/gandalf-white-rider.js";
 import _poolGarrukTheVeilCursed from "../pool/garruk-the-veil-cursed.js";
+import _poolGeordiLaForgeInnovator from "../pool/geordi-la-forge-innovator.js";
 import _poolGetawayGlamer from "../pool/getaway-glamer.js";
 import _poolGevScaledScorch from "../pool/gev-scaled-scorch.js";
 import _poolGhastlyMimicry from "../pool/ghastly-mimicry.js";
@@ -425,6 +426,7 @@ import _poolKreeCommandos from "../pool/kree-commandos.js";
 import _poolKrosanTusker from "../pool/krosan-tusker.js";
 import _poolKrovodHaunch from "../pool/krovod-haunch.js";
 import _poolKrumarBondKin from "../pool/krumar-bond-kin.js";
+import _poolKtingaClassBattleCruiser from "../pool/ktinga-class-battle-cruiser.js";
 import _poolKutzilsFlanker from "../pool/kutzils-flanker.js";
 import _poolLagonnaBandElder from "../pool/lagonna-band-elder.js";
 import _poolLakesideShack from "../pool/lakeside-shack.js";
@@ -438,6 +440,7 @@ import _poolLeinoreAutumnSovereign from "../pool/leinore-autumn-sovereign.js";
 import _poolLensFlare from "../pool/lens-flare.js";
 import _poolLeonardoLeaderInBlue from "../pool/leonardo-leader-in-blue.js";
 import _poolLibraryLarcenist from "../pool/library-larcenist.js";
+import _poolLieutenantHikaruSulu from "../pool/lieutenant-hikaru-sulu.js";
 import _poolLightform from "../pool/lightform.js";
 import _poolLightningRunner from "../pool/lightning-runner.js";
 import _poolLithobraking from "../pool/lithobraking.js";
@@ -821,6 +824,7 @@ import _poolTormentorsTrident from "../pool/tormentors-trident.js";
 import _poolTorrentSculptor from "../pool/torrent-sculptor.js";
 import _poolTorstenVonUrsus from "../pool/torsten-von-ursus.js";
 import _poolTortoiseFormation from "../pool/tortoise-formation.js";
+import _poolTpolVulcanRepresentative from "../pool/tpol-vulcan-representative.js";
 import _poolTrailblazingHistorian from "../pool/trailblazing-historian.js";
 import _poolTransmograntAltar from "../pool/transmogrant-altar.js";
 import _poolTrapmakersSnare from "../pool/trapmakers-snare.js";
@@ -1236,6 +1240,7 @@ const shard: CardShard = {
     _poolGalliaTragicHost,
     _poolGandalfWhiteRider,
     _poolGarrukTheVeilCursed,
+    _poolGeordiLaForgeInnovator,
     _poolGetawayGlamer,
     _poolGevScaledScorch,
     _poolGhastlyMimicry,
@@ -1356,6 +1361,7 @@ const shard: CardShard = {
     _poolKrosanTusker,
     _poolKrovodHaunch,
     _poolKrumarBondKin,
+    _poolKtingaClassBattleCruiser,
     _poolKutzilsFlanker,
     _poolLagonnaBandElder,
     _poolLakesideShack,
@@ -1369,6 +1375,7 @@ const shard: CardShard = {
     _poolLensFlare,
     _poolLeonardoLeaderInBlue,
     _poolLibraryLarcenist,
+    _poolLieutenantHikaruSulu,
     _poolLightform,
     _poolLightningRunner,
     _poolLithobraking,
@@ -1752,6 +1759,7 @@ const shard: CardShard = {
     _poolTorrentSculptor,
     _poolTorstenVonUrsus,
     _poolTortoiseFormation,
+    _poolTpolVulcanRepresentative,
     _poolTrailblazingHistorian,
     _poolTransmograntAltar,
     _poolTrapmakersSnare,

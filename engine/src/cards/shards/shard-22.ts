@@ -64,6 +64,7 @@ import _poolBearerOfTheHeavens from "../pool/bearer-of-the-heavens.js";
 import _poolBeck from "../pool/beck.js";
 import _poolBedeckBedazzle from "../pool/bedeck-bedazzle.js";
 import _poolBeeSting from "../pool/bee-sting.js";
+import _poolBelannaTorresScrapper from "../pool/belanna-torres-scrapper.js";
 import _poolBelovedChaplain from "../pool/beloved-chaplain.js";
 import _poolBenalishHeralds from "../pool/benalish-heralds.js";
 import _poolBenevolentBodyguard from "../pool/benevolent-bodyguard.js";
@@ -179,6 +180,7 @@ import _poolCynicalLoner from "../pool/cynical-loner.js";
 import _poolDarkSalvation from "../pool/dark-salvation.js";
 import _poolDaruLancer from "../pool/daru-lancer.js";
 import _poolDashingBloodsucker from "../pool/dashing-bloodsucker.js";
+import _poolDataExploringHumanity from "../pool/data-exploring-humanity.js";
 import _poolDaxosTheReturned from "../pool/daxos-the-returned.js";
 import _poolDeadlyTempest from "../pool/deadly-tempest.js";
 import _poolDeannaTroiPsychicCounsel from "../pool/deanna-troi-psychic-counsel.js";
@@ -420,11 +422,13 @@ import _poolKillerInstinct from "../pool/killer-instinct.js";
 import _poolKinTreeInvocation from "../pool/kin-tree-invocation.js";
 import _poolKindredCharge from "../pool/kindred-charge.js";
 import _poolKindredDominance from "../pool/kindred-dominance.js";
+import _poolKirkEnterprisingCaptain from "../pool/kirk-enterprising-captain.js";
 import _poolKithkinHealer from "../pool/kithkin-healer.js";
 import _poolKlawMasterOfSound from "../pool/klaw-master-of-sound.js";
 import _poolKlawSonicSubjugator from "../pool/klaw-sonic-subjugator.js";
 import _poolKnightOfTheWhiteOrchid from "../pool/knight-of-the-white-orchid.js";
 import _poolKnollspineInvocation from "../pool/knollspine-invocation.js";
+import _poolKolinahrPriest from "../pool/kolinahr-priest.js";
 import _poolKonstrariAnnex from "../pool/konstrari-annex.js";
 import _poolKorEntanglers from "../pool/kor-entanglers.js";
 import _poolKrotiqNestguard from "../pool/krotiq-nestguard.js";
@@ -637,6 +641,7 @@ import _poolRecklessRacer from "../pool/reckless-racer.js";
 import _poolReclusiveWight from "../pool/reclusive-wight.js";
 import _poolReduceInStature from "../pool/reduce-in-stature.js";
 import _poolReflexSliver from "../pool/reflex-sliver.js";
+import _poolRegBarclayFidgetyFantasist from "../pool/reg-barclay-fidgety-fantasist.js";
 import _poolRegeneration from "../pool/regeneration.js";
 import _poolReinforcedRonin from "../pool/reinforced-ronin.js";
 import _poolRelearn from "../pool/relearn.js";
@@ -759,6 +764,7 @@ import _poolSpellgorgerWeird from "../pool/spellgorger-weird.js";
 import _poolSphinxsRevelation from "../pool/sphinxs-revelation.js";
 import _poolSpiderManifestation from "../pool/spider-manifestation.js";
 import _poolSplinterTwin from "../pool/splinter-twin.js";
+import _poolSpockVoiceOfReason from "../pool/spock-voice-of-reason.js";
 import _poolSpoilsOfEvil from "../pool/spoils-of-evil.js";
 import _poolSpotterThopter from "../pool/spotter-thopter.js";
 import _poolSpreadTheSickness from "../pool/spread-the-sickness.js";
@@ -891,6 +897,7 @@ import _poolUncannySpeed from "../pool/uncanny-speed.js";
 import _poolUncontrollableAnger from "../pool/uncontrollable-anger.js";
 import _poolUncontrolledInfestation from "../pool/uncontrolled-infestation.js";
 import _poolUnhallowedPact from "../pool/unhallowed-pact.js";
+import _poolUnification from "../pool/unification.js";
 import _poolUnnervingAssault from "../pool/unnerving-assault.js";
 import _poolUnravelTheAether from "../pool/unravel-the-aether.js";
 import _poolUnwindingClock from "../pool/unwinding-clock.js";
@@ -1062,6 +1069,7 @@ const shard: CardShard = {
     _poolBeck,
     _poolBedeckBedazzle,
     _poolBeeSting,
+    _poolBelannaTorresScrapper,
     _poolBelovedChaplain,
     _poolBenalishHeralds,
     _poolBenevolentBodyguard,
@@ -1177,6 +1185,7 @@ const shard: CardShard = {
     _poolDarkSalvation,
     _poolDaruLancer,
     _poolDashingBloodsucker,
+    _poolDataExploringHumanity,
     _poolDaxosTheReturned,
     _poolDeadlyTempest,
     _poolDeannaTroiPsychicCounsel,
@@ -1418,11 +1427,13 @@ const shard: CardShard = {
     _poolKinTreeInvocation,
     _poolKindredCharge,
     _poolKindredDominance,
+    _poolKirkEnterprisingCaptain,
     _poolKithkinHealer,
     _poolKlawMasterOfSound,
     _poolKlawSonicSubjugator,
     _poolKnightOfTheWhiteOrchid,
     _poolKnollspineInvocation,
+    _poolKolinahrPriest,
     _poolKonstrariAnnex,
     _poolKorEntanglers,
     _poolKrotiqNestguard,
@@ -1635,6 +1646,7 @@ const shard: CardShard = {
     _poolReclusiveWight,
     _poolReduceInStature,
     _poolReflexSliver,
+    _poolRegBarclayFidgetyFantasist,
     _poolRegeneration,
     _poolReinforcedRonin,
     _poolRelearn,
@@ -1757,6 +1769,7 @@ const shard: CardShard = {
     _poolSphinxsRevelation,
     _poolSpiderManifestation,
     _poolSplinterTwin,
+    _poolSpockVoiceOfReason,
     _poolSpoilsOfEvil,
     _poolSpotterThopter,
     _poolSpreadTheSickness,
@@ -1889,6 +1902,7 @@ const shard: CardShard = {
     _poolUncontrollableAnger,
     _poolUncontrolledInfestation,
     _poolUnhallowedPact,
+    _poolUnification,
     _poolUnnervingAssault,
     _poolUnravelTheAether,
     _poolUnwindingClock,

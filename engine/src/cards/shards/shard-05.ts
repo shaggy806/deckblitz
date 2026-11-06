@@ -85,6 +85,7 @@ import _poolBeledrosWitherbloom from "../pool/beledros-witherbloom.js";
 import _poolBellowingCrier from "../pool/bellowing-crier.js";
 import _poolBenefactorsDraught from "../pool/benefactors-draught.js";
 import _poolBereavement from "../pool/bereavement.js";
+import _poolBeverlyCrusherShipsDoctor from "../pool/beverly-crusher-ships-doctor.js";
 import _poolBezaTheBoundingSpring from "../pool/beza-the-bounding-spring.js";
 import _poolBilbosGambit from "../pool/bilbos-gambit.js";
 import _poolBishopOfWings from "../pool/bishop-of-wings.js";
@@ -175,6 +176,7 @@ import _poolCloudManta from "../pool/cloud-manta.js";
 import _poolColdSnap from "../pool/cold-snap.js";
 import _poolCombadge from "../pool/combadge.js";
 import _poolCombatTutorial from "../pool/combat-tutorial.js";
+import _poolCommanderWilliamRiker from "../pool/commander-william-riker.js";
 import _poolCompleteDisregard from "../pool/complete-disregard.js";
 import _poolConquerorsFlail from "../pool/conquerors-flail.js";
 import _poolConspicuousSnoop from "../pool/conspicuous-snoop.js";
@@ -747,6 +749,7 @@ import _poolShivaWardenOfIce from "../pool/shiva-warden-of-ice.js";
 import _poolShorelineRanger from "../pool/shoreline-ranger.js";
 import _poolShriekdiver from "../pool/shriekdiver.js";
 import _poolShrineOfLoyalLegions from "../pool/shrine-of-loyal-legions.js";
+import _poolShuttlecraftGalileo from "../pool/shuttlecraft-galileo.js";
 import _poolSiftThroughSands from "../pool/sift-through-sands.js";
 import _poolSifterOfSkulls from "../pool/sifter-of-skulls.js";
 import _poolSilvergillMentor from "../pool/silvergill-mentor.js";
@@ -1057,6 +1060,7 @@ const shard: CardShard = {
     _poolBellowingCrier,
     _poolBenefactorsDraught,
     _poolBereavement,
+    _poolBeverlyCrusherShipsDoctor,
     _poolBezaTheBoundingSpring,
     _poolBilbosGambit,
     _poolBishopOfWings,
@@ -1147,6 +1151,7 @@ const shard: CardShard = {
     _poolColdSnap,
     _poolCombadge,
     _poolCombatTutorial,
+    _poolCommanderWilliamRiker,
     _poolCompleteDisregard,
     _poolConquerorsFlail,
     _poolConspicuousSnoop,
@@ -1719,6 +1724,7 @@ const shard: CardShard = {
     _poolShorelineRanger,
     _poolShriekdiver,
     _poolShrineOfLoyalLegions,
+    _poolShuttlecraftGalileo,
     _poolSiftThroughSands,
     _poolSifterOfSkulls,
     _poolSilvergillMentor,

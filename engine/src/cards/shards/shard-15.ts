@@ -21,6 +21,7 @@ import _poolAlexWilderRunaway from "../pool/alex-wilder-runaway.js";
 import _poolAlignedHedronNetwork from "../pool/aligned-hedron-network.js";
 import _poolAltarGolem from "../pool/altar-golem.js";
 import _poolAlterReality from "../pool/alter-reality.js";
+import _poolAmbassadorKehleyr from "../pool/ambassador-kehleyr.js";
 import _poolAmrouSeekers from "../pool/amrou-seekers.js";
 import _poolAnaxAndCymede from "../pool/anax-and-cymede.js";
 import _poolAncientCopperDragon from "../pool/ancient-copper-dragon.js";
@@ -51,6 +52,7 @@ import _poolBalaGedThief from "../pool/bala-ged-thief.js";
 import _poolBalthorTheStout from "../pool/balthor-the-stout.js";
 import _poolBansheesBlade from "../pool/banshees-blade.js";
 import _poolBartelRuneaxe from "../pool/bartel-runeaxe.js";
+import _poolBattleOfWolf359 from "../pool/battle-of-wolf-359.js";
 import _poolBayou from "../pool/bayou.js";
 import _poolBeetleHeadedMerchants from "../pool/beetle-headed-merchants.js";
 import _poolBelbeCorruptedObserver from "../pool/belbe-corrupted-observer.js";
@@ -130,6 +132,7 @@ import _poolCollectedCompany from "../pool/collected-company.js";
 import _poolCollision from "../pool/collision.js";
 import _poolCometCrawler from "../pool/comet-crawler.js";
 import _poolCommandOfUnsummoning from "../pool/command-of-unsummoning.js";
+import _poolCommanderSpock from "../pool/commander-spock.js";
 import _poolCommandingPresence from "../pool/commanding-presence.js";
 import _poolCompassGnome from "../pool/compass-gnome.js";
 import _poolCompulsiveResearch from "../pool/compulsive-research.js";
@@ -430,6 +433,7 @@ import _poolKnightRampager from "../pool/knight-rampager.js";
 import _poolKrallenhordeHowler from "../pool/krallenhorde-howler.js";
 import _poolKrovikanRot from "../pool/krovikan-rot.js";
 import _poolKyoshiIslandPlaza from "../pool/kyoshi-island-plaza.js";
+import _poolLaForgePerceptiveEngineer from "../pool/la-forge-perceptive-engineer.js";
 import _poolLabyrinthChampion from "../pool/labyrinth-champion.js";
 import _poolLambholtButcher from "../pool/lambholt-butcher.js";
 import _poolLamentation from "../pool/lamentation.js";
@@ -460,6 +464,7 @@ import _poolLivingInferno from "../pool/living-inferno.js";
 import _poolLlanowarLoamspeaker from "../pool/llanowar-loamspeaker.js";
 import _poolLlawanCephalidEmpress from "../pool/llawan-cephalid-empress.js";
 import _poolLochmereSerpent from "../pool/lochmere-serpent.js";
+import _poolLocutusOfBorg from "../pool/locutus-of-borg.js";
 import _poolLoranOfTheThirdPath from "../pool/loran-of-the-third-path.js";
 import _poolLoreholdApprentice from "../pool/lorehold-apprentice.js";
 import _poolLoreholdPledgemage from "../pool/lorehold-pledgemage.js";
@@ -631,6 +636,7 @@ import _poolRazorPendulum from "../pool/razor-pendulum.js";
 import _poolRazormaneMasticore from "../pool/razormane-masticore.js";
 import _poolReapTheSeagraf from "../pool/reap-the-seagraf.js";
 import _poolReasonableDoubt from "../pool/reasonable-doubt.js";
+import _poolReclamationSpecialist from "../pool/reclamation-specialist.js";
 import _poolRecoup from "../pool/recoup.js";
 import _poolReduceToMemory from "../pool/reduce-to-memory.js";
 import _poolReflectionOfKikiJiki from "../pool/reflection-of-kiki-jiki.js";
@@ -782,7 +788,9 @@ import _poolTezzeretsAmbition from "../pool/tezzerets-ambition.js";
 import _poolTheHungerTideRises from "../pool/the-hunger-tide-rises.js";
 import _poolTheNightOfTheDoctor from "../pool/the-night-of-the-doctor.js";
 import _poolTheOoze from "../pool/the-ooze.js";
+import _poolThePromiseOfKahless from "../pool/the-promise-of-kahless.js";
 import _poolTheRack from "../pool/the-rack.js";
+import _poolTheSwordOfKahless from "../pool/the-sword-of-kahless.js";
 import _poolTheTerrorOfSerpentsPass from "../pool/the-terror-of-serpents-pass.js";
 import _poolTheTricksterGodsHeist from "../pool/the-trickster-gods-heist.js";
 import _poolThermokarst from "../pool/thermokarst.js";
@@ -942,6 +950,7 @@ const shard: CardShard = {
     _poolAlignedHedronNetwork,
     _poolAltarGolem,
     _poolAlterReality,
+    _poolAmbassadorKehleyr,
     _poolAmrouSeekers,
     _poolAnaxAndCymede,
     _poolAncientCopperDragon,
@@ -972,6 +981,7 @@ const shard: CardShard = {
     _poolBalthorTheStout,
     _poolBansheesBlade,
     _poolBartelRuneaxe,
+    _poolBattleOfWolf359,
     _poolBayou,
     _poolBeetleHeadedMerchants,
     _poolBelbeCorruptedObserver,
@@ -1051,6 +1061,7 @@ const shard: CardShard = {
     _poolCollision,
     _poolCometCrawler,
     _poolCommandOfUnsummoning,
+    _poolCommanderSpock,
     _poolCommandingPresence,
     _poolCompassGnome,
     _poolCompulsiveResearch,
@@ -1351,6 +1362,7 @@ const shard: CardShard = {
     _poolKrallenhordeHowler,
     _poolKrovikanRot,
     _poolKyoshiIslandPlaza,
+    _poolLaForgePerceptiveEngineer,
     _poolLabyrinthChampion,
     _poolLambholtButcher,
     _poolLamentation,
@@ -1381,6 +1393,7 @@ const shard: CardShard = {
     _poolLlanowarLoamspeaker,
     _poolLlawanCephalidEmpress,
     _poolLochmereSerpent,
+    _poolLocutusOfBorg,
     _poolLoranOfTheThirdPath,
     _poolLoreholdApprentice,
     _poolLoreholdPledgemage,
@@ -1552,6 +1565,7 @@ const shard: CardShard = {
     _poolRazormaneMasticore,
     _poolReapTheSeagraf,
     _poolReasonableDoubt,
+    _poolReclamationSpecialist,
     _poolRecoup,
     _poolReduceToMemory,
     _poolReflectionOfKikiJiki,
@@ -1703,7 +1717,9 @@ const shard: CardShard = {
     _poolTheHungerTideRises,
     _poolTheNightOfTheDoctor,
     _poolTheOoze,
+    _poolThePromiseOfKahless,
     _poolTheRack,
+    _poolTheSwordOfKahless,
     _poolTheTerrorOfSerpentsPass,
     _poolTheTricksterGodsHeist,
     _poolThermokarst,

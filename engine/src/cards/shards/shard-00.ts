@@ -144,6 +144,7 @@ import _poolCaveOfTemptation from "../pool/cave-of-temptation.js";
 import _poolCelestialKirin from "../pool/celestial-kirin.js";
 import _poolCephalidShrine from "../pool/cephalid-shrine.js";
 import _poolChainedThroatseeker from "../pool/chained-throatseeker.js";
+import _poolChancellorGorkon from "../pool/chancellor-gorkon.js";
 import _poolChiefWargsCompany from "../pool/chief-wargs-company.js";
 import _poolChildOfGaea from "../pool/child-of-gaea.js";
 import _poolChildOfThorns from "../pool/child-of-thorns.js";
@@ -422,6 +423,7 @@ import _poolJacesIngenuity from "../pool/jaces-ingenuity.js";
 import _poolJadeheartAttendant from "../pool/jadeheart-attendant.js";
 import _poolJarakuTheInterloper from "../pool/jaraku-the-interloper.js";
 import _poolJayasFirenado from "../pool/jayas-firenado.js";
+import _poolJefferiesTube from "../pool/jefferies-tube.js";
 import _poolJoinTheDead from "../pool/join-the-dead.js";
 import _poolJubilation from "../pool/jubilation.js";
 import _poolJukaiMessenger from "../pool/jukai-messenger.js";
@@ -866,6 +868,7 @@ import _poolTrackDown from "../pool/track-down.js";
 import _poolTraitorsRoar from "../pool/traitors-roar.js";
 import _poolTranquilGrove from "../pool/tranquil-grove.js";
 import _poolTranspose from "../pool/transpose.js";
+import _poolTranswarpHub from "../pool/transwarp-hub.js";
 import _poolTrapRunner from "../pool/trap-runner.js";
 import _poolTrappedInTheTower from "../pool/trapped-in-the-tower.js";
 import _poolTraprootKami from "../pool/traproot-kami.js";
@@ -948,6 +951,7 @@ import _poolWildCeratok from "../pool/wild-ceratok.js";
 import _poolWildSlash from "../pool/wild-slash.js";
 import _poolWildUnraveling from "../pool/wild-unraveling.js";
 import _poolWildbornPreserver from "../pool/wildborn-preserver.js";
+import _poolWillRikerAssumingCommand from "../pool/will-riker-assuming-command.js";
 import _poolWindKinRaiders from "../pool/wind-kin-raiders.js";
 import _poolWindingCanyons from "../pool/winding-canyons.js";
 import _poolWindriderWizard from "../pool/windrider-wizard.js";
@@ -1128,6 +1132,7 @@ const shard: CardShard = {
     _poolCelestialKirin,
     _poolCephalidShrine,
     _poolChainedThroatseeker,
+    _poolChancellorGorkon,
     _poolChiefWargsCompany,
     _poolChildOfGaea,
     _poolChildOfThorns,
@@ -1406,6 +1411,7 @@ const shard: CardShard = {
     _poolJadeheartAttendant,
     _poolJarakuTheInterloper,
     _poolJayasFirenado,
+    _poolJefferiesTube,
     _poolJoinTheDead,
     _poolJubilation,
     _poolJukaiMessenger,
@@ -1850,6 +1856,7 @@ const shard: CardShard = {
     _poolTraitorsRoar,
     _poolTranquilGrove,
     _poolTranspose,
+    _poolTranswarpHub,
     _poolTrapRunner,
     _poolTrappedInTheTower,
     _poolTraprootKami,
@@ -1932,6 +1939,7 @@ const shard: CardShard = {
     _poolWildSlash,
     _poolWildUnraveling,
     _poolWildbornPreserver,
+    _poolWillRikerAssumingCommand,
     _poolWindKinRaiders,
     _poolWindingCanyons,
     _poolWindriderWizard,

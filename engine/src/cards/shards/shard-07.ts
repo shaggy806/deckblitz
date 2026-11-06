@@ -139,6 +139,7 @@ import _poolCharmingScoundrel from "../pool/charming-scoundrel.js";
 import _poolCharnelTroll from "../pool/charnel-troll.js";
 import _poolChatterstorm from "../pool/chatterstorm.js";
 import _poolCheeringCrowd from "../pool/cheering-crowd.js";
+import _poolChekovAndMccoy from "../pool/chekov-and-mccoy.js";
 import _poolChildOfAlara from "../pool/child-of-alara.js";
 import _poolChishiroTheShatteredBlade from "../pool/chishiro-the-shattered-blade.js";
 import _poolChitinGravestalker from "../pool/chitin-gravestalker.js";
@@ -150,6 +151,7 @@ import _poolClericOfLifesBond from "../pool/cleric-of-lifes-bond.js";
 import _poolClockworkBeast from "../pool/clockwork-beast.js";
 import _poolClockworkPercussionist from "../pool/clockwork-percussionist.js";
 import _poolCoastalWizard from "../pool/coastal-wizard.js";
+import _poolCollectiveOverride from "../pool/collective-override.js";
 import _poolCollectorOuphe from "../pool/collector-ouphe.js";
 import _poolColossapede from "../pool/colossapede.js";
 import _poolComaVeil from "../pool/coma-veil.js";
@@ -198,6 +200,7 @@ import _poolDeathbringerRegent from "../pool/deathbringer-regent.js";
 import _poolDeathcultRogue from "../pool/deathcult-rogue.js";
 import _poolDeepchannelMentor from "../pool/deepchannel-mentor.js";
 import _poolDefenderOfChaos from "../pool/defender-of-chaos.js";
+import _poolDefenseForceAggressor from "../pool/defense-force-aggressor.js";
 import _poolDefilerOfSouls from "../pool/defiler-of-souls.js";
 import _poolDeflectingSwat from "../pool/deflecting-swat.js";
 import _poolDemonOfFatesDesign from "../pool/demon-of-fates-design.js";
@@ -304,6 +307,7 @@ import _poolFuriousStrength from "../pool/furious-strength.js";
 import _poolFurnaceScamp from "../pool/furnace-scamp.js";
 import _poolFutureSight from "../pool/future-sight.js";
 import _poolGalecasterColossus from "../pool/galecaster-colossus.js";
+import _poolGalvanizingTenor from "../pool/galvanizing-tenor.js";
 import _poolGargoyleSentinel from "../pool/gargoyle-sentinel.js";
 import _poolGarrisonSergeant from "../pool/garrison-sergeant.js";
 import _poolGateColossus from "../pool/gate-colossus.js";
@@ -428,6 +432,7 @@ import _poolKeigaTheTideStar from "../pool/keiga-the-tide-star.js";
 import _poolKeldonVandals from "../pool/keldon-vandals.js";
 import _poolKenzoTheHardhearted from "../pool/kenzo-the-hardhearted.js";
 import _poolKerugaTheMacrosage from "../pool/keruga-the-macrosage.js";
+import _poolKesEvolvingTelepath from "../pool/kes-evolving-telepath.js";
 import _poolKindercatch from "../pool/kindercatch.js";
 import _poolKineticOoze from "../pool/kinetic-ooze.js";
 import _poolKingfisher from "../pool/kingfisher.js";
@@ -875,6 +880,7 @@ import _poolTuinvaleGuide from "../pool/tuinvale-guide.js";
 import _poolTuinvaleTreefolk from "../pool/tuinvale-treefolk.js";
 import _poolTwitchingDoll from "../pool/twitching-doll.js";
 import _poolUbulSarGatekeepers from "../pool/ubul-sar-gatekeepers.js";
+import _poolUhuraXenolinguist from "../pool/uhura-xenolinguist.js";
 import _poolUlvenwaldCaptive from "../pool/ulvenwald-captive.js";
 import _poolUnchainedBerserker from "../pool/unchained-berserker.js";
 import _poolUnchartedHaven from "../pool/uncharted-haven.js";
@@ -1136,6 +1142,7 @@ const shard: CardShard = {
     _poolCharnelTroll,
     _poolChatterstorm,
     _poolCheeringCrowd,
+    _poolChekovAndMccoy,
     _poolChildOfAlara,
     _poolChishiroTheShatteredBlade,
     _poolChitinGravestalker,
@@ -1147,6 +1154,7 @@ const shard: CardShard = {
     _poolClockworkBeast,
     _poolClockworkPercussionist,
     _poolCoastalWizard,
+    _poolCollectiveOverride,
     _poolCollectorOuphe,
     _poolColossapede,
     _poolComaVeil,
@@ -1195,6 +1203,7 @@ const shard: CardShard = {
     _poolDeathcultRogue,
     _poolDeepchannelMentor,
     _poolDefenderOfChaos,
+    _poolDefenseForceAggressor,
     _poolDefilerOfSouls,
     _poolDeflectingSwat,
     _poolDemonOfFatesDesign,
@@ -1301,6 +1310,7 @@ const shard: CardShard = {
     _poolFurnaceScamp,
     _poolFutureSight,
     _poolGalecasterColossus,
+    _poolGalvanizingTenor,
     _poolGargoyleSentinel,
     _poolGarrisonSergeant,
     _poolGateColossus,
@@ -1425,6 +1435,7 @@ const shard: CardShard = {
     _poolKeldonVandals,
     _poolKenzoTheHardhearted,
     _poolKerugaTheMacrosage,
+    _poolKesEvolvingTelepath,
     _poolKindercatch,
     _poolKineticOoze,
     _poolKingfisher,
@@ -1872,6 +1883,7 @@ const shard: CardShard = {
     _poolTuinvaleTreefolk,
     _poolTwitchingDoll,
     _poolUbulSarGatekeepers,
+    _poolUhuraXenolinguist,
     _poolUlvenwaldCaptive,
     _poolUnchainedBerserker,
     _poolUnchartedHaven,

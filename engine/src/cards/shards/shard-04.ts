@@ -745,6 +745,7 @@ import _poolSpitFlame from "../pool/spit-flame.js";
 import _poolSpitefulShadows from "../pool/spiteful-shadows.js";
 import _poolSplatterTechnique from "../pool/splatter-technique.js";
 import _poolSplittingHeadache from "../pool/splitting-headache.js";
+import _poolSpotFelisCatus from "../pool/spot-felis-catus.js";
 import _poolSpringheartNantuko from "../pool/springheart-nantuko.js";
 import _poolSpringleafDrum from "../pool/springleaf-drum.js";
 import _poolSproutingThrinax from "../pool/sprouting-thrinax.js";
@@ -752,6 +753,7 @@ import _poolSqueakBy from "../pool/squeak-by.js";
 import _poolSqueesToy from "../pool/squees-toy.js";
 import _poolSquirrelMob from "../pool/squirrel-mob.js";
 import _poolSquirrelNest from "../pool/squirrel-nest.js";
+import _poolStarfleetCrew from "../pool/starfleet-crew.js";
 import _poolStartle from "../pool/startle.js";
 import _poolSteadfastArmasaur from "../pool/steadfast-armasaur.js";
 import _poolSteelingStance from "../pool/steeling-stance.js";
@@ -802,6 +804,7 @@ import _poolTerminate from "../pool/terminate.js";
 import _poolTerritorialDispute from "../pool/territorial-dispute.js";
 import _poolTestOfIdentity from "../pool/test-of-identity.js";
 import _poolTestOfLoyalty from "../pool/test-of-loyalty.js";
+import _poolTheBeaconOfKahless from "../pool/the-beacon-of-kahless.js";
 import _poolTheFiligreeSylex from "../pool/the-filigree-sylex.js";
 import _poolTheLordOfTheEagles from "../pool/the-lord-of-the-eagles.js";
 import _poolTheRani from "../pool/the-rani.js";
@@ -888,6 +891,7 @@ import _poolVoiceOfVictory from "../pool/voice-of-victory.js";
 import _poolVoidmageApprentice from "../pool/voidmage-apprentice.js";
 import _poolVolsheTideturner from "../pool/volshe-tideturner.js";
 import _poolVoltaicServant from "../pool/voltaic-servant.js";
+import _poolVoqTorchbearer from "../pool/voq-torchbearer.js";
 import _poolWakeTheReflections from "../pool/wake-the-reflections.js";
 import _poolWalkInCloset from "../pool/walk-in-closet.js";
 import _poolWalkerOfTheGrove from "../pool/walker-of-the-grove.js";
@@ -903,6 +907,7 @@ import _poolWarehouseThief from "../pool/warehouse-thief.js";
 import _poolWarmth from "../pool/warmth.js";
 import _poolWarpedDevotion from "../pool/warped-devotion.js";
 import _poolWarsToll from "../pool/wars-toll.js";
+import _poolWarshipFlightCrew from "../pool/warship-flight-crew.js";
 import _poolWasteManagement from "../pool/waste-management.js";
 import _poolWaxWaneWitness from "../pool/wax-wane-witness.js";
 import _poolWayspeakerBodyguard from "../pool/wayspeaker-bodyguard.js";
@@ -923,6 +928,7 @@ import _poolWistfulSelkie from "../pool/wistful-selkie.js";
 import _poolWitherAndBloom from "../pool/wither-and-bloom.js";
 import _poolWolfirAvenger from "../pool/wolfir-avenger.js";
 import _poolWoodlandChampion from "../pool/woodland-champion.js";
+import _poolWorfDefiantCommander from "../pool/worf-defiant-commander.js";
 import _poolWorkshopAssistant from "../pool/workshop-assistant.js";
 import _poolWrathOfTheBloodmane from "../pool/wrath-of-the-bloodmane.js";
 import _poolWurmcalling from "../pool/wurmcalling.js";
@@ -1704,6 +1710,7 @@ const shard: CardShard = {
     _poolSpitefulShadows,
     _poolSplatterTechnique,
     _poolSplittingHeadache,
+    _poolSpotFelisCatus,
     _poolSpringheartNantuko,
     _poolSpringleafDrum,
     _poolSproutingThrinax,
@@ -1711,6 +1718,7 @@ const shard: CardShard = {
     _poolSqueesToy,
     _poolSquirrelMob,
     _poolSquirrelNest,
+    _poolStarfleetCrew,
     _poolStartle,
     _poolSteadfastArmasaur,
     _poolSteelingStance,
@@ -1761,6 +1769,7 @@ const shard: CardShard = {
     _poolTerritorialDispute,
     _poolTestOfIdentity,
     _poolTestOfLoyalty,
+    _poolTheBeaconOfKahless,
     _poolTheFiligreeSylex,
     _poolTheLordOfTheEagles,
     _poolTheRani,
@@ -1847,6 +1856,7 @@ const shard: CardShard = {
     _poolVoidmageApprentice,
     _poolVolsheTideturner,
     _poolVoltaicServant,
+    _poolVoqTorchbearer,
     _poolWakeTheReflections,
     _poolWalkInCloset,
     _poolWalkerOfTheGrove,
@@ -1862,6 +1872,7 @@ const shard: CardShard = {
     _poolWarmth,
     _poolWarpedDevotion,
     _poolWarsToll,
+    _poolWarshipFlightCrew,
     _poolWasteManagement,
     _poolWaxWaneWitness,
     _poolWayspeakerBodyguard,
@@ -1882,6 +1893,7 @@ const shard: CardShard = {
     _poolWitherAndBloom,
     _poolWolfirAvenger,
     _poolWoodlandChampion,
+    _poolWorfDefiantCommander,
     _poolWorkshopAssistant,
     _poolWrathOfTheBloodmane,
     _poolWurmcalling,

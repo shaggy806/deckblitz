@@ -102,6 +102,7 @@ import _poolBogRaiders from "../pool/bog-raiders.js";
 import _poolBoggartMob from "../pool/boggart-mob.js";
 import _poolBomatCourier from "../pool/bomat-courier.js";
 import _poolBoonOfTheSpiritRealm from "../pool/boon-of-the-spirit-realm.js";
+import _poolBorgIncursion from "../pool/borg-incursion.js";
 import _poolBornToDrive from "../pool/born-to-drive.js";
 import _poolBottomlessPool from "../pool/bottomless-pool.js";
 import _poolBoulderloftPathway from "../pool/boulderloft-pathway.js";
@@ -653,6 +654,7 @@ import _poolPatriarsSeal from "../pool/patriars-seal.js";
 import _poolPatronOfTheOrochi from "../pool/patron-of-the-orochi.js";
 import _poolPearlShard from "../pool/pearl-shard.js";
 import _poolPedanticLearning from "../pool/pedantic-learning.js";
+import _poolPeliaImmortalInnovator from "../pool/pelia-immortal-innovator.js";
 import _poolPendelhavenElder from "../pool/pendelhaven-elder.js";
 import _poolPendelhaven from "../pool/pendelhaven.js";
 import _poolPeregrineGriffin from "../pool/peregrine-griffin.js";
@@ -779,6 +781,7 @@ import _poolShireScarecrow from "../pool/shire-scarecrow.js";
 import _poolShivanHarvest from "../pool/shivan-harvest.js";
 import _poolShivanWumpus from "../pool/shivan-wumpus.js";
 import _poolShurisFabricator from "../pool/shuris-fabricator.js";
+import _poolShuttleCrew from "../pool/shuttle-crew.js";
 import _poolSicarianInfiltrator from "../pool/sicarian-infiltrator.js";
 import _poolSidisisFaithful from "../pool/sidisis-faithful.js";
 import _poolSilasRennSeekerAdept from "../pool/silas-renn-seeker-adept.js";
@@ -820,6 +823,7 @@ import _poolSpinelessThug from "../pool/spineless-thug.js";
 import _poolSpirespine from "../pool/spirespine.js";
 import _poolSpitfireBastion from "../pool/spitfire-bastion.js";
 import _poolSpittingHydra from "../pool/spitting-hydra.js";
+import _poolSpockLogicalChoice from "../pool/spock-logical-choice.js";
 import _poolSpreadingInsurrection from "../pool/spreading-insurrection.js";
 import _poolSpriteDragon from "../pool/sprite-dragon.js";
 import _poolSpyNetwork from "../pool/spy-network.js";
@@ -1138,6 +1142,7 @@ const shard: CardShard = {
     _poolBoggartMob,
     _poolBomatCourier,
     _poolBoonOfTheSpiritRealm,
+    _poolBorgIncursion,
     _poolBornToDrive,
     _poolBottomlessPool,
     _poolBoulderloftPathway,
@@ -1689,6 +1694,7 @@ const shard: CardShard = {
     _poolPatronOfTheOrochi,
     _poolPearlShard,
     _poolPedanticLearning,
+    _poolPeliaImmortalInnovator,
     _poolPendelhavenElder,
     _poolPendelhaven,
     _poolPeregrineGriffin,
@@ -1815,6 +1821,7 @@ const shard: CardShard = {
     _poolShivanHarvest,
     _poolShivanWumpus,
     _poolShurisFabricator,
+    _poolShuttleCrew,
     _poolSicarianInfiltrator,
     _poolSidisisFaithful,
     _poolSilasRennSeekerAdept,
@@ -1856,6 +1863,7 @@ const shard: CardShard = {
     _poolSpirespine,
     _poolSpitfireBastion,
     _poolSpittingHydra,
+    _poolSpockLogicalChoice,
     _poolSpreadingInsurrection,
     _poolSpriteDragon,
     _poolSpyNetwork,
