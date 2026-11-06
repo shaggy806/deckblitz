@@ -16374,6 +16374,7 @@ import _poolMetathranZombie from "./pool/metathran-zombie.js";
 import _poolMeteorBlast from "./pool/meteor-blast.js";
 import _poolMeteorCrater from "./pool/meteor-crater.js";
 import _poolMeteorGolem from "./pool/meteor-golem.js";
+import _poolMeteorShower from "./pool/meteor-shower.js";
 import _poolMeteorStorm from "./pool/meteor-storm.js";
 import _poolMeteorSwarm from "./pool/meteor-swarm.js";
 import _poolMeteorSword from "./pool/meteor-sword.js";
@@ -17884,6 +17885,7 @@ import _poolNorikaYamazakiThePoet from "./pool/norika-yamazaki-the-poet.js";
 import _poolNorinSwiftSurvivalist from "./pool/norin-swift-survivalist.js";
 import _poolNorinTheWary from "./pool/norin-the-wary.js";
 import _poolNormanOsborn from "./pool/norman-osborn.js";
+import _poolNornsAnnex from "./pool/norns-annex.js";
 import _poolNornsChoirmaster from "./pool/norns-choirmaster.js";
 import _poolNornsInquisitor from "./pool/norns-inquisitor.js";
 import _poolNornsWellspring from "./pool/norns-wellspring.js";
@@ -23100,6 +23102,8 @@ import _poolShatterskullCharger from "./pool/shatterskull-charger.js";
 import _poolShatterskullGiant from "./pool/shatterskull-giant.js";
 import _poolShatterskullMinotaur from "./pool/shatterskull-minotaur.js";
 import _poolShatterskullRecruit from "./pool/shatterskull-recruit.js";
+import _poolShatterskullSmashing from "./pool/shatterskull-smashing.js";
+import _poolShatterskullTheHammerPass from "./pool/shatterskull-the-hammer-pass.js";
 import _poolShatterstorm from "./pool/shatterstorm.js";
 import _poolShatterwingPegasus from "./pool/shatterwing-pegasus.js";
 import _poolShaukuEndbringer from "./pool/shauku-endbringer.js";
@@ -25543,6 +25547,7 @@ import _poolSummonChocoMog from "./pool/summon-choco-mog.js";
 import _poolSummonEsperRamuh from "./pool/summon-esper-ramuh.js";
 import _poolSummonEsperValigarmanda from "./pool/summon-esper-valigarmanda.js";
 import _poolSummonFatChocobo from "./pool/summon-fat-chocobo.js";
+import _poolSummonFenrir from "./pool/summon-fenrir.js";
 import _poolSummonGFCerberus from "./pool/summon-g-f-cerberus.js";
 import _poolSummonGfIfrit from "./pool/summon-gf-ifrit.js";
 import _poolSummonIxion from "./pool/summon-ixion.js";
@@ -47849,6 +47854,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMeteorBlast,
   _poolMeteorCrater,
   _poolMeteorGolem,
+  _poolMeteorShower,
   _poolMeteorStorm,
   _poolMeteorSwarm,
   _poolMeteorSword,
@@ -49359,6 +49365,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNorinSwiftSurvivalist,
   _poolNorinTheWary,
   _poolNormanOsborn,
+  _poolNornsAnnex,
   _poolNornsChoirmaster,
   _poolNornsInquisitor,
   _poolNornsWellspring,
@@ -54575,6 +54582,8 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShatterskullGiant,
   _poolShatterskullMinotaur,
   _poolShatterskullRecruit,
+  _poolShatterskullSmashing,
+  _poolShatterskullTheHammerPass,
   _poolShatterstorm,
   _poolShatterwingPegasus,
   _poolShaukuEndbringer,
@@ -57018,6 +57027,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSummonEsperRamuh,
   _poolSummonEsperValigarmanda,
   _poolSummonFatChocobo,
+  _poolSummonFenrir,
   _poolSummonGFCerberus,
   _poolSummonGfIfrit,
   _poolSummonIxion,
@@ -79337,6 +79347,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/meteor-blast": _poolMeteorBlast,
   "pool/meteor-crater": _poolMeteorCrater,
   "pool/meteor-golem": _poolMeteorGolem,
+  "pool/meteor-shower": _poolMeteorShower,
   "pool/meteor-storm": _poolMeteorStorm,
   "pool/meteor-swarm": _poolMeteorSwarm,
   "pool/meteor-sword": _poolMeteorSword,
@@ -80847,6 +80858,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/norin-swift-survivalist": _poolNorinSwiftSurvivalist,
   "pool/norin-the-wary": _poolNorinTheWary,
   "pool/norman-osborn": _poolNormanOsborn,
+  "pool/norns-annex": _poolNornsAnnex,
   "pool/norns-choirmaster": _poolNornsChoirmaster,
   "pool/norns-inquisitor": _poolNornsInquisitor,
   "pool/norns-wellspring": _poolNornsWellspring,
@@ -86063,6 +86075,8 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shatterskull-giant": _poolShatterskullGiant,
   "pool/shatterskull-minotaur": _poolShatterskullMinotaur,
   "pool/shatterskull-recruit": _poolShatterskullRecruit,
+  "pool/shatterskull-smashing": _poolShatterskullSmashing,
+  "pool/shatterskull-the-hammer-pass": _poolShatterskullTheHammerPass,
   "pool/shatterstorm": _poolShatterstorm,
   "pool/shatterwing-pegasus": _poolShatterwingPegasus,
   "pool/shauku-endbringer": _poolShaukuEndbringer,
@@ -88506,6 +88520,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/summon-esper-ramuh": _poolSummonEsperRamuh,
   "pool/summon-esper-valigarmanda": _poolSummonEsperValigarmanda,
   "pool/summon-fat-chocobo": _poolSummonFatChocobo,
+  "pool/summon-fenrir": _poolSummonFenrir,
   "pool/summon-g-f-cerberus": _poolSummonGFCerberus,
   "pool/summon-gf-ifrit": _poolSummonGfIfrit,
   "pool/summon-ixion": _poolSummonIxion,

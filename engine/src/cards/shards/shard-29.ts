@@ -705,6 +705,7 @@ import _poolSerraBestiary from "../pool/serra-bestiary.js";
 import _poolSewerNemesis from "../pool/sewer-nemesis.js";
 import _poolShadowcloakVampire from "../pool/shadowcloak-vampire.js";
 import _poolSharedAnimosity from "../pool/shared-animosity.js";
+import _poolShatterskullSmashing from "../pool/shatterskull-smashing.js";
 import _poolShieldOfTheRealm from "../pool/shield-of-the-realm.js";
 import _poolShieldsUp from "../pool/shields-up.js";
 import _poolShimmercreep from "../pool/shimmercreep.js";
@@ -1673,6 +1674,7 @@ const shard: CardShard = {
     _poolSewerNemesis,
     _poolShadowcloakVampire,
     _poolSharedAnimosity,
+    _poolShatterskullSmashing,
     _poolShieldOfTheRealm,
     _poolShieldsUp,
     _poolShimmercreep,

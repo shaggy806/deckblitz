@@ -798,6 +798,7 @@ import _poolStupefyingTouch from "../pool/stupefying-touch.js";
 import _poolSuChi from "../pool/su-chi.js";
 import _poolSumalaRumblers from "../pool/sumala-rumblers.js";
 import _poolSummonFatChocobo from "../pool/summon-fat-chocobo.js";
+import _poolSummonFenrir from "../pool/summon-fenrir.js";
 import _poolSummonersEgg from "../pool/summoners-egg.js";
 import _poolSunsetRevelry from "../pool/sunset-revelry.js";
 import _poolSuppress from "../pool/suppress.js";
@@ -1805,6 +1806,7 @@ const shard: CardShard = {
     _poolSuChi,
     _poolSumalaRumblers,
     _poolSummonFatChocobo,
+    _poolSummonFenrir,
     _poolSummonersEgg,
     _poolSunsetRevelry,
     _poolSuppress,
