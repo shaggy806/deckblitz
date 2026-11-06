@@ -422,6 +422,7 @@ import _poolIronVerdict from "../pool/iron-verdict.js";
 import _poolIronrootWarlord from "../pool/ironroot-warlord.js";
 import _poolIronwrightsCleansing from "../pool/ironwrights-cleansing.js";
 import _poolItDoesntAddUp from "../pool/it-doesnt-add-up.js";
+import _poolJabsMistressOfMockery from "../pool/jabs-mistress-of-mockery.js";
 import _poolJacesSentinel from "../pool/jaces-sentinel.js";
 import _poolJackalPup from "../pool/jackal-pup.js";
 import _poolJaradsOrders from "../pool/jarads-orders.js";
@@ -892,6 +893,7 @@ import _poolUnbreakableFormation from "../pool/unbreakable-formation.js";
 import _poolUndeadButler from "../pool/undead-butler.js";
 import _poolUnerringSling from "../pool/unerring-sling.js";
 import _poolUnyaroBeeSting from "../pool/unyaro-bee-sting.js";
+import _poolUugguuTheOmniplasm from "../pool/uugguu-the-omniplasm.js";
 import _poolValorMadeReal from "../pool/valor-made-real.js";
 import _poolVampireOfTheDireMoon from "../pool/vampire-of-the-dire-moon.js";
 import _poolVampiricTutor from "../pool/vampiric-tutor.js";
@@ -1403,6 +1405,7 @@ const shard: CardShard = {
     _poolIronrootWarlord,
     _poolIronwrightsCleansing,
     _poolItDoesntAddUp,
+    _poolJabsMistressOfMockery,
     _poolJacesSentinel,
     _poolJackalPup,
     _poolJaradsOrders,
@@ -1873,6 +1876,7 @@ const shard: CardShard = {
     _poolUndeadButler,
     _poolUnerringSling,
     _poolUnyaroBeeSting,
+    _poolUugguuTheOmniplasm,
     _poolValorMadeReal,
     _poolVampireOfTheDireMoon,
     _poolVampiricTutor,

@@ -339,6 +339,7 @@ import _poolGodsend from "../pool/godsend.js";
 import _poolGodtoucher from "../pool/godtoucher.js";
 import _poolGoryosVengeance from "../pool/goryos-vengeance.js";
 import _poolGovernTheGuildless from "../pool/govern-the-guildless.js";
+import _poolGrakkThePacifist from "../pool/grakk-the-pacifist.js";
 import _poolGranPulseOchu from "../pool/gran-pulse-ochu.js";
 import _poolGrayMerchantOfAsphodel from "../pool/gray-merchant-of-asphodel.js";
 import _poolGreatArashinCity from "../pool/great-arashin-city.js";
@@ -1328,6 +1329,7 @@ const shard: CardShard = {
     _poolGodtoucher,
     _poolGoryosVengeance,
     _poolGovernTheGuildless,
+    _poolGrakkThePacifist,
     _poolGranPulseOchu,
     _poolGrayMerchantOfAsphodel,
     _poolGreatArashinCity,

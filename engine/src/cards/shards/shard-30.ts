@@ -291,6 +291,7 @@ import _poolFearsomeGoblinPair from "../pool/fearsome-goblin-pair.js";
 import _poolFencingAce from "../pool/fencing-ace.js";
 import _poolFeralGhoul from "../pool/feral-ghoul.js";
 import _poolFeralKrushok from "../pool/feral-krushok.js";
+import _poolFerozUlgrothasWarden from "../pool/feroz-ulgrothas-warden.js";
 import _poolFieldmistBorderpost from "../pool/fieldmist-borderpost.js";
 import _poolFireMagic from "../pool/fire-magic.js";
 import _poolFirefly from "../pool/firefly.js";
@@ -519,6 +520,7 @@ import _poolLoxodonEavesdropper from "../pool/loxodon-eavesdropper.js";
 import _poolLoyalTutor from "../pool/loyal-tutor.js";
 import _poolLukkaCoppercoatOutcast from "../pool/lukka-coppercoat-outcast.js";
 import _poolLumengridGargoyle from "../pool/lumengrid-gargoyle.js";
+import _poolLynaVeilOfVengeance from "../pool/lyna-veil-of-vengeance.js";
 import _poolMacoStrikeTeam from "../pool/maco-strike-team.js";
 import _poolMadameMasque from "../pool/madame-masque.js";
 import _poolMageTowerReferee from "../pool/mage-tower-referee.js";
@@ -1291,6 +1293,7 @@ const shard: CardShard = {
     _poolFencingAce,
     _poolFeralGhoul,
     _poolFeralKrushok,
+    _poolFerozUlgrothasWarden,
     _poolFieldmistBorderpost,
     _poolFireMagic,
     _poolFirefly,
@@ -1519,6 +1522,7 @@ const shard: CardShard = {
     _poolLoyalTutor,
     _poolLukkaCoppercoatOutcast,
     _poolLumengridGargoyle,
+    _poolLynaVeilOfVengeance,
     _poolMacoStrikeTeam,
     _poolMadameMasque,
     _poolMageTowerReferee,

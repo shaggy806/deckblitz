@@ -235,6 +235,7 @@ import _poolDrLeonardBonesMccoy from "../pool/dr-leonard-bones-mccoy.js";
 import _poolDragonBreath from "../pool/dragon-breath.js";
 import _poolDragonHatchling from "../pool/dragon-hatchling.js";
 import _poolDragonMage from "../pool/dragon-mage.js";
+import _poolDragonsSmile from "../pool/dragons-smile.js";
 import _poolDranasEmissary from "../pool/dranas-emissary.js";
 import _poolDreamsOfLaguna from "../pool/dreams-of-laguna.js";
 import _poolDregReaver from "../pool/dreg-reaver.js";
@@ -467,6 +468,7 @@ import _poolKorAeronaut from "../pool/kor-aeronaut.js";
 import _poolKotisTheFangkeeper from "../pool/kotis-the-fangkeeper.js";
 import _poolKuldothaRingleader from "../pool/kuldotha-ringleader.js";
 import _poolKunLunWarrior from "../pool/kun-lun-warrior.js";
+import _poolKurokiThiefOfTalents from "../pool/kuroki-thief-of-talents.js";
 import _poolLaanNoonienSinghSecurity from "../pool/laan-noonien-singh-security.js";
 import _poolLaccolithGrunt from "../pool/laccolith-grunt.js";
 import _poolLastGasp from "../pool/last-gasp.js";
@@ -1216,6 +1218,7 @@ const shard: CardShard = {
     _poolDragonBreath,
     _poolDragonHatchling,
     _poolDragonMage,
+    _poolDragonsSmile,
     _poolDranasEmissary,
     _poolDreamsOfLaguna,
     _poolDregReaver,
@@ -1448,6 +1451,7 @@ const shard: CardShard = {
     _poolKotisTheFangkeeper,
     _poolKuldothaRingleader,
     _poolKunLunWarrior,
+    _poolKurokiThiefOfTalents,
     _poolLaanNoonienSinghSecurity,
     _poolLaccolithGrunt,
     _poolLastGasp,

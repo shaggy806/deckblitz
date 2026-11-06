@@ -422,6 +422,7 @@ import _poolJacesTriumph from "../pool/jaces-triumph.js";
 import _poolJaggedLightning from "../pool/jagged-lightning.js";
 import _poolJetMedallion from "../pool/jet-medallion.js";
 import _poolJoragaVisionary from "../pool/joraga-visionary.js";
+import _poolJovenAndChandler from "../pool/joven-and-chandler.js";
 import _poolJudgeMagisterGabranth from "../pool/judge-magister-gabranth.js";
 import _poolJujuBubble from "../pool/juju-bubble.js";
 import _poolJununEfreet from "../pool/junun-efreet.js";
@@ -559,6 +560,7 @@ import _poolObeliskOfUndoing from "../pool/obelisk-of-undoing.js";
 import _poolObscuraAscendancy from "../pool/obscura-ascendancy.js";
 import _poolOdricBloodCursed from "../pool/odric-blood-cursed.js";
 import _poolOldGrowthGrove from "../pool/old-growth-grove.js";
+import _poolOlindaTheOblivious from "../pool/olinda-the-oblivious.js";
 import _poolOliviaMobilizedForWar from "../pool/olivia-mobilized-for-war.js";
 import _poolOmashuCity from "../pool/omashu-city.js";
 import _poolOmenpathJourney from "../pool/omenpath-journey.js";
@@ -1382,6 +1384,7 @@ const shard: CardShard = {
     _poolJaggedLightning,
     _poolJetMedallion,
     _poolJoragaVisionary,
+    _poolJovenAndChandler,
     _poolJudgeMagisterGabranth,
     _poolJujuBubble,
     _poolJununEfreet,
@@ -1519,6 +1522,7 @@ const shard: CardShard = {
     _poolObscuraAscendancy,
     _poolOdricBloodCursed,
     _poolOldGrowthGrove,
+    _poolOlindaTheOblivious,
     _poolOliviaMobilizedForWar,
     _poolOmashuCity,
     _poolOmenpathJourney,

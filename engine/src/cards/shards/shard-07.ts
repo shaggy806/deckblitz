@@ -51,6 +51,7 @@ import _poolAuraFinesse from "../pool/aura-finesse.js";
 import _poolAuriokChampion from "../pool/auriok-champion.js";
 import _poolAuspiciousStarrix from "../pool/auspicious-starrix.js";
 import _poolAustereCommand from "../pool/austere-command.js";
+import _poolAutumnWillowHarmony from "../pool/autumn-willow-harmony.js";
 import _poolAvidReclaimer from "../pool/avid-reclaimer.js";
 import _poolBackdraftHellkite from "../pool/backdraft-hellkite.js";
 import _poolBakeryRaid from "../pool/bakery-raid.js";
@@ -845,6 +846,7 @@ import _poolTheGrimCaptainsLocker from "../pool/the-grim-captains-locker.js";
 import _poolTheLegendOfKyoshi from "../pool/the-legend-of-kyoshi.js";
 import _poolTheRedTerror from "../pool/the-red-terror.js";
 import _poolTheShire from "../pool/the-shire.js";
+import _poolTheWeaverKing from "../pool/the-weaver-king.js";
 import _poolThornMammoth from "../pool/thorn-mammoth.js";
 import _poolThornglintBridge from "../pool/thornglint-bridge.js";
 import _poolThornscapeFamiliar from "../pool/thornscape-familiar.js";
@@ -972,6 +974,7 @@ import _poolZoZuThePunisher from "../pool/zo-zu-the-punisher.js";
 import _poolZodiacDog from "../pool/zodiac-dog.js";
 import _poolZukoFirebendingMaster from "../pool/zuko-firebending-master.js";
 import _tokensAstartesWarriorToken from "../tokens/astartes-warrior-token.js";
+import _tokensBaneslayerAngelToken from "../tokens/baneslayer-angel-token.js";
 import _tokensBlackWarriorToken from "../tokens/black-warrior-token.js";
 import _tokensClericTokenDeathpactReturn from "../tokens/cleric-token-deathpact-return.js";
 import _tokensConstructTokenDefender from "../tokens/construct-token-defender.js";
@@ -1054,6 +1057,7 @@ const shard: CardShard = {
     _poolAuriokChampion,
     _poolAuspiciousStarrix,
     _poolAustereCommand,
+    _poolAutumnWillowHarmony,
     _poolAvidReclaimer,
     _poolBackdraftHellkite,
     _poolBakeryRaid,
@@ -1848,6 +1852,7 @@ const shard: CardShard = {
     _poolTheLegendOfKyoshi,
     _poolTheRedTerror,
     _poolTheShire,
+    _poolTheWeaverKing,
     _poolThornMammoth,
     _poolThornglintBridge,
     _poolThornscapeFamiliar,
@@ -1977,6 +1982,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokensAstartesWarriorToken,
+    _tokensBaneslayerAngelToken,
     _tokensBlackWarriorToken,
     _tokensClericTokenDeathpactReturn,
     _tokensConstructTokenDefender,

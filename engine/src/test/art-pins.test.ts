@@ -42,6 +42,11 @@ const NO_TOKEN_PRINTING = new Set([
   // Tombstone Stairwell (MIR)'s 2/2 black Zombie with haste named Tombspawn: no
   // token printing in the Oracle snapshot.
   "Tombspawn",
+  // Rise from the Nether (MDD preview)'s 3/1 black Mindless-One and Worzel, the
+  // Protector (MBC)'s 1/1 white Cat with a loyalty-counter ability: no token
+  // printing in the Oracle snapshot.
+  "Mindless-One Token",
+  "Cat Token (Loyalty Counters)",
   // Tatsumasa, the Dragon's Fang (CHK)'s 5/5 blue flying Dragon Spirit: no token
   // printing in the Oracle snapshot.
   "Dragon Spirit Token (Tatsumasa)",

@@ -730,6 +730,7 @@ import _poolRighteousIndignation from "../pool/righteous-indignation.js";
 import _poolRimefeatherOwl from "../pool/rimefeather-owl.js";
 import _poolRipClanCrasher from "../pool/rip-clan-crasher.js";
 import _poolRipplesOfPotential from "../pool/ripples-of-potential.js";
+import _poolRiseFromTheNether from "../pool/rise-from-the-nether.js";
 import _poolRiteOfFlame from "../pool/rite-of-flame.js";
 import _poolRiveteersOverlook from "../pool/riveteers-overlook.js";
 import _poolRoaringEarth from "../pool/roaring-earth.js";
@@ -1021,6 +1022,7 @@ import _tokensPhyrexianMiteToken from "../tokens/phyrexian-mite-token.js";
 import _tokensPrismToken from "../tokens/prism-token.js";
 import _tokensRedElementalToken11 from "../tokens/red-elemental-token-1-1.js";
 import _tokensSamuraiTokenTheEternalWanderer from "../tokens/samurai-token-the-eternal-wanderer.js";
+import _tokensScrybSpritesToken from "../tokens/scryb-sprites-token.js";
 import _tokensServoToken from "../tokens/servo-token.js";
 import _tokensSnakeTokenArtifactPoison from "../tokens/snake-token-artifact-poison.js";
 import _tokensSpiritTokenAbzanMonument from "../tokens/spirit-token-abzan-monument.js";
@@ -1756,6 +1758,7 @@ const shard: CardShard = {
     _poolRimefeatherOwl,
     _poolRipClanCrasher,
     _poolRipplesOfPotential,
+    _poolRiseFromTheNether,
     _poolRiteOfFlame,
     _poolRiveteersOverlook,
     _poolRoaringEarth,
@@ -2049,6 +2052,7 @@ const shard: CardShard = {
     _tokensPrismToken,
     _tokensRedElementalToken11,
     _tokensSamuraiTokenTheEternalWanderer,
+    _tokensScrybSpritesToken,
     _tokensServoToken,
     _tokensSnakeTokenArtifactPoison,
     _tokensSpiritTokenAbzanMonument,

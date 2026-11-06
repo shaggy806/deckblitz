@@ -473,6 +473,7 @@ import _poolMarduAscendancy from "../pool/mardu-ascendancy.js";
 import _poolMarshGas from "../pool/marsh-gas.js";
 import _poolMarshalsPathcruiser from "../pool/marshals-pathcruiser.js";
 import _poolMassacreWurm from "../pool/massacre-wurm.js";
+import _poolMeatsqueakHoardLord from "../pool/meatsqueak-hoard-lord.js";
 import _poolMephiticVapors from "../pool/mephitic-vapors.js";
 import _poolMerfolkOfTheDepths from "../pool/merfolk-of-the-depths.js";
 import _poolMerfolkSovereign from "../pool/merfolk-sovereign.js";
@@ -661,6 +662,7 @@ import _poolSanguineSyphoner from "../pool/sanguine-syphoner.js";
 import _poolSaradocMasterOfBuckland from "../pool/saradoc-master-of-buckland.js";
 import _poolSarevoksTome from "../pool/sarevoks-tome.js";
 import _poolSarumansTrickery from "../pool/sarumans-trickery.js";
+import _poolSashAndWaistcoatUnmen from "../pool/sash-and-waistcoat-unmen.js";
 import _poolSatyrNyxSmith from "../pool/satyr-nyx-smith.js";
 import _poolSavageAlliance from "../pool/savage-alliance.js";
 import _poolSavorTheMoment from "../pool/savor-the-moment.js";
@@ -1424,6 +1426,7 @@ const shard: CardShard = {
     _poolMarshGas,
     _poolMarshalsPathcruiser,
     _poolMassacreWurm,
+    _poolMeatsqueakHoardLord,
     _poolMephiticVapors,
     _poolMerfolkOfTheDepths,
     _poolMerfolkSovereign,
@@ -1612,6 +1615,7 @@ const shard: CardShard = {
     _poolSaradocMasterOfBuckland,
     _poolSarevoksTome,
     _poolSarumansTrickery,
+    _poolSashAndWaistcoatUnmen,
     _poolSatyrNyxSmith,
     _poolSavageAlliance,
     _poolSavorTheMoment,

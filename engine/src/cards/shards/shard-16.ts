@@ -609,6 +609,7 @@ import _poolPartTheWaterveil from "../pool/part-the-waterveil.js";
 import _poolPatagiaViper from "../pool/patagia-viper.js";
 import _poolPawpatchFormation from "../pool/pawpatch-formation.js";
 import _poolPeerPressure from "../pool/peer-pressure.js";
+import _poolPenanceStare from "../pool/penance-stare.js";
 import _poolPerceptionBobblehead from "../pool/perception-bobblehead.js";
 import _poolPerfectedTheory from "../pool/perfected-theory.js";
 import _poolPerpetualTimepiece from "../pool/perpetual-timepiece.js";
@@ -1031,6 +1032,7 @@ import _tokensInsectTokenRiseOfTheAnts from "../tokens/insect-token-rise-of-the-
 import _tokensInsectToken from "../tokens/insect-token.js";
 import _tokensKaldra from "../tokens/kaldra.js";
 import _tokensLifelinkVampireToken from "../tokens/lifelink-vampire-token.js";
+import _tokensMindlessOneToken from "../tokens/mindless-one-token.js";
 import _tokensMunitionsToken from "../tokens/munitions-token.js";
 import _tokensPhyrexianWurmLifelink from "../tokens/phyrexian-wurm-lifelink.js";
 import _tokensPilotToken from "../tokens/pilot-token.js";
@@ -1656,6 +1658,7 @@ const shard: CardShard = {
     _poolPatagiaViper,
     _poolPawpatchFormation,
     _poolPeerPressure,
+    _poolPenanceStare,
     _poolPerceptionBobblehead,
     _poolPerfectedTheory,
     _poolPerpetualTimepiece,
@@ -2080,6 +2083,7 @@ const shard: CardShard = {
     _tokensInsectToken,
     _tokensKaldra,
     _tokensLifelinkVampireToken,
+    _tokensMindlessOneToken,
     _tokensMunitionsToken,
     _tokensPhyrexianWurmLifelink,
     _tokensPilotToken,

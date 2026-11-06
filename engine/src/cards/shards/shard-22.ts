@@ -81,6 +81,7 @@ import _poolBlinkmothUrn from "../pool/blinkmoth-urn.js";
 import _poolBloodswornSteward from "../pool/bloodsworn-steward.js";
 import _poolBloomTender from "../pool/bloom-tender.js";
 import _poolBloomingBlast from "../pool/blooming-blast.js";
+import _poolBlorTheImpervious from "../pool/blor-the-impervious.js";
 import _poolBlotOutTheSky from "../pool/blot-out-the-sky.js";
 import _poolBodyCount from "../pool/body-count.js";
 import _poolBogInitiate from "../pool/bog-initiate.js";
@@ -721,6 +722,7 @@ import _poolShireTerrace from "../pool/shire-terrace.js";
 import _poolShockerUnshakable from "../pool/shocker-unshakable.js";
 import _poolShowerOfSparks from "../pool/shower-of-sparks.js";
 import _poolSiegeGangCommander from "../pool/siege-gang-commander.js";
+import _poolSifaGrent from "../pool/sifa-grent.js";
 import _poolSigardaHeronsGrace from "../pool/sigarda-herons-grace.js";
 import _poolSightlessGhoul from "../pool/sightless-ghoul.js";
 import _poolSigiledSentinel from "../pool/sigiled-sentinel.js";
@@ -1086,6 +1088,7 @@ const shard: CardShard = {
     _poolBloodswornSteward,
     _poolBloomTender,
     _poolBloomingBlast,
+    _poolBlorTheImpervious,
     _poolBlotOutTheSky,
     _poolBodyCount,
     _poolBogInitiate,
@@ -1726,6 +1729,7 @@ const shard: CardShard = {
     _poolShockerUnshakable,
     _poolShowerOfSparks,
     _poolSiegeGangCommander,
+    _poolSifaGrent,
     _poolSigardaHeronsGrace,
     _poolSightlessGhoul,
     _poolSigiledSentinel,

@@ -41,6 +41,7 @@ import _poolArmsOfHadar from "../pool/arms-of-hadar.js";
 import _poolArrestersAdmonition from "../pool/arresters-admonition.js";
 import _poolArtisansSorrow from "../pool/artisans-sorrow.js";
 import _poolAscendantSpirit from "../pool/ascendant-spirit.js";
+import _poolAshayasEnduringBond from "../pool/ashayas-enduring-bond.js";
 import _poolAshiokDreamRender from "../pool/ashiok-dream-render.js";
 import _poolAshioksReaper from "../pool/ashioks-reaper.js";
 import _poolAssemble from "../pool/assemble.js";
@@ -92,6 +93,7 @@ import _poolBoobyTrap from "../pool/booby-trap.js";
 import _poolBorealGriffin from "../pool/boreal-griffin.js";
 import _poolBoreasCharger from "../pool/boreas-charger.js";
 import _poolBorosStrikeCaptain from "../pool/boros-strike-captain.js";
+import _poolBossUramonShadowsReach from "../pool/boss-uramon-shadows-reach.js";
 import _poolBosssChauffeur from "../pool/bosss-chauffeur.js";
 import _poolBoundInSilence from "../pool/bound-in-silence.js";
 import _poolBrainbite from "../pool/brainbite.js";
@@ -318,6 +320,7 @@ import _poolGorgonFlail from "../pool/gorgon-flail.js";
 import _poolGorillaShaman from "../pool/gorilla-shaman.js";
 import _poolGougedZealot from "../pool/gouged-zealot.js";
 import _poolGracefulTakedown from "../pool/graceful-takedown.js";
+import _poolGrandmotherGoby from "../pool/grandmother-goby.js";
 import _poolGraspingGiant from "../pool/grasping-giant.js";
 import _poolGravelighter from "../pool/gravelighter.js";
 import _poolGreenGoblinNemesis from "../pool/green-goblin-nemesis.js";
@@ -401,6 +404,7 @@ import _poolInvokeDespair from "../pool/invoke-despair.js";
 import _poolIreShaman from "../pool/ire-shaman.js";
 import _poolIronMaiden from "../pool/iron-maiden.js";
 import _poolIronManArmoredAvenger from "../pool/iron-man-armored-avenger.js";
+import _poolIstvanButcherOfEln from "../pool/istvan-butcher-of-eln.js";
 import _poolIvoryCharm from "../pool/ivory-charm.js";
 import _poolJaddiOffshoot from "../pool/jaddi-offshoot.js";
 import _poolJadeAvenger from "../pool/jade-avenger.js";
@@ -1010,6 +1014,7 @@ const shard: CardShard = {
     _poolArrestersAdmonition,
     _poolArtisansSorrow,
     _poolAscendantSpirit,
+    _poolAshayasEnduringBond,
     _poolAshiokDreamRender,
     _poolAshioksReaper,
     _poolAssemble,
@@ -1061,6 +1066,7 @@ const shard: CardShard = {
     _poolBorealGriffin,
     _poolBoreasCharger,
     _poolBorosStrikeCaptain,
+    _poolBossUramonShadowsReach,
     _poolBosssChauffeur,
     _poolBoundInSilence,
     _poolBrainbite,
@@ -1287,6 +1293,7 @@ const shard: CardShard = {
     _poolGorillaShaman,
     _poolGougedZealot,
     _poolGracefulTakedown,
+    _poolGrandmotherGoby,
     _poolGraspingGiant,
     _poolGravelighter,
     _poolGreenGoblinNemesis,
@@ -1370,6 +1377,7 @@ const shard: CardShard = {
     _poolIreShaman,
     _poolIronMaiden,
     _poolIronManArmoredAvenger,
+    _poolIstvanButcherOfEln,
     _poolIvoryCharm,
     _poolJaddiOffshoot,
     _poolJadeAvenger,

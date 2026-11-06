@@ -395,6 +395,7 @@ import _poolGuardianOfSolitude from "../pool/guardian-of-solitude.js";
 import _poolGuideOfSouls from "../pool/guide-of-souls.js";
 import _poolGundabadOpportunist from "../pool/gundabad-opportunist.js";
 import _poolGustcloakRunner from "../pool/gustcloak-runner.js";
+import _poolGusthaEbbasdotter from "../pool/gustha-ebbasdotter.js";
 import _poolGutterGrime from "../pool/gutter-grime.js";
 import _poolHairStrungKoto from "../pool/hair-strung-koto.js";
 import _poolHaldanAvidArcanist from "../pool/haldan-avid-arcanist.js";
@@ -1427,6 +1428,7 @@ const shard: CardShard = {
     _poolGuideOfSouls,
     _poolGundabadOpportunist,
     _poolGustcloakRunner,
+    _poolGusthaEbbasdotter,
     _poolGutterGrime,
     _poolHairStrungKoto,
     _poolHaldanAvidArcanist,

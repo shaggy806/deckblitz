@@ -400,6 +400,7 @@ import _poolHaltOrder from "../pool/halt-order.js";
 import _poolHarshJustice from "../pool/harsh-justice.js";
 import _poolHeavyArbalest from "../pool/heavy-arbalest.js";
 import _poolHeedlessOne from "../pool/heedless-one.js";
+import _poolHelasArcanum from "../pool/helas-arcanum.js";
 import _poolHeroInTraining from "../pool/hero-in-training.js";
 import _poolHexgoldHoverwings from "../pool/hexgold-hoverwings.js";
 import _poolHexgoldSlith from "../pool/hexgold-slith.js";
@@ -830,6 +831,7 @@ import _poolTheFallOfLordKonda from "../pool/the-fall-of-lord-konda.js";
 import _poolTheGooseMother from "../pool/the-goose-mother.js";
 import _poolTheLastRide from "../pool/the-last-ride.js";
 import _poolTheWanderer from "../pool/the-wanderer.js";
+import _poolThomilTheDestroyer from "../pool/thomil-the-destroyer.js";
 import _poolThopterEngineer from "../pool/thopter-engineer.js";
 import _poolThopterFabricator from "../pool/thopter-fabricator.js";
 import _poolThornbiteStaff from "../pool/thornbite-staff.js";
@@ -951,6 +953,7 @@ import _poolZodiacMonkey from "../pool/zodiac-monkey.js";
 import _poolZulaportDuelist from "../pool/zulaport-duelist.js";
 import _tokens22SplittingOozeToken from "../tokens/2-2-splitting-ooze-token.js";
 import _tokensBeastToken33 from "../tokens/beast-token-3-3.js";
+import _tokensBlackLotusToken from "../tokens/black-lotus-token.js";
 import _tokensBlueBirdToken from "../tokens/blue-bird-token.js";
 import _tokensCadet from "../tokens/cadet.js";
 import _tokensCitizenToken from "../tokens/citizen-token.js";
@@ -1377,6 +1380,7 @@ const shard: CardShard = {
     _poolHarshJustice,
     _poolHeavyArbalest,
     _poolHeedlessOne,
+    _poolHelasArcanum,
     _poolHeroInTraining,
     _poolHexgoldHoverwings,
     _poolHexgoldSlith,
@@ -1807,6 +1811,7 @@ const shard: CardShard = {
     _poolTheGooseMother,
     _poolTheLastRide,
     _poolTheWanderer,
+    _poolThomilTheDestroyer,
     _poolThopterEngineer,
     _poolThopterFabricator,
     _poolThornbiteStaff,
@@ -1930,6 +1935,7 @@ const shard: CardShard = {
   tokens: [
     _tokens22SplittingOozeToken,
     _tokensBeastToken33,
+    _tokensBlackLotusToken,
     _tokensBlueBirdToken,
     _tokensCadet,
     _tokensCitizenToken,

@@ -58,6 +58,7 @@ import _poolAvenSquire from "../pool/aven-squire.js";
 import _poolAwakenTheSkyTyrant from "../pool/awaken-the-sky-tyrant.js";
 import _poolAxgardBraggart from "../pool/axgard-braggart.js";
 import _poolBadgeyMaliciousGlitch from "../pool/badgey-malicious-glitch.js";
+import _poolBalefangTheUnslayable from "../pool/balefang-the-unslayable.js";
 import _poolBalefulStrix from "../pool/baleful-strix.js";
 import _poolBalthierAndFran from "../pool/balthier-and-fran.js";
 import _poolBandTogether from "../pool/band-together.js";
@@ -963,6 +964,7 @@ import _tokensHeroToken from "../tokens/hero-token.js";
 import _tokensIllusionTokenFreezingBlocker from "../tokens/illusion-token-freezing-blocker.js";
 import _tokensKorWarriorToken from "../tokens/kor-warrior-token.js";
 import _tokensLizardToken from "../tokens/lizard-token.js";
+import _tokensLordOfThePitToken from "../tokens/lord-of-the-pit-token.js";
 import _tokensMinorDemonToken from "../tokens/minor-demon-token.js";
 import _tokensOfficerToken from "../tokens/officer-token.js";
 import _tokensOrnithopterToken from "../tokens/ornithopter-token.js";
@@ -1032,6 +1034,7 @@ const shard: CardShard = {
     _poolAwakenTheSkyTyrant,
     _poolAxgardBraggart,
     _poolBadgeyMaliciousGlitch,
+    _poolBalefangTheUnslayable,
     _poolBalefulStrix,
     _poolBalthierAndFran,
     _poolBandTogether,
@@ -1939,6 +1942,7 @@ const shard: CardShard = {
     _tokensIllusionTokenFreezingBlocker,
     _tokensKorWarriorToken,
     _tokensLizardToken,
+    _tokensLordOfThePitToken,
     _tokensMinorDemonToken,
     _tokensOfficerToken,
     _tokensOrnithopterToken,

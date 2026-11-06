@@ -379,6 +379,7 @@ import _poolHerbalPoultice from "../pool/herbal-poultice.js";
 import _poolHitTheMotherLode from "../pool/hit-the-mother-lode.js";
 import _poolHollowhengeOverlord from "../pool/hollowhenge-overlord.js";
 import _poolHollowhengeSpirit from "../pool/hollowhenge-spirit.js";
+import _poolHomerTheHermit from "../pool/homer-the-hermit.js";
 import _poolHoofSkulkin from "../pool/hoof-skulkin.js";
 import _poolHostileInvestigator from "../pool/hostile-investigator.js";
 import _poolHostileMinotaur from "../pool/hostile-minotaur.js";
@@ -651,6 +652,7 @@ import _poolReverseEngineer from "../pool/reverse-engineer.js";
 import _poolRhoxCharger from "../pool/rhox-charger.js";
 import _poolRhoxOracle from "../pool/rhox-oracle.js";
 import _poolRiderInNeed from "../pool/rider-in-need.js";
+import _poolRikalaHomaridKing from "../pool/rikala-homarid-king.js";
 import _poolRingOfMaruf from "../pool/ring-of-maruf.js";
 import _poolRiteOfRuin from "../pool/rite-of-ruin.js";
 import _poolRiteOfTheRagingStorm from "../pool/rite-of-the-raging-storm.js";
@@ -1366,6 +1368,7 @@ const shard: CardShard = {
     _poolHitTheMotherLode,
     _poolHollowhengeOverlord,
     _poolHollowhengeSpirit,
+    _poolHomerTheHermit,
     _poolHoofSkulkin,
     _poolHostileInvestigator,
     _poolHostileMinotaur,
@@ -1638,6 +1641,7 @@ const shard: CardShard = {
     _poolRhoxCharger,
     _poolRhoxOracle,
     _poolRiderInNeed,
+    _poolRikalaHomaridKing,
     _poolRingOfMaruf,
     _poolRiteOfRuin,
     _poolRiteOfTheRagingStorm,

@@ -245,6 +245,8 @@ import _poolEchoCirclet from "../pool/echo-circlet.js";
 import _poolEcologicalAppreciation from "../pool/ecological-appreciation.js";
 import _poolEiganjoDynastorian from "../pool/eiganjo-dynastorian.js";
 import _poolEjectTheWarpCore from "../pool/eject-the-warp-core.js";
+import _poolEkthiContaminatorPriest from "../pool/ekthi-contaminator-priest.js";
+import _poolEldaConjurerOfSpectacle from "../pool/elda-conjurer-of-spectacle.js";
 import _poolEldritchPact from "../pool/eldritch-pact.js";
 import _poolElectricEel from "../pool/electric-eel.js";
 import _poolElminstersSimulacrum from "../pool/elminsters-simulacrum.js";
@@ -1252,6 +1254,8 @@ const shard: CardShard = {
     _poolEcologicalAppreciation,
     _poolEiganjoDynastorian,
     _poolEjectTheWarpCore,
+    _poolEkthiContaminatorPriest,
+    _poolEldaConjurerOfSpectacle,
     _poolEldritchPact,
     _poolElectricEel,
     _poolElminstersSimulacrum,

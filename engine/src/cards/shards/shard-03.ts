@@ -497,6 +497,7 @@ import _poolNaturesPanoply from "../pool/natures-panoply.js";
 import _poolNecraDisciple from "../pool/necra-disciple.js";
 import _poolNecrogoyf from "../pool/necrogoyf.js";
 import _poolNecronDeathmark from "../pool/necron-deathmark.js";
+import _poolNephilimEpochal from "../pool/nephilim-epochal.js";
 import _poolNettleSwine from "../pool/nettle-swine.js";
 import _poolNevermaker from "../pool/nevermaker.js";
 import _poolNezumiRoadCaptain from "../pool/nezumi-road-captain.js";
@@ -1394,6 +1395,7 @@ const shard: CardShard = {
     _poolNecraDisciple,
     _poolNecrogoyf,
     _poolNecronDeathmark,
+    _poolNephilimEpochal,
     _poolNettleSwine,
     _poolNevermaker,
     _poolNezumiRoadCaptain,

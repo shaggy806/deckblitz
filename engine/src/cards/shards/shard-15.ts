@@ -168,6 +168,7 @@ import _poolDaredevilsBillyClub from "../pool/daredevils-billy-club.js";
 import _poolDarkestHour from "../pool/darkest-hour.js";
 import _poolDauntlessBodyguard from "../pool/dauntless-bodyguard.js";
 import _poolDauntlessOnslaught from "../pool/dauntless-onslaught.js";
+import _poolDavvolEvincarOfRath from "../pool/davvol-evincar-of-rath.js";
 import _poolDeathBomb from "../pool/death-bomb.js";
 import _poolDeathTyrant from "../pool/death-tyrant.js";
 import _poolDeathcoilWurm from "../pool/deathcoil-wurm.js";
@@ -1097,6 +1098,7 @@ const shard: CardShard = {
     _poolDarkestHour,
     _poolDauntlessBodyguard,
     _poolDauntlessOnslaught,
+    _poolDavvolEvincarOfRath,
     _poolDeathBomb,
     _poolDeathTyrant,
     _poolDeathcoilWurm,

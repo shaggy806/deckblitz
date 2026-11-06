@@ -390,6 +390,7 @@ import _poolGraySlaad from "../pool/gray-slaad.js";
 import _poolGreasefangOkibaBoss from "../pool/greasefang-okiba-boss.js";
 import _poolGreatHallOfTheCitadel from "../pool/great-hall-of-the-citadel.js";
 import _poolGreatTrainHeist from "../pool/great-train-heist.js";
+import _poolGreensleeves from "../pool/greensleeves.js";
 import _poolGreenwardenOfMurasa from "../pool/greenwarden-of-murasa.js";
 import _poolGrimAffliction from "../pool/grim-affliction.js";
 import _poolGrimBackwoods from "../pool/grim-backwoods.js";
@@ -587,6 +588,7 @@ import _poolNicoMinoruRunaway from "../pool/nico-minoru-runaway.js";
 import _poolNightOfSoulsBetrayal from "../pool/night-of-souls-betrayal.js";
 import _poolNightbladeBrigade from "../pool/nightblade-brigade.js";
 import _poolNirkanaCutthroat from "../pool/nirkana-cutthroat.js";
+import _poolNiveaBelovedBattlemage from "../pool/nivea-beloved-battlemage.js";
 import _poolNobleHierarch from "../pool/noble-hierarch.js";
 import _poolNorinTheWary from "../pool/norin-the-wary.js";
 import _poolNorritt from "../pool/norritt.js";
@@ -874,6 +876,7 @@ import _poolTraverseEternity from "../pool/traverse-eternity.js";
 import _poolTraxosAcademyGuardian from "../pool/traxos-academy-guardian.js";
 import _poolTriskelion from "../pool/triskelion.js";
 import _poolTrystansCommand from "../pool/trystans-command.js";
+import _poolTsaganRaiderWarlord from "../pool/tsagan-raider-warlord.js";
 import _poolTuktukTheExplorer from "../pool/tuktuk-the-explorer.js";
 import _poolTwentyToedToad from "../pool/twenty-toed-toad.js";
 import _poolTwilightsCall from "../pool/twilights-call.js";
@@ -959,6 +962,7 @@ import _tokensDinosaurSoldierToken from "../tokens/dinosaur-soldier-token.js";
 import _tokensElementalBirdTokenMuYanlingSkyDancer from "../tokens/elemental-bird-token-mu-yanling-sky-dancer.js";
 import _tokensElementalShamanToken from "../tokens/elemental-shaman-token.js";
 import _tokensElementalToken10Blue from "../tokens/elemental-token-1-0-blue.js";
+import _tokensFerozsBanToken from "../tokens/ferozs-ban-token.js";
 import _tokensGalactus from "../tokens/galactus.js";
 import _tokensHalflingToken from "../tokens/halfling-token.js";
 import _tokensHorrorTokenBlueBlackFlying from "../tokens/horror-token-blue-black-flying.js";
@@ -1365,6 +1369,7 @@ const shard: CardShard = {
     _poolGreasefangOkibaBoss,
     _poolGreatHallOfTheCitadel,
     _poolGreatTrainHeist,
+    _poolGreensleeves,
     _poolGreenwardenOfMurasa,
     _poolGrimAffliction,
     _poolGrimBackwoods,
@@ -1562,6 +1567,7 @@ const shard: CardShard = {
     _poolNightOfSoulsBetrayal,
     _poolNightbladeBrigade,
     _poolNirkanaCutthroat,
+    _poolNiveaBelovedBattlemage,
     _poolNobleHierarch,
     _poolNorinTheWary,
     _poolNorritt,
@@ -1849,6 +1855,7 @@ const shard: CardShard = {
     _poolTraxosAcademyGuardian,
     _poolTriskelion,
     _poolTrystansCommand,
+    _poolTsaganRaiderWarlord,
     _poolTuktukTheExplorer,
     _poolTwentyToedToad,
     _poolTwilightsCall,
@@ -1936,6 +1943,7 @@ const shard: CardShard = {
     _tokensElementalBirdTokenMuYanlingSkyDancer,
     _tokensElementalShamanToken,
     _tokensElementalToken10Blue,
+    _tokensFerozsBanToken,
     _tokensGalactus,
     _tokensHalflingToken,
     _tokensHorrorTokenBlueBlackFlying,

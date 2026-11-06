@@ -290,6 +290,7 @@ import _poolGaeasCradle from "../pool/gaeas-cradle.js";
 import _poolGalacticWayfarer from "../pool/galactic-wayfarer.js";
 import _poolGalliaOfTheEndlessDance from "../pool/gallia-of-the-endless-dance.js";
 import _poolGalvanicDischarge from "../pool/galvanic-discharge.js";
+import _poolGargantosTheEndbringer from "../pool/gargantos-the-endbringer.js";
 import _poolGaseousForm from "../pool/gaseous-form.js";
 import _poolGatekeeperGargoyle from "../pool/gatekeeper-gargoyle.js";
 import _poolGeistlightSnare from "../pool/geistlight-snare.js";
@@ -944,6 +945,7 @@ import _poolZygonInfiltrator from "../pool/zygon-infiltrator.js";
 import _tokens11ThrullToken from "../tokens/1-1-thrull-token.js";
 import _tokens55ElephantToken from "../tokens/5-5-elephant-token.js";
 import _tokensBallisticBoulderToken from "../tokens/ballistic-boulder-token.js";
+import _tokensCatTokenLoyaltyCounters from "../tokens/cat-token-loyalty-counters.js";
 import _tokensDragonTokenAvatarRoku from "../tokens/dragon-token-avatar-roku.js";
 import _tokensEldraziAngelToken from "../tokens/eldrazi-angel-token.js";
 import _tokensGoblinWizardToken from "../tokens/goblin-wizard-token.js";
@@ -1255,6 +1257,7 @@ const shard: CardShard = {
     _poolGalacticWayfarer,
     _poolGalliaOfTheEndlessDance,
     _poolGalvanicDischarge,
+    _poolGargantosTheEndbringer,
     _poolGaseousForm,
     _poolGatekeeperGargoyle,
     _poolGeistlightSnare,
@@ -1911,6 +1914,7 @@ const shard: CardShard = {
     _tokens11ThrullToken,
     _tokens55ElephantToken,
     _tokensBallisticBoulderToken,
+    _tokensCatTokenLoyaltyCounters,
     _tokensDragonTokenAvatarRoku,
     _tokensEldraziAngelToken,
     _tokensGoblinWizardToken,

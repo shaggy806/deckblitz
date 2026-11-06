@@ -918,6 +918,7 @@ import _poolWoodlandCemetery from "../pool/woodland-cemetery.js";
 import _poolWordOfSeizing from "../pool/word-of-seizing.js";
 import _poolWorldBreaker from "../pool/world-breaker.js";
 import _poolWorryBeads from "../pool/worry-beads.js";
+import _poolWorzelTheProtector from "../pool/worzel-the-protector.js";
 import _poolWrapInVigor from "../pool/wrap-in-vigor.js";
 import _poolWuAdmiral from "../pool/wu-admiral.js";
 import _poolWuScout from "../pool/wu-scout.js";
@@ -933,6 +934,7 @@ import _poolZiatorasProvingGround from "../pool/ziatoras-proving-ground.js";
 import _poolZodiacRabbit from "../pool/zodiac-rabbit.js";
 import _poolZombieCannibal from "../pool/zombie-cannibal.js";
 import _poolZurgoHelmsmasher from "../pool/zurgo-helmsmasher.js";
+import _tokensAkromaAngelOfWrathToken from "../tokens/akroma-angel-of-wrath-token.js";
 import _tokensAngelTokenBlack33Flying from "../tokens/angel-token-black-3-3-flying.js";
 import _tokensClownRobotToken from "../tokens/clown-robot-token.js";
 import _tokensConstructTokenTheFantasticar from "../tokens/construct-token-the-fantasticar.js";
@@ -1874,6 +1876,7 @@ const shard: CardShard = {
     _poolWordOfSeizing,
     _poolWorldBreaker,
     _poolWorryBeads,
+    _poolWorzelTheProtector,
     _poolWrapInVigor,
     _poolWuAdmiral,
     _poolWuScout,
@@ -1891,6 +1894,7 @@ const shard: CardShard = {
     _poolZurgoHelmsmasher,
   ],
   tokens: [
+    _tokensAkromaAngelOfWrathToken,
     _tokensAngelTokenBlack33Flying,
     _tokensClownRobotToken,
     _tokensConstructTokenTheFantasticar,

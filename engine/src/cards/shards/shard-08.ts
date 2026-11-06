@@ -146,6 +146,7 @@ import _poolChaosCharm from "../pool/chaos-charm.js";
 import _poolChargeOfTheForeverBeast from "../pool/charge-of-the-forever-beast.js";
 import _poolCharmedStray from "../pool/charmed-stray.js";
 import _poolChelonianTackle from "../pool/chelonian-tackle.js";
+import _poolChiefMagistrateOfMercadia from "../pool/chief-magistrate-of-mercadia.js";
 import _poolChillbringer from "../pool/chillbringer.js";
 import _poolChiseiHeartOfOceans from "../pool/chisei-heart-of-oceans.js";
 import _poolChitteringHost from "../pool/chittering-host.js";
@@ -251,6 +252,7 @@ import _poolDuneDiviner from "../pool/dune-diviner.js";
 import _poolDuskUrchins from "../pool/dusk-urchins.js";
 import _poolDusk from "../pool/dusk.js";
 import _poolDwarvenProvisioner from "../pool/dwarven-provisioner.js";
+import _poolDyfedTheGuidingHand from "../pool/dyfed-the-guiding-hand.js";
 import _poolEclipsedKithkin from "../pool/eclipsed-kithkin.js";
 import _poolEdELonesomeEyebot from "../pool/ed-e-lonesome-eyebot.js";
 import _poolEgoDrain from "../pool/ego-drain.js";
@@ -1010,6 +1012,7 @@ import _tokensCatWarriorToken from "../tokens/cat-warrior-token.js";
 import _tokensElfWarriorTokenRhysTheRedeemed from "../tokens/elf-warrior-token-rhys-the-redeemed.js";
 import _tokensFishTokenExpendableLackey from "../tokens/fish-token-expendable-lackey.js";
 import _tokensFoodToken from "../tokens/food-token.js";
+import _tokensGiantBadgerToken from "../tokens/giant-badger-token.js";
 import _tokensHorrorToken from "../tokens/horror-token.js";
 import _tokensHumanWarriorToken31TrampleHaste from "../tokens/human-warrior-token-3-1-trample-haste.js";
 import _tokensHumanWizardToken from "../tokens/human-wizard-token.js";
@@ -1176,6 +1179,7 @@ const shard: CardShard = {
     _poolChargeOfTheForeverBeast,
     _poolCharmedStray,
     _poolChelonianTackle,
+    _poolChiefMagistrateOfMercadia,
     _poolChillbringer,
     _poolChiseiHeartOfOceans,
     _poolChitteringHost,
@@ -1281,6 +1285,7 @@ const shard: CardShard = {
     _poolDuskUrchins,
     _poolDusk,
     _poolDwarvenProvisioner,
+    _poolDyfedTheGuidingHand,
     _poolEclipsedKithkin,
     _poolEdELonesomeEyebot,
     _poolEgoDrain,
@@ -2042,6 +2047,7 @@ const shard: CardShard = {
     _tokensElfWarriorTokenRhysTheRedeemed,
     _tokensFishTokenExpendableLackey,
     _tokensFoodToken,
+    _tokensGiantBadgerToken,
     _tokensHorrorToken,
     _tokensHumanWarriorToken31TrampleHaste,
     _tokensHumanWizardToken,
