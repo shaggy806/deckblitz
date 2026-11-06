@@ -2509,7 +2509,7 @@ function dividedTotalOf(phrase) {
  */
 function dividedDamageOf(s, ctx) {
   const m =
-    /^(~|[Ii]t) deals (?:(a|an|one|two|three|four|five|six|seven|eight|nine|ten|X|\d+) damage|damage equal to (?:its|~'s) power) divided as you choose among (.+?)(?:, where X is (.+?))?\.$/.exec(
+    /^(~|[Ii]t) deals (?:(a|an|one|two|three|four|five|six|seven|eight|nine|ten|X|X plus \d+|\d+) damage|damage equal to (?:its|~'s) power) divided as you choose among (.+?)(?:, where X is (.+?))?\.$/.exec(
       s,
     );
   if (m === null) return undefined;
@@ -2518,7 +2518,13 @@ function dividedDamageOf(s, ctx) {
   const [, , word, groupPhrase, where] = m;
   let total;
   let x = false;
-  if (word === undefined) {
+  // "X plus 1" (Meteor Shower): a spell's X read as it's cast, the offer
+  // carrying the total at each X; the engine caps the group by it.
+  const plus = word === undefined ? null : /^X plus (\d+)$/.exec(word);
+  if (plus !== null) {
+    if (!ctx.spell || where !== undefined) return null;
+    total = { sum: ["x", Number(plus[1])] };
+  } else if (word === undefined) {
     if (where !== undefined) return null;
     total = { powerOf: "source" };
   } else if (word === "X") {
@@ -2543,7 +2549,22 @@ function dividedDamageOf(s, ctx) {
   let g;
   let of;
   let bounds;
-  if ((g = /^(any number of|one or two|one, two, or three) (targets|target (.+))$/.exec(groupPhrase))) {
+  if ((g = /^up to (two|three) (targets|target (.+))$/.exec(groupPhrase))) {
+    // "X damage divided as you choose among up to two target …"
+    // (Shatterskull Smashing): the group's own most, and a spell's X as an
+    // amount — the offer reads it at each X, and how many targets each
+    // allows (at least 1 each).
+    if (!x) return null;
+    if (g[3] === undefined) of = "any-target";
+    else {
+      const either = /^creatures and\/or planeswalkers/;
+      of = targetOf(`target ${either.test(g[3]) ? g[3].replace(either, "creature or planeswalker") : singularTarget(g[3])}`);
+    }
+    if (of === undefined) return null;
+    x = false;
+    total = "x";
+    bounds = { max: g[1] === "two" ? 2 : 3 };
+  } else if ((g = /^(any number of|one or two|one, two, or three) (targets|target (.+))$/.exec(groupPhrase))) {
     if (g[3] === undefined) of = "any-target";
     else {
       const plural = g[3].replace(/ your opponents control$/, " an opponent controls");
@@ -15345,7 +15366,25 @@ function parseFaceAsWritten(face, ctx = {}) {
       }
       const asCast = splitAsCastSentence(text);
       if (asCast !== null) text = asCast.rest;
+      // "If X is 6 or more, ~ deals twice X damage divided as you choose
+      // among them instead." (Shatterskull Smashing): twice X is the total
+      // divided (its ruling), read at the X it's cast with.
+      const xInstead =
+        /^(.+\.) If X is (\d+) or more, ~ deals twice X damage divided as you choose among them instead\.$/.exec(text);
+      if (xInstead !== null) text = xInstead[1];
       const r = parseEffect(text, ctx2);
+      if (xInstead !== null) {
+        const before = ctx2.divided.value;
+        if (r.effect !== null && before?.total === "x" && before.x === undefined) {
+          ctx2.divided.value = {
+            ...before,
+            total: { ifCondition: { kind: "x", compare: { op: "gte", n: Number(xInstead[2]) } }, then: { product: ["x", 2] }, else: "x" },
+          };
+        } else {
+          r.effect = null;
+          r.todo = [...(r.todo ?? []), xInstead[0]];
+        }
+      }
       if (asCast !== null && r.effect !== null) {
         const patched = asCast.patch(r.effect);
         r.effect = patched;

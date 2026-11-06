@@ -542,6 +542,8 @@ interface Targeting {
     readonly of?: string
     readonly x?: true
     readonly upTo?: true
+    /** The total at each X (index X) — "X plus 1" (Meteor Shower). */
+    readonly totalByX?: readonly number[]
   }
   /** How many of its cost's Phyrexian pips could be paid with 2 life each
    * (rule 107.4f): asked once the targets are in, before it goes out. */
@@ -2583,8 +2585,14 @@ function Table({
           ? []
           : targets.slice(t.divide.slot).filter((r): r is TargetRef => r !== null)
       if (t.divide !== undefined && division === undefined && members.length >= 2) {
-        // "X damage divided" (Fire Covenant): the X just chosen.
-        const total = t.divide.x === true ? (t.xValue ?? 0) : t.divide.total
+        // "X damage divided" (Fire Covenant): the X just chosen; "X plus 1"
+        // (Meteor Shower): the engine's total at that X.
+        const total =
+          t.divide.x === true
+            ? (t.xValue ?? 0)
+            : t.divide.totalByX !== undefined
+              ? (t.divide.totalByX[t.xValue ?? 0] ?? t.divide.total)
+              : t.divide.total
         const base = Math.floor(total / members.length)
         setPendingDivision({
           total,
