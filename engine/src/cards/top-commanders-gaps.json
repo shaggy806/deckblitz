@@ -5,6 +5,7 @@
   "trigger:discards-batch-trigger",
   "replacement:keep-unspent-mana-until-end-of-turn",
   "keyword:overload-per-controller-search",
+  "replacement:draw-replacement-optional-skip",
   "effect:may-return-if-you-do",
   "effect:discard-unless-land",
   "trigger:face-a-dilemma",

@@ -6745,6 +6745,12 @@ clause (section 9):
   and each draw of several is finished, its choice answered, before the next
   (614.11a). It takes the exemptions too, and is applied before a "draw N"
   on the same draw. Its effect mustn't draw unless it's `firstEachTurn`.
+  With `may: true` it's "you **may** instead" (Abundance, Pavel Chekov, First
+  Posting; Obstinate Familiar's "you may skip that draw instead" is an empty
+  `sequence`): each draw, as it would happen, asks the drawing player "Draw a
+  card" or the option `text` names after the card's name (rule 616.1); beside
+  a mandatory one of theirs (Underrealm Lich) the draw is replaced either way,
+  so the choice is between the two. `draw-replacement-may.test.ts`.
   `{ event: "would-draw", who: "you", instead: "win-game", whileLibraryEmpty:
   true }` is Laboratory Maniac's "if you would draw a card while your library
   has no cards in it, you win the game instead" (rule 614.11: it applies

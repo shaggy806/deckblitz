@@ -7526,3 +7526,12 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Defiler of Vigor: paying 2 life for a green creature, four players
 - **Do:** Click the Grizzly Bears in your hand and choose "Cast Grizzly Bears (paying 2 life for Defiler of Vigor)".
 - **Expect:** You lose 2 life, only one Forest taps, and the Bears enter. Nobody else's life changes.
+## A draw you may replace (2026-11-06)
+
+### Abundance: each draw asks whether to draw or reveal
+- **Do:** Cast Divination. For the first draw pick "Abundance: choose land or nonland and reveal instead", then "Land". For the second pick "Draw a card".
+- **Expect:** You're asked twice, once per card. The first time Forest comes to your hand and Grizzly Bears and Shock go to the bottom of your library (you're asked their order); the second time you draw an Island.
+
+### Abundance: each draw asks whether to draw or reveal, four players
+- **Do:** Cast Divination. Both times pick "Abundance: choose land or nonland and reveal instead", then "Nonland".
+- **Expect:** Grizzly Bears comes to your hand, then Shock, and the Forest revealed on the way goes to the bottom of your library. Nobody else is asked anything.

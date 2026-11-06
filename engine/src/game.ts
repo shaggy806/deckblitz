@@ -33045,9 +33045,12 @@ export class Game {
           // stack from emitting millions of identical events. Not while a
           // "next time you would draw" could take this one instead.
           const from = this.eventualDrawer(player);
+          // Nor while an optional "you may instead" (Abundance) could: each
+          // draw is the player's to replace or not (its ruling).
           const empty =
             this.state.zones.perPlayer[from].library.length === 0 &&
-            !(this.state.playerEffects ?? []).some((e) => e.nextDrawInstead !== undefined && (e.owner === from || e.owner === player));
+            !(this.state.playerEffects ?? []).some((e) => e.nextDrawInstead !== undefined && (e.owner === from || e.owner === player)) &&
+            !this.drawEffectReplacementsFor(from, { firstInDrawStep: false, before: { all: 0, exceptDrawStepFirst: 0 } }).some((r) => r.may);
           const unasked = this.state.awaiting === null;
           this.drawCard(player);
           // A draw replaced by a win (Laboratory Maniac) ended the game.
@@ -54371,6 +54374,10 @@ export class Game {
     // becomes the effect, which applies though the library is empty (rule
     // 614.11). Taken before a "draw N instead" on the same draw — one of the
     // orders the drawing player could pick (616.1).
+    // "If you would draw a card, you may instead …" (Abundance): asked of the
+    // drawing player (rule 616.1), "Draw a card" among the options unless a
+    // mandatory one of theirs replaces the draw anyway.
+    if (this.optionalDrawReplacementAsked(player, drawEvent)) return;
     const replacing = this.drawEffectReplacementFor(player, drawEvent);
     if (replacing !== null) {
       const ctx = this.makeResolutionContext(replacing.source, player, []);
@@ -54378,6 +54385,12 @@ export class Game {
       else applyEffectSpec(replacing.effect, ctx);
       return;
     }
+    this.drawUnreplacedByEffect(player, drawEvent);
+  }
+
+  /** The rest of a draw no effect replacement took: "draw N cards instead"
+   * and the draw itself. */
+  private drawUnreplacedByEffect(player: PlayerId, drawEvent: WouldDrawEvent): void {
     // "If you would draw a card, draw N cards instead" — those N aren't
     // replaced again by it (rule 614.5), though one that finds the library
     // empty is Laboratory Maniac's to replace (616.2).
@@ -54406,7 +54419,7 @@ export class Game {
    */
   private nextDrawReplaced(player: PlayerId, event: WouldDrawEvent): boolean {
     const effects = this.state.playerEffects ?? [];
-    const options: { readonly index: number | null; readonly text: string; readonly source: ObjectId }[] = [];
+    const options: { readonly index: number | null | { readonly printed: ObjectId }; readonly text: string; readonly source: ObjectId }[] = [];
     const seen = new Set<string>();
     effects.forEach((effect, index) => {
       const instead = effect.nextDrawInstead;
@@ -54420,6 +54433,15 @@ export class Game {
     const printed = this.drawEffectReplacementFor(player, event);
     if (printed !== null) {
       options.push({ index: null, text: `${printedCardName(this.state.objects[printed.source])}'s replacement`, source: printed.source });
+    }
+    // An optional one (Abundance) is an alternative too: taking it leaves the
+    // "next time" waiting for the next draw.
+    for (const r of this.drawEffectReplacementsFor(player, event)) {
+      if (!r.may) continue;
+      const key = JSON.stringify([printedCardName(this.state.objects[r.source]), r.effect]);
+      if (seen.has(key)) continue;
+      seen.add(key);
+      options.push({ index: { printed: r.source }, text: r.text, source: r.source });
     }
     const asked = options.find((o) => this.state.objects[o.source] !== undefined);
     if (options.length === 1 || asked === undefined) {
@@ -54453,13 +54475,27 @@ export class Game {
    * (rule 400.7); any choice in the effect is answered before the next card is
    * drawn (rule 614.11a).
    */
-  private applyNextDrawReplacement(player: PlayerId, index: number | null, event: WouldDrawEvent): void {
+  private applyNextDrawReplacement(
+    player: PlayerId,
+    index: number | null | "draw" | { readonly printed: ObjectId },
+    event: WouldDrawEvent,
+  ): void {
     let source: ObjectId;
     let effect: EffectSpec;
     let targets: ResolvedTargets = [];
-    if (index === null) {
-      const printed = this.drawEffectReplacementFor(player, event);
-      if (printed === null) return;
+    // An optional replacement declined (Abundance): the draw happens, or what
+    // else replaces it.
+    if (index === "draw") {
+      this.drawUnreplacedByEffect(player, event);
+      return;
+    }
+    if (index === null || typeof index === "object") {
+      const printed = this.drawEffectReplacementFor(player, event, index === null ? undefined : index.printed);
+      if (printed === null) {
+        // Its permanent is gone since it was offered: as though declined.
+        if (index !== null) this.drawUnreplacedByEffect(player, event);
+        return;
+      }
       ({ source, effect } = printed);
     } else {
       const instead = this.state.playerEffects?.[index]?.nextDrawInstead;
@@ -54511,7 +54547,13 @@ export class Game {
     // A draw that finds the library empty ends the rest of its instruction,
     // as `draw` stops (rule 704.5b needs only one); a player who has left
     // draws nothing.
-    if (!gone && first.count > 1 && library.length > 0) {
+    if (
+      !gone &&
+      first.count > 1 &&
+      (library.length > 0 ||
+        // Each draw is the player's to replace or not (Abundance's ruling).
+        this.drawEffectReplacementsFor(first.player, { firstInDrawStep: false, before: { all: 0, exceptDrawStepFirst: 0 } }).some((r) => r.may))
+    ) {
       queue.unshift({ player: first.player, count: first.count - 1 });
     }
     if (queue.length === 0) delete this.state.pendingDraws;
@@ -54602,7 +54644,23 @@ export class Game {
   private drawEffectReplacementFor(
     player: PlayerId,
     event: WouldDrawEvent,
+    /** Only this permanent's — an optional one the player chose (Abundance). */
+    from?: ObjectId,
   ): { readonly source: ObjectId; readonly effect: EffectSpec } | null {
+    const found = this.drawEffectReplacementsFor(player, event).find((r) =>
+      from === undefined ? r.may !== true : r.source === from,
+    );
+    return found === undefined ? null : { source: found.source, effect: found.effect };
+  }
+
+  /** Every `would-draw` effect replacement (`DrawReplacedByEffect`) that
+   * replaces this draw `event` of `player`'s, in battlefield order, each with
+   * its permanent, whether it's optional (`may`) and its words as an option. */
+  private drawEffectReplacementsFor(
+    player: PlayerId,
+    event: WouldDrawEvent,
+  ): { readonly source: ObjectId; readonly effect: EffectSpec; readonly may: boolean; readonly text: string }[] {
+    const out: { source: ObjectId; effect: EffectSpec; may: boolean; text: string }[] = [];
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (source === undefined || source.controller !== player || hasLostAbilities(this.state, this.registry, source)) continue;
@@ -54610,10 +54668,55 @@ export class Game {
         const r = ability.replacement;
         if (r?.event !== "would-draw" || r.who !== "you" || typeof r.instead !== "object" || !("effect" in r.instead)) continue;
         if (!drawReplacementReaches(r, event) || !this.staticActive(source, ability)) continue;
-        return { source: id, effect: r.instead.effect };
+        const name = printedCardName(source);
+        out.push({
+          source: id,
+          effect: r.instead.effect,
+          may: r.instead.may === true,
+          text: r.instead.text === undefined ? `${name}'s replacement` : `${name}: ${r.instead.text}`,
+        });
       }
     }
-    return null;
+    return out;
+  }
+
+  /**
+   * "If you would draw a card, you may instead …" (Abundance — rule 616.1:
+   * the drawing player chooses which replacement applies, and one they don't
+   * choose doesn't): when an optional effect replacement of `player`'s could
+   * replace this draw, asks them by a `choose-modes` question — each such
+   * replacement (identical ones once), a mandatory one of theirs (Underrealm
+   * Lich, the first in battlefield order) as the alternative to them, or,
+   * with none, "Draw a card". Says whether it asked.
+   */
+  private optionalDrawReplacementAsked(player: PlayerId, event: WouldDrawEvent): boolean {
+    const all = this.drawEffectReplacementsFor(player, event);
+    if (!all.some((r) => r.may)) return false;
+    const options: { readonly choice: "draw" | { readonly printed: ObjectId }; readonly text: string; readonly source: ObjectId }[] = [];
+    const mandatory = all.find((r) => !r.may);
+    if (mandatory === undefined) options.push({ choice: "draw", text: "Draw a card", source: all[0].source });
+    else options.push({ choice: { printed: mandatory.source }, text: mandatory.text, source: mandatory.source });
+    const seen = new Set<string>();
+    for (const r of all) {
+      if (!r.may) continue;
+      const key = JSON.stringify([printedCardName(this.state.objects[r.source]), r.effect]);
+      if (seen.has(key)) continue;
+      seen.add(key);
+      options.push({ choice: { printed: r.source }, text: r.text, source: r.source });
+    }
+    const asked = all.find((r) => r.may)?.source ?? options[0].source;
+    this.state.awaiting = {
+      kind: "choose-modes",
+      player,
+      source: asked,
+      minModes: 1,
+      maxModes: 1,
+      modes: options.map((o) => ({ text: o.text, effect: { kind: "sequence", effects: [] } as EffectSpec })),
+      x: 0,
+      targets: [],
+      nextDrawFor: { effects: options.map((o) => o.choice), event },
+    };
+    return true;
   }
 
   /** The `would-mill` and `would-gain-life` replacements that reach

@@ -11290,4 +11290,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: ['Hill Giant'] }, { bf: [] }, { bf: ['Craw Wurm'] }],
     }),
   ),
+  // --- A draw you may replace (2026-11-06) ---------------------------------
+  preset(
+    'Abundance: each draw asks whether to draw or reveal',
+    board({
+      you: { bf: ['Abundance', 'Island*3'], hand: ['Divination'], lib: ['Grizzly Bears', 'Shock', 'Forest', 'Island*5'] },
+    }),
+  ),
+  preset(
+    'Abundance: each draw asks whether to draw or reveal, four players',
+    board({
+      you: { bf: ['Abundance', 'Island*3'], hand: ['Divination'], lib: ['Grizzly Bears', 'Forest', 'Shock', 'Island*5'] },
+      opp: [{}, {}, {}],
+    }),
+  ),
 ]

@@ -664,6 +664,17 @@ export interface DrawRedirectReplacement {
  * (which its own draw then can't meet again). */
 export interface DrawReplacedByEffect {
   readonly effect: EffectSpec;
+  /** "If you would draw a card, you **may** instead …" (Abundance): asked of
+   * the drawing player as each draw is about to happen, by a `choose-modes`
+   * question — "Draw a card" or this replacement (rule 616.1: the affected
+   * player chooses which replacement applies; one they don't take, the draw
+   * happens). Beside a mandatory effect replacement of theirs (Underrealm
+   * Lich), the draw is replaced either way, so "Draw a card" isn't offered. */
+  readonly may?: true;
+  /** The option's words in that question, after the source's name ("Abundance:
+   * reveal until a land or nonland card instead"); left out, "<name>'s
+   * replacement". */
+  readonly text?: string;
 }
 
 /**

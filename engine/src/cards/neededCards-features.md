@@ -370,6 +370,20 @@ void counter are, when the moving object's controller picks another exile that
 could apply (616.1 — Rest in Peace). The scaffolder sets it on a card that says
 "exiled with" anywhere. Proving cards: The Darkness Crystal, Gisa, Glorious
 Resurrector (`exile-instead-linked.test.ts`). Key: replacement:exile-instead-linked.
+### A draw you may replace — built 2026-11-06
+
+By EDHREC rank: Abundance (1960). `would-draw`'s `instead: { effect }` takes
+`may: true` and the option's `text`: each draw, as it would happen, asks the
+drawing player "Draw a card" or the replacement (rule 616.1), a draw of several
+one at a time (614.11a), from an empty library too (614.11 — the rest of a draw
+from it is no longer dropped while one could apply). Beside a mandatory effect
+replacement or a "next time you would draw" the choice is between those.
+Proving cards: Abundance, Pavel Chekov, First Posting, Obstinate Familiar ("you
+may skip that draw instead", an empty effect). Keys:
+replacement:draw-replacement-optional-skip. Still open in
+`replacement:draw-replacement-reveal`: Enduring Renewal, Zur's Weirding and
+Breathstealer's Crypt, which draw within the replacement (rule 614.5).
+
 ### "You may return another creature you control … If you do" — built 2026-11-06
 
 By EDHREC rank: Temur Sabertooth (1962). No engine code: a `choose-permanents`

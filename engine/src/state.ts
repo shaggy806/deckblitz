@@ -4467,10 +4467,12 @@ export type AwaitingDecision =
       /** Which replacement applies to a draw of `player`'s (rule 616.1, the
        * Words cycle): mode i is `effects[i]`, an index into `playerEffects`
        * (a `nextDrawInstead`), or `null` for their printed "if you would draw"
-       * (Underrealm Lich). `event` is the draw. Answered by the engine itself;
-       * the modes' effects are unused. */
+       * (Underrealm Lich). `{ printed }` is that permanent's optional "you may
+       * instead" (Abundance), and `"draw"` declines it: the draw happens.
+       * `event` is the draw. Answered by the engine itself; the modes'
+       * effects are unused. */
       readonly nextDrawFor?: {
-        readonly effects: readonly (number | null)[];
+        readonly effects: readonly (number | null | "draw" | { readonly printed: ObjectId })[];
         readonly event: { readonly firstInDrawStep: boolean; readonly before: { readonly all: number; readonly exceptDrawStepFirst: number } };
       };
       /** Storage Matrix's question in the untap step (rule 502.3 —
