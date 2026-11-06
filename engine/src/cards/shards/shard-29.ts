@@ -159,6 +159,7 @@ import _poolDarkProphecy from "../pool/dark-prophecy.js";
 import _poolDarklingStalker from "../pool/darkling-stalker.js";
 import _poolDarksteelAngel from "../pool/darksteel-angel.js";
 import _poolDaruStinger from "../pool/daru-stinger.js";
+import _poolDataNewLife from "../pool/data-new-life.js";
 import _poolDaughterOfTheDeep from "../pool/daughter-of-the-deep.js";
 import _poolDauthiGhoul from "../pool/dauthi-ghoul.js";
 import _poolDauthiWarlord from "../pool/dauthi-warlord.js";
@@ -846,6 +847,7 @@ import _poolTymaretChosenFromDeath from "../pool/tymaret-chosen-from-death.js";
 import _poolTymnaTheWeaver from "../pool/tymna-the-weaver.js";
 import _poolTyphoidMaryFractured from "../pool/typhoid-mary-fractured.js";
 import _poolUSAgentJohnWalker from "../pool/u-s-agent-john-walker.js";
+import _poolUSSExcelsiorCuttingEdge from "../pool/u-s-s-excelsior-cutting-edge.js";
 import _poolUginsConstruct from "../pool/ugins-construct.js";
 import _poolUlrichsKindred from "../pool/ulrichs-kindred.js";
 import _poolUlvenwaldBear from "../pool/ulvenwald-bear.js";
@@ -1115,6 +1117,7 @@ const shard: CardShard = {
     _poolDarklingStalker,
     _poolDarksteelAngel,
     _poolDaruStinger,
+    _poolDataNewLife,
     _poolDaughterOfTheDeep,
     _poolDauthiGhoul,
     _poolDauthiWarlord,
@@ -1802,6 +1805,7 @@ const shard: CardShard = {
     _poolTymnaTheWeaver,
     _poolTyphoidMaryFractured,
     _poolUSAgentJohnWalker,
+    _poolUSSExcelsiorCuttingEdge,
     _poolUginsConstruct,
     _poolUlrichsKindred,
     _poolUlvenwaldBear,

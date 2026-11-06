@@ -567,6 +567,7 @@ import _poolMonumentalHenge from "../pool/monumental-henge.js";
 import _poolMoongloveWinnower from "../pool/moonglove-winnower.js";
 import _poolMortalObstinacy from "../pool/mortal-obstinacy.js";
 import _poolMountedDreadknight from "../pool/mounted-dreadknight.js";
+import _poolMugato from "../pool/mugato.js";
 import _poolMundungu from "../pool/mundungu.js";
 import _poolMuseumNightwatch from "../pool/museum-nightwatch.js";
 import _poolMutantChainReaction from "../pool/mutant-chain-reaction.js";
@@ -1546,6 +1547,7 @@ const shard: CardShard = {
     _poolMoongloveWinnower,
     _poolMortalObstinacy,
     _poolMountedDreadknight,
+    _poolMugato,
     _poolMundungu,
     _poolMuseumNightwatch,
     _poolMutantChainReaction,

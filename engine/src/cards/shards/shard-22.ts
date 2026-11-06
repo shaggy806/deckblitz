@@ -113,6 +113,7 @@ import _poolCalderaKavu from "../pool/caldera-kavu.js";
 import _poolCanalMonitor from "../pool/canal-monitor.js";
 import _poolCaptainAmericaSteveRogers from "../pool/captain-america-steve-rogers.js";
 import _poolCaptainAmericasMotorcycle from "../pool/captain-americas-motorcycle.js";
+import _poolCaptainJamesTKirk from "../pool/captain-james-t-kirk.js";
 import _poolCaravanVigil from "../pool/caravan-vigil.js";
 import _poolCarbonize from "../pool/carbonize.js";
 import _poolCareeningMineCart from "../pool/careening-mine-cart.js";
@@ -180,6 +181,7 @@ import _poolDaruLancer from "../pool/daru-lancer.js";
 import _poolDashingBloodsucker from "../pool/dashing-bloodsucker.js";
 import _poolDaxosTheReturned from "../pool/daxos-the-returned.js";
 import _poolDeadlyTempest from "../pool/deadly-tempest.js";
+import _poolDeannaTroiPsychicCounsel from "../pool/deanna-troi-psychic-counsel.js";
 import _poolDeathGrasp from "../pool/death-grasp.js";
 import _poolDeathbloomGardener from "../pool/deathbloom-gardener.js";
 import _poolDeathcapGlade from "../pool/deathcap-glade.js";
@@ -249,6 +251,7 @@ import _poolExclusionRitual from "../pool/exclusion-ritual.js";
 import _poolExemplarOfLight from "../pool/exemplar-of-light.js";
 import _poolExorcist from "../pool/exorcist.js";
 import _poolExperimentalAugury from "../pool/experimental-augury.js";
+import _poolExploratoryMission from "../pool/exploratory-mission.js";
 import _poolExplosiveCrystal from "../pool/explosive-crystal.js";
 import _poolExquisiteBlood from "../pool/exquisite-blood.js";
 import _poolEyeOfMalcator from "../pool/eye-of-malcator.js";
@@ -347,6 +350,7 @@ import _poolHeronbladeElite from "../pool/heronblade-elite.js";
 import _poolHiddenSpider from "../pool/hidden-spider.js";
 import _poolHideousLaughter from "../pool/hideous-laughter.js";
 import _poolHighlandGame from "../pool/highland-game.js";
+import _poolHitIt from "../pool/hit-it.js";
 import _poolHithlainRope from "../pool/hithlain-rope.js";
 import _poolHiveOfTheEyeTyrant from "../pool/hive-of-the-eye-tyrant.js";
 import _poolHomunculusHorde from "../pool/homunculus-horde.js";
@@ -936,6 +940,7 @@ import _poolWickerWarcrawler from "../pool/wicker-warcrawler.js";
 import _poolWildGriffin from "../pool/wild-griffin.js";
 import _poolWildslayerElves from "../pool/wildslayer-elves.js";
 import _poolWillOfTheNaga from "../pool/will-of-the-naga.js";
+import _poolWillRikerFirstInTheField from "../pool/will-riker-first-in-the-field.js";
 import _poolWilyBandar from "../pool/wily-bandar.js";
 import _poolWindShear from "../pool/wind-shear.js";
 import _poolWindbornMuse from "../pool/windborn-muse.js";
@@ -1098,6 +1103,7 @@ const shard: CardShard = {
     _poolCanalMonitor,
     _poolCaptainAmericaSteveRogers,
     _poolCaptainAmericasMotorcycle,
+    _poolCaptainJamesTKirk,
     _poolCaravanVigil,
     _poolCarbonize,
     _poolCareeningMineCart,
@@ -1165,6 +1171,7 @@ const shard: CardShard = {
     _poolDashingBloodsucker,
     _poolDaxosTheReturned,
     _poolDeadlyTempest,
+    _poolDeannaTroiPsychicCounsel,
     _poolDeathGrasp,
     _poolDeathbloomGardener,
     _poolDeathcapGlade,
@@ -1234,6 +1241,7 @@ const shard: CardShard = {
     _poolExemplarOfLight,
     _poolExorcist,
     _poolExperimentalAugury,
+    _poolExploratoryMission,
     _poolExplosiveCrystal,
     _poolExquisiteBlood,
     _poolEyeOfMalcator,
@@ -1332,6 +1340,7 @@ const shard: CardShard = {
     _poolHiddenSpider,
     _poolHideousLaughter,
     _poolHighlandGame,
+    _poolHitIt,
     _poolHithlainRope,
     _poolHiveOfTheEyeTyrant,
     _poolHomunculusHorde,
@@ -1921,6 +1930,7 @@ const shard: CardShard = {
     _poolWildGriffin,
     _poolWildslayerElves,
     _poolWillOfTheNaga,
+    _poolWillRikerFirstInTheField,
     _poolWilyBandar,
     _poolWindShear,
     _poolWindbornMuse,

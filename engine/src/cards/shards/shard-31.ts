@@ -190,6 +190,7 @@ import _poolCurseOfTheWerefox from "../pool/curse-of-the-werefox.js";
 import _poolCurseOfVerbosity from "../pool/curse-of-verbosity.js";
 import _poolCyberneticaDatasmith from "../pool/cybernetica-datasmith.js";
 import _poolDaiLiIndoctrination from "../pool/dai-li-indoctrination.js";
+import _poolDalRelAugmentOrphan from "../pool/dal-rel-augment-orphan.js";
 import _poolDamoclesBaseSwordOfKang from "../pool/damocles-base-sword-of-kang.js";
 import _poolDaringWaverider from "../pool/daring-waverider.js";
 import _poolDarkApostle from "../pool/dark-apostle.js";
@@ -820,6 +821,7 @@ import _poolSpriteDragon from "../pool/sprite-dragon.js";
 import _poolSpyNetwork from "../pool/spy-network.js";
 import _poolSquallmonger from "../pool/squallmonger.js";
 import _poolSqueeDubiousMonarch from "../pool/squee-dubious-monarch.js";
+import _poolStableWormhole from "../pool/stable-wormhole.js";
 import _poolStadiumVendors from "../pool/stadium-vendors.js";
 import _poolStalwartAven from "../pool/stalwart-aven.js";
 import _poolStandstill from "../pool/standstill.js";
@@ -1216,6 +1218,7 @@ const shard: CardShard = {
     _poolCurseOfVerbosity,
     _poolCyberneticaDatasmith,
     _poolDaiLiIndoctrination,
+    _poolDalRelAugmentOrphan,
     _poolDamoclesBaseSwordOfKang,
     _poolDaringWaverider,
     _poolDarkApostle,
@@ -1846,6 +1849,7 @@ const shard: CardShard = {
     _poolSpyNetwork,
     _poolSquallmonger,
     _poolSqueeDubiousMonarch,
+    _poolStableWormhole,
     _poolStadiumVendors,
     _poolStalwartAven,
     _poolStandstill,

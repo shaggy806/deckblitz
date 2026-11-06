@@ -404,6 +404,7 @@ import _poolIslandFishJasconius from "../pool/island-fish-jasconius.js";
 import _poolItsClobberinTime from "../pool/its-clobberin-time.js";
 import _poolJacesArchivist from "../pool/jaces-archivist.js";
 import _poolJacesRuse from "../pool/jaces-ruse.js";
+import _poolJadziaDaxLivingLegacy from "../pool/jadzia-dax-living-legacy.js";
 import _poolJaggedScarArchers from "../pool/jagged-scar-archers.js";
 import _poolJeeringInstigator from "../pool/jeering-instigator.js";
 import _poolJeskaiCharm from "../pool/jeskai-charm.js";
@@ -598,6 +599,7 @@ import _poolOverzealousMuscle from "../pool/overzealous-muscle.js";
 import _poolParishBladeTrainee from "../pool/parish-blade-trainee.js";
 import _poolPassionateArchaeologist from "../pool/passionate-archaeologist.js";
 import _poolPathOfTheSchemer from "../pool/path-of-the-schemer.js";
+import _poolPeaceInOurTime from "../pool/peace-in-our-time.js";
 import _poolPeacekeeper from "../pool/peacekeeper.js";
 import _poolPendantOfProsperity from "../pool/pendant-of-prosperity.js";
 import _poolPerilousVoyage from "../pool/perilous-voyage.js";
@@ -1395,6 +1397,7 @@ const shard: CardShard = {
     _poolItsClobberinTime,
     _poolJacesArchivist,
     _poolJacesRuse,
+    _poolJadziaDaxLivingLegacy,
     _poolJaggedScarArchers,
     _poolJeeringInstigator,
     _poolJeskaiCharm,
@@ -1589,6 +1592,7 @@ const shard: CardShard = {
     _poolParishBladeTrainee,
     _poolPassionateArchaeologist,
     _poolPathOfTheSchemer,
+    _poolPeaceInOurTime,
     _poolPeacekeeper,
     _poolPendantOfProsperity,
     _poolPerilousVoyage,

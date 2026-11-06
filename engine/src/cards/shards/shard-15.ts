@@ -136,6 +136,7 @@ import _poolConcentrate from "../pool/concentrate.js";
 import _poolConcentratedFire from "../pool/concentrated-fire.js";
 import _poolConfusticateAndBebother from "../pool/confusticate-and-bebother.js";
 import _poolConjurersCloset from "../pool/conjurers-closet.js";
+import _poolConsiderThePrimeDirective from "../pool/consider-the-prime-directive.js";
 import _poolConsumingSepulcher from "../pool/consuming-sepulcher.js";
 import _poolContingencyPlan from "../pool/contingency-plan.js";
 import _poolCopperLonglegs from "../pool/copper-longlegs.js";
@@ -1052,6 +1053,7 @@ const shard: CardShard = {
     _poolConcentratedFire,
     _poolConfusticateAndBebother,
     _poolConjurersCloset,
+    _poolConsiderThePrimeDirective,
     _poolConsumingSepulcher,
     _poolContingencyPlan,
     _poolCopperLonglegs,

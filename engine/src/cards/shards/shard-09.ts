@@ -150,6 +150,7 @@ import _poolCinderCloud from "../pool/cinder-cloud.js";
 import _poolCinderhazeWretch from "../pool/cinderhaze-wretch.js";
 import _poolCitanulDruid from "../pool/citanul-druid.js";
 import _poolClarionConqueror from "../pool/clarion-conqueror.js";
+import _poolClassFShuttlecraft from "../pool/class-f-shuttlecraft.js";
 import _poolClericClass from "../pool/cleric-class.js";
 import _poolClingingDarkness from "../pool/clinging-darkness.js";
 import _poolCloudCover from "../pool/cloud-cover.js";
@@ -1141,6 +1142,7 @@ const shard: CardShard = {
     _poolCinderhazeWretch,
     _poolCitanulDruid,
     _poolClarionConqueror,
+    _poolClassFShuttlecraft,
     _poolClericClass,
     _poolClingingDarkness,
     _poolCloudCover,

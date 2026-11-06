@@ -779,6 +779,7 @@ import _poolSweatworksBrawler from "../pool/sweatworks-brawler.js";
 import _poolSwoopingLookout from "../pool/swooping-lookout.js";
 import _poolSwordOfBodyAndMind from "../pool/sword-of-body-and-mind.js";
 import _poolSwordOfKaldra from "../pool/sword-of-kaldra.js";
+import _poolSyndicateLiquidators from "../pool/syndicate-liquidators.js";
 import _poolSyphonMind from "../pool/syphon-mind.js";
 import _poolSyrArmontTheRedeemer from "../pool/syr-armont-the-redeemer.js";
 import _poolSzarekhTheSilentKing from "../pool/szarekh-the-silent-king.js";
@@ -1731,6 +1732,7 @@ const shard: CardShard = {
     _poolSwoopingLookout,
     _poolSwordOfBodyAndMind,
     _poolSwordOfKaldra,
+    _poolSyndicateLiquidators,
     _poolSyphonMind,
     _poolSyrArmontTheRedeemer,
     _poolSzarekhTheSilentKing,

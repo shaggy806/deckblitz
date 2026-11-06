@@ -424,6 +424,7 @@ import _poolHiddenVolcano from "../pool/hidden-volcano.js";
 import _poolHieroglyphicIllumination from "../pool/hieroglyphic-illumination.js";
 import _poolHighMarket from "../pool/high-market.js";
 import _poolHinterlandDrake from "../pool/hinterland-drake.js";
+import _poolHiveMindCoprocessor from "../pool/hive-mind-coprocessor.js";
 import _poolHofriGhostforge from "../pool/hofri-ghostforge.js";
 import _poolHollowheadSliver from "../pool/hollowhead-sliver.js";
 import _poolHondenOfInfiniteRage from "../pool/honden-of-infinite-rage.js";
@@ -442,6 +443,7 @@ import _poolIllustriousWanderglyph from "../pool/illustrious-wanderglyph.js";
 import _poolImmortalCoil from "../pool/immortal-coil.js";
 import _poolImpale from "../pool/impale.js";
 import _poolImplode from "../pool/implode.js";
+import _poolImpossibleChoice from "../pool/impossible-choice.js";
 import _poolImpostorSyndrome from "../pool/impostor-syndrome.js";
 import _poolInciteWar from "../pool/incite-war.js";
 import _poolIncreasingAmbition from "../pool/increasing-ambition.js";
@@ -1438,6 +1440,7 @@ const shard: CardShard = {
     _poolHieroglyphicIllumination,
     _poolHighMarket,
     _poolHinterlandDrake,
+    _poolHiveMindCoprocessor,
     _poolHofriGhostforge,
     _poolHollowheadSliver,
     _poolHondenOfInfiniteRage,
@@ -1456,6 +1459,7 @@ const shard: CardShard = {
     _poolImmortalCoil,
     _poolImpale,
     _poolImplode,
+    _poolImpossibleChoice,
     _poolImpostorSyndrome,
     _poolInciteWar,
     _poolIncreasingAmbition,

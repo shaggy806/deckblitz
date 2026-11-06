@@ -28,6 +28,7 @@ import _poolAngelOfFinality from "../pool/angel-of-finality.js";
 import _poolAngelfireIgnition from "../pool/angelfire-ignition.js";
 import _poolAngelicEdict from "../pool/angelic-edict.js";
 import _poolAnnul from "../pool/annul.js";
+import _poolAntagonistIncorporator from "../pool/antagonist-incorporator.js";
 import _poolAnthemOfChampions from "../pool/anthem-of-champions.js";
 import _poolAnthropede from "../pool/anthropede.js";
 import _poolAnticipate from "../pool/anticipate.js";
@@ -455,6 +456,7 @@ import _poolLimestoneGolem from "../pool/limestone-golem.js";
 import _poolLindenTheSteadfastQueen from "../pool/linden-the-steadfast-queen.js";
 import _poolLingeringMirage from "../pool/lingering-mirage.js";
 import _poolLittleBear from "../pool/little-bear.js";
+import _poolLiveLongAndProsper from "../pool/live-long-and-prosper.js";
 import _poolLoamDweller from "../pool/loam-dweller.js";
 import _poolLockAndLoad from "../pool/lock-and-load.js";
 import _poolLocketOfYesterdays from "../pool/locket-of-yesterdays.js";
@@ -635,6 +637,7 @@ import _poolReparations from "../pool/reparations.js";
 import _poolRepercussion from "../pool/repercussion.js";
 import _poolRepulse from "../pool/repulse.js";
 import _poolRescueSkiff from "../pool/rescue-skiff.js";
+import _poolResistanceIsFutile from "../pool/resistance-is-futile.js";
 import _poolResize from "../pool/resize.js";
 import _poolRestorativeTechnique from "../pool/restorative-technique.js";
 import _poolRetromancer from "../pool/retromancer.js";
@@ -980,6 +983,7 @@ const shard: CardShard = {
     _poolAngelfireIgnition,
     _poolAngelicEdict,
     _poolAnnul,
+    _poolAntagonistIncorporator,
     _poolAnthemOfChampions,
     _poolAnthropede,
     _poolAnticipate,
@@ -1407,6 +1411,7 @@ const shard: CardShard = {
     _poolLindenTheSteadfastQueen,
     _poolLingeringMirage,
     _poolLittleBear,
+    _poolLiveLongAndProsper,
     _poolLoamDweller,
     _poolLockAndLoad,
     _poolLocketOfYesterdays,
@@ -1587,6 +1592,7 @@ const shard: CardShard = {
     _poolRepercussion,
     _poolRepulse,
     _poolRescueSkiff,
+    _poolResistanceIsFutile,
     _poolResize,
     _poolRestorativeTechnique,
     _poolRetromancer,

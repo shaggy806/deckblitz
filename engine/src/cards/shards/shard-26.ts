@@ -800,6 +800,7 @@ import _poolSureStrike from "../pool/sure-strike.js";
 import _poolSwampMosquito from "../pool/swamp-mosquito.js";
 import _poolSwat from "../pool/swat.js";
 import _poolSwiftgearDrake from "../pool/swiftgear-drake.js";
+import _poolTacticalOfficer from "../pool/tactical-officer.js";
 import _poolTajuruBlightblade from "../pool/tajuru-blightblade.js";
 import _poolTakeDown from "../pool/take-down.js";
 import _poolTakeItBack from "../pool/take-it-back.js";
@@ -872,6 +873,7 @@ import _poolTurretOgre from "../pool/turret-ogre.js";
 import _poolTwinshotSniper from "../pool/twinshot-sniper.js";
 import _poolTwistedFates from "../pool/twisted-fates.js";
 import _poolTyrantOfDiscord from "../pool/tyrant-of-discord.js";
+import _poolUSSReliantFromHellsHeart from "../pool/u-s-s-reliant-from-hells-heart.js";
 import _poolUktabiEfreet from "../pool/uktabi-efreet.js";
 import _poolUktabiOrangutan from "../pool/uktabi-orangutan.js";
 import _poolUlashtTheHateSeed from "../pool/ulasht-the-hate-seed.js";
@@ -895,6 +897,7 @@ import _poolVengevine from "../pool/vengevine.js";
 import _poolVenomousVines from "../pool/venomous-vines.js";
 import _poolVenomousWords from "../pool/venomous-words.js";
 import _poolVerdantSuccession from "../pool/verdant-succession.js";
+import _poolVgerTheIntruder from "../pool/vger-the-intruder.js";
 import _poolViashinoSlasher from "../pool/viashino-slasher.js";
 import _poolViashinoWarrior from "../pool/viashino-warrior.js";
 import _poolVillageIronsmith from "../pool/village-ironsmith.js";
@@ -1773,6 +1776,7 @@ const shard: CardShard = {
     _poolSwampMosquito,
     _poolSwat,
     _poolSwiftgearDrake,
+    _poolTacticalOfficer,
     _poolTajuruBlightblade,
     _poolTakeDown,
     _poolTakeItBack,
@@ -1845,6 +1849,7 @@ const shard: CardShard = {
     _poolTwinshotSniper,
     _poolTwistedFates,
     _poolTyrantOfDiscord,
+    _poolUSSReliantFromHellsHeart,
     _poolUktabiEfreet,
     _poolUktabiOrangutan,
     _poolUlashtTheHateSeed,
@@ -1868,6 +1873,7 @@ const shard: CardShard = {
     _poolVenomousVines,
     _poolVenomousWords,
     _poolVerdantSuccession,
+    _poolVgerTheIntruder,
     _poolViashinoSlasher,
     _poolViashinoWarrior,
     _poolVillageIronsmith,

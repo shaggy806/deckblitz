@@ -914,6 +914,7 @@ import _poolTwinscrollShaman from "../pool/twinscroll-shaman.js";
 import _poolTwistedExperiment from "../pool/twisted-experiment.js";
 import _poolTymaretTheMurderKing from "../pool/tymaret-the-murder-king.js";
 import _poolTyrannicalPitlord from "../pool/tyrannical-pitlord.js";
+import _poolUSSDiscoveryAtBlackAlert from "../pool/u-s-s-discovery-at-black-alert.js";
 import _poolUlvenwaldMysteries from "../pool/ulvenwald-mysteries.js";
 import _poolUnbenderTine from "../pool/unbender-tine.js";
 import _poolUndermountainAdventurer from "../pool/undermountain-adventurer.js";
@@ -1953,6 +1954,7 @@ const shard: CardShard = {
     _poolTwistedExperiment,
     _poolTymaretTheMurderKing,
     _poolTyrannicalPitlord,
+    _poolUSSDiscoveryAtBlackAlert,
     _poolUlvenwaldMysteries,
     _poolUnbenderTine,
     _poolUndermountainAdventurer,

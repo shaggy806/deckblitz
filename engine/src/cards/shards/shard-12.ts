@@ -157,6 +157,7 @@ import _poolCloudseeder from "../pool/cloudseeder.js";
 import _poolCloudskate from "../pool/cloudskate.js";
 import _poolCoalbornEntity from "../pool/coalborn-entity.js";
 import _poolCogworkGrinder from "../pool/cogwork-grinder.js";
+import _poolCommandDecision from "../pool/command-decision.js";
 import _poolCommencementOfFestivities from "../pool/commencement-of-festivities.js";
 import _poolConciliatorsDuelist from "../pool/conciliators-duelist.js";
 import _poolConflux from "../pool/conflux.js";
@@ -670,6 +671,7 @@ import _poolRimeboundDead from "../pool/rimebound-dead.js";
 import _poolRimehornAurochs from "../pool/rimehorn-aurochs.js";
 import _poolRingingStrikeMastery from "../pool/ringing-strike-mastery.js";
 import _poolRinoaHeartilly from "../pool/rinoa-heartilly.js";
+import _poolRisa from "../pool/risa.js";
 import _poolRiseAgain from "../pool/rise-again.js";
 import _poolRoarOfTheCrowd from "../pool/roar-of-the-crowd.js";
 import _poolRogueRefiner from "../pool/rogue-refiner.js";
@@ -836,6 +838,7 @@ import _poolTheFlameOfKeld from "../pool/the-flame-of-keld.js";
 import _poolTheGreyHavens from "../pool/the-grey-havens.js";
 import _poolTheLordOfPain from "../pool/the-lord-of-pain.js";
 import _poolTheMycosynthGardens from "../pool/the-mycosynth-gardens.js";
+import _poolTheNeedsOfTheMany from "../pool/the-needs-of-the-many.js";
 import _poolTheRoyalScions from "../pool/the-royal-scions.js";
 import _poolTheScarabGod from "../pool/the-scarab-god.js";
 import _poolThiefOfBlood from "../pool/thief-of-blood.js";
@@ -1121,6 +1124,7 @@ const shard: CardShard = {
     _poolCloudskate,
     _poolCoalbornEntity,
     _poolCogworkGrinder,
+    _poolCommandDecision,
     _poolCommencementOfFestivities,
     _poolConciliatorsDuelist,
     _poolConflux,
@@ -1634,6 +1638,7 @@ const shard: CardShard = {
     _poolRimehornAurochs,
     _poolRingingStrikeMastery,
     _poolRinoaHeartilly,
+    _poolRisa,
     _poolRiseAgain,
     _poolRoarOfTheCrowd,
     _poolRogueRefiner,
@@ -1800,6 +1805,7 @@ const shard: CardShard = {
     _poolTheGreyHavens,
     _poolTheLordOfPain,
     _poolTheMycosynthGardens,
+    _poolTheNeedsOfTheMany,
     _poolTheRoyalScions,
     _poolTheScarabGod,
     _poolThiefOfBlood,

@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _pool70000LightYearsFromHome from "../pool/70-000-light-years-from-home.js";
 import _poolAbandonReason from "../pool/abandon-reason.js";
 import _poolAbjure from "../pool/abjure.js";
 import _poolAbstruseAppropriation from "../pool/abstruse-appropriation.js";
@@ -28,6 +29,7 @@ import _poolAlleyStrangler from "../pool/alley-strangler.js";
 import _poolAllosaurusRider from "../pool/allosaurus-rider.js";
 import _poolAllureOfPower from "../pool/allure-of-power.js";
 import _poolAlphaDeathclaw from "../pool/alpha-deathclaw.js";
+import _poolAmokTime from "../pool/amok-time.js";
 import _poolAmphibianDownpour from "../pool/amphibian-downpour.js";
 import _poolAmplifire from "../pool/amplifire.js";
 import _poolAngelOfIndemnity from "../pool/angel-of-indemnity.js";
@@ -299,6 +301,7 @@ import _poolFatedIntervention from "../pool/fated-intervention.js";
 import _poolFateshaperAspirant from "../pool/fateshaper-aspirant.js";
 import _poolFavorOfTheOverbeing from "../pool/favor-of-the-overbeing.js";
 import _poolFeastingTrollKing from "../pool/feasting-troll-king.js";
+import _poolFederationProbe from "../pool/federation-probe.js";
 import _poolFelidarSovereign from "../pool/felidar-sovereign.js";
 import _poolFerociousWerefox from "../pool/ferocious-werefox.js";
 import _poolFesteringNewt from "../pool/festering-newt.js";
@@ -490,6 +493,7 @@ import _poolLivingAirship from "../pool/living-airship.js";
 import _poolLivingHive from "../pool/living-hive.js";
 import _poolLoamDryad from "../pool/loam-dryad.js";
 import _poolLoanShark from "../pool/loan-shark.js";
+import _poolLocutusTheOneWhoSpeaks from "../pool/locutus-the-one-who-speaks.js";
 import _poolLongstalkBrawl from "../pool/longstalk-brawl.js";
 import _poolLoransEscape from "../pool/lorans-escape.js";
 import _poolLoreholdExcavation from "../pool/lorehold-excavation.js";
@@ -787,6 +791,7 @@ import _poolSunderingTitan from "../pool/sundering-titan.js";
 import _poolSundownPass from "../pool/sundown-pass.js";
 import _poolSunkenRuins from "../pool/sunken-ruins.js";
 import _poolSuperiorSpiderMan from "../pool/superior-spider-man.js";
+import _poolSupportMission from "../pool/support-mission.js";
 import _poolSwiftKick from "../pool/swift-kick.js";
 import _poolSwiftwaterCliffs from "../pool/swiftwater-cliffs.js";
 import _poolSwordOfLightAndShadow from "../pool/sword-of-light-and-shadow.js";
@@ -963,6 +968,7 @@ import _tokensWizardTokenGuff from "../tokens/wizard-token-guff.js";
 
 const shard: CardShard = {
   pool: [
+    _pool70000LightYearsFromHome,
     _poolAbandonReason,
     _poolAbjure,
     _poolAbstruseAppropriation,
@@ -988,6 +994,7 @@ const shard: CardShard = {
     _poolAllosaurusRider,
     _poolAllureOfPower,
     _poolAlphaDeathclaw,
+    _poolAmokTime,
     _poolAmphibianDownpour,
     _poolAmplifire,
     _poolAngelOfIndemnity,
@@ -1259,6 +1266,7 @@ const shard: CardShard = {
     _poolFateshaperAspirant,
     _poolFavorOfTheOverbeing,
     _poolFeastingTrollKing,
+    _poolFederationProbe,
     _poolFelidarSovereign,
     _poolFerociousWerefox,
     _poolFesteringNewt,
@@ -1450,6 +1458,7 @@ const shard: CardShard = {
     _poolLivingHive,
     _poolLoamDryad,
     _poolLoanShark,
+    _poolLocutusTheOneWhoSpeaks,
     _poolLongstalkBrawl,
     _poolLoransEscape,
     _poolLoreholdExcavation,
@@ -1747,6 +1756,7 @@ const shard: CardShard = {
     _poolSundownPass,
     _poolSunkenRuins,
     _poolSuperiorSpiderMan,
+    _poolSupportMission,
     _poolSwiftKick,
     _poolSwiftwaterCliffs,
     _poolSwordOfLightAndShadow,

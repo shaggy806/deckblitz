@@ -401,6 +401,7 @@ import _poolInvasionOfNewPhyrexia from "../pool/invasion-of-new-phyrexia.js";
 import _poolIronLadDivergingDestiny from "../pool/iron-lad-diverging-destiny.js";
 import _poolIronpawAspirant from "../pool/ironpaw-aspirant.js";
 import _poolIsolationZone from "../pool/isolation-zone.js";
+import _poolIsolinearProcessor from "../pool/isolinear-processor.js";
 import _poolItzquinthFirstbornOfGishath from "../pool/itzquinth-firstborn-of-gishath.js";
 import _poolIvoryTower from "../pool/ivory-tower.js";
 import _poolJaceBeleren from "../pool/jace-beleren.js";
@@ -883,6 +884,7 @@ import _poolTwoHeadedZombie from "../pool/two-headed-zombie.js";
 import _poolTyranidHarridan from "../pool/tyranid-harridan.js";
 import _poolTyrranaxRex from "../pool/tyrranax-rex.js";
 import _poolTzaangorShaman from "../pool/tzaangor-shaman.js";
+import _poolUSSVoyagerLoneWanderer from "../pool/u-s-s-voyager-lone-wanderer.js";
 import _poolUlrichOfTheKrallenhorde from "../pool/ulrich-of-the-krallenhorde.js";
 import _poolUndergrowthLeopard from "../pool/undergrowth-leopard.js";
 import _poolUnholyGrotto from "../pool/unholy-grotto.js";
@@ -1376,6 +1378,7 @@ const shard: CardShard = {
     _poolIronLadDivergingDestiny,
     _poolIronpawAspirant,
     _poolIsolationZone,
+    _poolIsolinearProcessor,
     _poolItzquinthFirstbornOfGishath,
     _poolIvoryTower,
     _poolJaceBeleren,
@@ -1858,6 +1861,7 @@ const shard: CardShard = {
     _poolTyranidHarridan,
     _poolTyrranaxRex,
     _poolTzaangorShaman,
+    _poolUSSVoyagerLoneWanderer,
     _poolUlrichOfTheKrallenhorde,
     _poolUndergrowthLeopard,
     _poolUnholyGrotto,

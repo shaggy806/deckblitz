@@ -89,6 +89,7 @@ import _poolBoundlessRealms from "../pool/boundless-realms.js";
 import _poolBountyOfSkemfar from "../pool/bounty-of-skemfar.js";
 import _poolBrambleCreeper from "../pool/bramble-creeper.js";
 import _poolBranchingEvolution from "../pool/branching-evolution.js";
+import _poolBranchingTimeline from "../pool/branching-timeline.js";
 import _poolBrassMan from "../pool/brass-man.js";
 import _poolBrasssTunnelGrinder from "../pool/brasss-tunnel-grinder.js";
 import _poolBringToLife from "../pool/bring-to-life.js";
@@ -471,6 +472,7 @@ import _poolLavaleaper from "../pool/lavaleaper.js";
 import _poolLawmagesBinding from "../pool/lawmages-binding.js";
 import _poolLeovoldEmissaryOfTrest from "../pool/leovold-emissary-of-trest.js";
 import _poolLichsCaress from "../pool/lichs-caress.js";
+import _poolLieutenantCommanderData from "../pool/lieutenant-commander-data.js";
 import _poolLifespringDruid from "../pool/lifespring-druid.js";
 import _poolLilianasCaress from "../pool/lilianas-caress.js";
 import _poolLilypadVillage from "../pool/lilypad-village.js";
@@ -551,6 +553,7 @@ import _poolNissaLeylineTamer from "../pool/nissa-leyline-tamer.js";
 import _poolNissaVitalForce from "../pool/nissa-vital-force.js";
 import _poolNissasEncouragement from "../pool/nissas-encouragement.js";
 import _poolNissasExpedition from "../pool/nissas-expedition.js";
+import _poolNivarScienceAcademy from "../pool/nivar-science-academy.js";
 import _poolNivixGuildmage from "../pool/nivix-guildmage.js";
 import _poolNobleBanneret from "../pool/noble-banneret.js";
 import _poolNomadMythmaker from "../pool/nomad-mythmaker.js";
@@ -1046,6 +1049,7 @@ const shard: CardShard = {
     _poolBountyOfSkemfar,
     _poolBrambleCreeper,
     _poolBranchingEvolution,
+    _poolBranchingTimeline,
     _poolBrassMan,
     _poolBrasssTunnelGrinder,
     _poolBringToLife,
@@ -1428,6 +1432,7 @@ const shard: CardShard = {
     _poolLawmagesBinding,
     _poolLeovoldEmissaryOfTrest,
     _poolLichsCaress,
+    _poolLieutenantCommanderData,
     _poolLifespringDruid,
     _poolLilianasCaress,
     _poolLilypadVillage,
@@ -1508,6 +1513,7 @@ const shard: CardShard = {
     _poolNissaVitalForce,
     _poolNissasEncouragement,
     _poolNissasExpedition,
+    _poolNivarScienceAcademy,
     _poolNivixGuildmage,
     _poolNobleBanneret,
     _poolNomadMythmaker,

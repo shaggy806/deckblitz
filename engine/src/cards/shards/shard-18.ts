@@ -247,6 +247,7 @@ import _poolEssenceExtraction from "../pool/essence-extraction.js";
 import _poolEternalIsolation from "../pool/eternal-isolation.js";
 import _poolEvangelOfSynthesis from "../pool/evangel-of-synthesis.js";
 import _poolEvilsThrall from "../pool/evils-thrall.js";
+import _poolExcalbianGamemaster from "../pool/excalbian-gamemaster.js";
 import _poolExcavatingAnurid from "../pool/excavating-anurid.js";
 import _poolExpandingOoze from "../pool/expanding-ooze.js";
 import _poolExpansion from "../pool/expansion.js";
@@ -1209,6 +1210,7 @@ const shard: CardShard = {
     _poolEternalIsolation,
     _poolEvangelOfSynthesis,
     _poolEvilsThrall,
+    _poolExcalbianGamemaster,
     _poolExcavatingAnurid,
     _poolExpandingOoze,
     _poolExpansion,

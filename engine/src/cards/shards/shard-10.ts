@@ -204,6 +204,7 @@ import _poolDeathsCaress from "../pool/deaths-caress.js";
 import _poolDecodeTransmissions from "../pool/decode-transmissions.js";
 import _poolDecompose from "../pool/decompose.js";
 import _poolDeepFreeze from "../pool/deep-freeze.js";
+import _poolDeepSpace9 from "../pool/deep-space-9.js";
 import _poolDefendTheCelestus from "../pool/defend-the-celestus.js";
 import _poolDefendTheHearth from "../pool/defend-the-hearth.js";
 import _poolDefensiveStance from "../pool/defensive-stance.js";
@@ -246,6 +247,7 @@ import _poolDuelTactics from "../pool/duel-tactics.js";
 import _poolDuelcraftTrainer from "../pool/duelcraft-trainer.js";
 import _poolDutyBeyondDeath from "../pool/duty-beyond-death.js";
 import _poolDwindle from "../pool/dwindle.js";
+import _poolEarthSector001 from "../pool/earth-sector-001.js";
 import _poolEarwigSquad from "../pool/earwig-squad.js";
 import _poolEccentricFarmer from "../pool/eccentric-farmer.js";
 import _poolEchoOfDusk from "../pool/echo-of-dusk.js";
@@ -712,6 +714,7 @@ import _poolSejiriSteppe from "../pool/sejiri-steppe.js";
 import _poolSepharaSkysBlade from "../pool/sephara-skys-blade.js";
 import _poolSerraAvenger from "../pool/serra-avenger.js";
 import _poolServantOfNefarox from "../pool/servant-of-nefarox.js";
+import _poolSetPhasersTo from "../pool/set-phasers-to.js";
 import _poolSetessanBattlePriest from "../pool/setessan-battle-priest.js";
 import _poolSetonsScout from "../pool/setons-scout.js";
 import _poolShadowfaxLordOfHorses from "../pool/shadowfax-lord-of-horses.js";
@@ -1171,6 +1174,7 @@ const shard: CardShard = {
     _poolDecodeTransmissions,
     _poolDecompose,
     _poolDeepFreeze,
+    _poolDeepSpace9,
     _poolDefendTheCelestus,
     _poolDefendTheHearth,
     _poolDefensiveStance,
@@ -1213,6 +1217,7 @@ const shard: CardShard = {
     _poolDuelcraftTrainer,
     _poolDutyBeyondDeath,
     _poolDwindle,
+    _poolEarthSector001,
     _poolEarwigSquad,
     _poolEccentricFarmer,
     _poolEchoOfDusk,
@@ -1679,6 +1684,7 @@ const shard: CardShard = {
     _poolSepharaSkysBlade,
     _poolSerraAvenger,
     _poolServantOfNefarox,
+    _poolSetPhasersTo,
     _poolSetessanBattlePriest,
     _poolSetonsScout,
     _poolShadowfaxLordOfHorses,

@@ -834,6 +834,7 @@ import _poolTempleOfCivilization from "../pool/temple-of-civilization.js";
 import _poolTempleOfMalice from "../pool/temple-of-malice.js";
 import _poolTemporalDistortion from "../pool/temporal-distortion.js";
 import _poolTemporalFirestorm from "../pool/temporal-firestorm.js";
+import _poolTestOfConviction from "../pool/test-of-conviction.js";
 import _poolTheAkroanWar from "../pool/the-akroan-war.js";
 import _poolTheBalrogOfMoria from "../pool/the-balrog-of-moria.js";
 import _poolTheFirstIroanGames from "../pool/the-first-iroan-games.js";
@@ -880,6 +881,7 @@ import _poolTunnelTipster from "../pool/tunnel-tipster.js";
 import _poolTwinflameTravelers from "../pool/twinflame-travelers.js";
 import _poolTyrantOfKherRidges from "../pool/tyrant-of-kher-ridges.js";
 import _poolTyrantsChoice from "../pool/tyrants-choice.js";
+import _poolUSSEnterpriseAFreeSpirit from "../pool/u-s-s-enterprise-a-free-spirit.js";
 import _poolUlamogTheInfiniteGyre from "../pool/ulamog-the-infinite-gyre.js";
 import _poolUltimateSpiderMan from "../pool/ultimate-spider-man.js";
 import _poolUmbrisFearManifest from "../pool/umbris-fear-manifest.js";
@@ -1818,6 +1820,7 @@ const shard: CardShard = {
     _poolTempleOfMalice,
     _poolTemporalDistortion,
     _poolTemporalFirestorm,
+    _poolTestOfConviction,
     _poolTheAkroanWar,
     _poolTheBalrogOfMoria,
     _poolTheFirstIroanGames,
@@ -1864,6 +1867,7 @@ const shard: CardShard = {
     _poolTwinflameTravelers,
     _poolTyrantOfKherRidges,
     _poolTyrantsChoice,
+    _poolUSSEnterpriseAFreeSpirit,
     _poolUlamogTheInfiniteGyre,
     _poolUltimateSpiderMan,
     _poolUmbrisFearManifest,
