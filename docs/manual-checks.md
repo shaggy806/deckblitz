@@ -7516,3 +7516,13 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Elim Garak: choosing a charm's mode faces a dilemma
 - **Do:** Cast Izzet Charm, choosing "Draw two cards, then discard two cards."
 - **Expect:** Elim Garak's ability triggers once: Bob loses 2 life and you gain 2.
+
+## The Defilers: pay 2 life instead of a coloured mana (2026-11-06)
+
+### Defiler of Vigor: paying 2 life for a green creature
+- **Do:** Click the Grizzly Bears in your hand and choose "Cast Grizzly Bears (paying 2 life for Defiler of Vigor)".
+- **Expect:** The menu also offers a plain "Cast Grizzly Bears". You lose 2 life, only one Forest taps, and the Defiler gets a +1/+1 counter (7/7) before the Bears enter.
+
+### Defiler of Vigor: paying 2 life for a green creature, four players
+- **Do:** Click the Grizzly Bears in your hand and choose "Cast Grizzly Bears (paying 2 life for Defiler of Vigor)".
+- **Expect:** You lose 2 life, only one Forest taps, and the Bears enter. Nobody else's life changes.

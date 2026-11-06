@@ -11276,4 +11276,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Elim Garak, Simple Tailor', 'Island', 'Mountain'], hand: ['Izzet Charm'] },
     }),
   ),
+  // --- The Defilers: pay 2 life instead of a coloured mana (2026-11-06) -----
+  preset(
+    'Defiler of Vigor: paying 2 life for a green creature',
+    board({
+      you: { bf: ['Defiler of Vigor', 'Forest*2'], hand: ['Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    'Defiler of Vigor: paying 2 life for a green creature, four players',
+    board({
+      you: { bf: ['Defiler of Vigor', 'Forest*2'], hand: ['Grizzly Bears'] },
+      opp: [{ bf: ['Hill Giant'] }, { bf: [] }, { bf: ['Craw Wurm'] }],
+    }),
+  ),
 ]

@@ -657,6 +657,24 @@ describe("what a spell costs: amounts, colours and targets", () => {
       castFromAnyones: true,
       increaseGeneric: 2,
     });
+    // The Defilers: the reduction only with the optional life paid.
+    expect(
+      staticOf(
+        "As an additional cost to cast red permanent spells, you may pay 2 life. Those spells cost {R} less to cast if you paid life this way. This effect reduces only the amount of red mana you pay.",
+      ),
+    ).toEqual({
+      applies: { colors: ["R"], typesAnyOf: ["artifact", "battle", "creature", "enchantment", "planeswalker"] },
+      caster: "you",
+      reduceColored: "{R}",
+      coloredOnly: true,
+      optionalLife: 2,
+    });
+    // A mismatched colour is no Defiler's.
+    expect(
+      staticOf(
+        "As an additional cost to cast red permanent spells, you may pay 2 life. Those spells cost {G} less to cast if you paid life this way. This effect reduces only the amount of red mana you pay.",
+      ),
+    ).toBeUndefined();
     expect(staticOf("Instant and sorcery spells you cast with mana value 4 or greater cost {X} less to cast, where X is this creature's power.")).toEqual({
       applies: { typesAnyOf: ["instant", "sorcery"], manaValue: { op: "gte", n: 4 } },
       caster: "you",

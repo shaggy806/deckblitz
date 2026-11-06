@@ -5795,6 +5795,18 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
     `reduceColoredTimes` (a `CostReductionAmount`) applies it that many
     times: Eluge, the Shoreless Sea's "{U} (or {1}) less to cast for each
     land you control with a flood counter on it".
+  - `optionalLife: 2` — the Defilers' "As an additional cost to cast green
+    permanent spells, you may pay 2 life. Those spells cost {G} less to cast
+    if you paid life this way. This effect reduces only the amount of green
+    mana you pay" (Defiler of Vigor, Defiler of Dreams: `applies: { colors:
+    ["G"], typesAnyOf: [the five permanent types] }`, `reduceColored: "{G}"`,
+    `coloredOnly: true`): an optional additional cost the caster announces
+    (rule 601.2b), once a spell for each such permanent (the rulings), the
+    reduction only with it paid. Every set of them is a `cast-spell` offer of
+    its own, naming the permanents in `optionalLife` (`optionalLifeText`
+    "paying 2 life for Defiler of Vigor"); not offered without the life
+    (119.4) or on a face-down cast. A spell cast by an effect as it resolves
+    (`cast-now`) is never offered it.
 
   A generic reduction bigger than the generic part carries on to the `{2}`
   half of twobrid pips (`{2/W}`), but only the ones actually paid with

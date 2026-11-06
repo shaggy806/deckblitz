@@ -561,6 +561,11 @@ export type Action =
        * Valley's Voice): its own additional cost beside any kicker (rule
        * 702.175b). Echoed from the offer's `offspring`. */
       readonly offspring?: boolean;
+      /** The permanents whose optional "you may pay 2 life" additional cost
+       * this cast pays (a `costModification`'s `optionalLife` — the Defilers,
+       * rule 601.2b), each taking its reduction off too. Echoed from the
+       * offer's `optionalLife`; omitted, none is paid. */
+      readonly optionalLife?: readonly ObjectId[];
       /** Cast for its evoke cost (rule 702.74) instead of its mana cost —
        * printed, or granted (Ashling, the Limitless). Echoed from the
        * offer's `evoke`, with `evokeCost` naming which evoke when it has
@@ -1413,6 +1418,12 @@ export type LegalAction =
        * labelling. */
       readonly offspring?: true;
       readonly offspringCost?: string;
+      /** A variant that pays these permanents' optional life costs as well
+       * (the Defilers' "you may pay 2 life", rule 601.2b) — echoed back as the
+       * action's `optionalLife`; `optionalLifeText` for labelling ("paying 2
+       * life for Defiler of Vigor"). */
+      readonly optionalLife?: readonly ObjectId[];
+      readonly optionalLifeText?: string;
       /** A variant cast for its evoke cost (rule 702.74) — echoed back as
        * the action's `evoke` and `evokeCost` (one offer per distinct evoke
        * cost: Mulldrifter under Ashling has {2}{U} and {4}). */

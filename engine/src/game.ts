@@ -2576,6 +2576,11 @@ export class Game {
           this.withAltCostPick(action.altCostIndex, () => this.dispatchOne(action));
           break;
         }
+        // Which optional life costs it pays (the Defilers, rule 601.2b).
+        if (action.optionalLife !== undefined && this.optionalLifePick !== action.optionalLife) {
+          this.withOptionalLifePick(action.optionalLife, () => this.dispatchOne(action));
+          break;
+        }
         // "Of an opponent's choice" (rules 601.2c, 700.2e): the opponent
         // named answers first; the cast comes back through here, its targets
         // and modes whole, once they have.
@@ -2819,6 +2824,9 @@ export class Game {
       case "cast-spell":
         if (action.altCostIndex !== undefined && this.altCostPick !== action.altCostIndex) {
           return this.withAltCostPick(action.altCostIndex, () => this.canDispatch(action));
+        }
+        if (action.optionalLife !== undefined && this.optionalLifePick !== action.optionalLife) {
+          return this.withOptionalLifePick(action.optionalLife, () => this.canDispatch(action));
         }
         // Naming the opponent who chooses (rules 601.2c, 700.2e): legal when
         // the cast would be with a choice of theirs in place.
@@ -4399,6 +4407,9 @@ export class Game {
       harmonizeTap?: ObjectId;
       /** A splice variant's cards spliced onto it (rule 702.47). */
       splice?: readonly ObjectId[];
+      /** The permanents whose optional life cost this variant pays (the
+       * Defilers, rule 601.2b). */
+      optionalLife?: readonly ObjectId[];
     }[] = [{ kicked: false, overload: false, free: false }];
     // Multikicker (rule 702.33c — Everflowing Chalice): one variant per
     // number of times, up to as many as the player's mana could pay for at
@@ -4574,14 +4585,28 @@ export class Game {
       }
       variants.push(...variants.filter((v) => !v.overload).flatMap((v) => sets.map((splice) => ({ ...v, splice }))));
     }
+    // An optional additional cost of life a permanent gives (the Defilers'
+    // "you may pay 2 life", rule 601.2b): every way to cast it may pay any set
+    // of them, each its own variant — worthless to a free cast but still a cost
+    // the caster may pay.
+    const lifeSources = via === "face-down" ? [] : this.optionalLifeSources(player, card).slice(0, Game.MAX_OPTIONAL_LIFE_OFFERED);
+    if (lifeSources.length > 0) {
+      const sets: ObjectId[][] = [];
+      for (let mask = 1; mask < 1 << lifeSources.length; mask += 1) {
+        sets.push(lifeSources.filter((_s, i) => (mask & (1 << i)) !== 0).map((s) => s.source));
+      }
+      variants.push(...variants.flatMap((v) => sets.map((optionalLife) => ({ ...v, optionalLife }))));
+    }
     const pickBefore = this.altCostPick;
-    for (const { kicked: kickedFlag, kickCount, overload, free, altCost, altCostIndex, costOption, prototype, offspring, evoke, harmonizeTap, splice } of variants) {
+    const lifePickBefore = this.optionalLifePick;
+    for (const { kicked: kickedFlag, kickCount, overload, free, altCost, altCostIndex, costOption, prototype, offspring, evoke, harmonizeTap, splice, optionalLife } of variants) {
       // This variant's alternative cost, for everything that reads one below.
       this.altCostPick = altCost === true ? altCostIndex : undefined;
+      this.optionalLifePick = optionalLife;
       const ownAltPaid = altCost === true && (altCostIndex ?? 0) === 0;
       // A multikicker variant passes its count where `kicked` goes.
       const kicked: boolean | number = kickCount ?? kickedFlag;
-      const kickKey = `${free}|${altCost}|${altCostIndex}|${costOption}|${prototype}|${offspring}|${evoke}|${splice?.join(",")}`;
+      const kickKey = `${free}|${altCost}|${altCostIndex}|${costOption}|${prototype}|${offspring}|${evoke}|${splice?.join(",")}|${optionalLife?.join(",")}`;
       if (kickCount !== undefined && kickCount > 1 && def.kicker?.second === undefined && kickFailed.has(kickKey)) continue;
       const offeredBefore = out.length;
       // A prototyped variant is worked out as the prototyped spell it is: its
@@ -5485,9 +5510,20 @@ export class Game {
         undoHarmonize();
         undoKickedReduction();
         if (kickCount !== undefined && out.length === offeredBefore) kickFailed.add(kickKey);
+        // The optional life it pays, on every offer this variant made.
+        if (optionalLife !== undefined) {
+          const optionalLifeText = optionalLife
+            .map((id) => `paying ${lifeSources.find((s) => s.source === id)?.life ?? 0} life for ${printedCardName(this.state.objects[id])}`)
+            .join(", ");
+          for (let i = offeredBefore; i < out.length; i += 1) {
+            const offer = out[i];
+            if (offer.kind === "cast-spell") out[i] = { ...offer, optionalLife, optionalLifeText };
+          }
+        }
       }
     }
     this.altCostPick = pickBefore;
+    this.optionalLifePick = lifePickBefore;
     return out;
   }
 
@@ -5908,6 +5944,10 @@ export class Game {
   /** The most splice cards in one hand offered onto one spell (rule 702.47):
    * every set of them is its own variant, so 2^N of them. */
   static readonly MAX_SPLICE_OFFERED = 4;
+  /** The most permanents whose optional life cost (the Defilers) is offered
+   * on one spell: every set of them is its own variant, so 2^N of them. Five
+   * Defilers, one a color, reach any one spell at most once each. */
+  static readonly MAX_OPTIONAL_LIFE_OFFERED = 5;
 
   /** What an airbended card is cast for "rather than paying its mana cost"
    * (rule 701.65a). */
@@ -15974,6 +16014,9 @@ export class Game {
     let reduceGeneric = 0;
     const colored: ColoredReduction[] = [];
     for (const { source, mod } of this.reachingCostModifications(player, cardId)) {
+      // "Those spells cost {G} less to cast if you paid life this way" (the
+      // Defilers): only with that source's optional life paid (rule 601.2b).
+      if (mod.optionalLife !== undefined && this.optionalLifePick?.includes(source.id) !== true) continue;
       let times = mod.perTarget === true ? targetCount : 1;
       if (isTargetKeyed(mod)) {
         if (targets !== undefined) {
@@ -17702,6 +17745,16 @@ export class Game {
         return `${def.name}'s number must be from ${chooseNumber.min} to ${chooseNumber.max}`;
       }
     }
+    // The optional life costs this cast pays (the Defilers, rule 601.2b):
+    // each from a permanent that gives one, and all of it — with any life the
+    // spell's own additional cost asks — payable at once (rules 118.3, 119.4).
+    {
+      const optionalLife = this.optionalLifeOwed(player, cardId);
+      if (typeof optionalLife === "string") return optionalLife;
+      if (optionalLife > 0 && !this.canPayLife(player, optionalLife + (def.additionalCost?.payLife ?? 0))) {
+        return `${player} can't pay ${optionalLife} life to cast ${def.name}`;
+      }
+    }
     // A non-modal spell's target legality is checked up front; a modal spell's
     // is checked per chosen mode (only once `modes` is known — at enumeration
     // time the driver hasn't picked yet).
@@ -18168,6 +18221,56 @@ export class Game {
   /** Which of `alternativeCostsOf` the cast being judged or paid for is using,
    * past the first (`Action.altCostIndex`), only for as long as that takes. */
   private altCostPick: number | undefined;
+
+  /** The permanents whose optional life cost (`costModification.optionalLife`
+   * — the Defilers) the cast being judged or paid for pays
+   * (`Action.optionalLife`), only for as long as that takes. */
+  private optionalLifePick: readonly ObjectId[] | undefined;
+
+  /** Run `fn` judging or paying a cast that pays `sources`' optional life costs. */
+  private withOptionalLifePick<T>(sources: readonly ObjectId[] | undefined, fn: () => T): T {
+    const before = this.optionalLifePick;
+    this.optionalLifePick = sources;
+    try {
+      return fn();
+    } finally {
+      this.optionalLifePick = before;
+    }
+  }
+
+  /**
+   * The permanents with an optional life cost for `cardId` as `player` casts
+   * it ("as an additional cost to cast green permanent spells, you may pay 2
+   * life" — the Defilers, rule 601.2b), each once (its rulings), with how much
+   * life.
+   */
+  private optionalLifeSources(player: PlayerId, cardId: ObjectId): { readonly source: ObjectId; readonly life: number }[] {
+    const out: { readonly source: ObjectId; readonly life: number }[] = [];
+    for (const { source, mod } of this.reachingCostModifications(player, cardId)) {
+      if (mod.optionalLife !== undefined && !out.some((o) => o.source === source.id)) {
+        out.push({ source: source.id, life: mod.optionalLife });
+      }
+    }
+    return out;
+  }
+
+  /** The life the cast being judged or paid for pays for the optional life
+   * costs it picked (`optionalLifePick`); a pick that isn't one of them is a
+   * string, the reason. */
+  private optionalLifeOwed(player: PlayerId, cardId: ObjectId): number | string {
+    const picked = this.optionalLifePick;
+    if (picked === undefined || picked.length === 0) return 0;
+    const sources = this.optionalLifeSources(player, cardId);
+    let life = 0;
+    for (const [i, id] of picked.entries()) {
+      const found = sources.find((s) => s.source === id);
+      if (found === undefined || picked.indexOf(id) !== i) {
+        return `${this.state.objects[id]?.cardName ?? id} gives no life to pay for this spell`;
+      }
+      life += found.life;
+    }
+    return life;
+  }
 
   // --- another player's choices as it's cast (rules 601.2c, 700.2e) -------
 
@@ -19444,6 +19547,9 @@ export class Game {
       targets,
     );
     if (why !== null) throw new Error(why);
+    // The optional life it pays (the Defilers), counted while the sources
+    // that ask it are where they were as it was announced (rule 601.2b).
+    const optionalLifeOwed = this.optionalLifeOwed(player, cardId);
 
     const object = this.state.objects[cardId];
     // Where it's cast from, before anything moves it (601.2a) — see the
@@ -20040,6 +20146,8 @@ export class Game {
     if (def.additionalCost?.payLife !== undefined) {
       this.changeLife(player, -def.additionalCost.payLife);
     }
+    // "You may pay 2 life" for each Defiler whose cost it pays (rule 601.2b).
+    if (typeof optionalLifeOwed === "number" && optionalLifeOwed > 0) this.changeLife(player, -optionalLifeOwed);
     // "This spell costs 3 life more to cast for each target" (Phyrexian
     // Purge — rule 601.2f), counted over the targets just locked in.
     if (def.additionalCost?.payLifePerTarget !== undefined) {

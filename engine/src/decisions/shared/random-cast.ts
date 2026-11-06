@@ -124,6 +124,7 @@ export function randomCast(
     ...(legal.kicked === true ? { kicked: true } : {}),
     ...(legal.kickCount !== undefined ? { kickCount: legal.kickCount } : {}),
     ...(legal.offspring === true ? { offspring: true } : {}),
+    ...(legal.optionalLife !== undefined ? { optionalLife: legal.optionalLife } : {}),
     ...(legal.evoke === true ? { evoke: true, evokeCost: legal.evokeCost } : {}),
     ...(legal.prototype === true ? { prototype: true } : {}),
     ...(legal.overload === true ? { overload: true } : {}),

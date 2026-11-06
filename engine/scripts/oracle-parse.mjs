@@ -17347,6 +17347,24 @@ function spellCostStaticOf(line, text) {
   if ((m = /^(White|Blue|Black|Red|Green) spells you cast cost ((?:\{[WUBRG]\})+) more to cast\.$/.exec(line))) {
     return made({ applies: { colors: [COLOR_WORD[m[1].toLowerCase()]] }, caster: "you", increaseColored: m[2] });
   }
+  // The Defilers: an optional additional cost of life (rule 601.2b), the
+  // reduction only with it paid (`optionalLife`).
+  if (
+    (m =
+      /^As an additional cost to cast (white|blue|black|red|green) permanent spells, you may pay (\d+) life\. Those spells cost (\{[WUBRG]\}) less to cast if you paid life this way\. This effect reduces only the amount of (white|blue|black|red|green) mana you pay\.$/.exec(
+        line,
+      )) &&
+    m[1] === m[4] &&
+    `{${COLOR_WORD[m[1]]}}` === m[3]
+  ) {
+    return made({
+      applies: { colors: [COLOR_WORD[m[1]]], typesAnyOf: ["artifact", "battle", "creature", "enchantment", "planeswalker"] },
+      caster: "you",
+      reduceColored: m[3],
+      coloredOnly: true,
+      optionalLife: Number(m[2]),
+    });
+  }
   if ((m = /^Spells you cast that target an? (.+?) cost \{(\d+)\} less to cast\.$/.exec(line))) {
     const targeting = parseTypePhrase(m[1]);
     if (targeting === null || Object.keys(targeting).length === 0) return null;

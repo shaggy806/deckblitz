@@ -1876,7 +1876,8 @@
   "effect:search-finds-castable-this-turn",
   "effect:flicker-return-at-owners-next-end-step",
   "effect:cast-discarded-card-exiled-by-madness",
-  "static:granted-static-replacement"
+  "static:granted-static-replacement",
+  "cost:optional-life-additional-cost-for-spells"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

@@ -4033,6 +4033,15 @@ export interface StaticAbility {
      * (Edgewalker, Morophon): a coloured reduction with nothing coloured
      * left to take is lost rather than taken off the generic part. */
     readonly coloredOnly?: boolean;
+    /** "As an additional cost to cast green permanent spells, you may pay 2
+     * life. Those spells cost {G} less to cast if you paid life this way"
+     * (the Defilers — Defiler of Vigor): an optional additional cost of this
+     * much life the caster of each matching spell may pay (rule 601.2b), once
+     * a spell for each such ability (its rulings), and the reduction this
+     * modification otherwise makes applies only if they did (601.2f). The cast
+     * names the sources it pays (`cast-spell`'s `optionalLife`); each way is a
+     * legal action of its own. */
+    readonly optionalLife?: number;
   };
   /** "All morph costs cost {2} more" (Exiled Doomsayer): generic mana on
    * turning a permanent up for its morph or megamorph cost, whoever's — a

@@ -228,6 +228,7 @@ function graveyardVariantLabel(
     if (a.xCost?.minX !== undefined && a.xCost.minX === a.xCost.maxX) parts.push(`X=${a.xCost.maxX}`)
     if (a.prototype) parts.push(`prototype ${a.prototypeCost ?? ''}`.trim())
     if (a.offspring) parts.push(`offspring ${a.offspringCost ?? ''}`.trim())
+    if (a.optionalLifeText !== undefined) parts.push(a.optionalLifeText)
     if (a.splice) parts.push(`splicing ${a.splice.map((s) => `${s.cardName} ${s.cost}`).join(' and ')}`)
     if (a.evoke) parts.push(a.altCostText !== undefined ? `evoke: ${a.altCostText}` : `evoke ${a.evokeCost ?? ''}`.trim())
     if (a.altCost && a.altCostText !== undefined) parts.push(a.altCostText)
@@ -258,6 +259,8 @@ const castExtras = (cast: CastAction) => ({
   ...(cast.kickCount !== undefined ? { kickCount: cast.kickCount } : {}),
   ...(cast.prototype === true ? { prototype: true } : {}),
   ...(cast.offspring === true ? { offspring: true } : {}),
+  // The Defilers' optional life (rule 601.2b): the permanents it pays for.
+  ...(cast.optionalLife !== undefined ? { optionalLife: cast.optionalLife } : {}),
   ...(cast.evoke === true ? { evoke: true, evokeCost: cast.evokeCost } : {}),
   ...(cast.overload === true ? { overload: true } : {}),
   ...(cast.free === true ? { free: true } : {}),
@@ -589,6 +592,9 @@ interface Targeting {
   readonly prototype?: boolean
   /** Paying a granted offspring cost too (Zinnia) — echoed back like `kicked`. */
   readonly offspring?: boolean
+  /** The permanents whose optional "you may pay 2 life" this cast pays (the
+   * Defilers) — echoed back like `kicked`. */
+  readonly optionalLife?: readonly ObjectId[]
   /** Casting this for its evoke cost (rule 702.74) — echoed back like `kicked`,
    * with which evoke cost when it has more than one. */
   readonly evoke?: boolean
@@ -2495,6 +2501,7 @@ function Table({
         | 'kickCount'
         | 'prototype'
         | 'offspring'
+        | 'optionalLife'
         | 'evoke'
         | 'evokeCost'
         | 'overload'
@@ -2543,6 +2550,7 @@ function Table({
                 ...(t.kickCount !== undefined ? { kickCount: t.kickCount } : {}),
                 ...(t.prototype === true ? { prototype: true } : {}),
                 ...(t.offspring === true ? { offspring: true } : {}),
+                ...(t.optionalLife !== undefined ? { optionalLife: [...t.optionalLife] } : {}),
                 ...(t.assist !== undefined ? { assist: t.assist } : {}),
                 ...(t.otherChooser !== undefined ? { otherChooser: t.otherChooser } : {}),
                 ...(t.evoke === true ? { evoke: true, evokeCost: t.evokeCost } : {}),
@@ -7125,6 +7133,7 @@ function Table({
                       {a.kind === 'cast-spell' && a.offspring ? (
                         <> (offspring <Symbols text={a.offspringCost ?? ''} />)</>
                       ) : null}
+                      {a.kind === 'cast-spell' && a.optionalLifeText !== undefined ? ` (${a.optionalLifeText})` : ''}
                       {a.kind === 'cast-spell' && a.assist !== undefined
                         ? ` (assist: ${playerLabel(a.assist, game.seats)} may pay up to ${a.assistMax ?? 0})`
                         : ''}
