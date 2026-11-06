@@ -16264,3 +16264,23 @@ describe("exiling a target spell and plotting it", () => {
     });
   });
 });
+
+describe("discard N unless you discard one card of a kind", () => {
+  it("reads Thirst for Knowledge whole", () => {
+    const thirst = parseFace({
+      name: "Thirst for Knowledge",
+      type_line: "Instant",
+      mana_cost: "{2}{U}",
+      colors: ["U"],
+      oracle_text: "Draw three cards. Then discard two cards unless you discard an artifact card.",
+    });
+    expect(thirst.complete).toBe(true);
+    expect(thirst.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "draw", amount: 3 },
+        { kind: "discard", target: "you", amount: 2, unlessOne: { type: "artifact" } },
+      ],
+    });
+  });
+});

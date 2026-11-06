@@ -5,6 +5,7 @@
   "trigger:discards-batch-trigger",
   "replacement:keep-unspent-mana-until-end-of-turn",
   "keyword:overload-per-controller-search",
+  "effect:discard-unless-land",
   "trigger:face-a-dilemma",
   "mechanic:beam-me-up",
   "amount:auras-attached-to-self",

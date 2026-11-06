@@ -370,6 +370,13 @@ void counter are, when the moving object's controller picks another exile that
 could apply (616.1 — Rest in Peace). The scaffolder sets it on a card that says
 "exiled with" anywhere. Proving cards: The Darkness Crystal, Gisa, Glorious
 Resurrector (`exile-instead-linked.test.ts`). Key: replacement:exile-instead-linked.
+### "Discard two cards unless you discard an artifact card" — built 2026-11-06
+
+By EDHREC rank: Thirst for Knowledge (1953). No engine code: `discard`'s
+`unlessOne` (Compulsive Research) already ran it. The scaffolder now reads "then
+discard N cards unless you discard a [kind] card" whole. Key:
+effect:discard-unless-land.
+
 ### The next spell has improvise — built 2026-11-05
 
 By EDHREC rank: Archway of Innovation (926). `grant-spells-this-turn`'s

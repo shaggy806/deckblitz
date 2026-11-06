@@ -6800,6 +6800,12 @@ export function parseSentence(sentence, ctx) {
   // "Then discard a card unless you attacked this turn" (Chart a Course),
   // "… unless there are five or more mana values among cards in your
   // graveyard" (Tainted Indulgence): any condition the intervening-ifs read.
+  // "Then discard two cards unless you discard an artifact card" (Thirst for
+  // Knowledge, Mystic Meditation): one matching card is a whole answer.
+  if ((m = new RegExp(`^(?:then )?discard ${N} cards? unless you discard an? (.+?) card\\.$`, "i").exec(s))) {
+    const filter = discardFilterOf(m[2]);
+    if (filter !== null) return { kind: "discard", target: "you", amount: amount(m[1]), unlessOne: filter };
+  }
   if ((m = /^(?:then )?discard a card unless (.+)\.$/i.exec(s))) {
     const condition = INTERVENING_IFS[`if ${m[1].toLowerCase()},`];
     if (condition !== undefined) {
