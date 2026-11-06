@@ -10,7 +10,7 @@ card. Look for existing machinery first (`card:brief`, `card:find`, `card:vocab`
 first 42 needed no engine code), and then the key is just that card and a scaffolder template.
 
 Read `.claude/skills/build-family/SKILL.md` steps 2 and 3, then `engine/CLAUDE.md`, `ROADMAP.md`'s *Architecture constraints* and
-`engine/src/cards/AUTHORING.md` §0, and follow them: tests in `engine/src/test/<feature>.test.ts`, the keys in `top-commanders-gaps.json`'s
+`engine/src/cards/AUTHORING.md` §0 and §16's **Harness pitfalls**, and follow them: tests in `engine/src/test/<feature>.test.ts`, the keys in `top-commanders-gaps.json`'s
 `built` array, the scaffolder taught where the line recurs (`npm run card:parse-check -w engine`: zero disagreements, pinned in
 `test/oracle-parse.test.ts`), `docs/architecture/engine.md`, AUTHORING's vocabulary, `neededCards-features.md`. Cite only rule numbers you
 grepped from `docs/rules/MagicCompRules_20260925.txt`.

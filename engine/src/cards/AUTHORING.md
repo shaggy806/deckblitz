@@ -7409,6 +7409,38 @@ is invisible to it.
   card:brief -w engine -- "Name" --test` prints a `describe` with an
   `it.todo` per ability and per ruling to start from. Vitest doesn't
   type-check tests; `npm run typecheck -w engine` does (`npm run verify` runs it).
+- **Harness pitfalls** — where a test author's guess about the harness was
+  wrong (batch 268's lead and three agents, 2026-11-06). Check this list
+  before a test fails for a reason that isn't the card's:
+  - **Every target slot gets an answer.** `cast`/`activate`'s `targets` and
+    `pickTargets` need one entry per slot, `null` for a declined optional one —
+    a per-opponent card (`{ seat: 1 }`, `{ seat: 2 }`, `{ seat: 3 }`) has all
+    three slots even at 2 or 3 players. A refusal for the slot count looks
+    like any other, so assert the message: `toThrow(/target/i)`, never a bare
+    `toThrow()`, which passes for the wrong reason.
+  - **Names, types and supertypes have their own reads.** `computeCharacteristics`
+    has no `name`: a copy's "except its name is …" is `nameOf(object)`
+    (`state.ts`). Use the harness's `types`, `subtypes`, `supertypes`,
+    `keywords` and `pt`, not fields guessed off the characteristics object.
+  - **`spawn()` doesn't make a token.** `debugSpawn` by a token's name gives an
+    object with `isToken` false, so `tokensNamed` and `token: true` filters
+    miss it. Make a token with a `create-token` effect
+    (`game.debugApplyEffect`).
+  - **"Put there from the battlefield this turn" needs the trip.** `toGraveyard`
+    puts a card straight in; `spawn` then `game.debugMove(id, "graveyard")`
+    (or `destroy`) is a card that died this turn.
+  - **Which seat hook answers what:** targets are `pickTargets`/`watchTargets`;
+    a card chosen from a zone — `look-and-choose`, `copyOnEnter`'s "enter as a
+    copy of", "a card exiled with it" — is `pickFromZone`; permanents chosen
+    without targeting are `pickPermanents`; modes and a `may` are `pickModes`.
+  - **An attacker nobody can block** never asks the defender to block, so
+    `blockOffer` runs on into a later turn: check combat straight to damage
+    instead.
+  - **A cost's sacrifice takes a filter wrapper:** `sacrifice: { filter: {
+    subtype: "Food" } }`. A bare `sacrifice: { subtype: "Food" }` type-checks
+    but throws at runtime.
+  - **Prove a setup-dependent test can fail**: break the clause it checks
+    and watch it go red, once.
 - **Run the suite:** `npm run test -w engine` — or everything a change must
   pass, the fuzzer with the new cards forced in included: `npm run verify`.
 - **Eyeball it:** in a dev room (§14).
