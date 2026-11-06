@@ -550,6 +550,7 @@ import _poolNobleTemplar from "../pool/noble-templar.js";
 import _poolNorwoodRanger from "../pool/norwood-ranger.js";
 import _poolNothic from "../pool/nothic.js";
 import _poolNoxiousToad from "../pool/noxious-toad.js";
+import _poolNyotaUhuraCommunications from "../pool/nyota-uhura-communications.js";
 import _poolNyxathid from "../pool/nyxathid.js";
 import _poolObyrasAttendants from "../pool/obyras-attendants.js";
 import _poolOffalsnout from "../pool/offalsnout.js";
@@ -609,6 +610,7 @@ import _poolPygmyKavu from "../pool/pygmy-kavu.js";
 import _poolPygmyRazorback from "../pool/pygmy-razorback.js";
 import _poolPygmyTroll from "../pool/pygmy-troll.js";
 import _poolQarsiRevenant from "../pool/qarsi-revenant.js";
+import _poolQuarksBar from "../pool/quarks-bar.js";
 import _poolQueenMotherRamonda from "../pool/queen-mother-ramonda.js";
 import _poolQueensAgent from "../pool/queens-agent.js";
 import _poolRadiantDestiny from "../pool/radiant-destiny.js";
@@ -818,6 +820,7 @@ import _poolTemporalTrespass from "../pool/temporal-trespass.js";
 import _poolTerminalCriticism from "../pool/terminal-criticism.js";
 import _poolTerrianWorldTyrant from "../pool/terrian-world-tyrant.js";
 import _poolTerritorialBruntar from "../pool/territorial-bruntar.js";
+import _poolTestOfPriorities from "../pool/test-of-priorities.js";
 import _poolThassaGodOfTheSea from "../pool/thassa-god-of-the-sea.js";
 import _poolTheAetherspark from "../pool/the-aetherspark.js";
 import _poolTheEchoverseFulcrum from "../pool/the-echoverse-fulcrum.js";
@@ -922,6 +925,7 @@ import _poolVoraciousGreatshark from "../pool/voracious-greatshark.js";
 import _poolVoraciousHatchling from "../pool/voracious-hatchling.js";
 import _poolVorracBattlehorns from "../pool/vorrac-battlehorns.js";
 import _poolVraskaBetrayalsSting from "../pool/vraska-betrayals-sting.js";
+import _poolVulcan from "../pool/vulcan.js";
 import _poolWalkingSponge from "../pool/walking-sponge.js";
 import _poolWallOfLight from "../pool/wall-of-light.js";
 import _poolWallop from "../pool/wallop.js";
@@ -1526,6 +1530,7 @@ const shard: CardShard = {
     _poolNorwoodRanger,
     _poolNothic,
     _poolNoxiousToad,
+    _poolNyotaUhuraCommunications,
     _poolNyxathid,
     _poolObyrasAttendants,
     _poolOffalsnout,
@@ -1585,6 +1590,7 @@ const shard: CardShard = {
     _poolPygmyRazorback,
     _poolPygmyTroll,
     _poolQarsiRevenant,
+    _poolQuarksBar,
     _poolQueenMotherRamonda,
     _poolQueensAgent,
     _poolRadiantDestiny,
@@ -1794,6 +1800,7 @@ const shard: CardShard = {
     _poolTerminalCriticism,
     _poolTerrianWorldTyrant,
     _poolTerritorialBruntar,
+    _poolTestOfPriorities,
     _poolThassaGodOfTheSea,
     _poolTheAetherspark,
     _poolTheEchoverseFulcrum,
@@ -1898,6 +1905,7 @@ const shard: CardShard = {
     _poolVoraciousHatchling,
     _poolVorracBattlehorns,
     _poolVraskaBetrayalsSting,
+    _poolVulcan,
     _poolWalkingSponge,
     _poolWallOfLight,
     _poolWallop,

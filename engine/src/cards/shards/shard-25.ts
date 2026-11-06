@@ -692,6 +692,7 @@ import _poolSandScout from "../pool/sand-scout.js";
 import _poolSandsower from "../pool/sandsower.js";
 import _poolSanguineSacrament from "../pool/sanguine-sacrament.js";
 import _poolSarkhansUnsealing from "../pool/sarkhans-unsealing.js";
+import _poolSaurianExplorer from "../pool/saurian-explorer.js";
 import _poolSauronDinoDevotee from "../pool/sauron-dino-devotee.js";
 import _poolSauronsRansom from "../pool/saurons-ransom.js";
 import _poolScabClanMauler from "../pool/scab-clan-mauler.js";
@@ -1638,6 +1639,7 @@ const shard: CardShard = {
     _poolSandsower,
     _poolSanguineSacrament,
     _poolSarkhansUnsealing,
+    _poolSaurianExplorer,
     _poolSauronDinoDevotee,
     _poolSauronsRansom,
     _poolScabClanMauler,

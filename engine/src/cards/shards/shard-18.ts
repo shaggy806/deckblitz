@@ -602,6 +602,7 @@ import _poolPsychosisCrawler from "../pool/psychosis-crawler.js";
 import _poolPullFromEternity from "../pool/pull-from-eternity.js";
 import _poolPutrefy from "../pool/putrefy.js";
 import _poolQuandrixPledgemage from "../pool/quandrix-pledgemage.js";
+import _poolQuarkHumbleProprietor from "../pool/quark-humble-proprietor.js";
 import _poolQuarryColossus from "../pool/quarry-colossus.js";
 import _poolQuarryHauler from "../pool/quarry-hauler.js";
 import _poolQuirionDryad from "../pool/quirion-dryad.js";
@@ -805,6 +806,7 @@ import _poolTheMechanistAerialArtisan from "../pool/the-mechanist-aerial-artisan
 import _poolTheOneRing from "../pool/the-one-ring.js";
 import _poolTheRollercrusherRide from "../pool/the-rollercrusher-ride.js";
 import _poolTheTenthDoctor from "../pool/the-tenth-doctor.js";
+import _poolTheUnicomplex from "../pool/the-unicomplex.js";
 import _poolTheWaspJanetVanDyne from "../pool/the-wasp-janet-van-dyne.js";
 import _poolTheloniteHermit from "../pool/thelonite-hermit.js";
 import _poolThirstingRoots from "../pool/thirsting-roots.js";
@@ -1565,6 +1567,7 @@ const shard: CardShard = {
     _poolPullFromEternity,
     _poolPutrefy,
     _poolQuandrixPledgemage,
+    _poolQuarkHumbleProprietor,
     _poolQuarryColossus,
     _poolQuarryHauler,
     _poolQuirionDryad,
@@ -1768,6 +1771,7 @@ const shard: CardShard = {
     _poolTheOneRing,
     _poolTheRollercrusherRide,
     _poolTheTenthDoctor,
+    _poolTheUnicomplex,
     _poolTheWaspJanetVanDyne,
     _poolTheloniteHermit,
     _poolThirstingRoots,

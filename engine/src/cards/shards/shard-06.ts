@@ -850,6 +850,7 @@ import _poolTraverseTheOutlands from "../pool/traverse-the-outlands.js";
 import _poolTreeMonkey from "../pool/tree-monkey.js";
 import _poolTriceratonCommander from "../pool/triceraton-commander.js";
 import _poolTroubleInPairs from "../pool/trouble-in-pairs.js";
+import _poolTroublingTribbles from "../pool/troubling-tribbles.js";
 import _poolTsabosDecree from "../pool/tsabos-decree.js";
 import _poolTurnAside from "../pool/turn-aside.js";
 import _poolTurnToSlag from "../pool/turn-to-slag.js";
@@ -898,6 +899,7 @@ import _poolWarMachineLegacyOfIron from "../pool/war-machine-legacy-of-iron.js";
 import _poolWardenOfTheWall from "../pool/warden-of-the-wall.js";
 import _poolWarlockClass from "../pool/warlock-class.js";
 import _poolWarmindInfantry from "../pool/warmind-infantry.js";
+import _poolWarpCore from "../pool/warp-core.js";
 import _poolWarrant from "../pool/warrant.js";
 import _poolWaterknot from "../pool/waterknot.js";
 import _poolWaylay from "../pool/waylay.js";
@@ -1815,6 +1817,7 @@ const shard: CardShard = {
     _poolTreeMonkey,
     _poolTriceratonCommander,
     _poolTroubleInPairs,
+    _poolTroublingTribbles,
     _poolTsabosDecree,
     _poolTurnAside,
     _poolTurnToSlag,
@@ -1863,6 +1866,7 @@ const shard: CardShard = {
     _poolWardenOfTheWall,
     _poolWarlockClass,
     _poolWarmindInfantry,
+    _poolWarpCore,
     _poolWarrant,
     _poolWaterknot,
     _poolWaylay,

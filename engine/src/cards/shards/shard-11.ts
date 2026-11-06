@@ -169,6 +169,7 @@ import _poolCodecrackerHound from "../pool/codecracker-hound.js";
 import _poolCoffinPurge from "../pool/coffin-purge.js";
 import _poolCognivore from "../pool/cognivore.js";
 import _poolCollectedConjuring from "../pool/collected-conjuring.js";
+import _poolCollectiveDrone from "../pool/collective-drone.js";
 import _poolComboAttack from "../pool/combo-attack.js";
 import _poolCommanderMustard from "../pool/commander-mustard.js";
 import _poolConclaveMentor from "../pool/conclave-mentor.js";
@@ -199,6 +200,7 @@ import _poolCursecatcher from "../pool/cursecatcher.js";
 import _poolDakmorPlague from "../pool/dakmor-plague.js";
 import _poolDaringSaboteur from "../pool/daring-saboteur.js";
 import _poolDarksteelForge from "../pool/darksteel-forge.js";
+import _poolDathonHisHeartOpen from "../pool/dathon-his-heart-open.js";
 import _poolDawnhartMentor from "../pool/dawnhart-mentor.js";
 import _poolDawnsireSunstarDreadnought from "../pool/dawnsire-sunstar-dreadnought.js";
 import _poolDazzlingReflection from "../pool/dazzling-reflection.js";
@@ -635,6 +637,7 @@ import _poolPraetorsCounsel from "../pool/praetors-counsel.js";
 import _poolPridefulFeastling from "../pool/prideful-feastling.js";
 import _poolPriestOfIroas from "../pool/priest-of-iroas.js";
 import _poolPrimalMight from "../pool/primal-might.js";
+import _poolPrimaryUnimatrixAdjunct from "../pool/primary-unimatrix-adjunct.js";
 import _poolPrismariCharm from "../pool/prismari-charm.js";
 import _poolProteanThaumaturge from "../pool/protean-thaumaturge.js";
 import _poolPsemillaMeletianPoet from "../pool/psemilla-meletian-poet.js";
@@ -815,6 +818,7 @@ import _poolSunfrillImitator from "../pool/sunfrill-imitator.js";
 import _poolSungoldBarrage from "../pool/sungold-barrage.js";
 import _poolSurgeNode from "../pool/surge-node.js";
 import _poolSurgeOfStrength from "../pool/surge-of-strength.js";
+import _poolSuurokClassScienceVessel from "../pool/suurok-class-science-vessel.js";
 import _poolSwampsnareTrap from "../pool/swampsnare-trap.js";
 import _poolSweepingCleave from "../pool/sweeping-cleave.js";
 import _poolSwordOfTheAnimist from "../pool/sword-of-the-animist.js";
@@ -1154,6 +1158,7 @@ const shard: CardShard = {
     _poolCoffinPurge,
     _poolCognivore,
     _poolCollectedConjuring,
+    _poolCollectiveDrone,
     _poolComboAttack,
     _poolCommanderMustard,
     _poolConclaveMentor,
@@ -1184,6 +1189,7 @@ const shard: CardShard = {
     _poolDakmorPlague,
     _poolDaringSaboteur,
     _poolDarksteelForge,
+    _poolDathonHisHeartOpen,
     _poolDawnhartMentor,
     _poolDawnsireSunstarDreadnought,
     _poolDazzlingReflection,
@@ -1620,6 +1626,7 @@ const shard: CardShard = {
     _poolPridefulFeastling,
     _poolPriestOfIroas,
     _poolPrimalMight,
+    _poolPrimaryUnimatrixAdjunct,
     _poolPrismariCharm,
     _poolProteanThaumaturge,
     _poolPsemillaMeletianPoet,
@@ -1800,6 +1807,7 @@ const shard: CardShard = {
     _poolSungoldBarrage,
     _poolSurgeNode,
     _poolSurgeOfStrength,
+    _poolSuurokClassScienceVessel,
     _poolSwampsnareTrap,
     _poolSweepingCleave,
     _poolSwordOfTheAnimist,

@@ -170,6 +170,7 @@ import _poolCurseOfChains from "../pool/curse-of-chains.js";
 import _poolCustodiSoulbinders from "../pool/custodi-soulbinders.js";
 import _poolCyanVengefulSamurai from "../pool/cyan-vengeful-samurai.js";
 import _poolCybermanPatrol from "../pool/cyberman-patrol.js";
+import _poolD7BattleCruiser from "../pool/d-7-battle-cruiser.js";
 import _poolDarkbladeAgent from "../pool/darkblade-agent.js";
 import _poolDawnCharm from "../pool/dawn-charm.js";
 import _poolDawnglareInvoker from "../pool/dawnglare-invoker.js";
@@ -1210,6 +1211,7 @@ const shard: CardShard = {
     _poolCustodiSoulbinders,
     _poolCyanVengefulSamurai,
     _poolCybermanPatrol,
+    _poolD7BattleCruiser,
     _poolDarkbladeAgent,
     _poolDawnCharm,
     _poolDawnglareInvoker,

@@ -160,6 +160,7 @@ import _poolCommonBond from "../pool/common-bond.js";
 import _poolComplexAutomaton from "../pool/complex-automaton.js";
 import _poolConclaveTribunal from "../pool/conclave-tribunal.js";
 import _poolConclavesBlessing from "../pool/conclaves-blessing.js";
+import _poolConquestMission from "../pool/conquest-mission.js";
 import _poolConsignToDust from "../pool/consign-to-dust.js";
 import _poolConsultTheStarCharts from "../pool/consult-the-star-charts.js";
 import _poolContractualSafeguard from "../pool/contractual-safeguard.js";
@@ -414,6 +415,7 @@ import _poolKhalniHeartExpedition from "../pool/khalni-heart-expedition.js";
 import _poolKhorvathBrightflame from "../pool/khorvath-brightflame.js";
 import _poolKikusShadow from "../pool/kikus-shadow.js";
 import _poolKiorasDambreaker from "../pool/kioras-dambreaker.js";
+import _poolKobayashiMaruScenario from "../pool/kobayashi-maru-scenario.js";
 import _poolKodamaOfTheNorthTree from "../pool/kodama-of-the-north-tree.js";
 import _poolKragmaButcher from "../pool/kragma-butcher.js";
 import _poolKreeCommandos from "../pool/kree-commandos.js";
@@ -1084,6 +1086,7 @@ const shard: CardShard = {
     _poolComplexAutomaton,
     _poolConclaveTribunal,
     _poolConclavesBlessing,
+    _poolConquestMission,
     _poolConsignToDust,
     _poolConsultTheStarCharts,
     _poolContractualSafeguard,
@@ -1338,6 +1341,7 @@ const shard: CardShard = {
     _poolKhorvathBrightflame,
     _poolKikusShadow,
     _poolKiorasDambreaker,
+    _poolKobayashiMaruScenario,
     _poolKodamaOfTheNorthTree,
     _poolKragmaButcher,
     _poolKreeCommandos,

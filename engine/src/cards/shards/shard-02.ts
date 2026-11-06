@@ -165,6 +165,7 @@ import _poolCrystalChimes from "../pool/crystal-chimes.js";
 import _poolCudgelTroll from "../pool/cudgel-troll.js";
 import _poolCulminationOfStudies from "../pool/culmination-of-studies.js";
 import _poolCuriousObsession from "../pool/curious-obsession.js";
+import _poolCyberneticSpecialist from "../pool/cybernetic-specialist.js";
 import _poolCycleOfRenewal from "../pool/cycle-of-renewal.js";
 import _poolCycloneSummoner from "../pool/cyclone-summoner.js";
 import _poolCyclonicRift from "../pool/cyclonic-rift.js";
@@ -201,6 +202,7 @@ import _poolDenProtector from "../pool/den-protector.js";
 import _poolDesertOfTheTrue from "../pool/desert-of-the-true.js";
 import _poolDesertersQuarters from "../pool/deserters-quarters.js";
 import _poolDevotedHero from "../pool/devoted-hero.js";
+import _poolDghorBloodletter from "../pool/dghor-bloodletter.js";
 import _poolDiamondCity from "../pool/diamond-city.js";
 import _poolDiamondValley from "../pool/diamond-valley.js";
 import _poolDiluvianPrimordial from "../pool/diluvian-primordial.js";
@@ -283,6 +285,7 @@ import _poolFangedFlames from "../pool/fanged-flames.js";
 import _poolFangkeepersFamiliar from "../pool/fangkeepers-familiar.js";
 import _poolFarfinder from "../pool/farfinder.js";
 import _poolFearOfBurningAlive from "../pool/fear-of-burning-alive.js";
+import _poolFederationOutpost from "../pool/federation-outpost.js";
 import _poolFeedback from "../pool/feedback.js";
 import _poolFelhidePetrifier from "../pool/felhide-petrifier.js";
 import _poolFelineSovereign from "../pool/feline-sovereign.js";
@@ -1125,6 +1128,7 @@ const shard: CardShard = {
     _poolCudgelTroll,
     _poolCulminationOfStudies,
     _poolCuriousObsession,
+    _poolCyberneticSpecialist,
     _poolCycleOfRenewal,
     _poolCycloneSummoner,
     _poolCyclonicRift,
@@ -1161,6 +1165,7 @@ const shard: CardShard = {
     _poolDesertOfTheTrue,
     _poolDesertersQuarters,
     _poolDevotedHero,
+    _poolDghorBloodletter,
     _poolDiamondCity,
     _poolDiamondValley,
     _poolDiluvianPrimordial,
@@ -1243,6 +1248,7 @@ const shard: CardShard = {
     _poolFangkeepersFamiliar,
     _poolFarfinder,
     _poolFearOfBurningAlive,
+    _poolFederationOutpost,
     _poolFeedback,
     _poolFelhidePetrifier,
     _poolFelineSovereign,

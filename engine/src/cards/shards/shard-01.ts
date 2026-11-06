@@ -141,6 +141,7 @@ import _poolCoastWatcher from "../pool/coast-watcher.js";
 import _poolCoastalDrake from "../pool/coastal-drake.js";
 import _poolCodexShredder from "../pool/codex-shredder.js";
 import _poolComeBackWrong from "../pool/come-back-wrong.js";
+import _poolCommandSubadjunct from "../pool/command-subadjunct.js";
 import _poolCommuneWithBeavers from "../pool/commune-with-beavers.js";
 import _poolConchHorn from "../pool/conch-horn.js";
 import _poolConformerShuriken from "../pool/conformer-shuriken.js";
@@ -1096,6 +1097,7 @@ const shard: CardShard = {
     _poolCoastalDrake,
     _poolCodexShredder,
     _poolComeBackWrong,
+    _poolCommandSubadjunct,
     _poolCommuneWithBeavers,
     _poolConchHorn,
     _poolConformerShuriken,

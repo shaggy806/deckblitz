@@ -46,6 +46,7 @@ import _poolArmoryGuard from "../pool/armory-guard.js";
 import _poolArtfulDodge from "../pool/artful-dodge.js";
 import _poolAshioksForerunner from "../pool/ashioks-forerunner.js";
 import _poolAspectOfGorgon from "../pool/aspect-of-gorgon.js";
+import _poolAssaultDrone from "../pool/assault-drone.js";
 import _poolAtzocanSeer from "../pool/atzocan-seer.js";
 import _poolAugurOfAutumn from "../pool/augur-of-autumn.js";
 import _poolAuriokSteelshaper from "../pool/auriok-steelshaper.js";
@@ -169,6 +170,7 @@ import _poolCruelFinality from "../pool/cruel-finality.js";
 import _poolCrushDissent from "../pool/crush-dissent.js";
 import _poolCryptChampion from "../pool/crypt-champion.js";
 import _poolCryptGhast from "../pool/crypt-ghast.js";
+import _poolCrystallineEntity from "../pool/crystalline-entity.js";
 import _poolCuriousFarmAnimals from "../pool/curious-farm-animals.js";
 import _poolCuriousHerd from "../pool/curious-herd.js";
 import _poolCurseOfChaos from "../pool/curse-of-chaos.js";
@@ -1032,6 +1034,7 @@ const shard: CardShard = {
     _poolArtfulDodge,
     _poolAshioksForerunner,
     _poolAspectOfGorgon,
+    _poolAssaultDrone,
     _poolAtzocanSeer,
     _poolAugurOfAutumn,
     _poolAuriokSteelshaper,
@@ -1155,6 +1158,7 @@ const shard: CardShard = {
     _poolCrushDissent,
     _poolCryptChampion,
     _poolCryptGhast,
+    _poolCrystallineEntity,
     _poolCuriousFarmAnimals,
     _poolCuriousHerd,
     _poolCurseOfChaos,

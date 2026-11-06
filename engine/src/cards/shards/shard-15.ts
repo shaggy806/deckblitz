@@ -46,6 +46,7 @@ import _poolAshiokNightmareWeaver from "../pool/ashiok-nightmare-weaver.js";
 import _poolAtsushiTheBlazingSky from "../pool/atsushi-the-blazing-sky.js";
 import _poolAutumnTailKitsuneSage from "../pool/autumn-tail-kitsune-sage.js";
 import _poolAzimaetDrake from "../pool/azimaet-drake.js";
+import _poolBajor from "../pool/bajor.js";
 import _poolBalaGedThief from "../pool/bala-ged-thief.js";
 import _poolBalthorTheStout from "../pool/balthor-the-stout.js";
 import _poolBansheesBlade from "../pool/banshees-blade.js";
@@ -762,6 +763,7 @@ import _poolTalismanOfCreativity from "../pool/talisman-of-creativity.js";
 import _poolTandemLookout from "../pool/tandem-lookout.js";
 import _poolTangleSpider from "../pool/tangle-spider.js";
 import _poolTattermungeDuo from "../pool/tattermunge-duo.js";
+import _poolTeaEarlGreyHot from "../pool/tea-earl-grey-hot.js";
 import _poolTekuthalInquiryDominus from "../pool/tekuthal-inquiry-dominus.js";
 import _poolTelimtorsEdict from "../pool/telimtors-edict.js";
 import _poolTemperamentalOozewagg from "../pool/temperamental-oozewagg.js";
@@ -963,6 +965,7 @@ const shard: CardShard = {
     _poolAtsushiTheBlazingSky,
     _poolAutumnTailKitsuneSage,
     _poolAzimaetDrake,
+    _poolBajor,
     _poolBalaGedThief,
     _poolBalthorTheStout,
     _poolBansheesBlade,
@@ -1679,6 +1682,7 @@ const shard: CardShard = {
     _poolTandemLookout,
     _poolTangleSpider,
     _poolTattermungeDuo,
+    _poolTeaEarlGreyHot,
     _poolTekuthalInquiryDominus,
     _poolTelimtorsEdict,
     _poolTemperamentalOozewagg,

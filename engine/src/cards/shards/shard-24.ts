@@ -593,6 +593,7 @@ import _poolPuncturingLight from "../pool/puncturing-light.js";
 import _poolPurifyTheGrave from "../pool/purify-the-grave.js";
 import _poolPyrogoyf from "../pool/pyrogoyf.js";
 import _poolPyrrhicBlast from "../pool/pyrrhic-blast.js";
+import _poolQContinuum from "../pool/q-continuum.js";
 import _poolQuarryBeetle from "../pool/quarry-beetle.js";
 import _poolQuickling from "../pool/quickling.js";
 import _poolQuicksilverGeyser from "../pool/quicksilver-geyser.js";
@@ -765,6 +766,7 @@ import _poolStormQueenOfWakanda from "../pool/storm-queen-of-wakanda.js";
 import _poolStormshriekFeral from "../pool/stormshriek-feral.js";
 import _poolStormwingDragon from "../pool/stormwing-dragon.js";
 import _poolSubjugatorAngel from "../pool/subjugator-angel.js";
+import _poolSubspaceAnomaly from "../pool/subspace-anomaly.js";
 import _poolSuddenDisappearance from "../pool/sudden-disappearance.js";
 import _poolSuleimansLegacy from "../pool/suleimans-legacy.js";
 import _poolSulfuricVortex from "../pool/sulfuric-vortex.js";
@@ -1559,6 +1561,7 @@ const shard: CardShard = {
     _poolPurifyTheGrave,
     _poolPyrogoyf,
     _poolPyrrhicBlast,
+    _poolQContinuum,
     _poolQuarryBeetle,
     _poolQuickling,
     _poolQuicksilverGeyser,
@@ -1731,6 +1734,7 @@ const shard: CardShard = {
     _poolStormshriekFeral,
     _poolStormwingDragon,
     _poolSubjugatorAngel,
+    _poolSubspaceAnomaly,
     _poolSuddenDisappearance,
     _poolSuleimansLegacy,
     _poolSulfuricVortex,

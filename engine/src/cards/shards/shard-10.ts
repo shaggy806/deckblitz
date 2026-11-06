@@ -485,6 +485,7 @@ import _poolMagmaticChanneler from "../pool/magmatic-channeler.js";
 import _poolMagmaticInsight from "../pool/magmatic-insight.js";
 import _poolMajaBretagardProtector from "../pool/maja-bretagard-protector.js";
 import _poolMajesticMetamorphosis from "../pool/majestic-metamorphosis.js";
+import _poolMakeItSo from "../pool/make-it-so.js";
 import _poolMalametBattleGlyph from "../pool/malamet-battle-glyph.js";
 import _poolManglehorn from "../pool/manglehorn.js";
 import _poolManifoldKey from "../pool/manifold-key.js";
@@ -528,6 +529,7 @@ import _poolMoonsnareSpecialist from "../pool/moonsnare-specialist.js";
 import _poolMoorFiend from "../pool/moor-fiend.js";
 import _poolMorgueBurst from "../pool/morgue-burst.js";
 import _poolMouserMarkIii from "../pool/mouser-mark-iii.js";
+import _poolMrSpockScienceOfficer from "../pool/mr-spock-science-officer.js";
 import _poolMtendaLion from "../pool/mtenda-lion.js";
 import _poolMulch from "../pool/mulch.js";
 import _poolMutagenManLivingOoze from "../pool/mutagen-man-living-ooze.js";
@@ -1455,6 +1457,7 @@ const shard: CardShard = {
     _poolMagmaticInsight,
     _poolMajaBretagardProtector,
     _poolMajesticMetamorphosis,
+    _poolMakeItSo,
     _poolMalametBattleGlyph,
     _poolManglehorn,
     _poolManifoldKey,
@@ -1498,6 +1501,7 @@ const shard: CardShard = {
     _poolMoorFiend,
     _poolMorgueBurst,
     _poolMouserMarkIii,
+    _poolMrSpockScienceOfficer,
     _poolMtendaLion,
     _poolMulch,
     _poolMutagenManLivingOoze,

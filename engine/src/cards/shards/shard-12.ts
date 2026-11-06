@@ -222,6 +222,7 @@ import _poolDivination from "../pool/divination.js";
 import _poolDjinnOfFoolsFall from "../pool/djinn-of-fools-fall.js";
 import _poolDogUmbra from "../pool/dog-umbra.js";
 import _poolDomineer from "../pool/domineer.js";
+import _poolDominionSupervisor from "../pool/dominion-supervisor.js";
 import _poolDoorToNothingness from "../pool/door-to-nothingness.js";
 import _poolDoriBearerOfFriends from "../pool/dori-bearer-of-friends.js";
 import _poolDoubtlessOne from "../pool/doubtless-one.js";
@@ -1189,6 +1190,7 @@ const shard: CardShard = {
     _poolDjinnOfFoolsFall,
     _poolDogUmbra,
     _poolDomineer,
+    _poolDominionSupervisor,
     _poolDoorToNothingness,
     _poolDoriBearerOfFriends,
     _poolDoubtlessOne,

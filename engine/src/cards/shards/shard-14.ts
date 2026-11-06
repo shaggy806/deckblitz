@@ -114,6 +114,7 @@ import _poolBurnishedHart from "../pool/burnished-hart.js";
 import _poolBuzzBots from "../pool/buzz-bots.js";
 import _poolCabarettiConfluence from "../pool/cabaretti-confluence.js";
 import _poolCapashenUnicorn from "../pool/capashen-unicorn.js";
+import _poolCaptainPikeFullnessOfTime from "../pool/captain-pike-fullness-of-time.js";
 import _poolCaptivatingCrew from "../pool/captivating-crew.js";
 import _poolCaptiveFlame from "../pool/captive-flame.js";
 import _poolCaptureSphere from "../pool/capture-sphere.js";
@@ -197,6 +198,7 @@ import _poolDeathbloomThallid from "../pool/deathbloom-thallid.js";
 import _poolDeathcapCultivator from "../pool/deathcap-cultivator.js";
 import _poolDebtorsTransport from "../pool/debtors-transport.js";
 import _poolDecayingTimeLoop from "../pool/decaying-time-loop.js";
+import _poolDeepSpaceScan from "../pool/deep-space-scan.js";
 import _poolDeliver from "../pool/deliver.js";
 import _poolDemolisherSpawn from "../pool/demolisher-spawn.js";
 import _poolDenethorStoneSeer from "../pool/denethor-stone-seer.js";
@@ -1094,6 +1096,7 @@ const shard: CardShard = {
     _poolBuzzBots,
     _poolCabarettiConfluence,
     _poolCapashenUnicorn,
+    _poolCaptainPikeFullnessOfTime,
     _poolCaptivatingCrew,
     _poolCaptiveFlame,
     _poolCaptureSphere,
@@ -1177,6 +1180,7 @@ const shard: CardShard = {
     _poolDeathcapCultivator,
     _poolDebtorsTransport,
     _poolDecayingTimeLoop,
+    _poolDeepSpaceScan,
     _poolDeliver,
     _poolDemolisherSpawn,
     _poolDenethorStoneSeer,

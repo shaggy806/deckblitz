@@ -539,6 +539,7 @@ import _poolLongshotRebelBowman from "../pool/longshot-rebel-bowman.js";
 import _poolLoomingHoverguard from "../pool/looming-hoverguard.js";
 import _poolLostInTheWoods from "../pool/lost-in-the-woods.js";
 import _poolLostJitte from "../pool/lost-jitte.js";
+import _poolLtCmdrGeordiLaForge from "../pool/lt-cmdr-geordi-la-forge.js";
 import _poolLuckyOffering from "../pool/lucky-offering.js";
 import _poolLudevicNecroAlchemist from "../pool/ludevic-necro-alchemist.js";
 import _poolMageDuel from "../pool/mage-duel.js";
@@ -984,6 +985,7 @@ import _poolWintermoorCommander from "../pool/wintermoor-commander.js";
 import _poolWipeClean from "../pool/wipe-clean.js";
 import _poolWispweaverAngel from "../pool/wispweaver-angel.js";
 import _poolWoodlandLiege from "../pool/woodland-liege.js";
+import _poolWorfIntelligenceContractor from "../pool/worf-intelligence-contractor.js";
 import _poolWorldfire from "../pool/worldfire.js";
 import _poolWorldwalkerHelm from "../pool/worldwalker-helm.js";
 import _poolWormHarvest from "../pool/worm-harvest.js";
@@ -1567,6 +1569,7 @@ const shard: CardShard = {
     _poolLoomingHoverguard,
     _poolLostInTheWoods,
     _poolLostJitte,
+    _poolLtCmdrGeordiLaForge,
     _poolLuckyOffering,
     _poolLudevicNecroAlchemist,
     _poolMageDuel,
@@ -2012,6 +2015,7 @@ const shard: CardShard = {
     _poolWipeClean,
     _poolWispweaverAngel,
     _poolWoodlandLiege,
+    _poolWorfIntelligenceContractor,
     _poolWorldfire,
     _poolWorldwalkerHelm,
     _poolWormHarvest,

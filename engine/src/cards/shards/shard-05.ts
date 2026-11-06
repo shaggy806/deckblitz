@@ -32,6 +32,7 @@ import _poolAnHavvaTownship from "../pool/an-havva-township.js";
 import _poolAnabaBodyguard from "../pool/anaba-bodyguard.js";
 import _poolAnarchy from "../pool/anarchy.js";
 import _poolAnimistsMight from "../pool/animists-might.js";
+import _poolAnthropologicalMission from "../pool/anthropological-mission.js";
 import _poolAphemiaTheCacophony from "../pool/aphemia-the-cacophony.js";
 import _poolAphettoGrifter from "../pool/aphetto-grifter.js";
 import _poolApocalypseDemon from "../pool/apocalypse-demon.js";
@@ -995,6 +996,7 @@ const shard: CardShard = {
     _poolAnabaBodyguard,
     _poolAnarchy,
     _poolAnimistsMight,
+    _poolAnthropologicalMission,
     _poolAphemiaTheCacophony,
     _poolAphettoGrifter,
     _poolApocalypseDemon,

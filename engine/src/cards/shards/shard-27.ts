@@ -804,6 +804,7 @@ import _poolTheOddAcornGang from "../pool/the-odd-acorn-gang.js";
 import _poolTheSixthDoctor from "../pool/the-sixth-doctor.js";
 import _poolTheUnderworldCookbook from "../pool/the-underworld-cookbook.js";
 import _poolTheWanderingMinstrel from "../pool/the-wandering-minstrel.js";
+import _poolTheWrathOfKhan from "../pool/the-wrath-of-khan.js";
 import _poolThreeTreeRootweaver from "../pool/three-tree-rootweaver.js";
 import _poolThrullSurgeon from "../pool/thrull-surgeon.js";
 import _poolThunderbreakRegent from "../pool/thunderbreak-regent.js";
@@ -1753,6 +1754,7 @@ const shard: CardShard = {
     _poolTheSixthDoctor,
     _poolTheUnderworldCookbook,
     _poolTheWanderingMinstrel,
+    _poolTheWrathOfKhan,
     _poolThreeTreeRootweaver,
     _poolThrullSurgeon,
     _poolThunderbreakRegent,

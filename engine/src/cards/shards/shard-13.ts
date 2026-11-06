@@ -415,6 +415,7 @@ import _poolKeenGlidemaster from "../pool/keen-glidemaster.js";
 import _poolKeeperOfSecrets from "../pool/keeper-of-secrets.js";
 import _poolKeeperOfTheMind from "../pool/keeper-of-the-mind.js";
 import _poolKezzerdrix from "../pool/kezzerdrix.js";
+import _poolKhanVengefulHeart from "../pool/khan-vengeful-heart.js";
 import _poolKiboUktabiPrince from "../pool/kibo-uktabi-prince.js";
 import _poolKindlyAncestor from "../pool/kindly-ancestor.js";
 import _poolKiorasFollower from "../pool/kioras-follower.js";
@@ -539,6 +540,7 @@ import _poolOraclesAttendants from "../pool/oracles-attendants.js";
 import _poolOratorOfOjutai from "../pool/orator-of-ojutai.js";
 import _poolOrchardSpirit from "../pool/orchard-spirit.js";
 import _poolOrcishLumberjack from "../pool/orcish-lumberjack.js";
+import _poolOrganicAvulsionUnit from "../pool/organic-avulsion-unit.js";
 import _poolOrphansOfTheWheat from "../pool/orphans-of-the-wheat.js";
 import _poolOrzhovCluestone from "../pool/orzhov-cluestone.js";
 import _poolOvalchaseDaredevil from "../pool/ovalchase-daredevil.js";
@@ -558,6 +560,7 @@ import _poolPhyrexianHydra from "../pool/phyrexian-hydra.js";
 import _poolPhyrexianIronworks from "../pool/phyrexian-ironworks.js";
 import _poolPhyrexianRevoker from "../pool/phyrexian-revoker.js";
 import _poolPhyrexianVivisector from "../pool/phyrexian-vivisector.js";
+import _poolPicardLeadingByExample from "../pool/picard-leading-by-example.js";
 import _poolPickYourPoison from "../pool/pick-your-poison.js";
 import _poolPillage from "../pool/pillage.js";
 import _poolPinionFeast from "../pool/pinion-feast.js";
@@ -1356,6 +1359,7 @@ const shard: CardShard = {
     _poolKeeperOfSecrets,
     _poolKeeperOfTheMind,
     _poolKezzerdrix,
+    _poolKhanVengefulHeart,
     _poolKiboUktabiPrince,
     _poolKindlyAncestor,
     _poolKiorasFollower,
@@ -1480,6 +1484,7 @@ const shard: CardShard = {
     _poolOratorOfOjutai,
     _poolOrchardSpirit,
     _poolOrcishLumberjack,
+    _poolOrganicAvulsionUnit,
     _poolOrphansOfTheWheat,
     _poolOrzhovCluestone,
     _poolOvalchaseDaredevil,
@@ -1499,6 +1504,7 @@ const shard: CardShard = {
     _poolPhyrexianIronworks,
     _poolPhyrexianRevoker,
     _poolPhyrexianVivisector,
+    _poolPicardLeadingByExample,
     _poolPickYourPoison,
     _poolPillage,
     _poolPinionFeast,

@@ -3717,6 +3717,46 @@
    "family": "mechanic:beam-me-up",
    "example": "Open Communications: Beam me up {2}{U} — cast this card from your graveyard for {2}{U} if you also return a creature you control to its owner's hand, then exile it"
   },
+  "mechanic:assimilate": {
+   "family": "mechanic:assimilate",
+   "example": "Death Is Irrelevant (Star Trek): assimilate — put a creature card onto the battlefield under your control with a +1/+1 counter; it's a Borg artifact creature and loses all other creature types, indefinitely"
+  },
+  "amount:dilemmas-faced-this-turn": {
+   "family": "stat:turn-event-tallies",
+   "example": "Captain Benjamin Sisko: at the beginning of your end step, create an Officer token for each dilemma you've faced this turn"
+  },
+  "effect:exiled-card-gains-activated": {
+   "family": "effect:cast-during-resolution",
+   "example": "Q, Stacking the Deck: an exiled card gains an activated ability usable only while exiled, which casts a copy of it"
+  },
+  "static:cast-from-library-top-once-per-turn": {
+   "family": "zone:cast-from-library-top",
+   "example": "Zefram Cochrane, Warp Pioneer: cast a spell from the top of your library once each turn, during your turn"
+  },
+  "static:life-gain-trigger-doubling": {
+   "family": "static:life-gain-trigger-doubling",
+   "example": "Dr. Beverly Crusher: a gain-life event triggers your permanents' abilities an additional time"
+  },
+  "effect:grant-trigger-doubling": {
+   "family": "static:life-gain-trigger-doubling",
+   "example": "Lwaxana Troi, Charming Guest: target permanent's triggered abilities trigger an additional time, for as long as she stays tapped"
+  },
+  "replacement:clone-enters-with-copied-counters": {
+   "family": "replacement:copy-on-enter-options",
+   "example": "Dominion Saboteur: enters as a copy of a creature, with the counters that creature has"
+  },
+  "replacement:would-be-destroyed-instead": {
+   "family": "replacement:new-event-replacements",
+   "example": "Dr. McCoy, Surly Surgeon: if a creature would be destroyed, instead remove its +1/+1 counters and remove all damage from it"
+  },
+  "condition:begun-extra-turn-this-game": {
+   "family": "condition:extra-turn",
+   "example": "H.M.S. Bounty, Unlikely Timeship: reads whether you've begun an extra turn this game"
+  },
+  "bug:static-condition-reads-printed-types": {
+   "family": "bug:static-condition-reads-printed-types",
+   "example": "Romulan Bird-of-Prey: 'as long as this isn't a creature, it has hexproof' kept hexproof once its station band made it a creature (an agent's test, 2026-11-06, not yet confirmed)"
+  },
   "filter:aura-enchant-restriction": {
    "family": "condition:filter-card-property-clauses",
    "example": "Rootwater Shaman: \"Aura spells with enchant creature\" — no CardFilter field reads an Aura's enchant restriction"

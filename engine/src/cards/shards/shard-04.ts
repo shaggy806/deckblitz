@@ -797,6 +797,7 @@ import _poolTemptingWurm from "../pool/tempting-wurm.js";
 import _poolTerisianMindbreaker from "../pool/terisian-mindbreaker.js";
 import _poolTerminate from "../pool/terminate.js";
 import _poolTerritorialDispute from "../pool/territorial-dispute.js";
+import _poolTestOfLoyalty from "../pool/test-of-loyalty.js";
 import _poolTheFiligreeSylex from "../pool/the-filigree-sylex.js";
 import _poolTheLordOfTheEagles from "../pool/the-lord-of-the-eagles.js";
 import _poolTheRani from "../pool/the-rani.js";
@@ -1750,6 +1751,7 @@ const shard: CardShard = {
     _poolTerisianMindbreaker,
     _poolTerminate,
     _poolTerritorialDispute,
+    _poolTestOfLoyalty,
     _poolTheFiligreeSylex,
     _poolTheLordOfTheEagles,
     _poolTheRani,

@@ -254,6 +254,7 @@ import _poolEngulfingEruption from "../pool/engulfing-eruption.js";
 import _poolEnigmaThief from "../pool/enigma-thief.js";
 import _poolEnlightenedAscetic from "../pool/enlightened-ascetic.js";
 import _poolEnterTheUnknown from "../pool/enter-the-unknown.js";
+import _poolEnterpriseNx01 from "../pool/enterprise-nx-01.js";
 import _poolEnvoyOfTheAncestors from "../pool/envoy-of-the-ancestors.js";
 import _poolEscapeTunnel from "../pool/escape-tunnel.js";
 import _poolEsikaGodOfTheTree from "../pool/esika-god-of-the-tree.js";
@@ -1252,6 +1253,7 @@ const shard: CardShard = {
     _poolEnigmaThief,
     _poolEnlightenedAscetic,
     _poolEnterTheUnknown,
+    _poolEnterpriseNx01,
     _poolEnvoyOfTheAncestors,
     _poolEscapeTunnel,
     _poolEsikaGodOfTheTree,

@@ -115,6 +115,7 @@ import _poolBoundInGold from "../pool/bound-in-gold.js";
 import _poolBragoKingEternal from "../pool/brago-king-eternal.js";
 import _poolBrambleSovereign from "../pool/bramble-sovereign.js";
 import _poolBrassSecretary from "../pool/brass-secretary.js";
+import _poolBrazenBluff from "../pool/brazen-bluff.js";
 import _poolBreOfClanStoutarm from "../pool/bre-of-clan-stoutarm.js";
 import _poolBreakDown from "../pool/break-down.js";
 import _poolBreakingEntering from "../pool/breaking-entering.js";
@@ -163,6 +164,7 @@ import _poolCobblebrute from "../pool/cobblebrute.js";
 import _poolCoerciveRecruiter from "../pool/coercive-recruiter.js";
 import _poolCoilAndCatch from "../pool/coil-and-catch.js";
 import _poolCoiledTinviper from "../pool/coiled-tinviper.js";
+import _poolCollationTrimatrix from "../pool/collation-trimatrix.js";
 import _poolColosYearling from "../pool/colos-yearling.js";
 import _poolColossalBadger from "../pool/colossal-badger.js";
 import _poolComparativeAnalysis from "../pool/comparative-analysis.js";
@@ -739,6 +741,7 @@ import _poolSelhoffOccultist from "../pool/selhoff-occultist.js";
 import _poolSerendibEfreet from "../pool/serendib-efreet.js";
 import _poolSerumCoreChimera from "../pool/serum-core-chimera.js";
 import _poolServe from "../pool/serve.js";
+import _poolSevenOfNineUnassimilated from "../pool/seven-of-nine-unassimilated.js";
 import _poolSevinnesReclamation from "../pool/sevinnes-reclamation.js";
 import _poolShadowbornApostle from "../pool/shadowborn-apostle.js";
 import _poolShadowsOfThePast from "../pool/shadows-of-the-past.js";
@@ -1137,6 +1140,7 @@ const shard: CardShard = {
     _poolBragoKingEternal,
     _poolBrambleSovereign,
     _poolBrassSecretary,
+    _poolBrazenBluff,
     _poolBreOfClanStoutarm,
     _poolBreakDown,
     _poolBreakingEntering,
@@ -1185,6 +1189,7 @@ const shard: CardShard = {
     _poolCoerciveRecruiter,
     _poolCoilAndCatch,
     _poolCoiledTinviper,
+    _poolCollationTrimatrix,
     _poolColosYearling,
     _poolColossalBadger,
     _poolComparativeAnalysis,
@@ -1761,6 +1766,7 @@ const shard: CardShard = {
     _poolSerendibEfreet,
     _poolSerumCoreChimera,
     _poolServe,
+    _poolSevenOfNineUnassimilated,
     _poolSevinnesReclamation,
     _poolShadowbornApostle,
     _poolShadowsOfThePast,

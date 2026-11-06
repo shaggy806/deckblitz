@@ -348,6 +348,7 @@ import _poolHedronRover from "../pool/hedron-rover.js";
 import _poolHeliodTheWarpedEclipse from "../pool/heliod-the-warped-eclipse.js";
 import _poolHellcatUndyingVigilante from "../pool/hellcat-undying-vigilante.js";
 import _poolHellionCrucible from "../pool/hellion-crucible.js";
+import _poolHemmerFixingWhatIsBroken from "../pool/hemmer-fixing-what-is-broken.js";
 import _poolHenrikaInfernalSeer from "../pool/henrika-infernal-seer.js";
 import _poolHenzieToolboxTorre from "../pool/henzie-toolbox-torre.js";
 import _poolHeraldOfSecretStreams from "../pool/herald-of-secret-streams.js";
@@ -697,6 +698,7 @@ import _poolSewerNemesis from "../pool/sewer-nemesis.js";
 import _poolShadowcloakVampire from "../pool/shadowcloak-vampire.js";
 import _poolSharedAnimosity from "../pool/shared-animosity.js";
 import _poolShieldOfTheRealm from "../pool/shield-of-the-realm.js";
+import _poolShieldsUp from "../pool/shields-up.js";
 import _poolShimmercreep from "../pool/shimmercreep.js";
 import _poolShivanPhoenix from "../pool/shivan-phoenix.js";
 import _poolShoalSerpent from "../pool/shoal-serpent.js";
@@ -1306,6 +1308,7 @@ const shard: CardShard = {
     _poolHeliodTheWarpedEclipse,
     _poolHellcatUndyingVigilante,
     _poolHellionCrucible,
+    _poolHemmerFixingWhatIsBroken,
     _poolHenrikaInfernalSeer,
     _poolHenzieToolboxTorre,
     _poolHeraldOfSecretStreams,
@@ -1655,6 +1658,7 @@ const shard: CardShard = {
     _poolShadowcloakVampire,
     _poolSharedAnimosity,
     _poolShieldOfTheRealm,
+    _poolShieldsUp,
     _poolShimmercreep,
     _poolShivanPhoenix,
     _poolShoalSerpent,

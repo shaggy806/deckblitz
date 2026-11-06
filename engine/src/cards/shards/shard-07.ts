@@ -119,6 +119,7 @@ import _poolCallTheScions from "../pool/call-the-scions.js";
 import _poolCallousGiant from "../pool/callous-giant.js";
 import _poolCallousInspector from "../pool/callous-inspector.js";
 import _poolCanopySurge from "../pool/canopy-surge.js";
+import _poolCaptainMichaelBurnham from "../pool/captain-michael-burnham.js";
 import _poolCarrionRats from "../pool/carrion-rats.js";
 import _poolCaseOfTheShatteredPact from "../pool/case-of-the-shattered-pact.js";
 import _poolCastOff from "../pool/cast-off.js";
@@ -1112,6 +1113,7 @@ const shard: CardShard = {
     _poolCallousGiant,
     _poolCallousInspector,
     _poolCanopySurge,
+    _poolCaptainMichaelBurnham,
     _poolCarrionRats,
     _poolCaseOfTheShatteredPact,
     _poolCastOff,

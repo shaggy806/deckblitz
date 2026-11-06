@@ -641,6 +641,7 @@ import _poolReliquaryTower from "../pool/reliquary-tower.js";
 import _poolReminisce from "../pool/reminisce.js";
 import _poolRenetTemporalApprentice from "../pool/renet-temporal-apprentice.js";
 import _poolRenownedWeaponsmith from "../pool/renowned-weaponsmith.js";
+import _poolReplicator from "../pool/replicator.js";
 import _poolReset from "../pool/reset.js";
 import _poolRestlessFortress from "../pool/restless-fortress.js";
 import _poolReturnOfTheNightstalkers from "../pool/return-of-the-nightstalkers.js";
@@ -1619,6 +1620,7 @@ const shard: CardShard = {
     _poolReminisce,
     _poolRenetTemporalApprentice,
     _poolRenownedWeaponsmith,
+    _poolReplicator,
     _poolReset,
     _poolRestlessFortress,
     _poolReturnOfTheNightstalkers,
