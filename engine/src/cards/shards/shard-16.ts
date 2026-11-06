@@ -924,6 +924,7 @@ import _poolUnwillingVessel from "../pool/unwilling-vessel.js";
 import _poolUrzasChalice from "../pool/urzas-chalice.js";
 import _poolUrzasCommand from "../pool/urzas-command.js";
 import _poolUrzasMine from "../pool/urzas-mine.js";
+import _poolValgavothTerrorEater from "../pool/valgavoth-terror-eater.js";
 import _poolVannifarEvolvedEnigma from "../pool/vannifar-evolved-enigma.js";
 import _poolVaultbornTyrant from "../pool/vaultborn-tyrant.js";
 import _poolVenarianGlimmer from "../pool/venarian-glimmer.js";
@@ -1961,6 +1962,7 @@ const shard: CardShard = {
     _poolUrzasChalice,
     _poolUrzasCommand,
     _poolUrzasMine,
+    _poolValgavothTerrorEater,
     _poolVannifarEvolvedEnigma,
     _poolVaultbornTyrant,
     _poolVenarianGlimmer,

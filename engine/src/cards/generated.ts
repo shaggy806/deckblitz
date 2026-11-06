@@ -10274,6 +10274,7 @@ import _poolGiottKingOfTheDwarves from "./pool/giott-king-of-the-dwarves.js";
 import _poolGirdForBattle from "./pool/gird-for-battle.js";
 import _poolGirderGoons from "./pool/girder-goons.js";
 import _poolGisaAndGeralf from "./pool/gisa-and-geralf.js";
+import _poolGisaGloriousResurrector from "./pool/gisa-glorious-resurrector.js";
 import _poolGisaTheHellraiser from "./pool/gisa-the-hellraiser.js";
 import _poolGisasBidding from "./pool/gisas-bidding.js";
 import _poolGiselaBladeOfGoldnight from "./pool/gisela-blade-of-goldnight.js";
@@ -26201,6 +26202,7 @@ import _poolTheCrueltyOfGix from "./pool/the-cruelty-of-gix.js";
 import _poolTheCrystalsChosen from "./pool/the-crystals-chosen.js";
 import _poolTheCyberController from "./pool/the-cyber-controller.js";
 import _poolTheDalekEmperor from "./pool/the-dalek-emperor.js";
+import _poolTheDarknessCrystal from "./pool/the-darkness-crystal.js";
 import _poolTheDawningArchaic from "./pool/the-dawning-archaic.js";
 import _poolTheDeathOfGwenStacy from "./pool/the-death-of-gwen-stacy.js";
 import _poolTheDeckOfManyThings from "./pool/the-deck-of-many-things.js";
@@ -28052,6 +28054,7 @@ import _poolValeriaRichardsPrecocious from "./pool/valeria-richards-precocious.j
 import _poolValeronOutlander from "./pool/valeron-outlander.js";
 import _poolValeronWardens from "./pool/valeron-wardens.js";
 import _poolValgavothHarrowerOfSouls from "./pool/valgavoth-harrower-of-souls.js";
+import _poolValgavothTerrorEater from "./pool/valgavoth-terror-eater.js";
 import _poolValgavothsFaithful from "./pool/valgavoths-faithful.js";
 import _poolValgavothsLair from "./pool/valgavoths-lair.js";
 import _poolValgavothsOnslaught from "./pool/valgavoths-onslaught.js";
@@ -41239,6 +41242,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGirdForBattle,
   _poolGirderGoons,
   _poolGisaAndGeralf,
+  _poolGisaGloriousResurrector,
   _poolGisaTheHellraiser,
   _poolGisasBidding,
   _poolGiselaBladeOfGoldnight,
@@ -57166,6 +57170,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheCrystalsChosen,
   _poolTheCyberController,
   _poolTheDalekEmperor,
+  _poolTheDarknessCrystal,
   _poolTheDawningArchaic,
   _poolTheDeathOfGwenStacy,
   _poolTheDeckOfManyThings,
@@ -59017,6 +59022,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolValeronOutlander,
   _poolValeronWardens,
   _poolValgavothHarrowerOfSouls,
+  _poolValgavothTerrorEater,
   _poolValgavothsFaithful,
   _poolValgavothsLair,
   _poolValgavothsOnslaught,
@@ -72217,6 +72223,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gird-for-battle": _poolGirdForBattle,
   "pool/girder-goons": _poolGirderGoons,
   "pool/gisa-and-geralf": _poolGisaAndGeralf,
+  "pool/gisa-glorious-resurrector": _poolGisaGloriousResurrector,
   "pool/gisa-the-hellraiser": _poolGisaTheHellraiser,
   "pool/gisas-bidding": _poolGisasBidding,
   "pool/gisela-blade-of-goldnight": _poolGiselaBladeOfGoldnight,
@@ -88144,6 +88151,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-crystals-chosen": _poolTheCrystalsChosen,
   "pool/the-cyber-controller": _poolTheCyberController,
   "pool/the-dalek-emperor": _poolTheDalekEmperor,
+  "pool/the-darkness-crystal": _poolTheDarknessCrystal,
   "pool/the-dawning-archaic": _poolTheDawningArchaic,
   "pool/the-death-of-gwen-stacy": _poolTheDeathOfGwenStacy,
   "pool/the-deck-of-many-things": _poolTheDeckOfManyThings,
@@ -89995,6 +90003,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/valeron-outlander": _poolValeronOutlander,
   "pool/valeron-wardens": _poolValeronWardens,
   "pool/valgavoth-harrower-of-souls": _poolValgavothHarrowerOfSouls,
+  "pool/valgavoth-terror-eater": _poolValgavothTerrorEater,
   "pool/valgavoths-faithful": _poolValgavothsFaithful,
   "pool/valgavoths-lair": _poolValgavothsLair,
   "pool/valgavoths-onslaught": _poolValgavothsOnslaught,

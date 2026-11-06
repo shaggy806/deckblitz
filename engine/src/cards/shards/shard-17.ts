@@ -328,6 +328,7 @@ import _poolGideonsResolve from "../pool/gideons-resolve.js";
 import _poolGiftOfOrzhova from "../pool/gift-of-orzhova.js";
 import _poolGiftOfStrength from "../pool/gift-of-strength.js";
 import _poolGiottKingOfTheDwarves from "../pool/giott-king-of-the-dwarves.js";
+import _poolGisaGloriousResurrector from "../pool/gisa-glorious-resurrector.js";
 import _poolGiselaBladeOfGoldnight from "../pool/gisela-blade-of-goldnight.js";
 import _poolGlassCastHeart from "../pool/glass-cast-heart.js";
 import _poolGlistenerSeer from "../pool/glistener-seer.js";
@@ -1299,6 +1300,7 @@ const shard: CardShard = {
     _poolGiftOfOrzhova,
     _poolGiftOfStrength,
     _poolGiottKingOfTheDwarves,
+    _poolGisaGloriousResurrector,
     _poolGiselaBladeOfGoldnight,
     _poolGlassCastHeart,
     _poolGlistenerSeer,
