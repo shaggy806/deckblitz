@@ -69,12 +69,28 @@ const MARKERS = [
   [/sameAbilityAs/, "one ability, two events"],
 ];
 
+/** The card's own name: the `defineCard({ … })` call's top-level `name`, not
+ * the first `name:` in the file — the import line also says `defineCard`, and
+ * a helper above the call may name another card in a filter (Captain Kirk,
+ * Boldly Going's search for "Starship Enterprise"). A card made by a helper
+ * (`export default painLand("Adarkar Wastes", …)`) is named by its first
+ * argument. */
+function cardName(src) {
+  const unquote = (m) => m?.[1]?.replace(/\\"/g, '"');
+  const call = /^([ \t]*).*\bdefineCard\(\{/m.exec(src);
+  if (call === null) return unquote(/export default \w+\(\s*"((?:[^"\\]|\\.)*)"/.exec(src)) ?? "?";
+  const body = src.slice(call.index);
+  const topLevel = new RegExp(`\\n${call[1]}  name: "((?:[^"\\\\]|\\\\.)*)"`).exec(body);
+  return unquote(topLevel) ?? unquote(/name: "((?:[^"\\]|\\.)*)"/.exec(body)) ?? "?";
+}
+
 const lines = [];
 const flagged = [];
 for (const file of files.sort()) {
   const src = readFileSync(join(engine, file), "utf8");
-  const body = src.slice(src.indexOf("defineCard"));
-  const name = /name: "((?:[^"\\]|\\.)*)"/.exec(body)?.[1]?.replace(/\\"/g, '"') ?? "?";
+  const call = /\bdefineCard\(\{/.exec(src);
+  const body = call === null ? src : src.slice(call.index);
+  const name = cardName(src);
   const isToken = file.includes("/tokens/");
   const card = oracle.get(name);
   const reasons = [];
