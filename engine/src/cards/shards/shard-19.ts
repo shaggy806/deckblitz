@@ -1008,6 +1008,7 @@ import _tokensNightmareHorrorToken from "../tokens/nightmare-horror-token.js";
 import _tokensPhyrexianMiteToken from "../tokens/phyrexian-mite-token.js";
 import _tokensPrismToken from "../tokens/prism-token.js";
 import _tokensRedElementalToken11 from "../tokens/red-elemental-token-1-1.js";
+import _tokensSamuraiTokenTheEternalWanderer from "../tokens/samurai-token-the-eternal-wanderer.js";
 import _tokensServoToken from "../tokens/servo-token.js";
 import _tokensSnakeTokenArtifactPoison from "../tokens/snake-token-artifact-poison.js";
 import _tokensSpiritTokenAbzanMonument from "../tokens/spirit-token-abzan-monument.js";
@@ -2023,6 +2024,7 @@ const shard: CardShard = {
     _tokensPhyrexianMiteToken,
     _tokensPrismToken,
     _tokensRedElementalToken11,
+    _tokensSamuraiTokenTheEternalWanderer,
     _tokensServoToken,
     _tokensSnakeTokenArtifactPoison,
     _tokensSpiritTokenAbzanMonument,

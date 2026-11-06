@@ -802,6 +802,7 @@ import _poolTevalsJudgment from "../pool/tevals-judgment.js";
 import _poolThalakosMistfolk from "../pool/thalakos-mistfolk.js";
 import _poolTheCavesOfAndrozani from "../pool/the-caves-of-androzani.js";
 import _poolTheDrossPits from "../pool/the-dross-pits.js";
+import _poolTheEternalWanderer from "../pool/the-eternal-wanderer.js";
 import _poolTheGirlInTheFireplace from "../pool/the-girl-in-the-fireplace.js";
 import _poolTheJollyBalloonMan from "../pool/the-jolly-balloon-man.js";
 import _poolTheManaRig from "../pool/the-mana-rig.js";
@@ -1741,6 +1742,7 @@ const shard: CardShard = {
     _poolThalakosMistfolk,
     _poolTheCavesOfAndrozani,
     _poolTheDrossPits,
+    _poolTheEternalWanderer,
     _poolTheGirlInTheFireplace,
     _poolTheJollyBalloonMan,
     _poolTheManaRig,

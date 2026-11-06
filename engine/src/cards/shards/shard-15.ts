@@ -474,6 +474,7 @@ import _poolMaggotTherapy from "../pool/maggot-therapy.js";
 import _poolMagitekScythe from "../pool/magitek-scythe.js";
 import _poolMagusOfTheMoon from "../pool/magus-of-the-moon.js";
 import _poolMakeshiftMunitions from "../pool/makeshift-munitions.js";
+import _poolMalcolmAlluringScoundrel from "../pool/malcolm-alluring-scoundrel.js";
 import _poolManicScribe from "../pool/manic-scribe.js";
 import _poolManticoreOfTheGauntlet from "../pool/manticore-of-the-gauntlet.js";
 import _poolMarblePriest from "../pool/marble-priest.js";
@@ -1389,6 +1390,7 @@ const shard: CardShard = {
     _poolMagitekScythe,
     _poolMagusOfTheMoon,
     _poolMakeshiftMunitions,
+    _poolMalcolmAlluringScoundrel,
     _poolManicScribe,
     _poolManticoreOfTheGauntlet,
     _poolMarblePriest,

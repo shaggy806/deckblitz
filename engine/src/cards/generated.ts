@@ -3554,6 +3554,7 @@ import _poolCadaverousBloom from "./pool/cadaverous-bloom.js";
 import _poolCadaverousKnight from "./pool/cadaverous-knight.js";
 import _poolCadiraCallerOfTheSmall from "./pool/cadira-caller-of-the-small.js";
 import _poolCadricSoulKindler from "./pool/cadric-soul-kindler.js";
+import _poolCaduceusStaffOfHermes from "./pool/caduceus-staff-of-hermes.js";
 import _poolCaelornaCoralTyrant from "./pool/caelorna-coral-tyrant.js";
 import _poolCaesarLegionsEmperor from "./pool/caesar-legions-emperor.js";
 import _poolCaetusSeaTyrantOfSegovia from "./pool/caetus-sea-tyrant-of-segovia.js";
@@ -4115,6 +4116,7 @@ import _poolChandraFlamecaller from "./pool/chandra-flamecaller.js";
 import _poolChandraFlamesCatalyst from "./pool/chandra-flames-catalyst.js";
 import _poolChandraFlamesFury from "./pool/chandra-flames-fury.js";
 import _poolChandraFlameshaper from "./pool/chandra-flameshaper.js";
+import _poolChandraHeartOfFire from "./pool/chandra-heart-of-fire.js";
 import _poolChandraLegacyOfFire from "./pool/chandra-legacy-of-fire.js";
 import _poolChandraNalaar from "./pool/chandra-nalaar.js";
 import _poolChandraNovicePyromancer from "./pool/chandra-novice-pyromancer.js";
@@ -15518,6 +15520,7 @@ import _poolMalanthrope from "./pool/malanthrope.js";
 import _poolMalboro from "./pool/malboro.js";
 import _poolMalcatorPurityOverseer from "./pool/malcator-purity-overseer.js";
 import _poolMalcatorsWatcher from "./pool/malcators-watcher.js";
+import _poolMalcolmAlluringScoundrel from "./pool/malcolm-alluring-scoundrel.js";
 import _poolMalcolmKeenEyedNavigator from "./pool/malcolm-keen-eyed-navigator.js";
 import _poolMalcolmTheEyes from "./pool/malcolm-the-eyes.js";
 import _poolMaleficScythe from "./pool/malefic-scythe.js";
@@ -16109,6 +16112,7 @@ import _poolMetathranZombie from "./pool/metathran-zombie.js";
 import _poolMeteorBlast from "./pool/meteor-blast.js";
 import _poolMeteorCrater from "./pool/meteor-crater.js";
 import _poolMeteorGolem from "./pool/meteor-golem.js";
+import _poolMeteorShower from "./pool/meteor-shower.js";
 import _poolMeteorStorm from "./pool/meteor-storm.js";
 import _poolMeteorSwarm from "./pool/meteor-swarm.js";
 import _poolMeteorSword from "./pool/meteor-sword.js";
@@ -22752,6 +22756,8 @@ import _poolShatterskullCharger from "./pool/shatterskull-charger.js";
 import _poolShatterskullGiant from "./pool/shatterskull-giant.js";
 import _poolShatterskullMinotaur from "./pool/shatterskull-minotaur.js";
 import _poolShatterskullRecruit from "./pool/shatterskull-recruit.js";
+import _poolShatterskullSmashing from "./pool/shatterskull-smashing.js";
+import _poolShatterskullTheHammerPass from "./pool/shatterskull-the-hammer-pass.js";
 import _poolShatterstorm from "./pool/shatterstorm.js";
 import _poolShatterwingPegasus from "./pool/shatterwing-pegasus.js";
 import _poolShaukuEndbringer from "./pool/shauku-endbringer.js";
@@ -26225,6 +26231,7 @@ import _poolTheEleventhDoctor from "./pool/the-eleventh-doctor.js";
 import _poolTheEmperorOfPalamecia from "./pool/the-emperor-of-palamecia.js";
 import _poolTheEnd from "./pool/the-end.js";
 import _poolTheEndstone from "./pool/the-endstone.js";
+import _poolTheEternalWanderer from "./pool/the-eternal-wanderer.js";
 import _poolTheEternityElevator from "./pool/the-eternity-elevator.js";
 import _poolTheEverChangingDane from "./pool/the-ever-changing-dane.js";
 import _poolTheFabulousFrogMan from "./pool/the-fabulous-frog-man.js";
@@ -27624,6 +27631,7 @@ import _poolUSAgentJohnWalker from "./pool/u-s-agent-john-walker.js";
 import _poolUbulSarGatekeepers from "./pool/ubul-sar-gatekeepers.js";
 import _poolUchbenbakTheGreatMistake from "./pool/uchbenbak-the-great-mistake.js";
 import _poolUchuulon from "./pool/uchuulon.js";
+import _poolUginEyeOfTheStorms from "./pool/ugin-eye-of-the-storms.js";
 import _poolUginTheIneffable from "./pool/ugin-the-ineffable.js";
 import _poolUginTheSpiritDragon from "./pool/ugin-the-spirit-dragon.js";
 import _poolUginsConjurant from "./pool/ugins-conjurant.js";
@@ -30771,6 +30779,7 @@ import _tokensRockToken from "./tokens/rock-token.js";
 import _tokensRogueToken from "./tokens/rogue-token.js";
 import _tokensRoyalRoleToken from "./tokens/royal-role-token.js";
 import _tokensSalamanderWarriorToken from "./tokens/salamander-warrior-token.js";
+import _tokensSamuraiTokenTheEternalWanderer from "./tokens/samurai-token-the-eternal-wanderer.js";
 import _tokensSamuraiToken from "./tokens/samurai-token.js";
 import _tokensSandToken from "./tokens/sand-token.js";
 import _tokensSandWarriorToken from "./tokens/sand-warrior-token.js";
@@ -34526,6 +34535,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCadaverousKnight,
   _poolCadiraCallerOfTheSmall,
   _poolCadricSoulKindler,
+  _poolCaduceusStaffOfHermes,
   _poolCaelornaCoralTyrant,
   _poolCaesarLegionsEmperor,
   _poolCaetusSeaTyrantOfSegovia,
@@ -35087,6 +35097,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolChandraFlamesCatalyst,
   _poolChandraFlamesFury,
   _poolChandraFlameshaper,
+  _poolChandraHeartOfFire,
   _poolChandraLegacyOfFire,
   _poolChandraNalaar,
   _poolChandraNovicePyromancer,
@@ -46490,6 +46501,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMalboro,
   _poolMalcatorPurityOverseer,
   _poolMalcatorsWatcher,
+  _poolMalcolmAlluringScoundrel,
   _poolMalcolmKeenEyedNavigator,
   _poolMalcolmTheEyes,
   _poolMaleficScythe,
@@ -47081,6 +47093,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMeteorBlast,
   _poolMeteorCrater,
   _poolMeteorGolem,
+  _poolMeteorShower,
   _poolMeteorStorm,
   _poolMeteorSwarm,
   _poolMeteorSword,
@@ -53724,6 +53737,8 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShatterskullGiant,
   _poolShatterskullMinotaur,
   _poolShatterskullRecruit,
+  _poolShatterskullSmashing,
+  _poolShatterskullTheHammerPass,
   _poolShatterstorm,
   _poolShatterwingPegasus,
   _poolShaukuEndbringer,
@@ -57197,6 +57212,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheEmperorOfPalamecia,
   _poolTheEnd,
   _poolTheEndstone,
+  _poolTheEternalWanderer,
   _poolTheEternityElevator,
   _poolTheEverChangingDane,
   _poolTheFabulousFrogMan,
@@ -58596,6 +58612,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUbulSarGatekeepers,
   _poolUchbenbakTheGreatMistake,
   _poolUchuulon,
+  _poolUginEyeOfTheStorms,
   _poolUginTheIneffable,
   _poolUginTheSpiritDragon,
   _poolUginsConjurant,
@@ -61749,6 +61766,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensRogueToken,
   _tokensRoyalRoleToken,
   _tokensSalamanderWarriorToken,
+  _tokensSamuraiTokenTheEternalWanderer,
   _tokensSamuraiToken,
   _tokensSandToken,
   _tokensSandWarriorToken,
@@ -65511,6 +65529,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cadaverous-knight": _poolCadaverousKnight,
   "pool/cadira-caller-of-the-small": _poolCadiraCallerOfTheSmall,
   "pool/cadric-soul-kindler": _poolCadricSoulKindler,
+  "pool/caduceus-staff-of-hermes": _poolCaduceusStaffOfHermes,
   "pool/caelorna-coral-tyrant": _poolCaelornaCoralTyrant,
   "pool/caesar-legions-emperor": _poolCaesarLegionsEmperor,
   "pool/caetus-sea-tyrant-of-segovia": _poolCaetusSeaTyrantOfSegovia,
@@ -66072,6 +66091,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/chandra-flames-catalyst": _poolChandraFlamesCatalyst,
   "pool/chandra-flames-fury": _poolChandraFlamesFury,
   "pool/chandra-flameshaper": _poolChandraFlameshaper,
+  "pool/chandra-heart-of-fire": _poolChandraHeartOfFire,
   "pool/chandra-legacy-of-fire": _poolChandraLegacyOfFire,
   "pool/chandra-nalaar": _poolChandraNalaar,
   "pool/chandra-novice-pyromancer": _poolChandraNovicePyromancer,
@@ -77475,6 +77495,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/malboro": _poolMalboro,
   "pool/malcator-purity-overseer": _poolMalcatorPurityOverseer,
   "pool/malcators-watcher": _poolMalcatorsWatcher,
+  "pool/malcolm-alluring-scoundrel": _poolMalcolmAlluringScoundrel,
   "pool/malcolm-keen-eyed-navigator": _poolMalcolmKeenEyedNavigator,
   "pool/malcolm-the-eyes": _poolMalcolmTheEyes,
   "pool/malefic-scythe": _poolMaleficScythe,
@@ -78066,6 +78087,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/meteor-blast": _poolMeteorBlast,
   "pool/meteor-crater": _poolMeteorCrater,
   "pool/meteor-golem": _poolMeteorGolem,
+  "pool/meteor-shower": _poolMeteorShower,
   "pool/meteor-storm": _poolMeteorStorm,
   "pool/meteor-swarm": _poolMeteorSwarm,
   "pool/meteor-sword": _poolMeteorSword,
@@ -84709,6 +84731,8 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shatterskull-giant": _poolShatterskullGiant,
   "pool/shatterskull-minotaur": _poolShatterskullMinotaur,
   "pool/shatterskull-recruit": _poolShatterskullRecruit,
+  "pool/shatterskull-smashing": _poolShatterskullSmashing,
+  "pool/shatterskull-the-hammer-pass": _poolShatterskullTheHammerPass,
   "pool/shatterstorm": _poolShatterstorm,
   "pool/shatterwing-pegasus": _poolShatterwingPegasus,
   "pool/shauku-endbringer": _poolShaukuEndbringer,
@@ -88182,6 +88206,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-emperor-of-palamecia": _poolTheEmperorOfPalamecia,
   "pool/the-end": _poolTheEnd,
   "pool/the-endstone": _poolTheEndstone,
+  "pool/the-eternal-wanderer": _poolTheEternalWanderer,
   "pool/the-eternity-elevator": _poolTheEternityElevator,
   "pool/the-ever-changing-dane": _poolTheEverChangingDane,
   "pool/the-fabulous-frog-man": _poolTheFabulousFrogMan,
@@ -89581,6 +89606,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ubul-sar-gatekeepers": _poolUbulSarGatekeepers,
   "pool/uchbenbak-the-great-mistake": _poolUchbenbakTheGreatMistake,
   "pool/uchuulon": _poolUchuulon,
+  "pool/ugin-eye-of-the-storms": _poolUginEyeOfTheStorms,
   "pool/ugin-the-ineffable": _poolUginTheIneffable,
   "pool/ugin-the-spirit-dragon": _poolUginTheSpiritDragon,
   "pool/ugins-conjurant": _poolUginsConjurant,
@@ -92728,6 +92754,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/rogue-token": _tokensRogueToken,
   "tokens/royal-role-token": _tokensRoyalRoleToken,
   "tokens/salamander-warrior-token": _tokensSalamanderWarriorToken,
+  "tokens/samurai-token-the-eternal-wanderer": _tokensSamuraiTokenTheEternalWanderer,
   "tokens/samurai-token": _tokensSamuraiToken,
   "tokens/sand-token": _tokensSandToken,
   "tokens/sand-warrior-token": _tokensSandWarriorToken,

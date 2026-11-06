@@ -141,6 +141,7 @@ import _poolCephalidAristocrat from "../pool/cephalid-aristocrat.js";
 import _poolChamberedNautilus from "../pool/chambered-nautilus.js";
 import _poolChampionOfArashin from "../pool/champion-of-arashin.js";
 import _poolChancellorOfTheTangle from "../pool/chancellor-of-the-tangle.js";
+import _poolChandraHeartOfFire from "../pool/chandra-heart-of-fire.js";
 import _poolChaoticGoo from "../pool/chaotic-goo.js";
 import _poolChargingTroll from "../pool/charging-troll.js";
 import _poolChiefOfTheEdge from "../pool/chief-of-the-edge.js";
@@ -494,6 +495,7 @@ import _poolMemoryGuardian from "../pool/memory-guardian.js";
 import _poolMerfolkFalconer from "../pool/merfolk-falconer.js";
 import _poolMesmerizingBenthid from "../pool/mesmerizing-benthid.js";
 import _poolMessengerJays from "../pool/messenger-jays.js";
+import _poolMeteorShower from "../pool/meteor-shower.js";
 import _poolMilitiaRallier from "../pool/militia-rallier.js";
 import _poolMineRaider from "../pool/mine-raider.js";
 import _poolMinisterOfPain from "../pool/minister-of-pain.js";
@@ -1083,6 +1085,7 @@ const shard: CardShard = {
     _poolChamberedNautilus,
     _poolChampionOfArashin,
     _poolChancellorOfTheTangle,
+    _poolChandraHeartOfFire,
     _poolChaoticGoo,
     _poolChargingTroll,
     _poolChiefOfTheEdge,
@@ -1436,6 +1439,7 @@ const shard: CardShard = {
     _poolMerfolkFalconer,
     _poolMesmerizingBenthid,
     _poolMessengerJays,
+    _poolMeteorShower,
     _poolMilitiaRallier,
     _poolMineRaider,
     _poolMinisterOfPain,
