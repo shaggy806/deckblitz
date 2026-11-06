@@ -2661,23 +2661,38 @@ function staticAbilityLosses(state: GameState, registry: CardRegistry): StaticLo
   // Humility out (2026-10-28).
   const memo = staticLossesMemo;
   if (memo !== null && memo.state === state && memo.registry === registry && memo.epoch === mutationEpoch) {
-    if (cacheCheck && !sameLosses(memo.value, fresh())) {
+    // The cache check recomputes the first hit of each epoch and one in
+    // every STATIC_LOSSES_CHECK_EVERY after it, not every hit: every ability
+    // check asks this, and the whole board scan on each made one situation
+    // fuzzer scenario (Trickster's Elk's "loses all abilities" beside its
+    // token copy, 2026-11-06) take 66 s where it plays in 0.6 s, timing out.
+    // A missed invalidation lasts until the next one, so it's still met.
+    staticLossesHits += 1;
+    if (cacheCheck && (memo.hits === 0 || staticLossesHits % STATIC_LOSSES_CHECK_EVERY === 0) && !sameLosses(memo.value, fresh())) {
       throw new Error("computed-cache divergence (static ability losses): a mutation is missing an invalidateComputedCache() call");
     }
+    memo.hits += 1;
     return memo.value;
   }
   const value = fresh();
-  staticLossesMemo = { state, registry, epoch: mutationEpoch, value };
+  staticLossesMemo = { state, registry, epoch: mutationEpoch, value, hits: 0 };
   return value;
 }
 
-/** The last {@link staticAbilityLosses} answer, and what it was for. */
+/** The last {@link staticAbilityLosses} answer, and what it was for; `hits`
+ * is how often it has been served. */
 let staticLossesMemo: {
   readonly state: GameState;
   readonly registry: CardRegistry;
   readonly epoch: number;
   readonly value: StaticLosses;
+  hits: number;
 } | null = null;
+
+/** Every memo hit of {@link staticAbilityLosses}, for the cache check's
+ * sampling: one in this many is recomputed beside each epoch's first. */
+let staticLossesHits = 0;
+const STATIC_LOSSES_CHECK_EVERY = 16;
 
 function sameLosses(a: StaticLosses, b: StaticLosses): boolean {
   if (a.lost.size !== b.lost.size || a.applied.size !== b.applied.size) return false;
