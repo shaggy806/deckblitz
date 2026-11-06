@@ -12,6 +12,23 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Seven need keys by EDHREC rank, from three agents** (2026-11-05), each card's own keys:
+  Bolas's Citadel (`castFromLibraryTop.payLifeManaValue`, the only way to cast from the top unless
+  another permission reaches the card, X 0 by rule 107.3b); Archway of Innovation (`improvise` on
+  `grant-spells-this-turn`); Plumb the Forbidden (`additionalCost.copyForEachSacrificed`, one
+  reflexive trigger copying the spell X times through replicate's `queuePaidCostCopy`, no new
+  targets by 707.10c); Carpet of Flowers (the `this-ability-did-this-turn` condition over
+  `GameState.abilitiesDoneThisTurn`, which `add-mana`'s `marksAbilityDone` sets only when at least one
+  mana was added — rule 107.1b); The Darkness Crystal and Gisa, Glorious Resurrector (a graveyard-exile
+  replacement's `linked`, setting `exiledWith` from the permanent's last stint, rules 607.2b and 616.1);
+  Valgavoth, Terror Eater (`playFromExile.payLifeManaValue`, `Game.exileStaticLifeCast`; "a card you
+  didn't control" is `controlledBy: "opponent"`, rule 108.4a). Also a fix: an impulse's pay-life-only
+  cast of a card with its own alternative cost (Gush under Inside Information) paid the card's cost, not
+  the life. Keys: `zone:cast-from-library-top-pay-life-mana-value`, `effect:next-spell-has-improvise`,
+  `cost:sacrifice-any-number-copy-for-each`, `condition:this-ability-did-this-turn`,
+  `replacement:exile-instead-linked`, `zone:linked-exile-play-pay-life-alternative`,
+  `replacement:exile-instead-cards-you-didnt-control`; no other cards freed.
+
 - **An Aura on a graveyard card, and an enchant ability an effect gives** (2026-11-05), by EDHREC rank: "enchant creature card in a graveyard" (`enchantsGraveyardCard` — entered attached to the card, cast or chosen as it's put onto the battlefield, the client's `choose-enchant` popup for graveyard cards), `swap-enchant` (`GameObject.enchantSwap`: "enchant creature put onto the battlefield with this" or any spec, `becomeAura`): Animate Dead, Dance of the Dead, Necromancy, Cloudform, Lightform, Rageform.
 - **Card definitions share a hidden class again** (2026-11-04), a regression from that morning: `defineCard`'s literal reached 128 entries, so the pool's import went from 1.2 s to 5.5 s and a fuzzer game cost 40-45% more per event. Its rare fields moved to `rareCardFields` (import 0.85 s), pinned by `card-definition-shape.test.ts`.
 - **Stealing a spell** (2026-11-04), `gain-control-spell`, `putOnStackBy` and `spellCaster` read by what asks who cast it, seat targets rebound to the new controller (a bug for another player's copy too): Commandeer, Aethersnatch.

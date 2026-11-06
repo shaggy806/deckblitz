@@ -922,6 +922,7 @@ missing. Re-run `--greedy` for Phase 2's order.
 - **2026-11-05: `author-freed`, batch 263 (frozen list F2 of the parallel round).** 108 of 133 authored, 25 given narrow keys (22 new; three under `cost:mana-spending-rules`, two under `cost:choose-cards-as-cost`); three engine fixes (a delayed `perCard` discard watch, `nextSpell` read without its source, `choose-permanents` without its source).
 - **2026-11-05: `author-freed`, batch 264 (frozen list F3).** 111 of 135 authored, 24 given 22 new narrow keys and one open one, by two agents of 68 and 67 with a blind reader that found two wrong (Haphazard Bombardment's random pick skipping indestructible permanents, Prismatic Strands' colour chosen as it was cast), both fixed; two engine fixes (`isSource` in a mass tap or bounce, and a random choice of permanents over a token stack).
 - **2026-11-05: `build-family`, by rank, Animate Dead (223) and Necromancy (1030).** An Aura enchanting a card in a graveyard and `swap-enchant` (an enchant ability an effect gives, `becomeAura`); keys `effect:aura-enchants-card-in-graveyard`, `effect:enchantment-becomes-aura`; six proving cards (Dance of the Dead, Cloudform, Lightform and Rageform too), so nothing freed for `author-freed`.
+- **2026-11-05: `build-family`, by rank, three agents.** Bolas's Citadel (274), Archway of Innovation (926), Plumb the Forbidden (1148), The Darkness Crystal (1159, with Gisa, Glorious Resurrector), Valgavoth, Terror Eater (1299) and Carpet of Flowers (1325): seven keys, each its card's own, so `--stale` stays at 0.
 
 ## Rough size
 
