@@ -94,6 +94,7 @@ import _poolBlitzLeech from "../pool/blitz-leech.js";
 import _poolBloodLust from "../pool/blood-lust.js";
 import _poolBloodPact from "../pool/blood-pact.js";
 import _poolBloodfireExpert from "../pool/bloodfire-expert.js";
+import _poolBoardingAction from "../pool/boarding-action.js";
 import _poolBogImp from "../pool/bog-imp.js";
 import _poolBogardanHellkite from "../pool/bogardan-hellkite.js";
 import _poolBoggartBrute from "../pool/boggart-brute.js";
@@ -1034,6 +1035,7 @@ const shard: CardShard = {
     _poolBloodLust,
     _poolBloodPact,
     _poolBloodfireExpert,
+    _poolBoardingAction,
     _poolBogImp,
     _poolBogardanHellkite,
     _poolBoggartBrute,

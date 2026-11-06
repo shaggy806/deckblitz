@@ -501,6 +501,7 @@ import _poolMaulfistRevolutionary from "../pool/maulfist-revolutionary.js";
 import _poolMazeRusher from "../pool/maze-rusher.js";
 import _poolMazesMantle from "../pool/mazes-mantle.js";
 import _poolMeatLockerDrownedDiner from "../pool/meat-locker-drowned-diner.js";
+import _poolMelkotianAdjudicator from "../pool/melkotian-adjudicator.js";
 import _poolMercilessEviction from "../pool/merciless-eviction.js";
 import _poolMesaUnicorn from "../pool/mesa-unicorn.js";
 import _poolMetamorphicWurm from "../pool/metamorphic-wurm.js";
@@ -1475,6 +1476,7 @@ const shard: CardShard = {
     _poolMazeRusher,
     _poolMazesMantle,
     _poolMeatLockerDrownedDiner,
+    _poolMelkotianAdjudicator,
     _poolMercilessEviction,
     _poolMesaUnicorn,
     _poolMetamorphicWurm,

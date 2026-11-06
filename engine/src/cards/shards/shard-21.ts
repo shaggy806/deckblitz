@@ -562,6 +562,7 @@ import _poolPathOfAngersFlame from "../pool/path-of-angers-flame.js";
 import _poolPathwayArrows from "../pool/pathway-arrows.js";
 import _poolPatientNaturalist from "../pool/patient-naturalist.js";
 import _poolPatriotShieldWielder from "../pool/patriot-shield-wielder.js";
+import _poolPatternBufferPreservation from "../pool/pattern-buffer-preservation.js";
 import _poolPeemaOutrider from "../pool/peema-outrider.js";
 import _poolPerplex from "../pool/perplex.js";
 import _poolPetalmaneBaku from "../pool/petalmane-baku.js";
@@ -1485,6 +1486,7 @@ const shard: CardShard = {
     _poolPathwayArrows,
     _poolPatientNaturalist,
     _poolPatriotShieldWielder,
+    _poolPatternBufferPreservation,
     _poolPeemaOutrider,
     _poolPerplex,
     _poolPetalmaneBaku,

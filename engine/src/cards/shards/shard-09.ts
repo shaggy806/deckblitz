@@ -222,6 +222,7 @@ import _poolEcstaticElectromancer from "../pool/ecstatic-electromancer.js";
 import _poolEdgarMarkovsCoffin from "../pool/edgar-markovs-coffin.js";
 import _poolEdricSpymasterOfTrest from "../pool/edric-spymaster-of-trest.js";
 import _poolElendaAndAzor from "../pool/elenda-and-azor.js";
+import _poolElimGarakSimpleTailor from "../pool/elim-garak-simple-tailor.js";
 import _poolEliminateTheImpossible from "../pool/eliminate-the-impossible.js";
 import _poolEmberHauler from "../pool/ember-hauler.js";
 import _poolEmberheartChallenger from "../pool/emberheart-challenger.js";
@@ -1212,6 +1213,7 @@ const shard: CardShard = {
     _poolEdgarMarkovsCoffin,
     _poolEdricSpymasterOfTrest,
     _poolElendaAndAzor,
+    _poolElimGarakSimpleTailor,
     _poolEliminateTheImpossible,
     _poolEmberHauler,
     _poolEmberheartChallenger,

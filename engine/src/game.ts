@@ -1785,7 +1785,9 @@ type FlashbackOption = {
   /** Cards discarded for it, and its keyword — only a printed one's
    * (jump-start, rule 702.133a; Conflagrate's "Discard X cards"). */
   readonly discard?: number | "x";
-  readonly keyword?: "jump-start";
+  readonly keyword?: "jump-start" | "beam-me-up";
+  /** Permanents returned to hand for it — only a printed one's (Beam me up). */
+  readonly returnToHand?: { readonly filter: CardFilter; readonly count: number };
   /** Creatures tapped for it — only a printed one's (Battle Screech). */
   readonly tapCreatures?: { readonly count: number; readonly filter: CardFilter };
   /** What gave it: the effect's source (Past in Flames) or the permanent
@@ -5171,6 +5173,8 @@ export class Game {
         // Jump-start rides the flashback cast: label it as printed.
         ...(via === "flashback" && this.flashbackOf(card, graveyardGrant)?.keyword === "jump-start"
           ? { altCostText: "jump-start, discarding a card" }
+          : via === "flashback" && this.flashbackOf(card, graveyardGrant)?.keyword === "beam-me-up"
+            ? { altCostText: "beam me up, returning a creature you control to its owner's hand" }
           : via === "retrace"
             ? { altCostText: "retrace, discarding a land card" }
             : via === "foretell-given"
@@ -7751,7 +7755,7 @@ export class Game {
             : (this.state.modesChosenThisTurn ??= {});
         record[awaiting.abilityKey] = [...(record[awaiting.abilityKey] ?? []), ...ordered];
       }
-      this.emit({ type: "modes-chosen", source: awaiting.source, player, modes: ordered });
+      this.emit({ type: "modes-chosen", source: awaiting.source, player, modes: ordered, modal: true });
       if (trigger !== undefined && this.placeTriggerOnStack({ ...trigger, modes: ordered }) === "paused") return;
       if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
       return;
@@ -17534,7 +17538,13 @@ export class Game {
     // A keyword's non-mana part (buyback's "Pay 4 life", "Sacrifice a land",
     // "Discard two cards"; squad's, each time over; a spliced card's): only
     // while it can all be paid.
-    const whyNotAlso = this.whyCannotPayAlso(player, cardId, def, this.castAlsoCosts(cardId, def, kicked ?? false, altCost, costOption), altCost);
+    const whyNotAlso = this.whyCannotPayAlso(
+      player,
+      cardId,
+      def,
+      this.castAlsoCosts(cardId, def, kicked ?? false, altCost, costOption, via, graveyardGrant),
+      altCost,
+    );
     if (whyNotAlso !== null) return whyNotAlso;
     // "This spell costs 3 life more to cast for each target" (Phyrexian
     // Purge — rule 601.2f, the targets chosen first, 601.2c): life the
@@ -20011,7 +20021,7 @@ export class Game {
     if (sortedModes !== undefined) {
       // Chosen by the opponent its caster named (rule 700.2e), when one did.
       const modesBy = this.otherChoice?.for === cardId ? this.otherChoice.chooser : player;
-      this.emit({ type: "modes-chosen", source: cardId, player: modesBy, modes: [...sortedModes] });
+      this.emit({ type: "modes-chosen", source: cardId, player: modesBy, modes: [...sortedModes], modal: true });
     }
     // The rest of the additional cost (rule 601.2f-h). Paid as the spell is
     // cast, so — like the sacrifice above — it stands even if the spell is
@@ -20081,7 +20091,7 @@ export class Game {
       player,
       cardId,
       [
-        ...this.castAlsoCosts(cardId, def, kicked, altCost, costOption),
+        ...this.castAlsoCosts(cardId, def, kicked, altCost, costOption, via, graveyardGrant),
         ...(returnsX !== undefined && chosenX > 0 ? [{ text: "", returnToHand: { filter: returnsX, count: chosenX } }] : []),
       ],
       via === "effect" ? this.activePlayer : player,
@@ -23292,7 +23302,7 @@ export class Game {
         const record = modeOffer.ever ? (this.state.modesChosenEver ??= {}) : (this.state.modesChosenThisTurn ??= {});
         record[modeOffer.key] = [...(record[modeOffer.key] ?? []), ...modes];
       }
-      this.emit({ type: "modes-chosen", source: sourceId, player, modes: [...modes] });
+      this.emit({ type: "modes-chosen", source: sourceId, player, modes: [...modes], modal: true });
     }
     const granterRef = granterOfRef(grantedAbility);
     if (sourceStint !== undefined || sacrificedRef !== undefined || tappedRef !== undefined || granterRef !== undefined) {
@@ -30454,6 +30464,16 @@ export class Game {
         return (
           event.type === "scried" &&
           (event.mode === "scry" || spec.orSurveil === true) &&
+          (spec.who === "any" ||
+            (spec.who === "you" && event.player === self.controller) ||
+            (spec.who === "opponent" && event.player !== self.controller))
+        );
+      case "faces-dilemma":
+        return (
+          event.type === "modes-chosen" &&
+          event.modal === true &&
+          event.modes.length > 0 &&
+          event.player !== undefined &&
           (spec.who === "any" ||
             (spec.who === "you" && event.player === self.controller) ||
             (spec.who === "opponent" && event.player !== self.controller))
@@ -40004,13 +40024,26 @@ export class Game {
     kicked: boolean | number,
     altCost: boolean,
     costOption?: number,
+    via?: CastVia,
+    graveyardGrant?: GraveyardGrant,
   ): readonly KickerAlsoCost[] {
     const kickerAlso = kicked !== false && kicked !== 0 ? def.kicker?.also : undefined;
     const spliced = this.activeSplice?.card === cardId ? this.activeSplice.also : [];
     const altAlso = altCost ? this.ownAltCost(def)?.also : undefined;
     const own = def.additionalCost?.also;
     const branch = costOption === undefined ? undefined : def.additionalCost?.options?.[costOption]?.also;
-    const additional = [...(own !== undefined ? [own] : []), ...(branch !== undefined ? [branch] : []), ...(altAlso !== undefined ? [altAlso] : [])];
+    // Beam me up's "if you also return a creature you control to its
+    // owner's hand": the flashback cost's return, chosen and paid as an
+    // additional cost's is (601.2h).
+    const flashbackReturn = via === "flashback" ? this.flashbackOf(cardId, graveyardGrant)?.returnToHand : undefined;
+    const fromFlashback: KickerAlsoCost | undefined =
+      flashbackReturn !== undefined ? { text: "Beam me up", returnToHand: flashbackReturn } : undefined;
+    const additional = [
+      ...(own !== undefined ? [own] : []),
+      ...(branch !== undefined ? [branch] : []),
+      ...(altAlso !== undefined ? [altAlso] : []),
+      ...(fromFlashback !== undefined ? [fromFlashback] : []),
+    ];
     if (kickerAlso === undefined) return additional.length === 0 ? spliced : [...additional, ...spliced];
     const times = def.kicker?.multi === true && typeof kicked === "number" ? kicked : 1;
     return [...additional, alsoTimes(kickerAlso, times), ...spliced];
@@ -49219,6 +49252,7 @@ export class Game {
             f.sacrifice === option.sacrifice &&
             f.behold === option.behold &&
             f.discard === option.discard &&
+            f.returnToHand === option.returnToHand &&
             f.tapCreatures === option.tapCreatures,
         )
       ) {
@@ -49230,7 +49264,8 @@ export class Game {
     if (printed !== null) {
       add(
         printed.payLife === undefined && printed.sacrifice === undefined && printed.behold === undefined &&
-          printed.discard === undefined && printed.keyword === undefined && printed.tapCreatures === undefined
+          printed.discard === undefined && printed.keyword === undefined && printed.tapCreatures === undefined &&
+          printed.returnToHand === undefined
           ? { cost: printed.cost }
           : { ...printed },
       );

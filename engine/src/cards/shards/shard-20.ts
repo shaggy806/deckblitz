@@ -15,6 +15,7 @@ import _poolAbsorbingMan from "../pool/absorbing-man.js";
 import _poolAbstruseInterference from "../pool/abstruse-interference.js";
 import _poolAbyssalHunter from "../pool/abyssal-hunter.js";
 import _poolActOfTreason from "../pool/act-of-treason.js";
+import _poolAdversaryByAlgorithm from "../pool/adversary-by-algorithm.js";
 import _poolAerialEngineer from "../pool/aerial-engineer.js";
 import _poolAetherChanneler from "../pool/aether-channeler.js";
 import _poolAeveProgenitorOoze from "../pool/aeve-progenitor-ooze.js";
@@ -876,6 +877,7 @@ import _poolTheSuperHeroCivilWar from "../pool/the-super-hero-civil-war.js";
 import _poolTheTenRings from "../pool/the-ten-rings.js";
 import _poolTheVisionAndScarletWitch from "../pool/the-vision-and-scarlet-witch.js";
 import _poolTheWhizzerClassicSpeedster from "../pool/the-whizzer-classic-speedster.js";
+import _poolTheresCoffeeInThatNebula from "../pool/theres-coffee-in-that-nebula.js";
 import _poolThiefsKnife from "../pool/thiefs-knife.js";
 import _poolThorOdinson from "../pool/thor-odinson.js";
 import _poolThornThallid from "../pool/thorn-thallid.js";
@@ -1035,6 +1037,7 @@ const shard: CardShard = {
     _poolAbstruseInterference,
     _poolAbyssalHunter,
     _poolActOfTreason,
+    _poolAdversaryByAlgorithm,
     _poolAerialEngineer,
     _poolAetherChanneler,
     _poolAeveProgenitorOoze,
@@ -1896,6 +1899,7 @@ const shard: CardShard = {
     _poolTheTenRings,
     _poolTheVisionAndScarletWitch,
     _poolTheWhizzerClassicSpeedster,
+    _poolTheresCoffeeInThatNebula,
     _poolThiefsKnife,
     _poolThorOdinson,
     _poolThornThallid,

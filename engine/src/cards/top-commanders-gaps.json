@@ -2,6 +2,8 @@
  "generated": "2026-09-22",
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
+  "trigger:face-a-dilemma",
+  "mechanic:beam-me-up",
   "amount:auras-attached-to-self",
   "condition:filter-dealt-damage-this-turn",
   "cost:return-permanent-additional-cost",

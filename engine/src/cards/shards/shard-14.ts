@@ -290,6 +290,7 @@ import _poolFar from "../pool/far.js";
 import _poolFarrelsZealot from "../pool/farrels-zealot.js";
 import _poolFathomFleetSwordjack from "../pool/fathom-fleet-swordjack.js";
 import _poolFeatherbrainedFilcher from "../pool/featherbrained-filcher.js";
+import _poolFederationResupply from "../pool/federation-resupply.js";
 import _poolFelotharDawnOfTheAbzan from "../pool/felothar-dawn-of-the-abzan.js";
 import _poolFemerefScouts from "../pool/femeref-scouts.js";
 import _poolFeralDeceiver from "../pool/feral-deceiver.js";
@@ -1268,6 +1269,7 @@ const shard: CardShard = {
     _poolFarrelsZealot,
     _poolFathomFleetSwordjack,
     _poolFeatherbrainedFilcher,
+    _poolFederationResupply,
     _poolFelotharDawnOfTheAbzan,
     _poolFemerefScouts,
     _poolFeralDeceiver,

@@ -3911,6 +3911,22 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(angel.triggered[0].condition).toEqual({ kind: "self-kicked", with: "both" });
   });
 
+  it("beam me up and face a dilemma (Star Trek)", () => {
+    const comms = face(
+      "Draw a card.\nBeam me up {2}{U} (You may cast this card from your graveyard for {2}{U} if you also return a creature you control to its owner's hand. Then exile this spell.)",
+      "Sorcery",
+      { mana_cost: "{U}" },
+    );
+    expect(comms.flashback).toEqual({ cost: "{2}{U}", returnToHand: { filter: { type: "creature" }, count: 1 }, keyword: "beam-me-up" });
+    expect(comms.complete).toBe(true);
+    const seven = face(
+      "Whenever you face a dilemma, draw a card. (You face a dilemma as you choose one or more modes for a spell or ability.)",
+      "Legendary Artifact Creature — Human Scientist",
+    );
+    expect(seven.triggered[0].trigger).toEqual({ on: "faces-dilemma", who: "you" });
+    expect(seven.complete).toBe(true);
+  });
+
   it("jump-start and mentor (rules 702.133, 702.134)", () => {
     const idea = face("Draw a card.\nJump-start (You may cast this card from your graveyard by discarding a card in addition to paying its other costs. Then exile this card.)", "Instant", { mana_cost: "{1}{U}" });
     expect(idea.flashback).toEqual({ cost: "{1}{U}", discard: 1, keyword: "jump-start" });

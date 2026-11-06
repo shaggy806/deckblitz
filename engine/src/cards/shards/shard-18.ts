@@ -549,6 +549,7 @@ import _poolOldFatSpiderCantSeeMe from "../pool/old-fat-spider-cant-see-me.js";
 import _poolOmenportVigilante from "../pool/omenport-vigilante.js";
 import _poolOnwardVictory from "../pool/onward-victory.js";
 import _poolOpalineSliver from "../pool/opaline-sliver.js";
+import _poolOpenCommunications from "../pool/open-communications.js";
 import _poolOranRiefInvoker from "../pool/oran-rief-invoker.js";
 import _poolOrbsOfWarding from "../pool/orbs-of-warding.js";
 import _poolOrcishFarmer from "../pool/orcish-farmer.js";
@@ -1510,6 +1511,7 @@ const shard: CardShard = {
     _poolOmenportVigilante,
     _poolOnwardVictory,
     _poolOpalineSliver,
+    _poolOpenCommunications,
     _poolOranRiefInvoker,
     _poolOrbsOfWarding,
     _poolOrcishFarmer,

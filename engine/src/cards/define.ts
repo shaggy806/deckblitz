@@ -5482,9 +5482,18 @@ export interface CardDefinition {
      * addition to paying its other costs", so `cost` is the card's own mana
      * cost and `discard` 1; exiled as it leaves the stack, like flashback. */
     readonly discard?: number | "x";
-    /** `"jump-start"`: the keyword this graveyard cast is printed as, for its
-     * label. */
-    readonly keyword?: "jump-start";
+    /** Permanents the caster controls returned to their owner's hand as part
+     * of the cost, chosen as it's paid (601.2h), as `additionalCost.also`'s
+     * `returnToHand` are. With `keyword: "beam-me-up"` it's Star Trek's
+     * **Beam me up** — "you may cast this card from your graveyard for [cost]
+     * if you also return a creature you control to its owner's hand. Then
+     * exile this spell." (Adversary by Algorithm): `cost` the beam-me-up
+     * cost, `returnToHand` one creature; exiled as it leaves the stack, like
+     * flashback. */
+    readonly returnToHand?: { readonly filter: CardFilter; readonly count: number };
+    /** `"jump-start"`, `"beam-me-up"`: the keyword this graveyard cast is
+     * printed as, for its label. */
+    readonly keyword?: "jump-start" | "beam-me-up";
     /** Untapped creatures tapped as part of the cost, chosen with the cast (its
      * offer's `tapCost`), as an alternative cost's `tapCreatures` are:
      * "Flashback—Tap three untapped white creatures you control" (Battle

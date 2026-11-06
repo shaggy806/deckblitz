@@ -974,6 +974,7 @@ import _tokensDwarfToken from "../tokens/dwarf-token.js";
 import _tokensElementalToken55BlueRedFlying from "../tokens/elemental-token-5-5-blue-red-flying.js";
 import _tokensGreenSheepToken from "../tokens/green-sheep-token.js";
 import _tokensHarpyToken from "../tokens/harpy-token.js";
+import _tokensIllusionToken33Artifact from "../tokens/illusion-token-3-3-artifact.js";
 import _tokensLifelinkCatToken from "../tokens/lifelink-cat-token.js";
 import _tokensMercenaryToken from "../tokens/mercenary-token.js";
 import _tokensPhobos from "../tokens/phobos.js";
@@ -1960,6 +1961,7 @@ const shard: CardShard = {
     _tokensElementalToken55BlueRedFlying,
     _tokensGreenSheepToken,
     _tokensHarpyToken,
+    _tokensIllusionToken33Artifact,
     _tokensLifelinkCatToken,
     _tokensMercenaryToken,
     _tokensPhobos,

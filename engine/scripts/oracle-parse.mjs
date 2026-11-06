@@ -2433,6 +2433,7 @@ export function parseTrigger(clause) {
     return [{ on: "discards", who: "you", byOpponent: true, perCard: true }];
   }
   if (/^Whenever you surveil$/.test(c)) return [{ on: "surveils", who: "you" }];
+  if (/^Whenever you face a dilemma$/.test(c)) return [{ on: "faces-dilemma", who: "you" }];
   if (/^Whenever an opponent searches their library$/.test(c)) return [{ on: "searches-library", who: "opponent" }];
 
   // Steps.
@@ -13565,6 +13566,12 @@ function parseFaceAsWritten(face, ctx = {}) {
     // cost, discarding a card.
     if (line === "Jump-start" && face.mana_cost) {
       out.flashback = { cost: face.mana_cost, discard: 1, keyword: "jump-start" };
+      continue;
+    }
+    // Beam me up [cost] (Star Trek): the graveyard cast for that cost,
+    // returning a creature you control to its owner's hand; exiled after.
+    if ((m = /^Beam me up ((?:\{[^}]+\})+)$/.exec(line))) {
+      out.flashback = { cost: m[1], returnToHand: { filter: { type: "creature" }, count: 1 }, keyword: "beam-me-up" };
       continue;
     }
     // Plot [cost] (rule 702.170a): a special action from the hand at sorcery speed.

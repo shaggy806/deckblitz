@@ -276,6 +276,7 @@ import _poolFertilidsFavor from "../pool/fertilids-favor.js";
 import _poolFerventCathar from "../pool/fervent-cathar.js";
 import _poolFieldOfDreams from "../pool/field-of-dreams.js";
 import _poolFieldOfSouls from "../pool/field-of-souls.js";
+import _poolFinalFrontier from "../pool/final-frontier.js";
 import _poolFindFinality from "../pool/find-finality.js";
 import _poolFireBellyChangeling from "../pool/fire-belly-changeling.js";
 import _poolFireSages from "../pool/fire-sages.js";
@@ -1314,6 +1315,7 @@ const shard: CardShard = {
     _poolFerventCathar,
     _poolFieldOfDreams,
     _poolFieldOfSouls,
+    _poolFinalFrontier,
     _poolFindFinality,
     _poolFireBellyChangeling,
     _poolFireSages,

@@ -261,6 +261,7 @@ import _poolEmpyrialPlate from "../pool/empyrial-plate.js";
 import _poolEndlessAtlas from "../pool/endless-atlas.js";
 import _poolEndoskeleton from "../pool/endoskeleton.js";
 import _poolEndure from "../pool/endure.js";
+import _poolEnergize from "../pool/energize.js";
 import _poolEnergyFlux from "../pool/energy-flux.js";
 import _poolEnigmaEidolon from "../pool/enigma-eidolon.js";
 import _poolEnsnaredByTheMara from "../pool/ensnared-by-the-mara.js";
@@ -1225,6 +1226,7 @@ const shard: CardShard = {
     _poolEndlessAtlas,
     _poolEndoskeleton,
     _poolEndure,
+    _poolEnergize,
     _poolEnergyFlux,
     _poolEnigmaEidolon,
     _poolEnsnaredByTheMara,

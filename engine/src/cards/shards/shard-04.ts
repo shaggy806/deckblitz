@@ -396,6 +396,7 @@ import _poolIroncladKrovod from "../pool/ironclad-krovod.js";
 import _poolIshiIshiAkkiCrackshot from "../pool/ishi-ishi-akki-crackshot.js";
 import _poolJenovaAncientCalamity from "../pool/jenova-ancient-calamity.js";
 import _poolJeongJeongTheDeserter from "../pool/jeong-jeong-the-deserter.js";
+import _poolJettRenoProblemSolver from "../pool/jett-reno-problem-solver.js";
 import _poolJoltingMerfolk from "../pool/jolting-merfolk.js";
 import _poolJovialEvil from "../pool/jovial-evil.js";
 import _poolKamahlFistOfKrosa from "../pool/kamahl-fist-of-krosa.js";
@@ -1347,6 +1348,7 @@ const shard: CardShard = {
     _poolIshiIshiAkkiCrackshot,
     _poolJenovaAncientCalamity,
     _poolJeongJeongTheDeserter,
+    _poolJettRenoProblemSolver,
     _poolJoltingMerfolk,
     _poolJovialEvil,
     _poolKamahlFistOfKrosa,

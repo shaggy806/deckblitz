@@ -603,6 +603,7 @@ import _poolPrismariCampus from "../pool/prismari-campus.js";
 import _poolProdigalPyromancer from "../pool/prodigal-pyromancer.js";
 import _poolPsychicIntrusion from "../pool/psychic-intrusion.js";
 import _poolPuppetStrings from "../pool/puppet-strings.js";
+import _poolPureEnergy from "../pool/pure-energy.js";
 import _poolPurifyingDragon from "../pool/purifying-dragon.js";
 import _poolPymTechnologies from "../pool/pym-technologies.js";
 import _poolPyroclasm from "../pool/pyroclasm.js";
@@ -712,6 +713,7 @@ import _poolSelesnyaGuildgate from "../pool/selesnya-guildgate.js";
 import _poolSeraphOfTheSuns from "../pool/seraph-of-the-suns.js";
 import _poolSerpentGenerator from "../pool/serpent-generator.js";
 import _poolSerumTank from "../pool/serum-tank.js";
+import _poolSevenOfNine from "../pool/seven-of-nine.js";
 import _poolSeverSoul from "../pool/sever-soul.js";
 import _poolShadowstormVizier from "../pool/shadowstorm-vizier.js";
 import _poolShaperGuildmage from "../pool/shaper-guildmage.js";
@@ -1546,6 +1548,7 @@ const shard: CardShard = {
     _poolProdigalPyromancer,
     _poolPsychicIntrusion,
     _poolPuppetStrings,
+    _poolPureEnergy,
     _poolPurifyingDragon,
     _poolPymTechnologies,
     _poolPyroclasm,
@@ -1655,6 +1658,7 @@ const shard: CardShard = {
     _poolSeraphOfTheSuns,
     _poolSerpentGenerator,
     _poolSerumTank,
+    _poolSevenOfNine,
     _poolSeverSoul,
     _poolShadowstormVizier,
     _poolShaperGuildmage,

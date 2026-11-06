@@ -2125,6 +2125,19 @@ export type TriggerSpec =
       readonly who: TriggerWho;
     }
   | {
+      /** A player faced a dilemma — Elim Garak, Simple Tailor's "whenever
+       * you face a dilemma" (Star Trek: "you face a dilemma as you choose
+       * one or more modes for a spell or ability"). Once per choice of a
+       * modal spell's or ability's modes (rule 700.2) by that player — as
+       * it's cast (601.2b), activated (602.2b) or put on the stack as a
+       * trigger (603.3c), whoever's it is (an opponent choosing your spell's
+       * modes faces it, 700.2e) — however many modes. Not modes chosen at
+       * random (nobody chose), a copy's (copied, not chosen — 707.10), or a
+       * choice made as an effect resolves ("create a Food or a Treasure"). */
+      readonly on: "faces-dilemma";
+      readonly who: TriggerWho;
+    }
+  | {
       /** A player searched their own library (rule 701.23) — Archivist of
        * Oghma's "whenever an opponent searches their library", whoever's effect
        * made them: not someone else's library, and not one they can't search.

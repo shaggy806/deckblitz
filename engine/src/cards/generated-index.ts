@@ -362,6 +362,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Illusion Token (Sacrificed When Targeted)",
   "Illusion Token (Skyclave Apparition)",
   "Illusion Token 2/2",
+  "Illusion Token 3/3 artifact",
   "Illusion Villain Token",
   "Imp Token (Judith)",
   "Incubator Token",

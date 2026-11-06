@@ -822,6 +822,7 @@ import _poolTragicSlip from "../pool/tragic-slip.js";
 import _poolTranscendentDragon from "../pool/transcendent-dragon.js";
 import _poolTransformingFlourish from "../pool/transforming-flourish.js";
 import _poolTransmutationFont from "../pool/transmutation-font.js";
+import _poolTransporterMalfunction from "../pool/transporter-malfunction.js";
 import _poolTreasuredFind from "../pool/treasured-find.js";
 import _poolTreeOfTales from "../pool/tree-of-tales.js";
 import _poolTrenchStalker from "../pool/trench-stalker.js";
@@ -1769,6 +1770,7 @@ const shard: CardShard = {
     _poolTranscendentDragon,
     _poolTransformingFlourish,
     _poolTransmutationFont,
+    _poolTransporterMalfunction,
     _poolTreasuredFind,
     _poolTreeOfTales,
     _poolTrenchStalker,

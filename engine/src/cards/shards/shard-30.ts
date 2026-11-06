@@ -322,6 +322,7 @@ import _poolFuelTheFlames from "../pool/fuel-the-flames.js";
 import _poolFungusElemental from "../pool/fungus-elemental.js";
 import _poolFuriousForebear from "../pool/furious-forebear.js";
 import _poolFurtiveAnalyst from "../pool/furtive-analyst.js";
+import _poolGabrielLorcaMirrorMenace from "../pool/gabriel-lorca-mirror-menace.js";
 import _poolGaeasAnthem from "../pool/gaeas-anthem.js";
 import _poolGaladhrimGuide from "../pool/galadhrim-guide.js";
 import _poolGalianBeast from "../pool/galian-beast.js";
@@ -1305,6 +1306,7 @@ const shard: CardShard = {
     _poolFungusElemental,
     _poolFuriousForebear,
     _poolFurtiveAnalyst,
+    _poolGabrielLorcaMirrorMenace,
     _poolGaeasAnthem,
     _poolGaladhrimGuide,
     _poolGalianBeast,
