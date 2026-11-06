@@ -31095,6 +31095,7 @@ import _tokensSoldierTokenRed11 from "./tokens/soldier-token-red-1-1.js";
 import _tokensSoldierTokenWhite22 from "./tokens/soldier-token-white-2-2.js";
 import _tokensSoldierToken from "./tokens/soldier-token.js";
 import _tokensSorcererRoleToken from "./tokens/sorcerer-role-token.js";
+import _tokensSpacecraftIllusionToken from "./tokens/spacecraft-illusion-token.js";
 import _tokensSparkElementalToken from "./tokens/spark-elemental-token.js";
 import _tokensSpawnTokenSpawningPit from "./tokens/spawn-token-spawning-pit.js";
 import _tokensSpawnToken from "./tokens/spawn-token.js";
@@ -31154,6 +31155,7 @@ import _tokensTreefolkTokenReachLands from "./tokens/treefolk-token-reach-lands.
 import _tokensTreefolkTokenSylvanOffering from "./tokens/treefolk-token-sylvan-offering.js";
 import _tokensTreefolkToken from "./tokens/treefolk-token.js";
 import _tokensTreefolkWarriorToken from "./tokens/treefolk-warrior-token.js";
+import _tokensTribbleToken from "./tokens/tribble-token.js";
 import _tokensTriskelaviteToken from "./tokens/triskelavite-token.js";
 import _tokensTrollWarriorToken from "./tokens/troll-warrior-token.js";
 import _tokensTuktukTheReturned from "./tokens/tuktuk-the-returned.js";
@@ -62352,6 +62354,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensSoldierTokenWhite22,
   _tokensSoldierToken,
   _tokensSorcererRoleToken,
+  _tokensSpacecraftIllusionToken,
   _tokensSparkElementalToken,
   _tokensSpawnTokenSpawningPit,
   _tokensSpawnToken,
@@ -62411,6 +62414,7 @@ export const TOKEN_CARDS: readonly CardDefinition[] = [
   _tokensTreefolkTokenSylvanOffering,
   _tokensTreefolkToken,
   _tokensTreefolkWarriorToken,
+  _tokensTribbleToken,
   _tokensTriskelaviteToken,
   _tokensTrollWarriorToken,
   _tokensTuktukTheReturned,
@@ -93610,6 +93614,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/soldier-token-white-2-2": _tokensSoldierTokenWhite22,
   "tokens/soldier-token": _tokensSoldierToken,
   "tokens/sorcerer-role-token": _tokensSorcererRoleToken,
+  "tokens/spacecraft-illusion-token": _tokensSpacecraftIllusionToken,
   "tokens/spark-elemental-token": _tokensSparkElementalToken,
   "tokens/spawn-token-spawning-pit": _tokensSpawnTokenSpawningPit,
   "tokens/spawn-token": _tokensSpawnToken,
@@ -93669,6 +93674,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "tokens/treefolk-token-sylvan-offering": _tokensTreefolkTokenSylvanOffering,
   "tokens/treefolk-token": _tokensTreefolkToken,
   "tokens/treefolk-warrior-token": _tokensTreefolkWarriorToken,
+  "tokens/tribble-token": _tokensTribbleToken,
   "tokens/triskelavite-token": _tokensTriskelaviteToken,
   "tokens/troll-warrior-token": _tokensTrollWarriorToken,
   "tokens/tuktuk-the-returned": _tokensTuktukTheReturned,

@@ -1001,6 +1001,7 @@ import _tokensSmaug from "../tokens/smaug.js";
 import _tokensSoldierTokenRed11 from "../tokens/soldier-token-red-1-1.js";
 import _tokensSpiderToken21Reach from "../tokens/spider-token-2-1-reach.js";
 import _tokensStoneforgedBladeToken from "../tokens/stoneforged-blade-token.js";
+import _tokensTribbleToken from "../tokens/tribble-token.js";
 import _tokensWurmTokenBaruWurmspeaker from "../tokens/wurm-token-baru-wurmspeaker.js";
 
 const shard: CardShard = {
@@ -2005,6 +2006,7 @@ const shard: CardShard = {
     _tokensSoldierTokenRed11,
     _tokensSpiderToken21Reach,
     _tokensStoneforgedBladeToken,
+    _tokensTribbleToken,
     _tokensWurmTokenBaruWurmspeaker,
   ],
 };
