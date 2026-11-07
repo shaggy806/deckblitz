@@ -740,6 +740,7 @@
   "keyword:affinity",
   "condition:defending-player-life-rank",
   "stat:mana-spent-to-cast",
+  "stat:countered-spell-mana-spent",
   "effect:look-and-choose-leftover",
   "bug:transform-fixes",
   "effect:exile-library-all-but-bottom",

@@ -745,7 +745,9 @@ cards" is `{ powerOfTwo: "x" }`; 2⁰ = 1), its exponent capped at 52;
 `{ manaSpentOf: ref }` — how much mana was actually spent to cast the source
 or trigger object (Prossh: "X is the amount of mana spent to cast it";
 commander tax and {X} count, a free cast is 0, convoked creatures aren't
-mana);
+mana), or of a target spell, read as it last was on the stack once it has
+left (rule 608.2h — Mana Sculpt's delayed `{ manaSpentOf: 0 }` after
+countering it, as Mana Drain's `{ manaValueOf: 0 }`);
 `{ colorsSpentOf: ref }` — how many **colours** of mana were spent to cast it,
 converge (rule 207.2c — Painful Truths: `{ colorsSpentOf: "source" }`):
 colourless isn't one, mana for cost increases and additional costs counts,

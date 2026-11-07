@@ -776,7 +776,11 @@ export type EffectAmount =
    * Kher: "where X is the amount of mana spent to cast it"). Commander tax,
    * {X} and additional mana costs count; a free cast is 0, and so is mana a
    * creature paid for by convoke, which isn't mana (rule 702.51a). `0` for
-   * anything that wasn't cast.
+   * anything that wasn't cast. A target that was a spell when targeted and
+   * has left the stack since is read as it last was there (rule 608.2h):
+   * Mana Sculpt's "counter target spell … add an amount of {C} equal to the
+   * amount of mana spent to cast that spell at the beginning of your next
+   * main phase".
    *
    * `from` counts only the mana made by matching sources: "the amount of {S}
    * spent to cast this spell" (Graven Lore — rule 107.4h, mana from a snow

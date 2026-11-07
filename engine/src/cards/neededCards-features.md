@@ -3173,6 +3173,16 @@ Bob to draw a card"; the client names the player already). No new decision
 kind: each choice is the `choose-modes` a `choose-opponent` was. Proving
 card: Gluntch, the Bestower (its only card).
 
+### Mana spent on a countered spell — built 2026-11-07
+
+The need key `stat:countered-spell-mana-spent`: `{ manaSpentOf }` and
+`{ colorsSpentOf }` of a target that was a spell when targeted and has left
+the stack since read it as it last was there (rule 608.2h —
+`lastStackManaSpent`, as `manaValueOfTarget` reads Mana Drain's mana value);
+it read the cleared `manaSpent`, 0, before. A delayed trigger keeps the
+targets, so "at the beginning of your next main phase" reads it then.
+Proving card: Mana Sculpt (its only card).
+
 ### Separating into piles — built 2026-10-29
 
 The need-keys Phase 2 family `decision:separate-into-piles` (features only).

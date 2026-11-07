@@ -33205,9 +33205,21 @@ export class Game {
           return spell.lastStackManaSpent;
         }
         const lki = lastKnownOf(target);
-        return lki !== undefined
-          ? (lki.manaSpent ?? 0)
-          : (this.state.objects[target.object]?.manaSpent ?? 0);
+        if (lki !== undefined) return lki.manaSpent ?? 0;
+        // A spell target gone from the stack since (countered — Mana
+        // Sculpt's "the amount of mana spent to cast that spell", read at
+        // your next main phase): as it last existed there (608.2h), the way
+        // `manaValueOfTarget` reads Mana Drain's.
+        const object = this.state.objects[target.object];
+        if (
+          object !== undefined &&
+          object.zone !== "stack" &&
+          expectedZoneOf(target) === "stack" &&
+          object.lastStackManaSpent !== undefined
+        ) {
+          return object.lastStackManaSpent;
+        }
+        return object?.manaSpent ?? 0;
       },
       manaSpentFromOf: (target) => {
         if (target.kind !== "object") return [];
@@ -33228,9 +33240,18 @@ export class Game {
           return spell.lastStackManaSpentColors.length;
         }
         const lki = lastKnownOf(target);
-        return (
-          (lki !== undefined ? lki.manaSpentColors : this.state.objects[target.object]?.manaSpentColors)?.length ?? 0
-        );
+        if (lki !== undefined) return lki.manaSpentColors?.length ?? 0;
+        // A spell target gone from the stack since, as `manaSpentOf`.
+        const object = this.state.objects[target.object];
+        if (
+          object !== undefined &&
+          object.zone !== "stack" &&
+          expectedZoneOf(target) === "stack" &&
+          object.lastStackManaSpentColors !== undefined
+        ) {
+          return object.lastStackManaSpentColors.length;
+        }
+        return object?.manaSpentColors?.length ?? 0;
       },
       // Rule 903.8: only a commander's owner casts it from the command zone,
       // and the count is kept under that player, by name.
