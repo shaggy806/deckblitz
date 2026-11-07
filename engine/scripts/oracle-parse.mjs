@@ -2941,6 +2941,28 @@ export function parseSentence(sentence, ctx) {
       count: 1,
     };
   }
+  // Dance with Calamity: "As many times as you choose, you may exile the top
+  // card of your library." — a `may`, then "again?" after each card; and "If
+  // the total mana value of the cards exiled this way is 13 or less, you may
+  // cast any number of spells from among those cards without paying their
+  // mana costs." — read over every card the repeat exiled.
+  if (/^shuffle your library\.$/i.test(s)) return { kind: "shuffle-library" };
+  if (/^as many times as you choose, you may exile the top card of your library\.$/i.test(s)) {
+    return {
+      kind: "may",
+      prompt: "Exile the top card of your library?",
+      effect: { kind: "repeat", mayAgain: true, effect: { kind: "exile-from-library", amount: 1 } },
+    };
+  }
+  if (
+    (M = /^if the total mana value of the cards exiled this way is (\d+) or (less|greater), you may cast any number of spells from among those cards without paying their mana costs\.$/i.exec(s))
+  ) {
+    return {
+      kind: "conditional",
+      condition: { kind: "amounts", left: { thisWay: "exiled", sumOf: "mana-value" }, op: M[2].toLowerCase() === "less" ? "lte" : "gte", right: Number(M[1]) },
+      then: { kind: "cast-now", from: "exiled-this-way", repeat: true, free: true },
+    };
+  }
   // "For each creature, its controller sacrifices it unless they pay X life"
   // (Killing Wave), "… sacrifices a permanent of their choice unless they pay
   // {1}" (Fade Away), "For each Spirit, return it to its owner's hand unless

@@ -492,6 +492,15 @@ over the token made this way that isn't a creature (`thisWay: "created"`,
 "You may pay {N}. If you do, create a token that's a copy of …" with that sentence
 after it. Key: effect:token-copy-if-noncreature-animate.
 
+### "If the total mana value of the cards exiled this way is 13 or less" — built 2026-11-07
+
+Flagged Build ASAP: Dance with Calamity (4151). No engine code: the `amounts`
+condition compares the `thisWay` sum (`{ thisWay: "exiled", sumOf: "mana-value" }`)
+with 13, read once the `repeat` (a `may` around one with `mayAgain`, "as many times as
+you choose") is done, over every pass; `cast-now` with `repeat` and `free` casts from
+among them. The scaffolder reads the whole card, "Shuffle your library." included.
+Key: condition:this-way-total-mana-value.
+
 ### Every nonbasic land type, and base P/T set to your life total — built 2026-11-06
 
 Flagged Build ASAP (B270): Planar Nexus (2625) and Aettir and Priwen (2672).

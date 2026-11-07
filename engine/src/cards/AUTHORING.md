@@ -6538,7 +6538,7 @@ clause (section 9):
   the resolving triggered ability (its `{ triggerValue: true }` amount):
   "if you won" off a `clashes` trigger is `{ op: "gte", n: 1 }` (Rebellion
   of the Flamekin, Entangling Trap). Only a resolution can answer it.
-- `{ kind: "amounts", left, op, right }` — one amount against another, unclamped, as a trigger's intervening-if or in a `conditional`: "if the amount of mana spent to cast that spell is greater than Liberator's power" (`{ manaSpentOf: "trigger-object" }`, `"gt"`, `{ powerOf: "source" }`), ED-E, Lonesome Eyebot's attackers against its quest counters. False in a static ability.
+- `{ kind: "amounts", left, op, right }` — one amount against another, unclamped, as a trigger's intervening-if or in a `conditional`: "if the amount of mana spent to cast that spell is greater than Liberator's power" (`{ manaSpentOf: "trigger-object" }`, `"gt"`, `{ powerOf: "source" }`), ED-E, Lonesome Eyebot's attackers against its quest counters. False in a static ability. A "this way" total is one of these too: Dance with Calamity's "if the total mana value of the cards exiled this way is 13 or less" is `left: { thisWay: "exiled", sumOf: "mana-value" }, op: "lte", right: 13` — after a `repeat`, over every pass (its "as many times as you choose, you may exile the top card" is a `may` around a `repeat` with `mayAgain: true`); the scaffolder reads both sentences, and "Shuffle your library." (`shuffle-library`).
 - `{ kind: "x", compare }` — "if X is 10 or more" (Finale of Devastation:
   `{ op: "gte", n: 10 }`): the X the resolving spell or ability was cast or
   activated with. A resolution answers it, and so does a triggered ability's

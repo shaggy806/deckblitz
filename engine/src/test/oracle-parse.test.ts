@@ -16653,6 +16653,30 @@ describe("flagged cards' lines (2026-11-07): target player adds mana, a host's t
       },
     });
   });
+
+  it("Dance with Calamity whole: shuffle, exile as many times as you choose, cast free under a total", () => {
+    const face = parseFace({
+      name: "Dance with Calamity",
+      type_line: "Sorcery",
+      oracle_text:
+        "Shuffle your library. As many times as you choose, you may exile the top card of your library. If the total mana value of the cards exiled this way is 13 or less, you may cast any number of spells from among those cards without paying their mana costs.",
+      mana_cost: "{7}{R}",
+      colors: ["R"],
+    });
+    expect(face.complete).toBe(true);
+    expect(face.effect).toMatchObject({
+      kind: "sequence",
+      effects: [
+        { kind: "shuffle-library" },
+        { kind: "may", effect: { kind: "repeat", mayAgain: true, effect: { kind: "exile-from-library", amount: 1 } } },
+        {
+          kind: "conditional",
+          condition: { kind: "amounts", left: { thisWay: "exiled", sumOf: "mana-value" }, op: "lte", right: 13 },
+          then: { kind: "cast-now", from: "exiled-this-way", repeat: true, free: true },
+        },
+      ],
+    });
+  });
 });
 
 describe("one play shared among cards (2026-11-07): a spell from among milled cards, one of the exiled cards", () => {
