@@ -7771,6 +7771,18 @@ export type EffectSpec =
       readonly amount: EffectAmount;
     }
   | {
+      /** "There is an additional end step after this step" (Y'shtola Rhul,
+       * rule 500.9): another end step straight after the end step under way,
+       * ahead of any added after it earlier, with no other step added along —
+       * the cleanup step comes once, after the last (its ruling). "At the
+       * beginning of the end step" triggers again in it, and a delayed "at the
+       * beginning of the next end step" made during this one fires in it (the
+       * rulings). Nothing outside an end step, the only place its card
+       * resolves it. "If it's the first end step of the turn" is a
+       * `turn-structure` condition's `endStep: 1`. */
+      readonly kind: "additional-end-step";
+    }
+  | {
       /** "N damage divided as you choose among any number of targets"
        * (Magma Opus): each target of the group starting at slot `from` is
        * dealt its share of the spell's `division`. A target that has become
@@ -12831,6 +12843,8 @@ export interface EffectApi {
   limitBlockers(players: readonly PlayerId[], most: number): void;
   /** See the `additional-upkeep-steps` {@link EffectSpec}. */
   additionalUpkeeps(count: number): void;
+  /** See the `additional-end-step` {@link EffectSpec}. */
+  additionalEndStep(): void;
   /** See the `additional-land-drop` {@link EffectSpec}. */
   additionalLandDrops(amount: number): void;
   /** Untap every battlefield permanent matching `filter`. */
@@ -19213,6 +19227,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     case "additional-upkeep-steps":
       ctx.additionalUpkeeps(amountValue(spec.amount, ctx));
+      return;
+    case "additional-end-step":
+      ctx.additionalEndStep();
       return;
     case "additional-land-drop":
       ctx.additionalLandDrops(amountValue(spec.amount, ctx));

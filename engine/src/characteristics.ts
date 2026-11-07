@@ -1315,6 +1315,9 @@ function evalStaticCondition(
       ) {
         return false;
       }
+      if (condition.endStep !== undefined && (step !== "end" || (state.turn.endSteps ?? 0) !== condition.endStep)) {
+        return false;
+      }
       return true;
     }
     case "damage-dealt-this-turn": {

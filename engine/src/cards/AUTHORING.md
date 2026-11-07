@@ -1962,6 +1962,14 @@ recent first (500.8), so an additional combat made during end of combat comes
 before the upkeeps. Nothing is added on another player's turn (500.10a), and
 only a combat phase can be "this phase" — use it from a combat trigger.
 
+`additional-end-step` (no fields) is Y'shtola Rhul's "there is an additional
+end step after this step" (rule 500.9): another end step straight after the
+one under way, no cleanup step between (its ruling), so "until end of turn"
+lasts through it. "At the beginning of the end step" triggers again in it, and
+a delayed "next end step" made during the first fires in it. Only from an end
+step; "if it's the first end step of the turn" is a `conditional` on
+`{ kind: "turn-structure", endStep: 1 }`.
+
 ### Format extras
 
 **Rolling dice** (rule 706) is `{ kind: "roll-dice", sides, count?, modifier?, table?, then? }` (`modifier` is signed — The Deck of Many Things' "subtract the number of cards in your hand" is `{ product: [{ cardsInHand: "you" }, -1] }`, and a row with a low `min` and `max: 0` is "0 or less"; a row's `mayRollAgain: true` is its "You may roll again", Delina, Wild Mage, rule 706.3c):
@@ -6274,7 +6282,7 @@ clause (section 9):
 - `{ kind: "opponent-lost-life-this-turn" }` — Theater of Horrors. Reads the
   per-player `lostLifeThisTurn` flag, set in `changeLife` so it catches damage
   and drain alike.
-- `{ kind: "turn-structure", steps?, duringCombat?, combatPhase?, mainPhase?, afterCombat? }` (`afterCombat`: "cast this spell only after combat", rule 506.8d, the turn's first combat phase over)
+- `{ kind: "turn-structure", steps?, duringCombat?, combatPhase?, mainPhase?, endStep?, afterCombat? }` (`afterCombat`: "cast this spell only after combat", rule 506.8d, the turn's first combat phase over; `endStep: 1`: "if it's the first end step of the turn", Y'shtola Rhul, counted in `TurnState.endSteps`)
   — where the turn is: during one of `steps`, during a combat phase, during
   the Nth combat phase of the turn (Karlach's "if it's the first combat phase
   of the turn" is `combatPhase: 1`), or the Nth main phase ("your second main

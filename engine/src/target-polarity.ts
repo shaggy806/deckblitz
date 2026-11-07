@@ -763,6 +763,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "end-the-combat-phase": none,
   "limit-blockers": none,
   "additional-upkeep-steps": none,
+  "additional-end-step": none,
   "additional-land-drop": none,
   // Your own library thinned, or an opponent's known top undone.
   "shuffle-library": (n, v) => v.touch(n.target, "either", MINOR),

@@ -3378,6 +3378,14 @@ export interface TurnState {
    * (Karlach) and "your second main phase". Reset as each turn begins. */
   combatPhases?: number;
   mainPhases?: number;
+  /** How many end steps have begun this turn, the one under way included —
+   * for "if it's the first end step of the turn" (Y'shtola Rhul) and for a
+   * delayed "next end step" made during one of them. Reset as each turn
+   * begins. */
+  endSteps?: number;
+  /** Additional end steps owed straight after the end step under way (rule
+   * 500.9 — the `additional-end-step` effect). */
+  extraEndSteps?: number;
   /** The mark of the additional combat phase under way, if it has one — see
    * `AddedPhase.mark`. */
   addedCombat?: number;
@@ -5260,6 +5268,10 @@ export interface DelayedTrigger {
   /** Created during that turn's end step (or cleanup) — so "the next end
    * step" means the *following* turn's, not the one it was made in. */
   readonly createdDuringEndStep: boolean;
+  /** Made during an end step: which of the turn's end steps
+   * (`TurnState.endSteps`), so an additional end step that begins after it
+   * is "the next end step" (Y'shtola Rhul's ruling). */
+  readonly createdInEndStep?: number;
   /** The object whose ability this is — `ctx.source` on resolution, and what
    * the log names it after. May well have left the battlefield by then; that
    * is normal and fine (rule 603.7e). */

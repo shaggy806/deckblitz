@@ -8752,6 +8752,8 @@ export class Game {
     delete this.state.extraMainPhases;
     delete this.state.turn.combatPhases;
     delete this.state.turn.mainPhases;
+    delete this.state.turn.endSteps;
+    delete this.state.turn.extraEndSteps;
     delete this.state.turn.addedCombat;
     delete this.state.extraCombatMarks;
     delete this.state.combatChoices;
@@ -9135,6 +9137,7 @@ export class Game {
       }
     }
     if (isMainPhase(step)) this.state.turn.mainPhases = (this.state.turn.mainPhases ?? 0) + 1;
+    if (step === "end") this.state.turn.endSteps = (this.state.turn.endSteps ?? 0) + 1;
     // Mana empties as each step and phase ends (rule 500.5), except units
     // whose source said otherwise — Savage Ventmaw's "you don't lose this
     // mana as steps and phases end". That permission is for the turn only, so
@@ -9450,6 +9453,7 @@ export class Game {
     delete this.state.turn.addedUpkeep;
     delete this.state.turn.endsAfterAddedCombat;
     delete this.state.turn.cleanupHadPriority;
+    delete this.state.turn.extraEndSteps;
     this.enterStep("cleanup");
   }
 
@@ -9555,6 +9559,16 @@ export class Game {
     if (this.state.turn.step === "postcombat-main" && (this.state.extraMainPhases ?? 0) > 0) {
       this.state.extraMainPhases = (this.state.extraMainPhases ?? 0) - 1;
       this.enterStep("postcombat-main");
+      return;
+    }
+    // "There is an additional end step after this step" (rule 500.9): another
+    // end step, and no other step with it — the cleanup step waits for the
+    // last (Y'shtola Rhul's rulings).
+    if (this.state.turn.step === "end" && (this.state.turn.extraEndSteps ?? 0) > 0) {
+      const owed = (this.state.turn.extraEndSteps ?? 0) - 1;
+      if (owed > 0) this.state.turn.extraEndSteps = owed;
+      else delete this.state.turn.extraEndSteps;
+      this.enterStep("end");
       return;
     }
     // A player got priority in this cleanup step: another one begins (rule
@@ -37130,6 +37144,12 @@ export class Game {
         }));
         (this.state.phasesAfterThisCombat ??= []).unshift(...added);
       },
+      // "After this step": only from an end step, the one place its card
+      // resolves it (rule 500.9).
+      additionalEndStep: () => {
+        if (this.state.turn.step !== "end") return;
+        this.state.turn.extraEndSteps = (this.state.turn.extraEndSteps ?? 0) + 1;
+      },
       additionalLandDrops: (amount) => {
         const seat = this.state.players[controller];
         seat.extraLandsThisTurn = (seat.extraLandsThisTurn ?? 0) + amount;
@@ -48780,6 +48800,7 @@ export class Game {
       createdOnTurn: this.state.turn.number,
       createdDuringEndStep:
         this.state.turn.step === "end" || this.state.turn.step === "cleanup",
+      ...(this.state.turn.step === "end" ? { createdInEndStep: this.state.turn.endSteps ?? 1 } : {}),
       source,
       sourceName: object === undefined ? "a spell" : printedCardName(object),
       ...(object?.isCopy === true && typeof when === "object" && "whenever" in when ? { sourceCopy: { ...object } } : {}),
@@ -48825,8 +48846,13 @@ export class Game {
     const whose = trigger.turnOf ?? trigger.controller;
     const laterTurn = this.state.turn.number > trigger.createdOnTurn;
     // This turn's end step still counts, unless the trigger was created
-    // during it (or in cleanup) — then "the next end step" is next turn's.
-    const endStepOk = laterTurn || !trigger.createdDuringEndStep;
+    // during it (or in cleanup) — then "the next end step" is next turn's, or
+    // an additional end step that begins after the one it was made in (rule
+    // 500.9 — Y'shtola Rhul's ruling).
+    const endStepOk =
+      laterTurn ||
+      !trigger.createdDuringEndStep ||
+      (trigger.createdInEndStep !== undefined && (this.state.turn.endSteps ?? 0) > trigger.createdInEndStep);
     switch (trigger.at) {
       case "next-end-step":
         return step === "end" && endStepOk;

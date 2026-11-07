@@ -610,6 +610,7 @@
   "keyword:toxic",
   "keyword:casualty",
   "effect:additional-upkeep-steps",
+  "effect:additional-end-step",
   "keyword:multikicker",
   "keyword:delve",
   "decision:copy-new-targets",

@@ -4732,6 +4732,14 @@ as it resolves, and how a card of two types uses the permissions needs its rulin
 hold. Plargg and Nassari needs `new:opponent-chooses-exiled`, Wand of Wonder the die's rows around an
 exile-until per opponent, Baron Helmut Zemo and Rod of Absorption their other keys.
 
+### An additional end step — built 2026-11-07
+
+Key `effect:additional-end-step`. The `additional-end-step` effect (rule 500.9) owes another end step straight
+after the one under way (`TurnState.extraEndSteps`, read by `Game.endStep`), with no cleanup between;
+`TurnState.endSteps` counts the turn's end steps for `turn-structure`'s `endStep` ("if it's the first end step
+of the turn"), and a delayed "next end step" made during one (`DelayedTrigger.createdInEndStep`) fires in a
+later one that turn. Proving card: Y'shtola Rhul.
+
 ### A discarded card exiled with the source, then one taken back by type — found built 2026-11-07
 
 Key `effect:linked-exile-from-discard`: no engine code. A `may` over `exile` with `target: "trigger-object"`,

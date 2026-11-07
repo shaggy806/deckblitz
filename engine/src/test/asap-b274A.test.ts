@@ -248,3 +248,63 @@ describe("Currency Converter", () => {
   });
 });
 
+describe("Y'shtola Rhul — an additional end step (rule 500.9)", () => {
+  /** The steps begun since `from` events in, in order. */
+  const stepsSince = (game: Game, from: number): string[] =>
+    game.state.eventLog.slice(from).flatMap((e) => (e.type === "step-began" ? [e.step] : []));
+  const stints = (game: Game, id: ObjectId): number => game.state.objects[id].zoneChangeCount ?? 0;
+
+  it("flickers in the first end step, then a second end step follows, where it triggers again but adds none", () => {
+    const { game, a } = table();
+    spawn(game, "Y'shtola Rhul");
+    const bears = spawn(game, "Grizzly Bears");
+    const before = stints(game, bears);
+    pickTargets(a, bears);
+    const from = game.state.eventLog.length;
+    nextTurn(game);
+    const steps = stepsSince(game, from);
+    const cleanup = steps.indexOf("cleanup");
+    expect(steps.slice(cleanup - 2, cleanup + 1)).toEqual(["end", "end", "cleanup"]);
+    expect(steps.filter((s) => s === "end")).toHaveLength(2);
+    // Exiled and returned once in each end step.
+    expect(zone(game, bears)).toBe("battlefield");
+    expect(stints(game, bears)).toBe(before + 4);
+  });
+
+  it("an illegal target: the ability doesn't resolve, and there's no additional end step", () => {
+    const { game, a } = table();
+    spawn(game, "Y'shtola Rhul");
+    const bears = spawn(game, "Grizzly Bears");
+    pickTargets(a, bears);
+    game.advanceUntil((s) => s.turn.step === "end" && s.zones.shared.stack.length === 1);
+    const from = game.state.eventLog.length;
+    destroy(game, bears);
+    nextTurn(game);
+    expect(stepsSince(game, from).filter((s) => s === "end")).toHaveLength(0);
+  });
+
+  it("a delayed 'at the beginning of the next end step' made during the first fires in the second", () => {
+    const { game, a } = table();
+    spawn(game, "Y'shtola Rhul");
+    const bears = spawn(game, "Grizzly Bears");
+    pickTargets(a, bears);
+    toStep(game, "end");
+    settle(game);
+    expect(game.state.turn.step).toBe("end");
+    const cards = hand(game).length;
+    game.debugApplyEffect(A, { kind: "delayed-trigger", at: "next-end-step", effect: { kind: "draw", amount: 1 }, text: "draw" });
+    nextTurn(game);
+    expect(hand(game).length).toBe(cards + 1);
+  });
+
+  it("without an additional end step, one made during the end step waits for the next turn's", () => {
+    const { game } = table();
+    toStep(game, "end");
+    const cards = hand(game).length;
+    game.debugApplyEffect(A, { kind: "delayed-trigger", at: "next-end-step", effect: { kind: "draw", amount: 1 }, text: "draw" });
+    nextTurn(game);
+    expect(hand(game).length).toBe(cards);
+    expect(game.state.turn.number).toBe(2);
+  });
+});
+

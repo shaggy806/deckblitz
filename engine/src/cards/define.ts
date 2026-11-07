@@ -1337,6 +1337,10 @@ export type StaticCondition =
       readonly duringCombat?: boolean;
       readonly combatPhase?: number;
       readonly mainPhase?: number;
+      /** "If it's the **first end step** of the turn" (Y'shtola Rhul:
+       * `endStep: 1`): in an end step, this one of the turn's — an additional
+       * end step counts as the next (rule 500.9). */
+      readonly endStep?: number;
       /** "Cast this spell only after combat" (rule 506.8d): the turn's first
        * combat phase has ended. Never in a turn that hasn't had one. */
       readonly afterCombat?: true;
