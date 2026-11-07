@@ -11470,4 +11470,22 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: [] },
     }),
   ),
+  // --- Copying everything you control on the stack (2026-11-07) -------------
+  preset(
+    'Ulalek, Fused Atrocity: pay {C}{C} to copy your Eldrazi spell',
+    board({
+      you: { bf: ['Ulalek, Fused Atrocity', 'Wastes*4', 'Island*2'], hand: ['Dimensional Infiltrator'] },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    'Ulalek, Fused Atrocity: choosing which spell is copied first, four players',
+    board({
+      you: {
+        bf: ['Ulalek, Fused Atrocity', 'Prodigal Pyromancer', 'Wastes*4', 'Island*2', 'Mountain'],
+        hand: ['Lightning Bolt', 'Dimensional Infiltrator'],
+      },
+      opp: [{ human: true, bf: ['Forest*2'], hand: ['Fog*2'] }, {}, {}],
+    }),
+  ),
 ]

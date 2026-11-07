@@ -7629,3 +7629,14 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Ancient Adamantoise: its damage stays into the next turn
 - **Do:** Cast Lightning Bolt on Ancient Adamantoise, then click No attacks and let the turn pass to Bob.
 - **Expect:** On Bob's turn Ancient Adamantoise still shows its 3 damage ("8/20 −3").
+
+## Copying everything you control on the stack (2026-11-07)
+
+### Ulalek, Fused Atrocity: pay {C}{C} to copy your Eldrazi spell
+- **Do:** Cast Dimensional Infiltrator. When Ulalek's ability asks, pay {C}{C}.
+- **Expect:** The offer reads "Pay {C}{C} to copy all spells and other abilities you control?". Two more lands tap, and you end with two Dimensional Infiltrators, one of them a token.
+
+### Ulalek, Fused Atrocity: choosing which spell is copied first, four players
+- **Do:** Cast Lightning Bolt at Carol; as Bob, cast Fog. Back as Alice, activate Prodigal Pyromancer at Dave; as Bob, cast the other Fog. Back as Alice, cast Dimensional Infiltrator. Pay {C}{C}, pick "Copy Lightning Bolt (targeting an opponent) next", and keep each copy's targets.
+- **Expect:** You're asked which of your two spells is copied first, each named; then the Pyromancer's ability is copied too. Carol takes 6, Dave 2, and you end with two Dimensional Infiltrators.
+- **Not a bug:** Ulalek's own ability isn't copied, and Bob's Fogs aren't (they aren't yours).

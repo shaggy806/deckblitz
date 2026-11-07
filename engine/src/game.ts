@@ -43380,8 +43380,10 @@ export class Game {
       const aimed = (object.targets ?? []).flatMap((t) =>
         t === null || t === undefined
           ? []
-          : t.kind === "player"
-            ? [String(t.player)]
+          : // A seat's id isn't its player's name: the client shows no
+            // name here, so "you" or "an opponent".
+            t.kind === "player"
+            ? [t.player === controller ? "you" : "an opponent"]
             : this.state.objects[t.object] !== undefined
               ? [nameOf(this.state.objects[t.object])]
               : [],
@@ -43397,7 +43399,18 @@ export class Game {
         what === "spells" ? 1 : (object.stackCount ?? 1) - resolving.filter((r) => r === id).length;
       for (let i = 0; i < instances; i += 1) out.push({ id, name: label(object) });
     }
-    return out;
+    // Two different objects that read alike are told apart by their place,
+    // counted from the bottom of the stack.
+    const seen = new Map<string, ObjectId[]>();
+    for (const o of out) {
+      const ids = seen.get(o.name) ?? [];
+      if (!ids.includes(o.id)) ids.push(o.id);
+      seen.set(o.name, ids);
+    }
+    return out.map((o) => {
+      const ids = seen.get(o.name) ?? [];
+      return ids.length > 1 ? { id: o.id, name: `${o.name} (${ids.indexOf(o.id) + 1} of ${ids.length})` } : o;
+    });
   }
 
   /** Twincast (rule 707.10): copy the spell `target`. */
