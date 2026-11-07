@@ -7190,6 +7190,13 @@ export type EffectSpec =
        * impulse permission lasting the turn. Rule 701.17d: each card, if a
        * replacement milled more than one. */
       readonly cards?: "milled-this-way";
+      /** "Each player mills a card. … Until end of turn, you may cast **a
+       * spell from among** those cards" (Locke, Treasure Hunter), with
+       * `cards` or `filter`: this many plays in all, shared among the cards it
+       * gives the permission (`GameState.permissionGroups`) — wherever each
+       * is, a graveyard or the exile a replacement put it in — and none of
+       * them may be played once they're used. */
+      readonly upTo?: number;
       /** "You may **play** that card": a land card too, played with the land
        * drop (rule 305.2); unset, casts only. */
       readonly play?: true;
@@ -10176,6 +10183,11 @@ export type EffectSpec =
       /** "Once each turn, you may cast a spell … from among" them: one cast
        * a turn across every card this source exiled with the permission. */
       readonly oncePerTurn?: boolean;
+      /** "Until your next end step, you may play **one of** those cards"
+       * (Unlucky Witness): this many plays in all, shared among the cards
+       * this exiled (`GameState.permissionGroups`) — one played, and with
+       * none left, none of the others may be. */
+      readonly upTo?: number;
       /** "Look at the top card of that player's library, then exile it
        * **face down**" (Edward Kenway): the cards are exiled face down
        * (rule 406.3), and only the controller may look at them. */
@@ -12058,8 +12070,18 @@ export interface EffectApi {
    * gets the same permission there, for the turn. */
   grantGraveyardCast(
     target: TargetRef,
-    terms?: { readonly free?: true; readonly exileAfter?: true; readonly play?: true; readonly orExiled?: true },
+    terms?: {
+      readonly free?: true;
+      readonly exileAfter?: true;
+      readonly play?: true;
+      readonly orExiled?: true;
+      /** The shared plays it counts against — from `newPermissionGroup`. */
+      readonly group?: number;
+    },
   ): void;
+  /** A new `GameState.permissionGroups` entry of `left` plays, for the
+   * permissions this effect is about to give: its id. */
+  newPermissionGroup(left: number): number;
   /** `a` and `b` (both creatures) fight; with `oneSided` only `a` deals,
    * to a creature or a planeswalker. */
   fight(a: TargetRef, b: TargetRef, oneSided: boolean): void;
@@ -12426,6 +12448,8 @@ export interface EffectApi {
       readonly payLifeManaValue?: true;
       readonly whileSource?: boolean;
       readonly oncePerTurn?: boolean;
+      /** See the effect's `upTo`. */
+      readonly upTo?: number;
       /** Exiled face down, for the controller's eyes only (rule 406.3). */
       readonly faceDown?: boolean;
       readonly spendAs?: SpendAs;
@@ -17537,14 +17561,22 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ...(spec.play === true ? { play: true as const } : {}),
       };
       if (spec.cards === "milled-this-way") {
-        for (const entry of ctx.thisWay("milled")) {
-          ctx.grantGraveyardCast({ kind: "object", object: entry.object }, { ...terms, orExiled: true });
+        const milled = ctx.thisWay("milled");
+        // "A spell from among those cards": one play shared among them all.
+        const group = spec.upTo !== undefined && milled.length > 0 ? ctx.newPermissionGroup(spec.upTo) : undefined;
+        for (const entry of milled) {
+          ctx.grantGraveyardCast(
+            { kind: "object", object: entry.object },
+            { ...terms, orExiled: true, ...(group !== undefined ? { group } : {}) },
+          );
         }
         return;
       }
       if (spec.filter !== undefined) {
-        for (const card of ctx.graveyardMatching(ctx.controller, spec.filter)) {
-          ctx.grantGraveyardCast({ kind: "object", object: card }, terms);
+        const cards = ctx.graveyardMatching(ctx.controller, spec.filter);
+        const group = spec.upTo !== undefined && cards.length > 0 ? ctx.newPermissionGroup(spec.upTo) : undefined;
+        for (const card of cards) {
+          ctx.grantGraveyardCast({ kind: "object", object: card }, { ...terms, ...(group !== undefined ? { group } : {}) });
         }
         return;
       }
@@ -20440,6 +20472,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           : {}),
         ...(spec.whileSource === true ? { whileSource: true } : {}),
         ...(spec.oncePerTurn === true ? { oncePerTurn: true } : {}),
+        ...(spec.upTo !== undefined ? { upTo: spec.upTo } : {}),
         ...(spec.faceDown === true ? { faceDown: true } : {}),
         ...(spec.playedBy === "owner" ? { ownerPlays: true } : {}),
         choose: spec.choose,

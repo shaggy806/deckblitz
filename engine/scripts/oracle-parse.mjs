@@ -4076,8 +4076,8 @@ export function parseSentence(sentence, ctx) {
       then: { kind: "return-to-hand", target: 0, from: "exile" },
     };
   }
-  if ((m = re(`each opponent mills ${N} cards?`).exec(s))) {
-    return { kind: "mill", target: "each-opponent", amount: amount(m[1]) };
+  if ((m = re(`each (opponent|player) mills ${N} cards?`).exec(s))) {
+    return { kind: "mill", target: `each-${m[1].toLowerCase()}`, amount: amount(m[2]) };
   }
   if ((m = re(`scry ${N}`).exec(s))) return { kind: "scry", amount: amount(m[1]) };
   // "Target player scries 2": `scry` has no `who`, so the player does it (`as-player`).
@@ -7258,7 +7258,8 @@ export function parseSentence(sentence, ctx) {
  */
 function impulseWindowOf(sentence) {
   const verb = "(play|cast)";
-  const it = "(?:it|that card|them|those cards)";
+  // "One of those cards" (Unlucky Witness): one play shared among them.
+  const it = "(?:it|that card|them|those cards|(one of) those cards)";
   const words = [
     [`you may ${verb} ${it} this turn`, { duration: "end-of-turn" }],
     [`until end of turn, you may ${verb} ${it}`, { duration: "end-of-turn" }],
@@ -7287,7 +7288,7 @@ function impulseWindowOf(sentence) {
   ];
   for (const [pattern, window] of words) {
     const m = new RegExp(`^${pattern}\\.$`, "i").exec(sentence);
-    if (m !== null) return { ...window, play: m[1].toLowerCase() === "play" };
+    if (m !== null) return { ...window, play: m[1].toLowerCase() === "play", ...(m[2] !== undefined ? { upTo: 1 } : {}) };
   }
   return null;
 }
@@ -7333,8 +7334,17 @@ function impulseWindowAt(sentences, i, ctx) {
   const window = impulseWindowOf(next);
   if (window === null) return null;
   const { play, ...when } = window;
-  if (/^exile the top card of your library\.$/i.test(sentences[i])) {
+  if (/^exile the top card of your library\.$/i.test(sentences[i]) && when.upTo === undefined) {
     return { kind: "impulse-exile", amount: 1, ...when, ...(play ? {} : { castOnly: true }) };
+  }
+  // "Exile the top two cards of your library. Until your next end step, you
+  // may play one of those cards." (Unlucky Witness).
+  const several = /^exile the top (\w+) cards of your library\.$/i.exec(sentences[i]);
+  const count = several === null ? undefined : numberOf(several[1]);
+  if (when.upTo !== undefined) {
+    return typeof count === "number" && count > 1
+      ? { kind: "impulse-exile", amount: count, ...when, ...(play ? {} : { castOnly: true }) }
+      : null;
   }
   // Only the windows new to `exile`: the plain "this turn" reads go on through
   // whatever else those lines say.
@@ -10353,6 +10363,39 @@ export function parseEffect(text, outer) {
     ) {
       const play = /^you may play/i.test(sentence);
       const made = { kind: "grant-graveyard-cast", cards: "milled-this-way", ...(play ? { play: true } : {}) };
+      parsed.push(made);
+      hints.push({ sentence, effect: made });
+      continue;
+    }
+    // "Mill a card. If a land card was milled this way, you gain 1 life."
+    // (Lorehold Excavation, Saprazzan Breaker, Locke, Treasure Hunter).
+    const milledM =
+      parsed.some((effect) => effect?.kind === "mill")
+        ? /^if an? ([a-z]+) card (?:was|is) milled this way, (.+)$/i.exec(sentence)
+        : null;
+    const milledFilter = milledM === null ? null : parseTypePhrase(milledM[1], { cards: true });
+    const milledThen =
+      milledM === null || milledFilter === null || Object.keys(milledFilter).length === 0
+        ? null
+        : parseSentence(`${milledM[2][0].toUpperCase()}${milledM[2].slice(1)}`, ctx);
+    if (milledM !== null && milledThen !== null && !containsUndefined(milledThen)) {
+      const made = {
+        kind: "conditional",
+        condition: { kind: "this-way", what: "milled", filter: milledFilter },
+        then: milledThen,
+      };
+      parsed.push(made);
+      hints.push({ sentence, effect: made });
+      continue;
+    }
+    // "Each player mills a card. … Until end of turn, you may cast a spell
+    // from among those cards." (Locke, Treasure Hunter): one cast shared among
+    // the milled cards, wherever each went (rule 701.17c).
+    if (
+      /^until end of turn, you may cast a spell from among those cards\.$/i.test(sentence) &&
+      parsed.some((effect) => effect?.kind === "mill")
+    ) {
+      const made = { kind: "grant-graveyard-cast", cards: "milled-this-way", upTo: 1 };
       parsed.push(made);
       hints.push({ sentence, effect: made });
       continue;

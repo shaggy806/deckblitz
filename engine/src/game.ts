@@ -1774,6 +1774,9 @@ type GraveyardGrantOption = {
   /** "You may spend mana as though it were mana of any color to cast that
    * spell" (rule 609.4b): only for a spell cast under this permission. */
   readonly spendAs?: SpendAs;
+  /** The card's own permission's shared play (`GameState.permissionGroups`
+   * — Locke, Treasure Hunter), spent by playing under it. */
+  readonly group?: number;
 };
 
 /** One flashback a graveyard card has (rule 702.34) — see `Game.flashbacksOf`. */
@@ -9657,6 +9660,7 @@ export class Game {
   private untapStep(): void {
     const active = this.activePlayer;
     const untapping: ObjectId[] = [];
+    this.prunePermissionGroups();
     // "Lands you control don't untap during your next untap step" (Kefnet's
     // Last Word): whatever matches now, whenever it arrived.
     const skips = this.state.players[active]?.untapSkips ?? [];
@@ -13631,7 +13635,20 @@ export class Game {
     // Most Attitude), and what the permission on the card says of a land.
     let tapped = false;
     if (from === "exile") {
-      tapped = this.state.objects[cardId].impulse?.landsEnterTapped === true && this.impulsePlayable(player, cardId);
+      const impulse = this.state.objects[cardId].impulse;
+      const underImpulse = this.impulsePlayable(player, cardId);
+      tapped = impulse?.landsEnterTapped === true && underImpulse;
+      // "Play one of those cards" (Unlucky Witness): played under that
+      // permission — not under one that spends nothing — it's the one play.
+      if (
+        underImpulse &&
+        impulse?.group !== undefined &&
+        impulse.castOnly !== true &&
+        this.linkedCastGrantFor(player, cardId, face) === null &&
+        this.exilePermissionsFor(player, cardId, face).length === 0
+      ) {
+        this.spendPermissionGroup(impulse.group);
+      }
       this.spendLinkedCastGrant(player, cardId, face);
     }
     this.state.objects[cardId].face = face;
@@ -20013,6 +20030,8 @@ export class Game {
       const linked = this.state.objects[impulseUsed.source.id];
       if (linked !== undefined) linked.impulseCastOnTurn = this.state.turn.number;
     }
+    // "A spell from among those cards": the other cards' play too.
+    this.spendPermissionGroup(impulseUsed?.group);
     // A prototyped spell has its prototype characteristics on the stack, and
     // the permanent it becomes keeps them (rule 718.3b; `moveObject`).
     if (prototype) {
@@ -34766,6 +34785,7 @@ export class Game {
         }
       },
       grantGraveyardCast: (target, terms) => this.grantGraveyardCastByEffect(controller, target, terms, source),
+      newPermissionGroup: (left) => this.newPermissionGroup(left),
       putOnLibrary: (target, position) => {
         if (target.kind === "object") this.putOnLibrary(target.object, position);
       },
@@ -39612,6 +39632,7 @@ export class Game {
       readonly payLifeManaValue?: true;
       readonly whileSource?: boolean;
       readonly oncePerTurn?: boolean;
+      readonly upTo?: number;
       readonly faceDown?: boolean;
       readonly spendAs?: SpendAs;
       readonly sourceDid?: "attacked" | "lore-counter" | "attacked-with-a-token";
@@ -39666,6 +39687,8 @@ export class Game {
       ...(linked !== undefined ? { source: linked } : {}),
       ...(linked !== undefined && opts.whileSource === true ? { whileSource: true } : {}),
       ...(linked !== undefined && opts.oncePerTurn === true ? { oncePerTurn: true } : {}),
+      // "One of those cards": one play shared among them all.
+      ...(opts.upTo !== undefined ? { group: this.newPermissionGroup(opts.upTo) } : {}),
       ...(opts.spendAs !== undefined ? { spendAs: opts.spendAs } : {}),
     };
 
@@ -39973,9 +39996,20 @@ export class Game {
     const isLand = def.types.includes("land");
     const out: GraveyardGrantOption[] = [];
     const own = object.graveyardCastPermission;
+    // A play shared with other cards (Locke, Treasure Hunter's "a spell from
+    // among those cards") goes after the resolved permissions, which a
+    // driver that names none then plays under first: using it would take the
+    // play from the other cards too.
+    let ownShared: GraveyardGrantOption | undefined;
     // A land card only under a permission to *play* it (Tablet of Discovery).
-    if ((!isLand || own?.play === true) && own !== undefined && own.player === player && own.turn === this.state.turn.number) {
-      out.push({
+    if (
+      (!isLand || own?.play === true) &&
+      own !== undefined &&
+      own.player === player &&
+      own.turn === this.state.turn.number &&
+      this.permissionGroupOpen(own.group)
+    ) {
+      const option: GraveyardGrantOption = {
         grant: { source: card },
         permission:
           own.free === true || own.exileAfter === true
@@ -39985,7 +40019,10 @@ export class Game {
                 ...(own.exileAfter === true ? { exileAfterwards: true } : {}),
               }
             : null,
-      });
+        ...(own.group !== undefined ? { group: own.group } : {}),
+      };
+      if (own.group === undefined) out.push(option);
+      else ownShared = option;
     }
     // The card's own "you may cast this card from your graveyard as long as
     // …" (Gravecrawler — rule 113.6f) or "… by [costs]" (Wickerfolk
@@ -39998,6 +40035,7 @@ export class Game {
       !isLand &&
       (ownDef.castFromGraveyardIf !== undefined || self !== undefined) &&
       out.length === 0 &&
+      ownShared === undefined &&
       (selfIf === undefined || staticConditionMet(this.state, this.registry, object, selfIf, { includeSelf: true })) &&
       (self === undefined || this.graveyardCostsPayable(player, card, def, self))
     ) {
@@ -40026,6 +40064,7 @@ export class Game {
         });
       }
     });
+    if (ownShared !== undefined) out.push(ownShared);
     if (!mine) return out;
     for (const id of this.staticSourceIds()) {
       const grantor = this.state.objects[id];
@@ -40083,6 +40122,8 @@ export class Game {
    * it. */
   private spendGraveyardGrant(found: GraveyardGrantOption): void {
     const { grant, permission } = found;
+    // "A spell from among those cards": the other cards' play too.
+    this.spendPermissionGroup(found.group);
     // A resolved permission for one spell is used up by it.
     const effects = this.state.playerEffects;
     const index = found.playerEffect;
@@ -40107,7 +40148,13 @@ export class Game {
   private grantGraveyardCastByEffect(
     controller: PlayerId,
     target: TargetRef,
-    terms?: { readonly free?: true; readonly exileAfter?: true; readonly play?: true; readonly orExiled?: true },
+    terms?: {
+      readonly free?: true;
+      readonly exileAfter?: true;
+      readonly play?: true;
+      readonly orExiled?: true;
+      readonly group?: number;
+    },
     source?: ObjectId,
   ): void {
     if (target.kind !== "object") return;
@@ -40115,21 +40162,72 @@ export class Game {
     if (object === undefined) return;
     const { orExiled, ...kept } = terms ?? {};
     // A milled card exiled instead (Rest in Peace) is still "that card" (rule
-    // 701.17c): the same permission, from exile, for the turn.
+    // 701.17c): the same permission, from exile, for the turn — sharing its
+    // play with the graveyard's cards (`group`).
     if (orExiled === true && object.zone === "exile" && !object.isToken && source !== undefined) {
-      object.impulse = this.exilePermissionGrant(
-        { duration: "end-of-turn", ...(kept.play === true ? { play: true as const } : {}) },
-        controller,
-        source,
-        object.owner,
-        kept.play === true,
-      );
+      object.impulse = {
+        ...this.exilePermissionGrant(
+          { duration: "end-of-turn", ...(kept.play === true ? { play: true as const } : {}) },
+          controller,
+          source,
+          object.owner,
+          kept.play === true,
+        ),
+        ...(kept.group !== undefined ? { group: kept.group } : {}),
+      };
       invalidateComputedCache();
       return;
     }
     if (object.zone !== "graveyard") return;
     object.graveyardCastPermission = { player: controller, turn: this.state.turn.number, ...kept };
     this.emit({ type: "graveyard-cast-granted", object: target.object, player: controller });
+  }
+
+  /** A new `GameState.permissionGroups` entry of `left` plays, for the cards
+   * one effect is about to give a permission — "a spell from among those
+   * cards" (Locke, Treasure Hunter), "one of those cards" (Unlucky Witness).
+   * Its id: one past the highest in use, so never one a permission still
+   * names (an entry goes only once none does). */
+  private newPermissionGroup(left: number): number {
+    const groups = (this.state.permissionGroups ??= []);
+    const id = groups.reduce((most, g) => Math.max(most, g.id), 0) + 1;
+    groups.push({ id, left });
+    return id;
+  }
+
+  /** Whether a permission sharing `group` may still be used: a play left. */
+  private permissionGroupOpen(group: number | undefined): boolean {
+    if (group === undefined) return true;
+    return (this.state.permissionGroups?.find((g) => g.id === group)?.left ?? 0) > 0;
+  }
+
+  /** A card has been played under a permission sharing `group`: one play
+   * fewer for every card that shares it. */
+  private spendPermissionGroup(group: number | undefined): void {
+    const groups = this.state.permissionGroups;
+    if (group === undefined || groups === undefined) return;
+    const index = groups.findIndex((g) => g.id === group);
+    if (index < 0) return;
+    groups[index] = { id: group, left: Math.max(0, groups[index].left - 1) };
+    invalidateComputedCache();
+  }
+
+  /** As a turn begins: the shared plays no card's permission names any more
+   * (they lapsed, or the cards moved on — rule 400.7) go. */
+  private prunePermissionGroups(): void {
+    const groups = this.state.permissionGroups;
+    if (groups === undefined || groups.length === 0) return;
+    const named = new Set<number>();
+    for (const object of Object.values(this.state.objects)) {
+      const own = object.graveyardCastPermission;
+      const b = object.impulse?.group;
+      // A graveyard card's lasts its turn alone.
+      if (own?.group !== undefined && own.turn >= this.state.turn.number) named.add(own.group);
+      if (b !== undefined) named.add(b);
+    }
+    const kept = groups.filter((g) => named.has(g.id));
+    if (kept.length === 0) delete this.state.permissionGroups;
+    else this.state.permissionGroups = kept;
   }
 
   /** Whether a `playFromExile` static's "pay life equal to its mana value
@@ -40191,6 +40289,8 @@ export class Game {
     }
     if (object === undefined || impulse === undefined) return false;
     if (object.zone !== "exile" || impulse.player !== player) return false;
+    // "One of those cards": none once the shared play is used.
+    if (!this.permissionGroupOpen(impulse.group)) return false;
     // "Exiled with Maralen": a static ability of that permanent, so only
     // while it's still the same object on the battlefield (rule 400.7) —
     // and "once each turn" across all the cards it gave the permission.

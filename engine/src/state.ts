@@ -313,6 +313,10 @@ export interface GameObject {
      * card too, with the turn's land drop (rule 305.2) — the effect's
      * `play`. */
     readonly play?: true;
+    /** "You may cast **a spell from among** those cards" (Locke, Treasure
+     * Hunter): the `GameState.permissionGroups` entry this permission shares
+     * with the other cards the same effect gave it, wherever they are. */
+    readonly group?: number;
   };
   /** This spell was cast under a permission that exiles it instead of letting
    * it reach a graveyard (Kess, Dissident Mage — `castFromGraveyard
@@ -791,6 +795,11 @@ export interface GameObject {
     /** "Once each turn": one cast a turn among every card `source` gave this
      * permission, counted on `source` (`GameObject.impulseCastOnTurn`). */
     readonly oncePerTurn?: boolean;
+    /** "You may play **one of** those cards" (Unlucky Witness): the
+     * `GameState.permissionGroups` entry this permission shares with the
+     * other cards the same effect gave it, spent by each card played under
+     * it — see `GameState.permissionGroups`. */
+    readonly group?: number;
     /** "…and mana of any type can be spent to cast that spell" (Gonti, Canny
      * Acquisitor) / "…as though it were mana of any color" (Grenzo, Havoc
      * Raiser): how freely mana may pay for a spell cast under this permission
@@ -6972,6 +6981,18 @@ export interface GameState {
   combatDamage: CombatDamageState | null;
   /** Monotonic source for battlefield-entry timestamps. */
   timestampSeq: number;
+  /**
+   * Plays shared among the cards one effect gave a permission: "until end of
+   * turn, you may cast **a spell from among** those cards" (Locke, Treasure
+   * Hunter), "you may play **one of** those cards" (Unlucky Witness), "**up to
+   * two** of those cards" — `left` plays to go between them, whichever
+   * zones they're in (a milled card exiled instead, rule 701.17c). Each card's
+   * own permission (`GameObject.graveyardCastPermission.group`,
+   * `GameObject.impulse.group`) names its entry; one card played under it
+   * spends one for them all, and at none left none of them may be. An entry
+   * no permission names any more goes as a turn begins.
+   */
+  permissionGroups?: { readonly id: number; readonly left: number }[];
   eventLog: GameEvent[];
   eventSeq: number;
   nextObjectSeq: number;

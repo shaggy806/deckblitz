@@ -16601,3 +16601,41 @@ describe("flagged cards' lines (2026-11-07): target player adds mana, a host's t
     expect(face.activated[0].effect).toEqual({ kind: "add-mana", mana: "any-color", amount: 2, target: 0 });
   });
 });
+
+describe("one play shared among cards (2026-11-07): a spell from among milled cards, one of the exiled cards", () => {
+  it("reads \"until end of turn, you may cast a spell from among those cards\" after each player mills", () => {
+    const read = parseEffect(
+      "Each player mills a card. Until end of turn, you may cast a spell from among those cards.",
+      { targets: [] },
+    );
+    expect(read.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "mill", target: "each-player", amount: 1 },
+        { kind: "grant-graveyard-cast", cards: "milled-this-way", upTo: 1 },
+      ],
+    });
+  });
+
+  it("reads \"if a land card was milled this way\" as a this-way condition", () => {
+    const read = parseEffect("Mill a card. If a land card was milled this way, you gain 1 life.", { targets: [] });
+    expect(read.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "mill", target: "you", amount: 1 },
+        { kind: "conditional", condition: { kind: "this-way", what: "milled", filter: { type: "land" } }, then: { kind: "gain-life", amount: 1 } },
+      ],
+    });
+  });
+
+  it("reads \"you may play one of those cards\" as one play shared among the cards exiled", () => {
+    const face = parseFace({
+      name: "Unlucky Witness",
+      type_line: "Creature — Human Citizen",
+      oracle_text: "When this creature dies, exile the top two cards of your library. Until your next end step, you may play one of those cards.",
+      mana_cost: "{R}",
+      colors: ["R"],
+    });
+    expect(face.triggered[0].effect).toEqual({ kind: "impulse-exile", amount: 2, duration: "your-next-end-step", upTo: 1 });
+  });
+});
