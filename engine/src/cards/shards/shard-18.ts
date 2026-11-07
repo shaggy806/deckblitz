@@ -595,6 +595,7 @@ import _poolPitchstoneWall from "../pool/pitchstone-wall.js";
 import _poolPitilessPontiff from "../pool/pitiless-pontiff.js";
 import _poolPlaguedRusalka from "../pool/plagued-rusalka.js";
 import _poolPlanarEngineering from "../pool/planar-engineering.js";
+import _poolPlarggAndNassari from "../pool/plargg-and-nassari.js";
 import _poolPlatedRootwalla from "../pool/plated-rootwalla.js";
 import _poolPlowThrough from "../pool/plow-through.js";
 import _poolPossibilityTechnician from "../pool/possibility-technician.js";
@@ -1573,6 +1574,7 @@ const shard: CardShard = {
     _poolPitilessPontiff,
     _poolPlaguedRusalka,
     _poolPlanarEngineering,
+    _poolPlarggAndNassari,
     _poolPlatedRootwalla,
     _poolPlowThrough,
     _poolPossibilityTechnician,

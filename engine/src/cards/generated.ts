@@ -5603,6 +5603,7 @@ import _poolCuriousHomunculus from "./pool/curious-homunculus.js";
 import _poolCuriousInquiry from "./pool/curious-inquiry.js";
 import _poolCuriousObsession from "./pool/curious-obsession.js";
 import _poolCuriousPair from "./pool/curious-pair.js";
+import _poolCurrencyConverter from "./pool/currency-converter.js";
 import _poolCurryFavor from "./pool/curry-favor.js";
 import _poolCurseArtifact from "./pool/curse-artifact.js";
 import _poolCurseMarredDemon from "./pool/curse-marred-demon.js";
@@ -12091,6 +12092,7 @@ import _poolHeroicFeast from "./pool/heroic-feast.js";
 import _poolHeroicIntervention from "./pool/heroic-intervention.js";
 import _poolHeroicReinforcements from "./pool/heroic-reinforcements.js";
 import _poolHeroicReturn from "./pool/heroic-return.js";
+import _poolHeroicSacrifice from "./pool/heroic-sacrifice.js";
 import _poolHeroicStanza from "./pool/heroic-stanza.js";
 import _poolHeroicTeamwork from "./pool/heroic-teamwork.js";
 import _poolHeroism from "./pool/heroism.js";
@@ -19362,6 +19364,7 @@ import _poolPlanetaryPatrol from "./pool/planetary-patrol.js";
 import _poolPlanewideCelebration from "./pool/planewide-celebration.js";
 import _poolPlantBeans from "./pool/plant-beans.js";
 import _poolPlantElemental from "./pool/plant-elemental.js";
+import _poolPlarggAndNassari from "./pool/plargg-and-nassari.js";
 import _poolPlarggDeanOfChaos from "./pool/plargg-dean-of-chaos.js";
 import _poolPlasmaBolt from "./pool/plasma-bolt.js";
 import _poolPlasmaCascade from "./pool/plasma-cascade.js";
@@ -30569,6 +30572,7 @@ import _poolYouthfulValkyrie from "./pool/youthful-valkyrie.js";
 import _poolYouveBeenCaughtStealing from "./pool/youve-been-caught-stealing.js";
 import _poolYsgardsCall from "./pool/ysgards-call.js";
 import _poolYshtolaNightsBlessed from "./pool/yshtola-nights-blessed.js";
+import _poolYshtolaRhul from "./pool/yshtola-rhul.js";
 import _poolYuanShaoTheIndecisive from "./pool/yuan-shao-the-indecisive.js";
 import _poolYuanShaosInfantry from "./pool/yuan-shaos-infantry.js";
 import _poolYuanTiFangBlade from "./pool/yuan-ti-fang-blade.js";
@@ -37113,6 +37117,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCuriousInquiry,
   _poolCuriousObsession,
   _poolCuriousPair,
+  _poolCurrencyConverter,
   _poolCurryFavor,
   _poolCurseArtifact,
   _poolCurseMarredDemon,
@@ -43601,6 +43606,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHeroicIntervention,
   _poolHeroicReinforcements,
   _poolHeroicReturn,
+  _poolHeroicSacrifice,
   _poolHeroicStanza,
   _poolHeroicTeamwork,
   _poolHeroism,
@@ -50872,6 +50878,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPlanewideCelebration,
   _poolPlantBeans,
   _poolPlantElemental,
+  _poolPlarggAndNassari,
   _poolPlarggDeanOfChaos,
   _poolPlasmaBolt,
   _poolPlasmaCascade,
@@ -62079,6 +62086,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolYouveBeenCaughtStealing,
   _poolYsgardsCall,
   _poolYshtolaNightsBlessed,
+  _poolYshtolaRhul,
   _poolYuanShaoTheIndecisive,
   _poolYuanShaosInfantry,
   _poolYuanTiFangBlade,
@@ -68636,6 +68644,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/curious-inquiry": _poolCuriousInquiry,
   "pool/curious-obsession": _poolCuriousObsession,
   "pool/curious-pair": _poolCuriousPair,
+  "pool/currency-converter": _poolCurrencyConverter,
   "pool/curry-favor": _poolCurryFavor,
   "pool/curse-artifact": _poolCurseArtifact,
   "pool/curse-marred-demon": _poolCurseMarredDemon,
@@ -75124,6 +75133,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/heroic-intervention": _poolHeroicIntervention,
   "pool/heroic-reinforcements": _poolHeroicReinforcements,
   "pool/heroic-return": _poolHeroicReturn,
+  "pool/heroic-sacrifice": _poolHeroicSacrifice,
   "pool/heroic-stanza": _poolHeroicStanza,
   "pool/heroic-teamwork": _poolHeroicTeamwork,
   "pool/heroism": _poolHeroism,
@@ -82395,6 +82405,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/planewide-celebration": _poolPlanewideCelebration,
   "pool/plant-beans": _poolPlantBeans,
   "pool/plant-elemental": _poolPlantElemental,
+  "pool/plargg-and-nassari": _poolPlarggAndNassari,
   "pool/plargg-dean-of-chaos": _poolPlarggDeanOfChaos,
   "pool/plasma-bolt": _poolPlasmaBolt,
   "pool/plasma-cascade": _poolPlasmaCascade,
@@ -93602,6 +93613,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/youve-been-caught-stealing": _poolYouveBeenCaughtStealing,
   "pool/ysgards-call": _poolYsgardsCall,
   "pool/yshtola-nights-blessed": _poolYshtolaNightsBlessed,
+  "pool/yshtola-rhul": _poolYshtolaRhul,
   "pool/yuan-shao-the-indecisive": _poolYuanShaoTheIndecisive,
   "pool/yuan-shaos-infantry": _poolYuanShaosInfantry,
   "pool/yuan-ti-fang-blade": _poolYuanTiFangBlade,

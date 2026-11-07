@@ -1003,6 +1003,7 @@ import _poolYavimayaWurm from "../pool/yavimaya-wurm.js";
 import _poolYawgmothsVileOffering from "../pool/yawgmoths-vile-offering.js";
 import _poolYoreTillerNephilim from "../pool/yore-tiller-nephilim.js";
 import _poolYouHappenOnAGlade from "../pool/you-happen-on-a-glade.js";
+import _poolYshtolaRhul from "../pool/yshtola-rhul.js";
 import _poolZanarkandAncientMetropolis from "../pool/zanarkand-ancient-metropolis.js";
 import _poolZenithFestival from "../pool/zenith-festival.js";
 import _poolZhalfirinCrusader from "../pool/zhalfirin-crusader.js";
@@ -2032,6 +2033,7 @@ const shard: CardShard = {
     _poolYawgmothsVileOffering,
     _poolYoreTillerNephilim,
     _poolYouHappenOnAGlade,
+    _poolYshtolaRhul,
     _poolZanarkandAncientMetropolis,
     _poolZenithFestival,
     _poolZhalfirinCrusader,

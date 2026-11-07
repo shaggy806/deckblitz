@@ -180,6 +180,7 @@ import _poolCrystallineSliver from "../pool/crystalline-sliver.js";
 import _poolCultConscript from "../pool/cult-conscript.js";
 import _poolCultivate from "../pool/cultivate.js";
 import _poolCunningManeuver from "../pool/cunning-maneuver.js";
+import _poolCurrencyConverter from "../pool/currency-converter.js";
 import _poolCurseOfPredation from "../pool/curse-of-predation.js";
 import _poolCurseclothWrappings from "../pool/cursecloth-wrappings.js";
 import _poolCursedTotem from "../pool/cursed-totem.js";
@@ -1164,6 +1165,7 @@ const shard: CardShard = {
     _poolCultConscript,
     _poolCultivate,
     _poolCunningManeuver,
+    _poolCurrencyConverter,
     _poolCurseOfPredation,
     _poolCurseclothWrappings,
     _poolCursedTotem,
