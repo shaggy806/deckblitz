@@ -11276,6 +11276,21 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       you: { bf: ['Elim Garak, Simple Tailor', 'Island', 'Mountain'], hand: ['Izzet Charm'] },
     }),
   ),
+  // --- Different players chosen in turn (2026-11-07) -------------------------
+  preset(
+    'Gluntch, the Bestower: at two players there is no third player',
+    board({
+      you: { bf: ['Gluntch, the Bestower'], lib: ['Island*5'] },
+      opp: { bf: ['Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    'Gluntch, the Bestower: each player chosen only once, four players',
+    board({
+      you: { bf: ['Gluntch, the Bestower'], lib: ['Island*5'] },
+      opp: [{ bf: ['Grizzly Bears'] }, {}, {}],
+    }),
+  ),
   // --- The Defilers: pay 2 life instead of a coloured mana (2026-11-06) -----
   preset(
     'Defiler of Vigor: paying 2 life for a green creature',

@@ -1100,6 +1100,7 @@
   "decision:trigger-object-controller-chooses-target",
   "decision:separate-into-piles",
   "decision:choose-player",
+  "decision:choose-different-players",
   "decision:secret-choice",
   "decision:any-opponent-may",
   "decision:may-answered-by-other-player",

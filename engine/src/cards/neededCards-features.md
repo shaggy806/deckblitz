@@ -3163,6 +3163,16 @@ over the chosen player's permanents (`amount:count-for-chosen-player`, the
 next family), "deals 1 damage to itself" (Stuffy Doll) — `author-freed`
 narrows them.
 
+### Different players chosen in turn — built 2026-11-07
+
+The need key `decision:choose-different-players`: `choose-opponent`'s
+`thenAnother`, a further choice once `then` is done, among the same
+candidates less everyone chosen earlier in the chain (carried as the
+engine-set `except`), and `purpose`, which ends each offer's text ("Choose
+Bob to draw a card"; the client names the player already). No new decision
+kind: each choice is the `choose-modes` a `choose-opponent` was. Proving
+card: Gluntch, the Bestower (its only card).
+
 ### Separating into piles — built 2026-10-29
 
 The need-keys Phase 2 family `decision:separate-into-piles` (features only).

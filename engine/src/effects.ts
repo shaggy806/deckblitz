@@ -2817,6 +2817,23 @@ export type EffectSpec =
        * `revealChosen` cost shows it. Asked as a `choose-creature-type` menu of
        * players, whose answer stays out of the log. */
       readonly secret?: true;
+      /** "Choose a player. They put two +1/+1 counters on a creature they
+       * control. **Choose a second player** to draw a card. **Then choose a
+       * third player** to create two Treasure tokens" (Gluntch, the
+       * Bestower): once `then` is done, this choice is made among the same
+       * players less every one chosen earlier in the chain — "all three
+       * players must be different players, although any one of them can be
+       * you" (the ruling) — and its own `thenAnother` goes on from there.
+       * With nobody left (two players and a third choice) it does nothing.
+       * Not with `secret`. */
+      readonly thenAnother?: Extract<EffectSpec, { kind: "choose-opponent" }>;
+      /** Set only by the engine: the players chosen earlier in a
+       * `thenAnother` chain, who can't be chosen again. */
+      readonly except?: readonly PlayerId[];
+      /** What the one chosen is chosen for, ending each player's choice in
+       * the offer — "Choose player2 **to draw a card**" — so a chain of
+       * choices reads apart. */
+      readonly purpose?: string;
     }
   | {
       /**
@@ -16286,11 +16303,17 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       }
       const whoIf = spec.whoIf;
       if (whoIf !== undefined) among = among.filter((p) => ctx.aboutPlayer(p).conditionMet(whoIf));
+      const except = spec.except ?? [];
+      if (except.length > 0) among = among.filter((p) => !except.includes(p));
       if (among.length === 0) return;
+      const another = spec.thenAnother;
       const about = (player: PlayerId): EffectSpec => ({
         kind: "about-player",
         player,
-        effect: spec.then,
+        effect:
+          another === undefined
+            ? spec.then
+            : { kind: "sequence", effects: [spec.then, { ...another, except: [...except, player] }] },
         ...(spec.remember === true ? { remember: true as const } : {}),
         ...(spec.secret === true ? { secret: true as const } : {}),
       });
@@ -16319,7 +16342,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         1,
         1,
         among.map((player) => ({
-          text: `Choose ${player.charAt(0).toUpperCase()}${player.slice(1)}`,
+          // With a purpose the seat is named as it is (`player2`), so a
+          // client reading it puts the player's name there.
+          text:
+            spec.purpose === undefined
+              ? `Choose ${player.charAt(0).toUpperCase()}${player.slice(1)}`
+              : `Choose ${player} ${spec.purpose}`,
           effect: about(player),
         })),
       );

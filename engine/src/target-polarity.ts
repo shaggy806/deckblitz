@@ -236,7 +236,10 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // Their slot 0 is a convoking creature, not the spell's target 0.
   "for-each-convoker": none,
   "for-convoker": none,
-  "choose-opponent": (n, v) => v.child(n.then),
+  "choose-opponent": (n, v) => {
+    v.child(n.then);
+    if (n.thenAnother !== undefined) v.child(n.thenAnother);
+  },
   "about-player": (n, v) => v.child(n.effect),
   "offer-zone-choice": none,
   // `keepTargets`: `then` reads the chosen permanent at 0 and the targets from

@@ -7517,6 +7517,16 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Cast Izzet Charm, choosing "Draw two cards, then discard two cards."
 - **Expect:** Elim Garak's ability triggers once: Bob loses 2 life and you gain 2.
 
+## Different players chosen in turn (2026-11-07)
+
+### Gluntch, the Bestower: at two players there is no third player
+- **Do:** Pass to your end step. When Gluntch asks, pick "Choose Bob to put two +1/+1 counters on a creature they control".
+- **Expect:** Bob's Grizzly Bears gets two +1/+1 counters (4/4). You draw a card without being asked again, and nobody creates a Treasure.
+
+### Gluntch, the Bestower: each player chosen only once, four players
+- **Do:** Pass to your end step. Choose Bob to put the counters, then yourself to draw a card, then Dave to create the Treasures.
+- **Expect:** The second choice offers everyone but Bob, and the third only Carol and Dave. Bob's Grizzly Bears gets two +1/+1 counters, you draw a card and Dave gets two Treasure tokens.
+
 ## The Defilers: pay 2 life instead of a coloured mana (2026-11-06)
 
 ### Defiler of Vigor: paying 2 life for a green creature
