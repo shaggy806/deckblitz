@@ -12,6 +12,7 @@
   "cost:plot-cost-reduction",
   "effect:attach-equipment-that-was-attached",
   "effect:double-x-on-cast",
+  "cost:escalate-nonmana",
   "effect:reveal-until-shares-type",
   "effect:tempting-offer",
   "effect:prevent-damage-each-matching-at-resolution",

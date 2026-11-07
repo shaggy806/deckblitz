@@ -17,7 +17,7 @@ import type {
   TapCostOffer,
 } from "./actions.js";
 import { abilityLifeCost } from "./abilities.js";
-import { convokeProofFor, defaultTapPicks, delvePicks, fillModes, fitModeSet, tapPicksPower, tapShareChoices } from "./actions.js";
+import { convokeProofFor, defaultTapPicks, delvePicks, fillModes, fitModeSet, tapCountForModes, tapPicksPower, tapShareChoices } from "./actions.js";
 import { obeyingLure } from "./combat/blocking.js";
 import { whyCannotAttack } from "./combat/eligibility.js";
 import { defaultAssignment } from "./combat/damage.js";
@@ -1879,8 +1879,14 @@ export class RandomController extends AutomaticController {
             ...(legal.graveyardGrant !== undefined ? { graveyardGrant: legal.graveyardGrant } : {}),
             ...(legal.face !== undefined ? { face: legal.face } : {}),
             ...castExtras(legal, (n) => this.pickIndex(n)),
+            // Escalate's tap counts the modes beyond the first.
             ...(legal.tapCost !== undefined
-              ? { tap: randomTapPicks(legal.tapCost, (n) => this.pickIndex(n)) }
+              ? {
+                  tap: randomTapPicks(
+                    { ...legal.tapCost, count: tapCountForModes(legal.tapCost, modes) },
+                    (n) => this.pickIndex(n),
+                  ),
+                }
               : {}),
             ...escapeExilePicks(legal),
           };

@@ -7594,3 +7594,12 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Bumi, Unleashed: only land creatures attack in the extra combat
 - **Do:** Go to combat and attack Bob with Bumi alone. After damage, in the extra combat, try to attack with Grizzly Bears.
 - **Expect:** Bumi's hit untaps your lands and starts another combat. In it, Dryad Arbor can attack but Grizzly Bears can't.
+## Escalate that taps or discards (2026-11-07)
+
+### Collective Effort: one creature tapped for each mode beyond the first
+- **Do:** Cast Collective Effort choosing all three modes: Bob's Craw Wurm, Bob's Rhystic Study, and you. When asked what to tap, pick both your Grizzly Bears.
+- **Expect:** You're asked to tap exactly 2 creatures. The Wurm and the Study die, and both your Bears, tapped, get a +1/+1 counter.
+
+### Collective Effort: one mode taps nothing, four players
+- **Do:** Cast Collective Effort choosing only its last mode, targeting you.
+- **Expect:** You aren't asked to tap anything; your Bears stay untapped and each gets a +1/+1 counter.

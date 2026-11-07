@@ -4916,12 +4916,21 @@ export class Game {
         manaAffordable = at.manaAffordable;
       }
       // Escalate (rule 702.120a): the most modes this variant can pay for —
-      // each one beyond the first adds its cost. Judged on mana alone.
+      // each one beyond the first adds its cost. Judged on mana alone, or,
+      // when some of it isn't mana (Collective Effort's tap, Collective
+      // Brutality's discard), on the whole cost, as the cast will be.
       const escalatedMaxModes = (): number | undefined => {
         const modal = def.castModal;
-        if (modal === null || modal.costPerExtraMode === undefined) return undefined;
+        if (modal === null || (modal.costPerExtraMode === undefined && modal.alsoPerExtraMode === undefined)) return undefined;
         const most = this.castModalMaxModes(modal, card);
         for (let k = most; k > Math.max(1, modal.minModes); k -= 1) {
+          if (modal.alsoPerExtraMode !== undefined) {
+            const why = this.whyCannotCastSpell(player, card, via, face ?? 0, Array.from({ length: k }, (_v, i) => i),
+              kicked, undefined, overload, free, undefined, altCost === true, costOption, undefined, graveyardGrant,
+              xFloor, 0, undefined, false, offspring === true, evoke ?? null);
+            if (why === null) return k;
+            continue;
+          }
           const withModes = this.withFace(card, face ?? 0, () =>
             this.castCostString(card, via, face, kicked, overload, free, altCost === true, costOption, player,
               graveyardGrant, offspring === true, evoke ?? null, Array.from({ length: k }, (_v, i) => i)),
@@ -5269,6 +5278,7 @@ export class Game {
             })()
           : (kicked === true && (def.kicker?.teamwork !== undefined || def.kicker?.also?.tapUntapped !== undefined)) ||
               this.activeSplice?.also.some((also) => also.tapUntapped !== undefined) === true ||
+              def.castModal?.alsoPerExtraMode?.tapUntapped !== undefined ||
               this.castAlsoCosts(card, def, false, false, costOption).some(
                 (also) => also.tapUntapped !== undefined || also.tapAnyNumber !== undefined,
               )
@@ -17787,7 +17797,7 @@ export class Game {
       player,
       cardId,
       def,
-      this.castAlsoCosts(cardId, def, kicked ?? false, altCost, costOption, via, graveyardGrant),
+      this.castAlsoCosts(cardId, def, kicked ?? false, altCost, costOption, via, graveyardGrant, modes),
       altCost,
     );
     if (whyNotAlso !== null) return whyNotAlso;
@@ -18014,7 +18024,7 @@ export class Game {
     }
     const cost = convoked.length > 0 ? this.reduceCostByConvoke(delved, convoked) : delved;
     const purpose: ManaPurpose = { kind: "cast", card: cardId, face, ...bestowPurpose(def, overload), ...castPaying(via, costString, kicked) };
-    const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked, costOption, graveyardGrant);
+    const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked, costOption, graveyardGrant, modes);
     if (alternativeTaps !== undefined) {
       // The tap half is checked against the same mana — see `tapCostOffer`.
       const offer = this.tapCostOffer(
@@ -19778,7 +19788,7 @@ export class Game {
         : via === "effect" && this.castNowOffer(player, cardId)?.madness !== undefined
           ? "madness"
           : undefined;
-    const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked, costOption, graveyardGrant);
+    const alternativeTaps = this.spellTapCost(cardId, def, via, player, altCost, kicked, costOption, graveyardGrant, modes);
     // "Pay life equal to its mana value" (Demon of Fate's Design, Inside
     // Information): the face cast, X 0 (rule 107.3b), paid with the rest below.
     // So does a resolving effect's "by paying life equal to" it (Bismuth
@@ -20403,7 +20413,7 @@ export class Game {
       player,
       cardId,
       [
-        ...this.castAlsoCosts(cardId, def, kicked, altCost, costOption, via, graveyardGrant),
+        ...this.castAlsoCosts(cardId, def, kicked, altCost, costOption, via, graveyardGrant, modes),
         ...(returnsX !== undefined && chosenX > 0 ? [{ text: "", returnToHand: { filter: returnsX, count: chosenX } }] : []),
       ],
       via === "effect" ? this.activePlayer : player,
@@ -40489,8 +40499,18 @@ export class Game {
     kicked: boolean | number,
     costOption?: number,
     graveyardGrant?: GraveyardGrant,
+    /** The modes chosen, for an escalate tap (rule 702.120a) once for each
+     * beyond the first; `"offer"` for the cast's offer, made before they're
+     * chosen — escalate's tap for one extra mode, marked `perExtraMode`. */
+    modes?: readonly number[] | "offer",
   ):
-    | { readonly count: number; readonly totalPower?: number; readonly anyNumber?: true; readonly filter: CardFilter }
+    | {
+        readonly count: number;
+        readonly totalPower?: number;
+        readonly anyNumber?: true;
+        readonly filter: CardFilter;
+        readonly perExtraMode?: true;
+      }
     | undefined {
     // "Flashback—Tap three untapped white creatures you control" (Battle Screech).
     if (via === "flashback") {
@@ -40508,17 +40528,26 @@ export class Game {
     // "Splice onto Arcane—Tap an untapped white creature you control"
     // (Hundred-Talon Strike), two copies of it two of them, and an additional
     // cost's: one offer, so one filter (`whyCannotCastSpell` refuses two).
-    const costs = this.castAlsoCosts(cardId, def, kicked, altCost, costOption);
+    const costs = this.castAlsoCosts(cardId, def, kicked, altCost, costOption, undefined, undefined,
+      modes === "offer" ? undefined : modes);
     const any = costs.find((also) => also.tapAnyNumber !== undefined)?.tapAnyNumber;
     if (any !== undefined) return { count: 0, anyNumber: true, filter: any.filter };
     const parts = costs.flatMap((also) => also.tapUntapped ?? []);
+    // Escalate's tap, offered before the modes are chosen (rule 702.120a):
+    // its count for each mode beyond the first. Alone: no card has escalate
+    // beside another tap cost, which one offer couldn't count.
+    const escalateTap = def.castModal?.alsoPerExtraMode?.tapUntapped;
+    if (modes === "offer" && escalateTap !== undefined && parts.length === 0) {
+      return { filter: escalateTap.filter, count: escalateTap.count, perExtraMode: true };
+    }
     if (parts.length === 0) return undefined;
     return { filter: parts[0].filter, count: parts.reduce((n, part) => n + part.count, 0) };
   }
 
   /** The non-mana costs this cast's kicker or squad, `kicked` times over, the
-   * cards spliced onto it, its own alternative cost's `also`, and its additional
-   * cost (the chosen branch's too) add. */
+   * cards spliced onto it, its own alternative cost's `also`, its additional
+   * cost (the chosen branch's too), and its escalate, once for each of `modes`
+   * beyond the first, add. */
   private castAlsoCosts(
     cardId: ObjectId,
     def: CardDefinition,
@@ -40527,7 +40556,15 @@ export class Game {
     costOption?: number,
     via?: CastVia,
     graveyardGrant?: GraveyardGrant,
+    modes?: readonly number[],
   ): readonly KickerAlsoCost[] {
+    // Escalate (rule 702.120a): an additional cost for each mode chosen
+    // beyond the first, paid as the others are (601.2f–h).
+    const escalate = def.castModal?.alsoPerExtraMode;
+    const extraModes = (modes?.length ?? 0) - 1;
+    if (escalate !== undefined && extraModes > 0) {
+      return [...this.castAlsoCosts(cardId, def, kicked, altCost, costOption, via, graveyardGrant), alsoTimes(escalate, extraModes)];
+    }
     const kickerAlso = kicked !== false && kicked !== 0 ? def.kicker?.also : undefined;
     const spliced = this.activeSplice?.card === cardId ? this.activeSplice.also : [];
     const altAlso = altCost ? this.ownAltCost(def)?.also : undefined;
@@ -40827,7 +40864,8 @@ export class Game {
     graveyardGrant?: GraveyardGrant,
   ): TapCostOffer | null {
     const def = this.faceDef(cardId, face);
-    const taps = this.spellTapCost(cardId, def, via, player, !notAlternative, teamwork, costOption, graveyardGrant);
+    const taps = this.spellTapCost(cardId, def, via, player, !notAlternative, teamwork, costOption, graveyardGrant,
+      notAlternative ? "offer" : undefined);
     if (taps === undefined) return null;
     const cost = this.withFace(cardId, face, () =>
       this.castingCostOf(
@@ -40838,7 +40876,7 @@ export class Game {
         this.castCostString(cardId, via, face, teamwork, false, false, !notAlternative, costOption, player),
       ),
     );
-    return this.tapCostOffer(
+    const offer = this.tapCostOffer(
       player,
       cardId,
       { ...taps, includeSelf: false },
@@ -40847,6 +40885,7 @@ export class Game {
       undefined,
       { kind: "cast", card: cardId, face },
     );
+    return offer !== null && taps.perExtraMode === true ? { ...offer, perExtraMode: true } : offer;
   }
 
   /** Why `tap` doesn't answer `offer` — exactly `count` picks, each one of

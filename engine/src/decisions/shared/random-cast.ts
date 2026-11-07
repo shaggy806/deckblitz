@@ -7,7 +7,7 @@
  */
 
 import type { Action, CastSpellOffer } from "../../actions.js";
-import { convokeProofFor, delvePicks, tapPicksPower } from "../../actions.js";
+import { convokeProofFor, delvePicks, tapCountForModes, tapPicksPower } from "../../actions.js";
 import type { ObjectId, PlayerId } from "../../primitives.js";
 import type { TargetRef, TargetSpec } from "../../target.js";
 import { fitTargetCount, maxXForTargets, minXForTargets, targetsWithinTaxes } from "../../target-count.js";
@@ -105,7 +105,9 @@ export function randomCast(
     // (`randomTapPicks`'s crew rule) — the count alone tapped none, an answer
     // the cast refused (Wizard's Spellbook copying Team Tactics, B265).
     const more = (): boolean =>
-      offer.totalPower !== undefined ? tapPicksPower(offer, tap) < offer.totalPower : tap.length < offer.count;
+      offer.totalPower !== undefined
+        ? tapPicksPower(offer, tap) < offer.totalPower
+        : tap.length < tapCountForModes(offer, modes); // escalate's, per extra mode
     while (more() && pool.length > 0) {
       tap.push(pool.splice(rng.pickIndex(pool.length), 1)[0]);
     }

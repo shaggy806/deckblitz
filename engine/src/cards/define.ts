@@ -240,6 +240,11 @@ export interface KickerAlsoCost {
   readonly opponentGainsLife?: number;
 }
 
+/** Escalate's non-mana cost — see `CastModalSpec.alsoPerExtraMode`. A
+ * sacrifice isn't among them: a spell's sacrifices are planned with its mana
+ * before its modes are known to them (`spellSacrificeParts`). */
+export type EscalateAlsoCost = Omit<KickerAlsoCost, "sacrifice" | "tapAnyNumber">;
+
 export interface AdditionalCostOption {
   /** What this option is called in the UI ("Pay 3 life"). Shown on the
    * variant's button, so it has to read as an imperative on its own. */
@@ -4319,10 +4324,22 @@ export interface CastModalSpec {
    * mode chosen beyond the first — an additional cost, so it's paid on top of
    * an alternative cost or a free cast too (rule 118.9d; Collective
    * Resistance's ruling). The offer's `castModal.maxModes` is capped at the
-   * most modes the caster can pay for. Mana only: escalate costs that discard
-   * (Collective Brutality) or tap (Collective Effort) aren't modelled.
+   * most modes the caster can pay for. What isn't mana is
+   * {@link alsoPerExtraMode}.
    */
   readonly costPerExtraMode?: string;
+  /**
+   * Escalate's cost when it isn't mana (rule 702.120a, paid as additional
+   * costs are, 601.2f–h): "Escalate—Tap an untapped creature you control"
+   * (Collective Effort), "Escalate—Discard a card" (Collective Brutality) —
+   * a kicker's `also`, paid once per mode chosen beyond the first, beside
+   * `costPerExtraMode`'s mana when there's both. A tap is picked from the
+   * variant's `tapCost` offer, which says `perExtraMode` (its `count` is for
+   * each extra mode — `tapCountForModes`); a discard is chosen as it's paid,
+   * once the spell is on the stack. The offer's `maxModes` is capped at the
+   * most modes all of it can pay for.
+   */
+  readonly alsoPerExtraMode?: EscalateAlsoCost;
   /**
    * "**An opponent chooses** one —" (Misfortune, Library of Lat-Nam): the
    * modes are chosen by an opponent, when the caster would choose them

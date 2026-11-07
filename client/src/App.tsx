@@ -38,6 +38,7 @@ import {
   specsAtX,
   defaultAssignment,
   delvePicksFit,
+  tapCountForModes,
   tapPicksPower,
   targetCountAtX,
   waterbendAt,
@@ -2657,9 +2658,17 @@ function Table({
           return
         }
       }
-      const offer = t.tapCost
+      // Escalate's tap (rule 702.120a) is per mode chosen beyond the first:
+      // counted now the modes are in, none for one mode.
+      const offered = t.tapCost
+      const offer =
+        offered?.perExtraMode === true ? { ...offered, count: tapCountForModes(offered, t.modes) } : offered
       if (offer === undefined || action.type === 'choose-targets') {
         game.dispatch(action)
+        return
+      }
+      if (offer.perExtraMode === true && offer.count === 0) {
+        game.dispatch({ ...action, tap: [] })
         return
       }
       // Exactly as much as the cost needs leaves nothing to choose. (Crew

@@ -11393,4 +11393,19 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: [] },
     }),
   ),
+  // --- Escalate that taps or discards (2026-11-07) ---------------------------
+  preset(
+    'Collective Effort: one creature tapped for each mode beyond the first',
+    board({
+      you: { bf: ['Plains*3', 'Grizzly Bears*2'], hand: ['Collective Effort'] },
+      opp: { bf: ['Craw Wurm', 'Rhystic Study'] },
+    }),
+  ),
+  preset(
+    'Collective Effort: one mode taps nothing, four players',
+    board({
+      you: { bf: ['Plains*3', 'Grizzly Bears*2'], hand: ['Collective Effort'] },
+      opp: [{ bf: ['Craw Wurm'] }, {}, {}],
+    }),
+  ),
 ]

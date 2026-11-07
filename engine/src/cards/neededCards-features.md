@@ -521,6 +521,19 @@ read where convoke's is (`tapPayKinds`); beside a granted or printed convoke,
 creatures convoke and artifacts improvise in one payment. Key:
 effect:next-spell-has-improvise.
 
+### Escalate that taps or discards — built 2026-11-07
+
+By EDHREC rank: Collective Effort (3204). `castModal.alsoPerExtraMode` is
+escalate's cost when it isn't mana (rule 702.120a, paid as additional costs
+are, 601.2f–h): a kicker's `also`, once for each mode beyond the first, beside
+`costPerExtraMode`'s mana. A tap is picked from the cast's `tapCost` offer,
+which says `perExtraMode` (`tapCountForModes` counts it once the modes are
+in: the client, the fuzzer and the engine's own pick); a discard is chosen as
+it's paid. The offer's `maxModes` is capped at what the whole cost can pay
+for. No sacrifice (`spellSacrificeParts` plans before the modes are known); no
+scaffolder template: the parser reads no modal spells. Proving cards:
+Collective Effort, Collective Brutality. Key: cost:escalate-nonmana.
+
 ### Spells off the top of the library for life — built 2026-11-05
 
 By EDHREC rank: Bolas's Citadel (274). A `castFromLibraryTop` permission's

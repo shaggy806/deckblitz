@@ -278,6 +278,17 @@ export interface TapCostOffer {
    * subtypes, marker and all (`subtypes.ts`). The picks must have one creature
    * type in common; `choices` holds only those with enough others to do it. */
   readonly creatureTypes?: Readonly<Record<ObjectId, readonly string[]>>;
+  /** Escalate's "Tap an untapped creature you control" (rule 702.120a —
+   * Collective Effort): `count` is for **each mode chosen beyond the first**,
+   * so the picks are `count` times that many — see {@link tapCountForModes}. */
+  readonly perExtraMode?: true;
+}
+
+/** How many picks `offer` wants once the cast's modes are chosen: its `count`,
+ * or for an escalate offer (`perExtraMode`) that many for each mode beyond the
+ * first — none for one mode. */
+export function tapCountForModes(offer: TapCostOffer, modes: readonly number[] | undefined): number {
+  return offer.perExtraMode === true ? offer.count * Math.max(0, (modes?.length ?? 1) - 1) : offer.count;
 }
 
 /** The power a set of tap picks adds up to under a crew offer (each id once
