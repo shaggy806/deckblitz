@@ -16539,3 +16539,31 @@ describe("a reveal for a card sharing a card type with the permanent targeted", 
     expect(face.complete).toBe(false);
   });
 });
+
+describe("target player adds mana", () => {
+  it("The Warring Triad whole: a mill cost, a targeted add-mana, and its graveyard God line", () => {
+    const face = parseFace({
+      name: "The Warring Triad",
+      type_line: "Legendary Artifact Creature — God",
+      oracle_text:
+        "Flying, trample, haste\nAs long as there are fewer than eight cards in your graveyard, The Warring Triad isn't a creature.\n{T}, Mill a card: Target player adds one mana of any color. (Activate only as an instant.)",
+      mana_cost: "{3}",
+      colors: [],
+    });
+    expect(face.complete).toBe(true);
+    expect(face.activated[0]).toMatchObject({
+      cost: { mana: null, tap: true, mill: 1 },
+      targets: ["player"],
+      effect: { kind: "add-mana", mana: "any-color", amount: 1, target: 0 },
+    });
+    expect(face.static[0]).toMatchObject({
+      condition: { kind: "not", of: { kind: "cards-in-graveyard", atLeast: 8 } },
+      removeTypes: ["creature"],
+    });
+  });
+
+  it("two mana of any one color, to a target player", () => {
+    const face = parseFace({ name: "Test Card", type_line: "Artifact", oracle_text: "{T}: Target player adds two mana of any one color.", mana_cost: "{3}", colors: [] });
+    expect(face.activated[0].effect).toEqual({ kind: "add-mana", mana: "any-color", amount: 2, target: 0 });
+  });
+});

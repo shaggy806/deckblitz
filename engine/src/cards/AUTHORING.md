@@ -4262,6 +4262,16 @@ keep the controller's own part unscoped (that is what the auto-payer counts)
 and put the others' on `also` with `who: "each-opponent"`; an ability whose
 own `add-mana` is scoped to someone else is never an auto-payer source.
 
+`add-mana`'s `target` (a player target slot) is "**target player** adds one
+mana of any color" (The Warring Triad: `targets: ["player"]`, `effect: { kind:
+"add-mana", mana: "any-color", amount: 1, target: 0 }`). A target makes it no
+mana ability (rule 605.5a): it uses the stack, and its controller picks the
+colour as it resolves (608.2d) — Radiant Lotus's "Choose a color. Target
+player adds three mana of the chosen color for each artifact sacrificed this
+way" is `mana: "any-color", amount: { product: [3, "x"] }` with a `count: "x"`
+sacrifice and `minX: 1`. A card where the other player picks says "they
+choose" (Spectral Searchlight), which this doesn't cover.
+
 **Triggered mana abilities** (rule 605.1b) are the `tapped-for-mana` trigger
 (§9) with an `add-mana` effect: Crypt Ghast's "whenever you tap a Swamp for
 mana, add an additional {B}" is `trigger: { on: "tapped-for-mana", who:

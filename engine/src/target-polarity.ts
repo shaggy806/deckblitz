@@ -287,7 +287,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     if (!toOwnController) v.touch(n.from, "help", MINOR);
   },
   "damage-divided-evenly": (n, v) => v.touch(n.from, "harm", MAJOR),
-  "add-mana": none,
+  // "Target player adds …" (The Warring Triad): mana for them.
+  "add-mana": (n, v) => v.touch(n.target, "help", MINOR),
   draw: (n, v) => v.touch(n.target, "help", MAJOR),
   "discard-hand": (n, v) => v.touch(n.who, "harm", MAJOR),
   "gain-life": (n, v) => v.touch(n.toControllerOfTarget, "help", MINOR),

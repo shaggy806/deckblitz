@@ -444,6 +444,16 @@ With them, needing no engine code: Liliana of the Dark Realms (a resolution-time
 static:every-nonbasic-land-type, static:set-base-pt-to-life-total,
 decision:choose-plus-or-minus, cost:multiple-alternative-costs.
 
+### "Target player adds" mana — built 2026-11-07
+
+By EDHREC rank: The Warring Triad (3110), Radiant Lotus (5668). `add-mana`'s
+`target` names a player target slot as who adds the mana. Targeted, it's no
+mana ability (605.5a): on the stack, the colour chosen as it resolves by its
+controller (608.2d), nothing added if the player is gone. The scaffolder reads
+"Target player adds one mana of any color" / "N mana of any one color", a
+"Mill a card" cost, and "As long as there are fewer than N cards in your
+graveyard, ~ isn't a creature". Key: effect:add-mana-target-player.
+
 ### The next spell has improvise — built 2026-11-05
 
 By EDHREC rank: Archway of Innovation (926). `grant-spells-this-turn`'s

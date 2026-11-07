@@ -3165,6 +3165,15 @@ export type EffectSpec =
        * the auto-payer counts — and the rest rides on `also` with
        * `who: "each-opponent"`. */
       readonly who?: PlayerScope;
+      /** A target slot holding the player who adds it — "**Target player**
+       * adds one mana of any color" (The Warring Triad), "Choose a color.
+       * Target player adds three mana of the chosen color" (Radiant Lotus).
+       * Wins over `who`. An ability with a target is never a mana ability
+       * (rule 605.5a): it uses the stack, and a choice of colour in it is
+       * made as it resolves by its controller (rule 608.2d) — a card that
+       * lets the other player choose says "they choose" (Spectral
+       * Searchlight). A player gone illegal adds nothing. */
+      readonly target?: number;
     }
   | {
       readonly kind: "draw";
@@ -16640,8 +16649,18 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       }
       const mana = spec.mana;
       const add = (): void => {
-        // "Each player adds …" (`who`) — the controller otherwise.
-        for (const player of spec.who === undefined ? [ctx.controller] : ctx.playersInScope(spec.who)) {
+        // "Target player adds …" (`target`), "each player adds …" (`who`) —
+        // the controller otherwise.
+        const targeted = spec.target === undefined ? undefined : ctx.targets[spec.target];
+        const adders =
+          spec.target !== undefined
+            ? targeted?.kind === "player"
+              ? [targeted.player]
+              : []
+            : spec.who === undefined
+              ? [ctx.controller]
+              : ctx.playersInScope(spec.who);
+        for (const player of adders) {
           // "Any color in your commander's color identity" — nothing at all
           // with no colour there (no commander, or a colourless one).
           if (mana === "commander-identity") {

@@ -1910,7 +1910,8 @@
   "replacement:counter-multiplier-on-costs",
   "zone:play-milled-card-this-turn",
   "amount:additional-land-drop-amount",
-  "effect:temporary-permanents-enter-tapped"
+  "effect:temporary-permanents-enter-tapped",
+  "effect:add-mana-target-player"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

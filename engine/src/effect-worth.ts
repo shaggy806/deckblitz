@@ -435,6 +435,8 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
     case "put-onto-battlefield":
       return typeof effect.target === "number" ? 0 : onObjectRef(effect.target, CARD, ctx);
     case "add-mana":
+      // "Target player adds …" is the target's to judge.
+      if (typeof effect.target === "number") return 0;
       return onPlayers(you, 0.5, ctx);
     case "scry":
     case "surveil":

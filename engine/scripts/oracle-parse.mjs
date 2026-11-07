@@ -1715,6 +1715,9 @@ export function parseCost(text) {
       if (typeof count !== "number") return null;
       cost.exileTop = count;
     }
+    // "Mill a card" as a cost (Millikin, The Warring Triad) — never a mana
+    // ability then (rule 605.1a).
+    else if (part === "Mill a card") cost.mill = 1;
     // A processor's "Put a card an opponent owns from exile into that
     // player's graveyard" (Void Attendant), chosen as it's paid.
     else if (part === "Put a card an opponent owns from exile into that player's graveyard") cost.putFromExile = 1;
@@ -6213,6 +6216,18 @@ export function parseSentence(sentence, ctx) {
     // colour (Gilded Lotus); on the stack it's a mode per colour.
     if (typeof n !== "number") return null;
     return choice(WUBRG, n);
+  }
+  // "Target player adds one mana of any color" (The Warring Triad), "… two
+  // mana of any one color" (Bigger on the Inside): `add-mana`'s `target`. A
+  // target makes it no mana ability (rule 605.5a), and `addManaChoice` asks the
+  // controller for the colour as it resolves.
+  if (/^target player adds one mana of any color\.$/i.test(s)) {
+    return { kind: "add-mana", mana: "any-color", amount: 1, target: ctx.target("player") };
+  }
+  if ((m = new RegExp(`^target player adds ${N} mana of any one color\\.$`, "i").exec(s))) {
+    const n = amount(m[1]);
+    if (typeof n !== "number") return null;
+    return { kind: "add-mana", mana: "any-color", amount: n, target: ctx.target("player") };
   }
 
   // Regeneration, transforming, prevention (rules 701.19, 701.28, 615).
@@ -19526,6 +19541,19 @@ function parseStatic(line, text) {
   if ((m = new RegExp(`^As long as your devotion to ${DEVOTION} is less than ${N}, ~ isn't a creature\\.$`).exec(line))) {
     const n = numberOf(m[3]);
     if (typeof n === "number") return godDevotion(devotionColors(m[1], m[2]), n, text);
+  }
+  // The Warring Triad's "as long as there are fewer than eight cards in your
+  // graveyard, ~ isn't a creature".
+  if ((m = new RegExp(`^As long as there are fewer than ${N} cards in your graveyard, ~ isn't a creature\\.$`).exec(line))) {
+    const n = numberOf(m[1]);
+    if (typeof n === "number") {
+      return {
+        affects: { scope: "self" },
+        condition: { kind: "not", of: { kind: "cards-in-graveyard", atLeast: n } },
+        removeTypes: ["creature"],
+        text,
+      };
+    }
   }
   if ((m = new RegExp(`^~'s power is equal to your devotion to ${DEVOTION}\\.$`).exec(line))) {
     return {
