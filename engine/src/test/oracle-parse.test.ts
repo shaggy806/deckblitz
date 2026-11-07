@@ -16604,6 +16604,24 @@ describe("flagged cards' lines (2026-11-07): target player adds mana, a host's t
     const face = parseFace({ name: "Test Card", type_line: "Artifact", oracle_text: "{T}: Target player adds two mana of any one color.", mana_cost: "{3}", colors: [] });
     expect(face.activated[0].effect).toEqual({ kind: "add-mana", mana: "any-color", amount: 2, target: 0 });
   });
+
+  it("Empowered Autogenerator: the counter before the mana is add-mana's `first`, X its charge counters", () => {
+    const face = parseFace({
+      name: "Empowered Autogenerator",
+      type_line: "Artifact",
+      oracle_text:
+        "This artifact enters tapped.\n{T}: Put a charge counter on this artifact. Add X mana of any one color, where X is the number of charge counters on this artifact.",
+      mana_cost: "{4}",
+      colors: [],
+    });
+    expect(face.complete).toBe(true);
+    expect(face.activated[0].effect).toEqual({
+      kind: "add-mana",
+      mana: "any-color",
+      amount: { countersOn: "source", counter: "charge" },
+      first: { kind: "add-counter", target: "source", counter: "charge", amount: 1 },
+    });
+  });
 });
 
 describe("one play shared among cards (2026-11-07): a spell from among milled cards, one of the exiled cards", () => {

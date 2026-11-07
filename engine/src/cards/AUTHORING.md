@@ -4277,6 +4277,17 @@ oneOf: ["R", "G"] }, amount: 1, also: { kind: "gain-life", amount: 2 } }`.
 Applied right after the mana, off the stack, whether it's activated by hand or
 the auto-payer uses it to pay a cost.
 
+What it does **before** the mana goes on `add-mana`'s `first`, and the amount
+is read after it: Empowered Autogenerator's "{T}: Put a charge counter on this
+artifact. Add X mana of any one color, where X is the number of charge
+counters on this artifact" is `{ kind: "add-mana", mana: "any-color", amount:
+{ countersOn: "source", counter: "charge" }, first: { kind: "add-counter",
+target: "source", counter: "charge", amount: 1 } }` — the new counter counts,
+doubled under Doubling Season (never `{ sum: [1, …] }`). The auto-payer sizes
+it the same way when `first` is a fixed number of counters on `"source"`; any
+other `first` is activated by hand. Activated mana abilities only. The
+scaffolder reads "[sentence]. Add …" this way.
+
 `add-mana`'s `who` (a `PlayerScope`) is "**each player** adds {B}{R}{G}"
 (Yurlok of Scorch Thrash) — for mana with no choice in it. In a mana ability,
 keep the controller's own part unscoped (that is what the auto-payer counts)

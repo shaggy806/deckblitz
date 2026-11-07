@@ -9,6 +9,7 @@
   "effect:cast-this-way-owner-loses-life",
   "effect:extra-combat-attack-restriction",
   "mechanic:more-than-meets-the-eye",
+  "effect:mana-ability-effect-before-mana",
   "cost:plot-cost-reduction",
   "effect:attach-equipment-that-was-attached",
   "effect:double-x-on-cast",

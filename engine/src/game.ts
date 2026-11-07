@@ -24838,6 +24838,10 @@ export class Game {
         ) {
           return;
         }
+        // What it does before its mana, when the mana it then makes can't be
+        // sized without doing it: activated by hand.
+        const first = ability.effect.first;
+        if (first !== undefined && !Game.sizesManaFirst(first)) return;
         // A mana ability whose own activation cost contains mana is a
         // "converter" (a Signet, a filter land, Prismatic Lens). Its cost is
         // paid from *other* sources, never from itself, so a coloured pip is
@@ -24923,8 +24927,8 @@ export class Game {
           typeof ability.effect.amount === "number"
             ? ability.effect.amount
             : perColor
-              ? Math.max(...COLORS.map((c) => this.liveManaAmount(id, player, effectAmount, c)))
-              : this.liveManaAmount(id, player, ability.effect.amount);
+              ? Math.max(...COLORS.map((c) => this.liveManaAmount(id, player, effectAmount, c, first)))
+              : this.liveManaAmount(id, player, ability.effect.amount, undefined, first);
         // A live amount of 0 makes nothing at all. A converter making no more
         // than it costs is still offered — Prismatic Lens's "{1}, {T}: Add one
         // mana of any color" is how a Swamp becomes blue — and the planner
@@ -24946,13 +24950,14 @@ export class Game {
           ...(ability.cost.tap ? {} : { untapped: true as const }),
           ...(ability.oncePerTurn === true ? { oncePerTurn: abilityIndex } : {}),
           ...(ability.effect.also !== undefined ? { rider: ability.effect.also } : {}),
+          ...(first !== undefined ? { first } : {}),
           ...(ability.cost.addCounter !== undefined ? { counterCost: ability.cost.addCounter } : {}),
         };
         const oneOf = typeof mana === "object" && "oneOf" in mana ? mana.oneOf : [];
         const candidates: ManaOption[] =
           perColor
             ? COLORS.flatMap((c) => {
-                const n = this.liveManaAmount(id, player, effectAmount, c);
+                const n = this.liveManaAmount(id, player, effectAmount, c, first);
                 return n <= 0
                   ? []
                   : [{ fixed: Array<ManaType>(n).fill(c), anyColor: 0, pain, lifeCost, genericCost, ...tag }];
@@ -25123,16 +25128,52 @@ export class Game {
     /** The colour being made, for an amount read for "that color"
      * (`{ devotionTo: "that-color" }` — Nykthos). */
     manaColor?: ManaType,
+    /** The ability's `add-mana` `first` — what it does before the mana, so
+     * the amount is read as it will be once that's done (Empowered
+     * Autogenerator's charge counter). Only a {@link Game.sizesManaFirst}
+     * one is read; the auto-payer leaves the rest to be activated by hand. */
+    first?: EffectSpec,
   ): number {
+    const counter = first !== undefined && Game.sizesManaFirst(first) ? first : undefined;
     // Asked for every mana source, every offer and every "could produce"
     // read, and a resolution context is dear to build: once per cache region.
-    return computedCacheMemo(`liveMana:${source}:${player}:${manaColor ?? ""}:${JSON.stringify(amount)}`, () => {
-      const ctx = computedCacheMemo(`liveManaCtx:${source}:${player}`, () =>
-        this.makeResolutionContext(source, player, []),
-      );
-      const n = amountValue(amount, manaColor === undefined ? ctx : { ...ctx, manaColor });
-      return Math.max(0, Math.min(n, Game.MAX_EFFECT_INSTANCES));
-    });
+    return computedCacheMemo(
+      `liveMana:${source}:${player}:${manaColor ?? ""}:${JSON.stringify(amount)}${counter === undefined ? "" : `:first${counter.counter}${counter.amount}`}`,
+      () => {
+        const ctx = computedCacheMemo(`liveManaCtx:${source}:${player}`, () =>
+          this.makeResolutionContext(source, player, []),
+        );
+        let read = manaColor === undefined ? ctx : { ...ctx, manaColor };
+        if (counter !== undefined) {
+          // The counters it will have put on itself — as many as Doubling
+          // Season or Hardened Scales make of an effect's (rule 614.1a), none
+          // under Solemnity — counted by every "counters on it" read of it.
+          const added = this.countersPrevented({ object: source }, counter.counter)
+            ? 0
+            : this.counterTotal(source, counter.counter, counter.amount, false, false, player);
+          const base = read.countersOf;
+          read = {
+            ...read,
+            countersOf: (target, kind) =>
+              base(target, kind) +
+              (target.kind === "object" && target.object === source && (kind === undefined || kind === counter.counter)
+                ? added
+                : 0),
+          };
+        }
+        const n = amountValue(amount, read);
+        return Math.max(0, Math.min(n, Game.MAX_EFFECT_INSTANCES));
+      },
+    );
+  }
+
+  /** Whether `first` (an `add-mana`'s) is one a live amount can be read
+   * after without doing it: a fixed number of counters put on the source
+   * itself. */
+  private static sizesManaFirst(
+    first: EffectSpec,
+  ): first is Extract<EffectSpec, { kind: "add-counter" }> & { readonly amount: number } {
+    return first.kind === "add-counter" && first.target === "source" && typeof first.amount === "number" && first.by === undefined;
   }
 
   /** Whether an `add-mana` amount is read for the colour being made — a
@@ -25567,6 +25608,11 @@ export class Game {
     // — the plan orders its funding sources ahead of it, and names the exact
     // units they contributed.
     for (const m of step.spends) this.removeMana(player, m);
+    // What the mana ability does before its mana (`add-mana`'s `first`):
+    // the plan sized the mana as it is once that's done (`liveManaAmount`).
+    if (step.first !== undefined) {
+      applyEffectSpec(step.first, this.makeResolutionContext(step.source, player, []));
+    }
     // The last units are what triggered mana abilities added, and theirs:
     // none of this source's restrictions or riders ride on them (the Mirari's
     // Wake and Kinnan rulings).
@@ -25765,7 +25811,7 @@ export class Game {
       own = [];
       let none = false;
       for (const c of COLORS) {
-        const n = this.liveManaAmount(sourceId, player, effect.amount, c);
+        const n = this.liveManaAmount(sourceId, player, effect.amount, c, effect.first);
         if (n > 0) own.push({ picks: Array<ManaType>(n).fill(c), makes: Array<ManaType>(n).fill(c) });
         else none = true;
       }
@@ -25778,7 +25824,7 @@ export class Game {
       const oneOf = (m: { readonly oneOf: readonly ManaType[] } | BoardManaList) => this.manaOneOf(m, player, sourceId);
       const live = () =>
         effect.kind === "add-mana" && typeof effect.amount !== "number"
-          ? this.liveManaAmount(sourceId, player, effect.amount)
+          ? this.liveManaAmount(sourceId, player, effect.amount, undefined, effect.first)
           : null;
       const choices = standaloneManaChoices(ability, oneOf, live);
       // A list naming no type now (Mox Amber with no legendary permanent,
@@ -25880,7 +25926,9 @@ export class Game {
     }
     if (effect.kind !== "add-mana") return [];
     const n =
-      typeof effect.amount === "number" ? effect.amount : this.liveManaAmount(sourceId, player, effect.amount);
+      typeof effect.amount === "number"
+        ? effect.amount
+        : this.liveManaAmount(sourceId, player, effect.amount, undefined, effect.first);
     const m = effect.mana;
     let types: readonly ManaType[] | null;
     if (m === "any-color") types = null;
@@ -28155,10 +28203,13 @@ export class Game {
     const player = object.controller;
     // Whether the amount makes any mana — read only when a type it would add
     // isn't already known, since a live amount is dear to read.
+    // The `add-mana` being read's `first` (Empowered Autogenerator's charge
+    // counter), which its amount is read after.
+    let first: EffectSpec | undefined;
     const makes = (amount: EffectAmount, color?: ManaType): boolean =>
       typeof amount === "number"
         ? amount > 0
-        : amount === "x" || this.liveManaAmount(id, player, amount, color) > 0;
+        : amount === "x" || this.liveManaAmount(id, player, amount, color, first) > 0;
     const addAll = (candidates: readonly ManaType[], amount: EffectAmount): void => {
       const fresh = candidates.filter((t) => !types.has(t));
       if (fresh.length > 0 && makes(amount)) for (const t of fresh) types.add(t);
@@ -28170,6 +28221,7 @@ export class Game {
         return;
       }
       if (effect.kind !== "add-mana") return;
+      first = effect.first;
       const m = effect.mana;
       if (m === "any-color") {
         // An amount read for the colour (Nykthos) is asked colour by colour.

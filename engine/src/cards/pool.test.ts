@@ -223,6 +223,19 @@ describe("triggered mana abilities", () => {
     );
     expect(onTheStack).toEqual([]);
   });
+
+  // `add-mana`'s `first` is read for an activated mana ability only
+  // (`tappedForManaExtras` doesn't apply one).
+  it("put nothing before the mana (`first`)", () => {
+    const addsFirst = (node: unknown): boolean =>
+      typeof node === "object" &&
+      node !== null &&
+      (((node as { kind?: unknown }).kind === "add-mana" && "first" in node) || Object.values(node).some(addsFirst));
+    const withFirst = POOL_CARDS.flatMap((def) =>
+      def.triggered.filter((ability) => addsFirst(ability.effect)).map(() => def.name),
+    );
+    expect(withFirst).toEqual([]);
+  });
 });
 
 describe("exile until this leaves the battlefield", () => {

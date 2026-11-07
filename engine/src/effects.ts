@@ -3164,6 +3164,18 @@ export type EffectSpec =
        * ability, the rest of it the same way (Overabundance's damage — rule
        * 605.4a), for no decision. */
       readonly also?: EffectSpec;
+      /** What the ability does **before** it adds the mana, as part of it —
+       * Empowered Autogenerator: "{T}: Put a charge counter on this artifact.
+       * Add X mana of any one color, where X is the number of charge counters
+       * on this artifact." Still all one mana ability (rule 605.1a asks only
+       * that it could add mana and have no target), and `amount` is read
+       * after it, so the new counter counts — doubled under Doubling Season,
+       * as an effect's counters are (a `+1` on the amount would be wrong
+       * there). The auto-payer sizes the mana the same way when `first` is
+       * an `add-counter` of a fixed number on `"source"` (`Game`'s
+       * `liveManaAmount`); any other `first` is activated by hand. An
+       * activated mana ability's only. */
+      readonly first?: EffectSpec;
       /** Who adds it, when that isn't the effect's controller — "each
        * player adds {B}{R}{G}" (Yurlok of Scorch Thrash). For mana with no
        * choice in it only (a choice is its controller's to make). A mana
@@ -16752,6 +16764,14 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       // What a permanent tapped for mana produced is known only to the
       // triggered mana ability the engine applies there (`tapped-for-mana`).
       if (spec.mana === "produced") return;
+      // "Put a charge counter on this artifact. Add X mana …" (Empowered
+      // Autogenerator): the first part, then the mana, read after it.
+      if (spec.first !== undefined) {
+        const { first, ...rest } = spec;
+        applyEffectSpec(first, ctx);
+        applyEffectSpec(rest, ctx);
+        return;
+      }
       // A spell or an ability on the stack adding mana with a choice in it
       // asks as the mana is added (rule 608.2d); a mana ability's choice came
       // with its activation (`ResolutionContext.manaAbility`).

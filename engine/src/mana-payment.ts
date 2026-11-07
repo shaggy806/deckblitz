@@ -88,6 +88,10 @@ export interface ManaOption {
   /** What else the mana ability does — `add-mana`'s `also` — applied when
    * the payment uses it. */
   readonly rider?: EffectSpec;
+  /** What the mana ability does before its mana — `add-mana`'s `first`
+   * (Empowered Autogenerator's charge counter) — applied when the payment
+   * uses it, ahead of the mana it adds. */
+  readonly first?: EffectSpec;
   /** The extra mana triggered mana abilities add as this source is tapped
    * (rule 605.1b), one entry per unit — those units are theirs, not this
    * source's (see `ManaOrigin`), and carry none of its `tag` (Mirari's Wake's
@@ -222,6 +226,8 @@ export interface ManaPlanStep {
   readonly oncePerTurn?: number;
   /** See {@link ManaOption.rider}. */
   readonly rider?: EffectSpec;
+  /** See {@link ManaOption.first}. */
+  readonly first?: EffectSpec;
   /** Whose the extra units are (see {@link ManaOption.extras}): the last
    * `extraFrom.length` units of `mana` are theirs, one id per unit, and
    * carry no `tag` of this source's. */
@@ -1017,6 +1023,7 @@ function planSnowPayment(
       ...(o.untapped !== undefined ? { untapped: o.untapped } : {}),
       ...(o.oncePerTurn !== undefined ? { oncePerTurn: o.oncePerTurn } : {}),
       ...(o.rider !== undefined ? { rider: o.rider } : {}),
+      ...(o.first !== undefined ? { first: o.first } : {}),
       ...(extras.length > 0 ? { extraFrom: extras.map((e) => e.from) } : {}),
       ...extraTagsOf(extras),
       ...(o.counterCost !== undefined ? { counterCost: o.counterCost } : {}),
@@ -1265,6 +1272,7 @@ function planManaPaymentOrdered(
     readonly untapped?: true;
     readonly oncePerTurn?: number;
     readonly rider?: EffectSpec;
+    readonly first?: EffectSpec;
     readonly counterCost?: { readonly kind: string; readonly count: number };
     readonly floating?: readonly ManaExtraUnit[];
     readonly extraTagOf?: Readonly<Record<ObjectId, Omit<ManaUnit, "type">>>;
@@ -1356,6 +1364,7 @@ function planManaPaymentOrdered(
       ...(opt.untapped !== undefined ? { untapped: opt.untapped } : {}),
       ...(opt.oncePerTurn !== undefined ? { oncePerTurn: opt.oncePerTurn } : {}),
       ...(opt.rider !== undefined ? { rider: opt.rider } : {}),
+      ...(opt.first !== undefined ? { first: opt.first } : {}),
       ...(opt.counterCost !== undefined ? { counterCost: opt.counterCost } : {}),
       ...(opt.floating !== undefined ? { floating: opt.floating } : {}),
       ...extraTagsOf(opt.extras ?? []),
@@ -1759,6 +1768,7 @@ function planManaPaymentOrdered(
       ...(t.untapped !== undefined ? { untapped: t.untapped } : {}),
       ...(t.oncePerTurn !== undefined ? { oncePerTurn: t.oncePerTurn } : {}),
       ...(t.rider !== undefined ? { rider: t.rider } : {}),
+      ...(t.first !== undefined ? { first: t.first } : {}),
       ...(extra.length > 0 ? { extraFrom: extra.map((u) => u.extra as ObjectId) } : {}),
       ...(t.extraTagOf !== undefined ? { extraTagOf: t.extraTagOf } : {}),
       ...(t.counterCost !== undefined ? { counterCost: t.counterCost } : {}),

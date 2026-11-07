@@ -3488,6 +3488,12 @@ export function parseSentence(sentence, ctx) {
     const total = dividedTotalOf(m[1]);
     if (total !== null) return { kind: "add-mana", mana: { oneOf: ["W", "U", "B", "R", "G"] }, amount: total };
   }
+  // "Add X mana of any one color, where X is the number of charge counters on
+  // this artifact" (Empowered Autogenerator, Glittering Stockpile): read as
+  // it's made, off the source as it last existed if it was sacrificed.
+  if ((m = /^add X mana of any one color, where X is the number of ([\w+/-]+) counters on ~\.$/i.exec(s))) {
+    return { kind: "add-mana", mana: "any-color", amount: { countersOn: "source", counter: m[1].toLowerCase() } };
+  }
   if (
     /\bwhere X\b|\bfor each\b/i.test(s) &&
     !/^add .*for each [\w+/-]+ counter removed this way\.$/i.test(s) &&
@@ -15523,7 +15529,7 @@ function parseFaceAsWritten(face, ctx = {}) {
       // "{R}, Sacrifice this creature: It deals 2 damage to …" (Tinder Wall,
       // Barbarian Lunatic): a permanent's own ability, so "it" is its source.
       i = fillEffect(ability, rest, { tokenFor, ...(/^It deals /.test(rest) ? { it: "source" } : {}) }, lines, i);
-      manaAbilityExtras(ability);
+      manaAbilityExtras(ability, true);
       out.activated.push(ability);
       continue;
     }
@@ -16986,9 +16992,25 @@ const touchesLibrary = (e) =>
  * moves a card to or from a library: those aren't mana abilities (605.1a —
  * Chromatic Sphere's "Add one mana of any color. Draw a card." uses the
  * stack), and a colour choice made on the stack needs authoring.
+ *
+ * `activated`: what comes **before** the mana in an activated one rides on
+ * `first` — Empowered Autogenerator's "{T}: Put a charge counter on this
+ * artifact. Add X mana …", X read after the counter.
  */
-function manaAbilityExtras(ability) {
+function manaAbilityExtras(ability, activated = false) {
   const e = ability.effect;
+  if (
+    activated &&
+    e?.kind === "sequence" &&
+    e.effects.length === 2 &&
+    e.effects[1]?.kind === "add-mana" &&
+    e.effects[0]?.kind !== "add-mana" &&
+    ability.targets.length === 0 &&
+    !touchesLibrary(e.effects[0])
+  ) {
+    ability.effect = { ...e.effects[1], first: e.effects[0] };
+    return;
+  }
   if (e?.kind !== "sequence" || e.effects[0]?.kind !== "add-mana" || ability.targets.length > 0) return;
   const rest = e.effects.slice(1);
   if (rest.length === 0 || rest.some((step) => step.kind === "add-mana")) return;

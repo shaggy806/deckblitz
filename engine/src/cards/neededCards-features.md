@@ -471,6 +471,17 @@ Muscle // Slicer, High-Speed Antagonist. Key: mechanic:more-than-meets-the-eye. 
 (also `trigger:becomes-monarch`), Ratchet, Field Medic, for `author-freed`; like blitz's and
 web-slinging's, the offer comes from the hand and command zone only, not every zone a card may
 be cast from (`docs/engine-gaps.md`).
+### A mana ability's effect before its mana — built 2026-11-07
+
+Flagged Build ASAP: Empowered Autogenerator (3982). `add-mana`'s `first` is what
+the ability does before it adds the mana, still one mana ability (rules 605.1a,
+605.3b), its `amount` read after it — so the charge counter it puts counts, doubled
+under Doubling Season. `Game.liveManaAmount` reads a `first` of a fixed number of
+counters on the source as already done (`counterTotal`, Solemnity), so the
+auto-payer, the by-hand offers and "could produce" size it right; any other
+`first` is activated by hand. The scaffolder reads "[sentence]. Add …" in an
+activated ability this way, and "Add X mana of any one color, where X is the
+number of [kind] counters on ~" whole. Key: effect:mana-ability-effect-before-mana.
 
 ### Every nonbasic land type, and base P/T set to your life total — built 2026-11-06
 
