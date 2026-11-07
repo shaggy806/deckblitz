@@ -765,6 +765,7 @@ import _poolAncestralVision from "./pool/ancestral-vision.js";
 import _poolAnchorToReality from "./pool/anchor-to-reality.js";
 import _poolAnchorToTheAether from "./pool/anchor-to-the-aether.js";
 import _poolAnchovyBananaPizza from "./pool/anchovy-banana-pizza.js";
+import _poolAncientAdamantoise from "./pool/ancient-adamantoise.js";
 import _poolAncientAmphitheater from "./pool/ancient-amphitheater.js";
 import _poolAncientAnimus from "./pool/ancient-animus.js";
 import _poolAncientBrassDragon from "./pool/ancient-brass-dragon.js";
@@ -3655,6 +3656,7 @@ import _poolCallTheGatewatch from "./pool/call-the-gatewatch.js";
 import _poolCallTheMountainChocobo from "./pool/call-the-mountain-chocobo.js";
 import _poolCallTheScions from "./pool/call-the-scions.js";
 import _poolCallTheSkybreaker from "./pool/call-the-skybreaker.js";
+import _poolCallTheSpiritDragons from "./pool/call-the-spirit-dragons.js";
 import _poolCallToArms from "./pool/call-to-arms.js";
 import _poolCallToGlory from "./pool/call-to-glory.js";
 import _poolCallToHeel from "./pool/call-to-heel.js";
@@ -29678,6 +29680,7 @@ import _poolWaterWings from "./pool/water-wings.js";
 import _poolWaterWurm from "./pool/water-wurm.js";
 import _poolWaterbenderAscension from "./pool/waterbender-ascension.js";
 import _poolWaterbendersRestoration from "./pool/waterbenders-restoration.js";
+import _poolWaterbendingLesson from "./pool/waterbending-lesson.js";
 import _poolWaterbendingScroll from "./pool/waterbending-scroll.js";
 import _poolWatercourser from "./pool/watercourser.js";
 import _poolWaterfallAerialist from "./pool/waterfall-aerialist.js";
@@ -32307,6 +32310,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAnchorToReality,
   _poolAnchorToTheAether,
   _poolAnchovyBananaPizza,
+  _poolAncientAdamantoise,
   _poolAncientAmphitheater,
   _poolAncientAnimus,
   _poolAncientBrassDragon,
@@ -35197,6 +35201,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCallTheMountainChocobo,
   _poolCallTheScions,
   _poolCallTheSkybreaker,
+  _poolCallTheSpiritDragons,
   _poolCallToArms,
   _poolCallToGlory,
   _poolCallToHeel,
@@ -61220,6 +61225,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWaterWurm,
   _poolWaterbenderAscension,
   _poolWaterbendersRestoration,
+  _poolWaterbendingLesson,
   _poolWaterbendingScroll,
   _poolWatercourser,
   _poolWaterfallAerialist,
@@ -63862,6 +63868,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/anchor-to-reality": _poolAnchorToReality,
   "pool/anchor-to-the-aether": _poolAnchorToTheAether,
   "pool/anchovy-banana-pizza": _poolAnchovyBananaPizza,
+  "pool/ancient-adamantoise": _poolAncientAdamantoise,
   "pool/ancient-amphitheater": _poolAncientAmphitheater,
   "pool/ancient-animus": _poolAncientAnimus,
   "pool/ancient-brass-dragon": _poolAncientBrassDragon,
@@ -66752,6 +66759,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/call-the-mountain-chocobo": _poolCallTheMountainChocobo,
   "pool/call-the-scions": _poolCallTheScions,
   "pool/call-the-skybreaker": _poolCallTheSkybreaker,
+  "pool/call-the-spirit-dragons": _poolCallTheSpiritDragons,
   "pool/call-to-arms": _poolCallToArms,
   "pool/call-to-glory": _poolCallToGlory,
   "pool/call-to-heel": _poolCallToHeel,
@@ -92775,6 +92783,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/water-wurm": _poolWaterWurm,
   "pool/waterbender-ascension": _poolWaterbenderAscension,
   "pool/waterbenders-restoration": _poolWaterbendersRestoration,
+  "pool/waterbending-lesson": _poolWaterbendingLesson,
   "pool/waterbending-scroll": _poolWaterbendingScroll,
   "pool/watercourser": _poolWatercourser,
   "pool/waterfall-aerialist": _poolWaterfallAerialist,

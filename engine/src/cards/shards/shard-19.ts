@@ -29,6 +29,7 @@ import _poolAmphinMutineer from "../pool/amphin-mutineer.js";
 import _poolAnavolver from "../pool/anavolver.js";
 import _poolAncestralCommunion from "../pool/ancestral-communion.js";
 import _poolAnchorToTheAether from "../pool/anchor-to-the-aether.js";
+import _poolAncientAdamantoise from "../pool/ancient-adamantoise.js";
 import _poolAncientSilverback from "../pool/ancient-silverback.js";
 import _poolAncientTomb from "../pool/ancient-tomb.js";
 import _poolAngelicExaltation from "../pool/angelic-exaltation.js";
@@ -117,6 +118,7 @@ import _poolCabarettiCharm from "../pool/cabaretti-charm.js";
 import _poolCaelornaCoralTyrant from "../pool/caelorna-coral-tyrant.js";
 import _poolCagedZombie from "../pool/caged-zombie.js";
 import _poolCallDamageControl from "../pool/call-damage-control.js";
+import _poolCallTheSpiritDragons from "../pool/call-the-spirit-dragons.js";
 import _poolCallapheBelovedOfTheSea from "../pool/callaphe-beloved-of-the-sea.js";
 import _poolCalmingVerse from "../pool/calming-verse.js";
 import _poolCanalDredger from "../pool/canal-dredger.js";
@@ -1059,6 +1061,7 @@ const shard: CardShard = {
     _poolAnavolver,
     _poolAncestralCommunion,
     _poolAnchorToTheAether,
+    _poolAncientAdamantoise,
     _poolAncientSilverback,
     _poolAncientTomb,
     _poolAngelicExaltation,
@@ -1147,6 +1150,7 @@ const shard: CardShard = {
     _poolCaelornaCoralTyrant,
     _poolCagedZombie,
     _poolCallDamageControl,
+    _poolCallTheSpiritDragons,
     _poolCallapheBelovedOfTheSea,
     _poolCalmingVerse,
     _poolCanalDredger,
