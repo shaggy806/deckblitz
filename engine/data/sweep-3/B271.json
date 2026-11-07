@@ -1,0 +1,29 @@
+{
+ "batch": "B271",
+ "status": "done",
+ "ranks": "Build ASAP: cards flagged in the library. 22 flagged; this session took the three that wait on a mill, as B270 recommended: a `mills` trigger off the existing cards-milled event (rule 701.17) and a `milledThisTurn` card filter, narrower than put-there-from-a-library (a surveilled card wasn't milled). The other 19 stay flagged, blocked as recorded.",
+ "authored": [
+  {
+   "name": "Mirelurk Queen",
+   "files": [
+    "engine/src/cards/pool/mirelurk-queen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Wise Mothman",
+   "files": [
+    "engine/src/cards/pool/the-wise-mothman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tato Farmer",
+   "files": [
+    "engine/src/cards/pool/tato-farmer.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": []
+}

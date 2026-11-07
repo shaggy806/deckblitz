@@ -12,6 +12,16 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **The Build ASAP mill cards** (2026-11-06, B271, `/author-flagged`): Mirelurk Queen, The Wise
+  Mothman and Tato Farmer. A `mills` trigger off the existing `cards-milled` event (rule 701.17):
+  once per mill when a card matches its filter, its trigger value the matching count ("where X is
+  the number of nonland cards milled this way"). Milled cards are marked `milledOnTurn` where the
+  mill put them, cleared on a zone change (400.7), read by the `milledThisTurn` filter — narrower
+  than put-there-from-a-library, as Tato Farmer's ruling says a surveilled land isn't a target.
+  The scaffolder reads the trigger line. Keys: `trigger:mills-trigger`,
+  `trigger:trigger-mills-nonland-card`, `stat:milled-this-turn-mill-only`; they free five more for
+  `author-freed` (Glowing One, Infesting Radroach, Screeching Scorchbeast, The Master,
+  Transcendent, Zellix). 19 flagged cards still wait.
 - **The first Build ASAP cards** (2026-11-06, B270, `/author-flagged`): four of the 26 cards the
   user flagged in the library. Liliana of the Dark Realms (her −3's "+X/+X or −X/−X" is a
   resolution-time `modal`, as the ruling says) and Dracogenesis (an `alternativeCostForSpells`
