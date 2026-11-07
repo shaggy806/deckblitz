@@ -282,6 +282,7 @@ import _poolEnergybending from "../pool/energybending.js";
 import _poolEntrustTheSpark from "../pool/entrust-the-spark.js";
 import _poolEomerMarshalOfRohan from "../pool/eomer-marshal-of-rohan.js";
 import _poolEshkiTemursRoar from "../pool/eshki-temurs-roar.js";
+import _poolEsperTerra from "../pool/esper-terra.js";
 import _poolEternalScourge from "../pool/eternal-scourge.js";
 import _poolEternalThirst from "../pool/eternal-thirst.js";
 import _poolEtherealChampion from "../pool/ethereal-champion.js";
@@ -1265,6 +1266,7 @@ const shard: CardShard = {
     _poolEntrustTheSpark,
     _poolEomerMarshalOfRohan,
     _poolEshkiTemursRoar,
+    _poolEsperTerra,
     _poolEternalScourge,
     _poolEternalThirst,
     _poolEtherealChampion,

@@ -3760,6 +3760,7 @@ import _poolCaptainAmericaTeamLeader from "./pool/captain-america-team-leader.js
 import _poolCaptainAmericaUnbowed from "./pool/captain-america-unbowed.js";
 import _poolCaptainAmericaWingsOfFreedom from "./pool/captain-america-wings-of-freedom.js";
 import _poolCaptainAmericasMotorcycle from "./pool/captain-americas-motorcycle.js";
+import _poolCaptainAmericasShield from "./pool/captain-americas-shield.js";
 import _poolCaptainHowlerSeaScourge from "./pool/captain-howler-sea-scourge.js";
 import _poolCaptainJamesTKirk from "./pool/captain-james-t-kirk.js";
 import _poolCaptainJanewayEndgame from "./pool/captain-janeway-endgame.js";
@@ -7751,6 +7752,7 @@ import _poolEliteInquisitor from "./pool/elite-inquisitor.js";
 import _poolEliteInstructor from "./pool/elite-instructor.js";
 import _poolEliteInterceptor from "./pool/elite-interceptor.js";
 import _poolEliteJavelineer from "./pool/elite-javelineer.js";
+import _poolEliteScaleguard from "./pool/elite-scaleguard.js";
 import _poolEliteSkirmisher from "./pool/elite-skirmisher.js";
 import _poolEliteSpellbinder from "./pool/elite-spellbinder.js";
 import _poolEliteVanguard from "./pool/elite-vanguard.js";
@@ -8206,10 +8208,12 @@ import _poolEsotericDuplicator from "./pool/esoteric-duplicator.js";
 import _poolEsperBattlemage from "./pool/esper-battlemage.js";
 import _poolEsperCharm from "./pool/esper-charm.js";
 import _poolEsperCormorants from "./pool/esper-cormorants.js";
+import _poolEsperOrigins from "./pool/esper-origins.js";
 import _poolEsperPanorama from "./pool/esper-panorama.js";
 import _poolEsperSentinel from "./pool/esper-sentinel.js";
 import _poolEsperSojourners from "./pool/esper-sojourners.js";
 import _poolEsperStormblade from "./pool/esper-stormblade.js";
+import _poolEsperTerra from "./pool/esper-terra.js";
 import _poolEspersToMagicite from "./pool/espers-to-magicite.js";
 import _poolEsperzoa from "./pool/esperzoa.js";
 import _poolEsquireOfTheKing from "./pool/esquire-of-the-king.js";
@@ -8325,6 +8329,7 @@ import _poolEverflameEidolon from "./pool/everflame-eidolon.js";
 import _poolEverflowingChalice from "./pool/everflowing-chalice.js";
 import _poolEverglades from "./pool/everglades.js";
 import _poolEvergloveCourier from "./pool/everglove-courier.js";
+import _poolEverlastingTorment from "./pool/everlasting-torment.js";
 import _poolEvermind from "./pool/evermind.js";
 import _poolEvernightShade from "./pool/evernight-shade.js";
 import _poolEverquillPhoenix from "./pool/everquill-phoenix.js";
@@ -23248,6 +23253,7 @@ import _poolShiningArmor from "./pool/shining-armor.js";
 import _poolShinkaGatekeeper from "./pool/shinka-gatekeeper.js";
 import _poolShinkaTheBloodsoakedKeep from "./pool/shinka-the-bloodsoaked-keep.js";
 import _poolShinraReinforcements from "./pool/shinra-reinforcements.js";
+import _poolShinryuTranscendentRival from "./pool/shinryu-transcendent-rival.js";
 import _poolShinyImpetus from "./pool/shiny-impetus.js";
 import _poolShipbreakerKraken from "./pool/shipbreaker-kraken.js";
 import _poolShipwreckDowser from "./pool/shipwreck-dowser.js";
@@ -25579,6 +25585,7 @@ import _poolSummonAlexander from "./pool/summon-alexander.js";
 import _poolSummonAnima from "./pool/summon-anima.js";
 import _poolSummonBahamut from "./pool/summon-bahamut.js";
 import _poolSummonChocoMog from "./pool/summon-choco-mog.js";
+import _poolSummonEsperMaduin from "./pool/summon-esper-maduin.js";
 import _poolSummonEsperRamuh from "./pool/summon-esper-ramuh.js";
 import _poolSummonEsperValigarmanda from "./pool/summon-esper-valigarmanda.js";
 import _poolSummonFatChocobo from "./pool/summon-fat-chocobo.js";
@@ -26475,6 +26482,7 @@ import _poolTerohsFaithful from "./pool/terohs-faithful.js";
 import _poolTerohsVanguard from "./pool/terohs-vanguard.js";
 import _poolTerraEternal from "./pool/terra-eternal.js";
 import _poolTerraHeraldOfHope from "./pool/terra-herald-of-hope.js";
+import _poolTerraMagicalAdept from "./pool/terra-magical-adept.js";
 import _poolTerraRavager from "./pool/terra-ravager.js";
 import _poolTerraStomper from "./pool/terra-stomper.js";
 import _poolTerraformer from "./pool/terraformer.js";
@@ -30658,6 +30666,7 @@ import _poolZenithChronicler from "./pool/zenith-chronicler.js";
 import _poolZenithFestival from "./pool/zenith-festival.js";
 import _poolZenithFlare from "./pool/zenith-flare.js";
 import _poolZenithSeeker from "./pool/zenith-seeker.js";
+import _poolZenosYaeGalvus from "./pool/zenos-yae-galvus.js";
 import _poolZephid from "./pool/zephid.js";
 import _poolZephidsEmbrace from "./pool/zephids-embrace.js";
 import _poolZephyrBoots from "./pool/zephyr-boots.js";
@@ -35290,6 +35299,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCaptainAmericaUnbowed,
   _poolCaptainAmericaWingsOfFreedom,
   _poolCaptainAmericasMotorcycle,
+  _poolCaptainAmericasShield,
   _poolCaptainHowlerSeaScourge,
   _poolCaptainJamesTKirk,
   _poolCaptainJanewayEndgame,
@@ -39281,6 +39291,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEliteInstructor,
   _poolEliteInterceptor,
   _poolEliteJavelineer,
+  _poolEliteScaleguard,
   _poolEliteSkirmisher,
   _poolEliteSpellbinder,
   _poolEliteVanguard,
@@ -39736,10 +39747,12 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEsperBattlemage,
   _poolEsperCharm,
   _poolEsperCormorants,
+  _poolEsperOrigins,
   _poolEsperPanorama,
   _poolEsperSentinel,
   _poolEsperSojourners,
   _poolEsperStormblade,
+  _poolEsperTerra,
   _poolEspersToMagicite,
   _poolEsperzoa,
   _poolEsquireOfTheKing,
@@ -39855,6 +39868,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEverflowingChalice,
   _poolEverglades,
   _poolEvergloveCourier,
+  _poolEverlastingTorment,
   _poolEvermind,
   _poolEvernightShade,
   _poolEverquillPhoenix,
@@ -54778,6 +54792,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolShinkaGatekeeper,
   _poolShinkaTheBloodsoakedKeep,
   _poolShinraReinforcements,
+  _poolShinryuTranscendentRival,
   _poolShinyImpetus,
   _poolShipbreakerKraken,
   _poolShipwreckDowser,
@@ -57109,6 +57124,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSummonAnima,
   _poolSummonBahamut,
   _poolSummonChocoMog,
+  _poolSummonEsperMaduin,
   _poolSummonEsperRamuh,
   _poolSummonEsperValigarmanda,
   _poolSummonFatChocobo,
@@ -58005,6 +58021,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTerohsVanguard,
   _poolTerraEternal,
   _poolTerraHeraldOfHope,
+  _poolTerraMagicalAdept,
   _poolTerraRavager,
   _poolTerraStomper,
   _poolTerraformer,
@@ -62188,6 +62205,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolZenithFestival,
   _poolZenithFlare,
   _poolZenithSeeker,
+  _poolZenosYaeGalvus,
   _poolZephid,
   _poolZephidsEmbrace,
   _poolZephyrBoots,
@@ -66833,6 +66851,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/captain-america-unbowed": _poolCaptainAmericaUnbowed,
   "pool/captain-america-wings-of-freedom": _poolCaptainAmericaWingsOfFreedom,
   "pool/captain-americas-motorcycle": _poolCaptainAmericasMotorcycle,
+  "pool/captain-americas-shield": _poolCaptainAmericasShield,
   "pool/captain-howler-sea-scourge": _poolCaptainHowlerSeaScourge,
   "pool/captain-james-t-kirk": _poolCaptainJamesTKirk,
   "pool/captain-janeway-endgame": _poolCaptainJanewayEndgame,
@@ -70824,6 +70843,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/elite-instructor": _poolEliteInstructor,
   "pool/elite-interceptor": _poolEliteInterceptor,
   "pool/elite-javelineer": _poolEliteJavelineer,
+  "pool/elite-scaleguard": _poolEliteScaleguard,
   "pool/elite-skirmisher": _poolEliteSkirmisher,
   "pool/elite-spellbinder": _poolEliteSpellbinder,
   "pool/elite-vanguard": _poolEliteVanguard,
@@ -71279,10 +71299,12 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/esper-battlemage": _poolEsperBattlemage,
   "pool/esper-charm": _poolEsperCharm,
   "pool/esper-cormorants": _poolEsperCormorants,
+  "pool/esper-origins": _poolEsperOrigins,
   "pool/esper-panorama": _poolEsperPanorama,
   "pool/esper-sentinel": _poolEsperSentinel,
   "pool/esper-sojourners": _poolEsperSojourners,
   "pool/esper-stormblade": _poolEsperStormblade,
+  "pool/esper-terra": _poolEsperTerra,
   "pool/espers-to-magicite": _poolEspersToMagicite,
   "pool/esperzoa": _poolEsperzoa,
   "pool/esquire-of-the-king": _poolEsquireOfTheKing,
@@ -71398,6 +71420,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/everflowing-chalice": _poolEverflowingChalice,
   "pool/everglades": _poolEverglades,
   "pool/everglove-courier": _poolEvergloveCourier,
+  "pool/everlasting-torment": _poolEverlastingTorment,
   "pool/evermind": _poolEvermind,
   "pool/evernight-shade": _poolEvernightShade,
   "pool/everquill-phoenix": _poolEverquillPhoenix,
@@ -86321,6 +86344,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/shinka-gatekeeper": _poolShinkaGatekeeper,
   "pool/shinka-the-bloodsoaked-keep": _poolShinkaTheBloodsoakedKeep,
   "pool/shinra-reinforcements": _poolShinraReinforcements,
+  "pool/shinryu-transcendent-rival": _poolShinryuTranscendentRival,
   "pool/shiny-impetus": _poolShinyImpetus,
   "pool/shipbreaker-kraken": _poolShipbreakerKraken,
   "pool/shipwreck-dowser": _poolShipwreckDowser,
@@ -88652,6 +88676,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/summon-anima": _poolSummonAnima,
   "pool/summon-bahamut": _poolSummonBahamut,
   "pool/summon-choco-mog": _poolSummonChocoMog,
+  "pool/summon-esper-maduin": _poolSummonEsperMaduin,
   "pool/summon-esper-ramuh": _poolSummonEsperRamuh,
   "pool/summon-esper-valigarmanda": _poolSummonEsperValigarmanda,
   "pool/summon-fat-chocobo": _poolSummonFatChocobo,
@@ -89548,6 +89573,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/terohs-vanguard": _poolTerohsVanguard,
   "pool/terra-eternal": _poolTerraEternal,
   "pool/terra-herald-of-hope": _poolTerraHeraldOfHope,
+  "pool/terra-magical-adept": _poolTerraMagicalAdept,
   "pool/terra-ravager": _poolTerraRavager,
   "pool/terra-stomper": _poolTerraStomper,
   "pool/terraformer": _poolTerraformer,
@@ -93731,6 +93757,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/zenith-festival": _poolZenithFestival,
   "pool/zenith-flare": _poolZenithFlare,
   "pool/zenith-seeker": _poolZenithSeeker,
+  "pool/zenos-yae-galvus": _poolZenosYaeGalvus,
   "pool/zephid": _poolZephid,
   "pool/zephids-embrace": _poolZephidsEmbrace,
   "pool/zephyr-boots": _poolZephyrBoots,

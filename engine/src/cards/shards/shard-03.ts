@@ -729,6 +729,7 @@ import _poolStudentOfWarfare from "../pool/student-of-warfare.js";
 import _poolStunningStrike from "../pool/stunning-strike.js";
 import _poolSulfurVent from "../pool/sulfur-vent.js";
 import _poolSumalaSentry from "../pool/sumala-sentry.js";
+import _poolSummonEsperMaduin from "../pool/summon-esper-maduin.js";
 import _poolSunSpiderNimbleWebber from "../pool/sun-spider-nimble-webber.js";
 import _poolSunderingArchaic from "../pool/sundering-archaic.js";
 import _poolSunspireGriffin from "../pool/sunspire-griffin.js";
@@ -1628,6 +1629,7 @@ const shard: CardShard = {
     _poolStunningStrike,
     _poolSulfurVent,
     _poolSumalaSentry,
+    _poolSummonEsperMaduin,
     _poolSunSpiderNimbleWebber,
     _poolSunderingArchaic,
     _poolSunspireGriffin,

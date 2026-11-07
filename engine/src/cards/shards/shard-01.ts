@@ -818,6 +818,7 @@ import _poolTemporalMachinations from "../pool/temporal-machinations.js";
 import _poolTemporaryInsanity from "../pool/temporary-insanity.js";
 import _poolTemptWithVengeance from "../pool/tempt-with-vengeance.js";
 import _poolTerohsVanguard from "../pool/terohs-vanguard.js";
+import _poolTerraMagicalAdept from "../pool/terra-magical-adept.js";
 import _poolTetheredSkirge from "../pool/tethered-skirge.js";
 import _poolTeyoLightshieldExpert from "../pool/teyo-lightshield-expert.js";
 import _poolTeyosLightshield from "../pool/teyos-lightshield.js";
@@ -1796,6 +1797,7 @@ const shard: CardShard = {
     _poolTemporaryInsanity,
     _poolTemptWithVengeance,
     _poolTerohsVanguard,
+    _poolTerraMagicalAdept,
     _poolTetheredSkirge,
     _poolTeyoLightshieldExpert,
     _poolTeyosLightshield,

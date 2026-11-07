@@ -912,6 +912,7 @@ import _poolYouComeToTheGnollCamp from "../pool/you-come-to-the-gnoll-camp.js";
 import _poolYuanTiFangBlade from "../pool/yuan-ti-fang-blade.js";
 import _poolYukoraThePrisoner from "../pool/yukora-the-prisoner.js";
 import _poolZaffaiThunderConductor from "../pool/zaffai-thunder-conductor.js";
+import _poolZenosYaeGalvus from "../pool/zenos-yae-galvus.js";
 import _poolZhaoRuthlessAdmiral from "../pool/zhao-ruthless-admiral.js";
 import _poolZhentarimBandit from "../pool/zhentarim-bandit.js";
 import _poolZirilanOfTheClaw from "../pool/zirilan-of-the-claw.js";
@@ -1848,6 +1849,7 @@ const shard: CardShard = {
     _poolYuanTiFangBlade,
     _poolYukoraThePrisoner,
     _poolZaffaiThunderConductor,
+    _poolZenosYaeGalvus,
     _poolZhaoRuthlessAdmiral,
     _poolZhentarimBandit,
     _poolZirilanOfTheClaw,

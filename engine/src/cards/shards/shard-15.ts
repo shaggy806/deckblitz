@@ -227,6 +227,7 @@ import _poolElderDruid from "../pool/elder-druid.js";
 import _poolElectroAssaultingBattery from "../pool/electro-assaulting-battery.js";
 import _poolElgaudShieldmate from "../pool/elgaud-shieldmate.js";
 import _poolEliminateTheCompetition from "../pool/eliminate-the-competition.js";
+import _poolEliteScaleguard from "../pool/elite-scaleguard.js";
 import _poolElvishMystic from "../pool/elvish-mystic.js";
 import _poolEmbalmedBrawler from "../pool/embalmed-brawler.js";
 import _poolEmbraceTheUnknown from "../pool/embrace-the-unknown.js";
@@ -1158,6 +1159,7 @@ const shard: CardShard = {
     _poolElectroAssaultingBattery,
     _poolElgaudShieldmate,
     _poolEliminateTheCompetition,
+    _poolEliteScaleguard,
     _poolElvishMystic,
     _poolEmbalmedBrawler,
     _poolEmbraceTheUnknown,

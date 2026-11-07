@@ -246,6 +246,7 @@ import _poolErrantDoomsayers from "../pool/errant-doomsayers.js";
 import _poolErtaiWizardAdept from "../pool/ertai-wizard-adept.js";
 import _poolEsiorWardwingFamiliar from "../pool/esior-wardwing-familiar.js";
 import _poolEsperCharm from "../pool/esper-charm.js";
+import _poolEsperOrigins from "../pool/esper-origins.js";
 import _poolEsperPanorama from "../pool/esper-panorama.js";
 import _poolEssenceScatter from "../pool/essence-scatter.js";
 import _poolEssenceSymbiote from "../pool/essence-symbiote.js";
@@ -1206,6 +1207,7 @@ const shard: CardShard = {
     _poolErtaiWizardAdept,
     _poolEsiorWardwingFamiliar,
     _poolEsperCharm,
+    _poolEsperOrigins,
     _poolEsperPanorama,
     _poolEssenceScatter,
     _poolEssenceSymbiote,

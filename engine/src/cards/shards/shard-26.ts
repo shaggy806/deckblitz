@@ -132,6 +132,7 @@ import _poolCandlesOfLeng from "../pool/candles-of-leng.js";
 import _poolCankerousThirst from "../pool/cankerous-thirst.js";
 import _poolCanyonJerboa from "../pool/canyon-jerboa.js";
 import _poolCapsize from "../pool/capsize.js";
+import _poolCaptainAmericasShield from "../pool/captain-americas-shield.js";
 import _poolCarnageInterpreter from "../pool/carnage-interpreter.js";
 import _poolCarrionCruiser from "../pool/carrion-cruiser.js";
 import _poolCarrionWurm from "../pool/carrion-wurm.js";
@@ -724,6 +725,7 @@ import _poolShellShield from "../pool/shell-shield.js";
 import _poolShelobChildOfUngoliant from "../pool/shelob-child-of-ungoliant.js";
 import _poolShepherdOfTheLost from "../pool/shepherd-of-the-lost.js";
 import _poolShinkaGatekeeper from "../pool/shinka-gatekeeper.js";
+import _poolShinryuTranscendentRival from "../pool/shinryu-transcendent-rival.js";
 import _poolShipwreckSentry from "../pool/shipwreck-sentry.js";
 import _poolShireiShizosCaretaker from "../pool/shirei-shizos-caretaker.js";
 import _poolShrapnelSlinger from "../pool/shrapnel-slinger.js";
@@ -1123,6 +1125,7 @@ const shard: CardShard = {
     _poolCankerousThirst,
     _poolCanyonJerboa,
     _poolCapsize,
+    _poolCaptainAmericasShield,
     _poolCarnageInterpreter,
     _poolCarrionCruiser,
     _poolCarrionWurm,
@@ -1715,6 +1718,7 @@ const shard: CardShard = {
     _poolShelobChildOfUngoliant,
     _poolShepherdOfTheLost,
     _poolShinkaGatekeeper,
+    _poolShinryuTranscendentRival,
     _poolShipwreckSentry,
     _poolShireiShizosCaretaker,
     _poolShrapnelSlinger,
