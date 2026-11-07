@@ -1287,6 +1287,12 @@ export type EffectAmount =
        * controller creates a token for each creature destroyed this way" is a
        * `create-token` with `who: "each-player"` and this). */
       readonly who?: PlayerScope | "each";
+      /** Whose by the objects' **owners** instead, for `who` and `perPlayer`
+       * — Kefka, Dancing Mad's "each player who **owns** a spell you cast this
+       * way loses life equal to its mana value": a `lose-life` to
+       * `"each-player"` of `{ thisWay: "cast", who: "each", byOwner: true,
+       * sumOf: "mana-value" }`, the spells counted by their caster otherwise. */
+      readonly byOwner?: true;
       readonly filter?: CardFilter;
       readonly cardTypes?: boolean;
       /** The **greatest** of the players' own counts rather than their sum
@@ -14970,7 +14976,17 @@ export function signedAmountValue(
         : amount.who === "each"
           ? [each ?? ctx.controller]
           : ctx.playersInScope(amount.who);
-    const done = ctx.thisWay(amount.thisWay, players, amount.filter);
+    // By owner: every entry, then those whose object `players` own, each
+    // counted as its owner's.
+    const done =
+      amount.byOwner === true
+        ? ctx
+            .thisWay(amount.thisWay, undefined, amount.filter)
+            .flatMap((entry) => {
+              const owner = ctx.ownerOf({ kind: "object", object: entry.object });
+              return owner === undefined || (players !== undefined && !players.includes(owner)) ? [] : [{ ...entry, player: owner }];
+            })
+        : ctx.thisWay(amount.thisWay, players, amount.filter);
     if (amount.cardTypes === true) return ctx.cardTypesAmong(done);
     if (amount.sharingManaValue === true) {
       const values = done.map((entry) => ctx.manaValueOf({ kind: "object", object: entry.object }));

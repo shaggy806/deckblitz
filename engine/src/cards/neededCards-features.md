@@ -432,6 +432,19 @@ from hand (702.170a, a special action, 116.2k): `Game.plotCostNow`, read by the 
 `costModification` with `castFrom: ["graveyard", "exile"]`, which already ran. The
 scaffolder reads both lines. Key: cost:plot-cost-reduction.
 
+### Each owner of a spell cast this way losing life — built 2026-11-07
+
+By EDHREC rank: Kefka, Dancing Mad (3869, flagged ASAP). The `thisWay` amount's `byOwner`
+reads each object by its owner rather than the player the kind names (a `"cast"` spell's caster),
+so a `lose-life` to `"each-player"` of `{ thisWay: "cast", who: "each", byOwner: true, sumOf:
+"mana-value" }` is "each player who owns a spell you cast this way loses life equal to its mana
+value", read on the stack (a free spell's X is 0, rule 107.3b). The random exile from each
+opponent's graveyard (`choose-random-card` in a `for-each-player`) and the free casts
+(`cast-now` from `exiled-this-way`) already ran. The scaffolder reads the sentence. Proving card:
+Kefka, Dancing Mad. Key: effect:cast-this-way-owner-loses-life. Left: The Ruinous Powers ("when
+you cast a spell this way, its owner loses life" — a cast trigger on an impulse permission, a
+different shape).
+
 ### Only land creatures attacking in the added combat — built 2026-11-07
 
 By EDHREC rank: Bumi, Unleashed (3529, flagged ASAP). `additional-combat`'s `onlyAttackers`

@@ -16682,3 +16682,15 @@ describe("an added combat after this phase, and only land creatures attacking in
     });
   });
 });
+
+describe("each owner of a spell cast this way losing life", () => {
+  it("reads Kefka's owners losing life by the spells cast this way", () => {
+    expect(
+      parseSentence("Then each player who owns a spell you cast this way loses life equal to its mana value.", ctx()),
+    ).toEqual({
+      kind: "lose-life",
+      who: "each-player",
+      amount: { thisWay: "cast", who: "each", byOwner: true, sumOf: "mana-value" },
+    });
+  });
+});

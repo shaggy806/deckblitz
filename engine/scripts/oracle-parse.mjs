@@ -2915,6 +2915,16 @@ export function parseSentence(sentence, ctx) {
   const emblem = emblemOf(s);
   if (emblem !== null) return emblem;
   let M;
+  // "Then each player who owns a spell you cast this way loses life equal to
+  // its mana value" (Kefka, Dancing Mad): the spells cast off a `cast-now`,
+  // read by their owners.
+  if (/^(?:then )?each player who owns a spell you cast this way loses life equal to its mana value\.$/i.test(s)) {
+    return {
+      kind: "lose-life",
+      who: "each-player",
+      amount: { thisWay: "cast", who: "each", byOwner: true, sumOf: "mana-value" },
+    };
+  }
   // "For each token you control [of the chosen type] [that entered this turn],
   // create a token that's a copy of it" (Renewed Solidarity, Second Harvest).
   if ((M = /^for each token you control( of the chosen type)?( that entered this turn)?, create a token that's a copy of (?:it|that permanent)\.$/i.exec(s))) {
