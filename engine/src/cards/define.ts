@@ -5647,6 +5647,11 @@ export interface CardDefinition {
    * hand, or a commander from the command zone, as the other alternative
    * costs that cast from a hand are offered. */
   readonly moreThanMeetsTheEye?: { readonly cost: string };
+  /** "This spell can't be copied" (See Double, Choreographed Sparks): an
+   * effect that would copy it on the stack (rule 707.10 — Twincast, storm,
+   * replicate, a copy of its own) makes nothing; it's still a legal target
+   * for one. An ability's is `ActivatedAbility.cantBeCopied`. */
+  readonly cantBeCopied?: true;
   /** Foretell (rule 702.143 — ROADMAP Phase 6b) — during your turn you may pay
    * `{2}` to exile this card from your hand face-down; on a later turn you may
    * cast it from exile for `cost`. `null` for a card without foretell. */
@@ -6171,6 +6176,7 @@ const PRINTED_ABILITY: {
   castSelfFromExile: (def) => def.castSelfFromExile !== undefined,
   castWhileSearchingLibrary: (def) => def.castWhileSearchingLibrary !== undefined,
   moreThanMeetsTheEye: (def) => def.moreThanMeetsTheEye !== undefined,
+  cantBeCopied: (def) => def.cantBeCopied !== undefined,
   chapters: (def) => def.chapters !== null && def.chapters.length > 0,
   readAhead: (def) => def.readAhead,
   faces: false,
@@ -6422,6 +6428,8 @@ interface CardDraft {
   castSelfFromExile?: true;
   castWhileSearchingLibrary?: true;
   moreThanMeetsTheEye?: { readonly cost: string };
+  /** See {@link CardDefinition.cantBeCopied}. */
+  cantBeCopied?: true;
   harmonize?: { readonly cost: string };
   retrace?: boolean;
   madness?: { readonly cost: string };
@@ -6784,5 +6792,6 @@ function rareCardFields(draft: CardDraft) {
     ...(draft.castSelfFromExile !== undefined ? { castSelfFromExile: draft.castSelfFromExile } : {}),
     ...(draft.castWhileSearchingLibrary !== undefined ? { castWhileSearchingLibrary: draft.castWhileSearchingLibrary } : {}),
     ...(draft.moreThanMeetsTheEye !== undefined ? { moreThanMeetsTheEye: draft.moreThanMeetsTheEye } : {}),
+    ...(draft.cantBeCopied !== undefined ? { cantBeCopied: draft.cantBeCopied } : {}),
   };
 }

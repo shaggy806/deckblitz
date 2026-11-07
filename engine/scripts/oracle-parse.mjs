@@ -14411,6 +14411,8 @@ function parseFaceAsWritten(face, ctx = {}) {
     // Mayhem (rule 702.187): a cost to cast it from your graveyard the turn you discarded it, or none (a land's, played from there).
     if ((m = /^Mayhem((?: (?:\{[^}]+\})+)?)$/.exec(line))) { out.mayhem = m[1] ? { cost: m[1].trim() } : {}; continue; }
     if (line === "~ can't be countered.") { out.cantBeCountered = true; continue; }
+    // "This spell can't be copied." (See Double — `cantBeCopied`).
+    if (line === "~ can't be copied.") { out.cantBeCopied = true; continue; }
     // The Mirage block's flash-and-sacrifice (`flashThenSacrifice`).
     if (/^You may cast (?:~|this spell) as though it had flash\. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step\.$/.test(line)) {
       out.flashThenSacrifice = true;

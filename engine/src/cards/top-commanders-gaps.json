@@ -12,6 +12,8 @@
   "cost:plot-cost-reduction",
   "effect:attach-equipment-that-was-attached",
   "effect:double-x-on-cast",
+  "effect:copy-ability-count",
+  "static:spell-cant-be-copied",
   "effect:cast-now-once-each-turn-if-cast",
   "cost:escalate-nonmana",
   "effect:reveal-until-shares-type",

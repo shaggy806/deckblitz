@@ -690,6 +690,11 @@ export interface ActivatedAbility {
   readonly effect: EffectSpec | null;
   readonly resolve: SpellResolver | null;
   readonly text: string;
+  /** "This ability can't be copied" (Gogo, Master of Mimicry): an effect
+   * that would copy it on the stack (rule 707.10) makes nothing — the
+   * ability is still a legal target for one. A spell's is
+   * `CardDefinition.cantBeCopied`. */
+  readonly cantBeCopied?: true;
   /** True for abilities like Equip that function only as a sorcery (rule 602.3). */
   readonly sorcerySpeed?: boolean;
   /** "Any player may activate this ability" (rule 602.2 — "unless the object

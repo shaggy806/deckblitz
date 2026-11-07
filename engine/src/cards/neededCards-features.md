@@ -521,6 +521,19 @@ read where convoke's is (`tapPayKinds`); beside a granted or printed convoke,
 creatures convoke and artifacts improvise in one payment. Key:
 effect:next-spell-has-improvise.
 
+### An ability copied X times, and what can't be copied — built 2026-11-07
+
+By EDHREC rank: Gogo, Master of Mimicry. `copy-ability`'s `count` copies the
+ability that many times ("X times"), as `copy-spell`'s does, each copy asked
+about new targets in turn (rule 707.10c). "This ability can't be copied" is
+`ActivatedAbility.cantBeCopied`, "This spell can't be copied"
+`CardDefinition.cantBeCopied` (a rare field): `copyStackAbility` and
+`copySpellFrom`, where every copy of an ability or a spell is made (rule
+707.10), make nothing for one; it's still a legal target. The scaffolder reads
+"This spell can't be copied."; Gogo's ability line is its own. Proving cards:
+Gogo, Master of Mimicry, See Double. Keys: effect:copy-ability-count,
+static:spell-cant-be-copied.
+
 ### "You may cast that card … Do this only once each turn" — built 2026-11-07
 
 By EDHREC rank: Planetarium of Wan Shi Tong (3240). A `cast-now` with

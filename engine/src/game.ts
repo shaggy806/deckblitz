@@ -37060,8 +37060,7 @@ export class Game {
           if (payment === null) return false;
           this.executePayment(copier, payment);
         }
-        this.copySpellFrom(copy, original, copier, copyOpts.newTargets, copyOpts.change, spell);
-        return true;
+        return this.copySpellFrom(copy, original, copier, copyOpts.newTargets, copyOpts.change, spell) !== null;
       },
       spellCopyEvent: (act) => this.withSpellCopyEvent(act),
       copyTriggerSpellForEach: (spell, each, copier) => {
@@ -42280,7 +42279,9 @@ export class Game {
     newTargets: boolean,
     change?: SpellCopyChange,
     unaimed: SpellSnapshot = spell,
-  ): ObjectId {
+  ): ObjectId | null {
+    // "This spell can't be copied" (See Double): nothing made.
+    if (this.registry.has(spell.cardName) && this.registry.get(spell.cardName).cantBeCopied === true) return null;
     const id = this.mintObjectId();
     const event = this.spellCopyEvent;
     if (event !== null) {
@@ -42431,7 +42432,7 @@ export class Game {
     const additional = this.additionalSpellCopies(made.controller);
     for (let i = 0; i < additional; i += 1) {
       const copy = this.copySpellFrom(made.spell, made.originalId, made.controller, true, made.change);
-      if (event.fixed.length === 0) continue;
+      if (copy === null || event.fixed.length === 0) continue;
       this.state.spellCopyPlacements = [...(this.state.spellCopyPlacements ?? []), { copy, among: [...among] }];
       among.push(copy);
     }
@@ -43174,7 +43175,11 @@ export class Game {
    * change, as for a spell's copy; meanwhile it sits on the stack with the
    * original's.
    */
-  private copyStackAbility(original: GameObject, controller: PlayerId, newTargets: boolean): ObjectId {
+  private copyStackAbility(original: GameObject, controller: PlayerId, newTargets: boolean): ObjectId | null {
+    // "This ability can't be copied" (Gogo, Master of Mimicry): nothing made.
+    if (original.abilityKind === "activated" && (this.stackAbilityOf(original) as ActivatedAbility).cantBeCopied === true) {
+      return null;
+    }
     const id = this.mintObjectId();
     const { stackCount: _count, stackMultiplier: _multiplier, ...rest } = clonePlain(original);
     this.state.objects[id] = {

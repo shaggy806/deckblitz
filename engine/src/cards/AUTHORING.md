@@ -440,6 +440,7 @@ from the same link.
 | `omen` | `boolean` | an omen card (rule 720 — Stormshriek Feral // Flush Out): `faces: [creature, Omen]` on both faces, the Omen face a `sorcery`/`instant` with subtype `Omen`. Cast as either; the Omen resolving is shuffled into its owner's library (720.3d) — a copy of one ceases to exist, its owner still shuffling — and countered or fizzled it goes to the graveyard. Scryfall files these under the adventure layout; the scaffold writes `omen`. |
 | `controlEnchanted` | `boolean` | an Aura whose controller controls the enchanted permanent (Mind Control) |
 | `cantBeCountered` | `boolean` | "This spell can't be countered." |
+| `cantBeCopied` | `true` | "This spell can't be copied." (See Double): a copy effect aimed at it (rule 707.10 — Twincast, storm, a copy of its own) makes nothing; it's still a legal target. An activated ability's "This ability can't be copied" is the ability's own `cantBeCopied: true` (Gogo, Master of Mimicry). |
 | `flashThenSacrifice` | `true` | The Mirage block's "You may cast this spell as though it had flash. If you cast it any time a sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning of the next cleanup step" (Spider Climb, Parapet, Armor of Thorns). It may be cast any time; a cast that only this permission allowed — not at sorcery timing, not by an effect's "cast it now", nor under another effect's "as though it had flash" (Vedalken Orrery: the ruling) — marks the spell (`GameObject.flashSacrificeOwed`), and the permanent it becomes gets a `"next-cleanup"` delayed sacrifice, which finds nothing once it has left (rule 400.7). A copy wasn't cast, so it owes nothing. The scaffolder reads the sentence. `flash-then-sacrifice.test.ts`. |
 | `split` | `boolean` | A split card (rule 709) — on all three definitions; see §12 ("Split card"). |
 | `aftermath` | `boolean` | **Aftermath** (rule 702.127a), on the split half that has it — cast only from a graveyard, then exiled; see §12 ("Split card"). |
@@ -1850,7 +1851,9 @@ Mischief's life loss, Wild Ricochet's copy).
 707.10): the one in target slot `target` — a `{ kind: "ability" }` target
 (§7; Lithoform Engine, Weaver of Harmony, Vantress Visions) — or with
 `"trigger-ability"` the one whose activation fired an `activates-ability`
-trigger (Illusionist's Bracers), as it last was on the stack if it has been
+trigger (Illusionist's Bracers); `count` copies it that many times ("X
+times" — Gogo, Master of Mimicry: `"x"`; each copy asked about new targets in
+turn), as it last was on the stack if it has been
 countered since (`GameState.departedAbilities`). The copy has the original's
 source (707.10b — so it's the same ability for "the Nth time this ability has
 resolved this turn"), modes, targets, X, trigger object and what paid its

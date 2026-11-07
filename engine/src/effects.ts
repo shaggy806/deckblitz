@@ -7656,6 +7656,11 @@ export type EffectSpec =
       readonly target: number | "trigger-ability";
       /** "You may choose new targets for the copy" (rule 707.10c). */
       readonly newTargets?: true;
+      /** "Copy target activated or triggered ability you control **X
+       * times**" (Gogo, Master of Mimicry: `"x"`): how many copies, read as
+       * the effect applies, as `copy-spell`'s `count` is. One when omitted;
+       * none at 0. With `newTargets`, each copy is asked about in turn. */
+      readonly count?: EffectAmount;
     }
   | {
       /**
@@ -19272,12 +19277,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "copy-ability": {
-      if (spec.target === "trigger-ability") {
-        ctx.copyAbility("trigger-ability", spec.newTargets === true);
-        return;
-      }
-      const target = ctx.targets[spec.target];
-      if (target !== undefined) ctx.copyAbility(target, spec.newTargets === true);
+      // "X times": the count, read as this applies.
+      const times =
+        spec.count === undefined ? 1 : Math.min(Math.max(0, Math.floor(amountValue(spec.count, ctx))), MAX_COPY_COUNT);
+      const target = spec.target === "trigger-ability" ? "trigger-ability" : ctx.targets[spec.target];
+      if (target === undefined || target === null) return;
+      for (let i = 0; i < times; i += 1) ctx.copyAbility(target, spec.newTargets === true);
       return;
     }
     case "additional-combat": {
