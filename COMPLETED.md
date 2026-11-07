@@ -12,6 +12,18 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **The next four Build ASAP cards** (2026-11-06, B272, `/author-flagged`): Dragonhawk, Fate's
+  Tempest, Improvisation Capstone, Gonti, Night Minister and Animist's Awakening, with Tasha's
+  Hideous Laughter. An `objectTargets` amount: how many of the resolving ability's object targets
+  are still the objects they were (rule 400.7) — a delayed trigger `about: "exiled"` counts "those
+  cards that are still exiled". `reveal-until-count`'s `measure: "mana-value"`: until the cards
+  found total mana value N (rule 202.3). A `notOwnedByController` card filter ("a spell they don't
+  own", rule 108.4). Gonti's other key and Animist's Awakening's needed nothing new (`as-player`
+  around a face-down `impulse-exile`; a take-all `look-and-choose`, then `untap-all` of the lands
+  put there this way). Keys: `effect:delayed-count-still-exiled`,
+  `effect:reveal-until-total-mana-value`, `zone:cast-spell-not-owned-by-caster`,
+  `effect:impulse-exile-for-creature-controller`, `effect:reveal-x-put-all-matching`; they free
+  Dream Harvest and Over the Top for `author-freed`. 15 flagged cards still wait.
 - **The Build ASAP mill cards** (2026-11-06, B271, `/author-flagged`): Mirelurk Queen, The Wise
   Mothman and Tato Farmer. A `mills` trigger off the existing `cards-milled` event (rule 701.17):
   once per mill when a card matches its filter, its trigger value the matching count ("where X is

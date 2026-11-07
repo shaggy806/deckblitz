@@ -1,0 +1,43 @@
+{
+ "batch": "B272",
+ "status": "done",
+ "ranks": "Build ASAP: cards flagged in the library. 19 flagged; this session took the first four by rank: Dragonhawk, Fate's Tempest (an `objectTargets` amount: a delayed trigger's cards still the objects they were, rule 400.7), Improvisation Capstone (`reveal-until-count`'s `measure: \"mana-value\"`, rule 202.3, which also ran Tasha's Hideous Laughter), Gonti, Night Minister (a `notOwnedByController` card filter, rule 108.4; its other key was existing `as-player` + face-down `impulse-exile`) and Animist's Awakening (no engine change: a take-all `look-and-choose` and `untap-all` of the lands put there this way). The other 15 stay flagged, blocked as recorded.",
+ "authored": [
+  {
+   "name": "Dragonhawk, Fate's Tempest",
+   "files": [
+    "engine/src/cards/pool/dragonhawk-fates-tempest.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Improvisation Capstone",
+   "files": [
+    "engine/src/cards/pool/improvisation-capstone.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tasha's Hideous Laughter",
+   "files": [
+    "engine/src/cards/pool/tashas-hideous-laughter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gonti, Night Minister",
+   "files": [
+    "engine/src/cards/pool/gonti-night-minister.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Animist's Awakening",
+   "files": [
+    "engine/src/cards/pool/animists-awakening.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": []
+}

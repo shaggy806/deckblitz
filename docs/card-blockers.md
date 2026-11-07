@@ -573,6 +573,11 @@ Five more passes, all merged (156 cards):
   filter. The keys free Glowing One, Infesting Radroach, Screeching Scorchbeast, The Master,
   Transcendent and Zellix, Sanity Flayer for `author-freed`. 19 flagged cards still wait, blocked
   as their records say (`cards:needs -- --asap`).
+- **Batch 272 (2026-11-06, `author-flagged`: the cards flagged Build ASAP in the library)** — the
+  first four of the 19 left by rank, and one more their keys ran: Dragonhawk, Fate's Tempest,
+  Improvisation Capstone, Gonti, Night Minister, Animist's Awakening and Tasha's Hideous Laughter.
+  Two of the five keys were already covered (Gonti's face-down exile for the creature's controller,
+  Animist's Awakening's take-all). The other 15 flagged cards stay blocked as their records say.
 - **Batch 270 (2026-11-06, `author-flagged`: the cards flagged Build ASAP in the library)** — 4 of
   26 authored: Liliana of the Dark Realms, Dracogenesis, Planar Nexus, Aettir and Priwen. Squandered
   Resources checked and still blocked on `mana:any-type-sacrificed-land-could-produce`; the other 21
