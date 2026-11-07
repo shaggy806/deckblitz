@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4683 already implemented / 317 missing (marks refreshed 2026-11-07)
+4690 already implemented / 310 missing (marks refreshed 2026-11-07)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -3192,7 +3192,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3199  Oppression                               {1}{B}{B}        Enchantment
 [x]  3200  Betor, Kin to All                        {2}{W}{B}{G}     Legendary Creature — Spirit Dragon
 [ ]  3201  Geode Golem                              {5}              Artifact Creature — Golem
-[ ]  3202  Collective Effort                        {1}{W}{W}        Sorcery
+[x]  3202  Collective Effort                        {1}{W}{W}        Sorcery
 [ ]  3203  Forth Eorlingas!                         {X}{R}{W}        Sorcery
 [x]  3204  Flayer of Loyalties                      {8}{C}{C}        Creature — Eldrazi
 [x]  3205  Impostor Syndrome                        {4}{U}{U}        Enchantment
@@ -3403,7 +3403,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3410  Mob Rule                                 {4}{R}{R}        Sorcery
 [x]  3411  Hermes, Overseer of Elpis                {3}{U}           Legendary Creature — Elder Wizard
 [x]  3412  Nyxborn Hydra                            {X}{G}           Enchantment Creature — Hydra
-[ ]  3413  Gogo, Master of Mimicry                  {2}{U}           Legendary Creature — Wizard
+[x]  3413  Gogo, Master of Mimicry                  {2}{U}           Legendary Creature — Wizard
 [x]  3414  Monstrous Rage                           {R}              Instant
 [x]  3415  Obyra, Dreaming Duelist                  {U}{B}           Legendary Creature — Faerie Warrior
 [ ]  3416  Lembas                                   {2}              Artifact — Food
@@ -3424,7 +3424,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3431  Reckless Endeavor                        {5}{R}{R}        Sorcery
 [ ]  3432  Serra Paragon                            {2}{W}{W}        Creature — Angel
 [x]  3433  General's Enforcer                       {W}{B}           Creature — Human Soldier
-[ ]  3434  See Double                               {2}{U}{U}        Instant
+[x]  3434  See Double                               {2}{U}{U}        Instant
 [x]  3435  Trailtracker Scout                       {1}{G}           Creature — Raccoon Scout
 [x]  3436  Axgard Armory                            {0}              Land
 [x]  3437  Slicer, Hired Muscle // Slicer, High-Speed Antagonist {5}              Legendary Artifact Creature — Robot // Legendary Artifact — Vehicle
@@ -3614,7 +3614,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3621  Moon-Circuit Hacker                      {1}{U}           Enchantment Creature — Human Ninja
 [x]  3622  Edgar, Charmed Groom // Edgar Markov's Coffin {4}              Legendary Creature — Vampire Noble // Legendary Artifact
 [x]  3623  Squall, SeeD Mercenary                   {2}{W}{B}        Legendary Creature — Human Knight Mercenary
-[ ]  3624  Planetarium of Wan Shi Tong              {6}              Legendary Artifact
+[x]  3624  Planetarium of Wan Shi Tong              {6}              Legendary Artifact
 [x]  3625  Summon: Ixion                            {2}{W}           Enchantment Creature — Saga Unicorn
 [x]  3626  Bello, Bard of the Brambles              {1}{R}{G}        Legendary Creature — Raccoon Bard
 [x]  3627  The Book of Exalted Deeds                {W}{W}{W}        Legendary Artifact — Book
@@ -4020,7 +4020,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4027  Contaminant Grafter                      {4}{G}           Creature — Phyrexian Druid
 [x]  4028  Hydra Omnivore                           {4}{G}{G}        Creature — Hydra
 [x]  4029  Unfinished Business                      {3}{W}{W}        Sorcery
-[ ]  4030  Empowered Autogenerator                  {4}              Artifact
+[x]  4030  Empowered Autogenerator                  {4}              Artifact
 [x]  4031  Baloth Prime                             {3}{G}           Creature — Beast
 [x]  4032  Virus Beetle                             {1}{B}           Artifact Creature — Insect
 [x]  4033  Airbending Lesson                        {2}{W}           Instant — Lesson
@@ -4231,7 +4231,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4238  Unstable Amulet                          {1}{R}           Artifact
 [ ]  4239  Secret Arcade // Dusty Parlor            {4}{W} // {2}{W} Enchantment — Room // Enchantment — Room
 [x]  4240  Kykar, Zephyr Awakener                   {2}{W}{U}        Legendary Creature — Bird Wizard
-[ ]  4241  Dance with Calamity                      {7}{R}           Sorcery
+[x]  4241  Dance with Calamity                      {7}{R}           Sorcery
 [x]  4242  Revitalize                               {1}{W}           Instant
 [x]  4243  Mechanized Warfare                       {1}{R}{R}        Enchantment
 [ ]  4244  Screeching Scorchbeast                   {4}{B}{B}        Creature — Bat Mutant
@@ -4800,7 +4800,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4807  Lilysplash Mentor                        {2}{G}{U}        Creature — Frog Druid
 [x]  4808  Gyome, Master Chef                       {2}{B}{G}        Legendary Creature — Troll Warlock
 [x]  4809  Éomer, King of Rohan                     {3}{R}{W}        Legendary Creature — Human Noble
-[ ]  4810  Ultron, Artificial Malevolence           {3}              Legendary Artifact Creature — Robot Villain
+[x]  4810  Ultron, Artificial Malevolence           {3}              Legendary Artifact Creature — Robot Villain
 [x]  4811  Act of Treason                           {2}{R}           Sorcery
 [x]  4812  Nemata, Primeval Warden                  {2}{B}{G}        Legendary Creature — Treefolk
 [x]  4813  Audacity                                 {G}              Enchantment — Aura

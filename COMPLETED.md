@@ -12,6 +12,15 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Build ASAP overnight, round 4** (2026-11-07, B274, `/author-flagged overnight`): Collective
+  Effort with Collective Brutality (escalate's non-mana costs, `castModal.alsoPerExtraMode`, the tap
+  offer's `perExtraMode`; escalate's mode cap fixed to judge only the cost; `cost:escalate-nonmana`),
+  Planetarium of Wan Shi Tong (`cast-now`'s `marksAbilityDone`;
+  `effect:cast-now-once-each-turn-if-cast`), Gogo, Master of Mimicry with See Double (`copy-ability`'s
+  `count`, `cantBeCopied` on abilities and spells, rule 707.10; `effect:copy-ability-count`,
+  `static:spell-cant-be-copied`), Empowered Autogenerator (`add-mana`'s `first`, an effect before the
+  mana that the auto-payer sizes, rules 605.1a, 605.3b; `effect:mana-ability-effect-before-mana`),
+  and Ultron, Artificial Malevolence and Dance with Calamity with no engine code.
 - **Build ASAP overnight, round 3** (2026-11-07, B274, `/author-flagged overnight`): Locke,
   Treasure Hunter with Unlucky Witness (`GameState.permissionGroups`: one play shared across
   graveyard and exile permissions, `upTo` on `grant-graveyard-cast` and `impulse-exile`;
