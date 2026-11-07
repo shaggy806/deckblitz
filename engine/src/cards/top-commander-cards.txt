@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4668 already implemented / 332 missing (marks refreshed 2026-11-07)
+4673 already implemented / 327 missing (marks refreshed 2026-11-07)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2523,7 +2523,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2530  Mox Jasper                               {0}              Legendary Artifact
 [x]  2531  Prosperous Thief                         {2}{U}           Creature — Human Ninja
 [x]  2532  Kogla and Yidaro                         {2}{R}{R}{G}{G}  Legendary Creature — Ape Dinosaur Turtle
-[ ]  2533  Doc Aurlock, Grizzled Genius             {G}{U}           Legendary Creature — Bear Druid
+[x]  2533  Doc Aurlock, Grizzled Genius             {G}{U}           Legendary Creature — Bear Druid
 [x]  2534  Armored Skyhunter                        {3}{W}           Creature — Cat Knight
 [x]  2535  Assault Formation                        {1}{G}           Enchantment
 [ ]  2536  Protean Hulk                             {5}{G}{G}        Creature — Beast
@@ -2604,7 +2604,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2611  Chulane, Teller of Tales                 {2}{G}{W}{U}     Legendary Creature — Human Druid
 [x]  2612  Kabira Takedown // Kabira Plateau        {2}              Instant // Land
 [x]  2613  Blood Seeker                             {1}{B}           Creature — Vampire Shaman
-[ ]  2614  Unbound Flourishing                      {2}{G}           Enchantment
+[x]  2614  Unbound Flourishing                      {2}{G}           Enchantment
 [x]  2615  Final Parting                            {3}{B}{B}        Sorcery
 [x]  2616  Vraska Joins Up                          {B}{G}           Legendary Enchantment
 [ ]  2617  Ghoulish Impetus                         {2}{B}           Enchantment — Aura
@@ -2655,7 +2655,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2662  Teval, the Balanced Scale                {1}{B}{G}{U}     Legendary Creature — Spirit Dragon
 [x]  2663  The Earth King                           {3}{G}           Legendary Creature — Human Noble Ally
 [x]  2664  Mirri, Weatherlight Duelist              {1}{G}{W}        Legendary Creature — Cat Warrior
-[ ]  2665  Zack Fair                                {W}              Legendary Creature — Human Soldier
+[x]  2665  Zack Fair                                {W}              Legendary Creature — Human Soldier
 [x]  2666  Volatile Fault                           {0}              Land — Cave
 [x]  2667  Khalni Heart Expedition                  {1}{G}           Enchantment
 [x]  2668  Tectonic Hazard                          {R}              Sorcery
@@ -3087,7 +3087,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3094  Mirrorworks                              {5}              Artifact
 [ ]  3095  Biomancer's Familiar                     {G}{U}           Creature — Mutant
 [x]  3096  Double Major                             {G}{U}           Instant
-[ ]  3097  Gluntch, the Bestower                    {1}{G}{W}        Legendary Creature — Jellyfish
+[x]  3097  Gluntch, the Bestower                    {1}{G}{W}        Legendary Creature — Jellyfish
 [x]  3098  Blighted Agent                           {1}{U}           Creature — Phyrexian Human Rogue
 [x]  3099  Eluge, the Shoreless Sea                 {1}{U}{U}{U}     Legendary Creature — Elemental Fish
 [x]  3100  Temple Altisaur                          {4}{W}           Creature — Dinosaur
@@ -3702,7 +3702,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3709  Yavimaya Hollow                          {0}              Legendary Land
 [x]  3710  Absorb                                   {W}{U}{U}        Instant
 [x]  3711  Polyraptor                               {6}{G}{G}        Creature — Dinosaur
-[ ]  3712  Mana Sculpt                              {1}{U}{U}        Instant
+[x]  3712  Mana Sculpt                              {1}{U}{U}        Instant
 [x]  3713  Kolaghan's Command                       {1}{B}{R}        Instant
 [x]  3714  Ikra Shidiqi, the Usurper                {3}{B}{G}        Legendary Creature — Snake Wizard
 [ ]  3715  The Masamune                             {3}              Legendary Artifact — Equipment

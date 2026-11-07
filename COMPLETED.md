@@ -12,6 +12,15 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Build ASAP overnight, round 1** (2026-11-07, B274, `/author-flagged overnight`): Gluntch, the
+  Bestower, Mana Sculpt, Doc Aurlock, Grizzled Genius, Zack Fair (with Rhuk, Hexgold Nabber) and
+  Unbound Flourishing. `choose-opponent`'s `thenAnother` (a further choice among the players not
+  yet chosen in the chain) and `purpose` (`decision:choose-different-players`); mana spent on a
+  countered spell read as it last was on the stack, rule 608.2h (`stat:countered-spell-mana-spent`);
+  a static's `plotCostReduction` (`cost:plot-cost-reduction`); a leaving permanent's
+  `LastKnownInfo.attachments` and the filter's `wasAttachedTo` (`effect:attach-equipment-that-was-attached`;
+  Cass, Hand of Vengeance's Aura cards from the graveyard still need their own key); `double-x` and
+  the `activates-ability` trigger's `xInCost` (`effect:double-x-on-cast`).
 - **Three more Build ASAP cards** (2026-11-07, B273, `/author-flagged`): Loading Zone, Tablet of
   Discovery and Nahiri's Lithoforming. `grant-graveyard-cast`'s `cards: "milled-this-way"` and
   `play`: "mill a card. You may play that card this turn", a land card played with the land drop

@@ -1,0 +1,14 @@
+{
+ "batch": "B274",
+ "status": "in progress",
+ "ranks": "Build ASAP: cards flagged in the library. `/author-flagged overnight` (2026-11-07), 95 flagged at the start, all but Heroic Sacrifice blocked; four agents at once in their own worktrees, by `--by-rank`. Keys built so far: `decision:choose-different-players` (Gluntch: `choose-opponent`'s `thenAnother`, `except` and `purpose`), `stat:countered-spell-mana-spent` (Mana Sculpt: mana spent read as the spell last was on the stack, rule 608.2h), `cost:plot-cost-reduction` (Doc Aurlock: a static's `plotCostReduction`), `effect:attach-equipment-that-was-attached` (Zack Fair, with Rhuk, Hexgold Nabber: `LastKnownInfo.attachments` and the filter's `wasAttachedTo`; Cass, Hand of Vengeance's Aura cards returned from the graveyard are not covered and need a narrower key), `effect:double-x-on-cast` (Unbound Flourishing: `double-x` and the `activates-ability` trigger's `xInCost`).",
+ "authored": [
+  { "name": "Gluntch, the Bestower", "files": ["engine/src/cards/pool/gluntch-the-bestower.ts"], "tested": true },
+  { "name": "Mana Sculpt", "files": ["engine/src/cards/pool/mana-sculpt.ts"], "tested": true },
+  { "name": "Doc Aurlock, Grizzled Genius", "files": ["engine/src/cards/pool/doc-aurlock-grizzled-genius.ts"], "tested": true },
+  { "name": "Zack Fair", "files": ["engine/src/cards/pool/zack-fair.ts"], "tested": true },
+  { "name": "Rhuk, Hexgold Nabber", "files": ["engine/src/cards/pool/rhuk-hexgold-nabber.ts"], "tested": true },
+  { "name": "Unbound Flourishing", "files": ["engine/src/cards/pool/unbound-flourishing.ts"], "tested": true }
+ ],
+ "blocked": []
+}

@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-472 already implemented / 28 missing
+473 already implemented / 27 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -366,7 +366,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  360  Ozai, the Phoenix King                          7838 decks  {2}{B}{B}{R}{R}  Legendary Creature — Human Noble
 [x]  361  Zoraline, Cosmos Caller                         7834 decks  {1}{W}{B}        Legendary Creature — Bat Cleric
 [x]  362  Sidisi, Brood Tyrant                            7821 decks  {1}{B}{G}{U}     Legendary Creature — Snake Shaman
-[ ]  363  Gluntch, the Bestower                           7816 decks  {1}{G}{W}        Legendary Creature — Jellyfish
+[x]  363  Gluntch, the Bestower                           7816 decks  {1}{G}{W}        Legendary Creature — Jellyfish
 [x]  364  Gisa and Geralf                                 7809 decks  {2}{U}{B}        Legendary Creature — Human Wizard
 [x]  365  Admiral Brass, Unsinkable                       7808 decks  {2}{U}{B}{R}     Legendary Creature — Human Pirate
 [x]  366  The Gitrog, Ravenous Ride                       7797 decks  {3}{B}{G}        Legendary Creature — Frog Horror Mount
