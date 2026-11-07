@@ -37,6 +37,10 @@
 //                      the blocked cards by EDHREC rank, best first (default
 //                      40), each with its open needs: the order to build by
 //                      once the greedy order's left with small units
+//   --asap [--prune]   the cards flagged "Build ASAP" in the library's dev view
+//                      (data/build-asap.json) and where each stands; `--prune`
+//                      unflags those now in the pool. --by-rank, --next and
+//                      --stale --next list flagged cards first, marked [ASAP]
 //   --audit            what to fix before building from the records: counts,
 //                      and to needs-audit.txt in the OS temp dir the lists —
 //                      records with every need built (since triage or before),
@@ -87,6 +91,32 @@ const VOCAB_PATH = path.join(ENGINE, "data/needs-vocabulary.json");
 const SWEEP_DIRS = ["data/sweep-2", "data/sweep-3"];
 const POOL_DIR = path.join(ENGINE, "src/cards/pool");
 const RECHECK_DIR = path.join(ENGINE, "data/recheck");
+const ASAP_PATH = path.join(ENGINE, "data/build-asap.json");
+
+/**
+ * The cards flagged "Build ASAP" in the library's dev-only view (the user,
+ * 2026-11-06; written by the Vite dev server, `client/vite.config.ts`): built
+ * ahead of their EDHREC rank. `--by-rank`, `--next` and `--stale --next` list
+ * them first, and `--asap` says where each stands (the `author-flagged`
+ * skill). Keyed by front face, as the records are.
+ */
+export function loadAsap() {
+  try {
+    const cards = JSON.parse(readFileSync(ASAP_PATH, "utf8")).cards ?? [];
+    return new Map(cards.map((c) => [frontName(c.name), c]));
+  } catch {
+    return new Map();
+  }
+}
+
+/** A comparator putting flagged cards first, then by EDHREC rank (none last). */
+const asapThenRank = (asap) => (a, b) =>
+  Number(asap.has(frontName(b.name))) - Number(asap.has(frontName(a.name))) ||
+  (a.edhrec_rank ?? Infinity) - (b.edhrec_rank ?? Infinity);
+
+/** A snapshot entry's rank column, and its ASAP mark. */
+const rankCol = (e) => String(e.edhrec_rank ?? "—").padStart(6);
+const asapMark = (asap, name) => (asap.has(frontName(name)) ? "  [ASAP]" : "");
 
 /** A card's front face: records name double-faced cards either way. */
 export const frontName = (name) => name.split(" // ")[0].trim();
@@ -305,6 +335,41 @@ function main() {
   const records = loadRecords();
   const pool = poolNames();
   const waiting = records.filter((r) => !pool.has(frontName(r.name)));
+  const asap = loadAsap();
+  // A flagged card counts whatever its rank or Commander status (a banned card
+  // flagged for casual play); the rest, Commander-legal and ranked.
+  const ranked = (e) =>
+    asap.has(frontName(e.name)) || (e.commander === "legal" && typeof e.edhrec_rank === "number");
+
+  if (args.includes("--asap")) {
+    // Where each flagged card stands, flagged first-come: landed (to unflag —
+    // `--prune` does), untriaged, every need built (author it), or blocked.
+    const latest = latestByCard(waiting);
+    const landed = [];
+    const lines = [];
+    for (const [front, flag] of asap) {
+      if (pool.has(front) || pool.has(flag.name)) {
+        landed.push(flag.name);
+        continue;
+      }
+      const record = latest.get(front);
+      const open = record === undefined ? null : [...new Set(openNeeds(record, vocab))];
+      const status =
+        open === null ? "untriaged" : open.length === 0 ? `every need built (${record.batch})` : `blocked: ${open.join(" + ")}`;
+      lines.push(`- ${flag.name} [flagged ${flag.flagged}] — ${status}`);
+    }
+    console.log(`${asap.size} card(s) flagged to build ASAP (data/build-asap.json):`);
+    for (const l of lines) console.log(l);
+    if (landed.length > 0) console.log(`In the pool now (${landed.length}): ${landed.join(", ")}`);
+    if (args.includes("--prune") && landed.length > 0) {
+      const gone = new Set(landed);
+      const keep = [...asap.values()].filter((c) => !gone.has(c.name)).sort((a, b) => a.name.localeCompare(b.name));
+      const body = keep.map((c) => JSON.stringify(c)).join(",\n");
+      writeFileSync(ASAP_PATH, `{"cards":[${keep.length > 0 ? `\n${body}\n` : ""}]}\n`, "utf8");
+      console.log(`Unflagged ${landed.length}: they're in the pool.`);
+    }
+    return;
+  }
 
   if (args.includes("--check")) {
     const unknown = new Map();
@@ -351,13 +416,13 @@ function main() {
       if (seen === undefined || (r.date ?? "") >= (seen.date ?? "")) newest.set(frontName(r.name), r);
     }
     const rows = loadSnapshot()
-      .entries.filter((e) => e.commander === "legal" && typeof e.edhrec_rank === "number")
+      .entries.filter(ranked)
       .filter((e) => newest.has(frontName(e.name)))
-      .sort((a, b) => a.edhrec_rank - b.edhrec_rank)
+      .sort(asapThenRank(asap))
       .map((e) => ({ e, open: [...new Set(openNeeds(newest.get(frontName(e.name)), vocab))] }))
       .filter((row) => row.open.length > 0)
       .slice(0, Number(opt("--top", 40)));
-    for (const { e, open } of rows) console.log(`${String(e.edhrec_rank).padStart(6)}  ${e.name}  — ${open.join(" + ")}`);
+    for (const { e, open } of rows) console.log(`${rankCol(e)}  ${e.name}${asapMark(asap, e.name)}  — ${open.join(" + ")}`);
     return;
   }
 
@@ -366,11 +431,11 @@ function main() {
     const triaged = new Set(records.map((r) => frontName(r.name)));
     const n = Number(opt("--next", 60));
     const next = loadSnapshot()
-      .entries.filter((e) => e.commander === "legal" && typeof e.edhrec_rank === "number")
+      .entries.filter(ranked)
       .filter((e) => !pool.has(frontName(e.name)) && !triaged.has(frontName(e.name)))
-      .sort((a, b) => a.edhrec_rank - b.edhrec_rank)
+      .sort(asapThenRank(asap))
       .slice(0, n);
-    for (const e of next) console.log(`${String(e.edhrec_rank).padStart(6)}  ${e.name}  — ${e.type_line}`);
+    for (const e of next) console.log(`${rankCol(e)}  ${e.name}${asapMark(asap, e.name)}  — ${e.type_line}`);
     console.log(`${next.length} untriaged card(s), from rank ${next[0]?.edhrec_rank ?? "—"}.`);
     return;
   }
@@ -406,6 +471,8 @@ function main() {
         .map((r) => ({ r, key: freedBy(r) }))
         .sort(
           (a, b) =>
+            // Flagged to build ASAP first.
+            Number(asap.has(frontName(b.r.name))) - Number(asap.has(frontName(a.r.name))) ||
             (vocab.builtDates.get(a.key) ?? "").localeCompare(vocab.builtDates.get(b.key) ?? "") ||
             a.key.localeCompare(b.key) ||
             a.r.name.localeCompare(b.r.name),
@@ -413,7 +480,7 @@ function main() {
         .slice(0, Number(opt("--next", 150)));
       if (args.includes("--names")) return console.log(batch.map(({ r }) => JSON.stringify(r.name)).join(" "));
       console.log(`The next ${batch.length} of the ${ready.length} cards with every need built:`);
-      for (const { r } of batch) console.log(`- ${r.name} [${r.batch}] built: ${r.built.map(when).join(", ")}`);
+      for (const { r } of batch) console.log(`- ${r.name}${asapMark(asap, r.name)} [${r.batch}] built: ${r.built.map(when).join(", ")}`);
       return;
     }
     console.log(`Every need built since triage — recheck these (${ready.length}):`);
