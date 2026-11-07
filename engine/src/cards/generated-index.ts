@@ -1191,6 +1191,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Skimming Strike": "https://cards.scryfall.io/art_crop/back/b/1/b1d21a9a-6b0c-4fbc-a427-81be885d326b.jpg",
   "Skyclave Basilica": "https://cards.scryfall.io/art_crop/back/0/1/014027c4-7f9d-4096-b308-ea4be574c0d4.jpg",
   "Skyclave Invader": "https://cards.scryfall.io/art_crop/back/c/d/cd1c8e1a-bd38-47a2-a55a-682ebaede960.jpg",
+  "Slicer, High-Speed Antagonist": "https://cards.scryfall.io/art_crop/back/9/d/9d9a9350-4734-4cc1-986d-467e6715199f.jpg",
   "Slitherbore Pathway": "https://cards.scryfall.io/art_crop/back/8/7/87a4e5fe-161f-42da-9ca2-67c8e8970e94.jpg",
   "Song-Mad Ruins": "https://cards.scryfall.io/art_crop/back/7/8/782ca27f-9f18-476c-b582-89c06fb2e322.jpg",
   "Soporific Springs": "https://cards.scryfall.io/art_crop/back/5/3/5358b87a-1a29-426d-b165-40c97da2c14d.jpg",

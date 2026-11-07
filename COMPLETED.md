@@ -12,6 +12,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Build ASAP overnight, round 3** (2026-11-07, B274, `/author-flagged overnight`): Locke,
+  Treasure Hunter with Unlucky Witness (`GameState.permissionGroups`: one play shared across
+  graveyard and exile permissions, `upTo` on `grant-graveyard-cast` and `impulse-exile`;
+  `zone:cast-one-from-milled-until-end-of-turn`, `zone:impulse-play-only-one`), The Ur-Sphinx and
+  Ark of Hunger (no engine code), Slicer (More Than Meets the Eye, living metal and convert, rule
+  702.162a; a transforming card's back face can't be cast without a permission, 712.11),
+  Bumi, Unleashed (`additional-combat`'s `onlyAttackers`, 508.1c; the key's other four cards need
+  narrower keys) and Kefka, Dancing Mad (`thisWay`'s `byOwner`).
 - **Build ASAP overnight, round 2** (2026-11-07, B274, `/author-flagged overnight`): The Warring
   Triad and Radiant Lotus (`add-mana`'s player `target`, not a mana ability, rule 605.5a;
   `effect:add-mana-target-player`), Wizard's Staff (`doubleTriggersOf`'s `host`, the equipped

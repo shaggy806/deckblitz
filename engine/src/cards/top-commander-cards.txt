@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4679 already implemented / 321 missing (marks refreshed 2026-11-07)
+4683 already implemented / 317 missing (marks refreshed 2026-11-07)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -3427,7 +3427,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3434  See Double                               {2}{U}{U}        Instant
 [x]  3435  Trailtracker Scout                       {1}{G}           Creature — Raccoon Scout
 [x]  3436  Axgard Armory                            {0}              Land
-[ ]  3437  Slicer, Hired Muscle // Slicer, High-Speed Antagonist {5}              Legendary Artifact Creature — Robot // Legendary Artifact — Vehicle
+[x]  3437  Slicer, Hired Muscle // Slicer, High-Speed Antagonist {5}              Legendary Artifact Creature — Robot // Legendary Artifact — Vehicle
 [x]  3438  Vincent Valentine // Galian Beast        {4}              Legendary Creature — Assassin // Legendary Creature — Werewolf Beast
 [x]  3439  Nissa's Pilgrimage                       {2}{G}           Sorcery
 [x]  3440  Ulamog's Dreadsire                       {10}             Creature — Eldrazi
@@ -3648,7 +3648,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3655  Aang, Swift Savior // Aang and La, Ocean's Fury {3}              Legendary Creature — Human Avatar Ally // Legendary Creature — Avatar Spirit Ally
 [x]  3656  Smile at Death                           {3}{W}{W}        Enchantment
 [x]  3657  Seizan, Perverter of Truth               {3}{B}{B}        Legendary Creature — Demon Spirit
-[ ]  3658  Bumi, Unleashed                          {3}{R}{G}        Legendary Creature — Human Noble Ally
+[x]  3658  Bumi, Unleashed                          {3}{R}{G}        Legendary Creature — Human Noble Ally
 [x]  3659  Maelstrom Pulse                          {1}{B}{G}        Sorcery
 [x]  3660  Saruman, the White Hand                  {1}{U}{B}{R}     Legendary Creature — Avatar Wizard
 [x]  3661  Markov Baron                             {2}{B}           Creature — Vampire Noble
@@ -4035,7 +4035,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4042  Scroll of Fate                           {3}              Artifact
 [x]  4043  Desolation Twin                          {10}             Creature — Eldrazi
 [x]  4044  Colossification                          {5}{G}{G}        Enchantment — Aura
-[ ]  4045  Kefka, Dancing Mad                       {5}{B}{R}        Legendary Creature — Human Wizard
+[x]  4045  Kefka, Dancing Mad                       {5}{B}{R}        Legendary Creature — Human Wizard
 [x]  4046  Innocent Blood                           {B}              Sorcery
 [x]  4047  Alania, Divergent Storm                  {3}{U}{R}        Legendary Creature — Otter Wizard
 [x]  4048  Metallurgic Summonings                   {3}{U}{U}        Enchantment
@@ -4221,7 +4221,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4228  Leap                                     {U}              Instant
 [ ]  4229  Wyll, Blade of Frontiers                 {1}{R}           Legendary Creature — Human Warlock
 [x]  4230  Decoction Module                         {2}              Artifact
-[ ]  4231  Locke, Treasure Hunter                   {1}{B}{R}        Legendary Creature — Human Rogue
+[x]  4231  Locke, Treasure Hunter                   {1}{B}{R}        Legendary Creature — Human Rogue
 [x]  4232  Zhur-Taa Druid                           {R}{G}           Creature — Human Druid
 [x]  4233  Count on Luck                            {R}{R}{R}        Enchantment
 [x]  4234  Rolling Hamsphere                        {7}              Artifact — Vehicle

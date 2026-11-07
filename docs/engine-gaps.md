@@ -333,7 +333,7 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   109), hidden from the others, then discard them all as one graveyard batch. Miasmic Mummy and
   Neheb are in the pool on today's behaviour; blocks Delirium Skeins, Stronghold Rats and
   Cunning Lethemancer (`effect:hidden-simultaneous-choices`). Found by an authoring agent, 2026-10-23 (B144).
-- **Blitz, dash, sneak and web-slinging are offered only from the hand and the command zone.** The same
+- **Blitz, dash, sneak, web-slinging and More Than Meets the Eye are offered only from the hand and the command zone.** (More Than Meets the Eye since 2026-11-07, Slicer: 702.162a lets it be cast from any zone the card may be cast from.) The same
   limit holds for sneak's and web-slinging's offers (`legalActions`' sneak and web-slinging loops,
   rules 702.190a and 702.188a allow any zone a card may be cast from). `Game.blitzCostOf` gates on
   those two zones, so a blitz card another permission lets you cast (an impulse exile, a
