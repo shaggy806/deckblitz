@@ -398,6 +398,16 @@ By EDHREC rank: Thirst for Knowledge (1953). No engine code: `discard`'s
 discard N cards unless you discard a [kind] card" whole. Key:
 effect:discard-unless-land.
 
+### Plotting costs less — built 2026-11-07
+
+By EDHREC rank: Doc Aurlock, Grizzled Genius (2543). A static's `plotCostReduction`
+takes generic mana (rule 118.7a) off the plot cost its controller pays to plot a card
+from hand (702.170a, a special action, 116.2k): `Game.plotCostNow`, read by the offer
+(its `cost` shows the reduced one), its check and its payment. Doc's other line,
+"spells you cast from your graveyard or from exile cost {2} less", is a
+`costModification` with `castFrom: ["graveyard", "exile"]`, which already ran. The
+scaffolder reads both lines. Key: cost:plot-cost-reduction.
+
 ### Every nonbasic land type, and base P/T set to your life total — built 2026-11-06
 
 Flagged Build ASAP (B270): Planar Nexus (2625) and Aettir and Priwen (2672).

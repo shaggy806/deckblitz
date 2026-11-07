@@ -3176,7 +3176,8 @@ export class Game {
       }
       // Plot (rule 702.170a) — a special action (116.2k).
       if (def.plot !== null && this.whyCannotPlot(player, card) === null) {
-        out.push({ kind: "plot", card, cardName, cost: def.plot.cost, ...this.phyrexianPipsOffer(player, def.plot.cost) });
+        const plotCost = this.plotCostNow(player, def.plot.cost);
+        out.push({ kind: "plot", card, cardName, cost: plotCost, ...this.phyrexianPipsOffer(player, plotCost) });
       }
       // Cycling (rule 702.29) — a special action, any time you could cast an instant.
       // One whose cost asks for more is an `activate-ability` offer.
@@ -15329,7 +15330,7 @@ export class Game {
     if (def.plot === null) return `${def.name} does not have plot`;
     const timing = this.whyNotSorcerySpeed(player, "plot a card");
     if (timing !== null) return timing;
-    if (this.payMana(player, parseManaCost(def.plot.cost)) === null) {
+    if (this.payMana(player, parseManaCost(this.plotCostNow(player, def.plot.cost))) === null) {
       return `${player} cannot pay the plot cost of ${def.name}`;
     }
     return null;
@@ -15338,7 +15339,7 @@ export class Game {
   private plotCard(player: PlayerId, cardId: ObjectId): void {
     const why = this.whyCannotPlot(player, cardId);
     if (why !== null) throw new Error(why);
-    const cost = this.registry.get(this.state.objects[cardId].cardName).plot!.cost;
+    const cost = this.plotCostNow(player, this.registry.get(this.state.objects[cardId].cardName).plot!.cost);
     const payment = this.payMana(player, parseManaCost(cost));
     if (payment === null) throw new Error(`${player} cannot pay the plot cost`);
     const before = this.state.objects[cardId].zoneChangeCount ?? 0;
@@ -15346,6 +15347,18 @@ export class Game {
     this.executePayment(player, payment);
     this.makePlotted(player, cardId, before);
     this.afterPlayerAction(player);
+  }
+
+  /** `printed`, a plot cost, as `player` would pay it to plot a card from
+   * their hand now: "Plotting cards from your hand costs {2} less" (Doc
+   * Aurlock, Grizzled Genius — `plotCostReduction`) of each permanent they
+   * control, taken off generic mana only (rule 118.7a). */
+  private plotCostNow(player: PlayerId, printed: string): string {
+    let less = 0;
+    for (const { ability } of this.activeStaticsOf(player, (a) => a.plotCostReduction !== undefined)) {
+      less += ability.plotCostReduction!;
+    }
+    return less > 0 ? withGenericReducedBy(printed, less) : printed;
   }
 
   /** A card just exiled becomes plotted (rule 702.170): its owner may cast

@@ -14779,6 +14779,11 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.static.push({ affects: { scope: "self" }, morphCostIncrease: Number(m[1]), text: printed(raw) });
       continue;
     }
+    // Doc Aurlock, Grizzled Genius: the plot special action's cost, generic mana only.
+    if ((m = /^Plotting cards from your hand costs \{(\d+)\} less\.$/.exec(line))) {
+      out.static.push({ affects: { scope: "self" }, plotCostReduction: Number(m[1]), text: printed(raw) });
+      continue;
+    }
     if (out.chooseCardNameOnEnter !== undefined && (m = /^Activated abilities of sources with the chosen name cost \{(\d+)\} more to activate( unless they're mana abilities)?\.$/.exec(line))) {
       out.chooseCardNameOnEnter = { ...out.chooseCardNameOnEnter, aim: "opponent-permanents" };
       out.static.push({
@@ -17649,8 +17654,8 @@ function spellCostStaticOf(line, text) {
     const each = { cardsInGraveyard: {}, sameNameAsSpell: true };
     return made({ applies: {}, caster: "you", reduceGeneric: m[1] === "1" ? each : { scaled: each, by: Number(m[1]) } });
   }
-  if ((m = /^Spells you cast from your graveyard cost \{(\d+)\} less to cast\.$/.exec(line))) {
-    return made({ applies: {}, caster: "you", castFrom: "graveyard", reduceGeneric: Number(m[1]) });
+  if ((m = /^Spells you cast from your graveyard( or from exile)? cost \{(\d+)\} less to cast\.$/.exec(line))) {
+    return made({ applies: {}, caster: "you", castFrom: m[1] !== undefined ? ["graveyard", "exile"] : "graveyard", reduceGeneric: Number(m[2]) });
   }
   if ((m = /^Each spell costs \{(\d+)\} more to cast except during its controller's turn\.$/.exec(line))) {
     return made({ applies: {}, exceptOnCastersTurn: true, increaseGeneric: Number(m[1]) });

@@ -4063,6 +4063,11 @@ export interface StaticAbility {
    * megamorph cost is a morph cost (rule 702.37b), a disguise cost isn't, nor
    * the {3} to cast one face down (its reminder text). `affects` is ignored. */
   readonly morphCostIncrease?: number;
+  /** "Plotting cards from your hand costs {2} less" (Doc Aurlock, Grizzled
+   * Genius): generic mana off the plot cost its controller pays to plot a
+   * card from hand (rule 702.170a, a special action, 116.2k), never coloured
+   * mana (rule 118.7a). `affects` is ignored. */
+  readonly plotCostReduction?: number;
   /**
    * Changes what activated abilities cost to activate (rule 602.2b, which
    * applies rule 601.2f's cost modifications to activation costs):

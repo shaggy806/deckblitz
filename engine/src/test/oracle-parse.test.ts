@@ -2371,6 +2371,13 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       text: "Reveal a blue card in your hand",
     });
     expect(face("All morph costs cost {2} more.").static?.[0]?.morphCostIncrease).toBe(2);
+    expect(face("Plotting cards from your hand costs {2} less.").static?.[0]?.plotCostReduction).toBe(2);
+    expect(face("Spells you cast from your graveyard or from exile cost {2} less to cast.").static?.[0]?.costModification).toEqual({
+      applies: {},
+      caster: "you",
+      castFrom: ["graveyard", "exile"],
+      reduceGeneric: 2,
+    });
     expect(face("Morph—Discard a Zombie card.").morph?.also).toEqual({ discard: { count: 1, filter: { subtype: "Zombie" } } });
     expect(face("Morph—Return a Bird you control to its owner's hand.").morph?.also).toEqual({
       returnToHand: { count: 1, filter: { subtype: "Bird" } },
