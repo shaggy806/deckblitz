@@ -3163,6 +3163,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Client / UI
 
+- **"Build ASAP" flags in the library** (the user, 2026-11-06): in development, each card in "Not
+  in the pool yet" has a ☆ ASAP toggle, and "Show: Build ASAP (dev)" lists the flagged ones. The
+  flags go to `engine/data/build-asap.json` through a dev-only Vite endpoint; `cards:needs` puts
+  flagged cards first in `--by-rank`, `--next` and `--stale --next` and reports them with
+  `--asap [--prune]`, and the new `author-flagged` skill works through them.
 - **The library shows the cards missing from the pool** (the user, 2026-11-06): a "Show: Not in
   the pool yet" dropdown lists every Commander-legal card the pool lacks (2,825 that day) as its
   Scryfall face, linked to Scryfall, through the same search, type, colour, sort and Set filters.

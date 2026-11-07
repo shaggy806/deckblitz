@@ -72,7 +72,10 @@ for:
   machine.
   The other order is EDHREC rank across all sets (the `author-top-cards` skill;
   `npm run cards:needs -w engine -- --next 60` lists the next untriaged cards by rank, `-- --rank`
-  what blocks the most triaged ones). The bots' decks' stand-ins (the
+  what blocks the most triaged ones). **Cards the user flags "Build ASAP"** in the library's
+  dev-only view (`engine/data/build-asap.json`, since 2026-11-06) jump every one of these
+  orders: `cards:needs` lists them first, marked `[ASAP]`, `-- --asap` says where each stands,
+  and the `author-flagged` skill works through them. The bots' decks' stand-ins (the
   substitution tables in `engine/src/sample-decks.ts`) go as their originals land. The pool is
   ~29,400 real cards (2026-11-06) (`npm run card:verify -w engine` prints the current count of definitions,
   which is a little higher: each face of a double-faced card is its own).

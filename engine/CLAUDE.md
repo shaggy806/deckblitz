@@ -118,9 +118,11 @@ authoring, run just the files you touched** (`npx vitest run cmdr-sokka pool.tes
 - All three read the **pool index** (`engine/.cache/pool-index.jsonl` and `pool-vocab.json`,
   gitignored, `scripts/pool-index.mjs`): written by `gen:cards` from the sources, rebuilt by the
   tools when a card file (or a `src/cards/*.ts`/`src/*.ts` helper) is newer. No build needed.
-- `cards:needs -- --next 60 | --rank | --by-rank | --stale [--next 150 [--names]] | --feature <key> | --audit | --greedy | --brief <family> | --recheck`: the next untriaged cards by
+- `cards:needs -- --next 60 | --rank | --by-rank | --stale [--next 150 [--names]] | --feature <key> | --audit | --greedy | --brief <family> | --recheck | --asap [--prune]`: the next untriaged cards by
   EDHREC rank, and the triage records through one need
   vocabulary (`data/needs-vocabulary.json`): what blocks the most cards, what's been built since.
+  Cards flagged "Build ASAP" in the library's dev view (`data/build-asap.json`) come first in
+  `--by-rank`, `--next` and `--stale --next`; `--asap` lists them with where each stands.
 - `decks:stand-ins`: the sample decks' stand-ins left, deck by deck, with each one's blockers;
   `-- --implemented` deletes those whose original is now in the pool (and fixes BACKLOG's count).
 - `card:scaffold -- "Name"`: writes a draft card file into `cards/scaffold/`.
