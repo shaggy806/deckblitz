@@ -1912,7 +1912,9 @@
   "amount:additional-land-drop-amount",
   "effect:temporary-permanents-enter-tapped",
   "effect:add-mana-target-player",
-  "static:double-triggers-of-attached"
+  "static:double-triggers-of-attached",
+  "effect:play-from-library-top-this-turn",
+  "cost:pay-life-equal-mv-instead-of-mana"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

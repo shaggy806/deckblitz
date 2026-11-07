@@ -1212,6 +1212,8 @@ function viewForUncached(
     const looksAtTop =
       player === viewer &&
       (sight.ownLibraryTop ||
+        // For a while, from a resolved effect (The Belligerent).
+        (state.playerEffects ?? []).some((e) => e.owner === player && e.looksAtOwnLibraryTop === true) ||
         state.zones.shared.battlefield.some((id) => {
           const object = state.objects[id];
           return (

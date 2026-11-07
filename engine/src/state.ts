@@ -5885,6 +5885,20 @@ export interface PlayerEffect {
   /** "You may play lands from your graveyard" for a while (Gaea's Will): the
    * `playFromGraveyard` static's permission (rule 305.9). */
   readonly playLandsFromGraveyard?: true;
+  /** The library-top permissions for a while (The Belligerent; Gwenom,
+   * Remorseless): `owner` may play lands matching `playFromLibraryTop` and
+   * cast spells matching `castFromLibraryTop` from the top of their library
+   * (rule 601.3), the latter for life equal to its mana value with
+   * `payLifeManaValue`, and look at that card any time
+   * (`looksAtOwnLibraryTop`) — the statics' own permissions. `source` is
+   * the effect's, which the filter reads as its source. */
+  readonly playFromLibraryTop?: CardFilter;
+  readonly castFromLibraryTop?: {
+    readonly filter: CardFilter;
+    readonly payLifeManaValue?: true;
+    readonly source: ObjectId;
+  };
+  readonly looksAtOwnLibraryTop?: true;
   /** "Lands you control enter tapped this turn" (Nahiri's Lithoforming —
    * rule 614.1d): a permanent matching this as it would enter, from
    * `owner`'s side, enters tapped while this lasts. */

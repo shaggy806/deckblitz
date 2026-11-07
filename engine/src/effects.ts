@@ -6610,6 +6610,18 @@ export type EffectSpec =
        * beside `castFromGraveyard`'s spells; rule 305.9): the land drop is the
        * ordinary one. */
       readonly playLandsFromGraveyard?: true;
+      /** The library-top permissions a static gives (`StaticAbility`'s
+       * `playFromLibraryTop`, `castFromLibraryTop` and the visibility's
+       * `looksAtOwnLibraryTop`), for a while: "until end of turn, you may look
+       * at the top card of your library any time, and you may play lands and
+       * cast spells from the top of your library" (The Belligerent), "… If
+       * you cast a spell this way, pay life equal to its mana value rather
+       * than pay its mana cost" (Gwenom, Remorseless — `payLifeManaValue`).
+       * The controller's, kept to the ordinary timing and land drop (rules
+       * 305, 601.3); they last whatever becomes of the source. */
+      readonly playFromLibraryTop?: CardFilter;
+      readonly castFromLibraryTop?: { readonly filter: CardFilter; readonly payLifeManaValue?: true };
+      readonly looksAtOwnLibraryTop?: true;
       /** "Lands you control enter tapped this turn" (Nahiri's Lithoforming —
        * rule 614.1d): a replacement for the duration over each permanent
        * matching this as it would enter, from the controller's side
@@ -18689,6 +18701,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ...(spec.tokensComeToOwner === true ? { tokensComeToOwner: true as const } : {}),
         ...(spec.graveyardExile !== undefined ? { graveyardExile: { ...spec.graveyardExile, source: ctx.source } } : {}),
         ...(spec.playLandsFromGraveyard === true ? { playLandsFromGraveyard: true as const } : {}),
+        ...(spec.playFromLibraryTop !== undefined ? { playFromLibraryTop: spec.playFromLibraryTop } : {}),
+        ...(spec.castFromLibraryTop !== undefined
+          ? { castFromLibraryTop: { ...spec.castFromLibraryTop, source: ctx.source } }
+          : {}),
+        ...(spec.looksAtOwnLibraryTop === true ? { looksAtOwnLibraryTop: true as const } : {}),
         ...(spec.entersTapped !== undefined ? { entersTapped: spec.entersTapped } : {}),
         ...(spec.nextDrawInstead !== undefined
           ? { nextDrawInstead: { ...spec.nextDrawInstead, source: ctx.source, targets: [...ctx.targets], targetStints: [] } }

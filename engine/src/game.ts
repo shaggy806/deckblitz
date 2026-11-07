@@ -13132,7 +13132,18 @@ export class Game {
    * their library if it matches (rule 118.9-adjacent) — as the face being
    * played, as from the graveyard. */
   private mayPlayFromLibraryTop(player: PlayerId, cardId: ObjectId, face = 0): boolean {
-    return this.playPermissionFrom(player, cardId, face, (ability) => ability.playFromLibraryTop);
+    return (
+      this.playPermissionFrom(player, cardId, face, (ability) => ability.playFromLibraryTop) ||
+      // The same for a while, from a resolved effect (The Belligerent).
+      (this.state.playerEffects ?? []).some((effect) => {
+        const filter = effect.playFromLibraryTop;
+        return (
+          effect.owner === player &&
+          filter !== undefined &&
+          this.withFace(cardId, face, () => matchesFilter(this.state, this.registry, cardId, filter, { you: player }))
+        );
+      })
+    );
   }
 
   /**
@@ -13168,12 +13179,30 @@ export class Game {
         if (fits) out.push(permission);
       }
     }
+    // The same for a while, from a resolved effect (The Belligerent; Gwenom,
+    // Remorseless's pay-life one).
+    for (const effect of this.state.playerEffects ?? []) {
+      const permission = effect.castFromLibraryTop;
+      if (effect.owner !== player || permission === undefined) continue;
+      if (which !== undefined && (permission.payLifeManaValue === true) !== (which === "pay-life")) continue;
+      const fits = this.withFace(cardId, face, () =>
+        matchesFilter(this.state, this.registry, cardId, permission.filter, {
+          you: player,
+          castX: x,
+          source: permission.source,
+        }),
+      );
+      if (fits) {
+        out.push({ filter: permission.filter, ...(permission.payLifeManaValue === true ? { payLifeManaValue: true } : {}) });
+      }
+    }
     return out;
   }
 
   /** Whether `player` controls a permanent with a `castFromLibraryTop`
    * static — a cheap gate before {@link libraryTopCastPermissions}. */
   private hasLibraryTopCastStatic(player: PlayerId): boolean {
+    if ((this.state.playerEffects ?? []).some((e) => e.owner === player && e.castFromLibraryTop !== undefined)) return true;
     return this.state.zones.shared.battlefield.some((id) => {
       const source = this.state.objects[id];
       return (

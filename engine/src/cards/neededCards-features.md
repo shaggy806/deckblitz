@@ -444,6 +444,16 @@ With them, needing no engine code: Liliana of the Dark Realms (a resolution-time
 static:every-nonbasic-land-type, static:set-base-pt-to-life-total,
 decision:choose-plus-or-minus, cost:multiple-alternative-costs.
 
+### Library-top permissions until end of turn, for life too — built 2026-11-07
+
+By EDHREC rank: Gwenom, Remorseless (2650), The Belligerent (7006). A
+`player-effect`'s `looksAtOwnLibraryTop`, `playFromLibraryTop` and
+`castFromLibraryTop` (`{ filter, payLifeManaValue? }`) are the statics'
+library-top permissions for a while, read beside them (601.3), lasting
+whatever becomes of the source; `payLifeManaValue` is Bolas's Citadel's
+alternative cost (118.9). The scaffolder reads both cards' lines. Keys:
+effect:play-from-library-top-this-turn, cost:pay-life-equal-mv-instead-of-mana.
+
 ### Doubling the equipped creature's triggers — built 2026-11-07
 
 By EDHREC rank: Wizard's Staff (2832). `doubleTriggersOf`'s `host` doubles the

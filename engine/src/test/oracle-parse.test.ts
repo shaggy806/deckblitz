@@ -16540,7 +16540,7 @@ describe("a reveal for a card sharing a card type with the permanent targeted", 
   });
 });
 
-describe("target player adds mana", () => {
+describe("flagged cards' lines (2026-11-07): target player adds mana, a host's triggers doubled, library-top permissions for a turn", () => {
   it("The Warring Triad whole: a mill cost, a targeted add-mana, and its graveyard God line", () => {
     const face = parseFace({
       name: "The Warring Triad",
@@ -16575,6 +16575,25 @@ describe("target player adds mana", () => {
     expect(face.static[0]).toMatchObject({ affects: { scope: "attached" }, grantsTriggered: [{ trigger: { on: "cast-spell", noncreatureOnly: true } }] });
     expect(face.static[1]).toMatchObject({ affects: { scope: "self" }, doubleTriggersOf: { host: true } });
     expect(face.activated[0].targets).toEqual([{ kind: "permanent", whose: "you", filter: { type: "creature", subtype: "Wizard" } }]);
+  });
+
+  it("Gwenom's library-top permissions until end of turn, for life", () => {
+    const face = parseFace({
+      name: "Gwenom, Remorseless",
+      type_line: "Legendary Creature — Symbiote Spider Hero",
+      oracle_text:
+        "Deathtouch, lifelink\nWhenever Gwenom attacks, until end of turn, you may look at the top card of your library any time and you may play cards from the top of your library. If you cast a spell this way, pay life equal to its mana value rather than pay its mana cost.",
+      mana_cost: "{3}{B}{B}",
+      colors: ["B"],
+    });
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0].effect).toEqual({
+      kind: "player-effect",
+      duration: "end-of-turn",
+      looksAtOwnLibraryTop: true,
+      playFromLibraryTop: { type: "land" },
+      castFromLibraryTop: { filter: {}, payLifeManaValue: true },
+    });
   });
 
   it("two mana of any one color, to a target player", () => {

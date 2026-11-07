@@ -10365,6 +10365,40 @@ export function parseEffect(text, outer) {
       hints.push({ sentence, effect: made });
       continue;
     }
+    // The same from the top of the library, looking at it any time (rule
+    // 601.3): "Until end of turn, you may look at the top card of your library
+    // any time, and you may play lands and cast spells from the top of your
+    // library." (The Belligerent), "… and you may play cards from the top of
+    // your library." (Gwenom, Remorseless).
+    if (
+      /^until end of turn, you may look at the top card of your library any time,? and you may play (?:lands and cast spells|cards) from the top of your library\.$/i.test(
+        sentence,
+      )
+    ) {
+      const made = {
+        kind: "player-effect",
+        duration: "end-of-turn",
+        looksAtOwnLibraryTop: true,
+        playFromLibraryTop: { type: "land" },
+        castFromLibraryTop: { filter: {} },
+      };
+      parsed.push(made);
+      hints.push({ sentence, effect: made });
+      continue;
+    }
+    // "If you cast a spell this way, pay life equal to its mana value rather
+    // than pay its mana cost." after it (Gwenom): an alternative cost (118.9).
+    if (
+      /^if you cast a spell this way, pay life equal to its mana value rather than pay its mana cost\.$/i.test(sentence) &&
+      parsed.length > 0 &&
+      parsed[parsed.length - 1]?.kind === "player-effect" &&
+      parsed[parsed.length - 1]?.castFromLibraryTop !== undefined
+    ) {
+      const last = parsed[parsed.length - 1];
+      parsed[parsed.length - 1] = { ...last, castFromLibraryTop: { ...last.castFromLibraryTop, payLifeManaValue: true } };
+      hints.push({ sentence, effect: parsed[parsed.length - 1] });
+      continue;
+    }
     // "Each token that would be created under an opponent's control this turn
     // is created under your control instead." (Crafty Cutpurse).
     if (/^each token that would be created under an opponent's control this turn is created under your control instead\.$/i.test(sentence)) {
