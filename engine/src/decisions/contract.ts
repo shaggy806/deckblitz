@@ -36,6 +36,7 @@ import type {
   ChosenTargets,
   CombatCost,
   LegalAction,
+  WaterbendOffer,
 } from "../actions.js";
 import type { CardRegistry } from "../cards.js";
 import type { Color, ManaType } from "../mana.js";
@@ -203,6 +204,13 @@ export interface DecisionReadCtx {
   /** An offer's `phyrexianPips`: how many pips of `cost` the player could
    * choose to pay with life. */
   readonly phyrexianPipsOffer: (player: PlayerId, cost: string | null) => { phyrexianPips?: number };
+  /** A `choose-modes` offer's `waterbend`: what may tap for a waterbend
+   * `cost` an effect asks for (rule 701.67a — "unless you waterbend {2}").
+   * A capability because it runs the mana solver over the live board. */
+  readonly modesWaterbendOffer: (player: PlayerId, cost: string) => WaterbendOffer;
+  /** Why tapping `taps` (with mana for the rest) can't pay that waterbend
+   * `cost`, or `null` when it can. */
+  readonly whyModesWaterbendIsWrong: (player: PlayerId, cost: string, taps: readonly ObjectId[]) => string | null;
   /**
    * The {@link TargetSource} of the triggered ability parked in
    * `state.pendingTargetedTrigger`, or `undefined` when none is.
@@ -300,6 +308,7 @@ export interface DecisionHost {
     xValue?: number,
     forAll?: boolean,
     phyrexianLife?: number,
+    waterbend?: readonly ObjectId[],
   ) => void;
   readonly applyChooseFromZone: (player: PlayerId, chosen: readonly ObjectId[]) => void;
   readonly applySacrifice: (player: PlayerId, permanents: readonly ObjectId[]) => void;

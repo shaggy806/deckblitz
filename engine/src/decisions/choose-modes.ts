@@ -41,6 +41,10 @@ export const chooseModes = defineDecision({
       ...(awaiting.aboutCard !== undefined ? { aboutCard: awaiting.aboutCard } : {}),
       ...(awaiting.ward !== undefined ? { ward: { spell: awaiting.ward.spell } } : {}),
       ...(awaiting.cost !== undefined ? ctx.phyrexianPipsOffer(awaiting.player, awaiting.cost) : {}),
+      // "Unless you waterbend {2}" (rule 701.67a): what may tap for it.
+      ...(awaiting.costWaterbend === true && awaiting.cost !== undefined
+        ? { waterbend: ctx.modesWaterbendOffer(awaiting.player, awaiting.cost) }
+        : {}),
       // "You may pay one or more {E}" / "any amount of {E}": X in energy,
       // up to what the chooser has (the raise capped `maxX` at it).
       ...(awaiting.energyX !== undefined
@@ -122,12 +126,27 @@ export const chooseModes = defineDecision({
     if (awaiting.costTimes === true && chosen.length > 0 && (action.xValue ?? 0) < 1) {
       return `${player} must pay the cost at least once`;
     }
+    // Waterbend taps (rule 701.67a): only for a waterbend cost, and only
+    // what pays it with the mana there is.
+    if (action.waterbend !== undefined && chosen.length > 0) {
+      if (awaiting.costWaterbend !== true || awaiting.cost === undefined) {
+        return action.waterbend.length > 0 ? "there is no waterbend cost to pay" : null;
+      }
+      return ctx.whyModesWaterbendIsWrong(player, awaiting.cost, action.waterbend);
+    }
     return null;
   },
 
   apply: (host, action): void => {
     if (action.type !== "choose-modes") return;
-    host.applyModesChoice(action.player, action.modes, action.xValue, action.forAll === true, action.phyrexianLife);
+    host.applyModesChoice(
+      action.player,
+      action.modes,
+      action.xValue,
+      action.forAll === true,
+      action.phyrexianLife,
+      action.waterbend,
+    );
   },
 
   ask: (controller, view, awaiting, player): Action => {

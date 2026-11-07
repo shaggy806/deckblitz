@@ -887,6 +887,11 @@ export type Action =
       readonly xValue?: number;
       /** See `phyrexianLife` on `cast-spell`: of the decision's own cost. */
       readonly phyrexianLife?: number;
+      /** The artifacts and creatures tapped to pay the decision's waterbend
+       * cost (the offer's `waterbend` — "unless you waterbend {2}", rule
+       * 701.67a), each paying {1}, the mana the rest; `[]` pays it all with
+       * mana. Omitted, the engine taps the offer's `proof`. */
+      readonly waterbend?: readonly ObjectId[];
       /** Give the same answer to every identical trigger still on the stack
        * under this one (the offer's `sameForAll`), each as it resolves —
        * see `GameState.standingModeAnswers`. Ignored when none is offered. */
@@ -2231,6 +2236,10 @@ export type LegalAction =
        * paid (a `may`'s `costTimes` — "you may pay {1}{G} any number of
        * times", `minX` 1). */
       readonly xCost?: { readonly maxX: number; readonly minX?: number; readonly energy?: true; readonly times?: string };
+      /** Present when the decision's cost is a waterbend cost ("discard a
+       * card unless you waterbend {2}" — rule 701.67a): what may tap for it.
+       * See {@link WaterbendOffer}. */
+      readonly waterbend?: WaterbendOffer;
       /** Rules text of each mode, in order — index into this is what the
        * `choose-modes` action submits. */
       readonly modeTexts: readonly string[];

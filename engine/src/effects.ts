@@ -1466,6 +1466,14 @@ export type UnlessOption =
        * (Cyclone): what taking this option also does, as the chooser's effect
        * like the payment. */
       readonly ifPaid?: EffectSpec;
+      /** "Then discard a card unless you **waterbend {2}**" (Waterbending
+       * Lesson): `pay` is a waterbend cost (rule 701.67a) — for each generic
+       * mana in it, the chooser may tap an untapped artifact or creature they
+       * control rather than pay that mana. Offered when mana and taps
+       * together can pay it (rule 118.3); the decision's offer carries what
+       * may tap (`WaterbendOffer`), and the answer's `waterbend` names them.
+       * An `"unless"` option only. */
+      readonly waterbend?: true;
     } & UnlessTimes)
   /** "…unless that player pays {X}, where X is this creature's power"
    * (Esper Sentinel): that much generic mana, read as the effect applies —

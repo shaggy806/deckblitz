@@ -24,9 +24,11 @@ import {
   activate,
   cast,
   counters,
+  graveyard,
   hand,
   lands,
   named,
+  pickModes,
   pt,
   ref,
   settle,
@@ -287,5 +289,91 @@ describe("an optional waterbend (Katara, Seeking Revenge's \"you may waterbend {
     expect(asked).toBe(false);
     expect(tapped(game, bears) && tapped(game, relic)).toBe(true);
     expect(counters(game, katara)).toBe(0);
+  });
+});
+
+describe("an \"unless\" waterbend (Waterbending Lesson's \"discard a card unless you waterbend {2}\")", () => {
+  type ModesOffer = Extract<LegalAction, { kind: "choose-modes" }>;
+  const modesOffer = (game: Game): ModesOffer | undefined =>
+    game.legalActions(A).find((a): a is ModesOffer => a.kind === "choose-modes");
+
+  it("taps creatures and artifacts for the {2}, and nothing is discarded", () => {
+    const { game, a } = table();
+    const bears = spawn(game, "Grizzly Bears", A, { sick: true });
+    const relic = spawn(game, "Darksteel Relic");
+    pickModes(a, 0);
+    let asked = false;
+    a.chooseDiscardsFn = (cards, count) => {
+      asked = true;
+      return cards.slice(0, count).map((o) => o.id);
+    };
+    const lesson = toHand(game, "Waterbending Lesson");
+    const before = hand(game).length - 1;
+    lands(game, "Island", 4);
+    cast(game, lesson);
+    expect(asked).toBe(false);
+    expect(hand(game)).toHaveLength(before + 3);
+    // Summoning sick or not (the rulings).
+    expect(tapped(game, bears) && tapped(game, relic)).toBe(true);
+  });
+
+  it("is offered with what may tap, and the answer names which; mana pays the rest", () => {
+    const { game } = table();
+    const bears = spawn(game, "Grizzly Bears");
+    const relic = spawn(game, "Darksteel Relic");
+    const lesson = toHand(game, "Waterbending Lesson");
+    lands(game, "Island", 4);
+    cast(game, lesson, { settle: false });
+    const spare = spawn(game, "Island");
+    game.advanceUntil((s) => s.awaiting?.kind === "choose-modes" || s.zones.shared.stack.length === 0);
+    const offer = modesOffer(game);
+    expect(offer?.waterbend?.max).toBe(2);
+    expect(offer?.waterbend?.choices).toEqual(expect.arrayContaining([bears, relic]));
+    // Mana alone can't pay {2} with one Island left: one tap at the least.
+    expect(offer?.waterbend?.proof).toHaveLength(1);
+    expect(game.canDispatch({ type: "choose-modes", player: A, modes: [0], waterbend: [] })).toMatch(/waterbend/);
+    expect(game.canDispatch({ type: "choose-modes", player: A, modes: [0], waterbend: [spare] })).toMatch(
+      /artifact or creature/,
+    );
+    const before = hand(game).length;
+    // Not the proof's pick (a non-creature artifact goes first).
+    expect(offer?.waterbend?.proof).toEqual([relic]);
+    game.dispatch({ type: "choose-modes", player: A, modes: [0], waterbend: [bears] });
+    settle(game);
+    expect(tapped(game, bears)).toBe(true);
+    expect(tapped(game, relic)).toBe(false);
+    expect(tapped(game, spare)).toBe(true);
+    expect(hand(game)).toHaveLength(before);
+  });
+
+  it("isn't asked when mana and taps together can't pay: the card is discarded", () => {
+    const { game, a } = table();
+    spawn(game, "Grizzly Bears");
+    let asked = false;
+    a.chooseModesFn = () => {
+      asked = true;
+      return [0];
+    };
+    const lesson = toHand(game, "Waterbending Lesson");
+    const before = hand(game).length - 1;
+    lands(game, "Island", 4);
+    cast(game, lesson);
+    expect(asked).toBe(false);
+    expect(hand(game)).toHaveLength(before + 2);
+    // The Lesson and the discarded card.
+    expect(graveyard(game)).toHaveLength(2);
+  });
+
+  it("declined, the card is discarded and nothing taps", () => {
+    const { game, a } = table();
+    const bears = spawn(game, "Grizzly Bears");
+    const relic = spawn(game, "Darksteel Relic");
+    pickModes(a);
+    const lesson = toHand(game, "Waterbending Lesson");
+    const before = hand(game).length - 1;
+    lands(game, "Island", 4);
+    cast(game, lesson);
+    expect(hand(game)).toHaveLength(before + 2);
+    expect(tapped(game, bears) || tapped(game, relic)).toBe(false);
   });
 });

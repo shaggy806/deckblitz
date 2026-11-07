@@ -422,6 +422,16 @@ creature). Key: effect:attach-equipment-that-was-attached. Left: Cass, Hand of
 Vengeance also returns the Aura cards that were attached from the graveyard,
 attached to a target — a graveyard card's stint differs from its battlefield one.
 
+### "Unless you waterbend {2}" — built 2026-11-07
+
+Flagged Build ASAP: Waterbending Lesson (4367). An `unless` option's `pay` takes
+`waterbend: true` (rule 701.67a): offered when mana and taps together can pay it,
+the `choose-modes` decision then carries `costWaterbend`, its offer a
+`WaterbendOffer` (`waterbend`) and its answer the taps (`waterbend`), the engine
+tapping the fewest that pay when a driver names none. The client asks which tap
+after "Pay", through the cast's waterbend picker. The scaffolder reads "then
+discard N cards unless you waterbend {N}" whole. Key: effect:unless-waterbend.
+
 ### Plotting costs less — built 2026-11-07
 
 By EDHREC rank: Doc Aurlock, Grizzled Genius (2543). A static's `plotCostReduction`

@@ -2396,6 +2396,9 @@ function Table({
           ? 'choose-number'
         : pendingPhyrexian !== null && (modesChoiceAction || attackAction)
           ? 'choose-phyrexian'
+        // "Unless you waterbend {2}": which tap, once the player says yes.
+        : pendingWaterbend !== null && modesChoiceAction
+          ? 'choose-waterbend'
         : modesChoiceAction
           ? 'choose-modes'
         : sacrificeAction
@@ -4726,6 +4729,14 @@ function Table({
     const xMax = xCost?.maxX ?? 0
     const xPaid = Math.max(xMin, Math.min(xMax, modeX ?? xMax))
     const withX = xCost !== undefined ? { xValue: xPaid } : {}
+    // "Unless you waterbend {2}" (rule 701.67a): a yes asks which artifacts
+    // and creatures tap first, starting from the offer's proof.
+    const sendModes = (action: Extract<Action, { type: 'choose-modes' }>) => {
+      const bend = modesChoiceAction.waterbend
+      if (bend !== undefined && action.modes.length > 0 && bend.max > 0) {
+        setPendingWaterbend({ action, offer: bend, max: bend.max, least: bend.proof.length, picks: [...bend.proof] })
+      } else game.dispatch(action)
+    }
     // A choice among players (Tasigur's "you choose an opponent") reads with
     // their names; the engine's own text names the seat.
     const modeLabel = (i: number): ReactNode => {
@@ -4798,11 +4809,11 @@ function Table({
               onClick={() => {
                 setModeX(null)
                 askLifeThen(modesChoiceAction,(life) =>
-                  game.dispatch({ type: 'choose-modes', player: seat, modes: [0], ...withX, ...life }),
+                  sendModes({ type: 'choose-modes', player: seat, modes: [0], ...withX, ...life }),
                 )
               }}
             >
-              {ward || xCost !== undefined ? 'Pay' : 'Yes'}
+              {ward || xCost !== undefined || modesChoiceAction.waterbend !== undefined ? 'Pay' : 'Yes'}
             </button>
             <button
               type="button"
@@ -4811,7 +4822,7 @@ function Table({
                 game.dispatch({ type: 'choose-modes', player: seat, modes: [] })
               }}
             >
-              {ward || xCost !== undefined ? `Don't pay` : 'No'}
+              {ward || xCost !== undefined || modesChoiceAction.waterbend !== undefined ? `Don't pay` : 'No'}
             </button>
             {/* Identical triggers still on the stack under this one: answer
                 them all now. Each still resolves on its own. */}
@@ -4823,7 +4834,7 @@ function Table({
                   onClick={() => {
                     setModeX(null)
                     askLifeThen(modesChoiceAction,(life) =>
-                      game.dispatch({ type: 'choose-modes', player: seat, modes: [0], forAll: true, ...withX, ...life }),
+                      sendModes({ type: 'choose-modes', player: seat, modes: [0], forAll: true, ...withX, ...life }),
                     )
                   }}
                 >
@@ -4850,7 +4861,7 @@ function Table({
                 type="button"
                 onClick={() =>
                   askLifeThen(modesChoiceAction,(life) =>
-                    game.dispatch({ type: 'choose-modes', player: seat, modes: [i], ...life }),
+                    sendModes({ type: 'choose-modes', player: seat, modes: [i], ...life }),
                   )
                 }
               >
@@ -4884,7 +4895,7 @@ function Table({
               disabled={modePicks.length < minModes || modePicks.length > maxModes}
               onClick={() =>
                 askLifeThen(modesChoiceAction,(life) =>
-                  game.dispatch({ type: 'choose-modes', player: seat, modes: [...modePicks], ...life }),
+                  sendModes({ type: 'choose-modes', player: seat, modes: [...modePicks], ...life }),
                 )
               }
             >
@@ -5369,7 +5380,9 @@ function Table({
         ? game.nameOf(action.card)
         : action.type === 'activate-ability'
           ? game.nameOf(action.source)
-          : ''
+          : action.type === 'choose-modes' && modesChoiceAction
+            ? game.nameOf(modesChoiceAction.source)
+            : ''
     controls = (
       <div className="controls">
         <span>

@@ -6956,6 +6956,16 @@ export function parseSentence(sentence, ctx) {
       otherwise: { kind: "discard", target: "you", amount: 1, random: true },
     };
   }
+  // "Then discard a card unless you waterbend {2}" (Waterbending Lesson): a
+  // waterbend cost as the way out (rule 701.67a).
+  if ((m = new RegExp(`^(?:then )?discard ${N} cards? unless you waterbend (\\{\\d+\\})\\.$`, "i").exec(s))) {
+    return {
+      kind: "unless",
+      chooser: "you",
+      options: [{ pay: m[2], waterbend: true, text: `Waterbend ${m[2]}` }],
+      otherwise: { kind: "discard", target: "you", amount: amount(m[1]) },
+    };
+  }
   if ((m = /^sacrifice (?:~|it) unless you (return|tap) (an? untapped (.+?)) you control(?: to its owner's hand)?\.$/i.exec(s))) {
     const toHand = /to its owner's hand\.$/i.test(s);
     const filter = parseTypePhrase(m[3]);

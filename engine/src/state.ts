@@ -4613,6 +4613,10 @@ export type AwaitingDecision =
       readonly costHasX?: true;
       /** What "spend this mana only to …" reads `cost` as: `UnlessOption.paysFor`. */
       readonly costFor?: "cumulative-upkeep";
+      /** `cost` is a waterbend cost (rule 701.67a — an `"unless"` option's
+       * `waterbend`): each generic mana in it may be paid by tapping an
+       * untapped artifact or creature the chooser controls. */
+      readonly costWaterbend?: true;
       /** The most `cost`'s X may be — a `may`'s `maxX` ("X can't be greater
        * than the amount of life you lost this turn"). With `energyX`, the
        * most energy the chooser can pay (what they have, under `maxX`). */

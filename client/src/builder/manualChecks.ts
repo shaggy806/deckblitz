@@ -11408,4 +11408,19 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: ['Craw Wurm'] }, {}, {}],
     }),
   ),
+  // --- Waterbending as a way out of a discard (2026-11-07) -------------------
+  preset(
+    'Waterbending Lesson: waterbend {2} instead of discarding',
+    board({
+      you: { bf: ['Grizzly Bears', 'Ornithopter', 'Island*5'], hand: ['Waterbending Lesson'] },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    'Waterbending Lesson: waterbend {2}, four players',
+    board({
+      you: { bf: ['Grizzly Bears', 'Ornithopter', 'Island*4'], hand: ['Waterbending Lesson'] },
+      opp: [{ bf: [] }, { bf: [] }, { bf: [] }],
+    }),
+  ),
 ]

@@ -3175,8 +3175,9 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       effect: { kind: "sequence", effects: [{ kind: "draw", amount: 1 }, { kind: "gain-life", amount: 2 }] },
     });
     expect(optional.effect).toEqual({ kind: "draw", amount: 1 });
-    // "Unless you waterbend" and ward's waterbend aren't built: a person's.
-    expect(face("Draw three cards. Then discard a card unless you waterbend {2}.", "Sorcery", {}).complete).toBe(false);
+    // "Unless you waterbend" is built (Waterbending Lesson, below); ward's
+    // waterbend isn't: a person's.
+    expect(face("Draw three cards. Then discard a card unless you waterbend {2}.", "Sorcery", {}).complete).toBe(true);
     expect(face("Ward—Waterbend {4}.").complete).toBe(false);
   });
 
@@ -16362,6 +16363,32 @@ describe("discard N unless you discard one card of a kind", () => {
       effects: [
         { kind: "draw", amount: 3 },
         { kind: "discard", target: "you", amount: 2, unlessOne: { type: "artifact" } },
+      ],
+    });
+  });
+});
+
+describe("discard a card unless you waterbend {N}", () => {
+  it("reads Waterbending Lesson whole", () => {
+    const lesson = parseFace({
+      name: "Waterbending Lesson",
+      type_line: "Sorcery — Lesson",
+      mana_cost: "{3}{U}",
+      colors: ["U"],
+      oracle_text:
+        "Draw three cards. Then discard a card unless you waterbend {2}. (While paying a waterbend cost, you can tap your artifacts and creatures to help. Each one pays for {1}.)",
+    });
+    expect(lesson.complete).toBe(true);
+    expect(lesson.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "draw", amount: 3 },
+        {
+          kind: "unless",
+          chooser: "you",
+          options: [{ pay: "{2}", waterbend: true, text: "Waterbend {2}" }],
+          otherwise: { kind: "discard", target: "you", amount: 1 },
+        },
       ],
     });
   });

@@ -1304,9 +1304,11 @@ of Scarabs' `unless` with `chooser: "active-player"`); the scaffolder reads the
 trigger clause.
 
 **An `unless`'s options**, one kind per payment (rule 118.12a), each offered only to
-a player who can do all of it: `{ pay, times?, andLife?, ifPaid?, text }` ("{1} and 1
+a player who can do all of it: `{ pay, times?, andLife?, ifPaid?, waterbend?, text }` ("{1} and 1
 life" — Mundungu; "{G} for each wind counter on it. If you pay, …" — Cyclone,
-`ifPaid` being the chooser's effect like the payment), `{ payGeneric }`, `{ payLife }`,
+`ifPaid` being the chooser's effect like the payment; `waterbend: true` is "unless
+you **waterbend {2}**" — Waterbending Lesson, each {1} of `pay` payable by tapping
+an untapped artifact or creature, rule 701.67a), `{ payGeneric }`, `{ payLife }`,
 `{ payLifeAmount, text: "Pay {X} life" }` ("life equal to its toughness" — Essence
 Vortex), `{ payManaCostOf, ifPaid?, text: "Pay {X}" }` (an object's mana cost, "that
 spell's mana cost" — Ice Cave, Tariff: X as chosen for a spell on the stack and 0

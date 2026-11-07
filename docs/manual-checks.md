@@ -7603,3 +7603,13 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Collective Effort: one mode taps nothing, four players
 - **Do:** Cast Collective Effort choosing only its last mode, targeting you.
 - **Expect:** You aren't asked to tap anything; your Bears stay untapped and each gets a +1/+1 counter.
+
+## Waterbending as a way out of a discard (2026-11-07)
+
+### Waterbending Lesson: waterbend {2} instead of discarding
+- **Do:** Cast Waterbending Lesson with four Islands. When asked "Waterbend {2}", click Pay. One creature starts picked; click Ornithopter too if it isn't, and confirm "Waterbend 2".
+- **Expect:** The banner reads "Waterbending Lesson: waterbend — tap up to 2 artifacts or creatures … at least 1". Grizzly Bears and Ornithopter tap, your fifth Island stays untapped, and no card is discarded: you hold the three cards drawn.
+
+### Waterbending Lesson: waterbend {2}, four players
+- **Do:** Cast Waterbending Lesson with four Islands. Click Pay, keep the picks it starts with and confirm.
+- **Expect:** Grizzly Bears and Ornithopter tap and nothing is discarded.

@@ -2233,7 +2233,11 @@ export class Game {
       state: this.state,
       registry: this.registry,
       phyrexianPipsOffer: (player, cost) => this.phyrexianPipsOffer(player, cost),
-      maxAffordableAbilityX: (player, cost, xColor, times) => {
+      modesWaterbendOffer: (player, cost) => this.modesWaterbendOffer(player, cost),
+      whyModesWaterbendIsWrong: (player, cost, taps) =>
+        this.whyWaterbendIsWrong(player, taps, parseManaCost(cost).generic) ??
+        (this.modesWaterbendPayment(player, cost, taps) === null ? `${player} cannot pay the rest of that waterbend cost` : null),
+      maxAffordableAbilityX:(player, cost, xColor, times) => {
         const parsed = parseManaCost(cost);
         if (times === true) {
           return this.maxAffordableAbilityX(player, (n) => repeatedManaCost(parsed, n));
@@ -2309,8 +2313,8 @@ export class Game {
       applyVenture: (player, choice) => this.applyVenture(player, choice),
       applyCreatureTypeChoice: (player, t) => this.applyCreatureTypeChoice(player, t),
       applyCardNameChoice: (player, name) => this.applyCardNameChoice(player, name),
-      applyModesChoice: (player, modes, x, forAll, phyrexianLife) =>
-        this.withLifeChoice(phyrexianLife, () => this.applyModesChoice(player, modes, x, forAll)),
+      applyModesChoice: (player, modes, x, forAll, phyrexianLife, waterbend) =>
+        this.withLifeChoice(phyrexianLife, () => this.applyModesChoice(player, modes, x, forAll, waterbend)),
       applyChooseFromZone: (player, chosen) => this.applyChooseFromZone(player, chosen),
       applySacrifice: (player, ps) => this.applySacrifice(player, ps),
       applyDiscard: (player, cards) => this.applyDiscard(player, cards),
@@ -7647,6 +7651,8 @@ export class Game {
       readonly costHasX?: true;
       /** See the `choose-modes` decision's `costFor`. */
       readonly costFor?: "cumulative-upkeep";
+      /** See the `choose-modes` decision's `costWaterbend`. */
+      readonly costWaterbend?: true;
       /** The most that X may be — see `may`'s `maxX`. */
       readonly maxX?: number;
       /** X paid in energy rather than mana — see `may`'s `costEnergyX`. */
@@ -7709,7 +7715,13 @@ export class Game {
         : { ...costParsed, generic: costParsed.generic, x: 0 };
     // Asked if the player could pay it naming their life (rule 119.4); a bot
     // that says yes without naming it declines as it pays (`applyModesChoice`).
-    if (baseline !== null && this.withLifeChoice(Number.MAX_SAFE_INTEGER, () => this.payMana(controller, baseline, undefined, undefined, otherCostPurpose(cost ?? null, ability.costHasX === true, ability.costFor))) === null) {
+    // A waterbend cost (rule 701.67a) with mana and taps together.
+    if (
+      baseline !== null &&
+      (ability.costWaterbend === true && cost !== undefined
+        ? this.modesWaterbendPayment(controller, cost) === null
+        : this.withLifeChoice(Number.MAX_SAFE_INTEGER, () => this.payMana(controller, baseline, undefined, undefined, otherCostPurpose(cost ?? null, ability.costHasX === true, ability.costFor))) === null)
+    ) {
       decline();
       return;
     }
@@ -7782,6 +7794,7 @@ export class Game {
       ...(ability.xColor !== undefined ? { xColor: ability.xColor } : {}),
       ...(ability.costHasX === true ? { costHasX: true as const } : {}),
       ...(ability.costFor !== undefined ? { costFor: ability.costFor } : {}),
+      ...(ability.costWaterbend === true ? { costWaterbend: true as const } : {}),
       ...(energyCap !== undefined ? { maxX: energyCap } : ability.maxX !== undefined ? { maxX: ability.maxX } : {}),
       ...(energyX !== undefined ? { energyX } : {}),
       ...(ability.costTimes === true ? { costTimes: true as const } : {}),
@@ -7816,8 +7829,9 @@ export class Game {
     modeIndices: readonly number[],
     xValue?: number,
     forAll = false,
+    waterbend?: readonly ObjectId[],
   ): void {
-    const why = this.whyCannotChooseModes(player, modeIndices, xValue);
+    const why = this.whyCannotChooseModes(player, modeIndices, xValue, waterbend);
     if (why !== null) throw new Error(why);
     const awaiting = this.state.awaiting;
     if (awaiting === null || awaiting.kind !== "choose-modes") {
@@ -7937,9 +7951,20 @@ export class Game {
       const times = awaiting.costTimes === true;
       chosenX = parsed.x > 0 || times ? Math.max(0, Math.floor(xValue ?? 0)) : 0;
       const concrete = times ? repeatedManaCost(parsed, chosenX) : concreteX(parsed, chosenX, awaiting.xColor);
-      const payment = this.payMana(player, concrete, undefined, undefined, otherCostPurpose(cost, awaiting.costHasX === true, awaiting.costFor));
-      if (payment === null) chosen = [];
-      else this.executePayment(player, payment);
+      if (awaiting.costWaterbend === true) {
+        // "Unless you waterbend {2}" (rule 701.67a): the artifacts and
+        // creatures named tap for {1} each, the mana paying the rest.
+        const bent = this.modesWaterbendPayment(player, cost, waterbend);
+        if (bent === null) chosen = [];
+        else {
+          this.executePayment(player, bent.payment);
+          this.tapForWaterbend(bent.taps);
+        }
+      } else {
+        const payment = this.payMana(player, concrete, undefined, undefined, otherCostPurpose(cost, awaiting.costHasX === true, awaiting.costFor));
+        if (payment === null) chosen = [];
+        else this.executePayment(player, payment);
+      }
     }
     // An amount of energy (`may.costEnergyX`): X counters removed (rule
     // 107.14), all of them or — the board having moved — none.
@@ -8042,10 +8067,17 @@ export class Game {
     player: PlayerId,
     modeIndices: readonly number[],
     xValue?: number,
+    waterbend?: readonly ObjectId[],
   ): string | null {
     return chooseModes.whyCannot(
       this.decisionCtx,
-      { type: "choose-modes", player, modes: modeIndices, ...(xValue !== undefined ? { xValue } : {}) },
+      {
+        type: "choose-modes",
+        player,
+        modes: modeIndices,
+        ...(xValue !== undefined ? { xValue } : {}),
+        ...(waterbend !== undefined ? { waterbend } : {}),
+      },
       player,
     );
   }
@@ -19044,6 +19076,50 @@ export class Game {
       this.state.objects[id].tapped = true;
       this.emit({ type: "permanent-tapped", object: id });
     }
+  }
+
+  /**
+   * How `player` pays a waterbend cost an effect asks for — "discard a card
+   * unless you waterbend {2}" (rule 701.67a, an `"unless"` option's
+   * `waterbend`): every generic mana in `cost` may be paid by tapping. `taps`
+   * are the driver's (checked), or else the fewest that leave the rest
+   * payable (`waterbendProof`). `null` when it can't be paid so.
+   */
+  private modesWaterbendPayment(
+    player: PlayerId,
+    cost: string,
+    taps?: readonly ObjectId[],
+  ): { readonly taps: ObjectId[]; readonly payment: ManaPayment } | null {
+    const parsed = parseManaCost(cost);
+    const purpose = otherCostPurpose(cost);
+    const plan = (rest: ManaCost, withheld: ReadonlySet<ObjectId>): ManaPayment | null =>
+      this.payMana(player, rest, undefined, undefined, purpose, withheld.size > 0 ? { withheld } : undefined);
+    const chosen =
+      taps !== undefined
+        ? this.whyWaterbendIsWrong(player, taps, parsed.generic) === null
+          ? [...taps]
+          : null
+        : this.waterbendProof(player, parsed, parsed.generic, (rest, withheld) => plan(rest, withheld) !== null);
+    if (chosen === null) return null;
+    const payment = plan({ ...parsed, generic: parsed.generic - chosen.length }, new Set(chosen));
+    return payment === null ? null : { taps: chosen, payment };
+  }
+
+  /** The `choose-modes` offer's `waterbend` for a waterbend cost an effect
+   * asks for (see {@link modesWaterbendPayment}). */
+  private modesWaterbendOffer(player: PlayerId, cost: string): WaterbendOffer {
+    const purpose = otherCostPurpose(cost);
+    return this.waterbendOffer(
+      player,
+      () => {
+        const parsed = parseManaCost(cost);
+        return { cost: parsed, waterbend: parsed.generic };
+      },
+      (rest, withheld) =>
+        this.payMana(player, rest, undefined, undefined, purpose, withheld.size > 0 ? { withheld } : undefined) !== null,
+      undefined,
+      0,
+    );
   }
 
   /** The offer of a waterbend cost (see {@link WaterbendOffer}): `at(x)` is
@@ -39311,6 +39387,7 @@ export class Game {
       {
         ...(offer.costHasX === true ? { costHasX: true as const } : {}),
         ...(offer.costFor !== undefined ? { costFor: offer.costFor } : {}),
+        ...(offer.costWaterbend === true ? { costWaterbend: true as const } : {}),
         ...(known.aboutObject !== undefined ? { aboutObject: known.aboutObject } : {}),
       },
     );
@@ -39334,8 +39411,9 @@ export class Game {
     readonly cost?: string;
     readonly costHasX?: true;
     readonly costFor?: "cumulative-upkeep";
+    readonly costWaterbend?: true;
   } | null {
-    const spared = (slot: number | undefined): ObjectId | undefined => {
+    const spared =(slot: number | undefined): ObjectId | undefined => {
       const ref = slot === undefined ? undefined : targets[slot];
       return ref?.kind === "object" ? ref.object : undefined;
     };
@@ -39343,6 +39421,8 @@ export class Game {
       this.state.zones.shared.battlefield.some((id) => matchesFilter(this.state, this.registry, id, filter, { you: player }));
     const available = options.filter((option) => {
       if ("pay" in option) {
+        // "Unless you waterbend {2}" (rule 701.67a): mana and taps together.
+        if (option.waterbend === true) return this.modesWaterbendPayment(player, option.pay) !== null;
         const payment =
           this.payMana(player, parseManaCost(option.pay), undefined, undefined, otherCostPurpose(option.pay, option.paysX === true, option.paysFor)) ??
           this.withLifeChoice(Number.MAX_SAFE_INTEGER, () =>
@@ -39501,6 +39581,7 @@ export class Game {
       ...(mana !== undefined ? { cost: mana.pay } : {}),
       ...(mana?.paysX === true ? { costHasX: true as const } : {}),
       ...(mana?.paysFor !== undefined ? { costFor: mana.paysFor } : {}),
+      ...(mana?.waterbend === true ? { costWaterbend: true as const } : {}),
     };
   }
 
