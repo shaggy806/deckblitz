@@ -217,6 +217,7 @@ import _poolDoctorDoomUnrivaled from "../pool/doctor-doom-unrivaled.js";
 import _poolDoctorJaneFoster from "../pool/doctor-jane-foster.js";
 import _poolDoomsday from "../pool/doomsday.js";
 import _poolDovinArchitectOfLaw from "../pool/dovin-architect-of-law.js";
+import _poolDragonhawkFatesTempest from "../pool/dragonhawk-fates-tempest.js";
 import _poolDragonlordAtarka from "../pool/dragonlord-atarka.js";
 import _poolDreamSalvage from "../pool/dream-salvage.js";
 import _poolDreamshaperShaman from "../pool/dreamshaper-shaman.js";
@@ -1171,6 +1172,7 @@ const shard: CardShard = {
     _poolDoctorJaneFoster,
     _poolDoomsday,
     _poolDovinArchitectOfLaw,
+    _poolDragonhawkFatesTempest,
     _poolDragonlordAtarka,
     _poolDreamSalvage,
     _poolDreamshaperShaman,

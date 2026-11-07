@@ -36,6 +36,7 @@ import _poolAnaBattlemage from "../pool/ana-battlemage.js";
 import _poolAngelOfRenewal from "../pool/angel-of-renewal.js";
 import _poolAngelicOverseer from "../pool/angelic-overseer.js";
 import _poolAngelicSleuth from "../pool/angelic-sleuth.js";
+import _poolAnimistsAwakening from "../pool/animists-awakening.js";
 import _poolAntManReformedRogue from "../pool/ant-man-reformed-rogue.js";
 import _poolAntiVenomHorrifyingHealer from "../pool/anti-venom-horrifying-healer.js";
 import _poolAnuridSwarmsnapper from "../pool/anurid-swarmsnapper.js";
@@ -994,6 +995,7 @@ const shard: CardShard = {
     _poolAngelOfRenewal,
     _poolAngelicOverseer,
     _poolAngelicSleuth,
+    _poolAnimistsAwakening,
     _poolAntManReformedRogue,
     _poolAntiVenomHorrifyingHealer,
     _poolAnuridSwarmsnapper,

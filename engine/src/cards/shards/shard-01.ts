@@ -801,6 +801,7 @@ import _poolTailTheSuspect from "../pool/tail-the-suspect.js";
 import _poolTakenByNightmares from "../pool/taken-by-nightmares.js";
 import _poolTalismanOfConviction from "../pool/talisman-of-conviction.js";
 import _poolTannukSteadfastSecond from "../pool/tannuk-steadfast-second.js";
+import _poolTashasHideousLaughter from "../pool/tashas-hideous-laughter.js";
 import _poolTasteOfBlood from "../pool/taste-of-blood.js";
 import _poolTaureanMauler from "../pool/taurean-mauler.js";
 import _poolTeachersPest from "../pool/teachers-pest.js";
@@ -1776,6 +1777,7 @@ const shard: CardShard = {
     _poolTakenByNightmares,
     _poolTalismanOfConviction,
     _poolTannukSteadfastSecond,
+    _poolTashasHideousLaughter,
     _poolTasteOfBlood,
     _poolTaureanMauler,
     _poolTeachersPest,

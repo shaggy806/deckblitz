@@ -383,6 +383,7 @@ import _poolIdrisSoulOfTheTardis from "../pool/idris-soul-of-the-tardis.js";
 import _poolIgnorantBliss from "../pool/ignorant-bliss.js";
 import _poolIllnessInTheRanks from "../pool/illness-in-the-ranks.js";
 import _poolIllvoiLightJammer from "../pool/illvoi-light-jammer.js";
+import _poolImprovisationCapstone from "../pool/improvisation-capstone.js";
 import _poolImpulsivePilferer from "../pool/impulsive-pilferer.js";
 import _poolInciteHysteria from "../pool/incite-hysteria.js";
 import _poolIncongruity from "../pool/incongruity.js";
@@ -1392,6 +1393,7 @@ const shard: CardShard = {
     _poolIgnorantBliss,
     _poolIllnessInTheRanks,
     _poolIllvoiLightJammer,
+    _poolImprovisationCapstone,
     _poolImpulsivePilferer,
     _poolInciteHysteria,
     _poolIncongruity,

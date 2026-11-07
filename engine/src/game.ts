@@ -36755,26 +36755,33 @@ export class Game {
         const it = this.state.objects[object];
         return it?.zone === "battlefield" && (it.zoneChangeCount ?? 0) === zoneChangeCount;
       },
-      revealUntilCount: (owner, filter, count, exile) => {
+      revealUntilCount: (owner, filter, count, exile, measure) => {
         const library = this.state.zones.perPlayer[owner]?.library ?? [];
         const revealed: ObjectId[] = [];
         const found: ObjectId[] = [];
         const matches = (id: ObjectId): boolean =>
           matchesFilter(this.state, this.registry, id, filter, { you: controller });
+        // How far it has got: the cards found, or their total mana value
+        // (rule 202.3), read as each is revealed.
+        let reached = 0;
+        const find = (id: ObjectId): void => {
+          found.push(id);
+          reached += measure === "mana-value" ? manaValueOfObject(this.registry, this.state.objects[id]) : 1;
+        };
         if (exile) {
           // One at a time, face up: each is in exile before the next.
-          while (found.length < count && library.length > 0) {
+          while (reached < count && library.length > 0) {
             const top = library[0];
             this.moveObject(top, "exile");
             revealed.push(top);
-            if (matches(top)) found.push(top);
+            if (matches(top)) find(top);
           }
           return { revealed, found };
         }
         for (const id of library) {
-          if (found.length >= count) break;
+          if (reached >= count) break;
           revealed.push(id);
-          if (matches(id)) found.push(id);
+          if (matches(id)) find(id);
         }
         if (revealed.length > 0) this.revealCards(owner, revealed, "library");
         return { revealed, found };

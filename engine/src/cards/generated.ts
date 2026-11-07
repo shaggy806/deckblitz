@@ -894,6 +894,7 @@ import _poolAnimateDead from "./pool/animate-dead.js";
 import _poolAnimateLand from "./pool/animate-land.js";
 import _poolAnimateWall from "./pool/animate-wall.js";
 import _poolAnimatingFaerie from "./pool/animating-faerie.js";
+import _poolAnimistsAwakening from "./pool/animists-awakening.js";
 import _poolAnimistsMight from "./pool/animists-might.js";
 import _poolAnimusOfNightsReach from "./pool/animus-of-nights-reach.js";
 import _poolAnimusOfPredation from "./pool/animus-of-predation.js";
@@ -7018,6 +7019,7 @@ import _poolDragonbroodsRelic from "./pool/dragonbroods-relic.js";
 import _poolDragonclawStrike from "./pool/dragonclaw-strike.js";
 import _poolDragonflySuit from "./pool/dragonfly-suit.js";
 import _poolDragonflySwarm from "./pool/dragonfly-swarm.js";
+import _poolDragonhawkFatesTempest from "./pool/dragonhawk-fates-tempest.js";
 import _poolDragonkinBerserker from "./pool/dragonkin-berserker.js";
 import _poolDragonlairSpider from "./pool/dragonlair-spider.js";
 import _poolDragonloftIdol from "./pool/dragonloft-idol.js";
@@ -10960,6 +10962,7 @@ import _poolGone from "./pool/gone.js";
 import _poolGongagaReactorTown from "./pool/gongaga-reactor-town.js";
 import _poolGontiCannyAcquisitor from "./pool/gonti-canny-acquisitor.js";
 import _poolGontiLordOfLuxury from "./pool/gonti-lord-of-luxury.js";
+import _poolGontiNightMinister from "./pool/gonti-night-minister.js";
 import _poolGontisAetherHeart from "./pool/gontis-aether-heart.js";
 import _poolGoobbueGardener from "./pool/goobbue-gardener.js";
 import _poolGoodFortuneUnicorn from "./pool/good-fortune-unicorn.js";
@@ -12882,6 +12885,7 @@ import _poolImpracticalJoke from "./pool/impractical-joke.js";
 import _poolImprisonedInTheMoon from "./pool/imprisoned-in-the-moon.js";
 import _poolImprobableAlliance from "./pool/improbable-alliance.js";
 import _poolImpromptuRaid from "./pool/impromptu-raid.js";
+import _poolImprovisationCapstone from "./pool/improvisation-capstone.js";
 import _poolImprovisedAct from "./pool/improvised-act.js";
 import _poolImprovisedArmor from "./pool/improvised-armor.js";
 import _poolImprovisedArsenal from "./pool/improvised-arsenal.js";
@@ -26175,6 +26179,7 @@ import _poolTaroxBladewing from "./pool/tarox-bladewing.js";
 import _poolTarpan from "./pool/tarpan.js";
 import _poolTarriansSoulcleaver from "./pool/tarrians-soulcleaver.js";
 import _poolTashaYarOutOfTime from "./pool/tasha-yar-out-of-time.js";
+import _poolTashasHideousLaughter from "./pool/tashas-hideous-laughter.js";
 import _poolTasigurTheGoldenFang from "./pool/tasigur-the-golden-fang.js";
 import _poolTasigursCruelty from "./pool/tasigurs-cruelty.js";
 import _poolTaskForce from "./pool/task-force.js";
@@ -32385,6 +32390,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAnimateLand,
   _poolAnimateWall,
   _poolAnimatingFaerie,
+  _poolAnimistsAwakening,
   _poolAnimistsMight,
   _poolAnimusOfNightsReach,
   _poolAnimusOfPredation,
@@ -38509,6 +38515,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDragonclawStrike,
   _poolDragonflySuit,
   _poolDragonflySwarm,
+  _poolDragonhawkFatesTempest,
   _poolDragonkinBerserker,
   _poolDragonlairSpider,
   _poolDragonloftIdol,
@@ -42451,6 +42458,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGongagaReactorTown,
   _poolGontiCannyAcquisitor,
   _poolGontiLordOfLuxury,
+  _poolGontiNightMinister,
   _poolGontisAetherHeart,
   _poolGoobbueGardener,
   _poolGoodFortuneUnicorn,
@@ -44373,6 +44381,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolImprisonedInTheMoon,
   _poolImprobableAlliance,
   _poolImpromptuRaid,
+  _poolImprovisationCapstone,
   _poolImprovisedAct,
   _poolImprovisedArmor,
   _poolImprovisedArsenal,
@@ -57666,6 +57675,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTarpan,
   _poolTarriansSoulcleaver,
   _poolTashaYarOutOfTime,
+  _poolTashasHideousLaughter,
   _poolTasigurTheGoldenFang,
   _poolTasigursCruelty,
   _poolTaskForce,
@@ -63889,6 +63899,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/animate-land": _poolAnimateLand,
   "pool/animate-wall": _poolAnimateWall,
   "pool/animating-faerie": _poolAnimatingFaerie,
+  "pool/animists-awakening": _poolAnimistsAwakening,
   "pool/animists-might": _poolAnimistsMight,
   "pool/animus-of-nights-reach": _poolAnimusOfNightsReach,
   "pool/animus-of-predation": _poolAnimusOfPredation,
@@ -70013,6 +70024,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dragonclaw-strike": _poolDragonclawStrike,
   "pool/dragonfly-suit": _poolDragonflySuit,
   "pool/dragonfly-swarm": _poolDragonflySwarm,
+  "pool/dragonhawk-fates-tempest": _poolDragonhawkFatesTempest,
   "pool/dragonkin-berserker": _poolDragonkinBerserker,
   "pool/dragonlair-spider": _poolDragonlairSpider,
   "pool/dragonloft-idol": _poolDragonloftIdol,
@@ -73955,6 +73967,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gongaga-reactor-town": _poolGongagaReactorTown,
   "pool/gonti-canny-acquisitor": _poolGontiCannyAcquisitor,
   "pool/gonti-lord-of-luxury": _poolGontiLordOfLuxury,
+  "pool/gonti-night-minister": _poolGontiNightMinister,
   "pool/gontis-aether-heart": _poolGontisAetherHeart,
   "pool/goobbue-gardener": _poolGoobbueGardener,
   "pool/good-fortune-unicorn": _poolGoodFortuneUnicorn,
@@ -75877,6 +75890,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/imprisoned-in-the-moon": _poolImprisonedInTheMoon,
   "pool/improbable-alliance": _poolImprobableAlliance,
   "pool/impromptu-raid": _poolImpromptuRaid,
+  "pool/improvisation-capstone": _poolImprovisationCapstone,
   "pool/improvised-act": _poolImprovisedAct,
   "pool/improvised-armor": _poolImprovisedArmor,
   "pool/improvised-arsenal": _poolImprovisedArsenal,
@@ -89170,6 +89184,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tarpan": _poolTarpan,
   "pool/tarrians-soulcleaver": _poolTarriansSoulcleaver,
   "pool/tasha-yar-out-of-time": _poolTashaYarOutOfTime,
+  "pool/tashas-hideous-laughter": _poolTashasHideousLaughter,
   "pool/tasigur-the-golden-fang": _poolTasigurTheGoldenFang,
   "pool/tasigurs-cruelty": _poolTasigursCruelty,
   "pool/task-force": _poolTaskForce,

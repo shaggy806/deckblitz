@@ -1246,6 +1246,14 @@ export type EffectAmount =
    * attack, and never one put onto the battlefield attacking (the
    * rulings). A planeswalker attacked isn't its controller. */
   | { readonly opponentsAttacked: true }
+  /** How many of the resolving spell's or ability's object targets are still
+   * the objects they were (rule 400.7) and legal — for a delayed trigger set
+   * up `about` what its creator did, "those cards that are **still exiled**":
+   * Dragonhawk, Fate's Tempest's "2 damage to each opponent for each of those
+   * cards that are still exiled" (`{ product: [2, { objectTargets: true }] }`,
+   * `about: "exiled"`). A card played from exile, or exiled again since, is a
+   * new object and isn't counted (its ruling). */
+  | { readonly objectTargets: true }
   /** How many creatures are attacking the player a per-player effect is
    * acting on — that player, not a planeswalker of theirs (rule 506.3):
    * Within Range's "each opponent loses life equal to the number of
@@ -4169,10 +4177,17 @@ export type EffectSpec =
        * together, under their owner's control, each card's "as this enters"
        * choices asked first, rule 614.12 — `tapped` enters them tapped),
        * `"hand"` (Fathom Trawl), or `"with-rest"`, going where the rest goes
-       * in one event (Mind Funeral). `rest` is `reveal-until`'s. */
+       * in one event (Mind Funeral). `rest` is `reveal-until`'s.
+       *
+       * `measure: "mana-value"`: until the matching cards revealed have
+       * **total mana value** `count` or greater, rather than `count` of them
+       * (rule 202.3) — Improvisation Capstone's "exile cards from the top of
+       * your library until you exile cards with total mana value 4 or
+       * greater", Tasha's Hideous Laughter's 20. */
       readonly kind: "reveal-until-count";
       readonly filter: CardFilter;
       readonly count: EffectAmount;
+      readonly measure?: "mana-value";
       readonly rest: RevealedCardsGo;
       readonly whose?: number | "that-player" | { readonly controllerOfTarget: number };
       readonly exile?: boolean;
@@ -11189,12 +11204,14 @@ export interface EffectApi {
    * object (rule 400.7). */
   votedPermanentHere(object: ObjectId, zoneChangeCount: number): boolean;
   /** Reveal from the top of `owner`'s library until `count` cards matching
-   * `filter` are revealed — see `"reveal-until-count"`. */
+   * `filter` are revealed — or, with `measure`, until their total mana value
+   * reaches `count` — see `"reveal-until-count"`. */
   revealUntilCount(
     owner: PlayerId,
     filter: CardFilter,
     count: number,
     exile: boolean,
+    measure?: "mana-value",
   ): { readonly revealed: readonly ObjectId[]; readonly found: readonly ObjectId[] };
   /** Put these cards onto the battlefield together, each under its owner's
    * control. `true` when it stopped first to ask an "as this enters"
@@ -14782,6 +14799,9 @@ export function signedAmountValue(
   }
   if ("cardTypesInGraveyard" in amount) return ctx.cardTypesInGraveyard(amount.cardTypesInGraveyard);
   if ("opponentsAttacked" in amount) return ctx.opponentsAttacked();
+  if ("objectTargets" in amount) {
+    return ctx.targets.filter((t, slot) => t?.kind === "object" && !illegalSlot(slot, ctx)).length;
+  }
   if ("attackingPlayer" in amount) return ctx.creaturesAttacking(each ?? ctx.controller);
   if ("damageDealtThisTurn" in amount) {
     return ctx.damageDealtThisTurn(ctx.playersInScope(amount.who ?? "you"), amount.combat, amount.colors, {
@@ -17229,7 +17249,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         if (n <= 0) return;
         const owner = revealingPlayer(spec.whose, ctx);
         if (owner === undefined) return;
-        progress = { owner, ...ctx.revealUntilCount(owner, spec.filter, n, spec.exile === true) };
+        progress = { owner, ...ctx.revealUntilCount(owner, spec.filter, n, spec.exile === true, spec.measure) };
       }
       const put = spec.put ?? "battlefield";
       const exiled = spec.exile === true;

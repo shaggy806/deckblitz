@@ -1896,7 +1896,12 @@
   "static:set-base-pt-to-life-total",
   "trigger:mills-trigger",
   "trigger:trigger-mills-nonland-card",
-  "stat:milled-this-turn-mill-only"
+  "stat:milled-this-turn-mill-only",
+  "effect:delayed-count-still-exiled",
+  "effect:reveal-until-total-mana-value",
+  "zone:cast-spell-not-owned-by-caster",
+  "effect:impulse-exile-for-creature-controller",
+  "effect:reveal-x-put-all-matching"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
