@@ -12704,6 +12704,24 @@ describe("any number of … with different names or powers", () => {
     ).toMatchObject({ loseAllAbilities: true, setTypes: ["creature"], setBasePtFromAffectedCounters: "loyalty" });
   });
 
+  it("reads a base P/T set to your life total, and every nonbasic land type", () => {
+    expect(
+      parseFace({
+        name: "Aettir and Priwen",
+        type_line: "Legendary Artifact — Equipment",
+        oracle_text: "Equipped creature has base power and toughness X/X, where X is your life total.\nEquip {5}",
+      }).static[0],
+    ).toMatchObject({ affects: { scope: "attached" }, setBasePtFromSourceCount: "your-life-total" });
+    const nexus = parseFace({
+      name: "Planar Nexus",
+      type_line: "Land",
+      oracle_text:
+        "This land is every nonbasic land type. (Nonbasic land types include Cave, Desert, Gate, Lair, Locus, Mine, Power-Plant, Sphere, Tower, and Urza's.)\n{T}: Add {C}.\n{1}, {T}: Add one mana of any color.",
+    });
+    expect(nexus.alsoSubtypes).toContain("Urza's");
+    expect(nexus.alsoSubtypes).not.toContain("Forest");
+  });
+
   it("reads a search whose chosen finds are shuffled back in", () => {
     const parsed = face(
       "Threats Undetected",

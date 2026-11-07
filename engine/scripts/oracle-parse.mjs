@@ -14000,6 +14000,12 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.alsoSubtypes = m[1].split(/,? and |, /);
       continue;
     }
+    // "This land is every nonbasic land type." (Planar Nexus) — the same CDA
+    // on a land: every land type but the five basic ones (rule 205.3i).
+    if (/^~ is every nonbasic land type\.(?: \(.*\))?$/.test(line) && /\bLand\b/.test(face.type_line ?? "")) {
+      out.alsoSubtypes = ["Cave", "Desert", "Gate", "Lair", "Locus", "Mine", "Planet", "Power-Plant", "Sphere", "Tower", "Town", "Urza's"];
+      continue;
+    }
     // Your own turns of the game (`FIRST_THREE_TURNS`): on another player's,
     // with flash from somewhere, it's castable (Serra Avenger's ruling).
     if (line === "You can't cast ~ during your first, second, or third turns of the game.") {
@@ -14900,6 +14906,12 @@ function parseFaceAsWritten(face, ctx = {}) {
     // chosen type" (Riders of Gavony): read off this permanent.
     if (out.chooseCreatureTypeOnEnter === true && (m = /^([A-Z]\w+) creatures you control have protection from creatures of the chosen type\.$/.exec(line))) {
       out.static.push({ affects: { scope: "creatures-you-control", subtype: m[1] }, protection: { filter: { type: "creature", ofChosenType: true } }, text: printed(raw) });
+      continue;
+    }
+    // "Equipped creature has base power and toughness X/X, where X is your
+    // life total" (Aettir and Priwen): a live layer-7b set, read from here.
+    if ((m = /^(Equipped|Enchanted) creature has base power and toughness X\/X, where X is your life total\.$/.exec(line))) {
+      out.static.push({ affects: { scope: "attached" }, setBasePtFromSourceCount: "your-life-total", text: printed(raw) });
       continue;
     }
     // Imprint's "the exiled card's card types" (Mirror Golem).

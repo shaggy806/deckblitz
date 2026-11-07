@@ -398,6 +398,18 @@ By EDHREC rank: Thirst for Knowledge (1953). No engine code: `discard`'s
 discard N cards unless you discard a [kind] card" whole. Key:
 effect:discard-unless-land.
 
+### Every nonbasic land type, and base P/T set to your life total — built 2026-11-06
+
+Flagged Build ASAP (B270): Planar Nexus (2625) and Aettir and Priwen (2672).
+`alsoSubtypes` now reaches a land, its land types only: Planar Nexus lists the
+twelve nonbasic ones as a CDA in every zone (rules 205.3i, 604.3). A static's
+`setBasePtFromSourceCount` sets the affected permanents' base P/T to a live
+count from the source's side (layer 7b, rule 613.4b). The scaffolder reads both.
+With them, needing no engine code: Liliana of the Dark Realms (a resolution-time
+`modal`) and Dracogenesis (a filtered `alternativeCostForSpells`). Keys:
+static:every-nonbasic-land-type, static:set-base-pt-to-life-total,
+decision:choose-plus-or-minus, cost:multiple-alternative-costs.
+
 ### The next spell has improvise — built 2026-11-05
 
 By EDHREC rank: Archway of Innovation (926). `grant-spells-this-turn`'s

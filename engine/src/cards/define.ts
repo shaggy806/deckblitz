@@ -2191,6 +2191,15 @@ export interface StaticAbility {
    */
   readonly setBasePtFromAffectedCounters?: string;
   /**
+   * Layer 7b, like `setBasePt` — each affected permanent's base power and
+   * toughness are both a live count read from **this** permanent's side
+   * (its controller's "you"): Aettir and Priwen's "equipped creature has
+   * base power and toughness X/X, where X is your life total" is
+   * `"your-life-total"` (rule 613.4b). Counted as characteristics are
+   * computed, so it follows the life total as it changes.
+   */
+  readonly setBasePtFromSourceCount?: CountSpec;
+  /**
    * A layer-7d bonus that *scales* with a live count — Skycat Sovereign's
    * "gets +1/+1 for each **other** creature you control with flying".
    *
@@ -4438,7 +4447,10 @@ export interface CardDefinition {
    * changeling, it applies first in layer 4, in every zone, from the copiable
    * values, and a loss of abilities (layer 6) doesn't undo it — see
    * `characteristics.ts`'s `withChangeling`. Its line is an ability, so it's
-   * in the card's `text` but not its printed type line.
+   * in the card's `text` but not its printed type line. On a land, land
+   * types: Planar Nexus's "this land is every nonbasic land type" lists the
+   * twelve that aren't basic (rule 205.3i) — no marker like "every land
+   * type", which would make it a Forest too.
    */
   readonly alsoSubtypes?: readonly string[];
   readonly power: number | null;

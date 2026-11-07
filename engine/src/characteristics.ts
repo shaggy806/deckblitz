@@ -3117,7 +3117,9 @@ function printedDefinition(registry: CardRegistry, object: GameObject): CardDefi
  * object can have creature types (rules 205.3d, 205.3m) — Crib Swap, a
  * "Kindred Instant — Shapeshifter", is every creature type as a spell.
  * A card's `alsoSubtypes` (Veteran Adventurer's "is also a Cleric, Rogue,
- * Warrior, and Wizard") is the same kind of CDA and joins here too.
+ * Warrior, and Wizard") is the same kind of CDA and joins here too; on a
+ * land it's land types (Planar Nexus's "this land is every nonbasic land
+ * type" — only a land has them, rule 205.3d).
  */
 export function withChangeling(
   def: CardDefinition,
@@ -3126,7 +3128,11 @@ export function withChangeling(
    * of text boxes gave it that card's text (rule 612.5). */
   text: CardDefinition = def,
 ): readonly string[] {
-  if (!def.types.includes("creature") && !def.types.includes("kindred")) return subtypes;
+  if (!def.types.includes("creature") && !def.types.includes("kindred")) {
+    return def.types.includes("land") && text.alsoSubtypes !== undefined
+      ? union(subtypes, text.alsoSubtypes.filter(isLandType))
+      : subtypes;
+  }
   // "~ is also a Cleric, Rogue, Warrior, and Wizard" — the same kind of CDA.
   const also = text.alsoSubtypes !== undefined ? union(subtypes, text.alsoSubtypes) : subtypes;
   return text.keywords.includes("changeling") ? union(also, [EVERY_CREATURE_TYPE]) : also;
@@ -4004,6 +4010,17 @@ function countSide(state: GameState, object: GameObject, forChosenPlayer: true |
   if (forChosenPlayer !== true) return object.controller;
   const chosen = object.chosenPlayer;
   return chosen !== undefined && state.players[chosen]?.hasLost !== true ? chosen : undefined;
+}
+
+/** A `setBasePtFromSourceCount`'s X/X: the count read from `source`'s side. */
+function sourceCountPt(
+  state: GameState,
+  registry: CardRegistry,
+  source: GameObject,
+  countOf: CountSpec,
+): { readonly power: number; readonly toughness: number } {
+  const n = basePtCount(state, registry, source, { countOf, plusPower: 0, plusToughness: 0 });
+  return { power: n, toughness: n };
 }
 
 /** A `setBasePtFromCount`'s count on `object`: the one permanent that knows
@@ -5013,7 +5030,8 @@ function contributesToCharacteristics(ability: StaticAbility): boolean {
     ability.bandsWithOther !== undefined ||
     ability.landwalk !== undefined ||
     ability.setBasePt !== undefined ||
-    ability.setBasePtFromAffectedCounters !== undefined
+    ability.setBasePtFromAffectedCounters !== undefined ||
+    ability.setBasePtFromSourceCount !== undefined
   );
 }
 
@@ -5343,6 +5361,8 @@ function collectStaticEffects(
               power: target.counters[ability.setBasePtFromAffectedCounters] ?? 0,
               toughness: target.counters[ability.setBasePtFromAffectedCounters] ?? 0,
             }
+          : ability.setBasePtFromSourceCount !== undefined
+          ? sourceCountPt(state, registry, source, ability.setBasePtFromSourceCount)
           : (ability.setBasePt ?? null),
     };
   };

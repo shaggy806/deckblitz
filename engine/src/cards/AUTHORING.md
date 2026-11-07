@@ -624,6 +624,9 @@ subtype list with `includes`** in engine code — ask `hasSubtype`.
 Burakos) is the same kind of CDA (rule 604.3, its ruling: every zone): the
 card field `alsoSubtypes: ["Cleric", "Rogue", "Warrior", "Wizard"]`, the
 printed `subtypes` left as the type line has them. The scaffolder reads it.
+On a land it's land types: Planar Nexus's "this land is every nonbasic land
+type" lists the twelve that aren't basic (rule 205.3i) — not
+`EVERY_LAND_TYPE`, which would make it a Forest too.
 
 **Toxic** (rule 702.164) is a field, not a `keywords` string, because it's
 parameterised and cumulative: `toxic: 1` is "Toxic 1" (Karumonix, the Rat
@@ -5434,6 +5437,10 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
 - `setBasePtFromAffectedCounters: "<kind>"` — layer 7b, each affected permanent
   by its own count of those counters: Spark Rupture's "a creature with power
   and toughness each equal to the number of loyalty counters on it".
+- `setBasePtFromSourceCount: <CountSpec>` — layer 7b, both base power and
+  toughness a live count from **this** permanent's side: Aettir and Priwen's
+  "equipped creature has base power and toughness X/X, where X is your life
+  total" is `"your-life-total"`.
 - **A static making a planeswalker a creature**: `addTypes: ["creature"]` for
   "that's still a planeswalker" (rule 205.1b, Gideon Blackblade); `setTypes:
   ["creature"]` for "he's a 3/4 Ninja creature" with no such words (205.1a,

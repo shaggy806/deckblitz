@@ -7,6 +7,7 @@ import _poolAcademyRuins from "../pool/academy-ruins.js";
 import _poolAcolyteOfAffliction from "../pool/acolyte-of-affliction.js";
 import _poolAetherTunnel from "../pool/aether-tunnel.js";
 import _poolAetherspouts from "../pool/aetherspouts.js";
+import _poolAettirAndPriwen from "../pool/aettir-and-priwen.js";
 import _poolAgathasSoulCauldron from "../pool/agathas-soul-cauldron.js";
 import _poolAjaniFellsTheGodsire from "../pool/ajani-fells-the-godsire.js";
 import _poolAjaniInspiringLeader from "../pool/ajani-inspiring-leader.js";
@@ -1015,6 +1016,7 @@ const shard: CardShard = {
     _poolAcolyteOfAffliction,
     _poolAetherTunnel,
     _poolAetherspouts,
+    _poolAettirAndPriwen,
     _poolAgathasSoulCauldron,
     _poolAjaniFellsTheGodsire,
     _poolAjaniInspiringLeader,

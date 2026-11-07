@@ -460,6 +460,7 @@ import _poolLightEmUp from "../pool/light-em-up.js";
 import _poolLightPawsEmperorsVoice from "../pool/light-paws-emperors-voice.js";
 import _poolLightUpTheStage from "../pool/light-up-the-stage.js";
 import _poolLightwheelEnhancements from "../pool/lightwheel-enhancements.js";
+import _poolLilianaOfTheDarkRealms from "../pool/liliana-of-the-dark-realms.js";
 import _poolLilianasDevotee from "../pool/lilianas-devotee.js";
 import _poolLilianasSpecter from "../pool/lilianas-specter.js";
 import _poolLimestoneGolem from "../pool/limestone-golem.js";
@@ -1434,6 +1435,7 @@ const shard: CardShard = {
     _poolLightPawsEmperorsVoice,
     _poolLightUpTheStage,
     _poolLightwheelEnhancements,
+    _poolLilianaOfTheDarkRealms,
     _poolLilianasDevotee,
     _poolLilianasSpecter,
     _poolLimestoneGolem,

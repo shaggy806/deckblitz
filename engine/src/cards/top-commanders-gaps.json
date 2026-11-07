@@ -1889,7 +1889,11 @@
   "effect:divided-total-reading-x",
   "effect:divided-total-reading-x",
   "cost:attack-tax-phyrexian-mana",
-  "effect:next-creature-enters-with-counter"
+  "effect:next-creature-enters-with-counter",
+  "decision:choose-plus-or-minus",
+  "cost:multiple-alternative-costs",
+  "static:every-nonbasic-land-type",
+  "static:set-base-pt-to-life-total"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

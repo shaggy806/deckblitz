@@ -223,6 +223,7 @@ import _poolDisappearingAct from "../pool/disappearing-act.js";
 import _poolDisperse from "../pool/disperse.js";
 import _poolDominatingLicid from "../pool/dominating-licid.js";
 import _poolDonatelloMutantMechanic from "../pool/donatello-mutant-mechanic.js";
+import _poolDracogenesis from "../pool/dracogenesis.js";
 import _poolDraconicLore from "../pool/draconic-lore.js";
 import _poolDragonshift from "../pool/dragonshift.js";
 import _poolDragonsoulKnight from "../pool/dragonsoul-knight.js";
@@ -1226,6 +1227,7 @@ const shard: CardShard = {
     _poolDisperse,
     _poolDominatingLicid,
     _poolDonatelloMutantMechanic,
+    _poolDracogenesis,
     _poolDraconicLore,
     _poolDragonshift,
     _poolDragonsoulKnight,

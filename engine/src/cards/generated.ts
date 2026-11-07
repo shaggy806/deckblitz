@@ -333,6 +333,7 @@ import _poolAethertow from "./pool/aethertow.js";
 import _poolAetherwindBasker from "./pool/aetherwind-basker.js";
 import _poolAetherwingGoldenScaleFlagship from "./pool/aetherwing-golden-scale-flagship.js";
 import _poolAetherworksMarvel from "./pool/aetherworks-marvel.js";
+import _poolAettirAndPriwen from "./pool/aettir-and-priwen.js";
 import _poolAeveProgenitorOoze from "./pool/aeve-progenitor-ooze.js";
 import _poolAffaGuardHound from "./pool/affa-guard-hound.js";
 import _poolAffaProtector from "./pool/affa-protector.js";
@@ -6960,6 +6961,7 @@ import _poolDrJosephMbenga from "./pool/dr-joseph-mbenga.js";
 import _poolDrLeonardBonesMccoy from "./pool/dr-leonard-bones-mccoy.js";
 import _poolDrMadisonLi from "./pool/dr-madison-li.js";
 import _poolDrPulaskiCynicalClinician from "./pool/dr-pulaski-cynical-clinician.js";
+import _poolDracogenesis from "./pool/dracogenesis.js";
 import _poolDraconauticsEngineer from "./pool/draconautics-engineer.js";
 import _poolDraconianCylix from "./pool/draconian-cylix.js";
 import _poolDraconicDestiny from "./pool/draconic-destiny.js";
@@ -15105,6 +15107,7 @@ import _poolLilianaDeathsMajesty from "./pool/liliana-deaths-majesty.js";
 import _poolLilianaDefiantNecromancer from "./pool/liliana-defiant-necromancer.js";
 import _poolLilianaDreadhordeGeneral from "./pool/liliana-dreadhorde-general.js";
 import _poolLilianaHereticalHealer from "./pool/liliana-heretical-healer.js";
+import _poolLilianaOfTheDarkRealms from "./pool/liliana-of-the-dark-realms.js";
 import _poolLilianaOfTheVeil from "./pool/liliana-of-the-veil.js";
 import _poolLilianaTheFaultless from "./pool/liliana-the-faultless.js";
 import _poolLilianaTheLastHope from "./pool/liliana-the-last-hope.js";
@@ -19332,6 +19335,7 @@ import _poolPlanarEngineering from "./pool/planar-engineering.js";
 import _poolPlanarGate from "./pool/planar-gate.js";
 import _poolPlanarGenesis from "./pool/planar-genesis.js";
 import _poolPlanarIncision from "./pool/planar-incision.js";
+import _poolPlanarNexus from "./pool/planar-nexus.js";
 import _poolPlanarOutburst from "./pool/planar-outburst.js";
 import _poolPlanarOverlay from "./pool/planar-overlay.js";
 import _poolPlanarPortal from "./pool/planar-portal.js";
@@ -31817,6 +31821,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAetherwindBasker,
   _poolAetherwingGoldenScaleFlagship,
   _poolAetherworksMarvel,
+  _poolAettirAndPriwen,
   _poolAeveProgenitorOoze,
   _poolAffaGuardHound,
   _poolAffaProtector,
@@ -38444,6 +38449,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDrLeonardBonesMccoy,
   _poolDrMadisonLi,
   _poolDrPulaskiCynicalClinician,
+  _poolDracogenesis,
   _poolDraconauticsEngineer,
   _poolDraconianCylix,
   _poolDraconicDestiny,
@@ -46589,6 +46595,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLilianaDefiantNecromancer,
   _poolLilianaDreadhordeGeneral,
   _poolLilianaHereticalHealer,
+  _poolLilianaOfTheDarkRealms,
   _poolLilianaOfTheVeil,
   _poolLilianaTheFaultless,
   _poolLilianaTheLastHope,
@@ -50816,6 +50823,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPlanarGate,
   _poolPlanarGenesis,
   _poolPlanarIncision,
+  _poolPlanarNexus,
   _poolPlanarOutburst,
   _poolPlanarOverlay,
   _poolPlanarPortal,
@@ -63314,6 +63322,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/aetherwind-basker": _poolAetherwindBasker,
   "pool/aetherwing-golden-scale-flagship": _poolAetherwingGoldenScaleFlagship,
   "pool/aetherworks-marvel": _poolAetherworksMarvel,
+  "pool/aettir-and-priwen": _poolAettirAndPriwen,
   "pool/aeve-progenitor-ooze": _poolAeveProgenitorOoze,
   "pool/affa-guard-hound": _poolAffaGuardHound,
   "pool/affa-protector": _poolAffaProtector,
@@ -69941,6 +69950,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dr-leonard-bones-mccoy": _poolDrLeonardBonesMccoy,
   "pool/dr-madison-li": _poolDrMadisonLi,
   "pool/dr-pulaski-cynical-clinician": _poolDrPulaskiCynicalClinician,
+  "pool/dracogenesis": _poolDracogenesis,
   "pool/draconautics-engineer": _poolDraconauticsEngineer,
   "pool/draconian-cylix": _poolDraconianCylix,
   "pool/draconic-destiny": _poolDraconicDestiny,
@@ -78086,6 +78096,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/liliana-defiant-necromancer": _poolLilianaDefiantNecromancer,
   "pool/liliana-dreadhorde-general": _poolLilianaDreadhordeGeneral,
   "pool/liliana-heretical-healer": _poolLilianaHereticalHealer,
+  "pool/liliana-of-the-dark-realms": _poolLilianaOfTheDarkRealms,
   "pool/liliana-of-the-veil": _poolLilianaOfTheVeil,
   "pool/liliana-the-faultless": _poolLilianaTheFaultless,
   "pool/liliana-the-last-hope": _poolLilianaTheLastHope,
@@ -82313,6 +82324,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/planar-gate": _poolPlanarGate,
   "pool/planar-genesis": _poolPlanarGenesis,
   "pool/planar-incision": _poolPlanarIncision,
+  "pool/planar-nexus": _poolPlanarNexus,
   "pool/planar-outburst": _poolPlanarOutburst,
   "pool/planar-overlay": _poolPlanarOverlay,
   "pool/planar-portal": _poolPlanarPortal,
