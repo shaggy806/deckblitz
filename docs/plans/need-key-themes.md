@@ -1,9 +1,52 @@
 # Need-key themes: general engine changes under the open keys
 
-Status: proposal (2026-11-07)
+Status: plan of record (2026-11-07), step 1 next — see *The plan* just below. The survey under it is a proposal.
 
 The 1,831 open need keys (2,324 waiting cards) mostly fall into about sixteen engine mechanisms that cut across
 their `family` prefixes. Each theme below is one general change that would turn many narrow keys into authoring work.
+
+## The plan (2026-11-07)
+
+Stop building keys one at a time; build the shared changes below, each ending a stream of keys. The first night run
+against flagged cards bears the survey out: of 36 cards (B274), about a third needed no engine code at all.
+
+**How every step runs.** One step a session, not four parallel agents: these steps change types every agent would
+touch. Each step:
+
+1. Adds a short design note under its theme here (the shape, where it lives, which old shapes it replaces).
+2. Migrates every user of the old parallel shapes to the new one, and **deletes the old shapes**, or the next key adds
+   a field to them again.
+3. Teaches the bots' effect knowledge the new shape in the same step (`docs/plans/bot-effect-knowledge.md`).
+4. Proves it with two or three cards, flagged Build ASAP cards first (`cards:needs -- --asap`), marks the keys it
+   covers built, and leaves the rest to `author-freed`.
+5. Verifies (`npm run verify`; `--full` for any step that moves a widely used type) and lands on `main`, with a line
+   in `COMPLETED.md` and the step ticked here.
+
+**The steps** (flagged cards each would prove, from the 2026-11-07 list):
+
+1. **Key clean-up (no engine design).** Merge the duplicate keys listed under *Already built or duplicated* in
+   `engine/data/needs-vocabulary.json` (one key, the other an alias; re-point the records). Try authoring the keys
+   listed there as probably expressible (`keyword:devoid` already proved so with Ulalek; the
+   cast-not-from-hand cost reduction would free Bilbo, Thief in the Night and Advanced Reconstruction). Run
+   `author-freed` over `--stale` (Benthic Anomaly, Corrupted Crossroads, Prowling Geistcatcher, Promise of Tomorrow,
+   Cold Storage, and the nine cards B274's partly covered keys left: Cass, Hand of Vengeance; Last Night Together,
+   Intimidation Bolt, Boros Battleshaper, Forgestoker Dragon; Flameskull, March of Reckless Joy; Yare). Then re-count
+   the themes (the counts here are ±15%) and correct this doc.
+2. **One shared duration type, and timed statics** (themes 3a, 3b): the foundation for steps 3, 4 and 6. Proving
+   cards: Teferi's Reproach, Willie Lumpkin, Zagorka, Emrakul, the Exigent Doom, Hall of Echoes, Frozen in Ice,
+   Jace's Machinations, Yavimaya Bloomsage.
+3. **A turn journal in game state** (theme 6): one read for "this turn / last turn / this game". Kid Loki, Kiora of
+   Salt and Sand, Kíli the Resourceful, Captain America, Living Legend.
+4. **Declarative event triggers with "first time / nth each turn" modifiers** (theme 2). The connive cards (Glorious
+   Purpose, Ultron, Unlimited, Iron Monger, Leader, Super-Genius), Elrond, Moon-Reader, Avatar Aang, Way of the Mind
+   Sculptor, Tamiyo, Upriser Crowned.
+5. **Object sets and one aggregate** (theme 1, with theme 15's captured context). Synthetic Destiny, Thorin,
+   Mountain-king, Brass Infiniscope, Captain Marvel, Apex Avenger.
+6. **The cost pipeline (theme 4), then one `chooser` field (theme 5).** The power-up cards (Hulk, Gamma Goliath; Kang
+   the Conqueror; Wonder Man; Advancing the Spirit), Baron Helmut Zemo, Dawnhand Dissident, The Dominion Bracelet,
+   World War Hulk, Eumidian Wastewaker.
+7. Then the survey's build order below from step 8 on (refs and relational filters, play permissions, "instead"
+   replacements, combat records, the smaller themes).
 
 ## How this was measured
 

@@ -24,7 +24,7 @@ is still unscoped.
 
 `need-keys-after-the-walk` (**in progress**: tooling, model trial, and Phase 1's merge and existence check done; the recheck round next) works down the blocked records once the set walk ends: tooling (`--audit`, `--greedy`, `--brief`), a check that every record is really blocked with keys merged by family, then building in greedy order a family per session, with cheap agents for the judging and scripts for the counting.
 
-`need-key-themes` (**proposal**, 2026-11-07) groups the 1,831 open need keys by the engine mechanism under them — object sets, declarative triggers, one duration type, cost amounts, choosers, a turn journal — and proposes a general change for each, with a build order.
+`need-key-themes` (**plan of record**, 2026-11-07; step 1 next) groups the 1,831 open need keys by the engine mechanism under them — object sets, declarative triggers, one duration type, cost amounts, choosers, a turn journal — and proposes a general change for each, with a build order.
 
 `scaling-rooms` (**planning**) plans how the server holds more rooms at once and makes use of a bigger box: measure first (a load harness, event-loop delay on `/status`), trim the one thread's work (frames with only new events), then rooms sharded across worker threads — without which a bigger box runs the same one thread — then the box, sized from the measurement, and deploys that don't end games.
 
