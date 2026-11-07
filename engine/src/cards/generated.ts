@@ -1233,6 +1233,7 @@ import _poolArisenGorgon from "./pool/arisen-gorgon.js";
 import _poolArixmethesSlumberingIsle from "./pool/arixmethes-slumbering-isle.js";
 import _poolArjunTheShiftingFlame from "./pool/arjun-the-shifting-flame.js";
 import _poolArkOfBlight from "./pool/ark-of-blight.js";
+import _poolArkOfHunger from "./pool/ark-of-hunger.js";
 import _poolArlinnEmbracedByTheMoon from "./pool/arlinn-embraced-by-the-moon.js";
 import _poolArlinnKord from "./pool/arlinn-kord.js";
 import _poolArlinnVoiceOfThePack from "./pool/arlinn-voice-of-the-pack.js";
@@ -15277,6 +15278,7 @@ import _poolLochMare from "./pool/loch-mare.js";
 import _poolLochmereSerpent from "./pool/lochmere-serpent.js";
 import _poolLockAndLoad from "./pool/lock-and-load.js";
 import _poolLockeCole from "./pool/locke-cole.js";
+import _poolLockeTreasureHunter from "./pool/locke-treasure-hunter.js";
 import _poolLockedInTheCemetery from "./pool/locked-in-the-cemetery.js";
 import _poolLockerRoom from "./pool/locker-room.js";
 import _poolLocketOfYesterdays from "./pool/locket-of-yesterdays.js";
@@ -26856,6 +26858,7 @@ import _poolTheUnderworldCookbook from "./pool/the-underworld-cookbook.js";
 import _poolTheUnicomplex from "./pool/the-unicomplex.js";
 import _poolTheUnspeakable from "./pool/the-unspeakable.js";
 import _poolTheUrDragon from "./pool/the-ur-dragon.js";
+import _poolTheUrSphinx from "./pool/the-ur-sphinx.js";
 import _poolTheVisionAndScarletWitch from "./pool/the-vision-and-scarlet-witch.js";
 import _poolTheVision from "./pool/the-vision.js";
 import _poolTheWallsOfBaSingSe from "./pool/the-walls-of-ba-sing-se.js";
@@ -28355,6 +28358,7 @@ import _poolUnlivingLegionnaire from "./pool/unliving-legionnaire.js";
 import _poolUnlivingPsychopath from "./pool/unliving-psychopath.js";
 import _poolUnluckyCabbageMerchant from "./pool/unlucky-cabbage-merchant.js";
 import _poolUnluckyDrop from "./pool/unlucky-drop.js";
+import _poolUnluckyWitness from "./pool/unlucky-witness.js";
 import _poolUnmakeTheGraves from "./pool/unmake-the-graves.js";
 import _poolUnmake from "./pool/unmake.js";
 import _poolUnmarkedGrave from "./pool/unmarked-grave.js";
@@ -32747,6 +32751,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolArixmethesSlumberingIsle,
   _poolArjunTheShiftingFlame,
   _poolArkOfBlight,
+  _poolArkOfHunger,
   _poolArlinnEmbracedByTheMoon,
   _poolArlinnKord,
   _poolArlinnVoiceOfThePack,
@@ -46791,6 +46796,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLochmereSerpent,
   _poolLockAndLoad,
   _poolLockeCole,
+  _poolLockeTreasureHunter,
   _poolLockedInTheCemetery,
   _poolLockerRoom,
   _poolLocketOfYesterdays,
@@ -58370,6 +58376,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheUnicomplex,
   _poolTheUnspeakable,
   _poolTheUrDragon,
+  _poolTheUrSphinx,
   _poolTheVisionAndScarletWitch,
   _poolTheVision,
   _poolTheWallsOfBaSingSe,
@@ -59869,6 +59876,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUnlivingPsychopath,
   _poolUnluckyCabbageMerchant,
   _poolUnluckyDrop,
+  _poolUnluckyWitness,
   _poolUnmakeTheGraves,
   _poolUnmake,
   _poolUnmarkedGrave,
@@ -64274,6 +64282,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/arixmethes-slumbering-isle": _poolArixmethesSlumberingIsle,
   "pool/arjun-the-shifting-flame": _poolArjunTheShiftingFlame,
   "pool/ark-of-blight": _poolArkOfBlight,
+  "pool/ark-of-hunger": _poolArkOfHunger,
   "pool/arlinn-embraced-by-the-moon": _poolArlinnEmbracedByTheMoon,
   "pool/arlinn-kord": _poolArlinnKord,
   "pool/arlinn-voice-of-the-pack": _poolArlinnVoiceOfThePack,
@@ -78318,6 +78327,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/lochmere-serpent": _poolLochmereSerpent,
   "pool/lock-and-load": _poolLockAndLoad,
   "pool/locke-cole": _poolLockeCole,
+  "pool/locke-treasure-hunter": _poolLockeTreasureHunter,
   "pool/locked-in-the-cemetery": _poolLockedInTheCemetery,
   "pool/locker-room": _poolLockerRoom,
   "pool/locket-of-yesterdays": _poolLocketOfYesterdays,
@@ -89897,6 +89907,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-unicomplex": _poolTheUnicomplex,
   "pool/the-unspeakable": _poolTheUnspeakable,
   "pool/the-ur-dragon": _poolTheUrDragon,
+  "pool/the-ur-sphinx": _poolTheUrSphinx,
   "pool/the-vision-and-scarlet-witch": _poolTheVisionAndScarletWitch,
   "pool/the-vision": _poolTheVision,
   "pool/the-walls-of-ba-sing-se": _poolTheWallsOfBaSingSe,
@@ -91396,6 +91407,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/unliving-psychopath": _poolUnlivingPsychopath,
   "pool/unlucky-cabbage-merchant": _poolUnluckyCabbageMerchant,
   "pool/unlucky-drop": _poolUnluckyDrop,
+  "pool/unlucky-witness": _poolUnluckyWitness,
   "pool/unmake-the-graves": _poolUnmakeTheGraves,
   "pool/unmake": _poolUnmake,
   "pool/unmarked-grave": _poolUnmarkedGrave,

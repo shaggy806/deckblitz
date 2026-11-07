@@ -839,6 +839,7 @@ import _poolTheNakedTime from "../pool/the-naked-time.js";
 import _poolTheRavensWarning from "../pool/the-ravens-warning.js";
 import _poolTheSpiritOasis from "../pool/the-spirit-oasis.js";
 import _poolTheTheoristJaceBeleren from "../pool/the-theorist-jace-beleren.js";
+import _poolTheUrSphinx from "../pool/the-ur-sphinx.js";
 import _poolTheWarInHeaven from "../pool/the-war-in-heaven.js";
 import _poolTheWeatherseedTreaty from "../pool/the-weatherseed-treaty.js";
 import _poolTheWeddingOfRiverSong from "../pool/the-wedding-of-river-song.js";
@@ -1829,6 +1830,7 @@ const shard: CardShard = {
     _poolTheRavensWarning,
     _poolTheSpiritOasis,
     _poolTheTheoristJaceBeleren,
+    _poolTheUrSphinx,
     _poolTheWarInHeaven,
     _poolTheWeatherseedTreaty,
     _poolTheWeddingOfRiverSong,

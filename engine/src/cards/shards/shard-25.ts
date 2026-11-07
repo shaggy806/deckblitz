@@ -876,6 +876,7 @@ import _poolUndergroundSea from "../pool/underground-sea.js";
 import _poolUnfortunateAccident from "../pool/unfortunate-accident.js";
 import _poolUnityOfPurpose from "../pool/unity-of-purpose.js";
 import _poolUnleashFury from "../pool/unleash-fury.js";
+import _poolUnluckyWitness from "../pool/unlucky-witness.js";
 import _poolUnravelingMummy from "../pool/unraveling-mummy.js";
 import _poolUnstableFooting from "../pool/unstable-footing.js";
 import _poolUnsubstantiate from "../pool/unsubstantiate.js";
@@ -1839,6 +1840,7 @@ const shard: CardShard = {
     _poolUnfortunateAccident,
     _poolUnityOfPurpose,
     _poolUnleashFury,
+    _poolUnluckyWitness,
     _poolUnravelingMummy,
     _poolUnstableFooting,
     _poolUnsubstantiate,

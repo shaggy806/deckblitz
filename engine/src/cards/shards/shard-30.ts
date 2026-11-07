@@ -510,6 +510,7 @@ import _poolLinSivviDefiantHero from "../pool/lin-sivvi-defiant-hero.js";
 import _poolLinvalaShieldOfSeaGate from "../pool/linvala-shield-of-sea-gate.js";
 import _poolLitaLittleOrphanAmphibian from "../pool/lita-little-orphan-amphibian.js";
 import _poolLivingDestiny from "../pool/living-destiny.js";
+import _poolLockeTreasureHunter from "../pool/locke-treasure-hunter.js";
 import _poolLonelyArroyo from "../pool/lonely-arroyo.js";
 import _poolLongRiversPull from "../pool/long-rivers-pull.js";
 import _poolLootExuberantExplorer from "../pool/loot-exuberant-explorer.js";
@@ -1514,6 +1515,7 @@ const shard: CardShard = {
     _poolLinvalaShieldOfSeaGate,
     _poolLitaLittleOrphanAmphibian,
     _poolLivingDestiny,
+    _poolLockeTreasureHunter,
     _poolLonelyArroyo,
     _poolLongRiversPull,
     _poolLootExuberantExplorer,
