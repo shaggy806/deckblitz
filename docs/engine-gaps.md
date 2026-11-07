@@ -340,6 +340,18 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   graveyard grant, the top of a library) isn't offered its blitz cost there, though rule
   702.152a allows it; `Game.dashCostOf` the same (702.109a). Henzie's discount also moves only a cost's generic number, never an `{X}`
   (no blitz cost in the pool has one yet).
+- **An optional "instead create copies" token replacement can't be asked.** Moonlit Meditation,
+  Mirrormind Crown and Esix, Fractal Bloom: "the first time you would create one or more tokens each
+  turn, you may instead create that many tokens that are copies of …". The "you may" is a player
+  choice made as the tokens would be created, but `Game.createTokens` and `createTokenCopy` return
+  the new ids to callers that use them at once (`thenCounters`, end-step removal, entering
+  attacking), across about a dozen creation paths (`effects.ts`' create-token branches, populate,
+  amass, Incubator, the predefined tokens' switch in `game.ts`). It needs a pausable token-creation
+  event, a per-player "would have created tokens this turn" flag (declining spends the turn's chance,
+  per the rulings; `createdTokenThisTurn` doesn't say that), and a call on its order beside
+  Chatterfang or Tippy-Toe (rule 616.1): `token-replacements.ts` takes whichever order makes the most
+  tokens, which an optional replacement doesn't fit. Key `replacement:token-creation-replace-with-copies`
+  (B274, 2026-11-07).
 - **A mana restriction reads the spell before it's cast.** `ManaRestriction.spell` is matched
   against the card in its pre-cast zone, so an ability a static grants a spell as it's cast
   (Abaddon the Despoiler's cascade) is missed: Jasmine Boreal of the Seven's "only to cast

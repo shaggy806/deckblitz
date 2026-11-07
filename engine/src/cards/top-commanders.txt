@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-473 already implemented / 27 missing
+475 already implemented / 25 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -36,7 +36,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   30  Baylen, the Haymaker                           29839 decks  {R}{G}{W}        Legendary Creature — Rabbit Warrior
 [x]   31  Miirym, Sentinel Wyrm                          28532 decks  {3}{G}{U}{R}     Legendary Creature — Dragon Spirit
 [x]   32  Chatterfang, Squirrel General                  27793 decks  {2}{G}           Legendary Creature — Squirrel Warrior
-[ ]   33  Ulalek, Fused Atrocity                         27646 decks  {C/W}{C/U}{C/B}{C/R}{C/G} Legendary Creature — Eldrazi
+[x]   33  Ulalek, Fused Atrocity                         27646 decks  {C/W}{C/U}{C/B}{C/R}{C/G} Legendary Creature — Eldrazi
 [x]   34  Frodo, Adventurous Hobbit                      26958 decks  {W}{B}           Legendary Creature — Halfling Scout
 [x]   35  Sam, Loyal Attendant                           26958 decks  {1}{G}{W}        Legendary Creature — Halfling Peasant
 [x]   36  Hashaton, Scarab's Fist                        26919 decks  {W}{B}           Legendary Creature — Zombie Wizard
@@ -89,7 +89,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   83  Kotis, the Fangkeeper                          19750 decks  {1}{B}{G}{U}     Legendary Creature — Zombie Warrior
 [x]   84  The First Sliver                               19750 decks  {W}{U}{B}{R}{G}  Legendary Creature — Sliver
 [x]   85  Terra, Herald of Hope                          19707 decks  {R}{W}{B}        Legendary Creature — Human Wizard Warrior
-[ ]   86  Terra, Magical Adept                           19502 decks  {1}{R}{G}        Legendary Creature — Human Wizard Warrior // Legendary Enchantment Creature — Saga Wizard
+[x]   86  Terra, Magical Adept                           19502 decks  {1}{R}{G}        Legendary Creature — Human Wizard Warrior // Legendary Enchantment Creature — Saga Wizard
 [x]   87  Betor, Ancestor's Voice                        19405 decks  {2}{W}{B}{G}     Legendary Creature — Spirit Dragon
 [x]   88  Auntie Ool, Cursewretch                        19398 decks  {1}{B}{R}{G}     Legendary Creature — Goblin Warlock
 [x]   89  Sisay, Weatherlight Captain                    19122 decks  {2}{W}           Legendary Creature — Human Soldier

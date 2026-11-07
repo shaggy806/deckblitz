@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4690 already implemented / 310 missing (marks refreshed 2026-11-07)
+4697 already implemented / 303 missing (marks refreshed 2026-11-07)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -4457,7 +4457,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4464  Torens, Fist of the Angels               {1}{G}{W}        Legendary Creature — Human Cleric
 [x]  4465  Phyrexian Censor                         {2}{W}           Creature — Phyrexian Wizard
 [x]  4466  Tivit, Seller of Secrets                 {3}{W}{U}{B}     Legendary Creature — Sphinx Rogue
-[ ]  4467  Waterbending Lesson                      {3}{U}           Sorcery — Lesson
+[x]  4467  Waterbending Lesson                      {3}{U}           Sorcery — Lesson
 [ ]  4468  Guff Rewrites History                    {2}{R}           Instant
 [x]  4469  Knollspine Dragon                        {5}{R}{R}        Creature — Dragon
 [x]  4470  Last Chance                              {R}{R}           Sorcery
@@ -4564,7 +4564,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4571  Serum Snare                              {1}{U}           Instant
 [x]  4572  Stifle                                   {U}              Instant
 [x]  4573  Queza, Augur of Agonies                  {1}{W}{U}{B}     Legendary Creature — Octopus Advisor
-[ ]  4574  Call the Spirit Dragons                  {W}{U}{B}{R}{G}  Enchantment
+[x]  4574  Call the Spirit Dragons                  {W}{U}{B}{R}{G}  Enchantment
 [x]  4575  Annul                                    {U}              Instant
 [x]  4576  Ugin's Mastery                           {4}              Enchantment
 [x]  4577  Anti-Venom, Horrifying Healer            {W}{W}{W}{W}{W}  Legendary Creature — Symbiote Hero
@@ -4705,14 +4705,14 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4712  Garnet, Princess of Alexandria           {G}{W}           Legendary Creature — Human Noble Cleric
 [x]  4713  Metropolis Reformer                      {2}{W}           Creature — Angel Cleric
 [x]  4714  Terisian Mindbreaker                     {7}              Artifact Creature — Juggernaut
-[ ]  4715  Ancient Adamantoise                      {5}{G}{G}{G}     Creature — Turtle
+[x]  4715  Ancient Adamantoise                      {5}{G}{G}{G}     Creature — Turtle
 [x]  4716  Slinn Voda, the Rising Deep              {6}{U}{U}        Legendary Creature — Leviathan
 [x]  4717  Star Compass                             {2}              Artifact
 [x]  4718  The Balrog of Moria                      {4}{B}{B}{R}     Legendary Creature — Avatar Demon
 [x]  4719  Bramble Sovereign                        {2}{G}{G}        Creature — Dryad
 [x]  4720  Nezumi Informant                         {1}{B}           Creature — Rat Rogue
 [x]  4721  Blade Splicer                            {2}{W}           Creature — Phyrexian Human Artificer
-[ ]  4722  Ulalek, Fused Atrocity                   {C/W}{C/U}{C/B}{C/R}{C/G} Legendary Creature — Eldrazi
+[x]  4722  Ulalek, Fused Atrocity                   {C/W}{C/U}{C/B}{C/R}{C/G} Legendary Creature — Eldrazi
 [x]  4723  The Raven Man                            {1}{B}           Legendary Creature — Human Wizard
 [x]  4724  Rabanastre, Royal City                   {0}              Land — Town
 [x]  4725  Brightglass Gearhulk                     {G}{G}{W}{W}     Artifact Creature — Construct
@@ -4817,7 +4817,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4824  Cathedral of War                         {0}              Land
 [x]  4825  Sejiri Refuge                            {0}              Land
 [x]  4826  Stonehoof Chieftain                      {7}{G}           Creature — Centaur Warrior
-[ ]  4827  Zenos yae Galvus // Shinryu, Transcendent Rival {5}              Legendary Creature — Human Noble Warrior // Legendary Creature — Dragon
+[x]  4827  Zenos yae Galvus // Shinryu, Transcendent Rival {5}              Legendary Creature — Human Noble Warrior // Legendary Creature — Dragon
 [x]  4828  Atzocan Seer                             {1}{G}{W}        Creature — Human Druid
 [x]  4829  Neriv, Heart of the Storm                {1}{R}{W}{B}     Legendary Creature — Spirit Dragon
 [x]  4830  Brotherhood Vertibird                    {3}              Artifact — Vehicle
@@ -4984,7 +4984,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4991  Rydia, Summoner of Mist                  {R}{G}           Legendary Creature — Human Shaman
 [x]  4992  Lightning Runner                         {3}{R}{R}        Creature — Human Warrior
 [x]  4993  Phyrexian Swarmlord                      {4}{G}{G}        Creature — Phyrexian Insect Horror
-[ ]  4994  Xu-Ifit, Osteoharmonist                  {1}{B}{B}        Legendary Creature — Human Wizard
+[x]  4994  Xu-Ifit, Osteoharmonist                  {1}{B}{B}        Legendary Creature — Human Wizard
 [x]  4995  Tromokratis                              {5}{U}{U}        Legendary Creature — Kraken
 [x]  4996  Sokka, Tenacious Tactician               {1}{U}{R}{W}     Legendary Creature — Human Warrior Ally
 [x]  4997  Reclaim                                  {G}              Instant
@@ -4992,7 +4992,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  4999  Sin, Unending Cataclysm                  {5}{G}{U}        Legendary Creature — Leviathan Avatar
 [x]  5000  Omen Hawker                              {U}              Creature — Octopus Advisor
 [x]  5001  Hammers of Moradin                       {2}{W}           Creature — Dwarf Cleric
-[ ]  5002  Sothera, the Supervoid                   {2}{B}{B}        Legendary Enchantment
+[x]  5002  Sothera, the Supervoid                   {2}{B}{B}        Legendary Enchantment
 [ ]  5003  Oriq Loremage                            {2}{B}{B}        Creature — Human Warlock
 [x]  5004  Brass Knuckles                           {4}              Artifact — Equipment
 [x]  5005  Filter Out                               {1}{U}{U}        Instant

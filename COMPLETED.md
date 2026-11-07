@@ -12,6 +12,15 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Build ASAP overnight, round 5 and the run's end** (2026-11-07, B274, `/author-flagged
+  overnight`, stopped at the user's call after twelve agents: 36 flagged cards and six proving cards
+  authored, Moonlit Meditation blocked): Zenos yae Galvus (`choose-permanents`' `remember`, `who:
+  "chosen"`, `choosePlayerOnTransform`, rule 712.20, a `player-loses-game` trigger, 104.3a), Captain
+  America's Shield with Elite Scaleguard and Esper Origins, Terra and Sothera (no engine code),
+  Everlasting Torment (`damageAsThoughSourceHad`), Xu-Ifit (`EnterTypes.loseAbilities`), Ulalek
+  (`{C/W}` hybrid pips and `copy-all`; devoid needed no code), Waterbending Lesson ("unless you
+  waterbend", rule 701.67a), Call the Spirit Dragons (`choose-for-each-slot`, 608.2f) and Ancient
+  Adamantoise (`keepsDamageInCleanup`).
 - **Build ASAP overnight, round 4** (2026-11-07, B274, `/author-flagged overnight`): Collective
   Effort with Collective Brutality (escalate's non-mana costs, `castModal.alsoPerExtraMode`, the tap
   offer's `perExtraMode`; escalate's mode cap fixed to judge only the cost; `cost:escalate-nonmana`),

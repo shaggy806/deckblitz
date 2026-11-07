@@ -1,38 +1,314 @@
 {
  "batch": "B274",
- "status": "in progress",
- "ranks": "Build ASAP: cards flagged in the library. `/author-flagged overnight` (2026-11-07), 95 flagged at the start, all but Heroic Sacrifice blocked; four agents at once in their own worktrees, by `--by-rank`. Keys built so far: `decision:choose-different-players` (Gluntch: `choose-opponent`'s `thenAnother`, `except` and `purpose`), `stat:countered-spell-mana-spent` (Mana Sculpt: mana spent read as the spell last was on the stack, rule 608.2h), `cost:plot-cost-reduction` (Doc Aurlock: a static's `plotCostReduction`), `effect:attach-equipment-that-was-attached` (Zack Fair, with Rhuk, Hexgold Nabber: `LastKnownInfo.attachments` and the filter's `wasAttachedTo`; Cass, Hand of Vengeance's Aura cards returned from the graveyard are not covered and need a narrower key), `effect:double-x-on-cast` (Unbound Flourishing: `double-x` and the `activates-ability` trigger's `xInCost`), `effect:add-mana-target-player` (The Warring Triad, Radiant Lotus: `add-mana`'s player `target`, not a mana ability, rule 605.5a), `static:double-triggers-of-attached` (Wizard's Staff: `doubleTriggersOf`'s `host`), `effect:play-from-library-top-this-turn` and `cost:pay-life-equal-mv-instead-of-mana` (Gwenom, with The Belligerent: `player-effect`'s library-top permissions until end of turn), `effect:opponent-chooses-exiled-this-way-excluded` (Plargg and Nassari: `cast-now`'s `exceptChosen`), `effect:linked-exile-from-discard` (Currency Converter, no engine code), `effect:additional-end-step` (Y'shtola Rhul, rule 500.9: `additional-end-step`, the `endStep` turn-structure clause, `DelayedTrigger.createdInEndStep`). Heroic Sacrifice needed no engine code. Round 3: `zone:cast-one-from-milled-until-end-of-turn` and `zone:impulse-play-only-one` (Locke, with Unlucky Witness: `GameState.permissionGroups`, plays shared across graveyard and exile permissions, `upTo`; Flameskull and March of Reckless Joy go to `--stale` and may need more), The Ur-Sphinx and Ark of Hunger with no engine code, `mechanic:more-than-meets-the-eye` (Slicer, rule 702.162a, with living metal and convert; a transforming card's back face can no longer be cast without a permission, 712.11), `effect:extra-combat-attack-restriction` (Bumi: `additional-combat`'s `onlyAttackers`; Last Night Together, Intimidation Bolt, Boros Battleshaper and Forgestoker Dragon need narrower keys), `effect:cast-this-way-owner-loses-life` (Kefka: `thisWay`'s `byOwner`). Round 4: `cost:escalate-nonmana` (Collective Effort, with Collective Brutality: `castModal.alsoPerExtraMode`, the tap offer's `perExtraMode`; fixed escalate's mode cap, which judged the first modes' targets), `effect:cast-now-once-each-turn-if-cast` (Planetarium of Wan Shi Tong: `cast-now`'s `marksAbilityDone`), `effect:copy-ability-count` and `static:spell-cant-be-copied` (Gogo, with See Double: `copy-ability`'s `count`, `cantBeCopied`, rule 707.10), `effect:mana-ability-effect-before-mana` (Empowered Autogenerator: `add-mana`'s `first`, sized by the auto-payer, rules 605.1a, 605.3b), Ultron, Artificial Malevolence and Dance with Calamity with no engine code.",
+ "status": "done",
+ "ranks": "Build ASAP: cards flagged in the library. `/author-flagged overnight` (2026-11-07), 95 flagged at the start, all but Heroic Sacrifice blocked; four agents at once in their own worktrees, by `--by-rank`. Keys built so far: `decision:choose-different-players` (Gluntch: `choose-opponent`'s `thenAnother`, `except` and `purpose`), `stat:countered-spell-mana-spent` (Mana Sculpt: mana spent read as the spell last was on the stack, rule 608.2h), `cost:plot-cost-reduction` (Doc Aurlock: a static's `plotCostReduction`), `effect:attach-equipment-that-was-attached` (Zack Fair, with Rhuk, Hexgold Nabber: `LastKnownInfo.attachments` and the filter's `wasAttachedTo`; Cass, Hand of Vengeance's Aura cards returned from the graveyard are not covered and need a narrower key), `effect:double-x-on-cast` (Unbound Flourishing: `double-x` and the `activates-ability` trigger's `xInCost`), `effect:add-mana-target-player` (The Warring Triad, Radiant Lotus: `add-mana`'s player `target`, not a mana ability, rule 605.5a), `static:double-triggers-of-attached` (Wizard's Staff: `doubleTriggersOf`'s `host`), `effect:play-from-library-top-this-turn` and `cost:pay-life-equal-mv-instead-of-mana` (Gwenom, with The Belligerent: `player-effect`'s library-top permissions until end of turn), `effect:opponent-chooses-exiled-this-way-excluded` (Plargg and Nassari: `cast-now`'s `exceptChosen`), `effect:linked-exile-from-discard` (Currency Converter, no engine code), `effect:additional-end-step` (Y'shtola Rhul, rule 500.9: `additional-end-step`, the `endStep` turn-structure clause, `DelayedTrigger.createdInEndStep`). Heroic Sacrifice needed no engine code. Round 3: `zone:cast-one-from-milled-until-end-of-turn` and `zone:impulse-play-only-one` (Locke, with Unlucky Witness: `GameState.permissionGroups`, plays shared across graveyard and exile permissions, `upTo`; Flameskull and March of Reckless Joy go to `--stale` and may need more), The Ur-Sphinx and Ark of Hunger with no engine code, `mechanic:more-than-meets-the-eye` (Slicer, rule 702.162a, with living metal and convert; a transforming card's back face can no longer be cast without a permission, 712.11), `effect:extra-combat-attack-restriction` (Bumi: `additional-combat`'s `onlyAttackers`; Last Night Together, Intimidation Bolt, Boros Battleshaper and Forgestoker Dragon need narrower keys), `effect:cast-this-way-owner-loses-life` (Kefka: `thisWay`'s `byOwner`). Round 4: `cost:escalate-nonmana` (Collective Effort, with Collective Brutality: `castModal.alsoPerExtraMode`, the tap offer's `perExtraMode`; fixed escalate's mode cap, which judged the first modes' targets), `effect:cast-now-once-each-turn-if-cast` (Planetarium of Wan Shi Tong: `cast-now`'s `marksAbilityDone`), `effect:copy-ability-count` and `static:spell-cant-be-copied` (Gogo, with See Double: `copy-ability`'s `count`, `cantBeCopied`, rule 707.10), `effect:mana-ability-effect-before-mana` (Empowered Autogenerator: `add-mana`'s `first`, sized by the auto-payer, rules 605.1a, 605.3b), Ultron, Artificial Malevolence and Dance with Calamity with no engine code. Round 5: `decision:remember-chosen-permanent-on-resolution`, `trigger:chosen-permanent-leaves` and `trigger:chosen-player-loses-game` (Zenos yae Galvus: `choose-permanents`' `remember`, `who: \"chosen\"`, `choosePlayerOnTransform`, rule 712.20, the `player-loses-game` trigger, 104.3a), `effect:defending-player-of-attached-attacker` (Captain America's Shield, with Elite Scaleguard, no engine code; Yare needs a narrower key), `mechanic:spell-enters-transformed` and `effect:token-copy-up-to-n-lore-counters` (Esper Origins, Terra, no engine code), `static:unpreventable-damage-and-global-wither` (Everlasting Torment: `damageAsThoughSourceHad`), `effect:linked-exile-return` (Sothera, no engine code; frees Prowling Geistcatcher, Promise of Tomorrow, Cold Storage), `bug:return-without-abilities-as-it-enters` (Xu-Ifit: `EnterTypes.loseAbilities`), `cost:colorless-hybrid-mana` and `keyword:devoid` (Ulalek: `{C/W}` pips, the `copy-all` effect; devoid needed no code, freeing Benthic Anomaly and Corrupted Crossroads), `effect:unless-waterbend` (Waterbending Lesson, rule 701.67a), `effect:per-color-counter-choice-and-win` (Call the Spirit Dragons: `choose-for-each-slot`, one placement per permanent, 608.2f), `static:damage-not-removed-in-cleanup` (Ancient Adamantoise: `keepsDamageInCleanup`). Moonlit Meditation is blocked. The run ended at the user's call after twelve agents: 36 flagged cards authored (42 with six proving cards), 1 blocked.",
  "authored": [
-  { "name": "Gluntch, the Bestower", "files": ["engine/src/cards/pool/gluntch-the-bestower.ts"], "tested": true },
-  { "name": "Mana Sculpt", "files": ["engine/src/cards/pool/mana-sculpt.ts"], "tested": true },
-  { "name": "Doc Aurlock, Grizzled Genius", "files": ["engine/src/cards/pool/doc-aurlock-grizzled-genius.ts"], "tested": true },
-  { "name": "Zack Fair", "files": ["engine/src/cards/pool/zack-fair.ts"], "tested": true },
-  { "name": "Rhuk, Hexgold Nabber", "files": ["engine/src/cards/pool/rhuk-hexgold-nabber.ts"], "tested": true },
-  { "name": "Unbound Flourishing", "files": ["engine/src/cards/pool/unbound-flourishing.ts"], "tested": true },
-  { "name": "The Warring Triad", "files": ["engine/src/cards/pool/the-warring-triad.ts"], "tested": true },
-  { "name": "Radiant Lotus", "files": ["engine/src/cards/pool/radiant-lotus.ts"], "tested": true },
-  { "name": "Wizard's Staff", "files": ["engine/src/cards/pool/wizards-staff.ts"], "tested": true },
-  { "name": "Gwenom, Remorseless", "files": ["engine/src/cards/pool/gwenom-remorseless.ts"], "tested": true },
-  { "name": "The Belligerent", "files": ["engine/src/cards/pool/the-belligerent.ts"], "tested": true },
-  { "name": "Heroic Sacrifice", "files": ["engine/src/cards/pool/heroic-sacrifice.ts"], "tested": true },
-  { "name": "Plargg and Nassari", "files": ["engine/src/cards/pool/plargg-and-nassari.ts"], "tested": true },
-  { "name": "Currency Converter", "files": ["engine/src/cards/pool/currency-converter.ts"], "tested": true },
-  { "name": "Y'shtola Rhul", "files": ["engine/src/cards/pool/yshtola-rhul.ts"], "tested": true },
-  { "name": "Locke, Treasure Hunter", "files": ["engine/src/cards/pool/locke-treasure-hunter.ts"], "tested": true },
-  { "name": "Unlucky Witness", "files": ["engine/src/cards/pool/unlucky-witness.ts"], "tested": true },
-  { "name": "The Ur-Sphinx", "files": ["engine/src/cards/pool/the-ur-sphinx.ts"], "tested": true },
-  { "name": "Ark of Hunger", "files": ["engine/src/cards/pool/ark-of-hunger.ts"], "tested": true },
-  { "name": "Slicer, Hired Muscle // Slicer, High-Speed Antagonist", "files": ["engine/src/cards/pool/slicer-hired-muscle.ts", "engine/src/cards/pool/slicer-high-speed-antagonist.ts"], "tested": true },
-  { "name": "Bumi, Unleashed", "files": ["engine/src/cards/pool/bumi-unleashed.ts"], "tested": true },
-  { "name": "Kefka, Dancing Mad", "files": ["engine/src/cards/pool/kefka-dancing-mad.ts"], "tested": true },
-  { "name": "Collective Effort", "files": ["engine/src/cards/pool/collective-effort.ts"], "tested": true },
-  { "name": "Collective Brutality", "files": ["engine/src/cards/pool/collective-brutality.ts"], "tested": true },
-  { "name": "Planetarium of Wan Shi Tong", "files": ["engine/src/cards/pool/planetarium-of-wan-shi-tong.ts"], "tested": true },
-  { "name": "Gogo, Master of Mimicry", "files": ["engine/src/cards/pool/gogo-master-of-mimicry.ts"], "tested": true },
-  { "name": "See Double", "files": ["engine/src/cards/pool/see-double.ts"], "tested": true },
-  { "name": "Empowered Autogenerator", "files": ["engine/src/cards/pool/empowered-autogenerator.ts"], "tested": true },
-  { "name": "Ultron, Artificial Malevolence", "files": ["engine/src/cards/pool/ultron-artificial-malevolence.ts"], "tested": true },
-  { "name": "Dance with Calamity", "files": ["engine/src/cards/pool/dance-with-calamity.ts"], "tested": true }
+  {
+   "name": "Gluntch, the Bestower",
+   "files": [
+    "engine/src/cards/pool/gluntch-the-bestower.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mana Sculpt",
+   "files": [
+    "engine/src/cards/pool/mana-sculpt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Doc Aurlock, Grizzled Genius",
+   "files": [
+    "engine/src/cards/pool/doc-aurlock-grizzled-genius.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zack Fair",
+   "files": [
+    "engine/src/cards/pool/zack-fair.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rhuk, Hexgold Nabber",
+   "files": [
+    "engine/src/cards/pool/rhuk-hexgold-nabber.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unbound Flourishing",
+   "files": [
+    "engine/src/cards/pool/unbound-flourishing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Warring Triad",
+   "files": [
+    "engine/src/cards/pool/the-warring-triad.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Radiant Lotus",
+   "files": [
+    "engine/src/cards/pool/radiant-lotus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wizard's Staff",
+   "files": [
+    "engine/src/cards/pool/wizards-staff.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gwenom, Remorseless",
+   "files": [
+    "engine/src/cards/pool/gwenom-remorseless.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Belligerent",
+   "files": [
+    "engine/src/cards/pool/the-belligerent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Heroic Sacrifice",
+   "files": [
+    "engine/src/cards/pool/heroic-sacrifice.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Plargg and Nassari",
+   "files": [
+    "engine/src/cards/pool/plargg-and-nassari.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Currency Converter",
+   "files": [
+    "engine/src/cards/pool/currency-converter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Y'shtola Rhul",
+   "files": [
+    "engine/src/cards/pool/yshtola-rhul.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Locke, Treasure Hunter",
+   "files": [
+    "engine/src/cards/pool/locke-treasure-hunter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unlucky Witness",
+   "files": [
+    "engine/src/cards/pool/unlucky-witness.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Ur-Sphinx",
+   "files": [
+    "engine/src/cards/pool/the-ur-sphinx.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ark of Hunger",
+   "files": [
+    "engine/src/cards/pool/ark-of-hunger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Slicer, Hired Muscle // Slicer, High-Speed Antagonist",
+   "files": [
+    "engine/src/cards/pool/slicer-hired-muscle.ts",
+    "engine/src/cards/pool/slicer-high-speed-antagonist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bumi, Unleashed",
+   "files": [
+    "engine/src/cards/pool/bumi-unleashed.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kefka, Dancing Mad",
+   "files": [
+    "engine/src/cards/pool/kefka-dancing-mad.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Collective Effort",
+   "files": [
+    "engine/src/cards/pool/collective-effort.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Collective Brutality",
+   "files": [
+    "engine/src/cards/pool/collective-brutality.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Planetarium of Wan Shi Tong",
+   "files": [
+    "engine/src/cards/pool/planetarium-of-wan-shi-tong.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gogo, Master of Mimicry",
+   "files": [
+    "engine/src/cards/pool/gogo-master-of-mimicry.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "See Double",
+   "files": [
+    "engine/src/cards/pool/see-double.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Empowered Autogenerator",
+   "files": [
+    "engine/src/cards/pool/empowered-autogenerator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ultron, Artificial Malevolence",
+   "files": [
+    "engine/src/cards/pool/ultron-artificial-malevolence.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dance with Calamity",
+   "files": [
+    "engine/src/cards/pool/dance-with-calamity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zenos yae Galvus // Shinryu, Transcendent Rival",
+   "files": [
+    "engine/src/cards/pool/zenos-yae-galvus.ts",
+    "engine/src/cards/pool/shinryu-transcendent-rival.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Captain America's Shield",
+   "files": [
+    "engine/src/cards/pool/captain-americas-shield.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elite Scaleguard",
+   "files": [
+    "engine/src/cards/pool/elite-scaleguard.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Esper Origins // Summon: Esper Maduin",
+   "files": [
+    "engine/src/cards/pool/esper-origins.ts",
+    "engine/src/cards/pool/summon-esper-maduin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Terra, Magical Adept // Esper Terra",
+   "files": [
+    "engine/src/cards/pool/terra-magical-adept.ts",
+    "engine/src/cards/pool/esper-terra.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Everlasting Torment",
+   "files": [
+    "engine/src/cards/pool/everlasting-torment.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sothera, the Supervoid",
+   "files": [
+    "engine/src/cards/pool/sothera-the-supervoid.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Xu-Ifit, Osteoharmonist",
+   "files": [
+    "engine/src/cards/pool/xu-ifit-osteoharmonist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ulalek, Fused Atrocity",
+   "files": [
+    "engine/src/cards/pool/ulalek-fused-atrocity.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Waterbending Lesson",
+   "files": [
+    "engine/src/cards/pool/waterbending-lesson.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Call the Spirit Dragons",
+   "files": [
+    "engine/src/cards/pool/call-the-spirit-dragons.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ancient Adamantoise",
+   "files": [
+    "engine/src/cards/pool/ancient-adamantoise.ts"
+   ],
+   "tested": true
+  }
  ],
- "blocked": []
+ "blocked": [
+  {
+   "name": "Moonlit Meditation",
+   "needs": [
+    "replacement:token-creation-replace-with-copies"
+   ],
+   "reason": "an optional \"the first time you would create tokens each turn, you may instead create copies\" replacement: the choice must be asked inside token creation, which about a dozen creation paths use without pausing (Game.createTokens, createTokenCopy and their callers); declining also spends the turn's chance, and its order beside Chatterfang or Tippy-Toe (rule 616.1) is a design call. Same for Mirrormind Crown and Esix, Fractal Bloom."
+  }
+ ]
 }

@@ -573,6 +573,15 @@ Five more passes, all merged (156 cards):
   filter. The keys free Glowing One, Infesting Radroach, Screeching Scorchbeast, The Master,
   Transcendent and Zellix, Sanity Flayer for `author-freed`. 19 flagged cards still wait, blocked
   as their records say (`cards:needs -- --asap`).
+- **Batch 274 (2026-11-07, `author-flagged overnight`: the cards flagged Build ASAP, by twelve
+  agents)** — 36 of the 95 flagged cards authored with six proving cards beside them, among them
+  Unbound Flourishing, The Warring Triad, Gwenom, Locke, Slicer, Collective Effort, Gogo, Zenos yae
+  Galvus and Ulalek; about 30 keys built, a third needing no engine code. Moonlit Meditation is
+  blocked on pausable token creation (`docs/engine-gaps.md`). Keys marked built over only part of
+  their cards leave Cass, Hand of Vengeance, Last Night Together, Intimidation Bolt, Boros
+  Battleshaper, Forgestoker Dragon, Flameskull, March of Reckless Joy and Yare on `--stale` for
+  narrower keys; Prowling Geistcatcher, Promise of Tomorrow, Cold Storage, Benthic Anomaly and
+  Corrupted Crossroads look freed. 59 flagged cards still wait.
 - **Batch 273 (2026-11-07, `author-flagged`: the cards flagged Build ASAP in the library)** — 3 of
   the 15 left, the engine-only ones the engine could be made to run exactly: Loading Zone (nothing
   new), Tablet of Discovery and Nahiri's Lithoforming. Locke, Treasure Hunter needs one cast shared
