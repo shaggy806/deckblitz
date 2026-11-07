@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4653 already implemented / 347 missing (marks refreshed 2026-11-06)
+4657 already implemented / 343 missing (marks refreshed 2026-11-07)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2133,7 +2133,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2140  Entity Tracker                           {2}{U}           Creature — Human Scout
 [x]  2141  Zendikar's Roil                          {3}{G}{G}        Enchantment
 [x]  2142  Plague Myr                               {2}              Artifact Creature — Phyrexian Myr
-[ ]  2143  Liliana of the Dark Realms               {2}{B}{B}        Legendary Planeswalker — Liliana
+[x]  2143  Liliana of the Dark Realms               {2}{B}{B}        Legendary Planeswalker — Liliana
 [x]  2144  Galadhrim Ambush                         {3}{G}           Instant
 [x]  2145  Trading Post                             {4}              Artifact
 [x]  2146  Overkill                                 {2}{B}           Instant
@@ -2261,7 +2261,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2268  Starfield of Nyx                         {4}{W}           Enchantment
 [ ]  2269  Quilled Greatwurm                        {4}{G}{G}        Creature — Wurm
 [x]  2270  Tome of Legends                          {2}              Artifact — Book
-[ ]  2271  Dracogenesis                             {6}{R}{R}        Enchantment
+[x]  2271  Dracogenesis                             {6}{R}{R}        Enchantment
 [x]  2272  Song of Totentanz                        {X}{R}           Sorcery
 [x]  2273  Scurry Oak                               {2}{G}           Creature — Treefolk
 [x]  2274  Royal Assassin                           {1}{B}{B}        Creature — Human Assassin
@@ -2626,7 +2626,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2633  Impulse                                  {1}{U}           Instant
 [x]  2634  Wrathful Raptors                         {4}{R}           Creature — Dinosaur
 [x]  2635  Serra's Emissary                         {4}{W}{W}{W}     Creature — Angel
-[ ]  2636  Planar Nexus                             {0}              Land
+[x]  2636  Planar Nexus                             {0}              Land
 [x]  2637  Lich-Knights' Conquest                   {4}{B}           Sorcery
 [x]  2638  Heritage Reclamation                     {1}{G}           Instant
 [x]  2639  Dawnsire, Sunstar Dreadnought            {5}              Legendary Artifact — Spacecraft
@@ -2774,7 +2774,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2781  Aetherspouts                             {3}{U}{U}        Instant
 [ ]  2782  Lurrus of the Dream-Den                  {1}{W/B}{W/B}    Legendary Creature — Cat Nightmare
 [x]  2783  Time Sieve                               {U}{B}           Artifact
-[ ]  2784  Aettir and Priwen                        {6}              Legendary Artifact — Equipment
+[x]  2784  Aettir and Priwen                        {6}              Legendary Artifact — Equipment
 [x]  2785  Mirrorpool                               {0}              Land
 [x]  2786  Raise the Past                           {2}{W}{W}        Sorcery
 [x]  2787  Struggle for Project Purity              {3}{U}           Enchantment
