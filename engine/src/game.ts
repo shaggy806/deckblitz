@@ -4916,30 +4916,36 @@ export class Game {
         manaAffordable = at.manaAffordable;
       }
       // Escalate (rule 702.120a): the most modes this variant can pay for —
-      // each one beyond the first adds its cost. Judged on mana alone, or,
-      // when some of it isn't mana (Collective Effort's tap, Collective
-      // Brutality's discard), on the whole cost, as the cast will be.
+      // each one beyond the first adds its cost. Judged on mana, and on what
+      // isn't mana (Collective Brutality's discards; Collective Effort's
+      // taps, with the mana, as the cast checks them) — never on which
+      // modes, since the cost counts them only.
       const escalatedMaxModes = (): number | undefined => {
         const modal = def.castModal;
         if (modal === null || (modal.costPerExtraMode === undefined && modal.alsoPerExtraMode === undefined)) return undefined;
         const most = this.castModalMaxModes(modal, card);
         for (let k = most; k > Math.max(1, modal.minModes); k -= 1) {
-          if (modal.alsoPerExtraMode !== undefined) {
-            const why = this.whyCannotCastSpell(player, card, via, face ?? 0, Array.from({ length: k }, (_v, i) => i),
-              kicked, undefined, overload, free, undefined, altCost === true, costOption, undefined, graveyardGrant,
-              xFloor, 0, undefined, false, offspring === true, evoke ?? null);
-            if (why === null) return k;
-            continue;
-          }
+          const modesK = Array.from({ length: k }, (_v, i) => i);
           const withModes = this.withFace(card, face ?? 0, () =>
             this.castCostString(card, via, face, kicked, overload, free, altCost === true, costOption, player,
-              graveyardGrant, offspring === true, evoke ?? null, Array.from({ length: k }, (_v, i) => i)),
+              graveyardGrant, offspring === true, evoke ?? null, modesK),
           );
           if (withModes === null) continue;
           const total = this.withFace(card, face ?? 0, () =>
             this.castingCostOf(player, card, def, 0, withModes, pricedAt),
           );
-          if (this.payMana(player, total, undefined, undefined, { kind: "cast", card, face: face ?? 0, ...bestowPurpose(def, overload), ...castPaying(via, withModes) }) !== null) return k;
+          const purpose: ManaPurpose = { kind: "cast", card, face: face ?? 0, ...bestowPurpose(def, overload), ...castPaying(via, withModes) };
+          if (modal.alsoPerExtraMode !== undefined) {
+            const also = this.castAlsoCosts(card, def, kicked, altCost === true, costOption, via, graveyardGrant, modesK);
+            if (this.whyCannotPayAlso(player, card, def, also, altCost === true) !== null) continue;
+            const taps = this.spellTapCost(card, def, via, player, altCost === true, kicked, costOption, graveyardGrant, modesK);
+            if (taps !== undefined) {
+              const offer = this.tapCostOffer(player, card, { ...taps, includeSelf: false }, total, undefined, undefined, purpose);
+              if (offer !== null && this.tapOfferPayable(offer)) return k;
+              continue;
+            }
+          }
+          if (this.payMana(player, total, undefined, undefined, purpose) !== null) return k;
         }
         return Math.max(1, modal.minModes);
       };

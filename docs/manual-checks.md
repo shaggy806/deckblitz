@@ -7597,8 +7597,8 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ## Escalate that taps or discards (2026-11-07)
 
 ### Collective Effort: one creature tapped for each mode beyond the first
-- **Do:** Cast Collective Effort choosing all three modes: Bob's Craw Wurm, Bob's Rhystic Study, and you. When asked what to tap, pick both your Grizzly Bears.
-- **Expect:** You're asked to tap exactly 2 creatures. The Wurm and the Study die, and both your Bears, tapped, get a +1/+1 counter.
+- **Do:** Cast Collective Effort choosing all three modes: Bob's Craw Wurm, Bob's Rhystic Study, and you. When asked what to tap, pick Grizzly Bears and Hill Giant.
+- **Expect:** You're asked to tap exactly 2 creatures. The Wurm and the Study die; the Bears and the Giant are tapped, Savannah Lions isn't, and all three get a +1/+1 counter.
 
 ### Collective Effort: one mode taps nothing, four players
 - **Do:** Cast Collective Effort choosing only its last mode, targeting you.

@@ -40,6 +40,17 @@ describe("Collective Effort — escalate by tapping creatures", () => {
     }
   });
 
+  it("counts the creatures to tap whatever the modes' targets are, at four players too", () => {
+    const { game } = table({ players: 4 });
+    lands(game, "Plains", 3);
+    spawn(game, "Grizzly Bears");
+    spawn(game, "Grizzly Bears");
+    spawn(game, "Craw Wurm", B);
+    const card = toHand(game, "Collective Effort");
+    // No enchantment to target: still up to three modes paid for.
+    expect(castOffers(game, card)[0]?.castModal?.maxModes).toBe(3);
+  });
+
   it("taps one creature for each mode beyond the first, and does every mode", () => {
     const { game, card, mine, big, study } = board(2);
     cast(game, card, { modes: [0, 1, 2], targets: [ref(big), ref(study), ref(A)], tap: mine });

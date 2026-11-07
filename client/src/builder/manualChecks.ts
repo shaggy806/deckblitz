@@ -11397,7 +11397,7 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
   preset(
     'Collective Effort: one creature tapped for each mode beyond the first',
     board({
-      you: { bf: ['Plains*3', 'Grizzly Bears*2'], hand: ['Collective Effort'] },
+      you: { bf: ['Plains*3', 'Grizzly Bears', 'Hill Giant', 'Savannah Lions'], hand: ['Collective Effort'] },
       opp: { bf: ['Craw Wurm', 'Rhystic Study'] },
     }),
   ),
