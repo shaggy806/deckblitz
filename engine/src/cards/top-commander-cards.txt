@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4665 already implemented / 335 missing (marks refreshed 2026-11-07)
+4668 already implemented / 332 missing (marks refreshed 2026-11-07)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2696,7 +2696,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2703  Heroes' Podium                           {5}              Legendary Artifact
 [x]  2704  Hyena Umbra                              {W}              Enchantment — Aura
 [x]  2705  Cloudstone Curio                         {3}              Artifact
-[ ]  2706  Loading Zone                             {3}{G}           Enchantment
+[x]  2706  Loading Zone                             {3}{G}           Enchantment
 [x]  2707  Transpose                                {2}{B}           Instant
 [x]  2708  Torrential Gearhulk                      {4}{U}{U}        Artifact Creature — Construct
 [ ]  2709  Thrakkus the Butcher                     {3}{R}{G}        Legendary Creature — Dragon Peasant
@@ -3731,7 +3731,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  3738  Final Act                                {4}{B}{B}        Sorcery
 [x]  3739  Astarion, the Decadent                   {4}{W}{B}        Legendary Creature — Vampire Elf Rogue
 [x]  3740  Wildwood Scourge                         {X}{G}           Creature — Hydra
-[ ]  3741  Tablet of Discovery                      {2}{R}           Artifact
+[x]  3741  Tablet of Discovery                      {2}{R}           Artifact
 [x]  3742  Access Denied                            {3}{U}{U}        Instant
 [ ]  3743  The Sound of Drums                       {2}{R}           Enchantment — Aura
 [x]  3744  Arahbo, the First Fang                   {2}{W}           Legendary Creature — Cat Avatar
@@ -4192,7 +4192,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4199  Spiked Corridor // Torture Pit           {3}{R} // {3}{R} Enchantment — Room // Enchantment — Room
 [x]  4200  Sword of Sinew and Steel                 {3}              Artifact — Equipment
 [x]  4201  Grave Venerations                        {3}{B}           Enchantment
-[ ]  4202  Nahiri's Lithoforming                    {X}{R}{R}        Sorcery
+[x]  4202  Nahiri's Lithoforming                    {X}{R}{R}        Sorcery
 [x]  4203  Jenova, Ancient Calamity                 {2}{B}{G}        Legendary Creature — Alien
 [x]  4204  Turnabout                                {2}{U}{U}        Instant
 [x]  4205  Koth, Fire of Resistance                 {2}{R}{R}        Legendary Planeswalker — Koth
