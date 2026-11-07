@@ -432,6 +432,17 @@ tapping the fewest that pay when a driver names none. The client asks which tap
 after "Pay", through the cast's waterbend picker. The scaffolder reads "then
 discard N cards unless you waterbend {N}" whole. Key: effect:unless-waterbend.
 
+### One chosen for each color, then all at once — built 2026-11-07
+
+Flagged Build ASAP: Call the Spirit Dragons (4521). The `choose-for-each-slot` effect:
+the controller chooses one permanent for each slot in turn (`choose-one-of-each`'s
+slots — colors, basic land types, card types) on the `choose-permanents` decision's
+keep choice, a permanent free to stand for several and a stack's token singled out
+as it's chosen; then `each` applies to every one chosen at once (rule 608.2f), `"x"`
+the slots it was chosen for, so a two-color Dragon's two counters are one placement.
+"Five Dragons this way" is `this-way` `"counters-put"` (distinct permanents). No new
+decision. Key: effect:per-color-counter-choice-and-win.
+
 ### Plotting costs less — built 2026-11-07
 
 By EDHREC rank: Doc Aurlock, Grizzled Genius (2543). A static's `plotCostReduction`

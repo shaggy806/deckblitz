@@ -8895,7 +8895,44 @@ export function parseEffect(text, outer) {
   // One for each of several categories (`choose-one-of-each`).
   const oneOfEach = ONE_OF_EACH_EFFECTS[text.charAt(0).toUpperCase() + text.slice(1)];
   if (oneOfEach !== undefined) return { effect: oneOfEach, todo: [], hints: [] };
-  const amongPlayers = AMONG_PLAYERS_EFFECTS[text.charAt(0).toUpperCase() + text.slice(1)];
+  // One chosen for each color, then all at once (`choose-for-each-slot`):
+  // Call the Spirit Dragons, with its "five Dragons this way" win.
+  const perColor =
+    /^For each color, put a \+1\/\+1 counter on an? (\w+) you control of that color\.(?: If you put \+1\/\+1 counters on (\w+) (\w+?)s this way, you win the game\.)?$/.exec(
+      text,
+    );
+  if (perColor !== null) {
+    const kind = parseTypePhrase(perColor[1]);
+    const many = perColor[2] === undefined ? undefined : numberOf(perColor[2].toLowerCase());
+    if (kind !== null && (perColor[2] === undefined || (typeof many === "number" && perColor[3] === perColor[1]))) {
+      const choose = {
+        kind: "choose-for-each-slot",
+        slots: "colors",
+        filter: { ...kind, controlledBy: "you" },
+        prompt: `Put a +1/+1 counter on a {slot} ${perColor[1]} you control`,
+        each: { kind: "add-counter", target: 0, counter: "+1/+1", amount: "x" },
+      };
+      return {
+        effect:
+          many === undefined
+            ? choose
+            : {
+                kind: "sequence",
+                effects: [
+                  choose,
+                  {
+                    kind: "conditional",
+                    condition: { kind: "this-way", what: "counters-put", filter: kind, atLeast: many },
+                    then: { kind: "win-game" },
+                  },
+                ],
+              },
+        todo: [],
+        hints: [],
+      };
+    }
+  }
+  const amongPlayers =AMONG_PLAYERS_EFFECTS[text.charAt(0).toUpperCase() + text.slice(1)];
   if (amongPlayers !== undefined) return { effect: amongPlayers, todo: [], hints: [] };
 
   // Chroma over what a player chose to show: Phosphorescent Feast.

@@ -7613,3 +7613,13 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Waterbending Lesson: waterbend {2}, four players
 - **Do:** Cast Waterbending Lesson with four Islands. Click Pay, keep the picks it starts with and confirm.
 - **Expect:** Grizzly Bears and Ornithopter tap and nothing is discarded.
+
+## One Dragon chosen for each color (2026-11-07)
+
+### Call the Spirit Dragons: five different Dragons win
+- **Do:** The game opens on your upkeep's question. For white choose Pearl Dragon and confirm, for red Ancient Hellkite.
+- **Expect:** You're asked only for white and red ("Put a +1/+1 counter on a white Dragon you control"). Five Dragons get a counter each and you win the game.
+
+### Call the Spirit Dragons: a two-color Dragon takes two counters
+- **Do:** The game opens on your upkeep's question. Choose Adult Gold Dragon for both white and red.
+- **Expect:** Adult Gold Dragon gets two +1/+1 counters; Pearl Dragon and Ancient Hellkite get none. Only four Dragons got counters, so the game goes on.

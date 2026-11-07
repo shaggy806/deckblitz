@@ -16368,6 +16368,38 @@ describe("discard N unless you discard one card of a kind", () => {
   });
 });
 
+describe("for each color, a counter on one of that color", () => {
+  it("reads Call the Spirit Dragons whole", () => {
+    const call = parseFace({
+      name: "Call the Spirit Dragons",
+      type_line: "Enchantment",
+      mana_cost: "{W}{U}{B}{R}{G}",
+      colors: ["W", "U", "B", "R", "G"],
+      oracle_text:
+        "Dragons you control have indestructible.\nAt the beginning of your upkeep, for each color, put a +1/+1 counter on a Dragon you control of that color. If you put +1/+1 counters on five Dragons this way, you win the game.",
+    });
+    // Its upkeep trigger read whole; "Dragons you control have
+    // indestructible" isn't a line the parser reads yet.
+    expect(call.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        {
+          kind: "choose-for-each-slot",
+          slots: "colors",
+          filter: { subtype: "Dragon", controlledBy: "you" },
+          prompt: "Put a +1/+1 counter on a {slot} Dragon you control",
+          each: { kind: "add-counter", target: 0, counter: "+1/+1", amount: "x" },
+        },
+        {
+          kind: "conditional",
+          condition: { kind: "this-way", what: "counters-put", filter: { subtype: "Dragon" }, atLeast: 5 },
+          then: { kind: "win-game" },
+        },
+      ],
+    });
+  });
+});
+
 describe("discard a card unless you waterbend {N}", () => {
   it("reads Waterbending Lesson whole", () => {
     const lesson = parseFace({

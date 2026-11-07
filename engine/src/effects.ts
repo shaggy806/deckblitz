@@ -9926,6 +9926,30 @@ export type EffectSpec =
     }
   | {
       /**
+       * "**For each color**, put a +1/+1 counter on a Dragon you control **of
+       * that color**" (Call the Spirit Dragons): the effect's controller
+       * chooses, slot by slot in order (the five colors W, U, B, R, G; the
+       * basic land types; card types), one battlefield permanent matching
+       * `filter` from their side and of that slot — none for a slot with no
+       * candidate, and unasked when there's only one. One permanent may be
+       * chosen for several slots it matches (the ruling: a Dragon of two colors
+       * may get two counters); one token of a stack is singled out as it's
+       * chosen, so a stack's tokens are told apart. Then, all at once (rule
+       * 608.2f), `each` applies to every permanent chosen — target 0, with
+       * `"x"` the number of slots it was chosen for. `{slot}` in `prompt` is
+       * the slot's word ("white", "Island", "artifact").
+       */
+      readonly kind: "choose-for-each-slot";
+      readonly slots: "basic-land-types" | "colors" | readonly CardType[];
+      readonly filter: CardFilter;
+      readonly prompt: string;
+      readonly each: EffectSpec;
+      /** Set only by the engine: the slots still to choose for, and what was
+       * chosen for those before (one entry a slot). */
+      readonly progress?: { readonly slotsLeft: readonly string[]; readonly chosen: readonly ObjectId[] };
+    }
+  | {
+      /**
        * "Each player chooses any number of creatures they control with total
        * power 4 or less, then sacrifices all other creatures they control"
        * (Slaughter the Strong): each player in `who`, in turn order from the
@@ -12414,6 +12438,14 @@ export interface EffectApi {
    * asked; otherwise what's chosen, when only one answer is legal, is waiting
    * for `takeKept`. */
   askOneOfEach(player: PlayerId, spec: Extract<EffectSpec, { kind: "choose-one-of-each" }>): boolean;
+  /** `choose-for-each-slot`'s choice for one slot, with `askKeep`'s answer:
+   * the controller's permanents matching `filter` and of `slot`. `true` when
+   * it asked; otherwise the one there is (none, with none) is waiting for
+   * `takeKept`. */
+  askForSlot(filter: CardFilter, slots: "basic-land-types" | "colors" | readonly CardType[], slot: string, prompt: string): boolean;
+  /** The words of `slots`, in order: "white" … "green", "Plains" … "Forest",
+   * or the card types as given. */
+  slotWords(slots: "basic-land-types" | "colors" | readonly CardType[]): readonly string[];
   /** Each kept permanent as one object and its stint, a token stack kept in
    * part having those members peeled off: what `amongObjects` asks. */
   separateKept(kept: readonly ObjectId[]): readonly { readonly object: ObjectId; readonly stint: number }[];
@@ -20437,6 +20469,36 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ctx,
         );
       }
+      return;
+    }
+    case "choose-for-each-slot": {
+      // One slot at a time, each choice made before the next is asked; a
+      // token of a stack singled out as it's chosen, so a later slot can
+      // name it again or another of its stack. Then all of it at once.
+      const below = ctx.parkedCount();
+      let slotsLeft = spec.progress?.slotsLeft ?? ctx.slotWords(spec.slots);
+      const chosen = [...(spec.progress?.chosen ?? [])];
+      const take = (): void => {
+        for (const id of ctx.takeKept()) {
+          const one = ctx.singleOut({ kind: "object", object: id });
+          if (one.kind === "object") chosen.push(one.object);
+        }
+      };
+      if (spec.progress !== undefined) take();
+      while (slotsLeft.length > 0) {
+        const slot = slotsLeft[0];
+        slotsLeft = slotsLeft.slice(1);
+        if (ctx.askForSlot(spec.filter, spec.slots, slot, spec.prompt.split("{slot}").join(slot))) {
+          ctx.resumeAfterDecisions({ ...spec, progress: { slotsLeft, chosen } }, below);
+          return;
+        }
+        take();
+      }
+      const times = new Map<ObjectId, number>();
+      for (const id of chosen) times.set(id, (times.get(id) ?? 0) + 1);
+      ctx.simultaneously(() => {
+        for (const [id, n] of times) applyEffectSpec(spec.each, ctx.withFoundAt(0, id).withX(n));
+      });
       return;
     }
     case "keep-total-power": {

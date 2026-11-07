@@ -950,6 +950,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   },
   "keep-total-power": none,
   "choose-one-of-each": none,
+  // Chosen, not targeted: what `each` does goes to the controller's own.
+  "choose-for-each-slot": none,
   // Separating a targeted player's permanents (Liliana of the Veil) takes
   // from them; a targeted separator or chooser (Fortune's Favor's opponent)
   // is only asked.

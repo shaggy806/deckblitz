@@ -35795,6 +35795,36 @@ export class Game {
         };
         return true;
       },
+      askForSlot: (filter, slots, slot, prompt) => {
+        const eligible = this.battlefieldMatching(controller, filter).filter((id) =>
+          this.oneOfEachSlotsOf(id, slots).includes(slot),
+        );
+        if (eligible.length === 0) return false;
+        // The only one, and not a stack to pick a token of: unasked.
+        if (eligible.length === 1 && (this.state.objects[eligible[0]]?.stackCount ?? 1) === 1) {
+          this.state.keptByChoice = [...(this.state.keptByChoice ?? []), eligible[0]];
+          return false;
+        }
+        this.state.awaiting = {
+          kind: "choose-permanents",
+          player: controller,
+          eligible,
+          min: 1,
+          max: 1,
+          prompt,
+          then: { kind: "sequence", effects: [] },
+          source,
+          x,
+          keepChoice: true,
+        };
+        return true;
+      },
+      slotWords: (slots) =>
+        slots === "basic-land-types"
+          ? ["Plains", "Island", "Swamp", "Mountain", "Forest"]
+          : slots === "colors"
+            ? ["white", "blue", "black", "red", "green"]
+            : slots,
       separateKept: (kept) => {
         const counts = new Map<ObjectId, number>();
         for (const id of kept) counts.set(id, (counts.get(id) ?? 0) + 1);

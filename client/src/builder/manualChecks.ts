@@ -11423,4 +11423,43 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: [] }, { bf: [] }, { bf: [] }],
     }),
   ),
+  // --- One Dragon chosen for each color (2026-11-07) -------------------------
+  preset(
+    'Call the Spirit Dragons: five different Dragons win',
+    board({
+      you: {
+        bf: [
+          'Call the Spirit Dragons',
+          'Adult Gold Dragon',
+          'Pearl Dragon',
+          'Ancient Hellkite',
+          'Belltoll Dragon',
+          'Acid-Spewer Dragon',
+          'Canopy Dragon',
+        ],
+      },
+      opp: { bf: [] },
+      turn: 0,
+      step: 'end',
+    }),
+  ),
+  preset(
+    'Call the Spirit Dragons: a two-color Dragon takes two counters',
+    board({
+      you: {
+        bf: [
+          'Call the Spirit Dragons',
+          'Adult Gold Dragon',
+          'Pearl Dragon',
+          'Ancient Hellkite',
+          'Belltoll Dragon',
+          'Acid-Spewer Dragon',
+          'Canopy Dragon',
+        ],
+      },
+      opp: { bf: [] },
+      turn: 0,
+      step: 'end',
+    }),
+  ),
 ]
