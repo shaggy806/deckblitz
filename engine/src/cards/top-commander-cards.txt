@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4660 already implemented / 340 missing (marks refreshed 2026-11-07)
+4665 already implemented / 335 missing (marks refreshed 2026-11-07)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2235,7 +2235,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2242  Idyllic Beachfront                       {0}              Land — Plains Island
 [x]  2243  Stuffy Doll                              {5}              Artifact Creature — Construct
 [x]  2244  Sword of Light and Shadow                {3}              Artifact — Equipment
-[ ]  2245  Dragonhawk, Fate's Tempest               {3}{R}{R}        Legendary Creature — Bird Dragon
+[x]  2245  Dragonhawk, Fate's Tempest               {3}{R}{R}        Legendary Creature — Bird Dragon
 [x]  2246  Llanowar Tribe                           {G}{G}{G}        Creature — Elf Druid
 [x]  2247  Jaya's Immolating Inferno                {X}{R}{R}        Legendary Sorcery
 [x]  2248  Deceptive Landscape                      {0}              Land
@@ -2462,7 +2462,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2469  Wrenn and Seven                          {3}{G}{G}        Legendary Planeswalker — Wrenn
 [x]  2470  Myr Convert                              {2}              Artifact Creature — Phyrexian Myr
 [x]  2471  Ivy Lane Denizen                         {3}{G}           Creature — Elf Warrior
-[ ]  2472  Gonti, Night Minister                    {2}{B}{B}        Legendary Creature — Aetherborn Rogue
+[x]  2472  Gonti, Night Minister                    {2}{B}{B}        Legendary Creature — Aetherborn Rogue
 [x]  2473  Alibou, Ancient Witness                  {3}{R}{W}        Legendary Artifact Creature — Golem
 [x]  2474  Wand of Wonder                           {3}{R}           Artifact
 [x]  2475  Disciple of the Vault                    {B}              Creature — Human Cleric
@@ -2491,7 +2491,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2498  Endless Atlas                            {2}              Artifact
 [ ]  2499  Selfless Squire                          {3}{W}           Creature — Human Soldier
 [x]  2500  Ghoulcaller Gisa                         {3}{B}{B}        Legendary Creature — Human Wizard
-[ ]  2501  Animist's Awakening                      {X}{G}           Sorcery
+[x]  2501  Animist's Awakening                      {X}{G}           Sorcery
 [x]  2502  Empty the Warrens                        {3}{R}           Sorcery
 [x]  2503  Otherworldly Gaze                        {U}              Instant
 [x]  2504  Echoing Deeps                            {0}              Land — Cave
@@ -2681,7 +2681,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2688  Invisible Stalker                        {1}{U}           Creature — Human Rogue
 [x]  2689  Essence Scatter                          {1}{U}           Instant
 [x]  2690  Pashalik Mons                            {2}{R}           Legendary Creature — Goblin Warrior
-[ ]  2691  Improvisation Capstone                   {5}{R}{R}        Sorcery — Lesson
+[x]  2691  Improvisation Capstone                   {5}{R}{R}        Sorcery — Lesson
 [x]  2692  Spectacular Showdown                     {1}{R}           Sorcery
 [x]  2693  Pip-Boy 3000                             {1}              Artifact — Equipment
 [x]  2694  Skithiryx, the Blight Dragon             {3}{B}{B}        Legendary Creature — Phyrexian Dragon Skeleton
@@ -2934,7 +2934,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2941  Spider-Sense                             {1}{U}           Instant
 [x]  2942  The Goose Mother                         {X}{G}{U}        Legendary Creature — Bird Hydra
 [x]  2943  Jolrael, Mwonvuli Recluse                {1}{G}           Legendary Creature — Human Druid
-[ ]  2944  Tasha's Hideous Laughter                 {1}{U}{U}        Sorcery
+[x]  2944  Tasha's Hideous Laughter                 {1}{U}{U}        Sorcery
 [x]  2945  Umezawa's Jitte                          {2}              Legendary Artifact — Equipment
 [x]  2946  Maze's End                               {0}              Land
 [x]  2947  Benevolent Hydra                         {X}{G}{G}        Creature — Hydra

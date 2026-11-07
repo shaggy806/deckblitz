@@ -1285,7 +1285,6 @@ export const SAMPLE_DECKS: readonly SampleDeck[] = [
       ["Warstorm Surge", 1],
     ],
     substitutions: [
-      sub("Dragonhawk, Fate's Tempest", "Demanding Dragon", "Five-mana red flying Dragon."),
     ],
   }),
   precon({
