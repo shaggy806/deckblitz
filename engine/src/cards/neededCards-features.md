@@ -398,6 +398,17 @@ By EDHREC rank: Thirst for Knowledge (1953). No engine code: `discard`'s
 discard N cards unless you discard a [kind] card" whole. Key:
 effect:discard-unless-land.
 
+### Doubling X as a spell is cast, and copying what has {X} — built 2026-11-07
+
+By EDHREC rank: Unbound Flourishing (2595). A `double-x` effect doubles the X of
+the spell whose casting fired its trigger, while it's still that spell on the stack
+(rules 107.3a, 400.7): its mana value there and its permanent's X (107.3m) follow.
+The `activates-ability` trigger takes `xInCost` ("if that ability's activation cost
+contains {X}", the mana symbol only); `cast-spell`'s filter already had
+`xInManaCost`, and `copy-spell` / `copy-ability` did the copying. Proving card:
+Unbound Flourishing (with Endless One, Walking Ballista, Blaze, Helix Pinnacle).
+Key: effect:double-x-on-cast.
+
 ### "An Equipment that was attached to it" — built 2026-11-07
 
 By EDHREC rank: Zack Fair (2591). A leaving permanent's snapshot records what was

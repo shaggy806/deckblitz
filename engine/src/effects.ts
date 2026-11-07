@@ -6249,6 +6249,18 @@ export type EffectSpec =
     }
   | {
       /**
+       * "Double the value of X" (Unbound Flourishing's "whenever you cast a
+       * permanent spell with a mana cost that contains {X}"): the X chosen
+       * for the spell whose casting fired this (rule 107.3a), while it's
+       * still that spell on the stack (rule 400.7) — its mana value there
+       * counts the new X (202.3e), and the permanent it becomes keeps it
+       * (107.3m). No more mana is paid; an X of 0 stays 0 (the rulings).
+       */
+      readonly kind: "double-x";
+      readonly target: "trigger-spell";
+    }
+  | {
+      /**
        * Time counters on exiled cards, which then have suspend (rule
        * 702.62b — a card is suspended if it's in exile, has suspend, and has
        * a time counter on it). Two forms:
@@ -12587,6 +12599,9 @@ export interface EffectApi {
   proliferate(then: EffectSpec | null): void;
   /** Time travel — see the `"time-travel"` {@link EffectSpec}. */
   timeTravel?(): void;
+  /** Double the X of the spell whose casting fired this — see the
+   * `"double-x"` {@link EffectSpec}. */
+  doubleTriggerSpellX(): void;
   /** Time counters on exiled cards, which have suspend — see the
    * `"give-suspend"` {@link EffectSpec}. `target` is the card the spec's
    * `target` names, resolved; absent for the "exiled this way" form. */
@@ -18512,6 +18527,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "time-travel":
       ctx.timeTravel?.();
+      return;
+    case "double-x":
+      ctx.doubleTriggerSpellX();
       return;
     case "give-suspend": {
       const counters = spec.timeCounters === "mana-value" ? "mana-value" : amountValue(spec.timeCounters, ctx);

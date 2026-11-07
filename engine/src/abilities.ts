@@ -2582,6 +2582,10 @@ export type TriggerSpec =
       readonly exhaust?: true;
       /** A power-up ability (rule 702.193 — Marvel Boy, Noh-Varr). */
       readonly powerUp?: true;
+      /** "If that ability's activation cost contains {X}" (Unbound
+       * Flourishing): the mana symbol in its activation cost, not an X
+       * elsewhere (the rulings). */
+      readonly xInCost?: true;
       readonly source?: CardFilter;
       readonly sacrificedToActivate?: true;
     }

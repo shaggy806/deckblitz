@@ -30803,7 +30803,13 @@ export class Game {
               return false;
             }
           }
-          if (spec.ninjutsu !== true && spec.loyalty !== true && spec.exhaust !== true && spec.powerUp !== true) {
+          if (
+            spec.ninjutsu !== true &&
+            spec.loyalty !== true &&
+            spec.exhaust !== true &&
+            spec.powerUp !== true &&
+            spec.xInCost !== true
+          ) {
             return true;
           }
           // The ability as it was activated — a granted ninjutsu (Satoru
@@ -30815,7 +30821,10 @@ export class Game {
             (spec.ninjutsu !== true || ability.ninjutsu === true) &&
             (spec.exhaust !== true || ability.exhaust === true) &&
             (spec.powerUp !== true || ability.powerUp === true) &&
-            (spec.loyalty !== true || ability.loyaltyCost !== undefined)
+            (spec.loyalty !== true || ability.loyaltyCost !== undefined) &&
+            // "{X} in its activation cost": the mana symbol (as
+            // `fireActivationWatchers` reads it).
+            (spec.xInCost !== true || (ability.cost !== undefined && parseManaCost(ability.cost.mana).x > 0))
           );
         }
         const host = this.state.objects[event.source];
@@ -36888,6 +36897,15 @@ export class Game {
           return this.spellSnapshot(spell);
         }
         return spell.lastOnStack?.zoneChangeCount === refs.triggerSpell ? spell.lastOnStack : null;
+      },
+      doubleTriggerSpellX: () => {
+        // Only that spell, still on the stack (rule 400.7): one countered or
+        // resolved since has no X left to change.
+        if (triggerObject === undefined || refs.triggerSpell === undefined) return;
+        const spell = this.state.objects[triggerObject];
+        if (spell?.zone !== "stack" || (spell.zoneChangeCount ?? 0) !== refs.triggerSpell || spell.xValue === null) return;
+        spell.xValue *= 2;
+        invalidateComputedCache();
       },
       shuffleLibrary: (player) => this.shuffleLibraryOf(player ?? controller),
       division: opts.division ?? [],
