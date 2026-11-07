@@ -41,6 +41,11 @@ for (const branch of branches) {
     unrelated.push(branch.replace(/^origin\//, ""));
     continue;
   }
+  // A branch whose every commit is already reachable from main is merged.
+  // Checking that first is cheap; `git cherry` patch-ids every commit and costs
+  // ~2 s a branch, which with dozens of merged cloud-session branches pushed
+  // this past a minute — longer than Remote Control waits for a session to start.
+  if (git("rev-list", "--count", `${MAIN}..${branch}`) === "0") continue;
   // `+` lines are commits whose change main lacks; merges aren't listed.
   const missing = (git("cherry", MAIN, branch) ?? "").split("\n").filter((l) => l.startsWith("+")).length;
   if (missing === 0) continue;
