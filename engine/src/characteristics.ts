@@ -2774,6 +2774,11 @@ function scanForLoseAllSource(state: GameState, registry: CardRegistry): boolean
  * its printed types (an Aura's or a pairing's scope can't reach it yet).
  */
 export function entersWithoutAbilities(state: GameState, registry: CardRegistry, object: GameObject): boolean {
+  // The effect putting it there says it has no abilities (Xu-Ifit,
+  // Osteoharmonist): marked before its choices are asked, and on its
+  // modifiers once it's there, before its replacements apply.
+  if (object.enterChoice?.withoutAbilities === true) return true;
+  if (object.zone === "battlefield" && modifierLossAt(object) !== null) return true;
   // A land a land-type setter would reach loses its rules text there too
   // (rule 305.7 — Blood Moon's ruling: a nonbasic land doesn't enter tapped).
   if (anyLandTypeSetter(state, registry) && printedDefinition(registry, object).types.includes("land")) {

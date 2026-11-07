@@ -1939,7 +1939,9 @@
   "mechanic:spell-enters-transformed",
   "effect:token-copy-up-to-n-lore-counters",
   "static:unpreventable-damage-and-global-wither",
-  "effect:linked-exile-return"
+  "effect:linked-exile-return",
+  "effect:linked-exile-return",
+  "bug:return-without-abilities-as-it-enters"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

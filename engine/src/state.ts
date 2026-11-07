@@ -1045,6 +1045,11 @@ export interface GameObject {
    * `Game.askEnterChoice`.
    */
   enterChoice?: {
+    /** The effect putting it there says it "has no abilities" (Xu-Ifit,
+     * Osteoharmonist — `EnterTypes.loseAbilities`): it will have none on the
+     * battlefield, so it makes none of its own "as this enters" choices
+     * (rule 614.12, the ruling). Set before they're asked. */
+    readonly withoutAbilities?: true;
     readonly copyOf?: string | null;
     /** The copied permanent's copy exceptions (its `copiable` modifiers),
      * which the copy takes too (rule 707.9b), then this copy effect's own

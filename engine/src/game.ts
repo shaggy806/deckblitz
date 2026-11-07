@@ -1182,6 +1182,11 @@ interface EnterOptions {
   /** Subtypes it has in addition to its own, the same way — Portal to
    * Phyrexia's "It's a Phyrexian in addition to its other types." */
   readonly addSubtypes?: readonly string[];
+  /** It has no abilities, the same way (layer 6) — Xu-Ifit,
+   * Osteoharmonist's "It's a Skeleton in addition to its other types and has
+   * no abilities": lost before its own enters replacements could apply or
+   * its enters triggers could trigger (rule 614.12, the ruling). */
+  readonly loseAbilities?: true;
   /** Subtypes instead of its own of the same kind, the same way (rule
    * 205.1a) — assimilate's "It's a Borg artifact creature and loses all
    * other creature types". */
@@ -1239,10 +1244,11 @@ function enterTypesEntry(
   types: EnterTypes | undefined,
 ): Pick<
   EnterOptions,
-  "setTypes" | "addTypes" | "addSubtypes" | "setSubtypes" | "addColors" | "setColors" | "basePt" | "keywords" | "ifCreature"
+  "setTypes" | "addTypes" | "addSubtypes" | "setSubtypes" | "addColors" | "setColors" | "basePt" | "keywords" | "ifCreature" | "loseAbilities"
 > {
   if (types === undefined) return {};
   return {
+    ...(types.loseAbilities === true ? { loseAbilities: true as const } : {}),
     ...(types.setTypes !== undefined ? { setTypes: types.setTypes } : {}),
     ...(types.addTypes !== undefined ? { addTypes: types.addTypes } : {}),
     ...(types.addSubtypes !== undefined ? { addSubtypes: types.addSubtypes } : {}),
@@ -10540,6 +10546,7 @@ export class Game {
       // without asking anything (303.4i).
       const host = awaiting.enterAttachedTo;
       if (host !== undefined && !this.readyToEnterAttached(id, host, awaiting.enterUnder ?? player)) continue;
+      this.markEnteringWithoutAbilities(id, awaiting.enterAs);
       if (this.askEnterChoice(id, player)) {
         this.state.suspendedResolutions.push({ effect: null, enter: entry });
         return;
@@ -47879,6 +47886,17 @@ export class Game {
    * it there. Nothing is put under a player who has left the game (rule
    * 800.4b).
    */
+  /** A card an effect puts onto the battlefield saying it "has no abilities"
+   * (`EnterTypes.loseAbilities` — Xu-Ifit, Osteoharmonist): marked before its
+   * "as this enters" choices are asked, so it makes none of its own (rule
+   * 614.12: judged as it would exist on the battlefield). */
+  private markEnteringWithoutAbilities(id: ObjectId, types: EnterTypes | undefined): void {
+    if (types?.loseAbilities !== true) return;
+    const object = this.state.objects[id];
+    if (object === undefined || object.enterChoice?.withoutAbilities === true) return;
+    object.enterChoice = { ...object.enterChoice, withoutAbilities: true };
+  }
+
   private putOntoBattlefieldByEffect(
     target: TargetRef,
     controller: PlayerId,
@@ -47909,7 +47927,8 @@ export class Game {
     }
     // Its "as this enters" choices first (rule 614.12 — a reanimated Clone
     // copies something): nothing moves until they're made. Face down, it has
-    // none (708.3: turned face down before it enters).
+    // none (708.3: turned face down before it enters), nor with no abilities.
+    this.markEnteringWithoutAbilities(target.object, types);
     if (types?.faceDown === undefined && this.askEnterChoice(target.object, under ?? object.owner)) return true;
     this.moveObject(target.object, "battlefield", {
       tapped: enterTapped,
@@ -51493,6 +51512,7 @@ export class Game {
         attachTo === undefined
           ? eligible
           : eligible.filter((id) => this.readyToEnterAttached(id, attachTo, ownerOrPlayer(id)));
+      for (const id of entering) this.markEnteringWithoutAbilities(id, enterAs);
       if (destination === "battlefield" && entering.some((id) => this.askEnterChoice(id, ownerOrPlayer(id)))) {
         return true;
       }
@@ -51943,6 +51963,7 @@ export class Game {
       return from === "hand" || from === "graveyard" || from === "library";
     });
     for (const id of entering) {
+      this.markEnteringWithoutAbilities(id, enterAs[id]);
       if (this.askEnterChoice(id, under[id] ?? this.state.objects[id].owner)) {
         this.state.suspendedResolutions.push({
           effect: null,
@@ -57629,7 +57650,8 @@ export class Game {
           enter.addColors !== undefined ||
           enter.setColors !== undefined ||
           enter.basePt !== undefined ||
-          enter.keywords !== undefined) &&
+          enter.keywords !== undefined ||
+          enter.loseAbilities === true) &&
         (enter.ifCreature !== true || effectiveTypes(this.state, this.registry, object).includes("creature"))
       ) {
         object.modifiers.push({
@@ -57637,6 +57659,7 @@ export class Game {
           power: 0,
           toughness: 0,
           keywords: [...(enter.keywords ?? [])],
+          ...(enter.loseAbilities === true ? { loseAbilities: true } : {}),
           ...(enter.setTypes !== undefined ? { setTypes: [...enter.setTypes] } : {}),
           ...(enter.addTypes !== undefined ? { addTypes: [...enter.addTypes] } : {}),
           ...(enter.addSubtypes !== undefined ? { addSubtypes: [...enter.addSubtypes] } : {}),

@@ -10939,6 +10939,14 @@ export interface EnterTypes {
    * (`addTypes: ["creature"]` with `basePt` and `addSubtypes`). */
   readonly addTypes?: readonly CardType[];
   readonly addSubtypes?: readonly string[];
+  /** It **has no abilities** (layer 6) — Xu-Ifit, Osteoharmonist's "It's a
+   * Skeleton in addition to its other types and has no abilities". Lost
+   * before it enters (rule 614.12, the ruling): it makes none of its own "as
+   * this enters" choices (no Clone copy), its own enters replacements don't
+   * apply (no "enters tapped", no counters of its own) and its enters
+   * triggers don't trigger. Abilities it gains afterwards it keeps (a later
+   * timestamp, rule 613.7). */
+  readonly loseAbilities?: true;
   /** Subtypes **instead of** its own of the same kind (rule 205.1a: a
    * creature type replaces its creature types, its artifact and other
    * subtypes kept) — assimilate's "It's a Borg artifact creature and loses

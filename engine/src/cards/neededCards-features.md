@@ -4919,6 +4919,14 @@ the linked cards after a `sacrifice-source` earlier in the same resolution (the 
 rule 607.2a). "If a player controls no creatures" is `of-player` `"a-player"`. Proving card: Sothera, the
 Supervoid.
 
+### Returned with no abilities, lost before it enters — built 2026-11-07
+
+Key `bug:return-without-abilities-as-it-enters`. `EnterTypes.loseAbilities` ("…and has no abilities") puts a
+layer-6 loss on the entry modifier, and `GameObject.enterChoice.withoutAbilities` marks the card before its
+"as this enters" choices are asked (put-onto-battlefield, look-and-choose, a chosen card from a zone, held
+entries), which `entersWithoutAbilities` reads as it reads Humility's: no Clone copy, no "enters tapped", no
+counters of its own, and no enters trigger (rule 614.12, the ruling). Proving card: Xu-Ifit, Osteoharmonist.
+
 ### What restricted mana may pay for, and one type of mana spent as a colour — built 2026-11-02
 
 The need-keys Phase 2 family `cost:mana-spending-rules`, features only. `ManaSpendOnly.purposes` /
