@@ -573,6 +573,13 @@ Five more passes, all merged (156 cards):
   filter. The keys free Glowing One, Infesting Radroach, Screeching Scorchbeast, The Master,
   Transcendent and Zellix, Sanity Flayer for `author-freed`. 19 flagged cards still wait, blocked
   as their records say (`cards:needs -- --asap`).
+- **Batch 273 (2026-11-07, `author-flagged`: the cards flagged Build ASAP in the library)** — 3 of
+  the 15 left, the engine-only ones the engine could be made to run exactly: Loading Zone (nothing
+  new), Tablet of Discovery and Nahiri's Lithoforming. Locke, Treasure Hunter needs one cast shared
+  among every player's milled card across graveyards and exile (rule 701.17c), more than its key's
+  description says; Squandered Resources needs the sacrificed land's could-produce read as it last
+  existed, and the payment planner offering a type per land. The keys free Due Respect and Pir,
+  Imaginative Rascal for `author-freed`. 12 flagged cards still wait.
 - **Batch 272 (2026-11-06, `author-flagged`: the cards flagged Build ASAP in the library)** — the
   first four of the 19 left by rank, and one more their keys ran: Dragonhawk, Fate's Tempest,
   Improvisation Capstone, Gonti, Night Minister, Animist's Awakening and Tasha's Hideous Laughter.

@@ -12,6 +12,19 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Three more Build ASAP cards** (2026-11-07, B273, `/author-flagged`): Loading Zone, Tablet of
+  Discovery and Nahiri's Lithoforming. `grant-graveyard-cast`'s `cards: "milled-this-way"` and
+  `play`: "mill a card. You may play that card this turn", a land card played with the land drop
+  (`graveyardCastPermission.play`), and a milled card a replacement exiled instead (Rest in Peace)
+  still that card (rule 701.17c), given the same permission from exile. `additional-land-drop`
+  takes any amount ("you may play X additional lands this turn"). `player-effect`'s
+  `entersTapped`: "lands you control enter tapped this turn" (rule 614.1d). Loading Zone needed
+  nothing new (a `would-add-counter` multiplier with an `anyOf` filter). The scaffolder reads the
+  land-drop, enters-tapped-this-turn and play-the-milled-card lines. Keys:
+  `replacement:counter-multiplier-on-costs`, `zone:play-milled-card-this-turn`,
+  `amount:additional-land-drop-amount`, `effect:temporary-permanents-enter-tapped`; they free Due
+  Respect and Pir, Imaginative Rascal for `author-freed`. Locke, Treasure Hunter and Squandered
+  Resources were looked at and stay blocked (B273's record says why); 12 flagged cards still wait.
 - **The next four Build ASAP cards** (2026-11-06, B272, `/author-flagged`): Dragonhawk, Fate's
   Tempest, Improvisation Capstone, Gonti, Night Minister and Animist's Awakening, with Tasha's
   Hideous Laughter. An `objectTargets` amount: how many of the resolving ability's object targets

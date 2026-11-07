@@ -1,0 +1,40 @@
+{
+ "batch": "B273",
+ "status": "done",
+ "ranks": "Build ASAP: cards flagged in the library. 15 flagged, all blocked; this session took the engine-only ones it could run exactly: Loading Zone (no engine change: a `would-add-counter` multiplier with an `anyOf` filter over creatures, Spacecraft and Planets; counters put as a cost reached too, since only \"an effect\" leaves them out), Tablet of Discovery (`grant-graveyard-cast`'s `cards: \"milled-this-way\"` and `play`, a land card played with the land drop; a milled card exiled instead by a replacement found there too, rule 701.17c) and Nahiri's Lithoforming (`additional-land-drop` taking any amount, X here, and `player-effect`'s `entersTapped`, rule 614.1d). Locke, Treasure Hunter (one cast shared among milled cards across graveyards and exile) and Squandered Resources (what the sacrificed land could produce, as it last existed, for the payment planner) were looked at and stay blocked as recorded; the other 10 weren't taken this session.",
+ "authored": [
+  {
+   "name": "Loading Zone",
+   "files": [
+    "engine/src/cards/pool/loading-zone.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tablet of Discovery",
+   "files": [
+    "engine/src/cards/pool/tablet-of-discovery.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nahiri's Lithoforming",
+   "files": [
+    "engine/src/cards/pool/nahiris-lithoforming.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Locke, Treasure Hunter",
+   "needs": ["zone:cast-one-from-milled-until-end-of-turn"],
+   "why": "One cast for the turn shared among every player's milled card, in a graveyard or (Rest in Peace) exile (rule 701.17c): a permission over a fixed card list spanning two zones, used up once"
+  },
+  {
+   "name": "Squandered Resources",
+   "needs": ["mana:any-type-sacrificed-land-could-produce"],
+   "why": "The mana types depend on the land sacrificed as the cost, read as it last existed (couldProduce reads only the battlefield), and the payment planner must offer a type per land"
+  }
+ ]
+}
