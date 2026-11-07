@@ -53220,10 +53220,24 @@ export class Game {
     keyword: "infect" | "wither",
     sourceLastKnown?: LastKnownInfo,
   ): boolean {
+    if (this.allDamageAsThough(keyword)) return true;
     if (sourceLastKnown !== undefined) return sourceLastKnown.keywords.includes(keyword);
     const object = this.state.objects[source];
     if (object === undefined || object.kind !== "card") return false;
     return this.objHasKeyword(source, keyword);
+  }
+
+  /** Whether a permanent's static `damageAsThoughSourceHad` has all damage
+   * dealt as though its source had `keyword` (Everlasting Torment). */
+  private allDamageAsThough(keyword: "infect" | "wither"): boolean {
+    for (const id of this.state.zones.shared.battlefield) {
+      const object = this.state.objects[id];
+      if (object === undefined || hasLostAbilities(this.state, this.registry, object)) continue;
+      for (const ability of this.registry.get(rulesTextName(object)).static) {
+        if (ability.damageAsThoughSourceHad?.keyword === keyword && this.staticActive(object, ability)) return true;
+      }
+    }
+    return false;
   }
 
   /** The total toxic value (rule 702.164b) of `source` if it's a creature on

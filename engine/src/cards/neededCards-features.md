@@ -532,6 +532,15 @@ dies trigger of the host looks back (603.10a) to the Equipment still on it.
 The scaffolder reads the line, "Equipped/Enchanted creature has prowess" and
 "Equip [creature type] {N}". Key: static:double-triggers-of-attached.
 
+### All damage dealt as though its source had wither — built 2026-11-07
+
+By EDHREC rank: Everlasting Torment (5228), the only card with the line. A
+static's `damageAsThoughSourceHad: { keyword }` (`"wither"`, or `"infect"`)
+has every source's damage dealt as one with that keyword deals it (120.3d,
+702.80a), read where damage is dealt (`sourceHasDamageKeyword`), with no
+source gaining the keyword. Not a scaffolder template: the line recurs
+nowhere. Key: static:unpreventable-damage-and-global-wither.
+
 ### A Saga token copy given up to N lore counters — built 2026-11-07
 
 By EDHREC rank: Terra, Magical Adept (5171), the only card. No engine code:

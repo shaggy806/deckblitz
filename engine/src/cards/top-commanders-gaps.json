@@ -1937,7 +1937,8 @@
   "effect:play-from-library-top-this-turn",
   "cost:pay-life-equal-mv-instead-of-mana",
   "mechanic:spell-enters-transformed",
-  "effect:token-copy-up-to-n-lore-counters"
+  "effect:token-copy-up-to-n-lore-counters",
+  "static:unpreventable-damage-and-global-wither"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

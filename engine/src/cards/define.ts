@@ -3130,6 +3130,15 @@ export interface StaticAbility {
     readonly combat?: true;
   };
   /**
+   * "All damage is dealt as though its source had wither" (Everlasting
+   * Torment, `{ keyword: "wither" }`): every source's damage, from any zone,
+   * whoever controls it, is dealt as a source with that keyword deals it
+   * (rules 120.3d, 702.80a; `"infect"` 702.90b-c as well) — without the
+   * source having the keyword, so nothing that asks whether it has wither
+   * sees it.
+   */
+  readonly damageAsThoughSourceHad?: { readonly keyword: "wither" | "infect" };
+  /**
    * "Counters can't be put on …" and "players can't get counters" (rule
    * 122 — Solemnity; Melira, Sylvok Outcast's "you can't get poison
    * counters" and "creatures you control can't have -1/-1 counters put on
