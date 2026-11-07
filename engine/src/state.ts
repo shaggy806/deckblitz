@@ -309,6 +309,10 @@ export interface GameObject {
     /** "If that spell would be put into your graveyard, exile it instead" — the
      * effect's `exileAfter`. */
     readonly exileAfter?: true;
+    /** "You may **play** that card this turn" (Tablet of Discovery): a land
+     * card too, with the turn's land drop (rule 305.2) — the effect's
+     * `play`. */
+    readonly play?: true;
   };
   /** This spell was cast under a permission that exiles it instead of letting
    * it reach a graveyard (Kess, Dissident Mage — `castFromGraveyard
@@ -5870,6 +5874,10 @@ export interface PlayerEffect {
   /** "You may play lands from your graveyard" for a while (Gaea's Will): the
    * `playFromGraveyard` static's permission (rule 305.9). */
   readonly playLandsFromGraveyard?: true;
+  /** "Lands you control enter tapped this turn" (Nahiri's Lithoforming —
+   * rule 614.1d): a permanent matching this as it would enter, from
+   * `owner`'s side, enters tapped while this lasts. */
+  readonly entersTapped?: CardFilter;
   /** "The next time you would draw a card this turn, [effect] instead" (the
    * Words cycle — rule 614.1a): replaces one of
    * `owner`'s draws, and is gone once it has. `targets` are the ability's, as

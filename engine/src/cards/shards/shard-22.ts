@@ -518,6 +518,7 @@ import _poolMudflatVillage from "../pool/mudflat-village.js";
 import _poolMyrBattlesphere from "../pool/myr-battlesphere.js";
 import _poolNadiersNightblade from "../pool/nadiers-nightblade.js";
 import _poolNagaOracle from "../pool/naga-oracle.js";
+import _poolNahirisLithoforming from "../pool/nahiris-lithoforming.js";
 import _poolNausea from "../pool/nausea.js";
 import _poolNavigationOrb from "../pool/navigation-orb.js";
 import _poolNecrodominance from "../pool/necrodominance.js";
@@ -1528,6 +1529,7 @@ const shard: CardShard = {
     _poolMyrBattlesphere,
     _poolNadiersNightblade,
     _poolNagaOracle,
+    _poolNahirisLithoforming,
     _poolNausea,
     _poolNavigationOrb,
     _poolNecrodominance,

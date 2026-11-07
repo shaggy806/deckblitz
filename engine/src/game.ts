@@ -34669,7 +34669,7 @@ export class Game {
           }
         }
       },
-      grantGraveyardCast: (target, terms) => this.grantGraveyardCastByEffect(controller, target, terms),
+      grantGraveyardCast: (target, terms) => this.grantGraveyardCastByEffect(controller, target, terms, source),
       putOnLibrary: (target, position) => {
         if (target.kind === "object") this.putOnLibrary(target.object, position);
       },
@@ -39856,7 +39856,8 @@ export class Game {
     const isLand = def.types.includes("land");
     const out: GraveyardGrantOption[] = [];
     const own = object.graveyardCastPermission;
-    if (!isLand && own !== undefined && own.player === player && own.turn === this.state.turn.number) {
+    // A land card only under a permission to *play* it (Tablet of Discovery).
+    if ((!isLand || own?.play === true) && own !== undefined && own.player === player && own.turn === this.state.turn.number) {
       out.push({
         grant: { source: card },
         permission:
@@ -39989,12 +39990,28 @@ export class Game {
   private grantGraveyardCastByEffect(
     controller: PlayerId,
     target: TargetRef,
-    terms?: { readonly free?: true; readonly exileAfter?: true },
+    terms?: { readonly free?: true; readonly exileAfter?: true; readonly play?: true; readonly orExiled?: true },
+    source?: ObjectId,
   ): void {
     if (target.kind !== "object") return;
     const object = this.state.objects[target.object];
-    if (object === undefined || object.zone !== "graveyard") return;
-    object.graveyardCastPermission = { player: controller, turn: this.state.turn.number, ...terms };
+    if (object === undefined) return;
+    const { orExiled, ...kept } = terms ?? {};
+    // A milled card exiled instead (Rest in Peace) is still "that card" (rule
+    // 701.17c): the same permission, from exile, for the turn.
+    if (orExiled === true && object.zone === "exile" && !object.isToken && source !== undefined) {
+      object.impulse = this.exilePermissionGrant(
+        { duration: "end-of-turn", ...(kept.play === true ? { play: true as const } : {}) },
+        controller,
+        source,
+        object.owner,
+        kept.play === true,
+      );
+      invalidateComputedCache();
+      return;
+    }
+    if (object.zone !== "graveyard") return;
+    object.graveyardCastPermission = { player: controller, turn: this.state.turn.number, ...kept };
     this.emit({ type: "graveyard-cast-granted", object: target.object, player: controller });
   }
 
@@ -55270,6 +55287,12 @@ export class Game {
           addCounters(r.counters.kind, each * (source.stackCount ?? 1));
         }
       }
+    }
+    // A resolved "lands you control enter tapped this turn" (Nahiri's
+    // Lithoforming — rule 614.1d), from its controller's side.
+    for (const effect of this.state.playerEffects ?? []) {
+      if (effect.entersTapped === undefined || this.state.players[effect.owner]?.hasLost === true) continue;
+      if (matchesFilter(this.state, this.registry, id, effect.entersTapped, { you: effect.owner })) tapped = true;
     }
     // "Enters untapped" is applied last: the entering permanent's controller
     // orders the replacements (rule 616.1), and it only ever reaches

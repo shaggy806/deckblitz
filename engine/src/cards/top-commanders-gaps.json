@@ -1901,7 +1901,11 @@
   "effect:reveal-until-total-mana-value",
   "zone:cast-spell-not-owned-by-caster",
   "effect:impulse-exile-for-creature-controller",
-  "effect:reveal-x-put-all-matching"
+  "effect:reveal-x-put-all-matching",
+  "replacement:counter-multiplier-on-costs",
+  "zone:play-milled-card-this-turn",
+  "amount:additional-land-drop-amount",
+  "effect:temporary-permanents-enter-tapped"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

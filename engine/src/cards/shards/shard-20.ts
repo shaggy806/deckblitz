@@ -857,6 +857,7 @@ import _poolSvyeluniteTemple from "../pool/svyelunite-temple.js";
 import _poolSweettoothWitch from "../pool/sweettooth-witch.js";
 import _poolSydriGalvanicGenius from "../pool/sydri-galvanic-genius.js";
 import _poolSylvanTutor from "../pool/sylvan-tutor.js";
+import _poolTabletOfDiscovery from "../pool/tablet-of-discovery.js";
 import _poolTaintedObserver from "../pool/tainted-observer.js";
 import _poolTalasAirShip from "../pool/talas-air-ship.js";
 import _poolTalismanOfHierarchy from "../pool/talisman-of-hierarchy.js";
@@ -1892,6 +1893,7 @@ const shard: CardShard = {
     _poolSweettoothWitch,
     _poolSydriGalvanicGenius,
     _poolSylvanTutor,
+    _poolTabletOfDiscovery,
     _poolTaintedObserver,
     _poolTalasAirShip,
     _poolTalismanOfHierarchy,

@@ -15248,6 +15248,7 @@ import _poolLlawanCephalidEmpress from "./pool/llawan-cephalid-empress.js";
 import _poolLluwenExchangeStudent from "./pool/lluwen-exchange-student.js";
 import _poolLluwenImperfectNaturalist from "./pool/lluwen-imperfect-naturalist.js";
 import _poolLoAndLiTwinTutors from "./pool/lo-and-li-twin-tutors.js";
+import _poolLoadingZone from "./pool/loading-zone.js";
 import _poolLoafingGiant from "./pool/loafing-giant.js";
 import _poolLoamDryad from "./pool/loam-dryad.js";
 import _poolLoamDweller from "./pool/loam-dweller.js";
@@ -17369,6 +17370,7 @@ import _poolNahiriStormOfStone from "./pool/nahiri-storm-of-stone.js";
 import _poolNahiriTheHarbinger from "./pool/nahiri-the-harbinger.js";
 import _poolNahiriTheLithomancer from "./pool/nahiri-the-lithomancer.js";
 import _poolNahirisBinding from "./pool/nahiris-binding.js";
+import _poolNahirisLithoforming from "./pool/nahiris-lithoforming.js";
 import _poolNahirisMachinations from "./pool/nahiris-machinations.js";
 import _poolNahirisStoneblades from "./pool/nahiris-stoneblades.js";
 import _poolNahirisWarcrafting from "./pool/nahiris-warcrafting.js";
@@ -25994,6 +25996,7 @@ import _poolSzarelGenesisShepherd from "./pool/szarel-genesis-shepherd.js";
 import _poolT45PowerArmor from "./pool/t-45-power-armor.js";
 import _poolTabaxiToucaneers from "./pool/tabaxi-toucaneers.js";
 import _poolTabletOfCompleation from "./pool/tablet-of-compleation.js";
+import _poolTabletOfDiscovery from "./pool/tablet-of-discovery.js";
 import _poolTabletOfEpityr from "./pool/tablet-of-epityr.js";
 import _poolTaboraxHopesDemise from "./pool/taborax-hopes-demise.js";
 import _poolTackleArtist from "./pool/tackle-artist.js";
@@ -46744,6 +46747,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolLluwenExchangeStudent,
   _poolLluwenImperfectNaturalist,
   _poolLoAndLiTwinTutors,
+  _poolLoadingZone,
   _poolLoafingGiant,
   _poolLoamDryad,
   _poolLoamDweller,
@@ -48865,6 +48869,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNahiriTheHarbinger,
   _poolNahiriTheLithomancer,
   _poolNahirisBinding,
+  _poolNahirisLithoforming,
   _poolNahirisMachinations,
   _poolNahirisStoneblades,
   _poolNahirisWarcrafting,
@@ -57490,6 +57495,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolT45PowerArmor,
   _poolTabaxiToucaneers,
   _poolTabletOfCompleation,
+  _poolTabletOfDiscovery,
   _poolTabletOfEpityr,
   _poolTaboraxHopesDemise,
   _poolTackleArtist,
@@ -78253,6 +78259,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/lluwen-exchange-student": _poolLluwenExchangeStudent,
   "pool/lluwen-imperfect-naturalist": _poolLluwenImperfectNaturalist,
   "pool/lo-and-li-twin-tutors": _poolLoAndLiTwinTutors,
+  "pool/loading-zone": _poolLoadingZone,
   "pool/loafing-giant": _poolLoafingGiant,
   "pool/loam-dryad": _poolLoamDryad,
   "pool/loam-dweller": _poolLoamDweller,
@@ -80374,6 +80381,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/nahiri-the-harbinger": _poolNahiriTheHarbinger,
   "pool/nahiri-the-lithomancer": _poolNahiriTheLithomancer,
   "pool/nahiris-binding": _poolNahirisBinding,
+  "pool/nahiris-lithoforming": _poolNahirisLithoforming,
   "pool/nahiris-machinations": _poolNahirisMachinations,
   "pool/nahiris-stoneblades": _poolNahirisStoneblades,
   "pool/nahiris-warcrafting": _poolNahirisWarcrafting,
@@ -88999,6 +89007,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/t-45-power-armor": _poolT45PowerArmor,
   "pool/tabaxi-toucaneers": _poolTabaxiToucaneers,
   "pool/tablet-of-compleation": _poolTabletOfCompleation,
+  "pool/tablet-of-discovery": _poolTabletOfDiscovery,
   "pool/tablet-of-epityr": _poolTabletOfEpityr,
   "pool/taborax-hopes-demise": _poolTaboraxHopesDemise,
   "pool/tackle-artist": _poolTackleArtist,

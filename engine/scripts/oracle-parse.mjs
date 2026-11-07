@@ -10304,6 +10304,44 @@ export function parseEffect(text, outer) {
       if (turnExile.returnAtEndStep === true) skip = 1;
       continue;
     }
+    // "You may play an additional land this turn" (Explore), "… up to three
+    // additional lands …" (Summer Bloom), "… X additional lands …" (Nahiri's
+    // Lithoforming).
+    const landDropM = /^you may play (?:up to )?(an|one|two|three|four|five|x) additional lands? this turn\.$/i.exec(sentence);
+    if (landDropM !== null) {
+      const word = landDropM[1].toLowerCase();
+      const made = { kind: "additional-land-drop", amount: word === "x" ? "x" : NUMBERS[word] };
+      parsed.push(made);
+      hints.push({ sentence, effect: made });
+      continue;
+    }
+    // "Lands you control enter tapped this turn" (Nahiri's Lithoforming),
+    // "Permanents enter tapped this turn" (Due Respect) — rule 614.1d.
+    const tappedTurnM = /^(lands you control|permanents) enter tapped this turn\.$/i.exec(sentence);
+    if (tappedTurnM !== null) {
+      const made = {
+        kind: "player-effect",
+        duration: "end-of-turn",
+        entersTapped: /^lands/i.test(tappedTurnM[1]) ? { type: "land", controlledBy: "you" } : {},
+      };
+      parsed.push(made);
+      hints.push({ sentence, effect: made });
+      continue;
+    }
+    // "Mill a card. You may play that card this turn." (Tablet of Discovery):
+    // a permission on the card milled, a land included (rule 701.17c/d).
+    if (
+      /^you may (play|cast) that card this turn\.$/i.test(sentence) &&
+      parsed.length > 0 &&
+      parsed[parsed.length - 1]?.kind === "mill" &&
+      parsed[parsed.length - 1]?.target === "you"
+    ) {
+      const play = /^you may play/i.test(sentence);
+      const made = { kind: "grant-graveyard-cast", cards: "milled-this-way", ...(play ? { play: true } : {}) };
+      parsed.push(made);
+      hints.push({ sentence, effect: made });
+      continue;
+    }
     // "Until end of turn, you may play lands and cast spells from your
     // graveyard." (Gaea's Will — rule 305.9, 601.3).
     if (/^until end of turn, you may play lands and cast spells from your graveyard\.$/i.test(sentence)) {

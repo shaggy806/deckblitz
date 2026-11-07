@@ -6567,6 +6567,11 @@ export type EffectSpec =
        * beside `castFromGraveyard`'s spells; rule 305.9): the land drop is the
        * ordinary one. */
       readonly playLandsFromGraveyard?: true;
+      /** "Lands you control enter tapped this turn" (Nahiri's Lithoforming —
+       * rule 614.1d): a replacement for the duration over each permanent
+       * matching this as it would enter, from the controller's side
+       * (`controlledBy: "you"` reads who it would enter under). */
+      readonly entersTapped?: CardFilter;
       /** "Until end of turn, you don't lose unspent red mana as steps and
        * phases end" (The Last Agni Kai — `["R"]`, rule 500.5): the
        * controller's mana of these types, whenever it was made, stays in
@@ -7115,6 +7120,16 @@ export type EffectSpec =
        * later. */
       readonly target?: number;
       readonly filter?: CardFilter;
+      /** Or the cards this resolution milled: "mill a card. You may play that
+       * card this turn" (Tablet of Discovery). A milled card a replacement put
+       * somewhere else public is still that card (rule 701.17c): one exiled
+       * instead (Rest in Peace) gets the same permission from exile, an
+       * impulse permission lasting the turn. Rule 701.17d: each card, if a
+       * replacement milled more than one. */
+      readonly cards?: "milled-this-way";
+      /** "You may **play** that card": a land card too, played with the land
+       * drop (rule 305.2); unset, casts only. */
+      readonly play?: true;
       /** "…**without paying its mana cost**" (Sins of the Past): an alternative
        * cost, so no other goes with it (rule 118.9a) and X is 0 (107.3b); the
        * ruling's additional costs are still paid. */
@@ -7772,9 +7787,11 @@ export type EffectSpec =
     }
   | {
       /** "You may play an additional land this turn" (Explore) — `amount`
-       * more land drops for the effect's controller, this turn only. */
+       * more land drops for the effect's controller, this turn only;
+       * `"x"` is Nahiri's Lithoforming's "you may play X additional lands
+       * this turn", any amount read as it resolves. */
       readonly kind: "additional-land-drop";
-      readonly amount: number;
+      readonly amount: EffectAmount;
     }
   | {
       /** Untap every battlefield permanent matching `filter` (Aggravated
@@ -11960,7 +11977,12 @@ export interface EffectApi {
   grantGraveyardKeyword(target: TargetRef | undefined, filter: CardFilter | undefined, grant: GraveyardKeywordGrant): void;
   /** Let this effect's controller cast `target` (a card in a graveyard)
    * from there this turn — see the `grant-graveyard-cast` effect. */
-  grantGraveyardCast(target: TargetRef, terms?: { readonly free?: true; readonly exileAfter?: true }): void;
+  /** `orExiled`: a card found in exile instead (a milled card, rule 701.17c)
+   * gets the same permission there, for the turn. */
+  grantGraveyardCast(
+    target: TargetRef,
+    terms?: { readonly free?: true; readonly exileAfter?: true; readonly play?: true; readonly orExiled?: true },
+  ): void;
   /** `a` and `b` (both creatures) fight; with `oneSided` only `a` deals,
    * to a creature or a planeswalker. */
   fight(a: TargetRef, b: TargetRef, oneSided: boolean): void;
@@ -17391,7 +17413,14 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       const terms = {
         ...(spec.free === true ? { free: true as const } : {}),
         ...(spec.exileAfter === true ? { exileAfter: true as const } : {}),
+        ...(spec.play === true ? { play: true as const } : {}),
       };
+      if (spec.cards === "milled-this-way") {
+        for (const entry of ctx.thisWay("milled")) {
+          ctx.grantGraveyardCast({ kind: "object", object: entry.object }, { ...terms, orExiled: true });
+        }
+        return;
+      }
       if (spec.filter !== undefined) {
         for (const card of ctx.graveyardMatching(ctx.controller, spec.filter)) {
           ctx.grantGraveyardCast({ kind: "object", object: card }, terms);
@@ -18575,6 +18604,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ...(spec.tokensComeToOwner === true ? { tokensComeToOwner: true as const } : {}),
         ...(spec.graveyardExile !== undefined ? { graveyardExile: { ...spec.graveyardExile, source: ctx.source } } : {}),
         ...(spec.playLandsFromGraveyard === true ? { playLandsFromGraveyard: true as const } : {}),
+        ...(spec.entersTapped !== undefined ? { entersTapped: spec.entersTapped } : {}),
         ...(spec.nextDrawInstead !== undefined
           ? { nextDrawInstead: { ...spec.nextDrawInstead, source: ctx.source, targets: [...ctx.targets], targetStints: [] } }
           : {}),
@@ -19070,7 +19100,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.additionalUpkeeps(amountValue(spec.amount, ctx));
       return;
     case "additional-land-drop":
-      ctx.additionalLandDrops(spec.amount);
+      ctx.additionalLandDrops(amountValue(spec.amount, ctx));
       return;
     case "shuffle-library": {
       if (spec.searchers === true) {

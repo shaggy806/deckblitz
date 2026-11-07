@@ -482,6 +482,7 @@ import _poolLightningBlow from "../pool/lightning-blow.js";
 import _poolLilianaDefiantNecromancer from "../pool/liliana-defiant-necromancer.js";
 import _poolLilianaOfTheVeil from "../pool/liliana-of-the-veil.js";
 import _poolLivingTsunami from "../pool/living-tsunami.js";
+import _poolLoadingZone from "../pool/loading-zone.js";
 import _poolLolthSpiderQueen from "../pool/lolth-spider-queen.js";
 import _poolLostLegion from "../pool/lost-legion.js";
 import _poolLotusGuardian from "../pool/lotus-guardian.js";
@@ -1472,6 +1473,7 @@ const shard: CardShard = {
     _poolLilianaDefiantNecromancer,
     _poolLilianaOfTheVeil,
     _poolLivingTsunami,
+    _poolLoadingZone,
     _poolLolthSpiderQueen,
     _poolLostLegion,
     _poolLotusGuardian,
