@@ -4958,7 +4958,10 @@ export type EffectSpec =
        * With `repeat`: "a spell from **each** opponent's graveyard" (Jetsam):
        * once one is cast, the other cards of that player's graveyard are no
        * longer offered. The caster picks the order, one offer at a time, as
-       * the spells go on the stack (rule 608.2g).
+       * the spells go on the stack (rule 608.2g). Read by each card's owner,
+       * so with `from: "milled-this-way"` it's "**for each player**, you may
+       * cast a card that player milled this way" (The Ur-Sphinx): a player
+       * mills their own library, wherever the card went (rule 701.17c).
        */
       readonly onePerGraveyard?: true;
       /**
