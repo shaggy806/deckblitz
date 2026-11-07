@@ -738,6 +738,7 @@ import _poolSinuousVermin from "../pool/sinuous-vermin.js";
 import _poolSisaysRing from "../pool/sisays-ring.js";
 import _poolSkitterbeamBattalion from "../pool/skitterbeam-battalion.js";
 import _poolSkulkingFugitive from "../pool/skulking-fugitive.js";
+import _poolSlicerHiredMuscle from "../pool/slicer-hired-muscle.js";
 import _poolSlickSequence from "../pool/slick-sequence.js";
 import _poolSlithPredator from "../pool/slith-predator.js";
 import _poolSlithermuse from "../pool/slithermuse.js";
@@ -1729,6 +1730,7 @@ const shard: CardShard = {
     _poolSisaysRing,
     _poolSkitterbeamBattalion,
     _poolSkulkingFugitive,
+    _poolSlicerHiredMuscle,
     _poolSlickSequence,
     _poolSlithPredator,
     _poolSlithermuse,

@@ -3454,6 +3454,7 @@ import _poolBumbleflowersSharepot from "./pool/bumbleflowers-sharepot.js";
 import _poolBumiBash from "./pool/bumi-bash.js";
 import _poolBumiEclecticEarthbender from "./pool/bumi-eclectic-earthbender.js";
 import _poolBumiKingOfThreeTrials from "./pool/bumi-king-of-three-trials.js";
+import _poolBumiUnleashed from "./pool/bumi-unleashed.js";
 import _poolBumpInTheNight from "./pool/bump-in-the-night.js";
 import _poolBuoyancy from "./pool/buoyancy.js";
 import _poolBurakosPartyLeader from "./pool/burakos-party-leader.js";
@@ -14055,6 +14056,7 @@ import _poolKeeperOfTresserhorn from "./pool/keeper-of-tresserhorn.js";
 import _poolKeepersOfTheFaith from "./pool/keepers-of-the-faith.js";
 import _poolKeepsakeGorgon from "./pool/keepsake-gorgon.js";
 import _poolKefkaCourtMage from "./pool/kefka-court-mage.js";
+import _poolKefkaDancingMad from "./pool/kefka-dancing-mad.js";
 import _poolKefkaRulerOfRuin from "./pool/kefka-ruler-of-ruin.js";
 import _poolKefnetTheMindful from "./pool/kefnet-the-mindful.js";
 import _poolKefnetsLastWord from "./pool/kefnets-last-word.js";
@@ -23955,6 +23957,8 @@ import _poolSleightOfMind from "./pool/sleight-of-mind.js";
 import _poolSliceAndDice from "./pool/slice-and-dice.js";
 import _poolSliceFromTheShadows from "./pool/slice-from-the-shadows.js";
 import _poolSliceInTwain from "./pool/slice-in-twain.js";
+import _poolSlicerHighSpeedAntagonist from "./pool/slicer-high-speed-antagonist.js";
+import _poolSlicerHiredMuscle from "./pool/slicer-hired-muscle.js";
 import _poolSlickImitator from "./pool/slick-imitator.js";
 import _poolSlickSequence from "./pool/slick-sequence.js";
 import _poolSlickshotLockpicker from "./pool/slickshot-lockpicker.js";
@@ -34972,6 +34976,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBumiBash,
   _poolBumiEclecticEarthbender,
   _poolBumiKingOfThreeTrials,
+  _poolBumiUnleashed,
   _poolBumpInTheNight,
   _poolBuoyancy,
   _poolBurakosPartyLeader,
@@ -45573,6 +45578,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKeepersOfTheFaith,
   _poolKeepsakeGorgon,
   _poolKefkaCourtMage,
+  _poolKefkaDancingMad,
   _poolKefkaRulerOfRuin,
   _poolKefnetTheMindful,
   _poolKefnetsLastWord,
@@ -55473,6 +55479,8 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSliceAndDice,
   _poolSliceFromTheShadows,
   _poolSliceInTwain,
+  _poolSlicerHighSpeedAntagonist,
+  _poolSlicerHiredMuscle,
   _poolSlickImitator,
   _poolSlickSequence,
   _poolSlickshotLockpicker,
@@ -66503,6 +66511,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/bumi-bash": _poolBumiBash,
   "pool/bumi-eclectic-earthbender": _poolBumiEclecticEarthbender,
   "pool/bumi-king-of-three-trials": _poolBumiKingOfThreeTrials,
+  "pool/bumi-unleashed": _poolBumiUnleashed,
   "pool/bump-in-the-night": _poolBumpInTheNight,
   "pool/buoyancy": _poolBuoyancy,
   "pool/burakos-party-leader": _poolBurakosPartyLeader,
@@ -77104,6 +77113,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/keepers-of-the-faith": _poolKeepersOfTheFaith,
   "pool/keepsake-gorgon": _poolKeepsakeGorgon,
   "pool/kefka-court-mage": _poolKefkaCourtMage,
+  "pool/kefka-dancing-mad": _poolKefkaDancingMad,
   "pool/kefka-ruler-of-ruin": _poolKefkaRulerOfRuin,
   "pool/kefnet-the-mindful": _poolKefnetTheMindful,
   "pool/kefnets-last-word": _poolKefnetsLastWord,
@@ -87004,6 +87014,8 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/slice-and-dice": _poolSliceAndDice,
   "pool/slice-from-the-shadows": _poolSliceFromTheShadows,
   "pool/slice-in-twain": _poolSliceInTwain,
+  "pool/slicer-high-speed-antagonist": _poolSlicerHighSpeedAntagonist,
+  "pool/slicer-hired-muscle": _poolSlicerHiredMuscle,
   "pool/slick-imitator": _poolSlickImitator,
   "pool/slick-sequence": _poolSlickSequence,
   "pool/slickshot-lockpicker": _poolSlickshotLockpicker,

@@ -425,6 +425,7 @@ import _poolKasminaEnigmaticMentor from "../pool/kasmina-enigmatic-mentor.js";
 import _poolKavuGlider from "../pool/kavu-glider.js";
 import _poolKazanduBlademaster from "../pool/kazandu-blademaster.js";
 import _poolKeeperOfTheLens from "../pool/keeper-of-the-lens.js";
+import _poolKefkaDancingMad from "../pool/kefka-dancing-mad.js";
 import _poolKeldonWarlord from "../pool/keldon-warlord.js";
 import _poolKenrithTheReturnedKing from "../pool/kenrith-the-returned-king.js";
 import _poolKillmongerScourgeOfWakanda from "../pool/killmonger-scourge-of-wakanda.js";
@@ -1402,6 +1403,7 @@ const shard: CardShard = {
     _poolKavuGlider,
     _poolKazanduBlademaster,
     _poolKeeperOfTheLens,
+    _poolKefkaDancingMad,
     _poolKeldonWarlord,
     _poolKenrithTheReturnedKing,
     _poolKillmongerScourgeOfWakanda,

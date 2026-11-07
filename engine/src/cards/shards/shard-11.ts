@@ -119,6 +119,7 @@ import _poolBroodOfCockroaches from "../pool/brood-of-cockroaches.js";
 import _poolBroodWeaver from "../pool/brood-weaver.js";
 import _poolBrushWithDeath from "../pool/brush-with-death.js";
 import _poolBuildersBlessing from "../pool/builders-blessing.js";
+import _poolBumiUnleashed from "../pool/bumi-unleashed.js";
 import _poolBurningPalmEfreet from "../pool/burning-palm-efreet.js";
 import _poolBurningTreeVandal from "../pool/burning-tree-vandal.js";
 import _poolCabalPaladin from "../pool/cabal-paladin.js";
@@ -1114,6 +1115,7 @@ const shard: CardShard = {
     _poolBroodWeaver,
     _poolBrushWithDeath,
     _poolBuildersBlessing,
+    _poolBumiUnleashed,
     _poolBurningPalmEfreet,
     _poolBurningTreeVandal,
     _poolCabalPaladin,

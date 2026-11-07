@@ -766,6 +766,7 @@ import _poolSkyScourer from "../pool/sky-scourer.js";
 import _poolSkyclaveBasilica from "../pool/skyclave-basilica.js";
 import _poolSkyspearCavalry from "../pool/skyspear-cavalry.js";
 import _poolSlaveringBranchsnapper from "../pool/slavering-branchsnapper.js";
+import _poolSlicerHighSpeedAntagonist from "../pool/slicer-high-speed-antagonist.js";
 import _poolSlimefootTheStowaway from "../pool/slimefoot-the-stowaway.js";
 import _poolSlithFirewalker from "../pool/slith-firewalker.js";
 import _poolSnakeCultInitiation from "../pool/snake-cult-initiation.js";
@@ -1771,6 +1772,7 @@ const shard: CardShard = {
     _poolSkyclaveBasilica,
     _poolSkyspearCavalry,
     _poolSlaveringBranchsnapper,
+    _poolSlicerHighSpeedAntagonist,
     _poolSlimefootTheStowaway,
     _poolSlithFirewalker,
     _poolSnakeCultInitiation,
