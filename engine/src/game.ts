@@ -30542,6 +30542,9 @@ export class Game {
           event.controller !== self.controller &&
           this.triggerFilterOk(spec.filter, event.object, self)
         );
+      case "player-loses-game":
+        // Rule 104.3: matched as they lose, before they leave (800.4a).
+        return event.type === "player-lost" && this.matchesWhoPlayer(spec.who, event.player, self);
       case "leaves-battlefield":
         // "Whenever one or more …": once, off the whole event.
         if (spec.batched === true) {
@@ -31494,7 +31497,7 @@ export class Game {
     if (who === "opponent") return self.controller !== player;
     // "Enchanted player" (a Curse): the player this Aura is attached to as
     // the event happened — as it last existed, if it has left.
-    if (who === "enchanted-player-controls") return false;
+    if (who === "enchanted-player-controls" || who === "chosen") return false;
     if (who === "attached") {
       const on =
         self.zone === "battlefield" ? self.attachedToPlayer : (self.lastKnown?.attachedToPlayer ?? self.attachedToPlayer);
@@ -31558,6 +31561,17 @@ export class Game {
       case "ring-bearer":
         // The Ring emblem's "your Ring-bearer" (rule 701.54e).
         return isRingBearer(this.state, self.controller, subject);
+      case "chosen": {
+        // "The chosen creature": this one's choice — as it last existed, if
+        // it has left — and only in the stint it was chosen in (rule 400.7).
+        // One that has just left is a zone change past that stint.
+        const chosen =
+          self.zone === "battlefield" ? self.chosenPermanent : (self.lastKnown?.chosenPermanent ?? self.chosenPermanent);
+        const object = this.state.objects[subject];
+        if (chosen === undefined || chosen.id !== subject || object === undefined) return false;
+        const stint = (object.zoneChangeCount ?? 0) - (lastKnown && object.zone !== "battlefield" ? 1 : 0);
+        return stint === chosen.stint;
+      }
       default:
         return false;
     }
@@ -33951,6 +33965,17 @@ export class Game {
       // it", its source blinked — `sourceLost`, rule 400.7) isn't "it".
       sacrificeSource: () =>
         opts.sourceLost === true ? false : this.sacrificeSourceByEffect(source, controller, refs.source),
+      rememberChosenPermanent: (chosen) => {
+        const on = this.state.objects[chosen];
+        if (on?.zone !== "battlefield") return;
+        this.emit({ type: "cards-chosen-from-zone", player: controller, objects: [chosen], chosenOnly: true });
+        const object = this.state.objects[source];
+        if (object?.zone !== "battlefield" || (refs.source !== undefined && refs.source !== (object.zoneChangeCount ?? 0))) {
+          return;
+        }
+        object.chosenPermanent = { id: chosen, stint: on.zoneChangeCount ?? 0 };
+        invalidateComputedCache();
+      },
       rememberChosenPlayer: (player, secret) => {
         const object = this.state.objects[source];
         if (object?.zone !== "battlefield" || (refs.source !== undefined && refs.source !== (object.zoneChangeCount ?? 0))) {
@@ -37578,25 +37603,28 @@ export class Game {
           this.attachPermanent(id, target);
         }
       },
-      transform: (target) => {
+      transform: (target, chosenPlayer) => {
         const t = this.splitTargetRef(target);
-        if (t.kind !== "object") return;
-        // Only a permanent transforms (rule 701.27a): one that has left the
-        // battlefield — an Incubator token that died with its "{2}: Transform
-        // this artifact" on the stack has ceased to exist — does nothing.
-        if (this.state.objects[t.object]?.zone !== "battlefield") return;
-        // Rule 701.27f: an ability of a permanent that has transformed since
-        // the ability was put on the stack (a delayed one: was created)
-        // doesn't transform it again.
-        const since = opts.transformSince;
-        const last = this.state.objects[t.object]?.transformedAtSeq;
-        if (t.object === source && since !== undefined && last !== undefined && last > since) return;
-        // Rules 702.145b, 702.145e: a daybound or nightbound permanent "can't
-        // transform except due to its daybound [nightbound] ability" — never
-        // by an effect (Tovolar, Dire Overlord's and Moonmist's rulings).
-        const keywords = computeCharacteristics(this.state, this.registry, t.object).keywords;
-        if (keywords.has("daybound") || keywords.has("nightbound")) return;
-        this.transformPermanent(t.object);
+        if (t.kind !== "object" || !this.effectCanTransform(t.object, source, opts.transformSince)) return;
+        this.transformPermanent(t.object, chosenPlayer);
+      },
+      transformChoice: (target) => {
+        if (target.kind !== "object" || !this.effectCanTransform(target.object, source, opts.transformSince)) return null;
+        const object = this.state.objects[target.object];
+        if (object.faces === undefined || !this.isTransformingDfc(target.object)) return null;
+        const into = object.faces[(object.face ?? 0) === 0 ? 1 : 0];
+        const choose = this.registry.has(into) ? this.registry.get(into).choosePlayerOnTransform : undefined;
+        if (choose === undefined) return null;
+        // Its controller chooses (rule 712.20: "you" is whoever controls it),
+        // among those still in the game, opponents first in turn order from
+        // the next — as "as this enters, choose" asks.
+        const chooser = object.controller;
+        const at = this.state.turnOrder.indexOf(chooser);
+        const rotated = [...this.state.turnOrder.slice(at + 1), ...this.state.turnOrder.slice(0, at + 1)];
+        const among = rotated.filter(
+          (p) => this.state.players[p]?.hasLost === false && (choose === "player" || p !== chooser),
+        );
+        return { chooser, among };
       },
       flip: (target) => {
         const t = this.splitTargetRef(target);
@@ -44900,16 +44928,48 @@ export class Game {
   }
 
   /**
-   * Transform `id` (rule 701.28) — turn a transforming DFC permanent over to
+   * Whether an effect of `source` — an ability put on the stack (a delayed
+   * one: created) at `since` — would transform the permanent `id` now.
+   */
+  private effectCanTransform(id: ObjectId, source: ObjectId, since: number | undefined): boolean {
+    // Only a permanent transforms (rule 701.27a): one that has left the
+    // battlefield — an Incubator token that died with its "{2}: Transform
+    // this artifact" on the stack has ceased to exist — does nothing.
+    const object = this.state.objects[id];
+    if (object?.zone !== "battlefield") return false;
+    // Rule 701.27f: an ability of a permanent that has transformed since
+    // the ability was put on the stack (a delayed one: was created)
+    // doesn't transform it again.
+    const last = object.transformedAtSeq;
+    if (id === source && since !== undefined && last !== undefined && last > since) return false;
+    // Rules 702.145b, 702.145e: a daybound or nightbound permanent "can't
+    // transform except due to its daybound [nightbound] ability" — never
+    // by an effect (Tovolar, Dire Overlord's and Moonmist's rulings).
+    const keywords = computeCharacteristics(this.state, this.registry, id).keywords;
+    return !keywords.has("daybound") && !keywords.has("nightbound");
+  }
+
+  /**
+   * Transform `id` (rule 701.27) — turn a transforming DFC permanent over to
    * its other face. Same object, same timestamp, same counters / attachments
    * (rule 712.10); characteristics recompute through `faceName`. A no-op for
    * anything that isn't a transforming DFC on the battlefield.
+   *
+   * `chosenPlayer`: the player chosen as it transforms into a face that says
+   * "as this transforms into [it], choose an opponent"
+   * (`CardDefinition.choosePlayerOnTransform` — rule 712.20: while it
+   * transforms, so before anything can see it), `null` for nobody. Kept as
+   * its `chosenPlayer`, replacing any earlier one.
    */
-  private transformPermanent(id: ObjectId): void {
+  private transformPermanent(id: ObjectId, chosenPlayer?: PlayerId | null): void {
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "battlefield") return;
     if (!this.isTransformingDfc(id)) return;
     object.face = (object.face ?? 0) === 0 ? 1 : 0;
+    if (chosenPlayer !== undefined && this.registry.get(rulesTextName(object)).choosePlayerOnTransform !== undefined) {
+      if (chosenPlayer === null) delete object.chosenPlayer;
+      else object.chosenPlayer = chosenPlayer;
+    }
     invalidateComputedCache();
     // Rule 712.20: an "As this transforms …" ability the permanent has after
     // it transforms applies while it's transforming, so before anything can

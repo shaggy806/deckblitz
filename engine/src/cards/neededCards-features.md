@@ -4839,6 +4839,18 @@ as it resolves, and how a card of two types uses the permissions needs its rulin
 hold. Plargg and Nassari needs `new:opponent-chooses-exiled`, Wand of Wonder the die's rows around an
 exile-until per opponent, Baron Helmut Zemo and Rod of Absorption their other keys.
 
+### A permanent chosen on resolution kept for a leaves trigger, a player chosen as it transforms, and a player losing the game — built 2026-11-07
+
+Keys `decision:remember-chosen-permanent-on-resolution`, `trigger:chosen-permanent-leaves`,
+`trigger:chosen-player-loses-game` (family `decision:choose-permanent`). No new decision kind:
+`choose-permanents { remember }` keeps the one chosen as the source's `chosenPermanent` and announces it
+(`cards-chosen-from-zone`, so `thisWay: "chosen"` spares it later in the resolution); `TriggerWho`'s
+`"chosen"` matches it, in the stint it was chosen in (rule 400.7); the card field
+`choosePlayerOnTransform` (rule 712.20) is asked as the `transform` effect resolves (a `choose-modes` of
+the transforming permanent's controller, only among two or more) and lands on `chosenPlayer`; the
+`player-loses-game` trigger (rule 104.3, conceding included) matches `player-lost` before the player leaves.
+Proving card: Zenos yae Galvus // Shinryu, Transcendent Rival (`chosen-permanent-leaves.test.ts`).
+
 ### An additional end step — built 2026-11-07
 
 Key `effect:additional-end-step`. The `additional-end-step` effect (rule 500.9) owes another end step straight

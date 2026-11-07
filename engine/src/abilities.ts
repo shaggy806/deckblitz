@@ -1074,6 +1074,14 @@ export type TriggerWho =
    * (Black Vise), whose step belongs to them — that player is then the
    * `"active-player"`. Where the subject is an object, nothing matches. */
   | "chosen-player"
+  /** "**The chosen creature**" — the permanent chosen for this one
+   * (`GameObject.chosenPermanent`, as this one last existed if it has left),
+   * in the stint it was chosen in: "when the chosen creature leaves the
+   * battlefield, transform Zenos yae Galvus". Once that permanent has left
+   * it's a new object the choice no longer names (rule 400.7), so a later
+   * entry of the same card doesn't match. Where the subject is a player,
+   * nothing matches. */
+  | "chosen"
   /** This ability's controller's **Ring-bearer** (rule 701.54a) — the Ring
    * emblem's "whenever your Ring-bearer attacks". */
   | "ring-bearer";
@@ -1307,6 +1315,16 @@ export type TriggerSpec =
       readonly on: "expend";
       readonly who: TriggerWho;
       readonly amount: number;
+    }
+  | {
+      /** A player lost the game (rule 104.3) — conceding is losing too
+       * (104.3a): "when **the chosen player** loses the game, you win the
+       * game" (Shinryu, Transcendent Rival — `who: "chosen-player"`). `who`
+       * is who lost. Matched as they lose, before they leave the game (800.4a),
+       * so a permanent they own still sees it; the trigger is this
+       * permanent's controller's, and a player who has left controls none. */
+      readonly on: "player-loses-game";
+      readonly who: TriggerWho;
     }
   | {
       /** A player lost life. `who` is whose life, `{ triggerValue: true }`

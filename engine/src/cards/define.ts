@@ -5888,6 +5888,15 @@ export interface CardDefinition {
    * permanent enters already showing this face. It can't target or ask
    * anything (Sephiroth, One-Winged Angel's emblem). `null` for normal cards. */
   readonly asTransformsInto: EffectSpec | null;
+  /** "As this creature transforms into [this face], choose an opponent"
+   * (rule 712.20 — Shinryu, Transcendent Rival), on the face named: its
+   * controller chooses among the players still in the game (`"opponent"`:
+   * their opponents), asked by the `transform` effect as it resolves and
+   * only among two or more, and the one chosen is kept as
+   * `GameObject.chosenPlayer` — what a `"chosen-player"` trigger subject,
+   * scope or filter reads. Not when it enters showing this face (it didn't
+   * transform). Unset for normal cards. */
+  readonly choosePlayerOnTransform?: "player" | "opponent";
   /** A flip card (rule 710): `faces` is its normal half then its alternative
    * (upside-down) half, each its own `CardDefinition` with this flag. It is
    * cast and lives everywhere as its normal half (710.2); a `flip` effect
@@ -6123,6 +6132,7 @@ const PRINTED_ABILITY: {
   asCast: (def) => def.asCast.length > 0,
   splitSecond: (def) => def.splitSecond,
   asTransformsInto: (def) => def.asTransformsInto !== null,
+  choosePlayerOnTransform: (def) => def.choosePlayerOnTransform !== undefined,
   copyOnEnter: (def) => def.copyOnEnter !== null,
   becomesOnEnter: (def) => def.becomesOnEnter !== null,
   exchangeTextOnEnter: (def) => def.exchangeTextOnEnter !== null,
@@ -6391,6 +6401,7 @@ interface CardDraft {
   asCast?: readonly AsCastFact[];
   splitSecond?: boolean;
   asTransformsInto?: EffectSpec;
+  choosePlayerOnTransform?: "player" | "opponent";
   copyOnEnter?: CopyOnEnter;
   becomesOnEnter?: BecomesOnEnter;
   exchangeTextOnEnter?: CardFilter;
@@ -6784,6 +6795,7 @@ function rareCardFields(draft: CardDraft) {
     ...(draft.flashIf !== undefined ? { flashIf: draft.flashIf } : {}),
     ...(draft.maxX !== undefined ? { maxX: draft.maxX } : {}),
     ...(draft.secretChoiceOnEnter === true ? { secretChoiceOnEnter: true as const } : {}),
+    ...(draft.choosePlayerOnTransform !== undefined ? { choosePlayerOnTransform: draft.choosePlayerOnTransform } : {}),
     ...(draft.entersUnderChosenPlayer === true ? { entersUnderChosenPlayer: true as const } : {}),
     ...(draft.asTurnedFaceUp !== undefined ? { asTurnedFaceUp: draft.asTurnedFaceUp } : {}),
     ...(draft.moreCycling !== undefined ? { moreCycling: draft.moreCycling } : {}),

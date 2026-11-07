@@ -2625,6 +2625,22 @@ export type EffectSpec =
        * pile, shuffle that pile, then cloak them". A token named more than once
        * from a stack holds one slot each. */
       readonly thenTogether?: true;
+      /** The one chosen is kept on the effect's source as "**the chosen
+       * creature**" (`GameObject.chosenPermanent`, replacing any earlier
+       * one), for its later abilities to name — Zenos yae Galvus's "When
+       * Zenos enters, choose a creature an opponent controls. …" and "When
+       * **the chosen creature** leaves the battlefield, transform Zenos"
+       * (a `who: "chosen"` trigger; the `"chosen"` target and scope read it
+       * too). Nothing is kept once the source has left the battlefield
+       * (rule 400.7), but the choice is still this resolution's: a later
+       * step's `{ not: { thisWay: "chosen" } }` spares it ("creatures other
+       * than … the chosen creature"). With `upTo: 1`. */
+      readonly remember?: true;
+    }
+  | {
+      /** Set only by the engine — a `choose-permanents`' `remember`, applied
+       * to the permanent chosen (target 0). Never authored. */
+      readonly kind: "remember-chosen-permanent";
     }
   | {
       /**
@@ -8869,9 +8885,16 @@ export type EffectSpec =
       /** Transform `target` — turn a transforming double-faced permanent over
        * to its other face (rule 701.28 / 712.10 — ROADMAP Phase 10b). No-op
        * for a permanent that isn't a transforming DFC. `"source"` transforms
-       * the ability's own permanent (a werewolf, "sacrifice …: transform ~"). */
+       * the ability's own permanent (a werewolf, "sacrifice …: transform ~").
+       * A face that says "as this transforms into [it], choose an opponent"
+       * (`CardDefinition.choosePlayerOnTransform`, rule 712.20 — Shinryu,
+       * Transcendent Rival) has its controller choose as this resolves, a
+       * `choose-modes` among the players, asked only among two or more. */
       readonly kind: "transform";
       readonly target: EffectTargetRef;
+      /** Set only by the engine: the player chosen for the face it turns
+       * into, `null` for nobody — the choice above, made. */
+      readonly chosenPlayer?: PlayerId | null;
     }
   | {
       /** Flip `target` (rule 710 — "flip this creature"): it gets the flipped
@@ -11725,6 +11748,12 @@ export interface EffectApi {
    * (`choose-opponent { remember }`) — nothing once it has left the
    * battlefield. */
   rememberChosenPlayer(player: PlayerId, secret?: true): void;
+  /** Keep `object` as the effect's source's "chosen creature"
+   * (`GameObject.chosenPermanent` — `choose-permanents { remember }`), and
+   * say who chose it (`cards-chosen-from-zone`, so `thisWay: "chosen"` reads
+   * it in this resolution). Kept only while the source is still on the
+   * battlefield as the object this resolution belongs to (rule 400.7). */
+  rememberChosenPermanent(object: ObjectId): void;
   /** An index in `0…count-1` (`count` > 0) picked with the game's seeded
    * randomness, and announced as a `chosen-at-random` event naming what
    * `pick` says the index stands for — a `random` choice: `choose-opponent`,
@@ -13099,8 +13128,15 @@ export interface EffectApi {
    * `attach` effect's `ontoChosen`. */
   attachableHosts(attachment: ObjectId, filter: CardFilter, another: boolean): readonly ObjectId[];
   /** Transform `target` (a transforming DFC permanent) — see the `"transform"`
-   * {@link EffectSpec}. */
-  transform(target: TargetRef): void;
+   * {@link EffectSpec}. `chosenPlayer`: the player chosen as it transforms
+   * into a face with `choosePlayerOnTransform` (`null`: nobody could be). */
+  transform(target: TargetRef, chosenPlayer?: PlayerId | null): void;
+  /** If `target` would transform now, and the face it would turn into says
+   * "as this transforms into …, choose a player / an opponent"
+   * (`CardDefinition.choosePlayerOnTransform`): who chooses, and among whom
+   * (the players still in the game, opponents of the chooser for
+   * `"opponent"`). `null` when it wouldn't transform or chooses nobody. */
+  transformChoice(target: TargetRef): { readonly chooser: PlayerId; readonly among: readonly PlayerId[] } | null;
   /** Flip `target` — see the `"flip"` {@link EffectSpec}. */
   flip(target: TargetRef): void;
   /** The permanents `targets` become copies of `of` — see the
@@ -16524,6 +16560,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       );
       return;
     }
+    case "remember-chosen-permanent": {
+      const chosen = ctx.targets[0];
+      if (chosen?.kind === "object") ctx.rememberChosenPermanent(chosen.object);
+      return;
+    }
     case "about-player":
       if (!ctx.playersInScope("each-player").includes(spec.player)) return;
       if (spec.remember === true) ctx.rememberChosenPlayer(spec.player, spec.secret);
@@ -16647,7 +16688,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.filter,
         Math.max(0, Math.floor(amountValue(spec.min ?? 0, ctx))),
         amountValue(spec.upTo, ctx),
-        spec.then,
+        spec.remember === true
+          ? { kind: "sequence", effects: [{ kind: "remember-chosen-permanent" }, spec.then] }
+          : spec.then,
         spec.prompt,
         spec.exceptSource,
         except,
@@ -19841,7 +19884,26 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "transform": {
       const target = resolveEffectTarget(spec.target, ctx);
-      if (target !== undefined) ctx.transform(target);
+      if (target === undefined) return;
+      if (spec.chosenPlayer !== undefined) {
+        ctx.transform(target, spec.chosenPlayer);
+        return;
+      }
+      // "As this transforms into [it], choose an opponent" (rule 712.20):
+      // its controller chooses as it transforms, asked only among two or more.
+      const choice = ctx.transformChoice(target);
+      if (choice === null || choice.among.length <= 1) {
+        ctx.transform(target, choice === null ? undefined : (choice.among[0] ?? null));
+        return;
+      }
+      ctx.asPlayer(choice.chooser).chooseModes(
+        1,
+        1,
+        choice.among.map((player) => ({
+          text: `Choose ${player.charAt(0).toUpperCase()}${player.slice(1)}`,
+          effect: { kind: "transform", target: spec.target, chosenPlayer: player },
+        })),
+      );
       return;
     }
     case "flip": {

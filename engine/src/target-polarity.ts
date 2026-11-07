@@ -241,6 +241,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     if (n.thenAnother !== undefined) v.child(n.thenAnother);
   },
   "about-player": (n, v) => v.child(n.effect),
+  "remember-chosen-permanent": none,
   "offer-zone-choice": none,
   // `keepTargets`: `then` reads the chosen permanent at 0 and the targets from
   // slot 1 (Crush Underfoot).
