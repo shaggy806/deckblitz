@@ -4969,6 +4969,14 @@ export type EffectSpec =
        */
       readonly upTo?: EffectAmount;
       /**
+       * "An opponent chooses a nonland card exiled this way. You may cast up
+       * to two spells from among **the other** cards exiled this way"
+       * (Plargg and Nassari): the cards chosen so far in this resolution (the
+       * `"chosen"` {@link ThisWayKind} — an earlier `look-and-choose` with
+       * `destination: "stay"`, whoever chose) are left out of `from`'s cards.
+       */
+      readonly exceptChosen?: true;
+      /**
        * With `repeat`: "you may cast any number of spells **with total mana
        * value 10 or less** from among them" (Primeval Spawn): a running total
        * — only a spell whose mana value (at X = 0, rule 107.3b, as the spell
@@ -14622,6 +14630,11 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
       cards = ctx.exiledOwnedWithCounter(ctx.controller, from.exiledOwnedWithCounter);
     } else {
       cards = typeof from === "object" ? looked : ctx.cardsIn(ctx.controller, from);
+    }
+    // "The other cards": the ones chosen this way are passed over.
+    if (spec.exceptChosen === true) {
+      const chosen = new Set(ctx.thisWay("chosen").map((entry) => entry.object));
+      cards = cards.filter((id) => !chosen.has(id));
     }
     if (spec.copies !== undefined) {
       cards = ctx.copyCards(cards, Math.max(0, Math.floor(amountValue(spec.copies, ctx))));

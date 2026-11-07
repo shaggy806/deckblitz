@@ -1409,6 +1409,7 @@
   "effect:look-and-choose-enters-with-counters",
   "effect:opponent-chooses-cards-from-hand",
   "effect:opponent-chooses-exiled",
+  "effect:opponent-chooses-exiled-this-way-excluded",
   "effect:opponent-chooses-from-found",
   "effect:defending-player-chooses-from-your-graveyard",
   "effect:opponent-chooses-from-graveyard",

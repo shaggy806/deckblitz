@@ -4732,6 +4732,13 @@ as it resolves, and how a card of two types uses the permissions needs its rulin
 hold. Plargg and Nassari needs `new:opponent-chooses-exiled`, Wand of Wonder the die's rows around an
 exile-until per opponent, Baron Helmut Zemo and Rod of Absorption their other keys.
 
+### An opponent's pick left out of the free casts — built 2026-11-07
+
+Key `effect:opponent-chooses-exiled-this-way-excluded` (family `effect:choices-by-other-players`). No new
+decision: a `look-and-choose` over `zone: "exiled-this-way"` with `chooser: "an-opponent"` and
+`destination: "stay"` records the pick (the `"chosen"` this-way kind), and the next step's `cast-now`
+takes `exceptChosen: true`, passing those cards over. Proving card: Plargg and Nassari.
+
 ### What restricted mana may pay for, and one type of mana spent as a colour — built 2026-11-02
 
 The need-keys Phase 2 family `cost:mana-spending-rules`, features only. `ManaSpendOnly.purposes` /

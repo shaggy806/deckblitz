@@ -6,10 +6,34 @@
  */
 import { describe, expect, it } from "vitest";
 
+import type { Action, LegalAction } from "../actions.js";
+import type { ScriptedController } from "../controller.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 import type { TargetRef } from "../target.js";
-import { A, B, cast, counters, destroy, hand, lands, life, nextTurn, pickTargets, ref, spawn, table, toHand, zone } from "./harness.js";
+import {
+  A,
+  B,
+  C,
+  D,
+  cast,
+  controller,
+  counters,
+  destroy,
+  hand,
+  lands,
+  life,
+  nextTurn,
+  pickTargets,
+  ref,
+  settle,
+  spawn,
+  table,
+  toHand,
+  toLibrary,
+  toStep,
+  zone,
+} from "./harness.js";
 
 /** `source` deals `amount` noncombat damage to `to`. */
 const hit = (game: Game, source: ObjectId, to: TargetRef, amount: number): void =>
@@ -82,5 +106,77 @@ describe("Heroic Sacrifice", () => {
     pickTargets(a, bears);
     destroy(game, giant);
     expect(hand(game).length).toBe(before);
+  });
+});
+
+type Offer = Extract<LegalAction, { kind: "cast-now" }>;
+type Cast = Extract<Action, { type: "cast-spell" }>;
+
+/** The seat casts `want` in turn, by name, then declines, recording each offer. */
+function casting(seat: ScriptedController, want: readonly string[]): Offer[] {
+  const offers: Offer[] = [];
+  const left = [...want];
+  seat.chooseCastNowFn = (_view, offer): Cast | null => {
+    offers.push(offer);
+    const name = left.shift();
+    if (name === undefined) return null;
+    const way = offer.casts.find((c) => c.cardName === name);
+    if (way === undefined) throw new Error(`${name} isn't on offer: ${offer.casts.map((c) => c.cardName).join(", ")}`);
+    return { type: "cast-spell", player: A, card: way.card, targets: [], via: "effect", free: true };
+  };
+  return offers;
+}
+const offeredNames = (offer: Offer): readonly string[] => [...new Set(offer.casts.map((c) => c.cardName))].sort();
+
+describe("Plargg and Nassari", () => {
+  it("an opponent picks one nonland card exiled this way, and you may cast the others but not that one", () => {
+    const { game, a, b } = table();
+    spawn(game, "Plargg and Nassari");
+    toStep(game, "upkeep");
+    const divination = toLibrary(game, "Divination");
+    const bears = toLibrary(game, "Grizzly Bears", B);
+    const wastes = toLibrary(game, "Wastes", B);
+    let seen: readonly ObjectId[] = [];
+    b.chooseFromZoneFn = (_view, eligible) => {
+      seen = eligible;
+      return [divination];
+    };
+    const offers = casting(a, ["Grizzly Bears"]);
+    settle(game);
+    // Only the nonland cards are the opponent's to choose among.
+    expect([...seen].sort()).toEqual([divination, bears].sort());
+    expect(offers).toHaveLength(1);
+    expect(offeredNames(offers[0])).toEqual(["Grizzly Bears"]);
+    expect(zone(game, bears)).toBe("battlefield");
+    expect(controller(game, bears)).toBe(A);
+    // The chosen card and the land stay in exile.
+    expect(zone(game, divination)).toBe("exile");
+    expect(zone(game, wastes)).toBe("exile");
+  });
+
+  it("with three opponents, you pick who chooses, and at most two spells are cast", () => {
+    const { game, a, b, c, d } = table({ players: 4 });
+    spawn(game, "Plargg and Nassari");
+    toStep(game, "upkeep");
+    const divination = toLibrary(game, "Divination");
+    const bears = toLibrary(game, "Grizzly Bears", B);
+    const giant = toLibrary(game, "Hill Giant", C);
+    const whisper = toLibrary(game, "Night's Whisper", D);
+    a.chooseModesFn = () => [1];
+    const refuse = (): never => {
+      throw new Error("the wrong opponent was asked");
+    };
+    b.chooseFromZoneFn = refuse;
+    d.chooseFromZoneFn = refuse;
+    c.chooseFromZoneFn = () => [divination];
+    const offers = casting(a, ["Grizzly Bears", "Hill Giant"]);
+    settle(game);
+    expect(offers).toHaveLength(2);
+    expect(offeredNames(offers[0])).toEqual(["Grizzly Bears", "Hill Giant", "Night's Whisper"]);
+    expect(offers.map((o) => o.castsLeft)).toEqual([2, 1]);
+    expect(zone(game, bears)).toBe("battlefield");
+    expect(zone(game, giant)).toBe("battlefield");
+    expect(zone(game, whisper)).toBe("exile");
+    expect(zone(game, divination)).toBe("exile");
   });
 });
