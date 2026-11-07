@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4657 already implemented / 343 missing (marks refreshed 2026-11-07)
+4660 already implemented / 340 missing (marks refreshed 2026-11-07)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -3692,7 +3692,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3699  Seal of Primordium                       {1}{G}           Enchantment
 [x]  3700  Diluvian Primordial                      {5}{U}{U}        Creature — Avatar
 [x]  3701  Lord of Extinction                       {3}{B}{G}        Creature — Elemental
-[ ]  3702  The Wise Mothman                         {1}{B}{G}{U}     Legendary Creature — Insect Mutant
+[x]  3702  The Wise Mothman                         {1}{B}{G}{U}     Legendary Creature — Insect Mutant
 [x]  3703  Astarion's Thirst                        {3}{B}           Instant
 [x]  3704  Ambition's Cost                          {3}{B}           Sorcery
 [x]  3705  Haunting Voyage                          {4}{B}{B}        Sorcery
@@ -4135,7 +4135,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4142  Hidden Strings                           {1}{U}           Sorcery
 [x]  4143  Merfolk Sovereign                        {1}{U}{U}        Creature — Merfolk Noble
 [x]  4144  Kor Cartographer                         {3}{W}           Creature — Kor Scout
-[ ]  4145  Mirelurk Queen                           {4}{U}           Creature — Crab Mutant
+[x]  4145  Mirelurk Queen                           {4}{U}           Creature — Crab Mutant
 [x]  4146  Extinguisher Battleship                  {8}              Artifact — Spacecraft
 [x]  4147  Assault Suit                             {4}              Artifact — Equipment
 [x]  4148  Dawn of a New Age                        {1}{W}           Enchantment
@@ -4377,7 +4377,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4384  Tezzeret, Artifice Master                {3}{U}{U}        Legendary Planeswalker — Tezzeret
 [x]  4385  Moss Diamond                             {2}              Artifact
 [x]  4386  Tidal Barracuda                          {3}{U}           Creature — Fish
-[ ]  4387  Tato Farmer                              {2}{G}           Creature — Zombie Mutant Peasant
+[x]  4387  Tato Farmer                              {2}{G}           Creature — Zombie Mutant Peasant
 [x]  4388  Ajani, Caller of the Pride               {1}{W}{W}        Legendary Planeswalker — Ajani
 [x]  4389  Deeproot Waters                          {2}{U}           Enchantment
 [x]  4390  Mjölnir, Hammer of Thor                  {3}{R}           Legendary Artifact — Equipment

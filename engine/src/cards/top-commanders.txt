@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-471 already implemented / 29 missing
+472 already implemented / 28 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -21,7 +21,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   15  Pantlaza, Sun-Favored                          36786 decks  {2}{R}{G}{W}     Legendary Creature — Dinosaur
 [x]   16  Lathril, Blade of the Elves                    35764 decks  {2}{B}{G}        Legendary Creature — Elf Noble
 [x]   17  Giada, Font of Hope                            34983 decks  {1}{W}           Legendary Creature — Angel
-[ ]   18  The Wise Mothman                               33672 decks  {1}{B}{G}{U}     Legendary Creature — Insect Mutant
+[x]   18  The Wise Mothman                               33672 decks  {1}{B}{G}{U}     Legendary Creature — Insect Mutant
 [x]   19  Jodah, the Unifier                             33117 decks  {W}{U}{B}{R}{G}  Legendary Creature — Human Wizard
 [x]   20  Toph, the First Metalbender                    32837 decks  {1}{R}{G}{W}     Legendary Creature — Human Warrior Ally
 [x]   21  Nekusar, the Mindrazer                         32372 decks  {2}{U}{B}{R}     Legendary Creature — Zombie Wizard
