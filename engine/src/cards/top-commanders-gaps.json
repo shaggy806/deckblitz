@@ -1941,7 +1941,9 @@
   "static:unpreventable-damage-and-global-wither",
   "effect:linked-exile-return",
   "effect:linked-exile-return",
-  "bug:return-without-abilities-as-it-enters"
+  "bug:return-without-abilities-as-it-enters",
+  "cost:colorless-hybrid-mana",
+  "keyword:devoid"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

@@ -7692,6 +7692,31 @@ export type EffectSpec =
     }
   | {
       /**
+       * "Copy all spells you control" / "copy all **other** activated and
+       * triggered abilities you control" (rule 707.10 — Ulalek, Fused
+       * Atrocity): each spell, or each ability other than the one resolving,
+       * that this effect's controller controls on the stack as it applies,
+       * copied once — the copies it makes aren't copied again. An object
+       * standing for several identical abilities (`stackCount`) is that many.
+       * Each copy is its own instruction to copy a spell (Twinning Staff's
+       * replacement applies to each). With two or more left, the controller
+       * chooses which is copied next, one at a time (a `choose-modes`
+       * question), as 707.10d has them order the copies "for each" makes;
+       * with `newTargets` each copy's new targets are asked as it's made
+       * (707.10c). Mana abilities never use the stack, so are never copied.
+       */
+      readonly kind: "copy-all";
+      readonly what: "spells" | "other-abilities";
+      readonly newTargets?: true;
+      /** Only the engine sets this: the stack objects still to copy (one
+       * entry per ability instance), and the one chosen to go next. */
+      readonly progress?: {
+        readonly left: readonly { readonly id: ObjectId; readonly name: string }[];
+        readonly next?: number;
+      };
+    }
+  | {
+      /**
        * Change the targets of the spell or ability in target slot `target`
        * (rule 115.7), this effect's controller choosing, each new target one
        * that spell or ability could legally have as its controller would
@@ -12857,6 +12882,11 @@ export interface EffectApi {
   /** Copy the spell at `TargetRef` on the stack — see the `copy-spell`
    * {@link EffectSpec}. */
   copySpell(target: TargetRef, newTargets: boolean, controller?: PlayerId, change?: SpellCopyChange): void;
+  /** What a `copy-all` copies, as it begins: this effect's controller's
+   * spells on the stack, bottom first, or the activated and triggered
+   * abilities they control there other than the one resolving — an id once
+   * per ability instance (`stackCount`). Each with its name, for asking. */
+  stackObjectsToCopy(what: "spells" | "other-abilities"): readonly { readonly id: ObjectId; readonly name: string }[];
   /** Run one instruction to copy a spell, however many copies it makes: a
    * `would-copy-spell` replacement applies to the instruction, not to each
    * copy (Twinning Staff). */
@@ -19354,6 +19384,50 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       const target = spec.target === "trigger-ability" ? "trigger-ability" : ctx.targets[spec.target];
       if (target === undefined || target === null) return;
       for (let i = 0; i < times; i += 1) ctx.copyAbility(target, spec.newTargets === true);
+      return;
+    }
+    case "copy-all": {
+      const parked = ctx.parkedCount();
+      const newTargets = spec.newTargets === true;
+      let left = spec.progress?.left ?? ctx.stackObjectsToCopy(spec.what);
+      const copyOne = (id: ObjectId): void => {
+        const target = { kind: "object", object: id } as const;
+        if (spec.what === "spells") ctx.spellCopyEvent(() => ctx.copySpell(target, newTargets));
+        else ctx.copyAbility(target, newTargets);
+      };
+      const next = spec.progress?.next;
+      if (next !== undefined && left[next] !== undefined) {
+        copyOne(left[next].id);
+        left = left.filter((_, i) => i !== next);
+      }
+      while (left.length > 0) {
+        // A copy's new targets are asked before the next is chosen or made.
+        if (ctx.decisionPending()) {
+          ctx.resumeAfterDecisions({ kind: "copy-all", what: spec.what, ...(newTargets ? { newTargets: true } : {}), progress: { left } }, parked);
+          return;
+        }
+        // Which goes next is the controller's (rule 707.10d's order), unless
+        // every one left is an instance of one stacked ability.
+        if (left.length > 1 && new Set(left.map((o) => o.id)).size > 1) {
+          const remaining = left;
+          ctx.chooseModes(
+            1,
+            1,
+            remaining.map((o, i) => ({
+              text: `Copy ${o.name} next`,
+              effect: {
+                kind: "copy-all",
+                what: spec.what,
+                ...(newTargets ? { newTargets: true as const } : {}),
+                progress: { left: remaining, next: i },
+              },
+            })),
+          );
+          return;
+        }
+        copyOne(left[0].id);
+        left = left.slice(1);
+      }
       return;
     }
     case "additional-combat": {

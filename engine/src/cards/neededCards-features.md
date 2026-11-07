@@ -4927,6 +4927,18 @@ layer-6 loss on the entry modifier, and `GameObject.enterChoice.withoutAbilities
 entries), which `entersWithoutAbilities` reads as it reads Humility's: no Clone copy, no "enters tapped", no
 counters of its own, and no enters trigger (rule 614.12, the ruling). Proving card: Xu-Ifit, Osteoharmonist.
 
+### Colorless hybrid mana, and copying everything you control on the stack — built 2026-11-07
+
+Keys `cost:colorless-hybrid-mana` and `keyword:devoid`. `parseManaCost` reads `{C/W}`-style symbols as a
+hybrid pip of `{ kind: "colorless" }` and its colour (rule 107.4e: paid with one colorless mana or one of its
+colour, a symbol of that colour, mana value 1 — 202.3f), which payment, cost reductions and colour identity
+already handled through the widened-pip path. Devoid needed nothing: the pool writes it as `colors: []` with
+the keyword line in `text` (702.114a). The new `copy-all` effect is "copy all spells you control, then copy
+all other activated and triggered abilities you control": each copied once, the resolving ability left out
+(`Game.resolvingAbilities`, or a parked one's `leaveStack`), the controller picking which goes next among two
+or more by `choose-modes`. Proving card: Ulalek, Fused Atrocity. Benthic Anomaly and Corrupted Crossroads,
+on `keyword:devoid` alone, go to `author-freed`.
+
 ### What restricted mana may pay for, and one type of mana spent as a colour — built 2026-11-02
 
 The need-keys Phase 2 family `cost:mana-spending-rules`, features only. `ManaSpendOnly.purposes` /

@@ -310,8 +310,9 @@ export type HybridOption =
    * life rather than pay that mana" (`withLifeForPips`) — compleated (rule
    * 702.150a) doesn't count it. */
   | { readonly kind: "phyrexian"; readonly rather?: true }
-  /** Colorless mana, only ever on a pip a payment widened (`pipsAsSpendable`
-   * — no printed hybrid symbol has it). */
+  /** Colorless mana specifically (rule 107.4c): the `{C}` half of a
+   * colorless hybrid symbol (`{C/W}` — rule 107.4, Ulalek, Fused Atrocity),
+   * or a pip a payment widened (`pipsAsSpendable`). */
   | { readonly kind: "colorless" };
 
 /** A single hybrid pip: the alternative payments it accepts, in the symbol's
@@ -353,11 +354,15 @@ function isColor(value: string): value is Color {
   );
 }
 
-/** Parse one `/`-joined pip body (`"W/U"`, `"2/W"`, `"W/P"`, `"G/U/P"`). */
+/** Parse one `/`-joined pip body (`"W/U"`, `"2/W"`, `"W/P"`, `"G/U/P"`,
+ * `"C/W"`). A `{C/W}` is white (rule 107.4e — a hybrid symbol is all of its
+ * component colours, and colorless is none), mana value 1 (202.3f), and paid
+ * with one colorless mana or one white. */
 function parseHybridPip(body: string): HybridPip {
   return body.split("/").map((part): HybridOption => {
     if (/^\d+$/.test(part)) return { kind: "generic", amount: Number(part) };
     if (part === "P") return { kind: "phyrexian" };
+    if (part === "C") return { kind: "colorless" };
     if (isColor(part)) return { kind: "color", color: part };
     throw new Error(`unsupported mana symbol: {${body}}`);
   });
@@ -578,7 +583,7 @@ export function reducedBy(cost: ManaCost, by: ManaCostReduction): ManaCost {
  */
 export function manaCostReductions(symbols: string | null, spell: ManaCost): readonly ManaCostReduction[] {
   const cost = parseManaCost(symbols);
-  type Half = { readonly color: Color } | { readonly generic: number };
+  type Half = { readonly color: Color } | { readonly generic: number } | { readonly colorless: true };
   const ways = cost.hybrid.reduce<(readonly Half[])[]>(
     (sofar, pip) =>
       sofar.flatMap((way) =>
@@ -587,7 +592,9 @@ export function manaCostReductions(symbols: string | null, spell: ManaCost): rea
             ? [[...way, { color: option.color }]]
             : option.kind === "generic"
               ? [[...way, { generic: option.amount }]]
-              : [],
+              : option.kind === "colorless"
+                ? [[...way, { colorless: true }]]
+                : [],
         ),
       ),
     [[]],
@@ -595,16 +602,18 @@ export function manaCostReductions(symbols: string | null, spell: ManaCost): rea
   const reductions = ways.map((way): ManaCostReduction => {
     const colors = { ...cost.colored };
     let generic = cost.generic + cost.snow;
+    let colorless = cost.colorless;
     for (const half of way) {
       if ("color" in half) colors[half.color] += 1;
+      else if ("colorless" in half) colorless += 1;
       else generic += half.generic;
     }
     const text = [
       generic > 0 ? `{${generic}}` : "",
-      "{C}".repeat(cost.colorless),
+      "{C}".repeat(colorless),
       ...COLORS.map((color) => `{${color}}`.repeat(colors[color])),
     ].join("");
-    return { generic, colors, colorless: cost.colorless, text };
+    return { generic, colors, colorless, text };
   });
   const left = reductions.map((reduction) => reducedBy(spell, reduction));
   /** Whatever pays `a` pays `b`: `b` asks no more of any type, nor more mana. */

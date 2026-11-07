@@ -1993,6 +1993,11 @@ export class Game {
    * rest of it isn't offered that. */
   private resolvingTrigger: { readonly object: ObjectId; readonly signature: string } | null =
     null;
+  /** The abilities resolving right now, outermost first — one instance of
+   * each, still on the stack until its resolution is done (rule 608.2n), so
+   * not one of the "other" abilities a `copy-all` copies. Not game state: it
+   * only spans their resolutions; a parked one is known by its `leaveStack`. */
+  private resolvingAbilities: ObjectId[] = [];
 
   /** What simultaneous damage owes once it has all been dealt (see {@link
    * withDamageBatch}): lifelink life gain per source, and the "whenever this
@@ -28477,6 +28482,7 @@ export class Game {
     const outerTrigger = this.resolvingTrigger;
     const signature = this.triggerSignature(object);
     this.resolvingTrigger = signature === null ? null : { object: id, signature };
+    this.resolvingAbilities.push(id);
     try {
       this.withDecisionSource(source, () => {
         if (ability.resolve !== null) {
@@ -28488,6 +28494,7 @@ export class Game {
     } finally {
       this.resolvingSourceTimestamp = outerSourceTimestamp;
       this.resolvingTrigger = outerTrigger;
+      this.resolvingAbilities.pop();
     }
     if (object.abilityKind === "chapter") {
       const chapters = this.registry.get(rulesTextName(object)).chapters ?? [];
@@ -37102,6 +37109,7 @@ export class Game {
           opts,
         ),
       copySpell: (target, newTargets, by, change) => this.copySpellByEffect(by ?? controller, target, newTargets, change),
+      stackObjectsToCopy: (what) => this.stackObjectsToCopy(controller, what),
       changeTargets: (target, how, toSource, optional) =>
         this.changeStackTargets(controller, source, target, how, toSource, optional),
       gainControlOfSpell: (target) => this.gainControlOfSpell(controller, target),
@@ -43227,6 +43235,51 @@ export class Game {
         this.shuffleLibraryOf(owner);
         return;
     }
+  }
+
+  /**
+   * What a `copy-all` of `controller`'s copies (rule 707.10 — Ulalek, Fused
+   * Atrocity): their spells on the stack, or their activated and triggered
+   * abilities there other than one instance of each resolving now (still on
+   * the stack until done, rule 608.2n), bottom first. An ability object
+   * standing for several (`stackCount`) is listed once per instance. Each is
+   * named with what it targets, for the controller choosing the order.
+   */
+  private stackObjectsToCopy(
+    controller: PlayerId,
+    what: "spells" | "other-abilities",
+  ): { readonly id: ObjectId; readonly name: string }[] {
+    const resolving = [
+      ...this.resolvingAbilities,
+      ...this.state.suspendedResolutions.flatMap((s) =>
+        s.effect === null && s.leaveStack !== undefined ? [s.leaveStack] : [],
+      ),
+    ];
+    const label = (object: GameObject): string => {
+      const source = object.sourceObjectId == null ? undefined : this.state.objects[object.sourceObjectId];
+      const name =
+        object.kind === "ability" ? `${source !== undefined ? nameOf(source) : object.cardName}'s ability` : nameOf(object);
+      const aimed = (object.targets ?? []).flatMap((t) =>
+        t === null || t === undefined
+          ? []
+          : t.kind === "player"
+            ? [String(t.player)]
+            : this.state.objects[t.object] !== undefined
+              ? [nameOf(this.state.objects[t.object])]
+              : [],
+      );
+      return aimed.length > 0 ? `${name} (targeting ${aimed.join(", ")})` : name;
+    };
+    const out: { id: ObjectId; name: string }[] = [];
+    for (const id of this.state.zones.shared.stack) {
+      const object = this.state.objects[id];
+      if (object === undefined || object.controller !== controller) continue;
+      if ((what === "spells") === (object.kind === "ability")) continue;
+      const instances =
+        what === "spells" ? 1 : (object.stackCount ?? 1) - resolving.filter((r) => r === id).length;
+      for (let i = 0; i < instances; i += 1) out.push({ id, name: label(object) });
+    }
+    return out;
   }
 
   /** Twincast (rule 707.10): copy the spell `target`. */

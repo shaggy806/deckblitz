@@ -474,6 +474,7 @@ Parsed by `parseManaCost` (`mana.ts`). Symbols, in `{…}`:
 | `{X}` | see below |
 | `{W/U}` | hybrid — either half |
 | `{2/W}` | twobrid — `{2}` or `{W}` |
+| `{C/W}` | colorless hybrid — `{C}` (colorless mana only) or `{W}`; a white symbol, mana value 1 (Ulalek, Fused Atrocity) |
 | `{W/P}` | Phyrexian — `{W}` or 2 life |
 | `{S}` | snow (rule 107.4h) — one mana of any type made by a snow source (a permanent with the `snow` supertype); no generic reduction touches it; counts 1 toward mana value. "The amount of {S} spent to cast this spell" is `{ manaSpentOf: "source", from: { supertype: "snow" } }` (Graven Lore, Tundra Fumarole); "if {S} was spent" is a `source` condition on `{ manaFrom: { supertype: "snow" } }` (Berg Strider). |
 
@@ -1866,6 +1867,13 @@ copy's controller. A delayed trigger's captured objects ("that creature",
 carried in its target slots) aren't targets, and stay. Neither copy is ever
 offered itself as a new target (rule 115.5) — a copy of Lithoform Engine's
 ability, or of Increasing Vengeance, could otherwise aim at itself.
+
+`copy-all { what: "spells" | "other-abilities", newTargets? }` is "copy all spells you control" /
+"copy all **other** activated and triggered abilities you control" (Ulalek, Fused Atrocity — the
+two in a `sequence` for "…, then …"): each one the effect's controller has on the stack as it
+begins, copied once (a stacked ability once per instance; the resolving ability left out), the
+copies themselves never copied again. With two or more left the controller picks which goes next
+(a `choose-modes` question), and `newTargets` asks each copy's new targets as it's made.
 
 `exile-spell-as-it-resolves` is Feather, the Redeemed's "exile that card instead of putting it
 into your graveyard as it resolves. If you do, return it to your hand at the beginning of the
