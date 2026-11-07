@@ -4771,8 +4771,10 @@ import _poolCollationTrimatrix from "./pool/collation-trimatrix.js";
 import _poolCollectedCompany from "./pool/collected-company.js";
 import _poolCollectedConjuring from "./pool/collected-conjuring.js";
 import _poolCollectiveBlessing from "./pool/collective-blessing.js";
+import _poolCollectiveBrutality from "./pool/collective-brutality.js";
 import _poolCollectiveDefiance from "./pool/collective-defiance.js";
 import _poolCollectiveDrone from "./pool/collective-drone.js";
+import _poolCollectiveEffort from "./pool/collective-effort.js";
 import _poolCollectiveInferno from "./pool/collective-inferno.js";
 import _poolCollectiveNightmare from "./pool/collective-nightmare.js";
 import _poolCollectiveOverride from "./pool/collective-override.js";
@@ -5767,6 +5769,7 @@ import _poolDanceOfTheDead from "./pool/dance-of-the-dead.js";
 import _poolDanceOfTheManse from "./pool/dance-of-the-manse.js";
 import _poolDanceOfTheSkywise from "./pool/dance-of-the-skywise.js";
 import _poolDanceOfTheTumbleweeds from "./pool/dance-of-the-tumbleweeds.js";
+import _poolDanceWithCalamity from "./pool/dance-with-calamity.js";
 import _poolDanceWithDevils from "./pool/dance-with-devils.js";
 import _poolDancersChakrams from "./pool/dancers-chakrams.js";
 import _poolDancingFromDarkToDawn from "./pool/dancing-from-dark-to-dawn.js";
@@ -7924,6 +7927,7 @@ import _poolEmperorCrocodile from "./pool/emperor-crocodile.js";
 import _poolEmperorMihailIi from "./pool/emperor-mihail-ii.js";
 import _poolEmperorOfBones from "./pool/emperor-of-bones.js";
 import _poolEmperorsVanguard from "./pool/emperors-vanguard.js";
+import _poolEmpoweredAutogenerator from "./pool/empowered-autogenerator.js";
 import _poolEmpressGalina from "./pool/empress-galina.js";
 import _poolEmptiness from "./pool/emptiness.js";
 import _poolEmptyCityRuse from "./pool/empty-city-ruse.js";
@@ -10883,6 +10887,7 @@ import _poolGodsire from "./pool/godsire.js";
 import _poolGodtoucher from "./pool/godtoucher.js";
 import _poolGodtrackerOfJund from "./pool/godtracker-of-jund.js";
 import _poolGogglesOfNight from "./pool/goggles-of-night.js";
+import _poolGogoMasterOfMimicry from "./pool/gogo-master-of-mimicry.js";
 import _poolGogoMysteriousMime from "./pool/gogo-mysterious-mime.js";
 import _poolGohamDjinn from "./pool/goham-djinn.js";
 import _poolGohnTownOfRuin from "./pool/gohn-town-of-ruin.js";
@@ -19362,6 +19367,7 @@ import _poolPlaneswalkersFury from "./pool/planeswalkers-fury.js";
 import _poolPlaneswalkersMirth from "./pool/planeswalkers-mirth.js";
 import _poolPlaneswalkersMischief from "./pool/planeswalkers-mischief.js";
 import _poolPlanetKiller from "./pool/planet-killer.js";
+import _poolPlanetariumOfWanShiTong from "./pool/planetarium-of-wan-shi-tong.js";
 import _poolPlanetaryAnnihilation from "./pool/planetary-annihilation.js";
 import _poolPlanetaryBombardment from "./pool/planetary-bombardment.js";
 import _poolPlanetaryPatrol from "./pool/planetary-patrol.js";
@@ -22691,6 +22697,7 @@ import _poolSedraxisAlchemist from "./pool/sedraxis-alchemist.js";
 import _poolSedraxisSpecter from "./pool/sedraxis-specter.js";
 import _poolSedrisTheTraitorKing from "./pool/sedris-the-traitor-king.js";
 import _poolSeeBeyond from "./pool/see-beyond.js";
+import _poolSeeDouble from "./pool/see-double.js";
 import _poolSeeRed from "./pool/see-red.js";
 import _poolSeeTheTruth from "./pool/see-the-truth.js";
 import _poolSeeTheUnwritten from "./pool/see-the-unwritten.js";
@@ -28161,6 +28168,7 @@ import _poolUltimeciaTemporalThreat from "./pool/ultimecia-temporal-threat.js";
 import _poolUltimeciaTimeSorceress from "./pool/ultimecia-time-sorceress.js";
 import _poolUltimoCivilizationsEnd from "./pool/ultimo-civilizations-end.js";
 import _poolUltramarinesHonourGuard from "./pool/ultramarines-honour-guard.js";
+import _poolUltronArtificialMalevolence from "./pool/ultron-artificial-malevolence.js";
 import _poolUltronDrone from "./pool/ultron-drone.js";
 import _poolUltronMachineOverlord from "./pool/ultron-machine-overlord.js";
 import _poolUltronTheAnnihilator from "./pool/ultron-the-annihilator.js";
@@ -36293,8 +36301,10 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCollectedCompany,
   _poolCollectedConjuring,
   _poolCollectiveBlessing,
+  _poolCollectiveBrutality,
   _poolCollectiveDefiance,
   _poolCollectiveDrone,
+  _poolCollectiveEffort,
   _poolCollectiveInferno,
   _poolCollectiveNightmare,
   _poolCollectiveOverride,
@@ -37289,6 +37299,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDanceOfTheManse,
   _poolDanceOfTheSkywise,
   _poolDanceOfTheTumbleweeds,
+  _poolDanceWithCalamity,
   _poolDanceWithDevils,
   _poolDancersChakrams,
   _poolDancingFromDarkToDawn,
@@ -39446,6 +39457,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEmperorMihailIi,
   _poolEmperorOfBones,
   _poolEmperorsVanguard,
+  _poolEmpoweredAutogenerator,
   _poolEmpressGalina,
   _poolEmptiness,
   _poolEmptyCityRuse,
@@ -42405,6 +42417,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGodtoucher,
   _poolGodtrackerOfJund,
   _poolGogglesOfNight,
+  _poolGogoMasterOfMimicry,
   _poolGogoMysteriousMime,
   _poolGohamDjinn,
   _poolGohnTownOfRuin,
@@ -50884,6 +50897,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPlaneswalkersMirth,
   _poolPlaneswalkersMischief,
   _poolPlanetKiller,
+  _poolPlanetariumOfWanShiTong,
   _poolPlanetaryAnnihilation,
   _poolPlanetaryBombardment,
   _poolPlanetaryPatrol,
@@ -54213,6 +54227,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSedraxisSpecter,
   _poolSedrisTheTraitorKing,
   _poolSeeBeyond,
+  _poolSeeDouble,
   _poolSeeRed,
   _poolSeeTheTruth,
   _poolSeeTheUnwritten,
@@ -59683,6 +59698,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUltimeciaTimeSorceress,
   _poolUltimoCivilizationsEnd,
   _poolUltramarinesHonourGuard,
+  _poolUltronArtificialMalevolence,
   _poolUltronDrone,
   _poolUltronMachineOverlord,
   _poolUltronTheAnnihilator,
@@ -67828,8 +67844,10 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/collected-company": _poolCollectedCompany,
   "pool/collected-conjuring": _poolCollectedConjuring,
   "pool/collective-blessing": _poolCollectiveBlessing,
+  "pool/collective-brutality": _poolCollectiveBrutality,
   "pool/collective-defiance": _poolCollectiveDefiance,
   "pool/collective-drone": _poolCollectiveDrone,
+  "pool/collective-effort": _poolCollectiveEffort,
   "pool/collective-inferno": _poolCollectiveInferno,
   "pool/collective-nightmare": _poolCollectiveNightmare,
   "pool/collective-override": _poolCollectiveOverride,
@@ -68824,6 +68842,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/dance-of-the-manse": _poolDanceOfTheManse,
   "pool/dance-of-the-skywise": _poolDanceOfTheSkywise,
   "pool/dance-of-the-tumbleweeds": _poolDanceOfTheTumbleweeds,
+  "pool/dance-with-calamity": _poolDanceWithCalamity,
   "pool/dance-with-devils": _poolDanceWithDevils,
   "pool/dancers-chakrams": _poolDancersChakrams,
   "pool/dancing-from-dark-to-dawn": _poolDancingFromDarkToDawn,
@@ -70981,6 +71000,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/emperor-mihail-ii": _poolEmperorMihailIi,
   "pool/emperor-of-bones": _poolEmperorOfBones,
   "pool/emperors-vanguard": _poolEmperorsVanguard,
+  "pool/empowered-autogenerator": _poolEmpoweredAutogenerator,
   "pool/empress-galina": _poolEmpressGalina,
   "pool/emptiness": _poolEmptiness,
   "pool/empty-city-ruse": _poolEmptyCityRuse,
@@ -73940,6 +73960,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/godtoucher": _poolGodtoucher,
   "pool/godtracker-of-jund": _poolGodtrackerOfJund,
   "pool/goggles-of-night": _poolGogglesOfNight,
+  "pool/gogo-master-of-mimicry": _poolGogoMasterOfMimicry,
   "pool/gogo-mysterious-mime": _poolGogoMysteriousMime,
   "pool/goham-djinn": _poolGohamDjinn,
   "pool/gohn-town-of-ruin": _poolGohnTownOfRuin,
@@ -82419,6 +82440,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/planeswalkers-mirth": _poolPlaneswalkersMirth,
   "pool/planeswalkers-mischief": _poolPlaneswalkersMischief,
   "pool/planet-killer": _poolPlanetKiller,
+  "pool/planetarium-of-wan-shi-tong": _poolPlanetariumOfWanShiTong,
   "pool/planetary-annihilation": _poolPlanetaryAnnihilation,
   "pool/planetary-bombardment": _poolPlanetaryBombardment,
   "pool/planetary-patrol": _poolPlanetaryPatrol,
@@ -85748,6 +85770,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sedraxis-specter": _poolSedraxisSpecter,
   "pool/sedris-the-traitor-king": _poolSedrisTheTraitorKing,
   "pool/see-beyond": _poolSeeBeyond,
+  "pool/see-double": _poolSeeDouble,
   "pool/see-red": _poolSeeRed,
   "pool/see-the-truth": _poolSeeTheTruth,
   "pool/see-the-unwritten": _poolSeeTheUnwritten,
@@ -91218,6 +91241,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ultimecia-time-sorceress": _poolUltimeciaTimeSorceress,
   "pool/ultimo-civilizations-end": _poolUltimoCivilizationsEnd,
   "pool/ultramarines-honour-guard": _poolUltramarinesHonourGuard,
+  "pool/ultron-artificial-malevolence": _poolUltronArtificialMalevolence,
   "pool/ultron-drone": _poolUltronDrone,
   "pool/ultron-machine-overlord": _poolUltronMachineOverlord,
   "pool/ultron-the-annihilator": _poolUltronTheAnnihilator,

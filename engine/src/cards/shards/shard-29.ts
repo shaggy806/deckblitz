@@ -125,6 +125,7 @@ import _poolCleverImpersonator from "../pool/clever-impersonator.js";
 import _poolCloakAndPhaser from "../pool/cloak-and-phaser.js";
 import _poolCloudDragon from "../pool/cloud-dragon.js";
 import _poolCodieVociferousCodex from "../pool/codie-vociferous-codex.js";
+import _poolCollectiveBrutality from "../pool/collective-brutality.js";
 import _poolColorfulFeiyiSparrow from "../pool/colorful-feiyi-sparrow.js";
 import _poolColossalDreadmask from "../pool/colossal-dreadmask.js";
 import _poolCommanderRaffiMusiker from "../pool/commander-raffi-musiker.js";
@@ -1094,6 +1095,7 @@ const shard: CardShard = {
     _poolCloakAndPhaser,
     _poolCloudDragon,
     _poolCodieVociferousCodex,
+    _poolCollectiveBrutality,
     _poolColorfulFeiyiSparrow,
     _poolColossalDreadmask,
     _poolCommanderRaffiMusiker,

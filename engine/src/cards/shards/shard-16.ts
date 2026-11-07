@@ -348,6 +348,7 @@ import _poolGlisteningSphere from "../pool/glistening-sphere.js";
 import _poolGlitterfang from "../pool/glitterfang.js";
 import _poolGluttonousSlug from "../pool/gluttonous-slug.js";
 import _poolGoblinChirurgeon from "../pool/goblin-chirurgeon.js";
+import _poolGogoMasterOfMimicry from "../pool/gogo-master-of-mimicry.js";
 import _poolGoldenTailTrainer from "../pool/golden-tail-trainer.js";
 import _poolGolgariDecoy from "../pool/golgari-decoy.js";
 import _poolGorionWiseMentor from "../pool/gorion-wise-mentor.js";
@@ -1398,6 +1399,7 @@ const shard: CardShard = {
     _poolGlitterfang,
     _poolGluttonousSlug,
     _poolGoblinChirurgeon,
+    _poolGogoMasterOfMimicry,
     _poolGoldenTailTrainer,
     _poolGolgariDecoy,
     _poolGorionWiseMentor,

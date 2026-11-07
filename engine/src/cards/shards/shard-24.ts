@@ -574,6 +574,7 @@ import _poolPillarOfWar from "../pool/pillar-of-war.js";
 import _poolPitilessGorgon from "../pool/pitiless-gorgon.js";
 import _poolPlagueBoiler from "../pool/plague-boiler.js";
 import _poolPlagueEngineer from "../pool/plague-engineer.js";
+import _poolPlanetariumOfWanShiTong from "../pool/planetarium-of-wan-shi-tong.js";
 import _poolPointedDiscussion from "../pool/pointed-discussion.js";
 import _poolPoisonArrow from "../pool/poison-arrow.js";
 import _poolPolliwallop from "../pool/polliwallop.js";
@@ -1551,6 +1552,7 @@ const shard: CardShard = {
     _poolPitilessGorgon,
     _poolPlagueBoiler,
     _poolPlagueEngineer,
+    _poolPlanetariumOfWanShiTong,
     _poolPointedDiscussion,
     _poolPoisonArrow,
     _poolPolliwallop,

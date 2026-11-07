@@ -240,6 +240,7 @@ import _poolElsha from "../pool/elsha.js";
 import _poolElvenPassage from "../pool/elven-passage.js";
 import _poolElvesOfDeepShadow from "../pool/elves-of-deep-shadow.js";
 import _poolElvishChampion from "../pool/elvish-champion.js";
+import _poolEmpoweredAutogenerator from "../pool/empowered-autogenerator.js";
 import _poolEmrakulsHatcher from "../pool/emrakuls-hatcher.js";
 import _poolEmryLurkerOfTheLoch from "../pool/emry-lurker-of-the-loch.js";
 import _poolEndlessHorizons from "../pool/endless-horizons.js";
@@ -686,6 +687,7 @@ import _poolSealOfRemoval from "../pool/seal-of-removal.js";
 import _poolSealedFate from "../pool/sealed-fate.js";
 import _poolSecludedCourtyard from "../pool/secluded-courtyard.js";
 import _poolSecretIdentity from "../pool/secret-identity.js";
+import _poolSeeDouble from "../pool/see-double.js";
 import _poolSeeTheUnwritten from "../pool/see-the-unwritten.js";
 import _poolSeedtime from "../pool/seedtime.js";
 import _poolSeethingPathblazer from "../pool/seething-pathblazer.js";
@@ -1195,6 +1197,7 @@ const shard: CardShard = {
     _poolElvenPassage,
     _poolElvesOfDeepShadow,
     _poolElvishChampion,
+    _poolEmpoweredAutogenerator,
     _poolEmrakulsHatcher,
     _poolEmryLurkerOfTheLoch,
     _poolEndlessHorizons,
@@ -1641,6 +1644,7 @@ const shard: CardShard = {
     _poolSealedFate,
     _poolSecludedCourtyard,
     _poolSecretIdentity,
+    _poolSeeDouble,
     _poolSeeTheUnwritten,
     _poolSeedtime,
     _poolSeethingPathblazer,
