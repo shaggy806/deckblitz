@@ -628,6 +628,7 @@
   "decision:remember-chosen-permanent-on-resolution",
   "trigger:chosen-permanent-leaves",
   "trigger:chosen-player-loses-game",
+  "effect:defending-player-of-attached-attacker",
   "keyword:multikicker",
   "keyword:delve",
   "decision:copy-new-targets",

@@ -3730,7 +3730,11 @@ stopped covering:
   control", "target creature with power 4 or greater". `whose: "trigger-player"`
   is "target creature **that player** controls" on a triggered ability: the
   player its event names (Alela, Cunning Conqueror's player dealt combat
-  damage), whose permanents alone are legal. `whose: "defending-player"` is
+  damage), whose permanents alone are legal — and on an attack trigger whose
+  source isn't the attacker, "target creature **defending player** controls":
+  the player the triggering creature attacks ("whenever equipped creature
+  attacks" — Thunder Lasso, Captain America's Shield; "whenever a creature you
+  control … attacks" — Elite Scaleguard). `whose: "defending-player"` is
   the player the ability's source is attacking (Kogla, the Titan Ape's
   "destroy target artifact or enchantment defending player controls").
   `attacking: "trigger-player"` is "target creature **that's attacking that

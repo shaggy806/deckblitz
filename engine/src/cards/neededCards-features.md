@@ -4839,6 +4839,17 @@ as it resolves, and how a card of two types uses the permissions needs its rulin
 hold. Plargg and Nassari needs `new:opponent-chooses-exiled`, Wand of Wonder the die's rows around an
 exile-until per opponent, Baron Helmut Zemo and Rod of Absorption their other keys.
 
+### A creature the triggering attacker's defending player controls — found built 2026-11-07
+
+Key `effect:defending-player-of-attached-attacker` (family `effect:player-scope-extensions`): no engine
+code. On an attack trigger whose source isn't the attacker, "target creature defending player controls" is
+`{ kind: "permanent", whose: "trigger-player", filter: { type: "creature" } }` — Thunder Lasso's shape,
+which the triage predated. The scaffolder now reads "Whenever equipped creature attacks", "Whenever a
+creature you control with a +1/+1 counter on it attacks" and the tap line on a non-self attack trigger.
+Proving cards: Captain America's Shield, Elite Scaleguard (`defending-player-of-attacker.test.ts`). Yare
+(an instant's "target creature defending player controls", with no attack trigger to name one) still
+waits: in a multiplayer combat there may be several defending players.
+
 ### A permanent chosen on resolution kept for a leaves trigger, a player chosen as it transforms, and a player losing the game — built 2026-11-07
 
 Keys `decision:remember-chosen-permanent-on-resolution`, `trigger:chosen-permanent-leaves`,

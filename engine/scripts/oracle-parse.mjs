@@ -2135,6 +2135,14 @@ export function parseTrigger(clause) {
     return [{ on: "attacks", who: "any", attackedPlayerOrPlaneswalker: "opponent", filter: { type: "creature" } }];
   }
   if (c === "Whenever equipped creature attacks the monarch") return [{ on: "attacks", who: "attached", attackedMonarch: true }];
+  // "Whenever equipped creature attacks" (Thunder Lasso, Captain America's
+  // Shield): the host, whoever controls it.
+  if (c === "Whenever equipped creature attacks") return [{ on: "attacks", who: "attached" }];
+  // "Whenever a creature you control with a +1/+1 counter on it attacks"
+  // (Byrke, Elite Scaleguard).
+  if (c === "Whenever a creature you control with a +1/+1 counter on it attacks") {
+    return [{ on: "attacks", who: "you-control", filter: { type: "creature", counters: { kind: "+1/+1", compare: { op: "gte", n: 1 } } } }];
+  }
   if ((m = /^Whenever an opponent attacks you with (two|three|four|five) or more creatures$/.exec(c))) {
     return [{ on: "attack-with", who: "opponent", atLeast: NUMBERS[m[1]], attackingYouDirectly: true }];
   }
@@ -5323,6 +5331,14 @@ export function parseSentence(sentence, ctx) {
   // step it is.
   if (ctx.thatPlayer === "active-player" && re("tap target creature that player controls").test(s)) {
     return { kind: "tap", target: ctx.target({ kind: "permanent", filter: { type: "creature", controlledBy: "active-player" } }) };
+  }
+  // "Whenever equipped creature attacks / a creature you control … attacks,
+  // tap target creature defending player controls" (Thunder Lasso, Captain
+  // America's Shield, Elite Scaleguard): the attack trigger's player. The
+  // source isn't the attacker, so `"creature-defending-player-controls"` (a
+  // self trigger's, which reads the source's attack) can't name them.
+  if (ctx.thatPlayer === "trigger-player" && ctx.it !== "source" && re("tap target creature defending player controls").test(s)) {
+    return { kind: "tap", target: ctx.target({ kind: "permanent", whose: "trigger-player", filter: { type: "creature" } }) };
   }
   if ((m = re(`tap (${TARGET})`).exec(s))) return { kind: "tap", target: slot(m[1]) };
   if ((m = re(`untap (${TARGET})`).exec(s))) return { kind: "untap", target: slot(m[1]) };

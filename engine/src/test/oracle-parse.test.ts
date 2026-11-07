@@ -16771,3 +16771,41 @@ describe("each owner of a spell cast this way losing life", () => {
     });
   });
 });
+
+describe("tapping a creature the triggering attacker's defending player controls", () => {
+  const tapDefender = [{ kind: "permanent", whose: "trigger-player", filter: { type: "creature" } }];
+  it("reads Captain America's Shield's equipped-creature attack trigger", () => {
+    const face = parseFace({
+      name: "Captain America's Shield",
+      type_line: "Legendary Artifact — Equipment",
+      oracle_text: "Whenever equipped creature attacks, tap target creature defending player controls.",
+    });
+    expect(face.todo).toEqual([]);
+    expect(face.triggered[0].trigger).toEqual({ on: "attacks", who: "attached" });
+    expect(face.triggered[0].targets).toEqual(tapDefender);
+    expect(face.triggered[0].effect).toEqual({ kind: "tap", target: 0 });
+  });
+  it("reads Elite Scaleguard's countered-creature attack trigger", () => {
+    const face = parseFace({
+      name: "Elite Scaleguard",
+      type_line: "Creature — Human Soldier",
+      oracle_text:
+        "Whenever a creature you control with a +1/+1 counter on it attacks, tap target creature defending player controls.",
+    });
+    expect(face.todo).toEqual([]);
+    expect(face.triggered[0].trigger).toEqual({
+      on: "attacks",
+      who: "you-control",
+      filter: { type: "creature", counters: { kind: "+1/+1", compare: { op: "gte", n: 1 } } },
+    });
+    expect(face.triggered[0].targets).toEqual(tapDefender);
+  });
+  it("leaves a self attack trigger's line to the source's own defending player", () => {
+    const face = parseFace({
+      name: "Clever Distraction",
+      type_line: "Creature — Spirit",
+      oracle_text: "Whenever this creature attacks, tap target creature defending player controls.",
+    });
+    expect(face.triggered[0]?.targets ?? []).not.toEqual(tapDefender);
+  });
+});
