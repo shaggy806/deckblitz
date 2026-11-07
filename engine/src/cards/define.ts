@@ -3550,6 +3550,13 @@ export interface StaticAbility {
    * it during another player's (Seedborn Muse) still does. `affects` is
    * ignored — it is always the permanent carrying it. */
   readonly doesntUntap?: boolean;
+  /** "Damage isn't removed from this creature during cleanup steps"
+   * (Ancient Adamantoise): the cleanup step's damage removal (rule 514.2)
+   * passes it by, while it's on the battlefield phased in with this ability
+   * (the ruling: phased out, it loses its damage). Other effects that remove
+   * damage — regeneration (rule 701.19a) — still do. `affects` is ignored:
+   * it is always the permanent carrying it. */
+  readonly keepsDamageInCleanup?: true;
   /** "You may choose not to untap [this] during your untap step" (rule
    * 502.3 — Ashnod's Battle Gear, Phyrexian Gremlins): as its controller's
    * untap step untaps their permanents, they choose which of these to leave

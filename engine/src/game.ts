@@ -11433,6 +11433,13 @@ export class Game {
       delete object.saddled;
       delete object.saddledThisTurn;
       delete object.crewedThisTurn;
+      // "Damage isn't removed from this creature during cleanup steps"
+      // (Ancient Adamantoise) — not while it's phased out, when its
+      // abilities don't exist (rule 702.26b; the ruling).
+      if (object.damageMarked !== 0 && object.phasedOut === undefined && this.hasOwnStatic(object, (a) => a.keepsDamageInCleanup === true)) {
+        object.markedByDeathtouch = false;
+        continue;
+      }
       if (object.damageMarked !== 0 || object.markedByDeathtouch) {
         object.damageMarked = 0;
         object.markedByDeathtouch = false;

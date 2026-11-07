@@ -443,6 +443,14 @@ the slots it was chosen for, so a two-color Dragon's two counters are one placem
 "Five Dragons this way" is `this-way` `"counters-put"` (distinct permanents). No new
 decision. Key: effect:per-color-counter-choice-and-win.
 
+### "Damage isn't removed from this creature during cleanup steps" — built 2026-11-07
+
+Flagged Build ASAP: Ancient Adamantoise (4567). A `keepsDamageInCleanup` static: the
+cleanup step's damage removal (rule 514.2) passes the permanent by while it's phased
+in (the ruling; rule 702.26b), regeneration still clearing it. Its redirection was
+Palisade Giant's. The scaffolder reads the line. Key:
+static:damage-not-removed-in-cleanup.
+
 ### Plotting costs less — built 2026-11-07
 
 By EDHREC rank: Doc Aurlock, Grizzled Genius (2543). A static's `plotCostReduction`

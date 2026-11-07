@@ -7623,3 +7623,9 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Call the Spirit Dragons: a two-color Dragon takes two counters
 - **Do:** The game opens on your upkeep's question. Choose Adult Gold Dragon for both white and red.
 - **Expect:** Adult Gold Dragon gets two +1/+1 counters; Pearl Dragon and Ancient Hellkite get none. Only four Dragons got counters, so the game goes on.
+
+## Damage kept through cleanup (2026-11-07)
+
+### Ancient Adamantoise: its damage stays into the next turn
+- **Do:** Cast Lightning Bolt on Ancient Adamantoise, then click No attacks and let the turn pass to Bob.
+- **Expect:** On Bob's turn Ancient Adamantoise still shows its 3 damage ("8/20 −3").

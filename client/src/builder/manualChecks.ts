@@ -11462,4 +11462,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       step: 'end',
     }),
   ),
+  // --- Damage kept through cleanup (2026-11-07) ------------------------------
+  preset(
+    'Ancient Adamantoise: its damage stays into the next turn',
+    board({
+      you: { bf: ['Ancient Adamantoise', 'Mountain'], hand: ['Lightning Bolt'] },
+      opp: { bf: [] },
+    }),
+  ),
 ]

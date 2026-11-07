@@ -19162,6 +19162,10 @@ function parseStatic(line, text) {
   if (line === "You may choose not to untap ~ during your untap step.") {
     return { affects: { scope: "self" }, mayChooseNotToUntap: true, text };
   }
+  // Rule 514.2's damage removal passed by (Ancient Adamantoise).
+  if (line === "Damage isn't removed from ~ during cleanup steps.") {
+    return { affects: { scope: "self" }, keepsDamageInCleanup: true, text };
+  }
   if (line === "~ enters tapped.") {
     return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", tapped: true }, text };
   }

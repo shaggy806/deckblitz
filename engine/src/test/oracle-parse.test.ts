@@ -16368,6 +16368,28 @@ describe("discard N unless you discard one card of a kind", () => {
   });
 });
 
+describe("damage isn't removed during cleanup steps", () => {
+  it("reads Ancient Adamantoise's line", () => {
+    const turtle = parseFace({
+      name: "Ancient Adamantoise",
+      type_line: "Creature — Turtle",
+      mana_cost: "{5}{G}{G}{G}",
+      colors: ["G"],
+      power: "8",
+      toughness: "20",
+      oracle_text: "Damage isn't removed from this creature during cleanup steps.",
+    });
+    expect(turtle.complete).toBe(true);
+    expect(turtle.static).toEqual([
+      {
+        affects: { scope: "self" },
+        keepsDamageInCleanup: true,
+        text: "Damage isn't removed from this creature during cleanup steps.",
+      },
+    ]);
+  });
+});
+
 describe("for each color, a counter on one of that color", () => {
   it("reads Call the Spirit Dragons whole", () => {
     const call = parseFace({
