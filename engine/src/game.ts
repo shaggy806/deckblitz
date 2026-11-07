@@ -461,6 +461,7 @@ import type {
   GameState,
   GrantedAbilityRef,
   CastSpellRecord,
+  AttachmentRecord,
   LastKnownInfo,
   LastKnownRefs,
   ResolutionResume,
@@ -34767,6 +34768,12 @@ export class Game {
         if (lki !== undefined) return lki.counters;
         return target.kind === "object" ? (this.state.objects[target.object]?.counters ?? {}) : {};
       },
+      attachmentsOf: (target) => {
+        if (target.kind !== "object") return [];
+        const lki = lastKnownOf(target);
+        if (lki !== undefined) return lki.attachments ?? [];
+        return this.attachedNow(target.object);
+      },
       singleOut: (target) =>
         target.kind === "object" && this.state.objects[target.object]?.zone === "battlefield"
           ? { kind: "object", object: this.splitOneFromStack(target.object) }
@@ -55809,11 +55816,24 @@ export class Game {
    * departure, and per victim of a simultaneous event: never over the whole
    * battlefield.
    */
+  /** The permanents attached to `id` on the battlefield now, each in its
+   * stint (`LastKnownInfo.attachments`). */
+  private attachedNow(id: ObjectId): AttachmentRecord[] {
+    if (this.state.objects[id]?.zone !== "battlefield") return [];
+    const out: AttachmentRecord[] = [];
+    for (const other of this.state.zones.shared.battlefield) {
+      const o = this.state.objects[other];
+      if (o !== undefined && o.attachedTo === id) out.push({ object: other, stint: o.zoneChangeCount ?? 0 });
+    }
+    return out;
+  }
+
   private takeLastKnown(id: ObjectId): LastKnownInfo {
     const object = this.state.objects[id];
     const name = printedCardName(object);
     const c = computeCharacteristics(this.state, this.registry, id);
     const attached = attachmentsOf(this.state, this.registry, id);
+    const attachedRecords = this.attachedNow(id);
     const lostAbilities = hasLostAbilities(this.state, this.registry,object);
     const renamed = nameOf(object);
     // The granted triggered abilities, in `effectiveTriggered`'s order after
@@ -55892,6 +55912,7 @@ export class Game {
       ...(object.attacking !== null && object.blockedBy.length > 0 ? { blockers: [...object.blockedBy] } : {}),
       equipped: attached.equipped,
       enchanted: attached.enchanted,
+      ...(attachedRecords.length > 0 ? { attachments: attachedRecords } : {}),
       ...(object.faceDown !== undefined ? { faceDown: true } : {}),
       enchantedByController: attached.enchantedByController,
       ...(attached.enchantedBy.length > 0 ? { enchantedBy: attached.enchantedBy } : {}),

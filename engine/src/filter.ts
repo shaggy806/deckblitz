@@ -34,7 +34,7 @@ import type { Color, ManaCost, ManaFromSpec } from "./mana.js";
 import { COLORS, colorSymbols, manaOriginMatches, manaValue, parseManaCost } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import { LOCKED_ROOM, spellCaster, activePlayerOf, blockedAttackersOf, controllersLastTurn, isTokenNow, manaCostOverride, nameOf, permanentCount, printedCardName, rulesTextName } from "./state.js";
-import type { GameObject, GameState, LastKnownInfo, ZoneType } from "./state.js";
+import type { AttachmentRecord, GameObject, GameState, LastKnownInfo, ZoneType } from "./state.js";
 import { CREATURE_TYPES } from "./creature-types.js";
 import { EVERY_CREATURE_TYPE, EVERY_LAND_TYPE, hasSubtype, isCreatureType, isLandType, isTypeMarker } from "./subtypes.js";
 import { lastKnownNames, namesOf } from "./card-names.js";
@@ -1063,6 +1063,22 @@ export interface CardFilter {
    * authored; `null` matches nothing. Matched on the battlefield, against
    * `GameObject.attachedTo` / `attachedToPlayer`. */
   readonly attachedToRef?: TargetRef | null;
+  /**
+   * Was attached to this object — the ability's source, or the object its
+   * trigger fired on — as it is now, or as it last existed on the
+   * battlefield once it has left (rule 608.2h; `LastKnownInfo.attachments`):
+   * Zack Fair's "attach an Equipment **that was attached to Zack Fair**" (he
+   * was sacrificed to pay for it), Rhuk, Hexgold Nabber's "all Equipment
+   * attached to **that creature**" when it dies. Only the same objects still
+   * on the battlefield (rule 400.7) — an Equipment that has left and come
+   * back is a new one. An effect's filter only: bound to `wasAttachedToAny`
+   * as the effect applies (`bindDynamicCompares`); unbound, it matches
+   * nothing.
+   */
+  readonly wasAttachedTo?: "source" | "trigger-object";
+  /** `wasAttachedTo` bound — written by `bindDynamicCompares`, never
+   * authored: each object attached, in the stint it was attached in. */
+  readonly wasAttachedToAny?: readonly AttachmentRecord[];
   /** Is an Aura attached to a **player** (rule 303.4) — `"you"` the
    * filter's `you` (Witchbane Orb's "all Curses attached to you"),
    * `"opponent"` one of their opponents. */
@@ -2821,6 +2837,14 @@ export function matchesFilter(
   // "Attached to it / that creature" (an effect's bound target slot) and
   // "attached to you" (rule 303.4): on the battlefield, as it is now.
   if (filter.attachedToTarget !== undefined && filter.attachedToRef === undefined) return false;
+  // "That was attached to it" (an effect's bound `wasAttachedTo`): the same
+  // object, still on the battlefield (rule 400.7).
+  if (filter.wasAttachedTo !== undefined && filter.wasAttachedToAny === undefined) return false;
+  if (filter.wasAttachedToAny !== undefined) {
+    if (live === undefined || live.zone !== "battlefield") return false;
+    const stint = live.zoneChangeCount ?? 0;
+    if (!filter.wasAttachedToAny.some((a) => a.object === id && a.stint === stint)) return false;
+  }
   if (filter.attachedToRef !== undefined || filter.attachedToPlayer !== undefined) {
     if (live === undefined || live.zone !== "battlefield") return false;
     const to = filter.attachedToRef;

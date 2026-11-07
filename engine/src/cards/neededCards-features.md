@@ -398,6 +398,19 @@ By EDHREC rank: Thirst for Knowledge (1953). No engine code: `discard`'s
 discard N cards unless you discard a [kind] card" whole. Key:
 effect:discard-unless-land.
 
+### "An Equipment that was attached to it" — built 2026-11-07
+
+By EDHREC rank: Zack Fair (2591). A leaving permanent's snapshot records what was
+attached to it (`LastKnownInfo.attachments`, each in its stint), and an effect's
+filter `wasAttachedTo: "source" | "trigger-object"` matches those still on the
+battlefield as the same objects (rules 608.2h, 400.7) — or what's attached now
+while it's still there. `attach`'s `choose` takes `min` ("attach **an** Equipment",
+mandatory). Proving cards: Zack Fair (sacrificed for the cost, his Equipment fallen
+off by 704.5n), Rhuk, Hexgold Nabber (all or none, from an attacking or dying
+creature). Key: effect:attach-equipment-that-was-attached. Left: Cass, Hand of
+Vengeance also returns the Aura cards that were attached from the graveyard,
+attached to a target — a graveyard card's stint differs from its battlefield one.
+
 ### Plotting costs less — built 2026-11-07
 
 By EDHREC rank: Doc Aurlock, Grizzled Genius (2543). A static's `plotCostReduction`

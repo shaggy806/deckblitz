@@ -31,6 +31,7 @@ import type { RandomPick, Vote, VoteChoice } from "./events.js";
 import type { ThisWayEntry } from "./this-way.js";
 import { textWordKind, type TextChange } from "./text-change.js";
 import type {
+  AttachmentRecord,
   AwaitingDecision,
   DelayedTriggerTiming,
   EnterAttachHost,
@@ -8700,8 +8701,10 @@ export type EffectSpec =
       readonly planeswalkerToo?: true;
       readonly attachments?: CardFilter;
       /** `upTo`: at most that many — Vow to Erebor's "you may attach **an**
-       * Equipment you control to it" is `upTo: 1`. */
-      readonly choose?: { readonly filter: CardFilter; readonly prompt: string; readonly upTo?: number };
+       * Equipment you control to it" is `upTo: 1`. `min`: at least that many
+       * while there are as many (default 0) — Zack Fair's "attach **an**
+       * Equipment that was attached to Zack Fair" is `upTo: 1, min: 1`. */
+      readonly choose?: { readonly filter: CardFilter; readonly prompt: string; readonly upTo?: number; readonly min?: number };
       /** Attach it to **a permanent chosen as this resolves**, not targeted
        * (rule 608.2c): Stonehewer Giant's "attach it to a creature you
        * control", Aura Graft's "attach it to another permanent it can
@@ -13193,6 +13196,10 @@ export interface EffectApi {
    * it last existed on the battlefield if it has left (rule 608.2h), as the
    * `{ countersOn }` amount reads it. */
   counterKindsOf(target: TargetRef): Readonly<Record<string, number>>;
+  /** The permanents attached to what `target` names, each in its stint —
+   * read as it last existed on the battlefield if it has left (rule 608.2h,
+   * `LastKnownInfo.attachments`), as it is now if it's still there. */
+  attachmentsOf(target: TargetRef): readonly AttachmentRecord[];
   /** The one permanent of a token stack an effect singles out (split off
    * first — see `Game.splitOneFromStack`); anything else as it is. */
   singleOut(target: TargetRef): TargetRef;
@@ -15472,6 +15479,7 @@ function containsDynamicCompare(value: unknown): boolean {
       "sameNameAsThisWay" in value ||
       "sharesColorWithTarget" in value ||
       "attachedToTarget" in value ||
+      "wasAttachedTo" in value ||
       "triggerBatch" in value ||
       "createdWithSource" in value ||
       ((value as Record<string, unknown>)["kind"] === "delayed-trigger" &&
@@ -15764,6 +15772,14 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
     if (typeof walked["attachedToTarget"] === "number") {
       const { attachedToTarget: slot, ...rest } = walked;
       walked = { ...rest, attachedToRef: ctx.targets[slot as number] ?? null };
+    }
+    // "An Equipment that was attached to Zack Fair" (sacrificed for the
+    // cost), "all Equipment attached to that creature" as it dies: what was
+    // attached to it as it last existed (rule 608.2h), or is now.
+    if (walked["wasAttachedTo"] === "source" || walked["wasAttachedTo"] === "trigger-object") {
+      const { wasAttachedTo: of, ...rest } = walked;
+      const ref = resolveAmountRef(of as "source" | "trigger-object", ctx);
+      walked = { ...rest, wasAttachedToAny: ref === undefined ? [] : ctx.attachmentsOf(ref) };
     }
     return walked;
   };
@@ -19609,10 +19625,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (spec.choose !== undefined) {
         const count = ctx.permanentsMatching(spec.choose.filter).reduce((n, m) => n + m.count, 0);
         if (count === 0) return;
+        const most = Math.min(count, spec.choose.upTo ?? count);
         ctx.choosePermanents(
           spec.choose.filter,
-          0,
-          Math.min(count, spec.choose.upTo ?? count),
+          Math.min(most, spec.choose.min ?? 0),
+          most,
           { kind: "attach", target: 0, attachment: 0, onto: target },
           spec.choose.prompt,
         );

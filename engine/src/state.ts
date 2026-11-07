@@ -2220,6 +2220,13 @@ export type GrantedAbilityRef =
    * so the trigger resolves as that text however its source changes. */
   | { readonly kind: "card-triggered"; readonly cardName: string; readonly index: number };
 
+/** A permanent attached to another, in the stint (`zoneChangeCount`) it was
+ * attached in (rule 400.7) — `LastKnownInfo.attachments`. */
+export interface AttachmentRecord {
+  readonly object: ObjectId;
+  readonly stint: number;
+}
+
 /**
  * A permanent as it last existed on the battlefield (rules 603.10a, 608.2h):
  * its *computed* characteristics — layers, counters, anthems and copy effects
@@ -2352,6 +2359,10 @@ export interface LastKnownInfo {
   readonly blockers?: readonly ObjectId[];
   readonly equipped: boolean;
   readonly enchanted: boolean;
+  /** The permanents attached to it as it left, each in its stint then —
+   * Zack Fair's "an Equipment that was attached to Zack Fair" (`CardFilter
+   * .wasAttachedTo`). Absent for none. */
+  readonly attachments?: readonly AttachmentRecord[];
   /** It was face down (rule 708) — a face-down spell as cast, or a face-down
    * permanent as it left: the `faceDown` filter's "a face-down creature
    * spell" (Kadena's first each turn). */
