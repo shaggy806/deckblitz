@@ -16,6 +16,7 @@ import {
   B,
   C,
   D,
+  activate,
   cast,
   controller,
   counters,
@@ -24,6 +25,8 @@ import {
   lands,
   life,
   nextTurn,
+  pickFromZone,
+  pickModes,
   pickTargets,
   ref,
   settle,
@@ -32,6 +35,7 @@ import {
   toHand,
   toLibrary,
   toStep,
+  tokensNamed,
   zone,
 } from "./harness.js";
 
@@ -180,3 +184,67 @@ describe("Plargg and Nassari", () => {
     expect(zone(game, divination)).toBe("exile");
   });
 });
+
+describe("Currency Converter", () => {
+  const exiledWith = (game: Game, source: ObjectId): ObjectId[] =>
+    game.state.zones.shared.exile.filter((id) => game.state.objects[id].exiledWith?.source === source);
+  const untap = (game: Game, id: ObjectId): void => {
+    game.state.objects[id].tapped = false;
+  };
+  /** Its own loot: draws `name` from the top, then discards it. */
+  function loot(game: Game, seat: ScriptedController, converter: ObjectId, name: string): ObjectId {
+    const card = toLibrary(game, name);
+    seat.chooseDiscardsFn = () => [card];
+    untap(game, converter);
+    activate(game, converter, 0);
+    return card;
+  }
+
+  it("may exile a discarded card with it; declined, the card stays in the graveyard", () => {
+    const { game, a } = table({ openingHandSize: 0 });
+    const converter = spawn(game, "Currency Converter");
+    lands(game, "Wastes", 4);
+    pickModes(a, 0);
+    const bears = loot(game, a, converter, "Grizzly Bears");
+    expect(zone(game, bears)).toBe("exile");
+    expect(exiledWith(game, converter)).toEqual([bears]);
+
+    pickModes(a);
+    const giant = loot(game, a, converter, "Hill Giant");
+    expect(zone(game, giant)).toBe("graveyard");
+    expect(exiledWith(game, converter)).toEqual([bears]);
+  });
+
+  it("{T}: a land card exiled with it goes to the graveyard and makes a Treasure; a nonland one, a Rogue", () => {
+    const { game, a } = table({ openingHandSize: 0 });
+    const converter = spawn(game, "Currency Converter");
+    lands(game, "Wastes", 4);
+    pickModes(a, 0);
+    const forest = loot(game, a, converter, "Forest");
+    const bears = loot(game, a, converter, "Grizzly Bears");
+    expect(exiledWith(game, converter).sort()).toEqual([forest, bears].sort());
+
+    pickFromZone(a, forest);
+    untap(game, converter);
+    activate(game, converter, 1);
+    expect(zone(game, forest)).toBe("graveyard");
+    expect(tokensNamed(game, "Treasure Token", A)).toBe(1);
+    expect(tokensNamed(game, "Rogue Token", A)).toBe(0);
+
+    pickFromZone(a, bears);
+    untap(game, converter);
+    activate(game, converter, 1);
+    expect(zone(game, bears)).toBe("graveyard");
+    expect(tokensNamed(game, "Treasure Token", A)).toBe(1);
+    expect(tokensNamed(game, "Rogue Token", A)).toBe(1);
+  });
+
+  it("{T} with nothing exiled with it does nothing", () => {
+    const { game } = table({ openingHandSize: 0 });
+    const converter = spawn(game, "Currency Converter");
+    activate(game, converter, 1);
+    expect(tokensNamed(game, "Treasure Token", A)).toBe(0);
+    expect(tokensNamed(game, "Rogue Token", A)).toBe(0);
+  });
+});
+

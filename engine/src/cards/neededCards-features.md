@@ -4732,6 +4732,13 @@ as it resolves, and how a card of two types uses the permissions needs its rulin
 hold. Plargg and Nassari needs `new:opponent-chooses-exiled`, Wand of Wonder the die's rows around an
 exile-until per opponent, Baron Helmut Zemo and Rod of Absorption their other keys.
 
+### A discarded card exiled with the source, then one taken back by type — found built 2026-11-07
+
+Key `effect:linked-exile-from-discard`: no engine code. A `may` over `exile` with `target: "trigger-object"`,
+`linked: true` on a per-card `discards` trigger (Bag of Holding's shape), and a `look-and-choose` over
+`zone: "exiled-with-source"` to the graveyard whose `then` branches on target 0's type. Proving card:
+Currency Converter. Toluz, Clever Conductor still waits on `trigger:discards-batch-objects`.
+
 ### An opponent's pick left out of the free casts — built 2026-11-07
 
 Key `effect:opponent-chooses-exiled-this-way-excluded` (family `effect:choices-by-other-players`). No new

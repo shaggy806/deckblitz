@@ -1664,6 +1664,7 @@
   "static:cost-increase-colored",
   "keyword:offering",
   "effect:linked-exiled-card",
+  "effect:linked-exile-from-discard",
   "effect:linked-face-down-exile-to-battlefield",
   "target:card-in-exile",
   "condition:filter-has-flashback",
