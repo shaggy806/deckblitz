@@ -6505,9 +6505,13 @@ clause (section 9):
 - `{ kind: "this-ability-did-this-turn" }` — this ability has done its thing
   this turn, as its effect recorded it: an `add-mana` with
   `marksAbilityDone: true` that added at least one mana (an amount of 0 adds
-  none, rule 107.1b). Its `not` as a triggered ability's `condition` is Carpet
+  none, rule 107.1b), or a `cast-now` with `marksAbilityDone: true` that cast
+  a spell. Its `not` as a triggered ability's `condition` is Carpet
   of Flowers' "if you **haven't added mana with this ability this turn**", an
-  intervening if (rule 603.4) asked as it triggers and as it resolves. Per
+  intervening if (rule 603.4) asked as it triggers and as it resolves — and
+  Planetarium of Wan Shi Tong's "you may cast that card … **Do this only once
+  each turn**", spent only by a cast (its ruling: it doesn't trigger again
+  that turn once it has cast; declining leaves it free). Per
   ability of one object (entries joined by `sameAbilityAs` share it —
   "at the beginning of each of your main phases" is two), restarting each turn
   and with a zone change. Answered for a triggered ability's `condition` and a

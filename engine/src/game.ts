@@ -36632,6 +36632,12 @@ export class Game {
           }
         }
       },
+      markAbilityDone: () => {
+        const key = opts.abilityKey;
+        if (key === undefined) return;
+        const done = (this.state.abilitiesDoneThisTurn ??= []);
+        if (!done.includes(key)) done.push(key);
+      },
       castSince: (cards, since, by) =>
         eventLogSince(this.state, since).some(
           (event) =>

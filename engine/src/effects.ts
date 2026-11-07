@@ -5149,6 +5149,13 @@ export type EffectSpec =
       /** "If you do, …" — a spell was cast this way (Conduit of Worlds: "you
        * can't cast additional spells this turn"). */
       readonly then?: EffectSpec;
+      /** A spell cast (or land played) this way marks the ability as having
+       * done its thing this turn (`GameState.abilitiesDoneThisTurn`, read by
+       * the `this-ability-did-this-turn` condition), as `add-mana`'s does —
+       * Planetarium of Wan Shi Tong's "you may cast that card … Do this only
+       * once each turn", spent only by a cast (its ruling): declining, or
+       * nothing castable, leaves it for the next trigger. */
+      readonly marksAbilityDone?: true;
       /** "If you don't, …" — nothing was cast, declined or not castable:
        * Breaching Dragonstorm's "put that card into your hand", Baral and
        * Kari Zev's First Mate Ragavan. */
@@ -11837,6 +11844,11 @@ export interface EffectApi {
   /** Whether the effect's controller has cast (or played, a land) one of
    * `cards` at a `cast-now`'s offer since event `since`. */
   castSince(cards: readonly ObjectId[], since: number, by?: PlayerId): boolean;
+  /** Record that the resolving ability has done its thing this turn
+   * (`GameState.abilitiesDoneThisTurn`, keyed by `abilityKey`) — a
+   * `cast-now`'s `marksAbilityDone`. Nothing for a spell or a delayed
+   * trigger, which have no key. */
+  markAbilityDone(): void;
   /** The total mana value of the spells among `cards` cast off a `cast-now`
    * offer since event `since` (rule 202.3e, X as chosen). */
   manaValueCastSince(cards: readonly ObjectId[], since: number): number;
@@ -14616,7 +14628,13 @@ function offerCastNow(
     });
   }
   if (pendingBefore || !ctx.decisionPending()) return false;
-  if (spec.then !== undefined || spec.else !== undefined || spec.rest !== undefined || spec.repeat === true) {
+  if (
+    spec.then !== undefined ||
+    spec.else !== undefined ||
+    spec.rest !== undefined ||
+    spec.repeat === true ||
+    spec.marksAbilityDone === true
+  ) {
     ctx.resumeAfterDecisions({ ...spec, progress }, parked);
   }
   return true;
@@ -14751,7 +14769,10 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
   }
   if (progress.followed !== true) {
     const by = spec.by === undefined ? undefined : effectPlayer(spec.by, ctx);
-    const followUp = ctx.castSince(progress.cards, progress.since, by) ? spec.then : spec.else;
+    const cast = ctx.castSince(progress.cards, progress.since, by);
+    // "Do this only once each turn", spent only by casting (Planetarium).
+    if (cast && spec.marksAbilityDone === true) ctx.markAbilityDone();
+    const followUp = cast ? spec.then : spec.else;
     if (followUp !== undefined) {
       const parked = ctx.parkedCount();
       const pendingBefore = ctx.decisionPending();

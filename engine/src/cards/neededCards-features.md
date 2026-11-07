@@ -521,6 +521,18 @@ read where convoke's is (`tapPayKinds`); beside a granted or printed convoke,
 creatures convoke and artifacts improvise in one payment. Key:
 effect:next-spell-has-improvise.
 
+### "You may cast that card … Do this only once each turn" — built 2026-11-07
+
+By EDHREC rank: Planetarium of Wan Shi Tong (3240). A `cast-now` with
+`marksAbilityDone` records the ability done this turn
+(`GameState.abilitiesDoneThisTurn`, Carpet of Flowers' record) when a spell is
+cast off its offer, and the trigger's `not this-ability-did-this-turn`
+condition (an intervening if, rule 603.4) keeps it from triggering again that
+turn — the card's ruling; declining, or nothing castable on top, spends
+nothing. No scaffolder template: the line is the Planetarium's alone. Proving
+card: Planetarium of Wan Shi Tong. Key:
+effect:cast-now-once-each-turn-if-cast.
+
 ### Escalate that taps or discards — built 2026-11-07
 
 By EDHREC rank: Collective Effort (3204). `castModal.alsoPerExtraMode` is
