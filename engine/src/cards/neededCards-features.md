@@ -483,6 +483,15 @@ auto-payer, the by-hand offers and "could produce" size it right; any other
 activated ability this way, and "Add X mana of any one color, where X is the
 number of [kind] counters on ~" whole. Key: effect:mana-ability-effect-before-mana.
 
+### A token copy that becomes a creature if it isn't one — built 2026-11-07
+
+Flagged Build ASAP: Ultron, Artificial Malevolence (4121). No engine code: the
+sentence after the copy is no copy exception (no "except"), so it's `animate-all`
+over the token made this way that isn't a creature (`thisWay: "created"`,
+`notTypes`), with no duration — Mirrorworks' trigger otherwise. The scaffolder reads
+"You may pay {N}. If you do, create a token that's a copy of …" with that sentence
+after it. Key: effect:token-copy-if-noncreature-animate.
+
 ### Every nonbasic land type, and base P/T set to your life total — built 2026-11-06
 
 Flagged Build ASAP (B270): Planar Nexus (2625) and Aettir and Priwen (2672).

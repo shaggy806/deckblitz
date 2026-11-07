@@ -11645,7 +11645,44 @@ function exiledCardPickAt(sentences, i, ctx) {
       used: 2,
     };
   }
+  // "You may pay {2}. If you do, create a token that's a copy of it. If the
+  // token isn't a creature, it becomes a 2/2 Robot Villain creature in
+  // addition to its other types." (Ultron, Artificial Malevolence): the
+  // token made this way, animated if it isn't a creature as this resolves —
+  // an effect, not a copy exception.
+  const payMana = /^you may pay ((?:\{[^}]+\})+)\.$/i.exec(first);
+  if (payMana !== null && done !== null && /^create a token that's a copy of /i.test(done[1])) {
+    const copy = parseSentence(`${done[1][0].toUpperCase()}${done[1].slice(1)}`, ctx);
+    if (copy === null || containsUndefined(copy) || copy.kind !== "create-token-copy") return null;
+    const animate = noncreatureTokenAnimate(sentences[i + 2] ?? "");
+    return {
+      effect: {
+        kind: "may",
+        prompt: `Pay ${payMana[1]} to create a token copy?`,
+        cost: payMana[1],
+        effect: animate === null ? copy : { kind: "sequence", effects: [copy, animate] },
+      },
+      used: animate === null ? 2 : 3,
+    };
+  }
   return null;
+}
+
+/** "If the token isn't a creature, it becomes a 2/2 Robot Villain creature in
+ * addition to its other types" — after a token copy: `animate-all` over the
+ * token made this way that isn't a creature, for good. Or `null`. */
+function noncreatureTokenAnimate(sentence) {
+  const m = /^[Ii]f the token isn't a creature, it becomes an? (\d+)\/(\d+) ((?:[A-Z][a-z]+ )*)creature in addition to its other types\.$/.exec(sentence);
+  if (m === null) return null;
+  return {
+    kind: "animate-all",
+    filter: { thisWay: "created", notTypes: ["creature"] },
+    power: Number(m[1]),
+    toughness: Number(m[2]),
+    addTypes: ["creature"],
+    addSubtypes: m[3].trim() === "" ? [] : m[3].trim().split(" "),
+    duration: "permanent",
+  };
 }
 
 /**

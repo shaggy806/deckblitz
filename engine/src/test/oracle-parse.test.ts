@@ -16622,6 +16622,37 @@ describe("flagged cards' lines (2026-11-07): target player adds mana, a host's t
       first: { kind: "add-counter", target: "source", counter: "charge", amount: 1 },
     });
   });
+
+  it("Ultron: pay for a token copy, which becomes a 2/2 Robot Villain creature if it isn't one", () => {
+    const face = parseFace({
+      name: "Ultron, Artificial Malevolence",
+      type_line: "Legendary Artifact Creature — Robot Villain",
+      oracle_text:
+        "Whenever another nontoken artifact you control enters, you may pay {2}. If you do, create a token that's a copy of it. If the token isn't a creature, it becomes a 2/2 Robot Villain creature in addition to its other types.",
+      mana_cost: "{3}",
+      colors: [],
+    });
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0].effect).toMatchObject({
+      kind: "may",
+      cost: "{2}",
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "create-token-copy", of: "trigger-object", count: 1, who: "you" },
+          {
+            kind: "animate-all",
+            filter: { thisWay: "created", notTypes: ["creature"] },
+            power: 2,
+            toughness: 2,
+            addTypes: ["creature"],
+            addSubtypes: ["Robot", "Villain"],
+            duration: "permanent",
+          },
+        ],
+      },
+    });
+  });
 });
 
 describe("one play shared among cards (2026-11-07): a spell from among milled cards, one of the exiled cards", () => {
