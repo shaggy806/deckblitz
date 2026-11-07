@@ -1935,7 +1935,8 @@
   "effect:add-mana-target-player",
   "static:double-triggers-of-attached",
   "effect:play-from-library-top-this-turn",
-  "cost:pay-life-equal-mv-instead-of-mana"
+  "cost:pay-life-equal-mv-instead-of-mana",
+  "mechanic:spell-enters-transformed"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

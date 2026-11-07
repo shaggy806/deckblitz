@@ -532,6 +532,15 @@ dies trigger of the host looks back (603.10a) to the Equipment still on it.
 The scaffolder reads the line, "Equipped/Enchanted creature has prowess" and
 "Equip [creature type] {N}". Key: static:double-triggers-of-attached.
 
+### A spell put onto the battlefield transformed — built 2026-11-07
+
+By EDHREC rank: Esper Origins (5103), the only card with the line. No engine
+code: `exile` of `"source"` takes the resolving spell off the stack, and
+`put-onto-battlefield` of `"source"` with `transformed` and `withCounters`
+finds it in exile (400.7j) and puts it in back face up (712.14a); a spell gone
+from the stack goes nowhere as it finishes (608.2n). Not a scaffolder
+template: the line recurs nowhere. Key: mechanic:spell-enters-transformed.
+
 ### "Target player adds" mana — built 2026-11-07
 
 By EDHREC rank: The Warring Triad (3110), Radiant Lotus (5668). `add-mana`'s
