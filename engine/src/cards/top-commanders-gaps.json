@@ -1938,7 +1938,8 @@
   "cost:pay-life-equal-mv-instead-of-mana",
   "mechanic:spell-enters-transformed",
   "effect:token-copy-up-to-n-lore-counters",
-  "static:unpreventable-damage-and-global-wither"
+  "static:unpreventable-damage-and-global-wither",
+  "effect:linked-exile-return"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

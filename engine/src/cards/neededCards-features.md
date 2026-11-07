@@ -4910,6 +4910,15 @@ decision: a `look-and-choose` over `zone: "exiled-this-way"` with `chooser: "an-
 `destination: "stay"` records the pick (the `"chosen"` this-way kind), and the next step's `cast-now`
 takes `exceptChosen: true`, passing those cards over. Proving card: Plargg and Nassari.
 
+### Each opponent's chosen creature exiled with the source, one returned later — found built 2026-11-07
+
+Key `effect:linked-exile-return`: no engine code. A `vote` with `choose: true`, `who: "each-opponent"` over
+their own creatures, then `for-each-voted` (`simultaneous`) `exile` with `linked: true`; the return is a
+`look-and-choose` over `zone: "exiled-with-source"` to the battlefield with `withCounters`, which still finds
+the linked cards after a `sacrifice-source` earlier in the same resolution (the stint the ability came from,
+rule 607.2a). "If a player controls no creatures" is `of-player` `"a-player"`. Proving card: Sothera, the
+Supervoid.
+
 ### What restricted mana may pay for, and one type of mana spent as a colour — built 2026-11-02
 
 The need-keys Phase 2 family `cost:mana-spending-rules`, features only. `ManaSpendOnly.purposes` /
