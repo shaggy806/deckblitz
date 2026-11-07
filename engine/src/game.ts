@@ -3072,6 +3072,20 @@ export class Game {
               }),
             );
           }
+          // More Than Meets the Eye (rule 702.162a) — cast converted, its
+          // back face up on the stack (712.11a), for that cost rather than
+          // its mana cost: an alternative cost.
+          const convertedCost = face === undefined ? this.moreThanMeetsTheEyeCostOf(card) : null;
+          if (convertedCost !== null) {
+            const backDef = this.faceDef(card, 1);
+            out.push(
+              ...this.castSpellActions(player, card, backDef.name, backDef, {
+                face: 1,
+                via: "more-than-meets-the-eye",
+                costString: convertedCost,
+              }),
+            );
+          }
           // Freerunning (rule 702.173a) — for its freerunning cost, once an
           // Assassin or a commander of theirs dealt a player combat damage
           // this turn.
@@ -4474,6 +4488,7 @@ export class Game {
       via === "blitz" ||
       via === "dash" ||
       via === "impending" ||
+      via === "more-than-meets-the-eye" ||
       via === "freerunning" ||
       via === "web-slinging" ||
       via === "emerge" ||
@@ -16934,6 +16949,8 @@ export class Game {
               ? this.dashCostOf(cardId, def, caster ?? this.state.objects[cardId]?.owner ?? "")
               : via === "impending"
               ? (def.impending?.cost ?? null)
+              : via === "more-than-meets-the-eye"
+              ? this.moreThanMeetsTheEyeCostOf(cardId)
               : via === "freerunning"
               ? this.freerunningCostOf(caster ?? this.state.objects[cardId]?.owner ?? "", cardId, def)
             : // Face down (rules 702.37c, 702.168a): {3}, an alternative cost.
@@ -17250,6 +17267,19 @@ export class Game {
     // A flip card is cast as its normal half only (rule 710.2): its
     // alternative half exists only on a flipped permanent.
     if (face !== 0 && def.flip) return `${def.name} is a flip card's alternative half, never cast`;
+    // A transforming double-faced card is cast with its front face up (rule
+    // 712.11); its back face only when it's cast "transformed" or
+    // "converted" (712.11a): by disturb, More Than Meets the Eye, or an
+    // effect that offers it so.
+    if (
+      face === 1 &&
+      def.transform &&
+      via !== "disturb" &&
+      via !== "more-than-meets-the-eye" &&
+      via !== "effect"
+    ) {
+      return `${def.name} is a transforming card's back face, cast only transformed or converted`;
+    }
     // Aftermath (rule 702.127a): "this half of this split card can't be cast
     // from any zone other than a graveyard" — whatever else would allow it.
     if (def.aftermath && this.state.objects[cardId]?.zone !== "graveyard") {
@@ -17584,6 +17614,18 @@ export class Game {
       }
       if (def.impending === null) return `${def.name} does not have impending`;
       if (overload || free || altCost) return `impending is an alternative cost, and can't be combined with another`;
+    } else if (via === "more-than-meets-the-eye") {
+      // Rule 702.162a — converted (its back face up, 712.11a) for its More
+      // Than Meets the Eye cost, from the hand or a commander from the
+      // command zone: an alternative cost (118.9a).
+      if (!this.state.zones.perPlayer[player].hand.includes(cardId) && !this.isCastableCommander(player, cardId)) {
+        return `${player} does not have that card in hand`;
+      }
+      if (this.moreThanMeetsTheEyeCostOf(cardId) === null) return `${def.name} does not have More Than Meets the Eye`;
+      if (face !== 1) return `More Than Meets the Eye casts ${def.name} converted, its back face up`;
+      if (overload || free || altCost || evoke !== null || prototype) {
+        return `More Than Meets the Eye is an alternative cost, and can't be combined with another`;
+      }
     } else if (via === "freerunning") {
       // Rule 702.173a — for its freerunning cost, from the hand or a
       // commander from the command zone: an alternative cost (118.9a), only
@@ -44582,6 +44624,17 @@ export class Game {
     const object = this.state.objects[id];
     const own = this.registry.get(object.cardName);
     return own.faces !== null ? this.registry.get(own.faces[0]) : own;
+  }
+
+  /** The More Than Meets the Eye cost (rule 702.162a) `cardId`'s card may be
+   * cast converted for — its front face's, on a transforming double-faced
+   * card — or `null`. */
+  private moreThanMeetsTheEyeCostOf(cardId: ObjectId): string | null {
+    if (this.state.objects[cardId] === undefined) return null;
+    const front = this.frontFaceDef(cardId);
+    return front.transform && front.faces !== null && front.faces.length > 1
+      ? (front.moreThanMeetsTheEye?.cost ?? null)
+      : null;
   }
 
   /** Whether the transforming DFC `id` enters the battlefield transformed:

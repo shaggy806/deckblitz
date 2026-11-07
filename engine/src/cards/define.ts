@@ -5622,6 +5622,14 @@ export interface CardDefinition {
    * start of each search of its owner's own library, at its normal cost and
    * ignoring timing, the search going on afterwards. */
   readonly castWhileSearchingLibrary?: true;
+  /** More Than Meets the Eye (rule 702.162a): "you may cast this card
+   * converted by paying `cost` rather than its mana cost" — an alternative
+   * cost (`via: "more-than-meets-the-eye"`) that puts the card on the stack
+   * with its back face up (712.11a), so it enters converted. On a
+   * transforming double-faced card's faces (read off its front). From the
+   * hand, or a commander from the command zone, as the other alternative
+   * costs that cast from a hand are offered. */
+  readonly moreThanMeetsTheEye?: { readonly cost: string };
   /** Foretell (rule 702.143 — ROADMAP Phase 6b) — during your turn you may pay
    * `{2}` to exile this card from your hand face-down; on a later turn you may
    * cast it from exile for `cost`. `null` for a card without foretell. */
@@ -6145,6 +6153,7 @@ const PRINTED_ABILITY: {
   castSelfFromGraveyard: (def) => def.castSelfFromGraveyard !== undefined,
   castSelfFromExile: (def) => def.castSelfFromExile !== undefined,
   castWhileSearchingLibrary: (def) => def.castWhileSearchingLibrary !== undefined,
+  moreThanMeetsTheEye: (def) => def.moreThanMeetsTheEye !== undefined,
   chapters: (def) => def.chapters !== null && def.chapters.length > 0,
   readAhead: (def) => def.readAhead,
   faces: false,
@@ -6395,6 +6404,7 @@ interface CardDraft {
   castSelfFromGraveyard?: NonNullable<CardDefinition["castSelfFromGraveyard"]>;
   castSelfFromExile?: true;
   castWhileSearchingLibrary?: true;
+  moreThanMeetsTheEye?: { readonly cost: string };
   harmonize?: { readonly cost: string };
   retrace?: boolean;
   madness?: { readonly cost: string };
@@ -6756,5 +6766,6 @@ function rareCardFields(draft: CardDraft) {
     ...(draft.castSelfFromGraveyard !== undefined ? { castSelfFromGraveyard: draft.castSelfFromGraveyard } : {}),
     ...(draft.castSelfFromExile !== undefined ? { castSelfFromExile: draft.castSelfFromExile } : {}),
     ...(draft.castWhileSearchingLibrary !== undefined ? { castWhileSearchingLibrary: draft.castWhileSearchingLibrary } : {}),
+    ...(draft.moreThanMeetsTheEye !== undefined ? { moreThanMeetsTheEye: draft.moreThanMeetsTheEye } : {}),
   };
 }

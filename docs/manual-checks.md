@@ -7578,3 +7578,13 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Norn's Annex: two attackers at two Annex players, four players
 - **Do:** Go to combat, attack Bob with Grizzly Bears and Dave with Hill Giant, and confirm. When asked, pick "Mana".
 - **Expect:** The bar reads "costs {W/P}{W/P}". Both attack; your Plains taps for one pip and you lose 2 life for the other, going to 38.
+
+## More Than Meets the Eye (2026-11-07)
+
+### Slicer, Hired Muscle: cast converted for {2}{R}
+- **Do:** Click Slicer, Hired Muscle in your hand and pick "Cast Slicer, High-Speed Antagonist (More Than Meets the Eye)".
+- **Expect:** Three Mountains tap, not five. Slicer enters as Slicer, High-Speed Antagonist, a 3/2 artifact creature with first strike and haste.
+
+### Slicer, Hired Muscle: cast converted, four players
+- **Do:** Click Slicer, Hired Muscle in your hand and pick "Cast Slicer, High-Speed Antagonist (More Than Meets the Eye)".
+- **Expect:** Three Mountains tap. Slicer enters as Slicer, High-Speed Antagonist.

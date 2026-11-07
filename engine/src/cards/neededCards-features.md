@@ -432,6 +432,20 @@ from hand (702.170a, a special action, 116.2k): `Game.plotCostNow`, read by the 
 `costModification` with `castFrom: ["graveyard", "exile"]`, which already ran. The
 scaffolder reads both lines. Key: cost:plot-cost-reduction.
 
+### More Than Meets the Eye, living metal and convert — built 2026-11-07
+
+By EDHREC rank: Slicer, Hired Muscle (3512, flagged ASAP). `CardDefinition.moreThanMeetsTheEye`
+(rule 702.162a) is an alternative cost, `via: "more-than-meets-the-eye"` with `face: 1`, offered
+from the hand or the command zone like impending's: the card is cast converted, its back face up
+on the stack (712.11a), its mana value its front's (712.8c), and enters converted. A transforming
+card's back face is now refused as a cast but by disturb, this, or an effect casting it
+transformed (712.11). Living metal (702.161a) is a `your-turn` static adding the creature type;
+convert is `transform` (701.28a). The scaffolder reads both keywords. Proving cards: Slicer, Hired
+Muscle // Slicer, High-Speed Antagonist. Key: mechanic:more-than-meets-the-eye. Left: Starscream
+(also `trigger:becomes-monarch`), Ratchet, Field Medic, for `author-freed`; like blitz's and
+web-slinging's, the offer comes from the hand and command zone only, not every zone a card may
+be cast from (`docs/engine-gaps.md`).
+
 ### Every nonbasic land type, and base P/T set to your life total — built 2026-11-06
 
 Flagged Build ASAP (B270): Planar Nexus (2625) and Aettir and Priwen (2672).

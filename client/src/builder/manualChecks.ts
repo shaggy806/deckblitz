@@ -11370,4 +11370,19 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: ["Norn's Annex"] }, {}, { bf: ["Norn's Annex"] }],
     }),
   ),
+  // --- More Than Meets the Eye (2026-11-07) -----------------------------------
+  preset(
+    'Slicer, Hired Muscle: cast converted for {2}{R}',
+    board({
+      you: { bf: ['Mountain*5'], hand: ['Slicer, Hired Muscle'] },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    'Slicer, Hired Muscle: cast converted, four players',
+    board({
+      you: { bf: ['Mountain*5'], hand: ['Slicer, Hired Muscle'] },
+      opp: [{ bf: [] }, { bf: [] }, { bf: [] }],
+    }),
+  ),
 ]

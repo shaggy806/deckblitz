@@ -16639,3 +16639,25 @@ describe("one play shared among cards (2026-11-07): a spell from among milled ca
     expect(face.triggered[0].effect).toEqual({ kind: "impulse-exile", amount: 2, duration: "your-next-end-step", upTo: 1 });
   });
 });
+
+describe("More Than Meets the Eye and living metal", () => {
+  it("reads More Than Meets the Eye [cost] as the card's alternative cost (rule 702.162a)", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Legendary Artifact Creature — Robot",
+      oracle_text: "More Than Meets the Eye {2}{R} (You may cast this card converted for {2}{R}.)",
+    });
+    expect(face.moreThanMeetsTheEye).toEqual({ cost: "{2}{R}" });
+    expect(face.complete).toBe(true);
+  });
+
+  it("reads living metal as a creature during your turn (rule 702.161a)", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Legendary Artifact — Vehicle",
+      oracle_text: "Living metal (During your turn, this Vehicle is also a creature.)",
+    });
+    expect(face.static[0]).toMatchObject({ affects: { scope: "self" }, condition: { kind: "your-turn" }, addTypes: ["creature"] });
+    expect(face.complete).toBe(true);
+  });
+});

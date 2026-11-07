@@ -229,7 +229,7 @@ function graveyardVariantLabel(
     if (source !== undefined) parts.push(`via ${source}`)
   }
   if (a.kind === 'cast-spell') {
-    if (a.via !== undefined && a.via !== 'graveyard-permission') parts.push((a.via === 'flashback' || a.via === 'foretell-given') && a.altCostText !== undefined ? a.altCostText : a.via)
+    if (a.via !== undefined && a.via !== 'graveyard-permission') parts.push((a.via === 'flashback' || a.via === 'foretell-given') && a.altCostText !== undefined ? a.altCostText : a.via === 'more-than-meets-the-eye' ? 'More Than Meets the Eye' : a.via)
     if (a.via === 'emerge' && a.emergeSacrifice) parts.push(`sacrificing ${a.emergeSacrifice.cardName}: −${a.emergeSacrifice.manaValue}`)
     if (a.kicked) parts.push(`${a.kickerKeyword ?? 'kicked'} ${a.kickerCost ?? ''}`.trim())
     if (a.xCost?.minX !== undefined && a.xCost.minX === a.xCost.maxX) parts.push(`X=${a.xCost.maxX}`)
@@ -7152,6 +7152,7 @@ function Table({
                       {a.kind === 'cast-spell' && a.via === 'blitz' ? ' (blitz)' : ''}
                       {a.kind === 'cast-spell' && a.via === 'dash' ? ' (dash)' : ''}
                       {a.kind === 'cast-spell' && a.via === 'impending' ? ' (impending)' : ''}
+                      {a.kind === 'cast-spell' && a.via === 'more-than-meets-the-eye' ? ' (More Than Meets the Eye)' : ''}
                       {a.kind === 'cast-spell' && a.via === 'freerunning' ? ' (freerunning)' : ''}
                       {a.kind === 'cast-spell' && a.offspring ? (
                         <> (offspring <Symbols text={a.offspringCost ?? ''} />)</>

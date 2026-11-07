@@ -508,6 +508,11 @@ function keywordPart(part, faceName, typeLine = "") {
     // Devoid makes the card colourless (rule 702.114a), which its colours
     // already say.
     devoid: () => ({}),
+    // Living metal (rule 702.161a): "During your turn, this permanent is an
+    // artifact creature in addition to its other types."
+    "living metal": () => ({
+      static: [{ affects: { scope: "self" }, condition: { kind: "your-turn" }, addTypes: ["creature"], text: "Living metal" }],
+    }),
     "affinity for artifacts": () => ({ card: { selfCostReduction: affinity({ type: "artifact" }) } }),
   }[p.toLowerCase()];
   if (simple !== undefined) return simple();
@@ -522,6 +527,11 @@ function keywordPart(part, faceName, typeLine = "") {
     return { card: { morph: { keyword: m[1].toLowerCase(), cost: "", also, text: m[2] } } };
   }
   if ((m = new RegExp(`^disturb ${COST}$`, "i").exec(p))) return { card: { disturb: { cost: m[1] } } };
+  // More Than Meets the Eye (rule 702.162a): an alternative cost that casts
+  // the card converted — on its faces, read off the front.
+  if ((m = new RegExp(`^more than meets the eye ${COST}$`, "i").exec(p))) {
+    return { card: { moreThanMeetsTheEye: { cost: m[1] } } };
+  }
   // Toxic N (rule 702.164a): the card's own `toxic` field.
   if ((m = /^toxic (\d+)$/i.exec(p))) return { card: { toxic: Number(m[1]) } };
   // Vanishing N (rule 702.63a): the helper's three abilities.

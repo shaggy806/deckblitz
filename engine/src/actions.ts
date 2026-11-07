@@ -72,6 +72,11 @@ export type CastVia =
    * comes off the total cost. An alternative cost; every timing rule still
    * applies. */
   | "emerge"
+  /** For its More Than Meets the Eye cost (rule 702.162a): from the hand or
+   * the command zone, converted — its back face up on the stack (712.11a),
+   * so the cast names `face: 1`. An alternative cost; every timing rule
+   * still applies, judged on the back face (712.11c, 712.11d). */
+  | "more-than-meets-the-eye"
   | "suspend"
   | "cascade"
   /** Harmonize (rule 702.180a) — cast from a graveyard for its harmonize
