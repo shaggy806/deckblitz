@@ -10641,6 +10641,7 @@ import _poolGlowingAnemone from "./pool/glowing-anemone.js";
 import _poolGlowrider from "./pool/glowrider.js";
 import _poolGlowsporeShaman from "./pool/glowspore-shaman.js";
 import _poolGlowstoneRecluse from "./pool/glowstone-recluse.js";
+import _poolGluntchTheBestower from "./pool/gluntch-the-bestower.js";
 import _poolGluttonousCyclops from "./pool/gluttonous-cyclops.js";
 import _poolGluttonousGuest from "./pool/gluttonous-guest.js";
 import _poolGluttonousSlime from "./pool/gluttonous-slime.js";
@@ -15828,6 +15829,7 @@ import _poolManaLeech from "./pool/mana-leech.js";
 import _poolManaMatrix from "./pool/mana-matrix.js";
 import _poolManaPrism from "./pool/mana-prism.js";
 import _poolManaReflection from "./pool/mana-reflection.js";
+import _poolManaSculpt from "./pool/mana-sculpt.js";
 import _poolManaSeism from "./pool/mana-seism.js";
 import _poolManaSeverance from "./pool/mana-severance.js";
 import _poolManaSkimmer from "./pool/mana-skimmer.js";
@@ -42140,6 +42142,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGlowrider,
   _poolGlowsporeShaman,
   _poolGlowstoneRecluse,
+  _poolGluntchTheBestower,
   _poolGluttonousCyclops,
   _poolGluttonousGuest,
   _poolGluttonousSlime,
@@ -47327,6 +47330,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolManaMatrix,
   _poolManaPrism,
   _poolManaReflection,
+  _poolManaSculpt,
   _poolManaSeism,
   _poolManaSeverance,
   _poolManaSkimmer,
@@ -73652,6 +73656,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/glowrider": _poolGlowrider,
   "pool/glowspore-shaman": _poolGlowsporeShaman,
   "pool/glowstone-recluse": _poolGlowstoneRecluse,
+  "pool/gluntch-the-bestower": _poolGluntchTheBestower,
   "pool/gluttonous-cyclops": _poolGluttonousCyclops,
   "pool/gluttonous-guest": _poolGluttonousGuest,
   "pool/gluttonous-slime": _poolGluttonousSlime,
@@ -78839,6 +78844,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mana-matrix": _poolManaMatrix,
   "pool/mana-prism": _poolManaPrism,
   "pool/mana-reflection": _poolManaReflection,
+  "pool/mana-sculpt": _poolManaSculpt,
   "pool/mana-seism": _poolManaSeism,
   "pool/mana-severance": _poolManaSeverance,
   "pool/mana-skimmer": _poolManaSkimmer,

@@ -489,6 +489,7 @@ import _poolMakindiStampede from "../pool/makindi-stampede.js";
 import _poolMalakirFamiliar from "../pool/malakir-familiar.js";
 import _poolMalakirMire from "../pool/malakir-mire.js";
 import _poolMalboro from "../pool/malboro.js";
+import _poolManaSculpt from "../pool/mana-sculpt.js";
 import _poolManorSkeleton from "../pool/manor-skeleton.js";
 import _poolMantaRiders from "../pool/manta-riders.js";
 import _poolMaraleafPixie from "../pool/maraleaf-pixie.js";
@@ -1465,6 +1466,7 @@ const shard: CardShard = {
     _poolMalakirFamiliar,
     _poolMalakirMire,
     _poolMalboro,
+    _poolManaSculpt,
     _poolManorSkeleton,
     _poolMantaRiders,
     _poolMaraleafPixie,

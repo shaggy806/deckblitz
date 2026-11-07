@@ -371,6 +371,7 @@ import _poolGlimmerOfGenius from "../pool/glimmer-of-genius.js";
 import _poolGlimmervoid from "../pool/glimmervoid.js";
 import _poolGlimpseTheFuture from "../pool/glimpse-the-future.js";
 import _poolGlissaSunslayer from "../pool/glissa-sunslayer.js";
+import _poolGluntchTheBestower from "../pool/gluntch-the-bestower.js";
 import _poolGnatAlleyCreeper from "../pool/gnat-alley-creeper.js";
 import _poolGnawingZombie from "../pool/gnawing-zombie.js";
 import _poolGoblinGangLeader from "../pool/goblin-gang-leader.js";
@@ -1352,6 +1353,7 @@ const shard: CardShard = {
     _poolGlimmervoid,
     _poolGlimpseTheFuture,
     _poolGlissaSunslayer,
+    _poolGluntchTheBestower,
     _poolGnatAlleyCreeper,
     _poolGnawingZombie,
     _poolGoblinGangLeader,
