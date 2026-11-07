@@ -16359,10 +16359,19 @@ export class Game {
     let count = 0;
     for (const id of this.state.zones.shared.battlefield) {
       const doubler = this.state.objects[id];
-      if (doubler.controller !== controller || hasLostAbilities(this.state, this.registry,doubler)) continue;
+      if (hasLostAbilities(this.state, this.registry,doubler)) continue;
       for (const ability of this.registry.get(rulesTextName(doubler)).static) {
         const d = ability.doubleTriggersOf;
         if (d === undefined || !this.staticActive(doubler, ability)) continue;
+        // "A triggered ability of equipped creature" (Wizard's Staff): the
+        // host's, whoever controls it. A departed host's leaves-the-
+        // battlefield ability looks back (rule 603.10a) to the Equipment
+        // still on it, as it is until the state-based check unattaches it.
+        if (d.host === true) {
+          if (!ofSpell && doubler.attachedTo === sourceId) count += 1;
+          continue;
+        }
+        if (doubler.controller !== controller) continue;
         if (ofSpell && d.spells !== true) continue;
         const ofSelfOrEquipment =
           d.selfAndEquipment === true &&

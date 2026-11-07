@@ -13785,6 +13785,19 @@ function parseFaceAsWritten(face, ctx = {}) {
       });
       continue;
     }
+    // "Equip Knight {1}", "Equip Wizard {1}" (rule 702.6a's "Equip
+    // [quality]"): a creature of that type you control.
+    if ((m = /^Equip ([A-Z][a-z]+) ((?:\{[^}]+\})+)$/.exec(line))) {
+      out.activated.push({
+        cost: { mana: m[2], tap: false },
+        targets: [{ kind: "permanent", whose: "you", filter: { type: "creature", subtype: m[1] } }],
+        effect: { kind: "attach", target: 0 },
+        resolve: null,
+        text: printed(raw),
+        sorcerySpeed: true,
+      });
+      continue;
+    }
     // Reconfigure [cost] (rule 702.151a): the `reconfigure` helper's two
     // abilities — attach to another creature you control, or unattach.
     if ((m = /^Reconfigure ((?:\{[^}]+\})+)$/.exec(line))) {
@@ -19833,6 +19846,14 @@ function parseStatic(line, text) {
       doubleTriggersOf: { filter: { colorless: true, controlledBy: "you" }, others: true, spells: true },
       text,
     };
+  }
+  // "… of equipped creature" (Wizard's Staff): its host's, whoever controls it.
+  if (line === "If a triggered ability of equipped creature triggers, that ability triggers an additional time.") {
+    return { affects: { scope: "self" }, doubleTriggersOf: { host: true }, text };
+  }
+  // Prowess is a triggered ability (rule 702.108), granted as one.
+  if (line === "Equipped creature has prowess." || line === "Enchanted creature has prowess.") {
+    return { affects: { scope: "attached" }, grantsTriggered: [prowessAbility()], text };
   }
   if (line === "If a triggered ability of another creature you control of the chosen type triggers, it triggers an additional time.") {
     return {

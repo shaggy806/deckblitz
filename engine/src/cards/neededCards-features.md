@@ -444,6 +444,15 @@ With them, needing no engine code: Liliana of the Dark Realms (a resolution-time
 static:every-nonbasic-land-type, static:set-base-pt-to-life-total,
 decision:choose-plus-or-minus, cost:multiple-alternative-costs.
 
+### Doubling the equipped creature's triggers — built 2026-11-07
+
+By EDHREC rank: Wizard's Staff (2832). `doubleTriggersOf`'s `host` doubles the
+triggers of the permanent the static's own permanent is attached to, whoever
+controls it (the line says nothing of "you control"), granted ones too, and a
+dies trigger of the host looks back (603.10a) to the Equipment still on it.
+The scaffolder reads the line, "Equipped/Enchanted creature has prowess" and
+"Equip [creature type] {N}". Key: static:double-triggers-of-attached.
+
 ### "Target player adds" mana — built 2026-11-07
 
 By EDHREC rank: The Warring Triad (3110), Radiant Lotus (5668). `add-mana`'s

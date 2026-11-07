@@ -6021,7 +6021,7 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   card the event is about: Traveling Chocobo's "a land or Bird you control
   entering" is `{ anyOf: [{ type: "land" }, { subtype: "Bird" }], controlledBy:
   "you" }`.
-- `doubleTriggersOf: { filter?, selfAndEquipment?, others?, spells? }` — the same, keyed on
+- `doubleTriggersOf: { filter?, selfAndEquipment?, others?, spells?, host? }` — the same, keyed on
   **whose** ability it is: "if a triggered ability of an Ally you control
   triggers" (Katara, the Fearless: `filter: { subtype: "Ally", controlledBy:
   "you" }`), "…of a creature you control with power 2 or less" (Delney).
@@ -6033,7 +6033,10 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   leaves-the-battlefield ability's source is matched as it last existed. The
   filter reads this permanent as its source: Roaming Throne's "another
   creature you control of the chosen type" is `{ filter: { type: "creature",
-  controlledBy: "you", ofChosenType: true }, others: true }`. All
+  controlledBy: "you", ofChosenType: true }, others: true }`. `host: true` is
+  "a triggered ability of **equipped creature**" (Wizard's Staff): the
+  permanent this one is attached to, whoever controls it, its granted
+  abilities too (the Staff's prowess) and its dies trigger. All
   the doublers add up: an Ally's attack trigger under Katara and Isshin fires
   three times.
 

@@ -1911,7 +1911,8 @@
   "zone:play-milled-card-this-turn",
   "amount:additional-land-drop-amount",
   "effect:temporary-permanents-enter-tapped",
-  "effect:add-mana-target-player"
+  "effect:add-mana-target-player",
+  "static:double-triggers-of-attached"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

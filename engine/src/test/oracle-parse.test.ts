@@ -16562,6 +16562,21 @@ describe("target player adds mana", () => {
     });
   });
 
+  it("Wizard's Staff whole: granted prowess, its host's triggers doubled, Equip Wizard", () => {
+    const face = parseFace({
+      name: "Wizard's Staff",
+      type_line: "Artifact — Equipment",
+      oracle_text:
+        "Equipped creature has prowess. (Whenever its controller casts a noncreature spell, that creature gets +1/+1 until end of turn.)\nIf a triggered ability of equipped creature triggers, that ability triggers an additional time.\nEquip Wizard {1}\nEquip {3}",
+      mana_cost: "{1}{U}",
+      colors: ["U"],
+    });
+    expect(face.complete).toBe(true);
+    expect(face.static[0]).toMatchObject({ affects: { scope: "attached" }, grantsTriggered: [{ trigger: { on: "cast-spell", noncreatureOnly: true } }] });
+    expect(face.static[1]).toMatchObject({ affects: { scope: "self" }, doubleTriggersOf: { host: true } });
+    expect(face.activated[0].targets).toEqual([{ kind: "permanent", whose: "you", filter: { type: "creature", subtype: "Wizard" } }]);
+  });
+
   it("two mana of any one color, to a target player", () => {
     const face = parseFace({ name: "Test Card", type_line: "Artifact", oracle_text: "{T}: Target player adds two mana of any one color.", mana_cost: "{3}", colors: [] });
     expect(face.activated[0].effect).toEqual({ kind: "add-mana", mana: "any-color", amount: 2, target: 0 });

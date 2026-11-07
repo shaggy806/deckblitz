@@ -4251,6 +4251,14 @@ export interface StaticAbility {
      * cast this spell" and cascade. Each additional instance makes its own
      * choices as it goes on the stack (its ruling). */
     readonly spells?: true;
+    /** "If a triggered ability of **equipped creature** triggers" (Wizard's
+     * Staff): the permanent this static's own permanent is attached to —
+     * whoever controls it, since the line says nothing of "you control" —
+     * its own triggered abilities and those it's been granted (the Staff's
+     * prowess) alike. A leaves-the-battlefield ability of the creature
+     * counts too: it looks back (rule 603.10a) to a moment the Equipment
+     * was still attached. */
+    readonly host?: true;
   };
   /**
    * "Permanents entering don't cause abilities of permanents your opponents
