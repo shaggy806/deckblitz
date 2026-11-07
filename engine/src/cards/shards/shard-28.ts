@@ -978,6 +978,7 @@ import _poolWrenchMind from "../pool/wrench-mind.js";
 import _poolWritOfReturn from "../pool/writ-of-return.js";
 import _poolWurmsTooth from "../pool/wurms-tooth.js";
 import _poolWurmskinForger from "../pool/wurmskin-forger.js";
+import _poolXuIfitOsteoharmonist from "../pool/xu-ifit-osteoharmonist.js";
 import _poolYawgmothsEdict from "../pool/yawgmoths-edict.js";
 import _poolYouFindACursedIdol from "../pool/you-find-a-cursed-idol.js";
 import _poolYunaGrandSummoner from "../pool/yuna-grand-summoner.js";
@@ -1991,6 +1992,7 @@ const shard: CardShard = {
     _poolWritOfReturn,
     _poolWurmsTooth,
     _poolWurmskinForger,
+    _poolXuIfitOsteoharmonist,
     _poolYawgmothsEdict,
     _poolYouFindACursedIdol,
     _poolYunaGrandSummoner,

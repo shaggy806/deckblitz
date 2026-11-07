@@ -24314,6 +24314,7 @@ import _poolSorinsThirst from "./pool/sorins-thirst.js";
 import _poolSorinsVengeance from "./pool/sorins-vengeance.js";
 import _poolSosukeSonOfSeshiro from "./pool/sosuke-son-of-seshiro.js";
 import _poolSosukesSummons from "./pool/sosukes-summons.js";
+import _poolSotheraTheSupervoid from "./pool/sothera-the-supervoid.js";
 import _poolSoulBarrier from "./pool/soul-barrier.js";
 import _poolSoulBleed from "./pool/soul-bleed.js";
 import _poolSoulChanneling from "./pool/soul-channeling.js";
@@ -28147,6 +28148,7 @@ import _poolUktabiFaerie from "./pool/uktabi-faerie.js";
 import _poolUktabiOrangutan from "./pool/uktabi-orangutan.js";
 import _poolUktabiWildcats from "./pool/uktabi-wildcats.js";
 import _poolUkudCobra from "./pool/ukud-cobra.js";
+import _poolUlalekFusedAtrocity from "./pool/ulalek-fused-atrocity.js";
 import _poolUlamogTheCeaselessHunger from "./pool/ulamog-the-ceaseless-hunger.js";
 import _poolUlamogTheDefiler from "./pool/ulamog-the-defiler.js";
 import _poolUlamogTheInfiniteGyre from "./pool/ulamog-the-infinite-gyre.js";
@@ -30485,6 +30487,7 @@ import _poolXindiSurveyors from "./pool/xindi-surveyors.js";
 import _poolXiraArien from "./pool/xira-arien.js";
 import _poolXolatoyacTheSmilingFlood from "./pool/xolatoyac-the-smiling-flood.js";
 import _poolXorn from "./pool/xorn.js";
+import _poolXuIfitOsteoharmonist from "./pool/xu-ifit-osteoharmonist.js";
 import _poolXunYuWeiAdvisor from "./pool/xun-yu-wei-advisor.js";
 import _poolXyrisTheWrithingStorm from "./pool/xyris-the-writhing-storm.js";
 import _poolYahenniUndyingPartisan from "./pool/yahenni-undying-partisan.js";
@@ -55853,6 +55856,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSorinsVengeance,
   _poolSosukeSonOfSeshiro,
   _poolSosukesSummons,
+  _poolSotheraTheSupervoid,
   _poolSoulBarrier,
   _poolSoulBleed,
   _poolSoulChanneling,
@@ -59686,6 +59690,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUktabiOrangutan,
   _poolUktabiWildcats,
   _poolUkudCobra,
+  _poolUlalekFusedAtrocity,
   _poolUlamogTheCeaselessHunger,
   _poolUlamogTheDefiler,
   _poolUlamogTheInfiniteGyre,
@@ -62024,6 +62029,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolXiraArien,
   _poolXolatoyacTheSmilingFlood,
   _poolXorn,
+  _poolXuIfitOsteoharmonist,
   _poolXunYuWeiAdvisor,
   _poolXyrisTheWrithingStorm,
   _poolYahenniUndyingPartisan,
@@ -87405,6 +87411,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sorins-vengeance": _poolSorinsVengeance,
   "pool/sosuke-son-of-seshiro": _poolSosukeSonOfSeshiro,
   "pool/sosukes-summons": _poolSosukesSummons,
+  "pool/sothera-the-supervoid": _poolSotheraTheSupervoid,
   "pool/soul-barrier": _poolSoulBarrier,
   "pool/soul-bleed": _poolSoulBleed,
   "pool/soul-channeling": _poolSoulChanneling,
@@ -91238,6 +91245,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/uktabi-orangutan": _poolUktabiOrangutan,
   "pool/uktabi-wildcats": _poolUktabiWildcats,
   "pool/ukud-cobra": _poolUkudCobra,
+  "pool/ulalek-fused-atrocity": _poolUlalekFusedAtrocity,
   "pool/ulamog-the-ceaseless-hunger": _poolUlamogTheCeaselessHunger,
   "pool/ulamog-the-defiler": _poolUlamogTheDefiler,
   "pool/ulamog-the-infinite-gyre": _poolUlamogTheInfiniteGyre,
@@ -93576,6 +93584,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/xira-arien": _poolXiraArien,
   "pool/xolatoyac-the-smiling-flood": _poolXolatoyacTheSmilingFlood,
   "pool/xorn": _poolXorn,
+  "pool/xu-ifit-osteoharmonist": _poolXuIfitOsteoharmonist,
   "pool/xun-yu-wei-advisor": _poolXunYuWeiAdvisor,
   "pool/xyris-the-writhing-storm": _poolXyrisTheWrithingStorm,
   "pool/yahenni-undying-partisan": _poolYahenniUndyingPartisan,

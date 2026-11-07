@@ -869,6 +869,7 @@ import _poolTyranidInvasion from "../pool/tyranid-invasion.js";
 import _poolTyranidPrime from "../pool/tyranid-prime.js";
 import _poolUSSEnterpriseESovereign from "../pool/u-s-s-enterprise-e-sovereign.js";
 import _poolUktabiFaerie from "../pool/uktabi-faerie.js";
+import _poolUlalekFusedAtrocity from "../pool/ulalek-fused-atrocity.js";
 import _poolUlvenwaldBehemoth from "../pool/ulvenwald-behemoth.js";
 import _poolUmaraRaptor from "../pool/umara-raptor.js";
 import _poolUnconventionalTactics from "../pool/unconventional-tactics.js";
@@ -1850,6 +1851,7 @@ const shard: CardShard = {
     _poolTyranidPrime,
     _poolUSSEnterpriseESovereign,
     _poolUktabiFaerie,
+    _poolUlalekFusedAtrocity,
     _poolUlvenwaldBehemoth,
     _poolUmaraRaptor,
     _poolUnconventionalTactics,

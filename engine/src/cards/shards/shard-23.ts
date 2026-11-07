@@ -774,6 +774,7 @@ import _poolSolveTheEquation from "../pool/solve-the-equation.js";
 import _poolSomethingWorthSaving from "../pool/something-worth-saving.js";
 import _poolSorcerersBroom from "../pool/sorcerers-broom.js";
 import _poolSorinOfHouseMarkov from "../pool/sorin-of-house-markov.js";
+import _poolSotheraTheSupervoid from "../pool/sothera-the-supervoid.js";
 import _poolSoulOfNewPhyrexia from "../pool/soul-of-new-phyrexia.js";
 import _poolSoulShatter from "../pool/soul-shatter.js";
 import _poolSouldrinker from "../pool/souldrinker.js";
@@ -1765,6 +1766,7 @@ const shard: CardShard = {
     _poolSomethingWorthSaving,
     _poolSorcerersBroom,
     _poolSorinOfHouseMarkov,
+    _poolSotheraTheSupervoid,
     _poolSoulOfNewPhyrexia,
     _poolSoulShatter,
     _poolSouldrinker,
