@@ -9233,6 +9233,17 @@ export function parseEffect(text, outer) {
       skip -= 1;
       continue;
     }
+    // "After this phase, there is an additional combat phase" (rule 500.8 —
+    // Port Razer), and "Only land creatures can attack during that combat
+    // phase" after it (Bumi, Unleashed): a restriction on that phase alone.
+    if (/^After this phase, there is an additional combat phase\.$/.test(sentence)) {
+      const onlyLands = sentences[i + 1] === "Only land creatures can attack during that combat phase.";
+      const effect = { kind: "additional-combat", afterThisPhase: true, ...(onlyLands ? { onlyAttackers: { type: "land" } } : {}) };
+      parsed.push(effect);
+      hints.push({ sentence, effect });
+      if (onlyLands) skip = 1;
+      continue;
+    }
     // "Exile the top card of your library. You may play that card until you
     // exile another card with ~." and the other windows, and "exile target
     // card from your graveyard" with a permission for a duration.

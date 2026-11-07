@@ -7588,3 +7588,9 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Slicer, Hired Muscle: cast converted, four players
 - **Do:** Click Slicer, Hired Muscle in your hand and pick "Cast Slicer, High-Speed Antagonist (More Than Meets the Eye)".
 - **Expect:** Three Mountains tap. Slicer enters as Slicer, High-Speed Antagonist.
+
+## An extra combat only land creatures attack in (2026-11-07)
+
+### Bumi, Unleashed: only land creatures attack in the extra combat
+- **Do:** Go to combat and attack Bob with Bumi alone. After damage, in the extra combat, try to attack with Grizzly Bears.
+- **Expect:** Bumi's hit untaps your lands and starts another combat. In it, Dryad Arbor can attack but Grizzly Bears can't.

@@ -16661,3 +16661,24 @@ describe("More Than Meets the Eye and living metal", () => {
     expect(face.complete).toBe(true);
   });
 });
+
+describe("an added combat after this phase, and only land creatures attacking in it", () => {
+  it("reads the added combat, with or without its lands-only restriction", () => {
+    expect(parseEffect("After this phase, there is an additional combat phase.", ctx()).effect).toEqual({
+      kind: "additional-combat",
+      afterThisPhase: true,
+    });
+    const bumi = parseEffect(
+      "Untap target creature. After this phase, there is an additional combat phase. Only land creatures can attack during that combat phase.",
+      ctx(),
+    );
+    expect(bumi.todo).toEqual([]);
+    expect(bumi.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "untap", target: 0 },
+        { kind: "additional-combat", afterThisPhase: true, onlyAttackers: { type: "land" } },
+      ],
+    });
+  });
+});

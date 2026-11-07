@@ -7733,6 +7733,12 @@ export type EffectSpec =
        * done, in that stint, are bound for that combat phase alone, whatever
        * other phases come first (rule 500.8). */
       readonly forcedAttackers?: { readonly filter: CardFilter; readonly cantAttackYou?: true };
+      /** With `afterThisPhase`: "**Only land creatures can attack during that
+       * combat phase**" (Bumi, Unleashed): a creature not matching this filter
+       * (read from this effect's controller's side as attackers are
+       * declared, rule 508.1c) can't attack in that combat phase alone — not
+       * in any other (its ruling). */
+      readonly onlyAttackers?: CardFilter;
       /** "**At the beginning of that combat**, untap all creatures you control"
        * (Moraug, Fury of Akoum; World at War): a delayed triggered ability
        * (rule 603.7) waiting for this one combat phase, whatever other phases
@@ -12861,6 +12867,7 @@ export interface EffectApi {
     afterThisPhase?: {
       readonly withMain: boolean;
       readonly forcedAttackers?: { readonly filter: CardFilter; readonly cantAttackYou?: true };
+      readonly onlyAttackers?: CardFilter;
     },
     how?: { readonly marked?: boolean; readonly afterSecondMain?: true },
   ): number | undefined;
@@ -19242,6 +19249,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ? {
               withMain: spec.withMain === true,
               ...(spec.forcedAttackers !== undefined ? { forcedAttackers: spec.forcedAttackers } : {}),
+              ...(spec.onlyAttackers !== undefined ? { onlyAttackers: spec.onlyAttackers } : {}),
             }
           : undefined,
         { marked: spec.atBeginning !== undefined, ...(spec.afterSecondMain === true ? { afterSecondMain: true } : {}) },

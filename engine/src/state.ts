@@ -3327,6 +3327,10 @@ export type AddedPhase =
         readonly objects: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
         readonly avoid?: PlayerId;
       };
+      /** "Only land creatures can attack during that combat phase" (Bumi,
+       * Unleashed — `"additional-combat"`'s `onlyAttackers`): as the phase
+       * begins, a `PlayerEffect.onlyAttackers` of `you`'s, ending with it. */
+      readonly onlyAttackers?: { readonly filter: CardFilter; readonly you: PlayerId };
       /** This phase's mark, for a delayed ability "at the beginning of that
        * combat" (`DelayedTrigger.at`'s `thatCombat`). */
       readonly mark?: number;
@@ -5983,6 +5987,11 @@ export interface PlayerEffect {
   /** Only `cantAttack`s of creatures this player controls (Champions of Minas
    * Tirith's "they can't attack you this combat"). */
   readonly cantAttackBy?: PlayerId;
+  /** Only creatures matching this (from `owner`'s side) can attack while it
+   * lasts — a restriction on every other creature (rule 508.1c): Bumi,
+   * Unleashed's "only land creatures can attack during that combat phase",
+   * `expires` at that phase's end. */
+  readonly onlyAttackers?: CardFilter;
 }
 
 /**

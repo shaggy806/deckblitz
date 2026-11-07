@@ -6,6 +6,7 @@
   "effect:cast-one-per-player-from-milled",
   "zone:cast-one-from-milled-until-end-of-turn",
   "zone:impulse-play-only-one",
+  "effect:extra-combat-attack-restriction",
   "mechanic:more-than-meets-the-eye",
   "cost:plot-cost-reduction",
   "effect:attach-equipment-that-was-attached",

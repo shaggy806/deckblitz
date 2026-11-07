@@ -11385,4 +11385,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: [] }, { bf: [] }, { bf: [] }],
     }),
   ),
+  // --- An extra combat only land creatures attack in (2026-11-07) -----------
+  preset(
+    'Bumi, Unleashed: only land creatures attack in the extra combat',
+    board({
+      you: { bf: ['Bumi, Unleashed', 'Grizzly Bears', 'Dryad Arbor', { name: 'Forest', n: 2, tapped: true }] },
+      opp: { bf: [] },
+    }),
+  ),
 ]

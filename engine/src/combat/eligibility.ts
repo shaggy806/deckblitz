@@ -273,6 +273,14 @@ function whyCannotAttackUncached(
   if (restrictions.has("cant-attack")) {
     return `${def.name} can't attack`;
   }
+  // "Only land creatures can attack during that combat phase" (Bumi,
+  // Unleashed): a restriction on every creature that doesn't match (rule
+  // 508.1c), read as attackers are declared.
+  for (const { owner, onlyAttackers } of state.playerEffects ?? []) {
+    if (onlyAttackers !== undefined && !matchesFilter(state, registry, creatureId, onlyAttackers, { you: owner })) {
+      return `${def.name} can't attack this combat`;
+    }
+  }
   if (
     asOf.nextTurn !== true &&
     hasSummoningSickness(object) &&

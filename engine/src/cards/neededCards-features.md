@@ -432,6 +432,19 @@ from hand (702.170a, a special action, 116.2k): `Game.plotCostNow`, read by the 
 `costModification` with `castFrom: ["graveyard", "exile"]`, which already ran. The
 scaffolder reads both lines. Key: cost:plot-cost-reduction.
 
+### Only land creatures attacking in the added combat — built 2026-11-07
+
+By EDHREC rank: Bumi, Unleashed (3529, flagged ASAP). `additional-combat`'s `onlyAttackers`
+(with `afterThisPhase`) rides on the queued phase (`AddedPhase.onlyAttackers`); as that phase
+begins, `Game.bindForcedAttackers` pushes a `PlayerEffect.onlyAttackers` that ends at its end of
+combat, and `whyCannotAttack` refuses a creature not matching it (rule 508.1c) — that combat
+alone (the ruling). The scaffolder reads "After this phase, there is an additional combat phase"
+(Port Razer's, untaught till now) and the lands-only sentence after it. Proving card: Bumi,
+Unleashed. Key: effect:extra-combat-attack-restriction. Left: Last Night Together ("only the
+chosen creatures", objects, and after a main phase), Intimidation Bolt ("other creatures can't
+attack this turn"), Boros Battleshaper and Forgestoker Dragon (a target that can't attack or
+block this combat) — each a different shape on the same key.
+
 ### More Than Meets the Eye, living metal and convert — built 2026-11-07
 
 By EDHREC rank: Slicer, Hired Muscle (3512, flagged ASAP). `CardDefinition.moreThanMeetsTheEye`

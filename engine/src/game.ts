@@ -37170,10 +37170,12 @@ export class Game {
         // (rule 500.8).
         else {
           const bound = afterThisPhase.forcedAttackers;
+          const only = afterThisPhase.onlyAttackers;
           (this.state.phasesAfterThisCombat ??= []).unshift({
             kind: "combat",
             withMain: afterThisPhase.withMain,
             ...(mark !== undefined ? { mark } : {}),
+            ...(only !== undefined ? { onlyAttackers: { filter: only, you: controller } } : {}),
             ...(bound !== undefined
               ? {
                   forced: {
@@ -46686,6 +46688,16 @@ export class Game {
   /** The combat phase an `"additional-combat"`'s `forcedAttackers` was for has
    * come: those still the same objects are bound for it. */
   private bindForcedAttackers(phase: Extract<AddedPhase, { kind: "combat" }>): void {
+    // "Only land creatures can attack during that combat phase": a
+    // restriction for this phase alone, gone at its end of combat step.
+    if (phase.onlyAttackers !== undefined) {
+      (this.state.playerEffects ??= []).push({
+        owner: phase.onlyAttackers.you,
+        expires: { kind: "end-of-combat" },
+        onlyAttackers: phase.onlyAttackers.filter,
+      });
+      invalidateComputedCache();
+    }
     const forced = phase.forced;
     if (forced === undefined) return;
     for (const { object: id, zoneChangeCount } of forced.objects) {
