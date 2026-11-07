@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4673 already implemented / 327 missing (marks refreshed 2026-11-07)
+4679 already implemented / 321 missing (marks refreshed 2026-11-07)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2282,7 +2282,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2289  Memnite                                  {0}              Artifact Creature — Construct
 [x]  2290  Shire Terrace                            {0}              Land
 [x]  2291  Riot Control                             {2}{W}           Instant
-[ ]  2292  Plargg and Nassari                       {3}{R}{R}        Legendary Creature — Orc Efreet
+[x]  2292  Plargg and Nassari                       {3}{R}{R}        Legendary Creature — Orc Efreet
 [x]  2293  Umbral Mantle                            {3}              Artifact — Equipment
 [x]  2294  Lightning Strike                         {1}{R}           Instant
 [ ]  2295  The Cabbage Merchant                     {2}{G}           Legendary Creature — Human Citizen
@@ -2495,7 +2495,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2502  Empty the Warrens                        {3}{R}           Sorcery
 [x]  2503  Otherworldly Gaze                        {U}              Instant
 [x]  2504  Echoing Deeps                            {0}              Land — Cave
-[ ]  2505  Y'shtola Rhul                            {4}{U}{U}        Legendary Creature — Cat Druid
+[x]  2505  Y'shtola Rhul                            {4}{U}{U}        Legendary Creature — Cat Druid
 [x]  2506  Forced Fruition                          {4}{U}{U}        Enchantment
 [x]  2507  Regisaur Alpha                           {3}{R}{G}        Creature — Dinosaur
 [x]  2508  Lair of the Hydra                        {0}              Land
@@ -2568,7 +2568,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2575  Dread Presence                           {3}{B}           Creature — Nightmare
 [x]  2576  Imoti, Celebrant of Bounty               {3}{G}{U}        Legendary Creature — Snake Druid
 [x]  2577  Beamtown Beatstick                       {R}              Artifact — Equipment
-[ ]  2578  Currency Converter                       {1}              Artifact
+[x]  2578  Currency Converter                       {1}              Artifact
 [x]  2579  Will of the Abzan                        {3}{B}           Sorcery
 [x]  2580  Siege-Gang Lieutenant                    {3}{R}           Creature — Goblin
 [x]  2581  Urabrask's Forge                         {2}{R}           Artifact
@@ -2787,7 +2787,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2794  Reyav, Master Smith                      {R}{W}           Legendary Creature — Dwarf Artificer
 [x]  2795  Blightbelly Rat                          {1}{B}           Creature — Phyrexian Rat
 [x]  2796  Wrenn and Realmbreaker                   {1}{G}{G}        Legendary Planeswalker — Wrenn
-[ ]  2797  Gwenom, Remorseless                      {3}{B}{B}        Legendary Creature — Symbiote Spider Hero
+[x]  2797  Gwenom, Remorseless                      {3}{B}{B}        Legendary Creature — Symbiote Spider Hero
 [x]  2798  Cyberman Patrol                          {2}              Artifact Creature — Cyberman
 [x]  2799  Sulfuric Vortex                          {1}{R}{R}        Enchantment
 [x]  2800  Emeria's Call // Emeria, Shattered Skyclave {7}              Sorcery // Land
@@ -3232,7 +3232,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3239  Redoubled Stormsinger                    {2}{R}           Creature — Orc Wizard
 [x]  3240  Nautiloid Ship                           {4}              Artifact — Vehicle
 [x]  3241  Archpriest of Shadows                    {3}{B}{B}        Creature — Human Warlock
-[ ]  3242  The Warring Triad                        {3}              Legendary Artifact Creature — God
+[x]  3242  The Warring Triad                        {3}              Legendary Artifact Creature — God
 [ ]  3243  Chain of Smog                            {1}{B}           Sorcery
 [x]  3244  Archenemy's Charm                        {B}{B}{B}        Instant
 [x]  3245  Virulent Emissary                        {G}              Creature — Elf Assassin
@@ -4452,7 +4452,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4459  Ifnir Deadlands                          {0}              Land — Desert
 [ ]  4460  Birthing Ritual                          {1}{G}           Enchantment
 [x]  4461  Fevered Visions                          {1}{U}{R}        Enchantment
-[ ]  4462  Wizard's Staff                           {1}{U}           Artifact — Equipment
+[x]  4462  Wizard's Staff                           {1}{U}           Artifact — Equipment
 [x]  4463  Urza's Factory                           {0}              Land — Urza's
 [x]  4464  Torens, Fist of the Angels               {1}{G}{W}        Legendary Creature — Human Cleric
 [x]  4465  Phyrexian Censor                         {2}{W}           Creature — Phyrexian Wizard

@@ -12,6 +12,16 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Build ASAP overnight, round 2** (2026-11-07, B274, `/author-flagged overnight`): The Warring
+  Triad and Radiant Lotus (`add-mana`'s player `target`, not a mana ability, rule 605.5a;
+  `effect:add-mana-target-player`), Wizard's Staff (`doubleTriggersOf`'s `host`, the equipped
+  creature's triggers; `static:double-triggers-of-attached`), Gwenom, Remorseless with The
+  Belligerent (`player-effect`'s library-top permissions until end of turn, paying life too;
+  `effect:play-from-library-top-this-turn`, `cost:pay-life-equal-mv-instead-of-mana`), Plargg and
+  Nassari (`cast-now`'s `exceptChosen`; `effect:opponent-chooses-exiled-this-way-excluded`), Y'shtola
+  Rhul (`additional-end-step`, rule 500.9, the `endStep` turn-structure clause and
+  `DelayedTrigger.createdInEndStep`; `effect:additional-end-step`), and Heroic Sacrifice and
+  Currency Converter with no engine code (`effect:linked-exile-from-discard`).
 - **Build ASAP overnight, round 1** (2026-11-07, B274, `/author-flagged overnight`): Gluntch, the
   Bestower, Mana Sculpt, Doc Aurlock, Grizzled Genius, Zack Fair (with Rhuk, Hexgold Nabber) and
   Unbound Flourishing. `choose-opponent`'s `thenAnother` (a further choice among the players not
