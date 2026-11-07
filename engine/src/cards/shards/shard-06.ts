@@ -875,6 +875,7 @@ import _poolUchuulon from "../pool/uchuulon.js";
 import _poolUginsConjurant from "../pool/ugins-conjurant.js";
 import _poolUldarosTheorix from "../pool/uldaros-theorix.js";
 import _poolUnaChinRileyNumberOne from "../pool/una-chin-riley-number-one.js";
+import _poolUnboundFlourishing from "../pool/unbound-flourishing.js";
 import _poolUnbreathingHorde from "../pool/unbreathing-horde.js";
 import _poolUncoveredClues from "../pool/uncovered-clues.js";
 import _poolUndercityScrounger from "../pool/undercity-scrounger.js";
@@ -1857,6 +1858,7 @@ const shard: CardShard = {
     _poolUginsConjurant,
     _poolUldarosTheorix,
     _poolUnaChinRileyNumberOne,
+    _poolUnboundFlourishing,
     _poolUnbreathingHorde,
     _poolUncoveredClues,
     _poolUndercityScrounger,

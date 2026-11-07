@@ -6821,6 +6821,7 @@ import _poolDjinnOfTheLamp from "./pool/djinn-of-the-lamp.js";
 import _poolDjinnOfWishes from "./pool/djinn-of-wishes.js";
 import _poolDjinniWindseer from "./pool/djinni-windseer.js";
 import _poolDoOrDie from "./pool/do-or-die.js";
+import _poolDocAurlockGrizzledGenius from "./pool/doc-aurlock-grizzled-genius.js";
 import _poolDocOckSinisterScientist from "./pool/doc-ock-sinister-scientist.js";
 import _poolDocOcksHenchmen from "./pool/doc-ocks-henchmen.js";
 import _poolDocOcksTentacles from "./pool/doc-ocks-tentacles.js";
@@ -21191,6 +21192,7 @@ import _poolRhoxPummeler from "./pool/rhox-pummeler.js";
 import _poolRhoxVeteran from "./pool/rhox-veteran.js";
 import _poolRhoxWarMonk from "./pool/rhox-war-monk.js";
 import _poolRhox from "./pool/rhox.js";
+import _poolRhukHexgoldNabber from "./pool/rhuk-hexgold-nabber.js";
 import _poolRhysTheEvermore from "./pool/rhys-the-evermore.js";
 import _poolRhysTheExiled from "./pool/rhys-the-exiled.js";
 import _poolRhysTheRedeemed from "./pool/rhys-the-redeemed.js";
@@ -28183,6 +28185,7 @@ import _poolUnauthorizedExit from "./pool/unauthorized-exit.js";
 import _poolUnbenderTine from "./pool/unbender-tine.js";
 import _poolUnblinkingBleb from "./pool/unblinking-bleb.js";
 import _poolUnblinkingObserver from "./pool/unblinking-observer.js";
+import _poolUnboundFlourishing from "./pool/unbound-flourishing.js";
 import _poolUnboundedPotential from "./pool/unbounded-potential.js";
 import _poolUnbreakableBond from "./pool/unbreakable-bond.js";
 import _poolUnbreakableFormation from "./pool/unbreakable-formation.js";
@@ -30581,6 +30584,7 @@ import _poolYurlokOfScorchThrash from "./pool/yurlok-of-scorch-thrash.js";
 import _poolYusriFortunesFlame from "./pool/yusri-fortunes-flame.js";
 import _poolYuyanArchers from "./pool/yuyan-archers.js";
 import _poolZacamaPrimalCalamity from "./pool/zacama-primal-calamity.js";
+import _poolZackFair from "./pool/zack-fair.js";
 import _poolZadaHedronGrinder from "./pool/zada-hedron-grinder.js";
 import _poolZadasCommando from "./pool/zadas-commando.js";
 import _poolZaffaiAndTheTempests from "./pool/zaffai-and-the-tempests.js";
@@ -38322,6 +38326,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDjinnOfWishes,
   _poolDjinniWindseer,
   _poolDoOrDie,
+  _poolDocAurlockGrizzledGenius,
   _poolDocOckSinisterScientist,
   _poolDocOcksHenchmen,
   _poolDocOcksTentacles,
@@ -52692,6 +52697,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRhoxVeteran,
   _poolRhoxWarMonk,
   _poolRhox,
+  _poolRhukHexgoldNabber,
   _poolRhysTheEvermore,
   _poolRhysTheExiled,
   _poolRhysTheRedeemed,
@@ -59684,6 +59690,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUnbenderTine,
   _poolUnblinkingBleb,
   _poolUnblinkingObserver,
+  _poolUnboundFlourishing,
   _poolUnboundedPotential,
   _poolUnbreakableBond,
   _poolUnbreakableFormation,
@@ -62082,6 +62089,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolYusriFortunesFlame,
   _poolYuyanArchers,
   _poolZacamaPrimalCalamity,
+  _poolZackFair,
   _poolZadaHedronGrinder,
   _poolZadasCommando,
   _poolZaffaiAndTheTempests,
@@ -69836,6 +69844,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/djinn-of-wishes": _poolDjinnOfWishes,
   "pool/djinni-windseer": _poolDjinniWindseer,
   "pool/do-or-die": _poolDoOrDie,
+  "pool/doc-aurlock-grizzled-genius": _poolDocAurlockGrizzledGenius,
   "pool/doc-ock-sinister-scientist": _poolDocOckSinisterScientist,
   "pool/doc-ocks-henchmen": _poolDocOcksHenchmen,
   "pool/doc-ocks-tentacles": _poolDocOcksTentacles,
@@ -84206,6 +84215,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rhox-veteran": _poolRhoxVeteran,
   "pool/rhox-war-monk": _poolRhoxWarMonk,
   "pool/rhox": _poolRhox,
+  "pool/rhuk-hexgold-nabber": _poolRhukHexgoldNabber,
   "pool/rhys-the-evermore": _poolRhysTheEvermore,
   "pool/rhys-the-exiled": _poolRhysTheExiled,
   "pool/rhys-the-redeemed": _poolRhysTheRedeemed,
@@ -91198,6 +91208,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/unbender-tine": _poolUnbenderTine,
   "pool/unblinking-bleb": _poolUnblinkingBleb,
   "pool/unblinking-observer": _poolUnblinkingObserver,
+  "pool/unbound-flourishing": _poolUnboundFlourishing,
   "pool/unbounded-potential": _poolUnboundedPotential,
   "pool/unbreakable-bond": _poolUnbreakableBond,
   "pool/unbreakable-formation": _poolUnbreakableFormation,
@@ -93596,6 +93607,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/yusri-fortunes-flame": _poolYusriFortunesFlame,
   "pool/yuyan-archers": _poolYuyanArchers,
   "pool/zacama-primal-calamity": _poolZacamaPrimalCalamity,
+  "pool/zack-fair": _poolZackFair,
   "pool/zada-hedron-grinder": _poolZadaHedronGrinder,
   "pool/zadas-commando": _poolZadasCommando,
   "pool/zaffai-and-the-tempests": _poolZaffaiAndTheTempests,

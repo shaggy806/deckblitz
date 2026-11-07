@@ -217,6 +217,7 @@ import _poolDismantlingWave from "../pool/dismantling-wave.js";
 import _poolDispersalTechnician from "../pool/dispersal-technician.js";
 import _poolDivineCongregation from "../pool/divine-congregation.js";
 import _poolDjerusRenunciation from "../pool/djerus-renunciation.js";
+import _poolDocAurlockGrizzledGenius from "../pool/doc-aurlock-grizzled-genius.js";
 import _poolDoggedDetective from "../pool/dogged-detective.js";
 import _poolDomrisAmbush from "../pool/domris-ambush.js";
 import _poolDormantVolcano from "../pool/dormant-volcano.js";
@@ -981,6 +982,7 @@ import _poolYawgmothsEdict from "../pool/yawgmoths-edict.js";
 import _poolYouFindACursedIdol from "../pool/you-find-a-cursed-idol.js";
 import _poolYunaGrandSummoner from "../pool/yuna-grand-summoner.js";
 import _poolYurikoHopeFromTheShadows from "../pool/yuriko-hope-from-the-shadows.js";
+import _poolZackFair from "../pool/zack-fair.js";
 import _poolZap from "../pool/zap.js";
 import _poolZardaThePowerPrincess from "../pool/zarda-the-power-princess.js";
 import _poolZeganaUtopianSpeaker from "../pool/zegana-utopian-speaker.js";
@@ -1228,6 +1230,7 @@ const shard: CardShard = {
     _poolDispersalTechnician,
     _poolDivineCongregation,
     _poolDjerusRenunciation,
+    _poolDocAurlockGrizzledGenius,
     _poolDoggedDetective,
     _poolDomrisAmbush,
     _poolDormantVolcano,
@@ -1992,6 +1995,7 @@ const shard: CardShard = {
     _poolYouFindACursedIdol,
     _poolYunaGrandSummoner,
     _poolYurikoHopeFromTheShadows,
+    _poolZackFair,
     _poolZap,
     _poolZardaThePowerPrincess,
     _poolZeganaUtopianSpeaker,
