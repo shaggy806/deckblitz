@@ -20,6 +20,7 @@ import { CardImage } from '../ui/CardImage.tsx'
 import { SiteNotice } from '../legal/SiteNotice.tsx'
 import { Symbols } from '../ui/Symbols.tsx'
 import { resolveArtUrl } from '../ui/art.ts'
+import { fetchAsap, setAsap } from './buildAsap.ts'
 import { fetchMissingCards, namesOfMissing } from './missingCards.ts'
 import type { MissingCard } from './missingCards.ts'
 import { fetchSetCards, fetchSets } from './setFilter.ts'
@@ -56,6 +57,10 @@ const COLOR_NAME: Record<ColorFilter, string> = {
 // actually play at the top, rather than an alphabetical wall.
 const SORTS = ['edhrec', 'name', 'mana', 'color', 'type'] as const
 type Sort = (typeof SORTS)[number]
+
+/** What the grid lists: the pool's cards, the ones not in it yet, or (in
+ * development) those flagged to build ASAP. */
+type Show = 'pool' | 'missing' | 'asap'
 
 const SORT_LABEL: Record<Sort, string> = {
   name: 'Name',
@@ -458,19 +463,44 @@ export function LibraryPage() {
   // "Not in the pool yet" (the user, 2026-11-06): the Commander-legal cards
   // the engine doesn't have, from `missing-cards.json`, fetched the first time
   // it's asked for (`missingCards.ts`).
-  const [showMissing, setShowMissing] = useState(false)
+  // In development, also "Build ASAP": the missing cards flagged to be built
+  // ahead of their rank (`buildAsap.ts`), each missing card with a flag toggle.
+  const [show, setShow] = useState<Show>('pool')
+  const showMissing = show !== 'pool'
   const [missing, setMissing] = useState<readonly MissingEntry[] | 'failed' | null>(null)
-  const chooseMissing = (show: boolean) => {
-    setShowMissing(show)
+  // `null` until read, and always in a build, which has no flags to show.
+  const [asap, setAsapState] = useState<ReadonlySet<string> | null>(null)
+  const chooseShow = (next: Show) => {
+    setShow(next)
+    if (next === 'pool') return
+    if (import.meta.env.DEV && asap === null) {
+      fetchAsap().then(setAsapState, (e: unknown) => console.error('Build ASAP flags:', e))
+    }
     // Fetched as it's turned on; after a failure, turning it on again retries.
-    if (!show || (missing !== null && missing !== 'failed')) return
+    if (missing !== null && missing !== 'failed') return
     setMissing(null)
     fetchMissingCards((name) => cardsByName.has(name)).then(
       (cards) => setMissing(cards.map(buildMissingEntry)),
       () => setMissing('failed'),
     )
   }
-  const missingRows = showMissing && missing !== null && missing !== 'failed' ? missing : null
+  const toggleAsap = (name: string) => {
+    // `DEV` first, so a build drops this and `buildAsap.ts` with it.
+    if (!import.meta.env.DEV || asap === null) return
+    const on = !asap.has(name)
+    const before = asap
+    // At once, then as the file says; put back if the write fails.
+    setAsapState(new Set(on ? [...asap, name] : [...asap].filter((n) => n !== name)))
+    setAsap(name, on).then(setAsapState, (e: unknown) => {
+      console.error('Build ASAP flag:', e)
+      setAsapState(before)
+    })
+  }
+  const missingRows = useMemo(() => {
+    if (!showMissing || missing === null || missing === 'failed') return null
+    if (show !== 'asap') return missing
+    return asap === null ? [] : missing.filter((e) => asap.has(e.name))
+  }, [show, showMissing, missing, asap])
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
@@ -502,7 +532,7 @@ export function LibraryPage() {
   // effect. An effect would commit the stale page first and then immediately
   // re-render (which `react/set-state-in-effect` flags); this is React's
   // documented "adjust state when a prop changes" pattern and repaints once.
-  const filterKey = `${query}|${typeFilter ?? ''}|${[...colorFilter].sort().join(',')}|${sort}|${descending}|${showTokens}|${setCode ?? ''}|${setNames === null ? 0 : setNames.size}|${showMissing}|${missingRows === null ? 0 : missingRows.length}`
+  const filterKey = `${query}|${typeFilter ?? ''}|${[...colorFilter].sort().join(',')}|${sort}|${descending}|${showTokens}|${setCode ?? ''}|${setNames === null ? 0 : setNames.size}|${show}|${missing === null || missing === 'failed' ? 0 : missing.length}`
   const [pagedFor, setPagedFor] = useState(filterKey)
   if (pagedFor !== filterKey) {
     setPagedFor(filterKey)
@@ -692,11 +722,12 @@ export function LibraryPage() {
           <label className="lib-sort">
             Show
             <select
-              value={showMissing ? 'missing' : 'pool'}
-              onChange={(e) => chooseMissing(e.target.value === 'missing')}
+              value={show}
+              onChange={(e) => chooseShow(e.target.value as Show)}
             >
               <option value="pool">In the pool</option>
               <option value="missing">Not in the pool yet</option>
+              {import.meta.env.DEV ? <option value="asap">Build ASAP (dev)</option> : null}
             </select>
           </label>
 
@@ -712,7 +743,7 @@ export function LibraryPage() {
                 setDescending(false)
                 setShowTokens(false)
                 chooseSet(null)
-                setShowMissing(false)
+                setShow('pool')
               }}
             >
               Clear
@@ -726,6 +757,7 @@ export function LibraryPage() {
           {shownCount} {shownCount === 1 ? 'card' : 'cards'}
           {setNow !== null && 'cards' in setNow ? ` of ${setNow.cards.total} in ${setName}` : ''}
           {showMissing ? (setNow !== null ? ', not in the pool yet' : ' not in the pool yet') : ''}
+          {show === 'asap' ? ', flagged to build ASAP' : ''}
           {pageCount > 1
             ? ` — showing ${safePage * pageSize + 1}-${Math.min(shownCount, (safePage + 1) * pageSize)}`
             : ''}
@@ -740,7 +772,9 @@ export function LibraryPage() {
           <p className="lib-empty muted">Couldn&rsquo;t load the cards not in the pool yet. Try again later.</p>
         ) : shownCount === 0 ? (
           <p className="lib-empty muted">
-            {showMissing
+            {show === 'asap'
+              ? 'No flagged card matches. Flag cards to build ASAP under "Not in the pool yet".'
+              : showMissing
               ? setCode !== null
                 ? `Every one of ${setName}'s cards that matches is in the pool.`
                 : 'No card not in the pool matches — try a shorter search.'
@@ -760,7 +794,13 @@ export function LibraryPage() {
                 />
               ))}
               {missingPageRows.map((e) => (
-                <MissingCardTile key={e.name} entry={e} printings={setPrintings} />
+                <MissingCardTile
+                  key={e.name}
+                  entry={e}
+                  printings={setPrintings}
+                  asap={asap === null ? undefined : asap.has(e.name)}
+                  onToggleAsap={() => toggleAsap(e.name)}
+                />
               ))}
             </div>
             {pageCount > 1 ? (
@@ -854,16 +894,22 @@ function GridCard({
 function MissingCardTile({
   entry,
   printings,
+  asap,
+  onToggleAsap,
 }: {
   readonly entry: MissingEntry
   readonly printings: SetPrintings | null
+  /** Whether it's flagged to build ASAP; `undefined` hides the flag (a
+   * build, or the flags not read yet). */
+  readonly asap: boolean | undefined
+  readonly onToggleAsap: () => void
 }) {
   const [failed, setFailed] = useState(false)
   const setImage = entry.names.map((n) => printings?.get(n)?.image).find(Boolean)
   const src = resolveArtUrl(setImage ?? entry.card.printing, entry.name, 'normal')
   const scryfall = `https://scryfall.com/search?q=${encodeURIComponent(`!"${entry.name}"`)}`
   return (
-    <div className="lib-card lib-card-missing">
+    <div className={`lib-card lib-card-missing${asap ? ' asap' : ''}`}>
       <a
         className="lib-card-open"
         href={scryfall}
@@ -881,6 +927,17 @@ function MissingCardTile({
         </span>
         <span className="lib-card-caption">{entry.name}</span>
       </a>
+      {!import.meta.env.DEV || asap === undefined ? null : (
+        <button
+          type="button"
+          className="lib-asap"
+          aria-pressed={asap}
+          title={asap ? 'Flagged to build ASAP: click to unflag' : 'Flag to build ASAP, ahead of its EDHREC rank'}
+          onClick={onToggleAsap}
+        >
+          {asap ? '★ ASAP' : '☆ ASAP'}
+        </button>
+      )}
     </div>
   )
 }

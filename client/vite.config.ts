@@ -1,4 +1,6 @@
 /// <reference types="vitest/config" />
+import { readFileSync, writeFileSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 import type { Plugin } from 'vite'
@@ -41,9 +43,70 @@ const shardFiles = (): Plugin => ({
   },
 })
 
+// The library's dev-only "Build ASAP" flags (`src/library/buildAsap.ts`): the
+// cards not in the pool yet that the user wants built ahead of EDHREC rank,
+// kept in `engine/data/build-asap.json`, which `npm run cards:needs -w engine`
+// puts first. The dev server only (`apply: 'serve'`): a build has no endpoint,
+// and the page shows no flags without one. GET reads the list; POST
+// `{ name, on }` flags or unflags one card and answers with the new list.
+const BUILD_ASAP_FILE = fileURLToPath(new URL('../engine/data/build-asap.json', import.meta.url))
+type AsapFlag = { readonly name: string; readonly flagged: string }
+const readAsap = (): AsapFlag[] => {
+  try {
+    const cards = (JSON.parse(readFileSync(BUILD_ASAP_FILE, 'utf8')) as { cards?: AsapFlag[] }).cards
+    return Array.isArray(cards) ? cards : []
+  } catch {
+    return []
+  }
+}
+// One card a line, by name, so a diff shows exactly which flags changed.
+const writeAsap = (cards: readonly AsapFlag[]): void => {
+  const sorted = [...cards].sort((a, b) => a.name.localeCompare(b.name))
+  const body = sorted.map((c) => JSON.stringify(c)).join(',\n')
+  writeFileSync(BUILD_ASAP_FILE, `{"cards":[${sorted.length > 0 ? `\n${body}\n` : ''}]}\n`, 'utf8')
+}
+const buildAsap = (): Plugin => ({
+  name: 'deckblitz:build-asap',
+  apply: 'serve',
+  configureServer(server) {
+    server.middlewares.use('/__build-asap', (req, res) => {
+      const reply = (status: number, body: unknown) => {
+        res.statusCode = status
+        res.setHeader('Content-Type', 'application/json')
+        res.end(JSON.stringify(body))
+      }
+      if (req.method === 'GET') return reply(200, { cards: readAsap() })
+      if (req.method !== 'POST') return reply(405, { error: 'GET or POST' })
+      let raw = ''
+      req.on('data', (chunk: Buffer) => {
+        raw += chunk.toString('utf8')
+      })
+      req.on('end', () => {
+        let name: unknown
+        let on: unknown
+        try {
+          ;({ name, on } = JSON.parse(raw) as { name?: unknown; on?: unknown })
+        } catch {
+          return reply(400, { error: 'not JSON' })
+        }
+        if (typeof name !== 'string' || name === '' || name.length > 200 || typeof on !== 'boolean') {
+          return reply(400, { error: 'expected { name: string, on: boolean }' })
+        }
+        const rest = readAsap().filter((c) => c.name !== name)
+        // Today here, not in UTC: an evening's flag dated tomorrow misleads.
+        const now = new Date()
+        const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`
+        const cards = on ? [...rest, readAsap().find((c) => c.name === name) ?? { name, flagged: today }] : rest
+        writeAsap(cards)
+        reply(200, { cards: readAsap() })
+      })
+    })
+  },
+})
+
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), engineLocal(), shardFiles()],
+  plugins: [react(), engineLocal(), shardFiles(), buildAsap()],
   // The landing page's dev menu of test rooms (`src/lobby/devRooms.ts`)
   // reads dev-rooms' command port (`server/scripts/dev-rooms.mjs`) through
   // this: same-origin, so no CORS, and the dev server only — a build has

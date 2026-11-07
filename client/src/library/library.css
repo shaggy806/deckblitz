@@ -269,6 +269,31 @@ html:has(.lib-page) {
 .lib-banned-badge {
   color: var(--warn);
 }
+
+/* The dev-only "Build ASAP" flag on a card not in the pool yet
+   (`buildAsap.ts`): bottom right, where a pool card's flip button sits. A
+   flagged card's face is outlined in the accent, so a page of them reads at a
+   glance. */
+.lib-asap {
+  position: absolute;
+  right: 6%;
+  bottom: 6%;
+  padding: 3px 7px;
+  font-size: var(--text-xs);
+  line-height: 1;
+  border-radius: 4px;
+  background: var(--scrim);
+  color: var(--muted);
+  border: 1px solid transparent;
+}
+.lib-asap[aria-pressed='true'] {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.lib-card-missing.asap .lib-card-open {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
 .lib-banned-note {
   margin: 0 0 8px;
   font-size: var(--text-sm);
