@@ -855,6 +855,7 @@ import _poolTheIndomitable from "../pool/the-indomitable.js";
 import _poolTheSwarmweaver from "../pool/the-swarmweaver.js";
 import _poolTheThirdDoctor from "../pool/the-third-doctor.js";
 import _poolTheUnbeatableSquirrelGirl from "../pool/the-unbeatable-squirrel-girl.js";
+import _poolTheWiseMothman from "../pool/the-wise-mothman.js";
 import _poolThingFromTheDeep from "../pool/thing-from-the-deep.js";
 import _poolThistledownDuo from "../pool/thistledown-duo.js";
 import _poolThoughtboundPrimoc from "../pool/thoughtbound-primoc.js";
@@ -1865,6 +1866,7 @@ const shard: CardShard = {
     _poolTheSwarmweaver,
     _poolTheThirdDoctor,
     _poolTheUnbeatableSquirrelGirl,
+    _poolTheWiseMothman,
     _poolThingFromTheDeep,
     _poolThistledownDuo,
     _poolThoughtboundPrimoc,

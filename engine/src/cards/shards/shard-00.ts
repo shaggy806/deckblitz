@@ -510,6 +510,7 @@ import _poolMindmelter from "../pool/mindmelter.js";
 import _poolMindwhisker from "../pool/mindwhisker.js";
 import _poolMinionsMurmurs from "../pool/minions-murmurs.js";
 import _poolMireBlight from "../pool/mire-blight.js";
+import _poolMirelurkQueen from "../pool/mirelurk-queen.js";
 import _poolMirrorhallMimic from "../pool/mirrorhall-mimic.js";
 import _poolMirrormereGuardian from "../pool/mirrormere-guardian.js";
 import _poolMissy from "../pool/missy.js";
@@ -1499,6 +1500,7 @@ const shard: CardShard = {
     _poolMindwhisker,
     _poolMinionsMurmurs,
     _poolMireBlight,
+    _poolMirelurkQueen,
     _poolMirrorhallMimic,
     _poolMirrormereGuardian,
     _poolMissy,

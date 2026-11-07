@@ -1893,7 +1893,10 @@
   "decision:choose-plus-or-minus",
   "cost:multiple-alternative-costs",
   "static:every-nonbasic-land-type",
-  "static:set-base-pt-to-life-total"
+  "static:set-base-pt-to-life-total",
+  "trigger:mills-trigger",
+  "trigger:trigger-mills-nonland-card",
+  "stat:milled-this-turn-mill-only"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

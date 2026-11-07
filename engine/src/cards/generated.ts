@@ -16611,6 +16611,7 @@ import _poolMireInMisery from "./pool/mire-in-misery.js";
 import _poolMireKavu from "./pool/mire-kavu.js";
 import _poolMireShade from "./pool/mire-shade.js";
 import _poolMireTriton from "./pool/mire-triton.js";
+import _poolMirelurkQueen from "./pool/mirelurk-queen.js";
 import _poolMirenTheMoaningWell from "./pool/miren-the-moaning-well.js";
 import _poolMiresGrasp from "./pool/mires-grasp.js";
 import _poolMiresMalice from "./pool/mires-malice.js";
@@ -26184,6 +26185,7 @@ import _poolTasteForMayhem from "./pool/taste-for-mayhem.js";
 import _poolTasteOfBlood from "./pool/taste-of-blood.js";
 import _poolTasteOfDeath from "./pool/taste-of-death.js";
 import _poolTataruTaru from "./pool/tataru-taru.js";
+import _poolTatoFarmer from "./pool/tato-farmer.js";
 import _poolTatsumasaTheDragonsFang from "./pool/tatsumasa-the-dragons-fang.js";
 import _poolTatsunariToadRider from "./pool/tatsunari-toad-rider.js";
 import _poolTatteredApparition from "./pool/tattered-apparition.js";
@@ -26854,6 +26856,7 @@ import _poolTheWeaverKing from "./pool/the-weaver-king.js";
 import _poolTheWeddingOfRiverSong from "./pool/the-wedding-of-river-song.js";
 import _poolTheWhizzerClassicSpeedster from "./pool/the-whizzer-classic-speedster.js";
 import _poolTheWindCrystal from "./pool/the-wind-crystal.js";
+import _poolTheWiseMothman from "./pool/the-wise-mothman.js";
 import _poolTheWitchsVanity from "./pool/the-witchs-vanity.js";
 import _poolTheWondrousWasp from "./pool/the-wondrous-wasp.js";
 import _poolTheWorldSpell from "./pool/the-world-spell.js";
@@ -48099,6 +48102,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMireKavu,
   _poolMireShade,
   _poolMireTriton,
+  _poolMirelurkQueen,
   _poolMirenTheMoaningWell,
   _poolMiresGrasp,
   _poolMiresMalice,
@@ -57672,6 +57676,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTasteOfBlood,
   _poolTasteOfDeath,
   _poolTataruTaru,
+  _poolTatoFarmer,
   _poolTatsumasaTheDragonsFang,
   _poolTatsunariToadRider,
   _poolTatteredApparition,
@@ -58342,6 +58347,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheWeddingOfRiverSong,
   _poolTheWhizzerClassicSpeedster,
   _poolTheWindCrystal,
+  _poolTheWiseMothman,
   _poolTheWitchsVanity,
   _poolTheWondrousWasp,
   _poolTheWorldSpell,
@@ -79600,6 +79606,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mire-kavu": _poolMireKavu,
   "pool/mire-shade": _poolMireShade,
   "pool/mire-triton": _poolMireTriton,
+  "pool/mirelurk-queen": _poolMirelurkQueen,
   "pool/miren-the-moaning-well": _poolMirenTheMoaningWell,
   "pool/mires-grasp": _poolMiresGrasp,
   "pool/mires-malice": _poolMiresMalice,
@@ -89173,6 +89180,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/taste-of-blood": _poolTasteOfBlood,
   "pool/taste-of-death": _poolTasteOfDeath,
   "pool/tataru-taru": _poolTataruTaru,
+  "pool/tato-farmer": _poolTatoFarmer,
   "pool/tatsumasa-the-dragons-fang": _poolTatsumasaTheDragonsFang,
   "pool/tatsunari-toad-rider": _poolTatsunariToadRider,
   "pool/tattered-apparition": _poolTatteredApparition,
@@ -89843,6 +89851,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-wedding-of-river-song": _poolTheWeddingOfRiverSong,
   "pool/the-whizzer-classic-speedster": _poolTheWhizzerClassicSpeedster,
   "pool/the-wind-crystal": _poolTheWindCrystal,
+  "pool/the-wise-mothman": _poolTheWiseMothman,
   "pool/the-witchs-vanity": _poolTheWitchsVanity,
   "pool/the-wondrous-wasp": _poolTheWondrousWasp,
   "pool/the-world-spell": _poolTheWorldSpell,

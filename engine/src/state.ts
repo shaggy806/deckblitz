@@ -385,6 +385,14 @@ export interface GameObject {
    * 400.7).
    */
   discardedOnTurn?: number;
+  /**
+   * The turn this card was milled on (rule 701.17) — set as the mill is
+   * announced (`cards-milled`), where the mill put it; read by "a land card
+   * in a graveyard that was milled this turn" (Tato Farmer). Unlike
+   * `putIntoGraveyardOn`'s `"library"`, a surveilled card isn't milled.
+   * Compared against `turn.number`; cleared on any zone change (400.7).
+   */
+  milledOnTurn?: number;
   /** What the creature returned to pay this spell's sneak cost was attacking
    * (rule 702.190b) — the permanent it becomes enters tapped and attacking
    * that. Set as the cost is paid; cleared by any zone change. */

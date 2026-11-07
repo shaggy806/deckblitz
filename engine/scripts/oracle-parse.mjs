@@ -2443,6 +2443,11 @@ export function parseTrigger(clause) {
     return [{ on: "discards", who: "you", byOpponent: true, perCard: true }];
   }
   if (/^Whenever you surveil$/.test(c)) return [{ on: "surveils", who: "you" }];
+  // Mirelurk Queen, The Wise Mothman: rule 701.17, any player's mill.
+  {
+    const m = /^Whenever one or more (nonland )?cards are milled$/.exec(c);
+    if (m) return [{ on: "mills", who: "any", ...(m[1] ? { filter: { notTypes: ["land"] } } : {}) }];
+  }
   if (/^Whenever you face a dilemma$/.test(c)) return [{ on: "faces-dilemma", who: "you" }];
   if (/^Whenever an opponent searches their library$/.test(c)) return [{ on: "searches-library", who: "opponent" }];
 

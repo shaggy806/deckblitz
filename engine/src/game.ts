@@ -28561,6 +28561,9 @@ export class Game {
               : // "…for each card discarded this way".
                 trigger.on === "discards" && event.type === "cards-discarded"
               ? this.discardedMatching(trigger, event.objects, object, event.unrevealed).length
+              : // "Where X is the number of nonland cards milled this way".
+                trigger.on === "mills" && event.type === "cards-milled"
+              ? this.milledMatching(trigger, event.objects, object).length
               : // "Deals that much damage": how many counters were put.
                 trigger.on === "counters-put" && event.type === "counter-added"
               ? trigger.perCounter === true
@@ -30670,6 +30673,14 @@ export class Game {
           (spec.who === "any" ||
             (spec.who === "you" && event.player === self.controller) ||
             (spec.who === "opponent" && event.player !== self.controller))
+        );
+      case "mills":
+        return (
+          event.type === "cards-milled" &&
+          (spec.who === "any" ||
+            (spec.who === "you" && event.player === self.controller) ||
+            (spec.who === "opponent" && event.player !== self.controller)) &&
+          this.milledMatching(spec, event.objects, self).length > 0
         );
       case "searches-library":
         return (
@@ -57009,6 +57020,8 @@ export class Game {
     const madnessDeclined =
       previousZone === "exile" && to === "graveyard" && object.discardedOnTurn === this.state.turn.number;
     if (!madnessDeclined) object.discardedOnTurn = undefined;
+    // A milled card that changes zones again is a new object (400.7).
+    object.milledOnTurn = undefined;
     object.sneakAttacking = undefined;
     // A multi-face card reverts to its front face while not on the battlefield
     // or stack (rule 712); casting/playing it sets the face again.
@@ -57481,6 +57494,21 @@ export class Game {
     const all = (this.state.players[player]?.turnHistory?.discarded ?? []).map((entry) => entry.object);
     const earlier = all.slice(0, Math.max(0, all.length - objects.length));
     return this.discardedMatching(spec, earlier, self).length === 0;
+  }
+
+  /** The milled cards matching a `mills` trigger's filter, each read where
+   * the mill put it (rule 701.17c). */
+  private milledMatching(
+    spec: Extract<TriggerSpec, { on: "mills" }>,
+    objects: readonly ObjectId[],
+    self: GameObject,
+  ): readonly ObjectId[] {
+    const filter = spec.filter;
+    return objects.filter(
+      (id) =>
+        this.state.objects[id] !== undefined &&
+        (filter === undefined || matchesFilter(this.state, this.registry, id, filter, { you: self.controller })),
+    );
   }
 
   private discardedMatching(
@@ -57960,6 +57988,14 @@ export class Game {
       for (const id of event.objects) {
         const card = this.state.objects[id];
         if (card !== undefined) card.discardedOnTurn = this.state.turn.number;
+      }
+    }
+    // "A land card in a graveyard that was milled this turn" (Tato Farmer):
+    // each milled card is marked where the mill put it.
+    if (event.type === "cards-milled") {
+      for (const id of event.objects) {
+        const card = this.state.objects[id];
+        if (card !== undefined) card.milledOnTurn = this.state.turn.number;
       }
     }
     // Permanents entering together are announced together, once every one of

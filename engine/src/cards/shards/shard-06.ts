@@ -814,6 +814,7 @@ import _poolTakenumaAbandonedMire from "../pool/takenuma-abandoned-mire.js";
 import _poolTalesOfTheAncestors from "../pool/tales-of-the-ancestors.js";
 import _poolTanufelRimespeaker from "../pool/tanufel-rimespeaker.js";
 import _poolTaskMageAssembly from "../pool/task-mage-assembly.js";
+import _poolTatoFarmer from "../pool/tato-farmer.js";
 import _poolTeachingsOfTheKirin from "../pool/teachings-of-the-kirin.js";
 import _poolTeeterpeakAmbusher from "../pool/teeterpeak-ambusher.js";
 import _poolTeferisTalent from "../pool/teferis-talent.js";
@@ -1794,6 +1795,7 @@ const shard: CardShard = {
     _poolTalesOfTheAncestors,
     _poolTanufelRimespeaker,
     _poolTaskMageAssembly,
+    _poolTatoFarmer,
     _poolTeachingsOfTheKirin,
     _poolTeeterpeakAmbusher,
     _poolTeferisTalent,

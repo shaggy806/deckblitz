@@ -2125,6 +2125,19 @@ export type TriggerSpec =
       readonly who: TriggerWho;
     }
   | {
+      /** Cards were milled (rule 701.17) — "whenever one or more nonland
+       * cards are milled" (Mirelurk Queen, The Wise Mothman: `who: "any"`,
+       * `filter: { notTypes: ["land"] }`). Off `cards-milled`: once per mill,
+       * however many cards, when at least one matches; `{ triggerValue: true
+       * }` is how many matched ("where X is the number of nonland cards
+       * milled this way"). `who` is the player who milled. A milled card a
+       * replacement sent elsewhere (Rest in Peace) was still milled and is
+       * read where it went (701.17c). A surveil or a discard isn't a mill. */
+      readonly on: "mills";
+      readonly who: TriggerWho;
+      readonly filter?: CardFilter;
+    }
+  | {
       /** A player faced a dilemma — Elim Garak, Simple Tailor's "whenever
        * you face a dilemma" (Star Trek: "you face a dilemma as you choose
        * one or more modes for a spell or ability"). Once per choice of a

@@ -1107,6 +1107,11 @@ export interface CardFilter {
    * wasn't. See `GameObject.discardedOnTurn`.
    */
   readonly discardedThisTurn?: boolean;
+  /** Is (or isn't) a card that was **milled** this turn and hasn't changed
+   * zones since — Tato Farmer's "target land card in a graveyard that was
+   * milled this turn". Narrower than `putIntoGraveyardFromLibraryThisTurn`:
+   * a surveilled card wasn't milled. See `GameObject.milledOnTurn`. */
+  readonly milledThisTurn?: boolean;
   /** Drawn this turn (or not), and where the draw put it since: Sylvan
    * Library's "cards in your hand drawn this turn" (`GameObject.drawnOnTurn`). */
   readonly drawnThisTurn?: boolean;
@@ -2665,6 +2670,11 @@ export function matchesFilter(
     // A snapshot is of a permanent, which wasn't discarded.
     const discarded = live !== undefined && live.discardedOnTurn === state.turn.number;
     if (discarded !== filter.discardedThisTurn) return false;
+  }
+  if (filter.milledThisTurn !== undefined) {
+    // A snapshot is of a permanent, which wasn't milled.
+    const milled = live !== undefined && live.milledOnTurn === state.turn.number;
+    if (milled !== filter.milledThisTurn) return false;
   }
   if (filter.drawnThisTurn !== undefined) {
     const drawn = live !== undefined && live.drawnOnTurn === state.turn.number;
