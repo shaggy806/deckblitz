@@ -1,0 +1,44 @@
+{
+ "batch": "B270",
+ "status": "done",
+ "ranks": "Build ASAP: cards flagged in the library. 26 flagged; this session took the first four by rank whose keys turned out to be existing machinery or small engine pieces (a resolution-time modal, the existing alternative-cost choice, alsoSubtypes on a land, a live layer-7b base P/T). The other 22 stay flagged, blocked as recorded.",
+ "authored": [
+  {
+   "name": "Liliana of the Dark Realms",
+   "files": [
+    "engine/src/cards/pool/liliana-of-the-dark-realms.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dracogenesis",
+   "files": [
+    "engine/src/cards/pool/dracogenesis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Planar Nexus",
+   "files": [
+    "engine/src/cards/pool/planar-nexus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aettir and Priwen",
+   "files": [
+    "engine/src/cards/pool/aettir-and-priwen.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Squandered Resources",
+   "needs": [
+    "mana:any-type-sacrificed-land-could-produce"
+   ],
+   "why": "Checked this batch: the mana is read off the sacrificed land as it last existed (rule 106.7 on last-known information), and the payment planner would have to know which types each land it might sacrifice yields; producedBy reads only lands still on the battlefield."
+  }
+ ]
+}

@@ -12,6 +12,16 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **The first Build ASAP cards** (2026-11-06, B270, `/author-flagged`): four of the 26 cards the
+  user flagged in the library. Liliana of the Dark Realms (her −3's "+X/+X or −X/−X" is a
+  resolution-time `modal`, as the ruling says) and Dracogenesis (an `alternativeCostForSpells`
+  filtered to Dragons; beside Jodah the caster already picks which) needed no engine code. Planar
+  Nexus: `alsoSubtypes` on a land, its twelve nonbasic land types as a CDA in every zone (rules
+  205.3i, 604.3). Aettir and Priwen: a static's `setBasePtFromSourceCount`, a live layer-7b base
+  P/T read from the source's side (rule 613.4b). The scaffolder reads both lines. Keys:
+  `decision:choose-plus-or-minus`, `cost:multiple-alternative-costs`,
+  `static:every-nonbasic-land-type`, `static:set-base-pt-to-life-total`. Squandered Resources was
+  checked and stays blocked (the payment planner can't read a sacrificed land's last-known mana).
 - **Twelve need keys by EDHREC rank, from five agents** (2026-11-06, `/build-family overnight`):
   Shatterskull Smashing and Meteor Shower (a divided total read from X, re-landed with the fix that
   reverted it: the X-group cast offer now carries `maxXUnreduced`, so X past what's payable is offered
