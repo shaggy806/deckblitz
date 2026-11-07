@@ -532,6 +532,14 @@ dies trigger of the host looks back (603.10a) to the Equipment still on it.
 The scaffolder reads the line, "Equipped/Enchanted creature has prowess" and
 "Equip [creature type] {N}". Key: static:double-triggers-of-attached.
 
+### A Saga token copy given up to N lore counters — built 2026-11-07
+
+By EDHREC rank: Terra, Magical Adept (5171), the only card. No engine code:
+`create-token-copy`, then a `conditional` on `this-way` `"created"` Saga and
+a `choose-value` number (0-3) feeding `add-counter-all { thisWay: "created" }`
+lore counters, each able to trigger chapters (714.2b). Key:
+effect:token-copy-up-to-n-lore-counters.
+
 ### A spell put onto the battlefield transformed — built 2026-11-07
 
 By EDHREC rank: Esper Origins (5103), the only card with the line. No engine
