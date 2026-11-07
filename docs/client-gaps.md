@@ -40,6 +40,9 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
 - **Library search only matches exact phrases** (found 2026-11-02). "dragon" finds 519 and "flying" 3902,
   but "flying dragon" and "dragon flying" find 0, as does "atraxa praetors", and the box advertises name, type
   or rules text. Matching every word would fit. The deck builder's search wasn't checked.
+- **The library can't sort by release date** (asked 2026-11-07). The user wants release date as a sort option.
+  `client/src/library/LibraryPage.tsx`'s `SORTS` has edhrec, name, mana, color and type; the set list
+  already carries each set's `releasedAt`.
 - **The history log names a hidden draw once the card is public** (found 2026-11-02). "Silumgar draws Swamp"
   shows after the Swamp is played, which says what they drew. `publicNameAt` rightly finds nothing public at
   that moment, then `App.tsx`'s `nameAt` falls back to `game.nameOf`, today's name. Your own draws need that

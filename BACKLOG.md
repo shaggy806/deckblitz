@@ -793,6 +793,7 @@ delete its detail there and move this line to `COMPLETED.md`.
 - **Blitz starts an incomplete deck without a word** — a 4-card list went straight into a game with an empty library.
 - **The lobby doesn't show that Ready is the next step** — Start Game is disabled until you press it, and it doesn't look like the thing to press.
 - **Library search only matches exact phrases** — "atraxa praetors" and "flying dragon" find nothing, and the message says to try a shorter search.
+- **The library can't sort by release date** — the user wants it as a sort option beside EDHREC, name, mana, color and type.
 - **The history log names a hidden draw once the card is public** — "Silumgar draws Swamp" after the Swamp is played: `publicNameAt` is right, and its fallback to the current name isn't.
 - **The history log's layout** — a full-screen popup you can't read beside the board, event numbers on every line, and the phase banner draws over it.
 - **The hand's rules text is tiny at rest** — 8.5-9.5px and tilted at 1366×768, readable only on hover.
