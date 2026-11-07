@@ -819,6 +819,7 @@ import _poolTheRinghartCrest from "../pool/the-ringhart-crest.js";
 import _poolTheSpotsPortal from "../pool/the-spots-portal.js";
 import _poolTheTabernacleAtPendrellVale from "../pool/the-tabernacle-at-pendrell-vale.js";
 import _poolTheTarrasque from "../pool/the-tarrasque.js";
+import _poolTheWarringTriad from "../pool/the-warring-triad.js";
 import _poolTheWitchsVanity from "../pool/the-witchs-vanity.js";
 import _poolTheWorldTree from "../pool/the-world-tree.js";
 import _poolThornado from "../pool/thornado.js";
@@ -1795,6 +1796,7 @@ const shard: CardShard = {
     _poolTheSpotsPortal,
     _poolTheTabernacleAtPendrellVale,
     _poolTheTarrasque,
+    _poolTheWarringTriad,
     _poolTheWitchsVanity,
     _poolTheWorldTree,
     _poolThornado,

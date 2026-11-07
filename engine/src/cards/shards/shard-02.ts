@@ -958,6 +958,7 @@ import _poolWitherbloomTheBalancer from "../pool/witherbloom-the-balancer.js";
 import _poolWitheredWretch from "../pool/withered-wretch.js";
 import _poolWithoutWeakness from "../pool/without-weakness.js";
 import _poolWizardsRetort from "../pool/wizards-retort.js";
+import _poolWizardsStaff from "../pool/wizards-staff.js";
 import _poolWojekSiren from "../pool/wojek-siren.js";
 import _poolWoodlandSleuth from "../pool/woodland-sleuth.js";
 import _poolWoollyLoxodon from "../pool/woolly-loxodon.js";
@@ -1944,6 +1945,7 @@ const shard: CardShard = {
     _poolWitheredWretch,
     _poolWithoutWeakness,
     _poolWizardsRetort,
+    _poolWizardsStaff,
     _poolWojekSiren,
     _poolWoodlandSleuth,
     _poolWoollyLoxodon,

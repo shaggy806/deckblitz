@@ -590,6 +590,7 @@ import _poolQuestForTheNecropolis from "../pool/quest-for-the-necropolis.js";
 import _poolQuicksilverWall from "../pool/quicksilver-wall.js";
 import _poolQuintoriusFieldHistorian from "../pool/quintorius-field-historian.js";
 import _poolQuirionRanger from "../pool/quirion-ranger.js";
+import _poolRadiantLotus from "../pool/radiant-lotus.js";
 import _poolRadioactiveSpider from "../pool/radioactive-spider.js";
 import _poolRageThrower from "../pool/rage-thrower.js";
 import _poolRainOfDaggers from "../pool/rain-of-daggers.js";
@@ -1549,6 +1550,7 @@ const shard: CardShard = {
     _poolQuicksilverWall,
     _poolQuintoriusFieldHistorian,
     _poolQuirionRanger,
+    _poolRadiantLotus,
     _poolRadioactiveSpider,
     _poolRageThrower,
     _poolRainOfDaggers,

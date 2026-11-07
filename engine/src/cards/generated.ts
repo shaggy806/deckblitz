@@ -11531,6 +11531,7 @@ import _poolGwaihirTheWindlord from "./pool/gwaihir-the-windlord.js";
 import _poolGwenStacy from "./pool/gwen-stacy.js";
 import _poolGwendlynDiCorci from "./pool/gwendlyn-di-corci.js";
 import _poolGwennaEyesOfGaea from "./pool/gwenna-eyes-of-gaea.js";
+import _poolGwenomRemorseless from "./pool/gwenom-remorseless.js";
 import _poolGwyllionHedgeMage from "./pool/gwyllion-hedge-mage.js";
 import _poolGwyndalaTheProgeny from "./pool/gwyndala-the-progeny.js";
 import _poolGylwainCastingDirector from "./pool/gylwain-casting-director.js";
@@ -20188,6 +20189,7 @@ import _poolRadiantFountain from "./pool/radiant-fountain.js";
 import _poolRadiantGrace from "./pool/radiant-grace.js";
 import _poolRadiantGrove from "./pool/radiant-grove.js";
 import _poolRadiantKavu from "./pool/radiant-kavu.js";
+import _poolRadiantLotus from "./pool/radiant-lotus.js";
 import _poolRadiantPurge from "./pool/radiant-purge.js";
 import _poolRadiantRestraints from "./pool/radiant-restraints.js";
 import _poolRadiantSerraArchangel from "./pool/radiant-serra-archangel.js";
@@ -26608,6 +26610,7 @@ import _poolTheBattleOfBywater from "./pool/the-battle-of-bywater.js";
 import _poolTheBeaconOfKahless from "./pool/the-beacon-of-kahless.js";
 import _poolTheBeamtownBullies from "./pool/the-beamtown-bullies.js";
 import _poolTheBearsOfLittjara from "./pool/the-bears-of-littjara.js";
+import _poolTheBelligerent from "./pool/the-belligerent.js";
 import _poolTheBiblioplex from "./pool/the-biblioplex.js";
 import _poolTheBindingOfTheTitans from "./pool/the-binding-of-the-titans.js";
 import _poolTheBirthOfMeletis from "./pool/the-birth-of-meletis.js";
@@ -26859,6 +26862,7 @@ import _poolTheWanderingMinstrel from "./pool/the-wandering-minstrel.js";
 import _poolTheWanderingRescuer from "./pool/the-wandering-rescuer.js";
 import _poolTheWarGames from "./pool/the-war-games.js";
 import _poolTheWarInHeaven from "./pool/the-war-in-heaven.js";
+import _poolTheWarringTriad from "./pool/the-warring-triad.js";
 import _poolTheWaspJanetVanDyne from "./pool/the-wasp-janet-van-dyne.js";
 import _poolTheWaspWinsomeAvenger from "./pool/the-wasp-winsome-avenger.js";
 import _poolTheWatcherInTheWater from "./pool/the-watcher-in-the-water.js";
@@ -30226,6 +30230,7 @@ import _poolWizardsRetort from "./pool/wizards-retort.js";
 import _poolWizardsRockets from "./pool/wizards-rockets.js";
 import _poolWizardsSchool from "./pool/wizards-school.js";
 import _poolWizardsSpellbook from "./pool/wizards-spellbook.js";
+import _poolWizardsStaff from "./pool/wizards-staff.js";
 import _poolWizenedCenn from "./pool/wizened-cenn.js";
 import _poolWizenedMentor from "./pool/wizened-mentor.js";
 import _poolWizenedSnitches from "./pool/wizened-snitches.js";
@@ -43036,6 +43041,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGwenStacy,
   _poolGwendlynDiCorci,
   _poolGwennaEyesOfGaea,
+  _poolGwenomRemorseless,
   _poolGwyllionHedgeMage,
   _poolGwyndalaTheProgeny,
   _poolGylwainCastingDirector,
@@ -51693,6 +51699,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRadiantGrace,
   _poolRadiantGrove,
   _poolRadiantKavu,
+  _poolRadiantLotus,
   _poolRadiantPurge,
   _poolRadiantRestraints,
   _poolRadiantSerraArchangel,
@@ -58113,6 +58120,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheBeaconOfKahless,
   _poolTheBeamtownBullies,
   _poolTheBearsOfLittjara,
+  _poolTheBelligerent,
   _poolTheBiblioplex,
   _poolTheBindingOfTheTitans,
   _poolTheBirthOfMeletis,
@@ -58364,6 +58372,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheWanderingRescuer,
   _poolTheWarGames,
   _poolTheWarInHeaven,
+  _poolTheWarringTriad,
   _poolTheWaspJanetVanDyne,
   _poolTheWaspWinsomeAvenger,
   _poolTheWatcherInTheWater,
@@ -61731,6 +61740,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWizardsRockets,
   _poolWizardsSchool,
   _poolWizardsSpellbook,
+  _poolWizardsStaff,
   _poolWizenedCenn,
   _poolWizenedMentor,
   _poolWizenedSnitches,
@@ -74554,6 +74564,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gwen-stacy": _poolGwenStacy,
   "pool/gwendlyn-di-corci": _poolGwendlynDiCorci,
   "pool/gwenna-eyes-of-gaea": _poolGwennaEyesOfGaea,
+  "pool/gwenom-remorseless": _poolGwenomRemorseless,
   "pool/gwyllion-hedge-mage": _poolGwyllionHedgeMage,
   "pool/gwyndala-the-progeny": _poolGwyndalaTheProgeny,
   "pool/gylwain-casting-director": _poolGylwainCastingDirector,
@@ -83211,6 +83222,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/radiant-grace": _poolRadiantGrace,
   "pool/radiant-grove": _poolRadiantGrove,
   "pool/radiant-kavu": _poolRadiantKavu,
+  "pool/radiant-lotus": _poolRadiantLotus,
   "pool/radiant-purge": _poolRadiantPurge,
   "pool/radiant-restraints": _poolRadiantRestraints,
   "pool/radiant-serra-archangel": _poolRadiantSerraArchangel,
@@ -89631,6 +89643,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-beacon-of-kahless": _poolTheBeaconOfKahless,
   "pool/the-beamtown-bullies": _poolTheBeamtownBullies,
   "pool/the-bears-of-littjara": _poolTheBearsOfLittjara,
+  "pool/the-belligerent": _poolTheBelligerent,
   "pool/the-biblioplex": _poolTheBiblioplex,
   "pool/the-binding-of-the-titans": _poolTheBindingOfTheTitans,
   "pool/the-birth-of-meletis": _poolTheBirthOfMeletis,
@@ -89882,6 +89895,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-wandering-rescuer": _poolTheWanderingRescuer,
   "pool/the-war-games": _poolTheWarGames,
   "pool/the-war-in-heaven": _poolTheWarInHeaven,
+  "pool/the-warring-triad": _poolTheWarringTriad,
   "pool/the-wasp-janet-van-dyne": _poolTheWaspJanetVanDyne,
   "pool/the-wasp-winsome-avenger": _poolTheWaspWinsomeAvenger,
   "pool/the-watcher-in-the-water": _poolTheWatcherInTheWater,
@@ -93249,6 +93263,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/wizards-rockets": _poolWizardsRockets,
   "pool/wizards-school": _poolWizardsSchool,
   "pool/wizards-spellbook": _poolWizardsSpellbook,
+  "pool/wizards-staff": _poolWizardsStaff,
   "pool/wizened-cenn": _poolWizenedCenn,
   "pool/wizened-mentor": _poolWizenedMentor,
   "pool/wizened-snitches": _poolWizenedSnitches,
