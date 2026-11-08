@@ -16,12 +16,7 @@ export default defineCard({
       {
         text: "Creatures target player controls attack this turn if able.",
         targets: ["player"],
-        effect: {
-          kind: "attack-requirement",
-          filter: { type: "creature" },
-          controlledByTarget: 0,
-          duration: "end-of-turn",
-        },
+        effect: { kind: "restrict", filter: { controlledBy: "you", type: "creature" }, controlledByTarget: 0, restrictions: ["must-attack"], duration: "end-of-turn" },
       },
       {
         text: "Creatures you control gain first strike until end of turn.",

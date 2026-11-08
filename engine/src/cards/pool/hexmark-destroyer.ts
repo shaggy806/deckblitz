@@ -38,7 +38,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      blockedByAtLeast: 6,
+      restrictions: [{ kind: "cant-be-blocked", byFewerThan: 6 }],
       text: "Multi-threat Eliminator — This creature can't be blocked except by six or more creatures.",
     },
   ],

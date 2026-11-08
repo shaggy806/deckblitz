@@ -7,6 +7,7 @@
  * tokens made as Angels instead — rule 614.1a).
  */
 
+import { aimedAt } from "./combat-probe.js";
 import { describe, expect, it } from "vitest";
 
 import type { LegalAction } from "../actions.js";
@@ -531,7 +532,7 @@ describe("Scourge of the Throne", () => {
 });
 
 describe("Territorial Hellkite", () => {
-  const chosenFor = (game: Game, id: ObjectId) => game.state.objects[id].mustAttackPlayer;
+  const chosenFor = (game: Game, id: ObjectId) => aimedAt(game, id);
 
   it("picks an opponent at random that it must attack this combat, and not the one it attacked last combat", () => {
     const game = setUp([A, B, C]);
@@ -1466,7 +1467,7 @@ describe("Divine Visitation", () => {
     const [copy] = named(game, angel);
     expect(copy).toBeDefined();
     expect(game.characteristics(copy).keywords.has("haste")).toBe(true);
-    expect(game.state.objects[copy].mustAttackPlayer).toBe(B);
+    expect(aimedAt(game, copy)).toBe(B);
     expect(
       game.state.delayedTriggers.some(
         (t) => t.at === "next-end-step" && t.targets.some((r) => r?.kind === "object" && r.object === copy),

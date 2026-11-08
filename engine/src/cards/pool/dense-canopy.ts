@@ -13,5 +13,5 @@ export default defineCard({
   colors: ["G"],
   types: ["enchantment"],
   text: TEXT,
-  static: [{ affects: { scope: "all-creatures", withKeyword: "flying" }, canBlockOnly: { keyword: "flying" }, text: TEXT }],
+  static: [{ affects: { scope: "all-creatures", withKeyword: "flying" }, restrictions: [{ kind: "cant-block", attackers: { not: { keyword: "flying" } } }], text: TEXT }],
 });

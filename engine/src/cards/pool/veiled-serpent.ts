@@ -34,7 +34,7 @@ export default defineCard({
           {
             kind: "grant-static",
             target: "source",
-            ability: { affects: { scope: "self" }, cantAttackUnlessDefender: { controls: { subtype: "Island" } }, text: ATTACK },
+            ability: { affects: { scope: "self" }, restrictions: [{ kind: "cant-attack", unlessDefender: { controls: { subtype: "Island" } } }], text: ATTACK },
             duration: "permanent",
           },
         ],

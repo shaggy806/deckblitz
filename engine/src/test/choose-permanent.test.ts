@@ -8,6 +8,7 @@
  * of permanents (`min` as an amount); and "another" sparing the trigger's
  * object (`exceptTriggerObject`, `sharesPermanentTypeWith`).
  */
+import { blockRecords } from "./combat-probe.js";
 import { describe, expect, it } from "vitest";
 
 import { choosePermanents } from "../decisions/choose-permanents.js";
@@ -174,9 +175,9 @@ describe("a choice made by another player", () => {
     const lions = spawn(game, "Savannah Lions", B);
     const seen = pickPermanents(b, lions);
     a.declareAttackersFn = () => [{ attacker: boars, defender: B }];
-    game.advanceUntil((s) => (s.blockRequirements?.length ?? 0) > 0 || s.turn.step === "declare-blockers");
+    game.advanceUntil((s) => blockRecords(game).length > 0 || s.turn.step === "declare-blockers");
     expect([...seen.offered].sort()).toEqual([giant, lions].sort());
-    expect(game.state.blockRequirements?.map((r) => [r.blocker, r.attacker])).toEqual([[lions, boars]]);
+    expect(blockRecords(game).map((r) => [r.blocker, r.attacker])).toEqual([[lions, boars]]);
   });
 
   it("offers a forced pick's options one by one to the search, the least valuable first", () => {

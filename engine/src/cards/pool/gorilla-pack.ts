@@ -26,7 +26,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantAttackUnlessDefender: { controls: { subtype: "Forest" } },
+      restrictions: [{ kind: "cant-attack", unlessDefender: { controls: { subtype: "Forest" } } }],
       text: "This creature can't attack unless defending player controls a Forest.",
     },
   ],

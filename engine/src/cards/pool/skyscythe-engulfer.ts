@@ -14,5 +14,5 @@ export default defineCard({
   toughness: 5,
   keywords: ["reach", "trample"],
   text: `Reach, trample\n${EVASION_TEXT}`,
-  static: [{ affects: { scope: "self" }, cantBeBlockedBy: { keyword: "flying" }, text: EVASION_TEXT }],
+  static: [{ affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", by: { keyword: "flying" } }], text: EVASION_TEXT }],
 });

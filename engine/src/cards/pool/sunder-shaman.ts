@@ -15,7 +15,7 @@ export default defineCard({
   power: 5,
   toughness: 5,
   text: `${BLOCK_TEXT}\n${DAMAGE_TEXT}`,
-  static: [{ affects: { scope: "self" }, blockedByAtMostOne: true, text: BLOCK_TEXT }],
+  static: [{ affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", byMoreThan: 1 }], text: BLOCK_TEXT }],
   triggered: [
     {
       trigger: { on: "deals-combat-damage-to-player", who: "self" },

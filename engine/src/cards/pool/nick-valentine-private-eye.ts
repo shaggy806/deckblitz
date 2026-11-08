@@ -25,7 +25,7 @@ export default defineCard({
   power: 2,
   toughness: 2,
   text: `${EVASION_TEXT}\n${DIES_TEXT}`,
-  static: [{ affects: { scope: "self" }, cantBeBlockedBy: { notTypes: ["artifact"] }, text: EVASION_TEXT }],
+  static: [{ affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", by: { notTypes: ["artifact"] } }], text: EVASION_TEXT }],
   triggered: [
     ...thisOrAnother({
       trigger: { on: "dies", who: "you-control", filter: { types: ["artifact", "creature"] } },

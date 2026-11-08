@@ -8,7 +8,7 @@ const WIN_TEXT =
   "At the beginning of your upkeep, if this enchantment has twelve or more peace counters on it, you win the game.";
 
 // "They can't attack this turn": no creature that player controls can
-// attack, whoever it would attack — `cantAttack: "all"` narrowed to that
+// attack, whoever it would attack — a `restrict` over that
 // player's creatures.
 export default defineCard({
   name: "Peace in Our Time",
@@ -28,7 +28,7 @@ export default defineCard({
         ifDid: {
           kind: "sequence",
           effects: [
-            { kind: "player-effect", duration: "end-of-turn", cantAttack: "all", cantAttackBy: "that-player" },
+            { kind: "restrict", filter: { type: "creature", controlledBy: "you" }, sideOf: "that-player", restrictions: ["cant-attack"], duration: "end-of-turn" },
             { kind: "add-counter", target: "source", counter: "peace", amount: 1 },
           ],
         },

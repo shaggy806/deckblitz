@@ -14,7 +14,7 @@ export default defineCard({
   effect: {
     kind: "restrict",
     filter: { type: "creature", colors: ["B"], controlledBy: "you" },
-    restrictions: [],
-    cantBeBlockedBy: { notColors: ["B"] },
+    restrictions: [{ kind: "cant-be-blocked", by: { notColors: ["B"] } }],
+    
   },
 });

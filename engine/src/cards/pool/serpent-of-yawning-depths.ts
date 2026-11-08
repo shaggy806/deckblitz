@@ -21,7 +21,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "filter", filter: { controlledBy: "you", subtypes: SEA } },
-      cantBeBlockedBy: { notSubtypes: SEA },
+      restrictions: [{ kind: "cant-be-blocked", by: { notSubtypes: SEA } }],
       text: TEXT,
     },
   ],

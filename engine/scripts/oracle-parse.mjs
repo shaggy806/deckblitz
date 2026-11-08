@@ -385,7 +385,7 @@ function keywordPart(part, faceName, typeLine = "") {
     persist: () => ({ triggered: [persist()] }),
     mentor: () => ({ triggered: [mentor()] }),
     flanking: () => ({ keywords: ["flanking"], triggered: [flanking()] }),
-    // Provoke (rule 702.39a): the attack trigger's untap and block-if-able.
+    // Provoke (rule 702.39a): the attack trigger's untap and its `must-block` record.
     provoke: () => ({ triggered: [provoke("Provoke")] }),
     dethrone: () => ({ triggered: [dethrone()] }),
     myriad: () => ({ triggered: [myriad()] }),
@@ -3205,7 +3205,7 @@ export function parseSentence(sentence, ctx) {
   // "Until your next turn, creatures can't attack you" (Chronomantic Escape):
   // a rule for a while, no cost.
   if (/^until your next turn, creatures can't attack you\.$/i.test(s)) {
-    return { kind: "player-effect", duration: "until-your-next-turn", cantAttack: "you" };
+    return { kind: "restrict", filter: { type: "creature" }, restrictions: [{ kind: "cant-attack", at: "you" }], duration: "until-your-next-turn" };
   }
   // Its block twin (War Cadence, rule 509.1d).
   if (/^this turn, creatures can't block unless their controller pays \{X\} for each blocking creature they control\.$/i.test(s)) {
@@ -3712,14 +3712,10 @@ export function parseSentence(sentence, ctx) {
   }
   // A rule for the turn over the blockers (rule 611.2c), not over who's there now.
   if ((m = re(`each creature( your opponents control)? blocks this turn if able`).exec(s))) {
-    return { kind: "block-if-able", filter: { type: "creature", ...(m[1] !== undefined ? { controlledBy: "opponent" } : {}) } };
+    return { kind: "restrict", filter: { type: "creature", ...(m[1] !== undefined ? { controlledBy: "opponent" } : {}) }, restrictions: ["must-block"] };
   }
   if ((m = re(`all creatures your opponents control able to block (~|${TARGET}) this turn do so`).exec(s))) {
-    return {
-      kind: "block-if-able",
-      filter: { type: "creature", controlledBy: "opponent" },
-      attacker: m[1] === "~" ? "source" : slot(m[1]),
-    };
+    return { kind: "restrict", filter: { type: "creature", controlledBy: "opponent" }, restrictions: [{ kind: "must-block", attacker: m[1] === "~" ? "source" : slot(m[1]) }] };
   }
   // "Skips their next untap step" (rule 614.10): the whole step.
   if (re(`you skip your next untap step`).test(s)) return { kind: "skip-untap-step", who: "you" };
@@ -6496,7 +6492,7 @@ export function parseSentence(sentence, ctx) {
   }
 
   // Combat this turn.
-  // Attack requirements narrowed (rule 508.1d — `attack-requirement`): one
+  // Attack requirements narrowed (rule 508.1d — `must-attack` records): one
   // target creature, at you or a target player, this turn (Alluring Siren,
   // Dulcet Sirens) or in its controller's next combat phase (Trench
   // Behemoth); a target player's creatures this turn (Imaginary Threats) or
@@ -6504,31 +6500,30 @@ export function parseSentence(sentence, ctx) {
   const PLAYER_T = "target (?:player|opponent)";
   if ((m = re(`(${TARGET}) attacks (you|${PLAYER_T}) this turn if able`).exec(s))) {
     const target = slot(m[1]);
-    const attacks = m[2].toLowerCase() === "you" ? "you" : slot(m[2]);
-    return { kind: "attack-requirement", target, attacks, duration: "end-of-turn" };
+    const aimed = m[2].toLowerCase() === "you" ? "you" : { target: slot(m[2]) };
+    return { kind: "restrict", target, restrictions: [{ kind: "must-attack", at: aimed }], duration: "end-of-turn" };
   }
   if ((m = re(`(${TARGET}) attacks during its controller's next combat phase if able`).exec(s))) {
-    return { kind: "attack-requirement", target: slot(m[1]), duration: "during-its-controllers-next-combat" };
+    return { kind: "restrict", target: slot(m[1]), restrictions: ["must-attack"], duration: "during-its-controllers-next-combat" };
   }
   if ((m = re(`creatures (${PLAYER_T}) controls attack this turn if able`).exec(s))) {
-    return { kind: "attack-requirement", filter: { type: "creature" }, controlledByTarget: slot(m[1]), duration: "end-of-turn" };
+    return { kind: "restrict", filter: { controlledBy: "you", type: "creature" }, controlledByTarget: slot(m[1]), restrictions: ["must-attack"], duration: "end-of-turn" };
   }
   if ((m = re(`during (${PLAYER_T})'s next turn, creatures that player controls attack (you|~) if able`).exec(s))) {
     const controlledByTarget = slot(m[1]);
-    return {
-      kind: "attack-requirement",
-      filter: { type: "creature" },
-      controlledByTarget,
-      attacks: m[2] === "~" ? "source" : "you",
-      duration: { duringTurnOf: { target: controlledByTarget } },
-    };
+    return { kind: "restrict", filter: { controlledBy: "you", type: "creature" }, controlledByTarget, restrictions: [{ kind: "must-attack", at: m[2] === "~" ? "source" : "you" }], duration: { duringTurnOf: { target: controlledByTarget } } };
   }
   // "Target creature can't block ~ this turn" (Kozilek's Pathfinder): that
   // one attacker, the source as it resolves (rule 400.7).
   if ((m = re(`(${TARGET}) can't block ~ this turn`).exec(s))) {
-    return { kind: "restrict", target: slot(m[1]), restrictions: [], cantBlockAttacker: "source" };
+    return { kind: "restrict", target: slot(m[1]), restrictions: [{ kind: "cant-block", attacker: "source" }]};
   }
   if ((m = re(`(${TARGET}) can't block this turn`).exec(s))) return { kind: "restrict", target: slot(m[1]), restrictions: ["cant-block"] };
+  // "Until the end of your next turn, target creature attacks that player
+  // each combat if able" (Silver Surfer): a must-attack record, timed.
+  if ((m = re(`until the end of your next turn, (${TARGET}) attacks that player each combat if able`).exec(s))) {
+    return { kind: "restrict", target: slot(m[1]), restrictions: [{ kind: "must-attack", at: "trigger-player" }], duration: "until-end-of-your-next-turn" };
+  }
   // A turn-wide rule over a set of creatures (rule 611.2c — `restrict`'s
   // `filter` form): "creatures target player controls can't attack this
   // turn" (Oriss, read from that player's side — `controlledByTarget`),
@@ -6609,7 +6604,7 @@ export function parseSentence(sentence, ctx) {
     };
   }
   // "Can't be blocked by [X] this turn" — a rule on it, not an ability
-  // (`restrict`'s `cantBeBlockedBy`); "except by [X]" is the negation.
+  // (a `cant-be-blocked` record); "except by [X]" is the negation.
   {
     const by =
       (m = re(`(~|${TARGET}) can't be blocked by creatures with power (\\d+) or (less|greater) this turn`).exec(s))
@@ -6618,9 +6613,11 @@ export function parseSentence(sentence, ctx) {
           ? { subtype: "Wall" }
           : (m = re(`(~|${TARGET}) can't be blocked this turn except by creatures with (flying|haste|defender|reach)`).exec(s))
             ? { notKeyword: m[2].toLowerCase() }
-            : undefined;
+            : (m = re(`(~|${TARGET}) can't be blocked this turn except by ([A-Z][a-z]+)s`).exec(s))
+              ? { notSubtypes: [m[2]] }
+              : undefined;
     if (by !== undefined) {
-      return { kind: "restrict", target: m[1] === "~" ? "source" : slot(m[1]), restrictions: [], cantBeBlockedBy: by };
+      return { kind: "restrict", target: m[1] === "~" ? "source" : slot(m[1]), restrictions: [{ kind: "cant-be-blocked", by }] };
     }
   }
   // What a block's other creature takes, as "it" (the trigger object).
@@ -7577,8 +7574,7 @@ function chosenAndTheRest(text) {
           kind: "restrict",
           filter: { thisWay: "chosen" },
           asItResolves: true,
-          restrictions: [],
-          cantAttackYou: "you-and-planeswalkers",
+          restrictions: [{ kind: "cant-attack", at: "you-and-planeswalkers" }],
           duration: { whileCounter: vowed[1] },
         },
       ],
@@ -19418,10 +19414,10 @@ function parseStatic(line, text) {
     }
   }
   // "Creatures with power 2 or less can't attack you" (Reverence): the player
-  // alone (`cantAttackController: "player"`, rule 508.1b).
+  // alone (`at: "you"`, rule 508.1b).
   if ((m = /^(.+) can't attack you\.$/.exec(line))) {
     const filter = attackingCreatures(m[1]);
-    if (filter !== null) return { affects: { scope: "filter", filter }, cantAttackController: "player", text };
+    if (filter !== null) return { affects: { scope: "filter", filter }, restrictions: [{ kind: "cant-attack", at: "you" }], text };
   }
   // Elephant Grass's other half, a `combatTax` by colour on attacking you.
   if ((m = /^(.+) can't attack you unless their controller pays \{(\d+)\} for each creature they control that's attacking you\.$/.exec(line))) {
@@ -19465,7 +19461,7 @@ function parseStatic(line, text) {
   }
   // "~ can't attack a player it has already attacked this turn" (Port Razer).
   if (line === "~ can't attack a player it has already attacked this turn.") {
-    return { affects: { scope: "self" }, restrictions: ["cant-attack-player-attacked-this-turn"], text };
+    return { affects: { scope: "self" }, restrictions: [{ kind: "cant-attack", at: "attacked-this-turn" }], text };
   }
   // A cost on a creature to attack or block (rules 508.1h, 509.1d, `combatTax`):
   // "~ can't attack unless you pay {1} for each +1/+1 counter on it" (Phyrexian
@@ -19538,18 +19534,19 @@ function parseStatic(line, text) {
   // Restrictions asked of the defending (or attacking) player — rules 508.1c
   // and 509.1b: "~ can't attack unless defending player controls an Island".
   if ((m = /^~ can't (attack unless|attack if|block unless) (defending|attacking) player (controls an? (.+)|is the monarch|is poisoned|has (\w+) or more cards in their graveyard)\.$/.exec(line))) {
-    const field = { "attack unless": "cantAttackUnlessDefender", "attack if": "cantAttackIfDefender", "block unless": "cantBlockUnlessAttacker" }[m[1]];
-    if ((field === "cantBlockUnlessAttacker") !== (m[2] === "attacking")) return null;
+    const rule = { "attack unless": { kind: "cant-attack", key: "unlessDefender" }, "attack if": { kind: "cant-attack", key: "ifDefender" }, "block unless": { kind: "cant-block", key: "unlessAttacking" } }[m[1]];
+    if ((rule.key === "unlessAttacking") !== (m[2] === "attacking")) return null;
+    const restricted = (test) => ({ affects: { scope: "self" }, restrictions: [{ kind: rule.kind, [rule.key]: test }], text });
     if (m[4] !== undefined) {
       const filter = playerTestPermanent(m[4]);
-      return filter === null ? null : { affects: { scope: "self" }, [field]: { controls: filter }, text };
+      return filter === null ? null : restricted({ controls: filter });
     }
     if (m[5] !== undefined) {
       const atLeast = numberOf(m[5]);
-      return typeof atLeast !== "number" ? null : { affects: { scope: "self" }, [field]: { holds: { kind: "cards-in-graveyard", atLeast } }, text };
+      return typeof atLeast !== "number" ? null : restricted({ holds: { kind: "cards-in-graveyard", atLeast } });
     }
     const holds = m[3] === "is the monarch" ? { kind: "monarch", who: "you" } : { kind: "player-counters", who: "you", counter: "poison", atLeast: 1 };
-    return { affects: { scope: "self" }, [field]: { holds }, text };
+    return restricted({ holds });
   }
   // The same restriction asked of you: "~ can't block if you control an
   // untapped land" (Branded Brawlers), "~ can't block unless you have four or
@@ -19567,7 +19564,7 @@ function parseStatic(line, text) {
   if ((m = /^~ can't (attack|block) unless you control more (creatures|lands) than (defending|attacking) player\.$/.exec(line))) {
     if ((m[1] === "block") !== (m[3] === "attacking")) return null;
     const test = { youControlMore: { type: m[2] === "creatures" ? "creature" : "land" } };
-    return { affects: { scope: "self" }, [m[1] === "attack" ? "cantAttackUnlessDefender" : "cantBlockUnlessAttacker"]: test, text };
+    return { affects: { scope: "self" }, restrictions: [m[1] === "attack" ? { kind: "cant-attack", unlessDefender: test } : { kind: "cant-block", unlessAttacking: test }], text };
   }
   if (line === "~ can't attack or block.") return { affects: { scope: "self" }, restrictions: ["cant-attack", "cant-block"], text };
   // Restrictions keyed to the other creatures in combat (rules 508.1c, 509.1b):
@@ -19601,6 +19598,10 @@ function parseStatic(line, text) {
     return { affects: { scope: "self" }, grantPt: [Number(m[1]), Number(m[2])], ...(kws.length ? { grantKeywords: kws } : {}), text };
   }
   if (line === "~ attacks each combat if able.") return { affects: { scope: "self" }, restrictions: ["must-attack"], text };
+  // A permission on the blocker (rule 702.28b), either spelling.
+  if (line === "~ can block creatures with shadow as though it had shadow." || line === "~ can block creatures with shadow as though they didn't have shadow.") {
+    return { affects: { scope: "self" }, blocksAsThoughShadow: true, text };
+  }
   // Rule 509.1c's requirement as a static; "attacks or blocks" is both, each
   // meeting only its own kind of combat.
   if (line === "~ blocks each combat if able.") return { affects: { scope: "self" }, restrictions: ["must-block"], text };
@@ -19610,33 +19611,33 @@ function parseStatic(line, text) {
   if (line === "All creatures block each combat if able.") return { affects: { scope: "all-creatures" }, restrictions: ["must-block"], text };
   // Requirements only the whole declaration can answer (rules 508.1d, 509.1c).
   if (line === "~ must be blocked by exactly one creature if able.") {
-    return { affects: { scope: "self" }, restrictions: ["must-be-blocked-by-exactly-one"], text };
+    return { affects: { scope: "self" }, restrictions: [{ kind: "must-be-blocked-if-able", exactlyOne: true }], text };
   }
   if ((m = /^(~|Equipped creature)(?: gets ([+-]\d+)\/([+-]\d+) and)? must be blocked by an? ([A-Z][a-z]+) if able\.$/.exec(line))) {
     return {
       affects: { scope: m[1] === "~" ? "self" : "attached" },
       ...(m[2] !== undefined ? { grantPt: [Number(m[2]), Number(m[3])] } : {}),
-      mustBeBlockedBy: { by: { type: "creature", subtype: m[4] } },
+      restrictions: [{ kind: "must-be-blocked-if-able", by: { type: "creature", subtype: m[4] } }],
       text,
     };
   }
   if ((m = /^All creatures with (flying|reach|defender) able to block ~ do so\.$/.exec(line))) {
-    return { affects: { scope: "self" }, mustBeBlockedBy: { by: { type: "creature", keyword: m[1] }, all: true }, text };
+    return { affects: { scope: "self" }, restrictions: [{ kind: "must-be-blocked", by: { type: "creature", keyword: m[1] } }], text };
   }
   if ((m = /^All ([A-Z][a-z]+)s able to block ~ do so\.$/.exec(line))) {
-    return { affects: { scope: "self" }, mustBeBlockedBy: { by: { type: "creature", subtype: m[1] }, all: true }, text };
+    return { affects: { scope: "self" }, restrictions: [{ kind: "must-be-blocked", by: { type: "creature", subtype: m[1] } }], text };
   }
   if (line === "If ~ attacks, all creatures you control attack if able.") {
-    return { affects: { scope: "creatures-you-control" }, attacksIfAttacks: { isSource: true }, text };
+    return { affects: { scope: "creatures-you-control" }, restrictions: [{ kind: "must-attack", ifAttacks: { isSource: true } }], text };
   }
   if (line === "If a creature you control attacks, ~ also attacks if able.") {
-    return { affects: { scope: "self" }, attacksIfAttacks: { type: "creature", controlledBy: "you" }, text };
+    return { affects: { scope: "self" }, restrictions: [{ kind: "must-attack", ifAttacks: { type: "creature", controlledBy: "you" } }], text };
   }
   // Boldwyr Intimidator: a rule over the two types, whoever controls them.
   if ((m = /^([A-Z][a-z]+)s can't block ([A-Z][a-z]+)s\.$/.exec(line))) {
     return {
       affects: { scope: "filter", filter: { type: "creature", subtype: m[2] } },
-      cantBeBlockedBy: { subtype: m[1] },
+      restrictions: [{ kind: "cant-be-blocked", by: { subtype: m[1] } }],
       text,
     };
   }
@@ -19645,7 +19646,7 @@ function parseStatic(line, text) {
     const n = { two: 2, three: 3, four: 4, five: 5, six: 6 }[m[2]];
     const affects =
       m[1] === "~" ? { scope: "self" } : { scope: "filter", filter: { type: "creature", controlledBy: "you", keyword: "menace" } };
-    return { affects, blockedByAtLeast: n, text };
+    return { affects, restrictions: [{ kind: "cant-be-blocked", byFewerThan: n }], text };
   }
   if (line === "~ can't be blocked unless defending player controls three or more creatures that share a creature type.") {
     const shared = { kind: "controls", filter: { type: "creature" }, atLeast: 3, sharingACreatureType: true };
@@ -19657,7 +19658,7 @@ function parseStatic(line, text) {
     };
   }
   if (line === "~ can't be blocked unless all creatures defending player controls block it.") {
-    return { affects: { scope: "self" }, blockedOnlyByAll: true, text };
+    return { affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", unlessAllBlock: true }], text };
   }
   if (line === "~ can't be blocked.") return { affects: { scope: "self" }, grantKeywords: ["unblockable"], text };
   if ((m = new RegExp(`^During your turn, ~ has ${KW}(?: and ${KW})?\\.$`, "i").exec(line))) {
@@ -19669,7 +19670,7 @@ function parseStatic(line, text) {
       text,
     };
   }
-  if (line === "~ can block only creatures with flying.") return { affects: { scope: "self" }, canBlockOnly: { keyword: "flying" }, text };
+  if (line === "~ can block only creatures with flying.") return { affects: { scope: "self" }, restrictions: [{ kind: "cant-block", attackers: { not: { keyword: "flying" } } }], text };
   // A Pilot's crew bonus (rules 702.122a, 702.171a): "~ [saddles Mounts and]
   // crews Vehicles as though its power were N greater" / "…using its
   // toughness rather than its power" — `crewsAs`, saddle only when it says so.
@@ -19734,7 +19735,7 @@ function parseStatic(line, text) {
     return { affects: { scope: "attached" }, assignAsThoughUnblocked: true, text };
   }
   if ((m = /^~ can't be blocked by creatures with power (\d+) or (less|greater)\.$/.exec(line))) {
-    return { affects: { scope: "self" }, cantBeBlockedBy: { power: { op: m[2] === "less" ? "lte" : "gte", n: Number(m[1]) } }, text };
+    return { affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", by: { power: { op: m[2] === "less" ? "lte" : "gte", n: Number(m[1]) } } }], text };
   }
   if (line === "You have no maximum hand size.") return { affects: { scope: "self" }, noMaxHandSize: true, text };
   // "This Equipment can be attached only to a creature with power 3 or

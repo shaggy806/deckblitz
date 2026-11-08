@@ -19,7 +19,7 @@ export default defineCard({
     {
       cost: { mana: "{1}", tap: false },
       targets: [],
-      effect: { kind: "restrict", target: "source", restrictions: [], cantBeBlockedBy: { notKeyword: "haste" } },
+      effect: { kind: "restrict", target: "source", restrictions: [{ kind: "cant-be-blocked", by: { notKeyword: "haste" } }]},
       resolve: null,
       text: DODGE,
     },

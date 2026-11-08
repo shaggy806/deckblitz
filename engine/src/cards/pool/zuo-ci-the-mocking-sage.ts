@@ -16,7 +16,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantBeBlockedBy: { keyword: "horsemanship" },
+      restrictions: [{ kind: "cant-be-blocked", by: { keyword: "horsemanship" } }],
       text: "Zuo Ci can't be blocked by creatures with horsemanship.",
     },
   ],

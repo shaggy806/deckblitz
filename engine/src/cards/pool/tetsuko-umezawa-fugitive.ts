@@ -26,7 +26,7 @@ export default defineCard({
           anyOf: [{ power: { op: "lte", n: 1 } }, { toughness: { op: "lte", n: 1 } }],
         },
       },
-      cantBeBlockedBy: {},
+      restrictions: [{ kind: "cant-be-blocked", by: {} }],
       text: TEXT,
     },
   ],

@@ -25,7 +25,7 @@ export default defineCard({
     {
       trigger: { on: "enters-battlefield", who: "self" },
       targets: ["creature", "opponent"],
-      effect: { kind: "attack-requirement", target: 0, attacks: 1, duration: "end-of-turn" },
+      effect: { kind: "restrict", target: 0, restrictions: [{ kind: "must-attack", at: { target: 1 } }], duration: "end-of-turn" },
       resolve: null,
       text: ENTER_TEXT,
     },

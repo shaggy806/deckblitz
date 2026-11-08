@@ -5,6 +5,7 @@
  * first legal defender.
  */
 
+import { aimAt } from "./combat-probe.js";
 import { describe, expect, it } from "vitest";
 
 import type { LegalAction } from "../actions.js";
@@ -87,14 +88,14 @@ describe("an encore copy", () => {
   it("may attack only the opponent it was made for, while it can", () => {
     const { game, ids, offer } = atAttack(["Grizzly Bears"]);
     const [bears] = ids;
-    game.state.objects[bears].mustAttackPlayer = C;
+    aimAt(game, bears, C, A);
     const fresh = game.legalActions(A).find((o): o is AttackOffer => o.kind === "declare-attackers");
     expect(fresh?.defendersFor[bears]).toEqual([C]);
     expect(fresh?.mustAttack).toContain(bears);
     expect(offer).toBeDefined();
     expect(() =>
       game.dispatch({ type: "declare-attackers", player: A, attackers: [{ attacker: bears, defender: B }] }),
-    ).toThrow(/must attack the opponent/);
+    ).toThrow(/must attack the player or planeswalker it was made to attack/);
   });
 });
 

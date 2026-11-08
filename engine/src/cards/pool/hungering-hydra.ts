@@ -21,7 +21,7 @@ export default defineCard({
       replacement: { event: "enters-battlefield", counters: { kind: "+1/+1", amount: "x" } },
       text: ENTER_TEXT,
     },
-    { affects: { scope: "self" }, blockedByAtMostOne: true, text: BLOCK_TEXT },
+    { affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", byMoreThan: 1 }], text: BLOCK_TEXT },
   ],
   triggered: [
     {

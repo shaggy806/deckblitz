@@ -562,90 +562,8 @@ export type AffectSpec =
       readonly excludeSelf?: boolean;
     };
 
-/** A combat restriction a static ability imposes on the objects it `affects`
- * (Pacifism: can't attack / can't block; Juggernaut: must attack if able;
- * Lure: all creatures able to block this one must do so — rule 509.1c), or
- * a `restrict` effect imposes until end of turn. */
-export type CombatRestriction =
-  | "cant-attack"
-  | "cant-block"
-  /** "Can't be attacked" on a planeswalker or battle (The Aetherspark): a
-   * restriction on declaring attackers (rule 508.1c), so one already being
-   * attacked stays attacked (the ruling), and a creature put onto the
-   * battlefield attacking may still choose it (rule 508.4c). */
-  | "cant-be-attacked"
-  /** "Can't be blocked": the `unblockable` keyword's rule as a restriction,
-   * so a `restrict` over a filter reaches creatures that match it later this
-   * turn — Jace, Arcane Strategist's "creatures you control can't be blocked
-   * this turn" (rule 611.2c: it changes no characteristic, so it isn't locked
-   * to the creatures there as it resolved). */
-  | "cant-be-blocked"
-  | "must-attack"
-  /** "Blocks each combat if able" (Razorgrass Screen; with `must-attack`,
-   * Iron Golem's "attacks or blocks each combat if able" — it can attack only
-   * on its controller's turn and block only on another's): a blocking
-   * requirement (rule 509.1c) on the creature, joined to the blockers
-   * offer's `blockRequirements` like the `block-if-able` effect's. */
-  | "must-block"
-  /** Lure: **every** creature able to block it must do so. */
-  | "must-be-blocked"
-  /** "Must be blocked if able" (Anzrag, the Quake-Mole): the defending
-   * player has to block it with at least one creature (two, with menace)
-   * when they can — a requirement (rule 509.1c), weighed against the rest
-   * as the declaration is checked. */
-  | "must-be-blocked-if-able"
-  /** "Must be blocked by exactly one creature if able" (Nacatl War-Pride): a
-   * requirement (rule 509.1c) one blocker obeys and none or two don't. Menace
-   * or the like makes it impossible to obey, and so asks nothing. */
-  | "must-be-blocked-by-exactly-one"
-  /** "Can't be blocked by more than one creature" as a `restrict` gives it for
-   * the turn (Glorfindel, Dauntless Rescuer) — a restriction (rule 509.1b), the
-   * static form's `blockedByAtMostOne`. */
-  | "blocked-by-at-most-one"
-  /** "Can't attack its owner" — the player only: a planeswalker its owner
-   * controls may still be attacked (Alexios, Deimos of Kosmos's ruling;
-   * rule 508.1b — a creature attacks a player *or* a planeswalker).
-   * With `cant-attack-owner-planeswalkers`, Xantcha's "can't attack its owner
-   * or planeswalkers its owner controls". */
-  | "cant-attack-owner"
-  /** "Can't attack … planeswalkers its owner controls" (Xantcha, Sleeper
-   * Agent). */
-  | "cant-attack-owner-planeswalkers"
-  /** "Can't attack a player it has already attacked this turn" (Port Razer,
-   * Bloodthirster): the player only, as above, by this object's own
-   * `attackedPlayersThisTurn` (rule 400.7: a new object starts afresh). */
-  | "cant-attack-player-attacked-this-turn"
-  /** "Can't attack alone" (Bonded Construct; with `cant-block-alone`, Mogg
-   * Flunkies's "can't attack or block alone"), and the rest of a restriction
-   * keyed to the other creatures declared with it (rules 508.1c, 509.1b — see
-   * `combat/company.ts`): those of its controller's creatures, whatever they
-   * attack or block (the rulings), one such creature counting for another. */
-  | "cant-attack-alone"
-  | "cant-block-alone"
-  /** "Can only attack alone" (Master of Cruelties, Errantry). */
-  | "can-only-attack-alone"
-  /** "Can't attack unless at least two other creatures attack", "can't block
-   * unless at least two other creatures block" (Orcish Conscripts). */
-  | "cant-attack-unless-two-others"
-  | "cant-block-unless-two-others"
-  /** "Doesn't untap during its controller's untap step" (rule 502.3) — on
-   * what the static reaches: Tractor Beam's "enchanted permanent", T-45 Power
-   * Armor's "equipped creature". Only that untap step: something that untaps
-   * it at another time (an effect, Seedborn Muse during another player's)
-   * still does. A permanent's own "this doesn't untap" is the static's
-   * `doesntUntap` (Mana Vault). */
-  | "doesnt-untap"
-  /** "Can't be turned face up" (rule 708.7 — the special actions of
-   * 701.40b, 701.58b, 702.37e and 702.168d refused): Unable to Scream's "as
-   * long as enchanted creature is face down, it can't be turned face up"
-   * (only a face-down permanent can be turned face up, so "enchanted
-   * creature can't be"), Karlov Watchdog's "permanents your opponents
-   * control can't be turned face up during your turn". */
-  | "cant-turn-face-up"
-  /** "Can't crew Vehicles" (rule 702.122d — Revoke Privileges,
-   * Intercessor's Arrest): it can't be tapped to pay a crew cost. A saddle
-   * cost, or any other "tap an untapped creature" cost, still can. */
-  | "cant-crew";
+export type { CombatRecord, CombatRule, CombatWord } from "../combat/rules.js";
+import type { CombatRule } from "../combat/rules.js";
 
 /**
  * A dynamic quantity a characteristic-defining ability can read (rule 604.3).
@@ -2001,6 +1919,9 @@ export interface PlayerTest {
    * controller has more permanents matching it than they do — Mogg Toady's
    * creatures, Monstrous Hound's lands. */
   readonly youControlMore?: CardFilter;
+  /** They have the most life among this permanent's controller's opponents,
+   * ties included (Galactus, Devourer of Worlds). */
+  readonly mostLifeAmongYourOpponents?: true;
 }
 
 /**
@@ -2360,35 +2281,6 @@ export interface StaticAbility {
     readonly pt: readonly [number, number];
     readonly excludeSelf?: boolean;
   };
-  /** The affected creatures "can't attack you or planeswalkers you control",
-   * where "you" is *this* permanent's controller: the creature an Aura
-   * enchants (Vow of Duty, `affects: { scope: "attached" }`), or every
-   * creature a scope reaches (Eriette of the Charmed Apple's "each creature
-   * that's enchanted by an Aura you control" — a `filter` scope with
-   * `enchantedBy: "you"`). Checked directly in `whyCannotAttack` rather than
-   * as a `CombatRestriction`: those are bare strings, and this one has to
-   * know whose "you" it means.
-   *
-   * `"player"` is "can't attack you" with no planeswalkers named: the player
-   * only, so a creature may still attack a planeswalker they control (rule
-   * 508.1b): Reverence, Blazing Archon, Teferi's Moat. */
-  readonly cantAttackController?: boolean | "player";
-  /** "This creature can't attack **unless defending player** controls an
-   * Island" (Sea Serpent), "… is the monarch" (Crown-Hunter Hireling), "…
-   * unless you control more creatures than defending player" (Mogg Toady):
-   * a restriction on each attack declared (rule 508.1c), asked of the player
-   * that attack would defend against (rule 506.2 — a planeswalker's or a
-   * battle's player), so in multiplayer it may attack one opponent and not
-   * another. This permanent's own, about itself alone. */
-  readonly cantAttackUnlessDefender?: PlayerTest;
-  /** "This creature can't attack **if defending player** controls an
-   * untapped creature with power 3 or greater" (Orgg): the same, the other
-   * way round. */
-  readonly cantAttackIfDefender?: PlayerTest;
-  /** "This creature can't block unless you control more lands than
-   * **attacking player**" (Monstrous Hound): asked of the controller of the
-   * attacker it would block (rule 509.1b). */
-  readonly cantBlockUnlessAttacker?: PlayerTest;
   /**
    * The affected creatures **are goaded** (rule 701.15b) for as long as this
    * static applies — Baeloth Barrityl, Entertainer's "creatures your
@@ -2406,53 +2298,6 @@ export interface StaticAbility {
    * "source" }`, read as it is now. Any other amount fails closed.
    */
   readonly goads?: boolean;
-  /** The affected creatures "can't be blocked by [filter]" — Delney,
-   * Streetwise Lookout's "creatures you control with power 2 or less can't
-   * be blocked by creatures with power 3 or greater" (`{ power: { op:
-   * "gte", n: 3 } }`). The blocker is matched from this permanent's
-   * controller's side. */
-  readonly cantBeBlockedBy?: CardFilter;
-  /** The affected creatures "can block only [filter]" — "can block only
-   * creatures with flying" (`{ keyword: "flying" }`). The attacker is
-   * matched from this permanent's controller's side. */
-  readonly canBlockOnly?: CardFilter;
-  /** The affected creatures "can't be blocked by more than one creature"
-   * (Challenger Troll — a blocking restriction, rule 509.1b): a declaration
-   * may put at most one creature on each. Checked as a block is declared,
-   * like `cantBeBlockedBy`, so a scope reading power ("with power 4 or
-   * greater") sees the creature as it is. */
-  readonly blockedByAtMostOne?: boolean;
-  /** The affected creatures "can't be blocked except by N or more
-   * creatures" (Pathrazer of Ulamog's three, Sonorous Howlbonder's "each
-   * creature you control with menace …"): menace's restriction (rule
-   * 702.111b) with a larger N, a blocking restriction (509.1b) read as blocks
-   * are declared. Several reaching one creature, menace among them, ask for
-   * the largest. */
-  readonly blockedByAtLeast?: number;
-  /** The affected creatures "can't be blocked unless **all creatures
-   * defending player controls** block it" (Tromokratis — rule 509.1b): it
-   * can be blocked only if every creature that player controls blocks it,
-   * so one of theirs that can't (tapped, or barred from blocking it) leaves
-   * it unblockable, and a declaration blocking it with only some is
-   * illegal. */
-  readonly blockedOnlyByAll?: boolean;
-  /** The affected creatures must be blocked by creatures matching `by`, a
-   * requirement (rule 509.1c) read as blocks are declared, the blocker matched
-   * from this permanent's controller's side. By one if able — Slayer's
-   * Cleaver's "must be blocked by an Eldrazi if able" (only one of them has
-   * to, and nothing's asked with none able) — or, with `all`, by every one
-   * able: Marble Priest's "all Walls able to block this creature do so". */
-  readonly mustBeBlockedBy?: { readonly by: CardFilter; readonly all?: true };
-  /** The affected creatures "attack if able" when a creature matching this is
-   * declared attacking beside them (rule 508.1d), so a requirement only the
-   * whole declaration can answer: Ekundu Cyclops's "if a creature you control
-   * attacks, this creature also attacks if able", Viashino Bey's "if this
-   * creature attacks, all creatures you control attack if able" (`{ isSource:
-   * true }`), War's Toll's "if a creature an opponent controls attacks, all
-   * creatures that opponent controls attack if able". Read from this
-   * permanent's controller's side. Only one player declares at a time, so the
-   * affected creatures and the one that attacks are always that player's. */
-  readonly attacksIfAttacks?: CardFilter;
   /**
    * A prohibition on casting and activating ("can't" beats "can" — rule
    * 101.2): `who` — `"opponents"`, `"you"` or `"each-player"`, from this
@@ -3627,6 +3472,12 @@ export interface StaticAbility {
    * those abilities" (Street Savvy — rule 702.14): the blocker's side of it,
    * for what `affects` picks out and of every kind of landwalk. */
   readonly blocksDespiteLandwalk?: true;
+  /** The affected creatures "can block creatures with shadow as though [it]
+   * had shadow" (Wall of Diffusion), or "as though they didn't have shadow"
+   * (Aether Web): a permission on the blocker (rule 702.28b). It widens what
+   * it may block and leaves everything else, so it still can't be blocked by
+   * nor block what it couldn't. */
+  readonly blocksAsThoughShadow?: true;
   /** Landwalk of a kind (rule 702.14) for the affected creatures, its land as
    * a filter: "nonbasic landwalk" is `{ type: "land", notSupertype: "basic" }`
    * (Dryad Sophisticate, Trailblazer's Boots), "artifact landwalk" `{ types:
@@ -3724,7 +3575,7 @@ export interface StaticAbility {
    * suspected stays so. */
   readonly cantBecomeSuspected?: true;
   /** Combat restrictions imposed on the affected objects (Pacifism, Juggernaut). */
-  readonly restrictions?: readonly CombatRestriction[];
+  readonly restrictions?: readonly CombatRule[];
   /**
    * "For each {B} in a cost, you may pay 2 life rather than pay that mana"
    * (K'rrik, Son of Yawgmoth): how this permanent's controller may pay every

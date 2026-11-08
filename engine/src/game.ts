@@ -110,7 +110,8 @@ import type {
   CardType,
   CastModalSpec,
   PermanentOnEnter,
-  CombatRestriction,
+  CombatRule,
+  CombatWord,
   Keyword,
   StaticAbility,
   StaticCondition,
@@ -126,6 +127,8 @@ import {
   cardTypesInGraveyards,
   basicLandTypesAmong,
   partySizeOf,
+  combatPlayerEffects,
+  playerEffectCovers,
   restrictionsOf,
   colorsAmongPermanents,
   computeCharacteristics,
@@ -339,8 +342,8 @@ import {
 import { goadersOf } from "./goad.js";
 import { answeringPlayer, attackChooser, decidingPlayer } from "./player-control.js";
 import type { AddedPhase, LeftBattlefield, PlayerControl } from "./state.js";
-import { blockersRequiredBy, defendersForAttacker } from "./combat/eligibility.js";
-import { turnRuleCovers } from "./characteristics.js";
+import { blockersRequiredBy, defendersForAttacker, mustBeBlockedByExactlyOne } from "./combat/eligibility.js";
+import { combatRuleWord } from "./combat/rules.js";
 import { bandingAbilitiesOf } from "./combat/banding.js";
 import { isRingBearer, RING_EMBLEM_TRIGGERS, ringEmblemText } from "./ring.js";
 import { colorIdentityOf } from "./identity.js";
@@ -427,7 +430,6 @@ import {
   POISON_LETHAL,
   activePlayerOf,
   sideboardOf,
-  attackRequirementActive,
   cloneGameState,
   clonePlain,
   createPlayerState,
@@ -509,7 +511,6 @@ import type {
   CastNowAsk,
   OtherChoiceAsk,
   MeldedInfo,
-  AttackRequirementRule,
 } from "./state.js";
 import { EVERY_CREATURE_TYPE, LAND_TYPES, hasSubtype, isCreatureType } from "./subtypes.js";
 import {
@@ -6018,8 +6019,6 @@ export class Game {
       if (shield.from !== undefined) pinned.add(shield.from.object);
       if (shield.redirect?.to.kind === "object") pinned.add(shield.redirect.to.object);
     }
-    // A token bound to block (provoke): another folded into it would be bound too.
-    for (const r of this.state.blockRequirements ?? []) pinned.add(r.blocker);
     // A spell or ability on the stack whose target was locked in to one token
     // (`lockInTargets`): a new batch folded into that token would make the
     // target a whole stack again, and each step of its effect would peel off
@@ -8882,9 +8881,7 @@ export class Game {
       mostByOnePlayer: Math.max(0, ...Object.values(this.state.players).map((p) => p.spellsCastThisTurn)),
     };
     this.state.spellsCastThisTurn = 0;
-    delete this.state.turnRestrictions;
     delete this.state.combatBlockLimits;
-    delete this.state.blockRequirements;
     delete this.state.turnDefenderAttacks;
     delete this.state.turnUnblockedAssignments;
     delete this.state.turnProhibitions;
@@ -9063,11 +9060,13 @@ export class Game {
       }
       // "Can't attack during its controller's next turn" (Wall of Dust): that
       // turn has come, or never will (rule 800.4a's player who left).
-      if (object?.modifiers.some((m) => m.restrictionsDuringTurnOf !== undefined && beginningFor.includes(m.restrictionsDuringTurnOf.player))) {
+      if (object?.modifiers.some((m) => m.restrictionsLater !== undefined && beginningFor.includes(m.restrictionsLater.player))) {
         object.modifiers = object.modifiers.flatMap((m): PtModifier[] => {
-          const during = m.restrictionsDuringTurnOf;
+          const during = m.restrictionsLater;
           if (during === undefined || !beginningFor.includes(during.player)) return [m];
           if (during.player !== this.activePlayer) return [];
+          // Their next combat phase waits for that phase.
+          if (during.at === "combat") return [m];
           return [{ power: 0, toughness: 0, keywords: [], untilEndOfTurn: true, restrictions: [...during.restrictions] }];
         });
         invalidateComputedCache();
@@ -9103,27 +9102,6 @@ export class Game {
           ? { ...t, turnBegan: true as const }
           : t,
       );
-    // So do attack-requirement rules (Kardur, Doomscourge's "until your next
-    // turn, creatures your opponents control attack each combat …").
-    // A "this turn" one ends with its turn, a "during that player's next
-    // turn" one starts with that turn and ends with it (Taunt).
-    const rules = this.state.attackRequirements;
-    if (rules !== undefined && rules.length > 0) {
-      const turn = this.state.turn.number;
-      const left = rules.flatMap((rule): AttackRequirementRule[] => {
-        const d = rule.duration;
-        if (d === undefined) return beginningFor.includes(rule.by) ? [] : [rule];
-        if (d.kind === "this-turn") return d.turn >= turn ? [rule] : [];
-        if (d.kind === "next-turn-of") {
-          if (d.started !== undefined) return [];
-          return d.player === this.activePlayer && turn > d.after ? [{ ...rule, duration: { ...d, started: turn } }] : [rule];
-        }
-        return [rule];
-      });
-      if (left.length === 0) delete this.state.attackRequirements;
-      else this.state.attackRequirements = left;
-      invalidateComputedCache();
-    }
     // "Until the end of your next turn": this is that turn, so this turn's
     // cleanup ends it. The other points are later in it, but for a player who
     // has left the game (rule 800.4m).
@@ -9384,7 +9362,10 @@ export class Game {
     }
     // "Until end of combat" effects end with the combat phase (rule 500.5a).
     if (!stillCombat) this.expireUntilEndOfCombat();
-    if (step === "begin-combat") this.beginPlayerControl("next-combat");
+    if (step === "begin-combat") {
+      this.beginPlayerControl("next-combat");
+      this.beginLaterRestrictions();
+    }
     this.state.priority.active = false;
     this.state.priority.holder = null;
     this.state.priority.passed = [];
@@ -11334,8 +11315,15 @@ export class Game {
     this.state.rngState = this.rng.seed;
     const target = this.splitOneFromStack(id);
     const attacker = this.state.objects[target];
-    attacker.mustAttackPlayer = chosen;
-    attacker.mustAttackPlayerThisCombat = true;
+    attacker.modifiers.push({
+      power: 0,
+      toughness: 0,
+      keywords: [],
+      untilEndOfTurn: true,
+      untilEndOfCombat: true,
+      restrictions: [{ kind: "must-attack", at: { player: chosen }, you: controller }],
+    });
+    invalidateComputedCache();
     this.emit({ type: "random-player-chosen", player: controller, chosen, object: target });
     return true;
   }
@@ -11409,9 +11397,6 @@ export class Game {
     const combatsOver = (this.state.turn.combatPhases ?? 0) - (this.state.turn.step === "begin-combat" ? 1 : 0);
     if (combatsOver > 0) this.passNextCombatEnds();
     // "Blocks it this combat if able" (Avalanche Tusker).
-    if (this.state.blockRequirements?.some((r) => r.thisCombat === true) === true) {
-      this.state.blockRequirements = this.state.blockRequirements.filter((r) => r.thisCombat !== true);
-    }
     // "They can't attack you this combat" (Champions of Minas Tirith).
     this.expirePlayerEffects("end-of-combat");
     // "During their next combat phase" (Secret of Bloodbending) is over.
@@ -11422,11 +11407,6 @@ export class Game {
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
       // "Attacks that player this combat if able" (Territorial Hellkite).
-      if (object.mustAttackPlayerThisCombat === true) {
-        delete object.mustAttackPlayer;
-        delete object.mustAttackPlayerThisCombat;
-      }
-      delete object.boundThisCombat;
       if (!object.modifiers.some((m) => m.untilEndOfCombat === true)) continue;
       object.modifiers = object.modifiers.filter((m) => m.untilEndOfCombat !== true);
       expired.push(id);
@@ -11866,14 +11846,18 @@ export class Game {
       (id) => this.state.objects[id].controller === defender && (this.state.objects[id].stackCount ?? 1) > 1,
     );
     if (stacks.length === 0) return;
-    const allOfThem = attackers.some((a) => restrictionsOf(this.state, this.registry, a).has("must-be-blocked-by-exactly-one"));
-    const named = (this.state.turnRestrictions ?? []).filter((rule) => rule.blocks !== undefined);
+    const allOfThem = attackers.some((a) => mustBeBlockedByExactlyOne(this.state, this.registry, a));
+    const named = combatPlayerEffects(this.state).flatMap((effect) =>
+      effect.combat?.rules.some((r) => typeof r !== "string" && r.kind === "must-block" && r.attacker !== undefined) === true
+        ? [effect.combat]
+        : [],
+    );
     const wanted = attackers.flatMap((a) => blockersRequiredBy(this.state, this.registry, a, stacks).filter((w) => w.all));
     for (const id of stacks) {
       if (
         allOfThem ||
         restrictionsOf(this.state, this.registry, id).has("must-block") ||
-        named.some((rule) => turnRuleCovers(this.state, this.registry, id, rule)) ||
+        named.some((combat) => playerEffectCovers(this.state, this.registry, id, combat)) ||
         wanted.some((w) => w.by.includes(id))
       ) {
         this.materializeStack(id, undefined, Game.MAX_BLOCKERS_WOKEN);
@@ -13038,16 +13022,6 @@ export class Game {
       object.blocked = false;
       delete object.blockingAlso;
       delete object.band;
-    }
-    // "Attacks during its controller's next combat phase if able" (Trench
-    // Behemoth) ends with that combat phase — not with one under way as it
-    // was made.
-    const rules = this.state.attackRequirements;
-    if (rules !== undefined && rules.some((rule) => rule.duration?.kind === "next-combat-of")) {
-      const left = rules.filter((rule) => !(rule.duration?.kind === "next-combat-of" && attackRequirementActive(this.state, rule)));
-      if (left.length === 0) delete this.state.attackRequirements;
-      else this.state.attackRequirements = left;
-      invalidateComputedCache();
     }
   }
 
@@ -36402,44 +36376,6 @@ export class Game {
               : [];
         for (const id of ids) this.unsuspect(id);
       },
-      addAttackRequirement: ({ filter, otherThanYou, object, controlledBy, attacks, duration }) => {
-        const held = object === undefined ? undefined : this.state.objects[object];
-        if (object !== undefined && held?.zone !== "battlefield") return;
-        const turn = this.state.turn.number;
-        let lasts: AttackRequirementRule["duration"];
-        if (duration === "end-of-turn") lasts = { kind: "this-turn", turn };
-        else if (typeof duration === "object") {
-          lasts = { kind: "next-turn-of", player: duration.duringTurnOf, after: turn };
-        } else if (duration === "during-its-controllers-next-turn") {
-          if (held === undefined) return;
-          lasts = { kind: "next-turn-of", player: held.controller, after: turn };
-        } else if (duration === "during-its-controllers-next-combat") {
-          if (held === undefined) return;
-          // Its controller's next combat phase: not the one under way, if it
-          // is theirs (rule 506.1 — a combat phase runs from its beginning
-          // of combat step through its end of combat step).
-          const player = held.controller;
-          const inCombat = this.activePlayer === player && PHASE_OF_STEP[this.state.turn.step] === "combat";
-          const now = this.state.players[player]?.currentCombat;
-          lasts = { kind: "next-combat-of", player, ...(inCombat && now !== undefined ? { after: now } : {}) };
-        }
-        this.state.attackRequirements = [
-          ...(this.state.attackRequirements ?? []),
-          {
-            by: controller,
-            filter,
-            otherThanYou,
-            ...(held !== undefined ? { object: { id: held.id, stint: held.zoneChangeCount ?? 0 } } : {}),
-            ...(controlledBy !== undefined ? { controlledBy } : {}),
-            ...(attacks !== undefined ? { attacks } : {}),
-            ...(attacks !== undefined && this.state.objects[attacks as ObjectId] !== undefined
-              ? { attacksStint: this.state.objects[attacks as ObjectId].zoneChangeCount ?? 0 }
-              : {}),
-            ...(lasts !== undefined ? { duration: lasts } : {}),
-          },
-        ];
-        invalidateComputedCache();
-      },
       impulseExile: (amount, grant, opts) => {
         const src = this.state.objects[source];
         const stint = refs.source ?? (src?.zone === "battlefield" ? (src.zoneChangeCount ?? 0) : undefined);
@@ -36775,6 +36711,7 @@ export class Game {
         this.emit({ type: "removed-from-combat", object: target.object });
       },
       blockAttacker: (blocker, attacker) => this.blockAttackerByEffect(blocker, attacker),
+      enterBlocking: (blocker, attacker) => this.blockAttackerByEffect(blocker, attacker, true),
       becomeBlocked: (on) => {
         const ids =
           "kind" in on && (on.kind === "object" || on.kind === "player")
@@ -36805,10 +36742,20 @@ export class Game {
           this.loseKeywords({ kind: "object", object: id }, keywords, lasting, false, timestamp, cantHave);
         }
       },
-      restrict: (target, filter, restrictions, duration, cantBeBlockedBy, cantBlock, scope) =>
-        duration === "during-its-controllers-next-turn"
-          ? this.restrictDuringControllersNextTurn(controller, target, restrictions)
-          : this.restrict(controller, target, filter, restrictions, lastingHere(duration ?? "end-of-turn"), cantBeBlockedBy, cantBlock, scope),
+      restrict: (target, filter, rules, duration, scope) =>
+        typeof duration === "object" && "laterAt" in duration
+          ? this.restrictLater(controller, target, rules, duration.laterAt, duration.player)
+          : this.restrict(controller, target, filter, rules, lastingHere(duration ?? "end-of-turn"), scope),
+      restrictOverGame: (combat, expires, during) => {
+        const made: PlayerEffect = { owner: controller, expires, combat };
+        if (during !== undefined) {
+          (this.state.laterPlayerEffects ??= []).push({ turnOf: during, after: this.state.turn.number, effect: made });
+        } else {
+          (this.state.playerEffects ??= []).push(made);
+          invalidateComputedCache();
+        }
+        this.emit({ type: "restrictions-imposed", player: controller, restrictions: combat.rules.map(combatRuleWord), ...(expires === "end-of-turn" && during === undefined ? {} : { duration: expires }) });
+      },
       grantStatic: (target, filter, ability, duration) => {
         const kept = lastingHere(duration);
         // One effect, one timestamp (rule 613.7b), however many it reaches.
@@ -36833,7 +36780,6 @@ export class Game {
         }
       },
       detain: (target) => this.detain(controller, target),
-      blockIfAble: (target, attacker, thisCombat) => this.blockIfAble(target, attacker, thisCombat),
       attackDespiteDefender: (target, filter) => {
         if (filter !== undefined) {
           (this.state.turnDefenderAttacks ??= []).push({ filter, you: controller });
@@ -41088,7 +41034,13 @@ export class Game {
         const token = this.state.objects[id];
         if (token === undefined) continue;
         // "…that attacks that opponent this turn if able".
-        token.mustAttackPlayer = opponent;
+        token.modifiers.push({
+          power: 0,
+          toughness: 0,
+          keywords: [],
+          untilEndOfTurn: true,
+          restrictions: [{ kind: "must-attack", at: { player: opponent }, you: controller }],
+        });
         made.push(id);
       }
     }
@@ -44681,91 +44633,31 @@ export class Game {
     invalidateComputedCache();
   }
 
+  /**
+   * The `restrict` effect's rules, already bound, on `target` or on the
+   * permanents matching `filter` as this resolves (rule 611.2c: the sentence
+   * fixes its set). A modifier each, a token stack bound whole; for as long as
+   * modifiers last (`durationFields`).
+   */
   private restrict(
     controller: PlayerId,
     target: TargetRef | undefined,
     filter: CardFilter | undefined,
-    restrictions: readonly CombatRestriction[],
+    rules: readonly CombatRule[],
     duration: Expiry = "end-of-turn",
-    cantBeBlockedBy?: CardFilter,
-    cantBlock?: TargetRef,
-    scope: {
-      readonly cantAttackYou?: true | "you-and-planeswalkers";
-      readonly cantBlockYours?: boolean;
-      readonly scopeTo?: PlayerId;
-      readonly except?: ObjectId;
-      readonly asItResolves?: boolean;
-      readonly blocks?: ObjectId;
-    } = {},
+    scope: { readonly scopeTo?: PlayerId; readonly except?: ObjectId } = {},
   ): void {
-    // "Can't attack you or a permanent you control", "can't block creatures
-    // you control" (Immortal Obligation), "you" being this effect's controller.
-    const towardYou: Pick<PtModifier, "cantAttackYou" | "cantAttackYouCovers" | "cantBlockCreaturesOf"> = {
-      ...(scope.cantAttackYou !== undefined ? { cantAttackYou: controller } : {}),
-      ...(scope.cantAttackYou === "you-and-planeswalkers" ? { cantAttackYouCovers: scope.cantAttackYou } : {}),
-      ...(scope.cantBlockYours === true ? { cantBlockCreaturesOf: controller } : {}),
-    };
-    // "Can't block this creature": the attacker as it is now (rule 400.7).
-    const attacker =
-      cantBlock?.kind === "object" && this.state.objects[cantBlock.object]?.zone === "battlefield"
-        ? { object: cantBlock.object, zoneChangeCount: this.state.objects[cantBlock.object].zoneChangeCount ?? 0 }
-        : undefined;
-    // "They block that creature this turn if able": the same, as it is now.
-    const named = scope.blocks === undefined ? undefined : this.state.objects[scope.blocks];
-    if (scope.blocks !== undefined && named?.zone !== "battlefield") return;
-    if (
-      restrictions.length === 0 &&
-      cantBeBlockedBy === undefined &&
-      attacker === undefined &&
-      named === undefined &&
-      scope.cantAttackYou === undefined &&
-      scope.cantBlockYours !== true
-    ) {
-      return;
-    }
+    if (rules.length === 0) return;
+    const words = rules.map(combatRuleWord);
     if (filter !== undefined) {
-      // Read from the side of a target player, or a target's controller
-      // (`controlledByTarget`); the one permanent left out by its stint.
       const you = scope.scopeTo ?? controller;
-      const spared = scope.except !== undefined ? this.state.objects[scope.except] : undefined;
-      const except =
-        spared !== undefined && spared.zone === "battlefield"
-          ? { object: spared.id, zoneChangeCount: spared.zoneChangeCount ?? 0 }
-          : undefined;
-      if (scope.asItResolves === true) {
-        // The set fixed as it resolves (rule 611.2c): a modifier on each
-        // match until end of turn, a token stack bound whole.
-        for (const id of this.battlefieldMatching(you, filter)) {
-          if (id === except?.object) continue;
-          const object = this.state.objects[id];
-          if (!durationBegins(object, duration)) continue;
-          object.modifiers.push({
-            power: 0,
-            toughness: 0,
-            keywords: [],
-            ...(restrictions.length > 0 ? { restrictions: [...restrictions] } : {}),
-            ...(cantBeBlockedBy !== undefined ? { cantBeBlockedBy: [{ filter: cantBeBlockedBy, you: controller }] } : {}),
-            ...towardYou,
-            ...durationFields(duration),
-          });
-          this.emit({ type: "restrictions-imposed", object: id, player: controller, restrictions: [...restrictions] });
-        }
-        invalidateComputedCache();
-        return;
+      for (const id of this.battlefieldMatching(you, filter)) {
+        if (id === scope.except) continue;
+        const object = this.state.objects[id];
+        if (!durationBegins(object, duration)) continue;
+        object.modifiers.push({ power: 0, toughness: 0, keywords: [], restrictions: [...rules], ...durationFields(duration) });
+        this.emit({ type: "restrictions-imposed", object: id, player: controller, restrictions: words });
       }
-      (this.state.turnRestrictions ??= []).push({
-        filter,
-        you,
-        restrictions: [...restrictions],
-        ...(cantBeBlockedBy !== undefined ? { cantBeBlockedBy } : {}),
-        ...(except !== undefined ? { except } : {}),
-        ...(named !== undefined ? { blocks: { object: named.id, zoneChangeCount: named.zoneChangeCount ?? 0 } } : {}),
-      });
-      this.emit({
-        type: "restrictions-imposed",
-        player: controller,
-        restrictions: named !== undefined ? ["must-block"] : [...restrictions],
-      });
       invalidateComputedCache();
       return;
     }
@@ -44773,54 +44665,66 @@ export class Game {
     const id = this.splitOneFromStack(target.object);
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "battlefield" || !durationBegins(object, duration)) return;
-    object.modifiers.push({
-      power: 0,
-      toughness: 0,
-      keywords: [],
-      ...(restrictions.length > 0 ? { restrictions: [...restrictions] } : {}),
-      ...(cantBeBlockedBy !== undefined ? { cantBeBlockedBy: [{ filter: cantBeBlockedBy, you: controller }] } : {}),
-      ...(attacker !== undefined ? { cantBlock: [attacker] } : {}),
-      ...towardYou,
-      ...durationFields(duration),
-    });
+    object.modifiers.push({ power: 0, toughness: 0, keywords: [], restrictions: [...rules], ...durationFields(duration) });
+    invalidateComputedCache();
     this.emit({
       type: "restrictions-imposed",
       object: id,
       player: controller,
-      restrictions: [...restrictions],
+      restrictions: words,
       ...(duration === "end-of-turn" ? {} : { duration }),
     });
   }
 
   /**
-   * "That creature can't attack during its controller's next turn" (Wall of
-   * Dust): nothing yet, then the restrictions for that one turn — held on the
-   * permanent as `PtModifier.restrictionsDuringTurnOf`, under whoever controls
-   * it as this resolves, and given to it as that player's next turn begins.
+   * Rules that only start later (Wall of Dust's "can't attack during its
+   * controller's next turn"; Trench Behemoth's "next combat phase"): nothing
+   * yet, then given to the permanent as that turn or combat begins — held as
+   * `PtModifier.restrictionsLater`, under whoever `player` is, or whoever
+   * controls it as this resolves.
    */
-  private restrictDuringControllersNextTurn(
+  private restrictLater(
     controller: PlayerId,
     target: TargetRef | undefined,
-    restrictions: readonly CombatRestriction[],
+    rules: readonly CombatRule[],
+    at: "turn" | "combat",
+    player?: PlayerId,
   ): void {
-    if (target?.kind !== "object") return;
+    if (target?.kind !== "object" || rules.length === 0) return;
     const id = this.splitOneFromStack(target.object);
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "battlefield") return;
+    const of = player ?? object.controller;
     object.modifiers.push({
       power: 0,
       toughness: 0,
       keywords: [],
       untilEndOfTurn: false,
-      restrictionsDuringTurnOf: { player: object.controller, restrictions: [...restrictions] },
+      restrictionsLater: { player: of, at, restrictions: [...rules] },
     });
     this.emit({
       type: "restrictions-imposed",
       object: id,
       player: controller,
-      restrictions: [...restrictions],
-      nextTurnOf: object.controller,
+      restrictions: rules.map(combatRuleWord),
+      nextTurnOf: of,
     });
+  }
+
+  /** The active player's combat phase begins: what was waiting for it starts,
+   * for that combat. */
+  private beginLaterRestrictions(): void {
+    const active = this.activePlayer;
+    for (const id of this.state.zones.shared.battlefield) {
+      const object = this.state.objects[id];
+      if (!object.modifiers.some((m) => m.restrictionsLater?.at === "combat" && m.restrictionsLater.player === active)) continue;
+      object.modifiers = object.modifiers.map((m): PtModifier => {
+        const during = m.restrictionsLater;
+        if (during?.at !== "combat" || during.player !== active) return m;
+        return { power: 0, toughness: 0, keywords: [], untilEndOfTurn: true, untilEndOfCombat: true, restrictions: [...during.restrictions] };
+      });
+      invalidateComputedCache();
+    }
   }
 
   /**
@@ -44830,13 +44734,6 @@ export class Game {
    * turn begins (or would have, once `detainer` has left the game — rule
    * 800.4m). Any permanent can be: a noncreature one that becomes a
    * creature later still can't attack or block (the ruling).
-   */
-  /**
-   * `target` blocks this turn if able — `attacker` if given (rule 509.1c; the
-   * `block-if-able` effect, provoke's 702.39a). Kept as a requirement in
-   * `GameState.blockRequirements`, each creature by its `zoneChangeCount`, so
-   * one that leaves the battlefield takes no requirement back with it (rule
-   * 400.7); `combat/blocking.ts` weighs it when blockers are declared.
    */
   /** A turn begins: the control that worked through the last one is over (rule
    * 723.1), and "after that turn, that player takes an extra turn" comes due,
@@ -44887,32 +44784,12 @@ export class Game {
     });
   }
 
-  private blockIfAble(target: TargetRef, attacker: TargetRef | undefined, thisCombat: boolean): void {
-    if (target.kind !== "object") return;
-    const id = this.splitOneFromStack(target.object);
-    const object = this.state.objects[id];
-    if (object === undefined || object.zone !== "battlefield") return;
-    let mustBlock: { readonly attacker: ObjectId; readonly attackerZoneChangeCount: number } | undefined;
-    if (attacker !== undefined) {
-      if (attacker.kind !== "object") return;
-      const other = this.state.objects[attacker.object];
-      if (other === undefined || other.zone !== "battlefield") return;
-      mustBlock = { attacker: attacker.object, attackerZoneChangeCount: other.zoneChangeCount ?? 0 };
-    }
-    (this.state.blockRequirements ??= []).push({
-      blocker: id,
-      zoneChangeCount: object.zoneChangeCount ?? 0,
-      ...(mustBlock ?? {}),
-      ...(thisCombat ? { thisCombat: true } : {}),
-    });
-  }
-
   private detain(detainer: PlayerId, target: TargetRef): void {
     if (target.kind !== "object") return;
     const id = this.splitOneFromStack(target.object);
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "battlefield") return;
-    const restrictions: CombatRestriction[] = ["cant-attack", "cant-block"];
+    const restrictions: CombatWord[] = ["cant-attack", "cant-block"];
     object.modifiers.push({
       power: 0,
       toughness: 0,
@@ -47446,7 +47323,7 @@ export class Game {
       (this.state.playerEffects ??= []).push({
         owner: phase.onlyAttackers.you,
         expires: { untilEndOfCombat: true },
-        onlyAttackers: phase.onlyAttackers.filter,
+        combat: { rules: ["cant-attack"], filter: { not: phase.onlyAttackers.filter }, side: phase.onlyAttackers.you },
       });
       invalidateComputedCache();
     }
@@ -47455,7 +47332,17 @@ export class Game {
     for (const { object: id, zoneChangeCount } of forced.objects) {
       const object = this.state.objects[id];
       if (object?.zone !== "battlefield" || (object.zoneChangeCount ?? 0) !== zoneChangeCount) continue;
-      object.boundThisCombat = forced.avoid !== undefined ? { avoid: forced.avoid } : {};
+      object.modifiers.push({
+        power: 0,
+        toughness: 0,
+        keywords: [],
+        untilEndOfTurn: true,
+        untilEndOfCombat: true,
+        restrictions: [
+          "must-attack",
+          ...(forced.avoid !== undefined ? [{ kind: "cant-attack", at: "you-and-planeswalkers", you: forced.avoid } as const] : []),
+        ],
+      });
     }
     invalidateComputedCache();
   }
@@ -47467,10 +47354,21 @@ export class Game {
    * one in a band blocks them all (702.22h). Blocking something, it isn't
    * blocking anything else: it was removed from combat first.
    */
-  private blockAttackerByEffect(blockerId: ObjectId, attackerId: ObjectId): void {
+  private blockAttackerByEffect(blockerId: ObjectId, attackerId: ObjectId, entered = false): void {
     const blocker = this.state.objects[blockerId];
     if (blocker?.zone !== "battlefield" || blocker.blocking !== null) return;
-    if (this.state.objects[attackerId]?.attacking === null) return;
+    const attackedHere = this.state.objects[attackerId]?.attacking ?? null;
+    if (attackedHere === null) return;
+    // Put onto the battlefield blocking (rule 509.4a, 506.3e): only as a
+    // defending player for that attacker, and never a battle.
+    if (
+      entered &&
+      (defendingPlayerOf(this.state, attackedHere) !== blocker.controller ||
+        computeCharacteristics(this.state, this.registry, blockerId).types.includes("battle"))
+    ) {
+      return;
+    }
+    const wasBlocked = this.state.objects[attackerId]?.blocked === true;
     // One token of an attacking stack is what's blocked.
     const one = (this.state.objects[attackerId]?.stackCount ?? 1) > 1 ? this.splitOneFromStack(attackerId) : attackerId;
     blocker.blocking = one;
@@ -47487,9 +47385,14 @@ export class Game {
       blocked.push(mateId);
     }
     invalidateComputedCache();
-    for (const [i, id] of blocked.entries()) {
-      this.emit({ type: "blocker-declared", blocker: blockerId, attacker: id, ...(i > 0 ? { alsoBlocked: true } : {}) });
+    if (!entered) {
+      for (const [i, id] of blocked.entries()) {
+        this.emit({ type: "blocker-declared", blocker: blockerId, attacker: id, ...(i > 0 ? { alsoBlocked: true } : {}) });
+      }
     }
+    // Put onto the battlefield blocking, it never "blocked" (rule 509.4), but
+    // an attacker that was unblocked becomes blocked (509.3c).
+    if (entered && wasBlocked) return;
     for (const id of blocked) {
       this.emit({ type: "attacker-blocked", attacker: id, blockers: [...this.state.objects[id].blockedBy] });
     }
@@ -57991,9 +57894,6 @@ export class Game {
     delete object.attackedOnTurns;
     delete object.attackedBattleThisTurn;
     delete object.lastAttack;
-    delete object.mustAttackPlayer;
-    delete object.mustAttackPlayerThisCombat;
-    delete object.boundThisCombat;
     delete object.lostBlockerIn;
     delete object.damageThisTurn;
     delete object.dealtDamageToCreatureOnTurn;

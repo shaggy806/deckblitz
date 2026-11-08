@@ -39,7 +39,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantBeBlockedBy: { type: "artifact" },
+      restrictions: [{ kind: "cant-be-blocked", by: { type: "artifact" } }],
       text: "This creature can't be blocked by artifact creatures.",
     },
   ],

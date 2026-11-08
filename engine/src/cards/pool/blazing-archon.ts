@@ -12,5 +12,5 @@ export default defineCard({
   toughness: 6,
   keywords: ["flying"],
   text: `Flying\n${TEXT}`,
-  static: [{ affects: { scope: "filter", filter: { type: "creature" } }, cantAttackController: "player", text: TEXT }],
+  static: [{ affects: { scope: "filter", filter: { type: "creature" } }, restrictions: [{ kind: "cant-attack", at: "you" }], text: TEXT }],
 });

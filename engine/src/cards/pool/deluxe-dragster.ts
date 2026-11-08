@@ -34,7 +34,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantBeBlockedBy: { notSubtypes: ["Vehicle"] },
+      restrictions: [{ kind: "cant-be-blocked", by: { notSubtypes: ["Vehicle"] } }],
       text: EVASION_TEXT,
     },
   ],

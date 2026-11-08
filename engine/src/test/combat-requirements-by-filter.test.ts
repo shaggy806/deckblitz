@@ -9,6 +9,7 @@
  * and 509.1c.
  */
 
+import { overGame } from "./combat-probe.js";
 import { describe, expect, it } from "vitest";
 
 import type { LegalAction } from "../actions.js";
@@ -66,7 +67,7 @@ describe("must be blocked by exactly one creature if able", () => {
   it("one blocker obeys it, and none or two don't", () => {
     const { game, a } = table();
     const pride = spawn(game, "Grizzly Bears", A);
-    game.debugApplyEffect(A, { kind: "restrict", target: 0, restrictions: ["must-be-blocked-by-exactly-one"] }, [ref(pride)]);
+    game.debugApplyEffect(A, { kind: "restrict", target: 0, restrictions: [{ kind: "must-be-blocked-if-able", exactlyOne: true }] }, [ref(pride)]);
     const first = spawn(game, "Grizzly Bears", B);
     const second = spawn(game, "Grizzly Bears", B);
     const offer = blockOffer(game, a, [pride]);
@@ -123,7 +124,7 @@ describe("must be blocked by exactly one creature if able", () => {
   it("menace makes it impossible to obey, so it asks nothing", () => {
     const { game, a } = table();
     const pride = spawn(game, "Grizzly Bears", A);
-    game.debugApplyEffect(A, { kind: "restrict", target: 0, restrictions: ["must-be-blocked-by-exactly-one"] }, [ref(pride)]);
+    game.debugApplyEffect(A, { kind: "restrict", target: 0, restrictions: [{ kind: "must-be-blocked-if-able", exactlyOne: true }] }, [ref(pride)]);
     grant(game, pride, "menace");
     spawn(game, "Grizzly Bears", B);
     spawn(game, "Grizzly Bears", B);
@@ -178,7 +179,7 @@ describe("must be blocked by [filter]", () => {
 
   /** "Can't be blocked by more than one creature" on it, for the turn. */
   const onlyOne = (game: Game, attacker: ObjectId): void =>
-    game.debugApplyEffect(A, { kind: "restrict", target: 0, restrictions: ["blocked-by-at-most-one"] }, [ref(attacker)]);
+    game.debugApplyEffect(A, { kind: "restrict", target: 0, restrictions: [{ kind: "cant-be-blocked", byMoreThan: 1 }] }, [ref(attacker)]);
 
   it("room for one blocker: a driver's other creature gives way to the Eldrazi", () => {
     const { game, a } = table();
@@ -245,7 +246,7 @@ describe("must be blocked by [filter]", () => {
     const giant = spawn(game, "Hill Giant", B);
     const eldrazi = spawn(game, "Eldrazi Devastator", B);
     // Every creature of bob's has to block as well as the Eldrazi being wanted.
-    game.debugApplyEffect(A, { kind: "block-if-able", filter: { type: "creature", controlledBy: "opponent" } });
+    game.debugApplyEffect(A, { kind: "restrict", filter: { type: "creature", controlledBy: "opponent" }, restrictions: ["must-block"] });
     const offer = blockOffer(game, a, [bearer]);
     for (const start of [[], [{ blocker: bears, attacker: bearer }], [{ blocker: giant, attacker: bearer }]]) {
       const fixed = obeyingLure(start, offer);
@@ -259,7 +260,7 @@ describe("must be blocked by [filter]", () => {
   it("exactly one and by an Eldrazi at once: the Eldrazi, alone", () => {
     const { game, a } = table();
     const bearer = armed(game);
-    game.debugApplyEffect(A, { kind: "restrict", target: 0, restrictions: ["must-be-blocked-by-exactly-one"] }, [ref(bearer)]);
+    game.debugApplyEffect(A, { kind: "restrict", target: 0, restrictions: [{ kind: "must-be-blocked-if-able", exactlyOne: true }] }, [ref(bearer)]);
     const bears = spawn(game, "Grizzly Bears", B);
     const eldrazi = spawn(game, "Eldrazi Devastator", B);
     const offer = blockOffer(game, a, [bearer]);
@@ -373,8 +374,8 @@ describe("Magnetic Web", () => {
     web(game, attacker, theirs);
     a.declareAttackersFn = () => [{ attacker, defender: B }];
     b.declareBlockersFn = () => [];
-    game.advanceUntil((s) => s.turn.step === "declare-attackers" && (s.turnRestrictions?.length ?? 0) > 0);
-    expect(game.state.turnRestrictions?.[0]?.blocks?.object).toBe(attacker);
+    game.advanceUntil((s) => s.turn.step === "declare-attackers" && overGame(game).length > 0);
+    expect(overGame(game)[0]?.rules).toEqual([{ kind: "must-block", attacker: { object: attacker, stint: game.state.objects[attacker].zoneChangeCount ?? 0 }, you: A }]);
     // Rule 611.2c: it changes no characteristic, so it isn't locked in.
     game.debugApplyEffect(A, { kind: "add-counter", target: 0, counter: "magnet", amount: 1 }, [ref(late)]);
     game.advanceUntil((s) => s.awaiting?.kind === "blockers");
@@ -393,7 +394,7 @@ describe("Magnetic Web", () => {
     web(game, attacker);
     a.declareAttackersFn = () => [{ attacker, defender: B }];
     game.advanceUntil((s) => s.turn.number === 2);
-    expect(game.state.turnRestrictions).toBeUndefined();
+    expect(overGame(game)).toEqual([]);
   });
 });
 
@@ -504,7 +505,7 @@ describe("can't be blocked by more than one creature, for the turn", () => {
   it("a `restrict` says it as the static does", () => {
     const { game, a } = table();
     const attacker = spawn(game, "Grizzly Bears", A);
-    game.debugApplyEffect(A, { kind: "restrict", target: 0, restrictions: ["blocked-by-at-most-one"] }, [ref(attacker)]);
+    game.debugApplyEffect(A, { kind: "restrict", target: 0, restrictions: [{ kind: "cant-be-blocked", byMoreThan: 1 }] }, [ref(attacker)]);
     const first = spawn(game, "Grizzly Bears", B);
     const second = spawn(game, "Grizzly Bears", B);
     const offer = blockOffer(game, a, [attacker]);

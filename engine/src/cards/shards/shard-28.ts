@@ -630,6 +630,7 @@ import _poolPropaganda from "../pool/propaganda.js";
 import _poolProtectorOfTheWastes from "../pool/protector-of-the-wastes.js";
 import _poolProvenCombatant from "../pool/proven-combatant.js";
 import _poolPryingBlade from "../pool/prying-blade.js";
+import _poolPublicEnemy from "../pool/public-enemy.js";
 import _poolPursuedWhale from "../pool/pursued-whale.js";
 import _poolPygmyPyrosaur from "../pool/pygmy-pyrosaur.js";
 import _poolQarsiHighPriest from "../pool/qarsi-high-priest.js";
@@ -1648,6 +1649,7 @@ const shard: CardShard = {
     _poolProtectorOfTheWastes,
     _poolProvenCombatant,
     _poolPryingBlade,
+    _poolPublicEnemy,
     _poolPursuedWhale,
     _poolPygmyPyrosaur,
     _poolQarsiHighPriest,

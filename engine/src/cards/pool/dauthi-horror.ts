@@ -14,5 +14,5 @@ export default defineCard({
   toughness: 1,
   keywords: ["shadow"],
   text: `Shadow (This creature can block or be blocked by only creatures with shadow.)\n${WHITE_TEXT}`,
-  static: [{ affects: { scope: "self" }, cantBeBlockedBy: { colors: ["W"] }, text: WHITE_TEXT }],
+  static: [{ affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", by: { colors: ["W"] } }], text: WHITE_TEXT }],
 });

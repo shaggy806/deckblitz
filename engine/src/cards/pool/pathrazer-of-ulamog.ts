@@ -12,6 +12,6 @@ export default defineCard({
   power: 9,
   toughness: 9,
   text: `Annihilator 3 (Whenever this creature attacks, defending player sacrifices three permanents of their choice.)\n${EVASION}`,
-  static: [{ affects: { scope: "self" }, blockedByAtLeast: 3, text: EVASION }],
+  static: [{ affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", byFewerThan: 3 }], text: EVASION }],
   triggered: [annihilator(3)],
 });

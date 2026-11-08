@@ -49,8 +49,8 @@ export default defineCard({
   static: [
     {
       affects: { scope: "filter", filter: { type: "creature", subtype: "Survivor", controlledBy: "opponent" } },
-      restrictions: ["cant-block"],
-      cantAttackController: true,
+      restrictions: ["cant-block", { kind: "cant-attack", at: "you-and-planeswalkers" }],
+      
       text: SURVIVORS_TEXT,
     },
   ],

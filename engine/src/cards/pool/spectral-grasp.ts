@@ -19,7 +19,7 @@ export default defineCard({
   text: `Enchant creature\n${ATTACK_TEXT}\n${BLOCK_TEXT}`,
   targets: ["creature"],
   static: [
-    { affects: { scope: "attached" }, cantAttackController: true, text: ATTACK_TEXT },
-    { affects: { scope: "attached" }, canBlockOnly: { controlledBy: "opponent" }, text: BLOCK_TEXT },
+    { affects: { scope: "attached" }, restrictions: [{ kind: "cant-attack", at: "you-and-planeswalkers" }], text: ATTACK_TEXT },
+    { affects: { scope: "attached" }, restrictions: [{ kind: "cant-block", attackers: { not: { controlledBy: "opponent" } } }], text: BLOCK_TEXT },
   ],
 });

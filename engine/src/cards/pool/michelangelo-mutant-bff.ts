@@ -26,7 +26,7 @@ export default defineCard({
         scope: "filter",
         filter: { type: "creature", controlledBy: "you", counters: { compare: { op: "gte", n: 1 } } },
       },
-      blockedByAtMostOne: true,
+      restrictions: [{ kind: "cant-be-blocked", byMoreThan: 1 }],
       text: BLOCK,
     },
   ],

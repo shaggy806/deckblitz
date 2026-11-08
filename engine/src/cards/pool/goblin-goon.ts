@@ -14,12 +14,12 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantAttackUnlessDefender: { youControlMore: { type: "creature" } },
+      restrictions: [{ kind: "cant-attack", unlessDefender: { youControlMore: { type: "creature" } } }],
       text: "This creature can't attack unless you control more creatures than defending player.",
     },
     {
       affects: { scope: "self" },
-      cantBlockUnlessAttacker: { youControlMore: { type: "creature" } },
+      restrictions: [{ kind: "cant-block", unlessAttacking: { youControlMore: { type: "creature" } } }],
       text: "This creature can't block unless you control more creatures than attacking player.",
     },
   ],

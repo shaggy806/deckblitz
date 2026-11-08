@@ -10,6 +10,7 @@
  * able"), which a block declaration has to obey as far as it can.
  */
 
+import { overGame } from "./combat-probe.js";
 import { describe, expect, it } from "vitest";
 
 import type { LegalAction } from "../actions.js";
@@ -60,7 +61,7 @@ const registry = createDefaultRegistry()
     enchantment(DELNEY, [
       {
         affects: { scope: "filter", filter: { type: "creature", controlledBy: "you", power: { op: "lte", n: 2 } } },
-        cantBeBlockedBy: { power: { op: "gte", n: 3 } },
+        restrictions: [{ kind: "cant-be-blocked", by: { power: { op: "gte", n: 3 } } }],
         text: "Creatures you control with power 2 or less can't be blocked by creatures with power 3 or greater.",
       },
     ]),
@@ -69,7 +70,7 @@ const registry = createDefaultRegistry()
     enchantment(ERIETTE, [
       {
         affects: { scope: "filter", filter: { type: "creature", enchantedBy: "you" } },
-        cantAttackController: true,
+        restrictions: [{ kind: "cant-attack", at: "you-and-planeswalkers" }],
         text: "Each creature that's enchanted by an Aura you control can't attack you or planeswalkers you control.",
       },
     ]),
@@ -87,7 +88,7 @@ const registry = createDefaultRegistry()
       static: [
         {
           affects: { scope: "self" },
-          canBlockOnly: { keyword: "flying" },
+          restrictions: [{ kind: "cant-block", attackers: { not: { keyword: "flying" } } }],
           text: "This creature can block only creatures with flying.",
         },
       ],
@@ -103,7 +104,7 @@ const registry = createDefaultRegistry()
       toughness: 2,
       text: "This creature can't attack its owner.",
       static: [
-        { affects: { scope: "self" }, restrictions: ["cant-attack-owner"], text: "This creature can't attack its owner." },
+        { affects: { scope: "self" }, restrictions: [{ kind: "cant-attack", at: "owner" }], text: "This creature can't attack its owner." },
       ],
     }),
   );
@@ -325,7 +326,7 @@ describe("one-shot restrictions", () => {
     expect(game.state.objects[late].blocking).toBeNull();
     expect(game.eventsOfType("blocker-declared")).toHaveLength(0);
     game.advanceUntil((s) => s.turn.number === 2);
-    expect(game.state.turnRestrictions).toBeUndefined();
+    expect(overGame(game)).toEqual([]);
   });
 });
 

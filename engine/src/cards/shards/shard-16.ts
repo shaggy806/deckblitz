@@ -107,6 +107,7 @@ import _poolBreakOpen from "../pool/break-open.js";
 import _poolBreaking from "../pool/breaking.js";
 import _poolBreyaEtheriumShaper from "../pool/breya-etherium-shaper.js";
 import _poolBriarShield from "../pool/briar-shield.js";
+import _poolBrimazKingOfOreskos from "../pool/brimaz-king-of-oreskos.js";
 import _poolBrineElemental from "../pool/brine-elemental.js";
 import _poolBringerOfTheBlueDawn from "../pool/bringer-of-the-blue-dawn.js";
 import _poolBrokersInitiate from "../pool/brokers-initiate.js";
@@ -979,6 +980,7 @@ import _poolWalkingSarcophagus from "../pool/walking-sarcophagus.js";
 import _poolWallOfGranite from "../pool/wall-of-granite.js";
 import _poolWallOfHeat from "../pool/wall-of-heat.js";
 import _poolWallOfLava from "../pool/wall-of-lava.js";
+import _poolWallOfVapor from "../pool/wall-of-vapor.js";
 import _poolWandOfTheElements from "../pool/wand-of-the-elements.js";
 import _poolWandOfVertebrae from "../pool/wand-of-vertebrae.js";
 import _poolWanderingGoblins from "../pool/wandering-goblins.js";
@@ -1162,6 +1164,7 @@ const shard: CardShard = {
     _poolBreaking,
     _poolBreyaEtheriumShaper,
     _poolBriarShield,
+    _poolBrimazKingOfOreskos,
     _poolBrineElemental,
     _poolBringerOfTheBlueDawn,
     _poolBrokersInitiate,
@@ -2034,6 +2037,7 @@ const shard: CardShard = {
     _poolWallOfGranite,
     _poolWallOfHeat,
     _poolWallOfLava,
+    _poolWallOfVapor,
     _poolWandOfTheElements,
     _poolWandOfVertebrae,
     _poolWanderingGoblins,

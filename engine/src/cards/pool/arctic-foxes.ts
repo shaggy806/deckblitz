@@ -19,7 +19,7 @@ export default defineCard({
         player: "defending-player",
         condition: { kind: "controls", filter: { type: "land", supertype: "snow" }, atLeast: 1 },
       },
-      cantBeBlockedBy: { power: { op: "gte", n: 2 } },
+      restrictions: [{ kind: "cant-be-blocked", by: { power: { op: "gte", n: 2 } } }],
       text: TEXT,
     },
   ],

@@ -13,7 +13,7 @@ export default defineCard({
   power: 6,
   toughness: 5,
   text: `${BLOCK_TEXT}\n${RETURN_TEXT}`,
-  static: [{ affects: { scope: "self" }, blockedByAtLeast: 3, text: BLOCK_TEXT }],
+  static: [{ affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", byFewerThan: 3 }], text: BLOCK_TEXT }],
   activated: [
     {
       cost: { mana: "{8}", tap: false },

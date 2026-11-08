@@ -14,7 +14,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      mustBeBlockedBy: { by: { type: "creature", keyword: "flying" }, all: true },
+      restrictions: [{ kind: "must-be-blocked", by: { type: "creature", keyword: "flying" } }],
       text: TEXT,
     },
   ],

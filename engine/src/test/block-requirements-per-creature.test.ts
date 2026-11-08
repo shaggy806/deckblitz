@@ -35,9 +35,9 @@ describe("target creature can't block this creature this turn", () => {
     const wall = spawn(game, "Wall of Wood", B);
     spawn(game, "Sol Ring", A);
     activate(game, pathfinder, 0, { targets: [{ kind: "object", object: wall }] });
-    const modifier = game.state.objects[wall].modifiers.find((m) => m.cantBlock !== undefined);
-    expect(modifier?.cantBlock).toEqual([
-      { object: pathfinder, zoneChangeCount: game.state.objects[pathfinder].zoneChangeCount ?? 0 },
+    const modifier = game.state.objects[wall].modifiers.find((m) => m.restrictions !== undefined);
+    expect(modifier?.restrictions).toEqual([
+      { kind: "cant-block", attacker: { object: pathfinder, stint: game.state.objects[pathfinder].zoneChangeCount ?? 0 }, you: A },
     ]);
     expect(modifier?.untilEndOfTurn).toBe(true);
   });

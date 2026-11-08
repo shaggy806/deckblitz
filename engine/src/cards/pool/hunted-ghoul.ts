@@ -17,7 +17,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      canBlockOnly: { notSubtypes: ["Human"] },
+      restrictions: [{ kind: "cant-block", attackers: { not: { notSubtypes: ["Human"] } } }],
       text: "This creature can't block Humans.",
     },
   ],

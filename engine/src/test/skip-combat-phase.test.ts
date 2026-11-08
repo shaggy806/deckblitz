@@ -4,6 +4,7 @@
  * beginning of combat" or "at end of combat" happens, and "next" waits for that
  * player's own turn (614.10a).
  */
+import { aimedAt } from "./combat-probe.js";
 import { describe, expect, it } from "vitest";
 
 import { A, B, C, attack, cast, enter, lands, nextTurn, ref, settle, spawn, table, toHand, toStep } from "./harness.js";
@@ -79,7 +80,7 @@ describe("Stonehorn Dignitary", () => {
     // Raving Dead picks at the beginning of its controller's combat.
     const raving = spawn(game, "Raving Dead", B);
     stepsUntil(game, (s) => s.turn.number === 2 && s.turn.step === "postcombat-main");
-    expect(game.state.objects[raving].mustAttackPlayer).toBeUndefined();
+    expect(aimedAt(game, raving)).toBeUndefined();
   });
 
   it("doesn't count a skipped combat as the turn's, and the additional one owed still comes", () => {

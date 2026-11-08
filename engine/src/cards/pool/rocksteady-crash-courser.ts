@@ -19,12 +19,12 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      blockedByAtMostOne: true,
+      restrictions: [{ kind: "cant-be-blocked", byMoreThan: 1 }],
       text: "Rocksteady can't be blocked by more than one creature.",
     },
     {
       affects: { scope: "filter", filter: { type: "creature", subtype: "Boar", controlledBy: "you" } },
-      blockedByAtMostOne: true,
+      restrictions: [{ kind: "cant-be-blocked", byMoreThan: 1 }],
       text: "Boars you control can't be blocked by more than one creature.",
     },
   ],

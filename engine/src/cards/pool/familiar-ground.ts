@@ -8,5 +8,5 @@ export default defineCard({
   colors: ["G"],
   types: ["enchantment"],
   text: TEXT,
-  static: [{ affects: { scope: "creatures-you-control" }, blockedByAtMostOne: true, text: TEXT }],
+  static: [{ affects: { scope: "creatures-you-control" }, restrictions: [{ kind: "cant-be-blocked", byMoreThan: 1 }], text: TEXT }],
 });

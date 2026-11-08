@@ -33,8 +33,8 @@ export default defineCard({
           {
             kind: "restrict",
             filter: yours,
-            restrictions: [],
-            cantBeBlockedBy: { type: "creature", token: true },
+            restrictions: [{ kind: "cant-be-blocked", by: { type: "creature", token: true } }],
+            
           },
         ],
       },

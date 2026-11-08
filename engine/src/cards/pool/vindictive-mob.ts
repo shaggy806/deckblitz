@@ -23,5 +23,5 @@ export default defineCard({
       text: ETB_TEXT,
     },
   ],
-  static: [{ affects: { scope: "self" }, cantBeBlockedBy: { subtype: "Saproling" }, text: STATIC_TEXT }],
+  static: [{ affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", by: { subtype: "Saproling" } }], text: STATIC_TEXT }],
 });

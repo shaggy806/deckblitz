@@ -15,7 +15,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "untap", target: 0 },
-      { kind: "block-if-able", target: 0 },
+      { kind: "restrict", target: 0, restrictions: ["must-block"] },
       { kind: "draw", amount: 1 },
     ],
   },

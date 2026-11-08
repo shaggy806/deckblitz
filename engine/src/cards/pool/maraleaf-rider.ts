@@ -15,7 +15,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: false, sacrifice: { filter: { subtype: "Food" } } },
       targets: ["creature"],
-      effect: { kind: "block-if-able", target: 0, attacker: "source" },
+      effect: { kind: "restrict", target: 0, restrictions: [{ kind: "must-block", attacker: "source" }] },
       resolve: null,
       text: LURE,
     },

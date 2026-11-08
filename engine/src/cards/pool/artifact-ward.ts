@@ -11,7 +11,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "attached" },
-      cantBeBlockedBy: { type: "artifact" },
+      restrictions: [{ kind: "cant-be-blocked", by: { type: "artifact" } }],
       text: "Enchanted creature can't be blocked by artifact creatures.",
     },
     {

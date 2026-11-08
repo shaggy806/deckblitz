@@ -40,8 +40,8 @@ export default defineCard({
           effect: {
             kind: "restrict",
             target: 0,
-            restrictions: [],
-            cantBeBlockedBy: { type: "creature", controlledBy: "you" },
+            restrictions: [{ kind: "cant-be-blocked", by: { type: "creature", controlledBy: "you" } }],
+            
           },
         },
       },

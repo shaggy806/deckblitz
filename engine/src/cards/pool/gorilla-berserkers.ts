@@ -30,7 +30,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      blockedByAtLeast: 3,
+      restrictions: [{ kind: "cant-be-blocked", byFewerThan: 3 }],
       text: "This creature can't be blocked except by three or more creatures.",
     },
   ],

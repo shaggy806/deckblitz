@@ -29,7 +29,7 @@ export default defineCard({
     {
       affects: { scope: "attached" },
       setBasePt: { power: 7, toughness: 7 },
-      cantBeBlockedBy: { power: { op: "lte", n: 2 } },
+      restrictions: [{ kind: "cant-be-blocked", by: { power: { op: "lte", n: 2 } } }],
       text: STATIC_TEXT,
     },
   ],

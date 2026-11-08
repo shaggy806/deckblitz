@@ -34,7 +34,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "filter", filter: { type: "creature", controlledBy: "you", hasAbilities: false } },
-      cantBeBlockedBy: { hasAbilities: true },
+      restrictions: [{ kind: "cant-be-blocked", by: { hasAbilities: true } }],
       text: BLOCK_TEXT,
     },
   ],

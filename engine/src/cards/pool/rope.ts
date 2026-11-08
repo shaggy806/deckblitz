@@ -16,7 +16,7 @@ export default defineCard({
       affects: { scope: "attached" },
       grantPt: [1, 2],
       grantKeywords: ["reach"],
-      blockedByAtMostOne: true,
+      restrictions: [{ kind: "cant-be-blocked", byMoreThan: 1 }],
       text: STATIC_TEXT,
     },
   ],

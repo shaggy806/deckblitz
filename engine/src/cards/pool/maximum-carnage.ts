@@ -21,7 +21,7 @@ export default defineCard({
     {
       at: [1],
       targets: [],
-      effect: { kind: "attack-requirement", filter: { type: "creature" }, otherThanYou: true },
+      effect: { kind: "restrict", filter: { type: "creature" }, restrictions: [{ kind: "must-attack", otherThan: "you" }], duration: "until-your-next-turn" },
       resolve: null,
       text: CHAPTER_I,
     },

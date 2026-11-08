@@ -14,7 +14,7 @@ export default defineCard({
   power: 2,
   toughness: 2,
   text: `${EVASION_TEXT}\n${PUMP_TEXT}`,
-  static: [{ affects: { scope: "self" }, cantBeBlockedBy: { type: "artifact" }, text: EVASION_TEXT }],
+  static: [{ affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", by: { type: "artifact" } }], text: EVASION_TEXT }],
   activated: [
     {
       cost: { mana: "{7}", tap: false },

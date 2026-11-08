@@ -14,6 +14,7 @@ import _poolAegisAutomaton from "../pool/aegis-automaton.js";
 import _poolAegisOfTheHeavens from "../pool/aegis-of-the-heavens.js";
 import _poolAetherBurst from "../pool/aether-burst.js";
 import _poolAetherSpellbomb from "../pool/aether-spellbomb.js";
+import _poolAetherWeb from "../pool/aether-web.js";
 import _poolAetherfluxReservoir from "../pool/aetherflux-reservoir.js";
 import _poolAimHigh from "../pool/aim-high.js";
 import _poolAirElemental from "../pool/air-elemental.js";
@@ -372,6 +373,7 @@ import _poolHazduhrTheAbbot from "../pool/hazduhr-the-abbot.js";
 import _poolHealTheScars from "../pool/heal-the-scars.js";
 import _poolHeapGate from "../pool/heap-gate.js";
 import _poolHeartSliver from "../pool/heart-sliver.js";
+import _poolHeartwoodDryad from "../pool/heartwood-dryad.js";
 import _poolHeartwoodShard from "../pool/heartwood-shard.js";
 import _poolHeliumSquirter from "../pool/helium-squirter.js";
 import _poolHellfire from "../pool/hellfire.js";
@@ -1010,6 +1012,7 @@ const shard: CardShard = {
     _poolAegisOfTheHeavens,
     _poolAetherBurst,
     _poolAetherSpellbomb,
+    _poolAetherWeb,
     _poolAetherfluxReservoir,
     _poolAimHigh,
     _poolAirElemental,
@@ -1368,6 +1371,7 @@ const shard: CardShard = {
     _poolHealTheScars,
     _poolHeapGate,
     _poolHeartSliver,
+    _poolHeartwoodDryad,
     _poolHeartwoodShard,
     _poolHeliumSquirter,
     _poolHellfire,

@@ -15,7 +15,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      canBlockOnly: { power: { op: "lte", n: 1 } },
+      restrictions: [{ kind: "cant-block", attackers: { not: { power: { op: "lte", n: 1 } } } }],
       text: "Zurgo can't block creatures with power 2 or greater.",
     },
   ],

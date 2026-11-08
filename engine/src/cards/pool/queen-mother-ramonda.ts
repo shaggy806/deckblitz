@@ -17,7 +17,7 @@ export default defineCard({
     {
       affects: { scope: "filter", filter: { type: "creature", power: { op: "lte", n: 2 } } },
       condition: { kind: "monarch", who: "you" },
-      cantAttackController: "player",
+      restrictions: [{ kind: "cant-attack", at: "you" }],
       text: TEXT,
     },
   ],

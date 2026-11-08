@@ -198,6 +198,7 @@ import _poolDelugeVirtuoso from "../pool/deluge-virtuoso.js";
 import _poolDemonOfWailingAgonies from "../pool/demon-of-wailing-agonies.js";
 import _poolDemonicAppetite from "../pool/demonic-appetite.js";
 import _poolDemonicRising from "../pool/demonic-rising.js";
+import _poolDepartedDeckhand from "../pool/departed-deckhand.js";
 import _poolDesperateStand from "../pool/desperate-stand.js";
 import _poolDireStrainAnarchist from "../pool/dire-strain-anarchist.js";
 import _poolDireWolfProwler from "../pool/dire-wolf-prowler.js";
@@ -1214,6 +1215,7 @@ const shard: CardShard = {
     _poolDemonOfWailingAgonies,
     _poolDemonicAppetite,
     _poolDemonicRising,
+    _poolDepartedDeckhand,
     _poolDesperateStand,
     _poolDireStrainAnarchist,
     _poolDireWolfProwler,

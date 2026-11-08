@@ -40,7 +40,7 @@ export default defineCard({
     },
     {
       affects: { scope: "self" },
-      cantBeBlockedBy: { power: { op: "lt", n: { amount: { powerOf: "source" } } } },
+      restrictions: [{ kind: "cant-be-blocked", by: { power: { op: "lt", n: { amount: { powerOf: "source" } } } } }],
       text: EVADE_TEXT,
     },
   ],

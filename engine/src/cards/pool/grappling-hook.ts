@@ -29,7 +29,7 @@ export default defineCard({
       effect: {
         kind: "may",
         prompt: "Have the target creature block the equipped creature this turn if able?",
-        effect: { kind: "block-if-able", target: 0, attacker: "trigger-object" },
+        effect: { kind: "restrict", target: 0, restrictions: [{ kind: "must-block", attacker: "trigger-object" }] },
       },
       resolve: null,
       text: TRIGGER,

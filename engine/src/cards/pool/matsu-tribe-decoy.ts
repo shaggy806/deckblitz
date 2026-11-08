@@ -20,7 +20,7 @@ export default defineCard({
     {
       cost: { mana: "{2}{G}", tap: false },
       targets: ["creature"],
-      effect: { kind: "block-if-able", target: 0, attacker: "source" },
+      effect: { kind: "restrict", target: 0, restrictions: [{ kind: "must-block", attacker: "source" }] },
       resolve: null,
       text: LURE,
     },

@@ -12,7 +12,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "filter", filter: { type: "creature", name: "Lightning Rager" } },
-      cantAttackController: true,
+      restrictions: [{ kind: "cant-attack", at: "you-and-planeswalkers" }],
       text: "Creatures named Lightning Rager can't attack you or planeswalkers you control.",
     },
   ],

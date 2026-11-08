@@ -33,7 +33,7 @@ export default defineCard({
     {
       affects: { scope: "attached" },
       grantPt: [1, 1],
-      blockedByAtMostOne: true,
+      restrictions: [{ kind: "cant-be-blocked", byMoreThan: 1 }],
       text: EQUIPPED_TEXT,
     },
   ],

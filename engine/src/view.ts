@@ -10,7 +10,7 @@
  * registry or the layer system to render a board.
  */
 
-import type { CardRegistry, CardType, CombatRestriction, Keyword, Supertype } from "./cards.js";
+import type { CardRegistry, CardType, CombatWord, Keyword, Supertype } from "./cards.js";
 import {
   abilitiesLostAt,
   computeCharacteristics,
@@ -234,7 +234,7 @@ export interface VisibleObject {
   readonly toxic: number;
   /** Combat restrictions from static abilities (`"cant-attack"` from a
    * Pacifism, `"must-attack"` from Juggernaut). */
-  readonly restrictions: readonly CombatRestriction[];
+  readonly restrictions: readonly CombatWord[];
   /** Computed colours (rule 105 / layer 5) — e.g. `["U"]` for a Turn-to-
    * Frogged permanent, `[]` for something colourless. */
   readonly colors: readonly Color[];

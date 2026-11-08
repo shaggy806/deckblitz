@@ -15,7 +15,7 @@ export default defineCard({
   toughness: 4,
   text: `${ATTACK}\n${BLOCK}`,
   static: [
-    { affects: { scope: "self" }, cantAttackUnlessDefender: { youControlMore: { type: "land" } }, text: ATTACK },
-    { affects: { scope: "self" }, cantBlockUnlessAttacker: { youControlMore: { type: "land" } }, text: BLOCK },
+    { affects: { scope: "self" }, restrictions: [{ kind: "cant-attack", unlessDefender: { youControlMore: { type: "land" } } }], text: ATTACK },
+    { affects: { scope: "self" }, restrictions: [{ kind: "cant-block", unlessAttacking: { youControlMore: { type: "land" } } }], text: BLOCK },
   ],
 });

@@ -2,6 +2,7 @@
  * Set walk batch 85, part b (2026-10-15): Foundations Jumpstart (J25), Duskmourn: House of Horror Commander (DSC) and Duskmourn: House of Horror (DSK), the rest of the sets.
  * Written on the shared table in `harness.ts`.
  */
+import { aimedAt } from "./combat-probe.js";
 import { describe, expect, it } from "vitest";
 
 import type { Game } from "../game.js";
@@ -331,7 +332,7 @@ describe("Ursine Monstrosity", () => {
     settle(game);
     // The milled Wastes makes three types: instant, creature, land.
     expect(graveyard(game)).toHaveLength(3);
-    expect(game.state.objects[bear].mustAttackPlayer).toBe(B);
+    expect(aimedAt(game, bear)).toBe(B);
     expect(keywords(game, bear).has("indestructible")).toBe(true);
     expect(pt(game, bear)).toEqual({ power: 6, toughness: 6 });
     // Locked in: a card type added later doesn't grow it.

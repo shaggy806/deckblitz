@@ -23,6 +23,6 @@ export default defineCard({
       grantKeywords: ["hexproof"],
       text: HEXPROOF,
     },
-    { affects: { scope: "self" }, blockedOnlyByAll: true, text: EVASION },
+    { affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", unlessAllBlock: true }], text: EVASION },
   ],
 });

@@ -990,7 +990,7 @@ export const flanking = (): TriggeredAbility => ({
  * Provoke (rule 702.39a): "Whenever this creature attacks, you may have
  * target creature defending player controls untap and block it if able."
  * The target is chosen as the trigger goes on the stack, the "may" as it
- * resolves; the requirement is the `block-if-able` effect's, on this
+ * resolves; the requirement is a `must-block` record's, on this
  * creature (`attacker: "source"`), weighed with the rest as blockers are
  * declared (rule 509.1c). Each instance triggers on its own (702.39b). Put
  * the printed line (with its reminder) as `text`.
@@ -1007,7 +1007,7 @@ export const provoke = (
       kind: "sequence",
       effects: [
         { kind: "untap", target: 0 },
-        { kind: "block-if-able", target: 0, attacker: "source" },
+        { kind: "restrict", target: 0, restrictions: [{ kind: "must-block", attacker: "source" }], duration: "until-end-of-combat" },
       ],
     },
   },

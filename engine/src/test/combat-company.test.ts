@@ -162,10 +162,10 @@ describe("can only attack alone", () => {
 describe("requirements (508.1d): as many as can be, without breaking a restriction", () => {
   /** A creature that must attack, on top of whatever it is. */
   const mustAttack = (game: Game, id: ObjectId): void => {
-    (game.state.turnRestrictions ??= []).push({
-      filter: { name: game.state.objects[id].cardName },
-      you: A,
-      restrictions: ["must-attack"],
+    (game.state.playerEffects ??= []).push({
+      owner: A,
+      expires: "end-of-turn",
+      combat: { rules: ["must-attack"], filter: { name: game.state.objects[id].cardName }, side: A },
     });
   };
 

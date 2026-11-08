@@ -30,8 +30,8 @@ export default defineCard({
         kind: "restrict",
         filter: { thisWay: "chosen" },
         asItResolves: true,
-        restrictions: [],
-        cantAttackYou: "you-and-planeswalkers",
+        restrictions: [{ kind: "cant-attack", at: "you-and-planeswalkers" }],
+        
         duration: { whileCounter: "vow" },
       },
     ],

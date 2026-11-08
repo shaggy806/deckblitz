@@ -37,7 +37,7 @@ export default defineCard({
           kind: "sequence",
           effects: [
             { kind: "untap", target: 0 },
-            { kind: "block-if-able", target: 0, attacker: "source" },
+            { kind: "restrict", target: 0, restrictions: [{ kind: "must-block", attacker: "source" }], duration: "until-end-of-combat" },
           ],
         },
       },

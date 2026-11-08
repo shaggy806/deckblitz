@@ -22,7 +22,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "filter", filter: { type: "creature", controlledBy: "you" } },
-      cantBeBlockedBy: { keyword: "flying" },
+      restrictions: [{ kind: "cant-be-blocked", by: { keyword: "flying" } }],
       text: TEXT,
     },
   ],

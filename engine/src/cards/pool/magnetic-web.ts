@@ -15,7 +15,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "filter", filter: MAGNETIC },
-      attacksIfAttacks: MAGNETIC,
+      restrictions: [{ kind: "must-attack", ifAttacks: MAGNETIC }],
       text: ATTACK_TEXT,
     },
   ],
@@ -23,7 +23,7 @@ export default defineCard({
     {
       trigger: { on: "attacks", who: "any", filter: MAGNETIC },
       targets: [],
-      effect: { kind: "block-if-able", filter: MAGNETIC, attacker: "trigger-object" },
+      effect: { kind: "restrict", filter: MAGNETIC, restrictions: [{ kind: "must-block", attacker: "trigger-object" }] },
       resolve: null,
       text: BLOCK_TEXT,
     },

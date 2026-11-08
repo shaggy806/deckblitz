@@ -21,9 +21,9 @@ export default defineCard({
         kind: "restrict",
         filter: IT,
         asItResolves: true,
-        restrictions: [],
-        cantAttackYou: true,
-        cantBlockYours: true,
+        restrictions: [{ kind: "cant-attack", at: "you-and-permanents" }, { kind: "cant-block", attackers: { controlledBy: "you" } }],
+        
+        
         duration: { whileCounter: "duty" },
       },
     ],

@@ -11,5 +11,5 @@ export default defineCard({
   power: 6,
   toughness: 4,
   text: TEXT,
-  static: [{ affects: { scope: "self" }, cantAttackUnlessDefender: { controls: { colors: ["U"] } }, text: TEXT }],
+  static: [{ affects: { scope: "self" }, restrictions: [{ kind: "cant-attack", unlessDefender: { controls: { colors: ["U"] } } }], text: TEXT }],
 });

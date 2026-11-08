@@ -316,6 +316,7 @@ import _poolFrostwielder from "../pool/frostwielder.js";
 import _poolFuneralCharm from "../pool/funeral-charm.js";
 import _poolFuneralRites from "../pool/funeral-rites.js";
 import _poolFyndhornDruid from "../pool/fyndhorn-druid.js";
+import _poolGalactusDevourerOfWorlds from "../pool/galactus-devourer-of-worlds.js";
 import _poolGandalfGoblinsBane from "../pool/gandalf-goblins-bane.js";
 import _poolGarzasAssassin from "../pool/garzas-assassin.js";
 import _poolGempalmPolluter from "../pool/gempalm-polluter.js";
@@ -1314,6 +1315,7 @@ const shard: CardShard = {
     _poolFuneralCharm,
     _poolFuneralRites,
     _poolFyndhornDruid,
+    _poolGalactusDevourerOfWorlds,
     _poolGandalfGoblinsBane,
     _poolGarzasAssassin,
     _poolGempalmPolluter,

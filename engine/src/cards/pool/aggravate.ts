@@ -22,7 +22,7 @@ export default defineCard({
         effect: {
           kind: "conditional",
           condition: { kind: "damage-dealt-this-way", to: 1 },
-          then: { kind: "attack-requirement", target: 1, duration: "end-of-turn" },
+          then: { kind: "restrict", target: 1, restrictions: ["must-attack"], duration: "end-of-turn" },
         },
       },
     ],

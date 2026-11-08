@@ -26,7 +26,7 @@ export default defineCard({
         effect: { kind: "gain-control", target: 1, untilEndOfTurn: true, who: { target: 0 } },
       },
       { kind: "for-each-target", from: 1, effect: { kind: "untap", target: 1 } },
-      { kind: "for-each-target", from: 1, effect: { kind: "block-if-able", target: 1 } },
+      { kind: "for-each-target", from: 1, effect: { kind: "restrict", target: 1, restrictions: ["must-block"] } },
     ],
   },
 });

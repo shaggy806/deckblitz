@@ -17,7 +17,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      canBlockOnly: { notColors: ["B"] },
+      restrictions: [{ kind: "cant-block", attackers: { not: { notColors: ["B"] } } }],
       text: "This creature can't block black creatures.",
     },
   ],

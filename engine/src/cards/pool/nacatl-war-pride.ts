@@ -13,7 +13,7 @@ export default defineCard({
   power: 3,
   toughness: 3,
   text: `${BLOCK_TEXT}\n${COPY_TEXT}`,
-  static: [{ affects: { scope: "self" }, restrictions: ["must-be-blocked-by-exactly-one"], text: BLOCK_TEXT }],
+  static: [{ affects: { scope: "self" }, restrictions: [{ kind: "must-be-blocked-if-able", exactlyOne: true }], text: BLOCK_TEXT }],
   triggered: [
     {
       trigger: { on: "attacks", who: "self" },

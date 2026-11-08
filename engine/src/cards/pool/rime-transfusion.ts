@@ -24,7 +24,7 @@ export default defineCard({
         {
           cost: { mana: "{S}", tap: false },
           targets: [],
-          effect: { kind: "restrict", target: "source", restrictions: [], cantBeBlockedBy: { notSupertype: "snow" } },
+          effect: { kind: "restrict", target: "source", restrictions: [{ kind: "cant-be-blocked", by: { notSupertype: "snow" } }]},
           resolve: null,
           text: GRANTED,
         },

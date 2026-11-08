@@ -20,7 +20,7 @@ export default defineCard({
     {
       affects: { scope: "filter", filter: { type: "creature", controlledBy: "you", enchanted: true } },
       grantPt: [1, 1],
-      cantBeBlockedBy: { notKeyword: "defender" },
+      restrictions: [{ kind: "cant-be-blocked", by: { notKeyword: "defender" } }],
       text: TEXT,
     },
   ],

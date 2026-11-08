@@ -13,7 +13,7 @@ export default defineCard({
     minModes: 1,
     maxModes: 1,
     modes: [
-      { text: THREATEN, effect: { kind: "block-if-able", filter: { type: "creature" } } },
+      { text: THREATEN, effect: { kind: "restrict", filter: { type: "creature" }, restrictions: ["must-block"] } },
       {
         text: BRIBE,
         effect: {

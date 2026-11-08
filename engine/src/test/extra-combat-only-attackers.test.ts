@@ -4,6 +4,7 @@
  * `additional-combat`'s `onlyAttackers`, a restriction (rule 508.1c) for the
  * added combat phase alone — not any other combat that turn (its ruling).
  */
+import { overGame } from "./combat-probe.js";
 import { describe, expect, it } from "vitest";
 
 import { whyCannotAttack } from "../combat/eligibility.js";
@@ -42,13 +43,13 @@ describe("Bumi, Unleashed — only land creatures attack in the added combat", (
     // combat in which only the Forest, a land creature, may attack.
     expect(game.state.objects[mountain].tapped).toBe(false);
     expect(seen[1].forest).toBeNull();
-    expect(seen[1].bumi).toMatch(/can't attack this combat/);
-    expect(seen[1].bears).toMatch(/can't attack this combat/);
+    expect(seen[1].bumi).toMatch(/can't attack/);
+    expect(seen[1].bears).toMatch(/can't attack/);
     // 5 + 2, then the Forest's 4.
     expect(life(game, B)).toBe(20 - 7 - 4);
     expect(declarations).toBe(2);
     // Gone with that combat phase.
-    expect(game.state.playerEffects?.some((e) => e.onlyAttackers !== undefined) ?? false).toBe(false);
+    expect(overGame(game)).toEqual([]);
   });
 
   it("the restriction is that phase's alone: a later added combat lets anything attack", () => {
@@ -71,7 +72,7 @@ describe("Bumi, Unleashed — only land creatures attack in the added combat", (
     // First combat, Bumi's added one, then the one after the second main.
     expect(declarations).toBe(3);
     expect(seen[0]).toBeNull();
-    expect(seen[1]).toMatch(/can't attack this combat/);
+    expect(seen[1]).toMatch(/can't attack/);
     expect(seen[2]).toBeNull();
   });
 });

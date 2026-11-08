@@ -14,7 +14,7 @@ export default defineCard({
     effects: [
       { kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 },
       { kind: "grant-keyword", target: 0, keyword: "haste", duration: "end-of-turn" },
-      { kind: "restrict", target: 0, restrictions: [], cantBeBlockedBy: { subtype: "Wall" } },
+      { kind: "restrict", target: 0, restrictions: [{ kind: "cant-be-blocked", by: { subtype: "Wall" } }]},
       { kind: "venture" },
     ],
   },

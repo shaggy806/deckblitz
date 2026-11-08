@@ -26,7 +26,7 @@ export default defineCard({
   keywords: ["vigilance", "deathtouch", "haste"],
   text: `Vigilance, deathtouch, haste\n${UNBLOCK_TEXT}\n${UNPREVENT_TEXT}\n${TRIGGER_TEXT}`,
   static: [
-    { affects: { scope: "self" }, cantBeBlockedBy: { power: { op: "lte", n: 2 } }, text: UNBLOCK_TEXT },
+    { affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", by: { power: { op: "lte", n: 2 } } }], text: UNBLOCK_TEXT },
     {
       affects: { scope: "self" },
       damageCantBePrevented: { by: { type: "creature", controlledBy: "you" }, combat: true },

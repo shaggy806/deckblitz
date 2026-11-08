@@ -14,7 +14,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantAttackIfDefender: { controls: { type: "creature", tapped: false, power: { op: "lte", n: 2 } } },
+      restrictions: [{ kind: "cant-attack", ifDefender: { controls: { type: "creature", tapped: false, power: { op: "lte", n: 2 } } } }],
       text: "This creature can't attack if defending player controls an untapped creature with power 2 or less.",
     },
   ],

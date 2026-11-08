@@ -22,7 +22,7 @@ export default defineCard({
     {
       // Every Sliver, whoever controls it; Prowler's Helm's "except by Walls" shape.
       affects: { scope: "filter", filter: { type: "creature", subtype: "Sliver" } },
-      cantBeBlockedBy: { notSubtypes: ["Sliver"] },
+      restrictions: [{ kind: "cant-be-blocked", by: { notSubtypes: ["Sliver"] } }],
       text: TEXT,
     },
   ],

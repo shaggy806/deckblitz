@@ -16,6 +16,7 @@ import _poolAerialExtortionist from "../pool/aerial-extortionist.js";
 import _poolAerialResponder from "../pool/aerial-responder.js";
 import _poolAetherInspector from "../pool/aether-inspector.js";
 import _poolAetherSting from "../pool/aether-sting.js";
+import _poolAetherflameWall from "../pool/aetherflame-wall.js";
 import _poolAethertorchRenegade from "../pool/aethertorch-renegade.js";
 import _poolAfterlifeFromTheLoam from "../pool/afterlife-from-the-loam.js";
 import _poolAfterthoughtSentry from "../pool/afterthought-sentry.js";
@@ -104,6 +105,7 @@ import _poolBoilingRockPrison from "../pool/boiling-rock-prison.js";
 import _poolBoneDevourer from "../pool/bone-devourer.js";
 import _poolBoneSabres from "../pool/bone-sabres.js";
 import _poolBontuTheGlorified from "../pool/bontu-the-glorified.js";
+import _poolBorosBattleshaper from "../pool/boros-battleshaper.js";
 import _poolBrandedBrawlers from "../pool/branded-brawlers.js";
 import _poolBrauliosOfPheresBand from "../pool/braulios-of-pheres-band.js";
 import _poolBrawn from "../pool/brawn.js";
@@ -719,6 +721,7 @@ import _poolSignalingRoar from "../pool/signaling-roar.js";
 import _poolSilentArbiter from "../pool/silent-arbiter.js";
 import _poolSilentDart from "../pool/silent-dart.js";
 import _poolSilkenfistOrder from "../pool/silkenfist-order.js";
+import _poolSilverSurferGalactussHerald from "../pool/silver-surfer-galactuss-herald.js";
 import _poolSilverbladePaladin from "../pool/silverblade-paladin.js";
 import _poolSimianSpiritGuide from "../pool/simian-spirit-guide.js";
 import _poolSirocco from "../pool/sirocco.js";
@@ -978,6 +981,7 @@ const shard: CardShard = {
     _poolAerialResponder,
     _poolAetherInspector,
     _poolAetherSting,
+    _poolAetherflameWall,
     _poolAethertorchRenegade,
     _poolAfterlifeFromTheLoam,
     _poolAfterthoughtSentry,
@@ -1066,6 +1070,7 @@ const shard: CardShard = {
     _poolBoneDevourer,
     _poolBoneSabres,
     _poolBontuTheGlorified,
+    _poolBorosBattleshaper,
     _poolBrandedBrawlers,
     _poolBrauliosOfPheresBand,
     _poolBrawn,
@@ -1681,6 +1686,7 @@ const shard: CardShard = {
     _poolSilentArbiter,
     _poolSilentDart,
     _poolSilkenfistOrder,
+    _poolSilverSurferGalactussHerald,
     _poolSilverbladePaladin,
     _poolSimianSpiritGuide,
     _poolSirocco,

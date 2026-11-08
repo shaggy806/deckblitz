@@ -25,12 +25,12 @@ export default defineCard({
   static: [
     {
       affects: { scope: "filter", filter: { type: "creature", power: { op: "lte", n: 2 } } },
-      cantBeBlockedBy: {
+      restrictions: [{ kind: "cant-be-blocked", by: {
         type: "creature",
         controlledBy: "opponent",
         notKeyword: "flying",
         anyOf: [{ notKeyword: "reach" }],
-      },
+      } }],
       text: BLOCK_TEXT,
     },
   ],

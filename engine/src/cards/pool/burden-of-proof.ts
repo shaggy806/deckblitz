@@ -39,7 +39,7 @@ export default defineCard({
       affects: { scope: "attached" },
       condition: { kind: "not", of: IS_YOUR_DETECTIVE },
       setBasePt: { power: 1, toughness: 1 },
-      canBlockOnly: { notSubtypes: ["Detective"] },
+      restrictions: [{ kind: "cant-block", attackers: { not: { notSubtypes: ["Detective"] } } }],
       text: TEXT,
     },
   ],

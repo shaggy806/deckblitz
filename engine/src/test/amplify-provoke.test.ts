@@ -4,6 +4,7 @@
  * requirement on one creature (rule 509.1c), "target creature blocks [this
  * creature] this turn if able".
  */
+import { blockRecords } from "./combat-probe.js";
 import { describe, expect, it } from "vitest";
 
 import { blockingViolations, obeyingLure } from "../combat/blocking.js";
@@ -149,7 +150,7 @@ describe("provoke", () => {
     expect(offer.blockRequirements).toEqual([{ blocker: bears, attacker: winged }]);
   });
 
-  it("the requirement lasts the turn only, and a creature that left takes none with it", () => {
+  it("the requirement lasts this combat only (702.39a), and a creature that left takes none with it", () => {
     const { game, a, b } = table();
     const grappler = spawn(game, "Goblin Grappler");
     const bears = spawn(game, "Grizzly Bears", B);
@@ -158,8 +159,6 @@ describe("provoke", () => {
     b.declareBlockersFn = () => [{ blocker: bears, attacker: grappler }];
     attack(game, a, [grappler]);
     expect(game.state.objects[grappler].zone).toBe("graveyard");
-    expect(game.state.blockRequirements).toHaveLength(1);
-    game.advanceUntil((s) => s.turn.number === 2);
-    expect(game.state.blockRequirements).toBeUndefined();
+    expect(blockRecords(game)).toEqual([]);
   });
 });

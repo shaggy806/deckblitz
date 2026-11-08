@@ -17,7 +17,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "attack-requirement", filter: { type: "creature" }, controlledByTarget: 0, duration: "end-of-turn" },
+      { kind: "restrict", filter: { controlledBy: "you", type: "creature" }, controlledByTarget: 0, restrictions: ["must-attack"], duration: "end-of-turn" },
       { kind: "skip-next-untap", filter: { type: "creature" }, who: 0 },
     ],
   },

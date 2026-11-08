@@ -19,7 +19,7 @@ export default defineCard({
       grantPt: [2, 2],
       grantKeywords: ["menace"],
       // "You" is the Aura's controller.
-      cantAttackController: true,
+      restrictions: [{ kind: "cant-attack", at: "you-and-planeswalkers" }],
       text: TEXT,
     },
   ],

@@ -43,7 +43,7 @@ export default defineCard({
     {
       affects: { scope: "attached" },
       condition: { kind: "source", filter: { attachedTo: { power: { op: "lte", n: 3 } } } },
-      cantBeBlockedBy: {},
+      restrictions: [{ kind: "cant-be-blocked", by: {} }],
       text: UNBLOCKABLE_TEXT,
     },
   ],

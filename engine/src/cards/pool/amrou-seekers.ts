@@ -14,7 +14,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantBeBlockedBy: { notTypes: ["artifact"], notColors: ["W"] },
+      restrictions: [{ kind: "cant-be-blocked", by: { notTypes: ["artifact"], notColors: ["W"] } }],
       text: "This creature can't be blocked except by artifact creatures and/or white creatures.",
     },
   ],

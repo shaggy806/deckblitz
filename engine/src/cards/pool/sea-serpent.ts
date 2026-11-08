@@ -14,7 +14,7 @@ export default defineCard({
   power: 5,
   toughness: 5,
   text: `${ATTACK}\n${SAC}`,
-  static: [{ affects: { scope: "self" }, cantAttackUnlessDefender: { controls: { subtype: "Island" } }, text: ATTACK }],
+  static: [{ affects: { scope: "self" }, restrictions: [{ kind: "cant-attack", unlessDefender: { controls: { subtype: "Island" } } }], text: ATTACK }],
   triggered: [
     {
       trigger: {

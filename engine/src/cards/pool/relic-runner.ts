@@ -16,7 +16,7 @@ export default defineCard({
         kind: "cast-this-turn",
         filter: { anyOf: [{ type: "artifact" }, { supertype: "legendary" }, { subtype: "Saga" }] },
       },
-      cantBeBlockedBy: {},
+      restrictions: [{ kind: "cant-be-blocked", by: {} }],
       text: "This creature can't be blocked if you've cast a historic spell this turn.",
     },
   ],

@@ -20,8 +20,8 @@ export default defineCard({
       effect: {
         kind: "restrict",
         target: "source",
-        restrictions: [],
-        cantBeBlockedBy: { notKeyword: "defender" },
+        restrictions: [{ kind: "cant-be-blocked", by: { notKeyword: "defender" } }],
+        
       },
       resolve: null,
       text: "{R}: This creature can't be blocked this turn except by creatures with defender.",

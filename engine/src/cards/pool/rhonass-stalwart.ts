@@ -23,7 +23,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "modify-pt", target: "source", power: 1, toughness: 1, duration: "end-of-turn" },
-          { kind: "restrict", target: "source", restrictions: [], cantBeBlockedBy: { power: { op: "lte", n: 2 } } },
+          { kind: "restrict", target: "source", restrictions: [{ kind: "cant-be-blocked", by: { power: { op: "lte", n: 2 } } }]},
         ],
       },
       resolve: null,

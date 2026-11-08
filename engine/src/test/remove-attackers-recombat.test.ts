@@ -4,6 +4,7 @@
  * attackers unblocked and its creature made to block something else.
  */
 
+import { hasRecord } from "./combat-probe.js";
 import { describe, expect, it } from "vitest";
 
 import type { Game } from "../game.js";
@@ -102,7 +103,7 @@ describe("Illusionist's Gambit", () => {
     a.declareAttackersFn = () => [];
     cast(game, gambit, { player: B });
     expect(life(game, B)).toBe(20);
-    expect(game.state.objects[giant].boundThisCombat).toBeUndefined();
+    expect(hasRecord(game, giant, "must-attack")).toBe(false);
     expect(game.state.objects[giant].tapped).toBe(false);
   });
 
@@ -120,7 +121,7 @@ describe("Illusionist's Gambit", () => {
     cast(game, gambit, { player: C });
     game.advanceUntil((s) => s.turn.number > 1);
     expect(declarations).toBe(2);
-    expect(game.state.objects[giant].boundThisCombat).toBeUndefined();
+    expect(hasRecord(game, giant, "must-attack")).toBe(false);
   });
 
   it("is cast only on an opponent's turn, in the declare blockers step", () => {

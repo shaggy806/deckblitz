@@ -16,7 +16,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantBeBlockedBy: { anyOf: [{ colors: ["B"] }, { colors: ["R"] }] },
+      restrictions: [{ kind: "cant-be-blocked", by: { anyOf: [{ colors: ["B"] }, { colors: ["R"] }] } }],
       text: "This creature can't be blocked by black and/or red creatures.",
     },
   ],

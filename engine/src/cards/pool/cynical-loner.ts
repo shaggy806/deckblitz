@@ -31,7 +31,7 @@ export default defineCard({
   power: 3,
   toughness: 1,
   text: `${GLIMMERS}\n${SURVIVAL}`,
-  static: [{ affects: { scope: "self" }, cantBeBlockedBy: { subtype: "Glimmer" }, text: GLIMMERS }],
+  static: [{ affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", by: { subtype: "Glimmer" } }], text: GLIMMERS }],
   triggered: [
     {
       // Survival (Kona, Rescue Beastie's shape): the second main phase only,

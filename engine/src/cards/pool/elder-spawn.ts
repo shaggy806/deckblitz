@@ -18,7 +18,7 @@ export default defineCard({
   power: 6,
   toughness: 6,
   text: `${UPKEEP_TEXT}\n${EVASION_TEXT}`,
-  static: [{ affects: { scope: "self" }, cantBeBlockedBy: { colors: ["R"] }, text: EVASION_TEXT }],
+  static: [{ affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", by: { colors: ["R"] } }], text: EVASION_TEXT }],
   triggered: [
     {
       trigger: { on: "step-begins", step: "upkeep", who: "you" },

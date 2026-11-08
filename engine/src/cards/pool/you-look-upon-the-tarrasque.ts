@@ -30,7 +30,7 @@ export default defineCard({
           effects: [
             { kind: "modify-pt", target: 0, power: 5, toughness: 5, duration: "end-of-turn" },
             { kind: "grant-keyword", target: 0, keyword: "indestructible", duration: "end-of-turn" },
-            { kind: "block-if-able", filter: { type: "creature", controlledBy: "opponent" }, attacker: 0 },
+            { kind: "restrict", filter: { type: "creature", controlledBy: "opponent" }, restrictions: [{ kind: "must-block", attacker: 0 }] },
           ],
         },
       },

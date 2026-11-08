@@ -12,7 +12,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "filter", filter: { type: "creature", power: { op: "lte", n: 2 } } },
-      cantAttackController: "player",
+      restrictions: [{ kind: "cant-attack", at: "you" }],
       text: TEXT,
     },
   ],

@@ -4,7 +4,7 @@
  */
 
 import { MAX_SPEED, publicNameAt } from 'engine/client'
-import type { CombatRestriction, GameEvent, ObjectId, PlayerId, Step, TargetRef, VoteChoice } from 'engine/client'
+import type { CombatWord, GameEvent, ObjectId, PlayerId, Step, TargetRef, VoteChoice } from 'engine/client'
 import type { SeatStatus } from 'protocol'
 
 export type NameOf = (id: ObjectId) => string
@@ -32,7 +32,7 @@ const CHOSEN_COLOR_NAMES: Readonly<Record<string, string>> = {
  * happen?" stays in the default view.
  */
 /** A combat restriction as the log says it — "X can't block this turn". */
-const RESTRICTION_TEXT: Record<CombatRestriction, string> = {
+const RESTRICTION_TEXT: Record<CombatWord, string> = {
   'cant-attack': "can't attack",
   'cant-block': "can't block",
   'cant-be-attacked': "can't be attacked",
@@ -40,11 +40,6 @@ const RESTRICTION_TEXT: Record<CombatRestriction, string> = {
   'must-block': 'must block',
   'must-be-blocked': 'must be blocked by every creature able',
   'must-be-blocked-if-able': 'must be blocked if able',
-  'must-be-blocked-by-exactly-one': 'must be blocked by exactly one creature if able',
-  'blocked-by-at-most-one': "can't be blocked by more than one creature",
-  'cant-attack-owner': "can't attack its owner",
-  'cant-attack-owner-planeswalkers': "can't attack planeswalkers its owner controls",
-  'cant-attack-player-attacked-this-turn': "can't attack a player it has already attacked this turn",
   'doesnt-untap': "doesn't untap during its controller's untap step",
   'cant-be-blocked': "can't be blocked",
   'cant-turn-face-up': "can't be turned face up",
@@ -476,7 +471,7 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
     case 'restrictions-imposed': {
       const what = event.restrictions.map((r) => RESTRICTION_TEXT[r]).join(' and ')
       return event.object === undefined
-        ? `${who(event.player)}: for the rest of the turn, affected creatures ${what}`
+        ? `${who(event.player)}: ${event.duration === undefined ? 'for the rest of the turn, ' : ''}affected creatures ${what}`
         : `${name(event.object)} ${what}${
             event.nextTurnOf !== undefined
               ? ` during ${who(event.nextTurnOf)}'s next turn`

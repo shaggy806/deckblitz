@@ -13,7 +13,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      canBlockOnly: { power: { op: "gte", n: 3 } },
+      restrictions: [{ kind: "cant-block", attackers: { not: { power: { op: "gte", n: 3 } } } }],
       text: "This creature can't block creatures with power 2 or less.",
     },
   ],

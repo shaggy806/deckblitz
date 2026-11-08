@@ -16,7 +16,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantAttackUnlessDefender: { controls: { anyOf: [{ type: "enchantment" }, { enchanted: true }] } },
+      restrictions: [{ kind: "cant-attack", unlessDefender: { controls: { anyOf: [{ type: "enchantment" }, { enchanted: true }] } } }],
       text: TEXT,
     },
   ],

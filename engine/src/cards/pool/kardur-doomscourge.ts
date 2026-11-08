@@ -27,11 +27,7 @@ export default defineCard({
     {
       trigger: { on: "enters-battlefield", who: "self" },
       targets: [],
-      effect: {
-        kind: "attack-requirement",
-        filter: { type: "creature", controlledBy: "opponent" },
-        otherThanYou: true,
-      },
+      effect: { kind: "restrict", filter: { type: "creature", controlledBy: "opponent" }, restrictions: [{ kind: "must-attack", otherThan: "you" }], duration: "until-your-next-turn" },
       resolve: null,
       text:
         "When Kardur, Doomscourge enters, until your next turn, creatures your " +

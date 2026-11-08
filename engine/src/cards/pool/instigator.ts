@@ -15,12 +15,7 @@ export default defineCard({
     {
       cost: { mana: "{1}{B}{B}", tap: true, discard: { count: 1 } },
       targets: ["player"],
-      effect: {
-        kind: "attack-requirement",
-        filter: { type: "creature" },
-        controlledByTarget: 0,
-        duration: "end-of-turn",
-      },
+      effect: { kind: "restrict", filter: { controlledBy: "you", type: "creature" }, controlledByTarget: 0, restrictions: ["must-attack"], duration: "end-of-turn" },
       resolve: null,
       text: "{1}{B}{B}, {T}, Discard a card: Creatures target player controls attack this turn if able.",
     },

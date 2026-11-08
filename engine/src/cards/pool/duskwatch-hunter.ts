@@ -23,7 +23,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantBeBlockedBy: { token: true },
+      restrictions: [{ kind: "cant-be-blocked", by: { token: true } }],
       text: "This creature can't be blocked by tokens.",
     },
   ],

@@ -30,13 +30,13 @@ export default defineCard({
     },
     {
       affects: { scope: "self" },
-      cantBeBlockedBy: {
+      restrictions: [{ kind: "cant-be-blocked", by: {
         anyOf: [
           { name: "Face-Down Creature" },
           { name: "Face-Down Creature (Ward {2})" },
           { name: "Room (Both Doors Locked)" },
         ],
-      },
+      } }],
       text: BLOCK_TEXT,
     },
   ],

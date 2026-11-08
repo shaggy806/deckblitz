@@ -45,7 +45,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "filter", filter: { type: "creature", colors: ["B"] } },
-      cantAttackController: "player",
+      restrictions: [{ kind: "cant-attack", at: "you" }],
       text: BLACK,
     },
     {

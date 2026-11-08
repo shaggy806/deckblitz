@@ -14,7 +14,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantAttackIfDefender: { controls: { type: "land", tapped: false } },
+      restrictions: [{ kind: "cant-attack", ifDefender: { controls: { type: "land", tapped: false } } }],
       text: "This creature can't attack if defending player controls an untapped land.",
     },
     {

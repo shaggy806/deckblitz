@@ -38,14 +38,14 @@ export default defineCard({
     {
       cost: { mana: "{2}{R}", tap: false },
       targets: ["creature"],
-      effect: { kind: "restrict", target: 0, restrictions: [], cantBlockAttacker: "source" },
+      effect: { kind: "restrict", target: 0, restrictions: [{ kind: "cant-block", attacker: "source" }]},
       resolve: null,
       text: "{2}{R}: Target creature can't block this creature this turn.",
     },
     {
       cost: { mana: "{2}{G}", tap: false },
       targets: ["creature"],
-      effect: { kind: "block-if-able", target: 0, attacker: "source" },
+      effect: { kind: "restrict", target: 0, restrictions: [{ kind: "must-block", attacker: "source" }] },
       resolve: null,
       text: "{2}{G}: Target creature blocks this creature this turn if able.",
     },

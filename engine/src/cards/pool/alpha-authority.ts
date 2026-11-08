@@ -12,5 +12,5 @@ export default defineCard({
   subtypes: ["Aura"],
   text: `Enchant creature\n${TEXT}`,
   targets: ["creature"],
-  static: [{ affects: { scope: "attached" }, grantKeywords: ["hexproof"], blockedByAtMostOne: true, text: TEXT }],
+  static: [{ affects: { scope: "attached" }, grantKeywords: ["hexproof"], restrictions: [{ kind: "cant-be-blocked", byMoreThan: 1 }], text: TEXT }],
 });

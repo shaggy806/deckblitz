@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 const TEXT = "When this creature enters or is turned face up, target creature blocks this turn if able.";
 const DISGUISE =
   "Disguise {4}{G} (You may cast this card face down for {3} as a 2/2 creature with ward {2}. Turn it face up any time for its disguise cost.)";
-const BLOCKS = { kind: "block-if-able", target: 0 } as const;
+const BLOCKS = { kind: "restrict", target: 0, restrictions: ["must-block"] } as const;
 
 export default defineCard({
   name: "Culvert Ambusher",

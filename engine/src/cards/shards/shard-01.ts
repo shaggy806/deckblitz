@@ -896,6 +896,7 @@ import _poolVampireInterloper from "../pool/vampire-interloper.js";
 import _poolVampiricFeast from "../pool/vampiric-feast.js";
 import _poolVampiricSliver from "../pool/vampiric-sliver.js";
 import _poolVanquishTheHorde from "../pool/vanquish-the-horde.js";
+import _poolVarchildsCrusader from "../pool/varchilds-crusader.js";
 import _poolVashFreelanceArchaeologist from "../pool/vash-freelance-archaeologist.js";
 import _poolVaultGuardsman from "../pool/vault-guardsman.js";
 import _poolVedalkenEntrancer from "../pool/vedalken-entrancer.js";
@@ -1876,6 +1877,7 @@ const shard: CardShard = {
     _poolVampiricFeast,
     _poolVampiricSliver,
     _poolVanquishTheHorde,
+    _poolVarchildsCrusader,
     _poolVashFreelanceArchaeologist,
     _poolVaultGuardsman,
     _poolVedalkenEntrancer,

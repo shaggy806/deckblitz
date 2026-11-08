@@ -18,8 +18,8 @@ export default defineCard({
       effect: {
         kind: "restrict",
         target: 0,
-        restrictions: [],
-        cantBeBlockedBy: { notTypes: ["artifact"], notColors: ["R"] },
+        restrictions: [{ kind: "cant-be-blocked", by: { notTypes: ["artifact"], notColors: ["R"] } }],
+        
       },
       resolve: null,
       text: "{1}{R}, {T}, Discard a card: Target creature can't be blocked this turn except by artifact creatures and/or red creatures.",

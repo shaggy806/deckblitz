@@ -23,8 +23,8 @@ export default defineCard({
       effect: {
         kind: "restrict",
         target: "source",
-        restrictions: [],
-        cantBeBlockedBy: { power: { op: "lte", n: 2 } },
+        restrictions: [{ kind: "cant-be-blocked", by: { power: { op: "lte", n: 2 } } }],
+        
       },
       resolve: null,
       text: TEXT,

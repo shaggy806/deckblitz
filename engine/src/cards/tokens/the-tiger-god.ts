@@ -18,5 +18,5 @@ export default defineCard({
   power: 4,
   toughness: 4,
   text: BLOCK_TEXT,
-  static: [{ affects: { scope: "self" }, blockedByAtMostOne: true, text: BLOCK_TEXT }],
+  static: [{ affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", byMoreThan: 1 }], text: BLOCK_TEXT }],
 });

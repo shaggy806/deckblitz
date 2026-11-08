@@ -23,7 +23,7 @@ export default defineCard({
     {
       at: [2],
       targets: [],
-      effect: { kind: "attack-requirement", filter: { type: "creature", controlledBy: "opponent" }, otherThanYou: false },
+      effect: { kind: "restrict", filter: { type: "creature", controlledBy: "opponent" }, restrictions: ["must-attack"], duration: "until-your-next-turn" },
       resolve: null,
       text: CHAPTER_II,
     },

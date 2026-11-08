@@ -22,7 +22,7 @@ export default defineCard({
     },
     {
       affects: { scope: "self" },
-      cantBeBlockedBy: { notSubtypes: ["Wall"] },
+      restrictions: [{ kind: "cant-be-blocked", by: { notSubtypes: ["Wall"] } }],
       text: EVASION,
     },
   ],

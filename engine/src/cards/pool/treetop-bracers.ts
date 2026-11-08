@@ -20,7 +20,7 @@ export default defineCard({
     {
       affects: { scope: "attached" },
       grantPt: [1, 1],
-      cantBeBlockedBy: { notKeyword: "flying" },
+      restrictions: [{ kind: "cant-be-blocked", by: { notKeyword: "flying" } }],
       text: TEXT,
     },
   ],

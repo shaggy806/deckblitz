@@ -15,8 +15,8 @@ export default defineCard({
       effect: {
         kind: "restrict",
         target: 0,
-        restrictions: [],
-        cantBeBlockedBy: { notSubtypes: ["Wall"] },
+        restrictions: [{ kind: "cant-be-blocked", by: { notSubtypes: ["Wall"] } }],
+        
       },
       resolve: null,
       text: "{4}, {T}: Target creature can't be blocked this turn except by Walls.",

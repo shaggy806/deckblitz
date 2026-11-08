@@ -13,7 +13,7 @@ export default defineCard({
   text: `Enchant creature\n${BLOCK_TEXT}\n${PUMP_TEXT}`,
   targets: ["creature"],
   static: [
-    { affects: { scope: "attached" }, cantBeBlockedBy: { colors: ["W"] }, text: BLOCK_TEXT },
+    { affects: { scope: "attached" }, restrictions: [{ kind: "cant-be-blocked", by: { colors: ["W"] } }], text: BLOCK_TEXT },
     {
       affects: { scope: "attached" },
       condition: { kind: "opponent-controls", filter: { colors: ["W"] }, atLeast: 1 },

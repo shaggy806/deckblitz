@@ -1129,13 +1129,13 @@ describe("effect templates", () => {
     ],
     [
       "Target creature can't be blocked by creatures with power 2 or less this turn.",
-      { kind: "restrict", target: 0, restrictions: [], cantBeBlockedBy: { power: { op: "lte", n: 2 } } },
+      { kind: "restrict", target: 0, restrictions: [{ kind: "cant-be-blocked", by: { power: { op: "lte", n: 2 } } }]},
     ],
     [
       "~ can't be blocked this turn except by creatures with haste.",
-      { kind: "restrict", target: "source", restrictions: [], cantBeBlockedBy: { notKeyword: "haste" } },
+      { kind: "restrict", target: "source", restrictions: [{ kind: "cant-be-blocked", by: { notKeyword: "haste" } }]},
     ],
-    ["Target creature can't be blocked by Walls this turn.", { kind: "restrict", target: 0, restrictions: [], cantBeBlockedBy: { subtype: "Wall" } }],
+    ["Target creature can't be blocked by Walls this turn.", { kind: "restrict", target: 0, restrictions: [{ kind: "cant-be-blocked", by: { subtype: "Wall" } }]}],
     ["Exchange control of target creature you control and target creature an opponent controls.", { kind: "exchange-control", objects: [0, 1] }],
     ["Exchange control of ~ and target nonland permanent.", { kind: "exchange-control", objects: ["source", 0] }],
     ["Add {G}.", { kind: "add-mana", mana: "G", amount: 1 }],
@@ -5276,7 +5276,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     );
     expect(throwback.amplify).toBe(2);
     expect(throwback.triggered[0].trigger).toEqual({ on: "attacks", who: "self" });
-    expect(throwback.triggered[0].effect.effect.effects[1]).toEqual({ kind: "block-if-able", target: 0, attacker: "source" });
+    expect(throwback.triggered[0].effect.effect.effects[1]).toEqual({ kind: "restrict", target: 0, restrictions: [{ kind: "must-block", attacker: "source" }], duration: "until-end-of-combat" });
     expect(throwback.complete).toBe(true);
   });
 
@@ -5577,7 +5577,7 @@ describe("damage by this source, switches, defending-player restrictions, a targ
     );
     expect(serpent.triggered[0].condition).toEqual({ kind: "source", filter: { type: "enchantment" } });
     expect(serpent.triggered[0].effect.effects[0]).toMatchObject({ setTypes: ["creature"], setSubtypes: ["Serpent"], duration: "permanent" });
-    expect(serpent.triggered[0].effect.effects[1].ability.cantAttackUnlessDefender).toEqual({ controls: { subtype: "Island" } });
+    expect(serpent.triggered[0].effect.effects[1].ability.restrictions[0].unlessDefender).toEqual({ controls: { subtype: "Island" } });
     const guardian = face(
       "Enchantment",
       "When an opponent casts a creature spell, if this permanent is an enchantment, this enchantment becomes a 3/4 Gargoyle creature with flying and protection from red.",
@@ -5588,38 +5588,38 @@ describe("damage by this source, switches, defending-player restrictions, a targ
 
   it("reads restrictions asked of the defending or attacking player", () => {
     const serpent = face("Creature — Serpent", "This creature can't attack unless defending player controls an Island.");
-    expect(serpent.static[0].cantAttackUnlessDefender).toEqual({ controls: { subtype: "Island" } });
+    expect(serpent.static[0].restrictions[0].unlessDefender).toEqual({ controls: { subtype: "Island" } });
     const hireling = face("Creature — Ogre", "This creature can't attack unless defending player is the monarch.");
-    expect(hireling.static[0].cantAttackUnlessDefender).toEqual({ holds: { kind: "monarch", who: "you" } });
+    expect(hireling.static[0].restrictions[0].unlessDefender).toEqual({ holds: { kind: "monarch", who: "you" } });
     const throatseeker = face("Creature — Horror", "This creature can't attack unless defending player is poisoned.");
-    expect(throatseeker.static[0].cantAttackUnlessDefender).toEqual({
+    expect(throatseeker.static[0].restrictions[0].unlessDefender).toEqual({
       holds: { kind: "player-counters", who: "you", counter: "poison", atLeast: 1 },
     });
     const gargoyle = face(
       "Artifact Creature — Gargoyle",
       "This creature can't attack unless defending player has seven or more cards in their graveyard.\nThis creature can't block unless you have four or more cards in hand.",
     );
-    expect(gargoyle.static[0].cantAttackUnlessDefender).toEqual({ holds: { kind: "cards-in-graveyard", atLeast: 7 } });
+    expect(gargoyle.static[0].restrictions[0].unlessDefender).toEqual({ holds: { kind: "cards-in-graveyard", atLeast: 7 } });
     expect(gargoyle.static[1]).toMatchObject({ condition: { kind: "hand-size", atMost: 3 }, restrictions: ["cant-block"] });
     const brawlers = face(
       "Creature — Human Soldier",
       "This creature can't attack if defending player controls an untapped land.\nThis creature can't block if you control an untapped land.",
     );
-    expect(brawlers.static[0].cantAttackIfDefender).toEqual({ controls: { type: "land", tapped: false } });
+    expect(brawlers.static[0].restrictions[0].ifDefender).toEqual({ controls: { type: "land", tapped: false } });
     expect(brawlers.static[1]).toMatchObject({
       condition: { kind: "controls", filter: { type: "land", tapped: false }, atLeast: 1 },
       restrictions: ["cant-block"],
     });
     const dragon = face("Creature — Dragon", "This creature can't attack unless defending player controls a creature with flying.");
-    expect(dragon.static[0].cantAttackUnlessDefender).toEqual({ controls: { type: "creature", keyword: "flying" } });
+    expect(dragon.static[0].restrictions[0].unlessDefender).toEqual({ controls: { type: "creature", keyword: "flying" } });
     const orgg = face("Creature — Orgg", "This creature can't attack if defending player controls an untapped creature with power 3 or greater.");
-    expect(orgg.static[0].cantAttackIfDefender).toEqual({ controls: { type: "creature", tapped: false, power: { op: "gte", n: 3 } } });
+    expect(orgg.static[0].restrictions[0].ifDefender).toEqual({ controls: { type: "creature", tapped: false, power: { op: "gte", n: 3 } } });
     const toady = face(
       "Creature — Goblin",
       "This creature can't attack unless you control more creatures than defending player.\nThis creature can't block unless you control more creatures than attacking player.",
     );
-    expect(toady.static[0].cantAttackUnlessDefender).toEqual({ youControlMore: { type: "creature" } });
-    expect(toady.static[1].cantBlockUnlessAttacker).toEqual({ youControlMore: { type: "creature" } });
+    expect(toady.static[0].restrictions[0].unlessDefender).toEqual({ youControlMore: { type: "creature" } });
+    expect(toady.static[1].restrictions[0].unlessAttacking).toEqual({ youControlMore: { type: "creature" } });
     // "Unless attacking player" on an attack is no sentence the rules write.
     expect(face("Creature — Goblin", "This creature can't attack unless attacking player is poisoned.").static ?? []).toEqual([]);
   });
@@ -5957,7 +5957,7 @@ describe("blocking restrictions and requirements on one creature", () => {
   it("reads 'except by N or more creatures', on it or each creature you control with menace", () => {
     expect(face("Creature — Troll", "This creature can't be blocked except by three or more creatures.").static[0]).toEqual({
       affects: { scope: "self" },
-      blockedByAtLeast: 3,
+      restrictions: [{ kind: "cant-be-blocked", byFewerThan: 3 }],
       text: "This creature can't be blocked except by three or more creatures.",
     });
     const howl = face("Creature — Human Warrior", "Each creature you control with menace can't be blocked except by three or more creatures.");
@@ -5981,7 +5981,7 @@ describe("blocking restrictions and requirements on one creature", () => {
       defending({ kind: "not", of: { kind: "controls", filter: { type: "creature" }, atLeast: 3, sharingACreatureType: true } }),
     );
     const tromo = face("Legendary Creature — Kraken", "This creature can't be blocked unless all creatures defending player controls block it.");
-    expect(tromo.static[0].blockedOnlyByAll).toBe(true);
+    expect(tromo.static[0].restrictions[0].unlessAllBlock).toBe(true);
   });
 
   it("reads 'blocks each combat if able', 'attacks or blocks', and 'can't block ~ this turn'", () => {
@@ -5993,8 +5993,8 @@ describe("blocking restrictions and requirements on one creature", () => {
     expect(parseSentence("Target creature can't block ~ this turn.", ctx())).toEqual({
       kind: "restrict",
       target: 0,
-      restrictions: [],
-      cantBlockAttacker: "source",
+      restrictions: [{ kind: "cant-block", attacker: "source" }],
+      
     });
   });
 
@@ -7679,7 +7679,35 @@ describe("creatures in a blocking relation (blockingRelation)", () => {
   });
 });
 
-describe("attack requirements narrowed (attack-requirement, rule 508.1d)", () => {
+describe("one combat rule: the proving cards' sentences (theme 11)", () => {
+  const face = (name: string, type_line: string, oracle_text: string) =>
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
+  it("reads the shadow permission, Silver Surfer's timed requirement and 'except by Walls this turn'", () => {
+    const dryad = face("Heartwood Dryad", "Creature \u2014 Dryad", "This creature can block creatures with shadow as though it had shadow.");
+    expect(dryad.static[0].blocksAsThoughShadow).toBe(true);
+    const wall = face("Aetherflame Wall", "Creature \u2014 Wall", "This creature can block creatures with shadow as though they didn't have shadow.");
+    expect(wall.static[0].blocksAsThoughShadow).toBe(true);
+    const surfer = face(
+      "Silver Surfer, Galactus's Herald",
+      "Legendary Creature \u2014 Alien Hero",
+      "Whenever Silver Surfer deals combat damage to a player, until the end of your next turn, target creature attacks that player each combat if able.",
+    );
+    expect(surfer.triggered[0].effect).toEqual({
+      kind: "restrict",
+      target: 0,
+      restrictions: [{ kind: "must-attack", at: "trigger-player" }],
+      duration: "until-end-of-your-next-turn",
+    });
+    const crusader = face("Varchild's Crusader", "Creature \u2014 Human Knight", "{0}: This creature can't be blocked this turn except by Walls.");
+    expect(crusader.activated[0].effect).toEqual({
+      kind: "restrict",
+      target: "source",
+      restrictions: [{ kind: "cant-be-blocked", by: { notSubtypes: ["Wall"] } }],
+    });
+  });
+});
+
+describe("attack requirements narrowed (must-attack records, rule 508.1d)", () => {
   const face = (name: string, type_line: string, oracle_text: string) =>
     parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
 
@@ -7687,36 +7715,25 @@ describe("attack requirements narrowed (attack-requirement, rule 508.1d)", () =>
     const siren = face("Alluring Siren", "Creature — Siren", "{T}: Target creature an opponent controls attacks you this turn if able.");
     expect(siren.complete).toBe(true);
     expect(siren.activated[0].targets).toEqual(["creature-an-opponent-controls"]);
-    expect(siren.activated[0].effect).toEqual({ kind: "attack-requirement", target: 0, attacks: "you", duration: "end-of-turn" });
+    expect(siren.activated[0].effect).toEqual({ kind: "restrict", target: 0, restrictions: [{ kind: "must-attack", at: "you" }], duration: "end-of-turn" });
     const sirens = face("Dulcet Sirens", "Creature — Siren", "{U}, {T}: Target creature attacks target opponent this turn if able.");
     expect(sirens.activated[0].targets).toEqual(["creature", "opponent"]);
-    expect(sirens.activated[0].effect).toEqual({ kind: "attack-requirement", target: 0, attacks: 1, duration: "end-of-turn" });
+    expect(sirens.activated[0].effect).toEqual({ kind: "restrict", target: 0, restrictions: [{ kind: "must-attack", at: { target: 1 } }], duration: "end-of-turn" });
     const behemoth = face(
       "Test",
       "Creature — Kraken",
       "Landfall — Whenever a land you control enters, target creature an opponent controls attacks during its controller's next combat phase if able.",
     );
-    expect(behemoth.triggered[0].effect).toEqual({ kind: "attack-requirement", target: 0, duration: "during-its-controllers-next-combat" });
+    expect(behemoth.triggered[0].effect).toEqual({ kind: "restrict", target: 0, restrictions: ["must-attack"], duration: "during-its-controllers-next-combat" });
   });
 
   it("reads a target player's creatures' requirement, this turn or during their next", () => {
     const taunt = face("Taunt", "Sorcery", "During target player's next turn, creatures that player controls attack you if able.");
     expect(taunt.complete).toBe(true);
     expect(taunt.targets).toEqual(["player"]);
-    expect(taunt.effect).toEqual({
-      kind: "attack-requirement",
-      filter: { type: "creature" },
-      controlledByTarget: 0,
-      attacks: "you",
-      duration: { duringTurnOf: { target: 0 } },
-    });
+    expect(taunt.effect).toEqual({ kind: "restrict", filter: { controlledBy: "you", type: "creature" }, controlledByTarget: 0, restrictions: [{ kind: "must-attack", at: "you" }], duration: { duringTurnOf: { target: 0 } } });
     const threats = face("Test", "Instant", "Creatures target opponent controls attack this turn if able.");
-    expect(threats.effect).toEqual({
-      kind: "attack-requirement",
-      filter: { type: "creature" },
-      controlledByTarget: 0,
-      duration: "end-of-turn",
-    });
+    expect(threats.effect).toEqual({ kind: "restrict", filter: { controlledBy: "you", type: "creature" }, controlledByTarget: 0, restrictions: ["must-attack"], duration: "end-of-turn" });
   });
 });
 
@@ -9701,7 +9718,7 @@ describe("a cost on a creature to attack or block", () => {
     const line = (subject: string) => read("Enchantment", `${subject} can't attack you.`);
     expect(line("Creatures")).toMatchObject({
       affects: { scope: "filter", filter: { type: "creature" } },
-      cantAttackController: "player",
+      restrictions: [{ kind: "cant-attack", at: "you" }],
     });
     expect(line("Creatures with power 2 or less")).toMatchObject({
       affects: { filter: { type: "creature", power: { op: "lte", n: 2 } } },
@@ -9714,7 +9731,7 @@ describe("a cost on a creature to attack or block", () => {
     expect(line("Goblins and elves")).toBeNull();
     expect(read("Enchantment", "As long as you're the monarch, creatures with power 2 or less can't attack you.")).toMatchObject({
       condition: { kind: "monarch", who: "you" },
-      cantAttackController: "player",
+      restrictions: [{ kind: "cant-attack", at: "you" }],
     });
   });
 
@@ -9732,13 +9749,13 @@ describe("a cost on a creature to attack or block", () => {
       combatTax: { on: ["block"], life: 1, attacker: { controlledBy: "you" } },
     });
     expect(own("This creature can't attack a player it has already attacked this turn.")).toMatchObject({
-      restrictions: ["cant-attack-player-attacked-this-turn"],
+      restrictions: [{ kind: "cant-attack", at: "attacked-this-turn" }],
     });
   });
 
   it("reads creatures can't attack you for a while", () => {
     const escape = parseEffect("Until your next turn, creatures can't attack you.", ctx());
-    expect(escape.effect).toEqual({ kind: "player-effect", duration: "until-your-next-turn", cantAttack: "you" });
+    expect(escape.effect).toEqual({ kind: "restrict", filter: { type: "creature" }, restrictions: [{ kind: "cant-attack", at: "you" }], duration: "until-your-next-turn" });
   });
 
   it("reads a block tax for the turn", () => {
@@ -13541,39 +13558,39 @@ describe("requirements a whole declaration answers", () => {
     [
       "Creature — Cat",
       "This creature must be blocked by exactly one creature if able.",
-      { affects: { scope: "self" }, restrictions: ["must-be-blocked-by-exactly-one"] },
+      { affects: { scope: "self" }, restrictions: [{ kind: "must-be-blocked-if-able", exactlyOne: true }] },
     ],
     [
       "Artifact — Equipment",
       "Equipped creature gets +3/+1 and must be blocked by an Eldrazi if able.",
-      { affects: { scope: "attached" }, grantPt: [3, 1], mustBeBlockedBy: { by: { type: "creature", subtype: "Eldrazi" } } },
+      { affects: { scope: "attached" }, grantPt: [3, 1], restrictions: [{ kind: "must-be-blocked-if-able", by: { type: "creature", subtype: "Eldrazi" } }]},
     ],
     [
       "Creature — Minotaur",
       "All creatures with flying able to block this creature do so.",
-      { affects: { scope: "self" }, mustBeBlockedBy: { by: { type: "creature", keyword: "flying" }, all: true } },
+      { affects: { scope: "self" }, restrictions: [{ kind: "must-be-blocked", by: { type: "creature", keyword: "flying" } }]},
     ],
     [
       "Creature — Cleric",
       "All Walls able to block this creature do so.",
-      { affects: { scope: "self" }, mustBeBlockedBy: { by: { type: "creature", subtype: "Wall" }, all: true } },
+      { affects: { scope: "self" }, restrictions: [{ kind: "must-be-blocked", by: { type: "creature", subtype: "Wall" } }]},
     ],
     [
       "Creature — Lizard",
       "If this creature attacks, all creatures you control attack if able.",
-      { affects: { scope: "creatures-you-control" }, attacksIfAttacks: { isSource: true } },
+      { affects: { scope: "creatures-you-control" }, restrictions: [{ kind: "must-attack", ifAttacks: { isSource: true } }]},
     ],
     [
       "Creature — Cyclops",
       "If a creature you control attacks, this creature also attacks if able.",
-      { affects: { scope: "self" }, attacksIfAttacks: { type: "creature", controlledBy: "you" } },
+      { affects: { scope: "self" }, restrictions: [{ kind: "must-attack", ifAttacks: { type: "creature", controlledBy: "you" } }]},
     ],
     [
       "Creature — Giant",
       "Cowards can't block Warriors.",
       {
         affects: { scope: "filter", filter: { type: "creature", subtype: "Warrior" } },
-        cantBeBlockedBy: { subtype: "Coward" },
+        restrictions: [{ kind: "cant-be-blocked", by: { subtype: "Coward" } }],
       },
     ],
   ])("%s: %s", (type, text, expected) => {
@@ -13581,14 +13598,8 @@ describe("requirements a whole declaration answers", () => {
   });
 
   it("reads 'each creature blocks this turn if able' as a rule for the turn", () => {
-    expect(parseEffect("Each creature your opponents control blocks this turn if able.", ctx()).effect).toEqual({
-      kind: "block-if-able",
-      filter: { type: "creature", controlledBy: "opponent" },
-    });
-    expect(parseEffect("Each creature blocks this turn if able.", ctx()).effect).toEqual({
-      kind: "block-if-able",
-      filter: { type: "creature" },
-    });
+    expect(parseEffect("Each creature your opponents control blocks this turn if able.", ctx()).effect).toEqual({ kind: "restrict", filter: { type: "creature", controlledBy: "opponent" }, restrictions: ["must-block"] });
+    expect(parseEffect("Each creature blocks this turn if able.", ctx()).effect).toEqual({ kind: "restrict", filter: { type: "creature" }, restrictions: ["must-block"] });
   });
 });
 describe("oracle-parse: Commander's Plate", () => {

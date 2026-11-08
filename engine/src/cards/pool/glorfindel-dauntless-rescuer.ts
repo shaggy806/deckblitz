@@ -35,7 +35,7 @@ export default defineCard({
                   target: "source",
                   ability: {
                     affects: { scope: "self" },
-                    blockedByAtMostOne: true,
+                    restrictions: [{ kind: "cant-be-blocked", byMoreThan: 1 }],
                     text: "This creature can't be blocked by more than one creature.",
                   },
                   duration: "end-of-turn",

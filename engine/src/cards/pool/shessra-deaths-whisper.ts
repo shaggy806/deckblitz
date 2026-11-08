@@ -21,7 +21,7 @@ export default defineCard({
     {
       trigger: { on: "enters-battlefield", who: "self" },
       targets: ["creature"],
-      effect: { kind: "block-if-able", target: 0 },
+      effect: { kind: "restrict", target: 0, restrictions: ["must-block"] },
       resolve: null,
       text: WHISPERS,
     },

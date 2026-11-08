@@ -4,7 +4,7 @@ import { defineCard } from "../define.js";
 //
 // Rulings:
 //   [2024-07-05] Alexios can attack planeswalkers its owner controls and battles its owner
-//     protects. ("cant-attack-owner" names the player only.)
+//     protects. ({ kind: "cant-attack", at: "owner" } names the player only.)
 //   [2024-07-05] If Alexios is controlled by a player other than its owner and its controller
 //     leaves the game, the effect giving that player control of Alexios ends. Alexios will return
 //     to the control of the player still in the game who most recently controlled it.
@@ -39,7 +39,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      restrictions: ["must-attack", "cant-attack-owner"],
+      restrictions: ["must-attack", { kind: "cant-attack", at: "owner" }],
       cantBeSacrificed: true,
       text: STATIC_TEXT,
     },

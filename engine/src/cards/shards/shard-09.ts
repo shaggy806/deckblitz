@@ -945,6 +945,7 @@ import _poolVoraciousWurm from "../pool/voracious-wurm.js";
 import _poolVowOfTorment from "../pool/vow-of-torment.js";
 import _poolVraskaSwarmsEminence from "../pool/vraska-swarms-eminence.js";
 import _poolWallOfDenial from "../pool/wall-of-denial.js";
+import _poolWallOfDiffusion from "../pool/wall-of-diffusion.js";
 import _poolWallOfWonder from "../pool/wall-of-wonder.js";
 import _poolWanderingEye from "../pool/wandering-eye.js";
 import _poolWarBehemoth from "../pool/war-behemoth.js";
@@ -1958,6 +1959,7 @@ const shard: CardShard = {
     _poolVowOfTorment,
     _poolVraskaSwarmsEminence,
     _poolWallOfDenial,
+    _poolWallOfDiffusion,
     _poolWallOfWonder,
     _poolWanderingEye,
     _poolWarBehemoth,

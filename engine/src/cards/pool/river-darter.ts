@@ -11,5 +11,5 @@ export default defineCard({
   power: 2,
   toughness: 3,
   text: TEXT,
-  static: [{ affects: { scope: "self" }, cantBeBlockedBy: { subtype: "Dinosaur" }, text: TEXT }],
+  static: [{ affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", by: { subtype: "Dinosaur" } }], text: TEXT }],
 });

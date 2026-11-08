@@ -8,6 +8,7 @@
  * Equipment put on an opponent's creature (Bloodthirsty Blade), and a creature
  * that can't become suspected (Airtight Alibi).
  */
+import { hasRecord } from "./combat-probe.js";
 import { describe, expect, it } from "vitest";
 
 import { whyCannotAttack } from "../combat/eligibility.js";
@@ -211,7 +212,7 @@ describe("goaded while it has a counter", () => {
     game.debugApplyEffect(A, { kind: "remove-counter", target: 0, counter: "duty", amount: 1 }, [ref(bear)]);
     settle(game);
     expect(goaders(game, bear)).toEqual([]);
-    expect(game.state.objects[bear].modifiers.some((m) => m.cantAttackYou !== undefined)).toBe(false);
+    expect(hasRecord(game, bear, "cant-attack")).toBe(false);
     game.debugApplyEffect(A, { kind: "add-counter", target: 0, counter: "duty", amount: 1 }, [ref(bear)]);
     settle(game);
     expect(goaders(game, bear)).toEqual([]);

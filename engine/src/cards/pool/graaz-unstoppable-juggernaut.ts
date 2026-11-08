@@ -28,7 +28,7 @@ export default defineCard({
   static: [
     // Graaz and every creature its last ability makes a Juggernaut.
     { affects: { scope: "filter", filter: JUGGERNAUTS }, restrictions: ["must-attack"], text: ATTACKS },
-    { affects: { scope: "filter", filter: JUGGERNAUTS }, cantBeBlockedBy: { subtype: "Wall" }, text: WALLS },
+    { affects: { scope: "filter", filter: JUGGERNAUTS }, restrictions: [{ kind: "cant-be-blocked", by: { subtype: "Wall" } }], text: WALLS },
     // Kudo, King Among Bears' shape: layer 4 and layer 7b.
     {
       affects: { scope: "filter", filter: { type: "creature", controlledBy: "you" }, excludeSelf: true },

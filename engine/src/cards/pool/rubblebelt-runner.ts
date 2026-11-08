@@ -15,7 +15,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantBeBlockedBy: { type: "creature", token: true },
+      restrictions: [{ kind: "cant-be-blocked", by: { type: "creature", token: true } }],
       text: TEXT,
     },
   ],

@@ -35,7 +35,7 @@ export default defineCard({
     {
       affects: { scope: "filter", filter: { hostOfSource: true, attacking: true } },
       grantKeywords: ["first-strike"],
-      mustBeBlockedBy: { by: { type: "creature", subtype: "Dalek" } },
+      restrictions: [{ kind: "must-be-blocked-if-able", by: { type: "creature", subtype: "Dalek" } }],
       text: ATTACKING,
     },
   ],

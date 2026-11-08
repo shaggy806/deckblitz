@@ -12,7 +12,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantBeBlockedBy: { power: { op: "gte", n: 2 } },
+      restrictions: [{ kind: "cant-be-blocked", by: { power: { op: "gte", n: 2 } } }],
       text: "This creature can't be blocked by creatures with power 2 or greater.",
     },
   ],

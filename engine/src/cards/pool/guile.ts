@@ -20,7 +20,7 @@ export default defineCard({
   toughness: 6,
   text: `${BLOCK_TEXT}\n${COUNTER_TEXT}\n${SHUFFLE_TEXT}`,
   static: [
-    { affects: { scope: "self" }, blockedByAtLeast: 3, text: BLOCK_TEXT },
+    { affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", byFewerThan: 3 }], text: BLOCK_TEXT },
     { affects: { scope: "self" }, replacement: { event: "would-counter-spell" }, text: COUNTER_TEXT },
   ],
   triggered: [

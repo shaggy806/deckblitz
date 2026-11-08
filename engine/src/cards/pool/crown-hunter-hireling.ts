@@ -12,7 +12,7 @@ export default defineCard({
   power: 4,
   toughness: 4,
   text: `${MONARCH}\n${ATTACK}`,
-  static: [{ affects: { scope: "self" }, cantAttackUnlessDefender: { holds: { kind: "monarch", who: "you" } }, text: ATTACK }],
+  static: [{ affects: { scope: "self" }, restrictions: [{ kind: "cant-attack", unlessDefender: { holds: { kind: "monarch", who: "you" } } }], text: ATTACK }],
   triggered: [
     {
       trigger: { on: "enters-battlefield", who: "self" },

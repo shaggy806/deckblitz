@@ -12,11 +12,5 @@ export default defineCard({
   types: ["sorcery"],
   text: TEXT,
   targets: ["player"],
-  effect: {
-    kind: "attack-requirement",
-    filter: { type: "creature" },
-    controlledByTarget: 0,
-    attacks: "you",
-    duration: { duringTurnOf: { target: 0 } },
-  },
+  effect: { kind: "restrict", filter: { controlledBy: "you", type: "creature" }, controlledByTarget: 0, restrictions: [{ kind: "must-attack", at: "you" }], duration: { duringTurnOf: { target: 0 } } },
 });

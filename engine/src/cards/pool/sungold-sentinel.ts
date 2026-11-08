@@ -33,7 +33,7 @@ export default defineCard({
           kind: "sequence",
           effects: [
             { kind: "grant-protection", asHexproof: true, target: "source", from: { colors: [CHOSEN_COLOR] }, duration: "end-of-turn" },
-            { kind: "restrict", target: "source", restrictions: [], cantBeBlockedBy: { colors: [CHOSEN_COLOR] } },
+            { kind: "restrict", target: "source", restrictions: [{ kind: "cant-be-blocked", by: { colors: [CHOSEN_COLOR] } }]},
           ],
         },
       },

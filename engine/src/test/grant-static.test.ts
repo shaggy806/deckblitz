@@ -24,8 +24,8 @@ const canBlock = (offer: ReturnType<typeof blockOffer>, blocker: ObjectId): read
 const SMALL_CANT_BLOCK: EffectSpec = {
   kind: "restrict",
   target: 0,
-  restrictions: [],
-  cantBeBlockedBy: { type: "creature", power: { op: "lte", n: 2 } },
+  restrictions: [{ kind: "cant-be-blocked", by: { type: "creature", power: { op: "lte", n: 2 } } }],
+  
 };
 
 describe("restrict: can't be blocked by [filter] this turn", () => {
@@ -55,7 +55,7 @@ describe("restrict: can't be blocked by [filter] this turn", () => {
     const giant = spawn(game, "Hill Giant", A);
     const bears = spawn(game, "Grizzly Bears", B);
     const wall = spawn(game, "Wall of Air", B);
-    run(game, { kind: "restrict", target: 0, restrictions: [], cantBeBlockedBy: { not: { subtype: "Wall" } } }, giant);
+    run(game, { kind: "restrict", target: 0, restrictions: [{ kind: "cant-be-blocked", by: { not: { subtype: "Wall" } } }]}, giant);
     const offer = blockOffer(game, a, [giant]);
     expect(canBlock(offer, bears)).toEqual([]);
     expect(canBlock(offer, wall)).toEqual([giant]);
@@ -66,8 +66,8 @@ describe("restrict: can't be blocked by [filter] this turn", () => {
     run(game, {
       kind: "restrict",
       filter: { type: "creature", controlledBy: "you" },
-      restrictions: [],
-      cantBeBlockedBy: { type: "creature", power: { op: "lte", n: 2 } },
+      restrictions: [{ kind: "cant-be-blocked", by: { type: "creature", power: { op: "lte", n: 2 } } }],
+      
     });
     const giant = spawn(game, "Hill Giant", A);
     const bears = spawn(game, "Grizzly Bears", B);
@@ -83,7 +83,7 @@ describe("grant-static", () => {
     run(game, {
       kind: "grant-static",
       filter: { type: "creature", controlledBy: "you" },
-      ability: { affects: { scope: "self" }, blockedByAtMostOne: true, text: "This creature can't be blocked by more than one creature." },
+      ability: { affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", byMoreThan: 1 }], text: "This creature can't be blocked by more than one creature." },
       duration: "end-of-turn",
     });
     const later = spawn(game, "Hill Giant", A);

@@ -35,7 +35,7 @@ export default defineCard({
     },
     {
       affects: { scope: "self" },
-      cantBeBlockedBy: { power: { op: "lte", n: 2 } },
+      restrictions: [{ kind: "cant-be-blocked", by: { power: { op: "lte", n: 2 } } }],
       text: EVASION_TEXT,
     },
   ],

@@ -18,5 +18,5 @@ export default defineCard({
   toughness: 1,
   keywords: ["hexproof"],
   text: `Hexproof (This creature can't be the target of spells or abilities your opponents control.)\n${TEXT}`,
-  static: [{ affects: { scope: "self" }, cantBeBlockedBy: { notKeyword: "flying" }, text: TEXT }],
+  static: [{ affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", by: { notKeyword: "flying" } }], text: TEXT }],
 });

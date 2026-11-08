@@ -24,7 +24,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "filter", filter: { type: "creature", controlledBy: "opponent" } },
-      attacksIfAttacks: { type: "creature", controlledBy: "opponent" },
+      restrictions: [{ kind: "must-attack", ifAttacks: { type: "creature", controlledBy: "opponent" } }],
       text: ATTACK,
     },
   ],

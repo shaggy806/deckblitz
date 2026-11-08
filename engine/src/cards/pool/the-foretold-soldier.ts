@@ -22,7 +22,7 @@ export default defineCard({
   foretell: { cost: "{1}{G}" },
   static: [
     { affects: { scope: "self" }, restrictions: ["must-be-blocked-if-able"], text: "This creature must be blocked if able." },
-    { affects: { scope: "self" }, blockedByAtMostOne: true, text: "This creature can't be blocked by more than one creature." },
+    { affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", byMoreThan: 1 }], text: "This creature can't be blocked by more than one creature." },
   ],
   triggered: [
     {

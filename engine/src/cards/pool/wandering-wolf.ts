@@ -14,7 +14,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantBeBlockedBy: { power: { op: "lt", n: { amount: { powerOf: "source" } } } },
+      restrictions: [{ kind: "cant-be-blocked", by: { power: { op: "lt", n: { amount: { powerOf: "source" } } } } }],
       text: TEXT,
     },
   ],

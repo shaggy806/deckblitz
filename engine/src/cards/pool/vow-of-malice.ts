@@ -18,7 +18,7 @@ export default defineCard({
       affects: { scope: "attached" },
       grantPt: [2, 2],
       grantKeywords: ["intimidate"],
-      cantAttackController: true,
+      restrictions: [{ kind: "cant-attack", at: "you-and-planeswalkers" }],
       text: TEXT,
     },
   ],

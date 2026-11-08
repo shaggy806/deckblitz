@@ -25,7 +25,7 @@ export default defineCard({
         compare: { op: "gte", n: 8 },
       },
       targets: ["creature"],
-      effect: { kind: "block-if-able", target: 0, attacker: "source" },
+      effect: { kind: "restrict", target: 0, restrictions: [{ kind: "must-block", attacker: "source" }] },
       resolve: null,
       text: FORMIDABLE,
     },

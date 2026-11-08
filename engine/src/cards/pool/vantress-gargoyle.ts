@@ -15,7 +15,7 @@ export default defineCard({
   keywords: ["flying"],
   text: `Flying\n${ATTACK}\n${BLOCK}\n${MILL}`,
   static: [
-    { affects: { scope: "self" }, cantAttackUnlessDefender: { holds: { kind: "cards-in-graveyard", atLeast: 7 } }, text: ATTACK },
+    { affects: { scope: "self" }, restrictions: [{ kind: "cant-attack", unlessDefender: { holds: { kind: "cards-in-graveyard", atLeast: 7 } } }], text: ATTACK },
     { affects: { scope: "self" }, condition: { kind: "hand-size", atMost: 3 }, restrictions: ["cant-block"], text: BLOCK },
   ],
   activated: [

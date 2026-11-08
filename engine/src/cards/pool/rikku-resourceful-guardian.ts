@@ -29,8 +29,8 @@ export default defineCard({
       effect: {
         kind: "restrict",
         target: "trigger-object",
-        restrictions: [],
-        cantBeBlockedBy: { type: "creature", controlledBy: "opponent" },
+        restrictions: [{ kind: "cant-be-blocked", by: { type: "creature", controlledBy: "opponent" } }],
+        
       },
       resolve: null,
       text: TRIGGER_TEXT,

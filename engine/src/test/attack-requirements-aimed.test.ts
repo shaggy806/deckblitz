@@ -1,6 +1,7 @@
 /** Attack requirements narrowed (rule 508.1d) — the `attack-requirement`
  * effect's `target`, `controlledByTarget`, `attacks` and `duration`: Alluring
  * Siren, Taunt, Dulcet Sirens, Trench Behemoth and Imaginary Threats. */
+import { overGame } from "./combat-probe.js";
 import { describe, expect, it } from "vitest";
 
 import type { LegalAction } from "../actions.js";
@@ -54,7 +55,7 @@ describe("target creature attacks you this turn if able (Alluring Siren)", () =>
     expect(offer.defendersFor[bears]).toEqual([A]);
     expect(offer.defendersFor[other]).toEqual(expect.arrayContaining([A, C]));
     finishTurn(game);
-    expect(game.state.attackRequirements ?? []).toEqual([]);
+    expect(overGame(game)).toEqual([]);
   });
 
   it("binds nothing once the creature can't attack you", () => {
@@ -74,7 +75,8 @@ describe("target creature attacks you this turn if able (Alluring Siren)", () =>
     const bears = spawn(game, "Grizzly Bears", B);
     toPriority(game, B, "begin-combat", A);
     activate(game, siren, 0, { player: A, targets: [ref(bears)] });
-    game.state.objects[bears].zoneChangeCount = (game.state.objects[bears].zoneChangeCount ?? 0) + 2;
+    // Rule 400.7: a move takes the modifiers holding the requirement with it.
+    game.state.objects[bears].modifiers = [];
     expect(attackOffer(game, B).mustAttack).toEqual([]);
   });
 });
@@ -106,16 +108,15 @@ describe("during target player's next turn, creatures that player controls attac
     const bears = spawn(game, "Grizzly Bears", B);
     toPriority(game, B, "upkeep", A);
     // A sorcery can't be cast on bob's turn: Taunt's rule, put there by hand.
-    game.state.attackRequirements = [
-      {
-        by: A,
-        filter: { type: "creature" },
-        otherThanYou: false,
-        controlledBy: B,
-        attacks: A,
-        duration: { kind: "next-turn-of", player: B, after: game.state.turn.number },
+    (game.state.laterPlayerEffects ??= []).push({
+      turnOf: B,
+      after: game.state.turn.number,
+      effect: {
+        owner: A,
+        expires: "end-of-turn",
+        combat: { rules: [{ kind: "must-attack", at: { player: A }, you: A }], filter: { type: "creature", controlledBy: "you" }, side: B },
       },
-    ];
+    });
     expect(attackOffer(game, B).mustAttack).toEqual([]);
     finishTurn(game);
     expect(attackOffer(game, B).mustAttack).toEqual([bears]);
@@ -148,7 +149,7 @@ describe("target creature attacks during its controller's next combat phase (Tre
     finishTurn(game);
     finishTurn(game);
     expect(attackOffer(game, B).mustAttack).toEqual([]);
-    expect(game.state.attackRequirements ?? []).toEqual([]);
+    expect(overGame(game)).toEqual([]);
   });
 
   it("made during that player's combat, waits for their next one", () => {
@@ -203,15 +204,15 @@ describe("attacks a planeswalker if able (Gideon Jura's +2)", () => {
     const { game } = table({ players: 3 });
     const jace = spawn(game, "Jace Beleren");
     const bears = spawn(game, "Grizzly Bears", B);
-    game.state.attackRequirements = [
+    game.state.playerEffects = [
       {
-        by: A,
-        filter: { type: "creature" },
-        otherThanYou: false,
-        controlledBy: B,
-        attacks: jace,
-        attacksStint: game.state.objects[jace].zoneChangeCount ?? 0,
-        duration: { kind: "next-turn-of", player: B, after: game.state.turn.number },
+        owner: A,
+        expires: { untilTurnOf: A },
+        combat: {
+          rules: [{ kind: "must-attack", at: { object: jace, stint: game.state.objects[jace].zoneChangeCount ?? 0 }, you: A }],
+          filter: { type: "creature", controlledBy: "you" },
+          side: B,
+        },
       },
     ];
     const offer = attackOffer(game, B);
@@ -219,8 +220,16 @@ describe("attacks a planeswalker if able (Gideon Jura's +2)", () => {
     expect(offer.defendersFor[bears]).toEqual([jace]);
     finishTurn(game);
     // Jace left and came back: a new object the rule doesn't name.
-    game.state.attackRequirements = [
-      { by: A, filter: { type: "creature" }, otherThanYou: false, controlledBy: B, attacks: jace, attacksStint: 99 },
+    game.state.playerEffects = [
+      {
+        owner: A,
+        expires: { untilTurnOf: A },
+        combat: {
+          rules: [{ kind: "must-attack", at: { object: jace, stint: 99 }, you: A }],
+          filter: { type: "creature", controlledBy: "you" },
+          side: B,
+        },
+      },
     ];
     expect(attackOffer(game, B).mustAttack).toEqual([]);
   });

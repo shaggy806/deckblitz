@@ -30,8 +30,8 @@ export default defineCard({
       effect: {
         kind: "restrict",
         target: "source",
-        restrictions: [],
-        cantBeBlockedBy: { notKeyword: "haste" },
+        restrictions: [{ kind: "cant-be-blocked", by: { notKeyword: "haste" } }],
+        
       },
       resolve: null,
       text: DODGE,

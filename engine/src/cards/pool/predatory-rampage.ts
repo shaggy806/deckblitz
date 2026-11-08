@@ -12,7 +12,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "modify-pt-all", filter: { type: "creature", controlledBy: "you" }, power: 3, toughness: 3, duration: "end-of-turn" },
-      { kind: "block-if-able", filter: { type: "creature", controlledBy: "opponent" } },
+      { kind: "restrict", filter: { type: "creature", controlledBy: "opponent" }, restrictions: ["must-block"] },
     ],
   },
 });

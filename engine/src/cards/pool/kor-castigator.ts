@@ -18,7 +18,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantBeBlockedBy: { type: "creature", subtype: "Eldrazi", subtypes: ["Scion"] },
+      restrictions: [{ kind: "cant-be-blocked", by: { type: "creature", subtype: "Eldrazi", subtypes: ["Scion"] } }],
       text: TEXT,
     },
   ],

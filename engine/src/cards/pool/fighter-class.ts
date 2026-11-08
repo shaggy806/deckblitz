@@ -43,7 +43,7 @@ export default defineCard({
     atLevel(3, {
       trigger: { on: "attacks", who: "you-control" },
       targets: [{ kind: "optional", of: "creature" }],
-      effect: { kind: "block-if-able", target: 0, attacker: "trigger-object", thisCombat: true },
+      effect: { kind: "restrict", target: 0, restrictions: [{ kind: "must-block", attacker: "trigger-object" }], duration: "until-end-of-combat" },
       resolve: null,
       text: ATTACK_TEXT,
     }),

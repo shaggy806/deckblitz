@@ -315,6 +315,7 @@ import _poolFireNationSoldier from "../pool/fire-nation-soldier.js";
 import _poolFireNationTurret from "../pool/fire-nation-turret.js";
 import _poolFlameBurst from "../pool/flame-burst.js";
 import _poolFlameSpill from "../pool/flame-spill.js";
+import _poolFlashFoliage from "../pool/flash-foliage.js";
 import _poolFlashback from "../pool/flashback.js";
 import _poolFlowOfIdeas from "../pool/flow-of-ideas.js";
 import _poolFlower from "../pool/flower.js";
@@ -1302,6 +1303,7 @@ const shard: CardShard = {
     _poolFireNationTurret,
     _poolFlameBurst,
     _poolFlameSpill,
+    _poolFlashFoliage,
     _poolFlashback,
     _poolFlowOfIdeas,
     _poolFlower,

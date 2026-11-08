@@ -9,5 +9,5 @@ export default defineCard({
   types: ["sorcery"],
   text: "Target creature blocks this turn if able.",
   targets: ["creature"],
-  effect: { kind: "block-if-able", target: 0 },
+  effect: { kind: "restrict", target: 0, restrictions: ["must-block"] },
 });

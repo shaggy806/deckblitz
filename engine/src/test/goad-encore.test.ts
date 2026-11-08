@@ -7,6 +7,7 @@
  * legal. Encore is the positive form: "attacks **that** opponent if able".
  */
 
+import { aimedAt } from "./combat-probe.js";
 import { describe, expect, it } from "vitest";
 
 import { Game } from "../game.js";
@@ -128,7 +129,7 @@ describe("encore", () => {
       (id) => game.state.objects[id].isToken && game.state.objects[id].controller === A,
     );
     expect(tokens.length).toBe(2);
-    const aimed = tokens.map((id) => game.state.objects[id].mustAttackPlayer).sort();
+    const aimed = tokens.map((id) => aimedAt(game, id)).sort();
     expect(aimed).toEqual([B, C].sort());
     for (const id of tokens) {
       expect(game.characteristics(id).keywords.has("haste")).toBe(true);

@@ -11,5 +11,5 @@ export default defineCard({
   power: 4,
   toughness: 3,
   text: TEXT,
-  static: [{ affects: { scope: "creatures-you-control" }, attacksIfAttacks: { isSource: true }, text: TEXT }],
+  static: [{ affects: { scope: "creatures-you-control" }, restrictions: [{ kind: "must-attack", ifAttacks: { isSource: true } }], text: TEXT }],
 });

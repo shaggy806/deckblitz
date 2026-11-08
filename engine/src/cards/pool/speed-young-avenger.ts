@@ -27,7 +27,7 @@ export default defineCard({
         effect: {
           kind: "reflexive-trigger",
           targets: [{ kind: "permanent", filter: { type: "creature", keyword: "haste" } }],
-          effect: { kind: "restrict", target: 0, restrictions: [], cantBeBlockedBy: { notKeyword: "haste" } },
+          effect: { kind: "restrict", target: 0, restrictions: [{ kind: "cant-be-blocked", by: { notKeyword: "haste" } }]},
           text: "Target creature with haste can't be blocked this turn except by creatures with haste.",
         },
       },

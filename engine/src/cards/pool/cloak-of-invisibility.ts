@@ -16,7 +16,7 @@ export default defineCard({
     {
       affects: { scope: "attached" },
       grantKeywords: ["phasing"],
-      cantBeBlockedBy: { notSubtypes: ["Wall"] },
+      restrictions: [{ kind: "cant-be-blocked", by: { notSubtypes: ["Wall"] } }],
       text: STATIC_TEXT,
     },
   ],

@@ -17,14 +17,14 @@ export default defineCard({
     {
       cost: { mana: "{1}", tap: false },
       targets: [ARTIFACT_CREATURE],
-      effect: { kind: "block-if-able", target: 0, attacker: "source" },
+      effect: { kind: "restrict", target: 0, restrictions: [{ kind: "must-block", attacker: "source" }] },
       resolve: null,
       text: LURE,
     },
     {
       cost: { mana: "{1}", tap: false },
       targets: [ARTIFACT_CREATURE],
-      effect: { kind: "restrict", target: 0, restrictions: [], cantBlockAttacker: "source" },
+      effect: { kind: "restrict", target: 0, restrictions: [{ kind: "cant-block", attacker: "source" }]},
       resolve: null,
       text: EVADE,
     },

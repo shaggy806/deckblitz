@@ -17,7 +17,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "filter", filter: { type: "creature", controlledBy: "you", power: { op: "gte", n: 4 } } },
-      blockedByAtMostOne: true,
+      restrictions: [{ kind: "cant-be-blocked", byMoreThan: 1 }],
       text: TEXT,
     },
   ],

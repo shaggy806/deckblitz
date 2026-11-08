@@ -31,7 +31,8 @@ import type {
   CardDefinition,
   CardRegistry,
   CardType,
-  CombatRestriction,
+  CombatRule,
+  CombatWord,
   ConditionPlayer,
   CountSpec,
   StaticPlayerAggregate,
@@ -82,6 +83,7 @@ import type {
   GameObject,
   GameState,
   LastKnownInfo,
+  PlayerEffect,
   PtModifier,
   SpellGrantThisTurn,
   JournalWhat,
@@ -1541,7 +1543,7 @@ export interface Characteristics {
   readonly controller: PlayerId;
   /** Combat restrictions from static abilities (Pacifism, Juggernaut) and
    * from `restrict` effects' modifiers. */
-  readonly restrictions: ReadonlySet<CombatRestriction>;
+  readonly restrictions: ReadonlySet<CombatWord>;
   /** It assigns combat damage equal to its toughness rather than its power
    * (a `combatDamageByToughness` static — Doran, the Siege Tower), already
    * resolved against its final P/T for the `"if-toughness-greater"` form.
@@ -4309,7 +4311,7 @@ function filterReadsPt(filter: CardFilter): boolean {
  * reach P/T, so `restrictionsOf` applies these after the fold rather than in it.
  */
 function isPtScopedRestriction(ability: StaticAbility): boolean {
-  return ability.restrictions !== undefined && ability.affects.scope === "filter" && filterReadsPt(ability.affects.filter);
+  return hasRestrictionWord(ability) && ability.affects.scope === "filter" && filterReadsPt(ability.affects.filter);
 }
 
 /**
@@ -4977,7 +4979,7 @@ interface AppliedEffect {
   readonly ownAt: number;
   /** Toxic N it grants (`grantToxic`), 0 for none. */
   readonly toxic: number;
-  readonly restrictions: readonly CombatRestriction[];
+  readonly restrictions: readonly CombatRule[];
   readonly combatDamageByToughness: StaticAbility["combatDamageByToughness"];
   readonly canAttackAsThoughNoDefender: boolean;
   readonly canAttackAttackersDespiteDefender: boolean;
@@ -5113,7 +5115,7 @@ function contributesToCharacteristics(ability: StaticAbility): boolean {
     ability.loseKeywords !== undefined ||
     ability.cantHaveKeywords !== undefined ||
     ability.grantToxic !== undefined ||
-    ability.restrictions !== undefined ||
+    hasRestrictionWord(ability) ||
     ability.combatDamageByToughness !== undefined ||
     (ability.canAttackAsThoughNoDefender !== undefined && ability.canAttackAsThoughNoDefender !== false) ||
     ability.assignAsThoughUnblocked === true ||
@@ -5674,7 +5676,7 @@ function computeCharacteristicsUncached(
   // timestamp order (below).
   // `collectStaticEffects` already includes a permanent's own `"self"`
   // restriction static (Juggernaut) as well as external ones (Pacifism).
-  const restrictions = new Set<CombatRestriction>();
+  const restrictions = new Set<CombatWord>();
   const protColors = new Set<Color>();
   const protTypes = new Set<CardType>();
   const protFilters: CardFilter[] = [];
@@ -5718,7 +5720,7 @@ function computeCharacteristicsUncached(
     // Each grant is one more instance of toxic, and instances add up (rule
     // 702.164b).
     if (granted) toxic += effect.toxic;
-    for (const r of effect.restrictions) restrictions.add(r);
+    for (const r of effect.restrictions) if (typeof r === "string") restrictions.add(r);
     if (effect.combatDamageByToughness !== undefined && byToughness !== "always") {
       byToughness = effect.combatDamageByToughness;
     }
@@ -5787,7 +5789,7 @@ function computeCharacteristicsUncached(
         if (!lostAfter(losses, keyword, modifier.timestamp)) keywords.add(keyword);
       }
     }
-    for (const r of modifier.restrictions ?? []) restrictions.add(r);
+    for (const r of modifier.restrictions ?? []) if (typeof r === "string") restrictions.add(r);
     // A granted "This creature can't be sacrificed" is an ability, and goes
     // with a later loss like a granted keyword.
     if (granted && modifier.cantBeSacrificed === true) cantBeSacrificed = true;
@@ -6127,27 +6129,40 @@ export function assignedCombatDamage(
   return combatDamageOf(computeCharacteristics(state, registry, id));
 }
 
-/** Whether a turn-wide `restrict` rule (`GameState.turnRestrictions`) binds
- * `id` now: it matches the rule's filter from `you`'s side, and isn't the
- * permanent the rule leaves out (`except`, the same object only — 400.7). */
-export function turnRuleCovers(
+/** Whether a static says a combat rule with no parameters (a `CombatWord`):
+ * those are read in the fold; the records aren't (`combat/rules.ts`). */
+function hasRestrictionWord(ability: StaticAbility): boolean {
+  return ability.restrictions !== undefined && ability.restrictions.some((r) => typeof r === "string");
+}
+
+/** The player effects carrying a combat rule, memoized per cache region:
+ * almost always none. */
+export function combatPlayerEffects(state: GameState): readonly PlayerEffect[] {
+  return computedCacheMemo("combat-player-effects", () => (state.playerEffects ?? []).filter((e) => e.combat !== undefined));
+}
+
+/** Whether a `PlayerEffect.combat` binds `id` now: it matches the filter from
+ * `side`'s side, is controlled by whom it says, and isn't the permanent left
+ * out (`except`, the same object only — rule 400.7). */
+export function playerEffectCovers(
   state: GameState,
   registry: CardRegistry,
   id: ObjectId,
-  rule: NonNullable<GameState["turnRestrictions"]>[number],
+  combat: NonNullable<PlayerEffect["combat"]>,
 ): boolean {
-  const except = rule.except;
-  if (except !== undefined && except.object === id && (state.objects[id]?.zoneChangeCount ?? 0) === except.zoneChangeCount) {
-    return false;
-  }
-  return matchesFilter(state, registry, id, rule.filter, { you: rule.you });
+  const object = state.objects[id];
+  if (object === undefined || object.zone !== "battlefield") return false;
+  if (combat.controlledBy !== undefined && object.controller !== combat.controlledBy) return false;
+  const except = combat.except;
+  if (except !== undefined && except.object === id && (object.zoneChangeCount ?? 0) === except.zoneChangeCount) return false;
+  return matchesFilter(state, registry, id, combat.filter, { you: combat.side });
 }
 
 /**
- * Combat restrictions on `id`: from static abilities (Pacifism, Juggernaut)
- * and `restrict` modifiers — the characteristics' own — plus any turn-wide
- * `restrict` rule it matches (`GameState.turnRestrictions`). Every legality
- * check reads restrictions through here.
+ * The combat words on `id`: from static abilities (Pacifism, Juggernaut) and
+ * modifiers — the characteristics' own — plus any rule over the game it
+ * matches (`PlayerEffect.combat`). Every legality check reads the words
+ * through here, and the records through `combat/rules.ts`'s `recordsOn`.
  *
  * A free function so the combat predicates can be lifted out of `Game`
  * without dragging `this` along — see `combat/eligibility.ts`.
@@ -6156,25 +6171,25 @@ export function restrictionsOf(
   state: GameState,
   registry: CardRegistry,
   id: ObjectId,
-): ReadonlySet<CombatRestriction> {
+): ReadonlySet<CombatWord> {
   const own = computeCharacteristics(state, registry, id).restrictions;
-  let out: Set<CombatRestriction> | null = null;
+  let out: Set<CombatWord> | null = null;
   const target = state.objects[id];
   for (const { source, ability } of ptScopedRestrictionSources(state, registry)) {
     if (target === undefined || !staticAffects(state, registry, ability.affects, source, target)) continue;
     if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
     out ??= new Set(own);
-    for (const r of ability.restrictions ?? []) out.add(r);
+    for (const r of ability.restrictions ?? []) if (typeof r === "string") out.add(r);
   }
-  // A turn-wide rule ("creatures your opponents control can't block this
+  // A rule over the game ("creatures your opponents control can't block this
   // turn") binds whatever matches it now, so it's matched here, outside the
   // fold, rather than baked into the characteristics.
-  const rules = state.turnRestrictions;
-  if (rules === undefined || rules.length === 0) return out ?? own;
-  for (const rule of rules) {
-    if (!turnRuleCovers(state, registry, id, rule)) continue;
+  for (const effect of combatPlayerEffects(state)) {
+    const combat = effect.combat;
+    if (combat === undefined || combat.rules.every((r) => typeof r !== "string")) continue;
+    if (!playerEffectCovers(state, registry, id, combat)) continue;
     out ??= new Set(own);
-    for (const r of rule.restrictions) out.add(r);
+    for (const r of combat.rules) if (typeof r === "string") out.add(r);
   }
   return out ?? own;
 }

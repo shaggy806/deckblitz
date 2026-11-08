@@ -24,7 +24,7 @@ export default defineCard({
     {
       cost: { mana: "{G}", tap: true },
       targets: ["creature"],
-      effect: { kind: "block-if-able", target: 0 },
+      effect: { kind: "restrict", target: 0, restrictions: ["must-block"] },
       resolve: null,
       text: "{G}, {T}: Target creature blocks this turn if able.",
     },

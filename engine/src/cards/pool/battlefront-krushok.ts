@@ -12,7 +12,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      blockedByAtMostOne: true,
+      restrictions: [{ kind: "cant-be-blocked", byMoreThan: 1 }],
       text: "This creature can't be blocked by more than one creature.",
     },
     {
@@ -20,7 +20,7 @@ export default defineCard({
         scope: "filter",
         filter: { type: "creature", controlledBy: "you", counters: { kind: "+1/+1", compare: { op: "gte", n: 1 } } },
       },
-      blockedByAtMostOne: true,
+      restrictions: [{ kind: "cant-be-blocked", byMoreThan: 1 }],
       text: "Each creature you control with a +1/+1 counter on it can't be blocked by more than one creature.",
     },
   ],

@@ -13,5 +13,5 @@ export default defineCard({
   power: 3,
   toughness: 3,
   text: TEXT,
-  static: [{ affects: { scope: "self" }, cantBeBlockedBy: { colors: ["B"] }, text: TEXT }],
+  static: [{ affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", by: { colors: ["B"] } }], text: TEXT }],
 });

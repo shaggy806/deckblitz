@@ -14,7 +14,7 @@ export default defineCard({
   power: 4,
   toughness: 4,
   text: `${TRIGGER}\n${RESTRICTION}`,
-  static: [{ affects: { scope: "self" }, restrictions: ["cant-attack-player-attacked-this-turn"], text: RESTRICTION }],
+  static: [{ affects: { scope: "self" }, restrictions: [{ kind: "cant-attack", at: "attacked-this-turn" }], text: RESTRICTION }],
   triggered: [
     {
       trigger: { on: "deals-combat-damage-to-player", who: "self" },

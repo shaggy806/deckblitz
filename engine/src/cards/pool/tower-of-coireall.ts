@@ -10,7 +10,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: true },
       targets: ["creature"],
-      effect: { kind: "restrict", target: 0, restrictions: [], cantBeBlockedBy: { subtype: "Wall" } },
+      effect: { kind: "restrict", target: 0, restrictions: [{ kind: "cant-be-blocked", by: { subtype: "Wall" } }]},
       resolve: null,
       text: "{T}: Target creature can't be blocked by Walls this turn.",
     },

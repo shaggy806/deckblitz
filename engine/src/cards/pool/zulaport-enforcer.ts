@@ -20,7 +20,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: levelBand(3),
-      cantBeBlockedBy: { notColors: ["B"] },
+      restrictions: [{ kind: "cant-be-blocked", by: { notColors: ["B"] } }],
       text: "This creature can't be blocked except by black creatures.",
     },
   ],

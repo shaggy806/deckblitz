@@ -7,6 +7,7 @@
  * turn-wide rule over a name or every creature (Leitmotif Composer, Veiling
  * Oddity), binding a creature that arrives later.
  */
+import { blockRecords } from "./combat-probe.js";
 import { describe, expect, it } from "vitest";
 
 import { restrictionsOf } from "../characteristics.js";
@@ -76,7 +77,7 @@ describe("a turn-wide restriction over a target player's creatures", () => {
     expect(game.state.objects[marked].tapped).toBe(false);
     expect(bound(t, marked).has("cant-block")).toBe(false);
     expect(bound(t, other).has("cant-block")).toBe(true);
-    expect(game.state.blockRequirements?.some((r) => r.blocker === marked)).toBe(true);
+    expect(blockRecords(game).some((r) => r.blocker === marked)).toBe(true);
     const later = spawn(game, "Grizzly Bears", B);
     expect(bound(t, later).has("cant-block")).toBe(true);
   });

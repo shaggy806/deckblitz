@@ -14,7 +14,7 @@ export default defineCard({
       grantPt: [3, 3],
       grantKeywords: ["trample"],
       // "You" is the Aura's controller (Vow of Duty's shape).
-      cantAttackController: true,
+      restrictions: [{ kind: "cant-attack", at: "you-and-planeswalkers" }],
       text: "Enchanted creature gets +3/+3, has trample, and can't attack you or planeswalkers you control.",
     },
   ],

@@ -16,7 +16,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "attached" },
-      cantBeBlockedBy: { colors: ["G"] },
+      restrictions: [{ kind: "cant-be-blocked", by: { colors: ["G"] } }],
       text: "Enchanted creature can't be blocked by green creatures.",
     },
     {

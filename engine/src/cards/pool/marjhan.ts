@@ -17,7 +17,7 @@ export default defineCard({
   text: `${NO_UNTAP}\n${UNTAP}\n${ATTACK}\n${PING}\n${SACRIFICE}`,
   static: [
     { affects: { scope: "self" }, doesntUntap: true, text: NO_UNTAP },
-    { affects: { scope: "self" }, cantAttackUnlessDefender: { controls: { subtype: "Island" } }, text: ATTACK },
+    { affects: { scope: "self" }, restrictions: [{ kind: "cant-attack", unlessDefender: { controls: { subtype: "Island" } } }], text: ATTACK },
   ],
   activated: [
     {

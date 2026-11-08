@@ -31,7 +31,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      restrictions: ["must-attack", "cant-attack-owner", "cant-attack-owner-planeswalkers"],
+      restrictions: ["must-attack", { kind: "cant-attack", at: "owner" }, { kind: "cant-attack", at: "owner-planeswalkers" }],
       text: ATTACKS,
     },
   ],

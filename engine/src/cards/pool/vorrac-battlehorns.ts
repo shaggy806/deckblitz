@@ -15,7 +15,7 @@ export default defineCard({
     {
       affects: { scope: "attached" },
       grantKeywords: ["trample"],
-      blockedByAtMostOne: true,
+      restrictions: [{ kind: "cant-be-blocked", byMoreThan: 1 }],
       text: GRANT,
     },
   ],

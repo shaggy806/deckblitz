@@ -24,7 +24,7 @@ export default defineCard({
   power: 4,
   toughness: 4,
   text: `${ISLAND}\n${BONUS}\n${SACRIFICE}`,
-  static: [{ affects: { scope: "self" }, cantAttackUnlessDefender: { controls: { subtype: "Island" } }, text: ISLAND }],
+  static: [{ affects: { scope: "self" }, restrictions: [{ kind: "cant-attack", unlessDefender: { controls: { subtype: "Island" } } }], text: ISLAND }],
   triggered: [
     {
       trigger: { on: "blocks", who: "self", object: "blocked" },

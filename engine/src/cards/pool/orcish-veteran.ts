@@ -19,7 +19,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      canBlockOnly: { anyOf: [{ notColors: ["W"] }, { power: { op: "lte", n: 1 } }] },
+      restrictions: [{ kind: "cant-block", attackers: { not: { anyOf: [{ notColors: ["W"] }, { power: { op: "lte", n: 1 } }] } } }],
       text: NO_BLOCK,
     },
   ],

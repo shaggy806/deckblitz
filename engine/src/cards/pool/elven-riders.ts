@@ -18,7 +18,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantBeBlockedBy: { notSubtypes: ["Wall"], notKeyword: "flying" },
+      restrictions: [{ kind: "cant-be-blocked", by: { notSubtypes: ["Wall"], notKeyword: "flying" } }],
       text: TEXT,
     },
   ],

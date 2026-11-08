@@ -20,29 +20,27 @@ import {
   computedCacheMemo,
   computeCharacteristics,
   effectiveTypes,
-  grantedStatics,
   withComputedCache,
   hasLostAbilities,
   objHasKeyword,
   restrictionsOf,
-  turnRuleCovers,
   canAttackDespiteDefender,
   staticAffects,
   staticConditionMet,
-  staticReaches,
 } from "../characteristics.js";
-import type { PlayerTest, StaticAbility } from "../cards.js";
-import type { EffectAmount } from "../effects.js";
+import type { StaticAbility } from "../cards.js";
 import type { CardFilter } from "../filter.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
-import { matchesFilter, weightedMatches } from "../filter.js";
+import { matchesFilter } from "../filter.js";
 import { goadersOf, sourceAmount } from "../goad.js";
 import { hasRingBearerDesignation } from "../ring.js";
-import { attackRequirementActive, printedCardName, rulesTextName } from "../state.js";
-import type { AttackRequirementRule, GameObject, GameState } from "../state.js";
+import { printedCardName, rulesTextName } from "../state.js";
+import type { GameObject, GameState } from "../state.js";
 import { LANDWALK } from "../subtypes.js";
 import { permanentSource, protectionBlocks } from "../targeting.js";
-import { attackCovers } from "./tax.js";
+import { aimNames, playerTestHolds, recordsOfKind, recordsOn } from "./rules.js";
+import type { AttackAim, AttackerAim, CantAttack, CantBlock, MustAttack, RuleInForce } from "./rules.js";
+
 
 /** The landwalk keywords some permanent's static says creatures "can be
  * blocked as though they didn't have" (Quagmire, Lord Magnus), `"landwalk"`
@@ -75,6 +73,28 @@ export function blocksDespiteLandwalk(state: GameState, registry: CardRegistry, 
       if (hasLostAbilities(state, registry, source)) continue;
       for (const ability of registry.get(rulesTextName(source)).static) {
         if (ability.blocksDespiteLandwalk === true) out.push({ source, ability });
+      }
+    }
+    return out;
+  });
+  return sources.some(
+    ({ source, ability }) =>
+      staticAffects(state, registry, ability.affects, source, blocker) &&
+      (ability.condition === undefined || staticConditionMet(state, registry, source, ability.condition)),
+  );
+}
+
+/** Whether a static lets `blocker` block creatures with shadow (Wall of
+ * Diffusion, Aether Web): the statics carrying it, memoized per cache region. */
+function blocksAsThoughShadow(state: GameState, registry: CardRegistry, blocker: GameObject): boolean {
+  const sources = computedCacheMemo("blocks-as-though-shadow", () => {
+    const out: { readonly source: GameObject; readonly ability: StaticAbility }[] = [];
+    for (const id of state.zones.shared.battlefield) {
+      const source = state.objects[id];
+      if (source === undefined || state.players[source.controller]?.hasLost === true) continue;
+      if (hasLostAbilities(state, registry, source)) continue;
+      for (const ability of registry.get(rulesTextName(source)).static) {
+        if (ability.blocksAsThoughShadow === true) out.push({ source, ability });
       }
     }
     return out;
@@ -269,17 +289,8 @@ function whyCannotAttackUncached(
   ) {
     return `${def.name} has defender and cannot attack`;
   }
-  const restrictions = restrictionsOf(state, registry, creatureId);
-  if (restrictions.has("cant-attack")) {
+  if (restrictionsOf(state, registry, creatureId).has("cant-attack")) {
     return `${def.name} can't attack`;
-  }
-  // "Only land creatures can attack during that combat phase" (Bumi,
-  // Unleashed): a restriction on every creature that doesn't match (rule
-  // 508.1c), read as attackers are declared.
-  for (const { owner, onlyAttackers } of state.playerEffects ?? []) {
-    if (onlyAttackers !== undefined && !matchesFilter(state, registry, creatureId, onlyAttackers, { you: owner })) {
-      return `${def.name} can't attack this combat`;
-    }
   }
   if (
     asOf.nextTurn !== true &&
@@ -294,152 +305,43 @@ function whyCannotAttackUncached(
       : "attackers can only attack an opponent who hasn't already lost";
   }
   if (!canBeAttacked(state, registry, target)) return `${def.name} can't attack that permanent: it can't be attacked`;
-  // "They can't attack you or planeswalkers you control that combat"
-  // (Illusionist's Gambit): a battle you protect isn't either.
-  const avoid = object.boundThisCombat?.avoid;
-  if (
-    avoid !== undefined &&
-    (target === avoid || (isPlaneswalkerTarget(state, target) && state.objects[target as ObjectId]?.controller === avoid))
-  ) {
-    return `${def.name} can't attack that player or their planeswalkers this combat`;
-  }
   const defendingPlayer = defendingPlayerOf(state, target);
-  // The owner, not their planeswalkers: a creature attacks a player or a
-  // planeswalker (rule 508.1b), and "can't attack its owner" names only the
-  // player (Alexios, Deimos of Kosmos's ruling).
-  if (restrictions.has("cant-attack-owner") && target === object.owner) {
-    return `${def.name} can't attack its owner`;
-  }
-  if (
-    restrictions.has("cant-attack-owner-planeswalkers") &&
-    isPlaneswalkerTarget(state, target) &&
-    state.objects[target as ObjectId]?.controller === object.owner
-  ) {
-    return `${def.name} can't attack a planeswalker its owner controls`;
-  }
-  if (
-    restrictions.has("cant-attack-player-attacked-this-turn") &&
-    object.attackedPlayersThisTurn?.includes(target as PlayerId) === true
-  ) {
-    return `${def.name} can't attack a player it has already attacked this turn`;
-  }
   const nearest = nearestOpponentRule(state, registry, player);
   if (nearest !== null && !nearest.includes(defendingPlayer)) {
     return nearest.length === 0
       ? `${def.name} can't attack: the directions chosen disagree, so there's no opponent to attack`
       : `${def.name} may attack only ${nearest[0]} (the nearest opponent in the chosen direction)`;
   }
-  // "Can't attack you or planeswalkers you control" — "you" is the
-  // controller of the permanent saying so, not of the creature: the Aura on
-  // it (Vow of Duty), or a static reaching it (Eriette of the Charmed
-  // Apple's creatures enchanted by an Aura you control).
-  // "Can't attack unless defending player controls an Island" (rule 508.1c),
-  // asked of the player this attack would defend against.
-  for (const ability of ownStatics(state, registry, object)) {
-    if (
-      (ability.cantAttackUnlessDefender !== undefined &&
-        !playerTestHolds(state, registry, ability.cantAttackUnlessDefender, defendingPlayer, object)) ||
-      (ability.cantAttackIfDefender !== undefined &&
-        playerTestHolds(state, registry, ability.cantAttackIfDefender, defendingPlayer, object))
-    ) {
-      return `${def.name} can't attack ${defendingPlayer}`;
-    }
-  }
-  for (const id of state.zones.shared.battlefield) {
-    const source = state.objects[id];
-    if (source.controller !== defendingPlayer || hasLostAbilities(state, registry, source)) continue;
-    for (const ability of registry.get(rulesTextName(source)).static) {
-      if (ability.cantAttackController === undefined || ability.cantAttackController === false) continue;
-      // Neither form names a battle (rule 310.5): one they protect may be attacked.
-      const covers = ability.cantAttackController === "player" ? "you" : "you-and-planeswalkers";
-      if (!attackCovers(state, registry, covers, source.controller, target)) continue;
-      if (!staticReaches(state, registry, source, ability, object)) continue;
-      if (
-        ability.condition !== undefined &&
-        !staticConditionMet(state, registry, source, ability.condition)
-      ) {
-        continue;
-      }
-      return `${def.name} can't attack ${defendingPlayer}`;
-    }
-  }
-  // "Can't attack you or a permanent you control" (Immortal Obligation), or
-  // "you or planeswalkers you control" (Promise of Loyalty): on this creature,
-  // however long the modifier lasts, whoever controls it now.
-  for (const { cantAttackYou, cantAttackYouCovers } of object.modifiers) {
-    if (cantAttackYou === undefined) continue;
-    if (
-      cantAttackYouCovers !== undefined
-        ? attackCovers(state, registry, cantAttackYouCovers, cantAttackYou, target)
-        : target === cantAttackYou || state.objects[target as ObjectId]?.controller === cantAttackYou
-    ) {
-      return `${def.name} can't attack ${defendingPlayer}`;
-    }
-  }
-  // "Until your next turn, creatures can't attack you" (Chronomantic Escape):
-  // a player effect, binding creatures that weren't there when it began.
-  for (const { owner, cantAttack, cantAttackBy } of state.playerEffects ?? []) {
-    if (cantAttack === undefined || (cantAttackBy !== undefined && cantAttackBy !== object.controller)) continue;
-    if (
-      typeof cantAttack === "object"
-        ? isPlaneswalkerTarget(state, target) &&
-          matchesFilter(state, registry, target as ObjectId, cantAttack.planeswalkers, { you: owner })
-        : attackCovers(state, registry, cantAttack, owner, target)
-    ) {
+  // "Can't attack you or planeswalkers you control" (Vow of Duty), "can't
+  // attack unless defending player controls an Island" (rule 508.1c, asked of
+  // the player this attack would defend against), "until your next turn,
+  // creatures can't attack you" (Chronomantic Escape): every record.
+  for (const force of recordsOfKind(state, registry, creatureId, "cant-attack")) {
+    if (attackRefused(state, registry, force, object, target, defendingPlayer)) {
+      const { at } = force.rule;
+      if (at === "owner") return `${def.name} can't attack its owner`;
+      if (at === "owner-planeswalkers") return `${def.name} can't attack a planeswalker its owner controls`;
+      if (at === "attacked-this-turn") return `${def.name} can't attack a player it has already attacked this turn`;
       return `${def.name} can't attack ${defendingPlayer}`;
     }
   }
   return null;
 }
 
-/** A permanent's own static abilities about itself (`affects: { scope:
- * "self" }`) that apply now: none once it has lost its abilities, and none
- * whose condition fails. */
-function ownStatics(state: GameState, registry: CardRegistry, object: GameObject): readonly StaticAbility[] {
-  const printed = hasLostAbilities(state, registry, object) ? [] : registry.get(rulesTextName(object)).static;
-  // And any a `grant-static` gave it (Veiled Serpent's "it becomes a 4/4
-  // Serpent creature with 'This creature can't attack unless …'"), which a
-  // loss of all abilities earlier than the grant leaves (rule 613.7).
-  const granted = grantedStatics(
-    state,
-    registry,
-    object,
-    (a) => a.cantAttackUnlessDefender !== undefined || a.cantAttackIfDefender !== undefined || a.cantBlockUnlessAttacker !== undefined,
-  );
-  return (granted.length === 0 ? printed : [...printed, ...granted]).filter(
-    (ability) =>
-      ability.affects.scope === "self" &&
-      (ability.condition === undefined || staticConditionMet(state, registry, object, ability.condition)),
-  );
-}
-
-/** Whether `player` passes a combat restriction's {@link PlayerTest}, as
- * `source` (the restricted creature) asks it: its "you" is the source's
- * controller. */
-export function playerTestHolds(
+/** Whether a "can't attack" record refuses this attack (rule 508.1c). */
+function attackRefused(
   state: GameState,
   registry: CardRegistry,
-  test: PlayerTest,
-  player: PlayerId,
-  source: GameObject,
+  { rule, you, source }: RuleInForce<CantAttack>,
+  object: GameObject,
+  target: PlayerId | ObjectId,
+  defendingPlayer: PlayerId,
 ): boolean {
-  const controlled = (who: PlayerId, filter: CardFilter): number =>
-    weightedMatches(
-      state,
-      state.zones.shared.battlefield,
-      (id) =>
-        state.objects[id].controller === who &&
-        matchesFilter(state, registry, id, filter, { you: who, source: source.id }),
-    ).reduce((sum, match) => sum + match.weight, 0);
-  if (test.controls !== undefined && controlled(player, test.controls) === 0) return false;
-  if (test.holds !== undefined && !staticConditionMet(state, registry, source, test.holds, { asPlayer: player })) return false;
-  if (
-    test.youControlMore !== undefined &&
-    controlled(source.controller, test.youControlMore) <= controlled(player, test.youControlMore)
-  ) {
-    return false;
-  }
-  return true;
+  return (
+    (rule.at === undefined || aimNames(state, registry, rule.at, you, object, target, source)) &&
+    (rule.unlessDefender === undefined || !playerTestHolds(state, registry, rule.unlessDefender, defendingPlayer, source)) &&
+    (rule.ifDefender === undefined || playerTestHolds(state, registry, rule.ifDefender, defendingPlayer, source))
+  );
 }
 
 /** {@link whyCannotBlockUncached} inside a computed-value cache region (a pure read
@@ -522,42 +424,23 @@ function whyThisCannotBlock(
     const attackerDef = registry.get(printedCardName(attacker));
     return `${blockerDef.name} can't block ${attackerDef.name} — it isn't attacking ${player}`;
   }
-  // "Can't block unless you control more lands than attacking player"
-  // (rule 509.1b), asked of the attacker's controller.
-  for (const ability of ownStatics(state, registry, blocker)) {
-    if (
-      ability.cantBlockUnlessAttacker !== undefined &&
-      !playerTestHolds(state, registry, ability.cantBlockUnlessAttacker, attacker.controller, blocker)
-    ) {
+  // "Can't block unless you control more lands than attacking player" (rule
+  // 509.1b), "can't block this creature this turn" (Kozilek's Pathfinder, the
+  // object it was then, 400.7), "can't block creatures you control" (Immortal
+  // Obligation), "can block only creatures with flying", on the blocker;
+  // "can't be blocked by [filter]" on the attacker (Delney, Streetwise Lookout).
+  for (const force of recordsOfKind(state, registry, blockerId, "cant-block")) {
+    if (blockRefused(state, registry, force, attacker)) {
       const attackerDef = registry.get(printedCardName(attacker));
       return `${blockerDef.name} can't block ${attackerDef.name}`;
     }
   }
-  // "Target creature can't block this creature this turn" (Kozilek's
-  // Pathfinder): this attacker, the object it was then (rule 400.7). And "can't
-  // block creatures you control" (Immortal Obligation).
-  if (
-    blocker.modifiers.some(
-      (m) =>
-        m.cantBlockCreaturesOf === attacker.controller ||
-        m.cantBlock?.some((c) => c.object === attackerId && c.zoneChangeCount === (attacker.zoneChangeCount ?? 0)),
-    )
-  ) {
-    const attackerDef = registry.get(printedCardName(attacker));
-    return `${blockerDef.name} can't block ${attackerDef.name} this turn`;
-  }
-  // "Can't be blocked by [filter]" on the attacker (Delney, Streetwise
-  // Lookout), "can block only [filter]" on the blocker.
-  if (
-    blockFilters(state, registry, attacker, "cantBeBlockedBy").some(({ filter, you, amount }) =>
-      matchesFilter(state, registry, blockerId, filter, { you, amount }),
-    ) ||
-    blockFilters(state, registry, blocker, "canBlockOnly").some(
-      ({ filter, you, amount }) => !matchesFilter(state, registry, attackerId, filter, { you, amount }),
-    )
-  ) {
-    const attackerDef = registry.get(printedCardName(attacker));
-    return `${blockerDef.name} can't block ${attackerDef.name}`;
+  for (const { rule, you, source } of recordsOfKind(state, registry, attackerId, "cant-be-blocked")) {
+    if (rule.by === undefined) continue;
+    if (matchesFilter(state, registry, blockerId, rule.by, { you, amount: sourceAmount(state, registry, source) })) {
+      const attackerDef = registry.get(printedCardName(attacker));
+      return `${blockerDef.name} can't block ${attackerDef.name}`;
+    }
   }
   // The Ring emblem: "your Ring-bearer … can't be blocked by creatures with
   // greater power" (rule 701.54c), the powers compared as blocks are declared.
@@ -591,7 +474,11 @@ function whyThisCannotBlock(
   }
   // Shadow (rule 702.28b): a creature with it is blocked only by creatures
   // with it, and one without it isn't blocked by them.
-  if (objHasKeyword(state, registry, attackerId, "shadow") !== objHasKeyword(state, registry, blockerId, "shadow")) {
+  const attackerShadow = objHasKeyword(state, registry, attackerId, "shadow");
+  if (
+    attackerShadow !== objHasKeyword(state, registry, blockerId, "shadow") &&
+    !(attackerShadow && blocksAsThoughShadow(state, registry, blocker))
+  ) {
     const attackerDef = registry.get(printedCardName(attacker));
     return `${blockerDef.name} can't block ${attackerDef.name} (shadow)`;
   }
@@ -690,139 +577,68 @@ export function nearestOpponentRule(
   return first !== null && allowed.every((p) => p === first) ? [first] : [];
 }
 
-/** The battlefield statics carrying a `cantBeBlockedBy` or `canBlockOnly`
- * filter — the target-independent half of {@link blockFilters}, memoized per
- * cache region (almost always none). */
-function blockFilterSources(
+/** Whether a "can't block" record refuses `attacker`, every field it gives
+ * holding (rule 509.1b); its `attackers` and any `{ amount }` operand read as
+ * blockers are declared (Champion of Lambholt's ruling). */
+function blockRefused(
   state: GameState,
   registry: CardRegistry,
-): readonly { readonly source: GameObject; readonly ability: StaticAbility }[] {
-  return computedCacheMemo("block-filter-sources", () => {
-    const out: { source: GameObject; ability: StaticAbility }[] = [];
-    for (const id of state.zones.shared.battlefield) {
-      const source = state.objects[id];
-      if (state.players[source.controller]?.hasLost === true) continue;
-      // Its own statics, and any a `grant-static` gave it (Full Steam
-      // Ahead's "This creature can't be blocked by more than one creature").
-      const own = hasLostAbilities(state, registry, source) ? [] : registry.get(rulesTextName(source)).static;
-      const granted = grantedStatics(state, registry, source);
-      for (const ability of granted.length === 0 ? own : [...own, ...granted]) {
-        if (
-          ability.cantBeBlockedBy !== undefined ||
-          ability.canBlockOnly !== undefined ||
-          ability.blockedByAtMostOne === true ||
-          ability.blockedByAtLeast !== undefined ||
-          ability.blockedOnlyByAll === true ||
-          ability.mustBeBlockedBy !== undefined ||
-          ability.attacksIfAttacks !== undefined
-        ) {
-          out.push({ source, ability });
-        }
-      }
-    }
-    return out;
-  });
+  { rule, you, source }: RuleInForce<CantBlock>,
+  attacker: GameObject,
+): boolean {
+  if (rule.attacker !== undefined && !namesAttacker(rule.attacker, attacker, source)) return false;
+  if (
+    rule.attackers !== undefined &&
+    !matchesFilter(state, registry, attacker.id, rule.attackers, { you, amount: sourceAmount(state, registry, source) })
+  ) {
+    return false;
+  }
+  return rule.unlessAttacking === undefined || !playerTestHolds(state, registry, rule.unlessAttacking, attacker.controller, source);
 }
 
-/**
- * The `field` filters (a static's `cantBeBlockedBy` or `canBlockOnly`) that
- * reach `object`, each with whose side it's read from. Read here, when a
- * block is checked, rather than folded into its characteristics: a scope
- * like Delney's "creatures you control with power 2 or less" asks for the
- * very power that fold computes, which from inside it fails closed.
- */
-function blockFilters(
-  state: GameState,
-  registry: CardRegistry,
-  object: GameObject,
-  field: "cantBeBlockedBy" | "canBlockOnly",
-): BlockFilter[] {
-  const out: BlockFilter[] = [];
-  for (const { source, ability } of blockFilterSources(state, registry)) {
-    const filter = ability[field];
-    if (filter === undefined) continue;
-    if (!staticReaches(state, registry, source, ability, object)) continue;
-    if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) {
-      continue;
-    }
-    // "Creatures with power less than this creature's power" (Champion of
-    // Lambholt): the static's own source answers `{ powerOf: "source" }`,
-    // read as blockers are declared (its ruling, rule 509.1b).
-    out.push({ filter, you: source.controller, amount: sourceAmount(state, registry, source) });
+/** Whether a rule's named attacker is this one: the object it was as the
+ * effect resolved (rule 400.7), or a static's own source. */
+function namesAttacker(aim: AttackerAim, attacker: GameObject, source: GameObject): boolean {
+  if (typeof aim === "object" && "stint" in aim) {
+    return aim.object === attacker.id && aim.stint === (attacker.zoneChangeCount ?? 0);
   }
-  if (field === "cantBeBlockedBy") {
-    // "Can't be blocked by [filter] this turn" — a `restrict` effect's, on
-    // this creature (Ghirapur Guide) or as a turn-wide rule it matches now
-    // (Dread Charge, rule 611.2c).
-    for (const m of object.modifiers) {
-      for (const { filter, you } of m.cantBeBlockedBy ?? []) {
-        out.push({ filter, you, amount: sourceAmount(state, registry, object) });
-      }
-    }
-    for (const rule of state.turnRestrictions ?? []) {
-      if (rule.cantBeBlockedBy === undefined) continue;
-      if (!turnRuleCovers(state, registry, object.id, rule)) continue;
-      out.push({ filter: rule.cantBeBlockedBy, you: rule.you, amount: sourceAmount(state, registry, object) });
-    }
-  }
-  return out;
+  return aim === "source" && attacker.id === source.id;
 }
 
 /**
  * Whether `attacker` "can't be blocked by more than one creature" right now
- * (rule 509.1b — Challenger Troll's `blockedByAtMostOne`): read as blocks are
- * declared, like {@link blockFilters}, so a scope reading power sees it now.
+ * (rule 509.1b — Challenger Troll): read as blocks are declared, so a scope
+ * reading power sees it now.
  */
 export function blockedByAtMostOne(state: GameState, registry: CardRegistry, attacker: ObjectId): boolean {
-  const object = state.objects[attacker];
-  if (object === undefined) return false;
-  if (restrictionsOf(state, registry, attacker).has("blocked-by-at-most-one")) return true;
-  for (const { source, ability } of blockFilterSources(state, registry)) {
-    if (ability.blockedByAtMostOne !== true) continue;
-    if (!staticReaches(state, registry, source, ability, object)) continue;
-    if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
-    return true;
-  }
-  return false;
+  return recordsOfKind(state, registry, attacker, "cant-be-blocked").some(({ rule }) => rule.byMoreThan === 1);
 }
 
 /**
  * The fewest creatures that may block `attacker` right now, if any do: 2 for
  * menace (rule 702.111b), N for "can't be blocked except by N or more
- * creatures" (`blockedByAtLeast` — Pathrazer of Ulamog), the largest when
- * several apply; 1 otherwise. Read as blocks are declared (rule 509.1b).
+ * creatures" (Pathrazer of Ulamog), the largest when several apply; 1
+ * otherwise. Read as blocks are declared (rule 509.1b).
  */
 export function minimumBlockers(state: GameState, registry: CardRegistry, attacker: ObjectId): number {
-  const object = state.objects[attacker];
-  if (object === undefined) return 1;
+  if (state.objects[attacker] === undefined) return 1;
   let least = objHasKeyword(state, registry, attacker, "menace") ? 2 : 1;
-  for (const { source, ability } of blockFilterSources(state, registry)) {
-    if (ability.blockedByAtLeast === undefined || ability.blockedByAtLeast <= least) continue;
-    if (!staticReaches(state, registry, source, ability, object)) continue;
-    if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
-    least = ability.blockedByAtLeast;
+  for (const { rule } of recordsOfKind(state, registry, attacker, "cant-be-blocked")) {
+    if (rule.byFewerThan !== undefined && rule.byFewerThan > least) least = rule.byFewerThan;
   }
   return least;
 }
 
 /** Whether `attacker` "can't be blocked unless all creatures defending
- * player controls block it" right now (Tromokratis' `blockedOnlyByAll`). */
+ * player controls block it" right now (Tromokratis). */
 export function blockedOnlyByAll(state: GameState, registry: CardRegistry, attacker: ObjectId): boolean {
-  const object = state.objects[attacker];
-  if (object === undefined) return false;
-  for (const { source, ability } of blockFilterSources(state, registry)) {
-    if (ability.blockedOnlyByAll !== true) continue;
-    if (!staticReaches(state, registry, source, ability, object)) continue;
-    if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
-    return true;
-  }
-  return false;
+  return recordsOfKind(state, registry, attacker, "cant-be-blocked").some(({ rule }) => rule.unlessAllBlock === true);
 }
 
 /**
- * Who `attacker` must be blocked by (`mustBeBlockedBy` — rule 509.1c) out of
- * `blockers`, read as blocks are declared: each static that reaches it, with
- * those of `blockers` matching its filter.
+ * Who `attacker` must be blocked by (rule 509.1c) out of `blockers`, read as
+ * blocks are declared: each record that names some, `all` when every one of
+ * them able must (Marble Priest), else one of them (Slayer's Cleaver).
  */
 export function blockersRequiredBy(
   state: GameState,
@@ -830,27 +646,45 @@ export function blockersRequiredBy(
   attacker: ObjectId,
   blockers: readonly ObjectId[],
 ): readonly { readonly all: boolean; readonly by: readonly ObjectId[] }[] {
-  const object = state.objects[attacker];
-  if (object === undefined) return [];
   const out: { all: boolean; by: ObjectId[] }[] = [];
-  for (const { source, ability } of blockFilterSources(state, registry)) {
-    const wanted = ability.mustBeBlockedBy;
-    if (wanted === undefined) continue;
-    if (!staticReaches(state, registry, source, ability, object)) continue;
-    if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
+  for (const { rule, you, source } of recordsOn(state, registry, attacker)) {
+    if ((rule.kind !== "must-be-blocked" && rule.kind !== "must-be-blocked-if-able") || rule.by === undefined) continue;
     const amount = sourceAmount(state, registry, source);
+    const wanted = rule.by;
     out.push({
-      all: wanted.all === true,
-      by: blockers.filter((id) => matchesFilter(state, registry, id, wanted.by, { you: source.controller, amount })),
+      all: rule.kind === "must-be-blocked",
+      by: blockers.filter((id) => matchesFilter(state, registry, id, wanted, { you, amount })),
     });
   }
   return out;
 }
 
+/** Whether "must be blocked by exactly one creature if able" binds `attacker`
+ * (Nacatl War-Pride, rule 509.1c). */
+export function mustBeBlockedByExactlyOne(state: GameState, registry: CardRegistry, attacker: ObjectId): boolean {
+  return recordsOfKind(state, registry, attacker, "must-be-blocked-if-able").some(({ rule }) => rule.exactlyOne === true);
+}
+
+/** The creature each "blocks [this attacker] if able" on `blocker` names, or
+ * `undefined` for a bare "blocks if able" with parameters elsewhere (rule
+ * 509.1c), each the same object it was when the requirement was made (400.7). */
+export function blockRequirementsOf(
+  state: GameState,
+  registry: CardRegistry,
+  blocker: ObjectId,
+): readonly { readonly attacker?: ObjectId }[] {
+  return recordsOfKind(state, registry, blocker, "must-block").flatMap(({ rule }) => {
+    if (rule.attacker === undefined) return [{}];
+    if (typeof rule.attacker !== "object" || !("stint" in rule.attacker)) return [];
+    const named = state.objects[rule.attacker.object];
+    return named?.zone === "battlefield" && (named.zoneChangeCount ?? 0) === rule.attacker.stint ? [{ attacker: rule.attacker.object }] : [];
+  });
+}
+
 /**
- * "If [a creature matching it] attacks, this attacks if able" (`attacksIfAttacks`
- * — rule 508.1d): for each of `able` such a static reaches, the creatures of
- * `eligible` whose attacking would bind it. Empty almost always.
+ * "If [a creature matching it] attacks, this attacks if able" (rule 508.1d):
+ * for each of `able` such a record binds, the creatures of `eligible` whose
+ * attacking would bind it. Empty almost always.
  */
 export function attacksIfOthersAttack(
   state: GameState,
@@ -858,89 +692,43 @@ export function attacksIfOthersAttack(
   able: readonly ObjectId[],
   eligible: readonly ObjectId[],
 ): readonly { readonly attacker: ObjectId; readonly when: readonly ObjectId[] }[] {
-  const out: { attacker: ObjectId; when: ObjectId[] }[] = [];
-  for (const { source, ability } of blockFilterSources(state, registry)) {
-    const filter = ability.attacksIfAttacks;
-    if (filter === undefined) continue;
-    if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
-    const when = eligible.filter((id) =>
-      matchesFilter(state, registry, id, filter, { you: source.controller, source: source.id }),
-    );
-    if (when.length === 0) continue;
-    for (const attacker of able) {
-      if (!staticReaches(state, registry, source, ability, state.objects[attacker])) continue;
-      const rule = out.find((r) => r.attacker === attacker);
-      if (rule === undefined) out.push({ attacker, when });
-      else rule.when = [...new Set([...rule.when, ...when])];
+  const out: { attacker: ObjectId; when: readonly ObjectId[] }[] = [];
+  for (const attacker of able) {
+    const when = new Set<ObjectId>();
+    for (const { rule, you, source } of recordsOfKind(state, registry, attacker, "must-attack")) {
+      const filter = rule.ifAttacks;
+      if (filter === undefined) continue;
+      for (const id of eligible) {
+        if (matchesFilter(state, registry, id, filter, { you, source: source.id })) when.add(id);
+      }
     }
+    if (when.size > 0) out.push({ attacker, when: [...when] });
   }
   return out;
 }
 
-/** One of {@link blockFilters}: the filter, whose side it's read from, and
- * what its `{ amount }` operands read off its source. */
-interface BlockFilter {
-  readonly filter: CardFilter;
-  readonly you: PlayerId;
-  readonly amount: (amount: EffectAmount) => number;
-}
-
 /**
- * The attack-requirement rules (the `attack-requirement` effect — Kardur,
- * Doomscourge's "until your next turn, creatures your opponents control
- * attack each combat if able …") that bind `id` right now: each one whose
- * filter it matches from its controller's side, whenever it came under
- * that control (rule 611.2c). See `AttackRequirementRule`.
+ * The requirements on `attacker` that care *where* it attacks and are obeyed
+ * only by attacking what they name (rule 508.1d): encore's opponent, Alluring
+ * Siren's "attacks you", Gideon Jura's "attack Gideon Jura", Galactus's "an
+ * opponent with the most life". One requirement each, however many it names.
  */
-export function attackRequirementRulesOf(
-  state: GameState,
-  registry: CardRegistry,
-  id: ObjectId,
-): readonly AttackRequirementRule[] {
-  const rules = state.attackRequirements;
-  if (rules === undefined || rules.length === 0) return [];
-  const object = state.objects[id];
-  if (object === undefined || object.zone !== "battlefield") return [];
-  return rules.filter(
-    (rule) =>
-      attackRequirementActive(state, rule) &&
-      (rule.object === undefined || (rule.object.id === id && rule.object.stint === (object.zoneChangeCount ?? 0))) &&
-      (rule.controlledBy === undefined || object.controller === rule.controlledBy) &&
-      matchesFilter(state, registry, id, rule.filter, { you: rule.by }),
-  );
-}
-
-/**
- * The players and planeswalkers `attacker` must attack if able — one entry
- * per requirement (rule 508.1d): encore's opponent (`mustAttackPlayer`) and
- * each binding attack-requirement rule's `attacks` (Alluring Siren's "attacks
- * you", Taunt's, Gideon Jura's "attack Gideon Jura").
- */
-function aimedRequirements(state: GameState, registry: CardRegistry, attacker: ObjectId): (PlayerId | ObjectId)[] {
-  const aimedAt = state.objects[attacker]?.mustAttackPlayer;
-  return [
-    ...(aimedAt !== undefined ? [aimedAt] : []),
-    ...attackRequirementRulesOf(state, registry, attacker).flatMap((rule) =>
-      rule.attacks === undefined ||
-      (rule.attacksStint !== undefined && (state.objects[rule.attacks as ObjectId]?.zoneChangeCount ?? 0) !== rule.attacksStint)
-        ? []
-        : [rule.attacks],
-    ),
-  ];
+function aimedRequirements(state: GameState, registry: CardRegistry, attacker: ObjectId): readonly RuleInForce<MustAttack>[] {
+  return recordsOfKind(state, registry, attacker, "must-attack").filter(({ rule }) => rule.at !== undefined);
 }
 
 /**
  * The players `attacker` must attack "a player other than" if able — one
  * entry per requirement, since rule 508.1d counts requirements: each player
- * who has goaded it (rule 701.15b — once each, 701.15d), and the controller
- * of each attack-requirement rule binding it that says so.
+ * who has goaded it (rule 701.15b — once each, 701.15d), and whoever made
+ * each "other than you" record binding it.
  */
 function otherThanRequirements(state: GameState, registry: CardRegistry, attacker: ObjectId): PlayerId[] {
   return [
     ...goadersOf(state, registry, attacker),
-    ...attackRequirementRulesOf(state, registry, attacker)
-      .filter((rule) => rule.otherThanYou)
-      .map((rule) => rule.by),
+    ...recordsOfKind(state, registry, attacker, "must-attack")
+      .filter(({ rule }) => rule.otherThan !== undefined)
+      .map(({ you }) => you),
   ];
 }
 
@@ -948,18 +736,20 @@ function otherThanRequirements(state: GameState, registry: CardRegistry, attacke
  * How many of `attacker`'s attack requirements that care *where* it attacks
  * are obeyed by attacking `defender` (rule 508.1d). "Attacks a player other
  * than [them] if able" (goad, rule 701.15b) is obeyed only by attacking a
- * **player** — a planeswalker isn't one — other than them; encore's "attacks
- * that opponent if able" only by attacking that player. The "attacks each
- * combat if able" every one of them also carries is obeyed wherever it
- * attacks, so it doesn't tell defenders apart.
+ * **player** — a planeswalker isn't one — other than them; an aimed one only
+ * by attacking what it names. The "attacks each combat if able" every one of
+ * them also carries is obeyed wherever it attacks, so it doesn't tell
+ * defenders apart.
  */
 function aimedRequirementsObeyed(
   state: GameState,
+  registry: CardRegistry,
   others: readonly PlayerId[],
-  aimed: readonly (PlayerId | ObjectId)[],
+  aimed: readonly RuleInForce<MustAttack>[],
+  object: GameObject,
   defender: PlayerId | ObjectId,
 ): number {
-  let obeyed = aimed.filter((a) => a === defender).length;
+  let obeyed = aimed.filter(({ rule, you, source }) => aimNames(state, registry, rule.at as AttackAim, you, object, defender, source)).length;
   if (!isPlaneswalkerTarget(state, defender)) {
     for (const other of others) if (other !== defender) obeyed += 1;
   }
@@ -999,11 +789,11 @@ export function attackRequirementsForbid(
   const others = otherThanRequirements(state, registry, attacker);
   const aimed = aimedRequirements(state, registry, attacker);
   if (others.length === 0 && aimed.length === 0) return false;
-  const here = aimedRequirementsObeyed(state, others, aimed, defender);
+  const here = aimedRequirementsObeyed(state, registry, others, aimed, object, defender);
   return legalDefenders(state, registry, player).some(
     (other) =>
       other !== defender &&
-      aimedRequirementsObeyed(state, others, aimed, other) > here &&
+      aimedRequirementsObeyed(state, registry, others, aimed, object, other) > here &&
       whyCannotAttack(state, registry, player, attacker, other, asOf) === null,
   );
 }
@@ -1018,7 +808,6 @@ export function attackRequirementsReason(state: GameState, registry: CardRegistr
   if (otherThanRequirements(state, registry, attacker).length > 0) {
     return `${name} must attack a player other than ${otherThanRequirements(state, registry, attacker).join(", ")} if able`;
   }
-  if (state.objects[attacker]?.mustAttackPlayer !== undefined) return `${name} must attack the opponent it was made to attack`;
   return `${name} must attack the player or planeswalker it was made to attack`;
 }
 
@@ -1091,17 +880,22 @@ export function mustAttack(...args: Parameters<typeof mustAttackUncached>): bool
 function mustAttackUncached(state: GameState, registry: CardRegistry, attacker: ObjectId): boolean {
   const object = state.objects[attacker];
   if (object === undefined) return false;
-  if (
-    object.boundThisCombat !== undefined ||
-    goadersOf(state, registry, attacker).length > 0 ||
-    attackRequirementRulesOf(state, registry, attacker).some((rule) => rule.attacks === undefined) ||
-    restrictionsOf(state, registry, attacker).has("must-attack")
-  ) {
+  if (goadersOf(state, registry, attacker).length > 0 || restrictionsOf(state, registry, attacker).has("must-attack")) {
     return true;
   }
+  const records = recordsOfKind(state, registry, attacker, "must-attack");
+  if (records.length === 0) return false;
+  // "Attacks a player other than you if able" carries "attacks if able"; the
+  // conditional one binds only through the declaration's check.
+  if (records.some(({ rule }) => rule.at === undefined && rule.ifAttacks === undefined)) return true;
   const defenders = legalDefenders(state, registry, object.controller);
-  return aimedRequirements(state, registry, attacker).some(
-    (aimedAt) =>
-      defenders.includes(aimedAt) && whyCannotAttack(state, registry, object.controller, attacker, aimedAt) === null,
+  return records.some(
+    ({ rule, you, source }) =>
+      rule.at !== undefined &&
+      defenders.some(
+        (defender) =>
+          aimNames(state, registry, rule.at as AttackAim, you, object, defender, source) &&
+          whyCannotAttack(state, registry, object.controller, attacker, defender) === null,
+      ),
   );
 }

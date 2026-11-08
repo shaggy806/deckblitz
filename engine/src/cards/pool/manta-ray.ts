@@ -26,12 +26,12 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantAttackUnlessDefender: { controls: { subtype: "Island" } },
+      restrictions: [{ kind: "cant-attack", unlessDefender: { controls: { subtype: "Island" } } }],
       text: "This creature can't attack unless defending player controls an Island.",
     },
     {
       affects: { scope: "self" },
-      cantBeBlockedBy: { notColors: ["U"] },
+      restrictions: [{ kind: "cant-be-blocked", by: { notColors: ["U"] } }],
       text: "This creature can't be blocked except by blue creatures.",
     },
   ],

@@ -28,7 +28,7 @@ export default defineCard({
     {
       affects: { scope: "attached" },
       grantPt: [0, 2],
-      blockedByAtMostOne: true,
+      restrictions: [{ kind: "cant-be-blocked", byMoreThan: 1 }],
       text: "Enchanted creature gets +0/+2 and can't be blocked by more than one creature.",
     },
   ],

@@ -11711,6 +11711,30 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Galactus: must attack the opponent with the most life',
+    board({
+      you: { bf: ['Galactus, Devourer of Worlds'] },
+      opp: [{ life: 40 }, { life: 20 }],
+      step: 'begin-combat',
+    }),
+  ),
+  preset(
+    'Galactus: Silver Surfer lets it attack anyone',
+    board({
+      you: { bf: ['Galactus, Devourer of Worlds', "Silver Surfer, Galactus's Herald"] },
+      opp: [{ life: 40 }, { life: 20 }],
+      step: 'begin-combat',
+    }),
+  ),
+  preset(
+    'Brimaz: the token blocks the same creature',
+    board({
+      you: { bf: ['Grizzly Bears'] },
+      opp: { human: true, bf: ['Brimaz, King of Oreskos'] },
+      step: 'begin-combat',
+    }),
+  ),
+  preset(
     'Stunning Reversal: the next loss this turn is replaced once',
     board({
       you: { bf: ['Swamp*4', 'Mountain*5'], hand: ['Stunning Reversal', 'Lava Axe'], life: 4 },

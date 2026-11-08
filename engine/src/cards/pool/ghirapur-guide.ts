@@ -16,8 +16,8 @@ export default defineCard({
       effect: {
         kind: "restrict",
         target: 0,
-        restrictions: [],
-        cantBeBlockedBy: { power: { op: "lte", n: 2 } },
+        restrictions: [{ kind: "cant-be-blocked", by: { power: { op: "lte", n: 2 } } }],
+        
       },
       resolve: null,
       text: "{2}{G}: Target creature you control can't be blocked by creatures with power 2 or less this turn.",

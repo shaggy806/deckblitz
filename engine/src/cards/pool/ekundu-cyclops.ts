@@ -12,6 +12,6 @@ export default defineCard({
   toughness: 4,
   text: TEXT,
   static: [
-    { affects: { scope: "self" }, attacksIfAttacks: { type: "creature", controlledBy: "you" }, text: TEXT },
+    { affects: { scope: "self" }, restrictions: [{ kind: "must-attack", ifAttacks: { type: "creature", controlledBy: "you" } }], text: TEXT },
   ],
 });

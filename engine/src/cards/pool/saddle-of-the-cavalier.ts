@@ -21,7 +21,7 @@ export default defineCard({
     {
       affects: { scope: "attached" },
       grantPt: [3, 3],
-      cantBeBlockedBy: { power: { op: "lte", n: 3 } },
+      restrictions: [{ kind: "cant-be-blocked", by: { power: { op: "lte", n: 3 } } }],
       text: STATIC_TEXT,
     },
   ],

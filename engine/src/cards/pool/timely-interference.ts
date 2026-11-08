@@ -24,7 +24,7 @@ export default defineCard({
       kind: "sequence",
       effects: [
         { kind: "modify-pt", target: 0, power: -1, toughness: 0, duration: "end-of-turn" },
-        { kind: "block-if-able", target: 0 },
+        { kind: "restrict", target: 0, restrictions: ["must-block"] },
         { kind: "draw", amount: 1 },
       ],
     },

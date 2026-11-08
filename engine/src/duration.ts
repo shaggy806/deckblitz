@@ -205,16 +205,6 @@ export type DamageRuleDuration = Extract<Duration, "end-of-turn" | "until-your-n
  * omitted. */
 export type WatchDuration = Extract<Duration, "until-your-next-turn" | "until-end-of-combat" | "permanent">;
 
-/** How long an attack requirement lasts (`attack-requirement`): until your
- * next turn when omitted. `{ duringTurnOf }` is Taunt's "during target
- * player's next turn". */
-export type AttackRequirementDuration = Extract<
-  Duration,
-  | "end-of-turn"
-  | { readonly duringTurnOf: DurationPlayer }
-  | "during-its-controllers-next-turn"
-  | "during-its-controllers-next-combat"
->;
 
 /**
  * How long an effect lasts, as the game keeps it once it has begun:

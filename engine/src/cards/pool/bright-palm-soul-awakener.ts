@@ -16,7 +16,7 @@ const ATTACK: TriggeredAbility = {
     kind: "sequence",
     effects: [
       { kind: "double-counters", target: 0, counter: "+1/+1" },
-      { kind: "restrict", target: 0, restrictions: [], cantBeBlockedBy: { power: { op: "lte", n: 2 } } },
+      { kind: "restrict", target: 0, restrictions: [{ kind: "cant-be-blocked", by: { power: { op: "lte", n: 2 } } }]},
     ],
   },
   resolve: null,

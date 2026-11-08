@@ -14,7 +14,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantBeBlockedBy: { anyOf: [{ enchanted: true }, { type: "enchantment" }] },
+      restrictions: [{ kind: "cant-be-blocked", by: { anyOf: [{ enchanted: true }, { type: "enchantment" }] } }],
       text: TEXT,
     },
   ],

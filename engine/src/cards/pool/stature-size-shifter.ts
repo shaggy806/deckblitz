@@ -27,7 +27,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "source", filter: { power: { op: "lte", n: 1 } } },
-      cantBeBlockedBy: {},
+      restrictions: [{ kind: "cant-be-blocked", by: {} }],
       text: EVASION_TEXT,
     },
   ],

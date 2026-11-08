@@ -58,7 +58,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantBeBlockedBy: { power: { op: "lte", n: 3 } },
+      restrictions: [{ kind: "cant-be-blocked", by: { power: { op: "lte", n: 3 } } }],
       text: "This creature can't be blocked by creatures with power 3 or less.",
     },
   ],

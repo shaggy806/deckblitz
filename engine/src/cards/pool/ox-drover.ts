@@ -36,6 +36,6 @@ export default defineCard({
   toughness: 4,
   keywords: ["vigilance"],
   text: `Vigilance\n${UNBLOCKABLE_TEXT}\n${TRIGGER_TEXT}`,
-  static: [{ affects: { scope: "self" }, cantBeBlockedBy: { subtype: "Ox" }, text: UNBLOCKABLE_TEXT }],
+  static: [{ affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", by: { subtype: "Ox" } }], text: UNBLOCKABLE_TEXT }],
   triggered: [oxAndDraw({ on: "enters-battlefield", who: "self" }), oxAndDraw({ on: "attacks", who: "self" })],
 });

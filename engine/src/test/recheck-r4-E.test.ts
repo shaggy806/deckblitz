@@ -3,6 +3,7 @@
  * the cards that waited for it, and a counterspell that mills the countered
  * spell's controller.
  */
+import { blockRecords } from "./combat-probe.js";
 import { describe, expect, it } from "vitest";
 
 import {
@@ -107,7 +108,7 @@ describe("R4 group E", () => {
     const bears = spawn(game, "Grizzly Bears", B);
     pickTargets(a, bears);
     enter(game, "Shessra, Death's Whisper");
-    expect(game.state.blockRequirements).toHaveLength(1);
+    expect(blockRecords(game)).toHaveLength(1);
     destroy(game, spawn(game, "Hill Giant", B));
     pickModes(a, 0);
     const before = hand(game).length;
@@ -126,7 +127,7 @@ describe("R4 group E", () => {
     cast(game, first, { targets: [ref(bears)] });
     expect(pt(game, bears)).toEqual({ power: 1, toughness: 2 });
     expect(hand(game).length).toBe(before);
-    expect(game.state.blockRequirements).toBeUndefined();
+    expect(blockRecords(game)).toEqual([]);
     lands(game, "Island", 1);
     lands(game, "Mountain", 2);
     cast(game, toHand(game, "Timely Interference"), { targets: [ref(bears)], kicked: true });

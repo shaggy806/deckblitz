@@ -14,5 +14,5 @@ export default defineCard({
   toughness: 5,
   cycling: { cost: "{1}", search: { subtype: "Swamp" } },
   text: `${EVASION}\nSwampcycling {1} ({1}, Discard this card: Search your library for a Swamp card, reveal it, put it into your hand, then shuffle.)`,
-  static: [{ affects: { scope: "self" }, blockedByAtLeast: 3, text: EVASION }],
+  static: [{ affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", byFewerThan: 3 }], text: EVASION }],
 });

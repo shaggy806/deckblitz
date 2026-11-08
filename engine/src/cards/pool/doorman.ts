@@ -25,8 +25,8 @@ export default defineCard({
       effect: {
         kind: "restrict",
         target: 0,
-        restrictions: [],
-        cantBeBlockedBy: { anyOf: [{ power: { op: "lte", n: 2 } }, { subtype: "Wall" }] },
+        restrictions: [{ kind: "cant-be-blocked", by: { anyOf: [{ power: { op: "lte", n: 2 } }, { subtype: "Wall" }] } }],
+        
       },
       resolve: null,
       text: TEXT,

@@ -24,7 +24,7 @@ export default defineCard({
     },
     {
       affects: { scope: "self" },
-      cantAttackUnlessDefender: { controls: { subtype: "Island" } },
+      restrictions: [{ kind: "cant-attack", unlessDefender: { controls: { subtype: "Island" } } }],
       text: ATTACK_TEXT,
     },
   ],

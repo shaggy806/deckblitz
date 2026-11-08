@@ -31,6 +31,7 @@
  */
 
 import { insteadEffect } from "./replacements.js";
+import { combatRuleHelps, combatRuleSlots } from "./combat/rules.js";
 import type { ActivatedAbility, TriggeredAbility } from "./abilities.js";
 import { costLosesSource } from "./abilities.js";
 import type { LegalAction } from "./actions.js";
@@ -624,6 +625,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     if (n.thenMayBlock === true) v.touch(n.target, "either", MINOR);
   },
   "block-attacker": none,
+  "enter-blocking": none,
   // Its damage kept from what it's attacking: an opponent's attacker's harm.
   "become-blocked": (n, v) => {
     if (n.target !== undefined) v.touch(n.target, "harm", MAJOR);
@@ -670,18 +672,13 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     v.touch(n.who, "harm", MINOR);
   },
   detain: (n, v) => v.touch(n.target, "harm", MINOR),
-  // Bound to block: a provoked creature is usually walked into a bad block.
-  "block-if-able": (n, v) => {
-    if (n.target !== undefined) v.touch(n.target, "harm", MINOR);
-  },
+  // Bound to block, or to attack (and at whom), as a goad is: a drawback on its
+  // creature or its player's creatures. The player attacked is the one it's
+  // aimed at. A creature that must be blocked, or can't be, is the opposite.
   restrict: (n, v) => {
-    const lure = (r: string): boolean =>
-      r === "must-be-blocked" ||
-      r === "must-be-blocked-if-able" ||
-      r === "must-be-blocked-by-exactly-one" ||
-      r === "blocked-by-at-most-one";
-    const helps = n.restrictions.some(lure) || n.cantBeBlockedBy !== undefined;
-    const hurts = n.restrictions.some((r) => !lure(r));
+    const helps = n.restrictions.some(combatRuleHelps);
+    const hurts = n.restrictions.some((r) => !combatRuleHelps(r));
+    for (const slot of n.restrictions.flatMap(combatRuleSlots)) v.touch(slot, "harm", MINOR);
     const side = helps && hurts ? "either" : helps ? "help" : "harm";
     v.touch(n.target, side, MINOR);
     // "Creatures target player controls can't block this turn" (Headliner
@@ -706,13 +703,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // unless it ties the creature down ("doesn't untap", "loses flying").
   "grant-static": (n, v) => {
     const a = n.ability;
-    const lure = (r: string): boolean =>
-      r === "must-be-blocked" ||
-      r === "must-be-blocked-if-able" ||
-      r === "must-be-blocked-by-exactly-one" ||
-      r === "blocked-by-at-most-one";
     const harms =
-      (a.restrictions ?? []).some((r) => !lure(r)) ||
+      (a.restrictions ?? []).some((r) => !combatRuleHelps(r)) ||
       (a.loseKeywords ?? []).length > 0 ||
       (a.cantHaveKeywords ?? []).length > 0 ||
       a.doesntUntap === true;
@@ -1004,13 +996,6 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   ungoad: () => {},
   // Saddled only switches on its own Mount's "while saddled" abilities.
   "become-saddled": (n, v) => v.touch(n.target, "help", MINOR),
-  // Forced to attack (and at whom), as a goad is: a drawback on its creature
-  // or its player's creatures. The player attacked is the one it's aimed at.
-  "attack-requirement": (n, v) => {
-    if (n.target !== undefined) v.touch(n.target, "harm", MINOR);
-    if (n.controlledByTarget !== undefined) v.touch(n.controlledByTarget, "harm", MINOR);
-    if (typeof n.attacks === "number") v.touch(n.attacks, "harm", MINOR);
-  },
   // Exiling the top of a targeted player's library (Rashmi and Ragavan) is
   // taken from them.
   "impulse-exile": (n, v) => v.touch(n.whose, "harm", MINOR),
@@ -1266,14 +1251,7 @@ export function auraPolarity(def: CardDefinition): Polarity {
     // pump is the point, the lost block its price.
     const pumped = ability.grantPt !== undefined && ability.grantPt[0] + ability.grantPt[1] > 0;
     for (const restriction of ability.restrictions ?? []) {
-      if (
-        restriction === "must-be-blocked" ||
-        restriction === "must-be-blocked-if-able" ||
-        restriction === "must-be-blocked-by-exactly-one" ||
-        restriction === "blocked-by-at-most-one"
-      ) {
-        help = true;
-      }
+      if (combatRuleHelps(restriction)) help = true;
       else if (!(restriction === "cant-block" && pumped)) harm = true;
     }
     if (ability.grantPt !== undefined) {
@@ -1304,7 +1282,7 @@ export function auraPolarity(def: CardDefinition): Polarity {
       else help = true;
     }
     if (ability.protection !== undefined || ability.cantBeSacrificed === true) help = true;
-    if (ability.doesntUntap === true || ability.cantAttackController === true || ability.cantAttackController === "player") harm = true;
+    if (ability.doesntUntap === true) harm = true;
     // A cost to attack or block with it (Brainwash) hurts; one on blocking it
     // (Awesome Presence) is evasion.
     if (ability.combatTax !== undefined) {

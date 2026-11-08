@@ -31,5 +31,5 @@ export default defineCard({
       text: ETB_TEXT,
     },
   ],
-  static: [{ affects: { scope: "self" }, blockedByAtMostOne: true, text: BLOCK_TEXT }],
+  static: [{ affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", byMoreThan: 1 }], text: BLOCK_TEXT }],
 });

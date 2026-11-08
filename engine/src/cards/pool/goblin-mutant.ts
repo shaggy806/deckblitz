@@ -18,9 +18,9 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantAttackIfDefender: { controls: { type: "creature", tapped: false, power: { op: "gte", n: 3 } } },
+      restrictions: [{ kind: "cant-attack", ifDefender: { controls: { type: "creature", tapped: false, power: { op: "gte", n: 3 } } } }],
       text: CANT_ATTACK,
     },
-    { affects: { scope: "self" }, canBlockOnly: { power: { op: "lte", n: 2 } }, text: CANT_BLOCK },
+    { affects: { scope: "self" }, restrictions: [{ kind: "cant-block", attackers: { not: { power: { op: "lte", n: 2 } } } }], text: CANT_BLOCK },
   ],
 });

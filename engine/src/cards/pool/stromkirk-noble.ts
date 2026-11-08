@@ -14,7 +14,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantBeBlockedBy: { subtype: "Human" },
+      restrictions: [{ kind: "cant-be-blocked", by: { subtype: "Human" } }],
       text: "This creature can't be blocked by Humans.",
     },
   ],

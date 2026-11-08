@@ -27,7 +27,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "filter", filter: { type: "creature", notKeyword: "flying" } },
-      cantAttackController: "player",
+      restrictions: [{ kind: "cant-attack", at: "you" }],
       text: "Creatures without flying can't attack you.",
     },
   ],

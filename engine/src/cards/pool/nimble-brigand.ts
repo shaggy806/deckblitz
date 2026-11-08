@@ -18,7 +18,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "committed-crime-this-turn" },
-      cantBeBlockedBy: {},
+      restrictions: [{ kind: "cant-be-blocked", by: {} }],
       text: EVASION_TEXT,
     },
   ],

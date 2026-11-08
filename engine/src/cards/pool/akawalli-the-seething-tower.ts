@@ -35,7 +35,7 @@ export default defineCard({
       affects: { scope: "self" },
       condition: { kind: "cards-in-graveyard", atLeast: 8, filter: { notTypes: ["instant", "sorcery"] } },
       grantPt: [2, 2],
-      blockedByAtMostOne: true,
+      restrictions: [{ kind: "cant-be-blocked", byMoreThan: 1 }],
       text: DESCEND_8,
     },
   ],

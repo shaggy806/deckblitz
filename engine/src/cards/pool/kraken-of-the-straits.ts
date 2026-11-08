@@ -15,7 +15,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantBeBlockedBy: { power: { op: "lt", n: { amount: { countOf: { subtype: "Island", controlledBy: "you" } } } } },
+      restrictions: [{ kind: "cant-be-blocked", by: { power: { op: "lt", n: { amount: { countOf: { subtype: "Island", controlledBy: "you" } } } } } }],
       text: EVASION,
     },
   ],

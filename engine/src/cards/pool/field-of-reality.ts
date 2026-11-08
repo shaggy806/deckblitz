@@ -13,7 +13,7 @@ export default defineCard({
   subtypes: ["Aura"],
   text: `Enchant creature\n${STATIC_TEXT}\n${RETURN_TEXT}`,
   targets: ["creature"],
-  static: [{ affects: { scope: "attached" }, cantBeBlockedBy: { subtype: "Spirit" }, text: STATIC_TEXT }],
+  static: [{ affects: { scope: "attached" }, restrictions: [{ kind: "cant-be-blocked", by: { subtype: "Spirit" } }], text: STATIC_TEXT }],
   activated: [
     {
       cost: { mana: "{1}{U}", tap: false },

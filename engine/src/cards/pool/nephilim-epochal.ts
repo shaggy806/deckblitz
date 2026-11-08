@@ -42,7 +42,7 @@ export default defineCard({
         excludeSelf: true,
         pt: [1, 1],
       },
-      cantBeBlockedBy: { type: "creature", colorless: false, multicolored: false },
+      restrictions: [{ kind: "cant-be-blocked", by: { type: "creature", colorless: false, multicolored: false } }],
       text: LORD,
     },
   ],

@@ -25,7 +25,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: true },
       targets: ["creature"],
-      effect: { kind: "block-if-able", target: 0 },
+      effect: { kind: "restrict", target: 0, restrictions: ["must-block"] },
       resolve: null,
       text: BLOCKS,
     },

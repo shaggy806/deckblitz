@@ -15,7 +15,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "player-effect", duration: "until-your-next-turn", cantAttack: "you" },
+      { kind: "restrict", filter: { type: "creature" }, restrictions: [{ kind: "cant-attack", at: "you" }], duration: "until-your-next-turn" },
       { kind: "give-suspend", target: "source", timeCounters: 3 },
     ],
   },

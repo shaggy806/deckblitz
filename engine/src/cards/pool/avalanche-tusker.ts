@@ -19,7 +19,7 @@ export default defineCard({
     {
       trigger: { on: "attacks", who: "self" },
       targets: ["creature-defending-player-controls"],
-      effect: { kind: "block-if-able", target: 0, attacker: "source", thisCombat: true },
+      effect: { kind: "restrict", target: 0, restrictions: [{ kind: "must-block", attacker: "source" }], duration: "until-end-of-combat" },
       resolve: null,
       text: TRIGGER,
     },

@@ -14,7 +14,7 @@ export default defineCard({
   toughness: 6,
   keywords: ["flying", "trample"],
   text: `Flying, trample\n${TRIGGER}\n${RESTRICTION}`,
-  static: [{ affects: { scope: "self" }, restrictions: ["cant-attack-player-attacked-this-turn"], text: RESTRICTION }],
+  static: [{ affects: { scope: "self" }, restrictions: [{ kind: "cant-attack", at: "attacked-this-turn" }], text: RESTRICTION }],
   triggered: [
     {
       trigger: { on: "deals-combat-damage-to-player", who: "self" },

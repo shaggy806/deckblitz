@@ -12,7 +12,7 @@ import type {
   AffectSpec,
   CardType,
   CombatPermanentTax,
-  CombatRestriction,
+  CombatRule,
   Keyword,
   StaticAbility,
   StaticCondition,
@@ -444,13 +444,6 @@ export interface GameObject {
    * the turn whatever then happens to the battle. Reset as each turn begins,
    * and by any zone change, like `attackedThisTurn`. */
   attackedBattleThisTurn?: true;
-  /** `mustAttackPlayer` lasts only this combat (rule 500.5a) — Territorial
-   * Hellkite's "attacks that player this combat if able". */
-  mustAttackPlayerThisCombat?: true;
-  /** It attacks this combat phase if able (rule 508.1d), and not `avoid` or a
-   * planeswalker they control (Illusionist's Gambit). Set as the phase begins,
-   * gone as it ends and with any zone change. */
-  boundThisCombat?: { readonly avoid?: PlayerId };
   /** The combat phase (`TurnState.combatPhases`) of a turn in which a creature
    * that was blocking it was removed from combat: False Orders' "blocked by only
    * that creature this combat" reads it, as `blockedBy` no longer holds it. */
@@ -611,9 +604,6 @@ export interface GameObject {
    * step happens, and all gone with any change of zone.
    */
   skipsUntapOf?: readonly { readonly player: PlayerId; readonly steps: number }[];
-  /** This creature must attack this specific player if able — Encore's
-   * "create a token copy that attacks that opponent this turn if able". */
-  mustAttackPlayer?: PlayerId;
   /**
    * This object as it last existed on the battlefield — last-known
    * information (rules 603.10a, 608.2h). See {@link LastKnownInfo}.
@@ -1752,18 +1742,14 @@ export interface PtModifier {
   /** Combat restrictions this modifier imposes, with it — "target creature
    * can't block this turn", "~ must be blocked each combat this turn if
    * able" (the `restrict` effect). */
-  restrictions?: CombatRestriction[];
-  /** "Can't be blocked by [filter] this turn" (the `restrict` effect's
-   * `cantBeBlockedBy` — Ghirapur Guide; "except by [X]" is `not` X): no
-   * creature matching `filter`, from `you`'s side, can block it (rule
-   * 509.1b). A rule about it, not an ability, so a loss of abilities doesn't
-   * end it. Read with the statics' block filters (`combat/eligibility.ts`). */
-  cantBeBlockedBy?: { readonly filter: CardFilter; readonly you: PlayerId }[];
-  /** "Target creature can't block **this creature** this turn" (the
-   * `restrict` effect's `cantBlockAttacker` — Kozilek's Pathfinder), on the
-   * creature that can't block: each attacker it can't block, held by its
-   * `zoneChangeCount` — that object, not a later one (rule 400.7). */
-  cantBlock?: { readonly object: ObjectId; readonly zoneChangeCount: number }[];
+  restrictions?: CombatRule[];
+  /** Restrictions that only start later: during `player`'s next turn (`at:
+   * "turn"`, Wall of Dust's "can't attack during its controller's next turn"),
+   * or their next combat phase (`"combat"`, Trench Behemoth's "attacks during
+   * its controller's next combat phase if able"), not one under way as it was
+   * made. Nothing until then; a modifier for that turn or combat once it comes,
+   * under whoever `player` is as the effect resolved. */
+  restrictionsLater?: { readonly player: PlayerId; readonly at: "turn" | "combat"; readonly restrictions: readonly CombatRule[] };
   /** Layer 6 — static abilities this modifier grants: "it gains 'This
    * creature can't be blocked by more than one creature' until end of turn"
    * (Full Steam Ahead), Earthbind's "this Aura gains 'Enchanted creature
@@ -1863,21 +1849,6 @@ export interface PtModifier {
    * durations a modifier already has. Not an ability, so a loss of abilities
    * leaves it; `goadersOf` reads it. */
   goadedBy?: PlayerId;
-  /** "Can't attack you or a permanent you control" (Immortal Obligation):
-   * this player, and any permanent they control (rule 508.1b). Not an
-   * ability. */
-  cantAttackYou?: PlayerId;
-  /** With `cantAttackYou`: only "you or planeswalkers you control" (Promise of
-   * Loyalty), which doesn't name a battle that player controls (rule 310.5). */
-  cantAttackYouCovers?: "you-and-planeswalkers";
-  /** "Can't block creatures you control" (Immortal Obligation): any attacker
-   * this player controls (rule 509.1b). Not an ability. */
-  cantBlockCreaturesOf?: PlayerId;
-  /** Combat restrictions that apply only during this player's next turn
-   * (Wall of Dust's "can't attack during its controller's next turn"): this
-   * modifier does nothing until that turn begins, then becomes one with those
-   * `restrictions` until that turn's end. */
-  restrictionsDuringTurnOf?: { readonly player: PlayerId; readonly restrictions: readonly CombatRestriction[] };
   /** "Until end of combat" / "this combat" (rules 500.5a, 511.2): it ends as
    * the combat phase does — Legion Warboss's token "attacks this combat if
    * able", which a later combat that turn doesn't bind. Set with
@@ -5397,81 +5368,21 @@ export interface PlayerEffect {
    * each blocking creature they control" (War Cadence): a cost on every
    * block by anyone (rule 509.1d), read as the effect was created (611.2b). */
   readonly blockTax?: { readonly generic: number; readonly life: number };
-  /** "Until your next turn, creatures can't attack you" (Chronomantic Escape):
-   * every creature, `owner` being "you", a planeswalker of theirs only under
-   * `"you-and-planeswalkers"` (rule 508.1b); `"all"`, every attack on
-   * anything; `{ planeswalkers }`, attacks on planeswalkers matching this
-   * from `owner`'s side (Jace, Multiverse Architect's "Jaces you control");
-   * `"you-and-permanents"`, "you or permanents you control", a battle of
-   * theirs too (Willie Lumpkin, Postman). */
-  readonly cantAttack?: "you" | "you-and-planeswalkers" | "you-and-permanents" | "all" | { readonly planeswalkers: CardFilter };
-  /** Only `cantAttack`s of creatures this player controls (Champions of Minas
-   * Tirith's "they can't attack you this combat"). */
-  readonly cantAttackBy?: PlayerId;
-  /** Only creatures matching this (from `owner`'s side) can attack while it
-   * lasts — a restriction on every other creature (rule 508.1c): Bumi,
-   * Unleashed's "only land creatures can attack during that combat phase",
-   * `expires` at that phase's end. */
-  readonly onlyAttackers?: CardFilter;
+  /** Combat rules over the game for as long as this lasts, reaching creatures
+   * that arrive later (rule 611.2c — the `restrict` effect's `filter` form).
+   * `filter` is read from `side`'s side, usually the owner's; "creatures
+   * **target player** controls" is that player's, `controlledBy` the
+   * "controlled by" a filter can't say as it's read from one side. `except`
+   * is the one permanent left out, by its stint (rule 400.7). */
+  readonly combat?: {
+    readonly rules: readonly CombatRule[];
+    readonly filter: CardFilter;
+    readonly side: PlayerId;
+    readonly controlledBy?: PlayerId;
+    readonly except?: { readonly object: ObjectId; readonly zoneChangeCount: number };
+  };
 }
 
-/**
- * "Until your next turn, creatures your opponents control attack each combat
- * if able and attack a player other than you if able" (Kardur, Doomscourge):
- * goad's two requirements (rule 701.15b) as a continuous effect that modifies
- * the rules of the game, not a designation on anything. So it binds every
- * creature matching `filter` (from `by`'s side) for as long as it lasts —
- * including creatures that come under an opponent's control after it began
- * (rule 611.2c) — and a creature it binds isn't *goaded*: nothing that asks
- * about goaded creatures sees it. Read by the attack-requirement checks in
- * `combat/eligibility.ts`; lapses as `by`'s next turn begins.
- */
-export interface AttackRequirementRule {
-  /** The effect's controller — the "you" of "a player other than you". */
-  readonly by: PlayerId;
-  readonly filter: CardFilter;
-  /** "…and attack a player other than you if able", as well as "attack
-   * each combat if able". */
-  readonly otherThanYou: boolean;
-  /** Only this creature, in this battlefield stint — "target creature
-   * attacks … if able" (Alluring Siren): once it leaves, the creature that
-   * comes back is a new object the rule doesn't bind (rule 400.7). */
-  readonly object?: { readonly id: ObjectId; readonly stint: number };
-  /** Only creatures this player controls as attackers are declared —
-   * "creatures target player controls attack … if able" (Taunt). */
-  readonly controlledBy?: PlayerId;
-  /** "Attacks [this player or planeswalker] if able" (rule 508.1d): obeyed
-   * only by attacking it, so it binds only while it can be attacked. */
-  readonly attacks?: PlayerId | ObjectId;
-  /** The battlefield stint of an `attacks` planeswalker: once it has left,
-   * the one that comes back is a new object (rule 400.7) it doesn't name. */
-  readonly attacksStint?: number;
-  /** How long it lasts — absent, until `by`'s next turn (Kardur):
-   * - `this-turn`: the turn numbered `turn` (Alluring Siren);
-   * - `next-turn-of`: during `player`'s next turn after the turn numbered
-   *   `after` (Taunt's "during target player's next turn", Gideon,
-   *   Battle-Forged's "during its controller's next turn"), `started` once
-   *   that turn has begun;
-   * - `next-combat-of`: `player`'s next combat phase — not `after`, the
-   *   one under way as it was created (Trench Behemoth's "attacks during its
-   *   controller's next combat phase if able"). */
-  readonly duration?:
-    | { readonly kind: "this-turn"; readonly turn: number }
-    | { readonly kind: "next-turn-of"; readonly player: PlayerId; readonly after: number; readonly started?: number }
-    | { readonly kind: "next-combat-of"; readonly player: PlayerId; readonly after?: CombatId };
-}
-
-/** Whether `rule` is in force now (`AttackRequirementRule.duration`). */
-export function attackRequirementActive(state: GameState, rule: AttackRequirementRule): boolean {
-  const d = rule.duration;
-  if (d === undefined) return true;
-  if (d.kind === "this-turn") return state.turn.number === d.turn;
-  const active = activePlayerOf(state);
-  if (d.kind === "next-turn-of") return d.started === state.turn.number && active === d.player;
-  if (active !== d.player) return false;
-  const now = state.players[d.player]?.currentCombat;
-  return d.after === undefined || now === undefined || now.turn !== d.after.turn || now.phase !== d.after.phase;
-}
 
 /**
  * A stretch of the game during which every player knew what an object was:
@@ -6161,40 +6072,6 @@ export interface GameState {
    * battlefield" for (a modifier's or control effect's `whileSource`) — so a
    * permanent leaving looks for effects to end only when it's one of these. */
   whileSourceIds?: ObjectId[];
-  /** Combat restrictions imposed as a rule for the rest of the turn — "creatures
-   * your opponents control can't block this turn" (the `restrict` effect's
-   * `filter` form): every permanent matching `filter`, from `you`'s side,
-   * including ones that enter later (rule 611.2c). Read through
-   * `restrictionsOf`. Turn-scoped. */
-  turnRestrictions?: {
-    readonly filter: CardFilter;
-    readonly you: PlayerId;
-    readonly restrictions: readonly CombatRestriction[];
-    /** "… can't be blocked by [this] this turn" (Dread Charge's "except by
-     * black creatures"): read with the block filters, not `restrictionsOf`. */
-    readonly cantBeBlockedBy?: CardFilter;
-    /** The one permanent left out — Mark for Death's "**other** creatures
-     * that player controls" — held by its stint (rule 400.7). */
-    readonly except?: { readonly object: ObjectId; readonly zoneChangeCount: number };
-    /** They have to block this attacker this turn if able (Magnetic Web — the
-     * `block-if-able` effect's `filter` form), held by its stint (rule 400.7);
-     * read into the blockers offer's `blockRequirements`. */
-    readonly blocks?: { readonly object: ObjectId; readonly zoneChangeCount: number };
-  }[];
-  /** Blocking requirements on one creature each (rule 509.1c) — "target
-   * creature blocks this turn if able", or blocks `attacker` if able
-   * (provoke, rule 702.39a): the `block-if-able` effect. Each creature is
-   * held by its `zoneChangeCount`, so one that has left the battlefield is
-   * no longer bound or blocked (rule 400.7). Read by
-   * `decisions/blockers.ts` into the offer's `blockRequirements`.
-   * Turn-scoped; a `thisCombat` one ends with the combat phase. */
-  blockRequirements?: {
-    readonly blocker: ObjectId;
-    readonly zoneChangeCount: number;
-    readonly attacker?: ObjectId;
-    readonly attackerZoneChangeCount?: number;
-    readonly thisCombat?: boolean;
-  }[];
   /** Rule 723, oldest first: "you control target player during that player's
    * next turn" (`control-player`), waiting for that turn and then working
    * through it. Read through `player-control.ts`. */
@@ -6222,10 +6099,6 @@ export interface GameState {
    * (611.2c doesn't lock it in). Read through `unblockedAssignmentOf`.
    * Turn-scoped. */
   turnUnblockedAssignments?: { readonly filter: CardFilter; readonly you: PlayerId; readonly must?: true }[];
-  /** Attack requirements imposed as a rule of the game until a player's next
-   * turn — the `attack-requirement` effect (Kardur, Doomscourge). See
-   * {@link AttackRequirementRule}. Absent when there are none. */
-  attackRequirements?: AttackRequirementRule[];
   /** Phases owed straight after the combat phase under way, the next one
    * first — each is added directly after the phase it was made in, so the
    * most recently created goes first (rule 500.8). An additional combat
@@ -6844,7 +6717,6 @@ export function tokenFoldKey(o: GameObject): string {
     o.skipsNextUntap ?? false,
     o.skipsFurtherUntaps ?? null,
     o.skipsUntapOf ?? null,
-    o.mustAttackPlayer ?? null,
     o.controlEffects ?? null,
     o.controlEndsAtCleanup,
     o.chosenOnEnter ?? null,

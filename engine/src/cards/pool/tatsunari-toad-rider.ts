@@ -36,8 +36,8 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "restrict", target: "source", restrictions: [], cantBeBlockedBy: NO_FLYING_OR_REACH },
-          { kind: "restrict", target: 0, restrictions: [], cantBeBlockedBy: NO_FLYING_OR_REACH },
+          { kind: "restrict", target: "source", restrictions: [{ kind: "cant-be-blocked", by: NO_FLYING_OR_REACH }]},
+          { kind: "restrict", target: 0, restrictions: [{ kind: "cant-be-blocked", by: NO_FLYING_OR_REACH }]},
         ],
       },
       resolve: null,

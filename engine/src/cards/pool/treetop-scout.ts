@@ -16,7 +16,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantBeBlockedBy: { notKeyword: "flying" },
+      restrictions: [{ kind: "cant-be-blocked", by: { notKeyword: "flying" } }],
       text: "This creature can't be blocked except by creatures with flying.",
     },
   ],

@@ -26,7 +26,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "creatures-you-control" },
-      cantBeBlockedBy: { notSupertype: "legendary" },
+      restrictions: [{ kind: "cant-be-blocked", by: { notSupertype: "legendary" } }],
       text: EVASION_TEXT,
     },
   ],

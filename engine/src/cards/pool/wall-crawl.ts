@@ -31,7 +31,7 @@ export default defineCard({
       // "Spiders you control" — permanents with the type (The Swarmweaver's scope).
       affects: { scope: "filter", filter: { subtype: "Spider", controlledBy: "you" } },
       grantPt: [1, 1],
-      cantBeBlockedBy: { type: "creature", keyword: "defender" },
+      restrictions: [{ kind: "cant-be-blocked", by: { type: "creature", keyword: "defender" } }],
       text: ANTHEM_TEXT,
     },
   ],

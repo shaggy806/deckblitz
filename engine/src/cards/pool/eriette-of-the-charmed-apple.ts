@@ -21,7 +21,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "filter", filter: { type: "creature", enchantedBy: "you" } },
-      cantAttackController: true,
+      restrictions: [{ kind: "cant-attack", at: "you-and-planeswalkers" }],
       text: STATIC_TEXT,
     },
   ],

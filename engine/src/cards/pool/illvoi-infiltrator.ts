@@ -23,7 +23,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "cast-this-turn", atLeast: 2 },
-      cantBeBlockedBy: {},
+      restrictions: [{ kind: "cant-be-blocked", by: {} }],
       text: UNBLOCKABLE_TEXT,
     },
   ],

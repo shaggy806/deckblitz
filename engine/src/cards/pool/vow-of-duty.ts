@@ -18,7 +18,7 @@ export default defineCard({
       grantKeywords: ["vigilance"],
       // "You" is the Aura's controller — usually cast on an opponent's
       // creature, so it can still attack everyone else.
-      cantAttackController: true,
+      restrictions: [{ kind: "cant-attack", at: "you-and-planeswalkers" }],
       text:
         "Enchanted creature gets +2/+2, has vigilance, and can't attack you or " +
         "planeswalkers you control.",

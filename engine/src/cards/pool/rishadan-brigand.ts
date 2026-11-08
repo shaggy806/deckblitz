@@ -34,7 +34,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      canBlockOnly: { keyword: "flying" },
+      restrictions: [{ kind: "cant-block", attackers: { not: { keyword: "flying" } } }],
       text: BLOCK_TEXT,
     },
   ],

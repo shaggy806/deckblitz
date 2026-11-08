@@ -23,7 +23,7 @@ export default defineCard({
     },
   ],
   static: [
-    { affects: { scope: "filter", filter: { type: "creature", keyword: "flying" } }, cantAttackController: "player", text: "Creatures with flying can't attack you or block creatures you control." },
-    { affects: { scope: "filter", filter: { type: "creature", controlledBy: "you" } }, cantBeBlockedBy: { keyword: "flying" }, text: "Creatures with flying can't attack you or block creatures you control." },
+    { affects: { scope: "filter", filter: { type: "creature", keyword: "flying" } }, restrictions: [{ kind: "cant-attack", at: "you" }], text: "Creatures with flying can't attack you or block creatures you control." },
+    { affects: { scope: "filter", filter: { type: "creature", controlledBy: "you" } }, restrictions: [{ kind: "cant-be-blocked", by: { keyword: "flying" } }], text: "Creatures with flying can't attack you or block creatures you control." },
   ],
 });

@@ -8,6 +8,7 @@
  * is tested with it (commanders-goad-suspect.test.ts).
  */
 
+import { aimAt, overGame } from "./combat-probe.js";
 import { describe, expect, it } from "vitest";
 
 import type { LegalAction } from "../actions.js";
@@ -193,7 +194,7 @@ describe("attack requirements are obeyed as far as they can be (rule 508.1d)", (
   it("an encore requirement and a goad by the same player are one requirement each, either obeyed", () => {
     const { game } = setUp([A, B, C]);
     const bears = spawn(game, "Grizzly Bears", B);
-    game.state.objects[bears].mustAttackPlayer = A;
+    aimAt(game, bears, A, A);
     game.debugApplyEffect(A, { kind: "goad", target: 0 }, [obj(bears)]);
     const offer = attackOffer(game, B);
     expect(offer.mustAttack).toContain(bears);
@@ -203,7 +204,7 @@ describe("attack requirements are obeyed as far as they can be (rule 508.1d)", (
   it("an encore opponent it can't attack binds it to nothing", () => {
     const { game } = setUp([A, B, C]);
     const bears = spawn(game, "Grizzly Bears", B);
-    game.state.objects[bears].mustAttackPlayer = A;
+    aimAt(game, bears, A, A);
     // Alice's Vow of Duty: "can't attack you or planeswalkers you control".
     const vow = spawn(game, "Vow of Duty", A);
     game.state.objects[vow].attachedTo = bears;
@@ -240,20 +241,16 @@ describe("an attack-requirement rule (Kardur, Doomscourge)", () => {
     const { game } = setUp();
     game.debugSpawn("Kardur, Doomscourge", A, "battlefield", { announceEntry: true });
     game.advanceUntil(quiet);
-    expect(game.state.attackRequirements).toHaveLength(1);
+    expect(overGame(game)).toHaveLength(1);
     game.advanceUntil((s) => s.turn.number === 3 || s.result.over);
-    expect(game.state.attackRequirements).toBeUndefined();
+    expect(overGame(game)).toEqual([]);
   });
 
   it('without "other than you", only makes the creatures attack each combat if able', () => {
     const { game } = setUp([A, B, C]);
     const bears = spawn(game, "Grizzly Bears", B);
     const garruk = spawn(game, "Garruk Wildspeaker", C);
-    game.debugApplyEffect(A, {
-      kind: "attack-requirement",
-      filter: { type: "creature", controlledBy: "opponent" },
-      otherThanYou: false,
-    });
+    game.debugApplyEffect(A, { kind: "restrict", filter: { type: "creature", controlledBy: "opponent" }, restrictions: ["must-attack"], duration: "until-your-next-turn" });
     expect(goaders(game, bears)).toEqual([]);
     const offer = attackOffer(game, B);
     expect(offer.mustAttack).toContain(bears);

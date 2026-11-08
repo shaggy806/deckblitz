@@ -17,7 +17,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "modify-pt", target: 0, power: 1, toughness: 1, duration: "end-of-turn" },
-      { kind: "restrict", target: 0, restrictions: [], cantBeBlockedBy: { power: { op: "gte", n: 3 } } },
+      { kind: "restrict", target: 0, restrictions: [{ kind: "cant-be-blocked", by: { power: { op: "gte", n: 3 } } }]},
     ],
   },
   faces: ["Cheeky House-Mouse", "Squeak By"],

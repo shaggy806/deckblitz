@@ -1,3 +1,4 @@
+import { blockRecords } from "./combat-probe.js";
 import { describe, expect, it } from "vitest";
 import {
   A,
@@ -85,7 +86,7 @@ describe("recheck R4, group D", () => {
     expect(controller(game, bears)).toBe(A);
     expect(controller(game, giant)).toBe(A);
     expect(game.state.objects[bears].tapped).toBe(false);
-    expect((game.state.blockRequirements ?? []).map((r) => r.blocker).sort()).toEqual([bears, giant].sort());
+    expect(blockRecords(game).map((r) => r.blocker).sort()).toEqual([bears, giant].sort());
   });
 
   it("Avalanche Tusker: the target creature must block it", () => {

@@ -19,7 +19,7 @@ export default defineCard({
     { affects: { scope: "attached" }, grantPt: [1, 1], text: "Equipped creature gets +1/+1." },
     {
       affects: { scope: "attached" },
-      cantBeBlockedBy: { power: { op: "gte", n: 4 } },
+      restrictions: [{ kind: "cant-be-blocked", by: { power: { op: "gte", n: 4 } } }],
       text: "Equipped creature can't be blocked by creatures with power 4 or greater.",
     },
   ],

@@ -14,7 +14,7 @@ export default defineCard({
       grantPt: [2, 2],
       grantKeywords: ["first-strike"],
       // "You" is the Aura's controller.
-      cantAttackController: true,
+      restrictions: [{ kind: "cant-attack", at: "you-and-planeswalkers" }],
       text: "Enchanted creature gets +2/+2, has first strike, and can't attack you or planeswalkers you control.",
     },
   ],

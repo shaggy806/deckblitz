@@ -13,6 +13,6 @@ export default defineCard({
   keywords: ["flying"],
   text: `Flying\n${ATTACK}`,
   static: [
-    { affects: { scope: "self" }, cantAttackUnlessDefender: { controls: { type: "creature", keyword: "flying" } }, text: ATTACK },
+    { affects: { scope: "self" }, restrictions: [{ kind: "cant-attack", unlessDefender: { controls: { type: "creature", keyword: "flying" } } }], text: ATTACK },
   ],
 });

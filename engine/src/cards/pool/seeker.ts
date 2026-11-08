@@ -17,7 +17,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "attached" },
-      cantBeBlockedBy: { notTypes: ["artifact"], notColors: ["W"] },
+      restrictions: [{ kind: "cant-be-blocked", by: { notTypes: ["artifact"], notColors: ["W"] } }],
       text: STATIC_TEXT,
     },
   ],

@@ -12,7 +12,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "filter", filter: { type: "creature", ofChosenColor: true, notKeyword: "flying" } },
-      cantAttackController: "player",
+      restrictions: [{ kind: "cant-attack", at: "you" }],
       text: TEXT,
     },
   ],

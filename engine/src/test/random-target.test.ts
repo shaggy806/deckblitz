@@ -5,6 +5,7 @@
  * activation, and Capricious Efreet's chosen targets of which one is destroyed
  * at random, which is the resolution-time pick Wild Swing has.
  */
+import { aimedAt } from "./combat-probe.js";
 import { describe, expect, it } from "vitest";
 
 import type { ObjectId, PlayerId } from "../primitives.js";
@@ -182,7 +183,7 @@ describe("Knight Rampager", () => {
     const { game } = table({ players: 3 });
     const knight = spawn(game, "Knight Rampager", A, { sick: false });
     toStep(game, "declare-attackers", A);
-    expect([B, C]).toContain(game.state.objects[knight].mustAttackPlayer);
+    expect([B, C]).toContain(aimedAt(game, knight));
   });
 });
 

@@ -20,7 +20,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "creatures-you-control" },
-      blockedByAtMostOne: true,
+      restrictions: [{ kind: "cant-be-blocked", byMoreThan: 1 }],
       text: "Each creature you control can't be blocked by more than one creature.",
     },
   ],

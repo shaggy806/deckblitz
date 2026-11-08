@@ -17,7 +17,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "attached" },
-      cantBeBlockedBy: { subtypes: ["Vampire", "Zombie"] },
+      restrictions: [{ kind: "cant-be-blocked", by: { subtypes: ["Vampire", "Zombie"] } }],
       text: BLOCK_TEXT,
     },
     {

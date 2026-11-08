@@ -17,7 +17,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "filter", filter: { type: "creature", controlledBy: "you", keyword: "menace" } },
-      blockedByAtLeast: 3,
+      restrictions: [{ kind: "cant-be-blocked", byFewerThan: 3 }],
       text: EVASION,
     },
   ],

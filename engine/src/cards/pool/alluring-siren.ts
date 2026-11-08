@@ -18,7 +18,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: true },
       targets: ["creature-an-opponent-controls"],
-      effect: { kind: "attack-requirement", target: 0, attacks: "you", duration: "end-of-turn" },
+      effect: { kind: "restrict", target: 0, restrictions: [{ kind: "must-attack", at: "you" }], duration: "end-of-turn" },
       resolve: null,
       text: TAP_TEXT,
     },

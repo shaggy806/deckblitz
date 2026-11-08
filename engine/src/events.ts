@@ -5,7 +5,7 @@
  */
 
 import type { CastVia } from "./actions.js";
-import type { CardType, CombatRestriction } from "./cards.js";
+import type { CardType, CombatWord } from "./cards.js";
 import type { Color, ManaType } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { LeftBattlefield, PlayerCounterKind, ZoneType } from "./state.js";
@@ -1527,7 +1527,7 @@ export type GameEvent =
       readonly type: "restrictions-imposed";
       readonly object?: ObjectId;
       readonly player: PlayerId;
-      readonly restrictions: readonly CombatRestriction[];
+      readonly restrictions: readonly CombatWord[];
       /** How long `object`'s last; absent means until end of turn. */
       readonly duration?: Expiry;
       /** They apply only during this player's next turn (Wall of Dust). */

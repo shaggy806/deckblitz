@@ -23,8 +23,8 @@ export default defineCard({
       effect: {
         kind: "restrict",
         target: "source",
-        restrictions: [],
-        cantBeBlockedBy: { notKeyword: "defender" },
+        restrictions: [{ kind: "cant-be-blocked", by: { notKeyword: "defender" } }],
+        
       },
       resolve: null,
       text: BLOCK_TEXT,

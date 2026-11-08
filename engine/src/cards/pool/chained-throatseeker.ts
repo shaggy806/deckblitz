@@ -14,7 +14,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantAttackUnlessDefender: { holds: { kind: "player-counters", who: "you", counter: "poison", atLeast: 1 } },
+      restrictions: [{ kind: "cant-attack", unlessDefender: { holds: { kind: "player-counters", who: "you", counter: "poison", atLeast: 1 } } }],
       text: "This creature can't attack unless defending player is poisoned.",
     },
   ],

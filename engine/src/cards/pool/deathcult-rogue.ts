@@ -17,5 +17,5 @@ export default defineCard({
   power: 2,
   toughness: 2,
   text: TEXT,
-  static: [{ affects: { scope: "self" }, cantBeBlockedBy: { notSubtypes: ["Rogue"] }, text: TEXT }],
+  static: [{ affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", by: { notSubtypes: ["Rogue"] } }], text: TEXT }],
 });

@@ -15,7 +15,7 @@ export default defineCard({
     {
       cost: { mana: "{R}", tap: false },
       targets: ["creature"],
-      effect: { kind: "restrict", target: 0, restrictions: [], cantBlockAttacker: "source" },
+      effect: { kind: "restrict", target: 0, restrictions: [{ kind: "cant-block", attacker: "source" }]},
       resolve: null,
       text: "{R}: Target creature can't block this creature this turn.",
     },

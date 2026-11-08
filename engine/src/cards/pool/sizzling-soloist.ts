@@ -25,7 +25,7 @@ export default defineCard({
           {
             kind: "conditional",
             condition: { kind: "resolved-this-turn", n: 2 },
-            then: { kind: "attack-requirement", target: 0, duration: "during-its-controllers-next-combat" },
+            then: { kind: "restrict", target: 0, restrictions: ["must-attack"], duration: "during-its-controllers-next-combat" },
           },
         ],
       },

@@ -15,7 +15,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantAttackUnlessDefender: { controls: { subtype: "Island" } },
+      restrictions: [{ kind: "cant-attack", unlessDefender: { controls: { subtype: "Island" } } }],
       text: "Zhou Yu can't attack unless defending player controls an Island.",
     },
   ],

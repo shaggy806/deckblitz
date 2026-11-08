@@ -16,7 +16,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantAttackUnlessDefender: { controls: { type: "land", supertype: "snow" } },
+      restrictions: [{ kind: "cant-attack", unlessDefender: { controls: { type: "land", supertype: "snow" } } }],
       text: ATTACK_TEXT,
     },
   ],

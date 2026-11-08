@@ -15,7 +15,7 @@ export default defineCard({
   text: `${UNTAP_STEP_TEXT}\n${LIFE_TEXT}\n${BLOCK_TEXT}`,
   static: [
     { affects: { scope: "self" }, doesntUntap: true, text: UNTAP_STEP_TEXT },
-    { affects: { scope: "self" }, blockedByAtLeast: 3, text: BLOCK_TEXT },
+    { affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", byFewerThan: 3 }], text: BLOCK_TEXT },
   ],
   activated: [
     {

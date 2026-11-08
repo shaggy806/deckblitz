@@ -315,8 +315,10 @@ import _poolAetherTide from "./pool/aether-tide.js";
 import _poolAetherTradewinds from "./pool/aether-tradewinds.js";
 import _poolAetherTunnel from "./pool/aether-tunnel.js";
 import _poolAetherVial from "./pool/aether-vial.js";
+import _poolAetherWeb from "./pool/aether-web.js";
 import _poolAetherbladeAgent from "./pool/aetherblade-agent.js";
 import _poolAetherbornMarauder from "./pool/aetherborn-marauder.js";
+import _poolAetherflameWall from "./pool/aetherflame-wall.js";
 import _poolAetherfluxConduit from "./pool/aetherflux-conduit.js";
 import _poolAetherfluxReservoir from "./pool/aetherflux-reservoir.js";
 import _poolAethergeodeMiner from "./pool/aethergeode-miner.js";
@@ -3070,6 +3072,7 @@ import _poolBornToDrive from "./pool/born-to-drive.js";
 import _poolBorneUponAWind from "./pool/borne-upon-a-wind.js";
 import _poolBoromirGondorsHope from "./pool/boromir-gondors-hope.js";
 import _poolBoromirWardenOfTheTower from "./pool/boromir-warden-of-the-tower.js";
+import _poolBorosBattleshaper from "./pool/boros-battleshaper.js";
 import _poolBorosChallenger from "./pool/boros-challenger.js";
 import _poolBorosCharm from "./pool/boros-charm.js";
 import _poolBorosCluestone from "./pool/boros-cluestone.js";
@@ -3321,6 +3324,7 @@ import _poolBrilliantRestoration from "./pool/brilliant-restoration.js";
 import _poolBrilliantSpectrum from "./pool/brilliant-spectrum.js";
 import _poolBrilliantWings from "./pool/brilliant-wings.js";
 import _poolBrimazBlightOfOreskos from "./pool/brimaz-blight-of-oreskos.js";
+import _poolBrimazKingOfOreskos from "./pool/brimaz-king-of-oreskos.js";
 import _poolBrimstoneDragon from "./pool/brimstone-dragon.js";
 import _poolBrimstoneMage from "./pool/brimstone-mage.js";
 import _poolBrimstoneRoundup from "./pool/brimstone-roundup.js";
@@ -6427,6 +6431,7 @@ import _poolDenyingWind from "./pool/denying-wind.js";
 import _poolDenziloreFatehold from "./pool/denzilore-fatehold.js";
 import _poolDepalaPilotExemplar from "./pool/depala-pilot-exemplar.js";
 import _poolDepartTheRealm from "./pool/depart-the-realm.js";
+import _poolDepartedDeckhand from "./pool/departed-deckhand.js";
 import _poolDepartedSoulkeeper from "./pool/departed-soulkeeper.js";
 import _poolDependableQuinjet from "./pool/dependable-quinjet.js";
 import _poolDeployTheGatewatch from "./pool/deploy-the-gatewatch.js";
@@ -9360,6 +9365,7 @@ import _poolFlaringPain from "./pool/flaring-pain.js";
 import _poolFlashConscription from "./pool/flash-conscription.js";
 import _poolFlashCounter from "./pool/flash-counter.js";
 import _poolFlashFlood from "./pool/flash-flood.js";
+import _poolFlashFoliage from "./pool/flash-foliage.js";
 import _poolFlashOfDefiance from "./pool/flash-of-defiance.js";
 import _poolFlashPhotography from "./pool/flash-photography.js";
 import _poolFlashThompsonSpiderFan from "./pool/flash-thompson-spider-fan.js";
@@ -9649,6 +9655,7 @@ import _poolForgeDevil from "./pool/forge-devil.js";
 import _poolForgeOfHeroes from "./pool/forge-of-heroes.js";
 import _poolForgebornOreads from "./pool/forgeborn-oreads.js";
 import _poolForgehammerCenturion from "./pool/forgehammer-centurion.js";
+import _poolForgestokerDragon from "./pool/forgestoker-dragon.js";
 import _poolForget from "./pool/forget.js";
 import _poolForgingTheAnchor from "./pool/forging-the-anchor.js";
 import _poolForgingTheTyriteSword from "./pool/forging-the-tyrite-sword.js";
@@ -10014,6 +10021,7 @@ import _poolGainsay from "./pool/gainsay.js";
 import _poolGaiusVanBaelsar from "./pool/gaius-van-baelsar.js";
 import _poolGalaGreeters from "./pool/gala-greeters.js";
 import _poolGalacticWayfarer from "./pool/galactic-wayfarer.js";
+import _poolGalactusDevourerOfWorlds from "./pool/galactus-devourer-of-worlds.js";
 import _poolGaladhrimAmbush from "./pool/galadhrim-ambush.js";
 import _poolGaladhrimBow from "./pool/galadhrim-bow.js";
 import _poolGaladhrimBrigade from "./pool/galadhrim-brigade.js";
@@ -11985,6 +11993,7 @@ import _poolHeartstone from "./pool/heartstone.js";
 import _poolHeartstringPuller from "./pool/heartstring-puller.js";
 import _poolHeartwarmingRedemption from "./pool/heartwarming-redemption.js";
 import _poolHeartwoodCrafter from "./pool/heartwood-crafter.js";
+import _poolHeartwoodDryad from "./pool/heartwood-dryad.js";
 import _poolHeartwoodGiant from "./pool/heartwood-giant.js";
 import _poolHeartwoodShard from "./pool/heartwood-shard.js";
 import _poolHeartwoodStoryteller from "./pool/heartwood-storyteller.js";
@@ -20019,6 +20028,7 @@ import _poolPterafractyl from "./pool/pterafractyl.js";
 import _poolPteramander from "./pool/pteramander.js";
 import _poolPterodonKnight from "./pool/pterodon-knight.js";
 import _poolPteronGhost from "./pool/pteron-ghost.js";
+import _poolPublicEnemy from "./pool/public-enemy.js";
 import _poolPublicExecution from "./pool/public-execution.js";
 import _poolPublicThoroughfare from "./pool/public-thoroughfare.js";
 import _poolPucasCovenant from "./pool/pucas-covenant.js";
@@ -23683,6 +23693,7 @@ import _poolSilverRaven from "./pool/silver-raven.js";
 import _poolSilverSableMercenaryLeader from "./pool/silver-sable-mercenary-leader.js";
 import _poolSilverSeraph from "./pool/silver-seraph.js";
 import _poolSilverShroudCostume from "./pool/silver-shroud-costume.js";
+import _poolSilverSurferGalactussHerald from "./pool/silver-surfer-galactuss-herald.js";
 import _poolSilverbackApe from "./pool/silverback-ape.js";
 import _poolSilverbackElder from "./pool/silverback-elder.js";
 import _poolSilverbackShaman from "./pool/silverback-shaman.js";
@@ -28834,6 +28845,7 @@ import _poolVaporSnare from "./pool/vapor-snare.js";
 import _poolVaporkin from "./pool/vaporkin.js";
 import _poolVaporousDjinn from "./pool/vaporous-djinn.js";
 import _poolVarchildBetrayerOfKjeldor from "./pool/varchild-betrayer-of-kjeldor.js";
+import _poolVarchildsCrusader from "./pool/varchilds-crusader.js";
 import _poolVariableChaser from "./pool/variable-chaser.js";
 import _poolVarinaLichQueen from "./pool/varina-lich-queen.js";
 import _poolVarisSilverymoonRanger from "./pool/varis-silverymoon-ranger.js";
@@ -29581,6 +29593,7 @@ import _poolWallOfBrambles from "./pool/wall-of-brambles.js";
 import _poolWallOfCorpses from "./pool/wall-of-corpses.js";
 import _poolWallOfDeceit from "./pool/wall-of-deceit.js";
 import _poolWallOfDenial from "./pool/wall-of-denial.js";
+import _poolWallOfDiffusion from "./pool/wall-of-diffusion.js";
 import _poolWallOfDistortion from "./pool/wall-of-distortion.js";
 import _poolWallOfDust from "./pool/wall-of-dust.js";
 import _poolWallOfEarth from "./pool/wall-of-earth.js";
@@ -29625,6 +29638,7 @@ import _poolWallOfTanglecord from "./pool/wall-of-tanglecord.js";
 import _poolWallOfTears from "./pool/wall-of-tears.js";
 import _poolWallOfTombstones from "./pool/wall-of-tombstones.js";
 import _poolWallOfTorches from "./pool/wall-of-torches.js";
+import _poolWallOfVapor from "./pool/wall-of-vapor.js";
 import _poolWallOfVines from "./pool/wall-of-vines.js";
 import _poolWallOfVipers from "./pool/wall-of-vipers.js";
 import _poolWallOfWater from "./pool/wall-of-water.js";
@@ -32036,8 +32050,10 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAetherTradewinds,
   _poolAetherTunnel,
   _poolAetherVial,
+  _poolAetherWeb,
   _poolAetherbladeAgent,
   _poolAetherbornMarauder,
+  _poolAetherflameWall,
   _poolAetherfluxConduit,
   _poolAetherfluxReservoir,
   _poolAethergeodeMiner,
@@ -34791,6 +34807,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBorneUponAWind,
   _poolBoromirGondorsHope,
   _poolBoromirWardenOfTheTower,
+  _poolBorosBattleshaper,
   _poolBorosChallenger,
   _poolBorosCharm,
   _poolBorosCluestone,
@@ -35042,6 +35059,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBrilliantSpectrum,
   _poolBrilliantWings,
   _poolBrimazBlightOfOreskos,
+  _poolBrimazKingOfOreskos,
   _poolBrimstoneDragon,
   _poolBrimstoneMage,
   _poolBrimstoneRoundup,
@@ -38148,6 +38166,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolDenziloreFatehold,
   _poolDepalaPilotExemplar,
   _poolDepartTheRealm,
+  _poolDepartedDeckhand,
   _poolDepartedSoulkeeper,
   _poolDependableQuinjet,
   _poolDeployTheGatewatch,
@@ -41081,6 +41100,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFlashConscription,
   _poolFlashCounter,
   _poolFlashFlood,
+  _poolFlashFoliage,
   _poolFlashOfDefiance,
   _poolFlashPhotography,
   _poolFlashThompsonSpiderFan,
@@ -41370,6 +41390,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolForgeOfHeroes,
   _poolForgebornOreads,
   _poolForgehammerCenturion,
+  _poolForgestokerDragon,
   _poolForget,
   _poolForgingTheAnchor,
   _poolForgingTheTyriteSword,
@@ -41735,6 +41756,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGaiusVanBaelsar,
   _poolGalaGreeters,
   _poolGalacticWayfarer,
+  _poolGalactusDevourerOfWorlds,
   _poolGaladhrimAmbush,
   _poolGaladhrimBow,
   _poolGaladhrimBrigade,
@@ -43706,6 +43728,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHeartstringPuller,
   _poolHeartwarmingRedemption,
   _poolHeartwoodCrafter,
+  _poolHeartwoodDryad,
   _poolHeartwoodGiant,
   _poolHeartwoodShard,
   _poolHeartwoodStoryteller,
@@ -51740,6 +51763,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPteramander,
   _poolPterodonKnight,
   _poolPteronGhost,
+  _poolPublicEnemy,
   _poolPublicExecution,
   _poolPublicThoroughfare,
   _poolPucasCovenant,
@@ -55404,6 +55428,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSilverSableMercenaryLeader,
   _poolSilverSeraph,
   _poolSilverShroudCostume,
+  _poolSilverSurferGalactussHerald,
   _poolSilverbackApe,
   _poolSilverbackElder,
   _poolSilverbackShaman,
@@ -60555,6 +60580,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVaporkin,
   _poolVaporousDjinn,
   _poolVarchildBetrayerOfKjeldor,
+  _poolVarchildsCrusader,
   _poolVariableChaser,
   _poolVarinaLichQueen,
   _poolVarisSilverymoonRanger,
@@ -61302,6 +61328,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWallOfCorpses,
   _poolWallOfDeceit,
   _poolWallOfDenial,
+  _poolWallOfDiffusion,
   _poolWallOfDistortion,
   _poolWallOfDust,
   _poolWallOfEarth,
@@ -61346,6 +61373,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWallOfTears,
   _poolWallOfTombstones,
   _poolWallOfTorches,
+  _poolWallOfVapor,
   _poolWallOfVines,
   _poolWallOfVipers,
   _poolWallOfWater,
@@ -63770,8 +63798,10 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/aether-tradewinds": _poolAetherTradewinds,
   "pool/aether-tunnel": _poolAetherTunnel,
   "pool/aether-vial": _poolAetherVial,
+  "pool/aether-web": _poolAetherWeb,
   "pool/aetherblade-agent": _poolAetherbladeAgent,
   "pool/aetherborn-marauder": _poolAetherbornMarauder,
+  "pool/aetherflame-wall": _poolAetherflameWall,
   "pool/aetherflux-conduit": _poolAetherfluxConduit,
   "pool/aetherflux-reservoir": _poolAetherfluxReservoir,
   "pool/aethergeode-miner": _poolAethergeodeMiner,
@@ -66525,6 +66555,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/borne-upon-a-wind": _poolBorneUponAWind,
   "pool/boromir-gondors-hope": _poolBoromirGondorsHope,
   "pool/boromir-warden-of-the-tower": _poolBoromirWardenOfTheTower,
+  "pool/boros-battleshaper": _poolBorosBattleshaper,
   "pool/boros-challenger": _poolBorosChallenger,
   "pool/boros-charm": _poolBorosCharm,
   "pool/boros-cluestone": _poolBorosCluestone,
@@ -66776,6 +66807,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/brilliant-spectrum": _poolBrilliantSpectrum,
   "pool/brilliant-wings": _poolBrilliantWings,
   "pool/brimaz-blight-of-oreskos": _poolBrimazBlightOfOreskos,
+  "pool/brimaz-king-of-oreskos": _poolBrimazKingOfOreskos,
   "pool/brimstone-dragon": _poolBrimstoneDragon,
   "pool/brimstone-mage": _poolBrimstoneMage,
   "pool/brimstone-roundup": _poolBrimstoneRoundup,
@@ -69882,6 +69914,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/denzilore-fatehold": _poolDenziloreFatehold,
   "pool/depala-pilot-exemplar": _poolDepalaPilotExemplar,
   "pool/depart-the-realm": _poolDepartTheRealm,
+  "pool/departed-deckhand": _poolDepartedDeckhand,
   "pool/departed-soulkeeper": _poolDepartedSoulkeeper,
   "pool/dependable-quinjet": _poolDependableQuinjet,
   "pool/deploy-the-gatewatch": _poolDeployTheGatewatch,
@@ -72815,6 +72848,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/flash-conscription": _poolFlashConscription,
   "pool/flash-counter": _poolFlashCounter,
   "pool/flash-flood": _poolFlashFlood,
+  "pool/flash-foliage": _poolFlashFoliage,
   "pool/flash-of-defiance": _poolFlashOfDefiance,
   "pool/flash-photography": _poolFlashPhotography,
   "pool/flash-thompson-spider-fan": _poolFlashThompsonSpiderFan,
@@ -73104,6 +73138,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/forge-of-heroes": _poolForgeOfHeroes,
   "pool/forgeborn-oreads": _poolForgebornOreads,
   "pool/forgehammer-centurion": _poolForgehammerCenturion,
+  "pool/forgestoker-dragon": _poolForgestokerDragon,
   "pool/forget": _poolForget,
   "pool/forging-the-anchor": _poolForgingTheAnchor,
   "pool/forging-the-tyrite-sword": _poolForgingTheTyriteSword,
@@ -73469,6 +73504,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gaius-van-baelsar": _poolGaiusVanBaelsar,
   "pool/gala-greeters": _poolGalaGreeters,
   "pool/galactic-wayfarer": _poolGalacticWayfarer,
+  "pool/galactus-devourer-of-worlds": _poolGalactusDevourerOfWorlds,
   "pool/galadhrim-ambush": _poolGaladhrimAmbush,
   "pool/galadhrim-bow": _poolGaladhrimBow,
   "pool/galadhrim-brigade": _poolGaladhrimBrigade,
@@ -75440,6 +75476,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/heartstring-puller": _poolHeartstringPuller,
   "pool/heartwarming-redemption": _poolHeartwarmingRedemption,
   "pool/heartwood-crafter": _poolHeartwoodCrafter,
+  "pool/heartwood-dryad": _poolHeartwoodDryad,
   "pool/heartwood-giant": _poolHeartwoodGiant,
   "pool/heartwood-shard": _poolHeartwoodShard,
   "pool/heartwood-storyteller": _poolHeartwoodStoryteller,
@@ -83474,6 +83511,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/pteramander": _poolPteramander,
   "pool/pterodon-knight": _poolPterodonKnight,
   "pool/pteron-ghost": _poolPteronGhost,
+  "pool/public-enemy": _poolPublicEnemy,
   "pool/public-execution": _poolPublicExecution,
   "pool/public-thoroughfare": _poolPublicThoroughfare,
   "pool/pucas-covenant": _poolPucasCovenant,
@@ -87138,6 +87176,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/silver-sable-mercenary-leader": _poolSilverSableMercenaryLeader,
   "pool/silver-seraph": _poolSilverSeraph,
   "pool/silver-shroud-costume": _poolSilverShroudCostume,
+  "pool/silver-surfer-galactuss-herald": _poolSilverSurferGalactussHerald,
   "pool/silverback-ape": _poolSilverbackApe,
   "pool/silverback-elder": _poolSilverbackElder,
   "pool/silverback-shaman": _poolSilverbackShaman,
@@ -92289,6 +92328,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/vaporkin": _poolVaporkin,
   "pool/vaporous-djinn": _poolVaporousDjinn,
   "pool/varchild-betrayer-of-kjeldor": _poolVarchildBetrayerOfKjeldor,
+  "pool/varchilds-crusader": _poolVarchildsCrusader,
   "pool/variable-chaser": _poolVariableChaser,
   "pool/varina-lich-queen": _poolVarinaLichQueen,
   "pool/varis-silverymoon-ranger": _poolVarisSilverymoonRanger,
@@ -93036,6 +93076,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/wall-of-corpses": _poolWallOfCorpses,
   "pool/wall-of-deceit": _poolWallOfDeceit,
   "pool/wall-of-denial": _poolWallOfDenial,
+  "pool/wall-of-diffusion": _poolWallOfDiffusion,
   "pool/wall-of-distortion": _poolWallOfDistortion,
   "pool/wall-of-dust": _poolWallOfDust,
   "pool/wall-of-earth": _poolWallOfEarth,
@@ -93080,6 +93121,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/wall-of-tears": _poolWallOfTears,
   "pool/wall-of-tombstones": _poolWallOfTombstones,
   "pool/wall-of-torches": _poolWallOfTorches,
+  "pool/wall-of-vapor": _poolWallOfVapor,
   "pool/wall-of-vines": _poolWallOfVines,
   "pool/wall-of-vipers": _poolWallOfVipers,
   "pool/wall-of-water": _poolWallOfWater,

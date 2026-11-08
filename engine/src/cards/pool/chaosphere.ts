@@ -13,7 +13,7 @@ export default defineCard({
   types: ["enchantment"],
   text: `${BLOCK_TEXT}\n${REACH_TEXT}`,
   static: [
-    { affects: { scope: "all-creatures", withKeyword: "flying" }, canBlockOnly: { keyword: "flying" }, text: BLOCK_TEXT },
+    { affects: { scope: "all-creatures", withKeyword: "flying" }, restrictions: [{ kind: "cant-block", attackers: { not: { keyword: "flying" } } }], text: BLOCK_TEXT },
     { affects: { scope: "all-creatures", withoutKeyword: "flying" }, grantKeywords: ["reach"], text: REACH_TEXT },
   ],
 });

@@ -12,7 +12,7 @@
  * against their offers. This is what they share.
  */
 
-import type { CombatRestriction } from "../cards/define.js";
+import type { CombatWord } from "./rules.js";
 import type { ObjectId } from "../primitives.js";
 
 /** How many *other* creatures a creature may be declared beside. */
@@ -24,7 +24,7 @@ export interface CombatCompany {
 }
 
 /** What `restrictions` ask of a creature's fellow attackers. `null`: nothing. */
-export function attackCompanyOf(restrictions: ReadonlySet<CombatRestriction>): CombatCompany | null {
+export function attackCompanyOf(restrictions: ReadonlySet<CombatWord>): CombatCompany | null {
   const least = restrictions.has("cant-attack-unless-two-others")
     ? 2
     : restrictions.has("cant-attack-alone")
@@ -35,7 +35,7 @@ export function attackCompanyOf(restrictions: ReadonlySet<CombatRestriction>): C
 }
 
 /** What `restrictions` ask of a creature's fellow blockers. `null`: nothing. */
-export function blockCompanyOf(restrictions: ReadonlySet<CombatRestriction>): CombatCompany | null {
+export function blockCompanyOf(restrictions: ReadonlySet<CombatWord>): CombatCompany | null {
   const least = restrictions.has("cant-block-unless-two-others") ? 2 : restrictions.has("cant-block-alone") ? 1 : 0;
   return least > 0 ? { least } : null;
 }

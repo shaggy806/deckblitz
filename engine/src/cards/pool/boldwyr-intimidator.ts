@@ -16,7 +16,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "filter", filter: { type: "creature", subtype: "Warrior" } },
-      cantBeBlockedBy: { subtype: "Coward" },
+      restrictions: [{ kind: "cant-be-blocked", by: { subtype: "Coward" } }],
       text: STATIC_TEXT,
     },
   ],

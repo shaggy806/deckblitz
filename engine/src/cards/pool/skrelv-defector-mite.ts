@@ -28,7 +28,7 @@ export default defineCard({
           effects: [
             { kind: "grant-toxic", target: 0, amount: 1, duration: "end-of-turn" },
             { kind: "grant-protection", asHexproof: true, target: 0, from: { colors: [CHOSEN_COLOR] }, duration: "end-of-turn" },
-            { kind: "restrict", target: 0, restrictions: [], cantBeBlockedBy: { colors: [CHOSEN_COLOR] } },
+            { kind: "restrict", target: 0, restrictions: [{ kind: "cant-be-blocked", by: { colors: [CHOSEN_COLOR] } }]},
           ],
         },
       },

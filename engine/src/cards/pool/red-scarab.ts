@@ -14,7 +14,7 @@ export default defineCard({
   text: `Enchant creature\n${EVASION_TEXT}\n${PUMP_TEXT}`,
   targets: ["creature"],
   static: [
-    { affects: { scope: "attached" }, cantBeBlockedBy: { colors: ["R"] }, text: EVASION_TEXT },
+    { affects: { scope: "attached" }, restrictions: [{ kind: "cant-be-blocked", by: { colors: ["R"] } }], text: EVASION_TEXT },
     {
       affects: { scope: "attached" },
       condition: { kind: "opponent-controls", filter: { colors: ["R"] }, atLeast: 1 },

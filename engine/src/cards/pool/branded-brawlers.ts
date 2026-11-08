@@ -13,7 +13,7 @@ export default defineCard({
   toughness: 2,
   text: `${ATTACK}\n${BLOCK}`,
   static: [
-    { affects: { scope: "self" }, cantAttackIfDefender: { controls: { type: "land", tapped: false } }, text: ATTACK },
+    { affects: { scope: "self" }, restrictions: [{ kind: "cant-attack", ifDefender: { controls: { type: "land", tapped: false } } }], text: ATTACK },
     {
       affects: { scope: "self" },
       condition: { kind: "controls", filter: { type: "land", tapped: false }, atLeast: 1 },

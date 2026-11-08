@@ -31,7 +31,7 @@ export default defineCard({
   text: `${ENTER_TEXT}\n${FISH_TEXT}\nForetell {3}{U}{R}`,
   static: [
     { affects: FISH, grantKeywords: ["haste"], text: FISH_TEXT },
-    { affects: FISH, cantBeBlockedBy: { subtype: "Human" }, text: FISH_TEXT },
+    { affects: FISH, restrictions: [{ kind: "cant-be-blocked", by: { subtype: "Human" } }], text: FISH_TEXT },
   ],
   triggered: [
     {

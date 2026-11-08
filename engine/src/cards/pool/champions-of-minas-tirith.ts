@@ -32,7 +32,7 @@ export default defineCard({
         kind: "unless",
         chooser: "active-player",
         options: [{ payGeneric: { cardsInHand: "active-player" }, text: "Pay {X}" }],
-        otherwise: { kind: "player-effect", duration: "until-end-of-combat", cantAttack: "you", cantAttackBy: "active-player" },
+        otherwise: { kind: "restrict", filter: { type: "creature", controlledBy: "you" }, sideOf: "active-player", restrictions: [{ kind: "cant-attack", at: "you" }], duration: "until-end-of-combat" },
       },
       resolve: null,
       text: TEXT,

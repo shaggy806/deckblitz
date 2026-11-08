@@ -22,7 +22,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantBeBlockedBy: { power: { op: "gte", n: 3 } },
+      restrictions: [{ kind: "cant-be-blocked", by: { power: { op: "gte", n: 3 } } }],
       text: "April O'Neil can't be blocked by creatures with power 3 or greater.",
     },
   ],

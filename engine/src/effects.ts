@@ -15,7 +15,7 @@ import type { ActivatedAbility, TriggeredAbility, TriggerSpec } from "./abilitie
 import type {
   AffectSpec,
   CardType,
-  CombatRestriction,
+  CombatRule,
   Keyword,
   StaticAbility,
   StaticCondition,
@@ -33,7 +33,6 @@ import { sameVoteChoice } from "./events.js";
 import type { RandomPick, Vote, VoteChoice } from "./events.js";
 import type { ThisWayEntry } from "./this-way.js";
 import type {
-  AttackRequirementDuration,
   CopyDuration,
   DamageRuleDuration,
   Duration,
@@ -45,6 +44,8 @@ import type {
   WatchDuration,
 } from "./duration.js";
 import { resolvePlayerDuration } from "./duration.js";
+import { bindCombatRule } from "./combat/rules.js";
+import type { CombatRuleRefs } from "./combat/rules.js";
 import { textWordKind, type TextChange } from "./text-change.js";
 import type {
   AttachmentRecord,
@@ -6019,6 +6020,21 @@ export type EffectSpec =
     }
   | {
       /**
+       * "\u2026 that's blocking that creature" (rule 509.4): the permanent just
+       * put onto the battlefield is blocking `attacker`, and for what triggers
+       * it never "blocked" (509.4), though the attacker does become blocked
+       * (509.3c). Nothing on declaring blockers applies (509.4b). If `attacker`
+       * has left combat, or isn't attacking the blocker's controller or what
+       * they protect, it's on the battlefield but never blocking (506.3e,
+       * 509.4a). Sequenced after what made it (`blocker: "created"` \u2014 Brimaz,
+       * King of Oreskos, Flash Foliage).
+       */
+      readonly kind: "enter-blocking";
+      readonly blocker: ObjectRef;
+      readonly attacker: ObjectRef;
+    }
+  | {
+      /**
        * "Target unblocked attacking creature **becomes blocked**" (rule
        * 509.1h — Curtain of Light, Trap Runner): it's a blocked creature,
        * with no creature blocking it, until it leaves combat or combat ends.
@@ -6234,19 +6250,6 @@ export type EffectSpec =
        * every block by anyone (rule 509.1d). `generic` and `life` are read as
        * this resolves (rule 611.2b), a creature. */
       readonly blockTax?: { readonly generic?: EffectAmount; readonly life?: EffectAmount };
-      /** "Until your next turn, creatures can't attack you" (Chronomantic
-       * Escape): every creature, entering later too; `"you-and-planeswalkers"`
-       * if the text also names planeswalkers; `"all"`: "creatures can't attack
-       * this combat" (Overencumbered); `{ planeswalkers }`: only planeswalkers
-       * matching this from the controller's side, "can't attack **Jaces you
-       * control**" (Jace, Multiverse Architect); `"you-and-permanents"`
-       * "can't attack you or permanents you control", a battle you control
-       * too (Willie Lumpkin, Postman). */
-      readonly cantAttack?: "you" | "you-and-planeswalkers" | "you-and-permanents" | "all" | { readonly planeswalkers: CardFilter };
-      /** With `cantAttack`: only the creatures this player controls, whoever
-       * that is as the attack is declared — "**they** can't attack you this
-       * combat" (Champions of Minas Tirith). Naming nobody, nothing is made. */
-      readonly cantAttackBy?: PlayerRef;
     }
   | {
       /**
@@ -6461,7 +6464,7 @@ export type EffectSpec =
       readonly kind: "restrict";
       readonly target?: ObjectRef;
       readonly filter?: CardFilter;
-      readonly restrictions: readonly CombatRestriction[];
+      readonly restrictions: readonly CombatRule[];
       /** With `filter`: "creatures **target player** controls can't attack
        * this turn" (Oriss, Samite Guardian), "… controlled by that player or
        * by that planeswalker's controller" (Concussive Bolt), "other
@@ -6471,51 +6474,32 @@ export type EffectSpec =
        * `controlledBy: "you"` is them. Nothing happens once that target is
        * illegal. */
       readonly controlledByTarget?: number;
+      /** With `filter`: read from this player's side instead: "**they** can't
+       * attack you this combat" (Champions of Minas Tirith's `"active-player"`).
+       * Naming nobody, nothing is made. */
+      readonly sideOf?: PlayerRef;
       /** With `filter`: the permanent in this target slot is left out —
        * Mark for Death's "**other** creatures that player controls" (the
        * object it is as this resolves, rule 400.7). */
       readonly exceptTarget?: number;
       /** With `filter`: the permanents matching it **as this resolves**, each
-       * given the restrictions as a modifier until end of turn, rather than a
+       * given the restrictions as a modifier for `duration`, rather than a
        * rule binding later arrivals — where the sentence also changes their
        * characteristics, which fixes the set (rule 611.2c): Joraga
        * Invocation's "each creature you control gets +3/+3 until end of turn
        * and must be blocked this turn if able", Suicidal Charge's "those
        * creatures attack this turn if able". A token stack is bound whole. */
       readonly asItResolves?: true;
-      /** "Can't be blocked by [this] this turn" (rule 509.1b): no creature
-       * matching it, from this effect's controller's side, can block —
-       * Ghirapur Guide's `{ types: ["creature"], power: { lte: 2 } }`;
-       * "except by creatures with haste" is `{ not: … }` (Run for Your
-       * Life). Not an ability the creature gains, so it outlasts a loss of
-       * abilities; with `filter`, a turn-wide rule like the rest (Dread
-       * Charge). `restrictions` may then be empty. */
-      readonly cantBeBlockedBy?: CardFilter;
-      /** "Target creature can't block **this creature** this turn" (Kozilek's
-       * Pathfinder — rule 509.1b): `target` can't block this one creature,
-       * usually `"source"`, the object it is as this resolves (rule 400.7).
-       * A `target` form only; `restrictions` may then be empty. */
-      readonly cantBlockAttacker?: ObjectRef;
-      /** How long a `target`'s restrictions, or an `asItResolves` filter's,
-       * last — this turn when omitted; `"while-source"` is Opportunistic
-       * Dragon's "for as long as this creature remains on the battlefield, …
-       * it can't attack or block"; `"until-your-next-turn"` Taunt from the
-       * Rampart's "until your next turn, those creatures can't block";
-       * `"until-end-of-combat"` Ma Chao's "can't be blocked this combat".
-       * `"during-its-controllers-next-turn"` is a `target`'s alone: only
-       * *during* the next turn of whoever controls it as this resolves, and
-       * not until then (Wall of Dust's "can't attack during its controller's
-       * next turn"). */
-      readonly duration?: PermanentDuration | Extract<Duration, "during-its-controllers-next-turn">;
-      /** "Can't attack **you or a permanent you control**" (Immortal
-       * Obligation): `PtModifier.cantAttackYou`, "you" this effect's
-       * controller. `"you-and-planeswalkers"` is "can't attack you or
-       * **planeswalkers** you control" (Promise of Loyalty), which doesn't
-       * name a battle (rule 310.5). `restrictions` may then be empty. */
-      readonly cantAttackYou?: true | "you-and-planeswalkers";
-      /** "Can't block **creatures you control**" (Immortal Obligation):
-       * `PtModifier.cantBlockCreaturesOf`. `restrictions` may then be empty. */
-      readonly cantBlockYours?: true;
+      /** How long it lasts — this turn when omitted. A `target`'s and an
+       * `asItResolves` filter's are `PermanentDuration`s or, nothing until
+       * then, `"during-its-controllers-next-turn"` (Wall of Dust),
+       * `"during-its-controllers-next-combat"` (Trench Behemoth),
+       * `{ duringTurnOf }`; a filter's are `PlayerDuration`s. A pool test holds
+       * each form to its own. */
+      readonly duration?:
+        | PermanentDuration
+        | PlayerDuration
+        | Extract<Duration, "during-its-controllers-next-turn" | "during-its-controllers-next-combat">;
     }
   | {
       /**
@@ -6529,35 +6513,6 @@ export type EffectSpec =
        */
       readonly kind: "detain";
       readonly target: ObjectRef;
-    }
-  | {
-      /**
-       * "`target` blocks this turn if able", or "blocks `attacker` this turn
-       * if able" — a blocking requirement (rule 509.1c) on that one
-       * creature, held in `GameState.blockRequirements`: when its controller
-       * declares blockers it has to block (that attacker) whenever it can,
-       * as many requirements obeyed as can be without breaking a
-       * restriction. Not a characteristic: a creature that can't block, or
-       * can't block that attacker (flying, tapped), simply doesn't, and one
-       * that's left the battlefield (or an attacker that has) is free of it
-       * (rule 400.7). Provoke (rule 702.39a) is `attacker: "source"` after
-       * an `untap` (`provoke()` in `cards/helpers.ts`); Hunt Down's "target
-       * creature blocks target creature" is `attacker: 1`. `thisCombat`:
-       * "this combat" (Avalanche Tusker) — ends with the combat phase.
-       *
-       * With `filter` instead of `target`: every creature matching it from the
-       * controller's side blocks `attacker` this turn if able, a rule for the
-       * turn that binds one matching only later (rule 611.2c) — Magnetic Web's
-       * "all creatures with magnet counters on them block that creature this
-       * turn if able", You Look Upon the Tarrasque's "all creatures your
-       * opponents control able to block that creature this turn do so". With
-       * neither `target` nor `attacker`, `restrict`'s `must-block` says it.
-       */
-      readonly kind: "block-if-able";
-      readonly target?: ObjectRef;
-      readonly filter?: CardFilter;
-      readonly attacker?: ObjectRef;
-      readonly thisCombat?: boolean;
     }
   | {
       /**
@@ -9727,45 +9682,6 @@ export type EffectSpec =
       readonly kind: "become-saddled";
       readonly target: ObjectRef;
     }
-  | {
-      /**
-       * "Until your next turn, creatures your opponents control attack each
-       * combat if able **and attack a player other than you if able**"
-       * (Kardur, Doomscourge): goad's requirements imposed as a rule of the
-       * game rather than goading anything. So it binds every creature
-       * matching `filter` (from the controller's side) until the controller's
-       * next turn — including one that comes under an opponent's control
-       * after this resolved (rule 611.2c) — and none of them is *goaded*: a
-       * `goaded` filter doesn't see them. `otherThanYou: false` is the bare
-       * "attack each combat if able". See `AttackRequirementRule`.
-       *
-       * The same requirement, narrowed (rule 508.1d):
-       * - `target`: only that creature, as the object it is now (400.7) —
-       *   "target creature an opponent controls attacks you this turn if
-       *   able" (Alluring Siren);
-       * - `controlledByTarget`: only creatures the player in that slot
-       *   controls as attackers are declared — "creatures target player
-       *   controls attack you if able" (Taunt, Imaginary Threats);
-       * - `attacks`: obeyed only by attacking that one — `"you"`, the
-       *   `"source"` (Gideon Jura's "attack Gideon Jura"), or the player in
-       *   a target slot (Ravener's "attacks target opponent");
-       * - `duration`: until your next turn (absent — Kardur), `"end-of-turn"`,
-       *   `{ duringTurnOf: { target: 0 } }` (during target player's next
-       *   turn — Taunt), `"during-its-controllers-next-combat"` (the
-       *   `target`'s controller's next combat phase — Trench Behemoth),
-       *   `"during-its-controllers-next-turn"` (their next turn — Gideon,
-       *   Battle-Forged). See `AttackRequirementDuration`.
-       *
-       * An illegal or missing target leaves nothing to require (608.2b).
-       */
-      readonly kind: "attack-requirement";
-      readonly filter?: CardFilter;
-      readonly otherThanYou?: boolean;
-      readonly target?: ObjectRef;
-      readonly controlledByTarget?: number;
-      readonly attacks?: "you" | "source" | number;
-      readonly duration?: AttackRequirementDuration;
-    }
   | ({
       /**
        * "Impulse draw" — exile the top `amount` cards of `whose` library
@@ -12045,20 +11961,6 @@ export interface EffectApi {
   unsuspect(target: TargetRef | { readonly filter: CardFilter }): void;
   /** See the `"become-saddled"` {@link EffectSpec}. */
   becomeSaddled(target: TargetRef): void;
-  /** See the `"attack-requirement"` {@link EffectSpec}: the rule, its
-   * targets resolved. */
-  addAttackRequirement(rule: {
-    readonly filter: CardFilter;
-    readonly otherThanYou: boolean;
-    readonly object?: ObjectId;
-    readonly controlledBy?: PlayerId;
-    readonly attacks?: PlayerId | ObjectId;
-    readonly duration?:
-      | "end-of-turn"
-      | { readonly duringTurnOf: PlayerId }
-      | "during-its-controllers-next-turn"
-      | "during-its-controllers-next-combat";
-  }): void;
   /** See the `"impulse-exile"` {@link EffectSpec}. */
   impulseExile(
     amount: number,
@@ -12115,28 +12017,22 @@ export interface EffectApi {
   /** See the `"prohibit"` {@link EffectSpec}'s `monarch`: `players` can't
    * become the monarch this turn. */
   prohibitMonarch(players: readonly PlayerId[]): void;
-  /** See the `"restrict"` {@link EffectSpec}: `target`'s restrictions until
-   * end of turn, or with `filter` a turn-wide rule. */
+  /** See the `"restrict"` {@link EffectSpec}: the rules, bound, on `target`
+   * or the permanents matching `filter` as this resolves, for `duration`. */
   restrict(
     target: TargetRef | undefined,
     filter: CardFilter | undefined,
-    restrictions: readonly CombatRestriction[],
-    /** A `target`'s or an `asItResolves` filter's: this turn when omitted. */
-    duration?: PermanentDuration | Extract<Duration, "during-its-controllers-next-turn">,
-    cantBeBlockedBy?: CardFilter,
-    /** The one attacker `target` can't block (`cantBlockAttacker`). */
-    cantBlock?: TargetRef,
-    /** A `filter`'s scope: read from `scopeTo`'s side (`controlledByTarget`),
-     * leaving out `except` (`exceptTarget`), or fixed `asItResolves`; `blocks`,
-     * the attacker those creatures have to block if able. */
-    scope?: {
-      readonly cantAttackYou?: true | "you-and-planeswalkers";
-      readonly cantBlockYours?: boolean;
-      readonly scopeTo?: PlayerId;
-      readonly except?: ObjectId;
-      readonly asItResolves?: boolean;
-      readonly blocks?: ObjectId;
-    },
+    rules: readonly CombatRule[],
+    /** This turn when omitted. */
+    duration?: PermanentDuration | { readonly laterAt: "turn" | "combat"; readonly player?: PlayerId },
+    scope?: { readonly scopeTo?: PlayerId; readonly except?: ObjectId },
+  ): void;
+  /** A combat rule over the game, reaching creatures that arrive later (rule
+   * 611.2c): `PlayerEffect.combat`, with `during` as `addPlayerEffect`'s. */
+  restrictOverGame(
+    combat: NonNullable<PlayerEffect["combat"]>,
+    expires: Expiry,
+    during?: PlayerId,
   ): void;
   /** See the `"grant-static"` {@link EffectSpec}: `target`, or with `filter`
    * every permanent matching it now. */
@@ -12148,9 +12044,6 @@ export interface EffectApi {
   ): void;
   /** See the `"detain"` {@link EffectSpec}. */
   detain(target: TargetRef): void;
-  /** See the `"block-if-able"` {@link EffectSpec}: `attacker` undefined is
-   * "blocks this turn if able" (any attacker). */
-  blockIfAble(target: TargetRef, attacker: TargetRef | undefined, thisCombat: boolean): void;
   /** See the `"attack-despite-defender"` {@link EffectSpec}. */
   attackDespiteDefender(target: TargetRef | undefined, filter: CardFilter | undefined): void;
   /** See the `"damage-by-toughness"` {@link EffectSpec}. */
@@ -12311,6 +12204,8 @@ export interface EffectApi {
    * modes: the controller says how many of each colour, as one decision
    * (`addManaChoice`). Absent on a bare context, which asks unit by unit. */
   splitMana?(ask: ManaSplitAsk): void;
+  /** See the `"enter-blocking"` {@link EffectSpec}. */
+  enterBlocking(blocker: ObjectId, attacker: ObjectId): void;
   grantKeyword(target: TargetRef, keyword: Keyword, duration: PermanentDuration): void;
   /** See the `"incubate"` {@link EffectSpec}. */
   incubate(amount: number): void;
@@ -18057,6 +17952,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (attacker?.kind === "object") ctx.blockAttacker(spec.blocker, attacker.object);
       return;
     }
+    case "enter-blocking": {
+      const blocker = objectRefAct(spec.blocker, ctx);
+      const attacker = illegalSlot(spec.attacker, ctx) ? undefined : objectRefAct(spec.attacker, ctx);
+      if (blocker?.kind === "object" && attacker?.kind === "object") ctx.enterBlocking(blocker.object, attacker.object);
+      return;
+    }
     case "become-blocked": {
       if (spec.filter !== undefined) {
         ctx.becomeBlocked(spec.filter);
@@ -18370,8 +18271,6 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "player-effect": {
-      const attackersOf = spec.cantAttackBy === undefined ? undefined : resolvePlayerRef(spec.cantAttackBy, ctx);
-      if (spec.cantAttackBy !== undefined && attackersOf === undefined) return;
       const lasts = resolvePlayerDuration(spec.duration, ctx.controller, (ref) => resolvePlayerRef(ref, ctx));
       if (lasts === undefined) return;
       ctx.addPlayerEffect({
@@ -18464,8 +18363,6 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
               },
             }
           : {}),
-        ...(spec.cantAttack !== undefined ? { cantAttack: spec.cantAttack } : {}),
-        ...(attackersOf !== undefined ? { cantAttackBy: attackersOf } : {}),
       }, "during" in lasts ? lasts.during : undefined);
       return;
     }
@@ -18554,27 +18451,67 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "restrict": {
+      const refs: CombatRuleRefs = {
+        you: ctx.controller,
+        player: (ref) => resolvePlayerRef(ref, ctx),
+        object: (ref) => (illegalSlot(ref, ctx) ? undefined : objectRefAct(ref, ctx)),
+        stint: (id) => ctx.zoneChangeCountOf(id) ?? 0,
+      };
+      const rules = spec.restrictions.flatMap((rule) => bindCombatRule(rule, refs) ?? []);
+      // Naming only what's gone, nothing is left to obey (rule 608.2b).
+      if (rules.length === 0 && spec.restrictions.length > 0) return;
+      const later =
+        spec.duration === "during-its-controllers-next-turn"
+          ? ({ laterAt: "turn" } as const)
+          : spec.duration === "during-its-controllers-next-combat"
+            ? ({ laterAt: "combat" } as const)
+            : undefined;
       if (spec.filter !== undefined) {
-        const scopeTo = scopedController(spec.controlledByTarget, ctx);
+        const side = spec.sideOf === undefined ? undefined : resolvePlayerRef(spec.sideOf, ctx);
+        if (spec.sideOf !== undefined && side === undefined) return;
+        const scopeTo = side ?? scopedController(spec.controlledByTarget, ctx);
         if (spec.controlledByTarget !== undefined && scopeTo === undefined) return;
         const spared = spec.exceptTarget === undefined ? undefined : ctx.targets[spec.exceptTarget];
-        ctx.restrict(undefined, spec.filter, spec.restrictions, spec.asItResolves === true ? spec.duration : undefined, spec.cantBeBlockedBy, undefined, {
-          ...(scopeTo !== undefined ? { scopeTo } : {}),
-          ...(spared?.kind === "object" ? { except: spared.object } : {}),
-          ...(spec.asItResolves === true ? { asItResolves: true } : {}),
-          ...(spec.cantAttackYou !== undefined ? { cantAttackYou: spec.cantAttackYou } : {}),
-          ...(spec.cantBlockYours === true ? { cantBlockYours: true } : {}),
-        });
+        if (spec.asItResolves === true) {
+          ctx.restrict(undefined, spec.filter, rules, later ?? (spec.duration as PermanentDuration | undefined), {
+            ...(scopeTo !== undefined ? { scopeTo } : {}),
+            ...(spared?.kind === "object" ? { except: spared.object } : {}),
+          });
+          return;
+        }
+        const lasts = resolvePlayerDuration(
+          (spec.duration ?? "end-of-turn") as PlayerDuration,
+          ctx.controller,
+          (ref) => resolvePlayerRef(ref, ctx),
+        );
+        if (lasts === undefined) return;
+        ctx.restrictOverGame(
+          {
+            rules,
+            filter: spec.filter,
+            side: scopeTo ?? ctx.controller,
+            ...(spared?.kind === "object"
+              ? { except: { object: spared.object, zoneChangeCount: ctx.zoneChangeCountOf(spared.object) ?? 0 } }
+              : {}),
+          },
+          "expires" in lasts ? lasts.expires : "end-of-turn",
+          "during" in lasts ? lasts.during : undefined,
+        );
         return;
       }
-      const target = spec.target === undefined ? undefined : objectRefAct(spec.target, ctx);
-      const cantBlock = spec.cantBlockAttacker === undefined ? undefined : objectRefAct(spec.cantBlockAttacker, ctx);
-      if (target !== undefined) {
-        ctx.restrict(target, undefined, spec.restrictions, spec.duration, spec.cantBeBlockedBy, cantBlock, {
-          ...(spec.cantAttackYou !== undefined ? { cantAttackYou: spec.cantAttackYou } : {}),
-          ...(spec.cantBlockYours === true ? { cantBlockYours: true } : {}),
-        });
+      if (spec.target === undefined || illegalSlot(spec.target, ctx)) return;
+      const target = objectRefAct(spec.target, ctx);
+      if (target === undefined) return;
+      if (later !== undefined) {
+        ctx.restrict(target, undefined, rules, later);
+        return;
       }
+      if (typeof spec.duration === "object" && "duringTurnOf" in spec.duration) {
+        const player = resolvePlayerRef(spec.duration.duringTurnOf, ctx);
+        if (player !== undefined) ctx.restrict(target, undefined, rules, { laterAt: "turn", player });
+        return;
+      }
+      ctx.restrict(target, undefined, rules, spec.duration as PermanentDuration | undefined);
       return;
     }
     case "grant-static": {
@@ -18589,26 +18526,6 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "detain": {
       const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.detain(target);
-      return;
-    }
-    case "block-if-able": {
-      let attacker: TargetRef | undefined;
-      if (spec.attacker !== undefined) {
-        attacker = objectRefAct(spec.attacker, ctx);
-        // The creature to block is gone (or no longer a legal target): no
-        // requirement is left to impose.
-        if (attacker === undefined || illegalSlot(spec.attacker, ctx)) return;
-      }
-      if (spec.filter !== undefined) {
-        ctx.restrict(undefined, spec.filter, attacker === undefined ? ["must-block"] : [], undefined, undefined, undefined, {
-          ...(attacker?.kind === "object" ? { blocks: attacker.object } : {}),
-        });
-        return;
-      }
-      if (spec.target === undefined) return;
-      const target = objectRefAct(spec.target, ctx);
-      if (target === undefined || illegalSlot(spec.target, ctx)) return;
-      ctx.blockIfAble(target, attacker, spec.thisCombat === true);
       return;
     }
     case "attack-despite-defender": {
@@ -20240,39 +20157,6 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "become-saddled": {
       const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.becomeSaddled(target);
-      return;
-    }
-    case "attack-requirement": {
-      const slot = (ref: ObjectRef): TargetRef | undefined =>
-        illegalSlot(ref, ctx) ? undefined : objectRefAct(ref, ctx);
-      const object = spec.target === undefined ? undefined : slot(spec.target);
-      if (spec.target !== undefined && object?.kind !== "object") return;
-      const player = spec.controlledByTarget === undefined ? undefined : slot(spec.controlledByTarget);
-      if (spec.controlledByTarget !== undefined && player?.kind !== "player") return;
-      const aimed =
-        spec.attacks === undefined
-          ? undefined
-          : spec.attacks === "you"
-            ? ({ kind: "player", player: ctx.controller } as const)
-            : slot(spec.attacks);
-      if (spec.attacks !== undefined && aimed === undefined) return;
-      // "During target player's next turn" (Taunt): whoever that is now.
-      let during: NonNullable<Parameters<ResolutionContext["addAttackRequirement"]>[0]["duration"]> | undefined;
-      if (typeof spec.duration === "object") {
-        const turnOf = resolvePlayerRef(spec.duration.duringTurnOf, ctx);
-        if (turnOf === undefined) return;
-        during = { duringTurnOf: turnOf };
-      } else {
-        during = spec.duration;
-      }
-      ctx.addAttackRequirement({
-        filter: spec.filter ?? {},
-        otherThanYou: spec.otherThanYou ?? false,
-        ...(object?.kind === "object" ? { object: object.object } : {}),
-        ...(player?.kind === "player" ? { controlledBy: player.player } : {}),
-        ...(aimed !== undefined ? { attacks: aimed.kind === "player" ? aimed.player : aimed.object } : {}),
-        ...(during !== undefined ? { duration: during } : {}),
-      });
       return;
     }
     case "impulse-exile": {

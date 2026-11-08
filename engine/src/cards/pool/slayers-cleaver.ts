@@ -23,7 +23,7 @@ export default defineCard({
     {
       affects: { scope: "attached" },
       grantPt: [3, 1],
-      mustBeBlockedBy: { by: { type: "creature", subtype: "Eldrazi" } },
+      restrictions: [{ kind: "must-be-blocked-if-able", by: { type: "creature", subtype: "Eldrazi" } }],
       text: STATIC_TEXT,
     },
   ],

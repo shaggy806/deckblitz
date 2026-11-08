@@ -25,7 +25,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantAttackUnlessDefender: { controls: { subtype: "Swamp" } },
+      restrictions: [{ kind: "cant-attack", unlessDefender: { controls: { subtype: "Swamp" } } }],
       text: "This creature can't attack unless defending player controls a Swamp.",
     },
   ],

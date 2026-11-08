@@ -34,7 +34,7 @@ export default defineCard({
       // Checked as blockers are declared only (the ruling): Steel-Leaf
       // Champion's shape.
       affects: { scope: "self" },
-      cantBeBlockedBy: { power: { op: "gte", n: 2 } },
+      restrictions: [{ kind: "cant-be-blocked", by: { power: { op: "gte", n: 2 } } }],
       text: EVASION_TEXT,
     },
   ],

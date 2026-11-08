@@ -1,3 +1,4 @@
+import { overGame } from "./combat-probe.js";
 import { describe, expect, it } from "vitest";
 
 import type { ScriptedController } from "../controller.js";
@@ -425,7 +426,7 @@ describe("a player effect limiting attacks, by whose creatures and for how long"
     expect(canAttack(game, C, carols, A)).toBe(true);
     // Gone once the combat phase ends.
     toStep(game, "postcombat-main", B);
-    expect(game.state.playerEffects?.some((e) => e.cantAttack !== undefined) ?? false).toBe(false);
+    expect(overGame(game)).toEqual([]);
   });
 
   it("Champions of Minas Tirith: paying {X}, the cards in their hand, leaves the attack open", () => {
@@ -483,7 +484,7 @@ describe("a player effect limiting attacks, by whose creatures and for how long"
     expect(seen.asked).toBe(0); // Three artifacts, no mana.
     expect(canAttack(game, B, bears, A)).toBe(false);
     toStep(game, "postcombat-main", B);
-    expect(game.state.playerEffects?.some((e) => e.cantAttack !== undefined) ?? false).toBe(false);
+    expect(overGame(game)).toEqual([]);
   });
 
   it("Overencumbered: paying {1} each leaves the attack open, and not on Alice's own turn", () => {

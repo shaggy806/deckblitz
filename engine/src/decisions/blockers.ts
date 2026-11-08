@@ -30,6 +30,8 @@ import { ableInCompany, blockCompanyOf } from "../combat/company.js";
 import {
   blockedByAtMostOne,
   blockedOnlyByAll,
+  blockRequirementsOf,
+  mustBeBlockedByExactlyOne,
   blockersRequiredBy,
   creatureDef,
   currentAttackers,
@@ -37,7 +39,7 @@ import {
   minimumBlockers,
   whyCannotBlock,
 } from "../combat/eligibility.js";
-import { blockLimitOf, restrictionsOf, turnRuleCovers } from "../characteristics.js";
+import { blockLimitOf, restrictionsOf } from "../characteristics.js";
 import { whyCountsInvalid } from "../combat/stack-counts.js";
 import { tooManyBlockers, whyMembersInvalid } from "../combat/blocking.js";
 import { blockersLeft } from "../combat/limits.js";
@@ -116,7 +118,7 @@ function blockersOffer(
   // a requirement no block could obey asking nothing (rule 509.1c).
   const eligibleIds = eligible.map((e) => e.blocker);
   const exactlyOne = attacking.filter((id) =>
-    restrictionsOf(ctx.state, ctx.registry, id).has("must-be-blocked-by-exactly-one"),
+    mustBeBlockedByExactlyOne(ctx.state, ctx.registry, id),
   );
   const required = new Map(
     attacking.map((id) => [id, blockersRequiredBy(ctx.state, ctx.registry, id, eligibleIds)] as const),
@@ -148,27 +150,14 @@ function blockersOffer(
       if (entry?.canBlock.includes(attacker) === true) blockRequirements.push({ blocker, attacker });
     }
   }
-  // "All creatures with magnet counters on them block that creature this turn
-  // if able" (Magnetic Web), a rule over the turn (rule 611.2c): whichever match
-  // now, and that attacker the same object still (rule 400.7).
-  for (const rule of ctx.state.turnRestrictions ?? []) {
-    const named = rule.blocks;
-    if (named === undefined || (ctx.state.objects[named.object]?.zoneChangeCount ?? 0) !== named.zoneChangeCount) continue;
-    for (const entry of eligible) {
-      if (entry.canBlock.includes(named.object) && turnRuleCovers(ctx.state, ctx.registry, entry.blocker, rule)) {
-        blockRequirements.push({ blocker: entry.blocker, attacker: named.object });
-      }
+  // "Target creature blocks this creature this combat if able" (provoke), "all
+  // creatures with magnet counters on them block that creature this turn if
+  // able" (Magnetic Web): each binding record, and only while it's able to.
+  for (const entry of eligible) {
+    for (const { attacker } of blockRequirementsOf(ctx.state, ctx.registry, entry.blocker)) {
+      if (attacker === undefined) blockRequirements.push({ blocker: entry.blocker });
+      else if (entry.canBlock.includes(attacker)) blockRequirements.push({ blocker: entry.blocker, attacker });
     }
-  }
-  for (const r of ctx.state.blockRequirements ?? []) {
-    const entry = eligible.find((e) => e.blocker === r.blocker);
-    if (entry === undefined || (ctx.state.objects[r.blocker]?.zoneChangeCount ?? 0) !== r.zoneChangeCount) continue;
-    if (r.attacker === undefined) {
-      blockRequirements.push({ blocker: r.blocker });
-      continue;
-    }
-    if ((ctx.state.objects[r.attacker]?.zoneChangeCount ?? 0) !== r.attackerZoneChangeCount) continue;
-    if (entry.canBlock.includes(r.attacker)) blockRequirements.push({ blocker: r.blocker, attacker: r.attacker });
   }
   // "Blocks each combat if able" (Razorgrass Screen, Grand Melee): a
   // requirement on the creature as a static or a `restrict` gives it.

@@ -27,7 +27,7 @@ export default defineCard({
     },
   ],
   static: [
-    { affects: { scope: "self" }, cantBeBlockedBy: { type: "artifact" }, text: UNBLOCKABLE },
+    { affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", by: { type: "artifact" } }], text: UNBLOCKABLE },
     {
       affects: { scope: "self" },
       hexproofFrom: { types: ["artifact"], abilitiesOnly: true, notHexproof: true },

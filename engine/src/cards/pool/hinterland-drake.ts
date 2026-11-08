@@ -15,5 +15,5 @@ export default defineCard({
   toughness: 3,
   keywords: ["flying"],
   text: `Flying\n${STATIC}`,
-  static: [{ affects: { scope: "self" }, canBlockOnly: { notTypes: ["artifact"] }, text: STATIC }],
+  static: [{ affects: { scope: "self" }, restrictions: [{ kind: "cant-block", attackers: { not: { notTypes: ["artifact"] } } }], text: STATIC }],
 });

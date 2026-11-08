@@ -26,7 +26,7 @@ export default defineCard({
         filter: { type: "creature", controlledBy: "you", tapped: false },
         min: 1,
         upTo: 1,
-        then: { kind: "block-if-able", target: 0, attacker: "source" },
+        then: { kind: "restrict", target: 0, restrictions: [{ kind: "must-block", attacker: "source" }] },
         prompt: "Choose an untapped creature you control to block Crashing Boars this turn if able",
       },
       resolve: null,

@@ -20,7 +20,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "filter", filter: small },
-      cantBeBlockedBy: { power: { op: "gte", n: 3 } },
+      restrictions: [{ kind: "cant-be-blocked", by: { power: { op: "gte", n: 3 } } }],
       text: EVASION_TEXT,
     },
     { affects: { scope: "self" }, doubleTriggersOf: { filter: small }, text: DOUBLE_TEXT },

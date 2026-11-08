@@ -15,8 +15,8 @@ export default defineCard({
     effects: [
       { kind: "grant-keyword", target: 0, keyword: "haste", duration: "end-of-turn" },
       { kind: "grant-keyword", target: 1, keyword: "haste", duration: "end-of-turn" },
-      { kind: "restrict", target: 0, restrictions: [], cantBeBlockedBy: exceptHaste },
-      { kind: "restrict", target: 1, restrictions: [], cantBeBlockedBy: exceptHaste },
+      { kind: "restrict", target: 0, restrictions: [{ kind: "cant-be-blocked", by: exceptHaste }]},
+      { kind: "restrict", target: 1, restrictions: [{ kind: "cant-be-blocked", by: exceptHaste }]},
     ],
   },
 });

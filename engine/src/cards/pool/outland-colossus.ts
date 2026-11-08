@@ -30,5 +30,5 @@ export default defineCard({
       text: "Renown 6 (When this creature deals combat damage to a player, if it isn't renowned, put six +1/+1 counters on it and it becomes renowned.)",
     },
   ],
-  static: [{ affects: { scope: "self" }, blockedByAtMostOne: true, text: "This creature can't be blocked by more than one creature." }],
+  static: [{ affects: { scope: "self" }, restrictions: [{ kind: "cant-be-blocked", byMoreThan: 1 }], text: "This creature can't be blocked by more than one creature." }],
 });
