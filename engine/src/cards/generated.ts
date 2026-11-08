@@ -1903,6 +1903,7 @@ import _poolBanditsHaul from "./pool/bandits-haul.js";
 import _poolBaneAlleyBlackguard from "./pool/bane-alley-blackguard.js";
 import _poolBaneAlleyBroker from "./pool/bane-alley-broker.js";
 import _poolBaneLordOfDarkness from "./pool/bane-lord-of-darkness.js";
+import _poolBaneOfBalaGed from "./pool/bane-of-bala-ged.js";
 import _poolBaneOfHanweir from "./pool/bane-of-hanweir.js";
 import _poolBaneOfProgress from "./pool/bane-of-progress.js";
 import _poolBaneOfTheLiving from "./pool/bane-of-the-living.js";
@@ -5622,6 +5623,7 @@ import _poolCuratorOfDestinies from "./pool/curator-of-destinies.js";
 import _poolCuratorOfMysteries from "./pool/curator-of-mysteries.js";
 import _poolCuratorOfSunsCreation from "./pool/curator-of-suns-creation.js";
 import _poolCuratorsWard from "./pool/curators-ward.js";
+import _poolCurfew from "./pool/curfew.js";
 import _poolCurioVendor from "./pool/curio-vendor.js";
 import _poolCuriosityCrafter from "./pool/curiosity-crafter.js";
 import _poolCuriosity from "./pool/curiosity.js";
@@ -8341,8 +8343,10 @@ import _poolEtherwroughtPage from "./pool/etherwrought-page.js";
 import _poolEttercap from "./pool/ettercap.js";
 import _poolEumidianHatchery from "./pool/eumidian-hatchery.js";
 import _poolEumidianTerrabotanist from "./pool/eumidian-terrabotanist.js";
+import _poolEumidianWastewaker from "./pool/eumidian-wastewaker.js";
 import _poolEunuchsIntrigues from "./pool/eunuchs-intrigues.js";
 import _poolEurekaMoment from "./pool/eureka-moment.js";
+import _poolEureka from "./pool/eureka.js";
 import _poolEusocialEngineering from "./pool/eusocial-engineering.js";
 import _poolEutropiaTheTwiceFavored from "./pool/eutropia-the-twice-favored.js";
 import _poolEvacuation from "./pool/evacuation.js";
@@ -9568,6 +9572,7 @@ import _poolFootfallCrater from "./pool/footfall-crater.js";
 import _poolFoothillGuide from "./pool/foothill-guide.js";
 import _poolFootlightFiend from "./pool/footlight-fiend.js";
 import _poolFootstepsOfTheGoryo from "./pool/footsteps-of-the-goryo.js";
+import _poolForTheAncestors from "./pool/for-the-ancestors.js";
 import _poolForTheCommonGood from "./pool/for-the-common-good.js";
 import _poolForTheEmperor from "./pool/for-the-emperor.js";
 import _poolForTheFamily from "./pool/for-the-family.js";
@@ -33573,6 +33578,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBaneAlleyBlackguard,
   _poolBaneAlleyBroker,
   _poolBaneLordOfDarkness,
+  _poolBaneOfBalaGed,
   _poolBaneOfHanweir,
   _poolBaneOfProgress,
   _poolBaneOfTheLiving,
@@ -37292,6 +37298,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCuratorOfMysteries,
   _poolCuratorOfSunsCreation,
   _poolCuratorsWard,
+  _poolCurfew,
   _poolCurioVendor,
   _poolCuriosityCrafter,
   _poolCuriosity,
@@ -40011,8 +40018,10 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEttercap,
   _poolEumidianHatchery,
   _poolEumidianTerrabotanist,
+  _poolEumidianWastewaker,
   _poolEunuchsIntrigues,
   _poolEurekaMoment,
+  _poolEureka,
   _poolEusocialEngineering,
   _poolEutropiaTheTwiceFavored,
   _poolEvacuation,
@@ -41238,6 +41247,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFoothillGuide,
   _poolFootlightFiend,
   _poolFootstepsOfTheGoryo,
+  _poolForTheAncestors,
   _poolForTheCommonGood,
   _poolForTheEmperor,
   _poolForTheFamily,
@@ -65256,6 +65266,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/bane-alley-blackguard": _poolBaneAlleyBlackguard,
   "pool/bane-alley-broker": _poolBaneAlleyBroker,
   "pool/bane-lord-of-darkness": _poolBaneLordOfDarkness,
+  "pool/bane-of-bala-ged": _poolBaneOfBalaGed,
   "pool/bane-of-hanweir": _poolBaneOfHanweir,
   "pool/bane-of-progress": _poolBaneOfProgress,
   "pool/bane-of-the-living": _poolBaneOfTheLiving,
@@ -68975,6 +68986,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/curator-of-mysteries": _poolCuratorOfMysteries,
   "pool/curator-of-suns-creation": _poolCuratorOfSunsCreation,
   "pool/curators-ward": _poolCuratorsWard,
+  "pool/curfew": _poolCurfew,
   "pool/curio-vendor": _poolCurioVendor,
   "pool/curiosity-crafter": _poolCuriosityCrafter,
   "pool/curiosity": _poolCuriosity,
@@ -71694,8 +71706,10 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ettercap": _poolEttercap,
   "pool/eumidian-hatchery": _poolEumidianHatchery,
   "pool/eumidian-terrabotanist": _poolEumidianTerrabotanist,
+  "pool/eumidian-wastewaker": _poolEumidianWastewaker,
   "pool/eunuchs-intrigues": _poolEunuchsIntrigues,
   "pool/eureka-moment": _poolEurekaMoment,
+  "pool/eureka": _poolEureka,
   "pool/eusocial-engineering": _poolEusocialEngineering,
   "pool/eutropia-the-twice-favored": _poolEutropiaTheTwiceFavored,
   "pool/evacuation": _poolEvacuation,
@@ -72921,6 +72935,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/foothill-guide": _poolFoothillGuide,
   "pool/footlight-fiend": _poolFootlightFiend,
   "pool/footsteps-of-the-goryo": _poolFootstepsOfTheGoryo,
+  "pool/for-the-ancestors": _poolForTheAncestors,
   "pool/for-the-common-good": _poolForTheCommonGood,
   "pool/for-the-emperor": _poolForTheEmperor,
   "pool/for-the-family": _poolForTheFamily,

@@ -1,6 +1,6 @@
 # Need-key themes: general engine changes under the open keys
 
-Status: plan of record (2026-11-07), steps 1-5 (B275-B279) done, step 6 next — see *The plan* just below. The survey under
+Status: plan of record (2026-11-07), steps 1-6 (B275-B280) done, step 7 next — see *The plan* just below. The survey under
 it is a proposal.
 
 The 1,783 open need keys (2,265 waiting cards, re-counted after step 1; the survey's own count was 1,831 and 2,324)
@@ -59,9 +59,10 @@ touch. Each step:
    Destiny; Thorin, Mountain-king; Brass Infiniscope; Captain Marvel, Apex Avenger) and 15 of the theme's top keys;
    13 keys marked built, their 18 other cards (Balancing Act, Restore Balance, Soulless One, Shagrat, The Eagles Are
    Coming!, …) left in `--stale` for `author-freed` (51 in all).
-6. **The cost pipeline (theme 4), then one `chooser` field (theme 5).** The power-up cards (Hulk, Gamma Goliath; Kang
-   the Conqueror; Wonder Man; Advancing the Spirit), Baron Helmut Zemo, Dawnhand Dissident, The Dominion Bracelet,
-   World War Hulk, Eumidian Wastewaker.
+6. **Done 2026-11-08 (B280).** The cost pipeline (theme 4: `engine/src/cost-acts.ts`, see its design note and *As built*) and
+   one chooser type (theme 5). 23 cards: seven of the flagged (Hulk, Gamma Goliath; Kang the Conqueror; Wonder Man; Advancing the
+   Spirit; The Dominion Bracelet; World War Hulk; Eumidian Wastewaker) and 16 of the themes' top keys; 20 keys marked built, their
+   other cards left in `--stale` for `author-freed`. Baron Helmut Zemo and Dawnhand Dissident stay flagged (see theme 4's *Left unbuilt*).
 7. Then the survey's build order below from step 8 on (refs and relational filters, play permissions, "instead"
    replacements, combat records, the smaller themes).
 
@@ -805,6 +806,42 @@ instructions. Secret and simultaneous choices are a separate decision kind.
 
 **Confidence: medium.** The chooser field is mechanical. The per-player round is the general combinator that most of
 the "each player chooses … then" keys need.
+
+**Design note (step 6, 2026-11-08): one chooser type; the round already exists.**
+
+*One `ChooserRef`* (`effects.ts`), resolved by `chooserPlayer(chooser, ctx)`: an `EffectPlayerRef`, a target slot (that player, or
+the controller of that object), `"an-opponent"`, and three members only one effect kind reads (`"any-player"`, `{ anyOf }` and `{
+player }`, for `unless`; `"their-controller"`, for `choose-among-targets`). It replaces the six spellings the effects had:
+`choose-permanents`, `choose-card-name` (a bare slot number), `discard-chosen`, `unless`, `separate-into-piles`, `exile-into-piles`,
+`choose-among-targets`, `look-and-choose`, `SearchInstead`, and `choose-one-of-each`'s `chosenBy`. A kind that lets another player
+choose takes this field; `ChooserRef` is the answer to "who", so a new effect doesn't grow a seventh spelling.
+
+*The round was already there.* The per-player combinator the survey asked for is `for-each-player` (a bound "that player",
+`aboutPlayer`, APNAP order, `choicesHeld` for "each chooses, then together", rule 101.4) and `each-player-may`
+(`startingWithYou`), and "repeat until a round in which nobody acts" is a `repeat` with `again: { kind: "this-way", … }`, which reads the
+pass just done (`repeatSince`). Eureka and Curfew are written from them with no new effect kind, so none was added.
+
+*Hidden information.* A chooser looking at another player's hidden zone is already what `look-and-choose`'s `show`/`faceDownLooks` and
+`view.ts` redact by; no chooser this step adds crosses a hidden zone. Secret and simultaneous choices stay their own decision kind
+(the survey's risk): `choose-creature-type`'s `secret` is unchanged.
+
+*608.2c and 101.4.* A `sequence` asks each step before the next, and `for-each-player` parks the remaining players behind a decision,
+so instructions are followed in order and APNAP choices are made in order.
+
+*Bots.* `target-polarity.ts` already read a chooser in a slot as "either"; `ChooserRef` is a superset of what it reads. No new decision
+kind, so no candidates to teach.
+
+*As built (step 6, theme 5).*
+- `ChooserRef`, `chooserPlayer`; `chosenBy` on `choose-one-of-each` is `chooser`.
+- **Not moved:** `CastModalSpec.chosenBy` (`"you"` / `"opponent"`): a choice made as a spell is cast (700.2e) from the wire action, with no
+  resolution context to resolve a ref in. `separate-into-piles`'s `separator` is the same type minus the rest, and stays until a card needs it.
+- Cards (5): Curfew; Bane of Bala Ged; Eumidian Wastewaker; Eureka; For the Ancestors.
+- Keys marked built: `effect:each-player-returns-own-permanent`, `effect:player-chooses-permanents-to-exile`,
+  `effect:discard-or-sacrifice-choice`, `decision:choose-creature-type-on-resolution`.
+- **Left unbuilt, not marked:** `decision:mixed-zone-targets` (one target slot over two zones), `decision:damage-redirect-order`,
+  `effect:separate-exiled-cards-into-piles` (`PileObjects` has no exiled-this-way form), `decision:pay-per-chosen-untap`,
+  `effect:target-per-opponent-mandatory`, `mechanic:piles`, `decision:opponent-guesses-mana-value`,
+  `mechanic:coin-flip-by-other-player` (each a mechanic of its own beyond who chooses).
 
 ### 6. Turn and game event journal (112 keys, ~143 cards)
 

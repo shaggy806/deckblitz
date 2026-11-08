@@ -34998,12 +34998,11 @@ export class Game {
           );
         }
       },
-      chooseCardName: (spec) => {
+      chooseCardName: (spec, named) => {
         // "Target player chooses a card name" (Vexing Arcanix): the player in
         // that slot names it, if they're still in the game; the resolution
         // stays its controller's.
-        const named = spec.chooser === undefined ? undefined : targets[spec.chooser];
-        const chooser = spec.chooser === undefined ? controller : named?.kind === "player" ? named.player : undefined;
+        const chooser = spec.chooser === undefined ? controller : named;
         if (chooser === undefined || this.state.players[chooser]?.hasLost !== false) return;
         const src = this.state.objects[source];
         const stint = refs.source ?? (src?.zone === "battlefield" ? (src.zoneChangeCount ?? 0) : undefined);
@@ -36292,7 +36291,7 @@ export class Game {
         }
         this.state.awaiting = {
           kind: "choose-permanents",
-          player: spec.chosenBy === "you" ? controller : player,
+          player: spec.chooser === "you" ? controller : player,
           eligible,
           min: 1,
           max,

@@ -12,6 +12,7 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Need-key themes step 6: the cost pipeline and one chooser type** (2026-11-08, B280): cost modifiers read an `EffectAmount` and one spell clause, effects can be costs (`cost-acts.ts`), and one `ChooserRef` replaces the six spellings; 23 cards, 20 keys.
 - **Need-key themes step 5: object sets and one aggregate** (2026-11-08, B279): one
   `ObjectSetRef` (`engine/src/object-sets.ts`) for every set of objects a card names — what was
   done this way, what the cost took, the cards exiled with the source, the trigger's batch, what's

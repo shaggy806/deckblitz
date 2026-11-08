@@ -284,6 +284,7 @@ import _poolFlowstoneSculpture from "../pool/flowstone-sculpture.js";
 import _poolFocusFire from "../pool/focus-fire.js";
 import _poolFoeRazerRegent from "../pool/foe-razer-regent.js";
 import _poolFollowTheBodies from "../pool/follow-the-bodies.js";
+import _poolForTheAncestors from "../pool/for-the-ancestors.js";
 import _poolForTheCommonGood from "../pool/for-the-common-good.js";
 import _poolForTheFamily from "../pool/for-the-family.js";
 import _poolForbiddenAlchemy from "../pool/forbidden-alchemy.js";
@@ -1259,6 +1260,7 @@ const shard: CardShard = {
     _poolFocusFire,
     _poolFoeRazerRegent,
     _poolFollowTheBodies,
+    _poolForTheAncestors,
     _poolForTheCommonGood,
     _poolForTheFamily,
     _poolForbiddenAlchemy,

@@ -11591,4 +11591,39 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Forest*4', 'Llanowar Elves'], hand: ['Forest', 'Forest', 'Forest'] },
     }),
   ),
+  preset(
+    'Thornvault Forager: forage asks which way to pay',
+    board({
+      you: { bf: ['Thornvault Forager', 'Food Token'], gy: ['Wastes', 'Wastes', 'Wastes'] },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    'Leashling: the cost is a card from your hand, put on top',
+    board({
+      you: { bf: ['Leashling'], hand: ['Grizzly Bears'] },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    'Advancing the Spirit: a free power-up, once',
+    board({
+      you: { bf: ['Wonder Man, Hollywood Hero', 'Advancing the Spirit', 'Mountain*7'] },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    'Curfew: each player picks their own creature',
+    board({
+      you: { bf: ['Island', 'Grizzly Bears', 'Hill Giant'], hand: ['Curfew'] },
+      opp: { bf: ['Craw Wurm', 'Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    'Eureka: rounds continue until nobody puts a card down',
+    board({
+      you: { bf: ['Forest*4'], hand: ['Eureka', 'Grizzly Bears', 'Hill Giant'] },
+      opp: { bf: [] },
+    }),
+  ),
 ]

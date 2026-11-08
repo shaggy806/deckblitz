@@ -58,6 +58,7 @@ import _poolAzcantaTheSunkenRuin from "../pool/azcanta-the-sunken-ruin.js";
 import _poolAzoriusCluestone from "../pool/azorius-cluestone.js";
 import _poolBalladOfTheBlackFlag from "../pool/ballad-of-the-black-flag.js";
 import _poolBalmOfRestoration from "../pool/balm-of-restoration.js";
+import _poolBaneOfBalaGed from "../pool/bane-of-bala-ged.js";
 import _poolBanesContingency from "../pool/banes-contingency.js";
 import _poolBarbedShocker from "../pool/barbed-shocker.js";
 import _poolBardsBow from "../pool/bards-bow.js";
@@ -1057,6 +1058,7 @@ const shard: CardShard = {
     _poolAzoriusCluestone,
     _poolBalladOfTheBlackFlag,
     _poolBalmOfRestoration,
+    _poolBaneOfBalaGed,
     _poolBanesContingency,
     _poolBarbedShocker,
     _poolBardsBow,

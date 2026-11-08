@@ -274,6 +274,7 @@ import _poolEnlightenedManiac from "../pool/enlightened-maniac.js";
 import _poolEntDraughtBasin from "../pool/ent-draught-basin.js";
 import _poolEntanglingVines from "../pool/entangling-vines.js";
 import _poolEtchedMonstrosity from "../pool/etched-monstrosity.js";
+import _poolEumidianWastewaker from "../pool/eumidian-wastewaker.js";
 import _poolExperimentalFrenzy from "../pool/experimental-frenzy.js";
 import _poolExperimentalOverload from "../pool/experimental-overload.js";
 import _poolFacevaulter from "../pool/facevaulter.js";
@@ -1320,6 +1321,7 @@ const shard: CardShard = {
     _poolEntDraughtBasin,
     _poolEntanglingVines,
     _poolEtchedMonstrosity,
+    _poolEumidianWastewaker,
     _poolExperimentalFrenzy,
     _poolExperimentalOverload,
     _poolFacevaulter,

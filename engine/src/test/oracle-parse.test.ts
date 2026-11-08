@@ -15208,7 +15208,7 @@ describe("a cast as this resolves, on its own terms", () => {
     expect(mythos.effect).toMatchObject({
       kind: "conditional",
       condition: { kind: "source", filter: { manaSpentOfColors: { B: 1, R: 1 } } },
-      then: { chosenBy: "you" },
+      then: { chooser: "you" },
       else: { kind: "choose-one-of-each" },
     });
   });

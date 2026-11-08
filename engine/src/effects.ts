@@ -256,7 +256,7 @@ export interface SearchInstead {
   readonly filter?: CardFilter;
   readonly condition?: StaticCondition;
   readonly pick: "all" | "any" | "one" | { readonly exactly: number };
-  readonly chooser?: EffectPlayerRef | "an-opponent";
+  readonly chooser?: ChooserRef;
   readonly under?: "you";
 }
 /** A {@link SearchInstead} as `beginLibrarySearch` takes it. */
@@ -2098,6 +2098,26 @@ export type PlayerScope =
   | "that-player";
 
 /**
+ * Who makes a choice an effect asks for, on every effect that lets someone other
+ * than its controller choose (theme 5 of docs/plans/need-key-themes.md): an
+ * {@link EffectPlayerRef}, a target slot (that player, or the controller of that
+ * object), or `"an-opponent"` (an opponent of the effect's controller, the
+ * first in turn order unless the effect asks which).
+ *
+ * `"any-player"`, `{ anyOf: scope }` and `{ player }` are `unless`'s alone,
+ * which asks each in turn order (rule 101.4); `"their-controller"` is
+ * `choose-among-targets`' (the controller of the targets).
+ */
+export type ChooserRef =
+  | EffectPlayerRef
+  | number
+  | "an-opponent"
+  | "any-player"
+  | "their-controller"
+  | { readonly anyOf: PlayerScope }
+  | { readonly player: PlayerId };
+
+/**
  * One player an effect names as the one who does something — who gains
  * control (`gain-control`), under whose control a card is put onto the
  * battlefield (`put-onto-battlefield`), who puts the counters (`add-counter`)
@@ -2515,7 +2535,7 @@ export type EffectSpec =
        * nothing happens. Several players each choosing is a `vote` with
        * `choose` (rule 101.4).
        */
-      readonly chooser?: EffectPlayerRef;
+      readonly chooser?: ChooserRef;
       /** "A creature an opponent controls **chosen at random**" (Cinderheart
        * Giant): nobody is asked, one of the matches is picked, and `then` runs
        * with it at slot 0. `upTo` isn't read: it's one permanent. */
@@ -3853,7 +3873,7 @@ export type EffectSpec =
       readonly kind: "choose-card-name";
       readonly filter?: CardNameFilter;
       readonly aim?: CardNameAim;
-      readonly chooser?: number;
+      readonly chooser?: ChooserRef;
       readonly remember?: true;
       readonly then?: EffectSpec;
     }
@@ -5520,7 +5540,7 @@ export type EffectSpec =
        * "reveal your hand and discard a card **of target opponent's choice**"
        * (`target: "you"`, `chooser: { target: 0 }`). The hand's owner still
        * discards it (rule 701.9a). The effect's controller, when absent. */
-      readonly chooser?: EffectPlayerRef;
+      readonly chooser?: ChooserRef;
       readonly unlinked?: true;
       /**
        * With `destination: "exile"`: "exile that card **until this creature
@@ -9583,12 +9603,7 @@ export type EffectSpec =
        * `otherwise` happens.
        * `{ player }` is the engine's own, naming one of them as it asks in
        * turn — never authored. */
-      readonly chooser:
-        | number
-        | EffectPlayerRef
-        | "any-player"
-        | { readonly anyOf: PlayerScope }
-        | { readonly player: PlayerId };
+      readonly chooser: ChooserRef;
       /** What they may do to avoid `otherwise`. At most one mana option, since
        * the mana cost rides on the decision itself. */
       readonly options: readonly UnlessOption[];
@@ -9899,7 +9914,7 @@ export type EffectSpec =
       /** "You choose the permanents for each player instead" (Mythos of
        * Snapdax): each player's own are offered, this effect's controller
        * answering, under the same rules for what must be chosen. */
-      readonly chosenBy?: "you";
+      readonly chooser?: ChooserRef;
       readonly prompt: string;
       readonly chosen?: "destroy" | "return-to-hand";
       /** `{ discard }`: each player discards the cards in their hand matching
@@ -9977,7 +9992,7 @@ export type EffectSpec =
       /** Who separates: the effect's controller when absent. */
       readonly separator?: EffectPlayerRef | "an-opponent";
       /** Who chooses one of the piles. */
-      readonly chooser: EffectPlayerRef | "an-opponent";
+      readonly chooser: ChooserRef;
       /**
        * "Separate them into **a face-down pile and a face-up pile**" (Curator
        * of Destinies, Fortune's Favor): the first pile stays hidden from all
@@ -10023,7 +10038,7 @@ export type EffectSpec =
       readonly kind: "exile-into-piles";
       readonly piles: readonly [ExilePileSpec, ExilePileSpec];
       readonly turnOneFaceUp?: true;
-      readonly chooser: EffectPlayerRef | "an-opponent";
+      readonly chooser: ChooserRef;
       readonly chosen: PileFate;
       readonly rest?: PileFate;
       /** Set only by the engine: the piles, the face-down one first once one
@@ -10058,7 +10073,7 @@ export type EffectSpec =
        * game.
        */
       readonly kind: "choose-among-targets";
-      readonly chooser: EffectPlayerRef | "their-controller";
+      readonly chooser: ChooserRef;
       readonly count: number;
       /** What happens to the chosen objects — nothing when absent (Deliver
        * Unto Evil's "leave the chosen cards in your graveyard"). */
@@ -10664,7 +10679,7 @@ export type EffectSpec =
        * opponent is the effect's controller's choice once the cards are
        * revealed (Plargg and Nassari's ruling), asked only among two or
        * more. */
-      readonly chooser?: "that-player" | "an-opponent";
+      readonly chooser?: ChooserRef;
       /** Chosen cards bound for the battlefield enter under the **effect's
        * controller's** control, whoever's zone or choice it was: Scrounge's
        * "target opponent chooses an artifact card in their graveyard. Put that
@@ -12048,7 +12063,7 @@ export interface EffectApi {
     keep?: { readonly remember?: "player" | "creature-type"; readonly secret?: true },
   ): void;
   /** See the `"choose-card-name"` {@link EffectSpec}. */
-  chooseCardName(spec: Extract<EffectSpec, { kind: "choose-card-name" }>): void;
+  chooseCardName(spec: Extract<EffectSpec, { kind: "choose-card-name" }>, named?: PlayerId): void;
   /** See the `"choose-value"` {@link EffectSpec}. */
   chooseValue(
     spec: Extract<EffectSpec, { kind: "choose-value" }>,
@@ -15445,6 +15460,25 @@ function resolveAttachRef(ref: AttachRef, ctx: ResolutionContext): TargetRef | u
 /** Imperative escape hatch for a spell or ability the vocab can't express. */
 export type SpellResolver = (ctx: ResolutionContext) => void;
 
+/**
+ * The player a {@link ChooserRef} names as this applies, or `undefined` for
+ * nobody (an illegal slot, a player who has left). `"an-opponent"` is the first
+ * opponent in turn order. `"any-player"` and `{ anyOf }` are `unless`'s, which
+ * asks each of them itself.
+ */
+export function chooserPlayer(chooser: ChooserRef, ctx: ResolutionContext): PlayerId | undefined {
+  if (typeof chooser === "number") {
+    const ref = ctx.targets[chooser];
+    if (ref === undefined) return undefined;
+    return ref.kind === "player" ? ref.player : ctx.controllerOf(ref);
+  }
+  if (chooser === "an-opponent") return ctx.playersInScope("each-opponent")[0];
+  if (chooser === "any-player" || chooser === "their-controller") return undefined;
+  if (typeof chooser === "object" && "player" in chooser) return chooser.player;
+  if (typeof chooser === "object" && "anyOf" in chooser) return ctx.playersInScope(chooser.anyOf)[0];
+  return effectPlayer(chooser, ctx);
+}
+
 function resolveAmountRef(ref: AmountRef, ctx: ResolutionContext): TargetRef | undefined {
   if (ref === "amassed") return amassedThisWay(ctx);
   if (ref === "priced") return ctx.priced === undefined ? undefined : { kind: "object", object: ctx.priced };
@@ -16759,7 +16793,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "choose-permanents": {
-      const chooser = spec.chooser === undefined ? ctx.controller : effectPlayer(spec.chooser, ctx);
+      const chooser = spec.chooser === undefined ? ctx.controller : chooserPlayer(spec.chooser, ctx);
       if (chooser === undefined) return;
       let except: readonly ObjectId[] =
         spec.exceptTriggerObject === true && ctx.triggerObject !== undefined ? [ctx.triggerObject] : [];
@@ -17519,7 +17553,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       );
       return;
     case "choose-card-name":
-      ctx.chooseCardName(spec);
+      ctx.chooseCardName(spec, spec.chooser === undefined ? undefined : chooserPlayer(spec.chooser, ctx));
       return;
     case "players-pay-any-amount":
       applyPlayersPayAnyAmount(spec, ctx);
@@ -18279,7 +18313,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             );
       if (target !== undefined) {
         const upTo = spec.upTo === undefined ? undefined : Math.max(0, Math.floor(amountValue(spec.upTo, ctx)));
-        const chooser = spec.chooser === undefined ? undefined : effectPlayer(spec.chooser, ctx);
+        const chooser = spec.chooser === undefined ? undefined : chooserPlayer(spec.chooser, ctx);
         if (spec.chooser !== undefined && chooser === undefined) return;
         ctx.discardChosen(target, spec.filter, spec.lookOnly === true, spec.optional === true, upTo, {
           ...(chooser !== undefined ? { chooser } : {}),
@@ -20610,7 +20644,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         // One opponent is that opponent from the start. Of several, the first
         // stands in on the offer until the piles are made.
         const opponents = spec.chooser === "an-opponent" ? ctx.playersInScope("each-opponent") : [];
-        const chooser = spec.chooser === "an-opponent" ? opponents[0] : effectPlayer(spec.chooser, ctx);
+        const chooser = spec.chooser === "an-opponent" ? opponents[0] : chooserPlayer(spec.chooser, ctx);
         if (chooser === undefined) return;
         const named = opponents.length > 1 ? {} : { chooser };
         if (ctx.askSeparatePiles(separator, progress.objects, chooser, faceDown, fates, opponents.length > 1)) {
@@ -20625,7 +20659,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           applyEffectSpec({ kind: "choose-opponent", then: { ...spec, chooser: "that-player", progress: { ...progress, piles } } }, ctx);
           return;
         }
-        const chooser = effectPlayer(spec.chooser, ctx);
+        const chooser = chooserPlayer(spec.chooser, ctx);
         if (chooser === undefined) return;
         if (ctx.askChoosePile(chooser, progress.separator, piles, faceDown, progress.lookers, fates)) {
           ctx.resumeAfterDecisions({ ...spec, progress: { ...progress, piles, chooser } }, below);
@@ -20684,7 +20718,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           applyEffectSpec({ kind: "choose-opponent", then: { ...spec, chooser: "that-player" } }, ctx);
           return;
         }
-        const chooser = effectPlayer(spec.chooser, ctx);
+        const chooser = chooserPlayer(spec.chooser, ctx);
         if (chooser === undefined) return;
         if (ctx.askChoosePile(chooser, ctx.controller, progress.piles, true, looked, fates)) {
           ctx.resumeAfterDecisions({ ...spec, progress: { ...progress, step: "choosing" } }, below);
@@ -20712,7 +20746,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         const chooser =
           spec.chooser === "their-controller"
             ? ctx.controllerOf({ kind: "object", object: objects[0] })
-            : effectPlayer(spec.chooser, ctx);
+            : chooserPlayer(spec.chooser, ctx);
         if (chooser === undefined) return;
         const prompt = spec.prompt ?? `Choose ${spec.count} of them`;
         if (!ctx.askChooseAmong(chooser, objects, spec.count, prompt)) return;
@@ -20895,7 +20929,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         return;
       }
       // One player named as this applies. Nobody: `otherwise` happens.
-      const named = effectPlayer(chooser, ctx);
+      const named = chooserPlayer(chooser, ctx);
       ctx.unless(named === undefined ? -1 : { player: named }, options, spec.otherwise, about);
       return;
     }
@@ -21050,7 +21084,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
                   ...((who) => (who === undefined ? {} : { chooser: who }))(
                     spec.instead.chooser === undefined || spec.instead.chooser === "an-opponent"
                       ? spec.instead.chooser
-                      : effectPlayer(spec.instead.chooser, ctx),
+                      : chooserPlayer(spec.instead.chooser, ctx),
                   ),
                 },
               }
@@ -21081,10 +21115,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       const picker =
         owner !== undefined
           ? ctx.controller
-          : spec.chooser === "that-player"
-            ? ctx.playersInScope("that-player")[0]
+          : spec.chooser !== undefined && spec.chooser !== "an-opponent"
+            ? chooserPlayer(spec.chooser, ctx)
             : undefined;
-      if (spec.chooser === "that-player" && picker === undefined) return;
+      if (spec.chooser !== undefined && spec.chooser !== "an-opponent" && picker === undefined) return;
       // "Up to one target card … for each opponent": the targets still legal
       // (an illegal one's slot is blank — rule 608.2b).
       const zone =

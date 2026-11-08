@@ -21,7 +21,7 @@ export default defineCard({
       slots: ["artifact", "creature", "enchantment", "planeswalker"],
       filter: { notTypes: ["land"] },
       rest: "sacrifice",
-      chosenBy: "you",
+      chooser: "you",
       prompt: "Choose an artifact, a creature, an enchantment, and a planeswalker for this player to keep — their other nonland permanents are sacrificed",
     },
     else: {

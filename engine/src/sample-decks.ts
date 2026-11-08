@@ -1381,7 +1381,6 @@ export const SAMPLE_DECKS: readonly SampleDeck[] = [
       ["Worldsoul's Rage", 1],
     ],
     substitutions: [
-      sub("Eumidian Wastewaker", "Icetill Explorer", "Four-mana green creature that plays lands from the graveyard."),
     ],
   }),
 ];

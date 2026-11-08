@@ -7704,3 +7704,24 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Balance: everyone keeps as many as the player with the fewest
 - **Do:** Cast Balance. Choose which lands, and later which creatures, to keep.
 - **Expect:** Bob sacrifices down to your number of lands, discards down to your hand size, and you sacrifice down to Bob's one creature.
+
+### Thornvault Forager: forage asks which way to pay
+- **Do:** Tap Thornvault Forager for its second ability ("Forage: Add two mana"), and pick a colour if asked.
+- **Expect:** With a Food and three cards in your graveyard, you're asked to choose "Exile three cards from your graveyard" or "Sacrifice a Food". The mana appears after you answer.
+
+### Leashling: the cost is a card from your hand, put on top
+- **Do:** Activate Leashling.
+- **Expect:** You're asked for a card from your hand; it goes on top of your library, and Leashling returns to your hand.
+- **Not a bug:** With no cards in hand the ability isn't offered: the cost can't be paid.
+
+### Advancing the Spirit: a free power-up, once
+- **Do:** Activate Wonder Man's power-up at {0} (the second offer). Then look for it again.
+- **Expect:** Two power-up offers appear, one for {0}. After the {0} one, no {0} offer is left this turn.
+
+### Curfew: each player picks their own creature
+- **Do:** Cast Curfew.
+- **Expect:** You're asked which of your creatures to return; Bob picks his own. Both go back to their owners' hands together.
+
+### Eureka: rounds continue until nobody puts a card down
+- **Do:** Cast Eureka. Each time you're asked, put a permanent card from your hand onto the battlefield, then decline.
+- **Expect:** It keeps going round the table while anyone puts a card down, and ends after a round where nobody does.

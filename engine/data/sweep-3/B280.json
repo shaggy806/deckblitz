@@ -1,0 +1,169 @@
+{
+ "batch": "B280",
+ "status": "done",
+ "ranks": "Need-key themes step 6 (docs/plans/need-key-themes.md, 2026-11-08): the cost pipeline (theme 4: cost modifiers read an EffectAmount and one spell clause, effects as costs through cost-acts.ts) and one chooser type (theme 5). Flagged Build ASAP cards first (Hulk, Gamma Goliath; Kang the Conqueror; Wonder Man, Hollywood Hero; Advancing the Spirit; The Dominion Bracelet; World War Hulk; Eumidian Wastewaker), then the themes' top keys where the cards ran.",
+ "authored": [
+  {
+   "name": "Hulk, Gamma Goliath",
+   "files": [
+    "engine/src/cards/pool/hulk-gamma-goliath.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kang the Conqueror",
+   "files": [
+    "engine/src/cards/pool/kang-the-conqueror.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wonder Man, Hollywood Hero",
+   "files": [
+    "engine/src/cards/pool/wonder-man-hollywood-hero.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Advancing the Spirit",
+   "files": [
+    "engine/src/cards/pool/advancing-the-spirit.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Dominion Bracelet",
+   "files": [
+    "engine/src/cards/pool/the-dominion-bracelet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "World War Hulk",
+   "files": [
+    "engine/src/cards/pool/world-war-hulk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sphinx of the Revelation",
+   "files": [
+    "engine/src/cards/pool/sphinx-of-the-revelation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thornvault Forager",
+   "files": [
+    "engine/src/cards/pool/thornvault-forager.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Feed the Cycle",
+   "files": [
+    "engine/src/cards/pool/feed-the-cycle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leashling",
+   "files": [
+    "engine/src/cards/pool/leashling.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Timestream Navigator",
+   "files": [
+    "engine/src/cards/pool/timestream-navigator.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Darksteel Monolith",
+   "files": [
+    "engine/src/cards/pool/darksteel-monolith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leyline of Mutation",
+   "files": [
+    "engine/src/cards/pool/leyline-of-mutation.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Corpse Cobble",
+   "files": [
+    "engine/src/cards/pool/corpse-cobble.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Soulblast",
+   "files": [
+    "engine/src/cards/pool/soulblast.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Verdeloth the Ancient",
+   "files": [
+    "engine/src/cards/pool/verdeloth-the-ancient.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Inscription of Ruin",
+   "files": [
+    "engine/src/cards/pool/inscription-of-ruin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Varolz, the Scar-Striped",
+   "files": [
+    "engine/src/cards/pool/varolz-the-scar-striped.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Curfew",
+   "files": [
+    "engine/src/cards/pool/curfew.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bane of Bala Ged",
+   "files": [
+    "engine/src/cards/pool/bane-of-bala-ged.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eumidian Wastewaker",
+   "files": [
+    "engine/src/cards/pool/eumidian-wastewaker.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eureka",
+   "files": [
+    "engine/src/cards/pool/eureka.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "For the Ancestors",
+   "files": [
+    "engine/src/cards/pool/for-the-ancestors.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": []
+}

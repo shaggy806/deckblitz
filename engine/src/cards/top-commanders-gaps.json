@@ -2,6 +2,10 @@
  "generated": "2026-09-22",
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
+  "effect:each-player-returns-own-permanent",
+  "effect:player-chooses-permanents-to-exile",
+  "effect:discard-or-sacrifice-choice",
+  "decision:choose-creature-type-on-resolution",
   "keyword:scavenge",
   "cost:power-up-alternative-cost",
   "cost:power-up-cost-reduction",
