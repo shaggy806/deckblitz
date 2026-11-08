@@ -12,7 +12,7 @@ export default defineCard({
   subtypes: ["Class"],
   text: "(Gain the next level as a sorcery to add its ability.)\nWhenever you cast a noncreature spell, you may discard a card. If you do, draw a card.\n{2}{R}: Level 2\nNoncreature spells you cast cost {1} less to cast.\n{2}{R}: Level 3\nIf a source you control would deal noncombat damage to an opponent or a permanent an opponent controls, it deals that much damage plus 2 instead.",
   static: [
-    atLevel(2, { affects: { scope: "self" }, costModification: { applies: { notTypes: ["creature"] }, caster: "you", reduceGeneric: 1 }, text: "Noncreature spells you cast cost {1} less to cast." }),
+    atLevel(2, { affects: { scope: "self" }, costModification: { applies: { notTypes: ["creature"] }, reduceGeneric: 1, when: { caster: "you" } }, text: "Noncreature spells you cast cost {1} less to cast." }),
     atLevel(3, { affects: { scope: "self" }, replacement: { event: "would-deal-damage", plus: 2, combat: false, to: "opponent-side", source: { controlledBy: "you" } }, text: "If a source you control would deal noncombat damage to an opponent or a permanent an opponent controls, it deals that much damage plus 2 instead." }),
   ],
   triggered: [

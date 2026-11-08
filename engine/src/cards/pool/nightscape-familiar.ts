@@ -16,7 +16,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       // A blue-red spell is one spell: {1} less, once.
-      costModification: { applies: { anyOf: [{ colors: ["U"] }, { colors: ["R"] }] }, caster: "you", reduceGeneric: 1 },
+      costModification: { applies: { anyOf: [{ colors: ["U"] }, { colors: ["R"] }] }, reduceGeneric: 1, when: { caster: "you" } },
       text: COST_TEXT,
     },
   ],

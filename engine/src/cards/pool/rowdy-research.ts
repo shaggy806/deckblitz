@@ -14,7 +14,7 @@ export default defineCard({
   text: `${COST_TEXT}\nDraw three cards.`,
   selfCostReduction: {
     condition: { kind: "controls", filter: {}, atLeast: 0 },
-    reduceGeneric: { turnStat: "attackers", who: "any-player" },
+    reduceGeneric: { turnStat: "attackers", who: "each-player" },
   },
   effect: { kind: "draw", amount: 3 },
 });

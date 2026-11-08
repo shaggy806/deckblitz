@@ -27,8 +27,8 @@ export default defineCard({
       affects: { scope: "self" },
       costModification: {
         applies: { typesAnyOf: ["instant", "sorcery"] },
-        caster: "you",
-        reduceGeneric: { countersOnSource: "oil" },
+        reduceGeneric: { countersOn: "source", counter: "oil" },
+        when: { caster: "you" },
       },
       text: REDUCE_TEXT,
     },

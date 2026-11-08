@@ -50,7 +50,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: {}, caster: "opponent", castFrom: ["graveyard", "exile"], castFromAnyones: true, increaseGeneric: 2 },
+      costModification: { applies: {}, increaseGeneric: 2, when: { caster: "opponent", castFrom: ["graveyard", "exile"], castFromAnyones: true } },
       text: TAX,
     },
   ],

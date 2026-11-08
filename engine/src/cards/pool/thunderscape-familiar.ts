@@ -19,8 +19,8 @@ export default defineCard({
       affects: { scope: "self" },
       costModification: {
         applies: { anyOf: [{ colors: ["B"] }, { colors: ["G"] }] },
-        caster: "you",
         reduceGeneric: 1,
+        when: { caster: "you" },
       },
       text: TEXT,
     },

@@ -20,7 +20,7 @@ export default defineCard({
       cost: { mana: "{5}", tap: true },
       targets: [],
       effect: { kind: "lose-life", amount: 2, who: "each-opponent" },
-      costReduction: { reduceGeneric: { cardsInGraveyard: { type: "creature" } } },
+      costReduction: { reduceGeneric: { countInGraveyard: { ownedBy: "you", type: "creature" } } },
       resolve: null,
       text: TEXT,
     },

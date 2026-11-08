@@ -16,7 +16,7 @@ export default defineCard({
       // Generic mana only, and neither the spell's mana cost nor its mana
       // value changes (the rulings).
       affects: { scope: "self" },
-      costModification: { applies: {}, caster: "you", castFrom: ["graveyard", "exile"], reduceGeneric: 2 },
+      costModification: { applies: {}, reduceGeneric: 2, when: { caster: "you", castFrom: ["graveyard", "exile"] } },
       text: "Spells you cast from your graveyard or from exile cost {2} less to cast.",
     },
     {

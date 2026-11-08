@@ -27,7 +27,7 @@ export default defineCard({
   text: `${COST_TEXT}\n${SAC_TEXT}\n${DESERT_TEXT}`,
   selfCostReduction: {
     condition: { kind: "controls", filter: {}, atLeast: 0 },
-    reduceGeneric: { cardsInGraveyard: { type: "land" } },
+    reduceGeneric: { countInGraveyard: { ownedBy: "you", type: "land" } },
   },
   triggered: [
     { trigger: { on: "enters-battlefield", who: "self" }, targets: [], effect: sacrificeALand, resolve: null, text: SAC_TEXT },

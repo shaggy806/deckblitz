@@ -14,8 +14,8 @@ export default defineCard({
       affects: { scope: "self" },
       costModification: {
         applies: { type: "creature", colors: ["B"] },
-        caster: "you",
         reduceGeneric: 1,
+        when: { caster: "you" },
       },
       text: "Black creature spells you cast cost {1} less to cast.",
     },

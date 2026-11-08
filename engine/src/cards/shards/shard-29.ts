@@ -930,6 +930,7 @@ import _poolWireflyHive from "../pool/wirefly-hive.js";
 import _poolWispdrinkerVampire from "../pool/wispdrinker-vampire.js";
 import _poolWitchHunt from "../pool/witch-hunt.js";
 import _poolWithstandDeath from "../pool/withstand-death.js";
+import _poolWonderManHollywoodHero from "../pool/wonder-man-hollywood-hero.js";
 import _poolWoodcallerAutomaton from "../pool/woodcaller-automaton.js";
 import _poolWoodenStake from "../pool/wooden-stake.js";
 import _poolWordsOfWar from "../pool/words-of-war.js";
@@ -1903,6 +1904,7 @@ const shard: CardShard = {
     _poolWispdrinkerVampire,
     _poolWitchHunt,
     _poolWithstandDeath,
+    _poolWonderManHollywoodHero,
     _poolWoodcallerAutomaton,
     _poolWoodenStake,
     _poolWordsOfWar,

@@ -24,9 +24,9 @@ export default defineCard({
       affects: { scope: "self" },
       costModification: {
         applies: { type: "creature" },
-        caster: "you",
         reduceGeneric: 1,
         matchesChosenCreatureType: true,
+        when: { caster: "you" },
       },
       text: COST_TEXT,
     },

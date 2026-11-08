@@ -688,6 +688,68 @@ cost:alternative-cost-for-all-spells 2; 87 one-card keys (`cost:cost-reduction-p
 
 **Confidence: medium.** (a) is mechanical; (b) is a real refactor.
 
+**Design note (step 6, 2026-11-08): one amount, one spell clause, and effects as costs.**
+
+*(a) Modifiers take `EffectAmount`.* `CostReductionAmount` goes. `costModification`'s `reduceGeneric` /
+`increaseGeneric` / `reduceColoredTimes`, `abilityCostModification`'s, a card's `costReduction` / `selfCostReduction`,
+an ability's `costReduction` and `timesEachTurn`, and `maxX` all take an `EffectAmount`, read by one
+`Game.costAmount(amount, player, source, priced?)` through `amountValue` in a resolution context of the static's
+source and controller. A number never builds a context, so the common case stays what it was on every legal-action
+query. The object being priced is the `AmountRef` `"priced"` (the spell, or the source of the ability, whose cost
+is worked out), so "where X is that spell's mana value" needs no field. `CostReductionAmount`'s members become the
+amount of the same meaning: `scaled` a `product`, `opponents` and `playersInGame` a `countPlayers`, `countersOnSource`
+a `countersOn`, `cardsInGraveyard` a `countInGraveyard`, `greatestOpponentCount` an `amongPlayers`; the two with no
+equal (`allCounters`, `commanderManaValue`) become `EffectAmount` members.
+
+*The spell clause.* One `SpellCastClause` (`when` on `costModification` and `alternativeCostForSpells`) says which
+casts it reaches: `caster`, `castFrom` (with `castFromAnyones`), `notFromCastersHand`, `exceptOnCastersTurn`, `yourTurnOnly`,
+`kicked`, `firstEachTurn` (the caster's casts this turn matching the static's filter, from the journal, as
+`Game.timingCount` counts a trigger's). It replaces those flat fields there and `alternativeCostForSpells`' own
+`fromHand` / `fromZones` / `oncePerTurn` / `yourTurnOnly`. The target-keyed fields (`perTarget`, `targeting`,
+`targetingSource`) stay beside it: they are what the offer's "assume the best target" path is keyed on.
+
+*(b) Effects as costs.* `AbilityCost.do` and `KickerAlsoCost.do` (so a kicker's, an additional cost's, an escalate's
+and an option's) take an `EffectSpec` whose every step has a row in `COST_ACTS` (`engine/src/cost-acts.ts`, one table
+plus one check, as `trigger-events.ts`): for each kind, whether it can be paid in full now (118.3; built on
+`mayBeDone`, a `sequence` needing every step and a `modal` some mode), the most an X could be, whether it may ask a
+player something, and whether it moves a card from a library or is random. Payment:
+- **Announced** like any other part: the X it allows caps the offer (601.2b); nothing is paid unless every part is
+  payable (601.2h: "partial payments are not allowed"), the payability check being read before anything moves.
+- **Paid** last among the cost's parts, once the object is on the stack, those a row marks random or moving from a
+  library after the rest (601.2h). `Game.payCostAct` applies the effect in a context of the ability's source and
+  controller, X and targets, as a resolution would; a decision it raises is an ordinary dispatched one, and what's
+  left waits in `suspendedResolutions`, which already holds state-based actions and priority off (117.5).
+- **Mana abilities** (605.3b) don't use the stack: the `do` and the mana run as one sequence, so the mana waits on the
+  answer. One whose act can't be planned is never used by the auto-payer, and one moving a card to or from a library
+  isn't a mana ability at all (605.1a reads `COST_ACTS`).
+- **Paid objects** go into `{ paid }` by an internal last step of the sequence, which reads the events since the act
+  began and calls `Game.recordPaid`, so a cost paid over several decisions is one set.
+
+The old automatic parts move onto it and go: `mill`, `exileTop`, `exileSelf`, `returnSelfToHand`, `exertSelf`,
+`discardHand` (`do` of the same action). The spell side's `AdditionalCostOption` loses `discard`, `blight`, `behold` and
+`also` for `do`, and "sacrifice any number" is `sacrificeCount: "x"` as a cost (Corpse Cobble, Soulblast), or
+`SacrificeCost`'s new `anyNumber` on an ability (Sword of the Ages).
+
+**Not moved, with the reason:** the parts named on the cast or activate action itself, because they're chosen with
+the mana and offered as variants, and moving them means changing the wire `LegalAction` and the client: `sacrifice`,
+`tapOthers`, `unattach`, `waterbend`, `removeCounter`, `payLife` and `payEnergy` (paying life and energy aren't
+instructions any effect gives: 118.2, 107.14). `discard`, `exileFromGraveyard`, `exileFromHand`, `exileSpell`,
+`putFromExile`, `reveal`, `returnToHand`, `untapOthers`, `blight`, `collectEvidence` and `craft` have offers keyed to
+X, source exclusions and decisions with their own continuation fields; each one is listed in *As built* as moved or
+left, by what its migration turned out to need.
+
+*(c) Keyword costs with parameters.* `kicker.cost` may be `{X}` (702.33: an X announced with the cost, `timesKicked`
+as usual, read as the spell's X); a granted replicate is one `grantsReplicate` static (cost `"mana-cost"` or a string);
+a modal spell's `maxModes` reads `ifKicked`.
+
+*Rules.* 601.2b (announced), 601.2f (total locked in: increases, then reductions, in `Game`'s existing order), 601.2h
+(paid in full, random and library parts last), 602.2b (the same for abilities), 605.1a and 605.3b (mana abilities),
+118.3 (payable in full), 118.8 and 118.9d (additional costs apply to alternative ones). `do` decisions are ordinary
+registered ones (`decision-registry.md`).
+
+*Bots.* `effect-worth.ts` prices a `do` as the effect it is, negated (a cost is a loss); `features.ts` reads "sacrifices itself"
+from `do` too; `target-polarity.ts` walks `do` as part of the ability. v2 simulates, so it pays them as the table does.
+
 ### 5. Who chooses (125 keys, ~150 cards)
 
 **Change.** A uniform `chooser: PlayerRef` on every effect that makes a choice (choose permanents, choose from a zone,

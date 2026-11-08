@@ -32,7 +32,7 @@ export default defineCard({
   text: `${COST_TEXT}\nTrample\n${DAMAGE_TEXT}`,
   selfCostReduction: {
     condition: { kind: "controls", filter: {}, atLeast: 0 },
-    reduceGeneric: { turnStat: "noncombat-damage-taken", who: "opponent" },
+    reduceGeneric: { turnStat: "noncombat-damage-taken", who: "each-opponent" },
   },
   triggered: [
     {

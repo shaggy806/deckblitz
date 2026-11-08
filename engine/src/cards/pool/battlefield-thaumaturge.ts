@@ -17,10 +17,10 @@ export default defineCard({
       affects: { scope: "self" },
       costModification: {
         applies: { typesAnyOf: ["instant", "sorcery"] },
-        caster: "you",
         perTarget: true,
         targeting: { type: "creature" },
         reduceGeneric: 1,
+        when: { caster: "you" },
       },
       text: STATIC,
     },

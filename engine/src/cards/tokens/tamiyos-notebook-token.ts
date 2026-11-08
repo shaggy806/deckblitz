@@ -14,7 +14,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: {}, caster: "you", reduceGeneric: 2 },
+      costModification: { applies: {}, reduceGeneric: 2, when: { caster: "you" } },
       text: "Spells you cast cost {2} less to cast.",
     },
   ],

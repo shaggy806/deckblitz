@@ -28,9 +28,8 @@ export default defineCard({
       condition: { kind: "your-turn" },
       costModification: {
         applies: { type: "creature", keyword: "flying", notSubtypes: ["Lemur"] },
-        caster: "you",
         reduceGeneric: 1,
-        firstEachTurn: true,
+        when: { caster: "you", firstEachTurn: true },
       },
       text: "The first non-Lemur creature spell with flying you cast during each of your turns costs {1} less to cast.",
     },

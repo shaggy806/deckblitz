@@ -19,7 +19,7 @@ export default defineCard({
   flashIf: { condition: { kind: "cards-in-graveyard", atLeast: 3, filter: { subtype: "Lesson" } } },
   selfCostReduction: {
     condition: { kind: "controls", filter: {}, atLeast: 0 },
-    reduceGeneric: { cardsInGraveyard: { notTypes: ["creature", "land"] } },
+    reduceGeneric: { countInGraveyard: { ownedBy: "you", notTypes: ["creature", "land"] } },
   },
   text: "If there are three or more Lesson cards in your graveyard, you may cast this spell as though it had flash.\nThis spell costs {1} less to cast for each noncreature, nonland card in your graveyard.",
 });

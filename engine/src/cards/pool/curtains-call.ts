@@ -16,7 +16,7 @@ export default defineCard({
   types: ["instant"],
   selfCostReduction: {
     condition: { kind: "controls", filter: {}, atLeast: 0 },
-    reduceGeneric: { opponents: true },
+    reduceGeneric: { countPlayers: "each-opponent" },
   },
   text: "Undaunted (This spell costs {1} less to cast for each opponent.)\nDestroy two target creatures.",
   targets: ["creature", { kind: "other", of: "creature", than: { slots: [0] } }],

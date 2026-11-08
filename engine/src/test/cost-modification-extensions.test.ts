@@ -57,9 +57,10 @@ const firstCreatureDiscount = defineCard({
       affects: { scope: "self" },
       costModification: {
         applies: { type: "creature" },
-        caster: "you",
-        firstEachTurn: true,
+        
+        
         reduceGeneric: 1,
+        when: { caster: "you", firstEachTurn: true },
       },
       text: "The first creature spell you cast each turn costs {1} less to cast.",
     },

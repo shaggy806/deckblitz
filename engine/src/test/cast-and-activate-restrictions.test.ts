@@ -84,7 +84,7 @@ const registry = createDefaultRegistry()
     enchantment(RIOT, {
       costModification: {
         applies: { type: "creature", controlledBy: "you" },
-        reduceGeneric: { turnStat: "life-lost", who: "opponent" },
+        reduceGeneric: { turnStat: "life-lost", who: "each-opponent" },
       },
     }),
   )

@@ -400,6 +400,7 @@ import _poolHoodwink from "../pool/hoodwink.js";
 import _poolHordeOfNotions from "../pool/horde-of-notions.js";
 import _poolHotDogCart from "../pool/hot-dog-cart.js";
 import _poolHotfootGnome from "../pool/hotfoot-gnome.js";
+import _poolHulkGammaGoliath from "../pool/hulk-gamma-goliath.js";
 import _poolHumility from "../pool/humility.js";
 import _poolHuntersProwess from "../pool/hunters-prowess.js";
 import _poolIceFangCoatl from "../pool/ice-fang-coatl.js";
@@ -1380,6 +1381,7 @@ const shard: CardShard = {
     _poolHordeOfNotions,
     _poolHotDogCart,
     _poolHotfootGnome,
+    _poolHulkGammaGoliath,
     _poolHumility,
     _poolHuntersProwess,
     _poolIceFangCoatl,

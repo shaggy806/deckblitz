@@ -20,7 +20,7 @@ export default defineCard({
   text: `${COST_TEXT}\nWitchstalker Frenzy deals 5 damage to target creature.`,
   selfCostReduction: {
     condition: { kind: "controls", filter: {}, atLeast: 0 },
-    reduceGeneric: { turnStat: "attackers", who: "any-player" },
+    reduceGeneric: { turnStat: "attackers", who: "each-player" },
   },
   targets: ["creature"],
   effect: { kind: "damage", amount: 5, target: 0 },

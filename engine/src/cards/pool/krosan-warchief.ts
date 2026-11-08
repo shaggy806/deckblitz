@@ -14,7 +14,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: { subtype: "Beast" }, caster: "you", reduceGeneric: 1 },
+      costModification: { applies: { subtype: "Beast" }, reduceGeneric: 1, when: { caster: "you" } },
       text: "Beast spells you cast cost {1} less to cast.",
     },
   ],

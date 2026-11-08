@@ -14,7 +14,7 @@ export default defineCard({
   text: `Flash\nThis spell costs {2} less to cast for each creature that died this turn.\n${ENTER}`,
   selfCostReduction: {
     condition: { kind: "controls", filter: {}, atLeast: 0 },
-    reduceGeneric: { turnHistory: "died", who: "any-player", filter: { type: "creature" }, times: 2 },
+    reduceGeneric: { product: [{ turnHistory: "died", who: "each-player", filter: { type: "creature" } }, 2] },
   },
   triggered: [
     {

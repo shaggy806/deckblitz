@@ -100,7 +100,7 @@ describe("a cost reduced by the most any one opponent controls", () => {
       },
       { tokenFor: () => "Treasure Token" },
     );
-    expect(parsed.selfCostReduction.reduceGeneric).toEqual({ greatestOpponentCount: { type: "artifact" } });
+    expect(parsed.selfCostReduction.reduceGeneric).toEqual({ amongPlayers: "greatest", who: "each-opponent", of: { countOf: { type: "artifact", controlledBy: "you" }, forEachPlayer: true } });
     expect(parsed.triggered[0].effect).toEqual({
       kind: "create-token",
       token: "Treasure Token",
@@ -570,15 +570,15 @@ describe("what a spell costs: amounts, colours and targets", () => {
     });
     expect(self("This spell costs {1} less to cast for each Cave you control and each Cave card in your graveyard.")).toEqual({
       condition: always,
-      reduceGeneric: { sum: [{ countOf: { subtype: "Cave", controlledBy: "you" } }, { cardsInGraveyard: { subtype: "Cave" } }] },
+      reduceGeneric: { sum: [{  countOf: { subtype: "Cave", controlledBy: "you" }  }, { countInGraveyard: { ownedBy: "you", subtype: "Cave" } }] },
     });
     expect(self("This spell costs {2} less to cast for each creature that died this turn.")).toEqual({
       condition: always,
-      reduceGeneric: { turnHistory: "died", who: "any-player", filter: { type: "creature" }, times: 2 },
+      reduceGeneric: { product: [{ turnHistory: "died", who: "each-player", filter: { type: "creature" } }, 2] },
     });
     expect(self("Domain — This spell costs {2} less to cast for each basic land type among lands you control.")).toEqual({
       condition: always,
-      reduceGeneric: { scaled: { basicLandTypes: "you" }, by: 2 },
+      reduceGeneric: { product: [{  basicLandTypes: "you"  }, 2] },
     });
   });
 
@@ -633,9 +633,10 @@ describe("what a spell costs: amounts, colours and targets", () => {
     const staticOf = (text: string): unknown => face(creature, text).static?.[0]?.costModification;
     expect(staticOf("Spells you cast that target a creature cost {2} less to cast.")).toEqual({
       applies: {},
-      caster: "you",
+      
       targeting: { type: "creature" },
       reduceGeneric: 2,
+      when: { caster: "you" },
     });
     expect(staticOf("Spells that target this creature cost {2} less to cast.")).toEqual({
       applies: {},
@@ -644,22 +645,25 @@ describe("what a spell costs: amounts, colours and targets", () => {
     });
     expect(staticOf("Each instant and sorcery spell you cast costs {1} less to cast for each creature it targets.")).toEqual({
       applies: { typesAnyOf: ["instant", "sorcery"] },
-      caster: "you",
+      
       perTarget: true,
       targeting: { type: "creature" },
       reduceGeneric: 1,
+      when: { caster: "you" },
     });
     expect(staticOf("Spells you cast cost {1} less to cast for each card with the same name as that spell in your graveyard.")).toEqual({
       applies: {},
-      caster: "you",
-      reduceGeneric: { cardsInGraveyard: {}, sameNameAsSpell: true },
+      
+      reduceGeneric: { countInGraveyard: { ownedBy: "you" }, sameNameAs: "priced" },
+      when: { caster: "you" },
     });
     expect(staticOf("Spells your opponents cast from graveyards or from exile cost {2} more to cast.")).toEqual({
       applies: {},
-      caster: "opponent",
-      castFrom: ["graveyard", "exile"],
-      castFromAnyones: true,
+      
+      
+      
       increaseGeneric: 2,
+      when: { caster: "opponent", castFrom: ["graveyard", "exile"], castFromAnyones: true },
     });
     // The Defilers: the reduction only with the optional life paid.
     expect(
@@ -668,10 +672,11 @@ describe("what a spell costs: amounts, colours and targets", () => {
       ),
     ).toEqual({
       applies: { colors: ["R"], typesAnyOf: ["artifact", "battle", "creature", "enchantment", "planeswalker"] },
-      caster: "you",
+      
       reduceColored: "{R}",
       coloredOnly: true,
       optionalLife: 2,
+      when: { caster: "you" },
     });
     // A mismatched colour is no Defiler's.
     expect(
@@ -681,8 +686,9 @@ describe("what a spell costs: amounts, colours and targets", () => {
     ).toBeUndefined();
     expect(staticOf("Instant and sorcery spells you cast with mana value 4 or greater cost {X} less to cast, where X is this creature's power.")).toEqual({
       applies: { typesAnyOf: ["instant", "sorcery"], manaValue: { op: "gte", n: 4 } },
-      caster: "you",
+      
       reduceGeneric: { powerOf: "source" },
+      when: { caster: "you" },
     });
     expect(face(creature, "Spells your opponents cast that target you or a permanent you control cost {2} more to cast.").static?.[0]?.targetedBySpellsCost).toEqual({
       payGeneric: 2,
@@ -1052,7 +1058,7 @@ describe("an emblem's static abilities", () => {
     ],
     [
       'You get an emblem with "You may cast spells from your hand without paying their mana costs."',
-      { affects: self, alternativeCostForSpells: { mana: "{0}", fromHand: true } },
+      { affects: self, alternativeCostForSpells: { mana: "{0}", when: { castFrom: "hand" } } },
     ],
     [
       "You get an emblem with \"Your opponents can't cast noncreature spells.\"",
@@ -2378,9 +2384,10 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("Plotting cards from your hand costs {2} less.").static?.[0]?.plotCostReduction).toBe(2);
     expect(face("Spells you cast from your graveyard or from exile cost {2} less to cast.").static?.[0]?.costModification).toEqual({
       applies: {},
-      caster: "you",
-      castFrom: ["graveyard", "exile"],
+      
+      
       reduceGeneric: 2,
+      when: { caster: "you", castFrom: ["graveyard", "exile"] },
     });
     expect(face("Morph—Discard a Zombie card.").morph?.also).toEqual({ discard: { count: 1, filter: { subtype: "Zombie" } } });
     expect(face("Morph—Return a Bird you control to its owner's hand.").morph?.also).toEqual({
@@ -2390,7 +2397,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("Improvise", "Sorcery", {}).improvise).toBe(true);
     // Assist (rule 702.132a), its reminder text stripped.
     expect(face("Assist (Another player can pay up to {5} of this spell's cost.)", "Sorcery", {}).assist).toBe(true);
-    expect(face("Undaunted", "Sorcery", {}).selfCostReduction?.reduceGeneric).toEqual({ opponents: true });
+    expect(face("Undaunted", "Sorcery", {}).selfCostReduction?.reduceGeneric).toEqual({ countPlayers: "each-opponent" });
     // Mayhem: a cost, or none on a land (played from the graveyard).
     expect(face("Mayhem {4}{R}").mayhem).toEqual({ cost: "{4}{R}" });
     expect(face("Mayhem", "Land").mayhem).toEqual({});
@@ -2587,17 +2594,17 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       also: { sacrifice: { filter: { type: "land" } } },
       costText: "Sacrifice a land",
     });
-    expect(face("You may pay {0} rather than pay the cycling cost of the first card you cycle each turn.").static[0].alternativeCyclingCost)
-      .toEqual({ mana: "{0}", firstEachTurn: true });
+    expect(face("You may pay {0} rather than pay the cycling cost of the first card you cycle each turn.").static[0].alternativeAbilityCost)
+      .toEqual({ kind: "cycling", mana: "{0}", firstEachTurn: true });
     expect(face("You may activate equip abilities any time you could cast an instant.").static[0].equipAtInstantSpeed).toBe(true);
     const anew = face("During your turn, you may activate equip abilities any time you could cast an instant.").static[0];
     expect(anew.equipAtInstantSpeed).toBe(true);
     expect(anew.condition).toEqual({ kind: "your-turn" });
     const first = face("You may pay {0} rather than pay the equip cost of the first equip ability you activate during each of your turns.").static[0];
-    expect(first.alternativeEquipCost).toEqual({ mana: "{0}", firstEachTurn: true });
+    expect(first.alternativeAbilityCost).toEqual({ kind: "equip", mana: "{0}", firstEachTurn: true });
     expect(first.condition).toEqual({ kind: "your-turn" });
     const perspectives = face("As long as you have seven or more cards in hand, you may pay {0} rather than pay cycling costs.").static[0];
-    expect(perspectives.alternativeCyclingCost).toEqual({ mana: "{0}" });
+    expect(perspectives.alternativeAbilityCost).toEqual({ kind: "cycling", mana: "{0}" });
     expect(perspectives.condition).toEqual({ kind: "hand-size", atLeast: 7 });
     expect(parseTrigger("When you cycle this card")).toEqual([{ on: "this-cycled" }]);
     // Reading the X of its cycling cost is `triggerValue`, a person's.
@@ -3614,14 +3621,15 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       filter: { type: "enchantment" },
       payLifeManaValue: true,
       oncePerTurn: true,
-      yourTurnOnly: true,
+      when: { yourTurnOnly: true },
     });
     const grantOf = (line: string) => face(line, "Enchantment").static[0].alternativeCostForSpells;
-    expect(grantOf("You may cast spells from your hand without paying their mana costs.")).toEqual({ mana: "{0}", fromHand: true });
+    expect(grantOf("You may cast spells from your hand without paying their mana costs.")).toEqual({ mana: "{0}", when: { castFrom: "hand" } });
     expect(grantOf("You may cast spells with mana value less than or equal to the number of creatures you control from your hand without paying their mana costs.")).toEqual({
       mana: "{0}",
-      fromHand: true,
+      
       filter: { manaValue: { op: "lte", n: { amount: { countOf: { type: "creature", controlledBy: "you" } } } } },
+      when: { castFrom: "hand" },
     });
     expect(grantOf("Any player may cast creature spells with mana value 3 or less without paying their mana costs and as though they had flash.")).toEqual({
       mana: "{0}",
@@ -3632,22 +3640,22 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(grantOf("Once during each of your turns, you may cast an instant or sorcery spell from your hand without paying its mana cost.")).toEqual({
       mana: "{0}",
       oncePerTurn: true,
-      yourTurnOnly: true,
-      fromHand: true,
+      
+      
       filter: { typesAnyOf: ["instant", "sorcery"] },
+      when: { castFrom: "hand", yourTurnOnly: true },
     });
     expect(grantOf("Once during each of your turns, you may cast a spell from your hand or the top of your library without paying its mana cost.")).toEqual({
       mana: "{0}",
       oncePerTurn: true,
-      yourTurnOnly: true,
-      fromHand: true,
-      fromZones: ["library"],
+      when: { castFrom: ["hand", "library"], yourTurnOnly: true },
     });
     expect(grantOf("Once each turn, you may pay {0} rather than pay the mana cost for a creature spell you cast from exile.")).toEqual({
       mana: "{0}",
       oncePerTurn: true,
-      fromZones: ["exile"],
+      
       filter: { type: "creature" },
+      when: { castFrom: "exile" },
     });
     expect(grantOf("Once each turn, you may pay {0} rather than pay the mana cost for a spell you cast with mana value X or less, where X is the number of time counters on this enchantment.")).toEqual({
       mana: "{0}",
@@ -3655,7 +3663,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       filter: { manaValue: { op: "lte", n: { amount: { countersOn: "source", counter: "time" } } } },
     });
     const maze = face("Once during each of your turns, you may cast a spell from your hand by paying life equal to its mana value rather than paying its mana cost.", "Enchantment — Room");
-    expect(maze.static[0].alternativeCostForSpells.fromHand).toBe(true);
+    expect(maze.static[0].alternativeCostForSpells.when?.castFrom).toBe("hand");
     const bloodcaster = face("{1}{B}, {T}: Rather than pay the mana cost of the next spell you cast this turn, you may pay life equal to that spell's mana value.", "Creature — Vampire Warlock");
     expect(bloodcaster.activated[0].effect).toEqual({ kind: "grant-spells-this-turn", next: true, payLifeManaValue: true });
   });
@@ -11214,7 +11222,7 @@ describe("amounts read from what has happened this turn", () => {
     expect(salvage.targets).toEqual(["opponent"]);
     expect(face(CREATURE, "This spell costs {2} less to cast for each card you've cycled or discarded this turn.").selfCostReduction).toEqual({
       condition: { kind: "controls", filter: {}, atLeast: 0 },
-      reduceGeneric: { turnHistory: "discarded", times: 2 },
+      reduceGeneric: { product: [{ turnHistory: "discarded" }, 2] },
     });
   });
 
@@ -12757,10 +12765,10 @@ describe("spells of a colour costing a coloured pip more", () => {
     parseFace({ name: "Card", type_line: "Creature", oracle_text }, { tokenFor: (d: string) => d }).static;
   it("reads the colour and the pips", () => {
     expect(statics("Black spells you cast cost {B} more to cast.")[0]).toMatchObject({
-      costModification: { applies: { colors: ["B"] }, caster: "you", increaseColored: "{B}" },
+      costModification: { applies: { colors: ["B"] }, increaseColored: "{B}", when: { caster: "you" } },
     });
     expect(statics("Blue spells you cast cost {U} more to cast.")[0]).toMatchObject({
-      costModification: { applies: { colors: ["U"] }, caster: "you", increaseColored: "{U}" },
+      costModification: { applies: { colors: ["U"] }, increaseColored: "{U}", when: { caster: "you" } },
     });
   });
   it("leaves another shape alone", () => {
@@ -13134,7 +13142,7 @@ describe("mana abilities from a hand, and paid by exiling from a graveyard", () 
       colors: [],
     });
     expect(parsed.complete).toBe(true);
-    expect(parsed.static[0].costModification).toEqual({ applies: {}, exceptOnCastersTurn: true, increaseGeneric: 3 });
+    expect(parsed.static[0].costModification).toEqual({ applies: {}, when: { exceptOnCastersTurn: true }, increaseGeneric: 3 });
   });
   it("a manland with all creature types, not a changeling", () => {
     const [, animate] = read(
@@ -15804,7 +15812,7 @@ describe("a spell's own ceiling on X, and revealing until X cards", () => {
       },
       { tokenFor: () => null },
     );
-    expect(way.maxX).toEqual({ playersInGame: true });
+    expect(way.maxX).toEqual({ countPlayers: "each-player" });
     expect(way.complete).toBe(true);
     expect(way.effect).toEqual({
       kind: "reveal-until-count",

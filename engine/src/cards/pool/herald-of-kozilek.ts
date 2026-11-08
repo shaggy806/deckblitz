@@ -32,7 +32,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: { colorless: true }, caster: "you", reduceGeneric: 1 },
+      costModification: { applies: { colorless: true }, reduceGeneric: 1, when: { caster: "you" } },
       text: COST_TEXT,
     },
   ],

@@ -13,8 +13,8 @@ export default defineCard({
       affects: { scope: "self" },
       alternativeCostForSpells: {
         mana: "{0}",
-        fromHand: true,
         filter: { manaValue: { op: "lte", n: { amount: { countOf: { type: "creature", controlledBy: "you" } } } } },
+        when: { castFrom: "hand" },
       },
       text: TEXT,
     },

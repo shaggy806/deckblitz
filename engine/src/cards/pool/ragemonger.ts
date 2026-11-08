@@ -14,7 +14,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: { subtype: "Minotaur" }, caster: "you", reduceColored: "{B}{R}", coloredOnly: true },
+      costModification: { applies: { subtype: "Minotaur" }, reduceColored: "{B}{R}", coloredOnly: true, when: { caster: "you" } },
       text: "Minotaur spells you cast cost {B}{R} less to cast. This effect reduces only the amount of colored mana you pay.",
     },
   ],

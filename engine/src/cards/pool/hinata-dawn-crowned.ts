@@ -23,12 +23,12 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: {}, caster: "you", perTarget: true, reduceGeneric: 1 },
+      costModification: { applies: {}, perTarget: true, reduceGeneric: 1, when: { caster: "you" } },
       text: "Spells you cast cost {1} less to cast for each target.",
     },
     {
       affects: { scope: "self" },
-      costModification: { applies: {}, caster: "opponent", perTarget: true, increaseGeneric: 1 },
+      costModification: { applies: {}, perTarget: true, increaseGeneric: 1, when: { caster: "opponent" } },
       text: "Spells your opponents cast cost {1} more to cast for each target.",
     },
   ],

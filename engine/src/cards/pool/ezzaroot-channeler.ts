@@ -20,8 +20,8 @@ export default defineCard({
       affects: { scope: "self" },
       costModification: {
         applies: { type: "creature" },
-        caster: "you",
         reduceGeneric: { turnStat: "life-gained", who: "you" },
+        when: { caster: "you" },
       },
       text: REDUCE_TEXT,
     },

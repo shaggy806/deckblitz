@@ -11,11 +11,9 @@
 
 import type { StaticCondition, TurnStat } from "./cards/define.js";
 import type { EffectAmount, EffectSpec, SpellResolver } from "./effects.js";
-import type { Color } from "./mana.js";
-import type { GameState, PlayerCounterKind, JournalWhat, ZoneType } from "./state.js";
-import type { JournalWindow } from "./journal.js";
+import type { GameState, ZoneType } from "./state.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
-import type { AggregateSpec, CardFilter } from "./filter.js";
+import type { CardFilter } from "./filter.js";
 import type { TargetSpec } from "./target.js";
 import type { Step } from "./turn.js";
 import type { TriggerEventName } from "./trigger-events.js";
@@ -672,6 +670,10 @@ export interface AbilityCost {
   readonly waterbend?: boolean;
 }
 
+/** The kinds of activated ability a cost modifier can single out by name (rule
+ * 602.2b): `isEquipAbility`, or the ability's own flag. */
+export type AbilityKindName = "equip" | "exhaust" | "cycling" | "loyalty" | "power-up";
+
 export interface ActivatedAbility {
   readonly cost: AbilityCost;
   readonly targets: readonly TargetSpec[];
@@ -830,7 +832,7 @@ export interface ActivatedAbility {
    * entry an activation, so the restriction stays with the object through a
    * change of control (602.5b). A mana ability with it isn't offered to the
    * auto-payer: activated by hand. */
-  readonly timesEachTurn?: CostReductionAmount;
+  readonly timesEachTurn?: EffectAmount;
   /** Exhaust — "Activate each exhaust ability only once": once for as long
    * as the object exists, rather than once each turn (Loot, the
    * Pathfinder). Tracked per ability index on
@@ -847,6 +849,9 @@ export interface ActivatedAbility {
    * entered, the ability costs less by that permanent's mana cost (702.193b,
    * rule 118.7 — see `Game.poweredUp`). */
   readonly powerUp?: boolean;
+  /** This is the ability at this index in its permanent's list at another
+   * cost (`alternativeAbilityCost`): activating it uses that one up. */
+  readonly altCostOf?: number;
   /** Boast (rule 702.142a — Dragonkin Berserker): activatable only if this
    * creature attacked this turn, and only once each turn. Implies
    * `oncePerTurn`; the "attacked this turn" half reads
@@ -863,7 +868,7 @@ export interface ActivatedAbility {
    * `reduceColored: "{U}"`. A symbol the cost hasn't comes off its generic
    * part (rule 118.7c). */
   readonly costReduction?: {
-    readonly reduceGeneric: CostReductionAmount;
+    readonly reduceGeneric: EffectAmount;
     readonly reduceColored?: string;
     readonly condition?: StaticCondition;
   };
@@ -898,118 +903,6 @@ export interface ActivatedAbility {
    * its group (at least 1 each), so give the group no `max`. */
   readonly divided?: { readonly total: EffectAmount; readonly slot: number; readonly of?: string };
 }
-
-/**
- * How much generic mana a cost reduction takes off: a fixed number, or a live
- * count read as the cost is determined.
- *
- * - `countOf`: permanents matching a filter (Blasphemous Act's creatures on
- *   the battlefield). Token stacks count as every token in them.
- * - `countersOnSource`: counters of one kind on the permanent doing the
- *   reducing (Animar, Soul of Elements: "{1} less for each +1/+1 counter on
- *   Animar").
- * - `cardsInGraveyard`: cards in *your* graveyard matching a filter (Karador,
- *   Ghost Chieftain: "{1} less for each creature card in your graveyard").
- * - an `AggregateSpec`: a sum or maximum over matching permanents.
- */
-export type CostReductionAmount =
-  | number
-  /** `excludeSelf`: "for each **other** artifact you control" (Etherium
-   * Pteramander, Plate Armor) — the permanent doing the reducing isn't one. */
-  | { readonly countOf: CardFilter; readonly excludeSelf?: boolean }
-  | { readonly countersOnSource: string }
-  /** `sameNameAsSpell`: "each card with the same name as that spell in your
-   * graveyard" (Locket of Yesterdays). A spell cast from that graveyard
-   * doesn't count itself: it's on the stack before its cost is worked out
-   * (rules 601.2a, 601.2f). */
-  | { readonly cardsInGraveyard: CardFilter; readonly sameNameAsSpell?: boolean }
-  /** One per counter of any kind on any player and any permanent — Lumbering
-   * Megasloth's "for each counter among players and permanents" (rule 122). */
-  | { readonly allCounters: true }
-  /** How many players are still in the game (rule 102.1's players, less those
-   * who have left, rule 800.4a) — Open the Way's `maxX`. */
-  | { readonly playersInGame: true }
-  /** One per color among permanents matching the filter — Vivid (Wildvine
-   * Pummeler). `characteristics.ts`'s `colorsAmongPermanents`. */
-  | { readonly colorsAmong: CardFilter }
-  /** The power of the permanent doing the reducing (The Scarlet Witch's "where
-   * X is The Scarlet Witch's power") or of what it's attached to (Glamdring's
-   * "equipped creature's power"). 0 if it's negative or there's no creature
-   * (rule 107.1b). */
-  | { readonly powerOf: "source" | "attached" }
-  /** The greatest mana value of a commander its controller owns on the
-   * battlefield or in the command zone (the Visions cycle) — not one in a
-   * graveyard or exile. 0 with none. */
-  | { readonly commanderManaValue: "battlefield-or-command-zone" }
-  /** Several counts added up — Gargantuan Leech's "for each Cave you control
-   * and each Cave card in your graveyard". */
-  | { readonly sum: readonly CostReductionAmount[] }
-  /** A count taken `by` times — Draco's "{2} less for each basic land type". */
-  | { readonly scaled: CostReductionAmount; readonly by: number }
-  /** One per card type among graveyard cards matching the filter, each type
-   * once — Emrakul, the Promised End's `{ cardTypesInGraveyard: { ownedBy:
-   * "you" } }`. The {@link EffectAmount} of that name, for a cost. */
-  | { readonly cardTypesInGraveyard: CardFilter }
-  /** One per counter of a kind its controller has — Mizzix of the Izmagnus's
-   * "{1} less to cast for each experience counter you have". */
-  | { readonly playerCounters: PlayerCounterKind }
-  /** Its controller's speed (rule 702.179; 0 with none, 702.179f) — Samut,
-   * the Driving Force's "noncreature spells you cast cost {X} less to cast,
-   * where X is your speed". */
-  | { readonly speed: "you" }
-  /** A turn stat summed over players — Rakdos, Lord of Riots' "{1} less to
-   * cast for each 1 life your opponents have lost this turn" is `{
-   * turnStat: "life-lost", who: "opponent" }`; Heliod, the Warped Eclipse's
-   * "for each card your opponents have drawn this turn" `"cards-drawn"`. */
-  | { readonly turnStat: TurnStat; readonly who: "you" | "opponent" | "any-player" }
-  /** `times` per thing in one of its controller's this-turn lists matching
-   * `filter` — Dargo, the Shipwrecker's "{2} less to cast for each other
-   * artifact or creature you've sacrificed this turn" is `{ turnHistory:
-   * "sacrificed", filter: { typesAnyOf: ["artifact", "creature"] }, times: 2
-   * }`. See `TurnHistory`. `who: "any-player"` reads every player's list —
-   * Death-Rattle Oni's "{2} less for each creature that died this turn", The
-   * Balrog's "for each permanent sacrificed this turn". `cardTypes` counts
-   * each card type among them once instead — Korvold, Gleeful Glutton's "for
-   * each card type among permanents you've sacrificed this turn". */
-  | {
-      readonly turnHistory: JournalWhat;
-      /** Which turns it reads (`journal.ts`); this one by default. */
-      readonly window?: JournalWindow;
-      readonly filter?: CardFilter;
-      readonly times?: number;
-      readonly who?: "you" | "any-player";
-      readonly cardTypes?: boolean;
-    }
-  /** Domain — {1} less for each basic land type among lands its controller
-   * controls (Leyline Binding, Jodah's Codex). `characteristics.ts`'s
-   * `basicLandTypesAmong`; see the `EffectAmount` of the same name. */
-  | { readonly basicLandTypes: "you" }
-  /** Party — {1} less for each creature in its controller's party (rule
-   * 700.8) — Deadly Alliance's "This spell costs {1} less to cast for each
-   * creature in your party". `characteristics.ts`'s
-   * `partySizeOf`; see the `EffectAmount` of the same name. */
-  | { readonly partySize: "you" }
-  /** Undaunted (rule 702.125a) — {1} less for each opponent its controller
-   * has: Coastal Breach's "This spell costs {1} less to cast for each
-   * opponent you have". Players who have left the game don't count
-   * (702.125b). */
-  | { readonly opponents: true }
-  /** The most permanents matching `filter` that any one opponent controls, not
-   * the sum (0 with no opponent; players who've left don't count) — Cavern-Hoard
-   * Dragon's "where X is the greatest number of artifacts an opponent controls",
-   * `{ greatestOpponentCount: { type: "artifact" } }`. A token stack counts as
-   * every token in it. */
-  | { readonly greatestOpponentCount: CardFilter }
-  /** Devotion (rule 700.5) — {1} less for each mana symbol of the colors among
-   * the mana costs of permanents its controller controls — Drag to the
-   * Underworld's "This spell costs {X} less to cast, where X is your devotion
-   * to black". `characteristics.ts`'s `devotionOf`; see the `EffectAmount` of
-   * the same name. */
-  | { readonly devotionTo: readonly Color[] }
-  /** A sum or maximum over permanents — Ghalta, Primal Hunger's "costs {X}
-   * less to cast, where X is the **total power** of creatures you control".
-   * Clamped at 0. See `AggregateSpec`. */
-  | AggregateSpec;
 
 /**
  * How an attacked player's life total compares with the other players', for

@@ -12,7 +12,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: { subtype: "Giant" }, caster: "you", reduceGeneric: 2 },
+      costModification: { applies: { subtype: "Giant" }, reduceGeneric: 2, when: { caster: "you" } },
       text: "Giant spells you cast cost {2} less to cast.",
     },
   ],

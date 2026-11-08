@@ -34,7 +34,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: { subtype: "Sphinx" }, caster: "you", reduceGeneric: 2 },
+      costModification: { applies: { subtype: "Sphinx" }, reduceGeneric: 2, when: { caster: "you" } },
       text: REDUCE,
     },
   ],

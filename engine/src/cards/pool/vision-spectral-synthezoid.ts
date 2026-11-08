@@ -19,9 +19,9 @@ export default defineCard({
       alternativeCostForSpells: {
         mana: "{0}",
         oncePerTurn: true,
-        yourTurnOnly: true,
-        fromHand: true,
+        
         filter: { anyOf: [{ notTypes: ["creature"] }, { subtypes: ["Robot"] }] },
+        when: { castFrom: "hand", yourTurnOnly: true },
       },
       text: TEXT,
     },

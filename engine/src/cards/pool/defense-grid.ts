@@ -9,7 +9,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: {}, exceptOnCastersTurn: true, increaseGeneric: 3 },
+      costModification: { applies: {}, increaseGeneric: 3, when: { exceptOnCastersTurn: true } },
       text: "Each spell costs {3} more to cast except during its controller's turn.",
     },
   ],

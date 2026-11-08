@@ -24,7 +24,7 @@ export default defineCard({
   selfCostReduction: {
     // Unconditional: the same always-true gate Karador uses.
     condition: { kind: "controls", filter: {}, atLeast: 0 },
-    reduceGeneric: { cardsInGraveyard: { type: "land" } },
+    reduceGeneric: { countInGraveyard: { ownedBy: "you", type: "land" } },
   },
   triggered: [
     {

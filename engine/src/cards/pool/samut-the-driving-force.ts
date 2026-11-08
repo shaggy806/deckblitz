@@ -25,7 +25,7 @@ export default defineCard({
     },
     {
       affects: { scope: "self" },
-      costModification: { applies: { notTypes: ["creature"] }, caster: "you", reduceGeneric: { speed: "you" } },
+      costModification: { applies: { notTypes: ["creature"] }, reduceGeneric: { speed: "you" }, when: { caster: "you" } },
       text: COST_TEXT,
     },
   ],

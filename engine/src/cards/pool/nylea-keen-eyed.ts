@@ -82,7 +82,7 @@ export default defineCard({
     },
     {
       affects: { scope: "self" },
-      costModification: { applies: { type: "creature" }, caster: "you", reduceGeneric: 1 },
+      costModification: { applies: { type: "creature" }, reduceGeneric: 1, when: { caster: "you" } },
       text: "Creature spells you cast cost {1} less to cast.",
     },
   ],

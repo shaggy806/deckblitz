@@ -40,8 +40,8 @@ export default defineCard({
       affects: { scope: "self" },
       costModification: {
         applies: { type: "creature" },
-        caster: "you",
         reduceGeneric: { countOf: COUNTERED },
+        when: { caster: "you" },
       },
       text: "Creature spells you cast cost {1} less to cast for each creature you control with a +1/+1 counter on it.",
     },

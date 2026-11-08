@@ -17,7 +17,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "your-turn" },
-      costModification: { applies: {}, caster: "opponent", increaseGeneric: 1 },
+      costModification: { applies: {}, increaseGeneric: 1, when: { caster: "opponent" } },
       text: TAX,
     },
     {

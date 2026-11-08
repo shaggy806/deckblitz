@@ -53,12 +53,11 @@ export default defineCard({
       affects: { scope: "self" },
       costModification: {
         applies: { typesAnyOf: ["instant", "sorcery"] },
-        caster: "you",
-        firstEachTurn: true,
         reduceColored: "{U}",
         reduceColoredTimes: {
           countOf: { type: "land", controlledBy: "you", counters: { kind: "flood", compare: { op: "gte", n: 1 } } },
         },
+        when: { caster: "you", firstEachTurn: true },
       },
       text: COST_TEXT,
     },

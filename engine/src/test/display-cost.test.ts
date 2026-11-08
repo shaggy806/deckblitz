@@ -27,7 +27,7 @@ registry.register(
     static: [
       {
         affects: { scope: "self" },
-        costModification: { applies: { type: "creature" }, caster: "you", reduceColored: "{W}{B}" },
+        costModification: { applies: { type: "creature" }, reduceColored: "{W}{B}", when: { caster: "you" } },
         text: "Creature spells you cast cost {W}{B} less to cast.",
       },
     ],

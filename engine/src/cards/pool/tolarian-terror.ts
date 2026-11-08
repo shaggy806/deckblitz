@@ -23,7 +23,7 @@ export default defineCard({
   text: "This spell costs {1} less to cast for each instant and sorcery card in your graveyard.\nWard {2} (Whenever this creature becomes the target of a spell or ability an opponent controls, counter it unless that player pays {2}.)",
   selfCostReduction: {
     condition: { kind: "controls", filter: {}, atLeast: 0 },
-    reduceGeneric: { cardsInGraveyard: { typesAnyOf: ["instant", "sorcery"] } },
+    reduceGeneric: { countInGraveyard: { ownedBy: "you", typesAnyOf: ["instant", "sorcery"] } },
   },
   triggered: [ward({ mana: "{2}" })],
 });

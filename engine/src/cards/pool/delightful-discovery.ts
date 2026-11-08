@@ -14,7 +14,7 @@ export default defineCard({
   text: `${COST_TEXT}\nScry 2, then draw two cards. (To scry 2, look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)`,
   selfCostReduction: {
     condition: { kind: "controls", filter: {}, atLeast: 0 },
-    reduceGeneric: { turnStat: "spells-cast", who: "opponent" },
+    reduceGeneric: { turnStat: "spells-cast", who: "each-opponent" },
   },
   effect: { kind: "scry", amount: 2, then: { kind: "draw", amount: 2 } },
 });

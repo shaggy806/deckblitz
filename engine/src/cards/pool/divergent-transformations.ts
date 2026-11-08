@@ -33,7 +33,7 @@ export default defineCard({
   types: ["instant"],
   selfCostReduction: {
     condition: { kind: "controls", filter: {}, atLeast: 0 },
-    reduceGeneric: { opponents: true },
+    reduceGeneric: { countPlayers: "each-opponent" },
   },
   text: "Undaunted (This spell costs {1} less to cast for each opponent.)\nExile two target creatures. For each of those creatures, its controller reveals cards from the top of their library until they reveal a creature card, puts that card onto the battlefield, then shuffles the rest into their library.",
   // Both exiled as one event; then, from the active player on in turn order

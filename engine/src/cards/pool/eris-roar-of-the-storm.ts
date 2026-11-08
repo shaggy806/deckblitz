@@ -18,15 +18,12 @@ export default defineCard({
   selfCostReduction: {
     // Unconditional: the always-true gate Blasphemous Act uses.
     condition: { kind: "controls", filter: {}, atLeast: 0 },
-    reduceGeneric: {
-      scaled: {
+    reduceGeneric: { product: [{ 
         aggregate: "distinct",
         of: "mana-value",
         filter: { typesAnyOf: ["instant", "sorcery"], ownedBy: "you" },
         in: "graveyards",
-      },
-      by: 2,
-    },
+       }, 2] },
   },
   triggered: [
     {

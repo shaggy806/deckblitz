@@ -29,8 +29,8 @@ export default defineCard({
       affects: { scope: "self" },
       costModification: {
         applies: { typesAnyOf: ["instant", "sorcery"] },
-        caster: "you",
         reduceGeneric: { powerOf: "attached" },
+        when: { caster: "you" },
       },
       text: REDUCE_TEXT,
     },

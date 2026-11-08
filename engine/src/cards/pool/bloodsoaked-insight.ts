@@ -27,7 +27,7 @@ export default defineCard({
   text: `${COST_TEXT}\n${EXILE_TEXT}`,
   selfCostReduction: {
     condition: { kind: "controls", filter: {}, atLeast: 0 },
-    reduceGeneric: { turnStat: "life-lost", who: "opponent" },
+    reduceGeneric: { turnStat: "life-lost", who: "each-opponent" },
   },
   targets: ["opponent"],
   effect: {

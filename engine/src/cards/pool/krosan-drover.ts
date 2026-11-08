@@ -14,8 +14,8 @@ export default defineCard({
       affects: { scope: "self" },
       costModification: {
         applies: { type: "creature", manaValue: { op: "gte", n: 6 } },
-        caster: "you",
         reduceGeneric: 2,
+        when: { caster: "you" },
       },
       text: "Creature spells you cast with mana value 6 or greater cost {2} less to cast.",
     },

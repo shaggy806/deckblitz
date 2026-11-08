@@ -22,8 +22,8 @@ export default defineCard({
       affects: { scope: "self" },
       costModification: {
         applies: { typesAnyOf: ["instant", "sorcery"], manaValue: { op: "gte", n: 5 } },
-        caster: "you",
         reduceGeneric: 1,
+        when: { caster: "you" },
       },
       text: "Instant and sorcery spells you cast with mana value 5 or greater cost {1} less to cast.",
     },

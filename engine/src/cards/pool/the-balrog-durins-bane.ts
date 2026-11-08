@@ -15,7 +15,7 @@ export default defineCard({
   keywords: ["haste"],
   selfCostReduction: {
     condition: { kind: "controls", filter: {}, atLeast: 0 },
-    reduceGeneric: { turnHistory: "sacrificed", who: "any-player" },
+    reduceGeneric: { turnHistory: "sacrificed", who: "each-player" },
   },
   text: `This spell costs {1} less to cast for each permanent sacrificed this turn.\nHaste\n${EVASION}\n${DIES}`,
   static: [{ affects: { scope: "self" }, cantBeBlockedBy: { notSupertype: "legendary" }, text: EVASION }],

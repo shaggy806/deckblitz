@@ -19,7 +19,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: {}, caster: "you", notFromCastersHand: true, reduceGeneric: 1 },
+      costModification: { applies: {}, reduceGeneric: 1, when: { caster: "you", notFromCastersHand: true } },
       text: "Spells you cast from anywhere other than your hand cost {1} less to cast.",
     },
   ],

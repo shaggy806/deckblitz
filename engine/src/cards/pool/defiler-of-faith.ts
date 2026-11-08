@@ -26,10 +26,10 @@ export default defineCard({
       affects: { scope: "self" },
       costModification: {
         applies: { colors: ["W"], typesAnyOf: [...PERMANENT_TYPES] },
-        caster: "you",
         reduceColored: "{W}",
         coloredOnly: true,
         optionalLife: 2,
+        when: { caster: "you" },
       },
       text: COST_TEXT,
     },

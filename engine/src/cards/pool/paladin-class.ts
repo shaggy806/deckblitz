@@ -12,7 +12,7 @@ export default defineCard({
   subtypes: ["Class"],
   text: "(Gain the next level as a sorcery to add its ability.)\nSpells your opponents cast during your turn cost {1} more to cast.\n{2}{W}: Level 2\nCreatures you control get +1/+1.\n{4}{W}: Level 3\nWhenever you attack, until end of turn, target attacking creature gets +1/+1 for each other attacking creature and gains double strike.",
   static: [
-    { affects: { scope: "self" }, condition: { kind: "your-turn" }, costModification: { applies: {}, caster: "opponent", increaseGeneric: 1 }, text: "Spells your opponents cast during your turn cost {1} more to cast." },
+    { affects: { scope: "self" }, condition: { kind: "your-turn" }, costModification: { applies: {}, increaseGeneric: 1, when: { caster: "opponent" } }, text: "Spells your opponents cast during your turn cost {1} more to cast." },
     atLevel(2, { affects: { scope: "creatures-you-control" }, grantPt: [1, 1], text: "Creatures you control get +1/+1." }),
   ],
   triggered: [

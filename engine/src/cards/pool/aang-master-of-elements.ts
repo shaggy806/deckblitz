@@ -20,7 +20,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: {}, caster: "you", reduceColored: "{W}{U}{B}{R}{G}" },
+      costModification: { applies: {}, reduceColored: "{W}{U}{B}{R}{G}", when: { caster: "you" } },
       text: COST_TEXT,
     },
   ],

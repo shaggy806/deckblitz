@@ -10,7 +10,7 @@ const REDUCE_TEXT = "Spells you cast of the chosen type cost {1} less to cast.";
 const reduction = (type: CardType) => ({
   affects: { scope: "self" } as const,
   condition: { kind: "chosen-on-enter", value: type } as const,
-  costModification: { applies: { type }, caster: "you", reduceGeneric: 1 } as const,
+  costModification: { applies: { type }, reduceGeneric: 1, when: { caster: "you" } } as const,
   text: REDUCE_TEXT,
 });
 

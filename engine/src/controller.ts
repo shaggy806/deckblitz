@@ -2311,7 +2311,7 @@ const AMOUNT_KEYS: ReadonlySet<string> = new Set(["amount", "power", "toughness"
 function reducesOwnSpells(def: CardDefinition): boolean {
   return def.static.some((ability) => {
     const modification = ability.costModification;
-    return modification?.reduceGeneric !== undefined && modification.caster !== "opponent";
+    return modification?.reduceGeneric !== undefined && modification.when?.caster !== "opponent";
   });
 }
 

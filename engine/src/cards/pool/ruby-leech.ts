@@ -15,7 +15,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: { colors: ["R"] }, caster: "you", increaseColored: "{R}" },
+      costModification: { applies: { colors: ["R"] }, increaseColored: "{R}", when: { caster: "you" } },
       text: "Red spells you cast cost {R} more to cast.",
     },
   ],

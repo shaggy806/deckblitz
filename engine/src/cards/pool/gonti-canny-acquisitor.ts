@@ -24,7 +24,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: { ownedBy: "opponent" }, caster: "you", reduceGeneric: 1 },
+      costModification: { applies: { ownedBy: "opponent" }, reduceGeneric: 1, when: { caster: "you" } },
       text: "Spells you cast but don't own cost {1} less to cast.",
     },
   ],

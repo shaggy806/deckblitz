@@ -27,9 +27,8 @@ export default defineCard({
       affects: { scope: "self" },
       costModification: {
         applies: { xInManaCost: true },
-        caster: "you",
-        firstEachTurn: true,
-        reduceGeneric: { countersOnSource: "+1/+1" },
+        reduceGeneric: { countersOn: "source", counter: "+1/+1" },
+        when: { caster: "you", firstEachTurn: true },
       },
       text: REDUCE_TEXT,
     },

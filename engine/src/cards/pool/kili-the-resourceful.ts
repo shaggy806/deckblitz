@@ -23,7 +23,7 @@ export default defineCard({
       // counts, those before Kíli arrived too (the journal's).
       affects: { scope: "self" },
       condition: { kind: "enduring-story" },
-      alternativeEquipCost: { mana: "{0}", firstEachTurn: true },
+      alternativeAbilityCost: { kind: "equip", mana: "{0}", firstEachTurn: true },
       text: EQUIP_TEXT,
     },
   ],

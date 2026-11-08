@@ -25,8 +25,8 @@ export default defineCard({
       // One reduction for a spell that's green, blue or both (the ruling).
       costModification: {
         applies: { anyOf: [{ colors: ["G"] }, { colors: ["U"] }] },
-        caster: "you",
         reduceGeneric: 1,
+        when: { caster: "you" },
       },
       text: "Green spells and blue spells you cast cost {1} less to cast.",
     },

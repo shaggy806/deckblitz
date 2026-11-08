@@ -15,14 +15,14 @@ export default defineCard({
   selfCostReduction: {
     // Unconditional: the always-true gate Overwhelming Remorse uses. Generic mana only (the ruling).
     condition: { kind: "controls", filter: {}, atLeast: 0 },
-    reduceGeneric: { cardsInGraveyard: { type: "creature" } },
+    reduceGeneric: { countInGraveyard: { ownedBy: "you", type: "creature" } },
   },
   activated: [
     {
       cost: { mana: "{7}{G}{G}", tap: false },
       targets: [],
       effect: { kind: "monstrosity", amount: 5 },
-      costReduction: { reduceGeneric: { cardsInGraveyard: { type: "creature" } } },
+      costReduction: { reduceGeneric: { countInGraveyard: { ownedBy: "you", type: "creature" } } },
       resolve: null,
       text: ABILITY,
     },

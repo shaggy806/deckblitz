@@ -18,7 +18,7 @@ export default defineCard({
   static: [
     atLevel(3, {
       affects: { scope: "self" },
-      costModification: { applies: {}, caster: "you", notFromCastersHand: true, reduceGeneric: 2 },
+      costModification: { applies: {}, reduceGeneric: 2, when: { caster: "you", notFromCastersHand: true } },
       text: "Spells you cast from anywhere other than your hand cost {2} less to cast.",
     }),
   ],

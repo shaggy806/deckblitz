@@ -13,7 +13,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: { type: "creature", faceDown: true }, caster: "you", reduceGeneric: 1 },
+      costModification: { applies: { type: "creature", faceDown: true }, reduceGeneric: 1, when: { caster: "you" } },
       text: "Face-down creature spells you cast cost {1} less to cast.",
     },
   ],

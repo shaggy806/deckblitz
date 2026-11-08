@@ -18,9 +18,7 @@ export default defineCard({
       alternativeCostForSpells: {
         mana: "{0}",
         oncePerTurn: true,
-        yourTurnOnly: true,
-        fromHand: true,
-        fromZones: ["library"],
+        when: { castFrom: ["hand", "library"], yourTurnOnly: true },
       },
       text: FREE_TEXT,
     },

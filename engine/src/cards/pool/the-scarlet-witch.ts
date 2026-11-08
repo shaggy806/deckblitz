@@ -18,8 +18,8 @@ export default defineCard({
       affects: { scope: "self" },
       costModification: {
         applies: { typesAnyOf: ["instant", "sorcery"], manaValue: { op: "gte", n: 4 } },
-        caster: "you",
         reduceGeneric: { powerOf: "source" },
+        when: { caster: "you" },
       },
       text: TEXT,
     },

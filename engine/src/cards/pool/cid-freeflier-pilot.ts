@@ -29,7 +29,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       // `subtypes` is an OR: an Equipment or a Vehicle.
-      costModification: { applies: { subtypes: ["Equipment", "Vehicle"] }, caster: "you", reduceGeneric: 1 },
+      costModification: { applies: { subtypes: ["Equipment", "Vehicle"] }, reduceGeneric: 1, when: { caster: "you" } },
       text: REDUCE_TEXT,
     },
     {

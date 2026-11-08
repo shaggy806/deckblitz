@@ -22,7 +22,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: { keyword: "flash" }, caster: "you", reduceGeneric: 1 },
+      costModification: { applies: { keyword: "flash" }, reduceGeneric: 1, when: { caster: "you" } },
       text: TEXT,
     },
     {

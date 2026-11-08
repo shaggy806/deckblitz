@@ -35,7 +35,7 @@ export default defineCard({
           { kind: "draw", amount: 4 },
         ],
       },
-      costReduction: { reduceGeneric: { countersOnSource: "oil" } },
+      costReduction: { reduceGeneric: { countersOn: "source", counter: "oil" } },
       resolve: null,
       text: SAC_TEXT,
     },

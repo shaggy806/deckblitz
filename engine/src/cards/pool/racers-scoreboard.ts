@@ -29,7 +29,7 @@ export default defineCard({
   ],
   static: [
     maxSpeed({
-      costModification: { applies: {}, caster: "you", reduceGeneric: 1 },
+      costModification: { applies: {}, reduceGeneric: 1, when: { caster: "you" } },
       text: `Max speed — ${COST_TEXT}`,
     }),
   ],

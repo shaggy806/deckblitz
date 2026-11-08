@@ -39,7 +39,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: { typesAnyOf: ["artifact", "instant", "sorcery"] }, caster: "opponent", increaseGeneric: 1 },
+      costModification: { applies: { typesAnyOf: ["artifact", "instant", "sorcery"] }, increaseGeneric: 1, when: { caster: "opponent" } },
       text: "Artifact, instant, and sorcery spells your opponents cast cost {1} more to cast.",
     },
   ],

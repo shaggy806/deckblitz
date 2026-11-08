@@ -31,7 +31,7 @@ export default defineCard({
       targets: [],
       effect: { kind: "draw", amount: 1 },
       // Generic only, never below {0} (rule 601.2f).
-      costReduction: { reduceGeneric: { countersOnSource: "page" } },
+      costReduction: { reduceGeneric: { countersOn: "source", counter: "page" } },
       resolve: null,
       text: DRAW_TEXT,
     },

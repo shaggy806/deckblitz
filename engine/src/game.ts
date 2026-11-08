@@ -27,7 +27,6 @@ import {
 import type {
   AbilityCost,
   ActivatedAbility,
-  CostReductionAmount,
   CraftMaterials,
   DefenderLife,
   SacrificeCost,
@@ -92,7 +91,7 @@ import {
   licidDefinition,
   readsGraveyardOrder,
 } from "./cards/define.js";
-import type { CyclingAbility, KickerAlsoCost, MorphCost, Supertype } from "./cards/define.js";
+import type { CyclingAbility, KickerAlsoCost, MorphCost, SpellCastClause, Supertype } from "./cards/define.js";
 import { DUNGEONS } from "./cards/dungeons.js";
 import { MADNESS_EFFECT, MADNESS_TEXT } from "./cards/madness.js";
 import { MIRACLE_EFFECT, MIRACLE_TEXT } from "./cards/miracle.js";
@@ -694,19 +693,6 @@ interface DamageApplied {
   readonly shields: readonly PreventionShield[];
 }
 const NO_DAMAGE_APPLIED: DamageApplied = { statics: [], shields: [] };
-
-/** The card types a cost's journal `cardTypes` read walks (rule 205.2a). */
-const COST_READ_CARD_TYPES: readonly CardType[] = [
-  "artifact",
-  "battle",
-  "creature",
-  "enchantment",
-  "instant",
-  "kindred",
-  "land",
-  "planeswalker",
-  "sorcery",
-];
 
 /** Whether a `costModification` applies only to a spell with certain targets. */
 /** Whether an amount reads the Equipment an "unattach" cost names (`{ paid:
@@ -8770,6 +8756,7 @@ export class Game {
           (this.state.objects[s.whileOn.object]?.zoneChangeCount ?? 0) === s.whileOn.zoneChangeCount),
     );
     delete this.state.damageUnpreventableThisTurn;
+    delete this.state.powerUpsBarredThisTurn;
     // "When that creature dies this turn" watches no longer, nor does "when
     // you next cast a spell this turn", nor "until end of turn, whenever …".
     // "Until your next turn, whenever …" waits for whose turn this is (below).
@@ -8928,6 +8915,7 @@ export class Game {
     // What the effect that queued this extra turn said about it.
     for (const rider of extraRiders) {
       if (rider.damageCantBePrevented === true) this.state.damageUnpreventableThisTurn = true;
+      if (rider.noPowerUps === true) this.state.powerUpsBarredThisTurn = true;
       if (rider.atEndStep !== undefined) {
         const { source, controller, effect, text } = rider.atEndStep;
         this.createDelayedTrigger(source, controller, "this-turn-end-step", effect, text, []);
@@ -15625,7 +15613,7 @@ export class Game {
       mods.reduceGeneric +
       this.harmonizePower +
       this.emergeManaValue +
-      (this.kickedCostReduction?.card === cardId ? this.kickedCostReduction.generic : 0);
+      (this.kickedCast?.card === cardId ? this.kickedCast.generic : 0);
     if (offering !== null) {
       reduction += offering.generic + offering.colorless - offeringColorless;
       colored.push({ colors: offering.colors, coloredOnly: false });
@@ -15634,9 +15622,9 @@ export class Game {
     for (const self of def.selfCostReduction === null ? [] : [def.selfCostReduction].flat()) {
       if (self.thisWay === "flashback" && costString !== def.flashback?.cost) continue;
       if (!staticConditionMet(this.state, this.registry, this.state.objects[cardId], self.condition)) continue;
-      if (self.reduceGeneric !== undefined) reduction += this.costReductionAmount(self.reduceGeneric, player, cardId, cardId);
+      if (self.reduceGeneric !== undefined) reduction += this.costAmount(self.reduceGeneric, player, cardId, cardId);
       if (self.reduceColored !== undefined) {
-        const times = self.reduceColoredTimes === undefined ? 1 : this.costReductionAmount(self.reduceColoredTimes, player, cardId, cardId);
+        const times = self.reduceColoredTimes === undefined ? 1 : this.costAmount(self.reduceColoredTimes, player, cardId, cardId);
         if (times > 0) colored.push(coloredReductionOf(self.reduceColored, self.coloredOnly === true, times));
       }
     }
@@ -15645,7 +15633,7 @@ export class Game {
     // instance, printed, applies as well (702.125c).
     const exiled = this.state.objects[cardId];
     if (exiled?.zone === "exile" && exiled.impulse?.undaunted === true && this.impulsePlayable(player, cardId)) {
-      reduction += this.costReductionAmount({ opponents: true }, player, cardId);
+      reduction += this.costAmount({ countPlayers: "each-opponent" }, player, cardId);
     }
     // "Spells you cast this way cost {2} less to cast" (Urianger Augurelt):
     // generic only, its ruling, so an ordinary reduction.
@@ -16272,9 +16260,9 @@ export class Game {
         if (times === 0) continue;
       }
       if (mod.reduceGeneric !== undefined) {
-        reduceGeneric += times * this.costReductionAmount(mod.reduceGeneric, source.controller, source.id, cardId);
+        reduceGeneric += times * this.costAmount(mod.reduceGeneric, source.controller, source.id, cardId);
       }
-      increaseGeneric += times * (mod.increaseGeneric ?? 0);
+      increaseGeneric += times * this.costAmount(mod.increaseGeneric ?? 0, source.controller, source.id, cardId);
       if (mod.increaseColored !== undefined) {
         const pips = parseManaCost(mod.increaseColored).colored;
         for (const color of COLORS) increaseColored[color] += times * pips[color];
@@ -16284,7 +16272,7 @@ export class Game {
           times *
           (mod.reduceColoredTimes === undefined
             ? 1
-            : this.costReductionAmount(mod.reduceColoredTimes, source.controller, source.id, cardId));
+            : this.costAmount(mod.reduceColoredTimes, source.controller, source.id, cardId));
         if (n > 0) colored.push(coloredReductionOf(mod.reduceColored, mod.coloredOnly === true, n));
       }
     }
@@ -16352,43 +16340,9 @@ export class Game {
         if (!matchesFilter(this.state, this.registry, cardId, applies, { you: source.controller, source: source.id })) {
           continue;
         }
-        // "Spells you cast" / "spells your opponents cast" (Hinata): the
-        // caster, whoever the card belongs to.
-        if (mod.caster === "you" && player !== source.controller) continue;
-        if (mod.caster === "opponent" && player === source.controller) continue;
-        if (mod.caster === "enchanted-player" && player !== source.attachedToPlayer) continue;
-        // "Except during its controller's turn" (Defense Grid).
-        if (mod.exceptOnCastersTurn === true && player === this.activePlayer) continue;
-        // "Spells you cast from your graveyard" (Green Goblin): where the card
-        // is cast from — where it is now, or, already on the stack, where it
-        // came from.
-        if (mod.castFrom !== undefined) {
-          const card = this.state.objects[cardId];
-          const from = card?.zone === "stack" ? card.castFrom : card?.zone;
-          if (from === undefined || from === null || ![mod.castFrom].flat().includes(from)) continue;
-          // "Your graveyard": a card is in its owner's graveyard (hand,
-          // library), so one cast from an opponent's (Memory Plunder) isn't.
-          // "From graveyards" (Aven Interrupter) reads any of them.
-          if (
-            mod.castFromAnyones !== true &&
-            (from === "graveyard" || from === "hand" || from === "library") &&
-            card?.owner !== source.controller
-          ) {
-            continue;
-          }
-        }
-        // "From anywhere other than your hand" (Bilbo): not from the caster's
-        // own hand — a card in a hand is in its owner's.
-        if (mod.notFromCastersHand === true) {
-          const card = this.state.objects[cardId];
-          const from = card?.zone === "stack" ? card.castFrom : card?.zone;
-          if (from === "hand" && card?.owner === player) continue;
-        }
-        // "The first … spell you cast each turn": any matching spell this
-        // player has already cast this turn has had it.
         if (
-          mod.firstEachTurn === true &&
-          (this.state.players[player].spellsCastThisTurnAs ?? []).some(({ id, spell }) =>
+          mod.when !== undefined &&
+          !this.spellCastClauseMet(mod.when, player, cardId, source.controller, source.attachedToPlayer, (id, spell) =>
             matchesFilter(this.state, this.registry, id, applies, { you: source.controller, source: source.id, snapshot: spell }),
           )
         ) {
@@ -16398,6 +16352,56 @@ export class Game {
       }
     }
     return reaching;
+  }
+
+  /**
+   * Whether a cast of `cardId` by `player` is one a {@link SpellCastClause}
+   * reaches. `you` is the player the clause reads "you" and "your" from;
+   * `isSame` is whether an earlier spell of this turn counts for `firstEachTurn`.
+   */
+  private spellCastClauseMet(
+    clause: SpellCastClause,
+    player: PlayerId,
+    cardId: ObjectId,
+    you: PlayerId,
+    enchanted: PlayerId | null | undefined,
+    isSame: (id: ObjectId, spell: CastSpellRecord["spell"]) => boolean,
+  ): boolean {
+    if (clause.caster === "you" && player !== you) return false;
+    if (clause.caster === "opponent" && player === you) return false;
+    if (clause.caster === "enchanted-player" && player !== enchanted) return false;
+    if (clause.exceptOnCastersTurn === true && player === this.activePlayer) return false;
+    if (clause.yourTurnOnly === true && player !== this.activePlayer) return false;
+    if (clause.kicked === true && this.kickedCast?.card !== cardId) return false;
+    if (clause.castFrom !== undefined || clause.notFromCastersHand === true) {
+      // Where it's cast from: where it is now or, already on the stack, where
+      // it came from.
+      const card = this.state.objects[cardId];
+      const from = card?.zone === "stack" ? card.castFrom : card?.zone;
+      if (clause.castFrom !== undefined) {
+        if (from === undefined || from === null || ![clause.castFrom].flat().includes(from)) return false;
+        // "Your graveyard": a card is in its owner's graveyard (hand, library),
+        // so one cast from an opponent's (Memory Plunder) isn't.
+        if (
+          clause.castFromAnyones !== true &&
+          (from === "graveyard" || from === "hand" || from === "library") &&
+          card?.owner !== you
+        ) {
+          return false;
+        }
+      }
+      // "From anywhere other than your hand": a card in a hand is its owner's.
+      if (clause.notFromCastersHand === true && from === "hand" && card?.owner === player) return false;
+    }
+    // "The first … spell you cast each turn": any matching spell this player
+    // has already cast this turn has had it.
+    if (
+      clause.firstEachTurn === true &&
+      (this.state.players[player].spellsCastThisTurnAs ?? []).some(({ id, spell }) => isSame(id, spell))
+    ) {
+      return false;
+    }
+    return true;
   }
 
   /** Whether a temporary player effect lets `cardId` — in its owner's hand —
@@ -16622,7 +16626,7 @@ export class Game {
     // "X can't be greater than …" (Open the Way), as the caster announces it
     // (rule 601.2b).
     if (def.maxX === undefined) return plan;
-    return { ...plan, maxX: Math.min(plan.maxX, this.costReductionAmount(def.maxX, player, cardId, cardId)) };
+    return { ...plan, maxX: Math.min(plan.maxX, this.costAmount(def.maxX, player, cardId, cardId)) };
   }
 
   /** `xPlanFor` before a card's own ceiling on X. */
@@ -17947,7 +17951,7 @@ export class Game {
       }
     }
     // "X can't be greater than …" (Open the Way), as it's announced (rule 601.2b).
-    if (def.maxX !== undefined && Math.floor(xValue) > this.costReductionAmount(def.maxX, player, cardId, cardId)) {
+    if (def.maxX !== undefined && Math.floor(xValue) > this.costAmount(def.maxX, player, cardId, cardId)) {
       return `X can't be ${Math.floor(xValue)} for ${def.name}`;
     }
     // An additional sacrifice cost (rule 601.2f) must be payable, and — once
@@ -19206,25 +19210,25 @@ export class Game {
    * paid; `castingCostOf` subtracts it from that card's total cost after
    * increases (601.2f). `null` otherwise.
    */
-  private kickedCostReduction: { readonly card: ObjectId; readonly generic: number } | null = null;
+  private kickedCast: { readonly card: ObjectId; readonly generic: number } | null = null;
   /** Price whatever runs next for `card` as its variant `kicked` of `def` —
-   * see {@link kickedCostReduction}. Returns the restore. */
+   * see {@link kickedCast}. Returns the restore. */
   private enterKickedReduction(card: ObjectId, def: CardDefinition, kicked: boolean | number): () => void {
-    const before = this.kickedCostReduction;
-    const generic = kicked !== false && kicked !== 0 ? (def.kicker?.reduceGeneric ?? 0) : 0;
-    this.kickedCostReduction = generic > 0 ? { card, generic } : null;
+    const before = this.kickedCast;
+    const isKicked = kicked !== false && kicked !== 0;
+    this.kickedCast = isKicked ? { card, generic: def.kicker?.reduceGeneric ?? 0 } : null;
     return () => {
-      this.kickedCostReduction = before;
+      this.kickedCast = before;
     };
   }
-  /** Whether {@link kickedCostReduction} isn't what casting `card` with
+  /** Whether {@link kickedCast} isn't what casting `card` with
    * `kicked` should be priced at — the casting check and the cast then set
    * it and ask again. */
   private kickedReductionStale(card: ObjectId, face: number, kicked: boolean | number): boolean {
     if (this.state.objects[card] === undefined) return false;
-    const want = kicked !== false && kicked !== 0 ? (this.faceDef(card, face).kicker?.reduceGeneric ?? 0) : 0;
-    const have = this.kickedCostReduction?.card === card ? this.kickedCostReduction.generic : 0;
-    return want !== have;
+    const isKicked = kicked !== false && kicked !== 0;
+    if (isKicked !== (this.kickedCast?.card === card)) return true;
+    return isKicked && this.kickedCast?.generic !== (this.faceDef(card, face).kicker?.reduceGeneric ?? 0);
   }
   /** Set while {@link withHarmonizeTap} is pricing a harmonize cast, so the
    * casting check and the cast don't re-enter it. */
@@ -21989,44 +21993,57 @@ export class Game {
     if (target?.zone === "hand") return this.handGrantedActivated(target);
     if (target?.zone === "graveyard") return this.graveyardGrantedActivated(target);
     if (target === undefined || target.zone !== "battlefield") return [];
-    return this.withAlternativeEquipCosts(target, this.grantedOnPermanent(target, grantors));
+    return this.withAlternativeAbilityCosts(target, this.grantedOnPermanent(target, grantors));
   }
 
   /**
    * `granted`, and last (where an index can't shift another's) the same equip
-   * ability at the cost of each `alternativeEquipCost` that reaches it: the
-   * player picks by which they activate (rule 602.2b). What goes on the stack
-   * carries its ability, so nothing is lost once "the first" has been used.
+   * or power-up ability at the cost of each `alternativeAbilityCost` that
+   * reaches it: the player picks by which they activate (rule 602.2b). What
+   * goes on the stack carries its ability, so nothing is lost once "the first"
+   * has been used. A power-up copy stays the one ability it copies (`altCostOf`),
+   * so activating either uses it up (606's "only once" is the ability's).
    */
-  private withAlternativeEquipCosts(
+  private withAlternativeAbilityCosts(
     target: GameObject,
     granted: readonly { readonly ability: ActivatedAbility; readonly ref: GrantedAbilityRef }[],
   ): readonly { readonly ability: ActivatedAbility; readonly ref: GrantedAbilityRef }[] {
     const printed = hasLostAbilities(this.state, this.registry, target)
       ? []
       : this.registry.get(rulesTextName(target)).activated;
-    const equips = [...printed, ...granted.map((g) => g.ability)].filter(isEquipAbility);
-    if (equips.length === 0) return granted;
-    const used = entriesThisTurn(this.state, "activated").filter(
-      (e) => e.how === "equip" && e.player === target.controller,
-    ).length;
+    const abilities = [...printed, ...granted.map((g) => g.ability)];
+    if (!abilities.some((a) => isEquipAbility(a) || a.powerUp === true)) return granted;
     const out = [...granted];
     const seen = new Set<string>();
-    for (const { ability } of this.activeStaticsOf(target.controller, (a) => a.alternativeEquipCost !== undefined)) {
-      const grant = ability.alternativeEquipCost!;
-      if (grant.firstEachTurn === true && used > 0) continue;
-      for (const equip of equips) {
-        // "Equip Human {2}" stays what it is; only the cost changes.
-        const quality = /^Equip(?: ([^{—]+?))?\s*(?:\{|—)/.exec(equip.text)?.[1];
-        const text = `Equip${quality === undefined ? "" : ` ${quality}`} ${grant.mana}`;
-        const key = `${text}|${JSON.stringify(equip.targets)}`;
-        if (seen.has(key)) continue;
+    for (const { ability: grantor } of this.activeStaticsOf(target.controller, (a) => a.alternativeAbilityCost !== undefined)) {
+      const grant = grantor.alternativeAbilityCost!;
+      if (grant.kind === "cycling") continue;
+      if (grant.firstEachTurn === true && this.activationsThisTurn(target.controller, grant.kind) > 0) continue;
+      abilities.forEach((ability, index) => {
+        if (grant.kind === "equip" ? !isEquipAbility(ability) : ability.powerUp !== true) return;
+        const text =
+          grant.kind === "equip"
+            ? // "Equip Human {2}" stays what it is; only the cost changes.
+              `Equip${((quality) => (quality === undefined ? "" : ` ${quality}`))(/^Equip(?: ([^{—]+?))?\s*(?:\{|—)/.exec(ability.text)?.[1])} ${grant.mana}`
+            : `Power-up ${grant.mana}`;
+        const key = `${grant.kind}|${text}|${grant.kind === "equip" ? "" : index}|${JSON.stringify(ability.targets)}`;
+        if (seen.has(key)) return;
         seen.add(key);
-        const cheaper: ActivatedAbility = { ...equip, cost: { mana: grant.mana, tap: false }, text };
+        const cheaper: ActivatedAbility = {
+          ...ability,
+          cost: { mana: grant.mana, tap: false },
+          text,
+          ...(grant.kind === "power-up" ? { altCostOf: index } : {}),
+        };
         out.push({ ability: cheaper, ref: { kind: "modifier-activated", ability: cheaper } });
-      }
+      });
     }
     return out;
+  }
+
+  /** How many `kind` abilities `player` has activated this turn, from the journal. */
+  private activationsThisTurn(player: PlayerId, kind: "equip" | "power-up"): number {
+    return entriesThisTurn(this.state, "activated").filter((e) => e.how === kind && e.player === player).length;
   }
 
   /** The abilities a permanent has from what grants them, its own modifiers'
@@ -22125,8 +22142,8 @@ export class Game {
     if (cyclings.length > 0) {
       const cycled = journalTotal(this.state, "cycled", card.owner, "count");
       const seen = new Set<string>();
-      for (const { ability } of this.activeStaticsOf(card.owner, (a) => a.alternativeCyclingCost !== undefined)) {
-        const grant = ability.alternativeCyclingCost!;
+      for (const { ability } of this.activeStaticsOf(card.owner, (a) => a.alternativeAbilityCost?.kind === "cycling")) {
+        const grant = ability.alternativeAbilityCost!;
         if (grant.firstEachTurn === true && cycled > 0) continue;
         for (const { search } of cyclings) {
           const key = `${grant.mana}|${JSON.stringify(search ?? null)}`;
@@ -22482,7 +22499,7 @@ export class Game {
     ) {
       // Its own source: "costs {1} less for each page counter on this" (Diary
       // of Dreams) reads that permanent's counters.
-      generic -= this.costReductionAmount(ability.costReduction.reduceGeneric, player, sourceId);
+      generic -= this.costAmount(ability.costReduction.reduceGeneric, player, sourceId);
       // "Costs {1}{U} less" (Flying Drone): a pip of its colour, else generic.
       if (ability.costReduction.reduceColored !== undefined) {
         colored.push(coloredReductionOf(ability.costReduction.reduceColored, false));
@@ -22581,6 +22598,8 @@ export class Game {
     // "…that target this creature": the reductions earned per target, kept
     // apart until the targets settle which apply.
     const perTarget = new Map<ObjectId, { increase: number; reduce: number; leavingOne: number }>();
+    const amount = (value: EffectAmount | undefined, by: ObjectId): number =>
+      value === undefined ? 0 : this.costAmount(value, this.state.objects[by]?.controller ?? player, by, sourceId);
     for (const { controller, source, mod } of this.abilityCostModifiers()) {
       if (!this.abilityCostModificationReaches(sourceId, ability, player, controller, source, mod)) continue;
       // "…that target a Merfolk you control" (Kopala): fixed once the targets
@@ -22596,21 +22615,21 @@ export class Game {
               matchesFilter(this.state, this.registry, t.object, filter, { you: controller, source }),
           ) === true
         ) {
-          increaseGeneric += mod.increaseGeneric ?? 0;
+          increaseGeneric += amount(mod.increaseGeneric, source);
         }
         continue;
       }
       if (mod.targetingSource === true) {
         const sum = perTarget.get(source) ?? { increase: 0, reduce: 0, leavingOne: 0 };
-        sum.increase += mod.increaseGeneric ?? 0;
-        if (mod.leavesOneMana === true) sum.leavingOne += mod.reduceGeneric ?? 0;
-        else sum.reduce += mod.reduceGeneric ?? 0;
+        sum.increase += amount(mod.increaseGeneric, source);
+        if (mod.leavesOneMana === true) sum.leavingOne += amount(mod.reduceGeneric, source);
+        else sum.reduce += amount(mod.reduceGeneric, source);
         perTarget.set(source, sum);
         continue;
       }
-      increaseGeneric += mod.increaseGeneric ?? 0;
-      if (mod.leavesOneMana === true) reduceGenericLeavingOne += mod.reduceGeneric ?? 0;
-      else reduceGeneric += mod.reduceGeneric ?? 0;
+      increaseGeneric += amount(mod.increaseGeneric, source);
+      if (mod.leavesOneMana === true) reduceGenericLeavingOne += amount(mod.reduceGeneric, source);
+      else reduceGeneric += amount(mod.reduceGeneric, source);
     }
     if (perTarget.size > 0) {
       // Chosen: every targeted static's source counts (rule 601.2c fixed the
@@ -22686,12 +22705,32 @@ export class Game {
       case "loyalty":
         if (ability.loyaltyCost === undefined) return false;
         break;
+      case "power-up":
+        if (ability.powerUp !== true) return false;
+        break;
       case undefined:
         break;
     }
     // "…unless they're mana abilities" (Suppression Field, Zirda).
     if (mod.exceptManaAbilities === true && isManaAbility(ability)) return false;
     return matchesFilter(this.state, this.registry, sourceId, mod.applies, { you: controller, source });
+  }
+
+  /** How many times this ability of `source` has been used up, a cheaper copy
+   * of it (`altCostOf`) counting as it. */
+  private activationsUsed(source: GameObject, ability: ActivatedAbility, abilityIndex: number): number {
+    const index = ability.altCostOf ?? abilityIndex;
+    return (source.exhaustedAbilities ?? []).filter((used) => used === index).length;
+  }
+
+  /** "Can be activated an additional time" (Wonder Man, Hollywood Hero): each
+   * such static its controller has adds one, to power-up abilities alone. */
+  private extraPowerUps(ability: ActivatedAbility, source: GameObject): number {
+    if (ability.powerUp !== true) return 0;
+    return this.activeStaticsOf(source.controller, (a) => a.additionalPowerUps !== undefined).reduce(
+      (n, { ability: grantor }) => n + (grantor.additionalPowerUps ?? 0),
+      0,
+    );
   }
 
   /** The loyalty cost a loyalty ability of `sourceId` has as `player`
@@ -22824,6 +22863,10 @@ export class Game {
         }
       }
     }
+    // "During that turn, power-up abilities can't be activated" (Kang).
+    if (ability.powerUp === true && this.state.powerUpsBarredThisTurn === true) {
+      return `${def.name}'s power-up ability can't be activated this turn`;
+    }
     if (this.abilitiesProhibited(player, source, isManaAbility(ability), ability.cost.tap, ability.loyaltyCost !== undefined)) {
       return `${player} can't activate ${def.name}'s abilities`;
     }
@@ -22864,7 +22907,7 @@ export class Game {
     // "Activate no more than twice each turn" (rule 602.5b): the limit read
     // now, a count of the snow Swamps you control or a number.
     if (ability.timesEachTurn !== undefined) {
-      const limit = this.costReductionAmount(ability.timesEachTurn, player, source.id);
+      const limit = this.costAmount(ability.timesEachTurn, player, source.id);
       if (this.timesUsedThisTurn(source, abilityIndex) >= limit) {
         return `${def.name}'s ability has been activated as many times this turn as it can be`;
       }
@@ -22872,7 +22915,7 @@ export class Game {
     // Exhaust and power-up: once for as long as this object exists.
     if (
       (ability.exhaust === true || ability.powerUp === true || ability.onlyOnce === true) &&
-      (source.exhaustedAbilities ?? []).includes(abilityIndex)
+      this.activationsUsed(source, ability, abilityIndex) >= 1 + this.extraPowerUps(ability, source)
     ) {
       return `${def.name}'s ability can be activated only once, and has been`;
     }
@@ -23571,7 +23614,7 @@ export class Game {
       this.markUsedThisTurn(source, abilityIndex);
     }
     if (ability.exhaust === true || ability.powerUp === true || ability.onlyOnce === true) {
-      source.exhaustedAbilities = [...(source.exhaustedAbilities ?? []), abilityIndex];
+      source.exhaustedAbilities = [...(source.exhaustedAbilities ?? []), ability.altCostOf ?? abilityIndex];
     }
     if (ability.cost.addCounter !== undefined) {
       this.putCostCounters(sourceId, ability.cost.addCounter.kind, ability.cost.addCounter.count, player);
@@ -23749,11 +23792,12 @@ export class Game {
     if (this.otherChoice?.for === sourceId) this.state.objects[abilityId].otherChooser = this.otherChoice.chooser;
     if (shares !== undefined) this.state.objects[abilityId].division = shares;
     if (grantedAbility !== undefined) this.state.objects[abilityId].grantedAbility = grantedAbility;
-    // Forge Anew's "the first equip ability you activate": the journal's.
-    if (isEquipAbility(ability)) {
+    // Forge Anew's "the first equip ability you activate", Advancing the
+    // Spirit's "first power-up ability": the journal's.
+    if (isEquipAbility(ability) || ability.powerUp === true) {
       this.journal({
         kind: "activated",
-        how: "equip",
+        how: ability.powerUp === true ? "power-up" : "equip",
         player,
         object: sourceId,
         stint: this.state.objects[sourceId]?.zoneChangeCount ?? 0,
@@ -25561,7 +25605,7 @@ export class Game {
             const modification = ability.costModification;
             return modification !== undefined &&
               typeof modification.reduceGeneric === "number" &&
-              modification.caster !== "opponent"
+              modification.when?.caster !== "opponent"
               ? [{ applies: modification.applies, by: modification.reduceGeneric }]
               : [];
           })
@@ -33089,6 +33133,7 @@ export class Game {
       readonly illegalTargets?: readonly number[];
       readonly announcedModes?: readonly number[];
       readonly division?: readonly number[];
+      readonly priced?: ObjectId;
     } = {},
   ): ResolutionContext {
     const refs = lastKnownRefs;
@@ -34013,15 +34058,24 @@ export class Game {
         return read?.greatest === undefined ? cast.length : cast.reduce((n, { spell }) => Math.max(n, spell.manaValue), 0);
       },
       countersPutThisTurn: (spec) => countersPutThisTurn(this.state, spec, controller),
-      countInGraveyard: (filter, you = controller) => {
+      countInGraveyard: (filter, you = controller, except) => {
         let n = 0;
         for (const player of this.state.turnOrder) {
           for (const id of this.state.zones.perPlayer[player].graveyard) {
-            if (matchesFilter(this.state, this.registry, id, filter, { you })) n += 1;
+            if (id !== except && matchesFilter(this.state, this.registry, id, filter, { you })) n += 1;
           }
         }
         return n;
       },
+      priced: opts.priced,
+      allCounters: () => this.countersAmongPlayersAndPermanents(),
+      commanderManaValue: () =>
+        Math.max(
+          0,
+          ...commandersOnBattlefieldOrInCommandZone(this.state, controller).map((id) =>
+            manaValueOfObject(this.registry, this.state.objects[id]),
+          ),
+        ),
       handSizeOf: (player, filter) =>
         filter === undefined
           ? (this.state.zones.perPlayer[player]?.hand.length ?? 0)
@@ -37166,6 +37220,7 @@ export class Game {
             {
               at: this.state.extraTurns.length,
               ...(thatTurn.damageCantBePrevented === true ? { damageCantBePrevented: true as const } : {}),
+              ...(thatTurn.noPowerUps === true ? { noPowerUps: true as const } : {}),
               ...(thatTurn.atEndStep !== undefined ? { atEndStep: { ...thatTurn.atEndStep, source, controller } } : {}),
             },
           ];
@@ -45046,93 +45101,19 @@ export class Game {
     return aggregateOver(this.state, this.registry, matches, spec);
   }
 
-  /** The generic mana a `CostReductionAmount` takes off, for `player`, with
-   * `sourceId` the object doing the reducing (for `countersOnSource`). */
-  private costReductionAmount(
-    amount: CostReductionAmount,
-    player: PlayerId,
-    sourceId?: ObjectId,
-    /** The spell being priced, for what's read off it (Locket of Yesterdays). */
-    spellId?: ObjectId,
-  ): number {
+  /** What a cost modifier's {@link EffectAmount} comes to for `player`
+   * (601.2f, 602.2b), read with `sourceId`, the object doing the modifying, as
+   * the source and `pricedId` as the `"priced"` object: at least 0 (107.1b). A
+   * number builds no context, since this is asked on every legal-action query. */
+  private costAmount(amount: EffectAmount, player: PlayerId, sourceId: ObjectId, pricedId?: ObjectId): number {
     if (typeof amount === "number") return amount;
-    if ("countOf" in amount) {
-      return this.countBattlefieldMatching(player, amount.countOf, amount.excludeSelf === true && sourceId !== undefined ? [sourceId] : []);
-    }
-    if ("sum" in amount) return amount.sum.reduce<number>((n, part) => n + this.costReductionAmount(part, player, sourceId, spellId), 0);
-    if ("scaled" in amount) return amount.by * this.costReductionAmount(amount.scaled, player, sourceId, spellId);
-    if ("allCounters" in amount) return this.countersAmongPlayersAndPermanents();
-    if ("playersInGame" in amount) {
-      return this.state.turnOrder.filter((p) => this.state.players[p]?.hasLost !== true).length;
-    }
-    if ("colorsAmong" in amount) return colorsAmongPermanents(this.state, this.registry, player, amount.colorsAmong, []);
-    if ("powerOf" in amount) {
-      const source = sourceId === undefined ? undefined : this.state.objects[sourceId];
-      const of = amount.powerOf === "source" ? source?.id : source?.attachedTo;
-      if (typeof of !== "string" || this.state.objects[of]?.zone !== "battlefield") return 0;
-      return Math.max(0, computeCharacteristics(this.state, this.registry, of).power);
-    }
-    if ("commanderManaValue" in amount) {
-      return Math.max(
-        0,
-        ...commandersOnBattlefieldOrInCommandZone(this.state, player).map((id) =>
-          manaValueOfObject(this.registry, this.state.objects[id]),
-        ),
-      );
-    }
-    if ("cardTypesInGraveyard" in amount) {
-      return cardTypesInGraveyards(this.state, this.registry, player, amount.cardTypesInGraveyard);
-    }
-    if ("aggregate" in amount) {
-      // Ghalta's "X is the total power of creatures you control". Clamped at
-      // 0: a negative total doesn't make the spell cost more (rule 107.1b).
-      const except = amount.excludeSelf === true && sourceId !== undefined ? [sourceId] : [];
-      return Math.max(0, this.aggregateBattlefield(player, amount, except));
-    }
-    if ("countersOnSource" in amount) {
-      if (sourceId === undefined) return 0;
-      return this.state.objects[sourceId]?.counters[amount.countersOnSource] ?? 0;
-    }
-    if ("playerCounters" in amount) {
-      return this.state.players[player]?.counters[amount.playerCounters] ?? 0;
-    }
-    if ("speed" in amount) return speedOf(this.state, player);
-    if ("basicLandTypes" in amount) return basicLandTypesAmong(this.state, this.registry, player);
-    if ("partySize" in amount) return partySizeOf(this.state, this.registry, player);
-    if ("opponents" in amount) return this.scopedPlayers(player, "each-opponent").length;
-    if ("greatestOpponentCount" in amount) {
-      const filter: CardFilter = { ...amount.greatestOpponentCount, controlledBy: "you" };
-      return Math.max(0, ...this.scopedPlayers(player, "each-opponent").map((p) => this.countBattlefieldMatching(p, filter)));
-    }
-    if ("devotionTo" in amount) return devotionOf(this.state, this.registry, player, amount.devotionTo);
-    if ("turnHistory" in amount) {
-      const players = amount.who === "any-player" ? this.state.turnOrder : [player];
-      if (amount.cardTypes === true) {
-        // Each card type once (Korvold): whether any entry has it, read as
-        // each one last was.
-        return COST_READ_CARD_TYPES.filter(
-          (type) =>
-            journalCount(this.state, this.registry, players, amount.turnHistory, { ...amount.filter, type }, player, undefined, amount) > 0,
-        ).length;
-      }
-      return (
-        (amount.times ?? 1) *
-        journalCount(this.state, this.registry, players, amount.turnHistory, amount.filter, player, undefined, amount)
-      );
-    }
-    if ("turnStat" in amount) {
-      return this.state.turnOrder
-        .filter((p) => amount.who === "any-player" || (amount.who === "you") === (p === player))
-        .reduce((n, p) => n + turnStatOf(this.state, p, amount.turnStat), 0);
-    }
-    const spell = amount.sameNameAsSpell === true && spellId !== undefined ? this.state.objects[spellId] : undefined;
-    const filter: CardFilter =
-      spell === undefined
-        ? amount.cardsInGraveyard
-        : { ...amount.cardsInGraveyard, sameNameAs: { object: spell.id, name: spell.faceDown !== undefined ? null : nameOf(spell) } };
-    return this.state.zones.perPlayer[player].graveyard.filter(
-      (id) => id !== spell?.id && matchesFilter(this.state, this.registry, id, filter, { you: player }),
-    ).length;
+    return Math.max(
+      0,
+      amountValue(
+        amount,
+        this.makeResolutionContext(sourceId, player, [], 0, 0, undefined, 1, 0, [], {}, pricedId === undefined ? {} : { priced: pricedId }),
+      ),
+    );
   }
 
   /** Every counter on a player or a permanent — energy, poison and the rest,
@@ -45467,7 +45448,7 @@ export class Game {
     for (const { controller, mod } of this.abilityCostModifiers()) {
       if (mod.unlock !== true || controller !== player) continue;
       if (!matchesFilter(this.state, this.registry, id, mod.applies, { you: controller })) continue;
-      less += mod.reduceGeneric ?? 0;
+      less += this.costAmount(mod.reduceGeneric ?? 0, controller, id);
     }
     return { ...cost, generic: Math.max(0, cost.generic - less) };
   }
@@ -48909,7 +48890,7 @@ export class Game {
     }
     return printed.costReduction === undefined
       ? cost
-      : withGenericReducedBy(cost, this.costReductionAmount(printed.costReduction, player, id));
+      : withGenericReducedBy(cost, this.costAmount(printed.costReduction, player, id));
   }
 
   /** `printed` at `x`, as a cost to pay. */
@@ -50936,14 +50917,15 @@ export class Game {
       // hand" (Access Maze, Tamiyo, Field Researcher's emblem), "from exile"
       // (Tlincalli Hunter), "or the top of your library" (One with the
       // Multiverse: the cast itself is what keeps it to the top card).
-      if (grant.yourTurnOnly === true && this.activePlayer !== caster) continue;
       if (grant.oncePerTurn === true && source.altCostGrantOnTurn === this.state.turn.number) continue;
-      if (grant.fromHand === true || grant.fromZones !== undefined) {
-        const reaches =
-          (grant.fromHand === true && card?.zone === "hand") ||
-          (card?.zone === "exile" && grant.fromZones?.includes("exile") === true) ||
-          (card?.zone === "library" && grant.fromZones?.includes("library") === true);
-        if (!reaches) continue;
+      if (
+        grant.when !== undefined &&
+        !this.spellCastClauseMet(grant.when, caster, cardId, caster, source.attachedToPlayer, (id, spell) =>
+          grant.filter === undefined ||
+          matchesFilter(this.state, this.registry, id, grant.filter, { you: caster, source: source.id, snapshot: spell }),
+        )
+      ) {
+        continue;
       }
       if (
         grant.filter === undefined ||

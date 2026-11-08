@@ -13,7 +13,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "hand-size", atLeast: 7 },
-      alternativeCyclingCost: { mana: "{0}" },
+      alternativeAbilityCost: { kind: "cycling", mana: "{0}" },
       text: FREE_TEXT,
     },
   ],

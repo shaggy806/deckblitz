@@ -18,7 +18,7 @@ export default defineCard({
         filter: { type: "enchantment" },
         payLifeManaValue: true,
         oncePerTurn: true,
-        yourTurnOnly: true,
+        when: { yourTurnOnly: true },
       },
       text: "Once during each of your turns, you may cast an enchantment spell by paying life equal to its mana value rather than paying its mana cost.",
     },

@@ -23,7 +23,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: { notTypes: ["creature"] }, caster: "opponent", increaseGeneric: 1 },
+      costModification: { applies: { notTypes: ["creature"] }, increaseGeneric: 1, when: { caster: "opponent" } },
       text: TAX_TEXT,
     },
   ],

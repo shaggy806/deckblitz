@@ -18,9 +18,9 @@ export default defineCard({
       alternativeCostForSpells: {
         mana: "{0}",
         oncePerTurn: true,
-        yourTurnOnly: true,
-        fromHand: true,
+        
         filter: { typesAnyOf: ["instant", "sorcery"] },
+        when: { castFrom: "hand", yourTurnOnly: true },
       },
       text: TEXT,
     },

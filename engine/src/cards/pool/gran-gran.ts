@@ -37,7 +37,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "cards-in-graveyard", atLeast: 3, filter: { subtype: "Lesson" } },
-      costModification: { applies: { notTypes: ["creature"] }, caster: "you", reduceGeneric: 1 },
+      costModification: { applies: { notTypes: ["creature"] }, reduceGeneric: 1, when: { caster: "you" } },
       text: COST_TEXT,
     },
   ],

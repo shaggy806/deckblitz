@@ -16,7 +16,7 @@ export default defineCard({
   morph: {
     keyword: "disguise",
     cost: "{5}{R}",
-    costReduction: { cardsInGraveyard: { typesAnyOf: ["instant", "sorcery"] } },
+    costReduction: { countInGraveyard: { ownedBy: "you", typesAnyOf: ["instant", "sorcery"] } },
   },
   triggered: [
     {

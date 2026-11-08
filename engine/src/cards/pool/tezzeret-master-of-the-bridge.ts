@@ -23,8 +23,8 @@ export default defineCard({
       affects: { scope: "self" },
       costModification: {
         applies: { typesAnyOf: ["creature", "planeswalker"] },
-        caster: "you",
         reduceGeneric: { countOf: { type: "artifact", controlledBy: "you" } },
+        when: { caster: "you" },
       },
       text: AFFINITY_TEXT,
     },

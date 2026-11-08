@@ -367,7 +367,14 @@ export interface ZoneChoiceSplitCase {
  * 608.2h — see `LastKnownRefs`): "When Juri dies, it deals damage equal to
  * its power" counts the counters Juri died with.
  */
-export type AmountRef = Exclude<EffectTargetRef, "tapped"> | ObjectSetRef | "amassed";
+export type AmountRef =
+  | Exclude<EffectTargetRef, "tapped">
+  | ObjectSetRef
+  | "amassed"
+  /** The spell, or the source of the ability, whose cost is being worked out
+   * (601.2f, 602.2b): only a cost modifier's amount reads it — "where X is that
+   * spell's mana value". Nothing outside that. */
+  | "priced";
 /** Where a `return-to-hand` effect takes its object from. */
 export type ReturnToHandZone = "battlefield" | "graveyard" | "exile" | "stack" | "library";
 /**
@@ -821,7 +828,19 @@ export type EffectAmount =
        * (Roiling Terrain: `{ controllerOfTarget: 0 }`). 0 when it names
        * nobody. As `countOf`'s. */
       readonly forPlayer?: EffectPlayerRef;
+      /** Only cards with the same name as the spell whose cost is being worked
+       * out, itself never counted: "each card with the same name as that spell
+       * in your graveyard" (Locket of Yesterdays — cast from that graveyard, it's
+       * on the stack before its cost is worked out, rules 601.2a, 601.2f). */
+      readonly sameNameAs?: "priced";
     }
+  /** One per counter of any kind on any player and any permanent — Lumbering
+   * Megasloth's "for each counter among players and permanents" (rule 122). */
+  | { readonly allCounters: true }
+  /** The greatest mana value of a commander its controller owns on the
+   * battlefield or in the command zone (the Visions cycle) — not one in a
+   * graveyard or exile. 0 with none. */
+  | { readonly commanderManaValue: "battlefield-or-command-zone" }
   /** How many suspended cards the effect's controller owns (rule 702.62b —
    * in exile, with suspend, with a time counter): Rose Tyler's "a time
    * counter on it for each suspended card you own". */
@@ -1175,6 +1194,10 @@ export type EffectAmount =
       /** Only the source, in the stint it's in or last had: "for each time
        * **it** regenerated this turn" (Spiny Starfish, `"regenerated"`). */
       readonly selfOnly?: true;
+      /** Each card type among them once, instead of each one — Korvold,
+       * Gleeful Glutton's "for each card type among permanents you've
+       * sacrificed this turn". */
+      readonly cardTypes?: true;
     }
   /** How many opponents the controller attacked with creatures this combat
    * — melee's "+1/+1 for each opponent you attacked with a creature this
@@ -2201,6 +2224,9 @@ export interface DieResultRow {
 /** See the `take-extra-turn` {@link EffectSpec}'s `thatTurn`. */
 export interface ExtraTurnScope {
   readonly damageCantBePrevented?: true;
+  /** "During that turn, power-up abilities can't be activated" (Kang the
+   * Conqueror). */
+  readonly noPowerUps?: true;
   readonly atEndStep?: { readonly effect: EffectSpec; readonly text: string };
 }
 
@@ -11337,7 +11363,11 @@ export interface EffectApi {
   countersPutThisTurn(spec: CountersPutSpec): number;
   /** See the `{ countInGraveyard }` {@link EffectAmount}; `you` reads the
    * filter from that player's side (the effect's controller's otherwise). */
-  countInGraveyard(filter: CardFilter, you?: PlayerId): number;
+  countInGraveyard(filter: CardFilter, you?: PlayerId, except?: ObjectId): number;
+  /** See the `{ allCounters }` {@link EffectAmount}. */
+  allCounters(): number;
+  /** See the `{ commanderManaValue }` {@link EffectAmount}. */
+  commanderManaValue(): number;
   /** See the `{ suspendedCardsYouOwn }` {@link EffectAmount}. */
   suspendedCardsYouOwn?(): number;
   /** How many cards are in `player`'s hand — see `{ cardsInHand }`. With
@@ -13548,6 +13578,9 @@ export interface ResolutionContext extends EffectApi {
   /** The colour an `add-mana` of `"any-color"` is making in this mana
    * ability — what `{ devotionTo: "that-color" }` reads. */
   readonly manaColor?: ManaType;
+  /** The spell, or the source of the ability, whose cost a modifier's amount
+   * is reading (the `"priced"` {@link AmountRef}). */
+  readonly priced?: ObjectId;
   /** The ability's source stayed in a non-battlefield zone while it was on
    * the stack (`ActivatedAbility.zone: "command"`, or `staysInZone`) and has
    * changed zones since: it's a new object (rule 400.7), so an effect naming
@@ -14991,6 +15024,16 @@ export function signedAmountValue(
     return amount.round === "up" ? Math.ceil(n) : Math.floor(n);
   }
   if ("countInGraveyard" in amount) {
+    if (amount.sameNameAs === "priced") {
+      // Locket of Yesterdays: the namesakes in that graveyard, the spell apart.
+      const priced = ctx.priced;
+      if (priced === undefined) return 0;
+      return ctx.countInGraveyard(
+        { ...amount.countInGraveyard, sameNameAs: { object: priced, name: ctx.nameForMatching(priced) } },
+        undefined,
+        priced,
+      );
+    }
     if (amount.forTarget !== undefined) {
       const ref = ctx.targets[amount.forTarget];
       if (ref?.kind !== "player" || illegalSlot(amount.forTarget, ctx)) return 0;
@@ -15086,8 +15129,15 @@ export function signedAmountValue(
       const ref = ctx.targets[amount.target];
       return ref?.kind === "player" ? ctx.journalCount(amount.turnHistory, [ref.player], amount.filter, amount) : 0;
     }
-    return ctx.journalCount(amount.turnHistory, ctx.playersInScope(amount.who ?? "you"), amount.filter, amount);
+    const players = ctx.playersInScope(amount.who ?? "you");
+    if (amount.cardTypes === true) {
+      // Each card type once: whether any entry has it, read as each one last was.
+      return CARD_TYPE_CHOICES.filter((type) => ctx.journalCount(amount.turnHistory, players, { ...amount.filter, type }, amount) > 0).length;
+    }
+    return ctx.journalCount(amount.turnHistory, players, amount.filter, amount);
   }
+  if ("allCounters" in amount) return ctx.allCounters();
+  if ("commanderManaValue" in amount) return ctx.commanderManaValue();
   if ("thisWay" in amount) {
     const players =
       amount.who === undefined
@@ -15377,6 +15427,7 @@ export type SpellResolver = (ctx: ResolutionContext) => void;
 
 function resolveAmountRef(ref: AmountRef, ctx: ResolutionContext): TargetRef | undefined {
   if (ref === "amassed") return amassedThisWay(ctx);
+  if (ref === "priced") return ctx.priced === undefined ? undefined : { kind: "object", object: ctx.priced };
   // "The sacrificed creature", "the discarded card", "the revealed card":
   // the set's one member — the context's reads know which stint it means,
   // and take it as it was once it has moved (608.2h).

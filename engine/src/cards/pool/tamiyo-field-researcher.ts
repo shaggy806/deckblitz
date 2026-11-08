@@ -66,7 +66,7 @@ export default defineCard({
             text: FREE,
             static: {
               affects: { scope: "self" },
-              alternativeCostForSpells: { mana: "{0}", fromHand: true },
+              alternativeCostForSpells: { mana: "{0}", when: { castFrom: "hand" } },
               text: FREE,
             },
           },

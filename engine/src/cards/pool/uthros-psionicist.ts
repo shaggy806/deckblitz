@@ -26,7 +26,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "cast-this-turn", who: "you", atLeast: 1, atMost: 1 },
-      costModification: { applies: {}, caster: "you", reduceGeneric: 2 },
+      costModification: { applies: {}, reduceGeneric: 2, when: { caster: "you" } },
       text: TEXT,
     },
   ],

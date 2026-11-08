@@ -422,7 +422,7 @@ describe("counts with no proving card on this board", () => {
         name: TWICE,
         manaCost: "{10}",
         types: ["artifact"],
-        selfCostReduction: { condition: always, reduceGeneric: { scaled: { basicLandTypes: "you" }, by: 2 } },
+        selfCostReduction: { condition: always, reduceGeneric: { product: [{  basicLandTypes: "you"  }, 2] } },
         text: "This spell costs {2} less to cast for each basic land type among lands you control.",
       }),
     )
@@ -447,8 +447,9 @@ describe("counts with no proving card on this board", () => {
             affects: { scope: "self" },
             costModification: {
               applies: { typesAnyOf: ["instant", "sorcery"] },
-              caster: "you",
+              
               reduceGeneric: { powerOf: "attached" },
+              when: { caster: "you" },
             },
             text: POWER_TEXT,
           },
@@ -475,10 +476,11 @@ describe("counts with no proving card on this board", () => {
             affects: { scope: "self" },
             costModification: {
               applies: {},
-              caster: "opponent",
-              castFrom: ["graveyard", "exile"],
-              castFromAnyones: true,
+              
+              
+              
               increaseGeneric: 2,
+              when: { caster: "opponent", castFrom: ["graveyard", "exile"], castFromAnyones: true },
             },
             text: WARDEN_TEXT,
           },

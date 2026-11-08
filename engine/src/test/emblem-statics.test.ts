@@ -276,7 +276,7 @@ describe("cast and play permissions, off an emblem", () => {
     emblem(game, [
       {
         affects: { scope: "self" },
-        alternativeCostForSpells: { mana: "{0}", fromHand: true },
+        alternativeCostForSpells: { mana: "{0}", when: { castFrom: "hand" } },
         text: "You may cast spells from your hand without paying their mana costs.",
       },
       { affects: { scope: "self" }, castFromGraveyard: { filter: { type: "creature" } }, text: "for the test" },

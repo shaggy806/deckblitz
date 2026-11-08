@@ -46,9 +46,9 @@ export default defineCard({
       affects: { scope: "self" },
       costModification: {
         applies: { supertype: "legendary" },
-        caster: "you",
         reduceColored: "{R}{G}",
         coloredOnly: true,
+        when: { caster: "you" },
       },
       text: COST_TEXT,
     }),

@@ -16,7 +16,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "your-turn" },
-      alternativeEquipCost: { mana: "{0}", firstEachTurn: true },
+      alternativeAbilityCost: { kind: "equip", mana: "{0}", firstEachTurn: true },
       text: FREE_TEXT,
     },
   ],

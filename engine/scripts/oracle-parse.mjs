@@ -499,7 +499,7 @@ function keywordPart(part, faceName, typeLine = "") {
     // Undaunted (rule 702.125a): {1} less for each opponent, the always-true
     // gate the party and domain reductions use.
     undaunted: () => ({
-      card: { selfCostReduction: { condition: { kind: "controls", filter: {}, atLeast: 0 }, reduceGeneric: { opponents: true } } },
+      card: { selfCostReduction: { condition: { kind: "controls", filter: {}, atLeast: 0 }, reduceGeneric: { countPlayers: "each-opponent" } } },
     }),
     // Compleated (rule 702.150a): the loyalty it enters with.
     compleated: () => ({ card: { compleated: true } }),
@@ -2821,7 +2821,7 @@ function emblemStaticOf(quoted) {
     };
   }
   if (quoted === "You may cast spells from your hand without paying their mana costs.") {
-    return { affects: { scope: "self" }, alternativeCostForSpells: { mana: "{0}", fromHand: true }, text };
+    return { affects: { scope: "self" }, alternativeCostForSpells: { mana: "{0}", when: { castFrom: "hand" } }, text };
   }
   if (quoted === "Your opponents can't cast noncreature spells.") {
     return { affects: { scope: "self" }, prohibits: { who: "opponents", spells: { notTypes: ["creature"] } }, text };
@@ -14250,7 +14250,7 @@ function parseFaceAsWritten(face, ctx = {}) {
     const perEach = {
       "~ costs {1} less to cast for each creature in your party.": { partySize: "you" },
       "~ costs {1} less to cast for each basic land type among lands you control.": { basicLandTypes: "you" },
-      "~ costs {1} less to cast for each opponent you have.": { opponents: true },
+      "~ costs {1} less to cast for each opponent you have.": { countPlayers: "each-opponent" },
     }[line];
     if (perEach !== undefined) {
       out.selfCostReduction = { condition: { kind: "controls", filter: {}, atLeast: 0 }, reduceGeneric: perEach };
@@ -14262,7 +14262,7 @@ function parseFaceAsWritten(face, ctx = {}) {
     if ((m = /^~ costs \{(\d+)\} less to cast for each card you've (?:cycled or )?discarded this turn\.$/.exec(line))) {
       out.selfCostReduction = {
         condition: { kind: "controls", filter: {}, atLeast: 0 },
-        reduceGeneric: { turnHistory: "discarded", ...(m[1] === "1" ? {} : { times: Number(m[1]) }) },
+        reduceGeneric: m[1] === "1" ? { turnHistory: "discarded" } : { product: [{ turnHistory: "discarded" }, Number(m[1])] },
       };
       continue;
     }
@@ -14290,14 +14290,14 @@ function parseFaceAsWritten(face, ctx = {}) {
     }
     // Open the Way's ceiling on X, fixed as X is chosen.
     if (line === "X can't be greater than the number of players in the game.") {
-      out.maxX = { playersInGame: true };
+      out.maxX = { countPlayers: "each-player" };
       continue;
     }
     // The most any one opponent has, not the sum: Cavern-Hoard Dragon.
     if ((m = /^~ costs \{X\} less to cast, where X is the greatest number of (.+?) an opponent controls\.$/.exec(line))) {
       const filter = parseTypePhrase(m[1]);
       if (filter !== null) {
-        out.selfCostReduction = { condition: { kind: "controls", filter: {}, atLeast: 0 }, reduceGeneric: { greatestOpponentCount: filter } };
+        out.selfCostReduction = { condition: { kind: "controls", filter: {}, atLeast: 0 }, reduceGeneric: { amongPlayers: "greatest", who: "each-opponent", of: { countOf: { ...filter, controlledBy: "you" }, forEachPlayer: true } } };
         continue;
       }
     }
@@ -17729,8 +17729,8 @@ function costEachAmount(phrase) {
     "color among permanents you control": { colorsAmong: { controlledBy: "you" } },
     "counter among players and permanents": { allCounters: true },
     "creature attacking you": { countOf: { type: "creature", attackingYou: true } },
-    "creature that died this turn": { turnHistory: "died", who: "any-player", filter: { type: "creature" } },
-    "permanent sacrificed this turn": { turnHistory: "sacrificed", who: "any-player" },
+    "creature that died this turn": { turnHistory: "died", who: "each-player", filter: { type: "creature" } },
+    "permanent sacrificed this turn": { turnHistory: "sacrificed", who: "each-player" },
     "card type among permanents you've sacrificed this turn": { turnHistory: "sacrificed", cardTypes: true },
     "{E} you've paid or lost this turn": { turnStat: "energy-paid-or-lost", who: "you" },
     "basic land type among lands you control": { basicLandTypes: "you" },
@@ -17741,7 +17741,7 @@ function costEachAmount(phrase) {
     const here = parseTypePhrase(m[1]);
     const there = parseTypePhrase(m[2]);
     if (here === null || there === null) return null;
-    return { sum: [{ countOf: { ...here, controlledBy: "you" } }, { cardsInGraveyard: there }] };
+    return { sum: [{ countOf: { ...here, controlledBy: "you" } }, { countInGraveyard: { ...there, ownedBy: "you" } }] };
   }
   if ((m = /^(other )?(?:(white|blue|black|red|green) )?(.+?) you control$/.exec(phrase))) {
     const filter = parseTypePhrase(m[3]);
@@ -17837,7 +17837,7 @@ function selfCostLine(line) {
     if (generic === 1) return { condition, reduceGeneric: each };
     return {
       condition,
-      reduceGeneric: "turnHistory" in each ? { ...each, times: generic } : { scaled: each, by: generic },
+      reduceGeneric: generic === 1 ? each : { product: [each, generic] },
     };
   };
   let m;
@@ -17890,7 +17890,10 @@ function selfCostLine(line) {
  * it's cast from, or read off the spell or its source (`costModification`),
  * or null. */
 function spellCostStaticOf(line, text) {
-  const made = (costModification) => ({ affects: { scope: "self" }, costModification, text });
+  const made = ({ caster, castFrom, castFromAnyones, notFromCastersHand, firstEachTurn, exceptOnCastersTurn, ...rest }) => {
+    const when = { ...(caster !== undefined ? { caster } : {}), ...(castFrom !== undefined ? { castFrom } : {}), ...(castFromAnyones !== undefined ? { castFromAnyones } : {}), ...(notFromCastersHand !== undefined ? { notFromCastersHand } : {}), ...(exceptOnCastersTurn !== undefined ? { exceptOnCastersTurn } : {}), ...(firstEachTurn !== undefined ? { firstEachTurn } : {}) };
+    return { affects: { scope: "self" }, costModification: { ...rest, ...(Object.keys(when).length > 0 ? { when } : {}) }, text };
+  };
   let m;
   if ((m = /^(White|Blue|Black|Red|Green) spells you cast cost ((?:\{[WUBRG]\})+) more to cast\.$/.exec(line))) {
     return made({ applies: { colors: [COLOR_WORD[m[1].toLowerCase()]] }, caster: "you", increaseColored: m[2] });
@@ -17933,8 +17936,8 @@ function spellCostStaticOf(line, text) {
     });
   }
   if ((m = /^Spells you cast cost \{(\d+)\} less to cast for each card with the same name as that spell in your graveyard\.$/.exec(line))) {
-    const each = { cardsInGraveyard: {}, sameNameAsSpell: true };
-    return made({ applies: {}, caster: "you", reduceGeneric: m[1] === "1" ? each : { scaled: each, by: Number(m[1]) } });
+    const each = { countInGraveyard: { ownedBy: "you" }, sameNameAs: "priced" };
+    return made({ applies: {}, when: { caster: "you" }, reduceGeneric: m[1] === "1" ? each : { product: [each, Number(m[1])] } });
   }
   if ((m = /^Spells you cast from your graveyard( or from exile)? cost \{(\d+)\} less to cast\.$/.exec(line))) {
     return made({ applies: {}, caster: "you", castFrom: m[1] !== undefined ? ["graveyard", "exile"] : "graveyard", reduceGeneric: Number(m[2]) });
@@ -18221,12 +18224,12 @@ function parseStatic(line, text) {
     return { affects: { scope: "self" }, condition: { kind: "your-turn" }, equipAtInstantSpeed: true, text };
   }
   if (line === "You may pay {0} rather than pay the equip cost of the first equip ability you activate during each of your turns.") {
-    return { affects: { scope: "self" }, condition: { kind: "your-turn" }, alternativeEquipCost: { mana: "{0}", firstEachTurn: true }, text };
+    return { affects: { scope: "self" }, condition: { kind: "your-turn" }, alternativeAbilityCost: { kind: "equip", mana: "{0}", firstEachTurn: true }, text };
   }
   // A cycling cost's alternative (rule 702.29f has typecycling's a cycling
   // cost too): Gavi, Nest Warden, New Perspectives.
   if (line === "You may pay {0} rather than pay the cycling cost of the first card you cycle each turn.") {
-    return { affects: { scope: "self" }, alternativeCyclingCost: { mana: "{0}", firstEachTurn: true }, text };
+    return { affects: { scope: "self" }, alternativeAbilityCost: { kind: "cycling", mana: "{0}", firstEachTurn: true }, text };
   }
   if ((m = /^As long as you have (\w+) or more cards in hand, you may pay (\{\d+\}) rather than pay cycling costs\.$/.exec(line))) {
     const atLeast = NUMBERS[m[1].toLowerCase()];
@@ -18234,22 +18237,23 @@ function parseStatic(line, text) {
       return {
         affects: { scope: "self" },
         condition: { kind: "hand-size", atLeast },
-        alternativeCyclingCost: { mana: m[2] },
+        alternativeAbilityCost: { kind: "cycling", mana: m[2] },
         text,
       };
     }
   }
   // A free cast by an alternative cost (rule 118.9), with its limits.
   if (line === "You may cast spells from your hand without paying their mana costs.") {
-    return { affects: { scope: "self" }, alternativeCostForSpells: { mana: "{0}", fromHand: true }, text };
+    return { affects: { scope: "self" }, alternativeCostForSpells: { mana: "{0}", when: { castFrom: "hand" } }, text };
   }
   if (line === "You may cast spells with mana value less than or equal to the number of creatures you control from your hand without paying their mana costs.") {
     return {
       affects: { scope: "self" },
       alternativeCostForSpells: {
         mana: "{0}",
-        fromHand: true,
+        
         filter: { manaValue: { op: "lte", n: { amount: { countOf: { type: "creature", controlledBy: "you" } } } } },
+        when: { castFrom: "hand" },
       },
       text,
     };
@@ -18280,9 +18284,7 @@ function parseStatic(line, text) {
         alternativeCostForSpells: {
           mana: "{0}",
           oncePerTurn: true,
-          yourTurnOnly: true,
-          fromHand: true,
-          ...(m[2] !== undefined ? { fromZones: ["library"] } : {}),
+          when: { yourTurnOnly: true, castFrom: m[2] !== undefined ? ["hand", "library"] : "hand" },
           ...(m[1] !== undefined ? { filter } : {}),
         },
         text,
@@ -18298,7 +18300,7 @@ function parseStatic(line, text) {
     if (filter !== null && Object.keys(filter).length > 0) {
       return {
         affects: { scope: "self" },
-        alternativeCostForSpells: { mana: "{0}", oncePerTurn: true, fromZones: ["exile"], filter },
+        alternativeCostForSpells: { mana: "{0}", oncePerTurn: true, filter, when: { castFrom: "exile" } },
         text,
       };
     }
@@ -18335,10 +18337,10 @@ function parseStatic(line, text) {
         affects: { scope: "self" },
         alternativeCostForSpells: {
           mana: "{0}",
-          ...(m[1] === undefined ? { fromHand: true } : { filter }),
+          ...(m[1] === undefined ? {} : { filter }),
           payLifeManaValue: true,
           oncePerTurn: true,
-          yourTurnOnly: true,
+          when: { yourTurnOnly: true, ...(m[1] === undefined ? { castFrom: "hand" } : {}) },
         },
         text,
       };

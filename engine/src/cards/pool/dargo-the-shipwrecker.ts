@@ -59,6 +59,6 @@ export default defineCard({
   },
   selfCostReduction: {
     condition: { kind: "controls", filter: {}, atLeast: 0 },
-    reduceGeneric: { turnHistory: "sacrificed", filter: { typesAnyOf: ["artifact", "creature"] }, times: 2 },
+    reduceGeneric: { product: [{ turnHistory: "sacrificed", filter: { typesAnyOf: ["artifact", "creature"] } }, 2] },
   },
 });

@@ -22,7 +22,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: { chosenName: true }, caster: "opponent", increaseGeneric: 2 },
+      costModification: { applies: { chosenName: true }, increaseGeneric: 2, when: { caster: "opponent" } },
       text: SPELL_TAX,
     },
     {

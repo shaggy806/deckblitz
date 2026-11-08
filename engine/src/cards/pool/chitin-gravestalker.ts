@@ -23,6 +23,6 @@ export default defineCard({
   text: "This spell costs {1} less to cast for each artifact and/or creature card in your graveyard.\nCycling {2} ({2}, Discard this card: Draw a card.)",
   selfCostReduction: {
     condition: { kind: "controls", filter: {}, atLeast: 0 },
-    reduceGeneric: { cardsInGraveyard: { typesAnyOf: ["artifact", "creature"] } },
+    reduceGeneric: { countInGraveyard: { ownedBy: "you", typesAnyOf: ["artifact", "creature"] } },
   },
 });

@@ -13,7 +13,7 @@ export default defineCard({
   power: 2,
   toughness: 5,
   text: `${FREE_TEXT}\n${DRAW_TEXT}`,
-  static: [{ affects: { scope: "self" }, alternativeCyclingCost: { mana: "{0}", firstEachTurn: true }, text: FREE_TEXT }],
+  static: [{ affects: { scope: "self" }, alternativeAbilityCost: { kind: "cycling", mana: "{0}", firstEachTurn: true }, text: FREE_TEXT }],
   triggered: [
     {
       trigger: { on: "draws", who: "you", nthEachTurn: 2 },

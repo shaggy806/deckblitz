@@ -18,7 +18,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: { subtypes: ["Klingon", "Warrior"] }, caster: "you", reduceGeneric: 1 },
+      costModification: { applies: { subtypes: ["Klingon", "Warrior"] }, reduceGeneric: 1, when: { caster: "you" } },
       text: COST_TEXT,
     },
   ],

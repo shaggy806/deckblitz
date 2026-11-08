@@ -21,7 +21,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: { subtype: "Cleric" }, caster: "you", reduceColored: "{W}{B}", coloredOnly: true },
+      costModification: { applies: { subtype: "Cleric" }, reduceColored: "{W}{B}", coloredOnly: true, when: { caster: "you" } },
       text: "Cleric spells you cast cost {W}{B} less to cast. This effect reduces only the amount of colored mana you pay.",
     },
   ],

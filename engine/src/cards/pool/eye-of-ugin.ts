@@ -24,7 +24,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: { subtype: "Eldrazi", colorless: true }, caster: "you", reduceGeneric: 2 },
+      costModification: { applies: { subtype: "Eldrazi", colorless: true }, reduceGeneric: 2, when: { caster: "you" } },
       text: REDUCE_TEXT,
     },
   ],

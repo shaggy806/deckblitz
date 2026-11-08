@@ -16,8 +16,8 @@ export default defineCard({
       affects: { scope: "self" },
       costModification: {
         applies: { type: "creature", faceDown: true },
-        caster: "you",
         reduceGeneric: 1,
+        when: { caster: "you" },
       },
       text: TEXT,
     },

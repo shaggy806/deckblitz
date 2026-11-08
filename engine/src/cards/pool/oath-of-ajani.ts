@@ -27,7 +27,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: { type: "planeswalker" }, caster: "you", reduceGeneric: 1 },
+      costModification: { applies: { type: "planeswalker" }, reduceGeneric: 1, when: { caster: "you" } },
       text: DISCOUNT,
     },
   ],

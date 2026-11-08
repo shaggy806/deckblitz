@@ -68,8 +68,8 @@ export default defineCard({
       // characteristics: rule 715.3b).
       costModification: {
         applies: { typesAnyOf: ["artifact", "battle", "creature", "enchantment", "land", "planeswalker"], hasAdventure: true },
-        caster: "you",
         reduceGeneric: 1,
+        when: { caster: "you" },
       },
       text: "Permanent spells you cast that have an Adventure cost {1} less to cast.",
     },

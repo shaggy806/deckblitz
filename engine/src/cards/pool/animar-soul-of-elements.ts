@@ -29,7 +29,7 @@ export default defineCard({
       affects: { scope: "self" },
       costModification: {
         applies: { type: "creature", controlledBy: "you" },
-        reduceGeneric: { countersOnSource: "+1/+1" },
+        reduceGeneric: { countersOn: "source", counter: "+1/+1" },
       },
       text: "Creature spells you cast cost {1} less to cast for each +1/+1 counter on Animar.",
     },

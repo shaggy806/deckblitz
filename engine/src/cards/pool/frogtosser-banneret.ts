@@ -27,8 +27,8 @@ export default defineCard({
       affects: { scope: "self" },
       costModification: {
         applies: { anyOf: [{ subtype: "Goblin" }, { subtype: "Rogue" }] },
-        caster: "you",
         reduceGeneric: 1,
+        when: { caster: "you" },
       },
       text: COST_TEXT,
     },

@@ -67,9 +67,8 @@ export default defineCard({
       affects: { scope: "self" },
       costModification: {
         applies: { type: "creature", supertype: "legendary" },
-        caster: "you",
         reduceGeneric: 2,
-        firstEachTurn: true,
+        when: { caster: "you", firstEachTurn: true },
       },
       text: COST_TEXT,
     },

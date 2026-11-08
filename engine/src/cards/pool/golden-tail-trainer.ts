@@ -38,8 +38,8 @@ export default defineCard({
       affects: { scope: "self" },
       costModification: {
         applies: { subtypes: ["Aura", "Equipment"] },
-        caster: "you",
         reduceGeneric: { powerOf: "source" },
+        when: { caster: "you" },
       },
       text: REDUCE_TEXT,
     },

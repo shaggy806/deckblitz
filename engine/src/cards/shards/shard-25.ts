@@ -428,6 +428,7 @@ import _poolJudgeMagisterGabranth from "../pool/judge-magister-gabranth.js";
 import _poolJujuBubble from "../pool/juju-bubble.js";
 import _poolJununEfreet from "../pool/junun-efreet.js";
 import _poolKaleidostone from "../pool/kaleidostone.js";
+import _poolKangTheConqueror from "../pool/kang-the-conqueror.js";
 import _poolKarametrasFavor from "../pool/karametras-favor.js";
 import _poolKarplusanWolverine from "../pool/karplusan-wolverine.js";
 import _poolKataraTheFearless from "../pool/katara-the-fearless.js";
@@ -1397,6 +1398,7 @@ const shard: CardShard = {
     _poolJujuBubble,
     _poolJununEfreet,
     _poolKaleidostone,
+    _poolKangTheConqueror,
     _poolKarametrasFavor,
     _poolKarplusanWolverine,
     _poolKataraTheFearless,

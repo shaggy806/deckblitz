@@ -20,7 +20,7 @@ export default defineCard({
   text: `${COST_TEXT}\nReach\n${ATTACK_TEXT}`,
   selfCostReduction: {
     condition: { kind: "controls", filter: {}, atLeast: 0 },
-    reduceGeneric: { cardsInGraveyard: { typesAnyOf: ["instant", "sorcery"] } },
+    reduceGeneric: { countInGraveyard: { ownedBy: "you", typesAnyOf: ["instant", "sorcery"] } },
   },
   triggered: [
     {

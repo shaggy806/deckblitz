@@ -18,8 +18,8 @@ export default defineCard({
       alternativeCostForSpells: {
         mana: "{0}",
         oncePerTurn: true,
-        fromZones: ["exile"],
         filter: { type: "creature" },
+        when: { castFrom: "exile" },
       },
       text: TEXT,
     },

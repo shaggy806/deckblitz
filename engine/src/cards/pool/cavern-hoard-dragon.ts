@@ -18,7 +18,7 @@ export default defineCard({
   keywords: ["flying", "trample", "haste"],
   selfCostReduction: {
     condition: { kind: "controls", filter: {}, atLeast: 0 },
-    reduceGeneric: { greatestOpponentCount: { type: "artifact" } },
+    reduceGeneric: { amongPlayers: "greatest", who: "each-opponent", of: { countOf: { type: "artifact", controlledBy: "you" }, forEachPlayer: true } },
   },
   text: `This spell costs {X} less to cast, where X is the greatest number of artifacts an opponent controls.\nFlying, trample, haste\n${TREASURES}`,
   triggered: [

@@ -21,7 +21,7 @@ export default defineCard({
     { affects: { scope: "self" }, prohibits: { who: "opponents", spells: { chosenName: true } }, text: LOCK },
     {
       affects: { scope: "self" },
-      costModification: { applies: { chosenName: true }, caster: "you", reduceGeneric: 2 },
+      costModification: { applies: { chosenName: true }, reduceGeneric: 2, when: { caster: "you" } },
       text: DISCOUNT,
     },
   ],

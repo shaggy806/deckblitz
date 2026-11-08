@@ -19,7 +19,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: { chosenName: true }, caster: "enchanted-player", increaseGeneric: 2 },
+      costModification: { applies: { chosenName: true }, increaseGeneric: 2, when: { caster: "enchanted-player" } },
       text: TAX,
     },
   ],

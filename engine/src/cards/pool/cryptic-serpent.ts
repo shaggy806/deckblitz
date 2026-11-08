@@ -13,6 +13,6 @@ export default defineCard({
   // sorcery (a split card) is one card and counts once (the rulings).
   selfCostReduction: {
     condition: { kind: "controls", filter: {}, atLeast: 0 },
-    reduceGeneric: { cardsInGraveyard: { typesAnyOf: ["instant", "sorcery"] } },
+    reduceGeneric: { countInGraveyard: { ownedBy: "you", typesAnyOf: ["instant", "sorcery"] } },
   },
 });

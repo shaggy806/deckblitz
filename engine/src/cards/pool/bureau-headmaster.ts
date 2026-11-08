@@ -15,7 +15,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: { subtype: "Equipment" }, caster: "you", reduceGeneric: 1 },
+      costModification: { applies: { subtype: "Equipment" }, reduceGeneric: 1, when: { caster: "you" } },
       text: SPELL_TEXT,
     },
     {

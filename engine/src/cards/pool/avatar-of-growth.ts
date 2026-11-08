@@ -13,7 +13,7 @@ export default defineCard({
   keywords: ["trample"],
   selfCostReduction: {
     condition: { kind: "controls", filter: {}, atLeast: 0 },
-    reduceGeneric: { opponents: true },
+    reduceGeneric: { countPlayers: "each-opponent" },
   },
   text: "This spell costs {1} less to cast for each opponent you have.\nTrample\nWhen this creature enters, each player searches their library for up to two basic land cards, puts them onto the battlefield, then shuffles.",
   triggered: [

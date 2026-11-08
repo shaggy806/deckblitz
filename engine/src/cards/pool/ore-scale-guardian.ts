@@ -18,6 +18,6 @@ export default defineCard({
   selfCostReduction: {
     // Unconditional: the always-true gate Blasphemous Act uses.
     condition: { kind: "controls", filter: {}, atLeast: 0 },
-    reduceGeneric: { cardsInGraveyard: { type: "land" } },
+    reduceGeneric: { countInGraveyard: { ownedBy: "you", type: "land" } },
   },
 });

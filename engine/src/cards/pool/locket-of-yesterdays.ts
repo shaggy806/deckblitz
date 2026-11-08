@@ -13,8 +13,8 @@ export default defineCard({
       affects: { scope: "self" },
       costModification: {
         applies: {},
-        caster: "you",
-        reduceGeneric: { cardsInGraveyard: {}, sameNameAsSpell: true },
+        reduceGeneric: { countInGraveyard: { ownedBy: "you" }, sameNameAs: "priced" },
+        when: { caster: "you" },
       },
       text: TEXT,
     },

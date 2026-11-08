@@ -8,7 +8,7 @@ export default defineCard({
   text: "This spell costs {1} less to cast for each creature that died this turn.\nDiscard your hand, then draw eight cards. Blood for the Blood God! deals 8 damage to each opponent. Exile Blood for the Blood God!",
   selfCostReduction: {
     condition: { kind: "controls", filter: {}, atLeast: 0 },
-    reduceGeneric: { turnHistory: "died", who: "any-player", filter: { type: "creature" } },
+    reduceGeneric: { turnHistory: "died", who: "each-player", filter: { type: "creature" } },
   },
   effect: {
     kind: "sequence",

@@ -48,9 +48,9 @@ export default defineCard({
       costModification: {
         applies: {},
         matchesChosenCreatureType: true,
-        caster: "you",
         reduceColored: "{W}{U}{B}{R}{G}",
         coloredOnly: true,
+        when: { caster: "you" },
       },
       text: COST_TEXT,
     },

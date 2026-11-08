@@ -8,7 +8,7 @@ const TYPES = ["artifact", "creature", "enchantment", "instant", "sorcery"] as c
 const reduction = (type: (typeof TYPES)[number]): StaticAbility => ({
   affects: { scope: "self" },
   condition: { kind: "chosen-on-enter", value: type },
-  costModification: { applies: { type }, caster: "you", reduceGeneric: 1 },
+  costModification: { applies: { type }, reduceGeneric: 1, when: { caster: "you" } },
   text: `Spells you cast of the chosen type (${type}) cost {1} less to cast.`,
 });
 

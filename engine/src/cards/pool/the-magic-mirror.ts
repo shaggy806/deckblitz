@@ -27,7 +27,7 @@ export default defineCard({
   text: `${COST_TEXT}\nYou have no maximum hand size.\n${UPKEEP_TEXT}`,
   selfCostReduction: {
     condition: { kind: "controls", filter: {}, atLeast: 0 },
-    reduceGeneric: { cardsInGraveyard: { typesAnyOf: ["instant", "sorcery"] } },
+    reduceGeneric: { countInGraveyard: { ownedBy: "you", typesAnyOf: ["instant", "sorcery"] } },
   },
   triggered: [
     {

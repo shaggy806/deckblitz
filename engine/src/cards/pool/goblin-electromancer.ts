@@ -14,8 +14,8 @@ export default defineCard({
       affects: { scope: "self" },
       costModification: {
         applies: { typesAnyOf: ["instant", "sorcery"] },
-        caster: "you",
         reduceGeneric: 1,
+        when: { caster: "you" },
       },
       text: "Instant and sorcery spells you cast cost {1} less to cast.",
     },

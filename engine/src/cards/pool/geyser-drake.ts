@@ -20,7 +20,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "not", of: { kind: "your-turn" } },
-      costModification: { applies: {}, caster: "you", reduceGeneric: 1 },
+      costModification: { applies: {}, reduceGeneric: 1, when: { caster: "you" } },
       text: COST_TEXT,
     },
   ],

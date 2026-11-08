@@ -24,7 +24,7 @@ export default defineCard({
   // sorcery (Aether Helix's "permanent card" filter).
   selfCostReduction: {
     condition: { kind: "controls", filter: {}, atLeast: 0 },
-    reduceGeneric: { cardsInGraveyard: { notTypes: ["instant", "sorcery"] } },
+    reduceGeneric: { countInGraveyard: { ownedBy: "you", notTypes: ["instant", "sorcery"] } },
   },
   static: [
     {

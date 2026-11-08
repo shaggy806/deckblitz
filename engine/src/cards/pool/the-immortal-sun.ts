@@ -18,7 +18,7 @@ export default defineCard({
       prohibits: { who: "each-player", abilitiesOf: { type: "planeswalker" }, onlyLoyaltyAbilities: true },
       text: LOCK,
     },
-    { affects: { scope: "self" }, costModification: { applies: {}, caster: "you", reduceGeneric: 1 }, text: COST },
+    { affects: { scope: "self" }, costModification: { applies: {}, reduceGeneric: 1, when: { caster: "you" } }, text: COST },
     { affects: { scope: "creatures-you-control" }, grantPt: [1, 1], text: ANTHEM },
   ],
   triggered: [

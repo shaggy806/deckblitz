@@ -17,7 +17,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: { typesAnyOf: ["instant", "enchantment"] }, caster: "you", reduceGeneric: 2 },
+      costModification: { applies: { typesAnyOf: ["instant", "enchantment"] }, reduceGeneric: 2, when: { caster: "you" } },
       text: TEXT,
     },
   ],

@@ -18,17 +18,17 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: { colors: ["W"] }, caster: "you", reduceGeneric: 1 },
+      costModification: { applies: { colors: ["W"] }, reduceGeneric: 1, when: { caster: "you" } },
       text: "White spells you cast cost {1} less to cast.",
     },
     {
       affects: { scope: "self" },
-      costModification: { applies: { colors: ["U"] }, caster: "you", reduceGeneric: 1 },
+      costModification: { applies: { colors: ["U"] }, reduceGeneric: 1, when: { caster: "you" } },
       text: "Blue spells you cast cost {1} less to cast.",
     },
     {
       affects: { scope: "self" },
-      costModification: { applies: {}, caster: "opponent", increaseGeneric: 1 },
+      costModification: { applies: {}, increaseGeneric: 1, when: { caster: "opponent" } },
       text: "Spells your opponents cast cost {1} more to cast.",
     },
   ],

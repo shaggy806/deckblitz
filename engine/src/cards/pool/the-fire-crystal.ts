@@ -15,7 +15,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: { colors: ["R"] }, caster: "you", reduceGeneric: 1 },
+      costModification: { applies: { colors: ["R"] }, reduceGeneric: 1, when: { caster: "you" } },
       text: REDUCE_TEXT,
     },
     { affects: { scope: "creatures-you-control" }, grantKeywords: ["haste"], text: HASTE_TEXT },

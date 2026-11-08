@@ -17,7 +17,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: { type: "enchantment" }, caster: "you", reduceGeneric: 1 },
+      costModification: { applies: { type: "enchantment" }, reduceGeneric: 1, when: { caster: "you" } },
       text: SPELLS,
     },
     {

@@ -60,6 +60,6 @@ export default defineCard({
   adventure: true,
   selfCostReduction: {
     condition: { kind: "controls", filter: {}, atLeast: 0 },
-    reduceGeneric: { cardsInGraveyard: { anyOf: [{ typesAnyOf: ["instant", "sorcery"] }, { hasAdventure: true }] } },
+    reduceGeneric: { countInGraveyard: { ownedBy: "you", anyOf: [{ typesAnyOf: ["instant", "sorcery"] }, { hasAdventure: true }] } },
   },
 });

@@ -14,7 +14,7 @@ export default defineCard({
   colors: ["G"],
   types: ["sorcery"],
   text: `${CAP_TEXT}\n${REVEAL_TEXT}`,
-  maxX: { playersInGame: true },
+  maxX: { countPlayers: "each-player" },
   targets: [],
   effect: {
     kind: "reveal-until-count",

@@ -27,8 +27,8 @@ export default defineCard({
       affects: { scope: "self" },
       costModification: {
         applies: { anyOf: [{ subtype: "Angel" }, { subtype: "Human" }] },
-        caster: "you",
-        reduceGeneric: { countersOnSource: "+1/+1" },
+        reduceGeneric: { countersOn: "source", counter: "+1/+1" },
+        when: { caster: "you" },
       },
       text: COST_TEXT,
     },

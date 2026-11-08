@@ -22,10 +22,10 @@ export default defineCard({
       affects: { scope: "self" },
       costModification: {
         applies: { colors: ["U"], typesAnyOf: ["artifact", "battle", "creature", "enchantment", "planeswalker"] },
-        caster: "you",
         reduceColored: "{U}",
         coloredOnly: true,
         optionalLife: 2,
+        when: { caster: "you" },
       },
       text: "As an additional cost to cast blue permanent spells, you may pay 2 life. Those spells cost {U} less to cast if you paid life this way. This effect reduces only the amount of blue mana you pay.",
     },

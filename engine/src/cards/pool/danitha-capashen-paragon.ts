@@ -14,7 +14,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: { subtypes: ["Aura", "Equipment"] }, caster: "you", reduceGeneric: 1 },
+      costModification: { applies: { subtypes: ["Aura", "Equipment"] }, reduceGeneric: 1, when: { caster: "you" } },
       text: "Aura and Equipment spells you cast cost {1} less to cast.",
     },
   ],

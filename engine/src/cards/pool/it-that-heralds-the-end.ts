@@ -16,8 +16,8 @@ export default defineCard({
       affects: { scope: "self" },
       costModification: {
         applies: { colorless: true, manaValue: { op: "gte", n: 7 } },
-        caster: "you",
         reduceGeneric: 1,
+        when: { caster: "you" },
       },
       text: COST_TEXT,
     },

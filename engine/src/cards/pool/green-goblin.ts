@@ -17,7 +17,7 @@ export default defineCard({
     {
       // Generic mana only (the ruling); it allows no cast by itself.
       affects: { scope: "self" },
-      costModification: { applies: {}, caster: "you", castFrom: "graveyard", reduceGeneric: 2 },
+      costModification: { applies: {}, reduceGeneric: 2, when: { caster: "you", castFrom: "graveyard" } },
       text: "Spells you cast from your graveyard cost {2} less to cast.",
     },
     {

@@ -162,8 +162,9 @@ const registry = createDefaultRegistry()
           affects: { scope: "self" },
           costModification: {
             applies: { type: "creature", toughness: { op: "gt", n: { own: "power" } } },
-            caster: "you",
+            
             reduceGeneric: 1,
+            when: { caster: "you" },
           },
           text: "Each creature spell you cast with toughness greater than its power costs {1} less to cast.",
         },

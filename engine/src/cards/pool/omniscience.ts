@@ -8,5 +8,5 @@ export default defineCard({
   colors: ["U"],
   types: ["enchantment"],
   text: TEXT,
-  static: [{ affects: { scope: "self" }, alternativeCostForSpells: { mana: "{0}", fromHand: true }, text: TEXT }],
+  static: [{ affects: { scope: "self" }, alternativeCostForSpells: { mana: "{0}", when: { castFrom: "hand" } }, text: TEXT }],
 });

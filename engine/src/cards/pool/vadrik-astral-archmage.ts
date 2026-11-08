@@ -27,8 +27,8 @@ export default defineCard({
       affects: { scope: "self" },
       costModification: {
         applies: { typesAnyOf: ["instant", "sorcery"] },
-        caster: "you",
         reduceGeneric: { powerOf: "source" },
+        when: { caster: "you" },
       },
       text: "Instant and sorcery spells you cast cost {X} less to cast, where X is Vadrik's power.",
     },

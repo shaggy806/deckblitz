@@ -18,7 +18,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "source", filter: { tapped: true } },
-      costModification: { applies: { type: "creature" }, caster: "you", reduceGeneric: 2 },
+      costModification: { applies: { type: "creature" }, reduceGeneric: 2, when: { caster: "you" } },
       text: TEXT,
     },
   ],

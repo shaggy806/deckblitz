@@ -12,7 +12,7 @@
  * escape hatch). Vanilla permanents need neither.
  */
 
-import type { AbilityCost, ActivatedAbility, CostReductionAmount, TriggeredAbility } from "../abilities.js";
+import type { AbilityCost, AbilityKindName, ActivatedAbility, TriggeredAbility } from "../abilities.js";
 import type {
   BeholdSpec,
   CopyExceptions,
@@ -203,6 +203,39 @@ export interface CopyOnEnter {
  * same mechanism kicker uses (Redirect Lightning: "pay 5 life or pay {2}").
  * It is a cost *increase*, not a replacement.
  */
+/**
+ * Which casts of a spell a cost modifier or a granted alternative cost reaches
+ * (rule 601.2f), besides what the spell is (`applies`, a `filter`). One clause
+ * for both, so a new kind of "when" is a field here rather than one on each.
+ */
+export interface SpellCastClause {
+  /** Who has to be casting it, relative to the static's controller: `"you"`
+   * ("spells you cast"), `"opponent"` ("spells your opponents cast" — Hinata),
+   * `"enchanted-player"` (Curse of Silence). The actual caster, not the card's
+   * controller, so a card cast from another's graveyard is the caster's. */
+  readonly caster?: "you" | "opponent" | "enchanted-player";
+  /** "…except during its controller's turn" (Defense Grid). */
+  readonly exceptOnCastersTurn?: true;
+  /** "During your turn" (Demon of Fate's Design): only on the caster's own. */
+  readonly yourTurnOnly?: true;
+  /** Only spells cast from this zone or these (Green Goblin's "from your
+   * graveyard", Access Maze's "from your hand"). A player's own zone (graveyard,
+   * hand, library) is the reader's: not a card cast from another's — unless
+   * `castFromAnyones`, Aven Interrupter's "from **graveyards** or from exile". */
+  readonly castFrom?: ZoneType | readonly ZoneType[];
+  /** See `castFrom`. */
+  readonly castFromAnyones?: boolean;
+  /** "From anywhere other than your hand" (Bilbo, Sage of the Beyond): every
+   * spell but one cast from its caster's own hand. */
+  readonly notFromCastersHand?: true;
+  /** Only a kicked spell (702.33d — announced before the total is worked out,
+   * 601.2b before 601.2f). */
+  readonly kicked?: true;
+  /** Only the caster's first spell each turn matching the static's filter — an
+   * earlier one uses it up even if it was cast before this arrived. */
+  readonly firstEachTurn?: boolean;
+}
+
 /** A kicker's non-mana cost — see `CardDefinition.kicker.also`. */
 export interface KickerAlsoCost {
   readonly text: string;
@@ -3059,9 +3092,9 @@ export interface StaticAbility {
     readonly flash?: true;
     readonly payLifeManaValue?: true;
     readonly oncePerTurn?: true;
-    readonly yourTurnOnly?: true;
-    readonly fromHand?: true;
-    readonly fromZones?: readonly ("exile" | "library")[];
+    /** Which casts it reaches ("from your hand", "from exile", "during your
+     * turn") — see {@link SpellCastClause}. Read from the caster's side. */
+    readonly when?: SpellCastClause;
     readonly anyPlayer?: true;
   };
   /**
@@ -3081,31 +3114,30 @@ export interface StaticAbility {
    * has both), so a "ninjutsu abilities you activate" static or trigger sees it.
    */
   readonly grantsNinjutsuInHand?: { readonly cost: string; readonly filter: CardFilter };
+  /** "Each power-up ability of permanents you control can be activated an
+   * additional time" (Wonder Man, Hollywood Hero): each power-up ability its
+   * controller's permanents have may be activated this many more times, in the
+   * time power-up's own "only once" gives. */
+  readonly additionalPowerUps?: number;
   /**
-   * "You may pay `mana` rather than pay cycling costs" (rule 702.29f: a
-   * typecycling cost is a cycling cost too) — New Perspectives, under the
-   * static's own `condition` (`{ kind: "hand-size", atLeast: 7 }`), and Gavi,
-   * Nest Warden's "… rather than pay the cycling cost of the first card you
-   * cycle each turn" with `firstEachTurn` (counting every card this player
-   * has cycled this turn, before Gavi arrived too). The cards in this
-   * permanent's controller's hand with any cycling ability, printed or
-   * granted, have a second one at that cost, which is how the player chooses
-   * (rule 602.2b): X is 0 in it, and it still discards the card, since only
-   * the `[Cost]` of "[Cost], Discard this card" is replaced.
+   * "You may pay `mana` rather than pay the [kind] cost of …" (rule 602.2b):
+   * the abilities of that kind this permanent's controller could activate have
+   * a second one at `mana`, beside the first, which is how the player chooses.
+   * `kind` is `"cycling"` (New Perspectives; a typecycling cost is a cycling
+   * cost too, 702.29f — X is 0 in it, and it still discards the card, since
+   * only the `[Cost]` of "[Cost], Discard this card" is replaced), `"equip"`
+   * (Forge Anew; an equip variant is an equip ability, 702.6c; reconfigure
+   * isn't) or `"power-up"` (Advancing the Spirit). The cost replaced is the whole
+   * cost; what raises or lowers it still applies. `firstEachTurn` is "of the
+   * first [kind] ability you activate each turn", counting every one this
+   * player has activated this turn, before this arrived too (Gavi; the
+   * static's `condition` says "during each of your turns").
    */
-  readonly alternativeCyclingCost?: { readonly mana: string; readonly firstEachTurn?: true };
-  /**
-   * "You may pay {0} rather than pay the equip cost of the first equip ability
-   * you activate during each of your turns" (Forge Anew, its static's
-   * `condition` a `your-turn`): the permanents this permanent's controller
-   * controls with an equip ability, printed or granted, have a second one at
-   * `mana`, beside the first, which is how the player chooses (rule 602.2b).
-   * `firstEachTurn` counts every equip ability they have activated this turn,
-   * before this arrived too. An equip variant is an equip ability (rule 702.6c);
-   * reconfigure isn't (Forge Anew's ruling). The cost replaced is the whole cost;
-   * what raises or lowers it still applies.
-   */
-  readonly alternativeEquipCost?: { readonly mana: string; readonly firstEachTurn?: true };
+  readonly alternativeAbilityCost?: {
+    readonly kind: "cycling" | "equip" | "power-up";
+    readonly mana: string;
+    readonly firstEachTurn?: true;
+  };
   /**
    * Cards matching `filter` in this permanent's controller's hand have
    * cycling for `cost` (rule 702.29a) — Rhet-Tomb Mystic's "each creature card
@@ -4023,12 +4055,15 @@ export interface StaticAbility {
      * an Eminence cost-reduction, which is live while the card is in the
      * command zone and so would otherwise discount casting itself. */
     readonly otherOnly?: boolean;
-    /** A fixed amount, or a live count of battlefield permanents matching a
-     * filter, evaluated with this static's controller as "you" (Temur
-     * Battlecrier: "{1} less for each creature you control with power 4 or
-     * greater" — needed-cards P16). */
-    readonly reduceGeneric?: CostReductionAmount;
-    readonly increaseGeneric?: number;
+    /** An amount read as the cost is worked out, with this static's source as
+     * the source, its controller as "you" and the spell being priced as the
+     * `"priced"` reference (Temur Battlecrier: "{1} less for each creature you
+     * control with power 4 or greater"). Never below 0. */
+    readonly reduceGeneric?: EffectAmount;
+    /** As `reduceGeneric`, added before anything is taken off (601.2f). */
+    readonly increaseGeneric?: EffectAmount;
+    /** Which casts it reaches, besides `applies` — see {@link SpellCastClause}. */
+    readonly when?: SpellCastClause;
     /** Coloured pips added to the cost ("Black spells you cast cost {B} more
      * to cast" — Derelor), as a mana string of coloured symbols: an increase,
      * so applied before any reduction (rule 601.2f), and to whatever cost the
@@ -4040,33 +4075,6 @@ export interface StaticAbility {
      * type" — needed-cards P14). No effect (matches nothing) before the
      * ETB choice is made. */
     readonly matchesChosenCreatureType?: boolean;
-    /** Who has to be casting the spell, relative to this static's
-     * controller: `"you"` ("spells you cast") or `"opponent"` ("spells your
-     * opponents cast" — Hinata, Dawn-Crowned). Judged against the actual
-     * caster, not the card's controller, so a card cast from someone else's
-     * graveyard or exile counts as the caster's spell. Omitted = anyone.
-     * `"enchanted-player"`: the player this Aura enchants (Curse of
-     * Silence's "spells with the chosen name enchanted player casts"). */
-    readonly caster?: "you" | "opponent" | "enchanted-player";
-    /** "…except during its controller's turn" (Defense Grid): nothing during
-     * the turn of the player casting it, whoever controls this permanent. */
-    readonly exceptOnCastersTurn?: true;
-    /** Only spells cast from this zone — Green Goblin's "spells you cast
-     * from your graveyard cost {2} less": the zone the card is cast from (its
-     * zone as the cost is worked out, rule 601.2f's card on its way). A
-     * player's own zone (graveyard, hand, library) is the static's
-     * controller's: a card cast from an opponent's graveyard isn't one —
-     * unless `castFromAnyones`, Aven Interrupter's "spells your opponents
-     * cast from **graveyards** or from exile" (a list of zones). */
-    readonly castFrom?: ZoneType | readonly ZoneType[];
-    /** See `castFrom`. */
-    readonly castFromAnyones?: boolean;
-    /** "Spells you cast from anywhere other than your hand" (Bilbo, Thief in
-     * the Night; Sage of the Beyond): every spell but one cast from its
-     * caster's own hand — a graveyard, exile, the library, the command zone,
-     * and another player's hand (Sen Triplets) alike. A zone list can't say
-     * it: `castFrom: [...]` reads hands as the static controller's. */
-    readonly notFromCastersHand?: true;
     /** "…cost {1} less to cast **for each target**" (Hinata, Dawn-Crowned):
      * `reduceGeneric` / `increaseGeneric` are multiplied by the number of
      * distinct players and objects the spell targets as it's cast (Hinata's
@@ -4087,12 +4095,6 @@ export interface StaticAbility {
     /** Only a spell with this permanent among its targets — Spellwild Ouphe's
      * "spells that target this creature cost {2} less". */
     readonly targetingSource?: boolean;
-    /** Only the caster's first spell each turn that matches `applies` ("the
-     * first creature spell you cast each turn costs {1} less") — earlier
-     * spells are asked the same question, so a matching spell cast earlier
-     * this turn uses the discount up even if it was cast before this
-     * permanent arrived. */
-    readonly firstEachTurn?: boolean;
     /** Coloured pips removed from the cost ("Cleric spells you cast cost
      * {W}{B} less" — Edgewalker), as a mana string of coloured symbols.
      * Each symbol takes a matching coloured pip, else a hybrid pip that
@@ -4103,7 +4105,7 @@ export interface StaticAbility {
      * each** land you control with a flood counter on it" (Eluge, the
      * Shoreless Sea): every {U} of the spell's cost first, then generic
      * (its ruling). Read as the cost is worked out. */
-    readonly reduceColoredTimes?: CostReductionAmount;
+    readonly reduceColoredTimes?: EffectAmount;
     /** "This effect reduces only the amount of colored mana you pay"
      * (Edgewalker, Morophon): a coloured reduction with nothing coloured
      * left to take is lost rather than taken off the generic part. */
@@ -4146,8 +4148,8 @@ export interface StaticAbility {
    */
   readonly abilityCostModification?: {
     readonly applies: CardFilter;
-    readonly reduceGeneric?: number;
-    readonly increaseGeneric?: number;
+    readonly reduceGeneric?: EffectAmount;
+    readonly increaseGeneric?: EffectAmount;
     /**
      * "This effect can't reduce the mana in that cost to less than one mana"
      * (Training Grounds, Forensic Gadgeteer): `reduceGeneric` stops where
@@ -4181,7 +4183,7 @@ export interface StaticAbility {
      * planeswalkers your opponents control cost {1} more"). `applies` still
      * filters the ability's source.
      */
-    readonly abilityKind?: "equip" | "exhaust" | "cycling" | "loyalty";
+    readonly abilityKind?: AbilityKindName;
     /** "…you activate" (Fluctuator, Bureau Headmaster, Carth the Lion): only
      * abilities this static's controller activates. */
     readonly byYou?: true;
@@ -4427,7 +4429,7 @@ export interface CastModalSpec {
 export interface MorphCost {
   readonly keyword: "morph" | "megamorph" | "disguise";
   readonly cost: string;
-  readonly costReduction?: CostReductionAmount;
+  readonly costReduction?: EffectAmount;
   readonly also?: {
     readonly payLife?: number;
     /** "Morph—Reveal a white card in your hand" (Watcher of the Roost): `count`
@@ -4451,7 +4453,7 @@ export interface MorphCost {
 export interface SelfCostReduction {
   readonly condition: StaticCondition;
   /** Generic mana taken off: a fixed number or a live count. */
-  readonly reduceGeneric?: CostReductionAmount;
+  readonly reduceGeneric?: EffectAmount;
   /** Coloured mana taken off, as a mana string — Ertai's Scorn's "{U} less",
    * Stormwing Entity's "{2}{U} less" (`reduceGeneric: 2, reduceColored: "{U}"`).
    * Each symbol takes a pip of its colour, else a hybrid pip with it (rule
@@ -4459,7 +4461,7 @@ export interface SelfCostReduction {
   readonly reduceColored?: string;
   /** `reduceColored` that many times — Khalni Hydra's "{G} less for each green
    * creature you control". */
-  readonly reduceColoredTimes?: CostReductionAmount;
+  readonly reduceColoredTimes?: EffectAmount;
   /** See `reduceColored`. */
   readonly coloredOnly?: boolean;
   /** "This spell costs {X} less to cast **this way**" after a flashback cost
@@ -5233,7 +5235,7 @@ export interface CardDefinition {
    * choose it and not again (Open the Way's "the number of players in the
    * game", `{ playersInGame: true }`, and its ruling).
    */
-  readonly maxX?: CostReductionAmount;
+  readonly maxX?: EffectAmount;
   /**
    * "This spell costs {1} more to cast for each target beyond the first"
    * (Fireball; Strive — Twinflame's {2}{R}): this cost, once per distinct
@@ -6430,7 +6432,7 @@ interface CardDraft {
   opponentChoosesTargets?: readonly number[];
   selfCostReduction?: SelfCostReduction | readonly SelfCostReduction[];
   /** See {@link CardDefinition.maxX}. */
-  maxX?: CostReductionAmount;
+  maxX?: EffectAmount;
   costPerExtraTarget?: string;
   /** See {@link CardDefinition.targetCostReduction}. */
   targetCostReduction?: { readonly filter: CardFilter; readonly reduceGeneric: number; readonly reduceColored?: string };

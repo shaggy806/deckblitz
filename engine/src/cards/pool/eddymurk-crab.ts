@@ -20,7 +20,7 @@ export default defineCard({
   text: `Flash\n${COST_TEXT}\n${TAPPED_TEXT}\n${ETB_TEXT}`,
   selfCostReduction: {
     condition: { kind: "controls", filter: {}, atLeast: 0 },
-    reduceGeneric: { cardsInGraveyard: { typesAnyOf: ["instant", "sorcery"] } },
+    reduceGeneric: { countInGraveyard: { ownedBy: "you", typesAnyOf: ["instant", "sorcery"] } },
   },
   static: [
     {

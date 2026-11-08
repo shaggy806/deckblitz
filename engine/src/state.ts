@@ -4722,6 +4722,9 @@ export interface ExtraTurnRider {
   readonly at: number;
   /** "During that turn, damage can't be prevented" (rule 615.12). */
   readonly damageCantBePrevented?: true;
+  /** "During that turn, power-up abilities can't be activated" (Kang the
+   * Conqueror), for the turn this rider's taken up. */
+  readonly noPowerUps?: true;
   /** "At the beginning of that turn's end step, …": the delayed ability
    * (rule 603.7) that turn sets up, as its effect's controller made it. */
   readonly atEndStep?: {
@@ -6540,6 +6543,9 @@ export interface GameState {
   preventionShields: PreventionShield[];
   /** "Damage can't be prevented this turn" (Skullcrack — rule 615.12): set by
    * the `damage-cant-be-prevented` effect, cleared as the next turn begins. */
+  /** See `ExtraTurnRider.noPowerUps`: while set, no power-up ability can be
+   * activated. Cleared as the turn ends. */
+  powerUpsBarredThisTurn?: true;
   damageUnpreventableThisTurn?: true;
   /** Extra turns still owed, in the order they'll be taken (rule 500.7 —
    * ROADMAP Phase 7). `beginTurn` shifts the front instead of advancing the

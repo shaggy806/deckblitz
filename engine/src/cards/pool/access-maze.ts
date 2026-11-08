@@ -17,10 +17,9 @@ export default defineCard({
       affects: { scope: "self" },
       alternativeCostForSpells: {
         mana: "{0}",
-        fromHand: true,
         payLifeManaValue: true,
         oncePerTurn: true,
-        yourTurnOnly: true,
+        when: { castFrom: "hand", yourTurnOnly: true },
       },
       text: MAZE,
     },

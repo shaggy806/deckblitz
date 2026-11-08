@@ -1477,8 +1477,9 @@ export const grantAffinity = (spells: CardFilter, filter: CardFilter, text: stri
   affects: { scope: "self" },
   costModification: {
     applies: spells,
-    caster: "you",
+    
     reduceGeneric: { countOf: { ...filter, controlledBy: "you" } },
+    when: { caster: "you" },
   },
   text,
 });
@@ -2926,7 +2927,7 @@ export const medallion = (name: string, color: Color): CardDefinition => {
         affects: { scope: "self" },
         // `caster: "you"`: without it the discount reached every player's
         // spells of the colour (found in batch 221).
-        costModification: { applies: { colors: [color] }, caster: "you", reduceGeneric: 1 },
+        costModification: { applies: { colors: [color] }, reduceGeneric: 1, when: { caster: "you" }, },
         text,
       },
     ],

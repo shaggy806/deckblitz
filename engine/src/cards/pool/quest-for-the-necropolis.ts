@@ -27,7 +27,7 @@ export default defineCard({
       cost: { mana: "{5}{B}", tap: false, sacrifice: "self" },
       targets: [{ kind: "card-in-graveyard", whose: "any", filter: { type: "creature" } }],
       effect: { kind: "put-onto-battlefield", target: 0, underYourControl: true },
-      costReduction: { reduceGeneric: { countersOnSource: "quest" } },
+      costReduction: { reduceGeneric: { countersOn: "source", counter: "quest" } },
       sorcerySpeed: true,
       resolve: null,
       text: REANIMATE_TEXT,

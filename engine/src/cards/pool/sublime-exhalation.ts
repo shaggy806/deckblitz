@@ -14,7 +14,7 @@ export default defineCard({
   types: ["sorcery"],
   selfCostReduction: {
     condition: { kind: "controls", filter: {}, atLeast: 0 },
-    reduceGeneric: { opponents: true },
+    reduceGeneric: { countPlayers: "each-opponent" },
   },
   text: "Undaunted (This spell costs {1} less to cast for each opponent.)\nDestroy all creatures.",
   effect: { kind: "destroy-all", filter: { type: "creature" } },

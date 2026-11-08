@@ -21,7 +21,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      alternativeCostForSpells: { mana: "{0}", oncePerTurn: true, yourTurnOnly: true, fromZones: ["exile"] },
+      alternativeCostForSpells: { mana: "{0}", oncePerTurn: true, when: { castFrom: "exile", yourTurnOnly: true } },
       text: ALT,
     },
   ],

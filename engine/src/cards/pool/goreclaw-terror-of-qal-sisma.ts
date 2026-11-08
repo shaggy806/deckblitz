@@ -21,8 +21,8 @@ export default defineCard({
       affects: { scope: "self" },
       costModification: {
         applies: { type: "creature", power: { op: "gte", n: 4 } },
-        caster: "you",
         reduceGeneric: 2,
+        when: { caster: "you" },
       },
       text: "Creature spells you cast with power 4 or greater cost {2} less to cast.",
     },

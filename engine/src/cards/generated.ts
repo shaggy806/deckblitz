@@ -225,6 +225,7 @@ import _poolAdvanceScout from "./pool/advance-scout.js";
 import _poolAdvancedHoverguard from "./pool/advanced-hoverguard.js";
 import _poolAdvancedReconstruction from "./pool/advanced-reconstruction.js";
 import _poolAdvancedStitchwing from "./pool/advanced-stitchwing.js";
+import _poolAdvancingTheSpirit from "./pool/advancing-the-spirit.js";
 import _poolAdventOfTheWurm from "./pool/advent-of-the-wurm.js";
 import _poolAdventureAwaits from "./pool/adventure-awaits.js";
 import _poolAdventurersAirship from "./pool/adventurers-airship.js";
@@ -12568,6 +12569,7 @@ import _poolHugsGrislyGuardian from "./pool/hugs-grisly-guardian.js";
 import _poolHulkAlwaysAngry from "./pool/hulk-always-angry.js";
 import _poolHulkBruceBanner from "./pool/hulk-bruce-banner.js";
 import _poolHulkBrutalBrawler from "./pool/hulk-brutal-brawler.js";
+import _poolHulkGammaGoliath from "./pool/hulk-gamma-goliath.js";
 import _poolHulkSmash from "./pool/hulk-smash.js";
 import _poolHulkStrongestThereIs from "./pool/hulk-strongest-there-is.js";
 import _poolHulkbusterArmor from "./pool/hulkbuster-armor.js";
@@ -13953,6 +13955,7 @@ import _poolKangDynasty from "./pool/kang-dynasty.js";
 import _poolKangPrime from "./pool/kang-prime.js";
 import _poolKangSuspiciousCaptain from "./pool/kang-suspicious-captain.js";
 import _poolKangTemporalTyrant from "./pool/kang-temporal-tyrant.js";
+import _poolKangTheConqueror from "./pool/kang-the-conqueror.js";
 import _poolKangeeSkyWarden from "./pool/kangee-sky-warden.js";
 import _poolKangeesLieutenant from "./pool/kangees-lieutenant.js";
 import _poolKapow from "./pool/kapow.js";
@@ -30396,6 +30399,7 @@ import _poolWolverineBestThereIs from "./pool/wolverine-best-there-is.js";
 import _poolWolverineClawsOut from "./pool/wolverine-claws-out.js";
 import _poolWolverinePack from "./pool/wolverine-pack.js";
 import _poolWolverineRiders from "./pool/wolverine-riders.js";
+import _poolWonderManHollywoodHero from "./pool/wonder-man-hollywood-hero.js";
 import _poolWonder from "./pool/wonder.js";
 import _poolWondrousCrucible from "./pool/wondrous-crucible.js";
 import _poolWondrousRevival from "./pool/wondrous-revival.js";
@@ -31876,6 +31880,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAdvancedHoverguard,
   _poolAdvancedReconstruction,
   _poolAdvancedStitchwing,
+  _poolAdvancingTheSpirit,
   _poolAdventOfTheWurm,
   _poolAdventureAwaits,
   _poolAdventurersAirship,
@@ -44219,6 +44224,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolHulkAlwaysAngry,
   _poolHulkBruceBanner,
   _poolHulkBrutalBrawler,
+  _poolHulkGammaGoliath,
   _poolHulkSmash,
   _poolHulkStrongestThereIs,
   _poolHulkbusterArmor,
@@ -45604,6 +45610,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKangPrime,
   _poolKangSuspiciousCaptain,
   _poolKangTemporalTyrant,
+  _poolKangTheConqueror,
   _poolKangeeSkyWarden,
   _poolKangeesLieutenant,
   _poolKapow,
@@ -62047,6 +62054,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWolverineClawsOut,
   _poolWolverinePack,
   _poolWolverineRiders,
+  _poolWonderManHollywoodHero,
   _poolWonder,
   _poolWondrousCrucible,
   _poolWondrousRevival,
@@ -63540,6 +63548,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/advanced-hoverguard": _poolAdvancedHoverguard,
   "pool/advanced-reconstruction": _poolAdvancedReconstruction,
   "pool/advanced-stitchwing": _poolAdvancedStitchwing,
+  "pool/advancing-the-spirit": _poolAdvancingTheSpirit,
   "pool/advent-of-the-wurm": _poolAdventOfTheWurm,
   "pool/adventure-awaits": _poolAdventureAwaits,
   "pool/adventurers-airship": _poolAdventurersAirship,
@@ -75883,6 +75892,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/hulk-always-angry": _poolHulkAlwaysAngry,
   "pool/hulk-bruce-banner": _poolHulkBruceBanner,
   "pool/hulk-brutal-brawler": _poolHulkBrutalBrawler,
+  "pool/hulk-gamma-goliath": _poolHulkGammaGoliath,
   "pool/hulk-smash": _poolHulkSmash,
   "pool/hulk-strongest-there-is": _poolHulkStrongestThereIs,
   "pool/hulkbuster-armor": _poolHulkbusterArmor,
@@ -77268,6 +77278,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kang-prime": _poolKangPrime,
   "pool/kang-suspicious-captain": _poolKangSuspiciousCaptain,
   "pool/kang-temporal-tyrant": _poolKangTemporalTyrant,
+  "pool/kang-the-conqueror": _poolKangTheConqueror,
   "pool/kangee-sky-warden": _poolKangeeSkyWarden,
   "pool/kangees-lieutenant": _poolKangeesLieutenant,
   "pool/kapow": _poolKapow,
@@ -93711,6 +93722,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/wolverine-claws-out": _poolWolverineClawsOut,
   "pool/wolverine-pack": _poolWolverinePack,
   "pool/wolverine-riders": _poolWolverineRiders,
+  "pool/wonder-man-hollywood-hero": _poolWonderManHollywoodHero,
   "pool/wonder": _poolWonder,
   "pool/wondrous-crucible": _poolWondrousCrucible,
   "pool/wondrous-revival": _poolWondrousRevival,

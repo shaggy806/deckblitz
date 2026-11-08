@@ -12,7 +12,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: { typesAnyOf: ["artifact", "enchantment"] }, caster: "opponent", increaseGeneric: 2 },
+      costModification: { applies: { typesAnyOf: ["artifact", "enchantment"] }, increaseGeneric: 2, when: { caster: "opponent" } },
       text: COST_TEXT,
     },
   ],
