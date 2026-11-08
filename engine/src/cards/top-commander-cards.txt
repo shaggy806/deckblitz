@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4710 already implemented / 290 missing (marks refreshed 2026-11-08)
+4713 already implemented / 287 missing (marks refreshed 2026-11-08)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -3884,7 +3884,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3891  Vona's Hunger                            {2}{B}           Instant
 [x]  3892  Infestation Sage                         {B}              Creature — Elf Warlock
 [x]  3893  Tidespout Tyrant                         {5}{U}{U}{U}     Creature — Djinn
-[ ]  3894  Unlicensed Hearse                        {2}              Artifact — Vehicle
+[x]  3894  Unlicensed Hearse                        {2}              Artifact — Vehicle
 [x]  3895  Colossal Skyturtle                       {4}{G}{G}{U}     Enchantment Creature — Turtle
 [x]  3896  Seeker of Skybreak                       {1}{G}           Creature — Elf
 [x]  3897  Roadside Reliquary                       {0}              Land
@@ -4900,7 +4900,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4907  Felix Five-Boots                         {2}{B}{G}{U}     Legendary Creature — Ooze Rogue
 [x]  4908  Bloodbraid Elf                           {2}{R}{G}        Creature — Elf Berserker
 [x]  4909  Titan of Littjara                        {4}{U}{U}        Creature — Illusion
-[ ]  4910  Cut Down                                 {B}              Instant
+[x]  4910  Cut Down                                 {B}              Instant
 [x]  4911  From Beyond                              {3}{G}           Enchantment
 [x]  4912  Smokebraider                             {1}{R}           Creature — Elemental Shaman
 [x]  4913  Aphetto Alchemist                        {1}{U}           Creature — Human Wizard
@@ -4977,7 +4977,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4984  Batterskull                              {5}              Artifact — Equipment
 [x]  4985  Joint Exploration                        {1}{U}           Instant
 [x]  4986  Mm'menon, the Right Hand                 {3}{U}{U}        Legendary Creature — Jellyfish Advisor
-[ ]  4987  Abomination of Llanowar                  {1}{B}{G}        Legendary Creature — Elf Horror
+[x]  4987  Abomination of Llanowar                  {1}{B}{G}        Legendary Creature — Elf Horror
 [x]  4988  Stadium Headliner                        {R}              Creature — Goblin Warrior
 [x]  4989  The Wanderer                             {3}{W}           Legendary Planeswalker
 [x]  4990  God-Eternal Rhonas                       {3}{G}{G}        Legendary Creature — Zombie God
