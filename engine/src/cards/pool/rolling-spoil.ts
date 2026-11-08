@@ -15,7 +15,7 @@ export default defineCard({
       { kind: "destroy", target: 0 },
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { B: 1 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "B", amount: { op: "gte", n: 1 } }] } },
         then: { kind: "modify-pt-all", filter: { type: "creature" }, power: -1, toughness: -1, duration: "end-of-turn" },
       },
     ],

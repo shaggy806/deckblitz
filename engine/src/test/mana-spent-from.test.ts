@@ -1,7 +1,7 @@
 /**
  * Where the mana spent to cast a spell came from: every unit of mana carries
  * its source's types as it made the mana (`ManaUnit.from`), a spell keeps
- * the lot as it's paid for (`GameObject.manaSpentFrom`), and a `manaFrom`
+ * the lot as it's paid for (`GameObject.manaSpentFrom`), and a `manaSpent`'s `from`
  * filter clause asks about it — "whenever you cast a spell, if mana from an
  * artifact was spent to cast it", "…from a Treasure".
  */
@@ -13,6 +13,7 @@ import { defineCard } from "../cards/define.js";
 import { createDefaultRegistry } from "../cards/registry.js";
 import { ScriptedController } from "../controller.js";
 import type { EffectSpec } from "../effects.js";
+import type { ManaFromSpec } from "../mana.js";
 import { Game } from "../game.js";
 import { asPlayerId } from "../primitives.js";
 import type { ObjectId } from "../primitives.js";
@@ -44,8 +45,8 @@ const DRUID = "Test Creature Mana Watcher";
 const WELLSPRING = "Test Creature Mana Wellspring";
 
 const gain = (amount: number): EffectSpec => ({ kind: "gain-life", amount });
-const onCast = (manaFrom: NonNullable<Extract<TriggerSpec, { on: "cast-spell" }>["filter"]>["manaFrom"]) =>
-  ({ on: "cast-spell", who: "you", filter: { manaFrom } }) as TriggerSpec;
+const onCast = ({ atLeast, ...from }: ManaFromSpec & { atLeast?: number }) =>
+  ({ on: "cast-spell", who: "you", filter: { manaSpent: [{ from, ...(atLeast !== undefined ? { amount: { op: "gte", n: atLeast } } : {}) }] } }) as TriggerSpec;
 
 const registry = createDefaultRegistry()
   .register(watcher(ARTIFICER, onCast({ type: "artifact" }), gain(1)))
@@ -138,9 +139,9 @@ describe("mana from an artifact", () => {
     spawn(game, "Forest");
     spawn(game, "Sol Ring");
     const bears = castBears(game);
-    expect(game.state.objects[bears].manaSpentFrom?.some((o) => o.types.includes("artifact"))).toBe(true);
+    expect(game.state.objects[bears].manaSpent?.some((unit) => unit.from?.types.includes("artifact"))).toBe(true);
     game.debugApplyEffect(A, { kind: "return-to-hand", target: 0 }, [{ kind: "object", object: bears }]);
-    expect(game.state.objects[bears].manaSpentFrom).toBeUndefined();
+    expect(game.state.objects[bears].manaSpent).toBeUndefined();
   });
 });
 

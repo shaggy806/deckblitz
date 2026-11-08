@@ -2,7 +2,7 @@
  * Brass's Tunnel-Grinder // Tecutlan, the Searing Rift: discard any number and
  * draw that many plus one; a bore counter at each end step you descended, three
  * of them transforming it; and the back's cast trigger, keyed to mana from this
- * very permanent (`manaFrom.fromSource`), discovering the spell's mana value.
+ * very permanent (`manaSpent`'s `from: { fromSource: true }`), discovering the spell's mana value.
  */
 import { describe, expect, it } from "vitest";
 

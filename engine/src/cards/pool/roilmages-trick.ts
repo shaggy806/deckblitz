@@ -21,7 +21,7 @@ export default defineCard({
       {
         kind: "modify-pt-all",
         filter: { type: "creature", controlledBy: "opponent" },
-        power: { product: [{ colorsSpentOf: "source" }, -1] },
+        power: { product: [{ manaSpentOf: "source", count: "colors" }, -1] },
         toughness: 0,
         duration: "end-of-turn",
       },

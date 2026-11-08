@@ -123,6 +123,7 @@ import _poolCinderbones from "../pool/cinderbones.js";
 import _poolCircleOfElders from "../pool/circle-of-elders.js";
 import _poolCircleOfSolace from "../pool/circle-of-solace.js";
 import _poolClaim from "../pool/claim.js";
+import _poolClayChampion from "../pool/clay-champion.js";
 import _poolClearTheMind from "../pool/clear-the-mind.js";
 import _poolCliffsideLookout from "../pool/cliffside-lookout.js";
 import _poolCloakOfInvisibility from "../pool/cloak-of-invisibility.js";
@@ -660,6 +661,7 @@ import _poolRiches from "../pool/riches.js";
 import _poolRiftburstHellion from "../pool/riftburst-hellion.js";
 import _poolRighteousWar from "../pool/righteous-war.js";
 import _poolRikkuResourcefulGuardian from "../pool/rikku-resourceful-guardian.js";
+import _poolRitualOfSubdual from "../pool/ritual-of-subdual.js";
 import _poolRiverBoa from "../pool/river-boa.js";
 import _poolRockSoldiers from "../pool/rock-soldiers.js";
 import _poolRockslideAmbush from "../pool/rockslide-ambush.js";
@@ -1058,6 +1060,7 @@ const shard: CardShard = {
     _poolCircleOfElders,
     _poolCircleOfSolace,
     _poolClaim,
+    _poolClayChampion,
     _poolClearTheMind,
     _poolCliffsideLookout,
     _poolCloakOfInvisibility,
@@ -1595,6 +1598,7 @@ const shard: CardShard = {
     _poolRiftburstHellion,
     _poolRighteousWar,
     _poolRikkuResourcefulGuardian,
+    _poolRitualOfSubdual,
     _poolRiverBoa,
     _poolRockSoldiers,
     _poolRockslideAmbush,

@@ -15,7 +15,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "enters-battlefield", counters: { kind: "crystal", amount: { colorsSpentOf: "source" } } },
+      replacement: { event: "enters-battlefield", counters: { kind: "crystal", amount: { manaSpentOf: "source", count: "colors" } } },
       text: CONVERGE_TEXT,
     },
   ],

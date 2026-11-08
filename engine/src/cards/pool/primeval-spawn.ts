@@ -17,7 +17,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "enters-battlefield", instead: { exileUnless: { manaSpent: { op: "gte", n: 1 } } } },
+      replacement: { event: "enters-battlefield", instead: { exileUnless: { manaSpent: [{ amount: { op: "gte", n: 1 } }] } } },
       text: ENTER_TEXT,
     },
   ],

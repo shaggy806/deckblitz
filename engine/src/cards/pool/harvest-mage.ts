@@ -1,6 +1,6 @@
 import { defineCard } from "../define.js";
 
-// Nemesis. `landManaInstead`'s `"any-color"` with `one`: one mana, the colour chosen as the land is
+// Nemesis. `manaProduction`'s `"any-color"` with `one`: one mana, the colour chosen as the land is
 // tapped, for each land its controller taps this turn.
 
 const TEXT =
@@ -22,7 +22,7 @@ export default defineCard({
       effect: {
         kind: "player-effect",
         duration: "end-of-turn",
-        landManaInstead: { produces: "any-color", tapper: "you", one: true },
+        manaProduction: { filter: { type: "land" }, produces: "any-color", tapper: "you", one: true },
       },
       resolve: null,
       text: TEXT,

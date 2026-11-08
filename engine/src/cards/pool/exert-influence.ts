@@ -20,7 +20,7 @@ export default defineCard({
     condition: {
       kind: "target",
       index: 0,
-      filter: { power: { op: "lte", n: { amount: { colorsSpentOf: "source" } } } },
+      filter: { power: { op: "lte", n: { amount: { manaSpentOf: "source", count: "colors" } } } },
     },
     then: { kind: "gain-control", target: 0, untilEndOfTurn: false },
   },

@@ -20,22 +20,32 @@ export const COLORS: readonly Color[] = ["W", "U", "B", "R", "G"];
 export const MANA_TYPES: readonly ManaType[] = ["W", "U", "B", "R", "G", "C"];
 
 /**
- * What a land tapped for mana produces instead of what its ability says
- * (rules 106.12, 614.1a) — one entry of `StaticAbility.landManaInstead`, or a
- * `player-effect`'s. Only the land's own mana is changed: what triggered mana
- * abilities add on the tap isn't the land's. See `Game.landManaInsteadFor`.
+ * What a permanent tapped for mana produces instead of what its ability says
+ * (rules 106.12b, 614.1a) — one entry of `StaticAbility.manaProduction`, or a
+ * `PlayerEffect`'s. Only the permanent's own mana is changed: what triggered
+ * mana abilities add on the tap isn't its own, and whatever the mana carries —
+ * a restriction, a rider — all of it carries (rule 106.6a). `produces` changes
+ * the type, `times` the amount; see `Game.manaProductionFor`.
  */
-export interface LandManaInstead {
-  /** Which lands — "Plains" (Reality Twist), "a nonbasic land" (Pale Moon),
-   * "a basic land you control" (Pulse of Llanowar); absent for any land. */
+export interface ManaProductionRule {
+  /** Which permanents, read from this rule's side: "Plains" (Reality Twist),
+   * `{ type: "land", notSupertype: "basic" }` (Pale Moon); absent for any
+   * permanent (Mana Reflection). */
   readonly filter?: CardFilter;
   /** The type it makes. `"any-color"` is "mana of a color of your choice"
    * (Pulse of Llanowar): chosen by whoever tapped it, as it's tapped, one
    * colour for all the land makes (its ruling). */
-  readonly produces: ManaType | "any-color";
+  readonly produces?: ManaType | "any-color";
   /** Whose tap it changes: this permanent's controller's (`"you"` — "if you
    * tap a land for mana") or anyone's (`"any"` — "if a land is tapped"). */
   readonly tapper: "you" | "any";
+  /** "If you tap a permanent for mana, it produces twice as much of that mana
+   * instead" (Mana Reflection; Nyxbloom Ancient's three). Several compound
+   * (the ruling). */
+  readonly times?: number;
+  /** "If a land is tapped for **two or more** mana" (Damping Sphere): applies
+   * only when the permanent would make at least this much. */
+  readonly atLeast?: number;
   /** "Instead of any other **color**" (Hall of Gemstone): {C} isn't a colour,
    * so colorless mana stays as it is (its ruling). */
   readonly colorsOnly?: true;
@@ -279,6 +289,60 @@ export const manaOriginMatches = (origin: ManaOrigin, spec: ManaFromSpec): boole
   (spec.type === undefined || origin.types.includes(spec.type)) &&
   (spec.subtype === undefined || hasSubtype(origin.subtypes, spec.subtype)) &&
   (spec.supertype === undefined || origin.supertypes.includes(spec.supertype));
+
+/**
+ * One unit of mana as it was spent on a spell or an activated ability: its
+ * type and what made it. A restriction or a rider has done its work by then,
+ * so a spent record keeps neither. `GameObject.manaSpent`, read by
+ * {@link spentManaCount}.
+ */
+export interface SpentMana {
+  readonly type: ManaType;
+  readonly from?: ManaOrigin;
+}
+
+/**
+ * What to count of the mana spent on something — the one read behind
+ * `CardFilter.manaSpent` and the `{ manaSpentOf }` amount.
+ *
+ * - `type`: only mana of this type or these types ("{C}", rule 106.1b).
+ * - `from`: only mana made by a matching source ("mana from a Treasure"; {S},
+ *   rule 107.4h).
+ * - `count`: `"units"` (the default) counts mana; `"colors"` the different
+ *   colours of it (converge, sunburst; colourless isn't a colour, rule 106.1b);
+ *   `"most-of-one-color"` the mana of the colour there's most of (Henge Walker).
+ * - `per`: how many whole groups of this many ("for each {G}{G} spent": two
+ *   and two more is two, and a third alone adds nothing).
+ */
+export interface ManaSpentQuery {
+  readonly type?: ManaType | readonly ManaType[];
+  readonly from?: ManaFromSpec;
+  readonly count?: "units" | "colors" | "most-of-one-color";
+  readonly per?: number;
+}
+
+/** How much of `units` `query` counts. `isFromSource` answers a `from`
+ * asking for `fromSource`, which needs the asker's own stint; without it,
+ * none is from the source. */
+export function spentManaCount(
+  units: readonly SpentMana[],
+  query: ManaSpentQuery,
+  isFromSource?: (origin: ManaOrigin) => boolean,
+): number {
+  const { type, from, count = "units", per } = query;
+  const types = type === undefined ? undefined : typeof type === "string" ? [type] : type;
+  const counted = units.filter((unit) => {
+    if (types !== undefined && !types.includes(unit.type)) return false;
+    if (from === undefined) return true;
+    if (unit.from === undefined || !manaOriginMatches(unit.from, from)) return false;
+    return from.fromSource !== true || isFromSource?.(unit.from) === true;
+  });
+  let n: number;
+  if (count === "units") n = counted.length;
+  else if (count === "colors") n = COLORS.filter((c) => counted.some((unit) => unit.type === c)).length;
+  else n = Math.max(0, ...COLORS.map((c) => counted.filter((unit) => unit.type === c).length));
+  return per === undefined ? n : Math.floor(n / per);
+}
 
 /** A triggered ability that fires when one unit of mana is spent on a
  * matching spell (rule 106.12 / 603.2e). */

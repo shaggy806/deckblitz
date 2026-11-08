@@ -4,7 +4,7 @@ import { defineCard } from "../define.js";
 //
 // The grant is Esika, God of the Tree's shape over every creature you control
 // (Inga and Esika included), with Clement's creature-spell restriction on the
-// mana. The intervening "if" is a `manaFrom` clause on the cast spell: where
+// mana. The intervening "if" is a `manaSpent`'s `from` clause on the cast spell: where
 // each unit of mana came from is fixed once it's paid, so asking again on
 // resolution can't change the answer.
 const MANA_TEXT = "{T}: Add one mana of any color. Spend this mana only to cast a creature spell.";
@@ -51,7 +51,7 @@ export default defineCard({
       trigger: {
         on: "cast-spell",
         who: "you",
-        filter: { type: "creature", manaFrom: { type: "creature", atLeast: 3 } },
+        filter: { type: "creature", manaSpent: [{ from: { type: "creature" }, amount: { op: "gte", n: 3 } }] },
       },
       targets: [],
       effect: { kind: "draw", amount: 1 },

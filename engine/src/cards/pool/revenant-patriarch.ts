@@ -16,7 +16,7 @@ export default defineCard({
   triggered: [
     {
       trigger: { on: "enters-battlefield", who: "self" },
-      condition: { kind: "source", filter: { manaSpentOfColors: { W: 1 } } },
+      condition: { kind: "source", filter: { manaSpent: [{ type: "W", amount: { op: "gte", n: 1 } }] } },
       targets: ["player"],
       effect: { kind: "skip-step", step: "combat", who: 0 },
       resolve: null,

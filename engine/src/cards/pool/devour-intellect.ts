@@ -1,7 +1,7 @@
 import { defineCard } from "../define.js";
 
 // EDHREC rank 20967. "If mana from a Treasure was spent to cast this spell"
-// reads the spell itself as it resolves (`manaFrom` on the source).
+// reads the spell itself as it resolves (`manaSpent`'s `from` on the source).
 
 export default defineCard({
   name: "Devour Intellect",
@@ -12,7 +12,7 @@ export default defineCard({
   targets: ["opponent"],
   effect: {
     kind: "conditional",
-    condition: { kind: "source", filter: { manaFrom: { subtype: "Treasure" } } },
+    condition: { kind: "source", filter: { manaSpent: [{ from: { subtype: "Treasure" } }] } },
     then: { kind: "discard-chosen", target: 0, filter: { notTypes: ["land"] } },
     else: { kind: "discard", target: 0, amount: 1 },
   },

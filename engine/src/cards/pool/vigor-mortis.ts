@@ -15,7 +15,7 @@ export default defineCard({
   targets: [{ kind: "card-in-graveyard", whose: "you", filter: { type: "creature" } }],
   effect: {
     kind: "conditional",
-    condition: { kind: "source", filter: { manaSpentOfColors: { G: 1 } } },
+    condition: { kind: "source", filter: { manaSpent: [{ type: "G", amount: { op: "gte", n: 1 } }] } },
     then: { kind: "put-onto-battlefield", target: 0, withCounters: { kind: "+1/+1", amount: 1 } },
     else: { kind: "put-onto-battlefield", target: 0 },
   },

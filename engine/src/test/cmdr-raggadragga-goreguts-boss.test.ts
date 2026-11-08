@@ -134,7 +134,7 @@ describe("Raggadragga, Goreguts Boss", () => {
       xValue: 6,
       targets: [{ kind: "player", player: B }],
     });
-    expect(game.state.objects[blaze].manaSpent).toBe(7);
+    expect(game.state.objects[blaze].manaSpent).toHaveLength(7);
     game.advanceUntil(settled);
     expect(game.state.objects[bears].tapped).toBe(false);
     expect(pt(game, bears)).toEqual([9, 9]);
@@ -158,7 +158,7 @@ describe("Raggadragga, Goreguts Boss", () => {
       xValue: 5,
       targets: [{ kind: "player", player: B }],
     });
-    expect(game.state.objects[blaze].manaSpent).toBe(6);
+    expect(game.state.objects[blaze].manaSpent).toHaveLength(6);
     game.advanceUntil(settled);
     expect(triggersOf(game, ragga)).toBe(0);
     expect(game.state.objects[bears].tapped).toBe(true);
@@ -178,7 +178,7 @@ describe("Raggadragga, Goreguts Boss", () => {
       (id) => game.state.objects[id].cardName === RAGGADRAGGA,
     )!;
     game.dispatch({ type: "cast-spell", player: A, card: ragga, targets: [] });
-    expect(game.state.objects[ragga].manaSpent).toBe(8);
+    expect(game.state.objects[ragga].manaSpent).toHaveLength(8);
     expect(game.state.zones.shared.stack).toEqual([ragga]);
     game.advanceUntil(settled);
     expect(game.state.objects[ragga].zone).toBe("battlefield");

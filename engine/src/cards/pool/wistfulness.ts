@@ -19,7 +19,7 @@ export default defineCard({
   triggered: [
     {
       trigger: { on: "enters-battlefield", who: "self" },
-      condition: { kind: "source", filter: { manaSpentOfColors: { G: 2 } } },
+      condition: { kind: "source", filter: { manaSpent: [{ type: "G", amount: { op: "gte", n: 2 } }] } },
       targets: [{ kind: "permanent", whose: "opponent", filter: { typesAnyOf: ["artifact", "enchantment"] } }],
       effect: { kind: "exile", target: 0 },
       resolve: null,
@@ -27,7 +27,7 @@ export default defineCard({
     },
     {
       trigger: { on: "enters-battlefield", who: "self" },
-      condition: { kind: "source", filter: { manaSpentOfColors: { U: 2 } } },
+      condition: { kind: "source", filter: { manaSpent: [{ type: "U", amount: { op: "gte", n: 2 } }] } },
       targets: [],
       effect: {
         kind: "sequence",

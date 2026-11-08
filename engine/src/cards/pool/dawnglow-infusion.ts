@@ -16,8 +16,8 @@ export default defineCard({
     kind: "gain-life",
     amount: {
       sum: [
-        { ifCondition: { kind: "source", filter: { manaSpentOfColors: { G: 1 } } }, then: "x", else: 0 },
-        { ifCondition: { kind: "source", filter: { manaSpentOfColors: { W: 1 } } }, then: "x", else: 0 },
+        { ifCondition: { kind: "source", filter: { manaSpent: [{ type: "G", amount: { op: "gte", n: 1 } }] } }, then: "x", else: 0 },
+        { ifCondition: { kind: "source", filter: { manaSpent: [{ type: "W", amount: { op: "gte", n: 1 } }] } }, then: "x", else: 0 },
       ],
     },
   },

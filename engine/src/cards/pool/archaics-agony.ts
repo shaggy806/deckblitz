@@ -14,7 +14,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "damage", amount: { colorsSpentOf: "source" }, target: 0 },
+      { kind: "damage", amount: { manaSpentOf: "source", count: "colors" }, target: 0 },
       {
         kind: "impulse-exile",
         amount: { excessDamageThisWay: true, to: 0 },

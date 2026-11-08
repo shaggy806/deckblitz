@@ -657,6 +657,7 @@ import _poolPardicMiner from "../pool/pardic-miner.js";
 import _poolPatriarsSeal from "../pool/patriars-seal.js";
 import _poolPatronOfTheOrochi from "../pool/patron-of-the-orochi.js";
 import _poolPearlShard from "../pool/pearl-shard.js";
+import _poolPeatBog from "../pool/peat-bog.js";
 import _poolPedanticLearning from "../pool/pedantic-learning.js";
 import _poolPeliaImmortalInnovator from "../pool/pelia-immortal-innovator.js";
 import _poolPendelhavenElder from "../pool/pendelhaven-elder.js";
@@ -1705,6 +1706,7 @@ const shard: CardShard = {
     _poolPatriarsSeal,
     _poolPatronOfTheOrochi,
     _poolPearlShard,
+    _poolPeatBog,
     _poolPedanticLearning,
     _poolPeliaImmortalInnovator,
     _poolPendelhavenElder,

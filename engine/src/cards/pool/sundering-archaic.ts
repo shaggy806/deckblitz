@@ -35,7 +35,7 @@ export default defineCard({
         {
           kind: "permanent",
           whose: "opponent",
-          filter: { notTypes: ["land"], manaValue: { op: "lte", n: { amount: { colorsSpentOf: "source" } } } },
+          filter: { notTypes: ["land"], manaValue: { op: "lte", n: { amount: { manaSpentOf: "source", count: "colors" } } } },
         },
       ],
       effect: { kind: "exile", target: 0 },

@@ -13,7 +13,7 @@ export default defineCard({
   targets: ["permanent"],
   effect: {
     kind: "conditional",
-    condition: { kind: "source", filter: { manaSpentOfColors: { R: 1, G: 1 } } },
+    condition: { kind: "source", filter: { manaSpent: [{ type: "R", amount: { op: "gte", n: 1 } }, { type: "G", amount: { op: "gte", n: 1 } }] } },
     then: {
       kind: "create-token-copy",
       of: 0,

@@ -19,7 +19,7 @@ export default defineCard({
   text: `Vigilance\n${COUNTER}\n${SAC}`,
   triggered: [
     {
-      trigger: { on: "cast-spell", who: "opponent", filter: { manaSpent: { op: "eq", n: 0 } } },
+      trigger: { on: "cast-spell", who: "opponent", filter: { manaSpent: [{ amount: { op: "eq", n: 0 } }] } },
       targets: [],
       effect: { kind: "counter", target: "trigger-object" },
       resolve: null,

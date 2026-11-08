@@ -4,7 +4,7 @@ import { defineCard } from "../define.js";
 //
 // - Cumulative upkeep—Pay {B} and 1 life: per age counter, {B} and 1 life in one payment
 //   (`andLife`, multiplied by the counters).
-// - Every land, whoever taps it, produces {B} instead of any other type (`landManaInstead`, rules
+// - Every land, whoever taps it, produces {B} instead of any other type (`manaProduction`, rules
 //   106.12, 614.1a): the amount kept.
 
 const UPKEEP_TEXT =
@@ -20,7 +20,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      landManaInstead: [{ produces: "B", tapper: "any" }],
+      manaProduction: [{ filter: { type: "land" }, produces: "B", tapper: "any" }],
       text: DARK_TEXT,
     },
   ],

@@ -8,7 +8,7 @@ import { defineCard } from "../define.js";
 //   [2004-10-04] You can choose a different color each time a basic land is tapped.
 //   [2004-10-04] You can choose the same color or mana the land would normally produce.
 //
-// `landManaInstead`'s `"any-color"`: the choice comes with the tap, as a five-colour land's does.
+// `manaProduction`'s `"any-color"`: the choice comes with the tap, as a five-colour land's does.
 
 const TEXT = "If a basic land you control is tapped for mana, it produces mana of a color of your choice instead of any other type.";
 
@@ -21,7 +21,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      landManaInstead: [{ filter: { supertype: "basic", controlledBy: "you" }, produces: "any-color", tapper: "any" }],
+      manaProduction: [{ filter: { type: "land", supertype: "basic", controlledBy: "you" }, produces: "any-color", tapper: "any" }],
       text: TEXT,
     },
   ],

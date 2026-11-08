@@ -249,6 +249,7 @@ import _poolDivinityOfPride from "../pool/divinity-of-pride.js";
 import _poolDonatelloWayWithMachines from "../pool/donatello-way-with-machines.js";
 import _poolDoraMilajeElite from "../pool/dora-milaje-elite.js";
 import _poolDoubleCleave from "../pool/double-cleave.js";
+import _poolDoublingCube from "../pool/doubling-cube.js";
 import _poolDoublingSeason from "../pool/doubling-season.js";
 import _poolDraconicDestiny from "../pool/draconic-destiny.js";
 import _poolDragonManReformedRobot from "../pool/dragon-man-reformed-robot.js";
@@ -1295,6 +1296,7 @@ const shard: CardShard = {
     _poolDonatelloWayWithMachines,
     _poolDoraMilajeElite,
     _poolDoubleCleave,
+    _poolDoublingCube,
     _poolDoublingSeason,
     _poolDraconicDestiny,
     _poolDragonManReformedRobot,

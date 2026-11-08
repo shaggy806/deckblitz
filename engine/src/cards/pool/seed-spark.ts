@@ -15,7 +15,7 @@ export default defineCard({
       { kind: "destroy", target: 0 },
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { G: 1 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "G", amount: { op: "gte", n: 1 } }] } },
         then: { kind: "create-token", token: "Saproling Token", count: 2 },
       },
     ],

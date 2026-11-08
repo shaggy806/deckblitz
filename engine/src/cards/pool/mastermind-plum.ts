@@ -32,9 +32,9 @@ export default defineCard({
       text: "Whenever Mastermind Plum attacks, exile up to one target card from a graveyard. If an artifact card was exiled this way, create a Treasure token.",
     },
     {
-      // Inga and Esika's `manaFrom` clause: what was spent never changes, so
+      // Inga and Esika's `manaSpent`'s `from` clause: what was spent never changes, so
       // the intervening-if reads the same as it resolves.
-      trigger: { on: "cast-spell", who: "you", filter: { manaFrom: { subtype: "Treasure" } } },
+      trigger: { on: "cast-spell", who: "you", filter: { manaSpent: [{ from: { subtype: "Treasure" } }] } },
       targets: [],
       effect: {
         kind: "sequence",

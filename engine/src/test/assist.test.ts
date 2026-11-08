@@ -78,8 +78,8 @@ describe("assist (rule 702.132a)", () => {
     expect(tappedCount(game, islands)).toBe(4);
     expect(tappedCount(game, forests)).toBe(4);
     // All of it mana spent to cast it, the helper's colours included.
-    expect(game.state.objects[binox].manaSpent).toBe(8);
-    expect(game.state.objects[binox].manaSpentColors).toEqual(["U", "G"]);
+    expect(game.state.objects[binox].manaSpent).toHaveLength(8);
+    expect(new Set(game.state.objects[binox].manaSpent?.map((unit) => unit.type))).toEqual(new Set(["U", "G"]));
     // The caster gets priority after casting (rule 601.2i).
     expect(game.state.priority.holder).toBe(A);
     settle(game);

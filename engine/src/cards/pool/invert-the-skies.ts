@@ -25,7 +25,7 @@ export default defineCard({
     effects: [
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { G: 1 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "G", amount: { op: "gte", n: 1 } }] } },
         then: {
           kind: "lose-keywords",
           filter: { type: "creature", controlledBy: "opponent" },
@@ -35,7 +35,7 @@ export default defineCard({
       },
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { U: 1 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "U", amount: { op: "gte", n: 1 } }] } },
         then: {
           kind: "grant-keyword-all",
           filter: { type: "creature", controlledBy: "you" },

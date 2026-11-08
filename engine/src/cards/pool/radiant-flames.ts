@@ -11,5 +11,5 @@ export default defineCard({
   types: ["sorcery"],
   text: TEXT,
   targets: [],
-  effect: { kind: "damage-all", filter: { type: "creature" }, amount: { colorsSpentOf: "source" } },
+  effect: { kind: "damage-all", filter: { type: "creature" }, amount: { manaSpentOf: "source", count: "colors" } },
 });

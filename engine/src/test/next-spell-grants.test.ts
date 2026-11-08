@@ -10,7 +10,7 @@
  *   permission (Savage Summoning — 601.3b);
  * - `enters-with-counters`' `"sunburst"` from a next-spell delayed trigger
  *   (Solar Array — 702.44a);
- * - `grantsToSpells.firstEachTurn` over a `castFrom` or `manaFrom` filter
+ * - `grantsToSpells.firstEachTurn` over a `castFrom` or `manaSpent`'s `from` filter
  *   (Wild-Magic Sorcerer, Rain of Riches).
  */
 

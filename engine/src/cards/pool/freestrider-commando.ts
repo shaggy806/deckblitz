@@ -25,7 +25,7 @@ export default defineCard({
         counters: {
           kind: "+1/+1",
           amount: {
-            ifCondition: { kind: "source", filter: { manaSpent: { op: "eq", n: 0 } } },
+            ifCondition: { kind: "source", filter: { manaSpent: [{ amount: { op: "eq", n: 0 } }] } },
             then: 2,
             else: 0,
           },

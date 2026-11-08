@@ -407,6 +407,7 @@ import _poolHearthhullTheWorldseed from "../pool/hearthhull-the-worldseed.js";
 import _poolHeartmender from "../pool/heartmender.js";
 import _poolHecatomb from "../pool/hecatomb.js";
 import _poolHelmOfPossession from "../pool/helm-of-possession.js";
+import _poolHickoryWoodlot from "../pool/hickory-woodlot.js";
 import _poolHiddenPath from "../pool/hidden-path.js";
 import _poolHonorboundPage from "../pool/honorbound-page.js";
 import _poolHornetSting from "../pool/hornet-sting.js";
@@ -1396,6 +1397,7 @@ const shard: CardShard = {
     _poolHeartmender,
     _poolHecatomb,
     _poolHelmOfPossession,
+    _poolHickoryWoodlot,
     _poolHiddenPath,
     _poolHonorboundPage,
     _poolHornetSting,

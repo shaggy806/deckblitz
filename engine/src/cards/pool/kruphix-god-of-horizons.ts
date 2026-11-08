@@ -57,7 +57,7 @@ export default defineCard({
     { affects: { scope: "self" }, noMaxHandSize: true, text: "You have no maximum hand size." },
     {
       affects: { scope: "self" },
-      unspentManaBecomesColorless: true,
+      unspentManaBecomes: "C",
       text: "If you would lose unspent mana, that mana becomes colorless instead.",
     },
   ],

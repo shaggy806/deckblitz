@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 
 // "The first spell you cast each turn that mana from a Treasure was spent to
 // cast has cascade": a `grantsToSpells` cascade with `firstEachTurn` over a
-// `manaFrom` filter — the spells cast earlier this turn are each read as
+// `manaSpent`'s `from` filter — the spells cast earlier this turn are each read as
 // they were cast, so only one paid for with Treasure mana uses it up.
 
 const CASCADE = {
@@ -34,7 +34,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      grantsToSpells: { filter: { manaFrom: { subtype: "Treasure" } }, firstEachTurn: true, triggered: [CASCADE] },
+      grantsToSpells: { filter: { manaSpent: [{ from: { subtype: "Treasure" } }] }, firstEachTurn: true, triggered: [CASCADE] },
       text: "The first spell you cast each turn that mana from a Treasure was spent to cast has cascade.",
     },
   ],

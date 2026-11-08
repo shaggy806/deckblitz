@@ -25,7 +25,7 @@ export default defineCard({
   text: `Haste\n${TEXT}`,
   triggered: [
     {
-      trigger: { on: "cast-spell", who: "you", filter: { notTypes: ["creature"], manaSpent: { op: "gte", n: 4 } } },
+      trigger: { on: "cast-spell", who: "you", filter: { notTypes: ["creature"], manaSpent: [{ amount: { op: "gte", n: 4 } }] } },
       targets: [],
       effect: { kind: "create-token", token: "Treasure Token", count: 1 },
       resolve: null,

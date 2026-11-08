@@ -17,7 +17,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "tap-for-mana", instead: { modify: { times: 3 } } },
+      manaProduction: [{ tapper: "you", times: 3 }],
       text: TEXT,
     },
   ],

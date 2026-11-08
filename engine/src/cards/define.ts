@@ -25,10 +25,10 @@ import type {
   SpellResolver,
   ThisWayKind,
 } from "../effects.js";
-import type { AggregateOf, AggregateSpec, CardFilter, NumCompare } from "../filter.js";
+import type { AggregateOf, AggregateSpec, CardFilter, ManaSpentClause, NumCompare } from "../filter.js";
 import type { CardNameChoice } from "../card-names.js";
 import type { CompanionCondition } from "../companion.js";
-import type { Color, LandManaInstead, ManaFromSpec, ManaType, SpendAs } from "../mana.js";
+import type { Color, ManaFromSpec, ManaProductionRule, ManaType, SpendAs } from "../mana.js";
 import type { ReplacementSpec } from "../replacements.js";
 import type { DelayedTriggerTiming, HeldPlayerCounter, PlayerCounterKind, JournalWhat, ZoneType } from "../state.js";
 import type { JournalWindow } from "../journal.js";
@@ -1578,6 +1578,13 @@ export type StaticCondition =
    * meaningful inside a `conditional` effect.
    */
   | { readonly kind: "target-chosen"; readonly index: number }
+  /** What was spent to activate the ability resolving (rules 602.2b, 608.2):
+   * Jetmir's Fixer's "if mana from a Treasure was spent to activate this
+   * ability". Only an effect's condition; nothing paid for a static. */
+  | { readonly kind: "ability-mana-spent"; readonly clauses: readonly ManaSpentClause[] }
+  /** You have at least `atLeast` unspent mana (rule 106.4), of `type` if given:
+   * Ozai's "as long as you have six or more unspent mana". */
+  | { readonly kind: "unspent-mana"; readonly atLeast: number; readonly type?: ManaType }
   /**
    * "If that object is ...": whether one object matches, read as the ref
    * reads it (rule 608.2h): "if the sacrificed creature was a Thrull" (`{ paid:
@@ -2264,6 +2271,9 @@ export interface StaticAbility {
     /** That player's running total for a turn stat — Knowledge Is Power's "+X/+X,
      * where X is the number of cards you've drawn this turn". */
     readonly turnStat?: TurnStat;
+    /** That player's unspent mana (rule 106.4): `{}` for all of it, `{ type:
+     * "G" }` for "each unspent green mana you have" (Omnath, Locus of Mana). */
+    readonly unspentMana?: { readonly type?: ManaType };
     /** Domain: the basic land types among lands that player controls — Manaforce
      * Mace's "+1/+1 for each basic land type among lands you control". */
     readonly basicLandTypes?: true;
@@ -3110,7 +3120,7 @@ export interface StaticAbility {
   readonly keepsUnspentManaEachPlayer?: true;
   /** "If you would lose unspent mana, that mana becomes **black** instead"
    * (Omnath, Locus of All; Ozai, the Phoenix King's red) — Kruphix's
-   * replacement (`unspentManaBecomesColorless`) to another type: every unit
+   * replacement to another type, or to `"C"` itself (Kruphix): every unit
    * its controller would lose as a step or phase ends stays, that type, its
    * restrictions and riders kept. Where several would apply to the same
    * mana, one does (rule 616.1 — the controller's to choose; the engine takes
@@ -3134,20 +3144,13 @@ export interface StaticAbility {
    * land's and isn't changed. Where several would apply to one tap, one does
    * (rule 616.1 — the tapping player's to choose; the engine takes the
    * newest). Read off the battlefield. */
-  readonly landManaInstead?: readonly LandManaInstead[];
+  readonly manaProduction?: readonly ManaProductionRule[];
   /** "While voting, you may vote an additional time" (Tivit, Seller of
    * Secrets — rule 701.38d): as its controller votes, they may cast one more
    * vote for each of these they control, at the same time (the extra vote is
    * optional, asked after their first). Read off the battlefield like
    * `keepsUnspentMana`; `affects` is ignored. */
   readonly votesAdditionalTime?: boolean;
-  /** "If you would lose unspent mana, that mana becomes colorless instead"
-   * (Kruphix, God of Horizons — a replacement, rule 614): every unit its
-   * controller would lose as a step or phase ends (rule 500.4) stays in
-   * their pool as colorless mana, its restrictions and riders kept (the
-   * rulings). Once it's gone, the mana empties as the step or phase it left
-   * in ends. Read off the battlefield like `keepsUnspentMana`. */
-  readonly unspentManaBecomesColorless?: boolean;
   /** "Reveal the first card you draw on each of your turns" (Keranos, God of
    * Storms — rule 701.16): as its controller draws their first card of a
    * turn of theirs, every player sees it. Its "whenever you reveal a land
@@ -3752,6 +3755,10 @@ export interface StaticAbility {
     readonly reduceGeneric?: EffectAmount;
     /** As `reduceGeneric`, added before anything is taken off (601.2f). */
     readonly increaseGeneric?: EffectAmount;
+    /** This much more for each other spell the **caster** has cast this turn
+     * (Damping Sphere): read for whoever is casting, where `increaseGeneric`
+     * reads from this permanent's side. */
+    readonly increasePerOtherSpellByCaster?: number;
     /** Which casts it reaches, besides `applies` — see {@link SpellCastClause}. */
     readonly when?: SpellCastClause;
     /** Coloured pips added to the cost ("Black spells you cast cost {B} more

@@ -17,12 +17,12 @@ export default defineCard({
     effects: [
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { U: 1 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "U", amount: { op: "gte", n: 1 } }] } },
         then: { kind: "return-to-hand", target: 0 },
       },
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { B: 1 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "B", amount: { op: "gte", n: 1 } }] } },
         then: { kind: "discard-chosen", target: 1, filter: { notTypes: ["land"] } },
       },
     ],

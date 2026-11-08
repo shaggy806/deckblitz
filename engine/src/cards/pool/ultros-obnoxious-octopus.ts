@@ -24,7 +24,7 @@ export default defineCard({
   text: `${STUN_TEXT} (If a permanent with a stun counter would become untapped, remove one from it instead.)\n${GROW_TEXT}`,
   triggered: [
     {
-      trigger: { on: "cast-spell", who: "you", filter: { notTypes: ["creature"], manaSpent: { op: "gte", n: 4 } } },
+      trigger: { on: "cast-spell", who: "you", filter: { notTypes: ["creature"], manaSpent: [{ amount: { op: "gte", n: 4 } }] } },
       targets: ["creature-an-opponent-controls"],
       effect: {
         kind: "sequence",
@@ -37,7 +37,7 @@ export default defineCard({
       text: STUN_TEXT,
     },
     {
-      trigger: { on: "cast-spell", who: "you", filter: { notTypes: ["creature"], manaSpent: { op: "gte", n: 8 } } },
+      trigger: { on: "cast-spell", who: "you", filter: { notTypes: ["creature"], manaSpent: [{ amount: { op: "gte", n: 8 } }] } },
       targets: [],
       effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 8 },
       resolve: null,

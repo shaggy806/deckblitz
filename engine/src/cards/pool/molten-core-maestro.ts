@@ -24,7 +24,7 @@ export default defineCard({
           { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
           {
             kind: "conditional",
-            condition: { kind: "trigger-object", filter: { manaSpent: { op: "gte", n: 5 } } },
+            condition: { kind: "trigger-object", filter: { manaSpent: [{ amount: { op: "gte", n: 5 } }] } },
             then: { kind: "add-mana", mana: "R", amount: { powerOf: "source" } },
           },
         ],

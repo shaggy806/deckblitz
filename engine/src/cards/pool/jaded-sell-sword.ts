@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 // EDHREC rank 23040.
 //
 // The intervening if (rule 603.4) reads where the mana spent to cast it came
-// from, which the permanent keeps from its spell (`manaFrom` — Smaug, Wicked
+// from, which the permanent keeps from its spell (`manaSpent`'s `from` — Smaug, Wicked
 // Worm's clause), checked as it triggers and again as it resolves. Put onto
 // the battlefield without being cast, it spent nothing and doesn't trigger.
 const TEXT =
@@ -21,7 +21,7 @@ export default defineCard({
   triggered: [
     {
       trigger: { on: "enters-battlefield", who: "self" },
-      condition: { kind: "source", filter: { manaFrom: { subtype: "Treasure" } } },
+      condition: { kind: "source", filter: { manaSpent: [{ from: { subtype: "Treasure" } }] } },
       targets: [],
       effect: {
         kind: "sequence",

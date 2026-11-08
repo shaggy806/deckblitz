@@ -1,6 +1,6 @@
 import { defineCard } from "../define.js";
 
-// Adamant: the white mana actually spent to cast it (`manaSpentOfColors`),
+// Adamant: the white mana actually spent to cast it (`manaSpent`),
 // read as it resolves.
 const ADAMANT =
   "Adamant — If at least three white mana was spent to cast this spell, creatures you control gain vigilance until end of turn.";
@@ -17,7 +17,7 @@ export default defineCard({
       { kind: "add-counter-all", filter: { type: "creature", controlledBy: "you" }, counter: "+1/+1", amount: 1 },
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { W: 3 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "W", amount: { op: "gte", n: 3 } }] } },
         then: {
           kind: "grant-keyword-all",
           filter: { type: "creature", controlledBy: "you" },

@@ -89,6 +89,7 @@ import _poolBiorhythm from "../pool/biorhythm.js";
 import _poolBirgiGodOfStorytelling from "../pool/birgi-god-of-storytelling.js";
 import _poolBismuthMindrender from "../pool/bismuth-mindrender.js";
 import _poolBiteDown from "../pool/bite-down.js";
+import _poolBladecoilSerpent from "../pool/bladecoil-serpent.js";
 import _poolBladegriffPrototype from "../pool/bladegriff-prototype.js";
 import _poolBlazemireVerge from "../pool/blazemire-verge.js";
 import _poolBlessedWind from "../pool/blessed-wind.js";
@@ -615,6 +616,7 @@ import _poolReconstruction from "../pool/reconstruction.js";
 import _poolRedGhostIntangibleGenius from "../pool/red-ghost-intangible-genius.js";
 import _poolReefPirates from "../pool/reef-pirates.js";
 import _poolRemedy from "../pool/remedy.js";
+import _poolRemoteFarm from "../pool/remote-farm.js";
 import _poolRenderInert from "../pool/render-inert.js";
 import _poolRepelTheDarkness from "../pool/repel-the-darkness.js";
 import _poolReprocess from "../pool/reprocess.js";
@@ -1054,6 +1056,7 @@ const shard: CardShard = {
     _poolBirgiGodOfStorytelling,
     _poolBismuthMindrender,
     _poolBiteDown,
+    _poolBladecoilSerpent,
     _poolBladegriffPrototype,
     _poolBlazemireVerge,
     _poolBlessedWind,
@@ -1580,6 +1583,7 @@ const shard: CardShard = {
     _poolRedGhostIntangibleGenius,
     _poolReefPirates,
     _poolRemedy,
+    _poolRemoteFarm,
     _poolRenderInert,
     _poolRepelTheDarkness,
     _poolReprocess,

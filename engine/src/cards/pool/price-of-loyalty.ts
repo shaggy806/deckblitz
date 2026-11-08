@@ -18,7 +18,7 @@ export default defineCard({
       { kind: "grant-keyword", target: 0, keyword: "haste", duration: "end-of-turn" },
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaFrom: { subtype: "Treasure" } } },
+        condition: { kind: "source", filter: { manaSpent: [{ from: { subtype: "Treasure" } }] } },
         then: { kind: "modify-pt", target: 0, power: 2, toughness: 0, duration: "end-of-turn" },
       },
     ],

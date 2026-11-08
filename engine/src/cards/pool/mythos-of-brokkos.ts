@@ -13,7 +13,7 @@ export default defineCard({
     effects: [
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { U: 1, B: 1 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "U", amount: { op: "gte", n: 1 } }, { type: "B", amount: { op: "gte", n: 1 } }] } },
         then: { kind: "search-library", filter: {}, destination: "graveyard", min: 1, max: 1 },
       },
       {

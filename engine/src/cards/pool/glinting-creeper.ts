@@ -18,7 +18,7 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "enters-battlefield",
-        counters: { kind: "+1/+1", amount: { product: [{ colorsSpentOf: "source" }, 2] } },
+        counters: { kind: "+1/+1", amount: { product: [{ manaSpentOf: "source", count: "colors" }, 2] } },
       },
       text: CONVERGE_TEXT,
     },

@@ -29,7 +29,7 @@ export default defineCard({
   text: `${CAST_TEXT}\n${BLOW_TEXT}`,
   triggered: [
     {
-      trigger: { on: "cast-spell", who: "you", filter: { notTypes: ["creature"], manaSpent: { op: "gte", n: 4 } } },
+      trigger: { on: "cast-spell", who: "you", filter: { notTypes: ["creature"], manaSpent: [{ amount: { op: "gte", n: 4 } }] } },
       targets: [],
       effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
       resolve: null,

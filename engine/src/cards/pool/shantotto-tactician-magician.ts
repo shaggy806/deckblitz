@@ -38,7 +38,7 @@ export default defineCard({
           },
           {
             kind: "conditional",
-            condition: { kind: "trigger-object", filter: { manaSpent: { op: "gte", n: 4 } } },
+            condition: { kind: "trigger-object", filter: { manaSpent: [{ amount: { op: "gte", n: 4 } }] } },
             then: { kind: "draw", amount: 1 },
           },
         ],

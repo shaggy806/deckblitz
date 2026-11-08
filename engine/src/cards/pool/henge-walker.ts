@@ -1,6 +1,6 @@
 import { defineCard } from "../define.js";
 
-// Adamant on three mana of any one colour (`manaSpentOfOneColor`), as an
+// Adamant on three mana of any one colour (`manaSpent`'s `count: "most-of-one-color"`), as an
 // enters replacement.
 const ADAMANT =
   "Adamant — If at least three mana of the same color was spent to cast this spell, this creature enters with a +1/+1 counter on it.";
@@ -17,7 +17,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      condition: { kind: "source", filter: { manaSpentOfOneColor: 3 } },
+      condition: { kind: "source", filter: { manaSpent: [{ count: "most-of-one-color", amount: { op: "gte", n: 3 } }] } },
       replacement: { event: "enters-battlefield", counters: { kind: "+1/+1", amount: 1 } },
       text: ADAMANT,
     },

@@ -18,7 +18,7 @@ export default defineCard({
       targets: ["player"],
       effect: {
         kind: "conditional",
-        condition: { kind: "trigger-object", filter: { manaSpent: { op: "gte", n: 5 } } },
+        condition: { kind: "trigger-object", filter: { manaSpent: [{ amount: { op: "gte", n: 5 } }] } },
         then: { kind: "mill", target: 0, amount: 10 },
         else: { kind: "mill", target: 0, amount: 3 },
       },

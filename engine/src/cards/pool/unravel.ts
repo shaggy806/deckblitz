@@ -17,7 +17,7 @@ export default defineCard({
   targets: ["spell"],
   effect: {
     kind: "conditional",
-    condition: { kind: "target", index: 0, filter: { manaSpent: { op: "lt", n: { own: "manaValue" } } } },
+    condition: { kind: "target", index: 0, filter: { manaSpent: [{ amount: { op: "lt", n: { own: "manaValue" } } }] } },
     then: {
       kind: "sequence",
       effects: [

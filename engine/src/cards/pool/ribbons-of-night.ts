@@ -14,7 +14,7 @@ export default defineCard({
       { kind: "gain-life", amount: 4 },
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { U: 1 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "U", amount: { op: "gte", n: 1 } }] } },
         then: { kind: "draw", amount: 1 },
       },
     ],

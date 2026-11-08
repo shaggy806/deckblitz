@@ -1,7 +1,7 @@
 /**
  * A land tapped for mana producing another type instead (rules 106.12,
  * 614.1a): for a turn, its controller's own (Deep Water — a `player-effect`'s
- * `landManaInstead`), every land (Infernal Darkness) or every land of a type
+ * `manaProduction`), every land (Infernal Darkness) or every land of a type
  * (Reality Twist — `StaticAbility.landManaInstead`). The amount is kept; the
  * auto-payer and the offered activations see the new type.
  */

@@ -19,7 +19,7 @@ export default defineCard({
   triggered: [
     {
       trigger: { on: "enters-battlefield", who: "self" },
-      condition: { kind: "source", filter: { manaSpentOfColors: { W: 2 } } },
+      condition: { kind: "source", filter: { manaSpent: [{ type: "W", amount: { op: "gte", n: 2 } }] } },
       targets: [
         { kind: "card-in-graveyard", whose: "you", filter: { type: "creature", manaValue: { op: "lte", n: 3 } } },
       ],
@@ -29,7 +29,7 @@ export default defineCard({
     },
     {
       trigger: { on: "enters-battlefield", who: "self" },
-      condition: { kind: "source", filter: { manaSpentOfColors: { B: 2 } } },
+      condition: { kind: "source", filter: { manaSpent: [{ type: "B", amount: { op: "gte", n: 2 } }] } },
       targets: [{ kind: "optional", of: "creature" }],
       effect: { kind: "add-counter", target: 0, counter: "-1/-1", amount: 3 },
       resolve: null,

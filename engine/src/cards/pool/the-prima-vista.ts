@@ -27,7 +27,7 @@ export default defineCard({
   text: `Flying\n${CAST_TEXT}\n${crewText(2)}`,
   triggered: [
     {
-      trigger: { on: "cast-spell", who: "you", filter: { notTypes: ["creature"], manaSpent: { op: "gte", n: 4 } } },
+      trigger: { on: "cast-spell", who: "you", filter: { notTypes: ["creature"], manaSpent: [{ amount: { op: "gte", n: 4 } }] } },
       targets: [],
       effect: { kind: "add-types", target: "source", addTypes: ["artifact", "creature"], duration: "end-of-turn" },
       resolve: null,

@@ -610,6 +610,7 @@ import _poolOverload from "../pool/overload.js";
 import _poolOverseerOfTheDamned from "../pool/overseer-of-the-damned.js";
 import _poolOversoldCemetery from "../pool/oversold-cemetery.js";
 import _poolOverzealousMuscle from "../pool/overzealous-muscle.js";
+import _poolParagonOfModernity from "../pool/paragon-of-modernity.js";
 import _poolParishBladeTrainee from "../pool/parish-blade-trainee.js";
 import _poolPassionateArchaeologist from "../pool/passionate-archaeologist.js";
 import _poolPathOfTheSchemer from "../pool/path-of-the-schemer.js";
@@ -1625,6 +1626,7 @@ const shard: CardShard = {
     _poolOverseerOfTheDamned,
     _poolOversoldCemetery,
     _poolOverzealousMuscle,
+    _poolParagonOfModernity,
     _poolParishBladeTrainee,
     _poolPassionateArchaeologist,
     _poolPathOfTheSchemer,

@@ -24,7 +24,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "enters-battlefield", counters: { kind: "+1/+1", amount: { colorsSpentOf: "source" } } },
+      replacement: { event: "enters-battlefield", counters: { kind: "+1/+1", amount: { manaSpentOf: "source", count: "colors" } } },
       text: CONVERGE_TEXT,
     },
   ],
@@ -36,7 +36,7 @@ export default defineCard({
         kind: "enters-with-counters",
         target: "trigger-object",
         counter: "+1/+1",
-        amount: { colorsSpentOf: "trigger-object" },
+        amount: { manaSpentOf: "trigger-object", count: "colors" },
       },
       resolve: null,
       text: CAST_TEXT,

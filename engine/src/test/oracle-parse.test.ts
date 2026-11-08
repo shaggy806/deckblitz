@@ -4441,7 +4441,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     );
     expect(wanderer.static[0].replacement).toEqual({
       event: "enters-battlefield",
-      counters: { kind: "+1/+1", amount: { colorsSpentOf: "source" } },
+      counters: { kind: "+1/+1", amount: { manaSpentOf: "source", count: "colors" } },
     });
     expect(wanderer.triggered[0].trigger).toEqual({ on: "dies", who: "self" });
     expect(wanderer.complete).toBe(true);
@@ -7367,7 +7367,7 @@ describe("one-shot grants to the next or first matching spell", () => {
     });
     expect(
       grant("Rain of Riches", "The first spell you cast each turn that mana from a Treasure was spent to cast has cascade."),
-    ).toEqual({ filter: { manaFrom: { subtype: "Treasure" } }, firstEachTurn: true, triggered: [CASCADE] });
+    ).toEqual({ filter: { manaSpent: [{ from: { subtype: "Treasure" } }] }, firstEachTurn: true, triggered: [CASCADE] });
   });
 });
 
@@ -10833,42 +10833,52 @@ describe("a static acting on a player", () => {
     expect(cub.triggered[0].trigger).toEqual({ on: "becomes-target", who: "self", firstTimeEachTurn: true });
   });
 
+  it("reads a size off the pool and the two new land rules (theme 13)", () => {
+    const omnath = face("Legendary Creature — Elemental", "~ gets +1/+1 for each unspent green mana you have.");
+    expect(omnath.complete).toBe(true);
+    expect(omnath.static[0].grantPtPerCount).toEqual({ unspentMana: { type: "G" }, pt: [1, 1] });
+    const sphere = face("Artifact", "If a land is tapped for two or more mana, it produces {C} instead of any other type and amount.");
+    expect(sphere.static[0].manaProduction).toEqual([{ filter: { type: "land" }, produces: "C", tapper: "any", one: true, atLeast: 2 }]);
+    const ritual = face("Enchantment", "If a land is tapped for mana, it produces colorless mana instead of any other type.");
+    expect(ritual.static[0].manaProduction).toEqual([{ filter: { type: "land" }, produces: "C", tapper: "any" }]);
+  });
+
   it("reads a land tapped for mana producing another type (rules 106.12, 614.1a)", () => {
     const darkness = face("Enchantment", "If a land is tapped for mana, it produces {B} instead of any other type.");
     expect(darkness.complete).toBe(true);
-    expect(darkness.static[0].landManaInstead).toEqual([{ produces: "B", tapper: "any" }]);
+    expect(darkness.static[0].manaProduction).toEqual([{ filter: { type: "land" }, produces: "B", tapper: "any" }]);
     const twist = face(
       "Enchantment",
       "If tapped for mana, Plains produce {R}, Swamps produce {G}, Mountains produce {W}, and Forests produce {B} instead of any other type.",
     );
     expect(twist.complete).toBe(true);
-    expect(twist.static[0].landManaInstead).toEqual([
-      { filter: { subtype: "Plains" }, produces: "R", tapper: "any" },
-      { filter: { subtype: "Swamp" }, produces: "G", tapper: "any" },
-      { filter: { subtype: "Mountain" }, produces: "W", tapper: "any" },
-      { filter: { subtype: "Forest" }, produces: "B", tapper: "any" },
+    expect(twist.static[0].manaProduction).toEqual([
+      { filter: { type: "land", subtype: "Plains" }, produces: "R", tapper: "any" },
+      { filter: { type: "land", subtype: "Swamp" }, produces: "G", tapper: "any" },
+      { filter: { type: "land", subtype: "Mountain" }, produces: "W", tapper: "any" },
+      { filter: { type: "land", subtype: "Forest" }, produces: "B", tapper: "any" },
     ]);
     const water = face("Enchantment", "{U}: Until end of turn, if you tap a land you control for mana, it produces {U} instead of any other type.");
     expect(water.complete).toBe(true);
-    expect(water.activated[0].effect).toEqual({ kind: "player-effect", duration: "end-of-turn", landManaInstead: "U" });
+    expect(water.activated[0].effect).toEqual({ kind: "player-effect", duration: "end-of-turn", manaProduction: { filter: { type: "land", controlledBy: "you" }, produces: "U", tapper: "you" } });
     const contamination = face("Enchantment", "If a land is tapped for mana, it produces {B} instead of any other type and amount.");
-    expect(contamination.static[0].landManaInstead).toEqual([{ produces: "B", tapper: "any", one: true }]);
+    expect(contamination.static[0].manaProduction).toEqual([{ filter: { type: "land" }, produces: "B", tapper: "any", one: true }]);
     const pulse = face("Enchantment", "If a basic land you control is tapped for mana, it produces mana of a color of your choice instead of any other type.");
-    expect(pulse.static[0].landManaInstead).toEqual([
-      { filter: { supertype: "basic", controlledBy: "you" }, produces: "any-color", tapper: "any" },
+    expect(pulse.static[0].manaProduction).toEqual([
+      { filter: { type: "land", supertype: "basic", controlledBy: "you" }, produces: "any-color", tapper: "any" },
     ]);
     const moon = face("Instant", "Until end of turn, if a player taps a nonbasic land for mana, it produces colorless mana instead of any other type.");
     expect(moon.complete).toBe(true);
     expect(moon.effect).toEqual({
       kind: "player-effect",
       duration: "end-of-turn",
-      landManaInstead: { filter: { notSupertype: "basic" }, produces: "C", tapper: "any" },
+      manaProduction: { filter: { type: "land", notSupertype: "basic" }, produces: "C", tapper: "any" },
     });
     const mage = face("Creature", "{G}, {T}, Discard a card: Until end of turn, if you tap a land for mana, it produces one mana of a color of your choice instead of any other type and amount.");
     expect(mage.activated[0].effect).toEqual({
       kind: "player-effect",
       duration: "end-of-turn",
-      landManaInstead: { produces: "any-color", tapper: "you", one: true },
+      manaProduction: { filter: { type: "land" }, produces: "any-color", tapper: "you", one: true },
     });
     const hall = face(
       "World Enchantment",
@@ -10933,7 +10943,7 @@ describe("a static acting on a player", () => {
   it("reads what happens to unspent mana as steps and phases end (rule 500.4)", () => {
     const stone = face("Artifact", "If you would lose unspent mana, that mana becomes colorless instead.");
     expect(stone.complete).toBe(true);
-    expect(stone.static[0].unspentManaBecomesColorless).toBe(true);
+    expect(stone.static[0].unspentManaBecomes).toBe("C");
     const omnath = face("Legendary Creature", "If you would lose unspent mana, that mana becomes black instead.");
     expect(omnath.static[0].unspentManaBecomes).toBe("B");
     const upwelling = face("Enchantment", "Players don't lose unspent mana as steps and phases end.");
@@ -15227,7 +15237,7 @@ describe("a cast as this resolves, on its own terms", () => {
     expect(mythos.complete).toBe(true);
     expect(mythos.effect).toMatchObject({
       kind: "conditional",
-      condition: { kind: "source", filter: { manaSpentOfColors: { B: 1, R: 1 } } },
+      condition: { kind: "source", filter: { manaSpent: [{ type: "B", amount: { op: "gte", n: 1 } }, { type: "R", amount: { op: "gte", n: 1 } }] } },
       then: { chooser: "you" },
       else: { kind: "choose-one-of-each" },
     });
@@ -15921,7 +15931,7 @@ describe("a cast trigger keyed to this permanent's own mana", () => {
       who: "you",
       filter: {
         typesAnyOf: ["artifact", "creature", "enchantment", "land", "planeswalker", "battle"],
-        manaFrom: { fromSource: true },
+        manaSpent: [{ from: { fromSource: true } }],
       },
     });
     expect(face.triggered[0].effect).toEqual({ kind: "discover", amount: { manaValueOf: "trigger-object" } });

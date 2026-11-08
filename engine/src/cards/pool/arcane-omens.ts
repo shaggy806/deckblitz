@@ -12,5 +12,5 @@ export default defineCard({
   types: ["sorcery"],
   text: "Converge — Target player discards X cards, where X is the number of colors of mana spent to cast this spell.",
   targets: ["player"],
-  effect: { kind: "discard", target: 0, amount: { colorsSpentOf: "source" } },
+  effect: { kind: "discard", target: 0, amount: { manaSpentOf: "source", count: "colors" } },
 });

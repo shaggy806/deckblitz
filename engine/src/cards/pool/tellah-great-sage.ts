@@ -39,12 +39,12 @@ export default defineCard({
           { kind: "create-token", token: "Hero Token (Black Mage's Rod)", count: 1 },
           {
             kind: "conditional",
-            condition: { kind: "trigger-object", filter: { manaSpent: { op: "gte", n: 4 } } },
+            condition: { kind: "trigger-object", filter: { manaSpent: [{ amount: { op: "gte", n: 4 } }] } },
             then: { kind: "draw", amount: 2 },
           },
           {
             kind: "conditional",
-            condition: { kind: "trigger-object", filter: { manaSpent: { op: "gte", n: 8 } } },
+            condition: { kind: "trigger-object", filter: { manaSpent: [{ amount: { op: "gte", n: 8 } }] } },
             then: {
               kind: "sequence",
               effects: [

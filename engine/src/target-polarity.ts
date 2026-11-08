@@ -297,6 +297,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   draw: (n, v) => v.touch(n.target, "help", MAJOR),
   "discard-hand": (n, v) => v.touch(n.who, "harm", MAJOR),
   "gain-life": (n, v) => v.touch(n.toControllerOfTarget, "help", MINOR),
+  "lose-unspent-mana": (n, v) => v.touch(n.target, "harm", MINOR),
   "lose-life": (n, v) => {
     v.touch(n.target, "harm", MINOR);
     if (typeof n.who === "object" && "target" in n.who) v.touch(slotOfPlayer(n.who), "harm", MINOR);

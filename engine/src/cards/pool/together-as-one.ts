@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 // EDHREC rank 16126. Converge: the colours of mana actually spent on this
 // spell, cost increases included; a copy or a free cast spent none (the
 // rulings) — Painful Truths' amount.
-const X = { colorsSpentOf: "source" } as const;
+const X = { manaSpentOf: "source", count: "colors" } as const;
 
 export default defineCard({
   name: "Together as One",

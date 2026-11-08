@@ -69,7 +69,7 @@ describe("a spendManaAs static", () => {
     expect(castable(game, counter)).toBe(true);
     game.dispatch({ type: "cast-spell", player: A, card: counter, targets: [] });
     // Rule 609.4b: it didn't change what was actually spent.
-    expect(game.state.objects[counter].manaSpentColors).toEqual(["R"]);
+    expect(game.state.objects[counter].manaSpent?.map((unit) => unit.type)).toEqual(["R", "R", "R"]);
     quiet(game);
     expect(game.state.objects[counter].zone).toBe("graveyard");
   });

@@ -14,12 +14,12 @@ export default defineCard({
     effects: [
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { R: 1 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "R", amount: { op: "gte", n: 1 } }] } },
         then: { kind: "prohibit", who: 0, lands: true },
       },
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { W: 1 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "W", amount: { op: "gte", n: 1 } }] } },
         then: { kind: "prohibit", who: 0, spells: { filter: { type: "creature" }, label: "creature spells" } },
       },
     ],

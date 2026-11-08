@@ -25,7 +25,7 @@ export default defineCard({
           { kind: "modify-pt", target: "source", power: 1, toughness: 1, duration: "end-of-turn" },
           {
             kind: "conditional",
-            condition: { kind: "trigger-object", filter: { manaSpent: { op: "gte", n: 5 } } },
+            condition: { kind: "trigger-object", filter: { manaSpent: [{ amount: { op: "gte", n: 5 } }] } },
             then: { kind: "create-token-copy", of: "source", count: 1 },
           },
         ],

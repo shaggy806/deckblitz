@@ -186,6 +186,7 @@ import _poolCurseOfTheRestlessDead from "../pool/curse-of-the-restless-dead.js";
 import _poolCursedMonstrosity from "../pool/cursed-monstrosity.js";
 import _poolCutIn from "../pool/cut-in.js";
 import _poolCyclopsTyrant from "../pool/cyclops-tyrant.js";
+import _poolDampingSphere from "../pool/damping-sphere.js";
 import _poolDanceWithCalamity from "../pool/dance-with-calamity.js";
 import _poolDargoTheShipwrecker from "../pool/dargo-the-shipwrecker.js";
 import _poolDarkheartSliver from "../pool/darkheart-sliver.js";
@@ -1184,6 +1185,7 @@ const shard: CardShard = {
     _poolCursedMonstrosity,
     _poolCutIn,
     _poolCyclopsTyrant,
+    _poolDampingSphere,
     _poolDanceWithCalamity,
     _poolDargoTheShipwrecker,
     _poolDarkheartSliver,

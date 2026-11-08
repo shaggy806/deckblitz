@@ -21,7 +21,7 @@ export default defineCard({
       { kind: "gain-life", amount: { countOf: { type: "creature" } } },
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { W: 1 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "W", amount: { op: "gte", n: 1 } }] } },
         then: { kind: "untap-all", filter: { type: "creature", controlledBy: "you" } },
       },
     ],

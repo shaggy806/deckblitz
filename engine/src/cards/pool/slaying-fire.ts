@@ -11,7 +11,7 @@ export default defineCard({
   targets: ["any-target"],
   effect: {
     kind: "conditional",
-    condition: { kind: "source", filter: { manaSpentOfColors: { R: 3 } } },
+    condition: { kind: "source", filter: { manaSpent: [{ type: "R", amount: { op: "gte", n: 3 } }] } },
     then: { kind: "damage", amount: 4, target: 0 },
     else: { kind: "damage", amount: 3, target: 0 },
   },

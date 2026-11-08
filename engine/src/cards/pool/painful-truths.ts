@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 
 // Converge: the colours of mana actually spent on this spell, cost increases
 // included; a copy or a free cast spent none (the rulings).
-const X = { colorsSpentOf: "source" } as const;
+const X = { manaSpentOf: "source", count: "colors" } as const;
 
 export default defineCard({
   name: "Painful Truths",

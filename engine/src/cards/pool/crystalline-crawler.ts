@@ -48,7 +48,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "enters-battlefield", counters: { kind: "+1/+1", amount: { colorsSpentOf: "source" } } },
+      replacement: { event: "enters-battlefield", counters: { kind: "+1/+1", amount: { manaSpentOf: "source", count: "colors" } } },
       text: "Converge — This creature enters with a +1/+1 counter on it for each color of mana spent to cast it.",
     },
   ],

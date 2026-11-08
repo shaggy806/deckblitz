@@ -1,7 +1,7 @@
 import { defineCard } from "../define.js";
 
 // EDHREC rank 31530. "If {B} was spent to cast it" is an intervening if on
-// the mana spent (Deceit's `manaSpentOfColors`, here one {B}).
+// the mana spent (Deceit's `manaSpent`, here one {B}).
 const TEXT = "When this creature enters, if {B} was spent to cast it, target player discards a card.";
 
 export default defineCard({
@@ -17,7 +17,7 @@ export default defineCard({
   triggered: [
     {
       trigger: { on: "enters-battlefield", who: "self" },
-      condition: { kind: "source", filter: { manaSpentOfColors: { B: 1 } } },
+      condition: { kind: "source", filter: { manaSpent: [{ type: "B", amount: { op: "gte", n: 1 } }] } },
       targets: ["player"],
       effect: { kind: "discard", target: 0, amount: 1 },
       resolve: null,

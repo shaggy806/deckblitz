@@ -19,11 +19,11 @@ export default defineCard({
         of: {
           kind: "any",
           of: [
-            { kind: "trigger-object", filter: { manaSpentOfColors: { W: 1 } } },
-            { kind: "trigger-object", filter: { manaSpentOfColors: { U: 1 } } },
-            { kind: "trigger-object", filter: { manaSpentOfColors: { B: 1 } } },
-            { kind: "trigger-object", filter: { manaSpentOfColors: { R: 1 } } },
-            { kind: "trigger-object", filter: { manaSpentOfColors: { G: 1 } } },
+            { kind: "trigger-object", filter: { manaSpent: [{ type: "W", amount: { op: "gte", n: 1 } }] } },
+            { kind: "trigger-object", filter: { manaSpent: [{ type: "U", amount: { op: "gte", n: 1 } }] } },
+            { kind: "trigger-object", filter: { manaSpent: [{ type: "B", amount: { op: "gte", n: 1 } }] } },
+            { kind: "trigger-object", filter: { manaSpent: [{ type: "R", amount: { op: "gte", n: 1 } }] } },
+            { kind: "trigger-object", filter: { manaSpent: [{ type: "G", amount: { op: "gte", n: 1 } }] } },
           ],
         },
       },

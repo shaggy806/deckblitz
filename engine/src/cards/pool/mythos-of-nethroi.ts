@@ -15,7 +15,7 @@ export default defineCard({
       kind: "any",
       of: [
         { kind: "target", index: 0, filter: { type: "creature" } },
-        { kind: "source", filter: { manaSpentOfColors: { G: 1, W: 1 } } },
+        { kind: "source", filter: { manaSpent: [{ type: "G", amount: { op: "gte", n: 1 } }, { type: "W", amount: { op: "gte", n: 1 } }] } },
       ],
     },
     then: { kind: "destroy", target: 0 },

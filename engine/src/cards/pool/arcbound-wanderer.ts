@@ -34,7 +34,7 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "enters-battlefield",
-        counters: { kind: "+1/+1", amount: { colorsSpentOf: "source" } },
+        counters: { kind: "+1/+1", amount: { manaSpentOf: "source", count: "colors" } },
       },
       text: "Modular—Sunburst",
     },

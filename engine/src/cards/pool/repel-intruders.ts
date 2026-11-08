@@ -19,12 +19,12 @@ export default defineCard({
     effects: [
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { W: 1 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "W", amount: { op: "gte", n: 1 } }] } },
         then: { kind: "create-token", token: "Kithkin Soldier Token", count: 2 },
       },
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { U: 1 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "U", amount: { op: "gte", n: 1 } }] } },
         then: { kind: "counter", target: 0 },
       },
     ],

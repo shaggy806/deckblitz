@@ -22,7 +22,7 @@ export default defineCard({
           { kind: "draw", amount: 1 },
           {
             kind: "conditional",
-            condition: { kind: "not", of: { kind: "trigger-object", filter: { manaSpent: { op: "gte", n: 5 } } } },
+            condition: { kind: "not", of: { kind: "trigger-object", filter: { manaSpent: [{ amount: { op: "gte", n: 5 } }] } } },
             then: { kind: "discard", target: "you", amount: 1 },
           },
         ],

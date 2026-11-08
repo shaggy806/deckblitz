@@ -318,6 +318,7 @@ import _poolFleecemaneLion from "../pool/fleecemane-lion.js";
 import _poolFleshCarver from "../pool/flesh-carver.js";
 import _poolFluctuator from "../pool/fluctuator.js";
 import _poolFootSoldiers from "../pool/foot-soldiers.js";
+import _poolForswornPaladin from "../pool/forsworn-paladin.js";
 import _poolFoulTongueShriek from "../pool/foul-tongue-shriek.js";
 import _poolFoundryScreecher from "../pool/foundry-screecher.js";
 import _poolFrontierGuide from "../pool/frontier-guide.js";
@@ -487,6 +488,7 @@ import _poolMaestrosCharm from "../pool/maestros-charm.js";
 import _poolMairsilThePretender from "../pool/mairsil-the-pretender.js";
 import _poolMalachiteTalisman from "../pool/malachite-talisman.js";
 import _poolMaliciousInvader from "../pool/malicious-invader.js";
+import _poolManaShort from "../pool/mana-short.js";
 import _poolManaclesOfDecay from "../pool/manacles-of-decay.js";
 import _poolMarbleGargoyle from "../pool/marble-gargoyle.js";
 import _poolMarchOfTheMultitudes from "../pool/march-of-the-multitudes.js";
@@ -1304,6 +1306,7 @@ const shard: CardShard = {
     _poolFleshCarver,
     _poolFluctuator,
     _poolFootSoldiers,
+    _poolForswornPaladin,
     _poolFoulTongueShriek,
     _poolFoundryScreecher,
     _poolFrontierGuide,
@@ -1473,6 +1476,7 @@ const shard: CardShard = {
     _poolMairsilThePretender,
     _poolMalachiteTalisman,
     _poolMaliciousInvader,
+    _poolManaShort,
     _poolManaclesOfDecay,
     _poolMarbleGargoyle,
     _poolMarchOfTheMultitudes,

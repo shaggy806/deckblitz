@@ -33,7 +33,7 @@ export default defineCard({
       { kind: "damage-divided", from: 0 },
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { W: 1, U: 1 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "W", amount: { op: "gte", n: 1 } }, { type: "U", amount: { op: "gte", n: 1 } }] } },
         then: { kind: "for-each-target", from: 0, effect: { kind: "detain", target: 0 } },
       },
     ],

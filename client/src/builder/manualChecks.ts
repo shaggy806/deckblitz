@@ -11735,6 +11735,41 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Squandered Resources: the mana is a type the sacrificed land could make',
+    board({
+      you: { bf: ['Squandered Resources', 'Forest', 'Island'] },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    'Omnath, Locus of the Void: unspent mana stays, colorless, and grows it',
+    board({
+      you: { bf: ['Omnath, Locus of the Void', 'Forest', 'Forest'] },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    "Damping Sphere: a land that would make two mana makes one {C}",
+    board({
+      you: { bf: ['Ancient Tomb', 'Forest'], hand: ['Divination'] },
+      opp: { bf: ['Damping Sphere'] },
+    }),
+  ),
+  preset(
+    "Jetmir's Fixer: mana from a Treasure makes it a counter",
+    board({
+      you: { bf: ["Jetmir's Fixer", 'Forest', 'Treasure Token'] },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    'Mana Short: a player loses all unspent mana',
+    board({
+      you: { bf: ['Island*3'], hand: ['Mana Short'] },
+      opp: { bf: ['Forest*2'] },
+    }),
+  ),
+  preset(
     'Stunning Reversal: the next loss this turn is replaced once',
     board({
       you: { bf: ['Swamp*4', 'Mountain*5'], hand: ['Stunning Reversal', 'Lava Axe'], life: 4 },

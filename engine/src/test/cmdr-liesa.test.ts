@@ -134,7 +134,7 @@ describe("Liesa, Shroud of Dusk", () => {
     expect(lands.every((id) => game.state.objects[id].tapped)).toBe(true);
     expect(life(game, A)).toBe(before - 4);
     expect(lifeLossEvents(game, A)).toEqual([-4]);
-    expect(game.state.objects[liesa].manaSpent).toBe(5);
+    expect(game.state.objects[liesa].manaSpent).toHaveLength(5);
     expect(game.state.players[A].commanderCastCounts[LIESA]).toBe(3);
   });
 

@@ -11,7 +11,7 @@ import { defineCard } from "../define.js";
 //     directed without being affected by this card. Effects which generate more mana based on what
 //     type of mana the land produces will be affected in color but not in amount.
 //
-// `landManaInstead`'s `one`: a land that makes mana makes one {B}, whatever it would have made; one
+// `manaProduction`'s `one`: a land that makes mana makes one {B}, whatever it would have made; one
 // that makes none still makes none. What triggered mana abilities add isn't the land's.
 
 const UPKEEP = "At the beginning of your upkeep, sacrifice this enchantment unless you sacrifice a creature.";
@@ -26,7 +26,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      landManaInstead: [{ produces: "B", tapper: "any", one: true }],
+      manaProduction: [{ filter: { type: "land" }, produces: "B", tapper: "any", one: true }],
       text: LANDS,
     },
   ],

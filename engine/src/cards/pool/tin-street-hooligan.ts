@@ -18,7 +18,7 @@ export default defineCard({
   triggered: [
     {
       trigger: { on: "enters-battlefield", who: "self" },
-      condition: { kind: "source", filter: { manaSpentOfColors: { G: 1 } } },
+      condition: { kind: "source", filter: { manaSpent: [{ type: "G", amount: { op: "gte", n: 1 } }] } },
       targets: ["artifact"],
       effect: { kind: "destroy", target: 0 },
       resolve: null,

@@ -26,7 +26,7 @@ export default defineCard({
     effects: [
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { B: 1 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "B", amount: { op: "gte", n: 1 } }] } },
         then: {
           kind: "may",
           prompt: "Have the first target creature get -3/-3 until end of turn?",
@@ -35,7 +35,7 @@ export default defineCard({
       },
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { G: 1 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "G", amount: { op: "gte", n: 1 } }] } },
         then: {
           kind: "may",
           prompt: "Have the second target creature get +3/+3 until end of turn?",

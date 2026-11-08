@@ -14,7 +14,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "add-counter", target: 0, counter: "+1/+1", amount: { colorsSpentOf: "source" } },
+      { kind: "add-counter", target: 0, counter: "+1/+1", amount: { manaSpentOf: "source", count: "colors" } },
       { kind: "grant-keyword", target: 0, keyword: "trample", duration: "end-of-turn" },
     ],
   },

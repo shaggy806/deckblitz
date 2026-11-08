@@ -377,6 +377,7 @@ import {
   coloredReductionOf,
   manaCostReductions,
   manaOriginMatches,
+  spentManaCount,
   differentManaSplits,
   colorSymbols,
   manaValue,
@@ -387,7 +388,8 @@ import {
 } from "./mana.js";
 import type {
   Color,
-  LandManaInstead,
+  ManaProductionRule,
+  SpentMana,
   ManaCostReduction,
   ColoredReduction,
   ManaCost,
@@ -663,6 +665,15 @@ const LOOP_REPEATS = 8;
  * static ones by key, shields by identity. Lives only for one `dealDamage`
  * call and the redirected events it deals. */
 /** One alternative cost a cast could announce (`Game.alternativeCostsOf`). */
+/** A {@link ManaProductionRule} in force: whose "you" it is, and what holds it
+ * (absent for a player effect), for `Game.manaProductionRules`. */
+interface HeldManaRule {
+  readonly rule: ManaProductionRule;
+  readonly you: PlayerId;
+  readonly holder?: ObjectId;
+  readonly timestamp: number;
+}
+
 interface AlternativeCostOffer {
   readonly mana: string;
   readonly tapCreatures?: { readonly count: number; readonly filter: CardFilter };
@@ -933,8 +944,11 @@ function chosenManaType(holder: GameObject): ManaType | undefined {
   return MANA_TYPES.includes(chosen as ManaType) ? (chosen as ManaType) : undefined;
 }
 
-/** What `Game.landManaInsteadFor` says a tapped land makes instead. */
-type LandManaChange = Pick<LandManaInstead, "produces" | "colorsOnly" | "one">;
+/** What `Game.landManaInsteadFor` says a tapped land makes instead: the type
+ * half of a {@link ManaProductionRule} (`times` is the other). */
+type LandManaChange = Pick<ManaProductionRule, "colorsOnly" | "one"> & {
+  readonly produces: NonNullable<ManaProductionRule["produces"]>;
+};
 
 /** What a land's own mana `made` comes to under `change`, its type being
  * fixed: as many units (one, for "and amount"), every one the new type — but
@@ -3974,7 +3988,7 @@ export class Game {
           sacrificeCostParts(ability.cost.sacrifice, 0) === null
             ? {
                 sacrifice: {
-                  choices: this.sacrificeCandidates(player, source, ability),
+                  choices: this.sacrificedManaChoices(player, source, ability, manaColors),
                   ...(ability.cost.exilesSacrifice === true ? { exile: true as const } : {}),
                 },
               }
@@ -9336,30 +9350,10 @@ export class Game {
       const keeps = (unit: ManaUnit): boolean =>
         keptTypes.has(unit.type) ||
         (keepPersistent && (unit.persists === true || (stillCombat && unit.untilEndOfCombat === true)));
-      const kept = pool.filter(keeps);
-      if (kept.length !== pool.length) {
-        // Kruphix's "that mana becomes colorless instead" (Omnath, Locus of
-        // All's black): what would be lost stays, that type, restrictions
-        // and all (its rulings).
-        const becomes = this.unspentManaBecomesFor(player);
-        if (becomes !== null) {
-          this.state.players[player].manaPool = pool.map((unit) =>
-            keeps(unit) || unit.type === becomes ? unit : { ...unit, type: becomes },
-          );
-        } else {
-          this.state.players[player].manaPool = kept;
-          lostMana.push({ player, amount: pool.length - kept.length });
-        }
-      }
+      const amount = this.loseUnspentMana(player, keeps);
+      if (amount > 0) lostMana.push({ player, amount });
     }
-    // Yurlok of Scorch Thrash's "a player losing unspent mana causes that
-    // player to lose that much life": for the mana actually emptied.
-    if (lostMana.length > 0) {
-      const times = this.manaLossLifeLossCount();
-      for (const { player, amount } of lostMana) {
-        for (let i = 0; i < times && !this.state.result.over; i += 1) this.changeLife(player, -amount);
-      }
-    }
+    for (const { player, amount } of lostMana) this.manaLossCostsLife(player, amount);
     // "Until end of combat" effects end with the combat phase (rule 500.5a).
     if (!stillCombat) this.expireUntilEndOfCombat();
     if (step === "begin-combat") {
@@ -10242,8 +10236,8 @@ export class Game {
    * Never below 0.
    */
   /** The type mana `player` would lose as a step or phase ends becomes
-   * instead, or `null` — `unspentManaBecomesColorless` (Kruphix) or
-   * `unspentManaBecomes` (Omnath, Locus of All's black). Of several, one
+   * instead, or `null`: `unspentManaBecomes` (Kruphix's colorless, Omnath,
+   * Locus of All's black). Of several, one
    * applies (rule 616.1): the newest permanent's. */
   private unspentManaBecomesFor(player: PlayerId): ManaType | null {
     let found: { readonly type: ManaType; readonly timestamp: number } | null = null;
@@ -10251,12 +10245,20 @@ export class Game {
       const source = this.state.objects[id];
       if (source === undefined || source.controller !== player || hasLostAbilities(this.state, this.registry,source)) continue;
       for (const ability of this.registry.get(rulesTextName(source)).static) {
-        const type = ability.unspentManaBecomesColorless === true ? "C" : ability.unspentManaBecomes;
+        const type = ability.unspentManaBecomes;
         if (type === undefined || !this.staticActive(source, ability)) continue;
         if (found === null || source.timestamp > found.timestamp) found = { type, timestamp: source.timestamp };
       }
     }
     return found?.type ?? null;
+  }
+
+  /** Yurlok of Scorch Thrash's "a player losing unspent mana causes that
+   * player to lose that much life": for the mana actually emptied. */
+  private manaLossCostsLife(player: PlayerId, amount: number): void {
+    if (amount <= 0) return;
+    const times = this.manaLossLifeLossCount();
+    for (let i = 0; i < times && !this.state.result.over; i += 1) this.changeLife(player, -amount);
   }
 
   /** How many times a player loses life for the mana emptied from their
@@ -16082,6 +16084,10 @@ export class Game {
         reduceGeneric += times * this.costAmount(mod.reduceGeneric, source.controller, source.id, cardId);
       }
       increaseGeneric += times * this.costAmount(mod.increaseGeneric ?? 0, source.controller, source.id, cardId);
+      if (mod.increasePerOtherSpellByCaster !== undefined) {
+        // Its total cost is worked out before it counts as cast (601.2f, 601.2i).
+        increaseGeneric += times * mod.increasePerOtherSpellByCaster * turnStatOf(this.state, player, "spells-cast");
+      }
       if (mod.increaseColored !== undefined) {
         const pips = parseManaCost(mod.increaseColored).colored;
         for (const color of COLORS) increaseColored[color] += times * pips[color];
@@ -20093,20 +20099,21 @@ export class Game {
     // Assist (rule 702.132a): the helper pays their share before the caster
     // begins to pay — with their own mana, which is still mana spent to cast
     // the spell (its colours and sources read with the caster's below).
+    let assistSpent: readonly SpentMana[] = [];
     if (assist !== undefined) {
       const help = this.payMana(assist.player, parseManaCost(`{${assist.amount}}`), undefined, undefined, payment.purpose);
       if (help === null) throw new Error(`${assist.player} cannot pay {${assist.amount}} of ${def.name}'s cost`);
-      this.executePayment(assist.player, help);
+      assistSpent = this.executePayment(assist.player, help);
       // Expend (rule 700.14) counts "the amount of mana that player spent
       // this turn to cast spells": the helper paid part of a cost to cast one.
       const before = journalTotal(this.state, "mana-spent", assist.player, "amount");
       this.emit({ type: "mana-expended", player: assist.player, before, after: before + assist.amount });
     }
-    this.executePayment(player, payment, assist !== undefined);
-    // `resolved` is the concrete cost after hybrid and Phyrexian choices, so
-    // life paid for a Phyrexian pip isn't counted as mana.
-    const ownSpent = manaValue(payment.resolved);
-    object.manaSpent = ownSpent + (assist?.amount ?? 0);
+    const ownUnits = this.executePayment(player, payment);
+    // Life paid for a Phyrexian pip isn't mana spent: the units are only what
+    // the pool paid, an assisting player's among them.
+    const ownSpent = ownUnits.length;
+    object.manaSpent = [...assistSpent, ...ownUnits];
     // Each Phyrexian pip paid with life cost 2 (rule 107.4f) — compleated
     // (702.150a) reads how many. Life paid rather than mana (K'rrik) pays no
     // Phyrexian symbol.
@@ -20945,6 +20952,28 @@ export class Game {
   /** Permanents `player` could sacrifice to pay `ability`'s sacrifice cost.
    * `[]` when the ability has no sacrifice cost. For a `"self"` cost it's just
    * the source (so a caller can still show/confirm it). */
+  /** The permanents an offer may name to sacrifice: for a mana ability that
+   * reads what the sacrificed land could produce, only those that make the
+   * pick the offer names (or, for no pick, those that could produce nothing).
+   * Anything else is {@link sacrificeCandidates}. */
+  private sacrificedManaChoices(
+    player: PlayerId,
+    sourceId: ObjectId,
+    ability: ActivatedAbility,
+    manaColors: readonly ManaType[] | undefined,
+  ): ObjectId[] {
+    const candidates = this.sacrificeCandidates(player, sourceId, ability);
+    const effect = ability.effect;
+    if (effect?.kind !== "add-mana" || typeof effect.mana !== "object" || !("sacrificedCouldProduce" in effect.mana)) {
+      return candidates;
+    }
+    const pick = manaColors?.[0];
+    return candidates.filter((id) => {
+      const makes = this.couldProduce(id, new Set());
+      return pick === undefined ? makes.length === 0 : makes.includes(pick);
+    });
+  }
+
   private sacrificeCandidates(
     player: PlayerId,
     sourceId: ObjectId,
@@ -23299,6 +23328,16 @@ export class Game {
     // What the cost took, as `LastKnownRefs.sets.paid` keeps it.
     let paidSets: ObjectSets | undefined;
 
+    // "Any type the sacrificed land could produce" (rule 106.7): read before
+    // the cost moves it.
+    const sacrificedCouldMake =
+      sacrificeVictim !== null &&
+      ability.effect?.kind === "add-mana" &&
+      typeof ability.effect.mana === "object" &&
+      "sacrificedCouldProduce" in ability.effect.mana
+        ? this.couldProduce(sacrificeVictim, new Set())
+        : undefined;
+
     // Pay the cost. The secret first: a sacrifice beside it clears the choice.
     if (ability.cost.revealChosen === true) this.revealSecretChoice(source, player);
     if (ability.cost.tap) {
@@ -23325,7 +23364,7 @@ export class Game {
       for (const id of tapped) this.emit({ type: "creature-tapped-for", creature: id, for: sourceId, as: tappedAs });
     }
     if (tapped.length > 0) paidSets = addToSet(paidSets, { paid: "tapped" }, this.paidMembers("tapped", tapped));
-    this.executePayment(player, payment);
+    const manaSpentOnThis = this.executePayment(player, payment);
     const lifeCost = abilityLifeCost(this.state, player, ability.cost, chosenX, sourceId) ?? 0;
     if (lifeCost > 0) this.changeLife(player, -lifeCost);
     if (ability.cost.removeCounter !== undefined && !chosenCounterCost(ability.cost)) {
@@ -23521,7 +23560,7 @@ export class Game {
         this.afterPlayerAction(player);
         return;
       }
-      this.resolveManaAbility(sourceId, player, ability, chosenX, manaColors, grantedAbility, paidSets);
+      this.resolveManaAbility(sourceId, player, ability, chosenX, manaColors, grantedAbility, paidSets, sacrificedCouldMake);
       return;
     }
 
@@ -23573,8 +23612,9 @@ export class Game {
       this.emit({ type: "modes-chosen", source: sourceId, player, modes: [...modes], modal: true });
     }
     const granterRef = granterOfRef(grantedAbility);
-    if (sourceStint !== undefined || paidSets !== undefined || granterRef !== undefined) {
+    if (sourceStint !== undefined || paidSets !== undefined || granterRef !== undefined || manaSpentOnThis.length > 0) {
       this.state.objects[abilityId].lastKnownRefs = {
+        ...(manaSpentOnThis.length > 0 ? { manaSpent: manaSpentOnThis } : {}),
         ...(sourceStint !== undefined ? { source: sourceStint } : {}),
         ...(paidSets !== undefined ? { sets: paidSets } : {}),
         ...(granterRef !== undefined ? { granter: granterRef } : {}),
@@ -23777,6 +23817,8 @@ export class Game {
     manaColors: readonly ManaType[] | undefined,
     grantedAbility: GrantedAbilityRef | undefined,
     paidSets: ObjectSets | undefined,
+    /** What the land its cost sacrificed could have produced (`sacrificedCouldProduce`). */
+    sacrificedCouldMake?: readonly ManaType[],
   ): void {
     const source = this.state.objects[sourceId];
     const manaGranter = granterOfRef(grantedAbility);
@@ -23798,9 +23840,10 @@ export class Game {
     let picked = 0;
     // A land's mana, changed as it's made (Deep Water, Infernal Darkness —
     // rule 106.12): every unit its own ability makes is that type instead.
-    // Asked now, as it would make the mana, so a land the cost sacrificed
-    // (Crystal Vein) is read as it last was.
-    const instead = ability.cost.tap && source !== undefined ? this.landManaInsteadFor(player, source) : null;
+    // Asked as it makes the mana, so a land the cost sacrificed (Crystal
+    // Vein) is read as it last was, and how much it would make is known
+    // (Damping Sphere's "two or more").
+    let instead: LandManaChange | null = null;
     // "A color of your choice" (Pulse of Llanowar): one, for all the land makes.
     let insteadColor: ManaType | undefined;
     let madeOne = false;
@@ -23829,6 +23872,9 @@ export class Game {
       manaAbility: true,
       ...(manaColor !== undefined ? { manaColor } : {}),
       addMana: (p, mana, amount, spec): void => {
+        if (ability.cost.tap && source !== undefined && p === player) {
+          instead = this.landManaInsteadFor(player, source, amount);
+        }
         if (mana !== "any-color" && typeof mana !== "object") {
           make(p, mana, amount, spec);
           return;
@@ -23839,6 +23885,16 @@ export class Game {
         // `manaColors` can't mint extra mana or a colour the card doesn't
         // offer. `spec` rides along so a restricted source (Cavern of
         // Souls) still stamps its restriction on mana floated by hand.
+        // The land the cost actually sacrificed: a pick it can't make (only
+        // a client's word could say one) is the first it can.
+        if (typeof mana === "object" && "sacrificedCouldProduce" in mana) {
+          const could = sacrificedCouldMake ?? [];
+          if (could.length === 0) return;
+          const pick = manaColors?.[picked];
+          picked += 1;
+          make(p, pick !== undefined && could.includes(pick) ? pick : could[0], 1, spec);
+          return;
+        }
         const allowed: readonly ManaType[] =
           mana === "any-color"
             ? COLORS
@@ -23892,7 +23948,7 @@ export class Game {
       // "If you tap a permanent for mana, it produces twice as much of that
       // mana instead" (Mana Reflection): its own mana, each unit with all
       // it carries (rule 106.6a).
-      const multiplier = this.tapManaMultiplier(player);
+      const multiplier = source === undefined ? 1 : this.tapManaMultiplier(player, source);
       if (multiplier > 1) {
         const made = pool.slice(poolBefore);
         for (const unit of made) {
@@ -25040,9 +25096,13 @@ export class Game {
         // triggered mana abilities add.
         // "If you tap a land for mana, it produces {U} instead of any other
         // type" (Deep Water, Infernal Darkness): as many units, that type.
-        const instead = ability.cost.tap ? this.landManaInsteadFor(player, object) : null;
-        const typed = instead === null ? candidates : candidates.flatMap((option) => landManaInsteadOptions(option, instead));
-        const multiplier = ability.cost.tap ? this.tapManaMultiplier(player) : 1;
+        const typed = !ability.cost.tap
+          ? candidates
+          : candidates.flatMap((option) => {
+              const instead = this.landManaInsteadFor(player, object, option.fixed.length + option.anyColor);
+              return instead === null ? [option] : landManaInsteadOptions(option, instead);
+            });
+        const multiplier = ability.cost.tap ? this.tapManaMultiplier(player, object) : 1;
         const multiplied =
           multiplier === 1 ? typed : typed.flatMap((option) => multipliedManaOption(option, multiplier));
         // Triggered mana abilities (rule 605.1b) — the extra mana tapping
@@ -25577,10 +25637,11 @@ export class Game {
   /** Carry out `payment`. `adding`: a cast's second payment, after an
    * assisting player's (rule 702.132a) — what the spell records of the mana
    * spent on it is added to theirs rather than replacing it. */
-  private executePayment(player: PlayerId, payment: ManaPayment, adding = false): void {
+  private executePayment(player: PlayerId, payment: ManaPayment): readonly SpentMana[] {
     for (const step of payment.steps) this.useManaSource(step);
-    this.spendFromPool(player, payment.resolved, payment.purpose, adding);
+    const spent = this.spendFromPool(player, payment.resolved, payment.purpose);
     if (payment.life > 0) this.changeLife(player, -payment.life);
+    return spent;
   }
 
   /** Carry out one {@link ManaPlanStep}: tap (or sacrifice) the source, add its
@@ -25863,6 +25924,19 @@ export class Game {
       // Exotic Orchard with no coloured land opposite) can still be
       // activated — it just adds no mana (the Mox Amber ruling).
       own = choices === null ? null : choices.length === 0 ? [{ picks: [], makes: [] }] : choices.map((c) => ({ picks: c, makes: c }));
+      // Squandered Resources' ruling: a land that could produce nothing can
+      // still be sacrificed, for no mana.
+      if (
+        own !== null &&
+        choices !== null &&
+        choices.length > 0 &&
+        effect.kind === "add-mana" &&
+        typeof effect.mana === "object" &&
+        "sacrificedCouldProduce" in effect.mana &&
+        this.sacrificedManaChoices(player, sourceId, ability, []).length > 0
+      ) {
+        own.push({ picks: [], makes: [] });
+      }
       // Too many splits to list: one more offer, whose split the player
       // picks (its picks here are only a stand-in for the client's).
       const listed = own === null ? null : standaloneManaSplit(ability, oneOf, live);
@@ -25878,18 +25952,25 @@ export class Game {
     const object = this.state.objects[sourceId];
     if (object === undefined) return asIs;
     const extras = this.tappedForManaExtras(object, !ability.cost.tap);
-    const multiplier = ability.cost.tap ? this.tapManaMultiplier(player) : 1;
+    const multiplier = ability.cost.tap ? this.tapManaMultiplier(player, object) : 1;
     // A land whose mana is another type instead (Deep Water): as many units,
-    // that type — a pick still names how many, where it decides that.
-    const instead = ability.cost.tap ? this.landManaInsteadFor(player, object) : null;
-    if (extras.length === 0 && multiplier === 1 && instead === null) return asIs;
+    // that type — a pick still names how many, where it decides that. Whether
+    // one applies can turn on how much it would make (Damping Sphere), so
+    // each way of making mana asks for itself.
+    const insteadOf = (makes: number): LandManaChange | null =>
+      ability.cost.tap ? this.landManaInsteadFor(player, object, makes) : null;
+    if (extras.length === 0 && multiplier === 1 && insteadOf(Infinity) === null) return asIs;
     let base = own;
     if (base === null) {
       const fixed = this.fixedManaOutput(effect, sourceId, player);
       if (fixed === null) return asIs;
       base = [{ picks: [], makes: fixed }];
     }
+    const unchanged = base.filter((v) => insteadOf(v.makes.length) === null);
+    const changed = base.filter((v) => insteadOf(v.makes.length) !== null);
+    const instead = changed.length === 0 ? null : insteadOf(changed[0].makes.length);
     if (instead !== null) {
+      base = changed;
       const produces = instead.produces;
       if (produces === "any-color") {
         // "A color of your choice": one pick, naming it for all the land
@@ -25910,6 +25991,7 @@ export class Game {
             return true;
           });
       }
+      base = [...unchanged, ...base];
     }
     const out: StandaloneManaVariant[] = [];
     for (const variant of base) {
@@ -26299,9 +26381,10 @@ export class Game {
    * predicate against a single purpose and same-type pips are
    * interchangeable, so there is nothing for a smarter search to find.
    *
-   * Each unit spent fires its `onSpend` rider (Path of Ancestry).
+   * Each unit spent fires its `onSpend` rider (Path of Ancestry). Returns what
+   * was spent, for whatever it paid for to keep.
    */
-  private spendFromPool(player: PlayerId, cost: ManaCost, purpose: ManaPurpose = null, adding = false): void {
+  private spendFromPool(player: PlayerId, cost: ManaCost, purpose: ManaPurpose = null): readonly SpentMana[] {
     const pool = this.state.players[player].manaPool;
     const spent: ManaUnit[] = [];
 
@@ -26427,27 +26510,10 @@ export class Game {
         ];
       }
     }
-    // Where the mana that cast it came from ("if mana from an artifact was
-    // spent to cast it"). Paid for only once, so this is all of it — or,
-    // `adding`, the rest of it after an assisting player's share.
-    if (purpose !== null && purpose.kind === "cast") {
-      const spell = this.state.objects[purpose.card];
-      if (spell !== undefined) {
-        const from = spent.flatMap((u) => (u.from === undefined ? [] : [u.from]));
-        spell.manaSpentFrom = adding ? [...(spell.manaSpentFrom ?? []), ...from] : from;
-        // Converge's "colors of mana spent" — colourless isn't one (rule 105.1).
-        const before = adding ? (spell.manaSpentByColor ?? {}) : {};
-        // Adamant's "at least three black mana": how much of each.
-        const byColor: Partial<Record<Color, number>> = {};
-        for (const c of COLORS) {
-          const n = spent.filter((u) => u.type === c).length + (before[c] ?? 0);
-          if (n > 0) byColor[c] = n;
-        }
-        spell.manaSpentColors = COLORS.filter((c) => (byColor[c] ?? 0) > 0);
-        spell.manaSpentByColor = byColor;
-      }
-    }
     for (const unit of spent) this.fireManaSpendRider(player, unit, purpose);
+    // What's left of a pool can be read ("for each unspent mana you have").
+    if (spent.length > 0) invalidateComputedCache();
+    return spent.map((unit) => ({ type: unit.type, ...(unit.from !== undefined ? { from: unit.from } : {}) }));
   }
 
   /**
@@ -28148,6 +28214,19 @@ export class Game {
       return met ? mana.thenOneOf : mana.elseOneOf;
     }
     const types = new Set<ManaType>();
+    if ("sacrificedCouldProduce" in mana) {
+      // What the offer can name: any type a land it could sacrifice could
+      // produce. Nothing, as another land's "could produce" asks: which land
+      // is sacrificed isn't defined until it's activated (rule 106.7).
+      if (visiting.size > 0) return [];
+      for (const id of this.state.zones.shared.battlefield) {
+        const object = this.state.objects[id];
+        if (object === undefined || object.controller !== player) continue;
+        if (!matchesFilter(this.state, this.registry, id, mana.sacrificedCouldProduce, { you: player })) continue;
+        for (const type of this.couldProduce(id, new Set())) types.add(type);
+      }
+      return MANA_TYPES.filter((t) => types.has(t));
+    }
     if ("producedBy" in mana) {
       const asking = source === undefined ? visiting : new Set([...visiting, source]);
       for (const id of this.state.zones.shared.battlefield) {
@@ -28248,9 +28327,12 @@ export class Game {
       typeof amount === "number"
         ? amount > 0
         : amount === "x" || this.liveManaAmount(id, player, amount, color, first) > 0;
+    // Where `addFrom` puts what it finds: `types`, or one {T} ability's own
+    // set while it's asked what a replacement makes of it (rule 106.7).
+    let into = types;
     const addAll = (candidates: readonly ManaType[], amount: EffectAmount): void => {
-      const fresh = candidates.filter((t) => !types.has(t));
-      if (fresh.length > 0 && makes(amount)) for (const t of fresh) types.add(t);
+      const fresh = candidates.filter((t) => !into.has(t));
+      if (fresh.length > 0 && makes(amount)) for (const t of fresh) into.add(t);
     };
     const addFrom = (effect: EffectSpec | null): void => {
       if (effect === null) return;
@@ -28282,15 +28364,24 @@ export class Game {
         addAll(this.manaOneOf(m, player, id, asking), effect.amount);
       }
     };
-    for (const ability of abilities) if (ability.cost.tap) addFrom(ability.effect);
     // "Taking into account any applicable replacement effects" (rule 106.7):
     // a land under Infernal Darkness could produce only {B}. Of a tap by its
-    // controller, the one player a "could produce" can ask about.
-    const instead = types.size > 0 ? this.landManaInsteadFor(player, object) : null;
-    if (instead !== null) {
-      const tapped = [...types];
-      types.clear();
-      for (const type of instead.produces === "any-color" ? COLORS : tapped) {
+    // controller, the one player a "could produce" can ask about. Ability by
+    // ability, since how much it would make can decide (Damping Sphere).
+    const replaced = this.landManaInsteadFor(player, object, Infinity) !== null;
+    for (const ability of abilities) {
+      if (!ability.cost.tap) continue;
+      const instead = replaced ? this.landManaInsteadFor(player, object, this.tapWouldMake(ability.effect, id, player)) : null;
+      if (instead === null) {
+        addFrom(ability.effect);
+        continue;
+      }
+      const own = new Set<ManaType>();
+      into = own;
+      addFrom(ability.effect);
+      into = types;
+      if (own.size === 0) continue;
+      for (const type of instead.produces === "any-color" ? COLORS : own) {
         types.add(instead.produces === "any-color" || (instead.colorsOnly === true && type === "C") ? type : instead.produces);
       }
     }
@@ -33340,6 +33431,14 @@ export class Game {
         }
         return matchesKnown(ref.object, condition.filter);
       }
+      // "If mana from a Treasure was spent to activate this ability."
+      if (condition.kind === "ability-mana-spent") {
+        const spent = refs.manaSpent ?? [];
+        return condition.clauses.every((clause) => {
+          const n = spentManaCount(spent, clause);
+          return clause.amount === undefined ? n >= 1 : compareNum(n, clause.amount, x);
+        });
+      }
       // A slot found illegal is blank in `targets` but was still chosen.
       if (condition.kind === "target-chosen") {
         return targets[condition.index] !== undefined || opts.illegalTargets?.includes(condition.index) === true;
@@ -33361,7 +33460,12 @@ export class Game {
         const spentThere = gone && manaSpent !== undefined ? spell.lastStackManaSpent : undefined;
         const valueThere = gone && manaValueFilter !== undefined ? spell.lastStackManaValue : undefined;
         if (spentThere !== undefined || valueThere !== undefined) {
-          if (spentThere !== undefined && !compareNum(spentThere, manaSpent!, x)) return false;
+          if (spentThere !== undefined) {
+            for (const clause of manaSpent!) {
+              const n = spentManaCount(spentThere, clause);
+              if (clause.amount === undefined ? n < 1 : !compareNum(n, clause.amount, x)) return false;
+            }
+          }
           if (valueThere !== undefined && !compareNum(valueThere, manaValueFilter!, x)) return false;
           const unread: CardFilter = {
             ...rest,
@@ -33804,9 +33908,10 @@ export class Game {
         return this.manaValueOfTarget(target, expectedZoneOf(target), lastKnownOf(target));
       },
       manaSpentOf: (target) => {
-        if (target.kind !== "object") return 0;
+        if (target.kind !== "object") return [];
         // The spell that fired a cast trigger, gone from the stack since
-        // (countered in response): what was spent on it there (608.2h).
+        // (countered in response): what was spent on it there (608.2h;
+        // Magmablood Archaic's ruling).
         const spell = target.object === triggerObject ? this.state.objects[target.object] : undefined;
         if (
           spell !== undefined &&
@@ -33817,7 +33922,7 @@ export class Game {
           return spell.lastStackManaSpent;
         }
         const lki = lastKnownOf(target);
-        if (lki !== undefined) return lki.manaSpent ?? 0;
+        if (lki !== undefined) return lki.manaSpent ?? [];
         // A spell target gone from the stack since (countered — Mana
         // Sculpt's "the amount of mana spent to cast that spell", read at
         // your next main phase): as it last existed there (608.2h), the way
@@ -33831,40 +33936,14 @@ export class Game {
         ) {
           return object.lastStackManaSpent;
         }
-        return object?.manaSpent ?? 0;
+        return object?.manaSpent ?? [];
       },
-      manaSpentFromOf: (target) => {
-        if (target.kind !== "object") return [];
-        const lki = lastKnownOf(target);
-        return (lki !== undefined ? lki.manaSpentFrom : this.state.objects[target.object]?.manaSpentFrom) ?? [];
+      manaSpentOnThisAbility: () => refs.manaSpent ?? [],
+      unspentMana: (who, type) => {
+        const pool = this.state.players[who]?.manaPool ?? [];
+        return type === undefined ? pool.length : pool.filter((unit) => unit.type === type).length;
       },
-      colorsSpentOf: (target) => {
-        if (target.kind !== "object") return 0;
-        // As `manaSpentOf`: the spell that fired a cast trigger, countered in
-        // response, is read as it last was on the stack (Magmablood Archaic).
-        const spell = target.object === triggerObject ? this.state.objects[target.object] : undefined;
-        if (
-          spell !== undefined &&
-          refs.triggerSpell !== undefined &&
-          (spell.zone !== "stack" || (spell.zoneChangeCount ?? 0) !== refs.triggerSpell) &&
-          spell.lastStackManaSpentColors !== undefined
-        ) {
-          return spell.lastStackManaSpentColors.length;
-        }
-        const lki = lastKnownOf(target);
-        if (lki !== undefined) return lki.manaSpentColors?.length ?? 0;
-        // A spell target gone from the stack since, as `manaSpentOf`.
-        const object = this.state.objects[target.object];
-        if (
-          object !== undefined &&
-          object.zone !== "stack" &&
-          expectedZoneOf(target) === "stack" &&
-          object.lastStackManaSpentColors !== undefined
-        ) {
-          return object.lastStackManaSpentColors.length;
-        }
-        return object?.manaSpentColors?.length ?? 0;
-      },
+      loseUnspentMana: (who) => this.manaLossCostsLife(who, this.loseUnspentMana(who)),
       // Rule 903.8: only a commander's owner casts it from the command zone,
       // and the count is kept under that player, by name.
       commanderCastsOf: (target) => {
@@ -35445,7 +35524,7 @@ export class Game {
         // mana spent to cast it, fixed as it was cast (rule 702.44a).
         const amount =
           counter === "sunburst"
-            ? Object.values(spell.manaSpentByColor ?? {}).filter((n) => (n ?? 0) > 0).length
+            ? spentManaCount(spell.manaSpent ?? [], { count: "colors" })
             : given;
         if (amount <= 0) return;
         spell.entersWithCounters = [
@@ -56399,7 +56478,7 @@ export class Game {
       if (r.sunburst === true) {
         addCounters(
           def.types.includes("creature") ? "+1/+1" : "charge",
-          this.enteringCounterAmount(id, object.controller, id, { colorsSpentOf: "source" }),
+          this.enteringCounterAmount(id, object.controller, id, { manaSpentOf: "source", count: "colors" }),
         );
       }
     }
@@ -56574,69 +56653,106 @@ export class Game {
    * (Deep Water, a turn of its owner's own lands; Pale Moon, every player's
    * nonbasic ones). Of several, one applies (rule 616.1, the tapping player's
    * choice): the newest. A land its own cost sacrificed (Crystal Vein) was
-   * tapped for mana all the same, and is read as it last was. */
-  private landManaInsteadFor(player: PlayerId, source: GameObject): LandManaChange | null {
-    const gone = source.zone !== "battlefield";
-    if (
-      gone
-        ? !matchesFilter(this.state, this.registry, source.id, { type: "land" }, { you: player, lastKnown: true })
-        : !effectiveTypes(this.state, this.registry, source).includes("land")
-    ) {
-      return null;
-    }
-    const applies = (entry: LandManaInstead, you: PlayerId, holder?: ObjectId): boolean =>
-      (entry.tapper === "any" || you === player) &&
-      (entry.filter === undefined ||
-        matchesFilter(this.state, this.registry, source.id, entry.filter, {
-          you,
-          ...(holder !== undefined ? { source: holder } : {}),
-          ...(gone ? { lastKnown: true } : {}),
-        }));
+   * tapped for mana all the same, and is read as it last was. `wouldMake` is
+   * how much it would make, before any multiplier: the order that leaves the
+   * tapper the most mana (`atLeast` read first, then `times`). `Infinity`
+   * asks whether any rule could apply. */
+  private landManaInsteadFor(player: PlayerId, source: GameObject, wouldMake: number): LandManaChange | null {
     let found: { readonly change: LandManaChange; readonly timestamp: number } | null = null;
-    const offer = (change: LandManaChange, timestamp: number): void => {
-      if (found === null || timestamp > found.timestamp) found = { change, timestamp };
-    };
-    for (const id of this.state.zones.shared.battlefield) {
-      const holder = this.state.objects[id];
-      if (holder === undefined || hasLostAbilities(this.state, this.registry, holder)) continue;
-      for (const ability of this.registry.get(rulesTextName(holder)).static) {
-        if (ability.landManaInstead === undefined || !this.staticActive(holder, ability)) continue;
-        for (const entry of ability.landManaInstead) {
-          if (applies(entry, holder.controller, holder.id)) offer(entry, holder.timestamp);
+    for (const held of this.manaProductionRules()) {
+      const { rule, timestamp } = held;
+      if (rule.produces === undefined || (rule.atLeast !== undefined && wouldMake < rule.atLeast)) continue;
+      if (found !== null && timestamp <= found.timestamp) continue;
+      if (this.manaRuleApplies(held, player, source)) found = { change: { ...rule, produces: rule.produces }, timestamp };
+    }
+    return found?.change ?? null;
+  }
+
+  /** Every rule of what tapped permanents make, as the battlefield and the
+   * player effects stand ({@link ManaProductionRule}). Each tap asks; a game
+   * mostly has none, so the list is built once a cache region. */
+  private manaProductionRules(): readonly HeldManaRule[] {
+    return computedCacheMemo("manaProductionRules", () => {
+      const held: HeldManaRule[] = [];
+      for (const id of this.state.zones.shared.battlefield) {
+        const holder = this.state.objects[id];
+        if (holder === undefined) continue;
+        const definition = this.registry.get(rulesTextName(holder));
+        if (definition.static.every((ability) => ability.manaProduction === undefined)) continue;
+        if (hasLostAbilities(this.state, this.registry, holder)) continue;
+        for (const ability of definition.static) {
+          if (ability.manaProduction === undefined || !this.staticActive(holder, ability)) continue;
+          for (const rule of ability.manaProduction) {
+            held.push({ rule, you: holder.controller, holder: holder.id, timestamp: holder.timestamp });
+          }
         }
       }
-    }
-    for (const effect of this.state.playerEffects ?? []) {
-      const instead = effect.landManaInstead;
-      if (instead === undefined) continue;
-      // A bare type is "if you tap a land you control for mana" (Deep Water).
-      const entry: LandManaInstead =
-        typeof instead === "string" ? { filter: { controlledBy: "you" }, produces: instead, tapper: "you" } : instead;
-      if (applies(entry, effect.owner)) offer(entry, effect.timestamp ?? 0);
-    }
-    return (found as { readonly change: LandManaChange } | null)?.change ?? null;
-  }
-
-  /** Product of every `tap-for-mana` multiplier (rules 106.12b, 614.1a) on
-   * a battlefield permanent `player` controls — "if you tap a permanent for
-   * mana, it produces twice as much of that mana instead" (Mana Reflection;
-   * three times, Nyxbloom Ancient), which compound (the ruling: two Mana
-   * Reflections make four times as much). `1` when there are none. */
-  private tapManaMultiplier(player: PlayerId): number {
-    return computedCacheMemo(`tapManaMultiplier:${player}`, () => this.tapManaMultiplierUncached(player));
-  }
-
-  private tapManaMultiplierUncached(player: PlayerId): number {
-    let mult = 1;
-    for (const id of this.state.zones.shared.battlefield) {
-      const object = this.state.objects[id];
-      if (object.controller !== player || hasLostAbilities(this.state, this.registry,object)) continue;
-      for (const ability of this.registry.get(rulesTextName(object)).static) {
-        const r = ability.replacement;
-        if (r?.event === "tap-for-mana" && this.staticActive(object, ability)) mult *= r.instead.modify.times ?? 1;
+      for (const effect of this.state.playerEffects ?? []) {
+        if (effect.manaProduction !== undefined) {
+          held.push({ rule: effect.manaProduction, you: effect.owner, timestamp: effect.timestamp ?? 0 });
+        }
       }
+      return held;
+    });
+  }
+
+  private manaRuleApplies({ rule, you, holder }: HeldManaRule, player: PlayerId, source: GameObject): boolean {
+    if (rule.tapper !== "any" && you !== player) return false;
+    return (
+      rule.filter === undefined ||
+      matchesFilter(this.state, this.registry, source.id, rule.filter, {
+        you,
+        ...(holder !== undefined ? { source: holder } : {}),
+        ...(source.zone !== "battlefield" ? { lastKnown: true } : {}),
+      })
+    );
+  }
+
+  /** Product of every rule's `times` for this tap (rules 106.12b, 614.1a) —
+   * "if you tap a permanent for mana, it produces twice as much of that mana
+   * instead" (Mana Reflection; three times, Nyxbloom Ancient), which compound
+   * (the ruling: two Mana Reflections make four times as much). `1` when
+   * there are none. */
+  private tapManaMultiplier(player: PlayerId, source: GameObject): number {
+    let mult = 1;
+    for (const held of this.manaProductionRules()) {
+      if (held.rule.times !== undefined && this.manaRuleApplies(held, player, source)) mult *= held.rule.times;
     }
     return Math.min(mult, Game.MAX_EFFECT_INSTANCES);
+  }
+
+  /** How much mana a {T} ability's `add-mana` would make if it resolved now,
+   * for a rule that turns on the amount (rule 106.7, Damping Sphere). */
+  private tapWouldMake(effect: EffectSpec | null, id: ObjectId, player: PlayerId): number {
+    if (effect === null) return 0;
+    if (effect.kind === "sequence") {
+      return effect.effects.reduce((total, step) => total + this.tapWouldMake(step, id, player), 0);
+    }
+    if (effect.kind !== "add-mana") return 0;
+    if (typeof effect.amount === "number") return effect.amount;
+    return effect.amount === "x" ? 0 : this.liveManaAmount(id, player, effect.amount, undefined, effect.first);
+  }
+
+  /**
+   * `player` loses unspent mana (rule 106.4): all of it as an effect says, or
+   * what `keeps` doesn't hold as a step or phase ends. Kruphix's "that mana
+   * becomes colorless instead" (Omnath, Locus of All's black) replaces the
+   * loss, restrictions and all (its rulings; rule 106.6), whichever caused it.
+   * The amount really lost, for Yurlok's life loss.
+   */
+  private loseUnspentMana(player: PlayerId, keeps: (unit: ManaUnit) => boolean = () => false): number {
+    const state = this.state.players[player];
+    const pool = state.manaPool;
+    const kept = pool.filter(keeps);
+    if (kept.length === pool.length) return 0;
+    invalidateComputedCache();
+    const becomes = this.unspentManaBecomesFor(player);
+    if (becomes !== null) {
+      state.manaPool = pool.map((unit) => (keeps(unit) || unit.type === becomes ? unit : { ...unit, type: becomes }));
+      return 0;
+    }
+    state.manaPool = kept;
+    return pool.length - kept.length;
   }
 
   /** Product of every `would-create-token` multiplier (rule 614) on a
@@ -57031,9 +57147,6 @@ export class Game {
       manaValue: manaValue(parseManaCost(printedManaCost(this.registry, object))),
       manaCost: printedManaCost(this.registry, object),
       ...(object.manaSpent !== undefined ? { manaSpent: object.manaSpent } : {}),
-      ...(object.manaSpentFrom !== undefined ? { manaSpentFrom: [...object.manaSpentFrom] } : {}),
-      ...(object.manaSpentColors !== undefined ? { manaSpentColors: [...object.manaSpentColors] } : {}),
-      ...(object.manaSpentByColor !== undefined ? { manaSpentByColor: { ...object.manaSpentByColor } } : {}),
       isToken: isTokenNow(object),
       isCommander: object.isCommander,
       tapped: object.tapped,
@@ -57769,9 +57882,8 @@ export class Game {
     // doesn't change because the card was exiled from the graveyard since.
     if (object.zone === "stack" && object.kind === "card") {
       object.lastStackManaValue = this.manaValueOnStack(object);
-      object.lastStackManaSpent = object.manaSpent ?? 0;
+      object.lastStackManaSpent = object.manaSpent ?? [];
       object.lastStackController = object.controller;
-      object.lastStackManaSpentColors = [...(object.manaSpentColors ?? [])];
       // Already taken if its targets were cleared on the way out (see
       // `forgetSpellTargets`).
       if (object.lastOnStack?.zoneChangeCount !== (object.zoneChangeCount ?? 0)) {
@@ -57781,12 +57893,7 @@ export class Game {
     // The mana spent to cast a spell stays with the permanent it becomes (an
     // "if N mana was spent to cast it" enters trigger reads it there) and
     // ends with any other move.
-    if (!(object.zone === "stack" && to === "battlefield")) {
-      object.manaSpent = undefined;
-      object.manaSpentFrom = undefined;
-      object.manaSpentColors = undefined;
-      object.manaSpentByColor = undefined;
-    }
+    if (!(object.zone === "stack" && to === "battlefield")) object.manaSpent = undefined;
 
     // Rule 400.7: wherever it goes, it arrives as a new object, so a move
     // into a graveyard records this turn and where it came from ("put there

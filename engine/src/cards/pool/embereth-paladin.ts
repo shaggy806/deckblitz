@@ -18,7 +18,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      condition: { kind: "source", filter: { manaSpentOfColors: { R: 3 } } },
+      condition: { kind: "source", filter: { manaSpent: [{ type: "R", amount: { op: "gte", n: 3 } }] } },
       replacement: { event: "enters-battlefield", counters: { kind: "+1/+1", amount: 1 } },
       text: ADAMANT,
     },

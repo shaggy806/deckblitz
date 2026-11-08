@@ -15,7 +15,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "draw", amount: { colorsSpentOf: "source" } },
+      { kind: "draw", amount: { manaSpentOf: "source", count: "colors" } },
       { kind: "discard", target: "you", amount: 2 },
     ],
   },

@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 // #209 in top-commanders.txt.
 //
 // Chaos Control grants split second to your spells paid for in part with
-// artifact mana (`manaFrom`, read off where each unit came from as it was
+// artifact mana (`manaSpent`'s `from`, read off where each unit came from as it was
 // made — a Treasure sacrificed for it was still a Treasure).
 const DRAW_TEXT = "Whenever Shadow the Hedgehog or another creature you control with flash or haste dies, draw a card.";
 const CHAOS_TEXT =
@@ -45,7 +45,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      grantsToSpells: { filter: { cast: true, castBy: "you", manaFrom: { type: "artifact" } }, splitSecond: true },
+      grantsToSpells: { filter: { cast: true, castBy: "you", manaSpent: [{ from: { type: "artifact" } }] }, splitSecond: true },
       text: CHAOS_TEXT,
     },
   ],

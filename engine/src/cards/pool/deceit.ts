@@ -20,7 +20,7 @@ export default defineCard({
   triggered: [
     {
       trigger: { on: "enters-battlefield", who: "self" },
-      condition: { kind: "source", filter: { manaSpentOfColors: { U: 2 } } },
+      condition: { kind: "source", filter: { manaSpent: [{ type: "U", amount: { op: "gte", n: 2 } }] } },
       targets: [{ kind: "optional", of: { kind: "other", of: "nonland-permanent" } }],
       effect: { kind: "return-to-hand", target: 0 },
       resolve: null,
@@ -28,7 +28,7 @@ export default defineCard({
     },
     {
       trigger: { on: "enters-battlefield", who: "self" },
-      condition: { kind: "source", filter: { manaSpentOfColors: { B: 2 } } },
+      condition: { kind: "source", filter: { manaSpent: [{ type: "B", amount: { op: "gte", n: 2 } }] } },
       targets: ["opponent"],
       effect: { kind: "discard-chosen", target: 0, filter: { notTypes: ["land"] } },
       resolve: null,

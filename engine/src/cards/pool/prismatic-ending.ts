@@ -18,7 +18,7 @@ export default defineCard({
     condition: {
       kind: "target",
       index: 0,
-      filter: { manaValue: { op: "lte", n: { amount: { colorsSpentOf: "source" } } } },
+      filter: { manaValue: { op: "lte", n: { amount: { manaSpentOf: "source", count: "colors" } } } },
     },
     then: { kind: "exile", target: 0 },
   },

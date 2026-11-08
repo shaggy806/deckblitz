@@ -29,7 +29,7 @@ export default defineCard({
         effect: {
           kind: "sequence",
           effects: [
-            { kind: "draw", amount: { colorsSpentOf: "source" } },
+            { kind: "draw", amount: { manaSpentOf: "source", count: "colors" } },
             {
               kind: "conditional",
               condition: { kind: "this-way", what: "drawn", atLeast: 1 },

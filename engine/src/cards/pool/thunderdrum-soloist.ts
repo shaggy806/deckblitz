@@ -21,7 +21,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "conditional",
-        condition: { kind: "trigger-object", filter: { manaSpent: { op: "gte", n: 5 } } },
+        condition: { kind: "trigger-object", filter: { manaSpent: [{ amount: { op: "gte", n: 5 } }] } },
         then: { kind: "damage", amount: 3, who: "each-opponent" },
         else: { kind: "damage", amount: 1, who: "each-opponent" },
       },

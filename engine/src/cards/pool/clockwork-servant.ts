@@ -1,6 +1,6 @@
 import { defineCard } from "../define.js";
 
-// Adamant on three mana of any one colour (`manaSpentOfOneColor`), an
+// Adamant on three mana of any one colour (`manaSpent`'s `count: "most-of-one-color"`), an
 // intervening-if the permanent reads from the spell it was.
 const ADAMANT =
   "Adamant — When this creature enters, if at least three mana of the same color was spent to cast it, draw a card.";
@@ -17,7 +17,7 @@ export default defineCard({
   triggered: [
     {
       trigger: { on: "enters-battlefield", who: "self" },
-      condition: { kind: "source", filter: { manaSpentOfOneColor: 3 } },
+      condition: { kind: "source", filter: { manaSpent: [{ count: "most-of-one-color", amount: { op: "gte", n: 3 } }] } },
       targets: [],
       effect: { kind: "draw", amount: 1 },
       resolve: null,

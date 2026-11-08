@@ -5,7 +5,7 @@ import { defineCard } from "../define.js";
 // or was cast for free (the rulings).
 const TEXT =
   "Converge — When this creature enters, each opponent loses X life and you gain X life, where X is the number of colors of mana spent to cast this spell.";
-const X = { colorsSpentOf: "source" } as const;
+const X = { manaSpentOf: "source", count: "colors" } as const;
 
 export default defineCard({
   name: "Radiant Epicure",

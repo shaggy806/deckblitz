@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 
 // Ice Age.
 //
-// Every player's basic land types each tapped for another colour (`landManaInstead`, one entry a
+// Every player's basic land types each tapped for another colour (`manaProduction`, one entry a
 // land type, whoever taps it — rules 106.12, 614.1a): the amount kept, only the type changed.
 
 const UPKEEP_TEXT =
@@ -19,11 +19,11 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      landManaInstead: [
-        { filter: { subtype: "Plains" }, produces: "R", tapper: "any" },
-        { filter: { subtype: "Swamp" }, produces: "G", tapper: "any" },
-        { filter: { subtype: "Mountain" }, produces: "W", tapper: "any" },
-        { filter: { subtype: "Forest" }, produces: "B", tapper: "any" },
+      manaProduction: [
+        { filter: { type: "land", subtype: "Plains" }, produces: "R", tapper: "any" },
+        { filter: { type: "land", subtype: "Swamp" }, produces: "G", tapper: "any" },
+        { filter: { type: "land", subtype: "Mountain" }, produces: "W", tapper: "any" },
+        { filter: { type: "land", subtype: "Forest" }, produces: "B", tapper: "any" },
       ],
       text: TWIST_TEXT,
     },

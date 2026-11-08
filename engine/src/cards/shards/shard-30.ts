@@ -619,6 +619,7 @@ import _poolOildeepGearhulk from "../pool/oildeep-gearhulk.js";
 import _poolOmenOfTheDead from "../pool/omen-of-the-dead.js";
 import _poolOmenOfTheSun from "../pool/omen-of-the-sun.js";
 import _poolOmen from "../pool/omen.js";
+import _poolOmnathLocusOfTheVoid from "../pool/omnath-locus-of-the-void.js";
 import _poolOmniscience from "../pool/omniscience.js";
 import _poolOnduInversion from "../pool/ondu-inversion.js";
 import _poolOonaQueenOfTheFae from "../pool/oona-queen-of-the-fae.js";
@@ -1632,6 +1633,7 @@ const shard: CardShard = {
     _poolOmenOfTheDead,
     _poolOmenOfTheSun,
     _poolOmen,
+    _poolOmnathLocusOfTheVoid,
     _poolOmniscience,
     _poolOnduInversion,
     _poolOonaQueenOfTheFae,

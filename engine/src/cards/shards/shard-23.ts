@@ -704,6 +704,7 @@ import _poolSanctuaryRaptor from "../pool/sanctuary-raptor.js";
 import _poolSandStrangler from "../pool/sand-strangler.js";
 import _poolSandstoneNeedle from "../pool/sandstone-needle.js";
 import _poolSanguineSpy from "../pool/sanguine-spy.js";
+import _poolSaprazzanSkerry from "../pool/saprazzan-skerry.js";
 import _poolSarahJaneSmith from "../pool/sarah-jane-smith.js";
 import _poolSardianAvenger from "../pool/sardian-avenger.js";
 import _poolSarkhanFireblood from "../pool/sarkhan-fireblood.js";
@@ -973,6 +974,7 @@ import _poolWoodbornBehemoth from "../pool/woodborn-behemoth.js";
 import _poolWoodwraithStrangler from "../pool/woodwraith-strangler.js";
 import _poolWrangle from "../pool/wrangle.js";
 import _poolWrathfulRaptors from "../pool/wrathful-raptors.js";
+import _poolWumpusAberration from "../pool/wumpus-aberration.js";
 import _poolXandersPact from "../pool/xanders-pact.js";
 import _poolYavimayaSteelcrusher from "../pool/yavimaya-steelcrusher.js";
 import _poolYoshimaruBelovedCompanion from "../pool/yoshimaru-beloved-companion.js";
@@ -1703,6 +1705,7 @@ const shard: CardShard = {
     _poolSandStrangler,
     _poolSandstoneNeedle,
     _poolSanguineSpy,
+    _poolSaprazzanSkerry,
     _poolSarahJaneSmith,
     _poolSardianAvenger,
     _poolSarkhanFireblood,
@@ -1972,6 +1975,7 @@ const shard: CardShard = {
     _poolWoodwraithStrangler,
     _poolWrangle,
     _poolWrathfulRaptors,
+    _poolWumpusAberration,
     _poolXandersPact,
     _poolYavimayaSteelcrusher,
     _poolYoshimaruBelovedCompanion,

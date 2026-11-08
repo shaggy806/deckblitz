@@ -1,6 +1,6 @@
 /**
  * Adamant (Throne of Eldraine): "if at least three [color] mana was spent to
- * cast this spell" — the `manaSpentOfColors` filter clause over
+ * cast this spell" — the `manaSpent` filter clause over
  * `GameObject.manaSpentByColor`, read through a `source` condition.
  */
 import { describe, expect, it } from "vitest";

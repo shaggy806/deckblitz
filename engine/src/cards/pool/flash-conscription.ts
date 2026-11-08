@@ -15,7 +15,7 @@ export default defineCard({
       { kind: "grant-keyword", target: 0, keyword: "haste", duration: "end-of-turn" },
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { W: 1 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "W", amount: { op: "gte", n: 1 } }] } },
         // "You" is the creature's controller as it deals the damage (the ruling).
         then: {
           kind: "grant-triggered",

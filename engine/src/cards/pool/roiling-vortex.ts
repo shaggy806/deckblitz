@@ -21,7 +21,7 @@ export default defineCard({
       text: UPKEEP,
     },
     {
-      trigger: { on: "cast-spell", who: "any", filter: { manaSpent: { op: "eq", n: 0 } } },
+      trigger: { on: "cast-spell", who: "any", filter: { manaSpent: [{ amount: { op: "eq", n: 0 } }] } },
       targets: [],
       effect: { kind: "damage", amount: 5, who: "trigger-controller" },
       resolve: null,

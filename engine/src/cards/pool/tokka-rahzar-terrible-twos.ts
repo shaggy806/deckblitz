@@ -26,7 +26,7 @@ export default defineCard({
   text: `This spell can't be countered.\nMenace\n${TRIGGER_TEXT}`,
   triggered: [
     {
-      trigger: { on: "cast-spell", who: "any", filter: { manaSpent: { op: "lt", n: { own: "manaValue" } } } },
+      trigger: { on: "cast-spell", who: "any", filter: { manaSpent: [{ amount: { op: "lt", n: { own: "manaValue" } } }] } },
       targets: [],
       effect: { kind: "damage", amount: 3, who: "trigger-controller" },
       resolve: null,

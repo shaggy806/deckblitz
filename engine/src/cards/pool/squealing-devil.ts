@@ -39,7 +39,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "conditional",
-        condition: { kind: "not", of: { kind: "source", filter: { manaSpentOfColors: { B: 1 } } } },
+        condition: { kind: "not", of: { kind: "source", filter: { manaSpent: [{ type: "B", amount: { op: "gte", n: 1 } }] } } },
         then: { kind: "sacrifice-source" },
       },
       resolve: null,

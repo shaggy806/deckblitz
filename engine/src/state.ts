@@ -33,7 +33,7 @@ import type {
 } from "./effects.js";
 import type { CardFilter } from "./filter.js";
 import type { CardNameAim, CardNameFilter } from "./card-names.js";
-import type { Color, LandManaInstead, ManaOrigin, ManaType, ManaUnit, SpendAs } from "./mana.js";
+import type { Color, ManaProductionRule, ManaType, ManaUnit, SpendAs, SpentMana } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { Expiry, UntilCast, UntilPoint, WhileSource } from "./duration.js";
 import type { ReplacementSpec } from "./replacements.js";
@@ -1405,47 +1405,27 @@ export interface GameObject {
   lastStackManaValue?: number;
   /** The mana spent to cast it as it last left the stack (`manaSpent`) — the
    * `{ manaSpentOf: "trigger-object" }` of a cast trigger whose spell was
-   * countered in response (Aetherflux Conduit). Kept like
-   * `lastStackManaValue`. */
-  lastStackManaSpent?: number;
+   * countered in response (Aetherflux Conduit; Magmablood Archaic's ruling).
+   * Kept like `lastStackManaValue`. */
+  lastStackManaSpent?: readonly SpentMana[];
   /** Who controlled it as it last left the stack — "**its controller's**"
    * graveyard, hand and library of a spell just countered (Counterbore's
    * ruling: a spell cast by someone else's effect is countered into its
    * owner's graveyard, and its controller's zones are searched). Kept like
    * `lastStackManaValue`. */
   lastStackController?: PlayerId;
-  /** The colours of mana spent to cast it as it last left the stack
-   * (`manaSpentColors`) — the `{ colorsSpentOf: "trigger-object" }` of a cast
-   * trigger whose spell was countered in response (Magmablood Archaic's
-   * ruling). Kept like `lastStackManaValue`. */
-  lastStackManaSpentColors?: Color[];
   /** This spell as it last existed on the stack, set each time it leaves:
    * what a copy of it copies once it has gone (rule 707.10 — Shiko and
    * Narset, Unified copies "that spell" even after it was countered in
    * response). Kept through later moves like `lastStackManaValue`; its
    * `zoneChangeCount` says which stint on the stack it describes. */
   lastOnStack?: SpellSnapshot;
-  /** How much mana was actually spent to cast this spell — the `{ manaSpentOf }`
-   * amount and the `manaSpent` filter clause (Prossh; The Emperor of
-   * Palamecia's "if at least four mana was spent to cast it"). Set as it's
-   * cast (0 for a free cast), kept by the permanent it resolves into, and
-   * cleared by any other zone change. */
-  manaSpent?: number;
-  /** Where the mana spent to cast this spell came from, one entry per unit
-   * spent — the `manaFrom` filter clause ("if mana from an artifact was
-   * spent to cast it"). Kept and cleared with `manaSpent`. */
-  manaSpentFrom?: ManaOrigin[];
-  /** The colours of the mana spent to cast this spell, each once, in WUBRG
-   * order — converge's "the number of colors of mana spent to cast this
-   * spell" (the `{ colorsSpentOf }` amount). Colourless isn't a colour. Kept
-   * and cleared with `manaSpent`. */
-  manaSpentColors?: Color[];
-  /** How many units of each colour were spent to cast this spell — adamant's
-   * "if at least three black mana was spent to cast this spell" (Throne of
-   * Eldraine), the Mythos cycle's "if {U}{B} was spent" (the filter's
-   * `manaSpentOfColors`). Colours with none are left out. Kept and cleared
-   * with `manaSpent`. */
-  manaSpentByColor?: Partial<Record<Color, number>>;
+  /** The mana spent to cast this spell, one entry per unit paid, read through
+   * `spentManaCount` — the `{ manaSpentOf }` amount and the `manaSpent` filter
+   * clause. Set as it's cast (empty for a free cast), kept by the permanent it
+   * resolves into, and cleared by any other zone change. An activated
+   * ability's is on `lastKnownRefs.manaSpent`, for "this ability". */
+  manaSpent?: readonly SpentMana[];
   /** For a triggered ability object: the target slots its triggering event
    * filled rather than its controller choosing — a saboteur's "that player"
    * (Hypnotic Specter's discard). Those aren't targets (rule 115.1), so
@@ -2070,13 +2050,7 @@ export interface LastKnownInfo {
    * of, once it has gone. Absent or `null`, none. */
   readonly manaCost?: string | null;
   /** The mana spent to cast it, if it was cast (`GameObject.manaSpent`). */
-  readonly manaSpent?: number;
-  /** Where that mana came from (`GameObject.manaSpentFrom`). */
-  readonly manaSpentFrom?: readonly ManaOrigin[];
-  /** Its colours (`GameObject.manaSpentColors`). */
-  readonly manaSpentColors?: readonly Color[];
-  /** How much of each (`GameObject.manaSpentByColor`). */
-  readonly manaSpentByColor?: Partial<Record<Color, number>>;
+  readonly manaSpent?: readonly SpentMana[];
   readonly isToken: boolean;
   readonly isCommander: boolean;
   readonly tapped: boolean;
@@ -2289,6 +2263,10 @@ export interface CastSpellRecord {
  * permanents.
  */
 export interface LastKnownRefs {
+  /** For an activated ability: the mana spent to activate it (rule 602.2b),
+   * "if mana from a Treasure was spent to activate this ability". It goes
+   * with the refs so a resolution parked on a decision still has it. */
+  readonly manaSpent?: readonly SpentMana[];
   readonly source?: number;
   readonly triggerObject?: number;
   /** For a fired delayed ability: the resolution that set it up
@@ -5331,12 +5309,11 @@ export interface PlayerEffect {
    * `owner`'s side, enters tapped while this lasts. */
   readonly entersTapped?: CardFilter;
   /** "Until end of turn, if you tap a land you control for mana, it produces
-   * {U} instead of any other type" (Deep Water): `owner`'s lands tapped for
-   * mana by them make this type (rules 106.12, 614.1a) — see
-   * `Game.landManaInsteadFor`. An entry says more: "if a player taps a
-   * nonbasic land for mana" (Pale Moon), any player's, with "you" in its
-   * filter being `owner`. */
-  readonly landManaInstead?: ManaType | LandManaInstead;
+   * {U} instead of any other type" (Deep Water), "if a player taps a nonbasic
+   * land for mana" (Pale Moon): one rule of what a tapped permanent makes
+   * (rules 106.12b, 614.1a), with "you" being `owner`. See
+   * `Game.manaProductionRules`. */
+  readonly manaProduction?: ManaProductionRule;
   /** "Your life total can't change" (Teferi's Protection): these players can
    * neither gain nor lose life (rules 119.7, 119.8) — a gain or a loss, from
    * damage or an effect, does nothing; a cost that has them pay more than 0

@@ -55,7 +55,7 @@ export default defineCard({
       text: ATTACK_TEXT,
     },
     {
-      trigger: { on: "cast-spell", who: "you", filter: { manaSpent: { op: "gte", n: 7 } } },
+      trigger: { on: "cast-spell", who: "you", filter: { manaSpent: [{ amount: { op: "gte", n: 7 } }] } },
       targets: ["creature"],
       effect: {
         kind: "sequence",

@@ -26,7 +26,7 @@ import type {
 import type { AggregateSpec, CardFilter, DamageSourceClause, ShareReference, SharedTypes } from "./filter.js";
 import { filterAtX } from "./filter.js";
 import type { CardNameAim, CardNameFilter } from "./card-names.js";
-import { differentManaSplits, manaOriginMatches, type Color, type LandManaInstead, type ManaCastFrom, type ManaFromSpec, type ManaOrigin, type ManaSpendPurpose, type ManaType, type SpendAs } from "./mana.js";
+import { differentManaSplits, spentManaCount, type Color, type ManaCastFrom, type ManaProductionRule, type ManaSpendPurpose, type ManaSpentQuery, type ManaType, type SpendAs, type SpentMana } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import { EVERY_CREATURE_TYPE, EVERY_LAND_TYPE, isCreatureType, isLandType } from "./subtypes.js";
 import { sameVoteChoice } from "./events.js";
@@ -643,21 +643,21 @@ export type EffectAmount =
    * amount of mana spent to cast that spell at the beginning of your next
    * main phase".
    *
-   * `from` counts only the mana made by matching sources: "the amount of {S}
-   * spent to cast this spell" (Graven Lore — rule 107.4h, mana from a snow
-   * source) is `{ manaSpentOf: "source", from: { supertype: "snow" } }`.
+   * The rest of it is {@link ManaSpentQuery}: `from` counts only the mana made
+   * by matching sources ("the amount of {S} spent to cast this spell", Graven
+   * Lore — rule 107.4h, is `{ manaSpentOf: "source", from: { supertype: "snow"
+   * } }`); `count: "colors"` is converge's "the number of colors of mana spent
+   * to cast this spell" (rule 207.2c; colourless isn't a colour, and a copy or
+   * a free cast reads 0); `per: 2` is "for each {G}{G} spent". `"this-ability"`
+   * reads the activated ability that's resolving instead (rule 602.2b).
    */
-  | { readonly manaSpentOf: ObjectRef; readonly from?: ManaFromSpec }
+  | ({ readonly manaSpentOf: ObjectRef | "this-ability" } & ManaSpentQuery)
   /**
-   * How many **colours** of mana were spent to cast the object — converge
-   * (an ability word, rule 207.2c: Painful Truths' "where X is the number of
-   * colors of mana spent to cast this spell"). Colourless isn't a colour, so
-   * at most 5; mana spent on additional costs and cost increases counts. A
-   * copy of a spell wasn't cast and reads 0, as does a free cast (the
-   * converge rulings). Kept by the permanent a spell becomes, like
-   * `manaSpentOf`; `0` for anything that wasn't cast.
+   * How much unspent mana a player has (rule 106.4): Omnath, Locus of the
+   * Void's "for each unspent mana you have"; `type` narrows it, "unspent green
+   * mana". Mana made and spent inside one payment is never unspent.
    */
-  | { readonly colorsSpentOf: ObjectRef }
+  | { readonly unspentMana: PlayerRef; readonly type?: ManaType }
   /**
    * How many creatures convoked it (rule 702.51a): the resolving spell's, or
    * — for the permanent a spell became — its spell's: Ancient Imperiosaur's
@@ -2151,6 +2151,13 @@ export interface CastNowProgress {
  */
 export type BoardManaList =
   /**
+   * "One mana of any type the sacrificed land could produce" (Squandered
+   * Resources): a mana ability whose cost sacrifices one permanent matching
+   * this filter. Rule 106.7's "could produce", read just before the cost is
+   * paid. A land that could produce none makes none (its ruling, rule 106.5).
+   */
+  | { readonly sacrificedCouldProduce: CardFilter }
+  /**
    * "…of any color that a land an opponent controls could produce" (Exotic
    * Orchard, Fellwar Stone): a `oneOf` over those colours.
    *
@@ -2996,6 +3003,16 @@ export type EffectSpec =
       /** A player target slot, a scope, or one player named through a target. */
       readonly who: number | PlayerScope;
       readonly amount: EffectAmount;
+    }
+  | {
+      /** "That player loses all unspent mana" (Mana Short, Power Sink,
+       * Worldpurge — rule 106.4). The loss a step's end causes, so "if you
+       * would lose unspent mana" sees it; "you don't lose … as steps and
+       * phases end" doesn't apply, because no step is ending. `who` a scope,
+       * `target` a target slot holding a player. */
+      readonly kind: "lose-unspent-mana";
+      readonly who?: PlayerScope;
+      readonly target?: number;
     }
   | {
       /** Life loss (Zulaport Cutthroat: "each opponent loses 1 life"). An
@@ -6213,14 +6230,13 @@ export type EffectSpec =
        * their pool while this lasts, as a `keepsUnspentMana` static's does. */
       readonly keepsUnspentMana?: readonly ManaType[];
       /** "Until end of turn, if you tap a land you control for mana, it
-       * produces {U} instead of any other type" (Deep Water): the owner's
-       * taps of their lands make this type, as `StaticAbility.landManaInstead`
-       * does with `tapper: "you"`. An entry says more: "until end of turn, if
-       * a player taps a nonbasic land for mana, it produces colorless mana"
-       * (Pale Moon), "lands tapped for mana produce mana of the chosen color
-       * instead of any other color" (Hall of Gemstone), with "you" in its
-       * filter being the effect's controller. */
-      readonly landManaInstead?: ManaType | LandManaInstead;
+       * produces {U} instead of any other type" (Deep Water), "if a player
+       * taps a nonbasic land for mana, it produces colorless mana" (Pale
+       * Moon), "lands tapped for mana produce mana of the chosen color instead
+       * of any other color" (Hall of Gemstone): one rule of what a tapped
+       * permanent makes, as a static's `manaProduction` entry, with "you"
+       * being the effect's controller. */
+      readonly manaProduction?: ManaProductionRule;
       /** "Your life total can't change" (Teferi's Protection — rules 119.7,
        * 119.8): no gain and no loss, from damage or an effect; no life paid
        * but 0; no exchange of life totals. */
@@ -10745,13 +10761,16 @@ export interface EffectApi {
    * the `{ manaValueOf }` {@link EffectAmount}. `0` for a player target or an
    * object that no longer exists. */
   manaValueOf(target: TargetRef): number;
-  /** See the `{ manaSpentOf }` {@link EffectAmount}. */
-  manaSpentOf(target: TargetRef): number;
-  /** Where the mana spent to cast `target` came from, one entry per unit
-   * (`GameObject.manaSpentFrom`) — `manaSpentOf`'s `from`. */
-  manaSpentFromOf(target: TargetRef): readonly ManaOrigin[];
-  /** See the `{ colorsSpentOf }` {@link EffectAmount}. */
-  colorsSpentOf(target: TargetRef): number;
+  /** The mana spent to cast `target`, read as it last was on the stack once
+   * it has gone (rule 608.2h) — see the `{ manaSpentOf }` {@link EffectAmount}. */
+  manaSpentOf(target: TargetRef): readonly SpentMana[];
+  /** The mana spent to activate the ability resolving (rule 602.2b), for
+   * `manaSpentOf: "this-ability"` and the `ability-mana-spent` condition. */
+  manaSpentOnThisAbility(): readonly SpentMana[];
+  /** How many units of mana `who` has in their pool, of `type` if given. */
+  unspentMana(who: PlayerId, type?: ManaType): number;
+  /** `who` loses all their unspent mana (rule 106.4): {@link Game.loseUnspentMana}. */
+  loseUnspentMana(who: PlayerId): void;
   /** See the `{ commanderCastsOf }` {@link EffectAmount}. */
   commanderCastsOf(target: TargetRef): number;
   /** See the `{ commanderCasts }` {@link EffectAmount}: `player`'s casts of
@@ -14683,15 +14702,13 @@ export function signedAmountValue(
   }
   if ("devoured" in amount) return ctx.devouredBySource(amount.filter);
   if ("manaSpentOf" in amount) {
+    if (amount.manaSpentOf === "this-ability") return spentManaCount(ctx.manaSpentOnThisAbility(), amount);
     const ref = objectRefRead(amount.manaSpentOf, ctx);
-    if (ref === undefined) return 0;
-    const from = amount.from;
-    if (from === undefined) return ctx.manaSpentOf(ref);
-    return ctx.manaSpentFromOf(ref).filter((origin) => manaOriginMatches(origin, from)).length;
+    return ref === undefined ? 0 : spentManaCount(ctx.manaSpentOf(ref), amount);
   }
-  if ("colorsSpentOf" in amount) {
-    const ref = objectRefRead(amount.colorsSpentOf, ctx);
-    return ref === undefined ? 0 : ctx.colorsSpentOf(ref);
+  if ("unspentMana" in amount) {
+    const who = resolvePlayerRef(amount.unspentMana, ctx);
+    return who === undefined ? 0 : ctx.unspentMana(who, amount.type);
   }
   if ("convokers" in amount) return ctx.convokerCount();
   if ("phyrexianPaidWithLife" in amount) return ctx.phyrexianPaidWithLife();
@@ -16434,6 +16451,20 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       else {
         for (const p of ctx.playersInScope(spec.who)) ctx.gainLife(p, amountValue(spec.amount, ctx, p));
       }
+      return;
+    }
+    case "lose-unspent-mana": {
+      if (spec.target !== undefined) {
+        const ref = ctx.targets[spec.target];
+        if (ref?.kind === "player") ctx.loseUnspentMana(ref.player);
+        return;
+      }
+      if (typeof spec.who === "object" && !("otherThan" in spec.who)) {
+        const who = resolvePlayerRef(spec.who, ctx);
+        if (who !== undefined) ctx.loseUnspentMana(who);
+        return;
+      }
+      for (const p of ctx.playersInScope(spec.who ?? "you")) ctx.loseUnspentMana(p);
       return;
     }
     case "lose-life": {
@@ -18333,7 +18364,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ...(spec.tokensComeToOwner === true ? { tokensComeToOwner: true as const } : {}),
         ...(spec.looksAtOwnLibraryTop === true ? { looksAtOwnLibraryTop: true as const } : {}),
         ...(spec.entersTapped !== undefined ? { entersTapped: spec.entersTapped } : {}),
-        ...(spec.landManaInstead !== undefined ? { landManaInstead: spec.landManaInstead } : {}),
+        ...(spec.manaProduction !== undefined ? { manaProduction: spec.manaProduction } : {}),
         ...(spec.lifeCantChange !== undefined ? { lifeCantChange: ctx.playersInScope(spec.lifeCantChange) } : {}),
         ...(spec.protectionFromEverything !== undefined
           ? { protectionFromEverything: ctx.playersInScope(spec.protectionFromEverything) }

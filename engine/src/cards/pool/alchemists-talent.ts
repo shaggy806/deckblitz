@@ -3,7 +3,7 @@ import { atLevel, classLevel } from "../helpers.js";
 
 // EDHREC rank 2073. A Class (rule 716): each level bar is a sorcery-speed
 // activated ability from the level below, and the abilities under it are
-// gated on the level (`atLevel`). The last level's "if mana from a Treasure was spent" is Mastermind Plum's `manaFrom`.
+// gated on the level (`atLevel`). The last level's "if mana from a Treasure was spent" is Mastermind Plum's `manaSpent`'s `from`.
 export default defineCard({
   name: "Alchemist's Talent",
   manaCost: "{3}{R}",
@@ -16,7 +16,7 @@ export default defineCard({
   ],
   triggered: [
     { trigger: { on: "enters-battlefield", who: "self" }, targets: [], effect: { kind: "create-token", token: "Treasure Token", count: 2, tapped: true }, resolve: null, text: "When this Class enters, create two tapped Treasure tokens." },
-    atLevel(3, { trigger: { on: "cast-spell", who: "you", filter: { manaFrom: { subtype: "Treasure" } } }, targets: [], effect: { kind: "damage", amount: { manaValueOf: "trigger-object" }, who: "each-opponent" }, resolve: null, text: "Whenever you cast a spell, if mana from a Treasure was spent to cast it, this Class deals damage equal to that spell's mana value to each opponent." }),
+    atLevel(3, { trigger: { on: "cast-spell", who: "you", filter: { manaSpent: [{ from: { subtype: "Treasure" } }] } }, targets: [], effect: { kind: "damage", amount: { manaValueOf: "trigger-object" }, who: "each-opponent" }, resolve: null, text: "Whenever you cast a spell, if mana from a Treasure was spent to cast it, this Class deals damage equal to that spell's mana value to each opponent." }),
   ],
   activated: [
     classLevel(2, "{1}{R}"),

@@ -21,7 +21,7 @@ export default defineCard({
   triggered: [
     {
       trigger: { on: "enters-battlefield", who: "self" },
-      condition: { kind: "source", filter: { manaFrom: { subtype: "Treasure" } } },
+      condition: { kind: "source", filter: { manaSpent: [{ from: { subtype: "Treasure" } }] } },
       targets: [],
       effect: {
         kind: "sequence",

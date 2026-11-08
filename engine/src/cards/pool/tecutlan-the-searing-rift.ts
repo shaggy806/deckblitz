@@ -1,7 +1,7 @@
 import { defineCard } from "../define.js";
 
 // Back face of Brass's Tunnel-Grinder. "Mana produced by Tecutlan" is this very
-// permanent's (`manaFrom.fromSource`); X is the spell's mana value, with {X} at
+// permanent's (`manaSpent`'s `from: { fromSource: true }`); X is the spell's mana value, with {X} at
 // its chosen value and ignoring what was actually paid (the rulings).
 
 const CAST_TEXT =
@@ -31,7 +31,7 @@ export default defineCard({
         who: "you",
         filter: {
           typesAnyOf: ["artifact", "creature", "enchantment", "land", "planeswalker", "battle"],
-          manaFrom: { fromSource: true },
+          manaSpent: [{ from: { fromSource: true } }],
         },
       },
       targets: [],

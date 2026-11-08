@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 
 // Fifth Dawn.
 //
-// Kruphix, God of Horizons's replacement alone (`unspentManaBecomesColorless`, rule 614): every
+// Kruphix, God of Horizons's replacement alone (`unspentManaBecomes`, rule 614): every
 // unit you would lose as a step or phase ends stays in your pool as colorless mana, its
 // restrictions and riders kept.
 
@@ -13,5 +13,5 @@ export default defineCard({
   manaCost: "{5}",
   types: ["artifact"],
   text: TEXT,
-  static: [{ affects: { scope: "self" }, unspentManaBecomesColorless: true, text: TEXT }],
+  static: [{ affects: { scope: "self" }, unspentManaBecomes: "C", text: TEXT }],
 });

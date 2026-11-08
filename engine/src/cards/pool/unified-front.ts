@@ -9,5 +9,5 @@ export default defineCard({
   types: ["sorcery"],
   text: "Converge — Create a 1/1 white Kor Ally creature token for each color of mana spent to cast this spell.",
   targets: [],
-  effect: { kind: "create-token", token: "Kor Ally Token", count: { colorsSpentOf: "source" } },
+  effect: { kind: "create-token", token: "Kor Ally Token", count: { manaSpentOf: "source", count: "colors" } },
 });

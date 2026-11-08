@@ -20,7 +20,7 @@ export default defineCard({
       { kind: "fight", a: 0, b: 1 },
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { G: 3 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "G", amount: { op: "gte", n: 3 } }] } },
         then: { kind: "grant-keyword", target: 0, keyword: "indestructible", duration: "end-of-turn" },
       },
     ],

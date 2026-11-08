@@ -455,6 +455,7 @@ import _poolJadeSeedstones from "../pool/jade-seedstones.js";
 import _poolJarvisEarthsMightiestButler from "../pool/jarvis-earths-mightiest-butler.js";
 import _poolJelevaNephaliasScourge from "../pool/jeleva-nephalias-scourge.js";
 import _poolJerrenCorruptedBishop from "../pool/jerren-corrupted-bishop.js";
+import _poolJetmirsFixer from "../pool/jetmirs-fixer.js";
 import _poolJinGitaxiasProgressTyrant from "../pool/jin-gitaxias-progress-tyrant.js";
 import _poolJungleLion from "../pool/jungle-lion.js";
 import _poolJuratiCordialQueen from "../pool/jurati-cordial-queen.js";
@@ -1443,6 +1444,7 @@ const shard: CardShard = {
     _poolJarvisEarthsMightiestButler,
     _poolJelevaNephaliasScourge,
     _poolJerrenCorruptedBishop,
+    _poolJetmirsFixer,
     _poolJinGitaxiasProgressTyrant,
     _poolJungleLion,
     _poolJuratiCordialQueen,

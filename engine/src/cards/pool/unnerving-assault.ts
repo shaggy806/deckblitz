@@ -20,7 +20,7 @@ export default defineCard({
     effects: [
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { U: 1 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "U", amount: { op: "gte", n: 1 } }] } },
         then: {
           kind: "modify-pt-all",
           filter: { type: "creature", controlledBy: "opponent" },
@@ -31,7 +31,7 @@ export default defineCard({
       },
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { R: 1 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "R", amount: { op: "gte", n: 1 } }] } },
         then: {
           kind: "modify-pt-all",
           filter: { type: "creature", controlledBy: "you" },

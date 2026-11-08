@@ -20,9 +20,9 @@ export default defineCard({
         kind: "create-token",
         token: "Fractal Token",
         count: 2,
-        thenCounters: { kind: "+1/+1", amount: { colorsSpentOf: "source" } },
+        thenCounters: { kind: "+1/+1", amount: { manaSpentOf: "source", count: "colors" } },
       },
-      { kind: "gain-life", amount: { colorsSpentOf: "source" } },
+      { kind: "gain-life", amount: { manaSpentOf: "source", count: "colors" } },
     ],
   },
 });

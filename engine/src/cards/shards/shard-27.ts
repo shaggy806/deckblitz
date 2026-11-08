@@ -319,6 +319,7 @@ import _poolGiantfall from "../pool/giantfall.js";
 import _poolGiftOfTheFae from "../pool/gift-of-the-fae.js";
 import _poolGithzeraiMonk from "../pool/githzerai-monk.js";
 import _poolGladecoverScout from "../pool/gladecover-scout.js";
+import _poolGlissaSunseeker from "../pool/glissa-sunseeker.js";
 import _poolGloryToTheEmpire from "../pool/glory-to-the-empire.js";
 import _poolGoblinMountaineer from "../pool/goblin-mountaineer.js";
 import _poolGoblinTombRaider from "../pool/goblin-tomb-raider.js";
@@ -1286,6 +1287,7 @@ const shard: CardShard = {
     _poolGiftOfTheFae,
     _poolGithzeraiMonk,
     _poolGladecoverScout,
+    _poolGlissaSunseeker,
     _poolGloryToTheEmpire,
     _poolGoblinMountaineer,
     _poolGoblinTombRaider,

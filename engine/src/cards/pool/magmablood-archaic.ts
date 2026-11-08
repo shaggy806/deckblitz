@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 // EDHREC rank 19486.
 //
 // Converge is Crystalline Crawler's replacement. The cast trigger reads the
-// colours spent on the spell that fired it (`colorsSpentOf`), a copy or a
+// colours spent on the spell that fired it (`manaSpentOf`'s `count: "colors"`), a copy or a
 // free cast having spent none (the rulings).
 //
 // Rulings:
@@ -33,7 +33,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "enters-battlefield", counters: { kind: "+1/+1", amount: { colorsSpentOf: "source" } } },
+      replacement: { event: "enters-battlefield", counters: { kind: "+1/+1", amount: { manaSpentOf: "source", count: "colors" } } },
       text: CONVERGE_TEXT,
     },
   ],
@@ -44,7 +44,7 @@ export default defineCard({
       effect: {
         kind: "modify-pt-all",
         filter: { type: "creature", controlledBy: "you" },
-        power: { colorsSpentOf: "trigger-object" },
+        power: { manaSpentOf: "trigger-object", count: "colors" },
         toughness: 0,
         duration: "end-of-turn",
       },

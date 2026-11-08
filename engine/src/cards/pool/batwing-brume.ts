@@ -17,12 +17,12 @@ export default defineCard({
     effects: [
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { W: 1 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "W", amount: { op: "gte", n: 1 } }] } },
         then: { kind: "prevent-all-combat-damage" },
       },
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { B: 1 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "B", amount: { op: "gte", n: 1 } }] } },
         then: {
           kind: "lose-life",
           who: "each-player",

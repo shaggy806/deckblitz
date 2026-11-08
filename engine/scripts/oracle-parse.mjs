@@ -326,7 +326,7 @@ function keywordPart(part, faceName, typeLine = "") {
     // Arcbound Ravager's shape: enters with the counters; may move them as it
     // dies. "Modular—Sunburst" is a +1/+1 counter per colour spent to cast it,
     // creature or not (rule 702.44c).
-    const n = m[1] !== undefined ? Number(m[1]) : { colorsSpentOf: "source" };
+    const n = m[1] !== undefined ? Number(m[1]) : { manaSpentOf: "source", count: "colors" };
     const label = typeof n === "number" ? `Modular ${n}` : "Modular—Sunburst";
     return {
       static: [
@@ -2411,7 +2411,7 @@ export function parseTrigger(clause) {
     return [{ on: "cast-spell", who: "you", filter: { hasKeyword: "convoke" } }];
   }
   // "Using mana produced by Tecutlan" (Barracks of the Thousand): this very
-  // permanent's mana, `manaFrom.fromSource`. A permanent spell is any of the
+  // permanent's mana, `manaSpent`'s `from: { fromSource: true }`. A permanent spell is any of the
   // permanent types.
   if ((m = /^Whenever you cast an? (.+?) spell using mana produced by ~$/.exec(c))) {
     const filter =
@@ -2419,7 +2419,7 @@ export function parseTrigger(clause) {
         ? { typesAnyOf: ["artifact", "creature", "enchantment", "land", "planeswalker", "battle"] }
         : parseTypePhrase(m[1]);
     if (filter === null) return null;
-    return [{ on: "cast-spell", who: "you", filter: { ...filter, manaFrom: { fromSource: true } } }];
+    return [{ on: "cast-spell", who: "you", filter: { ...filter, manaSpent: [{ from: { fromSource: true } }] } }];
   }
   if (/^Whenever you cast or copy an instant or sorcery spell$/.test(c)) {
     return [{ on: "cast-spell", who: "you", orCopy: true, filter: { typesAnyOf: ["instant", "sorcery"] } }];
@@ -3184,14 +3184,14 @@ export function parseSentence(sentence, ctx) {
   // "Until end of turn, if you tap a land you control for mana, it produces
   // {U} instead of any other type" (Deep Water — rule 106.12).
   if ((m = /^until end of turn, if you tap a land you control for mana, it produces \{([WUBRGC])\} instead of any other type\.$/i.exec(s))) {
-    return { kind: "player-effect", duration: "end-of-turn", landManaInstead: m[1] };
+    return { kind: "player-effect", duration: "end-of-turn", manaProduction: { filter: { type: "land", controlledBy: "you" }, produces: m[1], tapper: "you" } };
   }
   // One mana of the tapper's choice for the turn (Harvest Mage).
   if (/^until end of turn, if you tap a land for mana, it produces one mana of a color of your choice instead of any other type and amount\.$/i.test(s)) {
     return {
       kind: "player-effect",
       duration: "end-of-turn",
-      landManaInstead: { produces: "any-color", tapper: "you", one: true },
+      manaProduction: { filter: { type: "land" }, produces: "any-color", tapper: "you", one: true },
     };
   }
   // Every player's nonbasic lands for the turn (Pale Moon).
@@ -3199,7 +3199,7 @@ export function parseSentence(sentence, ctx) {
     return {
       kind: "player-effect",
       duration: "end-of-turn",
-      landManaInstead: { filter: { notSupertype: "basic" }, produces: "C", tapper: "any" },
+      manaProduction: { filter: { type: "land", notSupertype: "basic" }, produces: "C", tapper: "any" },
     };
   }
   // "Until your next turn, creatures can't attack you" (Chronomantic Escape):
@@ -8212,7 +8212,7 @@ const SNAPDAX_LINE =
   "Each player chooses an artifact, a creature, an enchantment, and a planeswalker from among the nonland permanents they control, then sacrifices the rest. If {B}{R} was spent to cast ~, you choose the permanents for each player instead.";
 const SNAPDAX_EFFECT = {
   kind: "conditional",
-  condition: { kind: "source", filter: { manaSpentOfColors: { B: 1, R: 1 } } },
+  condition: { kind: "source", filter: { manaSpent: [{ type: "B", amount: { op: "gte", n: 1 } }, { type: "R", amount: { op: "gte", n: 1 } }] } },
   then: {
     kind: "choose-one-of-each",
     who: "each-player",
@@ -8884,7 +8884,7 @@ export function parseEffect(text, outer) {
     const colors = [["W", "White"], ["U", "Blue"], ["B", "Black"], ["R", "Red"], ["G", "Green"]];
     const modes = colors.map(([produces, word]) => ({
       text: word,
-      effect: { kind: "player-effect", duration: "end-of-turn", landManaInstead: { produces, tapper: "any", colorsOnly: true } },
+      effect: { kind: "player-effect", duration: "end-of-turn", manaProduction: { filter: { type: "land" }, produces, tapper: "any", colorsOnly: true } },
     }));
     return {
       effect: { kind: "as-player", who: "active-player", effect: { kind: "modal", minModes: 1, maxModes: 1, modes } },
@@ -18473,17 +18473,25 @@ function parseStatic(line, text) {
   // A land tapped for mana producing another type (rules 106.12, 614.1a):
   // any land (Infernal Darkness), or by basic land type (Reality Twist).
   if ((m = /^If a land is tapped for mana, it produces \{([WUBRGC])\} instead of any other type\.$/.exec(line))) {
-    return { affects: { scope: "self" }, landManaInstead: [{ produces: m[1], tapper: "any" }], text };
+    return { affects: { scope: "self" }, manaProduction: [{ filter: { type: "land" }, produces: m[1], tapper: "any" }], text };
   }
   // "…instead of any other type and amount" (Contamination): one mana.
   if ((m = /^If a land is tapped for mana, it produces \{([WUBRGC])\} instead of any other type and amount\.$/.exec(line))) {
-    return { affects: { scope: "self" }, landManaInstead: [{ produces: m[1], tapper: "any", one: true }], text };
+    return { affects: { scope: "self" }, manaProduction: [{ filter: { type: "land" }, produces: m[1], tapper: "any", one: true }], text };
+  }
+  // "Produces colorless mana" (Ritual of Subdual); "for two or more mana"
+  // (Damping Sphere, rules 106.12b, 616.1).
+  if (/^If a land is tapped for mana, it produces colorless mana instead of any other type\.$/.test(line)) {
+    return { affects: { scope: "self" }, manaProduction: [{ filter: { type: "land" }, produces: "C", tapper: "any" }], text };
+  }
+  if (/^If a land is tapped for two or more mana, it produces \{C\} instead of any other type and amount\.$/.test(line)) {
+    return { affects: { scope: "self" }, manaProduction: [{ filter: { type: "land" }, produces: "C", tapper: "any", one: true, atLeast: 2 }], text };
   }
   // "A color of your choice", the tapper's (Pulse of Llanowar).
   if (/^If a basic land you control is tapped for mana, it produces mana of a color of your choice instead of any other type\.$/.test(line)) {
     return {
       affects: { scope: "self" },
-      landManaInstead: [{ filter: { supertype: "basic", controlledBy: "you" }, produces: "any-color", tapper: "any" }],
+      manaProduction: [{ filter: { type: "land", supertype: "basic", controlledBy: "you" }, produces: "any-color", tapper: "any" }],
       text,
     };
   }
@@ -18492,9 +18500,9 @@ function parseStatic(line, text) {
     for (const part of m[1].split(/, and |, /)) {
       const e = /^(Plains|Islands|Swamps|Mountains|Forests) produce \{([WUBRGC])\}$/.exec(part);
       if (e === null) return null;
-      entries.push({ filter: { subtype: e[1] === "Plains" ? "Plains" : e[1].slice(0, -1) }, produces: e[2], tapper: "any" });
+      entries.push({ filter: { type: "land", subtype: e[1] === "Plains" ? "Plains" : e[1].slice(0, -1) }, produces: e[2], tapper: "any" });
     }
-    return { affects: { scope: "self" }, landManaInstead: entries, text };
+    return { affects: { scope: "self" }, manaProduction: entries, text };
   }
   // Unspent mana as steps and phases end (rule 500.4): kept, of one colour
   // (Leyline Tyrant) or by every player (Upwelling); turned into another type
@@ -18510,9 +18518,13 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // A size read off the pool (rule 106.4).
+  if ((m = /^~ gets \+1\/\+1 for each unspent (?:(white|blue|black|red|green) )?mana you have\.$/.exec(line))) {
+    return { affects: { scope: "self" }, grantPtPerCount: { unspentMana: m[1] === undefined ? {} : { type: COLOR_WORD[m[1]] }, pt: [1, 1] }, text };
+  }
   if ((m = /^If you would lose unspent mana, that mana becomes (colorless|white|blue|black|red|green) instead\.$/.exec(line))) {
     return m[1] === "colorless"
-      ? { affects: { scope: "self" }, unspentManaBecomesColorless: true, text }
+      ? { affects: { scope: "self" }, unspentManaBecomes: "C", text }
       : { affects: { scope: "self" }, unspentManaBecomes: COLOR_WORD[m[1]], text };
   }
   if (line === "A player losing unspent mana causes that player to lose that much life.") {
@@ -18701,7 +18713,7 @@ function parseStatic(line, text) {
       const filter = {
         ...typed,
         ...(m[2] !== undefined ? { castFrom: "exile" } : {}),
-        ...(m[4] !== undefined ? { manaFrom: CARD_TYPES.includes(m[4].toLowerCase()) ? { type: m[4].toLowerCase() } : { subtype: m[4] } } : {}),
+        ...(m[4] !== undefined ? { manaSpent: [{ from: CARD_TYPES.includes(m[4].toLowerCase()) ? { type: m[4].toLowerCase() } : { subtype: m[4] } }] } : {}),
       };
       return {
         affects: { scope: "self" },

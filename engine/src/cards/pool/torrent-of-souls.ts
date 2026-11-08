@@ -16,12 +16,12 @@ export default defineCard({
     effects: [
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { B: 1 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "B", amount: { op: "gte", n: 1 } }] } },
         then: { kind: "put-onto-battlefield", target: 0 },
       },
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { R: 1 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "R", amount: { op: "gte", n: 1 } }] } },
         then: {
           kind: "sequence",
           effects: [

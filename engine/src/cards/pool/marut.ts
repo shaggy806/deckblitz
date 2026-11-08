@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 
 // EDHREC rank 13387.
 // Makes Treasure → use "Treasure Token".
-// Hired Hexblade's intervening-if (`manaFrom`), and the Treasures count the mana from\nTreasures the permanent kept from its cast.
+// Hired Hexblade's intervening-if (`manaSpent`'s `from`), and the Treasures count the mana from\nTreasures the permanent kept from its cast.
 
 const ENTER_TEXT =
   "When this creature enters, if mana from a Treasure was spent to cast it, create a Treasure token for each mana from a Treasure spent to cast it.";
@@ -20,7 +20,7 @@ export default defineCard({
   triggered: [
     {
       trigger: { on: "enters-battlefield", who: "self" },
-      condition: { kind: "source", filter: { manaFrom: { subtype: "Treasure" } } },
+      condition: { kind: "source", filter: { manaSpent: [{ from: { subtype: "Treasure" } }] } },
       targets: [],
       effect: {
         kind: "create-token",

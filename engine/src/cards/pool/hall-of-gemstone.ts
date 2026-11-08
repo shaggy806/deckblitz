@@ -11,7 +11,7 @@ import type { EffectSpec, ModeOption } from "../../effects.js";
 //   [2016-08-23] Any colorless mana that's produced isn't affected.
 //
 // The active player chooses as the trigger resolves (`as-player` over a `modal`), and the effect
-// lasts the turn with this gone: `landManaInstead`'s `colorsOnly`, whoever taps any land.
+// lasts the turn with this gone: `manaProduction`'s `colorsOnly`, whoever taps any land.
 
 const TEXT =
   "At the beginning of each player's upkeep, that player chooses a color. Until end of turn, lands tapped for mana produce mana of the chosen color instead of any other color.";
@@ -29,7 +29,7 @@ const modes: readonly ModeOption[] = COLORS.map(([color, word]) => ({
   effect: {
     kind: "player-effect",
     duration: "end-of-turn",
-    landManaInstead: { produces: color, tapper: "any", colorsOnly: true },
+    manaProduction: { filter: { type: "land" }, produces: color, tapper: "any", colorsOnly: true },
   } satisfies EffectSpec,
 }));
 

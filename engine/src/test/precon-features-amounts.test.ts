@@ -4,7 +4,7 @@
  * - the `thisWay` amount's `perPlayer: "greatest"` — Windfall — and
  *   `sumOf: "power"`, read as the sacrificed creatures last existed — Reign
  *   of the Pit;
- * - `colorsSpentOf`, converge — Painful Truths;
+ * - `manaSpentOf`'s `count: "colors"`, converge — Painful Truths;
  * - `sharesCreatureTypeWith: "trigger-object"` — Heirloom Blade;
  * - the `controls-greatest` condition — Thickest in the Thicket;
  * - `deals-combat-damage-to-player`'s `toPlayerControlsMore` — Cartographer's

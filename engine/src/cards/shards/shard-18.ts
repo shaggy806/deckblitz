@@ -557,6 +557,7 @@ import _poolOgreJailbreaker from "../pool/ogre-jailbreaker.js";
 import _poolOjutaiSoulOfWinter from "../pool/ojutai-soul-of-winter.js";
 import _poolOldFatSpiderCantSeeMe from "../pool/old-fat-spider-cant-see-me.js";
 import _poolOmenportVigilante from "../pool/omenport-vigilante.js";
+import _poolOmnathLocusOfMana from "../pool/omnath-locus-of-mana.js";
 import _poolOnwardVictory from "../pool/onward-victory.js";
 import _poolOpalineSliver from "../pool/opaline-sliver.js";
 import _poolOpenCommunications from "../pool/open-communications.js";
@@ -758,6 +759,7 @@ import _poolSpiritAway from "../pool/spirit-away.js";
 import _poolSpiritOfTheHearth from "../pool/spirit-of-the-hearth.js";
 import _poolSpiritualFocus from "../pool/spiritual-focus.js";
 import _poolSpiteOfMogis from "../pool/spite-of-mogis.js";
+import _poolSquanderedResources from "../pool/squandered-resources.js";
 import _poolStalkingVengeance from "../pool/stalking-vengeance.js";
 import _poolStandingTroops from "../pool/standing-troops.js";
 import _poolStarAthlete from "../pool/star-athlete.js";
@@ -1539,6 +1541,7 @@ const shard: CardShard = {
     _poolOjutaiSoulOfWinter,
     _poolOldFatSpiderCantSeeMe,
     _poolOmenportVigilante,
+    _poolOmnathLocusOfMana,
     _poolOnwardVictory,
     _poolOpalineSliver,
     _poolOpenCommunications,
@@ -1740,6 +1743,7 @@ const shard: CardShard = {
     _poolSpiritOfTheHearth,
     _poolSpiritualFocus,
     _poolSpiteOfMogis,
+    _poolSquanderedResources,
     _poolStalkingVengeance,
     _poolStandingTroops,
     _poolStarAthlete,

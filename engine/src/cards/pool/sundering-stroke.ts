@@ -13,7 +13,7 @@ export default defineCard({
   divided: { total: 7, slot: 0 },
   effect: {
     kind: "conditional",
-    condition: { kind: "source", filter: { manaSpentOfColors: { R: 7 } } },
+    condition: { kind: "source", filter: { manaSpent: [{ type: "R", amount: { op: "gte", n: 7 } }] } },
     then: { kind: "for-each-target", from: 0, effect: { kind: "damage", amount: 7, target: 0 }, simultaneous: true },
     else: { kind: "damage-divided", from: 0 },
   },

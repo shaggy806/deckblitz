@@ -4,7 +4,7 @@ const CAST_TEXT =
   'Whenever you cast an artifact or creature spell using mana produced by Barracks of the Thousand, create a white Gnome Soldier artifact creature token with "This token\'s power and toughness are each equal to the number of artifacts and/or creatures you control."';
 
 // "Mana produced by Barracks of the Thousand" is this very permanent's
-// (`manaFrom.fromSource`), not another with its name, which the legend rule
+// (`manaSpent`'s `from: { fromSource: true }`), not another with its name, which the legend rule
 // mostly rules out anyway.
 export default defineCard({
   name: "Barracks of the Thousand",
@@ -27,7 +27,7 @@ export default defineCard({
       trigger: {
         on: "cast-spell",
         who: "you",
-        filter: { typesAnyOf: ["artifact", "creature"], manaFrom: { fromSource: true } },
+        filter: { typesAnyOf: ["artifact", "creature"], manaSpent: [{ from: { fromSource: true } }] },
       },
       targets: [],
       effect: { kind: "create-token", token: "Gnome Soldier Token", count: 1 },

@@ -760,7 +760,7 @@ function evalStaticCondition(
       if (spell === undefined) return false;
       const stint = opts.triggerSpellStint;
       const onStack = spell.zone === "stack" && (stint === undefined || (spell.zoneChangeCount ?? 0) === stint);
-      const spent = onStack ? (spell.manaSpent ?? 0) : (spell.lastStackManaSpent ?? 0);
+      const spent = (onStack ? spell.manaSpent : spell.lastStackManaSpent)?.length ?? 0;
       const self = computeCharacteristics(state, registry, source.id);
       return self.types.includes("creature") && (spent > self.power || spent > self.toughness);
     }
@@ -1391,6 +1391,11 @@ function evalStaticCondition(
     }
     case "counters-put-this-turn":
       return countersPutThisTurn(state, condition, you) >= (condition.atLeast ?? 1);
+    case "unspent-mana":
+      return unspentManaOf(state, you, condition.type) >= condition.atLeast;
+    case "ability-mana-spent":
+      // Only an effect's condition, which `Game` reads before this.
+      return false;
     case "turn-stat": {
       // Per player, never summed: "an opponent lost 4 or more life this
       // turn" is satisfied by one opponent reaching 4, not by two reaching
@@ -1867,6 +1872,13 @@ const TURN_STAT_READS: { readonly [S in TurnStat]: (state: GameState, player: Pl
     PHASE_OF_STEP[state.turn.step] !== "combat" ? 0 : powerAttackedWith(state, player, state.turn.combatPhases ?? 1),
   "energy-paid-or-lost": (state, player) => journalTotal(state, "energy-lost", player, "amount"),
 };
+
+/** How many units of mana are unspent in `player`'s pool (rule 106.4), of
+ * `type` if given. */
+export function unspentManaOf(state: GameState, player: PlayerId, type?: ManaType): number {
+  const pool = state.players[player]?.manaPool ?? [];
+  return type === undefined ? pool.length : pool.filter((unit) => unit.type === type).length;
+}
 
 /** One player's running total for `stat` this turn: a read of the journal
  * (`TURN_STAT_READS`). */
@@ -5370,6 +5382,8 @@ function collectStaticEffects(
           ? Object.values(target.counters).reduce((total, count) => total + (count ?? 0), 0)
           : per.turnStat !== undefined
           ? turnStatOf(state, side, per.turnStat)
+          : per.unspentMana !== undefined
+          ? unspentManaOf(state, side, per.unspentMana.type)
           : per.basicLandTypes === true
           ? basicLandTypesAmong(state, registry, side)
           : per.opponents === true

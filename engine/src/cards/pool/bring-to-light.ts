@@ -16,7 +16,7 @@ export default defineCard({
         kind: "search-library",
         filter: {
           typesAnyOf: ["creature", "instant", "sorcery"],
-          manaValue: { op: "lte", n: { amount: { colorsSpentOf: "source" } } },
+          manaValue: { op: "lte", n: { amount: { manaSpentOf: "source", count: "colors" } } },
         },
         destination: "exile",
         min: 0,

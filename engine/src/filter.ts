@@ -34,8 +34,8 @@ import type { EffectAmount, ThisWayKind } from "./effects.js";
 import type { CardDefinition } from "./cards/define.js";
 import { goadersOf, isGoaded } from "./goad.js";
 import { hasRingBearerDesignation, isRingBearer } from "./ring.js";
-import type { Color, ManaCost, ManaFromSpec } from "./mana.js";
-import { COLORS, colorSymbols, manaOriginMatches, manaValue, parseManaCost } from "./mana.js";
+import type { Color, ManaCost, ManaOrigin, ManaSpentQuery } from "./mana.js";
+import { COLORS, colorSymbols, manaValue, parseManaCost, spentManaCount } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import { LOCKED_ROOM, spellCaster, activePlayerOf, blockedAttackersOf, controllersLastTurn, isTokenNow, manaCostOverride, nameOf, permanentCount, printedCardName, rulesTextName } from "./state.js";
 import type { AttachmentRecord, GameObject, GameState, LastKnownInfo, ZoneType } from "./state.js";
@@ -126,7 +126,7 @@ export function filterReadsX(filter: CardFilter): boolean {
     (cmp.n === "x" || (isDynamicOperand(cmp.n) && "amount" in cmp.n && cmp.n.amount === "x"));
   return (
     readsX(filter.manaValue) ||
-    readsX(filter.manaSpent) ||
+    (filter.manaSpent ?? []).some((clause) => readsX(clause.amount)) ||
     readsX(filter.counters?.compare) ||
     readsX(filter.power) ||
     readsX(filter.toughness) ||
@@ -153,7 +153,6 @@ export function filterAtX(filter: CardFilter, x: number): CardFilter {
     cmp !== undefined && cmp.n === "x" ? { ...cmp, n: x } : cmp;
   const keys = [
     "manaValue",
-    "manaSpent",
     "power",
     "toughness",
     "basePower",
@@ -170,6 +169,9 @@ export function filterAtX(filter: CardFilter, x: number): CardFilter {
     const cmp = filter[key];
     if (cmp !== undefined && cmp.n === "x") set({ [key]: at(cmp) });
   }
+  if (filter.manaSpent?.some((clause) => clause.amount?.n === "x")) {
+    set({ manaSpent: filter.manaSpent.map((clause) => (clause.amount === undefined ? clause : { ...clause, amount: at(clause.amount) })) });
+  }
   if (filter.counters?.compare?.n === "x") set({ counters: { ...filter.counters, compare: at(filter.counters.compare)! } });
   if (filter.nameDiffersFromEach !== undefined) {
     const inner = filterAtX(filter.nameDiffersFromEach, x);
@@ -184,6 +186,12 @@ export function filterAtX(filter: CardFilter, x: number): CardFilter {
     if (inner !== filter.not) set({ not: inner });
   }
   return out;
+}
+
+/** One condition on the mana spent on something: {@link ManaSpentQuery} says
+ * what to count, `amount` how much must be there (absent, at least one). */
+export interface ManaSpentClause extends ManaSpentQuery {
+  readonly amount?: NumCompare;
 }
 
 /** Does a `NumCompare` carry a {@link DynamicOperand}? */
@@ -360,28 +368,17 @@ export interface CardFilter {
   /** Has odd or even power (Zimone's Hypothesis; Kianne's "as long as Kianne's
    * power is even"), read like `power`: not inside the layer fold. */
   readonly powerParity?: ParityClause;
-  /** How much mana was actually spent to cast it (The Emperor of Palamecia:
-   * "if at least four mana was spent to cast it") — see
-   * `GameObject.manaSpent`. `0` for something that wasn't cast. */
-  readonly manaSpent?: NumCompare;
-  /** "If mana from an artifact was spent to cast it" (`{ type: "artifact"
-   * }`), "…from a Treasure" (`{ subtype: "Treasure" }`): at least `atLeast`
-   * (default 1) units of the mana spent to cast it were made by a source
-   * matching every field given, as that source was when it made the mana —
-   * see `GameObject.manaSpentFrom`. Something that wasn't cast matches
-   * nothing. */
-  readonly manaFrom?: ManaFromSpec & { readonly atLeast?: number };
-  /** At least this much mana of each colour named was spent to cast it —
-   * adamant (Throne of Eldraine): "if at least three white mana was spent to
-   * cast this spell" is `{ W: 3 }`; the Mythos cycle's "if {U}{B} was spent
-   * to cast this spell" is `{ U: 1, B: 1 }`. See
-   * `GameObject.manaSpentByColor`. Something that wasn't cast matches
-   * nothing. */
-  readonly manaSpentOfColors?: { readonly [C in Color]?: number };
-  /** At least this much mana of one colour — any one — was spent to cast it
-   * (Henge Walker's "if at least three mana of the same color was spent to
-   * cast it"). */
-  readonly manaSpentOfOneColor?: number;
+  /**
+   * What was spent to cast it (`GameObject.manaSpent`, `spentManaCount`): each
+   * clause holds. `[{ amount: { op: "gte", n: 4 } }]` is "if at least four mana
+   * was spent to cast it" (The Emperor of Palamecia); adamant is `[{ type: "W",
+   * amount: { op: "gte", n: 3 } }]`; "if {U}{B} was spent" two clauses;
+   * `[{ from: { subtype: "Treasure" } }]` "if mana from a Treasure was spent";
+   * `[{ type: "C", amount: { op: "eq", n: 0 } }]` "if {C} wasn't spent"; Henge
+   * Walker's "at least three mana of the same color" `count:
+   * "most-of-one-color"`. Something that wasn't cast has none spent.
+   */
+  readonly manaSpent?: readonly ManaSpentClause[];
   /**
    * How many counters of a given kind are on the object — Rishkar's "each
    * creature you control **with a counter on it**", Undying's "if it had no
@@ -2522,34 +2519,16 @@ export function matchesFilter(
     return false;
   }
   if (filter.manaSpent !== undefined) {
-    const spent = live !== undefined ? live.manaSpent : lki!.manaSpent;
-    if (!compareNum(spent ?? 0, filter.manaSpent, ctx.x, dynamic)) return false;
-  }
-  if (filter.manaFrom !== undefined) {
-    const spec = filter.manaFrom;
-    const origins = (live !== undefined ? live.manaSpentFrom : lki!.manaSpentFrom) ?? [];
-    const made = origins.filter((origin) => manaOriginMatches(origin, spec));
+    const spent = (live !== undefined ? live.manaSpent : lki!.manaSpent) ?? [];
     // "Using mana produced by Barracks of the Thousand": this permanent, in
     // this stint on the battlefield.
     const source = ctx.source === undefined ? undefined : state.objects[ctx.source];
-    const fromSource =
-      spec.fromSource !== true
-        ? made
-        : made.filter(
-            (origin) =>
-              source !== undefined &&
-              origin.object === ctx.source &&
-              origin.stint === (source.zoneChangeCount ?? 0),
-          );
-    if (fromSource.length < (spec.atLeast ?? 1)) return false;
-  }
-  if (filter.manaSpentOfColors !== undefined || filter.manaSpentOfOneColor !== undefined) {
-    const byColor = (live !== undefined ? live.manaSpentByColor : lki!.manaSpentByColor) ?? {};
-    for (const [color, n] of Object.entries(filter.manaSpentOfColors ?? {})) {
-      if ((byColor[color as Color] ?? 0) < (n ?? 0)) return false;
+    const isFromSource = (origin: ManaOrigin): boolean =>
+      source !== undefined && origin.object === ctx.source && origin.stint === (source.zoneChangeCount ?? 0);
+    for (const clause of filter.manaSpent) {
+      const n = spentManaCount(spent, clause, isFromSource);
+      if (clause.amount === undefined ? n < 1 : !compareNum(n, clause.amount, ctx.x, dynamic)) return false;
     }
-    const most = Math.max(0, ...Object.values(byColor).map((n) => n ?? 0));
-    if (filter.manaSpentOfOneColor !== undefined && most < filter.manaSpentOfOneColor) return false;
   }
   // Cheap, purely-positional clauses before the expensive fold below.
   const controller = ctx.enteringUnder ?? (live !== undefined ? live.controller : lki!.controller);

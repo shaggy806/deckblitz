@@ -26,12 +26,12 @@ export default defineCard({
     effects: [
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { R: 1 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "R", amount: { op: "gte", n: 1 } }] } },
         then: { kind: "damage-all", filter: { type: "creature", notKeyword: "flying" }, amount: 3 },
       },
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { G: 1 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "G", amount: { op: "gte", n: 1 } }] } },
         then: { kind: "damage-all", filter: { type: "creature", keyword: "flying" }, amount: 3 },
       },
     ],

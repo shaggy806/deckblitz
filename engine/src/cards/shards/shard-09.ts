@@ -589,6 +589,7 @@ import _poolOutlawStitcher from "../pool/outlaw-stitcher.js";
 import _poolOverlordOfTheBalemurk from "../pool/overlord-of-the-balemurk.js";
 import _poolOverwhelmingEncounter from "../pool/overwhelming-encounter.js";
 import _poolOwlbearCub from "../pool/owlbear-cub.js";
+import _poolOzaiThePhoenixKing from "../pool/ozai-the-phoenix-king.js";
 import _poolParalyzingGrasp from "../pool/paralyzing-grasp.js";
 import _poolParapetWatchers from "../pool/parapet-watchers.js";
 import _poolParhelionPatrol from "../pool/parhelion-patrol.js";
@@ -1603,6 +1604,7 @@ const shard: CardShard = {
     _poolOverlordOfTheBalemurk,
     _poolOverwhelmingEncounter,
     _poolOwlbearCub,
+    _poolOzaiThePhoenixKing,
     _poolParalyzingGrasp,
     _poolParapetWatchers,
     _poolParhelionPatrol,

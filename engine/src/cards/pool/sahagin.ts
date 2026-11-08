@@ -27,7 +27,7 @@ export default defineCard({
   text: CAST_TEXT,
   triggered: [
     {
-      trigger: { on: "cast-spell", who: "you", filter: { notTypes: ["creature"], manaSpent: { op: "gte", n: 4 } } },
+      trigger: { on: "cast-spell", who: "you", filter: { notTypes: ["creature"], manaSpent: [{ amount: { op: "gte", n: 4 } }] } },
       targets: [],
       effect: {
         kind: "sequence",

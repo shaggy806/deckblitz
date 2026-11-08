@@ -16,7 +16,7 @@ export default defineCard({
       { kind: "create-token", token: "Human Token", count: 2 },
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { W: 3 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "W", amount: { op: "gte", n: 3 } }] } },
         then: { kind: "gain-life", amount: { countOf: { type: "creature", controlledBy: "you" } } },
       },
     ],

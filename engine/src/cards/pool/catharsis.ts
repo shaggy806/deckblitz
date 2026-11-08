@@ -20,7 +20,7 @@ export default defineCard({
   triggered: [
     {
       trigger: { on: "enters-battlefield", who: "self" },
-      condition: { kind: "source", filter: { manaSpentOfColors: { W: 2 } } },
+      condition: { kind: "source", filter: { manaSpent: [{ type: "W", amount: { op: "gte", n: 2 } }] } },
       targets: [],
       effect: { kind: "create-token", token: "Kithkin Token", count: 2 },
       resolve: null,
@@ -28,7 +28,7 @@ export default defineCard({
     },
     {
       trigger: { on: "enters-battlefield", who: "self" },
-      condition: { kind: "source", filter: { manaSpentOfColors: { R: 2 } } },
+      condition: { kind: "source", filter: { manaSpent: [{ type: "R", amount: { op: "gte", n: 2 } }] } },
       targets: [],
       effect: {
         kind: "sequence",

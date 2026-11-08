@@ -78,7 +78,7 @@ describe("delve", () => {
     const exiled = yard.slice(2, 7);
     game.dispatch({ type: "cast-spell", player: A, card: cruise, targets: [], delve: exiled });
     // The mana value is still 8; three mana was spent.
-    expect(game.state.objects[cruise].manaSpent).toBe(3);
+    expect(game.state.objects[cruise].manaSpent).toHaveLength(3);
     settle(game);
     expect(game.handOf(A)).toHaveLength(handAfter);
     for (const id of exiled) expect(game.state.objects[id].zone).toBe("exile");

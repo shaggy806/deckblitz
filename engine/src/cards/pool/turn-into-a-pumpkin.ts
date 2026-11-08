@@ -17,7 +17,7 @@ export default defineCard({
       { kind: "draw", amount: 1 },
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { U: 3 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "U", amount: { op: "gte", n: 3 } }] } },
         then: { kind: "create-token", token: "Food Token", count: 1 },
       },
     ],

@@ -21,7 +21,7 @@ export default defineCard({
       { kind: "damage-rule", by: { target: 0 }, combat: true },
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpentOfColors: { R: 1 } } },
+        condition: { kind: "source", filter: { manaSpent: [{ type: "R", amount: { op: "gte", n: 1 } }] } },
         then: { kind: "damage", amount: { powerOf: 0 }, toControllerOfTarget: 0 },
       },
     ],

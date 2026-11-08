@@ -1,7 +1,7 @@
 import { defineCard } from "../define.js";
 
 // X is counted as the trigger resolves. The cast trigger is Mastermind
-// Plum's: an intervening if on the mana spent (`manaFrom`), read off the
+// Plum's: an intervening if on the mana spent (`manaSpent`'s `from`), read off the
 // spell's own payment.
 const ETB_TEXT =
   "When Smaug enters, create X tapped Treasure tokens, where X is the number of artifacts your opponents control.";
@@ -33,7 +33,7 @@ export default defineCard({
       text: ETB_TEXT,
     },
     {
-      trigger: { on: "cast-spell", who: "you", filter: { manaFrom: { subtype: "Treasure" } } },
+      trigger: { on: "cast-spell", who: "you", filter: { manaSpent: [{ from: { subtype: "Treasure" } }] } },
       targets: [],
       effect: {
         kind: "sequence",

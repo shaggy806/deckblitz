@@ -16,6 +16,6 @@ export default defineCard({
   effect: {
     kind: "player-effect",
     duration: "end-of-turn",
-    landManaInstead: { filter: { notSupertype: "basic" }, produces: "C", tapper: "any" },
+    manaProduction: { filter: { type: "land", notSupertype: "basic" }, produces: "C", tapper: "any" },
   },
 });

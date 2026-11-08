@@ -13,7 +13,7 @@ export default defineCard({
   text: `${COUNTER_TEXT}\n${DRAW_TEXT}`,
   triggered: [
     {
-      trigger: { on: "cast-spell", who: "any", filter: { manaSpent: { op: "eq", n: 0 } } },
+      trigger: { on: "cast-spell", who: "any", filter: { manaSpent: [{ amount: { op: "eq", n: 0 } }] } },
       targets: [],
       effect: { kind: "counter", target: "trigger-object" },
       resolve: null,
