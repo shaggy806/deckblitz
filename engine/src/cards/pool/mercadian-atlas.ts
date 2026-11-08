@@ -7,6 +7,7 @@ export default defineCard({
   manaCost: "{5}",
   colors: [],
   types: ["artifact"],
+  subtypes: ["Book"],
   text: DRAW_TEXT,
   triggered: [
     {
