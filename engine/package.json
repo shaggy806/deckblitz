@@ -62,6 +62,7 @@
     "play:random": "node scripts/dist-complete.mjs && tsc && node scripts/random-demo.mjs",
     "play:situations": "node scripts/dist-complete.mjs && tsc && node scripts/situation-fuzz.mjs",
     "bot:bench": "node scripts/tune-bot.mjs bench",
+    "bot:bench:last": "node scripts/bench-log.mjs",
     "bot:tune": "node scripts/tune-bot.mjs tune",
     "bot:harvest": "node scripts/harvest-positions.mjs",
     "bot:fit": "node scripts/fit-weights.mjs",

@@ -27,7 +27,8 @@
 // (bench: start after N seeds, rounded up to a multiple of --players, so a long
 // bench can be split into chunks run separately), --checkpoint PATH (bench
 // against one opponent or a mixed pod: append each game's result to PATH as it
-// finishes, and resume from it — rerun the same command after an interruption).
+// finishes, and resume from it — rerun the same command after an interruption),
+// --no-log (keep a plain bench out of data/bench-log.jsonl; see bench-log.mjs).
 //
 // A long bench in a container that can be reclaimed mid-run (a cloud session):
 //   npm run bot:bench -w engine -- --games 400 --checkpoint bench-4p.ndjson
@@ -51,6 +52,7 @@
 import os from "node:os";
 import { Worker } from "node:worker_threads";
 
+import { appendBench } from "./bench-log.mjs";
 import { progress } from "./progress.mjs";
 import { WORKER_LIMITS } from "./worker-limits.mjs";
 import { fileURLToPath } from "node:url";
@@ -437,6 +439,40 @@ if (mode === "bench") {
     report(results);
     if (jsonOut) {
       writeFileSync(jsonOut, JSON.stringify({ weights: baseWeights, players, summary, results }, null, 2));
+    }
+    // The plain configuration, finished clean, for the next session to reuse
+    // (`bench-log.mjs`): nothing else is comparable from one run to the next.
+    const clean = results.filter((r) => r.error === undefined);
+    if (
+      !args.includes("--no-log") &&
+      opponentArg === "v1" &&
+      !overridden &&
+      seedOffset === 0 &&
+      checkpoint === null &&
+      Object.keys(botOptions).length === 0 &&
+      Object.keys(candidateOptions).length === 0 &&
+      rollout === undefined &&
+      horizon === "turn" &&
+      clean.length === results.length &&
+      clean.length > 0
+    ) {
+      const decisions = clean.reduce((sum, r) => sum + r.decisions, 0);
+      const decisionMs = clean.reduce((sum, r) => sum + r.decisionMs, 0);
+      const mean = (f) => clean.reduce((sum, r) => sum + f(r), 0) / clean.length;
+      appendBench({
+        date: new Date().toISOString().slice(0, 10),
+        games,
+        workers,
+        players,
+        wins: summary.wins,
+        losses: summary.losses,
+        draws: summary.draws,
+        wallSeconds: Number(((Date.now() - startedAt) / 1000).toFixed(1)),
+        gameSeconds: Number((mean((r) => r.ms) / 1000).toFixed(1)),
+        decisionMs: Number((decisionMs / Math.max(1, decisions)).toFixed(1)),
+        worstDecisionMs: Math.round(Math.max(...clean.map((r) => r.maxDecisionMs))),
+        turns: Number(mean((r) => r.turns).toFixed(1)),
+      });
     }
   }
 } else {
