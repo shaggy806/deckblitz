@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4697 already implemented / 303 missing (marks refreshed 2026-11-07)
+4706 already implemented / 294 missing (marks refreshed 2026-11-08)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2265,7 +2265,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2272  Song of Totentanz                        {X}{R}           Sorcery
 [x]  2273  Scurry Oak                               {2}{G}           Creature — Treefolk
 [x]  2274  Royal Assassin                           {1}{B}{B}        Creature — Human Assassin
-[ ]  2275  Rooftop Storm                            {5}{U}           Enchantment
+[x]  2275  Rooftop Storm                            {5}{U}           Enchantment
 [x]  2276  Spiteful Banditry                        {X}{R}{R}        Enchantment
 [x]  2277  Mind's Eye                               {5}              Artifact
 [x]  2278  Hermit Druid                             {1}{G}           Creature — Human Druid
@@ -2977,7 +2977,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2984  Biophagus                                {1}{G}           Creature — Human Tyranid Wizard
 [x]  2985  Abraded Bluffs                           {0}              Land — Desert
 [x]  2986  Athreos, God of Passage                  {1}{W}{B}        Legendary Enchantment Creature — God
-[ ]  2987  Zellix, Sanity Flayer                    {2}{U}           Legendary Creature — Horror
+[x]  2987  Zellix, Sanity Flayer                    {2}{U}           Legendary Creature — Horror
 [x]  2988  Liliana of the Veil                      {1}{B}{B}        Legendary Planeswalker — Liliana
 [x]  2989  Kykar, Wind's Fury                       {1}{U}{R}{W}     Legendary Creature — Bird Wizard
 [x]  2990  Repercussion                             {1}{R}{R}        Enchantment
@@ -3792,7 +3792,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3799  Bishop of Wings                          {W}{W}           Creature — Human Cleric
 [x]  3800  Stunt Double                             {3}{U}           Creature — Shapeshifter
 [x]  3801  Heliod's Pilgrim                         {2}{W}           Creature — Human Cleric
-[ ]  3802  Fortune Teller's Talent                  {U}              Enchantment — Class
+[x]  3802  Fortune Teller's Talent                  {U}              Enchantment — Class
 [x]  3803  Sunfrill Imitator                        {2}{G}           Creature — Dinosaur
 [x]  3804  Secluded Starforge                       {0}              Land
 [x]  3805  Yes Man, Personal Securitron             {2}{W}           Legendary Artifact Creature — Robot
@@ -3943,7 +3943,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3950  Avenger of the Fallen                    {2}{B}           Creature — Human Warrior
 [x]  3951  Traxos, Scourge of Kroog                 {4}              Legendary Artifact Creature — Dragon Construct
 [x]  3952  Apex of Power                            {7}{R}{R}{R}     Sorcery
-[ ]  3953  General Ferrous Rokiric                  {1}{R}{W}        Legendary Creature — Human Soldier
+[x]  3953  General Ferrous Rokiric                  {1}{R}{W}        Legendary Creature — Human Soldier
 [ ]  3954  Elder Brain                              {5}{B}{B}        Creature — Horror
 [x]  3955  Composer of Spring                       {1}{G}           Creature — Satyr Bard
 [x]  3956  Broken Wings                             {2}{G}           Instant
@@ -4445,7 +4445,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4452  Cloud, Ex-SOLDIER                        {2}{R}{G}{W}     Legendary Creature — Human Soldier Mercenary
 [x]  4453  You Find Some Prisoners                  {1}{R}           Instant
 [x]  4454  Coiling Rebirth                          {3}{B}{B}        Sorcery
-[ ]  4455  Savvy Trader                             {3}{G}           Creature — Human Citizen
+[x]  4455  Savvy Trader                             {3}{G}           Creature — Human Citizen
 [x]  4456  Enter the Infinite                       {8}{U}{U}{U}{U}  Sorcery
 [x]  4457  Altar's Reap                             {1}{B}           Instant
 [x]  4458  Kura, the Boundless Sky                  {3}{G}{G}        Legendary Creature — Dragon Spirit
@@ -4877,19 +4877,19 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4884  Endless Foot Assault                     {2}{W}           Enchantment
 [x]  4885  Thraben Watcher                          {2}{W}{W}        Creature — Angel
 [x]  4886  Sudden Breakthrough                      {1}{R}           Instant
-[ ]  4887  Elenda, Saint of Dusk                    {2}{W}{B}        Legendary Creature — Vampire Knight
+[x]  4887  Elenda, Saint of Dusk                    {2}{W}{B}        Legendary Creature — Vampire Knight
 [x]  4888  Harmonized Trio // Brainstorm            {U} // {U}       Creature — Merfolk Bard Wizard // Instant
 [x]  4889  Attrition                                {1}{B}{B}        Enchantment
 [x]  4890  Kishla Village                           {0}              Land
 [x]  4891  Marchesa, the Black Rose                 {1}{U}{B}{R}     Legendary Creature — Human Wizard
-[ ]  4892  Defiler of Instinct                      {2}{R}{R}        Creature — Phyrexian Kavu
+[x]  4892  Defiler of Instinct                      {2}{R}{R}        Creature — Phyrexian Kavu
 [x]  4893  Combat Calligrapher                      {3}{W}           Creature — Bird Cleric
 [x]  4894  Elfsworn Giant                           {3}{G}{G}        Creature — Giant
 [x]  4895  Sisay's Ring                             {4}              Artifact
 [x]  4896  Deduce                                   {1}{U}           Instant
 [x]  4897  Barrensteppe Siege                       {2}{W}{B}        Enchantment
 [x]  4898  Death's Presence                         {5}{G}           Enchantment
-[ ]  4899  Sage of the Beyond                       {5}{U}{U}        Creature — Spirit Giant
+[x]  4899  Sage of the Beyond                       {5}{U}{U}        Creature — Spirit Giant
 [x]  4900  Fell Specter                             {3}{B}           Creature — Specter
 [x]  4901  Fumulus, the Infestation                 {3}{B}           Legendary Creature — Vampire Insect
 [x]  4902  Knight of the Ebon Legion                {B}              Creature — Vampire Knight
@@ -4944,7 +4944,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4951  Celes, Rune Knight                       {1}{R}{W}{B}     Legendary Creature — Human Wizard Knight
 [x]  4952  The Magic Mirror                         {6}{U}{U}{U}     Legendary Artifact
 [x]  4953  Grasslands                               {0}              Land
-[ ]  4954  Defiler of Faith                         {3}{W}{W}        Creature — Phyrexian Human
+[x]  4954  Defiler of Faith                         {3}{W}{W}        Creature — Phyrexian Human
 [x]  4955  Norin the Wary                           {R}              Legendary Creature — Human Warrior
 [x]  4956  Naga Fleshcrafter                        {3}{U}           Creature — Snake Shapeshifter
 [x]  4957  Ankh of Mishra                           {2}              Artifact

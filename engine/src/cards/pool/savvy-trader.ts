@@ -32,7 +32,7 @@ export default defineCard({
         {
           kind: "card-in-graveyard",
           whose: "you",
-          filter: { typesAnyOf: ["artifact", "battle", "creature", "enchantment", "land", "planeswalker"] },
+          filter: { notTypes: ["instant", "sorcery"] },
         },
       ],
       effect: { kind: "exile", target: 0, mayCast: { duration: "while-exiled", play: true } },

@@ -1204,7 +1204,6 @@ export const SAMPLE_DECKS: readonly SampleDeck[] = [
     ],
     substitutions: [
       sub("Arthur, Marigold Knight", "Adeline, Resplendent Cathar", "White creature that adds attackers when it attacks."),
-      sub("Fortune Teller's Talent", "Ophidian Eye", "Blue enchantment that draws cards."),
       sub("Shield Broker", "Act of Treason", "Takes an opponent's creature."),
     ],
   }),
