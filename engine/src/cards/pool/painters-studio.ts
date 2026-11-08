@@ -18,7 +18,7 @@ export default defineCard({
     {
       trigger: unlockThisDoor("left"),
       targets: [],
-      effect: { kind: "impulse-exile", amount: 2, duration: "your-next-turn" },
+      effect: { kind: "impulse-exile", amount: 2, duration: "until-end-of-your-next-turn" },
       resolve: null,
       text: UNLOCK,
     },

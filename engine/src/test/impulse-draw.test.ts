@@ -124,7 +124,7 @@ describe("impulse-exile", () => {
     game.debugApplyEffect(A, {
       kind: "impulse-exile",
       amount: 2,
-      duration: "your-next-turn",
+      duration: "until-end-of-your-next-turn",
       choose: 1,
     });
 
@@ -146,7 +146,7 @@ describe("impulse-exile", () => {
     game.debugApplyEffect(A, {
       kind: "impulse-exile",
       amount: 1,
-      duration: "your-next-turn",
+      duration: "until-end-of-your-next-turn",
     });
     expect(impulseExiled(game).length).toBe(1);
 
@@ -162,7 +162,7 @@ describe("impulse-exile", () => {
     // it was exiled ended.
     const game = makeGame();
     game.advanceUntil((s) => s.priority.holder === A && s.turn.step === "precombat-main");
-    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 3, duration: "your-next-turn" });
+    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 3, duration: "until-end-of-your-next-turn" });
     expect(impulseExiled(game).length).toBe(3);
     game.advanceUntil((s) => s.turn.number === 3 || s.result.over);
     expect(impulseExiled(game).length).toBe(3);
@@ -178,7 +178,7 @@ describe("impulse-exile", () => {
     game.debugApplyEffect(A, {
       kind: "impulse-exile",
       amount: 1,
-      duration: "your-next-turn",
+      duration: "until-end-of-your-next-turn",
     });
     expect(impulseExiled(game).length).toBe(1);
 

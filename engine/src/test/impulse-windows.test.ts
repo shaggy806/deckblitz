@@ -233,7 +233,7 @@ describe('"for as long as you control this" (Lightning, Victor Mancha)', () => {
     lands(game, "Mountain", 1);
     const source = spawn(game, "Lightning, Security Sergeant");
     const bolt = reachable(game);
-    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 1, duration: "while-you-control" }, [], { source });
+    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 1, duration: "while-you-control-source" }, [], { source });
     return { source, bolt };
   };
 

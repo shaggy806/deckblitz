@@ -34,7 +34,7 @@ export default defineCard({
     kind: "impulse-exile",
     amount: 3,
     whose: 0,
-    duration: "your-next-turn",
+    duration: "until-end-of-your-next-turn",
     spendAs: "any-type",
   },
   faces: ["Bloodsoaked Insight", "Sanguine Morass"],

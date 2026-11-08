@@ -21,5 +21,5 @@ export default defineCard({
   colors: ["R"],
   types: ["instant"],
   text: "Exile the top X cards of your library. Until the end of your next turn, you may play those cards.",
-  effect: { kind: "impulse-exile", amount: "x", duration: "your-next-turn" },
+  effect: { kind: "impulse-exile", amount: "x", duration: "until-end-of-your-next-turn" },
 });

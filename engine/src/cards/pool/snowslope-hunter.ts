@@ -24,7 +24,7 @@ export default defineCard({
         sacrifice: { filter: { typesAnyOf: ["creature", "artifact"] } },
       },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "your-next-turn" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn" },
       resolve: null,
       text: "Sacrifice another creature or artifact: Exile the top card of your library. You may play it until the end of your next turn. Activate only during your turn and only once each turn.",
       otherOnly: true,

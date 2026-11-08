@@ -32,7 +32,7 @@ const goadChapter = (at: number): SagaChapter => ({
         at: {
           whenever: { on: "deals-damage", who: "self", combat: true, to: "player" },
           watching: "targets",
-          until: "your-next-turn",
+          until: "until-your-next-turn",
         },
         effect: { kind: "draw", amount: 1 },
         text: "Until your next turn, whenever any of those creatures deals combat damage to a player, draw a card.",

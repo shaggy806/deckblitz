@@ -21,7 +21,7 @@ export default defineCard({
       {
         text: "Exile the top two cards of your library. Until the end of your next turn, you may play those cards.",
         targets: [],
-        effect: { kind: "impulse-exile", amount: 2, duration: "your-next-turn" },
+        effect: { kind: "impulse-exile", amount: 2, duration: "until-end-of-your-next-turn" },
       },
       {
         text: "Up to two target creatures each get +2/+1 until end of turn.",

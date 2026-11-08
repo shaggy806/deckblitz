@@ -134,7 +134,7 @@ describe("an attack tax paid in life", () => {
     game.state.playerEffects = [
       {
         owner: B,
-        expires: { kind: "your-next-turn" },
+        expires: { untilTurnOf: B },
         attackTax: { generic: 0, life: 2, covers: "you-and-planeswalkers" },
       },
     ];
@@ -172,8 +172,8 @@ describe("an attack tax paid in life", () => {
     const { game } = table();
     const bears = spawn(game, "Grizzly Bears");
     game.state.playerEffects = [
-      { owner: B, expires: { kind: "your-next-turn" }, attackTax: { generic: 0, life: 2, covers: "you" } },
-      { owner: A, expires: { kind: "end-of-turn" }, cantLoseLife: [A] },
+      { owner: B, expires: { untilTurnOf: B }, attackTax: { generic: 0, life: 2, covers: "you" } },
+      { owner: A, expires: "end-of-turn", cantLoseLife: [A] },
     ];
     const offer = toAttackers(game);
     expect(offer.attackTax?.lifeBudget).toBe(0);
@@ -196,7 +196,7 @@ describe("an attack tax paid in life", () => {
     const stack = spawn(game, "Grizzly Bears");
     game.state.objects[stack].stackCount = 3;
     game.state.playerEffects = [
-      { owner: B, expires: { kind: "your-next-turn" }, attackTax: { generic: 0, life: 2, covers: "you" } },
+      { owner: B, expires: { untilTurnOf: B }, attackTax: { generic: 0, life: 2, covers: "you" } },
     ];
     toAttackers(game);
     game.dispatch({ type: "declare-attackers", player: A, attackers: [{ attacker: stack, defender: B, count: 2 }] });
@@ -207,7 +207,7 @@ describe("an attack tax paid in life", () => {
     const { game } = table();
     const juggernaut = spawn(game, "Juggernaut");
     game.state.playerEffects = [
-      { owner: B, expires: { kind: "your-next-turn" }, attackTax: { generic: 0, life: 2, covers: "you" } },
+      { owner: B, expires: { untilTurnOf: B }, attackTax: { generic: 0, life: 2, covers: "you" } },
     ];
     const offer = toAttackers(game);
     expect(offer.mustAttack).not.toContain(juggernaut);

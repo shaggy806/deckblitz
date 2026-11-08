@@ -21,7 +21,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "roll-dice", sides: 20, then: { kind: "draw", amount: { roll: "total" } } },
-          { kind: "player-effect", duration: "rest-of-game", noMaxHandSize: "you" },
+          { kind: "player-effect", duration: "permanent", noMaxHandSize: "you" },
         ],
       },
       resolve: null,

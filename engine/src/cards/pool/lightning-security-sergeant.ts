@@ -21,7 +21,7 @@ export default defineCard({
     {
       trigger: { on: "deals-combat-damage-to-player", who: "self" },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "while-you-control" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "while-you-control-source" },
       resolve: null,
       text: TEXT,
     },

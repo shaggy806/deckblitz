@@ -24,7 +24,7 @@ export default defineCard({
       { kind: "vote", for: { options: ["past", "present"] } },
       { kind: "mill", target: "you", amount: { votesFor: 0 } },
       { kind: "damage", amount: { thisWay: "milled", sumOf: "mana-value" }, who: "each-opponent" },
-      { kind: "impulse-exile", amount: { votesFor: 1 }, duration: "your-next-turn" },
+      { kind: "impulse-exile", amount: { votesFor: 1 }, duration: "until-end-of-your-next-turn" },
     ],
   },
 });

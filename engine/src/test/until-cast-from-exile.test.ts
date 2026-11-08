@@ -1,6 +1,6 @@
 /**
  * Activated abilities granted by one-shot effects and statics: "until this card is
- * cast from exile" (`PtDuration`'s `"until-source-cast"` — Glamorous Outlaw's cycle),
+ * cast from exile" (`Duration`'s `"until-source-cast"` — Glamorous Outlaw's cycle),
  * "each creature you control with a +1/+1 counter has" a mana ability (Jiang Yanggu),
  * an Aura's restricted one (Leyline Immersion), and "gains all activated abilities of
  * target creature" (Quicksilver Elemental, `grant-activated-of`).

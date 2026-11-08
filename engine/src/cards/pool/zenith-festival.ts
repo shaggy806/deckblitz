@@ -14,6 +14,6 @@ export default defineCard({
   colors: ["R"],
   types: ["sorcery"],
   text: `${TEXT}\n${HARMONIZE_TEXT}`,
-  effect: { kind: "impulse-exile", amount: "x", duration: "your-next-turn" },
+  effect: { kind: "impulse-exile", amount: "x", duration: "until-end-of-your-next-turn" },
   harmonize: { cost: "{X}{R}{R}" },
 });

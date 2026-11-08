@@ -13,7 +13,7 @@ const TEXT =
 const EFFECT = {
   kind: "impulse-exile",
   amount: 1,
-  duration: "your-next-turn",
+  duration: "until-end-of-your-next-turn",
   castOnly: true,
   filter: { type: "creature", subtype: "Goblin" },
 } as const;

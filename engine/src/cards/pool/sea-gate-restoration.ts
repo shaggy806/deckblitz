@@ -14,7 +14,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "draw", amount: { sum: [{ cardsInHand: "you" }, 1] } },
-      { kind: "player-effect", duration: "rest-of-game", noMaxHandSize: "you" },
+      { kind: "player-effect", duration: "permanent", noMaxHandSize: "you" },
     ],
   },
   faces: ["Sea Gate Restoration", "Sea Gate, Reborn"],

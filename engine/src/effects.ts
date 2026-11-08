@@ -29,6 +29,20 @@ import { EVERY_CREATURE_TYPE, EVERY_LAND_TYPE, isCreatureType, isLandType } from
 import { sameVoteChoice } from "./events.js";
 import type { RandomPick, Vote, VoteChoice } from "./events.js";
 import type { ThisWayEntry } from "./this-way.js";
+import type {
+  AttackRequirementDuration,
+  CopyDuration,
+  DamageRuleDuration,
+  Duration,
+  DurationPlayer,
+  Expiry,
+  PermanentDuration,
+  PermissionDuration,
+  PlayerDuration,
+  PointDuration,
+  WatchDuration,
+} from "./duration.js";
+import { resolvePlayerDuration } from "./duration.js";
 import { textWordKind, type TextChange } from "./text-change.js";
 import type {
   AttachmentRecord,
@@ -359,87 +373,6 @@ export type AmountRef = EffectTargetRef | "sacrificed" | "tapped" | "discarded" 
 /** Where a `return-to-hand` effect takes its object from. */
 export type ReturnToHandZone = "battlefield" | "graveyard" | "exile" | "stack" | "library";
 /**
- * How long an effect on a permanent lasts (rule 611.2a): until end of turn;
- * for as long as the permanent stays on the battlefield (`"permanent"`);
- * "until your next turn" — the effect's controller's, ending as that turn
- * begins, or as it would have begun once they've left the game (rule
- * 800.4m); or "for as long as it has a [kind] counter on it" (Ultima,
- * Origin of Oblivion's blight — rule 611.2b), which does nothing if it has
- * none as the effect would begin, ends as the last one is removed, and
- * isn't brought back by a new one.
- */
-export type PtDuration =
-  | "end-of-turn"
-  | "permanent"
-  /** "**Until this card is cast from exile**" (Glamorous Outlaw): lasts until the
-   * effect's source, in the exile stint it's in as the effect begins, has been
-   * cast, its mana payable with what this gave (601.2g, the ruling). A card that
-   * leaves exile any other way ends nothing, and the effect goes on (the ruling). */
-  | "until-source-cast"
-  | "until-your-next-turn"
-  /** "This combat" / "until end of combat" (rules 500.5a, 511.2): it ends as
-   * the combat phase under way or next to come does (Ma Chao's "can't be
-   * blocked this combat", Battering Ram's "gains banding until end of
-   * combat"), or at this turn's cleanup with no combat to end. */
-  | "until-end-of-combat"
-  | UntilPointDuration
-  | { readonly whileCounter: string }
-  /** "For as long as [this] remains on the battlefield" — the effect's own
-   * source, in the stint the resolving ability refers to (Opportunistic
-   * Dragon): it ends as that leaves, and does nothing if it already has
-   * (rule 611.2b). */
-  | "while-source"
-  /** "For as long as [this] remains tapped" (Ashnod's Battle Gear, Phyrexian
-   * Gremlins): the source, in that stint, staying on the battlefield and
-   * tapped — it ends as the source untaps or leaves, and does nothing if the
-   * source is already untapped or gone (rule 611.2b). Usually beside a
-   * `mayChooseNotToUntap` static. */
-  | "while-source-tapped"
-  /** "For as long as you control [this]" (Aegis Angel, Aladdin): the source, in that stint, staying on the battlefield
-   * under the effect's controller — it ends as the source leaves or changes
-   * hands, and does nothing if they don't control it as it would begin
-   * (rule 611.2b). */
-  | "while-you-control-source"
-  /** Both: "for as long as you control ~ and ~ remains tapped" (Rubinia
-   * Soulsinger, Willow Satyr). */
-  | "while-you-control-source-tapped"
-  /** "For as long as **they** control it" of the source, said just after
-   * someone else gained control of it (Vislor Turlough): whoever controls the
-   * source as this begins, in that stint — it ends as the source leaves or
-   * changes hands again, and regaining it doesn't bring it back (rule 611.2b). */
-  | "while-its-controller-controls-source";
-
-/**
- * A duration ending at a point in a later turn, beyond that turn's beginning.
- * `"you"` is the effect's controller. Each is a {@link PtDuration}, and
- * `gain-control` takes them too.
- *
- * - `"until-your-next-upkeep"`: as it begins (Xenic Poltergeist).
- * - `"until-end-of-your-next-upkeep"`: as it ends (Halfdane).
- * - `"until-end-of-your-next-turn"`: its cleanup step (Stilt-Man, Towering
- *   Terror).
- * - `"until-its-controllers-next-untap-step"`: as the next untap step of the
- *   permanent's controller then begins (Orcish Farmer). A skipped one doesn't
- *   count (rule 614.10a), which is where it differs from "until your next
- *   turn".
- */
-/** How long a `become-copy` lasts, when it isn't for as long as it's that
- * object — see that effect. */
-export type CopyUntil =
-  | "end-of-turn"
-  | "next-end-step"
-  | "your-next-turn"
-  | "while-source"
-  | "while-source-attached"
-  | { readonly whileTapped: EffectTargetRef };
-
-export type UntilPointDuration =
-  | "until-your-next-upkeep"
-  | "until-end-of-your-next-upkeep"
-  | "until-end-of-your-next-turn"
-  | "until-its-controllers-next-untap-step";
-
-/**
  * A "spend this mana only to …" clause on a mana ability (rule 106.6b).
  *
  * `spell` is the ordinary case: only spells matching this filter. `abilityOf`
@@ -603,13 +536,13 @@ export interface DelayedUnblocked {
  */
 export interface DelayedWhenever {
   readonly whenever: TriggerSpec;
-  /** How long it lasts, if not just this turn: `"your-next-turn"` until its
-   * controller's next turn begins; `"end-of-combat"` "…this combat" (Love on the
-   * Battlefield), lapsing as this combat's end of combat step ends; `"game"` for
-   * as long as the game does — "at the beginning of each of your upkeeps for the
-   * rest of the game", and a delayed "when" with no duration of its own (`once`,
-   * Coffin Queen). */
-  readonly until?: "your-next-turn" | "end-of-combat" | "game";
+  /** How long it lasts, if not just this turn: `"until-your-next-turn"` until
+   * its controller's next turn begins; `"until-end-of-combat"` "…this combat"
+   * (Love on the Battlefield), lapsing as this combat's end of combat step
+   * ends; `"permanent"` for as long as the game does — "at the beginning of
+   * each of your upkeeps for the rest of the game", and a delayed "when" with
+   * no duration of its own (`once`, Coffin Queen). */
+  readonly until?: WatchDuration;
   /** "**For as long as any of those cards remain exiled**, at the beginning of
    * each player's upkeep" (Dimensional Breach), with `about`: used up, and not
    * triggering, once none of the cards it's about is still in exile as the
@@ -1917,7 +1850,7 @@ export interface DamageRuleSpec {
   /** `"end-of-turn"` (the default); `"until-your-next-turn"`; `"while-source"`
    * — for as long as the source stays on the battlefield (Old Fat Spider
    * Can't See Me). */
-  readonly duration?: "end-of-turn" | "until-your-next-turn" | "while-source";
+  readonly duration?: DamageRuleDuration;
   /** A redirection instead (614.9): dealt by the same source to this target
    * slot, `"source"` or `"you"`; `"source-controller"` (Mirror Strike) or
    * `"source-itself"` (Shield Dancer) are worked out as the damage would be
@@ -1945,7 +1878,7 @@ export interface ResolvedDamageRule {
   readonly exceptSource?: ObjectId;
   readonly combat?: boolean;
   readonly amount: "all" | "next-time" | number;
-  readonly duration: "end-of-turn" | "until-your-next-turn" | "while-source";
+  readonly duration: DamageRuleDuration;
   readonly redirect?: TargetRef;
   readonly redirectToSource?: "itself" | "controller";
   readonly then?: EffectSpec;
@@ -2228,48 +2161,11 @@ export type ResolvedEnterAttacking =
   | { readonly defender: PlayerId | ObjectId };
 
 /**
- * How long a permission to play an exiled card lasts, whatever it's over — an
- * `impulse-exile`'s cards or an `exile`'s `mayCast` — see `GameObject.impulse`:
- *
- * - `"end-of-turn"`: this turn.
- * - `"your-next-turn"`: "until the end of your next turn" (Tectonic Giant).
- * - `"your-next-turn-only"`: "during your next turn" (Galvanic Relay): not
- *   before it either, this turn if it's yours included.
- * - `"your-next-end-step"`: "until your next end step" (Rocco, Street Chef),
- *   ending as that step begins.
- * - `"until-end-of-combat-your-next-turn"`: Brazen Cannonade's.
- * - `"until-next-exile"`: "until you exile another card with this" (Unstable
- *   Amulet), ending when this stint of the source next does. Its leaving
- *   doesn't end it (the ruling).
- * - `"while-source"`: for as long as the permanent is on the battlefield
- *   (Theater of Horrors).
- * - `"while-you-control"`: "for as long as you control this" (Lightning,
- *   Security Sergeant), over for good once you don't (the ruling).
- * - `"while-exiled"`: "for as long as it remains exiled".
- * - `"until-your-next-turn"`: "until your next turn", over as that turn begins
- *   (Nivix, Aerie of the Firemind), where `"your-next-turn"` runs to its end.
- * - `"until-your-next-upkeep"`: "until the beginning of your next upkeep"
- *   (Elkin Bottle).
- */
-export type ImpulseDuration =
-  | "end-of-turn"
-  | "until-your-next-turn"
-  | "until-your-next-upkeep"
-  | "your-next-turn"
-  | "your-next-turn-only"
-  | "your-next-end-step"
-  | "until-end-of-combat-your-next-turn"
-  | "until-next-exile"
-  | "while-source"
-  | "while-you-control"
-  | "while-exiled";
-
-/**
  * A permission over a card an effect has just put into exile — `exile`'s and
  * `discard-chosen`'s `mayCast`, `look-and-choose`'s `playable`. It rides on
  * the card (`GameObject.impulse`) and ends with any move.
  *
- * - `duration`: how long, see {@link ImpulseDuration}, read from the side of
+ * - `duration`: how long, see {@link PermissionDuration}, read from the side of
  *   the player it's given to ("until the end of **their** next turn").
  * - `spendAs`: the spending rule for that cast alone (rule 118.14).
  * - `play`: on `mayCast`, "you may **play** it", a land too (rule 305.1), not
@@ -2288,7 +2184,7 @@ export type ImpulseDuration =
  *   Inquisitor).
  */
 export interface ExilePermission {
-  readonly duration: ImpulseDuration;
+  readonly duration: PermissionDuration;
   readonly spendAs?: SpendAs;
   readonly play?: true;
   readonly castOnly?: true;
@@ -3845,7 +3741,7 @@ export type EffectSpec =
        * effect's controller gets an impulse permission to *cast* the card
        * this put into exile (a land stays put) — `"while-exiled"`, or
        * `"end-of-turn"` for "this turn", or any other
-       * {@link ImpulseDuration}: Scholar of Combustion's "until the end of
+       * {@link PermissionDuration}: Scholar of Combustion's "until the end of
        * your next turn" — with `spendAs` for that cast alone (rule 118.14).
        * `play`: "you may **play** it" — a land too (rule 305.1), Victor
        * Mancha's. A token exiled ceases to exist (rule 111.7), so there's
@@ -4560,7 +4456,7 @@ export type EffectSpec =
       readonly whileYouControlSource?: boolean;
       /** "Gain control of that permanent **until the end of your next turn**"
        * (Stilt-Man, Towering Terror). With `untilEndOfTurn: false`. */
-      readonly until?: UntilPointDuration;
+      readonly until?: PointDuration;
     }
   | {
       /**
@@ -4658,7 +4554,7 @@ export type EffectSpec =
        * it stops (rule 701.21a). */
       readonly kind: "cant-be-sacrificed";
       readonly target: EffectTargetRef;
-      readonly duration: PtDuration;
+      readonly duration: PermanentDuration;
     }
   | {
       /** `target` "can block an additional creature this turn" (Act of
@@ -4668,7 +4564,7 @@ export type EffectSpec =
       readonly kind: "block-additional";
       readonly target: EffectTargetRef;
       readonly amount: number | "any";
-      readonly duration: PtDuration;
+      readonly duration: PermanentDuration;
     }
   | {
       /** Target player puts the top `amount` cards of their library into
@@ -5695,7 +5591,7 @@ export type EffectSpec =
       readonly target: EffectTargetRef;
       readonly power: EffectAmount;
       readonly toughness: EffectAmount;
-      readonly duration: PtDuration;
+      readonly duration: PermanentDuration;
     }
   | {
       /** "Switch target creature's power and toughness until end of turn"
@@ -5706,7 +5602,7 @@ export type EffectSpec =
       readonly kind: "switch-pt";
       readonly target?: EffectTargetRef;
       readonly all?: CardFilter;
-      readonly duration: PtDuration;
+      readonly duration: PermanentDuration;
     }
   | {
       /** Every battlefield permanent matching `filter` gets +power/+toughness
@@ -5717,7 +5613,7 @@ export type EffectSpec =
       readonly filter: CardFilter;
       readonly power: EffectAmount;
       readonly toughness: EffectAmount;
-      readonly duration: PtDuration;
+      readonly duration: PermanentDuration;
       /** Spare the effect's own source — "**other** attacking creatures you
        * control with flying" (Steel-Plume Marshal), which is itself an
        * attacking creature with flying. Same clause `damage-all` carries, and
@@ -5746,7 +5642,7 @@ export type EffectSpec =
        * and a 10/10, not identical stat lines. */
       readonly kind: "double-pt-all";
       readonly filter: CardFilter;
-      readonly duration: PtDuration;
+      readonly duration: PermanentDuration;
       /** "Double the **power** of each …" (God-Eternal Rhonas): +X/+0 only,
        * X each one's own power as it begins to apply (its ruling). */
       readonly powerOnly?: boolean;
@@ -5801,7 +5697,7 @@ export type EffectSpec =
       readonly kind: "grant-keyword-all";
       readonly filter: CardFilter;
       readonly keyword: Keyword;
-      readonly duration: PtDuration;
+      readonly duration: PermanentDuration;
       /** Spare the effect's own source — "**other** Spiders you control
        * gain flying" (Cosmic Spider-Man). Same clause as `modify-pt-all`. */
       readonly exceptSource?: boolean;
@@ -5826,7 +5722,7 @@ export type EffectSpec =
       readonly filter?: CardFilter;
       readonly exceptSource?: boolean;
       readonly amount: number;
-      readonly duration: PtDuration;
+      readonly duration: PermanentDuration;
     }
   | {
       /**
@@ -5852,7 +5748,7 @@ export type EffectSpec =
       readonly filter?: CardFilter;
       readonly exceptSource?: boolean;
       readonly from: ProtectionQualities | ProtectionChoice;
-      readonly duration: PtDuration;
+      readonly duration: PermanentDuration;
       /** **Hexproof** from those qualities rather than protection from them
        * (rule 702.11d — Veil of Summer's "gain hexproof from blue and from
        * black until end of turn"): only targeting by what an opponent controls
@@ -6379,7 +6275,7 @@ export type EffectSpec =
       readonly kind: "grant-keyword";
       readonly target: EffectTargetRef;
       readonly keyword: Keyword;
-      readonly duration: PtDuration;
+      readonly duration: PermanentDuration;
     }
   | {
       /**
@@ -6477,7 +6373,7 @@ export type EffectSpec =
        * has gone illegal (rule 608.2b). */
       readonly controlledByTarget?: number;
       readonly keywords: readonly Keyword[];
-      readonly duration: PtDuration;
+      readonly duration: PermanentDuration;
       /** "… and can't have hexproof or shroud" (Arcane Lighthouse): for the
        * duration, what it reached can't have these at all, whatever gives
        * them and whatever the timestamps (`PtModifier.cantHaveKeywords`). */
@@ -6509,14 +6405,14 @@ export type EffectSpec =
        * instead" — `floor: 1`). Angel's Grace, Everybody Lives!.
        */
       readonly kind: "player-effect";
-      /** `"this-combat"`: gone as the combat phase ends (rule 500.5a, 506.1) —
-       * "they can't attack you this combat" (Champions of Minas Tirith). */
-      readonly duration:
-        | "end-of-turn"
-        | "this-combat"
-        | "until-your-next-turn"
-        | "until-end-of-your-next-turn"
-        | "rest-of-game";
+      /** See `PlayerDuration`: `"until-end-of-combat"` is gone as the combat
+       * phase ends (rule 500.5a, 506.1) — "they can't attack you this combat"
+       * (Champions of Minas Tirith); `"permanent"` the rest of the game;
+       * `{ untilTurnOf: { target: 0 } }` "until **that player's** next turn"
+       * (Teferi's Reproach); `{ duringTurnOf: "trigger-player" }` "during
+       * their next turn" (Willie Lumpkin, Postman). Naming nobody (an illegal
+       * target), nothing is made. */
+      readonly duration: PlayerDuration;
       /** "You have no maximum hand size until your next turn" (Enter the
        * Infinite), "… for the rest of the game" (Praetor's Counsel). */
       readonly noMaxHandSize?: PlayerScope;
@@ -6745,8 +6641,10 @@ export type EffectSpec =
        * if the text also names planeswalkers; `"all"`: "creatures can't attack
        * this combat" (Overencumbered); `{ planeswalkers }`: only planeswalkers
        * matching this from the controller's side, "can't attack **Jaces you
-       * control**" (Jace, Multiverse Architect). */
-      readonly cantAttack?: "you" | "you-and-planeswalkers" | "all" | { readonly planeswalkers: CardFilter };
+       * control**" (Jace, Multiverse Architect); `"you-and-permanents"`
+       * "can't attack you or permanents you control", a battle you control
+       * too (Willie Lumpkin, Postman). */
+      readonly cantAttack?: "you" | "you-and-planeswalkers" | "you-and-permanents" | "all" | { readonly planeswalkers: CardFilter };
       /** With `cantAttack`: only the creatures this player controls, whoever
        * that is as the attack is declared — "**they** can't attack you this
        * combat" (Champions of Minas Tirith). Naming nobody, nothing is made. */
@@ -6949,7 +6847,7 @@ export type EffectSpec =
       readonly regeneration?: boolean;
       readonly monarch?: boolean;
       readonly dealtDamageThisWay?: "creature";
-      readonly duration?: "until-your-next-turn";
+      readonly duration?: Extract<Duration, "until-your-next-turn">;
     }
   | {
       /**
@@ -7006,11 +6904,11 @@ export type EffectSpec =
        * it can't attack or block"; `"until-your-next-turn"` Taunt from the
        * Rampart's "until your next turn, those creatures can't block";
        * `"until-end-of-combat"` Ma Chao's "can't be blocked this combat".
-       * `"its-controllers-next-turn"` is a `target`'s alone: only *during*
-       * the next turn of whoever controls it as this resolves, and not until
-       * then (Wall of Dust's "can't attack during its controller's next
-       * turn"). */
-      readonly duration?: PtDuration | "its-controllers-next-turn";
+       * `"during-its-controllers-next-turn"` is a `target`'s alone: only
+       * *during* the next turn of whoever controls it as this resolves, and
+       * not until then (Wall of Dust's "can't attack during its controller's
+       * next turn"). */
+      readonly duration?: PermanentDuration | Extract<Duration, "during-its-controllers-next-turn">;
       /** "Can't attack **you or a permanent you control**" (Immortal
        * Obligation): `PtModifier.cantAttackYou`, "you" this effect's
        * controller. `"you-and-planeswalkers"` is "can't attack you or
@@ -7109,9 +7007,13 @@ export type EffectSpec =
        * Zealot, Ophidian: "if you do, this creature assigns no combat damage
        * this turn"). An unblocked one deals the player nothing, and a
        * blocked one nothing to its blockers; it's still attacking, blocked
-       * or not, and its power is unchanged for everything else. */
+       * or not, and its power is unchanged for everything else.
+       * `duration: "until-end-of-combat"`: "assigns no combat damage **this
+       * combat**" (Master of Cruelties) — a later combat this turn it deals
+       * its damage again. */
       readonly kind: "assigns-no-combat-damage";
       readonly target: EffectTargetRef;
+      readonly duration?: Extract<Duration, "end-of-turn" | "until-end-of-combat">;
     }
   | {
       /**
@@ -7273,7 +7175,7 @@ export type EffectSpec =
       readonly kind: "grant-triggered";
       readonly target: EffectTargetRef;
       readonly ability: TriggeredAbility;
-      readonly duration: PtDuration;
+      readonly duration: PermanentDuration;
     }
   | {
       /**
@@ -7287,7 +7189,7 @@ export type EffectSpec =
       readonly target: EffectTargetRef;
       readonly loseLandTypes?: boolean;
       readonly activated?: readonly ActivatedAbility[];
-      readonly duration: PtDuration;
+      readonly duration: PermanentDuration;
     }
   | {
       /**
@@ -7301,7 +7203,7 @@ export type EffectSpec =
        */
       readonly kind: "lose-abilities-all";
       readonly filter: CardFilter;
-      readonly duration: PtDuration;
+      readonly duration: PermanentDuration;
     }
   | {
       /**
@@ -7313,7 +7215,7 @@ export type EffectSpec =
       readonly kind: "grant-activated";
       readonly target: EffectTargetRef;
       readonly ability: ActivatedAbility;
-      readonly duration: PtDuration;
+      readonly duration: PermanentDuration;
     }
   | {
       /**
@@ -7326,7 +7228,7 @@ export type EffectSpec =
       readonly kind: "grant-activated-of";
       readonly target: EffectTargetRef;
       readonly of: EffectTargetRef;
-      readonly duration: PtDuration;
+      readonly duration: PermanentDuration;
     }
   | {
       /**
@@ -7352,7 +7254,7 @@ export type EffectSpec =
       readonly target?: EffectTargetRef;
       readonly filter?: CardFilter;
       readonly ability: StaticAbility;
-      readonly duration: PtDuration;
+      readonly duration: PermanentDuration;
     }
   | {
       /** The mass form of `grant-activated`: Rain of Filth's "until end of
@@ -7362,7 +7264,7 @@ export type EffectSpec =
       readonly kind: "grant-activated-all";
       readonly filter: CardFilter;
       readonly ability: ActivatedAbility;
-      readonly duration: PtDuration;
+      readonly duration: PermanentDuration;
     }
   | {
       /** The mass form of `grant-triggered`: every battlefield permanent
@@ -7373,7 +7275,7 @@ export type EffectSpec =
       readonly kind: "grant-triggered-all";
       readonly filter: CardFilter;
       readonly ability: TriggeredAbility;
-      readonly duration: PtDuration;
+      readonly duration: PermanentDuration;
     }
   | {
       /** The effect's controller takes an extra turn after this one (rule
@@ -8158,7 +8060,7 @@ export type EffectSpec =
       /** "…**named Vitu-Ghazi**": its only name for as long as this lasts, a
        * copy of it not having it. */
       readonly setName?: string;
-      readonly duration: PtDuration;
+      readonly duration: PermanentDuration;
     }
   | {
       /**
@@ -8206,7 +8108,7 @@ export type EffectSpec =
        * Grand Metatect's "becomes a blue artifact in addition to its other
        * colors and types", Possessed Goat's "a black Demon in addition". */
       readonly addColors?: readonly Color[];
-      readonly duration: PtDuration;
+      readonly duration: PermanentDuration;
     }
   | {
       /**
@@ -8232,7 +8134,7 @@ export type EffectSpec =
       readonly addTypes?: readonly CardType[];
       readonly addSubtypes?: readonly string[];
       readonly keywords?: readonly Keyword[];
-      readonly duration: PtDuration;
+      readonly duration: PermanentDuration;
       /** "Each **other** creature" — not the effect's own permanent (Graven
        * Dominator). Read from exile (a haunt trigger), nothing is left out. */
       readonly exceptSource?: boolean;
@@ -8994,7 +8896,7 @@ export type EffectSpec =
       readonly exceptOf?: true;
       readonly of: AmountRef;
       readonly ofCard?: true | "when-a-card";
-      readonly until?: CopyUntil;
+      readonly until?: CopyDuration;
       readonly exceptions?: CopyExceptions;
     }
   | {
@@ -9195,6 +9097,34 @@ export type EffectSpec =
     }
   | {
       /**
+       * A **timed static** (theme 3b of docs/plans/need-key-themes.md): a
+       * resolved spell or ability's effect that changes the rules for a
+       * while, written as the static ability that says the same thing
+       * forever — "players can't gain life this turn" (Skullcrack) is
+       * Everlasting Torment's `would-gain-life` replacement with a
+       * `duration`; "the 'legend rule' doesn't apply to permanents you
+       * control this turn" (Hall of Echoes) Mirror Gallery's
+       * `legendRuleOff`; "until end of turn, you may activate loyalty
+       * abilities of Jace planeswalkers you control … any time you could
+       * cast an instant" (Jace's Machinations) Teferi, Temporal Archmage's
+       * emblem's `loyaltyAtInstantSpeed`, its `affects` a filter. "You" is
+       * the effect's controller, from the command zone (rule 113.6p).
+       *
+       * It is no emblem at the table: it rides the emblem machinery
+       * (`EmblemState.expires`), so only the fields
+       * `test/emblem-statics.test.ts` lists are read, and ends as its
+       * `duration` does (`Game.expirePlayerEffects`). Rule 611.2c: a rule
+       * change reaches whatever comes later, which is what a static does; a
+       * characteristic-changing one would have to lock its set as it begins,
+       * so none is written this way.
+       */
+      readonly kind: "timed-static";
+      readonly static: readonly StaticAbility[];
+      readonly duration: Exclude<PlayerDuration, "during-your-next-turn" | { readonly duringTurnOf: DurationPlayer }>;
+      readonly text: string;
+    }
+  | {
+      /**
        * Epic (rule 702.50a), the last part of the spell's effect: "For the
        * rest of the game, you can't cast spells" and "at the beginning of
        * each of your upkeeps for the rest of the game, copy this spell except
@@ -9350,7 +9280,7 @@ export type EffectSpec =
       readonly kind: "become-color";
       readonly target: EffectTargetRef;
       readonly colors: readonly Color[];
-      readonly duration: PtDuration;
+      readonly duration: PermanentDuration;
       /** "Becomes blue **in addition to its other colors**" (Indigo
        * Faerie — rule 105.3): `colors` are added to its others instead of
        * replacing them, in timestamp order with the rest of layer 5. */
@@ -9375,7 +9305,7 @@ export type EffectSpec =
       readonly kind: "change-text";
       readonly target: EffectTargetRef;
       readonly words: "color" | "land-type" | "color-or-land-type";
-      readonly duration: PtDuration;
+      readonly duration: PermanentDuration;
       readonly from?: string;
       readonly to?: string;
     }
@@ -10136,7 +10066,7 @@ export type EffectSpec =
        * Obligation's; `"while-its-controller-controls-source"` Vislor
        * Turlough's. Nothing happens if the duration could not begin (rule
        * 611.2b — Hot Pursuit's ruling). */
-      readonly duration?: PtDuration;
+      readonly duration?: PermanentDuration;
     }
   | {
       /**
@@ -10209,12 +10139,12 @@ export type EffectSpec =
        * - `attacks`: obeyed only by attacking that one — `"you"`, the
        *   `"source"` (Gideon Jura's "attack Gideon Jura"), or the player in
        *   a target slot (Ravener's "attacks target opponent");
-       * - `duration`: until your next turn (absent — Kardur), `"this-turn"`,
-       *   `"that-players-next-turn"` (during the `controlledByTarget`
-       *   player's next turn — Taunt), `"controllers-next-combat"` (the
+       * - `duration`: until your next turn (absent — Kardur), `"end-of-turn"`,
+       *   `{ duringTurnOf: { target: 0 } }` (during target player's next
+       *   turn — Taunt), `"during-its-controllers-next-combat"` (the
        *   `target`'s controller's next combat phase — Trench Behemoth),
-       *   `"controllers-next-turn"` (their next turn — Gideon,
-       *   Battle-Forged).
+       *   `"during-its-controllers-next-turn"` (their next turn — Gideon,
+       *   Battle-Forged). See `AttackRequirementDuration`.
        *
        * An illegal or missing target leaves nothing to require (608.2b).
        */
@@ -10224,7 +10154,7 @@ export type EffectSpec =
       readonly target?: EffectTargetRef;
       readonly controlledByTarget?: number;
       readonly attacks?: "you" | "source" | number;
-      readonly duration?: "this-turn" | "that-players-next-turn" | "controllers-next-combat" | "controllers-next-turn";
+      readonly duration?: AttackRequirementDuration;
     }
   | {
       /**
@@ -10239,8 +10169,8 @@ export type EffectSpec =
        */
       readonly kind: "impulse-exile";
       readonly amount: EffectAmount;
-      /** See {@link ImpulseDuration}. */
-      readonly duration: ImpulseDuration;
+      /** See {@link PermissionDuration}. */
+      readonly duration: PermissionDuration;
       /** Only during a turn the permission's player did this with this
        * source, in this stint of it, whatever has become of it since: "During
        * any turn you attacked with this creature, you may play that card"
@@ -12252,7 +12182,7 @@ export interface EffectApi {
     whileSource?: boolean,
     whileSourceTapped?: boolean,
     whileYouControlSource?: boolean,
-    until?: UntilPointDuration,
+    until?: PointDuration,
   ): void;
   /** See the `"gain-control-all"` {@link EffectSpec}: `who` a player, or
    * each permanent's own owner; `controlledBy` keeps only what that player
@@ -12277,9 +12207,9 @@ export interface EffectApi {
   exchangeControlAll(filter: CardFilter, other: PlayerId, untilEndOfTurn: boolean): void;
   /** `target` gains "This creature can't be sacrificed" — see the
    * `"cant-be-sacrificed"` {@link EffectSpec}. */
-  grantCantBeSacrificed(target: TargetRef, duration: PtDuration): void;
+  grantCantBeSacrificed(target: TargetRef, duration: PermanentDuration): void;
   /** See the `"block-additional"` {@link EffectSpec}. */
-  grantBlockAdditional(target: TargetRef, amount: number | "any", duration: PtDuration): void;
+  grantBlockAdditional(target: TargetRef, amount: number | "any", duration: PermanentDuration): void;
   /** `target` (a player) mills `amount` cards. */
   mill(target: TargetRef, amount: number): void;
   /** See the `"shuffle-graveyard-into-library"` {@link EffectSpec}: how
@@ -12385,7 +12315,7 @@ export interface EffectApi {
     target: TargetRef,
     power: number,
     toughness: number,
-    duration: PtDuration,
+    duration: PermanentDuration,
   ): void;
   /** See the `grant-protection` {@link EffectSpec}: the target, and every
    * other battlefield permanent matching `filter` as it resolves (from the
@@ -12393,17 +12323,17 @@ export interface EffectApi {
   grantProtection(
     on: { readonly target?: TargetRef; readonly filter?: CardFilter; readonly exceptSource?: true; readonly asHexproof?: true },
     from: ProtectionQualities,
-    duration: PtDuration,
+    duration: PermanentDuration,
   ): void;
   /** See the `grant-toxic` {@link EffectSpec}: `on` is the target, or a
    * filter over the battlefield read as it resolves. */
-  grantToxic(on: TargetRef | CardFilter, amount: number, duration: PtDuration, exceptSource?: boolean): void;
+  grantToxic(on: TargetRef | CardFilter, amount: number, duration: PermanentDuration, exceptSource?: boolean): void;
   /** +power/+toughness to every battlefield permanent matching `filter`. */
   modifyPtAll(
     filter: CardFilter,
     power: number,
     toughness: number,
-    duration: PtDuration,
+    duration: PermanentDuration,
     exceptSource?: boolean,
     scopeTo?: PlayerId,
   ): void;
@@ -12411,16 +12341,16 @@ export interface EffectApi {
   grantKeywordAll(
     filter: CardFilter,
     keyword: Keyword,
-    duration: PtDuration,
+    duration: PermanentDuration,
     exceptSource?: boolean,
     /** `filter` read from this player's side (`controlledByTarget`). */
     scopeTo?: PlayerId,
   ): void;
   /** See the `"double-pt-all"` {@link EffectSpec}. */
-  doublePtAll(filter: CardFilter, duration: PtDuration, powerOnly: boolean, exceptSource: boolean): void;
+  doublePtAll(filter: CardFilter, duration: PermanentDuration, powerOnly: boolean, exceptSource: boolean): void;
   /** See the `"switch-pt"` {@link EffectSpec}: one permanent, or each
    * matching a filter. */
-  switchPt(what: TargetRef | CardFilter, duration: PtDuration): void;
+  switchPt(what: TargetRef | CardFilter, duration: PermanentDuration): void;
   /** See the `"grant-player-hexproof"` {@link EffectSpec}. */
   grantPlayerHexproof(who: PlayerScope, from?: Pick<ProtectionQualities, "colors" | "types" | "filter">): void;
   /** See the `"grant-spells-this-turn"` {@link EffectSpec}. */
@@ -12550,13 +12480,13 @@ export interface EffectApi {
   commanderColors(): readonly ManaType[];
   /** See the `"goad"` {@link EffectSpec}: goad each creature `player`
    * controls. */
-  goadCreaturesOf(player: PlayerId, forGame: boolean, duration?: PtDuration): void;
+  goadCreaturesOf(player: PlayerId, forGame: boolean, duration?: PermanentDuration): void;
   /** See the `"goad"` {@link EffectSpec}: goad one creature — nothing, if
    * `target` isn't a creature on the battlefield. */
-  goadCreature(target: TargetRef, forGame: boolean, duration?: PtDuration): void;
+  goadCreature(target: TargetRef, forGame: boolean, duration?: PermanentDuration): void;
   /** See the `"goad"` {@link EffectSpec}: goad every creature matching
    * `filter`, from the effect's controller's side. */
-  goadMatching(filter: CardFilter, forGame: boolean, duration?: PtDuration): void;
+  goadMatching(filter: CardFilter, forGame: boolean, duration?: PermanentDuration): void;
   /** See the `"ungoad"` {@link EffectSpec}. */
   ungoad(filter: CardFilter): void;
   /** See the `"suspect"` {@link EffectSpec}. */
@@ -12574,12 +12504,16 @@ export interface EffectApi {
     readonly object?: ObjectId;
     readonly controlledBy?: PlayerId;
     readonly attacks?: PlayerId | ObjectId;
-    readonly duration?: "this-turn" | "that-players-next-turn" | "controllers-next-combat" | "controllers-next-turn";
+    readonly duration?:
+      | "end-of-turn"
+      | { readonly duringTurnOf: PlayerId }
+      | "during-its-controllers-next-turn"
+      | "during-its-controllers-next-combat";
   }): void;
   /** See the `"impulse-exile"` {@link EffectSpec}. */
   impulseExile(
     amount: number,
-    duration: ImpulseDuration,
+    duration: PermissionDuration,
     castOnly: boolean,
     opts?: {
       /** Whose libraries (the controller's alone when absent). */
@@ -12606,7 +12540,9 @@ export interface EffectApi {
   /** See the `"ward"` {@link EffectSpec}. */
   ward(cost: WardCost): void;
   /** See the `"player-effect"` {@link EffectSpec}. */
-  addPlayerEffect(effect: PlayerEffect): void;
+  /** `during`: the effect applies only during that player's next turn
+   * (`GameState.laterPlayerEffects`); `effect.expires` is then ignored. */
+  addPlayerEffect(effect: PlayerEffect, during?: PlayerId): void;
   /** How many spells `player` has cast this turn so far (`castsLeft`). */
   spellsCastThisTurn(player: PlayerId): number;
   /** Flip a coin for this effect's controller (see the `"flip-coin"`
@@ -12650,7 +12586,7 @@ export interface EffectApi {
     filter: CardFilter | undefined,
     restrictions: readonly CombatRestriction[],
     /** A `target`'s or an `asItResolves` filter's: this turn when omitted. */
-    duration?: PtDuration | "its-controllers-next-turn",
+    duration?: PermanentDuration | Extract<Duration, "during-its-controllers-next-turn">,
     cantBeBlockedBy?: CardFilter,
     /** The one attacker `target` can't block (`cantBlockAttacker`). */
     cantBlock?: TargetRef,
@@ -12672,7 +12608,7 @@ export interface EffectApi {
     target: TargetRef | undefined,
     filter: CardFilter | undefined,
     ability: StaticAbility,
-    duration: PtDuration,
+    duration: PermanentDuration,
   ): void;
   /** See the `"detain"` {@link EffectSpec}. */
   detain(target: TargetRef): void;
@@ -12684,7 +12620,8 @@ export interface EffectApi {
   /** See the `"damage-by-toughness"` {@link EffectSpec}. */
   damageByToughness(target: TargetRef): void;
   /** See the `"assigns-no-combat-damage"` {@link EffectSpec}. */
-  assignsNoCombatDamage(target: TargetRef): void;
+  /** `thisCombat`: only until this combat ends (rule 511.2). */
+  assignsNoCombatDamage(target: TargetRef, thisCombat?: boolean): void;
   /** See the `"assign-as-though-unblocked"` {@link EffectSpec}. */
   assignAsThoughUnblocked(target: TargetRef | undefined, filter: CardFilter | undefined, must: boolean): void;
   /** See the `"put-in-command-zone"` {@link EffectSpec}. */
@@ -12829,7 +12766,7 @@ export interface EffectApi {
    * modes: the controller says how many of each colour, as one decision
    * (`addManaChoice`). Absent on a bare context, which asks unit by unit. */
   splitMana?(ask: ManaSplitAsk): void;
-  grantKeyword(target: TargetRef, keyword: Keyword, duration: PtDuration): void;
+  grantKeyword(target: TargetRef, keyword: Keyword, duration: PermanentDuration): void;
   /** See the `"incubate"` {@link EffectSpec}. */
   incubate(amount: number): void;
   /** See the `"remove-from-combat"` {@link EffectSpec}. */
@@ -12847,7 +12784,7 @@ export interface EffectApi {
   loseKeywords(
     on: TargetRef | CardFilter,
     keywords: readonly Keyword[],
-    duration: PtDuration,
+    duration: PermanentDuration,
     scopeTo?: PlayerId,
     cantHave?: boolean,
   ): void;
@@ -12855,27 +12792,27 @@ export interface EffectApi {
   grantTriggered(
     target: TargetRef,
     ability: TriggeredAbility,
-    duration: PtDuration,
+    duration: PermanentDuration,
   ): void;
   /** See the `"grant-triggered-all"` {@link EffectSpec}. */
-  grantTriggeredAll(filter: CardFilter, ability: TriggeredAbility, duration: PtDuration): void;
+  grantTriggeredAll(filter: CardFilter, ability: TriggeredAbility, duration: PermanentDuration): void;
   /** See the `"grant-activated"` {@link EffectSpec}. */
-  grantActivated(target: TargetRef, ability: ActivatedAbility, duration: PtDuration): void;
+  grantActivated(target: TargetRef, ability: ActivatedAbility, duration: PermanentDuration): void;
   /** See the `"grant-activated-of"` {@link EffectSpec}. */
-  grantActivatedOf(target: TargetRef, of: TargetRef, duration: PtDuration): void;
+  grantActivatedOf(target: TargetRef, of: TargetRef, duration: PermanentDuration): void;
   /** See the `"lose-abilities"` {@link EffectSpec}. */
   loseAbilities(
     target: TargetRef,
     opts: {
       readonly loseLandTypes: boolean;
       readonly activated: readonly ActivatedAbility[];
-      readonly duration: PtDuration;
+      readonly duration: PermanentDuration;
     },
   ): void;
   /** See the `"lose-abilities-all"` {@link EffectSpec}. */
-  loseAbilitiesAll(filter: CardFilter, duration: PtDuration): void;
+  loseAbilitiesAll(filter: CardFilter, duration: PermanentDuration): void;
   /** See the `"grant-activated-all"` {@link EffectSpec}. */
-  grantActivatedAll(filter: CardFilter, ability: ActivatedAbility, duration: PtDuration): void;
+  grantActivatedAll(filter: CardFilter, ability: ActivatedAbility, duration: PermanentDuration): void;
   /** `player` takes an extra turn after this one (Time Warp). */
   takeExtraTurn(player: PlayerId, skipUntapStep?: boolean, thatTurn?: ExtraTurnScope): void;
   /** `player` skips their next `count` turns (the `skip-turn` effect). */
@@ -13063,7 +13000,7 @@ export interface EffectApi {
       readonly keywords: readonly Keyword[];
       readonly addSupertypes?: readonly Supertype[];
       readonly setName?: string;
-      readonly duration: PtDuration;
+      readonly duration: PermanentDuration;
     },
   ): void;
   /** `target` gains types and subtypes — see the `"add-types"`
@@ -13072,7 +13009,7 @@ export interface EffectApi {
     target: TargetRef,
     types: readonly CardType[],
     subtypes: readonly string[],
-    duration: PtDuration,
+    duration: PermanentDuration,
     set?: {
       readonly setTypes?: readonly CardType[];
       readonly removeTypes?: readonly CardType[];
@@ -13091,7 +13028,7 @@ export interface EffectApi {
       readonly addTypes: readonly CardType[];
       readonly addSubtypes: readonly string[];
       readonly keywords: readonly Keyword[];
-      readonly duration: PtDuration;
+      readonly duration: PermanentDuration;
       readonly exceptSource?: boolean;
       readonly scopeTo?: PlayerId;
     },
@@ -13225,7 +13162,7 @@ export interface EffectApi {
     of: ObjectId,
     opts: {
       readonly ofCard?: boolean;
-      readonly until?: Exclude<CopyUntil, { readonly whileTapped: EffectTargetRef }> | { readonly whileTapped: ObjectId };
+      readonly until?: Exclude<CopyDuration, { readonly whileTapped: EffectTargetRef }> | { readonly whileTapped: ObjectId };
       readonly exceptions?: CopyExceptions;
     },
   ): void;
@@ -13285,6 +13222,9 @@ export interface EffectApi {
     owner?: PlayerId,
     moreStatics?: readonly StaticAbility[],
   ): void;
+  /** The effect's controller's timed static — see the `timed-static`
+   * {@link EffectSpec}. */
+  addTimedStatic(text: string, statics: readonly StaticAbility[], expires: Expiry): void;
   /** Epic as the spell resolves — see the `epic` {@link EffectSpec}. */
   epic(): void;
   /** Paradigm as the spell resolves — see the `paradigm` {@link EffectSpec}. */
@@ -13318,10 +13258,10 @@ export interface EffectApi {
     },
   ): void;
   /** `target` becomes `colors` — see the `"become-color"` {@link EffectSpec}. */
-  becomeColor(target: TargetRef, colors: readonly Color[], duration: PtDuration, inAddition?: boolean): void;
+  becomeColor(target: TargetRef, colors: readonly Color[], duration: PermanentDuration, inAddition?: boolean): void;
   /** `target`'s text has every `change.from` replaced by `change.to` — see
    * the `"change-text"` {@link EffectSpec}. */
-  changeText(target: TargetRef, change: TextChange, duration: PtDuration): void;
+  changeText(target: TargetRef, change: TextChange, duration: PermanentDuration): void;
   /** Raise a `choose-modes` decision — see the `modal` / `may` {@link EffectSpec}.
    * The chosen modes' effects are applied after the controller answers.
    * `onDecline` (a `may` effect's `else` only) applies when zero modes end up
@@ -18845,18 +18785,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "player-effect": {
       const attackersOf = spec.cantAttackBy === undefined ? undefined : effectPlayer(spec.cantAttackBy, ctx);
       if (spec.cantAttackBy !== undefined && attackersOf === undefined) return;
+      const lasts = resolvePlayerDuration(spec.duration, ctx.controller, (ref) => effectPlayer(ref, ctx));
+      if (lasts === undefined) return;
       ctx.addPlayerEffect({
         owner: ctx.controller,
-        expires:
-          spec.duration === "end-of-turn"
-            ? { kind: "end-of-turn" }
-            : spec.duration === "this-combat"
-              ? { kind: "end-of-combat" }
-            : spec.duration === "until-end-of-your-next-turn"
-              ? { kind: "end-of-your-next-turn" }
-              : spec.duration === "rest-of-game"
-                ? { kind: "rest-of-game" }
-                : { kind: "your-next-turn" },
+        // A `during` effect is held until that turn (`laterPlayerEffects`).
+        expires: "expires" in lasts ? lasts.expires : "end-of-turn",
         ...(spec.noMaxHandSize !== undefined ? { noMaxHandSize: ctx.playersInScope(spec.noMaxHandSize) } : {}),
         ...(spec.reduceSpells !== undefined
           ? {
@@ -18994,7 +18928,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           : {}),
         ...(spec.cantAttack !== undefined ? { cantAttack: spec.cantAttack } : {}),
         ...(attackersOf !== undefined ? { cantAttackBy: attackersOf } : {}),
-      });
+      }, "during" in lasts ? lasts.during : undefined);
       return;
     }
     case "win-game":
@@ -19155,7 +19089,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "assigns-no-combat-damage": {
       const target = resolveEffectTarget(spec.target, ctx);
-      if (target !== undefined) ctx.assignsNoCombatDamage(target);
+      if (target !== undefined) ctx.assignsNoCombatDamage(target, spec.duration === "until-end-of-combat");
       return;
     }
     case "assign-as-though-unblocked": {
@@ -20177,6 +20111,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (to?.kind === "player") ctx.createEmblem(spec.text, spec.static, spec.triggered, to.player, spec.moreStatics);
       return;
     }
+    case "timed-static": {
+      const lasts = resolvePlayerDuration(spec.duration, ctx.controller, (ref) => effectPlayer(ref, ctx));
+      if (lasts !== undefined && "expires" in lasts) ctx.addTimedStatic(spec.text, spec.static, lasts.expires);
+      return;
+    }
     case "prevent-all-combat-damage":
       ctx.preventAllCombatDamage(spec.by);
       return;
@@ -20732,13 +20671,22 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             ? ({ kind: "player", player: ctx.controller } as const)
             : slot(spec.attacks);
       if (spec.attacks !== undefined && aimed === undefined) return;
+      // "During target player's next turn" (Taunt): whoever that is now.
+      let during: NonNullable<Parameters<ResolutionContext["addAttackRequirement"]>[0]["duration"]> | undefined;
+      if (typeof spec.duration === "object") {
+        const turnOf = effectPlayer(spec.duration.duringTurnOf, ctx);
+        if (turnOf === undefined) return;
+        during = { duringTurnOf: turnOf };
+      } else {
+        during = spec.duration;
+      }
       ctx.addAttackRequirement({
         filter: spec.filter ?? {},
         otherThanYou: spec.otherThanYou ?? false,
         ...(object?.kind === "object" ? { object: object.object } : {}),
         ...(player?.kind === "player" ? { controlledBy: player.player } : {}),
         ...(aimed !== undefined ? { attacks: aimed.kind === "player" ? aimed.player : aimed.object } : {}),
-        ...(spec.duration !== undefined ? { duration: spec.duration } : {}),
+        ...(during !== undefined ? { duration: during } : {}),
       });
       return;
     }

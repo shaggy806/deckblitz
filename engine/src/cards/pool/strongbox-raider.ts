@@ -17,7 +17,7 @@ export default defineCard({
       trigger: { on: "enters-battlefield", who: "self" },
       condition: { kind: "turn-stat", stat: "attacked", who: "you", atLeast: 1 },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 2, duration: "your-next-turn", choose: 1 },
+      effect: { kind: "impulse-exile", amount: 2, duration: "until-end-of-your-next-turn", choose: 1 },
       resolve: null,
       text: RAID_TEXT,
     },

@@ -365,6 +365,8 @@ describe("what is read off an emblem", () => {
     "untapLimit",
     "loyaltyAtInstantSpeed",
     "replacement",
+    // The legend rule (`exemptFromLegendRule`) - Hall of Echoes' timed static.
+    "legendRuleOff",
     // Permissions.
     "playFromGraveyard",
     "playFromLibraryTop",
@@ -383,6 +385,8 @@ describe("what is read off an emblem", () => {
     } else if (node !== null && typeof node === "object") {
       const record = node as Record<string, unknown>;
       if (record.kind === "create-emblem") out.push(record as (typeof out)[number]);
+      // A timed static rides an emblem: the same readers.
+      if (record.kind === "timed-static") out.push({ moreStatics: record.static as readonly StaticAbility[] });
       for (const value of Object.values(record)) emblemsIn(value, out);
     }
   };
@@ -401,9 +405,10 @@ describe("what is read off an emblem", () => {
           for (const field of Object.keys(ability)) {
             if (!READ.has(field)) unread.push(`${card.name}: ${field}`);
           }
-          // Only a damage replacement is read off an emblem.
+          // Only a damage or a life-gain replacement is read off an emblem
+          // (`playerEventReplacements` reads mill and life loss there too).
           const replacement = (ability as { replacement?: { event?: string } }).replacement;
-          if (replacement !== undefined && replacement.event !== "would-deal-damage") {
+          if (replacement !== undefined && !["would-deal-damage", "would-gain-life", "would-lose-life", "would-mill"].includes(replacement.event ?? "")) {
             unread.push(`${card.name}: replacement ${replacement.event}`);
           }
         }

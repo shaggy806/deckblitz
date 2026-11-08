@@ -25,11 +25,13 @@ import type { GameObject, GameState } from "../state.js";
 
 /** Who an attack tax covers: `owner` and, by what `covers` says, the
  * planeswalkers they control. A planeswalker isn't "you" (Ghostly Prison's
- * ruling); a battle is neither; `"all"` is every attack on anything. */
+ * ruling); a battle is neither; `"all"` is every attack on anything, and
+ * `"you-and-permanents"` every attack on `owner` or a permanent they control
+ * (a battle they control included — "you or permanents you control"). */
 export function attackCovers(
   state: GameState,
   registry: CardRegistry,
-  covers: "you" | "you-and-planeswalkers" | "planeswalkers" | "all",
+  covers: "you" | "you-and-planeswalkers" | "you-and-permanents" | "planeswalkers" | "all",
   owner: PlayerId,
   defender: PlayerId | ObjectId,
 ): boolean {
@@ -37,7 +39,7 @@ export function attackCovers(
   const isPlayer = state.players[defender as PlayerId] !== undefined;
   const object = isPlayer ? undefined : state.objects[defender as ObjectId];
   if ((isPlayer ? (defender as PlayerId) : object?.controller) !== owner) return false;
-  if (isPlayer) return covers !== "planeswalkers";
+  if (isPlayer || covers === "you-and-permanents") return covers !== "planeswalkers";
   if (covers === "you" || object === undefined) return false;
   return computeCharacteristics(state, registry, object.id).types.includes("planeswalker");
 }

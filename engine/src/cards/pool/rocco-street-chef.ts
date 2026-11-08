@@ -31,7 +31,7 @@ export default defineCard({
       effect: {
         kind: "impulse-exile",
         amount: 1,
-        duration: "your-next-end-step",
+        duration: "until-your-next-end-step",
         whose: "each-player",
         playedBy: "owner",
       },

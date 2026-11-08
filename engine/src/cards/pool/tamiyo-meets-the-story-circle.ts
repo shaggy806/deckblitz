@@ -21,7 +21,7 @@ export default defineCard({
         kind: "delayed-trigger",
         at: {
           whenever: { on: "attacks", who: "any", filter: { type: "creature" }, attackingYou: true },
-          until: "your-next-turn",
+          until: "until-your-next-turn",
         },
         effect: { kind: "modify-pt", target: "trigger-object", power: -2, toughness: 0, duration: "end-of-turn" },
         text: "Until your next turn, whenever a creature attacks you or a planeswalker you control, it gets -2/-0 until end of turn.",

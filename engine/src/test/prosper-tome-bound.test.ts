@@ -92,7 +92,7 @@ describe("Prosper, Tome-Bound — Pact Boon", () => {
     const { game } = makeGame([]);
     game.advanceUntil(atMain);
     game.debugSpawn(PROSPER, A, "battlefield");
-    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 1, duration: "your-next-turn" });
+    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn" });
     const [exiled] = impulseExiled(game);
     expect(exiled).toBeDefined();
 

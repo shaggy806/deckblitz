@@ -143,6 +143,7 @@ import {
   hasAnyAbility,
   hasLostAbilities,
   emblemStatics,
+  staticAffects,
   grantedStatics,
   staticsOfEmblem,
   pairedPartner,
@@ -263,7 +264,6 @@ import {
 } from "./effects.js";
 import type {
   ExilePermission,
-  ImpulseDuration,
   BeholdSpec,
   BoardManaList,
   CascadeFinish,
@@ -292,8 +292,6 @@ import type {
   ModeOption,
   PileFate,
   PlayerScope,
-  PtDuration,
-  UntilPointDuration,
   ResolutionContext,
   ChoosePermanentsTogether,
   ResolvedEnterAttacking,
@@ -336,17 +334,16 @@ import { colorIdentityOf } from "./identity.js";
 import { companionProblem } from "./companion.js";
 import type { StartingDeck } from "./companion.js";
 import type {
-  EffectDuration,
   EventOfType,
   GameEvent,
   GameEventInput,
   GameEventType,
-  UntilPoint,
   RandomPick,
   Vote,
-  WhileSource,
   VoteChoice,
 } from "./events.js";
+import type { Expiry, PermanentDuration, PermissionDuration, UntilPoint, WhileSource } from "./duration.js";
+import { endsThisTurn, untilPointOf } from "./duration.js";
 import {
   COLORS,
   MANA_TYPES,
@@ -446,6 +443,8 @@ import type {
   CommanderMoveOrigin,
   CommanderReplacementZone,
   ControlEffect,
+  EmblemState,
+  PlayerEffect,
   DelayedCastWatch,
   DelayedLeaveWatch,
   DelayedLoseControlWatch,
@@ -1865,12 +1864,12 @@ function reduceGenericInCost(cost: string, n: number): string {
 /** `duration` as an effect `you` control keeps it: "until your next turn"
  * is yours. */
 function lasting(
-  duration: PtDuration,
+  duration: PermanentDuration,
   you: PlayerId,
   /** The effect's source as it is now, for `"while-source"`: `null` when it
    * isn't on the battlefield as the stint the effect refers to. */
   source: WhileSource | null = null,
-): EffectDuration {
+): Expiry {
   if (
     duration === "while-source" ||
     duration === "while-source-tapped" ||
@@ -1887,23 +1886,9 @@ function lasting(
   return duration === "until-your-next-turn" ? { untilTurnOf: you } : { untilPoint: untilPointOf(duration, you) };
 }
 
-/** The moment `duration` ends at, for the effect's controller `you`. */
-function untilPointOf(duration: UntilPointDuration, you: PlayerId): UntilPoint {
-  switch (duration) {
-    case "until-your-next-upkeep":
-      return { point: "upkeep-begins", player: you };
-    case "until-end-of-your-next-upkeep":
-      return { point: "upkeep-ends", player: you };
-    case "until-end-of-your-next-turn":
-      return { point: "turn-ends", player: you };
-    case "until-its-controllers-next-untap-step":
-      return { point: "controllers-untap-begins" };
-  }
-}
-
 /** A modifier's duration fields for `duration`. */
 function durationFields(
-  duration: EffectDuration,
+  duration: Expiry,
 ): Pick<PtModifier, "untilEndOfTurn" | "untilEndOfCombat" | "untilTurnOf" | "untilPoint" | "whileCounter" | "whileSource" | "untilCast"> {
   if (duration === "end-of-turn") return { untilEndOfTurn: true };
   if (duration === "permanent") return { untilEndOfTurn: false };
@@ -1960,7 +1945,7 @@ interface SpellCopyEvent {
  * "for as long as it has a [kind] counter on it" does nothing if it has none
  * as it would begin, and one "for as long as [its source] remains on the
  * battlefield" nothing once that has left (rule 611.2b). */
-function durationBegins(object: GameObject, duration: EffectDuration): boolean {
+function durationBegins(object: GameObject, duration: Expiry): boolean {
   if (typeof duration !== "object") return true;
   if ("whileSource" in duration) return duration.whileSource !== null;
   return !("whileCounter" in duration) || (object.counters[duration.whileCounter] ?? 0) > 0;
@@ -8983,17 +8968,10 @@ export class Game {
       delete nowActive.noCombatNextTurn;
       this.state.turn.noCombat = true;
     }
-    if (this.state.playerEffects !== undefined) {
-      this.state.playerEffects = this.state.playerEffects
-        .filter((e) => !(e.expires.kind === "your-next-turn" && beginningFor.includes(e.owner)))
-        // "Until the end of your next turn": this is that turn, so this
-        // turn's cleanup ends it.
-        .map((e) =>
-          e.expires.kind === "end-of-your-next-turn" && beginningFor.includes(e.owner)
-            ? { ...e, expires: { kind: "end-of-turn" as const } }
-            : e,
-        );
-    }
+    // "Until your next turn" player effects and timed statics end; "during
+    // their next turn" ones begin (their "until the end of" points pass with
+    // the rest, below).
+    this.expirePlayerEffects({ turnBegins: beginningFor });
     // A permanent that phased out under a player who has left the game phases
     // in during the next untap step after that player's next turn would have
     // begun (rule 702.26n) — this turn's, which is about to begin.
@@ -9137,16 +9115,82 @@ export class Game {
   }
 
   /**
+   * The one expiry pass for player effects and timed statics (`duration.ts`):
+   * those whose `Expiry` runs out at this moment end — at cleanup, this
+   * turn's and this combat's (rule 514.2); at the end of combat, this
+   * combat's (511.2); as a turn begins, "until [that player's] next turn",
+   * for whoever's turn it is or would have been (800.4m) — and, as a turn
+   * begins, a `laterPlayerEffects` entry waiting for it starts, through
+   * this turn's cleanup. Their `UntilPoint`s pass with
+   * {@link passUntilPoints}.
+   */
+  private expirePlayerEffects(moment: "cleanup" | "end-of-combat" | { readonly turnBegins: readonly PlayerId[] }): void {
+    this.mapPlayerExpiries((expiry) => {
+      if (moment === "cleanup") return endsThisTurn(expiry) ? "ends" : undefined;
+      if (moment === "end-of-combat") return typeof expiry === "object" && "untilEndOfCombat" in expiry ? "ends" : undefined;
+      return typeof expiry === "object" && "untilTurnOf" in expiry && moment.turnBegins.includes(expiry.untilTurnOf)
+        ? "ends"
+        : undefined;
+    });
+    const later = this.state.laterPlayerEffects;
+    if (typeof moment !== "object" || later === undefined) return;
+    const turn = this.state.turn.number;
+    const left = later.filter((e) => !(moment.turnBegins.includes(e.turnOf) && turn > e.after));
+    for (const e of later) {
+      if (left.includes(e) || e.turnOf !== this.activePlayer) continue;
+      (this.state.playerEffects ??= []).push({ ...e.effect, expires: "end-of-turn" });
+    }
+    if (left.length > 0) this.state.laterPlayerEffects = left;
+    else delete this.state.laterPlayerEffects;
+  }
+
+  /**
+   * Every player effect's and timed static's `Expiry` through `next`: `"ends"`
+   * removes it (a timed static's object with it), an `Expiry` replaces its
+   * own, `undefined` leaves it be.
+   */
+  private mapPlayerExpiries(next: (expiry: Expiry) => Expiry | "ends" | undefined): void {
+    let changed = false;
+    if (this.state.playerEffects !== undefined && this.state.playerEffects.length > 0) {
+      this.state.playerEffects = this.state.playerEffects.flatMap((e): PlayerEffect[] => {
+        const after = next(e.expires);
+        if (after === undefined) return [e];
+        changed = true;
+        return after === "ends" ? [] : [{ ...e, expires: after }];
+      });
+    }
+    if (this.state.emblems.some((e) => e.expires !== undefined)) {
+      this.state.emblems = this.state.emblems.flatMap((e): EmblemState[] => {
+        if (e.expires === undefined) return [e];
+        const after = next(e.expires);
+        if (after === undefined) return [e];
+        changed = true;
+        if (after !== "ends") return [{ ...e, expires: after }];
+        if (e.object !== undefined) delete this.state.objects[e.object];
+        return [];
+      });
+    }
+    if (changed) invalidateComputedCache();
+  }
+
+  /**
    * Whatever lasts until an {@link UntilPoint}, modifiers and control effects
    * alike, on every permanent, phased-out ones too (702.26f): `at` says of each
    * whether it ends now, ends at this turn's cleanup, waits for another point,
    * or (undefined) goes on as it is.
    */
   private passUntilPoints(
-    at: (point: UntilPoint, object: GameObject) => UntilPoint | "ends" | "ends-this-turn" | undefined,
+    at: (point: UntilPoint, object: GameObject | null) => UntilPoint | "ends" | "ends-this-turn" | undefined,
   ): void {
     let changed = false;
     let controlChanged = false;
+    // A player effect's or timed static's point: no permanent of its own.
+    this.mapPlayerExpiries((expiry) => {
+      if (typeof expiry !== "object" || !("untilPoint" in expiry)) return undefined;
+      const next = at(expiry.untilPoint, null);
+      if (next === undefined) return undefined;
+      return next === "ends" ? "ends" : next === "ends-this-turn" ? "end-of-turn" : { untilPoint: next };
+    });
     for (const id of [...this.state.zones.shared.battlefield, ...phasedOutIds(this.state)]) {
       const object = this.state.objects[id];
       if (object === undefined) continue;
@@ -9759,7 +9803,7 @@ export class Game {
     // and waits past a skipped one (614.10a).
     if (!skipping) {
       this.passUntilPoints((point, object) =>
-        point.point === "controllers-untap-begins" && object.controller === active ? "ends" : undefined,
+        point.point === "controllers-untap-begins" && object?.controller === active ? "ends" : undefined,
       );
     }
     // First, phasing (rule 502.1), before anything untaps.
@@ -11332,9 +11376,7 @@ export class Game {
       this.state.blockRequirements = this.state.blockRequirements.filter((r) => r.thisCombat !== true);
     }
     // "They can't attack you this combat" (Champions of Minas Tirith).
-    if (this.state.playerEffects?.some((e) => e.expires.kind === "end-of-combat") === true) {
-      this.state.playerEffects = this.state.playerEffects.filter((e) => e.expires.kind !== "end-of-combat");
-    }
+    this.expirePlayerEffects("end-of-combat");
     // "During their next combat phase" (Secret of Bloodbending) is over.
     if (this.state.playerControl?.some((c) => c.during === "next-combat" && c.began !== undefined) === true) {
       this.state.playerControl = this.state.playerControl.filter((c) => c.during !== "next-combat" || c.began === undefined);
@@ -11361,11 +11403,7 @@ export class Game {
     // Impulse-draw permissions age here, alongside every other
     // "until end of turn" effect — see `GameObject.impulse`.
     this.expireImpulsePermissions();
-    if (this.state.playerEffects !== undefined) {
-      this.state.playerEffects = this.state.playerEffects.filter(
-        (e) => e.expires.kind !== "end-of-turn" && e.expires.kind !== "end-of-combat",
-      );
-    }
+    this.expirePlayerEffects("cleanup");
     // "You gain hexproof until end of turn" ends here too (rule 514.2), not
     // as the next turn begins: a trigger in this cleanup step can target.
     this.state.hexproofPlayers = [];
@@ -22858,7 +22896,11 @@ export class Game {
       // Temporal Archmage) — priority is all it needs. Still once a turn.
       const timing = this.hasOwnStatic(source, (a) => a.loyaltyAtInstantSpeed === true) ||
         emblemStatics(this.state, source.controller).some(
-          (e) => e.ability.loyaltyAtInstantSpeed === true && this.staticActive(e.source, e.ability),
+          (e) =>
+            e.ability.loyaltyAtInstantSpeed === true &&
+            this.staticActive(e.source, e.ability) &&
+            // "…of Jace planeswalkers you control" (Jace's Machinations).
+            (e.ability.affects.scope !== "filter" || staticAffects(this.state, this.registry, e.ability.affects, e.source, source)),
         )
         ? null
         : this.whyNotSorcerySpeed(player, `activate ${def.name}'s loyalty ability`);
@@ -32885,7 +32927,7 @@ export class Game {
         (refs.source === undefined || (src.zoneChangeCount ?? 0) === refs.source)
       );
     };
-    const lastingHere = (duration: PtDuration): EffectDuration => {
+    const lastingHere = (duration: PermanentDuration): Expiry => {
       if (duration === "until-source-cast") {
         return { untilCast: { card: source, stint: this.state.objects[source]?.zoneChangeCount ?? 0 } };
       }
@@ -33708,8 +33750,9 @@ export class Game {
         const endsFor = (id: ObjectId): CopyEnds | null | undefined => {
           const until = opts.until;
           if (until === undefined) return undefined;
-          if (until === "your-next-turn") return { turnOf: controller };
-          if (until === "end-of-turn" || until === "next-end-step") return until;
+          if (until === "until-your-next-turn") return { turnOf: controller };
+          if (until === "end-of-turn") return until;
+          if (until === "until-next-end-step") return "next-end-step";
           const named = typeof until === "object" ? this.state.objects[until.whileTapped] : this.state.objects[source];
           const stint = named?.zoneChangeCount ?? 0;
           if (named?.zone !== "battlefield") return null;
@@ -36093,14 +36136,13 @@ export class Game {
         if (object !== undefined && held?.zone !== "battlefield") return;
         const turn = this.state.turn.number;
         let lasts: AttackRequirementRule["duration"];
-        if (duration === "this-turn") lasts = { kind: "this-turn", turn };
-        else if (duration === "that-players-next-turn") {
-          if (controlledBy === undefined) return;
-          lasts = { kind: "next-turn-of", player: controlledBy, after: turn };
-        } else if (duration === "controllers-next-turn") {
+        if (duration === "end-of-turn") lasts = { kind: "this-turn", turn };
+        else if (typeof duration === "object") {
+          lasts = { kind: "next-turn-of", player: duration.duringTurnOf, after: turn };
+        } else if (duration === "during-its-controllers-next-turn") {
           if (held === undefined) return;
           lasts = { kind: "next-turn-of", player: held.controller, after: turn };
-        } else if (duration === "controllers-next-combat") {
+        } else if (duration === "during-its-controllers-next-combat") {
           if (held === undefined) return;
           // Its controller's next combat phase: not the one under way, if it
           // is theirs (rule 506.1 — a combat phase runs from its beginning
@@ -36486,7 +36528,7 @@ export class Game {
         }
       },
       restrict: (target, filter, restrictions, duration, cantBeBlockedBy, cantBlock, scope) =>
-        duration === "its-controllers-next-turn"
+        duration === "during-its-controllers-next-turn"
           ? this.restrictDuringControllersNextTurn(controller, target, restrictions)
           : this.restrict(controller, target, filter, restrictions, lastingHere(duration ?? "end-of-turn"), cantBeBlockedBy, cantBlock, scope),
       grantStatic: (target, filter, ability, duration) => {
@@ -36522,7 +36564,8 @@ export class Game {
         this.markUntilEndOfTurn(target, { canAttackAsThoughNoDefender: true });
       },
       damageByToughness: (target) => this.markUntilEndOfTurn(target, { combatDamageByToughness: true }),
-      assignsNoCombatDamage: (target) => this.markUntilEndOfTurn(target, { assignsNoCombatDamage: true }),
+      assignsNoCombatDamage: (target, thisCombat) =>
+        this.markUntilEndOfTurn(target, { assignsNoCombatDamage: true, ...(thisCombat === true ? { untilEndOfCombat: true } : {}) }),
       assignAsThoughUnblocked: (target, filter, must) => {
         if (filter !== undefined) {
           (this.state.turnUnblockedAssignments ??= []).push({ filter, you: controller, ...(must ? { must: true } : {}) });
@@ -36586,7 +36629,7 @@ export class Game {
         // abilities, so a lands-only one would read "can't  this turn".
       },
       spellsCastThisTurn: (player) => this.state.players[player]?.spellsCastThisTurnAs?.length ?? 0,
-      addPlayerEffect: (effect) => {
+      addPlayerEffect: (effect, during) => {
         const flash = effect.castAsThoughFlash;
         if (flash?.filter?.ofChosenType === true) {
           // "The next spell of the chosen type" (Progenitor's Icon): the type
@@ -36605,9 +36648,13 @@ export class Game {
         if (instead !== undefined) {
           effect = { ...effect, nextDrawInstead: { ...instead, targetStints: this.stintsOfTargets(instead.targets) } };
         }
-        (this.state.playerEffects ??= []).push(
-          effect.noMaxHandSize === undefined ? effect : { ...effect, timestamp: this.freshTimestamp() },
-        );
+        const made = effect.noMaxHandSize === undefined ? effect : { ...effect, timestamp: this.freshTimestamp() };
+        // "During their next turn": nothing until that turn begins.
+        if (during !== undefined) {
+          (this.state.laterPlayerEffects ??= []).push({ turnOf: during, after: this.state.turn.number, effect: made });
+          return;
+        }
+        (this.state.playerEffects ??= []).push(made);
       },
       flipCoin: () => {
         const won = this.rng.next() < 0.5;
@@ -37877,6 +37924,12 @@ export class Game {
           controller,
           moreStatics ?? [],
         );
+      },
+      addTimedStatic: (text, statics, expires) => {
+        if (statics.length === 0) return;
+        const from = this.state.objects[source];
+        const [first, ...more] = statics;
+        this.createEmblem(controller, text, first, from === undefined ? undefined : nameOf(from), [], controller, more, expires);
       },
       epic: () => this.applyEpic(controller, source),
       paradigm: () => this.applyParadigm(controller, source),
@@ -39917,7 +39970,7 @@ export class Game {
     controller: PlayerId,
     source: ObjectId,
     amount: number,
-    duration: ImpulseDuration,
+    duration: PermissionDuration,
     castOnly: boolean,
     opts: {
       readonly players?: readonly PlayerId[];
@@ -40042,7 +40095,7 @@ export class Game {
   /** When a permission of `duration`, granted now by `source`'s effect to
    * `controller`, lapses, and what else it says about using it. */
   private impulseWindow(
-    duration: ImpulseDuration,
+    duration: PermissionDuration,
     controller: PlayerId,
     source: ObjectId,
   ): Pick<NonNullable<GameObject["impulse"]>, "expiry" | "yourTurnOnly" | "fromTurn"> {
@@ -40054,13 +40107,13 @@ export class Game {
         return { expiry: { kind: "until-begins", at: "turn", player: controller } };
       case "until-your-next-upkeep":
         return { expiry: { kind: "until-begins", at: "upkeep", player: controller } };
-      case "your-next-turn":
+      case "until-end-of-your-next-turn":
         // It lapses as the player's next turn ends. Granted during one of
         // their own turns, that turn has to end first; granted on someone
         // else's turn (Tectonic Giant targeted by an opponent's spell),
         // the next of theirs is already the last one.
         return { expiry: { kind: "your-turns", remaining: this.activePlayer === controller ? 1 : 0 } };
-      case "your-next-turn-only":
+      case "during-your-next-turn":
         // "During your next turn": that turn alone, so not this one even if
         // it's yours (Galvanic Relay's ruling), nor anyone else's.
         return {
@@ -40068,7 +40121,7 @@ export class Game {
           yourTurnOnly: true,
           fromTurn: this.state.turn.number + 1,
         };
-      case "your-next-end-step":
+      case "until-your-next-end-step":
         return { expiry: { kind: "end-step-of", player: controller } };
       case "while-exiled":
         return { expiry: { kind: "while-exiled" } };
@@ -40076,7 +40129,7 @@ export class Game {
         return { expiry: { kind: "until-next-exile", source, stint } };
       case "until-end-of-combat-your-next-turn":
         return { expiry: { kind: "your-next-combat", player: controller, afterTurn: this.state.turn.number } };
-      case "while-you-control":
+      case "while-you-control-source":
         return { expiry: { kind: "while-source", source, stint, controlledBy: controller } };
       case "while-source":
         return { expiry: { kind: "while-source", source, stint } };
@@ -40087,7 +40140,7 @@ export class Game {
    * has just exiled `taken` — any card it gave that permission before now
    * has lost it. Nothing exiled, nothing ends: `taken` is what actually
    * moved (an empty library exiles nothing). */
-  private endUntilNextExile(duration: ImpulseDuration, source: ObjectId, taken: readonly ObjectId[]): void {
+  private endUntilNextExile(duration: PermissionDuration, source: ObjectId, taken: readonly ObjectId[]): void {
     if (duration !== "until-next-exile" || taken.length === 0) return;
     const stint = this.state.objects[source]?.zoneChangeCount ?? 0;
     for (const id of this.state.zones.shared.exile) {
@@ -43600,7 +43653,7 @@ export class Game {
     target: TargetRef,
     power: number,
     toughness: number,
-    duration: EffectDuration,
+    duration: Expiry,
     split = true,
   ): void {
     if (target.kind !== "object") return;
@@ -43624,7 +43677,7 @@ export class Game {
 
   /** See the `"switch-pt"` {@link EffectSpec}: a layer-7d modifier (rule
    * 613.4d). `split` as `modifyPt`'s. */
-  private switchPt(target: TargetRef, duration: EffectDuration, split = true): void {
+  private switchPt(target: TargetRef, duration: Expiry, split = true): void {
     if (target.kind !== "object") return;
     const id = split ? this.splitOneFromStack(target.object) : target.object;
     const object = this.state.objects[id];
@@ -43645,7 +43698,7 @@ export class Game {
   private grantKeyword(
     target: TargetRef,
     keyword: Keyword,
-    duration: EffectDuration,
+    duration: Expiry,
     split = true,
     timestamp?: number,
   ): void {
@@ -43682,7 +43735,7 @@ export class Game {
   private loseKeywords(
     target: TargetRef,
     keywords: readonly Keyword[],
-    duration: EffectDuration,
+    duration: Expiry,
     split = true,
     timestamp?: number,
     cantHave?: boolean,
@@ -44223,7 +44276,7 @@ export class Game {
     target: TargetRef | undefined,
     fields: Pick<
       PtModifier,
-      "canAttackAsThoughNoDefender" | "combatDamageByToughness" | "assignsNoCombatDamage" | "assignAsThoughUnblocked"
+      "canAttackAsThoughNoDefender" | "combatDamageByToughness" | "assignsNoCombatDamage" | "assignAsThoughUnblocked" | "untilEndOfCombat"
     >,
   ): void {
     if (target?.kind !== "object") return;
@@ -44239,7 +44292,7 @@ export class Game {
     target: TargetRef | undefined,
     filter: CardFilter | undefined,
     restrictions: readonly CombatRestriction[],
-    duration: EffectDuration = "end-of-turn",
+    duration: Expiry = "end-of-turn",
     cantBeBlockedBy?: CardFilter,
     cantBlock?: TargetRef,
     scope: {
@@ -44494,7 +44547,7 @@ export class Game {
    * (701.15d). A token stack is goaded whole, every token in it; a targeted
    * token was split off as it was targeted.
    */
-  private goad(id: ObjectId, goader: PlayerId, forGame: boolean, duration?: EffectDuration): void {
+  private goad(id: ObjectId, goader: PlayerId, forGame: boolean, duration?: Expiry): void {
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "battlefield") return;
     if (!computeCharacteristics(this.state, this.registry, id).types.includes("creature")) return;
@@ -44765,7 +44818,7 @@ export class Game {
     filter: CardFilter,
     power: number,
     toughness: number,
-    duration: EffectDuration,
+    duration: Expiry,
     except?: ObjectId,
   ): void {
     for (const id of this.battlefieldMatching(you, filter)) {
@@ -44777,7 +44830,7 @@ export class Game {
   private doublePtAll(
     you: PlayerId,
     filter: CardFilter,
-    duration: EffectDuration,
+    duration: Expiry,
     powerOnly = false,
     except?: ObjectId,
   ): void {
@@ -44805,7 +44858,7 @@ export class Game {
   private grantTriggered(
     target: TargetRef,
     ability: TriggeredAbility,
-    duration: EffectDuration,
+    duration: Expiry,
   ): void {
     if (target.kind !== "object") return;
     const id = this.splitOneFromStack(target.object);
@@ -44830,7 +44883,7 @@ export class Game {
     you: PlayerId,
     filter: CardFilter,
     keyword: Keyword,
-    duration: EffectDuration,
+    duration: Expiry,
     except?: ObjectId,
   ): void {
     // One effect, one timestamp (rule 613.7b), however many it reaches.
@@ -44863,7 +44916,7 @@ export class Game {
       readonly addSupertypes?: readonly Supertype[];
       readonly setName?: string;
       readonly keywords: readonly Keyword[];
-      readonly duration: EffectDuration;
+      readonly duration: Expiry;
     },
     split = true,
     timestamp?: number,
@@ -44917,7 +44970,7 @@ export class Game {
     target: TargetRef,
     types: readonly CardType[],
     subtypes: readonly string[],
-    duration: EffectDuration,
+    duration: Expiry,
     set: {
       readonly setTypes?: readonly CardType[];
       readonly removeTypes?: readonly CardType[];
@@ -47072,7 +47125,7 @@ export class Game {
     if (phase.onlyAttackers !== undefined) {
       (this.state.playerEffects ??= []).push({
         owner: phase.onlyAttackers.you,
-        expires: { kind: "end-of-combat" },
+        expires: { untilEndOfCombat: true },
         onlyAttackers: phase.onlyAttackers.filter,
       });
       invalidateComputedCache();
@@ -48590,7 +48643,7 @@ export class Game {
     this.executePayment(player, payment);
     this.state.playerEffects = [
       ...(this.state.playerEffects ?? []),
-      { owner: player, expires: { kind: "end-of-turn" }, ignoresStatic: { source: id, stint: object.zoneChangeCount ?? 0 } },
+      { owner: player, expires: "end-of-turn", ignoresStatic: { source: id, stint: object.zoneChangeCount ?? 0 } },
     ];
     invalidateComputedCache();
     this.emit({ type: "static-effect-ignored", player, object: id, cost });
@@ -49279,9 +49332,9 @@ export class Game {
       when = {
         whenever: at.whenever,
         ...(at.targets !== undefined ? { targets: at.targets } : {}),
-        ...(at.until === "your-next-turn" ? { untilYourNextTurn: true as const } : {}),
-        ...(at.until === "end-of-combat" ? { untilEndOfCombat: true as const } : {}),
-        ...(at.until === "game" ? { forGame: true as const } : {}),
+        ...(at.until === "until-your-next-turn" ? { untilYourNextTurn: true as const } : {}),
+        ...(at.until === "until-end-of-combat" ? { untilEndOfCombat: true as const } : {}),
+        ...(at.until === "permanent" ? { forGame: true as const } : {}),
         ...(at.whileAnyExiled === true ? { whileAnyExiled: true as const } : {}),
         ...(at.player !== undefined ? { player: at.player } : {}),
         ...(watching !== undefined ? { watching } : {}),
@@ -51079,7 +51132,7 @@ export class Game {
 
   /** See the `"cant-be-sacrificed"` {@link EffectSpec}: `target` gains "This
    * creature can't be sacrificed" (`PtModifier.cantBeSacrificed`). */
-  private grantCantBeSacrificed(target: TargetRef, duration: EffectDuration): void {
+  private grantCantBeSacrificed(target: TargetRef, duration: Expiry): void {
     if (target.kind !== "object") return;
     const id = this.splitOneFromStack(target.object);
     const object = this.state.objects[id];
@@ -51098,7 +51151,7 @@ export class Game {
 
   /** See the `"block-additional"` {@link EffectSpec}: `target` can block
    * `amount` more creatures (`PtModifier.blockAdditional`). */
-  private grantBlockAdditional(target: TargetRef, amount: number | "any", duration: EffectDuration): void {
+  private grantBlockAdditional(target: TargetRef, amount: number | "any", duration: Expiry): void {
     if (target.kind !== "object") return;
     const id = this.splitOneFromStack(target.object);
     const object = this.state.objects[id];
@@ -54098,6 +54151,9 @@ export class Game {
     triggered: readonly TriggeredAbility[] = [],
     createdBy: PlayerId = owner,
     moreStatics: readonly StaticAbility[] = [],
+    /** A timed static's end (`EmblemState.expires`): no emblem at the
+     * table, so nothing says one was made. */
+    expires?: Expiry,
   ): void {
     let object: ObjectId | undefined;
     if (triggered.length > 0 || staticAbility !== null || moreStatics.length > 0) {
@@ -54118,7 +54174,8 @@ export class Game {
     }
     this.state.timestampSeq += 1;
     this.state.emblems.push({
-      id: `emblem-${this.state.emblems.length + 1}`,
+      // One past the highest yet: a timed static that has ended leaves a gap.
+      id: `emblem-${this.state.emblems.reduce((most, e) => Math.max(most, Number(e.id.slice(7)) || 0), 0) + 1}`,
       owner,
       text,
       ...(sourceName !== undefined ? { sourceName } : {}),
@@ -54127,9 +54184,10 @@ export class Game {
       ...(moreStatics.length > 0 ? { moreStatics } : {}),
       ...(object !== undefined ? { object } : {}),
       ...(createdBy !== owner ? { createdBy } : {}),
+      ...(expires !== undefined ? { expires } : {}),
     });
     invalidateComputedCache();
-    this.emit({ type: "emblem-created", player: owner, text });
+    if (expires === undefined) this.emit({ type: "emblem-created", player: owner, text });
   }
 
   /**
@@ -55544,10 +55602,13 @@ export class Game {
     player: PlayerId,
   ): (MillMultiplierReplacement | LifeGainReplacement | LifeLossReplacement)[] {
     const out: (MillMultiplierReplacement | LifeGainReplacement | LifeLossReplacement)[] = [];
-    for (const id of this.state.zones.shared.battlefield) {
+    // An emblem's or a timed static's too ("players can't gain life this
+    // turn" — Skullcrack).
+    for (const id of this.staticSourceIds()) {
       const source = this.state.objects[id];
+      if (source === undefined) continue;
       if (hasLostAbilities(this.state, this.registry,source) || this.state.players[source.controller]?.hasLost === true) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      for (const ability of this.staticsOfSource(source)) {
         const r = ability.replacement;
         if (r === undefined || (r.event !== "would-mill" && r.event !== "would-gain-life" && r.event !== "would-lose-life")) continue;
         const reaches =

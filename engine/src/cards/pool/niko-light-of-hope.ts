@@ -40,7 +40,7 @@ export default defineCard({
             kind: "become-copy",
             filter: { subtype: "Shard", controlledBy: "you" },
             of: 0,
-            until: "next-end-step",
+            until: "until-next-end-step",
           },
         ],
       },

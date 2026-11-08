@@ -22,7 +22,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "modify-pt", target: 0, power: 3, toughness: 1, duration: "end-of-turn" },
-      { kind: "impulse-exile", amount: 1, duration: "your-next-turn" },
+      { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn" },
     ],
   },
 });

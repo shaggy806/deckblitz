@@ -6013,6 +6013,13 @@ export function exemptFromLegendRule(state: GameState, registry: CardRegistry, i
       if (staticAffects(state, registry, modifier.legendRuleOff, source, target)) return true;
     }
   }
+  // An emblem's, or a timed static's — "the legend rule doesn't apply to
+  // permanents you control this turn" (Hall of Echoes).
+  for (const { source, ability } of emblemStatics(state)) {
+    if (ability.legendRuleOff !== true) continue;
+    if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
+    if (staticAffects(state, registry, ability.affects, source, target)) return true;
+  }
   return false;
 }
 

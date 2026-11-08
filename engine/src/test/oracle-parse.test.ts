@@ -1993,7 +1993,7 @@ describe("costs and triggers", () => {
     });
     expect(
       parseSentence("Until your next turn, whenever a creature you control deals combat damage to a player, draw a card.", ctx()),
-    ).toMatchObject({ at: { until: "your-next-turn", whenever: { on: "deals-combat-damage-to-player" } } });
+    ).toMatchObject({ at: { until: "until-your-next-turn", whenever: { on: "deals-combat-damage-to-player" } } });
     const outer = ctx();
     expect(
       parseSentence("Whenever you cast a spell this turn, put a +1/+1 counter on target creature you control.", outer),
@@ -7660,16 +7660,16 @@ describe("attack requirements narrowed (attack-requirement, rule 508.1d)", () =>
     const siren = face("Alluring Siren", "Creature — Siren", "{T}: Target creature an opponent controls attacks you this turn if able.");
     expect(siren.complete).toBe(true);
     expect(siren.activated[0].targets).toEqual(["creature-an-opponent-controls"]);
-    expect(siren.activated[0].effect).toEqual({ kind: "attack-requirement", target: 0, attacks: "you", duration: "this-turn" });
+    expect(siren.activated[0].effect).toEqual({ kind: "attack-requirement", target: 0, attacks: "you", duration: "end-of-turn" });
     const sirens = face("Dulcet Sirens", "Creature — Siren", "{U}, {T}: Target creature attacks target opponent this turn if able.");
     expect(sirens.activated[0].targets).toEqual(["creature", "opponent"]);
-    expect(sirens.activated[0].effect).toEqual({ kind: "attack-requirement", target: 0, attacks: 1, duration: "this-turn" });
+    expect(sirens.activated[0].effect).toEqual({ kind: "attack-requirement", target: 0, attacks: 1, duration: "end-of-turn" });
     const behemoth = face(
       "Test",
       "Creature — Kraken",
       "Landfall — Whenever a land you control enters, target creature an opponent controls attacks during its controller's next combat phase if able.",
     );
-    expect(behemoth.triggered[0].effect).toEqual({ kind: "attack-requirement", target: 0, duration: "controllers-next-combat" });
+    expect(behemoth.triggered[0].effect).toEqual({ kind: "attack-requirement", target: 0, duration: "during-its-controllers-next-combat" });
   });
 
   it("reads a target player's creatures' requirement, this turn or during their next", () => {
@@ -7681,14 +7681,14 @@ describe("attack requirements narrowed (attack-requirement, rule 508.1d)", () =>
       filter: { type: "creature" },
       controlledByTarget: 0,
       attacks: "you",
-      duration: "that-players-next-turn",
+      duration: { duringTurnOf: { target: 0 } },
     });
     const threats = face("Test", "Instant", "Creatures target opponent controls attack this turn if able.");
     expect(threats.effect).toEqual({
       kind: "attack-requirement",
       filter: { type: "creature" },
       controlledByTarget: 0,
-      duration: "this-turn",
+      duration: "end-of-turn",
     });
   });
 });
@@ -9371,12 +9371,12 @@ describe("impulse permissions with a window", () => {
   const impulse = { kind: "impulse-exile", amount: 1 };
 
   it("reads each window", () => {
-    expect(trigger("During your next turn, you may play that card.")).toEqual({ ...impulse, duration: "your-next-turn-only" });
+    expect(trigger("During your next turn, you may play that card.")).toEqual({ ...impulse, duration: "during-your-next-turn" });
     // Inti, Seneschal of the Sun; Wiccan, Young Avenger.
-    expect(trigger("You may play that card until your next end step.")).toEqual({ ...impulse, duration: "your-next-end-step" });
+    expect(trigger("You may play that card until your next end step.")).toEqual({ ...impulse, duration: "until-your-next-end-step" });
     expect(trigger("Until your next end step, you may cast that card.")).toEqual({
       ...impulse,
-      duration: "your-next-end-step",
+      duration: "until-your-next-end-step",
       castOnly: true,
     });
     expect(trigger("Until end of combat on your next turn, you may play that card.")).toEqual({
@@ -9389,7 +9389,7 @@ describe("impulse permissions with a window", () => {
     });
     expect(trigger("You may play that card for as long as you control this enchantment.")).toEqual({
       ...impulse,
-      duration: "while-you-control",
+      duration: "while-you-control-source",
     });
     expect(trigger("During any turn you attacked with this enchantment, you may play that card.")).toEqual({
       ...impulse,
@@ -9406,7 +9406,7 @@ describe("impulse permissions with a window", () => {
   it("reads casting only, and leaves a window it doesn't know", () => {
     expect(trigger("You may cast that card until the end of your next turn.")).toEqual({
       ...impulse,
-      duration: "your-next-turn",
+      duration: "until-end-of-your-next-turn",
       castOnly: true,
     });
     const card = parseFace(
@@ -9434,7 +9434,7 @@ describe("impulse permissions with a window", () => {
     expect(parsed.triggered[0].targets).toEqual([
       { kind: "optional", of: { kind: "card-in-graveyard", whose: "you", filter: { typesAnyOf: ["instant", "sorcery"] } } },
     ]);
-    expect(parsed.triggered[0].effect).toEqual({ kind: "exile", target: 0, mayCast: { duration: "your-next-turn" } });
+    expect(parsed.triggered[0].effect).toEqual({ kind: "exile", target: 0, mayCast: { duration: "until-end-of-your-next-turn" } });
 
     const victor = parseFace(
       {
@@ -9447,7 +9447,7 @@ describe("impulse permissions with a window", () => {
     expect(victor.triggered[0].effect).toEqual({
       kind: "exile",
       target: 0,
-      mayCast: { duration: "while-you-control", play: true },
+      mayCast: { duration: "while-you-control-source", play: true },
     });
   });
 });
@@ -12363,7 +12363,7 @@ describe("a duration to a point in a later turn", () => {
         "Exile target creature. Until the end of your next turn, you may cast that card and you may spend mana as though it were mana of any color to cast that spell.",
         ctx(),
       ).effect,
-    ).toEqual({ kind: "exile", target: 0, mayCast: { duration: "your-next-turn", spendAs: "any-color" } });
+    ).toEqual({ kind: "exile", target: 0, mayCast: { duration: "until-end-of-your-next-turn", spendAs: "any-color" } });
   });
 });
 
@@ -14357,7 +14357,7 @@ describe("restrictions for a duration", () => {
     });
     expect(creature("Whenever this creature blocks a creature, that creature can't attack during its controller's next turn.").triggered[0]).toMatchObject({
       trigger: { on: "blocks", who: "self", object: "blocked" },
-      effect: { kind: "restrict", target: "trigger-object", restrictions: ["cant-attack"], duration: "its-controllers-next-turn" },
+      effect: { kind: "restrict", target: "trigger-object", restrictions: ["cant-attack"], duration: "during-its-controllers-next-turn" },
     });
   });
 });
@@ -14488,7 +14488,7 @@ describe("exile with its own way back", () => {
       kind: "sequence",
       effects: [
         { kind: "exile-all", filter: {} },
-        { kind: "delayed-trigger", about: "exiled", at: { until: "game", whileAnyExiled: true }, effect: { kind: "look-and-choose", player: "active-player" } },
+        { kind: "delayed-trigger", about: "exiled", at: { until: "permanent", whileAnyExiled: true }, effect: { kind: "look-and-choose", player: "active-player" } },
       ],
     });
   });
@@ -16794,7 +16794,7 @@ describe("one play shared among cards (2026-11-07): a spell from among milled ca
       mana_cost: "{R}",
       colors: ["R"],
     });
-    expect(face.triggered[0].effect).toEqual({ kind: "impulse-exile", amount: 2, duration: "your-next-end-step", upTo: 1 });
+    expect(face.triggered[0].effect).toEqual({ kind: "impulse-exile", amount: 2, duration: "until-your-next-end-step", upTo: 1 });
   });
 });
 

@@ -25,7 +25,7 @@ export default defineCard({
     {
       trigger: { on: "deals-damage", who: "self", atLeast: 4 },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "your-next-turn" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn" },
       resolve: null,
       text: DAMAGE,
     },

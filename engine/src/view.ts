@@ -1370,7 +1370,7 @@ function viewForUncached(
     dayNight: state.dayNight,
     monarch: state.monarch,
     initiative: state.initiative ?? null,
-    emblems: state.emblems.map((e) => ({ owner: e.owner, text: e.text, source: e.sourceName ?? null })),
+    emblems: state.emblems.filter((e) => e.expires === undefined).map((e) => ({ owner: e.owner, text: e.text, source: e.sourceName ?? null })),
     events: state.eventLog,
     publicStints: state.publicStints ?? {},
   };

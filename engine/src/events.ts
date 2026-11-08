@@ -11,6 +11,7 @@ import type { ObjectId, PlayerId } from "./primitives.js";
 import type { LeftBattlefield, PlayerCounterKind, ZoneType } from "./state.js";
 import type { TargetRef } from "./target.js";
 import type { Phase, Step } from "./turn.js";
+import type { Expiry } from "./duration.js";
 
 /**
  * What one vote was for (rule 701.38b): one of a vote's named options (its
@@ -43,69 +44,6 @@ export function sameVoteChoice(a: VoteChoice, b: VoteChoice): boolean {
   if ("object" in a) return "object" in b && a.object === b.object && a.zoneChangeCount === b.zoneChangeCount;
   if ("number" in a) return "number" in b && a.number === b.number;
   return "player" in b && a.player === b.player;
-}
-
-/**
- * How long an effect on a permanent lasts, as it's kept: until end of turn,
- * for as long as the permanent stays ("permanent"), until a given player's
- * next turn begins (an effect's "until your next turn", resolved to whose),
- * or for as long as it has a counter of a kind on it. See `PtDuration`.
- */
-export type EffectDuration =
-  | "end-of-turn"
-  | "permanent"
-  | { readonly untilTurnOf: PlayerId }
-  | { readonly untilPoint: UntilPoint }
-  | { readonly whileCounter: string }
-  /** "This combat" / "until end of combat" (rules 500.5a, 511.2). */
-  | { readonly untilEndOfCombat: true }
-  /** For as long as that permanent — the effect's source, in that stint —
-   * remains on the battlefield; `null` when it had already left as the
-   * effect would begin, so the effect doesn't (rule 611.2b). */
-  | { readonly whileSource: WhileSource | null }
-  /** Until that card, in that stint, is cast — see `PtDuration`'s
-   * `"until-source-cast"`. */
-  | { readonly untilCast: UntilCast };
-
-/** The card a `"until-source-cast"` effect waits on, in its exile stint. */
-export interface UntilCast {
-  readonly card: ObjectId;
-  readonly stint: number;
-}
-
-/**
- * The moment an effect lasts until, when it's a point in a later turn rather
- * than that turn's beginning — the effect's `UntilPointDuration`, read for the
- * player it names as the effect begins. Each waits for an occurrence that
- * isn't skipped (rule 614.10a); one naming a player who leaves the game ends
- * as their turn would have begun (rule 800.4m).
- *
- * - `upkeep-begins`, `upkeep-ends`: that player's next upkeep (rules 500.4, 500.5).
- * - `this-upkeep-ends`: `upkeep-ends` once that upkeep has begun, so an effect
- *   made during an upkeep waits for the next one.
- * - `turn-ends`: the cleanup step of that player's next turn (rule 514.2).
- * - `controllers-untap-begins`: the next untap step of whoever then controls
- *   the permanent, read then, like "doesn't untap during its controller's
- *   next untap step".
- */
-export type UntilPoint =
-  | { readonly point: "upkeep-begins" | "upkeep-ends" | "this-upkeep-ends" | "turn-ends"; readonly player: PlayerId }
-  | { readonly point: "controllers-untap-begins" };
-
-/** The source an effect lasts "for as long as" (see `EffectDuration`): that
- * permanent in that stint, remaining on the battlefield — and, with
- * `tapped`, remaining tapped ("for as long as ~ remains tapped"; rule
- * 611.2b), so it ends as the source untaps too. */
-export interface WhileSource {
-  readonly id: ObjectId;
-  readonly zoneChangeCount: number;
-  readonly tapped?: true;
-  /** "For as long as **you control** ~": it ends as ~ stops being this
-   * player's, too. */
-  readonly controller?: PlayerId;
-  /** "For as long as this Equipment **remains attached to it**" (Blade of
-   * Shared Souls): it ends as ~ comes off this permanent, too. */
-  readonly attachedTo?: ObjectId;
 }
 
 /** What a random choice picked — the `chosen-at-random` event: a player, a
@@ -901,7 +839,7 @@ export type GameEvent =
       readonly object: ObjectId;
       readonly power: number;
       readonly toughness: number;
-      readonly duration: EffectDuration;
+      readonly duration: Expiry;
     })
   | (Base & {
       readonly type: "counter-added";
@@ -957,7 +895,7 @@ export type GameEvent =
       readonly type: "keyword-granted";
       readonly object: ObjectId;
       readonly keyword: string;
-      readonly duration: EffectDuration;
+      readonly duration: Expiry;
     })
   | (Base & {
       /** A creature was removed from combat by an effect (rule 506.4 —
@@ -971,7 +909,7 @@ export type GameEvent =
       readonly type: "keywords-lost";
       readonly object: ObjectId;
       readonly keywords: readonly string[];
-      readonly duration: EffectDuration;
+      readonly duration: Expiry;
     })
   | (Base & {
       readonly type: "pt-modifier-expired";
@@ -984,7 +922,7 @@ export type GameEvent =
       readonly object: ObjectId;
       readonly power: number;
       readonly toughness: number;
-      readonly duration: EffectDuration;
+      readonly duration: Expiry;
     })
   | (Base & {
       /** A permanent gained types or subtypes "in addition to its other
@@ -993,7 +931,7 @@ export type GameEvent =
       readonly object: ObjectId;
       readonly types: readonly CardType[];
       readonly subtypes: readonly string[];
-      readonly duration: EffectDuration;
+      readonly duration: Expiry;
       /** Some of them *replace* its others ("becomes the basic land type of
        * your choice", "becomes a Coward"): the set ones are listed first. */
       readonly replaces?: true;
@@ -1576,7 +1514,7 @@ export type GameEvent =
       readonly player: PlayerId;
       readonly restrictions: readonly CombatRestriction[];
       /** How long `object`'s last; absent means until end of turn. */
-      readonly duration?: EffectDuration;
+      readonly duration?: Expiry;
       /** They apply only during this player's next turn (Wall of Dust). */
       readonly nextTurnOf?: PlayerId;
     })

@@ -21,7 +21,7 @@ export default defineCard({
           of: { kind: "card-in-graveyard", whose: "you", filter: { typesAnyOf: ["instant", "sorcery"] } },
         },
       ],
-      effect: { kind: "exile", target: 0, mayCast: { duration: "your-next-turn" } },
+      effect: { kind: "exile", target: 0, mayCast: { duration: "until-end-of-your-next-turn" } },
       resolve: null,
       text: TEXT,
     },

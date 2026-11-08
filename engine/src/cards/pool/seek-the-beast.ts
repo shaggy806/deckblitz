@@ -17,5 +17,5 @@ export default defineCard({
   faces: ["Questing Druid", "Seek the Beast"],
   adventure: true,
   targets: [],
-  effect: { kind: "impulse-exile", amount: 2, duration: "your-next-end-step" },
+  effect: { kind: "impulse-exile", amount: 2, duration: "until-your-next-end-step" },
 });

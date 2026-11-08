@@ -56,7 +56,7 @@ export default defineCard({
         kind: "impulse-exile",
         amount: { manaValueOf: "trigger-object" },
         whose: 0,
-        duration: "your-next-end-step",
+        duration: "until-your-next-end-step",
         spendAs: "any-type",
       },
       resolve: null,

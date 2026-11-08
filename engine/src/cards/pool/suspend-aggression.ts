@@ -13,9 +13,9 @@ export default defineCard({
       {
         kind: "exile",
         target: 0,
-        mayCast: { duration: "your-next-turn", play: true, byOwner: true },
+        mayCast: { duration: "until-end-of-your-next-turn", play: true, byOwner: true },
       },
-      { kind: "impulse-exile", amount: 1, duration: "your-next-turn", playedBy: "owner" },
+      { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn", playedBy: "owner" },
     ],
   },
 });

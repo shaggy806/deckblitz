@@ -3560,7 +3560,7 @@ export function parseSentence(sentence, ctx) {
       kind: "delayed-trigger",
       at: {
         whenever: triggers[0],
-        ...(/^until your next turn$/i.test(m[1]) ? { until: "your-next-turn" } : {}),
+        ...(/^until your next turn$/i.test(m[1]) ? { until: "until-your-next-turn" } : {}),
         ...(inner.targets.length > 0 ? { targets: inner.targets } : {}),
         ...(named ? { watching: ctx.target("creature") } : {}),
       },
@@ -6481,13 +6481,13 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`(${TARGET}) attacks (you|${PLAYER_T}) this turn if able`).exec(s))) {
     const target = slot(m[1]);
     const attacks = m[2].toLowerCase() === "you" ? "you" : slot(m[2]);
-    return { kind: "attack-requirement", target, attacks, duration: "this-turn" };
+    return { kind: "attack-requirement", target, attacks, duration: "end-of-turn" };
   }
   if ((m = re(`(${TARGET}) attacks during its controller's next combat phase if able`).exec(s))) {
-    return { kind: "attack-requirement", target: slot(m[1]), duration: "controllers-next-combat" };
+    return { kind: "attack-requirement", target: slot(m[1]), duration: "during-its-controllers-next-combat" };
   }
   if ((m = re(`creatures (${PLAYER_T}) controls attack this turn if able`).exec(s))) {
-    return { kind: "attack-requirement", filter: { type: "creature" }, controlledByTarget: slot(m[1]), duration: "this-turn" };
+    return { kind: "attack-requirement", filter: { type: "creature" }, controlledByTarget: slot(m[1]), duration: "end-of-turn" };
   }
   if ((m = re(`during (${PLAYER_T})'s next turn, creatures that player controls attack (you|~) if able`).exec(s))) {
     const controlledByTarget = slot(m[1]);
@@ -6496,7 +6496,7 @@ export function parseSentence(sentence, ctx) {
       filter: { type: "creature" },
       controlledByTarget,
       attacks: m[2] === "~" ? "source" : "you",
-      duration: "that-players-next-turn",
+      duration: { duringTurnOf: { target: controlledByTarget } },
     };
   }
   // "Target creature can't block ~ this turn" (Kozilek's Pathfinder): that
@@ -6547,7 +6547,7 @@ export function parseSentence(sentence, ctx) {
   // "That creature can't attack during its controller's next turn" (Wall of
   // Dust): the next turn alone, not before it.
   if (ctx.it === "trigger-object" && ctx.targets.length === 0 && /^(?:that creature|it) can't attack during its controller's next turn\.$/i.test(s)) {
-    return { kind: "restrict", target: "trigger-object", restrictions: ["cant-attack"], duration: "its-controllers-next-turn" };
+    return { kind: "restrict", target: "trigger-object", restrictions: ["cant-attack"], duration: "during-its-controllers-next-turn" };
   }
   // "Until your next turn, target creature can't attack or block and its
   // activated abilities can't be activated" (Edifice of Authority): detain in
@@ -7343,19 +7343,19 @@ function impulseWindowOf(sentence) {
       `until your next turn, you may ${verb} ${it} if it's an instant or sorcery spell`,
       { duration: "until-your-next-turn", filter: { typesAnyOf: ["instant", "sorcery"] } },
     ],
-    [`you may ${verb} ${it} until the end of your next turn`, { duration: "your-next-turn" }],
-    [`until the end of your next turn, you may ${verb} ${it}`, { duration: "your-next-turn" }],
+    [`you may ${verb} ${it} until the end of your next turn`, { duration: "until-end-of-your-next-turn" }],
+    [`until the end of your next turn, you may ${verb} ${it}`, { duration: "until-end-of-your-next-turn" }],
     [
       `until the end of your next turn, you may ${verb} ${it} and you may spend mana as though it were mana of any color to cast that spell`,
-      { duration: "your-next-turn", spendAs: "any-color" },
+      { duration: "until-end-of-your-next-turn", spendAs: "any-color" },
     ],
-    [`during your next turn, you may ${verb} ${it}`, { duration: "your-next-turn-only" }],
+    [`during your next turn, you may ${verb} ${it}`, { duration: "during-your-next-turn" }],
     // Wiccan, Young Avenger; Inti, Seneschal of the Sun.
-    [`until your next end step, you may ${verb} ${it}`, { duration: "your-next-end-step" }],
-    [`you may ${verb} ${it} until your next end step`, { duration: "your-next-end-step" }],
+    [`until your next end step, you may ${verb} ${it}`, { duration: "until-your-next-end-step" }],
+    [`you may ${verb} ${it} until your next end step`, { duration: "until-your-next-end-step" }],
     [`until end of combat on your next turn, you may ${verb} ${it}`, { duration: "until-end-of-combat-your-next-turn" }],
     [`you may ${verb} ${it} until you exile another card with ~`, { duration: "until-next-exile" }],
-    [`you may ${verb} ${it} for as long as you control ~`, { duration: "while-you-control" }],
+    [`you may ${verb} ${it} for as long as you control ~`, { duration: "while-you-control-source" }],
     [`you may ${verb} ${it} for as long as it remains exiled`, { duration: "while-exiled" }],
     [`during any turn you attacked with ~, you may ${verb} ${it}`, { duration: "while-exiled", sourceDid: "attacked" }],
     [`during any turn you put a lore counter on ~, you may ${verb} ${it}`, { duration: "while-exiled", sourceDid: "lore-counter" }],
@@ -12276,7 +12276,7 @@ function exiledUntilOrWhileAt(sentences, i) {
           {
             kind: "delayed-trigger",
             about: "exiled",
-            at: { whenever: { on: "step-begins", step: "upkeep", who: "any" }, until: "game", whileAnyExiled: true },
+            at: { whenever: { on: "step-begins", step: "upkeep", who: "any" }, until: "permanent", whileAnyExiled: true },
             effect: {
               kind: "look-and-choose",
               zone: "targets",

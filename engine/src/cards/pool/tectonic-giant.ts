@@ -19,7 +19,7 @@ const CHOICE = {
       effect: {
         kind: "impulse-exile",
         amount: 2,
-        duration: "your-next-turn",
+        duration: "until-end-of-your-next-turn",
         choose: 1,
       },
     },

@@ -44,7 +44,7 @@ export default defineCard({
     {
       trigger: { on: "dies", who: "you-control", filter: { type: "creature", subtypes: ["Goblin", "Orc", "Army"] }, otherOnly: true },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "your-next-turn" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn" },
       resolve: null,
       text: DIES_TEXT,
     },

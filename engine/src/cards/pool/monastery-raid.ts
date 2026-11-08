@@ -18,7 +18,7 @@ export default defineCard({
   effect: {
     kind: "conditional",
     condition: { kind: "source", filter: { castVia: "freerunning" } },
-    then: { kind: "impulse-exile", amount: "x", duration: "your-next-turn" },
-    else: { kind: "impulse-exile", amount: 2, duration: "your-next-turn" },
+    then: { kind: "impulse-exile", amount: "x", duration: "until-end-of-your-next-turn" },
+    else: { kind: "impulse-exile", amount: 2, duration: "until-end-of-your-next-turn" },
   },
 });

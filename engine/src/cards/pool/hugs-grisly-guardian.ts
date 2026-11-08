@@ -36,7 +36,7 @@ export default defineCard({
     {
       trigger: { on: "enters-battlefield", who: "self" },
       targets: [],
-      effect: { kind: "impulse-exile", amount: "x", duration: "your-next-turn" },
+      effect: { kind: "impulse-exile", amount: "x", duration: "until-end-of-your-next-turn" },
       resolve: null,
       text: ENTER_TEXT,
     },

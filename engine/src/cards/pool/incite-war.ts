@@ -20,7 +20,7 @@ export default defineCard({
           kind: "attack-requirement",
           filter: { type: "creature" },
           controlledByTarget: 0,
-          duration: "this-turn",
+          duration: "end-of-turn",
         },
       },
       {

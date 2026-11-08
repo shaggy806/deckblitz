@@ -33,7 +33,7 @@ export default defineCard({
         minModes: 0,
         maxModes: { triggerValue: true },
         modes: [
-          { text: IMPULSE, effect: { kind: "impulse-exile", amount: 1, duration: "your-next-turn" } },
+          { text: IMPULSE, effect: { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn" } },
           {
             text: GROW,
             effect: {

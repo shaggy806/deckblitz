@@ -31,7 +31,7 @@ export default defineCard({
         effect: {
           kind: "impulse-exile",
           amount: { powerOf: "trigger-object" },
-          duration: "your-next-turn",
+          duration: "until-end-of-your-next-turn",
           choose: 1,
         },
         text: DIES_TEXT,

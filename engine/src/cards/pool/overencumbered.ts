@@ -42,7 +42,7 @@ export default defineCard({
         kind: "unless",
         chooser: "active-player",
         options: [{ payGeneric: { countOf: { type: "artifact", controlledBy: "active-player" } }, text: "Pay {X}" }],
-        otherwise: { kind: "player-effect", duration: "this-combat", cantAttack: "all" },
+        otherwise: { kind: "player-effect", duration: "until-end-of-combat", cantAttack: "all" },
       },
       resolve: null,
       text: TEXT,

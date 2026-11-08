@@ -880,6 +880,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "get-energy": none,
   "pay-energy": none,
   "create-emblem": none,
+  // "Players can't gain life this turn": no target of its own.
+  "timed-static": none,
   epic: none,
   paradigm: none,
   "prevent-all-combat-damage": none,

@@ -18,7 +18,7 @@ export default defineCard({
       effects: [
         { kind: "shuffle-graveyard-into-library", target: "you" },
         { kind: "draw", amount: 7 },
-        { kind: "player-effect", duration: "rest-of-game", noMaxHandSize: "you" },
+        { kind: "player-effect", duration: "permanent", noMaxHandSize: "you" },
       ],
     },
   },

@@ -34,7 +34,7 @@ export default defineCard({
         kind: "delayed-trigger",
         at: {
           whenever: { on: "attacks", who: "any", filter: { type: "creature" }, attackingYou: true },
-          until: "your-next-turn",
+          until: "until-your-next-turn",
         },
         effect: { kind: "modify-pt", target: "trigger-object", power: -5, toughness: 0, duration: "end-of-turn" },
         text: WATCH,

@@ -28,7 +28,7 @@ export default defineCard({
         at: {
           whenever: { on: "deals-damage", who: "self", combat: true },
           watching: "targets",
-          until: "your-next-turn",
+          until: "until-your-next-turn",
         },
         effect: { kind: "draw", amount: 1 },
         text: `Until your next turn, ${WATCH}`,

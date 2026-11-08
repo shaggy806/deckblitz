@@ -31,7 +31,7 @@ export default defineCard({
       },
       {
         text: "Exile the top three cards of your library. Until your next end step, you may play those cards.",
-        effect: { kind: "impulse-exile", amount: 3, duration: "your-next-end-step" },
+        effect: { kind: "impulse-exile", amount: 3, duration: "until-your-next-end-step" },
       },
       {
         text: "Exile target player's graveyard.",

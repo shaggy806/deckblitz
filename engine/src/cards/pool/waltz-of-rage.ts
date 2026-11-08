@@ -27,7 +27,7 @@ export default defineCard({
       {
         kind: "delayed-trigger",
         at: { whenever: { on: "dies", who: "you-control", filter: { type: "creature" } } },
-        effect: { kind: "impulse-exile", amount: 1, duration: "your-next-turn" },
+        effect: { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn" },
         text: "Whenever a creature you control dies this turn, exile the top card of your library. You may play it until the end of your next turn.",
       },
     ],

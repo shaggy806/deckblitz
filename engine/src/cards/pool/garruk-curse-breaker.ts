@@ -62,7 +62,7 @@ export default defineCard({
         kind: "delayed-trigger",
         at: {
           whenever: { on: "attacks-player", who: "any", defender: "opponent" },
-          until: "your-next-turn",
+          until: "until-your-next-turn",
         },
         effect: {
           kind: "sequence",

@@ -20,7 +20,7 @@ export default defineCard({
       loyaltyCost: 2,
       cost: { mana: null, tap: false },
       targets: [{ kind: "optional", of: "creature-an-opponent-controls" }],
-      effect: { kind: "attack-requirement", target: 0, attacks: "source", duration: "controllers-next-turn" },
+      effect: { kind: "attack-requirement", target: 0, attacks: "source", duration: "during-its-controllers-next-turn" },
       resolve: null,
       text: PLUS_TWO,
     },

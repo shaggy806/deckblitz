@@ -7,5 +7,5 @@ export default defineCard({
   types: ["instant"],
   text: "Exile target creature. Until the end of your next turn, you may cast that card and you may spend mana as though it were mana of any color to cast that spell.",
   targets: ["creature"],
-  effect: { kind: "exile", target: 0, mayCast: { duration: "your-next-turn", spendAs: "any-color" } },
+  effect: { kind: "exile", target: 0, mayCast: { duration: "until-end-of-your-next-turn", spendAs: "any-color" } },
 });

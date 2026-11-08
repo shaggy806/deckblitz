@@ -125,7 +125,7 @@ describe("become-copy — durations layered (rule 613.7a)", () => {
     const { game } = table();
     const bears = spawn(game, "Grizzly Bears");
     const giant = spawn(game, "Hill Giant", B);
-    const effect: EffectSpec = { kind: "become-copy", target: 0, of: 1, until: "your-next-turn" };
+    const effect: EffectSpec = { kind: "become-copy", target: 0, of: 1, until: "until-your-next-turn" };
     game.debugApplyEffect(A, effect, [ref(bears), ref(giant)]);
     nextTurn(game); // Bob's turn
     expect(copyOf(game, bears)).toBe("Hill Giant");
@@ -137,7 +137,7 @@ describe("become-copy — durations layered (rule 613.7a)", () => {
     const { game } = table();
     const bears = spawn(game, "Grizzly Bears");
     const giant = spawn(game, "Hill Giant", B);
-    game.debugApplyEffect(A, { kind: "become-copy", target: 0, of: 1, until: "next-end-step" }, [ref(bears), ref(giant)]);
+    game.debugApplyEffect(A, { kind: "become-copy", target: 0, of: 1, until: "until-next-end-step" }, [ref(bears), ref(giant)]);
     toStep(game, "postcombat-main");
     expect(copyOf(game, bears)).toBe("Hill Giant");
     toStep(game, "end");

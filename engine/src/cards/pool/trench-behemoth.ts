@@ -34,7 +34,7 @@ export default defineCard({
     {
       trigger: { on: "enters-battlefield", who: "you-control", filter: { type: "land" } },
       targets: ["creature-an-opponent-controls"],
-      effect: { kind: "attack-requirement", target: 0, duration: "controllers-next-combat" },
+      effect: { kind: "attack-requirement", target: 0, duration: "during-its-controllers-next-combat" },
       resolve: null,
       text: LANDFALL_TEXT,
     },

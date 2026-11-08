@@ -554,6 +554,10 @@ export function onlyUntilEndOfTurn(effect: EffectSpec | null | undefined): boole
     case "grant-activated-of":
     case "animate":
       return effect.duration === "end-of-turn";
+    // Not `player-effect` or `timed-static` this turn: a rule for the rest of
+    // the turn ("you may cast spells from your hand this turn without paying
+    // their mana costs", "players can't gain life this turn") still matters
+    // after combat, where a pump no longer does.
     // "Until end of turn, you may cast …" (Idol of Endurance).
     case "allow-cast-linked-exile":
       return true;

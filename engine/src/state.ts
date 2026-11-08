@@ -35,7 +35,8 @@ import type { CardFilter } from "./filter.js";
 import type { CardNameAim, CardNameFilter } from "./card-names.js";
 import type { Color, LandManaInstead, ManaOrigin, ManaType, ManaUnit, SpendAs } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
-import type { GameEvent, UntilCast, UntilPoint, Vote, WhileSource } from "./events.js";
+import type { Expiry, UntilCast, UntilPoint, WhileSource } from "./duration.js";
+import type { GameEvent, Vote } from "./events.js";
 import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
 import type { Step } from "./turn.js";
 import { MERGED_PREFIX, MERGED_SEPARATOR } from "./cards/card-registry.js";
@@ -5770,14 +5771,13 @@ export interface CombatDamageState {
  */
 export interface PlayerEffect {
   readonly owner: PlayerId;
-  /** Gone at this turn's cleanup, as `owner`'s next turn begins, or at the
-   * cleanup of that turn (Single Combat's "until the end of your next turn"). */
-  readonly expires:
-    | { readonly kind: "end-of-turn" }
-    | { readonly kind: "end-of-combat" }
-    | { readonly kind: "your-next-turn" }
-    | { readonly kind: "end-of-your-next-turn" }
-    | { readonly kind: "rest-of-game" };
+  /** When it ends, as `resolvePlayerDuration` read the effect's `Duration`:
+   * this turn's cleanup, the end of combat, as a player's next turn begins
+   * (Teferi's Reproach's "until **that player's** next turn"), an
+   * `UntilPoint` of theirs (Single Combat's "until the end of your next
+   * turn"), or `"permanent"` — the rest of the game. Ended by
+   * `Game.expirePlayerEffects`. */
+  readonly expires: Expiry;
   /** These players have no maximum hand size (rule 402.2) — applied at its
    * `timestamp`, as every effect on the rules of the game is (rule 613.11). */
   readonly noMaxHandSize?: readonly PlayerId[];
@@ -5991,8 +5991,10 @@ export interface PlayerEffect {
    * every creature, `owner` being "you", a planeswalker of theirs only under
    * `"you-and-planeswalkers"` (rule 508.1b); `"all"`, every attack on
    * anything; `{ planeswalkers }`, attacks on planeswalkers matching this
-   * from `owner`'s side (Jace, Multiverse Architect's "Jaces you control"). */
-  readonly cantAttack?: "you" | "you-and-planeswalkers" | "all" | { readonly planeswalkers: CardFilter };
+   * from `owner`'s side (Jace, Multiverse Architect's "Jaces you control");
+   * `"you-and-permanents"`, "you or permanents you control", a battle of
+   * theirs too (Willie Lumpkin, Postman). */
+  readonly cantAttack?: "you" | "you-and-planeswalkers" | "you-and-permanents" | "all" | { readonly planeswalkers: CardFilter };
   /** Only `cantAttack`s of creatures this player controls (Champions of Minas
    * Tirith's "they can't attack you this combat"). */
   readonly cantAttackBy?: PlayerId;
@@ -6122,6 +6124,13 @@ export interface EmblemState {
   /** The Ring (rule 701.54c): one per player, its text growing with the
    * temptations — `ring.ts`. */
   readonly ring?: true;
+  /** A **timed static** (the `timed-static` effect), not an emblem at all:
+   * a resolved spell or ability's rule-changing effect for a while ("players
+   * can't gain life this turn" — Skullcrack; rule 611.2c, it reaches what
+   * comes later), riding the emblem machinery so every reader of emblem
+   * statics sees it. Ends with this `Expiry` (`Game.expirePlayerEffects`);
+   * not shown or counted as an emblem. */
+  readonly expires?: Expiry;
 }
 
 export interface GameState {
@@ -6744,6 +6753,13 @@ export interface GameState {
   /** Player-level continuous effects that expire (the `player-effect`
    * effect) — see {@link PlayerEffect}. */
   playerEffects?: PlayerEffect[];
+  /** Player effects that apply only *during* a player's next turn
+   * (`Duration`'s `"during-your-next-turn"`, `{ duringTurnOf }` — "that
+   * player can't attack you during their next turn", Willie Lumpkin,
+   * Postman): each waits here, doing nothing, until `turnOf`'s next turn
+   * after turn `after` begins, then holds through that turn's cleanup. One
+   * whose player has left the game never begins (rule 800.4m). */
+  laterPlayerEffects?: { readonly turnOf: PlayerId; readonly after: number; readonly effect: PlayerEffect }[];
   /** This turn's one-shot prohibitions (the `prohibit` effect): players who
    * can't cast spells and/or activate abilities, and permanents — the stint
    * they were in — whose activated abilities can't be activated. Turn-scoped. */

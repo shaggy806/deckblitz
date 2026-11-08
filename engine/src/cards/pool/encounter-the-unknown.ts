@@ -12,7 +12,7 @@ export default defineCard({
     modes: [
       {
         targets: [],
-        effect: { kind: "impulse-exile", amount: 2, duration: "your-next-turn" },
+        effect: { kind: "impulse-exile", amount: 2, duration: "until-end-of-your-next-turn" },
         text: "Come in Peace — Exile the top two cards of your library. Until the end of your next turn, you may play those cards.",
       },
       {

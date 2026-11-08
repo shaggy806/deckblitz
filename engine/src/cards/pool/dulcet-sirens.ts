@@ -17,7 +17,7 @@ export default defineCard({
     {
       cost: { mana: "{U}", tap: true },
       targets: ["creature", "opponent"],
-      effect: { kind: "attack-requirement", target: 0, attacks: 1, duration: "this-turn" },
+      effect: { kind: "attack-requirement", target: 0, attacks: 1, duration: "end-of-turn" },
       resolve: null,
       text: TAP_TEXT,
     },

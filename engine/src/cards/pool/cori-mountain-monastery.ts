@@ -40,7 +40,7 @@ export default defineCard({
     {
       cost: { mana: "{3}{R}", tap: true },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "your-next-turn" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn" },
       resolve: null,
       text: IMPULSE_TEXT,
     },

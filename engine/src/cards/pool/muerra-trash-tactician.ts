@@ -47,7 +47,7 @@ export default defineCard({
     {
       trigger: { on: "expend", who: "you", amount: 8 },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 2, duration: "your-next-turn" },
+      effect: { kind: "impulse-exile", amount: 2, duration: "until-end-of-your-next-turn" },
       resolve: null,
       text: EXPEND8_TEXT,
     },

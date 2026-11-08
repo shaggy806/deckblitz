@@ -1,5 +1,5 @@
 /**
- * Durations ending at a point in a later turn (`UntilPointDuration`): "until
+ * Durations ending at a point in a later turn (`PointDuration`): "until
  * your next upkeep", "until the end of your next upkeep", "until the end of
  * your next turn", "until its controller's next untap step" — and the same
  * moments for a permission over an exiled card ("until the beginning of your

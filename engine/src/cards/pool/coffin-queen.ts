@@ -27,7 +27,7 @@ export default defineCard({
             at: {
               whenever: { on: "becomes-untapped", who: "self" },
               watching: "source",
-              until: "game",
+              until: "permanent",
               once: true,
               orLosesControl: "source",
             },

@@ -17,6 +17,6 @@ export default defineCard({
     filter: { type: "creature" },
     controlledByTarget: 0,
     attacks: "you",
-    duration: "that-players-next-turn",
+    duration: { duringTurnOf: { target: 0 } },
   },
 });

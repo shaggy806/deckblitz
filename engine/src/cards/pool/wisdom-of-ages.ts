@@ -12,7 +12,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "return-from-graveyard", filter: { typesAnyOf: ["instant", "sorcery"] }, destination: "hand", count: "all" },
-      { kind: "player-effect", duration: "rest-of-game", noMaxHandSize: "you" },
+      { kind: "player-effect", duration: "permanent", noMaxHandSize: "you" },
     ],
   },
 });

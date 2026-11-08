@@ -31,7 +31,7 @@ export default defineCard({
           amount: 3,
           whose: 0,
           choose: 1,
-          duration: "your-next-turn",
+          duration: "until-end-of-your-next-turn",
           spendAs: "any-color",
         },
       },

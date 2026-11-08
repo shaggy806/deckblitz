@@ -22,7 +22,7 @@ export default defineCard({
     {
       trigger: { on: "cast-spell", who: "you", noncreatureOnly: true },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "your-next-end-step" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "until-your-next-end-step" },
       resolve: null,
       text: TEXT,
     },

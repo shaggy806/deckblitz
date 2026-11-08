@@ -5,7 +5,7 @@ import { defineCard } from "../define.js";
 // Teamwork (rule 702.194) is an optional additional cost; "if this spell was
 // cast using teamwork" is the spell being kicked, whose effect adds the
 // Treasure after the same impulse exile.
-const IMPULSE = { kind: "impulse-exile", amount: 2, duration: "your-next-turn" } as const;
+const IMPULSE = { kind: "impulse-exile", amount: 2, duration: "until-end-of-your-next-turn" } as const;
 
 export default defineCard({
   name: "Crossover Collaboration",

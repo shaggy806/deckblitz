@@ -12,7 +12,7 @@ export default defineCard({
     effects: [
       { kind: "return-from-graveyard", filter: {}, destination: "hand", count: "all" },
       { kind: "exile", target: "source" },
-      { kind: "player-effect", duration: "rest-of-game", noMaxHandSize: "you" },
+      { kind: "player-effect", duration: "permanent", noMaxHandSize: "you" },
     ],
   },
 });

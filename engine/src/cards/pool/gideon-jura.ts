@@ -24,7 +24,7 @@ export default defineCard({
         filter: { type: "creature" },
         controlledByTarget: 0,
         attacks: "source",
-        duration: "that-players-next-turn",
+        duration: { duringTurnOf: { target: 0 } },
       },
       resolve: null,
       text: PLUS,

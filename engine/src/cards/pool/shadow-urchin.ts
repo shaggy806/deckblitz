@@ -62,7 +62,7 @@ export default defineCard({
       effect: {
         kind: "impulse-exile",
         amount: { countersOn: "trigger-object" },
-        duration: "your-next-end-step",
+        duration: "until-your-next-end-step",
       },
       resolve: null,
       text: DIES_TEXT,

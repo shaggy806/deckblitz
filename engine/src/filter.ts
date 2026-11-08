@@ -391,6 +391,10 @@ export interface CardFilter {
   /** Currently attacking (Kangee's Lieutenant: "attacking creatures with
    * flying get +1/+1"). */
   readonly attacking?: boolean;
+  /** Attacking a player, not a planeswalker or a battle (rule 506.3) —
+   * Master of Cruelties' "whenever this creature attacks **a player** and
+   * isn't blocked". A permanent on the battlefield only. */
+  readonly attackingPlayer?: true;
   /** Controlled by a defending player, for a spell with no attacker to read one
    * from (False Orders' "target creature defending player controls"): any player
    * an attacker is attacking, or whose planeswalker or battle it is; a player
@@ -2222,6 +2226,10 @@ export function matchesFilter(
     // a snapshot still knows (Kardur's "whenever an attacking creature dies").
     const attacking = live !== undefined ? live.attacking !== null : lki!.attacking;
     if (attacking !== filter.attacking) return false;
+  }
+  if (filter.attackingPlayer === true) {
+    const at = live?.attacking;
+    if (at === undefined || at === null || state.players[at as PlayerId] === undefined) return false;
   }
   if (filter.controlledByDefendingPlayer === true) {
     const controller = live?.controller;

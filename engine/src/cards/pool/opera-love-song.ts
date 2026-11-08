@@ -24,7 +24,7 @@ export default defineCard({
         // Haste Magic's "until your next end step".
         text: EXILE_MODE,
         targets: [],
-        effect: { kind: "impulse-exile", amount: 2, duration: "your-next-end-step" },
+        effect: { kind: "impulse-exile", amount: 2, duration: "until-your-next-end-step" },
       },
       {
         // Amazing Acrobatics' "one or two target creatures".

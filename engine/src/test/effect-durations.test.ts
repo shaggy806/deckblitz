@@ -10,7 +10,7 @@ import { describe, expect, it } from "vitest";
 
 import { createDefaultRegistry } from "../cards/registry.js";
 import { ScriptedController } from "../controller.js";
-import type { PtDuration } from "../effects.js";
+import type { PermanentDuration } from "../duration.js";
 import { Game } from "../game.js";
 import { asPlayerId } from "../primitives.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
@@ -37,7 +37,7 @@ const check = (game: Game): void =>
     game.state.priority.holder ?? A,
   );
 /** `by` gives `id` flying for `duration`. */
-const fly = (game: Game, by: PlayerId, id: ObjectId, duration: PtDuration): void =>
+const fly = (game: Game, by: PlayerId, id: ObjectId, duration: PermanentDuration): void =>
   game.debugApplyEffect(by, { kind: "grant-keyword", target: 0, keyword: "flying", duration }, [
     { kind: "object", object: id },
   ]);

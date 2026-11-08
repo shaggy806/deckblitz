@@ -38,7 +38,7 @@ export default defineCard({
         kind: "become-copy",
         target: "source",
         of: 0,
-        until: "your-next-turn",
+        until: "until-your-next-turn",
         exceptions: { basePt: [7, 5], thisAbility: { card: "Volrath, the Shapestealer", activated: 0 } },
       },
       resolve: null,

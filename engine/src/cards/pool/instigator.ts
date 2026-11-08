@@ -19,7 +19,7 @@ export default defineCard({
         kind: "attack-requirement",
         filter: { type: "creature" },
         controlledByTarget: 0,
-        duration: "this-turn",
+        duration: "end-of-turn",
       },
       resolve: null,
       text: "{1}{B}{B}, {T}, Discard a card: Creatures target player controls attack this turn if able.",

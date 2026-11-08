@@ -30,7 +30,7 @@ export default defineCard({
         target: "source",
         of: 0,
         ofCard: "when-a-card",
-        until: "your-next-turn",
+        until: "until-your-next-turn",
         exceptions: {
           name: "Taskmaster, Mercenary Mimic",
           setTypes: ["creature"],

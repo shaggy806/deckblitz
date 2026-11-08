@@ -18,7 +18,7 @@ export default defineCard({
     {
       trigger: { on: "blocks", who: "self", object: "blocked" },
       targets: [],
-      effect: { kind: "restrict", target: "trigger-object", restrictions: ["cant-attack"], duration: "its-controllers-next-turn" },
+      effect: { kind: "restrict", target: "trigger-object", restrictions: ["cant-attack"], duration: "during-its-controllers-next-turn" },
       resolve: null,
       text: TEXT,
     },

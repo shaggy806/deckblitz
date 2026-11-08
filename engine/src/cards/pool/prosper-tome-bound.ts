@@ -20,7 +20,7 @@ export default defineCard({
       targets: [],
       // Exiled during your own end step, so the permission covers the rest of
       // this turn and all of your next one (`your-next-turn`).
-      effect: { kind: "impulse-exile", amount: 1, duration: "your-next-turn" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn" },
       resolve: null,
       text: "Mystic Arcanum — At the beginning of your end step, exile the top card of your library. Until the end of your next turn, you may play that card.",
     },

@@ -16,7 +16,7 @@ export default defineCard({
     {
       cost: { mana: "{2}{U}", tap: false },
       targets: [{ kind: "permanent", whose: "any", filter: { subtype: "Shapeshifter" } }, "creature"],
-      effect: { kind: "become-copy", target: 0, of: 1, until: "your-next-turn" },
+      effect: { kind: "become-copy", target: 0, of: 1, until: "until-your-next-turn" },
       resolve: null,
       text: TEXT,
     },

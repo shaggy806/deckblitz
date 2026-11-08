@@ -29,7 +29,7 @@ export default defineCard({
         kind: "delayed-trigger",
         at: {
           whenever: { on: "deals-damage", who: "any", filter: { type: "creature" }, to: "self", combat: true },
-          until: "your-next-turn",
+          until: "until-your-next-turn",
         },
         effect: { kind: "destroy", target: "trigger-object" },
         text: "Whenever a creature deals combat damage to Vraska, destroy that creature.",

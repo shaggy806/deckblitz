@@ -23,7 +23,7 @@ export default defineCard({
         kind: "delayed-trigger",
         at: {
           whenever: { on: "becomes-tapped", who: "any", filter: { type: "creature" } },
-          until: "your-next-turn",
+          until: "until-your-next-turn",
         },
         effect: { kind: "destroy", target: "trigger-object" },
         text: "Whenever a creature becomes tapped, destroy it.",

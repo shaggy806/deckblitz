@@ -29,7 +29,7 @@ export default defineCard({
         otherwise: {
           kind: "sequence",
           effects: [
-            { kind: "attack-requirement", target: 0, otherThanYou: false, duration: "this-turn" },
+            { kind: "attack-requirement", target: 0, otherThanYou: false, duration: "end-of-turn" },
             {
               kind: "delayed-trigger",
               at: "next-end-step",

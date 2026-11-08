@@ -26,7 +26,7 @@ export default defineCard({
         minModes: 1,
         maxModes: 1,
         modes: [
-          { text: EXILE_MODE, effect: { kind: "impulse-exile", amount: 2, duration: "your-next-turn" } },
+          { text: EXILE_MODE, effect: { kind: "impulse-exile", amount: 2, duration: "until-end-of-your-next-turn" } },
           { text: TREASURE_MODE, effect: { kind: "create-token", token: "Treasure Token", count: 3 } },
         ],
       },

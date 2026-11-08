@@ -11,7 +11,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "impulse-exile", amount: 5, duration: "your-next-turn" },
+      { kind: "impulse-exile", amount: 5, duration: "until-end-of-your-next-turn" },
       { kind: "additional-land-drop", amount: 1 },
     ],
   },

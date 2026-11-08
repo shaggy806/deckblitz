@@ -54,7 +54,7 @@ export default defineCard({
             {
               kind: "conditional",
               condition: { kind: "this-way", what: "discarded" },
-              then: { kind: "impulse-exile", amount: 2, duration: "your-next-turn" },
+              then: { kind: "impulse-exile", amount: 2, duration: "until-end-of-your-next-turn" },
             },
           ],
         },

@@ -22,7 +22,7 @@ export default defineCard({
     effects: [
       { kind: "tap", target: 0 },
       { kind: "add-counter", target: 0, counter: "stun", amount: 3 },
-      { kind: "impulse-exile", amount: 2, duration: "your-next-turn", choose: 1 },
+      { kind: "impulse-exile", amount: 2, duration: "until-end-of-your-next-turn", choose: 1 },
     ],
   },
 });

@@ -20,7 +20,7 @@ export default defineCard({
         sacrifice: { filter: { typesAnyOf: ["artifact", "creature"] } },
       },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "your-next-turn" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn" },
       resolve: null,
       text: TEXT,
     },

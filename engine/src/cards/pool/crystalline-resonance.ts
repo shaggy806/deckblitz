@@ -20,7 +20,7 @@ export default defineCard({
           kind: "become-copy",
           target: "source",
           of: 0,
-          until: "your-next-turn",
+          until: "until-your-next-turn",
           exceptions: { thisAbility: { card: "Crystalline Resonance", triggered: 0 } },
         },
       },

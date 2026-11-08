@@ -41,7 +41,7 @@ export default defineCard({
         kind: "become-copy",
         target: "source",
         of: 0,
-        until: "your-next-turn",
+        until: "until-your-next-turn",
         exceptions: {
           name: "Absorbing Man",
           addSupertypes: ["legendary"],

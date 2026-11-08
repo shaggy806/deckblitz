@@ -21,7 +21,7 @@ export default defineCard({
     {
       trigger: { on: "cast-spell", who: "you", filter: { targets: { source: true } } },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "your-next-turn" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn" },
       resolve: null,
       text: HEROIC_TEXT,
     },

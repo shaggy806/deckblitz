@@ -29,7 +29,7 @@ export default defineCard({
         { kind: "permanent", filter: { type: "creature", supertype: "legendary", controlledBy: "you" } },
         { kind: "card-in-exile", filter: { type: "creature", counters: { kind: "memory", compare: { op: "gte", n: 1 } } } },
       ],
-      effect: { kind: "become-copy", target: 0, of: 1, ofCard: true, until: "your-next-turn" },
+      effect: { kind: "become-copy", target: 0, of: 1, ofCard: true, until: "until-your-next-turn" },
       sorcerySpeed: true,
       resolve: null,
       text: COPY_TEXT,

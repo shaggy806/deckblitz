@@ -23,7 +23,7 @@ export default defineCard({
           then: { kind: "untap", target: 0 },
           prompt: "Untap up to five lands",
         },
-        { kind: "player-effect", duration: "rest-of-game", noMaxHandSize: "you" },
+        { kind: "player-effect", duration: "permanent", noMaxHandSize: "you" },
       ],
     },
     else: { kind: "draw", amount: "x" },

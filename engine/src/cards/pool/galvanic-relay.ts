@@ -11,7 +11,7 @@ export default defineCard({
   types: ["sorcery"],
   text: `${TEXT}\nStorm (When you cast this spell, copy it for each spell cast before it this turn.)`,
   targets: [],
-  effect: { kind: "impulse-exile", amount: 1, duration: "your-next-turn-only" },
+  effect: { kind: "impulse-exile", amount: 1, duration: "during-your-next-turn" },
   triggered: [
     {
       trigger: { on: "this-cast" },

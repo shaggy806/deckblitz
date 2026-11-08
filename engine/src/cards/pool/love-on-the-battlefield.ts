@@ -22,7 +22,7 @@ export default defineCard({
             kind: "delayed-trigger",
             at: {
               whenever: { on: "deals-combat-damage-to-player", who: "any", filter: { triggerBatch: true } },
-              until: "end-of-combat",
+              until: "until-end-of-combat",
             },
             effect: { kind: "add-counter", target: "trigger-object", counter: "+1/+1", amount: 1 },
             text: "Whenever either of those creatures deals combat damage to a player this combat, put a +1/+1 counter on it.",

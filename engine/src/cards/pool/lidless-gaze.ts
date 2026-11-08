@@ -23,7 +23,7 @@ export default defineCard({
     kind: "impulse-exile",
     amount: 1,
     whose: "each-player",
-    duration: "your-next-turn",
+    duration: "until-end-of-your-next-turn",
     spendAs: "any-type",
   },
 });
