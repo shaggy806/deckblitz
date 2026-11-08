@@ -39,6 +39,11 @@ Read a file's entry before changing that file; you don't need the rest.
   set (`readsCreatedTokens`) keeps them out of older stacks until cleanup. Combat wakes a stack into one object per token
   (`materializeStack`), or only a declaration's `count` of them (`combat/stack-counts.ts`).
   Loops that mint one real thing per unit stop at `Game.MAX_EFFECT_INSTANCES`.
+- **What happened this turn, last turn or this game lives in the journal** (`journal.ts`,
+  `GameState.journal`), never a new `*ThisTurn` field: a new question is a `JOURNAL_VIEWS` word, a
+  `TURN_STAT_READS` row or a `journaled` filter clause over the kinds already recorded, and a new
+  kind is recorded in `Game.recordJournal` (or through `Game.journal` at the act), each object
+  kept as it was. Not `eventLog`: bot simulations empty it.
 - **Computed-value cache** (`characteristics.ts`): wrap new read-only hot paths in
   `withComputedCache`, and never let a region span a mutation without `invalidateComputedCache()`.
   `MTG_CACHE_CHECK=1` on the fuzzer verifies it.

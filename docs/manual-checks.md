@@ -7653,3 +7653,21 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Zagorka, Mother of Sanctum: each player is offered a Sanctum
 - **Do:** Pass to your end step. Decline the Sanctum yourself; as Bob, take it.
 - **Expect:** Only Bob gets a tapped land token named Sanctum. On Bob's turn his Grizzly Bears can't attack you.
+
+## What happened this turn and last turn (2026-11-07)
+
+### Kid Loki: hexproof on the creature you put a +1/+1 counter on
+- **Do:** Cast Battlegrowth on your first Grizzly Bears.
+- **Expect:** That Grizzly Bears gets a +1/+1 counter and hexproof. Your other Grizzly Bears and Kid Loki don't have hexproof.
+
+### Captain America, Living Legend: only the first tapping each turn is undone
+- **Do:** Tap Prodigal Sorcerer to deal 1 damage to Bob. Then tap it again the same way.
+- **Expect:** After the first, Captain America's ability untaps Prodigal Sorcerer. After the second it stays tapped. Bob is at 18.
+
+### Kiora of Salt and Sand: your planeswalker has a [−8]
+- **Do:** Look at Jace Beleren's abilities, and use the [−8].
+- **Expect:** Jace Beleren offers "−8: Create an 8/8 blue Leviathan creature token with hexproof." beside its own. You get an 8/8 Leviathan with hexproof, and Jace Beleren can't use another ability this turn.
+
+### First Response: a Soldier the upkeep after you lost life
+- **Do:** Cast Shock at yourself. Pass the turn to Bob.
+- **Expect:** At the beginning of Bob's upkeep you get a 1/1 white Soldier token.

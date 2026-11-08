@@ -12,6 +12,15 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Need-key themes step 3: one turn journal in game state** (2026-11-07, B277):
+  `engine/src/journal.ts` and `GameState.journal`, one normalised entry per event kept as it was
+  (603.10a), read through windows (this turn, last turn, their last turn, since your last turn,
+  this game) and pruned to one round; `TurnHistory` and ten `*ThisTurn` counters deleted with
+  their readers, the new `journaled` filter clause, token folding by each token's own record.
+  13 cards (Kid Loki, Kiora of Salt and Sand, Kíli the Resourceful, Captain America, Living
+  Legend and nine of the theme's), seven keys built, four flagged cards unflagged. Clone cost
+  unchanged, the bench 5% faster. The fields not moved yet are listed in the plan's theme 6.
+
 - **Need-key themes step 2: one `Duration`, one `Expiry`, the timed static** (2026-11-07, B276):
   `engine/src/duration.ts` replaces `PtDuration`, `UntilPointDuration`, `CopyUntil`,
   `ImpulseDuration`, `EffectDuration`, `PlayerEffect.expires`' private kinds and six field-local

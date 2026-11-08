@@ -43,8 +43,12 @@ touch. Each step:
    of Echoes, Jace's Machinations, Skullcrack, Call In a Professional, Roiling Vortex, Sphinx's Decree, Azor and Master
    of Cruelties; seven keys marked built, their six other cards left in `--stale` for `author-freed`. Frozen in Ice
    (can't become untapped: theme 3c's prohibition) and Yavimaya Bloomsage (a player's own mana ability) stay flagged.
-3. **A turn journal in game state** (theme 6): one read for "this turn / last turn / this game". Kid Loki, Kiora of
-   Salt and Sand, Kíli the Resourceful, Captain America, Living Legend.
+3. **Done 2026-11-07 (B277).** A turn journal in game state (theme 6): `engine/src/journal.ts` (see theme 6's design
+   note). `TurnHistory` and ten `*ThisTurn` counters deleted; 13 cards: Kid Loki, Kiora of Salt and Sand, Kíli the
+   Resourceful, Captain America, Living Legend, Beast, Erudite Aerialist, Fractal Tender, Sigardian Paladin, Mercadian
+   Atlas, Garna, the Bloodflame, Myojin of Grim Betrayal, Feast on the Fallen, First Response, Paladin of Atonement;
+   seven keys marked built, their five other cards (Bruenor Battlehammer, Reenact the Crime, River of Tears, Rock
+   Jockey, The Chain Veil) left in `--stale` for `author-freed`.
 4. **Declarative event triggers with "first time / nth each turn" modifiers** (theme 2). The connive cards (Glorious
    Purpose, Ultron, Unlimited, Iron Monger, Leader, Super-Genius), Elrond, Moon-Reader, Avatar Aang, Way of the Mind
    Sculptor, Tamiyo, Upriser Crowned.
@@ -490,9 +494,51 @@ event exists to journal. The per-object `*OnTurn` stamps (`enteredBattlefieldOnT
 number each and read by object, not counted; they stay.
 
 *Bots.* No bot reads `eventLog` for rules, and v2 simulates resolutions, so it sees journal reads as the table does.
-What changes is what they read directly: `features.ts`'s land-drop and life-lost terms read the journal, the
-scenarios that set `landsPlayedThisTurn` append an entry instead, and `twins.ts`'s object fingerprint drops the
-deleted fields. Measured before and after (clone cost and a timed four-player bench) under *As built*.
+What changes is what they read directly: `features.ts`'s land-drop and life-lost terms read the journal (the
+life-lost read once per evaluation, not per creature), and the scenarios that set `landsPlayedThisTurn` append an
+entry instead.
+
+*As built (B277).*
+- `journal.ts` as above. Kinds recorded where the events are emitted (`Game.recordJournal`, from `emit`) or, where
+  the count must be right before any trigger looks, at the act itself: a land played (305.2's limit), a draw (its
+  `nthThisTurn`), a loyalty or equip activation, a land tapped for mana, an own-library search, and a whole attack
+  declaration before its first `attacker-declared` (pack tactics' total power, 508.1k). Every append from `Game`
+  goes through `Game.journal`, which invalidates the computed cache: statics now read the journal.
+- One new card-facing clause, `CardFilter.journaled` (`{ what, window?, by?, counter?, atLeast?, atMost? }`): this
+  object, in the stint it's in now (`arrived` after a move), appears in the journal. Kid Loki, Beast and Fractal
+  Tender read `counters-put`; Captain America's resolution-time "if" reads `tapped` with `atMost: 1`. The words
+  `life-lost`, `life-gained`, `lands-played`, `loyalty-activated`, `equip-activated`, `counters-put` and `tapped`
+  joined `JournalWhat`; `turn-history` and the `{ turnHistory }` amount and cost reduction took `window`.
+- Token folding: `counters-put` and `tapped` entries don't hold a token apart (they did in a first cut, and four
+  refold tests failed); instead `exactTokenShape` compares each token's own records of them, so two tokens fold only
+  when the journal says the same of each. Damage stays count-only, as before.
+- Deleted, with every reader moved: `TurnHistory` (all 30 lists and counters), `PlayerState.landsPlayedThisTurn`,
+  `lifeLostThisTurn`, `lifeGainedThisTurn`, `cardsDrawnThisTurn`, `equipsActivatedThisTurn`, `creaturesDiedThisTurn`
+  (and `GameState`'s), `createdTokenThisTurn`, `crimesThisTurn`, `cardsCycledThisTurn`, and
+  `GameObject.loyaltyActivatedThisTurn` / `loyaltyActivationsThisTurn`. Tests read and set them through the harness's
+  `turnTotal`, `setTurnTotal` and `diedThisTurn`.
+- **Not moved this session**, each still its own field, with its readers:
+  - The spells cast (`PlayerState.spellsCastThisTurn`, `spellsCastThisTurnAs`, `spellsCastLastTurn`,
+    `spellNamesCastThisGame`, `GameState.spellsCastThisTurn`): ~30 readers in the cast pipeline, cost reductions and
+    `controller.ts`, and `spellsCastThisTurnAs` holds the spell snapshots the 105 `cast-this-turn` card sites read.
+    Its own change: `spell-cast` entries whose `was` is the spell as cast.
+  - The attack records on objects and players (`attackedThisTurn`, `attacksThisTurn`, `attackedPlayersThisTurn`,
+    `attackedBattleThisTurn`, `attackedThisCombat`, `attackedWithCommanderOnTurn`, `attackedByOnTurn`): ~60 sites in
+    the declaration and `combat/eligibility.ts`. The journal's `attacked` entries already hold the same facts;
+    moving the readers is combat code, theme 11's (combat requirements and records).
+  - The damage records (`GameObject.damageThisTurn`, `combatDamagedPlayersThisTurn`,
+    `PlayerState.combatDamageCreatureTypesThisTurn`): the journal's `damage` entries hold them, but `damageThisTurn`
+    is also part of the token-fold shape and the bots' twin fingerprint; move them with
+    `filter:dealt-damage-to-source-this-turn`.
+  - `targetedThisTurn`, `revealedThisTurn` (the view's visibility), `drewInDrawStepThisTurn`, `saddledThisTurn` and
+    `crewedThisTurn` (relations, which creature crewed which vehicle).
+  - Usage limits keyed by ability (`abilitiesUsedThisTurn`, `grantedUsedThisTurn`, `abilitiesDoneThisTurn`,
+    `abilityActivationsThisTurn`, `abilityResolutionsThisTurn`, `modesChosenThisTurn`): "activate only once each
+    turn", "this ability has resolved N times" — theme 2's "nth time each turn" modifiers (step 4) are their home.
+- Measured (four-player fuzz games, `structuredClone` of the state at turns 4-16): 1.08-1.22 ms a clone against
+  1.14-1.21 before, the state 227-235 KB against 236-243 (the per-object loyalty flags are gone), the journal 4-5 KB
+  as JSON. A timed `bot:bench` (16 games, four players, 8 workers): the same games (12-4, 38.9 turns on average),
+  70.6 s a game against 74.3, 118.8 ms a decision against 125.2.
 
 ### 7. References and relational filter clauses (109 keys, ~144 cards)
 

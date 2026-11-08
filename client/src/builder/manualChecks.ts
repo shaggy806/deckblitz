@@ -11510,4 +11510,32 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { human: true, bf: ['Grizzly Bears'] },
     }),
   ),
+  preset(
+    'Kid Loki: hexproof on the creature you put a +1/+1 counter on',
+    board({
+      you: { bf: ['Kid Loki', 'Grizzly Bears*2', 'Forest'], hand: ['Battlegrowth'] },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    'Captain America, Living Legend: only the first tapping each turn is undone',
+    board({
+      you: { bf: ['Captain America, Living Legend', 'Prodigal Sorcerer'] },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    'Kiora of Salt and Sand: your planeswalker has a [−8]',
+    board({
+      you: { bf: ['Kiora of Salt and Sand', { name: 'Jace Beleren', counters: { loyalty: 9 } }] },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    'First Response: a Soldier the upkeep after you lost life',
+    board({
+      you: { bf: ['First Response', 'Mountain'], hand: ['Shock'] },
+      opp: { bf: [] },
+    }),
+  ),
 ]
