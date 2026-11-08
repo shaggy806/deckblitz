@@ -1958,17 +1958,17 @@ export function parseTrigger(clause) {
   }
   if (c === "When you cycle this card") return [{ on: "this-cycled" }];
   // Foretell (rule 702.143a): "whenever you foretell a card".
-  if (c === "Whenever you foretell a card") return [{ on: "foretells", who: "you" }];
+  if (c === "Whenever you foretell a card") return [{ on: "event", event: "foretells", who: "you" }];
   // The renowned designation (rule 702.112b) becoming true.
-  if (/^When(?:ever)? ~ becomes renowned$/.test(c)) return self("becomes-renowned");
-  if (/^Whenever a creature you control becomes renowned$/.test(c)) return [{ on: "becomes-renowned", who: "you-control", filter: { type: "creature" } }];
+  if (/^When(?:ever)? ~ becomes renowned$/.test(c)) return [{ on: "event", event: "becomes-renowned", who: "self" }];
+  if (/^Whenever a creature you control becomes renowned$/.test(c)) return [{ on: "event", event: "becomes-renowned", who: "you-control", filter: { type: "creature" } }];
   // A saddled designation (rule 702.171b) becoming true: "for the first time
   // each turn" only when it wasn't saddled already.
   if ((m = /^Whenever ~ becomes saddled( for the first time each turn)?$/.exec(c))) {
     return [{ on: "becomes-saddled", who: "self", ...(m[1] ? { firstTimeEachTurn: true } : {}) }];
   }
   // Enlisting (rule 702.154c): it tapped a creature for its enlist cost.
-  if (/^Whenever ~ enlists a creature$/.test(c)) return self("enlists");
+  if (/^Whenever ~ enlists a creature$/.test(c)) return [{ on: "event", event: "enlists", who: "self" }];
   // Crewing and saddling (rules 702.122b, 702.171c): it was tapped for a
   // Vehicle's crew cost or a Mount's saddle cost — that Vehicle or Mount the
   // trigger object. "During your main phase" is read with the clause.
@@ -2065,18 +2065,18 @@ export function parseTrigger(clause) {
   }
   // "For the first time each turn", by anyone's spell or ability (Angelic Cub).
   if (/^Whenever ~ becomes the target of a spell or ability for the first time each turn$/.test(c)) {
-    return [{ on: "becomes-target", who: "self", firstTimeEachTurnByAnyone: true }];
+    return [{ on: "becomes-target", who: "self", firstTimeEachTurn: true }];
   }
   if (/^When you cast (?:~|this spell)$/.test(c)) return [{ on: "this-cast" }];
   // Plot (rule 702.170): it triggers from exile, for this card alone.
   if (/^When (?:~|this card) becomes plotted$/.test(c)) return [{ on: "this-plotted" }];
   // Committing a crime (rule 700.13). "During your turn" is a person's: a
   // `your-turn` condition beside it.
-  if (/^Whenever you commit a crime$/.test(c)) return [{ on: "crime-committed", who: "you" }];
-  if (/^Whenever an opponent commits a crime$/.test(c)) return [{ on: "crime-committed", who: "opponent" }];
+  if (/^Whenever you commit a crime$/.test(c)) return [{ on: "event", event: "commits-crime", who: "you" }];
+  if (/^Whenever an opponent commits a crime$/.test(c)) return [{ on: "event", event: "commits-crime", who: "opponent" }];
   // Collect evidence (rule 701.59).
-  if (/^Whenever you collect evidence$/.test(c)) return [{ on: "evidence-collected", who: "you" }];
-  if (/^Whenever you discover$/.test(c)) return [{ on: "discovers", who: "you" }];
+  if (/^Whenever you collect evidence$/.test(c)) return [{ on: "event", event: "collects-evidence", who: "you" }];
+  if (/^Whenever you discover$/.test(c)) return [{ on: "event", event: "discovers", who: "you" }];
   // Explore (rule 701.44b).
   if (/^Whenever (?:~|this creature) explores$/.test(c)) return [{ on: "explores", who: "self" }];
   // Training's "trains" (rule 702.149c) and exploit's "exploits" (702.110b).
@@ -2367,12 +2367,12 @@ export function parseTrigger(clause) {
   if ((m = /^When(?:ever)? (you|an opponent|a player) casts? (a|an|your first|their first) (?:(.+?) )?spell(?: each turn)?$/.exec(c))) {
     const who = { you: "you", "an opponent": "opponent", "a player": "any" }[m[1]];
     const spec = { on: "cast-spell", who };
-    if (/first/.test(m[2])) spec.firstEachTurn = true;
+    if (/first/.test(m[2])) spec.firstTimeEachTurn = true;
     if (m[3] !== undefined) {
       // "Your first noncreature spell each turn" counts noncreature spells
-      // (Esper Sentinel's `filter`); `noncreatureOnly` with `firstEachTurn`
+      // (Esper Sentinel's `filter`); `noncreatureOnly` with `firstTimeEachTurn`
       // would be "your first spell, if it's noncreature".
-      if (m[3] === "noncreature" && spec.firstEachTurn === true) spec.filter = { notTypes: ["creature"] };
+      if (m[3] === "noncreature" && spec.firstTimeEachTurn === true) spec.filter = { notTypes: ["creature"] };
       else if (m[3] === "noncreature") spec.noncreatureOnly = true;
       // "A black spell" (K'rrik): a colour alone.
       else if (COLOR_WORD[m[3]] !== undefined) spec.filter = { colors: [COLOR_WORD[m[3]]] };
@@ -2427,7 +2427,7 @@ export function parseTrigger(clause) {
   if (/^Whenever you gain life$/.test(c)) return [{ on: "gains-life", who: "you" }];
   // Expend N (rule 700.14) and "whenever you forage" (701.61a).
   if ((m = /^Whenever you expend (\d+)$/.exec(c))) return [{ on: "expend", who: "you", amount: Number(m[1]) }];
-  if (/^Whenever you forage$/.test(c)) return [{ on: "forages", who: "you" }];
+  if (/^Whenever you forage$/.test(c)) return [{ on: "event", event: "forages", who: "you" }];
   if ((m = /^Whenever (you lose|an opponent loses) life$/.exec(c))) {
     return [{ on: "loses-life", who: m[1] === "you lose" ? "you" : "opponent" }];
   }
@@ -2463,14 +2463,14 @@ export function parseTrigger(clause) {
   if (/^Whenever a spell or ability an opponent controls causes you to discard a card$/.test(c)) {
     return [{ on: "discards", who: "you", byOpponent: true, perCard: true }];
   }
-  if (/^Whenever you surveil$/.test(c)) return [{ on: "surveils", who: "you" }];
+  if (/^Whenever you surveil$/.test(c)) return [{ on: "event", event: "surveils", who: "you" }];
   // Mirelurk Queen, The Wise Mothman: rule 701.17, any player's mill.
   {
     const m = /^Whenever one or more (nonland )?cards are milled$/.exec(c);
     if (m) return [{ on: "mills", who: "any", ...(m[1] ? { filter: { notTypes: ["land"] } } : {}) }];
   }
   if (/^Whenever you face a dilemma$/.test(c)) return [{ on: "faces-dilemma", who: "you" }];
-  if (/^Whenever an opponent searches their library$/.test(c)) return [{ on: "searches-library", who: "opponent" }];
+  if (/^Whenever an opponent searches their library$/.test(c)) return [{ on: "event", event: "searches-library", who: "opponent" }];
 
   // Steps.
   if (/^At the beginning of combat on your turn$/.test(c)) return [{ on: "step-begins", step: "begin-combat", who: "you" }];
@@ -16804,7 +16804,7 @@ function thatPlayerOf(triggers) {
   // (Manabarbs): who activated the mana ability.
   if (triggers.every((t) => t.on === "tapped-for-mana")) return "trigger-player";
   // Who searched (Ob Nixilis, Unshackled).
-  if (triggers.every((t) => t.on === "searches-library")) return "trigger-player";
+  if (triggers.every((t) => t.on === "event" && t.event === "searches-library")) return "trigger-player";
   if (triggers.every((t) => t.on === "deals-damage" && t.to === "player")) return "trigger-player";
   // "Whenever an opponent is dealt 3 or more damage by a single source, that
   // player discards a card" (Pain Magnification).

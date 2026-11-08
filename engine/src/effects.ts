@@ -3021,7 +3021,7 @@ export type EffectSpec =
        * painless option and only reaches for this when it must. */
       readonly painToController?: number;
       /** Mana added this way marks the ability as having done its thing this
-       * turn (`GameState.abilitiesDoneThisTurn`, read by the
+       * turn (the journal's `done` entries, read by the
        * `this-ability-did-this-turn` condition) — Carpet of Flowers' "if you
        * haven't added mana with this ability this turn". Only when at least
        * one mana is added: an amount of 0 adds no mana (rule 107.1b). */
@@ -5086,7 +5086,7 @@ export type EffectSpec =
        * can't cast additional spells this turn"). */
       readonly then?: EffectSpec;
       /** A spell cast (or land played) this way marks the ability as having
-       * done its thing this turn (`GameState.abilitiesDoneThisTurn`, read by
+       * done its thing this turn (the journal's `done` entries, read by
        * the `this-ability-did-this-turn` condition), as `add-mana`'s does —
        * Planetarium of Wan Shi Tong's "you may cast that card … Do this only
        * once each turn", spent only by a cast (its ruling): declining, or
@@ -8834,6 +8834,10 @@ export type EffectSpec =
       /** Set only by the engine: the player chosen for the face it turns
        * into, `null` for nobody — the choice above, made. */
       readonly chosenPlayer?: PlayerId | null;
+      /** "Transform ~. If you do, …" (Aang, Master of Elements): applied
+       * only if it did transform — not one that has left, or transformed
+       * since (701.28f). */
+      readonly then?: EffectSpec;
     }
   | {
       /** Flip `target` (rule 710 — "flip this creature"): it gets the flipped
@@ -9492,10 +9496,12 @@ export type EffectSpec =
       readonly else?: EffectSpec;
       /** "You may [effect]. **Do this only once each turn.**" (Pantlaza,
        * Sun-Favored): once this ability of this object has done it this
-       * turn, it isn't offered again — `else`, if any, applies instead. A
-       * turn when it was declined doesn't count, so a later resolution may
-       * still do it. Counted per ability, as `modal`'s `notChosenThisTurn`
-       * is: a `may` is a choice of one mode. */
+       * turn, the ability doesn't trigger again that turn (rule 603.2h —
+       * `Game.didOnceThisTurn`, for a `may` that is the whole effect), and a
+       * copy already on the stack isn't offered it again — `else`, if any,
+       * applies instead. A turn when it was declined doesn't count, so a
+       * later resolution may still do it. Counted per ability, as `modal`'s
+       * `notChosenThisTurn` is: a `may` is a choice of one mode. */
       readonly oncePerTurn?: boolean;
     }
   | {
@@ -11890,7 +11896,7 @@ export interface EffectApi {
    * `cards` at a `cast-now`'s offer since event `since`. */
   castSince(cards: readonly ObjectId[], since: number, by?: PlayerId): boolean;
   /** Record that the resolving ability has done its thing this turn
-   * (`GameState.abilitiesDoneThisTurn`, keyed by `abilityKey`) — a
+   * (the journal's `done` entries, keyed by `abilityKey`) — a
    * `cast-now`'s `marksAbilityDone`. Nothing for a spell or a delayed
    * trigger, which have no key. */
   markAbilityDone(): void;
@@ -12747,6 +12753,15 @@ export interface EffectApi {
   /** `by` is who puts them — the effect's controller when absent;
    * `training` marks training's counter (702.149c). */
   addCounter(target: TargetRef, counter: string, amount: number, by?: PlayerId, training?: boolean): void;
+  /** `object` connived (rule 701.50a) under `player`, `nonland` nonland
+   * cards discarded: announces it ("whenever a creature you control
+   * connives"). */
+  connived(object: ObjectId, player: PlayerId, nonland: number): void;
+  /** How many cards `player` draws first as a creature of theirs would
+   * connive (`StaticAbility.conniveDrawsFirst`, Leader, Super-Genius). */
+  conniveDrawsFirst(player: PlayerId): number;
+  /** This resolution's controller earthbent (rule 701.66b): announces it. */
+  earthbent(): void;
   /** Proliferate — see the `"proliferate"` {@link EffectSpec}. */
   proliferate(then: EffectSpec | null): void;
   /** Time travel — see the `"time-travel"` {@link EffectSpec}. */
@@ -13149,7 +13164,8 @@ export interface EffectApi {
   /** Transform `target` (a transforming DFC permanent) — see the `"transform"`
    * {@link EffectSpec}. `chosenPlayer`: the player chosen as it transforms
    * into a face with `choosePlayerOnTransform` (`null`: nobody could be). */
-  transform(target: TargetRef, chosenPlayer?: PlayerId | null): void;
+  /** Whether it transformed (rule 701.28f's "if you do"). */
+  transform(target: TargetRef, chosenPlayer?: PlayerId | null): boolean;
   /** If `target` would transform now, and the face it would turn into says
    * "as this transforms into …, choose a player / an opponent"
    * (`CardDefinition.choosePlayerOnTransform`): who chooses, and among whom
@@ -18033,6 +18049,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         },
         ctx,
       );
+      // "Whenever you earthbend" triggers as that delayed trigger is created
+      // (rule 701.66b).
+      ctx.earthbent();
       return;
     }
     case "sacrifice-target": {
@@ -18536,6 +18555,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         const player = ctx.controllerOf(read);
         const n = amountValue(spec.amount ?? 1, ctx);
         if (player === undefined || n <= 0) return;
+        // "Instead you draw a card, then that creature connives" (Leader,
+        // Super-Genius): a replacement, one draw per such ability, before it.
+        const first = ctx.conniveDrawsFirst(player);
+        if (first > 0) ctx.draw(player, first);
         const since = ctx.nextEventSeq();
         ctx.draw(player, n);
         const parked = ctx.parkedCount();
@@ -18554,6 +18577,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       const nonland = ctx.thisWay("discarded", undefined, { notTypes: ["land"] }, spec.discardsSince);
       const amount = nonland.reduce((n, e) => n + e.count, 0);
       if (amount > 0 && target !== undefined) ctx.addCounter(target, "+1/+1", amount);
+      // It connived, whether or not it's still there (701.50b) and whatever
+      // was discarded (701.50c): what "whenever a creature you control
+      // connives" sees, after the counters.
+      const conniver = ctx.controllerOf(read);
+      if (conniver !== undefined) ctx.connived(read.object, conniver, amount);
       return;
     }
     case "explore": {
@@ -19946,14 +19974,15 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       const target = resolveEffectTarget(spec.target, ctx);
       if (target === undefined) return;
       if (spec.chosenPlayer !== undefined) {
-        ctx.transform(target, spec.chosenPlayer);
+        if (ctx.transform(target, spec.chosenPlayer) && spec.then !== undefined) applyEffectSpec(spec.then, ctx);
         return;
       }
       // "As this transforms into [it], choose an opponent" (rule 712.20):
       // its controller chooses as it transforms, asked only among two or more.
       const choice = ctx.transformChoice(target);
       if (choice === null || choice.among.length <= 1) {
-        ctx.transform(target, choice === null ? undefined : (choice.among[0] ?? null));
+        const did = ctx.transform(target, choice === null ? undefined : (choice.among[0] ?? null));
+        if (did && spec.then !== undefined) applyEffectSpec(spec.then, ctx);
         return;
       }
       ctx.asPlayer(choice.chooser).chooseModes(
@@ -19961,7 +19990,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         1,
         choice.among.map((player) => ({
           text: `Choose ${player.charAt(0).toUpperCase()}${player.slice(1)}`,
-          effect: { kind: "transform", target: spec.target, chosenPlayer: player },
+          effect: { kind: "transform", target: spec.target, chosenPlayer: player, ...(spec.then !== undefined ? { then: spec.then } : {}) },
         })),
       );
       return;

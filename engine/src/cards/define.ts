@@ -1637,7 +1637,7 @@ export type StaticCondition =
   | { readonly kind: "resolved-this-turn"; readonly n: number }
   /**
    * This ability has done its thing this turn, as its effect recorded it
-   * (`GameState.abilitiesDoneThisTurn`): an `add-mana` with
+   * (the journal's `done` entries): an `add-mana` with
    * `marksAbilityDone` that added at least one mana — an amount of 0 adds
    * none (rule 107.1b). Its `not` is Carpet of Flowers' "if you
    * **haven't added mana with this ability this turn**", an intervening if
@@ -1655,7 +1655,7 @@ export type StaticCondition =
    * not the earlier ones resolved, and the one resolving is among them. Kept
    * per ability of one object, as `resolved-this-turn` is (a permanent that
    * leaves and comes back starts again, rule 400.7), and only for an
-   * activated ability whose effect asks (`GameState.abilityActivationsThisTurn`).
+   * activated ability whose effect asks (the journal's `activated` entries).
    * Only meaningful inside a `conditional` effect of the ability itself;
    * always false on a static ability.
    */
@@ -2827,7 +2827,7 @@ export interface StaticAbility {
    *
    * `onceEach` is "You may activate each of those abilities only once each
    * turn" (Mairsil): each card's ability has its own limit, kept per card so
-   * it holds however the list shifts (`GameObject.grantedUsedThisTurn`).
+   * it holds however the list shifts (the journal's `activated` entries).
    *
    * The permanent applying it is never one of the objects read. A card's
    * abilities that work only from another zone (`zone` — unearth, channel)
@@ -3274,6 +3274,12 @@ export interface StaticAbility {
    * layer system. `"each-player"` is Folio of Fancies' "players have no maximum
    * hand size". */
   readonly noMaxHandSize?: boolean | "each-player";
+  /** "If a creature you control would connive, instead you draw a card,
+   * then that creature connives" (Leader, Super-Genius): a replacement
+   * (rule 614.1a) its controller applies once per such ability (614.5 — each
+   * modifies the event once), read as the creature connives, of the player
+   * who controls it then (as it last existed if it has left, 701.50b). */
+  readonly conniveDrawsFirst?: true;
   /** "You don't lose unspent red mana as steps and phases end" (Leyline
    * Tyrant): mana of these types in the controller's pool isn't emptied as
    * each step and phase ends (rule 500.4) — cleanup included, so it lasts

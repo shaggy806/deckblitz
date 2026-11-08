@@ -103,6 +103,7 @@ import { namesOf } from "./card-names.js";
 import { CREATURE_TYPES } from "./creature-types.js";
 import {
   JOURNAL_VIEWS,
+  abilityCountThisTurn,
   entriesThisTurn,
   journalEntries,
   journalTotal,
@@ -718,9 +719,9 @@ function evalStaticCondition(
       return n >= (condition.atLeast ?? 1) && (condition.atMost === undefined || n <= condition.atMost);
     }
     case "this-ability-did-this-turn": {
-      // Recorded as it did it (`GameState.abilitiesDoneThisTurn`).
+      // Recorded as it did it (the journal's `done` entries).
       const key = opts.abilityKey;
-      return key !== undefined && (state.abilitiesDoneThisTurn?.includes(key) ?? false);
+      return key !== undefined && abilityCountThisTurn(state, "done", key) > 0;
     }
     case "trigger-spell-first": {
       // Its own record — which cast of that card, by its stint on the stack —

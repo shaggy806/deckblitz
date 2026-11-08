@@ -30,7 +30,7 @@ export default defineCard({
   ],
   triggered: [
     {
-      trigger: { on: "cast-spell", who: "opponent", firstEachTurn: true, filter: { notTypes: ["creature"] } },
+      trigger: { on: "cast-spell", who: "opponent", firstTimeEachTurn: true, filter: { notTypes: ["creature"] } },
       targets: [],
       effect: { kind: "damage", amount: 2, who: "trigger-controller" },
       resolve: null,

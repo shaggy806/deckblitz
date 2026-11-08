@@ -18,7 +18,7 @@ export default defineCard({
   text: `Flying\n${TEXT}`,
   triggered: [
     {
-      trigger: { on: "surveils", who: "you" },
+      trigger: { on: "event", event: "surveils", who: "you" },
       targets: [],
       effect: {
         kind: "may",

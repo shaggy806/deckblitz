@@ -10,7 +10,7 @@
  * planner nothing extra.
  */
 import { describe, expect, it } from "vitest";
-import { turnTotal } from "./harness.js";
+import { limitedActivations, turnTotal } from "./harness.js";
 
 import { createDefaultRegistry } from "../cards.js";
 import { HeuristicBotController, RandomController } from "../controller.js";
@@ -178,7 +178,7 @@ describe("Vivi Ornitier", () => {
     cast(game, bria);
     const object = game.state.objects[vivi];
     expect(object.tapped).toBe(false);
-    expect(object.abilitiesUsedThisTurn).toEqual([0]);
+    expect(limitedActivations(game, vivi)).toBe(1);
     expect(game.state.zones.shared.stack).toContain(bria);
   });
 
@@ -199,7 +199,7 @@ describe("Vivi Ornitier", () => {
     });
     expect(game.state.zones.shared.stack).toContain(expedition);
     expect(game.state.objects[vivi].tapped).toBe(true);
-    expect(game.state.objects[vivi].abilitiesUsedThisTurn).toEqual([0]);
+    expect(limitedActivations(game, vivi)).toBe(1);
   });
 
   it("can't pay a colour outside {U} and {R}", () => {

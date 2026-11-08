@@ -47,7 +47,7 @@ export default defineCard({
       text: ATTACK_TEXT,
     },
     {
-      trigger: { on: "becomes-monstrous", who: "self" },
+      trigger: { on: "event", event: "becomes-monstrous", who: "self" },
       targets: [{ kind: "any-number", of: "creature-an-opponent-controls", max: { triggerValue: true } }],
       effect: { kind: "for-each-target", from: 0, effect: { kind: "goad", target: 0 } },
       resolve: null,

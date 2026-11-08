@@ -21,7 +21,7 @@ export default defineCard({
       text: "At the beginning of combat on your turn, you may collect evidence 4.",
     },
     {
-      trigger: { on: "evidence-collected", who: "you" },
+      trigger: { on: "event", event: "collects-evidence", who: "you" },
       targets: [],
       effect: { kind: "create-token", token: "Clue Token", count: 1 },
       resolve: null,

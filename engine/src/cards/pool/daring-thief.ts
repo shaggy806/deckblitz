@@ -25,7 +25,7 @@ export default defineCard({
   text: TEXT,
   triggered: [
     {
-      trigger: { on: "becomes-untapped", who: "self" },
+      trigger: { on: "event", event: "becomes-untapped", who: "self" },
       targets: [
         { kind: "permanent", whose: "you", filter: { notTypes: ["land"] } },
         { kind: "other", of: { kind: "permanent", whose: "opponent", filter: {} }, than: { slot: 0 }, shares: { kind: "card" } },

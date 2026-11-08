@@ -27,7 +27,7 @@ export default defineCard({
   text: `Flying\n${FAERIE_TEXT}\n${GOAD_TEXT}`,
   triggered: [
     {
-      trigger: { on: "cast-spell", who: "you", firstEachTurn: true },
+      trigger: { on: "cast-spell", who: "you", firstTimeEachTurn: true },
       condition: { kind: "not", of: { kind: "your-turn" } },
       targets: [],
       effect: { kind: "create-token", token: "Faerie Rogue Token", count: 1 },

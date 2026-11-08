@@ -44,7 +44,7 @@ export const INITIATIVE_DEFINITIONS: readonly CardDefinition[] = [
         text: STEAL_TEXT,
       },
       {
-        trigger: { on: "takes-initiative", who: "you" },
+        trigger: { on: "event", event: "takes-initiative", who: "you" },
         targets: [],
         effect: { kind: "venture", into: "undercity" },
         resolve: null,

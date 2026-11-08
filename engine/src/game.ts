@@ -120,7 +120,6 @@ import {
   countValue,
   damageDealtThisTurn,
   journalCount,
-  journalReader,
   powerAttackedWith,
   cardTypesInGraveyards,
   basicLandTypesAmong,
@@ -347,7 +346,15 @@ import type {
 import type { Expiry, PermanentDuration, PermissionDuration, UntilPoint, WhileSource } from "./duration.js";
 import { endsThisTurn, untilPointOf } from "./duration.js";
 import type { JournalEntry } from "./journal.js";
-import { JOURNAL_VIEWS, appendJournal, beginJournalTurn, entriesThisTurn, journalEntries, journalTotal } from "./journal.js";
+import { timingCountable, triggerEventObject, triggerEventPlayer, triggerEventRow, triggerEventSubjects } from "./trigger-events.js";
+import {
+  abilityCountThisTurn,
+  appendJournal,
+  beginJournalTurn,
+  entriesThisTurn,
+  journalTotal,
+  modesDoneThisTurn,
+} from "./journal.js";
 import {
   COLORS,
   MANA_TYPES,
@@ -1502,6 +1509,9 @@ interface OwedDamageBatchTrigger {
   readonly players: Set<PlayerId>;
   amount: number;
   readonly perEvent: boolean;
+  /** The sources that counted, each with its stint as it dealt the damage:
+   * "those creatures" (`LastKnownRefs.dealtTogether`). */
+  readonly sources: { readonly object: ObjectId; readonly zoneChangeCount: number }[];
 }
 
 /** A "prevent that damage and …" follow-up owed by the damage event under
@@ -7681,9 +7691,7 @@ export class Game {
     // you don't".
     const onlyUnchosen = ability.notChosenThisTurn === true && key !== undefined;
     const ever = ability.notChosenEver === true;
-    const chosenBefore = onlyUnchosen
-      ? ((ever ? this.state.modesChosenEver : this.state.modesChosenThisTurn)?.[key] ?? [])
-      : [];
+    const chosenBefore = onlyUnchosen ? this.modesChosenFor(key, ever) : [];
     const offered = modes.map((_mode, i) => i).filter((i) => !chosenBefore.includes(i));
     if (offered.length === 0 && modes.length > 0) {
       decline();
@@ -7888,11 +7896,7 @@ export class Game {
       // "That hasn't been chosen this turn": chosen as it goes on the
       // stack, so a second copy triggered alongside it already can't.
       if (awaiting.abilityKey !== undefined && ordered.length > 0) {
-        const record =
-          awaiting.chosenEver === true
-            ? (this.state.modesChosenEver ??= {})
-            : (this.state.modesChosenThisTurn ??= {});
-        record[awaiting.abilityKey] = [...(record[awaiting.abilityKey] ?? []), ...ordered];
+        this.recordModesChosen(awaiting.abilityKey, awaiting.chosenEver === true, ordered, player);
       }
       this.emit({ type: "modes-chosen", source: awaiting.source, player, modes: ordered, modal: true });
       if (trigger !== undefined && this.placeTriggerOnStack({ ...trigger, modes: ordered }) === "paused") return;
@@ -7944,7 +7948,7 @@ export class Game {
         if (bent === null) chosen = [];
         else {
           this.executePayment(player, bent.payment);
-          this.tapForWaterbend(bent.taps);
+          this.tapForWaterbend(bent.taps, player, true);
         }
       } else {
         const payment = this.payMana(player, concrete, undefined, undefined, otherCostPurpose(cost, awaiting.costHasX === true, awaiting.costFor));
@@ -7982,11 +7986,7 @@ export class Game {
       ...(awaiting.sourceLost === true ? { sourceLost: true } : {}),
     };
     if (unchosen !== undefined && abilityKey !== undefined && own.length > 0) {
-      const record =
-        awaiting.chosenEver === true
-          ? (this.state.modesChosenEver ??= {})
-          : (this.state.modesChosenThisTurn ??= {});
-      record[abilityKey] = [...(record[abilityKey] ?? []), ...own];
+      this.recordModesChosen(abilityKey, awaiting.chosenEver === true, own, player);
     }
     // A secret vote's answer stays out of the log until the votes are
     // revealed together (`votes-finished`).
@@ -8748,10 +8748,6 @@ export class Game {
     // permanent window into a hand.
     this.state.revealedThisTurn = [];
     delete this.state.ceasedTokens;
-    this.state.abilityResolutionsThisTurn = {};
-    delete this.state.abilityActivationsThisTurn;
-    delete this.state.modesChosenThisTurn;
-    delete this.state.abilitiesDoneThisTurn;
     // Those lasting "until your next turn" or while an object stays go on
     // (below); "this turn" ones lapse.
     this.state.preventionShields = this.state.preventionShields.filter(
@@ -8788,7 +8784,6 @@ export class Game {
       }
       delete object.attackedPlayersThisTurn;
       delete object.attackedBattleThisTurn;
-      delete object.tappedOnTurn;
       if (object.dealtDamage?.thisTurn !== undefined) object.dealtDamage = { combat: object.dealtDamage.combat };
     }
     this.state.extraCombats = 0;
@@ -9805,11 +9800,6 @@ export class Game {
     // goes on through the phasing).
     for (const id of [...this.state.zones.shared.battlefield, ...phasedOutIds(this.state)]) {
       const object = this.state.objects[id];
-      // "Activate only once each turn" (rule 602.5b) is each turn, anyone's:
-      // Wall of Roots used on its controller's turn makes mana again on the
-      // next player's.
-      object.abilitiesUsedThisTurn = [];
-      if (object.grantedUsedThisTurn !== undefined) object.grantedUsedThisTurn = undefined;
       // A loyalty ability may be activated again (rule 606.3) — "that turn"
       // is each turn, so one whose loyalty abilities may be activated on any
       // player's turn (Teferi, Master of Time) gets one on this turn too.
@@ -9838,15 +9828,6 @@ export class Game {
         !restrictionsOf(this.state, this.registry, id).has("doesnt-untap")
       ) {
         untapping.push(id);
-      }
-    }
-    // A once-each-turn ability activated from a hand (forecast, rule
-    // 702.57b) is once each turn too: the card stays in the hand, so the
-    // record a zone change would clear has to be cleared here.
-    for (const player of this.state.turnOrder) {
-      for (const id of this.state.zones.perPlayer[player].hand) {
-        const object = this.state.objects[id];
-        if (object.abilitiesUsedThisTurn !== undefined) object.abilitiesUsedThisTurn = undefined;
       }
     }
     if (skipping) return;
@@ -11937,9 +11918,6 @@ export class Game {
         object.attacking = defender;
         object.blockedBy = [];
         object.blocked = false;
-        // "Attacks for the first time each turn": not declared earlier this
-        // turn, in an earlier combat.
-        const first = object.attackedThisTurn !== true;
         // Boast (702.142a) asks whether this creature attacked this turn —
         // recorded here, and reset as each turn begins.
         object.attackedThisTurn = true;
@@ -11978,7 +11956,7 @@ export class Game {
         if (object.isCommander) this.state.players[player].attackedWithCommanderOnTurn = this.state.turn.number;
         const taps = !this.objHasKeyword(id, "vigilance");
         if (taps) object.tapped = true;
-        declaredNow.push({ id, defender, taps, first });
+        declaredNow.push({ id, defender, taps });
       }
     }
     // A band is labelled by its first member; a band of one is none.
@@ -12226,7 +12204,7 @@ export class Game {
       const enlisted = this.state.objects[id];
       enlisted.tapped = true;
       invalidateComputedCache();
-      this.emit({ type: "permanent-tapped", object: id });
+      this.emit({ type: "permanent-tapped", object: id, by: player });
       by.enlistedIn = { turn: this.state.turn.number, phase: this.state.turn.combatPhases ?? 1 };
       this.emit({ type: "creature-tapped-for", creature: id, for: attacker, as: "enlist" });
       this.state.pendingTriggers.push({
@@ -12302,14 +12280,14 @@ export class Game {
     // They all became tapped at once (rule 508.1f), an event apiece between.
     this.tapBatchFired.clear();
     this.tapBatchHeld = true;
-    for (const { id, defender, taps, first } of declaredNow) {
+    for (const { id, defender, taps } of declaredNow) {
       // Attacking *taps* the creature, so a "becomes tapped" trigger (rule
       // 701.21a) fires here exactly as it would for a cost or for convoke —
       // Emmara, Soul of the Accord makes its Soldier when it attacks. This was
       // setting the flag without announcing it, so those triggers silently
       // never fired on the commonest way a creature gets tapped.
-      if (taps) this.emit({ type: "permanent-tapped", object: id, asAttacker: true });
-      this.emit({ type: "attacker-declared", attacker: id, defender, ...(first ? { firstThisTurn: true as const } : {}) });
+      if (taps) this.emit({ type: "permanent-tapped", object: id, asAttacker: true, by: this.state.objects[id]?.controller });
+      this.emit({ type: "attacker-declared", attacker: id, defender });
       // Who attacked whom, for the bots' sense of threat (`PlayerState.
       // lastAttackedBy`): a planeswalker's controller counts as attacked, and
       // a battle's protector.
@@ -19104,12 +19082,16 @@ export class Game {
 
   /** Taps what a waterbend cost was paid with (rule 701.67a) — a token
    * peeled off a stack for each time the stack is named. */
-  private tapForWaterbend(taps: readonly ObjectId[]): void {
+  /** Tap the artifacts and creatures that paid generic mana of a waterbend
+   * cost (rule 701.67a); `paid`: a waterbend cost was paid at all, however
+   * (701.67c: "whenever you waterbend" — `bent`). */
+  private tapForWaterbend(taps: readonly ObjectId[], by: PlayerId, paid = taps.length > 0): void {
+    if (paid) this.emit({ type: "bent", player: by, how: "water" });
     for (const named of taps) {
       if (this.state.objects[named] === undefined) continue;
       const id = this.splitOneFromStack(named);
       this.state.objects[id].tapped = true;
-      this.emit({ type: "permanent-tapped", object: id });
+      this.emit({ type: "permanent-tapped", object: id, by });
     }
   }
 
@@ -20107,7 +20089,12 @@ export class Game {
     if (payment === null) {
       throw new Error(`${player} cannot pay the cost of ${def.name}`);
     }
-    this.tapForWaterbend(waterbent);
+    this.tapForWaterbend(
+      waterbent,
+      player,
+      alternativeTaps === undefined &&
+        (def.additionalCost?.waterbend !== undefined || this.spellWaterbend(def, kicked, chosenX) > 0),
+    );
     // Convoke (rule 702.51a): tap the chosen creatures as part of the cost,
     // alongside the mana payment above — a token peeled off a stack for each
     // time the stack is named.
@@ -20121,7 +20108,7 @@ export class Game {
       const convoking = this.convokesForColor(creature, convokeKinds);
       const id = this.splitOneFromStack(creature);
       this.state.objects[id].tapped = true;
-      this.emit({ type: "permanent-tapped", object: id });
+      this.emit({ type: "permanent-tapped", object: id, by: player });
       if (convoking) convokers.push({ object: id, stint: this.state.objects[id].zoneChangeCount ?? 0 });
     }
 
@@ -20343,7 +20330,7 @@ export class Game {
     // other half of its alternative cost, paid as the spell is cast. One
     // permanent tapped is remembered: "the creature tapped to pay this spell's
     // additional cost" (Swallow Whole).
-    const tappedForCost = this.payTapCost(tapPicked);
+    const tappedForCost = this.payTapCost(tapPicked, player);
     if (tappedForCost.length === 1) {
       object.lastKnownRefs = {
         ...object.lastKnownRefs,
@@ -21074,7 +21061,7 @@ export class Game {
         for (const named of chosen) {
           const id = this.splitOneFromStack(named);
           this.state.objects[id].tapped = true;
-          this.emit({ type: "permanent-tapped", object: id });
+          this.emit({ type: "permanent-tapped", object: id, by: player });
         }
         const text = `Conspire — copy ${nameOf(spell)}. You may choose new targets for the copy.`;
         this.queuePaidCostCopy(spell, player, text, `conspire-${this.state.nextObjectSeq}-${ask.instances}`);
@@ -21858,28 +21845,39 @@ export class Game {
     return ref?.kind === "card-activated" && ref.from !== undefined ? `${ref.from}#${ref.index}` : undefined;
   }
 
+  /** The key the journal keeps the activations of `source`'s ability
+   * `abilityIndex` under, for its per-turn limit (rule 602.5b): the object in
+   * the stint it's in now (a zone change makes a new object, 400.7) and which
+   * ability — a granted one by the card and index it was granted from, since
+   * its index among the source's abilities shifts as grants come and go. Not
+   * the timestamp: a change of control renews that, and the limit stays with
+   * the object (602.5b). */
+  private usageKey(source: GameObject, abilityIndex: number): string {
+    const granted = this.onceEachKey(source, abilityIndex);
+    const which = granted !== undefined ? `granted:${granted}` : `activated:${abilityIndex}`;
+    return `${source.id}~${source.zoneChangeCount ?? 0}#${which}`;
+  }
+
   /** Whether `source` has used its "once each turn" ability this turn (rule 602.5b). */
   private usedThisTurn(source: GameObject, abilityIndex: number): boolean {
-    const key = this.onceEachKey(source, abilityIndex);
-    return key !== undefined
-      ? (source.grantedUsedThisTurn ?? []).includes(key)
-      : (source.abilitiesUsedThisTurn ?? []).includes(abilityIndex);
+    return this.timesUsedThisTurn(source, abilityIndex) > 0;
   }
 
   /** How many times `source` has used that ability this turn, a granted one
    * included — boast's limit can be more than once. */
   private timesUsedThisTurn(source: GameObject, abilityIndex: number): number {
-    const key = this.onceEachKey(source, abilityIndex);
-    return key !== undefined
-      ? (source.grantedUsedThisTurn ?? []).filter((used) => used === key).length
-      : this.activationsThisTurn(source, abilityIndex);
+    return abilityCountThisTurn(this.state, "activated", this.usageKey(source, abilityIndex));
   }
 
   /** Records one activation of an ability with a per-turn limit. */
   private markUsedThisTurn(source: GameObject, abilityIndex: number): void {
-    const key = this.onceEachKey(source, abilityIndex);
-    if (key !== undefined) source.grantedUsedThisTurn = [...(source.grantedUsedThisTurn ?? []), key];
-    else source.abilitiesUsedThisTurn = [...(source.abilitiesUsedThisTurn ?? []), abilityIndex];
+    this.journal({
+      kind: "activated",
+      player: source.controller,
+      object: source.id,
+      stint: source.zoneChangeCount ?? 0,
+      ability: this.usageKey(source, abilityIndex),
+    });
   }
 
   /** What one `grantsActivatedOf` static grants now, on top of the grants
@@ -22322,7 +22320,7 @@ export class Game {
           : `activated:${abilityIndex}`;
       key = `${sourceId}@${source.timestamp ?? 0}#${which}`;
     }
-    const before = key === undefined ? [] : ((ever ? this.state.modesChosenEver : this.state.modesChosenThisTurn)?.[key] ?? []);
+    const before = key === undefined ? [] : this.modesChosenFor(key, ever);
     const asker = this.permanentSource(sourceId);
     const offered = modal.modes.flatMap((mode, i) =>
       !before.includes(i) &&
@@ -22857,7 +22855,7 @@ export class Game {
     // now, a count of the snow Swamps you control or a number.
     if (ability.timesEachTurn !== undefined) {
       const limit = this.costReductionAmount(ability.timesEachTurn, player, source.id);
-      if (this.activationsThisTurn(source, abilityIndex) >= limit) {
+      if (this.timesUsedThisTurn(source, abilityIndex) >= limit) {
         return `${def.name}'s ability has been activated as many times this turn as it can be`;
       }
     }
@@ -23488,16 +23486,16 @@ export class Game {
     if (ability.cost.revealChosen === true) this.revealSecretChoice(source, player);
     if (ability.cost.tap) {
       source.tapped = true;
-      this.emit({ type: "permanent-tapped", object: sourceId });
+      this.emit({ type: "permanent-tapped", object: sourceId, by: player });
     }
     // {Q} (rule 107.6): a stunned source was refused above.
     if (ability.cost.untap === true) this.untapUnlessStunned(sourceId);
-    this.tapForWaterbend(waterbent);
+    this.tapForWaterbend(waterbent, player, ability.cost.waterbend === true);
     // "Tap five untapped Zombies you control" — see `AbilityCost.tapOthers`.
     // A cost that tapped one permanent remembers it: "the tapped creature's
     // power" (station, rule 702.184a) is read as the ability resolves, as it
     // last existed if it has left (the station ruling).
-    const tapped = this.payTapCost(tapPicked);
+    const tapped = this.payTapCost(tapPicked, player);
     // Saddle (rule 702.171c): each creature tapped for the cost saddles the
     // source as it's tapped — whether or not the ability goes on to resolve.
     if (ability.saddle === true) this.recordSaddlers(sourceId, tapped);
@@ -23736,6 +23734,9 @@ export class Game {
       chosen,
     );
     if (chosenX > 0) this.state.objects[abilityId].xValue = chosenX;
+    // A crew ability remembers its crew, for "whenever this Vehicle becomes
+    // crewed" as it resolves (rule 702.122e).
+    if (ability.crew === true) this.state.objects[abilityId].crewedWith = [...tapped];
     // The opponent who chose some of its targets (rules 602.2b, 601.2c).
     if (this.otherChoice?.for === sourceId) this.state.objects[abilityId].otherChooser = this.otherChoice.chooser;
     if (shares !== undefined) this.state.objects[abilityId].division = shares;
@@ -23754,20 +23755,14 @@ export class Game {
     // (Dragon Whelp): counted as it's activated, resolved or not.
     if (this.readsActivationCount(ability)) {
       const key = this.abilityTurnKey(this.state.objects[abilityId]);
-      if (key !== undefined) {
-        const counts = (this.state.abilityActivationsThisTurn ??= {});
-        counts[key] = (counts[key] ?? 0) + 1;
-      }
+      if (key !== undefined) this.journal({ kind: "activated", player, object: sourceId, ability: key });
     }
     // A modal ability's modes, chosen as it was activated (rule 700.2b): what
     // it resolves, and for "that hasn't been chosen" what it has had.
     const modes = this.activationModes;
     if (modeOffer !== null && modes !== undefined) {
       this.state.objects[abilityId].chosenModes = [...modes];
-      if (modeOffer.key !== undefined) {
-        const record = modeOffer.ever ? (this.state.modesChosenEver ??= {}) : (this.state.modesChosenThisTurn ??= {});
-        record[modeOffer.key] = [...(record[modeOffer.key] ?? []), ...modes];
-      }
+      if (modeOffer.key !== undefined) this.recordModesChosen(modeOffer.key, modeOffer.ever, modes, player);
       this.emit({ type: "modes-chosen", source: sourceId, player, modes: [...modes], modal: true });
     }
     const granterRef = granterOfRef(grantedAbility);
@@ -24093,6 +24088,7 @@ export class Game {
       source: sourceId,
       player,
       onStack: false,
+      ...(ability.zone === undefined ? { ofPermanent: true as const } : {}),
     });
     // Activated by hand, its player holding priority (`whyCannotAct`) —
     // one activated while paying a cost is `executePayment`'s, inside the
@@ -24683,26 +24679,16 @@ export class Game {
       announced.add(target.object);
       const object = this.state.objects[target.object];
       if (object === undefined || object.zone !== "battlefield") continue;
-      // Valiant's "for the first time each turn": by this player, this turn,
-      // as this object (rule 400.7).
-      const turn = this.state.turn.number;
-      const stint = object.zoneChangeCount ?? 0;
-      const record = object.targetedThisTurn;
-      const current = record !== undefined && record.turn === turn && record.stint === stint ? record.by : [];
-      const first = !current.includes(by);
-      this.emit({
-        type: "object-targeted",
+      // Valiant's "for the first time each turn": journaled before anything
+      // looks, as this object (rule 400.7).
+      this.journal({
+        kind: "targeted",
+        player: by,
         object: target.object,
-        by,
-        source,
-        stackObject,
-        bySpell,
-        ...(first ? { firstByPlayerThisTurn: true as const } : {}),
-        ...(current.length === 0 ? { firstThisTurn: true as const } : {}),
+        stint: object.zoneChangeCount ?? 0,
+        how: bySpell ? "spell" : "ability",
       });
-      if (first && this.state.objects[target.object] !== undefined) {
-        this.state.objects[target.object].targetedThisTurn = { turn, stint, by: [...current, by] };
-      }
+      this.emit({ type: "object-targeted", object: target.object, by, source, stackObject, bySpell });
     }
   }
 
@@ -25796,7 +25782,7 @@ export class Game {
       this.emit({ type: "permanent-sacrificed", object: step.source, player });
     } else if (step.untapped === undefined) {
       object.tapped = true;
-      this.emit({ type: "permanent-tapped", object: step.source });
+      this.emit({ type: "permanent-tapped", object: step.source, by: player });
     }
     if (step.lifeCost > 0) this.changeLife(player, -step.lifeCost);
     if (step.pain > 0) {
@@ -25814,7 +25800,35 @@ export class Game {
     if (step.untapped === undefined && own > 0) {
       this.emit({ type: "permanent-tapped-for-mana", object: step.source, player, produced: step.mana.slice(0, own) });
     }
+    // A mana ability activated to pay a cost (rule 605.3a), for "whenever
+    // you activate an ability of a creature" (Elrond, Moon-Reader) — only
+    // when something on the battlefield asks: this is every land tapped.
+    if (this.manaActivationWatched()) {
+      this.emit({ type: "ability-activated", source: step.source, player, onStack: false, ofPermanent: true });
+    }
   }
+
+  /** Whether a permanent on the battlefield has a printed `activates-ability`
+   * trigger with `orMana` — so a mana ability activated to pay a cost must
+   * be announced (`useManaSource`). Cached per definition. */
+  private manaActivationWatched(): boolean {
+    for (const id of this.state.zones.shared.battlefield) {
+      const object = this.state.objects[id];
+      if (object === undefined) continue;
+      const name = rulesTextName(object);
+      if (!this.registry.has(name)) continue;
+      const def = this.registry.get(name);
+      let watches = this.manaActivationWatchers.get(def);
+      if (watches === undefined) {
+        watches = def.triggered.some((t) => t.trigger.on === "activates-ability" && t.trigger.orMana === true);
+        this.manaActivationWatchers.set(def, watches);
+      }
+      if (watches) return true;
+    }
+    return false;
+  }
+
+  private readonly manaActivationWatchers = new WeakMap<object, boolean>();
 
   /**
    * `option` with one triggered mana ability's extra mana on top — a fixed
@@ -28634,6 +28648,16 @@ export class Game {
       const final = chapters[object.abilityIndex ?? 0]?.at.includes(last) === true;
       this.emit({ type: "chapter-resolved", saga: source, final });
     }
+    // "Whenever you firebend": whenever a firebending ability they control
+    // resolves (rule 702.189b).
+    if (object.abilityKind === "triggered" && (this.stackAbilityOf(object) as Partial<TriggeredAbility>).firebending === true) {
+      this.emit({ type: "bent", player: object.controller, how: "fire" });
+    }
+    // "Whenever this Vehicle becomes crewed": whenever its crew ability
+    // resolves (rule 702.122e).
+    if (object.crewedWith !== undefined && this.state.objects[source]?.zone === "battlefield") {
+      this.emit({ type: "became-crewed", object: source, player: object.controller, crew: object.crewedWith });
+    }
     // An ability leaves the stack as the final part of its resolution (rule
     // 608.2n), as a spell does: after any of its steps still waiting on a
     // decision. A spell its controller casts as it resolves (608.2g) sees it
@@ -28704,15 +28728,6 @@ export class Game {
    * it was granted from, since its index among the source's abilities can
    * shift as grants come and go.
    */
-  /** How many times `source` has activated its ability `index` this turn —
-   * kept only for an ability with a per-turn limit (`oncePerTurn`, boast,
-   * `timesEachTurn`), one `abilitiesUsedThisTurn` entry an activation. */
-  private activationsThisTurn(source: GameObject, index: number): number {
-    let n = 0;
-    for (const used of source.abilitiesUsedThisTurn ?? []) if (used === index) n += 1;
-    return n;
-  }
-
   /** Whether an activated ability's effect asks how many times it has been
    * activated this turn (`activated-this-turn` — Dragon Whelp), so its
    * activations are counted. Cached per definition object: a definition
@@ -28728,12 +28743,66 @@ export class Game {
 
   private readonly activationCountReaders = new WeakMap<ActivatedAbility, boolean>();
 
+  /** Journal one resolution of the ability `object` (on the stack) and say
+   * which time this turn it is — only for an ability that asks
+   * (`resolved-this-turn`); any other resolves unrecorded, as 0. */
   private recordAbilityResolution(object: GameObject): number {
+    if (!this.readsResolutionCount(object)) return 0;
     const key = this.abilityTurnKey(object);
     if (key === undefined) return 0;
-    const counts = (this.state.abilityResolutionsThisTurn ??= {});
-    counts[key] = (counts[key] ?? 0) + 1;
-    return counts[key];
+    this.journal({ kind: "resolved", player: object.controller, ability: key });
+    return abilityCountThisTurn(this.state, "resolved", key);
+  }
+
+  /** Whether the ability `object` reads how many times it has resolved
+   * this turn ("if this is the second time this ability has resolved this
+   * turn"), so its resolutions are journaled. Cached per definition. */
+  private readsResolutionCount(object: GameObject): boolean {
+    const sourceId = object.sourceObjectId ?? undefined;
+    const source = sourceId === undefined ? undefined : this.state.objects[sourceId];
+    const name = source === undefined ? undefined : rulesTextName(source);
+    const def = name === undefined || !this.registry.has(name) ? undefined : this.registry.get(name);
+    const ability =
+      def === undefined || object.grantedAbility !== undefined
+        ? undefined
+        : object.abilityKind === "activated"
+          ? def.activated[object.abilityIndex ?? 0]
+          : object.abilityKind === "triggered"
+            ? def.triggered[object.abilityIndex ?? 0]
+            : undefined;
+    // A granted or chapter ability, or one whose definition can't be found:
+    // journaled, to be safe — they are few.
+    if (ability === undefined) return true;
+    let known = this.resolutionCountReaders.get(ability);
+    if (known === undefined) {
+      known = JSON.stringify(ability).includes('"kind":"resolved-this-turn"');
+      this.resolutionCountReaders.set(ability, known);
+    }
+    return known;
+  }
+
+  private readonly resolutionCountReaders = new WeakMap<object, boolean>();
+
+  /** The ability `key` did its thing this turn (`this-ability-did-this-turn`). */
+  private markDone(key: string, player: PlayerId): void {
+    if (abilityCountThisTurn(this.state, "done", key) === 0) this.journal({ kind: "done", player, ability: key });
+  }
+
+  /** The modes the ability `key` has had chosen this turn — or, `ever`, for
+   * as long as its object has been on the battlefield (`modesChosenEver`,
+   * whole-game state rather than history). */
+  private modesChosenFor(key: string, ever: boolean): readonly number[] {
+    return ever ? (this.state.modesChosenEver?.[key] ?? []) : modesDoneThisTurn(this.state, key);
+  }
+
+  /** Record that the ability `key` had `modes` chosen (see `modesChosenFor`). */
+  private recordModesChosen(key: string, ever: boolean, modes: readonly number[], player: PlayerId): void {
+    if (ever) {
+      const record = (this.state.modesChosenEver ??= {});
+      record[key] = [...(record[key] ?? []), ...modes];
+      return;
+    }
+    for (const mode of modes) this.journal({ kind: "did", player, ability: key, mode });
   }
 
   /** Which ability of which object `object` (an ability on the stack) is, as
@@ -28835,6 +28904,15 @@ export class Game {
    * `object` is the ability's source, as the trigger is matched against it.
    */
   private triggerValueOf(trigger: TriggerSpec, event: GameEvent, object: GameObject): number | undefined {
+    // A generic trigger's value is its row's amount; "one or more" of a
+    // several-object event, how many matched.
+    if (trigger.on === "event") {
+      const subjects = triggerEventSubjects(trigger.event, event);
+      if (trigger.batched === true && subjects?.objects !== undefined) {
+        return this.eventTriggerObjects(trigger, subjects.objects, object).length;
+      }
+      return triggerEventRow(trigger.event).amount?.(event as never);
+    }
     const powerOfId =
       event.type === "permanent-entered-battlefield"
         ? event.object
@@ -28921,12 +28999,6 @@ export class Game {
               : // "The number of cards looked at while scrying this way".
                 trigger.on === "scries" && event.type === "scried"
               ? event.looked
-              : // "Discover again for the same value" (Curator of Sun's Creation).
-                trigger.on === "discovers" && event.type === "discovered"
-              ? event.amount
-              : // The N it became monstrous with (rule 701.37c's X).
-                trigger.on === "becomes-monstrous" && event.type === "became-monstrous"
-              ? event.amount
               : // "The number of times you chose a mode for that spell".
                 trigger.on === "cast-spell" && trigger.modal === true && event.type === "spell-cast"
               ? (this.state.objects[event.object]?.chosenModes?.length ?? 0)
@@ -29367,6 +29439,9 @@ export class Game {
             ability.oncePerTurn === true &&
             this.triggeredOnceThisTurn(live, ability.sameAbilityAs ?? index, lastSeen?.zoneChangeCount)
           ) &&
+          // "… Do this only once each turn" (rule 603.2h): once its controller
+          // has done it this turn, the ability doesn't trigger at all.
+          !this.didOnceThisTurn(ability, id, index, ref) &&
           this.interveningIfMet(
             ability.condition,
             object,
@@ -29491,7 +29566,7 @@ export class Game {
                         })),
                     }
                 : // "Whenever players finish voting": that vote's votes.
-                  ability.trigger.on === "players-finish-voting" && event.type === "votes-finished"
+                  ability.trigger.on === "event" && ability.trigger.event === "voting-finishes" && event.type === "votes-finished"
                   ? { ...(atTrigger ?? {}), votes: event.votes }
                   : this.withAttackedTogether(atTrigger, ability.trigger, event, object);
           // A printed ability its text box came with (rule 612.5) is that
@@ -29596,6 +29671,18 @@ export class Game {
           // "Whenever a creature card is put into a graveyard": once per card,
           // each its own trigger object — followed to that graveyard and no
           // further (rule 400.7).
+          // "Whenever this or another Spirit you control phases in": a generic
+          // trigger's several-object event is one occurrence per object (rule
+          // 603.2c), each its own trigger object — unless "one or more".
+          if (ability.trigger.on === "event" && ability.trigger.batched !== true) {
+            const subjects = triggerEventSubjects(ability.trigger.event, event);
+            if (subjects?.objects !== undefined && subjects.objects.length > 1) {
+              for (const card of this.eventTriggerObjects(ability.trigger, subjects.objects, object)) {
+                this.queueTrigger(ability, { ...base, triggerObject: card }, multiplier);
+              }
+              return;
+            }
+          }
           // "Whenever a creature card leaves your graveyard": once per card too.
           if (
             ability.trigger.on === "leaves-graveyard" &&
@@ -29728,6 +29815,9 @@ export class Game {
             }
             const key = perEvent ? `${id}#${index}` : `${id}#${index}@${player}`;
             const owed = damageBatch.damageTo.get(key);
+            const source = this.state.objects[event.source];
+            const stint = source?.zone === "battlefield" ? (source.zoneChangeCount ?? 0) : source?.lastKnown?.zoneChangeCount;
+            const counted = stint === undefined ? [] : [{ object: event.source, zoneChangeCount: stint }];
             if (owed === undefined) {
               damageBatch.damageTo.set(key, {
                 ability,
@@ -29736,10 +29826,12 @@ export class Game {
                 players: new Set([player]),
                 amount: event.amount,
                 perEvent,
+                sources: counted,
               });
             } else {
               owed.players.add(player);
               owed.amount += event.amount;
+              for (const s of counted) if (!owed.sources.some((o) => o.object === s.object)) owed.sources.push(s);
             }
             return;
           }
@@ -29835,29 +29927,43 @@ export class Game {
    * seeing the rest of a wrath): it is still the object that triggered
    * earlier this turn, though its move has already bumped the count. */
   private triggeredOnceThisTurn(object: GameObject, index: number, stint?: number): boolean {
-    const once = object.triggeredOnce;
-    return (
-      once !== undefined &&
-      once.turn === this.state.turn.number &&
-      once.zoneChangeCount === (stint ?? object.zoneChangeCount ?? 0) &&
-      once.indices.includes(index)
-    );
+    return abilityCountThisTurn(this.state, "triggered", this.onceKey(object, index, stint)) > 0;
   }
 
   private markTriggeredOnce(object: GameObject, index: number, stint?: number): void {
-    const zoneChangeCount = stint ?? object.zoneChangeCount ?? 0;
-    const once = object.triggeredOnce;
-    const current =
-      once !== undefined &&
-      once.turn === this.state.turn.number &&
-      once.zoneChangeCount === zoneChangeCount
-        ? once.indices
-        : [];
-    object.triggeredOnce = {
-      turn: this.state.turn.number,
-      zoneChangeCount,
-      indices: [...current, index],
-    };
+    // Straight to the journal, not through `Game.journal`: this runs inside
+    // `detectTriggers`' cache region, and nothing cached reads `triggered`
+    // entries (only this trigger scan does), so clearing the cache here
+    // would only make the rest of the scan recompute everything.
+    appendJournal(this.state, {
+      kind: "triggered",
+      player: object.controller,
+      object: object.id,
+      stint: stint ?? object.zoneChangeCount ?? 0,
+      ability: this.onceKey(object, index, stint),
+    });
+  }
+
+  /** Rule 603.2h: a triggered ability whose instruction is followed by "Do
+   * this only once each turn" (a top-level `may` with `oncePerTurn`) triggers
+   * only if its controller hasn't yet done it this turn — the `may`'s one
+   * mode chosen, which its resolution records under the ability's key. The
+   * `may` still asks again as it resolves, for a copy already on the stack. */
+  private didOnceThisTurn(
+    ability: TriggeredAbility,
+    sourceId: ObjectId,
+    index: number,
+    ref: PendingTrigger["grantedAbility"],
+  ): boolean {
+    const effect = ability.effect;
+    if (effect === null || effect.kind !== "may" || effect.oncePerTurn !== true) return false;
+    return this.modesChosenFor(this.triggerTurnKey(sourceId, index, ref, false), false).length > 0;
+  }
+
+  /** The journal's key for `object`'s triggered ability `index` in `stint`
+   * (its battlefield stint; see `triggeredOnceThisTurn`). */
+  private onceKey(object: GameObject, index: number, stint?: number): string {
+    return `${object.id}~${stint ?? object.zoneChangeCount ?? 0}#triggered:${index}`;
   }
 
   /**
@@ -30050,6 +30156,9 @@ export class Game {
     // enchanted player as it triggered (Trespasser's Curse: "whenever a
     // creature enchanted player controls enters, that player loses 1 life").
     if (player === undefined) player = departed?.attachedToPlayer ?? source.attachedToPlayer;
+    // The player a generic trigger's row names: who proliferated, the new
+    // monarch, the player who lost the game (trigger-events.ts).
+    if (player === undefined) player = triggerEventPlayer(event);
     if (
       sourceStint === undefined &&
       triggerStint === undefined &&
@@ -30375,15 +30484,10 @@ export class Game {
     if (spec.exactly !== undefined ? n !== spec.exactly : n < (spec.atLeast ?? 1)) return false;
     if (spec.includingThis === true && !counted.includes(self.id)) return false;
     if (spec.totalPower === undefined) return true;
-    // Each attacker as it was declared, this combat, in the journal; "for the
-    // first time each turn" asks that no earlier combat's declaration reached it.
+    // Each attacker as it was declared, this combat, in the journal ("for the
+    // first time each turn" is the timing wrapper's: `timingCount`).
     const combat = this.state.turn.combatPhases ?? 1;
-    if (powerAttackedWith(this.state, player, combat) < spec.totalPower.atLeast) return false;
-    if (spec.totalPower.firstTimeEachTurn !== true) return true;
-    for (let earlier = 1; earlier < combat; earlier += 1) {
-      if (powerAttackedWith(this.state, player, earlier) >= spec.totalPower.atLeast) return false;
-    }
-    return true;
+    return powerAttackedWith(this.state, player, combat) >= spec.totalPower.atLeast;
   }
 
   private batchedAttackers(
@@ -30500,14 +30604,190 @@ export class Game {
       .map(({ object }) => object);
   }
 
-  private triggerMatches(
+  /** Does `event` fire the trigger `spec` of `self`: its kind's own match,
+   * then its timing wrapper (`TriggerTiming`, theme 2's design note). */
+  private triggerMatches(spec: TriggerSpec, event: GameEvent, self: GameObject): boolean {
+    return this.triggerKindMatches(spec, event, self) && this.timingOk(spec, event, self);
+  }
+
+  /** The timing wrapper: `nthEachTurn` (`firstTimeEachTurn` is the first) —
+   * this is the Nth time this turn that this trigger's event, as the trigger
+   * reads it, has happened for the same subject. A kind `timingCount` can't
+   * count for never matches with it (test/trigger-timing.test.ts keeps every
+   * pool card off those). */
+  private timingOk(spec: TriggerSpec, event: GameEvent, self: GameObject): boolean {
+    const nth = spec.nthEachTurn ?? (spec.firstTimeEachTurn === true ? 1 : undefined);
+    if (nth === undefined) return true;
+    if (!timingCountable(spec)) return false;
+    const before = this.timingCount(spec, event, self);
+    return before !== undefined && before === nth - 1;
+  }
+
+  /**
+   * How many times this turn, before `event`, this trigger's event happened
+   * for the same subject as `event`'s — read from the journal, which already
+   * holds `event` (triggers are looked for in `emit`, right after
+   * `recordJournal`, or the act journaled itself first). `undefined`: a kind
+   * the wrapper can't count for.
+   *
+   * The subject is a player for a player's act (life gained or lost, a draw, a
+   * spell cast, a discard, a graveyard's owner, an attack declaration) and an
+   * object in its stint for an object's (it attacked, was targeted, became
+   * tapped or saddled, had counters put on it). The spec's own narrowing
+   * narrows what's counted (valiant's "you control", a `counter` kind, a
+   * cast's `filter`); a `draws` trigger's `filter` asks about this card only
+   * (Keranos: the first card drawn, if it's a land).
+   */
+  private timingCount(spec: TriggerSpec, event: GameEvent, self: GameObject): number | undefined {
+    const now = this.state.turn.number;
+    const count = (kind: JournalEntry["kind"], match: (e: JournalEntry) => boolean): number => {
+      let n = 0;
+      for (const e of this.state.journal?.entries ?? []) if (e.turn === now && e.kind === kind && match(e)) n += 1;
+      return n;
+    };
+    const stintOf = (id: ObjectId): number => this.state.objects[id]?.zoneChangeCount ?? 0;
+    switch (spec.on) {
+      case "gains-life":
+      case "loses-life": {
+        if (event.type !== "life-changed") return undefined;
+        return count(spec.on === "gains-life" ? "life-gained" : "life-lost", (e) => e.player === event.player) - 1;
+      }
+      case "draws":
+        return event.type === "card-drawn" ? count("card-drawn", (e) => e.player === event.player) - 1 : undefined;
+      case "cast-spell": {
+        // A copy isn't cast (rule 707.10): never counted, never the Nth.
+        if (event.type !== "spell-cast") return undefined;
+        const filter = spec.filter;
+        // With a filter the count is of matching spells: "your first
+        // enchantment spell each turn" can be your third spell. Earlier
+        // spells are asked the same question as this one, as they were cast.
+        if (filter === undefined) return event.spellsThisTurn === undefined ? undefined : event.spellsThisTurn - 1;
+        return (
+          (this.state.players[event.player]?.spellsCastThisTurnAs ?? []).filter(({ id, spell }) =>
+            matchesFilter(this.state, this.registry, id, filter, { you: self.controller, snapshot: spell }),
+          ).length - 1
+        );
+      }
+      case "becomes-target": {
+        if (event.type !== "object-targeted") return undefined;
+        const stint = stintOf(event.object);
+        return (
+          count(
+            "targeted",
+            (e) =>
+              e.object === event.object &&
+              e.stint === stint &&
+              (spec.byControllerOnly !== true || e.player === self.controller) &&
+              (spec.byOpponentOnly !== true || e.player !== self.controller) &&
+              (spec.spellOnly !== true || e.how === "spell") &&
+              (spec.abilityOnly !== true || e.how === "ability"),
+          ) - 1
+        );
+      }
+      case "attacks": {
+        // One entry per combat it attacked in, the whole declaration journaled
+        // before its first `attacker-declared`: this combat's is its own.
+        if (event.type !== "attacker-declared") return undefined;
+        const stint = stintOf(event.attacker);
+        return count("attacked", (e) => e.object === event.attacker && e.stint === stint) - 1;
+      }
+      case "becomes-saddled": {
+        if (event.type !== "became-saddled") return undefined;
+        const stint = stintOf(event.object);
+        return count("saddled", (e) => e.object === event.object && e.stint === stint) - 1;
+      }
+      case "becomes-tapped": {
+        if (event.type !== "permanent-tapped" || spec.batched === true) return undefined;
+        const stint = stintOf(event.object);
+        return count("tapped", (e) => e.object === event.object && e.stint === stint) - 1;
+      }
+      case "counters-put": {
+        if (event.type !== "counter-added" || spec.batched === true) return undefined;
+        const stint = stintOf(event.object);
+        return (
+          count(
+            "counters-put",
+            (e) =>
+              e.object === event.object &&
+              e.stint === stint &&
+              (spec.counter === undefined || e.counter === spec.counter) &&
+              (spec.byYou !== true || e.player === self.controller),
+          ) - 1
+        );
+      }
+      case "put-into-graveyard": {
+        if (event.type !== "cards-put-into-graveyard") return undefined;
+        const arrived = this.graveyardArrivals(spec, event.arrivals, self);
+        return this.graveyardArrivalsBefore(spec, event.arrivals, arrived, self);
+      }
+      case "discards":
+        return event.type === "cards-discarded" ? this.discardsBefore(spec, event.player, event.objects, self) : undefined;
+      case "attack-with": {
+        // An attack "with one or more creatures" is counted by combat: the
+        // earlier declarations of theirs this turn that would have fired it.
+        if (event.type !== "attackers-declared") return undefined;
+        if (spec.filter !== undefined || spec.eachOf !== undefined || spec.includingThis === true) return undefined;
+        const combat = this.state.turn.combatPhases ?? 1;
+        let n = 0;
+        for (let earlier = 1; earlier < combat; earlier += 1) {
+          const attacked = count("attacked", (e) => e.player === event.player && e.combat === earlier);
+          if (attacked === 0) continue;
+          const enough = spec.exactly !== undefined ? attacked === spec.exactly : attacked >= (spec.atLeast ?? 1);
+          const power =
+            spec.totalPower === undefined || powerAttackedWith(this.state, event.player, earlier) >= spec.totalPower.atLeast;
+          if (enough && power) n += 1;
+        }
+        return n;
+      }
+      default:
+        return undefined;
+    }
+  }
+
+  /** The objects of `event` a generic `{ on: "event" }` trigger's `who` and
+   * `filter` match, where its row names objects. */
+  private eventTriggerObjects(
+    spec: Extract<TriggerSpec, { on: "event" }>,
+    objects: readonly ObjectId[],
+    self: GameObject,
+  ): readonly ObjectId[] {
+    return objects.filter((id) => {
+      const object = this.state.objects[id];
+      if (object === undefined) return false;
+      // One that has left (a creature that connived as it last existed,
+      // rule 701.50b) is read as it last existed on the battlefield.
+      const departed = object.zone !== "battlefield" && object.lastKnown !== undefined;
+      return (
+        (spec.who === undefined || this.matchesWho(spec.who, id, self, departed)) &&
+        this.triggerFilterOk(spec.filter, id, self, departed)
+      );
+    });
+  }
+
+  /** A generic `{ on: "event" }` trigger (trigger-events.ts): the row's event,
+   * its `by`, and its subject — the objects, or the player — against `who`
+   * and `filter`. */
+  private eventTriggerMatches(spec: Extract<TriggerSpec, { on: "event" }>, event: GameEvent, self: GameObject): boolean {
+    const subjects = triggerEventSubjects(spec.event, event);
+    if (subjects === undefined) return false;
+    if (spec.by !== undefined) {
+      const by = triggerEventRow(spec.event).by?.(event as never);
+      if (by === undefined || !this.matchesWhoPlayer(spec.by, by, self)) return false;
+    }
+    if (subjects.objects !== undefined) return this.eventTriggerObjects(spec, subjects.objects, self).length > 0;
+    if (spec.filter !== undefined) return false;
+    if (spec.who === undefined || spec.who === "any") return true;
+    return subjects.player !== undefined && this.matchesWhoPlayer(spec.who, subjects.player, self);
+  }
+
+  private triggerKindMatches(
     spec: TriggerSpec,
     event: GameEvent,
     self: GameObject,
   ): boolean {
     switch (spec.on) {
-      case "predicate":
-        return spec.match(event);
+      case "event":
+        return this.eventTriggerMatches(spec, event, self);
       case "enters-battlefield":
         return (
           event.type === "permanent-entered-battlefield" &&
@@ -30541,8 +30821,6 @@ export class Game {
           this.matchesWho(spec.who, event.object, self, true) &&
           this.triggerFilterOk(spec.filter, event.object, self, true)
         );
-      case "forages":
-        return event.type === "foraged" && this.matchesWhoPlayer(spec.who, event.player, self);
       case "expend":
         return (
           event.type === "mana-expended" &&
@@ -30554,18 +30832,14 @@ export class Game {
         return (
           event.type === "life-changed" &&
           event.delta > 0 &&
-          this.matchesWhoPlayer(spec.who, event.player, self) &&
-          (spec.firstTimeEachTurn !== true ||
-            journalTotal(this.state, "life-gained", event.player, "amount") === event.delta)
+          this.matchesWhoPlayer(spec.who, event.player, self)
         );
       case "loses-life":
         return (
           event.type === "life-changed" &&
           event.delta < 0 &&
           this.matchesWhoPlayer(spec.who, event.player, self) &&
-          (spec.firstDuringTheirTurn !== true ||
-            (event.player === this.activePlayer &&
-              journalTotal(this.state, "life-lost", event.player, "amount") === -event.delta))
+          (spec.duringTheirTurn !== true || event.player === this.activePlayer)
         );
       case "counters-put":
         // "… or player": a player's counters, energy among them (rule 107.14).
@@ -30613,11 +30887,6 @@ export class Game {
           this.matchesWho(spec.who, event.object, self) &&
           this.triggerFilterOk(spec.filter, event.object, self)
         );
-      case "players-finish-voting":
-        // An "each player chooses" isn't a vote (rule 701.38 vs 101.4).
-        return event.type === "votes-finished" && event.choice !== true;
-      case "rolls-dice":
-        return event.type === "dice-rolled" && this.matchesWhoPlayer(spec.who, event.player, self);
       case "class-level-gained":
         return event.type === "class-level-gained" && event.level === spec.level && this.matchesWho(spec.who, event.object, self);
       case "door-unlocked":
@@ -30634,12 +30903,6 @@ export class Game {
           this.matchesWho(spec.who, event.object, self) &&
           this.triggerFilterOk(spec.filter, event.object, self)
         );
-      case "takes-initiative":
-        return event.type === "initiative-taken" && this.matchesWhoPlayer(spec.who, event.player, self);
-      case "ventures":
-        return event.type === "ventured" && this.matchesWhoPlayer(spec.who, event.player, self);
-      case "completes-dungeon":
-        return event.type === "dungeon-completed" && this.matchesWhoPlayer(spec.who, event.player, self);
       case "ring-tempts":
         // Rule 701.54d — once the choice is made, or found impossible.
         return (
@@ -30652,7 +30915,6 @@ export class Game {
         return (
           event.type === "card-drawn" &&
           this.matchesWhoPlayer(spec.who, event.player, self) &&
-          (spec.nthEachTurn === undefined || event.nthThisTurn === spec.nthEachTurn) &&
           (spec.exceptFirstInDrawStep !== true || event.firstInDrawStep !== true) &&
           // The source too, for "a card with **the chosen name**" (Booby
           // Trap: `chosenName` reads this permanent's).
@@ -30704,9 +30966,6 @@ export class Game {
           event.controller !== self.controller &&
           this.triggerFilterOk(spec.filter, event.object, self)
         );
-      case "player-loses-game":
-        // Rule 104.3: matched as they lose, before they leave (800.4a).
-        return event.type === "player-lost" && this.matchesWhoPlayer(spec.who, event.player, self);
       case "leaves-battlefield":
         // "Whenever one or more …": once, off the whole event.
         if (spec.batched === true) {
@@ -30737,9 +30996,7 @@ export class Game {
           return (
             by &&
             spec.player !== undefined &&
-            (spec.player === "any" || event.player === self.controller) &&
-            spec.firstTimeEachTurn !== true &&
-            spec.firstTimeEachTurnByAnyone !== true
+            (spec.player === "any" || event.player === self.controller)
           );
         }
         return (
@@ -30747,9 +31004,7 @@ export class Game {
           spec.playerOnly !== true &&
           !(spec.otherOnly === true && event.object === self.id) &&
           this.matchesWho(spec.who, event.object, self) &&
-          this.triggerFilterOk(spec.filter, event.object, self) &&
-          (spec.firstTimeEachTurn !== true || event.firstByPlayerThisTurn === true) &&
-          (spec.firstTimeEachTurnByAnyone !== true || event.firstThisTurn === true)
+          this.triggerFilterOk(spec.filter, event.object, self)
         );
       }
       case "attacks":
@@ -30770,7 +31025,6 @@ export class Game {
           (spec.attackedMonarch !== true ||
             (this.defenderKind(event.defender) === "player" && this.state.monarch === event.defender)) &&
           (spec.aloneAgainstDefender !== true || this.attackingAlone(event.attacker, event.defender)) &&
-          (spec.firstTimeEachTurn !== true || event.firstThisTurn === true) &&
           (spec.withGreaterPower !== true || this.attacksWithGreaterPower(event.attacker)) &&
           (spec.defenderLife === undefined ||
             this.defenderLifeRanks(spec.defenderLife, event.defender, self.controller))
@@ -30856,12 +31110,6 @@ export class Game {
           (spec.asItAttacks !== true || event.asItAttacks) &&
           this.matchesWho(spec.who, event.object, self)
         );
-      case "enlists":
-        return (
-          event.type === "creature-tapped-for" &&
-          event.as === "enlist" &&
-          this.matchesWho(spec.who, event.for, self)
-        );
       case "crews-or-saddles":
         return (
           event.type === "creature-tapped-for" &&
@@ -30873,22 +31121,9 @@ export class Game {
         return event.type === "spell-countered" && event.ability !== true && this.matchesWhoPlayer(spec.who, event.by, self);
       case "spell-countered":
         return event.type === "spell-countered" && event.castBy !== undefined && this.matchesWhoPlayer(spec.who, event.castBy, self);
-      case "becomes-monstrous":
-        return (
-          event.type === "became-monstrous" &&
-          this.matchesWho(spec.who, event.object, self) &&
-          this.triggerFilterOk(spec.filter, event.object, self)
-        );
-      case "becomes-renowned":
-        return (
-          event.type === "became-renowned" &&
-          this.matchesWho(spec.who, event.object, self) &&
-          this.triggerFilterOk(spec.filter, event.object, self)
-        );
       case "becomes-saddled":
         return (
           event.type === "became-saddled" &&
-          (spec.firstTimeEachTurn !== true || event.first) &&
           this.matchesWho(spec.who, event.object, self) &&
           this.triggerFilterOk(spec.filter, event.object, self)
         );
@@ -31006,7 +31241,7 @@ export class Game {
       case "put-into-graveyard": {
         if (event.type !== "cards-put-into-graveyard") return false;
         const arrived = this.graveyardArrivals(spec, event.arrivals, self);
-        return arrived.length > 0 && (spec.firstTimeEachTurn !== true || !this.reachedGraveyardEarlier(spec, event.arrivals, arrived, self));
+        return arrived.length > 0;
       }
       case "scries":
         return (
@@ -31026,14 +31261,6 @@ export class Game {
             (spec.who === "you" && event.player === self.controller) ||
             (spec.who === "opponent" && event.player !== self.controller))
         );
-      case "surveils":
-        return (
-          event.type === "scried" &&
-          event.mode === "surveil" &&
-          (spec.who === "any" ||
-            (spec.who === "you" && event.player === self.controller) ||
-            (spec.who === "opponent" && event.player !== self.controller))
-        );
       case "mills":
         return (
           event.type === "cards-milled" &&
@@ -31042,27 +31269,10 @@ export class Game {
             (spec.who === "opponent" && event.player !== self.controller)) &&
           this.milledMatching(spec, event.objects, self).length > 0
         );
-      case "searches-library":
-        return (
-          event.type === "library-searched" &&
-          // "Their library" (the rulings): never someone else's.
-          event.owner === event.player &&
-          (spec.who === "any" ||
-            (spec.who === "you" && event.player === self.controller) ||
-            (spec.who === "opponent" && event.player !== self.controller))
-        );
       case "clashes":
         return (
           event.type === "clashed" &&
           (spec.won !== true || event.won) &&
-          (spec.who === "any" ||
-            (spec.who === "you" && event.player === self.controller) ||
-            (spec.who === "opponent" && event.player !== self.controller))
-        );
-      case "wins-coin-flip":
-        return (
-          event.type === "coin-flipped" &&
-          event.won &&
           (spec.who === "any" ||
             (spec.who === "you" && event.player === self.controller) ||
             (spec.who === "opponent" && event.player !== self.controller))
@@ -31088,8 +31298,7 @@ export class Game {
             (spec.who === "you" && event.player === self.controller) ||
             (spec.who === "opponent" && event.player !== self.controller)) &&
           (spec.byOpponent !== true || (event.cause !== undefined && event.cause !== event.player)) &&
-          this.discardedMatching(spec, event.objects, self, event.unrevealed).length > 0 &&
-          (spec.firstTimeEachTurn !== true || this.firstMatchingDiscardThisTurn(spec, event.player, event.objects, self))
+          this.discardedMatching(spec, event.objects, self, event.unrevealed).length > 0
         );
       case "attack-with": {
         if (event.type !== "attackers-declared") return false;
@@ -31097,24 +31306,11 @@ export class Game {
         if (spec.who === "opponent" && event.player === self.controller) return false;
         return this.attackWithSatisfied(spec, event.player, event.attackers, self);
       }
-      case "fights":
-        return (
-          event.type === "creature-fought" &&
-          this.matchesWho(spec.who, event.object, self) &&
-          this.triggerFilterOk(spec.filter, event.object, self)
-        );
       case "becomes-tapped":
         return (
           event.type === "permanent-tapped" &&
-          (spec.firstTimeEachTurn !== true || event.firstThisTurn === true) &&
           (spec.notAttacking !== true || event.asAttacker !== true) &&
-          this.matchesWho(spec.who, event.object, self) &&
-          this.triggerFilterOk(spec.filter, event.object, self)
-        );
-      case "becomes-untapped":
-        return (
-          event.type === "permanent-untapped" &&
-          event.asItEntered !== true &&
+          (spec.by === undefined || (event.by !== undefined && this.matchesWhoPlayer(spec.by, event.by, self))) &&
           this.matchesWho(spec.who, event.object, self) &&
           this.triggerFilterOk(spec.filter, event.object, self)
         );
@@ -31124,7 +31320,9 @@ export class Game {
         // costs are paid (rules 602.2b, 601.2i) — a host sacrificed to pay them, or
         // an Equipment that was, equips nothing by then (the Illusionist's
         // Bracers rulings), unlike a dies trigger's look back.
-        if (event.type !== "ability-activated" || !event.onStack || event.ability === undefined) return false;
+        if (event.type !== "ability-activated") return false;
+        // A mana ability (rule 605.3b) only for one that says so (`orMana`).
+        if (event.onStack ? event.ability === undefined : spec.orMana !== true) return false;
         if (spec.sacrificedToActivate === true && event.sacrificedToActivate !== true) return false;
         if (spec.who !== "attached") {
           if (self.zone !== "battlefield") return false;
@@ -31152,6 +31350,7 @@ export class Game {
           if (
             spec.ninjutsu !== true &&
             spec.loyalty !== true &&
+            spec.removedAtLeast === undefined &&
             spec.exhaust !== true &&
             spec.powerUp !== true &&
             spec.xInCost !== true
@@ -31160,7 +31359,8 @@ export class Game {
           }
           // The ability as it was activated — a granted ninjutsu (Satoru
           // Umezawa's) included, through the stack object's grant.
-          const activated = this.state.objects[event.ability];
+          // A mana ability (`orMana`) has none, and is none of these.
+          const activated = event.ability === undefined ? undefined : this.state.objects[event.ability];
           if (activated === undefined) return false;
           const ability = this.stackAbilityOf(activated) as Partial<ActivatedAbility>;
           return (
@@ -31168,6 +31368,12 @@ export class Game {
             (spec.exhaust !== true || ability.exhaust === true) &&
             (spec.powerUp !== true || ability.powerUp === true) &&
             (spec.loyalty !== true || ability.loyaltyCost !== undefined) &&
+            (spec.removedAtLeast === undefined ||
+              (ability.loyaltyCost === "-x"
+                ? (activated.xValue ?? 0)
+                : typeof ability.loyaltyCost === "number"
+                  ? -ability.loyaltyCost
+                  : 0) >= spec.removedAtLeast) &&
             // "{X} in its activation cost": the mana symbol (as
             // `fireActivationWatchers` reads it).
             (spec.xInCost !== true || (ability.cost !== undefined && parseManaCost(ability.cost.mana).x > 0))
@@ -31212,7 +31418,7 @@ export class Game {
             copierMatches &&
             spec.from === undefined &&
             spec.notFrom === undefined &&
-            spec.firstEachTurn !== true &&
+            spec.firstTimeEachTurn !== true &&
             spec.nthEachTurn === undefined &&
             spec.noncreatureOnly !== true &&
             this.triggerFilterOk(spec.filter, event.copy, self)
@@ -31237,20 +31443,6 @@ export class Game {
         if (spec.from !== undefined && event.from !== spec.from) return false;
         if (spec.notFrom !== undefined && event.from === spec.notFrom) return false;
         if (!this.triggerFilterOk(spec.filter, event.object, self)) return false;
-        const nth = spec.firstEachTurn === true ? 1 : spec.nthEachTurn;
-        if (nth !== undefined) {
-          // With a filter the count is of matching spells: "your first
-          // enchantment spell each turn" can be your third spell. Earlier
-          // spells are asked the same question as this one.
-          const filter = spec.filter;
-          const count =
-            filter === undefined
-              ? event.spellsThisTurn
-              : (this.state.players[event.player]?.spellsCastThisTurnAs ?? []).filter(({ id, spell }) =>
-                  matchesFilter(this.state, this.registry, id, filter, { you: self.controller, snapshot: spell }),
-                ).length;
-          if (count !== nth) return false;
-        }
         if (spec.noncreatureOnly) {
           const castObject = this.state.objects[event.object];
           if (
@@ -31291,11 +31483,6 @@ export class Game {
           (spec.who === "any" || (spec.who === "you") === (event.player === self.controller)) &&
           !(spec.otherOnly === true && event.object === self.id)
         );
-      case "foretells":
-        return (
-          event.type === "card-foretold" &&
-          (spec.who === "any" || (spec.who === "you") === (event.player === self.controller))
-        );
       case "this-plotted":
         return event.type === "card-plotted" && event.object === self.id;
       case "haunted-dies": {
@@ -31312,10 +31499,6 @@ export class Game {
       }
       case "this-resolved-into-graveyard":
         return false;
-      case "evidence-collected":
-        return event.type === "evidence-collected" && event.player === self.controller;
-      case "discovers":
-        return event.type === "discovered" && event.player === self.controller;
       case "explores": {
         if (event.type !== "explored") return false;
         if (spec.revealed === "land" && !event.land) return false;
@@ -31330,11 +31513,6 @@ export class Game {
           ...(here ? {} : { lastKnown: true }),
         });
       }
-      case "crime-committed":
-        return (
-          event.type === "crime-committed" &&
-          (spec.who === "you" ? event.player === self.controller : event.player !== self.controller)
-        );
       default:
         return false;
     }
@@ -31402,6 +31580,9 @@ export class Game {
    * an intervening-if is asked about as the ability triggers (rule 603.4) —
    * the same object it's asked about again on resolution. */
   private eventTriggerObject(trigger: TriggerSpec, event: GameEvent): ObjectId | undefined {
+    // A generic trigger's object is its row's (one occurrence of a
+    // several-object event is queued with its own, in `detectTriggers`).
+    if (trigger.on === "event") return triggerEventObject(event);
     // "That creature": what the Equipment is now attached to.
     if (trigger.on === "becomes-attached") {
       return event.type === "permanent-attached" ? event.target : undefined;
@@ -32142,10 +32323,7 @@ export class Game {
       const ever = modal.notChosenBefore === true;
       const turnKey =
         modal.notChosenThisTurn === true || ever ? this.pendingTriggerTurnKey(trigger) : undefined;
-      const chosenBefore =
-        turnKey === undefined
-          ? []
-          : ((ever ? this.state.modesChosenEver : this.state.modesChosenThisTurn)?.[turnKey] ?? []);
+      const chosenBefore = turnKey === undefined ? [] : this.modesChosenFor(turnKey, ever);
       const offered = modal.modes.flatMap((mode, i) =>
         !chosenBefore.includes(i) &&
         (mode.targets ?? []).every(
@@ -33198,7 +33376,7 @@ export class Game {
       if (condition.kind === "resolved-this-turn") return resolutionCount === condition.n;
       if (condition.kind === "activated-this-turn") {
         const key = opts.abilityKey;
-        return key !== undefined && (this.state.abilityActivationsThisTurn?.[key] ?? 0) >= condition.atLeast;
+        return key !== undefined && abilityCountThisTurn(this.state, "activated", key) >= condition.atLeast;
       }
       // "Each player who doesn't have max speed" (Outpace Oblivion): that
       // player's speed, 0 for none (rule 702.179f).
@@ -33398,8 +33576,8 @@ export class Game {
         ? { enteredTogether: refs.enteredTogether.map(({ object, count }) => ({ object, count })) }
         : {}),
       // "Those creatures": whichever batch this trigger fired on.
-      ...((refs.attackedTogether ?? refs.enteredTogether ?? refs.arrivedTogether) !== undefined
-        ? { triggerBatch: refs.attackedTogether ?? refs.enteredTogether ?? refs.arrivedTogether }
+      ...((refs.attackedTogether ?? refs.enteredTogether ?? refs.arrivedTogether ?? refs.dealtTogether) !== undefined
+        ? { triggerBatch: refs.attackedTogether ?? refs.enteredTogether ?? refs.arrivedTogether ?? refs.dealtTogether }
         : {}),
       decisionPending: () => this.decisionOutstanding(),
       parkedCount: () => this.state.suspendedResolutions.length,
@@ -34027,14 +34205,11 @@ export class Game {
         // Flowers): recorded only when some was added — an amount of 0 adds
         // no mana (rule 107.1b's Viridian Joiner).
         const key = opts.abilityKey;
-        if (spec?.marksAbilityDone === true && amount > 0 && key !== undefined) {
-          const done = (this.state.abilitiesDoneThisTurn ??= []);
-          if (!done.includes(key)) done.push(key);
-        }
+        if (spec?.marksAbilityDone === true && amount > 0 && key !== undefined) this.markDone(key, controller);
       },
       tapPermanent: (target, doesntUntapNext, onlyDoesntUntap, doesntUntapSteps, untapStepOf) => {
         if (doesntUntapNext !== true || target.kind !== "object") {
-          this.setTapped(target, true);
+          this.setTapped(target, true, controller);
           return;
         }
         if (this.state.objects[target.object]?.zone !== "battlefield") return;
@@ -34042,7 +34217,7 @@ export class Game {
         // by — one token of a stack, not the rest. "Doesn't untap" alone
         // leaves it as it is.
         const id = this.splitOneFromStack(target.object);
-        if (onlyDoesntUntap !== true) this.setTapped({ kind: "object", object: id }, true);
+        if (onlyDoesntUntap !== true) this.setTapped({ kind: "object", object: id }, true, controller);
         this.holdThroughUntapSteps(this.state.objects[id], doesntUntapSteps ?? 1, untapStepOf);
       },
       untapPermanent: (target) => this.setTapped(target, false),
@@ -34528,6 +34703,9 @@ export class Game {
         if (airbend === true && exiled?.zone === "exile" && exiled.zoneChangeCount !== before && !exiled.isToken) {
           exiled.airbended = true;
         }
+        // "Whenever you airbend" (rule 701.65b) — even if it couldn't be
+        // exiled (the Avatar Aang ruling).
+        if (airbend === true) this.emit({ type: "bent", player: controller, how: "air" });
         // "Exile it with this" (rule 607.2a): linked to the stint the
         // resolving ability refers to, and counted by it for good (the
         // Colfenor's Urn ruling: "over the course of the entire game").
@@ -35549,6 +35727,9 @@ export class Game {
         this.doublePtAll(controller, filter, lastingHere(duration), powerOnly, exceptSource ? source : undefined),
       doubleCountersAll: (filter, counterKind) =>
         this.doubleCountersAll(controller, filter, counterKind),
+      connived: (object, player, nonland) => this.emit({ type: "connived", object, player, nonland }),
+      conniveDrawsFirst: (player) => this.activeStaticsOf(player, (a) => a.conniveDrawsFirst === true).length,
+      earthbent: () => this.emit({ type: "bent", player: controller, how: "earth" }),
       addCounter: (target, counter, amount, by, training) =>
         this.addCounter(target, counter, amount, true, by ?? controller, training),
       amass: (amount, creatureType, onto, player) => this.amass(player ?? controller, amount, creatureType, source, x, onto),
@@ -36914,9 +37095,7 @@ export class Game {
       },
       markAbilityDone: () => {
         const key = opts.abilityKey;
-        if (key === undefined) return;
-        const done = (this.state.abilitiesDoneThisTurn ??= []);
-        if (!done.includes(key)) done.push(key);
+        if (key !== undefined) this.markDone(key, controller);
       },
       castSince: (cards, since, by) =>
         eventLogSince(this.state, since).some(
@@ -37525,7 +37704,7 @@ export class Game {
           const object = this.state.objects[id];
           if (!object.tapped && !(doesntUntapNext === true && onlyDoesntUntap === true)) {
             object.tapped = true;
-            this.emit({ type: "permanent-tapped", object: id });
+            this.emit({ type: "permanent-tapped", object: id, by: controller });
           }
           // A stack matched whole: every token in it skips the untap.
           if (doesntUntapNext === true) {
@@ -37810,8 +37989,11 @@ export class Game {
       },
       transform: (target, chosenPlayer) => {
         const t = this.splitTargetRef(target);
-        if (t.kind !== "object" || !this.effectCanTransform(t.object, source, opts.transformSince)) return;
+        if (t.kind !== "object" || !this.effectCanTransform(t.object, source, opts.transformSince)) return false;
+        const before = this.state.objects[t.object]?.transformedAtSeq;
         this.transformPermanent(t.object, chosenPlayer);
+        const after = this.state.objects[t.object]?.transformedAtSeq;
+        return after !== undefined && after !== before;
       },
       transformChoice: (target) => {
         if (target.kind !== "object" || !this.effectCanTransform(target.object, source, opts.transformSince)) return null;
@@ -41415,11 +41597,11 @@ export class Game {
 
   /** Taps what {@link tapCostPicks} chose, peeling one token off a stack for
    * each time its id appears. */
-  private payTapCost(picked: readonly ObjectId[]): ObjectId[] {
+  private payTapCost(picked: readonly ObjectId[], by: PlayerId): ObjectId[] {
     return picked.map((chosen) => {
       const id = this.splitOneFromStack(chosen);
       this.state.objects[id].tapped = true;
-      this.emit({ type: "permanent-tapped", object: id });
+      this.emit({ type: "permanent-tapped", object: id, by });
       return id;
     });
   }
@@ -44622,15 +44804,13 @@ export class Game {
   }
 
   /** `id` becomes saddled until end of turn (rule 702.171b) — only a
-   * permanent can — and its `becomes-saddled` triggers fire, `first` when it
-   * wasn't saddled already. */
+   * permanent can — and its `becomes-saddled` triggers fire. */
   private becomeSaddled(id: ObjectId): void {
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "battlefield") return;
-    const first = object.saddled !== true;
     object.saddled = true;
-    invalidateComputedCache();
-    this.emit({ type: "became-saddled", object: id, first });
+    this.journal({ kind: "saddled", player: object.controller, object: id, stint: object.zoneChangeCount ?? 0 });
+    this.emit({ type: "became-saddled", object: id });
   }
 
   /** The creatures tapped to pay `mount`'s saddle cost saddle it (rule
@@ -46937,7 +47117,7 @@ export class Game {
     );
   }
 
-  private setTapped(target: TargetRef, tapped: boolean): void {
+  private setTapped(target: TargetRef, tapped: boolean, by?: PlayerId): void {
     if (target.kind !== "object") return;
     const before = this.state.objects[target.object];
     if (before === undefined || before.zone !== "battlefield") return;
@@ -46951,7 +47131,7 @@ export class Game {
       return;
     }
     this.state.objects[id].tapped = true;
-    this.emit({ type: "permanent-tapped", object: id });
+    this.emit({ type: "permanent-tapped", object: id, ...(by !== undefined ? { by } : {}) });
   }
 
   /** `split: false` (destroy-*all* draining `pendingDestruction`) hits the
@@ -47498,6 +47678,9 @@ export class Game {
         }
       }
     });
+    // "Whenever you airbend" (rule 701.65b) — once the instruction is
+    // done, even if nothing could be exiled (the Avatar Aang ruling).
+    if (airbend) this.emit({ type: "bent", player: you, how: "air" });
   }
 
   private returnToHandAllByEffect(you: PlayerId, filter: CardFilter, x = 0, source?: ObjectId): void {
@@ -49902,6 +50085,9 @@ export class Game {
         });
         return;
       }
+      case "bent":
+        add({ kind: "bent", player: event.player, how: event.how });
+        return;
       case "scried":
         add({ kind: "scried", player: event.player, how: event.mode });
         return;
@@ -53591,7 +53777,12 @@ export class Game {
     for (const owed of batch.damageTo.values()) {
       this.queueTrigger(
         owed.ability,
-        { ...owed.trigger, triggerValue: owed.perEvent ? owed.players.size : owed.amount },
+        {
+          ...owed.trigger,
+          triggerValue: owed.perEvent ? owed.players.size : owed.amount,
+          // "Tap those creatures" (Tamiyo, Upriser Crowned): the sources.
+          lastKnownRefs: { ...(owed.trigger.lastKnownRefs ?? {}), dealtTogether: owed.sources },
+        },
         owed.multiplier,
       );
     }
@@ -55641,7 +55832,6 @@ export class Game {
       type: "card-drawn",
       player,
       object: id,
-      nthThisTurn: nth,
       ...(firstInDrawStep ? { firstInDrawStep: true } : {}),
     });
     // Keranos's "reveal the first card you draw on each of your turns".
@@ -57358,7 +57548,6 @@ export class Game {
     delete object.attackedPlayersThisTurn;
     delete object.attackedOnTurns;
     delete object.attackedBattleThisTurn;
-    delete object.tappedOnTurn;
     delete object.lastAttack;
     delete object.mustAttackPlayer;
     delete object.mustAttackPlayerThisCombat;
@@ -57665,10 +57854,9 @@ export class Game {
     // Likewise a delayed flicker return's link (Norin the Wary, rule 610.3).
     object.flickerLink = undefined;
     object.entersWithCounters = undefined;
-    // Its once-a-turn and exhaust abilities: the permanent that comes back
-    // is a new object that has used neither (rule 400.7).
-    object.abilitiesUsedThisTurn = undefined;
-    object.grantedUsedThisTurn = undefined;
+    // Its exhaust abilities: the permanent that comes back is a new object
+    // that has used none (rule 400.7). Its once-a-turn ones are the journal's,
+    // keyed by stint.
     object.chosenExiledCard = undefined;
     object.exhaustedAbilities = undefined;
     object.overloaded = undefined;
@@ -58184,20 +58372,19 @@ export class Game {
    */
   /** The cards of a `cards-discarded` that a `discards` trigger's `filter`
    * matches, as they are in the graveyard (from the watcher's side). */
-  /** Whether `objects`, just discarded by `player`, are the first cards
-   * matching `spec`'s filter they've discarded this turn — the turn's
-   * history (already holding this discard) has no earlier match. */
-  private firstMatchingDiscardThisTurn(
+  /** How many cards matching `spec`'s filter `player` discarded this turn
+   * before `objects` (this discard, whose entries are the journal's last): the
+   * timing wrapper's count for a `discards` trigger. A card discarded,
+   * returned and discarded again this turn is in the journal twice. */
+  private discardsBefore(
     spec: Extract<TriggerSpec, { on: "discards" }>,
     player: PlayerId,
     objects: readonly ObjectId[],
     self: GameObject,
-  ): boolean {
-    // This discard's entries are the last ones; a card discarded, returned
-    // and discarded again this turn is in the history twice.
+  ): number {
     const all = entriesThisTurn(this.state, "discarded").flatMap((e) => (e.player === player && e.object !== undefined ? [e.object] : []));
     const earlier = all.slice(0, Math.max(0, all.length - objects.length));
-    return this.discardedMatching(spec, earlier, self).length === 0;
+    return this.discardedMatching(spec, earlier, self).length;
   }
 
   /** The milled cards matching a `mills` trigger's filter, each read where
@@ -58232,46 +58419,30 @@ export class Game {
     );
   }
 
-  /** Whether a card matching `spec`'s filter reached the graveyard of an
-   * owner of `arrived` earlier this turn than this move (`arrivals`): the
-   * turn's `descended` history, less this move's own entries (recorded just
-   * before triggers are looked for). */
-  private reachedGraveyardEarlier(
+  /** How many cards matching `spec` (its filter, `from`, `notFrom`) reached
+   * the graveyard of an owner of `arrived` earlier this turn than this move
+   * (`arrivals`, already journaled, each in the stint it arrived in): the
+   * timing wrapper's count for a `put-into-graveyard` trigger. */
+  private graveyardArrivalsBefore(
     spec: Extract<TriggerSpec, { on: "put-into-graveyard" }>,
     arrivals: readonly { readonly object: ObjectId; readonly from: ZoneType }[],
     arrived: readonly ObjectId[],
     self: GameObject,
-  ): boolean {
+  ): number {
     const owners = new Set(arrived.map((id) => this.state.objects[id]?.owner));
-    for (const owner of owners) {
-      if (owner === undefined) continue;
-      // This move's own arrivals are in the journal already, each in the
-      // stint it arrived in.
-      const thisMove = new Set(arrivals.map(({ object: id }) => id));
-      const earlier = journalEntries(
-        journalReader(this.state, this.registry),
-        JOURNAL_VIEWS.descended,
-        [owner],
-        "this-turn",
-        owner,
-      ).filter(
-        (e) =>
-          e.object !== undefined &&
-          !(thisMove.has(e.object) && e.arrived === this.state.objects[e.object]?.zoneChangeCount),
-      );
-      if (
-        earlier.some(
-          ({ object: id }) =>
-            id !== undefined &&
-            this.state.objects[id] !== undefined &&
-            (spec.filter === undefined ||
-              matchesFilter(this.state, this.registry, id, spec.filter, { you: self.controller })),
-        )
-      ) {
-        return true;
-      }
+    const thisMove = new Set(arrivals.map(({ object: id }) => id));
+    let n = 0;
+    for (const e of entriesThisTurn(this.state, "to-graveyard")) {
+      const id = e.object;
+      if (id === undefined || e.player === undefined || !owners.has(e.player)) continue;
+      if (thisMove.has(id) && e.arrived === this.state.objects[id]?.zoneChangeCount) continue;
+      if (spec.from !== undefined && e.from !== spec.from) continue;
+      if (spec.notFrom !== undefined && e.from === spec.notFrom) continue;
+      if (this.state.objects[id] === undefined) continue;
+      if (spec.filter !== undefined && !matchesFilter(this.state, this.registry, id, spec.filter, { you: self.controller })) continue;
+      n += e.count ?? 1;
     }
-    return false;
+    return n;
   }
 
   private graveyardArrivals(
@@ -58721,11 +58892,6 @@ export class Game {
       // is holding them together: `becomes-tapped`'s `batched`.
       if (!this.tapBatchHeld && seq !== this.lastTapSeq + 1) this.tapBatchFired.clear();
       this.lastTapSeq = seq;
-      const tapped = this.state.objects[full.object];
-      if (tapped !== undefined && tapped.tappedOnTurn !== this.state.turn.number) {
-        tapped.tappedOnTurn = this.state.turn.number;
-        full = { ...full, firstThisTurn: true };
-      }
     }
     // Each death has its own events: this one only asks the triggers.
     if (full.type !== "permanents-died" && full.type !== "permanents-left") this.state.eventLog.push(full);

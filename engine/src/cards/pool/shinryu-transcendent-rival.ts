@@ -27,7 +27,7 @@ export default defineCard({
   choosePlayerOnTransform: "opponent",
   triggered: [
     {
-      trigger: { on: "player-loses-game", who: "chosen-player" },
+      trigger: { on: "event", event: "loses-game", who: "chosen-player" },
       targets: [],
       effect: { kind: "win-game" },
       resolve: null,

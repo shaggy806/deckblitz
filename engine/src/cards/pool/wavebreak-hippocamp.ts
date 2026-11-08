@@ -16,7 +16,7 @@ export default defineCard({
   text: TEXT,
   triggered: [
     {
-      trigger: { on: "cast-spell", who: "you", firstEachTurn: true },
+      trigger: { on: "cast-spell", who: "you", firstTimeEachTurn: true },
       condition: { kind: "not", of: { kind: "your-turn" } },
       targets: [],
       effect: { kind: "draw", amount: 1 },

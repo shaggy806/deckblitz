@@ -24,7 +24,7 @@ export default defineCard({
   ],
   triggered: [
     {
-      trigger: { on: "crime-committed", who: "you" },
+      trigger: { on: "event", event: "commits-crime", who: "you" },
       targets: [],
       effect: { kind: "create-token", token: "Mercenary Token", count: 1 },
       resolve: null,

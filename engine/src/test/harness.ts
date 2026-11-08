@@ -431,3 +431,18 @@ export function setTurnTotal(state: GameState, player: PlayerId, kind: TurnTotal
 export function diedThisTurn(game: Game, players?: readonly PlayerId[]): number {
   return journalCount(game.state, game.registry, players ?? game.state.turnOrder, "died", undefined, A);
 }
+
+/** How many times this turn the abilities of `id` with a per-turn limit
+ * ("activate only once each turn", rule 602.5b) were activated, in the stint
+ * it's in now: the journal's `activated` entries keyed for those limits. */
+export function limitedActivations(game: Game, id: ObjectId): number {
+  const stint = game.state.objects[id]?.zoneChangeCount ?? 0;
+  return (game.state.journal?.entries ?? []).filter(
+    (e) =>
+      e.turn === game.state.turn.number &&
+      e.kind === "activated" &&
+      e.object === id &&
+      e.stint === stint &&
+      e.ability !== undefined,
+  ).length;
+}

@@ -26,7 +26,7 @@ export default defineCard({
   ],
   triggered: [
     {
-      trigger: { on: "becomes-monstrous", who: "self" },
+      trigger: { on: "event", event: "becomes-monstrous", who: "self" },
       targets: [],
       effect: { kind: "exile-all", filter: { typesAnyOf: ["artifact", "enchantment"] } },
       resolve: null,

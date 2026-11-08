@@ -25,7 +25,7 @@ export default defineCard({
           {
             kind: "delayed-trigger",
             at: {
-              whenever: { on: "becomes-untapped", who: "self" },
+              whenever: { on: "event", event: "becomes-untapped", who: "self" },
               watching: "source",
               until: "permanent",
               once: true,

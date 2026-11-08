@@ -20,7 +20,7 @@ export default defineCard({
   ],
   triggered: [
     {
-      trigger: { on: "foretells", who: "you" },
+      trigger: { on: "event", event: "foretells", who: "you" },
       targets: [],
       effect: { kind: "modify-pt", target: "source", power: 2, toughness: 0, duration: "end-of-turn" },
       resolve: null,

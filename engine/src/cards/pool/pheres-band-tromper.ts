@@ -13,7 +13,7 @@ export default defineCard({
   text: TEXT,
   triggered: [
     {
-      trigger: { on: "becomes-untapped", who: "self" },
+      trigger: { on: "event", event: "becomes-untapped", who: "self" },
       targets: [],
       effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
       resolve: null,

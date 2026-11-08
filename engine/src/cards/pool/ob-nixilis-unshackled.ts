@@ -19,7 +19,7 @@ export default defineCard({
   text: `Flying, trample\n${SEARCH}\n${DIES}`,
   triggered: [
     {
-      trigger: { on: "searches-library", who: "opponent" },
+      trigger: { on: "event", event: "searches-library", who: "opponent" },
       targets: [],
       effect: {
         kind: "sequence",

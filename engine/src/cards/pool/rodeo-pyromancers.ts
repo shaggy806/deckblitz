@@ -11,7 +11,7 @@ export default defineCard({
   text: "Whenever you cast your first spell each turn, add {R}{R}.",
   triggered: [
     {
-      trigger: { on: "cast-spell", who: "you", firstEachTurn: true },
+      trigger: { on: "cast-spell", who: "you", firstTimeEachTurn: true },
       targets: [],
       effect: { kind: "add-mana", mana: "R", amount: 2 },
       resolve: null,

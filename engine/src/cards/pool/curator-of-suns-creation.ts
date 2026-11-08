@@ -11,7 +11,7 @@ export default defineCard({
   text: "Whenever you discover, discover again for the same value. This ability triggers only once each turn.",
   triggered: [
     {
-      trigger: { on: "discovers", who: "you" },
+      trigger: { on: "event", event: "discovers", who: "you" },
       targets: [],
       effect: { kind: "discover", amount: { triggerValue: true } },
       resolve: null,

@@ -12,7 +12,7 @@ export default defineCard({
   text: "Flying\nInspired — Whenever this creature becomes untapped, each opponent discards a card, then each opponent mills a card.",
   triggered: [
     {
-      trigger: { on: "becomes-untapped", who: "self" },
+      trigger: { on: "event", event: "becomes-untapped", who: "self" },
       targets: [],
       effect: {
         kind: "sequence",

@@ -24,7 +24,7 @@ export default defineCard({
       text: ENTER_TEXT,
     },
     {
-      trigger: { on: "surveils", who: "you" },
+      trigger: { on: "event", event: "surveils", who: "you" },
       targets: [],
       effect: { kind: "return-to-hand", target: "source" },
       resolve: null,

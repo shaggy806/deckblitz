@@ -26,7 +26,7 @@ export default defineCard({
       // crime is committed — sacrificed to pay that spell's cost counts (the
       // ruling). {B} is paid as it resolves (the ruling).
       fromGraveyard: true,
-      trigger: { on: "crime-committed", who: "you" },
+      trigger: { on: "event", event: "commits-crime", who: "you" },
       targets: [],
       effect: {
         kind: "may",

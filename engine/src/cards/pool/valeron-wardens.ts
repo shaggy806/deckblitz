@@ -21,7 +21,7 @@ export default defineCard({
       text: "Renown 2 (When this creature deals combat damage to a player, if it isn't renowned, put two +1/+1 counters on it and it becomes renowned.)",
     },
     {
-      trigger: { on: "becomes-renowned", who: "you-control", filter: { type: "creature" } },
+      trigger: { on: "event", event: "becomes-renowned", who: "you-control", filter: { type: "creature" } },
       targets: [],
       effect: { kind: "draw", amount: 1 },
       resolve: null,

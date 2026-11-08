@@ -30,7 +30,7 @@ export default defineCard({
   ],
   triggered: [
     {
-      trigger: { on: "becomes-monstrous", who: "self" },
+      trigger: { on: "event", event: "becomes-monstrous", who: "self" },
       targets: [{ kind: "any-number", of: "creature", max: { triggerValue: true } }],
       effect: {
         kind: "for-each-target",

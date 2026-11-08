@@ -29,7 +29,7 @@ export default defineCard({
       text: ENRAGE_TEXT,
     },
     {
-      trigger: { on: "rolls-dice", who: "you" },
+      trigger: { on: "event", event: "rolls-dice", who: "you" },
       targets: [],
       effect: {
         kind: "may",

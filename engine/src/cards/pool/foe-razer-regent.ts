@@ -35,7 +35,7 @@ export default defineCard({
       text: ENTER_TEXT,
     },
     {
-      trigger: { on: "fights", who: "you-control" },
+      trigger: { on: "event", event: "fights", who: "you-control" },
       targets: [],
       effect: {
         kind: "delayed-trigger",

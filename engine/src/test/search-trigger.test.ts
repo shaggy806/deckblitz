@@ -1,5 +1,5 @@
 /**
- * `{ on: "searches-library" }` (rule 701.23): a player searching their own
+ * `{ on: "event", event: "searches-library" }` (rule 701.23): a player searching their own
  * library — Archivist of Oghma, Wan Shi Tong, Librarian, Ob Nixilis, Unshackled.
  */
 import { describe, expect, it } from "vitest";

@@ -14,7 +14,7 @@ export default defineCard({
   text: "Flying\nWhenever you commit a crime, each opponent loses 1 life and you gain 1 life. This ability triggers only once each turn. (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)",
   triggered: [
     {
-      trigger: { on: "crime-committed", who: "you" },
+      trigger: { on: "event", event: "commits-crime", who: "you" },
       targets: [],
       effect: {
         kind: "sequence",

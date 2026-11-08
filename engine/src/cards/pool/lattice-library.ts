@@ -40,7 +40,7 @@ export default defineCard({
       text: TOKEN_TEXT,
     },
     {
-      trigger: { on: "cast-spell", who: "you", firstEachTurn: true, filter: { xInManaCost: true } },
+      trigger: { on: "cast-spell", who: "you", firstTimeEachTurn: true, filter: { xInManaCost: true } },
       targets: [],
       effect: FRACTAL,
       resolve: null,

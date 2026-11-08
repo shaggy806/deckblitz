@@ -212,11 +212,38 @@ export type GameEvent =
     })
   | (Base & {
       /** A permanent became saddled (rule 702.171b — the `become-saddled`
-       * effect). `first` when it wasn't saddled already: "becomes saddled for
-       * the first time each turn" (Stubborn Burrowfiend). */
+       * effect). "For the first time each turn" reads the journal. */
       readonly type: "became-saddled";
       readonly object: ObjectId;
-      readonly first: boolean;
+    })
+  | (Base & {
+      /** A Vehicle became crewed (rule 702.122c): its crew ability resolved.
+       * `crew`: the creatures tapped to pay its cost, as they were tapped. */
+      readonly type: "became-crewed";
+      readonly object: ObjectId;
+      readonly player: PlayerId;
+      readonly crew: readonly ObjectId[];
+    })
+  | (Base & {
+      /** `player` bent — waterbent (paid a waterbend cost, rule 701.67c),
+       * earthbent (701.66b), firebent (a firebending ability resolved,
+       * 702.189b) or airbent (carried out an instruction to airbend,
+       * 701.65b — even one that could exile nothing, the Avatar Aang
+       * ruling). */
+      readonly type: "bent";
+      readonly player: PlayerId;
+      readonly how: "water" | "earth" | "fire" | "air";
+    })
+  | (Base & {
+      /** `object` connived (rule 701.50a), under `player`, whether or not
+       * any card was drawn or discarded (701.50c); `nonland` how many nonland
+       * cards were discarded. Emitted after the counters, so "whenever a
+       * creature you control connives, put a +1/+1 counter on it" sees it
+       * still there. */
+      readonly type: "connived";
+      readonly object: ObjectId;
+      readonly player: PlayerId;
+      readonly nonland: number;
     })
   | (Base & {
       /** The game became day or night (rule 731 — ROADMAP Phase 10b).
@@ -458,9 +485,6 @@ export type GameEvent =
       readonly type: "card-drawn";
       readonly player: PlayerId;
       readonly object: ObjectId;
-      /** Which card of the turn this is for that player — `2` for their
-       * second draw ("whenever you draw your second card each turn"). */
-      readonly nthThisTurn?: number;
       /** The first card they drew in their own draw step (Xyris's "except
        * the first one they draw in each of their draw steps"). */
       readonly firstInDrawStep?: true;
@@ -571,8 +595,10 @@ export type GameEvent =
   | (Base & {
       readonly type: "permanent-tapped";
       readonly object: ObjectId;
-      /** The first time this object became tapped this turn (`Game.emit` says). */
-      readonly firstThisTurn?: true;
+      /** Who tapped it: the controller of the spell or ability whose effect
+       * or cost did, the attacking player for an attack (508.1f). Absent for
+       * a tapping no player did (an untap-step rule never taps). */
+      readonly by?: PlayerId;
       /** Tapped by being declared as an attacker (rule 508.1f). */
       readonly asAttacker?: true;
     })
@@ -780,14 +806,6 @@ export type GameEvent =
        * for an ability. What ward counters (rule 702.21a). */
       readonly stackObject: ObjectId;
       readonly bySpell: boolean;
-      /** The first time this turn a spell or ability `by` controls has
-       * targeted this permanent (this battlefield stint) — valiant's "for
-       * the first time each turn". */
-      readonly firstByPlayerThisTurn?: true;
-      /** The first time this turn any spell or ability, anyone's, has
-       * targeted this permanent (this battlefield stint) — Angelic Cub's "for
-       * the first time each turn". */
-      readonly firstThisTurn?: true;
     })
   | (Base & {
       /**
@@ -967,9 +985,6 @@ export type GameEvent =
       readonly attacker: ObjectId;
       /** A player, or an opponent's planeswalker (rule 508.1). */
       readonly defender: PlayerId | ObjectId;
-      /** It hadn't been declared an attacker yet this turn — "attacks for
-       * the first time each turn" (Scourge of the Throne). */
-      readonly firstThisTurn?: true;
     })
   | (Base & {
       /** A creature was put onto the battlefield attacking `defender` (rule

@@ -18,7 +18,7 @@ export default defineCard({
   static: [{ affects: { scope: "self" }, protection: { colors: ["R"] }, text: "Protection from red" }],
   triggered: [
     {
-      trigger: { on: "cast-spell", who: "you", firstEachTurn: true },
+      trigger: { on: "cast-spell", who: "you", firstTimeEachTurn: true },
       whileCondition: { kind: "not", of: { kind: "your-turn" } },
       targets: [],
       effect: {

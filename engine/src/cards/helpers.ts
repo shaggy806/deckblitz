@@ -1496,6 +1496,7 @@ export const firebending = (amount: EffectAmount, text?: string): TriggeredAbili
   targets: [],
   effect: { kind: "add-mana", mana: "R", amount, untilEndOfCombat: true },
   resolve: null,
+  firebending: true,
   text: text ?? `Firebending ${typeof amount === "number" ? amount : "X"}`,
 });
 

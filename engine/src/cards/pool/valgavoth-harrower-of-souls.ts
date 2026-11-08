@@ -3,7 +3,7 @@ import { ward } from "../helpers.js";
 
 // "Ward—Pay 2 life." is the `ward` helper's triggered ability (rule 702.21a).
 // "For the first time during each of their turns" is the `loses-life`
-// trigger's `firstDuringTheirTurn`: the opponent must be the active player,
+// trigger's `duringTheirTurn` with `firstTimeEachTurn`: the opponent must be the active player,
 // and this loss must be the first life they've lost this turn — one earlier
 // in the turn, even before Valgavoth arrived, uses it up.
 const LOSE_TEXT =
@@ -24,7 +24,7 @@ export default defineCard({
   triggered: [
     ward({ payLife: 2 }),
     {
-      trigger: { on: "loses-life", who: "opponent", firstDuringTheirTurn: true },
+      trigger: { on: "loses-life", who: "opponent", duringTheirTurn: true, firstTimeEachTurn: true },
       targets: [],
       effect: {
         kind: "sequence",

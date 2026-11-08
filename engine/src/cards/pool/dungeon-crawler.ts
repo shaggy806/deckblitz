@@ -23,7 +23,7 @@ export default defineCard({
   triggered: [
     {
       fromGraveyard: true,
-      trigger: { on: "completes-dungeon", who: "you" },
+      trigger: { on: "event", event: "completes-dungeon", who: "you" },
       targets: [],
       effect: {
         kind: "may",

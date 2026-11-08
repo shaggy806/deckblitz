@@ -52,7 +52,14 @@ export function exactTokenShape(o: GameObject, state: GameState): string {
  * +1/+1 counter on this turn", "the first time it became tapped this turn"),
  * each recorded on the token itself: two tokens differing in them aren't
  * interchangeable, though the journal names neither (`COUNT_ONLY_HISTORY`). */
-const PER_OBJECT_KINDS: ReadonlySet<JournalKind> = new Set<JournalKind>(["counters-put", "tapped"]);
+const PER_OBJECT_KINDS: ReadonlySet<JournalKind> = new Set<JournalKind>([
+  "counters-put",
+  "tapped",
+  "targeted",
+  "saddled",
+  "activated",
+  "triggered",
+]);
 
 /** What this turn's journal says of `o` itself, in its stint, by the
  * per-object kinds — without amounts, which scale with a stack's size. */
@@ -61,7 +68,10 @@ function journalShape(o: GameObject, state: GameState): string {
   const marks: string[] = [];
   for (const e of state.journal?.entries ?? []) {
     if (e.turn !== state.turn.number || e.object !== o.id || e.stint !== stint || !PER_OBJECT_KINDS.has(e.kind)) continue;
-    marks.push(`${e.kind}:${e.counter ?? ""}:${e.player ?? ""}`);
+    // An ability key names the object itself; only which ability it is says
+    // anything about the token (`Game.usageKey`, `Game.onceKey`).
+    const which = e.ability === undefined ? "" : e.ability.slice(e.ability.indexOf("#") + 1);
+    marks.push(`${e.kind}:${e.counter ?? ""}:${e.player ?? ""}:${e.how ?? ""}:${which}`);
   }
   return marks.sort().join(",");
 }
@@ -80,14 +90,15 @@ const SNAPSHOT_OBJECT_FIELDS: ReadonlySet<string> = new Set(["lastOnStack", "las
 const CLIENT_ONLY_OBJECT_FIELDS: ReadonlySet<string> = new Set(["splitFrom"]);
 
 /** Journal kinds whose ids hold no token apart: damage is read by amount and
- * colour, and counters put and tappings by each token's own record, which
+ * colour, and counters put, tappings, targetings, saddlings and limited
+ * activations and triggers by each token's own record, which
  * `exactTokenShape` compares instead (`PER_OBJECT_KINDS`). Not `attacked`: it holds each creature that attacked this turn once, by
  * object, so a second combat's declaration is told from a first one's —
  * two tokens that attacked folded into one would attack again as that one
  * and a fresh token split off it, and Windbrisk Heights would count three
  * creatures for two. Every token that attacked stays its own object until
  * cleanup. */
-const COUNT_ONLY_HISTORY: ReadonlySet<JournalKind> = new Set<JournalKind>(["damage", "counters-put", "tapped"]);
+const COUNT_ONLY_HISTORY: ReadonlySet<JournalKind> = new Set<JournalKind>(["damage", ...PER_OBJECT_KINDS]);
 
 /**
  * Every object id the rest of the game state names: other objects' fields

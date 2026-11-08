@@ -14,7 +14,7 @@ export default defineCard({
   text: `${TEXT} (Targeting opponents, anything they control, and/or cards in their graveyards is a crime. Damage and effects that say "destroy" don't destroy a creature with indestructible.)`,
   triggered: [
     {
-      trigger: { on: "crime-committed", who: "you" },
+      trigger: { on: "event", event: "commits-crime", who: "you" },
       condition: { kind: "your-turn" },
       targets: [],
       effect: { kind: "grant-keyword", target: "source", keyword: "indestructible", duration: "end-of-turn" },

@@ -22,7 +22,7 @@ export default defineCard({
   triggered: [
     {
       // The first *enchantment* spell, which needn't be the first spell.
-      trigger: { on: "cast-spell", who: "you", firstEachTurn: true, filter: { type: "enchantment" } },
+      trigger: { on: "cast-spell", who: "you", firstTimeEachTurn: true, filter: { type: "enchantment" } },
       targets: [],
       effect: { kind: "draw", amount: 1 },
       resolve: null,

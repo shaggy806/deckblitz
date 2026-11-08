@@ -25,7 +25,7 @@ export default defineCard({
   ],
   triggered: [
     {
-      trigger: { on: "attack-with", who: "you", totalPower: { atLeast: 12, firstTimeEachTurn: true } },
+      trigger: { on: "attack-with", who: "you", totalPower: { atLeast: 12 }, firstTimeEachTurn: true },
       targets: [],
       effect: {
         kind: "sequence",

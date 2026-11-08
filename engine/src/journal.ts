@@ -63,9 +63,34 @@ export type JournalKind =
   /** `player` tapped a land for mana (106.12). */
   | "tapped-for-mana"
   /** `player` activated an ability of `object`; `how` says which kind
-   * (`"loyalty"`: 606.3, `"equip"`: 702.6). Only those two are kept: no other
-   * reader asks. */
+   * (`"loyalty"`: 606.3, `"equip"`: 702.6), `ability` which one where a limit
+   * or a reader counts it ("activate only once each turn", 602.5b; "if this
+   * ability has been activated four or more times this turn"). Kept only for
+   * those: a mana ability nothing limits isn't journaled. */
   | "activated"
+  /** A triggered ability `ability` of `object` (its source, in `stint`)
+   * triggered, `player` its controller — kept for "this ability triggers
+   * only once each turn" (603.2). */
+  | "triggered"
+  /** The ability `ability` resolved — kept for the abilities that ask how
+   * often ("if this is the second time this ability has resolved this turn"). */
+  | "resolved"
+  /** The ability `ability` had its mode `mode` chosen: "choose one that
+   * hasn't been chosen this turn", and a `may` with "do this only once each
+   * turn" (603.2h), whose one mode is doing it. */
+  | "did"
+  /** The ability `ability` did its thing (an `add-mana` with
+   * `marksAbilityDone` that added mana — Carpet of Flowers). */
+  | "done"
+  /** `player`'s spell or ability (`how`: `"spell"` or `"ability"`) targeted
+   * the permanent `object` in `stint` (rule 115.1): valiant's and Angelic
+   * Cub's "for the first time each turn". */
+  | "targeted"
+  /** `object` became saddled (702.171b) under `player`, in `stint`. */
+  | "saddled"
+  /** `player` bent (`how`: water, earth, fire or air — rules 701.65b,
+   * 701.66b, 701.67c, 702.189b). */
+  | "bent"
   /** `player` played a land (305.1). */
   | "land-played"
   /** `player` drew a card (121.1). */
@@ -134,8 +159,14 @@ export interface JournalEntry {
   /** The kind of counter (`counters-put`). */
   readonly counter?: string;
   /** The kind's own qualifier (`scried`: scry or surveil; `activated`: the
-   * ability's kind). */
+   * ability's kind; `targeted`: a spell's or an ability's). */
   readonly how?: string;
+  /** Which ability of which object (`activated`, `triggered`, `resolved`,
+   * `did`, `done`): an opaque key, compared for equality, as `Game` builds
+   * it for the reader that asks (`abilityTurnKey`, `usageKey`). */
+  readonly ability?: string;
+  /** The mode chosen (`did`), by index. */
+  readonly mode?: number;
 }
 
 /** A turn the journal still keeps entries for, and whose it was (extra
@@ -210,7 +241,13 @@ export type JournalWhat =
   /** A player gained life. */
   | "life-gained"
   /** A player played a land. */
-  | "lands-played";
+  | "lands-played"
+  /** A player waterbent, earthbent, firebent or airbent (`bent` entries):
+   * Avatar Aang's "if you've done all four this turn". */
+  | "waterbent"
+  | "earthbent"
+  | "firebent"
+  | "airbent";
 
 /** The zones a `to-graveyard` read takes its arrivals from (`from`: only
  * these) or leaves out (`notFrom`): "put into graveyards from the
@@ -265,6 +302,10 @@ export const JOURNAL_VIEWS: Readonly<Record<JournalWhat, JournalView>> = {
   "life-lost": { kind: "life-lost" },
   "life-gained": { kind: "life-gained" },
   "lands-played": { kind: "land-played" },
+  waterbent: { kind: "bent", match: (e) => e.how === "water" },
+  earthbent: { kind: "bent", match: (e) => e.how === "earth" },
+  firebent: { kind: "bent", match: (e) => e.how === "fire" },
+  airbent: { kind: "bent", match: (e) => e.how === "air" },
 };
 
 const PERMANENT_CARD_TYPES: ReadonlySet<string> = new Set([
@@ -408,6 +449,59 @@ export function journalTotal(state: GameState, kind: JournalKind, player: Player
     n += measure === "amount" ? (entry.amount ?? 0) : (entry.count ?? 1);
   }
   return n;
+}
+
+/** How many of this turn's entries of `kind` are the ability `ability`'s —
+ * the per-turn usage limits ("activate only once each turn", "triggers only
+ * once each turn", "the second time this ability has resolved this turn"). */
+export function abilityCountThisTurn(state: GameState, kind: JournalKind, ability: string): number {
+  return abilityIndex(state).counts.get(`${kind}|${ability}`) ?? 0;
+}
+
+/** The modes this turn's `did` entries record for the ability `ability`, in
+ * the order chosen. */
+export function modesDoneThisTurn(state: GameState, ability: string): readonly number[] {
+  return abilityIndex(state).modes.get(ability) ?? [];
+}
+
+/** This turn's ability-keyed entries, counted: what the usage limits ask on
+ * every legal-action query and every trigger scan, so a journal scan each
+ * time cost the bots dearly (B278). */
+interface AbilityIndex {
+  readonly turn: number;
+  /** How many entries of `entries` it has read. */
+  read: number;
+  readonly counts: Map<string, number>;
+  readonly modes: Map<string, number[]>;
+}
+
+/** Kept beside the state, never in it, per entries array: the journal only
+ * appends to its array (`appendJournal`) or replaces it (a prune, a clone),
+ * so the index reads just what was appended since, and starts again for a
+ * new array or a new turn. */
+const ABILITY_INDEX = new WeakMap<readonly JournalEntry[], AbilityIndex>();
+const NO_ENTRIES: readonly JournalEntry[] = [];
+
+function abilityIndex(state: GameState): AbilityIndex {
+  const entries = state.journal?.entries ?? NO_ENTRIES;
+  const now = state.turn.number;
+  let index = ABILITY_INDEX.get(entries);
+  if (index === undefined || index.turn !== now || index.read > entries.length) {
+    index = { turn: now, read: 0, counts: new Map(), modes: new Map() };
+    ABILITY_INDEX.set(entries, index);
+  }
+  for (; index.read < entries.length; index.read += 1) {
+    const entry = entries[index.read];
+    if (entry.ability === undefined || entry.turn !== now) continue;
+    const key = `${entry.kind}|${entry.ability}`;
+    index.counts.set(key, (index.counts.get(key) ?? 0) + 1);
+    if (entry.kind === "did" && entry.mode !== undefined) {
+      const modes = index.modes.get(entry.ability);
+      if (modes === undefined) index.modes.set(entry.ability, [entry.mode]);
+      else modes.push(entry.mode);
+    }
+  }
+  return index;
 }
 
 /** The whole game's count of `kind` for `player` ("this game"). */

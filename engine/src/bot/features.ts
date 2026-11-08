@@ -462,6 +462,12 @@ function manaPerTurn(def: CardDefinition): number {
 function isOneShot(trigger: TriggeredAbility["trigger"]): boolean {
   if (trigger.on === "this-cast" || trigger.on === "this-cycled" || trigger.on === "this-discarded") return true;
   const who = (trigger as { readonly who?: unknown }).who;
+  // A generic trigger event that happens to its own permanent at most once
+  // in its life: it becomes monstrous or renowned once (rules 701.37b,
+  // 702.112b), and stays so.
+  if (trigger.on === "event") {
+    return who === "self" && (trigger.event === "becomes-monstrous" || trigger.event === "becomes-renowned");
+  }
   return (
     who === "self" &&
     (trigger.on === "enters-battlefield" ||

@@ -13,7 +13,7 @@ export default defineCard({
   text: TEXT,
   triggered: [
     {
-      trigger: { on: "becomes-untapped", who: "self" },
+      trigger: { on: "event", event: "becomes-untapped", who: "self" },
       targets: [],
       effect: { kind: "modify-pt", target: "source", power: 2, toughness: 0, duration: "end-of-turn" },
       resolve: null,

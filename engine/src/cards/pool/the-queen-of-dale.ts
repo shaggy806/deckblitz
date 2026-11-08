@@ -29,7 +29,7 @@ export default defineCard({
   text: `${TEXT} (Draw a card, then discard a card. If you discarded a nonland card, create a 1/1 white Human Soldier creature token.)`,
   triggered: [
     {
-      trigger: { on: "cast-spell", who: "opponent", firstEachTurn: true, filter: { notTypes: ["creature"] } },
+      trigger: { on: "cast-spell", who: "opponent", firstTimeEachTurn: true, filter: { notTypes: ["creature"] } },
       targets: [],
       effect: {
         kind: "sequence",

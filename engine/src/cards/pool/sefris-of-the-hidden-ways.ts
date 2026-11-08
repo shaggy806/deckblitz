@@ -28,7 +28,7 @@ export default defineCard({
       text: VENTURE_TEXT,
     },
     {
-      trigger: { on: "completes-dungeon", who: "you" },
+      trigger: { on: "event", event: "completes-dungeon", who: "you" },
       targets: [{ kind: "card-in-graveyard", whose: "you", filter: { type: "creature" } }],
       effect: { kind: "put-onto-battlefield", target: 0 },
       resolve: null,

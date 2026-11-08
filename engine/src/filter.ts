@@ -1355,7 +1355,8 @@ export interface CardFilter {
    * "those creatures", "each of them": the attackers that counted for an
    * `attacks-batch`, `attack-with` or `attacks-player` trigger (Sabotage
    * Strategist's "those creatures get -1/-0 until end of turn"), the permanents
-   * of a batched entry, the cards of a batched arrival in a graveyard. Each in
+   * of a batched entry, the cards of a batched arrival in a graveyard, the
+   * sources of a batched damage trigger (Tamiyo, Upriser Crowned). Each in
    * the stint it was in then (rule 400.7), whatever it has become since: one
    * no longer attacking is still one of them, one that left isn't. An
    * effect's filter only, `delayed-trigger`'s `at` included, so that one keeps

@@ -15,7 +15,7 @@ export default defineCard({
   text: ROLL_TEXT,
   triggered: [
     {
-      trigger: { on: "rolls-dice", who: "you" },
+      trigger: { on: "event", event: "rolls-dice", who: "you" },
       targets: [],
       effect: { kind: "create-token", token: "Faerie Dragon Token", count: 1 },
       resolve: null,

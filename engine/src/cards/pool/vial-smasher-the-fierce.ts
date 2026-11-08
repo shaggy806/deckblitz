@@ -34,7 +34,7 @@ export default defineCard({
   text: `${TEXT}\nPartner (You can have two commanders if both have partner.)`,
   triggered: [
     {
-      trigger: { on: "cast-spell", who: "you", firstEachTurn: true },
+      trigger: { on: "cast-spell", who: "you", firstTimeEachTurn: true },
       targets: [],
       effect: {
         kind: "choose-opponent",

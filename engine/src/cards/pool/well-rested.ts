@@ -26,7 +26,7 @@ export default defineCard({
       affects: { scope: "attached" },
       grantsTriggered: [
         {
-          trigger: { on: "becomes-untapped", who: "self" },
+          trigger: { on: "event", event: "becomes-untapped", who: "self" },
           oncePerTurn: true,
           targets: [],
           effect: {

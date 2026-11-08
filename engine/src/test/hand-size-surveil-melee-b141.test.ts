@@ -51,7 +51,7 @@ const registry = createDefaultRegistry()
       text: MIRKO,
       triggered: [
         {
-          trigger: { on: "surveils", who: "you" },
+          trigger: { on: "event", event: "surveils", who: "you" },
           targets: [],
           effect: { kind: "gain-life", amount: 1 },
           resolve: null,

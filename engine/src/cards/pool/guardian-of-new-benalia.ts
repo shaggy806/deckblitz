@@ -16,7 +16,7 @@ export default defineCard({
   static: [enlist()],
   triggered: [
     {
-      trigger: { on: "enlists", who: "self" },
+      trigger: { on: "event", event: "enlists", who: "self" },
       targets: [],
       effect: { kind: "scry", amount: 2 },
       resolve: null,

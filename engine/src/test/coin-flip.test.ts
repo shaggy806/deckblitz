@@ -28,7 +28,7 @@ const registry = createDefaultRegistry().register(
     text: ZNDRSPLT,
     triggered: [
       {
-        trigger: { on: "wins-coin-flip", who: "any" },
+        trigger: { on: "event", event: "wins-coin-flip", who: "any" },
         targets: [],
         effect: { kind: "draw", amount: 1 },
         resolve: null,

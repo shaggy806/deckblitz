@@ -24,7 +24,7 @@ export default defineCard({
   text: `${COPY_TEXT}\n${COUNTER_TEXT}`,
   triggered: [
     {
-      trigger: { on: "cast-spell", who: "you", filter: { type: "instant" }, firstEachTurn: true },
+      trigger: { on: "cast-spell", who: "you", filter: { type: "instant" }, firstTimeEachTurn: true },
       condition: { kind: "source", filter: { tapped: true } },
       targets: [],
       effect: { kind: "copy-spell", target: "trigger-spell", newTargets: true },

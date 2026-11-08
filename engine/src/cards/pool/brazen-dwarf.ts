@@ -14,7 +14,7 @@ export default defineCard({
   text: TEXT,
   triggered: [
     {
-      trigger: { on: "rolls-dice", who: "you" },
+      trigger: { on: "event", event: "rolls-dice", who: "you" },
       targets: [],
       effect: { kind: "damage", amount: 1, who: "each-opponent" },
       resolve: null,

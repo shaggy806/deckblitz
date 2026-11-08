@@ -32,7 +32,7 @@ export default defineCard({
       text: CAST_TEXT,
     },
     {
-      trigger: { on: "completes-dungeon", who: "you" },
+      trigger: { on: "event", event: "completes-dungeon", who: "you" },
       targets: [],
       effect: { kind: "create-token", token: "Wolf Token", count: 1 },
       resolve: null,

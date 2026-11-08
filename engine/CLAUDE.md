@@ -44,6 +44,11 @@ Read a file's entry before changing that file; you don't need the rest.
   `TURN_STAT_READS` row or a `journaled` filter clause over the kinds already recorded, and a new
   kind is recorded in `Game.recordJournal` (or through `Game.journal` at the act), each object
   kept as it was. Not `eventLog`: bot simulations empty it.
+- **A new trigger event is a `TRIGGER_EVENTS` row** (`trigger-events.ts`, the generic
+  `{ on: "event" }` member), not a new `TriggerSpec` kind, unless it has rules of its own (look-back,
+  batching, combat or damage records). "For the first time / Nth each turn" is the timing wrapper
+  every trigger takes (`firstTimeEachTurn` / `nthEachTurn`), counted from the journal in
+  `Game.timingCount` — never a per-kind flag; a kind it can't count yet goes in `timingCountable`.
 - **Computed-value cache** (`characteristics.ts`): wrap new read-only hot paths in
   `withComputedCache`, and never let a region span a mutation without `invalidateComputedCache()`.
   `MTG_CACHE_CHECK=1` on the fuzzer verifies it.

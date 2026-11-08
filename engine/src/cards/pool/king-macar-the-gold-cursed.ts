@@ -17,7 +17,7 @@ export default defineCard({
   text: INSPIRED_TEXT,
   triggered: [
     {
-      trigger: { on: "becomes-untapped", who: "self" },
+      trigger: { on: "event", event: "becomes-untapped", who: "self" },
       targets: ["creature"],
       effect: {
         kind: "may",

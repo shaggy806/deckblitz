@@ -24,7 +24,7 @@ export default defineCard({
   ],
   triggered: [
     {
-      trigger: { on: "becomes-monstrous", who: "self" },
+      trigger: { on: "event", event: "becomes-monstrous", who: "self" },
       targets: [],
       effect: { kind: "sacrifice", who: "each-player", filter: { type: "land" }, count: 3 },
       resolve: null,

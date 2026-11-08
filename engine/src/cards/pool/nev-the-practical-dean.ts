@@ -29,7 +29,7 @@ export default defineCard({
   ],
   triggered: [
     {
-      trigger: { on: "cast-spell", who: "you", firstEachTurn: true, filter: { xInManaCost: true } },
+      trigger: { on: "cast-spell", who: "you", firstTimeEachTurn: true, filter: { xInManaCost: true } },
       targets: [],
       effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: "x" },
       resolve: null,

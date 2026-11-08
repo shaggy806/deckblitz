@@ -16,7 +16,7 @@ export default defineCard({
   text: INSPIRED_TEXT,
   triggered: [
     {
-      trigger: { on: "becomes-untapped", who: "self" },
+      trigger: { on: "event", event: "becomes-untapped", who: "self" },
       targets: ["creature-an-opponent-controls"],
       effect: { kind: "modify-pt", target: 0, power: -3, toughness: 0, duration: "end-of-turn" },
       resolve: null,

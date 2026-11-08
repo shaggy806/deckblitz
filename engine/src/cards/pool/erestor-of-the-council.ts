@@ -22,7 +22,7 @@ export default defineCard({
   text: TEXT,
   triggered: [
     {
-      trigger: { on: "players-finish-voting" },
+      trigger: { on: "event", event: "voting-finishes" },
       targets: [],
       effect: {
         kind: "sequence",

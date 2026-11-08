@@ -11,7 +11,6 @@
 
 import type { StaticCondition, TurnStat } from "./cards/define.js";
 import type { EffectAmount, EffectSpec, SpellResolver } from "./effects.js";
-import type { GameEvent } from "./events.js";
 import type { Color } from "./mana.js";
 import type { GameState, PlayerCounterKind, JournalWhat, ZoneType } from "./state.js";
 import type { JournalWindow } from "./journal.js";
@@ -19,6 +18,7 @@ import type { ObjectId, PlayerId } from "./primitives.js";
 import type { AggregateSpec, CardFilter } from "./filter.js";
 import type { TargetSpec } from "./target.js";
 import type { Step } from "./turn.js";
+import type { TriggerEventName } from "./trigger-events.js";
 
 /** A non-mana, non-tap component of an ability cost that sacrifices a permanent. */
 export type SacrificeCost =
@@ -819,14 +819,14 @@ export interface ActivatedAbility {
    * "cycling abilities you activate" (Fluctuator) names. */
   readonly cycling?: true;
   /** "Activate only once each turn" (rule 602.5g — Steel Hellkite). Tracked
-   * per ability index on `GameObject.abilitiesUsedThisTurn`, so a permanent
+   * per ability in the journal (`activated` entries), so a permanent
    * with two such abilities limits each separately. */
   readonly oncePerTurn?: boolean;
   /** "Activate no more than **twice** each turn" (Pit Imp — `2`; rule
    * 602.5b), or a count read as it would be activated — Withering Wisps'
    * "no more times each turn than the number of snow Swamps you control" (`{
    * countOf: … }`, from the activating player's side). Kept per ability
-   * index on `GameObject.abilitiesUsedThisTurn` with `oncePerTurn`'s, one
+   * in the journal with `oncePerTurn`'s, one
    * entry an activation, so the restriction stays with the object through a
    * change of control (602.5b). A mana ability with it isn't offered to the
    * auto-payer: activated by hand. */
@@ -1089,7 +1089,8 @@ export type TriggerWho =
    * emblem's "whenever your Ring-bearer attacks". */
   | "ring-bearer";
 
-export type TriggerSpec =
+/** The trigger event of a {@link TriggerSpec}, one member per kind. */
+export type TriggerKind =
   | {
       /**
        * "When you lose control of this permanent" (Khârn the Betrayer): another
@@ -1140,36 +1141,6 @@ export type TriggerSpec =
       readonly on: "ring-tempts";
       readonly who: TriggerWho;
       readonly chosen?: boolean | "other";
-    }
-  | {
-      /** "Whenever [a player] takes the initiative" (rule 726) — including
-       * one who already had it (726.5). `who` is the player who took it. The
-       * initiative's own "whenever a player takes the initiative, that player
-       * ventures into Undercity" is this, on `cards/initiative.ts`. */
-      readonly on: "takes-initiative";
-      readonly who: TriggerWho;
-    }
-  | {
-      /** "Whenever you venture into the dungeon" (rule 701.49 — Nadaar,
-       * Selfless Paladin): once per venture, as the marker moves. `who` is
-       * the player who ventured. */
-      readonly on: "ventures";
-      readonly who: TriggerWho;
-    }
-  | {
-      /** "Whenever you complete a dungeon" (rule 309.7 — Sefris of the
-       * Hidden Ways). `who` is the player who completed it. */
-      readonly on: "completes-dungeon";
-      readonly who: TriggerWho;
-    }
-  | {
-      /**
-       * "Whenever you roll one or more dice" (rule 706): once per roll,
-       * however many dice it took (Brazen Dwarf). `{ triggerValue: true }`
-       * is the roll's natural total. `who` is the player who rolled.
-       */
-      readonly on: "rolls-dice";
-      readonly who: TriggerWho;
     }
   | {
       /** "When this Class becomes level `level`" (rule 716.2a): `who: "self"`. */
@@ -1299,17 +1270,6 @@ export type TriggerSpec =
        * things at once is one event. */
       readonly on: "gains-life";
       readonly who: TriggerWho;
-      /** "Whenever you gain life **for the first time each turn**"
-       * (Gourmand's Talent): only the gain that took the player's life gained
-       * this turn from none — one earlier in the turn, even before this
-       * permanent arrived, uses it up. Reads the journal's life gained,
-       * which already counts this gain when the trigger is matched. */
-      readonly firstTimeEachTurn?: boolean;
-    }
-  | {
-      /** "Whenever you forage" (rule 701.61a — Corpseberry Cultivator). */
-      readonly on: "forages";
-      readonly who: TriggerWho;
     }
   | {
       /** "Whenever you expend N" (rule 700.14): paying for a spell took the
@@ -1320,27 +1280,14 @@ export type TriggerSpec =
       readonly amount: number;
     }
   | {
-      /** A player lost the game (rule 104.3) — conceding is losing too
-       * (104.3a): "when **the chosen player** loses the game, you win the
-       * game" (Shinryu, Transcendent Rival — `who: "chosen-player"`). `who`
-       * is who lost. Matched as they lose, before they leave the game (800.4a),
-       * so a permanent they own still sees it; the trigger is this
-       * permanent's controller's, and a player who has left controls none. */
-      readonly on: "player-loses-game";
-      readonly who: TriggerWho;
-    }
-  | {
       /** A player lost life. `who` is whose life, `{ triggerValue: true }`
        * how much (Exquisite Blood). */
       readonly on: "loses-life";
       readonly who: TriggerWho;
-      /** "…loses life **for the first time during each of their turns**"
-       * (Valgavoth, Harrower of Souls): only while that player is the active
-       * player, and only the loss that took their life lost this turn from
-       * none — so a loss earlier in the turn, even one before this permanent
-       * arrived, uses it up. Reads the journal's life lost, which
-       * already counts this loss when the trigger is matched. */
-      readonly firstDuringTheirTurn?: boolean;
+      /** "…loses life … **during each of their turns**" (Valgavoth,
+       * Harrower of Souls, with `firstTimeEachTurn`): only while that player
+       * is the active player. */
+      readonly duringTheirTurn?: true;
     }
   | {
       /**
@@ -1444,16 +1391,6 @@ export type TriggerSpec =
     }
   | {
       /**
-       * "Whenever players finish voting" (Erestor of the Council, Model of
-       * Unity — rule 701.38): every player has voted in a vote, whoever's
-       * spell or ability held it. Fires once per vote, off `votes-finished`;
-       * the ability reads that vote's votes (`{ votesFor }`, the
-       * `"opponents-who-voted-with-you"` scope, `{ opponentsVotedOtherwise }`).
-       */
-      readonly on: "players-finish-voting";
-    }
-  | {
-      /**
        * A player drew a card (Nekusar, the Mindrazer; Niv-Mizzet, Parun;
        * Consecrated Sphinx; Smothering Tithe). `who` is who drew.
        *
@@ -1467,9 +1404,6 @@ export type TriggerSpec =
        */
       readonly on: "draws";
       readonly who: TriggerWho;
-      /** Only their Nth card of the turn — "whenever you draw your second
-       * card each turn". */
-      readonly nthEachTurn?: number;
       /** Only a drawn card matching this, as it is in the hand it was drawn
        * into — Keranos, God of Storms' "whenever you reveal a **land** card
        * this way" (the first card drawn on each of your turns). */
@@ -1504,10 +1438,6 @@ export type TriggerSpec =
       /** Only a spell or ability this permanent's controller controls —
        * valiant's "a spell or ability you control" (rule 207.2c). */
       readonly byControllerOnly?: boolean;
-      /** Valiant's "for the first time each turn": only the first time this
-       * turn the targeting player has targeted it, whether or not this
-       * ability triggered then (the rulings). */
-      readonly firstTimeEachTurn?: boolean;
       /** Only a *spell* targeting it counts, not an activated ability —
        * "becomes the target of a spell" (Gargos, Vicious Watcher; Tectonic
        * Giant). */
@@ -1530,10 +1460,6 @@ export type TriggerSpec =
       /** Only an *ability* targeting it, not a spell — "becomes the target of
        * an ability you control" (Loki, God of Mischief). */
       readonly abilityOnly?: true;
-      /** "For the first time each turn" counted over every player's spells
-       * and abilities (Angelic Cub) — not valiant's per-player
-       * `firstTimeEachTurn`. Whether or not this ability triggered then. */
-      readonly firstTimeEachTurnByAnyone?: true;
     }
   | {
       /**
@@ -1639,11 +1565,6 @@ export type TriggerSpec =
        * the player with the most life or tied for most life". See
        * {@link DefenderLife}. */
       readonly defenderLife?: DefenderLife;
-      /** "Whenever this creature attacks **for the first time each turn**"
-       * (Scourge of the Throne): only a declaration of an attacker that
-       * hadn't been declared one earlier this turn — a later combat's
-       * attack doesn't fire it. */
-      readonly firstTimeEachTurn?: boolean;
       /** Training (rule 702.149a — the `training()` helper): "whenever this
        * creature **and at least one other creature with power greater than
        * this creature's power** attack" — another attacker of the
@@ -1791,41 +1712,16 @@ export type TriggerSpec =
       readonly filter?: CardFilter;
     }
   | {
-      /** A permanent became monstrous (rule 701.37 — the `monstrosity`
-       * effect): "when this creature becomes monstrous" is `who: "self"`.
-       * Never fires for a permanent that was monstrous already, or that left
-       * the battlefield before its monstrosity ability resolved (the
-       * rulings). The permanent is the trigger object, and `{ triggerValue:
-       * true }` the N it became monstrous with (701.37c's X). */
-      readonly on: "becomes-monstrous";
-      readonly who: TriggerWho;
-      readonly filter?: CardFilter;
-    }
-  | {
-      /** A permanent became renowned (rule 702.112 — the `renown` effect):
-       * "when this creature becomes renowned" is `who: "self"` (Relic
-       * Seeker), "whenever a creature you control becomes renowned" `who:
-       * "you-control"` (Valeron Wardens). Never fires for one renowned
-       * already, or that left before its renown trigger resolved (the
-       * rulings). The permanent is the trigger object. */
-      readonly on: "becomes-renowned";
-      readonly who: TriggerWho;
-      readonly filter?: CardFilter;
-    }
-  | {
       /** A permanent became saddled (rule 702.171b — the `become-saddled`
        * effect, a saddle ability's or another's: "whenever this creature
        * becomes saddled" is `who: "self"`). Fires again for one already
        * saddled that becomes saddled again (a second saddle activation — the
-       * rulings let it). `firstTimeEachTurn` is Stubborn Burrowfiend's "for
-       * the first time each turn": only when it wasn't saddled already —
-       * which, since saddled lasts the turn and a permanent that left is a
-       * new object (400.7), is the first time this object became saddled
-       * this turn. The permanent is the trigger object. */
+       * rulings let it). Stubborn Burrowfiend's "for the first time each
+       * turn" is the wrapper's `firstTimeEachTurn`, counted per object. The
+       * permanent is the trigger object. */
       readonly on: "becomes-saddled";
       readonly who: TriggerWho;
       readonly filter?: CardFilter;
-      readonly firstTimeEachTurn?: boolean;
     }
   | {
       /** A permanent was exerted (rule 701.43). `asItAttacks` is the "when
@@ -1836,15 +1732,6 @@ export type TriggerSpec =
       readonly on: "exerted";
       readonly who: TriggerWho;
       readonly asItAttacks?: boolean;
-    }
-  | {
-      /** A creature enlisted another (rule 702.154c): it tapped that one to
-       * pay its enlist cost as it attacked (`StaticAbility.enlist`) —
-       * Guardian of New Benalia's "whenever this creature enlists a
-       * creature" is `who: "self"`. `who` is asked of the enlisting
-       * creature; the trigger object is the creature it enlisted. */
-      readonly on: "enlists";
-      readonly who: TriggerWho;
     }
   | {
       /** A creature crewed a Vehicle or saddled a Mount (rules 702.122b,
@@ -2144,18 +2031,6 @@ export type TriggerSpec =
       readonly from?: ZoneType;
       readonly notFrom?: ZoneType;
       readonly batched?: boolean;
-      /** "…are put into your graveyard from anywhere **for the first time each
-       * turn**" (Crawling Sensation): only when no matching card reached that
-       * graveyard earlier this turn — before this permanent was around too,
-       * unlike `oncePerTurn`. Read off the turn's `descended` history, so the
-       * filter must name permanent cards (a land card, a creature card). */
-      readonly firstTimeEachTurn?: boolean;
-    }
-  | {
-      /** A player surveilled (rule 701.42) — Mirko, Obsessive Theorist's
-       * "whenever you surveil". Once per surveil, however many cards. */
-      readonly on: "surveils";
-      readonly who: TriggerWho;
     }
   | {
       /** Cards were milled (rule 701.17) — "whenever one or more nonland
@@ -2184,14 +2059,6 @@ export type TriggerSpec =
       readonly who: TriggerWho;
     }
   | {
-      /** A player searched their own library (rule 701.23) — Archivist of
-       * Oghma's "whenever an opponent searches their library", whoever's effect
-       * made them: not someone else's library, and not one they can't search.
-       * `"trigger-player"` is who searched. */
-      readonly on: "searches-library";
-      readonly who: TriggerWho;
-    }
-  | {
       /** A player scried (rule 701.22) — "whenever you scry"; with
        * `orSurveil`, "whenever you scry or surveil" (Denzilore Fatehold).
        * Once per scry, however many cards, and after it's done (701.22d) —
@@ -2202,13 +2069,6 @@ export type TriggerSpec =
       readonly on: "scries";
       readonly who: TriggerWho;
       readonly orSurveil?: true;
-    }
-  | {
-      /** A player won a coin flip (rule 705) — "whenever a player wins a
-       * coin flip" (Okaun, Zndrsplt: `who: "any"`), "whenever you win a coin
-       * flip" (`"you"`). Once per flip won. */
-      readonly on: "wins-coin-flip";
-      readonly who: TriggerWho;
     }
   | {
       /** A spell was countered (rule 701.6a), not an ability, and not a spell
@@ -2272,13 +2132,6 @@ export type TriggerSpec =
        * discard a card" (Spiritual Focus): the discard's `cause` was an
        * opponent of the discarding player, as `this-discarded`'s is. */
       readonly byOpponent?: true;
-      /** "Whenever you discard one or more [nonland] cards **for the first
-       * time each turn**" (Rielle, the Everwise; Veronica, Dissident Scribe):
-       * only the discard event that brings the player's first matching
-       * cards of the turn, read off the turn's history — so a discard before
-       * this permanent arrived counts as the first, which a once-per-turn
-       * limit couldn't see. */
-      readonly firstTimeEachTurn?: true;
     }
   | {
       /**
@@ -2300,10 +2153,10 @@ export type TriggerSpec =
       readonly exactly?: number;
       /** "Creatures with total power 12 or greater" (Desert Were-Worm): the
        * whole declaration's total power as it was declared (rule 508.1k —
-       * `TurnHistory.attackedPower`), `filter` or none. `firstTimeEachTurn`:
-       * only if no earlier declaration this turn reached it, counting one
-       * made before this permanent arrived, or one that didn't fire it. */
-      readonly totalPower?: { readonly atLeast: number; readonly firstTimeEachTurn?: true };
+       * the journal's `attacked` entries), `filter` or none. "… for the first
+       * time each turn" is the wrapper's `firstTimeEachTurn`: no earlier
+       * declaration of theirs this turn reached it. */
+      readonly totalPower?: { readonly atLeast: number };
       /** This permanent is one of those counted: Creepy Puppeteer's "whenever
        * **this creature** attacks, if you attacked with exactly one other
        * creature this combat" is `exactly: 2` with this. */
@@ -2462,49 +2315,27 @@ export type TriggerSpec =
        * a whole attack declaration, a `tap-all`, one cost. Its trigger object
        * is the first of them to match; don't read it. */
       readonly batched?: true;
-      /** "… becomes tapped **for the first time** [this turn]" (Tale of Katara
-       * and Toph, with a `your-turn` condition for "during each of your turns"):
-       * only the first time that object has become tapped this turn, even if
-       * that was before this ability's source arrived. */
-      readonly firstTimeEachTurn?: true;
+      /** Who tapped it, relative to this ability's controller: "whenever
+       * **you** tap an untapped creature an opponent controls" (Hylda of the
+       * Icy Crown) is `who: "opponent", by: "you"`. The tapper is the
+       * controller of the spell or ability whose effect or cost tapped it,
+       * the attacking player for an attack (508.1f), the payer for a cost
+       * (`permanent-tapped`'s `by`). */
+      readonly by?: TriggerWho;
       /** "… if it isn't being declared as an attacker" (Verity Circle): not the
        * tapping of an attack declaration (rule 508.1f). */
       readonly notAttacking?: true;
     }
-  | {
-      /** A creature fought (rule 701.14) — Foe-Razer Regent's "whenever a
-       * creature you control fights": each creature in a fight is one that
-       * fights, so a fight between two of yours fires twice. Its trigger
-       * object is the creature that fought. */
-      readonly on: "fights";
-      readonly who: TriggerWho;
-      readonly filter?: CardFilter;
-    }
-  | {
-      /** A permanent became untapped (rule 701.26b) — Key to the City's
-       * "whenever this artifact becomes untapped": in an untap step or by
-       * any effect. Not a shock land whose life was paid as it entered: that
-       * one enters untapped (rule 614.1c), which untaps nothing, though the
-       * engine turns it upright after it has arrived (`permanent-untapped`'s
-       * `asItEntered`). */
-      readonly on: "becomes-untapped";
-      readonly who: TriggerWho;
-      readonly filter?: CardFilter;
-    }
-  /** `who: "you"` fires only on your own step, `"opponent"` only on an
-   * opponent's (Archfiend of Depravity's "at the beginning of **each
-   * opponent's** end step" — once per opponent's turn, not once per
-   * opponent), `"any"` on everyone's. */
   | { readonly on: "step-begins"; readonly step: Step; readonly who: TriggerWho }
   | {
       /** A spell was cast. `who` is relative to the caster: `"you"` = this
        * permanent's controller cast it, `"opponent"` = anyone else did
        * (Kaervek the Merciless). `noncreatureOnly` narrows to a noncreature
-       * spell (prowess, rule 702.108). `firstEachTurn` narrows to the
-       * caster's first spell of the turn — or, with a `filter`, their first
-       * *matching* spell ("your first enchantment spell each turn"), which
-       * needn't be the first spell they cast. `nthEachTurn` counts the same
-       * way. */
+       * spell (prowess, rule 702.108). The wrapper's `firstTimeEachTurn` is
+       * the caster's first spell of the turn — or, with a `filter`, their
+       * first *matching* spell ("your first enchantment spell each turn"),
+       * which needn't be the first spell they cast; `nthEachTurn: 2` their
+       * second (Kraum, Ludevic's Opus). A copy is never counted. */
       readonly on: "cast-spell";
       readonly who: TriggerWho;
       /**
@@ -2512,8 +2343,8 @@ export type TriggerSpec =
        * isn't cast): Magecraft's "whenever you cast **or copy** an instant or
        * sorcery spell" (Archmage Emeritus). `who` is who controls the copy,
        * `filter` asks about the copy, and the copy is the trigger object. The
-       * cast-only narrowings (`from`, `notFrom`, `firstEachTurn`,
-       * `nthEachTurn`) never match a copy.
+       * cast-only narrowings (`from`, `notFrom`, the timing wrapper) never
+       * match a copy.
        */
       readonly orCopy?: boolean;
       /** Fire **only** when the player copies a spell — Kalamax, the
@@ -2534,11 +2365,6 @@ export type TriggerSpec =
        * cast a spell from anywhere other than your hand"). */
       readonly notFrom?: ZoneType;
       readonly noncreatureOnly?: boolean;
-      readonly firstEachTurn?: boolean;
-      /** The caster's Nth spell this turn — Kraum, Ludevic's Opus's "casts
-       * their second spell each turn" is `nthEachTurn: 2`. The general form
-       * of `firstEachTurn`. */
-      readonly nthEachTurn?: number;
       /**
        * A filter on the *spell* (Guttersnipe, Thermo-Alchemist: "whenever you
        * cast an instant or sorcery spell"). The general form of
@@ -2598,17 +2424,29 @@ export type TriggerSpec =
        * Vehicle crewed by it, which isn't a creature yet — the Runic Armasaur
        * rulings). Unnarrowed it sees every ability that uses the stack, from
        * any zone — cycling's too (rule 702.29a), whose draw goes on the stack
-       * sourced from the cycled card. Never a mana ability: one activated to
-       * pay a cost isn't announced, so a trigger that counts them (Elrond,
-       * Moon-Reader) can't be written. `sacrificedToActivate`: "if one or more
+       * sourced from the cycled card. A mana ability only with `orMana`.
+       * `sacrificedToActivate`: "if one or more
        * permanents were sacrificed to activate it" (Ashnod the Uncaring): by
        * the ability's own cost, whenever in paying it they're chosen, and
        * never by a mana ability that helped pay it (the ruling).
        */
       readonly on: "activates-ability";
       readonly who: "attached" | "you" | "opponent";
+      /** Mana abilities too (rule 605): every card that doesn't say "if it
+       * isn't a mana ability" — Elrond, Moon-Reader's "whenever you activate
+       * an ability of a creature", Avalanche of Sector 7's "an ability of an
+       * artifact they control". One activated while paying a cost is
+       * announced then (`Game.useManaSource`), so long as a printed trigger
+       * on the battlefield asks (`Game.manaActivationWatched`). Its trigger
+       * object is nothing: a mana ability is never on the stack (605.3b). */
+      readonly orMana?: true;
       readonly ninjutsu?: true;
       readonly loyalty?: true;
+      /** With `loyalty`: "if you removed two or more loyalty counters to
+       * activate it" (Way of the Mind Sculptor) — its cost removed at least
+       * this many (a [−X] one, the X chosen). The cost is paid and fixed as
+       * it triggers, so asked once (rule 603.4 can't change the answer). */
+      readonly removedAtLeast?: number;
       /** An exhaust ability (rule 702.177 — Rangers' Refueler, Adrenaline
        * Jockey), a granted one included. "Activate only once" alone isn't one
        * (`ActivatedAbility.onlyOnce`). */
@@ -2666,37 +2504,6 @@ export type TriggerSpec =
       readonly otherOnly?: boolean;
     }
   | {
-      /** "Whenever you foretell a card" (rule 702.143a — Dream Devourer): a
-       * player foretold a card, a special action, `who` relative to this
-       * permanent's controller. The foretold card is the trigger object. */
-      readonly on: "foretells";
-      readonly who: "you" | "opponent" | "any";
-    }
-  | {
-      /** "Whenever you commit a crime" / "whenever an opponent commits a
-       * crime" (rule 700.13): the ability's controller, or any opponent of
-       * theirs, cast a spell, activated an ability or put a triggered ability
-       * on the stack targeting an opponent of theirs, something that opponent
-       * controls or a card in that opponent's graveyard. "During your turn"
-       * is a `your-turn` condition; "triggers only once each turn" is
-       * `oncePerTurn`. */
-      readonly on: "crime-committed";
-      readonly who: "you" | "opponent";
-    }
-  | {
-      /** "Whenever you collect evidence" (rule 701.59 — Evidence Examiner,
-       * Surveillance Monitor): the ability's controller collected evidence,
-       * as a cost or an effect. */
-      readonly on: "evidence-collected";
-      readonly who: "you";
-    }
-  | {
-      /** "Whenever you discover" (rule 701.57b — Curator of Sun's Creation):
-       * the trigger value is the N discovered. */
-      readonly on: "discovers";
-      readonly who: "you";
-    }
-  | {
       /** "Whenever this creature explores" (`self`) / "whenever a creature
        * you control explores" (`you`, the explorer matching `filter` as it
        * explored — Merfolk Cave-Diver) — rule 701.44b: whatever the
@@ -2730,8 +2537,57 @@ export type TriggerSpec =
        * `hauntSpell()` helper. */
       readonly on: "this-resolved-into-graveyard";
     }
-  /** Escape hatch: match the raw event yourself. */
-  | { readonly on: "predicate"; readonly match: (event: GameEvent) => boolean };
+  | {
+      /**
+       * A trigger event named by a word of `TRIGGER_EVENTS`
+       * (trigger-events.ts): "whenever you proliferate" (`"proliferates"`),
+       * "whenever you become the monarch", "whenever this creature phases
+       * in". `who` relates the event's subject to this ability's controller
+       * as every kind's does — its object where the row names one (`"self"`,
+       * `"you-control"`, `"opponent"`), otherwise its player (`"you"`,
+       * `"opponent"`, `"any"`); absent is `"any"`. `filter` asks about the
+       * object. An event with several objects (phasing) triggers once per
+       * matching object (rule 603.2c), each the trigger object, unless
+       * `batched` ("one or more"): once, its value the count. The row's
+       * amount is the trigger value ("that much"). See
+       * docs/plans/need-key-themes.md, theme 2's design note.
+       */
+      readonly on: "event";
+      readonly event: TriggerEventName;
+      readonly who?: TriggerWho;
+      readonly filter?: CardFilter;
+      /** Who did it, as the row names them, relative to this ability's
+       * controller ("you" — "whenever **you** …"). */
+      readonly by?: TriggerWho;
+      readonly batched?: true;
+    };
+
+/**
+ * The timing wrapper every trigger takes, whatever its kind (theme 2's
+ * design note): "for the first time each turn", "your second … each turn".
+ *
+ * `nthEachTurn: N` — only when this is the Nth time this turn that this
+ * trigger's event, as this trigger reads it (the spec without this wrapper),
+ * has happened **for the same subject**: the same player for a player's act
+ * ("your second spell", "you lose life for the first time"), the same object
+ * in the same stint for an object's ("this creature attacks for the first
+ * time", "counters are put on that creature for the first time"). Counted
+ * whether or not this ability triggered then, and before its source existed
+ * (the rulings for every such card). The spec's own narrowing narrows what
+ * counts: valiant's "a spell or ability you control" counts only yours, a
+ * `counter` kind or a `filter` only those (U.S.S. Enterprise-D's charge
+ * counters, "your first enchantment spell"). Answered from the journal
+ * (`Game.timingCount`); a kind it can't answer for is refused by
+ * `test/trigger-timing.test.ts`. `firstTimeEachTurn` is `nthEachTurn: 1`.
+ */
+export interface TriggerTiming {
+  readonly firstTimeEachTurn?: boolean;
+  readonly nthEachTurn?: number;
+}
+
+/** A triggered ability's trigger: its event ({@link TriggerKind}) and its
+ * timing ({@link TriggerTiming}). */
+export type TriggerSpec = TriggerKind & TriggerTiming;
 
 export interface TriggeredAbility {
   /**
@@ -2850,6 +2706,9 @@ export interface TriggeredAbility {
    * permanent that leaves and returns is a new object that may trigger again.
    */
   readonly oncePerTurn?: boolean;
+  /** A firebending ability (rule 702.189a — the `firebending()` helper): as
+   * it resolves, its controller firebends (702.189b — `bent`). */
+  readonly firebending?: true;
   /** "N damage divided as you choose among any number of target …"
    * (Dragonlord Atarka, Inferno Titan): the targets from `slot` on — an
    * `any-number` group — share `total`, split as the ability is put on the

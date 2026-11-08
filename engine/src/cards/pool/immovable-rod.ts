@@ -13,7 +13,7 @@ export default defineCard({
   static: [{ affects: { scope: "self" }, mayChooseNotToUntap: true, text: UNTAP_TEXT }],
   triggered: [
     {
-      trigger: { on: "becomes-untapped", who: "self" },
+      trigger: { on: "event", event: "becomes-untapped", who: "self" },
       targets: [],
       effect: { kind: "venture" },
       resolve: null,

@@ -26,7 +26,7 @@ export default defineCard({
   ],
   triggered: [
     {
-      trigger: { on: "cast-spell", who: "any", firstEachTurn: true },
+      trigger: { on: "cast-spell", who: "any", firstTimeEachTurn: true },
       targets: [{ kind: "other", of: "player", than: "trigger-player" }],
       effect: { kind: "damage", amount: { manaValueOf: "trigger-object" }, target: 0 },
       resolve: null,

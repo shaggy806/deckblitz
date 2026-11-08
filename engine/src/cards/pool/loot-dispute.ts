@@ -27,7 +27,7 @@ export default defineCard({
       text: "Whenever you attack the player who has the initiative, create a Treasure token.",
     },
     {
-      trigger: { on: "completes-dungeon", who: "you" },
+      trigger: { on: "event", event: "completes-dungeon", who: "you" },
       targets: [],
       effect: { kind: "create-token", token: "Dragon Token", count: 1 },
       resolve: null,

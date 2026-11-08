@@ -43,7 +43,7 @@ export default defineCard({
       text: FLIP_TEXT,
     },
     {
-      trigger: { on: "wins-coin-flip", who: "you" },
+      trigger: { on: "event", event: "wins-coin-flip", who: "you" },
       targets: [],
       effect: { kind: "create-token", token: "Treasure Token", count: 2, tapped: true },
       resolve: null,

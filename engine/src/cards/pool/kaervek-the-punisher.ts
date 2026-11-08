@@ -20,7 +20,7 @@ export default defineCard({
   text: `${CRIME_TEXT} (Targeting opponents, anything they control, and/or cards in their graveyards is a crime. Copies of permanent spells become tokens.)`,
   triggered: [
     {
-      trigger: { on: "crime-committed", who: "you" },
+      trigger: { on: "event", event: "commits-crime", who: "you" },
       targets: [{ kind: "optional", of: { kind: "card-in-graveyard", whose: "you", filter: { colors: ["B"] } } }],
       effect: {
         kind: "sequence",

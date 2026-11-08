@@ -34,7 +34,7 @@ export default defineCard({
   text: `Menace\n${TREASURE_TEXT}\n${DAMAGE_TEXT}`,
   triggered: [
     {
-      trigger: { on: "cast-spell", who: "any", firstEachTurn: true },
+      trigger: { on: "cast-spell", who: "any", firstTimeEachTurn: true },
       targets: [],
       effect: { kind: "create-token", token: "Treasure Token", count: 1, who: "trigger-controller" },
       resolve: null,

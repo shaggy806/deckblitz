@@ -44,7 +44,7 @@ export default defineCard({
         text: EMBLEM,
         triggered: [
           {
-            trigger: { on: "cast-spell", who: "opponent", firstEachTurn: true },
+            trigger: { on: "cast-spell", who: "opponent", firstTimeEachTurn: true },
             targets: [],
             effect: { kind: "counter", target: "trigger-object" },
             resolve: null,

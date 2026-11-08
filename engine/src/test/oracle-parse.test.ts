@@ -2303,7 +2303,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
 
   it("\"your first noncreature spell each turn\" counts noncreature spells (Valeria Richards)", () => {
     const parsed = face("Whenever you cast your first noncreature spell each turn, draw a card.");
-    expect(parsed.triggered[0]?.trigger).toMatchObject({ on: "cast-spell", firstEachTurn: true, filter: { notTypes: ["creature"] } });
+    expect(parsed.triggered[0]?.trigger).toMatchObject({ on: "cast-spell", firstTimeEachTurn: true, filter: { notTypes: ["creature"] } });
     expect(parsed.triggered[0]?.trigger).not.toHaveProperty("noncreatureOnly");
   });
 
@@ -2484,16 +2484,16 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(negotiator.kicker).toEqual({ cost: "", keyword: "bargain" });
     expect(negotiator.triggered[0].condition).toEqual({ kind: "self-kicked" });
     expect(face("Whenever you collect evidence, draw a card.").triggered[0].trigger).toEqual({
-      on: "evidence-collected",
+      on: "event", event: "collects-evidence",
       who: "you",
     });
     // Committing a crime (rule 700.13).
     expect(face("Whenever you commit a crime, draw a card.").triggered[0].trigger).toEqual({
-      on: "crime-committed",
+      on: "event", event: "commits-crime",
       who: "you",
     });
     expect(face("Whenever an opponent commits a crime, draw a card.").triggered[0].trigger).toEqual({
-      on: "crime-committed",
+      on: "event", event: "commits-crime",
       who: "opponent",
     });
     // Web-slinging (rule 702.188a): the line, its reminder text stripped.
@@ -2571,7 +2571,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       ).triggered[0].trigger,
     ).toEqual({ on: "expend", who: "you", amount: 4 });
     expect(face("Whenever you forage, put a +1/+1 counter on this creature.").triggered[0].trigger).toEqual({
-      on: "forages",
+      on: "event", event: "forages",
       who: "you",
     });
     expect(face("Basic landcycling {1}").cycling).toEqual({ cost: "{1}", search: { supertype: "basic", type: "land" } });
@@ -3187,7 +3187,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       "Creature — Human Soldier",
     );
     expect(guardian.static[0]).toMatchObject({ affects: { scope: "self" }, enlist: true });
-    expect(guardian.triggered[0].trigger).toEqual({ on: "enlists", who: "self" });
+    expect(guardian.triggered[0].trigger).toEqual({ on: "event", event: "enlists", who: "self" });
     expect(guardian.triggered[0].effect).toEqual({ kind: "scry", amount: 2 });
     expect(guardian.complete).toBe(true);
     // The bare keyword (Keldon Flamesage prints it without reminder text).
@@ -4246,9 +4246,9 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(chaser.static[0]).toMatchObject({ grantKeywords: ["menace"], condition: { kind: "source", filter: { renowned: true } } });
     expect(chaser.complete).toBe(true);
     const wardens = face(`Renown 2 ${REMINDER}\nWhenever a creature you control becomes renowned, draw a card.`, "Creature — Human Monk");
-    expect(wardens.triggered[1].trigger).toEqual({ on: "becomes-renowned", who: "you-control", filter: { type: "creature" } });
+    expect(wardens.triggered[1].trigger).toEqual({ on: "event", event: "becomes-renowned", who: "you-control", filter: { type: "creature" } });
     const seeker = face("When this creature becomes renowned, draw a card.", "Creature — Human Soldier");
-    expect(seeker.triggered[0].trigger).toEqual({ on: "becomes-renowned", who: "self" });
+    expect(seeker.triggered[0].trigger).toEqual({ on: "event", event: "becomes-renowned", who: "self" });
     const consul = face("Whenever this creature attacks, if it's renowned, draw a card.", "Creature — Human Soldier");
     expect(consul.triggered[0].condition).toEqual({ kind: "source", filter: { renowned: true } });
   });
@@ -9351,7 +9351,7 @@ describe("cards outside the battlefield", () => {
       grant: { keyword: "unearth", cost: "{3}" },
     });
     const devourer = face("Creature — Demon", "Whenever you foretell a card, this creature gets +2/+0 until end of turn.");
-    expect(devourer.triggered[0].trigger).toEqual({ on: "foretells", who: "you" });
+    expect(devourer.triggered[0].trigger).toEqual({ on: "event", event: "foretells", who: "you" });
   });
 });
 
@@ -10786,7 +10786,7 @@ describe("a static acting on a player", () => {
       "Creature",
       "Whenever this creature becomes the target of a spell or ability for the first time each turn, put a +1/+1 counter on it.",
     );
-    expect(cub.triggered[0].trigger).toEqual({ on: "becomes-target", who: "self", firstTimeEachTurnByAnyone: true });
+    expect(cub.triggered[0].trigger).toEqual({ on: "becomes-target", who: "self", firstTimeEachTurn: true });
   });
 
   it("reads a land tapped for mana producing another type (rules 106.12, 614.1a)", () => {
@@ -15506,7 +15506,7 @@ describe("whenever an opponent searches their library", () => {
       "Flash\nWhenever an opponent searches their library, you gain 1 life and draw a card.",
     );
     expect(face.complete).toBe(true);
-    expect(face.triggered[0].trigger).toEqual({ on: "searches-library", who: "opponent" });
+    expect(face.triggered[0].trigger).toEqual({ on: "event", event: "searches-library", who: "opponent" });
   });
 
   it("Wan Shi Tong, Librarian", () => {
@@ -15516,7 +15516,7 @@ describe("whenever an opponent searches their library", () => {
       "{X}{U}{U}",
       "Flash\nFlying, vigilance\nWhen Wan Shi Tong enters, put X +1/+1 counters on him. Then draw half X cards, rounded down.\nWhenever an opponent searches their library, put a +1/+1 counter on Wan Shi Tong and draw a card.",
     );
-    expect(face.triggered[1].trigger).toEqual({ on: "searches-library", who: "opponent" });
+    expect(face.triggered[1].trigger).toEqual({ on: "event", event: "searches-library", who: "opponent" });
     expect(face.triggered[1].effect).toEqual({
       kind: "sequence",
       effects: [
@@ -15534,7 +15534,7 @@ describe("whenever an opponent searches their library", () => {
       "Flying, trample\nWhenever an opponent searches their library, that player sacrifices a creature of their choice and loses 10 life.\nWhenever another creature dies, put a +1/+1 counter on Ob Nixilis.",
     );
     expect(face.complete).toBe(true);
-    expect(face.triggered[0].trigger).toEqual({ on: "searches-library", who: "opponent" });
+    expect(face.triggered[0].trigger).toEqual({ on: "event", event: "searches-library", who: "opponent" });
     expect(face.triggered[0].effect.effects[0]).toMatchObject({ kind: "sacrifice", who: "trigger-player" });
   });
 });

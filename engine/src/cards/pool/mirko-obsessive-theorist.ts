@@ -23,7 +23,7 @@ export default defineCard({
   text: `Flying, vigilance\n${SURVEIL_TEXT}\n${RETURN_TEXT}`,
   triggered: [
     {
-      trigger: { on: "surveils", who: "you" },
+      trigger: { on: "event", event: "surveils", who: "you" },
       targets: [],
       effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
       resolve: null,

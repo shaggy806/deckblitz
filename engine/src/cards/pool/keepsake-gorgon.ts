@@ -26,7 +26,7 @@ export default defineCard({
   ],
   triggered: [
     {
-      trigger: { on: "becomes-monstrous", who: "self" },
+      trigger: { on: "event", event: "becomes-monstrous", who: "self" },
       targets: [{ kind: "permanent", whose: "opponent", filter: { type: "creature", notSubtypes: ["Gorgon"] } }],
       effect: { kind: "destroy", target: 0 },
       resolve: null,

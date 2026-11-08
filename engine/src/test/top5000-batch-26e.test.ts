@@ -102,7 +102,7 @@ describe("top-5000 batch 26e — The Queen of Dale", () => {
   it("triggers on an opponent's first noncreature spell, not on a creature spell", () => {
     const def = registry.get("The Queen of Dale")!;
     const trigger = def.triggered[0].trigger;
-    expect(trigger).toMatchObject({ on: "cast-spell", who: "opponent", firstEachTurn: true, filter: { notTypes: ["creature"] } });
+    expect(trigger).toMatchObject({ on: "cast-spell", who: "opponent", firstTimeEachTurn: true, filter: { notTypes: ["creature"] } });
   });
 });
 

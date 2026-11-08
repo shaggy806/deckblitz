@@ -166,14 +166,16 @@ describe("'do this only once each turn'", () => {
     expect(hand(game)).toBe(before + 1);
   });
 
-  it("its 'if you don't' applies once it can't be done", () => {
+  it("once done, it doesn't trigger at all — so its 'if you don't' doesn't apply either (rule 603.2h)", () => {
     const { game, a } = setUp();
     game.debugSpawn(ONCE_ELSE, A, "battlefield");
     recordOffers(a, () => [0]);
     enter(game);
     expect(life(game)).toBe(20);
+    const stackBefore = game.state.zones.shared.stack.length;
     enter(game);
-    expect(life(game)).toBe(21);
+    expect(life(game)).toBe(20);
+    expect(game.state.zones.shared.stack.length).toBe(stackBefore);
   });
 
   it("is offered again the next turn", () => {

@@ -34,7 +34,7 @@ export default defineCard({
   text: TEXT,
   triggered: [
     {
-      trigger: { on: "cast-spell", who: "opponent", firstEachTurn: true },
+      trigger: { on: "cast-spell", who: "opponent", firstTimeEachTurn: true },
       targets: [],
       effect: {
         kind: "sequence",

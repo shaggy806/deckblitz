@@ -27,7 +27,7 @@ export default defineCard({
       text: ENTER_TEXT,
     },
     {
-      trigger: { on: "crime-committed", who: "you" },
+      trigger: { on: "event", event: "commits-crime", who: "you" },
       targets: [],
       effect: {
         kind: "may",

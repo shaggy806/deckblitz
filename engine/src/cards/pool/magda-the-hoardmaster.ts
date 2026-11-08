@@ -17,7 +17,7 @@ export default defineCard({
   text: `${CRIME_TEXT} (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)\n${DRAGON_TEXT}`,
   triggered: [
     {
-      trigger: { on: "crime-committed", who: "you" },
+      trigger: { on: "event", event: "commits-crime", who: "you" },
       targets: [],
       effect: { kind: "create-token", token: "Treasure Token", count: 1, tapped: true },
       resolve: null,

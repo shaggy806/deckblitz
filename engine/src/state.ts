@@ -430,20 +430,6 @@ export interface GameObject {
    * controller's `PlayerState.previousUpkeepSeq`.
    */
   controlSinceSeq?: number;
-  /**
-   * Indices of this permanent's activated abilities marked
-   * `oncePerTurn` that have already been used this turn (rule 602.5g —
-   * "Activate only once each turn", Steel Hellkite). Reset as every turn
-   * begins, whoever's it is (an untap step's first act). An ability with
-   * `timesEachTurn` ("no more than twice each turn") has one entry per
-   * activation, so the count of its index is how often it has been used.
-   */
-  abilitiesUsedThisTurn?: number[];
-  /** The `grantsActivatedOf` abilities with `onceEach` this object has used
-   * this turn, each `"<card>#<its ability index>"` (Mairsil, the Pretender):
-   * an index among this object's abilities shifts as the card list changes,
-   * and each card's ability has its own limit. */
-  grantedUsedThisTurn?: string[];
   /** The card this permanent last chose with `choose-exiled-card`, in the stint
    * it had then (Koh, the Face Stealer's "the last chosen card"). Not the same
    * object once it leaves exile (rule 400.7). Cleared on any zone change. */
@@ -452,18 +438,6 @@ export interface GameObject {
    * each for as long as the object exists (see `ActivatedAbility.exhaust`).
    * Cleared by any zone change. */
   exhaustedAbilities?: number[];
-  /**
-   * Indices of this object's triggered abilities marked `oncePerTurn` that
-   * have already triggered — "This ability triggers only once each turn"
-   * (Morbid Opportunist). Stamped with the turn number and the object's
-   * `zoneChangeCount`, so it lapses by itself when the turn ends or the
-   * object changes zones (rule 400.7 — a new object), with nothing to reset.
-   */
-  triggeredOnce?: {
-    readonly turn: number;
-    readonly zoneChangeCount: number;
-    readonly indices: readonly number[];
-  };
   /** True once this permanent has been declared as an attacker this turn —
    * the "attacked this turn" half of Boast (rule 702.142a), and the
    * `attackedThisTurn` filter clause. Reset as each turn begins, and by any
@@ -486,10 +460,6 @@ export interface GameObject {
    * "can't attack a player it has already attacked this turn" (Port Razer).
    * Reset as each turn begins, and by any zone change, like `attackedThisTurn`. */
   attackedPlayersThisTurn?: PlayerId[];
-  /** The turn this object last became tapped, in this battlefield stint (rule
-   * 400.7), so a tapping can say whether it's the first this turn. Cleared as a
-   * turn begins, so it keeps no two tokens apart for long. */
-  tappedOnTurn?: number;
   /** True once this permanent has been declared as an attacker attacking a
    * battle this turn (rule 506.3) — War Historian's "as long as it attacked
    * a battle this turn", which holds from that declaration for the rest of
@@ -1668,11 +1638,10 @@ export interface GameObject {
    * creature flickered in response puts none — while a read of it ("its
    * power") uses last-known information. */
   sourceZoneChangeCount?: number;
-  /** The players whose spells or abilities have targeted this permanent
-   * this turn, in this battlefield stint — what valiant's "for the first
-   * time each turn" reads (the `object-targeted` event's
-   * `firstByPlayerThisTurn`). Stale once `turn` or `stint` differ. */
-  targetedThisTurn?: { readonly turn: number; readonly stint: number; readonly by: readonly PlayerId[] };
+  /** A crew ability on the stack (rule 702.122): the creatures tapped to pay
+   * its cost, as they were tapped — "whenever this Vehicle becomes crewed"
+   * (702.122e) is announced with them as it resolves. */
+  crewedWith?: readonly ObjectId[];
   /** How many times this object has changed zones — bumped by every
    * `moveObject`. Object ids survive zone changes in this engine (a commander
    * keeps its id), so this is what tells the card an ability was activated
@@ -2561,6 +2530,10 @@ export interface LastKnownRefs {
    * `put-into-graveyard` trigger fired on that counted for it, each as the
    * object it became in that graveyard. */
   readonly arrivedTogether?: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
+  /** "Those creatures" (Tamiyo, Upriser Crowned): the sources that counted
+   * for a `deals-damage-batch` trigger, each in the stint it dealt the
+   * damage in — what a filter's `triggerBatch` reads. */
+  readonly dealtTogether?: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
   /** For a "whenever players finish voting" trigger: the votes of the vote
    * that fired it (Erestor of the Council). */
   readonly votes?: readonly Vote[];
@@ -4843,14 +4816,12 @@ export interface CombatId {
 }
 
 /** One attacker of a declaration (rule 508.1a) as it tapped: what it
- * attacks, whether attacking tapped it (no vigilance — 508.1f), and whether
- * it's its first attack this turn. Announced together once every cost to
+ * attacks and whether attacking tapped it (no vigilance — 508.1f). Announced together once every cost to
  * attack is paid (508.1k) — see `GameState.pendingEnlist`. */
 export interface DeclaredAttacker {
   readonly id: ObjectId;
   readonly defender: PlayerId | ObjectId;
   readonly taps: boolean;
-  readonly first: boolean;
 }
 
 /** `count` of one kind of permanent a declaration owes to attack, the taxes
@@ -5915,40 +5886,8 @@ export interface GameState {
    * card included — on every pass to find them.
    */
   tokensLeftBattlefield?: ObjectId[];
-  /**
-   * How many times each ability has resolved this turn, for "if this is the
-   * Nth time this ability has resolved this turn" (`StaticCondition`
-   * `resolved-this-turn`). Keyed by source object, that object's timestamp
-   * and which of its abilities, so a permanent that left and came back
-   * starts again (rule 400.7) while an ability still on the stack from the
-   * old one keeps counting against it. Turn-scoped, cleared as a turn
-   * begins. Optional so an older snapshot still loads.
-   */
-  abilityResolutionsThisTurn?: Record<string, number>;
-  /**
-   * How many times each activated ability whose effect asks (`StaticCondition`
-   * `activated-this-turn` — Dragon Whelp) has been activated this turn, keyed
-   * like `abilityResolutionsThisTurn`. Counted as it's activated, resolved or
-   * not. Turn-scoped, cleared as a turn begins.
-   */
-  abilityActivationsThisTurn?: Record<string, number>;
-  /**
-   * Which modes each ability has had chosen this turn, keyed like
-   * `abilityResolutionsThisTurn` — for "choose one that hasn't been chosen
-   * this turn" (`modal`'s `notChosenThisTurn`) and "do this only once each
-   * turn" (`may`'s `oncePerTurn`, a choice of one mode). Turn-scoped,
-   * cleared as a turn begins.
-   */
-  modesChosenThisTurn?: Record<string, number[]>;
-  /**
-   * The abilities that have done their thing this turn, keyed like
-   * `abilityResolutionsThisTurn` — for `StaticCondition`
-   * `this-ability-did-this-turn`. Added to by an `add-mana` with
-   * `marksAbilityDone` that added at least one mana (Carpet of Flowers; rule
-   * 107.1b: an amount of 0 adds none). Turn-scoped, cleared as a turn begins.
-   */
-  abilitiesDoneThisTurn?: string[];
-  /** The same, never cleared — for "choose one that hasn't been chosen"
+  /** The modes each ability has had chosen, never cleared — for "choose one
+   * that hasn't been chosen" (this turn's are the journal's `did` entries)
    * (`modal`'s `notChosenBefore` — Silent Hallcreeper). The key carries the
    * permanent's timestamp, which it gets as it enters, so a permanent that
    * leaves and comes back is a new object with none chosen (rule 400.7). */

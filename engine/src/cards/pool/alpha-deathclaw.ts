@@ -46,6 +46,6 @@ export default defineCard({
   ],
   triggered: [
     destroys({ on: "enters-battlefield", who: "self" }),
-    destroys({ on: "becomes-monstrous", who: "self" }),
+    destroys({ on: "event", event: "becomes-monstrous", who: "self" }),
   ],
 });

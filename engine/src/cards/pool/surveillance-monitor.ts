@@ -23,7 +23,7 @@ export default defineCard({
       text: ENTER_TEXT,
     },
     {
-      trigger: { on: "evidence-collected", who: "you" },
+      trigger: { on: "event", event: "collects-evidence", who: "you" },
       targets: [],
       effect: { kind: "create-token", token: "Thopter Token", count: 1 },
       resolve: null,

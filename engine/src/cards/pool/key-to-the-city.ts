@@ -24,7 +24,7 @@ export default defineCard({
   ],
   triggered: [
     {
-      trigger: { on: "becomes-untapped", who: "self" },
+      trigger: { on: "event", event: "becomes-untapped", who: "self" },
       targets: [],
       effect: { kind: "may", prompt: "Pay {2} to draw a card?", cost: "{2}", effect: { kind: "draw", amount: 1 } },
       resolve: null,

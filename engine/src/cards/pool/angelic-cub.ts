@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 // Foundations Jumpstart.
 //
 // "Becomes the target of a spell or ability for the first time each turn": by anyone
-// (`firstTimeEachTurnByAnyone`) — the first time this turn any spell or ability has targeted it
+// (`firstTimeEachTurn`, counted over every player's) — the first time this turn any spell or ability has targeted it
 // (this battlefield stint), whether or not this ability triggered then.
 
 const TRIGGER_TEXT =
@@ -29,7 +29,7 @@ export default defineCard({
   ],
   triggered: [
     {
-      trigger: { on: "becomes-target", who: "self", firstTimeEachTurnByAnyone: true },
+      trigger: { on: "becomes-target", who: "self", firstTimeEachTurn: true },
       targets: [],
       effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
       resolve: null,

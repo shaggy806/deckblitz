@@ -20,7 +20,7 @@ export default defineCard({
   text: `${CRIME_TEXT} (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)\n${FOUR_TEXT}`,
   triggered: [
     {
-      trigger: { on: "crime-committed", who: "you" },
+      trigger: { on: "event", event: "commits-crime", who: "you" },
       targets: [],
       effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
       resolve: null,

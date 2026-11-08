@@ -16,7 +16,7 @@ export default defineCard({
   text: `${INSPIRED}\n{2}{B}: Regenerate this creature.`,
   triggered: [
     {
-      trigger: { on: "becomes-untapped", who: "self" },
+      trigger: { on: "event", event: "becomes-untapped", who: "self" },
       targets: [],
       effect: {
         kind: "sequence",

@@ -14,7 +14,7 @@ export default defineCard({
   text: `Flying\n${TEXT}`,
   triggered: [
     {
-      trigger: { on: "becomes-untapped", who: "self" },
+      trigger: { on: "event", event: "becomes-untapped", who: "self" },
       targets: [],
       effect: { kind: "draw", amount: 1 },
       resolve: null,

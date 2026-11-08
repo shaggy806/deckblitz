@@ -17,7 +17,7 @@ export default defineCard({
   text: `Haste\n${INSPIRED_TEXT}`,
   triggered: [
     {
-      trigger: { on: "becomes-untapped", who: "self" },
+      trigger: { on: "event", event: "becomes-untapped", who: "self" },
       targets: [],
       effect: {
         kind: "may",

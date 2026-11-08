@@ -27,7 +27,7 @@ export default defineCard({
   triggered: [
     ward({ mana: "{2}", payLife: 2 }),
     {
-      trigger: { on: "crime-committed", who: "you" },
+      trigger: { on: "event", event: "commits-crime", who: "you" },
       targets: [],
       effect: { kind: "create-token", token: "Zombie Rogue Token", count: 2, tapped: true },
       resolve: null,

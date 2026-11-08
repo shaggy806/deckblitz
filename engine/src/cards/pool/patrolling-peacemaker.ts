@@ -22,7 +22,7 @@ export default defineCard({
   ],
   triggered: [
     {
-      trigger: { on: "crime-committed", who: "opponent" },
+      trigger: { on: "event", event: "commits-crime", who: "opponent" },
       targets: [],
       effect: { kind: "proliferate" },
       resolve: null,

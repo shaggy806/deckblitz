@@ -32,7 +32,7 @@ export default defineCard({
       trigger: {
         on: "cast-spell",
         who: "you",
-        firstEachTurn: true,
+        firstTimeEachTurn: true,
         filter: { typesAnyOf: ["instant", "sorcery"], castFrom: "graveyard", ownedBy: "you" },
       },
       targets: [],

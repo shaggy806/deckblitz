@@ -22,7 +22,7 @@ export default defineCard({
   text: `${LUCK}\n${WIN}`,
   triggered: [
     {
-      trigger: { on: "wins-coin-flip", who: "you" },
+      trigger: { on: "event", event: "wins-coin-flip", who: "you" },
       targets: [],
       effect: { kind: "add-counter", target: "source", counter: "luck", amount: 1 },
       resolve: null,

@@ -48,7 +48,7 @@ export default defineCard({
   ],
   triggered: [
     {
-      trigger: { on: "cast-spell", who: "you", filter: { subtypes: OUTLAWS }, firstEachTurn: true },
+      trigger: { on: "cast-spell", who: "you", filter: { subtypes: OUTLAWS }, firstTimeEachTurn: true },
       targets: [],
       effect: {
         kind: "sequence",

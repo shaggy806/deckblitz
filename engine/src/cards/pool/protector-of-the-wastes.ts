@@ -52,6 +52,6 @@ export default defineCard({
   ],
   triggered: [
     exiles({ on: "enters-battlefield", who: "self" }),
-    exiles({ on: "becomes-monstrous", who: "self" }),
+    exiles({ on: "event", event: "becomes-monstrous", who: "self" }),
   ],
 });

@@ -13,7 +13,7 @@ export default defineCard({
   text: DRAW_TEXT,
   triggered: [
     {
-      trigger: { on: "cast-spell", who: "any", firstEachTurn: true, filter: { multicolored: true } },
+      trigger: { on: "cast-spell", who: "any", firstTimeEachTurn: true, filter: { multicolored: true } },
       targets: [],
       effect: { kind: "draw", amount: 1, who: "opponents-of-trigger-controller" },
       resolve: null,

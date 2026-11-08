@@ -26,7 +26,7 @@ export default defineCard({
       text: ETB_TEXT,
     },
     {
-      trigger: { on: "cast-spell", who: "you", firstEachTurn: true, filter: { notTypes: ["creature"] } },
+      trigger: { on: "cast-spell", who: "you", firstTimeEachTurn: true, filter: { notTypes: ["creature"] } },
       targets: [],
       effect: { kind: "empower-jace", amount: 1 },
       resolve: null,

@@ -12,7 +12,7 @@ export default defineCard({
   text: `${CRIME_TEXT} (Targeting opponents, anything they control, and/or cards in their graveyards is a crime.)\n{T}: Add one mana of any color.\n${DRAW_TEXT}`,
   triggered: [
     {
-      trigger: { on: "crime-committed", who: "you" },
+      trigger: { on: "event", event: "commits-crime", who: "you" },
       targets: [],
       effect: { kind: "add-counter", target: "source", counter: "loot", amount: 1 },
       resolve: null,

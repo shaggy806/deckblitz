@@ -21,7 +21,7 @@ export default defineCard({
       text: "Ward {2}",
     },
     {
-      trigger: { on: "crime-committed", who: "you" },
+      trigger: { on: "event", event: "commits-crime", who: "you" },
       targets: [],
       effect: { kind: "surveil", amount: 2 },
       resolve: null,

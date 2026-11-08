@@ -16,7 +16,7 @@ export default defineCard({
   text: TEXT,
   triggered: [
     {
-      trigger: { on: "cast-spell", who: "you", firstEachTurn: true, filter: { typesAnyOf: ["instant", "sorcery"] } },
+      trigger: { on: "cast-spell", who: "you", firstTimeEachTurn: true, filter: { typesAnyOf: ["instant", "sorcery"] } },
       targets: [],
       effect: { kind: "modify-pt", target: "source", power: 2, toughness: 0, duration: "end-of-turn" },
       resolve: null,

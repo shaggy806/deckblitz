@@ -14,7 +14,7 @@ export default defineCard({
   text: TEXT,
   triggered: [
     {
-      trigger: { on: "becomes-untapped", who: "any" },
+      trigger: { on: "event", event: "becomes-untapped", who: "any" },
       targets: [],
       effect: { kind: "mill", target: "trigger-controller", amount: 1 },
       resolve: null,

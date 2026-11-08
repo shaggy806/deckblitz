@@ -18,7 +18,7 @@ export default defineCard({
   text: TEXT,
   triggered: [
     {
-      trigger: { on: "cast-spell", who: "opponent", firstEachTurn: true, filter: { notTypes: ["creature"] } },
+      trigger: { on: "cast-spell", who: "opponent", firstTimeEachTurn: true, filter: { notTypes: ["creature"] } },
       targets: [],
       effect: {
         kind: "unless",

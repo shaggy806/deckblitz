@@ -33,7 +33,7 @@ export default defineCard({
       trigger: {
         on: "cast-spell",
         who: "you",
-        firstEachTurn: true,
+        firstTimeEachTurn: true,
         filter: { subtype: "Human", type: "creature" },
       },
       targets: [],

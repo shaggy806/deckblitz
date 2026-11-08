@@ -22,7 +22,7 @@ export default defineCard({
   text: `Flying, vigilance\n${COPY_TEXT} (A copy of a permanent spell becomes a token.)`,
   triggered: [
     {
-      trigger: { on: "cast-spell", who: "you", firstEachTurn: true, filter: { xInManaCost: true } },
+      trigger: { on: "cast-spell", who: "you", firstTimeEachTurn: true, filter: { xInManaCost: true } },
       targets: [],
       effect: {
         kind: "may",

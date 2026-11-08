@@ -23,7 +23,7 @@ export default defineCard({
   text: `${CAST_TEXT}\n${COMBAT_TEXT} (Damage dealt by this creature also causes you to gain that much life.)`,
   triggered: [
     {
-      trigger: { on: "cast-spell", who: "you", firstEachTurn: true, filter: { type: "enchantment" } },
+      trigger: { on: "cast-spell", who: "you", firstTimeEachTurn: true, filter: { type: "enchantment" } },
       targets: [],
       effect: { kind: "create-token", token: "Nymph Token", count: 1 },
       resolve: null,

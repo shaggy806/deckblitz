@@ -7,7 +7,7 @@ import type { ObjectId, PlayerId } from "../primitives.js";
 // enters ability resolves, kept for a later trigger (`choose-permanents {
 // remember }`, `who: "chosen"`); a choice made as a permanent transforms
 // (`choosePlayerOnTransform`, rule 712.20); and a trigger on a player losing
-// the game (`on: "player-loses-game"`, rule 104.3).
+// the game (`on: "event", event: "loses-game"`, rule 104.3).
 
 const face = (game: Game, id: ObjectId): number => game.state.objects[id].face ?? 0;
 const lose = (game: Game, player: PlayerId): void => {

@@ -26,7 +26,7 @@ export default defineCard({
     },
     {
       // Any forage of yours, not only this creature's own.
-      trigger: { on: "forages", who: "you" },
+      trigger: { on: "event", event: "forages", who: "you" },
       targets: [],
       effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
       resolve: null,

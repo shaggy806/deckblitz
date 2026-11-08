@@ -36,7 +36,7 @@ export default defineCard({
     {
       fromGraveyard: true,
       condition: { kind: "source-zone", zones: ["graveyard"], sameObject: true },
-      trigger: { on: "surveils", who: "you" },
+      trigger: { on: "event", event: "surveils", who: "you" },
       targets: [],
       effect: {
         kind: "may",

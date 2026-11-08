@@ -32,7 +32,7 @@ export default defineCard({
   ],
   triggered: [
     {
-      trigger: { on: "becomes-monstrous", who: "self" },
+      trigger: { on: "event", event: "becomes-monstrous", who: "self" },
       targets: [{ kind: "any-number", of: "creature-an-opponent-controls" }],
       divided: { total: 0, slot: 0, byTriggerValue: true },
       effect: {
