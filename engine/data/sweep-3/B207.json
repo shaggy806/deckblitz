@@ -625,7 +625,7 @@
       "name": "Flames of the Blood Hand",
       "needs": [
         "effect:damage-cant-be-prevented",
-        "effect:target-player-gains-no-life-this-turn"
+        "effect:players-cant-gain-life-this-turn"
       ],
       "why": "damage that can't be prevented, and one player can't gain life this turn"
     },

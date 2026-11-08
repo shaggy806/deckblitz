@@ -857,7 +857,7 @@
   {
    "name": "Stigma Lasher",
    "needs": [
-    "effect:player-cant-gain-life-for-game"
+    "effect:players-cant-gain-life-this-turn"
    ],
    "why": "the damaged player can't gain life for the rest of the game — player effects only last a turn"
   },

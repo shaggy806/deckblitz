@@ -842,7 +842,7 @@
   {
    "name": "Zefram Cochrane, Warp Pioneer",
    "needs": [
-    "static:cast-from-library-top-once-per-turn"
+    "zone:cast-from-library-top-once-each-turn"
    ],
    "why": "`castFromLibraryTop` has no once-each-turn, your-turn-only limit."
   },

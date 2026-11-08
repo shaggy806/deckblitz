@@ -509,7 +509,7 @@
   {
    "name": "Atarka's Command",
    "needs": [
-    "effect:opponents-cant-gain-life-this-turn"
+    "effect:players-cant-gain-life-this-turn"
    ],
    "why": "'Your opponents can't gain life this turn' (the other three modes are expressible)."
   },
@@ -523,14 +523,14 @@
   {
    "name": "Roiling Vortex",
    "needs": [
-    "effect:opponents-cant-gain-life-this-turn"
+    "effect:players-cant-gain-life-this-turn"
    ],
    "why": "'{R}: Your opponents can't gain life this turn'."
   },
   {
    "name": "Screaming Nemesis",
    "needs": [
-    "effect:player-cant-gain-life-for-game"
+    "effect:players-cant-gain-life-this-turn"
    ],
    "why": "A player dealt damage this way can't gain life for the rest of the game."
   },

@@ -659,7 +659,7 @@
     {
       "name": "Lich's Mirror",
       "needs": [
-        "replacement:would-lose-game"
+        "replacement:lose-game-replacement"
       ],
       "why": "if you would lose the game, instead shuffle and draw seven: no lose-the-game replacement"
     },

@@ -1163,7 +1163,7 @@
   {
    "name": "Icewrought Sentry",
    "needs": [
-    "trigger:you-tap-opponents-creature"
+    "trigger:you-tap-opponent-creature"
    ],
    "why": "'Whenever you tap an untapped creature an opponent controls' — becomes-tapped has no 'tapped by an effect you control' (and 'was untapped') qualifier; the ruling excludes an opponent tapping their own via your effect."
   },

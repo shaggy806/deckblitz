@@ -737,7 +737,7 @@
       "name": "Shared Fate",
       "needs": [
         "replacement:draw-replacement-exile-face-down",
-        "effect:exile-player-hand-play-exiled"
+        "zone:exile-player-hand-play-exiled"
       ],
       "why": "A draw replacement exiling from an opponent's library face down, with play permission tracked per Shared Fate."
     },

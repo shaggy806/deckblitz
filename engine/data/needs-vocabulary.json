@@ -1261,7 +1261,20 @@
   "effect:animate-all-except-source": "effect:animate-all-excluding-source",
   "static:grant-pt-per-cards-in-hand": "static:pt-per-cards-in-hand",
   "static:reveal-first-draw-each-turn-any-turn": "static:reveal-first-draw-every-turn",
-  "static:grant-scavenge-to-graveyard": "keyword:scavenge"
+  "static:grant-scavenge-to-graveyard": "keyword:scavenge",
+  "static:no-loss-for-zero-life": "static:dont-lose-for-zero-life",
+  "replacement:would-lose-game": "replacement:lose-game-replacement",
+  "trigger:you-tap-opponents-creature": "trigger:you-tap-opponent-creature",
+  "cost:cost-reduction-cast-not-from-your-hand": "cost:cost-reduction-cast-not-from-hand",
+  "cost:mana-ability-discard-cost": "cost:mana-ability-discard",
+  "effect:switch-blockers": "effect:swap-blockers",
+  "effect:delayed-move-unplayed-exiled-to-graveyard": "effect:delayed-exiled-unplayed-to-graveyard",
+  "effect:exile-player-hand-play-exiled": "zone:exile-player-hand-play-exiled",
+  "effect:opponents-cant-gain-life-this-turn": "effect:players-cant-gain-life-this-turn",
+  "effect:target-player-gains-no-life-this-turn": "effect:players-cant-gain-life-this-turn",
+  "effect:player-cant-gain-life-for-game": "effect:players-cant-gain-life-this-turn",
+  "static:cast-from-library-top-once-per-turn": "zone:cast-from-library-top-once-each-turn",
+  "static:play-from-library-top-once-each-turn": "zone:cast-from-library-top-once-each-turn"
  },
  "features": {
   "effect:double-player-counters": {
@@ -3731,7 +3744,8 @@
   },
   "static:cast-from-library-top-once-per-turn": {
    "family": "zone:cast-from-library-top",
-   "example": "Zefram Cochrane, Warp Pioneer: cast a spell from the top of your library once each turn, during your turn"
+   "example": "Zefram Cochrane, Warp Pioneer: cast a spell from the top of your library once each turn, during your turn",
+   "mergedInto": "zone:cast-from-library-top-once-each-turn"
   },
   "static:life-gain-trigger-doubling": {
    "family": "static:life-gain-trigger-doubling",
@@ -4353,7 +4367,8 @@
   },
   "replacement:lose-game-replacement": {
    "family": "replacement:new-event-replacements",
-   "example": "The Golden Throne: no 'if you would lose the game, instead' replacement"
+   "example": "The Golden Throne: no 'if you would lose the game, instead' replacement",
+   "description": "'If you would lose the game, instead …': a replacement on the game-loss event itself (The Golden Throne, Lich's Mirror, Stunning Reversal's 'you don't lose the game for having 0 or less life this turn' variant)."
   },
   "replacement:mana-multiplier": {
    "family": "replacement:new-event-replacements",
@@ -4701,7 +4716,7 @@
   "static:dont-lose-for-zero-life": {
    "example": "Pact Weapon: no 'don't lose for 0 life' (narrower than can't lose), no X from a drawn card's mana value",
    "checked": "2026-10-27: partial",
-   "description": "Still missing (2026-10-27 check): cantLoseGame is the broad 'can't lose the game'; no narrow don't-lose-for-0-life form (Lich, Soul Echo, Pact Weapon) and no X from a drawn card's mana value Already there: engine/src/cards/define.ts cantLoseGame (~line 1906); engine/src/characteristics.ts playerCantLoseGame (~line 1504)"
+   "description": "'You don't lose the game for having 0 or less life': suppresses only the 704.5a state-based loss, not poison or an empty library (cantLoseGame is the broader 'can't lose the game'). Phyrexian Unlife, Lich, Transcendence."
   },
   "static:draw-limit": {
    "example": "Narset, Parter of Veils: \"Each opponent can't draw more than one card each turn.\""
@@ -5336,7 +5351,8 @@
   },
   "zone:exile-player-hand-play-exiled": {
    "family": "zone:impulse-permission-options",
-   "example": "Elder Brain: no exile-a-player's-hand-then-draw-that-many with play permission and spend-as-any-color"
+   "example": "Elder Brain: no exile-a-player's-hand-then-draw-that-many with play permission and spend-as-any-color",
+   "description": "Exile a player's hand (or cards from it) and let a player look at and play the exiled cards (Fiend of the Shadows, Shared Fate, Elder Brain)."
   },
   "zone:exiled-with-source-play": {
    "family": "zone:impulse-permission-options",
@@ -5602,7 +5618,9 @@
    "example": "Fortune Teller's Talent: 'You may look at the top card of your library any time' — a private reveal to one player."
   },
   "cost:cost-reduction-cast-not-from-hand": {
-   "example": "Fortune Teller's Talent: 'Spells you cast from anywhere other than your hand cost {2} less to cast.'"
+   "example": "Fortune Teller's Talent: 'Spells you cast from anywhere other than your hand cost {2} less to cast.'",
+   "description": "A cost change for spells cast from anywhere but their caster's own hand (costModification.castFrom lists zones, so an opponent's hand would be missed).",
+   "family": "cost:cost-modification-extensions"
   },
   "effect:animate-with-cda-pt": {
    "family": "static:set-characteristics",
@@ -5620,7 +5638,8 @@
   },
   "static:no-loss-for-zero-life": {
    "family": "effect:lose-game",
-   "example": "Phyrexian Unlife: Phyrexian Unlife: 'You don't lose the game for having 0 or less life' — suppresses only the 704.5a state-based loss, not poison or an empty library."
+   "example": "Phyrexian Unlife: Phyrexian Unlife: 'You don't lose the game for having 0 or less life' — suppresses only the 704.5a state-based loss, not poison or an empty library.",
+   "mergedInto": "static:dont-lose-for-zero-life"
   },
   "static:damage-to-you-as-though-infect": {
    "family": "replacement:damage-modification",
@@ -7986,7 +8005,8 @@
   },
   "static:play-from-library-top-once-each-turn": {
    "family": "zone:cast-from-library-top",
-   "example": "The Fourth Doctor: A once-each-turn play/cast from the library top, with a 'when you do' rider (The Fourth Doctor)."
+   "example": "The Fourth Doctor: A once-each-turn play/cast from the library top, with a 'when you do' rider (The Fourth Doctor).",
+   "mergedInto": "zone:cast-from-library-top-once-each-turn"
   },
   "static:unblockable-unless-attacking-owner": {
    "family": "static:combat-restriction-extensions",
@@ -8061,11 +8081,13 @@
   },
   "trigger:you-tap-opponents-creature": {
    "family": "trigger:combat-trigger-extensions",
-   "example": "Icewrought Sentry: Icewrought Sentry: 'whenever you tap an untapped creature an opponent controls' — a becomes-tapped trigger narrowed to a tap caused by an effect/cost the trigger's controller controls, of an opponent's previously untapped creature."
+   "example": "Icewrought Sentry: Icewrought Sentry: 'whenever you tap an untapped creature an opponent controls' — a becomes-tapped trigger narrowed to a tap caused by an effect/cost the trigger's controller controls, of an opponent's previously untapped creature.",
+   "mergedInto": "trigger:you-tap-opponent-creature"
   },
   "zone:cast-from-library-top-once-each-turn": {
    "family": "zone:cast-from-library-top",
-   "example": "Johann, Apprentice Sorcerer: castFromLibraryTop with a once-per-turn allowance per permanent (Johann, Apprentice Sorcerer), like castFromGraveyard.oncePerTurn."
+   "example": "Johann, Apprentice Sorcerer: castFromLibraryTop with a once-per-turn allowance per permanent (Johann, Apprentice Sorcerer), like castFromGraveyard.oncePerTurn.",
+   "description": "Cast (or play) a spell from the top of your library once each turn, per permanent, like castFromGraveyard.oncePerTurn — with filters, 'during your turn', or a 'when you do' rider (Johann, Zefram Cochrane, The Fourth Doctor, Cemetery Illuminator)."
   },
   "effect:copy-next-loyalty-ability": {
    "family": "effect:copy-ability",
@@ -9828,7 +9850,8 @@
    "example": "Fumble"
   },
   "replacement:would-lose-game": {
-   "example": "Stunning Reversal"
+   "example": "Stunning Reversal",
+   "mergedInto": "replacement:lose-game-replacement"
   },
   "effect:player-effect-target-player": {
    "example": "Will Kenrith"
@@ -10481,7 +10504,8 @@
    "example": "Stench of Evil"
   },
   "effect:switch-blockers": {
-   "example": "General Jarkeld"
+   "example": "General Jarkeld",
+   "mergedInto": "effect:swap-blockers"
   },
   "static:additional-cost-per-mana-symbol": {
    "example": "Drought"
@@ -10636,7 +10660,8 @@
   },
   "cost:mana-ability-discard": {
    "family": "cost:mana-ability-complex-costs",
-   "example": "Bog Witch: '{B}, {T}, Discard a card: Add {B}{B}{B}.' A mana ability's activation never pays `cost.discard` (only the stack path does), and activation doesn't refuse it either — docs/engine-gaps.md."
+   "example": "Bog Witch: '{B}, {T}, Discard a card: Add {B}{B}{B}.' A mana ability's activation never pays `cost.discard` (only the stack path does), and activation doesn't refuse it either — docs/engine-gaps.md.",
+   "description": "A mana ability whose cost discards a card ('Discard a card: Add {B}'): the mana-ability path resolves before the discard is paid, so it isn't paid at all (Bog Witch, Skirge Familiar)."
   },
   "effect:discard-controller-of-target": {
    "family": "effect:player-scope-extensions",
@@ -11441,7 +11466,8 @@
   },
   "effect:delayed-move-unplayed-exiled-to-graveyard": {
    "example": "Three Wishes",
-   "family": "effect:delayed-trigger-extensions"
+   "family": "effect:delayed-trigger-extensions",
+   "mergedInto": "effect:delayed-exiled-unplayed-to-graveyard"
   },
   "effect:delayed-trigger-next-untap-step": {
    "example": "Undiscovered Paradise",
@@ -11586,7 +11612,8 @@
   },
   "effect:player-cant-gain-life-for-game": {
    "family": "effect:temporary-player-effect",
-   "example": "Stigma Lasher: 'that player can't gain life for the rest of the game' — a player effect with no end."
+   "example": "Stigma Lasher: 'that player can't gain life for the rest of the game' — a player effect with no end.",
+   "mergedInto": "effect:players-cant-gain-life-this-turn"
   },
   "cost:untap-others": {
    "family": "cost:choose-cards-as-cost",
@@ -12362,7 +12389,8 @@
   },
   "effect:target-player-gains-no-life-this-turn": {
    "family": "effect:temporary-player-effect",
-   "example": "Flames of the Blood Hand: that player can't gain life this turn"
+   "example": "Flames of the Blood Hand: that player can't gain life this turn",
+   "mergedInto": "effect:players-cant-gain-life-this-turn"
   },
   "replacement:exile-if-damaged-by-attached-dies": {
    "family": "replacement:exile-instead",
@@ -12656,7 +12684,8 @@
   },
   "effect:exile-player-hand-play-exiled": {
    "family": "effect:exile-hands-face-down-return-later",
-   "example": "Shared Fate: 'Each player may look at and play cards they exiled with Shared Fate.'"
+   "example": "Shared Fate: 'Each player may look at and play cards they exiled with Shared Fate.'",
+   "mergedInto": "zone:exile-player-hand-play-exiled"
   },
   "amount:unspent-mana": {
    "family": "static:mana-pool-reads",
@@ -13191,7 +13220,8 @@
   "effect:opponents-cant-gain-life-this-turn": {
    "family": "effect:temporary-player-effect",
    "description": "'Your opponents can't gain life this turn' as a resolving effect: player-effect covers only its controller.",
-   "example": "Atarka's Command"
+   "example": "Atarka's Command",
+   "mergedInto": "effect:players-cant-gain-life-this-turn"
   },
   "effect:creature-spells-uncounterable-this-turn": {
    "family": "effect:temporary-player-effect",
@@ -13796,7 +13826,8 @@
   "cost:mana-ability-discard-cost": {
    "family": "cost:mana-ability-complex-costs",
    "example": "Skirge Familiar",
-   "description": "A mana ability whose cost discards a card ('Discard a card: Add {B}'): the mana-ability path resolves before the discard is paid, so it isn't paid at all."
+   "description": "A mana ability whose cost discards a card ('Discard a card: Add {B}'): the mana-ability path resolves before the discard is paid, so it isn't paid at all.",
+   "mergedInto": "cost:mana-ability-discard"
   },
   "cost:mana-ability-exile-graveyard-cost": {
    "family": "cost:mana-ability-complex-costs",
@@ -14394,7 +14425,7 @@
   },
   "effect:players-cant-gain-life-this-turn": {
    "family": "effect:temporary-player-effect",
-   "description": "'Players can't gain life this turn' as a one-shot effect; only the static would-gain-life replacement exists",
+   "description": "A one-shot 'can't gain life' player effect: who (each player, your opponents, a target player) and how long (this turn, the rest of the game) vary — one timed static (theme 3 of docs/plans/need-key-themes.md). Only the static would-gain-life replacement exists (Sulfuric Vortex). Skullcrack, Atarka's Command, Flames of the Blood Hand, Stigma Lasher.",
    "example": "Skullcrack"
   },
   "decision:optional-redirect": {
@@ -15362,7 +15393,7 @@
   },
   "effect:swap-blockers": {
    "family": "effect:remove-blocker-unblock-and-reblock",
-   "description": "Swap what two blockers block, each checked as able to block the other's attackers.",
+   "description": "Swap or re-point what blockers block, each checked as able to block the other's attackers (Sorrow's Path, General Jarkeld).",
    "example": "Sorrow's Path"
   },
   "trigger:dies-while-blocking-source": {
@@ -15722,13 +15753,14 @@
   },
   "effect:delayed-exiled-unplayed-to-graveyard": {
    "family": "zone:impulse-permission-options",
-   "description": "\"At the beginning of the next end step, if that player hasn't played it, put the exiled card into its owner's graveyard\": a delayed move conditional on the card not having been played.",
+   "description": "\"At the beginning of the next end step, if that player hasn't played it, put the exiled card into its owner's graveyard\": a delayed move conditional on the card not having been played (Elkin Lair, Three Wishes).",
    "example": "Elkin Lair"
   },
   "cost:cost-reduction-cast-not-from-your-hand": {
    "family": "cost:cost-modification-extensions",
    "description": "A cost change for spells cast from anywhere but their caster's own hand (costModification.castFrom lists zones, so an opponent's hand would be missed).",
-   "example": "Advanced Reconstruction"
+   "example": "Advanced Reconstruction",
+   "mergedInto": "cost:cost-reduction-cast-not-from-hand"
   },
   "effect:prevent-damage-gain-life-as-prevented": {
    "family": "amount:damage-prevented-this-way",
@@ -17239,8 +17271,7 @@
   },
   {
    "keys": [
-    "effect:player-cant-gain-life-for-game",
-    "effect:target-player-gains-no-life-this-turn"
+    "effect:players-cant-gain-life-this-turn"
    ],
    "shape": "a player-level can't-gain-life effect on a target player, with the duration as a parameter (rest of the game, or this turn).",
    "from": "F26"
@@ -17967,7 +17998,6 @@
   },
   {
    "keys": [
-    "static:play-from-library-top-once-each-turn",
     "zone:cast-from-library-top-once-each-turn"
    ],
    "shape": "a per-turn use limit on the library-top play/cast permission (a oncePerTurn allowance per permanent on castFromLibraryTop, optionally shared with a land play and with a 'when you do' rider)",
@@ -20559,7 +20589,7 @@
   {
    "keys": [
     "effect:exile-hands-face-down-return-later",
-    "effect:exile-player-hand-play-exiled",
+    "zone:exile-player-hand-play-exiled",
     "mechanic:face-down-pile"
    ],
    "shape": "a face-down exile pile tied to a source or effect, whose cards are later returned to hand or made playable",
@@ -21374,7 +21404,7 @@
   {
    "keys": [
     "effect:win-game",
-    "replacement:would-lose-game"
+    "replacement:lose-game-replacement"
    ],
    "shape": "a game-result effect (you win the game) and a replacement on the event of a player losing the game.",
    "from": "S41"

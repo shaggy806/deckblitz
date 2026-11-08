@@ -975,7 +975,7 @@
   {
    "name": "The Fourth Doctor",
    "needs": [
-    "static:play-from-library-top-once-each-turn"
+    "zone:cast-from-library-top-once-each-turn"
    ],
    "why": "playFromLibraryTop/castFromLibraryTop have no once-each-turn limit shared by a land play and a cast, nor a 'when you do, create a Food' rider on the permission's use."
   },

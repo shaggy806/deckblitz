@@ -386,7 +386,7 @@
   {
    "name": "Stunning Reversal",
    "needs": [
-    "replacement:would-lose-game"
+    "replacement:lose-game-replacement"
    ],
    "why": "the next time you would lose the game this turn, instead"
   },

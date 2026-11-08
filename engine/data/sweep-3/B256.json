@@ -2676,7 +2676,7 @@
   {
    "name": "Skirge Familiar",
    "needs": [
-    "cost:mana-ability-discard-cost"
+    "cost:mana-ability-discard"
    ],
    "why": "The mana-ability path resolves before the discard is taken, so the mana comes free."
   },

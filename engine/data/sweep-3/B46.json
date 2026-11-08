@@ -278,7 +278,7 @@
     {
       "name": "Phyrexian Unlife",
       "needs": [
-        "static:no-loss-for-zero-life",
+        "static:dont-lose-for-zero-life",
         "static:damage-to-you-as-though-infect"
       ],
       "why": "No static for 'you don't lose the game for having 0 or less life' (narrower than Platinum Angel's can't-lose: poison and an empty library still kill), nor for damage dealt to you as though its source had infect while at 0 or less life."

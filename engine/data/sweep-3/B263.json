@@ -796,7 +796,7 @@
   {
    "name": "Advanced Reconstruction",
    "needs": [
-    "cost:cost-reduction-cast-not-from-your-hand"
+    "cost:cost-reduction-cast-not-from-hand"
    ],
    "why": "costModification.castFrom is a list of zones and can't say \"not from your hand\", which takes in a spell cast from an opponent's hand."
   },

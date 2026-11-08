@@ -952,7 +952,7 @@
   {
    "name": "Cemetery Illuminator",
    "needs": [
-    "static:play-from-library-top-once-each-turn",
+    "zone:cast-from-library-top-once-each-turn",
     "condition:card-types-among-exiled-with-source"
    ],
    "why": "once each turn cast the top card if it shares a type with a card exiled with this"

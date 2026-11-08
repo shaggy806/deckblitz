@@ -724,7 +724,7 @@
    "name": "Three Wishes",
    "needs": [
     "effect:exile-may-cast-until-your-next-turn",
-    "effect:delayed-move-unplayed-exiled-to-graveyard"
+    "effect:delayed-exiled-unplayed-to-graveyard"
    ],
    "why": "play the exiled cards until your next turn; then the rest go to your graveyard at your next upkeep"
   },

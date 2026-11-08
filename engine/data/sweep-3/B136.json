@@ -1764,7 +1764,7 @@
   {
    "name": "General Jarkeld",
    "needs": [
-    "effect:switch-blockers"
+    "effect:swap-blockers"
    ],
    "why": "switch the blockers of two attacking creatures"
   },

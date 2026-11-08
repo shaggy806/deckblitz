@@ -594,7 +594,7 @@
   {
    "name": "Marina Vendrell's Grimoire",
    "needs": [
-    "static:no-loss-for-zero-life"
+    "static:dont-lose-for-zero-life"
    ],
    "why": "You don't lose the game for having 0 or less life."
   },

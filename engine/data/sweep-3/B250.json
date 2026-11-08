@@ -1179,7 +1179,7 @@
     {
       "name": "Flames of the Blood Hand",
       "needs": [
-        "effect:target-player-gains-no-life-this-turn"
+        "effect:players-cant-gain-life-this-turn"
       ],
       "why": "Its damage-modification need is built; effect:target-player-gains-no-life-this-turn is still open."
     },

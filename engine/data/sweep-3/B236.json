@@ -698,7 +698,7 @@
   {
    "name": "Skirge Familiar",
    "needs": [
-    "cost:mana-ability-discard-cost"
+    "cost:mana-ability-discard"
    ],
    "why": "'Discard a card: Add {B}' — the mana-ability activation resolves before a discard cost would be paid."
   },
