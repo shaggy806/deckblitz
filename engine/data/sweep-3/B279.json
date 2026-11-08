@@ -1,0 +1,141 @@
+{
+ "batch": "B279",
+ "status": "done",
+ "ranks": "Need-key themes step 5 (docs/plans/need-key-themes.md, 2026-11-08): object sets and one aggregate (engine/src/object-sets.ts) with theme 15's captured context — flagged Build ASAP cards first (Synthetic Destiny; Thorin, Mountain-king; Brass Infiniscope; Captain Marvel, Apex Avenger), then the theme's top keys: what's attached to the source as it last existed, cards exiled with it and sums of counts in a CDA, a cost's exiled card, the highest life total, sharing a creature type with a card exiled this way, total power and toughness, keeping the count of the player with the fewest, a delayed ability counting what was done this way.",
+ "authored": [
+  {
+   "name": "Synthetic Destiny",
+   "files": [
+    "engine/src/cards/pool/synthetic-destiny.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Thorin, Mountain-king",
+   "files": [
+    "engine/src/cards/pool/thorin-mountain-king.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brass Infiniscope",
+   "files": [
+    "engine/src/cards/pool/brass-infiniscope.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Captain Marvel, Apex Avenger",
+   "files": [
+    "engine/src/cards/pool/captain-marvel-apex-avenger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Unlicensed Hearse",
+   "files": [
+    "engine/src/cards/pool/unlicensed-hearse.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Abomination of Llanowar",
+   "files": [
+    "engine/src/cards/pool/abomination-of-llanowar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dauntless Dourbark",
+   "files": [
+    "engine/src/cards/pool/dauntless-dourbark.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Corpse Lunge",
+   "files": [
+    "engine/src/cards/pool/corpse-lunge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Necropolis",
+   "files": [
+    "engine/src/cards/pool/necropolis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dread Defiler",
+   "files": [
+    "engine/src/cards/pool/dread-defiler.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Malignus",
+   "files": [
+    "engine/src/cards/pool/malignus.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scourge of the Skyclaves",
+   "files": [
+    "engine/src/cards/pool/scourge-of-the-skyclaves.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Arbiter of Knollridge",
+   "files": [
+    "engine/src/cards/pool/arbiter-of-knollridge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Resplendent Marshal",
+   "files": [
+    "engine/src/cards/pool/resplendent-marshal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cut Down",
+   "files": [
+    "engine/src/cards/pool/cut-down.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Balance",
+   "files": [
+    "engine/src/cards/pool/balance.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Wyleth, Soul of Steel",
+   "files": [
+    "engine/src/cards/pool/wyleth-soul-of-steel.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Valduk, Keeper of the Flame",
+   "files": [
+    "engine/src/cards/pool/valduk-keeper-of-the-flame.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Song of Blood",
+   "files": [
+    "engine/src/cards/pool/song-of-blood.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": []
+}

@@ -11566,4 +11566,29 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Grizzly Bears'] },
     }),
   ),
+  preset(
+    'Synthetic Destiny: the end step reveals as many creature cards as were exiled',
+    board({
+      you: {
+        bf: ['Grizzly Bears', 'Llanowar Elves', 'Island*6'],
+        hand: ['Synthetic Destiny'],
+        lib: ['Plains', 'Hill Giant', 'Plains', 'Craw Wurm'],
+      },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    'Thorin, Mountain-king: attach any number of Equipment, then that creature deals its power',
+    board({
+      you: { bf: ['Grizzly Bears', 'Bonesplitter', 'Short Sword', 'Mountain*4'], hand: ['Thorin, Mountain-king'] },
+      opp: { bf: ['Craw Wurm'] },
+    }),
+  ),
+  preset(
+    'Balance: everyone keeps as many as the player with the fewest',
+    board({
+      you: { bf: ['Plains*2', 'Grizzly Bears', 'Grizzly Bears'], hand: ['Balance', 'Plains'] },
+      opp: { bf: ['Forest*4', 'Llanowar Elves'], hand: ['Forest', 'Forest', 'Forest'] },
+    }),
+  ),
 ]

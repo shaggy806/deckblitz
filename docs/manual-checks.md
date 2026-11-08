@@ -7690,3 +7690,17 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Cast Tamiyo. Pass the turn; as Bob, attack Alice with Grizzly Bears, and don't block.
 - **Expect:** After the damage, Bob's Grizzly Bears is tapped with a stun counter on it.
 - **Not a bug:** Bob also becomes the monarch: dealing combat damage to the monarch does that.
+
+## Object sets and what a delayed ability remembers (2026-11-08)
+
+### Synthetic Destiny: the end step reveals as many creature cards as were exiled
+- **Do:** Cast Synthetic Destiny with Grizzly Bears and Llanowar Elves out. Pass priority until the end step.
+- **Expect:** Both creatures are exiled at once. At the end step you reveal from the top until two creature cards (Hill Giant and Craw Wurm) are revealed; both enter, and the two Plains are shuffled back.
+
+### Thorin, Mountain-king: attach any number of Equipment, then that creature deals its power
+- **Do:** Cast Thorin. Target Grizzly Bears and both Equipment. Then target Bob's Craw Wurm with the second ability.
+- **Expect:** Both Equipment attach to Grizzly Bears, then a second ability asks for up to one target creature; Grizzly Bears (5 power now) deals 5 damage to the 6/4 Wurm, which dies.
+
+### Balance: everyone keeps as many as the player with the fewest
+- **Do:** Cast Balance. Choose which lands, and later which creatures, to keep.
+- **Expect:** Bob sacrifices down to your number of lands, discards down to your hand size, and you sacrifice down to Bob's one creature.

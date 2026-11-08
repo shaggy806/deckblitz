@@ -1,6 +1,6 @@
 # Need-key themes: general engine changes under the open keys
 
-Status: plan of record (2026-11-07), steps 1-4 (B275-B278) done, step 5 next — see *The plan* just below. The survey under
+Status: plan of record (2026-11-07), steps 1-5 (B275-B279) done, step 6 next — see *The plan* just below. The survey under
 it is a proposal.
 
 The 1,783 open need keys (2,265 waiting cards, re-counted after step 1; the survey's own count was 1,831 and 2,324)
@@ -54,8 +54,11 @@ touch. Each step:
    Monger, Sadistic Tycoon; Leader, Super-Genius; Elrond, Moon-Reader; Avatar Aang; Way of the Mind Sculptor; Tamiyo,
    Upriser Crowned) and 16 of the theme's top keys; 17 keys marked built, their 22 other cards left in `--stale` for
    `author-freed`.
-5. **Object sets and one aggregate** (theme 1, with theme 15's captured context). Synthetic Destiny, Thorin,
-   Mountain-king, Brass Infiniscope, Captain Marvel, Apex Avenger.
+5. **Done 2026-11-08 (B279).** Object sets and one aggregate (theme 1, with theme 15's captured context):
+   `engine/src/object-sets.ts` (see theme 1's design note and *As built*). 19 cards: the four flagged (Synthetic
+   Destiny; Thorin, Mountain-king; Brass Infiniscope; Captain Marvel, Apex Avenger) and 15 of the theme's top keys;
+   13 keys marked built, their 18 other cards (Balancing Act, Restore Balance, Soulless One, Shagrat, The Eagles Are
+   Coming!, …) left in `--stale` for `author-freed` (51 in all).
 6. **The cost pipeline (theme 4), then one `chooser` field (theme 5).** The power-up cards (Hulk, Gamma Goliath; Kang
    the Conqueror; Wonder Man; Advancing the Spirit), Baron Helmut Zemo, Dawnhand Dissident, The Dominion Bracelet,
    World War Hulk, Eumidian Wastewaker.
@@ -182,6 +185,154 @@ single objects, and the aggregate can't take a non-zone set.
 
 **Confidence: medium.** The amounts and filters reduce cleanly. The effects that act on a set ("return the other",
 "an opponent chooses one of the exiled cards") still each need their verb.
+
+**Design note (step 5, 2026-11-07): one `ObjectSetRef`, one member, one resolver.**
+
+*Where it lives.* `engine/src/object-sets.ts`, pure, as `duration.ts`, `journal.ts` and `trigger-events.ts` are:
+the types, the record helpers, and the source-relative sets a static can read without a resolution. The sets a
+resolution knows (a cost's, this way's, the trigger's batch, remembered ones) are resolved by one context method,
+`ctx.objectSet(ref)`, and handed to the aggregate, the filter binding and the amount reads as members.
+
+*The member.* `SetMember = { object, stint, count?, was? }`, the journal entry's spelling (step 3), plain data:
+- `stint` is the object's `zoneChangeCount` **after the act**, where the set found it — the journal's convention:
+  on the battlefield for what was tapped, attacking, entering or dealing damage; in the graveyard for a permanent
+  sacrificed or a card discarded or put there; in the hand for one revealed; in exile for one exiled. An effect acts
+  on a member only while it is still in that stint (400.7, 603.7c). `was` is how it was **in the act** (608.2h): a
+  sacrificed or died permanent's last-known information from the battlefield, a revealed card's snapshot in the
+  hand (a hand keeps no last-known information of its own). A read ("its power") takes `was` when the member has
+  one, else the member as it is while it's in its stint, else its last-known information for that stint, else
+  nothing — a member with no information left still counts in a plain count ("that many"), and matches only an
+  empty filter.
+- `count` is how many permanents it stood for (a token stack that went whole, engine/CLAUDE.md): every count and sum
+  over a set weighs a member by it, as the aggregate already weighs a stack on the battlefield.
+
+*The reference.* `ObjectSetRef`, one union, each member one meaning everywhere:
+- `{ thisWay: ThisWayKind, who?, byOwner? }`: what the resolution under way did (this-way.ts), whose as the
+  `thisWay` amount already says. `"created"` is `{ thisWay: "created" }`, not a member of its own.
+- `{ paid: "sacrificed" | "discarded" | "exiled" | "revealed" | "tapped" }`: the objects the spell's or ability's
+  cost took (601.2h, 602.2b), recorded as each is paid — and, for `"sacrificed"`, by a `sacrifice-source` step
+  earlier in the same resolution, as the old ref was. (A `"returned"` member waits for a card: the one cost that
+  returns a creature, ninjutsu's, keeps `LastKnownRefs.returnedAttacking`, which records what it attacked.)
+- `"exiled-with-source"`: rule 607.2a / 406.6 linked exile — the cards exiled with the source in the stint the
+  ability refers to (`GameObject.exiledWith`, `exiledUntil`), only the source's own printed pairs being linked
+  (607.1, as `exile`'s `linked` already is).
+- `"trigger-batch"`: "those creatures", "them", "one of them" — the objects of the batch a "one or more" trigger
+  fired on, whichever kind it is (attacking, entering, arriving in a graveyard, dealing damage), each in the stint
+  it was in then; one that left since is no longer one of them to act on, though it's read as it was (603.10a for
+  the look-back kinds).
+- `"attached-to-source"`: the Auras and Equipment attached to the source — as it last existed once it has left
+  (608.2h: Wyleth's "for each Aura and Equipment attached to it" with Wyleth gone).
+- `{ targets: number[] }`: a target group, the objects in those slots (empty and illegal slots name nothing).
+- `{ remembered: name }`: a set captured into a delayed or reflexive trigger (below).
+
+*Where the state keeps sets.* One field, `LastKnownRefs.sets: ObjectSets` — `{ paid?: { [kind]: SetMember[] },
+batch?: SetMember[], remembered?: { [name]: SetMember[] } }` — plain arrays (ROADMAP's constraint), on the stack
+object as the cost is paid or the trigger fires. `addToSet` is its one writer, so a cost paid in two parts (a
+chosen discard answered after a sacrifice) appends rather than overwrites.
+
+*Every consumer takes it.*
+- `AggregateSpec.in` (and `plus`' `in`) takes `ObjectSetRef` beside its zones; the zone `"attackers"` goes, its
+  four cards on `"trigger-batch"`. The aggregate gains `"min"` (0 over nothing, as `max`). A static aggregate (a
+  CDA, a condition) reads the source-relative sets itself (`staticSetMembers`), so "the number of cards exiled with
+  it" works in every zone a CDA does (604.3); the resolution-only sets read nothing there.
+- `CardFilter.inSet: ObjectSetRef` in place of `triggerBatch: true`, bound by `bindDynamicCompares` to the
+  `amongObjects` clause it already had (unbound, it matches nothing). `ShareReference` takes any `ObjectSetRef`
+  ("shares a creature type with **a member of**" — the union of their types, as `"exiled-with-source"` already
+  read), in place of its own `"sacrificed"` and `"exiled-with-source"`.
+- An amount that reads one object (`powerOf`, `toughnessOf`, `manaValueOf`, `countersOn`, `manaSymbolsOf`, …)
+  takes an `ObjectSetRef` for "**the** sacrificed creature", "**the** exiled card": its one member, 0 with none or
+  several. `AmountRef`'s own `"sacrificed"`, `"discarded"`, `"revealed"`, `"exiled-as-cost"` and `"tapped"` go
+  (`"tapped"` stays an `EffectTargetRef`, for acting on that permanent, 400.7). `create-token-copy.of` takes `{ paid:
+  "exiled" }` in place of `"exiled-as-cost"`.
+- The `thisWay` amount keeps its counting modes (`filter`, `cardTypes`, `perPlayer`, `sharingManaValue`) and loses
+  its own `sumOf` / `greatestOf`: "the total power of the creatures sacrificed this way" is an aggregate `sum` `in:
+  { thisWay: "sacrificed" }`, one fold for every set.
+- `delayed-trigger` and `reflexive-trigger` take `remember: { [name]: ObjectSetRef }` (with an optional `filter`,
+  read as it's captured: Song of Blood's "creature card put into your graveyard this way"), resolved as the effect
+  applies into plain member arrays — `DelayedTrigger.remembered`, and the reflexive trigger's refs — and handed to
+  the ability as it fires (`LastKnownRefs.sets.remembered`), read as `{ remembered: name }`.
+
+*Theme 15's captured context.* A delayed trigger already keeps the resolution that made it (`madeIn`), its targets
+and their stints, its trigger object and its recipient. It now keeps the rest of what its creator knew: its **X**
+(`DelayedTrigger.x`, the fired ability's X — "where X is the creator's X" no longer reads 0), its **chosen
+player** (`LastKnownRefs.player`, "that player"), and its **sets** (`remember`). So "the number of creatures exiled
+this way" outlives the resolution (Synthetic Destiny, The Eagles Are Coming!). Rule 603.7b is unchanged: once,
+unless it has a duration; 603.7c: a remembered member is acted on only while in its stint.
+
+*The player aggregate.* `{ amongPlayers: "greatest" | "least", of: EffectAmount, who?: PlayerScope,
+includingLeft? }`: `of` read once per player in `who` (every player still in the game by default) as that
+player's `"each"`, then the largest or smallest — "the highest life total among all players" is `{ amongPlayers:
+"greatest", of: { lifeTotal: "each" } }`, "the number of lands controlled by the player who controls the fewest"
+`{ amongPlayers: "least", of: { countOf: <land>, forEachPlayer: true } }`. It replaces `greatestAmongPlayers` and
+`lowestLifeTotal`. "Each opponent who …" is already `countPlayers`' `where` and a scope's `whoIf`, so no third
+shape. A CDA reads it through `CountSpec` (the same member), over the `of` forms a static can answer (life totals
+and battlefield counts), which a pool-wide test holds cards to, as `trigger-timing.test.ts` does.
+
+*What it replaces.* The per-set `LastKnownRefs` fields `sacrificed`, `discarded`, `exiledCost`, `revealed`,
+`tapped`, `attackedTogether`, `enteredTogether`, `arrivedTogether` and `dealtTogether` (into `sets`; `attackers`,
+which keeps what each attacker attacked, stays: it is Mangara's record, not a set); the `ResolutionContext` fields
+that mirrored them (`sacrificed`, `discarded`, `exiledAsCost`, `revealed`, `enteredTogether`, `triggerBatch`); the
+`AmountRef`s above; the `thisWay` amount's `sumOf` / `greatestOf`; the filter's `triggerBatch`; the aggregate zone
+`"attackers"` and `AggregateReads.attackers`; `ShareReference`'s `"sacrificed"`; `greatestAmongPlayers` and
+`lowestLifeTotal`.
+
+*Rules.* 608.2h (a member read as it was, once it has moved), 603.10a (the look-back batches), 400.7 and 603.7c
+(acted on only in its stint), 607.1 / 607.2a / 406.6 (linked exile is the source's own), 603.7b (delayed once
+unless it has a duration), 603.12 (a reflexive trigger is a delayed one, so it remembers the same way). Token stacks:
+a member's `count`.
+
+*Bots.* `effect-worth.ts` names `create-token-copy`'s `of` (now `{ paid: "exiled" }`); `features.ts` and
+`target-polarity.ts` read no set refs or amounts (checked), and v2 simulates resolutions, so it sees every set as
+the table does.
+
+*As built (B279).*
+- `object-sets.ts` as above: `SetMember` (with `shown`, for a card revealed in a hidden zone), `ObjectSetRef`,
+  `PaidKind` (with `"unattached"`: Captain America's "unattach an Equipment" cost, which had borrowed
+  `"sacrificed"`), `ObjectSets`, `RememberSpec`, `addToSet` (its one writer), `storedSetMembers`, `setMembersAll`,
+  `onlyMember`, `isCardSet` and `staticSetMembers`. The game resolves the rest in `makeResolutionContext`
+  (`objectSet`, and `setMatches` for the aggregate, which leaves out a member in a library or hand that wasn't
+  shown, and a face-down exiled card unless the filter asks only whose it is, 406.3a); the cost writers are one
+  `Game.recordPaid` (`paidMembers`), every paid kind kept whole on a copy of a spell (`SpellSnapshot.paidCost`, rule
+  707.10 — it kept only the exiled and tapped ones).
+- Deleted, every user moved: the nine `LastKnownRefs` set fields; `ResolutionContext.sacrificed`, `discarded`,
+  `exiledAsCost`, `revealed`, `enteredTogether`, `triggerBatch`; `AmountRef`'s five strings (about 140 card sites, by
+  tsc's reported positions, and the `as const` ones tsc doesn't excess-check, found by a pool-wide walk); the
+  `thisWay` amount's `sumOf` / `greatestOf` (65 sites onto aggregates); the filter's `triggerBatch` (`inSet`) and
+  `sameNameAsThisWay` (`sameNameWith: { thisWay }`); `create-token-copy.of`'s `"entered-together"`,
+  `"exiled-as-cost"` and `"exiled-this-way"`; the zone `"attackers"` and `AggregateReads.attackers`;
+  `ShareReference`'s `"sacrificed"`; the amounts `exiledWithSourceManaValue` / `exiledWithSourcePower`, `CountSpec`'s
+  `exiledWithThis` and `grantPtPerCount.exiledWithSourceManaValue` (all aggregates `in: "exiled-with-source"`); and
+  `greatestAmongPlayers` / `lowestLifeTotal` (`amongPlayers`). The scaffolder (`oracle-parse.mjs`) emits the new
+  words. `test/object-sets.test.ts` walks every definition for the removed words and keeps counted statics on the
+  source's own sets.
+- Additions the proving cards needed: the aggregate's `"min"`; `CountSpec`'s `StaticPlayerAggregate` (with `half`
+  and `from`: Malignus, Scourge of the Skyclaves) and `sum` (Dauntless Dourbark's "Forests plus Treefolk", where a
+  Treefolk Forest is in both); the filter clause `totalPowerToughness` (Cut Down); the this-way kind `"attached"`
+  (Thorin); `LastKnownRefs.counter` and `add-counter`'s `counterOfTrigger` (Captain Marvel's "the same kind"); a
+  next-spell delayed trigger's X is that spell's (Brass Infiniscope), as a cast trigger's is.
+- Theme 15: `DelayedTrigger.x`, `.player` and `.remembered`, handed to the fired ability by `carryDelayedIdentity`
+  (the creator's X only where the ability has none of its own); `remember` on `delayed-trigger` and
+  `reflexive-trigger`.
+- **Not moved this session**, each with its reason:
+  - The `this-way` condition, the filter clauses `thisWay` / `notThisWay` and the `thisWay` amount's counting modes
+    read this way directly (live, unbound, no binding step), so they stay; they are the same set as `{ thisWay }`.
+  - The condition kinds `sacrificed` and `discarded` ("if the sacrificed creature was …") read `{ paid }`'s one
+    member now; folding them into a general "member matches" condition is theme 7's (relational clauses).
+  - `LastKnownRefs.attackers` keeps what each attacker attacked (Mangara's re-check), which a set doesn't.
+  - Other `"exiled-this-way"` words in other vocabularies (`cast-now`'s `from`, `choose-from-zone`'s `zone`,
+    `become-foretold`'s target) are verbs on this way's cards, theme 1's "each still need their verb".
+  - "Sacrifice any number of creatures" as a cost (Corpse Cobble, Soulblast, Sword of the Ages,
+    `amount:total-power-sacrificed-as-cost`): the aggregate `in: { paid: "sacrificed" }` reads it once there is
+    such a cost — step 6's cost pipeline.
+  - "Shares a creature type with **each** creature tapped this way" (Cryptic Gateway): the share reference is the
+    union of the members' types, which is "a member of"; "each" is a different relation (theme 7).
+  - Counters of two kinds put at once are two `counter-added` events, so a counters-put trigger fires once per
+    kind (rule 603.2c would have one event); Captain Marvel copies the same counters either way. Recorded as an
+    engine rules gap.
+- Measured: a timed `bot:bench` (16 games, four players, 8 workers, nothing else running) played the same games
+  (12-4, 38.9 turns on average) at 71.1 s a game and 119.5 ms a decision, against 70.0 s and 117.5 ms just before.
+  A first run read 79.1 s with seed 8 timing out; seed 8 replayed alone played the same game on both builds (77 s
+  against 75 s), and the old build's bench re-run beside it read 94.2 s: this machine's spread, not the change.
 
 ### 2. Declarative event triggers and generic modifiers (171 keys, ~236 cards)
 

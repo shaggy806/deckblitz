@@ -437,6 +437,16 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   slots are alike, as here), and a skipped optional first slot still needs the cast refused or the
   random controller kept from skipping it. Found 2026-10-23, batch 151's checks.
 
+**Counters of several kinds put at once fire a "one or more counters" trigger once per kind** (found
+2026-11-08, batch 279). `Game` emits one `counter-added` event per kind (`addCounter`), so a
+non-batched `counters-put` trigger ("whenever you put one or more counters on a creature") fires
+once for each kind an effect puts on one permanent at once (The Ozolith moving +1/+1 and flying
+counters, a "put a +1/+1 counter and a flying counter" effect), where rule 603.2c makes it one
+event for that permanent. Captain Marvel, Apex Avenger (in the pool) copies the same counters
+either way, but asks its "may" once per kind; a "draw a card" payoff would draw twice. The fix is
+one event per permanent per placement carrying every kind (the `withCounterBatch` batch already
+groups them), with `LastKnownRefs.counter` a list.
+
 **A "one or more cards milled" trigger fires once per player on a simultaneous mill** (found
 2026-11-07, batch 275). `Game` emits `cards-milled` once per milling player (game.ts, `this.emit({
 type: "cards-milled", player, objects: milled })`), so "whenever one or more nonland cards are

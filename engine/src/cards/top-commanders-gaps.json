@@ -1986,7 +1986,20 @@
   "trigger:phases-in",
   "trigger:you-tap-opponent-creature",
   "stat:once-per-turn-trigger",
-  "trigger:loses-life-first-time-each-turn"
+  "trigger:loses-life-first-time-each-turn",
+  "effect:delayed-count-done-this-way",
+  "effect:this-way-attached",
+  "effect:delayed-trigger-reads-spell-x",
+  "effect:add-counters-same-kind-as-trigger",
+  "amount:attached-to-source-last-known",
+  "bug:cda-cards-exiled-with",
+  "bug:cda-sum-of-counts",
+  "cost:exiled-card-ref",
+  "effect:cost-exiled-cards-this-way",
+  "amount:highest-life-total",
+  "filter:shares-creature-type-with-this-way",
+  "condition:filter-total-power-toughness",
+  "effect:keep-count-equal-to-fewest"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

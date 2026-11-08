@@ -12,6 +12,21 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Need-key themes step 5: object sets and one aggregate** (2026-11-08, B279): one
+  `ObjectSetRef` (`engine/src/object-sets.ts`) for every set of objects a card names — what was
+  done this way, what the cost took, the cards exiled with the source, the trigger's batch, what's
+  attached to the source, a target group, what a delayed or reflexive ability remembered — each
+  member read as it was (608.2h) and acted on only in its stint (400.7), taken by the aggregate
+  (`in`, and `"min"`), the filter (`inSet`), the share clauses, the one-object amounts and
+  `create-token-copy`. Nine `LastKnownRefs` fields, five `AmountRef`s, the `thisWay` amount's
+  `sumOf` / `greatestOf`, `triggerBatch`, `sameNameAsThisWay`, the aggregate zone `"attackers"`,
+  the exiled-with-source amounts and `CountSpec`'s `exiledWithThis` deleted, ~200 card sites moved.
+  The player aggregate `amongPlayers` (replacing `greatestAmongPlayers` / `lowestLifeTotal`, and
+  in a CDA); theme 15's captured context (a delayed ability keeps its creator's X, "that player"
+  and `remember`ed sets). 19 cards (Synthetic Destiny, Thorin, Mountain-king, Brass Infiniscope,
+  Captain Marvel, Apex Avenger, Balance, Malignus, Unlicensed Hearse and 10 more), 13 keys built,
+  four flagged cards unflagged.
+
 - **Need-key themes step 4: declarative event triggers and one timing wrapper** (2026-11-07,
   B278): the generic `{ on: "event", event, who?, filter?, by? }` trigger over a table of event
   words (`engine/src/trigger-events.ts`), which absorbed 19 hand-written kinds and the unused
