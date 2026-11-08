@@ -29,7 +29,7 @@ export default defineCard({
   ],
   activated: [
     {
-      cost: { mana: "{X}{2}{W}", tap: false, exileSelf: true },
+      cost: { mana: "{X}{2}{W}", tap: false, do: { kind: "exile", target: "source" } },
       condition: {
         kind: "all",
         of: [

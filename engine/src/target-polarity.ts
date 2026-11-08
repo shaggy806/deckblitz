@@ -31,6 +31,7 @@
  */
 
 import type { ActivatedAbility, TriggeredAbility } from "./abilities.js";
+import { costLosesSource } from "./abilities.js";
 import type { LegalAction } from "./actions.js";
 import type { CardRegistry } from "./cards.js";
 import type { CardDefinition } from "./cards/define.js";
@@ -692,7 +693,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   gift: none,
   // An ability that sacrifices the permanent is little consolation beside
   // what a `sequence` did to it first (Vraska, Betrayal's Sting's Treasure).
-  "grant-activated": (n, v) => v.touch(n.target, "help", n.ability.cost.sacrifice === "self" ? MINOR : MAJOR),
+  "grant-activated": (n, v) => v.touch(n.target, "help", costLosesSource(n.ability.cost) ? MINOR : MAJOR),
   // Only reads its target, whose abilities it may want whoever's it is.
   "grant-activated-of": (n, v) => v.touch(n.of, "either", MINOR),
   // A gained static is a gift ("can't be blocked by more than one creature")
@@ -879,6 +880,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     n.counter === "experience" ? v.touch(n.target, "harm", MINOR) : v.touch(n.target, "help", MINOR),
   "get-energy": none,
   "pay-energy": none,
+  "cost-paid": none,
   "create-emblem": none,
   // "Players can't gain life this turn": no target of its own.
   "timed-static": none,

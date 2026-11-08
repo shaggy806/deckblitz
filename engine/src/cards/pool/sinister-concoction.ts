@@ -8,7 +8,7 @@ export default defineCard({
   text: "{B}, Pay 1 life, Mill a card, Discard a card, Sacrifice this enchantment: Destroy target creature.",
   activated: [
     {
-      cost: { mana: "{B}", tap: false, payLife: 1, mill: 1, discard: { count: 1 }, sacrifice: "self" },
+      cost: { mana: "{B}", tap: false, payLife: 1, discard: { count: 1 }, sacrifice: "self", do: { kind: "mill", target: "you", amount: 1 } },
       targets: ["creature"],
       effect: { kind: "destroy", target: 0 },
       resolve: null,

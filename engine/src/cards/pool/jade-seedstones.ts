@@ -18,8 +18,9 @@ export default defineCard({
       cost: {
         mana: "{5}{G}{G}",
         tap: false,
-        exileSelf: true,
+        
         craft: { count: 1, filter: { type: "creature" }, text: "creature" },
+        do: { kind: "exile", target: "source" },
       },
       sorcerySpeed: true,
       targets: [],

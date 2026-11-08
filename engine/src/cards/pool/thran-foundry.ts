@@ -10,7 +10,7 @@ export default defineCard({
   text: TEXT,
   activated: [
     {
-      cost: { mana: "{1}", tap: true, exileSelf: true },
+      cost: { mana: "{1}", tap: true, do: { kind: "exile", target: "source" } },
       targets: ["player"],
       effect: { kind: "shuffle-graveyard-into-library", target: 0 },
       resolve: null,

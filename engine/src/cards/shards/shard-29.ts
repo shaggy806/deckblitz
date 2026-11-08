@@ -839,6 +839,7 @@ import _poolTideshaperMystic from "../pool/tideshaper-mystic.js";
 import _poolTigerDillo from "../pool/tiger-dillo.js";
 import _poolTimberpackWolf from "../pool/timberpack-wolf.js";
 import _poolTimeWalk from "../pool/time-walk.js";
+import _poolTimestreamNavigator from "../pool/timestream-navigator.js";
 import _poolToilToRenown from "../pool/toil-to-renown.js";
 import _poolTorWauki from "../pool/tor-wauki.js";
 import _poolTorchBreath from "../pool/torch-breath.js";
@@ -1813,6 +1814,7 @@ const shard: CardShard = {
     _poolTigerDillo,
     _poolTimberpackWolf,
     _poolTimeWalk,
+    _poolTimestreamNavigator,
     _poolToilToRenown,
     _poolTorWauki,
     _poolTorchBreath,

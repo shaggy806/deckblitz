@@ -745,6 +745,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Zombie Token",
   "Zombie Token (Ashnod, Flesh Mechanist)",
   "Zombie Token (Black 0/0)",
+  "Zombie Token (Blue-Black, Menace)",
   "Zombie Token (Crowded Crypt)",
   "Zombie Token (Curse of the Restless Dead)",
   "Zombie Token (Geralf, Visionary Stitcher)",

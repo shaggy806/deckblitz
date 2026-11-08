@@ -22,7 +22,7 @@ export default defineCard({
   text: `Vigilance, lifelink\n${EXILE_TEXT}`,
   activated: [
     {
-      cost: { mana: null, tap: false, exileSelf: true },
+      cost: { mana: null, tap: false, do: { kind: "exile", target: "source" } },
       targets: [],
       effect: {
         kind: "grant-keyword-all",

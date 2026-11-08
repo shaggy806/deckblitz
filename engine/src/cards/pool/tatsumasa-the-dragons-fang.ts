@@ -15,7 +15,7 @@ export default defineCard({
   static: [{ affects: { scope: "attached" }, grantPt: [5, 5], text: PUMP }],
   activated: [
     {
-      cost: { mana: "{6}", tap: false, exileSelf: true },
+      cost: { mana: "{6}", tap: false, do: { kind: "exile", target: "source" } },
       targets: [],
       effect: {
         kind: "sequence",

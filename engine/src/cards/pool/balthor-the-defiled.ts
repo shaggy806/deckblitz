@@ -22,7 +22,7 @@ export default defineCard({
   ],
   activated: [
     {
-      cost: { mana: "{B}{B}{B}", tap: false, exileSelf: true },
+      cost: { mana: "{B}{B}{B}", tap: false, do: { kind: "exile", target: "source" } },
       targets: [],
       effect: {
         kind: "return-from-graveyard",

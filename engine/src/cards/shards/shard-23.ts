@@ -915,6 +915,7 @@ import _poolValakutInvoker from "../pool/valakut-invoker.js";
 import _poolVandalblast from "../pool/vandalblast.js";
 import _poolVandalize from "../pool/vandalize.js";
 import _poolVanishingVerse from "../pool/vanishing-verse.js";
+import _poolVarolzTheScarStriped from "../pool/varolz-the-scar-striped.js";
 import _poolVashtaNerada from "../pool/vashta-nerada.js";
 import _poolVedalkenShackles from "../pool/vedalken-shackles.js";
 import _poolVeinRipper from "../pool/vein-ripper.js";
@@ -1911,6 +1912,7 @@ const shard: CardShard = {
     _poolVandalblast,
     _poolVandalize,
     _poolVanishingVerse,
+    _poolVarolzTheScarStriped,
     _poolVashtaNerada,
     _poolVedalkenShackles,
     _poolVeinRipper,

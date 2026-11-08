@@ -239,6 +239,9 @@ export interface SpellCastClause {
 /** A kicker's non-mana cost — see `CardDefinition.kicker.also`. */
 export interface KickerAlsoCost {
   readonly text: string;
+  /** An action as the cost — see `AbilityCost.do`. Paid as the spell goes on
+   * the stack, after its mana and its other parts (601.2h). */
+  readonly do?: EffectSpec;
   readonly payLife?: number;
   readonly discard?: number;
   readonly discardAtRandom?: boolean;
@@ -284,14 +287,8 @@ export interface AdditionalCostOption {
    * variant's button, so it has to read as an imperative on its own. */
   readonly text: string;
   readonly sacrifice?: CardFilter;
-  readonly discard?: number;
   readonly payLife?: number;
   readonly mana?: string;
-  /** "Blight N" (rule 701.68a — Bogslither's Embrace's "blight 1 or pay
-   * {3}"): offered only while the caster controls a creature (701.68b), and
-   * which creature is chosen as the cost is paid, once the spell is on the
-   * stack, with the `choose-permanents` decision (601.2h). */
-  readonly blight?: number;
   /** "Behold an Elf" (rule 701.4a — Lys Alana Dignitary's "behold an Elf or
    * pay {2}"): offered only while the caster has one to behold, and which
    * one is chosen as the cost is paid, once the spell is on the stack, with
@@ -4350,8 +4347,9 @@ export interface CastModalSpec {
   /** "Choose one. If this spell was cast using teamwork, choose both
    * instead" (HULK SMASH!): exactly this many modes when the spell is kicked
    * (its teamwork cost paid — `CardDefinition.kicker`), both chosen as it's
-   * cast (rule 601.2b). */
-  readonly kickedModes?: number;
+   * cast (rule 601.2b). A range is "choose one. If this spell was kicked,
+   * choose any number instead" (the Inscriptions). */
+  readonly kickedModes?: number | { readonly min: number; readonly max: number };
   /** "You may choose the same mode more than once" (rule 700.2d — the
    * Confluences): the chosen modes may repeat, and the spell is treated as
    * though a mode chosen n times appeared n times in sequence, each copy with

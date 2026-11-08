@@ -36,7 +36,7 @@ export default defineCard({
   ],
   activated: [
     {
-      cost: { mana: "{1}{R}", tap: false, discardHand: true, sacrifice: "self" },
+      cost: { mana: "{1}{R}", tap: false, sacrifice: "self", do: { kind: "discard-hand", who: "you" } },
       targets: [],
       effect: { kind: "draw", amount: 2 },
       resolve: null,

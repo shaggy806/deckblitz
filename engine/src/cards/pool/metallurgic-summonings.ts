@@ -26,7 +26,7 @@ export default defineCard({
   text: "Whenever you cast an instant or sorcery spell, create an X/X colorless Construct artifact creature token, where X is that spell's mana value.\n{3}{U}{U}, Exile this enchantment: Return all instant and sorcery cards from your graveyard to your hand. Activate only if you control six or more artifacts.",
   activated: [
     {
-      cost: { mana: "{3}{U}{U}", tap: false, exileSelf: true },
+      cost: { mana: "{3}{U}{U}", tap: false, do: { kind: "exile", target: "source" } },
       condition: { kind: "controls", filter: { type: "artifact" }, atLeast: 6 },
       targets: [],
       effect: {

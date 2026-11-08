@@ -43,7 +43,7 @@ export default defineCard({
   text: "Flying, trample, haste\nAs long as there are fewer than eight cards in your graveyard, The Warring Triad isn't a creature.\n{T}, Mill a card: Target player adds one mana of any color. (Activate only as an instant.)",
   activated: [
     {
-      cost: { mana: null, tap: true, mill: 1 },
+      cost: { mana: null, tap: true, do: { kind: "mill", target: "you", amount: 1 } },
       targets: ["player"],
       effect: { kind: "add-mana", mana: "any-color", amount: 1, target: 0 },
       resolve: null,

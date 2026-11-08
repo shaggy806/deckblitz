@@ -24,12 +24,13 @@ export default defineCard({
       cost: {
         mana: "{4}",
         tap: false,
-        exileSelf: true,
+        
         craft: {
           count: 4,
           oneEach: [{ subtype: "Dinosaur" }, { subtype: "Merfolk" }, { subtype: "Pirate" }, { subtype: "Vampire" }],
           text: "a Dinosaur, a Merfolk, a Pirate, and a Vampire",
         },
+        do: { kind: "exile", target: "source" },
       },
       sorcerySpeed: true,
       targets: [],

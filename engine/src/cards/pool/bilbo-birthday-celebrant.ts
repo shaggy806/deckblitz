@@ -23,7 +23,7 @@ export default defineCard({
   ],
   activated: [
     {
-      cost: { mana: "{2}{W}{B}{G}", tap: true, exileSelf: true },
+      cost: { mana: "{2}{W}{B}{G}", tap: true, do: { kind: "exile", target: "source" } },
       condition: { kind: "life-total", atLeast: 111 },
       targets: [],
       effect: {

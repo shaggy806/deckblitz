@@ -25,7 +25,7 @@ export default defineCard({
   ],
   activated: [
     {
-      cost: { mana: "{4}{U}{U}", tap: false, exileSelf: true },
+      cost: { mana: "{4}{U}{U}", tap: false, do: { kind: "exile", target: "source" } },
       targets: [],
       effect: {
         kind: "sequence",

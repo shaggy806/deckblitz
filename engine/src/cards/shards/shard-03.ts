@@ -821,6 +821,7 @@ import _poolVariableChaser from "../pool/variable-chaser.js";
 import _poolVassalsDuty from "../pool/vassals-duty.js";
 import _poolVeneratedRotpriest from "../pool/venerated-rotpriest.js";
 import _poolVerdantEidolon from "../pool/verdant-eidolon.js";
+import _poolVerdelothTheAncient from "../pool/verdeloth-the-ancient.js";
 import _poolVialSmasherGleefulGrenadier from "../pool/vial-smasher-gleeful-grenadier.js";
 import _poolVigeanGraftmage from "../pool/vigean-graftmage.js";
 import _poolVineweft from "../pool/vineweft.js";
@@ -1726,6 +1727,7 @@ const shard: CardShard = {
     _poolVassalsDuty,
     _poolVeneratedRotpriest,
     _poolVerdantEidolon,
+    _poolVerdelothTheAncient,
     _poolVialSmasherGleefulGrenadier,
     _poolVigeanGraftmage,
     _poolVineweft,

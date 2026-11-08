@@ -16,7 +16,7 @@ export default defineCard({
   text: MANA_TEXT,
   activated: [
     {
-      cost: { mana: null, tap: true, mill: 1 },
+      cost: { mana: null, tap: true, do: { kind: "mill", target: "you", amount: 1 } },
       targets: [],
       effect: { kind: "add-mana", mana: "C", amount: 1 },
       resolve: null,

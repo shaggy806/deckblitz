@@ -25,7 +25,7 @@ export default defineCard({
   ],
   activated: [
     {
-      cost: { mana: "{2}{B}{G}", tap: false, mill: 4 },
+      cost: { mana: "{2}{B}{G}", tap: false, do: { kind: "mill", target: "you", amount: 4 } },
       zone: "graveyard",
       staysInZone: true,
       sorcerySpeed: true,

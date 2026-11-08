@@ -37,7 +37,7 @@
  * feature is good for you.
  */
 
-import { isManaAbility } from "../abilities.js";
+import { costLosesSource, isManaAbility } from "../abilities.js";
 import { journalTotal } from "../journal.js";
 import type { TriggeredAbility } from "../abilities.js";
 import { combatDamageOf, computeCharacteristics, withComputedCache } from "../characteristics.js";
@@ -657,7 +657,7 @@ function drawRate(def: CardDefinition, opponents: number): number {
     rate = engineRate(
       def,
       (effect) => drawsPerFiring(effect),
-      (a) => a.cost.sacrifice !== "self" && !isManaAbility(a),
+      (a) => !costLosesSource(a.cost) && !isManaAbility(a),
     );
     drawMemo.set(def, rate);
   }
@@ -711,7 +711,7 @@ function tokenRate(registry: CardRegistry, def: CardDefinition, opponents: numbe
     rate = engineRate(
       def,
       (effect) => tokensPerFiring(registry, effect),
-      (a) => a.cost.sacrifice !== "self" && !isManaAbility(a) && a.loyaltyCost !== "-x" && (a.loyaltyCost ?? 0) >= 0,
+      (a) => !costLosesSource(a.cost) && !isManaAbility(a) && a.loyaltyCost !== "-x" && (a.loyaltyCost ?? 0) >= 0,
     );
     tokenMemo.set(def, rate);
   }

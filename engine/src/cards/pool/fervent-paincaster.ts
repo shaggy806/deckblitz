@@ -20,7 +20,7 @@ export default defineCard({
       text: "{T}: This creature deals 1 damage to target player or planeswalker.",
     },
     {
-      cost: { mana: null, tap: true, exertSelf: true },
+      cost: { mana: null, tap: true, do: { kind: "exert", target: "source" } },
       targets: ["creature"],
       effect: { kind: "damage", amount: 1, target: 0 },
       resolve: null,

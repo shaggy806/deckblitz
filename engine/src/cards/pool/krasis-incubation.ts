@@ -15,7 +15,7 @@ export default defineCard({
   targets: ["creature"],
   activated: [
     {
-      cost: { mana: "{1}{G}{U}", tap: false, returnSelfToHand: true },
+      cost: { mana: "{1}{G}{U}", tap: false, do: { kind: "return-to-hand", target: "source" } },
       targets: [],
       // "Enchanted creature": the one it was last attached to (the Aura is gone by then).
       effect: { kind: "add-counter", target: "attached", counter: "+1/+1", amount: 2 },

@@ -61,7 +61,7 @@ export default defineCard({
   ],
   activated: [
     {
-      cost: { mana: null, tap: true, returnSelfToHand: true },
+      cost: { mana: null, tap: true, do: { kind: "return-to-hand", target: "source" } },
       targets: ["creature"],
       effect: {
         kind: "sequence",

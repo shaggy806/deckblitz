@@ -17,7 +17,7 @@ export default defineCard({
   text: `${BLAST_TEXT}\n${EXILE_TEXT}`,
   activated: [
     {
-      cost: { mana: "{2}{W}{W}", tap: true, exileSelf: true },
+      cost: { mana: "{2}{W}{W}", tap: true, do: { kind: "exile", target: "source" } },
       targets: [],
       effect: {
         kind: "sequence",

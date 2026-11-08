@@ -21,7 +21,7 @@ export default defineCard({
       text: "{1}, {T}: Untap target land.",
     },
     {
-      cost: { mana: "{1}", tap: true, exertSelf: true },
+      cost: { mana: "{1}", tap: true, do: { kind: "exert", target: "source" } },
       targets: ["land", { kind: "other", of: "land", than: { slots: [0] } }],
       effect: {
         kind: "sequence",

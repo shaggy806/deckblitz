@@ -794,6 +794,7 @@ import _poolSpectersShroud from "../pool/specters-shroud.js";
 import _poolSpellSnare from "../pool/spell-snare.js";
 import _poolSpellbook from "../pool/spellbook.js";
 import _poolSpellgyre from "../pool/spellgyre.js";
+import _poolSphinxOfTheRevelation from "../pool/sphinx-of-the-revelation.js";
 import _poolSpiderFood from "../pool/spider-food.js";
 import _poolSpiderVerse from "../pool/spider-verse.js";
 import _poolSpireMangler from "../pool/spire-mangler.js";
@@ -1781,6 +1782,7 @@ const shard: CardShard = {
     _poolSpellSnare,
     _poolSpellbook,
     _poolSpellgyre,
+    _poolSphinxOfTheRevelation,
     _poolSpiderFood,
     _poolSpiderVerse,
     _poolSpireMangler,

@@ -15,7 +15,7 @@ export default defineCard({
       text: "{1}, {T}: Exile target card from a graveyard.",
     },
     {
-      cost: { mana: "{1}", tap: false, exileSelf: true },
+      cost: { mana: "{1}", tap: false, do: { kind: "exile", target: "source" } },
       targets: [],
       effect: { kind: "exile-graveyard", target: "each-player" },
       resolve: null,

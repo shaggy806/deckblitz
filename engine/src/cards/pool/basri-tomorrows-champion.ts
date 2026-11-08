@@ -21,7 +21,7 @@ export default defineCard({
   text: `${TOKEN_TEXT} (An exerted creature won't untap during your next untap step.)\nCycling {2}{W} ({2}{W}, Discard this card: Draw a card.)\n${CYCLE_TEXT}`,
   activated: [
     {
-      cost: { mana: "{W}", tap: true, exertSelf: true },
+      cost: { mana: "{W}", tap: true, do: { kind: "exert", target: "source" } },
       targets: [],
       effect: { kind: "create-token", token: "Lifelink Cat Token", count: 1 },
       resolve: null,

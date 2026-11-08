@@ -61,7 +61,7 @@ export default defineCard({
       text: "{T}: Add {C}.",
     },
     {
-      cost: { mana: "{5}", tap: true, exileSelf: true },
+      cost: { mana: "{5}", tap: true, do: { kind: "exile", target: "source" } },
       targets: [{ kind: "permanent", filter: { typesAnyOf: ["artifact", "creature", "planeswalker"] } }],
       effect: { kind: "roll-dice", sides: 10, table: BENEATH_TOP_X },
       resolve: null,

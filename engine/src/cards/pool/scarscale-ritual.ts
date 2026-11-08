@@ -10,7 +10,7 @@ export default defineCard({
   types: ["sorcery"],
   text: "As an additional cost to cast this spell, put a -1/-1 counter on a creature you control.\nDraw two cards.",
   additionalCost: {
-    options: [{ text: "Put a -1/-1 counter on a creature you control", blight: 1 }],
+    options: [{ text: "Put a -1/-1 counter on a creature you control", also: { text: "Put a -1/-1 counter on a creature you control", do: { kind: "blight", amount: 1 } } }],
   },
   targets: [],
   effect: { kind: "draw", amount: 2 },

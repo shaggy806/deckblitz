@@ -17,7 +17,7 @@ export default defineCard({
   text: "{R}, Exile the top ten cards of your library: This creature deals 2 damage to any target.",
   activated: [
     {
-      cost: { mana: "{R}", tap: false, exileTop: 10 },
+      cost: { mana: "{R}", tap: false, do: { kind: "exile-from-library", amount: 10 } },
       targets: ["any-target"],
       effect: { kind: "damage", amount: 2, target: 0 },
       resolve: null,

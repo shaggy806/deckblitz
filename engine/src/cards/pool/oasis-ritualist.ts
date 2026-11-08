@@ -20,7 +20,7 @@ export default defineCard({
       text: "{T}: Add one mana of any color.",
     },
     {
-      cost: { mana: null, tap: true, exertSelf: true },
+      cost: { mana: null, tap: true, do: { kind: "exert", target: "source" } },
       targets: [],
       effect: { kind: "add-mana", mana: "any-color", amount: 2 },
       resolve: null,

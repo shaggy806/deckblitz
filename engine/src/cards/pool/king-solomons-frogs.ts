@@ -51,7 +51,7 @@ export default defineCard({
   ],
   activated: [
     {
-      cost: { mana: "{3}", tap: true, exileSelf: true },
+      cost: { mana: "{3}", tap: true, do: { kind: "exile", target: "source" } },
       targets: [],
       effect: { kind: "become-monarch" },
       resolve: null,

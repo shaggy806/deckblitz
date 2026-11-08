@@ -15,7 +15,7 @@ export default defineCard({
   text: `At the beginning of your end step, if you gained 3 or more life this turn, create a 3/3 white Angel creature token with flying.\n${ACTIVATED}`,
   activated: [
     {
-      cost: { mana: "{W}{W}{W}", tap: true, exileSelf: true },
+      cost: { mana: "{W}{W}{W}", tap: true, do: { kind: "exile", target: "source" } },
       targets: [{ kind: "permanent", filter: { subtype: "Angel" } }],
       effect: {
         kind: "sequence",

@@ -15,7 +15,7 @@ export default defineCard({
   text: TEXT,
   activated: [
     {
-      cost: { mana: null, tap: false, exileSelf: true },
+      cost: { mana: null, tap: false, do: { kind: "exile", target: "source" } },
       targets: [],
       effect: {
         kind: "for-each-player",

@@ -30,7 +30,7 @@ export default defineCard({
   ],
   activated: [
     {
-      cost: { mana: null, tap: false, payEnergy: 8, exileSelf: true },
+      cost: { mana: null, tap: false, payEnergy: 8, do: { kind: "exile", target: "source" } },
       targets: [],
       effect: { kind: "take-extra-turn" },
       resolve: null,

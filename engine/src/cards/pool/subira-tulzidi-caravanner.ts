@@ -33,7 +33,7 @@ export default defineCard({
       text: EVADE_TEXT,
     },
     {
-      cost: { mana: "{1}{R}", tap: true, discardHand: true },
+      cost: { mana: "{1}{R}", tap: true, do: { kind: "discard-hand", who: "you" } },
       targets: [],
       effect: {
         kind: "delayed-trigger",

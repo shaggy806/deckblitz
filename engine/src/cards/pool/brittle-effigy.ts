@@ -8,7 +8,7 @@ export default defineCard({
   text: "{4}, {T}, Exile this artifact: Exile target creature.",
   activated: [
     {
-      cost: { mana: "{4}", tap: true, exileSelf: true },
+      cost: { mana: "{4}", tap: true, do: { kind: "exile", target: "source" } },
       targets: ["creature"],
       effect: { kind: "exile", target: 0 },
       resolve: null,

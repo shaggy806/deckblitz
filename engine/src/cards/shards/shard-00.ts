@@ -200,6 +200,7 @@ import _poolCyclopsElectromancer from "../pool/cyclops-electromancer.js";
 import _poolDanithaBenaliasHope from "../pool/danitha-benalias-hope.js";
 import _poolDarkIntimations from "../pool/dark-intimations.js";
 import _poolDarkTutelage from "../pool/dark-tutelage.js";
+import _poolDarksteelMonolith from "../pool/darksteel-monolith.js";
 import _poolDavrielRogueShadowmage from "../pool/davriel-rogue-shadowmage.js";
 import _poolDawnstrider from "../pool/dawnstrider.js";
 import _poolDazzlingSphinx from "../pool/dazzling-sphinx.js";
@@ -278,6 +279,7 @@ import _poolFearfulVillager from "../pool/fearful-villager.js";
 import _poolFearlessHalberdier from "../pool/fearless-halberdier.js";
 import _poolFearsomeWerewolf from "../pool/fearsome-werewolf.js";
 import _poolFeastOnTheFallen from "../pool/feast-on-the-fallen.js";
+import _poolFeedTheCycle from "../pool/feed-the-cycle.js";
 import _poolFieldOfReality from "../pool/field-of-reality.js";
 import _poolFieryInscription from "../pool/fiery-inscription.js";
 import _poolFillWithFright from "../pool/fill-with-fright.js";
@@ -1197,6 +1199,7 @@ const shard: CardShard = {
     _poolDanithaBenaliasHope,
     _poolDarkIntimations,
     _poolDarkTutelage,
+    _poolDarksteelMonolith,
     _poolDavrielRogueShadowmage,
     _poolDawnstrider,
     _poolDazzlingSphinx,
@@ -1275,6 +1278,7 @@ const shard: CardShard = {
     _poolFearlessHalberdier,
     _poolFearsomeWerewolf,
     _poolFeastOnTheFallen,
+    _poolFeedTheCycle,
     _poolFieldOfReality,
     _poolFieryInscription,
     _poolFillWithFright,

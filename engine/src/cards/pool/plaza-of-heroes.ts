@@ -41,7 +41,7 @@ export default defineCard({
       text: AMONG_TEXT,
     },
     {
-      cost: { mana: "{3}", tap: true, exileSelf: true },
+      cost: { mana: "{3}", tap: true, do: { kind: "exile", target: "source" } },
       targets: [{ kind: "permanent", filter: { type: "creature", supertype: "legendary" } }],
       effect: {
         kind: "sequence",

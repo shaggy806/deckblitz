@@ -17,7 +17,7 @@ export default defineCard({
   text: TEXT,
   activated: [
     {
-      cost: { mana: "{2}", tap: false, returnSelfToHand: true },
+      cost: { mana: "{2}", tap: false, do: { kind: "return-to-hand", target: "source" } },
       targets: [{ kind: "spell", whose: "you", filter: { typesAnyOf: ["instant", "sorcery"] } }],
       effect: { kind: "copy-spell", target: 0, newTargets: true },
       resolve: null,

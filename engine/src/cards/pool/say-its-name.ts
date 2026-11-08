@@ -31,8 +31,9 @@ export default defineCard({
       cost: {
         mana: null,
         tap: false,
-        exileSelf: true,
+        
         exileFromGraveyard: { count: 2, filter: { name: "Say Its Name" } },
+        do: { kind: "exile", target: "source" },
       },
       zone: "graveyard",
       sorcerySpeed: true,

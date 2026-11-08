@@ -11,6 +11,7 @@
 
 import type { StaticCondition, TurnStat } from "./cards/define.js";
 import type { EffectAmount, EffectSpec, SpellResolver } from "./effects.js";
+import { costActLosesSource, costActMovesLibrary, costActReadsX } from "./cost-acts.js";
 import type { GameState, ZoneType } from "./state.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { CardFilter } from "./filter.js";
@@ -156,8 +157,14 @@ export function costAnnouncesX(cost: AbilityCost): boolean {
     cost.exileFromGraveyard?.count === "x" ||
     cost.reveal?.count === "x" ||
     cost.removeCounter?.count === "x" ||
-    cost.payLife === "x"
+    cost.payLife === "x" ||
+    (cost.do !== undefined && costActReadsX(cost.do))
   );
+}
+
+/** Whether paying `cost` takes the ability's own source away for good. */
+export function costLosesSource(cost: AbilityCost): boolean {
+  return cost.sacrifice === "self" || (cost.do !== undefined && costActLosesSource(cost.do));
 }
 
 /** What a `discard` cost may discard at this X: "a card with mana value X"
@@ -313,6 +320,17 @@ export interface AbilityCost {
   readonly spendOnlyChosenColor?: true;
   /** Whether `{T}` (tap this permanent) is part of the cost. */
   readonly tap: boolean;
+  /**
+   * An action as (part of) the cost, in the effect vocabulary: an `EffectSpec`
+   * whose every step has a row in `COST_ACTS` (`cost-acts.ts`). Payable only
+   * if all of it can be done (118.3), paid after the cost's other parts once
+   * the ability is on the stack (602.2b, 601.2h), any choice in it an ordinary
+   * dispatched decision. What it took is read back as `{ paid: … }`. An amount
+   * of `"x"` makes X announced as it's activated (601.2b), capped by the row.
+   * A mana ability with one is activated by hand; one that moves a card to or
+   * from a library isn't a mana ability (605.1a).
+   */
+  readonly do?: EffectSpec;
   /** Whether `{Q}` (untap this permanent — rule 107.6) is part of the cost:
    * payable only while the source is tapped, and a creature's only once it
    * has been under its controller's control since their most recent turn
@@ -384,35 +402,12 @@ export interface AbilityCost {
   /** Energy counters to pay ({E} — rule 122 / ROADMAP Phase 10; automatic,
    * like `payLife`). */
   readonly payEnergy?: number;
-  /** Mill this many cards as part of the cost (Millikin: "{T}, Mill a card:
-   * Add {C}"). Can't be paid with fewer cards than that in the library (rule
-   * 701.17b), and a cost that moves a card from a library keeps an ability
-   * that adds mana from being a mana ability (rule 605.1a), so it uses the
-   * stack. Automatic, like `payLife`. */
-  readonly mill?: number;
-  /** Exile this many cards from the top of your library as part of the cost
-   * (Royal Herbalist: "{2}, Exile the top card of your library: You gain 1
-   * life"; Whirling Catapult's "Exile the top two cards"). Like `mill`: can't
-   * be paid with fewer cards than that in the library (rule 118.3), it moves
-   * cards from a library so an ability with it is never a mana ability (rule
-   * 605.1a), and it's automatic. */
-  readonly exileTop?: number;
-  /** Exile the source itself as part of the cost (Hanged Executioner:
-   * "{3}{W}, Exile this creature: Exile target creature"). Distinct from
-   * `sacrifice: "self"` — the source doesn't reach a graveyard, so nothing
-   * that watches for a death sees one. */
-  readonly exileSelf?: boolean;
   /** "Reveal the player you chose" (Stalking Leonin, Guardian Archon), "reveal
    * the creature type you chose" (A Killer Among Us): the secret choice made
    * for this permanent (`GameObject.secretChoice`) is shown to every player,
    * as the cost is paid. Payable only by the player who made it: nobody else
    * has anything to reveal. */
   readonly revealChosen?: true;
-  /** Return the source itself to its owner's hand as part of the cost
-   * (Shigeki, Jukai Visionary's "{1}{G}, {T}, Return Shigeki to its owner's
-   * hand: …"). Paid as the ability is activated, so nothing can answer it;
-   * the ability resolves without its source, read as it last existed. */
-  readonly returnSelfToHand?: boolean;
   /**
    * Unattach an Equipment as part of the cost (rule 701.3d): it stays on the
    * battlefield, attached to nothing, and it becomes unattached as the cost
@@ -431,16 +426,6 @@ export interface AbilityCost {
    *   the division is announced with the cost's choice (rule 601.2d).
    */
   readonly unattach?: "self" | "granter" | { readonly filter: CardFilter };
-  /** Exert the source as part of the cost (rule 701.43 — Oasis Ritualist's
-   * "{T}, Exert this creature: Add two mana of any one color"): it won't
-   * untap during its controller's next untap step. Payable tapped or not, and
-   * when already exerted (701.43b); an `exerted` trigger sees it. */
-  readonly exertSelf?: boolean;
-  /** Discard your whole hand as part of the cost (Slate of Ancestry: "{4},
-   * {T}, Discard your hand: Draw a card for each creature you control").
-   * Nothing to choose, so it's automatic like `payLife` — the empty hand is
-   * a legal payment, which is why this never gates activation. */
-  readonly discardHand?: boolean;
   /**
    * Discard `count` cards, matching `filter` if given, as part of the cost —
    * "{B}{B}, Discard a card: Proliferate" (Yawgmoth), "Discard a creature
@@ -2655,8 +2640,7 @@ export function isManaAbility(ability: ActivatedAbility): boolean {
     // "Exile this card from your hand: Add {G}" never uses the stack (605.3b).
     // Rule 605.1a: a cost that moves a card from a library (Millikin's "Mill
     // a card") makes it an ordinary activated ability, on the stack.
-    ability.cost.mill === undefined &&
-    ability.cost.exileTop === undefined &&
+    !(ability.cost.do !== undefined && costActMovesLibrary(ability.cost.do)) &&
     // Whatever else it costs (605.1a asks of a cost only that it move no
     // card to or from a library): a sacrifice of itself (Treasure) or of a
     // chosen permanent (Kykar's "Sacrifice a Spirit"), life, counters

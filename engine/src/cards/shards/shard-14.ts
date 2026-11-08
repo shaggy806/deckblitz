@@ -160,6 +160,7 @@ import _poolConsecrate from "../pool/consecrate.js";
 import _poolConservatory from "../pool/conservatory.js";
 import _poolConsultTheNecrosages from "../pool/consult-the-necrosages.js";
 import _poolCoopedUp from "../pool/cooped-up.js";
+import _poolCorpseCobble from "../pool/corpse-cobble.js";
 import _poolCorpseExplosion from "../pool/corpse-explosion.js";
 import _poolCorpseHauler from "../pool/corpse-hauler.js";
 import _poolCosmograndZenith from "../pool/cosmogrand-zenith.js";
@@ -496,6 +497,7 @@ import _poolLastRites from "../pool/last-rites.js";
 import _poolLavamancersSkill from "../pool/lavamancers-skill.js";
 import _poolLawbringer from "../pool/lawbringer.js";
 import _poolLazotepQuarry from "../pool/lazotep-quarry.js";
+import _poolLeashling from "../pool/leashling.js";
 import _poolLeeches from "../pool/leeches.js";
 import _poolLeoninVanguard from "../pool/leonin-vanguard.js";
 import _poolLeveler from "../pool/leveler.js";
@@ -856,6 +858,7 @@ import _poolTheTriumphOfAnax from "../pool/the-triumph-of-anax.js";
 import _poolThickestInTheThicket from "../pool/thickest-in-the-thicket.js";
 import _poolThirstForKnowledge from "../pool/thirst-for-knowledge.js";
 import _poolThorAsgardsAvenger from "../pool/thor-asgards-avenger.js";
+import _poolThornvaultForager from "../pool/thornvault-forager.js";
 import _poolThoughtKnotSeer from "../pool/thought-knot-seer.js";
 import _poolThranQuarry from "../pool/thran-quarry.js";
 import _poolThunderThrashElder from "../pool/thunder-thrash-elder.js";
@@ -1160,6 +1163,7 @@ const shard: CardShard = {
     _poolConservatory,
     _poolConsultTheNecrosages,
     _poolCoopedUp,
+    _poolCorpseCobble,
     _poolCorpseExplosion,
     _poolCorpseHauler,
     _poolCosmograndZenith,
@@ -1496,6 +1500,7 @@ const shard: CardShard = {
     _poolLavamancersSkill,
     _poolLawbringer,
     _poolLazotepQuarry,
+    _poolLeashling,
     _poolLeeches,
     _poolLeoninVanguard,
     _poolLeveler,
@@ -1856,6 +1861,7 @@ const shard: CardShard = {
     _poolThickestInTheThicket,
     _poolThirstForKnowledge,
     _poolThorAsgardsAvenger,
+    _poolThornvaultForager,
     _poolThoughtKnotSeer,
     _poolThranQuarry,
     _poolThunderThrashElder,

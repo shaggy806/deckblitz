@@ -14,7 +14,7 @@ export default defineCard({
     "Destroy target creature or planeswalker.",
   additionalCost: {
     options: [
-      { text: "Discard a card", discard: 1 },
+      { text: "Discard a card", also: { text: "Discard a card", do: { kind: "discard", target: "you", amount: 1 } } },
       { text: "Pay 3 life", payLife: 3 },
     ],
   },

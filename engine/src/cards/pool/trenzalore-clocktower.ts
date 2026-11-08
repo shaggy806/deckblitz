@@ -24,7 +24,7 @@ export default defineCard({
       text: MANA_TEXT,
     },
     {
-      cost: { mana: "{1}{U}", tap: true, exileSelf: true, removeCounter: { kind: "time", count: 12 } },
+      cost: { mana: "{1}{U}", tap: true, removeCounter: { kind: "time", count: 12 }, do: { kind: "exile", target: "source" } },
       condition: { kind: "controls", filter: { subtype: "Time Lord" }, atLeast: 1 },
       targets: [],
       effect: {

@@ -13,7 +13,7 @@ export default defineCard({
   text: "{2}, Exile the top card of your library: You gain 1 life.",
   activated: [
     {
-      cost: { mana: "{2}", tap: false, exileTop: 1 },
+      cost: { mana: "{2}", tap: false, do: { kind: "exile-from-library", amount: 1 } },
       targets: [],
       effect: { kind: "gain-life", amount: 1 },
       resolve: null,

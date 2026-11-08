@@ -16,7 +16,7 @@ export default defineCard({
   text: TEXT,
   activated: [
     {
-      cost: { mana: null, tap: true, exileSelf: true },
+      cost: { mana: null, tap: true, do: { kind: "exile", target: "source" } },
       targets: [],
       effect: {
         kind: "sequence",

@@ -9,7 +9,7 @@ export default defineCard({
     {
       // The discard is a *cost*, so it happens before the draw — which is
       // what makes this a refill rather than a wash.
-      cost: { mana: "{4}", tap: true, discardHand: true },
+      cost: { mana: "{4}", tap: true, do: { kind: "discard-hand", who: "you" } },
       targets: [],
       effect: {
         kind: "draw",

@@ -21,7 +21,7 @@ export default defineCard({
   ],
   activated: [
     {
-      cost: { mana: "{R}", tap: false, discardHand: true, sacrifice: "self" },
+      cost: { mana: "{R}", tap: false, sacrifice: "self", do: { kind: "discard-hand", who: "you" } },
       resolve: null,
       text: "{R}, Discard your hand, Sacrifice this creature: Put all cards exiled with this creature into their owners' hands.",
       targets: [],

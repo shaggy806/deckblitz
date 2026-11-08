@@ -12,7 +12,7 @@ export default defineCard({
   text: TEXT,
   activated: [
     {
-      cost: { mana: null, tap: false, returnSelfToHand: true },
+      cost: { mana: null, tap: false, do: { kind: "return-to-hand", target: "source" } },
       targets: [{ kind: "permanent", filter: { type: "creature", castBy: "you", enteredThisTurn: true } }],
       effect: {
         kind: "sequence",

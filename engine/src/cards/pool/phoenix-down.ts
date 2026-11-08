@@ -13,7 +13,7 @@ export default defineCard({
   text: "{1}{W}, {T}, Exile this artifact: Choose one —\n• Return target creature card with mana value 4 or less from your graveyard to the battlefield tapped.\n• Exile target Skeleton, Spirit, or Zombie.",
   activated: [
     {
-      cost: { mana: "{1}{W}", tap: true, exileSelf: true },
+      cost: { mana: "{1}{W}", tap: true, do: { kind: "exile", target: "source" } },
       targets: [],
       effect: {
         kind: "modal",

@@ -24,7 +24,7 @@ export default defineCard({
   ],
   activated: [
     {
-      cost: { mana: "{1}{B}{G}", tap: false, exileSelf: true },
+      cost: { mana: "{1}{B}{G}", tap: false, do: { kind: "exile", target: "source" } },
       targets: [{ kind: "card-in-graveyard", whose: "you" }],
       effect: { kind: "return-to-hand", target: 0, from: "graveyard" },
       resolve: null,

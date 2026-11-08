@@ -16,7 +16,7 @@ export default defineCard({
   text: ACTIVATE,
   activated: [
     {
-      cost: { mana: "{2}", tap: true, exileSelf: true },
+      cost: { mana: "{2}", tap: true, do: { kind: "exile", target: "source" } },
       targets: ["opponent"],
       effect: {
         kind: "choose-card-name",

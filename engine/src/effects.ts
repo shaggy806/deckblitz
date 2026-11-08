@@ -6151,6 +6151,9 @@ export type EffectSpec =
        * Bloodcaster, with `next`): an alternative cost the spell may be cast
        * for (rule 118.9), X 0 (107.3b). Casting it for anything else still
        * uses the grant up (the rulings). */
+      /** "…can be cast without paying its mana cost" (World War Hulk): an
+       * alternative cost of {0} for what this reaches (rule 118.9). */
+      readonly free?: true;
       readonly payLifeManaValue?: true;
     }
   | {
@@ -7332,6 +7335,14 @@ export type EffectSpec =
        * the game" (Warrior's Oath), a delayed ability (rule 603.7) of this
        * effect's controller that lapses unfired if that end step never comes. */
       readonly thatTurn?: ExtraTurnScope;
+    }
+  | {
+      /** A cost act's last step (`cost-acts.ts`): record what it took, since
+       * event `since`, in `{ paid }` on the stack object `onto` (`null` for a
+       * mana ability). Written by `Game.payCostAct`, not for card definitions. */
+      readonly kind: "cost-paid";
+      readonly onto: ObjectId | null;
+      readonly since: number;
     }
   | {
       /**
@@ -9102,7 +9113,7 @@ export type EffectSpec =
        * `unless`'s `payEnergy` option, offered only with that much. Never
        * authored. */
       readonly kind: "pay-energy";
-      readonly amount: number;
+      readonly amount: EffectAmount;
     }
   | {
       /** The effect's controller gets an emblem (rule 114 — ROADMAP Phase 10).
@@ -11192,7 +11203,7 @@ export interface GraveyardKeywordGrant {
 }
 
 /** See {@link GraveyardKeywordGrant}. */
-export type GraveyardKeyword = "unearth" | "encore" | "embalm" | "harmonize" | "retrace" | "sneak" | "escape";
+export type GraveyardKeyword = "unearth" | "encore" | "embalm" | "harmonize" | "retrace" | "sneak" | "escape" | "scavenge";
 
 /** See {@link PileFateWord}. */
 export function pileFateWord(fate: PileFate): PileFateWord {
@@ -11366,6 +11377,15 @@ export interface EffectApi {
   countInGraveyard(filter: CardFilter, you?: PlayerId, except?: ObjectId): number;
   /** See the `{ allCounters }` {@link EffectAmount}. */
   allCounters(): number;
+  /** How much energy `player` has (rule 107.14). */
+  energyOf(player: PlayerId): number;
+  /** The permanents the effect's controller could sacrifice matching `filter`:
+   * theirs, able to be sacrificed (rule 701.21a). */
+  sacrificeCandidateCount(filter: CardFilter): number;
+  /** Whether the effect's controller could collect evidence `amount` (701.59b). */
+  canCollectEvidence(amount: number): boolean;
+  /** A cost act's last step: record what it took in `{ paid }`. */
+  costPaid(onto: ObjectId | null, since: number): void;
   /** See the `{ commanderManaValue }` {@link EffectAmount}. */
   commanderManaValue(): number;
   /** See the `{ suspendedCardsYouOwn }` {@link EffectAmount}. */
@@ -18397,6 +18417,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ...(spec.reduceGeneric !== undefined ? { reduceGeneric: amountValue(spec.reduceGeneric, ctx) } : {}),
         ...(spec.affinityFor !== undefined ? { affinityFor: spec.affinityFor } : {}),
         ...(spec.payLifeManaValue === true ? { payLifeManaValue: true as const } : {}),
+        ...(spec.free === true ? { free: true as const } : {}),
       });
       return;
     case "populate":
@@ -20155,7 +20176,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.getEnergy(Math.max(0, Math.floor(amountValue(spec.amount, ctx))), spec.who);
       return;
     case "pay-energy":
-      ctx.getEnergy(-spec.amount, "you");
+      ctx.getEnergy(-Math.max(0, Math.floor(amountValue(spec.amount, ctx))), "you");
+      return;
+    case "cost-paid":
+      ctx.costPaid(spec.onto, spec.since);
       return;
     case "add-player-counters": {
       const players =

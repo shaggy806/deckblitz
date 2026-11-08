@@ -50,7 +50,7 @@ export default defineCard({
       text: TAP,
     },
     {
-      cost: { mana: "{R}", tap: true, exertSelf: true },
+      cost: { mana: "{R}", tap: true, do: { kind: "exert", target: "source" } },
       targets: [],
       effect: {
         kind: "add-mana",

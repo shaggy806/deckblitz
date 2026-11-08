@@ -207,6 +207,30 @@ export const ward = (cost: WardCost): TriggeredAbility => ({
  * "you", options: forageOptions(), ifDid: … }`; "when you do" puts a
  * `reflexive-trigger` in `ifDid`.
  */
+/** Forage as a cost (rule 701.61a): "exile three cards from your graveyard or
+ * sacrifice a Food", an `AbilityCost.do`, offered only the ways that can be paid. */
+export const forageCost = (): EffectSpec => ({
+  kind: "sequence",
+  effects: [
+    {
+      kind: "modal",
+      minModes: 1,
+      maxModes: 1,
+      modes: [
+        {
+          text: "Exile three cards from your graveyard",
+          effect: { kind: "look-and-choose", zone: "graveyard", min: 3, max: 3, destination: "exile", leftover: "stay" },
+        },
+        {
+          text: "Sacrifice a Food",
+          effect: { kind: "sacrifice", who: "you", filter: { subtype: "Food", controlledBy: "you" }, count: 1 },
+        },
+      ],
+    },
+    { kind: "foraged" },
+  ],
+});
+
 export const forageOptions = (): readonly BoundUnlessOption[] => [
   { exileFromGraveyard: 3, forage: true, text: "Exile three cards from your graveyard" },
   { sacrifice: { subtype: "Food" }, forage: true, text: "Sacrifice a Food" },
@@ -1784,6 +1808,19 @@ export const outlast = (cost: string): ActivatedAbility => ({
  * (`exileIfItWouldLeave`, as Whip of Erebos); the end-step exile is a delayed
  * trigger. Put the printed "Unearth {cost}" line in `text`.
  */
+/** Scavenge (rule 702.97a): "[Cost], Exile this card from your graveyard: Put a
+ * number of +1/+1 counters equal to this card's power on target creature.
+ * Activate only as a sorcery." */
+export const scavenge = (cost: string): ActivatedAbility => ({
+  cost: { mana: cost, tap: false },
+  zone: "graveyard",
+  sorcerySpeed: true,
+  targets: [{ kind: "permanent", whose: "any", filter: { type: "creature" } }],
+  effect: { kind: "add-counter", target: 0, counter: "+1/+1", amount: { powerOf: "source" } },
+  resolve: null,
+  text: `Scavenge ${cost} (${cost}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)`,
+});
+
 export const unearth = (cost: string): ActivatedAbility => ({
   cost: { mana: cost, tap: false },
   zone: "graveyard",
@@ -1894,7 +1931,7 @@ export const squadTrigger = (): TriggeredAbility => ({
  * linked to the permanent it becomes, as cards exiled with it (702.167c).
  */
 export const craft = (mana: string, materials: CraftMaterials, text: string): ActivatedAbility => ({
-  cost: { mana, tap: false, exileSelf: true, craft: materials },
+  cost: { mana, tap: false, craft: materials, do: { kind: "exile", target: "source" } },
   sorcerySpeed: true,
   targets: [],
   effect: { kind: "craft-return" },

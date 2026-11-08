@@ -39,7 +39,7 @@ export default defineCard({
       text: "{U}, {T}: Put an eon counter on this land. Skip your next turn.",
     },
     {
-      cost: { mana: null, tap: true, removeCounter: { kind: "eon", count: 1 }, returnSelfToHand: true },
+      cost: { mana: null, tap: true, removeCounter: { kind: "eon", count: 1 }, do: { kind: "return-to-hand", target: "source" } },
       targets: [],
       effect: { kind: "take-extra-turn" },
       resolve: null,

@@ -10,7 +10,7 @@ export default defineCard({
   text: "Whenever a creature you control attacks, exile the top card of your library face down. (You can't look at it.)\n{1}{R}, Discard your hand, Sacrifice this enchantment: Put all cards exiled with this enchantment into their owners' hands.",
   activated: [
     {
-      cost: { mana: "{1}{R}", tap: false, discardHand: true, sacrifice: "self" },
+      cost: { mana: "{1}{R}", tap: false, sacrifice: "self", do: { kind: "discard-hand", who: "you" } },
       targets: [],
       effect: { kind: "return-exiled-by-source", linked: "hand" },
       resolve: null,

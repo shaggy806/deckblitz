@@ -24,7 +24,7 @@ export default defineCard({
   ],
   activated: [
     {
-      cost: { mana: "{W}", tap: true, exertSelf: true },
+      cost: { mana: "{W}", tap: true, do: { kind: "exert", target: "source" } },
       targets: [],
       effect: { kind: "create-token", token: "Lifelink Cat Token", count: 2 },
       resolve: null,

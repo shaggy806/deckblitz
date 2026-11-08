@@ -17,7 +17,7 @@ export default defineCard({
   text: TEXT,
   activated: [
     {
-      cost: { mana: "{W}", tap: true, returnSelfToHand: true },
+      cost: { mana: "{W}", tap: true, do: { kind: "return-to-hand", target: "source" } },
       targets: [],
       effect: {
         kind: "search-library",

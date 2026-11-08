@@ -22,7 +22,7 @@ export default defineCard({
   ],
   activated: [
     {
-      cost: { mana: "{5}", tap: true, exileSelf: true },
+      cost: { mana: "{5}", tap: true, do: { kind: "exile", target: "source" } },
       targets: [],
       effect: {
         kind: "sequence",

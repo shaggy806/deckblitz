@@ -28,7 +28,7 @@ export default defineCard({
   activated: [
     {
       // Exiled, not sacrificed — nothing watching for a death sees one.
-      cost: { mana: "{3}{W}", tap: false, exileSelf: true },
+      cost: { mana: "{3}{W}", tap: false, do: { kind: "exile", target: "source" } },
       targets: ["creature"],
       effect: { kind: "exile", target: 0 },
       resolve: null,

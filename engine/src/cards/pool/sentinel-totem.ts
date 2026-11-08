@@ -10,7 +10,7 @@ export default defineCard({
   text: "When this artifact enters, scry 1. (Look at the top card of your library. You may put that card on the bottom.)\n{T}, Exile this artifact: Exile all graveyards.",
   activated: [
     {
-      cost: { mana: null, tap: true, exileSelf: true },
+      cost: { mana: null, tap: true, do: { kind: "exile", target: "source" } },
       targets: [],
       effect: { kind: "exile-graveyard", target: "each-player" },
       resolve: null,

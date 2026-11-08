@@ -9,7 +9,7 @@ export default defineCard({
   text: "Return this enchantment to its owner's hand: Draw three cards, then discard four cards.",
   activated: [
     {
-      cost: { mana: null, tap: false, returnSelfToHand: true },
+      cost: { mana: null, tap: false, do: { kind: "return-to-hand", target: "source" } },
       targets: [],
       effect: {
         kind: "sequence",

@@ -10,7 +10,7 @@ export default defineCard({
   text: "As an additional cost to cast this spell, blight 2 or pay {1}. (To blight 2, put two -1/-1 counters on a creature you control.)\nCounter target spell.",
   additionalCost: {
     options: [
-      { text: "Blight 2", blight: 2 },
+      { text: "Blight 2", also: { text: "Blight 2", do: { kind: "blight", amount: 2 } } },
       { text: "Pay {1}", mana: "{1}" },
     ],
   },

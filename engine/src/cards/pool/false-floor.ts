@@ -23,7 +23,7 @@ export default defineCard({
   ],
   activated: [
     {
-      cost: { mana: "{2}", tap: true, exileSelf: true },
+      cost: { mana: "{2}", tap: true, do: { kind: "exile", target: "source" } },
       targets: [],
       effect: { kind: "exile-all", filter: { type: "creature", tapped: false } },
       resolve: null,

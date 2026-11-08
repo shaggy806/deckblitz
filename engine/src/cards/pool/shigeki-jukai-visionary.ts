@@ -20,7 +20,7 @@ export default defineCard({
   text: `${REVEAL_TEXT}\n${CHANNEL_TEXT}`,
   activated: [
     {
-      cost: { mana: "{1}{G}", tap: true, returnSelfToHand: true },
+      cost: { mana: "{1}{G}", tap: true, do: { kind: "return-to-hand", target: "source" } },
       targets: [],
       effect: {
         kind: "look-and-choose",

@@ -16,7 +16,7 @@ export default defineCard({
   text: TEXT,
   activated: [
     {
-      cost: { mana: null, tap: true, exileFromGraveyard: { count: 2 }, exileSelf: true },
+      cost: { mana: null, tap: true, exileFromGraveyard: { count: 2 }, do: { kind: "exile", target: "source" } },
       targets: ["nonblack-creature"],
       effect: { kind: "destroy", target: 0, cantBeRegenerated: true },
       resolve: null,

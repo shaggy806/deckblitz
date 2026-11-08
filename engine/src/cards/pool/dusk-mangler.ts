@@ -18,7 +18,7 @@ export default defineCard({
   additionalCost: {
     options: [
       { sacrifice: { type: "creature", controlledBy: "you" }, text: "Sacrifice a creature" },
-      { discard: 1, text: "Discard a card" },
+      { text: "Discard a card", also: { text: "Discard a card", do: { kind: "discard", target: "you", amount: 1 } } },
       { payLife: 4, text: "Pay 4 life" },
     ],
   },

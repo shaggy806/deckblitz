@@ -19,7 +19,7 @@ export default defineCard({
   text: TEXT,
   activated: [
     {
-      cost: { mana: null, tap: false, sacrifice: "creature-you-control", returnSelfToHand: true },
+      cost: { mana: null, tap: false, sacrifice: "creature-you-control", do: { kind: "return-to-hand", target: "source" } },
       targets: [{ kind: "card-in-graveyard", whose: "you", filter: { type: "creature" } }],
       effect: { kind: "put-onto-battlefield", target: 0 },
       resolve: null,

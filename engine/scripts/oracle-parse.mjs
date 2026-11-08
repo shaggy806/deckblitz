@@ -1535,6 +1535,12 @@ function colorTypePhrase(phrase) {
   return filter === null ? null : { ...filter, colors: [COLOR_WORDS[colored[1].toLowerCase()]] };
 }
 
+/** One more action into a cost's `do` (`AbilityCost.do`), in the order printed. */
+function addCostAct(cost, step) {
+  if (cost.do === undefined) cost.do = step;
+  else cost.do = { kind: "sequence", effects: [...(cost.do.kind === "sequence" ? cost.do.effects : [cost.do]), step] };
+}
+
 export function parseCost(text) {
   const cost = { mana: null, tap: false };
   const extra = {};
@@ -1597,7 +1603,7 @@ export function parseCost(text) {
     } else if ((m = /^Pay (\d+) life for each card in your hand$/.exec(part))) {
       cost.payLife = { each: Number(m[1]), per: "card-in-hand" };
     }
-    else if (part === "Discard your hand") cost.discardHand = true;
+    else if (part === "Discard your hand") addCostAct(cost, { kind: "discard-hand", who: "you" });
     // "Discard a card at random" (Mage il-Vec): nothing to choose.
     else if (part === "Discard a card at random") cost.discard = { count: 1, random: true };
     // "Discard a card with mana value X" (Kozilek, the Great Distortion): X
@@ -1682,7 +1688,7 @@ export function parseCost(text) {
       extra.zone = "hand";
       extra.exilesFromHand = true;
     } else if (part === "Discard ~") extra.zone = "hand";
-    else if (part === "Exile ~") cost.exileSelf = true;
+    else if (part === "Exile ~") addCostAct(cost, { kind: "exile", target: "source" });
     // The secret chosen for this permanent (`GameObject.secretChoice`).
     else if (part === "Reveal the player you chose" || part === "Reveal the creature type you chose") cost.revealChosen = true;
     // "Exile a card from your hand" (Cadaverous Bloom), "Exile a creature you
@@ -1719,20 +1725,20 @@ export function parseCost(text) {
       const filter = m[1] === undefined ? undefined : parseTypePhrase(m[1]);
       if (filter === null || (filter !== undefined && Object.keys(filter).length === 0)) return null;
       cost.exileFromGraveyard = { count: 1, ...(filter !== undefined ? { filter } : {}), fromTop: true };
-    } else if (part === "Exile the top card of your library") cost.exileTop = 1;
+    } else if (part === "Exile the top card of your library") addCostAct(cost, { kind: "exile-from-library", amount: 1 });
     else if ((m = new RegExp(`^Exile the top ${N} cards of your library$`, "i").exec(part))) {
       const count = numberOf(m[1]);
       if (typeof count !== "number") return null;
-      cost.exileTop = count;
+      addCostAct(cost, { kind: "exile-from-library", amount: count });
     }
     // "Mill a card" as a cost (Millikin, The Warring Triad) — never a mana
     // ability then (rule 605.1a).
-    else if (part === "Mill a card") cost.mill = 1;
+    else if (part === "Mill a card") addCostAct(cost, { kind: "mill", target: "you", amount: 1 });
     // A processor's "Put a card an opponent owns from exile into that
     // player's graveyard" (Void Attendant), chosen as it's paid.
     else if (part === "Put a card an opponent owns from exile into that player's graveyard") cost.putFromExile = 1;
     // "Exert this creature" as a cost (rule 701.43 — Steward of Solidarity).
-    else if (part === "Exert ~") cost.exertSelf = true;
+    else if (part === "Exert ~") addCostAct(cost, { kind: "exert", target: "source" });
     // "Unattach this Equipment" (rule 701.3d — Sunforger).
     else if (part === "Unattach ~") cost.unattach = "self";
     // Blight N (rule 701.68a), chosen as it's paid.
@@ -14526,7 +14532,7 @@ function parseFaceAsWritten(face, ctx = {}) {
       const materials = craftMaterials(m[1]);
       if (materials !== null) {
         out.activated.push({
-          cost: { mana: m[2], tap: false, exileSelf: true, craft: materials },
+          cost: { mana: m[2], tap: false, do: { kind: "exile", target: "source" }, craft: materials },
           sorcerySpeed: true,
           targets: [],
           effect: { kind: "craft-return" },
@@ -14641,7 +14647,7 @@ function parseFaceAsWritten(face, ctx = {}) {
     }
     // "Blight N or pay {M}" (rule 701.68a): a choice of whole costs.
     if (isSpell && (m = /^As an additional cost to cast ~, blight (\d+) or pay ((?:\{[^}]+\})+)\.$/.exec(line))) {
-      out.additionalCost = { options: [{ text: `Blight ${m[1]}`, blight: Number(m[1]) }, { text: `Pay ${m[2]}`, mana: m[2] }] };
+      out.additionalCost = { options: [{ text: `Blight ${m[1]}`, also: { text: `Blight ${m[1]}`, do: { kind: "blight", amount: Number(m[1]) } } }, { text: `Pay ${m[2]}`, mana: m[2] }] };
       continue;
     }
     // "You may blight N": a kicker by another name — what paying it changes

@@ -21,7 +21,7 @@ export default defineCard({
       text: "{T}: Add {B}.",
     },
     {
-      cost: { mana: "{2}{B}{B}{B}", tap: true, exileSelf: true },
+      cost: { mana: "{2}{B}{B}{B}", tap: true, do: { kind: "exile", target: "source" } },
       targets: [],
       // The creature needn't be one just milled (the ruling).
       effect: {

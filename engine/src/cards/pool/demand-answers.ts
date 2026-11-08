@@ -14,7 +14,7 @@ export default defineCard({
   additionalCost: {
     options: [
       { text: "Sacrifice an artifact", sacrifice: { type: "artifact", controlledBy: "you" } },
-      { text: "Discard a card", discard: 1 },
+      { text: "Discard a card", also: { text: "Discard a card", do: { kind: "discard", target: "you", amount: 1 } } },
     ],
   },
   effect: { kind: "draw", amount: 2 },

@@ -11,7 +11,7 @@ export default defineCard({
   text: "At the beginning of your upkeep, you may exile the top card of your library face down.\n{5}, Discard your hand, Sacrifice this artifact: Put all cards exiled with this artifact into their owner's hand.",
   activated: [
     {
-      cost: { mana: "{5}", tap: false, discardHand: true, sacrifice: "self" },
+      cost: { mana: "{5}", tap: false, sacrifice: "self", do: { kind: "discard-hand", who: "you" } },
       targets: [],
       effect: { kind: "return-exiled-by-source", linked: "hand" },
       resolve: null,

@@ -13,7 +13,7 @@ export default defineCard({
   text: "{T}, Exert this creature: Create a 1/1 white Warrior creature token with vigilance. (An exerted creature won't untap during your next untap step.)",
   activated: [
     {
-      cost: { mana: null, tap: true, exertSelf: true },
+      cost: { mana: null, tap: true, do: { kind: "exert", target: "source" } },
       targets: [],
       effect: { kind: "create-token", token: "Warrior Token (Vigilance)", count: 1 },
       resolve: null,

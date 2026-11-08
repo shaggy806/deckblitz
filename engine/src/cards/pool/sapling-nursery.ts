@@ -22,7 +22,7 @@ export default defineCard({
   selfCostReduction: affinity({ subtype: "Forest" }),
   activated: [
     {
-      cost: { mana: "{1}{G}", tap: false, exileSelf: true },
+      cost: { mana: "{1}{G}", tap: false, do: { kind: "exile", target: "source" } },
       targets: [],
       effect: {
         kind: "grant-keyword-all",

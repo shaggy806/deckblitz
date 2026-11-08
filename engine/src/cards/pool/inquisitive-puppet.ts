@@ -11,7 +11,7 @@ export default defineCard({
   text: "When this creature enters, scry 1.\nExile this creature: Create a 1/1 white Human creature token.",
   activated: [
     {
-      cost: { mana: null, tap: false, exileSelf: true },
+      cost: { mana: null, tap: false, do: { kind: "exile", target: "source" } },
       targets: [],
       effect: { kind: "create-token", token: "Human Token", count: 1 },
       resolve: null,

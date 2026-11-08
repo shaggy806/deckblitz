@@ -987,6 +987,7 @@ import _tokensSkeletonTokenGutTrueSoulZealot from "../tokens/skeleton-token-gut-
 import _tokensTreefolkTokenSylvanOffering from "../tokens/treefolk-token-sylvan-offering.js";
 import _tokensVampireTokenHungryForMore from "../tokens/vampire-token-hungry-for-more.js";
 import _tokensVehicleToken from "../tokens/vehicle-token.js";
+import _tokensZombieTokenBlueBlackMenace from "../tokens/zombie-token-blue-black-menace.js";
 
 const shard: CardShard = {
   pool: [
@@ -1976,6 +1977,7 @@ const shard: CardShard = {
     _tokensTreefolkTokenSylvanOffering,
     _tokensVampireTokenHungryForMore,
     _tokensVehicleToken,
+    _tokensZombieTokenBlueBlackMenace,
   ],
 };
 

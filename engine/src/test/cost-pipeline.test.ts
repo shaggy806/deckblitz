@@ -4,7 +4,8 @@
  */
 import { describe, expect, it } from "vitest";
 import { POOL_CARDS, TOKEN_CARDS } from "../cards/generated.js";
-import { activate, counters, lands, nextTurn, spawn, table } from "./harness.js";
+import { costActMayAsk, costActUnknownKinds } from "../cost-acts.js";
+import { A, activate, cast, counters, graveyard, hand, lands, life, named, nextTurn, pt, ref, settle, spawn, table, toGraveyard, toHand, toLibrary, tokensNamed, zone } from "./harness.js";
 
 function valuesAt(value: unknown, key: string, out: unknown[] = []): unknown[] {
   if (value === null || typeof value !== "object") return out;
@@ -32,6 +33,20 @@ const REMOVED = [
 ];
 
 describe("the pool on the cost pipeline", () => {
+  it("writes every do cost from COST_ACTS, beside no other part that asks", () => {
+    const bad: string[] = [];
+    const asking = ["sacrifice", "discard", "exileFromGraveyard", "exileFromHand", "exileSpell", "putFromExile", "reveal", "returnToHand", "untapOthers", "blight", "collectEvidence"];
+    for (const def of POOL_CARDS) {
+      for (const ability of def.activated ?? []) {
+        const act = ability.cost.do;
+        if (act === undefined) continue;
+        for (const kind of costActUnknownKinds(act)) bad.push(`${def.name}: ${kind} isn't a cost act`);
+        if (costActMayAsk(act) && asking.some((k) => k in ability.cost)) bad.push(`${def.name}: a do that asks beside another part that asks`);
+      }
+    }
+    expect(bad).toEqual([]);
+  });
+
   it("spells no shape the pipeline replaced", () => {
     const bad: string[] = [];
     for (const def of [...POOL_CARDS, ...TOKEN_CARDS]) {
@@ -116,5 +131,177 @@ describe("power-up abilities", () => {
     nextTurn(game);
     lands(game, "Taiga", 7);
     expect(() => activate(game, other, 0)).toThrow(/can't be activated this turn/);
+  });
+});
+
+describe("effects as costs", () => {
+  it("Sphinx of the Revelation pays X energy, X announced up to what's there", () => {
+    const { game } = table();
+    const sphinx = spawn(game, "Sphinx of the Revelation");
+    lands(game, "Tundra", 3);
+    for (let i = 0; i < 4; i += 1) toLibrary(game, "Wastes");
+    game.state.players[A].energy = 3;
+    const before = hand(game).length;
+    expect(() => activate(game, sphinx, 0, { x: 4 })).toThrow();
+    activate(game, sphinx, 0, { x: 2 });
+    expect(game.state.players[A].energy).toBe(1);
+    expect(hand(game).length).toBe(before + 2);
+  });
+
+  it("forage with a Food: a mana ability that waits for nothing it can't pay", () => {
+    const { game } = table();
+    const forager = spawn(game, "Thornvault Forager");
+    const food = spawn(game, "Food Token");
+    activate(game, forager, 1, { manaColors: ["G", "G"], settle: false } as never);
+    expect(zone(game, food)).not.toBe("battlefield");
+    expect(game.state.players[A].manaPool.length).toBe(2);
+  });
+
+  it("forage offers exile only with three cards in the graveyard, and can't be paid with neither", () => {
+    const { game } = table();
+    const forager = spawn(game, "Thornvault Forager");
+    expect(() => activate(game, forager, 1)).toThrow();
+    const cards = [toGraveyard(game, "Wastes"), toGraveyard(game, "Wastes"), toGraveyard(game, "Wastes")];
+    activate(game, forager, 1, { settle: false });
+    game.dispatch({ type: "choose-from-zone", player: A, chosen: cards } as never);
+    expect(cards.every((id) => zone(game, id) === "exile")).toBe(true);
+  });
+
+  it("Feed the Cycle: forage or pay {B}", () => {
+    const { game } = table();
+    const bears = spawn(game, "Grizzly Bears", "bob" as never);
+    spawn(game, "Food Token");
+    lands(game, "Swamp", 2);
+    const feed = toHand(game, "Feed the Cycle");
+    cast(game, feed, { targets: [ref(bears)], costOption: 0 });
+    expect(zone(game, bears)).toBe("graveyard");
+    expect(named(game, "Food Token").length).toBe(0);
+  });
+
+  it("Leashling puts a card from hand on top: payable only with a card in hand", () => {
+    const { game } = table();
+    const dog = spawn(game, "Leashling");
+    game.state.zones.perPlayer[A].hand = [];
+    expect(() => activate(game, dog, 0)).toThrow();
+    const card = toHand(game, "Wastes");
+    activate(game, dog, 0);
+    expect(zone(game, card)).toBe("library");
+    expect(zone(game, dog)).toBe("hand");
+  });
+
+  it("Timestream Navigator goes to the bottom as a cost", () => {
+    const { game } = table();
+    const nav = spawn(game, "Timestream Navigator");
+    lands(game, "Island", 10);
+    game.state.players[A].citysBlessing = true;
+    activate(game, nav, 0);
+    expect(zone(game, nav)).toBe("library");
+    expect(game.state.extraTurns).toEqual([A]);
+  });
+
+  it("Darksteel Monolith: once each turn, from hand, colorless only", () => {
+    const { game } = table();
+    spawn(game, "Darksteel Monolith");
+    const ornithopter = toHand(game, "Ornithopter");
+    cast(game, ornithopter, { altCost: true });
+    expect(zone(game, ornithopter)).toBe("battlefield");
+    const second = toHand(game, "Ornithopter");
+    expect(() => cast(game, second, { altCost: true })).toThrow();
+  });
+
+  it("Leyline of Mutation pays five colors for any spell", () => {
+    const { game } = table();
+    spawn(game, "Leyline of Mutation");
+    lands(game, "City of Brass", 5);
+    const blast = toHand(game, "Worldfire");
+    expect(game.legalActions(A).some((o) => o.kind === "cast-spell" && o.card === blast && o.altCost === true)).toBe(true);
+  });
+
+  it("Corpse Cobble makes a token with the sacrificed creatures' total power", () => {
+    const { game } = table();
+    const a = spawn(game, "Grizzly Bears");
+    const b = spawn(game, "Hill Giant");
+    spawn(game, "Llanowar Elves");
+    lands(game, "Underground Sea", 2);
+    const cobble = toHand(game, "Corpse Cobble");
+    cast(game, cobble, { x: 2, settle: false });
+    game.dispatch({ type: "sacrifice", player: A, permanents: [a, b] });
+    settle(game);
+    const token = named(game, "Zombie Token (Blue-Black, Menace)")[0];
+    expect(pt(game, token)).toEqual({ power: 5, toughness: 5 });
+    expect(tokensNamed(game, "Zombie Token (Blue-Black, Menace)")).toBe(1);
+  });
+
+  it("Soulblast sacrifices them all, and deals their total power", () => {
+    const { game } = table();
+    spawn(game, "Grizzly Bears");
+    spawn(game, "Hill Giant");
+    lands(game, "Mountain", 6);
+    const blast = toHand(game, "Soulblast");
+    cast(game, blast, { targets: [ref("bob" as never)] });
+    expect(life(game, "bob" as never)).toBe(15);
+    expect(graveyard(game).length).toBe(3);
+  });
+
+  it("Verdeloth: kicker {X}, X reads what was paid", () => {
+    const { game } = table();
+    lands(game, "Forest", 8);
+    const verdeloth = toHand(game, "Verdeloth the Ancient");
+    cast(game, verdeloth, { x: 2, kicked: true });
+    expect(tokensNamed(game, "Saproling Token")).toBe(2);
+    settle(game);
+  });
+
+  it("an Inscription chooses any number of modes when kicked, one otherwise", () => {
+    const { game } = table();
+    const bears = spawn(game, "Grizzly Bears", "bob" as never);
+    lands(game, "Swamp", 7);
+    const card = toHand(game, "Inscription of Ruin");
+    expect(() => cast(game, card, { modes: [0, 2], targets: [ref("bob" as never), ref(bears)] })).toThrow();
+    cast(game, card, { kicked: true, modes: [0, 2], targets: [ref("bob" as never), ref(bears)] });
+    expect(zone(game, bears)).toBe("graveyard");
+  });
+});
+
+describe("flagged cards on the cost pipeline", () => {
+  it("World War Hulk: the next red or green creature spell is free, once", () => {
+    const { game } = table();
+    lands(game, "Forest", 5);
+    cast(game, toHand(game, "World War Hulk"));
+    const elf = toHand(game, "Llanowar Elves");
+    const next = toHand(game, "Llanowar Elves");
+    cast(game, elf, { altCost: true });
+    expect(zone(game, elf)).toBe("battlefield");
+    expect(() => cast(game, next, { altCost: true })).toThrow();
+  });
+
+  it("World War Hulk doesn't reach a spell of another color", () => {
+    const { game } = table();
+    lands(game, "Forest", 5);
+    cast(game, toHand(game, "World War Hulk"));
+    const crow = toHand(game, "Storm Crow");
+    expect(() => cast(game, crow, { altCost: true })).toThrow();
+  });
+
+  it("The Dominion Bracelet: the equipped creature's power comes off, and the Bracelet is exiled as a cost", () => {
+    const { game } = table();
+    const giant = spawn(game, "Hill Giant");
+    const bracelet = spawn(game, "The Dominion Bracelet");
+    lands(game, "Wastes", 1);
+    activate(game, bracelet, 0, { targets: [ref(giant)] });
+    lands(game, "Wastes", 11);
+    activate(game, giant, 0, { targets: [ref("bob" as never)] });
+    expect(zone(game, bracelet)).toBe("exile");
+    expect((game.state.playerControl ?? []).length).toBe(1);
+  });
+  it("Varolz gives a creature card in your graveyard scavenge at its mana cost", () => {
+    const { game } = table();
+    spawn(game, "Varolz, the Scar-Striped");
+    const bears = spawn(game, "Hill Giant");
+    const dead = toGraveyard(game, "Hill Giant");
+    lands(game, "Mountain", 4);
+    activate(game, dead, 0, { targets: [ref(bears)] });
+    expect(zone(game, dead)).toBe("exile");
+    expect(counters(game, bears)).toBe(3);
   });
 });

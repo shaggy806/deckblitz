@@ -11,7 +11,7 @@ export default defineCard({
   text: "As an additional cost to cast this spell, discard a card or pay {5}.\nLightning Axe deals 5 damage to target creature.",
   additionalCost: {
     options: [
-      { text: "Discard a card", discard: 1 },
+      { text: "Discard a card", also: { text: "Discard a card", do: { kind: "discard", target: "you", amount: 1 } } },
       { text: "Pay {5}", mana: "{5}" },
     ],
   },

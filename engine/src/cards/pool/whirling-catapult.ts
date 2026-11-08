@@ -13,7 +13,7 @@ export default defineCard({
   text: "{2}, Exile the top two cards of your library: This artifact deals 1 damage to each creature with flying and each player.",
   activated: [
     {
-      cost: { mana: "{2}", tap: false, exileTop: 2 },
+      cost: { mana: "{2}", tap: false, do: { kind: "exile-from-library", amount: 2 } },
       targets: [],
       effect: {
         kind: "sequence",

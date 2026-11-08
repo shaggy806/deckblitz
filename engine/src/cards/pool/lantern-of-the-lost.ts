@@ -12,7 +12,7 @@ export default defineCard({
   text: `${ENTER_TEXT}\n${EXILE_TEXT}`,
   activated: [
     {
-      cost: { mana: "{1}", tap: true, exileSelf: true },
+      cost: { mana: "{1}", tap: true, do: { kind: "exile", target: "source" } },
       targets: [],
       effect: {
         kind: "sequence",

@@ -13,7 +13,7 @@ export default defineCard({
   text: TEXT,
   activated: [
     {
-      cost: { mana: null, tap: false, returnSelfToHand: true },
+      cost: { mana: null, tap: false, do: { kind: "return-to-hand", target: "source" } },
       targets: ["creature"],
       effect: { kind: "regenerate", target: 0 },
       resolve: null,

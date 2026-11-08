@@ -26,7 +26,7 @@ export default defineCard({
   text: `As an additional cost to cast this spell, discard a card or sacrifice a permanent.\n${CDA_TEXT}`,
   additionalCost: {
     options: [
-      { discard: 1, text: "Discard a card" },
+      { text: "Discard a card", also: { text: "Discard a card", do: { kind: "discard", target: "you", amount: 1 } } },
       { sacrifice: { controlledBy: "you" }, text: "Sacrifice a permanent" },
     ],
   },

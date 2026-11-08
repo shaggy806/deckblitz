@@ -13,7 +13,7 @@ export default defineCard({
   text: "Exile this creature: Creatures you control gain indestructible until end of turn.",
   activated: [
     {
-      cost: { mana: null, tap: false, exileSelf: true },
+      cost: { mana: null, tap: false, do: { kind: "exile", target: "source" } },
       targets: [],
       effect: {
         kind: "grant-keyword-all",

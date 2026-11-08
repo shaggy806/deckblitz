@@ -30,7 +30,7 @@ export default defineCard({
       text: "{T}: Add {C}.",
     },
     {
-      cost: { mana: "{3}", tap: true, returnSelfToHand: true },
+      cost: { mana: "{3}", tap: true, do: { kind: "return-to-hand", target: "source" } },
       targets: [],
       effect: {
         kind: "sequence",

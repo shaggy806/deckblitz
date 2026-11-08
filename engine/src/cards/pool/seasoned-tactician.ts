@@ -13,7 +13,7 @@ export default defineCard({
   text: "{3}, Exile the top four cards of your library: The next time a source of your choice would deal damage to you this turn, prevent that damage.",
   activated: [
     {
-      cost: { mana: "{3}", tap: false, exileTop: 4 },
+      cost: { mana: "{3}", tap: false, do: { kind: "exile-from-library", amount: 4 } },
       targets: [],
       effect: { kind: "prevent-damage-from-chosen-source", to: "you", amount: "next-time" },
       resolve: null,

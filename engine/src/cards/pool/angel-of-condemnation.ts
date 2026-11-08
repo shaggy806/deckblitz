@@ -33,7 +33,7 @@ export default defineCard({
       text: FLICKER_TEXT,
     },
     {
-      cost: { mana: "{2}{W}", tap: true, exertSelf: true },
+      cost: { mana: "{2}{W}", tap: true, do: { kind: "exert", target: "source" } },
       targets: [{ kind: "other", of: "creature" }],
       effect: { kind: "exile", target: 0, untilSourceLeaves: true },
       resolve: null,

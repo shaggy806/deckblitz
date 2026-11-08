@@ -19,7 +19,7 @@ export default defineCard({
       text: "{1}, {T}: Add one mana of any color.",
     },
     {
-      cost: { mana: "{3}", tap: true, exileSelf: true },
+      cost: { mana: "{3}", tap: true, do: { kind: "exile", target: "source" } },
       targets: [
         {
           kind: "optional",

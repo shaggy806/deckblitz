@@ -83,7 +83,7 @@ import {
 import { CardRegistry } from "./cards/card-registry.js";
 import { defaultRegistry } from "./cards/default-registry.js";
 import { EMBLEM_CARD } from "./cards/emblem.js";
-import { embalmAbility, encoreAbility, ninjutsu, unearth } from "./cards/helpers.js";
+import { embalmAbility, encoreAbility, ninjutsu, scavenge, unearth } from "./cards/helpers.js";
 import {
   becameAuraDefinition,
   bestowedDefinition,
@@ -92,6 +92,7 @@ import {
   readsGraveyardOrder,
 } from "./cards/define.js";
 import type { CyclingAbility, KickerAlsoCost, MorphCost, SpellCastClause, Supertype } from "./cards/define.js";
+import { costActMaxX, costActPayable, payableCostAct } from "./cost-acts.js";
 import { DUNGEONS } from "./cards/dungeons.js";
 import { MADNESS_EFFECT, MADNESS_TEXT } from "./cards/madness.js";
 import { MIRACLE_EFFECT, MIRACLE_TEXT } from "./cards/miracle.js";
@@ -3821,7 +3822,9 @@ export class Game {
             ? Math.max(0, this.state.players[player].life)
             : 0
           : undefined;
-      const caps = [manaX, sacrificeX, tapOthersX, exileX, discardX, revealX, counterX, loyaltyX, lifeX].filter(
+      // A `do` cost's own X (Pay X {E}): what the act could pay.
+      const doX = ability.cost.do === undefined ? undefined : costActMaxX(ability.cost.do, this.makeResolutionContext(source, player, []));
+      const caps = [manaX, sacrificeX, tapOthersX, exileX, discardX, revealX, counterX, loyaltyX, lifeX, doX].filter(
         (n): n is number => n !== undefined,
       );
       const maxX = caps.length === 0 ? undefined : Math.min(...caps);
@@ -5016,7 +5019,8 @@ export class Game {
           const modeSpecs = m.targets ?? [];
           return targetsFillable(modeSpecs, this.targetOptionsFor(modeSpecs, player, source), [], 0, facts);
         }).length;
-        if (fillable < def.castModal.kickedModes) continue;
+        const needed = typeof def.castModal.kickedModes === "number" ? def.castModal.kickedModes : def.castModal.kickedModes.min;
+        if (fillable < needed) continue;
       }
       const alternative = altCost === true ? this.alternativeCostOf(card, def, via, player) : null;
       const paidBase = evoke ?? printedOrPrototype;
@@ -9498,7 +9502,9 @@ export class Game {
     this.state.decisionSource = null;
     // Tokens split off a stack that are the same again go back into one.
     this.refoldSplitTokens();
-    this.grantPriority(player);
+    const holder = this.state.costPriorityTo ?? player;
+    delete this.state.costPriorityTo;
+    this.grantPriority(holder);
   }
 
   /**
@@ -17221,7 +17227,8 @@ export class Game {
     kicked: boolean,
   ): { readonly minModes: number; readonly maxModes: number } {
     if (kicked && castModal.kickedModes !== undefined) {
-      return { minModes: castModal.kickedModes, maxModes: castModal.kickedModes };
+      const range = castModal.kickedModes;
+      return typeof range === "number" ? { minModes: range, maxModes: range } : { minModes: range.min, maxModes: range.max };
     }
     return { minModes: castModal.minModes, maxModes: this.castModalMaxModes(castModal, card) };
   }
@@ -20513,7 +20520,7 @@ export class Game {
     // ones is chosen now, as the cost is paid (rule 601.2h), the spell on the
     // stack and its mana paid.
     if (severalSacrificed !== null) {
-      this.beginCostSacrifice(player, cardId, severalSacrificed, undefined, via === "effect" ? this.activePlayer : player);
+      this.beginCostSacrifice(player, cardId, severalSacrificed, undefined, via === "effect" ? this.activePlayer : player, undefined, cardId);
     }
     // The chosen branch of a choice of additional costs, paid here with the
     // fixed ones — after the announcement, so the log reads "casts X,
@@ -20528,12 +20535,6 @@ export class Game {
     // A branch's sacrifice was paid above with the fixed one: it's the same
     // cost paid the same way, one member peeled off a token stack rather than
     // the whole stack, and the victim the driver named.
-    if (chosenOption?.discard !== undefined) {
-      this.payCostDiscard(cardId, cardId, () => {
-        this.discardByEffect({ kind: "player", player }, chosenOption.discard as number);
-      });
-      this.costDiscardPriorityTo(via === "effect" ? this.activePlayer : player);
-    }
     // A keyword's non-mana part (buyback's "Pay 3 life, Discard a card at
     // random", squad's, a spliced card's): its sacrifice is among the parts
     // above, the rest asked in turn before anyone gets priority.
@@ -20621,7 +20622,7 @@ export class Game {
     // taken (rule 701.68a): which creature is chosen now, as the cost is
     // paid (601.2h), the spell on the stack.
     const blightCost =
-      chosenOption?.blight ?? (kicked && def.kicker?.keyword === "blight" ? def.kicker.blight : undefined);
+      kicked && def.kicker?.keyword === "blight" ? def.kicker.blight : undefined;
     if (blightCost !== undefined) this.beginBlight(player, cardId, blightCost, { x: chosenX, priorityTo });
     // "You may collect evidence N" taken (rule 701.59a): which cards, chosen
     // now, as the cost is paid (601.2h).
@@ -21147,14 +21148,6 @@ export class Game {
     def: CardDefinition,
     option: AdditionalCostOption,
   ): string | null {
-    if (option.discard !== undefined) {
-      // Rule 601.2h — the spell is still in hand while this is checked and
-      // can't discard itself to pay its own cost.
-      const others = this.state.zones.perPlayer[player].hand.filter((id) => id !== cardId);
-      if (others.length < option.discard) {
-        return `${player} has too few cards in hand to ${option.text.toLowerCase()} for ${def.name}`;
-      }
-    }
     // Rule 118.4 — a player may pay any life they have, down to 0, so this
     // only refuses paying *more* life than they hold.
     if (option.payLife !== undefined && !this.canPayLife(player, option.payLife)) {
@@ -21167,9 +21160,6 @@ export class Game {
       }
     }
     // Rule 701.68b: no creature to put the counters on, no blighting.
-    if (option.blight !== undefined && !this.canBlight(player)) {
-      return `${player} controls no creature to ${option.text.toLowerCase()} for ${def.name}`;
-    }
     // Rule 701.4a: nothing to reveal or choose, no beholding — the spell
     // itself, on its way to the stack (601.2a), not among them.
     if (option.behold !== undefined && !this.canBehold(player, option.behold, cardId)) {
@@ -22218,7 +22208,9 @@ export class Game {
             ? encoreAbility(cost)
             : keyword === "embalm"
               ? embalmAbility(cost, `Embalm ${cost}`)
-              : null;
+              : keyword === "scavenge"
+                ? scavenge(cost)
+                : null;
       if (granted !== null) out.push({ ability: granted, ref: { kind: "modifier-activated", ability: granted } });
     }
     return out;
@@ -23200,13 +23192,7 @@ export class Game {
     }
     // Rule 701.17b: a cost that mills more cards than the library holds
     // can't be paid.
-    if (ability.cost.mill !== undefined && this.state.zones.perPlayer[player].library.length < ability.cost.mill) {
-      return `${player} has too few cards in their library to mill for ${def.name}'s cost`;
-    }
     // Likewise exiling cards from the top (rule 118.3).
-    if (ability.cost.exileTop !== undefined && this.state.zones.perPlayer[player].library.length < ability.cost.exileTop) {
-      return `${player} has too few cards in their library to exile for ${def.name}'s cost`;
-    }
     const costReturn = ability.cost.returnToHand;
     if (costReturn !== undefined) {
       // The choice waits on the stack (see `activateAbility`): a mana ability
@@ -23299,6 +23285,9 @@ export class Game {
       if (!this.canCraft(player, sourceId, ability.cost.craft)) {
         return `${player} lacks the materials to craft with ${ability.cost.craft.text}`;
       }
+    }
+    if (ability.cost.do !== undefined && !costActPayable(ability.cost.do, this.makeResolutionContext(sourceId, player, [], x ?? ability.minX ?? 0))) {
+      return `${player} can't pay ${def.name}'s cost`;
     }
     if (ability.cost.putFromExile !== undefined) {
       // Chosen once the ability is on the stack, as a graveyard exile is —
@@ -23584,29 +23573,13 @@ export class Game {
     }
     // "Mill a card" as a cost (Millikin): paid now, and stands even if the
     // ability is countered.
-    if (ability.cost.mill !== undefined) this.millByEffect({ kind: "player", player }, ability.cost.mill);
     // "Exile the top card of your library" as a cost (Royal Herbalist): paid
     // now, the same way.
-    if (ability.cost.exileTop !== undefined) {
-      this.exileFromLibraryByEffect({ kind: "player", player }, { top: ability.cost.exileTop }, player);
-    }
     // Paid *before* the ability resolves, which is what makes Slate of
     // Ancestry's "discard your hand, then draw a card for each creature"
     // work out as a refill rather than a discard of what it drew.
-    if (ability.cost.discardHand === true) this.discardWholeHand(player);
-    if (ability.cost.exileSelf === true) {
-      // Not a sacrifice: the source never touches a graveyard, so a
-      // dies-trigger elsewhere doesn't fire.
-      this.moveObject(sourceId, "exile");
-      this.emit({ type: "permanent-exiled", object: sourceId });
-    }
     // "Exert this creature" as a cost (rule 701.43): paid now, so it skips the
     // next untap step even if the ability is countered.
-    if (ability.cost.exertSelf === true) this.exertPermanent(sourceId, player, false);
-    if (ability.cost.returnSelfToHand === true) {
-      // "Return Shigeki to its owner's hand" — the cost itself, paid now.
-      this.returnToHandByEffect({ kind: "object", object: sourceId }, false);
-    }
     if (ability.oncePerTurn === true || ability.boast === true || ability.timesEachTurn !== undefined) {
       // Rule 602.5g — recorded per ability index, so a permanent with two
       // once-each-turn abilities limits each of them separately; one entry
@@ -23762,6 +23735,14 @@ export class Game {
           this.beginCollectEvidence(player, sourceId, evidence, { x: chosenX, priorityTo: player, thenManaAbility: manaAfter }),
         );
       }
+      if (ability.cost.do !== undefined) {
+        // Rule 605.3b: no stack. The mana waits on the answer to whatever the
+        // cost asks, beneath anything the cost parks of its own.
+        this.state.suspendedResolutions.push({ effect: null, manaAbility: { source: sourceId, abilityIndex, player, x: chosenX, ...(manaColors !== undefined ? { manaColors } : {}) } });
+        this.payCostAct(ability.cost.do, player, sourceId, null, chosenX, [], player);
+        this.afterPlayerAction(player);
+        return;
+      }
       if (this.state.awaiting !== null) {
         this.afterPlayerAction(player);
         return;
@@ -23847,11 +23828,15 @@ export class Game {
     });
     this.announceTargeted(chosen, player, sourceId, false, abilityId);
     this.commitCrimeIfAny(chosen, player, abilityId);
+    // In any order but random or library parts last (601.2h), and nothing here
+    // waits on the parts below: a `do` beside a part that asks is refused by the
+    // pool's test (`costActMayAsk`), since only one decision can wait at a time.
+    if (ability.cost.do !== undefined) this.payCostAct(ability.cost.do, player, sourceId, abilityId, chosenX, chosen, player);
     // "Sacrifice two artifacts": which ones is chosen now, as the cost is paid
     // (rules 602.2b, 601.2h) — the ability is on the stack and its mana paid,
     // and nobody gets priority until it's done.
     if (sacrificeParts !== null) {
-      this.beginCostSacrifice(player, sourceId, sacrificeParts, ability.otherOnly === true ? sourceId : undefined, player);
+      this.beginCostSacrifice(player, sourceId, sacrificeParts, ability.otherOnly === true ? sourceId : undefined, player, undefined, abilityId);
     }
     // "Discard a card" in the cost: asked now, as a spell's additional
     // discard is, before anyone gets priority (rule 602.2b).
@@ -23953,6 +23938,50 @@ export class Game {
       );
     }
     this.afterPlayerAction(player);
+  }
+
+  /**
+   * Pay a cost's action (`AbilityCost.do`, `KickerAlsoCost.do` — rules 601.2h,
+   * 602.2b), once its other parts are paid: the effect applied as its source's
+   * and payer's, a choice in it an ordinary dispatched decision, what's left
+   * waiting in `suspendedResolutions` (which holds off state-based actions and
+   * priority, 117.5). `onto` is the stack object the paid objects are recorded
+   * on, `null` for a mana ability. The act's payability was checked before
+   * anything was paid; only the ways that can be paid are offered now.
+   */
+  private payCostAct(
+    act: EffectSpec,
+    player: PlayerId,
+    source: ObjectId,
+    onto: ObjectId | null,
+    x: number,
+    targets: ResolvedTargets,
+    priorityTo: PlayerId,
+  ): void {
+    const refs = onto === null ? {} : (this.state.objects[onto]?.lastKnownRefs ?? {});
+    const context = this.makeResolutionContext(source, player, targets, x, 0, undefined, 1, 0, [], refs, { payingCost: priorityTo });
+    const steps: EffectSpec[] = [payableCostAct(act, context), { kind: "cost-paid", onto, since: this.state.eventSeq }];
+    this.state.costPriorityTo = priorityTo;
+    this.withDecisionSource(source, () => applyEffectSpec({ kind: "sequence", effects: steps }, context));
+  }
+
+  /** The objects a cost act took, by event, into `{ paid }` on its stack object. */
+  private recordCostActPaid(onto: ObjectId, since: number): void {
+    const kinds: readonly (readonly [ThisWayKind, PaidKind])[] = [
+      ["sacrificed", "sacrificed"],
+      ["discarded", "discarded"],
+      ["exiled", "exiled"],
+    ];
+    for (const [thisWay, paid] of kinds) {
+      const entries = thisWayEntries(this.state, thisWay, since);
+      if (entries.length === 0) continue;
+      const leftFrom: Record<ObjectId, number> = {};
+      for (const entry of entries) {
+        const last = entry.departed ? this.state.objects[entry.object]?.lastKnown : undefined;
+        if (last !== undefined) leftFrom[entry.object] = last.zoneChangeCount;
+      }
+      this.recordPaid(onto, paid, entries.map((entry) => entry.object), leftFrom);
+    }
   }
 
   /** A mana ability's effect, its cost paid: it resolves immediately and never
@@ -25012,16 +25041,13 @@ export class Game {
           (ability.cost.sacrifice !== undefined && ability.cost.sacrifice !== "self") ||
           ability.cost.removeCounter !== undefined ||
           ability.cost.payEnergy !== undefined ||
-          ability.cost.exileSelf === true ||
-          ability.cost.discardHand === true ||
+          ability.cost.do !== undefined ||
           ability.cost.discard !== undefined ||
           ability.cost.returnToHand !== undefined ||
           ability.cost.exileFromGraveyard !== undefined ||
           ability.cost.exileFromHand !== undefined ||
           ability.cost.exileSpell !== undefined ||
           ability.cost.putFromExile !== undefined ||
-          ability.cost.returnSelfToHand === true ||
-          ability.cost.exertSelf === true ||
           ability.cost.revealChosen === true ||
           ability.exhaust === true ||
           ability.onlyOnce === true ||
@@ -27221,6 +27247,13 @@ export class Game {
         const parked = this.state.suspendedResolutions.length;
         this.finishEntry(next.enter);
         this.holdResolutionOpen(parked);
+      }
+      if (next?.manaAbility !== undefined) {
+        const { source, abilityIndex, player, x, manaColors } = next.manaAbility;
+        const ability = this.effectiveActivated(source)[abilityIndex];
+        if (ability !== undefined) {
+          this.resolveManaAbility(source, player, ability, x, manaColors, this.activatedRefFor(source, abilityIndex), undefined);
+        }
       }
       if (next?.leaveStack !== undefined) {
         // Leaving may itself ask something (Feather's rule 616.1 choice).
@@ -33134,6 +33167,8 @@ export class Game {
       readonly announcedModes?: readonly number[];
       readonly division?: readonly number[];
       readonly priced?: ObjectId;
+      /** A cost act is being paid, by this player, to whom priority goes (`Game.payCostAct`). */
+      readonly payingCost?: PlayerId;
     } = {},
   ): ResolutionContext {
     const refs = lastKnownRefs;
@@ -34068,6 +34103,12 @@ export class Game {
         return n;
       },
       priced: opts.priced,
+      energyOf: (who) => this.state.players[who]?.energy ?? 0,
+      sacrificeCandidateCount: (filter) => permanentCount(this.state, this.costSacrificeEligible(controller, filter, undefined, source)),
+      canCollectEvidence: (amount) => this.canCollectEvidence(controller, amount),
+      costPaid: (onto, paidSince) => {
+        if (onto !== null) this.recordCostActPaid(onto, paidSince);
+      },
       allCounters: () => this.countersAmongPlayersAndPermanents(),
       commanderManaValue: () =>
         Math.max(
@@ -36852,7 +36893,7 @@ export class Game {
       timeCountersOnSuspended: (amount) => this.timeCountersOnSuspended(amount),
       choosePermanents: (filter, min, max, then, prompt, exceptSource, except, chooser, together, thenTargets, thenTogether) =>
         this.beginChoosePermanents(source, chooser ?? controller, x, filter, min, max, then, prompt, exceptSource === true, except, together, thenTargets, thenTogether),
-      blight: (player, amount, then) => this.beginBlight(player, source, amount, { x, ...(then !== undefined ? { then } : {}) }),
+      blight: (player, amount, then) => this.beginBlight(player, source, amount, { x, ...(opts.payingCost !== undefined ? { priorityTo: opts.payingCost } : {}), ...(then !== undefined ? { then } : {}) }),
       bolster: (amount) => this.beginBolster(controller, source, amount, x),
       behold: (spec, then) => this.beginBehold(controller, source, spec, { x, ...(then !== undefined ? { then } : {}) }),
       canBehold: (spec) => this.canBehold(controller, spec),
@@ -41332,6 +41373,11 @@ export class Game {
         return `${player} has too few cards in their graveyard to pay ${def.name}'s ${keyword} cost`;
       }
     }
+    for (const also of costs) {
+      if (also.do !== undefined && !costActPayable(also.do, this.makeResolutionContext(cardId, player, []))) {
+        return `${player} can't pay ${def.name}'s ${keyword} cost: ${also.text}`;
+      }
+    }
     if (sum((also) => also.opponentGainsLife) > 0 && !this.giftCandidates(player).some((p) => !this.playerCantGainLife(p))) {
       return `${player} has no opponent who can gain life for ${def.name}'s ${keyword} cost`;
     }
@@ -41383,6 +41429,7 @@ export class Game {
       if (also.exileFromGraveyard !== undefined) {
         queue.push({ spell, player, priorityTo, exileFromGraveyard: also.exileFromGraveyard });
       }
+      if (also.do !== undefined) queue.push({ spell, player, priorityTo, do: also.do });
       if (queue.length === 0) delete this.state.pendingAlsoCosts;
       if (also.opponentGainsLife !== undefined) {
         const candidates = this.giftCandidates(player).filter((p) => !this.playerCantGainLife(p));
@@ -41398,7 +41445,11 @@ export class Game {
     if (queue.length > 0) this.state.pendingAlsoCosts = queue;
     else delete this.state.pendingAlsoCosts;
     if (ask === undefined) return;
-    const { spell, player, priorityTo, discard, returnToHand, exileFromGraveyard } = ask;
+    const { spell, player, priorityTo, discard, returnToHand, exileFromGraveyard, do: act } = ask;
+    if (act !== undefined) {
+      const object = this.state.objects[spell];
+      this.payCostAct(act, player, spell, spell, object?.xValue ?? 0, object?.targets ?? [], priorityTo);
+    }
     if (discard !== undefined) {
       this.payCostDiscard(spell, spell, () => {
         this.discardByEffect({ kind: "player", player }, discard.count, discard.atRandom === true);
@@ -48219,9 +48270,12 @@ export class Game {
     except: ObjectId | undefined,
     priorityTo: PlayerId,
     manaAbility?: NonNullable<GameState["pendingCostSacrifice"]>["manaAbility"],
+    /** The stack object what's sacrificed is recorded on (`{ paid: "sacrificed" }`). */
+    onto?: ObjectId,
   ): void {
     this.state.pendingCostSacrifice = {
       player,
+      ...(onto !== undefined ? { onto } : {}),
       source,
       parts: [...parts],
       ...(except !== undefined ? { except } : {}),
@@ -48305,16 +48359,20 @@ export class Game {
     const grantedAbility = manaAbility === undefined ? undefined : this.activatedRefFor(pending.source, manaAbility.abilityIndex);
     const victims = pending.picked.filter((id) => this.state.objects[id]?.zone === "battlefield");
     if (victims.length > 0) {
+      const leftFrom: Record<ObjectId, number> = {};
       this.withLeaveBatch(() => {
         this.snapshotLeaving(victims);
         for (const id of victims) {
           // Its controller sacrifices it (rule 701.21a) — read before the move
           // hands it back to its owner.
           const sacrificer = this.state.objects[id].controller;
+          leftFrom[id] = this.state.objects[id].zoneChangeCount ?? 0;
           this.moveObject(id, "graveyard");
           this.emit({ type: "permanent-sacrificed", object: id, player: sacrificer });
         }
       });
+      // The sacrificed set, for "the total power of the sacrificed creatures".
+      if (pending.onto !== undefined) this.recordPaid(pending.onto, "sacrificed", victims, leftFrom);
     }
     if (manaAbility !== undefined && ability !== undefined) {
       this.resolveManaAbility(pending.source, pending.player, ability, manaAbility.x, manaAbility.manaColors, grantedAbility, undefined);
@@ -50957,6 +51015,13 @@ export class Game {
     if ((this.state.spellGrantsThisTurn ?? []).some((g) =>
       g.payLifeManaValue === true && turnCastGrantReaches(this.state, this.registry, g, cardId, caster, from))) {
       out.push({ mana: "{0}", payLifeManaValue: true });
+    }
+    // "The next … spell you cast this turn can be cast without paying its
+    // mana cost" (World War Hulk): the next-spell grant's, an alternative cost
+    // (118.9), so a printed one can't go with it.
+    if ((this.state.spellGrantsThisTurn ?? []).some((g) =>
+      g.free === true && turnCastGrantReaches(this.state, this.registry, g, cardId, caster, from))) {
+      out.push({ mana: "{0}" });
     }
     if (staticLife === "may") out.push({ mana: "{0}", payLifeManaValue: true });
     // Bolas's Citadel beside Future Sight: cast under the Citadel's

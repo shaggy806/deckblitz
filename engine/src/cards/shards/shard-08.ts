@@ -431,6 +431,7 @@ import _poolInformedInkwright from "../pool/informed-inkwright.js";
 import _poolInnerDemon from "../pool/inner-demon.js";
 import _poolInnerSanctum from "../pool/inner-sanctum.js";
 import _poolInscribedTablet from "../pool/inscribed-tablet.js";
+import _poolInscriptionOfRuin from "../pool/inscription-of-ruin.js";
 import _poolInsidiousFungus from "../pool/insidious-fungus.js";
 import _poolInspirationFromBeyond from "../pool/inspiration-from-beyond.js";
 import _poolInstigatorGang from "../pool/instigator-gang.js";
@@ -1468,6 +1469,7 @@ const shard: CardShard = {
     _poolInnerDemon,
     _poolInnerSanctum,
     _poolInscribedTablet,
+    _poolInscriptionOfRuin,
     _poolInsidiousFungus,
     _poolInspirationFromBeyond,
     _poolInstigatorGang,

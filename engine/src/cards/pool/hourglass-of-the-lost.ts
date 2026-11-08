@@ -25,7 +25,7 @@ export default defineCard({
       text: "{T}: Add {W}. Put a time counter on this artifact.",
     },
     {
-      cost: { mana: null, tap: true, exileSelf: true, removeCounter: { kind: "time", count: "x" } },
+      cost: { mana: null, tap: true, removeCounter: { kind: "time", count: "x" }, do: { kind: "exile", target: "source" } },
       sorcerySpeed: true,
       targets: [],
       effect: {

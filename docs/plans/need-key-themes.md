@@ -725,18 +725,9 @@ player something, and whether it moves a card from a library or is random. Payme
 - **Paid objects** go into `{ paid }` by an internal last step of the sequence, which reads the events since the act
   began and calls `Game.recordPaid`, so a cost paid over several decisions is one set.
 
-The old automatic parts move onto it and go: `mill`, `exileTop`, `exileSelf`, `returnSelfToHand`, `exertSelf`,
-`discardHand` (`do` of the same action). The spell side's `AdditionalCostOption` loses `discard`, `blight`, `behold` and
-`also` for `do`, and "sacrifice any number" is `sacrificeCount: "x"` as a cost (Corpse Cobble, Soulblast), or
-`SacrificeCost`'s new `anyNumber` on an ability (Sword of the Ages).
-
-**Not moved, with the reason:** the parts named on the cast or activate action itself, because they're chosen with
-the mana and offered as variants, and moving them means changing the wire `LegalAction` and the client: `sacrifice`,
-`tapOthers`, `unattach`, `waterbend`, `removeCounter`, `payLife` and `payEnergy` (paying life and energy aren't
-instructions any effect gives: 118.2, 107.14). `discard`, `exileFromGraveyard`, `exileFromHand`, `exileSpell`,
-`putFromExile`, `reveal`, `returnToHand`, `untapOthers`, `blight`, `collectEvidence` and `craft` have offers keyed to
-X, source exclusions and decisions with their own continuation fields; each one is listed in *As built* as moved or
-left, by what its migration turned out to need.
+The old automatic parts move onto it and go; what moved and what stayed is listed in *As built* below, with the reason for
+each one left. "Sacrifice any number" as a cost is `sacrificeCount: "x"` (Corpse Cobble), "sacrifice all" a `do`
+(Soulblast).
 
 *(c) Keyword costs with parameters.* `kicker.cost` may be `{X}` (702.33: an X announced with the cost, `timesKicked`
 as usual, read as the spell's X); a granted replicate is one `grantsReplicate` static (cost `"mana-cost"` or a string);
@@ -747,8 +738,46 @@ a modal spell's `maxModes` reads `ifKicked`.
 118.3 (payable in full), 118.8 and 118.9d (additional costs apply to alternative ones). `do` decisions are ordinary
 registered ones (`decision-registry.md`).
 
-*Bots.* `effect-worth.ts` prices a `do` as the effect it is, negated (a cost is a loss); `features.ts` reads "sacrifices itself"
-from `do` too; `target-polarity.ts` walks `do` as part of the ability. v2 simulates, so it pays them as the table does.
+*Bots.* `features.ts` and `target-polarity.ts` read `costLosesSource` (a `do` that exiles or moves the source counts as a
+sacrifice of it) where they asked `cost.sacrifice === "self"`. `effect-worth.ts` prices the choices a resolving effect offers,
+not an activation's cost, so it has nothing to learn; v2 simulates activations, so it pays a `do` as the table does.
+
+*As built (step 6, theme 4).*
+- `CostReductionAmount` deleted, every field an `EffectAmount` through `Game.costAmount`; `SpellCastClause` (`when`) on both
+  statics; `alternativeAbilityCost` (`kind` `"cycling"`, `"equip"`, `"power-up"`) replaced `alternativeCyclingCost` and
+  `alternativeEquipCost`; `abilityKind` gained `"power-up"`. The flat fields are gone from the pool, the scaffolder and the tests;
+  `test/cost-pipeline.test.ts` walks every definition for them.
+- `AbilityCost.do` and `KickerAlsoCost.do`, with `cost-acts.ts`'s `COST_ACTS`, `costActPayable`, `payableCostAct`, `costActMaxX`,
+  `costActReadsX`, `costActMovesLibrary` (605.1a, read by `isManaAbility`), `costActPaidLast` and `costActLosesSource`.
+  `Game.payCostAct` adds a last internal `cost-paid` step that records the act's objects in `{ paid }`. `GameState.costPriorityTo`
+  hands priority back to the payer after a decision, since a decision's answer otherwise gives it to the active player (117.3c).
+- Deleted, every user moved: `AbilityCost`'s `mill`, `exileTop`, `exileSelf`, `returnSelfToHand`, `exertSelf`, `discardHand`, and
+  `AdditionalCostOption`'s `discard` and `blight` (onto `also.do`). `pay-energy` takes an amount; a blight paid as a cost still
+  takes only a creature a counter can go on (`makeResolutionContext`'s `payingCost`).
+- **Not moved**, each with its reason:
+  - `sacrifice`, `tapOthers`, `unattach`, `waterbend`: named on the wire `cast-spell` / `activate-ability` action and offered as
+    variants, so moving them changes `LegalAction` and the client. `removeCounter` has an offer of its own for chosen counters.
+  - `payLife` and `payEnergy`: paying isn't an instruction any effect gives (119.4, 107.14), and the auto-payer reads them.
+  - `discard`, `exileFromGraveyard`, `exileFromHand`, `exileSpell`, `putFromExile`, `reveal`, `returnToHand`, `untapOthers`,
+    `blight`, `collectEvidence`, `craft` on `AbilityCost`: each has X caps, source exclusions and a continuation of its own
+    (mana abilities' `thenManaAbility`), and none of this step's cards needed them moved. New costs now use `do`, so the type no
+    longer grows; the moves are mechanical, card by card, when one of these is next touched.
+  - `AdditionalCostOption`'s `behold`: its `BeholdSpec` has `fromHand` and `exile`-and-link, which the `behold` effect lacks.
+- `do` is paid first among the parts asked for after the object is on the stack, so craft's exile comes before its materials. Only
+  one decision can wait at a time, so a `do` that may ask beside another part that asks is refused by a pool-wide test.
+- A chosen sacrifice of several (`sacrificeCount`, `SacrificeCost.parts`) now records `{ paid: "sacrificed" }`, which it never did.
+- Cards (18): Hulk, Gamma Goliath; Kang the Conqueror; Wonder Man, Hollywood Hero; Advancing the Spirit; The Dominion Bracelet;
+  World War Hulk; Sphinx of the Revelation; Thornvault Forager; Feed the Cycle; Leashling; Timestream Navigator; Darksteel Monolith;
+  Leyline of Mutation; Corpse Cobble; Soulblast; Verdeloth the Ancient; Inscription of Ruin; Varolz, the Scar-Striped.
+- Keys marked built: the four power-up keys, `keyword:kicker-x`, `keyword:kicker-any-number-of-modes`,
+  `cost:alternative-cost-for-spells-limits`, `cost:alternative-cost-for-all-spells`, `cost:pay-x-energy`, `cost:forage`,
+  `cost:put-card-from-hand-on-library-top`, `cost:put-self-on-library-bottom`, `amount:total-power-sacrificed-as-cost`,
+  `cost:granted-ability-exile-granter`, `effect:next-spell-free-this-turn`, `keyword:scavenge`.
+- **Left unbuilt, not marked:** `static:grant-replicate` (a card's `kicker` is read off its definition in about 40 places; a grant needs a
+  caster-aware effective kicker first), `cost:choose-creature-type-as-cast` (a choice before targets), `effect:pay-any-amount-of-mana`
+  (Power Leak's "prevent X of that damage"), Baron Helmut Zemo (copying exiled cards and casting up to three) and Dawnhand Dissident
+  (a cast permission with an additional cost: theme 10), and an alternative cost that's an action (Conspiracy Unraveler, Dream Halls:
+  `alternativeCostForSpells` has only `mana`).
 
 ### 5. Who chooses (125 keys, ~150 cards)
 

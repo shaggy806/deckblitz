@@ -24,7 +24,7 @@ export default defineCard({
       // A mana ability (rule 605.1a) with a delayed trigger beside its mana
       // (Magus Lucea Kane's shape): the next instant or sorcery is copied
       // whatever paid for it. Exiling itself keeps it off the auto-payer.
-      cost: { mana: null, tap: true, exileSelf: true },
+      cost: { mana: null, tap: true, do: { kind: "exile", target: "source" } },
       targets: [],
       effect: {
         kind: "add-mana",

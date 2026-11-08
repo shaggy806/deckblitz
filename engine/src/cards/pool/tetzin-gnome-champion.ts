@@ -44,8 +44,9 @@ export default defineCard({
       cost: {
         mana: "{4}",
         tap: false,
-        exileSelf: true,
+        
         craft: { count: 6, filter: { type: "artifact" }, text: "six artifacts" },
+        do: { kind: "exile", target: "source" },
       },
       sorcerySpeed: true,
       targets: [],

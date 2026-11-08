@@ -1226,9 +1226,9 @@ describe("costs and triggers", () => {
       discard: { count: 1, filter: { type: "creature" } },
     });
     // Exert as a cost (rule 701.43 — Steward of Solidarity).
-    expect(parseCost("{T}, Exert ~").cost).toEqual({ mana: null, tap: true, exertSelf: true });
-    expect(parseCost("{2}, Exile the top card of your library").cost).toEqual({ mana: "{2}", tap: false, exileTop: 1 });
-    expect(parseCost("{3}, Exile the top four cards of your library").cost).toEqual({ mana: "{3}", tap: false, exileTop: 4 });
+    expect(parseCost("{T}, Exert ~").cost).toEqual({ mana: null, tap: true, do: { kind: "exert", target: "source" } });
+    expect(parseCost("{2}, Exile the top card of your library").cost).toEqual({ mana: "{2}", tap: false, do: { kind: "exile-from-library", amount: 1 } });
+    expect(parseCost("{3}, Exile the top four cards of your library").cost).toEqual({ mana: "{3}", tap: false, do: { kind: "exile-from-library", amount: 4 } });
   });
 
   it("sacrifice costs matched against the source", () => {
@@ -1814,7 +1814,7 @@ describe("costs and triggers", () => {
       oracle_text:
         "This land enters tapped unless you control a Mountain.\n{T}: Add {R}.\n{R}, {T}, Exert this land: Add {R}{R}. If any of that mana is spent on a creature spell, it gains haste until end of turn. (An exerted permanent won't untap during your next untap step.)",
     });
-    expect(arena.activated[1].cost).toMatchObject({ mana: "{R}", tap: true, exertSelf: true });
+    expect(arena.activated[1].cost).toMatchObject({ mana: "{R}", tap: true, do: { kind: "exert", target: "source" } });
     expect(arena.activated[1].effect).toEqual({
       kind: "add-mana",
       mana: "R",
@@ -2799,7 +2799,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(parseSentence("Blight 2.", ctx())).toEqual({ kind: "blight", amount: 2 });
     const embrace = face("As an additional cost to cast this spell, blight 1 or pay {3}.\nExile target creature.", "Sorcery", {});
     expect(embrace.additionalCost).toEqual({
-      options: [{ text: "Blight 1", blight: 1 }, { text: "Pay {3}", mana: "{3}" }],
+      options: [{ text: "Blight 1", also: { text: "Blight 1", do: { kind: "blight", amount: 1 } } }, { text: "Pay {3}", mana: "{3}" }],
     });
     expect(embrace.complete).toBe(true);
     const curiosity = face("As an additional cost to cast this spell, you may blight 1.\nExile the top two cards of your library.", "Sorcery", {});
@@ -16645,7 +16645,7 @@ describe("flagged cards' lines (2026-11-07): target player adds mana, a host's t
     });
     expect(face.complete).toBe(true);
     expect(face.activated[0]).toMatchObject({
-      cost: { mana: null, tap: true, mill: 1 },
+      cost: { mana: null, tap: true, do: { kind: "mill", target: "you", amount: 1 } },
       targets: ["player"],
       effect: { kind: "add-mana", mana: "any-color", amount: 1, target: 0 },
     });

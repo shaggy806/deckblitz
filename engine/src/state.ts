@@ -2451,6 +2451,8 @@ export interface SpellGrantThisTurn {
   readonly affinityFor?: CardFilter;
   /** The matching spell may be cast by paying life equal to its mana value
    * rather than its mana cost (Marshland Bloodcaster). */
+  /** "…can be cast without paying its mana cost" (World War Hulk). */
+  readonly free?: true;
   readonly payLifeManaValue?: true;
   usedBy?: { readonly id: ObjectId; readonly zoneChangeCount: number };
 }
@@ -3098,6 +3100,8 @@ export interface AlsoCostAsk {
   readonly discard?: { readonly count: number; readonly atRandom?: boolean };
   readonly returnToHand?: { readonly count: number; readonly filter: CardFilter };
   readonly exileFromGraveyard?: { readonly count: number; readonly filter?: CardFilter };
+  /** An action as the cost (`KickerAlsoCost.do`). */
+  readonly do?: EffectSpec;
 }
 
 /**
@@ -5126,7 +5130,19 @@ export interface EntryRecord {
  */
 export type SuspendedResolution =
   | ParkedSteps
-  | { readonly effect: null; readonly enter?: PendingEntry; readonly leaveStack?: ObjectId };
+  | {
+      readonly effect: null;
+      readonly enter?: PendingEntry;
+      readonly leaveStack?: ObjectId;
+      /** A mana ability waiting on what its `do` cost asks (605.3b). */
+      readonly manaAbility?: {
+        readonly source: ObjectId;
+        readonly abilityIndex: number;
+        readonly player: PlayerId;
+        readonly x: number;
+        readonly manaColors?: readonly ManaType[];
+      };
+    };
 
 /**
  * A permanent part of the way onto the battlefield, stopped to make an "as
@@ -6203,6 +6219,8 @@ export interface GameState {
    */
   pendingCostSacrifice?: {
     readonly player: PlayerId;
+    /** The stack object what's sacrificed goes on, as `{ paid: "sacrificed" }`. */
+    readonly onto?: ObjectId;
     /** The card whose cost it is, named in the prompt. */
     readonly source: ObjectId;
     readonly parts: readonly { readonly filter: CardFilter; readonly count: number; readonly differentNames?: true }[];
@@ -6543,6 +6561,9 @@ export interface GameState {
   preventionShields: PreventionShield[];
   /** "Damage can't be prevented this turn" (Skullcrack — rule 615.12): set by
    * the `damage-cant-be-prevented` effect, cleared as the next turn begins. */
+  /** The player a cost's last decision hands priority back to (117.3c: its
+   * payer, who may not be the active player). Used by the next grant of priority. */
+  costPriorityTo?: PlayerId;
   /** See `ExtraTurnRider.noPowerUps`: while set, no power-up ability can be
    * activated. Cleared as the turn ends. */
   powerUpsBarredThisTurn?: true;

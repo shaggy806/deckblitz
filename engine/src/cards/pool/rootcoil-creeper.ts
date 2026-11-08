@@ -33,7 +33,7 @@ export default defineCard({
       text: TWO,
     },
     {
-      cost: { mana: "{G}{U}", tap: true, exileSelf: true },
+      cost: { mana: "{G}{U}", tap: true, do: { kind: "exile", target: "source" } },
       targets: [{ kind: "card-in-exile", whose: "you", filter: { hasFlashback: true } }],
       effect: { kind: "return-to-hand", target: 0, from: "exile" },
       resolve: null,

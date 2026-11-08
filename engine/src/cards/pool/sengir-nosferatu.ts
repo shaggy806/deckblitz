@@ -15,7 +15,7 @@ export default defineCard({
   text: `Flying\n${TEXT}`,
   activated: [
     {
-      cost: { mana: "{1}{B}", tap: false, exileSelf: true },
+      cost: { mana: "{1}{B}", tap: false, do: { kind: "exile", target: "source" } },
       targets: [],
       effect: { kind: "create-token", token: "Bat Token (Sengir Nosferatu)", count: 1 },
       resolve: null,

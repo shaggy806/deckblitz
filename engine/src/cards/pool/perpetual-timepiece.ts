@@ -21,7 +21,7 @@ export default defineCard({
       text: MILL,
     },
     {
-      cost: { mana: "{2}", tap: false, exileSelf: true },
+      cost: { mana: "{2}", tap: false, do: { kind: "exile", target: "source" } },
       targets: [{ kind: "any-number", of: { kind: "card-in-graveyard", whose: "you" } }],
       effect: {
         kind: "sequence",

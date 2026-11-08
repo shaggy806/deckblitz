@@ -16,7 +16,7 @@ export default defineCard({
       text: "{T}: Add {C}.",
     },
     {
-      cost: { mana: "{5}", tap: true, exileSelf: true },
+      cost: { mana: "{5}", tap: true, do: { kind: "exile", target: "source" } },
       targets: ["creature"],
       effect: { kind: "shuffle-into-library", target: 0 },
       resolve: null,

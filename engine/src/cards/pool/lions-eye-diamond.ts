@@ -15,7 +15,7 @@ export default defineCard({
   text: TEXT,
   activated: [
     {
-      cost: { mana: null, tap: false, discardHand: true, sacrifice: "self" },
+      cost: { mana: null, tap: false, sacrifice: "self", do: { kind: "discard-hand", who: "you" } },
       targets: [],
       effect: { kind: "add-mana", mana: "any-color", amount: 3 },
       resolve: null,
