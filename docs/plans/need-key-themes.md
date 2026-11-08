@@ -1,6 +1,6 @@
 # Need-key themes: general engine changes under the open keys
 
-Status: plan of record (2026-11-07), step 1 done (B275), step 2 next — see *The plan* just below. The survey under
+Status: plan of record (2026-11-07), steps 1 (B275) and 2 (B276) done, step 3 next — see *The plan* just below. The survey under
 it is a proposal.
 
 The 1,783 open need keys (2,265 waiting cards, re-counted after step 1; the survey's own count was 1,831 and 2,324)
@@ -38,9 +38,11 @@ touch. Each step:
    Cold Storage, and the nine cards B274's partly covered keys left: Cass, Hand of Vengeance; Last Night Together,
    Intimidation Bolt, Boros Battleshaper, Forgestoker Dragon; Flameskull, March of Reckless Joy; Yare). Then re-count
    the themes (the counts here are ±15%) and correct this doc.
-2. **One shared duration type, and timed statics** (themes 3a, 3b): the foundation for steps 3, 4 and 6. Proving
-   cards: Teferi's Reproach, Willie Lumpkin, Zagorka, Emrakul, the Exigent Doom, Hall of Echoes, Frozen in Ice,
-   Jace's Machinations, Yavimaya Bloomsage.
+2. **Done 2026-11-07 (B276).** One shared duration type, and timed statics (themes 3a, 3b): `engine/src/duration.ts`
+   (see theme 3's design note). 12 cards: Teferi's Reproach, Willie Lumpkin, Zagorka, Emrakul, the Exigent Doom, Hall
+   of Echoes, Jace's Machinations, Skullcrack, Call In a Professional, Roiling Vortex, Sphinx's Decree, Azor and Master
+   of Cruelties; seven keys marked built, their six other cards left in `--stale` for `author-freed`. Frozen in Ice
+   (can't become untapped: theme 3c's prohibition) and Yavimaya Bloomsage (a player's own mana ability) stay flagged.
 3. **A turn journal in game state** (theme 6): one read for "this turn / last turn / this game". Kid Loki, Kiora of
    Salt and Sand, Kíli the Resourceful, Captain America, Living Legend.
 4. **Declarative event triggers with "first time / nth each turn" modifiers** (theme 2). The connive cards (Glorious
@@ -270,6 +272,70 @@ Sample: Teferi's Reproach needs exactly `PlayerEffect`'s `protectionFromEverythi
 
 **Confidence: high.** Most of these keys exist today in one form (static, or for one player) and are missing in
 another.
+
+**Design note (step 2, 2026-11-07): one `Duration`, one `Expiry`, a timed static.**
+
+*Where it lives.* `engine/src/duration.ts`, beside nothing else: types and the pure helpers that read them. Two
+types, because a card and the game state say a duration differently:
+
+- **`Duration`**, what a card says ("until your next turn"): string members for the effect controller's own forms,
+  and object members anchored to any other player, `{ untilTurnOf | throughTurnOf | duringTurnOf: DurationPlayer }`
+  (`DurationPlayer` is `EffectPlayerRef` without `"you"`, whose forms are the strings, so each meaning has one
+  spelling). Every member names one meaning everywhere: `"until-your-next-turn"` ends as that turn begins,
+  `"until-end-of-your-next-turn"` at its cleanup, `"during-your-next-turn"` only within it, `"permanent"` has no end
+  of its own (the object's stint, rule 400.7; a player effect's rest of the game). It replaces `PtDuration`,
+  `UntilPointDuration`, `CopyUntil`, `ImpulseDuration`, the `player-effect` spec's own union, `DelayedWhenever.until`,
+  the damage rule's, `prohibit`'s, `restrict`'s and `attack-requirement`'s, whose clashing words are renamed: the
+  impulse permission's `"your-next-turn"` (it ran to the end of that turn) is `"until-end-of-your-next-turn"`, the
+  copy's and the delayed watch's `"your-next-turn"` (it ended as the turn began) `"until-your-next-turn"`,
+  `"this-turn"` `"end-of-turn"`, `"this-combat"`/`"end-of-combat"` `"until-end-of-combat"`,
+  `"rest-of-game"`/`"game"` `"permanent"`, `"while-you-control"` `"while-you-control-source"`.
+- **`Expiry`**, what the state keeps once the effect began (the old `EffectDuration`, moved from `events.ts` with
+  `UntilPoint`, `WhileSource` and `UntilCast`): players resolved to ids, sources to a stint. `PlayerEffect.expires`
+  takes it (its five private kinds deleted), and so does the new timed static; `PtModifier`'s fields and
+  `ControlEffect`'s stay the flattened image of an `Expiry` (`durationFields`), as 267 card files write
+  `untilEndOfTurn` directly.
+
+Each store takes the subset of `Duration` its expiry pass can end, declared in `duration.ts` as an `Extract` of it
+(`PermanentDuration`, `PlayerDuration`, `CopyDuration`, `PermissionDuration`, …), never a field-local union: a store
+that learns a member widens its subset and its resolver, and a new key adds no new word. `resolvePlayerDuration`
+turns a `PlayerDuration` into an `Expiry` for every player-side store, so "until **that player's** next turn"
+(Teferi's Reproach) is one anchor, not a new kind.
+
+*The one expiry check.* Player effects and timed statics end in one pass, `expirePlayerEffects(moment)` over
+`mapPlayerExpiries`, called at the turn's beginning, combat's end and cleanup; their `UntilPoint`s (an upkeep, the
+end of a later turn) pass in `passUntilPoints` beside the modifiers' and control effects'. A `duringTurnOf` effect waits in `GameState.laterPlayerEffects` until that player's
+next turn begins (800.4m: never, if they've left), then holds for that turn (Willie Lumpkin, Zagorka).
+
+*Not moved here*, each owned by a later theme: the impulse permission's stored `expiry` (theme 10's one
+play-permission record), `AttackRequirementRule.duration` (theme 11), `TemporaryCopy.ends` (`CopyEnds`, theme 8's
+characteristics patch), prevention shields and the turn-wide lists (`hexproofPlayers`, `turnProhibitions`; theme
+3c's predicate). Their *authored* words are `Duration`'s already: each resolver reads a `Duration` subset into its
+own store.
+
+*The timed static.* A new effect, `{ kind: "timed-static", static: StaticAbility[], duration: PlayerDuration }`,
+makes an emblem-like object owned by the effect's controller with `EmblemState.expires`: every reader of emblem
+statics (`emblemStatics`, `staticSourceIds`) sees it, and it goes when its `Expiry` ends. It is no emblem at the table
+(rule 114): the view leaves it out of the emblems (as it shows no other player effect), no "emblem" log line is
+written, and the bots don't count it as an emblem they own. Rule 611.2c: a timed static changes rules, not characteristics, so it reaches
+whatever comes later; one that changes characteristics would lock its `affects` as it begins, and is refused until a
+card needs it. Readers learn the fields their proving cards use (`legendRuleOff`; the life-gain, life-loss and mill
+replacements through `playerEventReplacements`; `loyaltyAtInstantSpeed` with a filter `affects`), each pinned by
+`emblem-statics.test.ts`, which now walks timed statics too. "Damage can't be prevented this turn" already had its
+one-shot (`damage-cant-be-prevented`).
+
+*Bots.* `features.ts` counts only lasting emblems (a timed static isn't an asset, and "players can't gain life"
+binds its maker too); `target-polarity` gives `timed-static` its entry (no targets of its own; a `player-effect`'s
+are read as before, and the `during` anchor is read after targets lock). `onlyUntilEndOfTurn` deliberately leaves both
+out: a rule for the rest of the turn still matters after combat, where a pump no longer does. v2 simulates the
+resolution, so it sees the effect itself.
+
+*As built (B276).* Every spec-level duration union is gone (`PtDuration`, `UntilPointDuration`, `CopyUntil`,
+`ImpulseDuration`, the player effect's, the watch's, the damage rule's, `prohibit`'s, `restrict`'s and
+`attack-requirement`'s), 140 card files and the scaffolder renamed onto `Duration`'s words; `EffectDuration` is
+`Expiry`. Two small additions the proving cards needed: `assigns-no-combat-damage`'s `duration:
+"until-end-of-combat"` (Master of Cruelties) and the filter clause `attackingPlayer`, and `cantAttack:
+"you-and-permanents"` (Willie Lumpkin's "you or permanents you control", a battle too).
 
 ### 4. Cost pipeline (116 keys, ~159 cards)
 

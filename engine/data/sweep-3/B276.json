@@ -1,0 +1,108 @@
+{
+ "batch": "B276",
+ "status": "done",
+ "ranks": "Need-key themes step 2 (docs/plans/need-key-themes.md, 2026-11-07): one shared Duration and Expiry (engine/src/duration.ts) and the timed static — flagged Build ASAP cards first, then the keys the step covers: players can't gain life this turn, until/during that player's next turn, this combat, until this card is cast from exile, the legend rule off this turn, instant-speed loyalty this turn.",
+ "authored": [
+  {
+   "name": "Azor, the Lawbringer",
+   "files": [
+    "engine/src/cards/pool/azor-the-lawbringer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Call In a Professional",
+   "files": [
+    "engine/src/cards/pool/call-in-a-professional.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Emrakul, the Exigent Doom",
+   "files": [
+    "engine/src/cards/pool/emrakul-the-exigent-doom.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Hall of Echoes",
+   "files": [
+    "engine/src/cards/pool/hall-of-echoes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jace's Machinations",
+   "files": [
+    "engine/src/cards/pool/jaces-machinations.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Master of Cruelties",
+   "files": [
+    "engine/src/cards/pool/master-of-cruelties.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Roiling Vortex",
+   "files": [
+    "engine/src/cards/pool/roiling-vortex.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skullcrack",
+   "files": [
+    "engine/src/cards/pool/skullcrack.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sphinx's Decree",
+   "files": [
+    "engine/src/cards/pool/sphinxs-decree.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Teferi's Reproach",
+   "files": [
+    "engine/src/cards/pool/teferis-reproach.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Willie Lumpkin, Postman",
+   "files": [
+    "engine/src/cards/pool/willie-lumpkin-postman.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zagorka, Mother of Sanctum",
+   "files": [
+    "engine/src/cards/pool/zagorka-mother-of-sanctum.ts",
+    "engine/src/cards/tokens/sanctum-token.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Frozen in Ice",
+   "needs": [
+    "static:cant-become-untapped"
+   ],
+   "reason": "'Can't become untapped' is a prohibition on every untap, not a duration: theme 3c's predicate, not this step."
+  },
+  {
+   "name": "Yavimaya Bloomsage // Channel",
+   "needs": [
+    "effect:player-mana-ability-until-eot"
+   ],
+   "reason": "Channel gives the player a mana ability for the turn ('any time you could activate a mana ability, you may pay 1 life'); no static gives a player, rather than a permanent, a mana ability, so a timed static can't say it yet."
+  }
+ ]
+}

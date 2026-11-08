@@ -12,6 +12,15 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Need-key themes step 2: one `Duration`, one `Expiry`, the timed static** (2026-11-07, B276):
+  `engine/src/duration.ts` replaces `PtDuration`, `UntilPointDuration`, `CopyUntil`,
+  `ImpulseDuration`, `EffectDuration`, `PlayerEffect.expires`' private kinds and six field-local
+  unions (140 card files and the scaffolder renamed); any player's next turn as an anchor
+  (`untilTurnOf`/`throughTurnOf`/`duringTurnOf`, `GameState.laterPlayerEffects`); the `timed-static`
+  effect on emblem machinery (`EmblemState.expires`, one expiry pass with player effects); bots count
+  only lasting emblems. 12 cards: Teferi's Reproach, Willie Lumpkin, Zagorka, Emrakul, the Exigent
+  Doom, Hall of Echoes, Jace's Machinations (flagged), Skullcrack, Call In a Professional, Roiling
+  Vortex, Sphinx's Decree, Azor, the Lawbringer, Master of Cruelties; seven keys built.
 - **Need-key themes step 1: key clean-up, and the freed cards** (2026-11-07, B275, `author-freed`):
   13 duplicate need keys merged (aliases, records re-pointed); nine keys built, six of them with no
   engine code and three with one switch each (`costModification.notFromCastersHand`, an `orPlayer`

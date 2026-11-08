@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4706 already implemented / 294 missing (marks refreshed 2026-11-08)
+4708 already implemented / 292 missing (marks refreshed 2026-11-08)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2501,7 +2501,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2508  Lair of the Hydra                        {0}              Land
 [x]  2509  Thrasios, Triton Hero                    {G}{U}           Legendary Creature — Merfolk Wizard
 [x]  2510  Bugenhagen, Wise Elder                   {1}{G}           Legendary Creature — Human Shaman
-[ ]  2511  Roiling Vortex                           {1}{R}           Enchantment
+[x]  2511  Roiling Vortex                           {1}{R}           Enchantment
 [x]  2512  Alandra, Sky Dreamer                     {2}{U}{U}        Legendary Creature — Merfolk Wizard
 [x]  2513  Scorched Geyser                          {0}              Land — Island Mountain
 [x]  2514  Railway Brawler                          {3}{G}{G}        Creature — Rhino Warrior
@@ -3467,7 +3467,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3474  Didn't Say Please                        {1}{U}{U}        Instant
 [x]  3475  Blasting Station                         {3}              Artifact
 [ ]  3476  Burning Inquiry                          {R}              Sorcery
-[ ]  3477  Master of Cruelties                      {3}{B}{R}        Creature — Demon
+[x]  3477  Master of Cruelties                      {3}{B}{R}        Creature — Demon
 [x]  3478  Coalition Relic                          {3}              Artifact
 [x]  3479  Kaalia of the Vast                       {1}{R}{W}{B}     Legendary Creature — Human Cleric
 [x]  3480  Berserk                                  {G}              Instant

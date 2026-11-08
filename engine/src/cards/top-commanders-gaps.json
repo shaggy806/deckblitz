@@ -1955,7 +1955,14 @@
   "keyword:hexproof-from-monocolored",
   "effect:pt-until-end-of-combat",
   "effect:return-linked-under-your-control",
-  "static:look-at-top-card-any-time"
+  "static:look-at-top-card-any-time",
+  "effect:players-cant-gain-life-this-turn",
+  "effect:player-effect-until-target-next-turn",
+  "effect:player-cant-attack-you-next-turn",
+  "effect:duration-this-combat",
+  "effect:duration-until-card-cast",
+  "effect:legend-rule-off-this-turn",
+  "effect:grant-instant-speed-loyalty-until-eot"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
