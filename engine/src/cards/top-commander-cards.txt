@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4716 already implemented / 284 missing (marks refreshed 2026-11-08)
+4717 already implemented / 283 missing (marks refreshed 2026-11-08)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2554,7 +2554,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2561  Baldur's Gate                            {0}              Legendary Land — Gate
 [ ]  2562  Mari, the Killing Quill                  {1}{B}{B}        Legendary Creature — Vampire Assassin
 [x]  2563  Somberwald Sage                          {2}{G}           Creature — Human Druid
-[ ]  2564  Nature's Will                            {2}{G}{G}        Enchantment
+[x]  2564  Nature's Will                            {2}{G}{G}        Enchantment
 [x]  2565  Leechridden Swamp                        {0}              Land — Swamp
 [ ]  2566  Aclazotz, Deepest Betrayal // Temple of the Dead {5}              Legendary Creature — Bat God // Land
 [x]  2567  Indulgent Aristocrat                     {B}              Creature — Vampire Noble
