@@ -34,7 +34,7 @@ export default defineCard({
         kind: "each-player-may",
         who: "you",
         options: [{ sacrifice: { type: "creature" }, exceptSource: true, text: "Sacrifice another creature" }],
-        ifDid: { kind: "add-counter", target: "source", counter: "+1/+1", amount: { powerOf: "sacrificed" } },
+        ifDid: { kind: "add-counter", target: "source", counter: "+1/+1", amount: { powerOf: { paid: "sacrificed" } } },
       },
       resolve: null,
       text: ATTACK_TEXT,

@@ -47,7 +47,7 @@ export default defineCard({
               then: {
                 kind: "reflexive-trigger",
                 targets: ["creature-you-control"],
-                value: { thisWay: "exiled", sumOf: "mana-value" },
+                value: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "exiled" } },
                 effect: {
                   kind: "modify-pt",
                   target: 0,

@@ -36,7 +36,7 @@ export default defineCard({
               kind: "search-library",
               filter: {
                 type: "artifact",
-                manaValue: { op: "eq", n: { amount: { sum: [{ manaValueOf: "sacrificed" }, 1] } } },
+                manaValue: { op: "eq", n: { amount: { sum: [{ manaValueOf: { paid: "sacrificed" } }, 1] } } },
               },
               destination: "battlefield",
               enterTapped: true,

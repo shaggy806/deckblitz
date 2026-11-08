@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 
 // Mirage (MIR). EDHREC rank 31500.
 //
-// `powerOf: "tapped"` is the creature tapped to pay the cost, read as the
+// `powerOf: { paid: "tapped" }` is the creature tapped to pay the cost, read as the
 // ability resolves (as it last existed, if it has left).
 
 const TEXT =
@@ -27,7 +27,7 @@ export default defineCard({
           filter: { type: "creature", keyword: "flying", anyOf: [{ attacking: true }, { blocking: true }] },
         },
       ],
-      effect: { kind: "damage", amount: { powerOf: "tapped" }, target: 0 },
+      effect: { kind: "damage", amount: { powerOf: { paid: "tapped" } }, target: 0 },
       resolve: null,
       text: TEXT,
     },

@@ -50,7 +50,7 @@ export default defineCard({
         then: {
           kind: "damage",
           who: "each-opponent",
-          amount: { thisWay: "exiled", who: "each", sumOf: "power" },
+          amount: { aggregate: "sum", of: "power", filter: {}, in: { thisWay: "exiled", who: "each" } },
         },
       },
     ],

@@ -620,6 +620,17 @@ export type CombatRestriction =
  * "You" is the object's controller — its owner, off the battlefield, since a
  * CDA works in every zone.
  */
+/** See `CountSpec`'s player aggregate. */
+export interface StaticPlayerAggregate {
+  readonly amongPlayers: "greatest" | "least";
+  readonly of: { readonly lifeTotal: "each" } | { readonly countOf: CardFilter; readonly forEachPlayer: true };
+  readonly who?: PlayerScope;
+  /** Half of it, rounded up or down (rule 107.1a). */
+  readonly half?: "up" | "down";
+  /** This number minus it (Scourge of the Skyclaves's "20 minus"). */
+  readonly from?: number;
+}
+
 export type CountSpec =
   /** The number this permanent chose (`GameObject.chosenOnEnter`), 0 while it
    * has none — Shapeshifter's "the last chosen number". Only a
@@ -629,12 +640,6 @@ export type CountSpec =
    * are each equal to the number of lore counters on it" (Myth Realized, a
    * granted one). Only a `setBasePtFromCount` knows which permanent that is. */
   | { readonly countersOnThis: string }
-  /** The total of a characteristic over the face-up cards exiled with this
-   * permanent in this stint (rule 607.2a) — Living Lore's "each equal to the
-   * exiled card's mana value", Sutured Ghoul's "the total power of the exiled
-   * cards". 0 once they've left exile, or with none. Only a
-   * `setBasePtFromCount` knows which permanent that is. */
-  | { readonly exiledWithThis: "mana-value" | "power" | "toughness" }
   /** How many counters of a kind are on the permanent this token was created
    * with, in the stint that made it (`GameObject.createdWith`) — "this token's
    * power and toughness are each equal to the number of fade counters on
@@ -691,8 +696,26 @@ export type CountSpec =
    * "name", filter: { type: "land", controlledBy: "you" } }`. Its own
    * permanent counts when it matches. A power read here is the CDA
    * dependency problem of AUTHORING §15; names, mana values and types aren't.
+   * Its set `in: "exiled-with-source"` is the face-up cards exiled with this
+   * permanent in this stint (rule 607.2a): Living Lore's "each equal to the
+   * exiled card's mana value", Sutured Ghoul's "the total power of the exiled
+   * cards", Unlicensed Hearse's "the number of cards exiled with it" — none
+   * once they've left exile, nor while it's off the battlefield.
    */
   | AggregateSpec
+  /** The player aggregate (the `EffectAmount` `amongPlayers`), over the `of`
+   * forms a static can answer — a life total (`{ lifeTotal: "each" }`) or a
+   * battlefield count from each player's side (`{ countOf, forEachPlayer:
+   * true }`): Malignus's "half the highest life total among your opponents,
+   * rounded up" with `half`, Scourge of the Skyclaves's "20 minus the highest
+   * life total among players" with `minus`. `test/object-sets.test.ts` keeps
+   * every CDA on those forms. */
+  | StaticPlayerAggregate
+  /** Several counts added — "the number of Forests you control **plus** the
+   * number of Treefolk you control" (Dauntless Dourbark), where one permanent
+   * in both counts in each (unlike an aggregate's `plus`, which counts an
+   * object two sets reach once). */
+  | { readonly sum: readonly CountSpec[] }
   /** Its controller's devotion to these colours (rule 700.5) — Anax,
    * Hardened in the Forge's "power is equal to your devotion to red" is `{
    * devotionTo: ["R"] }` with `only: "power"`. Two colours are "devotion to
@@ -2245,10 +2268,6 @@ export interface StaticAbility {
      * "creatures you control of the chosen type get +1/+1 for each charge
      * counter on this artifact". */
     readonly countersOnSource?: string;
-    /** The total mana value of the face-up cards exiled with this permanent
-     * in this stint (rule 607.2a) — Idris, Soul of the TARDIS's "+X/+X, where
-     * X is the exiled card's mana value". */
-    readonly exiledWithSourceManaValue?: true;
     /** Cards in exile matching a filter — Umbris, Fear Manifest's "+1/+1 for
      * each card your opponents own in exile" is `{ ownedBy: "opponent" }`.
      * Face-down cards count; they're still cards. */
@@ -4606,7 +4625,7 @@ export interface CardDefinition {
     /** `sacrifice`'s one chosen permanent is **exiled** instead — "As an
      * additional cost to cast this spell, exile a creature you control"
      * (Necrotic Fumes, Soul Exchange). Offered and named as a sacrifice is and
-     * read back as `"sacrificed"`, but it's no sacrifice: nothing stops or sees
+     * read back as `{ paid: "sacrificed" }`, but it's no sacrifice: nothing stops or sees
      * one (rule 701.21a). */
     readonly exilesSacrifice?: true;
     readonly sacrificeCount?: number | "x";
@@ -4702,7 +4721,7 @@ export interface CardDefinition {
      * Dreadnought): asked even with few cards there, none an answer. `linked`
      * makes what's exiled "exiled with" the permanent the spell becomes (rule
      * 607.2a). "The exiled card" of the spell's effect is the `AmountRef`
-     * `"exiled-as-cost"` (Corpse Explosion); of the permanent's, an
+     * `{ paid: "exiled" }` (Corpse Explosion); of the permanent's, an
      * `exiled-with-source` read.
      */
     readonly exileFromGraveyard?: {

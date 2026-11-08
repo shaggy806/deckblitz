@@ -42,6 +42,7 @@ import { EVERY_CREATURE_TYPE, EVERY_LAND_TYPE, hasSubtype, isCreatureType, isLan
 import { lastKnownNames, namesOf } from "./card-names.js";
 import type { TargetRef } from "./target.js";
 import { thisWayEntries } from "./this-way.js";
+import { isObjectSetRef, staticSetMembers, type ObjectSetRef } from "./object-sets.js";
 
 /**
  * A numeric comparison clause, e.g. `{ op: "lte", n: 2 }` = "≤ 2".
@@ -261,8 +262,15 @@ export function supertypesOf(registry: CardRegistry, object: GameObject): readon
  *
  * - `"trigger-object"` — the trigger object;
  * - `"source"` — the resolving spell's or ability's source;
- * - `"sacrificed"` — the permanent sacrificed to pay its cost (or by an
- *   earlier step), as it last existed;
+ * - an {@link ObjectSetRef} — every member of that set, each as it was if it
+ *   has moved since ("shares a creature type with **a member of**" it):
+ *   `{ paid: "sacrificed" }` the permanent sacrificed to pay its cost (or by
+ *   an earlier step), `{ thisWay: "exiled" }` the card exiled this way
+ *   (Resplendent Marshal's "shares a creature type with the exiled card"),
+ *   `"exiled-with-source"` the cards in exile linked to the source's
+ *   battlefield stint (rule 607.2a, `GameObject.exiledWith`) or exiled until
+ *   it leaves (610.3, `exiledUntil`): "the exiled card", "a card exiled with
+ *   this" (Exclusion Ritual, Ixalan's Binding);
  * - `"attached"` — what the source is attached to ("enchanted creature"),
  *   or was last attached to when the source has gone (as `EffectTargetRef`'s
  *   `"attached"`);
@@ -279,21 +287,16 @@ export function supertypesOf(registry: CardRegistry, object: GameObject): readon
  *   (Pyromancer Ascension) with `ownedBy: "you"`; `itsController: true` only
  *   looks in the graveyard of the controller of the object being asked
  *   about — "a creature spell with the same name as a card in **their**
- *   graveyard" (Dragonlord Kolaghan), which only a live read can answer;
- * - `"exiled-with-source"` — the cards in exile linked to the source's
- *   battlefield stint (rule 607.2a, `GameObject.exiledWith`) or exiled until
- *   it leaves (610.3, `exiledUntil`): "the exiled card", "a card exiled with
- *   this" (Exclusion Ritual, Ixalan's Binding).
+ *   graveyard" (Dragonlord Kolaghan), which only a live read can answer.
  *
  * Nothing to compare with: nothing shares a type with it.
  */
 export type ShareReference =
   | "trigger-object"
   | "source"
-  | "sacrificed"
   | "attached"
   | "chosen"
-  | "exiled-with-source"
+  | ObjectSetRef
   | number
   | { readonly controlled: CardFilter }
   | { readonly permanents: CardFilter }
@@ -700,17 +703,10 @@ export interface CardFilter {
    * the same name as another permanent. Fails closed inside the layer fold.
    */
   readonly sameNameAsAnother?: CardFilter;
-  /**
-   * Has the same name as one of the cards the resolving spell or ability
-   * did this to so far (rule 201.2a) — Haunting Echoes' "exile all cards from
-   * target player's graveyard other than basic land cards. **For each card
-   * exiled this way**, search that player's library for all cards **with the
-   * same name as that card**": one search for every such name (rule 701.23h
-   * — several searches of a library before one shuffle are one search). An
-   * effect's filter only: bound to `sameNameAsAny` as the effect applies.
-   */
-  readonly sameNameAsThisWay?: ThisWayKind;
-  /** `sameNameAsThisWay` bound — the names, never authored. */
+  /** `sameNameWith` bound — the names, never authored. (Haunting Echoes'
+   * "for each card exiled this way, search … for all cards with the same name
+   * as that card" is `sameNameWith: { thisWay: "exiled" }`: one search for
+   * every such name, rule 701.23h.) */
   readonly sameNameAsAny?: readonly string[];
   /**
    * It is the object in this target slot of the resolving spell or ability,
@@ -766,6 +762,9 @@ export interface CardFilter {
   };
   readonly power?: NumCompare;
   readonly toughness?: NumCompare;
+  /** Its power plus its toughness — "creature with total power and
+   * toughness 5 or less" (Cut Down), read as `power` and `toughness` are. */
+  readonly totalPowerToughness?: NumCompare;
   /**
    * Base power / base toughness (rule 613.4b) — Duskana, the Rage Mother's
    * "each creature you control with base power and toughness 2/2" is both,
@@ -1351,21 +1350,22 @@ export interface CardFilter {
    */
   readonly notThisWay?: ThisWayKind;
   /**
-   * One of the objects of the batch the trigger now resolving fired on —
-   * "those creatures", "each of them": the attackers that counted for an
+   * One of the members of a set (`object-sets.ts`), in the stint the set
+   * found it in (rule 400.7), whatever it has become since: `"trigger-batch"`
+   * is "those creatures", "each of them" — the attackers that counted for an
    * `attacks-batch`, `attack-with` or `attacks-player` trigger (Sabotage
-   * Strategist's "those creatures get -1/-0 until end of turn"), the permanents
-   * of a batched entry, the cards of a batched arrival in a graveyard, the
-   * sources of a batched damage trigger (Tamiyo, Upriser Crowned). Each in
-   * the stint it was in then (rule 400.7), whatever it has become since: one
-   * no longer attacking is still one of them, one that left isn't. An
+   * Strategist's "those creatures get -1/-0 until end of turn"), the
+   * permanents of a batched entry, the cards of a batched arrival in a
+   * graveyard, the sources of a batched damage trigger (Tamiyo, Upriser
+   * Crowned) — one no longer attacking is still one of them, one that left
+   * isn't. `{ remembered }` is what a delayed ability was made to remember. An
    * effect's filter only, `delayed-trigger`'s `at` included, so that one keeps
    * the objects meant ("whenever either of those creatures deals combat
    * damage"): `bindDynamicCompares` binds it to `amongObjects`. Unbound it
    * matches nothing.
    */
-  readonly triggerBatch?: true;
-  /** `triggerBatch` bound — written by `bindDynamicCompares`, never authored. */
+  readonly inSet?: ObjectSetRef;
+  /** `inSet` bound — written by `bindDynamicCompares`, never authored. */
   readonly amongObjects?: readonly { readonly object: ObjectId; readonly stint: number }[];
   /**
    * "Tokens **created with this**" (`GameObject.createdWith`): the effect's
@@ -1899,6 +1899,9 @@ export function liveReferenceObjects(
       return linked(object?.exiledWith) || linked(object?.exiledUntil);
     });
   }
+  // A static's other sets: its source's own (what's attached to it); a
+  // resolution's sets name nothing here.
+  if (isObjectSetRef(reference)) return staticSetMembers(state, reference, ctx.source).map((m) => m.object);
   if (typeof reference !== "object") return undefined;
   const innerCtx: FilterContext = {
     you: ctx.you,
@@ -2044,7 +2047,7 @@ export function matchesFilter(
   if (filter.notThisWay !== undefined && thisWayEntries(state, filter.notThisWay).some((e) => e.object === id)) {
     return false;
   }
-  if (filter.triggerBatch !== undefined) return false;
+  if (filter.inSet !== undefined) return false;
   if (filter.createdWithSource !== undefined) return false;
   if (filter.createdWith !== undefined) {
     const link = live?.createdWith;
@@ -2149,7 +2152,6 @@ export function matchesFilter(
   const named = live !== undefined ? nameOf(live) : (lki!.renamed ?? lki!.name);
   if (filter.name !== undefined && named !== filter.name) return false;
   if (filter.sameNameAsTarget !== undefined || filter.sameNameAsTriggerObject !== undefined) return false;
-  if (filter.sameNameAsThisWay !== undefined) return false;
   if (filter.sameNameAsAny !== undefined) {
     // A nameless object (face down, rule 708.2a) shares a name with nothing;
     // one name in common is enough — a split card's either half (201.2a).
@@ -3055,6 +3057,7 @@ export function matchesFilter(
     filter.power !== undefined ||
     filter.powerParity !== undefined ||
     filter.toughness !== undefined ||
+    filter.totalPowerToughness !== undefined ||
     filter.basePower !== undefined ||
     filter.baseToughness !== undefined ||
     filter.keyword !== undefined ||
@@ -3066,6 +3069,7 @@ export function matchesFilter(
         filter.power !== undefined ||
         filter.powerParity !== undefined ||
         filter.toughness !== undefined ||
+        filter.totalPowerToughness !== undefined ||
         filter.basePower !== undefined ||
         filter.baseToughness !== undefined ||
         filter.greatestAmongItsController !== undefined
@@ -3103,6 +3107,12 @@ export function matchesFilter(
       return false;
     }
     if (filter.toughness !== undefined && !compareNum(c.toughness, filter.toughness, ctx.x, dynamic)) {
+      return false;
+    }
+    if (
+      filter.totalPowerToughness !== undefined &&
+      !compareNum(c.power + c.toughness, filter.totalPowerToughness, ctx.x, dynamic)
+    ) {
       return false;
     }
     if (filter.basePower !== undefined && !compareNum(c.basePower, filter.basePower, ctx.x, dynamic)) {
@@ -3252,24 +3262,32 @@ export type AggregateOf =
  *   down has no characteristics (rule 406.3a), so it matches only a filter
  *   that asks about nothing but its owner — Kaya, Orzhov Usurper's "the
  *   number of cards that player owns in exile" counts it.
- * - `"attackers"`: the attackers that counted for the `attacks-batch`,
- *   `attack-with` or `attacks-player` trigger whose ability is resolving — the ones its filter
- *   matched as they were declared (`LastKnownRefs.attackedTogether`):
- *   Aloy, Savior of Meridian's "the greatest power **among them**", Vulpine
- *   Harvester's "**their** total power". Read as it resolves (rule
- *   608.2h): each one still on the battlefield as it is now, whatever it
- *   has become (the rulings: "even if the creature is no longer attacking or
- *   no longer a Phyrexian"), one that has left as it last existed there. So
- *   the aggregate's own filter is normally `{}`. Nothing outside such a
- *   resolution.
+ * - an {@link ObjectSetRef}: the members of that set (`object-sets.ts`) —
+ *   `"trigger-batch"` is Aloy, Savior of Meridian's "the greatest power
+ *   **among them**" and Vulpine Harvester's "**their** total power" (the
+ *   attackers that counted for the trigger), `{ thisWay: "sacrificed" }`
+ *   Reign of the Pit's "the total power of the creatures sacrificed this
+ *   way", `{ paid: "sacrificed" }` Corpse Cobble's "the total power of the
+ *   sacrificed creatures", `"exiled-with-source"` "the number of cards
+ *   exiled with it". Each member is read as it is while it's still in the
+ *   stint the set found it in, otherwise as it was (rule 608.2h: whatever it
+ *   has become — "even if the creature is no longer attacking or no longer a
+ *   Phyrexian" — and as it last existed once it has left), weighed by the
+ *   tokens it stood for; a card in a hidden zone that wasn't shown is
+ *   unknown and left out (701.17c). So the aggregate's own filter is
+ *   normally `{}`. Outside a resolution only the source's own sets
+ *   (`"exiled-with-source"`, `"attached-to-source"`) name anything.
  */
-export type AggregateZone = "battlefield" | "graveyards" | "exile" | "attackers";
+export type AggregateZone = "battlefield" | "graveyards" | "exile";
+
+/** Where an aggregate's objects come from: a zone or a set. */
+export type AggregateIn = AggregateZone | ObjectSetRef;
 
 /** One more set an aggregate folds in, with a filter of its own — see
  * {@link AggregateSpec}'s `plus`. */
 export interface AggregateSource {
   readonly filter: CardFilter;
-  readonly in?: AggregateZone | readonly AggregateZone[];
+  readonly in?: AggregateIn | readonly AggregateIn[];
 }
 
 /**
@@ -3315,7 +3333,9 @@ export interface AggregateSource {
  * "you"` with `forTarget`. 0 when the slot holds no player or went illegal.
  */
 export type AggregateSpec =
-  | (AggregateBase & { readonly aggregate: "sum" | "max"; readonly of: AggregateOf })
+  /** `min` is the least ("the lowest power among them"), 0 over nothing, as
+   * `max` is. */
+  | (AggregateBase & { readonly aggregate: "sum" | "max" | "min"; readonly of: AggregateOf })
   | (AggregateBase & { readonly aggregate: "distinct"; readonly of: DistinctOf })
   | (AggregateBase & { readonly aggregate: "count"; readonly of?: undefined })
   /** How many of them share the creature type most of them have (rule 205.3m)
@@ -3329,19 +3349,24 @@ export type AggregateSpec =
 interface AggregateBase {
   readonly filter: CardFilter;
   readonly excludeSelf?: boolean;
-  readonly in?: AggregateZone | readonly AggregateZone[];
+  readonly in?: AggregateIn | readonly AggregateIn[];
   readonly plus?: readonly AggregateSource[];
   readonly forTarget?: number;
 }
 
-/** What an aggregate's sets read beyond the board: the attackers of the
- * declaration that fired the resolving trigger, each with the battlefield
- * stint it attacked in; cards that count as being in a graveyard though they
- * are moving out of it (an entering permanent's own replacement, rule
- * 614.12); and the permanents to leave out ("other", "not yet here"). */
+/** What an aggregate's sets read beyond the board: a resolution's sets, each
+ * member already resolved to what it's read as (`members`); the source a
+ * static's own sets belong to (`source`); cards that count as being in a
+ * graveyard though they are moving out of it (an entering permanent's own
+ * replacement, rule 614.12); and the permanents to leave out ("other", "not
+ * yet here"). */
 export interface AggregateReads {
   readonly except?: readonly ObjectId[];
-  readonly attackers?: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
+  /** A resolution's sets, each member as it's read: live (no `lastKnown`)
+   * while it's still in its stint, else its snapshot. Absent outside a
+   * resolution, where only `source`'s own sets are read. */
+  readonly members?: (ref: ObjectSetRef) => readonly WeightedMatch[];
+  readonly source?: ObjectId;
   readonly stillInGraveyard?: readonly ObjectId[];
   /** The same from exile: Ulamog, the Defiler's "among cards in exile" sees
    * itself as it enters directly from there (its ruling). */
@@ -3377,11 +3402,25 @@ export function aggregateMatches(
     seen.add(m.id);
     out.push(m);
   };
-  const zonesOf = (zone: AggregateSource["in"]): readonly AggregateZone[] =>
-    zone === undefined ? ["battlefield"] : typeof zone === "string" ? [zone] : zone;
-  const collect = (filter: CardFilter, zones: readonly AggregateZone[], except: readonly ObjectId[]): void => {
+  const zonesOf = (zone: AggregateSource["in"]): readonly AggregateIn[] =>
+    zone === undefined ? ["battlefield"] : Array.isArray(zone) ? zone : [zone as AggregateIn];
+  const collect = (filter: CardFilter, zones: readonly AggregateIn[], except: readonly ObjectId[]): void => {
     for (const zone of zones) {
-      if (zone === "battlefield") {
+      if (isObjectSetRef(zone)) {
+        const members = reads.members?.(zone) ?? staticSetMatches(state, zone, reads.source);
+        for (const m of members) {
+          if (m.lastKnown === undefined && except.includes(m.id)) continue;
+          // Face down in exile, foretold cards among them, it has no
+          // characteristics (rule 406.3a).
+          const live = m.lastKnown === undefined ? state.objects[m.id] : undefined;
+          if (live?.zone === "exile" && (live.exiledFaceDown !== undefined || live.foretold === true) && !ownerOnly(filter)) continue;
+          const ok =
+            m.lastKnown !== undefined
+              ? matchesFilter(state, registry, m.id, filter, { you, snapshot: m.lastKnown })
+              : matchesFilter(state, registry, m.id, filter, { you });
+          if (ok) push(m);
+        }
+      } else if (zone === "battlefield") {
         const keep = reads.battlefieldMatch ?? ((id: ObjectId, f: CardFilter) => matchesFilter(state, registry, id, f, { you }));
         for (const m of weightedMatches(state, state.zones.shared.battlefield, (id) => keep(id, filter), except)) push(m);
       } else if (zone === "graveyards") {
@@ -3403,21 +3442,6 @@ export function aggregateMatches(
           const object = state.objects[id];
           if (object === undefined || object.isToken) continue;
           if (matchesFilter(state, registry, id, filter, { you })) push({ id, weight: 1 });
-        }
-      } else {
-        for (const a of reads.attackers ?? []) {
-          const object = state.objects[a.object];
-          if (object === undefined) continue;
-          const here = object.zone === "battlefield" && (object.zoneChangeCount ?? 0) === a.zoneChangeCount;
-          if (here) {
-            if (matchesFilter(state, registry, a.object, filter, { you })) push({ id: a.object, weight: object.stackCount ?? 1 });
-            continue;
-          }
-          const snapshot = object.lastKnown;
-          if (snapshot === undefined || snapshot.zoneChangeCount !== a.zoneChangeCount) continue;
-          if (matchesFilter(state, registry, a.object, filter, { you, snapshot })) {
-            push({ id: a.object, weight: 1, lastKnown: snapshot });
-          }
         }
       }
     }
@@ -3557,8 +3581,10 @@ export function aggregateValueOf(
   if (typeof of === "object") return state.objects[id]?.counters[of.counters] ?? 0;
   if (of === "counters") return totalCounters(state.objects[id]?.counters);
   if (of === "mana-value") {
+    // On the stack, {X} is the value chosen for it (rule 202.3e): a spell
+    // cast this way counts as cast.
     const object = state.objects[id];
-    return object === undefined ? 0 : manaValue(parseManaCost(printedManaCost(registry, object)));
+    return object === undefined ? 0 : manaValueOfObject(registry, object);
   }
   const c = computeCharacteristics(state, registry, id);
   return of === "power" ? c.power : c.toughness;
@@ -3618,5 +3644,14 @@ export function aggregateOver(
   if (spec.aggregate === "sum") {
     return matches.reduce((n, m) => n + matchValueOf(state, registry, m, of) * m.weight, 0);
   }
+  if (spec.aggregate === "min") {
+    return matches.reduce((least, m) => Math.min(least, matchValueOf(state, registry, m, of)), Infinity);
+  }
   return matches.reduce((best, m) => Math.max(best, matchValueOf(state, registry, m, of)), -Infinity);
+}
+
+/** A static's own sets as aggregate matches (`staticSetMembers`): each
+ * member as it is now, weighed by its tokens. */
+function staticSetMatches(state: GameState, ref: ObjectSetRef, source: ObjectId | undefined): WeightedMatch[] {
+  return staticSetMembers(state, ref, source).map((m) => ({ id: m.object, weight: m.count ?? 1 }));
 }

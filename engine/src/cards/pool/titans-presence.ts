@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 // EDHREC rank 3481. The target's power is checked as the spell resolves; if
 // it's greater, nothing happens (the ruling). The revealed card's power is
 // read in the hand, or as it last existed there (the ruling —
-// `{ powerOf: "revealed" }`).
+// `{ powerOf: { paid: "revealed" } }`).
 
 const COST = "As an additional cost to cast this spell, reveal a colorless creature card from your hand.";
 const TEXT = "Exile target creature if its power is less than or equal to the revealed card's power.";
@@ -23,7 +23,7 @@ export default defineCard({
     condition: {
       kind: "target",
       index: 0,
-      filter: { power: { op: "lte", n: { amount: { powerOf: "revealed" } } } },
+      filter: { power: { op: "lte", n: { amount: { powerOf: { paid: "revealed" } } } } },
     },
     then: { kind: "exile", target: 0 },
   },

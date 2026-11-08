@@ -24,7 +24,7 @@ export default defineCard({
         ifDid: {
           kind: "look-and-choose",
           zone: "library",
-          count: { manaValueOf: "sacrificed" },
+          count: { manaValueOf: { paid: "sacrificed" } },
           min: 0,
           max: 1,
           destination: "battlefield",

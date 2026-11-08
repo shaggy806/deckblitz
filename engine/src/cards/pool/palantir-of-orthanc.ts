@@ -34,7 +34,7 @@ export default defineCard({
                   kind: "sequence",
                   effects: [
                     { kind: "mill", target: "you", amount: { countersOn: "source", counter: "influence" } },
-                    { kind: "lose-life", target: 0, amount: { thisWay: "milled", sumOf: "mana-value" } },
+                    { kind: "lose-life", target: 0, amount: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "milled" } } },
                   ],
                 },
               },

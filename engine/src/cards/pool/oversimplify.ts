@@ -29,7 +29,7 @@ export default defineCard({
         token: "Fractal Token",
         count: 1,
         who: "each-player",
-        thenCounters: { kind: "+1/+1", amount: { thisWay: "exiled", who: "each", sumOf: "power" } },
+        thenCounters: { kind: "+1/+1", amount: { aggregate: "sum", of: "power", filter: {}, in: { thisWay: "exiled", who: "each" } } },
       },
     ],
   },

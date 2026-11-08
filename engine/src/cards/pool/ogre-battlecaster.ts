@@ -30,7 +30,7 @@ export default defineCard({
         then: {
           kind: "reflexive-trigger",
           targets: [],
-          value: { thisWay: "cast", sumOf: "mana-value" },
+          value: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "cast" } },
           effect: {
             kind: "modify-pt",
             target: "source",

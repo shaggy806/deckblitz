@@ -23,7 +23,7 @@ export default defineCard({
         destination: "hand",
         leftover: "bottom-any-order",
       },
-      { kind: "mill", target: 0, amount: { thisWay: "revealed", sumOf: { manaSymbols: "U" } } },
+      { kind: "mill", target: 0, amount: { aggregate: "sum", of: { manaSymbols: "U" }, filter: {}, in: { thisWay: "revealed" } } },
     ],
   },
 });

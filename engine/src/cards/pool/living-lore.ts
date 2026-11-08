@@ -25,7 +25,7 @@ export default defineCard({
     },
     {
       affects: { scope: "self" },
-      setBasePtFromCount: { countOf: { exiledWithThis: "mana-value" }, plusPower: 0, plusToughness: 0 },
+      setBasePtFromCount: { countOf: { aggregate: "sum", of: "mana-value", filter: {}, in: "exiled-with-source" }, plusPower: 0, plusToughness: 0 },
       text: PT_TEXT,
     },
   ],

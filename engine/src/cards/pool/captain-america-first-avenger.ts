@@ -25,7 +25,7 @@ export default defineCard({
     {
       cost: { mana: "{3}", tap: false, unattach: { filter: { subtype: "Equipment" } } },
       targets: [{ kind: "any-number", of: "any-target", min: 1, max: 3 }],
-      divided: { total: { manaValueOf: "sacrificed" }, slot: 0 },
+      divided: { total: { manaValueOf: { paid: "unattached" } }, slot: 0 },
       effect: { kind: "damage-divided", from: 0 },
       resolve: null,
       text: THROW,

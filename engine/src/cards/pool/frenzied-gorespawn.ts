@@ -41,7 +41,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "grant-keyword-all",
-        filter: { triggerBatch: true },
+        filter: { inSet: "trigger-batch" },
         keyword: "menace",
         duration: "end-of-turn",
       },

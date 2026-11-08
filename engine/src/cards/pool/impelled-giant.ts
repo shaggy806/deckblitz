@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 
 // Eventide (EVE). EDHREC rank 27860.
 //
-// `powerOf: "tapped"` is the creature tapped for the cost, read as the ability
+// `powerOf: { paid: "tapped" }` is the creature tapped for the cost, read as the ability
 // resolves — as it last existed, if it has left (the first ruling). With no
 // {T} in the cost, a summoning-sick creature can be tapped (the second).
 
@@ -27,7 +27,7 @@ export default defineCard({
         tapOthers: { count: 1, filter: { type: "creature", colors: ["R"], controlledBy: "you" } },
       },
       targets: [],
-      effect: { kind: "modify-pt", target: "source", power: { powerOf: "tapped" }, toughness: 0, duration: "end-of-turn" },
+      effect: { kind: "modify-pt", target: "source", power: { powerOf: { paid: "tapped" } }, toughness: 0, duration: "end-of-turn" },
       resolve: null,
       text: TEXT,
     },

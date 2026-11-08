@@ -20,7 +20,7 @@ export default defineCard({
         {
           kind: "damage-all",
           filter: { type: "creature" },
-          amount: { thisWay: "discarded", sumOf: "mana-value" },
+          amount: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "discarded" } },
         },
       ],
     },

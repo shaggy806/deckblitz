@@ -22,7 +22,7 @@ export default defineCard({
           kind: "search-library",
           filter: {
             type: "creature",
-            manaValue: { op: "eq", n: { amount: { sum: [{ manaValueOf: "sacrificed" }, 1] } } },
+            manaValue: { op: "eq", n: { amount: { sum: [{ manaValueOf: { paid: "sacrificed" } }, 1] } } },
           },
           destination: "battlefield",
           min: 0,

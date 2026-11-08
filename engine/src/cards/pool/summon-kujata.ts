@@ -3,7 +3,7 @@ import { distinctTargets } from "../helpers.js";
 
 // EDHREC rank 6028.
 // A discarded card with {X} in its cost has mana value with X = 0 (the
-// ruling; `sumOf: "mana-value"` reads it so, in the graveyard it went to).
+// ruling; an aggregate of `"mana-value"` reads it so, in the graveyard it went to).
 
 const CHAPTER_I = "I — Lightning — This creature deals 3 damage to each of up to two target creatures.";
 const CHAPTER_II = "II — Ice — Up to three target creatures can't block this turn.";
@@ -64,7 +64,7 @@ export default defineCard({
             then: {
               kind: "reflexive-trigger",
               targets: [],
-              value: { thisWay: "discarded", sumOf: "mana-value" },
+              value: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "discarded" } },
               effect: { kind: "damage", amount: { triggerValue: true }, who: "each-opponent" },
               text: "When you discard a card this way, this creature deals damage equal to that card's mana value to each opponent.",
             },

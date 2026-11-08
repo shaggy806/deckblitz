@@ -37,7 +37,7 @@ export default defineCard({
       {
         kind: "roll-dice",
         sides: 20,
-        modifier: { thisWay: "sacrificed", who: "you", sumOf: "toughness" },
+        modifier: { aggregate: "sum", of: "toughness", filter: {}, in: { thisWay: "sacrificed", who: "you" } },
         table: [
           { min: 1, max: 14, effect: RETURN(1, 1) },
           { min: 15, effect: RETURN(0, 2) },

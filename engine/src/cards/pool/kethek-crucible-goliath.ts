@@ -33,7 +33,7 @@ export default defineCard({
           filter: {
             type: "creature",
             notSupertype: "legendary",
-            manaValue: { op: "lt", n: { amount: { manaValueOf: "sacrificed" } } },
+            manaValue: { op: "lt", n: { amount: { manaValueOf: { paid: "sacrificed" } } } },
           },
           put: "battlefield",
           rest: "bottom-random",

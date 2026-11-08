@@ -22,7 +22,7 @@ export default defineCard({
           kind: "search-library",
           whose: { target: 0 },
           zones: "graveyard-hand-library",
-          filter: { sameNameAsThisWay: "exiled" },
+          filter: { sameNameWith: { thisWay: "exiled" } },
           destination: "exile",
           min: 0,
           max: 99,

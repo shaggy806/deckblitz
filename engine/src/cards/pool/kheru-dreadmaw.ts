@@ -20,7 +20,7 @@ export default defineCard({
       cost: { mana: "{1}{G}", tap: false, sacrifice: "creature-you-control" },
       otherOnly: true,
       targets: [],
-      effect: { kind: "gain-life", amount: { toughnessOf: "sacrificed" } },
+      effect: { kind: "gain-life", amount: { toughnessOf: { paid: "sacrificed" } } },
       resolve: null,
       text: TEXT,
     },

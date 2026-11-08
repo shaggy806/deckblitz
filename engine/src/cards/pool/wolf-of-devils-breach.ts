@@ -30,7 +30,7 @@ export default defineCard({
             kind: "sequence",
             effects: [
               { kind: "discard", target: "you", amount: 1 },
-              { kind: "damage", amount: { thisWay: "discarded", sumOf: "mana-value" }, target: 0 },
+              { kind: "damage", amount: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "discarded" } }, target: 0 },
             ],
           },
         },

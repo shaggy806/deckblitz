@@ -1,7 +1,7 @@
 import { defineCard } from "../define.js";
 
 // X is the sacrificed creature's power as it last existed on the battlefield
-// (2026-03-20 ruling) — `powerOf: "sacrificed"` reads it through last-known
+// (2026-03-20 ruling) — `powerOf: { paid: "sacrificed" }` reads it through last-known
 // information.
 export default defineCard({
   name: "Dina, Essence Brewer",
@@ -21,8 +21,8 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "gain-life", amount: { powerOf: "sacrificed" } },
-          { kind: "add-counter", target: 0, counter: "+1/+1", amount: { powerOf: "sacrificed" } },
+          { kind: "gain-life", amount: { powerOf: { paid: "sacrificed" } } },
+          { kind: "add-counter", target: 0, counter: "+1/+1", amount: { powerOf: { paid: "sacrificed" } } },
         ],
       },
       resolve: null,

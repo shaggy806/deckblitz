@@ -5,7 +5,7 @@ const DAMAGE_TEXT =
   "Whenever one or more creatures deal combat damage to you while you're the monarch, tap those creatures and put a stun counter on each of them.";
 
 // The batched damage trigger's sources as "those creatures"
-// (`LastKnownRefs.dealtTogether`, a filter's `triggerBatch` — B278). "While
+// (the trigger batch, a filter's `inSet: "trigger-batch"` — B278). "While
 // you're the monarch" is part of the trigger condition (rule 603.1), asked
 // only as the damage is dealt.
 export default defineCard({
@@ -34,8 +34,8 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "tap-all", filter: { triggerBatch: true } },
-          { kind: "add-counter-all", filter: { triggerBatch: true }, counter: "stun", amount: 1 },
+          { kind: "tap-all", filter: { inSet: "trigger-batch" } },
+          { kind: "add-counter-all", filter: { inSet: "trigger-batch" }, counter: "stun", amount: 1 },
         ],
       },
       resolve: null,

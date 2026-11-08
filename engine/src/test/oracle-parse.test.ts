@@ -1699,7 +1699,7 @@ describe("costs and triggers", () => {
     expect(plague.complete).toBe(true);
     expect(plague.effect).toEqual({
       kind: "destroy-all",
-      filter: { type: "creature", sharesCreatureTypeWith: "sacrificed" },
+      filter: { type: "creature", sharesCreatureTypeWith: { paid: "sacrificed" } },
       cantBeRegenerated: true,
     });
     expect(
@@ -3144,7 +3144,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(explosion.effect).toEqual({
       kind: "damage-all",
       filter: { typesAnyOf: ["creature", "planeswalker"] },
-      amount: { powerOf: "exiled-as-cost" },
+      amount: { powerOf: { paid: "exiled" } },
     });
     expect(explosion.complete).toBe(true);
     // "Discard a card / N cards / X cards [at random]" (Sickening Dreams'
@@ -5637,7 +5637,7 @@ describe("damage by this source, switches, defending-player restrictions, a targ
       amount: { countOf: { type: "creature", controlledBy: "you" }, forEachPlayer: true },
     });
     const repay = face("Sorcery", "Each player's life total becomes the lowest life total among all players.");
-    expect(repay.effect).toEqual({ kind: "set-life-total", who: "each-player", amount: { lowestLifeTotal: true } });
+    expect(repay.effect).toEqual({ kind: "set-life-total", who: "each-player", amount: { amongPlayers: "least", of: { lifeTotal: "each" } } });
     const stone = face("Sorcery", "Your life total becomes half your starting life total, rounded up.");
     expect(stone.effect).toEqual({ kind: "set-life-total", who: "you", amount: { half: { startingLifeTotal: true }, round: "up" } });
     const mercy = face("Sorcery", "Your life total becomes equal to your starting life total.");
@@ -6624,7 +6624,7 @@ describe("has all activated abilities of … (grantsActivatedOf)", () => {
       "Idris has all activated and triggered abilities of the exiled card and gets +X/+X, where X is the exiled card's mana value.",
     );
     expect(idris.static[0].grantsActivatedOf).toEqual({ zone: "exiled-with", filter: {}, withTriggered: true });
-    expect(idris.static[0].grantPtPerCount).toEqual({ exiledWithSourceManaValue: true, pt: [1, 1] });
+    expect(idris.static[0].grantPtPerCount).toEqual({ aggregate: { aggregate: "sum", of: "mana-value", filter: {}, in: "exiled-with-source" }, pt: [1, 1] });
     const koh = face(
       "Koh, the Face Stealer",
       "Legendary Creature — Shapeshifter Spirit",
@@ -8179,8 +8179,8 @@ describe("the card discarded to pay a cost", () => {
     expect(volrath.activated[0].effect).toEqual({
       kind: "modify-pt",
       target: "source",
-      power: { manaValueOf: "discarded" },
-      toughness: { manaValueOf: "discarded" },
+      power: { manaValueOf: { paid: "discarded" } },
+      toughness: { manaValueOf: { paid: "discarded" } },
       duration: "end-of-turn",
     });
     const chemister = face(
@@ -8188,7 +8188,7 @@ describe("the card discarded to pay a cost", () => {
       "Creature — Human Wizard",
       "{R}, {T}, Discard a card: This creature deals damage to target creature equal to the discarded card's mana value.",
     );
-    expect(chemister.activated[0].effect).toEqual({ kind: "damage", amount: { manaValueOf: "discarded" }, target: 0 });
+    expect(chemister.activated[0].effect).toEqual({ kind: "damage", amount: { manaValueOf: { paid: "discarded" } }, target: 0 });
     const moria = face(
       "Moria Scavenger",
       "Creature — Orc Rogue",
@@ -8426,8 +8426,8 @@ describe("the card revealed to pay a cost", () => {
     expect(despair.effect).toEqual({
       kind: "modify-pt",
       target: 0,
-      power: { product: [{ manaValueOf: "revealed" }, -1] },
-      toughness: { product: [{ manaValueOf: "revealed" }, -1] },
+      power: { product: [{ manaValueOf: { paid: "revealed" } }, -1] },
+      toughness: { product: [{ manaValueOf: { paid: "revealed" } }, -1] },
       duration: "end-of-turn",
     });
     const calamity = face(
@@ -9490,7 +9490,7 @@ describe("token copies of a linked source", () => {
     );
     expect(card.activated[0].effect).toEqual({
       kind: "create-token-copy",
-      of: "exiled-as-cost",
+      of: { paid: "exiled" },
       count: 1,
       notLegendary: true,
       exceptions: { addSubtypes: ["Mutant"] },
@@ -12492,20 +12492,20 @@ describe("an attack read as one batch", () => {
   it("reads 'those creatures' only on such a trigger", () => {
     expect(triggered("Whenever one or more creatures attack you, those creatures get -1/-0 until end of turn.").effect).toEqual({
       kind: "modify-pt-all",
-      filter: { triggerBatch: true },
+      filter: { inSet: "trigger-batch" },
       power: -1,
       toughness: 0,
       duration: "end-of-turn",
     });
     expect(triggered("Whenever you attack with two or more creatures, put a +1/+1 counter on each of those creatures.").effect).toEqual({
       kind: "add-counter-all",
-      filter: { triggerBatch: true },
+      filter: { inSet: "trigger-batch" },
       counter: "+1/+1",
       amount: 1,
     });
     expect(
       triggered("Whenever one or more creatures attack, ~ deals damage to each of those creatures equal to the number of attacking creatures.").effect,
-    ).toEqual({ kind: "damage-all", filter: { triggerBatch: true }, amount: { countOf: { type: "creature", attacking: true } } });
+    ).toEqual({ kind: "damage-all", filter: { inSet: "trigger-batch" }, amount: { countOf: { type: "creature", attacking: true } } });
     expect(parseEffect("Those creatures get -1/-0 until end of turn.", ctx()).effect).toBeNull();
   });
 });
@@ -13730,7 +13730,7 @@ describe("the greatest of an amount among players, and a revealed hand counted",
     ).toEqual({
       kind: "draw",
       who: "each-player",
-      amount: { difference: [{ greatestAmongPlayers: { cardsInHand: "each" } }, { cardsInHand: "each" }] },
+      amount: { difference: [{ amongPlayers: "greatest", of: { cardsInHand: "each" } }, { cardsInHand: "each" }] },
     });
   });
   it("counters and a P/T read off the greatest among players", () => {
@@ -13738,7 +13738,7 @@ describe("the greatest of an amount among players, and a revealed hand counted",
       parseFace({ name: "Card", type_line, oracle_text }, { tokenFor: (d: string) => d }).static[0];
     expect(
       read("Card enters with a number of suspect counters on it equal to the greatest number of creatures a player controls.", "Artifact"),
-    ).toMatchObject({ replacement: { counters: { kind: "suspect", amount: { greatestAmongPlayers: { forEachPlayer: true } } } } });
+    ).toMatchObject({ replacement: { counters: { kind: "suspect", amount: { amongPlayers: "greatest", of: { forEachPlayer: true } } } } });
     expect(
       read("Card's power and toughness are each equal to the number of cards in the hand of the opponent with the most cards in hand.", "Creature — Spirit"),
     ).toMatchObject({ setBasePtFromCount: { countOf: "cards-in-largest-opponent-hand" } });
@@ -13761,10 +13761,10 @@ describe("chroma, what it devoured, a commander here, a shared creature type", (
   it("a sacrificed creature's symbols, and what was shown", () => {
     expect(
       sentence("~ deals damage to any target equal to the number of red mana symbols in the sacrificed creature's mana cost."),
-    ).toEqual({ kind: "damage", target: 0, amount: { manaSymbolsOf: "sacrificed", color: "R" } });
+    ).toEqual({ kind: "damage", target: 0, amount: { manaSymbolsOf: { paid: "sacrificed" }, color: "R" } });
     expect(
       sentence("Reveal any number of cards in your hand. You gain 2 life for each green mana symbol in those cards' mana costs."),
-    ).toMatchObject({ effects: [{}, { amount: { product: [2, { sumOf: { manaSymbols: "G" } }] } }] });
+    ).toMatchObject({ effects: [{}, { amount: { product: [2, { aggregate: "sum", of: { manaSymbols: "G" } }] } }] });
   });
   it("a commander on the battlefield or in the command zone", () => {
     expect(
@@ -15021,7 +15021,7 @@ describe("a cast as this resolves, on its own terms", () => {
       target: 0,
       alsoPaying: "{R}{R}",
       exileAfter: true,
-      then: { kind: "reflexive-trigger", value: { thisWay: "cast", sumOf: "mana-value" } },
+      then: { kind: "reflexive-trigger", value: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "cast" } } },
     });
   });
 
@@ -16752,7 +16752,7 @@ describe("flagged cards' lines (2026-11-07): target player adds mana, a host's t
         { kind: "may", effect: { kind: "repeat", mayAgain: true, effect: { kind: "exile-from-library", amount: 1 } } },
         {
           kind: "conditional",
-          condition: { kind: "amounts", left: { thisWay: "exiled", sumOf: "mana-value" }, op: "lte", right: 13 },
+          condition: { kind: "amounts", left: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "exiled" } }, op: "lte", right: 13 },
           then: { kind: "cast-now", from: "exiled-this-way", repeat: true, free: true },
         },
       ],
@@ -16848,7 +16848,7 @@ describe("each owner of a spell cast this way losing life", () => {
     ).toEqual({
       kind: "lose-life",
       who: "each-player",
-      amount: { thisWay: "cast", who: "each", byOwner: true, sumOf: "mana-value" },
+      amount: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "cast", who: "each", byOwner: true } },
     });
   });
 });

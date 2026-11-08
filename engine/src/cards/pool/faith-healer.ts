@@ -17,7 +17,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: false, sacrifice: { filter: { type: "enchantment" } } },
       targets: [],
-      effect: { kind: "gain-life", amount: { manaValueOf: "sacrificed" } },
+      effect: { kind: "gain-life", amount: { manaValueOf: { paid: "sacrificed" } } },
       resolve: null,
       text: TEXT,
     },

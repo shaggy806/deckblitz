@@ -14,5 +14,5 @@ export default defineCard({
   types: ["sorcery"],
   text: "As an additional cost to cast this spell, sacrifice a creature.\nDraw cards equal to the sacrificed creature's power.",
   additionalCost: { sacrifice: { type: "creature", controlledBy: "you" } },
-  effect: { kind: "draw", amount: { powerOf: "sacrificed" } },
+  effect: { kind: "draw", amount: { powerOf: { paid: "sacrificed" } } },
 });

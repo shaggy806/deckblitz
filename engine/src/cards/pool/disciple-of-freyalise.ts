@@ -9,7 +9,7 @@ import { defineCard } from "../define.js";
 // Disciple of Bolas reads it.
 const TEXT =
   "When this creature enters, you may sacrifice another creature. If you do, you gain X life and draw X cards, where X is that creature's power.";
-const X = { thisWay: "sacrificed", sumOf: "power" } as const;
+const X = { aggregate: "sum", of: "power", filter: {}, in: { thisWay: "sacrificed" } } as const;
 
 export default defineCard({
   name: "Disciple of Freyalise",

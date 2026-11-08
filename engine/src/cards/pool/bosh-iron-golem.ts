@@ -22,7 +22,7 @@ export default defineCard({
     {
       cost: { mana: "{3}{R}", tap: false, sacrifice: { filter: { type: "artifact", controlledBy: "you" } } },
       targets: ["any-target"],
-      effect: { kind: "damage", amount: { manaValueOf: "sacrificed" }, target: 0 },
+      effect: { kind: "damage", amount: { manaValueOf: { paid: "sacrificed" } }, target: 0 },
       resolve: null,
       text: TEXT,
     },

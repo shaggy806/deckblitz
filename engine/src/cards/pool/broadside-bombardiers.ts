@@ -41,7 +41,7 @@ export default defineCard({
       otherOnly: true,
       boast: true,
       targets: ["any-target"],
-      effect: { kind: "damage", amount: { sum: [2, { manaValueOf: "sacrificed" }] }, target: 0 },
+      effect: { kind: "damage", amount: { sum: [2, { manaValueOf: { paid: "sacrificed" } }] }, target: 0 },
       resolve: null,
       text: "Boast — Sacrifice another creature or artifact: This creature deals damage equal to 2 plus the sacrificed permanent's mana value to any target.",
     },

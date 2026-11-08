@@ -38,7 +38,7 @@ export default defineCard({
             { kind: "exile-from-library", whose: "that-player", amount: 4 },
             {
               kind: "damage",
-              amount: { thisWay: "exiled", who: "that-player", sumOf: "mana-value" },
+              amount: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "exiled", who: "that-player" } },
               who: "that-player",
             },
           ],

@@ -6,14 +6,14 @@ import { defineCard } from "../define.js";
 // with nothing exiled (its first ability hasn't resolved) nobody creates a
 // token; with several cards exiled (a copied trigger), each of their owners
 // creates one token sized by all of them together — the
-// `"owners-of-exiled-with-source"` and `{ exiledWithSourceManaValue }` pair.
+// `"owners-of-exiled-with-source"` and `aggregate `in: "exiled-with-source"`` pair.
 // "You don't control" is an opponent's (no teams); a creature on the
 // battlefield with {X} in its cost has mana value with X as 0.
 const ENTER_TEXT =
   "When this creature enters, exile up to one target nonland, nontoken permanent you don't control with mana value 4 or less.";
 const LEAVE_TEXT =
   "When this creature leaves the battlefield, the exiled card's owner creates an X/X blue Illusion creature token, where X is the mana value of the exiled card.";
-const X = { exiledWithSourceManaValue: true } as const;
+const X = { aggregate: "sum", of: "mana-value", filter: {}, in: "exiled-with-source" } as const;
 
 export default defineCard({
   name: "Skyclave Apparition",

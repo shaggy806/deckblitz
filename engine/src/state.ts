@@ -37,6 +37,7 @@ import type { Color, LandManaInstead, ManaOrigin, ManaType, ManaUnit, SpendAs } 
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { Expiry, UntilCast, UntilPoint, WhileSource } from "./duration.js";
 import type { Journal } from "./journal.js";
+import type { ObjectSets, SetMember } from "./object-sets.js";
 export type { JournalOrigin, JournalWhat } from "./journal.js";
 import type { GameEvent, Vote } from "./events.js";
 import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
@@ -1837,14 +1838,11 @@ export interface SpellSnapshot {
    * effect of a copy that refers to objects used to pay its costs uses
    * those that paid the original's (rule 707.10). */
   readonly convokedBy?: readonly { readonly object: ObjectId; readonly stint: number }[];
-  /** The cards exiled from a graveyard to pay its cost
-   * (`LastKnownRefs.exiledCost`): a copy's "the exiled card" is the
-   * original's, as `convokedBy` is (rule 707.10). */
-  readonly exiledCost?: readonly ObjectId[];
-  /** The one permanent tapped to pay its cost (`LastKnownRefs.tapped`): a
-   * copy's "the creature tapped to pay this spell's additional cost" is the
-   * original's (rule 707.10, Swallow Whole's ruling). */
-  readonly tappedCost?: { readonly object: ObjectId; readonly zoneChangeCount: number };
+  /** The objects its cost took (`LastKnownRefs.sets.paid`): a copy's "the
+   * exiled card" or "the creature tapped to pay this spell's additional
+   * cost" is the original's, as `convokedBy` is (rule 707.10, Swallow
+   * Whole's ruling). */
+  readonly paidCost?: ObjectSets["paid"];
   /** Its copiable modifiers (a prototyped spell's — rule 718.3c). */
   readonly modifiers: readonly PtModifier[];
   /** A copy without its epic ability (`GameObject.withoutEpic`). */
@@ -2504,10 +2502,28 @@ export interface LastKnownRefs {
    * — Forced Fruition, Spellshock), still them once the spell is countered
    * and its card is in its owner's graveyard. */
   readonly triggerSpellController?: PlayerId;
-  /** "For each of them" (Kambal, Profiteering Mayor): the permanents of the
-   * simultaneous entry a batched `enters-battlefield` trigger fired on, each
-   * with its battlefield stint and how many tokens it stood for (a
-   * compacted stack is its tokens). */
+  /**
+   * The sets of objects this spell or ability refers to (`object-sets.ts`):
+   * - `paid`: what its cost took, each kind as it was paid — "the sacrificed
+   *   creature" (Dina, Soul Steeper; also what a `sacrifice-source` step
+   *   earlier in the resolution sacrificed), "the discarded card" (in its
+   *   stint where the discard put it), "the exiled card", "the revealed
+   *   card" (with `was`, what it was in the hand — "use its power as it last
+   *   existed in your hand"), "the tapped creature". Recorded as each is
+   *   paid, which for a chosen one is once its decision is answered (rule
+   *   602.2b).
+   * - `batch`: the objects of the batch a "one or more" trigger fired on —
+   *   the attackers that counted for `attacks-batch`, `attack-with` or
+   *   `attacks-player` (each in its battlefield stint, read as it resolves
+   *   whatever it has become since: "even if the creature is … no longer a
+   *   Phyrexian"), the permanents of a batched entry (with how many tokens
+   *   each stood for — Kambal's "for each of them"), the cards of a batched
+   *   arrival in a graveyard (each as the object it became there), the
+   *   sources of a batched damage trigger (Tamiyo, Upriser Crowned).
+   * - `remembered`: what a delayed or reflexive trigger captured as it was
+   *   made (`remember`).
+   */
+  readonly sets?: ObjectSets;
   /** For a trigger fired by attackers being declared (`attack-with`): each
    * attacker, its battlefield stint and what it was attacking then — what an
    * "if two or more of those creatures are attacking you" re-reads as it
@@ -2517,31 +2533,9 @@ export interface LastKnownRefs {
     readonly zoneChangeCount: number;
     readonly at: PlayerId | ObjectId | null;
   }[];
-  /** "Among them", "their total power", "those creatures" (Aloy, Savior of
-   * Meridian; Vulpine Harvester; Lightmine Field): the attackers that counted
-   * for the `attacks-batch`, `attack-with` or `attacks-player` trigger that
-   * fired — the ones its filter matched as they were declared, of
-   * `attacks-player` only those attacking that player — each with its
-   * battlefield stint. What an aggregate `in: "attackers"` and a filter's
-   * `triggerBatch` read as the ability resolves, whatever they've become
-   * since (the rulings: "even if the creature is … no longer a Phyrexian"). */
-  readonly attackedTogether?: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
-  /** "One of them" (Colossal Grave-Reaver): the cards of the move a batched
-   * `put-into-graveyard` trigger fired on that counted for it, each as the
-   * object it became in that graveyard. */
-  readonly arrivedTogether?: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
-  /** "Those creatures" (Tamiyo, Upriser Crowned): the sources that counted
-   * for a `deals-damage-batch` trigger, each in the stint it dealt the
-   * damage in — what a filter's `triggerBatch` reads. */
-  readonly dealtTogether?: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
   /** For a "whenever players finish voting" trigger: the votes of the vote
    * that fired it (Erestor of the Council). */
   readonly votes?: readonly Vote[];
-  readonly enteredTogether?: readonly {
-    readonly object: ObjectId;
-    readonly zoneChangeCount: number;
-    readonly count: number;
-  }[];
   /**
    * For a trigger fired by its triggering object *leaving* the battlefield (a
    * dies trigger, a delayed "when it dies or is exiled") or arriving in a
@@ -2554,46 +2548,12 @@ export interface LastKnownRefs {
    * last-known information and don't care.
    */
   readonly triggerObjectAfterLeaving?: number;
-  /** "The sacrificed creature": the permanent sacrificed to pay the spell's
-   * or ability's cost (Dina, Soul Steeper), or by a `sacrifice-source` step
-   * before the effect reading it. */
-  readonly sacrificed?: { readonly object: ObjectId; readonly zoneChangeCount: number };
-  /** "The discarded card": the cards discarded to pay the spell's or
-   * ability's cost (Volrath the Fallen's "where X is the discarded card's
-   * mana value", Grab the Prize's "if the discarded card wasn't a land
-   * card"), each with its stint where the discard put it — a graveyard, or
-   * exile for a madness card. Recorded as the discard happens, which for a
-   * chosen discard is once its decision is answered (rule 602.2b). */
-  readonly discarded?: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
-  /** "The exiled card": the cards exiled from a graveyard to pay the spell's
-   * or ability's cost (Dollhouse of Horrors), recorded as the exile happens,
-   * which for a chosen one is once its decision is answered (rule 602.2b). */
-  readonly exiledCost?: readonly ObjectId[];
-  /** "The revealed card": the cards revealed from the hand to pay the
-   * spell's or ability's cost (Induce Despair's "where X is the revealed
-   * card's mana value", Titan's Presence's "the revealed card's power"),
-   * each with its stint in the hand and what it was there as it was revealed
-   * — read instead once it has left the hand ("use its power as it last
-   * existed in your hand": the rulings). Recorded as the reveal is made
-   * (`Game.carryOutBehold`). */
-  readonly revealed?: readonly {
-    readonly object: ObjectId;
-    readonly zoneChangeCount: number;
-    readonly power: number;
-    readonly toughness: number;
-    readonly manaValue: number;
-    readonly creature: boolean;
-  }[];
   /** For an ability a permanent's static granted another ("Equipped
    * creature has '…, Sacrifice Ninja's Kunai: Ninja's Kunai deals 3
    * damage …'"): the granting permanent and its battlefield stint as the
    * ability was activated or triggered (rule 201.5a) — the `"granter"`
    * reference. */
   readonly granter?: { readonly object: ObjectId; readonly zoneChangeCount: number };
-  /** "The tapped creature": the one permanent tapped to pay the spell's or
-   * ability's cost (`AbilityCost.tapOthers` — station's, rule 702.184a; an
-   * additional cost's `tapUntapped` — Swallow Whole's). */
-  readonly tapped?: { readonly object: ObjectId; readonly zoneChangeCount: number };
   /**
    * What the triggering event was aimed at, for a trigger whose event has a
    * recipient — the permanent or player a `damage-dealt` event hit
@@ -2616,6 +2576,10 @@ export interface LastKnownRefs {
    * `"each-other-opponent"` scopes read.
    */
   readonly player?: PlayerId;
+  /** For a trigger fired by counters being put on something: their kind —
+   * "the same number and kind of counters" (Captain Marvel, Apex Avenger;
+   * the number is the trigger value). */
+  readonly counter?: string;
 }
 
 /**
@@ -3660,7 +3624,7 @@ export type AwaitingDecision =
        * resolution's choice. */
       readonly priorityTo?: PlayerId;
       /** A cost's exile: the spell or ability on the stack this pays for,
-       * which remembers the cards (`LastKnownRefs.exiledCost`). */
+       * which remembers the cards (`LastKnownRefs.sets.paid.exiled`). */
       readonly costExileFor?: ObjectId;
       /** A mana ability's cost (Cadaverous Bloom's "Exile a card from your
        * hand"), which never goes on the stack (rule 605.3b): what's needed to
@@ -5018,6 +4982,14 @@ export interface DelayedTrigger {
   /** The resolution that set it up (its `resolutionSince`) — what its own
    * "damage prevented this way" means (`LastKnownRefs.madeIn`). */
   readonly madeIn?: number;
+  /** What else its creator knew, which the delayed ability keeps (theme 15's
+   * captured context): the creator's X ("where X is …" no longer reads 0
+   * once its spell is gone), "that player" (`LastKnownRefs.player`), and the
+   * sets it was told to remember (`remember` — "the creatures exiled this
+   * way", plain members, each acted on only in its stint: rule 603.7c). */
+  readonly x?: number;
+  readonly player?: PlayerId;
+  readonly remembered?: { readonly [name: string]: readonly SetMember[] };
   readonly effect: EffectSpec;
   readonly text: string;
 }

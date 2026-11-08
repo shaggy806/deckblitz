@@ -42,7 +42,7 @@ export default defineCard({
             destination: "exile",
             leftover: "stay",
           },
-          { kind: "gain-life", amount: { exiledWithSourceManaValue: true } },
+          { kind: "gain-life", amount: { aggregate: "sum", of: "mana-value", filter: {}, in: "exiled-with-source" } },
         ],
       },
       resolve: null,
@@ -51,7 +51,7 @@ export default defineCard({
     {
       at: [2],
       targets: ["creature-you-control"],
-      effect: { kind: "add-counter", target: 0, counter: "+1/+1", amount: { exiledWithSourceManaValue: true } },
+      effect: { kind: "add-counter", target: 0, counter: "+1/+1", amount: { aggregate: "sum", of: "mana-value", filter: {}, in: "exiled-with-source" } },
       resolve: null,
       text: II_TEXT,
     },

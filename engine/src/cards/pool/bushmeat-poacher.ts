@@ -25,7 +25,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "gain-life", amount: { toughnessOf: "sacrificed" } },
+          { kind: "gain-life", amount: { toughnessOf: { paid: "sacrificed" } } },
           { kind: "draw", amount: 1 },
         ],
       },

@@ -7,7 +7,7 @@ const ENTER_TEXT =
   "When this creature enters, target opponent reveals their hand. You may choose a nonland card from it. If you do, exile that card.";
 const LEAVE_TEXT =
   "When this creature leaves the battlefield, the exiled card's owner creates an X/X white Spirit creature token, where X is the mana value of the exiled card.";
-const X = { exiledWithSourceManaValue: true } as const;
+const X = { aggregate: "sum", of: "mana-value", filter: {}, in: "exiled-with-source" } as const;
 
 export default defineCard({
   name: "Severance Priest",

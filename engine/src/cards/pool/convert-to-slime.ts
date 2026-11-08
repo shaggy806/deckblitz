@@ -11,7 +11,7 @@ import { defineCard } from "../define.js";
 // Three optional slots, destroyed as one instruction; the delirium check
 // follows it, so what it put into your graveyard counts. X sums the mana
 // values of what was destroyed, each read through its last-known information.
-const DESTROYED = { thisWay: "destroyed", sumOf: "mana-value" } as const;
+const DESTROYED = { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "destroyed" } } as const;
 
 export default defineCard({
   name: "Convert to Slime",

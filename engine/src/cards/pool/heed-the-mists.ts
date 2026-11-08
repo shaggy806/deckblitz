@@ -15,7 +15,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "mill", target: "you", amount: 1 },
-      { kind: "draw", amount: { thisWay: "milled", sumOf: "mana-value" } },
+      { kind: "draw", amount: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "milled" } } },
     ],
   },
 });

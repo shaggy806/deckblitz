@@ -16,7 +16,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: true, sacrifice: { filter: { type: "creature", controlledBy: "you" } } },
       targets: ["any-target"],
-      effect: { kind: "damage", amount: { powerOf: "sacrificed" }, target: 0 },
+      effect: { kind: "damage", amount: { powerOf: { paid: "sacrificed" } }, target: 0 },
       resolve: null,
       text: "{T}, Sacrifice a creature: This creature deals damage equal to the sacrificed creature's power to any target.",
     },

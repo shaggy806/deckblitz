@@ -38,7 +38,7 @@ export default defineCard({
             then: { kind: "sacrifice-target", target: 0 },
             prompt: "Sacrifice any number of other creatures",
           },
-          { kind: "exile-from-library", whose: "you", amount: { thisWay: "sacrificed", sumOf: "power" } },
+          { kind: "exile-from-library", whose: "you", amount: { aggregate: "sum", of: "power", filter: {}, in: { thisWay: "sacrificed" } } },
           {
             kind: "cast-now",
             from: "exiled-this-way",

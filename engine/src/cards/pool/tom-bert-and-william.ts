@@ -36,7 +36,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "draw", amount: { powerOf: "sacrificed" } },
+          { kind: "draw", amount: { powerOf: { paid: "sacrificed" } } },
           { kind: "discard", target: "you", amount: 1 },
         ],
       },

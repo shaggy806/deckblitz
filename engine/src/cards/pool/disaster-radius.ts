@@ -11,6 +11,6 @@ export default defineCard({
   effect: {
     kind: "damage-all",
     filter: { type: "creature", controlledBy: "opponent" },
-    amount: { manaValueOf: "revealed" },
+    amount: { manaValueOf: { paid: "revealed" } },
   },
 });

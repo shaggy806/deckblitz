@@ -16,7 +16,7 @@ export default defineCard({
     {
       cost: { mana: "{1}{U}{U}", tap: false, sacrifice: { filter: { type: "creature", colors: ["U"] } } },
       targets: [],
-      effect: { kind: "create-token", token: "Camarid Token", count: { manaValueOf: "sacrificed" } },
+      effect: { kind: "create-token", token: "Camarid Token", count: { manaValueOf: { paid: "sacrificed" } } },
       resolve: null,
       text: TEXT,
     },

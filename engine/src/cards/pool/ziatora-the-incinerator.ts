@@ -31,7 +31,7 @@ export default defineCard({
         ifDid: {
           kind: "reflexive-trigger",
           targets: ["any-target"],
-          value: { powerOf: "sacrificed" },
+          value: { powerOf: { paid: "sacrificed" } },
           effect: {
             kind: "sequence",
             effects: [

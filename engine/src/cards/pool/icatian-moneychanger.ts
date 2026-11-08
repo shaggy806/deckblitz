@@ -23,7 +23,7 @@ export default defineCard({
       cost: { mana: null, tap: false, sacrifice: "self" },
       condition: { kind: "all", of: [{ kind: "your-turn" }, { kind: "turn-structure", steps: ["upkeep"] }] },
       targets: [],
-      effect: { kind: "gain-life", amount: { countersOn: "sacrificed", counter: "credit" } },
+      effect: { kind: "gain-life", amount: { countersOn: { paid: "sacrificed" }, counter: "credit" } },
       resolve: null,
       text: SAC,
     },

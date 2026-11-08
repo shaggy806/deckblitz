@@ -11,7 +11,7 @@ export default defineCard({
   additionalCost: { sacrifice: { type: "creature" } },
   effect: {
     kind: "destroy-all",
-    filter: { type: "creature", sharesCreatureTypeWith: "sacrificed" },
+    filter: { type: "creature", sharesCreatureTypeWith: { paid: "sacrificed" } },
     cantBeRegenerated: true,
   },
 });

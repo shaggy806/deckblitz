@@ -42,7 +42,7 @@ export default defineCard({
           min: 0,
           max: {
             difference: [
-              { greatestAmongPlayers: { countOf: LANDS, forEachPlayer: true } },
+              { amongPlayers: "greatest", of: { countOf: LANDS, forEachPlayer: true } },
               { countOf: LANDS, forPlayer: "that-player" },
             ],
           },

@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 // EDHREC rank 2501.
 //
 // X is the sacrificed creature's power as it last existed on the battlefield
-// (rule 608.2h) — Greater Good's `{ powerOf: "sacrificed" }`.
+// (rule 608.2h) — Greater Good's `{ powerOf: { paid: "sacrificed" } }`.
 const TEXT =
   "{B}, {T}, Sacrifice another creature: Create X 2/2 black Zombie creature tokens, where X is the sacrificed creature's power.";
 
@@ -21,7 +21,7 @@ export default defineCard({
     {
       cost: { mana: "{B}", tap: true, sacrifice: "creature-you-control" },
       targets: [],
-      effect: { kind: "create-token", token: "Zombie Token", count: { powerOf: "sacrificed" } },
+      effect: { kind: "create-token", token: "Zombie Token", count: { powerOf: { paid: "sacrificed" } } },
       resolve: null,
       text: TEXT,
       otherOnly: true,

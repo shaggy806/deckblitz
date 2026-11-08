@@ -181,16 +181,20 @@ describe("the attackers that fired the trigger", () => {
     const stint = game.state.objects[wurm].zoneChangeCount ?? 0;
     destroy(game, wurm);
     expect(zone(game, wurm)).toBe("graveyard");
-    const spec: AggregateSpec = { aggregate: "sum", of: "power", filter: {}, in: "attackers" };
-    const attackers = [
-      { object: wurm, zoneChangeCount: stint },
-      { object: bears, zoneChangeCount: game.state.objects[bears].zoneChangeCount ?? 0 },
+    const spec: AggregateSpec = { aggregate: "sum", of: "power", filter: {}, in: "trigger-batch" };
+    // The resolution hands the set's members over as they're read: the
+    // Wurm as it last existed in its stint, the Bears as they are.
+    const lastKnown = game.state.objects[wurm].lastKnown;
+    expect(lastKnown?.zoneChangeCount).toBe(stint);
+    const members = [
+      { id: wurm, weight: 1, ...(lastKnown !== undefined ? { lastKnown } : {}) },
+      { id: bears, weight: 1 },
     ];
-    const total = (reads: typeof attackers): number =>
-      aggregateOver(game.state, registryOf(game), aggregateMatches(game.state, registryOf(game), spec, A, { attackers: reads }), spec);
-    expect(total(attackers)).toBe(8);
-    // A reference to another stint finds nothing.
-    expect(total([{ object: wurm, zoneChangeCount: stint + 5 }])).toBe(0);
+    const total = (reads: typeof members): number =>
+      aggregateOver(game.state, registryOf(game), aggregateMatches(game.state, registryOf(game), spec, A, { members: () => reads }), spec);
+    expect(total(members)).toBe(8);
+    // Outside a resolution a batch names nothing.
+    expect(aggregateOver(game.state, registryOf(game), aggregateMatches(game.state, registryOf(game), spec, A), spec)).toBe(0);
   });
 });
 

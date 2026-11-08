@@ -17,7 +17,7 @@ export default defineCard({
         min: 1,
         upTo: 1,
         prompt: "Choose a commander creature you control to put the +1/+1 counters on",
-        then: { kind: "add-counter", target: 0, counter: "+1/+1", amount: { thisWay: "exiled", sumOf: "power" } },
+        then: { kind: "add-counter", target: 0, counter: "+1/+1", amount: { aggregate: "sum", of: "power", filter: {}, in: { thisWay: "exiled" } } },
       },
     ],
   },

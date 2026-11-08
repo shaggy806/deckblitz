@@ -23,7 +23,7 @@ export default defineCard({
     {
       trigger: { on: "enters-battlefield", who: "opponent", filter: { token: true }, batched: true },
       targets: [],
-      effect: { kind: "create-token-copy", of: "entered-together", count: 1, tapped: true, who: "you" },
+      effect: { kind: "create-token-copy", of: "trigger-batch", count: 1, tapped: true, who: "you" },
       resolve: null,
       oncePerTurn: true,
       text: COPY_TEXT,

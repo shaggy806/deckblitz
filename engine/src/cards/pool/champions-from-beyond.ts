@@ -39,7 +39,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "modify-pt-all",
-        filter: { triggerBatch: true },
+        filter: { inSet: "trigger-batch" },
         power: 4,
         toughness: 4,
         duration: "end-of-turn",

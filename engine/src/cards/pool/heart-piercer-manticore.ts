@@ -30,7 +30,7 @@ export default defineCard({
         ifDid: {
           kind: "reflexive-trigger",
           targets: ["any-target"],
-          value: { powerOf: "sacrificed" },
+          value: { powerOf: { paid: "sacrificed" } },
           effect: { kind: "damage", target: 0, amount: { triggerValue: true } },
           text: "When you do, this creature deals damage equal to that creature's power to any target.",
         },

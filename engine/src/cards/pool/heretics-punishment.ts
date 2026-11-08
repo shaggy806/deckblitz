@@ -23,7 +23,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "mill", target: "you", amount: 3 },
-          { kind: "damage", target: 0, amount: { thisWay: "milled", greatestOf: "mana-value" } },
+          { kind: "damage", target: 0, amount: { aggregate: "max", of: "mana-value", filter: {}, in: { thisWay: "milled" } } },
         ],
       },
       resolve: null,

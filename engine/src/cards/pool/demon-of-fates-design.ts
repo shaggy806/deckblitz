@@ -31,7 +31,7 @@ export default defineCard({
       effect: {
         kind: "modify-pt",
         target: "source",
-        power: { manaValueOf: "sacrificed" },
+        power: { manaValueOf: { paid: "sacrificed" } },
         toughness: 0,
         duration: "end-of-turn",
       },

@@ -48,7 +48,7 @@ export default defineCard({
       cost: { mana: "{1}{B}", tap: true, sacrifice: "creature-you-control" },
       targets: [],
       // The power is the sacrificed creature's as it last existed.
-      effect: { kind: "draw", amount: { powerOf: "sacrificed" } },
+      effect: { kind: "draw", amount: { powerOf: { paid: "sacrificed" } } },
       resolve: null,
       text: "{1}{B}, {T}, Sacrifice another creature: Draw X cards, where X is that creature's power.",
       otherOnly: true,

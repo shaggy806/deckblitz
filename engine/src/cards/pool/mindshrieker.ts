@@ -5,7 +5,7 @@ import { defineCard } from "../define.js";
 
 const TEXT =
   "{2}: Target player mills a card. This creature gets +X/+X until end of turn, where X is the milled card's mana value.";
-const X = { thisWay: "milled", sumOf: "mana-value" } as const;
+const X = { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "milled" } } as const;
 
 export default defineCard({
   name: "Mindshrieker",

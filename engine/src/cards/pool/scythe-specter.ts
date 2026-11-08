@@ -13,7 +13,7 @@ const TEXT =
   "Whenever this creature deals combat damage to a player, each opponent discards a card. Each player who discarded " +
   "a card with the greatest mana value among cards discarded this way loses life equal to that mana value.";
 
-const GREATEST: EffectAmount = { thisWay: "discarded", greatestOf: "mana-value" };
+const GREATEST: EffectAmount = { aggregate: "max", of: "mana-value", filter: {}, in: { thisWay: "discarded" } };
 
 export default defineCard({
   name: "Scythe Specter",

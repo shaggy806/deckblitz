@@ -25,7 +25,7 @@ const EXILE_ANOTHER: EffectSpec = {
   then: {
     kind: "reflexive-trigger",
     targets: [],
-    value: { thisWay: "exiled", who: "each-player", sumOf: "mana-value" },
+    value: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "exiled", who: "each-player" } },
     effect: {
       kind: "modal",
       announced: true,

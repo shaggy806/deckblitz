@@ -26,7 +26,7 @@ export default defineCard({
               condition: { kind: "this-way", what: "milled", filter: { hasName: CHOSEN_CARD_NAME } },
               then: {
                 kind: "gain-life",
-                amount: { thisWay: "milled", filter: { hasName: CHOSEN_CARD_NAME }, sumOf: "mana-value" },
+                amount: { aggregate: "sum", of: "mana-value", filter: { hasName: CHOSEN_CARD_NAME }, in: { thisWay: "milled" } },
               },
             },
             { kind: "draw", amount: 1 },

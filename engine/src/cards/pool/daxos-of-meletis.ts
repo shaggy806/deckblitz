@@ -51,7 +51,7 @@ export default defineCard({
             castOnly: true,
             spendAs: "any-color",
           },
-          { kind: "gain-life", amount: { thisWay: "exiled", sumOf: "mana-value" } },
+          { kind: "gain-life", amount: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "exiled" } } },
         ],
       },
       resolve: null,

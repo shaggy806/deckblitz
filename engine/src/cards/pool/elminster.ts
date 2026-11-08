@@ -43,7 +43,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "exile-from-library", amount: 1 },
-          { kind: "create-token", token: "Faerie Dragon Token", count: { thisWay: "exiled", sumOf: "mana-value" } },
+          { kind: "create-token", token: "Faerie Dragon Token", count: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "exiled" } } },
         ],
       },
       resolve: null,

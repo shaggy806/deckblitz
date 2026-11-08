@@ -29,7 +29,7 @@ export default defineCard({
       effect: {
         kind: "modify-pt",
         target: "source",
-        power: { powerOf: "tapped" },
+        power: { powerOf: { paid: "tapped" } },
         toughness: 0,
         duration: "end-of-turn",
       },

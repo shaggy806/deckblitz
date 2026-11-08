@@ -15,7 +15,7 @@ export default defineCard({
       {
         kind: "damage-all",
         filter: { type: "creature", notSubtypes: ["Dragon"] },
-        amount: { manaValueOf: "exiled-as-cost" },
+        amount: { manaValueOf: { paid: "exiled" } },
       },
       { kind: "exile-if-dies-this-turn", dealtDamageThisWay: "creature" },
     ],

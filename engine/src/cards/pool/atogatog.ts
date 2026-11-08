@@ -28,8 +28,8 @@ export default defineCard({
       effect: {
         kind: "modify-pt",
         target: "source",
-        power: { powerOf: "sacrificed" },
-        toughness: { powerOf: "sacrificed" },
+        power: { powerOf: { paid: "sacrificed" } },
+        toughness: { powerOf: { paid: "sacrificed" } },
         duration: "end-of-turn",
       },
       resolve: null,

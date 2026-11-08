@@ -35,7 +35,7 @@ export default defineCard({
               filter: { typesAnyOf: ["creature", "planeswalker"] },
             },
           ],
-          value: { thisWay: "discarded", sumOf: "mana-value" },
+          value: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "discarded" } },
           effect: { kind: "damage", amount: { triggerValue: true }, target: 0 },
           text: "When you discard an instant or sorcery card this way, Flamethrower Sonata deals damage equal to that card's mana value to target creature or planeswalker you don't control.",
         },

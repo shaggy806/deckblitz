@@ -62,6 +62,7 @@ import type {
   ZoneType,
 } from "./state.js";
 import type { JournalWindow } from "./journal.js";
+import { isCardSet, isObjectSetRef, memberCount, onlyMember, type ObjectSetRef, type RememberSpec, type SetMember } from "./object-sets.js";
 import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
 
 /** `"trigger-object"` reads `ResolutionContext.triggerObject` (needed-cards
@@ -349,28 +350,24 @@ export interface ZoneChoiceSplitCase {
 /**
  * What an amount that reads an object (`powerOf`, `toughnessOf`,
  * `manaValueOf`, `manaSpentOf`) may point at: anything an
- * {@link EffectTargetRef} can, plus `"sacrificed"` — the permanent sacrificed
- * to pay the spell's or ability's cost, or by a `sacrifice-source` step
- * before this one ("where X is the sacrificed creature's power" — Dina, Soul
- * Steeper) — and `"tapped"`, the one permanent tapped to pay the ability's
- * cost ("equal to the tapped creature's power" — station) — and
- * `"discarded"`, the one card discarded to pay the cost ("where X is the
- * discarded card's mana value" — Volrath the Fallen), read where the discard
- * put it — and `"revealed"`, the one card revealed from the hand to pay the
- * cost ("where X is the revealed card's mana value" — Induce Despair), read
- * in the hand while it's still there and as it last existed there once it
- * has left (the rulings) — and `"exiled-as-cost"`, the one card exiled from a
- * graveyard to pay it ("damage equal to the exiled card's power" — Corpse
- * Explosion) — and `"amassed"`, the Army an earlier step of this resolution
- * amassed ("where X is the amassed Army's power" — Surrounded by Orcs).
- * Nothing sacrificed, tapped, discarded, revealed or exiled reads 0.
+ * {@link EffectTargetRef} can but `"tapped"`, plus an {@link ObjectSetRef} —
+ * **the** one object of that set, nothing with none or several: `{ paid:
+ * "sacrificed" }` is "the sacrificed creature" (Dina, Soul Steeper; also what
+ * a `sacrifice-source` step before this one sacrificed), `{ paid: "tapped" }`
+ * "the tapped creature" (station), `{ paid: "discarded" }` "the discarded
+ * card" (Volrath the Fallen, read where the discard put it), `{ paid:
+ * "revealed" }` "the revealed card" (Induce Despair, read in the hand while
+ * it's still there and as it was there once it has left — the rulings),
+ * `{ paid: "exiled" }` "the exiled card" (Corpse Explosion) — and
+ * `"amassed"`, the Army an earlier step of this resolution amassed ("where X
+ * is the amassed Army's power" — Surrounded by Orcs). Nothing there reads 0.
  *
  * An object that was a permanent when the spell or ability referred to it
  * and has left the battlefield since is read as it last existed there (rule
  * 608.2h — see `LastKnownRefs`): "When Juri dies, it deals damage equal to
  * its power" counts the counters Juri died with.
  */
-export type AmountRef = EffectTargetRef | "sacrificed" | "tapped" | "discarded" | "revealed" | "exiled-as-cost" | "amassed";
+export type AmountRef = Exclude<EffectTargetRef, "tapped"> | ObjectSetRef | "amassed";
 /** Where a `return-to-hand` effect takes its object from. */
 export type ReturnToHandZone = "battlefield" | "graveyard" | "exile" | "stack" | "library";
 /**
@@ -772,15 +769,6 @@ export type EffectAmount =
    * having read the chosen result as `"x"`, "the other result" (Reckless
    * Endeavor). 0 before any roll. */
   | { readonly roll: "total" | "odd" | "even" | "other" | { readonly equals: number } }
-  /** The total mana value of the cards in exile linked to this effect's
-   * source (rule 607.2a — `exile`'s `linked`), in the stint the resolving
-   * ability refers to: Skyclave Apparition's "where X is the mana value of
-   * the exiled card" (its ruling: several exiled cards add up). Printed
-   * costs, an {X} counting 0. 0 when there are none. */
-  | { readonly exiledWithSourceManaValue: true }
-  /** Their total power, as above: Redemptor Dreadnought's "where X is the
-   * power of the exiled card". 0 when there are none. */
-  | { readonly exiledWithSourcePower: true }
   /** A current life total: the effect controller's (`"you"` — Ajani, Caller
    * of the Pride's ultimate: "create X 2/2 white Cat creature tokens, where X
    * is your life total"), or `"each"`, the life of **each player the effect
@@ -797,9 +785,6 @@ export type EffectAmount =
    * "your life total becomes equal to your starting life total" (Oketra's
    * Last Mercy), and half of it with `half` (The Endstone). */
   | { readonly startingLifeTotal: true }
-  /** "The lowest life total among all players" still in the game (Repay in
-   * Kind). */
-  | { readonly lowestLifeTotal: true }
   /** Half of an amount, rounded up or down (rule 107.1a says which the card
    * must say) — "half their life, rounded up". `fraction` is another part
    * than a half: Legate Lanius's decimate, "a tenth of the creatures they
@@ -1070,20 +1055,30 @@ export type EffectAmount =
    * effect that doesn't act on them — Jeska's Will's "add {R} for each card
    * in target opponent's hand" (nothing, with that target illegal). */
   | { readonly cardsInHand: PlayerScope | "each" | { readonly target: number } }
-  /** The **greatest** of an amount read once for each player in `who`
-   * (default every player still in the game; `who: "each-opponent"`, "an
-   * opponent") — the amount's `"each"` is that player: Investigator's
-   * Journal's "the greatest number of creatures a player controls" is `{
-   * greatestAmongPlayers: { countOf: { type: "creature", controlledBy: "you"
-   * }, forEachPlayer: true } }`, Thought Sponge's "the greatest number of
-   * cards an opponent has drawn this turn" a `{ turnStat: "cards-drawn", who:
-   * "each" }` of `who: "each-opponent"`. Inside `difference`, with the same
-   * count read for the player an effect acts on, it's "the player with the
-   * most": Tales of the Ancestors. 0 with nobody in `who`. `includingLeft`:
-   * players who have left the game are asked too, for what stays so after
-   * they've gone (Thought Sponge's ruling: "even opponents who have left the
-   * game"). */
-  | { readonly greatestAmongPlayers: EffectAmount; readonly who?: PlayerScope; readonly includingLeft?: true }
+  /** The player aggregate: the **greatest** or **least** of an amount (`of`)
+   * read once for each player in `who` (default every player still in the
+   * game; `who: "each-opponent"`, "an opponent") — the amount's `"each"` is
+   * that player. "The highest life total among all players" (Malignus,
+   * Arbiter of Knollridge) is `{ amongPlayers: "greatest", of: { lifeTotal:
+   * "each" } }`, Repay in Kind's "the lowest life total among all players"
+   * the `"least"` of it; Investigator's Journal's "the greatest number of
+   * creatures a player controls" `{ amongPlayers: "greatest", of: { countOf:
+   * { type: "creature", controlledBy: "you" }, forEachPlayer: true } }`,
+   * Balance's "the number of lands controlled by the player who controls the
+   * fewest" the `"least"` of a land count; Thought Sponge's "the greatest
+   * number of cards an opponent has drawn this turn" `{ turnStat:
+   * "cards-drawn", who: "each" }` of `who: "each-opponent"`. Inside
+   * `difference`, with the same count read for the player an effect acts on,
+   * `"greatest"` is "the player with the most": Tales of the Ancestors. 0 with
+   * nobody in `who`. `includingLeft`: players who have left the game are
+   * asked too, for what stays so after they've gone (Thought Sponge's ruling:
+   * "even opponents who have left the game"). */
+  | {
+      readonly amongPlayers: "greatest" | "least";
+      readonly of: EffectAmount;
+      readonly who?: PlayerScope;
+      readonly includingLeft?: true;
+    }
   /** How many cards are in a library or graveyard — yours, or with
    * `"each"` the player a per-player effect is acting on: "any number of
    * target players each mill half **their** library" (Singularity Rupture)
@@ -1237,24 +1232,12 @@ export type EffectAmount =
        * player** discarded this way" (each player's entries summed, then the
        * largest; 0 with none). */
       readonly perPlayer?: "greatest";
-      /** Add up this characteristic of the objects instead of counting them
-       * — Reign of the Pit's "X is the **total power** of the creatures
-       * sacrificed this way", Tip the Scales' "the sacrificed creature's
-       * **toughness**". A permanent that left doing it is read as it last
-       * existed on the battlefield (its ruling: a negative power counts as
-       * negative), and a token stack that went whole counts once per
-       * token. `"mana-value"` is Combustible Gearhulk's "the **total mana
-       * value** of those cards" (milled): a card read where it went, if
-       * that's a public zone (rule 701.17c), {X} counting 0 (rule 202.3e).
-       * `{ manaSymbols }` is chroma's "each green mana symbol in those cards'
-       * mana costs" (Phosphorescent Feast), read the same way. */
-      readonly sumOf?: "power" | "toughness" | "mana-value" | { readonly manaSymbols: Color };
-      /** The **greatest** of this characteristic among the objects instead
-       * of their total, read as `sumOf` reads each — Heretic's Punishment's
-       * "the greatest mana value among the milled cards", Ill-Timed
-       * Explosion's "the greatest mana value among cards discarded this
-       * way". 0 with none. */
-      readonly greatestOf?: "power" | "toughness" | "mana-value";
+      /** (A total or the greatest of a characteristic of these objects is an
+       * aggregate over the set — `{ aggregate: "sum", of: "power", filter:
+       * {}, in: { thisWay: "sacrificed" } }` is Reign of the Pit's "the total
+       * power of the creatures sacrificed this way": one fold for every set,
+       * a departed permanent read as it last existed, a token stack once per
+       * token, a card where it went if that's a public zone, rule 701.17c.) */
       /** Only the objects sharing a mana value with **another** of them —
        * Vault 21: House Gambit's "for each of those cards that has the same
        * mana value as another card revealed this way". Each is read where it
@@ -1899,6 +1882,11 @@ export type ThisWayKind =
   | "died"
   /** The Army chosen by an `amass` step (rule 701.47a): "the amassed Army". */
   | "amassed"
+  /** The Auras and Equipment it attached (rule 701.3a), each counted by its
+   * controller — Thorin, Mountain-king's "when one or more Equipment become
+   * attached to that creature this way". One that was already there isn't
+   * attached again (701.3b: nothing happens). */
+  | "attached"
   | "exiled"
   /** Cards it exiled from a hand — Lost Legacy's "that player shuffles, then
    * draws a card **for each card exiled from their hand this way**" after a
@@ -4731,6 +4719,19 @@ export type EffectSpec =
        * controller's, whose ability it stays (rule 603.7d): Suppress's "the end
        * step of that player's next turn". Fixed as this resolves. */
       readonly turnOf?: ChosenPlayerRef;
+      /**
+       * Sets the delayed ability remembers, each captured as this resolves
+       * (`object-sets.ts`) and read in `effect` as `{ remembered: name }` —
+       * Synthetic Destiny's "exile all creatures you control. At the
+       * beginning of the next end step, reveal … until you reveal **that
+       * many** creature cards" is `{ exiled: { set: { thisWay: "exiled" } } }`
+       * counted as `{ aggregate: "count", filter: {}, in: { remembered:
+       * "exiled" } }`. A `filter` keeps only the members matching it then
+       * (Song of Blood's "each creature card put into your graveyard this
+       * way"). Each member is acted on only while it's in its stint (rule
+       * 603.7c). The ability keeps its creator's X and "that player" too.
+       */
+      readonly remember?: { readonly [name: string]: RememberSpec };
     }
   | {
       /** "That creature enters with two additional +1/+1 counters on it"
@@ -5320,6 +5321,10 @@ export type EffectSpec =
        * and a `total` that is an amount is read then.
        */
       readonly divided?: TriggeredAbility["divided"];
+      /** Sets the reflexive ability remembers, as `delayed-trigger`'s
+       * `remember` (rule 603.12: it follows the rules for delayed triggered
+       * abilities) — read as `{ remembered: name }`. */
+      readonly remember?: { readonly [name: string]: RememberSpec };
     }
   | {
       /**
@@ -5812,6 +5817,10 @@ export type EffectSpec =
       readonly kind: "add-counter";
       readonly target: EffectTargetRef;
       readonly counter: string;
+      /** "The same kind of counters" as those whose placement fired this
+       * trigger (`LastKnownRefs.counter` — Captain Marvel, Apex Avenger), in
+       * place of `counter`, which names the kind it most often is. */
+      readonly counterOfTrigger?: true;
       /** A fixed amount, `"x"`, or a live count (Will of the Sultai: "X
        * +1/+1 counters, where X is the number of lands you control" —
        * needed-cards P16). */
@@ -8584,9 +8593,9 @@ export type EffectSpec =
        * "its controller creates" — for a destroyed target its last-known
        * controller). */
       readonly kind: "create-token-copy";
-      /** `"entered-together"` is "for each of them": a copy (`count`) of
-       * each permanent of the entry a batched `enters-battlefield` trigger
-       * fired on — Kambal, Profiteering Mayor. `{ each }` is a copy of each
+      /** `"trigger-batch"` is "for each of them": a copy (`count`) of each
+       * permanent of the entry a batched `enters-battlefield` trigger fired
+       * on, a token stack once per token — Kambal, Profiteering Mayor. `{ each }` is a copy of each
        * permanent matching the filter as this resolves, a token stack once
        * per token in it — Redoubled Stormsinger's "for each creature token
        * you control that entered this turn, create … a copy of that token".
@@ -8606,20 +8615,19 @@ export type EffectSpec =
        * the stint the resolving ability refers to, an "until this leaves the
        * battlefield" exile's included (rule 610.3) — Mardu Siegebreaker, or
        * with `chooseOne` Mimic Vat's "a card exiled with this artifact".
-       * `"exiled-as-cost"` is what was exiled to pay this spell's or
-       * ability's cost — Dollhouse of Horrors. `"exiled-this-way"` is each
-       * card this resolution has exiled so far — Foggy Swamp Visions.
+       * `{ paid: "exiled" }` is what was exiled to pay this spell's or
+       * ability's cost — Dollhouse of Horrors, Osgir's "two tokens that are
+       * copies of the exiled card". `{ thisWay: "exiled" }` is each card this
+       * resolution has exiled so far — Foggy Swamp Visions. Any other card
+       * set (`ObjectSetRef`) copies its members the same way.
        * `{ eachExiled }` is each face-up card in exile matching the filter,
        * from this effect's controller's side — Altaïr Ibn-La'Ahad. */
       readonly of:
         | "source"
         | "trigger-object"
-        | "entered-together"
         | "equipped"
         | "enchanted"
-        | "exiled-with-source"
-        | "exiled-as-cost"
-        | "exiled-this-way"
+        | ObjectSetRef
         | number
         | { readonly each: CardFilter }
         | { readonly eachExiled: CardFilter };
@@ -11868,6 +11876,8 @@ export interface EffectApi {
     targets?: readonly TargetRef[],
     /** Whose turn a `"your-…"` timing waits for, if not `controller`'s. */
     turnOf?: PlayerId,
+    /** The sets it remembers (`remember`), captured now. */
+    remembered?: { readonly [name: string]: readonly SetMember[] },
   ): void;
   /** See the `"enters-with-counters"` {@link EffectSpec}. */
   entersWithCounters(target: TargetRef, counter: string, amount: number, condition?: StaticCondition): void;
@@ -12010,6 +12020,8 @@ export interface EffectApi {
     /** What `"trigger-object"` names in it; `null` is nothing at all, not the
      * creating ability's trigger object — an amass that could choose no Army. */
     about?: ObjectId | null,
+    /** The sets it remembers (`remember`), captured now. */
+    remembered?: { readonly [name: string]: readonly SetMember[] },
   ): void;
   /** Exile every card in `target`'s graveyard (a player — Bojuka Bog), as
    * one move. */
@@ -12255,8 +12267,10 @@ export interface EffectApi {
   countMatching(filter: CardFilter, except?: readonly ObjectId[], you?: PlayerId): number;
   /** See the aggregate {@link EffectAmount}: the raw sum, maximum or count,
    * with `except` left out one permanent apiece, from the effect's
-   * controller's side — or `you`'s, given one (its `forTarget`). */
-  aggregate(spec: AggregateSpec, except: readonly ObjectId[], you?: PlayerId): number;
+   * controller's side — or `you`'s, given one (its `forTarget`). Its sets
+   * are this resolution's (`objectSet`), a `who: "each"` this-way set read
+   * for `each`, the player a scoped effect is being applied to. */
+  aggregate(spec: AggregateSpec, except: readonly ObjectId[], you?: PlayerId, each?: PlayerId): number;
   /** See the `"return-from-graveyard"` {@link EffectSpec} — from the effect's
    * controller's graveyard.
    * Returns `true` when it stopped to ask an "as this enters" choice first
@@ -13502,12 +13516,20 @@ export interface ResolutionContext extends EffectApi {
    * last-known information and still works. See `LastKnownRefs
    * .triggerObjectAfterLeaving`. */
   readonly triggerObjectLost?: boolean;
-  /** See `LastKnownRefs.enteredTogether`: the permanents a batched entry
-   * trigger fired on, and how many tokens each stood for. */
-  readonly enteredTogether?: readonly { readonly object: ObjectId; readonly count: number }[];
-  /** The objects of the batch the resolving trigger fired on ("those
-   * creatures") — what a filter's `triggerBatch` binds to. */
-  readonly triggerBatch?: readonly { readonly object: ObjectId; readonly zoneChangeCount: number }[];
+  /** The members of a set this resolution refers to (`object-sets.ts`):
+   * what its cost took, its trigger's batch, what it did this way, what a
+   * delayed or reflexive ability remembered, the cards exiled with its
+   * source, what's attached to its source, a target group. Each in the
+   * stint the set found it in; the context's reads take one that has moved
+   * as it was (608.2h). `each` is the player a this-way set's `who: "each"`
+   * means. */
+  objectSet(ref: ObjectSetRef, each?: PlayerId): readonly SetMember[];
+  /** Whether a set's member matches `filter`, read as an aggregate reads it
+   * (as it is in its stint, else as it was). */
+  memberMatches(member: SetMember, filter: CardFilter): boolean;
+  /** The kind of the counters whose placement fired this trigger, if it was
+   * one (`LastKnownRefs.counter`). */
+  triggerCounterKind(): string | undefined;
   /** How many real, independent firings this resolution stands for — see
    * `GameObject.stackMultiplier`. `1` outside a scaled resolution. Only
    * `create-token` / `create-token-copy` read it (the only effect kinds
@@ -13531,22 +13553,6 @@ export interface ResolutionContext extends EffectApi {
    * changed zones since: it's a new object (rule 400.7), so an effect naming
    * `"source"` finds nothing. Absent otherwise. */
   readonly sourceLost?: boolean;
-  /** The permanent sacrificed to pay this spell's or ability's cost, or by a
-   * `sacrifice-source` step before this one — what an {@link AmountRef}
-   * `"sacrificed"` reads. Absent when nothing was. */
-  readonly sacrificed?: ObjectId;
-  /** The cards discarded to pay this spell's or ability's cost
-   * (`LastKnownRefs.discarded`) — an {@link AmountRef} `"discarded"` reads
-   * the one card when there is exactly one. Absent when none were. */
-  readonly discarded?: readonly ObjectId[];
-  /** The cards exiled to pay this spell's or ability's cost
-   * (`LastKnownRefs.exiledCost`) — a `create-token-copy`'s
-   * `"exiled-as-cost"`. Absent when none were. */
-  readonly exiledAsCost?: readonly ObjectId[];
-  /** The cards revealed from the hand to pay this spell's or ability's cost
-   * (`LastKnownRefs.revealed`) — an {@link AmountRef} `"revealed"` reads the
-   * one card when there is exactly one. Absent when none were. */
-  readonly revealed?: readonly ObjectId[];
   /** The permanent whose static granted this ability (`LastKnownRefs
    * .granter`) — what an {@link EffectTargetRef} `"granter"` names. Absent
    * on an ability nothing granted. */
@@ -13554,8 +13560,9 @@ export interface ResolutionContext extends EffectApi {
   /** That granter has left the battlefield, or left and come back, since
    * (rule 400.7): it's read as it last existed but not acted on. */
   readonly granterLost?: boolean;
-  /** The one permanent tapped to pay this ability's cost — what an
-   * {@link AmountRef} `"tapped"` reads. Absent when nothing was. */
+  /** The one permanent tapped to pay this ability's cost (`{ paid: "tapped"
+   * }`'s one member) — what an {@link EffectTargetRef} `"tapped"` acts on.
+   * Absent when nothing was. */
   readonly tapped?: ObjectId;
   /** That permanent has left the battlefield, or left and come back, since
    * (rule 400.7): it's read as it last existed but not acted on. */
@@ -14973,9 +14980,6 @@ export function signedAmountValue(
     return first === undefined || second === undefined ? 0 : Math.abs(first - second);
   }
   if ("startingLifeTotal" in amount) return ctx.startingLifeTotal();
-  if ("lowestLifeTotal" in amount) {
-    return Math.min(...ctx.playersInScope("each-player").map((p) => ctx.lifeTotalOf(p)));
-  }
   if ("powerOfTwo" in amount) {
     return 2 ** Math.min(52, Math.max(0, Math.floor(signedAmountValue(amount.powerOfTwo, ctx, each))));
   }
@@ -15030,10 +15034,13 @@ export function signedAmountValue(
     }
     return ctx.playersInScope(amount.cardsInHand).reduce((n, p) => n + ctx.handSizeOf(p), 0);
   }
-  if ("greatestAmongPlayers" in amount) {
+  if ("amongPlayers" in amount) {
     const who = amount.who ?? "each-player";
     const players = amount.includingLeft === true ? ctx.playersCountedInScope(who) : ctx.playersInScope(who);
-    return Math.max(0, ...players.map((p) => amountValue(amount.greatestAmongPlayers, ctx, p)));
+    if (players.length === 0) return 0;
+    // The least may be negative (a life total below 0): read it as it is.
+    const values = players.map((p) => signedAmountValue(amount.of, ctx, p));
+    return amount.amongPlayers === "greatest" ? Math.max(0, ...values) : Math.min(...values);
   }
   if ("colorsOf" in amount) {
     const ref = resolveAmountRef(amount.colorsOf, ctx);
@@ -15104,26 +15111,17 @@ export function signedAmountValue(
       const values = done.map((entry) => ctx.manaValueOf({ kind: "object", object: entry.object }));
       return values.filter((value) => values.filter((other) => other === value).length > 1).length;
     }
-    const greatestOf = amount.greatestOf;
-    if (greatestOf !== undefined) {
-      // Each object once, however many tokens a stack of it stood for.
-      return Math.max(0, ...done.map((entry) => ctx.powerAmong([{ ...entry, count: 1 }], greatestOf)));
-    }
-    const valueOf = (entry: ThisWayEntry): number =>
-      amount.sumOf === undefined ? entry.count : ctx.powerAmong([entry], amount.sumOf);
     if (amount.perPlayer === "greatest") {
       const byPlayer = new Map<PlayerId, number>();
-      for (const entry of done) byPlayer.set(entry.player, (byPlayer.get(entry.player) ?? 0) + valueOf(entry));
+      for (const entry of done) byPlayer.set(entry.player, (byPlayer.get(entry.player) ?? 0) + entry.count);
       return Math.max(0, ...byPlayer.values());
     }
     // "The number of counters removed this way" counts a player's too (rule
     // 122.1 — Leeches' "loses all poison counters … that much damage"),
-    // unless the amount asks about objects only (a filter or a sum of them).
+    // unless the amount asks about objects only (a filter).
     const fromPlayers =
-      amount.thisWay === "counters-removed" && amount.filter === undefined && amount.sumOf === undefined
-        ? ctx.playerCountersRemovedThisWay(players)
-        : 0;
-    return done.reduce((n, entry) => n + valueOf(entry), fromPlayers);
+      amount.thisWay === "counters-removed" && amount.filter === undefined ? ctx.playerCountersRemovedThisWay(players) : 0;
+    return done.reduce((n, entry) => n + entry.count, fromPlayers);
   }
   if ("countPlayers" in amount) {
     const players = ctx.playersInScope(amount.countPlayers);
@@ -15253,12 +15251,6 @@ export function signedAmountValue(
     const n = amount.roll.equals;
     return last.results.filter((r) => r === n).length;
   }
-  if ("exiledWithSourceManaValue" in amount) {
-    return ctx.cardsExiledWithSource().reduce((n, id) => n + ctx.manaValueOf({ kind: "object", object: id }), 0);
-  }
-  if ("exiledWithSourcePower" in amount) {
-    return ctx.cardsExiledWithSource().reduce((n, id) => n + ctx.powerOf({ kind: "object", object: id }), 0);
-  }
   if ("commanderCastsOf" in amount) {
     const ref = resolveAmountRef(amount.commanderCastsOf, ctx);
     return ref === undefined ? 0 : ctx.commanderCastsOf(ref);
@@ -15268,9 +15260,9 @@ export function signedAmountValue(
     if (amount.forTarget !== undefined) {
       const ref = ctx.targets[amount.forTarget];
       if (ref?.kind !== "player" || illegalSlot(amount.forTarget, ctx)) return 0;
-      return Math.max(0, ctx.aggregate(amount, except, ref.player));
+      return Math.max(0, ctx.aggregate(amount, except, ref.player, each));
     }
-    return Math.max(0, ctx.aggregate(amount, except));
+    return Math.max(0, ctx.aggregate(amount, except, undefined, each));
   }
   const except: ObjectId[] = [];
   if (amount.excludeSelf === true) except.push(ctx.source);
@@ -15357,6 +15349,21 @@ function amassedThisWay(ctx: ResolutionContext): TargetRef | undefined {
   return army === undefined ? undefined : { kind: "object", object: army.object };
 }
 
+/** The sets a delayed or reflexive trigger is told to `remember`, captured
+ * as the effect applies: each set's members, only those matching its
+ * `filter` (read as they are now) when it has one. */
+function rememberSets(
+  remember: { readonly [name: string]: RememberSpec },
+  ctx: ResolutionContext,
+): { readonly [name: string]: readonly SetMember[] } {
+  const out: Record<string, readonly SetMember[]> = {};
+  for (const [name, { set, filter }] of Object.entries(remember)) {
+    const members = ctx.objectSet(set);
+    out[name] = filter === undefined ? members : members.filter((m) => ctx.memberMatches(m, filter));
+  }
+  return out;
+}
+
 /** What an {@link AttachRef} names now. */
 function resolveAttachRef(ref: AttachRef, ctx: ResolutionContext): TargetRef | undefined {
   if (ref === "created") return createdThisWay(ctx);
@@ -15370,24 +15377,12 @@ export type SpellResolver = (ctx: ResolutionContext) => void;
 
 function resolveAmountRef(ref: AmountRef, ctx: ResolutionContext): TargetRef | undefined {
   if (ref === "amassed") return amassedThisWay(ctx);
-  if (ref === "sacrificed") {
-    return ctx.sacrificed === undefined ? undefined : { kind: "object", object: ctx.sacrificed };
-  }
-  if (ref === "tapped") {
-    return ctx.tapped === undefined ? undefined : { kind: "object", object: ctx.tapped };
-  }
-  // "The discarded card": the cost's one discarded card, where it went.
-  if (ref === "discarded") {
-    return ctx.discarded?.length === 1 ? { kind: "object", object: ctx.discarded[0] } : undefined;
-  }
-  // "The revealed card": the cost's one revealed card — the context's reads
-  // know to take it as it was in the hand once it has left.
-  if (ref === "revealed") {
-    return ctx.revealed?.length === 1 ? { kind: "object", object: ctx.revealed[0] } : undefined;
-  }
-  // "The exiled card": the cost's one card exiled from a graveyard.
-  if (ref === "exiled-as-cost") {
-    return ctx.exiledAsCost?.length === 1 ? { kind: "object", object: ctx.exiledAsCost[0] } : undefined;
+  // "The sacrificed creature", "the discarded card", "the revealed card":
+  // the set's one member — the context's reads know which stint it means,
+  // and take it as it was once it has moved (608.2h).
+  if (isObjectSetRef(ref)) {
+    const member = onlyMember(ctx.objectSet(ref));
+    return member === undefined ? undefined : { kind: "object", object: member.object };
   }
   // A read of the granter: as it last existed once it has left (608.2h) —
   // "the number of arrow counters on Archery Training".
@@ -15701,11 +15696,10 @@ function containsDynamicCompare(value: unknown): boolean {
       "blockedThisTurn" in value ||
       "sameNameAsTarget" in value ||
       "sameNameAsTriggerObject" in value ||
-      "sameNameAsThisWay" in value ||
       "sharesColorWithTarget" in value ||
       "attachedToTarget" in value ||
       "wasAttachedTo" in value ||
-      "triggerBatch" in value ||
+      "inSet" in value ||
       "createdWithSource" in value ||
       ((value as Record<string, unknown>)["kind"] === "delayed-trigger" &&
         mentionsCreatedWithSource((value as Record<string, unknown>)["effect"])) ||
@@ -15903,11 +15897,11 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
       const { saddledSource: _saddled, ...rest } = walked;
       walked = { ...rest, saddledBy: ctx.source };
     }
-    // "Those creatures", "each of them": the batch the resolving trigger fired
-    // on, each in the stint it was in then (rule 400.7).
-    if (walked["triggerBatch"] === true) {
-      const { triggerBatch: _batch, ...rest } = walked;
-      const amongObjects = (ctx.triggerBatch ?? []).map(({ object, zoneChangeCount }) => ({ object, stint: zoneChangeCount }));
+    // "Those creatures", "each of them", "the remembered cards": a set's
+    // members, each in the stint the set found it in (rule 400.7).
+    if (walked["inSet"] !== undefined && isObjectSetRef(walked["inSet"])) {
+      const { inSet: ref, ...rest } = walked;
+      const amongObjects = ctx.objectSet(ref as ObjectSetRef).map(({ object, stint }) => ({ object, stint }));
       walked = { ...rest, amongObjects };
     }
     if (walked["createdWithSource"] === true) {
@@ -15971,16 +15965,6 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
         .filter((name): name is string => name !== null);
       walked = { ...rest, sameNameAsAny: [...new Set(names)] };
     }
-    // "For each card exiled this way, … with the same name as that card"
-    // (Haunting Echoes): the names of what this resolution has done that to.
-    if (typeof walked["sameNameAsThisWay"] === "string") {
-      const { sameNameAsThisWay: what, ...rest } = walked;
-      const names = ctx
-        .thisWay(what as ThisWayKind)
-        .map((entry) => ctx.nameForMatching(entry.object))
-        .filter((name): name is string => name !== null);
-      walked = { ...rest, sameNameAsAny: [...new Set(names)] };
-    }
     // Radiance's "and each other … that shares a color with it": the target
     // and its colors now (rule 105.2), as for the name above.
     if (typeof walked["sharesColorWithTarget"] === "number") {
@@ -16026,10 +16010,9 @@ function shareReferenceObjects(reference: ShareReference, ctx: ResolutionContext
   const one = (object: ObjectId | undefined): readonly ObjectId[] => (object === undefined ? [] : [object]);
   if (reference === "source") return [ctx.source];
   if (reference === "trigger-object") return one(ctx.triggerObject);
-  if (reference === "sacrificed") return one(ctx.sacrificed);
   if (reference === "attached") return one(ctx.attachedHost());
   if (reference === "chosen") return one(ctx.chosenPermanent());
-  if (reference === "exiled-with-source") return ctx.cardsExiledWithSource(true);
+  if (isObjectSetRef(reference)) return ctx.objectSet(reference).map((m) => m.object);
   if (typeof reference === "number") {
     if (illegalSlot(reference, ctx)) return [];
     const target = ctx.targets[reference];
@@ -16055,6 +16038,12 @@ function readsEachPlayer(amount: EffectAmount): boolean {
   if ("countOf" in amount) return amount.forEachPlayer === true;
   if ("countInGraveyard" in amount) return amount.forEachPlayer === true;
   if ("thisWay" in amount) return amount.who === "each";
+  // "The total power of the creatures **that player** sacrificed this way":
+  // a set of `who: "each"` read per player.
+  if ("aggregate" in amount) {
+    const ins = [amount.in, ...(amount.plus ?? []).map((p) => p.in)].flatMap((i) => (Array.isArray(i) ? i : [i]));
+    return ins.some((i) => typeof i === "object" && i !== null && "thisWay" in i && i.who === "each");
+  }
   if ("half" in amount) return readsEachPlayer(amount.half);
   if ("powerOfTwo" in amount) return readsEachPlayer(amount.powerOfTwo);
   if ("product" in amount) return amount.product.some(readsEachPlayer);
@@ -17808,6 +17797,18 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.turnExiledFaceUp();
       return;
     case "delayed-trigger": {
+      // The sets it remembers, captured now (theme 15), handed to every
+      // `delayTrigger` below.
+      if (spec.remember !== undefined) {
+        const remembered = rememberSets(spec.remember, ctx);
+        const { remember: _remember, ...rest } = spec;
+        applyEffectSpec(rest, {
+          ...ctx,
+          delayTrigger: (at, effect, text, controller, own, turnOf) =>
+            ctx.delayTrigger(at, effect, text, controller, own, turnOf, remembered),
+        });
+        return;
+      }
       let controller = ctx.controller;
       if (spec.controller !== undefined) {
         const of = ctx.targets[spec.controller.controllerOfTarget];
@@ -18777,7 +18778,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       // "That player puts a counter on it": no such player, no counter.
       const by = spec.by === undefined ? undefined : effectPlayer(spec.by, ctx);
       if (spec.by !== undefined && by === undefined) return;
-      ctx.addCounter(target, spec.counter, amountValue(spec.amount, ctx), by, spec.training === true);
+      const counter = spec.counterOfTrigger === true ? ctx.triggerCounterKind() : spec.counter;
+      if (counter === undefined) return;
+      ctx.addCounter(target, counter, amountValue(spec.amount, ctx), by, spec.training === true);
       return;
     }
     case "time-travel":
@@ -19795,11 +19798,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       // Copies of cards are read as the cards they are, and "create a token"
       // is the effect's controller's: nothing on the battlefield to read a
       // controller from.
-      const ofCards =
-        spec.of === "exiled-with-source" ||
-        spec.of === "exiled-as-cost" ||
-        spec.of === "exiled-this-way" ||
-        (typeof spec.of === "object" && "eachExiled" in spec.of);
+      // A set of permanents (a trigger's batch, what's attached, a target
+      // group) is copied as permanents; every other set is of cards.
+      const ofSet = isObjectSetRef(spec.of) ? spec.of : undefined;
+      const permanentSet = ofSet !== undefined && !isCardSet(ofSet);
+      const ofCards = (ofSet !== undefined && !permanentSet) || (typeof spec.of === "object" && "eachExiled" in spec.of);
       const handedTo = spec.who === undefined || spec.who === "you" ? undefined : spec.who;
       const named = handedTo === undefined ? undefined : effectPlayer(handedTo, ctx);
       if (handedTo !== undefined && named === undefined) return;
@@ -19827,16 +19830,17 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ...(spec.atYourNextEndStep === true ? { atYourNextEndStep: true } : {}),
         });
       const specCount = amountValue(spec.count, ctx);
-      if (spec.of === "entered-together") {
+      if (ofSet !== undefined && permanentSet) {
+        const members = ctx.objectSet(ofSet);
         ctx.oneTokenEvent(() => {
-          for (const { object, count } of ctx.enteredTogether ?? []) copy(object, specCount * count);
+          for (const member of members) copy(member.object, specCount * memberCount(member));
         });
         return;
       }
-      if (typeof spec.of === "object") {
+      if (typeof spec.of === "object" && ofSet === undefined) {
         // Which ones, fixed before the first copy enters (rule 608.2h): a
         // copy made here doesn't count itself.
-        const of = spec.of;
+        const of = spec.of as { readonly each: CardFilter } | { readonly eachExiled: CardFilter };
         ctx.oneTokenEvent(() => {
           if ("eachExiled" in of) {
             for (const card of ctx.exiledCardsMatching(of.eachExiled)) copy(card, specCount);
@@ -19848,11 +19852,13 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       }
       if (ofCards) {
         const cards =
-          spec.of === "exiled-with-source"
+          ofSet === "exiled-with-source"
             ? ctx.cardsExiledWithSource(true)
-            : spec.of === "exiled-as-cost"
-              ? (ctx.exiledAsCost ?? [])
-              : ctx.cardsExiledThisWay();
+            : typeof ofSet === "object" && "thisWay" in ofSet && ofSet.thisWay === "exiled" && ofSet.who === undefined
+              ? ctx.cardsExiledThisWay()
+              : ofSet === undefined
+                ? []
+                : ctx.objectSet(ofSet).map((m) => m.object);
         if (spec.chooseOne === true && cards.length > 1) {
           // "A card exiled with this": which is chosen now, and the copy is
           // of that one wherever `then` finds it (it doesn't move).
@@ -19876,7 +19882,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (spec.of === "source") of = ctx.source;
       else if (spec.of === "trigger-object") of = ctx.triggerObject;
       else if (spec.of === "equipped" || spec.of === "enchanted") of = ctx.equippedCreature();
-      else {
+      else if (typeof spec.of === "number") {
         const ref = ctx.targets[spec.of];
         of = ref?.kind === "object" ? ref.object : undefined;
       }
@@ -20851,6 +20857,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.value === undefined ? undefined : amountValue(spec.value, ctx),
         spec.divided,
         about?.kind === "object" ? about.object : noArmy ? null : undefined,
+        spec.remember === undefined ? undefined : rememberSets(spec.remember, ctx),
       );
       return;
     }

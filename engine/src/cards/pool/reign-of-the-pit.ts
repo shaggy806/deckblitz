@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 // X is the sacrificed creatures' power as they last existed on the
 // battlefield, a negative power counting as negative (the ruling) — a total
 // below 1 makes a Demon that dies at once.
-const X = { thisWay: "sacrificed", sumOf: "power" } as const;
+const X = { aggregate: "sum", of: "power", filter: {}, in: { thisWay: "sacrificed" } } as const;
 
 export default defineCard({
   name: "Reign of the Pit",

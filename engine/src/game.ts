@@ -323,7 +323,19 @@ import {
   printedManaCost,
   weightedMatches,
 } from "./filter.js";
-import type { AggregateReads, AggregateSpec, CardFilter } from "./filter.js";
+import type { AggregateReads, AggregateSpec, CardFilter, WeightedMatch } from "./filter.js";
+import {
+  addToSet,
+  memberCount,
+  onlyMember,
+  setMembersAll,
+  staticSetMembers,
+  storedSetMembers,
+  type ObjectSetRef,
+  type ObjectSets,
+  type PaidKind,
+  type SetMember,
+} from "./object-sets.js";
 import { goadersOf } from "./goad.js";
 import { answeringPlayer, attackChooser, decidingPlayer } from "./player-control.js";
 import type { AddedPhase, LeftBattlefield, PlayerControl } from "./state.js";
@@ -697,9 +709,10 @@ const COST_READ_CARD_TYPES: readonly CardType[] = [
 ];
 
 /** Whether a `costModification` applies only to a spell with certain targets. */
-/** Whether an amount reads the permanent a cost names (`"sacrificed"`). */
+/** Whether an amount reads the Equipment an "unattach" cost names (`{ paid:
+ * "unattached" }`). */
 function amountReadsSacrificed(amount: EffectAmount): boolean {
-  return JSON.stringify(amount).includes('"sacrificed"');
+  return JSON.stringify(amount).includes('"paid":"unattached"');
 }
 
 function isTargetKeyed(mod: NonNullable<StaticAbility["costModification"]>): boolean {
@@ -10561,7 +10574,6 @@ export class Game {
           manaAfter.manaColors,
           this.activatedRefFor(manaAfter.source, manaAfter.abilityIndex),
           undefined,
-          undefined,
         );
       }
     }
@@ -12214,14 +12226,14 @@ export class Game {
         controller: player,
         lastKnownRefs: {
           source: by.zoneChangeCount ?? 0,
-          tapped: { object: id, zoneChangeCount: enlisted.zoneChangeCount ?? 0 },
+          sets: addToSet(undefined, { paid: "tapped" }, [{ object: id, stint: enlisted.zoneChangeCount ?? 0 }]),
         },
         reflexive: {
           targets: [],
           effect: {
             kind: "modify-pt",
             target: "source",
-            power: { powerOf: "tapped" },
+            power: { powerOf: { paid: "tapped" } },
             toughness: 0,
             duration: "end-of-turn",
           },
@@ -20331,11 +20343,8 @@ export class Game {
     // permanent tapped is remembered: "the creature tapped to pay this spell's
     // additional cost" (Swallow Whole).
     const tappedForCost = this.payTapCost(tapPicked, player);
-    if (tappedForCost.length === 1) {
-      object.lastKnownRefs = {
-        ...object.lastKnownRefs,
-        tapped: { object: tappedForCost[0], zoneChangeCount: this.state.objects[tappedForCost[0]].zoneChangeCount ?? 0 },
-      };
+    if (tappedForCost.length > 0) {
+      this.recordPaid(object.id, "tapped", tappedForCost);
     }
     // Sneak's "returning an unblocked creature you control to its owner's
     // hand" (rule 702.190a), the other half of that cost: what it was
@@ -20401,8 +20410,9 @@ export class Game {
         this.moveObject(victim, "graveyard");
         this.emit({ type: "permanent-sacrificed", object: victim, player: sacrificer });
       }
-      // What the spell's "the sacrificed creature" reads (rule 608.2h).
-      object.lastKnownRefs = { ...object.lastKnownRefs, sacrificed: { object: victim, zoneChangeCount: stint } };
+      // What the spell's "the sacrificed creature" reads (rule 608.2h): as
+      // it was on the battlefield, in the stint it went to.
+      this.recordPaid(object.id, "sacrificed", [victim], { [victim]: stint });
     }
     // The costs are paid, so a target in a token stack can be peeled off it
     // (`lockInTargets`) without taking a token a cost above had named.
@@ -23480,7 +23490,8 @@ export class Game {
     // The X announced — or, for a "remove all" cost, the counters it removed
     // (set as the cost is paid, below).
     let chosenX = planned.chosenX;
-    let sacrificedRef: LastKnownRefs["sacrificed"];
+    // What the cost took, as `LastKnownRefs.sets.paid` keeps it.
+    let paidSets: ObjectSets | undefined;
 
     // Pay the cost. The secret first: a sacrifice beside it clears the choice.
     if (ability.cost.revealChosen === true) this.revealSecretChoice(source, player);
@@ -23507,10 +23518,7 @@ export class Game {
     if (tappedAs !== undefined) {
       for (const id of tapped) this.emit({ type: "creature-tapped-for", creature: id, for: sourceId, as: tappedAs });
     }
-    const tappedRef: LastKnownRefs["tapped"] =
-      tapped.length === 1
-        ? { object: tapped[0], zoneChangeCount: this.state.objects[tapped[0]].zoneChangeCount ?? 0 }
-        : undefined;
+    if (tapped.length > 0) paidSets = addToSet(paidSets, { paid: "tapped" }, this.paidMembers("tapped", tapped));
     this.executePayment(player, payment);
     const lifeCost = abilityLifeCost(this.state, player, ability.cost, chosenX, sourceId) ?? 0;
     if (lifeCost > 0) this.changeLife(player, -lifeCost);
@@ -23618,7 +23626,7 @@ export class Game {
         this.emit({ type: "permanent-sacrificed", object: victim, player });
       }
       // "The sacrificed creature", as it last existed (Dina, Soul Steeper).
-      sacrificedRef = { object: victim, zoneChangeCount: stint };
+      paidSets = addToSet(paidSets, { paid: "sacrificed" }, this.paidMembers("sacrificed", [victim], { [victim]: stint }));
     }
     // "Unattach this Equipment" (rule 701.3d): off what it's on, and a grant
     // that needed it there ends, the ability already activated.
@@ -23626,7 +23634,7 @@ export class Game {
       this.unattachNow(unattachVictim);
       // "That Equipment's mana value" (Captain America).
       if (unattachChosen) {
-        sacrificedRef = { object: unattachVictim, zoneChangeCount: this.state.objects[unattachVictim].zoneChangeCount ?? 0 };
+        paidSets = addToSet(paidSets, { paid: "unattached" }, this.paidMembers("unattached", [unattachVictim]));
       }
     }
 
@@ -23715,7 +23723,7 @@ export class Game {
         this.afterPlayerAction(player);
         return;
       }
-      this.resolveManaAbility(sourceId, player, ability, chosenX, manaColors, grantedAbility, sacrificedRef, tappedRef);
+      this.resolveManaAbility(sourceId, player, ability, chosenX, manaColors, grantedAbility, paidSets);
       return;
     }
 
@@ -23766,11 +23774,10 @@ export class Game {
       this.emit({ type: "modes-chosen", source: sourceId, player, modes: [...modes], modal: true });
     }
     const granterRef = granterOfRef(grantedAbility);
-    if (sourceStint !== undefined || sacrificedRef !== undefined || tappedRef !== undefined || granterRef !== undefined) {
+    if (sourceStint !== undefined || paidSets !== undefined || granterRef !== undefined) {
       this.state.objects[abilityId].lastKnownRefs = {
         ...(sourceStint !== undefined ? { source: sourceStint } : {}),
-        ...(sacrificedRef !== undefined ? { sacrificed: sacrificedRef } : {}),
-        ...(tappedRef !== undefined ? { tapped: tappedRef } : {}),
+        ...(paidSets !== undefined ? { sets: paidSets } : {}),
         ...(granterRef !== undefined ? { granter: granterRef } : {}),
       };
     }
@@ -23915,14 +23922,12 @@ export class Game {
     chosenX: number,
     manaColors: readonly ManaType[] | undefined,
     grantedAbility: GrantedAbilityRef | undefined,
-    sacrificedRef: LastKnownRefs["sacrificed"],
-    tappedRef: LastKnownRefs["tapped"],
+    paidSets: ObjectSets | undefined,
   ): void {
     const source = this.state.objects[sourceId];
     const manaGranter = granterOfRef(grantedAbility);
     const base = this.makeResolutionContext(sourceId, player, [], chosenX, 0, undefined, 1, 0, [], {
-      ...(sacrificedRef !== undefined ? { sacrificed: sacrificedRef } : {}),
-      ...(tappedRef !== undefined ? { tapped: tappedRef } : {}),
+      ...(paidSets !== undefined ? { sets: paidSets } : {}),
       ...(manaGranter !== undefined ? { granter: manaGranter } : {}),
     });
     // The colour(s) the activating player picked, one per unit whose type
@@ -24152,39 +24157,63 @@ export class Game {
   }
 
   /** Remember `cards`, just discarded for `stackObject`'s cost, on it — each
-   * with its stint where the discard put it. */
+   * in its stint where the discard put it. */
   private recordCostDiscard(stackObject: ObjectId, cards: readonly ObjectId[]): void {
-    const object = this.state.objects[stackObject];
-    if (object === undefined || object.zone !== "stack" || cards.length === 0) return;
-    const entries = cards.map((card) => ({ object: card, zoneChangeCount: this.state.objects[card]?.zoneChangeCount ?? 0 }));
-    object.lastKnownRefs = {
-      ...object.lastKnownRefs,
-      discarded: [...(object.lastKnownRefs?.discarded ?? []), ...entries],
-    };
+    if (this.state.objects[stackObject]?.zone !== "stack") return;
+    this.recordPaid(stackObject, "discarded", cards);
   }
 
   /** Remember `cards`, just revealed from the hand for `stackObject`'s cost,
-   * on it — each with its stint in the hand and its power, toughness and
-   * mana value there, what "the revealed card's power" reads once it has
-   * left the hand (the rulings: "as it last existed in your hand"). */
+   * on it — each with what it was in the hand, which "the revealed card's
+   * power" reads once it has left the hand (the rulings: "as it last existed
+   * in your hand"). */
   private recordCostReveal(stackObject: ObjectId, cards: readonly ObjectId[]): void {
-    const object = this.state.objects[stackObject];
-    if (object === undefined || object.zone !== "stack" || cards.length === 0) return;
-    const entries = cards.map((card) => {
-      const chars = computeCharacteristics(this.state, this.registry, card);
-      return {
-        object: card,
-        zoneChangeCount: this.state.objects[card]?.zoneChangeCount ?? 0,
-        power: chars.power,
-        toughness: chars.toughness,
-        manaValue: this.manaValueOfTarget({ kind: "object", object: card }),
-        creature: chars.types.includes("creature"),
-      };
+    if (this.state.objects[stackObject]?.zone !== "stack") return;
+    this.recordPaid(stackObject, "revealed", cards);
+  }
+
+  /**
+   * Remember `objects`, just taken by `objectId`'s cost (a spell or ability
+   * on the stack, or one about to be — `LastKnownRefs.sets.paid`), each in
+   * the stint it's in now, after the act. One that left the battlefield doing
+   * it (a sacrifice) keeps what it last was there (`was`, rule 608.2h) —
+   * `leftFrom` names that battlefield stint; a card revealed from a hand
+   * keeps what it was there, since a hand has no last-known information.
+   */
+  private recordPaid(
+    objectId: ObjectId,
+    kind: PaidKind,
+    objects: readonly ObjectId[],
+    leftFrom: Readonly<Record<ObjectId, number>> = {},
+  ): void {
+    const object = this.state.objects[objectId];
+    if (object === undefined || objects.length === 0) return;
+    object.lastKnownRefs = { ...object.lastKnownRefs, sets: addToSet(object.lastKnownRefs?.sets, { paid: kind }, this.paidMembers(kind, objects, leftFrom)) };
+  }
+
+  /** The set members `recordPaid` records — see it. */
+  private paidMembers(
+    kind: PaidKind,
+    objects: readonly ObjectId[],
+    leftFrom: Readonly<Record<ObjectId, number>> = {},
+  ): SetMember[] {
+    return objects.flatMap((id): SetMember[] => {
+      const now = this.state.objects[id];
+      if (now === undefined) {
+        // A token that ceased to exist as it left (rule 111.7).
+        const ceased = this.state.ceasedTokens?.[id];
+        return ceased === undefined ? [] : [{ object: id, stint: ceased.zoneChangeCount, was: ceased }];
+      }
+      const stint = now.zoneChangeCount ?? 0;
+      const left = leftFrom[id];
+      const was =
+        left !== undefined && now.lastKnown?.zoneChangeCount === left
+          ? now.lastKnown
+          : kind === "revealed" && now.zone === "hand"
+            ? this.takeLastKnown(id)
+            : undefined;
+      return [{ object: id, stint, ...(was !== undefined ? { was } : {}) }];
     });
-    object.lastKnownRefs = {
-      ...object.lastKnownRefs,
-      revealed: [...(object.lastKnownRefs?.revealed ?? []), ...entries],
-    };
   }
 
   /** The cards in `player`'s graveyard an "exile N cards from your
@@ -24428,14 +24457,10 @@ export class Game {
   }
 
   /** Remember `cards`, just exiled for `stackObject`'s cost, on it — what
-   * `create-token-copy`'s `"exiled-as-cost"` reads as it resolves. */
+   * `{ paid: "exiled" }` reads as it resolves ("the exiled card"). */
   private recordCostExile(stackObject: ObjectId, cards: readonly ObjectId[]): void {
-    const object = this.state.objects[stackObject];
-    if (object === undefined || object.zone !== "stack" || cards.length === 0) return;
-    object.lastKnownRefs = {
-      ...object.lastKnownRefs,
-      exiledCost: [...(object.lastKnownRefs?.exiledCost ?? []), ...cards],
-    };
+    if (this.state.objects[stackObject]?.zone !== "stack") return;
+    this.recordPaid(stackObject, "exiled", cards);
   }
 
   /**
@@ -29539,7 +29564,15 @@ export class Game {
             event.type === "permanent-entered-battlefield"
               ? {
                   ...(atTrigger ?? {}),
-                  enteredTogether: this.enterBatchMatching(ability.trigger, event, object),
+                  sets: addToSet(
+                    atTrigger?.sets,
+                    "batch",
+                    this.enterBatchMatching(ability.trigger, event, object).map(({ object: id, zoneChangeCount, count }) => ({
+                      object: id,
+                      stint: zoneChangeCount,
+                      count,
+                    })),
+                  ),
                 }
               : // "Put one of them onto the battlefield": which cards, as
                 // the objects they are in that graveyard.
@@ -29548,22 +29581,34 @@ export class Game {
                   event.type === "cards-put-into-graveyard"
                 ? {
                     ...(atTrigger ?? {}),
-                    arrivedTogether: this.graveyardArrivals(ability.trigger, event.arrivals, object).map((card) => ({
-                      object: card,
-                      zoneChangeCount: this.state.objects[card]?.zoneChangeCount ?? 0,
-                    })),
+                    sets: addToSet(
+                      atTrigger?.sets,
+                      "batch",
+                      this.graveyardArrivals(ability.trigger, event.arrivals, object).map((card) => ({
+                        object: card,
+                        stint: this.state.objects[card]?.zoneChangeCount ?? 0,
+                      })),
+                    ),
                   }
                 : // "Return one of them": the cards among what died. A token
                   // is no card to return (rule 111.1).
                   ability.trigger.on === "dies" && event.type === "permanents-died"
                   ? {
                       ...(atTrigger ?? {}),
-                      arrivedTogether: this.diedBatchMatching(ability.trigger, event, object)
-                        .filter((card) => this.state.objects[card]?.isToken !== true)
-                        .map((card) => ({
-                          object: card,
-                          zoneChangeCount: this.state.objects[card]?.zoneChangeCount ?? 0,
-                        })),
+                      sets: addToSet(
+                        atTrigger?.sets,
+                        "batch",
+                        this.diedBatchMatching(ability.trigger, event, object)
+                          .filter((card) => this.state.objects[card]?.isToken !== true)
+                          .map((card) => {
+                            const died = this.state.objects[card];
+                            return {
+                              object: card,
+                              stint: died?.zoneChangeCount ?? 0,
+                              ...(died?.lastKnown !== undefined ? { was: died.lastKnown } : {}),
+                            };
+                          }),
+                      ),
                     }
                 : // "Whenever players finish voting": that vote's votes.
                   ability.trigger.on === "event" && ability.trigger.event === "voting-finishes" && event.type === "votes-finished"
@@ -30159,13 +30204,17 @@ export class Game {
     // The player a generic trigger's row names: who proliferated, the new
     // monarch, the player who lost the game (trigger-events.ts).
     if (player === undefined) player = triggerEventPlayer(event);
+    // "The same kind of counters" (Captain Marvel, Apex Avenger): the kind
+    // whose placement fired it.
+    const counter = event.type === "counter-added" ? event.counter : undefined;
     if (
       sourceStint === undefined &&
       triggerStint === undefined &&
       triggerSpell === undefined &&
       recipient === undefined &&
       player === undefined &&
-      attackers === undefined
+      attackers === undefined &&
+      counter === undefined
     ) {
       return undefined;
     }
@@ -30178,6 +30227,7 @@ export class Game {
       ...(recipient !== undefined ? { recipient } : {}),
       ...(player !== undefined ? { player } : {}),
       ...(attackers !== undefined ? { attackers } : {}),
+      ...(counter !== undefined ? { counter } : {}),
     };
   }
 
@@ -30458,10 +30508,15 @@ export class Game {
     if (counted === undefined) return refs;
     return {
       ...(refs ?? {}),
-      attackedTogether: counted.map((attacker) => ({
-        object: attacker,
-        zoneChangeCount: this.state.objects[attacker]?.zoneChangeCount ?? 0,
-      })),
+      sets: addToSet(
+        refs?.sets,
+        "batch",
+        counted.map((attacker) => ({
+          object: attacker,
+          stint: this.state.objects[attacker]?.zoneChangeCount ?? 0,
+          count: this.state.objects[attacker]?.stackCount ?? 1,
+        })),
+      ),
     };
   }
 
@@ -30596,10 +30651,10 @@ export class Game {
   /** "One of them": those of a batched trigger's cards still in that graveyard
    * as the same objects (rule 400.7). */
   private arrivedStillThere(refs: LastKnownRefs): ObjectId[] {
-    return (refs.arrivedTogether ?? [])
-      .filter(({ object, zoneChangeCount }) => {
+    return (refs.sets?.batch ?? [])
+      .filter(({ object, stint }) => {
         const card = this.state.objects[object];
-        return card?.zone === "graveyard" && (card.zoneChangeCount ?? 0) === zoneChangeCount;
+        return card?.zone === "graveyard" && (card.zoneChangeCount ?? 0) === stint;
       })
       .map(({ object }) => object);
   }
@@ -32264,6 +32319,9 @@ export class Game {
           triggerSpell: spell.zoneChangeCount ?? 0,
         };
       }
+      // The X it knows: the spell's that fired it (a next-spell watch), or
+      // its creator's (`carryDelayedIdentity`).
+      if (trigger.x !== undefined) this.state.objects[id].xValue = trigger.x;
       this.carryDelayedIdentity(id, trigger.delayed);
       this.emit({
         type: "ability-triggered",
@@ -32626,17 +32684,17 @@ export class Game {
     source: ObjectId,
     controller: PlayerId,
     x: number | undefined,
-    /** The permanent the cost names, for a total that reads `"sacrificed"`
-     * (Captain America's "that Equipment's mana value"). */
-    sacrificed?: ObjectId,
+    /** The Equipment an "unattach" cost names, for a total that reads `{
+     * paid: "unattached" }` (Captain America's "that Equipment's mana
+     * value"). */
+    unattached?: ObjectId,
   ): Omit<D, "total"> & { readonly total: number } {
     if (divided.x === true) return { ...divided, total: x ?? 0 };
     if (typeof divided.total === "number") return { ...divided, total: divided.total };
-    const ctx = this.makeResolutionContext(source, controller, [], x ?? 0);
-    return {
-      ...divided,
-      total: Math.max(0, amountValue(divided.total, sacrificed === undefined ? ctx : { ...ctx, sacrificed })),
-    };
+    const refs: LastKnownRefs =
+      unattached === undefined ? {} : { sets: addToSet(undefined, { paid: "unattached" }, this.paidMembers("unattached", [unattached])) };
+    const ctx = this.makeResolutionContext(source, controller, [], x ?? 0, 0, undefined, 1, 0, [], refs);
+    return { ...divided, total: Math.max(0, amountValue(divided.total, ctx)) };
   }
 
   /** A spell's divided total at each X from 0 to `payableX` (index X), for
@@ -33034,6 +33092,7 @@ export class Game {
     } = {},
   ): ResolutionContext {
     const refs = lastKnownRefs;
+    const createRefs = refs;
     // Where "this way" starts: the resolution under way (every continuation
     // of it reads the same), or — outside one — this context's own start.
     const since = this.state.resolutionSince ?? this.state.eventSeq;
@@ -33046,39 +33105,41 @@ export class Game {
     };
     // Last-known information (rule 608.2h): a permanent this spell or
     // ability refers to that has left the battlefield since is read as it
-    // last existed there. The source, the triggering object, the sacrificed
-    // permanent and the one tapped for the cost say which stint they mean
-    // (`refs`); a target was a permanent if it was on the battlefield when
-    // targeted.
+    // last existed there. The source, the triggering object and the granter
+    // say which stint they mean (`refs`); a member of one of its sets
+    // (`refs.sets`) is read as it was once it's no longer in the stint the
+    // set found it in — its `was` (a sacrificed permanent as it last was on
+    // the battlefield; a card revealed from the hand as it was there, "use
+    // its power as it last existed in your hand", Titan's Presence's ruling),
+    // else what it last was in that stint; a target was a permanent if it
+    // was on the battlefield when targeted.
     const stintOf = (id: ObjectId): number | undefined =>
       id === source && refs.source !== undefined
         ? refs.source
         : id === triggerObject && refs.triggerObject !== undefined
           ? refs.triggerObject
-          : refs.sacrificed?.object === id
-            ? refs.sacrificed.zoneChangeCount
-            : refs.tapped?.object === id
-              ? refs.tapped.zoneChangeCount
-              : refs.granter?.object === id
-                ? refs.granter.zoneChangeCount
-                : refs.enteredTogether?.find((e) => e.object === id)?.zoneChangeCount;
+          : refs.granter?.object === id
+            ? refs.granter.zoneChangeCount
+            : undefined;
+    const memberGone = (id: ObjectId): LastKnownInfo | null | undefined => {
+      if (refs.sets === undefined) return undefined;
+      const member = setMembersAll(refs.sets).find((m) => m.object === id);
+      if (member === undefined) return undefined;
+      // As it was in the act (a sacrificed permanent's last battlefield
+      // state, a revealed card's in the hand), even where it is still.
+      if (member.was !== undefined) return member.was;
+      const now = this.state.objects[id];
+      if (now !== undefined && (now.zoneChangeCount ?? 0) === member.stint) return null;
+      return this.lastKnownOfStint(id, member.stint);
+    };
     const lastKnownOf = (target: TargetRef): LastKnownInfo | undefined => {
       if (target.kind !== "object") return undefined;
+      const gone = memberGone(target.object);
+      if (gone !== undefined && gone !== null) return gone;
       const stint = stintOf(target.object);
-      return stint !== undefined
-        ? this.lastKnownOfStint(target.object, stint)
-        : this.lastKnownOfTarget(target.object, expectedZoneOf(target));
-    };
-    // A card revealed from the hand for the cost that has left the hand
-    // since: what it was there as it was revealed — "use its power as it
-    // last existed in your hand" (Titan's Presence's ruling). Still there,
-    // it's read as it is.
-    const revealedGone = (target: TargetRef): NonNullable<LastKnownRefs["revealed"]>[number] | undefined => {
-      if (target.kind !== "object" || refs.revealed === undefined) return undefined;
-      const entry = refs.revealed.find((r) => r.object === target.object);
-      if (entry === undefined) return undefined;
-      const now = this.state.objects[target.object];
-      return now?.zone === "hand" && (now.zoneChangeCount ?? 0) === entry.zoneChangeCount ? undefined : entry;
+      if (stint !== undefined) return this.lastKnownOfStint(target.object, stint);
+      // A member still where the set found it is read as it is.
+      return gone === null ? undefined : this.lastKnownOfTarget(target.object, expectedZoneOf(target));
     };
     // "Tokens created with it" (`GameObject.createdWith`): this source, in the
     // stint the resolving ability refers to, though it may have left since
@@ -33314,6 +33375,91 @@ export class Game {
             })),
       );
     };
+    // The sets this resolution refers to (`object-sets.ts`), each member in
+    // the stint the set found it in: after the act for what it did this way
+    // (a permanent that left doing it keeps what it last was there).
+    const objectSet = (ref: ObjectSetRef, each?: PlayerId): readonly SetMember[] => {
+      const stored = storedSetMembers(refs.sets, ref);
+      if (stored !== undefined) return stored;
+      if (ref === "exiled-with-source") {
+        const toToken = this.exiledLinkedToToken(source);
+        const stint = refs.source ?? (this.state.objects[source]?.zone === "battlefield" ? (this.state.objects[source].zoneChangeCount ?? 0) : undefined);
+        const cards =
+          toToken ??
+          (stint === undefined
+            ? []
+            : this.state.zones.shared.exile.filter((id) => {
+                const card = this.state.objects[id];
+                const linked = (link: { readonly source: ObjectId; readonly zoneChangeCount: number } | undefined): boolean =>
+                  link !== undefined && link.source === source && link.zoneChangeCount === stint;
+                return linked(card?.exiledWith) || linked(card?.exiledUntil);
+              }));
+        return cards.map((id) => ({ object: id, stint: this.state.objects[id]?.zoneChangeCount ?? 0 }));
+      }
+      if (ref === "attached-to-source") {
+        const src = this.state.objects[source];
+        const stint = refs.source ?? src?.zoneChangeCount ?? 0;
+        if (src?.zone === "battlefield" && (src.zoneChangeCount ?? 0) === stint) {
+          return staticSetMembers(this.state, ref, source);
+        }
+        // Gone: what was attached to it as it last existed (608.2h), each as
+        // it was then if it has left too.
+        return (this.lastKnownOfStint(source, stint)?.attachments ?? []).map(({ object, stint: at }) => {
+          const now = this.state.objects[object];
+          const was = now?.zoneChangeCount === at ? undefined : (now?.lastKnown?.zoneChangeCount === at ? now.lastKnown : undefined);
+          return { object, stint: at, ...(was !== undefined ? { was } : {}) };
+        });
+      }
+      if (typeof ref !== "object") return [];
+      if ("targets" in ref) {
+        return ref.targets.flatMap((slot): SetMember[] => {
+          const target = targets[slot];
+          if (target?.kind !== "object" || opts.illegalTargets?.includes(slot) === true) return [];
+          const object = this.state.objects[target.object];
+          return object === undefined ? [] : [{ object: target.object, stint: object.zoneChangeCount ?? 0, count: object.stackCount ?? 1 }];
+        });
+      }
+      if ("thisWay" in ref) {
+        const players =
+          ref.who === undefined ? undefined : ref.who === "each" ? [each ?? controller] : scoped(ref.who);
+        const whose = players === undefined ? undefined : new Set(players);
+        return thisWayDone(ref.thisWay, ref.byOwner === true ? undefined : players, undefined).flatMap((entry): SetMember[] => {
+          if (ref.byOwner === true && whose !== undefined) {
+            const owner = this.state.objects[entry.object]?.owner;
+            if (owner === undefined || !whose.has(owner)) return [];
+          }
+          const object = this.state.objects[entry.object];
+          const was = entry.departed ? (object?.lastKnown ?? this.state.ceasedTokens?.[entry.object]) : undefined;
+          return [
+            {
+              object: entry.object,
+              stint: object?.zoneChangeCount ?? was?.zoneChangeCount ?? 0,
+              ...(entry.count !== 1 ? { count: entry.count } : {}),
+              ...(was !== undefined ? { was } : {}),
+              ...(entry.revealed === true ? { shown: true as const } : {}),
+            },
+          ];
+        });
+      }
+      return [];
+    };
+    // A set's members as an aggregate reads them: as each is while it's in
+    // its stint, else as it was (608.2h); one in a hidden zone that wasn't
+    // shown, or gone with nothing known of it, is left out.
+    const setMatches = (ref: ObjectSetRef, each?: PlayerId): WeightedMatch[] =>
+      objectSet(ref, each).flatMap((m): WeightedMatch[] => {
+        const now = this.state.objects[m.object];
+        const weight = memberCount(m);
+        if (now !== undefined && (now.zoneChangeCount ?? 0) === m.stint && m.was === undefined) {
+          if ((now.zone === "library" || now.zone === "hand") && m.shown !== true) return [];
+          return [{ id: m.object, weight }];
+        }
+        const was = m.was ?? this.lastKnownOfStint(m.object, m.stint);
+        if (was !== undefined) return [{ id: m.object, weight, lastKnown: was }];
+        if (now !== undefined && (now.zone === "library" || now.zone === "hand") && m.shown !== true) return [];
+        return now === undefined ? [] : [{ id: m.object, weight }];
+      });
+    const tappedForCost = onlyMember(refs.sets?.paid?.tapped ?? []);
     const conditionMet = (condition: StaticCondition): boolean => {
       // "If that land is a Mountain" — a question about the object that
       // fired this trigger, which only the resolution context knows, so it
@@ -33364,13 +33510,13 @@ export class Game {
         return matchesKnown(triggerObject, condition.filter);
       }
       if (condition.kind === "sacrificed") {
-        const sacrificed = refs.sacrificed;
+        const sacrificed = refs.sets?.paid?.sacrificed?.at(-1);
         return sacrificed !== undefined && matchesKnown(sacrificed.object, condition.filter);
       }
       // "If the discarded card was a creature card": the cost's one card,
       // where the discard put it.
       if (condition.kind === "discarded") {
-        const discarded = refs.discarded;
+        const discarded = refs.sets?.paid?.discarded;
         return discarded?.length === 1 && matchesKnown(discarded[0].object, condition.filter);
       }
       if (condition.kind === "resolved-this-turn") return resolutionCount === condition.n;
@@ -33547,10 +33693,6 @@ export class Game {
         : {}),
       ...(opts.abilityKey !== undefined ? { abilityKey: opts.abilityKey } : {}),
       ...(opts.announcedModes !== undefined ? { announcedModes: opts.announcedModes } : {}),
-      ...(refs.sacrificed !== undefined ? { sacrificed: refs.sacrificed.object } : {}),
-      ...(refs.discarded !== undefined ? { discarded: refs.discarded.map((d) => d.object) } : {}),
-      ...(refs.exiledCost !== undefined ? { exiledAsCost: refs.exiledCost } : {}),
-      ...(refs.revealed !== undefined ? { revealed: refs.revealed.map((r) => r.object) } : {}),
       // The granter is acted on only while it's the same permanent (400.7).
       ...(refs.granter !== undefined
         ? {
@@ -33563,22 +33705,25 @@ export class Game {
         : {}),
       // Read as it last existed once gone, acted on only while the same
       // permanent (400.7).
-      ...(refs.tapped !== undefined
+      ...(tappedForCost !== undefined
         ? {
-            tapped: refs.tapped.object,
-            ...(this.state.objects[refs.tapped.object]?.zone !== "battlefield" ||
-            (this.state.objects[refs.tapped.object]?.zoneChangeCount ?? 0) !== refs.tapped.zoneChangeCount
+            tapped: tappedForCost.object,
+            ...(this.state.objects[tappedForCost.object]?.zone !== "battlefield" ||
+            (this.state.objects[tappedForCost.object]?.zoneChangeCount ?? 0) !== tappedForCost.stint
               ? { tappedLost: true }
               : {}),
           }
         : {}),
-      ...(refs.enteredTogether !== undefined
-        ? { enteredTogether: refs.enteredTogether.map(({ object, count }) => ({ object, count })) }
-        : {}),
-      // "Those creatures": whichever batch this trigger fired on.
-      ...((refs.attackedTogether ?? refs.enteredTogether ?? refs.arrivedTogether ?? refs.dealtTogether) !== undefined
-        ? { triggerBatch: refs.attackedTogether ?? refs.enteredTogether ?? refs.arrivedTogether ?? refs.dealtTogether }
-        : {}),
+      objectSet: (ref, each) => objectSet(ref, each),
+      triggerCounterKind: () => refs.counter,
+      memberMatches: (m, filter) => {
+        const now = this.state.objects[m.object];
+        if (m.was === undefined && now !== undefined && (now.zoneChangeCount ?? 0) === m.stint) {
+          return matchesFilter(this.state, this.registry, m.object, filter, { you: controller });
+        }
+        const was = m.was ?? this.lastKnownOfStint(m.object, m.stint);
+        return was !== undefined && matchesFilter(this.state, this.registry, m.object, filter, { you: controller, snapshot: was });
+      },
       decisionPending: () => this.decisionOutstanding(),
       parkedCount: () => this.state.suspendedResolutions.length,
       resumeAfterDecisions: (rest, below) => {
@@ -33745,8 +33890,6 @@ export class Game {
         ) {
           return spell.lastStackManaValue;
         }
-        const gone = revealedGone(target);
-        if (gone !== undefined) return gone.manaValue;
         return this.manaValueOfTarget(target, expectedZoneOf(target), lastKnownOf(target));
       },
       manaSpentOf: (target) => {
@@ -34441,7 +34584,9 @@ export class Game {
           stackMultiplier,
           resolutionCount,
           ["battlefield"],
-          record === undefined ? refs : { ...refs, tapped: { object: record.object, zoneChangeCount: record.stint } },
+          record === undefined
+            ? refs
+            : { ...refs, sets: { ...refs.sets, paid: { ...refs.sets?.paid, tapped: [{ object: record.object, stint: record.stint }] } } },
           {
             ...(opts.sourceLost !== undefined ? { sourceLost: opts.sourceLost } : {}),
             ...(opts.abilityKey !== undefined ? { abilityKey: opts.abilityKey } : {}),
@@ -34551,7 +34696,16 @@ export class Game {
           targetZones,
           lki === undefined
             ? refs
-            : { ...refs, sacrificed: { object, zoneChangeCount: lki.zoneChangeCount } },
+            : {
+                ...refs,
+                sets: {
+                  ...refs.sets,
+                  paid: {
+                    ...refs.sets?.paid,
+                    sacrificed: [{ object, stint: this.state.objects[object]?.zoneChangeCount ?? lki.zoneChangeCount, was: lki }],
+                  },
+                },
+              },
           opts,
         );
       },
@@ -34944,9 +35098,14 @@ export class Game {
           value: { sentinel, resume },
         };
       },
-      reflexiveTrigger: (specs, effect, text, value, divided, about) => {
+      reflexiveTrigger: (specs, effect, text, value, divided, about, remembered) => {
         // Rule 603.12: it triggers now and waits, like any trigger, to be put
-        // on the stack the next time a player would receive priority.
+        // on the stack the next time a player would receive priority. It
+        // knows what its creator knew, and the sets it was told to remember.
+        const refs =
+          remembered === undefined
+            ? createRefs
+            : { ...createRefs, sets: { ...createRefs.sets, remembered: { ...createRefs.sets?.remembered, ...remembered } } };
         const object = this.state.objects[source];
         const cardName =
           object !== undefined
@@ -35335,7 +35494,7 @@ export class Game {
         target.kind === "object" && this.state.objects[target.object]?.zone === "battlefield"
           ? { kind: "object", object: this.splitOneFromStack(target.object) }
           : target,
-      delayTrigger: (at, effect, text, delayedController, own, turnOf) =>
+      delayTrigger: (at, effect, text, delayedController, own, turnOf, remembered) =>
         this.createDelayedTrigger(
           source,
           delayedController,
@@ -35350,6 +35509,8 @@ export class Game {
             ...(triggerObject !== undefined ? { triggerObject } : {}),
             refs,
             ...(turnOf !== undefined ? { turnOf } : {}),
+            x,
+            ...(remembered !== undefined ? { remembered } : {}),
           },
         ),
       entersWithCounters: (target, counter, given, condition) => {
@@ -35581,8 +35742,8 @@ export class Game {
       countMatching: (filter, except, you) => this.countBattlefieldMatching(you ?? controller, filter, except, source),
       // "Among them": the attackers of the declaration that fired this
       // trigger, as `AggregateZone` "attackers" reads them.
-      aggregate: (spec, except, you = controller) =>
-        this.aggregateBattlefield(you, spec, except, { attackers: refs.attackedTogether ?? [] }),
+      aggregate: (spec, except, you = controller, each) =>
+        this.aggregateBattlefield(you, spec, except, { members: (ref) => setMatches(ref, each), source }),
       returnFromGraveyard: (filter, destination, count, enterTapped, withCounters, opts) =>
         this.returnFromGraveyardByEffect(controller, filter, destination, count, enterTapped, withCounters, { ...opts, x }),
       discardCards: (target, amount, random, unlessOne, anyNumber, filter) =>
@@ -36517,8 +36678,6 @@ export class Game {
       // that isn't a creature as Phenax's granted ability resolves, or wasn't
       // as it left, mills nothing (its ruling).
       powerOf: (target) => {
-        const gone = revealedGone(target);
-        if (gone !== undefined) return gone.creature ? gone.power : 0;
         const lki = lastKnownOf(target);
         if (lki !== undefined) return lki.types.includes("creature") ? lki.power : 0;
         if (target.kind !== "object" || this.state.objects[target.object] === undefined) return 0;
@@ -36528,8 +36687,6 @@ export class Game {
           : chars.power;
       },
       toughnessOf: (target) => {
-        const gone = revealedGone(target);
-        if (gone !== undefined) return gone.creature ? gone.toughness : 0;
         const lki = lastKnownOf(target);
         if (lki !== undefined) return lki.types.includes("creature") ? lki.toughness : 0;
         if (target.kind !== "object" || this.state.objects[target.object] === undefined) return 0;
@@ -42704,8 +42861,7 @@ export class Game {
       ...(object.offspringGrantPaid === true ? { offspringGrantPaid: true } : {}),
       ...(object.giftTo !== undefined ? { giftTo: object.giftTo } : {}),
       ...(object.convokedBy !== undefined ? { convokedBy: [...object.convokedBy] } : {}),
-      ...(object.lastKnownRefs?.exiledCost !== undefined ? { exiledCost: [...object.lastKnownRefs.exiledCost] } : {}),
-      ...(object.lastKnownRefs?.tapped !== undefined ? { tappedCost: object.lastKnownRefs.tapped } : {}),
+      ...(object.lastKnownRefs?.sets?.paid !== undefined ? { paidCost: object.lastKnownRefs.sets.paid } : {}),
       modifiers: object.modifiers.filter((m) => m.copiable === true).map((m) => ({ ...m })),
       ...(object.withoutEpic === true ? { withoutEpic: true } : {}),
     };
@@ -42807,14 +42963,7 @@ export class Game {
       ...(spell.convokedBy !== undefined ? { convokedBy: [...spell.convokedBy] } : {}),
       // "The creature tapped to pay this spell's additional cost": the
       // original's (Swallow Whole's ruling).
-      ...(spell.exiledCost !== undefined || spell.tappedCost !== undefined
-        ? {
-            lastKnownRefs: {
-              ...(spell.exiledCost !== undefined ? { exiledCost: [...spell.exiledCost] } : {}),
-              ...(spell.tappedCost !== undefined ? { tapped: spell.tappedCost } : {}),
-            },
-          }
-        : {}),
+      ...(spell.paidCost !== undefined ? { lastKnownRefs: { sets: { paid: spell.paidCost } } } : {}),
       attacking: null,
       blocking: null,
       blockedBy: [],
@@ -48187,7 +48336,7 @@ export class Game {
       });
     }
     if (manaAbility !== undefined && ability !== undefined) {
-      this.resolveManaAbility(pending.source, pending.player, ability, manaAbility.x, manaAbility.manaColors, grantedAbility, undefined, undefined);
+      this.resolveManaAbility(pending.source, pending.player, ability, manaAbility.x, manaAbility.manaColors, grantedAbility, undefined);
     }
   }
 
@@ -49509,7 +49658,15 @@ export class Game {
     targets: ResolvedTargets,
     targetZones: readonly (ZoneType | null)[] = [],
     /** The creating ability's trigger object, and how it knew it. */
-    creator: { readonly triggerObject?: ObjectId; readonly refs?: LastKnownRefs; readonly turnOf?: PlayerId } = {},
+    creator: {
+      readonly triggerObject?: ObjectId;
+      readonly refs?: LastKnownRefs;
+      readonly turnOf?: PlayerId;
+      /** Its X, and the sets it was told to remember (theme 15's captured
+       * context — see `DelayedTrigger.x`). */
+      readonly x?: number;
+      readonly remembered?: { readonly [name: string]: readonly SetMember[] };
+    } = {},
   ): void {
     let when:
       | DelayedTriggerTiming
@@ -49634,6 +49791,11 @@ export class Game {
         : {}),
       createdAtSeq: this.state.eventSeq,
       ...(this.state.resolutionSince !== undefined ? { madeIn: this.state.resolutionSince } : {}),
+      // What else its creator knew (theme 15): its X, "that player", and the
+      // sets it was told to remember.
+      ...(creator.x !== undefined && creator.x !== 0 ? { x: creator.x } : {}),
+      ...(creator.refs?.player !== undefined ? { player: creator.refs.player } : {}),
+      ...(creator.remembered !== undefined ? { remembered: creator.remembered } : {}),
       effect,
       text,
     });
@@ -49783,6 +49945,14 @@ export class Game {
     if (trigger.targetStints !== undefined) object.targetStints = [...trigger.targetStints];
     if (trigger.sourceStint !== undefined) object.sourceZoneChangeCount = trigger.sourceStint;
     if (trigger.madeIn !== undefined) object.lastKnownRefs = { ...object.lastKnownRefs, madeIn: trigger.madeIn };
+    // Its creator's X, "that player" and remembered sets (theme 15).
+    if (trigger.x !== undefined && (object.xValue ?? 0) === 0) object.xValue = trigger.x;
+    if (trigger.player !== undefined && object.lastKnownRefs?.player === undefined) {
+      object.lastKnownRefs = { ...object.lastKnownRefs, player: trigger.player };
+    }
+    if (trigger.remembered !== undefined) {
+      object.lastKnownRefs = { ...object.lastKnownRefs, sets: { ...object.lastKnownRefs?.sets, remembered: trigger.remembered } };
+    }
   }
 
   /**
@@ -50005,11 +50175,16 @@ export class Game {
     if (firing.length === 0) return;
     this.state.delayedTriggers = this.state.delayedTriggers.filter((t) => !firing.includes(t));
     for (const trigger of firing) {
+      // The X of the spell that fired it, as a cast trigger's is
+      // (`triggerCastX`): Brass Infiniscope's "when you next cast a spell with
+      // {X} … gain half X life" is that spell's X.
+      const spellX = this.state.objects[event.object]?.xValue ?? 0;
       this.state.pendingTriggers.push({
         sourceObjectId: trigger.source,
         cardName: trigger.sourceName,
         abilityIndex: 0,
         controller: trigger.controller,
+        ...(spellX > 0 ? { x: spellX } : {}),
         triggerObject: event.object,
         // Which stint of the spell on the stack "it" means: a copy of it
         // made after it was countered copies it as it last was there.
@@ -53781,7 +53956,14 @@ export class Game {
           ...owed.trigger,
           triggerValue: owed.perEvent ? owed.players.size : owed.amount,
           // "Tap those creatures" (Tamiyo, Upriser Crowned): the sources.
-          lastKnownRefs: { ...(owed.trigger.lastKnownRefs ?? {}), dealtTogether: owed.sources },
+          lastKnownRefs: {
+            ...(owed.trigger.lastKnownRefs ?? {}),
+            sets: addToSet(
+              owed.trigger.lastKnownRefs?.sets,
+              "batch",
+              owed.sources.map(({ object, zoneChangeCount }) => ({ object, stint: zoneChangeCount })),
+            ),
+          },
         },
         owed.multiplier,
       );

@@ -17,7 +17,7 @@ export default defineCard({
       {
         kind: "gain-life",
         who: "each-player",
-        amount: { thisWay: "destroyed", who: "each", sumOf: "mana-value" },
+        amount: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "destroyed", who: "each" } },
       },
     ],
   },

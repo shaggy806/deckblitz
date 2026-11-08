@@ -19,7 +19,7 @@ export default defineCard({
       targets: ["spell"],
       effect: {
         kind: "conditional",
-        condition: { kind: "target", index: 0, filter: { manaValue: { op: "eq", n: { amount: { manaValueOf: "discarded" } } } } },
+        condition: { kind: "target", index: 0, filter: { manaValue: { op: "eq", n: { amount: { manaValueOf: { paid: "discarded" } } } } } },
         then: { kind: "counter", target: 0 },
       },
       resolve: null,

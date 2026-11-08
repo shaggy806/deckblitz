@@ -43,6 +43,7 @@ import { activePlayerOf } from "./state.js";
 import type { ResolvedTargets } from "./target.js";
 import { sideOf, slotStrengths } from "./target-polarity.js";
 import { permanentSource, protectionQualitiesMatch } from "./targeting.js";
+import { isCardSet, isObjectSetRef } from "./object-sets.js";
 
 /** What one card is worth, the unit everything else is scaled to. */
 const CARD = 2;
@@ -412,9 +413,7 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
         effect.who !== "you" &&
         effect.of !== "source" &&
         // A copy of a card enters under the effect's controller.
-        effect.of !== "exiled-with-source" &&
-        effect.of !== "exiled-as-cost" &&
-        effect.of !== "exiled-this-way" &&
+        !(isObjectSetRef(effect.of) && isCardSet(effect.of)) &&
         !(typeof effect.of === "object" && "eachExiled" in effect.of)
       ) {
         return 0;

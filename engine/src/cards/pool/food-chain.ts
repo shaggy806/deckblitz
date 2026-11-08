@@ -20,7 +20,7 @@ export default defineCard({
       effect: {
         kind: "add-mana",
         mana: "any-color",
-        amount: { sum: [1, { manaValueOf: "sacrificed" }] },
+        amount: { sum: [1, { manaValueOf: { paid: "sacrificed" } }] },
         spendOnly: { spell: { type: "creature" }, text: "Spend this mana only to cast creature spells." },
       },
       resolve: null,

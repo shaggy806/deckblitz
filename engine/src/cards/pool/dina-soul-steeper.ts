@@ -38,7 +38,7 @@ export default defineCard({
       effect: {
         kind: "modify-pt",
         target: "source",
-        power: { powerOf: "sacrificed" },
+        power: { powerOf: { paid: "sacrificed" } },
         toughness: 0,
         duration: "end-of-turn",
       },

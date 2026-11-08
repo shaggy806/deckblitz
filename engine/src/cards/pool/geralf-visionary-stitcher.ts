@@ -27,7 +27,7 @@ export default defineCard({
         kind: "create-token",
         token: "Zombie Token (Geralf, Visionary Stitcher)",
         count: 1,
-        basePt: { power: { toughnessOf: "sacrificed" }, toughness: { toughnessOf: "sacrificed" } },
+        basePt: { power: { toughnessOf: { paid: "sacrificed" } }, toughness: { toughnessOf: { paid: "sacrificed" } } },
       },
       resolve: null,
       text: "{U}, {T}, Sacrifice another nontoken creature: Create an X/X blue Zombie creature token, where X is the sacrificed creature's toughness.",

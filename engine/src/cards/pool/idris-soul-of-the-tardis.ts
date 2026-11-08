@@ -44,7 +44,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       grantsActivatedOf: { zone: "exiled-with", filter: {}, withTriggered: true },
-      grantPtPerCount: { exiledWithSourceManaValue: true, pt: [1, 1] },
+      grantPtPerCount: { aggregate: { aggregate: "sum", of: "mana-value", filter: {}, in: "exiled-with-source" }, pt: [1, 1] },
       text: GRANT_TEXT,
     },
   ],

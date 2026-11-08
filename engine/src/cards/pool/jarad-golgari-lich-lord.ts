@@ -32,7 +32,7 @@ export default defineCard({
       cost: { mana: "{1}{B}{G}", tap: false, sacrifice: "creature-you-control" },
       otherOnly: true,
       targets: [],
-      effect: { kind: "lose-life", amount: { powerOf: "sacrificed" }, who: "each-opponent" },
+      effect: { kind: "lose-life", amount: { powerOf: { paid: "sacrificed" } }, who: "each-opponent" },
       resolve: null,
       text: DRAIN_TEXT,
     },

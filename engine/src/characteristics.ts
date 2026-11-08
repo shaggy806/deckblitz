@@ -34,6 +34,7 @@ import type {
   CombatRestriction,
   ConditionPlayer,
   CountSpec,
+  StaticPlayerAggregate,
   CountersPutSpec,
   Keyword,
   LifeFromStarting,
@@ -1054,6 +1055,7 @@ function evalStaticCondition(
       // to count it, the source (as every count of a condition does).
       const matches = aggregateMatches(state, registry, value, you, {
         except,
+        source: source.id,
         battlefieldMatch: (id, filter) =>
           !notYetHere(id) && (condition.countsSelf === true || !skipsSelf(id)) && matchesFilter(state, registry, id, filter, { you }),
       });
@@ -4083,17 +4085,6 @@ function basePtCount(
   const of = from.countOf;
   if (of === "chosen-number") return chosenNumberOf(object);
   if (typeof of === "object" && "countersOnThis" in of) return object.counters[of.countersOnThis] ?? 0;
-  if (typeof of === "object" && "exiledWithThis" in of) {
-    const stint = object.zoneChangeCount ?? 0;
-    return state.zones.shared.exile.reduce((total, id) => {
-      const card = state.objects[id];
-      const link = card?.exiledWith;
-      if (link?.source !== object.id || link.zoneChangeCount !== stint || card.exiledFaceDown !== undefined) return total;
-      if (of.exiledWithThis === "mana-value") return total + manaValueOfObject(registry, card);
-      const read = computeCharacteristics(state, registry, id);
-      return total + (of.exiledWithThis === "power" ? read.power : read.toughness);
-    }, 0);
-  }
   if (typeof of === "object" && "countersOnMaker" in of) {
     const link = object.createdWith;
     const maker = link === undefined ? undefined : state.objects[link.source];
@@ -4101,7 +4092,7 @@ function basePtCount(
     return maker.counters[of.countersOnMaker] ?? 0;
   }
   const side = countSide(state, object, from.forChosenPlayer);
-  return side === undefined ? 0 : countValue(of, state, registry, side);
+  return side === undefined ? 0 : countValue(of, state, registry, side, object.id);
 }
 
 /** The creature types `object` has, the every-type marker among them for a
@@ -4144,12 +4135,42 @@ function cardsInHandFor(
   return state.turnOrder.reduce((n, p) => (p === side ? n : n + handOf(p)), 0);
 }
 
+/** A CDA's player aggregate (`StaticPlayerAggregate`): the greatest or least
+ * of a life total or a battlefield count over the players in `who` still in
+ * the game, from `controller`'s side, then halved or taken from a number. */
+function staticPlayerAggregate(
+  state: GameState,
+  registry: CardRegistry,
+  controller: PlayerId,
+  spec: StaticPlayerAggregate,
+): number {
+  const living = state.turnOrder.filter((p) => state.players[p]?.hasLost !== true);
+  const players =
+    spec.who === "each-opponent" ? living.filter((p) => p !== controller) : spec.who === "you" ? [controller] : living;
+  if (players.length === 0) return spec.from ?? 0;
+  const of = spec.of;
+  const values = players.map((p) =>
+    "lifeTotal" in of
+      ? (state.players[p]?.life ?? 0)
+      : permanentCount(
+          state,
+          state.zones.shared.battlefield.filter((id) => matchesFilter(state, registry, id, of.countOf, { you: p })),
+        ),
+  );
+  const value = spec.amongPlayers === "greatest" ? Math.max(...values) : Math.min(...values);
+  const halved = spec.half === undefined ? value : spec.half === "up" ? Math.ceil(value / 2) : Math.floor(value / 2);
+  return spec.from === undefined ? halved : spec.from - halved;
+}
+
 /** The current value of a CDA's dynamic count (rule 604.3). */
 export function countValue(
   spec: CountSpec,
   state: GameState,
   registry: CardRegistry,
   controller: PlayerId,
+  /** The permanent whose CDA or static this is, for its own sets
+   * (`"exiled-with-source"`, `"attached-to-source"`). */
+  source?: ObjectId,
 ): number {
   // A player who has left the game took their graveyard with them (800.4a).
   const allGraveyards = (): ObjectId[] =>
@@ -4169,7 +4190,7 @@ export function countValue(
       return state.players[controller]?.counters[spec.playerCounters] ?? 0;
     }
     // Which permanent's is only known to a `setBasePtFromCount`.
-    if ("countersOnThis" in spec || "countersOnMaker" in spec || "exiledWithThis" in spec) return 0;
+    if ("countersOnThis" in spec || "countersOnMaker" in spec) return 0;
     if ("greatestManaValueOf" in spec) {
       let best = 0;
       for (const id of state.zones.shared.battlefield) {
@@ -4181,8 +4202,10 @@ export function countValue(
     if ("cardTypesInGraveyard" in spec) {
       return cardTypesInGraveyards(state, registry, controller, spec.cardTypesInGraveyard);
     }
+    if ("amongPlayers" in spec) return staticPlayerAggregate(state, registry, controller, spec);
+    if ("sum" in spec) return spec.sum.reduce((n, part) => n + countValue(part, state, registry, controller, source), 0);
     if ("aggregate" in spec) {
-      return Math.max(0, aggregateOver(state, registry, aggregateMatches(state, registry, spec, controller), spec));
+      return Math.max(0, aggregateOver(state, registry, aggregateMatches(state, registry, spec, controller, { source }), spec));
     }
     if ("devotionTo" in spec) return devotionOf(state, registry, controller, spec.devotionTo);
     if ("basicLandTypes" in spec) return basicLandTypesAmong(state, registry, controller);
@@ -5302,6 +5325,7 @@ function collectStaticEffects(
           const skip = spec.excludeSelf === true && (source.stackCount ?? 1) === 1 ? source.id : undefined;
           const matches = aggregateMatches(state, registry, spec, side, {
             except,
+            source: source.id,
             battlefieldMatch: (id, f) =>
               id !== skip && matchesFilter(state, registry, id, f, { you: side, source: source.id }),
           });
@@ -5352,15 +5376,6 @@ function collectStaticEffects(
             ? (target.counters[per.countersOnAffected] ?? 0)
             : per.countersOnSource !== undefined
             ? (source.counters[per.countersOnSource] ?? 0)
-            : per.exiledWithSourceManaValue === true
-            ? state.zones.shared.exile.reduce((total, id) => {
-                const card = state.objects[id];
-                const stint = source.zoneChangeCount ?? 0;
-                const withIt = [card?.exiledWith, card?.exiledUntil].some(
-                  (link) => link?.source === source.id && link.zoneChangeCount === stint,
-                );
-                return withIt && card.exiledFaceDown === undefined ? total + manaValueOfObject(registry, card) : total;
-              }, 0)
             : per.exiled !== undefined
             ? exiledMatching(per.exiled)
             : per.inGraveyard !== undefined

@@ -29,7 +29,7 @@ export default defineCard({
         kind: "each-player-may",
         who: "you",
         options: [{ sacrifice: { type: "creature", token: false }, text: "Sacrifice a nontoken creature" }],
-        ifDid: { kind: "create-token", token: "Wolf Token", count: { toughnessOf: "sacrificed" } },
+        ifDid: { kind: "create-token", token: "Wolf Token", count: { toughnessOf: { paid: "sacrificed" } } },
       },
       resolve: null,
       text: TEXT,

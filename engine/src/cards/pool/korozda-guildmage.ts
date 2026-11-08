@@ -6,7 +6,7 @@ import { defineCard } from "../define.js";
 //   [2012-10-01] Use the sacrificed creature's toughness when it was last on the battlefield to
 //     determine the value of X.
 //
-// `toughnessOf: "sacrificed"` reads the sacrificed creature as it last existed (Ghoulcaller
+// `toughnessOf: { paid: "sacrificed" }` reads the sacrificed creature as it last existed (Ghoulcaller
 // Gisa's `powerOf` shape).
 
 export default defineCard({
@@ -39,7 +39,7 @@ export default defineCard({
         sacrifice: { filter: { token: false, type: "creature" } },
       },
       targets: [],
-      effect: { kind: "create-token", token: "Saproling Token", count: { toughnessOf: "sacrificed" } },
+      effect: { kind: "create-token", token: "Saproling Token", count: { toughnessOf: { paid: "sacrificed" } } },
       resolve: null,
       text: "{2}{B}{G}, Sacrifice a nontoken creature: Create X 1/1 green Saproling creature tokens, where X is the sacrificed creature's toughness.",
     },

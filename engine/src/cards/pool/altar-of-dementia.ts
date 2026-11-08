@@ -10,7 +10,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: false, sacrifice: "creature-you-control" },
       targets: ["player"],
-      effect: { kind: "mill", target: 0, amount: { powerOf: "sacrificed" } },
+      effect: { kind: "mill", target: 0, amount: { powerOf: { paid: "sacrificed" } } },
       resolve: null,
       text: "Sacrifice a creature: Target player mills cards equal to the sacrificed creature's power.",
     },

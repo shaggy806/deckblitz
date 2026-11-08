@@ -27,7 +27,7 @@ export default defineCard({
           {
             kind: "create-token",
             token: "Minion Token",
-            count: { thisWay: "milled", sumOf: "mana-value" },
+            count: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "milled" } },
             who: "active-player",
           },
         ],

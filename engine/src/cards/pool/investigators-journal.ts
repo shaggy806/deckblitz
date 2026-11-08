@@ -18,7 +18,7 @@ export default defineCard({
         event: "enters-battlefield",
         counters: {
           kind: "suspect",
-          amount: { greatestAmongPlayers: { countOf: { type: "creature", controlledBy: "you" }, forEachPlayer: true } },
+          amount: { amongPlayers: "greatest", of: { countOf: { type: "creature", controlledBy: "you" }, forEachPlayer: true } },
         },
       },
       text: ENTER_TEXT,

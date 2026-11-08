@@ -37,7 +37,7 @@ export default defineCard({
           kind: "sequence",
           effects: [
             { kind: "sacrifice", who: "you", filter: { type: "creature" }, count: 1 },
-            { kind: "damage", amount: { thisWay: "sacrificed", sumOf: "power" }, target: 0 },
+            { kind: "damage", amount: { aggregate: "sum", of: "power", filter: {}, in: { thisWay: "sacrificed" } }, target: 0 },
           ],
         },
       },

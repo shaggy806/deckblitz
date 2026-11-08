@@ -34,7 +34,7 @@ export default defineCard({
       },
       {
         kind: "create-token-copy",
-        of: "exiled-this-way",
+        of: { thisWay: "exiled" },
         count: 1,
         sacrificeAtEndStep: true,
         atYourNextEndStep: true,

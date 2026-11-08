@@ -21,7 +21,7 @@ export default defineCard({
       otherOnly: true,
       targets: [],
       // The sacrificed creature's toughness as it last existed (ruling).
-      effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: { toughnessOf: "sacrificed" } },
+      effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: { toughnessOf: { paid: "sacrificed" } } },
       resolve: null,
       text: SAC_TEXT,
     },

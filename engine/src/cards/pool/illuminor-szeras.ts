@@ -14,7 +14,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: true, sacrifice: "creature-you-control" },
       targets: [],
-      effect: { kind: "add-mana", mana: "B", amount: { manaValueOf: "sacrificed" } },
+      effect: { kind: "add-mana", mana: "B", amount: { manaValueOf: { paid: "sacrificed" } } },
       resolve: null,
       text: "Secrets of the Soul — {T}, Sacrifice another creature: Add an amount of {B} equal to the sacrificed creature's mana value.",
       otherOnly: true,

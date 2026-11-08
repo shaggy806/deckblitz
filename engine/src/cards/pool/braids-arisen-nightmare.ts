@@ -38,7 +38,7 @@ export default defineCard({
           who: "each-opponent",
           options: [
             {
-              sacrifice: { sharesCardTypeWith: "sacrificed" },
+              sacrifice: { sharesCardTypeWith: { paid: "sacrificed" } },
               text: "Sacrifice a permanent that shares a card type with it",
             },
           ],

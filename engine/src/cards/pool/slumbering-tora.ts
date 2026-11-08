@@ -17,8 +17,8 @@ export default defineCard({
       effect: {
         kind: "animate",
         target: "source",
-        power: { manaValueOf: "discarded" },
-        toughness: { manaValueOf: "discarded" },
+        power: { manaValueOf: { paid: "discarded" } },
+        toughness: { manaValueOf: { paid: "discarded" } },
         addTypes: ["creature"],
         addSubtypes: ["Cat"],
         duration: "end-of-turn",

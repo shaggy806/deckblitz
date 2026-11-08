@@ -15,7 +15,7 @@ export default defineCard({
       cost: { mana: null, tap: false, sacrifice: "creature-you-control" },
       condition: { kind: "all", of: [{ kind: "your-turn" }, { kind: "turn-structure", steps: ["upkeep"] }] },
       targets: [],
-      effect: { kind: "gain-life", amount: { toughnessOf: "sacrificed" } },
+      effect: { kind: "gain-life", amount: { toughnessOf: { paid: "sacrificed" } } },
       resolve: null,
       text: "Sacrifice a creature: You gain life equal to the sacrificed creature's toughness. Activate only during your upkeep.",
     },

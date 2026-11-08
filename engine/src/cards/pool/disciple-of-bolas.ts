@@ -8,7 +8,7 @@ const TEXT =
 // (the ruling) — the `thisWay` record of the edict, which the ETB's own
 // controller answers. With no other creature, nothing is sacrificed and X is
 // 0 (the other ruling).
-const X = { thisWay: "sacrificed", sumOf: "power" } as const;
+const X = { aggregate: "sum", of: "power", filter: {}, in: { thisWay: "sacrificed" } } as const;
 
 export default defineCard({
   name: "Disciple of Bolas",

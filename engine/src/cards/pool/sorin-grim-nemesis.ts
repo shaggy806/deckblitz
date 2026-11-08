@@ -1,7 +1,7 @@
 import { defineCard } from "../define.js";
 
 // EDHREC rank 9728. The −9's count is read as it resolves, over every player
-// still in the game (`greatestAmongPlayers`).
+// still in the game (`amongPlayers`).
 
 export default defineCard({
   name: "Sorin, Grim Nemesis",
@@ -52,7 +52,7 @@ export default defineCard({
       effect: {
         kind: "create-token",
         token: "Vampire Knight Token",
-        count: { greatestAmongPlayers: { lifeTotal: "each" } },
+        count: { amongPlayers: "greatest", of: { lifeTotal: "each" } },
       },
       resolve: null,
       text: "−9: Create a number of 1/1 black Vampire Knight creature tokens with lifelink equal to the highest life total among all players.",

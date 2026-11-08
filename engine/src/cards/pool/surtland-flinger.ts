@@ -31,8 +31,8 @@ export default defineCard({
           targets: ["any-target"],
           value: {
             ifCondition: { kind: "sacrificed", filter: { subtype: "Giant" } },
-            then: { product: [{ powerOf: "sacrificed" }, 2] },
-            else: { powerOf: "sacrificed" },
+            then: { product: [{ powerOf: { paid: "sacrificed" } }, 2] },
+            else: { powerOf: { paid: "sacrificed" } },
           },
           effect: { kind: "damage", target: 0, amount: { triggerValue: true } },
           text: "When you do, this creature deals damage equal to the sacrificed creature's power to any target. If the sacrificed creature was a Giant, this creature deals twice that much damage instead.",

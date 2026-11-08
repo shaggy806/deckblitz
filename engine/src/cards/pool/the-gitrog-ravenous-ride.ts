@@ -8,7 +8,7 @@ import { saddle } from "../helpers.js";
 // playing them (the rulings).
 const DAMAGE_TEXT =
   "Whenever The Gitrog deals combat damage to a player, you may sacrifice a creature that saddled it this turn. If you do, draw X cards, then put up to X land cards from your hand onto the battlefield tapped, where X is the sacrificed creature's power.";
-const X = { powerOf: "sacrificed" } as const;
+const X = { powerOf: { paid: "sacrificed" } } as const;
 
 export default defineCard({
   name: "The Gitrog, Ravenous Ride",

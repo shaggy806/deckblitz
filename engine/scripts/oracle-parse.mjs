@@ -947,13 +947,13 @@ export function handRevealOf(phrase) {
 /**
  * A sentence reading "the revealed card's mana value" or "… power", where
  * the cost revealed one card from the hand (`ctx.costRevealed`): the
- * `"revealed"` amount ref — Induce Despair's -X/-X, Charge of the
+ * `{ paid: "revealed" }` amount ref — Induce Despair's -X/-X, Charge of the
  * Forever-Beast's damage, Calamity of the Titans' exile, Titan's Presence's
  * conditional exile, Living Destiny's life. `undefined` for anything else.
  */
 function revealedCardEffectOf(s, ctx) {
-  const mv = { manaValueOf: "revealed" };
-  const power = { powerOf: "revealed" };
+  const mv = { manaValueOf: { paid: "revealed" } };
+  const power = { powerOf: { paid: "revealed" } };
   const slot = (phrase) => {
     const spec = targetOf(phrase);
     return spec === undefined ? undefined : ctx.target(spec);
@@ -2107,7 +2107,7 @@ export function parseTrigger(clause) {
     return [{ on: "attacks-player", who: "you", defender: "any", atLeast: NUMBERS[m[1]] }];
   }
   // "Whenever one or more creatures attack you / one of your opponents": once
-  // per player attacked; `triggerBatch` is those attacking that player.
+  // per player attacked; `inSet: "trigger-batch"` is those attacking that player.
   if (c === "Whenever one or more creatures attack you") return [{ on: "attacks-player", who: "any", defender: "you" }];
   if (c === "Whenever one or more creatures attack one of your opponents") {
     return [{ on: "attacks-player", who: "any", defender: "opponent" }];
@@ -2930,7 +2930,7 @@ export function parseSentence(sentence, ctx) {
     return {
       kind: "lose-life",
       who: "each-player",
-      amount: { thisWay: "cast", who: "each", byOwner: true, sumOf: "mana-value" },
+      amount: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "cast", who: "each", byOwner: true } },
     };
   }
   // "For each token you control [of the chosen type] [that entered this turn],
@@ -2967,7 +2967,7 @@ export function parseSentence(sentence, ctx) {
   ) {
     return {
       kind: "conditional",
-      condition: { kind: "amounts", left: { thisWay: "exiled", sumOf: "mana-value" }, op: M[2].toLowerCase() === "less" ? "lte" : "gte", right: Number(M[1]) },
+      condition: { kind: "amounts", left: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "exiled" } }, op: M[2].toLowerCase() === "less" ? "lte" : "gte", right: Number(M[1]) },
       then: { kind: "cast-now", from: "exiled-this-way", repeat: true, free: true },
     };
   }
@@ -3270,7 +3270,7 @@ export function parseSentence(sentence, ctx) {
     return {
       kind: "damage",
       target: ctx.target("any-target"),
-      amount: { manaSymbolsOf: "sacrificed", color: COLOR_WORD[m[1]] },
+      amount: { manaSymbolsOf: { paid: "sacrificed" }, color: COLOR_WORD[m[1]] },
     };
   }
   // "Draw a card for each different mana value among nonland permanents you
@@ -3455,26 +3455,26 @@ export function parseSentence(sentence, ctx) {
     if (d !== undefined) return d;
   }
   // "Where X is the discarded card's mana value" where a "discard a card"
-  // cost discarded it: the `"discarded"` amount ref (Volrath the Fallen) —
+  // cost discarded it: the `{ paid: "discarded" }` amount ref (Volrath the Fallen) —
   // ahead of the guard too.
   if (ctx?.costDiscarded === true && /^~ gets \+X\/\+X until end of turn, where X is the discarded card's mana value\.$/.test(s)) {
-    const ofDiscarded = { manaValueOf: "discarded" };
+    const ofDiscarded = { manaValueOf: { paid: "discarded" } };
     return { kind: "modify-pt", target: "source", power: ofDiscarded, toughness: ofDiscarded, duration: "end-of-turn" };
   }
   // "The revealed card's mana value / power" where a "reveal a … card from
-  // your hand" cost revealed it: the `"revealed"` amount ref — ahead of the
+  // your hand" cost revealed it: the `{ paid: "revealed" }` amount ref — ahead of the
   // guard too.
   if (ctx?.costRevealed === true) {
     const r = revealedCardEffectOf(s, ctx);
     if (r !== undefined) return r;
   }
   // "Damage equal to the exiled card's power" where the cost exiled it from a
-  // graveyard (Corpse Explosion): the `"exiled-as-cost"` amount ref.
+  // graveyard (Corpse Explosion): the `{ paid: "exiled" }` amount ref.
   if (ctx?.costExiled === true && /^~ deals damage equal to the exiled card's power to each creature and each planeswalker\.$/.test(s)) {
     return {
       kind: "damage-all",
       filter: { typesAnyOf: ["creature", "planeswalker"] },
-      amount: { powerOf: "exiled-as-cost" },
+      amount: { powerOf: { paid: "exiled" } },
     };
   }
   // "Rather than pay the mana cost of the next spell you cast this turn, you
@@ -3589,7 +3589,7 @@ export function parseSentence(sentence, ctx) {
   if (ctx?.costDiscarded === true) {
     const MV = "(?:the discarded card's mana value|the mana value of the discarded card)";
     if ((m = re(`~ deals damage to (${TARGET}) equal to ${MV}`).exec(s))) {
-      return { kind: "damage", amount: { manaValueOf: "discarded" }, target: slot(m[1]) };
+      return { kind: "damage", amount: { manaValueOf: { paid: "discarded" } }, target: slot(m[1]) };
     }
   }
 
@@ -4177,7 +4177,7 @@ export function parseSentence(sentence, ctx) {
     if (new RegExp(`^${N}$`, "i").test(what) && !/^(?:a|an|x)$/i.test(what)) total = amount(what);
     else if (/^(?:your|their) starting life total$/i.test(what)) total = { startingLifeTotal: true };
     else if (half !== null) total = { half: { startingLifeTotal: true }, round: half[1].toLowerCase() };
-    else if (each && /^the lowest life total among all players$/i.test(what)) total = { lowestLifeTotal: true };
+    else if (each && /^the lowest life total among all players$/i.test(what)) total = { amongPlayers: "least", of: { lifeTotal: "each" } };
     else if (filter !== null && Object.keys(filter).length > 0) total = { countOf: { ...filter, controlledBy: "you" }, forEachPlayer: true };
     if (total !== undefined) {
       if (whose === "your") return { kind: "set-life-total", who: "you", amount: total };
@@ -4360,7 +4360,7 @@ export function parseSentence(sentence, ctx) {
     if (except === null) return null;
     return {
       kind: "create-token-copy",
-      of: /enchanted/i.test(m[1]) ? "enchanted" : ctx.costExiled === true ? "exiled-as-cost" : "exiled-with-source",
+      of: /enchanted/i.test(m[1]) ? "enchanted" : ctx.costExiled === true ? { paid: "exiled" } : "exiled-with-source",
       ...(/^a card/i.test(m[1]) ? { chooseOne: true } : {}),
       count: 1,
       ...(/enchanted/i.test(m[1]) ? { who: "you" } : {}),
@@ -4930,7 +4930,7 @@ export function parseSentence(sentence, ctx) {
   // "Destroy all creatures that share a creature type with the sacrificed
   // creature" (Endemic Plague).
   if ((m = re(`destroy all creatures that share a creature type with the sacrificed creature`).exec(s))) {
-    return { kind: "destroy-all", filter: { type: "creature", sharesCreatureTypeWith: "sacrificed" } };
+    return { kind: "destroy-all", filter: { type: "creature", sharesCreatureTypeWith: { paid: "sacrificed" } } };
   }
   // "Destroy up to X target artifacts", "tap X target creatures" (rule
   // 601.2c): a group as big as X, each member acted on — destroyed or exiled
@@ -5618,21 +5618,21 @@ export function parseSentence(sentence, ctx) {
     return { kind: "damage", amount: amount(m[1]), who: "attached-controller" };
   }
   // "Those creatures", "each of them", of an attack read as one batch: a
-  // filter's `triggerBatch`.
+  // filter's `inSet: "trigger-batch"`.
   if (ctx.attackBatch === true) {
     const THOSE = "(?:those creatures|them)";
     if ((m = re(`those creatures get ([+-]\\d+)/([+-]\\d+) until end of turn`).exec(s))) {
       // `+ 0`: "-0" is plain 0.
-      return { kind: "modify-pt-all", filter: { triggerBatch: true }, power: Number(m[1]) + 0, toughness: Number(m[2]) + 0, duration: "end-of-turn" };
+      return { kind: "modify-pt-all", filter: { inSet: "trigger-batch" }, power: Number(m[1]) + 0, toughness: Number(m[2]) + 0, duration: "end-of-turn" };
     }
     if ((m = re(`(?:those creatures|they) gain ${KW} until end of turn`).exec(s))) {
-      return { kind: "grant-keyword-all", filter: { triggerBatch: true }, keyword: KEYWORDS[m[1].toLowerCase()], duration: "end-of-turn" };
+      return { kind: "grant-keyword-all", filter: { inSet: "trigger-batch" }, keyword: KEYWORDS[m[1].toLowerCase()], duration: "end-of-turn" };
     }
     if ((m = re(`put ${N} ([+-]\\d+/[+-]\\d+|[a-z]+) counters? on each of ${THOSE}`).exec(s))) {
-      return { kind: "add-counter-all", filter: { triggerBatch: true }, counter: m[2].toLowerCase(), amount: amount(m[1]) };
+      return { kind: "add-counter-all", filter: { inSet: "trigger-batch" }, counter: m[2].toLowerCase(), amount: amount(m[1]) };
     }
     if (re(`~ deals damage to each of those creatures equal to the number of attacking creatures`).test(s)) {
-      return { kind: "damage-all", filter: { triggerBatch: true }, amount: { countOf: { type: "creature", attacking: true } } };
+      return { kind: "damage-all", filter: { inSet: "trigger-batch" }, amount: { countOf: { type: "creature", attacking: true } } };
     }
   }
   // "Creatures defending player controls get -1/-1 until end of turn"
@@ -8265,7 +8265,7 @@ const ONE_OF_EACH_EFFECTS = {
 };
 
 /** Whole effects read off one printed sentence: the greatest of an amount
- * among players (`greatestAmongPlayers`), "the player with the most",
+ * among players (`amongPlayers`), "the player with the most",
  * Isperia's named card among a revealed hand, a commander's mana value on the
  * battlefield or in the command zone, and Shared Animosity's "other attacking
  * creature that shares a creature type with it". */
@@ -8315,7 +8315,7 @@ const AMONG_PLAYERS_EFFECTS = {
   "Each player with fewer cards in hand than the player with the most cards in hand draws cards equal to the difference.": {
     kind: "draw",
     who: "each-player",
-    amount: { difference: [{ greatestAmongPlayers: { cardsInHand: "each" } }, { cardsInHand: "each" }] },
+    amount: { difference: [{ amongPlayers: "greatest", of: { cardsInHand: "each" } }, { cardsInHand: "each" }] },
   },
   "Each player who controls fewer lands than the player who controls the most lands searches their library for a number of basic land cards less than or equal to the difference, puts those cards onto the battlefield tapped, then shuffles.": {
     kind: "for-each-player",
@@ -8334,7 +8334,7 @@ const AMONG_PLAYERS_EFFECTS = {
       min: 0,
       max: {
         difference: [
-          { greatestAmongPlayers: { countOf: LANDS_THEY_CONTROL, forEachPlayer: true } },
+          { amongPlayers: "greatest", of: { countOf: LANDS_THEY_CONTROL, forEachPlayer: true } },
           { countOf: LANDS_THEY_CONTROL, forPlayer: "that-player" },
         ],
       },
@@ -8948,7 +8948,7 @@ export function parseEffect(text, outer) {
           { kind: "look-and-choose", zone: "hand", min: 0, max: { cardsInHand: "you" }, destination: "reveal", leftover: "stay" },
           {
             kind: "gain-life",
-            amount: { product: [2, { thisWay: "revealed", who: "you", sumOf: { manaSymbols: COLOR_WORD[revealedSymbols[1]] } }] },
+            amount: { product: [2, { aggregate: "sum", of: { manaSymbols: COLOR_WORD[revealedSymbols[1]] }, filter: {}, in: { thisWay: "revealed", who: "you" } }] },
           },
         ],
       },
@@ -12654,7 +12654,7 @@ function castNowTermsAt(sentences, i, ctx) {
         then: {
           kind: "reflexive-trigger",
           targets: [],
-          value: { thisWay: "cast", sumOf: "mana-value" },
+          value: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "cast" } },
           effect: { kind: "modify-pt", target: "source", power: { triggerValue: true }, toughness: 0, duration: "end-of-turn" },
           text: "When you cast that spell, this creature gets +X/+0 until end of turn, where X is that spell's mana value.",
         },
@@ -18874,7 +18874,7 @@ function parseStatic(line, text) {
           filter: {},
           withTriggered: true,
         },
-        ...(both[2] !== undefined ? { grantPtPerCount: { exiledWithSourceManaValue: true, pt: [1, 1] } } : {}),
+        ...(both[2] !== undefined ? { grantPtPerCount: { aggregate: { aggregate: "sum", of: "mana-value", filter: {}, in: "exiled-with-source" }, pt: [1, 1] } } : {}),
         text,
       };
     }
@@ -18998,14 +18998,14 @@ function parseStatic(line, text) {
   if (line === "~ has flying and trample if it devoured a creature.") {
     return { affects: { scope: "self" }, condition: { kind: "self-devoured" }, grantKeywords: ["flying", "trample"], text };
   }
-  // The greatest of a count among players (`greatestAmongPlayers`).
+  // The greatest of a count among players (`amongPlayers`).
   {
     const w = /^~ enters with a number of ([+-]\d+\/[+-]\d+|[a-z]+) counters on it equal to the greatest number of (creatures a player controls|cards an opponent has drawn this turn)\.$/.exec(line);
     if (w !== null) {
       const amount =
         w[2] === "creatures a player controls"
-          ? { greatestAmongPlayers: { countOf: { type: "creature", controlledBy: "you" }, forEachPlayer: true } }
-          : { greatestAmongPlayers: { turnStat: "cards-drawn", who: "each" }, who: "each-opponent", includingLeft: true };
+          ? { amongPlayers: "greatest", of: { countOf: { type: "creature", controlledBy: "you" }, forEachPlayer: true } }
+          : { amongPlayers: "greatest", of: { turnStat: "cards-drawn", who: "each" }, who: "each-opponent", includingLeft: true };
       return { affects: { scope: "self" }, replacement: { event: "enters-battlefield", counters: { kind: w[1], amount } }, text };
     }
   }

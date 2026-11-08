@@ -49,8 +49,8 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "damage", amount: { powerOf: "sacrificed" }, who: "each-opponent" },
-          { kind: "draw", amount: { powerOf: "sacrificed" } },
+          { kind: "damage", amount: { powerOf: { paid: "sacrificed" } }, who: "each-opponent" },
+          { kind: "draw", amount: { powerOf: { paid: "sacrificed" } } },
         ],
       },
       resolve: null,

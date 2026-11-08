@@ -34,7 +34,7 @@ export default defineCard({
             {
               kind: "create-token",
               token: "Treasure Token",
-              count: { thisWay: "sacrificed", sumOf: "power" },
+              count: { aggregate: "sum", of: "power", filter: {}, in: { thisWay: "sacrificed" } },
             },
           ],
         },

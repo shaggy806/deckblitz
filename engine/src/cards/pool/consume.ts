@@ -23,7 +23,7 @@ export default defineCard({
         filter: { type: "creature", greatestAmongItsController: { of: "power", among: { type: "creature" } } },
         count: 1,
       },
-      { kind: "gain-life", amount: { thisWay: "sacrificed", sumOf: "power" } },
+      { kind: "gain-life", amount: { aggregate: "sum", of: "power", filter: {}, in: { thisWay: "sacrificed" } } },
     ],
   },
   faces: FACES,

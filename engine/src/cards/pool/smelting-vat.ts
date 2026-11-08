@@ -26,7 +26,7 @@ export default defineCard({
         min: 0,
         max: 2,
         filter: { type: "artifact", notTypes: ["creature"] },
-        together: { totalManaValueAtMost: { manaValueOf: "sacrificed" } },
+        together: { totalManaValueAtMost: { manaValueOf: { paid: "sacrificed" } } },
         destination: "battlefield",
         leftover: "bottom-random",
       },

@@ -25,7 +25,7 @@ export default defineCard({
         ifDid: {
           kind: "reflexive-trigger",
           targets: ["creature"],
-          value: { powerOf: "sacrificed" },
+          value: { powerOf: { paid: "sacrificed" } },
           effect: { kind: "damage", target: 0, amount: { triggerValue: true } },
           text: "When you do, this creature deals damage equal to the sacrificed creature's power to target creature.",
         },

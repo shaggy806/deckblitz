@@ -34,7 +34,7 @@ export default defineCard({
               kind: "add-counter",
               target: "source",
               counter: "+1/+1",
-              amount: { thisWay: "returned-to-hand", sumOf: "power" },
+              amount: { aggregate: "sum", of: "power", filter: {}, in: { thisWay: "returned-to-hand" } },
             },
           ],
         },

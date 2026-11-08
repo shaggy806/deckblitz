@@ -25,7 +25,7 @@ export default defineCard({
         },
       },
       targets: ["any-target"],
-      effect: { kind: "damage", target: 0, amount: { half: { powerOf: "sacrificed" }, round: "down" } },
+      effect: { kind: "damage", target: 0, amount: { half: { powerOf: { paid: "sacrificed" } }, round: "down" } },
       resolve: null,
       text: TEXT,
     },

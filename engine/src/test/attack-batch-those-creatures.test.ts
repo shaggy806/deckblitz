@@ -326,7 +326,7 @@ describe("an unbound clause", () => {
     const { game } = table({ life: 100 });
     const giant = spawn(game, "Hill Giant");
     const ctx = { you: A };
-    expect(matchesFilter(game.state, registryOf(game), giant, { triggerBatch: true }, ctx)).toBe(false);
+    expect(matchesFilter(game.state, registryOf(game), giant, { inSet: "trigger-batch" }, ctx)).toBe(false);
     expect(matchesFilter(game.state, registryOf(game), giant, {}, ctx)).toBe(true);
   });
 });

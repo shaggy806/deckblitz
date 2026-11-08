@@ -33,7 +33,7 @@ export default defineCard({
               condition: { kind: "this-way", what: "discarded" },
               then: {
                 kind: "search-library",
-                filter: { manaValue: { op: "eq", n: { amount: { thisWay: "discarded", sumOf: "mana-value" } } } },
+                filter: { manaValue: { op: "eq", n: { amount: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "discarded" } } } } },
                 destination: "hand",
                 reveal: true,
                 min: 0,

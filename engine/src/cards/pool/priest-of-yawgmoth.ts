@@ -18,7 +18,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: true, sacrifice: { filter: { type: "artifact" } } },
       targets: [],
-      effect: { kind: "add-mana", mana: "B", amount: { manaValueOf: "sacrificed" } },
+      effect: { kind: "add-mana", mana: "B", amount: { manaValueOf: { paid: "sacrificed" } } },
       resolve: null,
       text: "{T}, Sacrifice an artifact: Add an amount of {B} equal to the sacrificed artifact's mana value.",
     },

@@ -216,14 +216,14 @@ describe("bindDynamicCompares binds the shares clauses", () => {
       controller: A,
       targets: [],
       triggerObject: undefined,
-      sacrificed: undefined,
+      objectSet: () => [],
       attachedHost: () => undefined,
       attachedOwner: () => undefined,
       chosenPermanent: () => undefined,
       cardTypesOf: () => [],
       subtypesOf: () => [],
     } as unknown as ResolutionContext;
-    const spec: EffectSpec = { kind: "destroy-all", filter: { type: "creature", sharesCreatureTypeWith: "sacrificed" } };
+    const spec: EffectSpec = { kind: "destroy-all", filter: { type: "creature", sharesCreatureTypeWith: { paid: "sacrificed" } } };
     expect(bindDynamicCompares(spec, ctx)).toEqual({
       kind: "destroy-all",
       filter: { type: "creature", sharesTypeWith: [{ kind: "creature", objects: [], types: [] }] },

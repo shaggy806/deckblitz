@@ -5,7 +5,7 @@ import { defineCard } from "../define.js";
 // Rulings:
 //   You must sacrifice exactly one creature to cast this spell.
 //   The sacrificed creature's last known existence on the battlefield is checked to determine its
-//   power (`powerOf: "sacrificed"`).
+//   power (`powerOf: { paid: "sacrificed" }`).
 
 export default defineCard({
   name: "Pyrrhic Blast",
@@ -20,7 +20,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "damage", target: 0, amount: { powerOf: "sacrificed" } },
+      { kind: "damage", target: 0, amount: { powerOf: { paid: "sacrificed" } } },
       { kind: "draw", amount: 1 },
     ],
   },

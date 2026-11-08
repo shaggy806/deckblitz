@@ -25,12 +25,12 @@ export default defineCard({
     },
     {
       affects: { scope: "self" },
-      setBasePtFromCount: { countOf: { exiledWithThis: "power" }, plusPower: 0, plusToughness: 0, only: "power" },
+      setBasePtFromCount: { countOf: { aggregate: "sum", of: "power", filter: {}, in: "exiled-with-source" }, plusPower: 0, plusToughness: 0, only: "power" },
       text: PT_TEXT,
     },
     {
       affects: { scope: "self" },
-      setBasePtFromCount: { countOf: { exiledWithThis: "toughness" }, plusPower: 0, plusToughness: 0, only: "toughness" },
+      setBasePtFromCount: { countOf: { aggregate: "sum", of: "toughness", filter: {}, in: "exiled-with-source" }, plusPower: 0, plusToughness: 0, only: "toughness" },
       text: PT_TEXT,
     },
   ],

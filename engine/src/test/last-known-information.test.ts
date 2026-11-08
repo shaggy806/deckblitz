@@ -85,7 +85,7 @@ const altar = defineCard({
             condition: { kind: "sacrificed", filter: { subtype: "Bear" } },
             then: { kind: "draw", amount: 1 },
           },
-          { kind: "destroy-all", filter: { sharesCardTypeWith: "sacrificed" } },
+          { kind: "destroy-all", filter: { sharesCardTypeWith: { paid: "sacrificed" } } },
         ],
       },
       resolve: null,
@@ -113,7 +113,7 @@ const martyr = defineCard({
       targets: [],
       effect: {
         kind: "sacrifice-source",
-        then: { kind: "gain-life", amount: { powerOf: "sacrificed" } },
+        then: { kind: "gain-life", amount: { powerOf: { paid: "sacrificed" } } },
       },
       resolve: null,
       text: "{0}: Sacrifice Test Martyr. If you do, you gain life equal to its power.",

@@ -23,7 +23,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "sacrifice", who: "target", filter: { type: "creature" }, count: 1 },
-      { kind: "gain-life", amount: { thisWay: "sacrificed", sumOf: "toughness" }, toControllerOfTarget: 0 },
+      { kind: "gain-life", amount: { aggregate: "sum", of: "toughness", filter: {}, in: { thisWay: "sacrificed" } }, toControllerOfTarget: 0 },
     ],
   },
 });

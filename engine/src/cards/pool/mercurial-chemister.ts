@@ -22,7 +22,7 @@ export default defineCard({
     {
       cost: { mana: "{R}", tap: true, discard: { count: 1 } },
       targets: ["creature"],
-      effect: { kind: "damage", amount: { manaValueOf: "discarded" }, target: 0 },
+      effect: { kind: "damage", amount: { manaValueOf: { paid: "discarded" } }, target: 0 },
       resolve: null,
       text: "{R}, {T}, Discard a card: This creature deals damage to target creature equal to the discarded card's mana value.",
     },

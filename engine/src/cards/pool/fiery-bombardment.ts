@@ -14,7 +14,7 @@ export default defineCard({
     {
       cost: { mana: "{2}", tap: false, sacrifice: { filter: { type: "creature" } } },
       targets: ["any-target"],
-      effect: { kind: "damage", target: 0, amount: { manaSymbolsOf: "sacrificed", color: "R" } },
+      effect: { kind: "damage", target: 0, amount: { manaSymbolsOf: { paid: "sacrificed" }, color: "R" } },
       resolve: null,
       text: TEXT,
     },

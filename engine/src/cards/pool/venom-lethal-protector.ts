@@ -9,7 +9,7 @@ const ATTACK_TEXT =
 // it last existed on the battlefield (a modal DFC's is its face up there).
 // The cards drawn can be the one put onto the battlefield; a modal DFC in
 // hand is judged by its front face and enters front face up (the rulings).
-const X = { manaValueOf: "sacrificed" } as const;
+const X = { manaValueOf: { paid: "sacrificed" } } as const;
 
 /** The back face of Eddie Brock. */
 export default defineCard({

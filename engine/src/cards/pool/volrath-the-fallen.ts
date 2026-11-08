@@ -23,8 +23,8 @@ export default defineCard({
       effect: {
         kind: "modify-pt",
         target: "source",
-        power: { manaValueOf: "discarded" },
-        toughness: { manaValueOf: "discarded" },
+        power: { manaValueOf: { paid: "discarded" } },
+        toughness: { manaValueOf: { paid: "discarded" } },
         duration: "end-of-turn",
       },
       resolve: null,

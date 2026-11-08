@@ -33,7 +33,7 @@ export default defineCard({
     {
       cost: { mana: "{6}{B}{B}", tap: true },
       targets: [],
-      effect: { kind: "set-life-total", who: "each-player", amount: { lowestLifeTotal: true } },
+      effect: { kind: "set-life-total", who: "each-player", amount: { amongPlayers: "least", of: { lifeTotal: "each" } } },
       resolve: null,
       sorcerySpeed: true,
       text: LOWEST,

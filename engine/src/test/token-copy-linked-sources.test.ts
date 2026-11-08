@@ -356,7 +356,7 @@ describe("a copy of each card exiled this way (Foggy Swamp Visions)", () => {
       kind: "sequence",
       effects: [
         { kind: "exile", target: 0 },
-        { kind: "create-token-copy", of: "exiled-this-way", count: 1, sacrificeAtEndStep: true, atYourNextEndStep: true },
+        { kind: "create-token-copy", of: { thisWay: "exiled" }, count: 1, sacrificeAtEndStep: true, atYourNextEndStep: true },
       ],
     }, [ref(card)]);
     settle(game);

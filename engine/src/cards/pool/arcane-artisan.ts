@@ -45,7 +45,7 @@ export default defineCard({
             condition: { kind: "this-way", what: "exiled", filter: { type: "creature" } },
             then: {
               kind: "create-token-copy",
-              of: "exiled-this-way",
+              of: { thisWay: "exiled" },
               count: 1,
               who: { target: 0 },
               linkedToSource: true,

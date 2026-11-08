@@ -21,7 +21,7 @@ export default defineCard({
     {
       cost: { mana: "{R}", tap: false, sacrifice: { filter: { hostOfSource: true } } },
       targets: [],
-      effect: { kind: "damage-all", amount: { powerOf: "sacrificed" }, filter: { type: "creature" } },
+      effect: { kind: "damage-all", amount: { powerOf: { paid: "sacrificed" } }, filter: { type: "creature" } },
       resolve: null,
       text: TEXT,
     },

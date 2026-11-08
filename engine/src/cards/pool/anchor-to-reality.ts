@@ -34,7 +34,7 @@ export default defineCard({
         condition: {
           kind: "this-way",
           what: "put-onto-battlefield",
-          filter: { manaValue: { op: "lt", n: { amount: { manaValueOf: "sacrificed" } } } },
+          filter: { manaValue: { op: "lt", n: { amount: { manaValueOf: { paid: "sacrificed" } } } } },
         },
         then: { kind: "scry", amount: 2 },
       },

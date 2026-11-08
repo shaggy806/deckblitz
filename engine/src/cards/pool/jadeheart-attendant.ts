@@ -19,7 +19,7 @@ export default defineCard({
     {
       trigger: { on: "enters-battlefield", who: "self" },
       targets: [],
-      effect: { kind: "gain-life", amount: { exiledWithSourceManaValue: true } },
+      effect: { kind: "gain-life", amount: { aggregate: "sum", of: "mana-value", filter: {}, in: "exiled-with-source" } },
       resolve: null,
       text: ENTER_TEXT,
     },

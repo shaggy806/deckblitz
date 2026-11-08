@@ -28,7 +28,7 @@ export default defineCard({
       effect: {
         kind: "choose-permanents",
         filter: { type: "land" },
-        upTo: { aggregate: "max", of: "power", filter: {}, in: "attackers" },
+        upTo: { aggregate: "max", of: "power", filter: {}, in: "trigger-batch" },
         then: { kind: "untap", target: 0 },
         prompt: "Untap up to X lands",
       },

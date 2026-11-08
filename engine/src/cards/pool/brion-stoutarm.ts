@@ -19,7 +19,7 @@ export default defineCard({
       cost: { mana: "{R}", tap: true, sacrifice: { filter: { type: "creature", controlledBy: "you" } } },
       otherOnly: true,
       targets: ["player-or-planeswalker"],
-      effect: { kind: "damage", amount: { powerOf: "sacrificed" }, target: 0 },
+      effect: { kind: "damage", amount: { powerOf: { paid: "sacrificed" } }, target: 0 },
       resolve: null,
       text: SAC_TEXT,
     },

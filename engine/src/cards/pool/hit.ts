@@ -15,7 +15,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "sacrifice", who: "target", filter: { typesAnyOf: ["artifact", "creature"] }, count: 1 },
-      { kind: "damage", amount: { thisWay: "sacrificed", sumOf: "mana-value" }, target: 0 },
+      { kind: "damage", amount: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "sacrificed" } }, target: 0 },
     ],
   },
   faces: FACES,

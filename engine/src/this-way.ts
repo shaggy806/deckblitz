@@ -364,6 +364,10 @@ export function thisWayEntries(
       case "amassed":
         if (event.type === "amassed") add(event.object, event.player, false);
         break;
+      case "attached":
+        // Whose: the attachment's controller, as it was attached.
+        if (event.type === "permanent-attached") add(event.source, state.objects[event.source]?.controller, false);
+        break;
       case "put-onto-battlefield":
         // Moved there from a zone — not a token created, nor a permanent
         // spell resolving.

@@ -7,5 +7,5 @@ export default defineCard({
   types: ["sorcery"],
   text: "Each player's life total becomes the lowest life total among all players.",
   targets: [],
-  effect: { kind: "set-life-total", who: "each-player", amount: { lowestLifeTotal: true } },
+  effect: { kind: "set-life-total", who: "each-player", amount: { amongPlayers: "least", of: { lifeTotal: "each" } } },
 });

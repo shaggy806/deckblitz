@@ -30,8 +30,8 @@ export default defineCard({
         ifDid: {
           kind: "sequence",
           effects: [
-            { kind: "draw", amount: { powerOf: "sacrificed" } },
-            { kind: "lose-life", amount: { toughnessOf: "sacrificed" } },
+            { kind: "draw", amount: { powerOf: { paid: "sacrificed" } } },
+            { kind: "lose-life", amount: { toughnessOf: { paid: "sacrificed" } } },
           ],
         },
       },

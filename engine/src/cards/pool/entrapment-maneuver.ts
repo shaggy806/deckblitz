@@ -35,7 +35,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "sacrifice", who: "target", filter: { type: "creature", attacking: true }, count: 1 },
-      { kind: "create-token", token: "Soldier Token", count: { thisWay: "sacrificed", sumOf: "toughness" } },
+      { kind: "create-token", token: "Soldier Token", count: { aggregate: "sum", of: "toughness", filter: {}, in: { thisWay: "sacrificed" } } },
     ],
   },
 });

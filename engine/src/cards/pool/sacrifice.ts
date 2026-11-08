@@ -18,5 +18,5 @@ export default defineCard({
   types: ["instant"],
   text: "As an additional cost to cast this spell, sacrifice a creature.\nAdd an amount of {B} equal to the sacrificed creature's mana value.",
   additionalCost: { sacrifice: { type: "creature", controlledBy: "you" } },
-  effect: { kind: "add-mana", mana: "B", amount: { manaValueOf: "sacrificed" } },
+  effect: { kind: "add-mana", mana: "B", amount: { manaValueOf: { paid: "sacrificed" } } },
 });

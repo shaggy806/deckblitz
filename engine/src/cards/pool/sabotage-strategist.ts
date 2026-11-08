@@ -21,7 +21,7 @@ export default defineCard({
     {
       trigger: { on: "attacks-player", who: "any", defender: "you" },
       targets: [],
-      effect: { kind: "modify-pt-all", filter: { triggerBatch: true }, power: -1, toughness: 0, duration: "end-of-turn" },
+      effect: { kind: "modify-pt-all", filter: { inSet: "trigger-batch" }, power: -1, toughness: 0, duration: "end-of-turn" },
       resolve: null,
       text: ATTACK_TEXT,
     },

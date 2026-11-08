@@ -61,7 +61,7 @@ export default defineCard({
     {
       trigger: { on: "attack-with", who: "you", atLeast: 2, filter: { type: "creature", notSubtypes: ["Gideon"] } },
       targets: [],
-      effect: { kind: "add-counter-all", filter: { triggerBatch: true }, counter: "+1/+1", amount: 1 },
+      effect: { kind: "add-counter-all", filter: { inSet: "trigger-batch" }, counter: "+1/+1", amount: 1 },
       resolve: null,
       text: ATTACK_TEXT,
     },

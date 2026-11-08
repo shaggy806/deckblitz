@@ -20,7 +20,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "destroy-all",
-        filter: { type: "creature", manaValue: { op: "eq", n: { amount: { manaValueOf: "sacrificed" } } } },
+        filter: { type: "creature", manaValue: { op: "eq", n: { amount: { manaValueOf: { paid: "sacrificed" } } } } },
       },
       resolve: null,
       text: "{B}, Sacrifice a creature: Destroy each creature with the same mana value as the sacrificed creature.",

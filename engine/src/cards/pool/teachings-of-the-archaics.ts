@@ -12,7 +12,7 @@ export default defineCard({
     kind: "conditional",
     condition: {
       kind: "amounts",
-      left: { greatestAmongPlayers: { cardsInHand: "each" }, who: "each-opponent" },
+      left: { amongPlayers: "greatest", of: { cardsInHand: "each" }, who: "each-opponent" },
       op: "gte",
       right: { sum: [{ cardsInHand: "you" }, 4] },
     },

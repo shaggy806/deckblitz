@@ -19,8 +19,8 @@ export default defineCard({
         kind: "sequence",
         simultaneous: true,
         effects: [
-          { kind: "damage-all", filter: { type: "creature", notKeyword: "flying" }, amount: { thisWay: "sacrificed", sumOf: "power" } },
-          { kind: "damage", amount: { thisWay: "sacrificed", sumOf: "power" }, who: "each-player" },
+          { kind: "damage-all", filter: { type: "creature", notKeyword: "flying" }, amount: { aggregate: "sum", of: "power", filter: {}, in: { thisWay: "sacrificed" } } },
+          { kind: "damage", amount: { aggregate: "sum", of: "power", filter: {}, in: { thisWay: "sacrificed" } }, who: "each-player" },
         ],
       },
     ],

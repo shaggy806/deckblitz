@@ -11,6 +11,6 @@ export default defineCard({
   effect: {
     kind: "damage-all",
     filter: { typesAnyOf: ["creature", "planeswalker"] },
-    amount: { powerOf: "exiled-as-cost" },
+    amount: { powerOf: { paid: "exiled" } },
   },
 });

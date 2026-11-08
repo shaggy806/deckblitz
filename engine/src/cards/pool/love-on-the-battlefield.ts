@@ -16,12 +16,12 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "grant-keyword-all", filter: { triggerBatch: true }, keyword: "first-strike", duration: "end-of-turn" },
+          { kind: "grant-keyword-all", filter: { inSet: "trigger-batch" }, keyword: "first-strike", duration: "end-of-turn" },
           { kind: "draw", amount: 1 },
           {
             kind: "delayed-trigger",
             at: {
-              whenever: { on: "deals-combat-damage-to-player", who: "any", filter: { triggerBatch: true } },
+              whenever: { on: "deals-combat-damage-to-player", who: "any", filter: { inSet: "trigger-batch" } },
               until: "until-end-of-combat",
             },
             effect: { kind: "add-counter", target: "trigger-object", counter: "+1/+1", amount: 1 },

@@ -12,5 +12,5 @@ export default defineCard({
     "Fling deals damage equal to the sacrificed creature's power to any target.",
   additionalCost: { sacrifice: { type: "creature", controlledBy: "you" } },
   targets: ["any-target"],
-  effect: { kind: "damage", target: 0, amount: { powerOf: "sacrificed" } },
+  effect: { kind: "damage", target: 0, amount: { powerOf: { paid: "sacrificed" } } },
 });

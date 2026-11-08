@@ -46,7 +46,7 @@ export default defineCard({
             },
             else: {
               kind: "lose-life",
-              amount: { difference: [{ thisWay: "sacrificed", sumOf: "power" }, 0] },
+              amount: { difference: [{ aggregate: "sum", of: "power", filter: {}, in: { thisWay: "sacrificed" } }, 0] },
               who: "each-opponent",
             },
           },

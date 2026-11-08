@@ -24,7 +24,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "damage-all",
-        filter: { triggerBatch: true },
+        filter: { inSet: "trigger-batch" },
         amount: { countOf: { type: "creature", attacking: true } },
       },
       resolve: null,

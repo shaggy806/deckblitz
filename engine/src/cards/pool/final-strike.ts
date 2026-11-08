@@ -17,5 +17,5 @@ export default defineCard({
   additionalCost: { sacrifice: { type: "creature", controlledBy: "you" } },
   text: "As an additional cost to cast this spell, sacrifice a creature.\nFinal Strike deals damage to target opponent or planeswalker equal to the sacrificed creature's power.",
   targets: ["opponent-or-planeswalker"],
-  effect: { kind: "damage", target: 0, amount: { powerOf: "sacrificed" } },
+  effect: { kind: "damage", target: 0, amount: { powerOf: { paid: "sacrificed" } } },
 });

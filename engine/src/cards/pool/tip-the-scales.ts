@@ -27,7 +27,7 @@ export default defineCard({
         then: {
           kind: "reflexive-trigger",
           targets: [],
-          value: { thisWay: "sacrificed", sumOf: "toughness" },
+          value: { aggregate: "sum", of: "toughness", filter: {}, in: { thisWay: "sacrificed" } },
           effect: {
             kind: "modify-pt-all",
             filter: { type: "creature" },

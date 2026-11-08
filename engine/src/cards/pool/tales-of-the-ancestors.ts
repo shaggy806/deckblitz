@@ -17,6 +17,6 @@ export default defineCard({
   effect: {
     kind: "draw",
     who: "each-player",
-    amount: { difference: [{ greatestAmongPlayers: HAND }, HAND] },
+    amount: { difference: [{ amongPlayers: "greatest", of: HAND }, HAND] },
   },
 });

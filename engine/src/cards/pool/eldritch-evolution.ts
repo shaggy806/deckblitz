@@ -17,7 +17,7 @@ export default defineCard({
     kind: "search-library",
     filter: {
       type: "creature",
-      manaValue: { op: "lte", n: { amount: { sum: [{ manaValueOf: "sacrificed" }, 2] } } },
+      manaValue: { op: "lte", n: { amount: { sum: [{ manaValueOf: { paid: "sacrificed" } }, 2] } } },
     },
     destination: "battlefield",
     min: 0,

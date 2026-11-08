@@ -19,8 +19,8 @@ export default defineCard({
         kind: "search-library",
         filter: {
           type: "creature",
-          sharesCreatureTypeWith: "sacrificed",
-          manaValue: { op: "eq", n: { amount: { sum: [{ manaValueOf: "sacrificed" }, 1] } } },
+          sharesCreatureTypeWith: { paid: "sacrificed" },
+          manaValue: { op: "eq", n: { amount: { sum: [{ manaValueOf: { paid: "sacrificed" } }, 1] } } },
         },
         destination: "battlefield",
         min: 0,

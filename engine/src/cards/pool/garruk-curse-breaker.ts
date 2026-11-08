@@ -67,8 +67,8 @@ export default defineCard({
         effect: {
           kind: "sequence",
           effects: [
-            { kind: "modify-pt-all", filter: { triggerBatch: true }, power: 2, toughness: 2, duration: "end-of-turn" },
-            { kind: "grant-keyword-all", filter: { triggerBatch: true }, keyword: "trample", duration: "end-of-turn" },
+            { kind: "modify-pt-all", filter: { inSet: "trigger-batch" }, power: 2, toughness: 2, duration: "end-of-turn" },
+            { kind: "grant-keyword-all", filter: { inSet: "trigger-batch" }, keyword: "trample", duration: "end-of-turn" },
           ],
         },
         text: "Whenever one or more creatures attack one of your opponents, those creatures get +2/+2 and gain trample until end of turn.",

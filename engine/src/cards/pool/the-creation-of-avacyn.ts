@@ -34,7 +34,7 @@ export default defineCard({
           {
             kind: "conditional",
             condition: { kind: "exiled-with-source", atLeast: 1, now: true, filter: { type: "creature" } },
-            then: { kind: "lose-life", amount: { exiledWithSourceManaValue: true } },
+            then: { kind: "lose-life", amount: { aggregate: "sum", of: "mana-value", filter: {}, in: "exiled-with-source" } },
           },
         ],
       },

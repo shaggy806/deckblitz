@@ -34,7 +34,7 @@ export default defineCard({
               random: true,
               then: {
                 kind: "damage",
-                amount: { thisWay: "revealed", greatestOf: "mana-value" },
+                amount: { aggregate: "max", of: "mana-value", filter: {}, in: { thisWay: "revealed" } },
                 who: "that-player",
               },
             },

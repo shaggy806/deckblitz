@@ -28,7 +28,7 @@ export default defineCard({
           kind: "enters-with-counters",
           target: "source",
           counter: "+1/+1",
-          amount: { thisWay: "revealed", sumOf: "mana-value" },
+          amount: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "revealed" } },
         },
       },
       resolve: null,

@@ -24,8 +24,8 @@ export default defineCard({
       effect: {
         kind: "modify-pt",
         target: "source",
-        power: { exiledWithSourcePower: true },
-        toughness: { exiledWithSourcePower: true },
+        power: { aggregate: "sum", of: "power", filter: {}, in: "exiled-with-source" },
+        toughness: { aggregate: "sum", of: "power", filter: {}, in: "exiled-with-source" },
         duration: "end-of-turn",
       },
       resolve: null,

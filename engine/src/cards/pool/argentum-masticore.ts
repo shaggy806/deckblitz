@@ -48,7 +48,7 @@ export default defineCard({
                       notTypes: ["land"],
                       // Bound as the reflexive ability is created, in this
                       // resolution, which knows the card discarded this way.
-                      manaValue: { op: "lte", n: { amount: { thisWay: "discarded", sumOf: "mana-value" } } },
+                      manaValue: { op: "lte", n: { amount: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "discarded" } } } },
                     },
                   },
                 ],

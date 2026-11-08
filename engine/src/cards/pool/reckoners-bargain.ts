@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 
 // EDHREC rank 3811.
 //
-// Deadly Dispute's additional cost; Sacrifice's `manaValueOf: "sacrificed"`.
+// Deadly Dispute's additional cost; Sacrifice's `manaValueOf: { paid: "sacrificed" }`.
 
 export default defineCard({
   name: "Reckoner's Bargain",
@@ -14,7 +14,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "gain-life", amount: { manaValueOf: "sacrificed" } },
+      { kind: "gain-life", amount: { manaValueOf: { paid: "sacrificed" } } },
       { kind: "draw", amount: 2 },
     ],
   },

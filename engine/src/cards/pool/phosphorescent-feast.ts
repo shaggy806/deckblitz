@@ -21,7 +21,7 @@ export default defineCard({
       },
       {
         kind: "gain-life",
-        amount: { product: [2, { thisWay: "revealed", who: "you", sumOf: { manaSymbols: "G" } }] },
+        amount: { product: [2, { aggregate: "sum", of: { manaSymbols: "G" }, filter: {}, in: { thisWay: "revealed", who: "you" } }] },
       },
     ],
   },

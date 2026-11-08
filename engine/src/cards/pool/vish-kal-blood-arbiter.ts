@@ -21,7 +21,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: false, sacrifice: "creature-you-control" },
       targets: [],
-      effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: { powerOf: "sacrificed" } },
+      effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: { powerOf: { paid: "sacrificed" } } },
       resolve: null,
       text: SAC_TEXT,
     },

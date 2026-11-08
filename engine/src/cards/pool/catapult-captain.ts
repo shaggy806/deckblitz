@@ -19,7 +19,7 @@ export default defineCard({
       cost: { mana: "{2}{B}", tap: true, sacrifice: "creature-you-control" },
       otherOnly: true,
       targets: ["opponent"],
-      effect: { kind: "lose-life", amount: { toughnessOf: "sacrificed" }, target: 0 },
+      effect: { kind: "lose-life", amount: { toughnessOf: { paid: "sacrificed" } }, target: 0 },
       resolve: null,
       text: TEXT,
     },

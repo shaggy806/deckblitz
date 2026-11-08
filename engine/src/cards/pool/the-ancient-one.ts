@@ -47,7 +47,7 @@ export default defineCard({
             then: {
               kind: "reflexive-trigger",
               targets: ["player"],
-              value: { thisWay: "discarded", sumOf: "mana-value" },
+              value: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "discarded" } },
               effect: { kind: "mill", target: 0, amount: { triggerValue: true } },
               text: "When you discard a card this way, target player mills cards equal to its mana value.",
             },

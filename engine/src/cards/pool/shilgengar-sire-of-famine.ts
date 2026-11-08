@@ -42,7 +42,7 @@ export default defineCard({
       effect: {
         kind: "conditional",
         condition: { kind: "sacrificed", filter: { subtype: "Angel" } },
-        then: { kind: "create-token", token: "Blood Token", count: { toughnessOf: "sacrificed" } },
+        then: { kind: "create-token", token: "Blood Token", count: { toughnessOf: { paid: "sacrificed" } } },
         else: { kind: "create-token", token: "Blood Token", count: 1 },
       },
       resolve: null,

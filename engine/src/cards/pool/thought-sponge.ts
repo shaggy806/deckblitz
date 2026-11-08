@@ -21,7 +21,7 @@ export default defineCard({
         counters: {
           kind: "+1/+1",
           amount: {
-            greatestAmongPlayers: { turnStat: "cards-drawn", who: "each" },
+            amongPlayers: "greatest", of: { turnStat: "cards-drawn", who: "each" },
             who: "each-opponent",
             includingLeft: true,
           },

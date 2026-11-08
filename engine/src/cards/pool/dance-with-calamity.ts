@@ -28,7 +28,7 @@ export default defineCard({
       },
       {
         kind: "conditional",
-        condition: { kind: "amounts", left: { thisWay: "exiled", sumOf: "mana-value" }, op: "lte", right: 13 },
+        condition: { kind: "amounts", left: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "exiled" } }, op: "lte", right: 13 },
         then: { kind: "cast-now", from: "exiled-this-way", repeat: true, free: true },
       },
     ],

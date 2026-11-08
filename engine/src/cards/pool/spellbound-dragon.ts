@@ -29,7 +29,7 @@ export default defineCard({
           {
             kind: "modify-pt",
             target: "source",
-            power: { thisWay: "discarded", sumOf: "mana-value" },
+            power: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "discarded" } },
             toughness: 0,
             duration: "end-of-turn",
           },

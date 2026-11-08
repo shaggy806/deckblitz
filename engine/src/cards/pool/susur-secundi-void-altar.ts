@@ -21,7 +21,7 @@ export default defineCard({
           cost: { mana: "{1}{B}", tap: true, payLife: 2, sacrifice: "creature-you-control" },
           sorcerySpeed: true,
           targets: [],
-          effect: { kind: "draw", amount: { powerOf: "sacrificed" } },
+          effect: { kind: "draw", amount: { powerOf: { paid: "sacrificed" } } },
           resolve: null,
           text: DRAW_TEXT,
         },

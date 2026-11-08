@@ -65,7 +65,7 @@ export default defineCard({
               then: {
                 kind: "reflexive-trigger",
                 targets: [{ kind: "any-number", of: "creature" }],
-                value: { thisWay: "exiled", sumOf: "power" },
+                value: { aggregate: "sum", of: "power", filter: {}, in: { thisWay: "exiled" } },
                 divided: { total: { triggerValue: true }, slot: 0, of: "+1/+1 counters" },
                 effect: { kind: "counters-divided", from: 0, counter: "+1/+1" },
                 text: "Distribute X +1/+1 counters among any number of target creatures, where X is the exiled creature's power.",

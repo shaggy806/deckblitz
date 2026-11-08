@@ -46,7 +46,7 @@ export default defineCard({
             then: {
               kind: "reflexive-trigger",
               targets: ["any-target"],
-              value: { thisWay: "exiled", sumOf: "mana-value" },
+              value: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "exiled" } },
               effect: { kind: "damage", amount: { triggerValue: true }, target: 0 },
               text: "When you exile a nonland card this way, Hidetsugu deals damage equal to the exiled card's mana value to any target.",
             },

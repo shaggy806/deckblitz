@@ -24,7 +24,7 @@ export default defineCard({
         prompt: "Make the other attacker's base power and toughness 4/3 until end of turn?",
         effect: {
           kind: "for-each-permanent",
-          filter: { triggerBatch: true, isSource: false },
+          filter: { inSet: "trigger-batch", isSource: false },
           effect: { kind: "animate", target: 0, power: 4, toughness: 3, addTypes: [], addSubtypes: [], duration: "end-of-turn" },
         },
       },

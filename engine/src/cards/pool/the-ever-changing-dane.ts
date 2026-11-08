@@ -22,7 +22,7 @@ export default defineCard({
       effect: {
         kind: "become-copy",
         target: "source",
-        of: "sacrificed",
+        of: { paid: "sacrificed" },
         exceptions: { thisAbility: { card: "The Ever-Changing 'Dane", activated: 0 } },
       },
       resolve: null,

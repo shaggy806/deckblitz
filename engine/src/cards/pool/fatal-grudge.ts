@@ -16,7 +16,7 @@ export default defineCard({
     effects: [
       // The sacrificed permanent's card types as it last existed on the
       // battlefield; a copy reads the original's (the ruling).
-      { kind: "sacrifice", who: "each-opponent", filter: { sharesCardTypeWith: "sacrificed" }, count: 1 },
+      { kind: "sacrifice", who: "each-opponent", filter: { sharesCardTypeWith: { paid: "sacrificed" } }, count: 1 },
       { kind: "draw", amount: 1 },
     ],
   },

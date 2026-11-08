@@ -24,7 +24,7 @@ export default defineCard({
         sacrifice: { filter: { type: "creature", anyOf: [{ colors: ["B"] }, { type: "artifact" }] } },
       },
       targets: [],
-      effect: { kind: "add-mana", mana: "B", amount: { manaValueOf: "sacrificed" } },
+      effect: { kind: "add-mana", mana: "B", amount: { manaValueOf: { paid: "sacrificed" } } },
       resolve: null,
       text: TEXT,
     },

@@ -38,7 +38,7 @@ export default defineCard({
           kind: "sequence",
           effects: [
             { kind: "draw", amount: 2 },
-            { kind: "lose-life", who: "each-opponent", amount: { manaValueOf: "sacrificed" } },
+            { kind: "lose-life", who: "each-opponent", amount: { manaValueOf: { paid: "sacrificed" } } },
           ],
         },
       },

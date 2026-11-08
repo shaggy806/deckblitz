@@ -1,7 +1,7 @@
 import { defineCard } from "../define.js";
 
 // The life is the sacrificed creature's toughness as it last existed on the
-// battlefield (the ruling; `toughnessOf: "sacrificed"` reads its last-known
+// battlefield (the ruling; `toughnessOf: { paid: "sacrificed" }` reads its last-known
 // information). An illegal target fizzles the whole spell, so no life then.
 export default defineCard({
   name: "Severed Strands",
@@ -14,7 +14,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "gain-life", amount: { toughnessOf: "sacrificed" } },
+      { kind: "gain-life", amount: { toughnessOf: { paid: "sacrificed" } } },
       { kind: "destroy", target: 0 },
     ],
   },

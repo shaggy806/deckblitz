@@ -31,7 +31,7 @@ export default defineCard({
           filter: {
             manaValue: {
               op: "lte",
-              n: { amount: { aggregate: "sum", of: "power", filter: {}, in: "attackers" } },
+              n: { amount: { aggregate: "sum", of: "power", filter: {}, in: "trigger-batch" } },
             },
           },
         },

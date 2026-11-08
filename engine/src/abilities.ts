@@ -428,7 +428,7 @@ export interface AbilityCost {
    * - `{ filter }`: one attached to the source that the player chooses,
    *   Captain America's "Unattach an Equipment from Captain America". Offered
    *   and named on the action as a sacrifice is (the offer's `sacrifice`, with
-   *   `unattach`), and read back as `"sacrificed"` for "that Equipment's mana
+   *   `unattach`), and read back as `{ paid: "unattached" }` for "that Equipment's mana
    *   value". A `divided` total that reads it gets one offer per total, since
    *   the division is announced with the cost's choice (rule 601.2d).
    */
@@ -499,7 +499,7 @@ export interface AbilityCost {
   /**
    * `sacrifice`'s one chosen permanent is **exiled** instead — "Exile a
    * creature you control" (Food Chain, City of Shadows). Offered and named on
-   * the action just as a sacrifice is, and read back as `"sacrificed"` (its
+   * the action just as a sacrifice is, and read back as `{ paid: "sacrificed" }` (its
    * mana value, "if it was a …") since the effect's "the exiled creature" is
    * the same last-known read. But it's no sacrifice: nothing stops or sees one
    * (rule 701.21a), and it doesn't die. Not with `"self"`, `"granter"` or a
@@ -547,7 +547,7 @@ export interface AbilityCost {
    * They stay in the hand. Not on a mana ability, nor beside another cost
    * that asks. `shareColor` (a fixed `count` only) is Illuminated Folio's
    * "Reveal two cards from your hand that share a color" (see
-   * `BeholdSpec.shareColor`). The effect reads the cards as `"revealed"`
+   * `BeholdSpec.shareColor`). The effect reads the cards as `{ paid: "revealed" }`
    * ({@link AmountRef}) when there's one.
    */
   readonly reveal?: {

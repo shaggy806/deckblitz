@@ -22,7 +22,7 @@ export default defineCard({
         kind: "create-token",
         token: "Ooze Token (Convert to Slime)",
         count: 1,
-        basePt: { power: { powerOf: "sacrificed" }, toughness: { powerOf: "sacrificed" } },
+        basePt: { power: { powerOf: { paid: "sacrificed" } }, toughness: { powerOf: { paid: "sacrificed" } } },
       },
       resolve: null,
       text: "{1}{G}, Sacrifice a non-Ooze creature: Create an X/X green Ooze creature token, where X is the sacrificed creature's power. Activate only as a sorcery.",

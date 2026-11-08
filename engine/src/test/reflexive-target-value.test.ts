@@ -21,7 +21,7 @@ const discardThenDestroy: EffectSpec = {
     { kind: "discard", target: "you", amount: 1 },
     {
       kind: "reflexive-trigger",
-      value: { thisWay: "discarded", sumOf: "mana-value" },
+      value: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "discarded" } },
       targets: [
         { kind: "permanent", filter: { type: "creature", manaValue: { op: "eq", n: { amount: { triggerValue: true } } } } },
       ],

@@ -49,8 +49,8 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "draw", amount: { toughnessOf: "sacrificed" } },
-          { kind: "discard", target: "you", amount: { powerOf: "sacrificed" } },
+          { kind: "draw", amount: { toughnessOf: { paid: "sacrificed" } } },
+          { kind: "discard", target: "you", amount: { powerOf: { paid: "sacrificed" } } },
         ],
       },
       resolve: null,

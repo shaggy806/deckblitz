@@ -11,5 +11,5 @@ export default defineCard({
   additionalCost: { sacrifice: { type: "creature", controlledBy: "you" } },
   text: "As an additional cost to cast this spell, sacrifice a creature.\nThud deals damage equal to the sacrificed creature's power to any target.",
   targets: ["any-target"],
-  effect: { kind: "damage", target: 0, amount: { powerOf: "sacrificed" } },
+  effect: { kind: "damage", target: 0, amount: { powerOf: { paid: "sacrificed" } } },
 });

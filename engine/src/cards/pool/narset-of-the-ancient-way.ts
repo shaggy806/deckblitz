@@ -87,7 +87,7 @@ export default defineCard({
                   then: {
                     kind: "reflexive-trigger",
                     targets: [{ kind: "permanent", whose: "any", filter: { typesAnyOf: ["creature", "planeswalker"] } }],
-                    value: { thisWay: "discarded", sumOf: "mana-value" },
+                    value: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "discarded" } },
                     effect: { kind: "damage", amount: { triggerValue: true }, target: 0 },
                     text: "When you discard a nonland card this way, Narset deals damage equal to that card's mana value to target creature or planeswalker.",
                   },

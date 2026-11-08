@@ -23,7 +23,7 @@ export default defineCard({
         ifDid: {
           kind: "reflexive-trigger",
           targets: [],
-          value: { thisWay: "discarded", greatestOf: "mana-value" },
+          value: { aggregate: "max", of: "mana-value", filter: {}, in: { thisWay: "discarded" } },
           effect: { kind: "damage-all", filter: { type: "creature" }, amount: { triggerValue: true } },
           text: "When you do, Ill-Timed Explosion deals X damage to each creature, where X is the greatest mana value among cards discarded this way.",
         },

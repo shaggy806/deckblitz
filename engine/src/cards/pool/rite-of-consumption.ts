@@ -18,7 +18,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "damage", target: 0, amount: { powerOf: "sacrificed" } },
+      { kind: "damage", target: 0, amount: { powerOf: { paid: "sacrificed" } } },
       { kind: "gain-life", amount: { damageDealtThisWay: true } },
     ],
   },

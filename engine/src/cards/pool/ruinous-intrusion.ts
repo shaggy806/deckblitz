@@ -5,7 +5,7 @@ import { defineCard } from "../define.js";
 // Rulings:
 //   [2021-09-24] Use the permanent's characteristics as it last existed on the battlefield to
 //     determine the value of X.
-// `thisWay: "exiled"` with `sumOf: "mana-value"` reads a permanent that left
+// an aggregate `in: { thisWay: "exiled" }` reads a permanent that left
 // through its last-known information (a token through its ceased snapshot).
 
 export default defineCard({
@@ -19,7 +19,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "exile", target: 0 },
-      { kind: "add-counter", target: 1, counter: "+1/+1", amount: { thisWay: "exiled", sumOf: "mana-value" } },
+      { kind: "add-counter", target: 1, counter: "+1/+1", amount: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "exiled" } } },
     ],
   },
 });

@@ -21,7 +21,7 @@ export default defineCard({
       sorcerySpeed: true,
       effect: {
         kind: "create-token-copy",
-        of: "exiled-as-cost",
+        of: { paid: "exiled" },
         count: 1,
         gainUntilEndOfTurn: ["haste"],
         exceptions: {
