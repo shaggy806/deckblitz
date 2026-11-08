@@ -707,6 +707,7 @@ import _poolSarkhanFireblood from "../pool/sarkhan-fireblood.js";
 import _poolSavingGrace from "../pool/saving-grace.js";
 import _poolScaledHulk from "../pool/scaled-hulk.js";
 import _poolScapeshift from "../pool/scapeshift.js";
+import _poolSchemingAspirant from "../pool/scheming-aspirant.js";
 import _poolScholarOfTheLostTrove from "../pool/scholar-of-the-lost-trove.js";
 import _poolScorchedGeyser from "../pool/scorched-geyser.js";
 import _poolScourgeOfGeierReach from "../pool/scourge-of-geier-reach.js";
@@ -1701,6 +1702,7 @@ const shard: CardShard = {
     _poolSavingGrace,
     _poolScaledHulk,
     _poolScapeshift,
+    _poolSchemingAspirant,
     _poolScholarOfTheLostTrove,
     _poolScorchedGeyser,
     _poolScourgeOfGeierReach,

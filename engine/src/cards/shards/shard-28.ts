@@ -187,6 +187,7 @@ import _poolCultGuildmage from "../pool/cult-guildmage.js";
 import _poolCuratorBeastie from "../pool/curator-beastie.js";
 import _poolCuratorOfDestinies from "../pool/curator-of-destinies.js";
 import _poolCuriousInquiry from "../pool/curious-inquiry.js";
+import _poolCustodiLich from "../pool/custodi-lich.js";
 import _poolCutthroatCenturion from "../pool/cutthroat-centurion.js";
 import _poolDakmorBat from "../pool/dakmor-bat.js";
 import _poolDalekDrone from "../pool/dalek-drone.js";
@@ -1202,6 +1203,7 @@ const shard: CardShard = {
     _poolCuratorBeastie,
     _poolCuratorOfDestinies,
     _poolCuriousInquiry,
+    _poolCustodiLich,
     _poolCutthroatCenturion,
     _poolDakmorBat,
     _poolDalekDrone,

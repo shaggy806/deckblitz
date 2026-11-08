@@ -947,6 +947,7 @@ import _poolWastelandStrangler from "../pool/wasteland-strangler.js";
 import _poolWatchwingScarecrow from "../pool/watchwing-scarecrow.js";
 import _poolWateryGrasp from "../pool/watery-grasp.js";
 import _poolWaveskimmerAven from "../pool/waveskimmer-aven.js";
+import _poolWayOfTheMindSculptor from "../pool/way-of-the-mind-sculptor.js";
 import _poolWayfaringTemple from "../pool/wayfaring-temple.js";
 import _poolWearAway from "../pool/wear-away.js";
 import _poolWeeDragonauts from "../pool/wee-dragonauts.js";
@@ -1942,6 +1943,7 @@ const shard: CardShard = {
     _poolWatchwingScarecrow,
     _poolWateryGrasp,
     _poolWaveskimmerAven,
+    _poolWayOfTheMindSculptor,
     _poolWayfaringTemple,
     _poolWearAway,
     _poolWeeDragonauts,

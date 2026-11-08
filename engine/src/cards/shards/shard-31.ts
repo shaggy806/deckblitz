@@ -776,6 +776,7 @@ import _poolSheHulkJenniferWalters from "../pool/she-hulk-jennifer-walters.js";
 import _poolShieldMare from "../pool/shield-mare.js";
 import _poolShieldmageAdvocate from "../pool/shieldmage-advocate.js";
 import _poolShimmeringBarrier from "../pool/shimmering-barrier.js";
+import _poolShimmeringEfreet from "../pool/shimmering-efreet.js";
 import _poolShimmerscaleDrake from "../pool/shimmerscale-drake.js";
 import _poolShinenOfStarsLight from "../pool/shinen-of-stars-light.js";
 import _poolShipwreckMoray from "../pool/shipwreck-moray.js";
@@ -1820,6 +1821,7 @@ const shard: CardShard = {
     _poolShieldMare,
     _poolShieldmageAdvocate,
     _poolShimmeringBarrier,
+    _poolShimmeringEfreet,
     _poolShimmerscaleDrake,
     _poolShinenOfStarsLight,
     _poolShipwreckMoray,

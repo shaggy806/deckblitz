@@ -104,6 +104,7 @@ import _poolBlightning from "../pool/blightning.js";
 import _poolBlindingPowder from "../pool/blinding-powder.js";
 import _poolBlisterpod from "../pool/blisterpod.js";
 import _poolBloodTithe from "../pool/blood-tithe.js";
+import _poolBloodTyrant from "../pool/blood-tyrant.js";
 import _poolBloodlineRecollector from "../pool/bloodline-recollector.js";
 import _poolBlossomingTortoise from "../pool/blossoming-tortoise.js";
 import _poolBlossomingWreath from "../pool/blossoming-wreath.js";
@@ -599,6 +600,7 @@ import _poolNorthamptonFarm from "../pool/northampton-farm.js";
 import _poolNovaCleric from "../pool/nova-cleric.js";
 import _poolNoviceOccultist from "../pool/novice-occultist.js";
 import _poolNurglesConscription from "../pool/nurgles-conscription.js";
+import _poolNykthosParagon from "../pool/nykthos-paragon.js";
 import _poolOakhollowVillage from "../pool/oakhollow-village.js";
 import _poolObsidianGiant from "../pool/obsidian-giant.js";
 import _poolOcularHalo from "../pool/ocular-halo.js";
@@ -1086,6 +1088,7 @@ const shard: CardShard = {
     _poolBlindingPowder,
     _poolBlisterpod,
     _poolBloodTithe,
+    _poolBloodTyrant,
     _poolBloodlineRecollector,
     _poolBlossomingTortoise,
     _poolBlossomingWreath,
@@ -1581,6 +1584,7 @@ const shard: CardShard = {
     _poolNovaCleric,
     _poolNoviceOccultist,
     _poolNurglesConscription,
+    _poolNykthosParagon,
     _poolOakhollowVillage,
     _poolObsidianGiant,
     _poolOcularHalo,

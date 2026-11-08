@@ -323,6 +323,7 @@ import _poolGlintWeaver from "../pool/glint-weaver.js";
 import _poolGlitteringWish from "../pool/glittering-wish.js";
 import _poolGloriousCharge from "../pool/glorious-charge.js";
 import _poolGloriousProtector from "../pool/glorious-protector.js";
+import _poolGloriousPurpose from "../pool/glorious-purpose.js";
 import _poolGnarledProfessor from "../pool/gnarled-professor.js";
 import _poolGnottvoldHermit from "../pool/gnottvold-hermit.js";
 import _poolGoBlank from "../pool/go-blank.js";
@@ -1261,6 +1262,7 @@ const shard: CardShard = {
     _poolGlitteringWish,
     _poolGloriousCharge,
     _poolGloriousProtector,
+    _poolGloriousPurpose,
     _poolGnarledProfessor,
     _poolGnottvoldHermit,
     _poolGoBlank,

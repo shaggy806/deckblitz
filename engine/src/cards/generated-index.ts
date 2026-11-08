@@ -765,6 +765,7 @@ export const TOKEN_NAMES: readonly string[] = [
 export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Aang and La, Ocean's Fury": "https://cards.scryfall.io/art_crop/back/8/2/82866a0e-485a-4f7e-8c49-f7d9ff3f4ad4.jpg",
   "Aang, Destined Savior": "https://cards.scryfall.io/art_crop/back/f/e/fea89ca0-8070-4f28-9851-994314f9d248.jpg",
+  "Aang, Master of Elements": "https://cards.scryfall.io/art_crop/back/f/e/fe29e909-50e9-4f04-b1a3-2cc5d7e3efe8.jpg",
   "Abolisher of Bloodlines": "https://cards.scryfall.io/art_crop/back/2/5/25baac6c-5bb4-4ecc-b1d5-fced52087bd9.jpg",
   "Absorb Essence": "https://cards.scryfall.io/art_crop/back/3/9/3988dc76-072c-4f43-849d-2e73c6f6ff58.jpg",
   "Adanto, the First Fort": "https://cards.scryfall.io/art_crop/back/0/5/05e2a5e6-3aaa-4096-bdd0-fcc1afe5a36c.jpg",

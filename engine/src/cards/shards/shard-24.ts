@@ -56,6 +56,7 @@ import _poolAvenEternal from "../pool/aven-eternal.js";
 import _poolAvenFateshaper from "../pool/aven-fateshaper.js";
 import _poolAvenSquire from "../pool/aven-squire.js";
 import _poolAwakenTheSkyTyrant from "../pool/awaken-the-sky-tyrant.js";
+import _poolAxgardArtisan from "../pool/axgard-artisan.js";
 import _poolAxgardBraggart from "../pool/axgard-braggart.js";
 import _poolBadgeyMaliciousGlitch from "../pool/badgey-malicious-glitch.js";
 import _poolBalefangTheUnslayable from "../pool/balefang-the-unslayable.js";
@@ -735,6 +736,7 @@ import _poolSoShiny from "../pool/so-shiny.js";
 import _poolSojournersCompanion from "../pool/sojourners-companion.js";
 import _poolSokenzanBruiser from "../pool/sokenzan-bruiser.js";
 import _poolSolarion from "../pool/solarion.js";
+import _poolSolitarySanctuary from "../pool/solitary-sanctuary.js";
 import _poolSolsticeZealot from "../pool/solstice-zealot.js";
 import _poolSongOfSerenity from "../pool/song-of-serenity.js";
 import _poolSoothsayerAdept from "../pool/soothsayer-adept.js";
@@ -1034,6 +1036,7 @@ const shard: CardShard = {
     _poolAvenFateshaper,
     _poolAvenSquire,
     _poolAwakenTheSkyTyrant,
+    _poolAxgardArtisan,
     _poolAxgardBraggart,
     _poolBadgeyMaliciousGlitch,
     _poolBalefangTheUnslayable,
@@ -1713,6 +1716,7 @@ const shard: CardShard = {
     _poolSojournersCompanion,
     _poolSokenzanBruiser,
     _poolSolarion,
+    _poolSolitarySanctuary,
     _poolSolsticeZealot,
     _poolSongOfSerenity,
     _poolSoothsayerAdept,

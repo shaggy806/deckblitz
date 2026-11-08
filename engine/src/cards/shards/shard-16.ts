@@ -3,6 +3,7 @@
 
 import type { CardShard } from "../card-shards.js";
 
+import _poolAangMasterOfElements from "../pool/aang-master-of-elements.js";
 import _poolAbundance from "../pool/abundance.js";
 import _poolAbyssalNightstalker from "../pool/abyssal-nightstalker.js";
 import _poolAbzanMonument from "../pool/abzan-monument.js";
@@ -746,6 +747,7 @@ import _poolShadowSliver from "../pool/shadow-sliver.js";
 import _poolShadowUrchin from "../pool/shadow-urchin.js";
 import _poolShadrixSilverquill from "../pool/shadrix-silverquill.js";
 import _poolShannaSisaysLegacy from "../pool/shanna-sisays-legacy.js";
+import _poolSharaeOfNumbingDepths from "../pool/sharae-of-numbing-depths.js";
 import _poolShatteredSanctum from "../pool/shattered-sanctum.js";
 import _poolShaukusMinion from "../pool/shaukus-minion.js";
 import _poolShipwreckMarsh from "../pool/shipwreck-marsh.js";
@@ -1054,6 +1056,7 @@ import _tokensZombieWarriorToken from "../tokens/zombie-warrior-token.js";
 
 const shard: CardShard = {
   pool: [
+    _poolAangMasterOfElements,
     _poolAbundance,
     _poolAbyssalNightstalker,
     _poolAbzanMonument,
@@ -1797,6 +1800,7 @@ const shard: CardShard = {
     _poolShadowUrchin,
     _poolShadrixSilverquill,
     _poolShannaSisaysLegacy,
+    _poolSharaeOfNumbingDepths,
     _poolShatteredSanctum,
     _poolShaukusMinion,
     _poolShipwreckMarsh,

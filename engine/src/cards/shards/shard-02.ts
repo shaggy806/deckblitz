@@ -362,6 +362,7 @@ import _poolGloomshrieker from "../pool/gloomshrieker.js";
 import _poolGodhunterOctopus from "../pool/godhunter-octopus.js";
 import _poolGoldForgeGarrison from "../pool/gold-forge-garrison.js";
 import _poolGolgariLocket from "../pool/golgari-locket.js";
+import _poolGontisMachinations from "../pool/gontis-machinations.js";
 import _poolGorehornRaider from "../pool/gorehorn-raider.js";
 import _poolGornogTheRedReaper from "../pool/gornog-the-red-reaper.js";
 import _poolGravedig from "../pool/gravedig.js";
@@ -1355,6 +1356,7 @@ const shard: CardShard = {
     _poolGodhunterOctopus,
     _poolGoldForgeGarrison,
     _poolGolgariLocket,
+    _poolGontisMachinations,
     _poolGorehornRaider,
     _poolGornogTheRedReaper,
     _poolGravedig,

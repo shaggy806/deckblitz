@@ -98,6 +98,7 @@ import _poolCaptivatingVampire from "../pool/captivating-vampire.js";
 import _poolCaribouRange from "../pool/caribou-range.js";
 import _poolCarvenCaryatid from "../pool/carven-caryatid.js";
 import _poolCavesOfKoilos from "../pool/caves-of-koilos.js";
+import _poolCeaselessSearblades from "../pool/ceaseless-searblades.js";
 import _poolCemeteryRecruitment from "../pool/cemetery-recruitment.js";
 import _poolCentaurBattlemaster from "../pool/centaur-battlemaster.js";
 import _poolCentaurOmenreader from "../pool/centaur-omenreader.js";
@@ -426,6 +427,7 @@ import _poolKytheonsIrregulars from "../pool/kytheons-irregulars.js";
 import _poolLaboratoryDrudge from "../pool/laboratory-drudge.js";
 import _poolLambholtRaconteur from "../pool/lambholt-raconteur.js";
 import _poolLazotepChancellor from "../pool/lazotep-chancellor.js";
+import _poolLeaderSuperGenius from "../pool/leader-super-genius.js";
 import _poolLiberatedDwarf from "../pool/liberated-dwarf.js";
 import _poolLiberatorUrzasBattlethopter from "../pool/liberator-urzas-battlethopter.js";
 import _poolLichKnightsConquest from "../pool/lich-knights-conquest.js";
@@ -1001,6 +1003,7 @@ const shard: CardShard = {
     _poolCaribouRange,
     _poolCarvenCaryatid,
     _poolCavesOfKoilos,
+    _poolCeaselessSearblades,
     _poolCemeteryRecruitment,
     _poolCentaurBattlemaster,
     _poolCentaurOmenreader,
@@ -1329,6 +1332,7 @@ const shard: CardShard = {
     _poolLaboratoryDrudge,
     _poolLambholtRaconteur,
     _poolLazotepChancellor,
+    _poolLeaderSuperGenius,
     _poolLiberatedDwarf,
     _poolLiberatorUrzasBattlethopter,
     _poolLichKnightsConquest,

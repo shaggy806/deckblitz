@@ -246,6 +246,7 @@ import _poolDwarvenArmory from "../pool/dwarven-armory.js";
 import _poolDwarvenDriller from "../pool/dwarven-driller.js";
 import _poolEagleOfTheGreatShelf from "../pool/eagle-of-the-great-shelf.js";
 import _poolEarlyFrost from "../pool/early-frost.js";
+import _poolEarthKingdomGeneral from "../pool/earth-kingdom-general.js";
 import _poolEdgewalker from "../pool/edgewalker.js";
 import _poolElasIlKorSadisticPilgrim from "../pool/elas-il-kor-sadistic-pilgrim.js";
 import _poolElvishSkysweeper from "../pool/elvish-skysweeper.js";
@@ -1256,6 +1257,7 @@ const shard: CardShard = {
     _poolDwarvenDriller,
     _poolEagleOfTheGreatShelf,
     _poolEarlyFrost,
+    _poolEarthKingdomGeneral,
     _poolEdgewalker,
     _poolElasIlKorSadisticPilgrim,
     _poolElvishSkysweeper,

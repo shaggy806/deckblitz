@@ -835,6 +835,7 @@ import _poolSynchronizedEviction from "../pool/synchronized-eviction.js";
 import _poolTaigamsStrike from "../pool/taigams-strike.js";
 import _poolTallAsABeanstalk from "../pool/tall-as-a-beanstalk.js";
 import _poolTalonrend from "../pool/talonrend.js";
+import _poolTamiyoUpriserCrowned from "../pool/tamiyo-upriser-crowned.js";
 import _poolTappingAtTheWindow from "../pool/tapping-at-the-window.js";
 import _poolTawnosTheToymaker from "../pool/tawnos-the-toymaker.js";
 import _poolTawnosUrzasApprentice from "../pool/tawnos-urzas-apprentice.js";
@@ -904,6 +905,7 @@ import _poolVaultOfChampions from "../pool/vault-of-champions.js";
 import _poolVectisDominator from "../pool/vectis-dominator.js";
 import _poolVengefulBloodwitch from "../pool/vengeful-bloodwitch.js";
 import _poolVengefulReaper from "../pool/vengeful-reaper.js";
+import _poolVengefulWarchief from "../pool/vengeful-warchief.js";
 import _poolVenserShaperSavant from "../pool/venser-shaper-savant.js";
 import _poolVenserTheSojourner from "../pool/venser-the-sojourner.js";
 import _poolVerdantCatacombs from "../pool/verdant-catacombs.js";
@@ -1820,6 +1822,7 @@ const shard: CardShard = {
     _poolTaigamsStrike,
     _poolTallAsABeanstalk,
     _poolTalonrend,
+    _poolTamiyoUpriserCrowned,
     _poolTappingAtTheWindow,
     _poolTawnosTheToymaker,
     _poolTawnosUrzasApprentice,
@@ -1889,6 +1892,7 @@ const shard: CardShard = {
     _poolVectisDominator,
     _poolVengefulBloodwitch,
     _poolVengefulReaper,
+    _poolVengefulWarchief,
     _poolVenserShaperSavant,
     _poolVenserTheSojourner,
     _poolVerdantCatacombs,

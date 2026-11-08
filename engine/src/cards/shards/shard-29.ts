@@ -493,6 +493,7 @@ import _poolMistvaultBridge from "../pool/mistvault-bridge.js";
 import _poolMiteOverseer from "../pool/mite-overseer.js";
 import _poolMizziumMeddler from "../pool/mizzium-meddler.js";
 import _poolMizziumSkin from "../pool/mizzium-skin.js";
+import _poolMobilizerMech from "../pool/mobilizer-mech.js";
 import _poolMomentsPeace from "../pool/moments-peace.js";
 import _poolMoongloveExtractor from "../pool/moonglove-extractor.js";
 import _poolMorbidCuriosity from "../pool/morbid-curiosity.js";
@@ -1464,6 +1465,7 @@ const shard: CardShard = {
     _poolMiteOverseer,
     _poolMizziumMeddler,
     _poolMizziumSkin,
+    _poolMobilizerMech,
     _poolMomentsPeace,
     _poolMoongloveExtractor,
     _poolMorbidCuriosity,

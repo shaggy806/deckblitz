@@ -471,6 +471,7 @@ import _poolInvoluntaryCooldown from "../pool/involuntary-cooldown.js";
 import _poolIraxxaEmpressOfMars from "../pool/iraxxa-empress-of-mars.js";
 import _poolIrohDragonOfTheWest from "../pool/iroh-dragon-of-the-west.js";
 import _poolIronManModernMarvel from "../pool/iron-man-modern-marvel.js";
+import _poolIronMongerSadisticTycoon from "../pool/iron-monger-sadistic-tycoon.js";
 import _poolIronrootTreefolk from "../pool/ironroot-treefolk.js";
 import _poolItemShopkeep from "../pool/item-shopkeep.js";
 import _poolIvoryGiant from "../pool/ivory-giant.js";
@@ -1505,6 +1506,7 @@ const shard: CardShard = {
     _poolIraxxaEmpressOfMars,
     _poolIrohDragonOfTheWest,
     _poolIronManModernMarvel,
+    _poolIronMongerSadisticTycoon,
     _poolIronrootTreefolk,
     _poolItemShopkeep,
     _poolIvoryGiant,

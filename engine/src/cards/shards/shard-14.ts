@@ -886,6 +886,7 @@ import _poolTrustyRetriever from "../pool/trusty-retriever.js";
 import _poolTunnelSurveyor from "../pool/tunnel-surveyor.js";
 import _poolTwinflame from "../pool/twinflame.js";
 import _poolUSSDefiantMirrorMigrant from "../pool/u-s-s-defiant-mirror-migrant.js";
+import _poolUltronUnlimited from "../pool/ultron-unlimited.js";
 import _poolUmaraWizard from "../pool/umara-wizard.js";
 import _poolUmbraStalker from "../pool/umbra-stalker.js";
 import _poolUmezawasCharm from "../pool/umezawas-charm.js";
@@ -1885,6 +1886,7 @@ const shard: CardShard = {
     _poolTunnelSurveyor,
     _poolTwinflame,
     _poolUSSDefiantMirrorMigrant,
+    _poolUltronUnlimited,
     _poolUmaraWizard,
     _poolUmbraStalker,
     _poolUmezawasCharm,

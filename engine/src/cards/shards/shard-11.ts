@@ -276,6 +276,7 @@ import _poolExaltedAngel from "../pool/exalted-angel.js";
 import _poolExtractPower from "../pool/extract-power.js";
 import _poolExtraordinaryJourney from "../pool/extraordinary-journey.js";
 import _poolEyesEverywhere from "../pool/eyes-everywhere.js";
+import _poolEzuriStalkerOfSpheres from "../pool/ezuri-stalker-of-spheres.js";
 import _poolFacetReader from "../pool/facet-reader.js";
 import _poolFailedFording from "../pool/failed-fording.js";
 import _poolFaithUnbroken from "../pool/faith-unbroken.js";
@@ -1273,6 +1274,7 @@ const shard: CardShard = {
     _poolExtractPower,
     _poolExtraordinaryJourney,
     _poolEyesEverywhere,
+    _poolEzuriStalkerOfSpheres,
     _poolFacetReader,
     _poolFailedFording,
     _poolFaithUnbroken,
