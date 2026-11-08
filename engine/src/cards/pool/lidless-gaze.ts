@@ -25,5 +25,6 @@ export default defineCard({
     whose: "each-player",
     duration: "until-end-of-your-next-turn",
     spendAs: "any-type",
+    play: true,
   },
 });

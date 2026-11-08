@@ -85,14 +85,14 @@ const treasures = (game: Game): number =>
     .reduce((sum, o) => sum + (o.stackCount ?? 1), 0);
 
 const impulseExiled = (game: Game): ObjectId[] =>
-  game.state.zones.shared.exile.filter((id) => game.state.objects[id].impulse !== undefined);
+  game.state.zones.shared.exile.filter((id) => game.state.objects[id].playPermission !== undefined);
 
 describe("Prosper, Tome-Bound — Pact Boon", () => {
   it("a land played from exile makes a Treasure", () => {
     const { game } = makeGame([]);
     game.advanceUntil(atMain);
     game.debugSpawn(PROSPER, A, "battlefield");
-    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn" });
+    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn", play: true });
     const [exiled] = impulseExiled(game);
     expect(exiled).toBeDefined();
 
@@ -183,9 +183,9 @@ describe("Prosper, Tome-Bound — Pact Boon", () => {
     game.advanceUntil(atMain);
     game.debugSpawn(PROSPER, A, "battlefield");
     game.advanceUntil((s) => s.turn.number === 2 && atMain(s));
-    game.debugApplyEffect(B, { kind: "impulse-exile", amount: 1, duration: "end-of-turn" });
+    game.debugApplyEffect(B, { kind: "impulse-exile", amount: 1, duration: "end-of-turn", play: true });
     const exiled = game.state.zones.shared.exile.find(
-      (id) => game.state.objects[id].impulse?.player === B,
+      (id) => game.state.objects[id].playPermission?.player === B,
     );
     expect(exiled).toBeDefined();
     if (exiled === undefined) return;
@@ -205,11 +205,11 @@ describe("Prosper, Tome-Bound — Mystic Arcanum", () => {
     // Alice's end step: the top card goes to exile with the permission.
     game.advanceUntil((s) => s.turn.number === 2);
     expect(game.state.objects[libraryTop].zone).toBe("exile");
-    expect(game.state.objects[libraryTop].impulse?.player).toBe(A);
+    expect(game.state.objects[libraryTop].playPermission?.player).toBe(A);
 
     // Still there through Bob's turn, and playable on Alice's next one.
     game.advanceUntil((s) => s.turn.number === 3 && atMain(s));
-    expect(game.state.objects[libraryTop].impulse).toBeDefined();
+    expect(game.state.objects[libraryTop].playPermission).toBeDefined();
     expect(
       game.legalActions(A).some((x) => x.kind === "play-land" && x.card === libraryTop),
     ).toBe(true);
@@ -218,7 +218,7 @@ describe("Prosper, Tome-Bound — Mystic Arcanum", () => {
     // this turn's end step keeps its own permission.
     game.advanceUntil((s) => s.turn.number === 4);
     expect(game.state.objects[libraryTop].zone).toBe("exile");
-    expect(game.state.objects[libraryTop].impulse).toBeUndefined();
+    expect(game.state.objects[libraryTop].playPermission).toBeUndefined();
     expect(impulseExiled(game).length).toBe(1);
   });
 
@@ -282,9 +282,9 @@ describe("cast-spell trigger — from / notFrom", () => {
 
     // From exile (an impulse exile of the Bolt): both.
     const bolt = game.debugSpawn("Lightning Bolt", A, "exile");
-    game.state.objects[bolt].impulse = {
+    game.state.objects[bolt].playPermission = {
       player: A,
-      expiry: { kind: "end-of-turn", turn: game.state.turn.number },
+      expiry: "end-of-turn",
     };
     game.dispatch({
       type: "cast-spell",

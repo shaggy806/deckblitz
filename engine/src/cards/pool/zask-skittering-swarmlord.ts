@@ -28,8 +28,8 @@ export default defineCard({
   toughness: 5,
   text: `${GRAVEYARD_TEXT}\n${DIES_TEXT}\n${PUMP_TEXT}`,
   static: [
-    { affects: { scope: "self" }, playFromGraveyard: { type: "land" }, text: GRAVEYARD_TEXT },
-    { affects: { scope: "self" }, castFromGraveyard: { filter: { subtype: "Insect" } }, text: GRAVEYARD_TEXT },
+    { affects: { scope: "self" }, mayPlay: { from: "graveyard", play: true, filter: { type: "land" } }, text: GRAVEYARD_TEXT },
+    { affects: { scope: "self" }, mayPlay: { from: "graveyard", filter: { subtype: "Insect" } }, text: GRAVEYARD_TEXT },
   ],
   triggered: [
     {

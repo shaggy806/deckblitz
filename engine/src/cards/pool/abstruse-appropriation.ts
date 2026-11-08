@@ -13,6 +13,6 @@ export default defineCard({
   effect: {
     kind: "exile",
     target: 0,
-    mayCast: { duration: "while-exiled", spendAs: { unit: "C", as: "any-color" } },
+    mayPlay: { duration: "while-exiled", spendAs: { unit: "C", as: "any-color" } },
   },
 });

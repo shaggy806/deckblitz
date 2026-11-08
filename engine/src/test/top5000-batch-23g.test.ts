@@ -129,7 +129,7 @@ describe("top-5000 batch 23g — Lyse Hext", () => {
 describe("top-5000 batch 23g — Ignite the Future", () => {
   const exiledWithImpulse = (game: Game): ObjectId[] =>
     Object.values(game.state.objects)
-      .filter((o) => o.zone === "exile" && o.impulse !== undefined && o.cardName === "Grizzly Bears")
+      .filter((o) => o.zone === "exile" && o.playPermission !== undefined && o.cardName === "Grizzly Bears")
       .map((o) => o.id);
 
   it("plays the cards for their costs cast from hand, and free once flashed back", () => {
@@ -140,7 +140,7 @@ describe("top-5000 batch 23g — Ignite the Future", () => {
     settle(game);
     const fromHand = exiledWithImpulse(game);
     expect(fromHand).toHaveLength(3);
-    expect(fromHand.every((id) => game.state.objects[id].impulse?.free === undefined)).toBe(true);
+    expect(fromHand.every((id) => game.state.objects[id].playPermission?.free === undefined)).toBe(true);
     expect(zone(game, ignite)).toBe("graveyard");
 
     lands(game, "Mountain", 8);
@@ -148,7 +148,7 @@ describe("top-5000 batch 23g — Ignite the Future", () => {
     settle(game);
     const flashed = exiledWithImpulse(game).filter((id) => !fromHand.includes(id));
     expect(flashed).toHaveLength(3);
-    expect(flashed.every((id) => game.state.objects[id].impulse?.free !== undefined)).toBe(true);
+    expect(flashed.every((id) => game.state.objects[id].playPermission?.free !== undefined)).toBe(true);
     expect(zone(game, ignite)).toBe("exile");
   });
 });

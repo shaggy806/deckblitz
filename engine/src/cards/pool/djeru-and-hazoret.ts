@@ -51,7 +51,7 @@ export default defineCard({
         filter: { type: "creature", supertype: "legendary" },
         destination: "exile",
         leftover: "bottom-random",
-        then: { kind: "allow-cast-from-exile", target: 0, free: true },
+        then: { kind: "grant-play", cards: 0, duration: "end-of-turn", free: true },
       },
       resolve: null,
       text: ATTACK_TEXT,

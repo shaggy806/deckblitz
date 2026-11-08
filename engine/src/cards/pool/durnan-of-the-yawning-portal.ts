@@ -30,7 +30,7 @@ export default defineCard({
         filter: { type: "creature" },
         destination: "exile",
         leftover: "bottom-any-order",
-        then: { kind: "allow-cast-from-exile", target: 0, whileExiled: true, undaunted: true },
+        then: { kind: "grant-play", cards: 0, duration: "while-exiled", undaunted: true },
       },
       resolve: null,
       text: ATTACK_TEXT,

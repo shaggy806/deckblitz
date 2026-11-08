@@ -18,7 +18,7 @@ export default defineCard({
     {
       ...ATTACKS_WHILE_SADDLED,
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn", play: true },
       resolve: null,
       text: ATTACK_TEXT,
     },

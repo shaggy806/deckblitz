@@ -19,6 +19,7 @@ export default defineCard({
     whose: 0,
     duration: "while-exiled",
     faceDown: true,
+    play: true,
   },
   faces: ["Decadent Dragon", "Expensive Taste"],
   adventure: true,

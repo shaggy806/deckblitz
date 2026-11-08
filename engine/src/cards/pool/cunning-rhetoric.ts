@@ -32,6 +32,7 @@ export default defineCard({
         whose: "active-player",
         duration: "while-exiled",
         spendAs: "any-color",
+        play: true,
       },
       resolve: null,
       text: TEXT,

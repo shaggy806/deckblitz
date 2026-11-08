@@ -24,7 +24,7 @@ export default defineCard({
       trigger: { on: "step-begins", step: "postcombat-main", who: "you" },
       condition: { kind: "turn-stat", stat: "attacked", who: "you", atLeast: 1 },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "until-end-of-combat-your-next-turn" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "until-end-of-combat-your-next-turn", play: true },
       resolve: null,
       text: RAID_TEXT,
     },

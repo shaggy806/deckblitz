@@ -14,8 +14,7 @@ export default defineCard({
       {
         kind: "player-effect",
         duration: "end-of-turn",
-        playLandsFromGraveyard: true,
-        castFromGraveyard: { filter: {} },
+        mayPlay: { from: "graveyard", play: true },
       },
       {
         kind: "player-effect",

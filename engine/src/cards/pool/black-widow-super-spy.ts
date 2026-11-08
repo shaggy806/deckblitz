@@ -28,7 +28,7 @@ export default defineCard({
           kind: "may",
           prompt: "Put a +1/+1 counter on Black Widow? (If you don't, you may cast the exiled card this turn.)",
           effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
-          else: { kind: "allow-cast-from-exile", target: 0, spendAs: "any-type" },
+          else: { kind: "grant-play", cards: 0, duration: "end-of-turn", spendAs: "any-type" },
         },
       },
       resolve: null,

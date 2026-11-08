@@ -21,7 +21,7 @@ export default defineCard({
     {
       trigger: { on: "step-begins", step: "upkeep", who: "you" },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn", castOnly: true },
+      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn", },
       resolve: null,
       text: UPKEEP_TEXT,
     },

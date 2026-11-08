@@ -31,7 +31,7 @@ export default defineCard({
       {
         text: DATE_MODE,
         targets: [],
-        effect: { kind: "impulse-exile", amount: 2, duration: "until-end-of-your-next-turn", choose: 1 },
+        effect: { kind: "impulse-exile", amount: 2, duration: "until-end-of-your-next-turn", play: true, choose: 1 },
       },
       {
         text: PATROL_MODE,

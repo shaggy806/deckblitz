@@ -63,6 +63,7 @@ Read a file's entry before changing that file; you don't need the rest.
   anything its *text* says — abilities, keywords, statics, `copyOnEnter` and the rest — which
   is another card's after an exchange of text boxes (layer 3, rule 612.5 — Deadpool). An
   ability read through `printedCardName` is a bug that only an exchanged permanent shows.
+- **A permission to play a card from somewhere is one record** (`play-permission.ts`): `PlayTerms`, kept as a static's `mayPlay`, a `PlayerEffect.mayPlay`, a card's `playPermission` or its `mayPlaySelf`, and read only through `Game.playOptions`, so a new rider works from every zone. Don't add a zone-specific field, or a new `*FromGraveyard` static.
 - **`"sideEffects": false`** holds only because no engine module does anything at import time
   but define things. Keep it so, or every page ships the whole card pool.
 - **The client imports `engine/client`** (`src/client.ts`), never the barrel. It must not start

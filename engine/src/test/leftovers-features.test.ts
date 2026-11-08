@@ -487,7 +487,7 @@ describe("Ixhel, Scion of Atraxa", () => {
     game.advanceUntil((s) => s.turn.number === 2);
     expect(zoneOf(game, bTop)).toBe("exile");
     expect(game.state.objects[bTop].exiledFaceDown?.lookers).toEqual([A]);
-    expect(game.state.objects[bTop].impulse).toMatchObject({ player: A, spendAs: "any-color" });
+    expect(game.state.objects[bTop].playPermission).toMatchObject({ player: A, spendAs: "any-color" });
     // Carol has only two: her card stays.
     expect(zoneOf(game, cTop)).toBe("library");
 

@@ -147,7 +147,7 @@ describe("Muldrotha, the Gravetide", () => {
       graveyardGrant: { source: muldrotha, asType },
     });
     expect(game.canDispatch(action("enchantment"))).not.toBeNull();
-    game.state.objects[muldrotha].graveyardCastTypesUsedThisTurn = ["creature"];
+    game.state.objects[muldrotha].playUses = { turn: game.state.turn.number, types: ["creature"] };
     expect(game.canDispatch(action("creature"))).not.toBeNull();
     // A grant on anything but a graveyard-permission cast is refused.
     const inHand = game.debugSpawn("Darksteel Myr", A, "hand");
@@ -203,7 +203,7 @@ describe("Muldrotha, the Gravetide", () => {
     ]);
     // Named no grant: Ramunap's, which spends nothing of Muldrotha's.
     game.dispatch({ type: "play-land", player: A, card: citadel });
-    expect(game.state.objects[muldrotha].graveyardCastTypesUsedThisTurn).toBeUndefined();
+    expect(game.state.objects[muldrotha].playUses).toBeUndefined();
     expect(typesOffered(game, citadel2)).toEqual(["land"]);
   });
 
@@ -312,7 +312,7 @@ describe("Silas Renn, Seeker Adept", () => {
     );
     settle(game);
     expect(game.state.players[B].life).toBe(18);
-    expect(game.state.objects[ring].graveyardCastPermission).toEqual({ player: A, turn: 1 });
+    expect(game.state.objects[ring].playPermission).toMatchObject({ player: A, expiry: "end-of-turn" });
 
     const offers = offersFor(game, ring);
     expect(offers.map((o) => o.graveyardGrant)).toEqual([{ source: ring }]);
@@ -388,7 +388,7 @@ describe("Emry, Lurker of the Loch", () => {
     toMain(game);
     addLands(game, 3);
     const myr = game.debugSpawn("Darksteel Myr", A, "graveyard");
-    game.debugApplyEffect(A, { kind: "grant-graveyard-cast", target: 0 }, [
+    game.debugApplyEffect(A, { kind: "grant-play", cards: 0, duration: "end-of-turn" }, [
       { kind: "object", object: myr },
     ]);
     expect(offersFor(game, myr).length).toBe(1);
@@ -433,12 +433,7 @@ describe("the static's other shapes", () => {
       static: [
         {
           affects: { scope: "self" },
-          castFromGraveyard: {
-            filter: { typesAnyOf: ["instant", "sorcery"] },
-            oncePerTurn: true,
-            yourTurnOnly: true,
-            exileAfterwards: true,
-          },
+          mayPlay: { from: "graveyard", filter: { typesAnyOf: ["instant", "sorcery"] }, oncePerTurn: true, yourTurnOnly: true, exileAfter: true },
           text: "",
         },
       ],
@@ -452,7 +447,7 @@ describe("the static's other shapes", () => {
       static: [
         {
           affects: { scope: "self" },
-          castFromGraveyard: { filter: { type: "artifact" }, payLife: 3 },
+          mayPlay: { from: "graveyard", filter: { type: "artifact" }, payLife: 3 },
           text: "",
         },
       ],

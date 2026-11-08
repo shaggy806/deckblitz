@@ -42,7 +42,7 @@ export default defineCard({
     {
       // Ramunap Excavator's permission, narrowed to Forests.
       affects: { scope: "self" },
-      playFromGraveyard: { type: "land", subtype: "Forest" },
+      mayPlay: { from: "graveyard", play: true, filter: { type: "land", subtype: "Forest" } },
       text: "You may play Forests from your graveyard.",
     },
   ],

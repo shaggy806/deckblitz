@@ -489,8 +489,11 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     v.child(n.effect);
   },
   "enters-with-counters": (n, v) => v.touch(n.target, "help", MINOR),
-  "allow-cast-from-exile": (n, v) => v.touch(n.target, "take", MAJOR),
-  "allow-cast-linked-exile": () => {},
+  // A permission over a card, a slot or a set: one from a graveyard of your
+  // own is a gift to you; another's card is taken.
+  "grant-play": (n, v) => {
+    if (typeof n.cards === "number") v.touch(n.cards, "help", MAJOR);
+  },
   "turn-exiled-face-up": () => {},
   "cast-now": (n, v) => {
     v.touch(n.from === "targets" ? EVERY_SLOT : n.target, "take", MAJOR);
@@ -683,9 +686,6 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "grant-flashback":(n, v) => v.touch(n.target, "help", MAJOR),
   "grant-flashback-all": none,
   "grant-graveyard-keyword": (n, v) => {
-    if (n.target !== undefined) v.touch(n.target, "help", MAJOR);
-  },
-  "grant-graveyard-cast": (n, v) => {
     if (n.target !== undefined) v.touch(n.target, "help", MAJOR);
   },
   "grant-triggered": (n, v) => v.touch(n.target, "help", MAJOR),

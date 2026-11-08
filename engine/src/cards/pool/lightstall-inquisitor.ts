@@ -28,7 +28,7 @@ export default defineCard({
           destination: "exile",
           unlinked: true,
           leftover: "stay",
-          playable: { duration: "while-exiled", byOwner: true, tax: { generic: 1 }, landsEnterTapped: true },
+          mayPlay: { duration: "while-exiled", byOwner: true, tax: { generic: 1 }, landsEnterTapped: true, play: true },
         },
       },
     },

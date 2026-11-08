@@ -24,7 +24,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      castFromGraveyard: { filter: DRAGON, oncePerTurn: true, yourTurnOnly: true },
+      mayPlay: { from: "graveyard", filter: DRAGON, oncePerTurn: true, yourTurnOnly: true },
       text: GRAVEYARD_TEXT,
     },
   ],

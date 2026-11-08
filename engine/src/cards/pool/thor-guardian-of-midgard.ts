@@ -26,7 +26,7 @@ export default defineCard({
       effect: {
         kind: "may",
         prompt: "Exile that many cards from the top of your library?",
-        effect: { kind: "impulse-exile", amount: { triggerValue: true }, duration: "end-of-turn" },
+        effect: { kind: "impulse-exile", amount: { triggerValue: true }, duration: "end-of-turn", play: true },
       },
       resolve: null,
       text: DAMAGE_TEXT,

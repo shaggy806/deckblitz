@@ -30,7 +30,7 @@ export default defineCard({
       cost: { mana: null, tap: false, sacrifice: "self" },
       condition: { kind: "solved" },
       targets: [],
-      effect: { kind: "grant-graveyard-cast", filter: { type: "creature" } },
+      effect: { kind: "grant-play", cards: { filter: { type: "creature" } }, duration: "end-of-turn" },
       resolve: null,
       text: SOLVED_TEXT,
     },

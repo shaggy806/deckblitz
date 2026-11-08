@@ -32,7 +32,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "impulse-exile", amount: 1, whose: 0, duration: "end-of-turn", castOnly: true },
+          { kind: "impulse-exile", amount: 1, whose: 0, duration: "end-of-turn", },
           { kind: "create-token", token: "Treasure Token", count: 1 },
           {
             kind: "cast-now",

@@ -27,6 +27,7 @@ export default defineCard({
         whose: "each-player",
         duration: "end-of-turn",
         spendAs: "any-color",
+        play: true,
       },
       resolve: null,
       text: ATTACK_TEXT,

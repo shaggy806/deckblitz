@@ -33,6 +33,7 @@ export default defineCard({
           choose: 1,
           duration: "until-end-of-your-next-turn",
           spendAs: "any-color",
+          play: true,
         },
       },
     ],

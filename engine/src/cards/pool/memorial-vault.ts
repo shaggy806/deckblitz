@@ -29,6 +29,7 @@ export default defineCard({
         kind: "impulse-exile",
         amount: { sum: [1, { manaValueOf: { paid: "sacrificed" } }] },
         duration: "end-of-turn",
+        play: true,
       },
       resolve: null,
       text: TEXT,

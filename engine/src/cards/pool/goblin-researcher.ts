@@ -20,7 +20,7 @@ export default defineCard({
     {
       trigger: { on: "enters-battlefield", who: "self" },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "while-exiled", sourceDid: "attacked" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "while-exiled", play: true, sourceDid: "attacked" },
       resolve: null,
       text: TEXT,
     },

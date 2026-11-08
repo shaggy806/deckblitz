@@ -41,7 +41,7 @@ export default defineCard({
             effect: { kind: "destroy", target: 0 },
           },
           { text: DAMAGE_MODE, effect: { kind: "damage", amount: 4, who: "each-other-opponent" } },
-          { text: IMPULSE_MODE, effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn" } },
+          { text: IMPULSE_MODE, effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn", play: true } },
         ],
       },
       resolve: null,

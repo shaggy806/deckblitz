@@ -23,7 +23,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "lose-life", amount: 2, who: "you" },
-          { kind: "impulse-exile", amount: 1, duration: "while-exiled" },
+          { kind: "impulse-exile", amount: 1, duration: "while-exiled", play: true },
         ],
       },
       resolve: null,

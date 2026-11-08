@@ -14,7 +14,7 @@ export default defineCard({
       cost: { mana: null, tap: true, sacrifice: "self" },
       sorcerySpeed: true,
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn", play: true },
       resolve: null,
       text:
         "{T}, Sacrifice this artifact: Exile the top card of your library. You may play that card " +

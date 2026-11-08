@@ -33,6 +33,7 @@ export default defineCard({
           amount: { powerOf: "trigger-object" },
           duration: "until-end-of-your-next-turn",
           choose: 1,
+          play: true,
         },
         text: DIES_TEXT,
       },

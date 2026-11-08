@@ -56,7 +56,7 @@ export default defineCard({
     {
       trigger: { on: "becomes-tapped", who: "self" },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 2, duration: "end-of-turn" },
+      effect: { kind: "impulse-exile", amount: 2, duration: "end-of-turn", play: true },
       resolve: null,
       text: TAP_TEXT,
     },

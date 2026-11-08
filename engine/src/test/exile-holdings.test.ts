@@ -54,7 +54,7 @@ describe("what a permanent holds in exile", () => {
     const [top, second] = game.state.zones.perPlayer[B].library;
     game.debugApplyEffect(
       A,
-      { kind: "impulse-exile", amount: 2, whose: "each-opponent", duration: "end-of-turn", whileSource: true, faceDown: true },
+      { kind: "impulse-exile", amount: 2, whose: "each-opponent", duration: "end-of-turn", play: true, whileSource: true, faceDown: true },
       [],
       { source: maralen },
     );

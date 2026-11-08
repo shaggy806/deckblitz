@@ -10,6 +10,6 @@ export default defineCard({
   subtypes: ["Scarecrow"],
   power: 4,
   toughness: 3,
-  castSelfFromGraveyard: { payLife: 2, sacrifice: { typesAnyOf: ["artifact", "creature"] } },
+  mayPlaySelf: { from: ["graveyard"], payLife: 2, sacrifice: { typesAnyOf: ["artifact", "creature"] } },
   text: "You may cast this card from your graveyard by paying 2 life and sacrificing an artifact or creature in addition to paying its other costs.",
 });

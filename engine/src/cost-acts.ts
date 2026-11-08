@@ -56,6 +56,7 @@ export const COST_ACTS = {
   untap: {},
   "discard-hand": {},
   discard: { maxX: (spec, ctx) => ctx.handSizeOf(ctx.controller, spec.filter) },
+  "remove-counters": { payable: (spec, ctx) => ctx.removableCounters(spec) >= (spec.count === "any" ? 0 : amountValue(spec.count, ctx)) },
   sacrifice: {
     payable: (spec, ctx) => ctx.sacrificeCandidateCount(spec.filter) >= amountValue(spec.count, ctx),
     maxX: (spec, ctx) => ctx.sacrificeCandidateCount(spec.filter),
@@ -159,6 +160,7 @@ const ASKS: ReadonlySet<string> = new Set([
   "collect-evidence",
   "behold",
   "blight",
+  "remove-counters",
   "modal",
 ]);
 export function costActMayAsk(act: EffectSpec): boolean {

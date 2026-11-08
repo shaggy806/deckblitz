@@ -28,7 +28,7 @@ export default defineCard({
       // timing (the ruling), until end of turn or until it leaves the graveyard.
       cost: { mana: null, tap: true },
       targets: [{ kind: "card-in-graveyard", whose: "you", filter: { type: "creature", subtype: "Zombie" } }],
-      effect: { kind: "grant-graveyard-cast", target: 0 },
+      effect: { kind: "grant-play", cards: 0, duration: "end-of-turn" },
       resolve: null,
       text: CAST_TEXT,
     },

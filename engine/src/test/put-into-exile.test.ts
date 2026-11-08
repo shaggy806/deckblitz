@@ -116,7 +116,7 @@ describe("one or more cards put into exile", () => {
       (id) => game.state.objects[id].cardName === "Goblin Token",
     )!;
     run(game, { kind: "exile", target: 0 }, [goblin]);
-    run(game, { kind: "impulse-exile", amount: 2, duration: "end-of-turn" });
+    run(game, { kind: "impulse-exile", amount: 2, duration: "end-of-turn", play: true });
     expect(fired(game, watcher)).toBe(1);
   });
 
@@ -163,7 +163,7 @@ describe("exiled from the top of a library", () => {
     const since = game.state.eventSeq;
     run(
       game,
-      { kind: "impulse-exile", amount: 2, whose: 0, duration: "while-exiled", faceDown: true },
+      { kind: "impulse-exile", amount: 2, whose: 0, duration: "while-exiled", play: true, faceDown: true },
       [B],
     );
     const moves = movesSince(game, since);

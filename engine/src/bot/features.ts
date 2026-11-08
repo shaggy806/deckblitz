@@ -414,8 +414,7 @@ function castableFromGraveyard(registry: CardRegistry, object: GameObject): bool
     def.retrace ||
     def.escape !== null ||
     def.disturb !== null ||
-    def.castFromGraveyardIf !== undefined ||
-    def.castSelfFromGraveyard !== undefined ||
+    def.mayPlaySelf?.from.includes("graveyard") === true ||
     (def.activated ?? []).some((a) => a.zone === "graveyard")
   );
 }

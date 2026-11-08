@@ -27,7 +27,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "put-onto-battlefield", target: 0 },
-      { kind: "impulse-exile", amount: 2, duration: "until-end-of-your-next-turn" },
+      { kind: "impulse-exile", amount: 2, duration: "until-end-of-your-next-turn", play: true },
     ],
   },
 });

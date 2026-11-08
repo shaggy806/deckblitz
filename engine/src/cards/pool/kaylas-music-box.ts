@@ -20,7 +20,7 @@ export default defineCard({
       resolve: null,
       text: "{T}: Until end of turn, you may play cards you own exiled with Kayla's Music Box.",
       targets: [],
-      effect: { kind: "allow-cast-linked-exile", spell: { ownedBy: "you" }, play: true, anyNumber: true },
+      effect: { kind: "player-effect", duration: "end-of-turn", mayPlay: { from: "exile", linked: true, play: true, spell: { ownedBy: "you" } } },
     },
   ],
 });

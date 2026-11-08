@@ -43,7 +43,7 @@ export default defineCard({
             {
               kind: "conditional",
               condition: { kind: "this-way", what: "sacrificed" },
-              then: { kind: "allow-cast-from-exile", target: 0, plays: true, spendAs: "any-type" },
+              then: { kind: "grant-play", cards: 0, duration: "end-of-turn", play: true, spendAs: "any-type" },
             },
           ],
         },

@@ -21,14 +21,14 @@ export default defineCard({
     {
       trigger: { on: "enters-battlefield", who: "self" },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn", play: true },
       resolve: null,
       text: IMPULSE_TEXT,
     },
     {
       trigger: { on: "leaves-battlefield", who: "self" },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn", play: true },
       resolve: null,
       text: IMPULSE_TEXT,
     },

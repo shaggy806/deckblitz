@@ -35,8 +35,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      playFromLibraryTop: { type: "land" },
-      castFromLibraryTop: { filter: {}, payLifeManaValue: true },
+      mayPlay: { from: "library-top", play: true, byPayingLife: true },
       text: PLAY_TEXT,
     },
   ],

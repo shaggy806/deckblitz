@@ -12,7 +12,7 @@ export default defineCard({
   types: ["enchantment"],
   subtypes: ["Room"],
   text: `${PLAY}\n${ROOM_REMINDER}`,
-  static: [{ affects: { scope: "self" }, playFromGraveyard: { type: "land" }, text: PLAY }],
+  static: [{ affects: { scope: "self" }, mayPlay: { from: "graveyard", play: true, filter: { type: "land" } }, text: PLAY }],
   faces: FACES,
   split: true,
 });

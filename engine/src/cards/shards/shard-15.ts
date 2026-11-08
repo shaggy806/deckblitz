@@ -241,6 +241,7 @@ import _poolEssenceCapture from "../pool/essence-capture.js";
 import _poolEssenceDrain from "../pool/essence-drain.js";
 import _poolEssenceReliquary from "../pool/essence-reliquary.js";
 import _poolEtherswornCanonist from "../pool/ethersworn-canonist.js";
+import _poolEvelynTheCovetous from "../pool/evelyn-the-covetous.js";
 import _poolExaltedSunborn from "../pool/exalted-sunborn.js";
 import _poolExecutionersCapsule from "../pool/executioners-capsule.js";
 import _poolExpandTheSphere from "../pool/expand-the-sphere.js";
@@ -1175,6 +1176,7 @@ const shard: CardShard = {
     _poolEssenceDrain,
     _poolEssenceReliquary,
     _poolEtherswornCanonist,
+    _poolEvelynTheCovetous,
     _poolExaltedSunborn,
     _poolExecutionersCapsule,
     _poolExpandTheSphere,

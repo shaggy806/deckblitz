@@ -32,6 +32,7 @@ export default defineCard({
         faceDown: true,
         gate: { kind: "class-level", atLeast: 3 },
         spendAs: "any-color",
+        play: true,
       },
       resolve: null,
       text: EXILE_TEXT,

@@ -113,7 +113,7 @@ describe("Edward Kenway — a Vehicle's combat damage", () => {
   it("a face-up exile is still public — the flag is only the face-down one's", () => {
     const { game } = mkGame();
     const top = game.debugSpawn("Grizzly Bears", B, "library");
-    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 1, whose: "each-opponent", duration: "while-exiled" }, []);
+    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 1, whose: "each-opponent", duration: "while-exiled", play: true }, []);
     expect(game.state.objects[top].zone).toBe("exile");
     expect(game.viewFor(B).objects[top]?.cardName).toBe("Grizzly Bears");
   });

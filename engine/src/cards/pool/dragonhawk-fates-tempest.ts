@@ -15,6 +15,7 @@ const EFFECT = {
       kind: "impulse-exile",
       amount: { countOf: { type: "creature", controlledBy: "you", power: { op: "gte", n: 4 } } },
       duration: "until-your-next-end-step",
+      play: true,
     },
     {
       kind: "delayed-trigger",

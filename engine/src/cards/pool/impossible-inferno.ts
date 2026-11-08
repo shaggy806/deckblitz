@@ -27,7 +27,7 @@ export default defineCard({
       {
         kind: "conditional",
         condition: { kind: "delirium" },
-        then: { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn" },
+        then: { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn", play: true },
       },
     ],
   },

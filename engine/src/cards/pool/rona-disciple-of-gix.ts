@@ -33,7 +33,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       text: "You may cast spells from among cards exiled with Rona.",
-      playFromExile: { filter: {}, linked: true, castOnly: true },
+      mayPlay: { from: "exile", filter: {}, linked: true },
     },
   ],
   activated: [

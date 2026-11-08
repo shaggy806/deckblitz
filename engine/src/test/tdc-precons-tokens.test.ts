@@ -761,8 +761,8 @@ describe("Dauthi Voidwalker", () => {
     game.dispatch({ type: "activate-ability", player: A, source: dauthi, abilityIndex: 0, targets: [] });
     game.advanceUntil(quiet);
     expect(game.state.objects[dauthi].zone).toBe("graveyard");
-    expect(game.state.objects[theirs].impulse?.player).toBe(A);
-    expect(game.state.objects[plain].impulse).toBeUndefined();
+    expect(game.state.objects[theirs].playPermission?.player).toBe(A);
+    expect(game.state.objects[plain].playPermission).toBeUndefined();
     // No mana: only free.
     game.dispatch({ type: "cast-spell", player: A, card: theirs, targets: [], via: "impulse", free: true });
     game.advanceUntil(quiet);
@@ -910,7 +910,7 @@ describe("Colossal Grave-Reaver", () => {
 
 describe("Neriv, Crackling Vanguard", () => {
   const exiledByNeriv = (game: Game): ObjectId[] =>
-    game.state.zones.shared.exile.filter((id) => game.state.objects[id].impulse?.player === A);
+    game.state.zones.shared.exile.filter((id) => game.state.objects[id].playPermission?.player === A);
   const playable = (game: Game, id: ObjectId): boolean =>
     game.legalActions(A).some((o) => (o.kind === "play-land" || o.kind === "cast-spell") && o.card === id);
 

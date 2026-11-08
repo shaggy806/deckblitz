@@ -16,7 +16,7 @@ export default defineCard({
   keywords: ["haste"],
   text: `Haste\n${ATTACK}\n${GRAVEYARD}`,
   // An alternative cost ({3}{R}) with an additional exile of four others.
-  castSelfFromGraveyard: { mana: "{3}{R}", exileOthers: 4 },
+  mayPlaySelf: { from: ["graveyard"], byPaying: "{3}{R}", exileOthers: 4 },
   triggered: [
     {
       trigger: { on: "attacks", who: "self" },

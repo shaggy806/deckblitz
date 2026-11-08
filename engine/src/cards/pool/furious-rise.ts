@@ -16,7 +16,7 @@ export default defineCard({
       trigger: { on: "step-begins", step: "end", who: "you" },
       condition: { kind: "controls", filter: { type: "creature", power: { op: "gte", n: 4 } }, atLeast: 1 },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "until-next-exile" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "until-next-exile", play: true },
       resolve: null,
       text: TEXT,
     },

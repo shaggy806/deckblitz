@@ -22,7 +22,7 @@ export default defineCard({
         effect: {
           kind: "exile",
           target: 0,
-          mayCast: { duration: "while-exiled", play: true, byOwner: true },
+          mayPlay: { duration: "while-exiled", play: true, byOwner: true },
         },
       },
       resolve: null,

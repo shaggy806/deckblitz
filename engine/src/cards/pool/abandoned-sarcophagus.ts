@@ -20,7 +20,7 @@ export default defineCard({
   types: ["artifact"],
   text: `${CAST_TEXT}\n${EXILE_TEXT}`,
   static: [
-    { affects: { scope: "self" }, castFromGraveyard: { filter: { hasKeyword: "cycling" } }, text: CAST_TEXT },
+    { affects: { scope: "self" }, mayPlay: { from: "graveyard", filter: { hasKeyword: "cycling" } }, text: CAST_TEXT },
     {
       affects: { scope: "self" },
       replacement: {

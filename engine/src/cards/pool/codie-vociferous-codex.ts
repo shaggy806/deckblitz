@@ -54,7 +54,7 @@ export default defineCard({
                   typesAnyOf: ["instant", "sorcery"],
                   manaValue: { op: "lt", n: { amount: { manaValueOf: "trigger-object" } } },
                 },
-                then: { kind: "allow-cast-from-exile", target: 0, free: true },
+                then: { kind: "grant-play", cards: 0, duration: "end-of-turn", free: true },
                 rest: "bottom-random",
                 keepFound: true,
               },

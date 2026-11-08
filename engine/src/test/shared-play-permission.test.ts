@@ -91,7 +91,7 @@ describe("Locke, Treasure Hunter", () => {
     const second = toLibrary(game, "Lightning Bolt");
     game.debugApplyEffect(A, { kind: "sequence", effects: [
       { kind: "mill", target: "you", amount: 1 },
-      { kind: "grant-graveyard-cast", cards: "milled-this-way", upTo: 1 },
+      { kind: "grant-play", cards: { thisWay: "milled" }, duration: "end-of-turn", upTo: 1 },
     ] }, []);
     cast(game, first, { targets: [ref(B)], via: "graveyard-permission" });
     expect(castable(game, second)).toBe(true);

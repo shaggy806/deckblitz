@@ -97,7 +97,7 @@ describe("a suspended card coming off suspend", () => {
     const { game, bolt } = offAtUpkeep();
     const awaiting = game.state.awaiting;
     if (awaiting?.kind !== "cast-now") throw new Error("no offer");
-    expect(awaiting.freeCastOf).toBe("suspend");
+    expect(awaiting.ask.freeCastOf).toBe("suspend");
     game.dispatch({ type: "cast-now", player: A, cast: null });
     game.advanceUntil(settled);
     expect(game.state.objects[bolt].zone).toBe("exile");

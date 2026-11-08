@@ -167,7 +167,7 @@ describe("Painter's Studio // Defaced Gallery", () => {
     const { game } = table();
     lands(game, "Mountain", 3);
     castDoor(game, "Painter's Studio // Defaced Gallery", 1);
-    const exiled = game.state.zones.shared.exile.filter((id) => game.state.objects[id].impulse !== undefined);
+    const exiled = game.state.zones.shared.exile.filter((id) => game.state.objects[id].playPermission !== undefined);
     expect(exiled).toHaveLength(2);
   });
 

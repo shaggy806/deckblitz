@@ -18,13 +18,13 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      playFromLibraryTop: { type: "land" },
+      mayPlay: { from: "library-top", play: true, filter: { type: "land" } },
       text: LANDS_TEXT,
     },
     {
       affects: { scope: "self" },
       condition: { kind: "coven" },
-      castFromLibraryTop: { filter: { type: "creature" } },
+      mayPlay: { from: "library-top", filter: { type: "creature" } },
       text: COVEN_TEXT,
     },
   ],

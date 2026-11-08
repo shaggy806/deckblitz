@@ -201,7 +201,7 @@ describe("STX group b — Ardent Dustspeaker", () => {
     expect(library(game).at(-1)).toBe(bolt);
     expect(zone(game, top)).toBe("exile");
     expect(zone(game, second)).toBe("exile");
-    expect(game.state.objects[top].impulse).toBeDefined();
+    expect(game.state.objects[top].playPermission).toBeDefined();
   });
 
   it("with no instant or sorcery in the graveyard, nothing is exiled", () => {

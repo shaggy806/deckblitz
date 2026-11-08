@@ -114,7 +114,7 @@ describe("Elemental Mascot", () => {
     fiveManaFireball(game);
     expect(pt(game, mascot)).toEqual({ power: 2, toughness: 4 });
     expect(zone(game, top)).toBe("exile");
-    expect(game.state.objects[top].impulse).toBeDefined();
+    expect(game.state.objects[top].playPermission).toBeDefined();
   });
 });
 

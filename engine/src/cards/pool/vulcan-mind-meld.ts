@@ -26,6 +26,7 @@ export default defineCard({
           duration: "while-exiled",
           faceDown: true,
           spendAs: "any-type",
+          play: true,
         },
       },
       {
@@ -35,6 +36,7 @@ export default defineCard({
         duration: "while-exiled",
         faceDown: true,
         spendAs: "any-type",
+        play: true,
       },
     ],
   },

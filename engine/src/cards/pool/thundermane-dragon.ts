@@ -24,10 +24,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      castFromLibraryTop: {
-        filter: { type: "creature", power: { op: "gte", n: 4 } },
-        gainsHaste: true,
-      },
+      mayPlay: { from: "library-top", filter: { type: "creature", power: { op: "gte", n: 4 } }, gainsHaste: true },
       text: CAST_TEXT,
     },
   ],

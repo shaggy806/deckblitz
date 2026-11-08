@@ -23,12 +23,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      castFromGraveyard: {
-        filter: { typesAnyOf: ["instant", "sorcery"] },
-        oncePerTurn: true,
-        yourTurnOnly: true,
-        exileAfterwards: true,
-      },
+      mayPlay: { from: "graveyard", filter: { typesAnyOf: ["instant", "sorcery"] }, oncePerTurn: true, yourTurnOnly: true, exileAfter: true },
       text:
         "Once during each of your turns, you may cast an instant or sorcery spell from your " +
         "graveyard. If a spell cast this way would be put into your graveyard, exile it instead.",

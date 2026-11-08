@@ -32,8 +32,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "source", filter: { attackedThisTurn: true } },
-      playFromLibraryTop: { type: "land" },
-      castFromLibraryTop: { filter: {} },
+      mayPlay: { from: "library-top", play: true },
       text: PLAY_TEXT,
     },
   ],

@@ -29,7 +29,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: true },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "until-your-next-end-step" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "until-your-next-end-step", play: true },
       resolve: null,
       text: TAP_TEXT,
     },

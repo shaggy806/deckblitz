@@ -13,5 +13,5 @@ export default defineCard({
   text: SPELL_TEXT,
   exileOnResolve: true,
   targets: [{ kind: "card-in-graveyard", whose: "you", filter: { typesAnyOf: ["instant", "sorcery"] } }],
-  effect: { kind: "grant-graveyard-cast", target: 0, free: true, exileAfter: true },
+  effect: { kind: "grant-play", cards: 0, duration: "end-of-turn", free: true, exileAfter: true },
 });

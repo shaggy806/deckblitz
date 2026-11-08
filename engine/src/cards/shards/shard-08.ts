@@ -625,6 +625,7 @@ import _poolOrderOfWhiteclay from "../pool/order-of-whiteclay.js";
 import _poolOrokuSakiShredderRising from "../pool/oroku-saki-shredder-rising.js";
 import _poolOtherworldAtlas from "../pool/otherworld-atlas.js";
 import _poolOtherworldlyJourney from "../pool/otherworldly-journey.js";
+import _poolOverflowSubmatrix from "../pool/overflow-submatrix.js";
 import _poolOverflowingBasin from "../pool/overflowing-basin.js";
 import _poolOverlaidTerrain from "../pool/overlaid-terrain.js";
 import _poolOverrun from "../pool/overrun.js";
@@ -1663,6 +1664,7 @@ const shard: CardShard = {
     _poolOrokuSakiShredderRising,
     _poolOtherworldAtlas,
     _poolOtherworldlyJourney,
+    _poolOverflowSubmatrix,
     _poolOverflowingBasin,
     _poolOverlaidTerrain,
     _poolOverrun,

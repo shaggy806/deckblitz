@@ -671,6 +671,8 @@ function visible(
                 "upkeep-ends": " until the end of your next upkeep",
                 "this-upkeep-ends": " until the end of this upkeep",
                 "turn-ends": " until the end of your next turn",
+                "end-step-begins": " until your next end step",
+                "next-combat-ends": " until the end of your next combat",
                 "controllers-untap-begins": " until its controller's next untap step",
               }[m.untilPoint.point]
             : m.untilTurnOf !== undefined
@@ -895,12 +897,16 @@ function splitCostsOf(registry: CardRegistry, object: GameObject): { splitCosts?
  * the source a card was exiled with (`exiledWith`, the same stint only).
  */
 function exileHoldings(state: GameState): Map<ObjectId, ObjectId[]> {
+  const whileSourceOf = (object: GameObject): ObjectId | undefined => {
+    const expiry = object.playPermission?.expiry;
+    return typeof expiry === "object" && "whileSource" in expiry ? expiry.whileSource?.id : undefined;
+  };
   const out = new Map<ObjectId, ObjectId[]>();
   const onBattlefield = (id: ObjectId): boolean => state.objects[id]?.zone === "battlefield";
   for (const id of state.zones.shared.exile) {
     const object = state.objects[id];
     if (object === undefined) continue;
-    const linked = object.impulse?.source;
+    const linked = object.playPermission?.source;
     const sameStint = (link: { readonly id: ObjectId; readonly zoneChangeCount: number } | undefined): boolean =>
       link !== undefined &&
       onBattlefield(link.id) &&
@@ -914,8 +920,8 @@ function exileHoldings(state: GameState): Map<ObjectId, ObjectId[]> {
         ? object.exiledBy
         : linked !== undefined && sameStint(linked)
           ? linked.id
-          : object.impulse?.expiry.kind === "while-source" && onBattlefield(object.impulse.expiry.source)
-            ? object.impulse.expiry.source
+          : whileSourceOf(object) !== undefined && onBattlefield(whileSourceOf(object)!)
+            ? whileSourceOf(object)
             : // "Exiled with" it (rule 607.2a): a hideaway card (Mosswort
               // Bridge — face down, so by id only to a seat that can't look),
               // an imprinted one, Arcane Bombardment's — while it's the same

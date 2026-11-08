@@ -36,7 +36,7 @@ export default defineCard({
       effect: {
         kind: "player-effect",
         duration: "end-of-turn",
-        castFromGraveyard: { filter: { type: "creature" }, whose: "trigger-player", once: true, spendAs: "any-color" },
+        mayPlay: { from: "graveyard", filter: { type: "creature" }, whose: "trigger-player", upTo: 1, spendAs: "any-color" },
       },
       resolve: null,
       text: DAMAGE_TEXT,

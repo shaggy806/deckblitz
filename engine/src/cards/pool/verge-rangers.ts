@@ -29,7 +29,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "opponent-controls-more", filter: { type: "land" } },
-      playFromLibraryTop: { type: "land" },
+      mayPlay: { from: "library-top", play: true, filter: { type: "land" } },
       text: "As long as an opponent controls more lands than you, you may play lands from the top of your library.",
     },
   ],

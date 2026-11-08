@@ -16,5 +16,5 @@ export default defineCard({
   toughness: 4,
   keywords: ["haste"],
   text: `Haste\n${CAST_TEXT}`,
-  castSelfFromGraveyard: { exileOthers: 1, exileFilter: { type: "creature" } },
+  mayPlaySelf: { from: ["graveyard"], exileOthers: 1, exileFilter: { type: "creature" } },
 });

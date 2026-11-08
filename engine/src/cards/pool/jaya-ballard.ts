@@ -55,7 +55,7 @@ export default defineCard({
         text: EMBLEM,
         static: {
           affects: { scope: "self" },
-          castFromGraveyard: { filter: { typesAnyOf: ["instant", "sorcery"] }, exileAfterwards: true },
+          mayPlay: { from: "graveyard", filter: { typesAnyOf: ["instant", "sorcery"] }, exileAfter: true },
           text: EMBLEM,
         },
       },

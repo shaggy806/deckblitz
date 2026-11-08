@@ -36,7 +36,7 @@ export default defineCard({
     {
       trigger: { on: "dies", who: "self" },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn", play: true },
       resolve: null,
       text: DIES_TEXT,
     },

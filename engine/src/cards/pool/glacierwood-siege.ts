@@ -40,7 +40,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "chosen-on-enter", value: "Sultai" },
-      playFromGraveyard: { type: "land" },
+      mayPlay: { from: "graveyard", play: true, filter: { type: "land" } },
       text: SULTAI_TEXT,
     },
   ],

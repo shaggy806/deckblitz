@@ -36,6 +36,7 @@ import type { CardNameAim, CardNameFilter } from "./card-names.js";
 import type { Color, LandManaInstead, ManaOrigin, ManaType, ManaUnit, SpendAs } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { Expiry, UntilCast, UntilPoint, WhileSource } from "./duration.js";
+import type { CardPlayPermission, CastNowTerms, EffectPlay } from "./play-permission.js";
 import type { Journal } from "./journal.js";
 import type { ObjectSets, SetMember } from "./object-sets.js";
 export type { JournalOrigin, JournalWhat } from "./journal.js";
@@ -288,40 +289,15 @@ export interface GameObject {
    * return, even only to come straight back, is a new object and stays put.
    */
   flickerLink?: string;
-  /** This permanent's `castFromGraveyard` permission has been used this turn
-   * (Gisa and Geralf's "once during each of your turns"). Reset with the
-   * other once-per-turn flags as its controller's turn begins. */
-  graveyardCastUsedThisTurn?: boolean;
-  /** The permanent types whose `castFromGraveyard.perType` allowance this
-   * permanent has spent this turn (Muldrotha). Reset with
-   * `graveyardCastUsedThisTurn`, and by `moveObject` — a new Muldrotha is a
-   * new object with a fresh set. */
-  graveyardCastTypesUsedThisTurn?: CardType[];
-  /**
-   * A one-shot permission on a card in a graveyard: `player` may cast it
-   * during turn `turn` (Silas Renn, Emry: "choose target artifact card in
-   * your graveyard. You may cast that card this turn"). It belongs to the
-   * card, not to whatever granted it, so it outlives its grantor — and it
-   * ends when the card leaves the graveyard (`moveObject` clears it): a card
-   * that comes back is a new object with no permission.
-   */
-  graveyardCastPermission?: {
-    readonly player: PlayerId;
-    readonly turn: number;
-    /** "…without paying its mana cost" — the effect's `free`. */
-    readonly free?: true;
-    /** "If that spell would be put into your graveyard, exile it instead" — the
-     * effect's `exileAfter`. */
-    readonly exileAfter?: true;
-    /** "You may **play** that card this turn" (Tablet of Discovery): a land
-     * card too, with the turn's land drop (rule 305.2) — the effect's
-     * `play`. */
-    readonly play?: true;
-    /** "You may cast **a spell from among** those cards" (Locke, Treasure
-     * Hunter): the `GameState.permissionGroups` entry this permission shares
-     * with the other cards the same effect gave it, wherever they are. */
-    readonly group?: number;
-  };
+  /** What this permanent's play permissions have spent this turn, for
+   * `PlayTerms.oncePerTurn` and `perType`: a stale `turn` is nothing spent,
+   * and `moveObject` clears it, a new object having a fresh set (rule 400.7).
+   * Rule state, not history: it says what's left. */
+  playUses?: { readonly turn: number; readonly once?: true; readonly types?: readonly CardType[] };
+  /** A permission to play this one card from where it is (exile or a
+   * graveyard): it belongs to the card, not to whatever gave it, so it outlives
+   * its source, and it ends with any move (rule 400.7). See `play-permission.ts`. */
+  playPermission?: CardPlayPermission;
   /** This spell was cast under a permission that exiles it instead of letting
    * it reach a graveyard (Kess, Dissident Mage — `castFromGraveyard
    * .exileAfterwards`). Consulted by `moveObject` for the move off the
@@ -659,152 +635,10 @@ export interface GameObject {
    * {@link LastKnownRefs}.
    */
   lastKnownRefs?: LastKnownRefs;
-  /**
-   * "Impulse draw" — this card is exiled face-up and its owner may play it.
-   * `until` is the turn number the permission lapses on (an "until end of
-   * turn" impulse); absent means it lasts as long as `exiledWith` is on the
-   * battlefield (Theater of Horrors).
-   *
-   * `castOnly` distinguishes "you may **cast spells** from among those cards"
-   * (Dream Pillager — no lands) from "you may **play** them" (Tectonic Giant).
-   */
-  impulse?: {
-    readonly player: PlayerId;
-    /**
-     * When the permission lapses:
-     * - `end-of-turn` — this turn only (Dream Pillager).
-     * - `your-turns` — through the end of the player's next `remaining`
-     *   turns (Tectonic Giant's "until the end of your next turn").
-     *   Counted down as each of *their* turns ends, so extra turns and
-     *   multiplayer turn order are handled exactly rather than by guessing a
-     *   turn number.
-     * - `while-source` — for as long as the permanent that exiled it is on
-     *   the battlefield (Theater of Horrors).
-     * - `while-exiled` — "for as long as it remains exiled": never, while it
-     *   stays (leaving exile ends it anyway, as for every permission).
-     * - `end-step-of` — "until your next end step" (Rocco, Street Chef): as
-     *   that player's next end step begins.
-     */
-    expiry:
-      | { readonly kind: "end-of-turn"; readonly turn: number }
-      | { kind: "your-turns"; remaining: number }
-      | { readonly kind: "end-step-of"; readonly player: PlayerId }
-      /** "Until your next turn" (`at: "turn"`, Nivix, Aerie of the Firemind)
-       * or "until the beginning of your next upkeep" (`at: "upkeep"`, Elkin
-       * Bottle): as that begins for that player. */
-      | { readonly kind: "until-begins"; readonly at: "turn" | "upkeep"; readonly player: PlayerId }
-      /** `stint`: the source's `zoneChangeCount` as it granted this — one that
-       * left and came back is a new object (rule 400.7), and the permission
-       * ended when it left. `controlledBy`: "for as long as you control
-       * [it]" — it also ends for good the moment that player doesn't
-       * (rule 611.2b; Lightning, Security Sergeant's ruling). */
-      | {
-          readonly kind: "while-source";
-          readonly source: ObjectId;
-          readonly stint?: number;
-          readonly controlledBy?: PlayerId;
-        }
-      | { readonly kind: "while-exiled" }
-      /** "Until you exile another card with [this]" (Unstable Amulet): ends
-       * when that stint of the source next exiles a card this way, however
-       * long after it has left (the ruling: it can't, so it never ends). */
-      | { readonly kind: "until-next-exile"; readonly source: ObjectId; readonly stint: number }
-      /** "Until end of combat on your next turn" (Brazen Cannonade): at the
-       * end of `player`'s first combat after turn `afterTurn`, or as that
-       * turn ends if it had none. */
-      | { readonly kind: "your-next-combat"; readonly player: PlayerId; readonly afterTurn: number };
-    readonly castOnly?: boolean;
-    /** Which of the exiled cards the permission covers — Narset, Enlightened
-     * Master's "noncreature, nonland cards". Matched from the permission
-     * holder's side; a card it doesn't match can't be played this way. */
-    readonly filter?: CardFilter;
-    /** Cast without paying its mana cost: every card the permission covers,
-     * or those matching `filter` (Nahiri, Forged in Fury's "you may cast
-     * Equipment spells this way without paying their mana costs"). `only`
-     * is a permission that is *only* to cast them free (Narset). */
-    readonly free?: { readonly filter?: CardFilter; readonly only?: boolean };
-    /** "If you cast a spell this way, pay life equal to its mana value rather
-     * than pay its mana cost" (Inside Information): the only way to cast it
-     * (rule 118.9b); a land card is played as ever. */
-    readonly payLifeManaValue?: true;
-    /** "A spell cast this way costs {N} more to cast" (Elite Spellbinder), for
-     * every caster but `exempt`: "a spell cast **by an opponent** this way"
-     * (Soul Partition), of the player whose effect it was. */
-    readonly tax?: { readonly generic: number; readonly exempt?: PlayerId };
-    /** "Each land played this way enters tapped" (Lightstall Inquisitor). */
-    readonly landsEnterTapped?: true;
-    /** Extra gates on *using* the permission, as opposed to when it lapses —
-     * Theater of Horrors' "**During your turn, if an opponent lost life this
-     * turn**, you may play …". Evaluated live, so the cards become playable
-     * and unplayable again as the condition changes. */
-    readonly yourTurnOnly?: boolean;
-    /** Not usable before this turn number — warp's "after the current turn
-     * has ended" (rule 702.185a). */
-    readonly fromTurn?: number;
-    readonly gate?: StaticCondition;
-    /** Only during a turn the permission's player did this with `source`, in
-     * the stint it was in then, whatever has become of it since: "during any
-     * turn you attacked with this creature" (Goblin Researcher, the
-     * ruling: even once it has left), "during any turn you put a lore counter
-     * on this Saga" (Summon: Brynhildr). */
-    readonly sourceDid?: "attacked" | "lore-counter" | "attacked-with-a-token";
-    /** The permanent the card was exiled with, in the stint it was in then —
-     * Maralen, Fae Ascendant's "cards exiled with Maralen". Set with
-     * `whileSource` or `oncePerTurn`; it also answers `filter`'s `{ amount }`
-     * operands, from that permanent's side, live. */
-    readonly source?: { readonly id: ObjectId; readonly zoneChangeCount: number };
-    /** Usable only while `source` is still on the battlefield as the same
-     * object (rule 400.7): the permission is a static ability of it ("you may
-     * cast … from among cards exiled with Maralen this turn"), on top of
-     * whatever `expiry` says. */
-    readonly whileSource?: boolean;
-    /** "Once each turn": one cast a turn among every card `source` gave this
-     * permission, counted on `source` (`GameObject.impulseCastOnTurn`). */
-    readonly oncePerTurn?: boolean;
-    /** "You may play **one of** those cards" (Unlucky Witness): the
-     * `GameState.permissionGroups` entry this permission shares with the
-     * other cards the same effect gave it, spent by each card played under
-     * it — see `GameState.permissionGroups`. */
-    readonly group?: number;
-    /** "…and mana of any type can be spent to cast that spell" (Gonti, Canny
-     * Acquisitor) / "…as though it were mana of any color" (Grenzo, Havoc
-     * Raiser): how freely mana may pay for a spell cast under this permission
-     * — and only one cast this way (rule 118.14). */
-    readonly spendAs?: SpendAs;
-    /** "That spell has **undaunted**" (Durnan of the Yawning Portal — rule
-     * 702.125): a spell cast under this permission costs {1} less for each
-     * of its caster's opponents, beside any undaunted of its own (702.125c). */
-    readonly undaunted?: true;
-  };
   /** The turn a `oncePerTurn` `alternativeCostForSpells` of this permanent was
    * last used (Demon of Fate's Design). Cleared on any zone change, as
-   * `impulseCastOnTurn` is (rule 400.7). */
+   * `playUses` is (rule 400.7). */
   altCostGrantOnTurn?: number;
-  /** The turn a `oncePerTurn` impulse permission this permanent gave was
-   * last used (Maralen, Fae Ascendant). Cleared on any zone change: the
-   * permanent that comes back is a new object (rule 400.7). */
-  impulseCastOnTurn?: number;
-  /** Resolved "until end of turn, you may cast a creature spell from among
-   * cards exiled with this artifact without paying its mana cost" permissions
-   * (Idol of Endurance — `allow-cast-linked-exile`), one spell each: read live
-   * over the cards linked to `stint` (rule 607.2a), and one is spent by each
-   * cast it allows. Past their `turn`, nothing. */
-  linkedCastGrants?: readonly {
-    readonly player: PlayerId;
-    readonly turn: number;
-    readonly stint: number;
-    readonly spell?: CardFilter;
-    readonly free: boolean;
-    /** "You may **play** …": a land too (Raphael, Most Attitude). */
-    readonly play?: true;
-    /** "… cards" (Kayla's Music Box): nothing spends it. */
-    readonly anyNumber?: true;
-    /** "Spells you cast this way cost {N} less" (Urianger Augurelt). */
-    readonly reduce?: number;
-    /** "…and you may spend mana as though it were mana of any color to cast
-     * those spells" (King Narfi's Betrayal, rule 609.4b). */
-    readonly spendAs?: SpendAs;
-  }[];
   /**
    * Players this permanent has dealt combat damage to this turn — Steel
    * Hellkite's "whose controller was dealt combat damage by this creature
@@ -3117,25 +2951,12 @@ export interface AlsoCostAsk {
  * (733.2). `need` is the least the caster's own mana leaves to be paid, for
  * the prompt.
  */
-/** What a `cast-now` offers — to whom, which cards, on what terms (see the
- * `cast-now` {@link EffectSpec}) — as `Game.castNowOffer` reads it. */
-export interface CastNowAsk {
+/** What a `cast-now` offers — to whom, which cards, on what terms: the
+ * `cast-now` {@link EffectSpec}'s {@link PlayTerms}, with what it adds. */
+export interface CastNowAsk extends Omit<CastNowTerms, "free" | "exileAfter" | "play"> {
   readonly player: PlayerId;
   readonly cards: readonly ObjectId[];
   readonly free: boolean;
-  readonly byDiscarding?: true;
-  /** Energy equal to the spell's mana value paid instead — the `cast-now`
-   * effect's `byPayingEnergy`. */
-  readonly byPayingEnergy?: true;
-  /** Life equal to the spell's mana value paid instead — the effect's
-   * `byPayingLife`. */
-  readonly byPayingLife?: true;
-  /** This mana paid rather than the mana cost — the effect's `byPaying`. */
-  readonly byPaying?: string;
-  /** This mana paid on top of the other costs — the effect's `alsoPaying`. */
-  readonly alsoPaying?: string;
-  /** "Mana of any type can be spent" (rule 118.14) — the effect's `spendAs`. */
-  readonly spendAs?: SpendAs;
   /** The madness cost paid rather than the mana cost (rule 702.35a). */
   readonly madness?: string;
   /** The miracle cost paid rather than the mana cost (rule 702.94a). */
@@ -3144,10 +2965,7 @@ export interface CastNowAsk {
    * `cast-now` effect's `suspendCost`. */
   readonly suspendCost?: true;
   readonly exileAfter: boolean | "instants-and-sorceries";
-  readonly spell?: CardFilter;
   readonly freeCastOf?: "cascade" | "suspend";
-  /** The `cast-now` effect's `gainsHaste`. */
-  readonly gainsHaste?: true;
 }
 
 /**
@@ -3664,10 +3482,10 @@ export type AwaitingDecision =
        * leaves the battlefield**" (Kitesail Freebooter) — `exiledUntil` for
        * the chosen card. */
       readonly exileUntil?: NonNullable<GameObject["exiledUntil"]>;
-      /** For `destination: "exile-playable"` — the impulse permission to
-       * stamp on the chosen cards, which stay in exile either way
-       * (Tectonic Giant: "exile the top two, choose one of them"). */
-      readonly impulseGrant?: GameObject["impulse"];
+      /** For `destination: "exile-playable"` — the permission to stamp on
+       * the chosen cards, which stay in exile either way (Tectonic Giant:
+       * "exile the top two, choose one of them"). */
+      readonly playGrant?: CardPlayPermission;
       /** What happens to any candidate not chosen: shuffled to the bottom of
        * the library; left exactly where it already was (nothing was ever
        * moved just to look at it — the graveyard-search case); the whole
@@ -4637,44 +4455,14 @@ export type AwaitingDecision =
        * be played as (rules 305.2a, 305.3) — see the `cast-now` effect's
        * `play`. */
       readonly lands?: readonly PlayLandOffer[];
-      /** "Without paying its mana cost" — the only way it's offered. */
-      readonly free: boolean;
-      /** …by discarding a card instead — see the effect's `byDiscarding`. */
-      readonly byDiscarding?: true;
-      /** …by paying energy equal to its mana value instead — see the
-       * effect's `byPayingEnergy`. */
-      readonly byPayingEnergy?: true;
-      /** …by paying life equal to its mana value instead — see the effect's
-       * `byPayingLife`. */
-      readonly byPayingLife?: true;
-      /** …for this mana instead — see the effect's `byPaying`. */
-      readonly byPaying?: string;
-      /** …for this mana on top of its other costs — see the effect's
-       * `alsoPaying`. */
-      readonly alsoPaying?: string;
-      /** …with mana of any type spendable — see the effect's `spendAs`. */
-      readonly spendAs?: SpendAs;
+      /** The terms the cast is on, as `Game.castNowOffer` reads them. */
+      readonly ask: CastNowAsk;
       /** "If able", and it can't lawfully be got out of: no declining — see
        * the effect's `mustCast` and `Game.castNowForced`. */
       readonly mustCast?: true;
       /** With `mustCast`: a whole cast found legal as this was raised — the proof
        * that a player held to it can make it. */
       readonly forcedCast?: Extract<Action, { type: "cast-spell" }>;
-      /** …for its madness cost instead (rule 702.35a) — the cost. */
-      readonly madness?: string;
-      /** …for its miracle cost instead (rule 702.94a) — the cost. */
-      readonly miracle?: string;
-      /** …for each card's own suspend cost instead — the effect's `suspendCost`. */
-      readonly suspendCost?: true;
-      /** What the spell must be, matched as it's cast — see the effect's
-       * `spell`, bound when it was raised. */
-      readonly spell?: CardFilter;
-      /** "If that spell would be put into your graveyard, exile it instead." */
-      readonly exileAfter: boolean | "instants-and-sorceries";
-      /** Cascade's or suspend's own free cast — see `CastNowOptions`. */
-      readonly freeCastOf?: "cascade" | "suspend";
-      /** The `cast-now` effect's `gainsHaste`. */
-      readonly gainsHaste?: true;
       /** "Up to N": how many more spells this may be, this one included. */
       readonly castsLeft?: number;
       /** "Total mana value N or less": how much is left. `spell` already
@@ -5162,7 +4950,7 @@ export type PendingEntry =
       readonly player: PlayerId;
       readonly from: ZoneType;
       /** "Each land played this way enters tapped" — the permission it's
-       * played under (`GameObject.impulse`), read before anything moved. */
+       * played under (`GameObject.playPermission`), read before anything moved. */
       readonly tapped?: true;
     }
   | {
@@ -5496,30 +5284,9 @@ export interface PlayerEffect {
    * cast that sorcery at a time you normally could"), and several such
    * effects all end on that one spell. See `Game.castsAsThoughFlash`. */
   readonly castAsThoughFlash?: { readonly filter?: CardFilter; readonly next?: true };
-  /** `owner` may cast matching spells from their graveyard (Liliana,
-   * Untouched by Death's −3) — a graveyard grant whose `source` is the
-   * effect's source, never used up.
-   *
-   * `graveyards`: whose graveyards it reaches, fixed as it resolved (The
-   Great Work's "any graveyard", Whispersteel Dagger's "that player's");
-   * absent, `owner`'s alone. `once`: one cast, after which `used` is set
-   * (Whispersteel Dagger's "a creature spell"). `spendAs`: how freely mana
-   * may pay for a spell cast this way (rule 609.4b). `exileAfterwards`: a
-   * spell cast this way is exiled rather than put into a graveyard. See the
-   * `player-effect` {@link EffectSpec}. */
-  readonly castFromGraveyard?: {
-    readonly filter: CardFilter;
-    readonly source: ObjectId;
-    readonly graveyards?: readonly PlayerId[];
-    readonly once?: true;
-    readonly used?: true;
-    readonly spendAs?: SpendAs;
-    readonly exileAfterwards?: true;
-  };
-  /** "You may play lands and cast spells from that player's hand this turn"
-   * (Sen Triplets): `owner` may, from each of these players' hands, by the
-   * ordinary rules for timing, costs and the land drop. Rule 601.3. */
-  readonly playFromHandsOf?: readonly PlayerId[];
+  /** A rule for a while: `owner` may play cards from `from` on these terms
+   * (rules 601.3, 611.2c). See `play-permission.ts`. */
+  readonly mayPlay?: EffectPlay;
   /** These players play with their hands revealed while this lasts (Sen
    * Triplets), to every player, as a `visibility` static has them do. */
   readonly handsRevealed?: readonly PlayerId[];
@@ -5594,22 +5361,6 @@ export interface PlayerEffect {
     readonly from?: "battlefield";
     readonly source: ObjectId;
     readonly returnAtEndStep?: true;
-  };
-  /** "You may play lands from your graveyard" for a while (Gaea's Will): the
-   * `playFromGraveyard` static's permission (rule 305.9). */
-  readonly playLandsFromGraveyard?: true;
-  /** The library-top permissions for a while (The Belligerent; Gwenom,
-   * Remorseless): `owner` may play lands matching `playFromLibraryTop` and
-   * cast spells matching `castFromLibraryTop` from the top of their library
-   * (rule 601.3), the latter for life equal to its mana value with
-   * `payLifeManaValue`, and look at that card any time
-   * (`looksAtOwnLibraryTop`) — the statics' own permissions. `source` is
-   * the effect's, which the filter reads as its source. */
-  readonly playFromLibraryTop?: CardFilter;
-  readonly castFromLibraryTop?: {
-    readonly filter: CardFilter;
-    readonly payLifeManaValue?: true;
-    readonly source: ObjectId;
   };
   readonly looksAtOwnLibraryTop?: true;
   /** "Lands you control enter tapped this turn" (Nahiri's Lithoforming —

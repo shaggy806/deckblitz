@@ -24,7 +24,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "impulse-exile", amount: 2, duration: "end-of-turn" },
+          { kind: "impulse-exile", amount: 2, duration: "end-of-turn", play: true },
           {
             kind: "conditional",
             condition: { kind: "this-way", what: "exiled", filter: { type: "land" } },

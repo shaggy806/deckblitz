@@ -11,7 +11,7 @@ export default defineCard({
   subtypes: ["Human", "Wizard"],
   power: 3,
   toughness: 4,
-  castSelfFromGraveyard: { discard: 2 },
+  mayPlaySelf: { from: ["graveyard"], discard: 2 },
   text: "Whenever you cast an instant or sorcery spell, each opponent loses 1 life.\nYou may cast this card from your graveyard by discarding two cards in addition to paying its other costs.",
   triggered: [
     {

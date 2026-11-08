@@ -26,7 +26,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: false, removeCounter: { kind: "oil", count: 3 } },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn", play: true },
       resolve: null,
       text: EXILE_TEXT,
     },

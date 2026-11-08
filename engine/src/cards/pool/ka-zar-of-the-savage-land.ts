@@ -19,7 +19,7 @@ export default defineCard({
   toughness: 2,
   text: `${LOOK_TEXT}\n${PLAY_TEXT}\n${ENTER_TEXT}`,
   looksAtOwnLibraryTop: true,
-  static: [{ affects: { scope: "self" }, playFromLibraryTop: { type: "land" }, text: PLAY_TEXT }],
+  static: [{ affects: { scope: "self" }, mayPlay: { from: "library-top", play: true, filter: { type: "land" } }, text: PLAY_TEXT }],
   triggered: [
     {
       trigger: { on: "enters-battlefield", who: "self" },

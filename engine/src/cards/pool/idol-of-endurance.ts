@@ -27,7 +27,7 @@ export default defineCard({
       resolve: null,
       text: "{1}{W}, {T}: Until end of turn, you may cast a creature spell from among cards exiled with this artifact without paying its mana cost.",
       targets: [],
-      effect: { kind: "allow-cast-linked-exile", spell: { type: "creature" }, free: true },
+      effect: { kind: "player-effect", duration: "end-of-turn", mayPlay: { from: "exile", linked: true, spell: { type: "creature" }, free: true, upTo: 1 } },
     },
   ],
 });

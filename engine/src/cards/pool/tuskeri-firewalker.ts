@@ -14,7 +14,7 @@ export default defineCard({
     {
       cost: { mana: "{1}", tap: false },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn", play: true },
       resolve: null,
       text: "Boast — {1}: Exile the top card of your library. You may play that card this turn.",
       boast: true,

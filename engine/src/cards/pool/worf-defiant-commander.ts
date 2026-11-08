@@ -28,7 +28,7 @@ export default defineCard({
     {
       trigger: { on: "attack-with", who: "you", atLeast: 1 },
       targets: [],
-      effect: { kind: "impulse-exile", amount: { turnStat: "opponents-attacked" }, duration: "until-end-of-your-next-turn" },
+      effect: { kind: "impulse-exile", amount: { turnStat: "opponents-attacked" }, duration: "until-end-of-your-next-turn", play: true },
       resolve: null,
       text: ATTACK_TEXT,
     },

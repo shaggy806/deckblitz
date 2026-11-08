@@ -47,7 +47,7 @@ export default defineCard({
         tapOthers: { count: 2, filter: { type: "artifact", token: false, controlledBy: "you" }, includeSelf: true },
       },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn", play: true },
       resolve: null,
       text: IMPULSE_TEXT,
     },

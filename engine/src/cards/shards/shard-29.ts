@@ -359,6 +359,7 @@ import _poolHemmerFixingWhatIsBroken from "../pool/hemmer-fixing-what-is-broken.
 import _poolHenrikaInfernalSeer from "../pool/henrika-infernal-seer.js";
 import _poolHenzieToolboxTorre from "../pool/henzie-toolbox-torre.js";
 import _poolHeraldOfSecretStreams from "../pool/herald-of-secret-streams.js";
+import _poolHexMagic from "../pool/hex-magic.js";
 import _poolHiddenHideout from "../pool/hidden-hideout.js";
 import _poolHiddenNursery from "../pool/hidden-nursery.js";
 import _poolHideousTaskmaster from "../pool/hideous-taskmaster.js";
@@ -1336,6 +1337,7 @@ const shard: CardShard = {
     _poolHenrikaInfernalSeer,
     _poolHenzieToolboxTorre,
     _poolHeraldOfSecretStreams,
+    _poolHexMagic,
     _poolHiddenHideout,
     _poolHiddenNursery,
     _poolHideousTaskmaster,

@@ -34,12 +34,7 @@ export default defineCard({
     }),
     {
       affects: { scope: "self" },
-      castFromGraveyard: {
-        filter: { typesAnyOf: ["artifact", "creature", "enchantment", "land", "planeswalker", "battle"] },
-        oncePerTurn: true,
-        yourTurnOnly: true,
-        sacrifice: { type: "land" },
-      },
+      mayPlay: { from: "graveyard", filter: { typesAnyOf: ["artifact", "creature", "enchantment", "land", "planeswalker", "battle"] }, oncePerTurn: true, yourTurnOnly: true, sacrifice: { type: "land" } },
       text: GRAVEYARD_TEXT,
     },
   ],

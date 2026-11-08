@@ -60,11 +60,7 @@ export default defineCard({
           {
             kind: "player-effect",
             duration: "end-of-turn",
-            castFromGraveyard: {
-              filter: { typesAnyOf: ["instant", "sorcery"] },
-              whose: "each-player",
-              exileAfterwards: true,
-            },
+            mayPlay: { from: "graveyard", filter: { typesAnyOf: ["instant", "sorcery"] }, whose: "each-player", exileAfter: true },
           },
           { kind: "flicker", target: "source", underYourControl: true },
         ],

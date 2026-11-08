@@ -22,7 +22,7 @@ export default defineCard({
     {
       cost: { mana: "{1}{U}", tap: false, untap: true },
       targets: ["opponent"],
-      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn", whose: 0 },
+      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn", play: true, whose: 0 },
       resolve: null,
       text: "{1}{U}, {Q}: Target opponent exiles the top card of their library. Until end of turn, you may play that card.",
     },

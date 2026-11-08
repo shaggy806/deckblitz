@@ -33,7 +33,7 @@ export default defineCard({
   effect: {
     kind: "conditional",
     condition: { kind: "source", filter: { castFrom: "graveyard" } },
-    then: { kind: "impulse-exile", amount: 3, duration: "until-end-of-your-next-turn", free: {} },
-    else: { kind: "impulse-exile", amount: 3, duration: "until-end-of-your-next-turn" },
+    then: { kind: "impulse-exile", amount: 3, duration: "until-end-of-your-next-turn", play: true, free: {} },
+    else: { kind: "impulse-exile", amount: 3, duration: "until-end-of-your-next-turn", play: true },
   },
 });

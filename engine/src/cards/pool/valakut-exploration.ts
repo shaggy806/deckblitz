@@ -21,7 +21,7 @@ export default defineCard({
     {
       trigger: { on: "enters-battlefield", who: "you-control", filter: { type: "land" } },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "while-exiled", linked: true },
+      effect: { kind: "impulse-exile", amount: 1, duration: "while-exiled", play: true, linked: true },
       resolve: null,
       text: LANDFALL_TEXT,
     },

@@ -22,7 +22,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      castFromLibraryTop: { filter: { anyOf: [{ subtype: "Spider" }, { notTypes: ["creature"] }] } },
+      mayPlay: { from: "library-top", filter: { anyOf: [{ subtype: "Spider" }, { notTypes: ["creature"] }] } },
       text: CAST_TEXT,
     },
   ],

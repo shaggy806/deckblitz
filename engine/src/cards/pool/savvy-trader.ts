@@ -35,7 +35,7 @@ export default defineCard({
           filter: { notTypes: ["instant", "sorcery"] },
         },
       ],
-      effect: { kind: "exile", target: 0, mayCast: { duration: "while-exiled", play: true } },
+      effect: { kind: "exile", target: 0, mayPlay: { duration: "while-exiled", play: true } },
       resolve: null,
       text: ENTERS_TEXT,
     },

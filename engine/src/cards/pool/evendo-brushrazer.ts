@@ -30,6 +30,7 @@ export default defineCard({
         whileSource: true,
         yourTurnOnly: true,
         gate: { kind: "turn-history", what: "sacrificed", who: "you", filter: { token: false } },
+        play: true,
       },
       resolve: null,
       text: EXILE_TEXT,

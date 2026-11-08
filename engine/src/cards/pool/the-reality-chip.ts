@@ -20,8 +20,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "source", filter: { attachedTo: { type: "creature" } } },
-      playFromLibraryTop: { type: "land" },
-      castFromLibraryTop: { filter: {} },
+      mayPlay: { from: "library-top", play: true },
       text: PLAY_TEXT,
     },
   ],

@@ -22,7 +22,7 @@ export default defineCard({
     {
       trigger: { on: "cast-spell", who: "you", filter: { subtypes: ["Aura", "Equipment"] } },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn", play: true },
       resolve: null,
       text: CAST_TEXT,
     },

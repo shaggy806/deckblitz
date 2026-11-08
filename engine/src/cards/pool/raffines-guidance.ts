@@ -13,5 +13,5 @@ export default defineCard({
   text: `Enchant creature\nEnchanted creature gets +1/+1.\n${CAST_TEXT}`,
   targets: ["creature"],
   static: [{ affects: { scope: "attached" }, grantPt: [1, 1], text: "Enchanted creature gets +1/+1." }],
-  castSelfFromGraveyard: { mana: "{2}{W}" },
+  mayPlaySelf: { from: ["graveyard"], byPaying: "{2}{W}" },
 });

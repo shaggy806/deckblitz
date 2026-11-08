@@ -46,7 +46,7 @@ export default defineCard({
     {
       cost: { mana: "{R}", tap: false, sacrifice: { filter: { type: "artifact" }, count: 2 } },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn", play: true },
       resolve: null,
       text: IMPULSE_TEXT,
     },

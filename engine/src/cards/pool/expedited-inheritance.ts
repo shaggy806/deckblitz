@@ -26,7 +26,7 @@ export default defineCard({
         kind: "each-player-may",
         who: "trigger-player",
         prompt: "Exile that many cards from the top of your library? You may play them until the end of your next turn.",
-        effect: { kind: "impulse-exile", amount: { triggerValue: true }, duration: "until-end-of-your-next-turn" },
+        effect: { kind: "impulse-exile", amount: { triggerValue: true }, duration: "until-end-of-your-next-turn", play: true },
       },
       resolve: null,
       text: TEXT,

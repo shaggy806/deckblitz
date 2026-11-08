@@ -15,7 +15,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      castFromLibraryTop: { filter: { typesAnyOf: ["instant", "sorcery"] } },
+      mayPlay: { from: "library-top", filter: { typesAnyOf: ["instant", "sorcery"] } },
       text: CAST_TEXT,
     },
   ],

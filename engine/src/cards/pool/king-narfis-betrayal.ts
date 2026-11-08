@@ -49,7 +49,7 @@ export default defineCard({
     {
       at: [2, 3],
       targets: [],
-      effect: { kind: "allow-cast-linked-exile", anyNumber: true, spendAs: "any-color" },
+      effect: { kind: "player-effect", duration: "end-of-turn", mayPlay: { from: "exile", linked: true, spendAs: "any-color" } },
       resolve: null,
       text: TWO,
     },

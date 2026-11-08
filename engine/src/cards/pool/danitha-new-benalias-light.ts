@@ -32,7 +32,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      castFromGraveyard: { filter: { subtypes: ["Aura", "Equipment"] }, oncePerTurn: true, yourTurnOnly: true },
+      mayPlay: { from: "graveyard", filter: { subtypes: ["Aura", "Equipment"] }, oncePerTurn: true, yourTurnOnly: true },
       text: CAST_TEXT,
     },
   ],

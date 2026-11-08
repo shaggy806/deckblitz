@@ -19,7 +19,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      playFromLibraryTop: { type: "land" },
+      mayPlay: { from: "library-top", play: true, filter: { type: "land" } },
       text: "You may play lands from the top of your library.",
     },
   ],

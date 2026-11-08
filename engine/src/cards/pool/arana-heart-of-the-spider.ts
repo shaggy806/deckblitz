@@ -34,7 +34,7 @@ export default defineCard({
       // the exile is Laelia's `impulse-exile` for this turn.
       trigger: { on: "deals-combat-damage-to-player", who: "you-control", filter: { modified: true } },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn", play: true },
       resolve: null,
       text: "Whenever a modified creature you control deals combat damage to a player, exile the top card of your library. You may play that card this turn.",
     },

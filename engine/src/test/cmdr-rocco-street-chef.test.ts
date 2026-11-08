@@ -59,8 +59,8 @@ describe("Rocco, Street Chef", () => {
     toEndStep(game, 1);
     expect(game.state.objects[top[A]].zone).toBe("exile");
     expect(game.state.objects[top[B]].zone).toBe("exile");
-    expect(game.state.objects[top[A]].impulse?.player).toBe(A);
-    expect(game.state.objects[top[B]].impulse?.player).toBe(B);
+    expect(game.state.objects[top[A]].playPermission?.player).toBe(A);
+    expect(game.state.objects[top[B]].playPermission?.player).toBe(B);
     // Bob plays his Forest on his own turn, and it's his land drop.
     game.advanceUntil((s) => s.turn.number === 2 && s.turn.step === "precombat-main" && s.priority.holder === B);
     expect(offers(game, B, top[B])).toBe(true);
@@ -80,7 +80,7 @@ describe("Rocco, Street Chef", () => {
     // Turn 3's end step: the old permission ends, the new card's begins.
     toEndStep(game, 3);
     expect(game.state.objects[grizzly].zone).toBe("exile");
-    expect(game.state.objects[grizzly].impulse).toBeUndefined();
+    expect(game.state.objects[grizzly].playPermission).toBeUndefined();
   });
 
   it("any card played from exile: a +1/+1 counter on target creature, and a Food", () => {
@@ -110,9 +110,9 @@ describe("Rocco, Street Chef", () => {
     expect(game.state.players[A].hasLost).toBe(true);
     // Bob's turn and Carol's: Carol's Opt is still hers to cast.
     game.advanceUntil((s) => s.turn.number === 3 && s.turn.step === "upkeep");
-    expect(game.state.objects[top[C]].impulse?.player).toBe(C);
+    expect(game.state.objects[top[C]].playPermission?.player).toBe(C);
     // Then alice's turn would have begun: it lapses.
     game.advanceUntil((s) => s.turn.number === 4);
-    expect(game.state.objects[top[C]].impulse).toBeUndefined();
+    expect(game.state.objects[top[C]].playPermission).toBeUndefined();
   });
 });

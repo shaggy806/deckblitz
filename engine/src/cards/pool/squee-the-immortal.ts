@@ -14,5 +14,5 @@ export default defineCard({
   power: 2,
   toughness: 1,
   text: CAST_TEXT,
-  castSelfFromGraveyard: { fromExile: true },
+  mayPlaySelf: { from: ["graveyard", "exile"] },
 });

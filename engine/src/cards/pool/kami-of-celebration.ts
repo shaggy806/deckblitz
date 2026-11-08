@@ -27,7 +27,7 @@ export default defineCard({
       // filter; Laelia's impulse exile).
       trigger: { on: "attacks", who: "you-control", filter: { type: "creature", modified: true } },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn", play: true },
       resolve: null,
       text: ATTACK_TEXT,
     },

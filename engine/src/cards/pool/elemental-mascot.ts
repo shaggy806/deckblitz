@@ -31,7 +31,7 @@ export default defineCard({
           {
             kind: "conditional",
             condition: { kind: "trigger-object", filter: { manaSpent: { op: "gte", n: 5 } } },
-            then: { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn" },
+            then: { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn", play: true },
           },
         ],
       },

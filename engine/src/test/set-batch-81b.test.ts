@@ -207,7 +207,7 @@ describe("Memorial Vault", () => {
     expect(game.state.zones.shared.exile.length).toBe(exileBefore + 3);
     for (const id of [first, second, third]) {
       expect(zone(game, id)).toBe("exile");
-      expect(game.state.objects[id].impulse).toBeDefined();
+      expect(game.state.objects[id].playPermission).toBeDefined();
     }
   });
 });

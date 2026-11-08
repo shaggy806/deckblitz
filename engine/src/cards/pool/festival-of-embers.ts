@@ -22,7 +22,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      castFromGraveyard: { filter: { typesAnyOf: ["instant", "sorcery"] }, yourTurnOnly: true, payLife: 1 },
+      mayPlay: { from: "graveyard", filter: { typesAnyOf: ["instant", "sorcery"] }, yourTurnOnly: true, payLife: 1 },
       text: CAST_TEXT,
     },
     {

@@ -19,7 +19,7 @@ export default defineCard({
     {
       trigger: { on: "enters-battlefield", who: "self" },
       targets: [{ kind: "card-in-graveyard", whose: "you" }],
-      effect: { kind: "exile", target: 0, mayCast: { duration: "while-you-control-source", play: true } },
+      effect: { kind: "exile", target: 0, mayPlay: { duration: "while-you-control-source", play: true } },
       resolve: null,
       text: TEXT,
     },

@@ -21,7 +21,7 @@ export default defineCard({
       effect: {
         kind: "may",
         prompt: "Exile that card, and you may play it this turn?",
-        effect: { kind: "exile", target: "trigger-object", mayCast: { duration: "end-of-turn", play: true } },
+        effect: { kind: "exile", target: "trigger-object", mayPlay: { duration: "end-of-turn", play: true } },
       },
       resolve: null,
       text: TEXT,

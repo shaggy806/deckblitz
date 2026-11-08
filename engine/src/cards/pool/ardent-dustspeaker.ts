@@ -48,7 +48,7 @@ export default defineCard({
                 destination: "library-bottom",
                 leftover: "stay",
               },
-              { kind: "impulse-exile", amount: 2, duration: "end-of-turn" },
+              { kind: "impulse-exile", amount: 2, duration: "end-of-turn", play: true },
             ],
           },
         },

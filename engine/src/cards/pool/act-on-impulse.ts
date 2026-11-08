@@ -12,5 +12,5 @@ export default defineCard({
   types: ["sorcery"],
   text: "Exile the top three cards of your library. Until end of turn, you may play those cards. (If you cast a spell this way, you still pay its costs. You can play a land this way only if you have an available land play remaining.)",
   targets: [],
-  effect: { kind: "impulse-exile", amount: 3, duration: "end-of-turn" },
+  effect: { kind: "impulse-exile", amount: 3, duration: "end-of-turn", play: true },
 });

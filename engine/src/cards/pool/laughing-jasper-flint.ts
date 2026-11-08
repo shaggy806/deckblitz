@@ -43,7 +43,6 @@ export default defineCard({
         amount: { countOf: { controlledBy: "you", subtypes: OUTLAWS } },
         whose: 0,
         duration: "end-of-turn",
-        castOnly: true,
         spendAs: "any-type",
       },
       resolve: null,

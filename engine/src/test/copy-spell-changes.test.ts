@@ -110,7 +110,7 @@ describe("Donal, Herald of Wings — base P/T and a subtype, once each turn", ()
 describe("Nalfeshnee — the copy gains haste and an end-step sacrifice", () => {
   const castFromExile = (game: Game, name: string): ObjectId => {
     const card = toLibrary(game, name);
-    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 1, duration: "end-of-turn" });
+    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 1, duration: "end-of-turn", play: true });
     expect(zone(game, card)).toBe("exile");
     return card;
   };

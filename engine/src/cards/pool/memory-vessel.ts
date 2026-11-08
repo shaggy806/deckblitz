@@ -26,7 +26,8 @@ export default defineCard({
             amount: 7,
             duration: "until-your-next-turn",
             whose: "each-player",
-            playedBy: "owner",
+            byOwner: true,
+            play: true,
           },
           {
             kind: "player-effect",

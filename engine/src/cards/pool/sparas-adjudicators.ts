@@ -33,7 +33,7 @@ export default defineCard({
             },
             duration: "until-source-cast",
           },
-          { kind: "allow-cast-from-exile", target: "source", whileExiled: true },
+          { kind: "grant-play", cards: "source", duration: "while-exiled" },
         ],
       },
       resolve: null,

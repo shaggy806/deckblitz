@@ -41,7 +41,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "impulse-exile", amount: 10, duration: "end-of-turn", castOnly: true, filter: EXACTLY_THREE_COLORS },
+      { kind: "impulse-exile", amount: 10, duration: "end-of-turn", filter: EXACTLY_THREE_COLORS },
       {
         kind: "add-mana",
         mana: { all: ["W", "U", "B", "R", "G"] },

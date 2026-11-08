@@ -20,7 +20,7 @@ export default defineCard({
       { kind: "modify-pt", target: 0, power: 3, toughness: 1, duration: "end-of-turn" },
       { kind: "grant-keyword", target: 0, keyword: "haste", duration: "end-of-turn" },
       // Rocco, Street Chef's "until your next end step".
-      { kind: "impulse-exile", amount: 1, duration: "until-your-next-end-step" },
+      { kind: "impulse-exile", amount: 1, duration: "until-your-next-end-step", play: true },
     ],
   },
 });

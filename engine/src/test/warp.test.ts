@@ -62,7 +62,7 @@ describe("Warp — Starfield Vocalist", () => {
     expect(game.state.objects[vocalist].zone).toBe("battlefield");
     game.advanceUntil((s) => s.turn.step === "end" && settled(s));
     expect(game.state.objects[vocalist].zone).toBe("exile");
-    expect(game.state.objects[vocalist].impulse).toMatchObject({ player: A, fromTurn: 2 });
+    expect(game.state.objects[vocalist].playPermission).toMatchObject({ player: A, fromTurn: 2 });
     // Alice's next turn: cast from exile, for its mana cost.
     game.advanceUntil((s) => s.turn.number === 3 && s.turn.step === "precombat-main");
     const fromExile = casts(game, vocalist);

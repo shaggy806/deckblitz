@@ -7,7 +7,7 @@ import { defineCard } from "../define.js";
 
 const TEXT =
   "Whenever Syr Carah or an instant or sorcery spell you control deals damage to a player, exile the top card of your library. You may play that card this turn.";
-const IMPULSE = { kind: "impulse-exile", amount: 1, duration: "end-of-turn" } as const;
+const IMPULSE = { kind: "impulse-exile", amount: 1, duration: "end-of-turn", play: true } as const;
 
 export default defineCard({
   name: "Syr Carah, the Bold",

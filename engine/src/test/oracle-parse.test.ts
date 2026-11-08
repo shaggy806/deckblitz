@@ -1054,7 +1054,7 @@ describe("an emblem's static abilities", () => {
     ],
     [
       'You get an emblem with "You may cast instant and sorcery spells from your graveyard. If a spell cast this way would be put into your graveyard, exile it instead."',
-      { affects: self, castFromGraveyard: { filter: { typesAnyOf: ["instant", "sorcery"] }, exileAfterwards: true } },
+      { affects: self, mayPlay: { from: "graveyard", filter: { typesAnyOf: ["instant", "sorcery"] }, exileAfter: true } },
     ],
     [
       'You get an emblem with "You may cast spells from your hand without paying their mana costs."',
@@ -3356,7 +3356,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(surveyor.activated[0]).toMatchObject({ zone: "graveyard", condition: MAX, effect: { kind: "draw", amount: 1 } });
     expect(surveyor.complete).toBe(true);
     // "You may cast this card from your graveyard."
-    expect(face("Max speed — You may cast this card from your graveyard.", "Enchantment — Aura").castFromGraveyardIf).toEqual(MAX);
+    expect(face("Max speed — You may cast this card from your graveyard.", "Enchantment — Aura").mayPlaySelf?.if).toEqual(MAX);
     // "Unless you have max speed" (Hazoret, Godseeker).
     expect(face("Hazoret can't attack or block unless you have max speed.").static).toEqual([]);
     expect(
@@ -3842,7 +3842,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     ).toEqual({
       kind: "sequence",
       effects: [
-        { kind: "player-effect", duration: "end-of-turn", playLandsFromGraveyard: true, castFromGraveyard: { filter: {} } },
+        { kind: "player-effect", duration: "end-of-turn", mayPlay: { from: "graveyard", play: true } },
         made({ filter: { ownedBy: "you", token: false } }),
       ],
     });
@@ -7165,7 +7165,7 @@ describe("permissions to cast from a zone other than the hand", () => {
   };
   it("reads a card's own permission over exile and over its library during a search", () => {
     const read = (name: string, oracle_text: string) => parseFace({ name, type_line: "Creature — Griffin", oracle_text }, { tokenFor: () => null });
-    expect(read("Misthollow Griffin", "You may cast this card from exile.").castSelfFromExile).toBe(true);
+    expect(read("Misthollow Griffin", "You may cast this card from exile.").mayPlaySelf).toEqual({ from: ["exile"] });
     expect(
       read("Panglacial Wurm", "While you're searching your library, you may cast this card from your library.").castWhileSearchingLibrary,
     ).toBe(true);
@@ -7193,17 +7193,13 @@ describe("permissions to cast from a zone other than the hand", () => {
       filter: { type: "creature", manaValue: { op: "lte", n: 3 } },
       untilSourceLeaves: true,
     });
-    expect(effectOf("Until end of turn, you may cast a creature spell from among cards exiled with ~ without paying its mana cost.").effect).toEqual({
-      kind: "allow-cast-linked-exile",
-      spell: { type: "creature" },
-      free: true,
-    });
+    expect(effectOf("Until end of turn, you may cast a creature spell from among cards exiled with ~ without paying its mana cost.").effect).toEqual({ kind: "player-effect", duration: "end-of-turn", mayPlay: { from: "exile", linked: true, spell: { type: "creature" }, free: true, upTo: 1 } });
   });
 });
 
 describe("a card's own graveyard permission with costs (castSelfFromGraveyard)", () => {
   const read = (name: string, type_line: string, oracle_text: string) =>
-    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null }).castSelfFromGraveyard;
+    parseFace({ name, type_line, oracle_text }, { tokenFor: () => null }).mayPlaySelf;
   it("reads the costs, the alternative cost, the per-card increase and 'or from exile'", () => {
     expect(
       read(
@@ -7211,40 +7207,40 @@ describe("a card's own graveyard permission with costs (castSelfFromGraveyard)",
         "Enchantment — Aura",
         "Enchant creature\nYou may cast this card from your graveyard by paying 3 life and discarding a card in addition to paying its other costs.",
       ),
-    ).toEqual({ payLife: 3, discard: 1 });
+    ).toEqual({ from: ["graveyard"], payLife: 3, discard: 1 });
     expect(
       read("Raffine's Guidance", "Enchantment — Aura", "Enchant creature\nYou may cast this card from your graveyard by paying {2}{W} rather than paying its mana cost."),
-    ).toEqual({ mana: "{2}{W}" });
+    ).toEqual({ from: ["graveyard"], byPaying: "{2}{W}" });
     expect(
       read(
         "Squee, Dubious Monarch",
         "Legendary Creature — Goblin Noble",
         "You may cast this card from your graveyard by paying {3}{R} and exiling four other cards from your graveyard rather than paying its mana cost.",
       ),
-    ).toEqual({ mana: "{3}{R}", exileOthers: 4 });
+    ).toEqual({ from: ["graveyard"], byPaying: "{3}{R}", exileOthers: 4 });
     expect(
       read(
         "Helbrute",
         "Artifact Creature — Astartes Dreadnought",
         "Sarcophagus — You may cast this card from your graveyard by exiling another creature card from your graveyard in addition to paying its other costs.",
       ),
-    ).toEqual({ exileOthers: 1, exileFilter: { type: "creature" } });
+    ).toEqual({ from: ["graveyard"], exileOthers: 1, exileFilter: { type: "creature" } });
     expect(
       read(
         "Wickerfolk Indomitable",
         "Artifact Creature — Scarecrow",
         "You may cast this card from your graveyard by paying 2 life and sacrificing an artifact or creature in addition to paying its other costs.",
       ),
-    ).toEqual({ payLife: 2, sacrifice: { typesAnyOf: ["artifact", "creature"] } });
+    ).toEqual({ from: ["graveyard"], payLife: 2, sacrifice: { typesAnyOf: ["artifact", "creature"] } });
     expect(
       read(
         "Risen Executioner",
         "Creature — Zombie Warrior",
         "You may cast this creature from your graveyard if you pay {1} more to cast it for each other creature card in your graveyard.",
       ),
-    ).toEqual({ costIncreasePerOther: { type: "creature" } });
+    ).toEqual({ from: ["graveyard"], costIncreasePerOther: { type: "creature" } });
     expect(read("Squee, the Immortal", "Legendary Creature — Goblin", "You may cast this card from your graveyard or from exile.")).toEqual({
-      fromExile: true,
+      from: ["graveyard", "exile"],
     });
     // A count of sacrifices isn't a cost the permission can take.
     expect(
@@ -8406,7 +8402,7 @@ describe("exiled this way, then a pick or the rest moved on", () => {
       max: 1,
       destination: "exile",
       unlinked: true,
-      playable: { duration: "end-of-turn" },
+      mayPlay: { duration: "end-of-turn", play: true },
       leftover: "bottom-random",
     });
     expect(
@@ -9376,16 +9372,16 @@ describe("impulse permissions with a window", () => {
     expect(card.complete).toBe(true);
     return card.triggered[0].effect;
   };
-  const impulse = { kind: "impulse-exile", amount: 1 };
+  const impulse = { kind: "impulse-exile", amount: 1, play: true };
 
   it("reads each window", () => {
     expect(trigger("During your next turn, you may play that card.")).toEqual({ ...impulse, duration: "during-your-next-turn" });
     // Inti, Seneschal of the Sun; Wiccan, Young Avenger.
     expect(trigger("You may play that card until your next end step.")).toEqual({ ...impulse, duration: "until-your-next-end-step" });
     expect(trigger("Until your next end step, you may cast that card.")).toEqual({
-      ...impulse,
+      kind: "impulse-exile",
+      amount: 1,
       duration: "until-your-next-end-step",
-      castOnly: true,
     });
     expect(trigger("Until end of combat on your next turn, you may play that card.")).toEqual({
       ...impulse,
@@ -9413,9 +9409,9 @@ describe("impulse permissions with a window", () => {
 
   it("reads casting only, and leaves a window it doesn't know", () => {
     expect(trigger("You may cast that card until the end of your next turn.")).toEqual({
-      ...impulse,
+      kind: "impulse-exile",
+      amount: 1,
       duration: "until-end-of-your-next-turn",
-      castOnly: true,
     });
     const card = parseFace(
       {
@@ -9442,7 +9438,7 @@ describe("impulse permissions with a window", () => {
     expect(parsed.triggered[0].targets).toEqual([
       { kind: "optional", of: { kind: "card-in-graveyard", whose: "you", filter: { typesAnyOf: ["instant", "sorcery"] } } },
     ]);
-    expect(parsed.triggered[0].effect).toEqual({ kind: "exile", target: 0, mayCast: { duration: "until-end-of-your-next-turn" } });
+    expect(parsed.triggered[0].effect).toEqual({ kind: "exile", target: 0, mayPlay: { duration: "until-end-of-your-next-turn" } });
 
     const victor = parseFace(
       {
@@ -9455,7 +9451,7 @@ describe("impulse permissions with a window", () => {
     expect(victor.triggered[0].effect).toEqual({
       kind: "exile",
       target: 0,
-      mayCast: { duration: "while-you-control-source", play: true },
+      mayPlay: { duration: "while-you-control-source", play: true },
     });
   });
 });
@@ -10579,7 +10575,7 @@ describe("a card chosen from a set as an effect resolves", () => {
       "Target opponent reveals their hand. You choose a nonland card from that player's graveyard or hand and exile it. You may cast that card for as long as it remains exiled, and you may spend mana as though it were mana of any color to cast that spell.",
     );
     expect(intrusion.complete).toBe(true);
-    expect(intrusion.effect.mayCast).toEqual({ duration: "while-exiled", spendAs: "any-color" });
+    expect(intrusion.effect.mayPlay).toEqual({ duration: "while-exiled", spendAs: "any-color" });
   });
 
   it("reads a card exiled with the source chosen for a hand, the battlefield, or to play", () => {
@@ -11956,7 +11952,7 @@ describe("a search whose exiled finds may be cast later this turn", () => {
       destination: "exile",
       min: 0,
       max: { librarySize: "you" },
-      playable: { duration: "end-of-turn", free: true },
+      mayPlay: { duration: "end-of-turn", free: true },
     });
     const chandra = parseEffect(
       "Search your graveyard and library for any number of red instant and/or sorcery cards, exile them, then shuffle. You may cast them this turn. Add six {R}.",
@@ -11970,7 +11966,7 @@ describe("a search whose exiled finds may be cast later this turn", () => {
       upTo: true,
       min: 0,
       max: 999,
-      playable: { duration: "end-of-turn" },
+      mayPlay: { duration: "end-of-turn" },
     });
     expect(chandra.effects[1]).toEqual({ kind: "add-mana", mana: "R", amount: 6 });
   });
@@ -12099,37 +12095,27 @@ describe("permissions over exiled cards", () => {
       static?: Record<string, unknown>[];
     };
   it("reads a resolved permission over the source's linked exile, of one card or of cards", () => {
-    expect(parseEffect("Until end of turn, you may play a card exiled with ~ without paying its mana cost.", ctx()).effect).toEqual({
-      kind: "allow-cast-linked-exile",
-      free: true,
-      play: true,
-    });
-    expect(parseEffect("Until end of turn, you may play cards you own exiled with ~.", ctx()).effect).toEqual({
-      kind: "allow-cast-linked-exile",
-      spell: { ownedBy: "you" },
-      play: true,
-      anyNumber: true,
-    });
-    expect(parseEffect("Until end of turn, you may cast a creature spell from among cards exiled with ~.", ctx()).effect).toEqual({
-      kind: "allow-cast-linked-exile",
-      spell: { type: "creature" },
-    });
+    expect(parseEffect("Until end of turn, you may play a card exiled with ~ without paying its mana cost.", ctx()).effect).toEqual({ kind: "player-effect", duration: "end-of-turn", mayPlay: { from: "exile", linked: true, play: true, free: true, upTo: 1 } });
+    expect(parseEffect("Until end of turn, you may play cards you own exiled with ~.", ctx()).effect).toEqual({ kind: "player-effect", duration: "end-of-turn", mayPlay: { from: "exile", linked: true, play: true, spell: { ownedBy: "you" } } });
+    expect(parseEffect("Until end of turn, you may cast a creature spell from among cards exiled with ~.", ctx()).effect).toEqual({ kind: "player-effect", duration: "end-of-turn", mayPlay: { from: "exile", linked: true, spell: { type: "creature" }, upTo: 1 } });
   });
   it("reads the static one, its lands and its spending rule", () => {
-    expect(face("You may play lands and cast spells from among cards exiled with this creature.").static?.[0]?.playFromExile).toEqual({
+    expect(face("You may play lands and cast spells from among cards exiled with this creature.").static?.[0]?.mayPlay).toEqual({
+      from: "exile",
+      play: true,
       filter: {},
       linked: true,
     });
-    expect(face("You may cast spells from among cards exiled with this creature.").static?.[0]?.playFromExile).toEqual({
+    expect(face("You may cast spells from among cards exiled with this creature.").static?.[0]?.mayPlay).toEqual({
+      from: "exile",
       filter: {},
       linked: true,
-      castOnly: true,
     });
     expect(
       face(
         "You may play lands and cast spells from among cards exiled with this creature. If you cast a spell this way, you may spend mana as though it were mana of any color to cast it.",
-      ).static?.[0]?.playFromExile,
-    ).toEqual({ filter: {}, linked: true, spendAs: "any-color" });
+      ).static?.[0]?.mayPlay,
+    ).toEqual({ from: "exile", play: true, filter: {}, linked: true, spendAs: "any-color" });
   });
   it("links a library's top card to the source when the card says 'exiled with' it", () => {
     const triggered = (oracle_text: string) =>
@@ -12154,14 +12140,14 @@ describe("permissions over exiled cards", () => {
     ).toEqual({
       kind: "exile",
       target: 0,
-      mayCast: { duration: "while-exiled", play: true, byOwner: true, tax: { generic: 2, opponentsOnly: true } },
+      mayPlay: { duration: "while-exiled", play: true, byOwner: true, tax: { generic: 2, opponentsOnly: true } },
     });
     expect(
       parseEffect(
         "Exile target nonland permanent. For as long as that card remains exiled, its owner may cast it without paying its mana cost.",
         ctx(),
       ).effect,
-    ).toEqual({ kind: "exile", target: 0, mayCast: { duration: "while-exiled", byOwner: true, free: true } });
+    ).toEqual({ kind: "exile", target: 0, mayPlay: { duration: "while-exiled", byOwner: true, free: true } });
   });
 });
 
@@ -12356,6 +12342,7 @@ describe("a duration to a point in a later turn", () => {
       kind: "impulse-exile",
       amount: 1,
       duration: "until-your-next-upkeep",
+      play: true,
     });
     expect(
       parseEffect("Exile the top card of your library. Until your next turn, you may cast it if it's an instant or sorcery spell.", ctx()).effect,
@@ -12364,14 +12351,13 @@ describe("a duration to a point in a later turn", () => {
       amount: 1,
       duration: "until-your-next-turn",
       filter: { typesAnyOf: ["instant", "sorcery"] },
-      castOnly: true,
     });
     expect(
       parseEffect(
         "Exile target creature. Until the end of your next turn, you may cast that card and you may spend mana as though it were mana of any color to cast that spell.",
         ctx(),
       ).effect,
-    ).toEqual({ kind: "exile", target: 0, mayCast: { duration: "until-end-of-your-next-turn", spendAs: "any-color" } });
+    ).toEqual({ kind: "exile", target: 0, mayPlay: { duration: "until-end-of-your-next-turn", spendAs: "any-color" } });
   });
 });
 
@@ -14514,7 +14500,7 @@ describe("what would go to a graveyard going elsewhere", () => {
     ).toEqual({ event: "would-discard", causedBy: "opponent", reveal: true });
   });
   it("reads a card that wasn't cycled exiled, and cycling spells cast from a graveyard", () => {
-    expect(statics("You may cast spells that have a cycling ability from your graveyard.").castFromGraveyard).toEqual({ filter: { hasKeyword: "cycling" } });
+    expect(statics("You may cast spells that have a cycling ability from your graveyard.").mayPlay).toEqual({ from: "graveyard", filter: { hasKeyword: "cycling" } });
     expect(
       statics("If a card that has a cycling ability would be put into your graveyard from anywhere and it wasn't cycled, exile it instead.").replacement,
     ).toEqual({ event: "would-be-put-into-graveyard", instead: "exile", notCycled: true, filter: { ownedBy: "you", token: false, hasKeyword: "cycling" } });
@@ -14550,14 +14536,14 @@ describe("what would go to a graveyard going elsewhere", () => {
     const valgavoth = card(
       "If a card you didn't control would be put into an opponent's graveyard from anywhere, exile it instead.\nDuring your turn, you may play cards exiled with Test Card. If you cast a spell this way, pay life equal to its mana value rather than pay its mana cost.",
     );
-    expect(valgavoth.static.map((s: { replacement?: unknown; playFromExile?: unknown }) => s.replacement ?? s.playFromExile)).toEqual([
+    expect(valgavoth.static.map((s: { replacement?: unknown; mayPlay?: unknown }) => s.replacement ?? s.mayPlay)).toEqual([
       {
         event: "would-be-put-into-graveyard",
         instead: "exile",
         filter: { ownedBy: "opponent", controlledBy: "opponent", token: false },
         linked: true,
       },
-      { filter: {}, linked: true, yourTurnOnly: true, payLifeManaValue: true },
+      { from: "exile", play: true, filter: {}, linked: true, yourTurnOnly: true, byPayingLife: true },
     ]);
     expect(card("If a card or token would be put into a graveyard from anywhere, exile it instead.").static[0].replacement).toEqual({
       event: "would-be-put-into-graveyard",
@@ -15110,7 +15096,7 @@ describe("a cast as this resolves, on its own terms", () => {
       "Until end of turn, you may cast target instant or sorcery card from your graveyard without paying its mana cost. If that spell would be put into your graveyard, exile it instead.",
     );
     expect(sins.complete).toBe(true);
-    expect(sins.effect).toEqual({ kind: "grant-graveyard-cast", target: 0, free: true, exileAfter: true });
+    expect(sins.effect).toEqual({ kind: "grant-play", cards: 0, duration: "end-of-turn", free: true, exileAfter: true });
     const seeker = read(
       "Creature — Fish Illusion",
       "When this creature enters, target opponent mills five cards. You may cast an instant or sorcery spell from among them without paying its mana cost.",
@@ -15174,7 +15160,7 @@ describe("a cast as this resolves, on its own terms", () => {
             ability: { effect: { kind: "add-mana", mana: { oneOf: ["U", "B", "R"] }, amount: 1 } },
             duration: "until-source-cast",
           },
-          { kind: "allow-cast-from-exile", target: "source", whileExiled: true },
+          { kind: "grant-play", cards: "source", duration: "while-exiled" },
         ],
       },
     });
@@ -15919,7 +15905,7 @@ describe("the cards exiled with it, to their graveyards", () => {
         "Landfall — Whenever a land you control enters, exile the top card of your library. You may play that card for as long as it remains exiled.\nAt the beginning of your end step, if there are cards exiled with this enchantment, put them into their owner's graveyard, then this enchantment deals that much damage to each opponent.",
     });
     expect(face.complete).toBe(true);
-    expect(face.triggered[0].effect).toEqual({ kind: "impulse-exile", amount: 1, duration: "while-exiled", linked: true });
+    expect(face.triggered[0].effect).toEqual({ kind: "impulse-exile", amount: 1, duration: "while-exiled", play: true, linked: true });
     expect(face.triggered[1].condition).toEqual({ kind: "exiled-with-source", atLeast: 1, now: true });
     expect(face.triggered[1].effect).toEqual({
       kind: "sequence",
@@ -16055,7 +16041,7 @@ describe("a permission for one creature spell from your graveyard", () => {
     expect(face.activated[0].effect).toEqual({
       kind: "player-effect",
       duration: "end-of-turn",
-      castFromGraveyard: { filter: { type: "creature" }, once: true },
+      mayPlay: { from: "graveyard", filter: { type: "creature" }, upTo: 1 },
     });
     expect(face.activated[0].oncePerTurn).toBe(true);
   });
@@ -16236,7 +16222,7 @@ describe("what a doubled trigger's cause is, and playing from the top by type", 
     });
     expect(chocobo.complete).toBe(true);
     expect(chocobo.looksAtOwnLibraryTop).toBe(true);
-    expect(chocobo.static[0]).toMatchObject({ playFromLibraryTop: { type: "land" }, castFromLibraryTop: { filter: { subtype: "Bird" } } });
+    expect(chocobo.static[0]).toMatchObject({ mayPlay: { from: "library-top", play: true, spell: { subtype: "Bird" } }, });
     expect(chocobo.static[1].doubleTriggers).toEqual({
       cause: "enters",
       filter: { anyOf: [{ type: "land" }, { subtype: "Bird" }], controlledBy: "you" },
@@ -16252,8 +16238,7 @@ describe("what a doubled trigger's cause is, and playing from the top by type", 
         "You may look at the top card of your library any time.\nYou may play lands and cast spells from the top of your library. If you cast a spell this way, pay life equal to its mana value rather than pay its mana cost.\n{T}, Sacrifice ten nonland permanents: Each opponent loses 10 life.",
     });
     expect(citadel.static[0]).toMatchObject({
-      playFromLibraryTop: { type: "land" },
-      castFromLibraryTop: { filter: {}, payLifeManaValue: true },
+      mayPlay: { from: "library-top", play: true, byPayingLife: true },
     });
     expect(citadel.complete).toBe(true);
   });
@@ -16684,8 +16669,7 @@ describe("flagged cards' lines (2026-11-07): target player adds mana, a host's t
       kind: "player-effect",
       duration: "end-of-turn",
       looksAtOwnLibraryTop: true,
-      playFromLibraryTop: { type: "land" },
-      castFromLibraryTop: { filter: {}, payLifeManaValue: true },
+      mayPlay: { from: "library-top", play: true, byPayingLife: true },
     });
   });
 
@@ -16778,7 +16762,7 @@ describe("one play shared among cards (2026-11-07): a spell from among milled ca
       kind: "sequence",
       effects: [
         { kind: "mill", target: "each-player", amount: 1 },
-        { kind: "grant-graveyard-cast", cards: "milled-this-way", upTo: 1 },
+        { kind: "grant-play", cards: { thisWay: "milled" }, duration: "end-of-turn", upTo: 1 },
       ],
     });
   });
@@ -16802,7 +16786,7 @@ describe("one play shared among cards (2026-11-07): a spell from among milled ca
       mana_cost: "{R}",
       colors: ["R"],
     });
-    expect(face.triggered[0].effect).toEqual({ kind: "impulse-exile", amount: 2, duration: "until-your-next-end-step", upTo: 1 });
+    expect(face.triggered[0].effect).toEqual({ kind: "impulse-exile", amount: 2, duration: "until-your-next-end-step", play: true, upTo: 1 });
   });
 });
 

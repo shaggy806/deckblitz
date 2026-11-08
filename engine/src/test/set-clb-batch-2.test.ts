@@ -193,7 +193,7 @@ describe("Caves of Chaos Adventurer", () => {
     const top = toLibrary(game, "Grizzly Bears");
     attack(game, a, [caves]);
     expect(zone(game, top)).toBe("exile");
-    expect(game.state.objects[top].impulse?.free).toBeUndefined();
+    expect(game.state.objects[top].playPermission?.free).toBeUndefined();
 
     const { game: g2, a: a2 } = table();
     const caves2 = spawn(g2, "Caves of Chaos Adventurer");
@@ -201,7 +201,7 @@ describe("Caves of Chaos Adventurer", () => {
     completed(g2);
     attack(g2, a2, [caves2]);
     expect(zone(g2, top2)).toBe("exile");
-    expect(g2.state.objects[top2].impulse?.free?.only).toBe(true);
+    expect(g2.state.objects[top2].playPermission?.free).toBe(true);
     lands(g2, "Forest", 2);
     // Paying for it isn't allowed: the only permission is the free one.
     expect(() => g2.dispatch({ type: "cast-spell", player: A, card: top2, targets: [], via: "impulse" })).toThrow();

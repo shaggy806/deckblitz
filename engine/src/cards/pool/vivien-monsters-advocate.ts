@@ -47,7 +47,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      castFromLibraryTop: { filter: { type: "creature" } },
+      mayPlay: { from: "library-top", filter: { type: "creature" } },
       text: CAST_TEXT,
     },
   ],

@@ -20,7 +20,7 @@ export default defineCard({
         target: 0,
         filter: { typesAnyOf: ["instant", "sorcery"] },
         destination: "exile",
-        mayCast: { duration: "while-exiled" },
+        mayPlay: { duration: "while-exiled" },
       },
       {
         kind: "delayed-trigger",

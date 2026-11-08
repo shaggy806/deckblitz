@@ -21,6 +21,7 @@ const CHOICE = {
         amount: 2,
         duration: "until-end-of-your-next-turn",
         choose: 1,
+        play: true,
       },
     },
   ],

@@ -17,7 +17,7 @@ export default defineCard({
   toughness: 5,
   keywords: ["flying"],
   text: `Flying\n${LANDS_TEXT}\n${SACRIFICE_TEXT}`,
-  static: [{ affects: { scope: "self" }, playFromGraveyard: { type: "land" }, text: LANDS_TEXT }],
+  static: [{ affects: { scope: "self" }, mayPlay: { from: "graveyard", play: true, filter: { type: "land" } }, text: LANDS_TEXT }],
   triggered: [
     {
       trigger: { on: "sacrifice", who: "you", otherOnly: true, filter: { token: false } },

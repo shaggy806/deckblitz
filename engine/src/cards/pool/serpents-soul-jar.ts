@@ -21,7 +21,7 @@ export default defineCard({
       resolve: null,
       text: "{T}, Pay 2 life: Until end of turn, you may cast a creature spell from among cards exiled with this artifact.",
       targets: [],
-      effect: { kind: "allow-cast-linked-exile", spell: { type: "creature" } },
+      effect: { kind: "player-effect", duration: "end-of-turn", mayPlay: { from: "exile", linked: true, spell: { type: "creature" }, upTo: 1 } },
     },
   ],
 });

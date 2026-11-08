@@ -28,7 +28,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "discard-hand", who: "you" },
-          { kind: "impulse-exile", amount: 3, duration: "end-of-turn" },
+          { kind: "impulse-exile", amount: 3, duration: "end-of-turn", play: true },
         ],
       },
       resolve: null,
@@ -57,7 +57,7 @@ export default defineCard({
             upTo: true,
             min: 0,
             max: 999,
-            playable: { duration: "end-of-turn" },
+            mayPlay: { duration: "end-of-turn" },
           },
           { kind: "add-mana", mana: "R", amount: 6 },
         ],

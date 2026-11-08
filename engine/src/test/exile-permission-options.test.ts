@@ -158,7 +158,7 @@ describe("Raphael, Most Attitude: a resolved permission over the cards linked to
     const { raphael, exiled } = withExiled(game, ["Grizzly Bears", "Elvish Mystic", "Llanowar Elves"]);
     lands(game, "Forest", 4);
     // A second resolved permission, as a copied trigger would be.
-    game.debugApplyEffect(A, { kind: "allow-cast-linked-exile", play: true }, [], { source: raphael });
+    game.debugApplyEffect(A, { kind: "player-effect", duration: "end-of-turn", mayPlay: { from: "exile", linked: true, play: true, upTo: 1 } }, [], { source: raphael });
     attack(game, a, [raphael]);
     cast(game, exiled[0], { via: "impulse" });
     expect(offers(game, exiled[1])).toHaveLength(1);
@@ -184,7 +184,7 @@ describe("Raphael, Most Attitude: a resolved permission over the cards linked to
     lands(game, "Forest", 2);
     game.debugApplyEffect(
       A,
-      { kind: "allow-cast-linked-exile", play: true, anyNumber: true, reduce: 2, spell: { ownedBy: "you" } },
+      { kind: "player-effect", duration: "end-of-turn", mayPlay: { from: "exile", linked: true, play: true, spell: { ownedBy: "you" }, reduce: 2 } },
       [],
       { source: raphael },
     );
@@ -238,7 +238,7 @@ describe("its owner's permission", () => {
     cast(game, toHand(game, "Soul Partition"), { targets: [ref(mine)] });
     // The Plains are tapped: two Forests are {1}{G}, with no {2} on top.
     expect(offers(game, mine)).toHaveLength(1);
-    expect(game.state.objects[mine].impulse?.tax?.exempt).toBe(A);
+    expect(game.state.objects[mine].playPermission?.granter).toBe(A);
   });
 
   it("Release to the Wind: its owner casts it free, and only free", () => {
@@ -273,10 +273,10 @@ describe("its owner's permission", () => {
     // Alice's turn after: hers ended with the permission still on it…
     toTurnOf(game, A);
     expect(offers(game, top, A).map((o) => o.kind)).toEqual(["play-land"]);
-    expect(game.state.objects[bears].impulse).toBeUndefined();
+    expect(game.state.objects[bears].playPermission).toBeUndefined();
     // …and the end of this turn is the end of "her next turn".
     toTurnOf(game, B);
-    expect(game.state.objects[top].impulse).toBeUndefined();
+    expect(game.state.objects[top].playPermission).toBeUndefined();
   });
 });
 
@@ -344,7 +344,7 @@ describe("the options again, on other printings", () => {
 
   it("Court of Locthwain: plays the card for good; the monarch casts one of them free this turn", () => {
     const { game, a } = table();
-    const court = enter(game, "Court of Locthwain");
+    enter(game, "Court of Locthwain");
     const first = toLibrary(game, "Lightning Bolt", B);
     toLibrary(game, "Wastes", B); // What Bob draws on his turn.
     pickTargets(a, B);
@@ -356,12 +356,12 @@ describe("the options again, on other printings", () => {
     const free = offers(game, first).filter((o) => o.kind === "cast-spell" && o.free === true);
     expect(free).toHaveLength(1);
     pickTargets(a, B);
-    expect(game.state.objects[court].linkedCastGrants).toHaveLength(1);
+    expect(game.state.playerEffects?.find((e) => e.mayPlay?.linked === true)?.mayPlay?.left).toBe(1);
     cast(game, first, { via: "impulse", free: true, targets: [ref(B)] });
     expect(zone(game, first)).toBe("graveyard");
     expect(game.state.players[B].life).toBe(17);
     // That free cast was the one the monarch's permission allowed.
-    expect(game.state.objects[court].linkedCastGrants).toHaveLength(0);
+    expect(game.state.playerEffects?.find((e) => e.mayPlay?.linked === true)?.mayPlay?.left).toBe(0);
   });
 
   it("Court of Locthwain: without the monarchy, no free cast, the mana cost in any type", () => {
@@ -435,7 +435,7 @@ describe("a taxed permission from a hand", () => {
     expect(seen.offered).toContain(bolt);
     expect(seen.offered).not.toContain(land);
     expect(zone(game, bolt)).toBe("exile");
-    expect(game.state.objects[bolt].impulse?.player).toBe(B);
+    expect(game.state.objects[bolt].playPermission?.player).toBe(B);
     lands(game, "Mountain", 2, B);
     toTurnOf(game, B);
     expect(offers(game, bolt, B)).toEqual([]);
@@ -463,8 +463,8 @@ describe("a taxed permission from a hand", () => {
     enter(game, "Lightstall Inquisitor");
     expect(zone(game, bolt)).toBe("exile");
     expect(zone(game, land)).toBe("exile");
-    expect(game.state.objects[bolt].impulse?.player).toBe(B);
-    expect(game.state.objects[land].impulse?.player).toBe(C);
+    expect(game.state.objects[bolt].playPermission?.player).toBe(B);
+    expect(game.state.objects[land].playPermission?.player).toBe(C);
     lands(game, "Mountain", 1, B);
     toTurnOf(game, B);
     expect(offers(game, bolt, B)).toEqual([]);

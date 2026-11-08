@@ -66,7 +66,7 @@ export default defineCard({
       loyaltyCost: -3,
       cost: { mana: null, tap: false },
       targets: [],
-      effect: { kind: "player-effect", duration: "end-of-turn", castFromGraveyard: { filter: { subtype: "Zombie" } } },
+      effect: { kind: "player-effect", duration: "end-of-turn", mayPlay: { from: "graveyard", filter: { subtype: "Zombie" } } },
       resolve: null,
       text: MINUS_THREE,
     },

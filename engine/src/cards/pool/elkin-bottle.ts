@@ -12,7 +12,7 @@ export default defineCard({
     {
       cost: { mana: "{3}", tap: true },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "until-your-next-upkeep" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "until-your-next-upkeep", play: true },
       resolve: null,
       text: TEXT,
     },

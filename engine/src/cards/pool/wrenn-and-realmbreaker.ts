@@ -69,8 +69,7 @@ export default defineCard({
         text: EMBLEM_TEXT,
         static: {
           affects: { scope: "self" },
-          playFromGraveyard: { type: "land" },
-          castFromGraveyard: { filter: { typesAnyOf: ["artifact", "creature", "enchantment", "planeswalker", "battle"] } },
+          mayPlay: { from: "graveyard", play: true, filter: { typesAnyOf: ["land", "artifact", "creature", "enchantment", "planeswalker", "battle"] } },
           text: EMBLEM_TEXT,
         },
       },

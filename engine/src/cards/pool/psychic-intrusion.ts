@@ -15,6 +15,6 @@ export default defineCard({
     filter: { notTypes: ["land"] },
     destination: "exile",
     alsoFrom: { zone: "graveyard", filter: { notTypes: ["land"] } },
-    mayCast: { duration: "while-exiled", spendAs: "any-color" },
+    mayPlay: { duration: "while-exiled", spendAs: "any-color" },
   },
 });

@@ -231,15 +231,15 @@ describe("Expedited Inheritance", () => {
     cast(game, toHand(game, "Shock"), { targets: [ref(giant)] });
     for (const id of top) {
       expect(zone(game, id)).toBe("exile");
-      expect(game.state.objects[id].impulse?.player).toBe(B);
+      expect(game.state.objects[id].playPermission?.player).toBe(B);
     }
     expect(zone(game, mine)).toBe("library");
     // Through bob's next turn, gone after it.
     nextTurn(game);
     expect(game.state.turn.number).toBe(2);
-    expect(game.state.objects[top[0]].impulse).toBeDefined();
+    expect(game.state.objects[top[0]].playPermission).toBeDefined();
     nextTurn(game);
-    expect(game.state.objects[top[0]].impulse).toBeUndefined();
+    expect(game.state.objects[top[0]].playPermission).toBeUndefined();
   });
 
   it("does nothing when they decline", () => {

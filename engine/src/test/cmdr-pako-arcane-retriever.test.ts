@@ -57,7 +57,7 @@ describe("Pako, Arcane Retriever", () => {
       expect(game.state.objects[top[player]].zone).toBe("exile");
       expect(game.state.objects[top[player]].counters).toEqual({ fetch: 1 });
       // No permission to play them.
-      expect(game.state.objects[top[player]].impulse).toBeUndefined();
+      expect(game.state.objects[top[player]].playPermission).toBeUndefined();
     }
     // Opt and Forest are noncreature cards; Grizzly Bears isn't.
     expect(game.state.objects[pako].counters).toEqual({ "+1/+1": 2 });

@@ -33,7 +33,7 @@ export default defineCard({
           {
             kind: "choose-random-card",
             zone: "graveyard",
-            then: { kind: "exile", target: 0, mayCast: { duration: "end-of-turn", play: true } },
+            then: { kind: "exile", target: 0, mayPlay: { duration: "end-of-turn", play: true } },
           },
         ],
       },

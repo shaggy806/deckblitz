@@ -7,5 +7,5 @@ export default defineCard({
   types: ["sorcery"],
   retrace: true,
   text: "Exile the top two cards of your library. Until the end of your next turn, you may play those cards.\nRetrace (You may cast this card from your graveyard by discarding a land card in addition to paying its other costs.)",
-  effect: { kind: "impulse-exile", amount: 2, duration: "until-end-of-your-next-turn" },
+  effect: { kind: "impulse-exile", amount: 2, duration: "until-end-of-your-next-turn", play: true },
 });

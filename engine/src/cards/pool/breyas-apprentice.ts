@@ -31,7 +31,7 @@ export default defineCard({
         modes: [
           {
             text: "Exile the top card of your library. Until the end of your next turn, you may play that card.",
-            effect: { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn" },
+            effect: { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn", play: true },
           },
           {
             text: "Target creature gets +2/+0 until end of turn.",

@@ -28,7 +28,7 @@ export default defineCard({
         minModes: 1,
         maxModes: 1,
         modes: [
-          { text: PLAY, effect: { kind: "allow-cast-linked-exile", play: true, free: true } },
+          { text: PLAY, effect: { kind: "player-effect", duration: "end-of-turn", mayPlay: { from: "exile", linked: true, play: true, free: true, upTo: 1 } } },
           {
             text: DRAIN,
             effect: {

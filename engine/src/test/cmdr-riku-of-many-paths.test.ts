@@ -136,6 +136,6 @@ describe("Riku of Many Paths", () => {
     game.dispatch({ type: "choose-modes", player: A, modes: [0] });
     game.advanceUntil(quiet);
     expect(game.state.objects[top].zone).toBe("exile");
-    expect(game.state.objects[top].impulse).toBeDefined();
+    expect(game.state.objects[top].playPermission).toBeDefined();
   });
 });

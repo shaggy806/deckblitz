@@ -23,7 +23,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "prohibit", who: 0, spells: true, abilities: true },
-          { kind: "player-effect", duration: "end-of-turn", handRevealed: 0, playFromHandOf: 0 },
+          { kind: "player-effect", duration: "end-of-turn", handRevealed: 0, mayPlay: { from: "hand", play: true, whose: { target: 0 } } },
         ],
       },
     },

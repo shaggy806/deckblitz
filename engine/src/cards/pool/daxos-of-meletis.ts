@@ -48,7 +48,6 @@ export default defineCard({
             amount: 1,
             whose: "trigger-player",
             duration: "end-of-turn",
-            castOnly: true,
             spendAs: "any-color",
           },
           { kind: "gain-life", amount: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "exiled" } } },

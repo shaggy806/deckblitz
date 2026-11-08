@@ -22,11 +22,11 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "impulse-exile", amount: 1, whose: 0, duration: "while-exiled", spendAs: "any-type", linked: true },
+          { kind: "impulse-exile", amount: 1, whose: 0, duration: "while-exiled", play: true, spendAs: "any-type", linked: true },
           {
             kind: "conditional",
             condition: { kind: "monarch", who: "you" },
-            then: { kind: "allow-cast-linked-exile", free: true },
+            then: { kind: "player-effect", duration: "end-of-turn", mayPlay: { from: "exile", linked: true, free: true, upTo: 1 } },
           },
         ],
       },

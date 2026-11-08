@@ -26,7 +26,7 @@ export default defineCard({
     {
       cost: { mana: "{1}", tap: true, sacrifice: "self" },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 2, duration: "until-end-of-your-next-turn", choose: 1 },
+      effect: { kind: "impulse-exile", amount: 2, duration: "until-end-of-your-next-turn", play: true, choose: 1 },
       resolve: null,
       text: SAC_TEXT,
     },

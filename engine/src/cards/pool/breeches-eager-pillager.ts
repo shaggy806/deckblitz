@@ -35,7 +35,7 @@ export default defineCard({
             targets: ["creature"],
             effect: { kind: "restrict", target: 0, restrictions: ["cant-block"] },
           },
-          { text: IMPULSE_MODE, effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn" } },
+          { text: IMPULSE_MODE, effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn", play: true } },
         ],
       },
       resolve: null,

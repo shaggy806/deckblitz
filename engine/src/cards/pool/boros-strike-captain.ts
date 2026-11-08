@@ -32,6 +32,7 @@ export default defineCard({
         amount: 1,
         duration: "while-exiled",
         gate: { kind: "turn-stat", stat: "attackers", who: "you", atLeast: 3 },
+        play: true,
       },
       resolve: null,
       text: BATTALION_TEXT,

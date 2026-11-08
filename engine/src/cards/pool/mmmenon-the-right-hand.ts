@@ -18,7 +18,7 @@ export default defineCard({
   text: `Flying\n${LOOK_TEXT}\n${CAST_TEXT}\n${GRANT_TEXT}`,
   static: [
     { affects: { scope: "self" }, visibility: { looksAtOwnLibraryTop: true }, text: LOOK_TEXT },
-    { affects: { scope: "self" }, castFromLibraryTop: { filter: { type: "artifact" } }, text: CAST_TEXT },
+    { affects: { scope: "self" }, mayPlay: { from: "library-top", filter: { type: "artifact" } }, text: CAST_TEXT },
     {
       affects: { scope: "filter", filter: { type: "artifact", controlledBy: "you" } },
       grantsActivated: [

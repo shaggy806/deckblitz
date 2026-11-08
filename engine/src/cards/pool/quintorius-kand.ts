@@ -61,7 +61,7 @@ export default defineCard({
             kind: "for-each-target",
             from: 0,
             simultaneous: true,
-            effect: { kind: "exile", target: 0, mayCast: { duration: "end-of-turn", play: true } },
+            effect: { kind: "exile", target: 0, mayPlay: { duration: "end-of-turn", play: true } },
           },
           { kind: "add-mana", mana: "R", amount: { thisWay: "exiled" } },
         ],

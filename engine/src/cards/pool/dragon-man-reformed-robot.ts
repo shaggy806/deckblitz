@@ -16,7 +16,7 @@ export default defineCard({
   toughness: 5,
   keywords: ["flying"],
   text: `Flying\n${POWER_TEXT}\n${GRAVEYARD_TEXT}`,
-  castSelfFromGraveyard: { discard: 1 },
+  mayPlaySelf: { from: ["graveyard"], discard: 1 },
   static: [
     {
       affects: { scope: "self" },

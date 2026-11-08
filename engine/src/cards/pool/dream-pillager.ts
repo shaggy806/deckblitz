@@ -22,7 +22,6 @@ export default defineCard({
         amount: { triggerValue: true },
         duration: "end-of-turn",
         // "cast spells from among" — no lands.
-        castOnly: true,
       },
       resolve: null,
       text: "Whenever this creature deals combat damage to a player, exile that many cards from the top of your library. Until end of turn, you may cast spells from among those exiled cards.",

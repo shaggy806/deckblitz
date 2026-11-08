@@ -10,6 +10,6 @@ export default defineCard({
   effect: {
     kind: "exile",
     target: 0,
-    mayCast: { duration: "while-exiled", byOwner: true, free: true },
+    mayPlay: { duration: "while-exiled", byOwner: true, free: true },
   },
 });

@@ -16,7 +16,7 @@ export default defineCard({
   types: ["sorcery"],
   text: "Create X tapped 2/2 black Necron Warrior artifact creature tokens, then you gain life equal to the number of artifacts you control. Exile Their Number Is Legion.\nYou may cast this card from your graveyard.",
   exileOnResolve: true,
-  castFromGraveyardIf: ALWAYS,
+  mayPlaySelf: { from: ["graveyard"], if: ALWAYS },
   targets: [],
   effect: {
     kind: "sequence",

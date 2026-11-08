@@ -20,7 +20,7 @@ export default defineCard({
       effect: {
         kind: "may",
         prompt: "Exile the top card of your library? You may play it until you exile another card with this creature.",
-        effect: { kind: "impulse-exile", amount: 1, duration: "until-next-exile" },
+        effect: { kind: "impulse-exile", amount: 1, duration: "until-next-exile", play: true },
       },
       resolve: null,
       text: TEXT,

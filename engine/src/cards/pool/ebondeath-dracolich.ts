@@ -38,10 +38,10 @@ export default defineCard({
   // last existed on the battlefield — a token counts, and so does one that
   // has left the graveyard since; one that was a copy of Ebondeath doesn't
   // (the rulings).
-  castFromGraveyardIf: {
+  mayPlaySelf: { from: ["graveyard"], if: {
     kind: "turn-history",
     what: "died",
     who: "any-player",
     filter: { notName: "Ebondeath, Dracolich" },
-  },
+  } },
 });

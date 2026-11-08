@@ -24,7 +24,7 @@ export default defineCard({
       {
         text: "Exile the top three cards of your library. You may play them this turn.",
         targets: [],
-        effect: { kind: "impulse-exile", amount: 3, duration: "end-of-turn" },
+        effect: { kind: "impulse-exile", amount: 3, duration: "end-of-turn", play: true },
       },
     ],
   },

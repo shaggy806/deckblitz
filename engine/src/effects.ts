@@ -8,6 +8,7 @@
  * into the spell's or ability's chosen targets, or the literal `"source"`.
  */
 
+import type { CastNowTerms, EffectPlay, EffectPlaySpec, PlayGrant } from "./play-permission.js";
 import type { ActivatedAbility, TriggeredAbility, TriggerSpec } from "./abilities.js";
 import type {
   AffectSpec,
@@ -37,7 +38,6 @@ import type {
   DurationPlayer,
   Expiry,
   PermanentDuration,
-  PermissionDuration,
   PlayerDuration,
   PointDuration,
   WatchDuration,
@@ -126,11 +126,11 @@ export const SEARCHED_ZONES = {
 } as const satisfies Record<SearchZones, { readonly library: boolean; readonly graveyard: boolean; readonly hand: boolean }>;
 /** A `search-library`'s other player's zones and what follows the finds, as
  * `ResolutionContext.searchLibrary` takes them — see the effect's `whose`,
- * `all`, `playable` and `then`. */
+ * `all`, `mayPlay` and `then`. */
 export interface SearchMore {
   readonly owner?: PlayerId;
   readonly all?: boolean;
-  readonly playable?: "while-exiled" | ExilePermission;
+  readonly mayPlay?: PlayGrant;
   /** Its `linked`. */
   readonly linked?: true;
   readonly then?: EffectSpec;
@@ -2002,40 +2002,6 @@ export type ResolvedEnterAttacking =
   | { readonly player: PlayerId | undefined; readonly orTheirPlaneswalker: boolean }
   | { readonly defender: PlayerId | ObjectId };
 
-/**
- * A permission over a card an effect has just put into exile — `exile`'s and
- * `discard-chosen`'s `mayCast`, `look-and-choose`'s `playable`. It rides on
- * the card (`GameObject.impulse`) and ends with any move.
- *
- * - `duration`: how long, see {@link PermissionDuration}, read from the side of
- *   the player it's given to ("until the end of **their** next turn").
- * - `spendAs`: the spending rule for that cast alone (rule 118.14).
- * - `play`: on `mayCast`, "you may **play** it", a land too (rule 305.1), not
- *   only cast it. A `playable` plays unless `castOnly`: "you may **cast** that
- *   card" (Gonti, Lord of Luxury), a land staying where it is.
- * - `byOwner`: "**its owner** may play it" (Soul Partition, Elite Spellbinder),
- *   not the effect's controller. On a `look-and-choose`, the chooser, who owns
- *   what's in their own hand (rule 400.3).
- * - `free`: "… may cast it **without paying its mana cost**" (Release to the
- *   Wind), and only that way.
- * - `tax`: "a spell cast this way costs {N} more to cast" (Elite Spellbinder),
- *   an increase, so before any reduction (rule 601.2f); `opponentsOnly`: "a
- *   spell cast **by an opponent** this way" (Soul Partition), of the effect's
- *   controller.
- * - `landsEnterTapped`: "each land played this way enters tapped" (Lightstall
- *   Inquisitor).
- */
-export interface ExilePermission {
-  readonly duration: PermissionDuration;
-  readonly spendAs?: SpendAs;
-  readonly play?: true;
-  readonly castOnly?: true;
-  readonly byOwner?: true;
-  readonly free?: true;
-  readonly tax?: { readonly generic: number; readonly opponentsOnly?: true };
-  readonly landsEnterTapped?: true;
-}
-
 /** One row of a die roll's results table (rule 706.3a): a result from `min`
  * to `max` (any result from `min` up, without one) gets `effect`. */
 export interface DieResultRow {
@@ -3582,18 +3548,12 @@ export type EffectSpec =
       readonly until?: { readonly targetLeaves: number } | "opponent-becomes-monarch";
       /**
        * "You may cast that card for as long as it remains exiled, and mana of
-       * any type can be spent to cast that spell" (Hostage Taker): the
-       * effect's controller gets an impulse permission to *cast* the card
-       * this put into exile (a land stays put) — `"while-exiled"`, or
-       * `"end-of-turn"` for "this turn", or any other
-       * {@link PermissionDuration}: Scholar of Combustion's "until the end of
-       * your next turn" — with `spendAs` for that cast alone (rule 118.14).
-       * `play`: "you may **play** it" — a land too (rule 305.1), Victor
-       * Mancha's. A token exiled ceases to exist (rule 111.7), so there's
-       * nothing to cast. The rest is {@link ExilePermission}: `byOwner`,
-       * `free`, `tax` and `landsEnterTapped`.
+       * any type can be spent to cast that spell" (Hostage Taker): a
+       * permission over the card this put into exile ({@link PlayGrant}, on
+       * the card, rule 400.7). A token exiled ceases to exist (rule 111.7),
+       * so there's nothing to cast.
        */
-      readonly mayCast?: ExilePermission;
+      readonly mayPlay?: PlayGrant;
       /** The card is in a hand, a `choose-random-card`'s find there: "reveals
        * a card at random from their hand … exile it" (Planeswalker's
        * Mischief). Only with this does `exile` reach a hand, so a target that
@@ -4607,7 +4567,7 @@ export type EffectSpec =
        * fixed as this resolves. */
       readonly ifAsItEnters?: StaticCondition;
     }
-  | {
+  | ({
       /**
        * "You may cast [a card]" while this resolves (rule 608.2g): the
        * effect's controller casts one card now, from wherever it is, by the
@@ -4785,14 +4745,6 @@ export type EffectSpec =
        */
       readonly totalManaValue?: EffectAmount;
       /**
-       * "You may **play** the card", not only cast it: a land card on offer
-       * may be played as part of the resolution — only during its player's
-       * own turn and with a land play left, which it uses up (rules 305.2a,
-       * 305.2b, 305.3); it ignores timing otherwise. A land is never cast
-       * (rule 305.9). Without `play` a land card is never offered.
-       */
-      readonly play?: boolean;
-      /**
        * Suspend's own "when the last time counter is removed from this card,
        * if it's exiled, you may play it without paying its mana cost if
        * able" (rule 702.62a) — the engine sets it on the trigger it makes
@@ -4801,78 +4753,6 @@ export type EffectSpec =
        * exiled, no longer suspended. Not for card definitions.
        */
       readonly suspend?: true;
-      /** "If you cast a creature spell this way, it gains haste until end of
-       * turn" (what Alaundo the Seer's card gains): on the spell and the
-       * permanent it becomes (rule 400.7h). */
-      readonly gainsHaste?: true;
-      /**
-       * What the spell cast must be — "an instant or sorcery spell with mana
-       * value 4 or less", "if that spell's mana value is 8 or less" —
-       * matched against the card as the spell it would be (rule 601.3e): the
-       * face being cast (a modal double-faced card's back, an adventure), or
-       * its prototype. An `{ amount }` compare is bound as this applies
-       * ("mana value X or less" — Electrodominance). The card is judged at
-       * X = 0, which is a free cast's X (rule 107.3b), so a mana-value clause
-       * goes with `free`.
-       */
-      readonly spell?: CardFilter;
-      /**
-       * "…without paying its mana cost" — the only way the card is offered.
-       * An alternative cost (rule 118.9), so no other one goes with it
-       * (118.9a) and X is 0 (107.3b); additional costs such as kicker may
-       * still be paid, and cost increases apply (118.9d).
-       */
-      readonly free?: boolean;
-      /**
-       * "You may cast that card **by discarding a card rather than paying
-       * its mana cost**" (The Infamous Cruelclaw): an alternative cost
-       * (rule 118.9) of one card from the caster's hand, so it's `free` with
-       * a discard on top — X is 0, additional costs may still be paid and
-       * cost increases apply (118.9d). Not offered with an empty hand.
-       */
-      readonly byDiscarding?: boolean;
-      /**
-       * "You may cast that card **by paying an amount of {E} equal to its
-       * mana value rather than paying its mana cost**" (Amped Raptor): an
-       * alternative cost (rule 118.9) of that much energy (107.14) — `free`
-       * with the energy on top, the mana value the spell's as it's cast (its
-       * face's, X 0 — 107.3b). Not offered without that much energy.
-       */
-      readonly byPayingEnergy?: boolean;
-      /**
-       * "You may cast the copy **by paying {3} rather than paying its mana
-       * cost**" (Blue Mage's Cane, Wizard's Spellbook): a fixed alternative
-       * cost in mana (rule 118.9), the only way offered, so a card with no
-       * mana cost can be cast too (118.6a). No other alternative cost goes
-       * with it (118.9a), an {X} in the card's own cost is 0 (107.3b), and
-       * additional costs are still paid and cost increases still apply
-       * (118.9d).
-       */
-      readonly byPaying?: string;
-      /**
-       * "You may cast that card **by paying life equal to the spell's mana
-       * value rather than paying its mana cost**" (Bismuth Mindrender, Anrakyr
-       * the Traveller): `byPayingEnergy`'s twin in life — an alternative cost
-       * (rule 118.9), `free` with the life on top, the mana value the spell's
-       * as it's cast (its face's, X 0 — 107.3b). Not offered to a player who
-       * can't pay that much (119.4); 0 is always payable (119.4b).
-       */
-      readonly byPayingLife?: boolean;
-      /**
-       * "You may cast target instant or sorcery card from your graveyard **by
-       * paying {R}{R} in addition to its other costs**" (Ogre Battlecaster):
-       * mana on top of whatever the cast pays, an additional cost (rule
-       * 601.2f), so its X is announced as usual (601.2b) and an alternative
-       * cost may still replace the mana cost (118.9d).
-       */
-      readonly alsoPaying?: string;
-      /**
-       * "…**and mana of any type can be spent to cast that spell**" (Tinybones,
-       * Quistis Trepe; rule 118.14): for the casts this offer allows and no
-       * others, read while the card is still where it's cast from, as every
-       * other permission's `spendAs` is.
-       */
-      readonly spendAs?: SpendAs;
       /**
        * "The player casts it without paying its mana cost **if able**" (Omen
        * Machine), "cast the copies if able" (Spelltwine): the offer can't be
@@ -4904,12 +4784,6 @@ export type EffectSpec =
        * Ancestral Vision). A Suspend X cost's X is announced as the spell is
        * cast (107.3a), and its "X can't be 0" holds. */
       readonly suspendCost?: boolean;
-      /** "If that spell would be put into your graveyard, exile it instead."
-       * `"instants-and-sorceries"` is Scholar of the Lost Trove's "if an
-       * instant or sorcery spell cast this way would be put into your
-       * graveyard": an artifact spell cast this way isn't exiled (its
-       * ruling). */
-      readonly exileAfter?: boolean | "instants-and-sorceries";
       /** "Cast it **transformed**" (rule 712.11a — a Siege's 310.12b): a
        * transforming double-faced card, cast with its back face up, which
        * enters the battlefield that way (712.13); a card without a back face
@@ -4962,7 +4836,7 @@ export type EffectSpec =
       readonly rest?: "bottom-random" | "bottom-any-order" | "hand";
       /** Set only on the copy parked across the decision. */
       readonly progress?: CastNowProgress;
-    }
+    } & CastNowTerms)
   | {
       /** "**Choose an exiled card** an opponent owns with a void counter on
        * it. **You may play it this turn** without paying its mana cost"
@@ -4990,68 +4864,22 @@ export type EffectSpec =
       readonly filter?: CardFilter;
       readonly prompt: string;
     }
-  | {
-      /** "Until end of turn, you may cast that card" — a card in exile
-       * (Codie, Vociferous Codex's, found by a `reveal-until`): cast only,
-       * this turn, by the effect's controller; with `free`, only "without
-       * paying its mana cost". The permission rides on the card as an impulse
-       * one (`GameObject.impulse`). */
-      readonly kind: "allow-cast-from-exile";
-      readonly target: ObjectRef;
-      readonly free?: boolean;
-      /** Warp's "its owner may cast this card **after the current turn has
-       * ended** for as long as it remains exiled" (rule 702.185a): the card's
-       * owner, not the effect's controller; from the next turn on; with no
-       * end but its leaving exile. */
-      readonly laterTurns?: boolean;
-      /** "**For as long as that card remains exiled**, you may cast it"
-       * (Durnan of the Yawning Portal): the effect's controller, with no end
-       * but its leaving exile, rather than this turn. */
-      readonly whileExiled?: true;
-      /** "That spell has **undaunted**" (rule 702.125 — Durnan): cast this
-       * way, it costs {1} less for each of its caster's opponents. */
-      readonly undaunted?: true;
-      /** "…and mana of any type can be spent to cast that spell" (Black Widow,
-       * Super Spy): for that cast alone (rule 118.14). */
-      readonly spendAs?: SpendAs;
-      /** "You may **play** it" rather than cast: a land too. */
-      readonly plays?: true;
-      /** The permission's player, fixed, where it isn't the effect's controller:
-       * set by the engine (Opposition Agent's finds). Not for card definitions. */
-      readonly to?: PlayerId;
-    }
-  | {
+  | ({
       /**
-       * "Until end of turn, you may cast **a** creature spell **from among
-       * cards exiled with this artifact** without paying its mana cost" (Idol
-       * of Endurance, rule 607.2a): one spell for each time this resolves,
-       * by the effect's controller, keeping its timing and any additional
-       * costs. Read over the linked cards as they are when it's cast, so one
-       * exiled later this turn counts. `spell` is the spell it may be, judged
-       * as the face being cast (an adventure's instant half isn't a creature
-       * spell). `free` permits only the free cast.
-       *
-       * The rest are the same permission's other printings, rule 611.2c's
-       * "modifies the rules of the game" all of them, so all read live:
-       * `play`: "you may **play** a card" (Raphael, Most Attitude), a land as
-       * well, at a land's timing and with a land drop (the rulings), and it
-       * spends the permission as a spell would. `anyNumber`: "you may play
-       * **cards**" (Kayla's Music Box), which nothing spends — `spell`'s
-       * `{ ownedBy: "you" }` is its "cards you own". `reduce`: "spells you cast
-       * this way cost {2} less" (generic only — Urianger Augurelt's ruling).
-       * A face-down card (rule 406.3a) is reached only by a player who may
-       * look at it. `spendAs`: "and you may spend mana as though it were
-       * mana of any color to cast those spells" (King Narfi's Betrayal, rule
-       * 609.4b), for the casts this permission allows.
+       * A permission over named cards where they are, in exile or a graveyard
+       * ({@link PlayGrant}, kept on each card, ending with any move: 400.7).
+       * `cards`: an object or a set, each member that's still the same object,
+       * or `{ filter }`, the controller's graveyard cards matching as this
+       * resolves (611.2c: not one put there later). "You may cast that card this
+       * turn" (Silas Renn) is `{ cards: 0, duration: "end-of-turn" }`; Hex
+       * Magic's "you may play cards exiled this way" `{ cards: { thisWay:
+       * "exiled" }, duration: "until-end-of-your-next-turn", play: true }`.
+       * `to`: the engine's own, a fixed player (Opposition Agent's finds).
        */
-      readonly kind: "allow-cast-linked-exile";
-      readonly spell?: CardFilter;
-      readonly free?: true;
-      readonly play?: true;
-      readonly anyNumber?: true;
-      readonly reduce?: number;
-      readonly spendAs?: SpendAs;
-    }
+      readonly kind: "grant-play";
+      readonly cards: ObjectRef | { readonly filter: CardFilter };
+      readonly to?: PlayerId;
+    } & PlayGrant)
   | {
       /**
        * Earthbend N, a keyword action: "Target land you control becomes a 0/0
@@ -5377,7 +5205,7 @@ export type EffectSpec =
         | { readonly zone: "library-top" };
       /**
        * With `destination: "exile"`, what the effect's controller may do with
-       * the card chosen, as `exile`'s `mayCast`: Psychic Intrusion's "you may
+       * the card chosen, as `exile`'s `mayPlay`: Psychic Intrusion's "you may
        * cast that card for as long as it remains exiled, and you may spend
        * mana as though it were mana of any color to cast that spell"
        * (`{ duration: "while-exiled", spendAs: "any-color" }`). Not with
@@ -5385,7 +5213,7 @@ export type EffectSpec =
        * this way costs {2} more" is `{ duration: "while-exiled", play: true,
        * byOwner: true, tax: { generic: 2 } }`.
        */
-      readonly mayCast?: ExilePermission;
+      readonly mayPlay?: PlayGrant;
     }
   | {
       /**
@@ -6330,41 +6158,11 @@ export type EffectSpec =
        * as this resolves, fixed from then on (Progenitor's Icon — nothing
        * chosen, no effect). */
       readonly castAsThoughFlash?: { readonly filter?: CardFilter; readonly next?: true };
-      /** "You may cast Zombie spells from your graveyard this turn"
-       * (Liliana, Untouched by Death's −3): a permission over the
-       * controller's graveyard cards matching `filter`, the ones that reach
-       * it later this turn included (its ruling), each cast following its
-       * own timing and costs — the same graveyard-permission cast a
-       * `castFromGraveyard` static offers, never used up.
-       *
-       * The rest widen it (rule 601.3: an effect that allows a player to
-       * cast a spell from a zone other than their hand):
-       * - `whose`: whose graveyards it reaches, fixed as this resolves —
-       *   `"each-player"` is The Great Work's "from any graveyard",
-       *   `"trigger-player"` Whispersteel Dagger's "from that player's
-       *   graveyard". The caster controls a spell cast from another
-       *   player's graveyard; its owner still owns it (rule 108.3).
-       * - `once`: "you may cast **a** creature spell from that player's
-       *   graveyard this turn" (Whispersteel Dagger) — one cast, then it's
-       *   used up.
-       * - `spendAs`: "…and you may spend mana as though it were mana of any
-       *   color to cast that spell" (rule 609.4b), only for a spell cast
-       *   under this permission.
-       * - `exileAfterwards`: "if a spell cast this way would be put into a
-       *   graveyard, exile it instead" (The Great Work's chapter III). */
-      readonly castFromGraveyard?: {
-        readonly filter: CardFilter;
-        readonly whose?: PlayerScope;
-        readonly once?: true;
-        readonly spendAs?: SpendAs;
-        readonly exileAfterwards?: true;
-      };
-      /** "You may play lands and cast spells **from that player's hand** this
-       * turn" (Sen Triplets — rule 601.3): the player in this target slot,
-       * for the effect's controller, by the ordinary rules for timing, costs
-       * and the land drop (rule 305). The caster controls what they cast, its
-       * owner still owns it (rule 108.3). A `via: "other-hand"` cast. */
-      readonly playFromHandOf?: number;
+      /** A rule for this effect's duration (rule 611.2c): the controller may
+       * play cards from `from` on these terms, those that get there later
+       * included (Liliana, Untouched by Death's "you may cast Zombie spells
+       * from your graveyard this turn"). See {@link EffectPlaySpec}. */
+      readonly mayPlay?: EffectPlaySpec;
       /** "…and plays with their hand revealed" (Sen Triplets): the player in
        * this target slot, to every player, while this lasts. */
       readonly handRevealed?: number;
@@ -6433,21 +6231,6 @@ export type EffectSpec =
         readonly from?: "battlefield";
         readonly returnAtEndStep?: true;
       };
-      /** "You may play lands from your graveyard" for a while (Gaea's Will,
-       * beside `castFromGraveyard`'s spells; rule 305.9): the land drop is the
-       * ordinary one. */
-      readonly playLandsFromGraveyard?: true;
-      /** The library-top permissions a static gives (`StaticAbility`'s
-       * `playFromLibraryTop`, `castFromLibraryTop` and the visibility's
-       * `looksAtOwnLibraryTop`), for a while: "until end of turn, you may look
-       * at the top card of your library any time, and you may play lands and
-       * cast spells from the top of your library" (The Belligerent), "… If
-       * you cast a spell this way, pay life equal to its mana value rather
-       * than pay its mana cost" (Gwenom, Remorseless — `payLifeManaValue`).
-       * The controller's, kept to the ordinary timing and land drop (rules
-       * 305, 601.3); they last whatever becomes of the source. */
-      readonly playFromLibraryTop?: CardFilter;
-      readonly castFromLibraryTop?: { readonly filter: CardFilter; readonly payLifeManaValue?: true };
       readonly looksAtOwnLibraryTop?: true;
       /** "Lands you control enter tapped this turn" (Nahiri's Lithoforming —
        * rule 614.1d): a replacement for the duration over each permanent
@@ -6991,47 +6774,6 @@ export type EffectSpec =
       readonly target?: number;
       readonly filter?: CardFilter;
       readonly grant: GraveyardKeywordGrant;
-    }
-  | {
-      /** "Choose target artifact card in your graveyard. You may cast that
-       * card this turn" (Silas Renn, Emry) — `target` (a card in a graveyard,
-       * via a `card-in-graveyard` spec) gets a one-shot permission for the
-       * ability's controller to cast it, for its ordinary cost, until end of
-       * turn. The permission lives on the card (`GameObject
-       * .graveyardCastPermission`) and ends if the card leaves the graveyard.
-       * Casts only: a land can't be cast. */
-      readonly kind: "grant-graveyard-cast";
-      /** The card. Or, in its place, `filter`: "creature cards in your graveyard
-       * gain 'you may cast this card from your graveyard' until end of turn"
-       * (Case of the Uneaten Feast): each card in the controller's graveyard
-       * that matches as this resolves (rule 611.2c), so not one put there
-       * later. */
-      readonly target?: number;
-      readonly filter?: CardFilter;
-      /** Or the cards this resolution milled: "mill a card. You may play that
-       * card this turn" (Tablet of Discovery). A milled card a replacement put
-       * somewhere else public is still that card (rule 701.17c): one exiled
-       * instead (Rest in Peace) gets the same permission from exile, an
-       * impulse permission lasting the turn. Rule 701.17d: each card, if a
-       * replacement milled more than one. */
-      readonly cards?: "milled-this-way";
-      /** "Each player mills a card. … Until end of turn, you may cast **a
-       * spell from among** those cards" (Locke, Treasure Hunter), with
-       * `cards` or `filter`: this many plays in all, shared among the cards it
-       * gives the permission (`GameState.permissionGroups`) — wherever each
-       * is, a graveyard or the exile a replacement put it in — and none of
-       * them may be played once they're used. */
-      readonly upTo?: number;
-      /** "You may **play** that card": a land card too, played with the land
-       * drop (rule 305.2); unset, casts only. */
-      readonly play?: true;
-      /** "…**without paying its mana cost**" (Sins of the Past): an alternative
-       * cost, so no other goes with it (rule 118.9a) and X is 0 (107.3b); the
-       * ruling's additional costs are still paid. */
-      readonly free?: true;
-      /** "If that spell would be put into your graveyard, **exile it instead**"
-       * (Sins of the Past, Vohar). */
-      readonly exileAfter?: true;
     }
   | {
       /**
@@ -10036,103 +9778,42 @@ export type EffectSpec =
       readonly attacks?: "you" | "source" | number;
       readonly duration?: AttackRequirementDuration;
     }
-  | {
+  | ({
       /**
-       * "Impulse draw" — exile the top `amount` cards of your library face-up
-       * and let yourself play them (Dream Pillager, Tectonic Giant, Theater
-       * of Horrors).
-       *
-       * `duration: "end-of-turn"` is the common shape; `"while-source"` keeps
-       * the permission for as long as the permanent that exiled them is on
-       * the battlefield. `castOnly` is "you may **cast spells** from among
-       * them" (no lands) rather than "you may **play** them".
+       * "Impulse draw" — exile the top `amount` cards of `whose` library
+       * face-up and give a {@link PlayGrant} over them (Dream Pillager,
+       * Tectonic Giant, Theater of Horrors). `byOwner`: "each player may play
+       * the card they exiled" is each card's owner; otherwise the controller's,
+       * whoever owns the cards: a spell cast from them is its caster's, and so is
+       * the permanent it becomes (rules 601.2a, 608.3a).
        */
       readonly kind: "impulse-exile";
       readonly amount: EffectAmount;
-      /** See {@link PermissionDuration}. */
-      readonly duration: PermissionDuration;
-      /** Only during a turn the permission's player did this with this
-       * source, in this stint of it, whatever has become of it since: "During
-       * any turn you attacked with this creature, you may play that card"
-       * (`"attacked"` — Goblin Researcher, with `duration: "while-exiled"`);
-       * "during any turn you put a lore counter on this Saga"
-       * (`"lore-counter"` — Summon: Brynhildr). `"attacked-with-a-token"` asks
-       * about any token and no source: "during any turn you attacked with a
-       * token" (Neyali, Suns' Vanguard). */
-      readonly sourceDid?: "attacked" | "lore-counter" | "attacked-with-a-token";
       /** Whose libraries: the controller's (the default), or each player's in
        * a scope, the top `amount` of each exiled at once — "each player
        * exiles the top card of their library" (Rocco) — or a target slot
        * holding a player (Maralen, Fae Ascendant's "target opponent's
-       * library"). The permission is the controller's unless `playedBy`
-       * says otherwise, whoever owns the cards: a spell cast from them is
-       * its caster's, and so is the permanent it becomes (rule 601.2a,
-       * 608.3a). */
+       * library"). */
       readonly whose?: number | PlayerScope;
       /** Only those of `whose`'s players this holds for, each asked about
        * as `"that-player"` as the effect applies — Ixhel, Scion of Atraxa's
        * "each opponent **who has three or more poison counters** exiles the
-       * top card of their library face down" (`{ kind: "player-counters",
-       * counter: "poison", who: "that-player", atLeast: 3 }`). The rest
-       * exile nothing; those it holds for still exile at once. */
+       * top card of their library face down". The rest exile nothing. */
       readonly whoseIf?: StaticCondition;
-      /** "Each player may play the card they exiled this way": the
-       * permission goes to each card's owner, not to the controller. */
-      readonly playedBy?: "owner";
-      readonly castOnly?: boolean;
-      /** Which of the exiled cards may be played — Narset, Enlightened
-       * Master's "noncreature, nonland cards exiled with Narset". */
-      readonly filter?: CardFilter;
-      /** "…without paying their mana costs": for every card the permission
-       * covers, or those matching `filter` (Nahiri, Forged in Fury's
-       * Equipment spells); `only` when paying isn't allowed at all (Narset's
-       * "you may cast … without paying their mana costs"). */
-      readonly free?: { readonly filter?: CardFilter; readonly only?: boolean };
-      /** "If you cast a spell this way, pay life equal to its mana value
-       * rather than pay its mana cost" (Inside Information): the only way a
-       * spell may be cast under this permission, X 0 (rules 118.9b, 107.3b);
-       * additional costs are paid on top (the rulings). */
-      readonly payLifeManaValue?: true;
       /** Grant the permission to only this many of the exiled cards, chosen
        * by the controller — Tectonic Giant's "exile the top two cards of your
-       * library. **Choose one of them.**" The rest stay exiled with no
-       * permission. Omit to grant it to all of them. */
+       * library. **Choose one of them.**" The rest stay exiled with none. */
       readonly choose?: number;
-      /** Gates on *using* the permission (Theater of Horrors), as opposed to
-       * `duration`, which is when it lapses for good. */
-      readonly yourTurnOnly?: boolean;
-      readonly gate?: StaticCondition;
-      /** "From among cards exiled with [this permanent]" as a static ability
-       * of it: usable only while this source stays on the battlefield as the
-       * same object, on top of `duration` (Maralen, Fae Ascendant). With it,
-       * a `filter`'s `{ amount }` operand is counted live from the source's
-       * side — "mana value less than or equal to the number of Elves and
-       * Faeries you control". */
-      readonly whileSource?: boolean;
-      /** "Once each turn, you may cast a spell … from among" them: one cast
-       * a turn across every card this source exiled with the permission. */
-      readonly oncePerTurn?: boolean;
-      /** "Until your next end step, you may play **one of** those cards"
-       * (Unlucky Witness): this many plays in all, shared among the cards
-       * this exiled (`GameState.permissionGroups`) — one played, and with
-       * none left, none of the others may be. */
-      readonly upTo?: number;
       /** "Look at the top card of that player's library, then exile it
        * **face down**" (Edward Kenway): the cards are exiled face down
        * (rule 406.3), and only the controller may look at them. */
       readonly faceDown?: boolean;
-      /** "…and mana of any type can be spent to cast that spell" (Gonti,
-       * Canny Acquisitor: `"any-type"`) / "…you may spend mana as though it
-       * were mana of any color to cast that spell" (Grenzo, Havoc Raiser:
-       * `"any-color"`) — only for a spell cast under this permission (rule
-       * 118.14). */
-      readonly spendAs?: SpendAs;
-      /** The cards are also exiled **with this source** (rule 607.2a), for an
-       * `allow-cast-linked-exile` of its: Court of Locthwain's "You may play
-       * that card … you may cast a spell from among cards exiled with this
+      /** The cards are also exiled **with this source** (rule 607.2a), for a
+       * `linked` permission of its: Court of Locthwain's "You may play that
+       * card … you may cast a spell from among cards exiled with this
        * enchantment". */
       readonly linked?: true;
-    }
+    } & PlayGrant)
   | {
       /** Scry `amount` (rule 701.18) — look at the top N, put any number on
        * the bottom, keep the rest on top. `then` (Preordain: draw a card) is
@@ -10404,19 +10085,12 @@ export type EffectSpec =
        */
       readonly all?: true;
       /** "You may play that card for as long as it remains exiled" (Praetor's
-       * Grasp): with an exile destination, the searcher may play the finds
-       * (rule 305.1 for a land) while they stay in exile.
-       *
-       * Or any {@link ExilePermission}, as `exile`'s `mayCast` grants one, on
-       * every find this search exiled: Ugin, Eye of the Storms' "search your
-       * library for any number of colorless nonland cards, exile them, then
-       * shuffle. **Until end of turn, you may cast those cards without paying
-       * their mana costs**" (`{ duration: "end-of-turn", free: true }`) —
-       * cast later this turn, each when its own timing allows (the ruling),
-       * not only during the resolution; Chandra, Heart of Fire's "you may cast
-       * them this turn". `play` lets a land among them be played too; without
-       * it the finds are only cast. */
-      readonly playable?: "while-exiled" | ExilePermission;
+       * Grasp): with an exile destination, a {@link PlayGrant} over every find
+       * this search exiled. Ugin, Eye of the Storms' "until end of turn, you may
+       * cast those cards without paying their mana costs" is `{ duration:
+       * "end-of-turn", free: true }`: cast later this turn, each when its own
+       * timing allows (the ruling), not only during the resolution. */
+      readonly mayPlay?: PlayGrant;
       /** With an exile destination, the finds are exiled **with this
        * source** (rule 607.2a — `GameObject.exiledWith`), as `exile`'s
        * `linked`: Skyship Weatherlight's "search your library for any number
@@ -10718,13 +10392,13 @@ export type EffectSpec =
        * the exiled card this turn"), `"while-exiled"` for as long as they
        * remain exiled (Black Cat, Cunning Thief). `spendAs` is "mana of any
        * type can be spent to cast spells this way" (rule 118.14). The
-       * permission rides on the card (`GameObject.impulse`) and ends with any
+       * permission rides on the card (`GameObject.playPermission`) and ends with any
        * move. Lightstall Inquisitor's "each opponent exiles a card from their
        * hand and may play that card for as long as it remains exiled. Each
        * spell cast this way costs {1} more to cast. Each land played this way
        * enters tapped" is a `for-each-player`'s look-and-choose with `byOwner`,
-       * `tax` and `landsEnterTapped` ({@link ExilePermission}). */
-      readonly playable?: ExilePermission;
+       * `tax` and `landsEnterTapped` ({@link PlayGrant}). */
+      readonly mayPlay?: PlayGrant;
       /**
        * A leftover destination that depends on how things stand once the
        * chosen cards are where they're going — Nine-Fingers Keene's "you may
@@ -11681,7 +11355,7 @@ export interface EffectApi {
     target: TargetRef,
     untilSourceLeaves?: boolean,
     withCounters?: { readonly kind: string; readonly amount: number },
-    mayCast?: ExilePermission,
+    mayPlay?: PlayGrant,
     linked?: boolean,
     /** Airbend it (rule 701.65a) — see the `exile` effect's `airbend`. */
     airbend?: boolean,
@@ -11756,19 +11430,11 @@ export interface EffectApi {
   ): void;
   /** See the `"enters-with-counters"` {@link EffectSpec}. */
   entersWithCounters(target: TargetRef, counter: string, amount: number, condition?: StaticCondition): void;
-  /** See the `"allow-cast-from-exile"` {@link EffectSpec}. */
-  allowCastFromExile(
-    target: TargetRef,
-    free: boolean,
-    laterTurns?: boolean,
-    opts?: {
-      readonly whileExiled?: boolean;
-      readonly undaunted?: boolean;
-      readonly spendAs?: SpendAs;
-      readonly plays?: true;
-      readonly to?: PlayerId;
-    },
-  ): void;
+  /** How many counters a `remove-counters` could take, in all, as a cost. */
+  removableCounters(spec: Extract<EffectSpec, { kind: "remove-counters" }>): number;
+  /** See the `"grant-play"` {@link EffectSpec}: each of `cards` still in
+   * exile or a graveyard gets this permission. */
+  grantPlay(cards: readonly ObjectId[], grant: PlayGrant, to?: PlayerId): void;
   /** See the `"choose-exiled-to-play"` {@link EffectSpec}. */
   chooseExiledToPlay(filter: CardFilter | undefined, free: boolean, among?: readonly ObjectId[]): void;
   /** See the `"choose-exiled-card"` {@link EffectSpec}. */
@@ -11802,12 +11468,6 @@ export interface EffectApi {
   /** Whether `player` can't search `owner`'s library in what's resolving now
    * (`playerCantSearchLibrary`). */
   cantSearchLibrary(player: PlayerId, owner: PlayerId): boolean;
-  /** See the `"allow-cast-linked-exile"` {@link EffectSpec}. */
-  allowCastLinkedExile(
-    spell: CardFilter | undefined,
-    free: boolean,
-    more?: { readonly play?: true; readonly anyNumber?: true; readonly reduce?: number; readonly spendAs?: SpendAs },
-  ): void;
   /** The cards this resolution has exiled so far from a library, a hand or
    * a graveyard, still in exile — a `cast-now`'s `"exiled-this-way"`. */
   cardsExiledThisWay(fromBattlefieldToo?: boolean): readonly ObjectId[];
@@ -12043,21 +11703,9 @@ export interface EffectApi {
   /** See the `"grant-graveyard-keyword"` {@link EffectSpec}: `target` when
    * given, else each card in your graveyard matching `filter`. */
   grantGraveyardKeyword(target: TargetRef | undefined, filter: CardFilter | undefined, grant: GraveyardKeywordGrant): void;
-  /** Let this effect's controller cast `target` (a card in a graveyard)
-   * from there this turn — see the `grant-graveyard-cast` effect. */
-  /** `orExiled`: a card found in exile instead (a milled card, rule 701.17c)
-   * gets the same permission there, for the turn. */
-  grantGraveyardCast(
-    target: TargetRef,
-    terms?: {
-      readonly free?: true;
-      readonly exileAfter?: true;
-      readonly play?: true;
-      readonly orExiled?: true;
-      /** The shared plays it counts against — from `newPermissionGroup`. */
-      readonly group?: number;
-    },
-  ): void;
+  /** The stint of the source this resolution refers to, for a `linked`
+   * permission (rule 607.2a); `undefined` if it has none. */
+  stintOfSource(): number | undefined;
   /** A new `GameState.permissionGroups` entry of `left` plays, for the
    * permissions this effect is about to give: its id. */
   newPermissionGroup(left: number): number;
@@ -12215,7 +11863,7 @@ export interface EffectApi {
       readonly alsoFrom?:
         | { readonly zone: "graveyard"; readonly filter?: CardFilter }
         | { readonly zone: "library-top" };
-      readonly mayCast?: ExilePermission;
+      readonly mayPlay?: PlayGrant;
       /** See the effect's `reveals` and `picks`, read as it resolves. */
       readonly reveals?: { readonly count: number; readonly picks: number };
       /** The effect's `picks`, read as it resolves, over the whole hand. */
@@ -12426,26 +12074,13 @@ export interface EffectApi {
   /** See the `"impulse-exile"` {@link EffectSpec}. */
   impulseExile(
     amount: number,
-    duration: PermissionDuration,
-    castOnly: boolean,
+    grant: PlayGrant,
     opts?: {
       /** Whose libraries (the controller's alone when absent). */
       readonly players?: readonly PlayerId[];
-      /** Each card's owner may play it, rather than the controller. */
-      readonly ownerPlays?: boolean;
       readonly choose?: number;
-      readonly yourTurnOnly?: boolean;
-      readonly gate?: StaticCondition;
-      readonly filter?: CardFilter;
-      readonly free?: { readonly filter?: CardFilter; readonly only?: boolean };
-      readonly payLifeManaValue?: true;
-      readonly whileSource?: boolean;
-      readonly oncePerTurn?: boolean;
-      /** See the effect's `upTo`. */
-      readonly upTo?: number;
       /** Exiled face down, for the controller's eyes only (rule 406.3). */
       readonly faceDown?: boolean;
-      readonly spendAs?: SpendAs;
       /** See the effect's `linked`. */
       readonly linked?: boolean;
     },
@@ -13258,7 +12893,7 @@ export interface EffectApi {
     /** A `search-library`'s `attachedToSource` (the source, or `null` once
      * it has left — nothing can be attached to it) or `attachedTo`. */
     attachTo?: EnterAttachHost,
-    /** Its `whose` resolved (`owner`), `all`, `playable` and `then`. */
+    /** Its `whose` resolved (`owner`), `all`, `mayPlay` and `then`. */
     more?: SearchMore,
   ): void;
   /** See the `"reveal-top"` {@link EffectSpec}. `player` is whose library
@@ -13340,8 +12975,8 @@ export interface EffectApi {
     /** What battlefield-bound picks enter attached to — see
      * `look-and-choose`'s `attachedTo`. */
     attachTo?: EnterAttachHost,
-    /** See `look-and-choose`'s `playable`. */
-    playable?: Extract<EffectSpec, { kind: "look-and-choose" }>["playable"],
+    /** See `look-and-choose`'s `mayPlay`. */
+    mayPlay?: PlayGrant,
     /** See `look-and-choose`'s `together`. */
     together?: ResolvedSearchTogether,
     /** See `look-and-choose`'s `split`. */
@@ -14621,6 +14256,20 @@ function offerCastNow(
   return true;
 }
 
+/** A `player-effect`'s `mayPlay` as it resolves: whose zones, fixed now, and
+ * the stint a `linked` one is about (rule 607.2a), read off the resolution. */
+function resolveEffectPlay(spec: EffectPlaySpec, ctx: ResolutionContext): EffectPlay {
+  const { whose, upTo, ...kept } = spec;
+  const stint = spec.linked === true ? ctx.stintOfSource() : undefined;
+  return {
+    ...kept,
+    source: ctx.source,
+    ...(whose !== undefined ? { owners: ctx.playersInScope(whose) } : {}),
+    ...(upTo !== undefined ? { left: upTo } : {}),
+    ...(stint !== undefined ? { stint } : {}),
+  };
+}
+
 function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: ResolutionContext): void {
   let progress = spec.progress;
   if (progress === undefined && spec.copyOfCardNamed !== undefined) {
@@ -15801,9 +15450,9 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
       };
       return { ...record, targets };
     }
-    // A `whileSource` impulse permission's filter is its source's static
-    // ability, read as the card is cast (Maralen's "the number of Elves and
-    // Faeries you control"), so it stays unbound — `impulsePlayable` counts it.
+    // A `whileSource` permission's filter is its source's static ability,
+    // read as the card is cast (Maralen's "the number of Elves and Faeries
+    // you control"), so it stays unbound — `Game.playOptions` counts it.
     const liveFilter = record["kind"] === "impulse-exile" && record["whileSource"] === true;
     const walked = Object.fromEntries(
       Object.entries(record).map(([key, v]) => [
@@ -17276,7 +16925,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         // illegal already: it doesn't move (Calix's ruling).
         const leaves = typeof spec.until === "object" ? ctx.targets[spec.until.targetLeaves] : undefined;
         if (typeof spec.until === "object" && leaves?.kind !== "object") return;
-        ctx.exileObject(target, spec.untilSourceLeaves === true, spec.withCounters, spec.mayCast, spec.linked === true,
+        ctx.exileObject(target, spec.untilSourceLeaves === true, spec.withCounters, spec.mayPlay, spec.linked === true,
           spec.airbend === true, leaves?.kind === "object" ? { leaves: leaves.object } : spec.until === "opponent-becomes-monarch" ? spec.until : undefined);
         const haunted = spec.haunting === undefined ? undefined : ctx.targets[spec.haunting];
         if (haunted?.kind === "object" && target.kind === "object") ctx.markHaunting(target.object, haunted.object);
@@ -17611,34 +17260,21 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       }
       return;
     }
-    case "grant-graveyard-cast": {
-      const terms = {
-        ...(spec.free === true ? { free: true as const } : {}),
-        ...(spec.exileAfter === true ? { exileAfter: true as const } : {}),
-        ...(spec.play === true ? { play: true as const } : {}),
-      };
-      if (spec.cards === "milled-this-way") {
-        const milled = ctx.thisWay("milled");
-        // "A spell from among those cards": one play shared among them all.
-        const group = spec.upTo !== undefined && milled.length > 0 ? ctx.newPermissionGroup(spec.upTo) : undefined;
-        for (const entry of milled) {
-          ctx.grantGraveyardCast(
-            { kind: "object", object: entry.object },
-            { ...terms, orExiled: true, ...(group !== undefined ? { group } : {}) },
-          );
-        }
-        return;
-      }
-      if (spec.filter !== undefined) {
-        const cards = ctx.graveyardMatching(ctx.controller, spec.filter);
-        const group = spec.upTo !== undefined && cards.length > 0 ? ctx.newPermissionGroup(spec.upTo) : undefined;
-        for (const card of cards) {
-          ctx.grantGraveyardCast({ kind: "object", object: card }, { ...terms, ...(group !== undefined ? { group } : {}) });
-        }
-        return;
-      }
-      const target = spec.target === undefined ? undefined : ctx.targets[spec.target];
-      if (target !== undefined) ctx.grantGraveyardCast(target, terms);
+    case "grant-play": {
+      const { cards } = spec;
+      const named =
+        typeof cards === "object" && "filter" in cards
+          ? ctx.graveyardMatching(ctx.controller, cards.filter)
+          : isObjectSetRef(cards)
+            ? ctx
+                .objectSet(cards)
+                .filter((member) => ctx.stintNow(member.object) === member.stint)
+                .map((member) => member.object)
+            : (() => {
+                const one = objectRefAct(cards, ctx);
+                return one?.kind === "object" ? [one.object] : [];
+              })();
+      ctx.grantPlay(named, spec, spec.to);
       return;
     }
     case "mill": {
@@ -17885,27 +17521,6 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "choose-exiled-card":
       ctx.chooseExiledCard(spec.filter, spec.prompt, ctx.cardsExiledWithSource(true));
       return;
-    case "allow-cast-linked-exile":
-      ctx.allowCastLinkedExile(spec.spell, spec.free === true, {
-        ...(spec.play === true ? { play: true } : {}),
-        ...(spec.anyNumber === true ? { anyNumber: true } : {}),
-        ...(spec.reduce !== undefined ? { reduce: spec.reduce } : {}),
-        ...(spec.spendAs !== undefined ? { spendAs: spec.spendAs } : {}),
-      });
-      return;
-    case "allow-cast-from-exile": {
-      const target = objectRefAct(spec.target, ctx);
-      if (target !== undefined) {
-        ctx.allowCastFromExile(target, spec.free === true, spec.laterTurns === true, {
-          whileExiled: spec.whileExiled === true,
-          undaunted: spec.undaunted === true,
-          ...(spec.spendAs !== undefined ? { spendAs: spec.spendAs } : {}),
-          ...(spec.plays === true ? { plays: true as const } : {}),
-          ...(spec.to !== undefined ? { to: spec.to } : {}),
-        });
-      }
-      return;
-    }
     case "unlock-door": {
       const target = spec.target === undefined ? undefined : objectRefAct(spec.target, ctx);
       if (spec.target !== undefined && target?.kind !== "object") return;
@@ -18130,7 +17745,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ...(spec.unlinked === true ? { unlinked: true } : {}),
           ...(spec.untilSourceLeaves === true ? { untilSourceLeaves: true } : {}),
           ...(spec.alsoFrom !== undefined ? { alsoFrom: spec.alsoFrom } : {}),
-          ...(spec.mayCast !== undefined ? { mayCast: spec.mayCast } : {}),
+          ...(spec.mayPlay !== undefined ? { mayPlay: spec.mayPlay } : {}),
           ...(spec.reveals !== undefined
             ? {
                 reveals: {
@@ -18767,24 +18382,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             }
           : {}),
         ...(spec.castAsThoughFlash !== undefined ? { castAsThoughFlash: spec.castAsThoughFlash } : {}),
-        ...(spec.castFromGraveyard !== undefined
-          ? (() => {
-              const grant = spec.castFromGraveyard;
-              return {
-                castFromGraveyard: {
-                  filter: grant.filter,
-                  source: ctx.source,
-                  ...(grant.whose !== undefined ? { graveyards: ctx.playersInScope(grant.whose) } : {}),
-                  ...(grant.once === true ? { once: true as const } : {}),
-                  ...(grant.spendAs !== undefined ? { spendAs: grant.spendAs } : {}),
-                  ...(grant.exileAfterwards === true ? { exileAfterwards: true as const } : {}),
-                },
-              };
-            })()
-          : {}),
-        ...(spec.playFromHandOf !== undefined && ctx.targets[spec.playFromHandOf]?.kind === "player"
-          ? { playFromHandsOf: [(ctx.targets[spec.playFromHandOf] as { readonly player: PlayerId }).player] }
-          : {}),
+        ...(spec.mayPlay !== undefined ? { mayPlay: resolveEffectPlay(spec.mayPlay, ctx) } : {}),
         ...(spec.handRevealed !== undefined && ctx.targets[spec.handRevealed]?.kind === "player"
           ? { handsRevealed: [(ctx.targets[spec.handRevealed] as { readonly player: PlayerId }).player] }
           : {}),
@@ -18842,11 +18440,6 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ...(spec.tokenMultiplier !== undefined ? { tokenMultiplier: spec.tokenMultiplier } : {}),
         ...(spec.tokensComeToOwner === true ? { tokensComeToOwner: true as const } : {}),
         ...(spec.graveyardExile !== undefined ? { graveyardExile: { ...spec.graveyardExile, source: ctx.source } } : {}),
-        ...(spec.playLandsFromGraveyard === true ? { playLandsFromGraveyard: true as const } : {}),
-        ...(spec.playFromLibraryTop !== undefined ? { playFromLibraryTop: spec.playFromLibraryTop } : {}),
-        ...(spec.castFromLibraryTop !== undefined
-          ? { castFromLibraryTop: { ...spec.castFromLibraryTop, source: ctx.source } }
-          : {}),
         ...(spec.looksAtOwnLibraryTop === true ? { looksAtOwnLibraryTop: true as const } : {}),
         ...(spec.entersTapped !== undefined ? { entersTapped: spec.entersTapped } : {}),
         ...(spec.nextDrawInstead !== undefined
@@ -20663,26 +20256,15 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           : whoseIf !== undefined
             ? [ctx.controller]
             : undefined;
-      ctx.impulseExile(amountValue(spec.amount, ctx), spec.duration, spec.castOnly === true, {
+      ctx.impulseExile(amountValue(spec.amount, ctx), spec, {
         ...(players !== undefined
           ? {
               players:
                 whoseIf === undefined ? players : players.filter((p) => ctx.aboutPlayer(p).conditionMet(whoseIf)),
             }
           : {}),
-        ...(spec.whileSource === true ? { whileSource: true } : {}),
-        ...(spec.oncePerTurn === true ? { oncePerTurn: true } : {}),
-        ...(spec.upTo !== undefined ? { upTo: spec.upTo } : {}),
+        ...(spec.choose !== undefined ? { choose: spec.choose } : {}),
         ...(spec.faceDown === true ? { faceDown: true } : {}),
-        ...(spec.playedBy === "owner" ? { ownerPlays: true } : {}),
-        choose: spec.choose,
-        yourTurnOnly: spec.yourTurnOnly,
-        gate: spec.gate,
-        ...(spec.filter !== undefined ? { filter: spec.filter } : {}),
-        ...(spec.free !== undefined ? { free: spec.free } : {}),
-        ...(spec.payLifeManaValue === true ? { payLifeManaValue: true as const } : {}),
-        ...(spec.spendAs !== undefined ? { spendAs: spec.spendAs } : {}),
-        ...(spec.sourceDid !== undefined ? { sourceDid: spec.sourceDid } : {}),
         ...(spec.linked === true ? { linked: true } : {}),
       });
       return;
@@ -20874,7 +20456,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         {
           ...(owner !== undefined ? { owner } : {}),
           ...(spec.all === true ? { all: true } : {}),
-          ...(spec.playable !== undefined ? { playable: spec.playable } : {}),
+          ...(spec.mayPlay !== undefined ? { mayPlay: spec.mayPlay } : {}),
           ...(spec.linked === true ? { linked: true } : {}),
           ...(spec.then !== undefined ? { then: spec.then } : {}),
           ...(spec.outside !== undefined ? { outside: spec.outside } : {}),
@@ -20984,7 +20566,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.unlinked === true,
         spec.needsMin === true,
         attachHost(spec.attachedTo, ctx),
-        spec.playable,
+        spec.mayPlay,
         resolvedTogether(spec.together, ctx),
         spec.split,
         {

@@ -23,5 +23,5 @@ export default defineCard({
       text: LORD_TEXT,
     },
   ],
-  castSelfFromGraveyard: { costIncreasePerOther: { type: "creature" } },
+  mayPlaySelf: { from: ["graveyard"], costIncreasePerOther: { type: "creature" } },
 });

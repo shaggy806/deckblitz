@@ -36,6 +36,7 @@ export default defineCard({
         amount: { distinctTokenNames: { token: true, controlledBy: "you" } },
         duration: "while-exiled",
         gate: { kind: "attacked-with-commander-this-turn" },
+        play: true,
       },
       resolve: null,
       text: ATTACK_TEXT,

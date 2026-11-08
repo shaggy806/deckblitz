@@ -26,7 +26,7 @@ export default defineCard({
       effect: {
         kind: "may",
         prompt: "Exile the blocked creature? You may play that card from exile this turn.",
-        effect: { kind: "exile", target: "trigger-object", mayCast: { duration: "end-of-turn", play: true } },
+        effect: { kind: "exile", target: "trigger-object", mayPlay: { duration: "end-of-turn", play: true } },
       },
     },
   ],

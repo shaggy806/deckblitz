@@ -46,7 +46,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: true },
       targets: [],
-      effect: { kind: "allow-cast-linked-exile", play: true, anyNumber: true, reduce: 2 },
+      effect: { kind: "player-effect", duration: "end-of-turn", mayPlay: { from: "exile", linked: true, play: true, reduce: 2 } },
       resolve: null,
       text: PLAY_TEXT,
     },

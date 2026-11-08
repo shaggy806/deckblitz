@@ -54,8 +54,8 @@ describe("cascade's \"you may cast it\" (rule 702.85a)", () => {
     if (awaiting?.kind !== "cast-now") throw new Error("cascade didn't ask");
     expect(awaiting.player).toBe(A);
     expect(awaiting.cards).toEqual([bolt]);
-    expect(awaiting.free).toBe(true);
-    expect(awaiting.freeCastOf).toBe("cascade");
+    expect(awaiting.ask.free).toBe(true);
+    expect(awaiting.ask.freeCastOf).toBe("cascade");
     // Both players are there to aim the Bolt at, not just the first of them.
     const offer = awaiting.offers.find((o) => o.card === bolt);
     const players = (offer?.targetOptions[0] ?? []).flatMap((t) => (t.kind === "player" ? [t.player] : []));

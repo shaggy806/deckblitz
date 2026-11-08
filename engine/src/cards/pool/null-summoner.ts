@@ -24,7 +24,7 @@ export default defineCard({
       affects: { scope: "self" },
       condition: { kind: "threshold" },
       text: "Threshold — As long as there are seven or more cards in your graveyard, you may cast the exiled card, and mana of any type can be spent to cast that spell.",
-      playFromExile: { filter: {}, linked: true, castOnly: true, spendAs: "any-type" },
+      mayPlay: { from: "exile", filter: {}, linked: true, spendAs: "any-type" },
     },
   ],
 });

@@ -46,7 +46,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "mill", target: "you", amount: 1 },
-          { kind: "grant-graveyard-cast", cards: "milled-this-way", play: true },
+          { kind: "grant-play", cards: { thisWay: "milled" }, duration: "end-of-turn", play: true },
         ],
       },
       resolve: null,

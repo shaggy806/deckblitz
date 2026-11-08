@@ -37,6 +37,7 @@ export default defineCard({
         duration: "while-exiled",
         faceDown: true,
         spendAs: "any-type",
+        play: true,
       },
       resolve: null,
       text: DAMAGE_TEXT,

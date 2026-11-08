@@ -39,7 +39,7 @@ export default defineCard({
           kind: "sequence",
           effects: [
             { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
-            { kind: "impulse-exile", amount: 1, duration: "end-of-turn" },
+            { kind: "impulse-exile", amount: 1, duration: "end-of-turn", play: true },
           ],
         },
       },

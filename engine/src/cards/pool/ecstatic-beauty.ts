@@ -13,7 +13,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "impulse-exile", amount: 3, duration: "end-of-turn" },
+      { kind: "impulse-exile", amount: 3, duration: "end-of-turn", play: true },
       { kind: "give-suspend", timeCounters: 4, onlyWithSuspend: true },
     ],
   },

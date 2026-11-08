@@ -26,7 +26,7 @@ export default defineCard({
     {
       trigger: { on: "cast-spell", who: "you", nthEachTurn: 2 },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn", play: true },
       resolve: null,
       text: IMPULSE_TEXT,
     },

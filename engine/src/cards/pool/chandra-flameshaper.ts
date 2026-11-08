@@ -45,7 +45,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "add-mana", mana: "R", amount: 3 },
-          { kind: "impulse-exile", amount: 3, duration: "end-of-turn", choose: 1 },
+          { kind: "impulse-exile", amount: 3, duration: "end-of-turn", play: true, choose: 1 },
         ],
       },
       resolve: null,

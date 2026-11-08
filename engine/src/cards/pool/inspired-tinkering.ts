@@ -16,7 +16,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "impulse-exile", amount: 3, duration: "until-end-of-your-next-turn" },
+      { kind: "impulse-exile", amount: 3, duration: "until-end-of-your-next-turn", play: true },
       { kind: "create-token", token: "Treasure Token", count: 3 },
     ],
   },

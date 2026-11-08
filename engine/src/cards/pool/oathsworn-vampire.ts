@@ -27,5 +27,5 @@ export default defineCard({
     },
   ],
   // Gravecrawler's shape; the life gained this turn is a total of gains alone (the ruling).
-  castFromGraveyardIf: { kind: "turn-stat", stat: "life-gained", who: "you", atLeast: 1 },
+  mayPlaySelf: { from: ["graveyard"], if: { kind: "turn-stat", stat: "life-gained", who: "you", atLeast: 1 } },
 });

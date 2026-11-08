@@ -50,7 +50,7 @@ describe("Inti, Seneschal of the Sun", () => {
     // The top card (a Wastes) is exiled, and can be played this turn.
     const top = exiled(game).filter((id) => game.state.objects[id].owner === A);
     expect(top).toHaveLength(1);
-    expect(game.state.objects[top[0]].impulse).toBeDefined();
+    expect(game.state.objects[top[0]].playPermission).toBeDefined();
     game.dispatch({ type: "play-land", player: A, card: top[0] });
     expect(zone(game, top[0])).toBe("battlefield");
   });

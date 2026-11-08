@@ -28,6 +28,7 @@ export default defineCard({
         whose: "each-opponent",
         duration: "while-exiled",
         faceDown: true,
+        play: true,
       },
       resolve: null,
       text: MUTATES,

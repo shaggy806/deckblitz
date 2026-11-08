@@ -28,7 +28,7 @@ export default defineCard({
   text: `${LOOK_TEXT}\n${CAST_TEXT}\n${REVEAL_TEXT}`,
   static: [
     { affects: { scope: "self" }, visibility: { looksAtOwnLibraryTop: true }, text: LOOK_TEXT },
-    { affects: { scope: "self" }, castFromLibraryTop: { filter: { type: "creature" } }, text: CAST_TEXT },
+    { affects: { scope: "self" }, mayPlay: { from: "library-top", filter: { type: "creature" } }, text: CAST_TEXT },
   ],
   activated: [
     {

@@ -37,7 +37,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "impulse-exile", amount: 1, duration: "end-of-turn" },
+          { kind: "impulse-exile", amount: 1, duration: "end-of-turn", play: true },
           { kind: "damage", amount: { aggregate: "sum", of: "mana-value", filter: {}, in: { thisWay: "exiled" } }, who: "you" },
         ],
       },

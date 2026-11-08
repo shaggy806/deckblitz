@@ -25,7 +25,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      castFromGraveyard: { filter: { type: "creature" }, oncePerTurn: true, yourTurnOnly: true },
+      mayPlay: { from: "graveyard", filter: { type: "creature" }, oncePerTurn: true, yourTurnOnly: true },
       text: "Once during each of your turns, you may cast a creature spell from your graveyard.",
     },
   ],

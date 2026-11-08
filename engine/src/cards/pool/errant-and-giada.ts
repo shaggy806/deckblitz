@@ -31,7 +31,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      castFromLibraryTop: { filter: { anyOf: [{ keyword: "flash" }, { keyword: "flying" }] } },
+      mayPlay: { from: "library-top", filter: { anyOf: [{ keyword: "flash" }, { keyword: "flying" }] } },
       text: CAST_TEXT,
     },
   ],

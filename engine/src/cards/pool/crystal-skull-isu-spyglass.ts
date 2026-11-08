@@ -21,8 +21,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      playFromLibraryTop: { type: "land", ...HISTORIC },
-      castFromLibraryTop: { filter: HISTORIC },
+      mayPlay: { from: "library-top", play: true, filter: HISTORIC },
       text: PLAY_TEXT,
     },
   ],

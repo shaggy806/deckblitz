@@ -69,7 +69,7 @@ export default defineCard({
     {
       trigger: { on: "discards", who: "you" },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "until-your-next-end-step" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "until-your-next-end-step", play: true },
       resolve: null,
       text: DISCARD_TEXT,
     },

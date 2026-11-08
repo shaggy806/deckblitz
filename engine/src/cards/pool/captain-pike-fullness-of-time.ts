@@ -29,6 +29,6 @@ export default defineCard({
       text: PT_TEXT,
     },
     { affects: { scope: "self" }, visibility: { looksAtOwnLibraryTop: true }, text: LOOK_TEXT },
-    { affects: { scope: "self" }, playFromLibraryTop: { type: "land" }, text: PLAY_TEXT },
+    { affects: { scope: "self" }, mayPlay: { from: "library-top", play: true, filter: { type: "land" } }, text: PLAY_TEXT },
   ],
 });

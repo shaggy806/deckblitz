@@ -37,7 +37,7 @@ export default defineCard({
             kind: "conditional",
             condition: { kind: "life-total", who: "opponent", atMost: 0 },
             then: { kind: "draw", amount: 7 },
-            else: { kind: "exile", target: "source", mayCast: { duration: "end-of-turn" } },
+            else: { kind: "exile", target: "source", mayPlay: { duration: "end-of-turn" } },
           },
         ],
       },

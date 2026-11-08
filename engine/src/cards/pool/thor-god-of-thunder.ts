@@ -25,7 +25,7 @@ export default defineCard({
           filter: { anyOf: [{ subtype: "Equipment" }, { typesAnyOf: ["instant", "sorcery"] }] },
         },
       ],
-      effect: { kind: "exile", target: 0, mayCast: { duration: "until-end-of-your-next-turn", play: true } },
+      effect: { kind: "exile", target: 0, mayPlay: { duration: "until-end-of-your-next-turn", play: true } },
       resolve: null,
       text: ETB_TEXT,
     },

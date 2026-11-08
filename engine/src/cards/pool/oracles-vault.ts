@@ -22,7 +22,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "impulse-exile", amount: 1, duration: "end-of-turn" },
+          { kind: "impulse-exile", amount: 1, duration: "end-of-turn", play: true },
           { kind: "add-counter", target: "source", counter: "brick", amount: 1 },
         ],
       },
@@ -33,7 +33,7 @@ export default defineCard({
       cost: { mana: null, tap: true },
       condition: { kind: "self-counters", counter: "brick", compare: { op: "gte", n: 3 } },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn", free: { only: true } },
+      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn", play: true, free: true },
       resolve: null,
       text: SECOND,
     },

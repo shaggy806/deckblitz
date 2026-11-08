@@ -275,7 +275,7 @@ describe("a free graveyard cast, exiled after (Sins of the Past)", () => {
     const sins = toHand(game, "Sins of the Past");
     cast(game, sins, { targets: [ref(divination)] });
     expect(zone(game, sins)).toBe("exile");
-    expect(game.state.objects[divination].graveyardCastPermission?.free).toBe(true);
+    expect(game.state.objects[divination].playPermission?.free).toBe(true);
     const before = hand(game).length;
     cast(game, divination, { via: "graveyard-permission", graveyardGrant: { source: divination } });
     expect(hand(game).length).toBe(before + 2);
@@ -312,7 +312,7 @@ describe("a graveyard cast granted to many (Case of the Uneaten Feast)", () => {
     const bolt = toGraveyard(game, "Lightning Bolt");
     activate(game, theCase);
     expect(zone(game, theCase)).toBe("graveyard");
-    const permission = (id: ObjectId) => game.state.objects[id].graveyardCastPermission;
+    const permission = (id: ObjectId) => game.state.objects[id].playPermission;
     expect(permission(bears)).toBeDefined();
     expect(permission(bears)?.free).toBeUndefined();
     expect(permission(bolt)).toBeUndefined();

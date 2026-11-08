@@ -83,7 +83,7 @@ describe("look-and-choose playable: the exiled pick may be played", () => {
     settle(game);
     expect([...offered.offered].sort()).toEqual([...top].sort());
     expect(zone(game, top[1])).toBe("exile");
-    expect(game.state.objects[top[1]].impulse).toMatchObject({ player: A, expiry: { kind: "end-of-turn" } });
+    expect(game.state.objects[top[1]].playPermission).toMatchObject({ player: A, expiry: "end-of-turn" });
     // The other two on the bottom; the fourth card is on top now.
     expect(library(game)[0]).toBe(deeper);
     expect(library(game).slice(-2)).toEqual(expect.arrayContaining([top[0], top[2]]));
@@ -147,7 +147,7 @@ describe("look-and-choose playable: the exiled pick may be played", () => {
     for (const id of theirs) {
       expect(zone(game, id)).toBe("exile");
       expect(game.state.objects[id].exiledFaceDown?.lookers).toEqual([A]);
-      expect(game.state.objects[id].impulse).toMatchObject({ player: A, expiry: { kind: "while-exiled" }, spendAs: "any-type" });
+      expect(game.state.objects[id].playPermission).toMatchObject({ player: A, expiry: "permanent", spendAs: "any-type" });
     }
     // The other seven under their library.
     expect(library(game, B).slice(-7)).toEqual(expect.arrayContaining(nine.filter((id) => !theirs.includes(id))));
@@ -275,7 +275,7 @@ describe("The Key to the Vault: look at that many, exile a nonland card, cast it
     attack(game, a, [bears]);
     settle(game);
     expect(zone(game, divination)).toBe("exile");
-    expect(game.state.objects[divination].impulse).toBeUndefined();
+    expect(game.state.objects[divination].playPermission).toBeUndefined();
   });
 });
 

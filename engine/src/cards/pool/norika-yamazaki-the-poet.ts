@@ -17,7 +17,7 @@ export default defineCard({
     {
       trigger: { on: "attacks-alone", who: "you-control", filter: { subtypes: ["Samurai", "Warrior"] } },
       targets: [{ kind: "card-in-graveyard", whose: "you", filter: { type: "enchantment" } }],
-      effect: { kind: "grant-graveyard-cast", target: 0 },
+      effect: { kind: "grant-play", cards: 0, duration: "end-of-turn" },
       resolve: null,
       text: "Whenever a Samurai or Warrior you control attacks alone, you may cast target enchantment card from your graveyard this turn.",
     },

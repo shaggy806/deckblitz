@@ -83,7 +83,7 @@ export type DurationPlayer = Exclude<PlayerRef, "you">;
  *   Outlaw): the source, in the exile stint it's in as the effect begins,
  *   has been cast (601.2g's ruling). Leaving exile any other way ends nothing.
  *
- * A permission over an exiled card (`GameObject.impulse`), whose every
+ * A permission over one card (`GameObject.playPermission`), whose every
  * permission ends anyway once the card moves:
  * - `"while-exiled"`: "for as long as it remains exiled".
  * - `"until-next-exile"`: "until you exile another card with this"
@@ -234,7 +234,10 @@ export type Expiry =
   | { readonly untilEndOfCombat: true }
   | { readonly whileSource: WhileSource | null }
   /** Until that card, in that stint, is cast — `"until-source-cast"`. */
-  | { readonly untilCast: UntilCast };
+  | { readonly untilCast: UntilCast }
+  /** A permission's "until you exile another card with [this]": ends when
+   * that stint of the source next does (Unstable Amulet). */
+  | { readonly untilNextExile: { readonly source: ObjectId; readonly stint: number } };
 
 /** The card a `"until-source-cast"` effect waits on, in its exile stint. */
 export interface UntilCast {
@@ -253,12 +256,17 @@ export interface UntilCast {
  * - `this-upkeep-ends`: `upkeep-ends` once that upkeep has begun, so an effect
  *   made during an upkeep waits for the next one.
  * - `turn-ends`: the cleanup step of that player's next turn (rule 514.2).
+ * - `end-step-begins`: that player's next end step, as it begins.
+ * - `next-combat-ends`: that player's first combat after a given turn.
  * - `controllers-untap-begins`: the next untap step of whoever then controls
  *   the permanent, read then, like "doesn't untap during its controller's
  *   next untap step".
  */
 export type UntilPoint =
-  | { readonly point: "upkeep-begins" | "upkeep-ends" | "this-upkeep-ends" | "turn-ends"; readonly player: PlayerId }
+  | { readonly point: "upkeep-begins" | "upkeep-ends" | "this-upkeep-ends" | "turn-ends" | "end-step-begins"; readonly player: PlayerId }
+  /** At the end of `player`'s first combat after turn `afterTurn`, or as that
+   * turn ends if it had none (Brazen Cannonade). */
+  | { readonly point: "next-combat-ends"; readonly player: PlayerId; readonly afterTurn: number }
   | { readonly point: "controllers-untap-begins" };
 
 /** The source an effect lasts "for as long as": that permanent in that

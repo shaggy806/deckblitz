@@ -10,5 +10,5 @@ export default defineCard({
   toughness: 3,
   keywords: ["flying"],
   text: "Flying\nYou may cast this card from exile.",
-  castSelfFromExile: true,
+  mayPlaySelf: { from: ["exile"] },
 });

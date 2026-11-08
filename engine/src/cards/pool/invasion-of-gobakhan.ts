@@ -36,7 +36,7 @@ export default defineCard({
         optional: true,
         destination: "exile",
         unlinked: true,
-        mayCast: { duration: "while-exiled", play: true, byOwner: true, tax: { generic: 2 } },
+        mayPlay: { duration: "while-exiled", play: true, byOwner: true, tax: { generic: 2 } },
       },
       resolve: null,
       text: ENTERS_TEXT,

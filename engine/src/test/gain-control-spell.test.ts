@@ -208,7 +208,7 @@ describe("the permanent a stolen spell becomes (rule 110.2b)", () => {
     game.debugApplyEffect(A, {
       kind: "player-effect",
       duration: "end-of-turn",
-      castFromGraveyard: { filter: { type: "artifact" }, whose: "each-player" },
+      mayPlay: { from: "graveyard", filter: { type: "artifact" }, whose: "each-player" },
     });
     lands(game, "Wastes", 1);
     cast(game, ring, { via: "graveyard-permission", settle: false });
@@ -257,7 +257,7 @@ describe("a stolen spell's controller leaving the game with it on the stack", ()
     game.debugApplyEffect(A, {
       kind: "player-effect",
       duration: "end-of-turn",
-      castFromGraveyard: { filter: { type: "sorcery" }, whose: "each-player" },
+      mayPlay: { from: "graveyard", filter: { type: "sorcery" }, whose: "each-player" },
     });
     lands(game, "Island", 3);
     cast(game, card, { via: "graveyard-permission", settle: false });

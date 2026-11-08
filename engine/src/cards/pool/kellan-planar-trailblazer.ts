@@ -51,7 +51,7 @@ export default defineCard({
               ability: {
                 trigger: { on: "deals-combat-damage-to-player", who: "self" },
                 targets: [],
-                effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn" },
+                effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn", play: true },
                 resolve: null,
                 text: "Whenever Kellan deals combat damage to a player, exile the top card of your library. You may play that card this turn.",
               },

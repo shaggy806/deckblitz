@@ -29,7 +29,7 @@ export default defineCard({
     atLevel(2, {
       affects: { scope: "self" },
       condition: { kind: "cast-this-turn" },
-      playFromLibraryTop: {},
+      mayPlay: { from: "library-top", play: true },
       text: PLAY_TEXT,
     }),
     atLevel(3, {

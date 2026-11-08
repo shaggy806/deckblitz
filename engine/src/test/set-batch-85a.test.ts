@@ -146,7 +146,7 @@ describe("Anep, Vizier of Hazoret", () => {
     attack(game, a, [anep]);
     expect(zone(game, top)).toBe("exile");
     expect(zone(game, second)).toBe("exile");
-    expect(game.state.objects[top].impulse?.player).toBe(A);
+    expect(game.state.objects[top].playPermission?.player).toBe(A);
     lands(game, "Forest", 2);
     cast(game, top, { via: "impulse" });
     expect(zone(game, top)).toBe("battlefield");

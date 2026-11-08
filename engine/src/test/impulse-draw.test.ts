@@ -2,7 +2,7 @@
  * "Impulse draw" — exile cards face-up and let yourself play them (Dream
  * Pillager, Tectonic Giant, Theater of Horrors).
  *
- * The permission rides on the *card* (`GameObject.impulse`) rather than on a
+ * The permission rides on the *card* (`GameObject.playPermission`) rather than on a
  * list somewhere, so it survives a `structuredClone`, the source leaving, and
  * anything else that moves state around. Three expiry shapes are covered
  * here, and the distinction between "cast spells from among them" (no lands)
@@ -40,7 +40,7 @@ const readyMountains = (game: Game, n: number) => {
 };
 
 const impulseExiled = (game: Game) =>
-  game.state.zones.shared.exile.filter((id) => game.state.objects[id].impulse !== undefined);
+  game.state.zones.shared.exile.filter((id) => game.state.objects[id].playPermission !== undefined);
 
 describe("impulse-exile", () => {
   it("exiles from the top of the library and marks the cards playable", () => {
@@ -52,6 +52,7 @@ describe("impulse-exile", () => {
       kind: "impulse-exile",
       amount: 2,
       duration: "end-of-turn",
+      play: true,
     });
 
     expect(impulseExiled(game).length).toBe(2);
@@ -73,6 +74,7 @@ describe("impulse-exile", () => {
       kind: "impulse-exile",
       amount: 1,
       duration: "end-of-turn",
+      play: true,
     });
     expect(impulseExiled(game).length).toBe(1);
 
@@ -91,7 +93,6 @@ describe("impulse-exile", () => {
       kind: "impulse-exile",
       amount: 1,
       duration: "end-of-turn",
-      castOnly: true,
     });
     const exiled = impulseExiled(game)[0];
     expect(exiled).toBeDefined();
@@ -110,6 +111,7 @@ describe("impulse-exile", () => {
       kind: "impulse-exile",
       amount: 1,
       duration: "end-of-turn",
+      play: true,
     });
     const exiled = impulseExiled(game)[0];
     const lands = game
@@ -127,6 +129,7 @@ describe("impulse-exile", () => {
       amount: 2,
       duration: "until-end-of-your-next-turn",
       choose: 1,
+      play: true,
     });
 
     // Raises a choice over the two exiled cards.
@@ -148,6 +151,7 @@ describe("impulse-exile", () => {
       kind: "impulse-exile",
       amount: 1,
       duration: "until-end-of-your-next-turn",
+      play: true,
     });
     expect(impulseExiled(game).length).toBe(1);
 
@@ -163,7 +167,7 @@ describe("impulse-exile", () => {
     // it was exiled ended.
     const game = makeGame();
     game.advanceUntil((s) => s.priority.holder === A && s.turn.step === "precombat-main");
-    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 3, duration: "until-end-of-your-next-turn" });
+    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 3, duration: "until-end-of-your-next-turn", play: true });
     expect(impulseExiled(game).length).toBe(3);
     game.advanceUntil((s) => s.turn.number === 3 || s.result.over);
     expect(impulseExiled(game).length).toBe(3);
@@ -180,6 +184,7 @@ describe("impulse-exile", () => {
       kind: "impulse-exile",
       amount: 1,
       duration: "until-end-of-your-next-turn",
+      play: true,
     });
     expect(impulseExiled(game).length).toBe(1);
 
@@ -207,6 +212,7 @@ describe("Theater of Horrors — a gated permission", () => {
         duration: "while-source",
         yourTurnOnly: true,
         gate: { kind: "opponent-lost-life-this-turn" },
+        play: true,
       },
       [],
       { source: theater },
@@ -233,7 +239,7 @@ describe("a permission for as long as the source is on the battlefield", () => {
     game.advanceUntil((s) => s.priority.holder === A && s.turn.step === "precombat-main");
     readyMountains(game, 3);
     const theater = game.debugSpawn("Theater of Horrors", A, "battlefield");
-    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 1, duration: "while-source" }, [], { source: theater });
+    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 1, duration: "while-source", play: true }, [], { source: theater });
     const castable = () => game.legalActions(A).some((a) => a.kind === "cast-spell" && a.via === "impulse");
     expect(castable()).toBe(true);
     // Flickered: the Theater that returns is a new object, which exiled nothing.
@@ -264,9 +270,8 @@ describe("impulse options: which cards, and free casts", () => {
       kind: "impulse-exile",
       amount: 4,
       duration: "end-of-turn",
-      castOnly: true,
       filter: { notTypes: ["creature", "land"] },
-      free: { only: true },
+      free: true,
     });
     expect(game.state.zones.shared.exile).toHaveLength(4);
     // Only free, and only the noncreature spells.
@@ -296,6 +301,7 @@ describe("impulse options: which cards, and free casts", () => {
       amount: 2,
       duration: "end-of-turn",
       free: { filter: { subtype: "Equipment" } },
+      play: true,
     });
     expect(castVariants(game, exiledNamed(game, "Bonesplitter")).sort()).toEqual(["free", "paid"]);
     expect(castVariants(game, exiledNamed(game, "Lightning Bolt"))).toEqual(["paid"]);
@@ -304,7 +310,7 @@ describe("impulse options: which cards, and free casts", () => {
   it("`while-exiled` never lapses", () => {
     const game = makeGame();
     game.advanceUntil((s) => s.priority.holder === A && s.turn.step === "precombat-main");
-    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 1, duration: "while-exiled" });
+    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 1, duration: "while-exiled", play: true });
     game.advanceUntil((s) => s.turn.number === 5 || s.result.over);
     expect(impulseExiled(game)).toHaveLength(1);
   });

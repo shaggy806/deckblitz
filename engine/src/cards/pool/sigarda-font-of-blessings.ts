@@ -29,7 +29,7 @@ export default defineCard({
     },
     {
       affects: { scope: "self" },
-      castFromLibraryTop: { filter: { subtypes: ["Angel", "Human"] } },
+      mayPlay: { from: "library-top", filter: { subtypes: ["Angel", "Human"] } },
       text: CAST_TEXT,
     },
   ],

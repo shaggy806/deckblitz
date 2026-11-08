@@ -14,7 +14,7 @@ export default defineCard({
     cost: "",
     keyword: "blight",
     blight: 1,
-    effect: { kind: "impulse-exile", amount: 3, duration: "until-end-of-your-next-turn" },
+    effect: { kind: "impulse-exile", amount: 3, duration: "until-end-of-your-next-turn", play: true },
   },
-  effect: { kind: "impulse-exile", amount: 2, duration: "until-end-of-your-next-turn" },
+  effect: { kind: "impulse-exile", amount: 2, duration: "until-end-of-your-next-turn", play: true },
 });

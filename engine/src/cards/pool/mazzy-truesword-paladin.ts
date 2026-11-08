@@ -43,7 +43,7 @@ export default defineCard({
         to: ["graveyard"],
       },
       targets: [],
-      effect: { kind: "exile", target: "trigger-object", mayCast: { duration: "until-end-of-your-next-turn" } },
+      effect: { kind: "exile", target: "trigger-object", mayPlay: { duration: "until-end-of-your-next-turn" } },
       resolve: null,
       text: AURA_TEXT,
     },

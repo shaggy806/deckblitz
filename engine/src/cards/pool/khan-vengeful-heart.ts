@@ -14,7 +14,7 @@ export default defineCard({
   power: 5,
   toughness: 3,
   text: `${ENTER_TEXT}\nYou may cast this card from exile.`,
-  castSelfFromExile: true,
+  mayPlaySelf: { from: ["exile"] },
   triggered: [
     {
       trigger: { on: "enters-battlefield", who: "self" },

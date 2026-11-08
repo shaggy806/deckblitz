@@ -12,6 +12,7 @@
  * escape hatch). Vanilla permanents need neither.
  */
 
+import type { SelfPlay, StaticPlay } from "../play-permission.js";
 import type { AbilityCost, AbilityKindName, ActivatedAbility, TriggeredAbility } from "../abilities.js";
 import type {
   BeholdSpec,
@@ -2003,53 +2004,6 @@ export interface PlayerTest {
 }
 
 /**
- * What casting a spell from a graveyard under a permission costs beyond, or
- * instead of, its mana cost — shared by a permanent's `castFromGraveyard`
- * static (Kotis, Sibsig Champion) and a card's own
- * {@link CardDefinition.castSelfFromGraveyard} (Wickerfolk Indomitable).
- * Each is part of the total cost (rule 601.2f), paid as the spell is cast
- * (601.2h), so a spell countered afterwards keeps them paid; none is offered
- * when it can't be paid (rule 601.2h: a cost must be paid in full).
- */
-export interface GraveyardCastCosts {
-  /** "By paying 3 life in addition to paying their other costs" — life
-   * paid only up to what the caster has (rule 119.4). */
-  readonly payLife?: number;
-  /** An additional sacrifice for a cast this way — Exploration
-   * Broodship's "by sacrificing a land in addition to paying its other
-   * costs". Offered and paid like a spell's own `additionalCost.sacrifice`
-   * (the offer's `sacrifice.choices`, the action's `sacrifice`), after the
-   * mana, so the land may tap for the spell first (rule 601.2g–h). Not
-   * offered for a card with a sacrifice cost of its own. */
-  readonly sacrifice?: CardFilter;
-  /** An additional cost of exiling this many *other* cards from the
-   * graveyard — Kotis, Sibsig Champion's "by exiling three other cards
-   * from your graveyard in addition to paying its other costs". Picked by
-   * the caster as escape's are (the offer's `escapeExile`, the action's
-   * `escapeExile`) and paid as the spell is cast; not offered with too few.
-   * The spell isn't escaped (`castVia` stays `"graveyard-permission"`). */
-  readonly exileOthers?: number;
-  /** Which other cards `exileOthers` may exile — Helbrute's "by exiling
-   * **another creature card** from your graveyard". Absent: any. */
-  readonly exileFilter?: CardFilter;
-  /** "By discarding a card in addition to paying its other costs" (Alien
-   * Symbiosis; Rona's two): cards from the caster's hand, chosen as the cost
-   * is paid after the mana (rule 601.2h), as retrace's is. Not offered with
-   * too few cards in hand. */
-  readonly discard?: number;
-  /** "By paying {2}{W} **rather than** paying its mana cost" (Raffine's
-   * Guidance): an alternative cost (rule 118.9), so no other alternative
-   * cost — a free cast, Jodah's — goes with it (118.9a); additional costs
-   * and cost changes still apply (118.9d). */
-  readonly mana?: string;
-  /** "If you pay {1} more to cast it **for each other creature card in your
-   * graveyard**" (Risen Executioner): {1} more per other card in the
-   * caster's graveyard matching this, counted as the cost is determined
-   * (rule 601.2f) — an increase, so before any reduction. */
-  readonly costIncreasePerOther?: CardFilter;
-}
-
-/**
  * A static ability: continuously modifies characteristics (rule 613 layers 6 /
  * 7b / 7d), and/or carries a `replacement` clause (rule 614 — applied by
  * `game.ts`, not by the layer fold).
@@ -2921,39 +2875,19 @@ export interface StaticAbility {
    */
   readonly grantsTriggered?: readonly TriggeredAbility[];
   /**
-   * A permission to cast spells from your **graveyard**, for their normal
-   * cost — Gisa and Geralf's "Once during each of your turns, you may cast a
-   * Zombie creature spell from your graveyard".
-   *
-   * `filter` is matched against the graveyard card's printed
-   * characteristics. `oncePerTurn` limits the permanent to one such cast per
-   * turn, and `yourTurnOnly` to casting during your own turn; the Gisa and
-   * Geralf wording ("once during each of your turns") needs both. The
-   * permission belongs to the permanent, so it ends the moment that leaves.
-   *
-   * `perType` is Muldrotha's allowance instead of a single use: once per turn
-   * **per listed permanent type**, a multi-typed card spending just one of
-   * its types, which the player picks (each type is its own `LegalAction`
-   * variant, carrying `graveyardGrant.asType`). Listing `"land"` extends the
-   * permission from casting to *playing* a land, which still takes the land
-   * drop. The allowances are per permanent: a new Muldrotha that turn grants
-   * a fresh set (the 2018 ruling), since `moveObject` clears them.
-   *
-   * `exileAfterwards` is Kess's "if a spell cast this way would be put into
-   * your graveyard, exile it instead" — flashback's replacement, riding on
-   * the spell. `payLife` is an extra cost paid on top of the spell's own
-   * ("by paying 3 life in addition to paying their other costs").
-   *
-   * When several permissions apply to one card, the card is offered once per
-   * permission, so which one is spent is the player's choice.
+   * A permission (rule 601.3): while this permanent has this ability, its
+   * controller may play the cards it reaches from `from`, on these terms. See
+   * {@link StaticPlay}. `affects` is ignored: this changes what a player may
+   * do, not a characteristic. Everything else (timing, a land drop, targets,
+   * costs) is the cast's own. It lapses the moment the permanent leaves.
    */
-  readonly castFromGraveyard?: {
-    readonly filter: CardFilter;
-    readonly oncePerTurn?: boolean;
-    readonly yourTurnOnly?: boolean;
-    readonly perType?: readonly CardType[];
-    readonly exileAfterwards?: boolean;
-  } & GraveyardCastCosts;
+  readonly mayPlay?: StaticPlay;
+  /**
+   * A keyword this permanent gives cards in its controller's **hand** (rule
+   * 604.1): "each instant and sorcery card in your hand has miracle {2}"
+   * (Lorehold, the Historian). A card with miracle of its own uses its own.
+   */
+  readonly grantsToHand?: { readonly filter: CardFilter; readonly miracle: { readonly cost: string } };
   /**
    * Keywords this permanent gives cards in its controller's **graveyard**
    * (rule 604.1 — a static ability reaches another zone when its text says
@@ -3791,88 +3725,6 @@ export interface StaticAbility {
   readonly cantBecomeSuspected?: true;
   /** Combat restrictions imposed on the affected objects (Pacifism, Juggernaut). */
   readonly restrictions?: readonly CombatRestriction[];
-  /** A permission (rule 305.9 / 118.9) — while this permanent is on the
-   * battlefield its controller may *play* cards matching `filter` from their
-   * graveyard (Ramunap Excavator: `{ type: "land" }`). `affects` is ignored;
-   * this grants the controller a play permission, not a characteristic. Still
-   * costs the land drop / sorcery timing. */
-  readonly playFromGraveyard?: CardFilter;
-  /** A permission (rule 118.9-adjacent) — while this permanent is on the
-   * battlefield its controller may *play* the top card of their library if it
-   * matches `filter` (Oracle of Mul Daya: `{ type: "land" }`). `affects` is
-   * ignored; this grants the controller a play permission, not a
-   * characteristic. Still costs the land drop / sorcery timing. Distinct from
-   * `revealsOwnLibraryTop` (the "play with the top card revealed" half). */
-  readonly playFromLibraryTop?: CardFilter;
-  /**
-   * A permission (rule 601.3) — while this permanent is on the battlefield
-   * its controller may *cast* the top card of their library if it's a spell
-   * matching `filter`, judged as the spell it would be (rule 601.3e): the
-   * face cast, and with `{X}` counted at the X announced for it (202.3e) —
-   * Glarb, Calamity's Augur's "spells with mana value 4 or greater" reaches
-   * an X spell only at an X that gets it there (its ruling). Cast as
-   * `via: "library-top"`, paying every cost and keeping every timing rule.
-   * Lands are `playFromLibraryTop`'s; "look at the top card of your library
-   * any time" is the card's `looksAtOwnLibraryTop`. `gainsHaste` is
-   * "if you cast a creature spell this way, it gains haste until end of
-   * turn" (Thundermane Dragon). `affects` is ignored.
-   *
-   * `payLifeManaValue` is "if you cast a spell this way, pay life equal to
-   * its mana value rather than pay its mana cost" (Bolas's Citadel): the
-   * only way this permission lets it be cast — an alternative cost (rule
-   * 118.9), so no other one goes with it, though additional costs and cost
-   * increases still do (the rulings), and X is 0 (107.3b). Another
-   * permission without it still lets the card be cast for its mana cost
-   * (Future Sight beside the Citadel): the caster picks which applies.
-   */
-  readonly castFromLibraryTop?: {
-    readonly filter: CardFilter;
-    readonly gainsHaste?: boolean;
-    readonly payLifeManaValue?: true;
-  };
-  /**
-   * A permission (rule 601.3) — while this permanent is on the battlefield
-   * its controller may play lands and cast spells from among the cards in
-   * exile matching `filter`, from their side (the counter on them, who owns
-   * them): Grolnok, the Omnivore's "cards you own in exile with croak
-   * counters on them" is `{ ownedBy: "you", counters: { kind: "croak", … } }`.
-   * Cast as `via: "impulse"`, paying every cost and keeping every timing
-   * rule (a land still takes the land drop); it lapses the moment this
-   * permanent leaves (Haldan's ruling) — unlike an impulse permission riding
-   * on the card.
-   * - `exiledByYou` — "cards **you exiled**" (Haldan, Avid Arcanist): only
-   *   those an effect of this player's put there (`GameObject.exiledByPlayer`).
-   * - `spells` — which spells it lets you cast, matched as the face cast
-   *   (Haldan's "cast **noncreature** spells" reaches an adventurer's
-   *   Adventure); lands are still played.
-   * - `castOnly` — "cast spells from among" them, no lands.
-   * - `yourTurnOnly` — "during your turn" (Tinybones, Bauble Burglar).
-   * - `spendAs` — "and you may spend mana as though it were mana of any
-   *   color" / "mana of any type can be spent to cast those spells" (rule
-   *   118.14 — only to cast them this way).
-   * `affects` is ignored.
-   */
-  readonly playFromExile?: {
-    readonly filter: CardFilter;
-    readonly exiledByYou?: boolean;
-    readonly spells?: CardFilter;
-    readonly castOnly?: boolean;
-    readonly yourTurnOnly?: boolean;
-    readonly spendAs?: SpendAs;
-    /** "From among **cards exiled with this creature**" (Nightveil Specter,
-     * rule 607.2a): only cards linked to this permanent's present stint
-     * (`GameObject.exiledWith`, or `exiledUntil` — Intellect Devourer's). The
-     * ability stops with it, and a thief who gains control may use it. */
-    readonly linked?: true;
-    /** "If you cast a spell this way, pay life equal to its mana value
-     * rather than pay its mana cost" (Valgavoth, Terror Eater): an
-     * alternative cost (rule 118.9), and the only one this permission
-     * allows — no other alternative cost goes with it, though additional
-     * costs (kicker) are paid as usual (the rulings). A card another
-     * permission also reaches may be cast either way. Lands are played as
-     * ever. */
-    readonly payLifeManaValue?: true;
-  };
   /**
    * "For each {B} in a cost, you may pay 2 life rather than pay that mana"
    * (K'rrik, Son of Yawgmoth): how this permanent's controller may pay every
@@ -5639,42 +5491,12 @@ export interface CardDefinition {
    * the card is drawn (`cards/miracle.ts`). `null` for a card without it. */
   readonly miracle: { readonly cost: string } | null;
   /**
-   * "You may cast this card from your graveyard as long as [condition]"
-   * (Gravecrawler: "as long as you control a Zombie") — an ability that
-   * modifies where the card may be cast from, so it functions there (rule
-   * 113.6f): while the condition holds
-   * for its owner, the card may be cast from their graveyard for its normal
-   * costs, under the usual timing (its ruling). Checked as it's cast, never
-   * again (the other ruling: losing the Zombie afterwards changes nothing).
-   * Offered like any graveyard permission (`via: "graveyard-permission"`,
-   * the card itself the grant's source), and it spends nothing.
+   * "You may cast this card from your graveyard [as long as …]", "… or from
+   * exile": the card's own permission, which functions from there (rule
+   * 113.6f), for its owner. See {@link SelfPlay}: `if` is read as it's cast and
+   * never again (Gravecrawler's ruling).
    */
-  readonly castFromGraveyardIf?: StaticCondition;
-  /**
-   * "You may cast this card from your graveyard **by** [costs]" — the card's
-   * own permission with costs of its own (rule 601.2f), as a static ability
-   * that functions from the graveyard (rule 113.6f): Wickerfolk
-   * Indomitable's "by paying 2 life and sacrificing an artifact or creature
-   * in addition to paying its other costs", Raffine's Guidance's "by paying
-   * {2}{W} rather than paying its mana cost", Helbrute's "by exiling another
-   * creature card from your graveyard", Risen Executioner's "if you pay {1}
-   * more … for each other creature card in your graveyard" — see
-   * {@link GraveyardCastCosts}. `if` gates it as `castFromGraveyardIf` does
-   * (that field is this one's condition-only form; a card has one or the
-   * other). Offered like any graveyard permission (`via:
-   * "graveyard-permission"`, the card itself the grant's source), under the
-   * card's normal timing.
-   *
-   * `fromExile`: "you may cast this card from your graveyard **or from
-   * exile**" (Squee, the Immortal) — the same permission over the card in
-   * exile, its owner casting it there as an `"impulse"` cast does.
-   */
-  readonly castSelfFromGraveyard?: { readonly if?: StaticCondition; readonly fromExile?: true } & GraveyardCastCosts;
-  /** "You may cast this card from exile" (Misthollow Griffin, Eternal
-   * Scourge): an ability that functions from exile (rule 113.6f), for the
-   * card's owner, while it's face up, under its normal timing and costs. As
-   * Squee's `fromExile`, a `via: "impulse"` cast. */
-  readonly castSelfFromExile?: true;
+  readonly mayPlaySelf?: SelfPlay;
   /** "While you're searching your library, you may cast this card from your
    * library" (Panglacial Wurm — rule 601.3): offered, as a `cast-now`, at the
    * start of each search of its owner's own library, at its normal cost and
@@ -6222,9 +6044,7 @@ const PRINTED_ABILITY: {
   suspend: (def) => def.suspend !== null,
   cycling: (def) => def.cycling !== null,
   moreCycling: (def) => def.moreCycling !== undefined,
-  castFromGraveyardIf: (def) => def.castFromGraveyardIf !== undefined,
-  castSelfFromGraveyard: (def) => def.castSelfFromGraveyard !== undefined,
-  castSelfFromExile: (def) => def.castSelfFromExile !== undefined,
+  mayPlaySelf: (def) => def.mayPlaySelf !== undefined,
   castWhileSearchingLibrary: (def) => def.castWhileSearchingLibrary !== undefined,
   moreThanMeetsTheEye: (def) => def.moreThanMeetsTheEye !== undefined,
   cantBeCopied: (def) => def.cantBeCopied !== undefined,
@@ -6475,9 +6295,7 @@ interface CardDraft {
   webSlinging?: { readonly cost: string };
   emerge?: NonNullable<CardDefinition["emerge"]>;
   flashback?: NonNullable<CardDefinition["flashback"]>;
-  castFromGraveyardIf?: StaticCondition;
-  castSelfFromGraveyard?: NonNullable<CardDefinition["castSelfFromGraveyard"]>;
-  castSelfFromExile?: true;
+  mayPlaySelf?: SelfPlay;
   castWhileSearchingLibrary?: true;
   moreThanMeetsTheEye?: { readonly cost: string };
   /** See {@link CardDefinition.cantBeCopied}. */
@@ -6840,9 +6658,7 @@ function rareCardFields(draft: CardDraft) {
     ...(draft.entersUnderChosenPlayer === true ? { entersUnderChosenPlayer: true as const } : {}),
     ...(draft.asTurnedFaceUp !== undefined ? { asTurnedFaceUp: draft.asTurnedFaceUp } : {}),
     ...(draft.moreCycling !== undefined ? { moreCycling: draft.moreCycling } : {}),
-    ...(draft.castFromGraveyardIf !== undefined ? { castFromGraveyardIf: draft.castFromGraveyardIf } : {}),
-    ...(draft.castSelfFromGraveyard !== undefined ? { castSelfFromGraveyard: draft.castSelfFromGraveyard } : {}),
-    ...(draft.castSelfFromExile !== undefined ? { castSelfFromExile: draft.castSelfFromExile } : {}),
+    ...(draft.mayPlaySelf !== undefined ? { mayPlaySelf: draft.mayPlaySelf } : {}),
     ...(draft.castWhileSearchingLibrary !== undefined ? { castWhileSearchingLibrary: draft.castWhileSearchingLibrary } : {}),
     ...(draft.moreThanMeetsTheEye !== undefined ? { moreThanMeetsTheEye: draft.moreThanMeetsTheEye } : {}),
     ...(draft.cantBeCopied !== undefined ? { cantBeCopied: draft.cantBeCopied } : {}),

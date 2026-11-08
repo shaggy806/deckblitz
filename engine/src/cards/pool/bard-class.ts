@@ -57,7 +57,7 @@ export default defineCard({
     atLevel(3, {
       trigger: { on: "cast-spell", who: "you", filter: { supertype: "legendary" } },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 2, duration: "end-of-turn" },
+      effect: { kind: "impulse-exile", amount: 2, duration: "end-of-turn", play: true },
       resolve: null,
       text: CAST_TEXT,
     }),

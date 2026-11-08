@@ -2826,7 +2826,7 @@ function emblemStaticOf(quoted) {
   if (quoted === "You may cast instant and sorcery spells from your graveyard. If a spell cast this way would be put into your graveyard, exile it instead.") {
     return {
       affects: { scope: "self" },
-      castFromGraveyard: { filter: { typesAnyOf: ["instant", "sorcery"] }, exileAfterwards: true },
+      mayPlay: { from: "graveyard", filter: { typesAnyOf: ["instant", "sorcery"] }, exileAfter: true },
       text,
     };
   }
@@ -3122,7 +3122,7 @@ export function parseSentence(sentence, ctx) {
   }
   // "A creature spell": one cast, then it's used up (Chainer's ruling).
   if (sentenceRe(`you may cast a creature spell from your graveyard this turn`).test(s)) {
-    return { kind: "player-effect", duration: "end-of-turn", castFromGraveyard: { filter: { type: "creature" }, once: true } };
+    return { kind: "player-effect", duration: "end-of-turn", mayPlay: { from: "graveyard", filter: { type: "creature" }, upTo: 1 } };
   }
   // "Discover X, where X is that spell's mana value" (Tecutlan): the spell a
   // cast trigger saw.
@@ -5822,7 +5822,7 @@ export function parseSentence(sentence, ctx) {
   if ((m = re("until end of turn, you may cast an? (.+?) spell from among cards exiled with ~( without paying its mana cost)?").exec(s))) {
     const spell = parseTypePhrase(m[1]);
     if (spell !== null && Object.keys(spell).length > 0) {
-      return { kind: "allow-cast-linked-exile", spell, ...(m[2] !== undefined ? { free: true } : {}) };
+      return { kind: "player-effect", duration: "end-of-turn", mayPlay: { from: "exile", linked: true, spell, ...(m[2] !== undefined ? { free: true } : {}), upTo: 1 } };
     }
   }
   // "Until end of turn, you may play a card exiled with ~ [without paying its
@@ -5830,11 +5830,16 @@ export function parseSentence(sentence, ctx) {
   // (Urianger Augurelt, Kayla's Music Box): rule 611.2c, read live.
   if ((m = re("until end of turn, you may play (a card|cards you own|cards) exiled with ~( without paying its mana cost)?").exec(s))) {
     return {
-      kind: "allow-cast-linked-exile",
-      ...(m[1].toLowerCase() === "cards you own" ? { spell: { ownedBy: "you" } } : {}),
-      ...(m[2] !== undefined ? { free: true } : {}),
-      play: true,
-      ...(m[1].toLowerCase() !== "a card" ? { anyNumber: true } : {}),
+      kind: "player-effect",
+      duration: "end-of-turn",
+      mayPlay: {
+        from: "exile",
+        linked: true,
+        ...(m[1].toLowerCase() === "cards you own" ? { spell: { ownedBy: "you" } } : {}),
+        ...(m[2] !== undefined ? { free: true } : {}),
+        play: true,
+        ...(m[1].toLowerCase() !== "a card" ? {} : { upTo: 1 }),
+      },
     };
   }
   // Bazaar of Wonders: asked as it resolves (rule 608.2c), of the spell.
@@ -7388,7 +7393,7 @@ function impulseWindowOf(sentence) {
 /** "Exile target nonland permanent. For as long as that card remains exiled,
  * its owner may play it[. A spell cast (by an opponent) this way costs {N} more
  * to cast]." (Soul Partition), "… may cast it without paying its mana cost"
- * (Release to the Wind): `exile`'s `mayCast` with `byOwner`, and how many
+ * (Release to the Wind): `exile`'s `mayPlay` with `byOwner`, and how many
  * sentences it took — or `null`. */
 function ownerPermissionAt(sentences, i, ctx) {
   const exile = /^exile (up to one )?target ([a-z' ]+?)\.$/i.exec(sentences[i]);
@@ -7403,7 +7408,7 @@ function ownerPermissionAt(sentences, i, ctx) {
     effect: {
       kind: "exile",
       target: ctx.target(exile[1] !== undefined ? { kind: "optional", of: spec } : spec),
-      mayCast: {
+      mayPlay: {
         duration: "while-exiled",
         ...(said[1].toLowerCase() === "play" ? { play: true } : {}),
         byOwner: true,
@@ -7419,7 +7424,7 @@ function ownerPermissionAt(sentences, i, ctx) {
 
 /** The impulse sentence pair at `i`, or `null`: the top card exiled with its
  * permission (`impulse-exile`), or a targeted card exiled from your graveyard
- * with one (`exile`'s `mayCast`; `sourceDid` isn't something that says). */
+ * with one (`exile`'s `mayPlay`; `sourceDid` isn't something that says). */
 function impulseWindowAt(sentences, i, ctx) {
   const next = sentences[i + 1];
   if (next === undefined) return null;
@@ -7427,7 +7432,7 @@ function impulseWindowAt(sentences, i, ctx) {
   if (window === null) return null;
   const { play, ...when } = window;
   if (/^exile the top card of your library\.$/i.test(sentences[i]) && when.upTo === undefined) {
-    return { kind: "impulse-exile", amount: 1, ...when, ...(play ? {} : { castOnly: true }) };
+    return { kind: "impulse-exile", amount: 1, ...when, ...(play ? { play: true } : {}) };
   }
   // "Exile the top two cards of your library. Until your next end step, you
   // may play one of those cards." (Unlucky Witness).
@@ -7435,7 +7440,7 @@ function impulseWindowAt(sentences, i, ctx) {
   const count = several === null ? undefined : numberOf(several[1]);
   if (when.upTo !== undefined) {
     return typeof count === "number" && count > 1
-      ? { kind: "impulse-exile", amount: count, ...when, ...(play ? {} : { castOnly: true }) }
+      ? { kind: "impulse-exile", amount: count, ...when, ...(play ? { play: true } : {}) }
       : null;
   }
   // Only the windows new to `exile`: the plain "this turn" reads go on through
@@ -7446,7 +7451,7 @@ function impulseWindowAt(sentences, i, ctx) {
   const permanent = window.spendAs !== undefined ? /^exile target ([a-z' ]+?)\.$/i.exec(sentences[i]) : null;
   const onBattlefield = permanent === null ? undefined : targetOf(`target ${permanent[1]}`);
   if (onBattlefield !== undefined) {
-    return { kind: "exile", target: ctx.target(onBattlefield), mayCast: { duration: when.duration, spendAs: when.spendAs } };
+    return { kind: "exile", target: ctx.target(onBattlefield), mayPlay: { duration: when.duration, spendAs: when.spendAs } };
   }
   const graveyard = /^exile (up to one )?target (?:(.+?) )?card from your graveyard\.$/i.exec(sentences[i]);
   if (graveyard === null) return null;
@@ -7456,7 +7461,7 @@ function impulseWindowAt(sentences, i, ctx) {
   return {
     kind: "exile",
     target: ctx.target(graveyard[1] !== undefined ? { kind: "optional", of: spec } : spec),
-    mayCast: {
+    mayPlay: {
       duration: when.duration,
       ...(play ? { play: true } : {}),
       ...(when.spendAs !== undefined ? { spendAs: when.spendAs } : {}),
@@ -9539,7 +9544,7 @@ export function parseEffect(text, outer) {
     // exile a nonland card from among them. Put the rest on the bottom … You
     // may cast the exiled card without paying its mana cost." (The Key to the
     // Vault): one look-and-choose exiling the pick, which may then be played
-    // this turn (`playable`) or cast free as this resolves (`then`).
+    // this turn (`mayPlay`) or cast free as this resolves (`then`).
     if (lookTopM !== null) {
       const count = numberOf(lookTopM[1]);
       const one = /^exile one of (?:those cards|them) and put the rest on the bottom of your library in a random order\.$/i.test(sentences[i + 1] ?? "");
@@ -9560,7 +9565,7 @@ export function parseEffect(text, outer) {
           ...(Object.keys(filter).length > 0 ? { filter } : {}),
           destination: "exile",
           unlinked: true,
-          ...(play ? { playable: { duration: "end-of-turn" } } : {}),
+          ...(play ? { mayPlay: { duration: "end-of-turn", play: true } } : {}),
           leftover: "bottom-random",
           ...(free ? { then: { kind: "cast-now", target: 0, free: true } } : {}),
         };
@@ -10502,7 +10507,7 @@ export function parseEffect(text, outer) {
       parsed[parsed.length - 1]?.target === "you"
     ) {
       const play = /^you may play/i.test(sentence);
-      const made = { kind: "grant-graveyard-cast", cards: "milled-this-way", ...(play ? { play: true } : {}) };
+      const made = { kind: "grant-play", cards: { thisWay: "milled" }, duration: "end-of-turn", ...(play ? { play: true } : {}) };
       parsed.push(made);
       hints.push({ sentence, effect: made });
       continue;
@@ -10535,7 +10540,7 @@ export function parseEffect(text, outer) {
       /^until end of turn, you may cast a spell from among those cards\.$/i.test(sentence) &&
       parsed.some((effect) => effect?.kind === "mill")
     ) {
-      const made = { kind: "grant-graveyard-cast", cards: "milled-this-way", upTo: 1 };
+      const made = { kind: "grant-play", cards: { thisWay: "milled" }, duration: "end-of-turn", upTo: 1 };
       parsed.push(made);
       hints.push({ sentence, effect: made });
       continue;
@@ -10543,7 +10548,7 @@ export function parseEffect(text, outer) {
     // "Until end of turn, you may play lands and cast spells from your
     // graveyard." (Gaea's Will — rule 305.9, 601.3).
     if (/^until end of turn, you may play lands and cast spells from your graveyard\.$/i.test(sentence)) {
-      const made = { kind: "player-effect", duration: "end-of-turn", playLandsFromGraveyard: true, castFromGraveyard: { filter: {} } };
+      const made = { kind: "player-effect", duration: "end-of-turn", mayPlay: { from: "graveyard", play: true } };
       parsed.push(made);
       hints.push({ sentence, effect: made });
       continue;
@@ -10562,8 +10567,7 @@ export function parseEffect(text, outer) {
         kind: "player-effect",
         duration: "end-of-turn",
         looksAtOwnLibraryTop: true,
-        playFromLibraryTop: { type: "land" },
-        castFromLibraryTop: { filter: {} },
+        mayPlay: { from: "library-top", play: true },
       };
       parsed.push(made);
       hints.push({ sentence, effect: made });
@@ -10575,10 +10579,10 @@ export function parseEffect(text, outer) {
       /^if you cast a spell this way, pay life equal to its mana value rather than pay its mana cost\.$/i.test(sentence) &&
       parsed.length > 0 &&
       parsed[parsed.length - 1]?.kind === "player-effect" &&
-      parsed[parsed.length - 1]?.castFromLibraryTop !== undefined
+      parsed[parsed.length - 1]?.mayPlay?.from === "library-top"
     ) {
       const last = parsed[parsed.length - 1];
-      parsed[parsed.length - 1] = { ...last, castFromLibraryTop: { ...last.castFromLibraryTop, payLifeManaValue: true } };
+      parsed[parsed.length - 1] = { ...last, mayPlay: { ...last.mayPlay, byPayingLife: true } };
       hints.push({ sentence, effect: parsed[parsed.length - 1] });
       continue;
     }
@@ -11499,7 +11503,7 @@ function searchZonesAt(sentences, i) {
 
 /**
  * A search whose exiled finds may be cast later this turn — the search's
- * `playable` permission:
+ * `mayPlay` permission:
  * - "Search your library for any number of colorless nonland cards, exile
  *   them, then shuffle. Until end of turn, you may cast those cards without
  *   paying their mana costs." (Ugin, Eye of the Storms);
@@ -11528,7 +11532,7 @@ function searchExileCastLaterAt(sentences, i) {
       ...(library ? {} : { zones: "library-and-graveyard", upTo: true }),
       min: 0,
       max: library ? { librarySize: "you" } : 999,
-      playable: { duration: "end-of-turn", ...(free ? { free: true } : {}) },
+      mayPlay: { duration: "end-of-turn", ...(free ? { free: true } : {}) },
     },
     used: 2,
   };
@@ -11981,7 +11985,7 @@ function revealedHandChoiceAt(sentences, i, ctx) {
         ...some,
         destination: "exile",
         alsoFrom: { zone: "graveyard", ...some },
-        ...(castIt ? { mayCast: { duration: "while-exiled", spendAs: "any-color" } } : {}),
+        ...(castIt ? { mayPlay: { duration: "while-exiled", spendAs: "any-color" } } : {}),
       },
       used: castIt ? 3 : 2,
     };
@@ -12721,7 +12725,7 @@ function castNowTermsAt(sentences, i, ctx) {
             },
             duration: "until-source-cast",
           },
-          { kind: "allow-cast-from-exile", target: "source", whileExiled: true },
+          { kind: "grant-play", cards: "source", duration: "while-exiled" },
         ],
       },
       used: 2,
@@ -12762,8 +12766,9 @@ function castNowTermsAt(sentences, i, ctx) {
     const exiled = /^if that spell would be put into your graveyard, exile it instead\.$/i.test(sentences[i + 1] ?? "");
     return {
       effect: {
-        kind: "grant-graveyard-cast",
-        target: ctx.target({ kind: "card-in-graveyard", whose: "you", filter }),
+        kind: "grant-play",
+        cards: ctx.target({ kind: "card-in-graveyard", whose: "you", filter }),
+        duration: "end-of-turn",
         ...(untilEnd[1] !== undefined ? { free: true } : {}),
         ...(exiled ? { exileAfter: true } : {}),
       },
@@ -14765,7 +14770,7 @@ function parseFaceAsWritten(face, ctx = {}) {
       continue;
     }
     // The card's own graveyard permission with costs of its own (rule
-    // 601.2f — `castSelfFromGraveyard`): "You may cast ~ from your
+    // 601.2f — `mayPlaySelf`): "You may cast ~ from your
     // graveyard by paying 3 life and discarding a card in addition to paying
     // its other costs" (Demonic Embrace), "… by paying {2}{W} rather than
     // paying its mana cost" (Raffine's Guidance), "… if you pay {1} more to
@@ -14774,13 +14779,13 @@ function parseFaceAsWritten(face, ctx = {}) {
     if (castable) {
       const self = selfGraveyardCast(line);
       if (self !== null) {
-        out.castSelfFromGraveyard = self;
+        out.mayPlaySelf = self;
         continue;
       }
       // Its own permission over exile (Misthollow Griffin) or its library
       // during a search of it (Panglacial Wurm): rule 601.3.
       if (line === "You may cast ~ from exile.") {
-        out.castSelfFromExile = true;
+        out.mayPlaySelf = { from: ["exile"] };
         continue;
       }
       if (line === "While you're searching your library, you may cast ~ from your library.") {
@@ -16134,12 +16139,12 @@ function graveyardCastCost(part) {
  * "You may cast ~ from your graveyard [or from exile] [by … in addition to
  * paying its other costs | by paying {cost} [and …] rather than paying its
  * mana cost | if you pay {1} more to cast it for each other creature card
- * in your graveyard]." — a card's `castSelfFromGraveyard`, or `null`.
+ * in your graveyard]." — a card's `mayPlaySelf`, or `null`.
  */
 function selfGraveyardCast(line) {
   const m = /^You may cast ~ from your graveyard( or from exile)?(?: (.+))?\.$/.exec(line);
   if (m === null) return null;
-  const out = m[1] ? { fromExile: true } : {};
+  const out = { from: m[1] ? ["graveyard", "exile"] : ["graveyard"] };
   const rest = m[2];
   if (rest === undefined) return m[1] ? out : null;
   if (rest === "if you pay {1} more to cast it for each other creature card in your graveyard") {
@@ -16148,7 +16153,7 @@ function selfGraveyardCast(line) {
   let costs;
   let alt;
   if ((alt = /^by paying ((?:\{[^}]+\})+)(?: and (.+))? rather than paying its mana cost$/.exec(rest))) {
-    out.mana = alt[1];
+    out.byPaying = alt[1];
     costs = alt[2] === undefined ? [] : alt[2].split(/, and |, | and /);
   } else if ((alt = /^by (.+) in addition to paying its other costs$/.exec(rest))) {
     costs = alt[1].split(/, and |, | and /);
@@ -16268,13 +16273,13 @@ function granterNamingGrant(face, raw, ctx) {
  * (`grantsActivated`, `grantsTriggered`), as `maxSpeed()` writes them — save
  * one that works from the graveyard (702.178b), which keeps its place with
  * the condition, and "You may cast this card from your graveyard", the
- * card's `castFromGraveyardIf`. `null` for anything else, or anything the
+ * card's `mayPlaySelf`. `null` for anything else, or anything the
  * line's own reading left to a person. `gate` is the condition: `MAX_SPEED`,
  * or `HARNESSED` for an "∞ — [ability]" line (rule 702.186b).
  */
 function maxSpeedLine(face, inner, text, ctx, gate = MAX_SPEED) {
   if (normalize(inner, face.name) === "You may cast ~ from your graveyard.") {
-    return gate === MAX_SPEED ? { activated: [], static: [], card: { castFromGraveyardIf: gate } } : null;
+    return gate === MAX_SPEED ? { activated: [], static: [], card: { mayPlaySelf: { from: ["graveyard"], if: gate } } } : null;
   }
   const read = parseFace({ ...face, oracle_text: inner }, ctx);
   if (!read.complete || read.keywords.length > 0 || read.effect !== undefined) return null;
@@ -18210,10 +18215,11 @@ function parseStatic(line, text) {
   if ((m = /^You may (play lands and )?cast spells from among cards exiled with ~\.( If you cast a spell this way, you may spend mana as though it were mana of any color to cast it\.)?$/.exec(line))) {
     return {
       affects: { scope: "self" },
-      playFromExile: {
+      mayPlay: {
+        from: "exile",
         filter: {},
         linked: true,
-        ...(m[1] === undefined ? { castOnly: true } : {}),
+        ...(m[1] === undefined ? {} : { play: true }),
         ...(m[2] !== undefined ? { spendAs: "any-color" } : {}),
       },
       text,
@@ -18225,11 +18231,13 @@ function parseStatic(line, text) {
   if ((m = /^(During your turn, you|You) may play cards exiled with ~\.( If you cast a spell this way, pay life equal to its mana value rather than pay its mana cost\.)?$/.exec(line))) {
     return {
       affects: { scope: "self" },
-      playFromExile: {
+      mayPlay: {
+        from: "exile",
+        play: true,
         filter: {},
         linked: true,
         ...(m[1] === "You" ? {} : { yourTurnOnly: true }),
-        ...(m[2] === undefined ? {} : { payLifeManaValue: true }),
+        ...(m[2] === undefined ? {} : { byPayingLife: true }),
       },
       text,
     };
@@ -19281,7 +19289,7 @@ function parseStatic(line, text) {
   }
   // Abandoned Sarcophagus's two lines.
   if (line === "You may cast spells that have a cycling ability from your graveyard.") {
-    return { affects: { scope: "self" }, castFromGraveyard: { filter: { hasKeyword: "cycling" } }, text };
+    return { affects: { scope: "self" }, mayPlay: { from: "graveyard", filter: { hasKeyword: "cycling" } }, text };
   }
   // Graveyard hate (rule 614): "If a card or token would be put into a
   // graveyard from anywhere, exile it instead" (Rest in Peace), "a card …
@@ -20103,15 +20111,36 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // "Each instant and sorcery card in your hand has miracle {2}" (Lorehold, the
+  // Historian), "Nonland cards in your hand have miracle {0}" (Molecule Man).
+  if ((m = /^(Each instant and sorcery card|Nonland cards) in your hand ha(?:s|ve) miracle ((?:\{[^}]+\})+)\.$/.exec(line))) {
+    return {
+      affects: { scope: "self" },
+      grantsToHand: { filter: m[1] === "Nonland cards" ? { notTypes: ["land"] } : { typesAnyOf: ["instant", "sorcery"] }, miracle: { cost: m[2] } },
+      text,
+    };
+  }
+  // "You may cast spells from the top of your library by sacrificing a nonland
+  // permanent in addition to paying their other costs." (Into the Pit).
+  if (line === "You may cast spells from the top of your library by sacrificing a nonland permanent in addition to paying their other costs.") {
+    return { affects: { scope: "self" }, mayPlay: { from: "library-top", sacrifice: { notTypes: ["land"] } }, text };
+  }
+  // "Once each turn, you may cast a creature spell with power 2 or less from
+  // the top of your library." (Assemble the Players).
+  if ((m = /^Once each turn, you may cast an? (.+?) spell from the top of your library\.$/.exec(line))) {
+    const filter = parseTypePhrase(m[1]);
+    if (filter !== null) return { affects: { scope: "self" }, mayPlay: { from: "library-top", filter, oncePerTurn: true }, text };
+  }
   // Future Sight, Traveling Chocobo's Birds; Bolas's Citadel's "… pay life
   // equal to its mana value rather than pay its mana cost".
   if ((m = /^You may play lands and cast (?:([A-Z][a-z]+) )?spells from the top of your library\.( If you cast a spell this way, pay life equal to its mana value rather than pay its mana cost\.)?$/.exec(line))) {
     return {
       affects: { scope: "self" },
-      playFromLibraryTop: { type: "land" },
-      castFromLibraryTop: {
-        filter: m[1] === undefined ? {} : { subtype: m[1] },
-        ...(m[2] !== undefined ? { payLifeManaValue: true } : {}),
+      mayPlay: {
+        from: "library-top",
+        play: true,
+        ...(m[1] === undefined ? {} : { spell: { subtype: m[1] } }),
+        ...(m[2] !== undefined ? { byPayingLife: true } : {}),
       },
       text,
     };

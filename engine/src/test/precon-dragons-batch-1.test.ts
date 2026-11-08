@@ -152,10 +152,10 @@ describe("Outpost Siege", () => {
     cast(game, toHand(game, "Breath Weapon"));
     expect(life(game, B)).toBe(20);
     game.advanceUntil((s) => s.turn.number === 3 && s.turn.step === "draw");
-    const exiled = game.state.zones.shared.exile.filter((id) => game.state.objects[id].impulse !== undefined);
+    const exiled = game.state.zones.shared.exile.filter((id) => game.state.objects[id].playPermission !== undefined);
     expect(exiled).toHaveLength(1);
     game.advanceUntil((s) => s.turn.number === 4);
-    expect(game.state.zones.shared.exile.filter((id) => game.state.objects[id].impulse !== undefined)).toHaveLength(0);
+    expect(game.state.zones.shared.exile.filter((id) => game.state.objects[id].playPermission !== undefined)).toHaveLength(0);
   });
 
   it("Dragons: leaving along with the creatures, it looks back at its chosen side (603.10a)", () => {
@@ -181,7 +181,7 @@ describe("Count on Luck", () => {
     const { game } = setUp();
     spawn(game, "Count on Luck");
     game.advanceUntil((s) => s.turn.number === 3 && s.turn.step === "precombat-main");
-    const exiled = game.state.zones.shared.exile.filter((id) => game.state.objects[id].impulse !== undefined);
+    const exiled = game.state.zones.shared.exile.filter((id) => game.state.objects[id].playPermission !== undefined);
     expect(exiled).toHaveLength(1);
     expect(game.legalActions(A).some((x) => x.kind === "play-land" && x.card === exiled[0])).toBe(true);
   });

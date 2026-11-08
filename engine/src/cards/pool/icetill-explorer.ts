@@ -22,7 +22,7 @@ export default defineCard({
     },
     {
       affects: { scope: "self" },
-      playFromGraveyard: { type: "land" },
+      mayPlay: { from: "graveyard", play: true, filter: { type: "land" } },
       text: "You may play lands from your graveyard.",
     },
   ],

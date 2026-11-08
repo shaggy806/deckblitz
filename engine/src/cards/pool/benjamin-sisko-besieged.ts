@@ -19,8 +19,7 @@ export default defineCard({
     { affects: { scope: "self" }, visibility: { libraryTopRevealed: "you" }, text: REVEAL_TEXT },
     {
       affects: { scope: "self" },
-      playFromLibraryTop: { type: "land" },
-      castFromLibraryTop: { filter: { type: "creature" } },
+      mayPlay: { from: "library-top", play: true, spell: { type: "creature" } },
       text: PLAY_TEXT,
     },
   ],

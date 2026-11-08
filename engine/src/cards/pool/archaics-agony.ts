@@ -19,6 +19,7 @@ export default defineCard({
         kind: "impulse-exile",
         amount: { excessDamageThisWay: true, to: 0 },
         duration: "until-end-of-your-next-turn",
+        play: true,
       },
     ],
   },

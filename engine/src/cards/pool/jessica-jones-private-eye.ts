@@ -22,7 +22,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: true, addCounter: { kind: "stun", count: 1 } },
       targets: [],
-      effect: { kind: "impulse-exile", amount: { powerOf: "source" }, duration: "end-of-turn" },
+      effect: { kind: "impulse-exile", amount: { powerOf: "source" }, duration: "end-of-turn", play: true },
       resolve: null,
       text: EXILE_TEXT,
     },

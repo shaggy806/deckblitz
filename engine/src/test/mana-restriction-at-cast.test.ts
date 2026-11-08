@@ -36,7 +36,7 @@ const casts = (game: Game, card: ObjectId): Cast[] =>
 const castable = (game: Game, card: ObjectId): boolean => casts(game, card).length > 0;
 const pool = (game: Game): number => game.state.players[A].manaPool.length;
 const playable = (game: Game, card: ObjectId): void => {
-  game.state.objects[card].impulse = { player: A, expiry: { kind: "end-of-turn", turn: game.state.turn.number } };
+  game.state.objects[card].playPermission = { player: A, expiry: "end-of-turn", play: true };
 };
 
 describe("castFrom: where the spell is cast from", () => {
@@ -54,7 +54,7 @@ describe("castFrom: where the spell is cast from", () => {
     const top = toLibrary(game, "Grizzly Bears");
     enter(game, "Interdimensional Web Watch");
     expect(zone(game, top)).toBe("exile");
-    expect(game.state.objects[top].impulse).toBeDefined();
+    expect(game.state.objects[top].playPermission).toBeDefined();
   });
 
   it("Lord of the Forsaken's mana pays for a spell from your graveyard, not your hand", () => {

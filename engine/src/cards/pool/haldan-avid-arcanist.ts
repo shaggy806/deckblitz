@@ -31,12 +31,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      playFromExile: {
-        filter: { counters: { kind: "fetch", compare: { op: "gte", n: 1 } } },
-        exiledByYou: true,
-        spells: { notTypes: ["creature"] },
-        spendAs: "any-color",
-      },
+      mayPlay: { from: "exile", play: true, filter: { counters: { kind: "fetch", compare: { op: "gte", n: 1 } } }, exiledByYou: true, spell: { notTypes: ["creature"] }, spendAs: "any-color" },
       text: PLAY_TEXT,
     },
   ],

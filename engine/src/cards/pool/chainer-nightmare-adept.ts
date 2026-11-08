@@ -29,7 +29,7 @@ export default defineCard({
       effect: {
         kind: "player-effect",
         duration: "end-of-turn",
-        castFromGraveyard: { filter: { type: "creature" }, once: true },
+        mayPlay: { from: "graveyard", filter: { type: "creature" }, upTo: 1 },
       },
       oncePerTurn: true,
       resolve: null,

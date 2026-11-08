@@ -21,7 +21,7 @@ export default defineCard({
     {
       trigger: { on: "attacks-player", who: "you", defender: "any", filter: { token: true } },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "while-exiled", sourceDid: "attacked-with-a-token" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "while-exiled", play: true, sourceDid: "attacked-with-a-token" },
       resolve: null,
       text: "Whenever one or more tokens you control attack a player, exile the top card of your library. During any turn you attacked with a token, you may play that card.",
     },

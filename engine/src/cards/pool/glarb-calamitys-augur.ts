@@ -25,8 +25,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      playFromLibraryTop: { type: "land" },
-      castFromLibraryTop: { filter: { manaValue: { op: "gte", n: 4 } } },
+      mayPlay: { from: "library-top", play: true, spell: { manaValue: { op: "gte", n: 4 } } },
       text: PLAY_TEXT,
     },
   ],

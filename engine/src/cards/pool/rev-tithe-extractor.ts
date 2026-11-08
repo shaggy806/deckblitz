@@ -36,7 +36,6 @@ export default defineCard({
             amount: 1,
             whose: "trigger-player",
             duration: "while-exiled",
-            castOnly: true,
             faceDown: true,
           },
         ],

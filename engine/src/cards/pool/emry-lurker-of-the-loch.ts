@@ -33,7 +33,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: true },
       targets: [{ kind: "card-in-graveyard", whose: "you", filter: { type: "artifact" } }],
-      effect: { kind: "grant-graveyard-cast", target: 0 },
+      effect: { kind: "grant-play", cards: 0, duration: "end-of-turn" },
       resolve: null,
       text: "{T}: Choose target artifact card in your graveyard. You may cast that card this turn.",
     },

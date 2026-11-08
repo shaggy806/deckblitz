@@ -253,7 +253,7 @@ const DUNGEON_OF_THE_MAD_MAGE: DungeonDefinition = {
       next: [7],
       targets: [],
       // No end to the permission: for as long as they remain exiled.
-      effect: { kind: "impulse-exile", amount: 2, duration: "while-exiled" },
+      effect: { kind: "impulse-exile", amount: 2, duration: "while-exiled", play: true },
     },
     {
       name: "Muiral's Graveyard",

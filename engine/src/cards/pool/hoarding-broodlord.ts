@@ -25,7 +25,7 @@ export default defineCard({
         kind: "search-library",
         filter: {},
         destination: "exile-face-down",
-        playable: "while-exiled",
+        mayPlay: { duration: "while-exiled", play: true },
         min: 1,
         max: 1,
       },

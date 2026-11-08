@@ -32,7 +32,7 @@ const quiet = (game: Game) =>
 /** `card` (Bob's) in exile, Alice allowed to play it this turn. */
 const bobsExiled = (game: Game, name: string): ObjectId => {
   const card = game.debugSpawn(name, B, "exile");
-  game.state.objects[card].impulse = { player: A, expiry: { kind: "end-of-turn", turn: game.state.turn.number } };
+  game.state.objects[card].playPermission = { player: A, expiry: "end-of-turn", play: true };
   return card;
 };
 
@@ -80,6 +80,6 @@ describe("casting a card you don't own", () => {
     game.debugApplyEffect(B, { kind: "put-onto-battlefield", target: 0 }, [{ kind: "object", object: bears }]);
     game.debugApplyEffect(B, { kind: "exile", target: 0 }, [{ kind: "object", object: bears }]);
     expect(game.state.objects[bears].zone).toBe("exile");
-    expect(game.state.objects[bears].impulse).toBeUndefined();
+    expect(game.state.objects[bears].playPermission).toBeUndefined();
   });
 });

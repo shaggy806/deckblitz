@@ -7,7 +7,7 @@ const EXILE_TEXT =
 const DRAW_TEXT = "Whenever another player casts a spell from anywhere other than their hand, draw a card.";
 
 const TARGET: TargetSpec = { kind: "optional", of: "nonland-permanent" };
-const EXILE: EffectSpec = { kind: "exile", target: 0, mayCast: { duration: "while-exiled", byOwner: true } };
+const EXILE: EffectSpec = { kind: "exile", target: 0, mayPlay: { duration: "while-exiled", byOwner: true } };
 
 export default defineCard({
   name: "Aerial Extortionist",

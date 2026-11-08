@@ -30,7 +30,7 @@ export default defineCard({
       effect: {
         kind: "may",
         prompt: "Exile the top card of your library? You may play it until end of turn.",
-        effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn" },
+        effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn", play: true },
       },
       resolve: null,
       text: TEXT,

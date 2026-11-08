@@ -22,9 +22,9 @@ export default defineCard({
         kind: "roll-dice",
         sides: 20,
         table: [
-          { min: 1, max: 9, effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn" } },
-          { min: 10, max: 19, effect: { kind: "impulse-exile", amount: 2, duration: "end-of-turn" } },
-          { min: 20, effect: { kind: "impulse-exile", amount: 3, duration: "end-of-turn" } },
+          { min: 1, max: 9, effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn", play: true } },
+          { min: 10, max: 19, effect: { kind: "impulse-exile", amount: 2, duration: "end-of-turn", play: true } },
+          { min: 20, effect: { kind: "impulse-exile", amount: 3, duration: "end-of-turn", play: true } },
         ],
       },
       resolve: null,

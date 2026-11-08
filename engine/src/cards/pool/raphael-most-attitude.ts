@@ -28,7 +28,7 @@ export default defineCard({
       resolve: null,
       text: "Whenever Raphael attacks, until end of turn, you may play a card exiled with Raphael.",
       targets: [],
-      effect: { kind: "allow-cast-linked-exile", play: true },
+      effect: { kind: "player-effect", duration: "end-of-turn", mayPlay: { from: "exile", linked: true, play: true, upTo: 1 } },
     },
   ],
 });

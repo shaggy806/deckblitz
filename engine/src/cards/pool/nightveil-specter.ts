@@ -23,7 +23,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       text: "You may play lands and cast spells from among cards exiled with this creature.",
-      playFromExile: { filter: {}, linked: true },
+      mayPlay: { from: "exile", play: true, filter: {}, linked: true },
     },
   ],
 });

@@ -21,7 +21,7 @@ export default defineCard({
   keywords: ["reach"],
   text: `Reach\n${GRAVEYARD_TEXT}\n${DOUBLE_TEXT}`,
   static: [
-    { affects: { scope: "self" }, playFromGraveyard: { type: "land" }, text: GRAVEYARD_TEXT },
+    { affects: { scope: "self" }, mayPlay: { from: "graveyard", play: true, filter: { type: "land" } }, text: GRAVEYARD_TEXT },
     { affects: { scope: "self" }, doubleTriggers: { cause: "enters", filter: { type: "land" } }, text: DOUBLE_TEXT },
   ],
 });

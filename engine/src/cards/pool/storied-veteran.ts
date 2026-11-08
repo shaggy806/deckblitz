@@ -9,7 +9,7 @@ export default defineCard({
   power: 2,
   toughness: 1,
   text: "This creature can't block.\nYou may cast this card from your graveyard. If you do, it enters with a finality counter on it.",
-  castSelfFromGraveyard: {},
+  mayPlaySelf: { from: ["graveyard"] },
   static: [
     {
       affects: { scope: "self" },

@@ -47,6 +47,7 @@ import _poolArrest from "../pool/arrest.js";
 import _poolAshlingsCommand from "../pool/ashlings-command.js";
 import _poolAssaultronDominator from "../pool/assaultron-dominator.js";
 import _poolAssembleTheEntmoot from "../pool/assemble-the-entmoot.js";
+import _poolAssembleThePlayers from "../pool/assemble-the-players.js";
 import _poolAtemsisAllSeeing from "../pool/atemsis-all-seeing.js";
 import _poolAudaciousReshapers from "../pool/audacious-reshapers.js";
 import _poolAuraBarbs from "../pool/aura-barbs.js";
@@ -1031,6 +1032,7 @@ const shard: CardShard = {
     _poolAshlingsCommand,
     _poolAssaultronDominator,
     _poolAssembleTheEntmoot,
+    _poolAssembleThePlayers,
     _poolAtemsisAllSeeing,
     _poolAudaciousReshapers,
     _poolAuraBarbs,

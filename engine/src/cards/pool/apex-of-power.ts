@@ -29,7 +29,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "impulse-exile", amount: 7, duration: "end-of-turn", castOnly: true },
+      { kind: "impulse-exile", amount: 7, duration: "end-of-turn", },
       {
         kind: "conditional",
         condition: { kind: "source", filter: { castFrom: "hand" } },

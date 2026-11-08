@@ -11648,6 +11648,41 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Hex Magic: the exiled hand may be played',
+    board({
+      you: { bf: ['Mountain*3'], hand: ['Hex Magic', 'Forest', 'Lightning Bolt'], lib: ['Wastes*2'] },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    'Dawnhand Dissident: three counters to cast from its exile',
+    board({
+      you: { bf: ['Forest*2', 'Dawnhand Dissident', { name: 'Hill Giant', counters: { '-1/-1': 1 } }], gy: ['Grizzly Bears'] },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    'Lorehold, the Historian: a drawn instant has miracle {2}',
+    board({
+      you: { bf: ['Lorehold, the Historian', 'Mountain*2'], lib: ['Lightning Bolt'] },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    'Assemble the Players: one creature spell a turn from the top',
+    board({
+      you: { bf: ['Assemble the Players', 'Plains*4'], lib: ['Savannah Lions', 'Savannah Lions'] },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    'Into the Pit: a nonland permanent for the top card',
+    board({
+      you: { bf: ['Into the Pit', 'Swamp*3', 'Grizzly Bears'], lib: ['Terror'] },
+      opp: { bf: ['Hill Giant'] },
+    }),
+  ),
+  preset(
     'Nether Shadow: three creature cards above it',
     board({
       you: { bf: [], gy: ['Nether Shadow', 'Grizzly Bears*3'] },

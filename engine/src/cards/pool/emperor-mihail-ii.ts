@@ -21,7 +21,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      castFromLibraryTop: { filter: { subtype: "Merfolk" } },
+      mayPlay: { from: "library-top", filter: { subtype: "Merfolk" } },
       text: CAST_TEXT,
     },
   ],

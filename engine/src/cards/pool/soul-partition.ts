@@ -10,6 +10,6 @@ export default defineCard({
   effect: {
     kind: "exile",
     target: 0,
-    mayCast: { duration: "while-exiled", play: true, byOwner: true, tax: { generic: 2, opponentsOnly: true } },
+    mayPlay: { duration: "while-exiled", play: true, byOwner: true, tax: { generic: 2, opponentsOnly: true } },
   },
 });

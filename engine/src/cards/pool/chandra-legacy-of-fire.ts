@@ -40,7 +40,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "remove-counters", from: {}, counter: "loyalty", count: "any", among: true, perObject: 1 },
-          { kind: "impulse-exile", amount: { thisWay: "counters-removed" }, duration: "end-of-turn" },
+          { kind: "impulse-exile", amount: { thisWay: "counters-removed" }, duration: "end-of-turn", play: true },
         ],
       },
       resolve: null,

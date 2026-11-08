@@ -27,9 +27,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      playFromExile: {
-        filter: { ownedBy: "you", counters: { kind: "croak", compare: { op: "gte", n: 1 } } },
-      },
+      mayPlay: { from: "exile", play: true, filter: { ownedBy: "you", counters: { kind: "croak", compare: { op: "gte", n: 1 } } } },
       text: PLAY_TEXT,
     },
   ],

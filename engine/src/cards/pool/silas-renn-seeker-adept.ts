@@ -23,7 +23,7 @@ export default defineCard({
     {
       trigger: { on: "deals-combat-damage-to-player", who: "self" },
       targets: [{ kind: "card-in-graveyard", whose: "you", filter: { type: "artifact" } }],
-      effect: { kind: "grant-graveyard-cast", target: 0 },
+      effect: { kind: "grant-play", cards: 0, duration: "end-of-turn" },
       resolve: null,
       text:
         "Whenever Silas Renn deals combat damage to a player, choose target artifact card in " +

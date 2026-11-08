@@ -21,7 +21,6 @@ export default defineCard({
         amount: 1,
         whose: "each-opponent",
         duration: "end-of-turn",
-        castOnly: true,
         spendAs: "any-color",
       },
       resolve: null,

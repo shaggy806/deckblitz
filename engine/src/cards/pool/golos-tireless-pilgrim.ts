@@ -57,7 +57,7 @@ export default defineCard({
     {
       cost: { mana: "{2}{W}{U}{B}{R}{G}", tap: false },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 3, duration: "end-of-turn", free: { only: true } },
+      effect: { kind: "impulse-exile", amount: 3, duration: "end-of-turn", play: true, free: true },
       resolve: null,
       text: EXILE_TEXT,
     },

@@ -54,7 +54,7 @@ describe("Doc Aurlock, Grizzled Genius", () => {
     const { game } = table();
     spawn(game, "Doc Aurlock, Grizzled Genius");
     const divination = toGraveyard(game, "Divination", A);
-    game.debugApplyEffect(A, { kind: "grant-graveyard-cast", target: 0 }, [ref(divination)]);
+    game.debugApplyEffect(A, { kind: "grant-play", cards: 0, duration: "end-of-turn" }, [ref(divination)]);
     lands(game, "Island", 1);
     // {2}{U} with one Island: castable only reduced.
     expect(castable(game, divination)).toBe(true);

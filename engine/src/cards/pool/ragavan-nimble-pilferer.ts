@@ -40,7 +40,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "create-token", token: "Treasure Token", count: 1 },
-          { kind: "impulse-exile", amount: 1, whose: "trigger-player", duration: "end-of-turn", castOnly: true },
+          { kind: "impulse-exile", amount: 1, whose: "trigger-player", duration: "end-of-turn", },
         ],
       },
       resolve: null,

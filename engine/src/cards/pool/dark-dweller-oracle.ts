@@ -13,7 +13,7 @@ export default defineCard({
     {
       cost: { mana: "{1}", tap: false, sacrifice: "creature-you-control" },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn", play: true },
       resolve: null,
       text: "{1}, Sacrifice a creature: Exile the top card of your library. You may play that card this turn.",
     },

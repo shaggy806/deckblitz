@@ -38,6 +38,6 @@ export default defineCard({
       resolve: null,
       text: PROWESS_TEXT,
     },
-    valiant({ kind: "impulse-exile", amount: 1, duration: "end-of-turn" }, VALIANT_TEXT),
+    valiant({ kind: "impulse-exile", amount: 1, duration: "end-of-turn", play: true }, VALIANT_TEXT),
   ],
 });

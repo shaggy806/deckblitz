@@ -55,7 +55,7 @@ export default defineCard({
         destination: "exile",
         min: 0,
         max: { librarySize: "you" },
-        playable: { duration: "end-of-turn", free: true },
+        mayPlay: { duration: "end-of-turn", free: true },
       },
       resolve: null,
       text: ULT,

@@ -25,7 +25,7 @@ export default defineCard({
             kind: "reveal-until",
             filter: { notTypes: ["land"] },
             exile: true,
-            then: { kind: "allow-cast-from-exile", target: 0, plays: true },
+            then: { kind: "grant-play", cards: 0, duration: "end-of-turn", play: true },
             rest: "stay",
           },
           {

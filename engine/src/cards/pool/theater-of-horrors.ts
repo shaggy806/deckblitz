@@ -21,6 +21,7 @@ export default defineCard({
         duration: "while-source",
         yourTurnOnly: true,
         gate: { kind: "opponent-lost-life-this-turn" },
+        play: true,
       },
       resolve: null,
       text: "At the beginning of your upkeep, exile the top card of your library.",

@@ -14,7 +14,6 @@ const EFFECT = {
   kind: "impulse-exile",
   amount: 1,
   duration: "until-end-of-your-next-turn",
-  castOnly: true,
   filter: { type: "creature", subtype: "Goblin" },
 } as const;
 

@@ -22,7 +22,7 @@ export default defineCard({
         kind: "exile",
         target: 0,
         untilSourceLeaves: true,
-        mayCast: { duration: "while-exiled", spendAs: "any-type" },
+        mayPlay: { duration: "while-exiled", spendAs: "any-type" },
       },
       resolve: null,
       text: TEXT,

@@ -28,7 +28,7 @@ export default defineCard({
     {
       at: [3],
       targets: ["opponent"],
-      effect: { kind: "impulse-exile", amount: 3, duration: "end-of-turn", whose: 0 },
+      effect: { kind: "impulse-exile", amount: 3, duration: "end-of-turn", play: true, whose: 0 },
       resolve: null,
       text: III_TEXT,
     },

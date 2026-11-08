@@ -28,7 +28,6 @@ export default defineCard({
         kind: "impulse-exile",
         amount: 3,
         duration: "while-exiled",
-        castOnly: true,
         filter: { type: "creature" },
         gate: { kind: "controls", filter: { type: "planeswalker", subtype: "Lukka" }, atLeast: 1, countsSelf: true },
       },

@@ -14,7 +14,7 @@ describe("a graveyard cost reduction reads whose graveyard (Patrician Geist)", (
     const { game } = table();
     spawn(game, "Patrician Geist");
     const mine = toGraveyard(game, "Divination", A);
-    game.debugApplyEffect(A, { kind: "grant-graveyard-cast", target: 0 }, [ref(mine)]);
+    game.debugApplyEffect(A, { kind: "grant-play", cards: 0, duration: "end-of-turn" }, [ref(mine)]);
     lands(game, "Island", 2);
     // {2}{U} with two Islands: castable only reduced.
     expect(game.legalActions(A).some((l) => l.kind === "cast-spell" && l.card === mine)).toBe(true);

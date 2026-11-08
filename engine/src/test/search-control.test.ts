@@ -153,7 +153,7 @@ describe("Opposition Agent: they exile each card they find, and you may play the
     cast(game, toHand(game, "Rampant Growth", B), { player: B });
     expect(zone(game, forest)).toBe("exile");
     expect(game.state.objects[forest].exiledFaceDown).toBeUndefined();
-    expect(game.state.objects[forest].impulse).toMatchObject({ player: A, expiry: { kind: "while-exiled" }, spendAs: "any-color" });
+    expect(game.state.objects[forest].playPermission).toMatchObject({ player: A, expiry: "permanent", spendAs: "any-color" });
     expect(game.state.eventSeq).toBeGreaterThan(shuffles);
   });
 
@@ -212,8 +212,8 @@ describe("Opposition Agent: they exile each card they find, and you may play the
     cast(game, toHand(game, "Rampant Growth", B), { player: B });
     expect(seen.answering).toBe(C);
     expect(zone(game, forest)).toBe("exile");
-    expect(game.state.objects[forest].impulse).toMatchObject({ player: A, expiry: { kind: "while-exiled" }, spendAs: "any-color" });
-    expect(game.state.objects[forest].impulse?.castOnly).toBeUndefined();
+    expect(game.state.objects[forest].playPermission).toMatchObject({ player: A, expiry: "permanent", spendAs: "any-color" });
+    expect(game.state.objects[forest].playPermission?.play).toBe(true);
   });
 
   it("with two of one player's Agents, there's nothing to choose", () => {
@@ -224,7 +224,7 @@ describe("Opposition Agent: they exile each card they find, and you may play the
     lands(game, "Forest", 2, B);
     answerSearchAs(game, a, B, () => [forest]);
     cast(game, toHand(game, "Rampant Growth", B), { player: B });
-    expect(game.state.objects[forest].impulse?.player).toBe(A);
+    expect(game.state.objects[forest].playPermission?.player).toBe(A);
     expect(game.state.awaiting).toBeNull();
   });
 
@@ -311,7 +311,7 @@ describe("Opposition Agent's rulings", () => {
     expect(zone(game, sword)).toBe("exile");
     expect(game.state.objects[sword].attachedTo ?? null).toBeNull();
     expect(game.state.awaiting).toBeNull();
-    expect(game.state.objects[sword].impulse?.player).toBe(A);
+    expect(game.state.objects[sword].playPermission?.player).toBe(A);
   });
 
   it("an instruction to cast the find offers nothing: Sunforger's free cast", () => {
@@ -331,7 +331,7 @@ describe("Opposition Agent's rulings", () => {
     activate(game, sunforger, 0, { player: B });
     expect(offered).toBe(false);
     expect(zone(game, bolt)).toBe("exile");
-    expect(game.state.objects[bolt].impulse?.player).toBe(A);
+    expect(game.state.objects[bolt].playPermission?.player).toBe(A);
   });
 
   it("you still pay for it, and may not cast it without the mana", () => {

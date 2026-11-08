@@ -194,6 +194,7 @@ import _poolDarkBetrayal from "../pool/dark-betrayal.js";
 import _poolDawnGryff from "../pool/dawn-gryff.js";
 import _poolDawn from "../pool/dawn.js";
 import _poolDawnbringerCharioteers from "../pool/dawnbringer-charioteers.js";
+import _poolDawnhandDissident from "../pool/dawnhand-dissident.js";
 import _poolDaysquadMarshal from "../pool/daysquad-marshal.js";
 import _poolDazzlingAngel from "../pool/dazzling-angel.js";
 import _poolDead from "../pool/dead.js";
@@ -1207,6 +1208,7 @@ const shard: CardShard = {
     _poolDawnGryff,
     _poolDawn,
     _poolDawnbringerCharioteers,
+    _poolDawnhandDissident,
     _poolDaysquadMarshal,
     _poolDazzlingAngel,
     _poolDead,

@@ -23,6 +23,7 @@ export default defineCard({
     whose: "each-player",
     duration: "while-exiled",
     faceDown: true,
-    free: { only: true },
+    free: true,
+    play: true,
   },
 });

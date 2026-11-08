@@ -36,6 +36,7 @@ export default defineCard({
     whose: 0,
     duration: "until-end-of-your-next-turn",
     spendAs: "any-type",
+    play: true,
   },
   faces: ["Bloodsoaked Insight", "Sanguine Morass"],
 });

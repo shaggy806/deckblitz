@@ -29,7 +29,7 @@ export default defineCard({
     {
       at: [2, 3, 4, 5],
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn", play: true },
       resolve: null,
       text: MIDDLE_TEXT,
     },

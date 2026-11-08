@@ -35,7 +35,7 @@ export default defineCard({
     },
     {
       affects: { scope: "self" },
-      playFromLibraryTop: { type: "land" },
+      mayPlay: { from: "library-top", play: true, filter: { type: "land" } },
       text: TOP_TEXT,
     },
   ],

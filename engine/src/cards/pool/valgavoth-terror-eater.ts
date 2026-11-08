@@ -45,7 +45,7 @@ export default defineCard({
     },
     {
       affects: { scope: "self" },
-      playFromExile: { filter: {}, linked: true, yourTurnOnly: true, payLifeManaValue: true },
+      mayPlay: { from: "exile", play: true, filter: {}, linked: true, yourTurnOnly: true, byPayingLife: true },
       text: PLAY_TEXT,
     },
   ],

@@ -15,7 +15,7 @@ export default defineCard({
   colors: ["R"],
   types: ["sorcery"],
   text: `${IMPULSE_TEXT}\n${RETURN_TEXT}`,
-  effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn" },
+  effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn", play: true },
   triggered: [
     {
       fromGraveyard: true,

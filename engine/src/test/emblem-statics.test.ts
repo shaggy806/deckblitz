@@ -255,8 +255,7 @@ describe("cast and play permissions, off an emblem", () => {
     emblem(game, [
       {
         affects: { scope: "self" },
-        playFromGraveyard: { type: "land" },
-        castFromGraveyard: { filter: { typesAnyOf: ["artifact", "creature", "enchantment", "planeswalker", "battle"] } },
+        mayPlay: { from: "graveyard", play: true, filter: { typesAnyOf: ["land", "artifact", "creature", "enchantment", "planeswalker", "battle"] } },
         text: "You may play lands and cast permanent spells from your graveyard.",
       },
     ]);
@@ -279,7 +278,7 @@ describe("cast and play permissions, off an emblem", () => {
         alternativeCostForSpells: { mana: "{0}", when: { castFrom: "hand" } },
         text: "You may cast spells from your hand without paying their mana costs.",
       },
-      { affects: { scope: "self" }, castFromGraveyard: { filter: { type: "creature" } }, text: "for the test" },
+      { affects: { scope: "self" }, mayPlay: { from: "graveyard", filter: { type: "creature" } }, text: "for the test" },
     ]);
     const bears = toHand(game, "Grizzly Bears");
     const buried = toGraveyard(game, "Grizzly Bears");
@@ -368,9 +367,7 @@ describe("what is read off an emblem", () => {
     // The legend rule (`exemptFromLegendRule`) - Hall of Echoes' timed static.
     "legendRuleOff",
     // Permissions.
-    "playFromGraveyard",
-    "playFromLibraryTop",
-    "castFromGraveyard",
+    "mayPlay",
     "alternativeCostForSpells",
     "grantsToGraveyard",
     // Abilities for permanents and for spells.

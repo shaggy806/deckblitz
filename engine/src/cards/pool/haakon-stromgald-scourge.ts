@@ -20,12 +20,12 @@ export default defineCard({
   power: 3,
   toughness: 3,
   text: "You may cast this card from your graveyard, but not from anywhere else.\nAs long as Haakon is on the battlefield, you may cast Knight spells from your graveyard.\nWhen Haakon dies, you lose 2 life.",
-  castFromGraveyardIf: ALWAYS,
+  mayPlaySelf: { from: ["graveyard"], if: ALWAYS },
   castOnlyIf: { kind: "source-zone", zones: ["graveyard"] },
   static: [
     {
       affects: { scope: "self" },
-      castFromGraveyard: { filter: { subtype: "Knight" } },
+      mayPlay: { from: "graveyard", filter: { subtype: "Knight" } },
       text: "As long as Haakon is on the battlefield, you may cast Knight spells from your graveyard.",
     },
   ],

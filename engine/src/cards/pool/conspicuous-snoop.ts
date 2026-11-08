@@ -17,7 +17,7 @@ export default defineCard({
     },
     {
       affects: { scope: "self" },
-      castFromLibraryTop: { filter: { subtype: "Goblin" } },
+      mayPlay: { from: "library-top", filter: { subtype: "Goblin" } },
       text: "You may cast Goblin spells from the top of your library.",
     },
     {

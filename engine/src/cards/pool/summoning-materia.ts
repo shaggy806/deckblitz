@@ -26,7 +26,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "source", filter: { attachedTo: { type: "creature" } } },
-      castFromLibraryTop: { filter: { type: "creature" } },
+      mayPlay: { from: "library-top", filter: { type: "creature" } },
       text: CAST_TEXT,
     },
     {

@@ -37,6 +37,7 @@ export default defineCard({
         duration: "while-exiled",
         faceDown: true,
         spendAs: "any-color",
+        play: true,
       },
       resolve: null,
       text: CORRUPTED_TEXT,

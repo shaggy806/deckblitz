@@ -40,7 +40,7 @@ export default defineCard({
             condition: { kind: "this-way", what: "milled", filter: { type: "land" } },
             then: { kind: "create-token", token: "Treasure Token", count: 1 },
           },
-          { kind: "grant-graveyard-cast", cards: "milled-this-way", upTo: 1 },
+          { kind: "grant-play", cards: { thisWay: "milled" }, duration: "end-of-turn", upTo: 1 },
         ],
       },
       resolve: null,

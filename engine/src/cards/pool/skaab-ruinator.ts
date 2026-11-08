@@ -15,7 +15,7 @@ export default defineCard({
   // "You may cast this card from your graveyard": Gravecrawler's permission
   // with no condition (Haakon's ALWAYS); the cost is paid from there too, and
   // the card is on the stack as it's paid, so it can't exile itself (the rulings).
-  castFromGraveyardIf: { kind: "controls", filter: {}, atLeast: 0 },
+  mayPlaySelf: { from: ["graveyard"], if: { kind: "controls", filter: {}, atLeast: 0 } },
   text: "As an additional cost to cast this spell, exile three creature cards from your graveyard.\nFlying\nYou may cast this card from your graveyard.",
   additionalCost: { exileFromGraveyard: { count: 3, filter: { type: "creature" } } },
 });

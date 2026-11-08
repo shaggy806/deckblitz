@@ -29,7 +29,7 @@ export default defineCard({
   power: 4,
   toughness: 2,
   text: "As long as there are three or more different kinds of counters among creatures you control, this creature gets +2/+4.\nYou may cast this card from your graveyard. If you do, it enters with a finality counter on it. (If a creature with a finality counter on it would die, exile it instead.)",
-  castSelfFromGraveyard: {},
+  mayPlaySelf: { from: ["graveyard"] },
   static: [
     {
       affects: { scope: "self" },

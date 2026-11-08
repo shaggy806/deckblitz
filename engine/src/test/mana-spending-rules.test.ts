@@ -160,7 +160,7 @@ describe("a permission's spendAs is only for the spell cast under it (rule 118.1
     const theirs = game.debugSpawn("Grizzly Bears", B, "library");
     game.debugApplyEffect(
       A,
-      { kind: "impulse-exile", amount: 1, whose: "each-opponent", duration: "while-exiled", spendAs: "any-type" },
+      { kind: "impulse-exile", amount: 1, whose: "each-opponent", duration: "while-exiled", play: true, spendAs: "any-type" },
       [],
     );
     expect(game.state.objects[theirs].zone).toBe("exile");
@@ -180,7 +180,7 @@ describe("a permission's spendAs is only for the spell cast under it (rule 118.1
     const theirs = game.debugSpawn("Grizzly Bears", B, "library");
     game.debugApplyEffect(
       A,
-      { kind: "impulse-exile", amount: 1, whose: "each-opponent", duration: "while-exiled", spendAs: "any-color" },
+      { kind: "impulse-exile", amount: 1, whose: "each-opponent", duration: "while-exiled", play: true, spendAs: "any-color" },
       [],
     );
     for (const id of game.state.zones.shared.battlefield) {
@@ -200,7 +200,7 @@ describe("a permission's spendAs is only for the spell cast under it (rule 118.1
     const { game } = mkGame();
     mountains(game, 2);
     const theirs = game.debugSpawn("Grizzly Bears", B, "library");
-    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 1, whose: "each-opponent", duration: "while-exiled" }, []);
+    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 1, whose: "each-opponent", duration: "while-exiled", play: true }, []);
     expect(castable(game, theirs)).toBe(false);
   });
 
@@ -210,14 +210,14 @@ describe("a permission's spendAs is only for the spell cast under it (rule 118.1
     const colour = game.debugSpawn("Glaring Fleshraker", B, "library");
     game.debugApplyEffect(
       A,
-      { kind: "impulse-exile", amount: 1, whose: "each-opponent", duration: "while-exiled", spendAs: "any-color" },
+      { kind: "impulse-exile", amount: 1, whose: "each-opponent", duration: "while-exiled", play: true, spendAs: "any-color" },
       [],
     );
     expect(castable(game, colour)).toBe(false);
     const type = game.debugSpawn("Glaring Fleshraker", B, "library");
     game.debugApplyEffect(
       A,
-      { kind: "impulse-exile", amount: 1, whose: "each-opponent", duration: "while-exiled", spendAs: "any-type" },
+      { kind: "impulse-exile", amount: 1, whose: "each-opponent", duration: "while-exiled", play: true, spendAs: "any-type" },
       [],
     );
     expect(castable(game, type)).toBe(true);

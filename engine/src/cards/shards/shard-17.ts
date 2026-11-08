@@ -273,6 +273,7 @@ import _poolFableOfWolfAndOwl from "../pool/fable-of-wolf-and-owl.js";
 import _poolFaebloomTrick from "../pool/faebloom-trick.js";
 import _poolFaerieVandal from "../pool/faerie-vandal.js";
 import _poolFailure from "../pool/failure.js";
+import _poolFalcoSparaPactweaver from "../pool/falco-spara-pactweaver.js";
 import _poolFallenCleric from "../pool/fallen-cleric.js";
 import _poolFalseDemise from "../pool/false-demise.js";
 import _poolFanaticOfXenagos from "../pool/fanatic-of-xenagos.js";
@@ -540,6 +541,7 @@ import _poolMistwaySpy from "../pool/mistway-spy.js";
 import _poolMobRule from "../pool/mob-rule.js";
 import _poolMobileHomestead from "../pool/mobile-homestead.js";
 import _poolMoggMob from "../pool/mogg-mob.js";
+import _poolMoleculeMan from "../pool/molecule-man.js";
 import _poolMollyHayesRunaway from "../pool/molly-hayes-runaway.js";
 import _poolMomentOfTriumph from "../pool/moment-of-triumph.js";
 import _poolMonkIdealist from "../pool/monk-idealist.js";
@@ -1256,6 +1258,7 @@ const shard: CardShard = {
     _poolFaebloomTrick,
     _poolFaerieVandal,
     _poolFailure,
+    _poolFalcoSparaPactweaver,
     _poolFallenCleric,
     _poolFalseDemise,
     _poolFanaticOfXenagos,
@@ -1523,6 +1526,7 @@ const shard: CardShard = {
     _poolMobRule,
     _poolMobileHomestead,
     _poolMoggMob,
+    _poolMoleculeMan,
     _poolMollyHayesRunaway,
     _poolMomentOfTriumph,
     _poolMonkIdealist,

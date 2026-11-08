@@ -29,9 +29,9 @@ export default defineCard({
       text: "Whenever a creature you control deals combat damage to a player, draw a card.",
     },
   ],
-  castFromGraveyardIf: {
+  mayPlaySelf: { from: ["graveyard"], if: {
     kind: "controls",
     filter: { subtypes: ["Pirate", "Vehicle"], tapped: true },
     atLeast: 3,
-  },
+  } },
 });

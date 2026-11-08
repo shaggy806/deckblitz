@@ -40,7 +40,7 @@ import {
 
 /** The cards in exile that carry a play permission. */
 const playable = (game: Game): ObjectId[] =>
-  game.state.zones.shared.exile.filter((id) => game.state.objects[id].impulse !== undefined);
+  game.state.zones.shared.exile.filter((id) => game.state.objects[id].playPermission !== undefined);
 
 describe("Dawnhand Eulogist", () => {
   it("mills three; with an Elf card among them, each opponent loses 2 and you gain 2", () => {

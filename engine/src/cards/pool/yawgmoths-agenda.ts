@@ -30,8 +30,8 @@ export default defineCard({
       prohibits: { who: "you", spells: true, castLimit: 1 },
       text: ONE_TEXT,
     },
-    { affects: { scope: "self" }, playFromGraveyard: { type: "land" }, text: GRAVEYARD_TEXT },
-    { affects: { scope: "self" }, castFromGraveyard: { filter: {} }, text: GRAVEYARD_TEXT },
+    { affects: { scope: "self" }, mayPlay: { from: "graveyard", play: true, filter: { type: "land" } }, text: GRAVEYARD_TEXT },
+    { affects: { scope: "self" }, mayPlay: { from: "graveyard", filter: {} }, text: GRAVEYARD_TEXT },
     {
       affects: { scope: "self" },
       replacement: { event: "would-be-put-into-graveyard", instead: "exile", filter: { ownedBy: "you", token: false } },

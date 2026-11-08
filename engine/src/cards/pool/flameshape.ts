@@ -28,6 +28,7 @@ export default defineCard({
     duration: "while-exiled",
     faceDown: true,
     gate: { kind: "controls", filter: { subtype: "Wizard" }, atLeast: 1 },
+    play: true,
   },
   faces: ["Gandalf, Goblins' Bane", "Flameshape"],
   adventure: true,

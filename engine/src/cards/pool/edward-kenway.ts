@@ -48,6 +48,7 @@ export default defineCard({
         // Looked at, then exiled face down: only Edward's controller knows
         // what it is (rule 406.3).
         faceDown: true,
+        play: true,
       },
       resolve: null,
       text: "Whenever a Vehicle you control deals combat damage to a player, look at the top card of that player's library, then exile it face down. You may play that card for as long as it remains exiled.",

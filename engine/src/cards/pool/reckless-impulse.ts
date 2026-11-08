@@ -6,5 +6,5 @@ export default defineCard({
   colors: ["R"],
   types: ["sorcery"],
   text: "Exile the top two cards of your library. Until the end of your next turn, you may play those cards.",
-  effect: { kind: "impulse-exile", amount: 2, duration: "until-end-of-your-next-turn" },
+  effect: { kind: "impulse-exile", amount: 2, duration: "until-end-of-your-next-turn", play: true },
 });

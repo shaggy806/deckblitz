@@ -213,7 +213,7 @@ describe("top-5000 batch 25d — Haste Magic", () => {
     expect([c.power, c.toughness]).toEqual([5, 3]);
     expect(c.keywords.has("haste")).toBe(true);
     expect(zone(game, top)).toBe("exile");
-    expect(game.state.objects[top].impulse?.expiry).toEqual({ kind: "end-step-of", player: A });
+    expect(game.state.objects[top].playPermission?.expiry).toEqual({ untilPoint: { point: "end-step-begins", player: A } });
     expect(game.legalActions(A).some((x) => x.kind === "cast-spell" && x.card === top)).toBe(true);
   });
 });

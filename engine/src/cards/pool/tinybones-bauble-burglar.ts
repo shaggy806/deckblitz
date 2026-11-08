@@ -27,11 +27,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      playFromExile: {
-        filter: { ownedBy: "opponent", counters: { kind: "stash", compare: { op: "gte", n: 1 } } },
-        yourTurnOnly: true,
-        spendAs: "any-type",
-      },
+      mayPlay: { from: "exile", play: true, filter: { ownedBy: "opponent", counters: { kind: "stash", compare: { op: "gte", n: 1 } } }, yourTurnOnly: true, spendAs: "any-type" },
       text: PLAY_TEXT,
     },
   ],

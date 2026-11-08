@@ -25,7 +25,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: false, sacrifice: { filter: { subtype: "Treasure" } } },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "end-of-turn", play: true },
       resolve: null,
       text: SAC_TEXT,
     },

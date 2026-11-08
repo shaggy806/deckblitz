@@ -37,7 +37,7 @@ export default defineCard({
         max: 2,
         destination: "exile-face-down",
         unlinked: true,
-        playable: { duration: "while-exiled", spendAs: "any-type" },
+        mayPlay: { duration: "while-exiled", spendAs: "any-type", play: true },
         leftover: "bottom-random",
       },
       resolve: null,

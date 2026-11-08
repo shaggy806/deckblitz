@@ -466,6 +466,7 @@ import _poolLongFinnedSkywhale from "../pool/long-finned-skywhale.js";
 import _poolLongForgottenGohei from "../pool/long-forgotten-gohei.js";
 import _poolLoomingSpires from "../pool/looming-spires.js";
 import _poolLordWindgrace from "../pool/lord-windgrace.js";
+import _poolLoreholdTheHistorian from "../pool/lorehold-the-historian.js";
 import _poolLotlethTroll from "../pool/lotleth-troll.js";
 import _poolLotuslightDancers from "../pool/lotuslight-dancers.js";
 import _poolLoyalSubordinate from "../pool/loyal-subordinate.js";
@@ -1436,6 +1437,7 @@ const shard: CardShard = {
     _poolLongForgottenGohei,
     _poolLoomingSpires,
     _poolLordWindgrace,
+    _poolLoreholdTheHistorian,
     _poolLotlethTroll,
     _poolLotuslightDancers,
     _poolLoyalSubordinate,

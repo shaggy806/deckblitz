@@ -136,7 +136,7 @@ describe('"during any turn you put a lore counter on this Saga"', () => {
     lands(game, "Mountain", 1);
     const saga = spawn(game, "History of Benalia");
     const bolt = reachable(game);
-    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 1, duration: "while-exiled", sourceDid: "lore-counter" }, [], {
+    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 1, duration: "while-exiled", play: true, sourceDid: "lore-counter" }, [], {
       source: saga,
     });
     at(game, 2, "upkeep");
@@ -221,9 +221,9 @@ describe('"until you exile another card with this" (Furious Rise)', () => {
     at(game, 2, "upkeep");
     expect(zone(game, first)).toBe("exile");
     const other = spawn(game, "Furious Rise");
-    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 1, duration: "until-next-exile" }, [], { source: other });
+    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 1, duration: "until-next-exile", play: true }, [], { source: other });
     expect(playable(game, first)).toBe(true);
-    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 1, duration: "until-next-exile" }, [], { source: one });
+    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 1, duration: "until-next-exile", play: true }, [], { source: one });
     expect(playable(game, first)).toBe(false);
   });
 });
@@ -233,7 +233,7 @@ describe('"for as long as you control this" (Lightning, Victor Mancha)', () => {
     lands(game, "Mountain", 1);
     const source = spawn(game, "Lightning, Security Sergeant");
     const bolt = reachable(game);
-    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 1, duration: "while-you-control-source" }, [], { source });
+    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 1, duration: "while-you-control-source", play: true }, [], { source });
     return { source, bolt };
   };
 

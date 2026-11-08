@@ -56,7 +56,6 @@ export default defineCard({
         kind: "impulse-exile",
         amount: 1,
         duration: "while-exiled",
-        castOnly: true,
         gate: { kind: "cast-this-turn", who: "you", atLeast: 1 },
       },
       resolve: null,

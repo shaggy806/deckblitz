@@ -27,6 +27,7 @@ export default defineCard({
         duration: "while-source",
         whileSource: true,
         gate: { kind: "turn-stat", stat: "attacked", who: "you", atLeast: 1 },
+        play: true,
       },
       resolve: null,
       text: EXILE_TEXT,

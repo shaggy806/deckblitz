@@ -39,7 +39,7 @@ export default defineCard({
         ],
       },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 2, duration: "end-of-turn", choose: 1 },
+      effect: { kind: "impulse-exile", amount: 2, duration: "end-of-turn", play: true, choose: 1 },
       resolve: null,
       text: TEXT,
     },

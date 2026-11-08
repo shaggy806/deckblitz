@@ -25,8 +25,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      playFromLibraryTop: { type: "land", supertype: "snow" },
-      castFromLibraryTop: { filter: { supertype: "snow" } },
+      mayPlay: { from: "library-top", play: true, filter: { supertype: "snow" } },
       text: PLAY_TEXT,
     },
   ],

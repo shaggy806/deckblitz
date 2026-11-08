@@ -33,7 +33,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: true, payEnergy: 2 },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "until-next-exile" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "until-next-exile", play: true },
       resolve: null,
       text: EXILE_TEXT,
     },

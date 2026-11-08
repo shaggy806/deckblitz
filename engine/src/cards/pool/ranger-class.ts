@@ -17,7 +17,7 @@ export default defineCard({
   text: `(Gain the next level as a sorcery to add its ability.)\n${ENTER}\n{1}{G}: Level 2\n${ATTACK}\n{3}{G}: Level 3\n${LOOK}\n${CAST}`,
   static: [
     atLevel(3, { affects: { scope: "self" }, visibility: { looksAtOwnLibraryTop: true }, text: LOOK }),
-    atLevel(3, { affects: { scope: "self" }, castFromLibraryTop: { filter: { type: "creature" } }, text: CAST }),
+    atLevel(3, { affects: { scope: "self" }, mayPlay: { from: "library-top", filter: { type: "creature" } }, text: CAST }),
   ],
   triggered: [
     {

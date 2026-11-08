@@ -25,5 +25,5 @@ export default defineCard({
       text: ANTHEM_TEXT,
     },
   ],
-  castFromGraveyardIf: MAX_SPEED_CONDITION,
+  mayPlaySelf: { from: ["graveyard"], if: MAX_SPEED_CONDITION },
 });

@@ -19,5 +19,5 @@ export default defineCard({
   types: ["sorcery"],
   text: "Exile the top X cards of target opponent's library. You may play those cards this turn. If you cast a spell this way, pay life equal to its mana value rather than pay its mana cost.",
   targets: ["opponent"],
-  effect: { kind: "impulse-exile", amount: "x", duration: "end-of-turn", whose: 0, payLifeManaValue: true },
+  effect: { kind: "impulse-exile", amount: "x", duration: "end-of-turn", play: true, whose: 0, byPayingLife: true },
 });

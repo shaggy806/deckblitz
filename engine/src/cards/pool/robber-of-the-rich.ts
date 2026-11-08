@@ -31,7 +31,6 @@ export default defineCard({
         amount: 1,
         whose: "trigger-player",
         duration: "while-exiled",
-        castOnly: true,
         spendAs: "any-color",
         yourTurnOnly: true,
         gate: {

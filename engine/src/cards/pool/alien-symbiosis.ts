@@ -12,7 +12,7 @@ export default defineCard({
   subtypes: ["Aura"],
   text: `Enchant creature\n${PUMP}\n${GRAVEYARD}`,
   targets: ["creature"],
-  castSelfFromGraveyard: { discard: 1 },
+  mayPlaySelf: { from: ["graveyard"], discard: 1 },
   static: [
     {
       affects: { scope: "attached" },

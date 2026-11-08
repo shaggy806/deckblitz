@@ -22,11 +22,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      castFromGraveyard: {
-        filter: {},
-        yourTurnOnly: true,
-        perType: ["artifact", "creature", "enchantment", "land", "planeswalker", "battle"],
-      },
+      mayPlay: { from: "graveyard", filter: {}, yourTurnOnly: true, perType: ["artifact", "creature", "enchantment", "land", "planeswalker", "battle"] },
       text:
         "During each of your turns, you may play a land and cast a permanent spell of each " +
         "permanent type from your graveyard.",

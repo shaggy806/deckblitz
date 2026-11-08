@@ -25,8 +25,7 @@ export default defineCard({
     { affects: { scope: "self" }, visibility: { looksAtOwnLibraryTop: true }, text: LOOK_TEXT },
     {
       affects: { scope: "self" },
-      playFromLibraryTop: { type: "land" },
-      castFromLibraryTop: { filter: { subtype: "Bird" } },
+      mayPlay: { from: "library-top", play: true, spell: { subtype: "Bird" } },
       text: PLAY_TEXT,
     },
     {

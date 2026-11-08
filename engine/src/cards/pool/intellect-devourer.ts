@@ -33,7 +33,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       text: "Body Thief — You may play lands and cast spells from among cards exiled with this creature. If you cast a spell this way, you may spend mana as though it were mana of any color to cast it.",
-      playFromExile: { filter: {}, linked: true, spendAs: "any-color" },
+      mayPlay: { from: "exile", play: true, filter: {}, linked: true, spendAs: "any-color" },
     },
   ],
 });

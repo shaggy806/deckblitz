@@ -21,9 +21,9 @@ export default defineCard({
       text: "This creature can't block and can't be blocked.",
     },
   ],
-  castFromGraveyardIf: {
+  mayPlaySelf: { from: ["graveyard"], if: {
     kind: "controls",
     filter: { anyOf: [{ colors: ["B"] }, { colors: ["G"] }] },
     atLeast: 1,
-  },
+  } },
 });

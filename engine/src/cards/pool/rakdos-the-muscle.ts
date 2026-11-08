@@ -58,6 +58,7 @@ export default defineCard({
         whose: 0,
         duration: "until-your-next-end-step",
         spendAs: "any-type",
+        play: true,
       },
       resolve: null,
       text: SAC_TRIGGER_TEXT,

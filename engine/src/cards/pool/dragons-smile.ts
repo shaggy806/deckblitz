@@ -29,7 +29,7 @@ export default defineCard({
     {
       trigger: { on: "deals-combat-damage-to-player", who: "self" },
       targets: [],
-      effect: { kind: "impulse-exile", amount: { triggerValue: true }, whose: "trigger-player", duration: "end-of-turn" },
+      effect: { kind: "impulse-exile", amount: { triggerValue: true }, whose: "trigger-player", duration: "end-of-turn", play: true },
       resolve: null,
       text: DAMAGE,
     },

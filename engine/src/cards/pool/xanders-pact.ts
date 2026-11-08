@@ -14,7 +14,6 @@ export default defineCard({
     amount: 1,
     duration: "end-of-turn",
     whose: "each-opponent",
-    castOnly: true,
-    payLifeManaValue: true,
+    byPayingLife: true,
   },
 });

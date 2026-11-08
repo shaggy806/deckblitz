@@ -23,5 +23,5 @@ export default defineCard({
   text: `${COST_TEXT}\n${EFFECT_TEXT}`,
   additionalCost: { exileFromHandReduces: { filter: { colors: ["R"] }, each: 2 } },
   targets: [],
-  effect: { kind: "impulse-exile", amount: "x", duration: "until-end-of-your-next-turn", upTo: 2 },
+  effect: { kind: "impulse-exile", amount: "x", duration: "until-end-of-your-next-turn", play: true, upTo: 2 },
 });

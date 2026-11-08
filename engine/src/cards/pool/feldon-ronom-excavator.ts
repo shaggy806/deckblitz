@@ -26,7 +26,7 @@ export default defineCard({
       targets: [],
       // "That many" is the damage dealt (Body of Knowledge's amount); the
       // rest stay exiled with no permission (Tectonic Giant's `choose`).
-      effect: { kind: "impulse-exile", amount: { triggerValue: true }, duration: "until-end-of-your-next-turn", choose: 1 },
+      effect: { kind: "impulse-exile", amount: { triggerValue: true }, duration: "until-end-of-your-next-turn", play: true, choose: 1 },
       resolve: null,
       text: DAMAGE_TEXT,
     },

@@ -228,7 +228,7 @@ describe("attacks while saddled: value", () => {
     const { mount } = saddledMount(game, "Gila Courser", ["Llanowar Elves"]);
     attack(game, a, [mount]);
     expect(zone(game, top)).toBe("exile");
-    expect(game.state.objects[top].impulse).toBeDefined();
+    expect(game.state.objects[top].playPermission).toBeDefined();
   });
 
   it("Gloryheath Lynx finds a basic Plains", () => {

@@ -18,7 +18,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      castFromLibraryTop: { filter: { anyOf: [{ type: "artifact" }, { colorless: true }] } },
+      mayPlay: { from: "library-top", filter: { anyOf: [{ type: "artifact" }, { colorless: true }] } },
       text: CAST_TEXT,
     },
   ],

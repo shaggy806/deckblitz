@@ -451,6 +451,13 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
       return onPlayers(you, effect.destination === "graveyard" ? 0.5 : CARD, ctx);
     case "look-and-choose":
       return onPlayers(you, effect.destination === "library-top" ? 0.5 : 1.5, ctx);
+    // Cards exiled with leave to play them: most of a card each, less if it's
+    // only for this turn, when it may be too expensive to use.
+    case "impulse-exile":
+      return onPlayers(you, (effect.duration === "end-of-turn" ? 0.5 : 0.75) * CARD * sizeOf(effect.amount), ctx);
+    // Leave to play named cards from where they are.
+    case "grant-play":
+      return onPlayers(you, 0.5, ctx);
     case "return-from-graveyard":
       return onPlayers(you, CARD * (effect.count === "all" ? 2 : typeof effect.count === "number" ? effect.count : 2), ctx);
     case "put-onto-battlefield":
@@ -580,8 +587,8 @@ export function onlyUntilEndOfTurn(effect: EffectSpec | null | undefined): boole
     // their mana costs", "players can't gain life this turn") still matters
     // after combat, where a pump no longer does.
     // "Until end of turn, you may cast …" (Idol of Endurance).
-    case "allow-cast-linked-exile":
-      return true;
+    case "player-effect":
+      return effect.mayPlay?.linked === true;
     // Matters only to this turn's combat damage (Gurzigost).
     case "assign-as-though-unblocked":
       return true;

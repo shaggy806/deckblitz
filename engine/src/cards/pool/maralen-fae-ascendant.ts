@@ -35,14 +35,13 @@ export default defineCard({
         amount: 2,
         whose: 0,
         duration: "end-of-turn",
-        castOnly: true,
         filter: {
           manaValue: {
             op: "lte",
             n: { amount: { countOf: { subtypes: ["Elf", "Faerie"], controlledBy: "you" } } },
           },
         },
-        free: { only: true },
+        free: true,
         whileSource: true,
         oncePerTurn: true,
       },

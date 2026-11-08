@@ -22,7 +22,7 @@ export default defineCard({
     {
       trigger: { on: "exerted", who: "self", asItAttacks: true },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 2, duration: "until-end-of-your-next-turn" },
+      effect: { kind: "impulse-exile", amount: 2, duration: "until-end-of-your-next-turn", play: true },
       resolve: null,
       text: EXERT_TEXT,
     },

@@ -21,7 +21,7 @@ const TRIGGER_TEXT =
 const EXILE_TOP = {
   kind: "sequence",
   effects: [
-    { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn", castOnly: true },
+    { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn", },
     {
       kind: "conditional",
       condition: { kind: "this-way", what: "exiled", filter: { type: "land" } },

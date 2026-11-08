@@ -42,6 +42,7 @@ export default defineCard({
                 kind: "impulse-exile",
                 amount: { countersOn: "source", counter: "skewer" },
                 duration: "end-of-turn",
+                play: true,
               },
             },
           },

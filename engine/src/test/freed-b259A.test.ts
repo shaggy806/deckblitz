@@ -801,7 +801,7 @@ describe("regeneration", () => {
 describe("spell copies", () => {
   const fromExile = (game: Game, name: string): ObjectId => {
     const card = toLibrary(game, name);
-    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 1, duration: "end-of-turn" }, []);
+    game.debugApplyEffect(A, { kind: "impulse-exile", amount: 1, duration: "end-of-turn", play: true }, []);
     settle(game);
     expect(zone(game, card)).toBe("exile");
     return card;

@@ -28,7 +28,7 @@ export default defineCard({
       loyaltyCost: -3,
       cost: { mana: null, tap: false },
       targets: [{ kind: "card-in-graveyard", whose: "you", filter: { typesAnyOf: ["instant", "sorcery"] } }],
-      effect: { kind: "grant-graveyard-cast", target: 0, exileAfter: true },
+      effect: { kind: "grant-play", cards: 0, duration: "end-of-turn", exileAfter: true },
       resolve: null,
       text: MINUS,
     },

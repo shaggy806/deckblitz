@@ -29,6 +29,7 @@ export default defineCard({
         amount: 1,
         duration: "end-of-turn",
         free: { filter: { subtype: "Equipment" } },
+        play: true,
       },
       resolve: null,
       text: TEXT,

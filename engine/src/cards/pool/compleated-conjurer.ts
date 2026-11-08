@@ -25,7 +25,7 @@ export default defineCard({
     {
       trigger: { on: "transforms", who: "self", intoFront: false },
       targets: [],
-      effect: { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn" },
+      effect: { kind: "impulse-exile", amount: 1, duration: "until-end-of-your-next-turn", play: true },
       resolve: null,
       text: TEXT,
     },

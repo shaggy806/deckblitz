@@ -37,6 +37,7 @@ export default defineCard({
         amount: 1,
         duration: "while-exiled",
         gate: { kind: "controls", filter: { subtype: "Kavu" }, atLeast: 1 },
+        play: true,
       },
       resolve: null,
       text: ENTER_TEXT,

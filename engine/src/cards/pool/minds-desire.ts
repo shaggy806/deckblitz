@@ -30,7 +30,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "shuffle-library" },
-      { kind: "impulse-exile", amount: 1, duration: "end-of-turn", free: { only: true } },
+      { kind: "impulse-exile", amount: 1, duration: "end-of-turn", play: true, free: true },
     ],
   },
   triggered: [

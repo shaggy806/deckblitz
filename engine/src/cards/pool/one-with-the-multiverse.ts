@@ -12,7 +12,7 @@ export default defineCard({
   looksAtOwnLibraryTop: true,
   text: `${LOOK_TEXT}\n${PLAY_TEXT}\n${FREE_TEXT}`,
   static: [
-    { affects: { scope: "self" }, playFromLibraryTop: { type: "land" }, castFromLibraryTop: { filter: {} }, text: PLAY_TEXT },
+    { affects: { scope: "self" }, mayPlay: { from: "library-top", play: true }, text: PLAY_TEXT },
     {
       affects: { scope: "self" },
       alternativeCostForSpells: {

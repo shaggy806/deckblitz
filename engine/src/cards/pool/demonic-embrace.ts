@@ -25,5 +25,5 @@ export default defineCard({
       text: BUFF_TEXT,
     },
   ],
-  castSelfFromGraveyard: { payLife: 3, discard: 1 },
+  mayPlaySelf: { from: ["graveyard"], payLife: 3, discard: 1 },
 });

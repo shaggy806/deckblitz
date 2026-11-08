@@ -33,7 +33,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      playFromGraveyard: { type: "land", subtype: "Desert" },
+      mayPlay: { from: "graveyard", play: true, filter: { type: "land", subtype: "Desert" } },
       text: PLAY_TEXT,
     },
   ],

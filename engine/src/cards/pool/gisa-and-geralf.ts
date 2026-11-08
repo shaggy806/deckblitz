@@ -26,12 +26,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      castFromGraveyard: {
-        filter: { type: "creature", subtype: "Zombie" },
-        // "Once during each of your turns" is both gates at once.
-        oncePerTurn: true,
-        yourTurnOnly: true,
-      },
+      mayPlay: { from: "graveyard", filter: { type: "creature", subtype: "Zombie" }, oncePerTurn: true, yourTurnOnly: true },
       text:
         "Once during each of your turns, you may cast a Zombie creature spell from " +
         "your graveyard.",

@@ -30,7 +30,7 @@ export default defineCard({
         max: 1,
         destination: "exile",
         unlinked: true,
-        playable: { duration: "end-of-turn" },
+        mayPlay: { duration: "end-of-turn", play: true },
         leftover: "bottom-random",
       },
     ],

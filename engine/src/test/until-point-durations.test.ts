@@ -336,8 +336,8 @@ describe('exile target creature, "until the end of your next turn" (Hurl Through
     const bears = spawn(game, "Grizzly Bears", B);
     cast(game, toHand(game, "Hurl Through Hell"), { targets: [ref(bears)] });
     at(game, 3, "end");
-    expect(game.state.objects[bears].impulse).toBeDefined();
+    expect(game.state.objects[bears].playPermission).toBeDefined();
     at(game, 4, "upkeep", B);
-    expect(game.state.objects[bears].impulse).toBeUndefined();
+    expect(game.state.objects[bears].playPermission).toBeUndefined();
   });
 });

@@ -21,5 +21,5 @@ export default defineCard({
       text: "This creature can't block.",
     },
   ],
-  castFromGraveyardIf: { kind: "controls", filter: { subtype: "Zombie" }, atLeast: 1 },
+  mayPlaySelf: { from: ["graveyard"], if: { kind: "controls", filter: { subtype: "Zombie" }, atLeast: 1 } },
 });
