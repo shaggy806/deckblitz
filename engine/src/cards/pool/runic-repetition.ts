@@ -11,6 +11,6 @@ export default defineCard({
   colors: ["U"],
   types: ["sorcery"],
   text: TEXT,
-  targets: [{ kind: "card-in-exile", whose: "you", filter: { hasFlashback: true } }],
+  targets: [{ kind: "card-in-exile", whose: "you", filter: { hasKeyword: "flashback" } }],
   effect: { kind: "return-to-hand", target: 0, from: "exile" },
 });

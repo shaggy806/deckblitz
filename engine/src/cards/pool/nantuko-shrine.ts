@@ -12,7 +12,7 @@ export default defineCard({
     {
       trigger: { on: "cast-spell", who: "any" },
       targets: [],
-      effect: { kind: "create-token", token: "Squirrel Token", count: { countInGraveyard: { sameNameAsTriggerObject: true } }, who: "trigger-controller" },
+      effect: { kind: "create-token", token: "Squirrel Token", count: { countInGraveyard: { sameNameWith: "trigger-object" } }, who: "trigger-controller" },
       resolve: null,
       text: "Whenever a player casts a spell, that player creates X 1/1 green Squirrel creature tokens, where X is the number of cards in all graveyards with the same name as that spell.",
     },

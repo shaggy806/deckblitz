@@ -10,7 +10,7 @@ export default defineCard({
   colors: ["U"],
   types: ["sorcery"],
   text: "Return up to two target cards with cycling from your graveyard to your hand.",
-  targets: distinctTargets(2, { kind: "card-in-graveyard", whose: "you", filter: { hasCycling: true } }, { optional: true }),
+  targets: distinctTargets(2, { kind: "card-in-graveyard", whose: "you", filter: { hasKeyword: "cycling" } }, { optional: true }),
   effect: {
     kind: "sequence",
     simultaneous: true,

@@ -57,6 +57,7 @@ import _poolAzizaMageTowerCaptain from "../pool/aziza-mage-tower-captain.js";
 import _poolAzoriusChancery from "../pool/azorius-chancery.js";
 import _poolAzoriusKnightArbiter from "../pool/azorius-knight-arbiter.js";
 import _poolBackInTown from "../pool/back-in-town.js";
+import _poolBackslide from "../pool/backslide.js";
 import _poolBalustradeWurm from "../pool/balustrade-wurm.js";
 import _poolBanefulOmen from "../pool/baneful-omen.js";
 import _poolBanishToAnotherUniverse from "../pool/banish-to-another-universe.js";
@@ -1054,6 +1055,7 @@ const shard: CardShard = {
     _poolAzoriusChancery,
     _poolAzoriusKnightArbiter,
     _poolBackInTown,
+    _poolBackslide,
     _poolBalustradeWurm,
     _poolBanefulOmen,
     _poolBanishToAnotherUniverse,

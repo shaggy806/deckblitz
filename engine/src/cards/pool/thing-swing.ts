@@ -11,5 +11,5 @@ export default defineCard({
   targets: ["creature-you-control", "creature-an-opponent-controls"],
   targetCostReduction: { filter: { subtype: "Hero", controlledBy: "you" }, reduceGeneric: 2 },
   // Read as it resolves; with the first target gone it deals nothing.
-  effect: { kind: "damage", amount: { product: [{ powerOf: 0 }, 2] }, target: 1, from: { target: 0 } },
+  effect: { kind: "damage", amount: { product: [{ powerOf: 0 }, 2] }, target: 1, from: 0 },
 });

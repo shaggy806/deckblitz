@@ -21,7 +21,7 @@ export default defineCard({
       { kind: "destroy", target: 0 },
       {
         kind: "conditional",
-        condition: { kind: "sacrificed", filter: { subtype: "Vehicle" } },
+        condition: { kind: "object-matches", object: { paid: "sacrificed" }, filter: { subtype: "Vehicle" } },
         then: { kind: "draw", amount: 1 },
       },
     ],

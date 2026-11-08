@@ -11,7 +11,7 @@ export default defineCard({
   targets: ["creature"],
   effect: {
     kind: "each-player-may",
-    who: { controllerOfTarget: 0 },
+    who: { controllerOf: 0 },
     choices: [
       {
         text: "Have Blazing Salvo deal 5 damage to you.",

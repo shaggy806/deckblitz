@@ -33,6 +33,7 @@ import _poolAncientCrab from "../pool/ancient-crab.js";
 import _poolAncientExcavation from "../pool/ancient-excavation.js";
 import _poolAngelOfDespair from "../pool/angel-of-despair.js";
 import _poolAngelicIntervention from "../pool/angelic-intervention.js";
+import _poolAnjeFalkenrath from "../pool/anje-falkenrath.js";
 import _poolAnticognition from "../pool/anticognition.js";
 import _poolAnuridMurkdiver from "../pool/anurid-murkdiver.js";
 import _poolAoTheDawnSky from "../pool/ao-the-dawn-sky.js";
@@ -1033,6 +1034,7 @@ const shard: CardShard = {
     _poolAncientExcavation,
     _poolAngelOfDespair,
     _poolAngelicIntervention,
+    _poolAnjeFalkenrath,
     _poolAnticognition,
     _poolAnuridMurkdiver,
     _poolAoTheDawnSky,

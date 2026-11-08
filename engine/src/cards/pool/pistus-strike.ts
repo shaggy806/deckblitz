@@ -16,7 +16,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "destroy", target: 0 },
-      { kind: "add-player-counters", counter: "poison", who: { controllerOfTarget: 0 }, amount: 1 },
+      { kind: "add-player-counters", counter: "poison", who: { controllerOf: 0 }, amount: 1 },
     ],
   },
 });

@@ -22,7 +22,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "counter", target: 0 },
-          { kind: "manifest-dread", who: { controllerOfTarget: 0 } },
+          { kind: "manifest-dread", who: { controllerOf: 0 } },
         ],
       },
       resolve: null,

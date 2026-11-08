@@ -1,7 +1,7 @@
 /**
  * The fourth precon pass:
  *
- * - `search-library { who: { controllerOfTarget } }` (Path to Exile).
+ * - `search-library { who: { controllerOf } }` (Path to Exile).
  * - `EffectAmount` `{ devotionTo }` (rule 700.5 — Gray Merchant of Asphodel)
  *   and `{ product }`, which is what lets "life equal to the life lost this
  *   way" multiply devotion by the number of opponents.

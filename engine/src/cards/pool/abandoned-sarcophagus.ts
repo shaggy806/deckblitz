@@ -20,14 +20,14 @@ export default defineCard({
   types: ["artifact"],
   text: `${CAST_TEXT}\n${EXILE_TEXT}`,
   static: [
-    { affects: { scope: "self" }, castFromGraveyard: { filter: { hasCycling: true } }, text: CAST_TEXT },
+    { affects: { scope: "self" }, castFromGraveyard: { filter: { hasKeyword: "cycling" } }, text: CAST_TEXT },
     {
       affects: { scope: "self" },
       replacement: {
         event: "would-be-put-into-graveyard",
         instead: "exile",
         notCycled: true,
-        filter: { ownedBy: "you", token: false, hasCycling: true },
+        filter: { ownedBy: "you", token: false, hasKeyword: "cycling" },
       },
       text: EXILE_TEXT,
     },

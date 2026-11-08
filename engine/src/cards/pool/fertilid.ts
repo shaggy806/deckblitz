@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 // EDHREC rank 3053.
 //
 // The target player needn't find a basic land, but shuffles either way (the
-// ruling) — Assassin's Trophy's `who: { controllerOfTarget }`, a player slot
+// ruling) — Assassin's Trophy's `who: { controllerOf }`, a player slot
 // naming that player.
 const ENTER_TEXT = "This creature enters with two +1/+1 counters on it.";
 const SEARCH_TEXT =
@@ -31,7 +31,7 @@ export default defineCard({
       targets: ["player"],
       effect: {
         kind: "search-library",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         filter: { supertype: "basic", type: "land" },
         destination: "battlefield",
         enterTapped: true,

@@ -13,7 +13,7 @@ export default defineCard({
       trigger: { on: "leaves-battlefield", who: "any", filter: { token: false }, to: ["graveyard"] },
       targets: [],
       resolve: null,
-      effect: { kind: "lose-life", amount: 1, who: "trigger-owner" },
+      effect: { kind: "lose-life", amount: 1, who: { ownerOf: "trigger-object" } },
       text: TEXT,
     },
   ],

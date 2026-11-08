@@ -4,7 +4,7 @@ import { defineCard } from "../define.js";
 //
 // One target: the others with its name (rule 201.2a) aren't targeted, so
 // protection or hexproof doesn't save them, and they're affected in the same
-// event as the target (`CardFilter.sameNameAsTarget`). An illegal target
+// event as the target (`CardFilter.sameNameWith`). An illegal target
 // means the spell doesn't resolve at all; a face-down target has no name and
 // goes alone.
 
@@ -17,7 +17,7 @@ export default defineCard({
   targets: ["creature"],
   effect: {
     kind: "modify-pt-all",
-    filter: { type: "creature", sameNameAsTarget: 0 },
+    filter: { type: "creature", sameNameWith: 0 },
     power: -2,
     toughness: -2,
     duration: "end-of-turn",

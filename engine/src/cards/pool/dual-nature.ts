@@ -25,7 +25,7 @@ export default defineCard({
     {
       trigger: { on: "leaves-battlefield", who: "any", filter: { type: "creature", token: false } },
       targets: [],
-      effect: { kind: "exile-all", filter: { token: true, sameNameAsTriggerObject: true } },
+      effect: { kind: "exile-all", filter: { token: true, sameNameWith: "trigger-object" } },
       resolve: null,
       text: NAMESAKES,
     },

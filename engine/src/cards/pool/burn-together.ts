@@ -20,7 +20,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "damage", amount: { powerOf: 0 }, target: 1, from: { target: 0 } },
+      { kind: "damage", amount: { powerOf: 0 }, target: 1, from: 0 },
       { kind: "sacrifice-target", target: 0 },
     ],
   },

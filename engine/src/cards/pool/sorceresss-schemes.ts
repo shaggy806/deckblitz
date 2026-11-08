@@ -15,7 +15,7 @@ export default defineCard({
       kind: "one-of",
       of: [
         { kind: "card-in-graveyard", whose: "you", filter: { typesAnyOf: ["instant", "sorcery"] } },
-        { kind: "card-in-exile", whose: "you", filter: { hasFlashback: true } },
+        { kind: "card-in-exile", whose: "you", filter: { hasKeyword: "flashback" } },
       ],
     },
   ],

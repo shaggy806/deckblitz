@@ -22,7 +22,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "conditional",
-        condition: { kind: "sacrificed", filter: { suspected: true } },
+        condition: { kind: "object-matches", object: { paid: "sacrificed" }, filter: { suspected: true } },
         then: { kind: "draw", amount: 2 },
         else: { kind: "draw", amount: 1 },
       },

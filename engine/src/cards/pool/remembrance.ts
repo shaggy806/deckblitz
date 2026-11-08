@@ -21,7 +21,7 @@ export default defineCard({
         prompt: "Search your library for a card with the same name as that creature?",
         effect: {
           kind: "search-library",
-          filter: { sameNameAsTriggerObject: true },
+          filter: { sameNameWith: "trigger-object" },
           destination: "hand",
           min: 0,
           max: 1,

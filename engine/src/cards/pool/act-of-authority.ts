@@ -33,7 +33,7 @@ export default defineCard({
           kind: "sequence",
           effects: [
             { kind: "exile", target: 0 },
-            { kind: "gain-control", target: "source", untilEndOfTurn: false, who: { controllerOfTarget: 0 } },
+            { kind: "gain-control", target: "source", untilEndOfTurn: false, who: { controllerOf: 0 } },
           ],
         },
       },

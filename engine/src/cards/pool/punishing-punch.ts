@@ -18,5 +18,5 @@ export default defineCard({
     reduceGeneric: 2,
   },
   targets: ["creature-you-control", "creature-an-opponent-controls"],
-  effect: { kind: "damage", amount: { product: [{ powerOf: 0 }, 2] }, target: 1, from: { target: 0 } },
+  effect: { kind: "damage", amount: { product: [{ powerOf: 0 }, 2] }, target: 1, from: 0 },
 });

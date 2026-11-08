@@ -24,7 +24,7 @@ export default defineCard({
       {
         kind: "delayed-trigger",
         at: "next-upkeep",
-        controller: { controllerOfTarget: 0 },
+        controller: { controllerOf: 0 },
         effect: { kind: "may", effect: { kind: "draw", amount: 2 }, prompt: "Draw two cards?" },
         text: "Draw up to two cards (Arcane Denial).",
       },

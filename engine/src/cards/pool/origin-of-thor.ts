@@ -49,7 +49,7 @@ export default defineCard({
     {
       at: [3],
       targets: ["creature-you-control"],
-      effect: { kind: "damage", who: "each-opponent", amount: { powerOf: 0 }, from: { target: 0 } },
+      effect: { kind: "damage", who: "each-opponent", amount: { powerOf: 0 }, from: 0 },
       resolve: null,
       text: CHAPTER_III,
     },

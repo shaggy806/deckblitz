@@ -2,7 +2,7 @@
  * "Its controller draws / discards / gets a poison counter" (the need-keys
  * `effect:player-scope-extensions` group): a `draw`'s `who`, a `discard`'s
  * `target` and an `add-player-counters`' `who` naming one player through a
- * target slot (`{ controllerOfTarget: n }`), read as the permanent last
+ * target slot (`{ controllerOf: n }`), read as the permanent last
  * existed once it has left the battlefield (rule 608.2h).
  */
 import { describe, expect, it } from "vitest";

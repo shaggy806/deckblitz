@@ -25,7 +25,7 @@ export default defineCard({
       // is no one to ask and nothing happens.
       effect: {
         kind: "each-player-may",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         prompt: "Sacrifice it? (If you don't, Star Athlete deals 5 damage to you.)",
         effect: { kind: "sacrifice-target", target: 0 },
         ifDidnt: { kind: "damage", amount: 5, who: "that-player" },

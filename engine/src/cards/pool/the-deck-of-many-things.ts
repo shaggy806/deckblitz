@@ -50,7 +50,7 @@ export default defineCard({
               then: {
                 kind: "delayed-trigger",
                 at: { leaves: 0, to: ["graveyard"] },
-                effect: { kind: "lose-game", who: "trigger-owner" },
+                effect: { kind: "lose-game", who: { ownerOf: "trigger-object" } },
                 text: "When that creature dies, its owner loses the game.",
               },
             },

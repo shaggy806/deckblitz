@@ -17,7 +17,7 @@ export default defineCard({
       { kind: "put-on-library", target: 0, position: "top" },
       {
         kind: "each-player-may",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         options: [
           {
             putFromHand: { typesAnyOf: ["artifact", "creature", "enchantment", "land"] },

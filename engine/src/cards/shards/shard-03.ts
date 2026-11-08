@@ -32,6 +32,7 @@ import _poolArcaneEndeavor from "../pool/arcane-endeavor.js";
 import _poolArcaneEpiphany from "../pool/arcane-epiphany.js";
 import _poolArcaneProxy from "../pool/arcane-proxy.js";
 import _poolArcboundSlith from "../pool/arcbound-slith.js";
+import _poolArchnemesis from "../pool/archnemesis.js";
 import _poolArchonOfCruelty from "../pool/archon-of-cruelty.js";
 import _poolArchonsGlory from "../pool/archons-glory.js";
 import _poolArgentMutation from "../pool/argent-mutation.js";
@@ -938,6 +939,7 @@ const shard: CardShard = {
     _poolArcaneEpiphany,
     _poolArcaneProxy,
     _poolArcboundSlith,
+    _poolArchnemesis,
     _poolArchonOfCruelty,
     _poolArchonsGlory,
     _poolArgentMutation,

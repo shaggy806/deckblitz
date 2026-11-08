@@ -17,7 +17,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "tap", target: 0 },
-      { kind: "damage", amount: { powerOf: 0 }, who: "active-player", from: { target: 0 } },
+      { kind: "damage", amount: { powerOf: 0 }, who: "active-player", from: 0 },
       { kind: "damage-rule", to: { target: 0 }, combat: true },
       { kind: "damage-rule", by: { target: 0 }, combat: true },
     ],

@@ -18,7 +18,7 @@ export default defineCard({
     simultaneous: true,
     effects: [
       { kind: "damage", amount: "x", target: 0 },
-      { kind: "damage", amount: { sum: [5, { product: ["x", -1] }] }, who: { controllerOfTarget: 0 } },
+      { kind: "damage", amount: { sum: [5, { product: ["x", -1] }] }, who: { controllerOf: 0 } },
     ],
   },
 });

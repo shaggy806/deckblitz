@@ -22,7 +22,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "as-player",
-        who: "attached-controller",
+        who: { controllerOf: "attached" },
         effect: {
           kind: "sequence",
           effects: [

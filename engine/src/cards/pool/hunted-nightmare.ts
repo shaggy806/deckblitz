@@ -31,7 +31,7 @@ export default defineCard({
           {
             kind: "for-each-voted",
             which: "voted",
-            effect: { kind: "add-counter", target: 0, counter: "deathtouch", amount: 1, by: { controllerOfTarget: 0 } },
+            effect: { kind: "add-counter", target: 0, counter: "deathtouch", amount: 1, by: { controllerOf: 0 } },
           },
         ],
       },

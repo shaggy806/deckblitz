@@ -27,7 +27,7 @@ export default defineCard({
             { kind: "attach", target: 1, attachment: 0 },
             {
               kind: "conditional",
-              condition: { kind: "target", index: 0, filter: { attachedToTarget: 1 } },
+              condition: { kind: "target", index: 0, filter: { attachedToObject: 1 } },
               then: {
                 kind: "delayed-trigger",
                 at: "next-end-step",

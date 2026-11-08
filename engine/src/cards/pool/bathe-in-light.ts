@@ -15,7 +15,7 @@ export default defineCard({
   effect: {
     kind: "grant-protection",
     target: 0,
-    filter: { type: "creature", sharesColorWithTarget: 0 },
+    filter: { type: "creature", sharesColorWith: 0 },
     from: { choose: "color" },
     duration: "end-of-turn",
   },

@@ -16,7 +16,7 @@ export default defineCard({
       { kind: "counter", target: 0 },
       {
         kind: "each-player-may",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         prompt: "Draw a card?",
         effect: { kind: "draw", amount: 1 },
       },

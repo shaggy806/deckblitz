@@ -16,7 +16,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "unless", chooser: 0, options: [{ pay: "{1}", text: "Pay {1}" }], otherwise: { kind: "counter", target: 0 } },
-      { kind: "discard", target: { controllerOfTarget: 0 }, amount: 1 },
+      { kind: "discard", target: { controllerOf: 0 }, amount: 1 },
     ],
   },
 });

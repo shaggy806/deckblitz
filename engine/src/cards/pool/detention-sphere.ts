@@ -4,7 +4,7 @@ import { defineCard } from "../define.js";
 //
 // Two linked abilities (rule 607.2a), Worldgorger Dragon's shape: the exile
 // is "with this" stint (`linked`), the target's namesakes — lands too, the
-// ruling — going untargeted with it (`CardFilter.sameNameAsTarget`). If the
+// ruling — going untargeted with it (`CardFilter.sameNameWith`). If the
 // Sphere leaves before its enters trigger resolves, the return finds nothing
 // and the cards stay exiled for good (the ruling).
 
@@ -26,7 +26,7 @@ export default defineCard({
       effect: {
         kind: "may",
         prompt: "Exile the target and every permanent with its name?",
-        effect: { kind: "exile-all", filter: { sameNameAsTarget: 0 }, linked: true },
+        effect: { kind: "exile-all", filter: { sameNameWith: 0 }, linked: true },
       },
       resolve: null,
       text: ENTER_TEXT,

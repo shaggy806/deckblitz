@@ -50,7 +50,7 @@ export default defineCard({
         filter: { type: "creature" },
         amount: { powerOf: 0 },
         exceptSource: true,
-        from: { target: 0 },
+        from: 0,
       },
       {
         kind: "conditional",

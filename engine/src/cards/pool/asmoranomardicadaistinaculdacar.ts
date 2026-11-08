@@ -41,7 +41,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: false, sacrifice: { filter: { subtype: "Food" }, count: 2 } },
       targets: ["creature"],
-      effect: { kind: "damage", amount: 6, target: 0, from: { target: 0 } },
+      effect: { kind: "damage", amount: 6, target: 0, from: 0 },
       resolve: null,
       text: SACRIFICE_TEXT,
     },

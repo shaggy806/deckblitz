@@ -19,7 +19,7 @@ export default defineCard({
     effect: {
       kind: "conditional",
       condition: { kind: "target-legal", index: 0 },
-      then: { kind: "damage", amount: { product: [{ powerOf: 0 }, 2] }, target: 1, from: { target: 0 } },
+      then: { kind: "damage", amount: { product: [{ powerOf: 0 }, 2] }, target: 1, from: 0 },
     },
   },
 });

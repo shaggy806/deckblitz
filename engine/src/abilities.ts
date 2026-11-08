@@ -531,7 +531,7 @@ export interface AbilityCost {
    * that asks. `shareColor` (a fixed `count` only) is Illuminated Folio's
    * "Reveal two cards from your hand that share a color" (see
    * `BeholdSpec.shareColor`). The effect reads the cards as `{ paid: "revealed" }`
-   * ({@link AmountRef}) when there's one.
+   * ({@link ObjectRef}) when there's one.
    */
   readonly reveal?: {
     readonly count: number | "x";

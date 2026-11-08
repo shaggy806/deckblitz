@@ -57,7 +57,7 @@ export default defineCard({
           { kind: "lose-life", amount: 1, target: 0 },
           {
             kind: "conditional",
-            condition: { kind: "sacrificed", filter: { supertype: "legendary" } },
+            condition: { kind: "object-matches", object: { paid: "sacrificed" }, filter: { supertype: "legendary" } },
             then: { kind: "amass", amount: 2, creatureType: "Orc" },
           },
         ],

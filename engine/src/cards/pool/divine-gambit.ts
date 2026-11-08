@@ -18,7 +18,7 @@ export default defineCard({
       { kind: "exile", target: 0 },
       {
         kind: "each-player-may",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         options: [
           {
             putFromHand: { notTypes: ["instant", "sorcery"] },

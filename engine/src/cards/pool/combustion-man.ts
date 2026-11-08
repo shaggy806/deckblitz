@@ -25,7 +25,7 @@ export default defineCard({
       targets: ["permanent"],
       effect: {
         kind: "each-player-may",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         choices: [
           {
             text: "Have Combustion Man deal damage to you equal to his power.",

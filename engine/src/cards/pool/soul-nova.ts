@@ -13,7 +13,7 @@ export default defineCard({
     kind: "sequence",
     simultaneous: true,
     effects: [
-      { kind: "exile-all", filter: { subtype: "Equipment", attachedToTarget: 0 } },
+      { kind: "exile-all", filter: { subtype: "Equipment", attachedToObject: 0 } },
       { kind: "exile", target: 0 },
     ],
   },

@@ -18,7 +18,7 @@ export default defineCard({
       { kind: "put-onto-battlefield", target: 0 },
       {
         kind: "conditional",
-        condition: { kind: "sacrificed", filter: { subtype: "Thrull" } },
+        condition: { kind: "object-matches", object: { paid: "sacrificed" }, filter: { subtype: "Thrull" } },
         then: { kind: "add-counter", target: 0, counter: "+2/+2", amount: 1 },
       },
     ],

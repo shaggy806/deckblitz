@@ -1,5 +1,5 @@
 /**
- * A chooser named by a target slot (`ChosenPlayerRef`): a `for-each-player`
+ * A chooser named by a target slot (`PlayerRef`): a `for-each-player`
  * about one targeted player — "target opponent exiles a card from their
  * hand" (Skullcap Snail), where the `look-and-choose` inside is theirs — and
  * a `vote`'s `choose` asked of one targeted player — "target opponent

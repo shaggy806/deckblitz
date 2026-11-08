@@ -20,7 +20,7 @@ export default defineCard({
     kind: "damage",
     amount: { powerOf: 0 },
     target: 1,
-    from: { target: 0 },
+    from: 0,
     excessToController: { ifSourceHas: "trample" },
   },
 });

@@ -34,7 +34,7 @@ export default defineCard({
           { kind: "return-to-hand", target: 0 },
           {
             kind: "for-each-player",
-            who: { ownerOfTarget: 0 },
+            who: { ownerOf: 0 },
             effect: {
               kind: "look-and-choose",
               player: "that-player",

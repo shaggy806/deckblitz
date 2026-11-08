@@ -3440,7 +3440,7 @@ export class HeuristicBotController extends AutomaticController {
     if (sweeps.length === 0) return false;
     const me = this.playerId;
     // "Each *other* creature", dealt by a creature the spell targets (Chandra's
-    // Ignition: `exceptSource` with `from: { target: n }`): that creature is
+    // Ignition: `exceptSource` with `from: n`): that creature is
     // spared, and deals damage equal to its power. Only the offer is known
     // here, not the target, so it's taken to be our most powerful creature,
     // the one the spell is cast for. Read as taking that creature too, the
@@ -3459,7 +3459,7 @@ export class HeuristicBotController extends AutomaticController {
               : best,
           );
     const dealtByTarget = (sweep: (typeof sweeps)[number]): boolean =>
-      sweep.kind === "damage-all" && sweep.exceptSource === true && typeof sweep.from === "object";
+      sweep.kind === "damage-all" && sweep.exceptSource === true && typeof sweep.from === "number";
     return state.zones.shared.battlefield.some((id) => {
       if (state.objects[id]?.controller !== me) return false;
       if (!counts(id)) return false;

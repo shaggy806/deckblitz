@@ -13,7 +13,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "shuffle-into-library", target: 0 },
-      { kind: "draw", amount: 2, who: { ownerOfTarget: 0 } },
+      { kind: "draw", amount: 2, who: { ownerOf: 0 } },
     ],
   },
 });

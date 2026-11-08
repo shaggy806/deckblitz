@@ -15,7 +15,7 @@ export default defineCard({
       targets: ["player-or-planeswalker"],
       effect: {
         kind: "conditional",
-        condition: { kind: "discarded", filter: { type: "land" } },
+        condition: { kind: "object-matches", object: { paid: "discarded" }, filter: { type: "land" } },
         then: { kind: "damage", amount: 2, target: 0 },
       },
       resolve: null,

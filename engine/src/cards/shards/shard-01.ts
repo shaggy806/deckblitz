@@ -545,6 +545,7 @@ import _poolNarrowEscape from "../pool/narrow-escape.js";
 import _poolNathsBuffoon from "../pool/naths-buffoon.js";
 import _poolNeglectedManor from "../pool/neglected-manor.js";
 import _poolNestingGrounds from "../pool/nesting-grounds.js";
+import _poolNetherShadow from "../pool/nether-shadow.js";
 import _poolNight from "../pool/night.js";
 import _poolNightscapeMaster from "../pool/nightscape-master.js";
 import _poolNimShambler from "../pool/nim-shambler.js";
@@ -1524,6 +1525,7 @@ const shard: CardShard = {
     _poolNathsBuffoon,
     _poolNeglectedManor,
     _poolNestingGrounds,
+    _poolNetherShadow,
     _poolNight,
     _poolNightscapeMaster,
     _poolNimShambler,

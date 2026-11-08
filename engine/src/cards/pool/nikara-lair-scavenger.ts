@@ -20,7 +20,7 @@ export default defineCard({
         // "… **may** search": that player's choice, so declining neither
         // searches nor shuffles their library.
         kind: "each-player-may",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         prompt: "Search your library for a card named Yannik, Scavenging Sentinel?",
         effect: {
           kind: "search-library",

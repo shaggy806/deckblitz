@@ -1,7 +1,7 @@
 import { defineCard } from "../define.js";
 
 // "Enchanted player" is the player this Curse is attached to
-// (`"attached-controller"` on an Aura attached to a player).
+// (`{ controllerOf: "attached" }` on an Aura attached to a player).
 
 const UPKEEP_TEXT =
   "At the beginning of your upkeep, put a judgment counter on this Aura. Then if there are three or more judgment counters on it, enchanted player loses the game.";
@@ -26,7 +26,7 @@ export default defineCard({
           {
             kind: "conditional",
             condition: { kind: "source", filter: { counters: { kind: "judgment", compare: { op: "gte", n: 3 } } } },
-            then: { kind: "lose-game", who: "attached-controller" },
+            then: { kind: "lose-game", who: { controllerOf: "attached" } },
           },
         ],
       },

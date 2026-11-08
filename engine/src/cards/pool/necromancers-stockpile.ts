@@ -19,7 +19,7 @@ export default defineCard({
           { kind: "draw", amount: 1 },
           {
             kind: "conditional",
-            condition: { kind: "discarded", filter: { subtype: "Zombie" } },
+            condition: { kind: "object-matches", object: { paid: "discarded" }, filter: { subtype: "Zombie" } },
             then: { kind: "create-token", token: "Zombie Token", count: 1, tapped: true },
           },
         ],

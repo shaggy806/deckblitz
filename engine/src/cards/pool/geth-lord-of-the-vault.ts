@@ -35,7 +35,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "put-onto-battlefield", target: 0, underYourControl: true, enterTapped: true },
-          { kind: "mill", target: { ownerOfTarget: 0 }, amount: "x" },
+          { kind: "mill", target: { ownerOf: 0 }, amount: "x" },
         ],
       },
       text:

@@ -11,7 +11,7 @@ export default defineCard({
     kind: "search-library",
     filter: {
       typesAnyOf: ["artifact", "creature", "enchantment", "land", "planeswalker", "battle"],
-      sameNameAsTarget: 0,
+      sameNameWith: 0,
     },
     destination: "battlefield",
     min: 0,

@@ -29,7 +29,7 @@ export default defineCard({
       targets: ["player"],
       effect: {
         kind: "each-player-may",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         choices: [
           {
             text: "Put a card from your hand on top of your library.",

@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 // EDHREC rank 22924.
 //
 // One target; the creatures sharing its name (rule 201.2a) are dealt the
-// damage too, targeted or not (`CardFilter.sameNameAsTarget`).
+// damage too, targeted or not (`CardFilter.sameNameWith`).
 
 export default defineCard({
   name: "Homing Lightning",
@@ -12,5 +12,5 @@ export default defineCard({
   types: ["instant"],
   text: "Homing Lightning deals 4 damage to target creature and each other creature with the same name as that creature.",
   targets: ["creature"],
-  effect: { kind: "damage-all", filter: { type: "creature", sameNameAsTarget: 0 }, amount: 4 },
+  effect: { kind: "damage-all", filter: { type: "creature", sameNameWith: 0 }, amount: 4 },
 });

@@ -14,8 +14,8 @@ export default defineCard({
   targets: [{ kind: "permanent", whose: "opponent", filter: {} }],
   effect: {
     kind: "search-library",
-    whose: { controllerOfTarget: 0 },
-    filter: { sameNameAsTarget: 0 },
+    whose: { controllerOf: 0 },
+    filter: { sameNameWith: 0 },
     destination: "battlefield",
     min: 0,
     max: 1,

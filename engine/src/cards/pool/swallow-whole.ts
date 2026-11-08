@@ -27,7 +27,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "exile", target: 0 },
-      { kind: "add-counter", target: "tapped", counter: "+1/+1", amount: 1 },
+      { kind: "add-counter", target: { paid: "tapped" }, counter: "+1/+1", amount: 1 },
     ],
   },
 });

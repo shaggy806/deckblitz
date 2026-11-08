@@ -13,7 +13,7 @@ export default defineCard({
       { kind: "destroy", target: 0 },
       {
         kind: "each-player-may",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         prompt: "Copy Chain of Acid? (You may choose a new target for the copy.)",
         effect: { kind: "copy-spell", target: "source", newTargets: true },
       },

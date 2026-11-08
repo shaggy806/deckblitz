@@ -15,5 +15,5 @@ export default defineCard({
   text: "Affinity for Frogs (This spell costs {1} less to cast for each Frog you control.)\nTarget creature you control deals damage equal to twice its power to target creature you don't control.",
   selfCostReduction: affinity({ subtype: "Frog" }),
   targets: ["creature-you-control", "creature-an-opponent-controls"],
-  effect: { kind: "damage", amount: { product: [{ powerOf: 0 }, 2] }, target: 1, from: { target: 0 } },
+  effect: { kind: "damage", amount: { product: [{ powerOf: 0 }, 2] }, target: 1, from: 0 },
 });

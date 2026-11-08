@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 // EDHREC rank 16751.
 //
 // By name only (rule 201.2a), not land type — the ruling
-// (`CardFilter.sameNameAsTarget`).
+// (`CardFilter.sameNameWith`).
 
 export default defineCard({
   name: "Wake of Destruction",
@@ -12,5 +12,5 @@ export default defineCard({
   types: ["sorcery"],
   text: "Destroy target land and all other lands with the same name as that land.",
   targets: ["land"],
-  effect: { kind: "destroy-all", filter: { type: "land", sameNameAsTarget: 0 } },
+  effect: { kind: "destroy-all", filter: { type: "land", sameNameWith: 0 } },
 });

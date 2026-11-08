@@ -1,7 +1,7 @@
 import { defineCard } from "../define.js";
 
 // The permanent is chosen and the colors compared as this resolves, not as damage
-// is dealt (the rulings). `sharesColorWithTarget` also matches the object itself,
+// is dealt (the rulings). `sharesColorWith` also matches the object itself,
 // so a colorless creature must be kept out: it shares no color even with itself.
 
 const TEXT =
@@ -29,7 +29,7 @@ export default defineCard({
         prompt: "Choose a permanent you control",
         then: {
           kind: "conditional",
-          condition: { kind: "target", index: 1, filter: { sharesColorWithTarget: 0, colorless: false } },
+          condition: { kind: "target", index: 1, filter: { sharesColorWith: 0, colorless: false } },
           then: { kind: "damage-rule", by: { target: 1 }, combat: true },
         },
       },

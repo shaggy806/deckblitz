@@ -10,7 +10,7 @@ import { defineCard } from "../define.js";
 // is blank. The legal ones are exiled together (one instruction over several
 // targets), and only then does anyone cloak: for each slot whose permanent
 // was exiled, its controller as it last existed (rule 608.2h — Reality
-// Shift's `controllerOfTarget`) cloaks the top card of their own library
+// Shift's `controllerOf`) cloaks the top card of their own library
 // (rule 701.58a) — a face-down 2/2 with ward {2}, turned face up for its mana
 // cost if it's a creature card (701.58b). A blank slot cloaks nothing, so a
 // player whose permanent wasn't exiled this way doesn't cloak.
@@ -42,10 +42,10 @@ export default defineCard({
           { kind: "exile", target: 3 },
         ],
       },
-      { kind: "manifest", who: { controllerOfTarget: 0 }, cloak: true },
-      { kind: "manifest", who: { controllerOfTarget: 1 }, cloak: true },
-      { kind: "manifest", who: { controllerOfTarget: 2 }, cloak: true },
-      { kind: "manifest", who: { controllerOfTarget: 3 }, cloak: true },
+      { kind: "manifest", who: { controllerOf: 0 }, cloak: true },
+      { kind: "manifest", who: { controllerOf: 1 }, cloak: true },
+      { kind: "manifest", who: { controllerOf: 2 }, cloak: true },
+      { kind: "manifest", who: { controllerOf: 3 }, cloak: true },
     ],
   },
 });

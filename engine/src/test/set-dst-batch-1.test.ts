@@ -21,7 +21,7 @@ import {
 
 // Darksteel (DST), batch 214: the lead's cards — the Echoing cycle and the
 // earlier cards on the same clause, "and all other permanents with the same
-// name as that permanent" (`CardFilter.sameNameAsTarget`, rule 201.2a).
+// name as that permanent" (`CardFilter.sameNameWith`, rule 201.2a).
 
 describe("Echoing Truth", () => {
   it("returns the target and every permanent with its name, whoever controls it, and nothing else", () => {

@@ -12,7 +12,7 @@ export default defineCard({
     {
       trigger: { on: "cast-spell", who: "any" },
       targets: [],
-      effect: { kind: "gain-life", amount: { countInGraveyard: { sameNameAsTriggerObject: true } }, who: "trigger-controller" },
+      effect: { kind: "gain-life", amount: { countInGraveyard: { sameNameWith: "trigger-object" } }, who: "trigger-controller" },
       resolve: null,
       text: "Whenever a player casts a spell, that player gains X life, where X is the number of cards in all graveyards with the same name as that spell.",
     },

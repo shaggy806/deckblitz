@@ -18,13 +18,13 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      costModification: { applies: { type: "creature", hasMutate: true }, reduceGeneric: 1, when: { caster: "you" } },
+      costModification: { applies: { type: "creature", hasKeyword: "mutate" }, reduceGeneric: 1, when: { caster: "you" } },
       text: COST_TEXT,
     },
   ],
   triggered: [
     {
-      trigger: { on: "cast-spell", who: "you", filter: { type: "creature", hasMutate: true } },
+      trigger: { on: "cast-spell", who: "you", filter: { type: "creature", hasKeyword: "mutate" } },
       targets: [],
       effect: {
         kind: "sequence",

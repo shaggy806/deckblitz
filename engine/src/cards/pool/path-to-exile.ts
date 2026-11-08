@@ -1,6 +1,6 @@
 import { defineCard } from "../define.js";
 
-// Exile first, then the land — the printed order. `controllerOfTarget` reads
+// Exile first, then the land — the printed order. `controllerOf` reads
 // last-known information (rule 608.2h), so the creature's controller is still
 // named after it has gone.
 export default defineCard({
@@ -20,7 +20,7 @@ export default defineCard({
         // "Its controller **may** search": their choice (`each-player-may`),
         // so declining neither searches nor shuffles their library.
         kind: "each-player-may",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         prompt: "Search your library for a basic land card?",
         effect: {
           kind: "search-library",

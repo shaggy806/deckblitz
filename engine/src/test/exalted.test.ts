@@ -5,7 +5,7 @@
  * New: a dedicated `attacked-alone` event, fired once per declare-attackers
  * action (not per `attacker-declared` event, which would wrongly read as
  * "alone" for the first of several simultaneously-declared attackers) +
- * `TriggerSpec.on: "attacks-alone"` + `EffectTargetRef` `"trigger-object"`
+ * `TriggerSpec.on: "attacks-alone"` + `ObjectRef` `"trigger-object"`
  * (the lone attacker, not a target and not the ability's own source).
  */
 import { describe, expect, it } from "vitest";

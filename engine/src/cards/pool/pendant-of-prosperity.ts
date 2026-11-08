@@ -41,7 +41,7 @@ export default defineCard({
           },
           {
             kind: "for-each-player",
-            who: "source-owner",
+            who: { ownerOf: "source" },
             effect: {
               kind: "sequence",
               effects: [

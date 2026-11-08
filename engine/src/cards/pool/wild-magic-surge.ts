@@ -19,7 +19,7 @@ export default defineCard({
       { kind: "destroy", target: 0 },
       {
         kind: "reveal-until",
-        whose: { controllerOfTarget: 0 },
+        whose: { controllerOf: 0 },
         filter: {
           typesAnyOf: ["artifact", "creature", "enchantment", "land", "planeswalker", "battle"],
           sharesCardTypeWith: 0,

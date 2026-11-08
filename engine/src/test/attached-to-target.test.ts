@@ -1,5 +1,5 @@
 /**
- * What's attached to a target, or to a player: the `attachedToTarget` filter clause ("all Auras
+ * What's attached to a target, or to a player: the `attachedToObject` filter clause ("all Auras
  * attached to it" — Hubris; "all Equipment attached to that creature" — Blastfire Bolt), bound to
  * the slot's target as the effect applies and nothing for a slot illegal as it resolves (rule
  * 608.2b); `attachedToPlayer` ("all Curses attached to you" — Witchbane Orb, rule 303.4); and the
@@ -72,7 +72,7 @@ describe("Blastfire Bolt: destroy all Equipment attached to that creature", () =
     const why = invalidTargetReason(
       game.state,
       game.registry,
-      [{ kind: "permanent", filter: { attachedToTarget: 0 } }],
+      [{ kind: "permanent", filter: { attachedToObject: 0 } }],
       [ref(attached)],
       A,
       "it",

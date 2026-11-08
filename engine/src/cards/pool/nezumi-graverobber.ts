@@ -23,7 +23,7 @@ export default defineCard({
             kind: "conditional",
             condition: {
               kind: "amounts",
-              left: { countInGraveyard: { ownedBy: "you" }, forPlayer: { ownerOfTarget: 0 } },
+              left: { countInGraveyard: { ownedBy: "you" }, forPlayer: { ownerOf: 0 } },
               op: "eq",
               right: 0,
             },

@@ -802,6 +802,7 @@ import _poolSpinedKarok from "../pool/spined-karok.js";
 import _poolSpinningWheel from "../pool/spinning-wheel.js";
 import _poolSpitefulRepossession from "../pool/spiteful-repossession.js";
 import _poolSpitefulVisions from "../pool/spiteful-visions.js";
+import _poolSpreadingPlague from "../pool/spreading-plague.js";
 import _poolSprout from "../pool/sprout.js";
 import _poolSpurnmageAdvocate from "../pool/spurnmage-advocate.js";
 import _poolStaffOfTheDeathMagus from "../pool/staff-of-the-death-magus.js";
@@ -1856,6 +1857,7 @@ const shard: CardShard = {
     _poolSpinningWheel,
     _poolSpitefulRepossession,
     _poolSpitefulVisions,
+    _poolSpreadingPlague,
     _poolSprout,
     _poolSpurnmageAdvocate,
     _poolStaffOfTheDeathMagus,

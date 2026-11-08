@@ -18,7 +18,7 @@ export default defineCard({
       { kind: "damage", amount: 4, target: 0 },
       {
         kind: "conditional",
-        condition: { kind: "sacrificed", filter: { type: "artifact" } },
+        condition: { kind: "object-matches", object: { paid: "sacrificed" }, filter: { type: "artifact" } },
         then: { kind: "gain-life", amount: 4 },
       },
     ],

@@ -11,7 +11,7 @@ export default defineCard({
   targets: [{ kind: "spell", filter: { typesAnyOf: ["instant", "sorcery"] } }],
   effect: {
     kind: "each-player-may",
-    who: { controllerOfTarget: 0 },
+    who: { controllerOf: 0 },
     choices: [
       {
         text: "Have Molten Influence deal 4 damage to you.",

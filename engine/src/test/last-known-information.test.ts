@@ -82,7 +82,7 @@ const altar = defineCard({
         effects: [
           {
             kind: "conditional",
-            condition: { kind: "sacrificed", filter: { subtype: "Bear" } },
+            condition: { kind: "object-matches", object: { paid: "sacrificed" }, filter: { subtype: "Bear" } },
             then: { kind: "draw", amount: 1 },
           },
           { kind: "destroy-all", filter: { sharesCardTypeWith: { paid: "sacrificed" } } },

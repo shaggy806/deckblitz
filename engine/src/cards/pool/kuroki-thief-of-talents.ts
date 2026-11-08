@@ -23,7 +23,7 @@ export default defineCard({
       targets: ["opponent"],
       effect: {
         kind: "each-player-may",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         prompt: "Draw four cards?",
         effect: { kind: "draw", amount: 4 },
         ifDid: { kind: "cast-now", from: { handOf: "that-player", look: true }, free: true },

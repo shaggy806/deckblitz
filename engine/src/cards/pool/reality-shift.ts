@@ -16,7 +16,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "exile", target: 0 },
-      { kind: "manifest", who: { controllerOfTarget: 0 } },
+      { kind: "manifest", who: { controllerOf: 0 } },
     ],
   },
 });

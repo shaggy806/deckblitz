@@ -27,7 +27,7 @@ export default defineCard({
     {
       // A spell that has convoke, whether or not anything convoked it (the
       // ruling).
-      trigger: { on: "cast-spell", who: "you", filter: { hasConvoke: true } },
+      trigger: { on: "cast-spell", who: "you", filter: { hasKeyword: "convoke" } },
       targets: [],
       effect: {
         kind: "sequence",

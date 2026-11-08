@@ -18,7 +18,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "return-to-hand-all", filter: { subtype: "Aura", attachedToTarget: 0 } },
+          { kind: "return-to-hand-all", filter: { subtype: "Aura", attachedToObject: 0 } },
           {
             kind: "delayed-trigger",
             at: "next-upkeep",

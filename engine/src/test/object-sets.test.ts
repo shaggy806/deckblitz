@@ -84,7 +84,7 @@ describe("the pool on object sets", () => {
         const counted = [st.setBasePtFromCount, st.grantPtPerCount, st.setBasePtFromSourceCount];
         for (const zoneIn of valuesAt(counted, "in")) {
           for (const one of Array.isArray(zoneIn) ? zoneIn : [zoneIn]) {
-            if (isObjectSetRef(one) && one !== "exiled-with-source" && one !== "attached-to-source") {
+            if (isObjectSetRef(one) && one !== "exiled-with-source" && !(typeof one === "object" && "attachmentsOf" in one)) {
               bad.push(`${def.name}: ${JSON.stringify(one)}`);
             }
           }

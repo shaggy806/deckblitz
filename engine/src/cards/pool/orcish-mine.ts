@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 
 // One ability with two trigger events (`sameAbilityAs`). The last ore
 // counter's trigger names the land's controller before the land is destroyed
-// (`for-each-player` over `"attached-controller"`), so the damage still finds
+// (`for-each-player` over `{ controllerOf: "attached" }`), so the damage still finds
 // that player once the land is gone.
 
 const REMOVE_TEXT =
@@ -47,7 +47,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "for-each-player",
-        who: "attached-controller",
+        who: { controllerOf: "attached" },
         effect: {
           kind: "sequence",
           effects: [

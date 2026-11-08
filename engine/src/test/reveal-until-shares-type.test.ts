@@ -2,7 +2,7 @@
  * Reveal until a card sharing a card type with a permanent that has just
  * left — `reveal-until`'s filter with `sharesCardTypeWith` of the target
  * slot, read as the permanent last existed (rule 608.2h), in its controller's
- * library (`whose: { controllerOfTarget }`). Wild Magic Surge: "Destroy
+ * library (`whose: { controllerOf }`). Wild Magic Surge: "Destroy
  * target permanent an opponent controls. Its controller reveals cards from
  * the top of their library until they reveal a permanent card that shares a
  * card type with that permanent. They put that card onto the battlefield and

@@ -18,9 +18,9 @@ export default defineCard({
       { kind: "counter", target: 0 },
       {
         kind: "search-library",
-        whose: { controllerOfTarget: 0 },
+        whose: { controllerOf: 0 },
         zones: "graveyard-hand-library",
-        filter: { sameNameAsTarget: 0 },
+        filter: { sameNameWith: 0 },
         destination: "exile",
         all: true,
         min: 0,

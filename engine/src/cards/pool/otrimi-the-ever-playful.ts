@@ -21,7 +21,7 @@ export default defineCard({
   triggered: [
     {
       trigger: { on: "deals-combat-damage-to-player", who: "self" },
-      targets: [{ kind: "card-in-graveyard", whose: "you", filter: { type: "creature", hasMutate: true } }],
+      targets: [{ kind: "card-in-graveyard", whose: "you", filter: { type: "creature", hasKeyword: "mutate" } }],
       effect: { kind: "return-to-hand", target: 0, from: "graveyard" },
       resolve: null,
       text: DAMAGE_TEXT,

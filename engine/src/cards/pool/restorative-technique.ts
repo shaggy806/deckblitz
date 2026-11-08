@@ -22,7 +22,7 @@ export default defineCard({
       { kind: "gain-life", amount: 2, toControllerOfTarget: 0 },
       {
         kind: "search-library",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         filter: { supertype: "basic", type: "land" },
         destination: "battlefield",
         enterTapped: true,

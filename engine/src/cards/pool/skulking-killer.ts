@@ -27,7 +27,7 @@ export default defineCard({
         kind: "conditional",
         condition: {
           kind: "of-player",
-          player: { controllerOfTarget: 0 },
+          player: { controllerOf: 0 },
           condition: { kind: "not", of: { kind: "controls", filter: { type: "creature" }, atLeast: 1, excludeTarget: 0 } },
         },
         then: { kind: "modify-pt", target: 0, power: -2, toughness: -2, duration: "end-of-turn" },

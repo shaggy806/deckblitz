@@ -29,7 +29,7 @@ export default defineCard({
       { kind: "damage", amount: 3, target: 0 },
       {
         kind: "each-player-may",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         options: [{ pay: "{R}{R}", text: "Pay {R}{R}" }],
         ifDid: {
           kind: "each-player-may",

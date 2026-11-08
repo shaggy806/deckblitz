@@ -3,7 +3,7 @@ import type { ModeOption } from "../../effects.js";
 
 // EDHREC rank 30978. "The color of its controller's choice": the target's
 // controller picks one of five fixed grants as it resolves (an
-// `each-player-may` of `who: { controllerOfTarget: 0 }`).
+// `each-player-may` of `who: { controllerOf: 0 }`).
 //
 // Rulings:
 //   [2008-05-01] If the permanent is already untapped, you can’t activate its {Q} ability. That’s
@@ -39,7 +39,7 @@ export default defineCard({
     {
       cost: { mana: "{2}{W}{W}", tap: false, untap: true },
       targets: ["creature"],
-      effect: { kind: "each-player-may", who: { controllerOfTarget: 0 }, choices: CHOICES },
+      effect: { kind: "each-player-may", who: { controllerOf: 0 }, choices: CHOICES },
       resolve: null,
       text: "{2}{W}{W}, {Q}: Target creature gains protection from the color of its controller's choice until end of turn.",
     },

@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 import { manaTapAbility } from "../helpers.js";
 
 // needed-cards P15. New: Exalted — a new "attacks-alone" TriggerSpec (rule
-// 702.111a) + EffectTargetRef "trigger-object" (the lone attacker, not a
+// 702.111a) + ObjectRef "trigger-object" (the lone attacker, not a
 // target and not the ability's own source).
 export default defineCard({
   name: "Ignoble Hierarch",

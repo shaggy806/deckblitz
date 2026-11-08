@@ -15,7 +15,7 @@ export default defineCard({
       { kind: "destroy", target: 0, cantBeRegenerated: true },
       {
         kind: "reveal-until",
-        whose: { controllerOfTarget: 0 },
+        whose: { controllerOf: 0 },
         filter: { type: "creature" },
         put: "battlefield",
         rest: "shuffle",

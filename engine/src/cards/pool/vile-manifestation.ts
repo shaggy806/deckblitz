@@ -22,7 +22,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      grantPtPerCount: { inGraveyard: { hasCycling: true, ownedBy: "you" }, pt: [1, 0] },
+      grantPtPerCount: { inGraveyard: { hasKeyword: "cycling", ownedBy: "you" }, pt: [1, 0] },
       text: "This creature gets +1/+0 for each card with cycling in your graveyard.",
     },
   ],

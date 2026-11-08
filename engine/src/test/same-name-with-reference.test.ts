@@ -159,7 +159,7 @@ describe("bindDynamicCompares and sameNameWith", () => {
 
   it("binds a target slot to the target's name, and a player slot to none", () => {
     const at = (reference: number): EffectSpec => ({ kind: "destroy-all", filter: { sameNameWith: reference } });
-    expect(bindDynamicCompares(at(0), ctx)).toEqual({ kind: "destroy-all", filter: { sameNameAsAny: ["Grizzly Bears"] } });
+    expect(bindDynamicCompares(at(0), ctx)).toEqual({ kind: "destroy-all", filter: { sameNameAs: { object: "obj-9", name: "Grizzly Bears" } } });
     expect(bindDynamicCompares(at(1), ctx)).toEqual({ kind: "destroy-all", filter: { sameNameAsAny: [] } });
   });
 

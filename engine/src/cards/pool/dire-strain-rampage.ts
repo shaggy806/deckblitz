@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 
 const searchUpTo = (max: number): EffectSpec => ({
   kind: "each-player-may",
-  who: { controllerOfTarget: 0 },
+  who: { controllerOf: 0 },
   prompt: max === 1 ? "Search your library for a basic land card?" : "Search your library for up to two basic land cards?",
   effect: {
     kind: "search-library",

@@ -11,6 +11,6 @@ export default defineCard({
   targets: ["nonland-permanent"],
   effect: {
     kind: "sequence",
-    effects: [{ kind: "exile", target: 0 }, { kind: "draw", who: { controllerOfTarget: 0 }, amount: 1 }],
+    effects: [{ kind: "exile", target: 0 }, { kind: "draw", who: { controllerOf: 0 }, amount: 1 }],
   },
 });

@@ -783,6 +783,10 @@ function playerTestPermanent(phrase) {
   if ((m = /^(.+) with (flying|reach|haste|defender|trample|vigilance|deathtouch|lifelink)$/.exec(rest))) {
     extra.keyword = m[2];
     rest = m[1];
+  } else if ((m = /^(.+?) with (?:an? )?(morph|madness|fading|unearth|awaken|modular)(?: ability)?$/.exec(rest))) {
+    // A keyword ability read off the card's text box (`CardFilter.hasKeyword`).
+    extra.hasKeyword = m[2];
+    rest = m[1];
   } else if ((m = /^(.+) with power (\d+) or (greater|less)$/.exec(rest))) {
     extra.power = { op: m[3] === "greater" ? "gte" : "lte", n: Number(m[2]) };
     rest = m[1];
@@ -1357,7 +1361,7 @@ function exileTargetOf(phrase) {
     return {
       kind: "card-in-exile",
       ...(own ? { whose: "you" } : {}),
-      ...(flashback ? { filter: { hasFlashback: true } } : {}),
+      ...(flashback ? { filter: { hasKeyword: "flashback" } } : {}),
     };
   }
   if ((m = /^target (?:([a-z]+) )?card( with mana value X)? exiled with (?:this [a-z]+|~)$/i.exec(phrase))) {
@@ -2404,7 +2408,7 @@ export function parseTrigger(clause) {
   }
   // "A spell that has convoke" (Kasla, the Broken Halo): convoked or not.
   if (/^Whenever you cast (?:a|another) spell that has convoke$/.test(c)) {
-    return [{ on: "cast-spell", who: "you", filter: { hasConvoke: true } }];
+    return [{ on: "cast-spell", who: "you", filter: { hasKeyword: "convoke" } }];
   }
   // "Using mana produced by Tecutlan" (Barracks of the Thousand): this very
   // permanent's mana, `manaFrom.fromSource`. A permanent spell is any of the
@@ -2747,7 +2751,7 @@ function turnTallyEffect(s, ctx) {
     const target = ctx.target("spell");
     return {
       kind: "conditional",
-      condition: { kind: "player-compare", stat: { controls: { type: singular(m[1].toLowerCase()) } }, compare: "more", than: { controllerOfTarget: target } },
+      condition: { kind: "player-compare", stat: { controls: { type: singular(m[1].toLowerCase()) } }, compare: "more", than: { controllerOf: target } },
       then: { kind: "counter", target },
     };
   }
@@ -2761,7 +2765,7 @@ function turnTallyEffect(s, ctx) {
       kind: "conditional",
       condition: {
         kind: "of-player",
-        player: { controllerOfTarget: then.target },
+        player: { controllerOf: then.target },
         condition: { kind: "not", of: { kind: "controls", filter: { type: "creature" }, atLeast: 1, excludeTarget: then.target } },
       },
       then,
@@ -4225,12 +4229,12 @@ export function parseSentence(sentence, ctx) {
   // Damage.
   // Radiance (Ravnica: City of Guilds): "target X and each other X that
   // shares a color with it" — one `-all` effect over the target and the
-  // others sharing a color with it (`sharesColorWithTarget`) — or a creature
+  // others sharing a color with it (`sharesColorWith`) — or a creature
   // or card type (`sharesCreatureTypeWith` / `sharesCardTypeWith` of the
   // slot: Killer's "target creature and each other creature that shares a
   // creature type with it").
   const KIN = `and each other (permanent|creature|artifact|enchantment|land) that shares a (color|creature type|card type) with it`;
-  const SHARES_KEY = { color: "sharesColorWithTarget", "creature type": "sharesCreatureTypeWith", "card type": "sharesCardTypeWith" };
+  const SHARES_KEY = { color: "sharesColorWith", "creature type": "sharesCreatureTypeWith", "card type": "sharesCardTypeWith" };
   const kin = (type, what, target) =>
     target === undefined
       ? undefined
@@ -4288,7 +4292,7 @@ export function parseSentence(sentence, ctx) {
   }
   // "Xantcha's controller loses 2 life".
   if ((m = re(`~'s controller loses (\\d+) life`).exec(s))) {
-    return { kind: "lose-life", amount: Number(m[1]), who: "source-controller" };
+    return { kind: "lose-life", amount: Number(m[1]), who: { controllerOf: "source" } };
   }
   // "Exile Sol'Kanar, then return it to the battlefield under an opponent's
   // control": the opponent chosen as it resolves.
@@ -4463,7 +4467,7 @@ export function parseSentence(sentence, ctx) {
     }
   }
   if ((m = re(`put ${N} ([+-]\\d+/[+-]\\d+|[a-z]+) counters? on the creature tapped to pay ~'s additional cost`).exec(s))) {
-    return { kind: "add-counter", target: "tapped", counter: m[2].toLowerCase(), amount: amount(m[1]) };
+    return { kind: "add-counter", target: { paid: "tapped" }, counter: m[2].toLowerCase(), amount: amount(m[1]) };
   }
   // Any named kind: +1/+1, oil (Phyrexia: All Will Be One), stun, shield.
   // "Put a +1/+1 counter on each creature you control and they gain vigilance
@@ -4649,11 +4653,11 @@ export function parseSentence(sentence, ctx) {
 
   // Removal and movement.
   // "Target X and all other Xs with the same name as that X" (rule 201.2a):
-  // one `-all` effect over the target and its namesakes (`sameNameAsTarget`).
+  // one `-all` effect over the target and its namesakes (`sameNameWith`).
   const NAMESAKES = `and all other (permanents|creatures|artifacts|enchantments|lands) with the same name as that (?:permanent|creature|artifact|enchantment|land)`;
   const namesakes = (plural, target) => {
     const type = { permanents: undefined, creatures: "creature", artifacts: "artifact", enchantments: "enchantment", lands: "land" }[plural.toLowerCase()];
-    return target === undefined ? undefined : { ...(type !== undefined ? { type } : {}), sameNameAsTarget: target };
+    return target === undefined ? undefined : { ...(type !== undefined ? { type } : {}), sameNameWith: target };
   };
   // The same names off the battlefield. "Return target creature card and all
   // other cards with the same name as that card from your graveyard to your
@@ -4663,7 +4667,7 @@ export function parseSentence(sentence, ctx) {
     const hand = m[1].toLowerCase() === "your hand";
     return {
       kind: "return-from-graveyard",
-      filter: { sameNameAsTarget: target },
+      filter: { sameNameWith: target },
       destination: hand ? "hand" : "battlefield",
       count: "all",
       ...(hand ? {} : { enterTapped: true }),
@@ -4674,11 +4678,11 @@ export function parseSentence(sentence, ctx) {
   // "for a card with the same name as target nontoken creature, put that card
   // onto the battlefield, then shuffle" (Mask of the Mimic).
   if (ctx.targets.length === 1 && /^search your library for any number of cards with the same name as that card, reveal them, put them into your hand, then shuffle\.$/i.test(s)) {
-    return { kind: "search-library", filter: { sameNameAsTarget: 0 }, destination: "hand", reveal: true, min: 0, max: 99 };
+    return { kind: "search-library", filter: { sameNameWith: 0 }, destination: "hand", reveal: true, min: 0, max: 99 };
   }
   if (/^search your library for a card with the same name as target nontoken creature, put that card onto the battlefield, then shuffle\.$/i.test(s)) {
     const target = ctx.target({ kind: "permanent", filter: { type: "creature", token: false } });
-    return { kind: "search-library", filter: { sameNameAsTarget: target }, destination: "battlefield", min: 0, max: 1 };
+    return { kind: "search-library", filter: { sameNameWith: target }, destination: "battlefield", min: 0, max: 1 };
   }
   // "Exile target nonland permanent an opponent controls and all tokens that
   // player controls with the same name as that permanent" (Legions to Ashes).
@@ -4686,7 +4690,7 @@ export function parseSentence(sentence, ctx) {
     const target = ctx.target({ kind: "permanent", filter: { notTypes: ["land"], controlledBy: "opponent" } });
     return {
       kind: "exile-all",
-      filter: { controlledBy: "you", sameNameAsTarget: target, sameNameTokensOnly: true },
+      filter: { controlledBy: "you", sameNameWith: target, sameNameTokensOnly: true },
       controlledByTarget: target,
     };
   }
@@ -4700,7 +4704,7 @@ export function parseSentence(sentence, ctx) {
     });
     return {
       kind: "exile-all",
-      filter: { type: "creature", controlledBy: "you", sameNameAsTarget: target },
+      filter: { type: "creature", controlledBy: "you", sameNameWith: target },
       controlledByTarget: target,
     };
   }
@@ -4713,8 +4717,8 @@ export function parseSentence(sentence, ctx) {
       then: {
         kind: "sequence",
         effects: [
-          { kind: "reveal-hand", who: { controllerOfTarget: 0 } },
-          { kind: "exile-graveyard", target: { controllerOfTarget: 0 }, filter: { sameNameAsTarget: 0 }, fromHand: "only" },
+          { kind: "reveal-hand", who: { controllerOf: 0 } },
+          { kind: "exile-graveyard", target: { controllerOf: 0 }, filter: { sameNameWith: 0 }, fromHand: "only" },
         ],
       },
     };
@@ -4737,8 +4741,8 @@ export function parseSentence(sentence, ctx) {
     return {
       kind: "sequence",
       effects: [
-        { kind: "exile-graveyard", target: "each-player", filter: { sameNameAsTarget: target } },
-        { kind: "exile-all", filter: { sameNameAsTarget: target } },
+        { kind: "exile-graveyard", target: "each-player", filter: { sameNameWith: target } },
+        { kind: "exile-all", filter: { sameNameWith: target } },
       ],
     };
   }
@@ -4821,7 +4825,7 @@ export function parseSentence(sentence, ctx) {
     const filter = namesakes(m[3], slot(m[2]));
     return filter === undefined ? null : { kind: m[1].toLowerCase() === "destroy" ? "destroy-all" : "exile-all", filter };
   }
-  // What's attached to a target (`attachedToTarget`): "return target
+  // What's attached to a target (`attachedToObject`): "return target
   // creature and all Auras attached to it to their owners' hands" (Hubris)
   // and "destroy target creature with flying and all Equipment attached to
   // that creature" (Eaten by Spiders) — one instruction, the attachments
@@ -4849,7 +4853,7 @@ export function parseSentence(sentence, ctx) {
         kind: "sequence",
         simultaneous: true,
         effects: [
-          { kind: all, filter: { ...attachmentsOf(both[3]), attachedToTarget: target } },
+          { kind: all, filter: { ...attachmentsOf(both[3]), attachedToObject: target } },
           { kind: one, target },
         ],
       };
@@ -4859,7 +4863,7 @@ export function parseSentence(sentence, ctx) {
       const kind = all[1].toLowerCase() === "destroy" ? "destroy-all" : "exile-all";
       if (/^you$/i.test(all[3])) return { kind, filter: { ...attachmentsOf(all[2]), attachedToPlayer: "you" } };
       const target = /^that creature$/i.test(all[3]) ? (ctx.targets.length === 1 ? 0 : undefined) : slot(all[3]);
-      return target === undefined ? null : { kind, filter: { ...attachmentsOf(all[2]), attachedToTarget: target } };
+      return target === undefined ? null : { kind, filter: { ...attachmentsOf(all[2]), attachedToObject: target } };
     }
     // "Exile up to one target Equipment attached to that creature" (Fiery
     // Annihilation): a slot attached to the one before it (`attachedToThan`).
@@ -5254,7 +5258,7 @@ export function parseSentence(sentence, ctx) {
         kind: "one-of",
         of: [
           { kind: "card-in-graveyard", whose: "you", filter },
-          { kind: "card-in-exile", whose: "you", filter: { hasFlashback: true } },
+          { kind: "card-in-exile", whose: "you", filter: { hasKeyword: "flashback" } },
         ],
       });
       return {
@@ -5335,6 +5339,14 @@ export function parseSentence(sentence, ctx) {
   if (re("tap ~").test(s)) return { kind: "tap", target: "source" };
   // "That player" of a trigger on someone's step (Citadel Siege): whoever's
   // step it is.
+  // "Tap all lands that player controls" (Nature's Will), the player a trigger
+  // names, whatever the ref (`CardFilter.controlledByRef`).
+  if (ctx.thatPlayer !== undefined && (m = re("(tap|untap) all (.+?) that player controls").exec(s))) {
+    const kind = parseTypePhrase(singular(m[2]));
+    if (kind !== null && Object.keys(kind).length > 0) {
+      return { kind: m[1].toLowerCase() === "tap" ? "tap-all" : "untap-all", filter: { ...kind, controlledByRef: ctx.thatPlayer } };
+    }
+  }
   if (ctx.thatPlayer === "active-player" && re("tap target creature that player controls").test(s)) {
     return { kind: "tap", target: ctx.target({ kind: "permanent", filter: { type: "creature", controlledBy: "active-player" } }) };
   }
@@ -5547,7 +5559,7 @@ export function parseSentence(sentence, ctx) {
     const i = slot(m[1]);
     if (i === undefined) return null;
     const put = { kind: "put-onto-battlefield", target: i, underYourControl: true, enterTapped: true };
-    return m[2] === undefined ? put : { kind: "sequence", effects: [put, { kind: "exile-graveyard", target: { ownerOfTarget: i } }] };
+    return m[2] === undefined ? put : { kind: "sequence", effects: [put, { kind: "exile-graveyard", target: { ownerOf: i } }] };
   }
   // "The owner of target nonland permanent shuffles it into their library,
   // then draws two cards" (Oblation).
@@ -5559,17 +5571,17 @@ export function parseSentence(sentence, ctx) {
           kind: "sequence",
           effects: [
             { kind: "shuffle-into-library", target: i },
-            { kind: "draw", amount: amount(m[2]), who: { ownerOfTarget: i } },
+            { kind: "draw", amount: amount(m[2]), who: { ownerOf: i } },
           ],
         };
   }
   // "Enchanted creature deals 1 damage to its owner" (Enslave).
   if ((m = re(`enchanted creature deals ${N} damage to its owner`).exec(s))) {
-    return { kind: "damage", amount: amount(m[1]), who: "attached-owner", from: "attached" };
+    return { kind: "damage", amount: amount(m[1]), who: { ownerOf: "attached" }, from: "attached" };
   }
   // "Enchanted creature deals 1 damage to target creature with flying" (Dizzying
   // Gaze), "… deals damage equal to its power to any other target" (Pain for
-  // All): the host the source (`DamageFrom`'s `"attached"`).
+  // All): the host the source (`ObjectRef`'s `"attached"`).
   if ((m = re(`enchanted creature deals ${N} damage to (${TARGET})`).exec(s))) {
     const target = slot(m[2]);
     if (target !== undefined) return { kind: "damage", amount: amount(m[1]), target, from: "attached" };
@@ -5585,7 +5597,7 @@ export function parseSentence(sentence, ctx) {
   // "Exile target creature card from a graveyard. That card deals damage equal
   // to its power to ~" (Selfless Exorcist): the card in its target slot, in exile.
   if (ctx.targets.length === 1 && re("that card deals damage equal to its power to ~").test(s)) {
-    return { kind: "damage", amount: { powerOf: 0 }, target: "source", from: { target: 0 } };
+    return { kind: "damage", amount: { powerOf: 0 }, target: "source", from: 0 };
   }
   // "Whenever a player taps a land for mana, ~ deals 1 damage to that player"
   // (Manabarbs): the player the event names.
@@ -5619,9 +5631,9 @@ export function parseSentence(sentence, ctx) {
       return { kind: "for-each-target", from, simultaneous: true, effect: { kind: "tap", target: from } };
     }
   }
-  // "Enchanted creature's controller": `"attached-controller"`.
+  // "Enchanted creature's controller": `{ controllerOf: "attached" }`.
   if ((m = re(`~ deals ${N} damage to enchanted (?:artifact|creature|land|permanent)'s controller`).exec(s))) {
-    return { kind: "damage", amount: amount(m[1]), who: "attached-controller" };
+    return { kind: "damage", amount: amount(m[1]), who: { controllerOf: "attached" } };
   }
   // "Those creatures", "each of them", of an attack read as one batch: a
   // filter's `inSet: "trigger-batch"`.
@@ -5771,19 +5783,19 @@ export function parseSentence(sentence, ctx) {
   // it last existed.
   if (ctx.it === "trigger-object" && ctx.targets.length === 0) {
     if (re("search your library for a card with the same name as that creature, reveal it, put it into your hand, then shuffle").test(s)) {
-      return { kind: "search-library", filter: { sameNameAsTriggerObject: true }, destination: "hand", min: 0, max: 1, reveal: true };
+      return { kind: "search-library", filter: { sameNameWith: "trigger-object" }, destination: "hand", min: 0, max: 1, reveal: true };
     }
     if (re("that creature's controller may search their library for a card with the same name as that creature, put it onto the battlefield, then shuffle").test(s)) {
       return {
         kind: "each-player-may",
         who: "trigger-controller",
         prompt: "Search your library for a card with the same name as that creature and put it onto the battlefield?",
-        effect: { kind: "search-library", filter: { sameNameAsTriggerObject: true }, destination: "battlefield", min: 0, max: 1 },
+        effect: { kind: "search-library", filter: { sameNameWith: "trigger-object" }, destination: "battlefield", min: 0, max: 1 },
       };
     }
     // Eye of Singularity's "that name": the permanent the trigger names, spared.
     if (re("destroy all other permanents with that name").test(s)) {
-      return { kind: "destroy-all", filter: { sameNameAsTriggerObject: true }, exceptTriggerObject: true };
+      return { kind: "destroy-all", filter: { sameNameWith: "trigger-object" }, exceptTriggerObject: true };
     }
   }
   // Eye of Singularity's "each permanent with the same name as another
@@ -5851,12 +5863,12 @@ export function parseSentence(sentence, ctx) {
   }
   // "That player" who owned what the trigger is about (Warped Devotion,
   // Liability — `thatPlayerOf`).
-  if (ctx.thatPlayer === "trigger-owner") {
+  if (ctx.thatPlayer?.ownerOf === "trigger-object") {
     if ((m = re(`that player discards ${N} cards?`).exec(s))) {
-      return { kind: "discard", target: "trigger-owner", amount: amount(m[1]) };
+      return { kind: "discard", target: { ownerOf: "trigger-object" }, amount: amount(m[1]) };
     }
     if ((m = re(`that player loses ${N} life`).exec(s))) {
-      return { kind: "lose-life", amount: amount(m[1]), who: "trigger-owner" };
+      return { kind: "lose-life", amount: amount(m[1]), who: { ownerOf: "trigger-object" } };
     }
   }
   if (re("sacrifice ~").test(s)) return { kind: "sacrifice-source" };
@@ -6830,7 +6842,7 @@ export function parseSentence(sentence, ctx) {
   }
   if ((m = re(`~ deals ${N} damage to itself`).exec(s))) return { kind: "damage", amount: amount(m[1]), target: "source" };
   if (ctx.targets.length === 1 && re("that (?:artifact|creature|enchantment|permanent) deals damage equal to its mana value to ~").test(s)) {
-    return { kind: "damage", amount: { manaValueOf: 0 }, target: "source", from: { target: 0 } };
+    return { kind: "damage", amount: { manaValueOf: 0 }, target: "source", from: 0 };
   }
   if ((m = re(`~ deals ${N} damage to (${TARGET}) and ${N} damage to you`).exec(s))) {
     // One instruction: both are dealt at once (rule 120.3, one damage event).
@@ -7051,7 +7063,7 @@ export function parseSentence(sentence, ctx) {
       kind: "unless",
       chooser: i,
       options: [{ sacrificeThat: i, text: "Sacrifice it" }],
-      otherwise: { kind: "damage", amount: { manaValueOf: i }, toControllerOfTarget: i, from: { target: i } },
+      otherwise: { kind: "damage", amount: { manaValueOf: i }, toControllerOfTarget: i, from: i },
     };
   }
 
@@ -7177,7 +7189,7 @@ export function parseSentence(sentence, ctx) {
       };
     }
     // A damage source is only the ability's own or the trigger's object
-    // (`DamageFrom`): "enchanted creature deals …" has no shape.
+    // (`ObjectRef`): "enchanted creature deals …" has no shape.
     // "It deals 1 damage to each creature blocking it" (Battle-Scarred
     // Goblin — `blockingRelation`), and when "it" is the object the trigger
     // names, it deals the damage too (Trailblazer's Torch).
@@ -7942,7 +7954,7 @@ function chosenNumbers(text, ctx) {
         {
           kind: "damage",
           amount: { sum: [Number(fire[1]), { product: ["x", -1] }] },
-          who: { controllerOfTarget: creature },
+          who: { controllerOf: creature },
         },
       ],
     };
@@ -8881,7 +8893,7 @@ export function parseEffect(text, outer) {
 
   // A suspend cost as an alternative cost (The Face of Boe).
   if (text === "You may cast a spell with suspend from your hand. If you do, pay its suspend cost rather than its mana cost.") {
-    return { effect: { kind: "cast-now", from: "hand", spell: { hasSuspend: true }, suspendCost: true }, todo: [], hints: [] };
+    return { effect: { kind: "cast-now", from: "hand", spell: { hasKeyword: "suspend" }, suspendCost: true }, todo: [], hints: [] };
   }
   // A delayed triggered mana ability (rule 605.1b): High Tide, Molten Tide.
   const tide = /^until end of turn, whenever (a player taps|you tap) an? ([A-Z][a-z]+) for mana, (?:that player adds|add) an additional \{([WUBRGC])\}\.$/i.exec(text);
@@ -9704,8 +9716,8 @@ export function parseEffect(text, outer) {
     // from their hand and graveyard." (Legion's End): two steps of one sentence.
     if (ctx.targets.length === 1 && /^then that player reveals their hand and exiles all cards with that name from their hand and graveyard\.$/i.test(sentence)) {
       const steps = [
-        { kind: "reveal-hand", who: { controllerOfTarget: 0 } },
-        { kind: "exile-graveyard", target: { controllerOfTarget: 0 }, filter: { sameNameAsTarget: 0 }, fromHand: "also" },
+        { kind: "reveal-hand", who: { controllerOf: 0 } },
+        { kind: "exile-graveyard", target: { controllerOf: 0 }, filter: { sameNameWith: 0 }, fromHand: "also" },
       ];
       parsed.push(...steps);
       hints.push({ sentence, effect: steps[1] });
@@ -10158,7 +10170,7 @@ export function parseEffect(text, outer) {
         : discardFilterOf(discardedIf[2]);
       const then = filter === null ? null : parseSentence(`${discardedIf[3][0].toUpperCase()}${discardedIf[3].slice(1)}`, ctx);
       if (then !== null && !containsUndefined(then)) {
-        const conditional = { kind: "conditional", condition: { kind: "discarded", filter }, then };
+        const conditional = { kind: "conditional", condition: { kind: "object-matches", object: { paid: "discarded" }, filter }, then };
         parsed.push(conditional);
         hints.push({ sentence, effect: conditional });
         continue;
@@ -10624,7 +10636,7 @@ export function parseEffect(text, outer) {
       const life = {
         kind: ownerLifeM[1].toLowerCase() === "gains" ? "gain-life" : "lose-life",
         amount: numberOf(ownerLifeM[2]),
-        who: { ownerOfTarget: 0 },
+        who: { ownerOf: 0 },
       };
       parsed.push(life);
       hints.push({ sentence, effect: life });
@@ -10640,8 +10652,8 @@ export function parseEffect(text, outer) {
       const n = ownerThenM[2].toLowerCase() === "x" ? "x" : numberOf(ownerThenM[2]);
       if (follows && (n === "x" || typeof n === "number")) {
         const effect = discards
-          ? { kind: "discard", target: { ownerOfTarget: 0 }, amount: n }
-          : { kind: "mill", target: { ownerOfTarget: 0 }, amount: n };
+          ? { kind: "discard", target: { ownerOf: 0 }, amount: n }
+          : { kind: "mill", target: { ownerOf: 0 }, amount: n };
         parsed.push(effect);
         hints.push({ sentence, effect });
         continue;
@@ -10659,7 +10671,7 @@ export function parseEffect(text, outer) {
     // Pistus Strike): that target's controller, as it last existed.
     const itsM = /^its controller (draws|discards) (a|an|one|two|three) cards?\.$|^its controller gets (a|an|one|two|three) poison counters?\.$/i.exec(sentence);
     if (itsM !== null && ctx.targets.length === 1 && parsed.length > 0) {
-      const who = { controllerOfTarget: 0 };
+      const who = { controllerOf: 0 };
       const n = numberOf(itsM[2] ?? itsM[3]);
       if (typeof n === "number") {
         const effect =
@@ -11468,7 +11480,7 @@ function searchZonesAt(sentences, i) {
   if ((n = /^a card named (.+)$/i.exec(what))) {
     if (/ and\/or /i.test(n[1])) return null;
     filter = { name: n[1] };
-  } else if (/^a card with the same name as that spell$/i.test(what)) filter = { sameNameAsTriggerObject: true };
+  } else if (/^a card with the same name as that spell$/i.test(what)) filter = { sameNameWith: "trigger-object" };
   else if ((n = /^an? (.+?) card$/i.exec(what))) filter = parseTypePhrase(n[1], { cards: true });
   if (filter === undefined || filter === null) return null;
   const search = searchZonesAndOr(zones, {
@@ -11570,7 +11582,7 @@ function searchOthersAt(sentences, i, ctx) {
     filter = { ...filter, hasName: CHOSEN_CARD_NAME };
   } else if (/^with the same name as that (spell|card|creature|artifact|enchantment|land|permanent)$/.test(rest)) {
     if (named !== null || ctx.targets.length !== 1) return null;
-    filter = { ...filter, sameNameAsTarget: 0 };
+    filter = { ...filter, sameNameWith: 0 };
   } else if (rest !== "" || named !== null) return null;
 
   // Whose: a new player target, or the one target before's controller,
@@ -11580,8 +11592,8 @@ function searchOthersAt(sentences, i, ctx) {
   if (owner === "target player's") whose = { target: ctx.target("player") };
   else if (owner === "target opponent's") whose = { target: ctx.target("opponent") };
   else if (ctx.targets.length !== 1) return null;
-  else if (owner === "its controller's") whose = { controllerOfTarget: 0 };
-  else if (owner === "its owner's") whose = { ownerOfTarget: 0 };
+  else if (owner === "its controller's") whose = { controllerOf: 0 };
+  else if (owner === "its owner's") whose = { ownerOf: 0 };
   else if (ctx.targets[0] === "player" || ctx.targets[0] === "opponent") whose = { target: 0 };
   else return null;
 
@@ -12929,7 +12941,7 @@ function controllerMaySearch(sentence, ctx, parsed) {
   if (filter === null) return null;
   return {
     kind: "each-player-may",
-    who: { controllerOfTarget: 0 },
+    who: { controllerOf: 0 },
     prompt: `Search your library for a ${m[1]} card?`,
     effect: { kind: "search-library", filter, destination: "battlefield", min: 0, max: 1, ...(m[2] ? { enterTapped: true } : {}) },
   };
@@ -13022,7 +13034,7 @@ function revealUntilAt(sentences, i, ctx) {
     return {
       effect: {
         kind: "reveal-until",
-        whose: { controllerOfTarget: 0 },
+        whose: { controllerOf: 0 },
         filter: { typesAnyOf: ["artifact", "creature", "enchantment", "land", "planeswalker", "battle"], sharesCardTypeWith: 0 },
         put: "battlefield",
         rest: restOf(close[1]),
@@ -16633,7 +16645,7 @@ function playerComparisonOf(clause, ctx) {
     return { kind: "player-compare", stat: COMPARED_STATS[m[1]], compare: "fewer", than: { target: 0 } };
   }
   if (c === "that player or that planeswalker's controller has more life than you" && slot === "player-or-planeswalker") {
-    return { kind: "player-compare", stat: "life", compare: "fewer", than: { controllerOfTarget: 0 } };
+    return { kind: "player-compare", stat: "life", compare: "fewer", than: { controllerOf: 0 } };
   }
   // Battle Angels of Tyr: the player the trigger names, against each other
   // player (each of them an opponent of theirs, rule 102.3).
@@ -16796,7 +16808,7 @@ function thatPlayerOf(triggers) {
   // (Warped Devotion), "put into a player's graveyard" (Liability): whose hand
   // or graveyard it is, its owner's.
   if (triggers.every((t) => t.on === "leaves-battlefield" && t.who === "any" && t.to?.length === 1 && t.filter?.ownedBy === undefined)) {
-    return "trigger-owner";
+    return { ownerOf: "trigger-object" };
   }
   if (triggers.every((t) => t.on === "attacks")) return "trigger-player";
   // "At the beginning of each opponent's upkeep, … that player's library"
@@ -19269,7 +19281,7 @@ function parseStatic(line, text) {
   }
   // Abandoned Sarcophagus's two lines.
   if (line === "You may cast spells that have a cycling ability from your graveyard.") {
-    return { affects: { scope: "self" }, castFromGraveyard: { filter: { hasCycling: true } }, text };
+    return { affects: { scope: "self" }, castFromGraveyard: { filter: { hasKeyword: "cycling" } }, text };
   }
   // Graveyard hate (rule 614): "If a card or token would be put into a
   // graveyard from anywhere, exile it instead" (Rest in Peace), "a card …
@@ -19302,7 +19314,7 @@ function parseStatic(line, text) {
         event: "would-be-put-into-graveyard",
         instead: "exile",
         notCycled: true,
-        filter: { ownedBy: "you", token: false, hasCycling: true },
+        filter: { ownedBy: "you", token: false, hasKeyword: "cycling" },
       },
       text,
     };
@@ -20183,7 +20195,7 @@ function parseStatic(line, text) {
   // "Creatures that share a color with equipped creature get +1/+1" (Konda's
   // Banner): a live read of the host.
   if ((m = /^Creatures that share a (color|creature type) with (?:equipped|enchanted) creature get ([+-]\d+)\/([+-]\d+)\.$/.exec(line))) {
-    const clause = m[1] === "color" ? { sharesColorWithHost: true } : { sharesCreatureTypeWithHost: true };
+    const clause = m[1] === "color" ? { sharesColorWith: "attached" } : { sharesCreatureTypeWith: "attached" };
     return { affects: { scope: "filter", filter: { type: "creature", ...clause } }, grantPt: [Number(m[2]), Number(m[3])], text };
   }
   // "As long as another Aura is attached to enchanted creature, it has first
@@ -20330,7 +20342,7 @@ const partnerWithAbility = (name) => ({
   // `partnerWithTrigger` helper's shape).
   effect: {
     kind: "each-player-may",
-    who: { controllerOfTarget: 0 },
+    who: { controllerOf: 0 },
     prompt: `Search your library for a card named ${name}?`,
     effect: { kind: "search-library", filter: { name }, destination: "hand", min: 0, max: 1, reveal: true },
   },

@@ -14,9 +14,8 @@ export default defineCard({
       trigger: { on: "tapped-for-mana", who: "opponent", filter: { type: "land" } },
       targets: [],
       effect: {
-        kind: "for-each-player",
-        who: "trigger-controller",
-        effect: { kind: "as-player", who: "that-player", effect: { kind: "tap-all", filter: { type: "land", controlledBy: "you" } } },
+        kind: "tap-all",
+        filter: { type: "land", controlledByRef: "trigger-player" },
       },
       resolve: null,
       text: TAP,

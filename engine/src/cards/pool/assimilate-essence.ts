@@ -14,7 +14,7 @@ export default defineCard({
   targets: [{ kind: "spell", filter: { typesAnyOf: ["creature", "battle"] } }],
   effect: {
     kind: "each-player-may",
-    who: { controllerOfTarget: 0 },
+    who: { controllerOf: 0 },
     options: [{ pay: "{4}", text: "Pay {4}" }],
     ifDid: { kind: "incubate", amount: 2 },
     ifDidnt: { kind: "counter", target: 0 },

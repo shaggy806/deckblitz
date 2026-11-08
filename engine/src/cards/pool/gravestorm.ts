@@ -19,7 +19,7 @@ export default defineCard({
       targets: ["opponent"],
       effect: {
         kind: "each-player-may",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         options: [{ exileFromGraveyard: 1, text: "Exile a card from your graveyard" }],
         ifDidnt: { kind: "may", prompt: "Draw a card?", effect: { kind: "draw", amount: 1 } },
       },

@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 // EDHREC rank 32300.
 //
 // The opponent's half is done as them (`as-player`): they look at the top
-// card of the caster's library ("source-controller" — the spell's controller)
+// card of the caster's library ({ controllerOf: "source" } — the spell's controller)
 // and exile it face down, and the permission to play it is theirs.
 
 export default defineCard({
@@ -22,7 +22,7 @@ export default defineCard({
         effect: {
           kind: "impulse-exile",
           amount: 1,
-          whose: "source-controller",
+          whose: { controllerOf: "source" },
           duration: "while-exiled",
           faceDown: true,
           spendAs: "any-type",

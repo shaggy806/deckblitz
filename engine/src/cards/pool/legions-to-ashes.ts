@@ -12,7 +12,7 @@ export default defineCard({
   targets: [{ kind: "permanent", filter: { notTypes: ["land"], controlledBy: "opponent" } }],
   effect: {
     kind: "exile-all",
-    filter: { controlledBy: "you", sameNameAsTarget: 0, sameNameTokensOnly: true },
+    filter: { controlledBy: "you", sameNameWith: 0, sameNameTokensOnly: true },
     controlledByTarget: 0,
   },
 });

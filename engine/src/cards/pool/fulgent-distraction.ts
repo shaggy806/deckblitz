@@ -1,7 +1,7 @@
 import { defineCard } from "../define.js";
 
 // Both creatures are tapped, then each one's Equipment is unattached; a target
-// gone illegal is neither (the ruling) — its slot's `attachedToTarget` then
+// gone illegal is neither (the ruling) — its slot's `attachedToObject` then
 // matches nothing.
 export default defineCard({
   name: "Fulgent Distraction",
@@ -17,14 +17,14 @@ export default defineCard({
       { kind: "tap", target: 1 },
       {
         kind: "for-each-permanent",
-        filter: { subtype: "Equipment", attachedToTarget: 0 },
+        filter: { subtype: "Equipment", attachedToObject: 0 },
         as: 2,
         simultaneous: true,
         effect: { kind: "unattach", target: 2 },
       },
       {
         kind: "for-each-permanent",
-        filter: { subtype: "Equipment", attachedToTarget: 1 },
+        filter: { subtype: "Equipment", attachedToObject: 1 },
         as: 2,
         simultaneous: true,
         effect: { kind: "unattach", target: 2 },

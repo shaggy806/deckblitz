@@ -25,7 +25,7 @@ export default defineCard({
       trigger: { on: "step-begins", step: "upkeep", who: "you" },
       targets: [],
       resolve: null,
-      effect: { kind: "damage", amount: 1, who: "attached-owner", from: "attached" },
+      effect: { kind: "damage", amount: 1, who: { ownerOf: "attached" }, from: "attached" },
       text: TRIGGER_TEXT,
     },
   ],

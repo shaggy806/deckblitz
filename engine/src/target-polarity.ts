@@ -39,7 +39,8 @@ import { bestowedDefinition, enchantsGraveyardCard, licidDefinition } from "./ca
 import { computeCharacteristics, playerCantLoseGame, playerCantLoseLife } from "./characteristics.js";
 import { matchesFilter } from "./filter.js";
 import type { CardFilter } from "./filter.js";
-import type { EffectAmount, EffectSpec } from "./effects.js";
+import type { EffectAmount, EffectSpec, PlayerScope } from "./effects.js";
+import type { ObjectRef } from "./refs.js";
 import { manaValue, parseManaCost } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { GameObject, GameState } from "./state.js";
@@ -162,7 +163,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
       n.effect.zone === "hand" &&
       n.effect.destination.startsWith("library")
     ) {
-      v.touch(n.who.target, "harm", MINOR);
+      v.touch(slotOfPlayer(n.who), "harm", MINOR);
     }
     // "Target opponent exiles a card from their hand" (Unscrupulous Agent).
     if (
@@ -172,7 +173,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
       n.effect.zone === "hand" &&
       n.effect.destination === "exile"
     ) {
-      v.touch(n.who.target, "harm", MAJOR);
+      v.touch(slotOfPlayer(n.who), "harm", MAJOR);
     }
     // "Target player exiles a card from their graveyard" (Scrabbling Claws):
     // a card they might have used again.
@@ -183,7 +184,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
       n.effect.zone === "graveyard" &&
       n.effect.destination === "exile"
     ) {
-      v.touch(n.who.target, "harm", MINOR);
+      v.touch(slotOfPlayer(n.who), "harm", MINOR);
     }
   },
   // A vote names no target, unless it's a targeted player's own choice ("target
@@ -191,7 +192,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // the choice says which way that goes, and a `for-each-voted`'s slot 0 is a
   // permanent voted for, not the spell's target 0.
   vote: (n, v) => {
-    if (n.choose === true && typeof n.who === "object" && "target" in n.who) v.touch(n.who.target, "either", MINOR);
+    if (n.choose === true && typeof n.who === "object" && "target" in n.who) v.touch(slotOfPlayer(n.who), "either", MINOR);
   },
   "cast-vote": none,
   // Everyone may pay or bid: what follows says who it helps.
@@ -217,7 +218,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     const as = n.as ?? 0;
     const each = slotStrengths(n.effect, as + 1)[as];
     if (each !== null && each !== undefined) v.touch(n.controlledByTarget, each.polarity, each.weight);
-    v.touch(n.filter.attachedToTarget, "either", MINOR);
+    v.touch(n.filter.attachedToObject, "either", MINOR);
     if (n.as !== undefined) v.child(n.effect);
   },
   "for-permanent": none,
@@ -231,7 +232,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // inner effect's to say, and with nothing inner naming the slot it's the
   // board's call (Encircling Fissure's "creatures target opponent controls").
   "as-player": (n, v) => {
-    if (typeof n.who === "object" && "target" in n.who) v.touch(n.who.target, "either", MINOR);
+    if (typeof n.who === "object" && "target" in n.who) v.touch(slotOfPlayer(n.who), "either", MINOR);
     v.child(n.effect);
   },
   // Their slot 0 is a convoking creature, not the spell's target 0.
@@ -254,7 +255,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // Its `then` reads the blighted creature as target 0. "Target opponent
   // blights 2" harms the player in that slot.
   blight: (n, v) => {
-    if (typeof n.who === "object") v.touch(n.who.target, "harm", MAJOR);
+    if (typeof n.who === "object") v.touch(slotOfPlayer(n.who), "harm", MAJOR);
   },
   // Its `then` reads the beheld card or permanent as target 0.
   behold: none,
@@ -285,8 +286,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     // "Target creature you control deals damage" — the dealer is yours.
     // Not when it deals that damage to its own controller (Traitor's Roar,
     // Ana Battlemage): then the dealer is the opponent's.
-    const toOwnController = typeof n.from === "object" && n.from.target === n.toControllerOfTarget;
-    if (!toOwnController) v.touch(n.from, "help", MINOR);
+    const toOwnController = typeof n.from === "number" && n.from === n.toControllerOfTarget;
+    if (!toOwnController && typeof n.from === "number") v.touch(n.from, "help", MINOR);
   },
   "damage-divided-evenly": (n, v) => v.touch(n.from, "harm", MAJOR),
   // "Target player adds …" (The Warring Triad): mana for them.
@@ -296,7 +297,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "gain-life": (n, v) => v.touch(n.toControllerOfTarget, "help", MINOR),
   "lose-life": (n, v) => {
     v.touch(n.target, "harm", MINOR);
-    if (typeof n.who === "object" && "target" in n.who) v.touch(n.who.target, "harm", MINOR);
+    if (typeof n.who === "object" && "target" in n.who) v.touch(slotOfPlayer(n.who), "harm", MINOR);
     v.touch(n.toControllerOfTarget, "harm", MINOR);
   },
   // A total this low is a blow to whoever it's aimed at (Magister Sphinx's 10,
@@ -311,13 +312,13 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "exile-if-dies-this-turn": (n, v) => v.touch(n.target, "harm", MINOR),
   "shuffle-into-library": (n, v) => v.touch(n.target, "harm", DECISIVE),
   // "… target player controls": that player is the one hurt. "Target X and
-  // all other Xs with the same name" (`sameNameAsTarget`), or radiance's
-  // "and each other X that shares a color with it" (`sharesColorWithTarget`):
+  // all other Xs with the same name" (`sameNameWith`), or radiance's
+  // "and each other X that shares a color with it" (`sharesColorWith`):
   // the target is.
   "destroy-all": (n, v) => {
     v.touch(n.controlledByTarget, "harm", MAJOR);
-    v.touch(n.filter.sameNameAsTarget, "harm", DECISIVE);
-    v.touch(n.filter.sharesColorWithTarget, "harm", DECISIVE);
+    v.touch(n.filter.sameNameWith, "harm", DECISIVE);
+    v.touch(n.filter.sharesColorWith, "harm", DECISIVE);
     v.touch(n.filter.sharesCreatureTypeWith, "harm", DECISIVE);
     // "All creatures that blocked or were blocked by it" (Venomous Breath):
     // the target's the creature whose opponents in combat die, so your own.
@@ -329,8 +330,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     v.touch(n.from, "help", MINOR);
     // "Each creature target player controls": that player is the one hurt.
     v.touch(n.controlledByTarget, "harm", MAJOR);
-    v.touch(n.filter.sameNameAsTarget, "harm", MAJOR);
-    v.touch(n.filter.sharesColorWithTarget, "harm", MAJOR);
+    v.touch(n.filter.sameNameWith, "harm", MAJOR);
+    v.touch(n.filter.sharesColorWith, "harm", MAJOR);
     // Killer's "target creature and each other creature that shares a
     // creature type with it" (a slot number; other references touch none).
     v.touch(n.filter.sharesCreatureTypeWith, "harm", MAJOR);
@@ -364,13 +365,13 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   },
   "return-to-hand-all": (n, v) => {
     v.touch(n.controlledByTarget, "harm", MAJOR);
-    v.touch(n.filter.sameNameAsTarget, "harm", DECISIVE);
-    v.touch(n.filter.sharesColorWithTarget, "harm", DECISIVE);
+    v.touch(n.filter.sameNameWith, "harm", DECISIVE);
+    v.touch(n.filter.sharesColorWith, "harm", DECISIVE);
   },
   "exile-all": (n, v) => {
     v.touch(n.controlledByTarget, "harm", MAJOR);
-    v.touch(n.filter.sameNameAsTarget, "harm", DECISIVE);
-    v.touch(n.filter.sharesColorWithTarget, "harm", DECISIVE);
+    v.touch(n.filter.sameNameWith, "harm", DECISIVE);
+    v.touch(n.filter.sharesColorWith, "harm", DECISIVE);
   },
   exile: (n, v) => {
     v.touch(n.target, "harm", DECISIVE);
@@ -398,7 +399,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     v.touch(n.target, "harm", MINOR);
     // "Exile target card from a graveyard and all others of its name"
     // (Moratorium Stone): the target is hurt with them.
-    v.touch(n.filter?.sameNameAsTarget, "harm", MAJOR);
+    v.touch(n.filter?.sameNameWith, "harm", MAJOR);
   },
   flicker: (n, v) => v.touch(n.target, "help", MINOR),
   "return-flickered": none,
@@ -468,7 +469,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "exile-from-library": (n, v) => v.touch(n.whose, "harm", MINOR),
   // "Return target creature card and all other cards with the same name"
   // (Echoing Return): the card you want back.
-  "return-from-graveyard": (n, v) => v.touch(n.filter.sameNameAsTarget, "help", MAJOR),
+  "return-from-graveyard": (n, v) => v.touch(n.filter.sameNameWith, "help", MAJOR),
   // A delayed ability acts on the targets its creator chose (rule 603.7c): it
   // has none of its own, its text not saying "target" (115.10a).
   // One watching a target leave and bringing it back ("when that creature
@@ -536,8 +537,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "modify-pt-all": (n, v) => {
     const shrinks = amountSign(n.toughness) < 0 || amountSign(n.power) < 0;
     v.touch(n.controlledByTarget, shrinks ? "harm" : "help", MINOR);
-    v.touch(n.filter.sameNameAsTarget, shrinks ? "harm" : "help", MAJOR);
-    v.touch(n.filter.sharesColorWithTarget, shrinks ? "harm" : "help", MAJOR);
+    v.touch(n.filter.sameNameWith, shrinks ? "harm" : "help", MAJOR);
+    v.touch(n.filter.sharesColorWith, shrinks ? "harm" : "help", MAJOR);
   },
   "double-pt-all": none,
   // A switch kills a 0-power wall or lets a 1/4 hit for 4: which side it
@@ -552,8 +553,8 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // with it gain haste" (Surge of Zeal) leans as `grant-keyword` does.
   "grant-keyword-all": (n, v) => {
     const lean = n.keyword === "defender" ? "harm" : "help";
-    v.touch(n.filter.sameNameAsTarget, lean, MAJOR);
-    v.touch(n.filter.sharesColorWithTarget, lean, MAJOR);
+    v.touch(n.filter.sameNameWith, lean, MAJOR);
+    v.touch(n.filter.sharesColorWith, lean, MAJOR);
     v.touch(n.controlledByTarget, lean, MINOR);
   },
   "add-counter": (n, v) =>
@@ -779,11 +780,11 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "counters-divided": (n, v) => v.touch(n.from, n.counter === "+1/+1" ? "help" : "harm", MAJOR),
   "untap-all": (n, v) => {
     v.touch(n.controlledByTarget, "help", MINOR);
-    v.touch(n.filter.sharesColorWithTarget, "help", MINOR);
+    v.touch(n.filter.sharesColorWith, "help", MINOR);
   },
   "tap-all": (n, v) => {
     v.touch(n.controlledByTarget, "harm", MINOR);
-    v.touch(n.filter.sharesColorWithTarget, "harm", MINOR);
+    v.touch(n.filter.sharesColorWith, "harm", MINOR);
     // "Tap each creature that was blocked by one of those creatures"
     // (Triton Tactics): a slot's are your own creature's opponents.
     v.touch(n.filter.blockedThisTurn?.of, "help", MINOR);
@@ -833,7 +834,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // Ring, Arcane Artisan).
   "create-token-copy": (n, v) => {
     v.touch(n.of, n.who === "you" ? "take" : "help", MAJOR);
-    if (typeof n.who === "object" && "target" in n.who) v.touch(n.who.target, "help", MAJOR);
+    if (typeof n.who === "object" && "target" in n.who) v.touch(slotOfPlayer(n.who), "help", MAJOR);
   },
   // The Aura or Equipment moved is put to work for whoever it ends up on
   // (Swordsman, Sharp Scoundrel's "attach target Equipment you control").
@@ -903,7 +904,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // hit.
   "damage-rule": (n, v) => {
     if (n.redirectTo !== undefined) {
-      if (n.redirectTo !== "source-controller" && n.redirectTo !== "source-itself") v.touch(n.redirectTo, "harm", MINOR);
+      if (typeof n.redirectTo === "number") v.touch(n.redirectTo, "harm", MINOR);
     } else if (n.to?.target !== undefined) {
       v.touch(n.to.target, "help", MINOR);
     }
@@ -941,7 +942,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     // "Target player may …" (partner with's search): the choice is theirs,
     // so being offered it is help — minor, so a punisher in `ifDidnt`
     // outranks it.
-    if (typeof n.who === "object" && "controllerOfTarget" in n.who) v.touch(n.who.controllerOfTarget, "help", MINOR);
+    if (typeof n.who === "object") v.touch(slotOfPlayer(n.who), "help", MINOR);
     v.child(n.effect);
     v.child(n.ifDid);
     v.child(n.ifDidnt);
@@ -950,7 +951,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   ward: none,
   // "That player sacrifices all but that many" (Choice of Damnations).
   "sacrifice-all-but": (n, v) => {
-    if (typeof n.who === "object" && "target" in n.who) v.touch(n.who.target, "harm", MAJOR);
+    if (typeof n.who === "object" && "target" in n.who) v.touch(slotOfPlayer(n.who), "harm", MAJOR);
   },
   "keep-total-power": none,
   "choose-one-of-each": none,
@@ -1018,16 +1019,16 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // Searching a targeted player's library, or the zones of a target's owner
   // or controller (Extract, Surgical Extraction), takes from them.
   "search-library": (n, v) => {
-    v.touch(typeof n.who === "object" ? n.who.controllerOfTarget : undefined, "help", MINOR);
+    v.touch(typeof n.who === "object" ? slotOfPlayer(n.who) : undefined, "help", MINOR);
     const whose = n.whose;
     // "Search your library for a card with the same name as target nontoken
     // creature" (Mask of the Mimic): your own deck holds your own creature's
     // namesakes.
-    if (whose === undefined) v.touch(n.filter.sameNameAsTarget, "help", MINOR);
+    if (whose === undefined) v.touch(n.filter.sameNameWith, "help", MINOR);
     // Yavimaya Dryad's Forest under target player's control.
     if (typeof n.enterUnder === "object" && "target" in n.enterUnder) v.touch(n.enterUnder.target, "help", MINOR);
     if (typeof whose !== "object") return;
-    v.touch("target" in whose ? whose.target : "controllerOfTarget" in whose ? whose.controllerOfTarget : whose.ownerOfTarget, "harm", MINOR);
+    v.touch(slotOfPlayer(whose), "harm", MINOR);
   },
   // Choosing among its own targets (Sepulchral Primordial's cards from
   // opponents' graveyards, put onto the battlefield under your control).
@@ -1055,11 +1056,26 @@ function slotsOf(ref: unknown): readonly number[] {
   if (typeof ref === "number") return [ref];
   if (Array.isArray(ref)) return ref.filter((x): x is number => typeof x === "number");
   if (typeof ref === "object" && ref !== null) {
-    const slot = (ref as { readonly from?: unknown; readonly target?: unknown }).from ??
-      (ref as { readonly target?: unknown }).target;
+    const held = ref as { readonly from?: unknown; readonly target?: unknown; readonly controllerOf?: unknown; readonly ownerOf?: unknown };
+    const slot = held.from ?? held.target ?? held.controllerOf ?? held.ownerOf;
     return typeof slot === "number" ? [slot] : [];
   }
   return [];
+}
+
+/** The target slot a player ref's player comes from, if it does: "target
+ * player", "that creature's controller", "its owner". Harm to that player is
+ * harm to whoever holds the slot, so a target for it is an opponent's. */
+function slotOfPlayer(who: PlayerScope): number | undefined {
+  if (typeof who !== "object" || "otherThan" in who) return undefined;
+  if ("target" in who) return who.target;
+  const of = "controllerOf" in who ? who.controllerOf : "ownerOf" in who ? who.ownerOf : who.defendingPlayerOf;
+  return typeof of === "number" ? of : undefined;
+}
+
+/** Whether `who` is the accessor `key` of `object`. */
+function isRefTo(who: PlayerScope | undefined, key: "controllerOf" | "ownerOf", object: ObjectRef): boolean {
+  return typeof who === "object" && key in who && (who as { readonly [K in typeof key]?: ObjectRef })[key] === object;
 }
 
 function resolveSlot(touches: readonly Touch[]): Polarity {
@@ -1319,7 +1335,7 @@ export function auraPolarity(def: CardDefinition): Polarity {
       // Infestation): that player is hurt, whenever it comes.
       if (
         (ability.effect?.kind === "damage" || ability.effect?.kind === "lose-life") &&
-        ability.effect.who === "attached-controller"
+        isRefTo(ability.effect.who, "controllerOf", "attached")
       ) {
         harm = true;
       }

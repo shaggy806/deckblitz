@@ -888,6 +888,7 @@ import _poolTrickShot from "../pool/trick-shot.js";
 import _poolTriplicateSpirits from "../pool/triplicate-spirits.js";
 import _poolTriumphOfGerrard from "../pool/triumph-of-gerrard.js";
 import _poolTropicalStorm from "../pool/tropical-storm.js";
+import _poolTsabosWeb from "../pool/tsabos-web.js";
 import _poolTuneUp from "../pool/tune-up.js";
 import _poolTwincast from "../pool/twincast.js";
 import _poolTyrantGuard from "../pool/tyrant-guard.js";
@@ -1876,6 +1877,7 @@ const shard: CardShard = {
     _poolTriplicateSpirits,
     _poolTriumphOfGerrard,
     _poolTropicalStorm,
+    _poolTsabosWeb,
     _poolTuneUp,
     _poolTwincast,
     _poolTyrantGuard,

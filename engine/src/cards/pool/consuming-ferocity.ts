@@ -27,7 +27,7 @@ export default defineCard({
             then: {
               kind: "sequence",
               effects: [
-                { kind: "damage", amount: { powerOf: "attached" }, who: "attached-controller", from: "attached" },
+                { kind: "damage", amount: { powerOf: "attached" }, who: { controllerOf: "attached" }, from: "attached" },
                 { kind: "destroy", target: "attached", cantBeRegenerated: true },
               ],
             },

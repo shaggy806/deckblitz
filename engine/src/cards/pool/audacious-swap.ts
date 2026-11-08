@@ -17,7 +17,7 @@ export default defineCard({
       { kind: "shuffle-into-library", target: 0 },
       {
         kind: "for-each-player",
-        who: { ownerOfTarget: 0 },
+        who: { ownerOf: 0 },
         effect: {
           kind: "sequence",
           effects: [

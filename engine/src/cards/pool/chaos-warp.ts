@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 
 // The owner shuffles it in — a token too, which ceases to exist but still
 // gets the library shuffled — then reveals the top card of *their* library
-// (`of: { ownerOfTarget }`, read even once the target has moved). A permanent
+// (`of: { ownerOf }`, read even once the target has moved). A permanent
 // card goes onto the battlefield under its owner's control; anything else,
 // or a permanent card that can't enter (an Aura with nothing to enchant),
 // stays on top (the rulings). An illegal target means none of it happens.
@@ -21,7 +21,7 @@ export default defineCard({
       { kind: "shuffle-into-library", target: 0 },
       {
         kind: "reveal-top",
-        of: { ownerOfTarget: 0 },
+        of: { ownerOf: 0 },
         then: {
           kind: "conditional",
           condition: {

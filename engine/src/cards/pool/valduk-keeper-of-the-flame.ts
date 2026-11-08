@@ -23,7 +23,7 @@ export default defineCard({
       effect: {
         kind: "create-token",
         token: "3/1 Red Elemental Token",
-        count: { aggregate: "count", filter: { subtypes: ["Aura", "Equipment"] }, in: "attached-to-source" },
+        count: { aggregate: "count", filter: { subtypes: ["Aura", "Equipment"] }, in: { attachmentsOf: "source" } },
         exileAtEndStep: true,
       },
       resolve: null,

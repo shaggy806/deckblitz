@@ -16,7 +16,7 @@ export default defineCard({
       { kind: "damage-rule", by: { target: 0 } },
       {
         kind: "each-player-may",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         options: [{ sacrifice: { type: "land" }, text: "Sacrifice a land" }],
         ifDid: {
           kind: "each-player-may",

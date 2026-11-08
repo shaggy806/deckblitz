@@ -23,7 +23,7 @@ export default defineCard({
       {
         kind: "conditional",
         condition: { kind: "this-way", what: "tapped" },
-        then: { kind: "damage", amount: { powerOf: 0 }, target: 1, from: { target: 0 } },
+        then: { kind: "damage", amount: { powerOf: 0 }, target: 1, from: 0 },
       },
     ],
   },

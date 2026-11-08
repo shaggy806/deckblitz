@@ -22,7 +22,7 @@ export default defineCard({
       { kind: "damage", amount: 3, target: 0 },
       {
         kind: "each-player-may",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         options: [{ discard: 1, text: "Discard a card" }],
         ifDid: {
           kind: "each-player-may",

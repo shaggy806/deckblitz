@@ -24,7 +24,7 @@ export default defineCard({
       ],
       effect: {
         kind: "unless",
-        chooser: { controllerOfTarget: 0 },
+        chooser: { controllerOf: 0 },
         options: [{ payGeneric: { manaValueOf: 0 }, text: "Pay {X}, where X is that creature's mana value" }],
         otherwise: {
           kind: "sequence",

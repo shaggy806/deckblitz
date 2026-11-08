@@ -29,13 +29,13 @@ export default defineCard({
         condition: { kind: "this-way", what: "destroyed", atLeast: 1 },
         then: {
           kind: "reveal-until",
-          whose: { controllerOfTarget: 0 },
+          whose: { controllerOf: 0 },
           filter: { notTypes: ["land"] },
           exile: true,
           rest: "stay",
           // The card found is the only target here: its controller in exile
           // is its owner, the player whose library it came from.
-          then: { kind: "cast-now", target: 0, free: true, by: { controllerOfTarget: 0 } },
+          then: { kind: "cast-now", target: 0, free: true, by: { controllerOf: 0 } },
         },
       },
     ],

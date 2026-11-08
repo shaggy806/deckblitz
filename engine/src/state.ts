@@ -988,7 +988,7 @@ export interface GameObject {
    * Bodyguard; rules 614.1c, 607.2d), with the stint it was chosen in
    * (`zoneChangeCount`) — once it leaves the battlefield it's a new object
    * the choice no longer names (rule 400.7). What the `"chosen"`
-   * {@link EffectTargetRef} and a static's `{ scope: "chosen" }` read.
+   * {@link ObjectRef} and a static's `{ scope: "chosen" }` read.
    * Cleared on any zone change of this one. */
   chosenPermanent?: { readonly id: ObjectId; readonly stint: number };
   /** A battle's protector (rule 310.9): the player who defends it — chosen
@@ -2567,7 +2567,7 @@ export interface LastKnownRefs {
    * permanent" is gone, rather than read as it last was, once it has left
    * (Ghyrson Starn's 2 damage to a creature that has since died hits
    * nothing). What a `damage` effect's `toTriggerRecipient` hits and an
-   * `EffectTargetRef` `"trigger-recipient"` names; a delayed trigger the
+   * `ObjectRef` `"trigger-recipient"` names; a delayed trigger the
    * ability makes keeps it (`DelayedTrigger.recipient`).
    */
   readonly recipient?: { readonly target: TargetRef; readonly zoneChangeCount?: number };

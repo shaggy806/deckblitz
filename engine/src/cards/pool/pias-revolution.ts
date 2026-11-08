@@ -39,7 +39,7 @@ export default defineCard({
       targets: ["opponent"],
       effect: {
         kind: "each-player-may",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         choices: [
           { text: "Have Pia's Revolution deal 3 damage to you.", effect: { kind: "damage", target: 0, amount: 3 } },
           {

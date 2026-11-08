@@ -26,7 +26,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "add-counter", target: 0, counter: "bribery", amount: 1 },
-          { kind: "draw", who: { controllerOfTarget: 0 }, amount: 1 },
+          { kind: "draw", who: { controllerOf: 0 }, amount: 1 },
         ],
       },
       resolve: null,

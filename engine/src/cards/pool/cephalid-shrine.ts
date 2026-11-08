@@ -15,7 +15,7 @@ export default defineCard({
       effect: {
         kind: "unless",
         chooser: "trigger-controller",
-        options: [{ payGeneric: { countInGraveyard: { sameNameAsTriggerObject: true } }, text: "Pay {X}" }],
+        options: [{ payGeneric: { countInGraveyard: { sameNameWith: "trigger-object" } }, text: "Pay {X}" }],
         otherwise: { kind: "counter", target: "trigger-object" },
       },
       resolve: null,

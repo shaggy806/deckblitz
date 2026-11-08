@@ -21,7 +21,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "draw",
-        amount: { aggregate: "count", filter: { subtypes: ["Aura", "Equipment"] }, in: "attached-to-source" },
+        amount: { aggregate: "count", filter: { subtypes: ["Aura", "Equipment"] }, in: { attachmentsOf: "source" } },
       },
       resolve: null,
       text: TEXT,

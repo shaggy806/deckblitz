@@ -15,7 +15,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: true },
       targets: ["creature"],
-      effect: { kind: "damage-all", amount: 1, filter: { type: "creature", sharesColorWithTarget: 0 } },
+      effect: { kind: "damage-all", amount: 1, filter: { type: "creature", sharesColorWith: 0 } },
       resolve: null,
       text: "Radiance — {T}: This creature deals 1 damage to target creature and each other creature that shares a color with it.",
     },

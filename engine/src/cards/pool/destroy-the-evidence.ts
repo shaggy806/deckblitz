@@ -19,7 +19,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "destroy", target: 0 },
-      { kind: "reveal-until", whose: { controllerOfTarget: 0 }, filter: { type: "land" }, rest: "graveyard" },
+      { kind: "reveal-until", whose: { controllerOf: 0 }, filter: { type: "land" }, rest: "graveyard" },
     ],
   },
 });

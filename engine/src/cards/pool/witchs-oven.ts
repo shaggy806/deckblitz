@@ -24,7 +24,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "conditional",
-        condition: { kind: "sacrificed", filter: { toughness: { op: "gte", n: 4 } } },
+        condition: { kind: "object-matches", object: { paid: "sacrificed" }, filter: { toughness: { op: "gte", n: 4 } } },
         then: { kind: "create-token", token: "Food Token", count: 2 },
         else: { kind: "create-token", token: "Food Token", count: 1 },
       },

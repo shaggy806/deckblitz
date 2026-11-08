@@ -21,7 +21,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "as-player",
-        who: "source-controller",
+        who: { controllerOf: "source" },
         effect: {
           kind: "sequence",
           effects: [

@@ -14,7 +14,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "destroy", target: 0 },
-      { kind: "manifest-dread", who: { controllerOfTarget: 0 } },
+      { kind: "manifest-dread", who: { controllerOf: 0 } },
     ],
   },
 });

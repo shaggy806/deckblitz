@@ -8,6 +8,7 @@
  * and destroy creatures with lethal damage or non-positive toughness. No combat.
  */
 
+import { objectRefRead, resolvePlayerRef } from "./effects.js";
 import {
   abilityLifeCost,
   chosenCounterCost,
@@ -271,7 +272,7 @@ import type {
   CascadeFound,
   DiscoverFound,
   CastNowOptions,
-  DamageFrom,
+  ObjectRef,
   DelayedNextSpell,
   DelayedWheneverAt,
   EffectAmount,
@@ -327,9 +328,7 @@ import type { AggregateReads, AggregateSpec, CardFilter, WeightedMatch } from ".
 import {
   addToSet,
   memberCount,
-  onlyMember,
   setMembersAll,
-  staticSetMembers,
   storedSetMembers,
   type ObjectSetRef,
   type ObjectSets,
@@ -26952,7 +26951,7 @@ export class Game {
     if (from.withFlashback === true) {
       return (
         purpose.via === "flashback" ||
-        matchesFilter(this.state, this.registry, purpose.card, { hasFlashback: true }, { you: player })
+        matchesFilter(this.state, this.registry, purpose.card, { hasKeyword: "flashback" }, { you: player })
       );
     }
     return true;
@@ -33207,7 +33206,9 @@ export class Game {
           ? refs.triggerObject
           : refs.granter?.object === id
             ? refs.granter.zoneChangeCount
-            : undefined;
+            : attachedWas()?.host === id
+              ? attachedWas()?.stint
+              : undefined;
     const memberGone = (id: ObjectId): LastKnownInfo | null | undefined => {
       if (refs.sets === undefined) return undefined;
       const member = setMembersAll(refs.sets).find((m) => m.object === id);
@@ -33308,29 +33309,11 @@ export class Game {
       return held ?? refs.votes ?? [];
     };
     const scoped = (who: PlayerScope): PlayerId[] => {
-      if (who === "source-controller") {
-        // Whoever controls it now, or last did (608.2h).
-        const departed = departedSource();
-        const p = departed !== undefined ? departed.controller : this.state.objects[source]?.controller;
-        return p === undefined || this.state.players[p]?.hasLost !== false ? [] : [p];
-      }
+      if (typeof who === "object") return context.playersInScope(who) as PlayerId[];
       if (who === "chosen-player") {
         // The source's chosen player, in the stint this refers to (608.2h).
         const departed = departedSource();
         const p = departed !== undefined ? departed.chosenPlayer : this.state.objects[source]?.chosenPlayer;
-        return p === undefined || this.state.players[p]?.hasLost !== false ? [] : [p];
-      }
-      if (who === "attached-controller") {
-        // Its controller as the host is now, or as it last existed if it's
-        // gone (608.2h). A Curse's host is a player: that player.
-        const known = attachedKnown();
-        const departed = departedSource();
-        const p =
-          known !== undefined
-            ? (known.lastKnown?.controller ?? this.state.objects[known.id]?.controller)
-            : departed !== undefined
-              ? departed.attachedToPlayer
-              : this.state.objects[source]?.attachedToPlayer;
         return p === undefined || this.state.players[p]?.hasLost !== false ? [] : [p];
       }
       if (who === "each-friend" || who === "each-foe") {
@@ -33407,8 +33390,13 @@ export class Game {
     // you control deals damage"), each as it last existed on the battlefield
     // if it has left. Nobody, for a blank target slot.
     const damageSource = (
-      from: DamageFrom | undefined,
+      from: ObjectRef | undefined,
     ): { readonly id: ObjectId; readonly lastKnown: LastKnownInfo | undefined } | undefined => {
+      // Any other ref: the object it reads (608.2h: as it last existed).
+      if (from !== undefined && from !== "granter" && from !== "attached" && from !== "amassed" && from !== "trigger-object" && typeof from !== "number") {
+        const read = objectRefRead(from, context);
+        return read?.kind === "object" ? { id: read.object, lastKnown: lastKnownOf(read) } : undefined;
+      }
       // The permanent whose static granted this ability, as it last existed
       // if it has gone — Ninja's Kunai sacrificed for its own cost (608.2h).
       if (from === "granter") {
@@ -33425,8 +33413,8 @@ export class Game {
         const army = thisWayEntries(this.state, "amassed", since).at(-1)?.object;
         return army === undefined ? undefined : { id: army, lastKnown: undefined };
       }
-      if (from !== undefined && from !== "trigger-object") {
-        const ref = targets[from.target];
+      if (typeof from === "number") {
+        const ref = targets[from];
         return ref?.kind === "object" ? { id: ref.object, lastKnown: lastKnownOf(ref) } : undefined;
       }
       return from === "trigger-object" && triggerObject !== undefined
@@ -33483,15 +33471,32 @@ export class Game {
               }));
         return cards.map((id) => ({ object: id, stint: this.state.objects[id]?.zoneChangeCount ?? 0 }));
       }
-      if (ref === "attached-to-source") {
-        const src = this.state.objects[source];
-        const stint = refs.source ?? src?.zoneChangeCount ?? 0;
-        if (src?.zone === "battlefield" && (src.zoneChangeCount ?? 0) === stint) {
-          return staticSetMembers(this.state, ref, source);
+      if (typeof ref === "object" && "targetsOf" in ref) {
+        const of = objectRefRead(ref.targetsOf, context);
+        const object = of?.kind === "object" ? this.state.objects[of.object] : undefined;
+        return (object?.targets ?? []).flatMap((target): SetMember[] => {
+          const held = target?.kind === "object" ? this.state.objects[target.object] : undefined;
+          return target?.kind !== "object" || held === undefined
+            ? []
+            : [{ object: target.object, stint: held.zoneChangeCount ?? 0, count: held.stackCount ?? 1 }];
+        });
+      }
+      if (typeof ref === "object" && "attachmentsOf" in ref) {
+        const of = objectRefRead(ref.attachmentsOf, context);
+        if (of?.kind !== "object") return [];
+        const id = of.object;
+        const on = this.state.objects[id];
+        const known = lastKnownOf(of);
+        if (known === undefined) {
+          if (on?.zone !== "battlefield") return [];
+          return this.state.zones.shared.battlefield.flatMap((other): SetMember[] => {
+            const held = this.state.objects[other];
+            return held?.attachedTo === id ? [{ object: other, stint: held.zoneChangeCount ?? 0, count: held.stackCount ?? 1 }] : [];
+          });
         }
         // Gone: what was attached to it as it last existed (608.2h), each as
         // it was then if it has left too.
-        return (this.lastKnownOfStint(source, stint)?.attachments ?? []).map(({ object, stint: at }) => {
+        return (known.attachments ?? []).map(({ object, stint: at }) => {
           const now = this.state.objects[object];
           const was = now?.zoneChangeCount === at ? undefined : (now?.lastKnown?.zoneChangeCount === at ? now.lastKnown : undefined);
           return { object, stint: at, ...(was !== undefined ? { was } : {}) };
@@ -33546,7 +33551,6 @@ export class Game {
         if (now !== undefined && (now.zone === "library" || now.zone === "hand") && m.shown !== true) return [];
         return now === undefined ? [] : [{ id: m.object, weight }];
       });
-    const tappedForCost = onlyMember(refs.sets?.paid?.tapped ?? []);
     const conditionMet = (condition: StaticCondition): boolean => {
       // "If that land is a Mountain" — a question about the object that
       // fired this trigger, which only the resolution context knows, so it
@@ -33596,15 +33600,11 @@ export class Game {
         }
         return matchesKnown(triggerObject, condition.filter);
       }
-      if (condition.kind === "sacrificed") {
-        const sacrificed = refs.sets?.paid?.sacrificed?.at(-1);
-        return sacrificed !== undefined && matchesKnown(sacrificed.object, condition.filter);
-      }
-      // "If the discarded card was a creature card": the cost's one card,
-      // where the discard put it.
-      if (condition.kind === "discarded") {
-        const discarded = refs.sets?.paid?.discarded;
-        return discarded?.length === 1 && matchesKnown(discarded[0].object, condition.filter);
+      // "If the sacrificed creature was …", "if that Equipment was attached to
+      // a creature": the object the ref reads, as it was (608.2h).
+      if (condition.kind === "object-matches") {
+        const read = objectRefRead(condition.object, context);
+        return read?.kind === "object" && matchesKnown(read.object, condition.filter);
       }
       if (condition.kind === "resolved-this-turn") return resolutionCount === condition.n;
       if (condition.kind === "activated-this-turn") {
@@ -33753,7 +33753,7 @@ export class Game {
         })
       );
     };
-    return {
+    const context: ResolutionContext = {
       controller,
       source,
       targets,
@@ -33787,17 +33787,6 @@ export class Game {
             ...(this.state.objects[refs.granter.object]?.zone !== "battlefield" ||
             (this.state.objects[refs.granter.object]?.zoneChangeCount ?? 0) !== refs.granter.zoneChangeCount
               ? { granterLost: true }
-              : {}),
-          }
-        : {}),
-      // Read as it last existed once gone, acted on only while the same
-      // permanent (400.7).
-      ...(tappedForCost !== undefined
-        ? {
-            tapped: tappedForCost.object,
-            ...(this.state.objects[tappedForCost.object]?.zone !== "battlefield" ||
-            (this.state.objects[tappedForCost.object]?.zoneChangeCount ?? 0) !== tappedForCost.stint
-              ? { tappedLost: true }
               : {}),
           }
         : {}),
@@ -33858,6 +33847,58 @@ export class Game {
       attachedOwner: () => {
         const known = attachedKnown();
         return known === undefined ? undefined : (known.lastKnown?.owner ?? this.state.objects[known.id]?.owner);
+      },
+      attachedRead: () => {
+        const known = attachedKnown();
+        if (known !== undefined) return { kind: "object", object: known.id };
+        const departed = departedSource();
+        const p = departed !== undefined ? departed.attachedToPlayer : this.state.objects[source]?.attachedToPlayer;
+        return p === undefined ? undefined : { kind: "player", player: p };
+      },
+      hostOf: (target, act) => {
+        if (target.kind !== "object") return undefined;
+        const object = this.state.objects[target.object];
+        const lki = lastKnownOf(target);
+        const was = lki !== undefined ? lki : object?.zone === "battlefield" ? object : undefined;
+        if (was === undefined) return undefined;
+        if (was.attachedToPlayer !== undefined) return { kind: "player", player: was.attachedToPlayer };
+        const host = was.attachedTo;
+        if (host === null || host === undefined) return undefined;
+        if (act) {
+          const on = this.state.objects[host];
+          const stint = lki?.attachedToStint;
+          // An Aura still enchanting a card in a graveyard (Animate Dead) is
+          // on the same card: it's unattached as soon as that card leaves.
+          if (!(stint === undefined && on?.zone === "graveyard")) {
+            if (on?.zone !== "battlefield" || (stint !== undefined && on.zoneChangeCount !== stint)) return undefined;
+          }
+        }
+        return { kind: "object", object: host };
+      },
+      pairedWith: (target) => {
+        if (target.kind !== "object") return undefined;
+        const object = this.state.objects[target.object];
+        const partner = object?.zone === "battlefield" ? object.pairedWith : undefined;
+        return partner === undefined ? undefined : { kind: "object", object: partner };
+      },
+      defendingPlayerOf: (target) => {
+        if (target.kind !== "object") return undefined;
+        const object = this.state.objects[target.object];
+        const of = (at: PlayerId | ObjectId): PlayerId | undefined => {
+          if (this.state.players[at as PlayerId] !== undefined) return at as PlayerId;
+          const attacked = this.state.objects[at as ObjectId];
+          return attacked === undefined ? undefined : (attacked.protector ?? attacked.controller);
+        };
+        if (object?.zone === "battlefield" && object.attacking !== null && object.attacking !== undefined) return of(object.attacking);
+        // No longer attacking: as it was before it was removed from combat
+        // (rule 508.5), from the journal rather than a field of its own.
+        const declared = entriesThisTurn(this.state, "attacked").filter((e) => e.object === target.object).at(-1);
+        if (declared?.target === undefined) return undefined;
+        return declared.target.kind === "player" ? declared.target.player : of(declared.target.object);
+      },
+      stintNow: (id) => {
+        const object = this.state.objects[id];
+        return object === undefined ? undefined : (object.zoneChangeCount ?? 0);
       },
       chosenPermanent: () => {
         // "The chosen creature" (rule 607.2d): the source's choice — as the
@@ -33951,7 +33992,17 @@ export class Game {
         }
       },
       cantDrawMore: (player, more) => this.cantDrawMore(player, more),
-      playersInScope: (who) => scoped(who),
+      playersInScope(who) {
+        if (typeof who !== "object") return scoped(who);
+        // Any `PlayerRef` is a scope of one, resolved in the context that
+        // asked (a body's bound targets), and "each other player" of one.
+        if ("otherThan" in who) {
+          const other = resolvePlayerRef(who.otherThan, this);
+          return scoped("each-player").filter((p) => p !== other);
+        }
+        const player = resolvePlayerRef(who, this);
+        return player === undefined ? [] : [player];
+      },
       playersCountedInScope: (who) =>
         this.scopedPlayers(controller, who, triggerObject, triggerLastKnown(), refs.player, true, refs.triggerSpellController),
       discardHand: (player, filter, reveal) => this.discardWholeHand(player, filter, reveal, x),
@@ -38653,7 +38704,7 @@ export class Game {
           },
         ),
       changeLifeScoped: (who, delta) =>
-        who === "source-controller"
+        typeof who === "object"
           ? scoped(who).forEach((player) => this.changeLife(player, delta))
           : this.changeLifeScoped(controller, who, delta, triggerObject, triggerLastKnown(), refs.player, refs.triggerSpellController),
       searchLibrary: (
@@ -38788,6 +38839,7 @@ export class Game {
         );
       },
     };
+    return context;
   }
 
   /** Does `id` satisfy a `"look-and-choose"` effect's optional filter? Always
@@ -39758,7 +39810,7 @@ export class Game {
           1,
           1,
           // The Army chosen is slot 0, and its controller is who's amassing.
-          { kind: "amass", amount, creatureType, onto: 0, who: { controllerOfTarget: 0 } },
+          { kind: "amass", amount, creatureType, onto: 0, who: { controllerOf: 0 } },
           "Amass: choose an Army creature you control",
         );
         return;
@@ -48052,7 +48104,7 @@ export class Game {
     // in turn and each a different permanent (`promptNextSacrifice`).
     const parts = [filter, ...(andEach ?? [])];
     let players: PlayerId[];
-    if (typeof who === "object") {
+    if (typeof who === "object" && "player" in who) {
       players = [who.player];
     } else {
       // APNAP: active player first, then the rest in turn order.
@@ -54119,16 +54171,15 @@ export class Game {
     triggerSpellController?: PlayerId,
   ): PlayerId[] {
     if (who === "you") return [controller];
-    // Only a resolution knows a vote's votes, and its source's chosen player
-    // (`makeResolutionContext`).
+    // Only a resolution knows a vote's votes, its source's chosen player and
+    // any ref made of accessors (`makeResolutionContext`).
     if (
+      typeof who === "object" ||
       who === "opponents-who-voted-with-you" ||
       who === "you-and-opponents-who-voted-with-you" ||
       who === "each-friend" ||
       who === "each-foe" ||
-      who === "chosen-player" ||
-      who === "attached-controller" ||
-      who === "source-controller"
+      who === "chosen-player"
     ) {
       return [];
     }
@@ -54179,11 +54230,6 @@ export class Game {
       return p === undefined || this.state.players[p]?.hasLost === true ? [] : [p];
     }
     // "That player" who owns the object: an owner never changes (rule 108.3).
-    if (who === "trigger-owner") {
-      const p =
-        triggerLastKnown?.owner ?? (triggerObject === undefined ? undefined : this.state.objects[triggerObject]?.owner);
-      return p === undefined || this.state.players[p]?.hasLost === true ? [] : [p];
-    }
     // "That player", in a trigger that fires on someone else's step.
     if (who === "active-player") {
       return this.state.players[this.activePlayer]?.hasLost === true

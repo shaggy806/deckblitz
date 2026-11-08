@@ -34,7 +34,7 @@ export default defineCard({
         simultaneous: true,
         effect: {
           kind: "sacrifice-all",
-          who: { controllerOfTarget: 0 },
+          who: { controllerOf: 0 },
           filter: { type: "creature", not: { sharesCreatureTypeWith: 0 } },
         },
       },

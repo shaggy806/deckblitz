@@ -7,7 +7,7 @@ import { defineCard } from "../define.js";
 // target; or, the target being yours, one of an opponent's; or two among
 // your opponents' (the target, being theirs, one of them).
 
-const SAME_NAME = { sameNameAsTarget: 0 } as const;
+const SAME_NAME = { sameNameWith: 0 } as const;
 
 export default defineCard({
   name: "Winnow",

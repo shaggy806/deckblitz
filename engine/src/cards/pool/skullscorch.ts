@@ -1,7 +1,7 @@
 import { defineCard } from "../define.js";
 
 // Torment. EDHREC rank 29241. Dwarven Driller's punisher: the targeted player
-// chooses (`each-player-may` of `controllerOfTarget`, a player target being
+// chooses (`each-player-may` of `controllerOf`, a player target being
 // its own controller) between the damage from Skullscorch and the random
 // discard.
 
@@ -14,7 +14,7 @@ export default defineCard({
   targets: ["player"],
   effect: {
     kind: "each-player-may",
-    who: { controllerOfTarget: 0 },
+    who: { controllerOf: 0 },
     choices: [
       {
         text: "Discard two cards at random.",

@@ -31,6 +31,7 @@ import type { Color, LandManaInstead, ManaFromSpec, ManaType, SpendAs } from "..
 import type { ReplacementSpec } from "../replacements.js";
 import type { DelayedTriggerTiming, HeldPlayerCounter, PlayerCounterKind, JournalWhat, ZoneType } from "../state.js";
 import type { JournalWindow } from "../journal.js";
+import type { ObjectRef } from "../refs.js";
 import type { TargetSpec } from "../target.js";
 import type { Step } from "../turn.js";
 
@@ -909,7 +910,7 @@ export type ConditionPlayer =
   | "active-player"
   | "defending-player"
   | { readonly target: number }
-  | { readonly controllerOfTarget: number };
+  | { readonly controllerOf: number };
 
 /** A starting-life-total bound for `life-total`: the game's starting life
  * plus `startingPlus` (rule 103.4 — 20, or 40 in Commander). */
@@ -1659,23 +1660,12 @@ export type StaticCondition =
    */
   | { readonly kind: "target-chosen"; readonly index: number }
   /**
-   * The permanent sacrificed to pay the spell's or ability's cost (or by a
-   * `sacrifice-source` step before this one) matched `filter` as it last
-   * existed on the battlefield — "if the sacrificed creature was a
-   * commander", "if it was a Hamster". False when nothing was sacrificed.
-   * Like `target`, only meaningful inside a `conditional` effect; always
-   * false on a static ability.
+   * "If that object is ...": whether one object matches, read as the ref
+   * reads it (rule 608.2h): "if the sacrificed creature was a Thrull" (`{ paid:
+   * "sacrificed" }`), "if that Equipment was attached to a creature" (`{
+   * hostOf: 0 }`). False with nothing to read.
    */
-  | { readonly kind: "sacrificed"; readonly filter: CardFilter }
-  /**
-   * The one card discarded to pay the spell's or ability's cost matched
-   * `filter` where the discard put it — "if the discarded card was a
-   * creature card" (Moria Scavenger), "wasn't a land card" (Grab the Prize,
-   * as `notTypes`). False when no card, or more than one, was discarded for
-   * the cost. Like `sacrificed`, only meaningful inside a `conditional`
-   * effect; always false on a static ability.
-   */
-  | { readonly kind: "discarded"; readonly filter: CardFilter }
+  | { readonly kind: "object-matches"; readonly object: ObjectRef; readonly filter: CardFilter }
   /**
    * "If this is the **Nth time this ability has resolved this turn**" (Omnath,
    * Locus of Creation; Ms. Bumbleflower; Tannuk). `n` counts the resolution
@@ -4720,7 +4710,7 @@ export interface CardDefinition {
      * (Skeletal Scrying). `optional` is "you **may** exile" (Redemptor
      * Dreadnought): asked even with few cards there, none an answer. `linked`
      * makes what's exiled "exiled with" the permanent the spell becomes (rule
-     * 607.2a). "The exiled card" of the spell's effect is the `AmountRef`
+     * 607.2a). "The exiled card" of the spell's effect is the `ObjectRef`
      * `{ paid: "exiled" }` (Corpse Explosion); of the permanent's, an
      * `exiled-with-source` read.
      */
@@ -5467,7 +5457,7 @@ export interface CardDefinition {
    * Tyrannical Pitlord, Dauntless Bodyguard): asked of its controller among
    * the permanents matching the filter — not targeted — and kept as
    * `GameObject.chosenPermanent` for "the chosen creature" (rule 607.2d),
-   * which the `"chosen"` {@link EffectTargetRef} and a static's `{ scope:
+   * which the `"chosen"` {@link ObjectRef} and a static's `{ scope:
    * "chosen" }` read. With nothing to choose, nothing is. See
    * {@link PermanentOnEnter} for its `attach` and `counter`. `null` for none.
    */

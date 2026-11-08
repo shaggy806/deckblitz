@@ -18,7 +18,7 @@ export default defineCard({
       { kind: "look-and-choose", zone: "library", count: 3, reveal: true, min: 0, max: 0, destination: "hand", leftover: "stay" },
       {
         kind: "each-player-may",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         choices: [
           {
             text: "Put those cards into their hand.",

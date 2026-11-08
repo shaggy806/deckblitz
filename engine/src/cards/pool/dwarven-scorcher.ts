@@ -23,7 +23,7 @@ export default defineCard({
       targets: ["creature"],
       effect: {
         kind: "each-player-may",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         choices: [
           {
             text: "Have Dwarven Scorcher deal 2 damage to you.",

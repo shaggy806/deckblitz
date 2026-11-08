@@ -26,7 +26,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "destroy", target: 0 },
-          { kind: "gain-control", target: "source", untilEndOfTurn: false, who: { controllerOfTarget: 0 } },
+          { kind: "gain-control", target: "source", untilEndOfTurn: false, who: { controllerOf: 0 } },
         ],
       },
       resolve: null,

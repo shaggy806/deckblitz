@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 // EDHREC rank 15484.
 //
 // One target; the opponent's other nonland permanents sharing its name (rule
-// 201.2a) go with it, untargeted (`CardFilter.sameNameAsTarget`), all until
+// 201.2a) go with it, untargeted (`CardFilter.sameNameWith`), all until
 // this creature leaves (rule 610.3). Gone before the trigger resolves: nothing
 // is exiled (610.3a, the ruling).
 
@@ -25,7 +25,7 @@ export default defineCard({
       targets: ["nonland-permanent-an-opponent-controls"],
       effect: {
         kind: "exile-all",
-        filter: { notTypes: ["land"], controlledBy: "you", sameNameAsTarget: 0 },
+        filter: { notTypes: ["land"], controlledBy: "you", sameNameWith: 0 },
         controlledByTarget: 0,
         untilSourceLeaves: true,
       },

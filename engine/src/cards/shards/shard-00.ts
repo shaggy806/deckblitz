@@ -585,6 +585,7 @@ import _poolPaleRecluse from "../pool/pale-recluse.js";
 import _poolPaleWayfarer from "../pool/pale-wayfarer.js";
 import _poolParadiseDruid from "../pool/paradise-druid.js";
 import _poolParadoxGardens from "../pool/paradox-gardens.js";
+import _poolParallaxInhibitor from "../pool/parallax-inhibitor.js";
 import _poolPasswallAdept from "../pool/passwall-adept.js";
 import _poolPathOfMettle from "../pool/path-of-mettle.js";
 import _poolPeaceStrider from "../pool/peace-strider.js";
@@ -788,6 +789,7 @@ import _poolStoneforgeAcolyte from "../pool/stoneforge-acolyte.js";
 import _poolStoneriseSpirit from "../pool/stonerise-spirit.js";
 import _poolStonewiseFortifier from "../pool/stonewise-fortifier.js";
 import _poolStoneworkPuma from "../pool/stonework-puma.js";
+import _poolStormWindrider from "../pool/storm-windrider.js";
 import _poolStormbeaconBlade from "../pool/stormbeacon-blade.js";
 import _poolStormkeldVanguard from "../pool/stormkeld-vanguard.js";
 import _poolStormriderRig from "../pool/stormrider-rig.js";
@@ -1585,6 +1587,7 @@ const shard: CardShard = {
     _poolPaleWayfarer,
     _poolParadiseDruid,
     _poolParadoxGardens,
+    _poolParallaxInhibitor,
     _poolPasswallAdept,
     _poolPathOfMettle,
     _poolPeaceStrider,
@@ -1788,6 +1791,7 @@ const shard: CardShard = {
     _poolStoneriseSpirit,
     _poolStonewiseFortifier,
     _poolStoneworkPuma,
+    _poolStormWindrider,
     _poolStormbeaconBlade,
     _poolStormkeldVanguard,
     _poolStormriderRig,

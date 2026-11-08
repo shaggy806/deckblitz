@@ -11,7 +11,7 @@ export default defineCard({
   targets: [{ kind: "permanent", filter: { notSupertype: "basic", type: "land" } }],
   effect: {
     kind: "each-player-may",
-    who: { controllerOfTarget: 0 },
+    who: { controllerOf: 0 },
     choices: [
       {
         text: "Have Lava Blister deal 6 damage to you.",

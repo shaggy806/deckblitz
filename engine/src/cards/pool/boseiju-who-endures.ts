@@ -8,7 +8,7 @@ import { manaTapAbility } from "../helpers.js";
  *
  * The compensating search is *the destroyed permanent's controller's*, not
  * this ability's, and theirs to decline — an `each-player-may` of `who: {
- * controllerOfTarget }` (Path to Exile), which reads last-known information
+ * controllerOf }` (Path to Exile), which reads last-known information
  * (rule 608.2h) so the target's controller is still named after it has gone.
  */
 export default defineCard({
@@ -34,7 +34,7 @@ export default defineCard({
             // "Its controller **may** search": their choice (`each-player-may`),
             // so declining neither searches nor shuffles their library.
             kind: "each-player-may",
-            who: { controllerOfTarget: 0 },
+            who: { controllerOf: 0 },
             prompt: "Search your library for a basic land card?",
             effect: {
               kind: "search-library",

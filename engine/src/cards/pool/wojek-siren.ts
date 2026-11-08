@@ -11,7 +11,7 @@ export default defineCard({
   targets: ["creature"],
   effect: {
     kind: "modify-pt-all",
-    filter: { type: "creature", sharesColorWithTarget: 0 },
+    filter: { type: "creature", sharesColorWith: 0 },
     power: 1,
     toughness: 1,
     duration: "end-of-turn",

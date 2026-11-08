@@ -17,7 +17,7 @@ export default defineCard({
         kind: "unless",
         chooser: 0,
         options: [{ sacrificeThat: 0, text: "Sacrifice it" }],
-        otherwise: { kind: "damage", amount: { manaValueOf: 0 }, toControllerOfTarget: 0, from: { target: 0 } },
+        otherwise: { kind: "damage", amount: { manaValueOf: 0 }, toControllerOfTarget: 0, from: 0 },
       },
       resolve: null,
       text: TEXT,

@@ -24,7 +24,7 @@ export default defineCard({
         chooser: 0,
         then: {
           kind: "reveal-top",
-          of: { ownerOfTarget: 0 },
+          of: { ownerOf: 0 },
           then: {
             kind: "conditional",
             condition: { kind: "target", index: 0, filter: { hasName: CHOSEN_CARD_NAME } },

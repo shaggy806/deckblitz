@@ -12,6 +12,7 @@
  */
 
 import type { PlayerScope, ThisWayKind } from "./effects.js";
+import type { ObjectRef } from "./refs.js";
 import type { CardFilter } from "./filter.js";
 import type { ObjectId } from "./primitives.js";
 import type { GameState, LastKnownInfo } from "./state.js";
@@ -65,8 +66,12 @@ export type PaidKind = "sacrificed" | "discarded" | "exiled" | "revealed" | "tap
  * - `"trigger-batch"` — "those creatures", "them", "one of them": the
  *   objects of the batch a "one or more" trigger fired on, each in the stint
  *   it was in then.
- * - `"attached-to-source"` — the Auras and Equipment attached to the source,
- *   as it last existed once it has left (608.2h).
+ * - `{ attachmentsOf }` — the Auras and Equipment attached to that object,
+ *   as it last existed once it has left (608.2h): Wyleth's "attached to it",
+ *   Mark of Eviction's "all Auras attached to that creature".
+ * - `{ targetsOf }` — the objects that object targets, a spell's: Storm,
+ *   Windrider's "those creatures" of "a spell that targets one or more
+ *   creatures". Its player targets aren't objects, and aren't in it.
  * - `{ targets }` — the objects in these target slots (an empty or illegal
  *   slot names nothing).
  * - `{ remembered }` — a set a delayed or reflexive trigger captured as it
@@ -77,7 +82,8 @@ export type ObjectSetRef =
   | { readonly paid: PaidKind }
   | "exiled-with-source"
   | "trigger-batch"
-  | "attached-to-source"
+  | { readonly attachmentsOf: ObjectRef }
+  | { readonly targetsOf: ObjectRef }
   | { readonly targets: readonly number[] }
   | { readonly remembered: string };
 
@@ -100,16 +106,16 @@ export interface ObjectSets {
 /** Whether `value` is an `ObjectSetRef` rather than a slot, a string ref of
  * another kind or a filter object. */
 export function isObjectSetRef(value: unknown): value is ObjectSetRef {
-  if (value === "exiled-with-source" || value === "trigger-batch" || value === "attached-to-source") return true;
+  if (value === "exiled-with-source" || value === "trigger-batch") return true;
   if (typeof value !== "object" || value === null) return false;
-  return "thisWay" in value || "paid" in value || "targets" in value || "remembered" in value;
+  return "thisWay" in value || "paid" in value || "targets" in value || "remembered" in value || "attachmentsOf" in value || "targetsOf" in value;
 }
 
 /** Whether a set's members are cards rather than permanents: everything but
  * a trigger's batch, what's attached to the source and a target group —
  * what a `create-token-copy` copies as the card it is. */
 export function isCardSet(ref: ObjectSetRef): boolean {
-  return ref !== "trigger-batch" && ref !== "attached-to-source" && !(typeof ref === "object" && "targets" in ref);
+  return ref !== "trigger-batch" && !(typeof ref === "object" && ("targets" in ref || "attachmentsOf" in ref || "targetsOf" in ref));
 }
 
 /** `sets` with `members` appended to one of its sets — the one writer, so a
@@ -167,7 +173,7 @@ export function memberCount(member: SetMember): number {
  *
  * - `"exiled-with-source"`: the cards in exile linked to `source`'s current
  *   battlefield stint (rule 607.2a);
- * - `"attached-to-source"`: the permanents attached to `source` now.
+ * - `{ attachmentsOf: "source" }`: the permanents attached to `source` now.
  *
  * Every other set is a resolution's and names nothing here.
  */
@@ -189,7 +195,7 @@ export function staticSetMembers(state: GameState, ref: ObjectSetRef, source: Ob
     }
     return out;
   }
-  if (ref === "attached-to-source") {
+  if (typeof ref === "object" && "attachmentsOf" in ref && ref.attachmentsOf === "source") {
     if (object.zone !== "battlefield") return [];
     const out: SetMember[] = [];
     for (const id of state.zones.shared.battlefield) {

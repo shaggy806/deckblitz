@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 // EDHREC rank 17128.
 //
 // One target; your opponents' other nonland permanents sharing its name (rule
-// 201.2a) go with it, untargeted (`CardFilter.sameNameAsTarget`), all until
+// 201.2a) go with it, untargeted (`CardFilter.sameNameWith`), all until
 // this enchantment leaves (rule 610.3).
 
 const TEXT =
@@ -22,7 +22,7 @@ export default defineCard({
       targets: ["nonland-permanent-an-opponent-controls"],
       effect: {
         kind: "exile-all",
-        filter: { notTypes: ["land"], controlledBy: "opponent", sameNameAsTarget: 0 },
+        filter: { notTypes: ["land"], controlledBy: "opponent", sameNameWith: 0 },
         untilSourceLeaves: true,
       },
       resolve: null,

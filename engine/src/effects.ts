@@ -63,47 +63,15 @@ import type {
 } from "./state.js";
 import type { JournalWindow } from "./journal.js";
 import { isCardSet, isObjectSetRef, memberCount, onlyMember, type ObjectSetRef, type RememberSpec, type SetMember } from "./object-sets.js";
+import type { ObjectRef, PlayerRef } from "./refs.js";
 import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
+export type { ObjectRef, PlayerRef } from "./refs.js";
 
-/** `"trigger-object"` reads `ResolutionContext.triggerObject` (needed-cards
- * P15 — Exalted's "that creature gets +1/+1", the lone attacker rather than
- * a target or the ability's own source). `"attached"` is the permanent the
- * effect's source — an Aura, Equipment or Fortification — is attached to as
- * this resolves: "enchanted creature", "equipped creature". With the source
- * gone from the battlefield, the permanent it was last attached to, if that
- * one is still there as the same object (the rulings of Starlit Mantle and
- * Wings of Hubris; rule 400.7); nothing once the host has left or the source
- * was attached to nothing. Not a target. `"chosen"` is "the chosen
- * creature": the permanent chosen as the source entered
- * (`CardDefinition.choosePermanentOnEnter` — rule 607.2d), read as the source
- * last existed if it has left; nothing once the chosen one has left the
- * battlefield (rule 400.7). Not a target. `"granter"` is the permanent
- * whose static granted this ability to its source — the Equipment or Aura
- * named in "Equipped creature has '{1}, {T}: Tap target creature. Return
- * Trusty Boomerang to its owner's hand'" (rule 201.5a: that name means only
- * the granting object), fixed as the ability was activated or triggered
- * (`LastKnownRefs.granter`). Acted on only while it's still that object on
- * the battlefield; read (its counters, its power) as it last existed there
- * once it has left (608.2h). Nothing on an ability no static granted. Not a
- * target. `"trigger-recipient"` is what the triggering event was aimed at
- * (`LastKnownRefs.recipient`): the permanent or player a `deals-damage`
- * trigger's damage was dealt to ("whenever this creature deals combat damage
- * to a creature, put a -1/-1 counter on **that creature**"), the player or
- * planeswalker an attacker is attacking. A delayed trigger such an ability
- * makes carries it ("destroy that creature at end of combat", 603.7c). Acted
- * on only while it's still the same permanent (rule 400.7); read as it last
- * existed once it has left (608.2h). Nothing on a trigger whose event has no
- * recipient. Not a target. `"tapped"` is the one permanent tapped to pay the
- * spell's or ability's cost (`LastKnownRefs.tapped`): "put a +1/+1 counter on
- * the creature tapped to pay this spell's additional cost" (Swallow Whole),
- * still the same one on a copy. Acted on only while it's still that permanent
- * (rule 400.7). Nothing when no one permanent was tapped. Not a target. */
-export type EffectTargetRef = number | "source" | "trigger-object" | "attached" | "chosen" | "granter" | "trigger-recipient" | "tapped";
 /**
  * What a card put onto the battlefield "attached to" something enters
  * attached to — an effect's `attachedTo`:
  *
- * - an {@link EffectTargetRef}: the permanent it names — a target slot (or a
+ * - an {@link ObjectRef}: the permanent it names — a target slot (or a
  *   **player** in that slot: Bitterheart Witch's "a Curse card … attached to
  *   target player", rule 303.4), the source, the trigger object, or what the
  *   source is attached to ("attached to enchanted creature" — Mantle of the
@@ -119,28 +87,7 @@ export type EffectTargetRef = number | "source" | "trigger-object" | "attached" 
  *
  * See {@link EnterAttachHost} for what happens when it can't be attached.
  */
-export type AttachHostRef = EffectTargetRef | { readonly among: CardFilter };
-/**
- * What an `attach` acts on — the attachment, or what it's attached to:
- * an {@link EffectTargetRef}, or
- *
- * - `"created"`: the token an earlier step of this resolution created (living
- *   weapon's "create a 0/0 black Phyrexian Germ creature token, then attach
- *   this to it" — rule 702.92a);
- * - `"put-this-way"`: the card an earlier step of this resolution put onto
- *   the battlefield (the `"put-onto-battlefield"` this-way kind) — Pre-War
- *   Formalwear's "return target creature card … to the battlefield and
- *   attach this Equipment to **it**", Stonehewer Giant's "search your library
- *   for an Equipment card, put it onto the battlefield, attach **it** to a
- *   creature you control". The first of them still on the battlefield, as
- *   the same object (rule 400.7);
- * - `"amassed"`: the Army an earlier `amass` step of this resolution chose,
- *   counters or none (rules 701.47a, 701.47c) — Goblin Plate Mail's "attach
- *   this Equipment to the amassed Army", Foray of Orcs' `about`. Nothing when
- *   none could be chosen; a `reflexive-trigger` `about` it triggers all the
- *   same (rule 701.47b), since an `amass` step before it has always happened.
- */
-export type AttachRef = EffectTargetRef | "created" | "put-this-way" | "amassed";
+export type AttachHostRef = ObjectRef | { readonly among: CardFilter } | { readonly player: PlayerRef };
 /** A `look-and-choose`'s zone as `ResolutionContext.lookAndChoose` takes it:
  * its `"targets"` resolved to `{ cards }`, its `"exiled-with-source"` to the
  * linked cards in exile, `{ exiled }`. */
@@ -347,34 +294,6 @@ export interface ZoneChoiceSplitCase {
   readonly destination: "battlefield" | "hand" | "graveyard";
   readonly enterTapped?: true;
 }
-/**
- * What an amount that reads an object (`powerOf`, `toughnessOf`,
- * `manaValueOf`, `manaSpentOf`) may point at: anything an
- * {@link EffectTargetRef} can but `"tapped"`, plus an {@link ObjectSetRef} —
- * **the** one object of that set, nothing with none or several: `{ paid:
- * "sacrificed" }` is "the sacrificed creature" (Dina, Soul Steeper; also what
- * a `sacrifice-source` step before this one sacrificed), `{ paid: "tapped" }`
- * "the tapped creature" (station), `{ paid: "discarded" }` "the discarded
- * card" (Volrath the Fallen, read where the discard put it), `{ paid:
- * "revealed" }` "the revealed card" (Induce Despair, read in the hand while
- * it's still there and as it was there once it has left — the rulings),
- * `{ paid: "exiled" }` "the exiled card" (Corpse Explosion) — and
- * `"amassed"`, the Army an earlier step of this resolution amassed ("where X
- * is the amassed Army's power" — Surrounded by Orcs). Nothing there reads 0.
- *
- * An object that was a permanent when the spell or ability referred to it
- * and has left the battlefield since is read as it last existed there (rule
- * 608.2h — see `LastKnownRefs`): "When Juri dies, it deals damage equal to
- * its power" counts the counters Juri died with.
- */
-export type AmountRef =
-  | Exclude<EffectTargetRef, "tapped">
-  | ObjectSetRef
-  | "amassed"
-  /** The spell, or the source of the ability, whose cost is being worked out
-   * (601.2f, 602.2b): only a cost modifier's amount reads it — "where X is that
-   * spell's mana value". Nothing outside that. */
-  | "priced";
 /** Where a `return-to-hand` effect takes its object from. */
 export type ReturnToHandZone = "battlefield" | "graveyard" | "exile" | "stack" | "library";
 /**
@@ -463,7 +382,7 @@ export interface DelayedLeaves {
    * instead: "put **the exiled card** into your hand" is `about: "exiled"` and
    * a slot 0 that stays with the card; Stangg's "exile **that token** when
    * Stangg leaves" is `leaves: "source"`, `about: "created"`. */
-  readonly leaves: EffectTargetRef | "created";
+  readonly leaves: ObjectRef | "created";
   /** `["graveyard"]` is "dies", `["graveyard", "exile"]` "dies or is
    * exiled". */
   readonly to: readonly LeaveDestination[];
@@ -485,7 +404,7 @@ export interface DelayedLeaves {
  * It triggers once (rule 603.7b), unless it's `thisTurn`.
  */
 export interface DelayedLosesControl {
-  readonly losesControl: EffectTargetRef;
+  readonly losesControl: ObjectRef;
   /** "…this turn" (Stolen Uniform): a stated duration, so every time, until
    * the next turn begins — past the cleanup step that ends "until end of
    * turn" control. */
@@ -518,7 +437,7 @@ export interface DelayedNextSpell {
  * the turn ends. That permanent is its trigger object, and its defending
  * player the trigger player. */
 export interface DelayedUnblocked {
-  readonly attacksUnblocked: EffectTargetRef;
+  readonly attacksUnblocked: ObjectRef;
 }
 
 /**
@@ -570,7 +489,7 @@ export interface DelayedWhenever {
    * no trigger is made. "You" is still this ability's controller, who needn't
    * control them. A source that's left since is judged as it last existed.
    */
-  readonly watching?: EffectTargetRef | "targets";
+  readonly watching?: ObjectRef | "targets";
   /** "**When** …" rather than "whenever": it triggers only once (rule 603.7b),
    * however long it could have waited. */
   readonly once?: true;
@@ -581,7 +500,7 @@ export interface DelayedWhenever {
    * controller's control fires it too (see {@link DelayedLosesControl}).
    * With `once`, whichever comes first uses it up.
    */
-  readonly orLosesControl?: EffectTargetRef;
+  readonly orLosesControl?: ObjectRef;
 }
 
 /** A {@link DelayedWhenever} with what it names read as it's set up. */
@@ -647,12 +566,12 @@ export type EffectAmount =
       readonly forTarget?: number;
       /** Read the filter from the side of the one player this names —
        * "equal to the number of nonbasic lands **that creature's
-       * controller** controls" (Weight of Spires: `{ controllerOfTarget: 0
+       * controller** controls" (Weight of Spires: `{ controllerOf: 0
        * }`), "for each artifact **that player** controls" in a trigger
        * (Emissary of Hope: `"trigger-player"`), "the creatures **the chosen
        * player** controls" (`"chosen-player"`). 0 when it names nobody (an
        * illegal slot, a player who has left the game). */
-      readonly forPlayer?: EffectPlayerRef;
+      readonly forPlayer?: PlayerRef;
       /** Read the filter from the side of **each player** a scoped effect
        * acts on, once for each — "each player sacrifices half the creatures
        * **they** control" (Zodiark, Umbral God: a `sacrifice` of `who:
@@ -689,11 +608,11 @@ export type EffectAmount =
    *
    * A permanent that has left the battlefield since is read as it last
    * existed there (rule 608.2h — last known information, see
-   * {@link AmountRef}). That matters because every card printed this way
+   * {@link ObjectRef}). That matters because every card printed this way
    * destroys the permanent *first* and then reads its mana value. `0` for a
    * player target or an object that no longer exists at all.
    */
-  | { readonly manaValueOf: AmountRef }
+  | { readonly manaValueOf: ObjectRef }
   /**
    * That colour's mana symbols in one object's mana cost, a hybrid or Phyrexian
    * one counting once — chroma (an ability word, rule 207.2c): Fiery
@@ -701,7 +620,7 @@ export type EffectAmount =
    * mana cost". As it last existed if it has left (rule 608.2h). Over a set of
    * objects it's an aggregate's `of: { manaSymbols }`, or a `thisWay`'s `sumOf`.
    */
-  | { readonly manaSymbolsOf: AmountRef; readonly color: Color }
+  | { readonly manaSymbolsOf: ObjectRef; readonly color: Color }
   /**
    * How many permanents this effect's source devoured as it entered (rule
    * 702.82b), each as it last existed on the battlefield; `filter` narrows them
@@ -725,7 +644,7 @@ export type EffectAmount =
    * spent to cast this spell" (Graven Lore — rule 107.4h, mana from a snow
    * source) is `{ manaSpentOf: "source", from: { supertype: "snow" } }`.
    */
-  | { readonly manaSpentOf: AmountRef; readonly from?: ManaFromSpec }
+  | { readonly manaSpentOf: ObjectRef; readonly from?: ManaFromSpec }
   /**
    * How many **colours** of mana were spent to cast the object — converge
    * (an ability word, rule 207.2c: Painful Truths' "where X is the number of
@@ -735,7 +654,7 @@ export type EffectAmount =
    * converge rulings). Kept by the permanent a spell becomes, like
    * `manaSpentOf`; `0` for anything that wasn't cast.
    */
-  | { readonly colorsSpentOf: AmountRef }
+  | { readonly colorsSpentOf: ObjectRef }
   /**
    * How many creatures convoked it (rule 702.51a): the resolving spell's, or
    * — for the permanent a spell became — its spell's: Ancient Imperiosaur's
@@ -752,14 +671,14 @@ export type EffectAmount =
    */
   | { readonly phyrexianPaidWithLife: true }
   /**
-   * How many times the commander behind an {@link AmountRef} has been cast
+   * How many times the commander behind an {@link ObjectRef} has been cast
    * from the command zone this game (rule 903.8's count — the same one the
    * commander tax reads), by its owner. Study Hall's "scry X, where X is the
    * number of times it's been cast from the command zone this game", in a
    * `whenSpent` rider whose slot 0 is the spell: that cast already counts. `0`
    * for anything that isn't a card.
    */
-  | { readonly commanderCastsOf: AmountRef }
+  | { readonly commanderCastsOf: ObjectRef }
   /**
    * How many times the effect's controller has cast **their commanders** from
    * the command zone this game, all of them together (rule 903.8's counts,
@@ -825,9 +744,9 @@ export type EffectAmount =
       readonly forTarget?: number;
       /** Read the filter from the side of the one player this names — "land
        * cards in **that player's** graveyard" after destroying their land
-       * (Roiling Terrain: `{ controllerOfTarget: 0 }`). 0 when it names
+       * (Roiling Terrain: `{ controllerOf: 0 }`). 0 when it names
        * nobody. As `countOf`'s. */
-      readonly forPlayer?: EffectPlayerRef;
+      readonly forPlayer?: PlayerRef;
       /** Only cards with the same name as the spell whose cost is being worked
        * out, itself never counted: "each card with the same name as that spell
        * in your graveyard" (Locket of Yesterdays — cast from that graveyard, it's
@@ -856,26 +775,26 @@ export type EffectAmount =
    * Exploit's "for each modified creature you controlled as you cast this
    * spell". 0 for a copy, which wasn't cast (rule 707.10). */
   | { readonly asCast: number }
-  /** The current power of whatever an {@link AmountRef} points at — Unleash
+  /** The current power of whatever an {@link ObjectRef} points at — Unleash
    * Fury's "double the power of target creature" is a `modify-pt` that adds
    * this; "it deals damage equal to its power" from a dies trigger reads the
    * power it died with, and `{ powerOf: "sacrificed" }` is the Fling family's
    * "the sacrificed creature's power". `doubling` marks a "double its power"
    * P/T change, the one place a power below 0 is used as it is (see
    * {@link ptChangeValue}). */
-  | { readonly powerOf: AmountRef; readonly doubling?: true }
-  /** The current toughness of whatever an {@link AmountRef} points at —
+  | { readonly powerOf: ObjectRef; readonly doubling?: true }
+  /** The current toughness of whatever an {@link ObjectRef} points at —
    * Condemn's "its controller gains life equal to its toughness", read as
    * the creature last existed on the battlefield. `doubling` as for
    * `powerOf`. */
-  | { readonly toughnessOf: AmountRef; readonly doubling?: true }
-  /** How many counters of one kind are on whatever an {@link AmountRef}
+  | { readonly toughnessOf: ObjectRef; readonly doubling?: true }
+  /** How many counters of one kind are on whatever an {@link ObjectRef}
    * points at — Black Market's "{B} for each charge counter on this
    * enchantment", Chasm Skulker's "X is the number of +1/+1 counters on this
    * creature" from its own dies trigger, which reads the counters it died
    * with (last-known information, rule 608.2h). `0` for a player. */
   | {
-      readonly countersOn: AmountRef;
+      readonly countersOn: ObjectRef;
       /** One kind; omitted, every counter of every kind — "the number of
        * counters on it". */
       readonly counter?: string;
@@ -1106,11 +1025,11 @@ export type EffectAmount =
    * Monument) `{ graveyardSize: "each" }`. */
   | { readonly librarySize: "you" | "each" }
   | { readonly graveyardSize: "you" | "each" }
-  /** How many colours what an {@link AmountRef} points at has — Ramos,
+  /** How many colours what an {@link ObjectRef} points at has — Ramos,
    * Dragon Engine's "a +1/+1 counter on Ramos for each of **that spell's
    * colors**" (`"trigger-object"` in a cast trigger). A permanent that has
    * left is read as it last existed there; colourless is 0. */
-  | { readonly colorsOf: AmountRef }
+  | { readonly colorsOf: ObjectRef }
   /** How many colours there are **among** battlefield permanents matching a
    * filter, each counted once however many permanents have it — "for each
    * color among other legendary permanents you control" (Sisay, Weatherlight
@@ -1429,7 +1348,7 @@ export type UnlessOption =
    * value chosen for a spell on the stack and 0 for anything else (rule
    * 107.3h). No mana cost is an unpayable cost (rules 118.6, 202.1b), and
    * isn't offered. `{X}` in `text` shows the cost. */
-  | { readonly payManaCostOf: EffectTargetRef; readonly text: string; readonly ifPaid?: EffectSpec }
+  | { readonly payManaCostOf: ObjectRef; readonly text: string; readonly ifPaid?: EffectSpec }
   /** Any effect, done by the chooser — "you" in it is them: "…unless its
    * controller **exiles all cards from their graveyard**" (Grip of Amnesia),
    * "**discards their hand**" (Perplex), "**discards a land card**" (Cursed
@@ -1462,7 +1381,7 @@ export type UnlessOption =
   /** "…unless that player sacrifices **it**" (Enchanter's Bane), "**that
    * artifact**" (Curse Artifact): a given permanent, offered only while the
    * chooser controls it (rule 701.21a). No choice of which. */
-  | { readonly sacrificeThat: EffectTargetRef; readonly text: string }
+  | { readonly sacrificeThat: ObjectRef; readonly text: string }
   /** `exceptSource`: "sacrifice **another** creature" (Ziatora, the
    * Incinerator) — never the effect's own source. `count`: "sacrifice **two**
    * Blood tokens" (Strefan, Maurer Progenitor; Rakdos, Patron of Chaos) —
@@ -1515,7 +1434,7 @@ export type BoundUnlessOption = Exclude<
   UnlessOption,
   | { readonly payGeneric: EffectAmount }
   | { readonly payLifeAmount: EffectAmount }
-  | { readonly payManaCostOf: EffectTargetRef }
+  | { readonly payManaCostOf: ObjectRef }
 >;
 
 /**
@@ -1801,20 +1720,6 @@ export type GiftKind = "food" | "card" | "tapped-fish" | "extra-turn" | "treasur
  * {@link EffectAmount} counts them, the `this-way` condition asks about them
  * and the `thisWay` filter clause picks among them.
  */
-/**
- * What deals an effect's damage when it isn't the effect's own source:
- * `"trigger-object"`, the object that fired the trigger, or `{ target }`, a
- * target slot's permanent — Chandra's Ignition's "**target creature you
- * control** deals damage equal to its power to each other creature and each
- * opponent" (that creature is the source, not the spell: its colours count
- * for protection, its lifelink and deathtouch apply — the rulings). Read as
- * it last existed on the battlefield if it has left (rule 608.2h); a blank
- * slot (an illegal target, rule 608.2b) deals nothing. `"granter"`: the
- * permanent whose static granted this ability (see {@link EffectTargetRef})
- * — Ninja's Kunai's granted "Sacrifice Ninja's Kunai: Ninja's Kunai deals 3
- * damage to any target", dealt by the Equipment as it last existed.
- */
-export type DamageFrom = "trigger-object" | "granter" | "attached" | "amassed" | { readonly target: number };
 
 /**
  * A one-shot prevention or redirection effect over a set of damage events
@@ -1838,18 +1743,18 @@ export interface DamageRuleSpec {
    * them counts ("this creature and/or you" — Glarecaster) — but not
    * `exceptTarget`. Omitted: any recipient. */
   readonly to?: {
-    readonly target?: EffectTargetRef;
+    readonly target?: ObjectRef;
     readonly players?: "you" | "each" | "opponents";
     readonly permanents?: CardFilter;
-    readonly exceptTarget?: EffectTargetRef;
+    readonly exceptTarget?: ObjectRef;
   };
   /** The sources: one object (a creature, or a spell on the stack —
    * Reverberation), or those matching `filter` from the controller's side,
    * but not `exceptTarget` (Terrifying Presence). Omitted: any source. */
   readonly by?: {
-    readonly target?: EffectTargetRef;
+    readonly target?: ObjectRef;
     readonly filter?: CardFilter;
-    readonly exceptTarget?: EffectTargetRef;
+    readonly exceptTarget?: ObjectRef;
   };
   /** Only combat (`true`) or noncombat (`false`) damage. */
   readonly combat?: boolean;
@@ -1862,10 +1767,10 @@ export interface DamageRuleSpec {
    * Can't See Me). */
   readonly duration?: DamageRuleDuration;
   /** A redirection instead (614.9): dealt by the same source to this target
-   * slot, `"source"` or `"you"`; `"source-controller"` (Mirror Strike) or
+   * slot, `"source"` or `"you"`; `{ controllerOf: "source" }` (Mirror Strike) or
    * `"source-itself"` (Shield Dancer) are worked out as the damage would be
    * dealt. */
-  readonly redirectTo?: EffectTargetRef | "you" | "source-controller" | "source-itself";
+  readonly redirectTo?: ObjectRef | PlayerRef | "source-itself";
   /** Prevention's additional effect (615.5), right after: `"x"` is the
    * damage it prevented, the spell's targets are its own, and the damage's
    * source is `"trigger-object"` (its controller `who: "trigger-controller"`)
@@ -2001,30 +1906,17 @@ export type ThisWayKind =
    * token of a stack is its own object here, singled out as it's chosen. */
   | "chosen";
 
+/**
+ * Who an effect is about: any one {@link PlayerRef}, or one of the plural
+ * words below. `{ otherThan }` is "each other player" of a ref (Oft-Nabbed
+ * Goat's "its owner draws … and each other player loses that much life"):
+ * every player still in the game but that one, in turn order.
+ */
 export type PlayerScope =
+  | PlayerRef
   | "each-player"
   | "each-opponent"
-  | "you"
-  /** Whoever's turn it is — "that player" in a trigger that fires on someone
-   * else's step (Archfiend of Depravity). */
-  | "active-player"
-  /** The controller of the object behind the trigger — "that player" when
-   * the event is about something they did: the player who drew the card
-   * (Nekusar, the Mindrazer), the player who cast the spell. Not a target,
-   * so a hexproof player is still reached. */
-  | "trigger-controller"
-  /** The owner of the object behind the trigger — "that player" where the
-   * event is about a card's own zones: "whenever a permanent is returned to a
-   * player's hand, **that player** discards a card" (Warped Devotion), "put
-   * into a player's graveyard from the battlefield" (Liability). Not its last
-   * controller; an owner never changes (rule 108.3), and a token's is known
-   * as it last existed. Not a target. */
-  | "trigger-owner"
-  /** The player the triggering event names — "that player" / "defending
-   * player": the player dealt damage (or the controller of the permanent
-   * dealt damage), the defending player of an attack. See
-   * `LastKnownRefs.player`. Nobody outside such a trigger. Not a target. */
-  | "trigger-player"
+  | { readonly otherThan: PlayerRef }
   /** Each opponent of the effect's controller **other than** the
    * `"trigger-player"` — Kediss, Emberclaw Familiar's "it deals that much
    * damage to each other opponent". Every opponent when the trigger names
@@ -2053,24 +1945,6 @@ export type PlayerScope =
    * resolution doesn't change who they are. */
   | "each-friend"
   | "each-foe"
-  /** "**The chosen player**": the player chosen for the effect's source — as
-   * it entered (`CardDefinition.choosePlayerOnEnter`: Black Vise, Saskia the
-   * Unyielding) or the last one an ability of it chose and kept
-   * (`choose-opponent { remember }`) — `GameObject.chosenPlayer`, read as
-   * the source last existed if it has left (rule 608.2h). Nobody when none
-   * was chosen or they've left the game. Not a target. Only a resolution
-   * knows its source, so elsewhere it names nobody. */
-  | "chosen-player"
-  /** "**Enchanted creature's controller**": whoever controls the permanent the
-   * effect's source is attached to as this resolves (Gremlin Infestation). The
-   * source and its host gone together, the host as it last existed (rule
-   * 608.2h); an Aura left behind first last existed attached to nothing, and
-   * names nobody. A sentence that goes on once the host may have left names
-   * the player first, a `for-each-player` of this with `"that-player"` inside:
-   * Strangling Grasp's "enchanted permanent's controller sacrifices …, then
-   * that player loses 1 life". On a Curse it's the enchanted player. Not a
-   * target. Only a resolution knows its source, so elsewhere it names nobody. */
-  | "attached-controller"
   /** "**Each of that player's opponents**" / "each other player", of the
    * `"trigger-controller"`: the opponents of the player who cast the spell
    * (Standstill, Heartwood Storyteller; every other player is an opponent,
@@ -2078,29 +1952,12 @@ export type PlayerScope =
    * (Bounty Board's "each of its controller's opponents"). The effect's own
    * controller is one of them unless they're that player. Nobody when the
    * trigger is about no one. Not a target. */
-  | "opponents-of-trigger-controller"
-  /** "**The player to your left**" / "**to your right**" (Hithlain Rope,
-   * Bucknard's Everfull Purse): the next player in turn order from the
-   * effect's controller, or the one before, skipping anyone who has left the
-   * game (as `rotate-control` reads its direction; rule 101.4). In a
-   * two-player game the other player is both (Hithlain Rope's ruling). Not a
-   * target. */
-  | "player-to-your-left"
-  | "player-to-your-right"
-  /** "**Xantcha's controller**": whoever controls the effect's source as this
-   * resolves, or last did once it has left (rule 608.2h) — not the ability's
-   * controller, when another player activated it. Not a target. Only a
-   * resolution knows its source, so elsewhere it names nobody. */
-  | "source-controller"
-  /** "That player" in an `"each-player-may"`'s `ifDid` / `ifDidnt`: the
-   * player the follow-up is about. Elsewhere, the same as
-   * `"trigger-player"`. Not a target. */
-  | "that-player";
+  | "opponents-of-trigger-controller";
 
 /**
  * Who makes a choice an effect asks for, on every effect that lets someone other
  * than its controller choose (theme 5 of docs/plans/need-key-themes.md): an
- * {@link EffectPlayerRef}, a target slot (that player, or the controller of that
+ * {@link PlayerRef}, a target slot (that player, or the controller of that
  * object), or `"an-opponent"` (an opponent of the effect's controller, the
  * first in turn order unless the effect asks which).
  *
@@ -2109,63 +1966,13 @@ export type PlayerScope =
  * `choose-among-targets`' (the controller of the targets).
  */
 export type ChooserRef =
-  | EffectPlayerRef
+  | PlayerRef
   | number
   | "an-opponent"
   | "any-player"
   | "their-controller"
   | { readonly anyOf: PlayerScope }
   | { readonly player: PlayerId };
-
-/**
- * One player an effect names as the one who does something — who gains
- * control (`gain-control`), under whose control a card is put onto the
- * battlefield (`put-onto-battlefield`), who puts the counters (`add-counter`)
- * or untaps it (`untap`):
- * the effect's controller (`"you"`), a player target slot (`{ target: n }`),
- * or one of the single-player {@link PlayerScope}s the event names. Naming
- * nobody — an empty or illegal slot (rule 608.2b), a player who has left the
- * game — the effect does nothing.
- */
-export type EffectPlayerRef =
-  | "you"
-  | "active-player"
-  | "trigger-controller"
-  | "trigger-owner"
-  /** The owner of the effect's source, wherever it is now — "Gandalf's owner
-   * shuffles him into their library and draws three cards". */
-  | "source-owner"
-  | "trigger-player"
-  | "that-player"
-  /** The player chosen for the effect's source — see the `"chosen-player"`
-   * {@link PlayerScope}. */
-  | "chosen-player"
-  /** The controller of what the source is attached to — see the
-   * `"attached-controller"` {@link PlayerScope}. */
-  | "attached-controller"
-  /** The seats and the source's controller — see those {@link PlayerScope}s. */
-  | "player-to-your-left"
-  | "player-to-your-right"
-  | "source-controller"
-  | { readonly target: number }
-  /** The controller of the permanent in this target slot, as it last existed
-   * on the battlefield if it has left — "**its controller** exiles cards …,
-   * then **they** may cast that card" (Transforming Flourish, after
-   * destroying it). Not a target. A spell that has left the stack (countered)
-   * is read as it last was there: its controller then, not its owner
-   * (Counterbore's ruling). */
-  | { readonly controllerOfTarget: number }
-  /** The owner of the object in this target slot — never changes (rules
-   * 108.3, 111.2), so it's known once the object has moved: "choose target
-   * card in a graveyard … search **its owner's** graveyard, hand, and
-   * library" (Surgical Extraction). Not a target. */
-  | { readonly ownerOfTarget: number };
-
-/** One player a target slot names, as a `for-each-player` or a `vote`'s
- * chooser: the player in it ("target opponent exiles …"), or the controller
- * or owner of the object in it ("its controller chooses …"). Nobody when the
- * slot is illegal (rule 608.2b) or the player has left the game. */
-export type ChosenPlayerRef = Extract<EffectPlayerRef, object>;
 
 /**
  * What a creature put onto the battlefield attacking attacks (rule 508.4).
@@ -2184,7 +1991,7 @@ export type ChosenPlayerRef = Extract<EffectPlayerRef, object>;
  */
 export type EnterAttacking =
   | "choose"
-  | { readonly player: EffectPlayerRef; readonly orTheirPlaneswalker?: boolean };
+  | { readonly player: PlayerRef; readonly orTheirPlaneswalker?: boolean };
 
 /** {@link EnterAttacking} with its player resolved, as `Game` takes it —
  * or `defender`, one exact player, planeswalker or battle (ninjutsu's "the
@@ -2554,7 +2361,7 @@ export type EffectSpec =
        * of the player it dealt damage to (Turf War's `"trigger-player"`). A
        * `CardFilter`'s own `controlledBy` can't name one seat at a 3-4 player
        * table. Nobody named, and nothing happens. */
-      readonly controlledByPlayer?: EffectPlayerRef;
+      readonly controlledByPlayer?: PlayerRef;
       /** `then` still reads this resolution's own targets, from slot 1: "choose
        * a Giant creature you control. It deals damage equal to its power to
        * **target creature**" (Crush Underfoot) is `targets: ["creature"]` and
@@ -2663,7 +2470,7 @@ export type EffectSpec =
        * still who controls it for anything outside `effect`.
        */
       readonly kind: "as-player";
-      readonly who: EffectPlayerRef;
+      readonly who: PlayerRef;
       readonly effect: EffectSpec;
     }
   | {
@@ -2838,9 +2645,9 @@ export type EffectSpec =
       /** Whose graveyard or hand: the effect's controller's (the default),
        * `"that-player"`, a target slot holding a player, or a player named
        * through a target ("target creature's controller reveals a card at
-       * random from their hand" — Friendly Fire: `{ controllerOfTarget: 0
+       * random from their hand" — Friendly Fire: `{ controllerOf: 0
        * }`). */
-      readonly whose?: "you" | "that-player" | number | ChosenPlayerRef;
+      readonly whose?: "you" | "that-player" | number | PlayerRef;
       readonly filter?: CardFilter;
       /** How a card picked from a hand is shown — see `zone`. */
       readonly show?: "reveal" | "look";
@@ -2868,7 +2675,7 @@ export type EffectSpec =
        * `choose-random-card`'s, a slot holding a player included.
        */
       readonly kind: "top-of-graveyard";
-      readonly whose?: "you" | "that-player" | number | ChosenPlayerRef;
+      readonly whose?: "you" | "that-player" | number | PlayerRef;
       readonly filter?: CardFilter;
       readonly ifIt?: CardFilter;
       readonly bottom?: true;
@@ -2928,19 +2735,19 @@ export type EffectSpec =
        * "deals 2 damage to that creature" (Earthbind) — what it enchants. Or
        * `"source"`, untargeted: "this creature deals 3 damage to **itself**"
        * (Psionic Entity), "that artifact deals damage … to **this creature**"
-       * (Goblin Tinkerer, with `from: { target: 0 }`). A source that has left
+       * (Goblin Tinkerer, with `from: 0`). A source that has left
        * since, even if it's back, is a new object and is dealt nothing (rule
        * 400.7). */
-      readonly target?: number | "trigger-object" | "attached" | "source";
+      readonly target?: ObjectRef;
       /** Untargeted damage to a whole scope of players (Sabotender / Tannuk:
        * "deals 1 damage to each opponent" — needed-cards P16), instead of a
        * chosen target. A per-player `amount` (`lifeTotal: "each"`) is read
        * for each of them. Or one player named through a target (`{
-       * ownerOfTarget: 0 }`), or `"attached-owner"`: the owner of what the
+       * ownerOf: 0 }`), or `{ ownerOf: "attached" }`: the owner of what the
        * source is attached to — Enslave's "enchanted creature deals 1 damage
        * to **its owner**", with `from: "attached"`. Nobody, with nothing
        * attached to. */
-      readonly who?: PlayerScope | ChosenPlayerRef | "attached-owner";
+      readonly who?: PlayerScope;
       /** With `who`: only the players of it this holds for, asked about each
        * (`"that-player"` names them) — Outpace Oblivion's "2 damage to each
        * player **who doesn't have max speed**" is `{ kind: "speed", who:
@@ -2960,8 +2767,8 @@ export type EffectSpec =
        * opponent" (Kediss: the commander that dealt combat damage). Its
        * lifelink, deathtouch and colours (for protection) apply, as it last
        * existed on the battlefield if it has left (rule 608.2h). See
-       * {@link DamageFrom} for a target slot. */
-      readonly from?: DamageFrom;
+       * {@link ObjectRef} for a target slot. */
+      readonly from?: ObjectRef;
       /**
        * Damage aimed at the *controller* of whatever a target slot points at
        * — Unlicensed Disintegration's "deals 3 damage to **that creature's**
@@ -3159,11 +2966,11 @@ export type EffectSpec =
        * (Stormfist Crusader: "each player draws a card"); `target` is a
        * target-slot index holding a player (Deep Analysis: "target player
        * draws two cards"). Mutually exclusive — `target` wins if both are set.
-       * A {@link ChosenPlayerRef} is one player named through a target — "its
-       * controller draws a card" (`{ controllerOfTarget: 0 }`), read as the
+       * A {@link PlayerRef} is one player named through a target — "its
+       * controller draws a card" (`{ controllerOf: 0 }`), read as the
        * permanent last existed if it has left.
        */
-      readonly who?: PlayerScope | ChosenPlayerRef;
+      readonly who?: PlayerScope;
       readonly target?: number;
     }
   | {
@@ -3182,7 +2989,7 @@ export type EffectSpec =
       /** A scope, a player target slot ("**target player** reveals their
        * hand and discards…"), or one player named through a target or
        * the event ("**that player**"). */
-      readonly who: PlayerScope | number | ChosenPlayerRef;
+      readonly who: PlayerScope | number | PlayerRef;
       readonly filter?: CardFilter;
       /** "Reveals their hand and discards…": the whole hand is revealed to
        * everyone first (rule 701.20a), matching or not. */
@@ -3196,8 +3003,8 @@ export type EffectSpec =
       readonly amount: EffectAmount;
       /** Who gains — the effect's controller (default), a scope, or one player
        * named through a target: Path of Peace's "**its owner** gains 4 life"
-       * (`{ ownerOfTarget: 0 }`). */
-      readonly who?: PlayerScope | ChosenPlayerRef;
+       * (`{ ownerOf: 0 }`). */
+      readonly who?: PlayerScope;
       /** The *controller* of whatever a target slot points at — Swords to
        * Plowshares' "**its controller** gains life equal to its power". Same
        * shape as `damage`'s field of the same name; see that one for the
@@ -3218,7 +3025,7 @@ export type EffectSpec =
        */
       readonly kind: "set-life-total";
       /** A player target slot, a scope, or one player named through a target. */
-      readonly who: number | PlayerScope | ChosenPlayerRef;
+      readonly who: number | PlayerScope;
       readonly amount: EffectAmount;
     }
   | {
@@ -3228,8 +3035,8 @@ export type EffectSpec =
       readonly kind: "lose-life";
       readonly amount: EffectAmount;
       /** A scope, or one player named through a target ("**its owner** loses
-       * 2 life": `{ ownerOfTarget: 0 }`). */
-      readonly who?: PlayerScope | ChosenPlayerRef;
+       * 2 life": `{ ownerOf: 0 }`). */
+      readonly who?: PlayerScope;
       /** A single *targeted* player instead of a scope (Ob Nixilis, the
        * Fallen: "target player loses 3 life") — a target-slot index holding
        * a player. Mutually exclusive with `who`. needed-cards P19. */
@@ -3247,7 +3054,7 @@ export type EffectSpec =
       /** A target slot or a reference — `"trigger-recipient"` as `destroy`
        * reads it: "whenever this creature deals combat damage to a creature,
        * tap **that creature**" (Kashi-Tribe Warriors, Matsu-Tribe Sniper). */
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       /** "**It doesn't untap during its controller's next untap step**"
        * (Junk Winder) — whoever controls it then; tapped by this or already
        * (`GameObject.skipsNextUntap`). */
@@ -3272,11 +3079,11 @@ export type EffectSpec =
        * off a trigger (Amulet of Vigor: untap the permanent that just
        * entered tapped). needed-cards P17. */
       readonly kind: "untap";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       /** Who untaps it, when the card says a player does — "that player …
        * untaps it" (Alexios, Deimos of Kosmos: `"active-player"`). Naming
        * nobody — a player who has left the game — nothing is untapped. */
-      readonly by?: EffectPlayerRef;
+      readonly by?: PlayerRef;
     }
   | {
       readonly kind: "destroy";
@@ -3287,7 +3094,7 @@ export type EffectSpec =
        * Imp's "whenever this creature deals combat damage to a creature,
        * destroy **that creature**" — untargeted, and only while it's still
        * the same permanent (rule 400.7; `damage`'s `toTriggerRecipient`). */
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       /** "It can't be regenerated" (rule 701.15c — Terminate): a
        * regeneration shield doesn't replace this destruction. */
       readonly cantBeRegenerated?: boolean;
@@ -3301,7 +3108,7 @@ export type EffectSpec =
        * lasts until used or the turn ends; each regeneration is one more.
        */
       readonly kind: "regenerate";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
     }
   | {
       /** Regenerate every battlefield permanent matching `filter` (Wrap in
@@ -3325,7 +3132,7 @@ export type EffectSpec =
        * (the rulings); a target that isn't a permanent (a player, through
        * "any target") is left alone. */
       readonly kind: "exile-if-dies-this-turn";
-      readonly target?: EffectTargetRef;
+      readonly target?: ObjectRef;
       /** Instead of `target`: "If a creature **dealt damage this way** would
        * die this turn, exile it instead" (Anger of the Gods, Incendiary
        * Flow) — every permanent the resolution under way has dealt damage to
@@ -3388,8 +3195,8 @@ export type EffectSpec =
        * instead (Chandra's Ignition's "each **other** creature"). */
       readonly exceptSource?: boolean;
       /** Who deals it, when that isn't the effect's own source — see
-       * {@link DamageFrom}. */
-      readonly from?: DamageFrom;
+       * {@link ObjectRef}. */
+      readonly from?: ObjectRef;
     }
   | {
       /** Every permanent matching `filter` deals `amount` damage to its own
@@ -3493,7 +3300,7 @@ export type EffectSpec =
        * If you do, **put it into that player's graveyard**" (Wand of Denial).
        */
       readonly kind: "put-into-graveyard";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
     }
   | {
       /**
@@ -3517,7 +3324,7 @@ export type EffectSpec =
        * asking that controller, whose effect this then is.
        */
       readonly kind: "sacrifice-target";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       /** "**Its controller** sacrifices it" — whoever controls it then, not
        * the effect's controller (the Ring's "the blocking creature's
        * controller sacrifices it at end of combat"). */
@@ -3545,11 +3352,11 @@ export type EffectSpec =
        * a planeswalker too (Stump Stomp's "to target creature or
        * planeswalker"). */
       readonly kind: "fight";
-      /** `EffectTargetRef`s, so `"trigger-object"` works — Frontier Siege's
+      /** `ObjectRef`s, so `"trigger-object"` works — Frontier Siege's
        * "you may have **it** fight target creature", where "it" is the
        * creature that just entered rather than a chosen target. */
-      readonly a: EffectTargetRef;
-      readonly b: EffectTargetRef;
+      readonly a: ObjectRef;
+      readonly b: ObjectRef;
       readonly oneSided?: boolean;
     }
   | {
@@ -3576,7 +3383,7 @@ export type EffectSpec =
        * bounce). `target: "source"` bounces the effect's own permanent, with
        * no target at all (Encroaching Dragonstorm — needed-cards P16). */
       readonly kind: "return-to-hand";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       /** With choices held (`for-each-unless`): it goes when they're released,
        * with what the other players' answers send, at once (rule 101.4 — Cut
        * the Tethers). Off the battlefield only. */
@@ -3694,7 +3501,7 @@ export type EffectSpec =
        * Luck), whose chosen card is its target 0. Nothing for a card no
        * longer in exile, a token, or one already plotted. */
       readonly kind: "become-plotted";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
     }
   | {
       /** "**It becomes foretold**" (rule 702.143d): a card an instruction just
@@ -3712,7 +3519,7 @@ export type EffectSpec =
        * (Ethereal Valkyrie's rulings). Nothing for a token or a card no longer
        * in exile. */
       readonly kind: "become-foretold";
-      readonly target: EffectTargetRef | "exiled-this-way";
+      readonly target: ObjectRef | "exiled-this-way";
       readonly costReducedBy?: number;
     }
   | {
@@ -3739,7 +3546,7 @@ export type EffectSpec =
       /** A target slot or a reference — `"trigger-recipient"` as `destroy`
        * reads it: "whenever this creature deals damage to a creature, exile
        * **that creature**" (Pit Spawn). */
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       /** "Exile it **with a croak counter on it**": counters the card gets
        * as it's exiled, there. */
       readonly withCounters?: { readonly kind: string; readonly amount: number };
@@ -3955,7 +3762,7 @@ export type EffectSpec =
       readonly prompt?: string;
       /** A number's chooser — see `"number"` above. Naming nobody, nothing is
        * asked and `then` doesn't happen. */
-      readonly who?: EffectPlayerRef;
+      readonly who?: PlayerRef;
       /** See `"number"` above. */
       readonly remember?: true;
     }
@@ -3968,7 +3775,7 @@ export type EffectSpec =
        * `discard-hand`'s: a target slot, a scope, or one player named.
        */
       readonly kind: "reveal-hand";
-      readonly who: PlayerScope | number | ChosenPlayerRef;
+      readonly who: PlayerScope | number | PlayerRef;
     }
   | {
       /** Return everything this effect's source exiled with
@@ -4034,9 +3841,9 @@ export type EffectSpec =
        * onto the battlefield under your control").
        */
       readonly kind: "put-onto-battlefield";
-      /** An `EffectTargetRef` so it can also name the object that fired the
+      /** An `ObjectRef` so it can also name the object that fired the
        * trigger — Undying returns *itself*, which is never a chosen target. */
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       readonly underYourControl?: boolean;
       /** Under someone else's control — "target opponent … puts target
        * creature card from your graveyard onto the battlefield under their
@@ -4045,7 +3852,7 @@ export type EffectSpec =
        * exiled if they leave the game, rule 800.4a). Naming nobody (an
        * illegal or empty slot, a player who has left) puts nothing anywhere
        * (rules 608.2b, 800.4b). */
-      readonly under?: EffectPlayerRef;
+      readonly under?: PlayerRef;
       readonly enterTapped?: boolean;
       /** Counters it enters with (Undying: "with a +1/+1 counter on it";
        * Admiral Brass, Unsinkable: "with a finality counter on it" — a
@@ -4124,11 +3931,11 @@ export type EffectSpec =
        * graveyard at once (Rest in Peace). needed-cards P8. */
       readonly kind: "exile-graveyard";
       /** `"each-opponent"`: Soul-Guide Lantern's "exile each opponent's
-       * graveyard", one move like `"each-player"`. A {@link ChosenPlayerRef}
+       * graveyard", one move like `"each-player"`. A {@link PlayerRef}
        * is one player named through a target: Nurgle's Conscription's "exile
        * **that player's** graveyard", the owner of the card it put onto the
-       * battlefield (`{ ownerOfTarget: 0 }`). */
-      readonly target: number | "you" | "each-player" | "each-opponent" | ChosenPlayerRef;
+       * battlefield (`{ ownerOf: 0 }`). */
+      readonly target: number | "you" | "each-player" | "each-opponent" | PlayerRef;
       /** Only the cards matching this — Living Death's "each player exiles
        * all **creature cards** from their graveyard". */
       readonly filter?: CardFilter;
@@ -4161,12 +3968,12 @@ export type EffectSpec =
        * they control — Living Death's "then sacrifices all creatures they
        * control": nobody chooses anything, and they all go at once (one
        * event, rule 603.10a). One that can't be sacrificed stays. A
-       * {@link ChosenPlayerRef} is one player: Winnowing's "each player
+       * {@link PlayerRef} is one player: Winnowing's "each player
        * sacrifices all other creatures they control that don't share a
        * creature type with the chosen creature they control" is this for each
-       * chosen creature, `{ controllerOfTarget: 0 }`, inside a `for-each-voted`. */
+       * chosen creature, `{ controllerOf: 0 }`, inside a `for-each-voted`. */
       readonly kind: "sacrifice-all";
-      readonly who: PlayerScope | ChosenPlayerRef;
+      readonly who: PlayerScope;
       readonly filter: CardFilter;
     }
   | {
@@ -4196,7 +4003,7 @@ export type EffectSpec =
       readonly count: EffectAmount;
       readonly measure?: "mana-value";
       readonly rest: RevealedCardsGo;
-      readonly whose?: number | "that-player" | { readonly controllerOfTarget: number };
+      readonly whose?: number | PlayerRef;
       readonly exile?: boolean;
       readonly put?: "battlefield" | "hand" | "with-rest";
       readonly tapped?: boolean;
@@ -4287,7 +4094,7 @@ export type EffectSpec =
        * the ability was put on the stack*: one that has since left and come
        * back is a new object (rule 400.7), and is left alone.
        */
-      readonly target: EffectTargetRef | readonly number[] | { readonly from: number };
+      readonly target: ObjectRef | readonly number[] | { readonly from: number };
       /** See {@link FlickerCounters} — Essence Flux's Spirit clause. */
       readonly thenCounters?: FlickerCounters;
       /** "Exile this creature, then return it to the battlefield **face down**
@@ -4304,7 +4111,7 @@ export type EffectSpec =
        * it to the battlefield **under an opponent's control**" is a
        * `choose-opponent` of this with `"that-player"`. Their default control
        * (rule 110.2 — it's exiled if they leave the game, 800.4a). */
-      readonly under?: EffectPlayerRef;
+      readonly under?: PlayerRef;
       /**
        * Return later rather than at once: a delayed triggered ability (rule
        * 603.7) at this step — Norin's "at the beginning of the next end
@@ -4388,7 +4195,7 @@ export type EffectSpec =
       /** A target slot, or `"trigger-object"` — the spell whose casting
        * fired this trigger, untargeted: Vexing Bauble's "whenever a player
        * casts a spell, if no mana was spent to cast it, counter that spell". */
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       /**
        * `"hand"`: if the spell is countered this way, put it into its
        * owner's hand instead of into their graveyard (Remand). Still a
@@ -4475,9 +4282,9 @@ export type EffectSpec =
        * the permanent's slot or the player's — makes it do nothing (rule
        * 608.2b; `ResolutionContext.illegalTargets`). */
       readonly kind: "gain-control";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       readonly untilEndOfTurn: boolean;
-      readonly who?: EffectPlayerRef;
+      readonly who?: PlayerRef;
       /** "**For as long as this creature remains on the battlefield**, gain
        * control of that permanent" (Opportunistic Dragon): the control
        * effect ends as the effect's source leaves — nothing at all if it
@@ -4509,7 +4316,7 @@ export type EffectSpec =
        * don't or can't make an exchange, sacrifice this creature").
        */
       readonly kind: "exchange-control";
-      readonly objects: readonly [EffectTargetRef, EffectTargetRef];
+      readonly objects: readonly [ObjectRef, ObjectRef];
       readonly then?: EffectSpec;
       readonly otherwise?: EffectSpec;
     }
@@ -4526,7 +4333,7 @@ export type EffectSpec =
        */
       readonly kind: "exchange-control-all";
       readonly filter: CardFilter;
-      readonly with: EffectPlayerRef;
+      readonly with: PlayerRef;
       readonly untilEndOfTurn: boolean;
     }
   | {
@@ -4559,7 +4366,7 @@ export type EffectSpec =
       readonly kind: "gain-control-all";
       readonly filter: CardFilter;
       readonly untilEndOfTurn: boolean;
-      readonly who?: EffectPlayerRef | "owner";
+      readonly who?: PlayerRef | "owner";
       readonly exceptSource?: boolean;
       readonly controlledBy?: "trigger-player";
       /** Only what the player in this target slot controls (or the
@@ -4591,7 +4398,7 @@ export type EffectSpec =
        * the static form is `StaticAbility.cantBeSacrificed`, which says what
        * it stops (rule 701.21a). */
       readonly kind: "cant-be-sacrificed";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       readonly duration: PermanentDuration;
     }
   | {
@@ -4600,7 +4407,7 @@ export type EffectSpec =
        * or `"any"` number (Give No Ground). A modifier like a keyword grant;
        * the static form is `StaticAbility.blockAdditional`. */
       readonly kind: "block-additional";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       readonly amount: number | "any";
       readonly duration: PermanentDuration;
     }
@@ -4614,11 +4421,11 @@ export type EffectSpec =
        * cards"), a per-player amount read for each. A slot holding an
        * object is "**its controller** mills …" (Broken Ambitions' "that
        * spell's controller mills four cards"): whoever controls it, or did
-       * as it last existed (rule 608.2h). A {@link ChosenPlayerRef} is one
+       * as it last existed (rule 608.2h). A {@link PlayerRef} is one
        * player named through a target whichever it is — Geth's "**that
        * player** mills X cards", the owner of the card it took
-       * (`{ ownerOfTarget: 0 }`), whoever controls it now. */
-      readonly target: number | PlayerScope | ChosenPlayerRef;
+       * (`{ ownerOf: 0 }`), whoever controls it now. */
+      readonly target: number | PlayerScope;
       readonly amount: EffectAmount;
     }
   | {
@@ -4747,13 +4554,13 @@ export type EffectSpec =
       /** Who controls it when it fires — the effect's own controller by
        * default, or the controller of a target slot (Arcane Denial hands its
        * "may draw two cards" to the player whose spell was countered). */
-      readonly controller?: { readonly controllerOfTarget: number };
+      readonly controller?: PlayerRef;
       /** "At the beginning of the next end step, sacrifice **that token**"
        * (Satya, Aetherflux Genius): the delayed ability's targets are what
        * this resolution did this to so far — the token it just created —
        * in place of the creating ability's own. With nothing done, no delayed
        * ability is set up. `"attached"`: its one target is the permanent the
-       * source is attached to as this resolves (see {@link EffectTargetRef}) —
+       * source is attached to as this resolves (see {@link ObjectRef}) —
        * Wings of Hubris's "sacrifice **it** at the beginning of the next end
        * step", the creature it equipped. */
       readonly about?: ThisWayKind | "attached";
@@ -4764,7 +4571,7 @@ export type EffectSpec =
       /** With a `"your-…"` step timing: **that player's** turn, not the
        * controller's, whose ability it stays (rule 603.7d): Suppress's "the end
        * step of that player's next turn". Fixed as this resolves. */
-      readonly turnOf?: ChosenPlayerRef;
+      readonly turnOf?: PlayerRef;
       /**
        * Sets the delayed ability remembers, each captured as this resolves
        * (`object-sets.ts`) and read in `effect` as `{ remembered: name }` —
@@ -4792,7 +4599,7 @@ export type EffectSpec =
        * it enters as a creature (its copiable types, as a printed sunburst
        * reads them), else charge counters. */
       readonly kind: "enters-with-counters";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       readonly counter: string;
       readonly amount: EffectAmount;
       /** Only if this holds as it enters, read from the permanent's side: "it
@@ -4820,14 +4627,14 @@ export type EffectSpec =
        */
       readonly kind: "cast-now";
       /** The card, when it's one card; absent with `from`. */
-      readonly target?: EffectTargetRef;
+      readonly target?: ObjectRef;
       /** Who may cast it, when that isn't the effect's controller — "then
        * **they** may cast that card without paying its mana cost"
-       * (Transforming Flourish: `{ controllerOfTarget: 0 }`), "the player casts
+       * (Transforming Flourish: `{ controllerOf: 0 }`), "the player casts
        * it" (Omen Machine: `"active-player"`, with `from: "exiled-this-way"`).
        * Nobody, and so nothing offered, once that player has left the game.
        * With `target`, or a `from` that isn't read from a player's own zones. */
-      readonly by?: EffectPlayerRef;
+      readonly by?: PlayerRef;
       /**
        * Where the player picks the card from, when it's any of several:
        * their hand, their graveyard ("an instant or sorcery spell from your
@@ -4910,13 +4717,13 @@ export type EffectSpec =
          * of the instruction, so with nothing to cast the hand is still shown
          * and closed; without it the looking came earlier, in a `reveal-hand`
          * (Mindclaw Shaman). */
-        | { readonly handOf: EffectPlayerRef; readonly look?: true }
+        | { readonly handOf: PlayerRef; readonly look?: true }
         /** One named player's graveyard, as this applies: "target opponent
          * mills nine cards, then you may cast an instant or sorcery spell
          * **from that player's graveyard**" (Sorcerous Squall). A card milled
          * earlier in this resolution is there to choose. Controlled by the
          * caster, owned as before (rule 108.3). */
-        | { readonly graveyardOf: EffectPlayerRef }
+        | { readonly graveyardOf: PlayerRef }
         /** Several of the effect's controller's zones at once: "you may cast
          * an artifact spell **from your hand or graveyard**" (Anrakyr the
          * Traveller), one spell from among them all. */
@@ -5190,7 +4997,7 @@ export type EffectSpec =
        * paying its mana cost". The permission rides on the card as an impulse
        * one (`GameObject.impulse`). */
       readonly kind: "allow-cast-from-exile";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       readonly free?: boolean;
       /** Warp's "its owner may cast this card **after the current turn has
        * ended** for as long as it remains exiled" (rule 702.185a): the card's
@@ -5259,7 +5066,7 @@ export type EffectSpec =
        * owner's control, and only from the graveyard or exile it went to.
        */
       readonly kind: "earthbend";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       readonly amount: EffectAmount;
     }
   | {
@@ -5297,7 +5104,7 @@ export type EffectSpec =
        * this door" (709.5h).
        */
       readonly kind: "unlock-door";
-      readonly target?: EffectTargetRef;
+      readonly target?: ObjectRef;
       readonly orLock?: boolean;
     }
   | {
@@ -5356,7 +5163,7 @@ export type EffectSpec =
        * the action didn't happen, so nothing triggers (rule 603.12) — a
        * Back for More whose card couldn't return.
        */
-      readonly about?: AttachRef;
+      readonly about?: ObjectRef;
       /**
        * "When you do, it deals 7 damage divided as you choose among one or
        * two targets" (Death to Our Enemies): the reflexive ability divides an
@@ -5390,7 +5197,7 @@ export type EffectSpec =
        * `"source"`, a spell putting itself there as it resolves (Approach of
        * the Second Sun); a copy of a spell can't go, and ceases to exist as
        * it leaves the stack (rule 707.10a). */
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       /** `{ fromTop: 7 }` is "seventh from the top": under the top six, or
        * on the bottom of a library with fewer than six (the Approach of the
        * Second Sun ruling). `{ ownerChooses }` is "**its owner** puts it on
@@ -5485,7 +5292,7 @@ export type EffectSpec =
       /** A player target slot, or a player the event names — "**that
        * player** reveals their hand" (Ghastlord of Fugue's
        * `"trigger-player"`). */
-      readonly target: number | EffectPlayerRef;
+      readonly target: number | PlayerRef;
       readonly filter?: CardFilter;
       readonly lookOnly?: true;
       readonly optional?: true;
@@ -5589,7 +5396,9 @@ export type EffectSpec =
        * (`max: 0`), so the look waits for its viewer to close it.
        */
       readonly kind: "look-at-hand";
-      readonly target: number;
+      /** A slot, or any {@link PlayerRef}: Walker of Secret Ways' "look at that
+       * player's hand" is `"trigger-player"`. */
+      readonly target: number | PlayerRef;
     }
   | {
       /** "**Look at the top card of target player's library**" (Mishra's
@@ -5599,7 +5408,7 @@ export type EffectSpec =
        * everyone else (rule 401.2). Asked as `look-at-hand` is, a
        * `choose-from-zone` with nothing to pick. An empty library shows nothing
        * and asks nothing. Anything done with what's seen is `look-and-choose`,
-       * whose `from: { target: 0 }` is this library. */
+       * whose `from: 0` is this library. */
       readonly kind: "look-at-library-top";
       readonly target: number;
       readonly count?: number;
@@ -5612,9 +5421,9 @@ export type EffectSpec =
       readonly kind: "discard";
       /** A target slot holding a player, or a scope ("each opponent discards
        * a card"), or one player named through a target ("its controller
-       * discards a card": `{ controllerOfTarget: 0 }`). Each player with a
+       * discards a card": `{ controllerOf: 0 }`). Each player with a
        * real choice is asked in turn — see `GameState.pendingDiscards`. */
-      readonly target: number | PlayerScope | ChosenPlayerRef;
+      readonly target: number | PlayerScope;
       readonly amount: EffectAmount;
       /** "Discards a card at random" (Hypnotic Specter): nobody chooses —
        * the game picks, with its seeded shuffle. */
@@ -5643,7 +5452,7 @@ export type EffectSpec =
     }
   | {
       readonly kind: "modify-pt";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       readonly power: EffectAmount;
       readonly toughness: EffectAmount;
       readonly duration: PermanentDuration;
@@ -5655,7 +5464,7 @@ export type EffectSpec =
        * Mannichi, the Fevered Dream's "switch each creature's power and
        * toughness". */
       readonly kind: "switch-pt";
-      readonly target?: EffectTargetRef;
+      readonly target?: ObjectRef;
       readonly all?: CardFilter;
       readonly duration: PermanentDuration;
     }
@@ -5686,7 +5495,7 @@ export type EffectSpec =
        * "creatures **defending player** controls get -1/-1 until end of turn"
        * (Silumgar, the Drifting Death: `"trigger-player"`, on a
        * `creature-attacks`). Nothing when it names nobody. */
-      readonly controlledByPlayer?: EffectPlayerRef;
+      readonly controlledByPlayer?: PlayerRef;
     }
   | {
       /** Double each matching permanent's *current* power and toughness
@@ -5726,7 +5535,7 @@ export type EffectSpec =
        * `counter` doubles just that kind — Voracious Hydra's "double the
        * number of +1/+1 counters on this creature". */
       readonly kind: "double-counters";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       readonly counter?: string;
     }
   | {
@@ -5743,7 +5552,7 @@ export type EffectSpec =
        * chooses per kind as it resolves (rule 608.2d's choice made on
        * resolution, one `choose-modes` a kind). */
       readonly kind: "another-counter-of-each-kind";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       readonly orRemove?: true;
     }
   | {
@@ -5773,7 +5582,7 @@ export type EffectSpec =
        * abilities after it takes it away, like a granted keyword (613.7).
        */
       readonly kind: "grant-toxic";
-      readonly target?: EffectTargetRef;
+      readonly target?: ObjectRef;
       readonly filter?: CardFilter;
       readonly exceptSource?: boolean;
       readonly amount: number;
@@ -5799,7 +5608,7 @@ export type EffectSpec =
        * per quality.
        */
       readonly kind: "grant-protection";
-      readonly target?: EffectTargetRef;
+      readonly target?: ObjectRef;
       readonly filter?: CardFilter;
       readonly exceptSource?: boolean;
       readonly from: ProtectionQualities | ProtectionChoice;
@@ -5820,7 +5629,7 @@ export type EffectSpec =
        * last controller draws and discards — but gets no counter (701.50b).
        */
       readonly kind: "connive";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       readonly amount?: EffectAmount;
       /** Set by the engine on the part it parks while the discard is being
        * chosen: the event the connive's draw began at. Never authored. */
@@ -5842,7 +5651,7 @@ export type EffectSpec =
        * effect's controller's, so the explorer must be theirs.
        */
       readonly kind: "explore";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       readonly times?: EffectAmount;
       /** "Each [filter] you control explores" (Hakbal of the Surging Soul's
        * Merfolk): every permanent of the effect's controller matching it as
@@ -5861,7 +5670,7 @@ export type EffectSpec =
     }
   | {
       readonly kind: "add-counter";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       readonly counter: string;
       /** "The same kind of counters" as those whose placement fired this
        * trigger (`LastKnownRefs.counter` — Captain Marvel, Apex Avenger), in
@@ -5875,7 +5684,7 @@ export type EffectSpec =
        * … puts a +1/+1 counter on it" (Alexios, Deimos of Kosmos:
        * `"active-player"`). What a "whenever you put … counters" trigger
        * asks (`counter-added`'s `by`). The effect's controller by default. */
-      readonly by?: EffectPlayerRef;
+      readonly by?: PlayerRef;
       /** The training ability's counter (rule 702.149 — the `training()`
        * helper): putting one or more makes the creature "train" (702.149c),
        * which a `trains` trigger watches for (`counter-added`'s `training`). */
@@ -5902,7 +5711,7 @@ export type EffectSpec =
        * removed this way").
        */
       readonly kind: "remove-counter";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       readonly counter: string;
       readonly amount: EffectAmount | "all";
     }
@@ -5967,7 +5776,7 @@ export type EffectSpec =
       readonly kind: "remove-counters";
       readonly from?: CardFilter;
       readonly anyController?: true;
-      readonly target?: EffectTargetRef;
+      readonly target?: ObjectRef;
       readonly counter: string;
       readonly orKinds?: readonly string[];
       readonly count: EffectAmount | "any";
@@ -6017,8 +5826,8 @@ export type EffectSpec =
        * in turn). Not targets (the Forgotten Ancient ruling).
        */
       readonly kind: "move-counters";
-      readonly from: EffectTargetRef | MoveCountersChooser;
-      readonly to: EffectTargetRef | MoveCountersChooser;
+      readonly from: ObjectRef | MoveCountersChooser;
+      readonly to: ObjectRef | MoveCountersChooser;
       readonly counter?: string;
       readonly amount?: 1 | "all" | "each-kind-missing" | "any" | "one-or-more";
       /** "If you do, draw a card" (Goldberry): after the moves, if any
@@ -6046,8 +5855,8 @@ export type EffectSpec =
        * `create-token` `separate`, so each is its own object).
        */
       readonly kind: "put-counters-of";
-      readonly of: AmountRef;
-      readonly target: EffectTargetRef | "created";
+      readonly of: ObjectRef;
+      readonly target: ObjectRef | "created";
     }
   | {
       /**
@@ -6203,10 +6012,10 @@ export type EffectSpec =
       /** The creature type amass names; the Army gains it (701.47a). */
       readonly creatureType: string;
       /** Who amasses, when that isn't the effect's controller — Azog, Moria's
-       * Ruin's "**its controller** amasses Goblins X" (`{ controllerOfTarget:
+       * Ruin's "**its controller** amasses Goblins X" (`{ controllerOf:
        * 0 }`, as the creature last existed): their Army, their choice among
        * several, their token. */
-      readonly who?: EffectPlayerRef;
+      readonly who?: PlayerRef;
       /** Set only by the engine: the Army chosen, as the target slot a
        * `choose-permanents` binds it to — never authored. */
       readonly onto?: number;
@@ -6311,7 +6120,7 @@ export type EffectSpec =
        */
       readonly kind: "give-suspend";
       readonly timeCounters: EffectAmount | "mana-value";
-      readonly target?: EffectTargetRef;
+      readonly target?: ObjectRef;
       readonly filter?: CardFilter;
       readonly onlyWithSuspend?: true;
       /** Not suspend but only its last line: "It gains 'When the last time
@@ -6335,7 +6144,7 @@ export type EffectSpec =
     }
   | {
       readonly kind: "grant-keyword";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       readonly keyword: Keyword;
       readonly duration: PermanentDuration;
     }
@@ -6367,7 +6176,7 @@ export type EffectSpec =
        * onto the battlefield blocking), and it blocks that (`"block-attacker"`).
        */
       readonly kind: "remove-from-combat";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       readonly unblockSoleBlocked?: true;
       readonly thenMayBlock?: true;
     }
@@ -6393,7 +6202,7 @@ export type EffectSpec =
        * creatures become blocked").
        */
       readonly kind: "become-blocked";
-      readonly target?: EffectTargetRef;
+      readonly target?: ObjectRef;
       readonly filter?: CardFilter;
     }
   | {
@@ -6411,7 +6220,7 @@ export type EffectSpec =
        * "which player" and no permanent (Capricopian).
        */
       readonly kind: "reselect-attack";
-      readonly target?: EffectTargetRef;
+      readonly target?: ObjectRef;
       readonly filter?: CardFilter;
       readonly onlyPlayers?: true;
     }
@@ -6427,7 +6236,7 @@ export type EffectSpec =
        * timestamp.
        */
       readonly kind: "lose-keywords";
-      readonly target?: EffectTargetRef;
+      readonly target?: ObjectRef;
       readonly filter?: CardFilter;
       /** With `filter`: read from the side of the player in this target slot
        * — Quick Draw's "creatures **target opponent** controls" is `{ type:
@@ -6496,8 +6305,8 @@ export type EffectSpec =
        * (`filter: {}`, `lands`, `from: ["hand"]`), judged where the card is
        * as the cast or play begins (601.2a). */
       readonly cantCast?: {
-        /** `{ ownerOfTarget }`: "that creature's owner" (Reflector Mage). */
-        readonly who: PlayerScope | { readonly ownerOfTarget: number };
+        /** `{ ownerOf }`: "that creature's owner" (Reflector Mage). */
+        readonly who: PlayerScope;
         readonly filter: CardFilter;
         readonly label: string;
         readonly lands?: true;
@@ -6710,7 +6519,7 @@ export type EffectSpec =
       /** With `cantAttack`: only the creatures this player controls, whoever
        * that is as the attack is declared — "**they** can't attack you this
        * combat" (Champions of Minas Tirith). Naming nobody, nothing is made. */
-      readonly cantAttackBy?: EffectPlayerRef;
+      readonly cantAttackBy?: PlayerRef;
     }
   | {
       /**
@@ -6902,7 +6711,7 @@ export type EffectSpec =
        */
       readonly kind: "prohibit";
       readonly who?: number | PlayerScope;
-      readonly target?: EffectTargetRef;
+      readonly target?: ObjectRef;
       readonly spells?: boolean | { readonly filter: CardFilter; readonly label: string };
       readonly abilities?: boolean;
       readonly lands?: boolean;
@@ -6923,7 +6732,7 @@ export type EffectSpec =
        * creature that enters later too (rule 611.2c).
        */
       readonly kind: "restrict";
-      readonly target?: EffectTargetRef;
+      readonly target?: ObjectRef;
       readonly filter?: CardFilter;
       readonly restrictions: readonly CombatRestriction[];
       /** With `filter`: "creatures **target player** controls can't attack
@@ -6959,7 +6768,7 @@ export type EffectSpec =
        * Pathfinder — rule 509.1b): `target` can't block this one creature,
        * usually `"source"`, the object it is as this resolves (rule 400.7).
        * A `target` form only; `restrictions` may then be empty. */
-      readonly cantBlockAttacker?: EffectTargetRef;
+      readonly cantBlockAttacker?: ObjectRef;
       /** How long a `target`'s restrictions, or an `asItResolves` filter's,
        * last — this turn when omitted; `"while-source"` is Opportunistic
        * Dragon's "for as long as this creature remains on the battlefield, …
@@ -6992,7 +6801,7 @@ export type EffectSpec =
        * an ability already on the stack is unaffected (the rulings).
        */
       readonly kind: "detain";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
     }
   | {
       /**
@@ -7018,9 +6827,9 @@ export type EffectSpec =
        * neither `target` nor `attacker`, `restrict`'s `must-block` says it.
        */
       readonly kind: "block-if-able";
-      readonly target?: EffectTargetRef;
+      readonly target?: ObjectRef;
       readonly filter?: CardFilter;
-      readonly attacker?: EffectTargetRef;
+      readonly attacker?: ObjectRef;
       readonly thisCombat?: boolean;
     }
   | {
@@ -7034,7 +6843,7 @@ export type EffectSpec =
        * end it. The static form is `StaticAbility.canAttackAsThoughNoDefender`.
        */
       readonly kind: "attack-despite-defender";
-      readonly target?: EffectTargetRef;
+      readonly target?: ObjectRef;
       readonly filter?: CardFilter;
     }
   | {
@@ -7052,7 +6861,7 @@ export type EffectSpec =
        * With nobody to pick, `else` happens instead.
        */
       readonly kind: "attack-random-opponent";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       readonly notAttackedLastCombat?: boolean;
       readonly else?: EffectSpec;
     }
@@ -7062,7 +6871,7 @@ export type EffectSpec =
        * power is unchanged for everything else. The static form is
        * `StaticAbility.combatDamageByToughness`. */
       readonly kind: "damage-by-toughness";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
     }
   | {
       /** `target` assigns no combat damage this turn (rule 510.1a — Farrel's
@@ -7074,7 +6883,7 @@ export type EffectSpec =
        * combat**" (Master of Cruelties) — a later combat this turn it deals
        * its damage again. */
       readonly kind: "assigns-no-combat-damage";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       readonly duration?: Extract<Duration, "end-of-turn" | "until-end-of-combat">;
     }
   | {
@@ -7094,7 +6903,7 @@ export type EffectSpec =
        * `StaticAbility.assignAsThoughUnblocked`.
        */
       readonly kind: "assign-as-though-unblocked";
-      readonly target?: EffectTargetRef;
+      readonly target?: ObjectRef;
       readonly filter?: CardFilter;
       readonly optional?: boolean;
     }
@@ -7107,7 +6916,7 @@ export type EffectSpec =
        * does. Anything that isn't a commander stays put.
        */
       readonly kind: "put-in-command-zone";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
     }
   | {
       /**
@@ -7126,11 +6935,11 @@ export type EffectSpec =
        */
       readonly kind: "exchange-life-stat";
       readonly stat: "power" | "toughness";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       /** Whose life total — the effect's controller's by default; Tree of
        * Perdition's "exchange **target opponent's** life total" is `{ target:
        * 0 }`. Naming nobody (an illegal or empty slot), nothing happens. */
-      readonly player?: EffectPlayerRef;
+      readonly player?: PlayerRef;
     }
   | {
       /**
@@ -7146,8 +6955,8 @@ export type EffectSpec =
        */
       readonly kind: "exchange-life-totals";
       /** The controller of the effect when absent. */
-      readonly first?: EffectPlayerRef;
-      readonly second: EffectPlayerRef;
+      readonly first?: PlayerRef;
+      readonly second: PlayerRef;
     }
   | {
       /** `target` (an instant/sorcery card in a graveyard, via the
@@ -7235,7 +7044,7 @@ export type EffectSpec =
        * with every other until-end-of-turn modifier.
        */
       readonly kind: "grant-triggered";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       readonly ability: TriggeredAbility;
       readonly duration: PermanentDuration;
     }
@@ -7248,7 +7057,7 @@ export type EffectSpec =
        * "it loses all land types and abilities and has '{T}: Add {C}.'"
        */
       readonly kind: "lose-abilities";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       readonly loseLandTypes?: boolean;
       readonly activated?: readonly ActivatedAbility[];
       readonly duration: PermanentDuration;
@@ -7275,7 +7084,7 @@ export type EffectSpec =
        * activated by hand where the payer can't use it (see `manaSources`).
        */
       readonly kind: "grant-activated";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       readonly ability: ActivatedAbility;
       readonly duration: PermanentDuration;
     }
@@ -7288,8 +7097,8 @@ export type EffectSpec =
        * card's abilities that work from another zone aren't among them.
        */
       readonly kind: "grant-activated-of";
-      readonly target: EffectTargetRef;
-      readonly of: EffectTargetRef;
+      readonly target: ObjectRef;
+      readonly of: ObjectRef;
       readonly duration: PermanentDuration;
     }
   | {
@@ -7313,7 +7122,7 @@ export type EffectSpec =
        * the grant's timestamp). A layer-4 part isn't applied.
        */
       readonly kind: "grant-static";
-      readonly target?: EffectTargetRef;
+      readonly target?: ObjectRef;
       readonly filter?: CardFilter;
       readonly ability: StaticAbility;
       readonly duration: PermanentDuration;
@@ -7490,7 +7299,7 @@ export type EffectSpec =
        * this target slot, or `"that-player"` — each one a `for-each-player`
        * names (Consuming Aberration's "each opponent reveals cards from the
        * top of their library until they reveal a land card"). */
-      readonly whose?: number | "that-player" | { readonly controllerOfTarget: number };
+      readonly whose?: number | PlayerRef;
       /** What stops it, matched against each card as it's revealed — an `{
        * amount }` compare is bound as the effect applies ("a nonland card
        * with lesser mana value"). */
@@ -7582,7 +7391,7 @@ export type EffectSpec =
        * under a `choose-opponent`). They choose its new targets. Naming
        * nobody — a player who has left the game — nothing is copied. Not with
        * `retargetTo`. */
-      readonly controller?: EffectPlayerRef;
+      readonly controller?: PlayerRef;
       /** "Copy that spell if it targets a permanent or player" — any of its
        * targets was, when chosen. Otherwise it isn't copied. */
       readonly ifTargets?: "permanent-or-player";
@@ -7964,7 +7773,7 @@ export type EffectSpec =
        * 607.2h).
        */
       readonly kind: "exert";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       readonly asItAttacks?: true;
     }
   | {
@@ -8067,7 +7876,7 @@ export type EffectSpec =
        * `tappedOnReturn`: "tap that creature as it phases in this way".
        */
       readonly kind: "phase-out";
-      readonly target?: EffectTargetRef;
+      readonly target?: ObjectRef;
       readonly attachedToSource?: boolean;
       readonly filter?: CardFilter;
       readonly controlledByTarget?: number;
@@ -8081,7 +7890,7 @@ export type EffectSpec =
        * a man-land is "still a land". `"source"` is the usual target
        * (man-lands animate themselves); Turn to Frog targets a creature. */
       readonly kind: "animate";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       /** Its base P/T. A live amount is read once, as the effect applies
        * (rule 608.2h — Zur, Eternal Schemer's "base power and base
        * toughness each equal to its mana value"), and stays that.
@@ -8144,7 +7953,7 @@ export type EffectSpec =
        * same resolution keeps its id, so its slot still reaches it there.
        */
       readonly kind: "add-types";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       readonly addTypes?: readonly CardType[];
       readonly addSubtypes?: readonly string[];
       /**
@@ -8218,11 +8027,11 @@ export type EffectSpec =
       /** "Manifest the top card of your library" (rule 701.40), or cloak it
        * (701.58): it goes onto the battlefield face down as a 2/2 — with ward
        * {2} if cloaked — under the manifesting player, from their own library.
-       * Reality Shift's "its controller manifests" is `{ controllerOfTarget: 0 }`,
+       * Reality Shift's "its controller manifests" is `{ controllerOf: 0 }`,
        * as the target last existed. Several are manifested one at a time
        * (701.40e). */
       readonly kind: "manifest";
-      readonly who: PlayerScope | { readonly controllerOfTarget: number };
+      readonly who: PlayerScope;
       /** How many — 1 by default, or an amount read as it resolves
        * (Omarthis, Ghostfire Initiate's "equal to the number of counters on
        * it"), each one a manifest of its own. */
@@ -8234,7 +8043,7 @@ export type EffectSpec =
        * `"trigger-player"`). It enters under the manifesting player's
        * control (rule 110.2a); its owner can't look at it (708.5). Nothing
        * when that player has left the game or the slot is illegal. */
-      readonly from?: EffectPlayerRef;
+      readonly from?: PlayerRef;
     }
   | {
       /**
@@ -8269,7 +8078,7 @@ export type EffectSpec =
        * creatures" wraps it in a `for-each-target`.
        */
       readonly kind: "turn-face-down";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       readonly as?: FaceDownAs;
     }
   | {
@@ -8288,7 +8097,7 @@ export type EffectSpec =
        * `choose-permanents` over `faceDown` with this as its `then`.
        */
       readonly kind: "turn-face-up";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
     }
   | {
       /** Manifest dread (rule 701.62a): the player looks at the top two cards
@@ -8297,7 +8106,7 @@ export type EffectSpec =
        * `look-and-choose` with `destination: "manifest"`, `leftover:
        * "graveyard"`. `who` is the effect's controller (`"you"`, the
        * default) or a target's controller as it last existed — Unwanted
-       * Remake's "its controller manifests dread" is `{ controllerOfTarget:
+       * Remake's "its controller manifests dread" is `{ controllerOf:
        * 0 }`. `count` manifests dread that many times, each finished before
        * the next (They Came from the Pipes' "twice"), an amount read once as
        * it resolves (Valgavoth's Onslaught's "manifest dread X times"). Each
@@ -8305,7 +8114,7 @@ export type EffectSpec =
        * a later step's `{ thisWay: "put-onto-battlefield" }` filter is "those
        * creatures" ("then put X +1/+1 counters on each of those creatures"). */
       readonly kind: "manifest-dread";
-      readonly who?: "you" | { readonly controllerOfTarget: number };
+      readonly who?: PlayerRef;
       readonly count?: EffectAmount;
     }
   | {
@@ -8354,7 +8163,7 @@ export type EffectSpec =
        * object (never a stack), and two of one player's Roles on one
        * permanent leave only the newest (rule 704.5z).
        */
-      readonly attachedTo?: EffectTargetRef;
+      readonly attachedTo?: ObjectRef;
       /** "**The tokens are goaded for the rest of the game**" (Rendmaw,
        * Creaking Nest; Nettling Nuisance) — by this effect's controller,
        * whoever creates them: a token of their own must attack each combat
@@ -8410,10 +8219,10 @@ export type EffectSpec =
       /** `"owners-of-exiled-with-source"`: each owner of a card in exile
        * linked to this source (rule 607.2a), in turn order — Skyclave
        * Apparition's "the exiled card's owner creates …". Nobody, with none.
-       * A {@link ChosenPlayerRef} is one player — "**target opponent** exiles
+       * A {@link PlayerRef} is one player — "**target opponent** exiles
        * a card from their hand" (Skullcap Snail): a `look-and-choose` with
        * `player: "that-player"` inside is theirs to choose. */
-      readonly who: PlayerScope | "owners-of-exiled-with-source" | "source-owner" | ChosenPlayerRef;
+      readonly who: PlayerScope | "owners-of-exiled-with-source";
       readonly effect: EffectSpec;
       /** "Each player **who** …": only the players in `who` for whom this
        * holds, read with that player as `"that-player"` (an `of-player`) —
@@ -8432,7 +8241,7 @@ export type EffectSpec =
       /** "Each player **other than** …": everyone in `who` but this player,
        * found as it begins — Fractured Identity's "each player other than its
        * controller", the controller it had as it was exiled. */
-      readonly except?: ChosenPlayerRef;
+      readonly except?: PlayerRef;
       /** With `whoIf`: the instruction those players are found **before** —
        * "each opponent discards a card. **Each opponent who can't** loses 3
        * life" (Entropic Battlecruiser), "for each opponent who can't, you gain
@@ -8558,9 +8367,9 @@ export type EffectSpec =
        */
       readonly choose?: true;
       /** Who chooses — only with `choose`; every player when absent. A
-       * {@link ChosenPlayerRef} is one player: "**target opponent** chooses a
+       * {@link PlayerRef} is one player: "**target opponent** chooses a
        * creature they control" (Imperial Edict). */
-      readonly who?: PlayerScope | ChosenPlayerRef;
+      readonly who?: PlayerScope;
       /** Who chooses first, the rest following in turn order: the effect's
        * controller (a vote's "starting with you", 701.38a — a vote always
        * starts there), the active player (rule 101.4 — a choice's default),
@@ -8742,12 +8551,12 @@ export type EffectSpec =
        * controller (Miirym copying your own Dragons); `"you"` puts it under
        * the effect's controller instead, which is what a card that copies
        * something an opponent controls means (Hate Mirage). A
-       * {@link ChosenPlayerRef} is one player, "**that player** creates a token
+       * {@link PlayerRef} is one player, "**that player** creates a token
        * that's a copy of that card" (Arcane Artisan); nobody, and none is made,
        * if that target has gone. `"that-player"` is the player a
        * `for-each-player` is on: "each opponent creates a token that's a copy
        * of it" (Life of the Party). */
-      readonly who?: "you" | "that-player" | ChosenPlayerRef;
+      readonly who?: "you" | "that-player" | PlayerRef;
       /** "**The tokens are goaded for the rest of the game**" (Life of the
        * Party), by this effect's controller — `create-token`'s. */
       readonly goadedForGame?: boolean;
@@ -8807,13 +8616,14 @@ export type EffectSpec =
        * only by an Aura that can enchant them (a Curse — rule 303.4); one
        * that can't go there stays where it is (701.3b). */
       readonly kind: "attach";
-      /** What it's attached to — see {@link AttachRef} (`"put-this-way"`:
+      /** What it's attached to — see {@link ObjectRef} (`"put-this-way"`:
        * Pre-War Formalwear's "return target creature card … and attach this
-       * Equipment to it"). Ignored with `ontoChosen`. */
-      readonly target: AttachRef;
-      /** What's attached, when it isn't the source — see {@link AttachRef}
+       * Equipment to it"), or a `{ player }` (Archnemesis's "attach this Aura
+       * to that player"). Ignored with `ontoChosen`. */
+      readonly target: ObjectRef | { readonly player: PlayerRef };
+      /** What's attached, when it isn't the source — see {@link ObjectRef}
        * (`"put-this-way"`: Stonehewer Giant's found Equipment). */
-      readonly attachment?: AttachRef;
+      readonly attachment?: ObjectRef;
       /** "Equip planeswalker" (rule 702.6e, Luxior, Giada's Gift): this
        * Equipment goes on a planeswalker "as though that planeswalker were a
        * creature". */
@@ -8871,7 +8681,7 @@ export type EffectSpec =
        * permanent"; it stays on the battlefield. Nothing for one that isn't
        * attached or has left (rule 400.7). */
       readonly kind: "unattach";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
     }
   | {
       /** A Licid's ability (`licid: true` on it): "~ loses this ability and
@@ -8882,7 +8692,7 @@ export type EffectSpec =
        * goes to the graveyard (rule 704.5m). Nothing once the source has left
        * (rule 400.7). */
       readonly kind: "become-licid-aura";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       readonly endCost: string;
     }
   | {
@@ -8895,7 +8705,7 @@ export type EffectSpec =
        * Transcendent Rival) has its controller choose as this resolves, a
        * `choose-modes` among the players, asked only among two or more. */
       readonly kind: "transform";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       /** Set only by the engine: the player chosen for the face it turns
        * into, `null` for nobody — the choice above, made. */
       readonly chosenPlayer?: PlayerId | null;
@@ -8909,7 +8719,7 @@ export type EffectSpec =
        * status, one way, and a flip card shows its alternative half from then
        * on. Only a permanent flips; an already flipped one stays as it is. */
       readonly kind: "flip";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
     }
   | {
       /**
@@ -8964,10 +8774,10 @@ export type EffectSpec =
        * on the battlefield or creature card in a graveyard").
        */
       readonly kind: "become-copy";
-      readonly target?: EffectTargetRef;
+      readonly target?: ObjectRef;
       readonly filter?: CardFilter;
       readonly exceptOf?: true;
-      readonly of: AmountRef;
+      readonly of: ObjectRef;
       readonly ofCard?: true | "when-a-card";
       readonly until?: CopyDuration;
       readonly exceptions?: CopyExceptions;
@@ -8988,7 +8798,7 @@ export type EffectSpec =
        * (722.3c — `Game.becomePrepared`).
        */
       readonly kind: "become-prepared";
-      readonly target?: EffectTargetRef;
+      readonly target?: ObjectRef;
       readonly filter?: CardFilter;
     }
   | {
@@ -9071,7 +8881,7 @@ export type EffectSpec =
       /** The chosen creature becomes the effect's controller's Ring-bearer
        * (rule 701.54a) — a step of `the-ring-tempts-you`. */
       readonly kind: "become-ring-bearer";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
     }
   | {
       /**
@@ -9082,7 +8892,7 @@ export type EffectSpec =
        * controller (702.95c), different, and both unpaired (702.95d).
        */
       readonly kind: "pair";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
     }
   | {
       /** The temptation completes (rule 701.54d) — the last step of
@@ -9102,8 +8912,8 @@ export type EffectSpec =
       readonly counter: PlayerCounterKind;
       readonly amount: EffectAmount;
       /** A scope, or one player named through a target — "its controller
-       * gets two poison counters" (`{ controllerOfTarget: 0 }`). */
-      readonly who?: PlayerScope | ChosenPlayerRef;
+       * gets two poison counters" (`{ controllerOf: 0 }`). */
+      readonly who?: PlayerScope;
       readonly target?: number;
     }
   | {
@@ -9269,7 +9079,7 @@ export type EffectSpec =
        * object covers only that object (rule 400.7): one that changes zones
        * is a new object without it. */
       readonly kind: "prevent-damage";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       readonly amount: EffectAmount | "all";
       readonly combatOnly?: boolean;
       /** A redirection instead (rule 614.9): "The next 1 damage that would
@@ -9282,7 +9092,7 @@ export type EffectSpec =
        * battlefield, no longer a creature, planeswalker or battle, or a
        * player who has left, the shield does nothing (614.9). Not with
        * `"all"`. */
-      readonly redirectTo?: EffectTargetRef | "you";
+      readonly redirectTo?: ObjectRef | PlayerRef;
     }
   | {
       /** Damage from a source of your choice (rule 609.7): "The next time a
@@ -9332,7 +9142,7 @@ export type EffectSpec =
        * amount: "next-time", redirectTo: "source" }`; Jade Monolith's "that
        * source deals that damage to you instead", `redirectTo: "you"`. As
        * `prevent-damage`'s `redirectTo`. */
-      readonly redirectTo?: EffectTargetRef | "you";
+      readonly redirectTo?: ObjectRef | PlayerRef;
       /** Set by the engine on the copy the choice's answer applies: what the
        * shield protects, with target 0 the source chosen. */
       readonly protect?: TargetRef | "your-side" | "your-side-creatures" | "any";
@@ -9351,7 +9161,7 @@ export type EffectSpec =
        * permanent it becomes is a new object with its own colours (rule
        * 400.7). Mana symbols in its cost don't change. */
       readonly kind: "become-color";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       readonly colors: readonly Color[];
       readonly duration: PermanentDuration;
       /** "Becomes blue **in addition to its other colors**" (Indigo
@@ -9376,7 +9186,7 @@ export type EffectSpec =
        * keeps the change as the permanent it becomes (400.7a).
        */
       readonly kind: "change-text";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
       readonly words: "color" | "land-type" | "color-or-land-type";
       readonly duration: PermanentDuration;
       readonly from?: string;
@@ -9597,7 +9407,7 @@ export type EffectSpec =
        * `otherwise` happens only if none of them took an option.
        * `{ anyOf }` is the same over a scope: "**any other player** may pay
        * that spell's mana cost" (Ice Cave's `"opponents-of-trigger-controller"`).
-       * Any other {@link EffectPlayerRef} is one player named as this applies:
+       * Any other {@link PlayerRef} is one player named as this applies:
        * "unless **that player** pays 3 life" in a `for-each-player` (Sivriss,
        * Lim-Dûl's Hex), "**the chosen player**" (Energy Vortex). Naming nobody,
        * `otherwise` happens.
@@ -9811,15 +9621,15 @@ export type EffectSpec =
        * as it's found.
        */
       readonly kind: "each-player-may";
-      /** A scope, or `{ controllerOfTarget }` — "**that permanent's
+      /** A scope, or `{ controllerOf }` — "**that permanent's
        * controller** may sacrifice a land" (Chain of Vapor): whoever
        * controls what the target slot points at, as it last existed if it
-       * has left (rule 608.2h) — or `{ ownerOfTarget }`, whoever owns it
+       * has left (rule 608.2h) — or `{ ownerOf }`, whoever owns it
        * (a `put-on-library`'s "its owner puts it on their choice of …"). */
       readonly who:
         | PlayerScope
-        | { readonly controllerOfTarget: number }
-        | { readonly ownerOfTarget: number };
+        | { readonly controllerOf: number }
+        | { readonly ownerOf: number };
       readonly prompt?: string;
       readonly effect?: EffectSpec;
       readonly options?: readonly BoundUnlessOption[];
@@ -9872,7 +9682,7 @@ export type EffectSpec =
        * many permanents of their choice" (`{ votedNumber: 0 }`).
        */
       readonly kind: "sacrifice-all-but";
-      readonly who: PlayerScope | ChosenPlayerRef;
+      readonly who: PlayerScope;
       readonly keep: EffectAmount;
       readonly filter: CardFilter;
       readonly upTo?: boolean;
@@ -9990,7 +9800,7 @@ export type EffectSpec =
       readonly kind: "separate-into-piles";
       readonly objects: PileObjects;
       /** Who separates: the effect's controller when absent. */
-      readonly separator?: EffectPlayerRef | "an-opponent";
+      readonly separator?: PlayerRef | "an-opponent";
       /** Who chooses one of the piles. */
       readonly chooser: ChooserRef;
       /**
@@ -10125,7 +9935,7 @@ export type EffectSpec =
       /** A slot (a player in it: "goad each creature target player controls"),
        * or `"source"` / `"trigger-object"` — Kros's "tap that creature and
        * goad it". */
-      readonly target?: EffectTargetRef;
+      readonly target?: ObjectRef;
       readonly who?: PlayerScope;
       readonly filter?: CardFilter;
       readonly forGame?: boolean;
@@ -10160,7 +9970,7 @@ export type EffectSpec =
        * trigger) or `"trigger-object"`.
        */
       readonly kind: "suspect";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
     }
   | {
       /**
@@ -10171,7 +9981,7 @@ export type EffectSpec =
        * suspected creatures are no longer suspected"). Exactly one of the two.
        */
       readonly kind: "unsuspect";
-      readonly target?: EffectTargetRef;
+      readonly target?: ObjectRef;
       readonly filter?: CardFilter;
     }
   | {
@@ -10185,7 +9995,7 @@ export type EffectSpec =
        * triggers but not a "for the first time each turn" one.
        */
       readonly kind: "become-saddled";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
     }
   | {
       /**
@@ -10221,7 +10031,7 @@ export type EffectSpec =
       readonly kind: "attack-requirement";
       readonly filter?: CardFilter;
       readonly otherThanYou?: boolean;
-      readonly target?: EffectTargetRef;
+      readonly target?: ObjectRef;
       readonly controlledByTarget?: number;
       readonly attacks?: "you" | "source" | number;
       readonly duration?: AttackRequirementDuration;
@@ -10348,7 +10158,7 @@ export type EffectSpec =
        * target condition reads false and an "otherwise, draw" draws (and
        * fails) as the card says.
        *
-       * `of: { ownerOfTarget }` reveals the top of **another** library: that
+       * `of: { ownerOf }` reveals the top of **another** library: that
        * of the owner of the object in a target slot (Chaos Warp's "the owner
        * of target permanent … reveals the top card of their library"). The
        * owner never changes (rules 108.3, 111.2), so it is still known once the
@@ -10358,7 +10168,7 @@ export type EffectSpec =
        */
       readonly kind: "reveal-top";
       readonly then: EffectSpec;
-      readonly of?: { readonly ownerOfTarget: number };
+      readonly of?: PlayerRef;
       /**
        * **Each player in this scope** reveals the top card of their library
        * (rule 701.20a), all of them before `then`, which runs once with no
@@ -10382,7 +10192,7 @@ export type EffectSpec =
        * nothing to an object that isn't on the battlefield any more.
        */
       readonly kind: "shuffle-into-library";
-      readonly target: EffectTargetRef;
+      readonly target: ObjectRef;
     }
   | {
       /**
@@ -10477,7 +10287,7 @@ export type EffectSpec =
       /** "Put it onto the battlefield tapped **under target player's control**"
        * (Yavimaya Dryad): with `destination: "battlefield"`, whose the finds
        * become. Nobody there, no search. */
-      readonly enterUnder?: EffectPlayerRef;
+      readonly enterUnder?: PlayerRef;
       /** "…, **reveal it**, …" (Enlightened Tutor, Kodama's Reach): show the
        * find to every player (rule 701.16). Off by default — a plain "search
        * your library for a card" (Vampiric Tutor) reveals nothing. */
@@ -10491,14 +10301,14 @@ export type EffectSpec =
        * the controller of a target slot, for a search they must make. A
        * search they **may** make ("its controller may search their library
        * for a basic land card" — Path to Exile) is theirs to decline: an
-       * `each-player-may` of `who: { controllerOfTarget }` around a search
+       * `each-player-may` of `who: { controllerOf }` around a search
        * with no `who`, since `min: 0` alone still searches and shuffles.
        * `"that-player"`: the player an `each-player-may`'s `ifDid` is about,
        * the effect's controller still "you" — Rootweaver Druid's "each
        * opponent may search … under your control" (with `instead`'s
        * `under: "you"`).
        */
-      readonly who?: { readonly controllerOfTarget: number } | "that-player";
+      readonly who?: PlayerRef;
       /**
        * Which zones are searched: the library (the default), the graveyard,
        * the hand, or any of them together — "search your library **and/or
@@ -10568,9 +10378,9 @@ export type EffectSpec =
       /**
        * Whose zones are searched, when they aren't the searcher's own —
        * "search **target opponent's** library" (`{ target: 0 }`), "**its
-       * controller's** graveyard, hand, and library" (`{ controllerOfTarget }`
+       * controller's** graveyard, hand, and library" (`{ controllerOf }`
        * — the extract family: Splinter, Counterbore), "**its owner's**"
-       * (`{ ownerOfTarget }` — Surgical Extraction), "**that player's**"
+       * (`{ ownerOf }` — Surgical Extraction), "**that player's**"
        * (`"trigger-player"` — Rootwater Thief). The searcher is still `who`'s
        * (the controller by default); the cards stay theirs, so a find put
        * into a graveyard or a hand goes to its owner's, and one put onto the
@@ -10581,7 +10391,7 @@ export type EffectSpec =
        * searched. With `zones: "graveyard-hand-library"` their hand is
        * searched too: a hidden zone, so the searcher sees it while searching.
        */
-      readonly whose?: EffectPlayerRef;
+      readonly whose?: PlayerRef;
       /**
        * "Search … for **all** cards with that name" (Cranial Extraction,
        * Extirpate): every match in a graveyard is found — a public zone, where
@@ -10699,7 +10509,7 @@ export type EffectSpec =
        * player's graveyard — Grime Gorger's "exile up to one card of each card
        * type from **defending player's** graveyard" (`"trigger-player"`).
        * Nothing at all with that player gone or the slot illegal. */
-      readonly from?: EffectPlayerRef;
+      readonly from?: PlayerRef;
       /** `"hand"` is the "you may put a land card **from your hand** onto the
        * battlefield" family (Growth Spiral, Ghalta) — nothing is revealed
        * there, the chooser is looking at their own hand, and `leftover` is
@@ -10731,7 +10541,7 @@ export type EffectSpec =
        * graveyard" (`filter: { ownedBy: "opponent" }`, `destination:
        * "graveyard"` — each card to its owner's), Oblivion Sower's "put any
        * number of land cards that player owns from exile onto the
-       * battlefield under your control" (`from: { target: 0 }`; under the
+       * battlefield under your control" (`from: 0`; under the
        * chooser's control, as `"graveyards"`' are). Only the cards that may
        * be chosen are shown. A face-down card there has no characteristics
        * (rule 406.3a), so it's choosable only when `filter` asks nothing
@@ -11153,7 +10963,7 @@ export interface CopyExceptions {
  */
 export type PileObjects =
   | { readonly libraryTop: EffectAmount; readonly reveal?: true }
-  | { readonly permanents: CardFilter; readonly whose: EffectPlayerRef }
+  | { readonly permanents: CardFilter; readonly whose: PlayerRef }
   | { readonly graveyard: CardFilter }
   | "targets";
 
@@ -11327,8 +11137,8 @@ export interface ModeOption {
 /** Primitive mutations an effect can perform. Implemented by the engine. */
 export interface EffectApi {
   /** `from`: the triggering object, or a target, deals it, not the effect's
-   * source — see {@link DamageFrom}. */
-  dealDamage(target: TargetRef, amount: number, from?: DamageFrom): void;
+   * source — see {@link ObjectRef}. */
+  dealDamage(target: TargetRef, amount: number, from?: ObjectRef): void;
   /** Run `fn` with every damage it deals unpreventable (rule 615.12 — a
    * `damage` effect's `cantBePrevented`). */
   unpreventably(fn: () => void): void;
@@ -11344,7 +11154,7 @@ export interface EffectApi {
   dealDamageScoped(
     who: PlayerScope,
     amountFor: (player: PlayerId) => number,
-    from?: DamageFrom,
+    from?: ObjectRef,
   ): void;
   /** What the triggering event was aimed at, if it still is what it was —
    * see `LastKnownRefs.recipient`. `undefined` outside such a trigger, for a
@@ -11692,7 +11502,7 @@ export interface EffectApi {
     amount: number,
     exceptSource?: boolean,
     whose?: readonly PlayerId[],
-    from?: DamageFrom,
+    from?: ObjectRef,
   ): void;
   /** Every battlefield permanent matching `filter` deals `amount` damage to
    * its own controller — see the `"creatures-damage-controllers"`
@@ -11728,7 +11538,7 @@ export interface EffectApi {
    * gate on a `sacrifice-source` effect's `then`. */
   sacrificeSource(): boolean;
   /** This context, with `object` — a permanent the effect has just
-   * sacrificed — as its `"sacrificed"` ({@link AmountRef}), read as it last
+   * sacrificed — as its `"sacrificed"` ({@link ObjectRef}), read as it last
    * existed on the battlefield. */
   withSacrificed(object: ObjectId): ResolutionContext;
   /** This context with target `index` in slot `from` and nothing after it
@@ -12121,14 +11931,28 @@ export interface EffectApi {
   /** The creature this effect's source equips — see `create-token-copy`'s
    * `of: "equipped"`. */
   equippedCreature(): ObjectId | undefined;
-  /** The permanent an {@link EffectTargetRef} `"attached"` names: what the
+  /** The permanent an {@link ObjectRef} `"attached"` names: what the
    * source is attached to now, or — the source gone — what it was last
    * attached to, while that is still on the battlefield as the same object. */
   attachedHost(): ObjectId | undefined;
   /** The owner of what the source is or was last attached to, as it last
    * existed if it has left the battlefield (rule 608.2h). */
   attachedOwner(): PlayerId | undefined;
-  /** The permanent an {@link EffectTargetRef} `"chosen"` names: the source's
+  /** What the source is or was last attached to, to read from: the object as
+   * it last existed if it has left (rule 608.2h), or a Curse's player. */
+  attachedRead(): TargetRef | undefined;
+  /** What this object is attached to (`{ hostOf }`), through its last known
+   * information once it has left. `act`: only while that host is still the
+   * same object (rule 400.7). A Curse's host is that player. */
+  hostOf(target: TargetRef, act: boolean): TargetRef | undefined;
+  /** The creature it's paired with (rule 702.95b). Pairing ends as either
+   * leaves the battlefield (702.95e), so a read needs it paired now. */
+  pairedWith(target: TargetRef): TargetRef | undefined;
+  /** The defending player of this attacker (rule 508.5). */
+  defendingPlayerOf(target: TargetRef): PlayerId | undefined;
+  /** The object's `zoneChangeCount` now; `undefined` once it's gone. */
+  stintNow(object: ObjectId): number | undefined;
+  /** The permanent an {@link ObjectRef} `"chosen"` names: the source's
    * chosen permanent (`GameObject.chosenPermanent`) — as the source last
    * existed, if it has left (rule 608.2h) — while that one is still on the
    * battlefield as the object that was chosen (rule 400.7). */
@@ -12136,10 +11960,10 @@ export interface EffectApi {
   /** How much damage from the effect's damage source (`from`) is lethal to
    * the creature `target` now — see the `damage` effect's
    * `excessToController`. */
-  lethalDamageTo(target: ObjectId, from: DamageFrom | undefined): number;
+  lethalDamageTo(target: ObjectId, from: ObjectRef | undefined): number;
   /** Whether the effect's damage source (`from`) has `keyword` — as it last
    * existed, if it has left. */
-  damageSourceHas(keyword: Keyword, from: DamageFrom | undefined): boolean;
+  damageSourceHas(keyword: Keyword, from: ObjectRef | undefined): boolean;
   /** Whether something the resolution has done so far is still waiting on a
    * player — a decision on `awaiting`, or a queued discard, sacrifice,
    * destruction or 903.9a choice not yet asked. */
@@ -13261,7 +13085,7 @@ export interface EffectApi {
     of: ObjectId,
     opts: {
       readonly ofCard?: boolean;
-      readonly until?: Exclude<CopyDuration, { readonly whileTapped: EffectTargetRef }> | { readonly whileTapped: ObjectId };
+      readonly until?: Exclude<CopyDuration, { readonly whileTapped: ObjectRef }> | { readonly whileTapped: ObjectId };
       readonly exceptions?: CopyExceptions;
     },
   ): void;
@@ -13614,7 +13438,7 @@ export interface ResolutionContext extends EffectApi {
    * ability — what `{ devotionTo: "that-color" }` reads. */
   readonly manaColor?: ManaType;
   /** The spell, or the source of the ability, whose cost a modifier's amount
-   * is reading (the `"priced"` {@link AmountRef}). */
+   * is reading (the `"priced"` {@link ObjectRef}). */
   readonly priced?: ObjectId;
   /** The ability's source stayed in a non-battlefield zone while it was on
    * the stack (`ActivatedAbility.zone: "command"`, or `staysInZone`) and has
@@ -13622,19 +13446,12 @@ export interface ResolutionContext extends EffectApi {
    * `"source"` finds nothing. Absent otherwise. */
   readonly sourceLost?: boolean;
   /** The permanent whose static granted this ability (`LastKnownRefs
-   * .granter`) — what an {@link EffectTargetRef} `"granter"` names. Absent
+   * .granter`) — what an {@link ObjectRef} `"granter"` names. Absent
    * on an ability nothing granted. */
   readonly granter?: ObjectId;
   /** That granter has left the battlefield, or left and come back, since
    * (rule 400.7): it's read as it last existed but not acted on. */
   readonly granterLost?: boolean;
-  /** The one permanent tapped to pay this ability's cost (`{ paid: "tapped"
-   * }`'s one member) — what an {@link EffectTargetRef} `"tapped"` acts on.
-   * Absent when nothing was. */
-  readonly tapped?: ObjectId;
-  /** That permanent has left the battlefield, or left and come back, since
-   * (rule 400.7): it's read as it last existed but not acted on. */
-  readonly tappedLost?: boolean;
   /** Which ability of which object is resolving, as the per-turn records
    * key it (`resolved-this-turn`, a `may`'s `oncePerTurn`): the source, the
    * timestamp it had when the ability went on the stack, and which of its
@@ -13686,25 +13503,25 @@ function eachPlayerMayAsks(
   ctx: ResolutionContext,
   startingWithYou = false,
 ): readonly PlayerId[] {
-  if (typeof who === "string") {
+  if (typeof who !== "object" || !isPlayerSlotRef(who)) {
     const players = ctx.playersInScope(who);
     // "Starting with you, each player votes …" (rule 701.38a): in turn
     // order from the effect's controller, not the active player.
     const at = startingWithYou ? players.indexOf(ctx.controller) : -1;
     return at <= 0 ? players : [...players.slice(at), ...players.slice(0, at)];
   }
-  const ref = ctx.targets["ownerOfTarget" in who ? who.ownerOfTarget : who.controllerOfTarget];
-  const player = ref === undefined ? undefined : "ownerOfTarget" in who ? ctx.ownerOf(ref) : ctx.controllerOf(ref);
-  return player === undefined || !ctx.playersInScope("each-player").includes(player) ? [] : [player];
+  const player = resolvePlayerRef(who, ctx);
+  return player === undefined ? [] : [player];
+}
+
+function isPlayerSlotRef(who: PlayerScope): who is Exclude<PlayerRef, string> {
+  return typeof who === "object" && !("otherThan" in who);
 }
 
 /** Who a `player-effect`'s `cantCast` binds as it resolves: a scope, or the
  * owner of a target, who hasn't left the game. */
-function cantCastPlayers(who: PlayerScope | { readonly ownerOfTarget: number }, ctx: ResolutionContext): readonly PlayerId[] {
-  if (typeof who !== "object" || !("ownerOfTarget" in who)) return ctx.playersInScope(who);
-  const target = ctx.targets[who.ownerOfTarget];
-  const owner = target === undefined || target === null ? undefined : ctx.ownerOf(target);
-  return owner === undefined || !ctx.playersInScope("each-player").includes(owner) ? [] : [owner];
+function cantCastPlayers(who: PlayerScope, ctx: ResolutionContext): readonly PlayerId[] {
+  return ctx.playersInScope(who);
 }
 
 /** Where a card goes in its owner's library — see `put-on-library`. */
@@ -13722,7 +13539,7 @@ function countersText(n: number, kind: string): string {
   return `${n === 1 ? (/^[aeiou]/i.test(kind) ? "an" : "a") : n} ${kind} counter${n === 1 ? "" : "s"}`;
 }
 
-function isMoveChooser(end: EffectTargetRef | MoveCountersChooser): end is MoveCountersChooser {
+function isMoveChooser(end: ObjectRef | MoveCountersChooser): end is MoveCountersChooser {
   return typeof end === "object";
 }
 
@@ -13790,8 +13607,8 @@ function applyMoveCounters(spec: MoveCountersSpec, ctx: ResolutionContext): void
   const amount = spec.amount ?? 1;
   const p = spec.progress;
   if (p === undefined) {
-    const from = isMoveChooser(spec.from) ? undefined : resolveEffectTarget(spec.from, ctx);
-    const to = isMoveChooser(spec.to) ? undefined : resolveEffectTarget(spec.to, ctx);
+    const from = isMoveChooser(spec.from) ? undefined : objectRefAct(spec.from, ctx);
+    const to = isMoveChooser(spec.to) ? undefined : objectRefAct(spec.to, ctx);
     // A named end that's gone (an illegal target, a source that has left):
     // nothing can move (122.5).
     if (!isMoveChooser(spec.from) && from?.kind !== "object") return;
@@ -14133,9 +13950,7 @@ function applyVote(spec: Extract<EffectSpec, { kind: "vote" }>, ctx: ResolutionC
     // "Each player chooses …": no additional votes — it isn't a vote.
     ctx.beginVoting(spec.secret === true, true);
     const fromYou =
-      typeof spec.who === "object"
-        ? ((player) => (player === undefined ? [] : [player]))(effectPlayer(spec.who, ctx))
-        : eachPlayerMayAsks(spec.who ?? "each-player", ctx, true);
+      eachPlayerMayAsks(spec.who ?? "each-player", ctx, true);
     const order =
       spec.startingWith === "you"
         ? fromYou
@@ -14513,7 +14328,7 @@ function applyClash(spec: Extract<EffectSpec, { kind: "clash" }>, ctx: Resolutio
     applyEffectSpec(
       {
         kind: "each-player-may",
-        who: { ownerOfTarget: 0 },
+        who: { ownerOf: 0 },
         choices: [
           { text: "Leave it on top of your library", effect: { kind: "sequence", effects: [] } },
           { text: "Put it on the bottom of your library", effect: { kind: "put-on-library", target: 0, position: "bottom" } },
@@ -14690,7 +14505,7 @@ function revealingPlayer(
   ctx: ResolutionContext,
 ): PlayerId | undefined {
   if (whose === undefined) return ctx.controller;
-  if (whose === "that-player" || typeof whose === "object") return effectPlayer(whose, ctx);
+  if (typeof whose !== "number") return resolvePlayerRef(whose, ctx);
   const ref = ctx.targets[whose];
   return ref?.kind === "player" ? ref.player : undefined;
 }
@@ -14764,7 +14579,7 @@ function offerCastNow(
   if (castsLeft === 0) return false;
   const parked = ctx.parkedCount();
   const pendingBefore = ctx.decisionPending();
-  const by = spec.by === undefined ? undefined : effectPlayer(spec.by, ctx);
+  const by = spec.by === undefined ? undefined : resolvePlayerRef(spec.by, ctx);
   if (spec.by !== undefined && by === undefined) return false;
   const spell: CardFilter | undefined =
     manaValueLeft === undefined ? spec.spell : { ...spec.spell, manaValue: { op: "lte", n: manaValueLeft } };
@@ -14815,8 +14630,8 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
   if (progress === undefined) {
     const from = spec.from;
     const handOwner =
-      typeof from === "object" && "handOf" in from ? effectPlayer(from.handOf, ctx) : undefined;
-    const searcher = from === "while-searching" ? (spec.by === undefined ? ctx.controller : effectPlayer(spec.by, ctx)) : undefined;
+      typeof from === "object" && "handOf" in from ? resolvePlayerRef(from.handOf, ctx) : undefined;
+    const searcher = from === "while-searching" ? (spec.by === undefined ? ctx.controller : resolvePlayerRef(spec.by, ctx)) : undefined;
     const looked =
       typeof from === "object" && "libraryTop" in from
         ? ctx.libraryTop(ctx.controller, Math.max(0, Math.floor(amountValue(from.libraryTop, ctx))), from.reveal === true)
@@ -14835,7 +14650,7 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
     } else if (spec.encoded !== undefined) {
       cards = ctx.stillExiled(spec.encoded.card, spec.encoded.zoneChangeCount);
     } else if (from === undefined) {
-      const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
+      const target = spec.target === undefined ? undefined : objectRefAct(spec.target, ctx);
       cards = target?.kind === "object" ? [target.object] : [];
     } else if (from === "exiled-with-source") {
       cards = ctx.cardsExiledWithSource();
@@ -14860,7 +14675,7 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
       // is on the stack now, which the offer passes over.
       cards = ctx.targets.flatMap((t) => (t?.kind === "object" ? [t.object] : []));
     } else if (typeof from === "object" && "graveyardOf" in from) {
-      const owner = effectPlayer(from.graveyardOf, ctx);
+      const owner = resolvePlayerRef(from.graveyardOf, ctx);
       cards = owner === undefined ? [] : ctx.cardsIn(owner, "graveyard");
     } else if (typeof from === "object" && "zones" in from) {
       cards = from.zones.flatMap((z) => ctx.cardsIn(ctx.controller, z));
@@ -14934,7 +14749,7 @@ function applyCastNowSpec(spec: Extract<EffectSpec, { kind: "cast-now" }>, ctx: 
     return;
   }
   if (progress.followed !== true) {
-    const by = spec.by === undefined ? undefined : effectPlayer(spec.by, ctx);
+    const by = spec.by === undefined ? undefined : resolvePlayerRef(spec.by, ctx);
     const cast = ctx.castSince(progress.cards, progress.since, by);
     // "Do this only once each turn", spent only by casting (Planetarium).
     if (cast && spec.marksAbilityDone === true) ctx.markAbilityDone();
@@ -15075,7 +14890,7 @@ export function signedAmountValue(
       return ctx.countInGraveyard(amount.countInGraveyard, ref.player);
     }
     if (amount.forPlayer !== undefined) {
-      const player = effectPlayer(amount.forPlayer, ctx);
+      const player = resolvePlayerRef(amount.forPlayer, ctx);
       return player === undefined ? 0 : ctx.countInGraveyard(amount.countInGraveyard, player);
     }
     return ctx.countInGraveyard(amount.countInGraveyard, amount.forEachPlayer === true ? each : undefined);
@@ -15106,9 +14921,10 @@ export function signedAmountValue(
   }
   if ("cardsInHand" in amount) {
     if (amount.cardsInHand === "each") return ctx.handSizeOf(each ?? ctx.controller);
+    if (typeof amount.cardsInHand === "object" && "otherThan" in amount.cardsInHand) return 0;
     if (typeof amount.cardsInHand === "object") {
-      const ref = ctx.targets[amount.cardsInHand.target];
-      return ref?.kind === "player" ? ctx.handSizeOf(ref.player) : 0;
+      const player = resolvePlayerRef(amount.cardsInHand, ctx);
+      return player === undefined ? 0 : ctx.handSizeOf(player);
     }
     return ctx.playersInScope(amount.cardsInHand).reduce((n, p) => n + ctx.handSizeOf(p), 0);
   }
@@ -15121,7 +14937,7 @@ export function signedAmountValue(
     return amount.amongPlayers === "greatest" ? Math.max(0, ...values) : Math.min(...values);
   }
   if ("colorsOf" in amount) {
-    const ref = resolveAmountRef(amount.colorsOf, ctx);
+    const ref = objectRefRead(amount.colorsOf, ctx);
     return ref === undefined ? 0 : ctx.colorsOf(ref).length;
   }
   if ("colorsAmong" in amount) {
@@ -15286,35 +15102,35 @@ export function signedAmountValue(
   }
   if ("creaturesDiedThisTurn" in amount) return ctx.creaturesDiedThisTurn(amount.anyController === true);
   if ("powerOf" in amount) {
-    const ref = resolveAmountRef(amount.powerOf, ctx);
+    const ref = objectRefRead(amount.powerOf, ctx);
     return ref === undefined ? 0 : ctx.powerOf(ref);
   }
   if ("toughnessOf" in amount) {
-    const ref = resolveAmountRef(amount.toughnessOf, ctx);
+    const ref = objectRefRead(amount.toughnessOf, ctx);
     return ref === undefined ? 0 : ctx.toughnessOf(ref);
   }
   if ("countersOn" in amount) {
-    const ref = resolveAmountRef(amount.countersOn, ctx);
+    const ref = objectRefRead(amount.countersOn, ctx);
     return ref === undefined ? 0 : ctx.countersOf(ref, amount.counter);
   }
   if ("manaValueOf" in amount) {
-    const ref = resolveAmountRef(amount.manaValueOf, ctx);
+    const ref = objectRefRead(amount.manaValueOf, ctx);
     return ref === undefined ? 0 : ctx.manaValueOf(ref);
   }
   if ("manaSymbolsOf" in amount) {
-    const ref = resolveAmountRef(amount.manaSymbolsOf, ctx);
+    const ref = objectRefRead(amount.manaSymbolsOf, ctx);
     return ref === undefined ? 0 : ctx.manaSymbolsOf(ref, amount.color);
   }
   if ("devoured" in amount) return ctx.devouredBySource(amount.filter);
   if ("manaSpentOf" in amount) {
-    const ref = resolveAmountRef(amount.manaSpentOf, ctx);
+    const ref = objectRefRead(amount.manaSpentOf, ctx);
     if (ref === undefined) return 0;
     const from = amount.from;
     if (from === undefined) return ctx.manaSpentOf(ref);
     return ctx.manaSpentFromOf(ref).filter((origin) => manaOriginMatches(origin, from)).length;
   }
   if ("colorsSpentOf" in amount) {
-    const ref = resolveAmountRef(amount.colorsSpentOf, ctx);
+    const ref = objectRefRead(amount.colorsSpentOf, ctx);
     return ref === undefined ? 0 : ctx.colorsSpentOf(ref);
   }
   if ("convokers" in amount) return ctx.convokerCount();
@@ -15337,7 +15153,7 @@ export function signedAmountValue(
     return last.results.filter((r) => r === n).length;
   }
   if ("commanderCastsOf" in amount) {
-    const ref = resolveAmountRef(amount.commanderCastsOf, ctx);
+    const ref = objectRefRead(amount.commanderCastsOf, ctx);
     return ref === undefined ? 0 : ctx.commanderCastsOf(ref);
   }
   if ("aggregate" in amount) {
@@ -15362,7 +15178,7 @@ export function signedAmountValue(
     return ctx.countMatching(amount.countOf, except, ref.player) * (amount.times ?? 1);
   }
   if (amount.forPlayer !== undefined) {
-    const player = effectPlayer(amount.forPlayer, ctx);
+    const player = resolvePlayerRef(amount.forPlayer, ctx);
     if (player === undefined) return 0;
     return ctx.countMatching(amount.countOf, except, player) * (amount.times ?? 1);
   }
@@ -15404,10 +15220,14 @@ function resolvedTogether(
 
 function attachHost(ref: AttachHostRef | undefined, ctx: ResolutionContext): EnterAttachHost | undefined {
   if (ref === undefined) return undefined;
-  if (typeof ref === "object") return { among: ref.among };
+  if (typeof ref === "object" && "among" in ref) return { among: ref.among };
+  if (typeof ref === "object" && "player" in ref) {
+    const player = resolvePlayerRef(ref.player, ctx);
+    return player === undefined ? null : { player };
+  }
   if (ref === "source" && ctx.sourceLost === true) return null;
   if (illegalSlot(ref, ctx)) return null;
-  const target = resolveEffectTarget(ref, ctx);
+  const target = objectRefAct(ref, ctx);
   if (target?.kind === "player") return { player: target.player };
   return target?.kind === "object" ? target.object : null;
 }
@@ -15449,14 +15269,6 @@ function rememberSets(
   return out;
 }
 
-/** What an {@link AttachRef} names now. */
-function resolveAttachRef(ref: AttachRef, ctx: ResolutionContext): TargetRef | undefined {
-  if (ref === "created") return createdThisWay(ctx);
-  if (ref === "put-this-way") return putThisWay(ctx);
-  if (ref === "amassed") return amassedThisWay(ctx);
-  return resolveEffectTarget(ref, ctx);
-}
-
 /** Imperative escape hatch for a spell or ability the vocab can't express. */
 export type SpellResolver = (ctx: ResolutionContext) => void;
 
@@ -15476,10 +15288,18 @@ export function chooserPlayer(chooser: ChooserRef, ctx: ResolutionContext): Play
   if (chooser === "any-player" || chooser === "their-controller") return undefined;
   if (typeof chooser === "object" && "player" in chooser) return chooser.player;
   if (typeof chooser === "object" && "anyOf" in chooser) return ctx.playersInScope(chooser.anyOf)[0];
-  return effectPlayer(chooser, ctx);
+  return resolvePlayerRef(chooser, ctx);
 }
 
-function resolveAmountRef(ref: AmountRef, ctx: ResolutionContext): TargetRef | undefined {
+/**
+ * What an {@link ObjectRef} names to **read** information from (rule 608.2h):
+ * the object wherever it is now, which the context's reads then take as it
+ * last existed once it's no longer where it was expected. Nothing for an
+ * illegal or empty slot.
+ */
+export function objectRefRead(ref: ObjectRef, ctx: ResolutionContext): TargetRef | undefined {
+  if (ref === "created") return createdThisWay(ctx);
+  if (ref === "put-this-way") return putThisWay(ctx);
   if (ref === "amassed") return amassedThisWay(ctx);
   if (ref === "priced") return ctx.priced === undefined ? undefined : { kind: "object", object: ctx.priced };
   // "The sacrificed creature", "the discarded card", "the revealed card":
@@ -15489,6 +15309,14 @@ function resolveAmountRef(ref: AmountRef, ctx: ResolutionContext): TargetRef | u
     const member = onlyMember(ctx.objectSet(ref));
     return member === undefined ? undefined : { kind: "object", object: member.object };
   }
+  if (typeof ref === "object") {
+    const inner = objectRefRead("hostOf" in ref ? ref.hostOf : ref.pairedWith, ctx);
+    if (inner === undefined) return undefined;
+    return "hostOf" in ref ? ctx.hostOf(inner, false) : ctx.pairedWith(inner);
+  }
+  // A host known only as it last existed (608.2h) is still read: "enchanted
+  // creature deals 1 damage to its owner" with both gone (Enslave).
+  if (ref === "attached") return ctx.attachedRead();
   // A read of the granter: as it last existed once it has left (608.2h) —
   // "the number of arrow counters on Archery Training".
   if (ref === "granter") {
@@ -15507,7 +15335,7 @@ function resolveAmountRef(ref: AmountRef, ctx: ResolutionContext): TargetRef | u
   // A read, so a delayed trigger's carried target is read even once it has
   // changed zones (by last-known information), though not acted on.
   if (typeof ref === "number" && ctx.readTargets !== undefined) return ctx.readTargets[ref];
-  return resolveEffectTarget(ref, ctx);
+  return objectRefAct(ref, ctx);
 }
 
 const PROTECTION_COLOR_WORDS: Readonly<Record<Color, string>> = {
@@ -15609,10 +15437,28 @@ function fixProtectionSide(from: ProtectionQualities, ctx: ResolutionContext): P
   return { ...fixed, filter: { ...rest, controllerIn: players } };
 }
 
-function resolveEffectTarget(
-  ref: EffectTargetRef,
+/**
+ * What an {@link ObjectRef} names to **act** on: only while it's the same
+ * object still (rule 400.7), and an illegal slot names nothing (rule 608.2b —
+ * `ctx.targets` holds a hole there).
+ */
+export function objectRefAct(
+  ref: ObjectRef,
   ctx: ResolutionContext,
 ): TargetRef | undefined {
+  if (ref === "created") return createdThisWay(ctx);
+  if (ref === "put-this-way") return putThisWay(ctx);
+  if (ref === "amassed") return amassedThisWay(ctx);
+  if (ref === "priced") return undefined;
+  if (isObjectSetRef(ref)) {
+    const member = onlyMember(ctx.objectSet(ref));
+    return member !== undefined && ctx.stintNow(member.object) === member.stint ? { kind: "object", object: member.object } : undefined;
+  }
+  if (typeof ref === "object") {
+    const inner = objectRefRead("hostOf" in ref ? ref.hostOf : ref.pairedWith, ctx);
+    if (inner === undefined) return undefined;
+    return "hostOf" in ref ? ctx.hostOf(inner, true) : ctx.pairedWith(inner);
+  }
   if (ref === "source") {
     return ctx.sourceLost === true ? undefined : { kind: "object", object: ctx.source };
   }
@@ -15633,45 +15479,56 @@ function resolveEffectTarget(
     return ctx.granter !== undefined && ctx.granterLost !== true ? { kind: "object", object: ctx.granter } : undefined;
   }
   if (ref === "trigger-recipient") return ctx.triggerRecipient();
-  if (ref === "tapped") {
-    return ctx.tapped !== undefined && ctx.tappedLost !== true ? { kind: "object", object: ctx.tapped } : undefined;
-  }
   return ctx.targets[ref];
 }
 
 /** Where a redirection's `redirectTo` sends the damage (rule 614.9), or
  * `undefined` when it names nothing still legal. */
-function redirectRef(ref: EffectTargetRef | "you", ctx: ResolutionContext): TargetRef | undefined {
-  if (ref === "you") return { kind: "player", player: ctx.controller };
+function redirectRef(ref: ObjectRef | PlayerRef, ctx: ResolutionContext): TargetRef | undefined {
+  if (isPlayerRef(ref)) {
+    const player = resolvePlayerRef(ref, ctx);
+    return player === undefined ? undefined : { kind: "player", player };
+  }
   if (illegalSlot(ref, ctx)) return undefined;
-  return resolveEffectTarget(ref, ctx);
+  return objectRefAct(ref, ctx);
+}
+
+/** Whether a slot that takes either kind of ref holds a player's. The words
+ * and shapes don't overlap. */
+function isPlayerRef(ref: ObjectRef | PlayerRef): ref is PlayerRef {
+  if (typeof ref === "number") return false;
+  if (typeof ref === "string") {
+    return (
+      ref === "you" || ref === "active-player" || ref === "trigger-controller" || ref === "trigger-player" ||
+      ref === "that-player" || ref === "chosen-player" || ref === "player-to-your-left" || ref === "player-to-your-right"
+    );
+  }
+  return "target" in ref || "controllerOf" in ref || "ownerOf" in ref || "defendingPlayerOf" in ref;
 }
 
 /** Whether slot `ref` held a target found illegal as the spell or ability
  * began to resolve — see `ResolutionContext.illegalTargets` (rule 608.2b). */
-function illegalSlot(ref: EffectTargetRef, ctx: ResolutionContext): boolean {
+function illegalSlot(ref: ObjectRef, ctx: ResolutionContext): boolean {
   return typeof ref === "number" && ctx.illegalTargets?.includes(ref) === true;
 }
 
 /** The one player `ref` names, or `undefined` for nobody — see
- * {@link EffectPlayerRef}. */
+ * {@link PlayerRef}. */
 function resolveEnterAttacking(
   how: EnterAttacking | undefined,
   ctx: ResolutionContext,
 ): ResolvedEnterAttacking | undefined {
   if (how === undefined || how === "choose") return how;
-  return { player: effectPlayer(how.player, ctx), orTheirPlaneswalker: how.orTheirPlaneswalker === true };
+  return { player: resolvePlayerRef(how.player, ctx), orTheirPlaneswalker: how.orTheirPlaneswalker === true };
 }
 
 /** Who makes a `search-library`: its controller by default, or who its `who`
  * names (`null`: nobody, so no search). */
 function searchingPlayer(spec: Extract<EffectSpec, { kind: "search-library" }>, ctx: ResolutionContext): PlayerId | null {
   if (spec.who === undefined) return ctx.controller;
-  if (spec.who === "that-player") return ctx.playersInScope("that-player")[0] ?? null;
-  const of = ctx.targets[spec.who.controllerOfTarget];
   // A target that has already gone (Path to Exile exiles first) still names
   // its last-known controller; nothing at all means no search.
-  return (of === undefined ? undefined : ctx.controllerOf(of)) ?? null;
+  return resolvePlayerRef(spec.who, ctx) ?? null;
 }
 
 /** Whether a `search-library` is only of a library `searcher` can't search, so
@@ -15683,7 +15540,7 @@ function cantSearchThisLibrary(
   ctx: ResolutionContext,
 ): boolean {
   if ((spec.zones ?? "library") !== "library" || spec.outside !== undefined) return false;
-  const owner = spec.whose === undefined ? searcher : (effectPlayer(spec.whose, ctx) ?? searcher);
+  const owner = spec.whose === undefined ? searcher : (resolvePlayerRef(spec.whose, ctx) ?? searcher);
   return ctx.cantSearchLibrary(searcher, owner);
 }
 
@@ -15716,28 +15573,23 @@ function eachPlayerMaySearchForbidden(
   return searcher !== null && cantSearchThisLibrary(action, searcher, ctx);
 }
 
-function effectPlayer(ref: EffectPlayerRef, ctx: ResolutionContext): PlayerId | undefined {
+/**
+ * The one player a {@link PlayerRef} names, or `undefined` for nobody. The
+ * accessors read their object (`objectRefRead`), so each works once it has
+ * moved; a player who has left the game names nobody.
+ */
+export function resolvePlayerRef(ref: PlayerRef, ctx: ResolutionContext): PlayerId | undefined {
   if (ref === "you") return ctx.controller;
-  if (ref === "source-owner") {
-    const owner = ctx.ownerOf({ kind: "object", object: ctx.source });
-    return owner !== undefined && ctx.playersInScope("each-player").includes(owner) ? owner : undefined;
-  }
-  if (typeof ref === "object" && "ownerOfTarget" in ref) {
-    const target = ctx.targets[ref.ownerOfTarget];
-    const player = target === undefined ? undefined : ctx.ownerOf(target);
-    return player !== undefined && ctx.playersInScope("each-player").includes(player) ? player : undefined;
-  }
-  if (typeof ref === "object" && "controllerOfTarget" in ref) {
-    const target = ctx.targets[ref.controllerOfTarget];
-    const player = target === undefined ? undefined : ctx.controllerOf(target);
-    return player !== undefined && ctx.playersInScope("each-player").includes(player) ? player : undefined;
-  }
-  if (typeof ref === "object") {
+  if (typeof ref === "string") return ctx.playersInScope(ref)[0];
+  if ("target" in ref) {
     if (illegalSlot(ref.target, ctx)) return undefined;
     const target = ctx.targets[ref.target];
     return target?.kind === "player" ? target.player : undefined;
   }
-  return ctx.playersInScope(ref)[0];
+  const inner = objectRefRead("controllerOf" in ref ? ref.controllerOf : "ownerOf" in ref ? ref.ownerOf : ref.defendingPlayerOf, ctx);
+  if (inner === undefined) return undefined;
+  const player = "controllerOf" in ref ? ctx.controllerOf(inner) : "ownerOf" in ref ? ctx.ownerOf(inner) : ctx.defendingPlayerOf(inner);
+  return player !== undefined && ctx.playersInScope("each-player").includes(player) ? player : undefined;
 }
 
 /** Keys under which an {@link EffectSpec} nests another one. Those are bound
@@ -15799,10 +15651,9 @@ function containsDynamicCompare(value: unknown): boolean {
       "bandedWithSource" in value ||
       "blockingRelation" in value ||
       "blockedThisTurn" in value ||
-      "sameNameAsTarget" in value ||
-      "sameNameAsTriggerObject" in value ||
-      "sharesColorWithTarget" in value ||
-      "attachedToTarget" in value ||
+      "sharesColorWith" in value ||
+      "attachedToObject" in value ||
+      "controlledByRef" in value ||
       "wasAttachedTo" in value ||
       "inSet" in value ||
       "createdWithSource" in value ||
@@ -16039,60 +15890,51 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
     if (blocked?.of !== undefined && blocked.with === undefined) {
       walked = { ...walked, blockedThisTurn: { ...blocked, with: blockPartners(blocked.of, ctx) } };
     }
-    // "And all other permanents with the same name as that permanent": the
-    // target itself and its name now (rule 201.2a). A target that's gone
-    // leaves the clause matching nothing — the spell has no other target, so
-    // it doesn't resolve at all (rule 608.2b).
-    if (typeof walked["sameNameAsTarget"] === "number") {
-      const { sameNameAsTarget: slot, ...rest } = walked;
-      const target = ctx.targets[slot as number];
-      walked =
-        target?.kind === "object"
-          ? { ...rest, sameNameAs: { object: target.object, name: ctx.nameForMatching(target.object) } }
-          : walked;
-    }
-    // "With the same name as that spell" (the Shrines): the trigger object
-    // and its name now — `nameForMatching` reads a spell that has since left
-    // the stack under the same id, so a countered one still has its name.
-    if (walked["sameNameAsTriggerObject"] === true) {
-      const { sameNameAsTriggerObject: _trigger, ...rest } = walked;
-      const object = ctx.triggerObject;
-      walked =
-        object !== undefined ? { ...rest, sameNameAs: { object, name: ctx.nameForMatching(object) } } : walked;
-    }
     // "With the same name as it / the exiled card / a permanent": the names
     // of what the reference names now (or last had) — every reference, since
     // an effect's matching has no source to read the live ones from.
     if ("sameNameWith" in walked) {
       const { sameNameWith: reference, ...rest } = walked;
-      const names = shareReferenceObjects(reference as ShareReference, ctx)
-        .map((object) => ctx.nameForMatching(object))
-        .filter((name): name is string => name !== null);
-      walked = { ...rest, sameNameAsAny: [...new Set(names)] };
+      const objects = shareReferenceObjects(reference as ShareReference, ctx);
+      // "That permanent and all others with the same name" (a target), "with
+      // the same name as that spell" (the Shrines): the one object itself,
+      // and its name now — a face-down one has none (rule 201.2a) but still
+      // matches itself. Every other reference is its names.
+      if ((typeof reference === "number" || reference === "trigger-object") && objects.length === 1) {
+        walked = { ...rest, sameNameAs: { object: objects[0], name: ctx.nameForMatching(objects[0]) } };
+      } else {
+        const names = objects.map((object) => ctx.nameForMatching(object)).filter((name): name is string => name !== null);
+        walked = { ...rest, sameNameAsAny: [...new Set(names)] };
+      }
     }
-    // Radiance's "and each other … that shares a color with it": the target
-    // and its colors now (rule 105.2), as for the name above.
-    if (typeof walked["sharesColorWithTarget"] === "number") {
-      const { sharesColorWithTarget: slot, ...rest } = walked;
-      const target = ctx.targets[slot as number];
-      walked =
-        target?.kind === "object"
-          ? { ...rest, sharesColorWith: { object: target.object, colors: ctx.colorsOf(target) } }
-          : walked;
+    // "And each other … that shares a color with it" (radiance), Spreading
+    // Plague's "that share a color with it": the reference objects and their
+    // colors now, or as they last existed (rule 608.2h).
+    if (walked["sharesColorWith"] !== undefined) {
+      const { sharesColorWith: reference, ...rest } = walked;
+      const objects = shareReferenceObjects(reference as ShareReference, ctx);
+      const colors = objects.flatMap((object) => ctx.colorsOf({ kind: "object", object }));
+      walked = { ...rest, sharesColorBound: { objects, colors: [...new Set(colors)] } };
     }
     // "All Auras attached to it", "all Equipment attached to that creature":
-    // the target slot's object or player; illegal or empty, nothing (rule
-    // 608.2b — `ctx.targets` holds a hole there).
-    if (typeof walked["attachedToTarget"] === "number") {
-      const { attachedToTarget: slot, ...rest } = walked;
-      walked = { ...rest, attachedToRef: ctx.targets[slot as number] ?? null };
+    // the object or player the ref reads; illegal or empty, nothing (rule
+    // 608.2b).
+    if (walked["attachedToObject"] !== undefined) {
+      const { attachedToObject: ref, ...rest } = walked;
+      walked = { ...rest, attachedToRef: objectRefRead(ref as ObjectRef, ctx) ?? null };
+    }
+    // "All lands that player controls": whoever the ref names as this applies.
+    if (walked["controlledByRef"] !== undefined) {
+      const { controlledByRef: ref, ...rest } = walked;
+      const player = resolvePlayerRef(ref as PlayerRef, ctx);
+      walked = { ...rest, controllerIn: player === undefined ? [] : [player] };
     }
     // "An Equipment that was attached to Zack Fair" (sacrificed for the
     // cost), "all Equipment attached to that creature" as it dies: what was
     // attached to it as it last existed (rule 608.2h), or is now.
     if (walked["wasAttachedTo"] === "source" || walked["wasAttachedTo"] === "trigger-object") {
       const { wasAttachedTo: of, ...rest } = walked;
-      const ref = resolveAmountRef(of as "source" | "trigger-object", ctx);
+      const ref = objectRefRead(of as "source" | "trigger-object", ctx);
       walked = { ...rest, wasAttachedToAny: ref === undefined ? [] : ctx.attachmentsOf(ref) };
     }
     return walked;
@@ -16112,16 +15954,10 @@ const SHARE_CLAUSES = [
 
 /** The objects a `ShareReference` names in this resolution — see its doc. */
 function shareReferenceObjects(reference: ShareReference, ctx: ResolutionContext): readonly ObjectId[] {
-  const one = (object: ObjectId | undefined): readonly ObjectId[] => (object === undefined ? [] : [object]);
-  if (reference === "source") return [ctx.source];
-  if (reference === "trigger-object") return one(ctx.triggerObject);
-  if (reference === "attached") return one(ctx.attachedHost());
-  if (reference === "chosen") return one(ctx.chosenPermanent());
   if (isObjectSetRef(reference)) return ctx.objectSet(reference).map((m) => m.object);
-  if (typeof reference === "number") {
-    if (illegalSlot(reference, ctx)) return [];
-    const target = ctx.targets[reference];
-    return target?.kind === "object" ? [target.object] : [];
+  if (typeof reference !== "object" || "hostOf" in reference || "pairedWith" in reference) {
+    const read = objectRefRead(reference as ObjectRef, ctx);
+    return read?.kind === "object" ? [read.object] : [];
   }
   // "Their graveyard" asks about the object being matched, which an effect
   // binding its filter ahead of time doesn't have: it names nothing.
@@ -16162,16 +15998,12 @@ function readsEachPlayer(amount: EffectAmount): boolean {
 /** A `mill` / `discard` `target`: the player in a target slot, or every
  * player a scope names (`"you"` is a scope of one). */
 function scopedOrTargetedPlayers(
-  target: number | PlayerScope | ChosenPlayerRef,
+  target: number | PlayerScope,
   ctx: ResolutionContext,
 ): readonly TargetRef[] {
   if (typeof target === "number") {
     const ref = ctx.targets[target];
     return ref === undefined ? [] : [ref];
-  }
-  if (typeof target === "object") {
-    const player = effectPlayer(target, ctx);
-    return player === undefined ? [] : [{ kind: "player", player }];
   }
   if (target === "you") return [{ kind: "player", player: ctx.controller }];
   return ctx.playersInScope(target).map((player) => ({ kind: "player", player }));
@@ -16207,9 +16039,7 @@ export function mayBeDone(effect: EffectSpec, ctx: ResolutionContext): boolean {
     const players =
       action.target !== undefined
         ? ((ref) => (ref?.kind === "player" ? [ref.player] : []))(ctx.targets[action.target])
-        : typeof action.who === "object"
-          ? ((player) => (player === undefined ? [] : [player]))(effectPlayer(action.who, ctx))
-          : ctx.playersInScope(action.who ?? "you");
+        : ctx.playersInScope(action.who ?? "you");
     return players.every((player) => !ctx.cantDrawMore(player, amountValue(action.amount, ctx, player)));
   }
   if (action.kind === "mill" || action.kind === "discard") {
@@ -16222,7 +16052,7 @@ export function mayBeDone(effect: EffectSpec, ctx: ResolutionContext): boolean {
   // "Any opponent may have you put that card into your graveyard" with no such
   // card (an empty library revealed nothing), or "into your hand" with nothing
   // exiled this way: an impossible option isn't one to choose (rule 608.2d).
-  if (action.kind === "put-into-graveyard") return resolveEffectTarget(action.target, ctx)?.kind === "object";
+  if (action.kind === "put-into-graveyard") return objectRefAct(action.target, ctx)?.kind === "object";
   if (action.kind === "move-exiled-this-way" && action.filter === undefined) return ctx.cardsExiledThisWay().length > 0;
   // "You may blight 1": a player who controls no creature the counters can
   // go on can't choose to (rule 701.68b).
@@ -16242,18 +16072,18 @@ export function mayBeDone(effect: EffectSpec, ctx: ResolutionContext): boolean {
   // 609.3 — provoke's "untap … and it blocks", Bringer of the Red Dawn's "untap
   // and gain control"), and a tap that also holds the permanent down is more.
   if (effect.kind === "tap" && effect.doesntUntapNext !== true) {
-    const target = resolveEffectTarget(effect.target, ctx);
+    const target = objectRefAct(effect.target, ctx);
     return target !== undefined && ctx.tappedNow(target) === false;
   }
   if (effect.kind === "untap") {
-    const target = resolveEffectTarget(effect.target, ctx);
+    const target = objectRefAct(effect.target, ctx);
     return target !== undefined && ctx.tappedNow(target) === true;
   }
   // "You may move a counter": not when none could move (rule 122.5) — from
   // a permanent with none (of that kind) left, or with either end gone.
   if (action.kind === "move-counters" && !isMoveChooser(action.from) && !isMoveChooser(action.to)) {
-    const from = resolveEffectTarget(action.from, ctx);
-    const to = resolveEffectTarget(action.to, ctx);
+    const from = objectRefAct(action.from, ctx);
+    const to = objectRefAct(action.to, ctx);
     if (from === undefined || to === undefined || ctx.countersHere(to) === undefined) return false;
     if (from.kind === "object" && to.kind === "object" && from.object === to.object) return false;
     return kindsHere(ctx, from, action.counter).length > 0;
@@ -16267,10 +16097,6 @@ function blightingPlayers(
   who: PlayerScope | { readonly target: number } | undefined,
   ctx: ResolutionContext,
 ): readonly PlayerId[] {
-  if (typeof who === "object") {
-    const player = effectPlayer(who, ctx);
-    return player === undefined ? [] : [player];
-  }
   return ctx.playersInScope(who ?? "you");
 }
 
@@ -16578,7 +16404,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "as-player": {
-      const player = effectPlayer(spec.who, ctx);
+      const player = resolvePlayerRef(spec.who, ctx);
       if (player !== undefined && ctx.playersInScope("each-player").includes(player)) {
         applyEffectSpec(spec.effect, ctx.asPlayer(player));
       }
@@ -16707,7 +16533,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         for (const { object } of ctx.permanentsMatching(spec.filter)) ctx.becomePrepared(object);
         return;
       }
-      const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
+      const target = spec.target === undefined ? undefined : objectRefAct(spec.target, ctx);
       if (target?.kind === "object") ctx.becomePrepared(target.object);
       return;
     }
@@ -16732,8 +16558,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       const whose = spec.whose ?? "you";
       let owner: PlayerId | undefined;
       if (whose === "you") owner = ctx.controller;
-      else if (whose === "that-player") owner = effectPlayer("that-player", ctx);
-      else if (typeof whose === "object") owner = effectPlayer(whose, ctx);
+      else if (whose === "that-player") owner = resolvePlayerRef("that-player", ctx);
+      else if (typeof whose !== "number") owner = resolvePlayerRef(whose, ctx);
       else {
         const ref = ctx.targets[whose];
         owner = ref?.kind === "player" ? ref.player : undefined;
@@ -16761,8 +16587,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       } else {
         const whose = spec.whose ?? "you";
         if (whose === "you") owner = ctx.controller;
-        else if (whose === "that-player") owner = effectPlayer("that-player", ctx);
-        else if (typeof whose === "object") owner = effectPlayer(whose, ctx);
+        else if (whose === "that-player") owner = resolvePlayerRef("that-player", ctx);
+        else if (typeof whose !== "number") owner = resolvePlayerRef(whose, ctx);
         else {
           const ref = ctx.targets[whose];
           owner = ref?.kind === "player" ? ref.player : undefined;
@@ -16798,7 +16624,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       let except: readonly ObjectId[] =
         spec.exceptTriggerObject === true && ctx.triggerObject !== undefined ? [ctx.triggerObject] : [];
       if (spec.controlledByPlayer !== undefined) {
-        const whose = effectPlayer(spec.controlledByPlayer, ctx);
+        const whose = resolvePlayerRef(spec.controlledByPlayer, ctx);
         if (whose === undefined) return;
         except = [
           ...except,
@@ -16882,10 +16708,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         }
         return;
       }
-      if (spec.who === "attached-owner" || typeof spec.who === "object") {
+      if (typeof spec.who === "object") {
         // One player named: the owner of what the source is attached to
         // (Enslave), or of a target.
-        const player = spec.who === "attached-owner" ? ctx.attachedOwner() : effectPlayer(spec.who, ctx);
+        const player = resolvePlayerRef(spec.who as PlayerRef, ctx);
         if (player !== undefined && ctx.playersInScope("each-player").includes(player)) {
           ctx.dealDamage({ kind: "player", player }, amountValue(spec.amount, ctx, player), spec.from);
         }
@@ -16909,7 +16735,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.toTriggerRecipient === true
           ? ctx.triggerRecipient()
           : spec.target !== undefined
-            ? resolveEffectTarget(spec.target, ctx)
+            ? objectRefAct(spec.target, ctx)
             : undefined;
       if (target !== undefined) {
         const each = target.kind === "player" ? target.player : undefined;
@@ -17012,9 +16838,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         return;
       }
       const drawers =
-        typeof spec.who === "object"
-          ? ((p) => (p === undefined ? [] : [p]))(effectPlayer(spec.who, ctx))
-          : ctx.playersInScope(spec.who ?? "you");
+        ctx.playersInScope(spec.who ?? "you");
       // Each player's number is read before anyone draws (rule 608.2h: Tales
       // of the Ancestors' "the difference" is fixed as it resolves, whatever a
       // replacement makes of the first player's draw).
@@ -17040,8 +16864,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         if (who !== undefined) ctx.gainLife(who, gained);
         return;
       }
-      if (typeof spec.who === "object") {
-        const who = effectPlayer(spec.who, ctx);
+      if (typeof spec.who === "object" && !("otherThan" in spec.who)) {
+        const who = resolvePlayerRef(spec.who, ctx);
         if (who !== undefined) ctx.gainLife(who, amountValue(spec.amount, ctx, who));
         return;
       }
@@ -17067,8 +16891,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         if (who !== undefined) ctx.loseLife(who, life);
         return;
       }
-      if (typeof spec.who === "object") {
-        const who = effectPlayer(spec.who, ctx);
+      if (typeof spec.who === "object" && !("otherThan" in spec.who)) {
+        const who = resolvePlayerRef(spec.who, ctx);
         if (who !== undefined) ctx.loseLife(who, amountValue(spec.amount, ctx, who));
         return;
       }
@@ -17096,7 +16920,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "tap": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) {
         ctx.tapPermanent(
           target,
@@ -17109,10 +16933,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "untap": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target === undefined) return;
       // "That player untaps it": no such player, nothing is untapped.
-      if (spec.by !== undefined && effectPlayer(spec.by, ctx) === undefined) return;
+      if (spec.by !== undefined && resolvePlayerRef(spec.by, ctx) === undefined) return;
       ctx.untapPermanent(target);
       return;
     }
@@ -17122,7 +16946,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         return;
       }
       if (spec.target === undefined) return;
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.exileIfDiesThisTurn(target);
       return;
     }
@@ -17132,7 +16956,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "destroy": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.destroyPermanent(target, spec.cantBeRegenerated === true);
       return;
     }
@@ -17150,7 +16974,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "regenerate": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.regenerate(target);
       return;
     }
@@ -17207,7 +17031,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       } else {
         // A target gone illegal, or a trigger's object that has left, is
         // dealt nothing — and nothing deals it anything.
-        const recipient = resolveEffectTarget(spec.to, ctx);
+        const recipient = objectRefAct(spec.to, ctx);
         if (recipient === undefined) return;
         to = [recipient];
       }
@@ -17259,7 +17083,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.revealDrawn();
       return;
     case "put-into-graveyard": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target?.kind === "object") ctx.putExiledIntoGraveyard([target.object]);
       return;
     }
@@ -17278,8 +17102,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "fight": {
-      const a = resolveEffectTarget(spec.a, ctx);
-      const b = resolveEffectTarget(spec.b, ctx);
+      const a = objectRefAct(spec.a, ctx);
+      const b = objectRefAct(spec.b, ctx);
       if (a !== undefined && b !== undefined) ctx.fight(a, b, spec.oneSided === true);
       return;
     }
@@ -17288,7 +17112,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.createdTokensFight(spec.among, spec.asked, spec.asked === undefined ? [] : ctx.targets);
       return;
     case "counter": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target === undefined) return;
       const { countered, sourcePermanent, exiledInstead } = ctx.counterSpell(
         target,
@@ -17320,9 +17144,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "gain-control": {
       // Rule 608.2b: nothing is done to an illegal target, and an illegal
       // player target does nothing — so either one stops the whole change.
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target === undefined || illegalSlot(spec.target, ctx)) return;
-      const player = effectPlayer(spec.who ?? "you", ctx);
+      const player = resolvePlayerRef(spec.who ?? "you", ctx);
       if (player !== undefined) {
         ctx.gainControl(
           target,
@@ -17337,7 +17161,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "gain-control-all": {
-      const who = spec.who === "owner" ? "owner" : effectPlayer(spec.who ?? "you", ctx);
+      const who = spec.who === "owner" ? "owner" : resolvePlayerRef(spec.who ?? "you", ctx);
       if (who === undefined) return;
       if (spec.controlledByTarget !== undefined) {
         if (illegalSlot(spec.controlledByTarget, ctx)) return;
@@ -17360,8 +17184,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     case "exchange-control": {
       const [a, b] = spec.objects;
-      const first = resolveEffectTarget(a, ctx);
-      const second = resolveEffectTarget(b, ctx);
+      const first = objectRefAct(a, ctx);
+      const second = objectRefAct(b, ctx);
       const exchanged =
         first !== undefined &&
         second !== undefined &&
@@ -17374,22 +17198,22 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "exchange-control-all": {
       if (typeof spec.with === "object" && "target" in spec.with && illegalSlot(spec.with.target, ctx)) return;
-      const other = effectPlayer(spec.with, ctx);
+      const other = resolvePlayerRef(spec.with, ctx);
       if (other !== undefined) ctx.exchangeControlAll(spec.filter, other, spec.untilEndOfTurn);
       return;
     }
     case "cant-be-sacrificed": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.grantCantBeSacrificed(target, spec.duration);
       return;
     }
     case "block-additional": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.grantBlockAdditional(target, spec.amount, spec.duration);
       return;
     }
     case "return-to-hand": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined && spec.atRelease === true) ctx.returnToHandAtRelease(target);
       else if (target !== undefined) ctx.returnToHand(target, spec.from, spec.now);
       return;
@@ -17405,10 +17229,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       }
       const who = spec.who ?? "you";
       let player: PlayerId | undefined = ctx.controller;
-      if (who !== "you") {
-        const ref = ctx.targets[who.controllerOfTarget];
-        player = ref === undefined ? undefined : ctx.controllerOf(ref);
-      }
+      if (who !== "you") player = resolvePlayerRef(who, ctx);
       if (player === undefined) return;
       ctx.lookAndChoose("library", 2, 1, 1, "manifest", "graveyard", undefined, false, undefined, false,
         undefined, undefined, undefined, undefined, player);
@@ -17417,16 +17238,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "manifest": {
       const who = spec.who;
       let players: readonly PlayerId[];
-      if (typeof who === "string") {
-        players = ctx.playersInScope(who);
-      } else {
-        const ref = ctx.targets[who.controllerOfTarget];
-        const player = ref === undefined ? undefined : ctx.controllerOf(ref);
-        players = player === undefined ? [] : [player];
-      }
+      players = ctx.playersInScope(who);
       // "The top card of that player's library": theirs, nobody's if
       // they've gone (or the slot is illegal — rule 608.2b).
-      const library = spec.from === undefined ? undefined : effectPlayer(spec.from, ctx);
+      const library = spec.from === undefined ? undefined : resolvePlayerRef(spec.from, ctx);
       if (spec.from !== undefined && library === undefined) return;
       const count = spec.count === undefined ? 1 : Math.min(amountValue(spec.count, ctx), MAX_COPY_COUNT);
       for (const player of players) {
@@ -17441,17 +17256,17 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       );
       return;
     case "turn-face-down": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.turnFaceDown(target, spec.as);
       return;
     }
     case "turn-face-up": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.turnFaceUp(target);
       return;
     }
     case "exile": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (spec.fromHand === true) {
         if (target?.kind === "object") ctx.exileFromHand(target.object);
         return;
@@ -17475,7 +17290,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.solveSource();
       return;
     case "become-plotted": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined && target.kind === "object") ctx.becomePlotted(target.object);
       return;
     }
@@ -17484,7 +17299,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         for (const card of ctx.cardsExiledThisWay(true)) ctx.becomeForetold(card, spec.costReducedBy);
         return;
       }
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target?.kind === "object") ctx.becomeForetold(target.object, spec.costReducedBy);
       return;
     }
@@ -17562,9 +17377,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       applyBidLife(spec, ctx);
       return;
     case "choose-value": {
-      const chooser = spec.who === undefined ? undefined : effectPlayer(spec.who, ctx);
+      const chooser = spec.who === undefined ? undefined : resolvePlayerRef(spec.who, ctx);
       if (spec.who !== undefined && chooser === undefined) return;
-      const thatPlayer = spec.value === "spell-damage" ? effectPlayer("that-player", ctx) : undefined;
+      const thatPlayer = spec.value === "spell-damage" ? resolvePlayerRef("that-player", ctx) : undefined;
       ctx.chooseValue(spec, {
         ...(spec.max !== undefined ? { max: amountValue(spec.max, ctx) } : {}),
         ...(chooser !== undefined ? { chooser } : {}),
@@ -17573,7 +17388,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "put-onto-battlefield": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       const parked = ctx.parkedCount();
       if (target !== undefined) {
         if (spec.ifPermanentCard === true && !ctx.isPermanentCard(target)) return;
@@ -17582,7 +17397,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           // Someone else puts it there, under their control: an illegal
           // target — the card or that player — and nothing moves (608.2b).
           if (illegalSlot(spec.target, ctx)) return;
-          under = effectPlayer(spec.under, ctx);
+          under = resolvePlayerRef(spec.under, ctx);
           if (under === undefined) return;
         }
         const asked = ctx.putOntoBattlefield(
@@ -17626,8 +17441,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       let target: TargetRef | undefined;
       if (spec.target === "you") {
         target = { kind: "player", player: ctx.controller };
-      } else if (typeof spec.target === "object") {
-        const player = effectPlayer(spec.target, ctx);
+      } else if (typeof spec.target !== "number") {
+        const player = resolvePlayerRef(spec.target as PlayerRef, ctx);
         target = player === undefined ? undefined : { kind: "player", player };
       } else {
         target = ctx.targets[spec.target];
@@ -17636,11 +17451,6 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "sacrifice-all":
-      if (typeof spec.who === "object") {
-        const player = effectPlayer(spec.who, ctx);
-        if (player !== undefined) ctx.sacrificeAll([player], spec.filter);
-        return;
-      }
       ctx.sacrificeAll(ctx.playersInScope(spec.who), spec.filter);
       return;
     case "put-exiled-this-way-onto-battlefield": {
@@ -17731,19 +17541,19 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "flicker": {
       const target = spec.target;
-      const refs: EffectTargetRef[] =
-        typeof target !== "object"
-          ? [target]
-          : "from" in target
-            ? Array.from({ length: Math.max(0, ctx.targets.length - target.from) }, (_unused, i) => target.from + i)
-            : [...target];
+      const refs: ObjectRef[] =
+        typeof target === "object" && "from" in target
+          ? Array.from({ length: Math.max(0, ctx.targets.length - target.from) }, (_unused, i) => target.from + i)
+          : Array.isArray(target)
+            ? [...(target as readonly number[])]
+            : [target as ObjectRef];
       const targets: TargetRef[] = [];
       for (const ref of refs) {
-        const target = resolveEffectTarget(ref, ctx);
+        const target = objectRefAct(ref, ctx);
         if (target !== undefined) targets.push(target);
       }
       const parked = ctx.parkedCount();
-      const returnUnder = spec.under === undefined ? undefined : effectPlayer(spec.under, ctx);
+      const returnUnder = spec.under === undefined ? undefined : resolvePlayerRef(spec.under, ctx);
       const returning = ctx.flicker(targets, {
         ...(spec.thenCounters !== undefined ? { thenCounters: spec.thenCounters } : {}),
         ...(spec.underYourControl === true ? { underYourControl: true } : {}),
@@ -17774,7 +17584,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "meld": {
-      const source = resolveEffectTarget("source", ctx);
+      const source = objectRefAct("source", ctx);
       const chosen = spec.chosen === true ? ctx.targets[0] : undefined;
       ctx.meld(
         source?.kind === "object" ? source.object : undefined,
@@ -17916,21 +17726,20 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       }
       let controller = ctx.controller;
       if (spec.controller !== undefined) {
-        const of = ctx.targets[spec.controller.controllerOfTarget];
         // The target may already be gone (Arcane Denial counters first);
         // `controllerOf` reads last-known information for exactly this.
-        const who = of === undefined ? undefined : ctx.controllerOf(of);
+        const who = resolvePlayerRef(spec.controller, ctx);
         if (who === undefined) return;
         controller = who;
       }
       if (typeof spec.at === "object" && "attacksUnblocked" in spec.at) {
-        const watched = resolveEffectTarget(spec.at.attacksUnblocked, ctx);
+        const watched = objectRefAct(spec.at.attacksUnblocked, ctx);
         if (watched?.kind !== "object") return;
         ctx.delayTrigger({ attacksUnblocked: watched.object }, spec.effect, spec.text, controller);
         return;
       }
       if (typeof spec.at === "object" && "losesControl" in spec.at) {
-        const watched = resolveEffectTarget(spec.at.losesControl, ctx);
+        const watched = objectRefAct(spec.at.losesControl, ctx);
         if (watched?.kind !== "object") return;
         // "Sacrifice the creature": what this resolution put there (Seraph).
         const about =
@@ -17970,10 +17779,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             t?.kind === "object" && !illegalSlot(slot, ctx) ? [t.object] : [],
           );
         } else if (watching !== undefined) {
-          const one = illegalSlot(watching, ctx) ? undefined : resolveEffectTarget(watching, ctx);
+          const one = illegalSlot(watching, ctx) ? undefined : objectRefAct(watching, ctx);
           watched = one?.kind === "object" ? [one.object] : [];
         }
-        const losing = orLosesControl === undefined ? undefined : resolveEffectTarget(orLosesControl, ctx);
+        const losing = orLosesControl === undefined ? undefined : objectRefAct(orLosesControl, ctx);
         if (orLosesControl !== undefined && losing?.kind !== "object") return;
         // "Exile that creature": what this resolution put there (Coffin Queen).
         const about =
@@ -18032,7 +17841,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         }
         // "When it dies": only a permanent can die, so there must be one to
         // watch as this applies.
-        const watched = resolveEffectTarget(leaves, ctx);
+        const watched = objectRefAct(leaves, ctx);
         if (watched?.kind !== "object") return;
         watch(watched.object);
         return;
@@ -18048,11 +17857,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         return;
       }
       if (spec.about === "attached") {
-        const host = resolveEffectTarget("attached", ctx);
+        const host = objectRefAct("attached", ctx);
         if (host !== undefined) ctx.delayTrigger(spec.at, spec.effect, spec.text, controller, [host]);
         return;
       }
-      const turnOf = spec.turnOf === undefined ? undefined : effectPlayer(spec.turnOf, ctx);
+      const turnOf = spec.turnOf === undefined ? undefined : resolvePlayerRef(spec.turnOf, ctx);
       if (spec.turnOf !== undefined && turnOf === undefined) return;
       if (spec.about !== undefined) {
         const done = ctx.thisWay(spec.about).map((e) => ({ kind: "object", object: e.object }) as const);
@@ -18063,7 +17872,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "enters-with-counters": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.entersWithCounters(target, spec.counter, amountValue(spec.amount, ctx), spec.ifAsItEnters);
       return;
     }
@@ -18085,7 +17894,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       });
       return;
     case "allow-cast-from-exile": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) {
         ctx.allowCastFromExile(target, spec.free === true, spec.laterTurns === true, {
           whileExiled: spec.whileExiled === true,
@@ -18098,7 +17907,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "unlock-door": {
-      const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
+      const target = spec.target === undefined ? undefined : objectRefAct(spec.target, ctx);
       if (spec.target !== undefined && target?.kind !== "object") return;
       const options = ctx
         .roomDoors(target?.kind === "object" ? target.object : undefined)
@@ -18169,7 +17978,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
               ? undefined
               : ({ kind: "object", object: ctx.triggerObject } as const)
             : typeof spec.target !== "number"
-              ? resolveEffectTarget(spec.target, ctx)
+              ? objectRefAct(spec.target, ctx)
               : ctx.targets[spec.target];
       if (target !== undefined) ctx.sacrificeTarget(target, spec.byItsController);
       return;
@@ -18183,7 +17992,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         applyEffectSpec(
           {
             kind: "each-player-may",
-            who: { ownerOfTarget: spec.target },
+            who: { ownerOf: spec.target },
             choices: position.ownerChooses.map((at) => ({
               text: libraryPositionText(at),
               effect: { kind: "put-on-library", target: spec.target, position: at },
@@ -18193,7 +18002,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         );
         return;
       }
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target === undefined) return;
       ctx.putOnLibrary(
         target,
@@ -18223,7 +18032,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
                   )
               : ctx.permanentsMatching(spec.what.all).map((p) => p.object);
         if (spec.withSource === true) {
-          const self = resolveEffectTarget("source", ctx);
+          const self = objectRefAct("source", ctx);
           if (self?.kind === "object") objects.push(self.object);
         }
         const cards = [...new Set(objects)].flatMap((object) => {
@@ -18309,7 +18118,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         typeof spec.target === "number"
           ? ctx.targets[spec.target]
           : ((player) => (player === undefined ? undefined : { kind: "player" as const, player }))(
-              effectPlayer(spec.target, ctx),
+              resolvePlayerRef(spec.target, ctx),
             );
       if (target !== undefined) {
         const upTo = spec.upTo === undefined ? undefined : Math.max(0, Math.floor(amountValue(spec.upTo, ctx)));
@@ -18338,7 +18147,13 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "look-at-hand": {
-      const target = ctx.targets[spec.target];
+      let target: TargetRef | undefined;
+      if (typeof spec.target === "number") {
+        target = ctx.targets[spec.target];
+      } else {
+        const player = resolvePlayerRef(spec.target, ctx);
+        target = player === undefined ? undefined : { kind: "player", player };
+      }
       if (target !== undefined) ctx.discardChosen(target, undefined, true, true, 0);
       return;
     }
@@ -18398,7 +18213,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "modify-pt": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) {
         ctx.modifyPt(
           target,
@@ -18414,12 +18229,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ctx.switchPt(spec.all, spec.duration);
         return;
       }
-      const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
+      const target = spec.target === undefined ? undefined : objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.switchPt(target, spec.duration);
       return;
     }
     case "modify-pt-all": {
-      const named = spec.controlledByPlayer === undefined ? undefined : effectPlayer(spec.controlledByPlayer, ctx);
+      const named = spec.controlledByPlayer === undefined ? undefined : resolvePlayerRef(spec.controlledByPlayer, ctx);
       if (spec.controlledByPlayer !== undefined && named === undefined) return;
       ctx.modifyPtAll(
         spec.filter,
@@ -18460,7 +18275,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "amass": {
       const chosen = spec.onto === undefined ? undefined : ctx.targets[spec.onto];
       if (spec.onto !== undefined && chosen?.kind !== "object") return;
-      const player = spec.who === undefined ? undefined : effectPlayer(spec.who, ctx);
+      const player = spec.who === undefined ? undefined : resolvePlayerRef(spec.who, ctx);
       if (spec.who !== undefined && player === undefined) return;
       ctx.amass(
         amountValue(spec.amount, ctx),
@@ -18482,7 +18297,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "add-counter-all": {
       const scopeTo =
         spec.controlledByPlayer !== undefined
-          ? effectPlayer(spec.controlledByPlayer, ctx)
+          ? resolvePlayerRef(spec.controlledByPlayer, ctx)
           : scopedController(spec.controlledByTarget, ctx);
       if ((spec.controlledByTarget !== undefined || spec.controlledByPlayer !== undefined) && scopeTo === undefined) return;
       const spared = spec.exceptTarget === undefined ? undefined : ctx.targets[spec.exceptTarget];
@@ -18502,12 +18317,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.doubleCountersAll(spec.filter, spec.counterKind);
       return;
     case "double-counters": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.doubleCounters(target, spec.counter);
       return;
     }
     case "another-counter-of-each-kind": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target === undefined) return;
       if (spec.orRemove !== true) {
         ctx.anotherCounterOfEachKind(target);
@@ -18554,7 +18369,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ctx.grantToxic(spec.filter, spec.amount, spec.duration, spec.exceptSource === true);
         return;
       }
-      const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
+      const target = spec.target === undefined ? undefined : objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.grantToxic(target, spec.amount, spec.duration);
       return;
     }
@@ -18571,7 +18386,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         return;
       }
       const from = fixProtectionSide(spec.from, ctx);
-      const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
+      const target = spec.target === undefined ? undefined : objectRefAct(spec.target, ctx);
       if (spec.target !== undefined && target === undefined && spec.filter === undefined) return;
       ctx.grantProtection(
         {
@@ -18589,7 +18404,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.incubate(amountValue(spec.amount, ctx));
       return;
     case "remove-from-combat": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target === undefined) return;
       ctx.removeFromCombat(target, spec.unblockSoleBlocked === true);
       if (spec.thenMayBlock === true && target.kind === "object") {
@@ -18616,7 +18431,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ctx.becomeBlocked(spec.filter);
         return;
       }
-      const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
+      const target = spec.target === undefined ? undefined : objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.becomeBlocked(target);
       return;
     }
@@ -18625,7 +18440,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ctx.reselectAttack(spec.filter, spec.onlyPlayers === true);
         return;
       }
-      const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
+      const target = spec.target === undefined ? undefined : objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.reselectAttack(target, spec.onlyPlayers === true);
       return;
     }
@@ -18636,12 +18451,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ctx.loseKeywords(spec.filter, spec.keywords, spec.duration, scopeTo, spec.cantHave);
         return;
       }
-      const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
+      const target = spec.target === undefined ? undefined : objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.loseKeywords(target, spec.keywords, spec.duration, undefined, spec.cantHave);
       return;
     }
     case "connive": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       // One that has left — or is back as a new object — still connives, as
       // it last existed: its last controller draws and discards, and nothing
       // gets a counter (rule 701.50b). A context that only reads it (a
@@ -18755,7 +18570,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ? ctx.onBattlefield(spec.object)
             ? { kind: "object" as const, object: spec.object }
             : undefined
-          : resolveEffectTarget(spec.target, ctx);
+          : objectRefAct(spec.target, ctx);
       // One that has left — or is back as a new object — still explores as
       // it last existed (rule 701.44c), as a connive is read.
       const read =
@@ -18805,7 +18620,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "remove-counter": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.removeCounter(target, spec.counter, spec.amount === "all" ? "all" : amountValue(spec.amount, ctx));
       return;
     }
@@ -18820,7 +18635,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         applyPlayerCounterRemoval(spec, spec.playerProgress, ctx);
         return;
       }
-      const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
+      const target = spec.target === undefined ? undefined : objectRefAct(spec.target, ctx);
       if (spec.target !== undefined && (target === undefined || illegalSlot(spec.target, ctx))) return;
       if (target?.kind === "player") {
         // A player's own counters (rule 122.1), of the kinds it allows.
@@ -18859,14 +18674,14 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       applyMoveCounters(spec, ctx);
       return;
     case "put-counters-of": {
-      const of = resolveAmountRef(spec.of, ctx);
+      const of = objectRefRead(spec.of, ctx);
       const onto: readonly TargetRef[] =
         spec.target === "created"
           ? ctx
               .thisWay("created")
               .filter((entry) => !entry.departed)
               .map((entry): TargetRef => ({ kind: "object", object: entry.object }))
-          : [resolveEffectTarget(spec.target, ctx)].filter((t): t is TargetRef => t !== undefined);
+          : [objectRefAct(spec.target, ctx)].filter((t): t is TargetRef => t !== undefined);
       if (of === undefined) return;
       // The same number of each kind it had (rule 122.8), each put as any
       // counter is — a -1/-1 among them too. Read once, before any goes on.
@@ -18879,10 +18694,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "add-counter": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target === undefined) return;
       // "That player puts a counter on it": no such player, no counter.
-      const by = spec.by === undefined ? undefined : effectPlayer(spec.by, ctx);
+      const by = spec.by === undefined ? undefined : resolvePlayerRef(spec.by, ctx);
       if (spec.by !== undefined && by === undefined) return;
       const counter = spec.counterOfTrigger === true ? ctx.triggerCounterKind() : spec.counter;
       if (counter === undefined) return;
@@ -18906,7 +18721,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ctx.giveSuspend?.(counters, options);
         return;
       }
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.giveSuspend?.(counters, { ...options, target });
       return;
     }
@@ -18917,16 +18732,16 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.proliferate(spec.then ?? null);
       return;
     case "grant-keyword": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) {
         ctx.grantKeyword(target, spec.keyword, spec.duration);
       }
       return;
     }
     case "player-effect": {
-      const attackersOf = spec.cantAttackBy === undefined ? undefined : effectPlayer(spec.cantAttackBy, ctx);
+      const attackersOf = spec.cantAttackBy === undefined ? undefined : resolvePlayerRef(spec.cantAttackBy, ctx);
       if (spec.cantAttackBy !== undefined && attackersOf === undefined) return;
-      const lasts = resolvePlayerDuration(spec.duration, ctx.controller, (ref) => effectPlayer(ref, ctx));
+      const lasts = resolvePlayerDuration(spec.duration, ctx.controller, (ref) => resolvePlayerRef(ref, ctx));
       if (lasts === undefined) return;
       ctx.addPlayerEffect({
         owner: ctx.controller,
@@ -19125,7 +18940,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         return;
       }
       if (spec.target !== undefined) {
-        const target = resolveEffectTarget(spec.target, ctx);
+        const target = objectRefAct(spec.target, ctx);
         if (target === undefined) return;
         if (spec.regeneration === true) ctx.prohibitRegeneration(target);
         // Abilities: named, or the default when nothing else is.
@@ -19170,8 +18985,8 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         });
         return;
       }
-      const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
-      const cantBlock = spec.cantBlockAttacker === undefined ? undefined : resolveEffectTarget(spec.cantBlockAttacker, ctx);
+      const target = spec.target === undefined ? undefined : objectRefAct(spec.target, ctx);
+      const cantBlock = spec.cantBlockAttacker === undefined ? undefined : objectRefAct(spec.cantBlockAttacker, ctx);
       if (target !== undefined) {
         ctx.restrict(target, undefined, spec.restrictions, spec.duration, spec.cantBeBlockedBy, cantBlock, {
           ...(spec.cantAttackYou !== undefined ? { cantAttackYou: spec.cantAttackYou } : {}),
@@ -19185,19 +19000,19 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ctx.grantStatic(undefined, spec.filter, spec.ability, spec.duration);
         return;
       }
-      const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
+      const target = spec.target === undefined ? undefined : objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.grantStatic(target, undefined, spec.ability, spec.duration);
       return;
     }
     case "detain": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.detain(target);
       return;
     }
     case "block-if-able": {
       let attacker: TargetRef | undefined;
       if (spec.attacker !== undefined) {
-        attacker = resolveEffectTarget(spec.attacker, ctx);
+        attacker = objectRefAct(spec.attacker, ctx);
         // The creature to block is gone (or no longer a legal target): no
         // requirement is left to impose.
         if (attacker === undefined || illegalSlot(spec.attacker, ctx)) return;
@@ -19209,7 +19024,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         return;
       }
       if (spec.target === undefined) return;
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target === undefined || illegalSlot(spec.target, ctx)) return;
       ctx.blockIfAble(target, attacker, spec.thisCombat === true);
       return;
@@ -19219,17 +19034,17 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ctx.attackDespiteDefender(undefined, spec.filter);
         return;
       }
-      const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
+      const target = spec.target === undefined ? undefined : objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.attackDespiteDefender(target, undefined);
       return;
     }
     case "damage-by-toughness": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.damageByToughness(target);
       return;
     }
     case "assigns-no-combat-damage": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.assignsNoCombatDamage(target, spec.duration === "until-end-of-combat");
       return;
     }
@@ -19239,36 +19054,36 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ctx.assignAsThoughUnblocked(undefined, spec.filter, must);
         return;
       }
-      const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
+      const target = spec.target === undefined ? undefined : objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.assignAsThoughUnblocked(target, undefined, must);
       return;
     }
     case "attack-random-opponent": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target?.kind !== "object") return;
       const chosen = ctx.attackRandomOpponent(target.object, spec.notAttackedLastCombat === true);
       if (!chosen && spec.else !== undefined) applyEffectSpec(spec.else, ctx);
       return;
     }
     case "put-in-command-zone": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.putInCommandZone(target);
       return;
     }
     case "exchange-life-stat": {
-      const target = resolveEffectTarget(spec.target, ctx);
-      const player = effectPlayer(spec.player ?? "you", ctx);
+      const target = objectRefAct(spec.target, ctx);
+      const player = resolvePlayerRef(spec.player ?? "you", ctx);
       if (target !== undefined && player !== undefined) ctx.exchangeLifeStat(target, player, spec.stat);
       return;
     }
     case "exchange-life-totals": {
-      const first = effectPlayer(spec.first ?? "you", ctx);
-      const second = effectPlayer(spec.second, ctx);
+      const first = resolvePlayerRef(spec.first ?? "you", ctx);
+      const second = resolvePlayerRef(spec.second, ctx);
       if (first !== undefined && second !== undefined) ctx.exchangeLifeTotals(first, second);
       return;
     }
     case "grant-triggered": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.grantTriggered(target, spec.ability, spec.duration);
       return;
     }
@@ -19276,13 +19091,13 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.grantTriggeredAll(spec.filter, spec.ability, spec.duration);
       return;
     case "grant-activated": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.grantActivated(target, spec.ability, spec.duration);
       return;
     }
     case "grant-activated-of": {
-      const target = resolveEffectTarget(spec.target, ctx);
-      const of = resolveEffectTarget(spec.of, ctx);
+      const target = objectRefAct(spec.target, ctx);
+      const of = objectRefAct(spec.of, ctx);
       if (target !== undefined && of !== undefined) ctx.grantActivatedOf(target, of, spec.duration);
       return;
     }
@@ -19293,7 +19108,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.loseAbilitiesAll(spec.filter, spec.duration);
       return;
     case "lose-abilities": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) {
         ctx.loseAbilities(target, {
           loseLandTypes: spec.loseLandTypes === true,
@@ -19425,7 +19240,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "copy-spell": {
       const newTargets = spec.newTargets === true;
       // "That player copies the spell" (demonstrate): nobody, once they've gone.
-      const copier = spec.controller === undefined ? undefined : effectPlayer(spec.controller, ctx);
+      const copier = spec.controller === undefined ? undefined : resolvePlayerRef(spec.controller, ctx);
       if (spec.controller !== undefined && copier === undefined) {
         if (spec.otherwise !== undefined) applyEffectSpec(spec.otherwise, ctx);
         return;
@@ -19450,7 +19265,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
               ctx.copyTriggerSpellForEach(spell, spec.forEachItCouldTarget, copier ?? ctx.controller);
               copied = true;
             } else {
-              const retargetTo = spec.retargetTo === undefined ? undefined : resolveEffectTarget(spec.retargetTo, ctx);
+              const retargetTo = spec.retargetTo === undefined ? undefined : objectRefAct(spec.retargetTo, ctx);
               // A slot whose target has gone, or a source that has left, has
               // nothing to aim the copy at.
               if (spec.retargetTo === undefined || retargetTo !== undefined) {
@@ -19617,7 +19432,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.untapAll(spec.filter, scopedController(spec.controlledByTarget, ctx), spec.exceptSource === true);
       return;
     case "exert": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.exert(target, spec.asItAttacks === true);
       return;
     }
@@ -19651,12 +19466,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         if (ctx.sourceLost !== true) ctx.phaseOut({ attachedToSource: true, ...until });
         return;
       }
-      const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
+      const target = spec.target === undefined ? undefined : objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.phaseOut({ target, ...until });
       return;
     }
     case "animate": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) {
         ctx.animate(target, {
           ...(spec.power !== undefined ? { power: amountValue(spec.power, ctx) } : {}),
@@ -19677,7 +19492,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "add-types": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) {
         ctx.addTypes(target, spec.addTypes ?? [], spec.addSubtypes ?? [], spec.duration, {
           ...(spec.setTypes !== undefined ? { setTypes: spec.setTypes } : {}),
@@ -19767,7 +19582,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ? undefined
           : illegalSlot(spec.attachedTo, ctx)
             ? null
-            : ((host) => (host?.kind === "object" ? host.object : null))(resolveEffectTarget(spec.attachedTo, ctx)),
+            : ((host) => (host?.kind === "object" ? host.object : null))(objectRefAct(spec.attachedTo, ctx)),
         spec.linkedToSource === true,
       );
       return;
@@ -19843,14 +19658,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ? ((owners) => ctx.playersInScope("each-player").filter((p) => owners.has(p)))(
               new Set(ctx.cardsExiledWithSource().map((id) => ctx.ownerOf({ kind: "object", object: id }))),
             )
-          : typeof spec.who === "object" || spec.who === "source-owner"
-            ? ((player) => (player === undefined ? [] : [player]))(effectPlayer(spec.who, ctx))
-            : ctx.playersInScope(spec.who));
+          : ctx.playersInScope(spec.who));
       // "Each player who …": fixed now, before anyone acts (`remaining` was).
       const whoIf = spec.whoIf;
       const excepted =
         spec.remaining === undefined && spec.found === undefined && spec.except !== undefined
-          ? effectPlayer(spec.except, ctx)
+          ? resolvePlayerRef(spec.except, ctx)
           : undefined;
       const players = (
         spec.remaining !== undefined || spec.found !== undefined || whoIf === undefined
@@ -19910,7 +19723,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       const permanentSet = ofSet !== undefined && !isCardSet(ofSet);
       const ofCards = (ofSet !== undefined && !permanentSet) || (typeof spec.of === "object" && "eachExiled" in spec.of);
       const handedTo = spec.who === undefined || spec.who === "you" ? undefined : spec.who;
-      const named = handedTo === undefined ? undefined : effectPlayer(handedTo, ctx);
+      const named = handedTo === undefined ? undefined : resolvePlayerRef(handedTo, ctx);
       if (handedTo !== undefined && named === undefined) return;
       const copy = (of: ObjectId, count: number): void =>
         ctx.createTokenCopy(of, count, {
@@ -20002,13 +19815,13 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "unattach": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.unattach(target);
       return;
     }
     case "become-licid-aura": {
       if (ctx.sourceLost === true) return;
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.becomeLicidAura(target, spec.endCost);
       return;
     }
@@ -20030,7 +19843,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             ? ctx.sourceLost === true
               ? undefined
               : ({ kind: "object", object: ctx.source } as const)
-            : resolveAttachRef(spec.attachment, ctx);
+            : objectRefAct(spec.attachment, ctx);
         if (attaching?.kind !== "object") return;
         const { filter, prompt, optional, another } = spec.ontoChosen;
         const hosts = ctx.attachableHosts(attaching.object, filter, another === true);
@@ -20052,7 +19865,15 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         if (host !== undefined) ctx.attach(host, spec.attaching);
         return;
       }
-      const target = spec.onto ?? resolveAttachRef(spec.target, ctx);
+      let target: TargetRef | undefined = spec.onto;
+      if (target === undefined) {
+        if (typeof spec.target === "object" && "player" in spec.target) {
+          const player = resolvePlayerRef(spec.target.player, ctx);
+          target = player === undefined ? undefined : { kind: "player", player };
+        } else {
+          target = objectRefAct(spec.target, ctx);
+        }
+      }
       if (target === undefined) return;
       if (spec.choose !== undefined) {
         const count = ctx.permanentsMatching(spec.choose.filter).reduce((n, m) => n + m.count, 0);
@@ -20078,12 +19899,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ctx.attach(target, undefined, spec.planeswalkerToo === true);
         return;
       }
-      const attachment = resolveAttachRef(spec.attachment, ctx);
+      const attachment = objectRefAct(spec.attachment, ctx);
       if (attachment !== undefined) ctx.attach(target, attachment);
       return;
     }
     case "transform": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target === undefined) return;
       if (spec.chosenPlayer !== undefined) {
         if (ctx.transform(target, spec.chosenPlayer) && spec.then !== undefined) applyEffectSpec(spec.then, ctx);
@@ -20108,7 +19929,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "flip": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.flip(target);
       return;
     }
@@ -20116,7 +19937,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       // Acting on `target` needs it to be the same object still (rule
       // 400.7); `of` is only read, so one that has left is read as it last
       // existed (rule 608.2h).
-      const of = resolveAmountRef(spec.of, ctx);
+      const of = objectRefRead(spec.of, ctx);
       if (of?.kind !== "object") return;
       // A card no longer there can't be copied as one (The Animus's ruling:
       // nothing happens); a permanent that left is read as it last existed.
@@ -20124,7 +19945,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       const ofCard = spec.ofCard === true || (spec.ofCard === "when-a-card" && !ctx.onBattlefield(of.object));
       let until: Parameters<ResolutionContext["becomeCopy"]>[2]["until"];
       if (typeof spec.until === "object") {
-        const tapped = resolveEffectTarget(spec.until.whileTapped, ctx);
+        const tapped = objectRefAct(spec.until.whileTapped, ctx);
         if (tapped?.kind !== "object") return;
         until = { whileTapped: tapped.object };
       } else {
@@ -20137,7 +19958,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           .map((m) => m.object)
           .filter((id) => spec.exceptOf !== true || id !== of.object);
       } else {
-        const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
+        const target = spec.target === undefined ? undefined : objectRefAct(spec.target, ctx);
         targets = target?.kind === "object" ? [target.object] : [];
       }
       if (targets.length === 0) return;
@@ -20194,12 +20015,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       );
       return;
     case "become-ring-bearer": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target?.kind === "object") ctx.becomeRingBearer(target.object);
       return;
     }
     case "pair": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target?.kind === "object") ctx.pairWithSource(target.object);
       return;
     }
@@ -20221,9 +20042,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ? scopedOrTargetedPlayers(spec.target, ctx).flatMap((ref) =>
               ref.kind === "player" ? [ref.player] : [],
             )
-          : typeof spec.who === "object"
-            ? ((p) => (p === undefined ? [] : [p]))(effectPlayer(spec.who, ctx))
-            : ctx.playersInScope(spec.who ?? "you");
+          : ctx.playersInScope(spec.who ?? "you");
       for (const player of players) {
         ctx.addPlayerCounters(player, spec.counter, amountValue(spec.amount, ctx, player));
       }
@@ -20260,7 +20079,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "timed-static": {
-      const lasts = resolvePlayerDuration(spec.duration, ctx.controller, (ref) => effectPlayer(ref, ctx));
+      const lasts = resolvePlayerDuration(spec.duration, ctx.controller, (ref) => resolvePlayerRef(ref, ctx));
       if (lasts !== undefined && "expires" in lasts) ctx.addTimedStatic(spec.text, spec.static, lasts.expires);
       return;
     }
@@ -20274,14 +20093,14 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.damageUnpreventableThisTurn();
       return;
     case "damage-rule": {
-      const objectOf = (ref: EffectTargetRef | undefined): ObjectId | null | undefined => {
+      const objectOf = (ref: ObjectRef | undefined): ObjectId | null | undefined => {
         if (ref === undefined) return undefined;
-        const t = resolveEffectTarget(ref, ctx);
+        const t = objectRefAct(ref, ctx);
         return t?.kind === "object" ? t.object : null;
       };
       let target: TargetRef | undefined;
       if (spec.to?.target !== undefined) {
-        target = resolveEffectTarget(spec.to.target, ctx);
+        target = objectRefAct(spec.to.target, ctx);
         // An illegal target: nothing to protect.
         if (target === undefined) return;
       }
@@ -20296,7 +20115,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       }
       let redirect: TargetRef | undefined;
       let redirectToSource: "itself" | "controller" | undefined;
-      if (spec.redirectTo === "source-controller") redirectToSource = "controller";
+      if (typeof spec.redirectTo === "object" && "controllerOf" in spec.redirectTo && spec.redirectTo.controllerOf === "source") redirectToSource = "controller";
       else if (spec.redirectTo === "source-itself") redirectToSource = "itself";
       else if (spec.redirectTo !== undefined) {
         redirect = redirectRef(spec.redirectTo, ctx);
@@ -20328,7 +20147,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       });
       return;
     case "prevent-damage": {
-      const ref = resolveEffectTarget(spec.target, ctx);
+      const ref = objectRefAct(spec.target, ctx);
       if (ref === undefined) return;
       if (spec.redirectTo !== undefined) {
         // Rule 614.9: nowhere to send it (an illegal target), no shield.
@@ -20344,7 +20163,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "prevent-damage-from-chosen-source": {
       // The answer: target 0 is the source chosen.
       if (spec.protect !== undefined) {
-        const source = resolveEffectTarget(0, ctx);
+        const source = objectRefAct(0, ctx);
         if (source !== undefined) {
           ctx.preventDamageFrom(
             source,
@@ -20368,7 +20187,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ? { kind: "player", player: ctx.controller }
           : spec.to === "your-side" || spec.to === "your-side-creatures" || spec.to === "any"
             ? spec.to
-            : resolveEffectTarget(spec.to, ctx);
+            : objectRefAct(spec.to, ctx);
       if (protect === undefined) return;
       const redirect = spec.redirectTo === undefined ? undefined : redirectRef(spec.redirectTo, ctx);
       if (spec.redirectTo !== undefined && redirect === undefined) return;
@@ -20381,7 +20200,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "become-color": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.becomeColor(target, spec.colors, spec.duration, spec.inAddition === true);
       return;
     }
@@ -20413,7 +20232,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         return;
       }
       if (textWordKind(spec.to) !== kind || spec.to === spec.from) return;
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.changeText(target, { from: spec.from, to: spec.to }, spec.duration);
       return;
     }
@@ -20494,7 +20313,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
               ...(spec.costEnergyX !== undefined ? { energyX: spec.costEnergyX } : {}),
               ...(spec.costTimes === true ? { costTimes: true as const } : {}),
             },
-        spec.aboutThatPlayer === true ? effectPlayer("that-player", ctx) : undefined,
+        spec.aboutThatPlayer === true ? resolvePlayerRef("that-player", ctx) : undefined,
         spec.xColor,
         ((target) => (target?.kind === "object" ? target.object : undefined))(
           spec.aboutTarget === undefined ? undefined : ctx.targets[spec.aboutTarget],
@@ -20507,9 +20326,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       // for them all.
       const below = ctx.parkedCount();
       const players =
-        typeof spec.who === "object"
-          ? ((player) => (player === undefined ? [] : [player]))(effectPlayer(spec.who, ctx))
-          : ctx.playersInScope(spec.who);
+        ctx.playersInScope(spec.who);
       let toAsk = spec.progress?.toAsk ?? ctx.apnap(players);
       let kept = [...(spec.progress?.kept ?? []), ...ctx.takeKept()];
       const keep = amountValue(spec.keep, ctx);
@@ -20615,7 +20432,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (progress === undefined) {
         // An opponent to separate is named after the reveal, which is
         // nobody's look to take: a look has its separator named beforehand.
-        const separator = spec.separator === "an-opponent" ? ctx.controller : effectPlayer(spec.separator ?? "you", ctx);
+        const separator = spec.separator === "an-opponent" ? ctx.controller : resolvePlayerRef(spec.separator ?? "you", ctx);
         if (separator === undefined) return;
         const what = spec.objects;
         const begun = ctx.beginPiles(
@@ -20624,7 +20441,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             : "libraryTop" in what
               ? { libraryTop: amountValue(what.libraryTop, ctx), reveal: what.reveal === true }
               : "permanents" in what
-                ? { permanents: what.permanents, whose: effectPlayer(what.whose, ctx) }
+                ? { permanents: what.permanents, whose: resolvePlayerRef(what.whose, ctx) }
                 : { graveyard: what.graveyard },
           separator,
         );
@@ -20639,7 +20456,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           applyEffectSpec({ kind: "choose-opponent", then: { ...spec, separator: "that-player" } }, ctx);
           return;
         }
-        const separator = effectPlayer(spec.separator ?? "you", ctx);
+        const separator = resolvePlayerRef(spec.separator ?? "you", ctx);
         if (separator === undefined) return;
         // One opponent is that opponent from the start. Of several, the first
         // stands in on the offer until the piles are made.
@@ -20778,7 +20595,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         return;
       }
       const ref =
-        spec.target === undefined ? undefined : typeof spec.target === "number" ? ctx.targets[spec.target] : resolveEffectTarget(spec.target, ctx);
+        spec.target === undefined ? undefined : typeof spec.target === "number" ? ctx.targets[spec.target] : objectRefAct(spec.target, ctx);
       if (ref?.kind === "player") ctx.goadCreaturesOf(ref.player, forGame, spec.duration);
       else if (ref?.kind === "object") ctx.goadCreature(ref, forGame, spec.duration);
       return;
@@ -20787,7 +20604,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.ungoad(spec.filter);
       return;
     case "suspect": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.suspect(target);
       return;
     }
@@ -20796,18 +20613,18 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ctx.unsuspect({ filter: spec.filter });
         return;
       }
-      const target = spec.target === undefined ? undefined : resolveEffectTarget(spec.target, ctx);
+      const target = spec.target === undefined ? undefined : objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.unsuspect(target);
       return;
     }
     case "become-saddled": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.becomeSaddled(target);
       return;
     }
     case "attack-requirement": {
-      const slot = (ref: EffectTargetRef): TargetRef | undefined =>
-        illegalSlot(ref, ctx) ? undefined : resolveEffectTarget(ref, ctx);
+      const slot = (ref: ObjectRef): TargetRef | undefined =>
+        illegalSlot(ref, ctx) ? undefined : objectRefAct(ref, ctx);
       const object = spec.target === undefined ? undefined : slot(spec.target);
       if (spec.target !== undefined && object?.kind !== "object") return;
       const player = spec.controlledByTarget === undefined ? undefined : slot(spec.controlledByTarget);
@@ -20822,7 +20639,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       // "During target player's next turn" (Taunt): whoever that is now.
       let during: NonNullable<Parameters<ResolutionContext["addAttackRequirement"]>[0]["duration"]> | undefined;
       if (typeof spec.duration === "object") {
-        const turnOf = effectPlayer(spec.duration.duringTurnOf, ctx);
+        const turnOf = resolvePlayerRef(spec.duration.duringTurnOf, ctx);
         if (turnOf === undefined) return;
         during = { duringTurnOf: turnOf };
       } else {
@@ -20889,7 +20706,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           return [{ payLife: n, text: option.text.split("{X}").join(`${n}`) }];
         }
         if ("payManaCostOf" in option) {
-          const object = resolveEffectTarget(option.payManaCostOf, ctx);
+          const object = objectRefAct(option.payManaCostOf, ctx);
           const cost = object === undefined ? null : ctx.manaCostToPay(object);
           return cost === null
             ? []
@@ -20952,7 +20769,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       const about =
         spec.about === undefined || (typeof spec.about === "number" && illegalSlot(spec.about, ctx))
           ? undefined
-          : resolveAttachRef(spec.about, ctx);
+          : objectRefAct(spec.about, ctx);
       // But a player has amassed even when no Army could be chosen (rule
       // 701.47b — Divine Visitation's Angel made instead): "when you do" still
       // triggers, about nothing, and the Army's power can't be determined, so
@@ -20986,13 +20803,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ctx.revealTop(spec.then);
         return;
       }
-      const of = ctx.targets[spec.of.ownerOfTarget];
-      const owner = of === undefined ? undefined : ctx.ownerOf(of);
+      const owner = resolvePlayerRef(spec.of, ctx);
       if (owner !== undefined) ctx.revealTop(spec.then, owner);
       return;
     }
     case "shuffle-into-library": {
-      const target = resolveEffectTarget(spec.target, ctx);
+      const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.shuffleIntoLibrary(target);
       // "When this creature dies, shuffle it into its owner's library" with
       // the card gone from the graveyard since: it stays where it is, and its
@@ -21013,9 +20829,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         if (searcher === null) return;
       }
       // "Search target opponent's library": nobody there, nothing searched.
-      const owner = spec.whose === undefined ? undefined : effectPlayer(spec.whose, ctx);
+      const owner = spec.whose === undefined ? undefined : resolvePlayerRef(spec.whose, ctx);
       if (spec.whose !== undefined && owner === undefined) return;
-      const enterUnder = spec.enterUnder === undefined ? undefined : effectPlayer(spec.enterUnder, ctx);
+      const enterUnder = spec.enterUnder === undefined ? undefined : resolvePlayerRef(spec.enterUnder, ctx);
       if (spec.enterUnder !== undefined && enterUnder === undefined) return;
       // "While you're searching your library, you may cast this card from
       // your library" (Panglacial Wurm, rule 601.3): any number of them, as
@@ -21101,14 +20917,14 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       // left the game.
       // "The top three cards of target player's library": theirs, you
       // choosing — the zone's owner and the picker of the Tasigur shape.
-      const owner = spec.from === undefined ? undefined : effectPlayer(spec.from, ctx);
+      const owner = spec.from === undefined ? undefined : resolvePlayerRef(spec.from, ctx);
       if (spec.from !== undefined && (owner === undefined || !ctx.playersInScope("each-player").includes(owner))) return;
       const chooser =
         owner ??
         (spec.player === "that-player"
           ? ctx.playersInScope("that-player")[0]
           : spec.player === "active-player"
-            ? effectPlayer("active-player", ctx)
+            ? resolvePlayerRef("active-player", ctx)
             : undefined);
       if (spec.player !== undefined && chooser === undefined) return;
       // "…of an opponent's choice" (Tasigur): they pick from your zone.

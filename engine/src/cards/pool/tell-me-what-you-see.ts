@@ -15,7 +15,7 @@ export default defineCard({
       // Terrapact Intimidator's shape: the opponent picks, the effects are yours.
       effect: {
         kind: "each-player-may",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         choices: [
           { text: "Have them draw a card.", effect: { kind: "draw", amount: 1 } },
           {

@@ -1,9 +1,9 @@
 /**
  * A player named as the owner, not the controller, of a target or of the
  * object behind a trigger, for a later effect (rule 108.3: an owner never
- * changes). `{ ownerOfTarget }` on `gain-life`, `lose-life`, `damage`, `mill`
- * and `exile-graveyard` beside `draw` and `discard`'s; `"attached-owner"` on
- * `damage`, with `from: "attached"`; the `"trigger-owner"` scope.
+ * changes). `{ ownerOf }` on `gain-life`, `lose-life`, `damage`, `mill`
+ * and `exile-graveyard` beside `draw` and `discard`'s; `{ ownerOf: "attached" }` on
+ * `damage`, with `from: "attached"`; the `{ ownerOf: "trigger-object" }` scope.
  */
 
 import { describe, expect, it } from "vitest";
@@ -16,7 +16,7 @@ const takeControl = (game: Game, id: ObjectId, to: PlayerId): void => {
   game.state.objects[id].controller = to;
 };
 
-describe("{ ownerOfTarget }: the owner, whoever controls it", () => {
+describe("{ ownerOf }: the owner, whoever controls it", () => {
   it("Path of Peace: its owner gains 4 life, not its controller", () => {
     const { game } = table({ players: 3 });
     const bears = spawn(game, "Grizzly Bears", B);

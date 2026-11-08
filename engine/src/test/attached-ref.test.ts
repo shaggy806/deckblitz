@@ -1,6 +1,6 @@
 /**
  * "Enchanted creature" / "equipped creature" in an effect — the
- * `EffectTargetRef` `"attached"`: what the source is attached to as the
+ * `ObjectRef` `"attached"`: what the source is attached to as the
  * effect resolves, or, the source gone, what it was last attached to while
  * that is still the same object (rule 400.7). Theros Beyond Death's Auras and
  * Wings of Hubris (batch 118).

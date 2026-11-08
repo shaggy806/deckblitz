@@ -21,11 +21,11 @@ export default defineCard({
         then: {
           kind: "sequence",
           effects: [
-            { kind: "reveal-hand", who: { controllerOfTarget: 0 } },
+            { kind: "reveal-hand", who: { controllerOf: 0 } },
             {
               kind: "exile-graveyard",
-              target: { controllerOfTarget: 0 },
-              filter: { sameNameAsTarget: 0 },
+              target: { controllerOf: 0 },
+              filter: { sameNameWith: 0 },
               fromHand: "only",
             },
           ],

@@ -18,14 +18,14 @@ export default defineCard({
     effects: [
       {
         kind: "exile-all",
-        filter: { type: "creature", controlledBy: "you", sameNameAsTarget: 0 },
+        filter: { type: "creature", controlledBy: "you", sameNameWith: 0 },
         controlledByTarget: 0,
       },
-      { kind: "reveal-hand", who: { controllerOfTarget: 0 } },
+      { kind: "reveal-hand", who: { controllerOf: 0 } },
       {
         kind: "exile-graveyard",
-        target: { controllerOfTarget: 0 },
-        filter: { sameNameAsTarget: 0 },
+        target: { controllerOf: 0 },
+        filter: { sameNameWith: 0 },
         fromHand: "also",
       },
     ],

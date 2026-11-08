@@ -42,7 +42,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "lose-life", amount: 2, who: "source-controller" },
+          { kind: "lose-life", amount: 2, who: { controllerOf: "source" } },
           { kind: "draw", amount: 1 },
         ],
       },

@@ -19,7 +19,7 @@ export default defineCard({
       { kind: "exile-all", filter: { type: "creature", attacking: true, controlledBy: "you" }, controlledByTarget: 0 },
       {
         kind: "each-player-may",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         prompt: "Search your library for that many basic land cards?",
         effect: {
           kind: "search-library",

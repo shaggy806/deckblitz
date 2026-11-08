@@ -1,5 +1,5 @@
 /**
- * `sameNameAsTarget` off the battlefield (rule 201.2a): the target's namesakes
+ * `sameNameWith` off the battlefield (rule 201.2a): the target's namesakes
  * in a graveyard (Echoing Return, Rat King, Moratorium Stone), a library (Secret
  * Salvage, Mask of the Mimic), and a revealed hand (`exile-graveyard`'s
  * `fromHand` — Legion's End, Hour of Glory, Thought Distortion). And

@@ -11,6 +11,6 @@ export default defineCard({
     kind: "for-each-permanent",
     filter: { type: "creature" },
     simultaneous: true,
-    effect: { kind: "damage", amount: { countOf: { subtype: "Aura", attachedToTarget: 0 }, times: 2 }, target: 0 },
+    effect: { kind: "damage", amount: { countOf: { subtype: "Aura", attachedToObject: 0 }, times: 2 }, target: 0 },
   },
 });

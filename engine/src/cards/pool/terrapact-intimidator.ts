@@ -25,7 +25,7 @@ export default defineCard({
       targets: ["opponent"],
       effect: {
         kind: "each-player-may",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         choices: [
           {
             text: "Have them create two Lander tokens.",

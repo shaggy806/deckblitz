@@ -23,7 +23,7 @@ export default defineCard({
           { kind: "draw", amount: 1 },
           {
             kind: "conditional",
-            condition: { kind: "discarded", filter: { type: "creature" } },
+            condition: { kind: "object-matches", object: { paid: "discarded" }, filter: { type: "creature" } },
             then: { kind: "amass", amount: 1, creatureType: "Orc" },
           },
         ],

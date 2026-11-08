@@ -13,7 +13,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "damage", amount: { powerOf: 0 }, target: 0, from: { target: 0 } },
+      { kind: "damage", amount: { powerOf: 0 }, target: 0, from: 0 },
       {
         kind: "conditional",
         condition: { kind: "target", index: 0, filter: { attacking: true } },

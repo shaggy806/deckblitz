@@ -40,7 +40,7 @@ export default defineCard({
     {
       // Whether or not anything convoked it (the ruling). "Another": Kasla
       // is a spell only while her ability doesn't exist yet.
-      trigger: { on: "cast-spell", who: "you", filter: { hasConvoke: true } },
+      trigger: { on: "cast-spell", who: "you", filter: { hasKeyword: "convoke" } },
       targets: [],
       effect: {
         kind: "sequence",

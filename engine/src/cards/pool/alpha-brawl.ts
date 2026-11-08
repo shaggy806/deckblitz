@@ -23,7 +23,7 @@ export default defineCard({
         amount: { powerOf: 0 },
         controlledByTarget: 0,
         exceptSource: true,
-        from: { target: 0 },
+        from: 0,
       },
       {
         kind: "each-deals-damage",

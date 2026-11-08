@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 // EDHREC rank 13001.
 //
 // One target; the creatures sharing its name (rule 201.2a) get -3/-3 with it,
-// targeted or not (`CardFilter.sameNameAsTarget`).
+// targeted or not (`CardFilter.sameNameWith`).
 
 export default defineCard({
   name: "Bile Blight",
@@ -14,7 +14,7 @@ export default defineCard({
   targets: ["creature"],
   effect: {
     kind: "modify-pt-all",
-    filter: { type: "creature", sameNameAsTarget: 0 },
+    filter: { type: "creature", sameNameWith: 0 },
     power: -3,
     toughness: -3,
     duration: "end-of-turn",

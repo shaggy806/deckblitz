@@ -17,7 +17,7 @@ export default defineCard({
       { kind: "exile", target: 0 },
       {
         kind: "each-player-may",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         prompt: "Search your library for a basic land card?",
         effect: {
           kind: "search-library",

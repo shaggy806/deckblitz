@@ -19,7 +19,7 @@ export default defineCard({
         then: {
           kind: "may",
           prompt: "Destroy all Equipment attached to that creature?",
-          effect: { kind: "destroy-all", filter: { subtype: "Equipment", attachedToTarget: 0 } },
+          effect: { kind: "destroy-all", filter: { subtype: "Equipment", attachedToObject: 0 } },
         },
       },
     ],

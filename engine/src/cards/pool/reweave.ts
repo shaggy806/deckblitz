@@ -23,7 +23,7 @@ export default defineCard({
         condition: { kind: "this-way", what: "sacrificed", atLeast: 1 },
         then: {
           kind: "reveal-until",
-          whose: { controllerOfTarget: 0 },
+          whose: { controllerOf: 0 },
           filter: {
             typesAnyOf: ["artifact", "creature", "enchantment", "land", "planeswalker", "battle"],
             sharesCardTypeWith: 0,

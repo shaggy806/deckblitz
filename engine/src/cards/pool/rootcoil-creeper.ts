@@ -34,7 +34,7 @@ export default defineCard({
     },
     {
       cost: { mana: "{G}{U}", tap: true, do: { kind: "exile", target: "source" } },
-      targets: [{ kind: "card-in-exile", whose: "you", filter: { hasFlashback: true } }],
+      targets: [{ kind: "card-in-exile", whose: "you", filter: { hasKeyword: "flashback" } }],
       effect: { kind: "return-to-hand", target: 0, from: "exile" },
       resolve: null,
       text: RETURN,

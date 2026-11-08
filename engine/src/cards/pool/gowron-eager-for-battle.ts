@@ -34,7 +34,7 @@ export default defineCard({
           { kind: "grant-keyword", target: "source", keyword: "trample", duration: "end-of-turn" },
           {
             kind: "conditional",
-            condition: { kind: "sacrificed", filter: { subtype: "Klingon" } },
+            condition: { kind: "object-matches", object: { paid: "sacrificed" }, filter: { subtype: "Klingon" } },
             then: {
               kind: "sequence",
               effects: [

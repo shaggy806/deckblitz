@@ -9,7 +9,7 @@ export default defineCard({
   targets: ["creature"],
   effect: {
     kind: "grant-keyword-all",
-    filter: { type: "creature", sharesColorWithTarget: 0 },
+    filter: { type: "creature", sharesColorWith: 0 },
     keyword: "haste",
     duration: "end-of-turn",
   },

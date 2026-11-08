@@ -26,7 +26,7 @@ export default defineCard({
         destination: "library-top",
         min: 1,
         max: 1,
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
       },
       resolve: null,
       text: BOAST_TEXT,

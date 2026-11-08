@@ -13,7 +13,7 @@ export default defineCard({
   effect: {
     kind: "choose-random-card",
     zone: "hand",
-    whose: { controllerOfTarget: 0 },
+    whose: { controllerOf: 0 },
     show: "reveal",
     slot: 1,
     then: {

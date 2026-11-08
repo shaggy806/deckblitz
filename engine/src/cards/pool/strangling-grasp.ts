@@ -19,7 +19,7 @@ export default defineCard({
       // permanent was what they sacrificed: bound once by for-each-player.
       effect: {
         kind: "for-each-player",
-        who: "attached-controller",
+        who: { controllerOf: "attached" },
         effect: {
           kind: "sequence",
           effects: [

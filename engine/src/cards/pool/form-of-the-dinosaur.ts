@@ -31,7 +31,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "damage", amount: 15, target: 0 },
-          { kind: "damage", amount: { powerOf: 0 }, who: "you", from: { target: 0 } },
+          { kind: "damage", amount: { powerOf: 0 }, who: "you", from: 0 },
         ],
       },
       resolve: null,

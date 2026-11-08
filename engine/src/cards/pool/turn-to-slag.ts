@@ -13,7 +13,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "damage", amount: 5, target: 0 },
-      { kind: "destroy-all", filter: { subtype: "Equipment", attachedToTarget: 0 } },
+      { kind: "destroy-all", filter: { subtype: "Equipment", attachedToObject: 0 } },
     ],
   },
 });

@@ -18,7 +18,7 @@ export default defineCard({
       { kind: "create-token", token: "Powerstone Token", count: 2, tapped: true },
       {
         kind: "conditional",
-        condition: { kind: "sacrificed", filter: { supertype: "legendary" } },
+        condition: { kind: "object-matches", object: { paid: "sacrificed" }, filter: { supertype: "legendary" } },
         then: { kind: "draw", amount: 1 },
       },
     ],

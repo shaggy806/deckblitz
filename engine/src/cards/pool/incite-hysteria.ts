@@ -13,7 +13,7 @@ import { defineCard } from "../define.js";
 //     matter if those creatures change colors before blockers are declared.
 //
 // The set is fixed as it resolves (`restrict`'s `asItResolves`, rule 611.2c);
-// `sharesColorWithTarget` includes the target itself (Surge of Zeal).
+// `sharesColorWith` includes the target itself (Surge of Zeal).
 export default defineCard({
   name: "Incite Hysteria",
   manaCost: "{2}{R}",
@@ -23,7 +23,7 @@ export default defineCard({
   targets: ["creature"],
   effect: {
     kind: "restrict",
-    filter: { type: "creature", sharesColorWithTarget: 0 },
+    filter: { type: "creature", sharesColorWith: 0 },
     asItResolves: true,
     restrictions: ["cant-block"],
   },

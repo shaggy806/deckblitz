@@ -22,7 +22,7 @@ export default defineCard({
     from: 0,
     effect: {
       kind: "search-library",
-      who: { controllerOfTarget: 0 },
+      who: { controllerOf: 0 },
       filter: {},
       destination: "library-top",
       min: 1,

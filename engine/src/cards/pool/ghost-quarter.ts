@@ -31,7 +31,7 @@ export default defineCard({
             // "Its controller **may** search": their choice (`each-player-may`),
             // so declining neither searches nor shuffles their library.
             kind: "each-player-may",
-            who: { controllerOfTarget: 0 },
+            who: { controllerOf: 0 },
             prompt: "Search your library for a basic land card?",
             effect: {
               kind: "search-library",

@@ -94,6 +94,7 @@ import _poolBlessedWind from "../pool/blessed-wind.js";
 import _poolBlitzLeech from "../pool/blitz-leech.js";
 import _poolBloodLust from "../pool/blood-lust.js";
 import _poolBloodPact from "../pool/blood-pact.js";
+import _poolBloodbondMarch from "../pool/bloodbond-march.js";
 import _poolBloodfireExpert from "../pool/bloodfire-expert.js";
 import _poolBoardingAction from "../pool/boarding-action.js";
 import _poolBogImp from "../pool/bog-imp.js";
@@ -1055,6 +1056,7 @@ const shard: CardShard = {
     _poolBlitzLeech,
     _poolBloodLust,
     _poolBloodPact,
+    _poolBloodbondMarch,
     _poolBloodfireExpert,
     _poolBoardingAction,
     _poolBogImp,

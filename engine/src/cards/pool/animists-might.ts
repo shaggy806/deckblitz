@@ -28,5 +28,5 @@ export default defineCard({
     filter: { supertype: "legendary", type: "creature", controlledBy: "you" },
     reduceGeneric: 2,
   },
-  effect: { kind: "damage", amount: { product: [{ powerOf: 0 }, 2] }, target: 1, from: { target: 0 } },
+  effect: { kind: "damage", amount: { product: [{ powerOf: 0 }, 2] }, target: 1, from: 0 },
 });

@@ -15,5 +15,5 @@ export default defineCard({
   flashback: { cost: "{3}{R}", discard: 1, keyword: "jump-start" },
   text: "Target creature you control deals damage equal to its power to target player.\nJump-start (You may cast this card from your graveyard by discarding a card in addition to paying its other costs. Then exile this card.)",
   targets: ["creature-you-control", "player"],
-  effect: { kind: "damage", amount: { powerOf: 0 }, target: 1, from: { target: 0 } },
+  effect: { kind: "damage", amount: { powerOf: 0 }, target: 1, from: 0 },
 });

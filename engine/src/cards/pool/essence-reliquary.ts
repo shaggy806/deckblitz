@@ -18,7 +18,7 @@ export default defineCard({
         kind: "sequence",
         simultaneous: true,
         effects: [
-          { kind: "return-to-hand-all", filter: { subtype: "Aura", controlledBy: "you", attachedToTarget: 0 } },
+          { kind: "return-to-hand-all", filter: { subtype: "Aura", controlledBy: "you", attachedToObject: 0 } },
           { kind: "return-to-hand", target: 0 },
         ],
       },

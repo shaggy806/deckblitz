@@ -23,7 +23,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "damage", amount: "x", target: 0 },
-          { kind: "draw", who: { controllerOfTarget: 0 }, amount: "x" },
+          { kind: "draw", who: { controllerOf: 0 }, amount: "x" },
         ],
       },
       resolve: null,

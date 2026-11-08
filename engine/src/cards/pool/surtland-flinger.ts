@@ -30,7 +30,7 @@ export default defineCard({
           kind: "reflexive-trigger",
           targets: ["any-target"],
           value: {
-            ifCondition: { kind: "sacrificed", filter: { subtype: "Giant" } },
+            ifCondition: { kind: "object-matches", object: { paid: "sacrificed" }, filter: { subtype: "Giant" } },
             then: { product: [{ powerOf: { paid: "sacrificed" } }, 2] },
             else: { powerOf: { paid: "sacrificed" } },
           },

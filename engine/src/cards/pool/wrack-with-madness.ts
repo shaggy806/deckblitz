@@ -13,5 +13,5 @@ export default defineCard({
   types: ["sorcery"],
   text: "Target creature deals damage to itself equal to its power.",
   targets: ["creature"],
-  effect: { kind: "damage", amount: { powerOf: 0 }, target: 0, from: { target: 0 } },
+  effect: { kind: "damage", amount: { powerOf: 0 }, target: 0, from: 0 },
 });

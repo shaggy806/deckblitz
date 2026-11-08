@@ -29,9 +29,9 @@ export default defineCard({
           leftover: "stay",
           then: {
             kind: "search-library",
-            whose: { ownerOfTarget: 0 },
+            whose: { ownerOf: 0 },
             zones: "graveyard-hand-library",
-            filter: { sameNameAsTarget: 0 },
+            filter: { sameNameWith: 0 },
             destination: "exile",
             min: 0,
             max: 99,

@@ -72,7 +72,7 @@ describe("sharesCreatureTypeWith: \"attached\" — the Crowns", () => {
     expect(keywords(game, bears).has("flying")).toBe(false);
   });
 
-  it("with the enchanted creature gone before it resolves, nothing shares a type with it", () => {
+  it("with the enchanted creature gone before it resolves, kin are read off it as it last existed (608.2h)", () => {
     const { game } = table();
     lands(game, "Island", 2);
     const elves = spawn(game, "Llanowar Elves");
@@ -82,7 +82,7 @@ describe("sharesCreatureTypeWith: \"attached\" — the Crowns", () => {
     activate(game, crown, 0, { settle: false });
     game.debugMove(elves, "graveyard");
     settle(game);
-    expect(keywords(game, mystic).has("flying")).toBe(false);
+    expect(keywords(game, mystic).has("flying")).toBe(true);
   });
 });
 

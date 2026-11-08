@@ -39,7 +39,7 @@ export default defineCard({
         reveal: "chosen",
         min: 0,
         max: 1,
-        filter: { hasKicker: true },
+        filter: { hasKeyword: "kicker" },
         destination: "hand",
         leftover: "bottom-random",
       },

@@ -29,7 +29,7 @@ export default defineCard({
       { kind: "sacrifice-target", target: 0, byItsController: true },
       {
         kind: "reveal-until",
-        whose: { controllerOfTarget: 0 },
+        whose: { controllerOf: 0 },
         filter: { type: "artifact" },
         put: "battlefield",
         rest: "shuffle",

@@ -23,7 +23,7 @@ export default defineCard({
           { kind: "remove-from-combat", target: "attached" },
           {
             kind: "draw",
-            amount: { countOf: { type: "creature", tapped: true, controlledBy: "you" }, forPlayer: "attached-controller" },
+            amount: { countOf: { type: "creature", tapped: true, controlledBy: "you" }, forPlayer: { controllerOf: "attached" } },
           },
         ],
       },

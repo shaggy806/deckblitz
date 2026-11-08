@@ -15,7 +15,7 @@ export default defineCard({
       trigger: { on: "leaves-battlefield", who: "any", to: ["hand"] },
       targets: [],
       resolve: null,
-      effect: { kind: "discard", target: "trigger-owner", amount: 1 },
+      effect: { kind: "discard", target: { ownerOf: "trigger-object" }, amount: 1 },
       text: TEXT,
     },
   ],

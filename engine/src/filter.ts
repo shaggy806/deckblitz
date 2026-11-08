@@ -23,6 +23,7 @@ import {
   effectiveTypes,
   hasAnyAbility,
   hasLostAbilities,
+  hasActivatedAbilityOf,
   hasManaAbility,
   journalReader,
   pairedPartner,
@@ -30,6 +31,7 @@ import {
 import type { CastVia } from "./actions.js";
 import type { CardRegistry, CardType, Keyword, Supertype } from "./cards.js";
 import type { EffectAmount, ThisWayKind } from "./effects.js";
+import type { CardDefinition } from "./cards/define.js";
 import { goadersOf, isGoaded } from "./goad.js";
 import { hasRingBearerDesignation, isRingBearer } from "./ring.js";
 import type { Color, ManaCost, ManaFromSpec } from "./mana.js";
@@ -43,6 +45,7 @@ import { lastKnownNames, namesOf } from "./card-names.js";
 import type { TargetRef } from "./target.js";
 import { thisWayEntries } from "./this-way.js";
 import { isObjectSetRef, staticSetMembers, type ObjectSetRef } from "./object-sets.js";
+import type { ObjectRef, PlayerRef } from "./refs.js";
 
 /**
  * A numeric comparison clause, e.g. `{ op: "lte", n: 2 }` = "≤ 2".
@@ -272,7 +275,7 @@ export function supertypesOf(registry: CardRegistry, object: GameObject): readon
  *   it leaves (610.3, `exiledUntil`): "the exiled card", "a card exiled with
  *   this" (Exclusion Ritual, Ixalan's Binding);
  * - `"attached"` — what the source is attached to ("enchanted creature"),
- *   or was last attached to when the source has gone (as `EffectTargetRef`'s
+ *   or was last attached to when the source has gone (as `ObjectRef`'s
  *   `"attached"`);
  * - `"chosen"` — the permanent chosen as the source entered;
  * - a number — the object in that target slot, as it last existed if it has
@@ -292,12 +295,7 @@ export function supertypesOf(registry: CardRegistry, object: GameObject): readon
  * Nothing to compare with: nothing shares a type with it.
  */
 export type ShareReference =
-  | "trigger-object"
-  | "source"
-  | "attached"
-  | "chosen"
-  | ObjectSetRef
-  | number
+  | ObjectRef
   | { readonly controlled: CardFilter }
   | { readonly permanents: CardFilter }
   | { readonly graveyard: CardFilter; readonly itsController?: true };
@@ -623,20 +621,6 @@ export interface CardFilter {
    */
   readonly isSource?: boolean;
   /**
-   * It is the object in this target slot of the resolving spell or ability,
-   * or has the same name as it (rule 201.2a) — Maelstrom Pulse's "destroy
-   * target nonland permanent **and all other permanents with the same name
-   * as that permanent**" is a `destroy-all` of `{ sameNameAsTarget: 0 }`,
-   * so the target and its namesakes go in one event (the ruling: an
-   * indestructible target still takes the others with it). An effect's
-   * filter only: `bindDynamicCompares` binds it to `sameNameAs` as the
-   * effect applies; anywhere else it matches nothing. It reaches whatever
-   * zone the effect reads: a `search-library`'s (Splinter, Mask of the Mimic,
-   * Secret Salvage), a `return-from-graveyard`'s (Echoing Return), an
-   * `exile-graveyard`'s (Moratorium Stone, Legion's End).
-   */
-  readonly sameNameAsTarget?: number;
-  /**
    * With `sameNameAsTarget`: the namesakes must be tokens, the target itself
    * needn't be — Legions to Ashes' "exile target nonland permanent an opponent
    * controls **and all tokens** that player controls with the same name as
@@ -651,16 +635,6 @@ export interface CardFilter {
    * isn't, unless it's a token copy (707.8a), which is made with its faces.
    */
   readonly doubleFaced?: true;
-  /**
-   * Has the same name as the trigger object (rule 201.2a) — the Odyssey
-   * Shrines' "the number of cards in all graveyards **with the same name as
-   * that spell**", the spell whose casting fired the trigger: a `count` of `{
-   * zone: "graveyard", sameNameAsTriggerObject: true }` with `"all"`. Bound
-   * like `sameNameAsTarget`, to `sameNameAs`, as the effect applies (its name
-   * as it is then, or as it last existed); an effect's filter only, and with
-   * no trigger object it matches nothing.
-   */
-  readonly sameNameAsTriggerObject?: true;
   /** `sameNameAsTarget` / `sameNameAsTriggerObject` bound — written by `bindDynamicCompares`, never
    * authored: the target itself, and the name it has (`null` for none — a
    * face-down permanent, rule 708.2a — which nothing else shares, 201.2a). */
@@ -708,21 +682,20 @@ export interface CardFilter {
    * as that card" is `sameNameWith: { thisWay: "exiled" }`: one search for
    * every such name, rule 701.23h.) */
   readonly sameNameAsAny?: readonly string[];
-  /**
-   * It is the object in this target slot of the resolving spell or ability,
-   * or shares a color with it (rule 105.2) — radiance's "target creature
-   * **and each other creature that shares a color with it**" (Ravnica:
-   * City of Guilds' ability word, rule 207.2c) is an effect over `{ type:
-   * "creature", sharesColorWithTarget: 0 }`. Only the target is targeted:
-   * protection or hexproof doesn't save the others. A colorless target goes
-   * alone. An effect's filter only: `bindDynamicCompares` binds it to
-   * `sharesColorWith` (the target's colors as the effect applies); anywhere
-   * else it matches nothing.
-   */
-  readonly sharesColorWithTarget?: number;
   /** `sharesColorWithTarget` bound — written by `bindDynamicCompares`, never
    * authored: the target itself, and its colors. */
-  readonly sharesColorWith?: { readonly object: ObjectId; readonly colors: readonly Color[] };
+  readonly sharesColorBound?: { readonly objects: readonly ObjectId[]; readonly colors: readonly Color[] };
+  /**
+   * Shares a color with the objects a reference names (rule 105.2): Spreading
+   * Plague's "all other creatures that share a color with it" is
+   * `sharesColorWith: "trigger-object"`, radiance's "and each other creature
+   * that shares a color with it" `sharesColorWith: 0`, Konda's Banner's
+   * "creatures that share a color with equipped creature" `sharesColorWith:
+   * "attached"`. The reference objects match themselves. A resolution binds it
+   * as it applies (`sharesColorBound`); a static reads `"source"` and
+   * `"attached"` live.
+   */
+  readonly sharesColorWith?: ShareReference;
   /**
    * It has the greatest `of` among the battlefield permanents **its
    * controller** controls that match `among` — ties all count: "each
@@ -734,7 +707,7 @@ export interface CardFilter {
    * its own controller's, live; an object that isn't on the battlefield
    * never matches.
    */
-  readonly greatestAmongItsController?: { readonly of: AggregateOf; readonly among: CardFilter };
+  readonly greatestAmongItsController?: { readonly of: AggregateOf; readonly among: CardFilter; readonly least?: true };
   /**
    * It has the greatest `of` of everything in **its zone** that matches
    * `among`, ties all counted: no other has more. On the battlefield that's
@@ -759,6 +732,10 @@ export interface CardFilter {
     /** "Greater than each other creature's power" (Selvala, Heart of the
      * Wilds): a tie doesn't count, nor does another token of its stack. */
     readonly strictly?: true;
+    /** The **least** instead: nothing else in its zone that matches has less
+     * (Witch-king's "least power among creatures they control", Porphyry
+     * Nodes' "the creature with the least power"). */
+    readonly least?: true;
   };
   readonly power?: NumCompare;
   readonly toughness?: NumCompare;
@@ -964,14 +941,6 @@ export interface CardFilter {
    * Inn's "target card that has an Adventure", Howling Galefang's "a card in
    * exile that has an Adventure". */
   readonly hasAdventure?: boolean;
-  /** Has (or hasn't) convoke (rule 702.51) — "whenever you cast a spell that
-   * has convoke" (Kasla, the Broken Halo; Joyful Stormsculptor). Read off its
-   * rules text (`rulesTextName`). */
-  readonly hasConvoke?: boolean;
-  /** Has (or hasn't) disguise (rule 702.168) — Expose the Culprit's "face-up
-   * creatures you control with disguise". Read off its rules text
-   * (`rulesTextName`), so `faceDown: false` goes with it for "face-up". */
-  readonly hasDisguise?: boolean;
   /** Is (or isn't) a suspended card (rule 702.62b: in exile, with suspend, with
    * a time counter on it) — Shivan Sand-Mage's "target permanent or suspended
    * card", Amy Pond's "a suspended card you own". */
@@ -982,20 +951,6 @@ export interface CardFilter {
    * one that was cast, and an ability aren't spells (the Emrakul, the Aeons
    * Torn ruling), nor is an Aura put onto the battlefield. */
   readonly isSpell?: boolean;
-  /** Has (or hasn't) a kicker or multikicker ability (rule 702.33) — "a card
-   * with a kicker ability" (Murasa Sproutling, Coralhelm Chronicler). Read off
-   * its rules text (`rulesTextName`), in any zone. */
-  readonly hasKicker?: boolean;
-  /** Has (or hasn't) a cycling ability (rule 702.29 — typecycling is one,
-   * 702.29e): "a card with a cycling ability" (Zenith Flare, Rooting
-   * Moloch). Read off its rules text, in any zone. */
-  readonly hasCycling?: boolean;
-  /** Has (or hasn't) suspend (rule 702.62): "a spell with suspend" (The Face of
-   * Boe). Read off its rules text, in any zone. */
-  readonly hasSuspend?: boolean;
-  /** Has (or hasn't) mutate (rule 702.140) — "if it has mutate" (Pollywog
-   * Symbiote). Read off its rules text, in any zone. */
-  readonly hasMutate?: boolean;
   /** A spell on the stack that was kicked (rule 702.33d — its kicker cost was
    * paid as it was cast; a copy of it is kicked too, 707.10): "whenever you
    * cast a kicked spell" (Roost of Drakes). Nothing off the stack is a kicked
@@ -1005,14 +960,6 @@ export interface CardFilter {
    * creature you control with toxic" (Slaughter Singer), "if that creature
    * has toxic" (Hexgold Slash). Read on the battlefield; not on a snapshot. */
   readonly hasToxic?: boolean;
-  /** Has (or hasn't) flashback (rule 702.34) — "target card with flashback
-   * you own from exile" (Rootcoil Creeper), "target exiled card with
-   * flashback" (Runic Repetition): the flashback its text prints, or one a
-   * resolved effect gave it where it is (`grantedFlashback`, Snapcaster
-   * Mage's, which ends with any move). Not a static ability's graveyard-only
-   * grant (Lier's "instant and sorcery cards in your graveyard have
-   * flashback"), so ask it of cards in exile, where no such grant reaches. */
-  readonly hasFlashback?: boolean;
   /** Has an Aura attached to it, whoever controls the Aura (rule 303.4). */
   readonly enchanted?: boolean;
   /** Is itself attached to a permanent matching this filter — an Aura or
@@ -1035,23 +982,6 @@ export interface CardFilter {
     readonly otherThanSource?: true;
   };
   /**
-   * It shares a color (rule 105.2) with the permanent the one applying the
-   * filter is attached to, as that is now — Konda's Banner's "creatures that
-   * share a color with equipped creature". The host shares one with itself if
-   * it has a color (the ruling); attached to nothing, nothing matches. A live
-   * read, for a static; an effect fixing the color as it applies is
-   * `sharesColorWithTarget`.
-   */
-  readonly sharesColorWithHost?: true;
-  /**
-   * As `sharesColorWithHost`, for a creature type (rule 205.3m, a changeling
-   * on either side sharing through `hasSubtype`): the host shares one with
-   * itself only if it has one (Konda's Banner's ruling). `sharesCreatureTypeWith:
-   * "attached"` is the effect's form, which always includes the host (the
-   * Crowns).
-   */
-  readonly sharesCreatureTypeWithHost?: true;
-  /**
    * Is attached to the object or player in this target slot — "return target
    * creature and all Auras attached to it" (Hubris), "destroy all Equipment
    * attached to that creature" (Blastfire Bolt), "all Auras attached to
@@ -1063,11 +993,32 @@ export interface CardFilter {
    * attached to it"), so they're read while still attached. Unbound,
    * anywhere nothing could answer it, it matches nothing.
    */
-  readonly attachedToTarget?: number;
+  readonly attachedToObject?: ObjectRef;
   /** `attachedToTarget` bound — written by `bindDynamicCompares`, never
    * authored; `null` matches nothing. Matched on the battlefield, against
    * `GameObject.attachedTo` / `attachedToPlayer`. */
   readonly attachedToRef?: TargetRef | null;
+  /** Controlled by the one player a {@link PlayerRef} names: "all lands **that
+   * player** controls", "the number of Swamps target player controls". Bound
+   * to `controllerIn` as an effect applies; unbound, it matches nothing. */
+  readonly controlledByRef?: PlayerRef;
+  /**
+   * Has a keyword ability, read off its text box (rule 702): the abilities a
+   * definition holds in fields of their own, not the ones the layers compute
+   * (`keyword`). `"morph"` is morph or megamorph; one row of
+   * `CARD_KEYWORD_READS` each, so a new keyword is a row.
+   */
+  readonly hasKeyword?: CardKeyword;
+  /**
+   * Has an activated ability (rule 602): with `mana: false`, one that isn't a
+   * mana ability (rule 605.1a) — Ravager Wurm's "target land with an activated
+   * ability that isn't a mana ability"; `mana: true`, one that is.
+   */
+  readonly hasActivatedAbility?: { readonly mana?: boolean };
+  /** Above the applying permanent in its owner's graveyard (rule 404.2: a
+   * graveyard keeps its order): Nether Shadow's "with three or more creature
+   * cards above it". The top is the card put there last. */
+  readonly aboveSourceInGraveyard?: true;
   /**
    * Was attached to this object — the ability's source, or the object its
    * trigger fired on — as it is now, or as it last existed on the
@@ -1258,7 +1209,7 @@ export interface CardFilter {
   /** …cast from this zone — "if it was cast from a graveyard". Asked of a
    * spell still on the stack, where it was cast from: Delayed Blast
    * Fireball's "if this spell was cast from exile". */
-  readonly castFrom?: ZoneType;
+  readonly castFrom?: ZoneType | { readonly not: ZoneType };
   /** …cast under this permission — Uro, Titan of Nature's Wrath's "sacrifice
    * it unless it escaped" is `{ castVia: "escape" }` under a `not`. A spell
    * cast from the graveyard some other way (Muldrotha, flashback granted by
@@ -1545,6 +1496,9 @@ export interface FilterContext {
    * it, from its own source (Abaddon the Despoiler's "mana value X or less").
    * Absent ⇒ such a grant doesn't reach the spell here. */
   readonly spellGrantAmount?: (source: GameObject) => (amount: EffectAmount) => number;
+  /** The object behind the trigger applying the filter: what a filter's
+   * `"trigger-object"` reference reads when it's a target's. */
+  readonly triggerObject?: ObjectId;
   /** The permanent whose trigger or ability is applying the filter — what
    * `putThereBySource` compares against. */
   readonly source?: ObjectId;
@@ -1885,6 +1839,12 @@ export function liveReferenceObjects(
   itsController?: PlayerId,
 ): readonly ObjectId[] | undefined {
   if (reference === "source") return ctx.source === undefined ? [] : [ctx.source];
+  if (reference === "trigger-object") return ctx.triggerObject === undefined ? undefined : [ctx.triggerObject];
+  if (reference === "attached") {
+    const on = ctx.source === undefined ? undefined : state.objects[ctx.source];
+    const host = on?.zone === "battlefield" ? on.attachedTo : null;
+    return host === null || host === undefined ? [] : [host];
+  }
   if (reference === "exiled-with-source") {
     const source = ctx.source === undefined ? undefined : state.objects[ctx.source];
     if (source === undefined) return [];
@@ -1909,6 +1869,7 @@ export function liveReferenceObjects(
     ...(ctx.amount !== undefined ? { amount: ctx.amount } : {}),
     ...(ctx.source !== undefined ? { source: ctx.source } : {}),
   };
+  if ("hostOf" in reference || "pairedWith" in reference) return undefined;
   if ("graveyard" in reference) {
     const players = reference.itsController === true ? (itsController === undefined ? [] : [itsController]) : state.turnOrder;
     return players.flatMap((player) =>
@@ -1948,6 +1909,42 @@ function hasParity(state: GameState, value: number, clause: ParityClause, source
   if (quality === "even") return value % 2 === 0;
   return false;
 }
+
+/** The keyword abilities a definition holds in fields of its own: what
+ * `CardFilter.hasKeyword` can ask. */
+export type CardKeyword =
+  | "convoke" | "cycling" | "disguise" | "flashback" | "kicker" | "morph" | "mutate" | "suspend"
+  | "awaken" | "madness" | "warp" | "disturb" | "freerunning" | "fading" | "modular" | "unearth";
+
+/** Whether a printed line of `def`'s text is this keyword ability: for the
+ * keywords a card authors as their parts, with no field of their own. */
+function hasKeywordLine(def: CardDefinition, keyword: string): boolean {
+  return new RegExp(`(^|\\n)${keyword} `).test(def.text);
+}
+
+/** One row per keyword, so a new one is a row: `live` is there for what a
+ * permanent can be granted (flashback, on a card in a graveyard). */
+const CARD_KEYWORD_READS = {
+  // A `kicker` with a `keyword` is another optional additional cost (buyback,
+  // entwine, bargain...) the engine models the same way: not a kicker ability
+  // (rule 702.33; multikicker has no `keyword` and counts).
+  kicker: (def) => def.kicker !== null && def.kicker.keyword === undefined,
+  convoke: (def) => def.convoke,
+  cycling: (def) => def.cycling !== null,
+  suspend: (def) => def.suspend !== null,
+  mutate: (def) => def.overload?.keyword === "mutate",
+  awaken: (def) => def.overload?.keyword === "awaken",
+  disguise: (def) => def.morph?.keyword === "disguise",
+  morph: (def) => def.morph !== null && def.morph.keyword !== "disguise",
+  flashback: (def, live) => live?.grantedFlashback != null || def.flashback !== null,
+  madness: (def) => def.madness !== null,
+  warp: (def) => def.warp !== null,
+  disturb: (def) => def.disturb !== null,
+  freerunning: (def) => def.freerunning !== null,
+  fading: (def) => hasKeywordLine(def, "Fading"),
+  modular: (def) => hasKeywordLine(def, "Modular"),
+  unearth: (def) => hasKeywordLine(def, "Unearth"),
+} as const satisfies Record<CardKeyword, (def: CardDefinition, live: GameObject | undefined) => boolean>;
 
 /** Does object `id` satisfy every clause of `filter`?
  *
@@ -2003,8 +2000,10 @@ export function matchesFilter(
     filter.sharesCreatureTypeWith !== undefined ||
     filter.sharesLandTypeWith !== undefined
   ) {
-    if (ctx.layered !== undefined) return false;
     const shares = (reference: ShareReference, kind: SharedTypes["kind"]): boolean => {
+      // Inside the layer fold only what the static's own host is can be read
+      // without folding again (Konda's Banner, in layer 7).
+      if (ctx.layered !== undefined && reference !== "attached") return false;
       const objects = liveReferenceObjects(state, registry, reference, ctx, live?.controller ?? lki?.controller);
       if (objects === undefined) return false;
       if (objects.includes(id)) return true;
@@ -2018,7 +2017,7 @@ export function matchesFilter(
           );
         });
       }
-      const mine = live !== undefined ? effectiveSubtypes(state, registry, live) : lki!.subtypes;
+      const mine = live !== undefined ? (ctx.layered?.subtypes ?? effectiveSubtypes(state, registry, live)) : lki!.subtypes;
       return objects.some((other) => {
         const object = state.objects[other];
         if (object === undefined) return false;
@@ -2151,7 +2150,6 @@ export function matchesFilter(
   // The name it has — a copy exception's, if one renamed it (`nameOf`).
   const named = live !== undefined ? nameOf(live) : (lki!.renamed ?? lki!.name);
   if (filter.name !== undefined && named !== filter.name) return false;
-  if (filter.sameNameAsTarget !== undefined || filter.sameNameAsTriggerObject !== undefined) return false;
   if (filter.sameNameAsAny !== undefined) {
     // A nameless object (face down, rule 708.2a) shares a name with nothing;
     // one name in common is enough — a split card's either half (201.2a).
@@ -2196,6 +2194,11 @@ export function matchesFilter(
       const object = state.objects[other];
       // A card exiled face down has no name to share (rule 406.3a).
       if (object === undefined || object.exiledFaceDown !== undefined || object.foretold === true) return false;
+      // The source gone: as it last existed (rules 113.7a, 608.2h), so a copy
+      // that's died is read by the name it was copying (Evil Twin).
+      if (other === ctx.source && object.zone !== "battlefield" && object.lastKnown !== undefined) {
+        return lastKnownNames(registry, object.lastKnown).some((n) => names.includes(n));
+      }
       return namesOf(registry, object).some((n) => names.includes(n));
     });
     if (!shared) return false;
@@ -2232,11 +2235,23 @@ export function matchesFilter(
       if (!names.some((n) => chosen.includes(n))) return false;
     }
   }
-  if (filter.sharesColorWithTarget !== undefined) return false;
-  if (filter.sharesColorWith !== undefined && id !== filter.sharesColorWith.object) {
+  if (filter.sharesColorBound !== undefined && !filter.sharesColorBound.objects.includes(id)) {
     const colors: ReadonlySet<Color> =
       live !== undefined ? effectiveColors(state, registry, live) : new Set(lki!.colors);
-    if (!filter.sharesColorWith.colors.some((col) => colors.has(col))) return false;
+    if (!filter.sharesColorBound.colors.some((col) => colors.has(col))) return false;
+  }
+  if (filter.sharesColorWith !== undefined) {
+    const others = liveReferenceObjects(state, registry, filter.sharesColorWith, ctx, live?.controller ?? lki?.controller);
+    if (others === undefined || (ctx.layered !== undefined && filter.sharesColorWith !== "attached")) return false;
+    if (!others.includes(id)) {
+      const colors: ReadonlySet<Color> =
+        live !== undefined ? effectiveColors(state, registry, live) : new Set(lki!.colors);
+      const shared = others.some((other) => {
+        const object = state.objects[other];
+        return object !== undefined && [...effectiveColors(state, registry, object)].some((color) => colors.has(color));
+      });
+      if (!shared) return false;
+    }
   }
 
   if (
@@ -2620,7 +2635,9 @@ export function matchesFilter(
         : entry?.cast;
     if (filter.cast !== undefined && (cast !== undefined) !== filter.cast) return false;
     if (filter.castBy === "you" && cast?.by !== ctx.you) return false;
-    if (filter.castFrom !== undefined && cast?.from !== filter.castFrom) return false;
+    if (filter.castFrom !== undefined) {
+      if (typeof filter.castFrom === "object" ? cast === undefined || cast.from === filter.castFrom.not : cast?.from !== filter.castFrom) return false;
+    }
     // A foretold card cast for a cost it was given was foretold all the same (702.143c).
     if (filter.castVia !== undefined && (cast?.via === "foretell-given" ? "foretell" : cast?.via) !== filter.castVia) return false;
     if (filter.enteredFrom !== undefined && entry?.from !== filter.enteredFrom) return false;
@@ -2794,48 +2811,20 @@ export function matchesFilter(
     const has = !faceDown && def !== undefined && def.adventure && !def.subtypes.includes("Adventure");
     if (has !== filter.hasAdventure) return false;
   }
-  if (filter.hasConvoke !== undefined) {
-    const name = live !== undefined ? rulesTextName(live) : lki?.name;
-    const has = name !== undefined && registry.has(name) && registry.get(name).convoke;
-    if (has !== filter.hasConvoke) return false;
+  if (filter.hasKeyword !== undefined) {
+    const textName = live !== undefined ? rulesTextName(live) : lki?.name;
+    const def = textName !== undefined && registry.has(textName) ? registry.get(textName) : undefined;
+    if (def === undefined || !CARD_KEYWORD_READS[filter.hasKeyword](def, live)) return false;
+    // A permanent that lost its abilities has none of these (Abandoned Sarcophagus's ruling).
+    if (live?.zone === "battlefield" && hasLostAbilities(state, registry, live)) return false;
   }
-  if (filter.hasKicker !== undefined) {
-    const name = live !== undefined ? rulesTextName(live) : lki?.name;
-    // A `kicker` with a `keyword` is another optional additional cost (buyback,
-    // entwine, bargain…) the engine models the same way — not a kicker ability
-    // (rule 702.33; multikicker has no `keyword` and counts).
-    const kicker = name !== undefined && registry.has(name) ? registry.get(name).kicker : null;
-    const has = kicker !== null && kicker.keyword === undefined;
-    if (has !== filter.hasKicker) return false;
-  }
-  if (filter.hasCycling !== undefined) {
-    const name = live !== undefined ? rulesTextName(live) : lki?.name;
-    const has =
-      name !== undefined &&
-      registry.has(name) &&
-      registry.get(name).cycling !== null &&
-      // A permanent that lost its abilities has no cycling ability (Abandoned Sarcophagus's ruling).
-      !(live?.zone === "battlefield" && hasLostAbilities(state, registry, live));
-    if (has !== filter.hasCycling) return false;
-  }
-  if (filter.hasSuspend !== undefined) {
-    const name = live !== undefined ? rulesTextName(live) : lki?.name;
-    const has = name !== undefined && registry.has(name) && registry.get(name).suspend !== null;
-    if (has !== filter.hasSuspend) return false;
-  }
-  if (filter.hasMutate !== undefined) {
-    const name = live !== undefined ? rulesTextName(live) : lki?.name;
-    const has = name !== undefined && registry.has(name) && registry.get(name).overload?.keyword === "mutate";
-    if (has !== filter.hasMutate) return false;
+  if (filter.hasActivatedAbility !== undefined) {
+    if (live === undefined) return false;
+    if (!hasActivatedAbilityOf(state, registry, live, filter.hasActivatedAbility.mana, layered !== undefined ? { inFold: true, types: layered.types, subtypes: layered.subtypes, supertypes: layered.supertypes, keywords: layered.keywords } : {})) return false;
   }
   if (filter.suspended !== undefined) {
     const suspended = live !== undefined && live.zone === "exile" && live.suspended === true && (live.counters.time ?? 0) > 0;
     if (suspended !== filter.suspended) return false;
-  }
-  if (filter.hasDisguise !== undefined) {
-    const name = live !== undefined ? rulesTextName(live) : lki?.name;
-    const has = name !== undefined && registry.has(name) && registry.get(name).morph?.keyword === "disguise";
-    if (has !== filter.hasDisguise) return false;
   }
   if (filter.kicked !== undefined) {
     // Only a kicker (rule 702.33): a spell whose "kicker" is entwine, gift,
@@ -2878,26 +2867,16 @@ export function matchesFilter(
     }
     if (attached < atLeast) return false;
   }
-  if (filter.sharesColorWithHost === true || filter.sharesCreatureTypeWithHost === true) {
-    const by = ctx.source === undefined ? undefined : state.objects[ctx.source];
-    const hostId = by?.zone === "battlefield" ? by.attachedTo : null;
-    const host = hostId === null || hostId === undefined ? undefined : state.objects[hostId];
-    if (host === undefined || live === undefined) return false;
-    if (filter.sharesColorWithHost === true) {
-      const colors = effectiveColors(state, registry, live);
-      if (![...effectiveColors(state, registry, host)].some((color) => colors.has(color))) return false;
-    }
-    if (filter.sharesCreatureTypeWithHost === true) {
-      const subtypes = layered?.subtypes ?? effectiveSubtypes(state, registry, live);
-      const theirs = effectiveSubtypes(state, registry, host).filter(
-        (t) => isCreatureType(t) || t === EVERY_CREATURE_TYPE,
-      );
-      if (!theirs.some((t) => hasSubtype(subtypes, t))) return false;
-    }
-  }
   // "Attached to it / that creature" (an effect's bound target slot) and
   // "attached to you" (rule 303.4): on the battlefield, as it is now.
-  if (filter.attachedToTarget !== undefined && filter.attachedToRef === undefined) return false;
+  if (filter.attachedToObject !== undefined && filter.attachedToRef === undefined) return false;
+  if (filter.controlledByRef !== undefined) return false;
+  if (filter.aboveSourceInGraveyard === true) {
+    const from = ctx.source === undefined ? undefined : state.objects[ctx.source];
+    if (live === undefined || live.zone !== "graveyard" || from?.zone !== "graveyard" || from.owner !== live.owner) return false;
+    const pile = state.zones.perPlayer[live.owner]?.graveyard ?? [];
+    if (pile.indexOf(id) <= pile.indexOf(from.id)) return false;
+  }
   // "That was attached to it" (an effect's bound `wasAttachedTo`): the same
   // object, still on the battlefield (rule 400.7).
   if (filter.wasAttachedTo !== undefined && filter.wasAttachedToAny === undefined) return false;
@@ -3145,12 +3124,6 @@ export function matchesFilter(
     if (has !== filter.hasToxic) return false;
   }
 
-  if (filter.hasFlashback !== undefined) {
-    const has =
-      live !== undefined &&
-      (live.grantedFlashback != null || registry.get(rulesTextName(live)).flashback !== null);
-    if (has !== filter.hasFlashback) return false;
-  }
 
   // "With the greatest power among creatures that player controls": none of
   // its controller's other matching permanents has more.
@@ -3162,7 +3135,8 @@ export function matchesFilter(
     for (const other of state.zones.shared.battlefield) {
       if (other === id || state.objects[other]?.controller !== live.controller) continue;
       if (!matchesFilter(state, registry, other, greatest.among, { you: live.controller })) continue;
-      if (aggregateValueOf(state, registry, other, greatest.of) > mine) return false;
+      const theirs = aggregateValueOf(state, registry, other, greatest.of);
+      if (greatest.least === true ? theirs < mine : theirs > mine) return false;
     }
   }
 
@@ -3170,7 +3144,7 @@ export function matchesFilter(
   // in its zone that matches has more, whoever controls it.
   const greatestInZone = filter.greatestInZone;
   if (greatestInZone !== undefined) {
-    const { of, among, strictly } = greatestInZone;
+    const { of, among, strictly, least } = greatestInZone;
     if (layered !== undefined && (of === "power" || of === "toughness")) return false;
     if (strictly === true && live?.zone === "battlefield" && (live.stackCount ?? 1) > 1) return false;
     const zone =
@@ -3187,7 +3161,11 @@ export function matchesFilter(
     for (const other of zone) {
       if (other === id || !matchesFilter(state, registry, other, among, { you: ctx.you })) continue;
       const theirs = aggregateValueOf(state, registry, other, of);
-      if (strictly === true ? theirs >= mine : theirs > mine) return false;
+      if (least === true) {
+        if (strictly === true ? theirs <= mine : theirs < mine) return false;
+      } else if (strictly === true ? theirs >= mine : theirs > mine) {
+        return false;
+      }
     }
   }
 

@@ -18,7 +18,7 @@ export default defineCard({
       targets: ["any-target"],
       effect: {
         kind: "conditional",
-        condition: { kind: "discarded", filter: { multicolored: true } },
+        condition: { kind: "object-matches", object: { paid: "discarded" }, filter: { multicolored: true } },
         then: { kind: "damage", amount: 4, target: 0 },
         else: { kind: "damage", amount: 2, target: 0 },
       },

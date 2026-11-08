@@ -18,7 +18,7 @@ export default defineCard({
       { kind: "add-counter", target: 0, counter: "-1/-1", amount: 3 },
       {
         kind: "unless",
-        chooser: { controllerOfTarget: 0 },
+        chooser: { controllerOf: 0 },
         options: [
           {
             sacrifice: { notTypes: ["land"] },
@@ -29,7 +29,7 @@ export default defineCard({
         ],
         otherwise: {
           kind: "as-player",
-          who: { controllerOfTarget: 0 },
+          who: { controllerOf: 0 },
           effect: { kind: "lose-life", amount: 3, who: "you" },
         },
       },

@@ -1,6 +1,6 @@
 import { defineCard } from "../define.js";
 
-// needed-cards P16. New: "return-to-hand" target widened to EffectTargetRef
+// needed-cards P16. New: "return-to-hand" target widened to ObjectRef
 // so it can bounce the effect's own source, untargeted, instead of always
 // needing a target. The search is already-shipped vocab.
 export default defineCard({

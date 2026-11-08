@@ -15,7 +15,7 @@ export default defineCard({
   effect: {
     kind: "conditional",
     condition: { kind: "target", index: 0, filter: { keyword: "flying" } },
-    then: { kind: "damage", amount: { product: [{ powerOf: 0 }, 2] }, target: 0, from: { target: 0 } },
-    else: { kind: "damage", amount: { powerOf: 0 }, target: 0, from: { target: 0 } },
+    then: { kind: "damage", amount: { product: [{ powerOf: 0 }, 2] }, target: 0, from: 0 },
+    else: { kind: "damage", amount: { powerOf: 0 }, target: 0, from: 0 },
   },
 });

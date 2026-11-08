@@ -15,7 +15,7 @@ export default defineCard({
     {
       trigger: { on: "attacks", who: "self" },
       targets: ["land"],
-      effect: { kind: "destroy-all", filter: { subtype: "Aura", attachedToTarget: 0 } },
+      effect: { kind: "destroy-all", filter: { subtype: "Aura", attachedToObject: 0 } },
       resolve: null,
       text: "Whenever this creature attacks, destroy all Auras attached to target land.",
     },

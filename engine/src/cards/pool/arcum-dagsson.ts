@@ -25,7 +25,7 @@ export default defineCard({
           { kind: "sacrifice-target", target: 0, byItsController: true },
           {
             kind: "each-player-may",
-            who: { controllerOfTarget: 0 },
+            who: { controllerOf: 0 },
             prompt: "Search your library for a noncreature artifact card?",
             effect: {
               kind: "search-library",

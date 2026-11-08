@@ -14,13 +14,13 @@
  * Teaching a store a member is widening its subset and its resolver.
  */
 
-import type { EffectPlayerRef, EffectTargetRef } from "./effects.js";
+import type { PlayerRef, ObjectRef } from "./effects.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 
 /** A player a duration is anchored to other than the effect's controller,
  * whose own forms are `Duration`'s strings: "until **that player's** next
  * turn" is `{ untilTurnOf: "that-player" }`, never `{ untilTurnOf: "you" }`. */
-export type DurationPlayer = Exclude<EffectPlayerRef, "you">;
+export type DurationPlayer = Exclude<PlayerRef, "you">;
 
 /**
  * How long an effect lasts, as a card says it. `you` is the effect's
@@ -113,7 +113,7 @@ export type Duration =
   | "while-you-control-source-tapped"
   | "while-its-controller-controls-source"
   | "while-source-attached"
-  | { readonly whileTapped: EffectTargetRef }
+  | { readonly whileTapped: ObjectRef }
   | { readonly whileCounter: string }
   | "until-source-cast"
   | "while-exiled"
@@ -175,7 +175,7 @@ export type CopyDuration = Extract<
   | "until-your-next-turn"
   | "while-source"
   | "while-source-attached"
-  | { readonly whileTapped: EffectTargetRef }
+  | { readonly whileTapped: ObjectRef }
 >;
 
 /** What a permission over an exiled card can last (`ImpulseGrant`,

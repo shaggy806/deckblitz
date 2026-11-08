@@ -38,7 +38,7 @@ export default defineCard({
         objects: [0, 1],
         then: {
           kind: "destroy-all",
-          filter: { subtype: "Aura", anyOf: [{ attachedToTarget: 0 }, { attachedToTarget: 1 }] },
+          filter: { subtype: "Aura", anyOf: [{ attachedToObject: 0 }, { attachedToObject: 1 }] },
         },
       },
       resolve: null,

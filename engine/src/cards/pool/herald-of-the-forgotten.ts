@@ -24,7 +24,7 @@ export default defineCard({
           of: {
             kind: "card-in-graveyard",
             whose: "you",
-            filter: { notTypes: ["instant", "sorcery"], hasCycling: true },
+            filter: { notTypes: ["instant", "sorcery"], hasKeyword: "cycling" },
           },
         },
       ],

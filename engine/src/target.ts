@@ -175,6 +175,8 @@ export type TargetSpec =
       readonly kind: "opponent-compared";
       readonly stat: PlayerStat;
       readonly by: number;
+      /** "At least `by` **fewer**" (Keeper of the Dead), against the player's own. */
+      readonly fewer?: true;
       /** The Oaths' "that player chooses target player who controls more
        * creatures than they do and is their opponent", at each player's
        * upkeep (with `targetsChosenBy: "active-player"`): the active player's

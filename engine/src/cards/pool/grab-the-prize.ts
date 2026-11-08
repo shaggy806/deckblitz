@@ -13,7 +13,7 @@ export default defineCard({
       { kind: "draw", amount: 2 },
       {
         kind: "conditional",
-        condition: { kind: "discarded", filter: { notTypes: ["land"] } },
+        condition: { kind: "object-matches", object: { paid: "discarded" }, filter: { notTypes: ["land"] } },
         then: { kind: "damage", amount: 2, who: "each-opponent" },
       },
     ],

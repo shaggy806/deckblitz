@@ -13,7 +13,7 @@ export default defineCard({
     effects: [
       {
         kind: "return-to-hand-all",
-        filter: { subtype: "Aura", colors: ["W"], ownedBy: "you", attachedToTarget: 0 },
+        filter: { subtype: "Aura", colors: ["W"], ownedBy: "you", attachedToObject: 0 },
       },
       { kind: "return-to-hand", target: 0 },
     ],

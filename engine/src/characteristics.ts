@@ -497,7 +497,7 @@ export function conditionPlayerOf(
     const ref = opts.targets?.[who.target];
     player = ref?.kind === "player" ? ref.player : undefined;
   } else {
-    const ref = opts.targets?.[who.controllerOfTarget];
+    const ref = typeof who.controllerOf === "number" ? opts.targets?.[who.controllerOf] : undefined;
     player =
       ref?.kind === "player" ? ref.player : ref?.kind === "object" ? state.objects[ref.object]?.controller : undefined;
   }
@@ -882,7 +882,7 @@ function evalStaticCondition(
         for (const id of state.zones.perPlayer[player]?.graveyard ?? []) {
           if (state.objects[id] === undefined) continue;
           if (condition.excludeSelf === true && id === source.id) continue;
-          if (condition.filter !== undefined && !matchesFilter(state, registry, id, condition.filter, { you })) continue;
+          if (condition.filter !== undefined && !matchesFilter(state, registry, id, condition.filter, { you, source: source.id })) continue;
           n += 1;
         }
         return n;
@@ -1462,8 +1462,7 @@ function evalStaticCondition(
       );
     case "target":
     case "target-chosen":
-    case "sacrificed":
-    case "discarded":
+    case "object-matches":
     case "resolved-this-turn":
     case "activated-this-turn":
     case "this-way":
@@ -4802,6 +4801,29 @@ export function hasManaAbility(
       ability.grantsTriggered?.some(isTriggeredManaAbility) === true,
     lostAt,
   );
+}
+
+/**
+ * Whether `object` has an activated ability (rule 602), printed or granted:
+ * with `mana` given, only one that is or isn't a mana ability (rule 605.1a).
+ */
+export function hasActivatedAbilityOf(
+  state: GameState,
+  registry: CardRegistry,
+  object: GameObject,
+  mana: boolean | undefined,
+  view: TargetView = {},
+): boolean {
+  const onBattlefield = object.zone === "battlefield";
+  const lostAt = onBattlefield ? abilitiesLostAt(state, registry, object) : null;
+  const fits = (ability: ActivatedAbility): boolean => mana === undefined || isManaAbility(ability) === mana;
+  const def = registry.get(rulesTextName(object));
+  if (lostAt === null && def.activated.some((a, i) => fits(a) && !inactiveStandIn(state, registry, object, i))) return true;
+  // A basic land type's mana ability (rule 305.6).
+  if (mana !== false && intrinsicManaColors(state, registry, object).length > 0) return true;
+  if (object.modifiers.some((m) => modifierGrantApplies(m, lostAt) && m.grantsActivated?.some(fits) === true)) return true;
+  if (!onBattlefield) return false;
+  return hasGrantedAbility(state, registry, object, view, (ability) => ability.grantsActivated?.some(fits) === true, lostAt);
 }
 
 /**

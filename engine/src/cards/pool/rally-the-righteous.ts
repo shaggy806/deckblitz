@@ -14,10 +14,10 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "untap-all", filter: { type: "creature", sharesColorWithTarget: 0 } },
+      { kind: "untap-all", filter: { type: "creature", sharesColorWith: 0 } },
       {
         kind: "modify-pt-all",
-        filter: { type: "creature", sharesColorWithTarget: 0 },
+        filter: { type: "creature", sharesColorWith: 0 },
         power: 2,
         toughness: 0,
         duration: "end-of-turn",

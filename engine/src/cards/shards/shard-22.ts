@@ -479,6 +479,7 @@ import _poolMalakirBloodPriest from "../pool/malakir-blood-priest.js";
 import _poolManaChargedDragon from "../pool/mana-charged-dragon.js";
 import _poolMarangRiverRegent from "../pool/marang-river-regent.js";
 import _poolMarhaultElsdragon from "../pool/marhault-elsdragon.js";
+import _poolMarkOfEviction from "../pool/mark-of-eviction.js";
 import _poolMarkOfTheOni from "../pool/mark-of-the-oni.js";
 import _poolMaskOfAvacyn from "../pool/mask-of-avacyn.js";
 import _poolMaskOfTheSchemer from "../pool/mask-of-the-schemer.js";
@@ -1493,6 +1494,7 @@ const shard: CardShard = {
     _poolManaChargedDragon,
     _poolMarangRiverRegent,
     _poolMarhaultElsdragon,
+    _poolMarkOfEviction,
     _poolMarkOfTheOni,
     _poolMaskOfAvacyn,
     _poolMaskOfTheSchemer,

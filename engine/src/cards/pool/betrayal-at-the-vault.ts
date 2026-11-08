@@ -30,8 +30,8 @@ export default defineCard({
     kind: "sequence",
     simultaneous: true,
     effects: [
-      { kind: "damage", target: 1, amount: { powerOf: 0 }, from: { target: 0 } },
-      { kind: "damage", target: 2, amount: { powerOf: 0 }, from: { target: 0 } },
+      { kind: "damage", target: 1, amount: { powerOf: 0 }, from: 0 },
+      { kind: "damage", target: 2, amount: { powerOf: 0 }, from: 0 },
     ],
   },
 });

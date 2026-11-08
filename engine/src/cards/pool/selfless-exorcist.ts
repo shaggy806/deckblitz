@@ -19,7 +19,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "exile", target: 0 },
-          { kind: "damage", amount: { powerOf: 0 }, target: "source", from: { target: 0 } },
+          { kind: "damage", amount: { powerOf: 0 }, target: "source", from: 0 },
         ],
       },
       resolve: null,

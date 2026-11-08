@@ -4,7 +4,7 @@
  * — not the {T} of rule 302.6, and unpayable once tapped, rule 118.3), and a
  * spell's "tap an untapped creature you control" as an additional cost, whose
  * text names "the creature tapped to pay this spell's additional cost"
- * (`EffectTargetRef` `"tapped"`, a copy's the original's, rule 707.10).
+ * (`ObjectRef` `"tapped"`, a copy's the original's, rule 707.10).
  */
 import { describe, expect, it } from "vitest";
 

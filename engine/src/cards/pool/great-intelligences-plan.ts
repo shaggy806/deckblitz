@@ -9,7 +9,7 @@ import { defineCard } from "../define.js";
 //     (an empty hand to discard from).
 //
 // Dr. Eggman's villainous choice (rule 701.56), asked of one player: the
-// target opponent, named through `controllerOfTarget` — a player slot names
+// target opponent, named through `controllerOf` — a player slot names
 // the player itself. The option chosen is the spell's controller's effect,
 // with `"that-player"` the opponent: "they discard three cards" is theirs,
 // and "you may cast a spell from your hand without paying its mana cost" is
@@ -32,7 +32,7 @@ export default defineCard({
       { kind: "draw", amount: 3 },
       {
         kind: "each-player-may",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         choices: [
           {
             text: "They discard three cards.",

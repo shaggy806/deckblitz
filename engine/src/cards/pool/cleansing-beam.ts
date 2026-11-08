@@ -9,5 +9,5 @@ export default defineCard({
   types: ["instant"],
   text: "Radiance — Cleansing Beam deals 2 damage to target creature and each other creature that shares a color with it.",
   targets: ["creature"],
-  effect: { kind: "damage-all", amount: 2, filter: { type: "creature", sharesColorWithTarget: 0 } },
+  effect: { kind: "damage-all", amount: 2, filter: { type: "creature", sharesColorWith: 0 } },
 });

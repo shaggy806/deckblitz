@@ -32,7 +32,7 @@ export default defineCard({
         kind: "sequence",
         effects: WALKS.map(([landType, keyword]) => ({
           kind: "conditional" as const,
-          condition: { kind: "sacrificed" as const, filter: { subtype: landType } },
+          condition: { kind: "object-matches" as const, object: { paid: "sacrificed" as const }, filter: { subtype: landType } },
           then: { kind: "grant-keyword" as const, target: 0, keyword, duration: "end-of-turn" as const },
         })),
       },

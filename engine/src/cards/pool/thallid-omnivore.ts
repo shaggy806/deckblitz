@@ -20,7 +20,7 @@ export default defineCard({
           { kind: "modify-pt", target: "source", power: 2, toughness: 2, duration: "end-of-turn" },
           {
             kind: "conditional",
-            condition: { kind: "sacrificed", filter: { subtype: "Saproling" } },
+            condition: { kind: "object-matches", object: { paid: "sacrificed" }, filter: { subtype: "Saproling" } },
             then: { kind: "gain-life", amount: 2 },
           },
         ],

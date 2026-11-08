@@ -9,5 +9,5 @@ export default defineCard({
   types: ["instant"],
   text: "Destroy all Auras and Equipment attached to target creature.",
   targets: ["creature"],
-  effect: { kind: "destroy-all", filter: { subtypes: ["Aura", "Equipment"], attachedToTarget: 0 } },
+  effect: { kind: "destroy-all", filter: { subtypes: ["Aura", "Equipment"], attachedToObject: 0 } },
 });

@@ -20,7 +20,7 @@ export default defineCard({
     {
       cost: { mana: "{1}{U}", tap: false },
       targets: ["player"],
-      effect: { kind: "reveal-top", of: { ownerOfTarget: 0 }, then: { kind: "sequence", effects: [] } },
+      effect: { kind: "reveal-top", of: { ownerOf: 0 }, then: { kind: "sequence", effects: [] } },
       resolve: null,
       text: REVEAL_TEXT,
     },

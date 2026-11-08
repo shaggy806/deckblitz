@@ -37,7 +37,7 @@ export default defineCard({
           { kind: "remove-counter", target: "source", counter: "-2/-2", amount: 1 },
           {
             kind: "conditional",
-            condition: { kind: "sacrificed", filter: { subtype: "Thrull" } },
+            condition: { kind: "object-matches", object: { paid: "sacrificed" }, filter: { subtype: "Thrull" } },
             then: { kind: "add-counter", target: "source", counter: "+1/+0", amount: 1 },
           },
         ],

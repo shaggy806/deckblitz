@@ -27,7 +27,7 @@ export default defineCard({
         prompt: "Search your graveyard, hand, and/or library for a card with the same name as that spell?",
         effect: searchZonesAndOr(["graveyard", "hand", "library"], {
           kind: "search-library",
-          filter: { sameNameAsTriggerObject: true },
+          filter: { sameNameWith: "trigger-object" },
           destination: "battlefield",
           min: 0,
           max: 1,

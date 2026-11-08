@@ -1617,7 +1617,7 @@ export const partnerWithTrigger = (name: string): TriggeredAbility => ({
   // included), so declining neither searches nor shuffles.
   effect: {
     kind: "each-player-may",
-    who: { controllerOfTarget: 0 },
+    who: { controllerOf: 0 },
     prompt: `Search your library for a card named ${name}?`,
     effect: { kind: "search-library", filter: { name }, destination: "hand", min: 0, max: 1, reveal: true },
   },

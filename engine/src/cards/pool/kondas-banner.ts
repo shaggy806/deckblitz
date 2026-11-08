@@ -18,9 +18,9 @@ export default defineCard({
   activated: [equip("{2}")],
   static: [
     { affects: { scope: "self" }, attachOnlyTo: { type: "creature", supertype: "legendary" }, text: ONLY },
-    { affects: { scope: "filter", filter: { type: "creature", sharesColorWithHost: true } }, grantPt: [1, 1], text: COLOR },
+    { affects: { scope: "filter", filter: { type: "creature", sharesColorWith: "attached" } }, grantPt: [1, 1], text: COLOR },
     {
-      affects: { scope: "filter", filter: { type: "creature", sharesCreatureTypeWithHost: true } },
+      affects: { scope: "filter", filter: { type: "creature", sharesCreatureTypeWith: "attached" } },
       grantPt: [1, 1],
       text: TYPE,
     },

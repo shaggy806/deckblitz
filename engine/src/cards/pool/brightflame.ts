@@ -14,7 +14,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "damage-all", amount: "x", filter: { type: "creature", sharesColorWithTarget: 0 } },
+      { kind: "damage-all", amount: "x", filter: { type: "creature", sharesColorWith: 0 } },
       { kind: "gain-life", amount: { damageDealtThisWay: true } },
     ],
   },

@@ -34,7 +34,7 @@ export default defineCard({
           then: {
             kind: "conditional",
             condition: { kind: "target", index: 0, filter: { subtype: "Demon" } },
-            then: { kind: "damage", amount: { powerOf: 0 }, who: "each-opponent", from: { target: 0 } },
+            then: { kind: "damage", amount: { powerOf: 0 }, who: "each-opponent", from: 0 },
           },
         },
       },

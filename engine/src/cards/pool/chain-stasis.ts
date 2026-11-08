@@ -37,7 +37,7 @@ export default defineCard({
       },
       {
         kind: "each-player-may",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         options: [{ pay: "{2}{U}", text: "Pay {2}{U}" }],
         ifDid: {
           kind: "each-player-may",

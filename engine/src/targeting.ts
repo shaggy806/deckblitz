@@ -85,6 +85,7 @@ function targetFilterContext(forPlayer: PlayerId, source: TargetSource | undefin
   return {
     you: forPlayer,
     ...(source?.object !== undefined ? { source: source.object } : {}),
+    ...(source?.triggerObject !== undefined ? { triggerObject: source.triggerObject } : {}),
     ...(source?.amount !== undefined ? { amount: source.amount } : {}),
     ...(source?.x !== undefined ? { x: source.x } : {}),
     ...(source?.chooser !== undefined ? { chooser: source.chooser } : {}),
@@ -678,7 +679,8 @@ function isLegalTargetUncached(
   if (typeof spec === "object" && spec.kind === "opponent-compared") {
     const base = spec.comparedTo === "active-player" ? activePlayerOf(state) : forPlayer;
     if (!isLivingPlayer(state, ref) || ref.kind !== "player" || ref.player === base) return false;
-    return playerStat(state, registry, ref.player, spec.stat) - playerStat(state, registry, base, spec.stat) >= spec.by;
+    const lead = playerStat(state, registry, ref.player, spec.stat) - playerStat(state, registry, base, spec.stat);
+    return spec.fewer === true ? -lead >= spec.by : lead >= spec.by;
   }
   // A narrowed activated or triggered ability on the stack.
   if (typeof spec === "object" && spec.kind === "ability") {

@@ -18,7 +18,7 @@ export default defineCard({
     effect: {
       kind: "unless",
       chooser: { anyOf: "each-opponent" },
-      options: [{ doing: { kind: "draw", amount: 1, who: "source-controller" }, text: "Have them draw a card" }],
+      options: [{ doing: { kind: "draw", amount: 1, who: { controllerOf: "source" } }, text: "Have them draw a card" }],
       otherwise: { kind: "create-token", token: "Elemental Token (Research // Development)", count: 1 },
     },
   },

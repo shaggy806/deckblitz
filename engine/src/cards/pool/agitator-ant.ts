@@ -37,7 +37,7 @@ export default defineCard({
             kind: "for-each-voted",
             which: "voted",
             simultaneous: true,
-            effect: { kind: "add-counter", target: 0, counter: "+1/+1", amount: 2, by: { controllerOfTarget: 0 } },
+            effect: { kind: "add-counter", target: 0, counter: "+1/+1", amount: 2, by: { controllerOf: 0 } },
           },
           { kind: "goad", filter: { type: "creature", thisWay: "counters-put" } },
         ],

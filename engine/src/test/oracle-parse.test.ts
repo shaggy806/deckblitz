@@ -857,7 +857,7 @@ describe("the players a sentence names by another target, the Aura's host and th
   it("the Aura's host's controller, and the upkeep that's theirs", () => {
     const aura = "Enchantment — Aura";
     const gremlin = face(aura, "Enchant artifact\nAt the beginning of your end step, this Aura deals 2 damage to enchanted artifact's controller.");
-    expect(gremlin.triggered[0].effect).toEqual({ kind: "damage", amount: 2, who: "attached-controller" });
+    expect(gremlin.triggered[0].effect).toEqual({ kind: "damage", amount: 2, who: { controllerOf: "attached" } });
     const smart = face(aura, "Enchant creature\nAt the beginning of the upkeep of enchanted creature's controller, that player draws a card.");
     expect(smart.triggered[0].trigger).toEqual({ on: "step-begins", step: "upkeep", who: "attached" });
     expect(smart.triggered[0].effect).toEqual({ kind: "draw", amount: 1, who: "active-player" });
@@ -1395,9 +1395,9 @@ describe("costs and triggers", () => {
         { kind: "exile", target: 0 },
         {
           kind: "search-library",
-          whose: { controllerOfTarget: 0 },
+          whose: { controllerOf: 0 },
           zones: "graveyard-hand-library",
-          filter: { sameNameAsTarget: 0 },
+          filter: { sameNameWith: 0 },
           destination: "exile",
           all: true,
           min: 0,
@@ -1437,7 +1437,7 @@ describe("costs and triggers", () => {
     });
     expect(truth.complete).toBe(true);
     expect(truth.targets).toEqual(["nonland-permanent"]);
-    expect(truth.effect).toEqual({ kind: "return-to-hand-all", filter: { sameNameAsTarget: 0 } });
+    expect(truth.effect).toEqual({ kind: "return-to-hand-all", filter: { sameNameWith: 0 } });
     const decay = parseFace({
       name: "Echoing Decay",
       type_line: "Instant",
@@ -1445,7 +1445,7 @@ describe("costs and triggers", () => {
     });
     expect(decay.effect).toEqual({
       kind: "modify-pt-all",
-      filter: { type: "creature", sameNameAsTarget: 0 },
+      filter: { type: "creature", sameNameWith: 0 },
       power: -2,
       toughness: -2,
       duration: "end-of-turn",
@@ -1455,7 +1455,7 @@ describe("costs and triggers", () => {
       type_line: "Sorcery",
       oracle_text: "Destroy target artifact and all other artifacts with the same name as that artifact.",
     });
-    expect(ruin.effect).toEqual({ kind: "destroy-all", filter: { type: "artifact", sameNameAsTarget: 0 } });
+    expect(ruin.effect).toEqual({ kind: "destroy-all", filter: { type: "artifact", sameNameWith: 0 } });
   });
 
   it("reads radiance's \"target X and each other X that shares a color with it\" as one -all effect", () => {
@@ -1466,13 +1466,13 @@ describe("costs and triggers", () => {
     });
     expect(trace.complete).toBe(true);
     expect(trace.targets).toEqual(["enchantment"]);
-    expect(trace.effect).toEqual({ kind: "destroy-all", filter: { type: "enchantment", sharesColorWithTarget: 0 } });
+    expect(trace.effect).toEqual({ kind: "destroy-all", filter: { type: "enchantment", sharesColorWith: 0 } });
     const beam = parseFace({
       name: "Cleansing Beam",
       type_line: "Instant",
       oracle_text: "Radiance — Cleansing Beam deals 2 damage to target creature and each other creature that shares a color with it.",
     });
-    expect(beam.effect).toEqual({ kind: "damage-all", amount: 2, filter: { type: "creature", sharesColorWithTarget: 0 } });
+    expect(beam.effect).toEqual({ kind: "damage-all", amount: 2, filter: { type: "creature", sharesColorWith: 0 } });
     const siren = parseFace({
       name: "Wojek Siren",
       type_line: "Instant",
@@ -1480,7 +1480,7 @@ describe("costs and triggers", () => {
     });
     expect(siren.effect).toEqual({
       kind: "modify-pt-all",
-      filter: { type: "creature", sharesColorWithTarget: 0 },
+      filter: { type: "creature", sharesColorWith: 0 },
       power: 1,
       toughness: 1,
       duration: "end-of-turn",
@@ -1533,7 +1533,7 @@ describe("costs and triggers", () => {
       kind: "sequence",
       effects: [
         { kind: "destroy", target: 0 },
-        { kind: "damage", amount: { manaValueOf: 0 }, target: "source", from: { target: 0 } },
+        { kind: "damage", amount: { manaValueOf: 0 }, target: "source", from: 0 },
       ],
     });
   });
@@ -1577,7 +1577,7 @@ describe("costs and triggers", () => {
         "Whenever a nontoken creature you control dies, you may search your library for a card with the same name as that creature, reveal it, put it into your hand, then shuffle.",
     });
     expect(remembrance.complete).toBe(true);
-    expect(remembrance.triggered[0].effect.effect.filter).toEqual({ sameNameAsTriggerObject: true });
+    expect(remembrance.triggered[0].effect.effect.filter).toEqual({ sameNameWith: "trigger-object" });
 
     const succession = parseFace({
       name: "Verdant Succession",
@@ -1602,7 +1602,7 @@ describe("costs and triggers", () => {
     });
     expect(eye.triggered[1].effect).toEqual({
       kind: "destroy-all",
-      filter: { sameNameAsTriggerObject: true },
+      filter: { sameNameWith: "trigger-object" },
       exceptTriggerObject: true,
       cantBeRegenerated: true,
     });
@@ -1924,7 +1924,7 @@ describe("costs and triggers", () => {
     expect(parseTrigger("When ~ enters")).toEqual([{ on: "enters-battlefield", who: "self" }]);
     expect(parseTrigger("Whenever ~ enters or attacks")).toHaveLength(2);
     expect(parseTrigger("Whenever you cast a spell that has convoke")).toEqual([
-      { on: "cast-spell", who: "you", filter: { hasConvoke: true } },
+      { on: "cast-spell", who: "you", filter: { hasKeyword: "convoke" } },
     ]);
     expect(parseTrigger("Whenever ~ deals combat damage to a player or battle")).toEqual([
       { on: "deals-combat-damage-to-player", who: "self", orBattle: true },
@@ -4942,7 +4942,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(parseEffect("~'s controller loses 2 life.", { targets: [] }).effect).toEqual({
       kind: "lose-life",
       amount: 2,
-      who: "source-controller",
+      who: { controllerOf: "source" },
     });
   });
 
@@ -5070,7 +5070,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
   });
 
   it("its controller draws, discards or gets a poison counter (effect:player-scope-extensions)", () => {
-    const who = { controllerOfTarget: 0 };
+    const who = { controllerOf: 0 };
     const strike = face("Destroy target creature. Its controller discards a card.", "Sorcery");
     expect(strike.effect).toEqual({
       kind: "sequence",
@@ -7152,7 +7152,7 @@ describe("damage dealt by another object than the source", () => {
       kind: "sequence",
       effects: [
         { kind: "exile", target: 0 },
-        { kind: "damage", amount: { powerOf: 0 }, target: "source", from: { target: 0 } },
+        { kind: "damage", amount: { powerOf: 0 }, target: "source", from: 0 },
       ],
     });
   });
@@ -8206,7 +8206,7 @@ describe("the card discarded to pay a cost", () => {
       kind: "sequence",
       effects: [
         { kind: "draw", amount: 1 },
-        { kind: "conditional", condition: { kind: "discarded", filter: { type: "creature" } }, then: { kind: "amass", amount: 1, creatureType: "Orc" } },
+        { kind: "conditional", condition: { kind: "object-matches", object: { paid: "discarded" }, filter: { type: "creature" } }, then: { kind: "amass", amount: 1, creatureType: "Orc" } },
       ],
     });
     const grab = face(
@@ -8217,7 +8217,7 @@ describe("the card discarded to pay a cost", () => {
     expect(grab.complete).toBe(true);
     expect(grab.effect.effects[1]).toEqual({
       kind: "conditional",
-      condition: { kind: "discarded", filter: { notTypes: ["land"] } },
+      condition: { kind: "object-matches", object: { paid: "discarded" }, filter: { notTypes: ["land"] } },
       then: { kind: "damage", amount: 2, who: "each-opponent" },
     });
   });
@@ -8884,7 +8884,7 @@ describe("what's attached to a target or a player", () => {
       kind: "sequence",
       simultaneous: true,
       effects: [
-        { kind: "return-to-hand-all", filter: { subtype: "Aura", attachedToTarget: 0 } },
+        { kind: "return-to-hand-all", filter: { subtype: "Aura", attachedToObject: 0 } },
         { kind: "return-to-hand", target: 0 },
       ],
     });
@@ -8893,7 +8893,7 @@ describe("what's attached to a target or a player", () => {
       kind: "sequence",
       simultaneous: true,
       effects: [
-        { kind: "destroy-all", filter: { subtype: "Equipment", attachedToTarget: 0 } },
+        { kind: "destroy-all", filter: { subtype: "Equipment", attachedToObject: 0 } },
         { kind: "destroy", target: 0 },
       ],
     });
@@ -8909,12 +8909,12 @@ describe("what's attached to a target or a player", () => {
       kind: "sequence",
       effects: [
         { kind: "damage", amount: 5, target: 0 },
-        { kind: "destroy-all", filter: { subtype: "Equipment", attachedToTarget: 0 } },
+        { kind: "destroy-all", filter: { subtype: "Equipment", attachedToObject: 0 } },
       ],
     });
     expect(parseSentence("Destroy all Auras and Equipment attached to target creature.", ctx())).toEqual({
       kind: "destroy-all",
-      filter: { subtypes: ["Aura", "Equipment"], attachedToTarget: 0 },
+      filter: { subtypes: ["Aura", "Equipment"], attachedToObject: 0 },
     });
     expect(parseSentence("Destroy all Curses attached to you.", ctx())).toEqual({
       kind: "destroy-all",
@@ -9083,12 +9083,12 @@ describe("a player named as the owner of a target or trigger object", () => {
       kind: "sequence",
       effects: [
         { kind: "destroy", target: 0 },
-        { kind: "gain-life", amount: 4, who: { ownerOfTarget: 0 } },
+        { kind: "gain-life", amount: 4, who: { ownerOf: 0 } },
       ],
     });
     const recoil = face("Recoil", "Instant", "Return target permanent to its owner's hand. Then that player discards a card.");
     expect(recoil.complete).toBe(true);
-    expect(recoil.effect.effects[1]).toEqual({ kind: "discard", target: { ownerOfTarget: 0 }, amount: 1 });
+    expect(recoil.effect.effects[1]).toEqual({ kind: "discard", target: { ownerOf: 0 }, amount: 1 });
   });
 
   it("doesn't read 'that player' after a move that names no owner", () => {
@@ -9102,7 +9102,7 @@ describe("a player named as the owner of a target or trigger object", () => {
       "Legendary Creature — Phyrexian Zombie",
       "{X}{B}: Put target artifact or creature card with mana value X from an opponent's graveyard onto the battlefield tapped under your control. Then that player mills X cards.",
     );
-    expect(geth.activated[0].effect.effects[1]).toEqual({ kind: "mill", target: { ownerOfTarget: 0 }, amount: "x" });
+    expect(geth.activated[0].effect.effects[1]).toEqual({ kind: "mill", target: { ownerOf: 0 }, amount: "x" });
     expect(geth.activated[0].targets[0].filter.manaValue).toEqual({ op: "eq", n: "x" });
     const nurgle = face(
       "Nurgle's Conscription",
@@ -9110,7 +9110,7 @@ describe("a player named as the owner of a target or trigger object", () => {
       "Put target creature card from an opponent's graveyard onto the battlefield tapped under your control, then exile that player's graveyard.",
     );
     expect(nurgle.complete).toBe(true);
-    expect(nurgle.effect.effects[1]).toEqual({ kind: "exile-graveyard", target: { ownerOfTarget: 0 } });
+    expect(nurgle.effect.effects[1]).toEqual({ kind: "exile-graveyard", target: { ownerOf: 0 } });
   });
 
   it("reads assimilate's keyword action, its reminder text gone (Star Trek)", () => {
@@ -9138,17 +9138,17 @@ describe("a player named as the owner of a target or trigger object", () => {
       "Enchantment — Aura",
       "Enchant creature\nAt the beginning of your upkeep, enchanted creature deals 1 damage to its owner.",
     );
-    expect(enslave.triggered[0].effect).toEqual({ kind: "damage", amount: 1, who: "attached-owner", from: "attached" });
+    expect(enslave.triggered[0].effect).toEqual({ kind: "damage", amount: 1, who: { ownerOf: "attached" }, from: "attached" });
     const oblation = face("Oblation", "Instant", "The owner of target nonland permanent shuffles it into their library, then draws two cards.");
     expect(oblation.complete).toBe(true);
-    expect(oblation.effect.effects[1]).toEqual({ kind: "draw", amount: 2, who: { ownerOfTarget: 0 } });
+    expect(oblation.effect.effects[1]).toEqual({ kind: "draw", amount: 2, who: { ownerOf: 0 } });
   });
 
   it("reads the triggers 'returned to a player's hand' and 'into a player's graveyard', with that player their owner", () => {
     const devotion = face("Warped Devotion", "Enchantment", "Whenever a permanent is returned to a player's hand, that player discards a card.");
     expect(devotion.complete).toBe(true);
     expect(devotion.triggered[0].trigger).toEqual({ on: "leaves-battlefield", who: "any", to: ["hand"] });
-    expect(devotion.triggered[0].effect).toEqual({ kind: "discard", target: "trigger-owner", amount: 1 });
+    expect(devotion.triggered[0].effect).toEqual({ kind: "discard", target: { ownerOf: "trigger-object" }, amount: 1 });
     const liability = face(
       "Liability",
       "Enchantment",
@@ -9156,7 +9156,7 @@ describe("a player named as the owner of a target or trigger object", () => {
     );
     expect(liability.complete).toBe(true);
     expect(liability.triggered[0].trigger).toEqual({ on: "leaves-battlefield", who: "any", filter: { token: false }, to: ["graveyard"] });
-    expect(liability.triggered[0].effect).toEqual({ kind: "lose-life", amount: 1, who: "trigger-owner" });
+    expect(liability.triggered[0].effect).toEqual({ kind: "lose-life", amount: 1, who: { ownerOf: "trigger-object" } });
   });
 });
 
@@ -9783,7 +9783,7 @@ describe("an unless's payments", () => {
       kind: "unless",
       chooser: 0,
       options: [{ sacrificeThat: 0, text: "Sacrifice it" }],
-      otherwise: { kind: "damage", amount: { manaValueOf: 0 }, toControllerOfTarget: 0, from: { target: 0 } },
+      otherwise: { kind: "damage", amount: { manaValueOf: 0 }, toControllerOfTarget: 0, from: 0 },
     });
   });
 });
@@ -11155,7 +11155,7 @@ describe("a number of yours against another player's (player-compare)", () => {
     expect(dross.effect.effects[1].condition).toEqual({ kind: "player-compare", stat: "hand", compare: "fewer", than: { target: 0 } });
     expect(dross.complete).toBe(true);
     const forge = face("Instant", "Thing deals 4 damage to target player or planeswalker. Then if that player or that planeswalker's controller has more life than you, return Thing to its owner's hand.");
-    expect(forge.effect.effects[1].condition).toEqual({ kind: "player-compare", stat: "life", compare: "fewer", than: { controllerOfTarget: 0 } });
+    expect(forge.effect.effects[1].condition).toEqual({ kind: "player-compare", stat: "life", compare: "fewer", than: { controllerOf: 0 } });
     expect(forge.complete).toBe(true);
   });
 
@@ -11316,7 +11316,7 @@ describe("a number a player chooses", () => {
       simultaneous: true,
       effects: [
         { kind: "damage", amount: "x", target: 0 },
-        { kind: "damage", amount: { sum: [5, { product: ["x", -1] }] }, who: { controllerOfTarget: 0 } },
+        { kind: "damage", amount: { sum: [5, { product: ["x", -1] }] }, who: { controllerOf: 0 } },
       ],
     });
   });
@@ -11719,8 +11719,8 @@ describe("references to the source's host and to attachments", () => {
       { tokenFor: (d: string) => d },
     );
     expect(banner.static).toMatchObject([
-      { affects: { scope: "filter", filter: { type: "creature", sharesColorWithHost: true } }, grantPt: [1, 1] },
-      { affects: { scope: "filter", filter: { type: "creature", sharesCreatureTypeWithHost: true } }, grantPt: [1, 1] },
+      { affects: { scope: "filter", filter: { type: "creature", sharesColorWith: "attached" } }, grantPt: [1, 1] },
+      { affects: { scope: "filter", filter: { type: "creature", sharesCreatureTypeWith: "attached" } }, grantPt: [1, 1] },
     ]);
     expect(
       aura("Enchant creature\nAs long as another Aura is attached to enchanted creature, it has first strike and lifelink.")
@@ -11771,7 +11771,7 @@ describe("a target's namesakes off the battlefield", () => {
     expect(echoing.targets).toEqual([{ kind: "card-in-graveyard", whose: "you", filter: { type: "creature" } }]);
     expect(echoing.effect).toEqual({
       kind: "return-from-graveyard",
-      filter: { sameNameAsTarget: 0 },
+      filter: { sameNameWith: 0 },
       destination: "hand",
       count: "all",
     });
@@ -11791,7 +11791,7 @@ describe("a target's namesakes off the battlefield", () => {
     expect(salvage.complete).toBe(true);
     expect(salvage.effect.effects[1]).toEqual({
       kind: "search-library",
-      filter: { sameNameAsTarget: 0 },
+      filter: { sameNameWith: 0 },
       destination: "hand",
       reveal: true,
       min: 0,
@@ -11801,7 +11801,7 @@ describe("a target's namesakes off the battlefield", () => {
       "Search your library for a card with the same name as target nontoken creature, put that card onto the battlefield, then shuffle.",
       ctx(),
     );
-    expect(mask.effect.filter).toEqual({ sameNameAsTarget: 0 });
+    expect(mask.effect.filter).toEqual({ sameNameWith: 0 });
   });
 
   it("in a revealed hand and graveyard", () => {
@@ -11843,7 +11843,7 @@ describe("a target's namesakes off the battlefield", () => {
     expect(ashes.complete).toBe(true);
     expect(ashes.effect).toEqual({
       kind: "exile-all",
-      filter: { controlledBy: "you", sameNameAsTarget: 0, sameNameTokensOnly: true },
+      filter: { controlledBy: "you", sameNameWith: 0, sameNameTokensOnly: true },
       controlledByTarget: 0,
     });
   });
@@ -11918,7 +11918,7 @@ describe("a search of your own zones", () => {
       "You may search your graveyard, hand, and/or library for a card with the same name as that spell and put it onto the battlefield. If you search your library this way, shuffle.",
       ctx(),
     );
-    expect(mishra.effect.effect.effects[0].modes[0].effect.filter).toEqual({ sameNameAsTriggerObject: true });
+    expect(mishra.effect.effect.effects[0].modes[0].effect.filter).toEqual({ sameNameWith: "trigger-object" });
   });
 
   it("reads all three zones with no choice, and Doomsday's five", () => {
@@ -12790,7 +12790,7 @@ describe("a may another player answers", () => {
         { kind: "destroy", target: 0 },
         {
           kind: "each-player-may",
-          who: { controllerOfTarget: 0 },
+          who: { controllerOf: 0 },
           prompt: "Search your library for a basic land card?",
           effect: {
             kind: "search-library",
@@ -12814,7 +12814,7 @@ describe("a may another player answers", () => {
         kind: "sequence",
         effects: [
           { kind: "sacrifice-target", target: 0, byItsController: true },
-          { kind: "each-player-may", who: { controllerOfTarget: 0 } },
+          { kind: "each-player-may", who: { controllerOf: 0 } },
         ],
       },
     });
@@ -13003,7 +13003,7 @@ describe("one target slot over several kinds of object", () => {
         kind: "one-of",
         of: [
           { kind: "card-in-graveyard", whose: "you", filter: { typesAnyOf: ["instant", "sorcery"] } },
-          { kind: "card-in-exile", whose: "you", filter: { hasFlashback: true } },
+          { kind: "card-in-exile", whose: "you", filter: { hasKeyword: "flashback" } },
         ],
       },
     ]);
@@ -13041,7 +13041,7 @@ describe("a card in exile, targeted", () => {
   it("reads an exiled card with flashback you own returned to your hand", () => {
     const runic = spell("Return target exiled card with flashback you own to your hand.");
     expect(runic.complete).toBe(true);
-    expect(runic.targets).toEqual([{ kind: "card-in-exile", whose: "you", filter: { hasFlashback: true } }]);
+    expect(runic.targets).toEqual([{ kind: "card-in-exile", whose: "you", filter: { hasKeyword: "flashback" } }]);
     expect(runic.effect).toEqual({ kind: "return-to-hand", target: 0, from: "exile" });
   });
   it("reads a creature card with mana value X exiled with this creature", () => {
@@ -13243,7 +13243,7 @@ describe("a tap cost on the host, and the creature a cost tapped", () => {
       kind: "sequence",
       effects: [
         { kind: "exile", target: 0 },
-        { kind: "add-counter", target: "tapped", counter: "+1/+1", amount: 1 },
+        { kind: "add-counter", target: { paid: "tapped" }, counter: "+1/+1", amount: 1 },
       ],
     });
   });
@@ -13632,7 +13632,7 @@ describe("oracle-parse: Suspend X and a suspend cost paid to cast", () => {
     expect(card.todo).toEqual([]);
     expect(card.activated[0]).toMatchObject({
       cost: { mana: null, tap: true },
-      effect: { kind: "cast-now", from: "hand", spell: { hasSuspend: true }, suspendCost: true },
+      effect: { kind: "cast-now", from: "hand", spell: { hasKeyword: "suspend" }, suspendCost: true },
       sorcerySpeed: true,
     });
   });
@@ -14072,7 +14072,7 @@ describe("how one player's state compares with another's", () => {
   it("that spell's controller", () => {
     expect(read("Instant", "Counter target spell if you control more creatures than that spell's controller.").effect).toEqual({
       kind: "conditional",
-      condition: { kind: "player-compare", stat: { controls: { type: "creature" } }, compare: "more", than: { controllerOfTarget: 0 } },
+      condition: { kind: "player-compare", stat: { controls: { type: "creature" } }, compare: "more", than: { controllerOf: 0 } },
       then: { kind: "counter", target: 0 },
     });
   });
@@ -14091,7 +14091,7 @@ describe("how one player's state compares with another's", () => {
     const killer = read("Creature", "When this creature enters, target creature an opponent controls gets -2/-2 until end of turn if that opponent controls no other creatures.");
     expect(killer.triggered[0].effect).toMatchObject({
       kind: "conditional",
-      condition: { kind: "of-player", player: { controllerOfTarget: 0 }, condition: { kind: "not", of: { excludeTarget: 0 } } },
+      condition: { kind: "of-player", player: { controllerOf: 0 }, condition: { kind: "not", of: { excludeTarget: 0 } } },
       then: { kind: "modify-pt", target: 0, power: -2 },
     });
   });
@@ -14514,10 +14514,10 @@ describe("what would go to a graveyard going elsewhere", () => {
     ).toEqual({ event: "would-discard", causedBy: "opponent", reveal: true });
   });
   it("reads a card that wasn't cycled exiled, and cycling spells cast from a graveyard", () => {
-    expect(statics("You may cast spells that have a cycling ability from your graveyard.").castFromGraveyard).toEqual({ filter: { hasCycling: true } });
+    expect(statics("You may cast spells that have a cycling ability from your graveyard.").castFromGraveyard).toEqual({ filter: { hasKeyword: "cycling" } });
     expect(
       statics("If a card that has a cycling ability would be put into your graveyard from anywhere and it wasn't cycled, exile it instead.").replacement,
-    ).toEqual({ event: "would-be-put-into-graveyard", instead: "exile", notCycled: true, filter: { ownedBy: "you", token: false, hasCycling: true } });
+    ).toEqual({ event: "would-be-put-into-graveyard", instead: "exile", notCycled: true, filter: { ownedBy: "you", token: false, hasKeyword: "cycling" } });
   });
   it("reads a creature's own would die, on top of the library", () => {
     const zombie = parseFace({
@@ -16613,7 +16613,7 @@ describe("a reveal for a card sharing a card type with the permanent targeted", 
         { kind: "destroy", target: 0 },
         {
           kind: "reveal-until",
-          whose: { controllerOfTarget: 0 },
+          whose: { controllerOf: 0 },
           filter: { typesAnyOf: ["artifact", "creature", "enchantment", "land", "planeswalker", "battle"], sharesCardTypeWith: 0 },
           put: "battlefield",
           rest: "bottom-random",

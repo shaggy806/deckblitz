@@ -27,7 +27,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "lose-life", amount: 2, who: "trigger-owner" },
+          { kind: "lose-life", amount: 2, who: { ownerOf: "trigger-object" } },
           { kind: "gain-life", amount: 2 },
         ],
       },

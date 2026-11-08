@@ -8,7 +8,7 @@ import { defineCard } from "../define.js";
 
 // X is counted as it resolves: cards with a cycling ability (typecycling
 // included, rule 702.29e) in your graveyard.
-const X = { countInGraveyard: { hasCycling: true, ownedBy: "you" } } as const;
+const X = { countInGraveyard: { hasKeyword: "cycling", ownedBy: "you" } } as const;
 
 export default defineCard({
   name: "Zenith Flare",

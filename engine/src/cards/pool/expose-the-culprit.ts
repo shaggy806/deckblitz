@@ -5,7 +5,7 @@ import { defineCard } from "../define.js";
 const TURN_UP = "Turn target face-down creature face up.";
 const CLOAK =
   "Exile any number of face-up creatures you control with disguise in a face-down pile, shuffle that pile, then cloak them. (To cloak a card, put it onto the battlefield face down as a 2/2 creature with ward {2}. Turn it face up any time for its mana cost if it's a creature card.)";
-const WITH_DISGUISE = { type: "creature", controlledBy: "you", faceDown: false, hasDisguise: true } as const;
+const WITH_DISGUISE = { type: "creature", controlledBy: "you", faceDown: false, hasKeyword: "disguise" } as const;
 
 export default defineCard({
   name: "Expose the Culprit",

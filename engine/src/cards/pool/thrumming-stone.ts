@@ -46,7 +46,7 @@ export default defineCard({
               effect: {
                 kind: "cast-now",
                 from: { libraryTop: 4, reveal: true },
-                spell: { sameNameAsTriggerObject: true },
+                spell: { sameNameWith: "trigger-object" },
                 free: true,
                 repeat: true,
                 rest: "bottom-any-order",

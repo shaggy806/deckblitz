@@ -20,7 +20,7 @@ export default defineCard({
           { kind: "put-on-bottom-of-library", target: 0 },
           {
             kind: "reveal-until",
-            whose: { controllerOfTarget: 0 },
+            whose: { controllerOf: 0 },
             filter: { type: "creature" },
             put: "battlefield",
             rest: "bottom-any-order",

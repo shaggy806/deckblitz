@@ -58,7 +58,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "as-player",
-        who: "source-owner",
+        who: { ownerOf: "source" },
         effect: {
           kind: "create-token",
           token: "Soldier Token",

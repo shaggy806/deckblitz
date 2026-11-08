@@ -15,7 +15,7 @@ export default defineCard({
     {
       trigger: { on: "step-begins", step: "end", who: "you" },
       targets: [],
-      effect: { kind: "damage", amount: 2, who: "attached-controller" },
+      effect: { kind: "damage", amount: 2, who: { controllerOf: "attached" } },
       resolve: null,
       text: END_STEP,
     },

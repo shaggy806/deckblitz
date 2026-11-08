@@ -13,7 +13,7 @@ export default defineCard({
   targets: [{ kind: "permanent", filter: { type: "creature", token: false } }],
   effect: {
     kind: "search-library",
-    filter: { sameNameAsTarget: 0 },
+    filter: { sameNameWith: 0 },
     destination: "battlefield",
     min: 0,
     max: 1,

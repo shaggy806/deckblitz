@@ -19,7 +19,7 @@ export default defineCard({
         condition: { kind: "target", index: 0, filter: { supertype: "legendary" } },
         then: {
           kind: "as-player",
-          who: { controllerOfTarget: 0 },
+          who: { controllerOf: 0 },
           effect: { kind: "sacrifice", who: "you", filter: { type: "land" }, count: 1, exceptTarget: 0 },
         },
       },

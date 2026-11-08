@@ -18,7 +18,7 @@ export default defineCard({
     target: 0,
     amount: {
       countOf: { type: "land", notSupertype: "basic", controlledBy: "you" },
-      forPlayer: { controllerOfTarget: 0 },
+      forPlayer: { controllerOf: 0 },
     },
   },
 });

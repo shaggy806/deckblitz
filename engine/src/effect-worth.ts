@@ -34,11 +34,11 @@ import type { CardRegistry } from "./cards/card-registry.js";
 import type { CardDefinition } from "./cards/define.js";
 import { computeCharacteristics } from "./characteristics.js";
 import { polarityBias } from "./deck-bias.js";
-import type { EffectAmount, EffectSpec, EffectTargetRef, PlayerScope, ProtectionQualities } from "./effects.js";
+import type { EffectAmount, EffectSpec, ObjectRef, PlayerScope, ProtectionQualities } from "./effects.js";
 import { manaValueOfObject } from "./filter.js";
 import { manaValue, parseManaCost } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
-import type { GameState } from "./state.js";
+import type { GameObject, GameState } from "./state.js";
 import { activePlayerOf } from "./state.js";
 import type { ResolvedTargets } from "./target.js";
 import { sideOf, slotStrengths } from "./target-polarity.js";
@@ -101,9 +101,48 @@ function opponentsOf(state: GameState, player: PlayerId): PlayerId[] {
   return state.turnOrder.filter((p) => p !== player && !state.players[p].hasLost);
 }
 
+/** The object a ref names as things stand here, for the few refs a look
+ * ahead can follow: `undefined` otherwise. A Curse's host is a player, which
+ * this can't answer. */
+function refObjectNow(ref: ObjectRef, ctx: WorthContext): GameObject | undefined {
+  const { state } = ctx;
+  if (typeof ref === "number") {
+    const slot = ctx.targets[ref];
+    return slot?.kind === "object" ? state.objects[slot.object] : undefined;
+  }
+  if (ref === "source") return ctx.source !== undefined ? state.objects[ctx.source] : undefined;
+  if (ref === "trigger-object") return ctx.triggerObject !== undefined ? state.objects[ctx.triggerObject] : undefined;
+  if (ref === "attached") {
+    const on = ctx.source !== undefined ? state.objects[ctx.source] : undefined;
+    return on?.attachedTo !== null && on?.attachedTo !== undefined ? state.objects[on.attachedTo] : undefined;
+  }
+  if (typeof ref === "object" && "hostOf" in ref) {
+    const inner = refObjectNow(ref.hostOf, ctx);
+    return inner?.attachedTo !== null && inner?.attachedTo !== undefined ? state.objects[inner.attachedTo] : undefined;
+  }
+  return undefined;
+}
+
 /** The players a scope reaches, or `null` when it can't be told here. */
 function playersIn(scope: PlayerScope, ctx: WorthContext): readonly PlayerId[] | null {
   const { state, controller } = ctx;
+  // A ref made of accessors: the object it reads as things stand, or the
+  // player in a slot. Reads like these are all a look ahead has.
+  if (typeof scope === "object") {
+    if ("otherThan" in scope) {
+      const other = playersIn(scope.otherThan, ctx);
+      return other === null ? null : opponentsOf(state, other[0] ?? controller).concat(other[0] === undefined || other[0] === controller ? [] : [controller]);
+    }
+    if ("target" in scope) {
+      const slot = ctx.targets[scope.target];
+      return slot?.kind === "player" ? [slot.player] : null;
+    }
+    const of = "controllerOf" in scope ? scope.controllerOf : "ownerOf" in scope ? scope.ownerOf : scope.defendingPlayerOf;
+    if ("defendingPlayerOf" in scope) return null;
+    const object = refObjectNow(of, ctx);
+    if (object === undefined) return null;
+    return ["controllerOf" in scope ? object.controller : object.owner];
+  }
   switch (scope) {
     case "you":
       return [controller];
@@ -131,10 +170,6 @@ function playersIn(scope: PlayerScope, ctx: WorthContext): readonly PlayerId[] |
       if (at < 0 || players.length < 2) return [];
       return [players[(at + (scope === "player-to-your-left" ? 1 : players.length - 1)) % players.length]];
     }
-    case "source-controller": {
-      const held = ctx.source !== undefined ? state.objects[ctx.source]?.controller : undefined;
-      return held !== undefined ? [held] : null;
-    }
     case "you-and-opponents-attacking-trigger-player":
       // Who'll be attacking isn't known until the attack: the controller's
       // share is the part that's ours for sure.
@@ -146,16 +181,6 @@ function playersIn(scope: PlayerScope, ctx: WorthContext): readonly PlayerId[] |
     case "trigger-controller": {
       const object = ctx.triggerObject !== undefined ? state.objects[ctx.triggerObject] : undefined;
       return object !== undefined ? [object.controller] : null;
-    }
-    case "trigger-owner": {
-      const object = ctx.triggerObject !== undefined ? state.objects[ctx.triggerObject] : undefined;
-      return object !== undefined ? [object.owner] : null;
-    }
-    case "attached-controller": {
-      const on = ctx.source !== undefined ? state.objects[ctx.source] : undefined;
-      if (on?.attachedToPlayer !== undefined) return [on.attachedToPlayer];
-      const host = on?.attachedTo !== null && on?.attachedTo !== undefined ? state.objects[on.attachedTo] : undefined;
-      return host !== undefined ? [host.controller] : null;
     }
     case "opponents-of-trigger-controller": {
       const object = ctx.triggerObject !== undefined ? state.objects[ctx.triggerObject] : undefined;
@@ -196,7 +221,7 @@ function lifeLossTo(players: readonly PlayerId[] | null, amount: number, ctx: Wo
 /** The permanent a `"source"`/`"trigger-object"`/`"attached"`/`"chosen"`
  * reference names — `"attached"` as the source is attached now, `"chosen"`
  * the source's chosen permanent. */
-function objectRef(ref: EffectTargetRef, ctx: WorthContext): ObjectId | undefined {
+function objectRef(ref: ObjectRef, ctx: WorthContext): ObjectId | undefined {
   if (ref === "source") return ctx.source;
   if (ref === "trigger-object") return ctx.triggerObject;
   if (ref === "attached") {
@@ -212,7 +237,7 @@ function objectRef(ref: EffectTargetRef, ctx: WorthContext): ObjectId | undefine
 /** Something good (`worth` > 0) or bad done to a permanent named by
  * `"source"`/`"trigger-object"`, counted for whoever controls it. Numbered
  * slots are the targets, already counted. */
-function onObjectRef(ref: EffectTargetRef, worth: number, ctx: WorthContext): number {
+function onObjectRef(ref: ObjectRef, worth: number, ctx: WorthContext): number {
   const id = objectRef(ref, ctx);
   const object = id !== undefined ? ctx.state.objects[id] : undefined;
   if (object === undefined) return 0;
@@ -264,7 +289,7 @@ function targetsWorth(effect: EffectSpec, ctx: WorthContext): number {
  * of your choice" by: every colour is the same help to the slot.
  */
 function protectionWorth(
-  target: EffectTargetRef | undefined,
+  target: ObjectRef | undefined,
   from: ProtectionQualities,
   ctx: WorthContext,
   /** Hexproof from a quality (`asHexproof`) stops only the targeting. */
@@ -347,7 +372,6 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
       return lifeLossTo(playersIn(effect.who ?? "you", ctx), sizeHere(effect.amount, 2, ctx), ctx);
     case "damage":
       if (effect.target !== undefined || effect.who === undefined || typeof effect.who === "object") return 0;
-      if (effect.who === "attached-owner") return 0;
       return lifeLossTo(playersIn(effect.who, ctx), sizeHere(effect.amount, 2, ctx), ctx);
     case "discard":
       if (typeof effect.target !== "string") return 0;
@@ -369,9 +393,7 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
       // 701.68a), and what your own blight's `then` does with the creature.
       // "Target opponent blights 2": the player in that slot.
       const who = effect.who ?? "you";
-      const slot = typeof who === "object" ? ctx.targets[who.target] : undefined;
-      const players =
-        typeof who !== "object" ? playersIn(who, ctx) : slot?.kind === "player" ? [slot.player] : null;
+      const players = playersIn(who, ctx);
       return (
         onPlayers(players, -effect.amount, ctx) +
         (who === "you" && effect.then !== undefined ? untargetedWorth(effect.then, ctx) : 0)

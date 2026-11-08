@@ -1,7 +1,7 @@
 /**
  * `damage`'s `target: "source"`: untargeted damage to the ability's own source, "this creature
  * deals 3 damage to itself" (Psionic Entity, Psionic Sliver, Goblin Bangchuckers), or dealt to it
- * by something else (Goblin Tinkerer, `from: { target: 0 }`).
+ * by something else (Goblin Tinkerer, `from: 0`).
  */
 import { describe, expect, it } from "vitest";
 

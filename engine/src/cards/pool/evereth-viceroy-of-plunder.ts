@@ -33,7 +33,7 @@ export default defineCard({
           { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
           {
             kind: "conditional",
-            condition: { kind: "sacrificed", filter: { subtype: "Treasure" } },
+            condition: { kind: "object-matches", object: { paid: "sacrificed" }, filter: { subtype: "Treasure" } },
             then: { kind: "grant-keyword", target: "source", keyword: "lifelink", duration: "end-of-turn" },
           },
         ],

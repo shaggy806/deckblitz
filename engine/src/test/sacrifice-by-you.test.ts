@@ -72,7 +72,7 @@ describe("sacrifice-target — the effect's controller sacrifices", () => {
       A,
       {
         kind: "each-player-may",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         prompt: "Sacrifice it?",
         effect: { kind: "sacrifice-target", target: 0 },
         ifDidnt: { kind: "damage", amount: 5, who: "that-player" },

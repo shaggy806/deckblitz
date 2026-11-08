@@ -182,6 +182,7 @@ import _poolConvalescence from "../pool/convalescence.js";
 import _poolConvolute from "../pool/convolute.js";
 import _poolConvulsingLicid from "../pool/convulsing-licid.js";
 import _poolCoralEel from "../pool/coral-eel.js";
+import _poolCorrosiveOoze from "../pool/corrosive-ooze.js";
 import _poolCourageousResolve from "../pool/courageous-resolve.js";
 import _poolCovetedJewel from "../pool/coveted-jewel.js";
 import _poolCracklingCyclops from "../pool/crackling-cyclops.js";
@@ -531,6 +532,7 @@ import _poolMyrGalvanizer from "../pool/myr-galvanizer.js";
 import _poolMysticDecree from "../pool/mystic-decree.js";
 import _poolNarsetsRebuke from "../pool/narsets-rebuke.js";
 import _poolNarstadScrapper from "../pool/narstad-scrapper.js";
+import _poolNaturesWill from "../pool/natures-will.js";
 import _poolNeedlebug from "../pool/needlebug.js";
 import _poolNeurokTransmuter from "../pool/neurok-transmuter.js";
 import _poolNezumiShadowWatcher from "../pool/nezumi-shadow-watcher.js";
@@ -906,6 +908,7 @@ import _poolVraskasFall from "../pool/vraskas-fall.js";
 import _poolWakandanShieldGuard from "../pool/wakandan-shield-guard.js";
 import _poolWakeningSunsAvatar from "../pool/wakening-suns-avatar.js";
 import _poolWakerOfTheWilds from "../pool/waker-of-the-wilds.js";
+import _poolWalkerOfSecretWays from "../pool/walker-of-secret-ways.js";
 import _poolWalkingBulwark from "../pool/walking-bulwark.js";
 import _poolWallOfHope from "../pool/wall-of-hope.js";
 import _poolWallOfShields from "../pool/wall-of-shields.js";
@@ -1163,6 +1166,7 @@ const shard: CardShard = {
     _poolConvolute,
     _poolConvulsingLicid,
     _poolCoralEel,
+    _poolCorrosiveOoze,
     _poolCourageousResolve,
     _poolCovetedJewel,
     _poolCracklingCyclops,
@@ -1512,6 +1516,7 @@ const shard: CardShard = {
     _poolMysticDecree,
     _poolNarsetsRebuke,
     _poolNarstadScrapper,
+    _poolNaturesWill,
     _poolNeedlebug,
     _poolNeurokTransmuter,
     _poolNezumiShadowWatcher,
@@ -1887,6 +1892,7 @@ const shard: CardShard = {
     _poolWakandanShieldGuard,
     _poolWakeningSunsAvatar,
     _poolWakerOfTheWilds,
+    _poolWalkerOfSecretWays,
     _poolWalkingBulwark,
     _poolWallOfHope,
     _poolWallOfShields,

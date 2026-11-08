@@ -10,7 +10,7 @@ export default defineCard({
   effect: {
     kind: "search-library",
     whose: { target: 0 },
-    filter: { hasFlashback: true },
+    filter: { hasKeyword: "flashback" },
     destination: "graveyard",
     min: 0,
     max: 3,

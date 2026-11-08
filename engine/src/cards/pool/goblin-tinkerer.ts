@@ -22,7 +22,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "destroy", target: 0 },
-          { kind: "damage", amount: { manaValueOf: 0 }, target: "source", from: { target: 0 } },
+          { kind: "damage", amount: { manaValueOf: 0 }, target: "source", from: 0 },
         ],
       },
       resolve: null,

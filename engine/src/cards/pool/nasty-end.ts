@@ -11,7 +11,7 @@ export default defineCard({
   additionalCost: { sacrifice: { type: "creature", controlledBy: "you" } },
   effect: {
     kind: "conditional",
-    condition: { kind: "sacrificed", filter: { supertype: "legendary" } },
+    condition: { kind: "object-matches", object: { paid: "sacrificed" }, filter: { supertype: "legendary" } },
     then: { kind: "draw", amount: 3 },
     else: { kind: "draw", amount: 2 },
   },

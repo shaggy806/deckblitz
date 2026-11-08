@@ -21,7 +21,7 @@ export default defineCard({
     {
       trigger: { on: "leaves-battlefield", who: "any", filter: { ownedBy: "opponent" }, to: ["graveyard"] },
       targets: [],
-      effect: { kind: "lose-life", amount: 1, who: "trigger-owner" },
+      effect: { kind: "lose-life", amount: 1, who: { ownerOf: "trigger-object" } },
       resolve: null,
       text: LOSE,
     },

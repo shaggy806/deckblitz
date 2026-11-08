@@ -22,7 +22,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "goad", target: 0 },
-          { kind: "draw", who: { controllerOfTarget: 0 }, amount: 1 },
+          { kind: "draw", who: { controllerOf: 0 }, amount: 1 },
           { kind: "add-mana", mana: "R", amount: 1 },
         ],
       },

@@ -26,8 +26,8 @@ export default defineCard({
             kind: "player-effect",
             duration: "until-your-next-turn",
             cantCast: {
-              who: { ownerOfTarget: 0 },
-              filter: { sameNameAsTarget: 0 },
+              who: { ownerOf: 0 },
+              filter: { sameNameWith: 0 },
               label: "spells with the same name as that creature",
             },
           },

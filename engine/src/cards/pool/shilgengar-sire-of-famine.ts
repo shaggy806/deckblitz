@@ -41,7 +41,7 @@ export default defineCard({
       // ruling — `"sacrificed"` reads it so).
       effect: {
         kind: "conditional",
-        condition: { kind: "sacrificed", filter: { subtype: "Angel" } },
+        condition: { kind: "object-matches", object: { paid: "sacrificed" }, filter: { subtype: "Angel" } },
         then: { kind: "create-token", token: "Blood Token", count: { toughnessOf: { paid: "sacrificed" } } },
         else: { kind: "create-token", token: "Blood Token", count: 1 },
       },

@@ -21,7 +21,7 @@ export default defineCard({
         prompt: "Search your library for a card with the same name as that creature and put it onto the battlefield?",
         effect: {
           kind: "search-library",
-          filter: { sameNameAsTriggerObject: true },
+          filter: { sameNameWith: "trigger-object" },
           destination: "battlefield",
           min: 0,
           max: 1,

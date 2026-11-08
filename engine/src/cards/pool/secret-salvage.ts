@@ -16,7 +16,7 @@ export default defineCard({
       { kind: "exile", target: 0 },
       {
         kind: "search-library",
-        filter: { sameNameAsTarget: 0 },
+        filter: { sameNameWith: 0 },
         destination: "hand",
         reveal: true,
         min: 0,

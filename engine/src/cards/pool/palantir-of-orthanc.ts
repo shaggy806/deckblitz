@@ -25,7 +25,7 @@ export default defineCard({
           { kind: "scry", amount: 2 },
           {
             kind: "each-player-may",
-            who: { controllerOfTarget: 0 },
+            who: { controllerOf: 0 },
             choices: [
               { text: "Have them draw a card.", effect: { kind: "draw", amount: 1 } },
               {

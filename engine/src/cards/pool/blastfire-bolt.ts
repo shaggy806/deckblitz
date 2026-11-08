@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 
 // Any creature, Equipment or not (the ruling); the target illegal as it
 // resolves, nothing happens (rule 608.2b). "Attached to that creature" is the
-// target slot's (`attachedToTarget`).
+// target slot's (`attachedToObject`).
 export default defineCard({
   name: "Blastfire Bolt",
   manaCost: "{5}{R}",
@@ -14,7 +14,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "damage", amount: 5, target: 0 },
-      { kind: "destroy-all", filter: { subtype: "Equipment", attachedToTarget: 0 } },
+      { kind: "destroy-all", filter: { subtype: "Equipment", attachedToObject: 0 } },
     ],
   },
 });

@@ -20,7 +20,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "shuffle-into-library", target: 0 },
-      { kind: "as-player", who: { ownerOfTarget: 0 }, effect: { kind: "discover", amount: { manaValueOf: 0 } } },
+      { kind: "as-player", who: { ownerOf: 0 }, effect: { kind: "discover", amount: { manaValueOf: 0 } } },
     ],
   },
 });

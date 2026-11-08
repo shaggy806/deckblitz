@@ -13,7 +13,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "destroy", target: 0 },
-      { kind: "gain-life", amount: 4, who: { ownerOfTarget: 0 } },
+      { kind: "gain-life", amount: 4, who: { ownerOf: 0 } },
     ],
   },
 });

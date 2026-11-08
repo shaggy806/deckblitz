@@ -7,5 +7,5 @@ export default defineCard({
   types: ["sorcery"],
   text: "Target player exiles all cards with flashback from their graveyard.",
   targets: ["player"],
-  effect: { kind: "exile-graveyard", target: 0, filter: { hasFlashback: true } },
+  effect: { kind: "exile-graveyard", target: 0, filter: { hasKeyword: "flashback" } },
 });

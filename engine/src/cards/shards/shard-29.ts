@@ -875,6 +875,7 @@ import _poolUndercoverOperative from "../pool/undercover-operative.js";
 import _poolUnderseaInvader from "../pool/undersea-invader.js";
 import _poolUnderworldCharger from "../pool/underworld-charger.js";
 import _poolUndulatingWitness from "../pool/undulating-witness.js";
+import _poolUnforge from "../pool/unforge.js";
 import _poolUnholyAnnexRitualChamber from "../pool/unholy-annex-ritual-chamber.js";
 import _poolUnifiedStrike from "../pool/unified-strike.js";
 import _poolUnsettlingTwins from "../pool/unsettling-twins.js";
@@ -1851,6 +1852,7 @@ const shard: CardShard = {
     _poolUnderseaInvader,
     _poolUnderworldCharger,
     _poolUndulatingWitness,
+    _poolUnforge,
     _poolUnholyAnnexRitualChamber,
     _poolUnifiedStrike,
     _poolUnsettlingTwins,

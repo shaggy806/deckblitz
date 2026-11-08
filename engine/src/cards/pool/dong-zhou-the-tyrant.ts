@@ -24,7 +24,7 @@ export default defineCard({
         kind: "damage",
         amount: { powerOf: 0 },
         toControllerOfTarget: 0,
-        from: { target: 0 },
+        from: 0,
       },
       resolve: null,
       text: TEXT,

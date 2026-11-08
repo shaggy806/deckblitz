@@ -15,5 +15,5 @@ export default defineCard({
   targets: ["creature-you-control", "any-target"],
   // The creature deals it (Chandra's Ignition's `from`): a blank slot — an
   // illegal target, either one — deals nothing (the ruling).
-  effect: { kind: "damage", amount: { powerOf: 0 }, target: 1, from: { target: 0 } },
+  effect: { kind: "damage", amount: { powerOf: 0 }, target: 1, from: 0 },
 });

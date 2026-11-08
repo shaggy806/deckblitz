@@ -14,7 +14,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "tap", target: 0 },
-      { kind: "damage", amount: { powerOf: 0 }, toControllerOfTarget: 0, from: { target: 0 } },
+      { kind: "damage", amount: { powerOf: 0 }, toControllerOfTarget: 0, from: 0 },
     ],
   },
 });

@@ -44,7 +44,7 @@ export default defineCard({
           { kind: "damage", amount: 7, target: 0 },
           {
             kind: "for-each-player",
-            who: { controllerOfTarget: 0 },
+            who: { controllerOf: 0 },
             effect: {
               kind: "sequence",
               effects: [

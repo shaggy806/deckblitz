@@ -23,7 +23,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "destroy", target: 0 },
-          { kind: "amass", amount: { powerOf: 0 }, creatureType: "Goblin", who: { controllerOfTarget: 0 } },
+          { kind: "amass", amount: { powerOf: 0 }, creatureType: "Goblin", who: { controllerOf: 0 } },
           {
             kind: "conditional",
             condition: { kind: "target-controlled-by-you", index: 0 },

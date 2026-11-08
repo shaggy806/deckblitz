@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 
 // Nemesis (NEM). EDHREC rank 23796.
 //
-// The search's filter names the target's name (`sameNameAsTarget`, bound as
+// The search's filter names the target's name (`sameNameWith`, bound as
 // the effect applies — rule 201.2a).
 
 export default defineCard({
@@ -14,7 +14,7 @@ export default defineCard({
   targets: ["creature"],
   effect: {
     kind: "search-library",
-    filter: { sameNameAsTarget: 0 },
+    filter: { sameNameWith: 0 },
     destination: "hand",
     min: 0,
     max: 3,

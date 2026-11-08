@@ -40,7 +40,7 @@ export default defineCard({
       targets: [{ kind: "card-in-graveyard", whose: "you", filter: { type: "creature" } }],
       effect: {
         kind: "return-from-graveyard",
-        filter: { sameNameAsTarget: 0 },
+        filter: { sameNameWith: 0 },
         destination: "battlefield",
         count: "all",
         enterTapped: true,

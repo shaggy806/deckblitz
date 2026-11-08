@@ -17,7 +17,7 @@ export default defineCard({
     {
       trigger: { on: "enters-battlefield", who: "self" },
       condition: { kind: "self-kicked" },
-      targets: [{ kind: "card-in-graveyard", whose: "you", filter: { hasKicker: true } }],
+      targets: [{ kind: "card-in-graveyard", whose: "you", filter: { hasKeyword: "kicker" } }],
       effect: { kind: "return-to-hand", target: 0, from: "graveyard" },
       resolve: null,
       text: ENTER_TEXT,

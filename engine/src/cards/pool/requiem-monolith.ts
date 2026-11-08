@@ -54,7 +54,7 @@ export default defineCard({
           },
           {
             kind: "each-player-may",
-            who: { controllerOfTarget: 0 },
+            who: { controllerOf: 0 },
             prompt: "Have Requiem Monolith deal 1 damage to your creature?",
             effect: { kind: "damage", amount: 1, target: 0 },
           },

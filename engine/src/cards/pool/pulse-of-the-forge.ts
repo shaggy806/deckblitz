@@ -1,6 +1,6 @@
 import { defineCard } from "../define.js";
 
-// "That player or that planeswalker's controller": `controllerOfTarget` is the
+// "That player or that planeswalker's controller": `controllerOf` is the
 // player in the slot, or the controller of the object in it. Asked of life
 // totals after the damage (rule 608.2c), and a planeswalker the damage has
 // finished is still there: state-based actions wait for the resolution to end.
@@ -17,7 +17,7 @@ export default defineCard({
       { kind: "damage", amount: 4, target: 0 },
       {
         kind: "conditional",
-        condition: { kind: "player-compare", stat: "life", compare: "fewer", than: { controllerOfTarget: 0 } },
+        condition: { kind: "player-compare", stat: "life", compare: "fewer", than: { controllerOf: 0 } },
         then: { kind: "return-to-hand", target: "source", from: "stack" },
       },
     ],

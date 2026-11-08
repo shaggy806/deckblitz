@@ -35,7 +35,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "destroy-all",
-        filter: { sameNameAsTriggerObject: true },
+        filter: { sameNameWith: "trigger-object" },
         exceptTriggerObject: true,
         cantBeRegenerated: true,
       },

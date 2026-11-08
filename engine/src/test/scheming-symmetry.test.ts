@@ -1,6 +1,6 @@
 /**
  * Two target players each search their own library for a card and put it on top:
- * `for-each-target` over `search-library` of `who: { controllerOfTarget }`. Each
+ * `for-each-target` over `search-library` of `who: { controllerOf }`. Each
  * chooses for themselves, in APNAP order however they were targeted (rule 101.4),
  * and each shuffles.
  */

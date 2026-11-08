@@ -17,7 +17,7 @@ export default defineCard({
       { kind: "damage", amount: 6, target: 0 },
       {
         kind: "choose-permanents",
-        filter: { subtype: "Equipment", attachedToTarget: 0 },
+        filter: { subtype: "Equipment", attachedToObject: 0 },
         upTo: 1,
         prompt: "Choose up to one Equipment attached to that creature",
         then: { kind: "destroy", target: 0 },

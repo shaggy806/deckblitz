@@ -25,7 +25,7 @@ export default defineCard({
         chooser: 0,
         then: {
           kind: "reveal-top",
-          of: { ownerOfTarget: 0 },
+          of: { ownerOf: 0 },
           then: {
             kind: "conditional",
             condition: { kind: "target", index: 0, filter: { hasName: "$chosenName" } },
@@ -34,7 +34,7 @@ export default defineCard({
               kind: "sequence",
               effects: [
                 { kind: "put-into-graveyard", target: 0 },
-                { kind: "damage", amount: 2, who: { ownerOfTarget: 0 } },
+                { kind: "damage", amount: 2, who: { ownerOf: 0 } },
               ],
             },
           },

@@ -1,6 +1,6 @@
 /**
  * Attached-ref batch, group B: Auras and Equipment whose effects name
- * "enchanted creature" / "equipped creature" (the `"attached"` EffectTargetRef).
+ * "enchanted creature" / "equipped creature" (the `"attached"` ObjectRef).
  */
 import { describe, expect, it } from "vitest";
 

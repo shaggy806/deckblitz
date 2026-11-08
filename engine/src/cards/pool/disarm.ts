@@ -9,7 +9,7 @@ export default defineCard({
   targets: ["creature"],
   effect: {
     kind: "for-each-permanent",
-    filter: { subtype: "Equipment", attachedToTarget: 0 },
+    filter: { subtype: "Equipment", attachedToObject: 0 },
     simultaneous: true,
     effect: { kind: "unattach", target: 0 },
   },

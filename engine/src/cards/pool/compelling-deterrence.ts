@@ -16,7 +16,7 @@ export default defineCard({
       {
         kind: "conditional",
         condition: { kind: "controls", filter: { subtype: "Zombie" }, atLeast: 1 },
-        then: { kind: "discard", target: { ownerOfTarget: 0 }, amount: 1 },
+        then: { kind: "discard", target: { ownerOf: 0 }, amount: 1 },
       },
     ],
   },

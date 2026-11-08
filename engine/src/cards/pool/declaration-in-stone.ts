@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 // EDHREC rank 15338.
 //
 // One target; its controller's other creatures sharing its name (rule
-// 201.2a) go with it, untargeted (`CardFilter.sameNameAsTarget`) — creatures
+// 201.2a) go with it, untargeted (`CardFilter.sameNameWith`) — creatures
 // only, not a namesake that isn't one (the ruling). Then that player
 // investigates once per nontoken creature exiled this way.
 
@@ -19,7 +19,7 @@ export default defineCard({
     effects: [
       {
         kind: "exile-all",
-        filter: { type: "creature", controlledBy: "you", sameNameAsTarget: 0 },
+        filter: { type: "creature", controlledBy: "you", sameNameWith: 0 },
         controlledByTarget: 0,
       },
       {

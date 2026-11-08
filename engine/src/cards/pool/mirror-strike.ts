@@ -14,6 +14,6 @@ export default defineCard({
     to: { players: "you" },
     by: { target: 0 },
     combat: true,
-    redirectTo: "source-controller",
+    redirectTo: { controllerOf: "source" },
   },
 });

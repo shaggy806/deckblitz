@@ -15,7 +15,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "put-onto-battlefield", target: 0, underYourControl: true, enterTapped: true },
-      { kind: "exile-graveyard", target: { ownerOfTarget: 0 } },
+      { kind: "exile-graveyard", target: { ownerOf: 0 } },
     ],
   },
 });

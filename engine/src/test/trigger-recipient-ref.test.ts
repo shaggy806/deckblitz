@@ -1,5 +1,5 @@
 /**
- * A trigger's recipient as a reference (`EffectTargetRef` `"trigger-recipient"`,
+ * A trigger's recipient as a reference (`ObjectRef` `"trigger-recipient"`,
  * `LastKnownRefs.recipient`): what the triggering event was aimed at — the
  * creature dealt damage, the player or planeswalker attacked — reaching any
  * effect that takes a reference, and a delayed trigger the ability makes

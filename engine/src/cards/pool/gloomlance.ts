@@ -17,7 +17,7 @@ export default defineCard({
       {
         kind: "conditional",
         condition: { kind: "target", index: 0, filter: { anyOf: [{ colors: ["G"] }, { colors: ["W"] }] } },
-        then: { kind: "discard", target: { controllerOfTarget: 0 }, amount: 1 },
+        then: { kind: "discard", target: { controllerOf: 0 }, amount: 1 },
       },
     ],
   },

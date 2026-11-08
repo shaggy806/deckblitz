@@ -13,7 +13,7 @@ export default defineCard({
       { kind: "exile", target: 0 },
       {
         kind: "as-player",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         effect: { kind: "incubate", amount: { manaValueOf: 0 } },
       },
     ],

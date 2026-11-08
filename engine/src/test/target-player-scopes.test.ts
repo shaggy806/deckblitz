@@ -1,7 +1,7 @@
 /**
  * More players an effect can name: a slot tied to a target player's permanents
  * (`sameController`, `sameObjectAllowed`, a group's `{ slot }`), the controller
- * of what an Aura's on (`"attached-controller"`, a `step-begins` `who:
+ * of what an Aura's on (`{ controllerOf: "attached" }`, a `step-begins` `who:
  * "attached"` on a creature, `whose: "active-player"`), each opponent of the
  * trigger's player (`"opponents-of-trigger-controller"`), each player who can't
  * (`for-each-player`'s `before`), and who amasses (`amass`'s `who`).
@@ -196,7 +196,7 @@ describe("a slot tied to a target player", () => {
   });
 });
 
-describe('"attached-controller": the controller of what the source is on', () => {
+describe('{ controllerOf: "attached" }: the controller of what the source is on', () => {
   it("Gremlin Infestation deals its 2 to the artifact's controller, not the Aura's", () => {
     const { game } = table();
     const stone = spawn(game, "Mind Stone", B);

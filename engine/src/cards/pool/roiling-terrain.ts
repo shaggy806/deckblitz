@@ -16,7 +16,7 @@ export default defineCard({
       { kind: "destroy", target: 0 },
       {
         kind: "damage",
-        amount: { countInGraveyard: { type: "land", ownedBy: "you" }, forPlayer: { controllerOfTarget: 0 } },
+        amount: { countInGraveyard: { type: "land", ownedBy: "you" }, forPlayer: { controllerOf: 0 } },
         toControllerOfTarget: 0,
       },
     ],

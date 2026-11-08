@@ -17,7 +17,7 @@ export default defineCard({
       targets: ["land"],
       effect: {
         kind: "each-player-may",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         choices: [
           {
             text: "Have Dwarven Driller deal 2 damage to you.",

@@ -15,7 +15,7 @@ export default defineCard({
   targets: ["creature"],
   effect: {
     kind: "as-player",
-    who: { controllerOfTarget: 0 },
+    who: { controllerOf: 0 },
     effect: { kind: "modify-pt", target: 0, power: X, toughness: X, duration: "end-of-turn" },
   },
 });

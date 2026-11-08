@@ -22,7 +22,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "draw", amount: 2, who: { ownerOfTarget: 0 } },
+          { kind: "draw", amount: 2, who: { ownerOf: 0 } },
           { kind: "shuffle-into-library", target: 0 },
         ],
       },

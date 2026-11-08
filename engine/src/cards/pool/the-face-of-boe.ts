@@ -20,7 +20,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: true },
       targets: [],
-      effect: { kind: "cast-now", from: "hand", spell: { hasSuspend: true }, suspendCost: true },
+      effect: { kind: "cast-now", from: "hand", spell: { hasKeyword: "suspend" }, suspendCost: true },
       sorcerySpeed: true,
       resolve: null,
       text: TEXT,

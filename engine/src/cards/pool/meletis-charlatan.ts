@@ -17,7 +17,7 @@ export default defineCard({
       cost: { mana: "{2}{U}", tap: true },
       targets: ["instant-or-sorcery-spell"],
       // The spell's controller controls the copy and chooses its new targets (the rulings).
-      effect: { kind: "copy-spell", target: 0, newTargets: true, controller: { controllerOfTarget: 0 } },
+      effect: { kind: "copy-spell", target: 0, newTargets: true, controller: { controllerOf: 0 } },
       resolve: null,
       text: ABILITY,
     },

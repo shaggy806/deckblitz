@@ -579,6 +579,7 @@ import _poolNoblesPurse from "../pool/nobles-purse.js";
 import _poolObeliskOfAlara from "../pool/obelisk-of-alara.js";
 import _poolObeliskOfBant from "../pool/obelisk-of-bant.js";
 import _poolObsessiveStitcher from "../pool/obsessive-stitcher.js";
+import _poolOftNabbedGoat from "../pool/oft-nabbed-goat.js";
 import _poolOkibaSalvage from "../pool/okiba-salvage.js";
 import _poolOminousAsylum from "../pool/ominous-asylum.js";
 import _poolOnakkeOathkeeper from "../pool/onakke-oathkeeper.js";
@@ -1565,6 +1566,7 @@ const shard: CardShard = {
     _poolObeliskOfAlara,
     _poolObeliskOfBant,
     _poolObsessiveStitcher,
+    _poolOftNabbedGoat,
     _poolOkibaSalvage,
     _poolOminousAsylum,
     _poolOnakkeOathkeeper,

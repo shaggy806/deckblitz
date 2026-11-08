@@ -26,7 +26,7 @@ export default defineCard({
           kind: "sequence",
           effects: [
             { kind: "destroy", target: 0 },
-            { kind: "draw", who: { controllerOfTarget: 0 }, amount: 2 },
+            { kind: "draw", who: { controllerOf: 0 }, amount: 2 },
           ],
         },
       },

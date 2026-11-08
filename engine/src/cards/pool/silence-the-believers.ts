@@ -21,7 +21,7 @@ export default defineCard({
       kind: "sequence",
       simultaneous: true,
       effects: [
-        { kind: "exile-all", filter: { subtype: "Aura", attachedToTarget: 0 } },
+        { kind: "exile-all", filter: { subtype: "Aura", attachedToObject: 0 } },
         { kind: "exile", target: 0 },
       ],
     },

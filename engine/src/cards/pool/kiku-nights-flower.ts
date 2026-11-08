@@ -14,7 +14,7 @@ export default defineCard({
     {
       cost: { mana: "{2}{B}{B}", tap: true },
       targets: ["creature"],
-      effect: { kind: "damage", amount: { powerOf: 0 }, target: 0, from: { target: 0 } },
+      effect: { kind: "damage", amount: { powerOf: 0 }, target: 0, from: 0 },
       resolve: null,
       text: "{2}{B}{B}, {T}: Target creature deals damage to itself equal to its power.",
     },

@@ -27,6 +27,6 @@ export default defineCard({
     kind: "for-each-target",
     from: 1,
     simultaneous: true,
-    effect: { kind: "damage", target: 1, amount: { powerOf: 0 }, from: { target: 0 } },
+    effect: { kind: "damage", target: 1, amount: { powerOf: 0 }, from: 0 },
   },
 });

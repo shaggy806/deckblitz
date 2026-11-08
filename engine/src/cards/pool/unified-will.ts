@@ -16,7 +16,7 @@ export default defineCard({
   targets: ["spell"],
   effect: {
     kind: "conditional",
-    condition: { kind: "player-compare", stat: { controls: { type: "creature" } }, compare: "more", than: { controllerOfTarget: 0 } },
+    condition: { kind: "player-compare", stat: { controls: { type: "creature" } }, compare: "more", than: { controllerOf: 0 } },
     then: { kind: "counter", target: 0 },
   },
 });

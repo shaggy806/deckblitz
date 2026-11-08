@@ -14,7 +14,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "turn-face-up", target: 0 },
-      { kind: "damage-all", filter: { type: "creature" }, amount: { powerOf: 0 }, exceptSource: true, from: { target: 0 } },
+      { kind: "damage-all", filter: { type: "creature" }, amount: { powerOf: 0 }, exceptSource: true, from: 0 },
     ],
   },
 });

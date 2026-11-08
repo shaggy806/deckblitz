@@ -3,7 +3,7 @@ import { A, B, cast, lands, life, pt, ref, spawn, table, toHand, zone } from "./
 
 // Ravnica: City of Guilds (RAV), batch 229: the lead's cards — radiance,
 // "target X and each other X that shares a color with it"
-// (`CardFilter.sharesColorWithTarget`, rule 105.2).
+// (`CardFilter.sharesColorWith`, rule 105.2).
 
 describe("Leave No Trace", () => {
   it("destroys the target and each other enchantment sharing a color with it, whoever controls it", () => {

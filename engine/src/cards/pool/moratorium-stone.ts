@@ -27,8 +27,8 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "exile-graveyard", target: "each-player", filter: { sameNameAsTarget: 0 } },
-          { kind: "exile-all", filter: { sameNameAsTarget: 0 } },
+          { kind: "exile-graveyard", target: "each-player", filter: { sameNameWith: 0 } },
+          { kind: "exile-all", filter: { sameNameWith: 0 } },
         ],
       },
       resolve: null,

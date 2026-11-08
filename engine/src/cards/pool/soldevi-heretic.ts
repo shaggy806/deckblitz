@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 
 // Alliances (ALL). EDHREC rank 31888.
 //
-// The opponent's draw is theirs to take (Risk Factor's `controllerOfTarget`
+// The opponent's draw is theirs to take (Risk Factor's `controllerOf`
 // on a player slot): "you" in the `each-player-may` effect is them.
 
 const TEXT =
@@ -27,7 +27,7 @@ export default defineCard({
           { kind: "prevent-damage", target: 0, amount: 2 },
           {
             kind: "each-player-may",
-            who: { controllerOfTarget: 1 },
+            who: { controllerOf: 1 },
             prompt: "Draw a card?",
             effect: { kind: "draw", amount: 1 },
           },

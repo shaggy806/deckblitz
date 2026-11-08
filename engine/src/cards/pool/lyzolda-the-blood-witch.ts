@@ -26,12 +26,12 @@ export default defineCard({
         effects: [
           {
             kind: "conditional",
-            condition: { kind: "sacrificed", filter: { colors: ["R"] } },
+            condition: { kind: "object-matches", object: { paid: "sacrificed" }, filter: { colors: ["R"] } },
             then: { kind: "damage", amount: 2, target: 0 },
           },
           {
             kind: "conditional",
-            condition: { kind: "sacrificed", filter: { colors: ["B"] } },
+            condition: { kind: "object-matches", object: { paid: "sacrificed" }, filter: { colors: ["B"] } },
             then: { kind: "draw", amount: 1 },
           },
         ],

@@ -36,7 +36,7 @@ export default defineCard({
           kind: "damage",
           amount: { countersOn: 0, counter: "loyalty" },
           target: 1,
-          from: { target: 0 },
+          from: 0,
         },
       },
     ],

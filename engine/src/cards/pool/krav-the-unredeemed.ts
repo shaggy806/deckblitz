@@ -47,7 +47,7 @@ export default defineCard({
       targets: ["player"],
       effect: {
         kind: "each-player-may",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         prompt: "Search your library for a card named Regna, the Redeemer?",
         effect: {
           kind: "search-library",

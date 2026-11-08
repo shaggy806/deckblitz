@@ -19,7 +19,7 @@ export default defineCard({
       {
         kind: "for-each-player",
         who: "each-player",
-        except: { controllerOfTarget: 0 },
+        except: { controllerOf: 0 },
         simultaneous: true,
         effect: { kind: "create-token-copy", of: 0, count: 1, who: "that-player" },
       },

@@ -94,7 +94,7 @@ export default defineCard({
         // "… **may** search": that player's choice (`each-player-may`), so
         // declining neither searches nor shuffles their library.
         kind: "each-player-may",
-        who: { controllerOfTarget: 0 },
+        who: { controllerOf: 0 },
         prompt: "Search your library for a card named Merry, Warden of Isengard?",
         effect: {
           kind: "search-library",

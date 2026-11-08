@@ -3,7 +3,7 @@ import type { ModeOption } from "../../effects.js";
 
 // EDHREC rank 23379. "The color of its controller's choice": the target's
 // controller picks one of five fixed grants as it resolves (an
-// `each-player-may` of `who: { controllerOfTarget: 0 }`), whoever activated it.
+// `each-player-may` of `who: { controllerOf: 0 }`), whoever activated it.
 
 const COLORS = [
   ["White", "W"],
@@ -31,7 +31,7 @@ export default defineCard({
     {
       cost: { mana: "{2}", tap: false },
       targets: ["creature"],
-      effect: { kind: "each-player-may", who: { controllerOfTarget: 0 }, choices: CHOICES },
+      effect: { kind: "each-player-may", who: { controllerOf: 0 }, choices: CHOICES },
       resolve: null,
       text: "{2}: Target creature gains protection from the color of its controller's choice until end of turn. Any player may activate this ability.",
       anyPlayer: true,
