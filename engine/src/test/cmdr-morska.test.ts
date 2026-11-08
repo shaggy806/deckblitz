@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { setTurnTotal } from "./harness.js";
 
 import { investigate } from "../cards/helpers.js";
 import { HeuristicBotController, RandomController, ScriptedController } from "../controller.js";
@@ -107,7 +108,7 @@ describe("Clue token (investigate)", () => {
     game.debugSpawn("Island", A, "battlefield");
     game.debugSpawn("Island", A, "battlefield");
     // Nothing else to do: the land drop is used and the hand is all Islands.
-    game.state.players[A].landsPlayedThisTurn = game.state.rules.maxLandsPerTurn;
+    setTurnTotal(game.state, A, "land-played", game.state.rules.maxLandsPerTurn);
     const view = { state: game.state, player: A, legalActions: () => game.legalActions(A) };
 
     const botPick = new HeuristicBotController(A).act(view);

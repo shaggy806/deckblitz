@@ -28,7 +28,7 @@
  *
  * Not built into `dist/` (tsconfig excludes `src/test/`).
  */
-import { computeCharacteristics } from "../characteristics.js";
+import { computeCharacteristics, journalCount } from "../characteristics.js";
 import { ScriptedController } from "../controller.js";
 import type { Action, LegalAction } from "../actions.js";
 import type { Keyword } from "../cards/define.js";
@@ -38,6 +38,7 @@ import { asPlayerId } from "../primitives.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import { activePlayerOf } from "../state.js";
 import type { GameState } from "../state.js";
+import { appendJournal, journalTotal, type JournalKind } from "../journal.js";
 import type { CardRegistry } from "../cards/card-registry.js";
 import type { TargetRef, TargetSpec } from "../target.js";
 
@@ -391,4 +392,42 @@ export function blockOffer(game: Game, seat: ScriptedController, attackers: read
   const offer = game.legalActions(defender).find((o): o is BlockOffer => o.kind === "declare-blockers");
   if (offer === undefined) throw new Error(`${defender} wasn't asked to block`);
   return offer;
+}
+
+/** The journal tallies tests read and set by hand: a count of entries, or
+ * the sum of their amounts (life). */
+const TURN_TOTALS = {
+  "land-played": "count",
+  "card-drawn": "count",
+  "life-lost": "amount",
+  "life-gained": "amount",
+  crime: "count",
+  cycled: "count",
+  "token-created": "count",
+} as const satisfies Partial<Record<JournalKind, "count" | "amount">>;
+export type TurnTotalKind = keyof typeof TURN_TOTALS;
+
+/** This turn's total of `kind` for `player`, from the journal. */
+export function turnTotal(state: GameState, player: PlayerId, kind: TurnTotalKind): number {
+  return journalTotal(state, kind, player, TURN_TOTALS[kind]);
+}
+
+/** Make this turn's total of `kind` for `player` `value`: this turn's
+ * entries of it for them replaced by `value` of them (one of `value` life). */
+export function setTurnTotal(state: GameState, player: PlayerId, kind: TurnTotalKind, value: number): void {
+  const journal = state.journal;
+  if (journal !== undefined) {
+    journal.entries = journal.entries.filter(
+      (e) => !(e.kind === kind && e.player === player && e.turn === state.turn.number),
+    );
+  }
+  if (value <= 0) return;
+  if (TURN_TOTALS[kind] === "amount") appendJournal(state, { kind, player, amount: value });
+  else for (let i = 0; i < value; i += 1) appendJournal(state, { kind, player });
+}
+
+/** The creatures that died this turn under `players`' control (all players'
+ * by default), a token stack as every token in it: the journal's `died`. */
+export function diedThisTurn(game: Game, players?: readonly PlayerId[]): number {
+  return journalCount(game.state, game.registry, players ?? game.state.turnOrder, "died", undefined, A);
 }

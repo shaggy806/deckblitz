@@ -43,7 +43,7 @@ const spawn = (
     id, cardName, owner: controller, controller, zone: "battlefield",
     tapped: opts.tapped ?? false, damageMarked: 0, markedByDeathtouch: false,
     enteredBattlefieldOnTurn: 0, summoningSick: opts.sick ?? false,
-    loyaltyActivatedThisTurn: false, targets: null,
+    targets: null,
     attacking: null, blocking: null, blockedBy: [], blocked: false,
     kind: "card", abilityKind: null, sourceObjectId: null, abilityIndex: null,
     counters: { ...opts.counters }, modifiers: [], timestamp: game.state.timestampSeq,

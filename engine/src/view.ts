@@ -28,6 +28,7 @@ import {
 } from "./characteristics.js";
 import { protectionLabel } from "./effects.js";
 import type { GameEvent } from "./events.js";
+import { journalTotal } from "./journal.js";
 import type { Color, ManaPool } from "./mana.js";
 import { poolCounts } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
@@ -1165,7 +1166,7 @@ function viewForUncached(
       graveyardSize: zones.graveyard.length,
       sideboardSize: sideboardOf(state, player).length,
       companion: revealedCompanion(state, player),
-      landsPlayedThisTurn: playerState.landsPlayedThisTurn,
+      landsPlayedThisTurn: journalTotal(state, "land-played", playerState.id, "count"),
       maxLandsThisTurn:
         options.maxLands?.(player) ??
         state.rules.maxLandsPerTurn + (playerState.extraLandsThisTurn ?? 0),

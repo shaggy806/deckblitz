@@ -9,7 +9,7 @@ import { describe, expect, it } from "vitest";
 
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
-import { A, B, C, cast, enter, lands, life, pickTargets, ref, settle, spawn, table, toHand } from "./harness.js";
+import { A, B, C, cast, enter, lands, life, pickTargets, ref, settle, spawn, table, toHand, turnTotal } from "./harness.js";
 
 const lifeChanges = (game: Game, player: string) =>
   game.state.eventLog.filter((e) => e.type === "life-changed" && e.player === player).map((e) => (e as { delta: number }).delta);
@@ -21,8 +21,8 @@ describe("set-life-total", () => {
     enter(game, "Magister Sphinx");
     expect(life(game, B)).toBe(10);
     expect(lifeChanges(game, B)).toEqual([-10]);
-    expect(game.state.players[B].lifeLostThisTurn).toBe(10);
-    expect(game.state.players[B].lifeGainedThisTurn).toBe(0);
+    expect(turnTotal(game.state, B, "life-lost")).toBe(10);
+    expect(turnTotal(game.state, B, "life-gained")).toBe(0);
   });
 
   it("…and brings a player below 10 up to it: a gain, seen by 'whenever you gain life'", () => {
@@ -32,7 +32,7 @@ describe("set-life-total", () => {
     pickTargets(a, A);
     enter(game, "Magister Sphinx");
     expect(life(game, A)).toBe(10);
-    expect(game.state.players[A].lifeGainedThisTurn).toBe(6);
+    expect(turnTotal(game.state, A, "life-gained")).toBe(6);
     const pridemate = game.state.zones.shared.battlefield.find((id) => game.state.objects[id].cardName === "Ajani's Pridemate");
     expect(game.state.objects[pridemate as ObjectId].counters["+1/+1"]).toBe(1);
   });

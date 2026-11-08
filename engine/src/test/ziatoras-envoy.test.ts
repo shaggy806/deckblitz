@@ -5,7 +5,7 @@
  */
 import { describe, expect, it } from "vitest";
 
-import { A, attack, hand, spawn, table, toLibrary, zone } from "./harness.js";
+import { A, attack, hand, spawn, table, toLibrary, zone, turnTotal } from "./harness.js";
 
 describe("Ziatora's Envoy", () => {
   it("plays a land from the top of the library, using the land play", () => {
@@ -16,10 +16,10 @@ describe("Ziatora's Envoy", () => {
       const land = offer.lands?.find((l) => l.card === forest);
       return land === undefined ? null : { type: "play-land", player: A, card: forest };
     };
-    const played = game.state.players[A].landsPlayedThisTurn;
+    const played = turnTotal(game.state, A, "land-played");
     attack(game, a, [envoy]);
     expect(zone(game, forest)).toBe("battlefield");
-    expect(game.state.players[A].landsPlayedThisTurn).toBe(played + 1);
+    expect(turnTotal(game.state, A, "land-played")).toBe(played + 1);
   });
 
   it("casts a spell with mana value up to the damage dealt, free", () => {

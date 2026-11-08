@@ -8,28 +8,7 @@ import { describe, expect, it } from "vitest";
 
 import type { ObjectId } from "../primitives.js";
 
-import {
-  A,
-  B,
-  activate,
-  attack,
-  cast,
-  enter,
-  hand,
-  keywords,
-  lands,
-  life,
-  named,
-  pickTargets,
-  pt,
-  ref,
-  settle,
-  spawn,
-  table,
-  toGraveyard,
-  toHand,
-  zone,
-} from "./harness.js";
+import { A, B, activate, attack, cast, enter, hand, keywords, lands, life, named, pickTargets, pt, ref, settle, spawn, table, toGraveyard, toHand, zone, turnTotal, setTurnTotal } from "./harness.js";
 
 describe("Goblin Piledriver", () => {
   it("gets +2/+0 for each other attacking Goblin, not one that stayed home", () => {
@@ -88,9 +67,9 @@ describe("Gwaihir the Windlord", () => {
     lands(game, "Island", 2);
     const card = toHand(game, "Gwaihir the Windlord");
     // Turn 1's draw is one card: four lands aren't enough.
-    expect(game.state.players[A].cardsDrawnThisTurn).toBe(1);
+    expect(turnTotal(game.state, A, "card-drawn")).toBe(1);
     expect(() => cast(game, card)).toThrow();
-    game.state.players[A].cardsDrawnThisTurn = 2;
+    setTurnTotal(game.state, A, "card-drawn", 2);
     cast(game, card);
     expect(zone(game, card)).toBe("battlefield");
 

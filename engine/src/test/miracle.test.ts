@@ -13,7 +13,7 @@ import type { ObjectId, PlayerId } from "../primitives.js";
 import type { EffectSpec } from "../effects.js";
 import { viewFor } from "../view.js";
 
-import { A, B, cast, hand, lands, life, ref, settle, spawn, table, toHand, toLibrary, toStep, zone } from "./harness.js";
+import { A, B, cast, hand, lands, life, ref, settle, spawn, table, toHand, toLibrary, toStep, zone, setTurnTotal } from "./harness.js";
 
 /** The seat casts what it's offered (at these targets, with this X), or declines with `null`. */
 function castOffered(
@@ -45,7 +45,7 @@ function castOffered(
 
 /** `player` draws `n` as an effect, as their first draws this turn. */
 const draw = (game: Game, player: PlayerId, n = 1, then?: EffectSpec): void => {
-  game.state.players[player].cardsDrawnThisTurn = 0;
+  setTurnTotal(game.state, player, "card-drawn", 0);
   const effect: EffectSpec = { kind: "draw", amount: n };
   game.debugApplyEffect(player, then === undefined ? effect : { kind: "sequence", effects: [effect, then] });
   settle(game);

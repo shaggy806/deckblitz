@@ -14,6 +14,7 @@
  */
 
 import { describe, expect, it } from "vitest";
+import { turnTotal } from "./harness.js";
 
 import { createDefaultRegistry } from "../cards.js";
 import { ScriptedController } from "../controller.js";
@@ -265,7 +266,7 @@ describe("Aesi, Tyrant of Gyre Strait", () => {
       expect(game.libraryOf(A).length).toBe(library - 2);
       // A land put onto the battlefield isn't a land *played* — the drop
       // is still unused (rule 305.4).
-      expect(game.state.players[A].landsPlayedThisTurn).toBe(0);
+      expect(turnTotal(game.state, A, "land-played")).toBe(0);
     });
 
     it("triggers on a land entering on an opponent's turn too", () => {

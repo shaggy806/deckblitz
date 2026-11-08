@@ -15,7 +15,7 @@ import { autoSettle, forcedZoneChoice } from "../auto-settle.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 
-import { A, B, activate, hand, lands, life, settle, spawn, table, toHand, toLibrary, zone } from "./harness.js";
+import { A, B, activate, hand, lands, life, settle, spawn, table, toHand, toLibrary, zone, turnTotal } from "./harness.js";
 import type { Table } from "./harness.js";
 
 const library = (game: Game): readonly ObjectId[] => game.state.zones.perPlayer[A].library;
@@ -57,7 +57,7 @@ describe("Scroll Rack", () => {
     const deep = toLibrary(game, "Plains");
     // The top of the library is index 0: Plains, Swamp, Island.
     expect(library(game).slice(0, 3)).toEqual([deep, first, second]);
-    const drawnBefore = game.state.players[A].cardsDrawnThisTurn;
+    const drawnBefore = turnTotal(game.state, A, "card-drawn");
     const seen = rack(t, [one, two], [two, one]);
 
     activate(game, rackId);
@@ -69,7 +69,7 @@ describe("Scroll Rack", () => {
     expect(zone(game, rackId)).toBe("battlefield");
     expect(game.state.objects[rackId].tapped).toBe(true);
     // Not a draw (the ruling).
-    expect(game.state.players[A].cardsDrawnThisTurn).toBe(drawnBefore);
+    expect(turnTotal(game.state, A, "card-drawn")).toBe(drawnBefore);
     // The order was asked of the two cards exiled, by name.
     expect(seen.offered.at(-1)).toEqual(expect.arrayContaining([one, two]));
   });

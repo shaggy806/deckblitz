@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { diedThisTurn } from "./harness.js";
 
 import { blockingViolations } from "../combat/blocking.js";
 import { Game } from "../game.js";
@@ -123,8 +124,8 @@ describe("creatures that died this turn", () => {
       targets: [],
     });
     resolveStack(game);
-    expect(game.state.players[A].creaturesDiedThisTurn).toBe(9);
-    expect(game.state.creaturesDiedThisTurn).toBe(9);
+    expect(diedThisTurn(game, [A])).toBe(9);
+    expect(diedThisTurn(game)).toBe(9);
   });
 
   // It dies either way: rule 903.9a offers the command zone once it's in the
@@ -153,7 +154,7 @@ describe("creatures that died this turn", () => {
         game.dispatch({ type: "commander-replacement", player: B, toCommandZone });
       }
       expect(game.state.objects[krenko].zone).toBe(toCommandZone ? "command" : "graveyard");
-      expect(game.state.players[B].creaturesDiedThisTurn).toBe(1);
+      expect(diedThisTurn(game, [B])).toBe(1);
     });
   }
 
@@ -170,7 +171,7 @@ describe("creatures that died this turn", () => {
     });
     resolveStack(game);
     expect(game.state.objects[bears].zone).toBe("exile");
-    expect(game.state.creaturesDiedThisTurn).toBe(0);
+    expect(diedThisTurn(game)).toBe(0);
   });
 
   it("Rest in Peace exiles tokens too, so a token stack under it didn't die", () => {
@@ -186,7 +187,7 @@ describe("creatures that died this turn", () => {
     });
     resolveStack(game);
     expect(tokens(game, "Goblin Token")).toBe(0);
-    expect(game.state.creaturesDiedThisTurn).toBe(0);
+    expect(diedThisTurn(game)).toBe(0);
   });
 
   it("Anafenza's \"creature card\" leaves tokens alone", () => {
@@ -203,7 +204,7 @@ describe("creatures that died this turn", () => {
     resolveStack(game);
     // Died (into a graveyard, then ceased to exist), not exiled.
     expect(game.state.objects[goblins]?.zone ?? "gone").not.toBe("exile");
-    expect(game.state.players[B].creaturesDiedThisTurn).toBe(9);
+    expect(diedThisTurn(game, [B])).toBe(9);
   });
 });
 

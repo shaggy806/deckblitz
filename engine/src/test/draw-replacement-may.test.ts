@@ -13,7 +13,7 @@ import { describe, expect, it } from "vitest";
 
 import type { ScriptedController } from "../controller.js";
 import type { Game } from "../game.js";
-import { A, hand, lands, settle, spawn, table, toLibrary } from "./harness.js";
+import { A, hand, lands, settle, spawn, table, toLibrary, turnTotal } from "./harness.js";
 
 const library = (game: Game) => game.state.zones.perPlayer[A].library;
 const names = (game: Game, ids: readonly string[]) => ids.map((id) => game.state.objects[id as never].cardName);
@@ -38,7 +38,7 @@ describe("a draw you may replace (Abundance)", () => {
     // The last put on top: Grizzly Bears, then Shock, then Forest.
     for (const name of ["Forest", "Shock", "Grizzly Bears"]) toLibrary(game, name);
     const asked = answer(a, true, "Land");
-    const drawnBefore = game.state.players[A].cardsDrawnThisTurn;
+    const drawnBefore = turnTotal(game.state, A, "card-drawn");
     const handBefore = hand(game).length;
     game.debugApplyEffect(A, { kind: "draw", amount: 1 });
     settle(game);
@@ -48,7 +48,7 @@ describe("a draw you may replace (Abundance)", () => {
     const lib = library(game);
     expect(names(game, lib.slice(lib.length - 2)).sort()).toEqual(["Grizzly Bears", "Shock"]);
     // Put into the hand, not drawn (the ruling).
-    expect(game.state.players[A].cardsDrawnThisTurn).toBe(drawnBefore);
+    expect(turnTotal(game.state, A, "card-drawn")).toBe(drawnBefore);
   });
 
   it("nonland chosen: the first nonland card is taken", () => {
@@ -68,11 +68,11 @@ describe("a draw you may replace (Abundance)", () => {
     spawn(game, "Abundance");
     toLibrary(game, "Shock");
     answer(a, false);
-    const drawnBefore = game.state.players[A].cardsDrawnThisTurn;
+    const drawnBefore = turnTotal(game.state, A, "card-drawn");
     game.debugApplyEffect(A, { kind: "draw", amount: 1 });
     settle(game);
     expect(names(game, hand(game))).toContain("Shock");
-    expect(game.state.players[A].cardsDrawnThisTurn).toBe(drawnBefore + 1);
+    expect(turnTotal(game.state, A, "card-drawn")).toBe(drawnBefore + 1);
   });
 
   it("a draw of two is asked about twice, each draw on its own (the ruling)", () => {
@@ -157,12 +157,12 @@ describe("a draw you may replace (Abundance)", () => {
       return [skip ? 1 : 0];
     };
     const handBefore = hand(game).length;
-    const drawnBefore = game.state.players[A].cardsDrawnThisTurn;
+    const drawnBefore = turnTotal(game.state, A, "card-drawn");
     game.debugApplyEffect(A, { kind: "draw", amount: 1 });
     settle(game);
     expect(asked).toEqual([["Draw a card", "Obstinate Familiar: skip that draw"]]);
     expect(hand(game).length).toBe(handBefore);
-    expect(game.state.players[A].cardsDrawnThisTurn).toBe(drawnBefore);
+    expect(turnTotal(game.state, A, "card-drawn")).toBe(drawnBefore);
     skip = false;
     game.debugApplyEffect(A, { kind: "draw", amount: 1 });
     settle(game);

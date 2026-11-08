@@ -14,7 +14,7 @@ import { describe, expect, it } from "vitest";
 import type { Game } from "../game.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 
-import { staticConditionMet, turnHistoryCount } from "../characteristics.js";
+import { staticConditionMet, journalCount } from "../characteristics.js";
 import {
   A,
   B,
@@ -118,7 +118,7 @@ describe("cards discarded this turn (TurnHistory.discarded)", () => {
     a.chooseCastNowFn = () => null;
     discardHand(game);
     expect(zone(game, greeting)).toBe("graveyard");
-    expect(turnHistoryCount(game.state, game.registry, [A], "discarded", undefined, A)).toBe(1);
+    expect(journalCount(game.state, game.registry, [A], "discarded", undefined, A)).toBe(1);
     lands(game, "Swamp", 2);
     cast(game, toHand(game, "Shadow of the Grave"));
     expect(zone(game, greeting)).toBe("hand");
@@ -174,7 +174,7 @@ describe("cards put into a graveyard this turn, by origin (TurnHistory['to-grave
     exile(game, exiled);
     mill(game, B, 2);
     const count = (filter?: object, origin?: object): number =>
-      turnHistoryCount(game.state, game.registry, [A, B], "to-graveyard", filter, A, undefined, origin);
+      journalCount(game.state, game.registry, [A, B], "to-graveyard", filter, A, undefined, origin);
     expect(count(undefined, { from: ["battlefield"] })).toBe(2);
     expect(count({ type: "artifact" }, { from: ["battlefield"] })).toBe(1);
     expect(count({ token: false })).toBe(3);

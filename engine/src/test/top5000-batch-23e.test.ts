@@ -9,6 +9,7 @@
  * trigger (Strength of Will) and the second draw of a turn (Prince Imrahil).
  */
 import { describe, expect, it } from "vitest";
+import { turnTotal } from "./harness.js";
 
 import { computeCharacteristics } from "../characteristics.js";
 import { createDefaultRegistry } from "../cards/registry.js";
@@ -214,7 +215,7 @@ describe("top-5000 batch 23e — Prince Imrahil the Fair", () => {
   it("makes a Soldier on the second card drawn this turn only", () => {
     const { game } = setUp();
     spawn(game, "Prince Imrahil the Fair");
-    while (game.state.players[A].cardsDrawnThisTurn < 1) {
+    while (turnTotal(game.state, A, "card-drawn") < 1) {
       game.debugApplyEffect(A, { kind: "draw", amount: 1 }, []);
       settle(game);
     }

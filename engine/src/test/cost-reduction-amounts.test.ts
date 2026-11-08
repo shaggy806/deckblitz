@@ -8,6 +8,7 @@
  * a tax for targeting a player.
  */
 import { describe, expect, it } from "vitest";
+import { appendJournal } from "../journal.js";
 import type { LegalAction } from "../actions.js";
 import { createDefaultRegistry, defineCard } from "../cards.js";
 import { ScriptedController } from "../controller.js";
@@ -209,7 +210,7 @@ describe("what a spell prints on itself", () => {
     expect(offered(game, balrog)).toBe(false);
     // Three more of the other player's: {5}{B}{R} less 4, on three lands.
     const theirs = spawn(game, "Grizzly Bears", B);
-    game.state.players[B].turnHistory = { sacrificed: [{ object: theirs, count: 3 }] } as never;
+    appendJournal(game.state, { kind: "sacrificed", player: B, object: theirs, count: 3 });
     expect(offered(game, balrog)).toBe(true);
   });
 

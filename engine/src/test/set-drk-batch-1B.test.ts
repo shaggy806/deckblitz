@@ -1,24 +1,5 @@
 import { describe, expect, it } from "vitest";
-import {
-  A,
-  B,
-  activate,
-  cast,
-  counters,
-  graveyard,
-  lands,
-  life,
-  pickFromZone,
-  pickModes,
-  pt,
-  ref,
-  spawn,
-  table,
-  toHand,
-  zone,
-  nextTurn,
-  settle,
-} from "./harness.js";
+import { A, B, activate, cast, counters, graveyard, lands, life, pickFromZone, pickModes, pt, ref, spawn, table, toHand, zone, nextTurn, settle, turnTotal } from "./harness.js";
 
 describe("Gaea's Touch", () => {
   it("puts only a basic Forest from hand onto the battlefield, once each turn, without using the land drop", () => {
@@ -32,7 +13,7 @@ describe("Gaea's Touch", () => {
     expect(seen.offered).toContain(forest);
     expect(seen.offered).not.toContain(shock);
     expect(zone(game, forest)).toBe("battlefield");
-    expect(game.state.players[A].landsPlayedThisTurn ?? 0).toBe(0);
+    expect(turnTotal(game.state, A, "land-played") ?? 0).toBe(0);
     expect(() => activate(game, touch, 0)).toThrow();
     expect(zone(game, forest2)).toBe("hand");
   });

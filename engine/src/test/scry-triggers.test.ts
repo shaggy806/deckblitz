@@ -6,6 +6,7 @@
  */
 
 import { describe, expect, it } from "vitest";
+import { turnStatOf } from "../characteristics.js";
 
 import { whyCannotAttack } from "../combat/eligibility.js";
 import type { Game } from "../game.js";
@@ -143,8 +144,8 @@ describe("if you've scried or surveilled this turn", () => {
   it("Proctor of Potential surveils as it or another creature of yours enters", () => {
     const { game } = table();
     enter(game, "Proctor of Potential");
-    expect(game.state.players[A].turnHistory?.scriedOrSurveilled).toBe(1);
+    expect(turnStatOf(game.state, A, "scried-or-surveilled")).toBe(1);
     enter(game, "Grizzly Bears");
-    expect(game.state.players[A].turnHistory?.scriedOrSurveilled).toBe(2);
+    expect(turnStatOf(game.state, A, "scried-or-surveilled")).toBe(2);
   });
 });

@@ -10,6 +10,7 @@
  * planner nothing extra.
  */
 import { describe, expect, it } from "vitest";
+import { turnTotal } from "./harness.js";
 
 import { createDefaultRegistry } from "../cards.js";
 import { HeuristicBotController, RandomController } from "../controller.js";
@@ -132,7 +133,7 @@ describe("Kydele, Chosen of Kruphix", () => {
     game.advanceUntil(atMain);
     const kydele = game.debugSpawn("Kydele, Chosen of Kruphix", A, "battlefield");
     game.state.objects[kydele].summoningSick = false;
-    const drawnSoFar = game.state.players[A].cardsDrawnThisTurn;
+    const drawnSoFar = turnTotal(game.state, A, "card-drawn");
     const opt = game.debugSpawn("Opt", A, "hand");
     // {U} can't come from colourless mana.
     expect(canCast(game, opt)).toBe(false);
@@ -141,7 +142,7 @@ describe("Kydele, Chosen of Kruphix", () => {
     const bear = game.debugSpawn("Marwyn, the Nurturer", A, "hand");
     game.debugSpawn("Forest", A, "battlefield");
     expect(canCast(game, bear)).toBe(drawnSoFar >= 2);
-    while (game.state.players[A].cardsDrawnThisTurn < 2) {
+    while (turnTotal(game.state, A, "card-drawn") < 2) {
       game.debugApplyEffect(A, { kind: "draw", amount: 1 }, []);
     }
     expect(canCast(game, bear)).toBe(true);
@@ -155,7 +156,7 @@ describe("Kydele, Chosen of Kruphix", () => {
     const kydele = game.debugSpawn("Kydele, Chosen of Kruphix", A, "battlefield");
     game.state.objects[kydele].summoningSick = false;
     game.debugApplyEffect(A, { kind: "draw", amount: 3 }, []);
-    const drawn = game.state.players[A].cardsDrawnThisTurn;
+    const drawn = turnTotal(game.state, A, "card-drawn");
     game.dispatch({ type: "activate-ability", player: A, source: kydele, abilityIndex: 0, targets: [] });
     expect(pool(game).C).toBe(drawn);
   });

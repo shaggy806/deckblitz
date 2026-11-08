@@ -5,12 +5,13 @@
  * - `EffectAmount` `{ devotionTo }` (rule 700.5 — Gray Merchant of Asphodel)
  *   and `{ product }`, which is what lets "life equal to the life lost this
  *   way" multiply devotion by the number of opponents.
- * - `PlayerState.creaturesDiedThisTurn`, the per-player counterpart of the
+ * - the journal's `died` (per player), the per-player counterpart of the
  *   global one (Liliana's Standard Bearer).
  * - `AbilityCost.discardHand` (Slate of Ancestry).
  */
 
 import { describe, expect, it } from "vitest";
+import { diedThisTurn } from "./harness.js";
 
 import { Game } from "../game.js";
 import { asPlayerId } from "../primitives.js";
@@ -105,14 +106,14 @@ describe("creatures that died under your control", () => {
     }
     settle(game);
 
-    expect(game.state.players[A].creaturesDiedThisTurn).toBe(2);
-    expect(game.state.players[B].creaturesDiedThisTurn).toBe(1);
+    expect(diedThisTurn(game, [A])).toBe(2);
+    expect(diedThisTurn(game, [B])).toBe(1);
     // Global counts all three.
-    expect(game.state.creaturesDiedThisTurn).toBe(3);
+    expect(diedThisTurn(game)).toBe(3);
 
     const turn = game.state.turn.number;
     game.advanceUntil((s) => s.turn.number > turn || s.result.over);
-    expect(game.state.players[A].creaturesDiedThisTurn).toBe(0);
+    expect(diedThisTurn(game, [A])).toBe(0);
   });
 
   it("is what Liliana's Standard Bearer draws off", () => {

@@ -11,6 +11,7 @@
  */
 
 import { describe, expect, it } from "vitest";
+import { turnTotal } from "./harness.js";
 
 import { Game } from "../game.js";
 import { asPlayerId } from "../primitives.js";
@@ -196,7 +197,7 @@ describe("Shiko and Narset, Unified", () => {
     expect(copy.attachedTo).toBe(second);
     expect(copy.controller).toBe(A);
     // A token that wasn't "created" (the ruling).
-    expect(game.state.players[A].createdTokenThisTurn).toBe(false);
+    expect(turnTotal(game.state, A, "token-created") > 0).toBe(false);
   });
 });
 

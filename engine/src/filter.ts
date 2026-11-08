@@ -14,6 +14,7 @@
  * `.snapshot` — a dies trigger's filter, a resolving ability's "if it was …").
  */
 
+import { JOURNAL_VIEWS, entriesThisTurn, journalEntries, type JournalWhat, type JournalWindow } from "./journal.js";
 import {
   computeCharacteristics,
   effectiveColors,
@@ -23,6 +24,7 @@ import {
   hasAnyAbility,
   hasLostAbilities,
   hasManaAbility,
+  journalReader,
   pairedPartner,
 } from "./characteristics.js";
 import type { CastVia } from "./actions.js";
@@ -574,7 +576,7 @@ export interface CardFilter {
    *   that creature"), or `"either"`;
    * - `partner`: the other creature matched this filter **as it was at the
    *   block** — You Cannot Pass!'s "a legendary creature", Time to Reflect's "a
-   *   Zombie", Sea Troll's "a blue creature" — as `TurnHistoryEntry.asEntered`
+   *   Zombie", Sea Troll's "a blue creature" — as a journal entry's `was`
    *   reads what entered;
    * - `of`: the other creature was this one — a target slot (Venomous Breath's
    *   "that blocked or were blocked by it"), `"each-target"` (Triton Tactics'
@@ -1170,6 +1172,27 @@ export interface CardFilter {
    * permanent that left the battlefield and came back is a new object that
    * hasn't; one that has left is asked as it last was. */
   readonly attackedThisTurn?: boolean;
+  /**
+   * It appears in the journal (`journal.ts`) — this object, in the stint it's
+   * in now (or last had): "each creature you control that you've put one or
+   * more +1/+1 counters on this turn" (Kid Loki: `{ what: "counters-put", by:
+   * "you", counter: "+1/+1" }`), "all creature cards in your graveyard that
+   * were put there from anywhere this turn" (Garna, the Bloodflame: `{ what:
+   * "to-graveyard" }`), "the first time that creature has become tapped this
+   * turn" (Captain America: `{ what: "tapped", atMost: 1 }`). A card a move
+   * put where it is now is the object that arrived (rule 400.7), so a card
+   * put into a graveyard, returned and put there again counts once. `by`
+   * narrows to the entries in its controller's own record ("you've put"),
+   * the filter's `you`; `atLeast` (default 1) and `atMost` count entries.
+   */
+  readonly journaled?: {
+    readonly what: JournalWhat;
+    readonly window?: JournalWindow;
+    readonly by?: "you";
+    readonly counter?: string;
+    readonly atLeast?: number;
+    readonly atMost?: number;
+  };
   /** Was declared as an attacker in this combat phase (or wasn't): the
    * Clockwork creatures' "if this creature attacked or blocked this combat",
    * an `anyOf` with `blockedThisTurn`'s `{ relation: "blocked", thisCombat:
@@ -1653,6 +1676,26 @@ export function creaturesBlocking(state: GameState, attacker: ObjectId): number 
 /** Whether object `id`, in its stint `stint`, blocked or was blocked this turn
  * as `CardFilter.blockedThisTurn` asks, every player's `TurnHistory.blocks`
  * read. */
+/** Whether object `id`, in stint `stint`, has as many entries as `clause`
+ * asks in the journal's `clause.what` (see `CardFilter.journaled`). */
+function journaledMatches(
+  state: GameState,
+  registry: CardRegistry,
+  id: ObjectId,
+  stint: number,
+  clause: NonNullable<CardFilter["journaled"]>,
+  you: PlayerId,
+): boolean {
+  const players = clause.by === "you" ? [you] : state.turnOrder;
+  let n = 0;
+  for (const e of journalEntries(journalReader(state, registry), JOURNAL_VIEWS[clause.what], players, clause.window ?? "this-turn", you)) {
+    if (e.object !== id || (e.arrived ?? e.stint) !== stint) continue;
+    if (clause.counter !== undefined && e.counter !== clause.counter) continue;
+    n += 1;
+  }
+  return n >= (clause.atLeast ?? 1) && (clause.atMost === undefined || n <= clause.atMost);
+}
+
 function blockedThisTurnMatches(
   state: GameState,
   registry: CardRegistry,
@@ -1667,25 +1710,28 @@ function blockedThisTurnMatches(
     (clause.with === undefined ||
       clause.with.some((w) => w.object === partner && w.stint === was.zoneChangeCount)) &&
     (clause.partner === undefined || matchesFilter(state, registry, partner, clause.partner, { ...ctx, snapshot: was }));
-  for (const player of Object.values(state.players)) {
-    for (const block of player.turnHistory?.blocks ?? []) {
-      if (clause.thisCombat === true && block.combatPhase !== state.turn.combatPhases) continue;
-      if (
-        clause.relation !== "blocked-by" &&
-        block.blocker === id &&
-        block.blockerWas.zoneChangeCount === stint &&
-        partnerMatches(block.attacker, block.attackerWas)
-      ) {
-        return true;
-      }
-      if (
-        clause.relation !== "blocked" &&
-        block.attacker === id &&
-        block.attackerWas.zoneChangeCount === stint &&
-        partnerMatches(block.blocker, block.blockerWas)
-      ) {
-        return true;
-      }
+  for (const block of entriesThisTurn(state, "blocked")) {
+    if (clause.thisCombat === true && block.combat !== state.turn.combatPhases) continue;
+    const blocker = block.object;
+    const blockerWas = block.was;
+    const attacker = block.target?.kind === "object" ? block.target.object : undefined;
+    const attackerWas = block.targetWas;
+    if (blocker === undefined || blockerWas === undefined || attacker === undefined || attackerWas === undefined) continue;
+    if (
+      clause.relation !== "blocked-by" &&
+      blocker === id &&
+      blockerWas.zoneChangeCount === stint &&
+      partnerMatches(attacker, attackerWas)
+    ) {
+      return true;
+    }
+    if (
+      clause.relation !== "blocked" &&
+      attacker === id &&
+      attackerWas.zoneChangeCount === stint &&
+      partnerMatches(blocker, blockerWas)
+    ) {
+      return true;
     }
   }
   return false;
@@ -2641,6 +2687,10 @@ export function matchesFilter(
   if (filter.turnedFaceUpThisTurn !== undefined) {
     const turned = (live !== undefined ? live.turnedFaceUpOnTurn : lki!.turnedFaceUpOnTurn) === state.turn.number;
     if (turned !== filter.turnedFaceUpThisTurn) return false;
+  }
+  if (filter.journaled !== undefined) {
+    const stint = live !== undefined ? (live.zoneChangeCount ?? 0) : lki!.zoneChangeCount;
+    if (!journaledMatches(state, registry, id, stint, filter.journaled, ctx.you)) return false;
   }
   if (filter.attackedThisTurn !== undefined) {
     const attacked =

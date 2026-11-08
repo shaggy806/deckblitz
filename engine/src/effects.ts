@@ -57,10 +57,11 @@ import type {
   PlayerEffect,
   SpellGrantThisTurn,
   SpellSnapshot,
-  TurnHistoryKind,
-  TurnHistoryOrigin,
+  JournalWhat,
+  JournalOrigin,
   ZoneType,
 } from "./state.js";
+import type { JournalWindow } from "./journal.js";
 import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
 
 /** `"trigger-object"` reads `ResolutionContext.triggerObject` (needed-cards
@@ -929,7 +930,7 @@ export type EffectAmount =
    * the same through `CardFilter.blockerCount`. */
   | { readonly blockersOf: "source" | "trigger-object" }
   /** How many creatures died under the effect controller's control this turn
-   * — Liliana's Standard Bearer. Reads `PlayerState.creaturesDiedThisTurn`.
+   * — Liliana's Standard Bearer. Reads the journal's `died`.
    * `anyController`: every creature that died this turn, whoever controlled
    * it (Spymaster's Vault). */
   | { readonly creaturesDiedThisTurn: true; readonly anyController?: true }
@@ -1167,7 +1168,10 @@ export type EffectAmount =
    * ["library"] }`).
    */
   | {
-      readonly turnHistory: TurnHistoryKind;
+      readonly turnHistory: JournalWhat;
+      /** Which turns it reads (`journal.ts`): this one by default, "last
+       * turn", "during their last turn", "since your last turn". */
+      readonly window?: JournalWindow;
       readonly who?: PlayerScope;
       readonly target?: number;
       readonly filter?: CardFilter;
@@ -11453,12 +11457,12 @@ export interface EffectApi {
     colors?: readonly Color[],
     read?: { readonly to?: "you" | "source"; readonly by?: DamageSourceClause },
   ): number;
-  /** See the `{ turnHistory }` {@link EffectAmount}. */
-  turnHistoryCount(
-    what: TurnHistoryKind,
+  /** See the `{ turnHistory }` {@link EffectAmount}: a journal read. */
+  journalCount(
+    what: JournalWhat,
     players: readonly PlayerId[],
     filter?: CardFilter,
-    origin?: TurnHistoryOrigin & { readonly selfOnly?: boolean },
+    origin?: JournalOrigin & { readonly selfOnly?: boolean; readonly window?: JournalWindow },
   ): number;
   /** How many card types there are among `objects`, each once — as they
    * last existed on the battlefield if `departed` (a sacrificed or
@@ -15057,9 +15061,9 @@ export function signedAmountValue(
   if ("turnHistory" in amount) {
     if (amount.target !== undefined) {
       const ref = ctx.targets[amount.target];
-      return ref?.kind === "player" ? ctx.turnHistoryCount(amount.turnHistory, [ref.player], amount.filter, amount) : 0;
+      return ref?.kind === "player" ? ctx.journalCount(amount.turnHistory, [ref.player], amount.filter, amount) : 0;
     }
-    return ctx.turnHistoryCount(amount.turnHistory, ctx.playersInScope(amount.who ?? "you"), amount.filter, amount);
+    return ctx.journalCount(amount.turnHistory, ctx.playersInScope(amount.who ?? "you"), amount.filter, amount);
   }
   if ("thisWay" in amount) {
     const players =

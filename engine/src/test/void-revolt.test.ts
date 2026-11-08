@@ -13,7 +13,7 @@ import { describe, expect, it } from "vitest";
 
 import { REVOLT_CONDITION, VOID_CONDITION } from "../cards/helpers.js";
 import type { StaticCondition } from "../cards/define.js";
-import { staticConditionMet, turnHistoryCount } from "../characteristics.js";
+import { staticConditionMet, journalCount } from "../characteristics.js";
 import type { Game } from "../game.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 
@@ -194,14 +194,14 @@ describe("the left list reads each permanent as it was in the stint it left (rul
       [ref(ring)],
     );
     destroy(game, ring);
-    const creatures = (): number => turnHistoryCount(game.state, game.registry, [A], "left", { type: "creature" }, A);
+    const creatures = (): number => journalCount(game.state, game.registry, [A], "left", { type: "creature" }, A);
     expect(creatures()).toBe(1);
     // Back as a plain artifact, and gone again.
     game.debugApplyEffect(A, { kind: "put-onto-battlefield", target: 0 }, [ref(ring)]);
     settle(game);
     expect(zone(game, ring)).toBe("battlefield");
     destroy(game, ring);
-    expect(turnHistoryCount(game.state, game.registry, [A], "left", undefined, A)).toBe(2);
+    expect(journalCount(game.state, game.registry, [A], "left", undefined, A)).toBe(2);
     expect(creatures()).toBe(1);
   });
 
@@ -213,9 +213,9 @@ describe("the left list reads each permanent as it was in the stint it left (rul
     lands(game, "Forest", 2);
     cast(game, bears);
     expect(zone(game, bears)).toBe("battlefield");
-    expect(turnHistoryCount(game.state, game.registry, [A], "left", { type: "creature" }, A)).toBe(1);
+    expect(journalCount(game.state, game.registry, [A], "left", { type: "creature" }, A)).toBe(1);
     // A card put into a graveyard from anywhere else never left the battlefield.
     toGraveyard(game, "Hill Giant");
-    expect(turnHistoryCount(game.state, game.registry, [A], "left", undefined, A)).toBe(1);
+    expect(journalCount(game.state, game.registry, [A], "left", undefined, A)).toBe(1);
   });
 });

@@ -9,35 +9,13 @@ import { describe, expect, it } from "vitest";
 
 import type { Game } from "../game.js";
 import type { PlayerId } from "../primitives.js";
-import {
-  A,
-  B,
-  activate,
-  cast,
-  destroy,
-  hand,
-  lands,
-  life,
-  loyalty,
-  nextTurn,
-  pickFromZone,
-  pickModes,
-  ref,
-  settle,
-  spawn,
-  table,
-  toHand,
-  toLibrary,
-  toStep,
-  tokensNamed,
-  zone,
-} from "./harness.js";
+import { A, B, activate, cast, destroy, hand, lands, life, loyalty, nextTurn, pickFromZone, pickModes, ref, settle, spawn, table, toHand, toLibrary, toStep, tokensNamed, zone, turnTotal } from "./harness.js";
 
 const draw = (game: Game, player: PlayerId, amount = 1): void => {
   game.debugApplyEffect(player, { kind: "draw", amount }, []);
   settle(game);
 };
-const drawnThisTurn = (game: Game, player: PlayerId): number => game.state.players[player].cardsDrawnThisTurn;
+const drawnThisTurn = (game: Game, player: PlayerId): number => turnTotal(game.state, player, "card-drawn");
 
 describe("can't draw more than one card each turn", () => {
   it("Narset: an opponent's second draw is ignored, hers isn't, and the count starts anew next turn", () => {

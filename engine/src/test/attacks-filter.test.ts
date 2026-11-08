@@ -49,7 +49,6 @@ const spawn = (
     markedByDeathtouch: false,
     enteredBattlefieldOnTurn: opts.sick ? game.state.turn.number : 0,
     summoningSick: opts.sick ?? false,
-    loyaltyActivatedThisTurn: false,
     targets: null,
     attacking: null,
     blocking: null,

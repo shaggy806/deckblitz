@@ -13,21 +13,7 @@ import { Game } from "../game.js";
 import { asPlayerId } from "../primitives.js";
 import type { ObjectId } from "../primitives.js";
 
-import {
-  A,
-  B,
-  activate,
-  counters,
-  destroy,
-  enter,
-  keywords,
-  lands,
-  pt,
-  spawn,
-  table,
-  toGraveyard,
-  toLibrary,
-} from "./harness.js";
+import { A, B, activate, counters, destroy, enter, keywords, lands, pt, spawn, table, toGraveyard, toLibrary, turnTotal, setTurnTotal } from "./harness.js";
 
 /** `aura` or `equipment`, on the battlefield, attached to `host` (silently). */
 const attach = (game: Game, name: string, host: ObjectId, player = A): ObjectId => {
@@ -177,9 +163,9 @@ describe("other amounts", () => {
     const bears = spawn(game, "Grizzly Bears");
     const theirs = spawn(game, "Grizzly Bears", B);
     toLibrary(game, "Wastes");
-    const base = game.state.players[A].cardsDrawnThisTurn;
+    const base = turnTotal(game.state, A, "card-drawn");
     expect(pt(game, bears)).toEqual({ power: 2 + base, toughness: 2 + base });
-    game.state.players[A].cardsDrawnThisTurn = base + 2;
+    setTurnTotal(game.state, A, "card-drawn", base + 2);
     expect(pt(game, bears)).toEqual({ power: 4 + base, toughness: 4 + base });
     expect(pt(game, theirs)).toEqual({ power: 2, toughness: 2 });
   });

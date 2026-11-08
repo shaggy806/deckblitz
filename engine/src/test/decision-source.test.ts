@@ -59,7 +59,6 @@ const spawn = (game: Game, cardName: string, controller: PlayerId): ObjectId => 
     markedByDeathtouch: false,
     enteredBattlefieldOnTurn: 0,
     summoningSick: false,
-    loyaltyActivatedThisTurn: false,
     targets: null,
     attacking: null,
     blocking: null,

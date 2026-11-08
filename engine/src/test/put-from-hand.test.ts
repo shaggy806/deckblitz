@@ -6,6 +6,7 @@
  * family: putting a land onto the battlefield is not *playing* one.
  */
 import { describe, expect, it } from "vitest";
+import { turnTotal } from "./harness.js";
 
 import { computeCharacteristics } from "../characteristics.js";
 import { ScriptedController } from "../controller.js";
@@ -54,7 +55,7 @@ describe("Growth Spiral", () => {
     // Spend the turn's one land drop first, so the only way a land can reach
     // the battlefield below is the spell itself.
     game.dispatch({ type: "play-land", player: A, card: handCard(game, "Island") });
-    expect(game.state.players[A].landsPlayedThisTurn).toBe(1);
+    expect(turnTotal(game.state, A, "land-played")).toBe(1);
 
     const lands0 = game.battlefield.filter(
       (id) => game.state.objects[id].controller === A,
@@ -83,7 +84,7 @@ describe("Growth Spiral", () => {
     expect(
       game.battlefield.filter((id) => game.state.objects[id].controller === A).length,
     ).toBe(lands0 + 1);
-    expect(game.state.players[A].landsPlayedThisTurn).toBe(1);
+    expect(turnTotal(game.state, A, "land-played")).toBe(1);
   });
 
   it("is optional — declining leaves the hand alone", () => {

@@ -13,6 +13,7 @@
  */
 
 import { describe, expect, it } from "vitest";
+import { entriesThisTurn } from "../journal.js";
 
 import { defineCard } from "../cards/define.js";
 import { createDefaultRegistry } from "../cards/registry.js";
@@ -258,7 +259,7 @@ describe("the lists and stats", () => {
     expect(holds(game, { kind: "turn-history", what: "entered", filter: { subtype: "Human" } })).toBe(true);
     game.advanceUntil((s) => s.turn.number === 2 && s.turn.step === "precombat-main");
     expect(holds(game, { kind: "turn-history", what: "entered", who: "any-player" })).toBe(false);
-    expect(game.state.players[A].turnHistory).toBeUndefined();
+    expect(entriesThisTurn(game.state, "entered")).toHaveLength(0);
   });
 
   it("raid and damage taken as turn stats", () => {

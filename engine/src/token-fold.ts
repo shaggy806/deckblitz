@@ -14,6 +14,7 @@
  * it is named.
  */
 
+import type { JournalKind } from "./journal.js";
 import type { ObjectId } from "./primitives.js";
 import type { GameObject, GameState } from "./state.js";
 
@@ -42,9 +43,27 @@ function stableStringify(value: unknown): string {
  * timestamps, and every per-turn record (attacked this turn, damage dealt to
  * it this turn, abilities used this turn).
  */
-export function exactTokenShape(o: GameObject): string {
+export function exactTokenShape(o: GameObject, state: GameState): string {
   const { id: _id, stackCount: _count, splitFromStack: _split, splitFrom: _from, ...rest } = o;
-  return stableStringify(rest);
+  return `${stableStringify(rest)}|${journalShape(o, state)}`;
+}
+
+/** The journal kinds a card asks about one object by ("a creature you put a
+ * +1/+1 counter on this turn", "the first time it became tapped this turn"),
+ * each recorded on the token itself: two tokens differing in them aren't
+ * interchangeable, though the journal names neither (`COUNT_ONLY_HISTORY`). */
+const PER_OBJECT_KINDS: ReadonlySet<JournalKind> = new Set<JournalKind>(["counters-put", "tapped"]);
+
+/** What this turn's journal says of `o` itself, in its stint, by the
+ * per-object kinds — without amounts, which scale with a stack's size. */
+function journalShape(o: GameObject, state: GameState): string {
+  const stint = o.zoneChangeCount ?? 0;
+  const marks: string[] = [];
+  for (const e of state.journal?.entries ?? []) {
+    if (e.turn !== state.turn.number || e.object !== o.id || e.stint !== stint || !PER_OBJECT_KINDS.has(e.kind)) continue;
+    marks.push(`${e.kind}:${e.counter ?? ""}:${e.player ?? ""}`);
+  }
+  return marks.sort().join(",");
 }
 
 /** Fields holding snapshots of things that have left a zone — a spell as it
@@ -60,22 +79,22 @@ const SNAPSHOT_OBJECT_FIELDS: ReadonlySet<string> = new Set(["lastOnStack", "las
  * (`GameObject.splitFrom`): nothing in the game looks it up. */
 const CLIENT_ONLY_OBJECT_FIELDS: ReadonlySet<string> = new Set(["splitFrom"]);
 
-/** `TurnHistory` lists kept only to be counted, whose ids nothing looks up:
- * how much damage sources dealt (`damageDealt`, read by amount and colour).
- * Not `attackers`: it holds each creature that attacked this turn once, by
+/** Journal kinds whose ids hold no token apart: damage is read by amount and
+ * colour, and counters put and tappings by each token's own record, which
+ * `exactTokenShape` compares instead (`PER_OBJECT_KINDS`). Not `attacked`: it holds each creature that attacked this turn once, by
  * object, so a second combat's declaration is told from a first one's —
  * two tokens that attacked folded into one would attack again as that one
  * and a fresh token split off it, and Windbrisk Heights would count three
  * creatures for two. Every token that attacked stays its own object until
  * cleanup. */
-const COUNT_ONLY_HISTORY: ReadonlySet<string> = new Set(["damageDealt"]);
+const COUNT_ONLY_HISTORY: ReadonlySet<JournalKind> = new Set<JournalKind>(["damage", "counters-put", "tapped"]);
 
 /**
  * Every object id the rest of the game state names: other objects' fields
  * (an Aura's host, an exiled card's exiler, a modifier's source), delayed
  * triggers, prevention shields, anything waiting, and the turn's history of
  * what entered, attacked, died, was sacrificed or exiled
- * (`PlayerState.turnHistory`, read by matching each entry's object). Left
+ * (this turn's journal entries, read by matching each entry's object). Left
  * out: the zone lists (where
  * things are, not what refers to them), the event log (what has already
  * happened), each object's own `id`, the snapshots of things that left a
@@ -104,20 +123,18 @@ export function referencedObjectIds(state: GameState): Set<ObjectId> {
     for (const item of Object.values(value)) walk(item);
   };
   for (const [key, value] of Object.entries(state)) {
-    if (key === "zones" || key === "eventLog" || key === "objects" || key === "players") continue;
+    if (key === "zones" || key === "eventLog" || key === "objects" || key === "players" || key === "journal") continue;
     if (SNAPSHOT_STATE_FIELDS.has(key)) continue;
     walk(value);
   }
-  for (const seat of Object.values(state.players)) {
-    for (const [key, value] of Object.entries(seat)) {
-      if (key !== "turnHistory") {
-        walk(value);
-        continue;
-      }
-      for (const [list, entries] of Object.entries(value ?? {})) {
-        if (!COUNT_ONLY_HISTORY.has(list)) walk(entries);
-      }
-    }
+  for (const seat of Object.values(state.players)) walk(seat);
+  // The journal names objects by id, but earlier turns' reads match each as
+  // it was (`was`), so only this turn's entries hold a token apart, and only
+  // their objects, not the snapshots.
+  for (const entry of state.journal?.entries ?? []) {
+    if (entry.turn !== state.turn.number || COUNT_ONLY_HISTORY.has(entry.kind)) continue;
+    if (entry.object !== undefined) seen.add(entry.object);
+    if (entry.target?.kind === "object") seen.add(entry.target.object);
   }
   for (const object of Object.values(state.objects)) {
     if (object.zone === "library") continue;

@@ -7,6 +7,7 @@
  */
 
 import { describe, expect, it } from "vitest";
+import { powerAttackedWith } from "../characteristics.js";
 
 import type { LegalAction } from "../actions.js";
 import { withinAttackTax, withRequiredAttackers } from "../combat/attacking.js";
@@ -187,7 +188,7 @@ describe("a cost to attack paid in permanents", () => {
     attack(game, dragon, arbor);
     expect(zoneOf(game, arbor)).toBe("graveyard");
     expect(attacking(game, dragon)).toBe(true);
-    expect(game.state.players[A].turnHistory?.attackedPower?.power).toBe(5);
+    expect(powerAttackedWith(game.state, A, game.state.turn.combatPhases ?? 1)).toBe(5);
     settle(game);
   });
 

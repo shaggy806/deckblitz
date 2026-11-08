@@ -36,6 +36,8 @@ import type { CardNameAim, CardNameFilter } from "./card-names.js";
 import type { Color, LandManaInstead, ManaOrigin, ManaType, ManaUnit, SpendAs } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { Expiry, UntilCast, UntilPoint, WhileSource } from "./duration.js";
+import type { Journal } from "./journal.js";
+export type { JournalOrigin, JournalWhat } from "./journal.js";
 import type { GameEvent, Vote } from "./events.js";
 import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
 import type { Step } from "./turn.js";
@@ -428,14 +430,6 @@ export interface GameObject {
    * controller's `PlayerState.previousUpkeepSeq`.
    */
   controlSinceSeq?: number;
-  /**
-   * True once a loyalty ability of this permanent has been activated this turn
-   * (rule 606.3 — at most one per turn). Reset in the controller's untap step.
-   */
-  loyaltyActivatedThisTurn: boolean;
-  /** How many, while `loyaltyActivatedThisTurn` — Oath of Teferi's second (rule
-   * 606.3). Stale, and unread, once that's false. */
-  loyaltyActivationsThisTurn?: number;
   /**
    * Indices of this permanent's activated abilities marked
    * `oncePerTurn` that have already been used this turn (rule 602.5g —
@@ -2895,7 +2889,6 @@ export interface PlayerState {
    * spent without ever landing here. */
   manaPool: ManaUnit[];
   maxHandSize: number;
-  landsPlayedThisTurn: number;
   /** Extra land drops an effect granted this turn — Explore's "You may play
    * an additional land this turn". Reset as each turn begins; the ongoing
    * kind (Azusa) is a static, `extraLandsPerTurn`. */
@@ -2932,30 +2925,8 @@ export interface PlayerState {
    * turn" triggers. (Storm counts *all* players' spells — see
    * `GameState.spellsCastThisTurn`.) Reset in `beginTurn`. ROADMAP Phase 8. */
   spellsCastThisTurn: number;
-  /** How many crimes this player has committed this turn (rule 700.13 — a
-   * spell or ability of theirs targeting an opponent, an opponent's
-   * permanent, spell or ability, or a card in an opponent's graveyard).
-   * Absent for none; reset in `beginTurn`. */
-  crimesThisTurn?: number;
   /** True once this player has lost life this turn — Theater of Horrors's
    * "if an opponent lost life this turn". Reset in `beginTurn`. */
-  /**
-   * How much life this player has **lost** this turn, as an amount.
-   *
-   * Was a boolean, which answered "did an opponent lose life?" (Theater of
-   * Horrors, Rakdos) but not "did a player lose 4 or more?" — Y'shtola, the
-   * most-played commander in the format, and Bloodchief Ascension both need
-   * the number. `> 0` is the old boolean.
-   *
-   * Counts life *lost*, which is not the same as damage taken: a drain, a
-   * cost paid and combat damage all land here, and prevention means nothing
-   * arrives. Reset in `beginTurn`.
-   */
-  lifeLostThisTurn: number;
-  /** How much life this player has **gained** this turn (The Gaffer,
-   * Resplendent Angel, Lathiel: "if you gained N or more life this turn").
-   * Reset in `beginTurn`. */
-  lifeGainedThisTurn: number;
   /**
    * The creature types of the sources this player controlled that dealt
    * combat damage to a player this turn, each read as it dealt the damage —
@@ -2965,17 +2936,6 @@ export interface PlayerState {
    * absent is none.
    */
   combatDamageCreatureTypesThisTurn?: string[];
-  /** How many cards this player has drawn this turn (Kydele's "{T}: Add {C}
-   * for each card you've drawn this turn", Fists of Flame). Counts the draw
-   * itself, not cards put into hand another way — a tutor to hand is not a
-   * draw. Reset in `beginTurn`. */
-  cardsDrawnThisTurn: number;
-  /** How many cards this player has cycled this turn (rule 702.29c) — Gavi,
-   * Nest Warden's "the first card you cycle each turn". Reset in `beginTurn`. */
-  cardsCycledThisTurn?: number;
-  /** How many equip abilities this player has activated this turn — Forge
-   * Anew's "the first equip ability you activate". Reset in `beginTurn`. */
-  equipsActivatedThisTurn?: number;
   /** Whether this player has drawn a card during their own draw step this
    * turn — so the next one isn't "the first one they draw in each of their
    * draw steps" (Xyris, the Writhing Storm; Orcish Bowmasters). Reset in
@@ -3006,16 +2966,6 @@ export interface PlayerState {
    * Never reset; absent until their first spell. Kept on the player rather
    * than read off the event log, which a simulation starts empty. */
   spellNamesCastThisGame?: Record<string, number>;
-  /** How many creatures died **under this player's control** this turn —
-   * Liliana's Standard Bearer's "draw X cards, where X is the number of
-   * creatures that died under your control this turn". The per-player
-   * counterpart of `GameState.creaturesDiedThisTurn`, which is global. Reset
-   * with it at cleanup. */
-  creaturesDiedThisTurn: number;
-  /** This player created at least one token this turn (Idol of Oblivion:
-   * "Activate only if you created a token this turn"). Set in
-   * `mintTokenBatch`, which every token-making path goes through. */
-  createdTokenThisTurn: boolean;
   /** The last turn this player declared a commander — anyone's — as an
    * attacker: "during any turn you attacked with a commander" (Neriv,
    * Crackling Vanguard). */
@@ -3055,9 +3005,6 @@ export interface PlayerState {
    * set until that turn begins, when it becomes `TurnState.noCombat`. A turn
    * that's skipped never begins, so this waits for the first that isn't. */
   noCombatNextTurn?: true;
-  /** What this player's turn so far has held — see {@link TurnHistory}.
-   * Absent until something is recorded; reset as each turn begins. */
-  turnHistory?: TurnHistory;
   /** Energy counters this player has (rule 122 / {E} — ROADMAP Phase 10). A
    * player resource, not tied to any permanent; spent by a `payEnergy` ability
    * cost, gained by a `get-energy` effect. Kept apart from `counters`, which
@@ -4915,239 +4862,6 @@ export interface AttackCostPart {
   readonly source: ObjectId;
 }
 
-/** One placement of counters in {@link TurnHistory}'s `countersPut`: `count`
- * is every counter it put, on every token of a stack; `controller` and `types`
- * are the permanent's as they went on. It names no object: a list that did would
- * keep every token given a counter from folding back into its stack
- * (`token-fold.ts`'s `referencedObjectIds`), and only counting reads it. */
-export interface CountersPutRecord {
-  readonly counter: string;
-  readonly count: number;
-  readonly controller: PlayerId;
-  readonly types: readonly CardType[];
-}
-
-/** One object in a {@link TurnHistory} list; a token stack entering or
- * leaving at once counts as every token in it. */
-export interface TurnHistoryEntry {
-  readonly object: ObjectId;
-  readonly count: number;
-  /** For a permanent that left the battlefield (`left`, `died`, `exiled`,
-   * `sacrificed`): the battlefield stint it left — its
-   * `LastKnownInfo.zoneChangeCount` — so it's matched as it was *then* (rule
-   * 603.10a), not as a later stint left it, and so "another creature died"
-   * can tell the source's own earlier stint (a different object, 400.7)
-   * from the one it's in now. */
-  readonly stint?: number;
-  /** For a permanent that entered (`entered`): what it was as it entered,
-   * after its replacement effects — so "if an artifact entered the
-   * battlefield under your control this turn" asks what entered, not what
-   * it is now (Mechan Shieldmate's ruling): one that has stopped being an
-   * artifact still counts, one that became one later doesn't. */
-  readonly asEntered?: LastKnownInfo;
-  /** For a source of combat damage (`combat-damaged-by`): what it was as it
-   * dealt that damage, so "dealt combat damage by a Zombie this turn" asks
-   * about then, whatever it has become or wherever it has gone. */
-  readonly asDealt?: LastKnownInfo;
-  /** For a creature declared as an attacker (`attackers`): what it was as it
-   * was declared, so "if you attacked with a Hero this turn" asks about then
-   * (rule 508.1), whatever it has become or wherever it has gone. */
-  readonly asDeclared?: LastKnownInfo;
-  /** For something put into a graveyard (`to-graveyard`): the zone it came
-   * from — `"battlefield"` (with `stint`), `"library"`, `"hand"`, `"stack"`
-   * and the rest. */
-  readonly from?: ZoneType;
-}
-
-/**
- * One creature's block of one attacker, as declared (rules 509.1g-h): a block
- * of a band is one of these per member (702.22h), and a creature put onto the
- * battlefield blocking has none, never having "blocked" (509.4). Each side as
- * it was then, its `zoneChangeCount` saying which object it was (400.7): "was
- * blocked by a Zombie" asks what blocked it, not what that creature has become
- * or whether it's still here.
- */
-export interface BlockRecord {
-  readonly blocker: ObjectId;
-  readonly blockerWas: LastKnownInfo;
-  readonly attacker: ObjectId;
-  readonly attackerWas: LastKnownInfo;
-  /** Which of the turn's combat phases (`TurnState.combatPhases`). */
-  readonly combatPhase: number;
-}
-
-/** The lists a {@link TurnHistory} keeps. */
-export type TurnHistoryKind =
-  | "entered"
-  | "left"
-  | "died"
-  | "sacrificed"
-  | "exiled"
-  | "descended"
-  | "discarded"
-  | "to-graveyard"
-  | "combat-damaged-by"
-  | "attackers"
-  | "turned-face-up"
-  | "regenerated";
-
-/** The zones a `to-graveyard` {@link TurnHistory} count takes its arrivals
- * from (`from`: only these) or leaves out (`notFrom`) — "put into graveyards
- * from the battlefield" (`from: ["battlefield"]`), "from their library"
- * (`["library"]`), "from anywhere other than the battlefield" (`notFrom:
- * ["battlefield"]`). Other lists have no origin, so `from` matches nothing
- * there. */
-export interface TurnHistoryOrigin {
-  readonly from?: readonly ZoneType[];
-  readonly notFrom?: readonly ZoneType[];
-}
-
-/**
- * What one player's turn so far has held, for "this turn" conditions and
- * amounts — "if another Human entered the battlefield under your control this
- * turn" (Éowyn, Shieldmaiden), "the number of opponents that were dealt combat
- * damage this turn" (Tymna the Weaver), "for each creature that died under
- * your control this turn", "the number of times you descended this turn".
- * Recorded off the events themselves (`Game.recordTurnHistory`, from `emit`),
- * so every path that announces one counts; reset as each turn begins.
- */
-export interface TurnHistory {
-  /** Permanents that entered the battlefield under this player's control. */
-  entered?: TurnHistoryEntry[];
-  /** Permanents that left the battlefield while this player controlled them
-   * — controlled as they left (rule 603.10a looks back) — for any zone,
-   * however they left, a token included: revolt's "if a permanent you
-   * controlled left the battlefield this turn", void's "if a nonland
-   * permanent left the battlefield this turn" (every player's list, filtered
-   * `notTypes: ["land"]`). Phasing out isn't leaving (rule 702.26d): it
-   * moves nothing, so nothing is announced. Each entry names the stint it
-   * left. */
-  left?: TurnHistoryEntry[];
-  /** Creatures that died under this player's control. */
-  died?: TurnHistoryEntry[];
-  /** Permanents this player sacrificed. */
-  sacrificed?: TurnHistoryEntry[];
-  /** Permanents exiled from the battlefield while this player controlled
-   * them — Vren, the Relentless's "creatures your opponents controlled that
-   * were exiled this turn". */
-  exiled?: TurnHistoryEntry[];
-  /** Permanent cards put into this player's graveyard from anywhere — each
-   * is this player "descending". */
-  descended?: TurnHistoryEntry[];
-  /** Each source that dealt combat damage to this player, one entry a source
-   * a combat damage step, matched as it dealt it (`asDealt`, its stint in
-   * `stint`): Lost Monarch of Ifnir's "if a player was dealt combat damage by
-   * a Zombie this turn", Blitzball's "an opponent … by a legendary creature". */
-  "combat-damaged-by"?: TurnHistoryEntry[];
-  /** Cards this player discarded (rule 701.9a), wherever they went — a
-   * madness card discarded into exile too (702.35a) — "for each card you've
-   * discarded this turn" (Change of Fortune), "if you've discarded a card
-   * this turn" (Gilt-Blade Prowler). Cycling discards (702.29a). A card in
-   * a hand is always its owner's (rule 400.3), so the discarder is the owner. */
-  discarded?: TurnHistoryEntry[];
-  /** The creatures this player attacked with, each in the stint it attacked
-   * in — an impulse permission's `sourceDid: "attacked"`. */
-  attackedWith?: { readonly object: ObjectId; readonly stint: number }[];
-  /** The permanents this player put a lore counter on, each in the stint it
-   * was in — an impulse permission's `sourceDid: "lore-counter"`. */
-  loreCountersOn?: { readonly object: ObjectId; readonly stint: number }[];
-  /** Every placement of counters this player put on a permanent this turn
-   * (`CountersPutSpec`), read as they went on. */
-  countersPut?: CountersPutRecord[];
-  /** The players this player has declared an attacker at this turn, each once
-   * (`TurnStat`'s `"opponents-attacked"`). */
-  attackedPlayers?: PlayerId[];
-  /** Each block declared by a creature this player controlled, once per
-   * attacker it blocked — `CardFilter.blockedThisTurn`. */
-  blocks?: BlockRecord[];
-  /** Everything put into this player's graveyard this turn, each with the
-   * zone it came from (`from`): cards from anywhere — a library (milled,
-   * surveilled), a hand (discarded), the stack (a resolved or countered
-   * spell) — and permanents from the battlefield, a token included (it is
-   * put there before it ceases to exist, rule 111.7), each with the stint it
-   * left so a filter reads it as it last existed there (603.10a). The
-   * graveyard is the owner's (rule 400.3), so the list is. "The number of
-   * artifacts that were put into graveyards from the battlefield this turn"
-   * (Structural Assault: every player's, `from: ["battlefield"]`), "cards
-   * put into target player's graveyard from their library this turn"
-   * (Cruel Calculations), "from anywhere other than the battlefield" (Dimir
-   * Strandcatcher: `notFrom`). A card that has left the graveyard since still
-   * counts — it was put there. */
-  "to-graveyard"?: TurnHistoryEntry[];
-  /** Cards put into this player's graveyard from their hand or library —
-   * discarded, milled, surveilled, cycled — Welcome the Dead's "the number
-   * of cards that were put into your graveyard from your hand or library
-   * this turn" (`TurnStat` `"cards-to-graveyard-from-hand-or-library"`). */
-  toGraveyardFromHandOrLibrary?: number;
-  /** Cards that left this player's graveyard, for anywhere — Essence
-   * Anchor's "if a card left your graveyard this turn" (`TurnStat`
-   * `"cards-left-graveyard"`). */
-  leftGraveyard?: number;
-  /** Lands this player tapped for mana (rule 106.12) — Desolation's "each
-   * player who tapped a land for mana this turn" (`TurnStat`
-   * `"lands-tapped-for-mana"`). */
-  landsTappedForMana?: number;
-  /** Scries and surveils this turn (`TurnStat` `"scried-or-surveilled"`). */
-  scriedOrSurveilled?: number;
-  /** Mana this player spent to cast spells this turn (rule 700.14 —
-   * expend; `TurnStat` `"mana-spent-on-spells"`). */
-  manaSpentOnSpells?: number;
-  /** A player was dealt combat damage this turn by a creature that, as it
-   * dealt it, was an Assassin creature or a commander this player
-   * controlled — what lets them pay a freerunning cost (rule 702.173a). */
-  freerunning?: boolean;
-  /** Energy counters this player has paid or lost (the `energy-paid-or-lost`
-   * turn stat). */
-  energyPaidOrLost?: number;
-  /** Damage dealt to this player, and the part of it that was combat damage. */
-  damageTaken?: number;
-  combatDamageTaken?: number;
-  /** Damage dealt by sources this player controlled, to anything — each
-   * with its source's colours as it dealt it: "if red sources you controlled
-   * dealt 4 or more noncombat damage this turn" (Ojer Axonil's Temple of
-   * Power). What it was as it dealt it, and what to: "the damage dealt to you
-   * so far this turn by artifacts" (Reverse Polarity), "if 4 or more damage was
-   * dealt to it this turn" (the Zuberas, `toStint` the stint it was in). */
-  damageDealt?: {
-    readonly source: ObjectId;
-    readonly amount: number;
-    readonly combat: boolean;
-    readonly colors: readonly Color[];
-    readonly name?: string;
-    readonly types?: readonly CardType[];
-    readonly to?: TargetRef;
-    readonly toStint?: number;
-  }[];
-  /** This player declared one or more attackers (raid). */
-  attacked?: boolean;
-  /** Each creature this player declared as an attacker, once — in the
-   * battlefield stint it was in (a creature that left and came back is a
-   * different one, rule 400.7), with what it was as it was first declared
-   * (`asDeclared`). A creature put onto the battlefield attacking was never
-   * declared (rule 508.4). */
-  attackers?: TurnHistoryEntry[];
-  /** Permanents this player turned face up (rule 701.40b), each time. */
-  "turned-face-up"?: TurnHistoryEntry[];
-  /** Permanents under this player's control a regeneration shield saved
-   * (rule 701.19a), each time: Spiny Starfish's "for each time it regenerated
-   * this turn". */
-  regenerated?: TurnHistoryEntry[];
-  /** Times this player surveilled (rule 701.25; a surveil 0 isn't one). */
-  surveilled?: number;
-  /** Times this player searched their own library (rule 701.23). */
-  ownLibrarySearched?: number;
-  /** Cards this player owns put into exile, from any zone, by anyone: not a
-   * token, which isn't a card (rules 108.2, 111.1). */
-  cardsPutIntoExile?: number;
-  /** The total power of the creatures this player last declared as attackers
-   * this turn, read as they were declared, and which of the turn's combat
-   * phases that was (`TurnState.combatPhases`) — `TurnStat`'s
-   * `"power-attacked-with-this-combat"`. `earlierMost` is the greatest such
-   * total of the turn's earlier declarations, for `attack-with`'s "for the
-   * first time each turn" (Desert Were-Worm). */
-  attackedPower?: { readonly combat: number; readonly power: number; readonly earlierMost?: number };
-}
-
 /** Where a permanent can go when it leaves the battlefield. */
 export type LeaveDestination = "graveyard" | "exile" | "hand" | "library" | "command";
 
@@ -6907,9 +6621,6 @@ export interface GameState {
    * turn (`grant-spells-this-turn` — Yidris, Maelstrom Wielder's cascade),
    * one entry per resolution. Ends with the turn. Absent when empty. */
   spellGrantsThisTurn?: SpellGrantThisTurn[];
-  /** How many creatures have died this turn — Liliana's Devotee's "if a
-   * creature died this turn". Turn-scoped; reset as each turn begins. */
-  creaturesDiedThisTurn: number;
   /** One-shot damage-prevention shields (Healing Salve — rule 614.9 / ROADMAP
    * Phase 11 EG-6). Each absorbs up to `amount` damage aimed at `target`;
    * consumed (and shrunk / removed) in `dealDamage` before the hit lands.
@@ -7027,6 +6738,11 @@ export interface GameState {
    * no permission names any more goes as a turn begins.
    */
   permissionGroups?: { readonly id: number; readonly left: number }[];
+  /** What has happened this round and this game: the one record every "this
+   * turn", "last turn" and "this game" read asks (`journal.ts`). State, not
+   * `eventLog`, because bot simulations empty the log. Absent until something
+   * is recorded. */
+  journal?: Journal;
   eventLog: GameEvent[];
   eventSeq: number;
   nextObjectSeq: number;
@@ -7066,18 +6782,12 @@ export function createPlayerState(id: PlayerId, rules: GameRules): PlayerState {
     life: rules.startingLife,
     manaPool: [],
     maxHandSize: rules.maxHandSize,
-    landsPlayedThisTurn: 0,
     hasLost: false,
     lossReason: null,
     attemptedDrawFromEmptyLibrary: false,
     commanderCastCounts: {},
     commanderDamageTaken: {},
     spellsCastThisTurn: 0,
-    lifeLostThisTurn: 0,
-  lifeGainedThisTurn: 0,
-  cardsDrawnThisTurn: 0,
-    creaturesDiedThisTurn: 0,
-    createdTokenThisTurn: false,
     usedGraveyardThisTurn: false,
     energy: 0,
     counters: {},

@@ -9,7 +9,7 @@ import { describe, expect, it } from "vitest";
 import type { Action, LegalAction } from "../actions.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
-import { A, B, lands, settle, spawn, table, toGraveyard, toHand, toLibrary } from "./harness.js";
+import { A, B, lands, settle, spawn, table, toGraveyard, toHand, toLibrary, turnTotal } from "./harness.js";
 
 type CastOffer = Extract<LegalAction, { kind: "cast-spell" }>;
 type AbilityOffer = Extract<LegalAction, { kind: "activate-ability" }>;
@@ -53,7 +53,7 @@ describe("two typecycling abilities on one card", () => {
     expect(offered).toContain(forest);
     expect(offered).not.toContain(mountain);
     expect(game.state.objects[forest].zone).toBe("hand");
-    expect(game.state.players[A].cardsCycledThisTurn).toBe(1);
+    expect(turnTotal(game.state, A, "cycled")).toBe(1);
   });
 
   it("isn't offered without the mana", () => {

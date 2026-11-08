@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { turnTotal } from "./harness.js";
 
 import { ScriptedController } from "../controller.js";
 import { Game } from "../game.js";
@@ -51,8 +52,7 @@ const spawn = (
     damageMarked: 0,
     markedByDeathtouch: false,
     enteredBattlefieldOnTurn: opts.sick ? game.state.turn.number : 0,
-    summoningSick: opts.sick ?? false, loyaltyActivatedThisTurn: false,
-    targets: null,
+    summoningSick: opts.sick ?? false,    targets: null,
     attacking: null,
     blocking: null,
     blockedBy: [],
@@ -258,7 +258,7 @@ describe("Oracle of Mul Daya (reveals the top of your library and lets you play 
     game.dispatch({ type: "play-land", player: A, card: topId });
 
     expect(game.state.objects[topId].zone).toBe("battlefield");
-    expect(game.state.players[A].landsPlayedThisTurn).toBe(1);
+    expect(turnTotal(game.state, A, "land-played")).toBe(1);
     // Oracle's own extra land drop (`extraLandsPerTurn: 1`) still allows a
     // second land this turn, from hand.
     const handForest = game.handOf(A).find((id) => game.state.objects[id].cardName === "Forest")!;

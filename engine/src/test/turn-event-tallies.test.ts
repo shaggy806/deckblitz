@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import { entriesThisTurn } from "../journal.js";
+import { turnStatOf } from "../characteristics.js";
 
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
@@ -26,7 +28,7 @@ import {
   zone,
 } from "./harness.js";
 
-// `TurnHistory`'s lists and counts, read by the conditions `turn-history` and
+// The journal's lists and counts, read by the conditions `turn-history` and
 // `turn-stat` and the amount `{ turnHistory }`: creatures declared as attackers
 // as they were declared, permanents turned face up, regenerations, surveils,
 // searches of one's own library, cards put into exile.
@@ -63,7 +65,7 @@ describe("attacked with: a list of creatures as they were declared", () => {
     const navigator = spawn(t.game, "Deepway Navigator", A, { sick: true });
     attackWith(t, [spawn(t.game, "Coral Merfolk"), spawn(t.game, "Coral Merfolk"), spawn(t.game, "Grizzly Bears")]);
     expect(pt(t.game, navigator)).toEqual({ power: 2, toughness: 2 });
-    expect(t.game.state.players[A].turnHistory?.attackers?.length).toBe(3);
+    expect(turnStatOf(t.game.state, A, "attackers")).toBe(3);
   });
 
   it("Deepway Navigator's +1/+0 stays though the Merfolk have gone, and ends with the turn", () => {
@@ -192,7 +194,7 @@ describe("attacked with: a list of creatures as they were declared", () => {
     game.state.objects[token].summoningSick = false;
     attackWith(t, [token]);
     expect(keywords(game, token).has("double-strike")).toBe(true);
-    expect(game.state.players[A].turnHistory?.attackers?.[0].asDeclared?.isToken).toBe(true);
+    expect(entriesThisTurn(game.state, "attacked").filter((e) => e.player === A)[0]?.was?.isToken).toBe(true);
     const exiled = game.state.zones.shared.exile;
     expect(exiled).toHaveLength(1);
     game.advanceUntil((s) => s.turn.step === "postcombat-main" && quiet(s) && s.priority.holder === A);
@@ -255,7 +257,7 @@ describe("turned face up, and entered face down", () => {
     const hidden = faceDown(game, "Grizzly Bears");
     game.debugApplyEffect(A, { kind: "turn-face-up", target: 0 }, [ref(hidden)]);
     settle(game);
-    expect(game.state.players[A].turnHistory?.["turned-face-up"]).toHaveLength(1);
+    expect(entriesThisTurn(game.state, "turned-face-up").filter((e) => e.player === A)).toHaveLength(1);
     pickModes(a, 0);
     a.chooseDiscardsFn = () => [keep];
     pastEndStep(game);
@@ -268,7 +270,7 @@ describe("turned face up, and entered face down", () => {
     const keep = toHand(game, "Grizzly Bears");
     game.debugApplyEffect(A, { kind: "manifest", who: "you" }, []);
     settle(game);
-    expect(game.state.players[A].turnHistory?.entered?.at(-1)?.asEntered?.faceDown).toBe(true);
+    expect(entriesThisTurn(game.state, "entered").filter((e) => e.player === A).at(-1)?.was?.faceDown).toBe(true);
     pickModes(a, 0);
     a.chooseDiscardsFn = () => [keep];
     pastEndStep(game);
@@ -354,7 +356,7 @@ describe("the rest of the turn's tallies", () => {
     expect(free()).toBe(false);
     game.debugApplyEffect(B, search, []);
     settle(game);
-    expect(game.state.players[B].turnHistory?.ownLibrarySearched).toBe(1);
+    expect(turnStatOf(game.state, B, "own-library-searched")).toBe(1);
     expect(free()).toBe(true);
     cast(game, trap, { targets: [ref(B)], free: true });
     expect(graveyard(game, B).length).toBeGreaterThanOrEqual(13);
@@ -391,7 +393,7 @@ describe("the rest of the turn's tallies", () => {
     const token = realToken(game);
     game.debugApplyEffect(A, { kind: "exile", target: 0 }, [ref(token)]);
     settle(game);
-    expect(game.state.players[A].turnHistory?.cardsPutIntoExile ?? 0).toBe(0);
+    expect(turnStatOf(game.state, A, "cards-put-into-exile")).toBe(0);
   });
 
   it("Ellyn Harbreeze looks at as many cards as tokens you created this turn, a stack counted whole", () => {
@@ -422,7 +424,7 @@ describe("the rest of the turn's tallies", () => {
       settle(game);
       expect(zone(game, starfish)).toBe("battlefield");
     }
-    expect(game.state.players[A].turnHistory?.regenerated).toHaveLength(2);
+    expect(entriesThisTurn(game.state, "regenerated").filter((e) => e.player === A)).toHaveLength(2);
     pastEndStep(game);
     expect(tokensNamed(game, "0/1 Blue Starfish Token")).toBe(2);
     // None at the next end step: it hasn't regenerated that turn.

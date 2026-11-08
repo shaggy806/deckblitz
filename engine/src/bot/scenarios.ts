@@ -43,6 +43,7 @@ import { createDefaultRegistry } from "../cards.js";
 import { HeuristicBotController } from "../controller.js";
 import type { ControllerView, PlayerController } from "../controller.js";
 import { Game } from "../game.js";
+import { appendJournal } from "../journal.js";
 import { asPlayerId } from "../primitives.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import { printedCardName } from "../state.js";
@@ -1770,7 +1771,7 @@ const SCENARIOS: readonly BotScenario[] = [
         game.debugSpawn("Forest", A, "library");
         onBoard(game, "Llanowar Elves", C);
         if (active === A) {
-          game.state.players[A].landsPlayedThisTurn = 1;
+          appendJournal(game.state, { kind: "land-played", player: A });
         } else {
           // On to dave's upkeep, the next turn, with alice holding priority.
           game.advanceUntil(
@@ -1835,7 +1836,7 @@ const SCENARIOS: readonly BotScenario[] = [
       const game = table(registry, [A, B, C, D], A);
       lands(game, "Forest", A, 3);
       const landscape = onBoard(game, "Bountiful Landscape", A);
-      game.state.players[A].landsPlayedThisTurn = 1;
+      appendJournal(game.state, { kind: "land-played", player: A });
       return {
         game,
         player: A,
@@ -2491,7 +2492,7 @@ const SCENARIOS: readonly BotScenario[] = [
       const game = table(registry, [A, B, C, D], A);
       game.state.turn.number = 5; // alice's second turn
       for (const land of ["Forest", "Mountain"]) onBoard(game, land, A);
-      game.state.players[A].landsPlayedThisTurn = 1;
+      appendJournal(game.state, { kind: "land-played", player: A });
       const explore = game.debugSpawn("Explore", A, "hand");
       for (const card of ["Swamp", "Swamp", "Harrow", "Crop Rotation", "Grazing Gladehart", "Lifespring Druid"]) {
         game.debugSpawn(card, A, "hand");
@@ -2525,7 +2526,7 @@ const SCENARIOS: readonly BotScenario[] = [
       // Out since turn one, so untapped: it enters tapped even when spawned.
       game.state.objects[onBoard(game, "Temple of Mystery", A)].tapped = false;
       onBoard(game, "Shivan Reef", A);
-      game.state.players[A].landsPlayedThisTurn = 1;
+      appendJournal(game.state, { kind: "land-played", player: A });
       for (const land of ["Mountain", "Island"]) game.debugSpawn(land, A, "library");
       game.debugSpawn("Roiling Dragonstorm", A, "hand");
       const ramp = [game.debugSpawn("Rampant Growth", A, "hand"), game.debugSpawn("Farseek", A, "hand")];
@@ -2559,7 +2560,7 @@ const SCENARIOS: readonly BotScenario[] = [
       for (const land of ["Forest", "Mountain", "Mountain", "Frontier Bivouac", "Sheltered Thicket"]) {
         game.state.objects[onBoard(game, land, A)].tapped = false;
       }
-      game.state.players[A].landsPlayedThisTurn = 1;
+      appendJournal(game.state, { kind: "land-played", player: A });
       const orb = game.debugSpawn("Carnelian Orb of Dragonkind", A, "hand");
       for (const card of ["Garruk's Uprising", "Balefire Dragon", "Utvara Hellkite"]) {
         game.debugSpawn(card, A, "hand");
@@ -4056,7 +4057,7 @@ const SCENARIOS: readonly BotScenario[] = [
       const game = table(registry, [A, B, C, D], A);
       lands(game, "Island", A, 4);
       lands(game, "Mountain", A, 2);
-      game.state.players[A].landsPlayedThisTurn = 1;
+      appendJournal(game.state, { kind: "land-played", player: A });
       const archmage = game.debugSpawn("Archmage Emeritus", A, "hand");
       const abrade = game.debugSpawn("Abrade", A, "hand");
       onBoard(game, "Weathered Sentinels", B);
@@ -4091,7 +4092,7 @@ const SCENARIOS: readonly BotScenario[] = [
       // the Bolt now outscores it.
       const game = table(registry, [A, B, C, D], A);
       lands(game, "Mountain", A, 4);
-      game.state.players[A].landsPlayedThisTurn = 1;
+      appendJournal(game.state, { kind: "land-played", player: A });
       const guttersnipe = game.debugSpawn("Guttersnipe", A, "hand");
       const bolt = game.debugSpawn("Lightning Bolt", A, "hand");
       onBoard(game, "Grizzly Bears", B);
@@ -4169,7 +4170,7 @@ const SCENARIOS: readonly BotScenario[] = [
       // the one removed leaves the strongest and the average as they were, so
       // the kill scores nothing and the wall decides it.
       const game = table(registry, [A, B, C, D], A);
-      game.state.players[A].landsPlayedThisTurn = 1;
+      appendJournal(game.state, { kind: "land-played", player: A });
       const titan = onBoard(game, "Towering Titan", A);
       game.state.objects[titan].counters["+1/+1"] = 17;
       for (const wall of ["Wall of Omens", "Wall of Blossoms", "Wall of Roots", "Overgrown Battlement"]) {
@@ -4219,7 +4220,7 @@ const SCENARIOS: readonly BotScenario[] = [
       }
       const kiora = onBoard(game, "Kiora, Behemoth Beckoner", A);
       game.state.objects[kiora].counters.loyalty = 2;
-      game.state.players[A].landsPlayedThisTurn = 1;
+      appendJournal(game.state, { kind: "land-played", player: A });
       const ganax = game.debugSpawn("Ganax, Astral Hunter", A, "hand");
       game.debugSpawn("Temur Ascendancy", A, "hand");
       game.debugSpawn("Garruk's Uprising", A, "hand");

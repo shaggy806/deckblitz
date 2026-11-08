@@ -9,7 +9,7 @@ import type { ScriptedController } from "../controller.js";
 import type { Game } from "../game.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 
-import { A, B, cast, counters, ref, spawn, toHand, hand, lands, named, settle, table, toGraveyard, toLibrary, tokensNamed, zone } from "./harness.js";
+import { A, B, cast, counters, ref, spawn, toHand, hand, lands, named, settle, table, toGraveyard, toLibrary, tokensNamed, zone, setTurnTotal } from "./harness.js";
 
 /** The seat casts what its miracle offers, with these targets and this X. */
 function castMiracle(seat: ScriptedController, targets: readonly ObjectId[] = [], xValue?: number): void {
@@ -27,7 +27,7 @@ function castMiracle(seat: ScriptedController, targets: readonly ObjectId[] = []
 }
 
 const drawFirst = (game: Game, player: PlayerId = A): void => {
-  game.state.players[player].cardsDrawnThisTurn = 0;
+  setTurnTotal(game.state, player, "card-drawn", 0);
   game.debugApplyEffect(player, { kind: "draw", amount: 1 });
   settle(game);
 };

@@ -9,42 +9,7 @@ import { whyCannotAttack } from "../combat/eligibility.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 
-import {
-  A,
-  B,
-  activate,
-  attack,
-  blockOffer,
-  type BlockOffer,
-  cast,
-  counters,
-  destroy,
-  enter,
-  graveyard,
-  hand,
-  keywords,
-  lands,
-  life,
-  named,
-  nextTurn,
-  pickFromZone,
-  pickModes,
-  pickTargets,
-  pt,
-  quiet,
-  ref,
-  settle,
-  spawn,
-  table,
-  toGraveyard,
-  toHand,
-  toLibrary,
-  toStep,
-  tokensNamed,
-  types,
-  watchTargets,
-  zone,
-} from "./harness.js";
+import { A, B, activate, attack, blockOffer, type BlockOffer, cast, counters, destroy, enter, graveyard, hand, keywords, lands, life, named, nextTurn, pickFromZone, pickModes, pickTargets, pt, quiet, ref, settle, spawn, table, toGraveyard, toHand, toLibrary, toStep, tokensNamed, types, watchTargets, zone, turnTotal } from "./harness.js";
 
 /** Alice draws `n` cards (she drew one in her draw step already). */
 function draw(game: Game, n: number): void {
@@ -52,7 +17,7 @@ function draw(game: Game, n: number): void {
   settle(game);
 }
 
-const drawnThisTurn = (game: Game): number => game.state.players[A].cardsDrawnThisTurn;
+const drawnThisTurn = (game: Game): number => turnTotal(game.state, A, "card-drawn");
 
 /** A real token (`spawn` of a token's card isn't one). */
 function makeToken(game: Game, name: string, player = A): ObjectId {

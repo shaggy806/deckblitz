@@ -83,8 +83,8 @@ import type {
   LastKnownInfo,
   PtModifier,
   SpellGrantThisTurn,
-  TurnHistoryKind,
-  TurnHistoryOrigin,
+  JournalWhat,
+  JournalOrigin,
   ZoneType,
 } from "./state.js";
 import {
@@ -101,6 +101,14 @@ import {
 } from "./subtypes.js";
 import { namesOf } from "./card-names.js";
 import { CREATURE_TYPES } from "./creature-types.js";
+import {
+  JOURNAL_VIEWS,
+  entriesThisTurn,
+  journalEntries,
+  journalTotal,
+  type JournalReader,
+  type JournalWindow,
+} from "./journal.js";
 import type { TargetRef } from "./target.js";
 import { PHASE_OF_STEP, isMainPhase } from "./turn.js";
 import type { Step } from "./turn.js";
@@ -696,7 +704,7 @@ function evalStaticCondition(
     case "citys-blessing":
       return state.players[you]?.citysBlessing === true;
     case "committed-crime-this-turn":
-      return (state.players[you]?.crimesThisTurn ?? 0) > 0;
+      return journalTotal(state, "crime", you, "count") > 0;
     case "cast-this-turn": {
       const who = condition.who ?? "you";
       let n = 0;
@@ -1231,9 +1239,9 @@ function evalStaticCondition(
         opts.sourceLastKnown?.enteredKicked === true
       );
     case "creature-died-this-turn":
-      return state.creaturesDiedThisTurn > 0;
+      return journalCount(state, registry, state.turnOrder, "died", undefined, you) > 0;
     case "created-token-this-turn":
-      return state.players[you]?.createdTokenThisTurn === true;
+      return journalTotal(state, "token-created", you, "count") > 0;
     case "attacked-with-commander-this-turn":
       return state.players[you]?.attackedWithCommanderOnTurn === state.turn.number;
     case "used-graveyard-this-turn":
@@ -1279,7 +1287,7 @@ function evalStaticCondition(
       return condition.of.some((each) => evalStaticCondition(state, registry, source, each, opts));
     case "opponent-lost-life-this-turn":
       return state.turnOrder.some(
-        (p) => p !== you && state.players[p].lifeLostThisTurn > 0,
+        (p) => p !== you && journalTotal(state, "life-lost", p, "amount") > 0,
       );
     case "before-attackers-declared": {
       const combats = state.turn.combatPhases ?? 0;
@@ -1349,7 +1357,7 @@ function evalStaticCondition(
           : condition.who === "opponent"
             ? state.turnOrder.filter((p) => p !== you)
             : state.turnOrder;
-      const n = turnHistoryCount(
+      const n = journalCount(
         state,
         registry,
         seats,
@@ -1767,76 +1775,115 @@ export function speedWithin(
   return (bounds.atLeast === undefined || speed >= bounds.atLeast) && (bounds.atMost === undefined || speed <= bounds.atMost);
 }
 
-/**
- * One player's running total for `stat` this turn.
- *
- * The single place these fields are read by name, so a card never depends
- * on which `PlayerState` field backs which stat.
- */
-export function turnStatOf(state: GameState, player: PlayerId, stat: TurnStat): number {
-  const seat = state.players[player];
-  if (seat === undefined) return 0;
-  switch (stat) {
-    case "life-lost":
-      return seat.lifeLostThisTurn;
-    case "life-gained":
-      return seat.lifeGainedThisTurn;
-    case "cards-drawn":
-      return seat.cardsDrawnThisTurn;
-    case "spells-cast":
-      return seat.spellsCastThisTurn;
-    case "damage-taken":
-      return seat.turnHistory?.damageTaken ?? 0;
-    case "combat-damage-taken":
-      return seat.turnHistory?.combatDamageTaken ?? 0;
-    case "noncombat-damage-taken":
-      return (seat.turnHistory?.damageTaken ?? 0) - (seat.turnHistory?.combatDamageTaken ?? 0);
-    case "attacked":
-      return seat.turnHistory?.attacked === true ? 1 : 0;
-    case "attackers":
-      return seat.turnHistory?.attackers?.length ?? 0;
-    case "cards-to-graveyard-from-hand-or-library":
-      return seat.turnHistory?.toGraveyardFromHandOrLibrary ?? 0;
-    case "cards-left-graveyard":
-      return seat.turnHistory?.leftGraveyard ?? 0;
-    case "lands-tapped-for-mana":
-      return seat.turnHistory?.landsTappedForMana ?? 0;
-    case "scried-or-surveilled":
-      return seat.turnHistory?.scriedOrSurveilled ?? 0;
-    case "surveilled":
-      return seat.turnHistory?.surveilled ?? 0;
-    case "own-library-searched":
-      return seat.turnHistory?.ownLibrarySearched ?? 0;
-    case "cards-put-into-exile":
-      return seat.turnHistory?.cardsPutIntoExile ?? 0;
-    case "mana-spent-on-spells":
-      return seat.turnHistory?.manaSpentOnSpells ?? 0;
-    case "opponents-attacked":
-      return seat.turnHistory?.attackedPlayers?.filter((p) => p !== player).length ?? 0;
-    case "power-attacked-with-this-combat": {
-      const record = seat.turnHistory?.attackedPower;
-      if (record === undefined || PHASE_OF_STEP[state.turn.step] !== "combat") return 0;
-      return record.combat === (state.turn.combatPhases ?? 1) ? record.power : 0;
-    }
-    case "energy-paid-or-lost":
-      return seat.turnHistory?.energyPaidOrLost ?? 0;
+/** The journal's reader for `state`: its views' type reads are layer 4's. */
+export function journalReader(state: GameState, registry: CardRegistry): JournalReader {
+  return {
+    state,
+    typesOf: (id) => {
+      const object = state.objects[id];
+      return object === undefined ? [] : effectiveTypes(state, registry, object);
+    },
+  };
+}
+
+/** Damage dealt to `player` this turn, all of it or (with `combat`) only
+ * combat or noncombat damage. Damage, not life lost: prevented damage isn't
+ * dealt. */
+function damageTakenThisTurn(state: GameState, player: PlayerId, combat: boolean | undefined): number {
+  let n = 0;
+  for (const entry of entriesThisTurn(state, "damage")) {
+    if (entry.target?.kind !== "player" || entry.target.player !== player) continue;
+    if (combat !== undefined && (entry.combat !== undefined) !== combat) continue;
+    n += entry.amount ?? 0;
   }
+  return n;
+}
+
+/** The creatures `player` declared as attackers this turn, each once in
+ * each stint however many combats it attacked in, a stack as every token in
+ * it — never one put onto the battlefield attacking (rule 508.4). */
+function attackersThisTurn(state: GameState, player: PlayerId): number {
+  const seen = new Set<string>();
+  let n = 0;
+  for (const entry of entriesThisTurn(state, "attacked")) {
+    if (entry.player !== player) continue;
+    const key = `${entry.object}@${entry.stint}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    n += entry.count ?? 1;
+  }
+  return n;
+}
+
+/** The total power of the creatures `player` declared as attackers in
+ * combat phase `combat`, each as it was declared, a stack as every token in
+ * it (a negative power counts as itself, rule 107.1b). */
+export function powerAttackedWith(state: GameState, player: PlayerId, combat: number): number {
+  let n = 0;
+  for (const entry of entriesThisTurn(state, "attacked")) {
+    if (entry.player === player && entry.combat === combat) n += (entry.was?.power ?? 0) * (entry.count ?? 1);
+  }
+  return n;
+}
+
+/**
+ * Each `TurnStat` word as a read of the journal (`journal.ts`) for one player
+ * this turn: no state stands behind any of them, and a new stat is a new row,
+ * never a new field.
+ */
+const TURN_STAT_READS: { readonly [S in TurnStat]: (state: GameState, player: PlayerId) => number } = {
+  "life-lost": (state, player) => journalTotal(state, "life-lost", player, "amount"),
+  "life-gained": (state, player) => journalTotal(state, "life-gained", player, "amount"),
+  "cards-drawn": (state, player) => journalTotal(state, "card-drawn", player, "count"),
+  "spells-cast": (state, player) => state.players[player]?.spellsCastThisTurn ?? 0,
+  "damage-taken": (state, player) => damageTakenThisTurn(state, player, undefined),
+  "combat-damage-taken": (state, player) => damageTakenThisTurn(state, player, true),
+  "noncombat-damage-taken": (state, player) => damageTakenThisTurn(state, player, false),
+  attacked: (state, player) => (journalTotal(state, "attacked", player, "count") > 0 ? 1 : 0),
+  attackers: (state, player) => attackersThisTurn(state, player),
+  "cards-to-graveyard-from-hand-or-library": (state, player) =>
+    entriesThisTurn(state, "to-graveyard").filter(
+      (e) => e.player === player && (e.from === "hand" || e.from === "library"),
+    ).length,
+  "cards-left-graveyard": (state, player) => journalTotal(state, "left-graveyard", player, "count"),
+  "lands-tapped-for-mana": (state, player) => journalTotal(state, "tapped-for-mana", player, "count"),
+  "scried-or-surveilled": (state, player) => journalTotal(state, "scried", player, "count"),
+  surveilled: (state, player) =>
+    entriesThisTurn(state, "scried").filter((e) => e.player === player && e.how === "surveil").length,
+  "own-library-searched": (state, player) => journalTotal(state, "library-searched", player, "count"),
+  "cards-put-into-exile": (state, player) => journalTotal(state, "put-into-exile", player, "count"),
+  "mana-spent-on-spells": (state, player) => journalTotal(state, "mana-spent", player, "amount"),
+  "opponents-attacked": (state, player) =>
+    new Set(
+      entriesThisTurn(state, "attacked").flatMap((e) =>
+        e.player === player && e.target?.kind === "player" && e.target.player !== player ? [e.target.player] : [],
+      ),
+    ).size,
+  "power-attacked-with-this-combat": (state, player) =>
+    PHASE_OF_STEP[state.turn.step] !== "combat" ? 0 : powerAttackedWith(state, player, state.turn.combatPhases ?? 1),
+  "energy-paid-or-lost": (state, player) => journalTotal(state, "energy-lost", player, "amount"),
+};
+
+/** One player's running total for `stat` this turn: a read of the journal
+ * (`TURN_STAT_READS`). */
+export function turnStatOf(state: GameState, player: PlayerId, stat: TurnStat): number {
+  if (state.players[player] === undefined) return 0;
+  return TURN_STAT_READS[stat](state, player);
 }
 
 /**
  * How many counters were put on permanents this turn, as `spec` narrows them,
  * from `you`'s side — the `countersPutThisTurn` amount and the
- * `counters-put-this-turn` condition.
+ * `counters-put-this-turn` condition. Each permanent as the counters went on.
  */
 export function countersPutThisTurn(state: GameState, spec: CountersPutSpec, you: PlayerId): number {
   let n = 0;
-  for (const player of spec.by === "any-player" ? state.turnOrder : [you]) {
-    for (const put of state.players[player]?.turnHistory?.countersPut ?? []) {
-      if (spec.counter !== undefined && put.counter !== spec.counter) continue;
-      if (spec.onType !== undefined && !put.types.includes(spec.onType)) continue;
-      if (spec.onYours === true && put.controller !== you) continue;
-      n += put.count;
-    }
+  for (const put of entriesThisTurn(state, "counters-put")) {
+    if (spec.by !== "any-player" && put.player !== you) continue;
+    if (spec.counter !== undefined && put.counter !== spec.counter) continue;
+    if (spec.onType !== undefined && put.was?.types.includes(spec.onType) !== true) continue;
+    if (spec.onYours === true && put.was?.controller !== you) continue;
+    n += put.amount ?? 0;
   }
   return n;
 }
@@ -1862,84 +1909,77 @@ export function damageDealtThisTurn(
   } = {},
 ): number {
   let n = 0;
-  for (const player of players) {
-    for (const dealt of state.players[player]?.turnHistory?.damageDealt ?? []) {
-      if (combat !== undefined && dealt.combat !== combat) continue;
-      if (colors !== undefined && !dealt.colors.some((c) => colors.includes(c))) continue;
-      const to = read.to;
-      if (to?.kind === "player" && (dealt.to?.kind !== "player" || dealt.to.player !== to.player)) continue;
-      if (
-        to?.kind === "object" &&
-        (dealt.to?.kind !== "object" || dealt.to.object !== to.object || dealt.toStint !== read.toStint)
-      ) {
-        continue;
-      }
-      const by = read.by;
-      if (by?.type !== undefined && dealt.types?.includes(by.type) !== true) continue;
-      if (by?.name !== undefined && dealt.name !== by.name) continue;
-      if (by?.other === true && dealt.source === read.source) continue;
-      n += dealt.amount;
+  for (const dealt of entriesThisTurn(state, "damage")) {
+    if (dealt.player === undefined || !players.includes(dealt.player)) continue;
+    if (combat !== undefined && (dealt.combat !== undefined) !== combat) continue;
+    if (colors !== undefined && dealt.was?.colors.some((c) => colors.includes(c)) !== true) continue;
+    const to = read.to;
+    if (to?.kind === "player" && (dealt.target?.kind !== "player" || dealt.target.player !== to.player)) continue;
+    if (
+      to?.kind === "object" &&
+      (dealt.target?.kind !== "object" || dealt.target.object !== to.object || dealt.targetStint !== read.toStint)
+    ) {
+      continue;
     }
+    const by = read.by;
+    if (by?.type !== undefined && dealt.was?.types.includes(by.type) !== true) continue;
+    if (by?.name !== undefined && dealt.was?.name !== by.name) continue;
+    if (by?.other === true && dealt.object === read.source) continue;
+    n += dealt.amount ?? 0;
   }
   return n;
 }
 
+/** How a {@link journalCount} reads beyond its list: the zones a
+ * `to-graveyard` arrival came from, and the window (default this turn). */
+export type JournalReadOptions = JournalOrigin & { readonly window?: JournalWindow };
+
 /**
- * How many things of one {@link TurnHistory} list `players` have this turn,
- * matching `filter` from `you`'s side — a token stack counting as every
- * token in it. A permanent that entered is matched as it entered (its
- * `asEntered` snapshot). A permanent that has left the battlefield is matched as it
- * last existed there — a `left` entry as it was in the stint it left (rule
- * 603.10a), though it has come back and left again since; a card put into a
- * graveyard (`descended`), as it is now. `except` leaves one object out in
- * one stint ("another Human" — the source as it is now): the same card in
- * an earlier stint was a different object (rule 400.7) and counts. A card
- * discarded (`discarded`) or put into a graveyard from anywhere but the
- * battlefield (`to-graveyard`) is matched as it is now; `origin` narrows
+ * How many things of one journal word (`JournalWhat`, `journal.ts`'s
+ * `JOURNAL_VIEWS`) `players` have in `window` (default this turn), matching
+ * `filter` from `you`'s side — a token stack counting as every token in it.
+ * Each is matched as it was (its entry's `was`: as it entered, left, attacked
+ * or dealt damage, rule 603.10a); a card discarded or put into a graveyard
+ * from anywhere but the battlefield, as it is now (a descend too, the card it became). `except` leaves one object
+ * out in one stint ("another Human" — the source as it is now): the same card
+ * in an earlier stint was a different object (rule 400.7) and counts. `only`
+ * counts one object in one stint ("if **it** …"). `options` narrows
  * `to-graveyard` by the zone each came from.
  */
-export function turnHistoryCount(
+export function journalCount(
   state: GameState,
   registry: CardRegistry,
   players: readonly PlayerId[],
-  what: TurnHistoryKind,
+  what: JournalWhat,
   filter: CardFilter | undefined,
   you: PlayerId,
   except?: { readonly id: ObjectId; readonly stint: number },
-  origin?: TurnHistoryOrigin,
+  options?: JournalReadOptions,
   only?: { readonly id: ObjectId; readonly stint: number },
 ): number {
   let n = 0;
-  for (const player of players) {
-    for (const entry of state.players[player]?.turnHistory?.[what] ?? []) {
-      if (origin?.from !== undefined && (entry.from === undefined || !origin.from.includes(entry.from))) continue;
-      if (origin?.notFrom !== undefined && entry.from !== undefined && origin.notFrom.includes(entry.from)) continue;
-      if (except !== undefined && entry.object === except.id) {
-        const at = entry.stint ?? entry.asEntered?.zoneChangeCount;
-        if (at === undefined || at === except.stint) continue;
-      }
-      if (only !== undefined && (entry.object !== only.id || (entry.stint ?? entry.asEntered?.zoneChangeCount) !== only.stint)) {
-        continue;
-      }
-      if (filter !== undefined) {
-        const snapshot =
-          entry.asEntered ??
-          entry.asDealt ??
-          entry.asDeclared ??
-          (entry.stint === undefined ? undefined : snapshotOfStint(state, entry.object, entry.stint));
-        const asNow =
-          what === "descended" || what === "discarded" || (what === "to-graveyard" && entry.stint === undefined);
-        const matched = matchesFilter(
-          state,
-          registry,
-          entry.object,
-          filter,
-          snapshot !== undefined ? { you, snapshot } : { you, ...(asNow ? {} : { lastKnown: true }) },
-        );
-        if (!matched) continue;
-      }
-      n += entry.count;
+  const entries = journalEntries(journalReader(state, registry), JOURNAL_VIEWS[what], players, options?.window ?? "this-turn", you);
+  for (const entry of entries) {
+    if (options?.from !== undefined && (entry.from === undefined || !options.from.includes(entry.from))) continue;
+    if (options?.notFrom !== undefined && entry.from !== undefined && options.notFrom.includes(entry.from)) continue;
+    const at = entry.stint ?? entry.was?.zoneChangeCount;
+    if (except !== undefined && entry.object === except.id && (at === undefined || at === except.stint)) continue;
+    if (only !== undefined && (entry.object !== only.id || at !== only.stint)) continue;
+    if (filter !== undefined && entry.object !== undefined) {
+      const asNow = what === "descended" || what === "discarded" || (what === "to-graveyard" && entry.from !== "battlefield");
+      const snapshot = asNow
+        ? undefined
+        : (entry.was ?? (entry.stint === undefined ? undefined : snapshotOfStint(state, entry.object, entry.stint)));
+      const matched = matchesFilter(
+        state,
+        registry,
+        entry.object,
+        filter,
+        snapshot !== undefined ? { you, snapshot } : { you, ...(asNow ? {} : { lastKnown: true }) },
+      );
+      if (!matched) continue;
     }
+    n += entry.count ?? 1;
   }
   return n;
 }

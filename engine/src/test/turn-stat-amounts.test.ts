@@ -1,12 +1,13 @@
 /**
  * The `turnStat` / `playersWithTurnStat` amounts: a per-turn running total
- * (`PlayerState.lifeLostThisTurn` / `lifeGainedThisTurn` /
- * `cardsDrawnThisTurn`) read as a number rather than the `turn-stat`
+ * (the journal's life lost, life gained and
+ * cards drawn) read as a number rather than the `turn-stat`
  * condition's threshold — Kydele's "{C} for each card you've drawn this
  * turn", "the life your opponents lost this turn", "for each opponent who
  * lost life this turn".
  */
 import { describe, expect, it } from "vitest";
+import { turnTotal } from "./harness.js";
 
 import { Game } from "../game.js";
 import { asPlayerId } from "../primitives.js";
@@ -73,7 +74,7 @@ describe("turnStat amounts", () => {
     );
     expect(game.state.players[A].life).toBe(start - 1);
     game.debugApplyEffect(A, { kind: "draw", amount: 2 }, []);
-    const drawn = game.state.players[A].cardsDrawnThisTurn;
+    const drawn = turnTotal(game.state, A, "card-drawn");
     const hand = game.handOf(A).length;
     game.debugApplyEffect(A, { kind: "draw", amount: { turnStat: "cards-drawn" } }, []);
     expect(game.handOf(A).length).toBe(hand + drawn);

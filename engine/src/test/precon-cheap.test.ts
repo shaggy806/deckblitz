@@ -4,7 +4,7 @@
  * - `shuffleIntoLibraryOnResolve` (White Sun's Zenith) — only on resolving;
  *   a countered one still goes to the graveyard.
  * - `grantPtPerCount { commanderCasts }` (Commander's Insignia).
- * - `PlayerState.createdTokenThisTurn` + the `created-token-this-turn`
+ * - the journal's `token-created` + the `created-token-this-turn`
  *   condition gating an activated ability (Idol of Oblivion).
  * - `PlayerState.usedGraveyardThisTurn` + `used-graveyard-this-turn`
  *   (Laboratory Drudge).
@@ -13,6 +13,7 @@
  */
 
 import { describe, expect, it } from "vitest";
+import { turnTotal } from "./harness.js";
 
 import { Game } from "../game.js";
 import { asPlayerId } from "../primitives.js";
@@ -114,12 +115,12 @@ describe("Idol of Oblivion", () => {
 
     expect(drawOffered()).toBe(false);
     game.debugApplyEffect(A, { kind: "create-token", token: "Soldier Token", count: 1 });
-    expect(game.state.players[A].createdTokenThisTurn).toBe(true);
+    expect(turnTotal(game.state, A, "token-created") > 0).toBe(true);
     expect(drawOffered()).toBe(true);
 
     const turn = game.state.turn.number;
     game.advanceUntil((s) => s.turn.number > turn || s.result.over);
-    expect(game.state.players[A].createdTokenThisTurn).toBe(false);
+    expect(turnTotal(game.state, A, "token-created") > 0).toBe(false);
   });
 
   it("counts a token made any way, not just by create-token", () => {
@@ -132,7 +133,7 @@ describe("Idol of Oblivion", () => {
       [{ kind: "object", object: bear }],
     );
     // `mintTokenBatch` is the funnel every token path goes through.
-    expect(game.state.players[A].createdTokenThisTurn).toBe(true);
+    expect(turnTotal(game.state, A, "token-created") > 0).toBe(true);
   });
 });
 

@@ -4,6 +4,7 @@
  * per-player count families. One test for the clause of each most likely to be wrong.
  */
 import { describe, expect, it } from "vitest";
+import { entriesThisTurn } from "../journal.js";
 import type { Action } from "../actions.js";
 import type { Game } from "../game.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
@@ -275,7 +276,7 @@ describe("Robber of the Rich", () => {
     const theirRogue = spawn(game, "Robber of the Rich", B);
     b.declareAttackersFn = () => [{ attacker: theirRogue, defender: A }];
     game.advanceUntil((s) => s.turn.step === "end" && s.priority.holder === A);
-    expect(game.state.players[B].turnHistory?.attackers?.length).toBe(1);
+    expect(entriesThisTurn(game.state, "attacked").filter((e) => e.player === B)).toHaveLength(1);
     expect(impulse(game, bolt)).not.toBeNull();
     b.declareAttackersFn = () => [];
     nextTurn(game);

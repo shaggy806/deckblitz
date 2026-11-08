@@ -29,7 +29,8 @@ import type { CardNameChoice } from "../card-names.js";
 import type { CompanionCondition } from "../companion.js";
 import type { Color, LandManaInstead, ManaFromSpec, ManaType, SpendAs } from "../mana.js";
 import type { ReplacementSpec } from "../replacements.js";
-import type { DelayedTriggerTiming, HeldPlayerCounter, PlayerCounterKind, TurnHistoryKind, ZoneType } from "../state.js";
+import type { DelayedTriggerTiming, HeldPlayerCounter, PlayerCounterKind, JournalWhat, ZoneType } from "../state.js";
+import type { JournalWindow } from "../journal.js";
 import type { TargetSpec } from "../target.js";
 import type { Step } from "../turn.js";
 
@@ -1325,8 +1326,8 @@ export type StaticCondition =
       readonly who: "you" | "opponent" | "any-player";
       readonly atLeast: number;
     }
-  /** A creature died this turn (Liliana's Devotee). Reads the turn-scoped
-   * `GameState.creaturesDiedThisTurn`. */
+  /** A creature died this turn (Liliana's Devotee). Reads the journal's
+   * `died` (any player's). */
   | { readonly kind: "creature-died-this-turn" }
   /**
    * Where the turn is — "activate only during combat" (`duringCombat`),
@@ -1365,7 +1366,7 @@ export type StaticCondition =
    * permanent out ("another"). `"discarded"` is the cards a player discarded
    * ("if you've discarded a card this turn" — Gilt-Blade Prowler);
    * `"to-graveyard"` everything put into a player's graveyard, narrowed by
-   * the zone it came from (`from` / `notFrom`, as `TurnHistoryOrigin` says):
+   * the zone it came from (`from` / `notFrom`, as `JournalOrigin` says):
    * "if an artifact or creature was put into a graveyard from the
    * battlefield this turn" (Ichor Shade: `{ what: "to-graveyard", who:
    * "any-player", from: ["battlefield"], filter: { typesAnyOf: ["artifact",
@@ -1393,7 +1394,10 @@ export type StaticCondition =
     }
   | {
       readonly kind: "turn-history";
-      readonly what: TurnHistoryKind;
+      readonly what: JournalWhat;
+      /** Which turns it reads (`journal.ts`'s `JournalWindow`): this one by
+       * default; `"last-turn"` for "if you lost life last turn". */
+      readonly window?: JournalWindow;
       readonly who?: "you" | "opponent" | "any-player";
       readonly filter?: CardFilter;
       readonly atLeast?: number;
@@ -1468,7 +1472,7 @@ export type StaticCondition =
    * a noncreature spell" is two of these under `all`.
    */
   /** "If you've committed a crime this turn" (rule 700.13 —
-   * `PlayerState.crimesThisTurn`). */
+   * the journal's `crime` entries). */
   | { readonly kind: "committed-crime-this-turn" }
   | {
       readonly kind: "cast-this-turn";
@@ -1519,7 +1523,7 @@ export type StaticCondition =
    * — Mirrodin Besieged destroyed in response still makes them lose). */
   | { readonly kind: "chosen-on-enter"; readonly value: string }
   /** An opponent of the source's controller has lost life this turn (Theater
-   * of Horrors). Reads the per-player `lifeLostThisTurn` amount as `> 0`. */
+   * of Horrors). Reads each player's life lost this turn (the journal) as `> 0`. */
   | { readonly kind: "opponent-lost-life-this-turn" }
   /** Portal's "Cast this spell only during the declare attackers step and
    * only if **you've been attacked this step**": it's a declare attackers

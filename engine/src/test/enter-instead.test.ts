@@ -10,7 +10,7 @@
  */
 import { describe, expect, it } from "vitest";
 
-import { A, B, activate, cast, lands, pickFromZone, pickPermanents, ref, settle, spawn, table, toGraveyard, toHand, zone } from "./harness.js";
+import { A, B, activate, cast, lands, pickFromZone, pickPermanents, ref, settle, spawn, table, toGraveyard, toHand, zone, turnTotal } from "./harness.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 import type { GameEvent } from "../events.js";
@@ -58,7 +58,7 @@ describe("sacrifice a [filter] instead (Kjeldoran Outpost)", () => {
     expect(zone(game, outpost)).toBe("graveyard");
     expect(seen().some((e) => e.type === "land-played")).toBe(true);
     expect(seen().some((e) => e.type === "permanent-entered-battlefield" && e.object === outpost)).toBe(false);
-    expect(game.state.players[A].landsPlayedThisTurn).toBe(1);
+    expect(turnTotal(game.state, A, "land-played")).toBe(1);
   });
 
   it("applies however it enters, not only played (rule 614.12): put there by an effect, with a sacrifice", () => {

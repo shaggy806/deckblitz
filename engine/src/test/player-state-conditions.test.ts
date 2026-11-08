@@ -2,31 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { staticConditionMet } from "../characteristics.js";
 import type { PlayerId } from "../primitives.js";
-import {
-  A,
-  B,
-  C,
-  activate,
-  attack,
-  cast,
-  hand,
-  keywords,
-  life,
-  lands,
-  named,
-  pickTargets,
-  pt,
-  ref,
-  registryOf,
-  settle,
-  spawn,
-  table,
-  toHand,
-  toLibrary,
-  toStep,
-  tokensNamed,
-  zone,
-} from "./harness.js";
+import { A, B, C, activate, attack, cast, hand, keywords, life, lands, named, pickTargets, pt, ref, registryOf, settle, spawn, table, toHand, toLibrary, toStep, tokensNamed, zone, setTurnTotal } from "./harness.js";
 
 type Game = ReturnType<typeof table>["game"];
 
@@ -102,7 +78,7 @@ describe("of-player: a condition read from another player's seat", () => {
   it("reads that player's turn stats (Lolth's emblem, Davros)", () => {
     const { game } = table();
     const muse = spawn(game, "Lavaborn Muse");
-    game.state.players[B].lifeLostThisTurn = 3;
+    setTurnTotal(game.state, B, "life-lost", 3);
     const lost = (atLeast: number) =>
       ({
         kind: "of-player",

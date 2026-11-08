@@ -10,27 +10,7 @@
 import { describe, expect, it } from "vitest";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
-import {
-  A,
-  B,
-  attack,
-  cast,
-  counters,
-  destroy,
-  enter,
-  graveyard,
-  lands,
-  life,
-  nextTurn,
-  pickTargets,
-  ref,
-  settle,
-  spawn,
-  table,
-  toHand,
-  toStep,
-  zone,
-} from "./harness.js";
+import { A, B, attack, cast, counters, destroy, enter, graveyard, lands, life, nextTurn, pickTargets, ref, settle, spawn, table, toHand, toStep, zone, turnTotal } from "./harness.js";
 
 const phasedOut = (game: Game, id: ObjectId): boolean =>
   game.state.objects[id].zone === "phased-out" && game.state.objects[id].phasedOut !== undefined;
@@ -65,9 +45,9 @@ describe("phasing out (rule 702.26b–d)", () => {
     const other = spawn(game, "Grizzly Bears", A);
     phaseOut(game, [bears]);
     // "Draw a card for each creature you control" counts one.
-    const drawn = game.state.players[A].cardsDrawnThisTurn;
+    const drawn = turnTotal(game.state, A, "card-drawn");
     game.debugApplyEffect(A, { kind: "draw", amount: { countOf: { type: "creature", controlledBy: "you" } } });
-    expect(game.state.players[A].cardsDrawnThisTurn - drawn).toBe(1);
+    expect(turnTotal(game.state, A, "card-drawn") - drawn).toBe(1);
     game.debugApplyEffect(B, { kind: "destroy-all", filter: { type: "creature" } });
     settle(game);
     expect(zone(game, other)).toBe("graveyard");

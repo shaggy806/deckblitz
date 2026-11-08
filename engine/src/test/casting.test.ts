@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { turnTotal } from "./harness.js";
 
 import { ScriptedController } from "../controller.js";
 import { Game } from "../game.js";
@@ -56,8 +57,7 @@ const spawn = (game: Game, cardName: string, controller: PlayerId): ObjectId => 
     damageMarked: 0,
     markedByDeathtouch: false,
     enteredBattlefieldOnTurn: game.state.turn.number,
-    summoningSick: false, loyaltyActivatedThisTurn: false,
-    targets: null,
+    summoningSick: false,    targets: null,
     attacking: null,
     blocking: null,
     blockedBy: [],
@@ -87,7 +87,7 @@ describe("playing lands", () => {
     const forest = game.handOf(A)[0];
     game.dispatch({ type: "play-land", player: A, card: forest });
     expect(game.state.objects[forest].zone).toBe("battlefield");
-    expect(game.state.players[A].landsPlayedThisTurn).toBe(1);
+    expect(turnTotal(game.state, A, "land-played")).toBe(1);
     expect(game.eventsOfType("land-played")).toHaveLength(1);
   });
 

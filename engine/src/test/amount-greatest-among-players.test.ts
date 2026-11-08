@@ -9,35 +9,7 @@ import { describe, expect, it } from "vitest";
 
 import type { Game } from "../game.js";
 import type { PlayerId } from "../primitives.js";
-import {
-  A,
-  B,
-  C,
-  activate,
-  attack,
-  cast,
-  controller,
-  counters,
-  destroy,
-  enter,
-  graveyard,
-  hand,
-  lands,
-  life,
-  nextTurn,
-  pickFromZone,
-  pickModes,
-  pt,
-  ref,
-  settle,
-  spawn,
-  table,
-  toGraveyard,
-  toHand,
-  toLibrary,
-  types,
-  zone,
-} from "./harness.js";
+import { A, B, C, activate, attack, cast, controller, counters, destroy, enter, graveyard, hand, lands, life, nextTurn, pickFromZone, pickModes, pt, ref, settle, spawn, table, toGraveyard, toHand, toLibrary, types, zone, setTurnTotal } from "./harness.js";
 
 /** The seat's hand, exactly `n` cards: its opening seven go back first. */
 const setHand = (game: Game, player: PlayerId, n: number): void => {
@@ -200,9 +172,9 @@ describe("the greatest of an amount among players", () => {
   it("Thought Sponge counts the one opponent who drew the most, not their total nor its controller", () => {
     const { game } = table({ players: 3 });
     lands(game, "Island", 4);
-    game.state.players[A].cardsDrawnThisTurn = 9;
-    game.state.players[B].cardsDrawnThisTurn = 2;
-    game.state.players[C].cardsDrawnThisTurn = 1;
+    setTurnTotal(game.state, A, "card-drawn", 9);
+    setTurnTotal(game.state, B, "card-drawn", 2);
+    setTurnTotal(game.state, C, "card-drawn", 1);
     const sponge = toHand(game, "Thought Sponge");
     cast(game, sponge);
     expect(counters(game, sponge)).toBe(2);
@@ -212,8 +184,8 @@ describe("the greatest of an amount among players", () => {
   it("Thought Sponge counts an opponent who has since left the game (its ruling)", () => {
     const { game } = table({ players: 3 });
     lands(game, "Island", 4);
-    game.state.players[B].cardsDrawnThisTurn = 3;
-    game.state.players[C].cardsDrawnThisTurn = 1;
+    setTurnTotal(game.state, B, "card-drawn", 3);
+    setTurnTotal(game.state, C, "card-drawn", 1);
     game.state.players[B].hasLost = true;
     const sponge = toHand(game, "Thought Sponge");
     cast(game, sponge);
@@ -223,7 +195,7 @@ describe("the greatest of an amount among players", () => {
   it("Thought Sponge draws its last power as it dies", () => {
     const { game } = table();
     lands(game, "Island", 4);
-    game.state.players[B].cardsDrawnThisTurn = 2;
+    setTurnTotal(game.state, B, "card-drawn", 2);
     const sponge = toHand(game, "Thought Sponge");
     cast(game, sponge);
     const before = hand(game, A).length;

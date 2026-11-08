@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { turnTotal } from "./harness.js";
 
 import { Game } from "../game.js";
 import { asPlayerId } from "../primitives.js";
@@ -145,7 +146,7 @@ describe("\"as this enters\" choices are made before the permanent moves (rule 6
     expect(game.state.awaiting?.kind).toBe("choose-creature-type");
     expect(game.state.objects[cavern].zone).toBe("hand");
     // The land drop is spent: it's being played.
-    expect(game.state.players[A].landsPlayedThisTurn).toBe(1);
+    expect(turnTotal(game.state, A, "land-played")).toBe(1);
 
     game.dispatch({ type: "choose-creature-type", player: A, creatureType: "Elf" });
 

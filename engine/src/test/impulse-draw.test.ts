@@ -10,6 +10,7 @@
  */
 
 import { describe, expect, it } from "vitest";
+import { turnTotal, setTurnTotal } from "./harness.js";
 
 import { Game } from "../game.js";
 import { asPlayerId } from "../primitives.js";
@@ -84,7 +85,7 @@ describe("impulse-exile", () => {
     // A deck of nothing but lands: with castOnly nothing becomes playable.
     const game = makeGame(list([["Mountain", 40]]));
     game.advanceUntil((s) => s.priority.holder === A && s.turn.step === "precombat-main");
-    game.state.players[A].landsPlayedThisTurn = 0;
+    setTurnTotal(game.state, A, "land-played", 0);
 
     game.debugApplyEffect(A, {
       kind: "impulse-exile",
@@ -103,7 +104,7 @@ describe("impulse-exile", () => {
   it("without `castOnly`, a land may be played from exile", () => {
     const game = makeGame(list([["Mountain", 40]]));
     game.advanceUntil((s) => s.priority.holder === A && s.turn.step === "precombat-main");
-    game.state.players[A].landsPlayedThisTurn = 0;
+    setTurnTotal(game.state, A, "land-played", 0);
 
     game.debugApplyEffect(A, {
       kind: "impulse-exile",
@@ -219,7 +220,7 @@ describe("Theater of Horrors — a gated permission", () => {
 
     // Drain the opponent and the gate opens.
     game.debugApplyEffect(A, { kind: "lose-life", amount: 1, who: "each-opponent" });
-    expect(game.state.players[B].lifeLostThisTurn).toBeGreaterThan(0);
+    expect(turnTotal(game.state, B, "life-lost")).toBeGreaterThan(0);
     expect(
       game.legalActions(A).some((a) => a.kind === "cast-spell" && a.via === "impulse"),
     ).toBe(true);

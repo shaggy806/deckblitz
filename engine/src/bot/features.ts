@@ -38,6 +38,7 @@
  */
 
 import { isManaAbility } from "../abilities.js";
+import { journalTotal } from "../journal.js";
 import type { TriggeredAbility } from "../abilities.js";
 import { combatDamageOf, computeCharacteristics, withComputedCache } from "../characteristics.js";
 import type { Characteristics } from "../characteristics.js";
@@ -226,7 +227,7 @@ function landDropsHad(state: GameState, player: PlayerId): number {
   const seats = Math.max(1, state.turnOrder.length);
   const round = roundOf(state);
   const offset = (state.turnOrder.indexOf(player) - state.turn.activePlayerIndex + seats) % seats;
-  if (offset === 0) return Math.max(0, state.players[player].landsPlayedThisTurn > 0 ? round : round - 1);
+  if (offset === 0) return Math.max(0, journalTotal(state, "land-played", player, "count") > 0 ? round : round - 1);
   const activeAt = (state.turn.number - 1) % seats;
   return activeAt + offset >= seats ? round : Math.max(0, round - 1);
 }
@@ -1034,6 +1035,7 @@ function playerFeaturesUncached(
   if (isMe) {
     const living = state.turnOrder.filter((q) => !state.players[q].hasLost);
     const attackedBy = p.lastAttackedBy ?? {};
+    const lostThisTurn = journalTotal(state, "life-lost", p.id, "amount");
     for (const id of state.zones.shared.battlefield) {
       const object = state.objects[id];
       if (object === undefined || object.controller === player) continue;
@@ -1064,7 +1066,7 @@ function playerFeaturesUncached(
       // `life`, and v2 chump-blocked a Craw Wurm with a Soldier token at 35
       // (the Mardu autopsy) — while at 6 going to 1 every creature on the
       // table is still lethal.
-      const life = p.life + Math.min(p.lifeLostThisTurn, Math.max(0, p.life - THREAT_LIFE));
+      const life = p.life + Math.min(lostThisTurn, Math.max(0, p.life - THREAT_LIFE));
       const scale = Math.min(
         MAX_THREAT_SCALE,
         THREAT_LIFE / Math.max(1, Math.min(life, commanderLeft)),

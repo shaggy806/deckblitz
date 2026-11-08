@@ -7,35 +7,9 @@ import { describe, expect, it } from "vitest";
 import type { Game } from "../game.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 
-import {
-  A,
-  B,
-  attack,
-  cast,
-  counters,
-  graveyard,
-  hand,
-  keywords,
-  lands,
-  life,
-  named,
-  nextTurn,
-  pickModes,
-  pickTargets,
-  pt,
-  ref,
-  settle,
-  spawn,
-  subtypes,
-  table,
-  toGraveyard,
-  toHand,
-  toLibrary,
-  tokensNamed,
-  zone,
-} from "./harness.js";
+import { A, B, attack, cast, counters, graveyard, hand, keywords, lands, life, named, nextTurn, pickModes, pickTargets, pt, ref, settle, spawn, subtypes, table, toGraveyard, toHand, toLibrary, tokensNamed, zone, turnTotal } from "./harness.js";
 
-const crimes = (game: Game, player: PlayerId = A): number => game.state.players[player].crimesThisTurn ?? 0;
+const crimes = (game: Game, player: PlayerId = A): number => turnTotal(game.state, player, "crime");
 
 const bolt = (game: Game, target: PlayerId | ObjectId, player: PlayerId = A): void => {
   lands(game, "Mountain", 1, player);

@@ -7,11 +7,12 @@
  * combat of the turn (`"opponents-attacked"`).
  */
 import { describe, expect, it } from "vitest";
+import { turnStatOf } from "../characteristics.js";
 
 import { countersPutThisTurn } from "../characteristics.js";
 import type { Game } from "../game.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
-import { A, B, C, D, activate, attack, cast, counters, destroy, enter, graveyard, hand, lands, life, named, nextTurn, pt, ref, settle, spawn, table, toHand, toStep, tokensNamed, zone } from "./harness.js";
+import { A, B, C, D, activate, attack, cast, counters, destroy, enter, graveyard, hand, lands, life, named, nextTurn, pt, ref, settle, spawn, table, toHand, toStep, tokensNamed, zone, setTurnTotal } from "./harness.js";
 
 /** Run to the end step of this turn, every trigger of it resolved. */
 const toEndStep = (game: Game, player: PlayerId = A): void => {
@@ -294,14 +295,14 @@ describe("a stat read per player", () => {
   it("Smuggler's Share: a card for each opponent who drew two, a Treasure for each who had two lands enter", () => {
     const { game } = table({ players: 4 });
     spawn(game, "Smuggler's Share");
-    game.state.players[B].cardsDrawnThisTurn = 2;
-    game.state.players[C].cardsDrawnThisTurn = 1;
-    game.state.players[D].cardsDrawnThisTurn = 3;
+    setTurnTotal(game.state, B, "card-drawn", 2);
+    setTurnTotal(game.state, C, "card-drawn", 1);
+    setTurnTotal(game.state, D, "card-drawn", 3);
     enter(game, "Forest", C);
     enter(game, "Forest", C);
     enter(game, "Forest", D);
     // Your own don't count: you aren't an opponent.
-    game.state.players[A].cardsDrawnThisTurn = 5;
+    setTurnTotal(game.state, A, "card-drawn", 5);
     enter(game, "Forest");
     enter(game, "Forest");
     const before = hand(game).length;
@@ -367,6 +368,6 @@ describe("the opponents attacked this turn", () => {
     const { game, a } = table();
     const bears = spawn(game, "Grizzly Bears", A, { sick: false });
     attack(game, a, [bears]);
-    expect(game.state.players[A].turnHistory?.attackedPlayers).toEqual([B]);
+    expect(turnStatOf(game.state, A, "opponents-attacked")).toBe(1);
   });
 });

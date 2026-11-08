@@ -6450,8 +6450,7 @@ clause (section 9):
   The whole previous turn, wherever the werewolf was (`GameState.spellsCastLastTurn`,
   set as each turn begins); the scaffolder reads both.
 - `{ kind: "creature-died-this-turn" }` — Liliana's Devotee. Reads the
-  turn-scoped `GameState.creaturesDiedThisTurn`, counted in `moveObject`
-  while the dying permanent's types are still readable.
+  journal's `died` (`journal.ts`): each creature as it left for a graveyard.
 - `{ kind: "created-token-this-turn" }` — the source's controller made a token
   this turn (Idol of Oblivion). Set in `mintTokenBatch`, the funnel every
   token-making path goes through, so a token *copy* counts too.
@@ -6471,7 +6470,7 @@ clause (section 9):
   have been exiled with this artifact" (its ruling: "over the course of the
   entire game"). False off the battlefield.
 - `{ kind: "committed-crime-this-turn" }` — "if / as long as you've committed a crime
-  this turn" (rule 700.13, `PlayerState.crimesThisTurn` — see the `crime-committed`
+  this turn" (rule 700.13, the journal's `crime` entries — see the `crime-committed`
   trigger in §9): Slickshot Vault-Buster's +2/+0, Servant of the Stinger's intervening if.
 - `{ kind: "all", of: [...] }` — every one of the conditions holds. Michelangelo,
   the Heart's "at the beginning of your second main phase, if you attacked this

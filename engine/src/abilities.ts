@@ -13,7 +13,8 @@ import type { StaticCondition, TurnStat } from "./cards/define.js";
 import type { EffectAmount, EffectSpec, SpellResolver } from "./effects.js";
 import type { GameEvent } from "./events.js";
 import type { Color } from "./mana.js";
-import type { GameState, PlayerCounterKind, TurnHistoryKind, ZoneType } from "./state.js";
+import type { GameState, PlayerCounterKind, JournalWhat, ZoneType } from "./state.js";
+import type { JournalWindow } from "./journal.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { AggregateSpec, CardFilter } from "./filter.js";
 import type { TargetSpec } from "./target.js";
@@ -971,7 +972,9 @@ export type CostReductionAmount =
    * each card type among them once instead — Korvold, Gleeful Glutton's "for
    * each card type among permanents you've sacrificed this turn". */
   | {
-      readonly turnHistory: TurnHistoryKind;
+      readonly turnHistory: JournalWhat;
+      /** Which turns it reads (`journal.ts`); this one by default. */
+      readonly window?: JournalWindow;
       readonly filter?: CardFilter;
       readonly times?: number;
       readonly who?: "you" | "any-player";
@@ -1299,7 +1302,7 @@ export type TriggerSpec =
       /** "Whenever you gain life **for the first time each turn**"
        * (Gourmand's Talent): only the gain that took the player's life gained
        * this turn from none — one earlier in the turn, even before this
-       * permanent arrived, uses it up. Reads `PlayerState.lifeGainedThisTurn`,
+       * permanent arrived, uses it up. Reads the journal's life gained,
        * which already counts this gain when the trigger is matched. */
       readonly firstTimeEachTurn?: boolean;
     }
@@ -1335,7 +1338,7 @@ export type TriggerSpec =
        * (Valgavoth, Harrower of Souls): only while that player is the active
        * player, and only the loss that took their life lost this turn from
        * none — so a loss earlier in the turn, even one before this permanent
-       * arrived, uses it up. Reads `PlayerState.lifeLostThisTurn`, which
+       * arrived, uses it up. Reads the journal's life lost, which
        * already counts this loss when the trigger is matched. */
       readonly firstDuringTheirTurn?: boolean;
     }

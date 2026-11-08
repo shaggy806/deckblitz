@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { turnTotal } from "./harness.js";
 
 import { ScriptedController } from "../controller.js";
 import { Game } from "../game.js";
@@ -144,13 +145,13 @@ describe("Ramunap Excavator — play lands from your graveyard", () => {
     expect(plays).toContain(gyForest);
     expect(plays).toContain(gyMountain);
 
-    const landsBefore = game.state.players[A].landsPlayedThisTurn;
+    const landsBefore = turnTotal(game.state, A, "land-played");
     game.dispatch({ type: "play-land", player: A, card: gyForest });
     game.advanceUntil(quiet);
     expect(game.state.objects[gyForest].zone).toBe("battlefield");
     expect(game.state.zones.perPlayer[A].graveyard).not.toContain(gyForest);
     // It consumed the land drop (rule 305.2).
-    expect(game.state.players[A].landsPlayedThisTurn).toBe(landsBefore + 1);
+    expect(turnTotal(game.state, A, "land-played")).toBe(landsBefore + 1);
     expect(game.eventsOfType("land-played").some((e) => e.object === gyForest)).toBe(true);
   });
 

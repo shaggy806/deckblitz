@@ -7,36 +7,7 @@ import { describe, expect, it } from "vitest";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 
-import {
-  A,
-  B,
-  activate,
-  attack,
-  blockOffer,
-  cast,
-  counters,
-  destroy,
-  graveyard,
-  hand,
-  keywords,
-  lands,
-  life,
-  pickFromZone,
-  pickModes,
-  pickTargets,
-  pt,
-  ref,
-  settle,
-  spawn,
-  table,
-  toGraveyard,
-  toHand,
-  toLibrary,
-  toStep,
-  tokensNamed,
-  watchTargets,
-  zone,
-} from "./harness.js";
+import { A, B, activate, attack, blockOffer, cast, counters, destroy, graveyard, hand, keywords, lands, life, pickFromZone, pickModes, pickTargets, pt, ref, settle, spawn, table, toGraveyard, toHand, toLibrary, toStep, tokensNamed, watchTargets, zone, turnTotal } from "./harness.js";
 
 /** `id` becomes an artifact creature until end of turn — a crewed Vehicle. */
 const crewed = (game: Game, id: ObjectId): void =>
@@ -247,7 +218,7 @@ describe("Daughter of the Deep", () => {
     const { game } = table();
     spawn(game, "Daughter of the Deep");
     // Alice drew her first card in her draw step.
-    expect(game.state.players[A].cardsDrawnThisTurn).toBe(1);
+    expect(turnTotal(game.state, A, "card-drawn")).toBe(1);
     game.debugApplyEffect(A, { kind: "draw", amount: 1 }, []);
     settle(game);
     expect(tokensNamed(game, "Merfolk Token", A)).toBe(1);

@@ -12,36 +12,7 @@ import type { Action, LegalAction } from "../actions.js";
 import type { Game } from "../game.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import { viewFor } from "../view.js";
-import {
-  A,
-  B,
-  C,
-  activate,
-  attack,
-  cast,
-  destroy,
-  enter,
-  graveyard,
-  hand,
-  lands,
-  life,
-  named,
-  nextTurn,
-  pickFromZone,
-  pickModes,
-  pickTargets,
-  ref,
-  registryOf,
-  settle,
-  spawn,
-  table,
-  toExile,
-  toGraveyard,
-  toHand,
-  toLibrary,
-  toStep,
-  zone,
-} from "./harness.js";
+import { A, B, C, activate, attack, cast, destroy, enter, graveyard, hand, lands, life, named, nextTurn, pickFromZone, pickModes, pickTargets, ref, registryOf, settle, spawn, table, toExile, toGraveyard, toHand, toLibrary, toStep, zone, turnTotal } from "./harness.js";
 
 type Cast = Extract<Action, { type: "cast-spell" }>;
 type CastNowOffer = Extract<LegalAction, { kind: "cast-now" }>;
@@ -222,7 +193,7 @@ describe("Sen Triplets — playing from another player's hand for a turn", () =>
     settle(game);
     expect(zone(game, land)).toBe("battlefield");
     expect(game.state.objects[land].controller).toBe(A);
-    expect(game.state.players[A].landsPlayedThisTurn).toBe(1);
+    expect(turnTotal(game.state, A, "land-played")).toBe(1);
   });
 
   it("keeps the card's timing: no sorcery during combat", () => {

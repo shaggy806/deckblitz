@@ -1,6 +1,6 @@
 /**
- * Per-turn running totals (`PlayerState.lifeLostThisTurn` /
- * `lifeGainedThisTurn` / `cardsDrawnThisTurn`) and the `turn-stat` condition
+ * Per-turn running totals (the journal's life lost / life
+ * gained / cards drawn) and the `turn-stat` condition
  * that reads them.
  *
  * The three were picked by measuring real card text rather than guessed at:
@@ -11,6 +11,7 @@
  * commander in the format.
  */
 import { describe, expect, it } from "vitest";
+import { turnTotal } from "./harness.js";
 
 import { ScriptedController } from "../controller.js";
 import { Game } from "../game.js";
@@ -47,14 +48,14 @@ describe("per-turn running totals", () => {
   it("counts life lost as an amount, not a flag", () => {
     const game = mkGame();
     game.advanceUntil(toPrecombat);
-    expect(game.state.players[A].lifeLostThisTurn).toBe(0);
+    expect(turnTotal(game.state, A, "life-lost")).toBe(0);
 
     game.debugApplyEffect(A, { kind: "lose-life", amount: 3, who: "you" }, []);
-    expect(game.state.players[A].lifeLostThisTurn).toBe(3);
+    expect(turnTotal(game.state, A, "life-lost")).toBe(3);
     // Accumulates across separate losses in the same turn — which is the
     // whole reason it isn't a boolean.
     game.debugApplyEffect(A, { kind: "lose-life", amount: 2, who: "you" }, []);
-    expect(game.state.players[A].lifeLostThisTurn).toBe(5);
+    expect(turnTotal(game.state, A, "life-lost")).toBe(5);
   });
 
   it("counts life gained, separately from life lost", () => {
@@ -65,23 +66,23 @@ describe("per-turn running totals", () => {
 
     // Gains and losses don't net off: a card asking "did you gain 4 life" is
     // still satisfied after losing 1.
-    expect(game.state.players[A].lifeGainedThisTurn).toBe(4);
-    expect(game.state.players[A].lifeLostThisTurn).toBe(1);
+    expect(turnTotal(game.state, A, "life-gained")).toBe(4);
+    expect(turnTotal(game.state, A, "life-lost")).toBe(1);
   });
 
   it("counts cards drawn, but not a card put into hand another way", () => {
     const game = mkGame();
     game.advanceUntil(toPrecombat);
-    const before = game.state.players[A].cardsDrawnThisTurn;
+    const before = turnTotal(game.state, A, "card-drawn");
 
     game.debugApplyEffect(A, { kind: "draw", amount: 2 }, []);
-    expect(game.state.players[A].cardsDrawnThisTurn).toBe(before + 2);
+    expect(turnTotal(game.state, A, "card-drawn")).toBe(before + 2);
 
     // A card put into hand *without* being drawn (a tutor) must not count.
     // `debugSpawn` to hand goes through `moveObject`, the same path a tutor
     // takes, rather than through the draw.
     game.debugSpawn("Swamp", A, "hand");
-    expect(game.state.players[A].cardsDrawnThisTurn).toBe(before + 2);
+    expect(turnTotal(game.state, A, "card-drawn")).toBe(before + 2);
   });
 
   it("resets every turn", () => {
@@ -89,12 +90,12 @@ describe("per-turn running totals", () => {
     game.advanceUntil(toPrecombat);
     game.debugApplyEffect(A, { kind: "lose-life", amount: 3, who: "you" }, []);
     game.debugApplyEffect(A, { kind: "gain-life", amount: 3 }, []);
-    expect(game.state.players[A].lifeLostThisTurn).toBe(3);
+    expect(turnTotal(game.state, A, "life-lost")).toBe(3);
 
     game.advanceUntil((s) => s.turn.number === 2);
-    expect(game.state.players[A].lifeLostThisTurn).toBe(0);
-    expect(game.state.players[A].lifeGainedThisTurn).toBe(0);
-    expect(game.state.players[A].cardsDrawnThisTurn).toBe(0);
+    expect(turnTotal(game.state, A, "life-lost")).toBe(0);
+    expect(turnTotal(game.state, A, "life-gained")).toBe(0);
+    expect(turnTotal(game.state, A, "card-drawn")).toBe(0);
   });
 });
 
@@ -133,8 +134,8 @@ describe("Y'shtola, Night's Blessed — the turn-stat condition", () => {
 
     // "a player", not "an opponent" — an opponent's loss arms it too.
     game.debugApplyEffect(A, { kind: "lose-life", amount: 5, who: "each-opponent" }, []);
-    expect(game.state.players[B].lifeLostThisTurn).toBe(5);
-    expect(game.state.players[A].lifeLostThisTurn).toBe(0);
+    expect(turnTotal(game.state, B, "life-lost")).toBe(5);
+    expect(turnTotal(game.state, A, "life-lost")).toBe(0);
 
     const hand = game.handOf(A).length;
     game.advanceUntil((s) => s.turn.step === "end");
@@ -160,6 +161,6 @@ describe("Y'shtola, Night's Blessed — the turn-stat condition", () => {
     expect(game.state.players[B].life).toBe(18); // 2 damage
     // +2 from Y'shtola, −3 from the spell's own cost.
     expect(game.state.players[A].life).toBe(19);
-    expect(game.state.players[A].lifeGainedThisTurn).toBe(2);
+    expect(turnTotal(game.state, A, "life-gained")).toBe(2);
   });
 });

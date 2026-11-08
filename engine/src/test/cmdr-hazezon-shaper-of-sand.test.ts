@@ -13,6 +13,7 @@
  */
 
 import { describe, expect, it } from "vitest";
+import { turnTotal } from "./harness.js";
 
 import { ScriptedController } from "../controller.js";
 import { Game } from "../game.js";
@@ -124,7 +125,7 @@ describe("Hazezon, Shaper of Sand — play Desert lands from your graveyard", ()
     game.advanceUntil(settled);
 
     expect(game.state.objects[desert].zone).toBe("battlefield");
-    expect(game.state.players[A].landsPlayedThisTurn).toBe(1);
+    expect(turnTotal(game.state, A, "land-played")).toBe(1);
     expect(game.eventsOfType("land-played").some((e) => e.object === desert)).toBe(true);
     // The land drop is spent: the Forest in hand is no longer playable.
     expect(offersPlay(game, inHand(game, "Forest"))).toBe(false);

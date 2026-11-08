@@ -432,6 +432,68 @@ fold in here too.
 
 **Confidence: high.** The keys are almost all "count events of kind K matching F in window W".
 
+**Design note (step 3, 2026-11-07): one journal in game state, one read.**
+
+*Where it lives.* `engine/src/journal.ts`: the types, the append and prune helpers, the windows and the read, all pure
+(as `duration.ts` is for step 2). The state is one field, `GameState.journal: Journal`, `{ entries, turns, game }`.
+
+*The entry.* One normalised shape for every kind, each field meaning one thing everywhere:
+`{ kind, turn, player, object?, stint?, was?, count?, amount?, from?, to?, target?, targetStint?, targetWas?, combat?,
+counter?, ability? }`. `player` is whose record it is, fixed per kind (the controller as it entered or left, the
+sacrificer, the discarder, the caster, the activator, the source's controller as it dealt damage, the owner of the
+graveyard a card went to). `object` + `stint` name the object *after* the event (rule 400.7: the card now in the
+graveyard is the one "put there this turn"); `was` is the object **as it was** (603.10a, 608.2h), the
+`LastKnownInfo` the event already took, never a bare id to be looked up later; `was.zoneChangeCount` names the
+stint it was in. `was` is kept only for kinds a filter reads as it was (entered, left, attacked, blocked, damage's
+source, counters put); the rest are matched as the object is now, which is what their cards say ("discarded",
+"put into a graveyard"). `count` is a token stack's size (default 1), `amount` a quantity (damage, life, counters,
+mana, energy). The kinds are events, not questions: "died" is a `left` entry with `to: "graveyard"` whose `was` is
+a creature, "exiled" one with `to: "exile"`, "descended" a `to-graveyard` entry of a permanent card, so one death
+writes one `left` entry and one `to-graveyard` entry where `TurnHistory` wrote four. The card-facing words ("died",
+"descended", "attackers", "combat-damaged-by") stay, each defined once in `JOURNAL_VIEWS` as a kind and a match.
+
+*Windows.* `"this-turn"` (the default), `"last-turn"` (the turn before this one, whoever's it was: First Response),
+`"their-last-turn"` (the given player's most recent turn before this one: avenge, Goblin Rock Sled), `"since-their-
+last-turn"` (after that turn ended: "since your last turn") and `"this-game"`. `Journal.turns` lists each kept turn
+and whose it was (extra turns make the number no guide), appended as a turn begins. `this-combat` stays a filter on
+`combat` (the combat phase number), not a window.
+
+*Pruning.* As each turn begins, entries and turns older than the earliest turn any window can still name are dropped:
+the last turn, and each player's own last turn, so at most one round (four turns at four players). `game` is the
+whole-game summary, `player → kind → count`, for "this game" reads, which take no filter (no key needs one yet).
+
+*The read.* `journalRead(state, registry, read, ctx)` over `JournalRead = { what, window?, who?, filter?, from?,
+notFrom?, combat?, counter?, by?, selfOnly?, excludeSelf?, measure? }` (`measure`: `count`, the default; `sum` of
+`amount`; `distinct` objects; `players` with one), serving all four uses through one evaluator: the `turn-history`
+condition, the `turnHistory` amount (spells and abilities) and cost reduction, and a new `CardFilter` clause
+`journaled` ("this object, in the stint it's in now, appears in an entry": "creature you've put a +1/+1 counter on
+this turn", "card put into a graveyard from anywhere this turn"). Those three card-facing spellings were already one
+shape with `what`; they gain `window` and the new fields. `TurnStat` (cards/define.ts) keeps its words, because 357
+card sites spell them, but each is now a row of `TURN_STAT_READS`, a `JournalRead`: no state behind any of them, and a
+new stat is a row, not a field.
+
+*Why not `eventLog`.* It holds every event but is emptied by every bot simulation (`{ ...state, eventLog: [] }` in
+`bot/simulate.ts`, `bot/turn-plan.ts`, `bot/determinize.ts`, `game.ts`), so a rule reading it would answer
+differently in a simulation than at the table. The journal is state: it rides every clone, and so it must stay
+small (entries share the `LastKnownInfo` objects the events already took; `structuredClone` keeps one copy of each).
+
+*What it replaces.* `TurnHistory` (state.ts) and its hand-added lists and counters, all deleted with
+`TurnHistoryEntry`, `CountersPutRecord` and the per-list recording in `Game.recordTurnHistory` (now
+`recordJournal`); `turnStatOf`, `turnHistoryCount`, `countersPutThisTurn` and `damageDealtThisTurn`
+(characteristics.ts) become reads; and the event-history `*ThisTurn` fields on `PlayerState`, `GameObject` and
+`GameState`, field by field, each deleted with its last reader (listed under *As built*). Not replaced, because
+they are rule state rather than history: permissions and their use limits (`extraLandsThisTurn`,
+`graveyardCastUsedThisTurn`, `spellGrantsThisTurn`: theme 10), combat requirements (`mustAttackPlayerThisCombat`,
+`boundThisCombat`: theme 11), rule flags and turn structure (`damageUnpreventableThisTurn`, `skipsThisTurn`,
+`phasesAfterThisCombat`), and `wouldDrawThisTurn`, which counts draws a replacement may have stopped, so no draw
+event exists to journal. The per-object `*OnTurn` stamps (`enteredBattlefieldOnTurn`, `tappedOnTurn`, …) are one
+number each and read by object, not counted; they stay.
+
+*Bots.* No bot reads `eventLog` for rules, and v2 simulates resolutions, so it sees journal reads as the table does.
+What changes is what they read directly: `features.ts`'s land-drop and life-lost terms read the journal, the
+scenarios that set `landsPlayedThisTurn` append an entry instead, and `twins.ts`'s object fingerprint drops the
+deleted fields. Measured before and after (clone cost and a timed four-player bench) under *As built*.
+
 ### 7. References and relational filter clauses (109 keys, ~144 cards)
 
 **Change, in two parts.**

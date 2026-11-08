@@ -119,7 +119,9 @@ import {
   cantBeSacrificed,
   countValue,
   damageDealtThisTurn,
-  turnHistoryCount,
+  journalCount,
+  journalReader,
+  powerAttackedWith,
   cardTypesInGraveyards,
   basicLandTypesAmong,
   partySizeOf,
@@ -344,6 +346,8 @@ import type {
 } from "./events.js";
 import type { Expiry, PermanentDuration, PermissionDuration, UntilPoint, WhileSource } from "./duration.js";
 import { endsThisTurn, untilPointOf } from "./duration.js";
+import type { JournalEntry } from "./journal.js";
+import { JOURNAL_VIEWS, appendJournal, beginJournalTurn, entriesThisTurn, journalEntries, journalTotal } from "./journal.js";
 import {
   COLORS,
   MANA_TYPES,
@@ -466,7 +470,6 @@ import type {
   ResolutionResume,
   LeaveDestination,
   MulliganHandState,
-  TurnHistory,
   EnteringTokenCopies,
   TokenLink,
   PendingEntry,
@@ -673,7 +676,7 @@ interface DamageApplied {
 }
 const NO_DAMAGE_APPLIED: DamageApplied = { statics: [], shields: [] };
 
-/** The card types a cost's `turnHistory` `cardTypes` read walks (rule 205.2a). */
+/** The card types a cost's journal `cardTypes` read walks (rule 205.2a). */
 const COST_READ_CARD_TYPES: readonly CardType[] = [
   "artifact",
   "battle",
@@ -1444,7 +1447,6 @@ const ceasedSourceStandIn = (
   markedByDeathtouch: false,
   enteredBattlefieldOnTurn: null,
   summoningSick: false,
-  loyaltyActivatedThisTurn: false,
   targets: null,
   controlEndsAtCleanup: false,
   copyOf: null,
@@ -2383,7 +2385,6 @@ export class Game {
       suspendedResolutions: [],
       preventAllCombatDamage: false,
       hexproofPlayers: [],
-      creaturesDiedThisTurn: 0,
       preventionShields: [],
       extraTurns: [],
       extraCombats: 0,
@@ -6314,7 +6315,7 @@ export class Game {
     }
     const battlefield = this.state.zones.shared.battlefield;
     // A token that attacked this turn waits for cleanup: the turn's attackers
-    // name it (`turnHistory.attackers`, each creature once by object), so it
+    // name it (the journal's `attacked` entries, by object), so it
     // can't fold away, and folding another into it would let a second
     // combat's attack count a fresh split-off token as one more creature
     // that attacked (Windbrisk Heights). `referencedObjectIds` keeps them
@@ -6337,7 +6338,7 @@ export class Game {
       const o = this.state.objects[id];
       if (!o.isToken || waits(o) || !kinds.has(`${o.controller}\u0001${o.cardName}`)) continue;
       if (!this.isFoldableToken(id, pinned)) continue;
-      const shape = exactTokenShape(o);
+      const shape = exactTokenShape(o, this.state);
       const group = groups.get(shape);
       if (group === undefined) groups.set(shape, [id]);
       else group.push(id);
@@ -8396,7 +8397,6 @@ export class Game {
       markedByDeathtouch: false,
       enteredBattlefieldOnTurn: null,
       summoningSick: false,
-      loyaltyActivatedThisTurn: false,
       targets: null,
       attacking: null,
       blocking: null,
@@ -8743,7 +8743,6 @@ export class Game {
     this.state.hexproofPlayers = [];
     delete this.state.hexproofFromPlayers;
     delete this.state.spellGrantsThisTurn;
-    this.state.creaturesDiedThisTurn = 0;
     // A reveal is public knowledge for as long as anyone could have acted on
     // it; past the turn it stops being rendered rather than lingering as a
     // permanent window into a hand.
@@ -8927,24 +8926,17 @@ export class Game {
       }
     }
     for (const player of this.state.turnOrder) {
-      this.state.players[player].landsPlayedThisTurn = 0;
       this.state.players[player].extraLandsThisTurn = 0;
       this.state.players[player].spellsCastThisTurn = 0;
-      this.state.players[player].lifeLostThisTurn = 0;
-      this.state.players[player].lifeGainedThisTurn = 0;
       delete this.state.players[player].combatDamageCreatureTypesThisTurn;
-      this.state.players[player].cardsDrawnThisTurn = 0;
       this.state.players[player].drewInDrawStepThisTurn = false;
       delete this.state.players[player].wouldDrawThisTurn;
       this.state.players[player].spellsCastThisTurnAs = [];
-      this.state.players[player].creaturesDiedThisTurn = 0;
-      this.state.players[player].createdTokenThisTurn = false;
       this.state.players[player].usedGraveyardThisTurn = false;
-      delete this.state.players[player].cardsCycledThisTurn;
-      delete this.state.players[player].equipsActivatedThisTurn;
-      delete this.state.players[player].crimesThisTurn;
-      delete this.state.players[player].turnHistory;
     }
+    // The journal notes whose turn this is and lets go of what no window can
+    // name any more (`journal.ts`).
+    beginJournalTurn(this.state, this.state.turn.number, this.activePlayer);
     // Nothing waits on a departed ability across turns: the stack is empty.
     delete this.state.departedAbilities;
     // "Until your next turn" effects end as that turn begins (the active
@@ -9821,7 +9813,6 @@ export class Game {
       // A loyalty ability may be activated again (rule 606.3) — "that turn"
       // is each turn, so one whose loyalty abilities may be activated on any
       // player's turn (Teferi, Master of Time) gets one on this turn too.
-      object.loyaltyActivatedThisTurn = false;
       if (object.controller !== active) continue;
       // Summoning sickness wears off as the controller's turn begins.
       object.summoningSick = false;
@@ -11982,10 +11973,6 @@ export class Game {
           if (!players.includes(object.lastAttack.player)) {
             this.state.players[player].attackedThisCombat = { combat, players: [...players, object.lastAttack.player] };
           }
-          // And "the opponents you attacked this turn", at any of its combats.
-          const history = (this.state.players[player].turnHistory ??= {});
-          const attacked = (history.attackedPlayers ??= []);
-          if (!attacked.includes(object.lastAttack.player)) attacked.push(object.lastAttack.player);
         }
         // "During any turn you attacked with a commander" (Neriv).
         if (object.isCommander) this.state.players[player].attackedWithCommanderOnTurn = this.state.turn.number;
@@ -12000,24 +11987,10 @@ export class Game {
       for (const id of members) this.state.objects[id].band = members[0];
     }
     // Pack tactics' "you attacked with creatures with total power 6 or
-    // greater this combat": their power now that they all attack (rule
-    // 508.1k), and no later change to it or to them. Enlist's bonus comes by a
-    // trigger after this, and a creature put onto the battlefield attacking
-    // was never declared (508.4). A counted stack is every token in it.
-    invalidateComputedCache();
-    const turnHistory = (this.state.players[player].turnHistory ??= {});
-    const earlierPower = turnHistory.attackedPower;
-    turnHistory.attackedPower = {
-      ...(earlierPower !== undefined
-        ? { earlierMost: Math.max(earlierPower.power, earlierPower.earlierMost ?? earlierPower.power) }
-        : {}),
-      combat: this.state.turn.combatPhases ?? 1,
-      power: declaredNow.reduce(
-        (total, { id }) =>
-          total + computeCharacteristics(this.state, this.registry, id).power * (this.state.objects[id].stackCount ?? 1),
-        0,
-      ),
-    };
+    // greater this combat" reads each attacker's journal entry, its power as
+    // it became attacking (rule 508.1k, `announceAttackers`), every cost paid
+    // and before enlist's bonus, which comes by a trigger; a creature put onto
+    // the battlefield attacking was never declared (508.4).
     if (tax.mana !== "") {
       // Phyrexian pips (Norn's Annex) as the attacker chose: that many in
       // life, the rest in mana (rule 107.4f).
@@ -12146,20 +12119,6 @@ export class Game {
     });
     for (const id of returned) this.returnToHandByEffect({ kind: "object", object: id });
     const still = declared.filter((d) => this.state.objects[d.id]?.zone === "battlefield");
-    if (still.length < declared.length) {
-      const history = this.state.players[player].turnHistory;
-      if (history?.attackedPower !== undefined) {
-        invalidateComputedCache();
-        history.attackedPower = {
-          ...history.attackedPower,
-          power: still.reduce(
-            (total, { id }) =>
-              total + computeCharacteristics(this.state, this.registry, id).power * (this.state.objects[id].stackCount ?? 1),
-            0,
-          ),
-        };
-      }
-    }
     this.askEnlistsThenAnnounce(player, still);
   }
 
@@ -12298,6 +12257,36 @@ export class Game {
     if (pending !== undefined) this.announceAttackers(pending.declared);
   }
 
+  /** Note `entry` in the journal. Statics read it (Kid Loki's "creature
+   * you've put a +1/+1 counter on this turn"), so computed values go stale. */
+  private journal(entry: Omit<JournalEntry, "turn">): void {
+    invalidateComputedCache();
+    appendJournal(this.state, entry);
+  }
+
+  /** `id` was declared as an attacker at `defender` (rule 508.1): its journal
+   * entry, as it was declared. */
+  private journalAttack(id: ObjectId, defender: PlayerId | ObjectId): void {
+    const attacker = this.state.objects[id];
+    if (attacker === undefined) return;
+    const count = attacker.stackCount ?? 1;
+    const at = this.state.objects[defender as ObjectId];
+    this.journal({
+      kind: "attacked",
+      player: attacker.controller,
+      object: id,
+      stint: attacker.zoneChangeCount ?? 0,
+      was: this.takeLastKnown(id),
+      target:
+        this.state.players[defender as PlayerId] !== undefined
+          ? { kind: "player", player: defender as PlayerId }
+          : { kind: "object", object: defender as ObjectId },
+      ...(at !== undefined ? { targetStint: at.zoneChangeCount ?? 0 } : {}),
+      combat: this.state.turn.combatPhases ?? 1,
+      ...(count !== 1 ? { count } : {}),
+    });
+  }
+
   /**
    * The attack just declared becomes one (rule 508.1k), every cost to attack
    * paid: each attacker's `attacker-declared` (after its `permanent-tapped`,
@@ -12306,6 +12295,10 @@ export class Game {
    */
   private announceAttackers(declaredNow: readonly DeclaredAttacker[]): void {
     const allAttackers = declaredNow.map((d) => d.id);
+    // The whole declaration goes into the journal before any of it is
+    // announced: a trigger on the first attacker already sees the rest (pack
+    // tactics' total power, rule 508.1k), each as it was declared.
+    for (const { id, defender } of declaredNow) this.journalAttack(id, defender);
     // They all became tapped at once (rule 508.1f), an event apiece between.
     this.tapBatchFired.clear();
     this.tapBatchHeld = true;
@@ -12959,15 +12952,8 @@ export class Game {
         if (!damaged.includes(target.player)) {
           attacker.combatDamagedPlayersThisTurn = [...damaged, target.player];
         }
-        // "If a player was dealt combat damage by a Zombie this turn": the
-        // player's list, the source as it is now (it may not stay a Zombie).
-        const history = (this.state.players[target.player].turnHistory ??= {});
-        (history["combat-damaged-by"] ??= []).push({
-          object: source,
-          count: 1,
-          stint: attacker.zoneChangeCount ?? 0,
-          asDealt: this.takeLastKnown(source),
-        });
+        // "If a player was dealt combat damage by a Zombie this turn" reads
+        // the damage's journal entry, the source as it dealt it.
         // Prowl (rule 702.76a): the creature types its controller dealt
         // combat damage to a player with, as the source had them now.
         const dealer = this.state.players[attacker.controller];
@@ -13657,8 +13643,7 @@ export class Game {
   }
 
   private landDropReason(player: PlayerId): string | null {
-    const playerState = this.state.players[player];
-    return playerState.landsPlayedThisTurn >= this.maxLandsFor(player)
+    return journalTotal(this.state, "land-played", player, "count") >= this.maxLandsFor(player)
       ? `${player} has already played a land this turn`
       : null;
   }
@@ -13738,7 +13723,6 @@ export class Game {
   ): void {
     const why = this.whyCannotPlayLand(player, cardId, face, graveyardGrant);
     if (why !== null) throw new Error(why);
-    const playerState = this.state.players[player];
     // From a graveyard under a limited permission (Muldrotha), spend it while
     // the card is still there. An unnamed one prefers an unlimited permission
     // (Ramunap Excavator), which spends nothing.
@@ -13772,7 +13756,7 @@ export class Game {
       this.spendLinkedCastGrant(player, cardId, face);
     }
     this.state.objects[cardId].face = face;
-    playerState.landsPlayedThisTurn += 1;
+    this.journal({ kind: "land-played", player, object: cardId });
     this.finishLandPlay({ kind: "land", object: cardId, player, from, ...(tapped ? { tapped: true as const } : {}) });
     this.afterPlayerAction(player);
   }
@@ -15005,8 +14989,7 @@ export class Game {
   /** A card was cycled (rule 702.29c), for everything watching and for the
    * count "the first card you cycle each turn" reads. */
   private noteCycled(player: PlayerId, object: ObjectId, x: number): void {
-    const state = this.state.players[player];
-    state.cardsCycledThisTurn = (state.cardsCycledThisTurn ?? 0) + 1;
+    this.journal({ kind: "cycled", player, object });
     this.emit({ type: "card-cycled", player, object, ...(x > 0 ? { x } : {}) });
   }
 
@@ -19714,7 +19697,7 @@ export class Game {
       // it leaves exile (406.3a), and it enters as any land played does.
       const from = this.state.objects[cast.card].zone;
       this.state.objects[cast.card].face = face;
-      this.state.players[player].landsPlayedThisTurn += 1;
+      this.journal({ kind: "land-played", player, object: cast.card });
       this.finishLandPlay({ kind: "land", object: cast.card, player, from });
       this.prepareForPriority(this.activePlayer);
       return;
@@ -20333,7 +20316,7 @@ export class Game {
       this.executePayment(assist.player, help);
       // Expend (rule 700.14) counts "the amount of mana that player spent
       // this turn to cast spells": the helper paid part of a cost to cast one.
-      const before = this.state.players[assist.player]?.turnHistory?.manaSpentOnSpells ?? 0;
+      const before = journalTotal(this.state, "mana-spent", assist.player, "amount");
       this.emit({ type: "mana-expended", player: assist.player, before, after: before + assist.amount });
     }
     this.executePayment(player, payment, assist !== undefined);
@@ -20347,10 +20330,10 @@ export class Game {
     const phyrexianLife = payment.life - (payment.lifeRather ?? 0);
     if (phyrexianLife > 0) object.phyrexianPaidWithLife = phyrexianLife / 2;
     // Expend (rule 700.14): the mana this player has spent on spells this
-    // turn, before and after this payment — `turnHistory` counts it as the
+    // turn, before and after this payment — the journal counts it as the
     // event passes.
     if (ownSpent > 0) {
-      const before = this.state.players[player]?.turnHistory?.manaSpentOnSpells ?? 0;
+      const before = journalTotal(this.state, "mana-spent", player, "amount");
       this.emit({ type: "mana-expended", player, before, after: before + ownSpent });
     }
     // The commander tax, paid in life rather than mana (Liesa). Part of the
@@ -22016,7 +21999,9 @@ export class Game {
       : this.registry.get(rulesTextName(target)).activated;
     const equips = [...printed, ...granted.map((g) => g.ability)].filter(isEquipAbility);
     if (equips.length === 0) return granted;
-    const used = this.state.players[target.controller]?.equipsActivatedThisTurn ?? 0;
+    const used = entriesThisTurn(this.state, "activated").filter(
+      (e) => e.how === "equip" && e.player === target.controller,
+    ).length;
     const out = [...granted];
     const seen = new Set<string>();
     for (const { ability } of this.activeStaticsOf(target.controller, (a) => a.alternativeEquipCost !== undefined)) {
@@ -22130,7 +22115,7 @@ export class Game {
     // each for what its cycling abilities do, so the player picks by which
     // they activate (rule 602.2b).
     if (cyclings.length > 0) {
-      const cycled = this.state.players[card.owner]?.cardsCycledThisTurn ?? 0;
+      const cycled = journalTotal(this.state, "cycled", card.owner, "count");
       const seen = new Set<string>();
       for (const { ability } of this.activeStaticsOf(card.owner, (a) => a.alternativeCyclingCost !== undefined)) {
         const grant = ability.alternativeCyclingCost!;
@@ -22905,10 +22890,7 @@ export class Game {
         ? null
         : this.whyNotSorcerySpeed(player, `activate ${def.name}'s loyalty ability`);
       if (timing !== null) return timing;
-      if (
-        source.loyaltyActivatedThisTurn &&
-        (source.loyaltyActivationsThisTurn ?? 1) >= this.loyaltyActivationsAllowed(player)
-      ) {
+      if (this.loyaltyActivationsOf(source) >= this.loyaltyActivationsAllowed(player)) {
         return `a loyalty ability of ${def.name} has already been activated this turn`;
       }
       // A "−X" cost removes the X announced (rule 107.3a), so it needs that
@@ -23598,8 +23580,15 @@ export class Game {
         : loyaltyDue;
     if (loyaltyPaid !== undefined) {
       source.counters.loyalty = (source.counters.loyalty ?? 0) + loyaltyPaid;
-      source.loyaltyActivationsThisTurn = (source.loyaltyActivatedThisTurn ? (source.loyaltyActivationsThisTurn ?? 1) : 0) + 1;
-      source.loyaltyActivatedThisTurn = true;
+      // Rule 606.3: one loyalty ability of a permanent a turn (Oath of
+      // Teferi's two), counted by the journal for this object in this stint.
+      this.journal({
+        kind: "activated",
+        how: "loyalty",
+        player,
+        object: sourceId,
+        stint: source.zoneChangeCount ?? 0,
+      });
       this.emit({
         type: "loyalty-changed",
         object: sourceId,
@@ -23751,10 +23740,15 @@ export class Game {
     if (this.otherChoice?.for === sourceId) this.state.objects[abilityId].otherChooser = this.otherChoice.chooser;
     if (shares !== undefined) this.state.objects[abilityId].division = shares;
     if (grantedAbility !== undefined) this.state.objects[abilityId].grantedAbility = grantedAbility;
-    // Forge Anew's "the first equip ability you activate".
+    // Forge Anew's "the first equip ability you activate": the journal's.
     if (isEquipAbility(ability)) {
-      const activator = this.state.players[player];
-      activator.equipsActivatedThisTurn = (activator.equipsActivatedThisTurn ?? 0) + 1;
+      this.journal({
+        kind: "activated",
+        how: "equip",
+        player,
+        object: sourceId,
+        stint: this.state.objects[sourceId]?.zoneChangeCount ?? 0,
+      });
     }
     // "If this ability has been activated four or more times this turn"
     // (Dragon Whelp): counted as it's activated, resolved or not.
@@ -24739,8 +24733,7 @@ export class Game {
       return false;
     });
     if (!crime) return;
-    const player = this.state.players[by];
-    player.crimesThisTurn = (player.crimesThisTurn ?? 0) + 1;
+    this.journal({ kind: "crime", player: by, object: stackObject });
     this.emit({ type: "crime-committed", player: by, object: stackObject });
   }
 
@@ -24767,7 +24760,6 @@ export class Game {
       markedByDeathtouch: false,
       enteredBattlefieldOnTurn: null,
       summoningSick: false,
-      loyaltyActivatedThisTurn: false,
       targets: targets.length > 0 ? [...targets] : null,
       attacking: null,
       blocking: null,
@@ -25375,6 +25367,15 @@ export class Game {
           }),
       );
     });
+  }
+
+  /** How many loyalty abilities of `source`, in the stint it's in now, have
+   * been activated this turn (rule 606.3) — the journal's. */
+  private loyaltyActivationsOf(source: GameObject): number {
+    const stint = source.zoneChangeCount ?? 0;
+    return entriesThisTurn(this.state, "activated").filter(
+      (e) => e.how === "loyalty" && e.object === source.id && e.stint === stint,
+    ).length;
   }
 
   /** How many times `player` may activate loyalty abilities of a permanent
@@ -26298,8 +26299,7 @@ export class Game {
    * `"lands-tapped-for-mana"`, if it's a land. */
   private noteTappedForMana(tapped: GameObject | undefined, player: PlayerId): void {
     if (tapped === undefined || !effectiveTypes(this.state, this.registry, tapped).includes("land")) return;
-    const history = (this.state.players[player].turnHistory ??= {});
-    history.landsTappedForMana = (history.landsTappedForMana ?? 0) + 1;
+    this.journal({ kind: "tapped-for-mana", player, object: tapped.id });
   }
 
   /** The triggered mana abilities with something more to do as `tapped`, having
@@ -30375,13 +30375,15 @@ export class Game {
     if (spec.exactly !== undefined ? n !== spec.exactly : n < (spec.atLeast ?? 1)) return false;
     if (spec.includingThis === true && !counted.includes(self.id)) return false;
     if (spec.totalPower === undefined) return true;
-    const declared = this.state.players[player]?.turnHistory?.attackedPower;
-    if (declared === undefined || declared.power < spec.totalPower.atLeast) return false;
-    return (
-      spec.totalPower.firstTimeEachTurn !== true ||
-      declared.earlierMost === undefined ||
-      declared.earlierMost < spec.totalPower.atLeast
-    );
+    // Each attacker as it was declared, this combat, in the journal; "for the
+    // first time each turn" asks that no earlier combat's declaration reached it.
+    const combat = this.state.turn.combatPhases ?? 1;
+    if (powerAttackedWith(this.state, player, combat) < spec.totalPower.atLeast) return false;
+    if (spec.totalPower.firstTimeEachTurn !== true) return true;
+    for (let earlier = 1; earlier < combat; earlier += 1) {
+      if (powerAttackedWith(this.state, player, earlier) >= spec.totalPower.atLeast) return false;
+    }
+    return true;
   }
 
   private batchedAttackers(
@@ -30553,7 +30555,8 @@ export class Game {
           event.type === "life-changed" &&
           event.delta > 0 &&
           this.matchesWhoPlayer(spec.who, event.player, self) &&
-          (spec.firstTimeEachTurn !== true || this.state.players[event.player].lifeGainedThisTurn === event.delta)
+          (spec.firstTimeEachTurn !== true ||
+            journalTotal(this.state, "life-gained", event.player, "amount") === event.delta)
         );
       case "loses-life":
         return (
@@ -30562,7 +30565,7 @@ export class Game {
           this.matchesWhoPlayer(spec.who, event.player, self) &&
           (spec.firstDuringTheirTurn !== true ||
             (event.player === this.activePlayer &&
-              this.state.players[event.player].lifeLostThisTurn === -event.delta))
+              journalTotal(this.state, "life-lost", event.player, "amount") === -event.delta))
         );
       case "counters-put":
         // "… or player": a player's counters, energy among them (rule 107.14).
@@ -33976,8 +33979,8 @@ export class Game {
           this.state,
           this.state.zones.shared.battlefield.filter((id) => this.state.objects[id]?.attacking === player),
         ),
-      turnHistoryCount: (what, players, filter, origin) =>
-        turnHistoryCount(
+      journalCount: (what, players, filter, origin) =>
+        journalCount(
           this.state,
           this.registry,
           players,
@@ -34664,9 +34667,9 @@ export class Game {
             const dealt = this.state.turnOrder.reduce(
               (total, player) =>
                 total +
-                (this.state.players[player]?.turnHistory?.damageDealt ?? [])
-                  .filter((entry) => entry.source === id)
-                  .reduce((n, entry) => n + entry.amount, 0),
+                entriesThisTurn(this.state, "damage")
+                  .filter((entry) => entry.player === player && entry.object === id)
+                  .reduce((n, entry) => n + (entry.amount ?? 0), 0),
               0,
             );
             xByOption[`${nameOf(this.state.objects[id])}: ${dealt} damage`] = dealt;
@@ -37710,10 +37713,17 @@ export class Game {
             this.countBattlefieldMatching(p, owned) < mine,
         ).length;
       },
+      // Under its controller as it died (the journal's `died`), a stack as
+      // every token in it.
       creaturesDiedThisTurn: (anyController) =>
-        anyController === true
-          ? this.state.creaturesDiedThisTurn
-          : (this.state.players[controller]?.creaturesDiedThisTurn ?? 0),
+        journalCount(
+          this.state,
+          this.registry,
+          anyController === true ? this.state.turnOrder : [controller],
+          "died",
+          undefined,
+          controller,
+        ),
       // A copy of something that has left the zone this refers to it in —
       // "a copy of that creature" of one that died — copies it as it last
       // existed there (rule 608.2h): its source, triggering object or a
@@ -38882,11 +38892,7 @@ export class Game {
     // all a search of several zones says, doesn't.
     const forbidden = searched.library && this.cantSearchLibrary(player, owner);
     const library = searched.library && !outsideOnly && !forbidden;
-    if (library && owner === player) {
-      const seat = this.state.players[player];
-      const history = (seat.turnHistory ??= {});
-      history.ownLibrarySearched = (history.ownLibrarySearched ?? 0) + 1;
-    }
+    if (library && owner === player) this.journal({ kind: "library-searched", player });
     // Whatever it finds, even nothing (rule 701.23f: a search of part of it
     // still counts). One that can't happen didn't (Archivist of Oghma).
     if (library) this.emit({ type: "library-searched", player, owner });
@@ -39368,7 +39374,7 @@ export class Game {
    */
   private interchangeableKinds(ids: readonly ObjectId[]): number {
     return new Set(
-      ids.map((id) => exactTokenShape({ ...this.state.objects[id], timestamp: 0, controlSinceSeq: 0 })),
+      ids.map((id) => exactTokenShape({ ...this.state.objects[id], timestamp: 0, controlSinceSeq: 0 }, this.state)),
     ).size;
   }
 
@@ -40675,12 +40681,18 @@ export class Game {
     if (impulse.yourTurnOnly === true && this.activePlayer !== player) return false;
     if (impulse.fromTurn !== undefined && this.state.turn.number < impulse.fromTurn) return false;
     if (impulse.sourceDid === "attacked-with-a-token") {
-      if (this.state.players[player]?.turnHistory?.attackers?.some((e) => e.asDeclared?.isToken === true) !== true) return false;
+      const attacked = entriesThisTurn(this.state, "attacked");
+      if (!attacked.some((e) => e.player === player && e.was?.isToken === true)) return false;
     } else if (impulse.sourceDid !== undefined) {
-      const history = this.state.players[player]?.turnHistory;
-      const did = impulse.sourceDid === "attacked" ? history?.attackedWith : history?.loreCountersOn;
+      const did =
+        impulse.sourceDid === "attacked"
+          ? entriesThisTurn(this.state, "attacked")
+          : entriesThisTurn(this.state, "counters-put").filter((e) => e.counter === "lore");
       const source = impulse.source;
-      if (source === undefined || did?.some((e) => e.object === source.id && e.stint === source.zoneChangeCount) !== true) {
+      if (
+        source === undefined ||
+        !did.some((e) => e.player === player && e.object === source.id && e.stint === source.zoneChangeCount)
+      ) {
         return false;
       }
     }
@@ -41606,9 +41618,8 @@ export class Game {
    * turn makes this entry their "first time each turn" (Akim, the Soaring
    * Wind — `firstCreationEachTurn`). */
   private noteTokensCreated(player: PlayerId): void {
-    const seat = this.state.players[player];
-    if (!seat.createdTokenThisTurn) this.firstTokenCreators.add(player);
-    seat.createdTokenThisTurn = true;
+    if (journalTotal(this.state, "token-created", player, "count") === 0) this.firstTokenCreators.add(player);
+    this.journal({ kind: "token-created", player });
   }
 
   /** A token named after a real card carries its name as a copiable value
@@ -42368,7 +42379,6 @@ export class Game {
       markedByDeathtouch: false,
       enteredBattlefieldOnTurn: this.state.turn.number,
       summoningSick: true,
-      loyaltyActivatedThisTurn: false,
       targets: null,
       attacking: null,
       blocking: null,
@@ -42585,7 +42595,6 @@ export class Game {
       markedByDeathtouch: false,
       enteredBattlefieldOnTurn: null,
       summoningSick: false,
-      loyaltyActivatedThisTurn: false,
       targets: spell.targets ? [...spell.targets] : null,
       ...(spell.targetZones !== undefined ? { targetZones: [...spell.targetZones] } : {}),
       ...(spell.targetStints !== undefined ? { targetStints: [...spell.targetStints] } : {}),
@@ -44773,11 +44782,13 @@ export class Game {
         // Each card type once (Korvold): whether any entry has it, read as
         // each one last was.
         return COST_READ_CARD_TYPES.filter(
-          (type) => turnHistoryCount(this.state, this.registry, players, amount.turnHistory, { ...amount.filter, type }, player) > 0,
+          (type) =>
+            journalCount(this.state, this.registry, players, amount.turnHistory, { ...amount.filter, type }, player, undefined, amount) > 0,
         ).length;
       }
       return (
-        (amount.times ?? 1) * turnHistoryCount(this.state, this.registry, players, amount.turnHistory, amount.filter, player)
+        (amount.times ?? 1) *
+        journalCount(this.state, this.registry, players, amount.turnHistory, amount.filter, player, undefined, amount)
       );
     }
     if ("turnStat" in amount) {
@@ -49220,7 +49231,17 @@ export class Game {
   }
 
   private freerunningAllowed(player: PlayerId): boolean {
-    return this.state.players[player]?.turnHistory?.freerunning === true;
+    // A player was dealt combat damage this turn by a creature of `player`'s
+    // that was an Assassin or a commander as it dealt it (rule 702.173a).
+    return entriesThisTurn(this.state, "damage").some(
+      (e) =>
+        e.player === player &&
+        e.combat !== undefined &&
+        e.target?.kind === "player" &&
+        e.was !== undefined &&
+        e.was.types.includes("creature") &&
+        (e.was.isCommander || hasSubtype(e.was.subtypes, "Assassin")),
+    );
   }
 
   // --- delayed triggered abilities (rule 603.7) ------------------
@@ -49816,177 +49837,113 @@ export class Game {
   }
 
   /**
-   * Note `event` in the turn history of the player it concerns (see
-   * `TurnHistory`) — from `emit`, so every path that announces an entry, a
-   * leave, a death, a sacrifice, a card put into a graveyard, damage or an attack
-   * counts.
+   * Note `event` in the journal (`journal.ts`) — from `emit`, so every path
+   * that announces an entry, a leave, a death, a sacrifice, a card put into a
+   * graveyard, damage, an attack, a tapping, a land played, a draw or a life
+   * change counts. Each object is kept as it was then (rules 603.10a, 608.2h):
+   * the snapshot the event's own move took where there is one.
    */
-  private recordTurnHistory(event: GameEvent): void {
-    const historyOf = (player: PlayerId | undefined): TurnHistory | undefined => {
-      const seat = player === undefined ? undefined : this.state.players[player];
-      return seat === undefined ? undefined : (seat.turnHistory ??= {});
-    };
+  private recordJournal(event: GameEvent): void {
+    const add = (entry: Omit<JournalEntry, "turn">): void => this.journal(entry);
+    const stintOf = (id: ObjectId): number => this.state.objects[id]?.zoneChangeCount ?? 0;
     switch (event.type) {
       case "blocker-declared": {
-        // The two creatures as they are now, every block of this declaration
-        // made (`CardFilter.blockedThisTurn`).
-        const history = historyOf(this.state.objects[event.blocker]?.controller);
-        if (history !== undefined) {
-          (history.blocks ??= []).push({
-            blocker: event.blocker,
-            blockerWas: this.takeLastKnown(event.blocker),
-            attacker: event.attacker,
-            attackerWas: this.takeLastKnown(event.attacker),
-            combatPhase: this.state.turn.combatPhases ?? 1,
-          });
-        }
+        const blocker = this.state.objects[event.blocker];
+        if (blocker === undefined) return;
+        add({
+          kind: "blocked",
+          player: blocker.controller,
+          object: event.blocker,
+          stint: stintOf(event.blocker),
+          was: this.takeLastKnown(event.blocker),
+          target: { kind: "object", object: event.attacker },
+          targetStint: stintOf(event.attacker),
+          targetWas: this.takeLastKnown(event.attacker),
+          combat: this.state.turn.combatPhases ?? 1,
+        });
         return;
       }
       case "permanent-entered-battlefield": {
         const object = this.state.objects[event.object];
-        const history = historyOf(object?.controller);
-        if (history !== undefined) {
-          // What entered, as it entered (Mechan Shieldmate's ruling) — not
-          // as it is when a "this turn" condition is asked later.
-          (history.entered ??= []).push({
-            object: event.object,
-            count: event.count ?? 1,
-            asEntered: this.takeLastKnown(event.object),
-          });
-        }
+        if (object === undefined) return;
+        add({
+          kind: "entered",
+          player: object.controller,
+          object: event.object,
+          stint: stintOf(event.object),
+          was: this.takeLastKnown(event.object),
+          ...((event.count ?? 1) !== 1 ? { count: event.count } : {}),
+        });
         return;
       }
       case "permanent-left-battlefield": {
         const object = this.state.objects[event.object];
         const lki = object?.lastKnown ?? this.state.ceasedTokens?.[event.object];
         if (lki === undefined) return;
-        // Put into its owner's graveyard (rule 400.3) from the battlefield —
-        // a token too (111.7) — with the stint it left, so a filter reads it
-        // as it last existed there (603.10a). The graveyard event below
-        // carries cards from every other zone; tokens never appear there.
-        if (event.toZone === "graveyard") {
-          const owner = historyOf(lki.owner);
-          if (owner !== undefined) {
-            (owner["to-graveyard"] ??= []).push({
-              object: event.object,
-              count: object?.stackCount ?? 1,
-              stint: lki.zoneChangeCount,
-              from: "battlefield",
-            });
-          }
-        }
-        // Its controller as it left (rule 603.10a), wherever it went — a
-        // token too, which still moved before it ceased to exist (rule 111.7).
-        const history = historyOf(lki.controller);
-        if (history === undefined) return;
-        const entry = { object: event.object, count: object?.stackCount ?? 1 };
-        (history.left ??= []).push({ ...entry, stint: lki.zoneChangeCount });
-        if (event.toZone !== "graveyard" && event.toZone !== "exile") return;
-        // Each with the stint it left, so "another creature died" can tell
-        // the source's own earlier stint (a different object, rule 400.7)
-        // from the one it's in now.
-        if (event.toZone === "exile") (history.exiled ??= []).push({ ...entry, stint: lki.zoneChangeCount });
-        else if (lki.types.includes("creature")) (history.died ??= []).push({ ...entry, stint: lki.zoneChangeCount });
+        const count = object?.stackCount ?? 1;
+        const left = {
+          object: event.object,
+          stint: lki.zoneChangeCount,
+          was: lki,
+          ...(count !== 1 ? { count } : {}),
+          ...(object !== undefined && object.zone !== "battlefield" ? { arrived: object.zoneChangeCount ?? 0 } : {}),
+        };
+        add({ kind: "left", player: lki.controller, to: event.toZone, ...left });
+        if (event.toZone === "graveyard") add({ kind: "to-graveyard", player: lki.owner, from: "battlefield", ...left });
         return;
       }
       case "permanent-sacrificed": {
-        const history = historyOf(event.player);
-        const stint = (this.state.objects[event.object]?.lastKnown ?? this.state.ceasedTokens?.[event.object])?.zoneChangeCount;
-        if (history !== undefined) {
-          (history.sacrificed ??= []).push({ object: event.object, count: 1, ...(stint !== undefined ? { stint } : {}) });
-        }
+        const lki = this.state.objects[event.object]?.lastKnown ?? this.state.ceasedTokens?.[event.object];
+        add({
+          kind: "sacrificed",
+          player: event.player,
+          object: event.object,
+          ...(lki !== undefined ? { stint: lki.zoneChangeCount, was: lki } : {}),
+        });
         return;
       }
-      case "scried": {
-        const history = historyOf(event.player);
-        if (history !== undefined) {
-          history.scriedOrSurveilled = (history.scriedOrSurveilled ?? 0) + 1;
-          if (event.mode === "surveil") history.surveilled = (history.surveilled ?? 0) + 1;
-        }
+      case "scried":
+        add({ kind: "scried", player: event.player, how: event.mode });
         return;
-      }
-      case "attacker-declared": {
-        const attacker = this.state.objects[event.attacker];
-        const history = historyOf(attacker?.controller);
-        if (history !== undefined) {
-          (history.attackedWith ??= []).push({ object: event.attacker, stint: attacker.zoneChangeCount ?? 0 });
-        }
-        return;
-      }
       case "counter-added": {
         const permanent = this.state.objects[event.object];
-        const history = historyOf(event.by ?? permanent?.controller);
-        if (history === undefined || permanent === undefined) return;
-        if (event.counter === "lore") {
-          (history.loreCountersOn ??= []).push({ object: event.object, stint: permanent.zoneChangeCount ?? 0 });
-        }
-        // None put is none put: a replacement can take a placement to zero.
-        if (event.amount > 0) {
-          (history.countersPut ??= []).push({
-            counter: event.counter,
-            count: event.amount * (event.count ?? permanent.stackCount ?? 1),
-            controller: permanent.controller,
-            types: effectiveTypes(this.state, this.registry, permanent),
-          });
-        }
+        if (permanent === undefined || event.amount <= 0) return;
+        add({
+          kind: "counters-put",
+          player: event.by ?? permanent.controller,
+          object: event.object,
+          stint: stintOf(event.object),
+          was: this.takeLastKnown(event.object),
+          counter: event.counter,
+          amount: event.amount * (event.count ?? permanent.stackCount ?? 1),
+        });
         return;
       }
-      case "cards-discarded": {
-        // Every discard announces itself here (`discardCards`), a madness
-        // card's into exile included (rule 702.35a).
-        const history = historyOf(event.player);
-        if (history !== undefined) {
-          const discarded = (history.discarded ??= []);
-          for (const id of event.objects) discarded.push({ object: id, count: 1 });
-        }
+      case "cards-discarded":
+        for (const id of event.objects) add({ kind: "discarded", player: event.player, object: id, stint: stintOf(id) });
         return;
-      }
-      case "mana-expended": {
-        const history = historyOf(event.player);
-        if (history !== undefined) history.manaSpentOnSpells = event.after;
+      case "mana-expended":
+        add({ kind: "mana-spent", player: event.player, amount: event.after - event.before });
         return;
-      }
-      case "cards-left-graveyard": {
+      case "cards-left-graveyard":
         for (const id of event.objects) {
-          const history = historyOf(this.state.objects[id]?.owner);
-          if (history !== undefined) history.leftGraveyard = (history.leftGraveyard ?? 0) + 1;
+          const owner = this.state.objects[id]?.owner;
+          if (owner !== undefined) add({ kind: "left-graveyard", player: owner, object: id });
         }
         return;
-      }
-      case "cards-put-into-graveyard": {
+      case "cards-put-into-graveyard":
+        // From the battlefield, the leave already wrote it, with the card as
+        // it left.
         for (const { object: id, from } of event.arrivals) {
           const card = this.state.objects[id];
-          if (card === undefined) continue;
-          // From anywhere but the battlefield (whose arrivals, tokens with
-          // them, the leave event records): the zone it came from.
-          if (from !== "battlefield") {
-            const owner = historyOf(card.owner);
-            if (owner !== undefined) (owner["to-graveyard"] ??= []).push({ object: id, count: 1, from });
-          }
-          if (from === "hand" || from === "library") {
-            const history = historyOf(card.owner);
-            if (history !== undefined) {
-              history.toGraveyardFromHandOrLibrary = (history.toGraveyardFromHandOrLibrary ?? 0) + 1;
-            }
-          }
-          const permanent = effectiveTypes(this.state, this.registry, card).some((t) =>
-            PERMANENT_TYPES.has(t),
-          );
-          if (!permanent) continue;
-          const history = historyOf(card.owner);
-          if (history !== undefined) (history.descended ??= []).push({ object: id, count: 1 });
+          if (card === undefined || from === "battlefield") continue;
+          add({ kind: "to-graveyard", player: card.owner, object: id, from, arrived: card.zoneChangeCount ?? 0 });
         }
         return;
-      }
-      case "energy-changed": {
-        if (event.delta >= 0) return;
-        const history = historyOf(event.player);
-        if (history !== undefined) history.energyPaidOrLost = (history.energyPaidOrLost ?? 0) - event.delta;
+      case "energy-changed":
+        if (event.delta < 0) add({ kind: "energy-lost", player: event.player, amount: -event.delta });
         return;
-      }
       case "damage-dealt": {
-        // Its source's controller and colours as it dealt it: a spell's or a
-        // permanent's own, a departed source's as it left.
         const source = this.state.objects[event.source];
         const departed =
           source === undefined
@@ -49994,54 +49951,24 @@ export class Game {
             : source.zone === "battlefield" || source.zone === "stack"
               ? undefined
               : source.lastKnown;
+        const was = departed ?? (source !== undefined ? suspendComputedCache(() => this.takeLastKnown(source.id)) : undefined);
         const dealer = departed?.controller ?? source?.controller;
-        const dealt = historyOf(dealer);
-        if (dealt !== undefined) {
-          // Read fresh: the damage was marked before this event invalidated
-          // anything.
-          const colors =
-            departed !== undefined
-              ? departed.colors
-              : source !== undefined
-                ? suspendComputedCache(() => [...computeCharacteristics(this.state, this.registry, source.id).colors])
-                : [];
-          const types =
-            departed !== undefined
-              ? departed.types
-              : source !== undefined
-                ? suspendComputedCache(() => [...computeCharacteristics(this.state, this.registry, source.id).types])
-                : [];
-          const hit = event.target.kind === "object" ? this.state.objects[event.target.object] : undefined;
-          (dealt.damageDealt ??= []).push({
-            source: event.source,
-            amount: event.amount,
-            combat: event.combat,
-            colors,
-            ...(source !== undefined ? { name: printedCardName(source) } : {}),
-            types,
-            to: event.target,
-            ...(hit !== undefined ? { toStint: hit.zoneChangeCount ?? 0 } : {}),
-          });
-        }
-        if (event.target.kind !== "player") return;
-        // Freerunning (rule 702.173a): combat damage to a player from a
-        // creature that, as it dealt it, was an Assassin creature or a
-        // commander under its controller's control.
-        if (dealt !== undefined && event.combat && departed === undefined && source !== undefined) {
-          const now = suspendComputedCache(() => computeCharacteristics(this.state, this.registry, source.id));
-          if (now.types.includes("creature") && (source.isCommander || hasSubtype(now.subtypes, "Assassin"))) {
-            dealt.freerunning = true;
-          }
-        }
-        const history = historyOf(event.target.player);
-        if (history === undefined) return;
-        history.damageTaken = (history.damageTaken ?? 0) + event.amount;
-        if (event.combat) history.combatDamageTaken = (history.combatDamageTaken ?? 0) + event.amount;
+        const hit = event.target.kind === "object" ? this.state.objects[event.target.object] : undefined;
+        // A source with nothing left to say who controlled it still dealt the
+        // damage: its recipient's reads count it, the dealer's side can't.
+        add({
+          kind: "damage",
+          ...(dealer !== undefined ? { player: dealer } : {}),
+          object: event.source,
+          ...(was !== undefined ? { stint: was.zoneChangeCount, was } : {}),
+          amount: event.amount,
+          target: event.target,
+          ...(hit !== undefined ? { targetStint: hit.zoneChangeCount ?? 0 } : {}),
+          ...(event.combat ? { combat: this.state.turn.combatPhases ?? 1 } : {}),
+        });
         return;
       }
       case "attackers-declared": {
-        // "Attacked you": a creature declared attacking that player (not a
-        // planeswalker of theirs) — see `PlayerState.attackedByOnTurn`.
         const attackerSeat = this.state.players[event.player];
         if (attackerSeat !== undefined) attackerSeat.lastTurnTaken = this.state.turn.number;
         for (const id of event.attackers) {
@@ -50052,43 +49979,32 @@ export class Game {
             defender.attackedInCombat = { turn: this.state.turn.number, combat: this.state.turn.combatPhases ?? 1 };
           }
         }
-        const history = historyOf(event.player);
-        if (history === undefined) return;
-        history.attacked = true;
-        // Each creature once, however many attack phases it's declared in.
-        const attackers = (history.attackers ??= []);
-        for (const id of event.attackers) {
-          const stint = this.state.objects[id]?.zoneChangeCount ?? 0;
-          if (!attackers.some((a) => a.object === id && a.stint === stint)) {
-            attackers.push({ object: id, count: 1, stint, asDeclared: this.takeLastKnown(id) });
-          }
-        }
         return;
       }
-      case "permanent-turned-face-up": {
-        const history = historyOf(event.player);
-        if (history !== undefined) {
-          const stint = this.state.objects[event.object]?.zoneChangeCount ?? 0;
-          (history["turned-face-up"] ??= []).push({ object: event.object, count: 1, stint });
-        }
+      case "permanent-turned-face-up":
+        add({ kind: "turned-face-up", player: event.player, object: event.object, stint: stintOf(event.object) });
         return;
-      }
       case "permanent-destroy-prevented": {
         if (event.reason !== "regenerated") return;
         const permanent = this.state.objects[event.object];
-        const history = historyOf(permanent?.controller);
-        if (history !== undefined) {
-          (history.regenerated ??= []).push({ object: event.object, count: 1, stint: permanent.zoneChangeCount ?? 0 });
+        if (permanent === undefined) return;
+        add({ kind: "regenerated", player: permanent.controller, object: event.object, stint: stintOf(event.object) });
+        return;
+      }
+      case "cards-put-into-exile":
+        for (const arrival of event.arrivals) add({ kind: "put-into-exile", player: arrival.owner, object: arrival.object });
+        return;
+      case "permanent-tapped": {
+        const permanent = this.state.objects[event.object];
+        if (permanent !== undefined) {
+          add({ kind: "tapped", player: permanent.controller, object: event.object, stint: stintOf(event.object) });
         }
         return;
       }
-      case "cards-put-into-exile": {
-        for (const arrival of event.arrivals) {
-          const history = historyOf(arrival.owner);
-          if (history !== undefined) history.cardsPutIntoExile = (history.cardsPutIntoExile ?? 0) + 1;
-        }
+      case "life-changed":
+        if (event.delta < 0) add({ kind: "life-lost", player: event.player, amount: -event.delta });
+        else if (event.delta > 0) add({ kind: "life-gained", player: event.player, amount: event.delta });
         return;
-      }
       default:
         return;
     }
@@ -53746,11 +53662,9 @@ export class Game {
     }
     const playerState = this.state.players[player];
     playerState.life += delta;
-    // Recorded here so every path counts — damage, a drain, a cost paid.
-    // Amounts rather than flags: "lost life this turn" is `> 0`, but
-    // "lost 4 or more life this turn" (Y'shtola) needs the number.
-    if (delta < 0) playerState.lifeLostThisTurn += -delta;
-    else if (delta > 0) playerState.lifeGainedThisTurn += delta;
+    // The event's journal entry is the turn's tally, so every path counts —
+    // damage, a drain, a cost paid — as an amount: "lost life this turn" is
+    // `> 0`, but "lost 4 or more life this turn" (Y'shtola) needs the number.
     this.emit({
       type: "life-changed",
       player,
@@ -55279,9 +55193,9 @@ export class Game {
 
   /** Whether a `prohibits`'s `drawsPerTurn` stops `player` drawing another card
    * now, with `more` of them about to be drawn: read from the turn's real draws
-   * (`cardsDrawnThisTurn`), those before the permanent arrived included. */
+   * (the journal's), those before the permanent arrived included. */
   private cantDrawMore(player: PlayerId, more = 1): boolean {
-    const drawn = this.state.players[player]?.cardsDrawnThisTurn ?? 0;
+    const drawn = journalTotal(this.state, "card-drawn", player, "count");
     return this.prohibitionsOn(player).some(
       ({ prohibits }) => prohibits.drawsPerTurn !== undefined && drawn + more > prohibits.drawsPerTurn,
     );
@@ -55714,7 +55628,8 @@ export class Game {
     // Counted on the *raw* draw, so every draw path counts it once and
     // nothing that merely puts a card in hand (a tutor) does.
     const seat = this.state.players[player];
-    seat.cardsDrawnThisTurn += 1;
+    this.journal({ kind: "card-drawn", player, object: id });
+    const nth = journalTotal(this.state, "card-drawn", player, "count");
     // The first card a player draws in their own draw step, whether it's the
     // turn-based draw or not (a skipped first draw leaves the next one first).
     const firstInDrawStep =
@@ -55726,18 +55641,18 @@ export class Game {
       type: "card-drawn",
       player,
       object: id,
-      nthThisTurn: seat.cardsDrawnThisTurn,
+      nthThisTurn: nth,
       ...(firstInDrawStep ? { firstInDrawStep: true } : {}),
     });
     // Keranos's "reveal the first card you draw on each of your turns".
     // Booby Trap's "the chosen player reveals each card they draw".
     if (
-      (seat.cardsDrawnThisTurn === 1 && player === this.activePlayer && this.revealsFirstDraw(player)) ||
+      (nth === 1 && player === this.activePlayer && this.revealsFirstDraw(player)) ||
       this.revealsEachDraw(player)
     ) {
       this.revealCards(player, [id], "hand");
     }
-    if (seat.cardsDrawnThisTurn === 1) this.queueMiracle(player, id);
+    if (nth === 1) this.queueMiracle(player, id);
     this.tallyDraw(player);
   }
 
@@ -57274,23 +57189,10 @@ export class Game {
       return false;
     }
 
-    // "If a creature died this turn" (rule 700.4 — a creature going to a
-    // graveyard from the battlefield). Counted here, after every redirect, so
-    // only a death that really happens counts: not a Rest in Peace exile. Its
-    // types are still readable, and a compacted token stack is that many
-    // creatures dying.
-    if (
-      leavingBattlefield &&
-      to === "graveyard" &&
-      object.lastKnown?.types.includes("creature") === true
-    ) {
-      const died = object.stackCount ?? 1;
-      this.state.creaturesDiedThisTurn += died;
-      // Per-player as well: "under **your** control" reads the controller
-      // it had on the way out, before this move reverts it to the owner.
-      const under = this.state.players[object.lastKnown.controller];
-      if (under !== undefined) under.creaturesDiedThisTurn += died;
-    }
+    // "If a creature died this turn" (rule 700.4) reads the journal's `left`
+    // entry, written as the leave is announced — after every redirect, so a
+    // Rest in Peace exile isn't one — under the controller it had on the way
+    // out, a compacted token stack as that many creatures.
 
     // A permanent spell that was kicked has to remember it across this one
     // move: `kicked` dies with the stack object (below), but the rider it
@@ -58293,7 +58195,7 @@ export class Game {
   ): boolean {
     // This discard's entries are the last ones; a card discarded, returned
     // and discarded again this turn is in the history twice.
-    const all = (this.state.players[player]?.turnHistory?.discarded ?? []).map((entry) => entry.object);
+    const all = entriesThisTurn(this.state, "discarded").flatMap((e) => (e.player === player && e.object !== undefined ? [e.object] : []));
     const earlier = all.slice(0, Math.max(0, all.length - objects.length));
     return this.discardedMatching(spec, earlier, self).length === 0;
   }
@@ -58343,19 +58245,24 @@ export class Game {
     const owners = new Set(arrived.map((id) => this.state.objects[id]?.owner));
     for (const owner of owners) {
       if (owner === undefined) continue;
-      const history = this.state.players[owner]?.turnHistory?.descended ?? [];
-      const thisMove = arrivals.filter(({ object: id }) => {
-        const card = this.state.objects[id];
-        return (
-          card !== undefined &&
-          card.owner === owner &&
-          effectiveTypes(this.state, this.registry, card).some((t) => PERMANENT_TYPES.has(t))
-        );
-      }).length;
-      const earlier = history.slice(0, Math.max(0, history.length - thisMove));
+      // This move's own arrivals are in the journal already, each in the
+      // stint it arrived in.
+      const thisMove = new Set(arrivals.map(({ object: id }) => id));
+      const earlier = journalEntries(
+        journalReader(this.state, this.registry),
+        JOURNAL_VIEWS.descended,
+        [owner],
+        "this-turn",
+        owner,
+      ).filter(
+        (e) =>
+          e.object !== undefined &&
+          !(thisMove.has(e.object) && e.arrived === this.state.objects[e.object]?.zoneChangeCount),
+      );
       if (
         earlier.some(
           ({ object: id }) =>
+            id !== undefined &&
             this.state.objects[id] !== undefined &&
             (spec.filter === undefined ||
               matchesFilter(this.state, this.registry, id, spec.filter, { you: self.controller })),
@@ -58822,7 +58729,7 @@ export class Game {
     }
     // Each death has its own events: this one only asks the triggers.
     if (full.type !== "permanents-died" && full.type !== "permanents-left") this.state.eventLog.push(full);
-    this.recordTurnHistory(full);
+    this.recordJournal(full);
     // A token comes into being on the battlefield, and a copy of a spell on
     // the stack, rather than moving there, so no zone change opened a public
     // stint for it (see `PublicStint`): one opens as it arrives, so the

@@ -20,6 +20,7 @@
  */
 
 import { describe, expect, it } from "vitest";
+import { turnTotal } from "./harness.js";
 
 import { createDefaultRegistry } from "../cards.js";
 import { ScriptedController } from "../controller.js";
@@ -167,7 +168,7 @@ describe("Chulane, Teller of Tales", () => {
       expect(landsOut(game, A)).toBe(before + 1);
       // Put onto the battlefield, not played — the drop is untouched, and the
       // land arrives untapped (nothing on the card says otherwise).
-      expect(game.state.players[A].landsPlayedThisTurn).toBe(0);
+      expect(turnTotal(game.state, A, "land-played")).toBe(0);
       const put = offers[0][0];
       expect(game.state.objects[put].zone).toBe("battlefield");
       expect(game.state.objects[put].tapped).toBe(false);
@@ -235,7 +236,7 @@ describe("Chulane, Teller of Tales", () => {
       spawnLands(game, A, "Forest", 2);
       game.dispatch({ type: "play-land", player: A, card: inHand(game, A, "Forest") });
       game.advanceUntil(quiet);
-      expect(game.state.players[A].landsPlayedThisTurn).toBe(1);
+      expect(turnTotal(game.state, A, "land-played")).toBe(1);
       const before = landsOut(game, A);
       watchChoices(a, takeFirst);
 
@@ -243,7 +244,7 @@ describe("Chulane, Teller of Tales", () => {
       game.advanceUntil(quiet);
 
       expect(landsOut(game, A)).toBe(before + 1);
-      expect(game.state.players[A].landsPlayedThisTurn).toBe(1);
+      expect(turnTotal(game.state, A, "land-played")).toBe(1);
     });
 
     it("works on an opponent's turn, off a creature spell cast with flash", () => {
@@ -263,7 +264,7 @@ describe("Chulane, Teller of Tales", () => {
       expect(offers).toHaveLength(1);
       expect(game.libraryOf(A).length).toBe(library - 1);
       expect(landsOut(game, A)).toBe(before + 1);
-      expect(game.state.players[A].landsPlayedThisTurn).toBe(0);
+      expect(turnTotal(game.state, A, "land-played")).toBe(0);
     });
 
     it("does not trigger on a noncreature spell", () => {

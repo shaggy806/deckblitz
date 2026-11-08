@@ -7,27 +7,7 @@ import { describe, expect, it } from "vitest";
 
 import { isRingBearer, ringBearerOf } from "../ring.js";
 
-import {
-  A,
-  B,
-  attack,
-  blockOffer,
-  cast,
-  hand,
-  lands,
-  life,
-  pickModes,
-  pickPermanents,
-  settle,
-  spawn,
-  supertypes,
-  table,
-  toGraveyard,
-  toHand,
-  toLibrary,
-  toStep,
-  zone,
-} from "./harness.js";
+import { A, B, attack, blockOffer, cast, hand, lands, life, pickModes, pickPermanents, settle, spawn, supertypes, table, toGraveyard, toHand, toLibrary, toStep, zone, setTurnTotal } from "./harness.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 
@@ -147,7 +127,7 @@ describe("Ring cards", () => {
     const { game, a } = table();
     const frodo = spawn(game, "Frodo, Adventurous Hobbit");
     game.state.players[A].ringTemptations = 1;
-    game.state.players[A].lifeGainedThisTurn = 3;
+    setTurnTotal(game.state, A, "life-gained", 3);
     pickPermanents(a, frodo);
     toLibrary(game, "Wastes");
     const before = hand(game).length;

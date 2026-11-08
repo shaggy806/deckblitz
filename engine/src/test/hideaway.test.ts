@@ -11,6 +11,7 @@
  * Isle, Howltooth Hollow; Watcher for Tomorrow; the SNC/DSC enchantments.
  */
 import { describe, expect, it } from "vitest";
+import { turnTotal } from "./harness.js";
 
 import type { Action, LegalAction } from "../actions.js";
 import { ScriptedController } from "../controller.js";
@@ -179,12 +180,12 @@ describe("hideaway — playing the exiled card", () => {
       offered = offer;
       return { type: "play-land", player: A, card: ids["Forest"] };
     };
-    const played = game.state.players[A].landsPlayedThisTurn;
+    const played = turnTotal(game.state, A, "land-played");
     activate(game, permanent);
     expect(offered?.casts).toEqual([]);
     expect(offered?.lands?.map((l) => l.card)).toEqual([ids["Forest"]]);
     expect(game.state.objects[ids["Forest"]].zone).toBe("battlefield");
-    expect(game.state.players[A].landsPlayedThisTurn).toBe(played + 1);
+    expect(turnTotal(game.state, A, "land-played")).toBe(played + 1);
   });
 
   it("doesn't offer the land once the turn's land play is used", () => {

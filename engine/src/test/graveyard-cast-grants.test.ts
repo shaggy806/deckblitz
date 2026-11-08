@@ -12,6 +12,7 @@
  */
 
 import { describe, expect, it } from "vitest";
+import { turnTotal } from "./harness.js";
 
 import type { Action, LegalAction } from "../actions.js";
 import { EvalBotController } from "../bot/eval-bot.js";
@@ -174,7 +175,7 @@ describe("Muldrotha, the Gravetide", () => {
     ).toBe(1);
     game.dispatch(castAs(citadel, offers[0]));
     expect(game.state.objects[citadel].zone).toBe("battlefield");
-    expect(game.state.players[A].landsPlayedThisTurn).toBe(1);
+    expect(turnTotal(game.state, A, "land-played")).toBe(1);
     expect(offersFor(game, citadel2)).toEqual([]);
 
     // With the land drop taken from the hand instead, the allowance can't

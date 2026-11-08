@@ -9,7 +9,7 @@ import { describe, expect, it } from "vitest";
 import type { LegalAction } from "../actions.js";
 import type { Game } from "../game.js";
 import { colorIdentityOf } from "../identity.js";
-import { A, B, hand, lands, life, nextTurn, registryOf, settle, spawn, table, tokensNamed, toHand, toStep, zone } from "./harness.js";
+import { A, B, hand, lands, life, nextTurn, registryOf, settle, spawn, table, tokensNamed, toHand, toStep, zone, turnTotal, setTurnTotal } from "./harness.js";
 import type { ObjectId } from "../primitives.js";
 
 type Land = Extract<LegalAction, { kind: "play-land" }>;
@@ -48,7 +48,7 @@ describe("a land with an Adventure", () => {
 
   it("the Adventure resolves into exile, and the card is then playable from there, using a land drop", () => {
     const { game, a } = table();
-    game.state.players[A].landsPlayedThisTurn = 0;
+    setTurnTotal(game.state, A, "land-played", 0);
     lands(game, "Swamp", 3);
     const bears = spawn(game, "Grizzly Bears");
     a.chooseModesFn = () => [0];
@@ -66,7 +66,7 @@ describe("a land with an Adventure", () => {
     settle(game);
     expect(zone(game, card)).toBe("battlefield");
     expect(game.state.objects[card].tapped).toBe(true);
-    expect(game.state.players[A].landsPlayedThisTurn).toBe(1);
+    expect(turnTotal(game.state, A, "land-played")).toBe(1);
   });
 
   it("from exile it waits for a land drop and for sorcery timing", () => {
@@ -79,9 +79,9 @@ describe("a land with an Adventure", () => {
     settle(game);
     expect(zone(game, card)).toBe("exile");
     expect(tokensNamed(game, "Wizard Token (Kuja)", A)).toBe(1);
-    game.state.players[A].landsPlayedThisTurn = 99;
+    setTurnTotal(game.state, A, "land-played", 99);
     expect(playOffer(game, card)).toBeUndefined();
-    game.state.players[A].landsPlayedThisTurn = 0;
+    setTurnTotal(game.state, A, "land-played", 0);
     expect(playOffer(game, card)).toBeDefined();
     toStep(game, "end");
     expect(playOffer(game, card)).toBeUndefined();

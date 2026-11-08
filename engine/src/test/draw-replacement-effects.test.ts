@@ -9,7 +9,7 @@
 
 import { describe, expect, it } from "vitest";
 
-import { A, B, cast, lands, graveyard, hand, nextTurn, settle, spawn, table, toHand, toLibrary, toStep } from "./harness.js";
+import { A, B, cast, lands, graveyard, hand, nextTurn, settle, spawn, table, toHand, toLibrary, toStep, turnTotal } from "./harness.js";
 
 const library = (game: ReturnType<typeof table>["game"], player = A) => game.state.zones.perPlayer[player].library;
 
@@ -25,7 +25,7 @@ describe("a draw replaced by an effect", () => {
       looks.push(eligible.map((id) => game.state.objects[id].cardName));
       return [eligible[eligible.length - 1]];
     };
-    const drawnBefore = game.state.players[A].cardsDrawnThisTurn;
+    const drawnBefore = turnTotal(game.state, A, "card-drawn");
     const handBefore = hand(game).length;
     const graveBefore = graveyard(game).length;
     cast(game, toHand(game, "Divination"));
@@ -40,7 +40,7 @@ describe("a draw replaced by an effect", () => {
     // Four looked-at cards and Divination itself.
     expect(graveyard(game).length).toBe(graveBefore + 5);
     // Replaced draws aren't draws.
-    expect(game.state.players[A].cardsDrawnThisTurn).toBe(drawnBefore);
+    expect(turnTotal(game.state, A, "card-drawn")).toBe(drawnBefore);
   });
 
   it("Underrealm Lich: a draw from an empty library is replaced, so it isn't a loss", () => {

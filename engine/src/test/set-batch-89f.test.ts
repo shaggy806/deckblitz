@@ -7,32 +7,7 @@ import { describe, expect, it } from "vitest";
 import type { Game } from "../game.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 
-import {
-  A,
-  B,
-  C,
-  attack,
-  blockOffer,
-  cast,
-  counters,
-  destroy,
-  enter,
-  hand,
-  keywords,
-  lands,
-  life,
-  named,
-  nextTurn,
-  pickModes,
-  pt,
-  ref,
-  spawn,
-  table,
-  toHand,
-  toLibrary,
-  tokensNamed,
-  zone,
-} from "./harness.js";
+import { A, B, C, attack, blockOffer, cast, counters, destroy, enter, hand, keywords, lands, life, named, nextTurn, pickModes, pt, ref, spawn, table, toHand, toLibrary, tokensNamed, zone, turnTotal } from "./harness.js";
 
 /** Lightning Bolt at `target` — at an opponent, a crime (rule 700.13). */
 const bolt = (game: Game, target: PlayerId | ObjectId, player: PlayerId = A): void => {
@@ -40,7 +15,7 @@ const bolt = (game: Game, target: PlayerId | ObjectId, player: PlayerId = A): vo
   cast(game, toHand(game, "Lightning Bolt", player), { player, targets: [ref(target)] });
 };
 
-const crimes = (game: Game, player: PlayerId = A): number => game.state.players[player].crimesThisTurn ?? 0;
+const crimes = (game: Game, player: PlayerId = A): number => turnTotal(game.state, player, "crime");
 
 const plot = (game: Game, card: ObjectId, player: PlayerId = A): void => {
   const why = game.canDispatch({ type: "plot", player, card });

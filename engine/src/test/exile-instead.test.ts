@@ -11,6 +11,7 @@
  *   - Admiral Brass, Unsinkable, the commander that puts finality counters on.
  */
 import { describe, expect, it } from "vitest";
+import { diedThisTurn } from "./harness.js";
 
 import { createDefaultRegistry, defineCard } from "../cards.js";
 import { ScriptedController } from "../controller.js";
@@ -100,7 +101,7 @@ describe("finality counters (rule 122)", () => {
     bolt(game, A, bears);
 
     expect(game.state.objects[bears].zone).toBe("exile");
-    expect(game.state.creaturesDiedThisTurn).toBe(0);
+    expect(diedThisTurn(game)).toBe(0);
     expect(game.battlefield.some((id) => game.state.objects[id].cardName === "Treasure Token")).toBe(
       false,
     );
@@ -173,7 +174,7 @@ describe('"if it would leave the battlefield, exile it instead" — Whip of Ereb
     bolt(game, A, bear);
 
     expect(game.state.objects[bear].zone).toBe("exile");
-    expect(game.state.creaturesDiedThisTurn).toBe(0);
+    expect(diedThisTurn(game)).toBe(0);
   });
 
   it("is gone once the card is a new object: a second trip is an ordinary one", () => {
@@ -205,7 +206,7 @@ describe('the dies-only form — would-be-put-into-graveyard { from: "battlefiel
     bolt(game, A, bears);
 
     expect(game.state.objects[bears].zone).toBe("exile");
-    expect(game.state.creaturesDiedThisTurn).toBe(0);
+    expect(diedThisTurn(game)).toBe(0);
   });
 
   it("lets its controller's own creatures die (the filter reads who controls it)", () => {
@@ -316,7 +317,7 @@ describe("Admiral Brass, Unsinkable", () => {
     bolt(game, A, plunderer);
 
     expect(game.state.objects[plunderer].zone).toBe("exile");
-    expect(game.state.creaturesDiedThisTurn).toBe(0);
+    expect(diedThisTurn(game)).toBe(0);
   });
 
   it("returning nothing is a choice", () => {
@@ -393,6 +394,6 @@ describe("finality counters alongside other rules", () => {
     expect(game.state.objects[marked].zone).toBe("exile");
     // Zulaport sees itself and the other Bears die — not the exiled one.
     expect(game.state.players[B].life).toBe(life - 2);
-    expect(game.state.creaturesDiedThisTurn).toBe(2);
+    expect(diedThisTurn(game)).toBe(2);
   });
 });

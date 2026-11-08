@@ -9,6 +9,7 @@
  */
 
 import { describe, expect, it } from "vitest";
+import { turnTotal } from "./harness.js";
 
 import { defineCard } from "../cards/define.js";
 import { createDefaultRegistry } from "../cards/registry.js";
@@ -148,10 +149,10 @@ describe("a cast trigger's sharesNoCreatureType (Volo, Guide to Monsters)", () =
   /** Cast `name`; how many cards Alice drew for it. */
   const cast = (game: Game, name: string): number => {
     for (let i = 0; i < 2; i += 1) game.debugSpawn("Forest", A, "battlefield");
-    const drawn = game.state.players[A].cardsDrawnThisTurn;
+    const drawn = turnTotal(game.state, A, "card-drawn");
     game.dispatch({ type: "cast-spell", player: A, card: game.debugSpawn(name, A, "hand") });
     game.advanceUntil(quiet);
-    return game.state.players[A].cardsDrawnThisTurn - drawn;
+    return turnTotal(game.state, A, "card-drawn") - drawn;
   };
 
   it("fires for a creature spell sharing no creature type with yours", () => {

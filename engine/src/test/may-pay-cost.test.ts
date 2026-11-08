@@ -10,6 +10,7 @@
  */
 
 import { describe, expect, it } from "vitest";
+import { diedThisTurn } from "./harness.js";
 
 import { Game } from "../game.js";
 import { asPlayerId } from "../primitives.js";
@@ -130,13 +131,13 @@ describe("Liliana's Devotee", () => {
   it("only triggers once a creature has died this turn", () => {
     const game = makeGame();
     game.advanceUntil((s) => s.priority.holder === A);
-    expect(game.state.creaturesDiedThisTurn).toBe(0);
+    expect(diedThisTurn(game)).toBe(0);
 
     const bear = game.debugSpawn("Grizzly Bears", A, "battlefield");
     game.debugApplyEffect(A, { kind: "destroy", target: 0 }, [
       { kind: "object", object: bear },
     ]);
-    expect(game.state.creaturesDiedThisTurn).toBe(1);
+    expect(diedThisTurn(game)).toBe(1);
   });
 
   it("forgets on the next turn", () => {
@@ -148,7 +149,7 @@ describe("Liliana's Devotee", () => {
     ]);
     const turn = game.state.turn.number;
     game.advanceUntil((s) => s.turn.number > turn || s.result.over);
-    expect(game.state.creaturesDiedThisTurn).toBe(0);
+    expect(diedThisTurn(game)).toBe(0);
   });
 
   it("does not count a noncreature permanent", () => {
@@ -158,6 +159,6 @@ describe("Liliana's Devotee", () => {
     game.debugApplyEffect(A, { kind: "destroy", target: 0 }, [
       { kind: "object", object: bomb },
     ]);
-    expect(game.state.creaturesDiedThisTurn).toBe(0);
+    expect(diedThisTurn(game)).toBe(0);
   });
 });

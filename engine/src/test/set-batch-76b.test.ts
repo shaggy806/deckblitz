@@ -7,30 +7,7 @@ import { describe, expect, it } from "vitest";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 
-import {
-  A,
-  B,
-  attack,
-  cast,
-  counters,
-  destroy,
-  enter,
-  hand,
-  keywords,
-  lands,
-  life,
-  named,
-  pt,
-  ref,
-  settle,
-  spawn,
-  table,
-  toGraveyard,
-  toHand,
-  toStep,
-  tokensNamed,
-  zone,
-} from "./harness.js";
+import { A, B, attack, cast, counters, destroy, enter, hand, keywords, lands, life, named, pt, ref, settle, spawn, table, toGraveyard, toHand, toStep, tokensNamed, zone, turnTotal } from "./harness.js";
 
 /** The prepare spell copies in exile. */
 const preparedCopies = (game: Game): ObjectId[] =>
@@ -135,7 +112,7 @@ describe("Fractal Anomaly", () => {
     game.debugApplyEffect(A, { kind: "draw", amount: 2 });
     settle(game);
     // The draw step's card and these two.
-    expect(game.state.players[A].cardsDrawnThisTurn).toBe(3);
+    expect(turnTotal(game.state, A, "card-drawn")).toBe(3);
     cast(game, toHand(game, "Fractal Anomaly"));
     const [fractal] = named(game, "Fractal Token");
     expect(counters(game, fractal)).toBe(3);

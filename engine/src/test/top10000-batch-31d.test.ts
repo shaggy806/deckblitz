@@ -12,6 +12,7 @@
  * the turn's deaths (Gravelighter).
  */
 import { describe, expect, it } from "vitest";
+import { turnTotal } from "./harness.js";
 
 import type { Action } from "../actions.js";
 import { createDefaultRegistry } from "../cards/registry.js";
@@ -173,7 +174,7 @@ describe("top-10000 batch 31d — Lady Octopus, Inspired Inventor", () => {
     const { game } = setUp();
     const lady = spawn(game, "Lady Octopus, Inspired Inventor");
     // The draw step's card was the turn's first, drawn before she arrived.
-    expect(game.state.players[A].cardsDrawnThisTurn).toBe(1);
+    expect(turnTotal(game.state, A, "card-drawn")).toBe(1);
     game.debugApplyEffect(A, { kind: "draw", amount: 2 });
     game.advanceUntil(quiet);
     expect(counters(game, lady, "ingenuity")).toBe(1);

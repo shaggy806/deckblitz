@@ -7,6 +7,7 @@
  */
 
 import { describe, expect, it } from "vitest";
+import { setTurnTotal } from "./harness.js";
 
 import { DEFAULT_WEIGHTS } from "../bot/evaluate.js";
 import { playerFeatures } from "../bot/features.js";
@@ -52,7 +53,7 @@ describe("threat", () => {
     game.debugSpawn("Craw Wurm", C, "battlefield", { summoningSick: false });
     const at = (life: number, lostThisTurn: number): number => {
       game.state.players[A].life = life;
-      game.state.players[A].lifeLostThisTurn = lostThisTurn;
+      setTurnTotal(game.state, A, "life-lost", lostThisTurn);
       return threatTo(game);
     };
     // At 35 a combat that takes 6 doesn't also grow the Wurm's threat...
