@@ -92,7 +92,7 @@ import {
   readsGraveyardOrder,
 } from "./cards/define.js";
 import type { CyclingAbility, KickerAlsoCost, MorphCost, SpellCastClause, Supertype } from "./cards/define.js";
-import { costActMaxX, costActPayable, payableCostAct } from "./cost-acts.js";
+import { costActMaxX, costActPaidLast, costActPayable, payableCostAct } from "./cost-acts.js";
 import { DUNGEONS } from "./cards/dungeons.js";
 import { MADNESS_EFFECT, MADNESS_TEXT } from "./cards/madness.js";
 import { MIRACLE_EFFECT, MIRACLE_TEXT } from "./cards/miracle.js";
@@ -23828,10 +23828,17 @@ export class Game {
     });
     this.announceTargeted(chosen, player, sourceId, false, abilityId);
     this.commitCrimeIfAny(chosen, player, abilityId);
-    // In any order but random or library parts last (601.2h), and nothing here
-    // waits on the parts below: a `do` beside a part that asks is refused by the
+    // Rule 601.2h: in any order, but random parts and those moving a card from
+    // a library after the rest — those wait in the queue until the parts below
+    // are answered. A `do` that asks beside a part that asks is refused by the
     // pool's test (`costActMayAsk`), since only one decision can wait at a time.
-    if (ability.cost.do !== undefined) this.payCostAct(ability.cost.do, player, sourceId, abilityId, chosenX, chosen, player);
+    if (ability.cost.do !== undefined) {
+      if (costActPaidLast(ability.cost.do)) {
+        (this.state.pendingAlsoCosts ??= []).push({ spell: abilityId, source: sourceId, player, priorityTo: player, do: ability.cost.do });
+      } else {
+        this.payCostAct(ability.cost.do, player, sourceId, abilityId, chosenX, chosen, player);
+      }
+    }
     // "Sacrifice two artifacts": which ones is chosen now, as the cost is paid
     // (rules 602.2b, 601.2h) — the ability is on the stack and its mana paid,
     // and nobody gets priority until it's done.
@@ -41447,7 +41454,7 @@ export class Game {
     const { spell, player, priorityTo, discard, returnToHand, exileFromGraveyard, do: act } = ask;
     if (act !== undefined) {
       const object = this.state.objects[spell];
-      this.payCostAct(act, player, spell, spell, object?.xValue ?? 0, object?.targets ?? [], priorityTo);
+      this.payCostAct(act, player, ask.source ?? spell, spell, object?.xValue ?? 0, object?.targets ?? [], priorityTo);
     }
     if (discard !== undefined) {
       this.payCostDiscard(spell, spell, () => {

@@ -3100,8 +3100,11 @@ export interface AlsoCostAsk {
   readonly discard?: { readonly count: number; readonly atRandom?: boolean };
   readonly returnToHand?: { readonly count: number; readonly filter: CardFilter };
   readonly exileFromGraveyard?: { readonly count: number; readonly filter?: CardFilter };
-  /** An action as the cost (`KickerAlsoCost.do`). */
+  /** An action as the cost (`KickerAlsoCost.do`, or an ability's `AbilityCost.do`
+   * paid after its other parts, 601.2h). */
   readonly do?: EffectSpec;
+  /** The ability's source, when `spell` is the ability on the stack. */
+  readonly source?: ObjectId;
 }
 
 /**

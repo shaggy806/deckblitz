@@ -704,8 +704,8 @@ equal (`allCounters`, `commanderManaValue`) become `EffectAmount` members.
 
 *The spell clause.* One `SpellCastClause` (`when` on `costModification` and `alternativeCostForSpells`) says which
 casts it reaches: `caster`, `castFrom` (with `castFromAnyones`), `notFromCastersHand`, `exceptOnCastersTurn`, `yourTurnOnly`,
-`kicked`, `firstEachTurn` (the caster's casts this turn matching the static's filter, from the journal, as
-`Game.timingCount` counts a trigger's). It replaces those flat fields there and `alternativeCostForSpells`' own
+`kicked`, `firstEachTurn` (the caster's casts this turn matching the static's filter, read from
+`PlayerState.spellsCastThisTurnAs`, the one cast record step 3's journal left where it was). It replaces those flat fields there and `alternativeCostForSpells`' own
 `fromHand` / `fromZones` / `oncePerTurn` / `yourTurnOnly`. The target-keyed fields (`perTarget`, `targeting`,
 `targetingSource`) stay beside it: they are what the offer's "assume the best target" path is keyed on.
 
@@ -716,8 +716,8 @@ plus one check, as `trigger-events.ts`): for each kind, whether it can be paid i
 player something, and whether it moves a card from a library or is random. Payment:
 - **Announced** like any other part: the X it allows caps the offer (601.2b); nothing is paid unless every part is
   payable (601.2h: "partial payments are not allowed"), the payability check being read before anything moves.
-- **Paid** last among the cost's parts, once the object is on the stack, those a row marks random or moving from a
-  library after the rest (601.2h). `Game.payCostAct` applies the effect in a context of the ability's source and
+- **Paid** once the object is on the stack: first among the parts asked for then, except what a row marks random or moving
+  a card from a library, which 601.2h pays after the rest (`pendingAlsoCosts`; Sinister Concoction's mill waits for its discard). `Game.payCostAct` applies the effect in a context of the ability's source and
   controller, X and targets, as a resolution would; a decision it raises is an ordinary dispatched one, and what's
   left waits in `suspendedResolutions`, which already holds state-based actions and priority off (117.5).
 - **Mana abilities** (605.3b) don't use the stack: the `do` and the mana run as one sequence, so the mana waits on the

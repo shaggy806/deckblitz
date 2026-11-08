@@ -5,7 +5,7 @@
 import { describe, expect, it } from "vitest";
 import { POOL_CARDS, TOKEN_CARDS } from "../cards/generated.js";
 import { costActMayAsk, costActUnknownKinds } from "../cost-acts.js";
-import { A, activate, cast, counters, graveyard, hand, lands, life, named, nextTurn, pt, ref, settle, spawn, table, toGraveyard, toHand, toLibrary, tokensNamed, zone } from "./harness.js";
+import { A, B, activate, cast, counters, graveyard, hand, lands, life, named, nextTurn, pt, ref, settle, spawn, table, toGraveyard, toHand, toLibrary, tokensNamed, zone } from "./harness.js";
 
 function valuesAt(value: unknown, key: string, out: unknown[] = []): unknown[] {
   if (value === null || typeof value !== "object") return out;
@@ -303,5 +303,25 @@ describe("flagged cards on the cost pipeline", () => {
     activate(game, dead, 0, { targets: [ref(bears)] });
     expect(zone(game, dead)).toBe("exile");
     expect(counters(game, bears)).toBe(3);
+  });
+  it("Sinister Concoction discards before it mills (601.2h: library parts last)", () => {
+    const { game, a } = table();
+    const concoction = spawn(game, "Sinister Concoction");
+    const bears = spawn(game, "Grizzly Bears", B);
+    lands(game, "Swamp", 1);
+    game.state.zones.perPlayer[A].hand = [];
+    const card = toHand(game, "Wastes");
+    toHand(game, "Wastes");
+    const top = toLibrary(game, "Hill Giant");
+    let libraryTopAtDiscard: string | undefined;
+    a.chooseDiscardsFn = (cards) => {
+      libraryTopAtDiscard = game.state.objects[top]?.zone;
+      return cards.slice(0, 1).map((c) => c.id);
+    };
+    activate(game, concoction, 0, { targets: [ref(bears)] });
+    expect(zone(game, card)).toBe("graveyard");
+    expect(libraryTopAtDiscard).toBe("library");
+    expect(zone(game, top)).toBe("graveyard");
+    expect(zone(game, bears)).toBe("graveyard");
   });
 });
