@@ -114,6 +114,7 @@ import _poolBurningVengeance from "../pool/burning-vengeance.js";
 import _poolBurrogBanemaker from "../pool/burrog-banemaker.js";
 import _poolBuryInBooks from "../pool/bury-in-books.js";
 import _poolCacklingCounterpart from "../pool/cackling-counterpart.js";
+import _poolCallInAProfessional from "../pool/call-in-a-professional.js";
 import _poolCallerOfTheUntamed from "../pool/caller-of-the-untamed.js";
 import _poolCallowJushi from "../pool/callow-jushi.js";
 import _poolCameraLauncher from "../pool/camera-launcher.js";
@@ -1123,6 +1124,7 @@ const shard: CardShard = {
     _poolBurrogBanemaker,
     _poolBuryInBooks,
     _poolCacklingCounterpart,
+    _poolCallInAProfessional,
     _poolCallerOfTheUntamed,
     _poolCallowJushi,
     _poolCameraLauncher,

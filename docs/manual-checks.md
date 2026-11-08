@@ -7640,3 +7640,16 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Do:** Cast Lightning Bolt at Carol; as Bob, cast Fog. Back as Alice, activate Prodigal Pyromancer at Dave; as Bob, cast the other Fog. Back as Alice, cast Dimensional Infiltrator. Pay {C}{C}, pick "Copy Lightning Bolt (targeting an opponent) next", and keep each copy's targets.
 - **Expect:** You're asked which of your two spells is copied first, each named; then the Pyromancer's ability is copied too. Carol takes 6, Dave 2, and you end with two Dimensional Infiltrators.
 - **Not a bug:** Ulalek's own ability isn't copied, and Bob's Fogs aren't (they aren't yours).
+## Effects for a while: this turn, and that player's next turn (2026-11-07)
+
+### Skullcrack: nobody gains life for the rest of the turn
+- **Do:** Cast Skullcrack at Bob, then cast Healing Salve choosing "gain 3 life", targeting yourself.
+- **Expect:** Bob goes to 17. Healing Salve resolves but you stay at 20.
+
+### Willie Lumpkin, Postman: the player who draws can't attack you on their next turn
+- **Do:** Attack Bob with Willie Lumpkin. As Bob, answer yes to "Draw a card?". Let the turn pass to Bob, and as Bob try to attack Alice with Grizzly Bears.
+- **Expect:** You and Bob each draw a card. On Bob's turn his Grizzly Bears can't attack you.
+
+### Zagorka, Mother of Sanctum: each player is offered a Sanctum
+- **Do:** Pass to your end step. Decline the Sanctum yourself; as Bob, take it.
+- **Expect:** Only Bob gets a tapped land token named Sanctum. On Bob's turn his Grizzly Bears can't attack you.

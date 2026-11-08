@@ -953,6 +953,7 @@ import _tokensMonkeyToken from "../tokens/monkey-token.js";
 import _tokensNalaarAetherjetToken from "../tokens/nalaar-aetherjet-token.js";
 import _tokensPegasusToken22 from "../tokens/pegasus-token-2-2.js";
 import _tokensPirateTokenNettlingNuisance from "../tokens/pirate-token-nettling-nuisance.js";
+import _tokensSanctumToken from "../tokens/sanctum-token.js";
 import _tokensSatyrToken from "../tokens/satyr-token.js";
 import _tokensSpacecraftIllusionToken from "../tokens/spacecraft-illusion-token.js";
 import _tokensSpiritToken from "../tokens/spirit-token.js";
@@ -1914,6 +1915,7 @@ const shard: CardShard = {
     _tokensNalaarAetherjetToken,
     _tokensPegasusToken22,
     _tokensPirateTokenNettlingNuisance,
+    _tokensSanctumToken,
     _tokensSatyrToken,
     _tokensSpacecraftIllusionToken,
     _tokensSpiritToken,

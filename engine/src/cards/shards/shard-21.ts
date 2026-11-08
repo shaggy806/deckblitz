@@ -53,6 +53,7 @@ import _poolAvalancheCaller from "../pool/avalanche-caller.js";
 import _poolAvelineDeGrandpre from "../pool/aveline-de-grandpre.js";
 import _poolAvenWindMage from "../pool/aven-wind-mage.js";
 import _poolAzlaskTheSwellingScourge from "../pool/azlask-the-swelling-scourge.js";
+import _poolAzorTheLawbringer from "../pool/azor-the-lawbringer.js";
 import _poolAzoriusCharm from "../pool/azorius-charm.js";
 import _poolAzoriusKeyrune from "../pool/azorius-keyrune.js";
 import _poolAzorsElocutors from "../pool/azors-elocutors.js";
@@ -990,6 +991,7 @@ const shard: CardShard = {
     _poolAvelineDeGrandpre,
     _poolAvenWindMage,
     _poolAzlaskTheSwellingScourge,
+    _poolAzorTheLawbringer,
     _poolAzoriusCharm,
     _poolAzoriusKeyrune,
     _poolAzorsElocutors,

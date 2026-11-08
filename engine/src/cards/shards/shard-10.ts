@@ -425,6 +425,7 @@ import _poolIronrootWarlord from "../pool/ironroot-warlord.js";
 import _poolIronwrightsCleansing from "../pool/ironwrights-cleansing.js";
 import _poolItDoesntAddUp from "../pool/it-doesnt-add-up.js";
 import _poolJabsMistressOfMockery from "../pool/jabs-mistress-of-mockery.js";
+import _poolJacesMachinations from "../pool/jaces-machinations.js";
 import _poolJacesSentinel from "../pool/jaces-sentinel.js";
 import _poolJackalPup from "../pool/jackal-pup.js";
 import _poolJaradsOrders from "../pool/jarads-orders.js";
@@ -1411,6 +1412,7 @@ const shard: CardShard = {
     _poolIronwrightsCleansing,
     _poolItDoesntAddUp,
     _poolJabsMistressOfMockery,
+    _poolJacesMachinations,
     _poolJacesSentinel,
     _poolJackalPup,
     _poolJaradsOrders,

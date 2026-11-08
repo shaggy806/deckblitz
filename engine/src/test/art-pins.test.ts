@@ -146,6 +146,9 @@ const NO_TOKEN_PRINTING = new Set([
   // Spiny Starfish's 0/1 blue Starfish: the card lists no token in the Oracle snapshot's
   // `all_parts`, and the snapshot holds none of that name (checked 2026-11-04).
   "0/1 Blue Starfish Token",
+  // Zagorka, Mother of Sanctum's Sanctum land: the card lists no token in the Oracle
+  // snapshot's `all_parts` (checked 2026-11-07).
+  "Sanctum Token",
 ]);
 
 describe("token art", () => {

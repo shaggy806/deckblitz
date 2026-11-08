@@ -787,6 +787,7 @@ import _poolSirShandlarOfEberyn from "../pool/sir-shandlar-of-eberyn.js";
 import _poolSkeletalVampire from "../pool/skeletal-vampire.js";
 import _poolSkitteringCrustacean from "../pool/skittering-crustacean.js";
 import _poolSkrelvsHive from "../pool/skrelvs-hive.js";
+import _poolSkullcrack from "../pool/skullcrack.js";
 import _poolSkullknockerOgre from "../pool/skullknocker-ogre.js";
 import _poolSkyshipStalker from "../pool/skyship-stalker.js";
 import _poolSkyshroudCondor from "../pool/skyshroud-condor.js";
@@ -1828,6 +1829,7 @@ const shard: CardShard = {
     _poolSkeletalVampire,
     _poolSkitteringCrustacean,
     _poolSkrelvsHive,
+    _poolSkullcrack,
     _poolSkullknockerOgre,
     _poolSkyshipStalker,
     _poolSkyshroudCondor,

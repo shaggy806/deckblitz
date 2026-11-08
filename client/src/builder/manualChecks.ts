@@ -11488,4 +11488,26 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ human: true, bf: ['Forest*2'], hand: ['Fog*2'] }, {}, {}],
     }),
   ),
+  // --- Effects for a while: this turn, and that player's next turn (2026-11-07)
+  preset(
+    "Skullcrack: nobody gains life for the rest of the turn",
+    board({
+      you: { bf: ['Mountain*2', 'Plains'], hand: ['Skullcrack', 'Healing Salve'] },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    "Willie Lumpkin, Postman: the player who draws can't attack you on their next turn",
+    board({
+      you: { bf: ['Willie Lumpkin, Postman'] },
+      opp: { human: true, bf: ['Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    'Zagorka, Mother of Sanctum: each player is offered a Sanctum',
+    board({
+      you: { bf: ['Zagorka, Mother of Sanctum'] },
+      opp: { human: true, bf: ['Grizzly Bears'] },
+    }),
+  ),
 ]

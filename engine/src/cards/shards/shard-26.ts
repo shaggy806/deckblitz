@@ -493,6 +493,7 @@ import _poolMarisisTwinclaws from "../pool/marisis-twinclaws.js";
 import _poolMarrowGnawer from "../pool/marrow-gnawer.js";
 import _poolMarrowShards from "../pool/marrow-shards.js";
 import _poolMassiveMight from "../pool/massive-might.js";
+import _poolMasterOfCruelties from "../pool/master-of-cruelties.js";
 import _poolMasterOfWaves from "../pool/master-of-waves.js";
 import _poolMasterTransmuter from "../pool/master-transmuter.js";
 import _poolMastermindsAcquisition from "../pool/masterminds-acquisition.js";
@@ -1487,6 +1488,7 @@ const shard: CardShard = {
     _poolMarrowGnawer,
     _poolMarrowShards,
     _poolMassiveMight,
+    _poolMasterOfCruelties,
     _poolMasterOfWaves,
     _poolMasterTransmuter,
     _poolMastermindsAcquisition,

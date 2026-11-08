@@ -225,6 +225,7 @@ import _poolEmbermawHellion from "../pool/embermaw-hellion.js";
 import _poolEmergeFromTheCocoon from "../pool/emerge-from-the-cocoon.js";
 import _poolEmergenceZone from "../pool/emergence-zone.js";
 import _poolEmeritusOfConflict from "../pool/emeritus-of-conflict.js";
+import _poolEmrakulTheExigentDoom from "../pool/emrakul-the-exigent-doom.js";
 import _poolEnemyOfTheGuildpact from "../pool/enemy-of-the-guildpact.js";
 import _poolEngineRat from "../pool/engine-rat.js";
 import _poolEnragedGiant from "../pool/enraged-giant.js";
@@ -1192,6 +1193,7 @@ const shard: CardShard = {
     _poolEmergeFromTheCocoon,
     _poolEmergenceZone,
     _poolEmeritusOfConflict,
+    _poolEmrakulTheExigentDoom,
     _poolEnemyOfTheGuildpact,
     _poolEngineRat,
     _poolEnragedGiant,

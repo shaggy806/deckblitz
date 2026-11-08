@@ -563,6 +563,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Salamander Warrior Token",
   "Samurai Token",
   "Samurai Token (The Eternal Wanderer)",
+  "Sanctum Token",
   "Sand Token",
   "Sand Warrior Token",
   "Saproling Token",

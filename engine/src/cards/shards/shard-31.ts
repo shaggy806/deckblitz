@@ -990,6 +990,7 @@ import _poolWearyPrisoner from "../pool/weary-prisoner.js";
 import _poolWeatherseedFaeries from "../pool/weatherseed-faeries.js";
 import _poolWeddingCrasher from "../pool/wedding-crasher.js";
 import _poolWickTheWhorledMind from "../pool/wick-the-whorled-mind.js";
+import _poolWillieLumpkinPostman from "../pool/willie-lumpkin-postman.js";
 import _poolWindsOfRebuke from "../pool/winds-of-rebuke.js";
 import _poolWingrattleScarecrow from "../pool/wingrattle-scarecrow.js";
 import _poolWingsOfHubris from "../pool/wings-of-hubris.js";
@@ -2033,6 +2034,7 @@ const shard: CardShard = {
     _poolWeatherseedFaeries,
     _poolWeddingCrasher,
     _poolWickTheWhorledMind,
+    _poolWillieLumpkinPostman,
     _poolWindsOfRebuke,
     _poolWingrattleScarecrow,
     _poolWingsOfHubris,

@@ -684,6 +684,7 @@ import _poolRoarOfTheFifthPeople from "../pool/roar-of-the-fifth-people.js";
 import _poolRoarOfTheKha from "../pool/roar-of-the-kha.js";
 import _poolRoaringSlagwurm from "../pool/roaring-slagwurm.js";
 import _poolRoilingCanopy from "../pool/roiling-canopy.js";
+import _poolRoilingVortex from "../pool/roiling-vortex.js";
 import _poolRoninShadowStalker from "../pool/ronin-shadow-stalker.js";
 import _poolRooftopAssassin from "../pool/rooftop-assassin.js";
 import _poolRoryWilliams from "../pool/rory-williams.js";
@@ -972,6 +973,7 @@ import _poolYavimayaSteelcrusher from "../pool/yavimaya-steelcrusher.js";
 import _poolYoshimaruBelovedCompanion from "../pool/yoshimaru-beloved-companion.js";
 import _poolYouCannotPass from "../pool/you-cannot-pass.js";
 import _poolZaffaiAndTheTempests from "../pool/zaffai-and-the-tempests.js";
+import _poolZagorkaMotherOfSanctum from "../pool/zagorka-mother-of-sanctum.js";
 import _poolZaskSkitteringSwarmlord from "../pool/zask-skittering-swarmlord.js";
 import _poolZeroPointBallad from "../pool/zero-point-ballad.js";
 import _poolZhangHeWeiGeneral from "../pool/zhang-he-wei-general.js";
@@ -1676,6 +1678,7 @@ const shard: CardShard = {
     _poolRoarOfTheKha,
     _poolRoaringSlagwurm,
     _poolRoilingCanopy,
+    _poolRoilingVortex,
     _poolRoninShadowStalker,
     _poolRooftopAssassin,
     _poolRoryWilliams,
@@ -1964,6 +1967,7 @@ const shard: CardShard = {
     _poolYoshimaruBelovedCompanion,
     _poolYouCannotPass,
     _poolZaffaiAndTheTempests,
+    _poolZagorkaMotherOfSanctum,
     _poolZaskSkitteringSwarmlord,
     _poolZeroPointBallad,
     _poolZhangHeWeiGeneral,

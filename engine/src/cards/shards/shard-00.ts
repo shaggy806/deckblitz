@@ -365,6 +365,7 @@ import _poolGustWalker from "../pool/gust-walker.js";
 import _poolGutterShortcut from "../pool/gutter-shortcut.js";
 import _poolGwaihirTheWindlord from "../pool/gwaihir-the-windlord.js";
 import _poolGyreSage from "../pool/gyre-sage.js";
+import _poolHallOfEchoes from "../pool/hall-of-echoes.js";
 import _poolHallOfStormGiants from "../pool/hall-of-storm-giants.js";
 import _poolHannaShipsNavigator from "../pool/hanna-ships-navigator.js";
 import _poolHannasCustody from "../pool/hannas-custody.js";
@@ -1357,6 +1358,7 @@ const shard: CardShard = {
     _poolGutterShortcut,
     _poolGwaihirTheWindlord,
     _poolGyreSage,
+    _poolHallOfEchoes,
     _poolHallOfStormGiants,
     _poolHannaShipsNavigator,
     _poolHannasCustody,
