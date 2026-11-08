@@ -30,6 +30,7 @@
  * decision modules may use it too.
  */
 
+import { insteadEffect } from "./replacements.js";
 import type { ActivatedAbility, TriggeredAbility } from "./abilities.js";
 import { costLosesSource } from "./abilities.js";
 import type { LegalAction } from "./actions.js";
@@ -639,10 +640,14 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     // "Creatures target opponent controls lose first strike" (Quick Draw).
     if (n.controlledByTarget !== undefined) v.touch(n.controlledByTarget, side, MINOR);
   },
-  // What a "next time you would draw" will do is what its targets get (Words
-  // of War's 2 damage).
-  "player-effect": (n, v) => {
-    if (n.nextDrawInstead !== undefined) v.child(n.nextDrawInstead.effect);
+  "player-effect": none,
+  // What a resolved replacement will do is what its targets get (Words of
+  // War's 2 damage).
+  heal: (n, v) => v.touch(n.target, "help", MINOR),
+  "replacement-effect": (n, v) => {
+    const instead = "instead" in n.replacement ? n.replacement.instead : undefined;
+    const replaced = insteadEffect(instead);
+    if (replaced !== undefined) v.child(replaced.effect);
   },
   // "You win" has no target; "target opponent loses the game" harms it.
   "win-game": none,

@@ -2810,7 +2810,7 @@ function emblemStaticOf(quoted) {
   if (quoted === "If a source would deal damage to you or a planeswalker you control, prevent all but 1 of that damage.") {
     return {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", to: "your-side", toFilter: { type: "planeswalker" }, preventAllBut: 1 },
+      replacement: { event: "would-deal-damage", to: "your-side", toFilter: { type: "planeswalker" }, instead: { prevent: { allBut: 1 } } },
       text,
     };
   }
@@ -6214,21 +6214,22 @@ export function parseSentence(sentence, ctx) {
     };
   }
 
-  // A would-deal-damage replacement for the turn (rule 614.1a) — `player-effect`'s
-  // `damageReplacement`: The Flame of Keld's "if a red source you control …",
+  // A would-deal-damage replacement for the turn (rule 614.1a), a
+  // `replacement-effect`: The Flame of Keld's "if a red source you control …",
   // Rankle and Torbran's "… to a player or battle …", Equal Treatment's "1 or more".
   if ((m = /^if any source would deal 1 or more damage to a permanent or player this turn, it deals (\d+) damage to that permanent or player instead\.$/i.exec(s))) {
-    return { kind: "player-effect", duration: "end-of-turn", damageReplacement: { setTo: Number(m[1]) } };
+    return { kind: "replacement-effect", duration: "end-of-turn", replacement: { event: "would-deal-damage", instead: { modify: { set: Number(m[1]) } } } };
   }
   if ((m = /^if a ((?:white|blue|black|red|green) )?source( you control)? would deal (noncombat )?damage to (a permanent or player|a player or battle) this turn, it deals that much damage plus (\d+)(?: to that permanent or player)? instead\.$/i.exec(s))) {
     const colors = m[1] === undefined ? {} : { colors: [COLOR_WORD[m[1].trim().toLowerCase()]] };
     const controlled = m[2] === undefined ? {} : { controlledBy: "you" };
     const source = { ...colors, ...controlled };
     return {
-      kind: "player-effect",
+      kind: "replacement-effect",
       duration: "end-of-turn",
-      damageReplacement: {
-        plus: Number(m[5]),
+      replacement: {
+        event: "would-deal-damage",
+        instead: { modify: { plus: Number(m[5]) } },
         ...(Object.keys(source).length > 0 ? { source } : {}),
         ...(m[3] !== undefined ? { combat: false } : {}),
         ...(m[4].toLowerCase() === "a player or battle" ? { to: "player-or-battle" } : {}),
@@ -10433,7 +10434,7 @@ export function parseEffect(text, outer) {
       continue;
     }
     // "The next time you would draw a card this turn, you gain 5 life instead."
-    // (the Words cycle — `player-effect`'s `nextDrawInstead`): whatever one
+    // (the Words cycle — a `replacement-effect` with `next`): whatever one
     // sentence the replacement does, its targets the ability's own (rule 115.1b).
     const nextDrawM = /^the next time you would draw a card this turn, (.+) instead\.$/i.exec(sentence);
     if (nextDrawM !== null) {
@@ -10442,9 +10443,10 @@ export function parseEffect(text, outer) {
       const inner = parseSentence(`${clause}.`, ctx);
       if (inner !== null && inner !== undefined) {
         const made = {
-          kind: "player-effect",
+          kind: "replacement-effect",
           duration: "end-of-turn",
-          nextDrawInstead: { effect: inner, text: `${clause} instead.` },
+          next: true,
+          replacement: { event: "would-draw", who: "you", instead: { effect: inner, text: `${clause} instead.` } },
         };
         parsed.push(made);
         hints.push({ sentence, effect: made });
@@ -10452,8 +10454,8 @@ export function parseEffect(text, outer) {
       }
       ctx.targets.length = slots;
     }
-    // A graveyard replacement a resolving spell makes for the turn (`player-effect`'s
-    // `graveyardExile`, rule 614.1a): "If a creature [an opponent controls]
+    // A graveyard replacement a resolving spell makes for the turn (a
+    // `replacement-effect`, rule 614.1a): "If a creature [an opponent controls]
     // would die this turn, exile it instead." (Malicious Eclipse), "If a card
     // would be put into your graveyard from anywhere this turn, exile that card
     // instead." (Gaea's Will), and Cosmic Intervention's, with its return.
@@ -10468,7 +10470,11 @@ export function parseEffect(text, outer) {
             ? { filter: { controlledBy: "you" }, from: "battlefield", returnAtEndStep: true }
             : null;
     if (turnExile !== null) {
-      const made = { kind: "player-effect", duration: "end-of-turn", graveyardExile: turnExile };
+      const made = {
+        kind: "replacement-effect",
+        duration: "end-of-turn",
+        replacement: { event: "would-be-put-into-graveyard", instead: "exile", ...turnExile },
+      };
       parsed.push(made);
       hints.push({ sentence, effect: made });
       if (turnExile.returnAtEndStep === true) skip = 1;
@@ -18003,7 +18009,7 @@ function tokenReplacementOf(line, text, tokenFor) {
   if ((m = /^If one or more (?:(\w+) )?tokens would be created( under your control)?, (twice|three times) that many of those tokens are created instead\.$/.exec(line))) {
     const ofTokens = of(m[1]);
     if (ofTokens === null) return null;
-    return static_({ multiplier: m[3] === "twice" ? 2 : 3, ...(m[2] === undefined ? { anyController: true } : {}), ...ofTokens });
+    return static_({ instead: { modify: { times: m[3] === "twice" ? 2 : 3 } }, ...(m[2] === undefined ? { anyController: true } : {}), ...ofTokens });
   }
   // "If you would create a Clue, Food, or Treasure token, instead create one of each."
   if ((m = /^If you would create a (\w+), (\w+), or (\w+) token, instead create one of each\.$/.exec(line))) {
@@ -18277,7 +18283,7 @@ function parseStatic(line, text) {
       affects: { scope: "self" },
       alternativeCostForSpells: {
         mana: "{0}",
-        
+
         filter: { manaValue: { op: "lte", n: { amount: { countOf: { type: "creature", controlledBy: "you" } } } } },
         when: { castFrom: "hand" },
       },
@@ -18532,12 +18538,30 @@ function parseStatic(line, text) {
       replacement: {
         event: "would-draw",
         who: "you",
-        instead: { draws: NUMBERS[m[3]] },
+        instead: { modify: { set: NUMBERS[m[3]] } },
         ...(m[2] !== undefined ? { exceptFirstInDrawStep: true } : {}),
         ...(m[1].startsWith("The first time") ? { firstEachTurn: true } : {}),
       },
       text,
     };
+  }
+  // "If you would scry a number of cards, scry that many cards plus one
+  // instead" (Kenessos), "draw that many cards instead" (Eligeth).
+  if ((m = /^If you would scry a number of cards, scry that many cards plus (\w+) instead\.$/.exec(line))) {
+    return { affects: { scope: "self" }, replacement: { event: "would-scry", who: "you", instead: { modify: { plus: NUMBERS[m[1]] } } }, text };
+  }
+  if (line === "If you would scry a number of cards, draw that many cards instead.") {
+    return { affects: { scope: "self" }, replacement: { event: "would-scry", who: "you", instead: { effect: { kind: "draw", amount: "x" } } }, text };
+  }
+  // "If you would lose the game, instead …" (The Golden Throne): the event
+  // never happens (rule 614.6).
+  if ((m = /^If you would lose the game, instead (.+)\.$/.exec(line))) {
+    const sentence = `${m[1].charAt(0).toUpperCase()}${m[1].slice(1)}.`;
+    const effect = parseEffect(sentence, { targets: [] });
+    const parsed = "kind" in effect ? { effect, todo: [] } : effect;
+    if (parsed.effect !== null && parsed.todo.length === 0) {
+      return { affects: { scope: "self" }, replacement: { event: "would-lose-game", who: "you", instead: { effect: parsed.effect } }, text };
+    }
   }
   if (
     (m = /^If you would draw a card, instead (.+)$/.exec(line)) ??
@@ -18559,7 +18583,7 @@ function parseStatic(line, text) {
     return {
       affects: { scope: "self" },
       condition: { kind: "your-turn" },
-      replacement: { event: "would-lose-life", who: "opponent", multiplier: 2 },
+      replacement: { event: "would-lose-life", who: "opponent", instead: { modify: { times: 2 } } },
       text,
     };
   }
@@ -18567,7 +18591,7 @@ function parseStatic(line, text) {
     return { affects: { scope: "self" }, replacement: { event: "would-gain-life", who: "enchanted-player", prevent: true }, text };
   }
   if (line === "If a source would deal damage to enchanted player, it deals double that damage to that player instead.") {
-    return { affects: { scope: "self" }, replacement: { event: "would-deal-damage", multiplier: 2, to: "enchanted-player" }, text };
+    return { affects: { scope: "self" }, replacement: { event: "would-deal-damage", instead: { modify: { times: 2 } }, to: "enchanted-player" }, text };
   }
   const creaturesEnchanted = { affects: { scope: "filter", filter: { type: "creature", controlledBy: "enchanted-player" } } };
   if ((m = /^Creatures enchanted player controls get ([+-]\d+)\/([+-]\d+)\.$/.exec(line))) {
@@ -18756,7 +18780,7 @@ function parseStatic(line, text) {
     return { affects: { scope: "attached" }, restrictions: ["cant-attack"], text };
   }
   if (line === "Prevent all combat damage that would be dealt by enchanted creature.") {
-    return { affects: { scope: "self" }, replacement: { event: "would-deal-damage", fromAttached: true, combat: true, prevent: true }, text };
+    return { affects: { scope: "self" }, replacement: { event: "would-deal-damage", fromAttached: true, combat: true, instead: { prevent: true } }, text };
   }
   // "Equipped creature gets +2/+0 and is goaded" (Bloodthirsty Blade),
   // "Enchanted creature gets +2/+2 and can't become suspected" (Airtight Alibi).
@@ -18803,7 +18827,7 @@ function parseStatic(line, text) {
       affects: { scope: "self" },
       replacement: {
         event: "would-deal-damage",
-        plus: Number(m[4]),
+        instead: { modify: { plus: Number(m[4]) } },
         ...(m[2] !== undefined ? { combat: false } : {}),
         fromOther: true,
         source: { ...colors, controlledBy: "you" },
@@ -18821,7 +18845,7 @@ function parseStatic(line, text) {
       replacement: {
         event: "would-deal-damage",
         ...(m[1] !== undefined ? { combat: m[1] === "combat " } : {}),
-        prevent: true,
+        instead: { prevent: true },
         toFilter: { type: "creature", controlledBy: "you" },
         ...(m[2] !== undefined ? { toOther: true } : {}),
       },
@@ -18929,7 +18953,7 @@ function parseStatic(line, text) {
   }
   // Tekuthal, Inquiry Dominus (rules 701.34, 614.5).
   if (line === "If you would proliferate, proliferate twice instead.") {
-    return { affects: { scope: "self" }, replacement: { event: "would-proliferate", times: 2 }, text };
+    return { affects: { scope: "self" }, replacement: { event: "would-proliferate", instead: { modify: { times: 2 } } }, text };
   }
   // Leyline of the Guildpact (rule 613.1e); Prismatic Omen (rule 305.7).
   if (line === "Each nonland permanent you control is all colors.") {
@@ -18964,7 +18988,7 @@ function parseStatic(line, text) {
   }
   // Twinning Staff (rule 614.1a).
   if (line === "If you would copy a spell one or more times, instead copy it that many times plus an additional time. You may choose new targets for the additional copy.") {
-    return { affects: { scope: "self" }, replacement: { event: "would-copy-spell", additional: 1 }, text };
+    return { affects: { scope: "self" }, replacement: { event: "would-copy-spell", instead: { modify: { plus: 1 } } }, text };
   }
   // K'rrik, Son of Yawgmoth: how every mana cost may be paid.
   const lifeForPip = /^For each \{([WUBRG])\} in a cost, you may pay 2 life rather than pay that mana\.$/.exec(line);
@@ -20031,7 +20055,7 @@ function parseStatic(line, text) {
       affects: { scope: "self" },
       replacement: {
         event: "would-add-counter",
-        multiplier: 2,
+        instead: { modify: { times: 2 } },
         ...(m[1] === undefined ? { anyController: true } : {}),
         counterKind: "+1/+1",
         filter: { type: "creature" },
@@ -20042,10 +20066,10 @@ function parseStatic(line, text) {
   // "If you would put one or more counters on a permanent or player, put twice
   // that many …" (Vorinclex, Innkeeper's Talent): `whoPuts`, `onPlayers`.
   if (line === "If you would put one or more counters on a permanent or player, put twice that many of each of those kinds of counters on that permanent or player instead.") {
-    return { affects: { scope: "self" }, replacement: { event: "would-add-counter", multiplier: 2, whoPuts: "you", onPlayers: "any" }, text };
+    return { affects: { scope: "self" }, replacement: { event: "would-add-counter", instead: { modify: { times: 2 } }, whoPuts: "you", onPlayers: "any" }, text };
   }
   if (line === "If an opponent would put one or more counters on a permanent or player, they put half that many of each of those kinds of counters on that permanent or player instead, rounded down.") {
-    return { affects: { scope: "self" }, replacement: { event: "would-add-counter", halved: true, whoPuts: "opponent", onPlayers: "any" }, text };
+    return { affects: { scope: "self" }, replacement: { event: "would-add-counter", instead: { modify: { half: "down" } }, whoPuts: "opponent", onPlayers: "any" }, text };
   }
   // Lae'zel, Vlaakith's Champion.
   if (line === "If you would put one or more counters on a creature or planeswalker you control or on yourself, put that many plus one of each of those kinds of counters on that permanent or player instead.") {
@@ -20053,7 +20077,7 @@ function parseStatic(line, text) {
       affects: { scope: "self" },
       replacement: {
         event: "would-add-counter",
-        plus: 1,
+        instead: { modify: { plus: 1 } },
         whoPuts: "you",
         onPlayers: "you",
         filter: { typesAnyOf: ["creature", "planeswalker"], controlledBy: "you" },

@@ -18,7 +18,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", plus: 1, fromOther: true, combat: false, source: { controlledBy: "you" } },
+      replacement: { event: "would-deal-damage", instead: { modify: { plus: 1 } }, fromOther: true, combat: false, source: { controlledBy: "you" } },
       text: PLUS,
     },
   ],

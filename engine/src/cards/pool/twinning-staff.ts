@@ -19,7 +19,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-copy-spell", additional: 1 },
+      replacement: { event: "would-copy-spell", instead: { modify: { plus: 1 } } },
       text: REPLACEMENT,
     },
   ],

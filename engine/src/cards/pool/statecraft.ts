@@ -19,12 +19,12 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", combat: true, prevent: true, toFilter: YOUR_CREATURES },
+      replacement: { event: "would-deal-damage", combat: true, instead: { prevent: true }, toFilter: YOUR_CREATURES },
       text: TEXT,
     },
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", combat: true, prevent: true, source: YOUR_CREATURES },
+      replacement: { event: "would-deal-damage", combat: true, instead: { prevent: true }, source: YOUR_CREATURES },
       text: TEXT,
     },
   ],

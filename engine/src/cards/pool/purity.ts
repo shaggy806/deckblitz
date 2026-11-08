@@ -20,10 +20,8 @@ export default defineCard({
       replacement: {
         event: "would-deal-damage",
         combat: false,
-        prevent: true,
-        perEvent: true,
+        instead: { prevent: true, then: { kind: "gain-life", amount: "x" }, perEvent: true },
         to: "you",
-        then: { kind: "gain-life", amount: "x" },
       },
       text: PREVENT_TEXT,
     },

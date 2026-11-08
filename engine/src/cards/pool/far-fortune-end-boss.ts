@@ -32,7 +32,7 @@ export default defineCard({
     maxSpeed({
       replacement: {
         event: "would-deal-damage",
-        plus: 1,
+        instead: { modify: { plus: 1 } },
         source: { controlledBy: "you" },
         to: "opponent-side",
       },

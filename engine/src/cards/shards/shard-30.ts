@@ -788,6 +788,7 @@ import _poolSolarTide from "../pool/solar-tide.js";
 import _poolSoltariLancer from "../pool/soltari-lancer.js";
 import _poolSoltariPriest from "../pool/soltari-priest.js";
 import _poolSoothingBalm from "../pool/soothing-balm.js";
+import _poolSoulScarMage from "../pool/soul-scar-mage.js";
 import _poolSoulbladeRenewer from "../pool/soulblade-renewer.js";
 import _poolSoulcatchersAerie from "../pool/soulcatchers-aerie.js";
 import _poolSouthernAirTemple from "../pool/southern-air-temple.js";
@@ -1800,6 +1801,7 @@ const shard: CardShard = {
     _poolSoltariLancer,
     _poolSoltariPriest,
     _poolSoothingBalm,
+    _poolSoulScarMage,
     _poolSoulbladeRenewer,
     _poolSoulcatchersAerie,
     _poolSouthernAirTemple,

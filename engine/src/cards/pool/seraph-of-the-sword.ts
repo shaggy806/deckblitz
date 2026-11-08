@@ -13,7 +13,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", combat: true, prevent: true, to: "self" },
+      replacement: { event: "would-deal-damage", combat: true, instead: { prevent: true }, to: "self" },
       text: "Prevent all combat damage that would be dealt to this creature.",
     },
   ],

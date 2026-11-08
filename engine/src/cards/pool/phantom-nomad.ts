@@ -28,10 +28,8 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-deal-damage",
-        prevent: true,
-        perEvent: true,
+        instead: { prevent: true, then: { kind: "remove-counter", target: "source", counter: "+1/+1", amount: 1 }, perEvent: true },
         to: "self",
-        then: { kind: "remove-counter", target: "source", counter: "+1/+1", amount: 1 },
       },
       text: PREVENT_TEXT,
     },

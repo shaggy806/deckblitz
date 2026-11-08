@@ -18,7 +18,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", fromAttached: true, combat: true, multiplier: 2 },
+      replacement: { event: "would-deal-damage", fromAttached: true, combat: true, instead: { modify: { times: 2 } } },
       text: "If equipped creature would deal combat damage, it deals double that damage instead.",
     },
     {
@@ -28,7 +28,7 @@ export default defineCard({
         to: "attached",
         source: { type: "creature" },
         combat: true,
-        multiplier: 2,
+        instead: { modify: { times: 2 } },
       },
       text: "If another creature would deal combat damage to equipped creature, it deals double that damage to equipped creature instead.",
     },

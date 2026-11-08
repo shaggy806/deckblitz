@@ -20,10 +20,9 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-deal-damage",
-        prevent: true,
-        perEvent: true,
+        instead: { prevent: true, then: { kind: "add-counter", target: "source", counter: "depletion", amount: "x" }, perEvent: true },
         to: "you",
-        then: { kind: "add-counter", target: "source", counter: "depletion", amount: "x" },
+
       },
       text: REPLACE_TEXT,
     },

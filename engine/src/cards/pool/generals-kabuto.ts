@@ -15,7 +15,7 @@ export default defineCard({
     { affects: { scope: "attached" }, grantKeywords: ["shroud"], text: SHROUD_TEXT },
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", combat: true, prevent: true, to: "attached" },
+      replacement: { event: "would-deal-damage", combat: true, instead: { prevent: true }, to: "attached" },
       text: PREVENT_TEXT,
     },
   ],

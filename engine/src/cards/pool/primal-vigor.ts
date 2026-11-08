@@ -13,14 +13,14 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-create-token", multiplier: 2, anyController: true },
+      replacement: { event: "would-create-token", instead: { modify: { times: 2 } }, anyController: true },
       text: TOKENS_TEXT,
     },
     {
       affects: { scope: "self" },
       replacement: {
         event: "would-add-counter",
-        multiplier: 2,
+        instead: { modify: { times: 2 } },
         anyController: true,
         counterKind: "+1/+1",
         filter: { type: "creature" },

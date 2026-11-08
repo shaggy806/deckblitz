@@ -30,7 +30,7 @@ export default defineCard({
     {
       // Fog Bank's first half.
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", combat: true, prevent: true, to: "self" },
+      replacement: { event: "would-deal-damage", combat: true, instead: { prevent: true }, to: "self" },
       text: "Immune — Prevent all combat damage that would be dealt to Diamond Weapon.",
     },
   ],

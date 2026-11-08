@@ -34,7 +34,7 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-add-counter",
-        multiplier: 2,
+        instead: { modify: { times: 2 } },
         whoPuts: "you",
         filter: { type: "creature", controlledBy: "you" },
       },

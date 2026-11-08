@@ -25,10 +25,9 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-deal-damage",
-        prevent: true,
+        instead: { prevent: true, then: { kind: "mill", target: "each-opponent", amount: "x" } },
         source: { controlledBy: "you" },
         to: "opponent",
-        then: { kind: "mill", target: "each-opponent", amount: "x" },
       },
       text: REPLACEMENT_TEXT,
     },

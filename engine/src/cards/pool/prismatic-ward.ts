@@ -22,7 +22,7 @@ export default defineCard({
     (color): StaticAbility => ({
       affects: { scope: "self" },
       condition: { kind: "chosen-on-enter", value: color },
-      replacement: { event: "would-deal-damage", to: "attached", source: { colors: [color] }, prevent: true },
+      replacement: { event: "would-deal-damage", to: "attached", source: { colors: [color] }, instead: { prevent: true } },
       text: PREVENT_TEXT,
     }),
   ),

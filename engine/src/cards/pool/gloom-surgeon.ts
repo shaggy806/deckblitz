@@ -28,10 +28,8 @@ export default defineCard({
       replacement: {
         event: "would-deal-damage",
         combat: true,
-        prevent: true,
-        perEvent: true,
+        instead: { prevent: true, then: { kind: "exile-from-library", amount: "x" }, perEvent: true },
         to: "self",
-        then: { kind: "exile-from-library", amount: "x" },
       },
       text: TEXT,
     },

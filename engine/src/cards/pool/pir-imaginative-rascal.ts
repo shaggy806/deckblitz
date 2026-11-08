@@ -54,7 +54,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-add-counter", plus: 1 },
+      replacement: { event: "would-add-counter", instead: { modify: { plus: 1 } } },
       text: COUNTER_TEXT,
     },
   ],

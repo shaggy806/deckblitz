@@ -30,7 +30,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "not", of: HOST_IS_ENCHANTMENT },
-      replacement: { event: "would-deal-damage", fromAttached: true, prevent: true },
+      replacement: { event: "would-deal-damage", fromAttached: true, instead: { prevent: true } },
       text: "Otherwise, prevent all damage that would be dealt by enchanted creature.",
     },
   ],

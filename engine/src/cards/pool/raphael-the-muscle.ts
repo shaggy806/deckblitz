@@ -18,7 +18,7 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-deal-damage",
-        multiplier: 2,
+        instead: { modify: { times: 2 } },
         source: { type: "creature", controlledBy: "you", counters: { compare: { op: "gte", n: 1 } } },
       },
       text: "Double all damage that creatures you control with counters on them would deal.",

@@ -14,7 +14,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", to: "self", prevent: true, ifAtMost: 3 },
+      replacement: { event: "would-deal-damage", to: "self", instead: { prevent: true }, ifAtMost: 3 },
       text: "If a source would deal 3 or less damage to this creature, prevent that damage.",
     },
   ],

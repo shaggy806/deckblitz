@@ -51,7 +51,7 @@ export default defineCard({
       cost: { mana: null, tap: false },
       loyaltyCost: -2,
       targets: [],
-      effect: { kind: "player-effect", duration: "end-of-turn", tokenMultiplier: 2 },
+      effect: { kind: "replacement-effect", duration: "end-of-turn", replacement: { event: "would-create-token", instead: { modify: { times: 2 } } } },
       resolve: null,
       text: MINUS_TEXT,
     },

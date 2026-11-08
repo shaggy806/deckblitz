@@ -16,7 +16,7 @@ export default defineCard({
     },
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", to: "attached", combat: false, prevent: true },
+      replacement: { event: "would-deal-damage", to: "attached", combat: false, instead: { prevent: true } },
       text: "Prevent all noncombat damage that would be dealt to equipped creature.",
     },
   ],

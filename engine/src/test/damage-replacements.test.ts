@@ -56,7 +56,7 @@ const registry = createDefaultRegistry()
           affects: { scope: "self" },
           replacement: {
             event: "would-deal-damage",
-            atLeast: "this-power",
+            instead: { modify: { atLeast: { powerOf: "source" } } },
             combat: false,
             source: { colors: ["R"], controlledBy: "you" },
             to: "opponent",
@@ -69,14 +69,14 @@ const registry = createDefaultRegistry()
   .register(
     enchantment(NERIV, {
       event: "would-deal-damage",
-      multiplier: 2,
+      instead: { modify: { times: 2 } },
       source: { type: "creature", controlledBy: "you", enteredThisTurn: true },
     }),
   )
   .register(
     enchantment(TORBRAN, {
       event: "would-deal-damage",
-      plus: 2,
+      instead: { modify: { plus: 2 } },
       source: { colors: ["R"], controlledBy: "you" },
       to: "opponent-side",
     }),
@@ -84,10 +84,9 @@ const registry = createDefaultRegistry()
   .register(
     enchantment(MINDSKINNER, {
       event: "would-deal-damage",
-      prevent: true,
+      instead: { prevent: true, then: { kind: "mill", target: "each-opponent", amount: "x" } },
       source: { controlledBy: "you" },
       to: "opponent",
-      then: { kind: "mill", target: "each-opponent", amount: "x" },
     }),
   )
   .register(
@@ -104,9 +103,8 @@ const registry = createDefaultRegistry()
           affects: { scope: "self" },
           replacement: {
             event: "would-deal-damage",
-            prevent: true,
+            instead: { prevent: true, then: { kind: "add-counter", target: "source", counter: "+1/+1", amount: "x" } },
             to: "self",
-            then: { kind: "add-counter", target: "source", counter: "+1/+1", amount: "x" },
           },
           text: "If damage would be dealt to it, prevent that damage and put that many +1/+1 counters on it.",
         },

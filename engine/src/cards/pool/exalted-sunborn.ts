@@ -22,7 +22,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-create-token", multiplier: 2 },
+      replacement: { event: "would-create-token", instead: { modify: { times: 2 } } },
       text: "If one or more tokens would be created under your control, twice that many of those tokens are created instead.",
     },
   ],

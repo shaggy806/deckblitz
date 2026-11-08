@@ -438,19 +438,19 @@ describe("would-create-token replacements", () => {
   it("twice or three times that many, of any token or some", () => {
     expect(
       read("If one or more tokens would be created under your control, twice that many of those tokens are created instead."),
-    ).toEqual({ event: "would-create-token", multiplier: 2 });
+    ).toEqual({ event: "would-create-token", instead: { modify: { times: 2 } } });
     expect(
       read("If one or more creature tokens would be created under your control, three times that many of those tokens are created instead."),
-    ).toEqual({ event: "would-create-token", multiplier: 3, ofTokens: { type: "creature" } });
+    ).toEqual({ event: "would-create-token", instead: { modify: { times: 3 } }, ofTokens: { type: "creature" } });
     expect(
       read("If one or more tokens would be created, twice that many of those tokens are created instead."),
-    ).toEqual({ event: "would-create-token", multiplier: 2, anyController: true });
+    ).toEqual({ event: "would-create-token", instead: { modify: { times: 2 } }, anyController: true });
     expect(
       read("If one or more +1/+1 counters would be put on a creature, twice that many +1/+1 counters are put on that creature instead."),
-    ).toEqual({ event: "would-add-counter", multiplier: 2, anyController: true, counterKind: "+1/+1", filter: { type: "creature" } });
+    ).toEqual({ event: "would-add-counter", instead: { modify: { times: 2 } }, anyController: true, counterKind: "+1/+1", filter: { type: "creature" } });
     expect(
       read("If one or more +1/+1 counters would be put on a creature you control, twice that many +1/+1 counters are put on that creature instead."),
-    ).toEqual({ event: "would-add-counter", multiplier: 2, counterKind: "+1/+1", filter: { type: "creature" } });
+    ).toEqual({ event: "would-add-counter", instead: { modify: { times: 2 } }, counterKind: "+1/+1", filter: { type: "creature" } });
   });
   it("those tokens plus an additional one, of any token or some", () => {
     expect(
@@ -633,7 +633,7 @@ describe("what a spell costs: amounts, colours and targets", () => {
     const staticOf = (text: string): unknown => face(creature, text).static?.[0]?.costModification;
     expect(staticOf("Spells you cast that target a creature cost {2} less to cast.")).toEqual({
       applies: {},
-      
+
       targeting: { type: "creature" },
       reduceGeneric: 2,
       when: { caster: "you" },
@@ -645,7 +645,7 @@ describe("what a spell costs: amounts, colours and targets", () => {
     });
     expect(staticOf("Each instant and sorcery spell you cast costs {1} less to cast for each creature it targets.")).toEqual({
       applies: { typesAnyOf: ["instant", "sorcery"] },
-      
+
       perTarget: true,
       targeting: { type: "creature" },
       reduceGeneric: 1,
@@ -653,15 +653,15 @@ describe("what a spell costs: amounts, colours and targets", () => {
     });
     expect(staticOf("Spells you cast cost {1} less to cast for each card with the same name as that spell in your graveyard.")).toEqual({
       applies: {},
-      
+
       reduceGeneric: { countInGraveyard: { ownedBy: "you" }, sameNameAs: "priced" },
       when: { caster: "you" },
     });
     expect(staticOf("Spells your opponents cast from graveyards or from exile cost {2} more to cast.")).toEqual({
       applies: {},
-      
-      
-      
+
+
+
       increaseGeneric: 2,
       when: { caster: "opponent", castFrom: ["graveyard", "exile"], castFromAnyones: true },
     });
@@ -672,7 +672,7 @@ describe("what a spell costs: amounts, colours and targets", () => {
       ),
     ).toEqual({
       applies: { colors: ["R"], typesAnyOf: ["artifact", "battle", "creature", "enchantment", "planeswalker"] },
-      
+
       reduceColored: "{R}",
       coloredOnly: true,
       optionalLife: 2,
@@ -686,7 +686,7 @@ describe("what a spell costs: amounts, colours and targets", () => {
     ).toBeUndefined();
     expect(staticOf("Instant and sorcery spells you cast with mana value 4 or greater cost {X} less to cast, where X is this creature's power.")).toEqual({
       applies: { typesAnyOf: ["instant", "sorcery"], manaValue: { op: "gte", n: 4 } },
-      
+
       reduceGeneric: { powerOf: "source" },
       when: { caster: "you" },
     });
@@ -1040,7 +1040,7 @@ describe("an emblem's static abilities", () => {
       'You get an emblem with "If a source would deal damage to you or a planeswalker you control, prevent all but 1 of that damage."',
       {
         affects: self,
-        replacement: { event: "would-deal-damage", to: "your-side", toFilter: { type: "planeswalker" }, preventAllBut: 1 },
+        replacement: { event: "would-deal-damage", to: "your-side", toFilter: { type: "planeswalker" }, instead: { prevent: { allBut: 1 } } },
       },
     ],
     [
@@ -2055,7 +2055,7 @@ describe("costs and triggers", () => {
     );
     expect(thor.static[0].replacement).toEqual({
       event: "would-deal-damage",
-      plus: 1,
+      instead: { modify: { plus: 1 } },
       fromOther: true,
       source: { controlledBy: "you" },
       to: "opponent-side",
@@ -2066,19 +2066,19 @@ describe("costs and triggers", () => {
         ctx(),
       ),
     ).toEqual({
-      kind: "player-effect",
+      kind: "replacement-effect",
       duration: "end-of-turn",
-      damageReplacement: { plus: 2, source: { colors: ["R"], controlledBy: "you" } },
+      replacement: { event: "would-deal-damage", instead: { modify: { plus: 2 } }, source: { colors: ["R"], controlledBy: "you" } },
     });
     expect(
       parseSentence("If a source would deal damage to a player or battle this turn, it deals that much damage plus 2 instead.", ctx()),
-    ).toEqual({ kind: "player-effect", duration: "end-of-turn", damageReplacement: { plus: 2, to: "player-or-battle" } });
+    ).toEqual({ kind: "replacement-effect", duration: "end-of-turn", replacement: { event: "would-deal-damage", instead: { modify: { plus: 2 } }, to: "player-or-battle" } });
     expect(
       parseSentence(
         "If any source would deal 1 or more damage to a permanent or player this turn, it deals 2 damage to that permanent or player instead.",
         ctx(),
       ),
-    ).toEqual({ kind: "player-effect", duration: "end-of-turn", damageReplacement: { setTo: 2 } });
+    ).toEqual({ kind: "replacement-effect", duration: "end-of-turn", replacement: { event: "would-deal-damage", instead: { modify: { set: 2 } } } });
   });
 
   it("one type of mana spent as a colour: `SpendUnitAs`", () => {
@@ -2384,8 +2384,8 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("Plotting cards from your hand costs {2} less.").static?.[0]?.plotCostReduction).toBe(2);
     expect(face("Spells you cast from your graveyard or from exile cost {2} less to cast.").static?.[0]?.costModification).toEqual({
       applies: {},
-      
-      
+
+
       reduceGeneric: 2,
       when: { caster: "you", castFrom: ["graveyard", "exile"] },
     });
@@ -3627,7 +3627,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(grantOf("You may cast spells from your hand without paying their mana costs.")).toEqual({ mana: "{0}", when: { castFrom: "hand" } });
     expect(grantOf("You may cast spells with mana value less than or equal to the number of creatures you control from your hand without paying their mana costs.")).toEqual({
       mana: "{0}",
-      
+
       filter: { manaValue: { op: "lte", n: { amount: { countOf: { type: "creature", controlledBy: "you" } } } } },
       when: { castFrom: "hand" },
     });
@@ -3640,8 +3640,8 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(grantOf("Once during each of your turns, you may cast an instant or sorcery spell from your hand without paying its mana cost.")).toEqual({
       mana: "{0}",
       oncePerTurn: true,
-      
-      
+
+
       filter: { typesAnyOf: ["instant", "sorcery"] },
       when: { castFrom: "hand", yourTurnOnly: true },
     });
@@ -3653,7 +3653,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(grantOf("Once each turn, you may pay {0} rather than pay the mana cost for a creature spell you cast from exile.")).toEqual({
       mana: "{0}",
       oncePerTurn: true,
-      
+
       filter: { type: "creature" },
       when: { castFrom: "exile" },
     });
@@ -3826,8 +3826,30 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("If that creature would die this turn, exile it instead.", "Instant").complete).toBe(false);
   });
 
+  it("reads the would-scry and would-lose-game replacements (rule 614.1a)", () => {
+    expect(face("If you would scry a number of cards, scry that many cards plus one instead.", "Creature").static?.[0]?.replacement).toEqual({
+      event: "would-scry",
+      who: "you",
+      instead: { modify: { plus: 1 } },
+    });
+    expect(face("If you would scry a number of cards, draw that many cards instead.", "Creature").static?.[0]?.replacement).toEqual({
+      event: "would-scry",
+      who: "you",
+      instead: { effect: { kind: "draw", amount: "x" } },
+    });
+    expect(face("If you would lose the game, instead draw seven cards.", "Artifact").static?.[0]?.replacement).toEqual({
+      event: "would-lose-game",
+      who: "you",
+      instead: { effect: { kind: "draw", amount: 7 } },
+    });
+  });
+
   it("a graveyard replacement for the turn, and an exile that does something besides (rule 614.1a)", () => {
-    const made = (graveyardExile: object): object => ({ kind: "player-effect", duration: "end-of-turn", graveyardExile });
+    const made = (exile: object): object => ({
+      kind: "replacement-effect",
+      duration: "end-of-turn",
+      replacement: { event: "would-be-put-into-graveyard", instead: "exile", ...exile },
+    });
     expect(face("If a creature an opponent controls would die this turn, exile it instead.", "Sorcery").effect).toEqual(
       made({ filter: { type: "creature", controlledBy: "opponent" }, from: "battlefield" }),
     );
@@ -3884,13 +3906,14 @@ describe("templates for features built since the parser began (2026-10-11)", () 
 
     const worship = face("{1}: The next time you would draw a card this turn, you gain 5 life instead.", "Enchantment");
     expect(worship.activated[0].effect).toEqual({
-      kind: "player-effect",
+      kind: "replacement-effect",
       duration: "end-of-turn",
-      nextDrawInstead: { effect: { kind: "gain-life", amount: 5 }, text: "You gain 5 life instead." },
+      next: true,
+      replacement: { event: "would-draw", who: "you", instead: { effect: { kind: "gain-life", amount: 5 }, text: "You gain 5 life instead." } },
     });
     const war = face("{1}: The next time you would draw a card this turn, this enchantment deals 2 damage to any target instead.", "Enchantment");
     expect(war.activated[0].targets).toEqual(["any-target"]);
-    expect(war.activated[0].effect).toMatchObject({ nextDrawInstead: { effect: { kind: "damage", amount: 2, target: 0 } } });
+    expect(war.activated[0].effect).toMatchObject({ replacement: { instead: { effect: { kind: "damage", amount: 2, target: 0 } } } });
   });
 
   it("what reads who created a token (rule 111.2), and a redirect of who does", () => {
@@ -4878,7 +4901,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(face("Prevent all noncombat damage that would be dealt to other creatures you control.", "Creature — Human Soldier").static?.[0]?.replacement).toEqual({
       event: "would-deal-damage",
       combat: false,
-      prevent: true,
+      instead: { prevent: true },
       toFilter: { type: "creature", controlledBy: "you" },
       toOther: true,
     });
@@ -10702,7 +10725,7 @@ describe("a static acting on a player", () => {
   it("reads damage to them, the life they gain, and the trigger on being dealt damage", () => {
     expect(aura("If a source would deal damage to enchanted player, it deals double that damage to that player instead.").static[0].replacement).toEqual({
       event: "would-deal-damage",
-      multiplier: 2,
+      instead: { modify: { times: 2 } },
       to: "enchanted-player",
     });
     const wound = aura("Enchanted player can't gain life.\nWhenever enchanted player is dealt damage, they lose half their life, rounded up.");
@@ -10727,7 +10750,7 @@ describe("a static acting on a player", () => {
       "If you would draw a card except the first one you draw in each of your draw steps, draw two cards instead.",
     );
     expect(insight.complete).toBe(true);
-    expect(insight.static[0].replacement).toEqual({ event: "would-draw", who: "you", instead: { draws: 2 }, exceptFirstInDrawStep: true });
+    expect(insight.static[0].replacement).toEqual({ event: "would-draw", who: "you", instead: { modify: { set: 2 } }, exceptFirstInDrawStep: true });
     const reed = face(
       "Legendary Creature",
       "The first time you would draw a card each turn except the first card you draw during each of your draw steps, you draw four cards instead.",
@@ -10736,7 +10759,7 @@ describe("a static acting on a player", () => {
     expect(reed.static[0].replacement).toEqual({
       event: "would-draw",
       who: "you",
-      instead: { draws: 4 },
+      instead: { modify: { set: 4 } },
       exceptFirstInDrawStep: true,
       firstEachTurn: true,
     });
@@ -13279,7 +13302,7 @@ describe("what an Aura says of the permanent it enchants", () => {
       event: "would-deal-damage",
       fromAttached: true,
       combat: true,
-      prevent: true,
+      instead: { prevent: true },
     });
   });
 
@@ -15204,7 +15227,7 @@ describe("a cast as this resolves, on its own terms", () => {
     expect(letter.complete).toBe(true);
     expect(letter.static[0]).toMatchObject({
       condition: { kind: "your-turn" },
-      replacement: { event: "would-lose-life", who: "opponent", multiplier: 2 },
+      replacement: { event: "would-lose-life", who: "opponent", instead: { modify: { times: 2 } } },
     });
   });
 
@@ -15545,8 +15568,8 @@ describe("counters by who puts them, on permanents or players", () => {
     });
     expect(face.complete).toBe(true);
     expect(face.static.map((s: { replacement: unknown }) => s.replacement)).toEqual([
-      { event: "would-add-counter", multiplier: 2, whoPuts: "you", onPlayers: "any" },
-      { event: "would-add-counter", halved: true, whoPuts: "opponent", onPlayers: "any" },
+      { event: "would-add-counter", instead: { modify: { times: 2 } }, whoPuts: "you", onPlayers: "any" },
+      { event: "would-add-counter", instead: { modify: { half: "down" } }, whoPuts: "opponent", onPlayers: "any" },
     ]);
   });
 
@@ -15561,7 +15584,7 @@ describe("counters by who puts them, on permanents or players", () => {
     });
     expect(face.static[0].replacement).toEqual({
       event: "would-add-counter",
-      plus: 1,
+      instead: { modify: { plus: 1 } },
       whoPuts: "you",
       onPlayers: "you",
       filter: { typesAnyOf: ["creature", "planeswalker"], controlledBy: "you" },
@@ -15607,7 +15630,7 @@ describe("mana that adds counters to what it casts", () => {
       "Flying\nIf you would proliferate, proliferate twice instead.\n{1}{U/P}{U/P}, Remove three counters from among other artifacts, creatures, and planeswalkers you control: Put an indestructible counter on ~. ({U/P} can be paid with either {U} or 2 life.)",
     );
     expect(face.complete).toBe(true);
-    expect(face.static[0].replacement).toEqual({ event: "would-proliferate", times: 2 });
+    expect(face.static[0].replacement).toEqual({ event: "would-proliferate", instead: { modify: { times: 2 } } });
     expect(face.activated[0].cost.removeCounter).toEqual({
       kind: "any",
       count: 3,
@@ -16075,7 +16098,7 @@ describe("copying a spell an additional time", () => {
         "If you would copy a spell one or more times, instead copy it that many times plus an additional time. You may choose new targets for the additional copy.\n{7}, {T}: Copy target instant or sorcery spell you control. You may choose new targets for the copy.",
     });
     expect(face.complete).toBe(true);
-    expect(face.static[0].replacement).toEqual({ event: "would-copy-spell", additional: 1 });
+    expect(face.static[0].replacement).toEqual({ event: "would-copy-spell", instead: { modify: { plus: 1 } } });
     expect(face.activated[0].effect).toEqual({ kind: "copy-spell", target: 0, newTargets: true });
   });
 });

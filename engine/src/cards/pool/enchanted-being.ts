@@ -22,7 +22,7 @@ export default defineCard({
       replacement: {
         event: "would-deal-damage",
         combat: true,
-        prevent: true,
+        instead: { prevent: true },
         to: "self",
         source: { type: "creature", enchanted: true },
       },

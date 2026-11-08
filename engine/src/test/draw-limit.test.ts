@@ -184,7 +184,7 @@ describe("players can't draw cards", () => {
     const before = life(game, A);
     draw(game, A);
     expect(life(game, A)).toBe(before);
-    expect((game.state.playerEffects ?? []).some((e) => e.nextDrawInstead !== undefined)).toBe(true);
+    expect(game.state.activeReplacements.some((r) => r.replacement.event === "would-draw" && r.next === true)).toBe(true);
   });
 
   it("Mornsong Aria: no draws, no life gained", () => {

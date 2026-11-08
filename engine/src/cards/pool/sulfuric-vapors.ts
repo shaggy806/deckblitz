@@ -24,7 +24,7 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-deal-damage",
-        plus: 1,
+        instead: { modify: { plus: 1 } },
         source: { colors: ["R"], typesAnyOf: ["instant", "sorcery"] },
       },
       text: TEXT,

@@ -21,7 +21,7 @@ export default defineCard({
   static: [
     { affects: { scope: "self" }, noMaxHandSize: true, text: HAND_TEXT },
     maxSpeed({
-      replacement: { event: "would-draw", who: "you", instead: { draws: 2 } },
+      replacement: { event: "would-draw", who: "you", instead: { modify: { set: 2 } } },
       text: `Max speed — ${DRAW_TEXT}`,
     }),
   ],

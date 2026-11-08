@@ -960,6 +960,7 @@ import _poolWirewoodSymbiote from "../pool/wirewood-symbiote.js";
 import _poolWishcoinCrab from "../pool/wishcoin-crab.js";
 import _poolWithinRange from "../pool/within-range.js";
 import _poolWolfOfDevilsBreach from "../pool/wolf-of-devils-breach.js";
+import _poolWolverineFierceFighter from "../pool/wolverine-fierce-fighter.js";
 import _poolWoodcuttersGrit from "../pool/woodcutters-grit.js";
 import _poolWoollyMammoths from "../pool/woolly-mammoths.js";
 import _poolWorldsoulsRage from "../pool/worldsouls-rage.js";
@@ -1961,6 +1962,7 @@ const shard: CardShard = {
     _poolWishcoinCrab,
     _poolWithinRange,
     _poolWolfOfDevilsBreach,
+    _poolWolverineFierceFighter,
     _poolWoodcuttersGrit,
     _poolWoollyMammoths,
     _poolWorldsoulsRage,

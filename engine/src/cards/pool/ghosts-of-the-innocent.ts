@@ -34,7 +34,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", halve: "down" },
+      replacement: { event: "would-deal-damage", instead: { modify: { half: "down" } } },
       text: "If a source would deal damage to a permanent or player, it deals half that damage, rounded down, to that permanent or player instead.",
     },
   ],

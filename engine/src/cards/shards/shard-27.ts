@@ -26,6 +26,7 @@ import _poolAjanisAnguish from "../pool/ajanis-anguish.js";
 import _poolAkroanPhalanx from "../pool/akroan-phalanx.js";
 import _poolAlabornTrooper from "../pool/alaborn-trooper.js";
 import _poolAlertHeedbonder from "../pool/alert-heedbonder.js";
+import _poolAlmsCollector from "../pool/alms-collector.js";
 import _poolAlphaBrawl from "../pool/alpha-brawl.js";
 import _poolAltarsReap from "../pool/altars-reap.js";
 import _poolAmbitiousFarmhand from "../pool/ambitious-farmhand.js";
@@ -520,6 +521,7 @@ import _poolNeedlebiteTrap from "../pool/needlebite-trap.js";
 import _poolNegate from "../pool/negate.js";
 import _poolNicolBolas from "../pool/nicol-bolas.js";
 import _poolNightScythe from "../pool/night-scythe.js";
+import _poolNissasChosen from "../pool/nissas-chosen.js";
 import _poolNissasRenewal from "../pool/nissas-renewal.js";
 import _poolNomadStadium from "../pool/nomad-stadium.js";
 import _poolNoosegrafMob from "../pool/noosegraf-mob.js";
@@ -991,6 +993,7 @@ const shard: CardShard = {
     _poolAkroanPhalanx,
     _poolAlabornTrooper,
     _poolAlertHeedbonder,
+    _poolAlmsCollector,
     _poolAlphaBrawl,
     _poolAltarsReap,
     _poolAmbitiousFarmhand,
@@ -1485,6 +1488,7 @@ const shard: CardShard = {
     _poolNegate,
     _poolNicolBolas,
     _poolNightScythe,
+    _poolNissasChosen,
     _poolNissasRenewal,
     _poolNomadStadium,
     _poolNoosegrafMob,

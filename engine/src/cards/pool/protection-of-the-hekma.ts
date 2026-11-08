@@ -14,7 +14,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", to: "you", source: { controlledBy: "opponent" }, preventAmount: 1 },
+      replacement: { event: "would-deal-damage", to: "you", source: { controlledBy: "opponent" }, instead: { prevent: 1 } },
       text: "If a source an opponent controls would deal damage to you, prevent 1 of that damage.",
     },
   ],

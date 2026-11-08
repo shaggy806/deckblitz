@@ -38,14 +38,14 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: LEVEL_1_4,
-      replacement: { event: "would-deal-damage", to: "your-side", toFilter: { type: "creature" }, preventAmount: 1 },
+      replacement: { event: "would-deal-damage", to: "your-side", toFilter: { type: "creature" }, instead: { prevent: 1 } },
       text: PREVENT_1,
     },
     { affects: { scope: "self" }, condition: LEVEL_5, setBasePt: { power: 2, toughness: 5 }, text: "LEVEL 5+\n2/5" },
     {
       affects: { scope: "self" },
       condition: LEVEL_5,
-      replacement: { event: "would-deal-damage", to: "your-side", toFilter: { type: "creature" }, preventAmount: 2 },
+      replacement: { event: "would-deal-damage", to: "your-side", toFilter: { type: "creature" }, instead: { prevent: 2 } },
       text: PREVENT_2,
     },
   ],

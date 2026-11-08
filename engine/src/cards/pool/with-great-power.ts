@@ -23,7 +23,7 @@ export default defineCard({
     },
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", to: "you", redirect: "attached" },
+      replacement: { event: "would-deal-damage", to: "you", instead: { redirect: "attached" } },
       text: REDIRECT_TEXT,
     },
   ],

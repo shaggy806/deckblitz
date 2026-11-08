@@ -215,6 +215,7 @@ import _poolElderfangDisciple from "../pool/elderfang-disciple.js";
 import _poolElderfangRitualist from "../pool/elderfang-ritualist.js";
 import _poolElderscaleWurm from "../pool/elderscale-wurm.js";
 import _poolElectrostaticPummeler from "../pool/electrostatic-pummeler.js";
+import _poolEligethCrossroadsAugur from "../pool/eligeth-crossroads-augur.js";
 import _poolEliteHeadhunter from "../pool/elite-headhunter.js";
 import _poolElsewhereFlask from "../pool/elsewhere-flask.js";
 import _poolElvenWarhounds from "../pool/elven-warhounds.js";
@@ -1186,6 +1187,7 @@ const shard: CardShard = {
     _poolElderfangRitualist,
     _poolElderscaleWurm,
     _poolElectrostaticPummeler,
+    _poolEligethCrossroadsAugur,
     _poolEliteHeadhunter,
     _poolElsewhereFlask,
     _poolElvenWarhounds,

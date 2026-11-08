@@ -38,9 +38,9 @@ export default defineCard({
           {
             text: "If a source would deal damage to a player or battle this turn, it deals that much damage plus 2 instead.",
             effect: {
-              kind: "player-effect",
+              kind: "replacement-effect",
               duration: "end-of-turn",
-              damageReplacement: { plus: 2, to: "player-or-battle" },
+              replacement: { event: "would-deal-damage", instead: { modify: { plus: 2 } }, to: "player-or-battle" },
             },
           },
         ],

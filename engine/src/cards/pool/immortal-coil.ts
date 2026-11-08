@@ -25,9 +25,7 @@ export default defineCard({
       replacement: {
         event: "would-deal-damage",
         to: "you",
-        prevent: true,
-        perEvent: true,
-        then: { kind: "look-and-choose", zone: "graveyard", min: "x", max: "x", destination: "exile", leftover: "stay" },
+        instead: { prevent: true, then: { kind: "look-and-choose", zone: "graveyard", min: "x", max: "x", destination: "exile", leftover: "stay" }, perEvent: true },
       },
       text: "If damage would be dealt to you, prevent that damage. Exile a card from your graveyard for each 1 damage prevented this way.",
     },

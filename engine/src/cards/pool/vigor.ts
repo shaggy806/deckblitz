@@ -19,11 +19,9 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-deal-damage",
-        prevent: true,
-        perEvent: true,
+        instead: { prevent: true, then: { kind: "add-counter", target: "trigger-recipient", counter: "+1/+1", amount: "x" }, perEvent: true },
         toFilter: { type: "creature", controlledBy: "you" },
         toOther: true,
-        then: { kind: "add-counter", target: "trigger-recipient", counter: "+1/+1", amount: "x" },
       },
       text: PREVENT_TEXT,
     },

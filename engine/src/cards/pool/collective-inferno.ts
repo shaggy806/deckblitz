@@ -44,7 +44,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", multiplier: 2, source: { controlledBy: "you", ofChosenType: true } },
+      replacement: { event: "would-deal-damage", instead: { modify: { times: 2 } }, source: { controlledBy: "you", ofChosenType: true } },
       text: "Double all damage that sources you control of the chosen type would deal.",
     },
   ],

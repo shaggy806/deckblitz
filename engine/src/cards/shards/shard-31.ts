@@ -588,6 +588,7 @@ import _poolMoggBombers from "../pool/mogg-bombers.js";
 import _poolMoltenEchoes from "../pool/molten-echoes.js";
 import _poolMomentOfDefiance from "../pool/moment-of-defiance.js";
 import _poolMonstrousVortex from "../pool/monstrous-vortex.js";
+import _poolMoonlitMeditation from "../pool/moonlit-meditation.js";
 import _poolMoonveilRegent from "../pool/moonveil-regent.js";
 import _poolMorale from "../pool/morale.js";
 import _poolMordorOnTheMarch from "../pool/mordor-on-the-march.js";
@@ -1635,6 +1636,7 @@ const shard: CardShard = {
     _poolMoltenEchoes,
     _poolMomentOfDefiance,
     _poolMonstrousVortex,
+    _poolMoonlitMeditation,
     _poolMoonveilRegent,
     _poolMorale,
     _poolMordorOnTheMarch,

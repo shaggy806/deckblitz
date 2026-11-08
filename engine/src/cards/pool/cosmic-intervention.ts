@@ -18,8 +18,8 @@ export default defineCard({
   foretell: { cost: "{1}{W}" },
   targets: [],
   effect: {
-    kind: "player-effect",
+    kind: "replacement-effect",
     duration: "end-of-turn",
-    graveyardExile: { filter: { controlledBy: "you" }, from: "battlefield", returnAtEndStep: true },
+    replacement: { event: "would-be-put-into-graveyard", instead: "exile", filter: { controlledBy: "you" }, from: "battlefield", returnAtEndStep: true },
   },
 });

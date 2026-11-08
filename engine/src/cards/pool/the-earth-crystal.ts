@@ -29,7 +29,7 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-add-counter",
-        multiplier: 2,
+        instead: { modify: { times: 2 } },
         counterKind: "+1/+1",
         filter: { type: "creature" },
       },

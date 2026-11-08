@@ -27,7 +27,7 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-deal-damage",
-        multiplier: 2,
+        instead: { modify: { times: 2 } },
         source: { colors: ["R"], typesAnyOf: ["instant", "sorcery"], controlledBy: "you" },
       },
       text: "If a red instant or sorcery spell you control would deal damage, it deals double that damage instead.",

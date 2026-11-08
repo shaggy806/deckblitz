@@ -31,7 +31,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "source", filter: { attacking: true } },
-      replacement: { event: "would-deal-damage", prevent: true, to: "self", source: { subtype: "Desert" } },
+      replacement: { event: "would-deal-damage", instead: { prevent: true }, to: "self", source: { subtype: "Desert" } },
       text: "As long as this creature is attacking, prevent all damage Deserts would deal to this creature and to creatures banded with this creature.",
     },
     {
@@ -39,7 +39,7 @@ export default defineCard({
       condition: { kind: "source", filter: { attacking: true } },
       replacement: {
         event: "would-deal-damage",
-        prevent: true,
+        instead: { prevent: true },
         toFilter: { type: "creature", bandedWithSource: true },
         source: { subtype: "Desert" },
       },

@@ -207,6 +207,7 @@ import _poolDistantMelody from "../pool/distant-melody.js";
 import _poolDisturbedBurial from "../pool/disturbed-burial.js";
 import _poolDivineLight from "../pool/divine-light.js";
 import _poolDjinniWindseer from "../pool/djinni-windseer.js";
+import _poolDocSamsonSuperPsychiatrist from "../pool/doc-samson-super-psychiatrist.js";
 import _poolDodecapod from "../pool/dodecapod.js";
 import _poolDongZhouTheTyrant from "../pool/dong-zhou-the-tyrant.js";
 import _poolDoomBlade from "../pool/doom-blade.js";
@@ -1222,6 +1223,7 @@ const shard: CardShard = {
     _poolDisturbedBurial,
     _poolDivineLight,
     _poolDjinniWindseer,
+    _poolDocSamsonSuperPsychiatrist,
     _poolDodecapod,
     _poolDongZhouTheTyrant,
     _poolDoomBlade,

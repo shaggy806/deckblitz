@@ -9,6 +9,8 @@
  */
 
 import type { CastNowTerms, EffectPlay, EffectPlaySpec, PlayGrant } from "./play-permission.js";
+import type { AmountChange, ReplacementSpec } from "./replacements.js";
+import type { ActiveReplacement } from "./state.js";
 import type { ActivatedAbility, TriggeredAbility, TriggerSpec } from "./abilities.js";
 import type {
   AffectSpec,
@@ -6088,12 +6090,7 @@ export type EffectSpec =
        * `applies` a filter, `reduceGeneric` an amount read as this resolves
        * and fixed from then on, rule 611.2b); `castFromHandFree` is "you may
        * cast spells from your hand this turn without paying their mana costs"
-       * (Yusri, Fortune's Flame), `filter` narrowing which. `damageTo` is
-       * "until your next turn, if a source would deal damage to that player
-       * or a permanent that player controls, it deals double that damage
-       * instead" (`who: "trigger-player"`, `multiplier: 2`, `permanentsToo`)
-       * — the players fixed as it resolves; the effect is still the
-       * controller's, and ends with it.
+       * (Yusri, Fortune's Flame), `filter` narrowing which.
        *
        * The game-outcome locks, each over the players a scope names as it
        * resolves: `cantLoseGame` ("you can't lose the game this turn"),
@@ -6166,29 +6163,6 @@ export type EffectSpec =
       /** "…and plays with their hand revealed" (Sen Triplets): the player in
        * this target slot, to every player, while this lasts. */
       readonly handRevealed?: number;
-      readonly damageTo?: {
-        readonly who: PlayerScope;
-        readonly multiplier: number;
-        readonly permanentsToo?: boolean;
-      };
-      /**
-       * A would-deal-damage replacement for a duration, made by a spell or an
-       * ability (rule 614.1a): "if a red source you control would deal damage
-       * to a permanent or player this turn, it deals that much damage plus 2"
-       * (The Flame of Keld: `plus`, `source`), "if a source would deal damage to
-       * a player or battle this turn, … plus 2" (Rankle and Torbran: `to`), "if
-       * any source would deal 1 or more damage … this turn, it deals 2 damage"
-       * (Equal Treatment: `setTo`). `plus` is fixed as this resolves (`"x"`
-       * reads the ability's X); `source` is asked from your side as the damage
-       * would be dealt, so a source that arrives later counts.
-       */
-      readonly damageReplacement?: {
-        readonly plus?: EffectAmount;
-        readonly setTo?: number;
-        readonly source?: CardFilter;
-        readonly combat?: boolean;
-        readonly to?: "player-or-battle";
-      };
       readonly cantLoseGame?: PlayerScope;
       readonly cantWinGame?: PlayerScope;
       readonly cantLoseLife?: PlayerScope;
@@ -6202,10 +6176,6 @@ export type EffectSpec =
        * impulse-exiled card, a copy cast from exile, all barred. */
       readonly castOnlyFromHand?: PlayerScope;
       readonly damageLifeFloor?: { readonly who: PlayerScope; readonly floor: number };
-      /** "Until end of turn, if one or more tokens would be created under
-       * your control, twice that many of those tokens are created instead"
-       * (Kaya, Geist Hunter's −2) — `2`. Compounds with a Doubling Season. */
-      readonly tokenMultiplier?: number;
       /** "Each token that would be created under an opponent's control this
        * turn is created under your control instead" (Crafty Cutpurse, rules
        * 111.2, 614.1a). Applied before any other replacement on the event, so
@@ -6215,22 +6185,6 @@ export type EffectSpec =
        * that would have been created attacking and is no longer its attacking
        * player's is tapped but not attacking. */
       readonly tokensComeToOwner?: true;
-      /** A would-be-put-into-a-graveyard replacement for a while, made by a
-       * resolving spell or ability (rule 614.1a): "if a creature an opponent
-       * controls would die this turn, exile it instead" (Malicious Eclipse —
-       * `filter`, `from: "battlefield"`, rule 700.4), "if a card would be put
-       * into your graveyard from anywhere this turn, exile that card instead"
-       * (Gaea's Will — `{ ownedBy: "you", token: false }`). The filter is read
-       * from the controller's side as each card would go, so a creature that
-       * enters or changes control later is covered (the rulings).
-       * `returnAtEndStep`: "return it to the battlefield under its owner's
-       * control at the beginning of the next end step" (Cosmic Intervention) —
-       * one delayed triggered ability per permanent, a token gone for good. */
-      readonly graveyardExile?: {
-        readonly filter?: CardFilter;
-        readonly from?: "battlefield";
-        readonly returnAtEndStep?: true;
-      };
       readonly looksAtOwnLibraryTop?: true;
       /** "Lands you control enter tapped this turn" (Nahiri's Lithoforming —
        * rule 614.1d): a replacement for the duration over each permanent
@@ -6242,16 +6196,6 @@ export type EffectSpec =
        * controller's mana of these types, whenever it was made, stays in
        * their pool while this lasts, as a `keepsUnspentMana` static's does. */
       readonly keepsUnspentMana?: readonly ManaType[];
-      /** "The next time you would draw a card this turn, [effect] instead"
-       * (the Words cycle — rule 614.1a), with `duration: "end-of-turn"`: each
-       * resolution sets up one replacement of one of the controller's draws,
-       * spent when it applies. The drawing player chooses among different
-       * ones (616.1, the Words ruling). `effect` is run as the draw would
-       * happen, by the controller, with this ability's targets (chosen as it
-       * was activated, rule 115.1b) and any choice in it answered before the
-       * next card is drawn (614.11a). It applies though the library is empty
-       * (614.11); a draw the player can't make can't be replaced. */
-      readonly nextDrawInstead?: { readonly effect: EffectSpec; readonly text: string };
       /** "Until end of turn, if you tap a land you control for mana, it
        * produces {U} instead of any other type" (Deep Water): the owner's
        * taps of their lands make this type, as `StaticAbility.landManaInstead`
@@ -7861,6 +7805,8 @@ export type EffectSpec =
     }
   | {
       readonly kind: "create-token";
+      /** Set when a would-create-token replacement was asked, and declined (rule 616.1). */
+      readonly replacementAsked?: true;
       /** Name of a token definition in the {@link CardRegistry}. */
       readonly token: string;
       readonly count: EffectAmount;
@@ -8201,6 +8147,8 @@ export type EffectSpec =
        * "its controller creates" — for a destroyed target its last-known
        * controller). */
       readonly kind: "create-token-copy";
+      /** See `create-token`'s. */
+      readonly replacementAsked?: true;
       /** `"trigger-batch"` is "for each of them": a copy (`count`) of each
        * permanent of the entry a batched `enters-battlefield` trigger fired
        * on, a token stack once per token — Kambal, Profiteering Mayor. `{ each }` is a copy of each
@@ -8750,6 +8698,46 @@ export type EffectSpec =
     }
   | {
       /**
+       * A resolved spell's or ability's replacement or prevention effect for
+       * a while (rules 611.2c, 614.1a, 615): the same words a static's
+       * `replacement` says, kept as an `ActiveReplacement` — "if a red source
+       * you control would deal damage to a permanent or player this turn …"
+       * (The Flame of Keld), "the next time you would draw a card this turn,
+       * [effect] instead" (the Words cycle: `next: true`).
+       *
+       * Amounts in a `modify` are read as it resolves and fixed from then on
+       * (`"x"` the ability's X, rule 611.2b); filters are read from your
+       * side as each event would happen, so what arrives later counts. An
+       * `instead`'s `effect` has this ability's targets (rule 115.1b), and
+       * reads the event as a static's does. See
+       * `docs/plans/need-key-themes.md`, theme 9.
+       */
+      /** "All damage already dealt to it is healed" (rule 701.69). */
+      readonly kind: "heal";
+      readonly target: ObjectRef;
+    }
+  | {
+      readonly kind: "replacement-effect";
+      readonly replacement: ReplacementSpec;
+      readonly duration: Exclude<PlayerDuration, "during-your-next-turn" | { readonly duringTurnOf: DurationPlayer }>;
+      /** A shield: `true`, the next one, then it's spent (615.8, "the next
+       * time"); an amount, "the next N" damage (615.7). */
+      readonly next?: true | EffectAmount;
+      /** Only these players' events, fixed as it resolves: "if target player
+       * would draw a card", "…to that player". */
+      readonly players?: PlayerScope;
+      /** With `players`, a permanent one of them controls counts too ("to that
+       * player or a permanent that player controls"). */
+      readonly permanentsToo?: true;
+      /** Only damage dealt to this object ("if that creature would be dealt
+       * damage"), or an event on it, in the stint it has now (rule 400.7). */
+      readonly object?: ObjectRef;
+      /** Only damage this object would deal ("if that creature would deal
+       * combat damage"), in the stint it has now. */
+      readonly fromObject?: ObjectRef;
+    }
+  | {
+      /**
        * Epic (rule 702.50a), the last part of the spell's effect: "For the
        * rest of the game, you can't cast spells" and "at the beginning of
        * each of your upkeeps for the rest of the game, copy this spell except
@@ -8788,7 +8776,7 @@ export type EffectSpec =
        * prevention isn't locked in ahead of time (rule 615.1), so a creature
        * that becomes a Spider later in the turn isn't stopped — from the
        * effect's controller's side. A rule for the turn
-       * (`GameState.combatDamagePreventedBy`). */
+       * (`GameState.activeReplacements`). */
       readonly by?: CardFilter;
     }
   | {
@@ -8799,7 +8787,7 @@ export type EffectSpec =
        * the player, not their permanents — from sources matching `by`, each
        * asked as its damage would be dealt (rule 615.1), from the
        * controller's side. A rule for the turn, beside Fog's
-       * (`GameState.combatDamagePreventedBy`, `toYou`). */
+       * (`GameState.activeReplacements`, `toYou`). */
       readonly kind: "prevent-damage-to-you";
       readonly by: CardFilter;
     }
@@ -12783,6 +12771,14 @@ export interface EffectApi {
   /** The effect's controller's timed static — see the `timed-static`
    * {@link EffectSpec}. */
   addTimedStatic(text: string, statics: readonly StaticAbility[], expires: Expiry): void;
+  /** Keeps a resolved replacement effect (`state.activeReplacements`); the
+   * Game adds its owner, source, targets and X. */
+  addReplacementEffect(record: NewActiveReplacement): void;
+  /** Rule 701.69a: all damage marked on `target` is removed. */
+  heal(target: TargetRef): void;
+  /** If a `would-create-token` replacement's `becomes` applies to `count`
+   * tokens of this `create-token`: true once it's replaced or asked. */
+  tokenEventReplaced(spec: Extract<EffectSpec, { kind: "create-token" | "create-token-copy" }>, count: number): boolean;
   /** Epic as the spell resolves — see the `epic` {@link EffectSpec}. */
   epic(): void;
   /** Paradigm as the spell resolves — see the `paradigm` {@link EffectSpec}. */
@@ -14447,6 +14443,26 @@ const MAX_COPY_COUNT = 1000;
  * difference between a -1 power and a 3 toughness is 4 — and only its result
  * is clamped. A P/T change reads its amounts through {@link ptChangeValue}
  * instead, which keeps a card's own minus sign. */
+/** `spec` with the amounts in its `modify` read as a resolving effect's are
+ * (rule 611.2b). */
+function withFixedAmounts(spec: ReplacementSpec, fixed: (amount: EffectAmount) => number): ReplacementSpec {
+  if (!("instead" in spec) || typeof spec.instead !== "object" || spec.instead === null || !("modify" in spec.instead)) return spec;
+  const { modify, ...rest } = spec.instead;
+  const change: AmountChange = {
+    ...modify,
+    ...(modify.plus !== undefined ? { plus: fixed(modify.plus) } : {}),
+    ...(modify.atLeast !== undefined ? { atLeast: fixed(modify.atLeast) } : {}),
+    ...(modify.atMost !== undefined ? { atMost: fixed(modify.atMost) } : {}),
+    ...(modify.set !== undefined ? { set: fixed(modify.set) } : {}),
+  };
+  return { ...spec, instead: { ...rest, modify: change } } as ReplacementSpec;
+}
+
+/** An `ActiveReplacement` as the resolving effect makes it. */
+export type NewActiveReplacement = Omit<ActiveReplacement, "owner" | "source" | "madeIn" | "targets" | "targetStints" | "x" | "from"> & {
+  readonly fromObject?: ObjectId;
+};
+
 export function amountValue(
   amount: EffectAmount,
   ctx: ResolutionContext,
@@ -18386,28 +18402,6 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ...(spec.handRevealed !== undefined && ctx.targets[spec.handRevealed]?.kind === "player"
           ? { handsRevealed: [(ctx.targets[spec.handRevealed] as { readonly player: PlayerId }).player] }
           : {}),
-        ...(spec.damageTo !== undefined
-          ? {
-              damageTo: {
-                players: ctx.playersInScope(spec.damageTo.who),
-                multiplier: spec.damageTo.multiplier,
-                ...(spec.damageTo.permanentsToo === true ? { permanentsToo: true } : {}),
-              },
-            }
-          : {}),
-        ...(spec.damageReplacement !== undefined
-          ? {
-              damageReplacement: {
-                ...(spec.damageReplacement.plus !== undefined
-                  ? { plus: Math.max(0, amountValue(spec.damageReplacement.plus, ctx)) }
-                  : {}),
-                ...(spec.damageReplacement.setTo !== undefined ? { setTo: spec.damageReplacement.setTo } : {}),
-                ...(spec.damageReplacement.source !== undefined ? { source: spec.damageReplacement.source } : {}),
-                ...(spec.damageReplacement.combat !== undefined ? { combat: spec.damageReplacement.combat } : {}),
-                ...(spec.damageReplacement.to !== undefined ? { to: spec.damageReplacement.to } : {}),
-              },
-            }
-          : {}),
         ...(spec.cantLoseGame !== undefined ? { cantLoseGame: ctx.playersInScope(spec.cantLoseGame) } : {}),
         ...(spec.cantWinGame !== undefined ? { cantWinGame: ctx.playersInScope(spec.cantWinGame) } : {}),
         ...(spec.cantLoseLife !== undefined ? { cantLoseLife: ctx.playersInScope(spec.cantLoseLife) } : {}),
@@ -18437,14 +18431,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
               },
             }
           : {}),
-        ...(spec.tokenMultiplier !== undefined ? { tokenMultiplier: spec.tokenMultiplier } : {}),
         ...(spec.tokensComeToOwner === true ? { tokensComeToOwner: true as const } : {}),
-        ...(spec.graveyardExile !== undefined ? { graveyardExile: { ...spec.graveyardExile, source: ctx.source } } : {}),
         ...(spec.looksAtOwnLibraryTop === true ? { looksAtOwnLibraryTop: true as const } : {}),
         ...(spec.entersTapped !== undefined ? { entersTapped: spec.entersTapped } : {}),
-        ...(spec.nextDrawInstead !== undefined
-          ? { nextDrawInstead: { ...spec.nextDrawInstead, source: ctx.source, targets: [...ctx.targets], targetStints: [] } }
-          : {}),
         ...(spec.landManaInstead !== undefined ? { landManaInstead: spec.landManaInstead } : {}),
         ...(spec.lifeCantChange !== undefined ? { lifeCantChange: ctx.playersInScope(spec.lifeCantChange) } : {}),
         ...(spec.protectionFromEverything !== undefined
@@ -19113,6 +19102,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "create-token":
+      if (spec.replacementAsked !== true && spec.who === undefined && ctx.tokenEventReplaced(spec, amountValue(spec.count, ctx) * ctx.stackMultiplier)) return;
       // A per-player count ("its controller creates a token for each
       // creature destroyed this way") — or per-player counters on it
       // (Oversimplify) — is read for each player the scope names, each
@@ -19307,6 +19297,16 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "create-token-copy": {
+      // One copy of one named permanent: a token event a replacement can
+      // take (Moonlit Meditation). A batch's copies are many events' worth.
+      if (
+        spec.replacementAsked !== true &&
+        (spec.who === undefined || spec.who === "you") &&
+        (typeof spec.of !== "object" || isObjectSetRef(spec.of) === false) &&
+        ctx.tokenEventReplaced(spec, amountValue(spec.count, ctx) * ctx.stackMultiplier)
+      ) {
+        return;
+      }
       // Copies of cards are read as the cards they are, and "create a token"
       // is the effect's controller's: nothing on the battlefield to read a
       // controller from.
@@ -19674,6 +19674,33 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "timed-static": {
       const lasts = resolvePlayerDuration(spec.duration, ctx.controller, (ref) => resolvePlayerRef(ref, ctx));
       if (lasts !== undefined && "expires" in lasts) ctx.addTimedStatic(spec.text, spec.static, lasts.expires);
+      return;
+    }
+    case "heal": {
+      const target = objectRefAct(spec.target, ctx);
+      if (target?.kind === "object") ctx.heal(target);
+      return;
+    }
+    case "replacement-effect": {
+      const lasts = resolvePlayerDuration(spec.duration, ctx.controller, (ref) => resolvePlayerRef(ref, ctx));
+      if (lasts === undefined || !("expires" in lasts)) return;
+      const left = spec.next === undefined || spec.next === true ? undefined : amountValue(spec.next, ctx);
+      if (left !== undefined && left <= 0) return;
+      const object = spec.object === undefined ? undefined : objectRefAct(spec.object, ctx);
+      if (spec.object !== undefined && object === undefined) return;
+      const from = spec.fromObject === undefined ? undefined : objectRefAct(spec.fromObject, ctx);
+      if (spec.fromObject !== undefined && from?.kind !== "object") return;
+      const fixed = (amount: EffectAmount): number => amountValue(amount, ctx);
+      ctx.addReplacementEffect({
+        replacement: withFixedAmounts(spec.replacement, fixed),
+        expires: lasts.expires,
+        ...(spec.next === true ? { next: true as const } : {}),
+        ...(left !== undefined ? { left } : {}),
+        ...(spec.players !== undefined ? { onlyPlayers: ctx.playersInScope(spec.players) } : {}),
+        ...(spec.permanentsToo === true ? { playersPermanents: true as const } : {}),
+        ...(object !== undefined ? { target: object } : {}),
+        ...(from?.kind === "object" ? { fromObject: from.object } : {}),
+      });
       return;
     }
     case "prevent-all-combat-damage":

@@ -281,6 +281,7 @@ import _poolFodderCannon from "../pool/fodder-cannon.js";
 import _poolFogOnTheBarrowDowns from "../pool/fog-on-the-barrow-downs.js";
 import _poolForerunnerOfTheHeralds from "../pool/forerunner-of-the-heralds.js";
 import _poolForesee from "../pool/foresee.js";
+import _poolForethoughtAmulet from "../pool/forethought-amulet.js";
 import _poolForgottenCave from "../pool/forgotten-cave.js";
 import _poolFoulFamiliar from "../pool/foul-familiar.js";
 import _poolFoundryHornet from "../pool/foundry-hornet.js";
@@ -614,6 +615,7 @@ import _poolPsychosisCrawler from "../pool/psychosis-crawler.js";
 import _poolPullFromEternity from "../pool/pull-from-eternity.js";
 import _poolPutrefy from "../pool/putrefy.js";
 import _poolQuandrixPledgemage from "../pool/quandrix-pledgemage.js";
+import _poolQuantumRiddler from "../pool/quantum-riddler.js";
 import _poolQuarkHumbleProprietor from "../pool/quark-humble-proprietor.js";
 import _poolQuarryColossus from "../pool/quarry-colossus.js";
 import _poolQuarryHauler from "../pool/quarry-hauler.js";
@@ -1261,6 +1263,7 @@ const shard: CardShard = {
     _poolFogOnTheBarrowDowns,
     _poolForerunnerOfTheHeralds,
     _poolForesee,
+    _poolForethoughtAmulet,
     _poolForgottenCave,
     _poolFoulFamiliar,
     _poolFoundryHornet,
@@ -1594,6 +1597,7 @@ const shard: CardShard = {
     _poolPullFromEternity,
     _poolPutrefy,
     _poolQuandrixPledgemage,
+    _poolQuantumRiddler,
     _poolQuarkHumbleProprietor,
     _poolQuarryColossus,
     _poolQuarryHauler,

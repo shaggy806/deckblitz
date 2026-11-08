@@ -17,7 +17,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "delirium" },
-      replacement: { event: "would-deal-damage", multiplier: 2, combat: false, source: { controlledBy: "you" } },
+      replacement: { event: "would-deal-damage", instead: { modify: { times: 2 } }, combat: false, source: { controlledBy: "you" } },
       text: DOUBLE,
     },
   ],

@@ -95,15 +95,15 @@ describe("EG-6 — one-shot damage-prevention shields (Sunlit Bastion)", () => {
       targets: [{ kind: "player", player: B }],
     });
     game.advanceUntil(settled);
-    expect(game.state.preventionShields).toHaveLength(1);
+    expect(game.state.activeReplacements).toHaveLength(1);
 
     bolt(game, { kind: "player", player: B }); // 3 prevented, 1 left on the shield
     expect(game.state.players[B].life).toBe(20);
-    expect(game.state.preventionShields[0]?.amount).toBe(1);
+    expect(game.state.activeReplacements[0]?.left).toBe(1);
 
     bolt(game, { kind: "player", player: B }); // 1 prevented, 2 through
     expect(game.state.players[B].life).toBe(18);
-    expect(game.state.preventionShields).toHaveLength(0);
+    expect(game.state.activeReplacements).toHaveLength(0);
 
     // A fresh turn clears any leftover shields (there are none, but re-shield
     // then roll the turn to prove it lapses).
@@ -115,7 +115,7 @@ describe("EG-6 — one-shot damage-prevention shields (Sunlit Bastion)", () => {
     });
     game.advanceUntil(settled);
     game.advanceUntil((s) => s.turn.number === 3 && s.turn.step === "precombat-main");
-    expect(game.state.preventionShields).toHaveLength(0);
+    expect(game.state.activeReplacements).toHaveLength(0);
     bolt(game, { kind: "player", player: B });
     expect(game.state.players[B].life).toBe(15); // full 3
   });

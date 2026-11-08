@@ -23,7 +23,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", to: "your-side", toOther: true, redirect: "self" },
+      replacement: { event: "would-deal-damage", to: "your-side", toOther: true, instead: { redirect: "self" } },
       text: "All damage that would be dealt to you and other permanents you control is dealt to this creature instead.",
     },
   ],

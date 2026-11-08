@@ -25,7 +25,7 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-deal-damage",
-        plus: 1,
+        instead: { modify: { plus: 1 } },
         source: { subtypes: ["Lizard", "Mouse", "Otter", "Raccoon"], controlledBy: "you" },
       },
       text: TEXT,

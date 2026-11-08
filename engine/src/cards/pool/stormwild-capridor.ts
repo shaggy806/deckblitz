@@ -19,10 +19,8 @@ export default defineCard({
       replacement: {
         event: "would-deal-damage",
         combat: false,
-        prevent: true,
-        perEvent: true,
+        instead: { prevent: true, then: { kind: "add-counter", target: "source", counter: "+1/+1", amount: "x" }, perEvent: true },
         to: "self",
-        then: { kind: "add-counter", target: "source", counter: "+1/+1", amount: "x" },
       },
       text: PREVENT_TEXT,
     },

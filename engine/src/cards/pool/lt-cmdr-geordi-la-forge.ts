@@ -20,7 +20,7 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-add-counter",
-        multiplier: 2,
+        instead: { modify: { times: 2 } },
         whoPuts: "you",
         counterKind: "charge",
         filter: { type: "artifact", controlledBy: "you" },

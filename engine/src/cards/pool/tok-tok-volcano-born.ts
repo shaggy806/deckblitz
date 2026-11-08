@@ -15,7 +15,7 @@ export default defineCard({
     { affects: { scope: "self" }, protection: { colors: ["R"] }, text: "Protection from red" },
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", plus: 1, source: { colors: ["R"] }, to: "player" },
+      replacement: { event: "would-deal-damage", instead: { modify: { plus: 1 } }, source: { colors: ["R"] }, to: "player" },
       text: "If a red source would deal damage to a player, it deals that much damage plus 1 to that player instead.",
     },
   ],

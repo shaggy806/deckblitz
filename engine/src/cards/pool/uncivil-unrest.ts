@@ -22,7 +22,7 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-deal-damage",
-        multiplier: 2,
+        instead: { modify: { times: 2 } },
         source: { type: "creature", controlledBy: "you", counters: { kind: "+1/+1", compare: { op: "gte", n: 1 } } },
       },
       text: DOUBLE_TEXT,

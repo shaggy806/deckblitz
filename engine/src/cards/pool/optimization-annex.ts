@@ -15,7 +15,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-add-counter", plus: 1, counterKind: "charge", filter: { type: "artifact" } },
+      replacement: { event: "would-add-counter", instead: { modify: { plus: 1 } }, counterKind: "charge", filter: { type: "artifact" } },
       text: TEXT,
     },
   ],

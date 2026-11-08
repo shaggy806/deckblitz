@@ -36,6 +36,7 @@ import type { CardNameAim, CardNameFilter } from "./card-names.js";
 import type { Color, LandManaInstead, ManaOrigin, ManaType, ManaUnit, SpendAs } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { Expiry, UntilCast, UntilPoint, WhileSource } from "./duration.js";
+import type { ReplacementSpec } from "./replacements.js";
 import type { CardPlayPermission, CastNowTerms, EffectPlay } from "./play-permission.js";
 import type { Journal } from "./journal.js";
 import type { ObjectSets, SetMember } from "./object-sets.js";
@@ -4227,12 +4228,21 @@ export type AwaitingDecision =
        * unused. */
       readonly dredgeFor?: { readonly cards: readonly ObjectId[] };
       /** Which replacement applies to a draw of `player`'s (rule 616.1, the
-       * Words cycle): mode i is `effects[i]`, an index into `playerEffects`
-       * (a `nextDrawInstead`), or `null` for their printed "if you would draw"
+       * Words cycle): mode i is `effects[i]`, an index into `activeReplacements`
+       * (a resolved "next time" one), or `null` for their printed "if you would draw"
        * (Underrealm Lich). `{ printed }` is that permanent's optional "you may
        * instead" (Abundance), and `"draw"` declines it: the draw happens.
        * `event` is the draw. Answered by the engine itself; the modes'
        * effects are unused. */
+      /** A would-create-token replacement's "you may instead": the first mode
+       * is the original effect, under this source, controller, targets and
+       * X; the other the replacement's. Answered by the engine itself. */
+      readonly replacedFor?: {
+        readonly source: ObjectId;
+        readonly controller: PlayerId;
+        readonly targets: readonly (TargetRef | undefined)[];
+        readonly x: number;
+      };
       readonly nextDrawFor?: {
         readonly effects: readonly (number | null | "draw" | { readonly printed: ObjectId })[];
         readonly event: { readonly firstInDrawStep: boolean; readonly before: { readonly all: number; readonly exceptDrawStepFirst: number } };
@@ -5089,19 +5099,45 @@ export interface StandingModeAnswer {
   readonly xValue?: number;
 }
 
-/** A one-shot damage-prevention shield (Healing Salve — ROADMAP Phase 11 EG-6). */
-export interface PreventionShield {
-  /** The player or object it protects — absent for a set of them
-   * (`recipients`) or anything at all. */
+/**
+ * A resolved spell's or ability's replacement or prevention effect, for as
+ * long as it lasts (rules 611.2c, 614, 615): the one record they're kept in.
+ * See `docs/plans/need-key-themes.md`, theme 9.
+ *
+ * `next` and `left` make it a shield: `next` is "the next time" (615.8), gone
+ * once it has applied to one event; `left` is "the next N" (615.7), counting
+ * down. With neither it applies for as long as `expires` says (615.3).
+ *
+ * The rest is what its references fixed as it resolved, each an object in its
+ * stint (rule 400.7). They narrow it beside what `replacement` says.
+ */
+export interface ActiveReplacement {
+  /** What it replaces and with what, the same words a static's says. */
+  readonly replacement: ReplacementSpec;
+  /** The effect's controller, its "you". */
+  readonly owner: PlayerId;
+  /** The spell or ability's source. */
+  readonly source: ObjectId;
+  /** How long it lasts, for the shared expiry pass. */
+  readonly expires: Expiry;
+  /** The next time, then it's spent (615.8). */
+  readonly next?: true;
+  /** The next N damage still to absorb (615.7); gone at 0. */
+  left?: number;
+  /** The targets its ability was activated with, each in its stint: what its
+   * `instead` reads (`targetStints`, rule 115.1b). */
+  readonly targets?: readonly (TargetRef | null | undefined)[];
+  readonly targetStints?: readonly (number | null | undefined)[];
+  /** The ability's X, for its `instead`. */
+  readonly x?: number;
+  /** Only these players' events ("if target player would draw a card", "…to
+   * that player or a permanent that player controls"). */
+  readonly onlyPlayers?: readonly PlayerId[];
+  /** With `onlyPlayers`, a permanent one of them controls counts too. */
+  readonly playersPermanents?: true;
+  /** The player or object it protects, or (for an event on one object) the
+   * object it's about. */
   readonly target?: TargetRef;
-  /** Damage still to absorb (shrinks as hits are prevented; removed at 0). */
-  amount: number;
-  /** Only prevents combat damage. */
-  readonly combatOnly: boolean;
-  /** Prevents *all* damage to `target` this turn and is never used up
-   * (Gideon Jura's "prevent all damage that would be dealt to him this
-   * turn"); `amount` is unused. */
-  readonly all?: true;
   /** For an object target: the stint it was made for (rule 400.7) — once
    * that object has changed zones it's a new object the shield doesn't
    * cover. Absent on a state saved before it was recorded. */
@@ -5119,9 +5155,6 @@ export interface PreventionShield {
     readonly filter?: CardFilter;
     readonly you: PlayerId;
   };
-  /** "The next time … would deal damage, prevent that damage": all of the
-   * next damage event it covers, then it's gone (`amount` unused). */
-  readonly nextTime?: true;
   /** Reverse Damage: this player gains life equal to the damage it prevents. */
   readonly gainLife?: PlayerId;
   /** Only damage from a source matching this, from `gainLife`'s side, as the
@@ -5165,15 +5198,6 @@ export interface PreventionShield {
     readonly origin?: ObjectId;
     readonly except?: { readonly object: ObjectId; readonly zoneChangeCount: number };
   };
-  /** Only noncombat damage (beside `combatOnly`). */
-  readonly noncombatOnly?: true;
-  /** "Until your next turn" (Dovin, Hand of Control's −1): kept at cleanup,
-   * gone as this player's next turn begins. */
-  readonly untilTurnOf?: PlayerId;
-  /** "For as long as this Saga remains on the battlefield" (Old Fat Spider
-   * Can't See Me): kept at cleanup, and does nothing once this object has
-   * left (its stint). */
-  readonly whileOn?: { readonly object: ObjectId; readonly zoneChangeCount: number };
   /** Prevention's additional effect (rule 615.5 — Deflecting Palm's "if
    * damage is prevented this way, … deals that much damage to that source's
    * controller", Temper's counters): applied right after, as `controller`'s
@@ -5191,6 +5215,8 @@ export interface PreventionShield {
    * `damage-prevented` events name — the `damagePreventedThisWay` amount's
    * read. */
   readonly madeIn?: number;
+  /** A shield's option text, for the player choosing among replacements. */
+  readonly text?: string;
 }
 
 /**
@@ -5290,22 +5316,6 @@ export interface PlayerEffect {
   /** These players play with their hands revealed while this lasts (Sen
    * Triplets), to every player, as a `visibility` static has them do. */
   readonly handsRevealed?: readonly PlayerId[];
-  /** Damage any source would deal to one of `players` — or, with
-   * `permanentsToo`, to a permanent one of them controls — is multiplied. */
-  readonly damageTo?: {
-    readonly players: readonly PlayerId[];
-    readonly multiplier: number;
-    readonly permanentsToo?: boolean;
-  };
-  /** Damage that would be dealt while this lasts, changed (rule 614.1a) — see
-   * `player-effect`'s `damageReplacement`, its amount fixed as it resolved. */
-  readonly damageReplacement?: {
-    readonly plus?: number;
-    readonly setTo?: number;
-    readonly source?: CardFilter;
-    readonly combat?: boolean;
-    readonly to?: "player-or-battle";
-  };
   /** These players can't lose the game (Angel's Grace: "you can't lose the
    * game this turn") — no state-based action and no effect that says they
    * lose makes them lose; conceding still does (rule 104.3a). See
@@ -5340,45 +5350,15 @@ export interface PlayerEffect {
    * a player already below it loses life to damage as normal (the ruling).
    * The damage itself is still dealt in full. */
   readonly damageLifeFloor?: { readonly players: readonly PlayerId[]; readonly floor: number };
-  /** "If one or more tokens would be created under your control, twice that
-   * many of those tokens are created instead" for a while (Kaya, Geist
-   * Hunter's −2): multiplies every token creation under `owner`'s control,
-   * alongside a Doubling Season's (rule 614 — they compound). */
-  readonly tokenMultiplier?: number;
   /** "Each token that would be created under an opponent's control this turn
    * is created under your control instead" (Crafty Cutpurse): see
    * `Game.tokenCreatorAfterRedirects`. */
   readonly tokensComeToOwner?: true;
-  /** "If a card would be put into your graveyard from anywhere this turn,
-   * exile that card instead" (Gaea's Will), "if a creature an opponent
-   * controls would die this turn, exile it instead" (Malicious Eclipse): a
-   * `GraveyardExileReplacement` a resolved spell made, asked of each card from
-   * `owner`'s side as it would go — one that arrives later counts (the
-   * rulings). `returnAtEndStep`: each one so exiled comes back at the
-   * beginning of the next end step (Cosmic Intervention). */
-  readonly graveyardExile?: {
-    readonly filter?: CardFilter;
-    readonly from?: "battlefield";
-    readonly source: ObjectId;
-    readonly returnAtEndStep?: true;
-  };
   readonly looksAtOwnLibraryTop?: true;
   /** "Lands you control enter tapped this turn" (Nahiri's Lithoforming —
    * rule 614.1d): a permanent matching this as it would enter, from
    * `owner`'s side, enters tapped while this lasts. */
   readonly entersTapped?: CardFilter;
-  /** "The next time you would draw a card this turn, [effect] instead" (the
-   * Words cycle — rule 614.1a): replaces one of
-   * `owner`'s draws, and is gone once it has. `targets` are the ability's, as
-   * it resolved (`targetStints` says which object each was). See
-   * `Game.drawCard`. */
-  readonly nextDrawInstead?: {
-    readonly effect: EffectSpec;
-    readonly text: string;
-    readonly source: ObjectId;
-    readonly targets: readonly (TargetRef | undefined)[];
-    readonly targetStints: readonly (number | null)[];
-  };
   /** "Until end of turn, if you tap a land you control for mana, it produces
    * {U} instead of any other type" (Deep Water): `owner`'s lands tapped for
    * mana by them make this type (rules 106.12, 614.1a) — see
@@ -6270,24 +6250,10 @@ export interface GameState {
   /** Additional main phases owed after the postcombat main phase under way
    * (a `withMain` combat's). Turn-scoped. */
   extraMainPhases?: number;
-  /** True while a Fog-style effect has prevented all combat damage this turn
-   * (rule 614 replacement, but turn-scoped with no permanent to hang it on).
-   * Set by the `prevent-all-combat-damage` effect, cleared at the start of the
-   * next turn. */
-  preventAllCombatDamage: boolean;
-  /** The same for only some sources — a `prevent-all-combat-damage` with
-   * `by` (Arachnogenesis: "by non-Spider creatures"): combat damage a source
-   * matching one of these filters would deal is prevented, each matched as
-   * the damage would be dealt from `you`'s side. Cleared with
-   * `preventAllCombatDamage`; absent when there are none. An entry with
-   * `toYou` (a `prevent-damage-to-you` — Deep Wood) is all damage, combat or
-   * not, dealt to `you` the player instead. */
-  combatDamagePreventedBy?: { readonly filter: CardFilter; readonly you: PlayerId; readonly toYou?: true }[];
   /**
    * Players with hexproof until end of turn (Lazotep Plating: "**You** and
    * permanents you control gain hexproof"). Turn-scoped rather than a
-   * per-player flag for the same reason `preventAllCombatDamage` is: there's
-   * no permanent to hang it on. Cleared as each turn begins.
+   * per-player flag: there's no permanent to hang it on. Cleared as each turn begins.
    */
   hexproofPlayers: PlayerId[];
   /** What an Opposition Agent has just exiled from a search: no "this way" read
@@ -6312,7 +6278,7 @@ export interface GameState {
    * consumed (and shrunk / removed) in `dealDamage` before the hit lands.
    * Cleared at the start of the next turn, but for one lasting until a
    * player's next turn (`untilTurnOf`) or while an object stays (`whileOn`). */
-  preventionShields: PreventionShield[];
+  activeReplacements: ActiveReplacement[];
   /** "Damage can't be prevented this turn" (Skullcrack — rule 615.12): set by
    * the `damage-cant-be-prevented` effect, cleared as the next turn begins. */
   /** The player a cost's last decision hands priority back to (117.3c: its

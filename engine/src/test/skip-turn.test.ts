@@ -97,15 +97,15 @@ describe("skipping a turn (rules 500.11, 614.10)", () => {
   it("an effect until your next turn waits through a skipped turn (614.10a)", () => {
     const { game } = table();
     game.state.players[A].turnsToSkip = 1;
-    game.state.preventionShields.push({ untilTurnOf: A } as never);
+    game.state.activeReplacements.push({ replacement: { event: "would-deal-damage", instead: { prevent: true } }, owner: A, source: "x", expires: { untilTurnOf: A } } as never);
     nextTurn(game);
-    expect(game.state.preventionShields).toHaveLength(1);
+    expect(game.state.activeReplacements).toHaveLength(1);
     nextTurn(game);
     expect(active(game)).toBe(B);
-    expect(game.state.preventionShields).toHaveLength(1);
+    expect(game.state.activeReplacements).toHaveLength(1);
     nextTurn(game);
     expect(active(game)).toBe(A);
-    expect(game.state.preventionShields).toHaveLength(0);
+    expect(game.state.activeReplacements).toHaveLength(0);
   });
 });
 

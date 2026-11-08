@@ -15,5 +15,5 @@ export default defineCard({
   power: 1,
   toughness: 4,
   text: TEXT,
-  static: [{ affects: { scope: "self" }, replacement: { event: "would-mill", who: "opponent", multiplier: 2 }, text: TEXT }],
+  static: [{ affects: { scope: "self" }, replacement: { event: "would-mill", who: "opponent", instead: { modify: { times: 2 } } }, text: TEXT }],
 });

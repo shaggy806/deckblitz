@@ -16,7 +16,7 @@ export default defineCard({
     },
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", to: "attached", source: { type: "artifact" }, prevent: true },
+      replacement: { event: "would-deal-damage", to: "attached", source: { type: "artifact" }, instead: { prevent: true } },
       text: "Prevent all damage that would be dealt to enchanted creature by artifact sources.",
     },
     {

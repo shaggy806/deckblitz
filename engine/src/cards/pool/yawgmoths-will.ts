@@ -17,9 +17,9 @@ export default defineCard({
         mayPlay: { from: "graveyard", play: true },
       },
       {
-        kind: "player-effect",
+        kind: "replacement-effect",
         duration: "end-of-turn",
-        graveyardExile: { filter: { ownedBy: "you", token: false } },
+        replacement: { event: "would-be-put-into-graveyard", instead: "exile", filter: { ownedBy: "you", token: false } },
       },
     ],
   },

@@ -19,9 +19,9 @@ export default defineCard({
         duration: "end-of-turn",
       },
       {
-        kind: "player-effect",
+        kind: "replacement-effect",
         duration: "end-of-turn",
-        graveyardExile: { filter: { type: "creature" }, from: "battlefield" },
+        replacement: { event: "would-be-put-into-graveyard", instead: "exile", filter: { type: "creature" }, from: "battlefield" },
       },
     ],
   },

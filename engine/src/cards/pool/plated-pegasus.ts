@@ -27,7 +27,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", plus: -1, source: { typesAnyOf: ["instant", "sorcery"] } },
+      replacement: { event: "would-deal-damage", instead: { modify: { plus: -1 } }, source: { typesAnyOf: ["instant", "sorcery"] } },
       text: TEXT,
     },
   ],

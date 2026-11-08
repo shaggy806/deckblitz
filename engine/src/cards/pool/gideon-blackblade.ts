@@ -33,7 +33,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "your-turn" },
-      replacement: { event: "would-deal-damage", prevent: true, to: "self" },
+      replacement: { event: "would-deal-damage", instead: { prevent: true }, to: "self" },
       text: PREVENT,
     },
   ],

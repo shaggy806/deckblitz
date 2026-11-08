@@ -35,7 +35,7 @@ export default defineCard({
     { affects: { scope: "self" }, keepsDamageInCleanup: true, text: KEEP_TEXT },
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", to: "your-side", toOther: true, redirect: "self" },
+      replacement: { event: "would-deal-damage", to: "your-side", toOther: true, instead: { redirect: "self" } },
       text: REDIRECT_TEXT,
     },
   ],

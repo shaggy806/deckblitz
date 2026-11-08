@@ -19,12 +19,11 @@ export default defineCard({
       cost: { mana: "{1}", tap: false },
       targets: ["any-target"],
       effect: {
-        kind: "player-effect",
+        kind: "replacement-effect",
         duration: "end-of-turn",
-        nextDrawInstead: {
-          effect: { kind: "damage", amount: 2, target: 0 },
-          text: "~ deals 2 damage to any target instead.",
-        },
+        next: true,
+        replacement: { event: "would-draw", who: "you", instead: { effect: { kind: "damage", amount: 2, target: 0 },
+          text: "~ deals 2 damage to any target instead." } },
       },
       resolve: null,
       text: TEXT,

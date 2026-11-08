@@ -137,7 +137,7 @@ describe("top-10000 batch 30c — Jaheira's Respite", () => {
     const plains = named(game, "Plains");
     expect(plains).toHaveLength(2);
     for (const id of plains) expect(game.state.objects[id].tapped).toBe(true);
-    expect(game.state.preventAllCombatDamage).toBe(true);
+    expect(game.state.activeReplacements).toHaveLength(1);
   });
 });
 

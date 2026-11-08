@@ -22,7 +22,7 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-deal-damage",
-        atLeast: "this-power",
+        instead: { modify: { atLeast: { powerOf: "source" } } },
         combat: false,
         source: { colors: ["R"], controlledBy: "you" },
         to: "opponent",

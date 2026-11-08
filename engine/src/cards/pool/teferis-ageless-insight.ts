@@ -19,7 +19,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-draw", who: "you", instead: { draws: 2 }, exceptFirstInDrawStep: true },
+      replacement: { event: "would-draw", who: "you", instead: { modify: { set: 2 } }, exceptFirstInDrawStep: true },
       text: DRAW_TEXT,
     },
   ],

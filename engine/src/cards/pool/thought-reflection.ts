@@ -15,7 +15,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-draw", who: "you", instead: { draws: 2 } },
+      replacement: { event: "would-draw", who: "you", instead: { modify: { set: 2 } } },
       text: "If you would draw a card, draw two cards instead.",
     },
   ],

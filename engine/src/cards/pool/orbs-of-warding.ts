@@ -15,7 +15,7 @@ export default defineCard({
     { affects: { scope: "self" }, playerHexproof: true, text: "You have hexproof." },
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", to: "you", source: { type: "creature" }, preventAmount: 1 },
+      replacement: { event: "would-deal-damage", to: "you", source: { type: "creature" }, instead: { prevent: 1 } },
       text: "If a creature would deal damage to you, prevent 1 of that damage.",
     },
   ],

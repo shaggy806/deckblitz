@@ -34,7 +34,7 @@ export default defineCard({
     }),
     atLevel(3, {
       affects: { scope: "self" },
-      replacement: { event: "would-add-counter", multiplier: 2, whoPuts: "you", onPlayers: "any" },
+      replacement: { event: "would-add-counter", instead: { modify: { times: 2 } }, whoPuts: "you", onPlayers: "any" },
       text: DOUBLE_TEXT,
     }),
   ],

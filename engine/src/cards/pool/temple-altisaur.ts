@@ -18,7 +18,7 @@ export default defineCard({
         event: "would-deal-damage",
         toFilter: { subtype: "Dinosaur", controlledBy: "you" },
         toOther: true,
-        preventAllBut: 1,
+        instead: { prevent: { allBut: 1 } },
       },
       text: "If a source would deal damage to another Dinosaur you control, prevent all but 1 of that damage.",
     },

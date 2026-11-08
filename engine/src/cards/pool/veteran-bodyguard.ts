@@ -27,7 +27,7 @@ export default defineCard({
         event: "would-deal-damage",
         to: "you",
         source: { type: "creature", unblocked: true },
-        redirect: "self",
+        instead: { redirect: "self" },
       },
       text: TEXT,
     },

@@ -10,7 +10,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "player-effect", duration: "end-of-turn", damageReplacement: { setTo: 2 } },
+      { kind: "replacement-effect", duration: "end-of-turn", replacement: { event: "would-deal-damage", instead: { modify: { set: 2 } } } },
       { kind: "draw", amount: 1 },
     ],
   },

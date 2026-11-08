@@ -49,7 +49,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: HAS_ICE,
-      replacement: { event: "would-deal-damage", combat: true, prevent: true, fromSelf: true },
+      replacement: { event: "would-deal-damage", combat: true, instead: { prevent: true }, fromSelf: true },
       text: ICE_TEXT,
     },
   ],

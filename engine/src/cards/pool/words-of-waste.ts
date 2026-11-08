@@ -16,12 +16,11 @@ export default defineCard({
       cost: { mana: "{1}", tap: false },
       targets: [],
       effect: {
-        kind: "player-effect",
+        kind: "replacement-effect",
         duration: "end-of-turn",
-        nextDrawInstead: {
-          effect: { kind: "discard", target: "each-opponent", amount: 1 },
-          text: "Each opponent discards a card instead.",
-        },
+        next: true,
+        replacement: { event: "would-draw", who: "you", instead: { effect: { kind: "discard", target: "each-opponent", amount: 1 },
+          text: "Each opponent discards a card instead." } },
       },
       resolve: null,
       text: TEXT,

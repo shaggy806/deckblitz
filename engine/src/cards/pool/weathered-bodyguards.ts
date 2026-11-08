@@ -21,7 +21,7 @@ export default defineCard({
         to: "you",
         combat: true,
         source: { type: "creature", unblocked: true },
-        redirect: "self",
+        instead: { redirect: "self" },
       },
       text: "As long as this creature is untapped, all combat damage that would be dealt to you by unblocked creatures is dealt to this creature instead.",
     },

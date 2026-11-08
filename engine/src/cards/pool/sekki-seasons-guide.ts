@@ -29,16 +29,14 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-deal-damage",
-        prevent: true,
-        perEvent: true,
-        to: "self",
-        then: {
+        instead: { prevent: true, then: {
           kind: "sequence",
           effects: [
             { kind: "remove-counter", target: "source", counter: "+1/+1", amount: "x" },
             { kind: "create-token", token: "Spirit Token (Colorless)", count: "x" },
           ],
-        },
+        }, perEvent: true },
+        to: "self",
       },
       text: DAMAGE_TEXT,
     },

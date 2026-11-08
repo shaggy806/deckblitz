@@ -12,7 +12,7 @@ export default defineCard({
   subtypes: ["Class"],
   text: "(Gain the next level as a sorcery to add its ability.)\nIf you would gain life, you gain that much life plus 1 instead.\n{3}{W}: Level 2\nWhenever you gain life, put a +1/+1 counter on target creature you control.\n{4}{W}: Level 3\nWhen this Class becomes level 3, return target creature card from your graveyard to the battlefield. You gain life equal to that creature's toughness.",
   static: [
-    { affects: { scope: "self" }, replacement: { event: "would-gain-life", who: "you", plus: 1 }, text: "If you would gain life, you gain that much life plus 1 instead." },
+    { affects: { scope: "self" }, replacement: { event: "would-gain-life", who: "you", instead: { modify: { plus: 1 } } }, text: "If you would gain life, you gain that much life plus 1 instead." },
   ],
   triggered: [
     atLevel(2, { trigger: { on: "gains-life", who: "you" }, targets: ["creature-you-control"], effect: { kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 }, resolve: null, text: "Whenever you gain life, put a +1/+1 counter on target creature you control." }),

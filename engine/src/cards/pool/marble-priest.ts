@@ -20,7 +20,7 @@ export default defineCard({
     },
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", combat: true, prevent: true, to: "self", source: { subtype: "Wall" } },
+      replacement: { event: "would-deal-damage", combat: true, instead: { prevent: true }, to: "self", source: { subtype: "Wall" } },
       text: PREVENT_TEXT,
     },
   ],

@@ -26,12 +26,12 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-draw", who: "you", instead: { draws: 2 }, exceptFirstInDrawStep: true },
+      replacement: { event: "would-draw", who: "you", instead: { modify: { set: 2 } }, exceptFirstInDrawStep: true },
       text: DRAW_TEXT,
     },
     {
       affects: { scope: "self" },
-      replacement: { event: "would-create-token", multiplier: 2 },
+      replacement: { event: "would-create-token", instead: { modify: { times: 2 } } },
       text: TOKEN_TEXT,
     },
   ],

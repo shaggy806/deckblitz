@@ -20,7 +20,7 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-deal-damage",
-        multiplier: 2,
+        instead: { modify: { times: 2 } },
         source: { subtype: "Wizard", controlledBy: "you" },
       },
       text: TEXT,

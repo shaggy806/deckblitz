@@ -35,7 +35,66 @@ import type { BeholdSpec, EffectAmount, EffectSpec } from "./effects.js";
 import type { CardFilter } from "./filter.js";
 import type { CardType } from "./cards.js";
 
-/** A single replacement clause on a `StaticAbility`. Discriminated by `event`. */
+/**
+ * A change to an event's amount, the one spelling of "that many plus one",
+ * "twice that much", "half that many": the event still happens, changed
+ * (rule 614.1a). Amounts are read as the event would happen, from the
+ * replacement's source. See `docs/plans/need-key-themes.md`, theme 9.
+ *
+ * Several on one event are ordered by the affected player (rule 616.1), each
+ * event working out the order best for them.
+ */
+export interface AmountChange {
+  /** "Twice that many" (2), "three times that many" (3). */
+  readonly times?: number;
+  /** "That many plus 1"; negative is "minus 1" (Vizier of Remedies), never
+   * below none. An amount that reads the board, and so could be negative,
+   * adds nothing while it's 0 or less ("plus X, where X is Hawkeye's power"). */
+  readonly plus?: EffectAmount;
+  /** "Half that many, rounded down". */
+  readonly half?: "up" | "down";
+  /** Raised to this, never lowered ("…deals damage equal to ~'s power
+   * instead", Ojer Axonil). */
+  readonly atLeast?: EffectAmount;
+  /** Lowered to this, never raised ("… it deals 2 damage to you instead",
+   * Forethought Amulet). */
+  readonly atMost?: EffectAmount;
+  /** Exactly this ("it deals 2 damage", Equal Treatment; "draw two cards
+   * instead"). */
+  readonly set?: EffectAmount;
+}
+
+/**
+ * The event becomes this effect, and never happens (rules 614.1a, 614.6): no
+ * event, journal entry or trigger for what was replaced, only for what
+ * happened. Run by the replacement's controller, reading the event as `"x"`
+ * ("that much"), `"trigger-object"` ("that card", the damage's source) and
+ * `"trigger-recipient"` / `"trigger-player"` (who it would have happened to).
+ * A decision in it suspends what's left of the event (rule 614.11a for
+ * draws). It mustn't repeat its own event after a decision: `ModifiedEvent`'s
+ * `also` is for the event still happening.
+ */
+export interface ReplacedByEffect {
+  readonly effect: EffectSpec;
+  /** The option's words where a player chooses among replacements, after the
+   * source's name; left out, "<name>'s replacement". */
+  readonly text?: string;
+}
+
+/** The event happens, changed. `also` is done first, beside it: "instead that
+ * damage is dealt, but all other damage already dealt to him is healed"
+ * (Wolverine, Fierce Fighter), "instead you draw two cards and you lose 1
+ * life" (Blood Scrivener). */
+export interface ModifiedEvent {
+  readonly modify: AmountChange;
+  readonly also?: EffectSpec;
+}
+
+/** What a replacement does, wherever the event can take it. */
+export type Instead = ReplacedByEffect | ModifiedEvent;
+
+/** A single replacement clause on a `StaticAbility`, or kept by a resolved
+ * `replacement-effect`. Discriminated by `event`. */
 export type ReplacementSpec =
   | TurnBeginReplacement
   | EntersBattlefieldReplacement
@@ -52,7 +111,44 @@ export type ReplacementSpec =
   | LifeLossReplacement
   | TapManaMultiplierReplacement
   | ProliferateReplacement
-  | SpellCopyReplacement;
+  | SpellCopyReplacement
+  | LoseGameReplacement
+  | ScryReplacement;
+
+/**
+ * "If you would lose the game, instead exile The Golden Throne and your life
+ * total becomes 1": the game isn't lost, and what it became is what happens
+ * (rules 104.3, 614.1a, 614.6). Asked for every way of losing but conceding
+ * (104.3a); applied inside the state-based-action check (704.5a), so the next
+ * pass of it sees the changed life total. `Game.loseGame`.
+ */
+export interface LoseGameReplacement {
+  readonly event: "would-lose-game";
+  readonly who: "you" | "opponent" | "any-player";
+  readonly instead: ReplacedByEffect;
+}
+
+/**
+ * "If you would scry a number of cards, scry that many cards plus one
+ * instead" (Kenessos, Priest of Thassa); "… draw that many cards instead"
+ * (Eligeth, Crossroads Augur, the effect with `"x"`): one instruction to
+ * scry, rule 701.22. A surveil isn't a scry. `Game.beginScry`.
+ */
+export interface ScryReplacement {
+  readonly event: "would-scry";
+  readonly who: "you" | "opponent" | "any-player";
+  readonly instead: Instead;
+}
+
+/** Whether an `instead` is the event replaced by an effect. */
+export function insteadEffect(instead: Instead | object | string | undefined): ReplacedByEffect | undefined {
+  return typeof instead === "object" && instead !== null && "effect" in instead ? (instead as ReplacedByEffect) : undefined;
+}
+
+/** The amount change in an `instead`, if it has one. */
+export function insteadModify(instead: Instead | object | string | undefined): AmountChange | undefined {
+  return typeof instead === "object" && instead !== null && "modify" in instead ? (instead as ModifiedEvent).modify : undefined;
+}
 
 /**
  * "If you would copy a spell one or more times, instead copy it that many
@@ -66,7 +162,7 @@ export type ReplacementSpec =
  */
 export interface SpellCopyReplacement {
   readonly event: "would-copy-spell";
-  readonly additional: number;
+  readonly instead: ModifiedEvent;
 }
 
 /**
@@ -78,7 +174,7 @@ export interface SpellCopyReplacement {
  */
 export interface ProliferateReplacement {
   readonly event: "would-proliferate";
-  readonly times: number;
+  readonly instead: ModifiedEvent;
 }
 
 /**
@@ -94,7 +190,7 @@ export interface ProliferateReplacement {
  */
 export interface TapManaMultiplierReplacement {
   readonly event: "tap-for-mana";
-  readonly multiplier: number;
+  readonly instead: ModifiedEvent;
 }
 
 /**
@@ -344,7 +440,8 @@ export interface OthersEnterReplacement {
  * result is the same. */
 export interface TokenMultiplierReplacement {
   readonly event: "would-create-token";
-  readonly multiplier?: number;
+  /** "Twice that many are created instead": `{ modify: { times: 2 } }`. */
+  readonly instead?: ModifiedEvent;
   /** "If one or more tokens would be created", with no "under your control"
    * (Primal Vigor): whoever would control them (its ruling). */
   readonly anyController?: true;
@@ -390,6 +487,18 @@ export interface TokenMultiplierReplacement {
    */
   readonly oneOfEach?: readonly string[];
   /**
+   * "The first time you would create one or more tokens each turn, you may
+   * instead create that many tokens that are copies of enchanted permanent"
+   * (Moonlit Meditation): the event becomes this effect, with `"x"` the number
+   * of tokens, and never happens. With `firstEachTurn`, only the player's
+   * first token event of the turn (from the journal, so one before this
+   * arrived counts); `may` is asked of the creating player before the tokens
+   * are made.
+   */
+  readonly becomes?: ReplacedByEffect;
+  readonly firstEachTurn?: true;
+  readonly may?: true;
+  /**
    * "One or more **artifact** tokens": applies only when the event would make
    * a token of this kind, and so can start to when another replacement adds
    * one (rule 616.1). A token is what it would be created as, its definition
@@ -416,18 +525,16 @@ export interface TokenKindFilter {
  * multiply. */
 export interface CounterMultiplierReplacement {
   readonly event: "would-add-counter";
-  /** "Twice that many … instead" (Doubling Season). */
-  readonly multiplier?: number;
-  /** "That many plus one … instead" (Hardened Scales, Winding Constrictor):
-   * added once to each placement of one or more counters; negative is "that
-   * many minus one" (Vizier of Remedies' -1/-1 counters), never below none.
-   * With a multiplier as well, the permanent's controller orders them (rule
-   * 616.1) — the order that puts the most counters, or for -1/-1 counters
-   * the fewest (`Game.counterTotal`). */
-  readonly plus?: number;
-  /** "Half that many …, rounded down" (Vorinclex, Monstrous Raider). Rounding
-   * makes the order matter, so `counterTotalInBestOrder` looks for it. */
-  readonly halved?: true;
+  /** `times`: "twice that many … instead" (Doubling Season). `plus`: "that
+   * many plus one … instead" (Hardened Scales, Winding Constrictor), added
+   * once to each placement of one or more counters, negative being "that many
+   * minus one" (Vizier of Remedies' -1/-1 counters), never below none. With a
+   * multiplier as well, the permanent's controller orders them (rule 616.1) —
+   * the order that puts the most counters, or for -1/-1 counters the fewest
+   * (`Game.counterTotal`). `half: "down"`: "half that many …, rounded down"
+   * (Vorinclex, Monstrous Raider); rounding makes the order matter, so
+   * `counterTotalInBestOrder` looks for it. */
+  readonly instead: ModifiedEvent;
   /** "If **you** would put" or "if **an opponent** would put": it reads who is
    * putting them (Vorinclex's ruling cares deeply), and whoever controls the
    * permanent they go on. A counter put without a named player is put by the
@@ -532,9 +639,11 @@ export function counterTotalInBestOrder(kind: string, amount: number, steps: Cou
  * they're applied by `moveObject` directly rather than through this spec. */
 export interface GraveyardExileReplacement {
   readonly event: "would-be-put-into-graveyard";
-  /** `"library-top"`: "if this creature would die, put it on top of its owner's
-   * library instead" (Gravebane Zombie). Only with `self`. */
-  readonly instead: "exile" | "library-top";
+  /** `"library-top"`, `"library-bottom"`, `"hand"`: "if this creature would
+   * die, put it on top of its owner's library instead" (Gravebane Zombie), "…
+   * on the bottom of its owner's library" (Nissa's Chosen), "return it to its
+   * owner's hand instead" (Necromancer's Magemark). */
+  readonly instead: "exile" | "library-top" | "library-bottom" | "hand";
   readonly filter?: CardFilter;
   readonly from?: "battlefield";
   /** "… **and it wasn't cycled**, exile it instead" (Abandoned Sarcophagus):
@@ -563,6 +672,10 @@ export interface GraveyardExileReplacement {
    * Valgavoth". Like `then`, given up when the moving object's controller
    * picks another exile that could apply (rule 616.1). Not with `self`. */
   readonly linked?: true;
+  /** On a resolved one: "return it to the battlefield under its owner's
+   * control at the beginning of the next end step" (Cosmic Intervention), one
+   * delayed triggered ability per permanent, a token gone for good. */
+  readonly returnAtEndStep?: true;
   /** "If **this** would be put into a graveyard from anywhere, exile it
    * instead" — a disturb back face's (Hook-Haunt Drifter, rule 702.146):
    * the object's own ability, not an external one, so it catches only the
@@ -610,12 +723,13 @@ export interface CounterExileReplacement {
 export interface DrawRedirectReplacement {
   readonly event: "would-draw";
   /** Whose draw is replaced, relative to this permanent's controller. */
-  readonly who: "opponent" | "you";
+  readonly who: "opponent" | "you" | "any-player";
   /** The replacement: the source's controller draws instead (Notion Thief —
    * `who: "opponent"`: "instead that player skips that draw and you draw a
-   * card"), or that player draws `draws` cards instead ("if you would draw a
-   * card, draw two cards instead" — gate it with the static's `condition`).
-   * Neither replacement applies again to the draws it makes (rule 614.5).
+   * card"), or that player draws that many instead (`{ modify: { set: 2 } }`
+   * for "if you would draw a card, draw two cards instead" — gate it with the
+   * static's `condition`). Neither applies again to the draws it makes (rule
+   * 614.5).
    *
    * Several `"you-draw"` redirects pass one draw along between them, each
    * applying once (the Notion Thief rulings): the draw an opponent's Thief
@@ -628,10 +742,41 @@ export interface DrawRedirectReplacement {
    * win the game instead": `who: "you"` with `whileLibraryEmpty`. It applies
    * even though no card could be drawn (rule 614.11), and replaces the draw
    * whether or not the player can win — one who can't (an opponent's
-   * Platinum Angel) neither wins nor loses for it (the rulings). */
-  readonly instead: "you-draw" | { readonly draws: number } | "win-game" | DrawReplacedByEffect;
+   * Platinum Angel) neither wins nor loses for it (the rulings).
+   *
+   * `{ effect }`: the draw becomes the effect (rule 614.1a): "if you would
+   * draw a card, instead look at the top three cards of your library, then
+   * put one into your hand and the rest into your graveyard" (Underrealm
+   * Lich). With `who: "you"` the effect is its controller's, the drawing
+   * player; with another `who` it's still this permanent's controller's, and
+   * the drawing player is `"trigger-player"`. It applies though the library
+   * is empty (rule 614.11), and the card isn't drawn: no draw trigger, nothing
+   * counted as drawn. In a draw of several cards it's finished, any choice in
+   * it answered, before the next card is drawn (rule 614.11a). Taken before
+   * any `set` on the same draw: of the orders the drawing player could pick
+   * (rule 616.1), the engine takes the effect first (AUTHORING §15,
+   * "Replacement ordering"). The effect mustn't draw a card unless the
+   * replacement is `firstEachTurn`, which its own draw then can't meet again. */
+  readonly instead: "you-draw" | "win-game" | Instead;
+  /** The whole instruction rather than each card: "if you would draw **one
+   * or more** cards, you draw that many cards plus one instead" (Quantum
+   * Riddler: `{ atLeast: 1 }`), "if an opponent would draw **two or more**
+   * cards, instead you and that player each draw a card" (Alms Collector),
+   * with `"x"` the number it would have been. */
+  readonly instruction?: { readonly atLeast: number };
+  /** "If you would draw a card, you **may** instead …" (Abundance): asked of
+   * the drawing player as each draw is about to happen, by a `choose-modes`
+   * question — "Draw a card" or this replacement (rule 616.1: the affected
+   * player chooses which replacement applies; one they don't take, the draw
+   * happens). Beside a mandatory effect replacement of theirs (Underrealm
+   * Lich), the draw is replaced either way, so "Draw a card" isn't offered. */
+  readonly may?: true;
   /** Only a draw while the drawing player's library has no cards in it. */
   readonly whileLibraryEmpty?: boolean;
+  /** Only a draw while the drawing player's hand has no cards in it, or at
+   * most this many (Blood Scrivener's "while you have no cards in hand" is
+   * `0`). */
+  readonly whileHandAtMost?: number;
   /** "…except the first one they draw in each of their draw steps" (Notion
    * Thief; Teferi's Ageless Insight's and Bard, King of Dale's "draw two
    * cards instead"): not the first card a player draws during their own
@@ -648,35 +793,6 @@ export interface DrawRedirectReplacement {
   readonly firstEachTurn?: boolean;
 }
 
-/** A `would-draw` replacement whose draw becomes an effect instead (rule
- * 614.1a) — Underrealm Lich's "if you would draw a card, instead look at the
- * top three cards of your library, then put one into your hand and the rest
- * into your graveyard", Sages of the Anima's reveal-three, Tomorrow, Azami's
- * Familiar's look-three-keep-one. `who: "you"`: the effect is its
- * controller's ("you" in it is them — the drawing player). It applies though
- * the library is empty (rule 614.11), and the card isn't drawn: no draw
- * trigger, nothing counted as drawn. In a draw of several cards it's
- * finished, any choice in it answered, before the next card is drawn (rule
- * 614.11a). Applied in `Game.drawCard` instead of any `draws` multiplier on
- * the same draw — of the orders the drawing player could pick (rule 616.1),
- * the engine takes the effect first (AUTHORING §15, "Replacement ordering").
- * The effect mustn't draw a card unless the replacement is `firstEachTurn`
- * (which its own draw then can't meet again). */
-export interface DrawReplacedByEffect {
-  readonly effect: EffectSpec;
-  /** "If you would draw a card, you **may** instead …" (Abundance): asked of
-   * the drawing player as each draw is about to happen, by a `choose-modes`
-   * question — "Draw a card" or this replacement (rule 616.1: the affected
-   * player chooses which replacement applies; one they don't take, the draw
-   * happens). Beside a mandatory effect replacement of theirs (Underrealm
-   * Lich), the draw is replaced either way, so "Draw a card" isn't offered. */
-  readonly may?: true;
-  /** The option's words in that question, after the source's name ("Abundance:
-   * reveal until a land or nonland card instead"); left out, "<name>'s
-   * replacement". */
-  readonly text?: string;
-}
-
 /**
  * A mill, made bigger (rule 614.1a) — Bruvac the Grandiloquent's "if an
  * opponent would mill one or more cards, they mill twice that many cards
@@ -689,8 +805,7 @@ export interface DrawReplacedByEffect {
 export interface MillMultiplierReplacement {
   readonly event: "would-mill";
   readonly who: "opponent" | "you" | "any-player" | "enchanted-player";
-  readonly multiplier?: number;
-  readonly plus?: number;
+  readonly instead: Instead;
 }
 
 /**
@@ -724,10 +839,11 @@ export interface TurnBeginReplacement {
 export interface LifeGainReplacement {
   readonly event: "would-gain-life";
   readonly who: "opponent" | "you" | "any-player" | "enchanted-player";
-  readonly plus?: number;
-  /** "…you gain twice that much life instead" (Rhox Faithmender, Boon
-   * Reflection) — applied after every `plus`, the order that gains most. */
-  readonly multiplier?: number;
+  /** `plus`: "that much life plus 1" (Bilbo). `times`: "twice that much life"
+   * (Rhox Faithmender, Boon Reflection), after every `plus`, the order that
+   * gains most. `{ effect }`: "if you would gain life, draw that many cards
+   * instead" (Lich), that many being `"x"`. */
+  readonly instead?: Instead;
   readonly prevent?: boolean;
   /** With `prevent`, the wording is a replacement — "if a player would gain
    * life, that player gains no life instead" (Sulfuric Vortex) — and not "can't
@@ -754,7 +870,7 @@ export interface LifeGainReplacement {
 export interface LifeLossReplacement {
   readonly event: "would-lose-life";
   readonly who: "opponent" | "you" | "any-player" | "enchanted-player";
-  readonly multiplier: number;
+  readonly instead: Instead;
 }
 
 /**
@@ -773,45 +889,25 @@ export interface LifeLossReplacement {
  * Tok-Tok, Volcano Born), `"self"` (this permanent).
  * Omitted: anyone's damage, to anything.
  *
- * Applied in `Game.dealDamage` in a fixed order — every multiplier, then
- * every `plus`, then the first `prevent` that applies, then prevention
- * shields — where rule 616.1 would let the affected player order them.
- * A `prevent` stops all of it, and `then` is applied as this permanent's
- * controller's effect with `"x"` the damage prevented, `"trigger-object"` the
- * damage's source and `"trigger-recipient"` the one it would have been dealt
- * to (Vigor's "put a +1/+1 counter on that creature").
+ * Applied in `Game.dealDamage` in the order best for the affected player
+ * (rule 616.1, `bestDamageOrder`). A `prevent` stops all of it, and `then` is
+ * applied as this permanent's controller's effect with `"x"` the damage
+ * prevented, `"trigger-object"` the damage's source and `"trigger-recipient"`
+ * the one it would have been dealt to (Vigor's "put a +1/+1 counter on that
+ * creature").
  */
 export interface DamageMultiplierReplacement {
   readonly event: "would-deal-damage";
-  readonly multiplier?: number;
-  readonly plus?: number;
-  /** A `plus` read as the damage would be dealt: "plus X, where X is Hawkeye's
-   * power" (`"this-power"`, nothing while that's 0 or less), "plus an amount
-   * of damage equal to the number of fire counters on this enchantment" (Fated
-   * Firepower: `{ countersOnThis: "fire" }`). */
-  readonly plusOf?: "this-power" | { readonly countersOnThis: string };
-  /** "…would deal an amount of damage **less than ~'s power** …, that
-   * source deals damage equal to ~'s power instead" (Ojer Axonil, Deepest
-   * Might) — raised to this permanent's power, never lowered. After the
-   * multipliers and additions. */
-  readonly atLeast?: "this-power";
+  /** What happens: a changed amount (`modify`: Dictate of the Twin Gods'
+   * `times`, Torbran's `plus`, Hawkeye's `plus: { powerOf: "source" }`, Ojer
+   * Axonil's `atLeast`, Ghosts of the Innocent's `half`, a replacement, so
+   * unpreventable damage is still halved), an effect instead of any damage
+   * (`effect`: "put that many -1/-1 counters on that creature instead",
+   * Soul-Scar Mage; not prevention, so it works on damage that can't be
+   * prevented, rule 615.12), `prevent` or `redirect`. */
+  readonly instead: Instead | DamagePrevention | DamageRedirection;
   /** Only combat (`true`) or only noncombat (`false`) damage. */
   readonly combat?: boolean;
-  readonly prevent?: boolean;
-  readonly then?: EffectSpec;
-  /** With `prevent` and `then`: "if damage **would be dealt to** this
-   * creature" — the replacement applies to a simultaneous damage event once
-   * (rule 614.5), so in combat its `then` happens once, after all of it, with
-   * "that many" the total (Oathsworn Knight's ruling: two blockers, one
-   * counter). Without it, "if a creature **would deal** damage to this
-   * creature" applies per source (Ironscale Hydra's ruling: a counter per
-   * creature). */
-  readonly perEvent?: true;
-  /** With `prevent` and `then`: `then`'s "that many" is the damage even
-   * when it can't be prevented and so isn't (rule 615.12 — Jared Carthalion,
-   * True Heir's ruling). Without it, "x" is the damage actually prevented
-   * (Swans of Bryn Argoll's "prevented this way"). */
-  readonly thenCountsUnprevented?: true;
   readonly source?: CardFilter;
   /** Only damage **this permanent** would deal — Wolverine, Best There
    * Is's "double all damage Wolverine would deal". */
@@ -829,41 +925,64 @@ export interface DamageMultiplierReplacement {
    * control"); `"attached"`: the permanent this Aura or Equipment is
    * attached to (Inviolability, Shield of the Realm); `"enchanted-player"`:
    * the player this Aura is attached to (Curse of Bloodletting). */
-  readonly to?: "opponent" | "opponent-side" | "you" | "player" | "self" | "your-side" | "attached" | "enchanted-player";
+  readonly to?: "opponent" | "opponent-side" | "you" | "player" | "player-or-battle" | "self" | "your-side" | "attached" | "enchanted-player";
   /** Not this permanent itself — "**other** permanents you control"
    * (Palisade Giant), "another creature you control" (Vigor). */
   readonly toOther?: true;
-  /** A redirection (rule 614.9) instead of a change in amount: all of the
-   * damage is dealt by the same source to this permanent (`"self"` —
-   * Palisade Giant's "all damage that would be dealt to you and other
-   * permanents you control is dealt to this creature instead"), to the
-   * permanent it's attached to (`"attached"` — Pariah), or to the
-   * recipient's controller (`"recipient-controller"` — Treacherous Link).
-   * Does nothing while that isn't a creature, planeswalker or battle on the
-   * battlefield, or a player in the game, or is the recipient already; and
-   * applies to a damage event once (614.5), so two Palisade Giants don't
-   * send it back and forth. */
-  readonly redirect?: "self" | "attached" | "recipient-controller";
-  /** "Prevent N of that damage" (rule 615.10 — Guardian Seraph's 1, Shield
-   * of the Realm's 2): that much of each damage event it applies to. */
-  readonly preventAmount?: number;
-  /** "Prevent all but N of that damage" (Hyperion, Supreme Hero; Temple
-   * Altisaur). */
-  readonly preventAllBut?: number;
-  /** "Prevent half that damage, rounded up" (Gisela, Blade of Goldnight). */
-  readonly preventHalf?: "up" | "down";
-  /** "It deals half that damage, rounded down, … instead" (Ghosts of the
-   * Innocent): a replacement, not prevention — damage that can't be
-   * prevented is still halved. */
-  readonly halve?: "down" | "up";
   /** Only when the damage is this much or less — Callous Giant's "if a
    * source would deal 3 or less damage to this creature, prevent that
    * damage". */
   readonly ifAtMost?: number;
+  /** Only when the damage is this much or more — Forethought Amulet's "if an
+   * instant or sorcery source would deal 3 or more damage to you". */
+  readonly ifAtLeast?: number;
   /** Only damage to a permanent matching this filter, from this permanent's
    * controller's side, as it is when the damage would be dealt — Iroas, God
    * of Victory's "prevent all damage that would be dealt to attacking
    * creatures you control" is `{ type: "creature", attacking: true,
    * controlledBy: "you" }` with `prevent`. Never a player. */
   readonly toFilter?: CardFilter;
+}
+
+/**
+ * Damage prevented (rule 615): nothing dealt, a `damage-prevented` event, and
+ * nothing at all if the damage can't be prevented (615.12).
+ *
+ * `prevent`: `true` all of it; a number "prevent N of that damage" (rule
+ * 615.10 — Guardian Seraph's 1, Shield of the Realm's 2), that much of each
+ * damage event it applies to; `{ allBut }` "prevent all but N of that damage"
+ * (Hyperion, Supreme Hero; Temple Altisaur); `{ half }` "prevent half that
+ * damage, rounded up" (Gisela, Blade of Goldnight).
+ */
+export interface DamagePrevention {
+  readonly prevent: true | number | { readonly allBut: number } | { readonly half: "up" | "down" };
+  /** What happens right after (615.5), reading the damage as `"x"`. */
+  readonly then?: EffectSpec;
+  /** With `then`: "if damage **would be dealt to** this creature" — the
+   * replacement applies to a simultaneous damage event once (rule 614.5), so
+   * in combat its `then` happens once, after all of it, with "that many" the
+   * total (Oathsworn Knight's ruling: two blockers, one counter). Without it,
+   * "if a creature **would deal** damage to this creature" applies per source
+   * (Ironscale Hydra's ruling: a counter per creature). */
+  readonly perEvent?: true;
+  /** With `then`: its "that many" is the damage even when it can't be
+   * prevented and so isn't (rule 615.12 — Jared Carthalion, True Heir's
+   * ruling). Without it, "x" is the damage actually prevented (Swans of Bryn
+   * Argoll's "prevented this way"). */
+  readonly thenCountsUnprevented?: true;
+}
+
+/**
+ * A redirection (rule 614.9): all of the damage is dealt by the same source to
+ * this permanent (`"self"` — Palisade Giant's "all damage that would be dealt
+ * to you and other permanents you control is dealt to this creature instead"),
+ * to the permanent it's attached to (`"attached"` — Pariah), or to the
+ * recipient's controller (`"recipient-controller"` — Treacherous Link). Does
+ * nothing while that isn't a creature, planeswalker or battle on the
+ * battlefield, or a player in the game, or is the recipient already; and
+ * applies to a damage event once (614.5), so two Palisade Giants don't send it
+ * back and forth.
+ */
+export interface DamageRedirection {
+  readonly redirect: "self" | "attached" | "recipient-controller";
 }

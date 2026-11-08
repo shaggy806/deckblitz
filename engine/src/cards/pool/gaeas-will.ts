@@ -26,7 +26,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "player-effect", duration: "end-of-turn", mayPlay: { from: "graveyard", play: true } },
-      { kind: "player-effect", duration: "end-of-turn", graveyardExile: { filter: { ownedBy: "you", token: false } } },
+      { kind: "replacement-effect", duration: "end-of-turn", replacement: { event: "would-be-put-into-graveyard", instead: "exile", filter: { ownedBy: "you", token: false } } },
     ],
   },
 });

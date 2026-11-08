@@ -20,7 +20,7 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-add-counter",
-        multiplier: 2,
+        instead: { modify: { times: 2 } },
         filter: { anyOf: [{ type: "creature" }, { subtype: "Spacecraft" }, { subtype: "Planet" }] },
       },
       text: DOUBLE_TEXT,

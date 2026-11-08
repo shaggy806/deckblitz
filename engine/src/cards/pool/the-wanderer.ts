@@ -20,7 +20,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", combat: false, prevent: true, to: "your-side", toOther: true },
+      replacement: { event: "would-deal-damage", combat: false, instead: { prevent: true }, to: "your-side", toOther: true },
       text: STATIC_TEXT,
     },
   ],

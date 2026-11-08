@@ -35,10 +35,10 @@ const BILBO = "Test Birthday Celebrant";
 const LORD = "Test Lord of Pain";
 const SCHOLAR = "Test Double Drawer";
 const registry = createDefaultRegistry()
-  .register(enchantment(BRUVAC, { event: "would-mill", who: "opponent", multiplier: 2 }))
-  .register(enchantment(BILBO, { event: "would-gain-life", who: "you", plus: 1 }))
+  .register(enchantment(BRUVAC, { event: "would-mill", who: "opponent", instead: { modify: { times: 2 } } }))
+  .register(enchantment(BILBO, { event: "would-gain-life", who: "you", instead: { modify: { plus: 1 } } }))
   .register(enchantment(LORD, { event: "would-gain-life", who: "opponent", prevent: true }))
-  .register(enchantment(SCHOLAR, { event: "would-draw", who: "you", instead: { draws: 2 } }));
+  .register(enchantment(SCHOLAR, { event: "would-draw", who: "you", instead: { modify: { set: 2 } } }));
 
 const setUp = () => {
   const game = Game.create({

@@ -11,7 +11,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-gain-life", who: "you", multiplier: 2 },
+      replacement: { event: "would-gain-life", who: "you", instead: { modify: { times: 2 } } },
       text: TEXT,
     },
   ],

@@ -24,7 +24,7 @@ export default defineCard({
         kind: "all",
         of: COLORS.map((color) => ({ kind: "controls" as const, filter: { colors: [color] }, atLeast: 1, countsSelf: true })),
       },
-      replacement: { event: "would-deal-damage", prevent: true, to: "you" },
+      replacement: { event: "would-deal-damage", instead: { prevent: true }, to: "you" },
       text: TEXT,
     },
   ],

@@ -16,7 +16,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", to: "your-side", toFilter: { subtypes: ["Hero"] }, preventAllBut: 1 },
+      replacement: { event: "would-deal-damage", to: "your-side", toFilter: { subtypes: ["Hero"] }, instead: { prevent: { allBut: 1 } } },
       text: "If a source would deal damage to you or a Hero you control, prevent all but 1 of that damage.",
     },
   ],

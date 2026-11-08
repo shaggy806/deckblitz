@@ -29,7 +29,7 @@ export default defineCard({
       replacement: {
         event: "would-draw",
         who: "you",
-        instead: { draws: 4 },
+        instead: { modify: { set: 4 } },
         exceptFirstInDrawStep: true,
         firstEachTurn: true,
       },

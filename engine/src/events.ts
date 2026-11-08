@@ -1402,7 +1402,7 @@ export type GameEvent =
       readonly target: TargetRef;
       readonly amount: number;
       /** A one-shot or turn-long shield's: the resolution that made it
-       * (`PreventionShield.madeIn`) — "damage prevented this way". */
+       * (`ActiveReplacement.madeIn`) — "damage prevented this way". */
       readonly shieldMadeIn?: number;
     })
   | (Base & {

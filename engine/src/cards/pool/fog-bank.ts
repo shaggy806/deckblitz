@@ -27,12 +27,12 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", combat: true, prevent: true, to: "self" },
+      replacement: { event: "would-deal-damage", combat: true, instead: { prevent: true }, to: "self" },
       text: PREVENT_TEXT,
     },
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", combat: true, prevent: true, fromSelf: true },
+      replacement: { event: "would-deal-damage", combat: true, instead: { prevent: true }, fromSelf: true },
       text: PREVENT_TEXT,
     },
   ],

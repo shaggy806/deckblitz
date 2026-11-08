@@ -18,7 +18,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", to: "attached", preventAmount: 2 },
+      replacement: { event: "would-deal-damage", to: "attached", instead: { prevent: 2 } },
       text: PREVENT_TEXT,
     },
   ],

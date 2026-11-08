@@ -13,7 +13,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-create-token", multiplier: 2 },
+      replacement: { event: "would-create-token", instead: { modify: { times: 2 } } },
       text:
         "If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead.",
     },

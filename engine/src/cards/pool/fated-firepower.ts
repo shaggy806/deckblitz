@@ -21,7 +21,7 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-deal-damage",
-        plusOf: { countersOnThis: "fire" },
+        instead: { modify: { plus: { countersOn: "source", counter: "fire" } } },
         source: { controlledBy: "you" },
         to: "opponent-side",
       },

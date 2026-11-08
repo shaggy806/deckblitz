@@ -17,10 +17,9 @@ export default defineCard({
       // deals none while on the stack).
       replacement: {
         event: "would-deal-damage",
-        prevent: true,
+        instead: { prevent: true, then: { kind: "create-token", token: "Elemental Shaman Token (Haste)", count: "x" } },
         source: { typesAnyOf: ["instant", "sorcery"], controlledBy: "you" },
         to: "opponent",
-        then: { kind: "create-token", token: "Elemental Shaman Token (Haste)", count: "x" },
       },
       text: "If a spell you control would deal damage to an opponent, prevent that damage. Create a 3/1 red Elemental Shaman creature token with haste for each 1 damage prevented this way.",
     },

@@ -30,12 +30,12 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", to: "opponent-side", multiplier: 2 },
+      replacement: { event: "would-deal-damage", to: "opponent-side", instead: { modify: { times: 2 } } },
       text: "If a source would deal damage to an opponent or a permanent an opponent controls, that source deals double that damage to that player or permanent instead.",
     },
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", to: "your-side", preventHalf: "up" },
+      replacement: { event: "would-deal-damage", to: "your-side", instead: { prevent: { half: "up" } } },
       text: "If a source would deal damage to you or a permanent you control, prevent half that damage, rounded up.",
     },
   ],

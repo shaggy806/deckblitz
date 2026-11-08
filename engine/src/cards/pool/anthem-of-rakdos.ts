@@ -38,7 +38,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "hand-size", atMost: 0 },
-      replacement: { event: "would-deal-damage", multiplier: 2, source: { controlledBy: "you" } },
+      replacement: { event: "would-deal-damage", instead: { modify: { times: 2 } }, source: { controlledBy: "you" } },
       text: HELLBENT_TEXT,
     },
   ],

@@ -23,7 +23,7 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-deal-damage",
-        prevent: true,
+        instead: { prevent: true },
         fromSelf: true,
         toFilter: { type: "creature", supertype: "snow" },
       },

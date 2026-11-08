@@ -41,7 +41,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-create-token", multiplier: 2 },
+      replacement: { event: "would-create-token", instead: { modify: { times: 2 } } },
       text: DOUBLE_TEXT,
     },
   ],

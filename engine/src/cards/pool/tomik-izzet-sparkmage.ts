@@ -23,7 +23,7 @@ export default defineCard({
     {
       // Artist's Talent's level 3, plus 1 rather than 2.
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", plus: 1, combat: false, to: "opponent-side", source: { controlledBy: "you" } },
+      replacement: { event: "would-deal-damage", instead: { modify: { plus: 1 } }, combat: false, to: "opponent-side", source: { controlledBy: "you" } },
       text: "If a source you control would deal noncombat damage to an opponent or a permanent an opponent controls, it deals that much damage plus 1 instead.",
     },
   ],

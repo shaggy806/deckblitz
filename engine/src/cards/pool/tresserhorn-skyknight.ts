@@ -28,7 +28,7 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-deal-damage",
-        prevent: true,
+        instead: { prevent: true },
         to: "self",
         source: { types: ["creature"], keyword: "first-strike" },
       },

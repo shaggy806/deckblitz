@@ -20,7 +20,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-gain-life", who: "you", plus: 1 },
+      replacement: { event: "would-gain-life", who: "you", instead: { modify: { plus: 1 } } },
       text: "If you would gain life, you gain that much life plus 1 instead.",
     },
     {

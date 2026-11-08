@@ -20,12 +20,12 @@ export default defineCard({
     // and its `toFilter` a permanent.
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", prevent: true, to: "you", source: { chosenName: true } },
+      replacement: { event: "would-deal-damage", instead: { prevent: true }, to: "you", source: { chosenName: true } },
       text: PREVENT,
     },
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", prevent: true, toFilter: { controlledBy: "you" }, source: { chosenName: true } },
+      replacement: { event: "would-deal-damage", instead: { prevent: true }, toFilter: { controlledBy: "you" }, source: { chosenName: true } },
       text: PREVENT,
     },
   ],

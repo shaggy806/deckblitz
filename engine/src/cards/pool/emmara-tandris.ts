@@ -27,7 +27,7 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-deal-damage",
-        prevent: true,
+        instead: { prevent: true },
         toFilter: { type: "creature", token: true, controlledBy: "you" },
       },
       text: TEXT,

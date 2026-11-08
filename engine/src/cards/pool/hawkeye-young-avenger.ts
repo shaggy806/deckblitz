@@ -19,7 +19,7 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-deal-damage",
-        plusOf: "this-power",
+        instead: { modify: { plus: { powerOf: "source" } } },
         combat: false,
         source: { controlledBy: "you" },
         to: "opponent-side",

@@ -37,7 +37,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-add-counter", plus: 1, counterKind: "+1/+1" },
+      replacement: { event: "would-add-counter", instead: { modify: { plus: 1 } }, counterKind: "+1/+1" },
       text: "If one or more +1/+1 counters would be put on a permanent you control, that many plus one +1/+1 counters are put on that permanent instead.",
     },
   ],

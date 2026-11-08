@@ -19,7 +19,7 @@ export default defineCard({
   toughness: 3,
   text: `${LIFE_TEXT}\n${PARTY_TEXT}`,
   static: [
-    { affects: { scope: "self" }, replacement: { event: "would-gain-life", who: "you", plus: 1 }, text: LIFE_TEXT },
+    { affects: { scope: "self" }, replacement: { event: "would-gain-life", who: "you", instead: { modify: { plus: 1 } } }, text: LIFE_TEXT },
   ],
   activated: [
     {

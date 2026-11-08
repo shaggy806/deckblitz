@@ -13,7 +13,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", to: "attached", redirect: "recipient-controller" },
+      replacement: { event: "would-deal-damage", to: "attached", instead: { redirect: "recipient-controller" } },
       text: "All damage that would be dealt to enchanted creature is dealt to its controller instead.",
     },
   ],

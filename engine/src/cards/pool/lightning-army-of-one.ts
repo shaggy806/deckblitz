@@ -26,9 +26,11 @@ export default defineCard({
       trigger: { on: "deals-combat-damage-to-player", who: "self" },
       targets: [],
       effect: {
-        kind: "player-effect",
+        kind: "replacement-effect",
         duration: "until-your-next-turn",
-        damageTo: { who: "trigger-player", multiplier: 2, permanentsToo: true },
+        replacement: { event: "would-deal-damage", instead: { modify: { times: 2 } } },
+        players: "trigger-player",
+        permanentsToo: true,
       },
       resolve: null,
       text: STAGGER_TEXT,

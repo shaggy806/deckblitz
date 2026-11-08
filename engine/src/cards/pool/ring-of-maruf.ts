@@ -19,12 +19,11 @@ export default defineCard({
       cost: { mana: "{5}", tap: true, do: { kind: "exile", target: "source" } },
       targets: [],
       effect: {
-        kind: "player-effect",
+        kind: "replacement-effect",
         duration: "end-of-turn",
-        nextDrawInstead: {
-          effect: { kind: "search-library", filter: {}, destination: "hand", min: 0, max: 1, outside: "only" },
-          text: "Instead, put a card you own from outside the game into your hand.",
-        },
+        next: true,
+        replacement: { event: "would-draw", who: "you", instead: { effect: { kind: "search-library", filter: {}, destination: "hand", min: 0, max: 1, outside: "only" },
+          text: "Instead, put a card you own from outside the game into your hand." } },
       },
       resolve: null,
       text: TEXT,

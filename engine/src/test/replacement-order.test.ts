@@ -30,7 +30,7 @@ const blightEngine = defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-add-counter", plus: 1, counterKind: "-1/-1", filter: { type: "creature" } },
+      replacement: { event: "would-add-counter", instead: { modify: { plus: 1 } }, counterKind: "-1/-1", filter: { type: "creature" } },
       text: BLIGHT_TEXT,
     },
   ],

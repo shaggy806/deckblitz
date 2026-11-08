@@ -213,7 +213,7 @@ describe("Fog — combat-damage prevention (rule 614)", () => {
       card: named(game, game.handOf(A), "Fog"),
     });
     game.advanceUntil(stackEmpty);
-    expect(game.state.preventAllCombatDamage).toBe(true);
+    expect(game.state.activeReplacements).toHaveLength(1);
 
     a.declareAttackersFn = () => [{ attacker: bears, defender: B }];
     game.advanceUntil(toPostcombat);
@@ -233,10 +233,10 @@ describe("Fog — combat-damage prevention (rule 614)", () => {
       card: named(game, game.handOf(A), "Fog"),
     });
     game.advanceUntil(stackEmpty);
-    expect(game.state.preventAllCombatDamage).toBe(true);
+    expect(game.state.activeReplacements).toHaveLength(1);
 
     game.advanceUntil((s) => s.turn.number === 2 && s.turn.step === "precombat-main");
-    expect(game.state.preventAllCombatDamage).toBe(false);
+    expect(game.state.activeReplacements).toHaveLength(0);
   });
 });
 

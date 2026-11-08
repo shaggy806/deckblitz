@@ -12,7 +12,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", to: "you", redirect: "attached" },
+      replacement: { event: "would-deal-damage", to: "you", instead: { redirect: "attached" } },
       text: "All damage that would be dealt to you is dealt to equipped creature instead.",
     },
   ],

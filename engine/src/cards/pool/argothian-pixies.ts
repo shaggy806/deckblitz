@@ -19,7 +19,7 @@ export default defineCard({
     },
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", prevent: true, to: "self", source: { types: ["artifact", "creature"] } },
+      replacement: { event: "would-deal-damage", instead: { prevent: true }, to: "self", source: { types: ["artifact", "creature"] } },
       text: "Prevent all damage that would be dealt to this creature by artifact creatures.",
     },
   ],

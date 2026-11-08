@@ -385,6 +385,7 @@ import _poolHorizonCanopy from "../pool/horizon-canopy.js";
 import _poolHorrificAssault from "../pool/horrific-assault.js";
 import _poolHuangZhongShuGeneral from "../pool/huang-zhong-shu-general.js";
 import _poolHulkBrutalBrawler from "../pool/hulk-brutal-brawler.js";
+import _poolHullbreacher from "../pool/hullbreacher.js";
 import _poolHungryGraffalon from "../pool/hungry-graffalon.js";
 import _poolHurlThroughHell from "../pool/hurl-through-hell.js";
 import _poolHydromorphGuardian from "../pool/hydromorph-guardian.js";
@@ -1402,6 +1403,7 @@ const shard: CardShard = {
     _poolHorrificAssault,
     _poolHuangZhongShuGeneral,
     _poolHulkBrutalBrawler,
+    _poolHullbreacher,
     _poolHungryGraffalon,
     _poolHurlThroughHell,
     _poolHydromorphGuardian,

@@ -28,7 +28,7 @@ describe("damage redirection", () => {
     hit(game, goblin, ref(warrior), 3);
     expect(damage(game, wall)).toBe(2);
     expect(damage(game, warrior)).toBe(1);
-    expect(game.state.preventionShields).toHaveLength(0);
+    expect(game.state.activeReplacements).toHaveLength(0);
   });
 
   it("can redirect to another en-Kor, more damage than its toughness with more damage than its toughness", () => {
@@ -64,7 +64,7 @@ describe("damage redirection", () => {
     hit(game, goblin, ref(warrior), 1);
     expect(damage(game, warrior)).toBe(0);
     expect(damage(game, wall)).toBe(0);
-    expect(game.state.preventionShields).toHaveLength(1);
+    expect(game.state.activeReplacements).toHaveLength(1);
   });
 
   it("Shaman en-Kor takes all of a chosen source's next damage to the creature", () => {

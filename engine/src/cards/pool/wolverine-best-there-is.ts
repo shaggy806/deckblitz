@@ -23,7 +23,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", multiplier: 2, fromSelf: true },
+      replacement: { event: "would-deal-damage", instead: { modify: { times: 2 } }, fromSelf: true },
       text: DOUBLE_TEXT,
     },
   ],

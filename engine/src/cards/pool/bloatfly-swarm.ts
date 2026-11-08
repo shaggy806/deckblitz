@@ -32,10 +32,7 @@ export default defineCard({
       condition: { kind: "self-counters", counter: "+1/+1", compare: { op: "gte", n: 1 } },
       replacement: {
         event: "would-deal-damage",
-        prevent: true,
-        perEvent: true,
-        to: "self",
-        then: {
+        instead: { prevent: true, then: {
           kind: "sequence",
           effects: [
             {
@@ -46,7 +43,8 @@ export default defineCard({
             },
             { kind: "remove-counter", target: "source", counter: "+1/+1", amount: "x" },
           ],
-        },
+        }, perEvent: true },
+        to: "self",
       },
       text: PREVENT_TEXT,
     },

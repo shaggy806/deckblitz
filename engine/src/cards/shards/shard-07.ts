@@ -623,6 +623,7 @@ import _poolPhantomWurm from "../pool/phantom-wurm.js";
 import _poolPilferingImp from "../pool/pilfering-imp.js";
 import _poolPinpointAvalanche from "../pool/pinpoint-avalanche.js";
 import _poolPitilessCarnage from "../pool/pitiless-carnage.js";
+import _poolPlagiarize from "../pool/plagiarize.js";
 import _poolPlagueWind from "../pool/plague-wind.js";
 import _poolPlunderTheTrollshaws from "../pool/plunder-the-trollshaws.js";
 import _poolPollenbrightDruid from "../pool/pollenbright-druid.js";
@@ -1637,6 +1638,7 @@ const shard: CardShard = {
     _poolPilferingImp,
     _poolPinpointAvalanche,
     _poolPitilessCarnage,
+    _poolPlagiarize,
     _poolPlagueWind,
     _poolPlunderTheTrollshaws,
     _poolPollenbrightDruid,

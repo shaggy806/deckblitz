@@ -30,9 +30,9 @@ export default defineCard({
       at: [3],
       targets: [],
       effect: {
-        kind: "player-effect",
+        kind: "replacement-effect",
         duration: "end-of-turn",
-        damageReplacement: { plus: 2, source: { colors: ["R"], controlledBy: "you" } },
+        replacement: { event: "would-deal-damage", instead: { modify: { plus: 2 } }, source: { colors: ["R"], controlledBy: "you" } },
       },
       resolve: null,
       text: "III — If a red source you control would deal damage to a permanent or player this turn, it deals that much damage plus 2 to that permanent or player instead.",

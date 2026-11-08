@@ -32,13 +32,11 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-deal-damage",
-        prevent: true,
-        perEvent: true,
-        to: "self",
-        then: {
+        instead: { prevent: true, then: {
           kind: "choose-opponent",
           then: { kind: "gain-control", target: "source", untilEndOfTurn: false, who: "that-player" },
-        },
+        }, perEvent: true },
+        to: "self",
       },
       text: BETRAYER,
     },

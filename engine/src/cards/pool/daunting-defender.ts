@@ -18,7 +18,7 @@ export default defineCard({
       replacement: {
         event: "would-deal-damage",
         toFilter: { type: "creature", subtype: "Cleric", controlledBy: "you" },
-        preventAmount: 1,
+        instead: { prevent: 1 },
       },
       text: TEXT,
     },

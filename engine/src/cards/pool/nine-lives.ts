@@ -17,8 +17,7 @@ export default defineCard({
       replacement: {
         event: "would-deal-damage",
         to: "you",
-        prevent: true,
-        then: { kind: "add-counter", target: "source", counter: "incarnation", amount: 1 },
+        instead: { prevent: true, then: { kind: "add-counter", target: "source", counter: "incarnation", amount: 1 } },
       },
       text: "If a source would deal damage to you, prevent that damage and put an incarnation counter on this enchantment.",
     },

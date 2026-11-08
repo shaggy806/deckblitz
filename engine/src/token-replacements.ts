@@ -97,8 +97,8 @@ function applyOne(
   const filter = r.ofTokens ?? (r.creatureTokensInstead !== undefined ? { type: "creature" as const } : undefined);
   const matching = (t: PlannedTokens): boolean => tokenKindMatches(kindsOf(search, t.name), filter);
   // Ojer Taq's "three times that many" of the tokens `ofTokens` names.
-  if (r.multiplier !== undefined) {
-    const by = r.multiplier;
+  if (r.instead?.modify.times !== undefined) {
+    const by = r.instead.modify.times;
     return tokens.map((t) =>
       matching(t) ? { name: t.name, count: Math.min(t.count * by, Math.max(search.cap, t.count)) } : t,
     );

@@ -193,11 +193,12 @@ import {
 import type { Characteristics } from "./characteristics.js";
 import { planTokenEvent } from "./token-replacements.js";
 import type { PlannedTokens, TokenKind, TokenReplacementInstance } from "./token-replacements.js";
-import { counterTotalInBestOrder } from "./replacements.js";
+import { counterTotalInBestOrder, insteadEffect, insteadModify } from "./replacements.js";
 import type {
   CounterMultiplierReplacement,
   CounterReplacementSteps,
   DamageMultiplierReplacement,
+  DamageRedirection,
   DrawRedirectReplacement,
   AsEntersAction,
   EnterInstead,
@@ -496,7 +497,7 @@ import type {
   TriggerOrderEntry,
   PublicStint,
   PlayerCounterKind,
-  PreventionShield,
+  ActiveReplacement,
   StandingModeAnswer,
   ReflexiveTrigger,
   PtModifier,
@@ -690,7 +691,7 @@ interface AlternativeCostOffer {
 
 interface DamageApplied {
   readonly statics: readonly string[];
-  readonly shields: readonly PreventionShield[];
+  readonly shields: readonly ActiveReplacement[];
 }
 const NO_DAMAGE_APPLIED: DamageApplied = { statics: [], shields: [] };
 
@@ -705,13 +706,48 @@ function isTargetKeyed(mod: NonNullable<StaticAbility["costModification"]>): boo
   return mod.targeting !== undefined || mod.targetingSource === true;
 }
 
+/** A `would-draw` replacement that makes the draw an effect: whose, and the
+ * resolved record it came from, if one did. */
+interface DrawEffectReplacement {
+  /** Keeps it off the draws inside its own effect (rule 614.5). */
+  readonly key: string;
+  readonly source: ObjectId;
+  readonly controller: PlayerId;
+  readonly effect: EffectSpec;
+  readonly record?: ActiveReplacement;
+}
+
+/** A player event's replacement and the permanent it's on. */
+interface PlayerEventReplacement<R> {
+  readonly r: R;
+  readonly by: GameObject;
+}
+
+/** Who's replacing a damage event: a permanent, or a resolved effect's
+ * source and controller. */
+type DamageReplacer = Pick<GameObject, "id" | "controller" | "attachedTo" | "attachedToPlayer">;
+
 /** One effect that would change a damage event — see `Game.damageSteps`. */
-type DamageStep =
+type DamageStep = DamageStepKind & {
+  /** Only when each source's share is this much or less, or this much or
+   * more (Callous Giant; Forethought Amulet). */
+  readonly ifAtMost?: number;
+  readonly ifAtLeast?: number;
+  /** A "next time" record this step uses up, if it applies (615.8). */
+  readonly spends?: ActiveReplacement;
+};
+
+type DamageStepKind =
   | { readonly kind: "times"; readonly by: number }
   | { readonly kind: "plus"; readonly by: number }
   /** "It deals 2 damage … instead", each source's (Equal Treatment). */
   | { readonly kind: "set"; readonly to: number }
   | { readonly kind: "at-least"; readonly power: number }
+  /** Lowered to this, never raised (Forethought Amulet). */
+  | { readonly kind: "at-most"; readonly to: number }
+  /** The event becomes this effect and never happens (rules 614.1a, 614.6):
+   * not prevention, so it applies to damage that can't be prevented. */
+  | { readonly kind: "replaced"; readonly by: ObjectId; readonly controller: PlayerId; readonly effect: EffectSpec; readonly key: string; readonly record?: ActiveReplacement }
   | {
       readonly kind: "prevent-all";
       readonly by: ObjectId;
@@ -721,10 +757,10 @@ type DamageStep =
       /** `then`'s "that many" is the damage even when it can't be prevented
        * (Jared Carthalion's ruling, rule 615.12). */
       readonly thenCountsUnprevented?: true;
-      /** Only when the damage is this much or less (Callous Giant). */
-      readonly ifAtMost?: number;
     }
-  | { readonly kind: "shield"; readonly shield: PreventionShield }
+  /** "Instead that damage is dealt, but …" (Wolverine): done first, beside it. */
+  | { readonly kind: "also"; readonly by: ObjectId; readonly controller: PlayerId; readonly effect: EffectSpec; readonly key: string }
+  | { readonly kind: "shield"; readonly shield: ActiveReplacement }
   /** A shield counter's "prevent that damage and remove a shield counter"
    * (rule 122.1c): all of it, one counter however much — none more when
    * one already went this same simultaneous event (`spent`). */
@@ -755,7 +791,7 @@ function runDamageSteps(
   amount: number,
   sources: number,
   order: readonly DamageStep[],
-  left: (shield: PreventionShield) => number,
+  left: (shield: ActiveReplacement) => number,
   /** Damage that can't be prevented (rule 615.12): each prevention effect
    * still applies — its other effects happen — but prevents none of it, and
    * a shield isn't used up. */
@@ -763,7 +799,7 @@ function runDamageSteps(
 ): {
   readonly dealt: number;
   readonly shieldUsed: number;
-  readonly shields: readonly { readonly shield: PreventionShield; readonly prevented: number }[];
+  readonly shields: readonly { readonly shield: ActiveReplacement; readonly prevented: number }[];
   readonly preventedAll?: {
     readonly step: Extract<DamageStep, { kind: "prevent-all" }>;
     readonly amount: number;
@@ -772,15 +808,23 @@ function runDamageSteps(
   };
   readonly shieldCounter?: { readonly step: Extract<DamageStep, { kind: "shield-counter" }>; readonly amount: number };
   readonly redirected?: { readonly step: Extract<DamageStep, { kind: "redirect" }>; readonly amount: number };
+  readonly replaced?: { readonly step: Extract<DamageStep, { kind: "replaced" }>; readonly amount: number };
+  /** The "next time" records the steps that applied used up. */
+  readonly spends: readonly ActiveReplacement[];
+  readonly alsos: readonly Extract<DamageStep, { kind: "also" }>[];
 } {
   let total = amount * sources;
   let shieldUsed = 0;
-  const shields: { shield: PreventionShield; prevented: number }[] = [];
+  const shields: { shield: ActiveReplacement; prevented: number }[] = [];
   let preventedAll: { step: Extract<DamageStep, { kind: "prevent-all" }>; amount: number; thenAmount?: number } | undefined;
   let shieldCounter: { step: Extract<DamageStep, { kind: "shield-counter" }>; amount: number } | undefined;
+  const spends: ActiveReplacement[] = [];
+  const alsos: Extract<DamageStep, { kind: "also" }>[] = [];
   const rest = () => ({
     shieldUsed,
     shields,
+    spends,
+    alsos,
     ...(preventedAll !== undefined ? { preventedAll } : {}),
     ...(shieldCounter !== undefined ? { shieldCounter } : {}),
   });
@@ -788,6 +832,11 @@ function runDamageSteps(
   const each = (): number => total / sources;
   for (const step of order) {
     if (total <= 0) break;
+    if (step.ifAtMost !== undefined && each() > step.ifAtMost) continue;
+    if (step.ifAtLeast !== undefined && each() < step.ifAtLeast) continue;
+    // A prevention shield isn't used up by damage that can't be prevented
+    // (615.12).
+    if (step.spends !== undefined && !(unpreventable && step.kind.startsWith("prevent"))) spends.push(step.spends);
     switch (step.kind) {
       case "times":
         total *= step.by;
@@ -802,13 +851,20 @@ function runDamageSteps(
       case "at-least":
         total = Math.max(total, step.power * sources);
         break;
+      case "at-most":
+        total = Math.min(total, step.to * sources);
+        break;
+      case "replaced":
+        return { dealt: 0, ...rest(), replaced: { step, amount: total } };
+      case "also":
+        alsos.push(step);
+        break;
       case "halve":
         total = (step.round === "up" ? Math.ceil(each() / 2) : Math.floor(each() / 2)) * sources;
         break;
       case "redirect":
         return { dealt: 0, ...rest(), redirected: { step, amount: total } };
       case "prevent-all":
-        if (step.ifAtMost !== undefined && each() > step.ifAtMost) break;
         if (unpreventable) {
           preventedAll ??= { step, amount: 0, ...(step.thenCountsUnprevented === true ? { thenAmount: total } : {}) };
           break;
@@ -842,10 +898,10 @@ function runDamageSteps(
           break;
         }
         // An "all damage this turn" shield takes the whole hit and stays.
-        const prevented = step.shield.all === true ? total : Math.min(total, left(step.shield));
+        const prevented = shieldTakesAll(step.shield) ? total : Math.min(total, left(step.shield));
         if (prevented <= 0) break;
         total -= prevented;
-        if (step.shield.all !== true) shieldUsed += prevented;
+        if (!shieldTakesAll(step.shield)) shieldUsed += prevented;
         shields.push({ shield: step.shield, prevented });
         break;
       }
@@ -929,8 +985,19 @@ function drawReplacementReaches(r: DrawRedirectReplacement, event: WouldDrawEven
 
 /** How much damage a prevention shield can still take: a "next time" shield
  * takes the whole of the next event, however much. */
-const shieldLeft = (shield: PreventionShield): number =>
-  shield.nextTime === true ? Number.MAX_SAFE_INTEGER : shield.amount;
+const shieldLeft = (shield: ActiveReplacement): number =>
+  shield.next === true ? Number.MAX_SAFE_INTEGER : (shield.left ?? 0);
+
+/** A shield neither counted nor once-only: all of the damage it covers, for
+ * as long as it lasts (Gideon Jura's "prevent all damage … this turn"). */
+const shieldTakesAll = (shield: ActiveReplacement): boolean => shield.next !== true && shield.left === undefined;
+
+/** The replacement record a prevention effect keeps. */
+const preventionRecord = (combat?: boolean): DamageMultiplierReplacement => ({
+  event: "would-deal-damage",
+  instead: { prevent: true },
+  ...(combat !== undefined ? { combat } : {}),
+});
 
 /** Every order of `items` but the one given (few: the effects on one damage
  * event). */
@@ -2014,7 +2081,7 @@ export class Game {
     /** "Next time" shields used in this event (rule 615.8): they cover the
      * whole of it — a creature's combat damage to two blockers, a sweeper's
      * to every creature — and go once it's dealt. */
-    readonly nextTimeSpent: PreventionShield[];
+    readonly nextTimeSpent: ActiveReplacement[];
     readonly dealtDamage: Map<
       string,
       { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number }
@@ -2129,6 +2196,9 @@ export class Game {
    * 122.1c, 614.5), so the rest of that damage is prevented with no second
    * counter. Not game state: it only ever spans one synchronous call. */
   private shieldCountersSpent: Set<ObjectId> | null = null;
+  /** Replacements carrying out their own effect (rule 614.5), so an event
+   * inside it isn't replaced by them again. Synchronous only. */
+  private applyingReplacements = new Set<string>();
   /** In the same event (see {@link shieldCountersSpent}), the "prevent that
    * damage and …" follow-ups owed: one per replacement and recipient, "that
    * many" the total it prevented, applied once the whole event is dealt —
@@ -2402,9 +2472,8 @@ export class Game {
       pendingSacrifices: [],
       pendingSacrificeVictims: [],
       suspendedResolutions: [],
-      preventAllCombatDamage: false,
       hexproofPlayers: [],
-      preventionShields: [],
+      activeReplacements: [],
       extraTurns: [],
       extraCombats: 0,
       spellsCastThisTurn: 0,
@@ -2431,6 +2500,9 @@ export class Game {
       controllers[player] =
         env.controllers?.[player] ?? new AutomaticController(player);
     }
+    // A snapshot saved before `activeReplacements` (2026-11-08): its shields
+    // are old, and only a saved position reads them.
+    state.activeReplacements ??= [];
     const game = new Game(state, registry, controllers, createRng(state.rngState));
     game.giveEmblemsTheirObjects();
     return game;
@@ -5939,7 +6011,7 @@ export class Game {
       }
       if (trigger.triggerObject !== undefined) pinned.add(trigger.triggerObject);
     }
-    for (const shield of this.state.preventionShields) {
+    for (const shield of this.state.activeReplacements) {
       if (shield.target?.kind === "object") pinned.add(shield.target.object);
       if (shield.recipients?.except !== undefined) pinned.add(shield.recipients.except.object);
       if (shield.byFilter?.except !== undefined) pinned.add(shield.byFilter.except.object);
@@ -7870,6 +7942,22 @@ export class Game {
       if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
       return;
     }
+    // A would-create-token replacement's "you may instead" (Moonlit
+    // Meditation): the first mode makes the tokens as the effect said, under
+    // its own source; the other is the replacement's effect.
+    if (awaiting.replacedFor !== undefined) {
+      const { source: from, controller: by, targets, x } = awaiting.replacedFor;
+      const chosen = awaiting.modes[modeIndices[0] ?? 0];
+      this.state.awaiting = null;
+      if (chosen !== undefined) {
+        const ctx = (modeIndices[0] ?? 0) === 0
+          ? this.makeResolutionContext(from, by, targets, x)
+          : this.makeResolutionContext(awaiting.source, by, [], awaiting.x);
+        applyEffectSpec(chosen.effect, ctx);
+      }
+      if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
+      return;
+    }
     // Which replacement applies to a draw (rule 616.1 — the Words cycle).
     if (awaiting.nextDrawFor !== undefined) {
       this.state.awaiting = null;
@@ -8747,8 +8835,6 @@ export class Game {
       prevActive !== null ? this.state.players[prevActive].spellsCastThisTurn : 0;
     // Fog's "prevent all combat damage this turn" shield and any one-shot
     // prevention shields lapse; a fresh turn owes no extra combats yet.
-    this.state.preventAllCombatDamage = false;
-    delete this.state.combatDamagePreventedBy;
     this.state.hexproofPlayers = [];
     delete this.state.hexproofFromPlayers;
     delete this.state.spellGrantsThisTurn;
@@ -8757,14 +8843,6 @@ export class Game {
     // permanent window into a hand.
     this.state.revealedThisTurn = [];
     delete this.state.ceasedTokens;
-    // Those lasting "until your next turn" or while an object stays go on
-    // (below); "this turn" ones lapse.
-    this.state.preventionShields = this.state.preventionShields.filter(
-      (s) =>
-        s.untilTurnOf !== undefined ||
-        (s.whileOn !== undefined && this.state.objects[s.whileOn.object]?.zone === "battlefield" &&
-          (this.state.objects[s.whileOn.object]?.zoneChangeCount ?? 0) === s.whileOn.zoneChangeCount),
-    );
     delete this.state.damageUnpreventableThisTurn;
     delete this.state.powerUpsBarredThisTurn;
     // "When that creature dies this turn" watches no longer, nor does "when
@@ -8948,10 +9026,6 @@ export class Game {
     // "Until your next turn" effects end as that turn begins (the active
     // player is the new one by now).
     beginningFor.push(this.activePlayer);
-    // "Until your next turn" damage rules end as that turn begins.
-    this.state.preventionShields = this.state.preventionShields.filter(
-      (s) => s.untilTurnOf === undefined || !beginningFor.includes(s.untilTurnOf),
-    );
     // "Their last turn" is this one now (see `PlayerState.lastTurnTaken`).
     const seatNow = this.state.players[this.activePlayer];
     if (seatNow.lastTurnTaken !== undefined && seatNow.lastTurnTaken !== this.state.turn.number) {
@@ -9134,6 +9208,20 @@ export class Game {
         if (after === undefined) return [e];
         changed = true;
         return after === "ends" ? [] : [{ ...e, expires: after }];
+      });
+    }
+    // A replacement "while it remains": gone with its source (the check at
+    // the event stops it doing anything before then).
+    if (this.state.activeReplacements.length > 0) {
+      this.state.activeReplacements = this.state.activeReplacements.flatMap((r): ActiveReplacement[] => {
+        const after = next(r.expires);
+        if (after === "ends" || (after === undefined && !this.activeReplacementStands(r))) {
+          changed = true;
+          return [];
+        }
+        if (after === undefined) return [r];
+        changed = true;
+        return [{ ...r, expires: after }];
       });
     }
     if (this.state.emblems.some((e) => e.expires !== undefined)) {
@@ -33666,7 +33754,8 @@ export class Game {
           ? target
           : undefined;
       },
-      draw: (player, count) => {
+      draw: (player, baseCount) => {
+        const count = this.drawInstructionReplaced(player, baseCount);
         for (let i = 0; i < count; i += 1) {
           // Behind a dredge question: the rest wait their turn, in order.
           if (this.drawsWaiting()) {
@@ -33686,7 +33775,7 @@ export class Game {
           // draw is the player's to replace or not (its ruling).
           const empty =
             this.state.zones.perPlayer[from].library.length === 0 &&
-            !(this.state.playerEffects ?? []).some((e) => e.nextDrawInstead !== undefined && (e.owner === from || e.owner === player)) &&
+            !this.state.activeReplacements.some((r) => r.replacement.event === "would-draw" && r.next === true && (r.owner === from || r.owner === player)) &&
             !this.drawEffectReplacementsFor(from, { firstInDrawStep: false, before: { all: 0, exceptDrawStepFirst: 0 } }).some((r) => r.may);
           const unasked = this.state.awaiting === null;
           this.drawCard(player);
@@ -36832,11 +36921,6 @@ export class Game {
           const { ofChosenType: _chosen, ...rest } = flash.filter;
           effect = { ...effect, castAsThoughFlash: { ...flash, filter: { ...rest, subtype: chosen } } };
         }
-        // "The next time you would draw": which objects its targets are now.
-        const instead = effect.nextDrawInstead;
-        if (instead !== undefined) {
-          effect = { ...effect, nextDrawInstead: { ...instead, targetStints: this.stintsOfTargets(instead.targets) } };
-        }
         const made = effect.noMaxHandSize === undefined ? effect : { ...effect, timestamp: this.freshTimestamp() };
         // "During their next turn": nothing until that turn begins.
         if (during !== undefined) {
@@ -38127,17 +38211,41 @@ export class Game {
       epic: () => this.applyEpic(controller, source),
       paradigm: () => this.applyParadigm(controller, source),
       preventAllCombatDamage: (by, toYou) => {
-        if (by !== undefined) {
-          (this.state.combatDamagePreventedBy ??= []).push({
-            filter: by,
-            you: controller,
-            ...(toYou === true ? { toYou: true as const } : {}),
-          });
-          this.emit({ type: "combat-damage-prevention-set", partialBy: source });
-          return;
-        }
-        this.state.preventAllCombatDamage = true;
-        this.emit({ type: "combat-damage-prevention-set" });
+        // Fog (rule 615), or what sources matching a filter would deal,
+        // matched as the damage would be dealt (rule 615.1); Deep Wood's
+        // (`toYou`), all damage those sources would deal to its controller.
+        this.state.activeReplacements.push({
+          replacement: preventionRecord(toYou === true ? undefined : true),
+          owner: controller,
+          source,
+          expires: "end-of-turn",
+          ...(toYou === true ? { target: { kind: "player" as const, player: controller } } : {}),
+          ...(by !== undefined ? { byFilter: { filter: by, you: controller } } : {}),
+        });
+        this.emit({ type: "combat-damage-prevention-set", ...(by !== undefined ? { partialBy: source } : {}) });
+      },
+      heal: (target) => {
+        if (target.kind !== "object") return;
+        const object = this.state.objects[target.object];
+        if (object === undefined || object.zone !== "battlefield" || object.damageMarked === 0) return;
+        object.damageMarked = 0;
+        invalidateComputedCache();
+      },
+      tokenEventReplaced: (spec, count) => this.tokenEventReplaced(spec, count, controller, source, targets, x),
+      addReplacementEffect: ({ fromObject, ...record }) => {
+        const object = record.target?.kind === "object" ? this.state.objects[record.target.object] : undefined;
+        const from = fromObject === undefined ? undefined : this.state.objects[fromObject];
+        this.state.activeReplacements.push({
+          ...record,
+          owner: controller,
+          source,
+          targets: [...targets],
+          targetStints: this.stintsOfTargets(targets),
+          x,
+          madeIn: since,
+          ...(object !== undefined ? { zoneChangeCount: object.zoneChangeCount ?? 0 } : {}),
+          ...(from !== undefined ? { from: { object: from.id, zoneChangeCount: from.zoneChangeCount ?? 0, you: controller } } : {}),
+        });
       },
       unpreventably: (fn) => {
         this.unpreventableDepth += 1;
@@ -38155,7 +38263,16 @@ export class Game {
         const target = rule.target === undefined ? undefined : this.splitTargetRef(rule.target);
         const from = rule.from === undefined ? undefined : this.state.objects[rule.from];
         if (rule.from !== undefined && from === undefined) return;
-        const shield: PreventionShield = {
+        const shield: ActiveReplacement = {
+          replacement: preventionRecord(rule.combat),
+          owner: controller,
+          source,
+          expires:
+            rule.duration === "until-your-next-turn"
+              ? { untilTurnOf: controller }
+              : rule.duration === "while-source"
+                ? { whileSource: { id: source, zoneChangeCount: this.state.objects[source]?.zoneChangeCount ?? 0 } }
+                : "end-of-turn",
           ...(target !== undefined ? { target } : {}),
           ...(target?.kind === "object" ? { zoneChangeCount: this.state.objects[target.object]?.zoneChangeCount ?? 0 } : {}),
           // Beside a target, "this creature and/or you" (Glarecaster).
@@ -38169,12 +38286,9 @@ export class Game {
                 },
               }
             : {}),
-          amount: typeof rule.amount === "number" ? rule.amount : 0,
+          ...(typeof rule.amount === "number" ? { left: rule.amount } : {}),
           madeIn: since,
-          combatOnly: rule.combat === true,
-          ...(rule.combat === false ? { noncombatOnly: true as const } : {}),
-          ...(rule.amount === "all" ? { all: true as const } : {}),
-          ...(rule.amount === "next-time" ? { nextTime: true as const } : {}),
+          ...(rule.amount === "next-time" ? { next: true as const } : {}),
           ...(from !== undefined
             ? {
                 from: {
@@ -38195,8 +38309,6 @@ export class Game {
                 },
               }
             : {}),
-          ...(rule.duration === "until-your-next-turn" ? { untilTurnOf: controller } : {}),
-          ...(rule.duration === "while-source" ? { whileOn: stint(source) } : {}),
           ...(rule.gainLifePrevented === true ? { gainLife: controller } : {}),
           ...(rule.redirect !== undefined ? { redirect: this.redirectOf(rule.redirect) } : {}),
           ...(rule.redirectToSource !== undefined ? { redirectToSource: rule.redirectToSource } : {}),
@@ -38204,13 +38316,13 @@ export class Game {
             ? { then: { spec: rule.then, by: source, controller, targets: targets.map((t) => t ?? null) } }
             : {}),
         };
-        this.state.preventionShields.push(shield);
+        this.state.activeReplacements.push(shield);
         this.emit({
           type: "prevention-shield-created",
           ...(target !== undefined ? { target } : {}),
-          amount: shield.amount,
-          ...(shield.all === true ? { all: true as const } : {}),
-          ...(shield.nextTime === true ? { nextTime: true as const } : {}),
+          amount: shield.left ?? 0,
+          ...(shieldTakesAll(shield) ? { all: true as const } : {}),
+          ...(shield.next === true ? { nextTime: true as const } : {}),
         });
       },
       preventDamage: (target, amount, combatOnly, redirectTo) => {
@@ -38218,18 +38330,24 @@ export class Game {
         // A shield on an object is for that object (rule 400.7): this stint.
         const stint =
           target.kind === "object" ? { zoneChangeCount: this.state.objects[target.object]?.zoneChangeCount ?? 0 } : {};
+        const made = {
+          replacement: preventionRecord(combatOnly ? true : undefined),
+          owner: controller,
+          source,
+          expires: "end-of-turn" as const,
+        };
         if (redirectTo !== undefined && amount !== "all") {
           const redirect = this.redirectOf(redirectTo);
-          this.state.preventionShields.push({ target, amount, combatOnly, ...stint, redirect });
+          this.state.activeReplacements.push({ ...made, target, left: amount, ...stint, redirect });
           this.emit({ type: "prevention-shield-created", target, amount, redirectTo });
           return;
         }
         if (amount === "all") {
-          this.state.preventionShields.push({ target, amount: 0, combatOnly, all: true, ...stint, madeIn: since });
+          this.state.activeReplacements.push({ ...made, target, ...stint, madeIn: since });
           this.emit({ type: "prevention-shield-created", target, amount: 0, all: true });
           return;
         }
-        this.state.preventionShields.push({ target, amount, combatOnly, ...stint, madeIn: since });
+        this.state.activeReplacements.push({ ...made, target, left: amount, ...stint, madeIn: since });
         this.emit({ type: "prevention-shield-created", target, amount });
       },
       chooseDamageSource: (filter, then) => {
@@ -38276,7 +38394,11 @@ export class Game {
           typeof protect === "object" && protect.kind === "object"
             ? { zoneChangeCount: this.state.objects[protect.object]?.zoneChangeCount ?? 0 }
             : {};
-        this.state.preventionShields.push({
+        this.state.activeReplacements.push({
+          replacement: preventionRecord(),
+          owner: controller,
+          source,
+          expires: "end-of-turn",
           // "You and/or permanents you control" (Harm's Way): one shield
           // over them all; "any": whatever it would be dealt to.
           ...(typeof protect === "object" ? { target: protect } : {}),
@@ -38284,14 +38406,12 @@ export class Game {
           ...(protect === "your-side-creatures"
             ? { recipients: { players: "you" as const, permanents: { type: "creature" as const, controlledBy: "you" as const }, you: controller } }
             : {}),
-          amount: typeof amount === "number" ? amount : 0,
-          ...(amount === "all" ? { all: true as const } : {}),
+          ...(typeof amount === "number" ? { left: amount } : {}),
           ...(more?.redirectToSource !== undefined ? { redirectToSource: more.redirectToSource } : {}),
           ...(more?.then !== undefined
             ? { then: { spec: more.then, by: source, controller, targets: more.thenTargets ?? targets.map((t) => t ?? null) } }
             : {}),
           madeIn: since,
-          combatOnly: false,
           ...stint,
           from: {
             object: from.object,
@@ -38301,7 +38421,7 @@ export class Game {
             ...(filter !== undefined ? { filter: fixChosenColor(this.state, filter, source) } : {}),
             you: controller,
           },
-          ...(amount === "next-time" ? { nextTime: true as const } : {}),
+          ...(amount === "next-time" ? { next: true as const } : {}),
           ...(gainLifePrevented ? { gainLife: controller } : {}),
           ...(more?.gainLifeFrom !== undefined ? { gainLifeFrom: more.gainLifeFrom } : {}),
           ...(redirectTo !== undefined ? { redirect: this.redirectOf(redirectTo) } : {}),
@@ -39367,6 +39487,25 @@ export class Game {
     mode: "scry" | "surveil",
     then: EffectSpec | null,
   ): void {
+    if (mode === "scry" && amount > 0) {
+      for (const id of this.staticSourceIds()) {
+        const by = this.state.objects[id];
+        if (by === undefined || hasLostAbilities(this.state, this.registry, by)) continue;
+        for (const ability of this.staticsOfSource(by)) {
+          const r = ability.replacement;
+          if (r?.event !== "would-scry" || !(r.who === "any-player" || (r.who === "you") === (player === by.controller))) continue;
+          if (!this.staticActive(by, ability)) continue;
+          const becomes = insteadEffect(r.instead);
+          if (becomes !== undefined) {
+            this.runReplacedBy(becomes.effect, id, by.controller, { x: amount, player });
+            if (then !== null) applyEffectSpec(then, this.makeResolutionContext(source, player, [], x));
+            return;
+          }
+          const change = insteadModify(r.instead);
+          if (change !== undefined) amount = amount * (change.times ?? 1) + (change.plus !== undefined ? this.replacementAmount(change.plus, by) : 0);
+        }
+      }
+    }
     const cards = this.state.zones.perPlayer[player].library.slice(0, amount);
     if (cards.length === 0) {
       // Nothing to look at — skip straight to the follow-up effect. A scry
@@ -41856,6 +41995,55 @@ export class Game {
    * "those tokens plus an additional Food token" gets its one opportunity
    * at all of them (rule 614.5). Nested calls join the outer event.
    */
+  /**
+   * A `would-create-token` replacement's `becomes` (Moonlit Meditation), for
+   * `count` tokens of `spec` that `controller` would create. One that says
+   * `may` is asked first, by a `choose-modes` question; declined, the
+   * tokens are made as the `spec` said. Says whether it replaced or asked.
+   */
+  private tokenEventReplaced(
+    spec: Extract<EffectSpec, { kind: "create-token" | "create-token-copy" }>,
+    count: number,
+    controller: PlayerId,
+    source: ObjectId,
+    targets: ResolvedTargets,
+    x: number,
+  ): boolean {
+    if (count <= 0) return false;
+    const first = journalTotal(this.state, "token-created", controller, "count") === 0;
+    for (const id of this.state.zones.shared.battlefield) {
+      const by = this.state.objects[id];
+      if (by.controller !== controller || hasLostAbilities(this.state, this.registry, by)) continue;
+      for (const ability of this.registry.get(rulesTextName(by)).static) {
+        const r = ability.replacement;
+        if (r?.event !== "would-create-token" || r.becomes === undefined || (r.firstEachTurn === true && !first)) continue;
+        if (!this.staticActive(by, ability)) continue;
+        // Its own token copies are not a new event for it to replace (614.5).
+        const becomes = { ...r.becomes.effect, replacementAsked: true } as EffectSpec;
+        if (r.may !== true) {
+          this.runReplacedBy(becomes, by.id, controller, { x: count, player: controller });
+          return true;
+        }
+        this.state.awaiting = {
+          kind: "choose-modes",
+          player: controller,
+          source: by.id,
+          minModes: 1,
+          maxModes: 1,
+          modes: [
+            { text: "Create the tokens", effect: { ...spec, replacementAsked: true } },
+            { text: r.becomes.text ?? `${printedCardName(by)}'s replacement`, effect: becomes },
+          ],
+          x: count,
+          targets: [],
+          replacedFor: { source, controller, targets: [...targets], x },
+        };
+        return true;
+      }
+    }
+    return false;
+  }
+
   private withTokenEvent<T>(fn: () => T): T {
     if (this.tokenEventUsed !== null) return fn();
     this.tokenEventUsed = new Set();
@@ -41908,7 +42096,7 @@ export class Game {
         if (r?.event !== "would-create-token" || !this.staticActive(object, statics[i])) continue;
         if (object.controller !== controller && r.anyController !== true) continue;
         // A plain doubler multiplies what the search returns.
-        if (r.multiplier !== undefined && r.ofTokens === undefined) continue;
+        if (r.instead?.modify.times !== undefined && r.ofTokens === undefined) continue;
         for (let n = 0; n < (object.stackCount ?? 1); n++) {
           const key = `${id}:${i}:${n}`;
           if (used?.has(key) !== true) replacements.push({ key, replacement: r });
@@ -42942,7 +43130,7 @@ export class Game {
       if (source.controller !== player || hasLostAbilities(this.state, this.registry, source)) continue;
       for (const ability of this.registry.get(rulesTextName(source)).static) {
         if (ability.replacement?.event === "would-copy-spell" && this.staticActive(source, ability)) {
-          additional += ability.replacement.additional;
+          additional += this.replacementAmount(ability.replacement.instead.modify.plus ?? 0, source);
         }
       }
     }
@@ -44474,10 +44662,7 @@ export class Game {
   private playerCantGainLife(player: PlayerId): boolean {
     if (playerLifeCantChange(this.state, player)) return true;
     return this.playerEventReplacements(player).some(
-      (r) =>
-        r.event === "would-gain-life" &&
-        (r as LifeGainReplacement).prevent === true &&
-        (r as LifeGainReplacement).gainsNoLifeInstead !== true,
+      ({ r }) => r.event === "would-gain-life" && r.prevent === true && r.gainsNoLifeInstead !== true,
     );
   }
 
@@ -45617,7 +45802,7 @@ export class Game {
       if (source.controller !== player || hasLostAbilities(this.state, this.registry, source)) continue;
       for (const ability of this.registry.get(rulesTextName(source)).static) {
         if (ability.replacement?.event === "would-proliferate" && this.staticActive(source, ability)) {
-          times = Math.min(times * ability.replacement.times, Game.MAX_EFFECT_INSTANCES);
+          times = Math.min(times * (ability.replacement.instead.modify.times ?? 1), Game.MAX_EFFECT_INSTANCES);
         }
       }
     }
@@ -51713,10 +51898,13 @@ export class Game {
     // 616.1 lets the milled player order them, and that order mills fewer.
     if (amount > 0) {
       const replacements = this.playerEventReplacements(player).filter(
-        (r): r is MillMultiplierReplacement => r.event === "would-mill",
+        (e): e is PlayerEventReplacement<MillMultiplierReplacement> => e.r.event === "would-mill",
       );
-      for (const r of replacements) amount *= r.multiplier ?? 1;
-      for (const r of replacements) amount += r.plus ?? 0;
+      for (const { r } of replacements) amount *= insteadModify(r.instead)?.times ?? 1;
+      for (const { r, by } of replacements) {
+        const plus = insteadModify(r.instead)?.plus;
+        if (plus !== undefined) amount += this.replacementAmount(plus, by);
+      }
     }
     const milled: ObjectId[] = [];
     this.withGraveyardEnterBatch(() => {
@@ -52603,7 +52791,16 @@ export class Game {
 
   /** A redirection shield's destination, with an object's stint then (rule
    * 400.7). */
-  private redirectOf(to: TargetRef): NonNullable<PreventionShield["redirect"]> {
+  /** Whether a replacement "for as long as" its source remains still can do
+   * anything: that permanent, in that stint, still there (611.2b). */
+  private activeReplacementStands(record: ActiveReplacement): boolean {
+    const lasts = record.expires;
+    if (typeof lasts !== "object" || !("whileSource" in lasts) || lasts.whileSource === null) return true;
+    const on = this.state.objects[lasts.whileSource.id];
+    return on?.zone === "battlefield" && (on.zoneChangeCount ?? 0) === lasts.whileSource.zoneChangeCount;
+  }
+
+  private redirectOf(to: TargetRef): NonNullable<ActiveReplacement["redirect"]> {
     return to.kind === "object"
       ? { to, zoneChangeCount: this.state.objects[to.object]?.zoneChangeCount ?? 0 }
       : { to };
@@ -52612,7 +52809,7 @@ export class Game {
   /** Whether a redirection can still send damage to its destination (rule
    * 614.9): a player still in the game, or the same object still on the
    * battlefield and still a creature, planeswalker or battle. */
-  private redirectStands(redirect: NonNullable<PreventionShield["redirect"]>): boolean {
+  private redirectStands(redirect: NonNullable<ActiveReplacement["redirect"]>): boolean {
     return this.redirectDestinationStands(redirect.to, redirect.zoneChangeCount);
   }
 
@@ -52648,7 +52845,7 @@ export class Game {
   /** Where shield `shield` redirects damage from `source`, if it's a
    * redirection. */
   private shieldRedirect(
-    shield: PreventionShield,
+    shield: ActiveReplacement,
     source: ObjectId,
     sourceLastKnown: LastKnownInfo | undefined,
   ): TargetRef | undefined {
@@ -52663,18 +52860,24 @@ export class Game {
 
   /** Whether prevention shield `shield` covers a hit on `target` (combat or not). */
   private shieldCovers(
-    shield: PreventionShield,
+    shield: ActiveReplacement,
     target: TargetRef,
     combat: boolean,
     source: ObjectId,
     sourceLastKnown?: LastKnownInfo,
   ): boolean {
-    if (shield.combatOnly && !combat) return false;
-    if (shield.noncombatOnly === true && combat) return false;
+    const replaced = shield.replacement;
+    if (replaced.event === "would-deal-damage" && replaced.combat !== undefined && replaced.combat !== combat) return false;
     // "For as long as this Saga remains on the battlefield".
-    if (shield.whileOn !== undefined) {
-      const on = this.state.objects[shield.whileOn.object];
-      if (on?.zone !== "battlefield" || !this.sameStint(on.id, shield.whileOn)) return false;
+    if (!this.activeReplacementStands(shield)) return false;
+    // "If target player would be dealt damage", "that player or a permanent
+    // that player controls": the players it fixed as it resolved.
+    if (shield.onlyPlayers !== undefined) {
+      const hit =
+        target.kind === "player"
+          ? shield.onlyPlayers.includes(target.player)
+          : shield.playersPermanents === true && shield.onlyPlayers.includes(this.state.objects[target.object]?.controller ?? "");
+      if (!hit) return false;
     }
     // "A [red] source of your choice" (rule 609.7): only that object — or the
     // permanent the spell chosen became — and only while it still matches
@@ -52774,7 +52977,7 @@ export class Game {
      * (rule 614.5) — a redirected event's. */
     applied: DamageApplied = NO_DAMAGE_APPLIED,
   ): DamageStep[] {
-    const applying: { readonly by: GameObject; readonly r: DamageMultiplierReplacement; readonly key: string }[] = [];
+    const applying: { readonly by: DamageReplacer; readonly r: DamageMultiplierReplacement; readonly key: string; readonly spends?: ActiveReplacement; readonly record?: ActiveReplacement }[] = [];
     for (const id of this.staticSourceIds()) {
       const object = this.state.objects[id];
       if (object === undefined) continue;
@@ -52789,100 +52992,114 @@ export class Game {
         if (r === undefined || r.event !== "would-deal-damage") return;
         const key = `${id}:${object.zoneChangeCount ?? 0}:${from + i}`;
         if (applied.statics.includes(key)) return;
+        if (this.applyingReplacements.has(key)) return;
         if (!this.staticActive(object, ability)) return;
         if (!this.damageReplacementReaches(r, object, source, target, combat, sourceLastKnown)) return;
         applying.push({ by: object, r, key });
       });
     }
-    // "Until your next turn, … deals double that damage instead" — a player
-    // effect's, on damage to its players (or their permanents).
-    let playerMultiplier = 1;
-    const recipient = target.kind === "player" ? target.player : undefined;
-    const recipientsController = target.kind === "object" ? this.state.objects[target.object]?.controller : undefined;
-    for (const effect of this.state.playerEffects ?? []) {
-      const d = effect.damageTo;
-      if (d === undefined) continue;
-      const hits =
-        (recipient !== undefined && d.players.includes(recipient)) ||
-        (d.permanentsToo === true && recipientsController !== undefined && d.players.includes(recipientsController));
-      if (hits) playerMultiplier *= d.multiplier;
-    }
+    // The same, made by a spell or ability for a while (The Flame of Keld,
+    // Jeska): shields are below.
+    this.state.activeReplacements.forEach((record, index) => {
+      const r = record.replacement;
+      if (r.event !== "would-deal-damage" || "prevent" in r.instead || applied.shields.includes(record)) return;
+      const key = `active:${record.source}:${index}`;
+      if (this.applyingReplacements.has(key)) return;
+      const by: DamageReplacer = { id: record.source, controller: record.owner, attachedTo: null };
+      if (!this.damageReplacementReaches(r, by, source, target, combat, sourceLastKnown)) return;
+      if (!this.shieldCovers(record, target, combat, source, sourceLastKnown)) return;
+      applying.push({ by, r, key, record, ...(record.next === true ? { spends: record } : {}) });
+    });
+    const gate = (r: DamageMultiplierReplacement, spends?: ActiveReplacement) => ({
+      ...(r.ifAtMost !== undefined ? { ifAtMost: r.ifAtMost } : {}),
+      ...(r.ifAtLeast !== undefined ? { ifAtLeast: r.ifAtLeast } : {}),
+      ...(spends !== undefined ? { spends } : {}),
+    });
+    const modified = applying.flatMap((a) => {
+      const change = insteadModify(a.r.instead);
+      return change === undefined ? [] : [{ ...a, change }];
+    });
     const steps: DamageStep[] = [];
-    if (playerMultiplier !== 1) steps.push({ kind: "times", by: playerMultiplier });
-    for (const { r } of applying) if ((r.multiplier ?? 1) !== 1) steps.push({ kind: "times", by: r.multiplier ?? 1 });
-    for (const { r } of applying) if ((r.plus ?? 0) !== 0) steps.push({ kind: "plus", by: r.plus ?? 0 });
+    for (const { r, spends, change } of modified) if ((change.times ?? 1) !== 1) steps.push({ kind: "times", by: change.times ?? 1, ...gate(r, spends) });
     // "Plus X, where X is Hawkeye's power": as the damage would be dealt.
-    for (const { by, r } of applying) {
-      const plusOf =
-        r.plusOf === undefined
-          ? 0
-          : r.plusOf === "this-power"
-            ? computeCharacteristics(this.state, this.registry, by.id).power
-            : (by.counters[r.plusOf.countersOnThis] ?? 0);
-      if (plusOf > 0) steps.push({ kind: "plus", by: plusOf });
+    for (const { by, r, spends, change } of modified) {
+      if (change.plus === undefined) continue;
+      const plus = this.replacementAmount(change.plus, by);
+      if (plus !== 0) steps.push({ kind: "plus", by: plus, ...gate(r, spends) });
     }
-    // The same, made by a spell or ability for a duration (The Flame of Keld).
-    for (const effect of this.state.playerEffects ?? []) {
-      const d = effect.damageReplacement;
-      if (d === undefined || (d.combat !== undefined && d.combat !== combat)) continue;
-      if (
-        d.to === "player-or-battle" &&
-        target.kind === "object" &&
-        !computeCharacteristics(this.state, this.registry, target.object).types.includes("battle")
-      ) {
-        continue;
-      }
-      if (
-        d.source !== undefined &&
-        (sourceLastKnown === undefined && this.state.objects[source] === undefined
-          ? true
-          : !matchesFilter(this.state, this.registry, source, d.source, {
-              you: effect.owner,
-              ...(sourceLastKnown !== undefined ? { snapshot: sourceLastKnown } : {}),
-            }))
-      ) {
-        continue;
-      }
-      if ((d.plus ?? 0) !== 0) steps.push({ kind: "plus", by: d.plus ?? 0 });
-      if (d.setTo !== undefined) steps.push({ kind: "set", to: d.setTo });
+    for (const { by, r, spends, change } of modified) {
+      if (change.set !== undefined) steps.push({ kind: "set", to: this.replacementAmount(change.set, by), ...gate(r, spends) });
     }
     // "…less than ~'s power …, that source deals damage equal to ~'s power
     // instead": raised, never lowered.
-    for (const { by, r } of applying) {
-      if (r.atLeast === "this-power") {
-        steps.push({ kind: "at-least", power: computeCharacteristics(this.state, this.registry, by.id).power });
+    for (const { by, r, spends, change } of modified) {
+      if (change.atLeast !== undefined) steps.push({ kind: "at-least", power: this.replacementAmount(change.atLeast, by), ...gate(r, spends) });
+      if (change.atMost !== undefined) steps.push({ kind: "at-most", to: this.replacementAmount(change.atMost, by), ...gate(r, spends) });
+    }
+    for (const { r, spends, change } of modified) {
+      if (change.half !== undefined) steps.push({ kind: "halve", round: change.half, ...gate(r, spends) });
+    }
+    // Beside the damage: done before it's dealt (Wolverine).
+    for (const a of applying) {
+      if ("also" in a.r.instead && a.r.instead.also !== undefined) {
+        steps.push({ kind: "also", by: a.by.id, controller: a.by.controller, effect: a.r.instead.also, key: a.key, ...gate(a.r, a.spends) });
       }
     }
-    for (const { r } of applying) {
-      if (r.halve !== undefined) steps.push({ kind: "halve", round: r.halve });
-      if (r.preventAmount !== undefined) steps.push({ kind: "prevent-n", by: r.preventAmount });
-      if (r.preventAllBut !== undefined) steps.push({ kind: "prevent-all-but", leave: r.preventAllBut });
-      if (r.preventHalf !== undefined) steps.push({ kind: "prevent-half", round: r.preventHalf });
+    // The event becomes an effect (Soul-Scar Mage, Delaying Shield).
+    for (const a of applying) {
+      const replaced = insteadEffect(a.r.instead);
+      if (replaced !== undefined) {
+        steps.push({
+          kind: "replaced",
+          by: a.by.id,
+          controller: a.by.controller,
+          effect: replaced.effect,
+          key: a.key,
+          ...(a.record !== undefined ? { record: a.record } : {}),
+          ...gate(a.r, a.spends),
+        });
+      }
     }
-    for (const { by, r } of applying) {
-      if (r.prevent !== true) continue;
-      steps.push({
-        kind: "prevent-all",
-        by: by.id,
-        controller: by.controller,
-        ...(r.then !== undefined ? { then: r.then } : {}),
-        ...(r.perEvent === true ? { perEvent: true as const } : {}),
-        ...(r.thenCountsUnprevented === true ? { thenCountsUnprevented: true as const } : {}),
-        ...(r.ifAtMost !== undefined ? { ifAtMost: r.ifAtMost } : {}),
-      });
+    for (const { by, r, spends } of applying) {
+      if (!("prevent" in r.instead)) continue;
+      const { prevent, then, perEvent, thenCountsUnprevented } = r.instead;
+      if (typeof prevent === "number") steps.push({ kind: "prevent-n", by: prevent, ...gate(r, spends) });
+      else if (prevent !== true && "allBut" in prevent) steps.push({ kind: "prevent-all-but", leave: prevent.allBut, ...gate(r, spends) });
+      else if (prevent !== true) steps.push({ kind: "prevent-half", round: prevent.half, ...gate(r, spends) });
+      else {
+        steps.push({
+          kind: "prevent-all",
+          by: by.id,
+          controller: by.controller,
+          ...(then !== undefined ? { then } : {}),
+          ...(perEvent === true ? { perEvent: true as const } : {}),
+          ...(thenCountsUnprevented === true ? { thenCountsUnprevented: true as const } : {}),
+          ...gate(r, spends),
+        });
+      }
     }
     // Static redirections (rule 614.9 — Palisade Giant, Pariah): to
     // somewhere legal that isn't where it's going already.
     for (const { by, r, key } of applying) {
-      if (r.redirect === undefined) continue;
-      const to = this.staticRedirectDestination(r.redirect, by, target);
+      if (!("redirect" in r.instead)) continue;
+      const to = this.staticRedirectDestination(r.instead.redirect, by, target);
       if (to === undefined || sameTargetRef(to, target) || !this.redirectDestinationStands(to)) continue;
       steps.push({ kind: "redirect", to, key });
     }
-    // One-shot prevention shields (Healing Salve — rule 614.9 / EG-6).
-    for (const shield of this.state.preventionShields) {
+    // Prevention records (Healing Salve, Fog — rules 615.7, 615.8; 614.9).
+    // Partial prevention by a "next time" one is `applying`'s, above.
+    for (const shield of this.state.activeReplacements) {
+      const r = shield.replacement;
+      if (r.event !== "would-deal-damage" || !("prevent" in r.instead)) continue;
       if (applied.shields.includes(shield)) continue;
-      if (this.shieldCovers(shield, target, combat, source, sourceLastKnown)) steps.push({ kind: "shield", shield });
+      if (!this.shieldCovers(shield, target, combat, source, sourceLastKnown)) continue;
+      const by: DamageReplacer = { id: shield.source, controller: shield.owner, attachedTo: null };
+      if (!this.damageReplacementReaches(r, by, source, target, combat, sourceLastKnown)) continue;
+      const prevent = r.instead.prevent;
+      if (prevent === true) steps.push({ kind: "shield", shield });
+      else if (typeof prevent === "number") steps.push({ kind: "prevent-n", by: prevent, ...gate(r, shield.next === true ? shield : undefined) });
+      else if ("allBut" in prevent) steps.push({ kind: "prevent-all-but", leave: prevent.allBut, ...gate(r, shield.next === true ? shield : undefined) });
+      else steps.push({ kind: "prevent-half", round: prevent.half, ...gate(r, shield.next === true ? shield : undefined) });
     }
     // Shield counters (rule 122.1c): not an ability, so one that lost its
     // abilities keeps the protection (the rulings).
@@ -52950,10 +53167,18 @@ export class Game {
     return best;
   }
 
+  /** An amount in a replacement, read as the event would happen from its
+   * source's side: a literal as it stands; one that reads the board adds
+   * nothing while it's 0 or less. */
+  private replacementAmount(amount: EffectAmount, by: DamageReplacer): number {
+    if (typeof amount === "number") return amount;
+    return Math.max(0, amountValue(amount, this.makeResolutionContext(by.id, by.controller, [])));
+  }
+
   /** Where a static redirection on `by` sends damage to `target`. */
   private staticRedirectDestination(
-    redirect: NonNullable<DamageMultiplierReplacement["redirect"]>,
-    by: GameObject,
+    redirect: DamageRedirection["redirect"],
+    by: DamageReplacer,
     target: TargetRef,
   ): TargetRef | undefined {
     switch (redirect) {
@@ -52974,7 +53199,7 @@ export class Game {
    * scope, read from `by`'s controller's side. */
   private damageReplacementReaches(
     r: DamageMultiplierReplacement,
-    by: GameObject,
+    by: DamageReplacer,
     source: ObjectId,
     target: TargetRef,
     combat: boolean,
@@ -53002,6 +53227,14 @@ export class Game {
         break;
       case "player":
         if (target.kind !== "player") return false;
+        break;
+      case "player-or-battle":
+        if (
+          target.kind === "object" &&
+          !computeCharacteristics(this.state, this.registry, target.object).types.includes("battle")
+        ) {
+          return false;
+        }
         break;
       case "self":
         if (target.kind !== "object" || target.object !== by.id) return false;
@@ -53242,6 +53475,66 @@ export class Game {
   /** A prevention shield's additional effect (rule 615.5 — `then`): applied
    * as `controller`'s effect from `by` with `"x"` what it prevented, the
    * spell's own targets, and the damage's source as the trigger object. */
+  /**
+   * Runs what an event became (rule 614.1a): `effect` as `controller`'s, the
+   * event's facts bound as `"x"` ("that much"), `"trigger-object"` ("that
+   * card", the damage's source), `"trigger-recipient"` and `"trigger-player"`.
+   * A decision in it suspends the rest of the event; one already outstanding
+   * in a sweep goes first.
+   */
+  private runReplacedBy(
+    effect: EffectSpec,
+    source: ObjectId,
+    controller: PlayerId,
+    facts: {
+      readonly x?: number;
+      readonly object?: ObjectId;
+      readonly player?: PlayerId;
+      readonly recipient?: NonNullable<LastKnownRefs["recipient"]>;
+      readonly record?: ActiveReplacement;
+      /** Part of a sweep of simultaneous events: any decision still
+       * outstanding goes first, not only one being asked now. */
+      readonly inSweep?: true;
+      /** Which replacement this is: an event inside its effect isn't
+       * replaced by it again (rule 614.5). */
+      readonly key?: string;
+    },
+  ): void {
+    const record = facts.record;
+    // An object target that has changed zones since the ability resolved is
+    // gone (rule 400.7).
+    const targets: ResolvedTargets = (record?.targets ?? []).map((target, i) =>
+      target?.kind === "object" && (this.state.objects[target.object]?.zoneChangeCount ?? -1) !== record?.targetStints?.[i]
+        ? undefined
+        : (target ?? undefined),
+    );
+    const ctx = this.makeResolutionContext(
+      source,
+      controller,
+      targets,
+      facts.x ?? record?.x ?? 0,
+      0,
+      facts.object,
+      1,
+      0,
+      [],
+      {
+        ...(facts.player !== undefined ? { player: facts.player } : {}),
+        ...(facts.recipient !== undefined ? { recipient: facts.recipient } : {}),
+      },
+    );
+    if (facts.inSweep === true ? this.decisionOutstanding() : this.state.awaiting !== null) {
+      ctx.resumeAfterDecisions(effect);
+      return;
+    }
+    if (facts.key !== undefined) this.applyingReplacements.add(facts.key);
+    try {
+      applyEffectSpec(effect, ctx);
+    } finally {
+      if (facts.key !== undefined) this.applyingReplacements.delete(facts.key);
+    }
+  }
+
   private applyPreventionFollowUp(
     spec: EffectSpec,
     by: ObjectId,
@@ -53285,24 +53578,6 @@ export class Game {
     // prevention effect below, protection's included (702.16e).
     const unpreventable = this.damageUnpreventable(source, combat, sourceLastKnown);
 
-    // Fog (rule 614): a turn-scoped shield prevents all combat damage — or
-    // what sources matching a filter would deal, matched now (rule 615.1);
-    // Deep Wood's (`toYou`), all damage those sources would deal to its
-    // controller.
-    if (
-      !unpreventable &&
-      ((combat && this.state.preventAllCombatDamage) ||
-      (this.state.combatDamagePreventedBy?.some(
-        ({ filter, you, toYou }) =>
-          (toYou === true ? target.kind === "player" && target.player === you : combat) &&
-          matchesFilter(this.state, this.registry, source, filter, { you }),
-      ) ??
-        false))
-    ) {
-      this.emit({ type: "damage-prevented", source, target, amount: amount * sources });
-      return 0;
-    }
-
     // Damage replacements (rule 614) — doubling (Dictate of the Twin Gods),
     // "plus 2" (Torbran), "prevent that damage and …" (The Mindskinner) —
     // and prevention shields (615), in the order best for whoever is dealt
@@ -53315,13 +53590,13 @@ export class Game {
     } else {
       const order = this.bestDamageOrder(amount, sources, steps, unpreventable);
       const outcome = runDamageSteps(amount, sources, order, shieldLeft, unpreventable);
-      const spent: PreventionShield[] = [];
+      const spent: ActiveReplacement[] = [];
       const redirected: { readonly to: TargetRef; readonly amount: number; readonly applied: DamageApplied }[] = [];
       for (const { shield, prevented } of outcome.shields) {
         if (prevented <= 0) continue;
         // Within one simultaneous event it covers the rest of it (615.8).
-        if (shield.nextTime === true) (this.damageBatch?.nextTimeSpent ?? spent).push(shield);
-        else if (shield.all !== true) shield.amount -= prevented;
+        if (shield.next === true) (this.damageBatch?.nextTimeSpent ?? spent).push(shield);
+        else if (shield.left !== undefined) shield.left -= prevented;
         const to = this.shieldRedirect(shield, source, sourceLastKnown);
         if (to !== undefined) {
           this.emit({ type: "damage-redirected", source, from: target, to, amount: prevented });
@@ -53343,8 +53618,9 @@ export class Game {
         this.emit({ type: "damage-redirected", source, from: target, to: step.to, amount: moved });
         redirected.push({ to: step.to, amount: moved, applied: { ...applied, statics: [...applied.statics, step.key] } });
       }
-      this.state.preventionShields = this.state.preventionShields.filter(
-        (s) => !spent.includes(s) && (s.all === true || s.nextTime === true || s.amount > 0),
+      for (const used of outcome.spends) (this.damageBatch?.nextTimeSpent ?? spent).push(used);
+      this.state.activeReplacements = this.state.activeReplacements.filter(
+        (s) => !spent.includes(s) && (s.left === undefined || s.left > 0),
       );
       // Redirected damage (rule 614.9) is dealt to its new recipient by the
       // same source, as part of the same event — a new hit there, which that
@@ -53374,7 +53650,28 @@ export class Game {
           this.applyPreventionFollowUp(t.spec, t.by, t.controller, t.targets, prevented, source);
         }
       }
+      for (const also of outcome.alsos) {
+        this.runReplacedBy(also.effect, also.by, also.controller, { x: outcome.dealt, object: source, inSweep: true, key: also.key });
+      }
       if (outcome.redirected !== undefined) return 0;
+      if (outcome.replaced !== undefined) {
+        // The damage never happens (rule 614.6): nothing but what it became.
+        const { step, amount: thatMuch } = outcome.replaced;
+        const recipient: NonNullable<LastKnownRefs["recipient"]> = {
+          target,
+          ...(target.kind === "object" ? { zoneChangeCount: this.state.objects[target.object]?.zoneChangeCount ?? 0 } : {}),
+        };
+        this.runReplacedBy(step.effect, step.by, step.controller, {
+          x: thatMuch,
+          object: source,
+          recipient,
+          ...(target.kind === "player" ? { player: target.player } : {}),
+          ...(step.record !== undefined ? { record: step.record } : {}),
+          inSweep: true,
+          key: step.key,
+        });
+        return 0;
+      }
       if (outcome.preventedAll !== undefined) {
         const { step, amount: prevented } = outcome.preventedAll;
         if (prevented > 0) this.emit({ type: "damage-prevented", source, target, amount: prevented });
@@ -53710,7 +54007,7 @@ export class Game {
     }
     const batch = {
       lifelink: new Map<ObjectId, { controller: PlayerId; amount: number }>(),
-      nextTimeSpent: [] as PreventionShield[],
+      nextTimeSpent: [] as ActiveReplacement[],
       dealtDamage: new Map<
         string,
         { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number }
@@ -53733,7 +54030,7 @@ export class Game {
       this.damageBatch = null;
     }
     if (batch.nextTimeSpent.length > 0) {
-      this.state.preventionShields = this.state.preventionShields.filter((s) => !batch.nextTimeSpent.includes(s));
+      this.state.activeReplacements = this.state.activeReplacements.filter((s) => !batch.nextTimeSpent.includes(s));
     }
     // "N or more" reads what the whole event came to, known only now.
     const enough = (ability: TriggeredAbility, trigger: PendingTrigger): boolean => {
@@ -53801,8 +54098,8 @@ export class Game {
    * life instead" (Bloodletter of Aclazotz, each one doubling it again). */
   private lifeLossReplaced(player: PlayerId, amount: number): number {
     let loss = amount;
-    for (const r of this.playerEventReplacements(player)) {
-      if (r.event === "would-lose-life") loss *= r.multiplier;
+    for (const { r } of this.playerEventReplacements(player)) {
+      if (r.event === "would-lose-life") loss *= insteadModify(r.instead)?.times ?? 1;
     }
     return loss;
   }
@@ -53824,17 +54121,27 @@ export class Game {
     // order them, and additions before doublings is the order that gains most.
     if (delta > 0) {
       const replacements = this.playerEventReplacements(player).filter(
-        (r): r is LifeGainReplacement => r.event === "would-gain-life",
+        (e): e is PlayerEventReplacement<LifeGainReplacement> => e.r.event === "would-gain-life",
       );
-      if (replacements.some((r) => r.prevent === true)) return;
+      if (replacements.some(({ r }) => r.prevent === true)) return;
+      // "If you would gain life, draw that many cards instead" (Lich): the
+      // gain never happens (rule 614.6).
+      const becomes = replacements.find(({ r }) => insteadEffect(r.instead) !== undefined);
+      if (becomes !== undefined) {
+        this.runReplacedBy(insteadEffect(becomes.r.instead)!.effect, becomes.by.id, becomes.by.controller, { x: delta, player });
+        return;
+      }
       // "…loses that much life instead" (Tainted Remedy), before anything
       // that would add to the gain: the order the player gaining would take.
-      if (replacements.some((r) => r.becomesLoss === true)) {
+      if (replacements.some(({ r }) => r.becomesLoss === true)) {
         this.changeLife(player, -delta);
         return;
       }
-      for (const r of replacements) delta += r.plus ?? 0;
-      for (const r of replacements) delta *= r.multiplier ?? 1;
+      for (const { r, by } of replacements) {
+        const plus = insteadModify(r.instead)?.plus;
+        if (plus !== undefined) delta += this.replacementAmount(plus, by);
+      }
+      for (const { r } of replacements) delta *= insteadModify(r.instead)?.times ?? 1;
     }
     const playerState = this.state.players[player];
     playerState.life += delta;
@@ -54496,8 +54803,10 @@ export class Game {
         // off for as long as it lasts; the cause, if it's still there, makes
         // them lose at the first check after it ends. The "tried to draw"
         // flag is cleared below all the same: that loss was this check's.
+        // Each way of losing can be replaced ("if you would lose the game,
+        // instead …", rule 614.6); the next pass sees what it changed.
         if (reason !== null && !playerCantLoseGame(this.state, this.registry, player)) {
-          this.eliminate(player, reason);
+          if (!this.loseGameReplaced(player, reason)) this.eliminate(player, reason);
           changed = true;
         }
       }
@@ -54782,13 +55091,46 @@ export class Game {
    * is asked before any of them leaves. If that leaves one player, they win
    * at once (104.2a); if it leaves none, the game is a draw (104.4a).
    */
+  /**
+   * "If you would lose the game, instead …": true when a `would-lose-game`
+   * replacement took this loss (rule 614.6). Conceding can't be replaced
+   * (104.3a). Each applies once to the event (614.5); when several could,
+   * the player would choose, and the first in battlefield order is taken.
+   */
+  private loseGameReplaced(player: PlayerId, reason: string): boolean {
+    if (/\bconced/i.test(reason)) return false;
+    for (const record of this.state.activeReplacements) {
+      const r = record.replacement;
+      if (r.event !== "would-lose-game") continue;
+      const reaches = record.onlyPlayers?.includes(player) ?? (r.who === "any-player" || (r.who === "you") === (player === record.owner));
+      if (!reaches) continue;
+      if (record.next === true) this.state.activeReplacements = this.state.activeReplacements.filter((a) => a !== record);
+      this.runReplacedBy(r.instead.effect, record.source, record.owner, { player, record });
+      return true;
+    }
+    for (const id of this.staticSourceIds()) {
+      const source = this.state.objects[id];
+      if (source === undefined || hasLostAbilities(this.state, this.registry, source)) continue;
+      for (const ability of this.staticsOfSource(source)) {
+        const r = ability.replacement;
+        if (r?.event !== "would-lose-game") continue;
+        if (!(r.who === "any-player" || (r.who === "you") === (player === source.controller))) continue;
+        if (!this.staticActive(source, ability)) continue;
+        this.runReplacedBy(r.instead.effect, id, source.controller, { player });
+        return true;
+      }
+    }
+    return false;
+  }
+
   private loseGame(players: readonly PlayerId[], reason: string): void {
     if (this.state.result.over) return;
     const losing = players.filter(
       (player, i) =>
         players.indexOf(player) === i &&
         this.state.players[player]?.hasLost === false &&
-        !playerCantLoseGame(this.state, this.registry, player),
+        !playerCantLoseGame(this.state, this.registry, player) &&
+        !this.loseGameReplaced(player, reason),
     );
     if (losing.length === 0) return;
     for (const player of losing) this.eliminate(player, reason);
@@ -55341,9 +55683,7 @@ export class Game {
     if (this.optionalDrawReplacementAsked(player, drawEvent)) return;
     const replacing = this.drawEffectReplacementFor(player, drawEvent);
     if (replacing !== null) {
-      const ctx = this.makeResolutionContext(replacing.source, player, []);
-      if (this.state.awaiting !== null) ctx.resumeAfterDecisions(replacing.effect);
-      else applyEffectSpec(replacing.effect, ctx);
+      this.runDrawReplacement(replacing, player);
       return;
     }
     this.drawUnreplacedByEffect(player, drawEvent);
@@ -55356,9 +55696,52 @@ export class Game {
     // replaced again by it (rule 614.5), though one that finds the library
     // empty is Laboratory Maniac's to replace (616.2).
     const draws = this.drawCountFor(player, drawEvent);
+    this.drawAlsoFor(player, drawEvent);
     for (let i = 0; i < draws && !this.state.result.over; i += 1) {
       if (!this.drawWonInstead(player)) this.drawCardRaw(player);
     }
+  }
+
+  /** What a whole draw instruction comes to under the `instruction`
+   * replacements that reach it ("if you would draw one or more cards"), and
+   * 0 when one makes it an effect instead (Alms Collector). Each applies once
+   * (rule 614.5); a player choosing the order would take these first. */
+  private drawInstructionReplaced(player: PlayerId, count: number): number {
+    if (count <= 0 || this.state.result.over) return count;
+    let n = count;
+    for (const id of this.staticSourceIds()) {
+      const source = this.state.objects[id];
+      if (source === undefined || hasLostAbilities(this.state, this.registry, source)) continue;
+      for (const ability of this.staticsOfSource(source)) {
+        const r = ability.replacement;
+        if (r?.event !== "would-draw" || r.instruction === undefined || n < r.instruction.atLeast) continue;
+        if (!(r.who === "any-player" || (r.who === "you") === (player === source.controller))) continue;
+        if (!this.staticActive(source, ability)) continue;
+        const becomes = insteadEffect(r.instead);
+        if (becomes !== undefined) {
+          this.runReplacedBy(becomes.effect, source.id, source.controller, { x: n, player });
+          return 0;
+        }
+        const change = insteadModify(r.instead);
+        if (change === undefined) continue;
+        n *= change.times ?? 1;
+        if (change.plus !== undefined) n += this.replacementAmount(change.plus, source);
+      }
+    }
+    return n;
+  }
+
+  /** A draw replaced by an effect (rule 614.1a): `"x"` is 1, the card drawn
+   * would have been one; `"trigger-player"` the player who would have drawn
+   * it. A `next` record is spent as it applies. */
+  private runDrawReplacement(replacing: DrawEffectReplacement, player: PlayerId): void {
+    const record = replacing.record;
+    if (record?.next === true) this.state.activeReplacements = this.state.activeReplacements.filter((r) => r !== record);
+    this.runReplacedBy(replacing.effect, replacing.source, replacing.controller, {
+      player,
+      key: replacing.key,
+      ...(record !== undefined ? { record } : {}),
+    });
   }
 
   /** Whether a `prohibits`'s `drawsPerTurn` stops `player` drawing another card
@@ -55379,16 +55762,17 @@ export class Game {
    * identical ones are nothing to choose between.
    */
   private nextDrawReplaced(player: PlayerId, event: WouldDrawEvent): boolean {
-    const effects = this.state.playerEffects ?? [];
     const options: { readonly index: number | null | { readonly printed: ObjectId }; readonly text: string; readonly source: ObjectId }[] = [];
     const seen = new Set<string>();
-    effects.forEach((effect, index) => {
-      const instead = effect.nextDrawInstead;
-      if (effect.owner !== player || instead === undefined) return;
-      const key = JSON.stringify([instead.effect, instead.targets]);
+    this.state.activeReplacements.forEach((record, index) => {
+      const r = record.replacement;
+      if (record.next !== true || r.event !== "would-draw" || !this.activeDrawReaches(record, r, player)) return;
+      const replaced = insteadEffect(r.instead);
+      if (replaced === undefined) return;
+      const key = JSON.stringify([replaced.effect, record.targets]);
       if (seen.has(key)) return;
       seen.add(key);
-      options.push({ index, text: this.nextDrawText(instead.text, instead.source), source: instead.source });
+      options.push({ index, text: this.nextDrawText(replaced.text ?? "~'s replacement", record.source), source: record.source });
     });
     if (options.length === 0) return false;
     const printed = this.drawEffectReplacementFor(player, event);
@@ -55423,15 +55807,24 @@ export class Game {
     return true;
   }
 
-  /** A `nextDrawInstead`'s words, for the player choosing it: its source named. */
+  /** Whether a resolved draw replacement reaches `player`'s draw: the
+   * players its references fixed as it resolved, or its `who` from its
+   * controller's side. */
+  private activeDrawReaches(record: ActiveReplacement, r: DrawRedirectReplacement, player: PlayerId): boolean {
+    if (record.onlyPlayers !== undefined) return record.onlyPlayers.includes(player);
+    return r.who === "any-player" || (r.who === "you") === (player === record.owner);
+  }
+
+  /** A "next time" replacement's words, for the player choosing it: its source named. */
   private nextDrawText(text: string, source: ObjectId): string {
     const object = this.state.objects[source];
     return object === undefined ? text : text.replace(/~/g, printedCardName(object));
   }
 
   /**
-   * Applies the `nextDrawInstead` at `index` of `state.playerEffects` (spent as
-   * it does), or, for `null`, the `player`'s printed effect replacement. An
+   * Applies the resolved replacement at `index` of `state.activeReplacements`
+   * (spent as it does), or, for `null`, the `player`'s printed effect
+   * replacement. An
    * object target that has changed zones since the ability resolved is gone
    * (rule 400.7); any choice in the effect is answered before the next card is
    * drawn (rule 614.11a).
@@ -55441,9 +55834,6 @@ export class Game {
     index: number | null | "draw" | { readonly printed: ObjectId },
     event: WouldDrawEvent,
   ): void {
-    let source: ObjectId;
-    let effect: EffectSpec;
-    let targets: ResolvedTargets = [];
     // An optional replacement declined (Abundance): the draw happens, or what
     // else replaces it.
     if (index === "draw") {
@@ -55457,21 +55847,14 @@ export class Game {
         if (index !== null) this.drawUnreplacedByEffect(player, event);
         return;
       }
-      ({ source, effect } = printed);
-    } else {
-      const instead = this.state.playerEffects?.[index]?.nextDrawInstead;
-      if (instead === undefined) return;
-      this.state.playerEffects = this.state.playerEffects?.filter((_, i) => i !== index);
-      ({ source, effect } = instead);
-      targets = instead.targets.map((target, i) =>
-        target?.kind === "object" && (this.state.objects[target.object]?.zoneChangeCount ?? -1) !== instead.targetStints[i]
-          ? undefined
-          : target,
-      );
+      this.runDrawReplacement(printed, player);
+      return;
     }
-    const ctx = this.makeResolutionContext(source, player, targets);
-    if (this.state.awaiting !== null) ctx.resumeAfterDecisions(effect);
-    else applyEffectSpec(effect, ctx);
+    const record = this.state.activeReplacements[index];
+    if (record === undefined) return;
+    const replaced = insteadEffect(record.replacement.event === "would-draw" ? record.replacement.instead : undefined);
+    if (replaced === undefined) return;
+    this.runDrawReplacement({ key: `draw-record:${record.source}:${record.madeIn ?? 0}`, source: record.source, controller: record.owner, effect: replaced.effect, record }, player);
   }
 
   /** The cards in `player`'s graveyard whose dredge could replace a draw
@@ -55570,13 +55953,32 @@ export class Game {
       if (hasLostAbilities(this.state, this.registry,source) || source.controller !== player) continue;
       for (const ability of this.registry.get(rulesTextName(source)).static) {
         const r = ability.replacement;
-        if (r?.event !== "would-draw" || r.who !== "you" || typeof r.instead !== "object" || !("draws" in r.instead)) continue;
-        if (!drawReplacementReaches(r, event) || !this.staticActive(source, ability)) continue;
-        if (r.firstEachTurn === true) firstEachTurn = Math.max(firstEachTurn, r.instead.draws);
-        else draws *= r.instead.draws ** (source.stackCount ?? 1);
+        if (r?.event !== "would-draw" || r.who !== "you") continue;
+        const set = insteadModify(r.instead)?.set;
+        if (set === undefined) continue;
+        if (!this.drawReplacementReachesNow(r, player, event) || !this.staticActive(source, ability)) continue;
+        const n = this.replacementAmount(set, source);
+        if (r.firstEachTurn === true) firstEachTurn = Math.max(firstEachTurn, n);
+        else draws *= n ** (source.stackCount ?? 1);
       }
     }
     return draws * firstEachTurn;
+  }
+
+  /** What a `modify` replacement does beside the draw (Blood Scrivener's "and
+   * you lose 1 life"), done first. */
+  private drawAlsoFor(player: PlayerId, event: WouldDrawEvent): void {
+    for (const id of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[id];
+      if (hasLostAbilities(this.state, this.registry, source) || source.controller !== player) continue;
+      for (const ability of this.registry.get(rulesTextName(source)).static) {
+        const r = ability.replacement;
+        if (r?.event !== "would-draw" || r.who !== "you" || typeof r.instead !== "object" || !("modify" in r.instead)) continue;
+        if (r.instead.also === undefined || r.instruction !== undefined) continue;
+        if (!this.drawReplacementReachesNow(r, player, event) || !this.staticActive(source, ability)) continue;
+        this.runReplacedBy(r.instead.also, source.id, player, { x: 1, player });
+      }
+    }
   }
 
   /** Counts a draw event of `player`'s in the turn's history
@@ -55597,8 +55999,7 @@ export class Game {
     return { firstInDrawStep, before: { ...before } };
   }
 
-  /** The `would-draw` effect replacement (`DrawReplacedByEffect` —
-   * Underrealm Lich) that replaces this draw `event` of `player`'s, with the
+  /** The `would-draw` effect replacement (Underrealm Lich) that replaces this draw `event` of `player`'s, with the
    * permanent it's from: one of theirs, the first in battlefield order when
    * several could (they're the drawing player's to order, rule 616.1), or
    * `null`. */
@@ -55607,38 +56008,75 @@ export class Game {
     event: WouldDrawEvent,
     /** Only this permanent's — an optional one the player chose (Abundance). */
     from?: ObjectId,
-  ): { readonly source: ObjectId; readonly effect: EffectSpec } | null {
+  ): DrawEffectReplacement | null {
     const found = this.drawEffectReplacementsFor(player, event).find((r) =>
       from === undefined ? r.may !== true : r.source === from,
     );
-    return found === undefined ? null : { source: found.source, effect: found.effect };
+    return found ?? null;
   }
 
-  /** Every `would-draw` effect replacement (`DrawReplacedByEffect`) that
+  /** Every `would-draw` effect replacement (`{ effect }`) that
    * replaces this draw `event` of `player`'s, in battlefield order, each with
    * its permanent, whether it's optional (`may`) and its words as an option. */
   private drawEffectReplacementsFor(
     player: PlayerId,
     event: WouldDrawEvent,
-  ): { readonly source: ObjectId; readonly effect: EffectSpec; readonly may: boolean; readonly text: string }[] {
-    const out: { source: ObjectId; effect: EffectSpec; may: boolean; text: string }[] = [];
-    for (const id of this.state.zones.shared.battlefield) {
+  ): readonly (DrawEffectReplacement & { readonly may: boolean; readonly text: string })[] {
+    const out: (DrawEffectReplacement & { may: boolean; text: string })[] = [];
+    for (const id of this.staticSourceIds()) {
       const source = this.state.objects[id];
-      if (source === undefined || source.controller !== player || hasLostAbilities(this.state, this.registry, source)) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
+      if (source === undefined || hasLostAbilities(this.state, this.registry, source)) continue;
+      for (const ability of this.staticsOfSource(source)) {
         const r = ability.replacement;
-        if (r?.event !== "would-draw" || r.who !== "you" || typeof r.instead !== "object" || !("effect" in r.instead)) continue;
-        if (!drawReplacementReaches(r, event) || !this.staticActive(source, ability)) continue;
+        if (r?.event !== "would-draw") continue;
+        const replaced = insteadEffect(r.instead);
+        if (replaced === undefined || r.instruction !== undefined) continue;
+        const reaches = r.who === "any-player" || (r.who === "you") === (player === source.controller);
+        if (!reaches || !this.drawReplacementReachesNow(r, player, event) || !this.staticActive(source, ability)) continue;
+        const key = `draw:${id}:${source.zoneChangeCount ?? 0}`;
+        if (this.applyingReplacements.has(key)) continue;
         const name = printedCardName(source);
         out.push({
+          key,
           source: id,
-          effect: r.instead.effect,
-          may: r.instead.may === true,
-          text: r.instead.text === undefined ? `${name}'s replacement` : `${name}: ${r.instead.text}`,
+          controller: source.controller,
+          effect: replaced.effect,
+          may: r.may === true,
+          text: replaced.text === undefined ? `${name}'s replacement` : `${name}: ${replaced.text}`,
         });
       }
     }
+    // For a while ("until end of turn, if target player would draw a card"):
+    // a `next` one goes through `nextDrawReplaced`, set up on purpose.
+    for (const record of this.state.activeReplacements) {
+      const r = record.replacement;
+      if (record.next === true || r.event !== "would-draw" || !this.activeDrawReaches(record, r, player)) continue;
+      const replaced = insteadEffect(r.instead);
+      if (replaced === undefined || !this.drawReplacementReachesNow(r, player, event)) continue;
+      const key = `draw-record:${record.source}:${record.madeIn ?? 0}`;
+      if (this.applyingReplacements.has(key)) continue;
+      const name = this.state.objects[record.source] === undefined ? "A replacement" : printedCardName(this.state.objects[record.source]);
+      out.push({
+        key,
+        source: record.source,
+        controller: record.owner,
+        effect: replaced.effect,
+        record,
+        may: r.may === true,
+        text: replaced.text === undefined ? `${name}'s replacement` : `${name}: ${replaced.text}`,
+      });
+    }
     return out;
+  }
+
+  /** `drawReplacementReaches`, and the board the replacement asks about: "while
+   * you have no cards in hand", "while your library has no cards in it". */
+  private drawReplacementReachesNow(r: DrawRedirectReplacement, player: PlayerId, event: WouldDrawEvent): boolean {
+    if (!drawReplacementReaches(r, event)) return false;
+    const zones = this.state.zones.perPlayer[player];
+    if (r.whileLibraryEmpty === true && zones.library.length !== 0) return false;
+    if (r.whileHandAtMost !== undefined && zones.hand.length > r.whileHandAtMost) return false;
+    return true;
   }
 
   /**
@@ -55684,8 +56122,8 @@ export class Game {
    * `player`'s event — each one's `who` read from its controller's side. */
   private playerEventReplacements(
     player: PlayerId,
-  ): (MillMultiplierReplacement | LifeGainReplacement | LifeLossReplacement)[] {
-    const out: (MillMultiplierReplacement | LifeGainReplacement | LifeLossReplacement)[] = [];
+  ): PlayerEventReplacement<MillMultiplierReplacement | LifeGainReplacement | LifeLossReplacement>[] {
+    const out: PlayerEventReplacement<MillMultiplierReplacement | LifeGainReplacement | LifeLossReplacement>[] = [];
     // An emblem's or a timed static's too ("players can't gain life this
     // turn" — Skullcrack).
     for (const id of this.staticSourceIds()) {
@@ -55703,7 +56141,7 @@ export class Game {
               ? player === source.controller
               : player !== source.controller);
         if (!reaches || !this.staticActive(source, ability)) continue;
-        out.push(r);
+        out.push({ r, by: source });
       }
     }
     return out;
@@ -56292,7 +56730,7 @@ export class Game {
       if (object.controller !== player || hasLostAbilities(this.state, this.registry,object)) continue;
       for (const ability of this.registry.get(rulesTextName(object)).static) {
         const r = ability.replacement;
-        if (r?.event === "tap-for-mana" && this.staticActive(object, ability)) mult *= r.multiplier;
+        if (r?.event === "tap-for-mana" && this.staticActive(object, ability)) mult *= r.instead.modify.times ?? 1;
       }
     }
     return Math.min(mult, Game.MAX_EFFECT_INSTANCES);
@@ -56310,18 +56748,19 @@ export class Game {
         const r = ability.replacement;
         if (
           r?.event === "would-create-token" &&
-          r.multiplier !== undefined &&
+          r.instead?.modify.times !== undefined &&
           r.ofTokens === undefined &&
           (object.controller === controller || r.anyController === true) &&
           this.staticActive(object, ability)
         ) {
-          mult = Math.min(mult * r.multiplier ** (object.stackCount ?? 1), Game.MAX_EFFECT_INSTANCES);
+          mult = Math.min(mult * (r.instead?.modify.times ?? 1) ** (object.stackCount ?? 1), Game.MAX_EFFECT_INSTANCES);
         }
       }
     }
     // A doubler for a while (Kaya, Geist Hunter's −2).
-    for (const effect of this.state.playerEffects ?? []) {
-      if (effect.owner === controller && effect.tokenMultiplier !== undefined) mult *= effect.tokenMultiplier;
+    for (const record of this.state.activeReplacements) {
+      const r = record.replacement;
+      if (r.event === "would-create-token" && r.instead?.modify.times !== undefined && record.owner === controller) mult *= r.instead.modify.times;
     }
     return mult;
   }
@@ -56402,9 +56841,10 @@ export class Game {
         ) {
           // A token stack of them is that many replacements.
           for (let i = 0; i < (object.stackCount ?? 1); i += 1) {
-            if (r.multiplier !== undefined) multipliers.push(r.multiplier);
-            if (r.plus !== undefined) plus.push(r.plus);
-            if (r.halved === true) halved += 1;
+            const change = r.instead.modify;
+            if (change.times !== undefined) multipliers.push(change.times);
+            if (change.plus !== undefined) plus.push(this.replacementAmount(change.plus, object));
+            if (change.half !== undefined) halved += 1;
           }
         }
       }
@@ -56501,19 +56941,19 @@ export class Game {
       }
     }
     // One a resolved spell made for a while (Malicious Eclipse, Gaea's Will).
-    for (const effect of this.state.playerEffects ?? []) {
-      const made = effect.graveyardExile;
-      if (made === undefined || (made.from === "battlefield" && !fromBattlefield)) continue;
+    for (const record of this.state.activeReplacements) {
+      const made = record.replacement;
+      if (made.event !== "would-be-put-into-graveyard" || made.instead !== "exile" || (made.from === "battlefield" && !fromBattlefield)) continue;
       if (
         made.filter !== undefined &&
-        !matchesFilter(this.state, this.registry, cardId, made.filter, { you: effect.owner, source: made.source })
+        !matchesFilter(this.state, this.registry, cardId, made.filter, { you: record.owner, source: record.source })
       ) {
         continue;
       }
       found.push({
         replacement: { event: "would-be-put-into-graveyard", instead: "exile" },
-        controller: effect.owner,
-        ...(made.returnAtEndStep === true ? { returnsFrom: made.source } : {}),
+        controller: record.owner,
+        ...(made.returnAtEndStep === true ? { returnsFrom: record.source } : {}),
       });
       if (firstOnly) return found;
     }
@@ -56526,12 +56966,32 @@ export class Game {
    * copy of the face has it (rule 707.2) and the face once it has lost all
    * its abilities doesn't — not from how it was cast. "From anywhere": the
    * stack as well as the battlefield. */
-  private topsItselfInstead(object: GameObject): boolean {
-    if (object.zone !== "battlefield" || hasLostAbilities(this.state, this.registry, object)) return false;
-    return this.registry.get(rulesTextName(object)).static.some((ability) => {
+  private ownDestinationInstead(object: GameObject): "library-top" | "library-bottom" | "hand" | undefined {
+    if (hasLostAbilities(this.state, this.registry, object)) return undefined;
+    // Its own text: a static's `self` reaches the object it's on, from
+    // whichever zone it has the ability in.
+    for (const ability of this.registry.get(rulesTextName(object)).static) {
       const r = ability.replacement;
-      return r?.event === "would-be-put-into-graveyard" && r.instead === "library-top" && r.self === true;
-    });
+      if (r?.event !== "would-be-put-into-graveyard" || r.self !== true || r.instead === "exile") continue;
+      if (r.from === "battlefield" && object.zone !== "battlefield") continue;
+      if (object.zone === "battlefield" || r.from === undefined) return r.instead;
+    }
+    // Another permanent's: "if a creature you control that's enchanted would
+    // die, return it to its owner's hand instead" (Necromancer's Magemark).
+    if (object.zone !== "battlefield") return undefined;
+    for (const id of this.state.zones.shared.battlefield) {
+      const by = this.state.objects[id];
+      if (by === undefined || hasLostAbilities(this.state, this.registry, by)) continue;
+      for (const ability of this.registry.get(rulesTextName(by)).static) {
+        const r = ability.replacement;
+        if (r?.event !== "would-be-put-into-graveyard" || r.self === true || r.instead === "exile") continue;
+        if (r.from === "battlefield" && object.zone !== "battlefield") continue;
+        if (!this.staticActive(by, ability)) continue;
+        if (r.filter !== undefined && !matchesFilter(this.state, this.registry, object.id, r.filter, { you: by.controller, source: id })) continue;
+        return r.instead;
+      }
+    }
+    return undefined;
   }
 
   private exilesItselfInstead(object: GameObject): boolean {
@@ -57155,11 +57615,14 @@ export class Game {
     }
     // "If this creature would die, put it on top of its owner's library
     // instead" (Gravebane Zombie): the same, its owner's pick over an exile.
-    if (to === "graveyard" && this.topsItselfInstead(object)) {
-      const moved = this.moveObjectUncached(id, "library", { ...enter, libraryPlacement: "top" });
-      if (moved) this.placeInLibrary(id, "top");
+    const owed = to === "graveyard" ? this.ownDestinationInstead(object) : undefined;
+    if (owed === "library-top" || owed === "library-bottom") {
+      const place = owed === "library-top" ? "top" : "bottom";
+      const moved = this.moveObjectUncached(id, "library", { ...enter, libraryPlacement: place });
+      if (moved) this.placeInLibrary(id, place);
       return moved;
     }
+    if (owed === "hand") return this.moveObjectUncached(id, "hand", enter);
 
     // Rest in Peace (rule 614): whatever would be put into a graveyard is
     // exiled instead. Whether that includes tokens is the card's wording, so

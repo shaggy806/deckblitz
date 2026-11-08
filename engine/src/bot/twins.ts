@@ -25,7 +25,7 @@ import type { TargetRef } from "../target.js";
 
 /** Object ids something pending refers to by id. */
 function referencedIds(state: GameState): string {
-  const parts: unknown[] = [state.delayedTriggers, state.preventionShields ?? []];
+  const parts: unknown[] = [state.delayedTriggers, state.activeReplacements ?? []];
   for (const id of state.zones.shared.stack) parts.push(state.objects[id]?.targets ?? null);
   return JSON.stringify(parts);
 }

@@ -33,7 +33,7 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-deal-damage",
-        prevent: true,
+        instead: { prevent: true },
         toFilter: { subtypes: ["Soldier"], attacking: true, controlledBy: "you" },
         toOther: true,
       },

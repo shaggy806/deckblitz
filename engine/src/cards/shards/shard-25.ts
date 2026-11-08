@@ -261,6 +261,7 @@ import _poolEnvoyOfOkinecAhau from "../pool/envoy-of-okinec-ahau.js";
 import _poolErisRoarOfTheStorm from "../pool/eris-roar-of-the-storm.js";
 import _poolErraticPortal from "../pool/erratic-portal.js";
 import _poolErtaisTrickery from "../pool/ertais-trickery.js";
+import _poolEruthTormentedProphet from "../pool/eruth-tormented-prophet.js";
 import _poolEscapeFromOrthanc from "../pool/escape-from-orthanc.js";
 import _poolEscapeToTheWilds from "../pool/escape-to-the-wilds.js";
 import _poolEscapeVelocity from "../pool/escape-velocity.js";
@@ -1231,6 +1232,7 @@ const shard: CardShard = {
     _poolErisRoarOfTheStorm,
     _poolErraticPortal,
     _poolErtaisTrickery,
+    _poolEruthTormentedProphet,
     _poolEscapeFromOrthanc,
     _poolEscapeToTheWilds,
     _poolEscapeVelocity,

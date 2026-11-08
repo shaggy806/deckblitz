@@ -23,10 +23,8 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-deal-damage",
-        prevent: true,
-        perEvent: true,
+        instead: { prevent: true, then: { kind: "mill", target: "you", amount: { product: ["x", 2] } }, perEvent: true },
         to: "you",
-        then: { kind: "mill", target: "you", amount: { product: ["x", 2] } },
       },
       text: PREVENT_TEXT,
     },

@@ -22,7 +22,7 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-add-counter",
-        plus: 1,
+        instead: { modify: { plus: 1 } },
         whoPuts: "you",
         onPlayers: "you",
         filter: { typesAnyOf: ["creature", "planeswalker"], controlledBy: "you" },

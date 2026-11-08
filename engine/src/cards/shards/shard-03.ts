@@ -558,6 +558,7 @@ import _poolPyreticCharge from "../pool/pyretic-charge.js";
 import _poolPyroclasticElemental from "../pool/pyroclastic-elemental.js";
 import _poolPyrohemia from "../pool/pyrohemia.js";
 import _poolQueenBrahne from "../pool/queen-brahne.js";
+import _poolQuestForPureFlame from "../pool/quest-for-pure-flame.js";
 import _poolQuestForTheGravelord from "../pool/quest-for-the-gravelord.js";
 import _poolQuickbeamUpstartEnt from "../pool/quickbeam-upstart-ent.js";
 import _poolQuirionElves from "../pool/quirion-elves.js";
@@ -731,6 +732,7 @@ import _poolStromkirkCaptain from "../pool/stromkirk-captain.js";
 import _poolStromkirkPatrol from "../pool/stromkirk-patrol.js";
 import _poolStrongholdDiscipline from "../pool/stronghold-discipline.js";
 import _poolStudentOfWarfare from "../pool/student-of-warfare.js";
+import _poolStunningReversal from "../pool/stunning-reversal.js";
 import _poolStunningStrike from "../pool/stunning-strike.js";
 import _poolSulfurVent from "../pool/sulfur-vent.js";
 import _poolSumalaSentry from "../pool/sumala-sentry.js";
@@ -1465,6 +1467,7 @@ const shard: CardShard = {
     _poolPyroclasticElemental,
     _poolPyrohemia,
     _poolQueenBrahne,
+    _poolQuestForPureFlame,
     _poolQuestForTheGravelord,
     _poolQuickbeamUpstartEnt,
     _poolQuirionElves,
@@ -1638,6 +1641,7 @@ const shard: CardShard = {
     _poolStromkirkPatrol,
     _poolStrongholdDiscipline,
     _poolStudentOfWarfare,
+    _poolStunningReversal,
     _poolStunningStrike,
     _poolSulfurVent,
     _poolSumalaSentry,

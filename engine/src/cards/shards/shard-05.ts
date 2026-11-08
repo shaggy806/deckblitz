@@ -849,6 +849,7 @@ import _poolTempleOfMalady from "../pool/temple-of-malady.js";
 import _poolTendTheSprigs from "../pool/tend-the-sprigs.js";
 import _poolTheDarknessCrystal from "../pool/the-darkness-crystal.js";
 import _poolTheGoldSaucer from "../pool/the-gold-saucer.js";
+import _poolTheGoldenThrone from "../pool/the-golden-throne.js";
 import _poolTheHorusHeresy from "../pool/the-horus-heresy.js";
 import _poolTheLadyOfTheMountain from "../pool/the-lady-of-the-mountain.js";
 import _poolTheOzolith from "../pool/the-ozolith.js";
@@ -1834,6 +1835,7 @@ const shard: CardShard = {
     _poolTendTheSprigs,
     _poolTheDarknessCrystal,
     _poolTheGoldSaucer,
+    _poolTheGoldenThrone,
     _poolTheHorusHeresy,
     _poolTheLadyOfTheMountain,
     _poolTheOzolith,

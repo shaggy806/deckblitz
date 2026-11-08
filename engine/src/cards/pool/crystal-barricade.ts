@@ -25,7 +25,7 @@ export default defineCard({
       replacement: {
         event: "would-deal-damage",
         combat: false,
-        prevent: true,
+        instead: { prevent: true },
         toFilter: { type: "creature", controlledBy: "you" },
         toOther: true,
       },

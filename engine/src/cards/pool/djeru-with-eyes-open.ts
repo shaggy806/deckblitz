@@ -40,7 +40,7 @@ export default defineCard({
       replacement: {
         event: "would-deal-damage",
         toFilter: { type: "planeswalker", controlledBy: "you" },
-        preventAmount: 1,
+        instead: { prevent: 1 },
       },
       text: "If a source would deal damage to a planeswalker you control, prevent 1 of that damage.",
     },

@@ -25,7 +25,6 @@ export default defineCard({
         event: "would-draw",
         who: "you",
         instead: {
-          may: true,
           text: "choose land or nonland and reveal instead",
           effect: {
             kind: "modal",
@@ -42,7 +41,7 @@ export default defineCard({
               },
             ],
           },
-        },
+        }, may: true,
       },
       text: TEXT,
     },

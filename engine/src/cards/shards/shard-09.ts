@@ -549,6 +549,7 @@ import _poolMystifyingMaze from "../pool/mystifying-maze.js";
 import _poolNahirisBinding from "../pool/nahiris-binding.js";
 import _poolNamoraTheSeaQueen from "../pool/namora-the-sea-queen.js";
 import _poolNayaCharm from "../pool/naya-charm.js";
+import _poolNecromancersMagemark from "../pool/necromancers-magemark.js";
 import _poolNecronOverlord from "../pool/necron-overlord.js";
 import _poolNefashu from "../pool/nefashu.js";
 import _poolNemesisMask from "../pool/nemesis-mask.js";
@@ -1561,6 +1562,7 @@ const shard: CardShard = {
     _poolNahirisBinding,
     _poolNamoraTheSeaQueen,
     _poolNayaCharm,
+    _poolNecromancersMagemark,
     _poolNecronOverlord,
     _poolNefashu,
     _poolNemesisMask,

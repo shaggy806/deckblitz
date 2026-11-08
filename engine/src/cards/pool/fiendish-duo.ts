@@ -19,7 +19,7 @@ export default defineCard({
       // Any source, yours or not; only damage to an opponent (a player) of
       // this permanent's controller — never a permanent.
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", multiplier: 2, to: "opponent" },
+      replacement: { event: "would-deal-damage", instead: { modify: { times: 2 } }, to: "opponent" },
       text: DOUBLE_TEXT,
     },
   ],

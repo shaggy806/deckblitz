@@ -25,7 +25,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: REVOLT_CONDITION,
-      replacement: { event: "would-deal-damage", plus: 2, combat: false, to: "opponent-side", source: { controlledBy: "you" } },
+      replacement: { event: "would-deal-damage", instead: { modify: { plus: 2 } }, combat: false, to: "opponent-side", source: { controlledBy: "you" } },
       text: REVOLT_TEXT,
     },
   ],

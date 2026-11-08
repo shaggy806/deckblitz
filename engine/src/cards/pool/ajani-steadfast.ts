@@ -66,7 +66,7 @@ export default defineCard({
             event: "would-deal-damage",
             to: "your-side",
             toFilter: { type: "planeswalker" },
-            preventAllBut: 1,
+            instead: { prevent: { allBut: 1 } },
           },
           text: EMBLEM,
         },

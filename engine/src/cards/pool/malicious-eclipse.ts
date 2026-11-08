@@ -21,9 +21,9 @@ export default defineCard({
     effects: [
       { kind: "modify-pt-all", filter: { type: "creature" }, power: -2, toughness: -2, duration: "end-of-turn" },
       {
-        kind: "player-effect",
+        kind: "replacement-effect",
         duration: "end-of-turn",
-        graveyardExile: { filter: { type: "creature", controlledBy: "opponent" }, from: "battlefield" },
+        replacement: { event: "would-be-put-into-graveyard", instead: "exile", filter: { type: "creature", controlledBy: "opponent" }, from: "battlefield" },
       },
     ],
   },

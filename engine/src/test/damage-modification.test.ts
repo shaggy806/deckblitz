@@ -180,7 +180,7 @@ describe("damage that can't be prevented (rule 615.12)", () => {
     cast(game, toHand(game, "Flaring Pain"));
     hit(game, goblin, ref(A), 2);
     expect(life(game, A)).toBe(18);
-    expect(game.state.preventionShields[0]?.amount).toBe(3);
+    expect(game.state.activeReplacements[0]?.left).toBe(3);
     // It lapses with the turn.
     nextTurn(game);
     expect(game.state.damageUnpreventableThisTurn).toBeUndefined();
@@ -252,7 +252,7 @@ describe("damage rules (one-shot prevention and redirection)", () => {
     game.debugApplyEffect(B, { kind: "damage", amount: 2, who: "each-player" }, [], { source: goblin });
     expect(life(game, A)).toBe(20);
     expect(life(game, B)).toBe(20);
-    expect(game.state.preventionShields).toHaveLength(0);
+    expect(game.state.activeReplacements).toHaveLength(0);
     game.debugApplyEffect(B, { kind: "damage", amount: 2, who: "each-player" }, [], { source: goblin });
     expect(life(game, A)).toBe(18);
   });
@@ -277,7 +277,7 @@ describe("damage rules (one-shot prevention and redirection)", () => {
     game.debugApplyEffect(A, { kind: "damage-rule", by: { target: "source" }, combat: true, amount: "next-time", redirectTo: "you" }, [], { source: psycho });
     hit(game, psycho, ref(B), 5);
     expect(life(game, B)).toBe(15);
-    expect(game.state.preventionShields).toHaveLength(1);
+    expect(game.state.activeReplacements).toHaveLength(1);
   });
 
   it("Circle of Solace prevents the next damage a creature of the chosen type deals you", () => {

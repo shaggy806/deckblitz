@@ -70,7 +70,7 @@ describe("prevent-damage-from-chosen-source", () => {
     expect(colorsOf(game, goblin)).toEqual(["U"]);
     ping(game, goblin);
     expect(life(game, A)).toBe(18);
-    expect(game.state.preventionShields).toHaveLength(1);
+    expect(game.state.activeReplacements).toHaveLength(1);
   });
 
   it("ends with the turn", () => {

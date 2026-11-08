@@ -14,7 +14,7 @@ export default defineCard({
       replacement: {
         event: "would-deal-damage",
         combat: true,
-        prevent: true,
+        instead: { prevent: true },
         toFilter: { type: "creature", attacking: true, controlledBy: "you" },
       },
       text: "Prevent all combat damage that would be dealt to attacking creatures you control.",

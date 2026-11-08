@@ -24,7 +24,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "controls", filter: { type: "creature" }, atLeast: 1, excludeSelf: true },
-      replacement: { event: "would-deal-damage", prevent: true, to: "self", source: { targets: { source: true } } },
+      replacement: { event: "would-deal-damage", instead: { prevent: true }, to: "self", source: { targets: { source: true } } },
       text: TEXT,
     },
   ],

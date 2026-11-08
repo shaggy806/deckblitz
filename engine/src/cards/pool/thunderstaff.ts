@@ -17,7 +17,7 @@ export default defineCard({
         to: "you",
         combat: true,
         source: { type: "creature" },
-        preventAmount: 1,
+        instead: { prevent: 1 },
       },
       text: "As long as this artifact is untapped, if a creature would deal combat damage to you, prevent 1 of that damage.",
     },

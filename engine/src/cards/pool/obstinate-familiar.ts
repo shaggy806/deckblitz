@@ -22,7 +22,7 @@ export default defineCard({
       replacement: {
         event: "would-draw",
         who: "you",
-        instead: { may: true, text: "skip that draw", effect: { kind: "sequence", effects: [] } },
+        instead: { text: "skip that draw", effect: { kind: "sequence", effects: [] } }, may: true,
       },
       text: TEXT,
     },

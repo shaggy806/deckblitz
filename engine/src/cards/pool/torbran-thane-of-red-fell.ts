@@ -20,7 +20,7 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-deal-damage",
-        plus: 2,
+        instead: { modify: { plus: 2 } },
         source: { colors: ["R"], controlledBy: "you" },
         to: "opponent-side",
       },

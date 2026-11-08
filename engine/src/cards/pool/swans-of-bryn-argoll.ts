@@ -26,8 +26,7 @@ export default defineCard({
       replacement: {
         event: "would-deal-damage",
         to: "self",
-        prevent: true,
-        then: { kind: "draw", amount: "x", who: "trigger-controller" },
+        instead: { prevent: true, then: { kind: "draw", amount: "x", who: "trigger-controller" } },
       },
       text: TEXT,
     },

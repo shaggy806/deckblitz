@@ -21,7 +21,7 @@ export default defineCard({
     },
     {
       affects: { scope: "self" },
-      replacement: { event: "would-mill", who: "opponent", plus: 4 },
+      replacement: { event: "would-mill", who: "opponent", instead: { modify: { plus: 4 } } },
       text: MILL_TEXT,
     },
   ],

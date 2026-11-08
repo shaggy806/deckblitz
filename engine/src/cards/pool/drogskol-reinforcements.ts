@@ -31,7 +31,7 @@ export default defineCard({
       replacement: {
         event: "would-deal-damage",
         combat: false,
-        prevent: true,
+        instead: { prevent: true },
         toFilter: { subtype: "Spirit", controlledBy: "you" },
       },
       text: PREVENT_TEXT,

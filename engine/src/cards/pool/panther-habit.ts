@@ -13,10 +13,8 @@ export default defineCard({
       replacement: {
         event: "would-deal-damage",
         to: "attached",
-        prevent: true,
+        instead: { prevent: true, then: { kind: "add-counter", target: "attached", counter: "+1/+1", amount: "x" }, perEvent: true },
         // "Would be dealt damage": once per damage event, "that many" its total (Anti-Venom's shape).
-        perEvent: true,
-        then: { kind: "add-counter", target: "attached", counter: "+1/+1", amount: "x" },
       },
       text: "If equipped creature would be dealt damage, prevent that damage and put that many +1/+1 counters on it.",
     },

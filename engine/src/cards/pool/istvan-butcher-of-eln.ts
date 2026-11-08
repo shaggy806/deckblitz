@@ -19,7 +19,7 @@ export default defineCard({
     { affects: { scope: "self" }, restrictions: ["must-attack"], text: ATTACKS },
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", prevent: true, to: "self", source: { types: ["creature"] } },
+      replacement: { event: "would-deal-damage", instead: { prevent: true }, to: "self", source: { types: ["creature"] } },
       text: PREVENT,
     },
   ],

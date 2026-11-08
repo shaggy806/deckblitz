@@ -24,7 +24,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-add-counter", plus: 1, counterKind: "+1/+1", filter: { type: "creature" } },
+      replacement: { event: "would-add-counter", instead: { modify: { plus: 1 } }, counterKind: "+1/+1", filter: { type: "creature" } },
       text: "If one or more +1/+1 counters would be put on a creature you control, that many plus one +1/+1 counters are put on it instead.",
     },
   ],

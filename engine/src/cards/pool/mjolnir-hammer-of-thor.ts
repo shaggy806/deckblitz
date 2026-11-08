@@ -22,7 +22,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", multiplier: 2, fromAttached: true },
+      replacement: { event: "would-deal-damage", instead: { modify: { times: 2 } }, fromAttached: true },
       text: "Double all damage equipped creature would deal.",
     },
   ],

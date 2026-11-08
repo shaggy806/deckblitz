@@ -26,7 +26,7 @@ export default defineCard({
     },
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", fromAttached: true, combat: true, prevent: true },
+      replacement: { event: "would-deal-damage", fromAttached: true, combat: true, instead: { prevent: true } },
       text: "Prevent all combat damage that would be dealt by enchanted creature.",
     },
   ],

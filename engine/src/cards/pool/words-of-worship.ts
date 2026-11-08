@@ -16,9 +16,10 @@ export default defineCard({
       cost: { mana: "{1}", tap: false },
       targets: [],
       effect: {
-        kind: "player-effect",
+        kind: "replacement-effect",
         duration: "end-of-turn",
-        nextDrawInstead: { effect: { kind: "gain-life", amount: 5 }, text: "You gain 5 life instead." },
+        next: true,
+        replacement: { event: "would-draw", who: "you", instead: { effect: { kind: "gain-life", amount: 5 }, text: "You gain 5 life instead." } },
       },
       resolve: null,
       text: TEXT,

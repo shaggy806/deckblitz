@@ -15,7 +15,7 @@ export default defineCard({
   toughness: 5,
   keywords: ["flying"],
   text: `Flying\n${REPLACE_TEXT}\n${ACTIVATED_TEXT}`,
-  static: [{ affects: { scope: "self" }, replacement: { event: "would-proliferate", times: 2 }, text: REPLACE_TEXT }],
+  static: [{ affects: { scope: "self" }, replacement: { event: "would-proliferate", instead: { modify: { times: 2 } } }, text: REPLACE_TEXT }],
   activated: [
     {
       cost: {

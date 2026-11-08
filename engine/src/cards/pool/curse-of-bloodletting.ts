@@ -15,7 +15,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", multiplier: 2, to: "enchanted-player" },
+      replacement: { event: "would-deal-damage", instead: { modify: { times: 2 } }, to: "enchanted-player" },
       text: TEXT,
     },
   ],

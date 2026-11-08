@@ -59,7 +59,7 @@ export default defineCard({
       affects: { scope: "self" },
       replacement: {
         event: "would-deal-damage",
-        prevent: true,
+        instead: { prevent: true },
         toFilter: { type: "creature", attacking: true, controlledBy: "you" },
       },
       text: "Prevent all damage that would be dealt to attacking creatures you control.",

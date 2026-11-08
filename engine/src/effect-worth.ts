@@ -30,6 +30,7 @@
  * may both use it.
  */
 
+import { insteadEffect } from "./replacements.js";
 import type { CardRegistry } from "./cards/card-registry.js";
 import type { CardDefinition } from "./cards/define.js";
 import { computeCharacteristics } from "./characteristics.js";
@@ -337,6 +338,11 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
     }
     case "sequence":
       return effect.effects.reduce((sum, e) => sum + untargetedWorth(e, ctx), 0);
+    // A resolved replacement: what it will do instead, if it says.
+    case "replacement-effect": {
+      const replaced = insteadEffect("instead" in effect.replacement ? effect.replacement.instead : undefined);
+      return replaced === undefined ? 0 : effectWorth(replaced.effect, ctx);
+    }
     case "for-each-target":
     case "for-target":
     case "for-each-permanent":

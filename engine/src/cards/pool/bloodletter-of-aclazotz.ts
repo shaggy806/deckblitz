@@ -24,7 +24,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "your-turn" },
-      replacement: { event: "would-lose-life", who: "opponent", multiplier: 2 },
+      replacement: { event: "would-lose-life", who: "opponent", instead: { modify: { times: 2 } } },
       text: "If an opponent would lose life during your turn, they lose twice that much life instead.",
     },
   ],

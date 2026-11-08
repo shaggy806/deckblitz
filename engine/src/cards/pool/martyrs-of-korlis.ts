@@ -24,7 +24,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "source", filter: { tapped: false } },
-      replacement: { event: "would-deal-damage", to: "you", source: { type: "artifact" }, redirect: "self" },
+      replacement: { event: "would-deal-damage", to: "you", source: { type: "artifact" }, instead: { redirect: "self" } },
       text: TEXT,
     },
   ],

@@ -50,7 +50,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-gain-life", who: "you", plus: 1 },
+      replacement: { event: "would-gain-life", who: "you", instead: { modify: { plus: 1 } } },
       text: GAIN_TEXT,
     },
   ],

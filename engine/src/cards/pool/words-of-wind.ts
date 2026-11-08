@@ -17,18 +17,17 @@ export default defineCard({
       cost: { mana: "{1}", tap: false },
       targets: [],
       effect: {
-        kind: "player-effect",
+        kind: "replacement-effect",
         duration: "end-of-turn",
-        nextDrawInstead: {
-          effect: {
+        next: true,
+        replacement: { event: "would-draw", who: "you", instead: { effect: {
             kind: "sequence",
             effects: [
               { kind: "vote", choose: true, who: "each-player", for: { permanent: { controlledBy: "you" }, own: true } },
               { kind: "for-each-voted", which: "voted", simultaneous: true, effect: { kind: "return-to-hand", target: 0 } },
             ],
           },
-          text: "Instead, each player returns a permanent they control to its owner's hand.",
-        },
+          text: "Instead, each player returns a permanent they control to its owner's hand." } },
       },
       resolve: null,
       text: TEXT,

@@ -18,12 +18,12 @@ export default defineCard({
     },
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", to: "attached", combat: true, prevent: true },
+      replacement: { event: "would-deal-damage", to: "attached", combat: true, instead: { prevent: true } },
       text: PREVENT_TEXT,
     },
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", fromAttached: true, combat: true, prevent: true },
+      replacement: { event: "would-deal-damage", fromAttached: true, combat: true, instead: { prevent: true } },
       text: PREVENT_TEXT,
     },
   ],

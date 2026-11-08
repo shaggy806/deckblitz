@@ -9,7 +9,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", to: "you", source: { type: "artifact" }, preventAmount: 1 },
+      replacement: { event: "would-deal-damage", to: "you", source: { type: "artifact" }, instead: { prevent: 1 } },
       text: "If an artifact would deal damage to you, prevent 1 of that damage.",
     },
   ],

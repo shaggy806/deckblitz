@@ -21,7 +21,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", prevent: true, to: "self", source: { subtype: "Desert" } },
+      replacement: { event: "would-deal-damage", instead: { prevent: true }, to: "self", source: { subtype: "Desert" } },
       text: PREVENT_TEXT,
     },
   ],

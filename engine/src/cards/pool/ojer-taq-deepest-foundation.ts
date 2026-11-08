@@ -19,7 +19,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-create-token", multiplier: 3, ofTokens: { type: "creature" } },
+      replacement: { event: "would-create-token", instead: { modify: { times: 3 } }, ofTokens: { type: "creature" } },
       text: TOKENS_TEXT,
     },
   ],

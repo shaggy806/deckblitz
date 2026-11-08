@@ -18,12 +18,11 @@ export default defineCard({
       cost: { mana: "{1}", tap: false },
       targets: [],
       effect: {
-        kind: "player-effect",
+        kind: "replacement-effect",
         duration: "end-of-turn",
-        nextDrawInstead: {
-          effect: { kind: "create-token", token: "Bear Token", count: 1 },
-          text: "Create a 2/2 green Bear creature token instead.",
-        },
+        next: true,
+        replacement: { event: "would-draw", who: "you", instead: { effect: { kind: "create-token", token: "Bear Token", count: 1 },
+          text: "Create a 2/2 green Bear creature token instead." } },
       },
       resolve: null,
       text: TEXT,

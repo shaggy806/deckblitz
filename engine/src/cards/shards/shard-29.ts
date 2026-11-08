@@ -406,6 +406,7 @@ import _poolIntoTheStory from "../pool/into-the-story.js";
 import _poolInundatedArchive from "../pool/inundated-archive.js";
 import _poolInvasionOfXerex from "../pool/invasion-of-xerex.js";
 import _poolIroncladSlayer from "../pool/ironclad-slayer.js";
+import _poolIsengardUnleashed from "../pool/isengard-unleashed.js";
 import _poolIsuTheAbominable from "../pool/isu-the-abominable.js";
 import _poolJacesMindseeker from "../pool/jaces-mindseeker.js";
 import _poolJacquesLeVert from "../pool/jacques-le-vert.js";
@@ -1384,6 +1385,7 @@ const shard: CardShard = {
     _poolInundatedArchive,
     _poolInvasionOfXerex,
     _poolIroncladSlayer,
+    _poolIsengardUnleashed,
     _poolIsuTheAbominable,
     _poolJacesMindseeker,
     _poolJacquesLeVert,

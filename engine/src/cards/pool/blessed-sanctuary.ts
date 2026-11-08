@@ -17,7 +17,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", combat: false, prevent: true, to: "you" },
+      replacement: { event: "would-deal-damage", combat: false, instead: { prevent: true }, to: "you" },
       text: PREVENT_TEXT,
     },
     {
@@ -25,7 +25,7 @@ export default defineCard({
       replacement: {
         event: "would-deal-damage",
         combat: false,
-        prevent: true,
+        instead: { prevent: true },
         toFilter: { type: "creature", controlledBy: "you" },
       },
       text: PREVENT_TEXT,

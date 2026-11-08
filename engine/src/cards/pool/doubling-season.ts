@@ -11,13 +11,13 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-create-token", multiplier: 2 },
+      replacement: { event: "would-create-token", instead: { modify: { times: 2 } } },
       text: "If an effect would create one or more tokens under your control, it creates twice that many of those tokens instead.",
     },
     {
       affects: { scope: "self" },
       // "An effect would put": not counters put as a cost (Devoted Druid).
-      replacement: { event: "would-add-counter", multiplier: 2, byEffectOnly: true },
+      replacement: { event: "would-add-counter", instead: { modify: { times: 2 } }, byEffectOnly: true },
       text: "If an effect would put one or more counters on a permanent you control, it puts twice that many of those counters on that permanent instead.",
     },
   ],

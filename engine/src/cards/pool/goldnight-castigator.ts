@@ -17,12 +17,12 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", multiplier: 2, to: "you" },
+      replacement: { event: "would-deal-damage", instead: { modify: { times: 2 } }, to: "you" },
       text: "If a source would deal damage to you, it deals double that damage to you instead.",
     },
     {
       affects: { scope: "self" },
-      replacement: { event: "would-deal-damage", multiplier: 2, to: "self" },
+      replacement: { event: "would-deal-damage", instead: { modify: { times: 2 } }, to: "self" },
       text: "If a source would deal damage to this creature, it deals double that damage to this creature instead.",
     },
   ],

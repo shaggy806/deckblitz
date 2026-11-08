@@ -101,9 +101,11 @@ describe("damage to a player, multiplied until your next turn", () => {
   it("Lightning's shape: sources deal that player — and their permanents — double", () => {
     const game = setUp([]);
     run(game, {
-      kind: "player-effect",
+      kind: "replacement-effect",
       duration: "until-your-next-turn",
-      damageTo: { who: "each-opponent", multiplier: 2, permanentsToo: true },
+      replacement: { event: "would-deal-damage", instead: { modify: { times: 2 } } },
+      players: "each-opponent",
+      permanentsToo: true,
     });
     const source = game.debugSpawn("Grizzly Bears", A, "battlefield");
     const hit = (to: { kind: "player"; player: typeof A } | { kind: "object"; object: ObjectId }) =>
