@@ -946,6 +946,7 @@ import _poolUnmooredEgo from "../pool/unmoored-ego.js";
 import _poolUnnaturalPredation from "../pool/unnatural-predation.js";
 import _poolUrborgMindsucker from "../pool/urborg-mindsucker.js";
 import _poolUrborgPhantom from "../pool/urborg-phantom.js";
+import _poolValdukKeeperOfTheFlame from "../pool/valduk-keeper-of-the-flame.js";
 import _poolValeriaRichardsPrecocious from "../pool/valeria-richards-precocious.js";
 import _poolValiantVeteran from "../pool/valiant-veteran.js";
 import _poolValkyriesSword from "../pool/valkyries-sword.js";
@@ -1991,6 +1992,7 @@ const shard: CardShard = {
     _poolUnnaturalPredation,
     _poolUrborgMindsucker,
     _poolUrborgPhantom,
+    _poolValdukKeeperOfTheFlame,
     _poolValeriaRichardsPrecocious,
     _poolValiantVeteran,
     _poolValkyriesSword,

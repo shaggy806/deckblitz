@@ -220,6 +220,7 @@ import _poolDarkHeartOfTheWood from "../pool/dark-heart-of-the-wood.js";
 import _poolDarkPrivilege from "../pool/dark-privilege.js";
 import _poolDarkSupplicant from "../pool/dark-supplicant.js";
 import _poolDaruWarchief from "../pool/daru-warchief.js";
+import _poolDauntlessDourbark from "../pool/dauntless-dourbark.js";
 import _poolDauthiSlayer from "../pool/dauthi-slayer.js";
 import _poolDawnOfHope from "../pool/dawn-of-hope.js";
 import _poolDawnhartGeist from "../pool/dawnhart-geist.js";
@@ -1205,6 +1206,7 @@ const shard: CardShard = {
     _poolDarkPrivilege,
     _poolDarkSupplicant,
     _poolDaruWarchief,
+    _poolDauntlessDourbark,
     _poolDauthiSlayer,
     _poolDawnOfHope,
     _poolDawnhartGeist,

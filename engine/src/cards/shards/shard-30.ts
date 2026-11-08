@@ -839,6 +839,7 @@ import _poolSwiftReckoning from "../pool/swift-reckoning.js";
 import _poolSwordOfForgeAndFrontier from "../pool/sword-of-forge-and-frontier.js";
 import _poolSyggWanderwineWisdom from "../pool/sygg-wanderwine-wisdom.js";
 import _poolSyndicateTrafficker from "../pool/syndicate-trafficker.js";
+import _poolSyntheticDestiny from "../pool/synthetic-destiny.js";
 import _poolSyphonLife from "../pool/syphon-life.js";
 import _poolTaintedSigil from "../pool/tainted-sigil.js";
 import _poolTaintedWell from "../pool/tainted-well.js";
@@ -1850,6 +1851,7 @@ const shard: CardShard = {
     _poolSwordOfForgeAndFrontier,
     _poolSyggWanderwineWisdom,
     _poolSyndicateTrafficker,
+    _poolSyntheticDestiny,
     _poolSyphonLife,
     _poolTaintedSigil,
     _poolTaintedWell,

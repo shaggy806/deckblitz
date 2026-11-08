@@ -233,6 +233,7 @@ import _poolDragonsHoard from "../pool/dragons-hoard.js";
 import _poolDragonstormGlobe from "../pool/dragonstorm-globe.js";
 import _poolDranaKalastriaBloodchief from "../pool/drana-kalastria-bloodchief.js";
 import _poolDraugrsHelm from "../pool/draugrs-helm.js";
+import _poolDreadDefiler from "../pool/dread-defiler.js";
 import _poolDreadReaper from "../pool/dread-reaper.js";
 import _poolDreadSlag from "../pool/dread-slag.js";
 import _poolDreadWarlock from "../pool/dread-warlock.js";
@@ -722,6 +723,7 @@ import _poolScalpelexis from "../pool/scalpelexis.js";
 import _poolScavengedWeaponry from "../pool/scavenged-weaponry.js";
 import _poolSchemaThief from "../pool/schema-thief.js";
 import _poolScionOfGlaciers from "../pool/scion-of-glaciers.js";
+import _poolScourgeOfTheSkyclaves from "../pool/scourge-of-the-skyclaves.js";
 import _poolScouringSands from "../pool/scouring-sands.js";
 import _poolScrybSprites from "../pool/scryb-sprites.js";
 import _poolScytheclaw from "../pool/scytheclaw.js";
@@ -1227,6 +1229,7 @@ const shard: CardShard = {
     _poolDragonstormGlobe,
     _poolDranaKalastriaBloodchief,
     _poolDraugrsHelm,
+    _poolDreadDefiler,
     _poolDreadReaper,
     _poolDreadSlag,
     _poolDreadWarlock,
@@ -1716,6 +1719,7 @@ const shard: CardShard = {
     _poolScavengedWeaponry,
     _poolSchemaThief,
     _poolScionOfGlaciers,
+    _poolScourgeOfTheSkyclaves,
     _poolScouringSands,
     _poolScrybSprites,
     _poolScytheclaw,

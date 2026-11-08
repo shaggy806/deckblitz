@@ -936,6 +936,7 @@ import _poolWordsOfWar from "../pool/words-of-war.js";
 import _poolWorldsoulColossus from "../pool/worldsoul-colossus.js";
 import _poolWortBoggartAuntie from "../pool/wort-boggart-auntie.js";
 import _poolWuWarship from "../pool/wu-warship.js";
+import _poolWylethSoulOfSteel from "../pool/wyleth-soul-of-steel.js";
 import _poolXunYuWeiAdvisor from "../pool/xun-yu-wei-advisor.js";
 import _poolYellowScarvesTroops from "../pool/yellow-scarves-troops.js";
 import _poolYoshimaruScrappyStray from "../pool/yoshimaru-scrappy-stray.js";
@@ -1908,6 +1909,7 @@ const shard: CardShard = {
     _poolWorldsoulColossus,
     _poolWortBoggartAuntie,
     _poolWuWarship,
+    _poolWylethSoulOfSteel,
     _poolXunYuWeiAdvisor,
     _poolYellowScarvesTroops,
     _poolYoshimaruScrappyStray,

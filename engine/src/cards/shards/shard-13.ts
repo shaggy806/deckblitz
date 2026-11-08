@@ -616,6 +616,7 @@ import _poolRenderInert from "../pool/render-inert.js";
 import _poolRepelTheDarkness from "../pool/repel-the-darkness.js";
 import _poolReprocess from "../pool/reprocess.js";
 import _poolRepudiateReplicate from "../pool/repudiate-replicate.js";
+import _poolResplendentMarshal from "../pool/resplendent-marshal.js";
 import _poolResurgentBelief from "../pool/resurgent-belief.js";
 import _poolResurrectedCultist from "../pool/resurrected-cultist.js";
 import _poolReturnedReveler from "../pool/returned-reveler.js";
@@ -1576,6 +1577,7 @@ const shard: CardShard = {
     _poolRepelTheDarkness,
     _poolReprocess,
     _poolRepudiateReplicate,
+    _poolResplendentMarshal,
     _poolResurgentBelief,
     _poolResurrectedCultist,
     _poolReturnedReveler,

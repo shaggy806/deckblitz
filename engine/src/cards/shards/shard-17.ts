@@ -553,6 +553,7 @@ import _poolNardoleResourcefulCyborg from "../pool/nardole-resourceful-cyborg.js
 import _poolNathOfTheGiltLeaf from "../pool/nath-of-the-gilt-leaf.js";
 import _poolNayaPanorama from "../pool/naya-panorama.js";
 import _poolNecroplasm from "../pool/necroplasm.js";
+import _poolNecropolis from "../pool/necropolis.js";
 import _poolNecroticWound from "../pool/necrotic-wound.js";
 import _poolNemaSiltlurker from "../pool/nema-siltlurker.js";
 import _poolNephaliaAcademy from "../pool/nephalia-academy.js";
@@ -1535,6 +1536,7 @@ const shard: CardShard = {
     _poolNathOfTheGiltLeaf,
     _poolNayaPanorama,
     _poolNecroplasm,
+    _poolNecropolis,
     _poolNecroticWound,
     _poolNemaSiltlurker,
     _poolNephaliaAcademy,

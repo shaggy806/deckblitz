@@ -4,6 +4,7 @@
 import type { CardShard } from "../card-shards.js";
 
 import _poolAatchikEmeraldRadian from "../pool/aatchik-emerald-radian.js";
+import _poolAbominationOfLlanowar from "../pool/abomination-of-llanowar.js";
 import _poolAccomplishedAlchemist from "../pool/accomplished-alchemist.js";
 import _poolAddle from "../pool/addle.js";
 import _poolAetherSearcher from "../pool/aether-searcher.js";
@@ -999,6 +1000,7 @@ import _tokensWeirdToken from "../tokens/weird-token.js";
 const shard: CardShard = {
   pool: [
     _poolAatchikEmeraldRadian,
+    _poolAbominationOfLlanowar,
     _poolAccomplishedAlchemist,
     _poolAddle,
     _poolAetherSearcher,

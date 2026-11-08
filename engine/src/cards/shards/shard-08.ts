@@ -133,6 +133,7 @@ import _poolCandlestick from "../pool/candlestick.js";
 import _poolCaoRenWeiCommander from "../pool/cao-ren-wei-commander.js";
 import _poolCapriciousSorcerer from "../pool/capricious-sorcerer.js";
 import _poolCaptainAmericaSkybound from "../pool/captain-america-skybound.js";
+import _poolCaptainMarvelApexAvenger from "../pool/captain-marvel-apex-avenger.js";
 import _poolCaptiveWeird from "../pool/captive-weird.js";
 import _poolCarnageAltar from "../pool/carnage-altar.js";
 import _poolCarthTheLion from "../pool/carth-the-lion.js";
@@ -1169,6 +1170,7 @@ const shard: CardShard = {
     _poolCaoRenWeiCommander,
     _poolCapriciousSorcerer,
     _poolCaptainAmericaSkybound,
+    _poolCaptainMarvelApexAvenger,
     _poolCaptiveWeird,
     _poolCarnageAltar,
     _poolCarthTheLion,

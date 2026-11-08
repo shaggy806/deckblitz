@@ -487,6 +487,7 @@ import _poolMaiJadedEdge from "../pool/mai-jaded-edge.js";
 import _poolMaladyInvoker from "../pool/malady-invoker.js";
 import _poolMalevolentChandelier from "../pool/malevolent-chandelier.js";
 import _poolMalfunction from "../pool/malfunction.js";
+import _poolMalignus from "../pool/malignus.js";
 import _poolManipulateFate from "../pool/manipulate-fate.js";
 import _poolMantisRider from "../pool/mantis-rider.js";
 import _poolMaraudingBoneslasher from "../pool/marauding-boneslasher.js";
@@ -766,6 +767,7 @@ import _poolSmolderingStagecoach from "../pool/smoldering-stagecoach.js";
 import _poolSmotheringTithe from "../pool/smothering-tithe.js";
 import _poolSolemnity from "../pool/solemnity.js";
 import _poolSolidarity from "../pool/solidarity.js";
+import _poolSongOfBlood from "../pool/song-of-blood.js";
 import _poolSorinVampireLord from "../pool/sorin-vampire-lord.js";
 import _poolSoulEnervation from "../pool/soul-enervation.js";
 import _poolSoulSear from "../pool/soul-sear.js";
@@ -878,6 +880,7 @@ import _poolUndergroundSea from "../pool/underground-sea.js";
 import _poolUnfortunateAccident from "../pool/unfortunate-accident.js";
 import _poolUnityOfPurpose from "../pool/unity-of-purpose.js";
 import _poolUnleashFury from "../pool/unleash-fury.js";
+import _poolUnlicensedHearse from "../pool/unlicensed-hearse.js";
 import _poolUnluckyWitness from "../pool/unlucky-witness.js";
 import _poolUnravelingMummy from "../pool/unraveling-mummy.js";
 import _poolUnstableFooting from "../pool/unstable-footing.js";
@@ -1453,6 +1456,7 @@ const shard: CardShard = {
     _poolMaladyInvoker,
     _poolMalevolentChandelier,
     _poolMalfunction,
+    _poolMalignus,
     _poolManipulateFate,
     _poolMantisRider,
     _poolMaraudingBoneslasher,
@@ -1732,6 +1736,7 @@ const shard: CardShard = {
     _poolSmotheringTithe,
     _poolSolemnity,
     _poolSolidarity,
+    _poolSongOfBlood,
     _poolSorinVampireLord,
     _poolSoulEnervation,
     _poolSoulSear,
@@ -1844,6 +1849,7 @@ const shard: CardShard = {
     _poolUnfortunateAccident,
     _poolUnityOfPurpose,
     _poolUnleashFury,
+    _poolUnlicensedHearse,
     _poolUnluckyWitness,
     _poolUnravelingMummy,
     _poolUnstableFooting,

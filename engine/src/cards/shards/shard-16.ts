@@ -34,6 +34,7 @@ import _poolAnglerTurtle from "../pool/angler-turtle.js";
 import _poolAngryRabble from "../pool/angry-rabble.js";
 import _poolAnointerOfChampions from "../pool/anointer-of-champions.js";
 import _poolAqueousForm from "../pool/aqueous-form.js";
+import _poolArbiterOfKnollridge from "../pool/arbiter-of-knollridge.js";
 import _poolArborElf from "../pool/arbor-elf.js";
 import _poolArcaneAmphisbaena from "../pool/arcane-amphisbaena.js";
 import _poolArchpriestOfIona from "../pool/archpriest-of-iona.js";
@@ -1087,6 +1088,7 @@ const shard: CardShard = {
     _poolAngryRabble,
     _poolAnointerOfChampions,
     _poolAqueousForm,
+    _poolArbiterOfKnollridge,
     _poolArborElf,
     _poolArcaneAmphisbaena,
     _poolArchpriestOfIona,

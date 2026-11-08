@@ -1342,6 +1342,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
  * `banned`), as the deck builder and the library show it. */
 export const COMMANDER_BANNED: readonly string[] = [
   "Ancestral Recall",
+  "Balance",
   "Black Lotus",
   "Dockside Extortionist",
   "Emrakul, the Aeons Torn",
