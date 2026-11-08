@@ -7671,3 +7671,22 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### First Response: a Soldier the upkeep after you lost life
 - **Do:** Cast Shock at yourself. Pass the turn to Bob.
 - **Expect:** At the beginning of Bob's upkeep you get a 1/1 white Soldier token.
+
+## Trigger events and "first time each turn" (2026-11-07)
+
+### Nykthos Paragon: once it has done it, gaining life again doesn't trigger it
+- **Do:** Cast Healing Salve choosing "gain 3 life" on yourself, and answer yes to putting the counters. Then cast the second Healing Salve the same way.
+- **Expect:** After the first, Nykthos Paragon and Grizzly Bears each get three +1/+1 counters. After the second you gain 3 life and Nykthos Paragon's ability doesn't go on the stack at all: no question, no new counters.
+
+### Elrond, Moon-Reader: a creature's mana pays for a spell, and you draw
+- **Do:** Cast Giant Growth on Grizzly Bears, paying with a Llanowar Elves. Then cast the second Giant Growth the same way.
+- **Expect:** You draw a card after the first Giant Growth is cast, and not after the second.
+
+### Leader, Super-Genius: a creature conniving draws you an extra card first
+- **Do:** Go to combat. Leader's ability targets Grizzly Bears; discard a card when asked.
+- **Expect:** You draw two cards, then discard one. Grizzly Bears gets a +1/+1 counter if the card you discarded wasn't a land.
+
+### Tamiyo, Upriser Crowned: creatures that deal you combat damage get tapped and stunned
+- **Do:** Cast Tamiyo. Pass the turn; as Bob, attack Alice with Grizzly Bears, and don't block.
+- **Expect:** After the damage, Bob's Grizzly Bears is tapped with a stun counter on it.
+- **Not a bug:** Bob also becomes the monarch: dealing combat damage to the monarch does that.

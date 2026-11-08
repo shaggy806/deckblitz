@@ -1,6 +1,6 @@
 # Need-key themes: general engine changes under the open keys
 
-Status: plan of record (2026-11-07), steps 1 (B275) and 2 (B276) done, step 3 next — see *The plan* just below. The survey under
+Status: plan of record (2026-11-07), steps 1-4 (B275-B278) done, step 5 next — see *The plan* just below. The survey under
 it is a proposal.
 
 The 1,783 open need keys (2,265 waiting cards, re-counted after step 1; the survey's own count was 1,831 and 2,324)
@@ -49,9 +49,11 @@ touch. Each step:
    Atlas, Garna, the Bloodflame, Myojin of Grim Betrayal, Feast on the Fallen, First Response, Paladin of Atonement;
    seven keys marked built, their five other cards (Bruenor Battlehammer, Reenact the Crime, River of Tears, Rock
    Jockey, The Chain Veil) left in `--stale` for `author-freed`.
-4. **Declarative event triggers with "first time / nth each turn" modifiers** (theme 2). The connive cards (Glorious
-   Purpose, Ultron, Unlimited, Iron Monger, Leader, Super-Genius), Elrond, Moon-Reader, Avatar Aang, Way of the Mind
-   Sculptor, Tamiyo, Upriser Crowned.
+4. **Done 2026-11-07 (B278).** Declarative event triggers and one timing wrapper (theme 2): `engine/src/trigger-events.ts`
+   (see theme 2's design note and *As built*). 24 cards: the eight flagged (Glorious Purpose; Ultron, Unlimited; Iron
+   Monger, Sadistic Tycoon; Leader, Super-Genius; Elrond, Moon-Reader; Avatar Aang; Way of the Mind Sculptor; Tamiyo,
+   Upriser Crowned) and 16 of the theme's top keys; 17 keys marked built, their 22 other cards left in `--stale` for
+   `author-freed`.
 5. **Object sets and one aggregate** (theme 1, with theme 15's captured context). Synthetic Destiny, Thorin,
    Mountain-king, Brass Infiniscope, Captain Marvel, Apex Avenger.
 6. **The cost pipeline (theme 4), then one `chooser` field (theme 5).** The power-up cards (Hulk, Gamma Goliath; Kang
@@ -217,6 +219,167 @@ destroyed, pays-life, untap, activates-boast, …).
 - Keep `triggerMatches` hot-path cheap: index specs by event type.
 
 **Confidence: high.** Most of these keys name an event the engine already logs.
+
+**Design note (step 4, 2026-11-07): one table of trigger events, one timing wrapper.**
+
+*Where it lives.* `engine/src/trigger-events.ts`, pure, as `journal.ts` is for step 3: the table, its types and the
+lookups by event type. `Game.triggerMatches` gains one arm for it and one wrapper check in `detectTriggers`.
+
+*The generic member.* `{ on: "event", event: TriggerEventName, who?, filter?, by? }`. The shape the survey proposed
+(`player?, object?, cause?, value?`) is the same thing spelled apart from the other 87 kinds; the code argues for
+their words, because `who` and `filter` are what `matchesWho` / `matchesWhoPlayer`, the bots' trigger knowledge
+(`features.ts` reads `trigger.who`) and the text tools already read:
+- `event` is a **word of the table**, not a raw `GameEvent["type"]`: `"surveilled"` is a `scried` event of mode
+  surveil, `"became-monarch"` a `monarch-changed` read from the new monarch's side, `"won-coin-flip"` a
+  `coin-flipped` that was won. Each row of `TRIGGER_EVENTS` (`as const satisfies`, so a new word is one row) names
+  its `GameEvent` type, an optional `when` over the event, and how the event names its parts: `player` (whose act or
+  whose state it is), `object` or `objects` (what it happened to), `by` (who did it, where that differs from both:
+  the player who tapped a creature, 701.26), and `amount` (what `triggerValue` reads: "that much", "that many").
+- `who` relates the event's **subject** to the ability's controller exactly as every other kind's does: the object
+  where the row has one (`"self"`, `"you-control"`, `"opponent"` — an opponent controls it, `"attached"`), otherwise
+  the player (`"you"`, `"opponent"`, `"attached"` — the enchanted player). `filter` asks about the object.
+  `by` relates the row's `by` player the same way. (As built, the one card-facing "by" so far — "whenever **you**
+  tap an untapped creature an opponent controls" — went on the existing `becomes-tapped` kind as its `by`, since that
+  kind's batching and attack narrowing were the substance: `who: "opponent", by: "you"`.)
+- A row with `objects` (one event, several objects: `permanents-phased-in`) triggers **once per matching object**
+  (603.2c: one event, several occurrences), each the trigger object; `batched: true` asks for "one or more" instead,
+  once off the event with `triggerValue` the count, as the batched kinds already do.
+- "That player" (`trigger-player` scope, `LastKnownRefs.player`) and "that creature" (`trigger-object`) come from the
+  row, through `eventTriggerObject` and `refsAtTrigger`, which fall back to the table by event type.
+- **Index by event type.** The table is inverted once into `TRIGGER_EVENTS_BY_TYPE`, so the arm's first test is the
+  event's type against its row's (one string compare), and `refsAtTrigger` finds a row in one lookup. The per-object
+  scan in `detectTriggersUncached` is unchanged: no other arm got slower.
+
+*Look-back (603.10a).* A subject that has left (a creature that connived as it last existed, 701.50b) is matched
+as it last existed: the arm passes the last-known flag to `matchesWho` / `triggerFilterOk` for an object off the
+battlefield with a snapshot. A phased-out permanent is another matter: it isn't in the trigger scan at all, so
+"whenever this phases out" waits (see *As built*). Leave-the-battlefield and sacrifice kinds keep their own arms
+(below), where the look-back sources are the substance.
+
+*The timing wrapper, on every trigger.* Lifted off the kinds onto one place, `TriggerTiming`, intersected into
+`TriggerSpec` (`TriggerSpec = TriggerKind & TriggerTiming`), so every kind, the generic one included, takes it, and
+the card files that already spell `firstTimeEachTurn` / `nthEachTurn` inside their trigger don't change:
+- `firstTimeEachTurn: true` ≡ `nthEachTurn: 1`; `nthEachTurn: N`: **this is the Nth time this turn that this
+  trigger's event, as this trigger reads it, has happened** — counting events before the source existed (the
+  rulings for every such card), and whether or not this ability triggered then. "As this trigger reads it" is the
+  spec without the wrapper, for the same subject: the same player for a player's act ("your second spell", "you lose
+  life for the first time"), the same object in the same stint for an object's ("this creature attacks for the first
+  time", "counters are put on that creature for the first time"), with the spec's own narrowing — valiant's "a spell
+  or ability you control" counts only yours, Angelic Cub's counts anyone's, which is why
+  `firstTimeEachTurnByAnyone` goes; a `counter` kind or a `filter` narrows what counts (U.S.S. Enterprise-D: charge
+  counters; "your first enchantment spell").
+- Answered **from the journal**: `Game.timingCount(spec, event, self)` maps each kind that supports it to its journal
+  kind, subject and narrowing, and counts the entries this turn that aren't the event's own. Triggers are detected
+  synchronously in `emit`, right after `recordJournal`, so the journal holds exactly the events up to this one; the
+  event's own entries are the ones naming its objects (a batch) or the last one (a single act). Where the journal
+  is written ahead of the event (B277's whole attack declaration), the subject's own unit still counts right: one
+  `attacked` entry per creature per combat, and an attack "with one or more creatures" is counted by distinct combat.
+- `oncePerTurn` (603.2: "this ability triggers only once each turn") stays on `TriggeredAbility` (it is the
+  ability's, not the event's) but is answered from a `triggered` journal entry keyed by the ability, not
+  `GameObject.triggeredOnce`.
+- "Do this only once each turn" (603.2h: the ability **triggers only if** its controller hasn't yet taken that action
+  that turn). Today it is `may`'s `oncePerTurn`, asked as the ability resolves: the ability triggers, goes on the
+  stack and is merely not offered again, which 603.2h says it must not do (a Strionic Resonator could copy it; a
+  "whenever an ability triggers" card would see it). The wrapper asks it as the ability triggers too, from the
+  ability's `did` journal entry, and the `may` keeps asking on resolution (two copies on the stack at once).
+- The intervening if (603.4) is `TriggeredAbility.condition`, unchanged, and `whileCondition` (603.1) beside it: both
+  already read the journal through `turn-history` conditions since B277.
+
+*Usage limits, onto the journal.* Each is "count entries of kind K for this ability this turn", keyed by the
+existing ability key (`abilityTurnKey`: source, its timestamp, which ability), held in a new entry field
+`ability`: `activated` entries (now every activation the limits or a reader ask about, not only loyalty and equip)
+replace `GameObject.abilitiesUsedThisTurn` and `grantedUsedThisTurn` (602.5b, "activate only once / twice each
+turn") and `GameState.abilityActivationsThisTurn` (Dragon Whelp); `resolved` entries replace
+`abilityResolutionsThisTurn` ("the Nth time this ability has resolved this turn"); `did` entries (a mode chosen,
+`mode` its index) replace `modesChosenThisTurn` ("choose one that hasn't been chosen this turn", `may`'s
+`oncePerTurn`); `done` entries replace `abilitiesDoneThisTurn` (Carpet of Flowers). `modesChosenEver` is whole-game
+state (Silent Hallcreeper, "hasn't been chosen" ever) and stays.
+
+*What it replaces.*
+- The per-kind first/nth flags: `gains-life`, `becomes-target` (and `firstTimeEachTurnByAnyone`), `attacks`,
+  `becomes-saddled`, `put-into-graveyard`, `discards`, `becomes-tapped`'s `firstTimeEachTurn`;
+  `attack-with`'s `totalPower.firstTimeEachTurn`; `draws`' and `cast-spell`'s `nthEachTurn` and `cast-spell`'s
+  `firstEachTurn`; `loses-life`'s `firstDuringTheirTurn` (a first time each turn with a their-turn trigger
+  condition). With them the event-carried flags that answered them (`card-drawn.nthThisTurn`,
+  `object-targeted.firstByPlayerThisTurn` / `firstThisTurn`, `permanent-tapped.firstThisTurn`,
+  `attacker-declared.firstThisTurn`, `became-saddled.first`) and the helpers behind them
+  (`reachedGraveyardEarlier`, `firstMatchingDiscardThisTurn`).
+- `{ on: "predicate", match }`: no card, no `self`, no controller, nothing a bot or a text tool can read. Deleted.
+- The hand-written kinds that are an event, a subject and nothing else become rows, their card sites rewritten:
+  `forages`, `rolls-dice`, `takes-initiative`, `ventures`, `completes-dungeon`, `player-loses-game`, `surveils`,
+  `searches-library`, `evidence-collected`, `discovers`, `foretells`, `crime-committed`, `becomes-renowned`,
+  `becomes-monstrous`, `fights`, `wins-coin-flip`, `becomes-untapped`, `players-finish-voting`. Kinds with a
+  narrowing of their own (`scries`' `orSurveil`, `exerted`'s `asItAttacks`, `class-level-gained`'s level,
+  `door-unlocked`, `ring-tempts`' `chosen`, `day-night-changes`' `becomes`, `mills`' and `cycles`' filters over a
+  batch) could be rows with a `when` each, but are left for now: each is its own small field, and no key waits on
+  them. The zone-change, combat, damage, cast and activation kinds keep their arms: their look-back, batching and
+  LKI rules are the substance, not the event.
+- The usage-limit fields above, each deleted with its last reader.
+
+*Bots.* `effect-worth.ts` and `features.ts` read `trigger.on` for a handful of kinds and `trigger.who` for the rest;
+the generic member keeps `who`, so the "who fires it" terms (once per opponent, once for anyone) read it unchanged.
+`isOneShot` gains the generic rows that can only happen once to their subject, and `features.ts`' per-opponent
+discount reads the wrapper's `nthEachTurn` for every kind, not only `cast-spell`.
+
+*As built (B278).*
+- `trigger-events.ts` as above: 25 rows (the 19 absorbed kinds, renamed where a card's word reads better —
+  `loses-game`, `collects-evidence`, `commits-crime`, `voting-finishes` — and `proliferates`, `becomes-monarch`,
+  `phases-in`, `connives`, `becomes-crewed`, `bends`). `who` absent is `"any"`; a departed object (a creature that
+  connived as it last existed) is matched as it last existed. Two new events: `connived` (after the connive's
+  counters) and `became-crewed` (as a crew ability resolves, 702.122e: the stack object keeps its crew,
+  `GameObject.crewedWith`); and `bent` (Avatar Aang), announced at each bending's own moment (701.65b, 701.66b,
+  701.67c, 702.189b — a firebending ability is marked `TriggeredAbility.firebending` by its helper).
+- The wrapper is `TriggerTiming`, `TriggerSpec = TriggerKind & TriggerTiming`. `Game.triggerMatches` is now the
+  kind's match (`triggerKindMatches`) and then `timingOk`; `timingCountable` (trigger-events.ts) is the one list of
+  kinds it can count for, and `test/trigger-timing.test.ts` walks every definition (granted triggers included) to
+  keep cards off the rest. Counted from the journal: `life-gained`/`life-lost`, `card-drawn`, `attacked` (per creature
+  per combat; per declaration for `attack-with`), `tapped`, `counters-put`, `discarded`, `to-graveyard`, and two new
+  kinds, `targeted` (valiant; `GameObject.targetedThisTurn` deleted) and `saddled`. `cast-spell` still counts from
+  `PlayerState.spellsCastThisTurnAs`, the cast record B277 left (its own change).
+- Deleted: the per-kind flags (`gains-life`, `becomes-target`, `attacks`, `becomes-saddled`, `put-into-graveyard`,
+  `discards`, `becomes-tapped` `firstTimeEachTurn`; `firstTimeEachTurnByAnyone`; `attack-with`'s
+  `totalPower.firstTimeEachTurn`; `draws`' and `cast-spell`'s `nthEachTurn`; `cast-spell`'s `firstEachTurn`;
+  `loses-life`'s `firstDuringTheirTurn`, now `duringTheirTurn` with the wrapper), the event flags behind them
+  (`card-drawn.nthThisTurn`, `object-targeted.firstByPlayerThisTurn` / `firstThisTurn`,
+  `permanent-tapped.firstThisTurn` with `GameObject.tappedOnTurn`, `attacker-declared.firstThisTurn` with
+  `DeclaredAttacker.first`, `became-saddled.first`), `reachedGraveyardEarlier`, `firstMatchingDiscardThisTurn`, the
+  `predicate` member, and 19 kinds with their arms. Card sites rewritten (152 files spelled the flags; the renamed
+  ones by tsc's own error positions, so `firstEachTurn` on cost grants was left alone).
+- Usage limits on the journal, the entry's new `ability` (an opaque key) and `mode` fields: `activated` entries
+  (602.5b's limits by object, stint and ability — not the timestamp, which a change of control renews — and Dragon
+  Whelp's count), `triggered` (603.2, `GameObject.triggeredOnce` deleted), `resolved` (journaled only for an ability
+  whose text reads `resolved-this-turn`), `did` (modes chosen this turn), `done` (Carpet of Flowers). Deleted:
+  `GameObject.abilitiesUsedThisTurn`, `grantedUsedThisTurn`, `triggeredOnce`; `GameState.abilityResolutionsThisTurn`,
+  `abilityActivationsThisTurn`, `modesChosenThisTurn`, `abilitiesDoneThisTurn`. `modesChosenEver` stays: whole-game
+  state, which the journal prunes. Token folding compares the new per-object kinds as it does `counters-put`.
+- 603.2h, a rules change: a `may` with `oncePerTurn` that is the whole effect now keeps its ability from triggering
+  once done that turn (`Game.didOnceThisTurn`); `test/ability-turn-choices.test.ts`'s invented "if you don't" card
+  expected the old shortcut and was corrected.
+- Smaller pieces the flagged cards needed: `activates-ability`'s `orMana` (a mana ability counts, one activated to pay
+  a cost announced only while a printed `orMana` watcher is on the battlefield, `Game.manaActivationWatched`) and
+  `removedAtLeast` (a loyalty cost's size); `StaticAbility.conniveDrawsFirst` (Leader's replacement, once per ability,
+  614.5); the batched damage trigger's sources as `LastKnownRefs.dealtTogether` for a filter's `triggerBatch`
+  (Tamiyo's "those creatures"); `transform`'s `then` ("if you do").
+- **Not moved this session**, each with its reason:
+  - Kinds with a narrowing of their own stay kinds (listed above: `scries`, `exerted`, `class-level-gained`,
+    `door-unlocked`, `ring-tempts`, `day-night-changes`, `mills`, `cycles`), as do the zone-change, combat, damage,
+    cast and activation kinds.
+  - `enters-battlefield`'s `firstCreationEachTurn` ("whenever you create one or more tokens for the first time each
+    turn"): a different event (the creation, not the entry), read from the journal already as the creation happens;
+    it becomes a row when token creation is one (`token-created`).
+  - `phases-out` has no row: a phased-out permanent isn't in the trigger scan (`detectTriggersUncached`), so "whenever
+    this phases out" (Teferi's Imp) needs the scan to look back at it first — key `trigger:phases-out`.
+  - A granted `orMana` trigger isn't seen by `manaActivationWatched` (printed only; no card grants one).
+- Two costs found by the bench, both fixed: the usage limits are asked on every legal-action query and every trigger
+  scan, so counting them by scanning the journal each time made the first cut 53% slower a game (101.8 s); they now
+  read an incremental index kept beside the state per entries array (`abilityIndex` in journal.ts: it reads only what
+  was appended since, and starts again after a prune, a clone or a new turn). And `markTriggeredOnce` runs inside
+  `detectTriggers`' cache region, so appending through `Game.journal` there cleared the computed cache for the rest of
+  every scan; it appends directly (nothing cached reads `triggered` entries).
+- Measured: a timed `bot:bench` (16 games, four players, 8 workers, the machine otherwise idle) played the same games
+  (12-4, 38.9 turns on average) at 65.9 s a game and 111.2 ms a decision, against 66.5 s and 112.05 ms just before and
+  65.4 s and 110.1 ms for the old build re-run beside it: no change. (A run with a typecheck beside it read 86 s.)
+  Single-process replays of seeds 8 and 14, v1 and v2, took the same time on both builds.
 
 ### 3. One rule-effect vocabulary: shared durations, timed statics, prohibitions (162 keys, ~229 cards)
 
@@ -530,11 +693,11 @@ entry instead.
     `PlayerState.combatDamageCreatureTypesThisTurn`): the journal's `damage` entries hold them, but `damageThisTurn`
     is also part of the token-fold shape and the bots' twin fingerprint; move them with
     `filter:dealt-damage-to-source-this-turn`.
-  - `targetedThisTurn`, `revealedThisTurn` (the view's visibility), `drewInDrawStepThisTurn`, `saddledThisTurn` and
-    `crewedThisTurn` (relations, which creature crewed which vehicle).
-  - Usage limits keyed by ability (`abilitiesUsedThisTurn`, `grantedUsedThisTurn`, `abilitiesDoneThisTurn`,
-    `abilityActivationsThisTurn`, `abilityResolutionsThisTurn`, `modesChosenThisTurn`): "activate only once each
-    turn", "this ability has resolved N times" — theme 2's "nth time each turn" modifiers (step 4) are their home.
+  - `revealedThisTurn` (the view's visibility), `drewInDrawStepThisTurn`, `saddledThisTurn` and `crewedThisTurn`
+    (relations, which creature crewed which vehicle). (`targetedThisTurn` moved in step 4, B278.)
+  - (Moved in step 4, B278: the usage limits keyed by ability — `abilitiesUsedThisTurn`, `grantedUsedThisTurn`,
+    `abilitiesDoneThisTurn`, `abilityActivationsThisTurn`, `abilityResolutionsThisTurn`, `modesChosenThisTurn` — see
+    theme 2's *As built*.)
 - Measured (four-player fuzz games, `structuredClone` of the state at turns 4-16): 1.08-1.22 ms a clone against
   1.14-1.21 before, the state 227-235 KB against 236-243 (the per-object loyalty flags are gone), the journal 4-5 KB
   as JSON. A timed `bot:bench` (16 games, four players, 8 workers): the same games (12-4, 38.9 turns on average),

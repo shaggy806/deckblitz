@@ -11538,4 +11538,32 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: [] },
     }),
   ),
+  preset(
+    "Nykthos Paragon: once it has done it, gaining life again doesn't trigger it",
+    board({
+      you: { bf: ['Nykthos Paragon', 'Grizzly Bears', 'Plains', 'Plains'], hand: ['Healing Salve', 'Healing Salve'] },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    "Elrond, Moon-Reader: a creature's mana pays for a spell, and you draw",
+    board({
+      you: { bf: ['Elrond, Moon-Reader', 'Llanowar Elves', 'Llanowar Elves', 'Grizzly Bears'], hand: ['Giant Growth', 'Giant Growth'] },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    'Leader, Super-Genius: a creature conniving draws you an extra card first',
+    board({
+      you: { bf: ['Leader, Super-Genius', 'Grizzly Bears'], hand: ['Hill Giant', 'Forest'] },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    'Tamiyo, Upriser Crowned: creatures that deal you combat damage get tapped and stunned',
+    board({
+      you: { bf: ['Plains', 'Plains', 'Mountain', 'Mountain', 'Mountain', 'Mountain'], hand: ['Tamiyo, Upriser Crowned'] },
+      opp: { bf: ['Grizzly Bears'] },
+    }),
+  ),
 ]

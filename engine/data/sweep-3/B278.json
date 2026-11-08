@@ -1,0 +1,177 @@
+{
+ "batch": "B278",
+ "status": "done",
+ "ranks": "Need-key themes step 4 (docs/plans/need-key-themes.md, 2026-11-07): declarative event triggers (engine/src/trigger-events.ts) and one timing wrapper on every trigger, answered from the journal — flagged Build ASAP cards first (the connive cards, Elrond, Moon-Reader, Avatar Aang, Way of the Mind Sculptor, Tamiyo, Upriser Crowned), then the theme's top keys: mana abilities activated, counters put for the first time each turn, a player losing the game, proliferate, becoming crewed, becoming the monarch, phasing in, you tapping an opponent's creature, \"do this only once each turn\", life lost for the first time each turn.",
+ "authored": [
+  {
+   "name": "Avatar Aang // Aang, Master of Elements",
+   "files": [
+    "engine/src/cards/pool/avatar-aang.ts",
+    "engine/src/cards/pool/aang-master-of-elements.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Axgard Artisan",
+   "files": [
+    "engine/src/cards/pool/axgard-artisan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Blood Tyrant",
+   "files": [
+    "engine/src/cards/pool/blood-tyrant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ceaseless Searblades",
+   "files": [
+    "engine/src/cards/pool/ceaseless-searblades.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Custodi Lich",
+   "files": [
+    "engine/src/cards/pool/custodi-lich.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Earth Kingdom General",
+   "files": [
+    "engine/src/cards/pool/earth-kingdom-general.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Elrond, Moon-Reader",
+   "files": [
+    "engine/src/cards/pool/elrond-moon-reader.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ezuri, Stalker of Spheres",
+   "files": [
+    "engine/src/cards/pool/ezuri-stalker-of-spheres.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glorious Purpose",
+   "files": [
+    "engine/src/cards/pool/glorious-purpose.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gonti's Machinations",
+   "files": [
+    "engine/src/cards/pool/gontis-machinations.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Iron Monger, Sadistic Tycoon",
+   "files": [
+    "engine/src/cards/pool/iron-monger-sadistic-tycoon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Leader, Super-Genius",
+   "files": [
+    "engine/src/cards/pool/leader-super-genius.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mobilizer Mech",
+   "files": [
+    "engine/src/cards/pool/mobilizer-mech.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Nykthos Paragon",
+   "files": [
+    "engine/src/cards/pool/nykthos-paragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scheming Aspirant",
+   "files": [
+    "engine/src/cards/pool/scheming-aspirant.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sharae of Numbing Depths",
+   "files": [
+    "engine/src/cards/pool/sharae-of-numbing-depths.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Shimmering Efreet",
+   "files": [
+    "engine/src/cards/pool/shimmering-efreet.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Solitary Sanctuary",
+   "files": [
+    "engine/src/cards/pool/solitary-sanctuary.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Stalwart Successor",
+   "files": [
+    "engine/src/cards/pool/stalwart-successor.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tamiyo, Upriser Crowned",
+   "files": [
+    "engine/src/cards/pool/tamiyo-upriser-crowned.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ultron, Unlimited",
+   "files": [
+    "engine/src/cards/pool/ultron-unlimited.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vengeful Warchief",
+   "files": [
+    "engine/src/cards/pool/vengeful-warchief.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Warping Wurm",
+   "files": [
+    "engine/src/cards/pool/warping-wurm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Way of the Mind Sculptor",
+   "files": [
+    "engine/src/cards/pool/way-of-the-mind-sculptor.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": []
+}

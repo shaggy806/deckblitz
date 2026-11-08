@@ -12,6 +12,20 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Need-key themes step 4: declarative event triggers and one timing wrapper** (2026-11-07,
+  B278): the generic `{ on: "event", event, who?, filter?, by? }` trigger over a table of event
+  words (`engine/src/trigger-events.ts`), which absorbed 19 hand-written kinds and the unused
+  `predicate` hatch; one `TriggerTiming` (`firstTimeEachTurn` / `nthEachTurn`) on every trigger,
+  counted from the journal, in place of ten per-kind flags and five event-carried ones; 603.2h's
+  "do this only once each turn" now stops the trigger itself; the per-ability usage limits
+  (602.5b, 603.2, "resolved N times", modes chosen, "did its thing") moved onto journal entries,
+  six fields and `targetedThisTurn` / `tappedOnTurn` deleted. Also `activates-ability`'s
+  `orMana`, the `connived`, `became-crewed` and `bent` events, Leader's connive replacement,
+  the batched damage trigger's "those creatures", transform's "if you do". 24 cards (Glorious
+  Purpose, Ultron, Unlimited, Iron Monger, Leader, Super-Genius, Elrond, Moon-Reader, Avatar
+  Aang, Way of the Mind Sculptor, Tamiyo, Upriser Crowned and 16 of the theme's), 17 keys built,
+  eight flagged cards unflagged.
+
 - **Need-key themes step 3: one turn journal in game state** (2026-11-07, B277):
   `engine/src/journal.ts` and `GameState.journal`, one normalised entry per event kept as it was
   (603.10a), read through windows (this turn, last turn, their last turn, since your last turn,

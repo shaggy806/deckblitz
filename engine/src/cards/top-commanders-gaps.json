@@ -1969,7 +1969,24 @@
   "condition:lost-life-last-turn",
   "stat:loyalty-activation-tracking",
   "cost:first-equip-each-turn-free",
-  "trigger:first-time-tapped-checked-on-resolution"
+  "trigger:first-time-tapped-checked-on-resolution",
+  "trigger:connives",
+  "trigger:creature-connives",
+  "replacement:connive-replacement",
+  "trigger:activates-mana-ability",
+  "trigger:activates-loyalty-ability-cost-size",
+  "trigger:combat-damage-to-you-trigger",
+  "effect:damage-batch-those-creatures",
+  "trigger:bends",
+  "trigger:counters-put-first-time-each-turn",
+  "trigger:player-loses-game-trigger",
+  "trigger:proliferate-trigger",
+  "trigger:becomes-crewed-trigger",
+  "trigger:becomes-monarch",
+  "trigger:phases-in",
+  "trigger:you-tap-opponent-creature",
+  "stat:once-per-turn-trigger",
+  "trigger:loses-life-first-time-each-turn"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
