@@ -11626,4 +11626,32 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: [] },
     }),
   ),
+  preset(
+    'Storm, Windrider: only the creatures a spell targets get flying',
+    board({
+      you: { bf: ['Forest', 'Storm, Windrider', 'Grizzly Bears', 'Hill Giant'], hand: ['Giant Growth'] },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    'Unforge: the host takes the damage',
+    board({
+      you: { bf: ['Mountain*3'], hand: ['Unforge'] },
+      opp: { bf: ['Hill Giant', { name: 'Short Sword', attach: 'Hill Giant' }] },
+    }),
+  ),
+  preset(
+    'Keeper of the Dead: a fewer-creature-cards opponent\'s creature',
+    board({
+      you: { bf: ['Swamp', 'Keeper of the Dead'], gy: ['Grizzly Bears*2'] },
+      opp: { bf: ['Hill Giant'] },
+    }),
+  ),
+  preset(
+    'Nether Shadow: three creature cards above it',
+    board({
+      you: { bf: [], gy: ['Nether Shadow', 'Grizzly Bears*3'] },
+      opp: { bf: [] },
+    }),
+  ),
 ]

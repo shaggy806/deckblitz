@@ -7725,3 +7725,19 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Eureka: rounds continue until nobody puts a card down
 - **Do:** Cast Eureka. Each time you're asked, put a permanent card from your hand onto the battlefield, then decline.
 - **Expect:** It keeps going round the table while anyone puts a card down, and ends after a round where nobody does.
+
+### Storm, Windrider: only the creatures a spell targets get flying
+- **Do:** Cast Giant Growth on Grizzly Bears.
+- **Expect:** Grizzly Bears gains flying until end of turn; Hill Giant doesn't.
+
+### Unforge: the host takes the damage
+- **Do:** Cast Unforge on the Short Sword equipped to Hill Giant.
+- **Expect:** The Short Sword is destroyed, and Hill Giant is dealt 2 damage (it survives; it isn't a player hit).
+
+### Keeper of the Dead: a fewer-creature-cards opponent's creature
+- **Do:** Activate Keeper of the Dead, targeting Bob, then one of his creatures.
+- **Expect:** It's offered only against a creature Bob controls, and with Bob's graveyard at least two creature cards short of yours; the creature is destroyed.
+
+### Nether Shadow: three creature cards above it
+- **Do:** Move to your upkeep (pass priority until it's your upkeep).
+- **Expect:** With three creature cards above Nether Shadow in your graveyard, you're asked whether to put it onto the battlefield; with fewer above it, nothing happens.

@@ -12,6 +12,7 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Need-key themes step 7, first piece: refs and relational filters** (2026-11-08, B281, commit 68c6eff02): one `ObjectRef` / `PlayerRef` algebra (`refs.ts`, read vs act: 608.2h, 400.7) in every ref slot, six parallel unions deleted; relational clauses (`sameNameWith`, `sharesColorWith`, `attachedToObject`, `controlledByRef`, `least`, `hasKeyword`, `hasActivatedAbility`) and one `object-matches` condition; 18 cards, 18 keys. `controlledByTarget`, `CardFilter.controlledBy` and `TargetSpec.whose` stay (the plan's *As built*).
 - **Need-key themes step 6: the cost pipeline and one chooser type** (2026-11-08, B280): cost modifiers read an `EffectAmount` and one spell clause, effects can be costs (`cost-acts.ts`), and one `ChooserRef` replaces the six spellings; 23 cards, 20 keys.
 - **Need-key themes step 5: object sets and one aggregate** (2026-11-08, B279): one
   `ObjectSetRef` (`engine/src/object-sets.ts`) for every set of objects a card names — what was

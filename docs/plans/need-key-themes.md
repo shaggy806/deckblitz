@@ -1,7 +1,7 @@
 # Need-key themes: general engine changes under the open keys
 
-Status: plan of record (2026-11-07), steps 1-6 (B275-B280) done, step 7 next — see *The plan* just below. The survey under
-it is a proposal.
+Status: plan of record (2026-11-07), steps 1-6 (B275-B280) and the first piece of step 7 (theme 7, B281) done; step 7 continues with
+play permissions, "instead" replacements and combat records — see *The plan* just below. The survey under it is a proposal.
 
 The 1,783 open need keys (2,265 waiting cards, re-counted after step 1; the survey's own count was 1,831 and 2,324)
 mostly fall into about sixteen engine mechanisms that cut across
@@ -63,8 +63,11 @@ touch. Each step:
    one chooser type (theme 5). 23 cards: seven of the flagged (Hulk, Gamma Goliath; Kang the Conqueror; Wonder Man; Advancing the
    Spirit; The Dominion Bracelet; World War Hulk; Eumidian Wastewaker) and 16 of the themes' top keys; 20 keys marked built, their
    other cards left in `--stale` for `author-freed`. Baron Helmut Zemo and Dawnhand Dissident stay flagged (see theme 4's *Left unbuilt*).
-7. Then the survey's build order below from step 8 on (refs and relational filters, play permissions, "instead"
-   replacements, combat records, the smaller themes).
+7. Then the survey's build order below from step 8 on, one piece a session:
+   - **Done 2026-11-08 (B281).** References and relational filter clauses (theme 7: `engine/src/refs.ts`, see its design note and *As built*).
+     18 cards: Oft-Nabbed Goat, Storm, Windrider, Archnemesis (flagged) and 15 of the theme's top keys; 18 keys marked built, their other
+     cards left in `--stale` for `author-freed`. Squandered Resources stays flagged (see *Left unbuilt*).
+   - Next: play permissions, "instead" replacements, combat records (build-order item 9), then the smaller themes.
 
 ## How this was measured
 
@@ -1017,6 +1020,135 @@ list a "same name as a reference" group (six keys) inside one family, but nothin
 109.4/109.5).
 
 **Confidence: medium.**
+
+**Design note (step 7, 2026-11-08): one `ObjectRef`, one `PlayerRef`, and filter clauses that take them.**
+
+*Where it lives.* `engine/src/refs.ts`, types only, as `object-sets.ts` is for sets. Both refs are resolved in one place in
+`effects.ts`: `objectRefAct` / `objectRefRead` and `playerRef`, over the resolution context. Filter clauses are bound by the
+existing `bindDynamicCompares` as an effect applies, and read live by `filter.ts` for the few refs a static has.
+
+*(a) The algebra.*
+
+`ObjectRef` is one object:
+- base refs, each one meaning everywhere: a slot number, `"source"`, `"trigger-object"`, `"attached"` (the source's host),
+  `"chosen"`, `"granter"`, `"trigger-recipient"`, `"created"`, `"put-this-way"`, `"amassed"`, `"priced"`;
+- any `ObjectSetRef`, meaning its one member (0 or several name nothing, as `onlyMember` already reads): `"tapped"` goes for
+  `{ paid: "tapped" }`;
+- composed: `{ hostOf: ObjectRef }` (what it's attached to) and `{ pairedWith: ObjectRef }` (702.95b).
+
+`PlayerRef` is one player:
+- base refs: `"you"`, `"active-player"`, `"trigger-controller"`, `"trigger-player"`, `"that-player"`, `"chosen-player"`,
+  `"player-to-your-left"` / `"-right"`, `{ target: n }`;
+- composed: `{ controllerOf: ObjectRef }`, `{ ownerOf: ObjectRef }`, `{ defendingPlayerOf: ObjectRef }`.
+
+The set-valued accessor is an `ObjectSetRef`: `{ attachedTo: ObjectRef }` ("all Auras attached to that creature"), replacing
+`"attached-to-source"`, and `{ targetsOf: ObjectRef }` ("those creatures" of a cast trigger's spell, Storm, Windrider).
+
+`PlayerScope` becomes its plural words (`"each-player"`, `"each-opponent"`, the vote scopes, …) **or any `PlayerRef`**, plus `{
+otherThan: PlayerRef }` ("each other player", Oft-Nabbed Goat), so every `who` slot takes every ref. No slot has a subset of its own:
+`EffectTargetRef`, `AttachRef`, `AmountRef`, `DamageFrom`, `EffectPlayerRef` and `ChosenPlayerRef` are deleted, `AttachHostRef` is
+`ObjectRef` plus its `{ among }` and a `{ player: PlayerRef }` (a Curse, Archnemesis), `ChooserRef` and `ShareReference` extend the refs
+with the few words only they have. `"source-owner"`, `"source-controller"`, `"attached-controller"`, `"trigger-owner"`, `{
+controllerOfTarget }` and `{ ownerOfTarget }` are spelled with the accessors and go.
+
+*Reading and acting: what happens when the object has moved.* Two modes, because the rules have two:
+- **Reading** information (an accessor's inner object, an amount, a share reference): the object's current information if it's in the
+  public zone it was expected to be in; otherwise, or if the effect itself moved it to a hidden zone, its last known information
+  (608.2h; for the source, 113.7a). `objectRefRead` returns the object; the context's reads (`controllerOf`, `ownerOf`, `colorsOf`, …)
+  already pick the snapshot for the stint the reference recorded (`LastKnownRefs`, `targetZones`).
+- **Acting** on the object needs it to be the same object still (400.7): `objectRefAct` returns nothing when it has moved, and an
+  illegal slot names nothing (608.2b). So `{ hostOf: 0 }` as a damage target (Unforge) reads the host through the destroyed Equipment's
+  last known information (`attachedTo` with `attachedToStint`, which it already keeps), then acts only if the host is still in that
+  stint.
+- `{ controllerOf }`: a permanent's or spell's controller, as last known once it has moved (a countered spell keeps its controller
+  there, Counterbore's ruling, as `controllerOfTarget` did). A card with no controller is read as its owner (108.4a, 109.4). A player
+  who has left names nobody, as every ref does today.
+- `{ ownerOf }`: never changes (108.3), so it's known wherever the object is, a library or hand included.
+- `{ defendingPlayerOf }`: the player it's attacking, or the controller of the planeswalker, or the protector of the battle (508.5,
+  310.9d); no longer attacking, as it was before it was removed from combat (508.5), read from the journal's `attacked` entry rather
+  than a new field. In a target's filter it's the same object's read, so "target creature defending player controls" on a spell is
+  unchanged (`controlledByDefendingPlayer`, 508.5a).
+
+*Public and hidden information.* A ref never reveals anything by being read: the accessors give only what is public (owner, controller
+of a permanent or spell, what's attached), and a read of a set member in a hand or library that wasn't shown still reads nothing, as
+`ctx.memberMatches` already does (`SetMember.shown`). A filter clause bound to a hidden reference (a name read from a card nobody has
+been shown) binds to nothing, so a search for "the same name" as a card not revealed finds nothing; no card asks that without a
+reveal, and Infernal Tutor's is `{ paid: "revealed" }`, which is shown. A face-down reference has no name (201.2a), colour or type.
+
+*(b) Relational clauses.* Every clause that compares against an object takes an `ObjectRef` (or the `ShareReference` superset):
+- `sameNameWith` replaces `sameNameAsTarget` and `sameNameAsTriggerObject`. Bound, a slot or trigger-object reference matches itself as
+  the old clauses did ("target permanent and all other permanents with the same name", where a face-down target has no name, 201.2a).
+- `sharesColorWith` (authored, any reference) replaces `sharesColorWithTarget` and `sharesColorWithHost`; its bound form is renamed.
+  `sharesCreatureTypeWith: "attached"` replaces `sharesCreatureTypeWithHost`.
+- `attachedToObject: ObjectRef` replaces `attachedToTarget`; "with an Aura attached" stays `attachments`, a filter on the attachment.
+- `controlledByRef: PlayerRef`, bound to the existing `controllerIn`: "all lands that player controls" (`effect:tap-all-trigger-player-scope`,
+  `condition:filter-controlled-by-trigger-player`), "the number of Swamps target player controls".
+- `greatestInZone` and `greatestAmongItsController` take `least: true` (Witch-king, Porphyry Nodes). The per-object comparison is
+  the same; the tie and fail-closed behaviours don't change.
+- `hasKeyword: CardKeyword` reads a keyword ability off the card's definition, from one table (`CARD_KEYWORD_READS`), through `rulesTextName`
+  as every text read must: `morph`, `madness`, `fading`, `unearth`, `freerunning`, `awaken`, `disturb`, `warp`, `modular`, and the old
+  `hasKicker`, `hasCycling`, `hasFlashback`, `hasConvoke`, `hasDisguise`, `hasSuspend`, `hasMutate` (each with its existing care, as a row). `keyword`
+  stays for the abilities the layers compute. `hasAdventure` isn't a keyword (715), and stays.
+- `hasActivatedAbility: { mana?: boolean }`: `condition:filter-has-nonmana-activated-ability`.
+- Spell-context: `castFrom` takes `{ not: ZoneType }`; `cast: false` already says "wasn't cast" and an others-enter replacement can read it.
+- One condition, `{ kind: "object-matches", object: ObjectRef, filter }`, reading the object as `objectRefRead` does, replaces the
+  `sacrificed` and `discarded` conditions (step 5's leftover). Its read is `ctx.memberMatches`-like, so a member keeps its `was`.
+- "Target creature that player controls" needs nothing new: an `other` slot with `than: { slot }` and `sameController: true` already holds it (Keeper
+  of the Dead; 601.2c, chosen in order).
+
+*Deliberately not moved*, decided before building:
+- `"trigger-controller"` (233 card lines) stays a base ref: it's the player behind the event, including events with no object (a draw,
+  `triggerSpellController` for a spell since countered), so `{ controllerOf: "trigger-object" }` wouldn't say the same.
+- `"attached"` stays a base ref, not `{ hostOf: "source" }`: it's what `attachedWas` reads (the resolution's recorded stint), and it's
+  about 300 sites. A pool test forbids spelling it the long way.
+- `CardFilter.controlledBy` (`"you"`, `"opponent"`, …): thousands of sites, a perspective word answered inside the layer fold, where a
+  resolution's ref can't be. `controlledByRef` is the bound form beside it.
+- `TargetSpec.whose`'s words (`"trigger-player"`, `"defending-player"`, `{ seat }`): chosen with no resolution context, and an earlier slot's
+  relation is `other` with `sameController`.
+- `controlledByTarget` on effects (118 card sites, about 20 effect kinds): it isn't only "controlled by that player", it reads the whole filter from
+  that player's side (a filter's other `"you"`s included, the `scopeTo` argument). Moving each kind needs its own check; `controlledByRef` is
+  the general form and new cards use it. Same for `controlledByPlayer` (nine sites).
+- A static's ref reading stays what `filter.ts` can answer without a resolution: `"source"`, `"attached"`, and `{ attachedTo: "source" }`.
+  Anything else in a static matches nothing, and a pool test keeps cards off that.
+
+*Bots.* `effect-worth.ts`, `features.ts` and `target-polarity.ts` each read some of the old words; they're moved to the accessors, and
+`target-polarity.ts` learns that `{ controllerOf: n }` as `who` of a harmful effect means slot `n`'s controller is the one hurt. No new
+decision kind is planned, so no candidates.
+
+*As built (step 7, B281).*
+- `refs.ts` as above: `ObjectRef`, `PlayerRef`; `objectRefAct` / `objectRefRead` / `resolvePlayerRef` in `effects.ts`; on the context, `attachedRead`,
+  `hostOf`, `pairedWith`, `defendingPlayerOf` (the journal's `attacked` entry past 508.5), `stintNow`. `ctx.playersInScope` takes any scope, so a
+  ref in a `who` resolves in the context that asked.
+- **Deleted, every user moved:** `EffectTargetRef`, `AttachRef`, `AmountRef`, `DamageFrom`, `EffectPlayerRef`, `ChosenPlayerRef`; the player words
+  `"source-owner"`, `"source-controller"`, `"attached-controller"`, `"trigger-owner"`, `"attached-owner"`; `{ controllerOfTarget }` and `{ ownerOfTarget }`
+  (218 card lines); the object word `"tapped"` and `ctx.tapped` / `tappedLost`; `DamageFrom`'s `{ target: n }` (93 lines, now the slot); the filter clauses
+  `sameNameAsTarget`, `sameNameAsTriggerObject`, `sharesColorWithTarget`, `sharesColorWithHost`, `sharesCreatureTypeWithHost`, `attachedToTarget`, and the seven
+  `has<Keyword>` booleans; the `"attached-to-source"` set; the conditions `sacrificed` and `discarded` (`object-matches`, 30 sites). `test/refs.test.ts` walks every definition for the removed words.
+- **How much moved, plainly:** every reference *type* and every card that spelled an old accessor is on the new types (about 430 files, mechanically). The `who`
+  of a resolved scope is now one union. But three parallel shapes stay, each with a reason above: `controlledByTarget` (118 sites), `CardFilter.controlledBy`
+  (thousands), `TargetSpec.whose`.
+- **Also not moved:** `sameNameAsSource` (three cards: a live clause with a negative form, read inside a static's fold, Mirror Box and Marvin); `blockingRelation.of`,
+  `blockedThisTurn.of` and `wasAttachedTo` keep their own short words; `look-and-choose`'s `from: { target: n }`, an effect-specific player field, stays;
+  and per-effect player words on single effects (`who: "target"`, `who: "target-controller"` on `sacrifice` and `create-token`) stay, since each reads an implicit slot.
+- **A behaviour change:** a share reference read through `"attached"` now reads the host as it last existed (608.2h), where the Crown of Ascension test had it read
+  nothing: with the enchanted creature gone, kin are still read off it. Test edited to say so.
+- **Additions the proving cards needed:** `opponent-compared`'s `fewer` (Keeper of the Dead), `attach`'s `{ player }` target, `look-at-hand`'s `PlayerRef` target, `damage`'s
+  `target: ObjectRef` (was a narrower union), `FilterContext.triggerObject` for a target's filter, the `aboveSourceInGraveyard` clause, the `cards-in-graveyard` condition
+  passing its source to the filter.
+- Scaffolder: `tap`/`untap all X that player controls` (`controlledByRef`), `with morph/madness/fading/unearth/awaken/modular` (`hasKeyword`) in its restriction filters.
+- Cards (18): Oft-Nabbed Goat, Storm, Windrider and Archnemesis (flagged); Keeper of the Dead; Unforge; Corrosive Ooze; Nature's Will (and War's Toll moved onto the
+  new clause); Joint Assault; Mark of Eviction; Walker of Secret Ways; Spreading Plague; Bloodbond March; Witch-king, Bringer of Ruin; Backslide; Anje Falkenrath; Parallax
+  Inhibitor; Nether Shadow; Tsabo's Web.
+- Keys marked built: `effect:each-player-other-than-source-owner`, `effect:cast-spell-trigger-spell-targets`, `effect:curse-attach-player`,
+  `target:permanent-controlled-by-target-slot`, `effect:host-of-destroyed-target`, `filter:attached-to-trigger-object`, `effect:tap-all-trigger-player-scope`,
+  `effect:paired-creature-of-target`, `effect:return-enchanted-and-its-auras`, `effect:look-at-trigger-player-hand`, `filter:shares-color-with-trigger-object`,
+  `filter:same-name-as-trigger-spell`, `filter:least-among-its-controller`, `filter:has-morph`, `filter:has-madness`, `filter:has-fading`,
+  `condition:creature-cards-above-in-graveyard`, `condition:filter-has-nonmana-activated-ability`. Their other cards are left in `--stale` for `author-freed`.
+- Measured: a timed `bot:bench` (16 games, four players, 8 workers, nothing else running) played the same games (11-5, 38.1 turns on average) at 66.7 s a game and 115.6 ms a
+  decision, against 72.4 s and 125.6 ms just before (227.7 s wall against 245.4 s). Bench noise is wide; the refs add no cost that shows.
+- **Left unbuilt, not marked:** `mana:any-type-sacrificed-land-could-produce` (Squandered Resources, flagged: a mana ability's colours are worked out before the cost is
+  paid, with no sacrificed land to read: stays flagged); `filter:same-name-as-source-last-known` (the read is built, no card authored: Evil Twin's copy exception wasn't
+  tried); `filter:has-unearth`, `-awaken`, `-modular` (rows in the table, no card proved); `amount:domain-of-target-player`.
 
 ### 8. One characteristics patch for copy exceptions, "becomes" and animate (118 keys, ~149 cards)
 

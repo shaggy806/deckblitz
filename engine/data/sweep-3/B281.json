@@ -1,0 +1,26 @@
+{
+  "batch": "B281",
+  "status": "done",
+  "ranks": "Need-key themes step 7, first piece (docs/plans/need-key-themes.md, 2026-11-08): one ObjectRef / PlayerRef algebra (engine/src/refs.ts) and relational filter clauses that take them. Flagged Build ASAP cards first (Oft-Nabbed Goat; Storm, Windrider; Archnemesis), then the theme's top keys.",
+  "authored": [
+    { "name": "Oft-Nabbed Goat", "files": ["engine/src/cards/pool/oft-nabbed-goat.ts"], "tested": true },
+    { "name": "Storm, Windrider", "files": ["engine/src/cards/pool/storm-windrider.ts"], "tested": true },
+    { "name": "Archnemesis", "files": ["engine/src/cards/pool/archnemesis.ts"], "tested": true },
+    { "name": "Keeper of the Dead", "files": ["engine/src/cards/pool/keeper-of-the-dead.ts"], "tested": true },
+    { "name": "Unforge", "files": ["engine/src/cards/pool/unforge.ts"], "tested": true },
+    { "name": "Corrosive Ooze", "files": ["engine/src/cards/pool/corrosive-ooze.ts"], "tested": true },
+    { "name": "Nature's Will", "files": ["engine/src/cards/pool/natures-will.ts"], "tested": true },
+    { "name": "Joint Assault", "files": ["engine/src/cards/pool/joint-assault.ts"], "tested": true },
+    { "name": "Mark of Eviction", "files": ["engine/src/cards/pool/mark-of-eviction.ts"], "tested": true },
+    { "name": "Walker of Secret Ways", "files": ["engine/src/cards/pool/walker-of-secret-ways.ts"], "tested": true },
+    { "name": "Spreading Plague", "files": ["engine/src/cards/pool/spreading-plague.ts"], "tested": true },
+    { "name": "Bloodbond March", "files": ["engine/src/cards/pool/bloodbond-march.ts"], "tested": true },
+    { "name": "Witch-king, Bringer of Ruin", "files": ["engine/src/cards/pool/witch-king-bringer-of-ruin.ts"], "tested": true },
+    { "name": "Backslide", "files": ["engine/src/cards/pool/backslide.ts"], "tested": true },
+    { "name": "Anje Falkenrath", "files": ["engine/src/cards/pool/anje-falkenrath.ts"], "tested": true },
+    { "name": "Parallax Inhibitor", "files": ["engine/src/cards/pool/parallax-inhibitor.ts"], "tested": true },
+    { "name": "Nether Shadow", "files": ["engine/src/cards/pool/nether-shadow.ts"], "tested": true },
+    { "name": "Tsabo's Web", "files": ["engine/src/cards/pool/tsabos-web.ts"], "tested": true }
+  ],
+  "blocked": []
+}
