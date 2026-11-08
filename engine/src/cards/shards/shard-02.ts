@@ -340,6 +340,7 @@ import _poolGalinasKnight from "../pool/galinas-knight.js";
 import _poolGallantCitizen from "../pool/gallant-citizen.js";
 import _poolGallifreyFallsNoMore from "../pool/gallifrey-falls-no-more.js";
 import _poolGandalfWanderingWizard from "../pool/gandalf-wandering-wizard.js";
+import _poolGarnaTheBloodflame from "../pool/garna-the-bloodflame.js";
 import _poolGarruksUprising from "../pool/garruks-uprising.js";
 import _poolGeistHonoredMonk from "../pool/geist-honored-monk.js";
 import _poolGeneralMarhaultElsdragon from "../pool/general-marhault-elsdragon.js";
@@ -463,6 +464,7 @@ import _poolKavaronHarrier from "../pool/kavaron-harrier.js";
 import _poolKeepersOfTheFaith from "../pool/keepers-of-the-faith.js";
 import _poolKessigRecluse from "../pool/kessig-recluse.js";
 import _poolKherKeep from "../pool/kher-keep.js";
+import _poolKiliTheResourceful from "../pool/kili-the-resourceful.js";
 import _poolKillianDecisiveMentor from "../pool/killian-decisive-mentor.js";
 import _poolKingOfThePride from "../pool/king-of-the-pride.js";
 import _poolKinsbaileBalloonist from "../pool/kinsbaile-balloonist.js";
@@ -599,6 +601,7 @@ import _poolOrimsThunder from "../pool/orims-thunder.js";
 import _poolOrzhovRacketeers from "../pool/orzhov-racketeers.js";
 import _poolOrzhovaTheChurchOfDeals from "../pool/orzhova-the-church-of-deals.js";
 import _poolPainsReward from "../pool/pains-reward.js";
+import _poolPaladinOfAtonement from "../pool/paladin-of-atonement.js";
 import _poolPaleBears from "../pool/pale-bears.js";
 import _poolPalliationAccord from "../pool/palliation-accord.js";
 import _poolPathOfThePyromancer from "../pool/path-of-the-pyromancer.js";
@@ -1330,6 +1333,7 @@ const shard: CardShard = {
     _poolGallantCitizen,
     _poolGallifreyFallsNoMore,
     _poolGandalfWanderingWizard,
+    _poolGarnaTheBloodflame,
     _poolGarruksUprising,
     _poolGeistHonoredMonk,
     _poolGeneralMarhaultElsdragon,
@@ -1453,6 +1457,7 @@ const shard: CardShard = {
     _poolKeepersOfTheFaith,
     _poolKessigRecluse,
     _poolKherKeep,
+    _poolKiliTheResourceful,
     _poolKillianDecisiveMentor,
     _poolKingOfThePride,
     _poolKinsbaileBalloonist,
@@ -1589,6 +1594,7 @@ const shard: CardShard = {
     _poolOrzhovRacketeers,
     _poolOrzhovaTheChurchOfDeals,
     _poolPainsReward,
+    _poolPaladinOfAtonement,
     _poolPaleBears,
     _poolPalliationAccord,
     _poolPathOfThePyromancer,

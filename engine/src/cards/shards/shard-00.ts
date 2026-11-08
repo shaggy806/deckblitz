@@ -277,6 +277,7 @@ import _poolFatedClash from "../pool/fated-clash.js";
 import _poolFearfulVillager from "../pool/fearful-villager.js";
 import _poolFearlessHalberdier from "../pool/fearless-halberdier.js";
 import _poolFearsomeWerewolf from "../pool/fearsome-werewolf.js";
+import _poolFeastOnTheFallen from "../pool/feast-on-the-fallen.js";
 import _poolFieldOfReality from "../pool/field-of-reality.js";
 import _poolFieryInscription from "../pool/fiery-inscription.js";
 import _poolFillWithFright from "../pool/fill-with-fright.js";
@@ -284,6 +285,7 @@ import _poolFirefiendElemental from "../pool/firefiend-elemental.js";
 import _poolFiremaneCommando from "../pool/firemane-commando.js";
 import _poolFireshrieker from "../pool/fireshrieker.js";
 import _poolFirewakeSliver from "../pool/firewake-sliver.js";
+import _poolFirstResponse from "../pool/first-response.js";
 import _poolFishingGear from "../pool/fishing-gear.js";
 import _poolFlameshot from "../pool/flameshot.js";
 import _poolFlayerDrone from "../pool/flayer-drone.js";
@@ -1270,6 +1272,7 @@ const shard: CardShard = {
     _poolFearfulVillager,
     _poolFearlessHalberdier,
     _poolFearsomeWerewolf,
+    _poolFeastOnTheFallen,
     _poolFieldOfReality,
     _poolFieryInscription,
     _poolFillWithFright,
@@ -1277,6 +1280,7 @@ const shard: CardShard = {
     _poolFiremaneCommando,
     _poolFireshrieker,
     _poolFirewakeSliver,
+    _poolFirstResponse,
     _poolFishingGear,
     _poolFlameshot,
     _poolFlayerDrone,

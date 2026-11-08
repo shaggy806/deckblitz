@@ -25,7 +25,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: false, sacrifice: "self" },
       targets: [],
-      // The turn's gross life lost (`lifeLostThisTurn`), not the net change —
+      // The turn's gross life lost (the journal's life lost), not the net change —
       // the ruling.
       effect: { kind: "gain-life", amount: { turnStat: "life-lost", who: "you" } },
       resolve: null,

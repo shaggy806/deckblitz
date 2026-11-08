@@ -1962,7 +1962,14 @@
   "effect:duration-this-combat",
   "effect:duration-until-card-cast",
   "effect:legend-rule-off-this-turn",
-  "effect:grant-instant-speed-loyalty-until-eot"
+  "effect:grant-instant-speed-loyalty-until-eot",
+  "condition:counters-put-by-you-this-turn",
+  "condition:played-land-this-turn",
+  "condition:put-into-graveyard-this-turn-filter",
+  "condition:lost-life-last-turn",
+  "stat:loyalty-activation-tracking",
+  "cost:first-equip-each-turn-free",
+  "trigger:first-time-tapped-checked-on-resolution"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

@@ -82,6 +82,7 @@ import _poolBatterskull from "../pool/batterskull.js";
 import _poolBattleSquadron from "../pool/battle-squadron.js";
 import _poolBeaconOfDestiny from "../pool/beacon-of-destiny.js";
 import _poolBearerOfOverwhelmingTruths from "../pool/bearer-of-overwhelming-truths.js";
+import _poolBeastEruditeAerialist from "../pool/beast-erudite-aerialist.js";
 import _poolBeckonApparition from "../pool/beckon-apparition.js";
 import _poolBelbesPercher from "../pool/belbes-percher.js";
 import _poolBellowingElk from "../pool/bellowing-elk.js";
@@ -1124,6 +1125,7 @@ const shard: CardShard = {
     _poolBattleSquadron,
     _poolBeaconOfDestiny,
     _poolBearerOfOverwhelmingTruths,
+    _poolBeastEruditeAerialist,
     _poolBeckonApparition,
     _poolBelbesPercher,
     _poolBellowingElk,

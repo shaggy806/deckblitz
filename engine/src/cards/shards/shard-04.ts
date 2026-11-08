@@ -413,6 +413,7 @@ import _poolKeeperOfKeys from "../pool/keeper-of-keys.js";
 import _poolKeeperOfTheFlame from "../pool/keeper-of-the-flame.js";
 import _poolKefnetTheMindful from "../pool/kefnet-the-mindful.js";
 import _poolKheruGoldkeeper from "../pool/kheru-goldkeeper.js";
+import _poolKidLoki from "../pool/kid-loki.js";
 import _poolKindleTheInnerFlame from "../pool/kindle-the-inner-flame.js";
 import _poolKindredBoon from "../pool/kindred-boon.js";
 import _poolKingCheetah from "../pool/king-cheetah.js";
@@ -489,6 +490,7 @@ import _poolMeetingOfTheFive from "../pool/meeting-of-the-five.js";
 import _poolMemnarchTheWarden from "../pool/memnarch-the-warden.js";
 import _poolMemorysJourney from "../pool/memorys-journey.js";
 import _poolMentalNote from "../pool/mental-note.js";
+import _poolMercadianAtlas from "../pool/mercadian-atlas.js";
 import _poolMerfolkSeer from "../pool/merfolk-seer.js";
 import _poolMeriadocBrandybuck from "../pool/meriadoc-brandybuck.js";
 import _poolMidnightRitual from "../pool/midnight-ritual.js";
@@ -1381,6 +1383,7 @@ const shard: CardShard = {
     _poolKeeperOfTheFlame,
     _poolKefnetTheMindful,
     _poolKheruGoldkeeper,
+    _poolKidLoki,
     _poolKindleTheInnerFlame,
     _poolKindredBoon,
     _poolKingCheetah,
@@ -1457,6 +1460,7 @@ const shard: CardShard = {
     _poolMemnarchTheWarden,
     _poolMemorysJourney,
     _poolMentalNote,
+    _poolMercadianAtlas,
     _poolMerfolkSeer,
     _poolMeriadocBrandybuck,
     _poolMidnightRitual,

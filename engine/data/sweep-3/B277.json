@@ -1,0 +1,100 @@
+{
+ "batch": "B277",
+ "status": "done",
+ "ranks": "Need-key themes step 3 (docs/plans/need-key-themes.md, 2026-11-07): one turn journal in game state (engine/src/journal.ts) — flagged Build ASAP cards first (Kid Loki, Kiora of Salt and Sand, Kíli the Resourceful, Captain America, Living Legend), then the theme's top keys: counters you put this turn, a land played this turn, cards put into a graveyard this turn, life lost last turn, loyalty activations, the first equip each turn, the first tapping checked as the trigger resolves.",
+ "authored": [
+  {
+   "name": "Beast, Erudite Aerialist",
+   "files": [
+    "engine/src/cards/pool/beast-erudite-aerialist.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Captain America, Living Legend",
+   "files": [
+    "engine/src/cards/pool/captain-america-living-legend.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Feast on the Fallen",
+   "files": [
+    "engine/src/cards/pool/feast-on-the-fallen.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "First Response",
+   "files": [
+    "engine/src/cards/pool/first-response.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fractal Tender",
+   "files": [
+    "engine/src/cards/pool/fractal-tender.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Garna, the Bloodflame",
+   "files": [
+    "engine/src/cards/pool/garna-the-bloodflame.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kid Loki",
+   "files": [
+    "engine/src/cards/pool/kid-loki.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kiora of Salt and Sand",
+   "files": [
+    "engine/src/cards/pool/kiora-of-salt-and-sand.ts",
+    "engine/src/cards/tokens/leviathan-token-kiora-of-salt-and-sand.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Kíli the Resourceful",
+   "files": [
+    "engine/src/cards/pool/kili-the-resourceful.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Mercadian Atlas",
+   "files": [
+    "engine/src/cards/pool/mercadian-atlas.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Myojin of Grim Betrayal",
+   "files": [
+    "engine/src/cards/pool/myojin-of-grim-betrayal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Paladin of Atonement",
+   "files": [
+    "engine/src/cards/pool/paladin-of-atonement.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sigardian Paladin",
+   "files": [
+    "engine/src/cards/pool/sigardian-paladin.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": []
+}

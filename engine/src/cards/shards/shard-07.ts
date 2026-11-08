@@ -122,6 +122,7 @@ import _poolCallTheScions from "../pool/call-the-scions.js";
 import _poolCallousGiant from "../pool/callous-giant.js";
 import _poolCallousInspector from "../pool/callous-inspector.js";
 import _poolCanopySurge from "../pool/canopy-surge.js";
+import _poolCaptainAmericaLivingLegend from "../pool/captain-america-living-legend.js";
 import _poolCaptainMichaelBurnham from "../pool/captain-michael-burnham.js";
 import _poolCarrionRats from "../pool/carrion-rats.js";
 import _poolCaseOfTheShatteredPact from "../pool/case-of-the-shattered-pact.js";
@@ -996,6 +997,7 @@ import _tokensIllusionToken from "../tokens/illusion-token.js";
 import _tokensInsectTokenBlackFlying from "../tokens/insect-token-black-flying.js";
 import _tokensInsectTokenNestOfScarabs from "../tokens/insect-token-nest-of-scarabs.js";
 import _tokensKaroxBladewingToken from "../tokens/karox-bladewing-token.js";
+import _tokensLeviathanTokenKioraOfSaltAndSand from "../tokens/leviathan-token-kiora-of-salt-and-sand.js";
 import _tokensOxTokenOxDrover from "../tokens/ox-token-ox-drover.js";
 import _tokensPestTokenColorlessArtifact01 from "../tokens/pest-token-colorless-artifact-0-1.js";
 import _tokensPlantTokenDefender from "../tokens/plant-token-defender.js";
@@ -1132,6 +1134,7 @@ const shard: CardShard = {
     _poolCallousGiant,
     _poolCallousInspector,
     _poolCanopySurge,
+    _poolCaptainAmericaLivingLegend,
     _poolCaptainMichaelBurnham,
     _poolCarrionRats,
     _poolCaseOfTheShatteredPact,
@@ -2008,6 +2011,7 @@ const shard: CardShard = {
     _tokensInsectTokenBlackFlying,
     _tokensInsectTokenNestOfScarabs,
     _tokensKaroxBladewingToken,
+    _tokensLeviathanTokenKioraOfSaltAndSand,
     _tokensOxTokenOxDrover,
     _tokensPestTokenColorlessArtifact01,
     _tokensPlantTokenDefender,

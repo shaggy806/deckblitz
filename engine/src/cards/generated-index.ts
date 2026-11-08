@@ -421,6 +421,7 @@ export const TOKEN_NAMES: readonly string[] = [
   "Land Mine Token",
   "Lander Token",
   "Leviathan Token",
+  "Leviathan Token (Kiora of Salt and Sand)",
   "Lifelink Cat Token",
   "Lifelink Soldier Token",
   "Lifelink Vampire Token",

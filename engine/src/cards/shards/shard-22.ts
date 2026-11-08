@@ -728,6 +728,7 @@ import _poolShowerOfSparks from "../pool/shower-of-sparks.js";
 import _poolSiegeGangCommander from "../pool/siege-gang-commander.js";
 import _poolSifaGrent from "../pool/sifa-grent.js";
 import _poolSigardaHeronsGrace from "../pool/sigarda-herons-grace.js";
+import _poolSigardianPaladin from "../pool/sigardian-paladin.js";
 import _poolSightlessGhoul from "../pool/sightless-ghoul.js";
 import _poolSigiledSentinel from "../pool/sigiled-sentinel.js";
 import _poolSilverFurMaster from "../pool/silver-fur-master.js";
@@ -1740,6 +1741,7 @@ const shard: CardShard = {
     _poolSiegeGangCommander,
     _poolSifaGrent,
     _poolSigardaHeronsGrace,
+    _poolSigardianPaladin,
     _poolSightlessGhoul,
     _poolSigiledSentinel,
     _poolSilverFurMaster,

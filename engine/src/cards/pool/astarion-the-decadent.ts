@@ -1,7 +1,7 @@
 import { defineCard } from "../define.js";
 
 // Both amounts are read as the mode resolves, from this turn's running
-// totals (`PlayerState.lifeLostThisTurn` / `lifeGainedThisTurn`). Feed's
+// totals (the journal's life lost / life gained). Feed's
 // target is chosen with the mode, as the trigger goes on the stack
 // (rule 603.3c).
 const TRIGGER_TEXT = "At the beginning of your end step, choose one —";

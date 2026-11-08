@@ -324,6 +324,7 @@ import _poolForbiddenFriendship from "../pool/forbidden-friendship.js";
 import _poolForensicGadgeteer from "../pool/forensic-gadgeteer.js";
 import _poolFoundationBreaker from "../pool/foundation-breaker.js";
 import _poolFoundryAssembler from "../pool/foundry-assembler.js";
+import _poolFractalTender from "../pool/fractal-tender.js";
 import _poolFromTheRubble from "../pool/from-the-rubble.js";
 import _poolFrostOgre from "../pool/frost-ogre.js";
 import _poolFrozenSolid from "../pool/frozen-solid.js";
@@ -1359,6 +1360,7 @@ const shard: CardShard = {
     _poolForensicGadgeteer,
     _poolFoundationBreaker,
     _poolFoundryAssembler,
+    _poolFractalTender,
     _poolFromTheRubble,
     _poolFrostOgre,
     _poolFrozenSolid,

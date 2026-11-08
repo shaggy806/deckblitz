@@ -505,6 +505,7 @@ import _poolMouserFoundry from "../pool/mouser-foundry.js";
 import _poolMulticlassBaldric from "../pool/multiclass-baldric.js";
 import _poolMultiversalIncursion from "../pool/multiversal-incursion.js";
 import _poolMunitionsExpert from "../pool/munitions-expert.js";
+import _poolMyojinOfGrimBetrayal from "../pool/myojin-of-grim-betrayal.js";
 import _poolMyrCustodian from "../pool/myr-custodian.js";
 import _poolMythosOfBrokkos from "../pool/mythos-of-brokkos.js";
 import _poolMythosOfNethroi from "../pool/mythos-of-nethroi.js";
@@ -1467,6 +1468,7 @@ const shard: CardShard = {
     _poolMulticlassBaldric,
     _poolMultiversalIncursion,
     _poolMunitionsExpert,
+    _poolMyojinOfGrimBetrayal,
     _poolMyrCustodian,
     _poolMythosOfBrokkos,
     _poolMythosOfNethroi,
