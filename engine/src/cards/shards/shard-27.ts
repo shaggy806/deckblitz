@@ -809,6 +809,7 @@ import _poolTheBalrogDurinsBane from "../pool/the-balrog-durins-bane.js";
 import _poolTheFlux from "../pool/the-flux.js";
 import _poolTheKeyToTheVault from "../pool/the-key-to-the-vault.js";
 import _poolTheLionTurtle from "../pool/the-lion-turtle.js";
+import _poolTheMasterTranscendent from "../pool/the-master-transcendent.js";
 import _poolTheOddAcornGang from "../pool/the-odd-acorn-gang.js";
 import _poolTheSixthDoctor from "../pool/the-sixth-doctor.js";
 import _poolTheUnderworldCookbook from "../pool/the-underworld-cookbook.js";
@@ -1770,6 +1771,7 @@ const shard: CardShard = {
     _poolTheFlux,
     _poolTheKeyToTheVault,
     _poolTheLionTurtle,
+    _poolTheMasterTranscendent,
     _poolTheOddAcornGang,
     _poolTheSixthDoctor,
     _poolTheUnderworldCookbook,

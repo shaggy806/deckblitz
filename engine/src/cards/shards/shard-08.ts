@@ -648,6 +648,7 @@ import _poolPicnicRuiner from "../pool/picnic-ruiner.js";
 import _poolPierceStrider from "../pool/pierce-strider.js";
 import _poolPilgrimOfTheFires from "../pool/pilgrim-of-the-fires.js";
 import _poolPiliPala from "../pool/pili-pala.js";
+import _poolPirImaginativeRascal from "../pool/pir-imaginative-rascal.js";
 import _poolPitKeeper from "../pool/pit-keeper.js";
 import _poolPlagonLordOfTheBeach from "../pool/plagon-lord-of-the-beach.js";
 import _poolPlanarBirth from "../pool/planar-birth.js";
@@ -1682,6 +1683,7 @@ const shard: CardShard = {
     _poolPierceStrider,
     _poolPilgrimOfTheFires,
     _poolPiliPala,
+    _poolPirImaginativeRascal,
     _poolPitKeeper,
     _poolPlagonLordOfTheBeach,
     _poolPlanarBirth,

@@ -200,6 +200,7 @@ import _poolDeathlessKnight from "../pool/deathless-knight.js";
 import _poolDebtToTheDeathless from "../pool/debt-to-the-deathless.js";
 import _poolDeepwoodDenizen from "../pool/deepwood-denizen.js";
 import _poolDefilerOfDreams from "../pool/defiler-of-dreams.js";
+import _poolDefilerOfInstinct from "../pool/defiler-of-instinct.js";
 import _poolDefyGravity from "../pool/defy-gravity.js";
 import _poolDeityOfScars from "../pool/deity-of-scars.js";
 import _poolDemonicConsultation from "../pool/demonic-consultation.js";
@@ -447,6 +448,7 @@ import _poolLeapfrog from "../pool/leapfrog.js";
 import _poolLeechingSliver from "../pool/leeching-sliver.js";
 import _poolLeeringGargoyle from "../pool/leering-gargoyle.js";
 import _poolLegionLoyalty from "../pool/legion-loyalty.js";
+import _poolLegionsOfLimDul from "../pool/legions-of-lim-dul.js";
 import _poolLeylineDowser from "../pool/leyline-dowser.js";
 import _poolLightningHelix from "../pool/lightning-helix.js";
 import _poolLightningReflexes from "../pool/lightning-reflexes.js";
@@ -1157,6 +1159,7 @@ const shard: CardShard = {
     _poolDebtToTheDeathless,
     _poolDeepwoodDenizen,
     _poolDefilerOfDreams,
+    _poolDefilerOfInstinct,
     _poolDefyGravity,
     _poolDeityOfScars,
     _poolDemonicConsultation,
@@ -1404,6 +1407,7 @@ const shard: CardShard = {
     _poolLeechingSliver,
     _poolLeeringGargoyle,
     _poolLegionLoyalty,
+    _poolLegionsOfLimDul,
     _poolLeylineDowser,
     _poolLightningHelix,
     _poolLightningReflexes,

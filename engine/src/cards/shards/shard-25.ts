@@ -466,6 +466,7 @@ import _poolLightOfPromise from "../pool/light-of-promise.js";
 import _poolLightfootTechnique from "../pool/lightfoot-technique.js";
 import _poolLightningAxe from "../pool/lightning-axe.js";
 import _poolLilianasStandardBearer from "../pool/lilianas-standard-bearer.js";
+import _poolLivonyaSilone from "../pool/livonya-silone.js";
 import _poolLogicKnot from "../pool/logic-knot.js";
 import _poolLonesomeUnicorn from "../pool/lonesome-unicorn.js";
 import _poolLookoutsDispersal from "../pool/lookouts-dispersal.js";
@@ -1430,6 +1431,7 @@ const shard: CardShard = {
     _poolLightfootTechnique,
     _poolLightningAxe,
     _poolLilianasStandardBearer,
+    _poolLivonyaSilone,
     _poolLogicKnot,
     _poolLonesomeUnicorn,
     _poolLookoutsDispersal,

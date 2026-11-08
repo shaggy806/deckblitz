@@ -209,6 +209,7 @@ import _poolDromarsAttendant from "../pool/dromars-attendant.js";
 import _poolDrownInShapelessness from "../pool/drown-in-shapelessness.js";
 import _poolDryadGreenseeker from "../pool/dryad-greenseeker.js";
 import _poolDryadOfTheIlysianGrove from "../pool/dryad-of-the-ilysian-grove.js";
+import _poolDueRespect from "../pool/due-respect.js";
 import _poolDundoolinWeaver from "../pool/dundoolin-weaver.js";
 import _poolDuneDrifter from "../pool/dune-drifter.js";
 import _poolDuskmournsDomination from "../pool/duskmourns-domination.js";
@@ -488,6 +489,7 @@ import _poolManicScribe from "../pool/manic-scribe.js";
 import _poolManticoreOfTheGauntlet from "../pool/manticore-of-the-gauntlet.js";
 import _poolMarblePriest from "../pool/marble-priest.js";
 import _poolMarchFromTheTomb from "../pool/march-from-the-tomb.js";
+import _poolMarchOfRecklessJoy from "../pool/march-of-reckless-joy.js";
 import _poolMarketFestival from "../pool/market-festival.js";
 import _poolMarkovEnforcer from "../pool/markov-enforcer.js";
 import _poolMarrowBats from "../pool/marrow-bats.js";
@@ -1141,6 +1143,7 @@ const shard: CardShard = {
     _poolDrownInShapelessness,
     _poolDryadGreenseeker,
     _poolDryadOfTheIlysianGrove,
+    _poolDueRespect,
     _poolDundoolinWeaver,
     _poolDuneDrifter,
     _poolDuskmournsDomination,
@@ -1420,6 +1423,7 @@ const shard: CardShard = {
     _poolManticoreOfTheGauntlet,
     _poolMarblePriest,
     _poolMarchFromTheTomb,
+    _poolMarchOfRecklessJoy,
     _poolMarketFestival,
     _poolMarkovEnforcer,
     _poolMarrowBats,

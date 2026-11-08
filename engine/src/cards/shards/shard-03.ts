@@ -47,6 +47,7 @@ import _poolAvacynAngelOfHope from "../pool/avacyn-angel-of-hope.js";
 import _poolAvalancheRiders from "../pool/avalanche-riders.js";
 import _poolAvatarKyoshiEarthbender from "../pool/avatar-kyoshi-earthbender.js";
 import _poolAxiomEngraver from "../pool/axiom-engraver.js";
+import _poolAyumiTheLastVisitor from "../pool/ayumi-the-last-visitor.js";
 import _poolAzusasManyJourneys from "../pool/azusas-many-journeys.js";
 import _poolBakeIntoAPie from "../pool/bake-into-a-pie.js";
 import _poolBaronStruckerHydraOverlord from "../pool/baron-strucker-hydra-overlord.js";
@@ -875,6 +876,7 @@ import _poolYoungRedDragon from "../pool/young-red-dragon.js";
 import _poolYoungWeiRecruits from "../pool/young-wei-recruits.js";
 import _poolZaraRenegadeRecruiter from "../pool/zara-renegade-recruiter.js";
 import _poolZhalfirinLancer from "../pool/zhalfirin-lancer.js";
+import _poolZombieMusher from "../pool/zombie-musher.js";
 import _tokens44RedBirdToken from "../tokens/4-4-red-bird-token.js";
 import _tokensBeauToken from "../tokens/beau-token.js";
 import _tokensBirdToken from "../tokens/bird-token.js";
@@ -947,6 +949,7 @@ const shard: CardShard = {
     _poolAvalancheRiders,
     _poolAvatarKyoshiEarthbender,
     _poolAxiomEngraver,
+    _poolAyumiTheLastVisitor,
     _poolAzusasManyJourneys,
     _poolBakeIntoAPie,
     _poolBaronStruckerHydraOverlord,
@@ -1775,6 +1778,7 @@ const shard: CardShard = {
     _poolYoungWeiRecruits,
     _poolZaraRenegadeRecruiter,
     _poolZhalfirinLancer,
+    _poolZombieMusher,
   ],
   tokens: [
     _tokens44RedBirdToken,

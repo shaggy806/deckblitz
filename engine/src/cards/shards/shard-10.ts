@@ -341,6 +341,7 @@ import _poolGlassCasket from "../pool/glass-casket.js";
 import _poolGleamOfDeath from "../pool/gleam-of-death.js";
 import _poolGlittermonger from "../pool/glittermonger.js";
 import _poolGloryBoundInitiate from "../pool/glory-bound-initiate.js";
+import _poolGlyphOfDestruction from "../pool/glyph-of-destruction.js";
 import _poolGoblinBurrows from "../pool/goblin-burrows.js";
 import _poolGoblinFreerunner from "../pool/goblin-freerunner.js";
 import _poolGoblinGuide from "../pool/goblin-guide.js";
@@ -1326,6 +1327,7 @@ const shard: CardShard = {
     _poolGleamOfDeath,
     _poolGlittermonger,
     _poolGloryBoundInitiate,
+    _poolGlyphOfDestruction,
     _poolGoblinBurrows,
     _poolGoblinFreerunner,
     _poolGoblinGuide,

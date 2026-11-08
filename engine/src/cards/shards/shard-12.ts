@@ -717,6 +717,7 @@ import _poolSatyaAetherfluxGenius from "../pool/satya-aetherflux-genius.js";
 import _poolSavagePunch from "../pool/savage-punch.js";
 import _poolSavaiSabertooth from "../pool/savai-sabertooth.js";
 import _poolSavor from "../pool/savor.js";
+import _poolSavvyTrader from "../pool/savvy-trader.js";
 import _poolScar from "../pool/scar.js";
 import _poolScarletWitchWandaMaximoff from "../pool/scarlet-witch-wanda-maximoff.js";
 import _poolScholarOfNewHorizons from "../pool/scholar-of-new-horizons.js";
@@ -1701,6 +1702,7 @@ const shard: CardShard = {
     _poolSavagePunch,
     _poolSavaiSabertooth,
     _poolSavor,
+    _poolSavvyTrader,
     _poolScar,
     _poolScarletWitchWandaMaximoff,
     _poolScholarOfNewHorizons,

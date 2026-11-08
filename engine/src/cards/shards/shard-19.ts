@@ -691,6 +691,7 @@ import _poolPrizedStatue from "../pool/prized-statue.js";
 import _poolProdigysPrototype from "../pool/prodigys-prototype.js";
 import _poolProgenitorExarch from "../pool/progenitor-exarch.js";
 import _poolProsperousPirates from "../pool/prosperous-pirates.js";
+import _poolProwlingGeistcatcher from "../pool/prowling-geistcatcher.js";
 import _poolPseudodragonFamiliar from "../pool/pseudodragon-familiar.js";
 import _poolPsychicImpetus from "../pool/psychic-impetus.js";
 import _poolPsychicPuppetry from "../pool/psychic-puppetry.js";
@@ -742,6 +743,7 @@ import _poolRollingSpoil from "../pool/rolling-spoil.js";
 import _poolRoninCliffrider from "../pool/ronin-cliffrider.js";
 import _poolRoninHoundmaster from "../pool/ronin-houndmaster.js";
 import _poolRonomSerpent from "../pool/ronom-serpent.js";
+import _poolRooftopStorm from "../pool/rooftop-storm.js";
 import _poolRootwaterAlligator from "../pool/rootwater-alligator.js";
 import _poolRoughTumble from "../pool/rough-tumble.js";
 import _poolRovingActuator from "../pool/roving-actuator.js";
@@ -1723,6 +1725,7 @@ const shard: CardShard = {
     _poolProdigysPrototype,
     _poolProgenitorExarch,
     _poolProsperousPirates,
+    _poolProwlingGeistcatcher,
     _poolPseudodragonFamiliar,
     _poolPsychicImpetus,
     _poolPsychicPuppetry,
@@ -1774,6 +1777,7 @@ const shard: CardShard = {
     _poolRoninCliffrider,
     _poolRoninHoundmaster,
     _poolRonomSerpent,
+    _poolRooftopStorm,
     _poolRootwaterAlligator,
     _poolRoughTumble,
     _poolRovingActuator,

@@ -611,6 +611,7 @@ import _poolPrimordialHydra from "../pool/primordial-hydra.js";
 import _poolPrishesWanderings from "../pool/prishes-wanderings.js";
 import _poolPrismwakeMerrow from "../pool/prismwake-merrow.js";
 import _poolPromiseOfPower from "../pool/promise-of-power.js";
+import _poolPromiseOfTomorrow from "../pool/promise-of-tomorrow.js";
 import _poolProudMentor from "../pool/proud-mentor.js";
 import _poolPsychicStrike from "../pool/psychic-strike.js";
 import _poolPteramander from "../pool/pteramander.js";
@@ -1622,6 +1623,7 @@ const shard: CardShard = {
     _poolPrishesWanderings,
     _poolPrismwakeMerrow,
     _poolPromiseOfPower,
+    _poolPromiseOfTomorrow,
     _poolProudMentor,
     _poolPsychicStrike,
     _poolPteramander,

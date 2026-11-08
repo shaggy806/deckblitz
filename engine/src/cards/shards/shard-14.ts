@@ -136,6 +136,7 @@ import _poolCharixTheRagingIsle from "../pool/charix-the-raging-isle.js";
 import _poolChiefOfTheScale from "../pool/chief-of-the-scale.js";
 import _poolChillingShade from "../pool/chilling-shade.js";
 import _poolChocoboRacetrack from "../pool/chocobo-racetrack.js";
+import _poolChoreographedSparks from "../pool/choreographed-sparks.js";
 import _poolChromeDome from "../pool/chrome-dome.js";
 import _poolChronatog from "../pool/chronatog.js";
 import _poolChupacabraEcho from "../pool/chupacabra-echo.js";
@@ -966,6 +967,7 @@ import _poolYunaHopeOfSpira from "../pool/yuna-hope-of-spira.js";
 import _poolYurikoBladeOfTheMighty from "../pool/yuriko-blade-of-the-mighty.js";
 import _poolZealotsEnDal from "../pool/zealots-en-dal.js";
 import _poolZealousLorecaster from "../pool/zealous-lorecaster.js";
+import _poolZellixSanityFlayer from "../pool/zellix-sanity-flayer.js";
 import _poolZhalfirinCommander from "../pool/zhalfirin-commander.js";
 import _poolZopandrelHungerDominus from "../pool/zopandrel-hunger-dominus.js";
 import _poolZukosOffense from "../pool/zukos-offense.js";
@@ -1133,6 +1135,7 @@ const shard: CardShard = {
     _poolChiefOfTheScale,
     _poolChillingShade,
     _poolChocoboRacetrack,
+    _poolChoreographedSparks,
     _poolChromeDome,
     _poolChronatog,
     _poolChupacabraEcho,
@@ -1963,6 +1966,7 @@ const shard: CardShard = {
     _poolYurikoBladeOfTheMighty,
     _poolZealotsEnDal,
     _poolZealousLorecaster,
+    _poolZellixSanityFlayer,
     _poolZhalfirinCommander,
     _poolZopandrelHungerDominus,
     _poolZukosOffense,

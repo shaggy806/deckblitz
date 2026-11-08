@@ -315,6 +315,7 @@ import _poolGatherThePack from "../pool/gather-the-pack.js";
 import _poolGearseekerSerpent from "../pool/gearseeker-serpent.js";
 import _poolGeierReachBandit from "../pool/geier-reach-bandit.js";
 import _poolGeistflame from "../pool/geistflame.js";
+import _poolGeneralFerrousRokiric from "../pool/general-ferrous-rokiric.js";
 import _poolGeneralTraagHeartOfStone from "../pool/general-traag-heart-of-stone.js";
 import _poolGerrardsBattleCry from "../pool/gerrards-battle-cry.js";
 import _poolGetThePoint from "../pool/get-the-point.js";
@@ -1308,6 +1309,7 @@ const shard: CardShard = {
     _poolGearseekerSerpent,
     _poolGeierReachBandit,
     _poolGeistflame,
+    _poolGeneralFerrousRokiric,
     _poolGeneralTraagHeartOfStone,
     _poolGerrardsBattleCry,
     _poolGetThePoint,

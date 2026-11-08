@@ -203,6 +203,7 @@ import _poolDeathcultRogue from "../pool/deathcult-rogue.js";
 import _poolDeepchannelMentor from "../pool/deepchannel-mentor.js";
 import _poolDefenderOfChaos from "../pool/defender-of-chaos.js";
 import _poolDefenseForceAggressor from "../pool/defense-force-aggressor.js";
+import _poolDefilerOfFaith from "../pool/defiler-of-faith.js";
 import _poolDefilerOfSouls from "../pool/defiler-of-souls.js";
 import _poolDeflectingSwat from "../pool/deflecting-swat.js";
 import _poolDemonOfFatesDesign from "../pool/demon-of-fates-design.js";
@@ -264,6 +265,7 @@ import _poolExpelFromOrazca from "../pool/expel-from-orazca.js";
 import _poolExponentialGrowth from "../pool/exponential-growth.js";
 import _poolExultantSkymarcher from "../pool/exultant-skymarcher.js";
 import _poolEyeOfNidhogg from "../pool/eye-of-nidhogg.js";
+import _poolFabricationModule from "../pool/fabrication-module.js";
 import _poolFaeOfWishes from "../pool/fae-of-wishes.js";
 import _poolFaerieHarbinger from "../pool/faerie-harbinger.js";
 import _poolFailureComply from "../pool/failure-comply.js";
@@ -1211,6 +1213,7 @@ const shard: CardShard = {
     _poolDeepchannelMentor,
     _poolDefenderOfChaos,
     _poolDefenseForceAggressor,
+    _poolDefilerOfFaith,
     _poolDefilerOfSouls,
     _poolDeflectingSwat,
     _poolDemonOfFatesDesign,
@@ -1272,6 +1275,7 @@ const shard: CardShard = {
     _poolExponentialGrowth,
     _poolExultantSkymarcher,
     _poolEyeOfNidhogg,
+    _poolFabricationModule,
     _poolFaeOfWishes,
     _poolFaerieHarbinger,
     _poolFailureComply,

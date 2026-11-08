@@ -176,6 +176,7 @@ import _poolDecoratedChampion from "../pool/decorated-champion.js";
 import _poolDedicatedMartyr from "../pool/dedicated-martyr.js";
 import _poolDeepSeaTerror from "../pool/deep-sea-terror.js";
 import _poolDeepwoodWolverine from "../pool/deepwood-wolverine.js";
+import _poolDefilerOfFlesh from "../pool/defiler-of-flesh.js";
 import _poolDemandAnswers from "../pool/demand-answers.js";
 import _poolDemigodOfRevenge from "../pool/demigod-of-revenge.js";
 import _poolDemolitionStomper from "../pool/demolition-stomper.js";
@@ -1146,6 +1147,7 @@ const shard: CardShard = {
     _poolDedicatedMartyr,
     _poolDeepSeaTerror,
     _poolDeepwoodWolverine,
+    _poolDefilerOfFlesh,
     _poolDemandAnswers,
     _poolDemigodOfRevenge,
     _poolDemolitionStomper,

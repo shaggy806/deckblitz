@@ -12,6 +12,7 @@ import _poolAdrixAndNev from "../pool/adrix-and-nev.js";
 import _poolAdvancedHoverguard from "../pool/advanced-hoverguard.js";
 import _poolAerialManeuver from "../pool/aerial-maneuver.js";
 import _poolAetherMeltdown from "../pool/aether-meltdown.js";
+import _poolAetherRevolt from "../pool/aether-revolt.js";
 import _poolAgentOfMasks from "../pool/agent-of-masks.js";
 import _poolAhnCropInvader from "../pool/ahn-crop-invader.js";
 import _poolAinokStrikeLeader from "../pool/ainok-strike-leader.js";
@@ -677,6 +678,7 @@ import _poolRevolutionist from "../pool/revolutionist.js";
 import _poolRexCyberHound from "../pool/rex-cyber-hound.js";
 import _poolRighteousCause from "../pool/righteous-cause.js";
 import _poolRigoStreetwiseMentor from "../pool/rigo-streetwise-mentor.js";
+import _poolRimeDryad from "../pool/rime-dryad.js";
 import _poolRionyaFireDancer from "../pool/rionya-fire-dancer.js";
 import _poolRipplesOfUndeath from "../pool/ripples-of-undeath.js";
 import _poolRiptideTurtle from "../pool/riptide-turtle.js";
@@ -1000,6 +1002,7 @@ const shard: CardShard = {
     _poolAdvancedHoverguard,
     _poolAerialManeuver,
     _poolAetherMeltdown,
+    _poolAetherRevolt,
     _poolAgentOfMasks,
     _poolAhnCropInvader,
     _poolAinokStrikeLeader,
@@ -1665,6 +1668,7 @@ const shard: CardShard = {
     _poolRexCyberHound,
     _poolRighteousCause,
     _poolRigoStreetwiseMentor,
+    _poolRimeDryad,
     _poolRionyaFireDancer,
     _poolRipplesOfUndeath,
     _poolRiptideTurtle,

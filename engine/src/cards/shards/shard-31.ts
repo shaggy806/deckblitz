@@ -115,6 +115,7 @@ import _poolBrindleBoar from "../pool/brindle-boar.js";
 import _poolBristlingHydra from "../pool/bristling-hydra.js";
 import _poolBroodMonitor from "../pool/brood-monitor.js";
 import _poolBrotherhoodAmbushers from "../pool/brotherhood-ambushers.js";
+import _poolBrotherhoodScribe from "../pool/brotherhood-scribe.js";
 import _poolBulwark from "../pool/bulwark.js";
 import _poolBurnFromWithin from "../pool/burn-from-within.js";
 import _poolCalciteSnapper from "../pool/calcite-snapper.js";
@@ -260,6 +261,7 @@ import _poolEclipsedElf from "../pool/eclipsed-elf.js";
 import _poolEerieInterlude from "../pool/eerie-interlude.js";
 import _poolEerieUltimatum from "../pool/eerie-ultimatum.js";
 import _poolElegantParlor from "../pool/elegant-parlor.js";
+import _poolElendaSaintOfDusk from "../pool/elenda-saint-of-dusk.js";
 import _poolElendaTheDuskRose from "../pool/elenda-the-dusk-rose.js";
 import _poolElixirOfVitality from "../pool/elixir-of-vitality.js";
 import _poolElspethStormSlayer from "../pool/elspeth-storm-slayer.js";
@@ -1022,6 +1024,7 @@ import _tokensFoxToken from "../tokens/fox-token.js";
 import _tokensGiantToken from "../tokens/giant-token.js";
 import _tokensGolemFlyingToken from "../tokens/golem-flying-token.js";
 import _tokensGreenOxToken44 from "../tokens/green-ox-token-4-4.js";
+import _tokensHorrorTokenBlack11 from "../tokens/horror-token-black-1-1.js";
 import _tokensHumanCitizenToken from "../tokens/human-citizen-token.js";
 import _tokensHumanSoldierTokenTorensFistOfTheAngels from "../tokens/human-soldier-token-torens-fist-of-the-angels.js";
 import _tokensIllusionTokenPlain from "../tokens/illusion-token-plain.js";
@@ -1155,6 +1158,7 @@ const shard: CardShard = {
     _poolBristlingHydra,
     _poolBroodMonitor,
     _poolBrotherhoodAmbushers,
+    _poolBrotherhoodScribe,
     _poolBulwark,
     _poolBurnFromWithin,
     _poolCalciteSnapper,
@@ -1300,6 +1304,7 @@ const shard: CardShard = {
     _poolEerieInterlude,
     _poolEerieUltimatum,
     _poolElegantParlor,
+    _poolElendaSaintOfDusk,
     _poolElendaTheDuskRose,
     _poolElixirOfVitality,
     _poolElspethStormSlayer,
@@ -2064,6 +2069,7 @@ const shard: CardShard = {
     _tokensGiantToken,
     _tokensGolemFlyingToken,
     _tokensGreenOxToken44,
+    _tokensHorrorTokenBlack11,
     _tokensHumanCitizenToken,
     _tokensHumanSoldierTokenTorensFistOfTheAngels,
     _tokensIllusionTokenPlain,

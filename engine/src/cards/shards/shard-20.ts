@@ -565,6 +565,7 @@ import _poolMorningApparition from "../pool/morning-apparition.js";
 import _poolMoroii from "../pool/moroii.js";
 import _poolMorticianBeetle from "../pool/mortician-beetle.js";
 import _poolMoxJasper from "../pool/mox-jasper.js";
+import _poolMurkDwellers from "../pool/murk-dwellers.js";
 import _poolMutantsPrey from "../pool/mutants-prey.js";
 import _poolMyojinOfSeeingWinds from "../pool/myojin-of-seeing-winds.js";
 import _poolMyrQuadropod from "../pool/myr-quadropod.js";
@@ -726,6 +727,7 @@ import _poolRustsporeRam from "../pool/rustspore-ram.js";
 import _poolRuthlessKnave from "../pool/ruthless-knave.js";
 import _poolRuthlessNegotiation from "../pool/ruthless-negotiation.js";
 import _poolRuthlessSniper from "../pool/ruthless-sniper.js";
+import _poolSageOfTheBeyond from "../pool/sage-of-the-beyond.js";
 import _poolSaltRoadQuartermasters from "../pool/salt-road-quartermasters.js";
 import _poolSanarUnfinishedGenius from "../pool/sanar-unfinished-genius.js";
 import _poolSandbendersStorm from "../pool/sandbenders-storm.js";
@@ -1604,6 +1606,7 @@ const shard: CardShard = {
     _poolMoroii,
     _poolMorticianBeetle,
     _poolMoxJasper,
+    _poolMurkDwellers,
     _poolMutantsPrey,
     _poolMyojinOfSeeingWinds,
     _poolMyrQuadropod,
@@ -1765,6 +1768,7 @@ const shard: CardShard = {
     _poolRuthlessKnave,
     _poolRuthlessNegotiation,
     _poolRuthlessSniper,
+    _poolSageOfTheBeyond,
     _poolSaltRoadQuartermasters,
     _poolSanarUnfinishedGenius,
     _poolSandbendersStorm,

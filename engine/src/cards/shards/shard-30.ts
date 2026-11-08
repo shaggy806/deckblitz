@@ -65,6 +65,7 @@ import _poolBalanceOfTerror from "../pool/balance-of-terror.js";
 import _poolBalothNull from "../pool/baloth-null.js";
 import _poolBalothWoodcrasher from "../pool/baloth-woodcrasher.js";
 import _poolBannerhideKrushok from "../pool/bannerhide-krushok.js";
+import _poolBarbarianGuides from "../pool/barbarian-guides.js";
 import _poolBarbedWire from "../pool/barbed-wire.js";
 import _poolBartzAndBoko from "../pool/bartz-and-boko.js";
 import _poolBasilicaShepherd from "../pool/basilica-shepherd.js";
@@ -152,6 +153,7 @@ import _poolCloudOfDarkness from "../pool/cloud-of-darkness.js";
 import _poolCloudOfFaeries from "../pool/cloud-of-faeries.js";
 import _poolCloudshift from "../pool/cloudshift.js";
 import _poolCoastalHornclaw from "../pool/coastal-hornclaw.js";
+import _poolColdStorage from "../pool/cold-storage.js";
 import _poolCollectiveBlessing from "../pool/collective-blessing.js";
 import _poolColossalGraveReaver from "../pool/colossal-grave-reaver.js";
 import _poolCometStorm from "../pool/comet-storm.js";
@@ -316,6 +318,7 @@ import _poolForensicResearcher from "../pool/forensic-researcher.js";
 import _poolFormOfTheDinosaur from "../pool/form-of-the-dinosaur.js";
 import _poolFormlessNurturing from "../pool/formless-nurturing.js";
 import _poolFortuitousFind from "../pool/fortuitous-find.js";
+import _poolFortuneTellersTalent from "../pool/fortune-tellers-talent.js";
 import _poolFountainOfCho from "../pool/fountain-of-cho.js";
 import _poolFourKnocks from "../pool/four-knocks.js";
 import _poolFranticInventory from "../pool/frantic-inventory.js";
@@ -998,6 +1001,7 @@ import _tokensBlueElementalToken22Flying from "../tokens/blue-elemental-token-2-
 import _tokensDinosaurToken22FlyingHaste from "../tokens/dinosaur-token-2-2-flying-haste.js";
 import _tokensDragonSpiritToken from "../tokens/dragon-spirit-token.js";
 import _tokensGoldToken from "../tokens/gold-token.js";
+import _tokensGolemTokenRedWhite44 from "../tokens/golem-token-red-white-4-4.js";
 import _tokensGreenCatToken11 from "../tokens/green-cat-token-1-1.js";
 import _tokensKeimi from "../tokens/keimi.js";
 import _tokensKrakenTokenKioraBestsTheSeaGod from "../tokens/kraken-token-kiora-bests-the-sea-god.js";
@@ -1070,6 +1074,7 @@ const shard: CardShard = {
     _poolBalothNull,
     _poolBalothWoodcrasher,
     _poolBannerhideKrushok,
+    _poolBarbarianGuides,
     _poolBarbedWire,
     _poolBartzAndBoko,
     _poolBasilicaShepherd,
@@ -1157,6 +1162,7 @@ const shard: CardShard = {
     _poolCloudOfFaeries,
     _poolCloudshift,
     _poolCoastalHornclaw,
+    _poolColdStorage,
     _poolCollectiveBlessing,
     _poolColossalGraveReaver,
     _poolCometStorm,
@@ -1321,6 +1327,7 @@ const shard: CardShard = {
     _poolFormOfTheDinosaur,
     _poolFormlessNurturing,
     _poolFortuitousFind,
+    _poolFortuneTellersTalent,
     _poolFountainOfCho,
     _poolFourKnocks,
     _poolFranticInventory,
@@ -2005,6 +2012,7 @@ const shard: CardShard = {
     _tokensDinosaurToken22FlyingHaste,
     _tokensDragonSpiritToken,
     _tokensGoldToken,
+    _tokensGolemTokenRedWhite44,
     _tokensGreenCatToken11,
     _tokensKeimi,
     _tokensKrakenTokenKioraBestsTheSeaGod,
