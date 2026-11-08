@@ -825,6 +825,7 @@ import _poolTelimtorsDarts from "../pool/telimtors-darts.js";
 import _poolTempestHart from "../pool/tempest-hart.js";
 import _poolTempestOfLight from "../pool/tempest-of-light.js";
 import _poolTenuredOilcaster from "../pool/tenured-oilcaster.js";
+import _poolTerritorialGorger from "../pool/territorial-gorger.js";
 import _poolTheBlackArrow from "../pool/the-black-arrow.js";
 import _poolTheBoulderReadyToRumble from "../pool/the-boulder-ready-to-rumble.js";
 import _poolTheDeathOfGwenStacy from "../pool/the-death-of-gwen-stacy.js";
@@ -1809,6 +1810,7 @@ const shard: CardShard = {
     _poolTempestHart,
     _poolTempestOfLight,
     _poolTenuredOilcaster,
+    _poolTerritorialGorger,
     _poolTheBlackArrow,
     _poolTheBoulderReadyToRumble,
     _poolTheDeathOfGwenStacy,

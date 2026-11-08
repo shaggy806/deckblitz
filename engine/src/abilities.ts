@@ -1409,8 +1409,10 @@ export type TriggerSpec =
       /** "… on a permanent **or player**" (All Will Be One): a player's
        * counters fire it too (rule 122.1), energy included (rule 107.14), once
        * per player for a simultaneous placement, with `{ triggerValue: true }`
-       * how many (toxic's ruling); `who` and `filter` ask only of a permanent.
-       * There's no trigger object for a player's. */
+       * how many (toxic's ruling); `filter` asks only of a permanent, `who`
+       * of the player too (`"any"` for every player's; `"you"` is "whenever
+       * you get one or more {E}" — Territorial Gorger, with `counter:
+       * "energy"`). There's no trigger object for a player's. */
       readonly orPlayer?: true;
     }
   | {
@@ -1431,6 +1433,11 @@ export type TriggerSpec =
       readonly counter?: string;
       readonly filter?: CardFilter;
       readonly last?: boolean;
+      /** "Whenever **a** +1/+1 counter is removed from this creature"
+       * (Protean Hydra): once per counter, each its own trigger (rule 603.2c
+       * and its ruling), `{ triggerValue: true }` being 1 — like
+       * `counters-put`'s `perCounter`. */
+      readonly perCounter?: true;
     }
   | {
       /**

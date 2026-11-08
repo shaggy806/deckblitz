@@ -1946,7 +1946,10 @@
   "effect:linked-exile-return",
   "bug:return-without-abilities-as-it-enters",
   "cost:colorless-hybrid-mana",
-  "keyword:devoid"
+  "keyword:devoid",
+  "cost:cost-reduction-cast-not-from-hand",
+  "trigger:energy-gained",
+  "trigger:counter-removed-trigger"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

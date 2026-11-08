@@ -642,6 +642,7 @@ import _poolPontiffOfBlight from "../pool/pontiff-of-blight.js";
 import _poolPristineAngel from "../pool/pristine-angel.js";
 import _poolPristineTalisman from "../pool/pristine-talisman.js";
 import _poolProfaneTutor from "../pool/profane-tutor.js";
+import _poolProteanHydra from "../pool/protean-hydra.js";
 import _poolPteronGhost from "../pool/pteron-ghost.js";
 import _poolPufferExtract from "../pool/puffer-extract.js";
 import _poolPunishment from "../pool/punishment.js";
@@ -1680,6 +1681,7 @@ const shard: CardShard = {
     _poolPristineAngel,
     _poolPristineTalisman,
     _poolProfaneTutor,
+    _poolProteanHydra,
     _poolPteronGhost,
     _poolPufferExtract,
     _poolPunishment,

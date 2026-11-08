@@ -4032,6 +4032,12 @@ export interface StaticAbility {
     readonly castFrom?: ZoneType | readonly ZoneType[];
     /** See `castFrom`. */
     readonly castFromAnyones?: boolean;
+    /** "Spells you cast from anywhere other than your hand" (Bilbo, Thief in
+     * the Night; Sage of the Beyond): every spell but one cast from its
+     * caster's own hand — a graveyard, exile, the library, the command zone,
+     * and another player's hand (Sen Triplets) alike. A zone list can't say
+     * it: `castFrom: [...]` reads hands as the static controller's. */
+    readonly notFromCastersHand?: true;
     /** "…cost {1} less to cast **for each target**" (Hinata, Dawn-Crowned):
      * `reduceGeneric` / `increaseGeneric` are multiplied by the number of
      * distinct players and objects the spell targets as it's cast (Hinata's

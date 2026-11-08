@@ -11,6 +11,7 @@ import _poolAcolyteOfXathrid from "../pool/acolyte-of-xathrid.js";
 import _poolAcrobaticLeap from "../pool/acrobatic-leap.js";
 import _poolActOfAuthority from "../pool/act-of-authority.js";
 import _poolAdamantWill from "../pool/adamant-will.js";
+import _poolAdvancedReconstruction from "../pool/advanced-reconstruction.js";
 import _poolAdverseConditions from "../pool/adverse-conditions.js";
 import _poolAerieAuxiliary from "../pool/aerie-auxiliary.js";
 import _poolAgateInstigator from "../pool/agate-instigator.js";
@@ -78,6 +79,7 @@ import _poolBedeck from "../pool/bedeck.js";
 import _poolBeholdTheUnspeakable from "../pool/behold-the-unspeakable.js";
 import _poolBeornsHospitality from "../pool/beorns-hospitality.js";
 import _poolBewilderingBlizzard from "../pool/bewildering-blizzard.js";
+import _poolBilboThiefInTheNight from "../pool/bilbo-thief-in-the-night.js";
 import _poolBilbosRing from "../pool/bilbos-ring.js";
 import _poolBillThePony from "../pool/bill-the-pony.js";
 import _poolBioAssetAllocator from "../pool/bio-asset-allocator.js";
@@ -1017,6 +1019,7 @@ const shard: CardShard = {
     _poolAcrobaticLeap,
     _poolActOfAuthority,
     _poolAdamantWill,
+    _poolAdvancedReconstruction,
     _poolAdverseConditions,
     _poolAerieAuxiliary,
     _poolAgateInstigator,
@@ -1084,6 +1087,7 @@ const shard: CardShard = {
     _poolBeholdTheUnspeakable,
     _poolBeornsHospitality,
     _poolBewilderingBlizzard,
+    _poolBilboThiefInTheNight,
     _poolBilbosRing,
     _poolBillThePony,
     _poolBioAssetAllocator,

@@ -221,6 +221,7 @@ import _poolAdultGoldDragon from "./pool/adult-gold-dragon.js";
 import _poolAdunOakenshield from "./pool/adun-oakenshield.js";
 import _poolAdvanceScout from "./pool/advance-scout.js";
 import _poolAdvancedHoverguard from "./pool/advanced-hoverguard.js";
+import _poolAdvancedReconstruction from "./pool/advanced-reconstruction.js";
 import _poolAdvancedStitchwing from "./pool/advanced-stitchwing.js";
 import _poolAdventOfTheWurm from "./pool/advent-of-the-wurm.js";
 import _poolAdventureAwaits from "./pool/adventure-awaits.js";
@@ -2360,6 +2361,7 @@ import _poolBilboBagginsBurglar from "./pool/bilbo-baggins-burglar.js";
 import _poolBilboBirthdayCelebrant from "./pool/bilbo-birthday-celebrant.js";
 import _poolBilboLuckwearer from "./pool/bilbo-luckwearer.js";
 import _poolBilboRetiredBurglar from "./pool/bilbo-retired-burglar.js";
+import _poolBilboThiefInTheNight from "./pool/bilbo-thief-in-the-night.js";
 import _poolBilbosDeadlySlice from "./pool/bilbos-deadly-slice.js";
 import _poolBilbosGambit from "./pool/bilbos-gambit.js";
 import _poolBilbosRing from "./pool/bilbos-ring.js";
@@ -19821,6 +19823,7 @@ import _poolProsperousPirates from "./pool/prosperous-pirates.js";
 import _poolProsperousThief from "./pool/prosperous-thief.js";
 import _poolProsshSkyraiderOfKher from "./pool/prossh-skyraider-of-kher.js";
 import _poolProstheticInjector from "./pool/prosthetic-injector.js";
+import _poolProteanHydra from "./pool/protean-hydra.js";
 import _poolProteanRaider from "./pool/protean-raider.js";
 import _poolProteanThaumaturge from "./pool/protean-thaumaturge.js";
 import _poolProtectServe from "./pool/protect-serve.js";
@@ -26506,6 +26509,7 @@ import _poolTerritorialBaloth from "./pool/territorial-baloth.js";
 import _poolTerritorialBoar from "./pool/territorial-boar.js";
 import _poolTerritorialBruntar from "./pool/territorial-bruntar.js";
 import _poolTerritorialDispute from "./pool/territorial-dispute.js";
+import _poolTerritorialGorger from "./pool/territorial-gorger.js";
 import _poolTerritorialHammerskull from "./pool/territorial-hammerskull.js";
 import _poolTerritorialHellkite from "./pool/territorial-hellkite.js";
 import _poolTerritorialKavu from "./pool/territorial-kavu.js";
@@ -31766,6 +31770,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAdunOakenshield,
   _poolAdvanceScout,
   _poolAdvancedHoverguard,
+  _poolAdvancedReconstruction,
   _poolAdvancedStitchwing,
   _poolAdventOfTheWurm,
   _poolAdventureAwaits,
@@ -33905,6 +33910,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBilboBirthdayCelebrant,
   _poolBilboLuckwearer,
   _poolBilboRetiredBurglar,
+  _poolBilboThiefInTheNight,
   _poolBilbosDeadlySlice,
   _poolBilbosGambit,
   _poolBilbosRing,
@@ -51366,6 +51372,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolProsperousThief,
   _poolProsshSkyraiderOfKher,
   _poolProstheticInjector,
+  _poolProteanHydra,
   _poolProteanRaider,
   _poolProteanThaumaturge,
   _poolProtectServe,
@@ -58051,6 +58058,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTerritorialBoar,
   _poolTerritorialBruntar,
   _poolTerritorialDispute,
+  _poolTerritorialGorger,
   _poolTerritorialHammerskull,
   _poolTerritorialHellkite,
   _poolTerritorialKavu,
@@ -63324,6 +63332,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/adun-oakenshield": _poolAdunOakenshield,
   "pool/advance-scout": _poolAdvanceScout,
   "pool/advanced-hoverguard": _poolAdvancedHoverguard,
+  "pool/advanced-reconstruction": _poolAdvancedReconstruction,
   "pool/advanced-stitchwing": _poolAdvancedStitchwing,
   "pool/advent-of-the-wurm": _poolAdventOfTheWurm,
   "pool/adventure-awaits": _poolAdventureAwaits,
@@ -65463,6 +65472,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/bilbo-birthday-celebrant": _poolBilboBirthdayCelebrant,
   "pool/bilbo-luckwearer": _poolBilboLuckwearer,
   "pool/bilbo-retired-burglar": _poolBilboRetiredBurglar,
+  "pool/bilbo-thief-in-the-night": _poolBilboThiefInTheNight,
   "pool/bilbos-deadly-slice": _poolBilbosDeadlySlice,
   "pool/bilbos-gambit": _poolBilbosGambit,
   "pool/bilbos-ring": _poolBilbosRing,
@@ -82924,6 +82934,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/prosperous-thief": _poolProsperousThief,
   "pool/prossh-skyraider-of-kher": _poolProsshSkyraiderOfKher,
   "pool/prosthetic-injector": _poolProstheticInjector,
+  "pool/protean-hydra": _poolProteanHydra,
   "pool/protean-raider": _poolProteanRaider,
   "pool/protean-thaumaturge": _poolProteanThaumaturge,
   "pool/protect-serve": _poolProtectServe,
@@ -89609,6 +89620,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/territorial-boar": _poolTerritorialBoar,
   "pool/territorial-bruntar": _poolTerritorialBruntar,
   "pool/territorial-dispute": _poolTerritorialDispute,
+  "pool/territorial-gorger": _poolTerritorialGorger,
   "pool/territorial-hammerskull": _poolTerritorialHammerskull,
   "pool/territorial-hellkite": _poolTerritorialHellkite,
   "pool/territorial-kavu": _poolTerritorialKavu,

@@ -16366,6 +16366,13 @@ export class Game {
             continue;
           }
         }
+        // "From anywhere other than your hand" (Bilbo): not from the caster's
+        // own hand — a card in a hand is in its owner's.
+        if (mod.notFromCastersHand === true) {
+          const card = this.state.objects[cardId];
+          const from = card?.zone === "stack" ? card.castFrom : card?.zone;
+          if (from === "hand" && card?.owner === player) continue;
+        }
         // "The first … spell you cast each turn": any matching spell this
         // player has already cast this turn has had it.
         if (
@@ -28866,7 +28873,9 @@ export class Game {
               : trigger.on === "counters-put" && (event.type === "player-counters-changed" || event.type === "energy-changed")
               ? event.delta
               : trigger.on === "counters-removed" && event.type === "counter-removed"
-              ? event.amount
+              ? trigger.perCounter === true
+                ? 1
+                : event.amount
               : // "The number of cards looked at while scrying this way".
                 trigger.on === "scries" && event.type === "scried"
               ? event.looked
@@ -28954,7 +28963,10 @@ export class Game {
     // with counters into a stack already there names how many it was.
     // "Whenever a counter is put": once per counter besides.
     const eachCounter =
-      trigger.on === "counters-put" && trigger.perCounter === true && event.type === "counter-added" ? event.amount : 1;
+      (trigger.on === "counters-put" && trigger.perCounter === true && event.type === "counter-added") ||
+      (trigger.on === "counters-removed" && trigger.perCounter === true && event.type === "counter-removed")
+        ? event.amount
+        : 1;
     const countered =
       trigger.on === "counters-put" &&
       trigger.batched !== true &&
@@ -29737,7 +29749,12 @@ export class Game {
           }
           // Counters simultaneous damage removes (a planeswalker's loyalty,
           // rule 306.8) go in one event: one trigger, "that much" the total.
-          if (ability.trigger.on === "counters-removed" && event.type === "counter-removed" && damageBatch !== null) {
+          if (
+            ability.trigger.on === "counters-removed" &&
+            ability.trigger.perCounter !== true &&
+            event.type === "counter-removed" &&
+            damageBatch !== null
+          ) {
             const key = `${id}#${index}@${event.object}`;
             const owed = damageBatch.countersRemoved.get(key);
             if (owed === undefined) {
@@ -30511,6 +30528,9 @@ export class Game {
           return (
             spec.orPlayer === true &&
             event.delta > 0 &&
+            // "Whenever **you** get one or more {E}" (Territorial Gorger):
+            // `who` reads the player too — `"any"` is every player's.
+            this.matchesWhoPlayer(spec.who, event.player, self) &&
             (spec.counter === undefined || spec.counter === (event.type === "energy-changed" ? "energy" : event.counter)) &&
             (spec.byYou !== true || event.by === self.controller)
           );
