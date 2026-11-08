@@ -1,0 +1,106 @@
+{
+  "batch": "B284",
+  "status": "done",
+  "ranks": "Need-key themes step 7, fourth piece (docs/plans/need-key-themes.md, 2026-11-08): one combat rule, requirements and restrictions as one record (engine/src/combat/rules.ts).",
+  "authored": [
+    {
+      "name": "Galactus, Devourer of Worlds",
+      "files": [
+        "engine/src/cards/pool/galactus-devourer-of-worlds.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Silver Surfer, Galactus's Herald",
+      "files": [
+        "engine/src/cards/pool/silver-surfer-galactuss-herald.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Public Enemy",
+      "files": [
+        "engine/src/cards/pool/public-enemy.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wall of Diffusion",
+      "files": [
+        "engine/src/cards/pool/wall-of-diffusion.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Heartwood Dryad",
+      "files": [
+        "engine/src/cards/pool/heartwood-dryad.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Aether Web",
+      "files": [
+        "engine/src/cards/pool/aether-web.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Aetherflame Wall",
+      "files": [
+        "engine/src/cards/pool/aetherflame-wall.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Forgestoker Dragon",
+      "files": [
+        "engine/src/cards/pool/forgestoker-dragon.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Boros Battleshaper",
+      "files": [
+        "engine/src/cards/pool/boros-battleshaper.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Varchild's Crusader",
+      "files": [
+        "engine/src/cards/pool/varchilds-crusader.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Departed Deckhand",
+      "files": [
+        "engine/src/cards/pool/departed-deckhand.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Brimaz, King of Oreskos",
+      "files": [
+        "engine/src/cards/pool/brimaz-king-of-oreskos.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Flash Foliage",
+      "files": [
+        "engine/src/cards/pool/flash-foliage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wall of Vapor",
+      "files": [
+        "engine/src/cards/pool/wall-of-vapor.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": []
+}

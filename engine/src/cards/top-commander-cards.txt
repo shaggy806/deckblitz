@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4721 already implemented / 279 missing (marks refreshed 2026-11-08)
+4722 already implemented / 278 missing (marks refreshed 2026-11-08)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -3015,7 +3015,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3022  Robe of Stars                            {1}{W}           Artifact — Equipment
 [x]  3023  Abdel Adrian, Gorion's Ward              {4}{W}           Legendary Creature — Human Warrior
 [x]  3024  Lifeblood Hydra                          {X}{G}{G}{G}     Creature — Hydra
-[ ]  3025  Brimaz, King of Oreskos                  {1}{W}{W}        Legendary Creature — Cat Soldier
+[x]  3025  Brimaz, King of Oreskos                  {1}{W}{W}        Legendary Creature — Cat Soldier
 [x]  3026  Esika's Chariot                          {3}{G}           Legendary Artifact — Vehicle
 [x]  3027  Ultima, Origin of Oblivion               {5}              Legendary Creature — God
 [x]  3028  Dazzling Angel                           {2}{W}           Creature — Angel

@@ -135,7 +135,7 @@ the simplest dies-triggers to copy); `--limit N` prints more than ten.
 
 **To ask whether the vocabulary can say something,** `npm run card:vocab -w
 engine -- emblem` searches every term the pool uses (`kind=create-emblem`,
-`on=step-begins.step=begin-combat`, `card.static[].cantBeBlockedBy`) with
+`on=step-begins.step=begin-combat`, `card.static[].restrictions`) with
 how many cards use it and the smallest three, every declaration in the
 engine sources with its doc comment (and whether any card uses it yet), and
 this guide's matching lines. `--unused` lists the declared kinds no card
@@ -574,12 +574,12 @@ asks, the helper the trigger (`blocked-by`, §9).
 **Provoke** (rule 702.39): the `provoke()` helper in `triggered` (Goblin
 Grappler; `grantsTriggered: [provoke("Provoke")]` for "All Sliver creatures
 have provoke" — Hunter Sliver). It's an attack trigger whose "may" untaps the
-target and then a **`block-if-able`** effect: a blocking requirement on one
+target and then a **`restrict`** with a `must-block` record: a blocking requirement on one
 creature (rule 509.1c), weighed with Lure's and the rest as blockers are
 declared (`combat/blocking.ts`). The same effect is "target creature blocks
-this turn if able" (no `attacker`), "blocks it/this creature this turn if
+this turn if able" (the word `"must-block"`), "blocks it/this creature this turn if
 able" (`attacker: "source"`), "blocks target creature" (`attacker: 1`), and
-"this combat" (`thisCombat: true`). A creature that can't block (that
+"this combat" (`duration: "until-end-of-combat"`). A creature that can't block (that
 attacker) is simply under no requirement. `amplify-provoke.test.ts`. With
 `filter` in place of `target` it's a rule for the turn over whatever matches,
 later arrivals too (rule 611.2c): "each creature your opponents control blocks
@@ -1681,8 +1681,8 @@ own object, so it reaches every one.
 | `clash` | `won?`, `lost?`, `repeat?` | "Clash with an opponent. If you win, …" (rule 701.30 — Lorwyn block): the controller chooses an opponent (not a target; asked only among several), both reveal the top card of their library, each in APNAP order leaves it on top or puts it on the bottom, and a greater mana value wins (an empty library can't win, and loses to any card). Then `won` or `lost` applies, `"that-player"` naming the opponent clashed with (Captivating Glance's "Otherwise, that player gains control"). `repeat` is "if you win, repeat this process" (Hoarder's Greed): on a win, `repeat` and then the clash again. Each clashing player then **clashes** (a `clashed` event, won or not), which the `{ on: "clashes", who, won? }` trigger fires on: "whenever you clash" (Entangling Trap), "whenever you clash and win" (`won: true`, Sylvan Echoes) — for a clash anyone started. Its "if you won" is the condition `{ kind: "trigger-value", compare: { op: "gte", n: 1 } }` (the trigger's value is 1 for a win, 0 for a loss — Rebellion of the Flamekin). |
 | `flip-coin` | `won?`, `lost?`, `untilLose?` | "Flip a coin. If you win the flip, …; if you lose the flip, …" (rule 705): the controller flips on the game's seeded random stream (so a seed replays), then `won` or `lost` applies as their effect. `untilLose: true` is "flip a coin until you lose a flip" (Okaun, Eye of Chaos; Zndrsplt, Eye of Wisdom) — `won` once per win. Each flip is a `coin-flipped` event, which the `wins-coin-flip` trigger reads. |
 | `prohibit` | `who` (a target slot or a `PlayerScope`, default you) with `spells` / `abilities`, or `target` (a permanent) | Prohibitions until end of turn: Sen Triplets' "this turn, that player can't cast spells or activate abilities" (`who: 0, spells: true, abilities: true`); `spells` may instead be `{ filter, label }` for only some spells — Ranger-Captain of Eos's "your opponents can't cast noncreature spells this turn" is `{ who: "each-opponent", spells: { filter: { notTypes: ["creature"] }, label: "noncreature spells" } }`, the filter matched against the card as it would be cast and `label` naming them in the log; Koma, Cosmos Serpent's "its activated abilities can't be activated this turn" (`target: 0` — that permanent this stint; flickered, it's a new object). Mana abilities are activated abilities, so they're barred too. `GameState.turnProhibitions`. Other forbidden actions: **`regeneration: true`** — "target creature can't be regenerated this turn" (Hurr Jackal: `{ target: 0, regeneration: true }`; rule 701.19c, its shields stay but aren't applied), or with `dealtDamageThisWay: "creature"` and no target every creature the resolution has dealt damage to so far (Incinerate, Flamebreak — after the damage); Disintegrate's "if it's a creature, it can't be regenerated this turn" is a `conditional` on `{ kind: "target", index: 0, filter: { type: "creature" } }` (`GameObject.cantBeRegeneratedTurn`). **`lands: true`** — "target player can't play lands this turn" on the `who` players (Turf Wound, Pardic Miner: `{ who: 0, lands: true }`; rule 305.2, a land from any zone). **`monarch: true`** — "you can't become the monarch this turn" on the `who` players (Jared Carthalion, True Heir; `PlayerState.cantBecomeMonarchTurn`, rule 725.4). On `target`, `abilities` is the default only when nothing else is named; **`duration: "until-your-next-turn"`** makes a target's abilities prohibition last until your next turn without detain's attack/block half (Dovin Baan's +1) — "until your next turn, it can't attack or block, and its activated abilities can't be activated" is `detain` (Academic Probation, Mythos of Vadrok). |
-| `restrict` | `target` or `filter`, `restrictions`, `duration?` | Combat restrictions (§5's `CombatRestriction`s) until end of turn, or on `target` or an `asItResolves` `filter` for any `PermanentDuration` (`"while-source"`: Opportunistic Dragon's "for as long as this creature remains on the battlefield, … it can't attack or block"; `"until-your-next-turn"`: Taunt from the Rampart's "until your next turn, those creatures can't block", and beside `prohibit { target, abilities: true, duration: "until-your-next-turn" }` Linvala, Shield of Sea Gate's and Edifice of Authority's "can't attack or block, and its activated abilities can't be activated"; `"until-end-of-combat"`: Ma Chao's "it can't be blocked this combat", Flummoxed Cyclops's "can't block this combat", and on `grant-keyword` Battering Ram's "gains banding until end of combat"). **`duration: "its-controllers-next-turn"`**, a `target`'s alone, binds it only during the next turn of whoever controls it as this resolves, and not before (Wall of Dust's "that creature can't attack during its controller's next turn" — `PtModifier.restrictionsDuringTurnOf`). "Target creature can't block this turn" (`restrictions: ["cant-block"]`), Anzrag, the Quake-Mole's "~ must be blocked each combat this turn if able" (`target: "source"`, `["must-be-blocked-if-able"]`). On `target` it's a modifier, like a keyword grant; with `filter` instead it's a rule for the rest of the turn over everything matching it from your side — "creatures your opponents control can't block this turn" binds a creature that enters later too (rule 611.2c; `GameState.turnRestrictions`). With `filter`, **`controlledByTarget: slot`** reads it from the side of the player in that slot, or of the permanent's controller there, as it resolves — Oriss's "creatures target player controls can't attack this turn", Concussive Bolt's "creatures controlled by that player or by that planeswalker's controller", Mark for Death's "creatures that player controls" (`filter: { type: "creature", controlledBy: "you" }`); **`exceptTarget: slot`** leaves that permanent out (Mark for Death's "**other** creatures"); **`asItResolves: true`** gives the restrictions to the permanents matching it now, until end of turn, instead of a rule binding later arrivals — for a sentence that also changes their characteristics, which fixes the set (611.2c): Joraga Invocation's "each creature you control gets +3/+3 … and must be blocked this turn if able", Suicidal Charge's "those creatures attack this turn if able". "Creatures named Leitmotif Composer can't be blocked this turn" is `filter: { type: "creature", name: … }, restrictions: ["cant-be-blocked"]` (`restrict-scoped.test.ts`). **`cantBeBlockedBy: CardFilter`** is "can't be blocked by [X] this turn" (Ghirapur Guide's `{ power: { op: "lte", n: 2 } }`, Tower of Coireall's `{ subtype: "Wall" }`), with `restrictions: []` beside it; "except by [X]" is its negation — `{ notKeyword: "haste" }`, or `CardFilter.not` for a whole clause ("except by creatures with flying or reach": `{ not: { anyOf: [{ keyword: "flying" }, { keyword: "reach" }] } }`). A rule about the creature, not an ability, so a loss of abilities doesn't end it. **`cantBlockAttacker: "source"`** is "target creature can't block **this creature** this turn" (Kozilek's Pathfinder, Auriok Siege Sled): the target can't block that one attacker, the object it is as this resolves (rule 400.7); its twin, "blocks this creature this turn if able", is `block-if-able`'s `attacker: "source"`. `grant-static.test.ts`, `block-requirements-per-creature.test.ts`. |
-| `grant-static` | `target` or `filter`, `ability: StaticAbility`, `duration` | "Becomes a Monk Avatar creature and gains 'This creature's power and toughness are each equal to the number of lore counters on it'" (Myth Realized; Svogthos, Druid Class): an `animate` with no `power` or `toughness`, then this with `setBasePtFromCount`, read live (`countOf` may be `{ countersOnThis: kind }`), not a CDA once granted (604.3a). **"Becomes a creature with [a whole ability]" is `animate` then the grant, in one `sequence`, by one duration:** this for a static (Restless Spire's `condition: { kind: "your-turn" }`, Veiled Serpent's `cantAttackUnlessDefender`, Monument to Perfection's `grantToxic` after an `animate` with `loseAbilities`), `grant-triggered` for a trigger (Raging Ravine, Veiled Apparition, Dancing Sword's `ward(…)`), `grant-protection` for a protection (Opal Guardian); the scaffolder reads these. `animate-grants-ability.test.ts`. "It gains '[static ability]'": Full Steam Ahead's "This creature can't be blocked by more than one creature" (`filter`, locked as it resolves — 611.2c), Carnage's "This creature attacks each combat if able" (`restrictions: ["must-attack"]`, `"permanent"`), Earthbind's Aura gaining "Enchanted creature loses flying" (`target: "source"`, `affects: { scope: "attached" }`). The ability works from that permanent as its own static would, its effects timestamped by the later of the permanent and the grant (613.7a), and a later loss of all abilities takes it (613.7). Read for P/T, keyword and restriction statics, block filters, `grantsActivated`/`grantsTriggered`, `doesntUntap`, `cantLoseGame`, and a granted "base power is equal to …" (`setBasePtFromCount` — layer 7b by timestamp, not a CDA once granted, 604.3a). A layer-4 part isn't applied. `grant-static.test.ts`. |
+| `restrict` | `target` or `filter`, `restrictions` (`CombatRule`s, see *Combat rules*), `controlledByTarget?`, `sideOf?`, `exceptTarget?`, `asItResolves?`, `duration?` | The one effect that makes a combat rule. A `target` (or `asItResolves` filter): the set fixed as it resolves, on that creature, for any `PermanentDuration`, or `"during-its-controllers-next-turn"`, `"during-its-controllers-next-combat"`, `{ duringTurnOf }` (nothing until then). A `filter` without `asItResolves`: a rule over the game reaching later arrivals (611.2c), for any `PlayerDuration`. A record's `"source"`, slots and `PlayerRef`s are read as it resolves. A record naming something gone leaves nothing to obey. Combat restrictions until end of turn, or on `target` or an `asItResolves` `filter` for any `PermanentDuration` (`"while-source"`: Opportunistic Dragon's "for as long as this creature remains on the battlefield, … it can't attack or block"; `"until-your-next-turn"`: Taunt from the Rampart's "until your next turn, those creatures can't block", and beside `prohibit { target, abilities: true, duration: "until-your-next-turn" }` Linvala, Shield of Sea Gate's and Edifice of Authority's "can't attack or block, and its activated abilities can't be activated"; `"until-end-of-combat"`: Ma Chao's "it can't be blocked this combat", Flummoxed Cyclops's "can't block this combat", and on `grant-keyword` Battering Ram's "gains banding until end of combat"). **`duration: "during-its-controllers-next-turn"`**, a `target`'s alone, binds it only during the next turn of whoever controls it as this resolves, and not before (Wall of Dust's "that creature can't attack during its controller's next turn" — `PtModifier.restrictionsLater`). "Target creature can't block this turn" (`restrictions: ["cant-block"]`), Anzrag, the Quake-Mole's "~ must be blocked each combat this turn if able" (`target: "source"`, `["must-be-blocked-if-able"]`). On `target` it's a modifier, like a keyword grant; with `filter` instead it's a rule for the rest of the turn over everything matching it from your side — "creatures your opponents control can't block this turn" binds a creature that enters later too (rule 611.2c; `PlayerEffect.combat`). With `filter`, **`controlledByTarget: slot`** reads it from the side of the player in that slot, or of the permanent's controller there, as it resolves — Oriss's "creatures target player controls can't attack this turn", Concussive Bolt's "creatures controlled by that player or by that planeswalker's controller", Mark for Death's "creatures that player controls" (`filter: { type: "creature", controlledBy: "you" }`); **`exceptTarget: slot`** leaves that permanent out (Mark for Death's "**other** creatures"); **`asItResolves: true`** gives the restrictions to the permanents matching it now, until end of turn, instead of a rule binding later arrivals — for a sentence that also changes their characteristics, which fixes the set (611.2c): Joraga Invocation's "each creature you control gets +3/+3 … and must be blocked this turn if able", Suicidal Charge's "those creatures attack this turn if able". "Creatures named Leitmotif Composer can't be blocked this turn" is `filter: { type: "creature", name: … }, restrictions: ["cant-be-blocked"]` (`restrict-scoped.test.ts`). **A `cant-be-blocked` record's `by: CardFilter`** is "can't be blocked by [X] this turn" (Ghirapur Guide's `{ power: { op: "lte", n: 2 } }`, Tower of Coireall's `{ subtype: "Wall" }`), with `restrictions: []` beside it; "except by [X]" is its negation — `{ notKeyword: "haste" }`, or `CardFilter.not` for a whole clause ("except by creatures with flying or reach": `{ not: { anyOf: [{ keyword: "flying" }, { keyword: "reach" }] } }`). A rule about the creature, not an ability, so a loss of abilities doesn't end it. **A `cant-block` record's `attacker: "source"`** is "target creature can't block **this creature** this turn" (Kozilek's Pathfinder, Auriok Siege Sled): the target can't block that one attacker, the object it is as this resolves (rule 400.7); its twin, "blocks this creature this turn if able", is a `must-block` record's `attacker: "source"`. `grant-static.test.ts`, `block-requirements-per-creature.test.ts`. |
+| `grant-static` | `target` or `filter`, `ability: StaticAbility`, `duration` | "Becomes a Monk Avatar creature and gains 'This creature's power and toughness are each equal to the number of lore counters on it'" (Myth Realized; Svogthos, Druid Class): an `animate` with no `power` or `toughness`, then this with `setBasePtFromCount`, read live (`countOf` may be `{ countersOnThis: kind }`), not a CDA once granted (604.3a). **"Becomes a creature with [a whole ability]" is `animate` then the grant, in one `sequence`, by one duration:** this for a static (Restless Spire's `condition: { kind: "your-turn" }`, Veiled Serpent's `cant-attack` record, Monument to Perfection's `grantToxic` after an `animate` with `loseAbilities`), `grant-triggered` for a trigger (Raging Ravine, Veiled Apparition, Dancing Sword's `ward(…)`), `grant-protection` for a protection (Opal Guardian); the scaffolder reads these. `animate-grants-ability.test.ts`. "It gains '[static ability]'": Full Steam Ahead's "This creature can't be blocked by more than one creature" (`filter`, locked as it resolves — 611.2c), Carnage's "This creature attacks each combat if able" (`restrictions: ["must-attack"]`, `"permanent"`), Earthbind's Aura gaining "Enchanted creature loses flying" (`target: "source"`, `affects: { scope: "attached" }`). The ability works from that permanent as its own static would, its effects timestamped by the later of the permanent and the grant (613.7a), and a later loss of all abilities takes it (613.7). Read for P/T, keyword and restriction statics, block filters, `grantsActivated`/`grantsTriggered`, `doesntUntap`, `cantLoseGame`, and a granted "base power is equal to …" (`setBasePtFromCount` — layer 7b by timestamp, not a CDA once granted, 604.3a). A layer-4 part isn't applied. `grant-static.test.ts`. |
 | `attack-despite-defender` | `target` or `filter` | "Can attack this turn as though it didn't have defender" (rule 702.3b). On `target` (Assault Formation) a modifier until end of turn; with `filter` a rule for the rest of the turn over everything matching it from your side, so a defender that comes under your control later is covered too (Wakestone Gargoyle's ruling; `GameState.turnDefenderAttacks`). A rule about the creature rather than an ability it gains, so a loss of all abilities doesn't end it. The static form is §10's `canAttackAsThoughNoDefender`. |
 | `damage-by-toughness` | `target` | "Assigns combat damage equal to its toughness rather than its power" until end of turn (rule 510.1a — Walking Bulwark). Its power is unchanged for everything else (a fight still uses power). The static form is §10's `combatDamageByToughness`. |
 | `assign-as-though-unblocked` | `target` or `filter`, `optional?` | "[It] assign[s] its combat damage this turn as though it weren't blocked": as combat damage is assigned, a blocked creature assigns all of it to the player, planeswalker or battle it's attacking (rule 510.1b), none to its blockers. `optional` is "you may have …" — its controller chooses then, on the `assign-combat-damage` decision (Gurzigost's `target: "source"`); without it there's no choice (Outmaneuver's "X target blocked creatures", the `blocked` filter). On `target` a modifier until end of turn; with `filter` a rule for the turn over everything matching it from your side, one arriving later too (Predatory Focus — it changes no characteristic, so 611.2c doesn't lock the set in; `GameState.turnUnblockedAssignments`). Not an ability. The static form is §10's `assignAsThoughUnblocked`. `assign-as-though-unblocked.test.ts`. |
@@ -2484,8 +2484,8 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   condition, any `PermanentDuration`: `"while-source"` (Hot Pursuit; The War Games, its
   `filter` `{ thisWay: "created" }` after a `separate` `create-token`), `{
   whileCounter: "duty" }` (Immortal Obligation, `filter: { thisWay:
-  "put-onto-battlefield" }`, beside a `restrict` with `cantAttackYou`,
-  `cantBlockYours` and the same duration; `cantAttackYou: "you-and-planeswalkers"`
+  "put-onto-battlefield" }`, beside a `restrict` with `cant-attack` and
+  `cant-block` records and the same duration; `at: "you-and-planeswalkers"`
   is Promise of Loyalty's "you or planeswalkers you control", naming no battle,
   after a `vote` with `keep`, over `thisWay: "chosen"`), `"while-its-controller-controls-source"`
   (Vislor Turlough, after a `gain-control`): nothing if it couldn't begin (rule
@@ -2501,26 +2501,8 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   designation on the creature (`goadersOf` in `goad.ts` reads every kind), so
   "until your next turn, creatures your opponents control attack each combat
   if able and attack a player other than you if able" is **not** one — that's
-  `attack-requirement`.
-- **`attack-requirement { filter, otherThanYou }`** — Kardur, Doomscourge's
-  ETB: goad's requirements as a rule of the game until your next turn, over
-  every creature matching `filter` from your side — including creatures an
-  opponent gets later (rule 611.2c) — and none of them *goaded*.
-  `otherThanYou: false` is the bare "attack each combat if able" (both
-  default to it: `filter` `{}`, `otherThanYou` false). Maximum Carnage's
-  chapter I is `{ filter: { type: "creature" }, otherThanYou: true }`.
-  Narrowed (rule 508.1d): **`target`** binds that one creature, as the object
-  it is (Alluring Siren's "target creature an opponent controls attacks you
-  this turn if able"); **`controlledByTarget`** a target player's creatures
-  as attackers are declared (Taunt, Imaginary Threats); **`attacks`**
-  (`"you"`, `"source"` — Gideon Jura's "attack Gideon Jura" — or a target
-  slot, Dulcet Sirens' "attacks target opponent") is obeyed only by attacking
-  that one, so it binds only while that one can be attacked; **`duration`**
-  is `"end-of-turn"`, `{ duringTurnOf: { target: 0 } }` (the
-  `controlledByTarget` player's next turn — Taunt),
-  `"during-its-controllers-next-turn"` or `"during-its-controllers-next-combat"`
-  (the `target`'s controller's — Trench Behemoth), until your next turn when
-  absent (`AttackRequirementDuration`).
+  a `restrict` with `must-attack` records.
+- **A goad's requirements as a rule of the game** — Kardur, Doomscourge's ETB is a `restrict` with `filter: { type: "creature", controlledBy: "opponent" }`, `restrictions: [{ kind: "must-attack", otherThan: "you" }]` and `duration: "until-your-next-turn"`: it reaches creatures an opponent gets later (rule 611.2c) and none of them is *goaded*. Narrowed: `target` binds that one creature (Alluring Siren's `at: "you"`); `controlledByTarget` a target player's creatures as attackers are declared (Taunt, Imaginary Threats); `at: "source"` is Gideon Jura's "attack Gideon Jura", `at: { target: 1 }` Dulcet Sirens' "attacks target opponent"; `duration: { duringTurnOf: { target: 0 } }` is Taunt's "during target player's next turn", `"during-its-controllers-next-combat"` Trench Behemoth's.
 - **`suspect { target }`** / **`unsuspect { target | filter }`** — suspect a
   creature (rule 701.60): a designation (`GameObject.suspectedAt`) that gives
   it menace and "can't block" until it leaves the battlefield or is no longer
@@ -2532,7 +2514,7 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
   are no longer suspected".
 - **`encore {}`** — Encore (rule 702.140 — Rakshasa Debaser, Kangee's
   Lieutenant): one hasty token copy per opponent, each with
-  `mustAttackPlayer` set to *that* opponent, all sacrificed at the next end
+  a `must-attack` record at *that* opponent, all sacrificed at the next end
   step. One effect because the loop, the per-opponent attack requirement and
   the sacrifice are one instruction — and it copies a card in **exile**, which
   the Encore cost put there (`zone: "graveyard"`).
@@ -4831,15 +4813,7 @@ once it's made (a `sacrifice` or `choose-permanents` decision, none if there's n
 the mana is paid, so a land can tap for that first, and what paid with itself doesn't attack (rule
 508.1k). Tapping another creature (Hollow Warrior) isn't here yet.
 
-`cantAttackController: "player"` is "creatures can't attack you" with no planeswalkers named
-(Reverence, Blazing Archon, Teferi's Moat: rule 508.1b), where `true` is "you or planeswalkers you
-control" (Vow of Duty); `affects` says which creatures, `condition` when (Queen Mother Ramonda's
-monarch). For a while: the `player-effect` effect's `cantAttack: "you"` (Chronomantic Escape), a
-rule that binds creatures arriving later, or `"all"` (Overencumbered), or `{ planeswalkers: filter }`
-("Jaces you control"), with `cantAttackBy: <player ref>` for one player's creatures and `duration:
-"this-combat"` (Champions of Minas Tirith's "they can't attack you this combat"). The restriction `"cant-attack-player-attacked-this-turn"`
-is "can't attack a player it has already attacked this turn" (Port Razer), by the object's own
-`attackedPlayersThisTurn`; a planeswalker it attacked isn't the player.
+"Creatures can't attack you" is a `{ kind: "cant-attack", at: "you" }` record (see *Combat rules*). For a while, it's a `restrict` over a `filter`, a rule that binds creatures arriving later (611.2c): Chronomantic Escape's `{ kind: "restrict", filter: { type: "creature" }, restrictions: [{ kind: "cant-attack", at: "you" }], duration: "until-your-next-turn" }`; one player's creatures take `filter: { type: "creature", controlledBy: "you" }` with `sideOf: "active-player"` (Champions of Minas Tirith) or `controlledByTarget`.
 
 - `grantPt: [p, t]` — layer 7d P/T bonus.
 - `grantPtPerCount`, each affected permanent by its own: `relativeToAffected`
@@ -5198,14 +5172,19 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   { notTypes: ["instant", "sorcery"] } }`, offered only while the caster has
   eight. `flash: true` is "if you cast a spell this way, you may cast it as
   though it had flash" (Primal Prayers, rule 601.3c).
-- `cantAttackController: true` — the affected creatures "can't attack you or
-  planeswalkers you control", where "you" is *this permanent's* controller:
-  the enchanted creature with `affects: { scope: "attached" }` (Vow of Duty),
-  or everything any scope reaches — Eriette of the Charmed Apple's "each
-  creature that's enchanted by an Aura you control" is a `filter` scope with
-  `{ type: "creature", enchantedBy: "you" }`. Checked in `whyCannotAttack`
-  rather than as a `CombatRestriction`, because those are bare strings and
-  can't say whose "you" is meant.
+- **Combat rules** — `restrictions: [...]` (rules 508.1c, 508.1d, 509.1b, 509.1c; `combat/rules.ts`). Each entry is a **word** where the rule has no parameters, and a **record** where it has any; a word is the only spelling of a rule that says no more than its kind (a pool test refuses `{ kind: "cant-attack" }`). `affects` says which creatures, `condition` when; a record reads "you" as this permanent's controller, and is read as attackers or blockers are declared, so a scope may ask about power and toughness.
+
+  | Record | Fields | Says |
+  | --- | --- | --- |
+  | `{ kind: "cant-attack", at?, unlessDefender?, ifDefender? }` | | "Can't attack" narrowed. `at`: `"you"` (the player only, so a planeswalker they control is still attackable, rule 508.1b: Reverence, Blazing Archon, Teferi's Moat), `"you-and-planeswalkers"` (Vow of Duty), `"you-and-permanents"` (a battle too), `"owner"`, `"owner-planeswalkers"` (Xantcha), `"attacked-this-turn"` (Port Razer), `{ planeswalkers: filter }` ("Jaces you control"). `unlessDefender` / `ifDefender`: a `PlayerTest` (`controls`, `holds`, `youControlMore`) of the player this attack would defend against (rules 506.2, 508.1c: a planeswalker's controller), so at a table of four it may attack one opponent and not another: Sea Serpent's `unlessDefender: { controls: { subtype: "Island" } }`, Crown-Hunter Hireling's `{ holds: { kind: "monarch", who: "you" } }`, Orgg's `ifDefender`, Mogg Toady's `{ youControlMore: { type: "creature" } }`. The same asked of **you** is the static's own `condition` (Branded Brawlers). |
+  | `{ kind: "must-attack", at?, otherThan?, ifAttacks? }` | | "Attacks if able" narrowed. `at`: obeyed only by attacking one of them, so it binds only while one can be attacked (rule 508.1d), one requirement however many it names: `"you"`, `"source"`, any `PlayerRef`, `{ controllerOf: "attached" }` on a static (Public Enemy), `{ defender: PlayerTest }` ("an opponent with the most life among your opponents": Galactus, `{ mostLifeAmongYourOpponents: true }`). `otherThan: "you"`: "attacks a player other than you if able", which carries "attacks if able" too (goad's requirement as a rule of the game). `ifAttacks: filter`: "if a creature matching it attacks, this attacks if able" (Ekundu Cyclops; Viashino Bey's `{ isSource: true }`), the offer's `attackIf`; a limit on attackers bends it, and it never obliges paying a cost. |
+  | `{ kind: "cant-block", attacker?, attackers?, unlessAttacking? }` | | Every field given must hold. `attacker`: this one creature (`"source"`, a slot). `attackers`: a filter, read from `you`'s side: "can block only creatures with flying" is `{ not: { keyword: "flying" } }`; "can't block creatures you control" is `{ controlledBy: "you" }` (Immortal Obligation). `unlessAttacking`: a `PlayerTest` of the attacker's controller (Mogg Toady). |
+  | `{ kind: "must-block", attacker? }` | | "Blocks [this attacker] if able" (rule 509.1c): a slot or `"source"`. |
+  | `{ kind: "cant-be-blocked", by?, byMoreThan?, byFewerThan?, unlessAllBlock? }` | | `by`: no creature matching it can block (Delney; "except by" is `{ not: … }`; `{}` is "can't be blocked"). It may compare against this permanent's own power: Champion of Lambholt's `{ power: { op: "lt", n: { amount: { powerOf: "source" } } } }`, read as blockers are declared. `byMoreThan: 1` (Challenger Troll); `byFewerThan: N` is menace with a larger N (Troll of Khazad-dûm's 3); `unlessAllBlock: true` (Tromokratis). |
+  | `{ kind: "must-be-blocked", by }` | | "All [filter] able to block this creature do so" (Marble Priest): each its own requirement. Word form: Lure, every creature. |
+  | `{ kind: "must-be-blocked-if-able", by?, exactlyOne? }` | | One blocker's enough, if one's able: `by` a filter (Slayer's Cleaver's Eldrazi), `exactlyOne: true` (Nacatl War-Pride: one obeys it, none or two don't, menace makes it ask nothing). Word form: Anzrag, any creature. |
+
+  Scoped to whichever creatures a static reaches: Eriette of the Charmed Apple's "each creature that's enchanted by an Aura you control" is a `filter` scope with `{ type: "creature", enchantedBy: "you" }`. The blockers offer lists these as it always did (`singleBlockerAttackers`, `minBlockers`, `blockedByAll`, `mustBeBlockedByOneOf`).
 - `restrictions: ["cant-attack-alone"]`, `"cant-block-alone"`,
   `"can-only-attack-alone"`, `"cant-attack-unless-two-others"`,
   `"cant-block-unless-two-others"` — a restriction keyed to the other creatures
@@ -5219,23 +5198,6 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   the requirements' maximum, 508.1d, 509.1c), `withinAttackCompany` /
   `withinBlockCompany` for bots and the fuzzer. The scaffolder reads these.
   `combat-company.test.ts`.
-- `cantAttackUnlessDefender: PlayerTest`, `cantAttackIfDefender: PlayerTest`,
-  `cantBlockUnlessAttacker: PlayerTest` (`affects: { scope: "self" }`) — "This
-  creature can't attack **unless defending player** controls an Island" (Sea
-  Serpent: `{ controls: { subtype: "Island" } }`), `holds`, any condition read
-  with that player as its "you" — "… is the monarch" (`{ holds: { kind:
-  "monarch", who: "you" } }`), "… is poisoned" (`player-counters`), "… has seven
-  or more cards in their graveyard" (Vantress Gargoyle: `cards-in-graveyard`) —
-  "… if defending player controls an untapped creature with power 3 or greater"
-  (Orgg), "… unless you control more creatures than defending player" /
-  "can't block unless … than attacking player" (Mogg Toady:
-  `{ youControlMore: { type: "creature" } }`). Asked per attack of the player
-  it would defend against (rules 506.2, 508.1c — a planeswalker's controller),
-  and per block of the attacker's controller (509.1b), so at a table of four
-  it may attack one opponent and not another. The same asked of **you** is the
-  static's own `condition` over `restrictions` (Branded Brawlers' "can't block if
-  you control an untapped land"). The scaffolder reads these.
-  `attack-restriction-defending-player.test.ts`, `attack-restriction-player-condition.test.ts`.
 - `cantBecomeSuspected: true` — the affected creatures can't become suspected
   (Airtight Alibi); one already suspected stays so.
 - `goads: true` — the affected creatures **are goaded** (rule 701.15b), with
@@ -5250,51 +5212,6 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   the ability, or its scope stops reaching the creature. The one static whose
   scope answers an `{ amount }` operand, and only the source's own `powerOf`,
   `toughnessOf` or `manaValueOf`.
-- `cantBeBlockedBy: CardFilter` / `canBlockOnly: CardFilter` — the affected
-  creatures "can't be blocked by [filter]" (Delney, Streetwise Lookout's
-  "creatures you control with power 2 or less can't be blocked by creatures
-  with power 3 or greater": a `filter` scope with `power: { op: "lte", n: 2
-  }` and `cantBeBlockedBy: { power: { op: "gte", n: 3 } }`) / "can block only
-  [filter]" ("can block only creatures with flying" — `{ keyword: "flying" }`;
-  the creature still needs flying or reach to block a flyer at all). The
-  other creature is matched from this permanent's controller's side. Read
-  when a block is checked rather than folded into characteristics, so the
-  scope may ask about power and toughness. The filter may compare against
-  this permanent's own power, toughness or mana value, read as blockers are
-  declared — Champion of Lambholt's "creatures with power less than this
-  creature's power can't block creatures you control" is `cantBeBlockedBy: {
-  power: { op: "lt", n: { amount: { powerOf: "source" } } } }`. "Can't be
-  blocked" outright is `cantBeBlockedBy: {}` — Tetsuko Umezawa, Fugitive's
-  "creatures you control with power or toughness 1 or less" as a `filter`
-  scope with an `anyOf` of the two.
-- `blockedByAtMostOne: true` — the affected creatures "can't be blocked by
-  more than one creature" (Challenger Troll — rule 509.1b). Read as blocks
-  are declared, like `cantBeBlockedBy`, so the scope may ask about power. The
-  blockers offer lists them (`singleBlockerAttackers`); a Lured one among
-  them needs only one blocker (509.1c), so it's offered as "must be blocked
-  if able".
-- `mustBeBlockedBy: { by: CardFilter, all?: true }` — the affected creatures
-  "must be blocked by [filter] if able" (Slayer's Cleaver's Eldrazi: one is
-  enough, and nothing's asked with none able), or with `all` "all [filter] able
-  to block this creature do so" (Talruum Piper, Marble Priest). Requirements
-  (rule 509.1c), matched from this permanent's controller's side as blocks are
-  declared.
-- `attacksIfAttacks: CardFilter` — the affected creatures attack if able when a
-  creature matching it is declared attacking (rule 508.1d): Ekundu Cyclops's "if
-  a creature you control attacks, this creature also attacks if able", Viashino
-  Bey's "if this creature attacks, all creatures you control attack if able"
-  (`{ isSource: true }`), Magnetic Web's. The offer's `attackIf`; a limit on
-  attackers bends it, and it never obliges paying a cost.
-- `blockedByAtLeast: N` — "can't be blocked except by N or more creatures"
-  (Troll of Khazad-dûm's 3; Sonorous Howlbonder's "each creature you control
-  with menace", a `filter` scope): menace's restriction with a larger N
-  (rules 702.111b, 509.1b), the largest when several reach one creature. The
-  blockers offer lists it with the menace attackers and gives its N in
-  `minBlockers`.
-- `blockedOnlyByAll: true` — "can't be blocked unless all creatures
-  defending player controls block it" (Tromokratis): one of theirs that
-  can't block it leaves it unblockable, and blocking it with only some is
-  illegal (the offer's `blockedByAll`).
 - "Can't be blocked **as long as defending player** controls an artifact /
   has a rad counter" is `grantKeywords: ["unblockable"]` on an `of-player`
   condition with `player: "defending-player"` (Bouncing Beebles, Neurok Spy,
@@ -5581,8 +5498,7 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   characteristics (a `keyword`, `power`); if that asks about the CDA's own
   object, the nested read uses its printed P/T rather than recursing.
 - `restrictions: [...]` — `"cant-attack" \| "cant-block" \| "cant-be-blocked" \|
-  "must-attack" \| "must-block" \| "must-be-blocked" \| "must-be-blocked-if-able" \|
-  "cant-attack-owner"` (Pacifism, Juggernaut, Lure). `"cant-be-attacked"` goes on a
+  "must-attack" \| "must-block" \| "must-be-blocked" \| "must-be-blocked-if-able"` and records (see *Combat rules*), Pacifism, Juggernaut, Lure. `"cant-be-attacked"` goes on a
   planeswalker or battle: The Aetherspark's, with `affects: { scope: "self" }` and a
   `source` condition. A restriction on declaring attackers (rule 508.1c), so an
   attacker already at it stays, and one put onto the battlefield attacking may
@@ -5603,13 +5519,7 @@ is "can't attack a player it has already attacked this turn" (Port Razer), by th
   `lurePlan`). `"must-be-blocked-if-able"` asks only for **one** blocker (two
   with menace) whenever the defender has one to spare — also a rule 509.1c
   requirement, weighed as the declaration is checked (`ifAblePlan`; the
-  creatures Lure needs stay with Lure). `"must-be-blocked-by-exactly-one"` is
-  Nacatl War-Pride's: one blocker obeys it, none or two don't, and menace makes
-  it ask nothing. `"blocked-by-at-most-one"` is `blockedByAtMostOne` for a
-  `restrict` (Glorfindel, Dauntless Rescuer). `"cant-attack-owner"` keeps a stolen
-  creature off its owner — the player only, so it may still attack their
-  planeswalkers (Alexios, Deimos of Kosmos's ruling; Xantcha's "or
-  planeswalkers its owner controls" would need a restriction of its own).
+  creatures Lure needs stay with Lure). `at: "owner"` keeps a stolen creature off its owner — the player only, so it may still attack their planeswalkers (Alexios, Deimos of Kosmos's ruling).
   `"doesnt-untap"` is "doesn't untap during its controller's untap step" on
   what the static reaches (rule 502.3) — Tractor Beam's `"attached"` scope,
   Back to Basics' `"filter"` (`doesnt-untap-restriction.test.ts`); only that
@@ -6161,7 +6071,7 @@ clause (section 9):
   802.2a), which a static can read: Bouncing Beebles' "can't be blocked as
   long as defending player controls an artifact" (nobody while it isn't
   attacking; "can't attack unless defending player …" is
-  `cantAttackUnlessDefender` instead, asked per attack declared). Works
+  `unlessDefender` on a `cant-attack` record instead, asked per attack declared). Works
   as an intervening-if (asked with the trigger's "that player" as it
   triggers and resolves), a `conditional`, an activation condition; on a
   static, only `"active-player"`, `"defending-player"` and `"host-controller"`

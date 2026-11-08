@@ -7779,3 +7779,15 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Into the Pit: a nonland permanent for the top card
 - **Do:** Cast the top card of your library.
 - **Expect:** You're asked to choose a nonland permanent to sacrifice as you cast it.
+
+### Galactus: must attack the opponent with the most life
+- **Do:** Go to declare attackers.
+- **Expect:** Galactus has to attack, and only Bob (who has the most life) is offered as what it can attack.
+
+### Galactus: Silver Surfer lets it attack anyone
+- **Do:** Go to declare attackers.
+- **Expect:** Galactus doesn't have to attack, and you may send it at either opponent.
+
+### Brimaz: the token blocks the same creature
+- **Do:** Attack with Grizzly Bears. As Bob, block it with Brimaz.
+- **Expect:** A 1/1 Cat Soldier token arrives blocking Grizzly Bears, beside Brimaz.

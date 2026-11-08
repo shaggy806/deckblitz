@@ -641,6 +641,8 @@ on life, and with it at the holder. It passes at weight 0 too, because the rollo
 the steal and Secret Entrance's land, so the weight is for defending it. The gate passes 201/201.
 No `bot:diff`: the feature is 0 in every recorded position, since none has the initiative.
 
+**Combat rules (2026-11-08, need-key themes step 7, theme 11).** `restrict` is the one effect that makes a combat rule. `target-polarity` reads it through `combatRuleHelps` (a must-be-blocked or can't-be-blocked helps what it's on, the rest hurt) and aims `combatRuleSlots` at the player it's made to attack. `features.ts` and `combat-math.ts` read the words as they did: a scoped record ("can't attack you") isn't a blanket "can't attack". A new aim reaches the bots through the offers, which they already read.
+
 **Play permissions (2026-11-08, need-key themes step 7, theme 10).** A permission is one record now: `candidates` already see what it offers, through the legal actions. `effect-worth` values `impulse-exile` (most of a card each, less for "this turn") and `grant-play`; `target-polarity` reads `grant-play`'s slot; `features.ts` reads `mayPlaySelf`.
 
 ## Watching live games for

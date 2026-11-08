@@ -2,6 +2,12 @@
  "generated": "2026-09-22",
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
+    "static:must-attack-specific-player",
+    "static:block-as-though-shadow",
+    "effect:grant-cant-be-blocked-except",
+    "effect:restrict-this-combat",
+    "effect:token-enters-blocking",
+    "filter:creature-source-is-blocking",
     "replacement:lose-game-replacement",
     "replacement:counter-replacement-you-put",
     "replacement:draw-instruction-plus-one",

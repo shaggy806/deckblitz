@@ -71,7 +71,7 @@ section keeps only what to do next.
   Jean-Luc Picard, Luminary (not in the snapshot yet); and re-read the vanilla preview commons
   (Starfleet Crew, Warship Flight Crew, Defense Force Aggressor) and Võx, Child of the Collective
   (blocked, also waiting on a ruling) against the released text.
-- **Need-key themes step 7 continues** (`docs/plans/need-key-themes.md`): theme 9 ("instead" replacements, B283) done; next theme 11 (combat records), then the smaller themes.
+- **Need-key themes step 7 continues** (`docs/plans/need-key-themes.md`): theme 11 (combat rules, B284) done; next the smaller themes (12, 13, 14, 16, 8) as `--by-rank` reaches their cards.
 - **Next: work down the need keys** (the set walk ended 2026-10-27 with batch 234; its record moved to `COMPLETED.md`) (`docs/plans/need-keys-after-the-walk.md`,
   in progress; the tooling, the model trial, and Phase 1's merge and existence check landed
   2026-10-27): next, Phase 1 step 2, the recheck round. 863 cards were frozen 2026-10-27 into nine
@@ -626,7 +626,6 @@ there and move this line to `COMPLETED.md`.
 - **A text change misses a token's colours and a resolving spell's colour change**: a token made by changed text keeps its definition's colours (612.1, 612.4; Glamerdye, Trait Doctoring and Whim of Volrath wait on `effect:text-change-token-colors`, while Sleight of Mind and Crystal Spray are in the pool with it); `becomeColor` on a permanent spell is dropped as it resolves (400.7a); no all-objects text-change static (Swirl the Mists) (`docs/engine-gaps.md`).
 - **A spell's copy keeps none of its cost references**: rule 707.10 copies additional-cost decisions, but a copy of Fling, Volrath the Fallen or Induce Despair reads no sacrificed, discarded or revealed card (`docs/engine-gaps.md`).
 - **Buyback always beats an "exile it instead" replacement**: rule 616.1 gives the owner the choice; and no turn-long graveyard-to-exile `player-effect` — Yawgmoth's Will (`docs/engine-gaps.md`).
-- **A static can't require attacking one player**: `attack-requirement` is an effect's rule of the game; Public Enemy's "all creatures attack enchanted creature's controller each combat if able" needs a static form, Galactus a most-life opponent, Silver Surfer "until the end of your next turn".
 - **A targeting restriction can't last a turn, or require a target**: `hexproofFrom`'s qualifiers are statics only; Display of Dominance's "… this turn" over permanents you control, Lurker's "unless it attacked or blocked this turn" and the Flagbearers' "must choose at least one Flagbearer" (601.2c) need more (`docs/engine-gaps.md`).
 - **"Creatures it blocked this turn" has no record**: `blockingRelation` reads the blocks as they are now, so an attacker removed from combat (506.4) drops out; Defiant Vanguard needs a per-turn record of what a creature blocked.
 - **A merged or melded permanent's cards go into a library or graveyard in an order nobody chose**: rule 730.3a and the meld ruling let the owner order them; and only a blink and the exile links find every card it became as "that card" (730.3c, `leftWith`, built 2026-10-31 with meld).

@@ -1,7 +1,7 @@
 # Need-key themes: general engine changes under the open keys
 
-Status: plan of record (2026-11-07), steps 1-6 (B275-B280) and three pieces of step 7 (theme 7, B281; theme 10, B282; theme 9, B283) done; step 7 continues with
-combat records — see *The plan* just below. The survey under it is a proposal.
+Status: plan of record (2026-11-07), steps 1-6 (B275-B280) and four pieces of step 7 (theme 7, B281; theme 10, B282; theme 9, B283; theme 11, B284) done; step 7 goes on to
+the smaller themes — see *The plan* just below. The survey under it is a proposal.
 
 The 1,783 open need keys (2,265 waiting cards, re-counted after step 1; the survey's own count was 1,831 and 2,324)
 mostly fall into about sixteen engine mechanisms that cut across
@@ -70,7 +70,8 @@ touch. Each step:
    - **Done 2026-11-08 (B282).** One play-permission record (theme 10: `engine/src/play-permission.ts`, see its design note and *As built*). 10 cards: Hex Magic,
      Dawnhand Dissident, Lorehold, the Historian, Molecule Man (flagged) and 6 of the theme's top keys; 7 keys marked built, their other cards left in `--stale` for `author-freed`.
    - **Done 2026-11-08 (B283).** One `instead` and one resolved-replacement record (theme 9: `engine/src/replacements.ts`, see its design note and *As built*). 18 cards: Doc Samson, Moonlit Meditation, Quantum Riddler and Wolverine, Fierce Fighter (flagged) and 14 of the theme's top keys; 18 keys marked built, their other cards left in `--stale` for `author-freed`.
-   - Next: combat records (the rest of build-order item 9), then the smaller themes.
+   - **Done 2026-11-08 (B284).** One combat rule, requirements and restrictions (theme 11: `engine/src/combat/rules.ts`, see its design note and *As built*). 14 cards: Galactus, Devourer of Worlds and Silver Surfer, Galactus's Herald (flagged) and 12 of the theme's top keys; 6 keys marked built, their other cards left in `--stale` for `author-freed`.
+   - Next: the smaller themes (12, 13, 14, 16, 8, as `--by-rank` reaches their cards).
 
 ## How this was measured
 
@@ -1348,6 +1349,63 @@ static:must-target-flagbearer 3, static:attack-direction-restriction 2, effect:e
 one-card keys.
 
 **Confidence: medium.** The requirement solver exists. The keys are mostly new shapes of input to it.
+
+**Design note (step 7, 2026-11-08): one combat rule, three places to keep it.**
+
+*What's wrong today.* "Can't attack" is spelled eleven ways: the words `cant-attack`, `cant-attack-owner`, `cant-attack-owner-planeswalkers`, `cant-attack-player-attacked-this-turn`; the static fields `cantAttackController`, `cantAttackUnlessDefender`, `cantAttackIfDefender`; the effect's `cantAttackYou`; `PlayerEffect.cantAttack` and `onlyAttackers`; `boundThisCombat.avoid`. "Attacks if able" four more: the word, `AttackRequirementRule`, `GameObject.mustAttackPlayer`, `attacksIfAttacks`. The block side is the same: `cantBlockUnlessAttacker`, `canBlockOnly`, `cantBlockCreaturesOf`, `PtModifier.cantBlock`, `cantBeBlockedBy` (static, effect and turn-rule forms), `blockedByAtMostOne` (a field and a word), `blockedByAtLeast`, `blockedOnlyByAll`, `mustBeBlockedBy`, `GameState.blockRequirements`, `turnRestrictions.blocks`. Each has its own reader and its own lifetime, so "attacks that player each combat if able until the end of your next turn" (Silver Surfer) has a requirement that can aim and a store that can last, but not on the same field.
+
+*Where it lives.* `engine/src/combat/rules.ts`: the types and the one reader. One vocabulary, `CombatRule`, and the three places a rule can be kept:
+
+- **`CombatRule`, what a rule says, the same wherever it comes from.** A bare `CombatWord` where the rule has no parameters, exactly today's strings (`"cant-attack"`, `"cant-block"`, `"must-attack"`, `"must-block"`, `"cant-be-blocked"`, `"cant-be-attacked"`, `"must-be-blocked"` for Lure, `"must-be-blocked-if-able"`, the company words of 508.1c and 509.1b, and the three that aren't about combat, `doesnt-untap`, `cant-turn-face-up`, `cant-crew`); and a record where it has any:
+  - `{ kind: "cant-attack", at?, unlessDefender?, ifDefender? }`
+  - `{ kind: "must-attack", at?, otherThan?, ifAttacks? }`
+  - `{ kind: "cant-block", attacker?, attackers?, unlessAttacking? }`
+  - `{ kind: "must-block", attacker? }`
+  - `{ kind: "cant-be-blocked", by?, byMoreThan?, byFewerThan?, unlessAllBlock? }`
+  - `{ kind: "must-be-blocked", by }` (every matching creature able to) and `{ kind: "must-be-blocked-if-able", by?, exactlyOne? }` (at least one)
+  - `at` is who's attacked: `"you"`, `"you-and-planeswalkers"`, `"you-and-permanents"`, `"owner"`, `"owner-planeswalkers"`, `"attacked-this-turn"`, `"source"`, any `PlayerRef`, `{ defender: PlayerTest }` ("an opponent with the most life"), `{ planeswalkers: CardFilter }`. As a restriction, it's the defenders refused; as a requirement, the ones that obey it.
+  - A word is the record with nothing in it, and has only the one spelling: a pool test refuses `{ kind: "cant-attack" }` alone.
+- **Where a rule is kept**, the same split as theme 10's and 611.2c's:
+  - `StaticAbility.restrictions`: while the permanent has the ability, over whatever its `affects` reaches. Absorbs the eleven static fields.
+  - `PtModifier.restrictions`: on the one object, the set fixed as it resolved. Absorbs `cantBeBlockedBy`, `cantBlock`, `cantAttackYou`, `cantAttackYouCovers`, `cantBlockCreaturesOf`, and `GameObject.mustAttackPlayer`, `mustAttackPlayerThisCombat`, `boundThisCombat`, `GameState.blockRequirements`, and the one-object form of `attackRequirements`. It lasts as modifiers do (`durationFields`), so every `PermanentDuration` works on every rule, and a token with a rule on it already won't fold into one without. `PtModifier.restrictionsLater` (`restrictionsDuringTurnOf`, generalised) holds one that starts at that player's next turn or next combat.
+  - `PlayerEffect.combat` (`{ rules, filter, side, except?, controlledBy? }`): a rule over the game (611.2c: it reaches creatures that arrive later), lasting any `PlayerDuration` by the one pass `expirePlayerEffects`. Replaces `GameState.turnRestrictions`, the filter form of `attackRequirements`, and `PlayerEffect.cantAttack`, `cantAttackBy`, `onlyAttackers`.
+- **One effect**, `restrict`: `target` or `filter`, `restrictions: CombatRule[]`, `controlledByTarget`, `exceptTarget`, `asItResolves`, `duration`. `block-if-able` and `attack-requirement` are deleted into it, and with them `restrict`'s own `cantBeBlockedBy`, `cantBlockAttacker`, `cantAttackYou`, `cantBlockYours`, because each of those is a record. References in a resolved record (`"source"`, a target slot, `"that-player"`) are bound as it resolves to ids with stints (400.7), and `you` to the effect's controller.
+
+*The reader.* `recordsOn(state, registry, id)` is every record binding this object now, each with whose side it reads from and its source: statics through one per-computed-cache-region index, its own modifiers, and `PlayerEffect.combat`. It replaces `blockFilterSources`, the battlefield walk in `whyCannotAttack` (which scanned every permanent per creature, per defender) and `ownStatics`. The questions (`whyCannotAttack`, `whyThisCannotBlock`, `aimedRequirements`, the blockers offer) become filters of that list. Words stay in `characteristics.restrictions` and `restrictionsOf`, as cheap as today: a board with no records costs one empty list.
+
+*Rules.*
+- **506.2, 508.1b**: a creature attacks a player, a planeswalker or a battle. `at: "you"` is the player only; `"you-and-planeswalkers"` doesn't name a battle (310.5).
+- **508.1c, 509.1b**: restrictions apply to the declaration; an evasion ability is one (509.1b), so a change after blocks undoes nothing. Who may be blocked by what is read as blocks are declared, as today.
+- **508.1d, 509.1c**: requirements count, and the most that can be obeyed without breaking a restriction must be. A requirement aimed at a set is **one** requirement however many players are in it: Galactus with two tied opponents has one to obey, by attacking either, and none if neither can be attacked. A requirement nobody can obey asks nothing. A creature "can't attack unless a player pays" isn't required to pay (508.1d).
+- **508.4c, 509.4b**: a creature put onto the battlefield attacking or blocking isn't affected by any of this (the readers are the declaration's only).
+- **611.2b, 611.2c**: the target form fixes its set as it resolves and an "as long as" that never starts does nothing; the filter form changes the rules and reaches later arrivals, except where the sentence also changes characteristics (`asItResolves`, as today).
+- **400.7**: a named creature, planeswalker or attacker is held by its stint. A rule aimed at something that's gone no longer binds.
+- **701.15** goad, **702.39a** provoke and **702.141a** encore: goad stays a designation with its own rules (701.15d), read beside the records; provoke and encore make the same record any effect does.
+- **800.4m**: a rule's `you` having left ends it as `PlayerDuration`s do; a requirement aimed at a player who's left has nothing to obey.
+
+*Moved or not, decided before building.* **Moved and deleted:** everything listed above, and the words `blocked-by-at-most-one`, `must-be-blocked-by-exactly-one`, `cant-attack-owner`, `cant-attack-owner-planeswalkers`, `cant-attack-player-attacked-this-turn` (records now). About 1,100 cards' `restrictions` arrays need no change, because a word is already the spelling; a script rewrites the roughly 370 files that use a field or effect that's gone. **Plainly:** the field keeps its name, `restrictions`, though it holds requirements too; renaming it would touch 1,100 files to say the same thing, and it already held `must-attack`. Deliberately not moved, each for a reason:
+- *Goad* (701.15): a designation with its own rules, which filters and triggers ask about ("goaded creature"), not a rule. Read beside.
+- *`detain`*: a keyword action that also stops activated abilities; it stays one modifier, using the same words.
+- *`attackLimit`, `blockLimit`*: a cap on a whole declaration (`combat/limits.ts`), not about any one creature; "no more than two" can't be read per object.
+- *`attackOnlyNearestOpponent`* (Pramikon): combines every source's direction, and two that disagree leave nobody to attack (its ruling). It's a whole-table read of its own; one card.
+- *`attackTax`, `combatTax`, the costs to block*: 508.1d and 509.1c say a cost isn't required, so they're costs (`combat/tax.ts`), not rules.
+- *`canAttackAsThoughNoDefender`, `blockAdditional`, `blockableDespiteLandwalk`, `blocksDespiteLandwalk`, `assignAsThoughUnblocked`*: permissions ("can", "as though"), which widen what's allowed rather than restrict or require.
+- *The company words* stay words: `combat/company.ts` weighs them across the declaration.
+- *"Must attack with at least one creature"* (Seeker of Slaanesh, Trove of Temptation): a requirement on a player, not on a creature; tried last, against `combat/attacking.ts`'s per-creature solver, and left unbuilt if it doesn't fit honestly.
+
+*Bots.* `target-polarity` and `effect-worth` read `restrict` by its rules' kinds (a must-be-blocked or a can't-be-blocked helps its creature, the rest hurt); `features.ts` and `combat-math.ts` read words as today, and a scoped record ("can't attack you") isn't a blanket "can't attack". The candidates read the offers, so a new aim needs nothing there. No new decision kind.
+
+*As built (step 7, B284).*
+- `combat/rules.ts` as above: `CombatWord`, `CombatRecord`, `CombatRule`, `AttackAim`, `AttackerAim`; `bindCombatRule` (with `CombatRuleRefs`), `recordsOn`, `recordsOfKind`, `aimNames`, `playerTestHolds`. `Game.restrict`, `restrictLater` and `beginLaterRestrictions`, and `ctx.restrictOverGame`, which keeps a `PlayerEffect.combat`.
+- **Moved and deleted, every user migrated:** the static fields `cantAttackController`, `cantAttackUnlessDefender`, `cantAttackIfDefender`, `cantBlockUnlessAttacker`, `cantBeBlockedBy`, `canBlockOnly`, `blockedByAtMostOne`, `blockedByAtLeast`, `blockedOnlyByAll`, `mustBeBlockedBy`, `attacksIfAttacks`; the words `cant-attack-owner`, `cant-attack-owner-planeswalkers`, `cant-attack-player-attacked-this-turn`, `must-be-blocked-by-exactly-one`, `blocked-by-at-most-one`; the effects `block-if-able` and `attack-requirement`, and `restrict`'s `cantBeBlockedBy`, `cantBlockAttacker`, `cantAttackYou`, `cantBlockYours`; `PlayerEffect.cantAttack`, `cantAttackBy`, `onlyAttackers`; `PtModifier.cantBeBlockedBy`, `cantBlock`, `cantAttackYou`, `cantAttackYouCovers`, `cantBlockCreaturesOf`, `restrictionsDuringTurnOf` (now `restrictionsLater`); `GameState.turnRestrictions`, `blockRequirements`, `attackRequirements`; `GameObject.mustAttackPlayer`, `mustAttackPlayerThisCombat`, `boundThisCombat`; `AttackRequirementRule`, `attackRequirementActive`, `AttackRequirementDuration`, `CombatRestriction`, `turnRuleCovers`, `blockFilterSources`, `blockFilters`, `ownStatics`. 413 card files and 19 test files, by a script that ran once; a second pass finds nothing.
+- **How much moved, plainly:** one vocabulary and one reader, so a rule aimed at a player or lasting past this turn works on any creature, whatever made it. **The word arrays didn't move, and the field keeps its name `restrictions`**, as the note decided: a word is already the spelling, and about 1,100 cards say the same thing they did. The 508.1c and 509.1b company words stay words. `additional-combat`'s authored `forcedAttackers` and `onlyAttackers` keep their words; what they make when the phase comes is the record.
+- **Behaviour changes, all rules fixes:** provoke's requirement lasts this combat, as 702.39a says, where it lasted the turn (the helper and Deftblade Elite's hand-written one). A modifier's requirement no longer needs a stack pin: a token with one has a different modifier list, so it can't fold. The bots read a `cant-be-blocked` as a help, where the word alone was a harm.
+- **Additions the proving cards needed:** `PlayerTest.mostLifeAmongYourOpponents` (Galactus), `StaticAbility.blocksAsThoughShadow` (a permission, beside the landwalk ones), `restrict.sideOf`, and the `enter-blocking` effect (rule 509.4: Brimaz, Flash Foliage): a permanent just put onto the battlefield blocks, never "blocked" for triggers, and an unblocked attacker becomes blocked. Only for one made by the effect before it (`"created"`, or a slot).
+- Scaffolder: every old output moved; it now reads the shadow permissions, Silver Surfer's "until the end of your next turn, target creature attacks that player each combat if able", and "can't be blocked this turn except by [subtype]s".
+- Cards (14): Galactus, Devourer of Worlds; Silver Surfer, Galactus's Herald (flagged); Public Enemy; Wall of Diffusion; Heartwood Dryad; Aether Web; Aetherflame Wall; Forgestoker Dragon; Boros Battleshaper; Varchild's Crusader; Departed Deckhand; Brimaz, King of Oreskos; Flash Foliage; Wall of Vapor. `test/combat-rules.test.ts` covers each, with the rules above and a pool walk for the removed words, unknown or bare records, a static's aims and a filter form's duration.
+- Keys marked built: `static:must-attack-specific-player`, `static:block-as-though-shadow`, `effect:grant-cant-be-blocked-except`, `effect:restrict-this-combat`, `effect:token-enters-blocking`, `filter:creature-source-is-blocking`.
+- **Left unbuilt, not marked:** `static:player-must-attack-with-a-creature` (Seeker of Slaanesh, Trove of Temptation): a requirement on a player, where `combat/attacking.ts`'s solver counts one per creature, so it needs a whole-declaration requirement in the offer and the validator; a real change, not done here. `decision:attacker-chooses-blocks` (a new decision kind, Melee, Invasion Plans). `static:attack-direction-restriction` (Mystic Barrier's re-choosing, beside Pramikon's whole-table read). `static:must-target-flagbearer` (targeting, not combat). `effect:swap-blockers`, `effect:put-into-combat-attacking`, `effect:delayed-combat-damage-that-much`, the trigger keys and the rest of the 46 one-card keys. `effect:forced-block-this-combat` and `effect:attacks-if-able-during-target-player-next-turn` are expressible now, but each waits on something else in its cards (Tolsimir, Vortex Elemental, Rowan Kenrith's emblem, Oracle en-Vec) and wasn't authored.
+- Measured: a timed `bot:bench` (16 games, four players, 8 workers, nothing else running) played the same games (11-5), 38.1 turns on average, at 63.8 s a game and 110.2 ms a decision (216.0 s wall), against 66.6 s and 115.8 ms before (226.1 s wall). Both figures are in `engine/data/bench-log.jsonl`.
 
 ### 12. Random results as recorded, triggerable events (59 keys, ~80 cards)
 
