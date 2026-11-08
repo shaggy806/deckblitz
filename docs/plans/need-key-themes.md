@@ -774,6 +774,9 @@ not an activation's cost, so it has nothing to learn; v2 simulates activations, 
   `cost:alternative-cost-for-spells-limits`, `cost:alternative-cost-for-all-spells`, `cost:pay-x-energy`, `cost:forage`,
   `cost:put-card-from-hand-on-library-top`, `cost:put-self-on-library-bottom`, `amount:total-power-sacrificed-as-cost`,
   `cost:granted-ability-exile-granter`, `effect:next-spell-free-this-turn`, `keyword:scavenge`.
+- Measured: a timed `bot:bench` (16 games, four players, 8 workers, nothing else running) at 66.5 s a game and 115.3 ms a decision,
+  38.1 turns on average, 11-5, against 70.1 s, 117.7 ms and 38.9 turns just before (12-4, the two benches within each other's
+  intervals). A cost modifier with a non-numeric amount builds a resolution context as it's read; no slowdown shows.
 - **Left unbuilt, not marked:** `static:grant-replicate` (a card's `kicker` is read off its definition in about 40 places; a grant needs a
   caster-aware effective kicker first), `cost:choose-creature-type-as-cast` (a choice before targets), `effect:pay-any-amount-of-mana`
   (Power Leak's "prevent X of that damage"), Baron Helmut Zemo (copying exiled cards and casting up to three) and Dawnhand Dissident
