@@ -2,6 +2,13 @@
  "generated": "2026-09-22",
  "source": "Per-commander triage of every unimplemented top-commanders.txt entry (AI agents reading Oracle text + rulings against the engine), normalized onto one feature vocabulary. See neededCards-features.md, 'The commander gap'.",
  "built": [
+    "zone:exile-hand-with-play-permission",
+    "static:grant-miracle-in-hand",
+    "cost:linked-exile-cast-additional-remove-counters",
+    "zone:cast-from-library-top-once-each-turn",
+    "zone:cast-from-library-top-extra-cost",
+    "static:play-from-exile-once-each-turn",
+    "zone:exile-player-hand-play-exiled",
   "effect:each-player-other-than-source-owner",
   "effect:cast-spell-trigger-spell-targets",
   "effect:curse-attach-player",

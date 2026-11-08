@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-476 already implemented / 24 missing
+477 already implemented / 23 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -239,7 +239,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  233  Ziatora, the Incinerator                       10831 decks  {3}{B}{R}{G}     Legendary Creature — Demon Dragon
 [x]  234  Killian, Decisive Mentor                       10738 decks  {1}{W}{B}        Legendary Creature — Human Warlock
 [ ]  235  Ob Nixilis, Captive Kingpin                    10730 decks  {2}{B}{R}        Legendary Creature — Demon
-[ ]  236  Lorehold, the Historian                        10712 decks  {3}{R}{W}        Legendary Creature — Elder Dragon
+[x]  236  Lorehold, the Historian                        10712 decks  {3}{R}{W}        Legendary Creature — Elder Dragon
 [x]  237  Clavileño, First of the Blessed                10668 decks  {1}{W}{B}        Legendary Creature — Vampire Cleric
 [x]  238  Narset, Enlightened Exile                      10506 decks  {1}{U}{R}{W}     Legendary Creature — Human Monk
 [x]  239  Krark, the Thumbless                           10505 decks  {1}{R}           Legendary Creature — Goblin Wizard

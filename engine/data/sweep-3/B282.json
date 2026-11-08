@@ -1,0 +1,78 @@
+{
+  "batch": "B282",
+  "status": "done",
+  "ranks": "Need-key themes step 7, second piece (docs/plans/need-key-themes.md, 2026-11-08): one play-permission record (engine/src/play-permission.ts).",
+  "authored": [
+    {
+      "name": "Hex Magic",
+      "files": [
+        "engine/src/cards/pool/hex-magic.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Dawnhand Dissident",
+      "files": [
+        "engine/src/cards/pool/dawnhand-dissident.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Lorehold, the Historian",
+      "files": [
+        "engine/src/cards/pool/lorehold-the-historian.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Molecule Man",
+      "files": [
+        "engine/src/cards/pool/molecule-man.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Assemble the Players",
+      "files": [
+        "engine/src/cards/pool/assemble-the-players.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Into the Pit",
+      "files": [
+        "engine/src/cards/pool/into-the-pit.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Falco Spara, Pactweaver",
+      "files": [
+        "engine/src/cards/pool/falco-spara-pactweaver.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Evelyn, the Covetous",
+      "files": [
+        "engine/src/cards/pool/evelyn-the-covetous.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Fiend of the Shadows",
+      "files": [
+        "engine/src/cards/pool/fiend-of-the-shadows.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Overflow Submatrix",
+      "files": [
+        "engine/src/cards/pool/overflow-submatrix.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": []
+}

@@ -7741,3 +7741,23 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Nether Shadow: three creature cards above it
 - **Do:** Move to your upkeep (pass priority until it's your upkeep).
 - **Expect:** With three creature cards above Nether Shadow in your graveyard, you're asked whether to put it onto the battlefield; with fewer above it, nothing happens.
+
+### Hex Magic: the exiled hand may be played
+- **Do:** Cast Hex Magic.
+- **Expect:** Your hand is exiled and you draw that many; the exiled land and spell are playable from exile, until the end of your next turn.
+
+### Dawnhand Dissident: three counters to cast from its exile
+- **Do:** Activate Dawnhand Dissident's second ability on Grizzly Bears in your graveyard, blighting Hill Giant. On your next turn, cast Grizzly Bears from exile.
+- **Expect:** With three counters among your creatures it's offered, on your turn only, and you choose which to remove as it's cast.
+
+### Lorehold, the Historian: a drawn instant has miracle {2}
+- **Do:** Pass to your next turn.
+- **Expect:** With a Lightning Bolt as your first draw of the turn, you're asked whether to reveal it, and may cast it for {2}.
+
+### Assemble the Players: one creature spell a turn from the top
+- **Do:** Cast Savannah Lions from the top of your library, then look at the next one.
+- **Expect:** The second Savannah Lions isn't castable from the top this turn, and is on your next turn.
+
+### Into the Pit: a nonland permanent for the top card
+- **Do:** Cast the top card of your library.
+- **Expect:** You're asked to choose a nonland permanent to sacrifice as you cast it.

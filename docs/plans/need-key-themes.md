@@ -1,7 +1,7 @@
 # Need-key themes: general engine changes under the open keys
 
-Status: plan of record (2026-11-07), steps 1-6 (B275-B280) and the first piece of step 7 (theme 7, B281) done; step 7 continues with
-play permissions, "instead" replacements and combat records — see *The plan* just below. The survey under it is a proposal.
+Status: plan of record (2026-11-07), steps 1-6 (B275-B280) and two pieces of step 7 (theme 7, B281; theme 10, B282) done; step 7 continues with
+"instead" replacements and combat records — see *The plan* just below. The survey under it is a proposal.
 
 The 1,783 open need keys (2,265 waiting cards, re-counted after step 1; the survey's own count was 1,831 and 2,324)
 mostly fall into about sixteen engine mechanisms that cut across
@@ -67,7 +67,9 @@ touch. Each step:
    - **Done 2026-11-08 (B281).** References and relational filter clauses (theme 7: `engine/src/refs.ts`, see its design note and *As built*).
      18 cards: Oft-Nabbed Goat, Storm, Windrider, Archnemesis (flagged) and 15 of the theme's top keys; 18 keys marked built, their other
      cards left in `--stale` for `author-freed`. Squandered Resources stays flagged (see *Left unbuilt*).
-   - Next: play permissions, "instead" replacements, combat records (build-order item 9), then the smaller themes.
+   - **Done 2026-11-08 (B282).** One play-permission record (theme 10: `engine/src/play-permission.ts`, see its design note and *As built*). 10 cards: Hex Magic,
+     Dawnhand Dissident, Lorehold, the Historian, Molecule Man (flagged) and 6 of the theme's top keys; 7 keys marked built, their other cards left in `--stale` for `author-freed`.
+   - Next: "instead" replacements, combat records (the rest of build-order item 9), then the smaller themes.
 
 ## How this was measured
 
@@ -1216,6 +1218,66 @@ zone:impulse-play-one-including-exiled-self).
 changes zones is a new object (400.7). The permission must die with it.
 
 **Confidence: medium.**
+
+**Design note (step 7, 2026-11-08): one permission record, one reader.**
+
+*What's wrong today.* "May play this card from there" lives in eight places, each with its own riders: `GameObject.impulse` (exile), `GameObject.graveyardCastPermission`,
+`GameObject.linkedCastGrants`, five `PlayerEffect` fields, five `StaticAbility` fields, three `CardDefinition` fields, `ExilePermission` and `impulse-exile`'s own options, and `CastNowAsk`'s
+term-by-term copy of the `cast-now` effect. Each is read by its own function (`impulsePlayable`, `linkedCastGrantFor`, `exilePermissionsFor`, `graveyardGrantsFor`, `mayPlayFromGraveyard`,
+`mayPlayFromLibraryTop`, `libraryTopCastPermissions`, `handsOpenTo`), so a rider added to one (a tax, a spending rule, once each turn) isn't available from another zone, which is why 78 keys exist.
+
+*Where it lives.* `engine/src/play-permission.ts`: types and the pure reads. One vocabulary of terms, and the three places a permission can be kept:
+
+- **`PlayTerms`, what a permission says, the same wherever it comes from** (spelled as `cast-now` already spells them, its 300 card lines being the largest user):
+  - *what:* `play` ("play": a land too, 305.1; absent, "cast"), `filter` (which cards), `spell` (which spells, as the face being cast, 601.3e);
+  - *cost:* `free` (`true`: only without paying; `{ filter? }`: may), `byPaying` / `byPayingLife` (alternative costs, 118.9), and the additional costs `alsoPaying`, `payLife`, `sacrifice`, `exileOthers` + `exileFilter`,
+    `discard`, `costIncreasePerOther`, `removeCounters`; `tax`, `reduce`, `undaunted`; `spendAs` (118.14, 609.4b);
+  - *how often:* `oncePerTurn`, `perType`, `upTo` (that many plays in all under this permission);
+  - *when:* `yourTurnOnly`, `gate`, `sourceDid`;
+  - *afterwards:* `exileAfter`, `gainsHaste`, `landsEnterTapped`, `entersWith`.
+- **`PlayGrant`** is `PlayTerms` plus a `duration` (`PermissionDuration`, a subset of the shared `Duration`) and `byOwner`: what an effect gives. It replaces `ExilePermission`, and `impulse-exile` takes it directly.
+- **Where a permission is kept:**
+  - `StaticAbility.mayPlay` (`{ from: "graveyard" | "exile" | "library-top", exiledByYou?, linked?, …PlayTerms }`): while the permanent has the ability. Replaces `castFromGraveyard`, `playFromGraveyard`, `playFromLibraryTop`, `castFromLibraryTop`, `playFromExile`.
+  - `PlayerEffect.mayPlay` (the same with `from: "hand"` too, and the players whose zones it reaches): a resolved rule for a while (611.2c: it reaches cards that arrive later). Replaces the five `PlayerEffect` fields and `linkedCastGrants`.
+  - `GameObject.playPermission`: on the one card, with `player` and an `Expiry`. Replaces `impulse` and `graveyardCastPermission`, the private expiry kinds becoming `Expiry`'s (three new members: an end step, the next combat, "until you exile another card").
+  - `CardDefinition.mayPlaySelf`: the card's own ("you may cast this card from your graveyard"; 113.6f, it functions there). Replaces `castSelfFromGraveyard`, `castFromGraveyardIf`, `castSelfFromExile`.
+- **One effect for a permission over named cards**, `grant-play` (`cards: ObjectRef | ObjectSetRef | { filter }`, plus `PlayGrant`), replacing `allow-cast-from-exile` and `grant-graveyard-cast`. `allow-cast-linked-exile` becomes a `player-effect`'s `mayPlay` with `linked` (it's read live).
+- **`cast-now`** is a decision during a resolution (608.2g), not something kept: no duration, no limit, nothing to expire. Its spec takes `PlayTerms` as its cost and rider vocabulary, and `CastNowAsk` carries them as one object in place of the field-by-field copies. Its card-picking (`from`, `repeat`, …) is its own.
+
+*The reader.* `Game.playOptions(player, card, face)` answers every question: the options reaching this card for this player now, whichever carrier each comes from, each with its terms. Every other question is a read of that list: may it be played, is it free, what does it cost more, what does it spend. The zone-specific remains are the offers' shapes (`GraveyardGrant` naming which permission to spend, library-top's search for an X).
+
+*O(1) offers.* A permission on the card is a field read. The statics are collected once per computed-cache region, per player (`playStaticsOf`), where today `exilePermissionsFor` and `libraryTopCastPermissions` walk the battlefield **per card, per face, per offer**, so a read costs the number of permissions that player actually has (usually none). The one-word gate before each zone's loop (`reachesZone`) keeps zones nothing reaches at no cost.
+
+*Rules.*
+- **601.3**: a player can begin to cast a spell only if a rule or effect allows it and none prohibits it, so a permission answers only "from there"; every other check (timing, targets, costs, prohibitions) stays the cast's own. **601.3e**: `filter` and `spell` are judged as the spell it would be (the face, X at the value announced from the library top, 202.3e); a permission on the one card still reads its `filter` as the card, as Narset's "noncreature, nonland cards" does.
+- **601.2f / 601.2h**: additional costs and taxes are part of the total cost, paid in full or not offered; **118.9a**: one alternative cost, so `byPaying`/`byPayingLife`/`free` exclude each other; **118.9d** additional costs still apply; **107.3b**: X is 0 unless the alternative cost includes X. Where two permissions reach a card, the player picks which they cast it under (601.3), so `free: true` from one doesn't stop another's paid cast.
+- **305.1, 305.2, 305.3, 305.9**: `play` only widens *from where*. A land is still played as a special action in a main phase of the player's own turn, with the stack empty, using a land drop; a land is never cast, so `spell` and every cost term are ignored for it. Only `landsEnterTapped` and `entersWith` apply to a land. An effect that puts a land onto the battlefield is 305.4, not this.
+- **400.7**: a permission on the card goes with any move (`moveObject` deletes it). A `linked` one holds only for cards linked to that stint of the source (607.2a). Use limits (`GameObject.playUses`) are cleared by the move too, so a new object has a fresh "once each turn". They stay rule state, not the journal (theme 6's note).
+- **611.2b**: "for as long as you control it" that has ended doesn't come back, the pass deletes it. **611.2c** a resolved `mayPlay` is a rule change and reaches later arrivals; `grant-play` is about the named cards.
+- **Public and hidden (400.2, 401.2, 402.3, 406.3, 601.3f).** A permission never shows anything by itself. Face-up exile and graveyards are public. A card exiled face down is reachable only by a player in `exiledFaceDown.lookers` (406.3, 601.3f), now checked once in `playOptions` rather than in two of three readers. Another player's hand needs a `handsRevealed` (a pool test holds this), and a library top needs the look: `looksAtOwnLibraryTop` or a reveal (401.2), which `view.ts` already answers. `view.ts` shows no permission at all, only `exileHoldings`' links, and is otherwise unchanged. The viewer's legal actions name the cards they may play, as they do today. That's the only place a hidden card's name reaches a seat through a permission, and only one the seat may look at.
+
+*Moved or not, decided before building.* **Moved and deleted:** everything listed under *Where it's kept*, `ExilePermission`, `GraveyardCastCosts` (its fields are `PlayTerms`'), `graveyardCastUsedThisTurn`, `graveyardCastTypesUsedThisTurn`, `impulseCastOnTurn` (one `playUses`), the private expiry kinds, the per-zone gates. About 400 card files, mechanically. **Deliberately not moved**, each for a reason:
+- *Keyword casts* (flashback, escape, foretell, adventure, plot, suspend, disturb, mayhem, retrace, jump-start, aftermath, sneak, airbend, warp's own cast, a prepared copy): each is a keyword's rule (702.x, 701.65), with its own cost and its own "what happens to it", and nothing varies per card. They'd only become a second spelling.
+- *`grantsToGraveyard` and `grant-graveyard-keyword`*: they give a card a keyword, and the keyword is the permission. Same for the miracle grant this theme adds.
+- *`via` (`"impulse"`, `"graveyard-permission"`, `"library-top"`, `"other-hand"`) and `GraveyardGrant`*: the wire contract and the `castVia` words filters and the journal read. They say how a spell was cast, which stays true.
+- *`alternativeCostForSpells`, `castsAsThoughFlash`, Omniscience-style free casts from the hand*: they change how a spell already castable is paid for or timed, not whether it can be played from somewhere (118.9, 609.4).
+- *`spellGrantsThisTurn`*: abilities for spells, not permissions.
+- *`cast-now`'s card selection*, as above.
+- *One record per card*: a second grant overwrites the first, as it does today. Two effects naming the same exiled card in one game is rare, and an array would add a choice to every cast. Noted, not fixed.
+
+*Bots.* `candidates` read the legal actions, so an offered card is already seen. `effect-worth` and `target-polarity` learn `grant-play`; `features.ts` counts `mayPlaySelf` and a static `mayPlay` where it counted `castFromGraveyardIf`. No new decision kind.
+
+*As built (step 7, B282).*
+- `play-permission.ts` as above: `PlayTerms`, `PlayGrant`, `StaticPlay`, `EffectPlaySpec` / `EffectPlay`, `SelfPlay`, `CardPlayPermission`. `Game.playOptions` is the one reader; `playStaticsOf` the per-region index; `chosenPlayOption` picks what a cast nothing names is under (it spends nothing first, asks no extra cost first); `spendPlay` spends it.
+- **Deleted, every user moved (about 430 files, mechanically):** `GameObject.impulse`, `graveyardCastPermission`, `linkedCastGrants`, `impulseCastOnTurn`, `graveyardCastUsedThisTurn`, `graveyardCastTypesUsedThisTurn` (one `playUses`); `StaticAbility.castFromGraveyard`, `playFromGraveyard`, `playFromLibraryTop`, `castFromLibraryTop`, `playFromExile`; `PlayerEffect.castFromGraveyard`, `playFromHandsOf`, `playLandsFromGraveyard`, `playFromLibraryTop`, `castFromLibraryTop`; `CardDefinition.castFromGraveyardIf`, `castSelfFromGraveyard`, `castSelfFromExile`; `ExilePermission`, `GraveyardCastCosts`; the effects `allow-cast-from-exile`, `allow-cast-linked-exile`, `grant-graveyard-cast`; `mayCast` and `playable` (one `mayPlay`); `castOnly` (absent `play`); the private expiry kinds (now `Expiry`, with `untilNextExile`, the `end-step-begins` and `next-combat-ends` points); `impulsePlayable`, `linkedCastGrantFor`, `exilePermissionsFor`, `handsOpenTo`'s own field, `mayPlayFromLibraryTop`, `hasPlayFromExileStatic`, `hasLibraryTopCastStatic`, `graveyardCastAbilities`. `CastNowAsk` is carried whole as `awaiting.ask`, its 15 field-by-field copies gone, and the `cast-now` spec takes its cost words from `PlayTerms`. `test/play-permission.test.ts` walks every definition for the removed words and for terms no store reads.
+- **How much moved, plainly:** every kept permission is one record now, read in one place, so a rider added once works in every zone: once each turn and an additional cost now work from the library top and exile as they did from a graveyard (Assemble the Players, Into the Pit, Falco Spara, Dawnhand Dissident). What stayed separate is listed above with its reason, and none of it was a surprise: the keyword casts, `grantsToGraveyard`, `via` and `GraveyardGrant`, cost statics and `cast-now`'s card picking. One record per card remains.
+- **Behaviour changes, all rules fixes:** `free: true` from one permission no longer stops a paid cast under another (601.3), nor does a "pay life rather than" one; a resolved `mayPlay` in a graveyard reaches a land too, as a static's always did.
+- **Additions the proving cards needed:** `PlayTerms.do` (an action as an additional cost, through `cost-acts.ts`, which gained `remove-counters`), `entersWith` (a finality counter), `StaticAbility.grantsToHand` (miracle in hand: it's a keyword grant, as `grantsToGraveyard` is).
+- Scaffolder: every old output moved, and it now reads "each instant and sorcery card in your hand has miracle {2}", "by sacrificing a nonland permanent in addition…" from the top, "once each turn, you may cast a … spell from the top of your library".
+- Cards (10): Hex Magic, Dawnhand Dissident, Lorehold, the Historian and Molecule Man (flagged); Assemble the Players, Into the Pit, Falco Spara, Pactweaver, Evelyn, the Covetous, Fiend of the Shadows, Overflow Submatrix.
+- Keys marked built: `zone:exile-hand-with-play-permission`, `static:grant-miracle-in-hand`, `cost:linked-exile-cast-additional-remove-counters`, `zone:cast-from-library-top-once-each-turn`, `zone:cast-from-library-top-extra-cost`, `static:play-from-exile-once-each-turn`, `zone:exile-player-hand-play-exiled`. Their other cards are left in `--stale` for `author-freed`.
+- **Left unbuilt, not marked:** `zone:graveyard-play-once-shared-land-or-permanent` (Serra Paragon and The Eighth Doctor need "it gains [an ability]" as a rider, Kagha a filter for cards put there from the library this turn); `zone:cast-from-graveyard-enters-finality-vampire` (`entersWith` is the finality half, Overflow Submatrix authored, Tarrian's Journal still needs "is a Vampire in addition"); `zone:impulse-exile-instead` (Radiant Scrollwielder, Nita: `exileAfter` is built, but random exile and the rest of each card weren't tried); `zone:choose-one-of-exiled`; `effect:allow-play-from-exile`; `effect:conjure`.
+- Measured: a timed `bot:bench` (16 games, four players, 8 workers, nothing else running) played the same games (11-5, 38.1 turns on average) at 66.9 s a game and 116.2 ms a decision, against 67.4 s and 116.9 ms just before (230.5 s wall against 230.4 s). The offers are cheaper to read, but they were never the cost that shows; bench noise is wider than this. Both figures are in `engine/data/bench-log.jsonl`.
 
 ### 11. Combat requirements and restrictions (62 keys, ~88 cards)
 

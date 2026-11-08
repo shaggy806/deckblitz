@@ -641,6 +641,8 @@ on life, and with it at the holder. It passes at weight 0 too, because the rollo
 the steal and Secret Entrance's land, so the weight is for defending it. The gate passes 201/201.
 No `bot:diff`: the feature is 0 in every recorded position, since none has the initiative.
 
+**Play permissions (2026-11-08, need-key themes step 7, theme 10).** A permission is one record now: `candidates` already see what it offers, through the legal actions. `effect-worth` values `impulse-exile` (most of a card each, less for "this turn") and `grant-play`; `target-polarity` reads `grant-play`'s slot; `features.ts` reads `mayPlaySelf`.
+
 ## Watching live games for
 
 Moved from BACKLOG (2026-10-04; the last four on 2026-10-09): each of these is open only until

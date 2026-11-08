@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4717 already implemented / 283 missing (marks refreshed 2026-11-08)
+4718 already implemented / 282 missing (marks refreshed 2026-11-08)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -4639,7 +4639,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4646  Phyrexian Scriptures                     {2}{B}{B}        Enchantment — Saga
 [x]  4647  Wizard's Retort                          {1}{U}{U}        Instant
 [x]  4648  Kiora Bests the Sea God                  {5}{U}{U}        Enchantment — Saga
-[ ]  4649  Assemble the Players                     {1}{W}           Enchantment
+[x]  4649  Assemble the Players                     {1}{W}           Enchantment
 [x]  4650  Slaughter Specialist                     {1}{B}           Creature — Vampire Warrior
 [x]  4651  Darksteel Juggernaut                     {5}              Artifact Creature — Juggernaut
 [x]  4652  Goblin War Strike                        {R}              Sorcery
