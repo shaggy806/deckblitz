@@ -573,6 +573,22 @@ Five more passes, all merged (156 cards):
   filter. The keys free Glowing One, Infesting Radroach, Screeching Scorchbeast, The Master,
   Transcendent and Zellix, Sanity Flayer for `author-freed`. 19 flagged cards still wait, blocked
   as their records say (`cards:needs -- --asap`).
+- **Batch 275 (2026-11-07, `author-freed` with need-key themes step 1: the key clean-up)** — 33
+  authored, 16 given narrow keys. Thirteen duplicate keys merged; the nine "probably expressible"
+  keys tried (`docs/plans/need-key-themes.md`, *Already built or duplicated*): six needed no
+  engine code (snow and legendary landwalk, hexproof from monocolored, until-end-of-combat P/T,
+  look at the library's top any time, linked exile returned under your control) and three one
+  switch each (`costModification.notFromCastersHand`; an energy trigger's `who` now reads the
+  player; `counters-removed`'s `perCounter`). Authored: Bilbo, Thief in the Night and Advanced
+  Reconstruction (flagged ASAP), Fortune Teller's Talent, Sage of the Beyond, Savvy Trader,
+  Territorial Gorger, Aether Revolt, Protean Hydra, General Ferrous Rokiric, Elenda, Prowling
+  Geistcatcher, Promise of Tomorrow, Cold Storage, the three Defilers, Zellix, The Master,
+  Transcendent and 15 more. Still blocked, each on its own new key: Primitive Justice, Chaotic
+  Transformation, Over the Top, Dream Harvest, Screeching Scorchbeast, Glowing One and Infesting
+  Radroach (`trigger:mills-per-card`), Cass, The Ruinous Powers, Last Night Together, Benthic
+  Anomaly, Corrupted Crossroads (`filter:has-devoid`), Ratchet, Watcher of Hours, Flameskull and
+  Niv-Mizzet, Supreme. Intimidation Bolt, Boros Battleshaper, Forgestoker Dragon and Yare already
+  had narrow keys that say what's missing. `--stale` is empty.
 - **Batch 274 (2026-11-07, `author-flagged overnight`: the cards flagged Build ASAP, by twelve
   agents)** — 36 of the 95 flagged cards authored with six proving cards beside them, among them
   Unbound Flourishing, The Warring Triad, Gwenom, Locke, Slicer, Collective Effort, Gogo, Zenos yae

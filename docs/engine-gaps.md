@@ -437,6 +437,22 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   slots are alike, as here), and a skipped optional first slot still needs the cast refused or the
   random controller kept from skipping it. Found 2026-10-23, batch 151's checks.
 
+**A "one or more cards milled" trigger fires once per player on a simultaneous mill** (found
+2026-11-07, batch 275). `Game` emits `cards-milled` once per milling player (game.ts, `this.emit({
+type: "cards-milled", player, objects: milled })`), so "whenever one or more nonland cards are
+milled" triggers once per player when an effect has several players mill at once (Locke's "each
+player mills"), where its rulings say once, for the total. Wrong today for The Wise Mothman (in
+the pool); blocks Screeching Scorchbeast (`trigger:mills-batched-across-players`), and a per-card
+mills trigger is its own gap (`trigger:mills-per-card`: Glowing One, Infesting Radroach). The fix
+is a mill batch like `withLeaveBatch`, emitting one event for a simultaneous mill.
+
+**`for-each-player` with `simultaneous: true` around a `look-and-choose` moves nothing, silently**
+(found 2026-11-07, batch 275). Over the Top's agent wrote each player's reveal-and-put that way to
+get one simultaneous entry (rule 603.6a) and no card moved, with no error. It should either work
+or be refused when the card is defined. Clear the Land, in the pool, does each player's
+reveal-and-put in turn order instead, so its permanents may enter as separate events: unchecked.
+Blocks Over the Top (`effect:each-player-look-and-choose-together`).
+
 **A static's own-type condition may read printed types** (suspected, 2026-11-06). Batch 266's
 agent authored Romulan Bird-of-Prey (Star Trek: a Spacecraft with station; "as long as this
 isn't a creature, it has hexproof") as a static with `condition: { kind: "source", filter: {

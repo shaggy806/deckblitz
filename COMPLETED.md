@@ -12,6 +12,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Commander gap
 
+- **Need-key themes step 1: key clean-up, and the freed cards** (2026-11-07, B275, `author-freed`):
+  13 duplicate need keys merged (aliases, records re-pointed); nine keys built, six of them with no
+  engine code and three with one switch each (`costModification.notFromCastersHand`, an `orPlayer`
+  counters trigger's `who` reading the player, `counters-removed`'s `perCounter`); 33 cards
+  authored, Bilbo, Thief in the Night and Advanced Reconstruction (flagged ASAP) among them, and 16
+  given narrow keys; `--stale` emptied. Theme counts re-measured: 2,265 cards on 1,783 open keys,
+  no theme moved more than 6 keys. Commits 301fc828e, 6d8a35214, ca60466bc and the record after.
 - **Build ASAP overnight, round 5 and the run's end** (2026-11-07, B274, `/author-flagged
   overnight`, stopped at the user's call after twelve agents: 36 flagged cards and six proving cards
   authored, Moonlit Meditation blocked): Zenos yae Galvus (`choose-permanents`' `remember`, `who:

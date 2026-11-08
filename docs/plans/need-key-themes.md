@@ -1,8 +1,10 @@
 # Need-key themes: general engine changes under the open keys
 
-Status: plan of record (2026-11-07), step 1 next — see *The plan* just below. The survey under it is a proposal.
+Status: plan of record (2026-11-07), step 1 done (B275), step 2 next — see *The plan* just below. The survey under
+it is a proposal.
 
-The 1,831 open need keys (2,324 waiting cards) mostly fall into about sixteen engine mechanisms that cut across
+The 1,783 open need keys (2,265 waiting cards, re-counted after step 1; the survey's own count was 1,831 and 2,324)
+mostly fall into about sixteen engine mechanisms that cut across
 their `family` prefixes. Each theme below is one general change that would turn many narrow keys into authoring work.
 
 ## The plan (2026-11-07)
@@ -24,7 +26,11 @@ touch. Each step:
 
 **The steps** (flagged cards each would prove, from the 2026-11-07 list):
 
-1. **Key clean-up (no engine design).** Merge the duplicate keys listed under *Already built or duplicated* in
+1. **Done 2026-11-07 (B275).** Thirteen duplicate keys merged; of the nine "probably expressible" keys, six needed
+   no engine code and three one small switch each (see *Already built or duplicated*); 33 cards authored, Bilbo and
+   Advanced Reconstruction among them; the 16 still blocked each have a narrow key; `--stale` is empty. The theme
+   counts moved by at most 6 keys and 6 cards each, inside the survey's ±15%, so the build order stands.
+   **Key clean-up (no engine design).** Merge the duplicate keys listed under *Already built or duplicated* in
    `engine/data/needs-vocabulary.json` (one key, the other an alias; re-point the records). Try authoring the keys
    listed there as probably expressible (`keyword:devoid` already proved so with Ulalek; the
    cast-not-from-hand cost reduction would free Bilbo, Thief in the Night and Advanced Reconstruction). Run
@@ -52,9 +58,13 @@ touch. Each step:
 
 - **Open keys and cards:** each unimplemented card's newest record (`latestByCard` in
   `engine/scripts/needs-vocabulary.mjs`), with its needs resolved through the aliases, minus meta and `built` keys.
-  That leaves **2,324 cards and 1,831 open keys**. **1,415 keys block one card each.** Only 121 cards have two or more
+  That leaves **2,314 cards and 1,831 open keys**. **1,415 keys block one card each.** Only 121 cards have two or more
   open needs (2,203 have exactly one). So a theme's card count is close to what building it frees on its own, and
   the counts nearly add up.
+- **Re-counted after step 1 (2026-11-07, B275)** the same way: **2,265 cards and 1,783 open keys** (1,388 keys
+  block one card each). At this doc's first commit the same count gave 2,274 and 1,790 (the figures above predate
+  B274). The 7 keys fewer are 13 merged and 9 built (3 with a small switch, 6 with no code) against 15 new narrow
+  keys for cards the built keys left; the theme table carries each theme's share of that, by hand.
 - **Themes** come from the key names (prefix ignored), checked against descriptions and a sample of Oracle text. Each
   key goes to the first theme that matches, so the counts are **approximate (±15%)**. "Cards" means cards with a key
   in the theme. It does not mean the general change frees all of them: each theme gives a confidence and a realistic
@@ -88,22 +98,22 @@ below **replaces a parallel shape with one shared type**. Doing that once ends a
 
 | # | Theme | Keys | Cards | Realistic reach | Confidence |
 |---|---|---|---|---|---|
-| 1 | Object sets ("this way", linked, cost-paid, batch) + one aggregate | 215 | 280 | ~150 | medium |
-| 2 | Declarative event triggers + generic trigger modifiers | 170 | 237 | ~140 | high |
-| 3 | One rule-effect vocabulary: shared durations, timed statics, prohibitions | 168 | 235 | ~130 | high |
-| 4 | Cost pipeline: modifiers take `EffectAmount`, effects as costs | 117 | 163 | ~80 | medium |
-| 5 | Who chooses: a uniform `chooser`, per-player rounds | 123 | 148 | ~60 | medium |
+| 1 | Object sets ("this way", linked, cost-paid, batch) + one aggregate | 215 | 278 | ~150 | medium |
+| 2 | Declarative event triggers + generic trigger modifiers | 171 | 236 | ~140 | high |
+| 3 | One rule-effect vocabulary: shared durations, timed statics, prohibitions | 162 | 229 | ~130 | high |
+| 4 | Cost pipeline: modifiers take `EffectAmount`, effects as costs | 116 | 159 | ~80 | medium |
+| 5 | Who chooses: a uniform `chooser`, per-player rounds | 125 | 150 | ~60 | medium |
 | 6 | Turn/game event journal with a query read | 112 | 143 | ~100 | high |
-| 7 | References and relational filter clauses | 108 | 143 | ~70 | medium |
-| 8 | One characteristics patch for copy exceptions, "becomes" and animate | 117 | 148 | ~60 | low-medium |
-| 9 | Replacement effects with an arbitrary "instead" | 102 | 123 | ~60 | medium |
-| 10 | One play-permission record | 80 | 112 | ~60 | medium |
-| 11 | Combat requirements and restrictions as data | 64 | 93 | ~45 | medium |
+| 7 | References and relational filter clauses | 109 | 144 | ~70 | medium |
+| 8 | One characteristics patch for copy exceptions, "becomes" and animate | 118 | 149 | ~60 | low-medium |
+| 9 | Replacement effects with an arbitrary "instead" | 101 | 123 | ~60 | medium |
+| 10 | One play-permission record | 78 | 113 | ~60 | medium |
+| 11 | Combat requirements and restrictions as data | 62 | 88 | ~45 | medium |
 | 12 | Random results as recorded, triggerable events | 59 | 80 | ~45 | medium |
-| 13 | Mana: spent-mana queries and mana-ability hooks | 57 | 80 | ~35 | low-medium |
-| 14 | Attachments: any host, any attachee reference | 35 | 54 | ~30 | medium |
-| 15 | Delayed triggers: any step, any player, captured context | 32 (+~20 counted under 1 and 2) | 41 | ~30 | high |
-| 16 | Grants: any keyword with parameters; trigger multipliers by cause | 36 | 38 | ~25 | medium |
+| 13 | Mana: spent-mana queries and mana-ability hooks | 56 | 80 | ~35 | low-medium |
+| 14 | Attachments: any host, any attachee reference | 36 | 55 | ~30 | medium |
+| 15 | Delayed triggers: any step, any player, captured context | 31 (+~20 counted under 1 and 2) | 41 | ~30 | high |
+| 16 | Grants: any keyword with parameters; trigger multipliers by cause | 37 | 39 | ~25 | medium |
 | — | Counters (folds into 1, 2 and 6), face-down/phasing/meld mechanics, singletons | ~236 | ~300 | — | — |
 
 "Realistic reach" is a judgement: the cards whose key is fully covered by the change as described, from the
@@ -112,7 +122,7 @@ extra option, but one sitting on the new type instead of a new parallel shape.
 
 ---
 
-### 1. Object sets and one aggregate (215 keys, ~280 cards)
+### 1. Object sets and one aggregate (215 keys, ~278 cards)
 
 **Change.** Introduce one `ObjectSetRef`: a named set of objects with how each one was then (an LKI snapshot or a
 zone-change-count stint). Its sources:
@@ -165,7 +175,7 @@ single objects, and the aggregate can't take a non-zone set.
 **Confidence: medium.** The amounts and filters reduce cleanly. The effects that act on a set ("return the other",
 "an opponent chooses one of the exiled cards") still each need their verb.
 
-### 2. Declarative event triggers and generic modifiers (170 keys, ~237 cards)
+### 2. Declarative event triggers and generic modifiers (171 keys, ~236 cards)
 
 **Change.** Add one `TriggerSpec` member,
 `{ on: "event", event: GameEvent["type"], player?: PlayerRelation, object?: CardFilter, cause?: PlayerRelation, value?: field }`.
@@ -176,7 +186,7 @@ an intervening-if (603.4). That wrapper reads the event journal (theme 6).
 
 **Keys (top):** trigger:activates-mana-ability 6, trigger:counters-put-first-time-each-turn 5,
 trigger:player-loses-game-trigger 5, trigger:proliferate-trigger 4, trigger:becomes-crewed-trigger 4,
-trigger:becomes-monarch 4, trigger:energy-gained 4, trigger:phases-in 4, trigger:you-tap-opponent-creature 3,
+trigger:becomes-monarch 4, trigger:phases-in 4, trigger:you-tap-opponent-creature 4 (energy-gained built 2026-11-07),
 trigger:combat-damage-to-you-trigger 3, stat:once-per-turn-trigger 3, trigger:trigger-from-exile 3,
 trigger:loses-life-first-time-each-turn 3, trigger:phases-out 3, trigger:opponent-shuffles-library 3,
 trigger:player-puts-onto-battlefield 3; then 130 one-card keys (connives, investigates, solves-case, gives-gift,
@@ -202,7 +212,7 @@ destroyed, pays-life, untap, activates-boast, …).
 
 **Confidence: high.** Most of these keys name an event the engine already logs.
 
-### 3. One rule-effect vocabulary: shared durations, timed statics, prohibitions (168 keys, ~235 cards)
+### 3. One rule-effect vocabulary: shared durations, timed statics, prohibitions (162 keys, ~229 cards)
 
 **Change, in three parts.**
 
@@ -232,14 +242,15 @@ It is checked at the existing gates. It would replace `StaticAbility.prohibits` 
 narrower "can't" fields.
 
 **Keys (top):**
-- static:dont-lose-for-zero-life 6, effect:player-cant-attack-you-next-turn 4, keyword:hexproof-from-monocolored 4,
+- static:dont-lose-for-zero-life 8 (with no-loss-for-zero-life, merged), effect:players-cant-gain-life-this-turn 7
+  (the four "can't gain life" one-shots, merged 2026-11-07), effect:player-cant-attack-you-next-turn 4,
   static:ignore-hexproof 4, static:spell-cant-be-copied 4;
 - replacement:damage-multiplier-this-turn 3, effect:player-effect-until-target-next-turn 3,
   static:graveyard-enter-prohibition 3, static:player-shroud-static 3, static:opponent-cant-cause-sacrifice 3,
   static:cant-become-untapped 3, static:prohibit-cast-from-graveyard-or-library 3, static:counter-cap 3;
-- effect:opponents-cant-gain-life-this-turn 2, effect:players-cant-gain-life-this-turn 2,
-  effect:player-cant-gain-life-for-game 2, effect:temporary-opponent-spell-tax 2, effect:grant-replacement-until-eot 2,
-  effect:duration-this-combat 2, effect:restrict-this-combat 2, effect:pt-until-end-of-combat 2,
+- effect:temporary-opponent-spell-tax 2, effect:grant-replacement-until-eot 2,
+  effect:duration-this-combat 2, effect:restrict-this-combat 2 (hexproof-from-monocolored and pt-until-end-of-combat
+  were already expressible: built 2026-11-07),
   duration:while-source-tapped-since-activation 2, static:prohibit-outside-own-turn 2;
 - about 120 one-card keys.
 
@@ -260,7 +271,7 @@ Sample: Teferi's Reproach needs exactly `PlayerEffect`'s `protectionFromEverythi
 **Confidence: high.** Most of these keys exist today in one form (static, or for one player) and are missing in
 another.
 
-### 4. Cost pipeline (117 keys, ~163 cards)
+### 4. Cost pipeline (116 keys, ~159 cards)
 
 **Change.**
 - **(a)** `costModification` / `abilityCostModification` / `alternativeCostForSpells` take an `EffectAmount`,
@@ -275,7 +286,8 @@ another.
 - **(c)** **Keyword costs with parameters** (kicker X, replicate granted with a cost, multikicker modes).
 
 **Keys (top):** static:grant-replicate 5, keyword:kicker-x 4, cost:alternative-cost-for-spells-limits 4,
-cost:cost-reduction-cast-not-from-hand 4, cost:choose-creature-type-as-cast 4, keyword:kicker-any-number-of-modes 3,
+cost:choose-creature-type-as-cast 4, keyword:kicker-any-number-of-modes 3 (cost-reduction-cast-not-from-hand built
+2026-11-07),
 cost:pay-x-energy 3, cost:forage 3, effect:pay-any-amount-of-mana 3, keyword:scavenge 3,
 cost:put-card-from-hand-on-library-top 3, cost:escalate-nonmana 2, cost:put-self-on-library-bottom 2,
 cost:alternative-cost-for-all-spells 2; 87 one-card keys (`cost:cost-reduction-per-*`, `cost:x-fixed-by-*`,
@@ -292,7 +304,7 @@ cost:alternative-cost-for-all-spells 2; 87 one-card keys (`cost:cost-reduction-p
 
 **Confidence: medium.** (a) is mechanical; (b) is a real refactor.
 
-### 5. Who chooses (123 keys, ~148 cards)
+### 5. Who chooses (125 keys, ~150 cards)
 
 **Change.** A uniform `chooser: PlayerRef` on every effect that makes a choice (choose permanents, choose from a zone,
 look-and-choose, piles, modes, damage division, creature type or colour, the order of the library bottom). Add one
@@ -354,7 +366,7 @@ fold in here too.
 
 **Confidence: high.** The keys are almost all "count events of kind K matching F in window W".
 
-### 7. References and relational filter clauses (108 keys, ~143 cards)
+### 7. References and relational filter clauses (109 keys, ~144 cards)
 
 **Change, in two parts.**
 
@@ -387,12 +399,12 @@ list a "same name as a reference" group (six keys) inside one family, but nothin
 
 **Confidence: medium.**
 
-### 8. One characteristics patch for copy exceptions, "becomes" and animate (117 keys, ~148 cards)
+### 8. One characteristics patch for copy exceptions, "becomes" and animate (118 keys, ~149 cards)
 
 **Change.** One `CharacteristicsPatch` (set or add types, subtypes and supertypes; set colours; add or remove abilities,
 keyword instances with parameters; base P/T from an amount; conditional on "if it's a creature"). It is used by:
 - copy exceptions: they become part of the copiable values (rule 707.9a), which `CopyValues.modifiers: PtModifier[]`
-  (state.ts:1880) carries;
+  (state.ts:1878) carries;
 - "becomes a …" / animate effects;
 - `grant-static`'s layer-4 part, which "isn't applied" (effects.ts:7227).
 
@@ -407,7 +419,7 @@ Copying gets an `of: ObjectSetRef` (theme 1) and "a copy for each object it coul
 
 **Confidence: low-medium.** The patch is general, but many keys here are separate mechanics.
 
-### 9. Replacement effects with an arbitrary "instead" (102 keys, ~123 cards)
+### 9. Replacement effects with an arbitrary "instead" (101 keys, ~123 cards)
 
 **Change.** One replacement shape: `{ event: draw | damage | die | leave | enter | gain-life | lose-life | lose-game |
 counters | tokens | scry | explore | untap-step | mill | discard, match, instead: EffectSpec | { modify: amount-op }, may?,
@@ -432,7 +444,7 @@ replacement:would-lose-game 2; 84 one-card keys.
 
 **Confidence: medium.**
 
-### 10. One play-permission record (80 keys, ~112 cards)
+### 10. One play-permission record (78 keys, ~113 cards)
 
 **Change.** One record, `{ who, cards: ObjectSetRef | { zone, filter, top? }, duration: Duration, limit: once-each-turn
 | one-of | count, cost: normal | free | alt | tax | pay-life, spendAs?, riders: entersTapped | entersWithCounter |
@@ -442,18 +454,19 @@ impulse. Today it is split across `GameObject.impulse` (state.ts:701, 17 fields)
 riders.
 
 **Keys (top):** effect:conjure 9 (outside-the-game; see Singletons), static:grant-miracle-in-hand 3,
-zone:exile-hand-with-play-permission 3, zone:impulse-play-only-one 3, zone:choose-one-of-exiled 2,
-zone:graveyard-play-once-shared-land-or-permanent 2, zone:exile-player-hand-play-exiled 2 (also filed as
-`effect:exile-player-hand-play-exiled`), zone:cast-from-library-top-extra-cost 2, effect:allow-play-from-exile 2,
-zone:play-from-graveyard-your-turn 2, static:play-from-library-top-once-each-turn 2,
-static:play-from-exile-once-each-turn 2; 58 one-card keys.
+zone:exile-hand-with-play-permission 3, zone:cast-from-library-top-once-each-turn 5 (three keys, merged 2026-11-07),
+zone:exile-player-hand-play-exiled 3 (two keys, merged), zone:choose-one-of-exiled 2,
+zone:graveyard-play-once-shared-land-or-permanent 2, zone:cast-from-library-top-extra-cost 2,
+effect:allow-play-from-exile 2, zone:play-from-graveyard-your-turn 2, static:play-from-exile-once-each-turn 2; 58
+one-card keys (zone:impulse-play-only-one was built 2026-11-07; Flameskull needs
+zone:impulse-play-one-including-exiled-self).
 
 **Risks.** Rule 305.1 for lands (playing a land is a special action, one per turn). 609.4 "as though". A card that
 changes zones is a new object (400.7). The permission must die with it.
 
 **Confidence: medium.**
 
-### 11. Combat requirements and restrictions (64 keys, ~93 cards)
+### 11. Combat requirements and restrictions (62 keys, ~88 cards)
 
 **Change.** One requirement/restriction record per side (rules 508.1d, 509.1c): `{ creatures: filter/ref, must |
 cant, attack | block, target?: PlayerRef | "you-or-your-planeswalkers", unless?: Condition, duration: Duration }`. The
@@ -462,7 +475,7 @@ existing maximisation in `combat/` reads it. Today it is `AttackRequirementRule`
 `PlayerEffect.cantAttack`, and about 20 more `StaticAbility` combat fields.
 
 **Keys:** decision:attacker-chooses-blocks 4, static:must-attack-specific-player 4, static:block-as-though-shadow 4,
-keyword:snow-landwalk 4, effect:token-enters-blocking 3, filter:creature-source-is-blocking 3,
+effect:token-enters-blocking 3, filter:creature-source-is-blocking 3 (snow and legendary landwalk built 2026-11-07),
 static:must-target-flagbearer 3, static:attack-direction-restriction 2, effect:extra-combat-attack-restriction 2; 46
 one-card keys.
 
@@ -485,7 +498,7 @@ call for (engine/CLAUDE.md, *Determinism*). Rules 705 and 706.
 
 **Confidence: medium.**
 
-### 13. Mana: spent-mana queries and mana-ability hooks (57 keys, ~80 cards)
+### 13. Mana: spent-mana queries and mana-ability hooks (56 keys, ~80 cards)
 
 **Change.**
 - Mana provenance is built (memory, 2026-09). Expose one read over a spell's or ability's paid mana: count by colour
@@ -502,7 +515,7 @@ one-card keys.
 
 **Confidence: low-medium.** The keys are heterogeneous.
 
-### 14. Attachments (35 keys, ~54 cards)
+### 14. Attachments (36 keys, ~55 cards)
 
 **Change.** `attach` takes any `AttachHostRef` including a player (Curses: rule 303.4 lets an Aura enchant a player)
 and any attachee from an `ObjectSetRef` ("each created token", "the Equipment that was attached", "auras attached to
@@ -515,7 +528,7 @@ effect:return-aura-after-host-died 2. Existing: `AttachRef`/`AttachHostRef` (eff
 
 **Confidence: medium.**
 
-### 15. Delayed triggers: any step, any player, captured context (32 keys + ~20 elsewhere, ~41 cards)
+### 15. Delayed triggers: any step, any player, captured context (31 keys + ~20 elsewhere, ~41 cards)
 
 **Change.**
 - `DelayedTrigger.at` becomes `{ step | phase, whose: PlayerRef | "any", which: "next" | "this-turn" }` instead of the
@@ -536,7 +549,7 @@ expected.
 
 **Confidence: high.**
 
-### 16. Grants: any keyword with parameters; trigger multipliers by cause (36 keys, ~38 cards)
+### 16. Grants: any keyword with parameters; trigger multipliers by cause (37 keys, ~39 cards)
 
 **Change, in two parts.**
 - **(a)** Keywords with parameters (replicate {cost}, madness {cost}, emerge, saddle N, miracle) become `KeywordInstance`
@@ -559,20 +572,31 @@ cost equals the spell's mana cost).
 
 ## Already built or duplicated: check before building
 
-- **Probably expressible today** (try authoring first):
-  - `keyword:snow-landwalk` (4) and `keyword:legendary-landwalk` (2): `StaticAbility.landwalk` is a `CardFilter`
-    (define.ts:3634).
-  - `keyword:hexproof-from-monocolored` (4): `hexproofFrom.filter` (define.ts:3925) plus CardFilter's
-    `multicolored`/`colorless` (filter.ts:347, 351).
-  - `cost:cost-reduction-cast-not-from-hand` (4): `costModification.castFrom` takes a zone list (define.ts:3965).
-  - `trigger:energy-gained` (4): `counters-put` with `orPlayer` already fires on energy (abilities.ts:1386). It needs
-    a players-only switch at most.
-  - `trigger:counter-removed-trigger` (2): a counters-removed trigger exists (abilities.ts:1406).
-  - `keyword:devoid` (3): the pool already writes Devoid as empty colours (cards/pool/drowner-of-hope.ts). Recheck
-    what its three cards really lack.
-  - `effect:duration-this-combat`, `effect:pt-until-end-of-combat`: `PtDuration` has `"until-end-of-combat"`; the gap
-    is that only some effect kinds take it (theme 3a).
-- **The same feature under two keys** (merge with aliases):
+- **Probably expressible today — tried 2026-11-07 (B275).** What each one turned out to be:
+  - `keyword:snow-landwalk`, `keyword:legendary-landwalk`: no code — a `landwalk` filter with `supertype`. Built;
+    all six cards authored.
+  - `keyword:hexproof-from-monocolored`: no code — `hexproofFrom.filter: { multicolored: false, colorless: false }`.
+    Built; General Ferrous Rokiric authored. Elenda's record was wrong (hexproof from instants; authored). Niv-Mizzet,
+    Supreme still needs `static:grant-jump-start-to-graveyard-cards`; Dragonfire Blade `cost:equip-cost-per-color`.
+  - `cost:cost-reduction-cast-not-from-hand`: a zone list can't say it (it reads hands as the static controller's),
+    so `costModification.notFromCastersHand`. Built; Bilbo, Advanced Reconstruction, Sage of the Beyond, Savvy
+    Trader, Fortune Teller's Talent.
+  - `trigger:energy-gained`: the `orPlayer` branch ignored `who`, so it fired on any player's energy; now `who` reads
+    the player. Built; Territorial Gorger, Aether Revolt, Brotherhood Scribe, Fabrication Module.
+  - `trigger:counter-removed-trigger`: `perCounter` added (Protean Hydra's ruling: once per counter). Built. Watcher of
+    Hours still needs `trigger:time-counter-removed-in-exile-by-you-per-counter` (the time-counter event has no
+    amount or remover).
+  - `keyword:devoid` (built in B274): its two cards needed other things — `filter:has-devoid` (Corrupted
+    Crossroads: devoid as empty colours can't be told from colorless) and
+    `effect:token-copy-of-one-chosen-with-total-pt` (Benthic Anomaly).
+  - `effect:pt-until-end-of-combat`: no code (`modify-pt`'s `"until-end-of-combat"`). Built; Glyph of Destruction,
+    Murk Dwellers. `effect:duration-this-combat` stays open for theme 3a: Ria Ivor's prevention and Master of
+    Cruelties' "assigns no combat damage this combat" take no combat duration.
+  - Two more keys the batch found already expressible: `static:look-at-top-card-any-time` (`visibility:
+    { looksAtOwnLibraryTop }`) and `effect:return-linked-under-your-control` (Sothera's linked exile; Prowling
+    Geistcatcher, Promise of Tomorrow, Cold Storage).
+- **The same feature under two keys — merged 2026-11-07** (the second key of each is now an alias, `mergedInto` the
+  first, and its records re-pointed):
   - static:dont-lose-for-zero-life (6) = static:no-loss-for-zero-life (2);
   - replacement:lose-game-replacement (2) = replacement:would-lose-game (2);
   - trigger:you-tap-opponent-creature (3) = trigger:you-tap-opponents-creature (1);
@@ -581,11 +605,15 @@ cost equals the spell's mana cost).
   - effect:swap-blockers = effect:switch-blockers;
   - effect:delayed-exiled-unplayed-to-graveyard = effect:delayed-move-unplayed-exiled-to-graveyard;
   - zone:exile-player-hand-play-exiled (2) = effect:exile-player-hand-play-exiled (1);
-  - the four "can't gain life" one-shots (effect:opponents-cant-gain-life-this-turn,
-    effect:players-cant-gain-life-this-turn, effect:target-player-gains-no-life-this-turn,
-    effect:player-cant-gain-life-for-game) are one static with four durations;
-  - static:cast-from-library-top-once-per-turn ≈ zone:cast-from-library-top-once-each-turn ≈
-    static:play-from-library-top-once-each-turn.
+  - the four "can't gain life" one-shots are one key, effect:players-cant-gain-life-this-turn (who and how long vary:
+    a timed static, theme 3), with effect:opponents-cant-gain-life-this-turn,
+    effect:target-player-gains-no-life-this-turn and effect:player-cant-gain-life-for-game its aliases;
+  - zone:cast-from-library-top-once-each-turn, with static:cast-from-library-top-once-per-turn and
+    static:play-from-library-top-once-each-turn its aliases.
+- **New leads from B275's engine notes:** `cards-milled` is emitted once per player, so "whenever one or more cards
+  are milled" fires once per player on a simultaneous multi-player mill (The Wise Mothman, in the pool, against its
+  ruling; `trigger:mills-batched-across-players`); and a `for-each-player` with `simultaneous: true` around a
+  `look-and-choose` moves nothing, silently (`effect:each-player-look-and-choose-together`).
 - **An unused escape hatch:** `TriggerSpec { on: "predicate" }` (abilities.ts:2697) is in no pool card. Theme 2 is its
   declarative, bot-readable replacement.
 
