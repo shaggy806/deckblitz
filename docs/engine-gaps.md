@@ -618,3 +618,5 @@ but a choice the player has is missing. Found 2026-11-06, building Defiler of Vi
 and two mandatory "instead of drawing" replacements (Underrealm Lich and another), rule 616.1
 lets the player pick any of them; `Game.optionalDrawReplacementAsked` offers the first mandatory
 one in battlefield order, as the draw did before. Found 2026-11-06, building Abundance.
+
+**Adamant's colour word and a text change.** Rule 612.2 lets a text-changing effect change a colour word, and adamant's "if at least three white mana was spent" has one. `text-change.ts` doesn't read a `manaSpent` clause's `type` (it didn't read the old `manaSpentOfColors` either; theme 13's pool test named it). `{U}{B}` symbol clauses (the Mythos cycle) are mana symbols and must stay as they are (rule 612.2), so a clause needs to say which it is before the walker can change it. Cards: every adamant card, Ardenvale Paladin first.

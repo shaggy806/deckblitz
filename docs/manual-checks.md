@@ -7791,3 +7791,24 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Brimaz: the token blocks the same creature
 - **Do:** Attack with Grizzly Bears. As Bob, block it with Brimaz.
 - **Expect:** A 1/1 Cat Soldier token arrives blocking Grizzly Bears, beside Brimaz.
+
+### Squandered Resources: the mana is a type the sacrificed land could make
+- **Do:** Open Squandered Resources' menu.
+- **Expect:** One choice for {G} naming only the Forest, one for {U} naming only the Island. Pick {U} and sacrifice the Island: {U} is in your pool and the Island is in the graveyard.
+
+### Omnath, Locus of the Void: unspent mana stays, colorless, and grows it
+- **Do:** Tap a Forest for mana by hand. Pass priority until the next step.
+- **Expect:** Omnath is 7/7 with {G} floating. In the next step it is still 7/7 and the mana shows as {C}, not gone.
+
+### Damping Sphere: a land that would make two mana makes one {C}
+- **Do:** Tap Ancient Tomb for mana by hand, then tap the Forest.
+- **Expect:** Ancient Tomb adds one {C}, not {C}{C}. The Forest still adds {G}.
+
+### Jetmir's Fixer: mana from a Treasure makes it a counter
+- **Do:** Activate Jetmir's Fixer's ability, paying with the Forest and the Treasure.
+- **Expect:** It gets a +1/+1 counter and no pump.
+- **Not a bug:** With no Treasure spent, it is +1/+1 until end of turn and no counter.
+
+### Mana Short: a player loses all unspent mana
+- **Do:** Switch to Bob and tap a Forest for mana by hand. Back as Alice, cast Mana Short on Bob.
+- **Expect:** Bob's lands are tapped and Bob's floating {G} is gone.

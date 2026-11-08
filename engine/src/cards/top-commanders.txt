@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-477 already implemented / 23 missing
+479 already implemented / 21 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -274,7 +274,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  268  Nicol Bolas, the Ravager                        9786 decks  {1}{U}{B}{R}     Legendary Creature — Elder Dragon // Legendary Planeswalker — Bolas
 [x]  269  Quintorius, History Chaser                      9776 decks  {2}{R}{W}        Legendary Planeswalker — Quintorius
 [x]  270  Rocco, Cabaretti Caterer                        9749 decks  {X}{R}{G}{W}     Legendary Creature — Elf Druid
-[ ]  271  Omnath, Locus of Mana                           9718 decks  {2}{G}           Legendary Creature — Elemental
+[x]  271  Omnath, Locus of Mana                           9718 decks  {2}{G}           Legendary Creature — Elemental
 [x]  272  Chulane, Teller of Tales                        9679 decks  {2}{G}{W}{U}     Legendary Creature — Human Druid
 [x]  273  Shilgengar, Sire of Famine                      9622 decks  {3}{B}{B}        Legendary Creature — Elder Demon
 [x]  274  Shalai and Hallar                               9586 decks  {1}{R}{G}{W}     Legendary Creature — Angel Elf
@@ -363,7 +363,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  357  Ellivere of the Wild Court                      7866 decks  {2}{G}{W}        Legendary Creature — Human Knight
 [x]  358  Koma, Cosmos Serpent                            7852 decks  {3}{G}{G}{U}{U}  Legendary Creature — Serpent
 [x]  359  Kodama of the East Tree                         7851 decks  {4}{G}{G}        Legendary Creature — Spirit
-[ ]  360  Ozai, the Phoenix King                          7838 decks  {2}{B}{B}{R}{R}  Legendary Creature — Human Noble
+[x]  360  Ozai, the Phoenix King                          7838 decks  {2}{B}{B}{R}{R}  Legendary Creature — Human Noble
 [x]  361  Zoraline, Cosmos Caller                         7834 decks  {1}{W}{B}        Legendary Creature — Bat Cleric
 [x]  362  Sidisi, Brood Tyrant                            7821 decks  {1}{B}{G}{U}     Legendary Creature — Snake Shaman
 [x]  363  Gluntch, the Bestower                           7816 decks  {1}{G}{W}        Legendary Creature — Jellyfish

@@ -1,0 +1,148 @@
+{
+  "batch": "B285",
+  "status": "done",
+  "ranks": "Need-key themes step 7, fifth piece (docs/plans/need-key-themes.md, 2026-11-08): theme 13, three reads of mana, Squandered Resources and Omnath, Locus of the Void (flagged) and 18 of the theme's top keys",
+  "authored": [
+    {
+      "name": "Squandered Resources",
+      "files": [
+        "engine/src/cards/pool/squandered-resources.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Omnath, Locus of the Void",
+      "files": [
+        "engine/src/cards/pool/omnath-locus-of-the-void.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Omnath, Locus of Mana",
+      "files": [
+        "engine/src/cards/pool/omnath-locus-of-mana.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ozai, the Phoenix King",
+      "files": [
+        "engine/src/cards/pool/ozai-the-phoenix-king.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Damping Sphere",
+      "files": [
+        "engine/src/cards/pool/damping-sphere.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Ritual of Subdual",
+      "files": [
+        "engine/src/cards/pool/ritual-of-subdual.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Jetmir's Fixer",
+      "files": [
+        "engine/src/cards/pool/jetmirs-fixer.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Forsworn Paladin",
+      "files": [
+        "engine/src/cards/pool/forsworn-paladin.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Paragon of Modernity",
+      "files": [
+        "engine/src/cards/pool/paragon-of-modernity.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Mana Short",
+      "files": [
+        "engine/src/cards/pool/mana-short.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Power Sink",
+      "files": [
+        "engine/src/cards/pool/power-sink.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Remote Farm",
+      "files": [
+        "engine/src/cards/pool/remote-farm.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Saprazzan Skerry",
+      "files": [
+        "engine/src/cards/pool/saprazzan-skerry.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Peat Bog",
+      "files": [
+        "engine/src/cards/pool/peat-bog.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hickory Woodlot",
+      "files": [
+        "engine/src/cards/pool/hickory-woodlot.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Doubling Cube",
+      "files": [
+        "engine/src/cards/pool/doubling-cube.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Glissa Sunseeker",
+      "files": [
+        "engine/src/cards/pool/glissa-sunseeker.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Bladecoil Serpent",
+      "files": [
+        "engine/src/cards/pool/bladecoil-serpent.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wumpus Aberration",
+      "files": [
+        "engine/src/cards/pool/wumpus-aberration.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Clay Champion",
+      "files": [
+        "engine/src/cards/pool/clay-champion.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": []
+}

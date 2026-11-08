@@ -1,6 +1,6 @@
 # Need-key themes: general engine changes under the open keys
 
-Status: plan of record (2026-11-07), steps 1-6 (B275-B280) and four pieces of step 7 (theme 7, B281; theme 10, B282; theme 9, B283; theme 11, B284) done; step 7 goes on to
+Status: plan of record (2026-11-07), steps 1-6 (B275-B280) and five pieces of step 7 (theme 7, B281; theme 10, B282; theme 9, B283; theme 11, B284; theme 13, B285) done; step 7 goes on to
 the smaller themes — see *The plan* just below. The survey under it is a proposal.
 
 The 1,783 open need keys (2,265 waiting cards, re-counted after step 1; the survey's own count was 1,831 and 2,324)
@@ -71,7 +71,8 @@ touch. Each step:
      Dawnhand Dissident, Lorehold, the Historian, Molecule Man (flagged) and 6 of the theme's top keys; 7 keys marked built, their other cards left in `--stale` for `author-freed`.
    - **Done 2026-11-08 (B283).** One `instead` and one resolved-replacement record (theme 9: `engine/src/replacements.ts`, see its design note and *As built*). 18 cards: Doc Samson, Moonlit Meditation, Quantum Riddler and Wolverine, Fierce Fighter (flagged) and 14 of the theme's top keys; 18 keys marked built, their other cards left in `--stale` for `author-freed`.
    - **Done 2026-11-08 (B284).** One combat rule, requirements and restrictions (theme 11: `engine/src/combat/rules.ts`, see its design note and *As built*). 14 cards: Galactus, Devourer of Worlds and Silver Surfer, Galactus's Herald (flagged) and 12 of the theme's top keys; 6 keys marked built, their other cards left in `--stale` for `author-freed`.
-   - Next: the smaller themes (12, 13, 14, 16, 8, as `--by-rank` reaches their cards).
+   - **Done 2026-11-08 (B285).** Three reads of mana (theme 13: `engine/src/mana.ts`, see its design note and *As built*). 20 cards: Squandered Resources, Omnath, Locus of the Void (flagged) and 18 of the theme's top keys; 11 keys marked built, their other cards left in `--stale` for `author-freed`. Yavimaya Bloomsage stays flagged (see *Left unbuilt*).
+   - Next: the smaller themes (12, 14, 16, 8, as `--by-rank` reaches their cards).
 
 ## How this was measured
 
@@ -1440,6 +1441,60 @@ one-card keys.
 **Risks.** Mana abilities don't use the stack (rule 117.1d, 605). A trigger from one is still a normal trigger.
 
 **Confidence: low-medium.** The keys are heterogeneous.
+
+**Design note (step 7, 2026-11-08): three reads of mana, one each.** Picked by `--by-rank`, flagged cards first: Squandered Resources, Omnath, Locus of the Void and Yavimaya Bloomsage are the theme's, and lead the list.
+
+*What's wrong today.* What paid for a spell is spread over six fields kept in step by hand: `GameObject.manaSpent` (a total), `manaSpentFrom`, `manaSpentColors`, `manaSpentByColor`, `lastStackManaSpent`, `lastStackManaSpentColors`, and four copies on `LastKnown`. Cards read them through four filter clauses (`manaSpent`, `manaFrom`, `manaSpentOfColors`, `manaSpentOfOneColor`) and two amounts (`manaSpentOf`, `colorsSpentOf`). Each new question is a new field: "{C} was spent" has nowhere to go, and nothing at all records what paid for an activated ability. A land's mana being changed is two shapes with two readers: `landManaInstead` (static and player effect) and the `tap-for-mana` replacement. Losing mana is written once, inside the step-end loop, so an effect can't do it.
+
+*Where it lives.* `engine/src/mana.ts`, beside `ManaUnit`:
+
+- **One record of what was spent.** `SpentMana`, one `{ type, from? }` per unit (a unit's type and `ManaOrigin`, not its restrictions or riders, which are done with once it's paid). `GameObject.manaSpent?: SpentMana[]` on a spell **or an activated ability on the stack**, `lastStackManaSpent`, `LastKnown.manaSpent`. The total is its length.
+- **One read of it.** `spentManaCount(units, query)` over `ManaSpentQuery { type?, from?, sameColor?, count?: "colors" }`, and on the card side one clause and one amount:
+  - `CardFilter.manaSpent: ManaSpentClause[]`, each a query and an `amount` (default "at least one"): `[{ type: "W", amount: { op: "gte", n: 3 } }]` for adamant, `[{ from: { subtype: "Treasure" } }]`, `[{ amount: { op: "gte", n: 4 } }]`, `[{ type: "C", amount: { op: "eq", n: 0 } }]` for "if {C} wasn't spent".
+  - `{ manaSpentOf: ref, type?, from?, count?, per? }`. `count: "colors"` is converge; `per: 2` counts pairs, "for each {G}{G} spent" (two and two more is two, a third alone adds nothing).
+  - An activated ability's mana is read by `manaSpentOf: "this-ability"` and the `ability-mana-spent` condition ("if mana from a Treasure was spent to activate this ability"). A spell's `"source"` still reads the spell.
+- **One record of what a tapped permanent makes instead.** `ManaProductionRule { filter?, tapper, produces?, colorsOnly?, one?, atLeast?, times? }`, kept in `StaticAbility.manaProduction` and on a `PlayerEffect`; read by one `Game.manaProductionFor`. Absent `filter` is any permanent; a land rule says `{ type: "land" }`. `times` is Mana Reflection's and Nyxbloom's. `atLeast: 2` is Damping Sphere's. It replaces `landManaInstead` (both homes), `LandManaInstead`, and `TapManaMultiplierReplacement`.
+- **One way to lose mana.** `Game.loseUnspentMana(player, keeps?)`, the step-end loop and the new `lose-unspent-mana` effect both. Kruphix's "becomes colorless instead" and Yurlok's life loss apply to either; "you don't lose … as steps and phases end" applies only to the step's.
+- **One read of the pool.** `grantPtPerCount.unspentMana`, the `unspent-mana` condition and the `unspentMana` amount, each `{ type? }`.
+
+*Rules.*
+- **106.1, 106.1b**: {C} is a type and not a colour, so `count: "colors"` skips it and `type: "C"` finds it.
+- **106.3**: mana's source is the source of the ability or the spell, already `ManaOrigin`.
+- **106.4**: a pool empties at the end of each step and phase, and that's "losing" it. An instruction to lose unspent mana is the same loss, so a "would lose" replacement sees it and a "you don't lose … as steps and phases end" doesn't apply.
+- **106.5**: Squandered Resources on a land that could produce nothing makes nothing (its ruling).
+- **106.6, 106.6a**: replacement keeps restrictions and riders; Omnath's "becomes colorless" keeps them (its ruling).
+- **106.7**: "could produce" takes replacement effects into account and ignores costs. So a filter or a sacrificed land reads through `couldProduce`.
+- **106.12, 106.12a, 106.12b**: only a mana ability with {T} is "tapped for mana", and a replacement of it modifies the production as the ability resolves.
+- **601.2g-h, 602.2b**: an ability is paid as a spell is, so what paid it is recorded the same way.
+- **605.1a**: a mana ability needs no target and could add mana, so Squandered's and the depletion lands' are.
+- **605.3b**: a mana ability doesn't use the stack, so what paid for one isn't recorded; nothing asks.
+- **608.2h**: a spell gone from the stack is read as it last was.
+- **616.1** with Damping Sphere's ruling: of several replacements the tapper picks an order, and one that no longer applies doesn't. The engine takes the order that leaves the tapper the most mana: type changes read the unmultiplied amount, then the multipliers (a land making {C}{C} under Sphere and Reflection: {C}{C}, not {C}).
+- **702.44a** sunburst and converge (207.2c) read `count: "colors"`, so a copy (not cast) and a free cast read 0.
+
+*Moved or not, decided before building.* **Moved and deleted:** every field and clause above, 150-odd card files by a script over their very regular spellings. Deliberately not moved:
+- *`ManaUnit`'s own tags* (`restriction`, `spellGains`, `onSpend`): they ride on unspent mana, and a spent record is what's left.
+- *`phyrexianPaidWithLife`, convoke and delve counts, the journal's `mana-spent`*: not mana spent on an object ("life paid" and "tapped"), or a player's running total for a turn.
+- *What paid for X alone* (`amount:colored-mana-spent-on-x`, Soul Burn): knowing which units paid for X needs the payment to tag the X pips. Not built here.
+- *`spendAs` and the spend-only restrictions*: what mana may pay, a different question from what did.
+- *Mana Flare-style extras* (`tapped-for-mana` triggers): triggered mana abilities, not replacements (605.1b), and already one path.
+- *A second round of `false dawn`-style "spells and abilities would add"*: only tapped permanents are replaced here; False Dawn stays open unless the reader takes it honestly.
+
+*Bots.* `lose-unspent-mana` gets a target-polarity row (harm to the player losing it). Omnath's size reads through characteristics, so the eval sees it. `manaProduction` needs nothing: the options already carry what a land makes, and `couldProduce` reads the rule. No new decision kind expected.
+
+*As built (step 7, B285).*
+- `mana.ts`: `SpentMana`, `ManaSpentQuery`, `spentManaCount`, `ManaProductionRule`. `filter.ts`: `ManaSpentClause`. `Game.manaProductionRules`, `manaRuleApplies`, `landManaInsteadFor(…, wouldMake)`, `tapManaMultiplier(player, source)`, `tapWouldMake`, `loseUnspentMana`, `manaLossCostsLife`, `sacrificedManaChoices`.
+- **Moved and deleted, every user migrated:** `GameObject.manaSpentFrom`, `manaSpentColors`, `manaSpentByColor`, `lastStackManaSpentColors` and their `LastKnown` copies (`manaSpent` and `lastStackManaSpent` are now the unit lists); `CardFilter.manaFrom`, `manaSpentOfColors`, `manaSpentOfOneColor`; the amount `colorsSpentOf`; `ctx.manaSpentFromOf`, `ctx.colorsSpentOf`; `StaticAbility.landManaInstead` and the player effect's, bare type and all; `LandManaInstead`; `TapManaMultiplierReplacement`; `unspentManaBecomesColorless` (now `unspentManaBecomes: "C"`). 142 card and test files by a script, run once; a pool test refuses every removed spelling.
+- **How much moved, plainly:** the state and the card vocabulary are both one shape now, for spells and activated abilities. **Not** a generic "mana production event": only tapped permanents are replaced (106.12b), so False Dawn's "spells and abilities that would add colored mana" has no reader. And no `"this-ability"` `ObjectRef`, as the note first said: an activated ability's mana is on `lastKnownRefs.manaSpent`, read by `{ manaSpentOf: "this-ability" }` and the `ability-mana-spent` condition, so a resolution parked on a decision keeps it for free.
+- **Behaviour changes:** the mana spent on a cast is counted from the units the pool paid rather than the resolved cost's mana value, which comes to the same in every test and fuzzer game. `manaSpent`'s `from` reads a spell countered in response as it last was on the stack, where `manaSpentFrom` didn't.
+- **Damping Sphere and multipliers:** the rule reads "two or more" before any multiplier, the order leaving the tapper the most mana. Rule 616.1 lets the tapper take the other order, which only someone who wanted one {C} instead of two of the land's own mana would. The note's alternative auto-payer option wasn't built; the same fixed order was already Contamination's.
+- **Additions the proving cards needed:** `add-mana`'s `{ sacrificedCouldProduce }` (read before the cost moves it; each offer names only the lands that make its colour), the `increasePerOtherSpellByCaster` cost modifier (Damping Sphere), and `count: "most-of-one-color"`, `per` on the query.
+- Bots: `target-polarity` reads `lose-unspent-mana` as a harm to a targeted player. `effect-worth` has no row for it (0, the default, since a pool is nearly always empty when a bot weighs it). No new decision kind, so nothing to browser-check for one.
+- Scaffolder: every old output moved; it now reads the pool size lines and the two land rules. It doesn't read "if mana from a Treasure was spent to activate this ability".
+- Cards (20): Squandered Resources, Omnath, Locus of the Void (flagged); Omnath, Locus of Mana; Ozai, the Phoenix King; Damping Sphere; Ritual of Subdual; Jetmir's Fixer; Forsworn Paladin; Paragon of Modernity; Mana Short; Power Sink; Remote Farm, Saprazzan Skerry, Peat Bog, Hickory Woodlot; Doubling Cube; Glissa Sunseeker; Bladecoil Serpent; Wumpus Aberration; Clay Champion. `test/mana-reads.test.ts` covers each but Clay Champion's second ability and two of Bladecoil's three, with a pool walk for the removed spellings.
+- Keys marked built: `static:mana-pool-reads`, `mana:any-type-sacrificed-land-could-produce`, `effect:empty-mana-pool`, `replacement:tap-for-mana-produces-colorless-instead`, `cost:depletion-counter-lands`, `stat:mana-spent-to-activate-from`, `amount:colors-spent-to-activate`, `stat:mana-color-spent-count`, `amount:unspent-mana`, `effect:double-mana-pool`, `stat:colorless-mana-spent-condition`.
+- **Left unbuilt, not marked:** `effect:player-mana-ability-until-eot` (**Yavimaya Bloomsage // Channel stays flagged**): "any time you could activate a mana ability" has no object to activate, so it needs a new priority action, a source in the payment planner that isn't an object, and a client control; a real change. `filter:land-could-produce-mana-type` (Break the Ice, Obsidian Charmaw, Mana Web): `couldProduce` lives on `Game`, and `filter.ts` can't call it. `replacement:mana-production-replacement` (False Dawn, above; Damping Sphere is done). `amount:colored-mana-spent-on-x` (which units paid for X isn't recorded). `trigger:activates-ability-mana-from` (Vazi). `condition:snow-mana-of-spell-colors` (Boreal Outrider). Depletion lands go through hand activation (AUTHORING §15), as every counter-cost mana ability does. The rest of the 39 one-card keys.
+- Measured: a timed `bot:bench` (16 games, four players, 8 workers, nothing else running) played the same games (11-5), 38.1 turns on average, at 64.0 s a game and 110.9 ms a decision (220.6 s wall), against 63.8 s and 110.2 ms before (216.0 s wall), inside the run-to-run noise. Both figures are in `engine/data/bench-log.jsonl`.
 
 ### 14. Attachments (36 keys, ~55 cards)
 

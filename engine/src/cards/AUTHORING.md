@@ -418,7 +418,7 @@ from the same link.
 | `triggered: [kinship(effect, text)]` | helper | **Kinship —** (Morningtide's ability word — Waterspout Weavers, Leaf-Crowned Elder): the upkeep "you may look at the top card of your library. If it shares a creature type with this creature, you may reveal it. If you do, [effect]" — a `look-and-choose` of the top card with `filter: { sharesCreatureTypeWith: "source" }`, left on top, `then` the effect (its `target: 0` the revealed card: Leaf-Crowned Elder's `{ kind: "cast-now", target: 0, free: true }`). `text` is the last sentence without its period. The scaffolder reads the line when that sentence has no target. |
 | `tribute: N` | card field | **Tribute N** (rule 702.104 — Pharagax Giant, Ornitharch, Nessian Wilds Ravager): `tribute: 2`. As it's about to enter its controller chooses an opponent (asked only among two or more), who chooses whether it enters with N more +1/+1 counters (the `choose-creature-type` decision, `tribute: "opponent"` / `"pay"`). "When this creature enters, **if tribute wasn't paid**, …" is an ETB trigger with the `tribute-not-paid` condition (`tributeUnpaid`, kept in last-known information, so it still resolves once the creature has left). Entering some way that never asked (a token copy) is unpaid. The scaffolder reads the keyword line and the condition. |
 | `triggered: [...bushido(n)]` | helper | **Bushido N** (rule 702.45 — Saviors of Kamigawa's Samurai): two triggers, blocks and becomes blocked, sharing one +N/+N until end of turn on the source (Jukai Trainee's shape). The scaffolder reads the line. |
-| `static: [sunburst("creature" \| "artifact")]` | helper | **Sunburst** (rule 702.44 — Fifth Dawn: Suntouched Myr, Engineered Explosives, Pentad Prism): a self `enters-battlefield` replacement with `sunburst: true` — a counter per colour of mana spent to cast it, +1/+1 if it's entering as a creature by its copiable types (type-changing effects ignored, 702.44a), charge otherwise; none unless it was cast (702.44b). The argument picks the reminder text's noun. **"Modular—Sunburst"** (Arcbound Wanderer, 702.44c) is always +1/+1 counters: the modular shape with `counters: { kind: "+1/+1", amount: { colorsSpentOf: "source" } }`. The scaffolder reads both lines. |
+| `static: [sunburst("creature" \| "artifact")]` | helper | **Sunburst** (rule 702.44 — Fifth Dawn: Suntouched Myr, Engineered Explosives, Pentad Prism): a self `enters-battlefield` replacement with `sunburst: true` — a counter per colour of mana spent to cast it, +1/+1 if it's entering as a creature by its copiable types (type-changing effects ignored, 702.44a), charge otherwise; none unless it was cast (702.44b). The argument picks the reminder text's noun. **"Modular—Sunburst"** (Arcbound Wanderer, 702.44c) is always +1/+1 counters: the modular shape with `counters: { kind: "+1/+1", amount: { manaSpentOf: "source", count: "colors" } }`. The scaffolder reads both lines. |
 | `triggered: [soulshift(n)]` | helper | **Soulshift N** (rule 702.46 — Kamigawa's Spirits): the dies trigger, "you may return target Spirit card with mana value N or less from your graveyard to your hand" — it may target itself. The scaffolder reads the line. |
 | `{ kind: "paradigm" }` | effect | **Paradigm** (rule 702.192a — Germination Practicum, Decorum Dissertation): last in the spell's `sequence`, with `exileOnResolve: true` on the card. The first spell with its name its controller has resolve gives them an emblem: at the beginning of each of their precombat main phases, a copy made in exile that they may cast free. A later one with the name, or the copy itself, only exiles. |
 | `{ kind: "epic" }` | effect | **Epic** (rule 702.50 — Enduring Ideal, Endless Swarm): last in the spell's `sequence`. As it resolves its controller can't cast spells for the rest of the game (`PlayerState.cantCastSpellsForGame`), and gets an emblem whose upkeep trigger copies the spell as it resolved — targets, {X}, choices — without its epic ability, targets open to change. A Twincast copy keeps epic and sets up its own. `keyword-epic.test.ts`. |
@@ -790,8 +790,8 @@ commander tax and {X} count, a free cast is 0, convoked creatures aren't
 mana), or of a target spell, read as it last was on the stack once it has
 left (rule 608.2h — Mana Sculpt's delayed `{ manaSpentOf: 0 }` after
 countering it, as Mana Drain's `{ manaValueOf: 0 }`);
-`{ colorsSpentOf: ref }` — how many **colours** of mana were spent to cast it,
-converge (rule 207.2c — Painful Truths: `{ colorsSpentOf: "source" }`):
+`{ manaSpentOf: ref, count: "colors" }` — how many **colours** of mana were spent to cast it,
+converge (rule 207.2c — Painful Truths: `{ manaSpentOf: "source", count: "colors" }`):
 colourless isn't one, mana for cost increases and additional costs counts,
 a copy or a free cast is 0 (the converge rulings), kept by the permanent a
 spell becomes;
@@ -2976,7 +2976,7 @@ Riddle Master), and "without mana value of the chosen quality" a `not` of it
 subtypes, supertype, notSupertype, name, notName, colors, notColors, colorless,
 manaValue, manaValueParity, power, powerParity, toughness, basePower, baseToughness, counters, controlledBy,
 ownedBy, keyword, notKeyword, tapped, token, isCommander, equipped, enchanted,
-modified, anyOf, manaSpent, manaFrom, putIntoGraveyardFromLibraryThisTurn, putIntoGraveyardThisTurn, blockedThisTurn,
+modified, anyOf, manaSpent, putIntoGraveyardFromLibraryThisTurn, putIntoGraveyardThisTurn, blockedThisTurn,
 discardedThisTurn, drawnThisTurn, enteredThisTurn, turnedFaceUpThisTurn, controlledContinuously, controlledSinceTurnBegan, controlledByAsSetUp, attackedThisTurn, attackedThisCombat, attackedYouThisTurn, attackedDuringControllersLastTurn, attackedBattleThisTurn, damagedThisTurnBy, excessDamageThisTurn,
 dealtDamageToCreatureThisTurn, dealtDamageThisTurn, cast, castBy, castFrom, castVia, enteredFrom,
 putThereBySource, sharesCardTypeWith, sharesPermanentTypeWith, sharesCreatureTypeWith, sharesLandTypeWith, sameNameWith, sameNameAsAnother, thisWay, attacking, blocking, blockingRelation, goaded, suspected, saddled, saddledSource, crewedSource, crewedBySource, enlistedThisCombat, monstrous, renowned, hasManaAbility, hasAbilities,
@@ -3146,22 +3146,18 @@ to — Conqueror's Flail's "as long as this Equipment is attached to a creature"
 `source` condition of `{ attachedTo: { type: "creature" } }`. **`attachments: { filter?, atLeast?, otherThanSource? }`** asks what's attached to it, whoever controls that: Daybreak Coronet's and Face of Divinity's "another Aura attached" (`otherThanSource`), Bride's Gown's `controls` of a creature with a named Equipment. **`sharesColorWithHost`** and **`sharesCreatureTypeWithHost`** are a static's live read of what the source is attached to (Konda's Banner). **`hostOfSource: false`** is "other than enchanted creature" on a target; an edict's is `sacrifice`'s `exceptHost`. The `of-player` condition's `player: "host-controller"` is "its controller" for a static (So Tiny), and `controls`' `excludeHost` "another creature" beside the host (Favorable Destiny). **`attachedToObject: n`** (an effect's filter only) is "attached to **that creature** / to **target** …": the object or player in slot `n` as the effect applies — Hubris's "return target creature and all Auras attached to it" is a simultaneous `sequence` of `return-to-hand-all` over `{ subtype: "Aura", attachedToObject: 0 }` then `return-to-hand` of slot 0 (the attachments' step first, while they're still attached), Blastfire Bolt's "destroy all Equipment attached to that creature" a `destroy-all` after the damage; the slot illegal as it resolves, it matches nothing (608.2b). **`attachedToPlayer: "you" | "opponent"`** is an Aura on a player (rule 303.4) — Witchbane Orb's "destroy all Curses attached to you". "Up to one target Equipment **attached to that creature**" (Fiery Annihilation) is a target relation instead: `attachedToThan: true` on an `other` slot (§7). `isSource: true` is the source itself, so "**for each** Equipment attached to it" counts `{ subtype: "Equipment", attachedTo: { isSource: true } }` (Goblin Gaveleer's `grantPtPerCount`, Kemba, Kha Regent's `countOf`) and "attached to equipped creature" `attachedTo: { hostOfSource: true }`. `equipmentAttached: NumCompare` counts the Equipment on it, whoever controls them — Balan's "as long as two or more Equipment are attached to it" is a `source` condition of `{ equipmentAttached: { op: "gte", n: 2 } }` (on the battlefield only). `equipped` / `enchanted` ask whether an Equipment / Aura is
 attached, whoever controls it (`enchantedBy: "you"` — an Aura *you* control); `modified` is rule 700.9 — a counter, an
 Equipment, or an Aura controlled by the permanent's *own* controller.
-`manaSpent` compares the mana spent to cast it (The Emperor of Palamecia's
-cast trigger filters on `{ manaSpent: { op: "gte", n: 4 } }`). `manaFrom` asks
-where that mana came from: `{ type: "artifact" }` is "if mana from an artifact
+`manaSpent` is the one read of what was spent to cast it, a list of clauses that must all hold, each a `ManaSpentQuery` (`type`, `from`, `count`, `per`) and an `amount` (default "at least one"). `[{ amount: { op: "gte", n: 4 } }]` is The Emperor of Palamecia's "at least four mana". `from` is where it came from: `{ type: "artifact" }` is "if mana from an artifact
 was spent to cast it", `{ subtype: "Treasure" }` "…from a Treasure",
 `{ fromSource: true }` "using mana produced by [this]" (Barracks of the
-Thousand), and `atLeast` (default 1) how many units ("two or more mana from creatures" is `{
-type: "creature", atLeast: 2 }`). Each unit is read off its source as it made
+Thousand), and `amount` how many units ("two or more mana from creatures" is `{ from: { type:
+"creature" }, amount: { op: "gte", n: 2 } }`). `type` names a mana type: `[{ type: "C", amount: { op: "eq", n: 0 } }]` is "if {C} wasn't spent" (Wumpus Aberration). Each unit is read off its source as it made
 the mana — a Treasure sacrificed for it was still a Treasure — and extra mana a
 triggered mana ability added is that ability's permanent's, not the one tapped.
-Kept by the permanent the spell becomes, like `manaSpent`. `manaSpentOfColors`
-is **adamant** and its kin — at least that much of each colour named was spent
-to cast it: "if at least three white mana was spent to cast this spell" is `{
-W: 3 }` (Silverflame Ritual's resolving `source` condition; a Paladin's
+Kept by the permanent the spell becomes. **Adamant** and its kin are one clause a colour:
+"if at least three white mana was spent to cast this spell" is `[{ type: "W", amount: { op: "gte", n: 3 } }]` (Silverflame Ritual's resolving `source` condition; a Paladin's
 "enters with a +1/+1 counter" is an enters replacement gated on it), "if
-{U}{B} was spent" `{ U: 1, B: 1 }`; `manaSpentOfOneColor: 3` is "three mana
-of the same color" (Henge Walker). A copy of a spell had no mana spent
+{U}{B} was spent" a clause for each; `count: "most-of-one-color"` is "three mana
+of the same color" (Henge Walker). What paid for an **activated ability** is the `ability-mana-spent` condition (`clauses`, the same clauses: Jetmir's Fixer) and `{ manaSpentOf: "this-ability" }` (rule 602.2b). A copy of a spell had no mana spent
 (`adamant.test.ts`). `putIntoGraveyardFromLibraryThisTurn` is a
 graveyard card that got there from a library this turn — milled, surveilled,
 or any other library-to-graveyard move, never discarded or destroyed (Captain
@@ -4158,14 +4154,15 @@ with `amount: 2` (Firemind Vessel, Interplanar Beacon); `different: 2` with
 `amount: 4` is "two mana of any one color and two mana of any other color" (Open
 the Omenpaths). `amount` is a number. `mana-different-colors.test.ts`.
 
-**A land's mana replaced** (rules 106.12, 614.1a): `StaticAbility.landManaInstead`,
-a list of `{ filter?, produces, tapper, colorsOnly?, one? }`, or the same one entry as
-a `player-effect`'s `landManaInstead` for a while (a bare type there is Deep Water's
-"if you tap a land you control"). `produces` is a mana type or `"any-color"`, the
+**What a tapped permanent makes instead** (rules 106.12b, 614.1a): `StaticAbility.manaProduction`,
+a list of `{ filter?, produces?, tapper, colorsOnly?, one?, atLeast?, times? }`, or the same one entry as
+a `player-effect`'s `manaProduction` for a while. `filter` absent is any permanent; a land rule says `{ type: "land" }`. `atLeast` is "for two or more mana" (Damping Sphere). `produces` is a mana type or `"any-color"`, the
 tapper's pick (Pulse of Llanowar); `one` is "and amount" (Contamination, Harvest
 Mage); `colorsOnly` is "any other color", leaving {C} alone (Hall of Gemstone). In a
 filter, "you" is the permanent's controller or the effect's. What triggered mana
-abilities add isn't changed. `land-mana-change.test.ts`.
+abilities add isn't changed. `land-mana-instead.test.ts`, `mana-reads.test.ts`.
+
+**Unspent mana** (rule 106.4): the `{ unspentMana: PlayerRef, type? }` amount, `grantPtPerCount`'s `unspentMana: { type? }` (Omnath, Locus of the Void) and the `unspent-mana` condition (Ozai). The `lose-unspent-mana` effect (`who` or `target`) is the same loss a step's end causes: "if you would lose unspent mana" replaces it and "you don't lose … as steps and phases end" doesn't stop it. `add-mana`'s `{ sacrificedCouldProduce: filter }` is "any type the sacrificed land could produce" (Squandered Resources, rule 106.7), read just before the cost takes it; the offer names the land with the colour.
 
 **Mana abilities** (`isManaAbility`, rule 605.1a): an ability with no
 targets, no `resolve`, and an `add-mana` effect (or a `sequence` of them),
@@ -4359,7 +4356,7 @@ the effect is a single `add-mana`: `pool.test` holds every card to both.
 
 **"If you tap a permanent for mana, it produces twice as much of that mana
 instead"** (Mana Reflection; three times — Nyxbloom Ancient) is the static
-replacement `{ event: "tap-for-mana", instead: { modify: { times } } }` (rule 106.12b): only a
+rule `manaProduction: [{ tapper: "you", times }]` (rule 106.12b): only a
 `{T}` mana ability its controller activates, only its own mana (never a
 triggered mana ability's extra — the ruling), every unit with what it
 carries; several compound. An "any colour" unit becomes `multiplier` of
@@ -5048,7 +5045,7 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   `alsoImprovise`). `prowl: "{2}{R}"` is Hunting Velociraptor's "Dinosaur spells you cast have
   prowl {2}{R}" — an alternative cost under the printed prowl's condition, answering
   `self-prowl-paid`. `firstEachTurn` reaches these as the spell is cast too (Peri Brown's "the
-  first historic spell you cast each turn has convoke"); a `filter` with `castFrom` or `manaFrom` asks each earlier spell as it was cast (Wild-Magic Sorcerer's "the first spell you cast from exile each turn has cascade" is `{ filter: { castFrom: "exile" }, firstEachTurn: true }`, Rain of Riches' "… that mana from a Treasure was spent to cast" `{ manaFrom: { subtype: "Treasure" } }`). `freerunning` / `webSlinging` (a cost) give the spells that
+  first historic spell you cast each turn has convoke"); a `filter` with `castFrom` or `manaSpent` asks each earlier spell as it was cast (Wild-Magic Sorcerer's "the first spell you cast from exile each turn has cascade" is `{ filter: { castFrom: "exile" }, firstEachTurn: true }`, Rain of Riches' "… that mana from a Treasure was spent to cast" `{ manaFrom: { subtype: "Treasure" } }`). `freerunning` / `webSlinging` (a cost) give the spells that
   alternative cost: Ezio Auditore da Firenze's "Assassin spells you cast have freerunning {B}{B}"
   (`{ filter: { subtype: "Assassin" }, freerunning: "{B}{B}" }`), Amazing Spider-Man's "each
   legendary spell you cast that's one or more colors has web-slinging {G}{W}{U}" ("one or more
@@ -5073,7 +5070,7 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   operand works for a granted trigger but fails closed for granted keywords.
   `splitSecond: true` gives them split second — Shadow the Hedgehog's "each
   spell you cast has split second if mana from an artifact was spent to cast
-  it" is `{ filter: { manaFrom: { type: "artifact" } }, splitSecond: true }`.
+  it" is `{ filter: { manaSpent: [{ from: { type: "artifact" } }] }, splitSecond: true }`.
   `casualty: N` gives them casualty N (rule 702.153 — see `casualty` in §3):
   Silverquill, the Disputant's "each instant and sorcery spell you cast has
   casualty 1" is `{ filter: { typesAnyOf: ["instant", "sorcery"] }, casualty:
@@ -6531,19 +6528,19 @@ The `prevent-damage` family makes the same record.
   makes the most, worked out (`token-replacements.ts`), with doublers last. A
   replacement the player may decline ("you may instead", Jinnie Fay, Mirrormind
   Crown) isn't this vocabulary: nothing asks mid-creation.
-- `{ event: "tap-for-mana", instead: { modify: { times } } }` — "if you tap a permanent for mana,
+- `manaProduction: [{ tapper: "you", times }]` — "if you tap a permanent for mana,
   it produces twice as much of that mana instead" (Mana Reflection, Nyxbloom
   Ancient): see "Triggered mana abilities" in §8.
-- `landManaInstead: [{ filter?, produces, tapper }]` (a static field, not a
+- `manaProduction: [{ filter?, produces, tapper }]` (a static field, not a
   `replacement`) — a land tapped for mana producing another type instead
   (rules 106.12, 614.1a): Infernal Darkness's "if a land is tapped for mana,
-  it produces {B} instead of any other type" is `[{ produces: "B", tapper:
+  it produces {B} instead of any other type" is `[{ filter: { type: "land" }, produces: "B", tapper:
   "any" }]`; Reality Twist's "Plains produce {R}, Swamps produce {G}, …" is
   an entry a land type (`filter: { subtype: "Plains" }`). `tapper: "you"` is
   "if **you** tap a land". The amount is kept; mana a triggered mana ability
   adds on the tap isn't the land's. Deep Water's turn-long "{U}: Until end of
   turn, if you tap a land you control for mana, it produces {U} instead" is
-  the `player-effect` field `landManaInstead: "U"`. The auto-payer and the
+  the `player-effect` field `manaProduction: { filter: { type: "land", controlledBy: "you" }, produces: "U", tapper: "you" }`. The auto-payer and the
   offered activations see the new type. Of several, the newest applies
   (rule 616.1). Not "one mana of a color of your choice instead of any other
   type and amount" (Harvest Mage).
@@ -7262,8 +7259,8 @@ Delete an entry in the same commit as the feature that retires it.
   opponents on one token (`Game.tokenCreatorAfterRedirects`). No damage
   **redirection** to a third object (Harm's Way).
 - **Snow mana of a spell's colours** — Boreal Outrider's "if {S} of any of
-  that spell's colors was spent": a spell records where its mana came from
-  (`manaSpentFrom`), not which unit was which colour. Snow mana itself
+  that spell's colors was spent": a clause can't yet read the spell's colours
+  for its `type`. Snow mana itself
   (`{S}`) is built — see §4.
 - **A static can't pick what it affects by power or toughness.** Tetsuko
   Umezawa's "creatures you control with power or toughness 1 or less can't

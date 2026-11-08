@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4722 already implemented / 278 missing (marks refreshed 2026-11-08)
+4725 already implemented / 275 missing (marks refreshed 2026-11-08)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -3499,7 +3499,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3506  Reckless Barbarian                       {1}{R}           Creature — Dragon Barbarian
 [x]  3507  Krang, Utrom Warlord                     {9}              Legendary Artifact Creature — Utrom Robot
 [x]  3508  Take Up the Shield                       {1}{W}           Instant
-[ ]  3509  Doubling Cube                            {2}              Artifact
+[x]  3509  Doubling Cube                            {2}              Artifact
 [x]  3510  Chrome Host Seedshark                    {2}{U}           Creature — Phyrexian Shark
 [x]  3511  Raid Bombardment                         {2}{R}           Enchantment
 [ ]  3512  Lulu, Stern Guardian                     {2}{U}           Legendary Creature — Human Wizard
@@ -3719,7 +3719,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3726  Secrets of the Dead                      {2}{U}           Enchantment
 [x]  3727  Summon: Leviathan                        {4}{U}{U}        Enchantment Creature — Saga Leviathan
 [x]  3728  Korlessa, Scale Singer                   {G}{U}           Legendary Creature — Dragon Bard
-[ ]  3729  Omnath, Locus of Mana                    {2}{G}           Legendary Creature — Elemental
+[x]  3729  Omnath, Locus of Mana                    {2}{G}           Legendary Creature — Elemental
 [x]  3730  Deadly Tempest                           {4}{B}{B}        Sorcery
 [x]  3731  MacCready, Lamplight Mayor               {W}{B}           Legendary Creature — Human Advisor
 [x]  3732  Ghostly Dancers                          {3}{W}{W}        Creature — Spirit
@@ -3851,7 +3851,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3858  Illusionist's Gambit                     {2}{U}{U}        Instant
 [x]  3859  Unctus, Grand Metatect                   {1}{U}{U}        Legendary Artifact Creature — Phyrexian Vedalken
 [x]  3860  Rikku, Resourceful Guardian              {2}{U}           Legendary Creature — Human Artificer
-[ ]  3861  Ozai, the Phoenix King                   {2}{B}{B}{R}{R}  Legendary Creature — Human Noble
+[x]  3861  Ozai, the Phoenix King                   {2}{B}{B}{R}{R}  Legendary Creature — Human Noble
 [x]  3862  Broodcaller Scourge                      {5}{G}{G}        Creature — Dragon
 [x]  3863  Rite of Oblivion                         {W}{B}           Sorcery
 [x]  3864  Hunting Velociraptor                     {2}{R}           Creature — Dinosaur

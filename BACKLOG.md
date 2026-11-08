@@ -71,7 +71,7 @@ section keeps only what to do next.
   Jean-Luc Picard, Luminary (not in the snapshot yet); and re-read the vanilla preview commons
   (Starfleet Crew, Warship Flight Crew, Defense Force Aggressor) and Võx, Child of the Collective
   (blocked, also waiting on a ruling) against the released text.
-- **Need-key themes step 7 continues** (`docs/plans/need-key-themes.md`): theme 11 (combat rules, B284) done; next the smaller themes (12, 13, 14, 16, 8) as `--by-rank` reaches their cards.
+- **Need-key themes step 7 continues** (`docs/plans/need-key-themes.md`): theme 13 (mana, B285) done; next the smaller themes (12, 14, 16, 8) as `--by-rank` reaches their cards.
 - **Next: work down the need keys** (the set walk ended 2026-10-27 with batch 234; its record moved to `COMPLETED.md`) (`docs/plans/need-keys-after-the-walk.md`,
   in progress; the tooling, the model trial, and Phase 1's merge and existence check landed
   2026-10-27): next, Phase 1 step 2, the recheck round. 863 cards were frozen 2026-10-27 into nine
@@ -585,6 +585,7 @@ section keeps only what to do next.
 
 ## Engine rules gaps
 
+- **Adamant's colour word and a text change** — Sleight of Mind can't change the colour word in "at least three white mana": `text-change.ts` doesn't read a `manaSpent` clause's `type` (`docs/engine-gaps.md`).
 - **Token events a `may` replacement doesn't reach (Moonlit Meditation)** — amass, incubate, encore, myriad and populate make tokens without offering a `becomes` (`docs/engine-gaps.md`).
 
 One line each; the detail (rule numbers, code sites, the cards each blocks) is in
