@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4713 already implemented / 287 missing (marks refreshed 2026-11-08)
+4716 already implemented / 284 missing (marks refreshed 2026-11-08)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2374,7 +2374,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2381  Two-Handed Axe // Sweeping Cleave        {2}{R} // {1}{R} Artifact — Equipment // Instant — Adventure
 [x]  2382  Greater Auramancy                        {1}{W}           Enchantment
 [x]  2383  Steelbane Hydra                          {X}{G}{G}        Creature — Turtle Hydra
-[ ]  2384  Darksteel Monolith                       {8}              Artifact
+[x]  2384  Darksteel Monolith                       {8}              Artifact
 [ ]  2385  Sphinx of the Second Sun                 {6}{U}{U}        Creature — Sphinx
 [x]  2386  Ringsight                                {1}{U}{B}        Sorcery
 [x]  2387  Together Forever                         {W}{W}           Enchantment
@@ -3250,7 +3250,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3257  Misleading Signpost                      {2}{U}           Artifact
 [x]  3258  Hour of Promise                          {4}{G}           Sorcery
 [ ]  3259  Tenuous Truce                            {1}{W}           Enchantment — Aura
-[ ]  3260  Thornvault Forager                       {1}{G}           Creature — Squirrel Ranger
+[x]  3260  Thornvault Forager                       {1}{G}           Creature — Squirrel Ranger
 [x]  3261  Tanglepool Bridge                        {0}              Artifact Land
 [x]  3262  Duress                                   {B}              Sorcery
 [x]  3263  Goblin Instigator                        {1}{R}           Creature — Goblin Rogue
@@ -3351,7 +3351,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3358  Mortality Spear                          {2}{B}{G}        Instant
 [x]  3359  Quasiduplicate                           {1}{U}{U}        Sorcery
 [x]  3360  Daily Bugle Building                     {0}              Land
-[ ]  3361  Bane of Bala Ged                         {7}              Creature — Eldrazi
+[x]  3361  Bane of Bala Ged                         {7}              Creature — Eldrazi
 [ ]  3362  Songbirds' Blessing                      {3}{W}           Enchantment — Aura
 [x]  3363  Rhys the Redeemed                        {G/W}            Legendary Creature — Elf Warrior
 [x]  3364  Increasing Devotion                      {3}{W}{W}        Sorcery
