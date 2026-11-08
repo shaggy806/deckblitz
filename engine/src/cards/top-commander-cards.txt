@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4708 already implemented / 292 missing (marks refreshed 2026-11-08)
+4710 already implemented / 290 missing (marks refreshed 2026-11-08)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2917,7 +2917,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2924  Unholy Grotto                            {0}              Land
 [x]  2925  Farmer Cotton                            {X}{G}{W}        Legendary Creature — Halfling Peasant
 [x]  2926  Ink-Eyes, Servant of Oni                 {4}{B}{B}        Legendary Creature — Rat Ninja
-[ ]  2927  Nykthos Paragon                          {4}{W}{W}        Enchantment Creature — Human Soldier
+[x]  2927  Nykthos Paragon                          {4}{W}{W}        Enchantment Creature — Human Soldier
 [x]  2928  Crystalline Crawler                      {4}              Artifact Creature — Construct
 [x]  2929  Derevi, Empyrial Tactician               {G}{W}{U}        Legendary Creature — Bird Wizard
 [x]  2930  Legion Loyalty                           {6}{W}{W}        Enchantment
@@ -3264,7 +3264,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3271  Mistblade Shinobi                        {2}{U}           Creature — Human Ninja
 [x]  3272  Firdoch Core                             {3}              Kindred Artifact — Shapeshifter
 [x]  3273  Grievous Wound                           {3}{B}{B}        Enchantment — Aura
-[ ]  3274  Ezuri, Stalker of Spheres                {2}{G}{U}        Legendary Creature — Phyrexian Elf Warrior
+[x]  3274  Ezuri, Stalker of Spheres                {2}{G}{U}        Legendary Creature — Phyrexian Elf Warrior
 [x]  3275  Slagwoods Bridge                         {0}              Artifact Land
 [ ]  3276  Vorinclex // The Grand Evolution         {5}              Legendary Creature — Phyrexian Praetor // Enchantment — Saga
 [x]  3277  Test of Endurance                        {2}{W}{W}        Enchantment
