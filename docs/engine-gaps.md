@@ -524,6 +524,8 @@ doesn't use, so a Sol Ring can't be tapped for a tap cost while lands pay the ma
 601.2h pays costs in any order. Existing behaviour, more visible since lands can pay these costs. Found 2026-11-02; not
 reported from play.
 
+**Token events a `may` replacement doesn't reach (Moonlit Meditation).** `would-create-token`'s `becomes` with `may` is asked at the two effects that make tokens as a resolution step, `create-token` and `create-token-copy` (a batch's copies aside). Tokens made inside another operation, amass (701.47), incubate, encore, myriad, populate and the like, go straight through `Game.createTokens`, which can't stop to ask: the replacement isn't offered for them, and only the tokens of a token doubler apply there (rule 614.1a). Moonlit Meditation's the only card with it so far.
+
 ## Latent
 
 The engine departs from the rules here, but no pool card reaches it yet: fix each when a card

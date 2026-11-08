@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4718 already implemented / 282 missing (marks refreshed 2026-11-08)
+4721 already implemented / 279 missing (marks refreshed 2026-11-08)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -4131,7 +4131,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4138  Jan Jansen, Chaos Crafter                {R}{W}{B}        Legendary Creature — Gnome Artificer
 [ ]  4139  Barrowgoyf                               {2}{B}           Creature — Lhurgoyf
 [x]  4140  Tavern Scoundrel                         {1}{R}           Creature — Human Rogue
-[ ]  4141  Alms Collector                           {3}{W}           Creature — Cat Cleric
+[x]  4141  Alms Collector                           {3}{W}           Creature — Cat Cleric
 [x]  4142  Hidden Strings                           {1}{U}           Sorcery
 [x]  4143  Merfolk Sovereign                        {1}{U}{U}        Creature — Merfolk Noble
 [x]  4144  Kor Cartographer                         {3}{W}           Creature — Kor Scout
@@ -4418,7 +4418,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4425  Primordial Sage                          {4}{G}{G}        Creature — Spirit
 [x]  4426  Zuko, Exiled Prince                      {3}{R}           Legendary Creature — Human Noble
 [x]  4427  Titan's Strength                         {R}              Instant
-[ ]  4428  The Golden Throne                        {4}              Legendary Artifact
+[x]  4428  The Golden Throne                        {4}              Legendary Artifact
 [x]  4429  Dream Fracture                           {1}{U}{U}        Instant
 [x]  4430  Jade Orb of Dragonkind                   {2}{G}           Artifact
 [x]  4431  Impervious Greatwurm                     {7}{G}{G}{G}     Creature — Wurm
@@ -4807,7 +4807,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4814  Wondrous Crucible                        {7}              Artifact
 [ ]  4815  Filigree Vector                          {3}{W}           Artifact Creature — Phyrexian Construct
 [x]  4816  Stormscale Scion                         {4}{R}{R}        Creature — Dragon
-[ ]  4817  Moonlit Meditation                       {2}{U}           Enchantment — Aura
+[x]  4817  Moonlit Meditation                       {2}{U}           Enchantment — Aura
 [x]  4818  Liliana Vess                             {3}{B}{B}        Legendary Planeswalker — Liliana
 [x]  4819  Bumi, Eclectic Earthbender               {3}{G}{G}        Legendary Creature — Human Noble Ally
 [x]  4820  Tale's End                               {1}{U}           Instant

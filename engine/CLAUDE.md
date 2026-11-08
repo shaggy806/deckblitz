@@ -63,6 +63,7 @@ Read a file's entry before changing that file; you don't need the rest.
   anything its *text* says — abilities, keywords, statics, `copyOnEnter` and the rest — which
   is another card's after an exchange of text boxes (layer 3, rule 612.5 — Deadpool). An
   ability read through `printedCardName` is a bug that only an exchanged permanent shows.
+- **A replacement says what happens through one `instead`** (`replacements.ts`): `{ effect }` (the event never happens, 614.6), `{ modify, also? }` (it does, changed), `{ prevent }`, `{ redirect }`. A resolved one is an `ActiveReplacement` on one list, `GameState.activeReplacements` (the `replacement-effect` and the `prevent-damage` family make them), with the shared `Expiry` and `next` / `left` for shields. Don't add a per-event amount field or a new resolved-replacement field on `PlayerEffect`.
 - **A permission to play a card from somewhere is one record** (`play-permission.ts`): `PlayTerms`, kept as a static's `mayPlay`, a `PlayerEffect.mayPlay`, a card's `playPermission` or its `mayPlaySelf`, and read only through `Game.playOptions`, so a new rider works from every zone. Don't add a zone-specific field, or a new `*FromGraveyard` static.
 - **`"sideEffects": false`** holds only because no engine module does anything at import time
   but define things. Keep it so, or every page ships the whole card pool.

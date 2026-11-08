@@ -11689,4 +11689,32 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: [] },
     }),
   ),
+  preset(
+    'Moonlit Meditation: you choose the first token event of the turn',
+    board({
+      you: { bf: ['Grizzly Bears', { name: 'Moonlit Meditation', attach: 'Grizzly Bears' }, 'Plains*2'], hand: ['Raise the Alarm'] },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    'The Golden Throne: your life total becomes 1 instead of losing',
+    board({
+      you: { bf: ['The Golden Throne', 'Mountain*5'], hand: ['Lava Axe'], life: 4 },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    'Soul-Scar Mage: damage becomes -1/-1 counters',
+    board({
+      you: { bf: ['Soul-Scar Mage', 'Mountain'], hand: ['Lightning Bolt'] },
+      opp: { bf: ['Hill Giant'] },
+    }),
+  ),
+  preset(
+    'Stunning Reversal: the next loss this turn is replaced once',
+    board({
+      you: { bf: ['Swamp*4', 'Mountain*5'], hand: ['Stunning Reversal', 'Lava Axe'], life: 4 },
+      opp: { bf: [] },
+    }),
+  ),
 ]

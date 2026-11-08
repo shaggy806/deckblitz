@@ -71,7 +71,7 @@ section keeps only what to do next.
   Jean-Luc Picard, Luminary (not in the snapshot yet); and re-read the vanilla preview commons
   (Starfleet Crew, Warship Flight Crew, Defense Force Aggressor) and Võx, Child of the Collective
   (blocked, also waiting on a ruling) against the released text.
-- **Need-key themes step 7 continues** (`docs/plans/need-key-themes.md`): theme 10 (play permissions, B282) done; next theme 9 ("instead" replacements), then theme 11 (combat records), then the smaller themes.
+- **Need-key themes step 7 continues** (`docs/plans/need-key-themes.md`): theme 9 ("instead" replacements, B283) done; next theme 11 (combat records), then the smaller themes.
 - **Next: work down the need keys** (the set walk ended 2026-10-27 with batch 234; its record moved to `COMPLETED.md`) (`docs/plans/need-keys-after-the-walk.md`,
   in progress; the tooling, the model trial, and Phase 1's merge and existence check landed
   2026-10-27): next, Phase 1 step 2, the recheck round. 863 cards were frozen 2026-10-27 into nine
@@ -584,6 +584,8 @@ section keeps only what to do next.
   template matches sentences, not meaning, so each new card is read against its Oracle text.
 
 ## Engine rules gaps
+
+- **Token events a `may` replacement doesn't reach (Moonlit Meditation)** — amass, incubate, encore, myriad and populate make tokens without offering a `becomes` (`docs/engine-gaps.md`).
 
 One line each; the detail (rule numbers, code sites, the cards each blocks) is in
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail

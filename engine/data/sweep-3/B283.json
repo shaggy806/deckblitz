@@ -1,0 +1,134 @@
+{
+  "batch": "B283",
+  "status": "done",
+  "ranks": "Need-key themes step 7, third piece (docs/plans/need-key-themes.md, 2026-11-08): one \"instead\" and one resolved-replacement record (engine/src/replacements.ts).",
+  "authored": [
+    {
+      "name": "Moonlit Meditation",
+      "files": [
+        "engine/src/cards/pool/moonlit-meditation.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Wolverine, Fierce Fighter",
+      "files": [
+        "engine/src/cards/pool/wolverine-fierce-fighter.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Doc Samson, Super Psychiatrist",
+      "files": [
+        "engine/src/cards/pool/doc-samson-super-psychiatrist.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Quantum Riddler",
+      "files": [
+        "engine/src/cards/pool/quantum-riddler.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "The Golden Throne",
+      "files": [
+        "engine/src/cards/pool/the-golden-throne.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Stunning Reversal",
+      "files": [
+        "engine/src/cards/pool/stunning-reversal.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Isengard Unleashed",
+      "files": [
+        "engine/src/cards/pool/isengard-unleashed.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Forethought Amulet",
+      "files": [
+        "engine/src/cards/pool/forethought-amulet.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Soul-Scar Mage",
+      "files": [
+        "engine/src/cards/pool/soul-scar-mage.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Hullbreacher",
+      "files": [
+        "engine/src/cards/pool/hullbreacher.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Blood Scrivener",
+      "files": [
+        "engine/src/cards/pool/blood-scrivener.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Alms Collector",
+      "files": [
+        "engine/src/cards/pool/alms-collector.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Eligeth, Crossroads Augur",
+      "files": [
+        "engine/src/cards/pool/eligeth-crossroads-augur.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Plagiarize",
+      "files": [
+        "engine/src/cards/pool/plagiarize.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Nissa's Chosen",
+      "files": [
+        "engine/src/cards/pool/nissas-chosen.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Necromancer's Magemark",
+      "files": [
+        "engine/src/cards/pool/necromancers-magemark.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Eruth, Tormented Prophet",
+      "files": [
+        "engine/src/cards/pool/eruth-tormented-prophet.ts"
+      ],
+      "tested": true
+    },
+    {
+      "name": "Quest for Pure Flame",
+      "files": [
+        "engine/src/cards/pool/quest-for-pure-flame.ts"
+      ],
+      "tested": true
+    }
+  ],
+  "blocked": []
+}

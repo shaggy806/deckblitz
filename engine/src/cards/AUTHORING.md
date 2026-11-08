@@ -2186,7 +2186,7 @@ Reignited), `prevent-all-combat-damage` (Fog; `by: CardFilter` is only what
 sources matching it would deal — Arachnogenesis's "by non-Spider creatures", matched as
 each damage would be dealt, rule 615.1),
 `prevent-damage-to-you { by }` (Deep Wood's "prevent all damage that would be dealt to you this turn by attacking creatures", Scarecrow's "by creatures with flying": combat and noncombat damage to you the player, not your permanents, each source matched as its damage would be dealt — `attacked-this-step.test.ts`),
-`prevent-damage { target, amount, combatOnly? }` (Healing Salve; `target` may be `"source"`, and `amount: "all"` is "prevent all damage that would be dealt to [it] this turn", never used up — Gideon Jura's 0. A shield on an object covers only that object, not the card back from another zone, rule 400.7). The untargeted "prevent the next 2 damage that would be dealt to you this turn" (Conservator, Shield of the Ages; "… combat damage …" — Decorated Griffin) is `damage-rule`'s `{ to: { players: "you" }, amount: 2 }` (`combat: true`), below. Prevention over the permanents a filter matches **as it resolves** — a fixed set, where `damage-rule`'s `permanents` is asked as the damage would be dealt — is a `for-each-permanent` (`simultaneous`) putting a `prevent-damage` `"all"` shield on each: Mutational Advantage's "permanents you control with counters on them gain hexproof and indestructible until end of turn. Prevent all damage that would be dealt to **those permanents** this turn" (the ruling: one that gets a counter later isn't covered, one that loses its counters stays covered). `prevent-damage-each-matching.test.ts`.
+`prevent-damage { target, amount, combatOnly? }` (kept as an `ActiveReplacement`; Healing Salve; `target` may be `"source"`, and `amount: "all"` is "prevent all damage that would be dealt to [it] this turn", never used up — Gideon Jura's 0. A shield on an object covers only that object, not the card back from another zone, rule 400.7). The untargeted "prevent the next 2 damage that would be dealt to you this turn" (Conservator, Shield of the Ages; "… combat damage …" — Decorated Griffin) is `damage-rule`'s `{ to: { players: "you" }, amount: 2 }` (`combat: true`), below. Prevention over the permanents a filter matches **as it resolves** — a fixed set, where `damage-rule`'s `permanents` is asked as the damage would be dealt — is a `for-each-permanent` (`simultaneous`) putting a `prevent-damage` `"all"` shield on each: Mutational Advantage's "permanents you control with counters on them gain hexproof and indestructible until end of turn. Prevent all damage that would be dealt to **those permanents** this turn" (the ruling: one that gets a counter later isn't covered, one that loses its counters stays covered). `prevent-damage-each-matching.test.ts`.
 `prevent-damage-divided { from, combatOnly? }` (rules 601.2d, 615.7 — Remedy's "prevent the next 5 damage that would be dealt this turn to any number of targets, divided as you choose"): each target of the `any-number` group at `from` gets a shield of its share, at least 1 each; give the card or ability `divided: { total: 5, slot: 0, of: "damage to prevent" }` and the group `max: 5` (`prevent-next-damage.test.ts`).
 
 **`damage-rule`** (rules 614.9, 615 — `damage-modification.test.ts`) is the general one-shot prevention or redirection over a set of damage events for a duration: `{ to?: { target? | players?: "you" | "each" | "opponents", permanents?: CardFilter, exceptTarget? }, by?: { target? | filter?, exceptTarget? }, combat?: boolean, amount?: "all" | "next-time" | EffectAmount, duration?: "end-of-turn" | "until-your-next-turn" | "while-source", redirectTo?: slot | "source" | "you" | { controllerOf: "source" } | "source-itself", then?, gainLifePrevented? }`. Omitted `to`/`by` is any recipient/source; `players` and `permanents` both count ("you and creatures you control"); a filter is asked as the damage would be dealt (615.1), so a creature arriving later is covered. Kor Haven: `{ by: { target: 0 }, combat: true }`; Dovin, Hand of Control's −1: two rules, `to: { target: 0 }` and `by: { target: 0 }`, `duration: "until-your-next-turn"`; Eerie Interference: `{ to: { players: "you", permanents: { type: "creature", controlledBy: "you" } }, by: { filter: { type: "creature" } } }`; Turn the Tables: `{ to: { players: "you" }, combat: true, redirectTo: 0 }`; Mirror Strike: `{ to: { players: "you" }, by: { target: 0 }, combat: true, redirectTo: { controllerOf: "source" } }`; Temper: `{ to: { target: 0 }, amount: "x", then: { kind: "add-counter", target: 0, counter: "+1/+1", amount: "x" } }`. **`then`** is prevention's additional effect (615.5): `"x"` the damage that rule prevented, the spell's own targets, and the damage's source as `"trigger-object"` (its controller `who: "trigger-controller"`). `prevent-damage-from-chosen-source` takes `then` too (Deflecting Palm: `then: { kind: "damage", amount: "x", who: "trigger-controller" }`), `amount: "all"` (Kor Chant's "all damage … this turn", with `redirectTo: 1`), `to: "your-side"` (one shield over you and your permanents — not yet with an amount the player would divide, rule 615.7: Harm's Way and Divine Deflection wait on `decision:prevention-shield-allocation`) or `"any"` (Reflect Damage), and `redirectToSource`.
@@ -4377,7 +4377,7 @@ the effect is a single `add-mana`: `pool.test` holds every card to both.
 
 **"If you tap a permanent for mana, it produces twice as much of that mana
 instead"** (Mana Reflection; three times — Nyxbloom Ancient) is the static
-replacement `{ event: "tap-for-mana", multiplier }` (rule 106.12b): only a
+replacement `{ event: "tap-for-mana", instead: { modify: { times } } }` (rule 106.12b): only a
 `{T}` mana ability its controller activates, only its own mana (never a
 triggered mana ability's extra — the ruling), every unit with what it
 carries; several compound. An "any colour" unit becomes `multiplier` of
@@ -6566,7 +6566,28 @@ clause (section 9):
   replacement off itself, and off anything entering at the same time as it
   (a token batch, a mass reanimation, a flicker's return, a tutor's finds are
   each one simultaneous entry).
-- `{ event: "would-create-token", multiplier }` — Doubling Season. `{ event:
+**One `instead` (replacement effects, rules 614, 615 — theme 9 of `docs/plans/need-key-themes.md`).** A
+replacement's `event` and its flat fields say what it matches; `instead` says what happens:
+`{ effect, text? }` the event becomes this effect and never happens (rule 614.6), or
+`{ modify: { times?, plus?, half?, atLeast?, atMost?, set? }, also? }` the event happens, changed, `also` done first beside
+it ("instead that damage is dealt, but …"). Amounts are `EffectAmount`s, read as the event would happen. In the effect
+`"x"` is "that much", `"trigger-object"` "that card" or the damage's source, `"trigger-recipient"` and `"trigger-player"`
+who it would have happened to; it's run by the replacement's controller, so "that player" draws is an `as-player` or a
+`who: "trigger-player"`. It mustn't repeat its own event after a decision (rule 614.5): use `also`. Damage has its own
+`{ prevent, then?, perEvent?, thenCountsUnprevented? }` (`prevent`: `true`, a number, `{ allBut }` or `{ half }`) and
+`{ redirect }`; the leave event takes a destination (`"exile"`, `"library-top"`, `"library-bottom"`, `"hand"`). `may: true`
+is "you may instead", only on events that can wait for the answer (draw, tokens, turn begin): `test/instead-replacements.test.ts`
+refuses it elsewhere. **New events:** `would-lose-game` (`{ who, instead: { effect } }`, conceding isn't replaced),
+`would-scry` (`{ who, instead }`). `would-draw` also takes `instruction: { atLeast }` (the whole draw: "one or more
+cards", "two or more", `"x"` the number) and `whileHandAtMost`; `would-create-token` takes `becomes: { effect, text? }` with
+`firstEachTurn` and `may` (Moonlit Meditation); `would-deal-damage` takes `ifAtLeast`.
+**A resolved replacement for a while** is `replacement-effect { replacement, duration, next?, players?, permanentsToo?, object?, fromObject? }`
+(`state.activeReplacements`): the same words as a static's, with a `PlayerDuration`. `next: true` is "the next time" (spent
+when it applies, 615.8), an amount "the next N" damage (615.7); `players`, `object` and `fromObject` are what its references
+name, fixed as it resolves. Amounts in a `modify` are fixed as it resolves too; filters are read at each event, so what arrives later counts.
+The `prevent-damage` family makes the same record.
+
+- `{ event: "would-create-token", instead: { modify: { times } } }` — Doubling Season. `{ event:
   "would-create-token", creatureTokensInstead: "<token>" }` is Divine
   Visitation's "if one or more creature tokens would be created under your
   control, that many 4/4 … Angel creature tokens … are created instead":
@@ -6589,7 +6610,7 @@ clause (section 9):
   another token in place of the ones `ofTokens` names (Draconic Visitor,
   Fisher's Talent: `atLevel` it for a Class). `oneOfEach: ["<token>", …]` is
   Academy Manufactor: each token `ofTokens` names becomes one of each.
-  `multiplier` with `ofTokens` multiplies just those tokens (Ojer Taq, Deepest
+  `modify.times` with `ofTokens` multiplies just those tokens (Ojer Taq, Deepest
   Foundation, three times creature tokens), in the search rather than last.
   `anyController: true` on it, as on `would-add-counter`'s, is Primal Vigor's
   wording with no "under your control": anyone's tokens, anyone's creature.
@@ -6600,7 +6621,7 @@ clause (section 9):
   makes the most, worked out (`token-replacements.ts`), with doublers last. A
   replacement the player may decline ("you may instead", Jinnie Fay, Mirrormind
   Crown) isn't this vocabulary: nothing asks mid-creation.
-- `{ event: "tap-for-mana", multiplier }` — "if you tap a permanent for mana,
+- `{ event: "tap-for-mana", instead: { modify: { times } } }` — "if you tap a permanent for mana,
   it produces twice as much of that mana instead" (Mana Reflection, Nyxbloom
   Ancient): see "Triggered mana abilities" in §8.
 - `landManaInstead: [{ filter?, produces, tapper }]` (a static field, not a
@@ -6616,10 +6637,10 @@ clause (section 9):
   offered activations see the new type. Of several, the newest applies
   (rule 616.1). Not "one mana of a color of your choice instead of any other
   type and amount" (Harvest Mage).
-- `{ event: "would-add-counter", multiplier?, plus?, halved?, counterKind?, filter?, other?, byEffectOnly?, whoPuts?, onPlayers? }` —
-  Doubling Season (`multiplier: 2`). `filter` narrows which of your permanents
+- `{ event: "would-add-counter", instead: { modify: { times?, plus?, half? } }, counterKind?, filter?, other?, byEffectOnly?, whoPuts?, onPlayers? }` —
+  Doubling Season (`times: 2`). `filter` narrows which of your permanents
   it covers (Branching Evolution: `{ type: "creature" }`; Caradora's "a
-  creature or Vehicle": `anyOf`). `plus: 1` is "that many plus one" (Hardened
+  creature or Vehicle": `anyOf`). `plus: 1` in the `modify` is "that many plus one" (Hardened
   Scales, `counterKind: "+1/+1"`), and `other: true` leaves out this
   permanent itself (Benevolent Hydra's "another creature you control"). Both
   apply to counters a permanent enters with too (rule 122.6). The order is
@@ -6723,7 +6744,7 @@ clause (section 9):
   The draw it hands its controller can be handed on by a Thief of one of
   *their* opponents, each effect applying to the draw once (rule 614.5, the
   rulings' procedure): with a Thief on each side of a duel the draw stays put,
-  and two against one leaves it with the two. `{ event: "would-draw", who: "you", instead: { draws: N } }` is "if
+  and two against one leaves it with the two. `{ event: "would-draw", who: "you", instead: { modify: { set: N } } }` is "if
   you would draw a card, draw N cards instead" (gate it with the static's
   `condition`); neither applies again to the draws it makes (rule 614.5).
   Several multiply (Thought Reflection twice is four). `exceptFirstInDrawStep:
@@ -6758,33 +6779,33 @@ clause (section 9):
   isn't offered, see §15's replacement ordering). It also replaces a draw
   another replacement made of yours (rule 616.2): your own Notion Thief's
   "you draw a card instead" from an empty library wins.
-- `{ event: "would-mill", who, multiplier?, plus? }` — Bruvac the
+- `{ event: "would-mill", who, instead: { modify: { times?, plus? } } }` — Bruvac the
   Grandiloquent's "if an opponent would mill one or more cards, they mill
-  twice that many cards instead" (`who: "opponent"`, `multiplier: 2`), The
+  twice that many cards instead" (`who: "opponent"`, `times: 2`), The
   Water Crystal's "…they mill that many cards plus four instead" (`plus: 4`).
   Several multiply, then every `plus` adds, as damage's do; a mill of none is
   never replaced.
-- `{ event: "would-lose-life", who, multiplier }` — Bloodletter of Aclazotz's
+- `{ event: "would-lose-life", who, instead: { modify: { times } } }` — Bloodletter of Aclazotz's
   "if an opponent would lose life during your turn, they lose twice that much
   life instead", with a `your-turn` `condition`. Every loss, damage's and a life
   payment's included (rule 119); the damage itself doesn't change, so lifelink
   doesn't either.
-- `{ event: "would-gain-life", who, plus?, multiplier?, prevent?, becomesLoss? }` — Bilbo, Birthday
+- `{ event: "would-gain-life", who, instead?: { modify: { plus?, times? } } | { effect }, prevent?, becomesLoss? }` — Bilbo, Birthday
   Celebrant's "if you would gain life, you gain that much life plus 1
-  instead" (`who: "you"`, `plus: 1`), or "your opponents can't gain life"
+  instead" (`who: "you"`, `modify: { plus: 1 }`), or "your opponents can't gain life"
   (The Lord of Pain — `who: "opponent"`, `prevent: true`). Applied to every
   life gain, lifelink's included; one `prevent` beats every `plus`.
-  `multiplier: 2` is Rhox Faithmender's "you gain twice that much life
+  `times: 2` is Rhox Faithmender's "you gain twice that much life
   instead", applied after every `plus` (the order the gaining player would
   pick, rule 616.1). `becomesLoss: true` is Tainted Remedy's "if an opponent
   would gain life, that player loses that much life instead" (`who:
   "opponent"`): applied before any `plus` or `multiplier`, after a `prevent`.
-- `{ event: "would-deal-damage", multiplier?, plus?, plusOf?, fromOther?, atLeast?, combat?, prevent?, then?, source?, fromSelf?, to?, toFilter? } — and since B250 `fromAttached?, toOther?, redirect?, preventAmount?, preventAllBut?, preventHalf?, halve?, ifAtMost?`:
+- `{ event: "would-deal-damage", instead, combat?, source?, fromSelf?, to?, toFilter?, ifAtMost?, ifAtLeast? }` — `instead` is `{ modify: { times, plus, atLeast, atMost, set, half } }`, `{ prevent, then?, perEvent?, thenCountsUnprevented? }`, `{ redirect }` or `{ effect }` (see **One `instead`** above); and — and since B250 `fromAttached?, toOther?, redirect?, preventAmount?, preventAllBut?, preventHalf?, halve?, ifAtMost?`:
   `to: "your-side"` is you or a permanent you control (`toFilter` narrowing only the permanents — Hyperion's "you or a Hero you control"),
   `to: "attached"` / `fromAttached: true` the Aura's or Equipment's host (Inviolability; Muzzle), `toOther` "other permanents" (Palisade Giant);
   `redirect: "self" | "attached" | "recipient-controller"` deals all of it there instead (Palisade Giant, Pariah, Treacherous Link — rule 614.9,
-  once per event, 614.5); `preventAmount: 1` (Guardian Seraph, per source, 615.10), `preventAllBut: 1` (Hyperion), `preventHalf: "up"` (Gisela),
-  `halve: "down"` (Ghosts of the Innocent — a replacement, so unpreventable damage is still halved), `ifAtMost: 3` with `prevent` (Callous Giant).
+  once per event, 614.5); `instead: { prevent: 1 }` (Guardian Seraph, per source, 615.10), `{ prevent: { allBut: 1 } }` (Hyperion), `{ prevent: { half: "up" } }` (Gisela),
+  `modify: { half: "down" }` (Ghosts of the Innocent — a replacement, so unpreventable damage is still halved), `ifAtMost: 3` with `prevent` (Callous Giant), `ifAtLeast: 3` with `modify: { set: 2 }` (Forethought Amulet).
   `then` runs with the damage's source as `"trigger-object"` (Swans of Bryn Argoll's "that source's controller") and the one it would have been dealt to as `"trigger-recipient"` (Vigor's "put a +1/+1 counter on that creature for each 1 damage prevented this way": `add-counter { target: "trigger-recipient", amount: "x" }`, `perEvent` for one follow-up per recipient over a simultaneous event).
   With `prevent` and `then`, `"x"` is the damage actually prevented — none when it can't be (Swans' "prevented this way"); `thenCountsUnprevented: true`
   makes it the damage either way (Jared Carthalion, True Heir's ruling: unpreventable damage is dealt and still puts "that many" counters on — rule 615.12).

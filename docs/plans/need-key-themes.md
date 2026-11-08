@@ -1,7 +1,7 @@
 # Need-key themes: general engine changes under the open keys
 
-Status: plan of record (2026-11-07), steps 1-6 (B275-B280) and two pieces of step 7 (theme 7, B281; theme 10, B282) done; step 7 continues with
-"instead" replacements and combat records — see *The plan* just below. The survey under it is a proposal.
+Status: plan of record (2026-11-07), steps 1-6 (B275-B280) and three pieces of step 7 (theme 7, B281; theme 10, B282; theme 9, B283) done; step 7 continues with
+combat records — see *The plan* just below. The survey under it is a proposal.
 
 The 1,783 open need keys (2,265 waiting cards, re-counted after step 1; the survey's own count was 1,831 and 2,324)
 mostly fall into about sixteen engine mechanisms that cut across
@@ -69,7 +69,8 @@ touch. Each step:
      cards left in `--stale` for `author-freed`. Squandered Resources stays flagged (see *Left unbuilt*).
    - **Done 2026-11-08 (B282).** One play-permission record (theme 10: `engine/src/play-permission.ts`, see its design note and *As built*). 10 cards: Hex Magic,
      Dawnhand Dissident, Lorehold, the Historian, Molecule Man (flagged) and 6 of the theme's top keys; 7 keys marked built, their other cards left in `--stale` for `author-freed`.
-   - Next: "instead" replacements, combat records (the rest of build-order item 9), then the smaller themes.
+   - **Done 2026-11-08 (B283).** One `instead` and one resolved-replacement record (theme 9: `engine/src/replacements.ts`, see its design note and *As built*). 18 cards: Doc Samson, Moonlit Meditation, Quantum Riddler and Wolverine, Fierce Fighter (flagged) and 14 of the theme's top keys; 18 keys marked built, their other cards left in `--stale` for `author-freed`.
+   - Next: combat records (the rest of build-order item 9), then the smaller themes.
 
 ## How this was measured
 
@@ -1196,6 +1197,60 @@ replacement:would-lose-game 2; 84 one-card keys.
 - An `instead` effect that asks a decision suspends the event. That is the hard part, already solved for draws.
 
 **Confidence: medium.**
+
+**Design note (step 7, 2026-11-08): one `instead`, one resolved record.**
+
+*What's wrong today.* `ReplacementSpec` is 16 interfaces, and what a replacement *does* is spelled nine ways for one idea (`multiplier`, `plus`, `plusOf`, `atLeast`, `halve`, `halved`, `draws`, `times`, `additional`), so "that much plus X" exists for damage and not for scry. Only the draw takes "any effect instead". And what a *resolved* spell's replacement is kept as is split four ways: `PreventionShield` on its own state list, `PlayerEffect.damageReplacement` / `damageTo` / `nextDrawInstead` / `tokenMultiplier` / `graveyardExile`, each read by its own loop, so "the next time" exists for damage and draws and nothing else, and "prevent half" for a static and not a shield.
+
+*Where it lives.* `engine/src/replacements.ts`, one vocabulary:
+
+- **`event`** says what's replaced, and the event's own flat fields say what it matches (`who`, `source`, `to`, `filter`, …) exactly as today. A wrapping `match: {}` would rewrite every card and say nothing new: the fields differ because the events do.
+- **`instead`** says what happens, one union wherever the event can take it:
+  - `{ effect, text? }`: the event becomes this effect and never happens (614.1a, 614.6, 615.6).
+  - `{ modify: AmountChange, also? }`: the event happens, changed. `AmountChange` is `{ times?, plus?, half?, atLeast?, atMost?, set? }`, amounts being `EffectAmount`s read as the event would happen. `also` is done beside it, first ("that damage is dealt, but all other damage already dealt to him is healed").
+  - damage's own `{ prevent, then?, … }` (615) and `{ redirect }` (614.9); the leave event's destinations; the draw's `"you-draw"` and `"win-game"`.
+- **`may`** and **`text`**: "you may … instead", asked of the affected player (616.1).
+- **The replaced event's facts** are bound the way `then` already binds them, one convention in every event: amount `"x"` is "that much", `"trigger-object"` "that card" or the damage's source, `"trigger-recipient"` / `"trigger-player"` who it would have happened to. No new ref words.
+
+**One record for a resolved replacement.** A new effect, `{ kind: "replacement-effect", replacement, duration, next? }`, keeps an `ActiveReplacement` on one list, `GameState.activeReplacements`: the `ReplacementSpec`, `owner`, `source`, what its references fixed as it resolved (`bound`: the object or player named, in its stint, 400.7; `targets`, `x`), an `Expiry`, and `next` (`true`: the next one, 615.8; a number left: the next N, 615.7). Damage's shields are these records: `shieldCovers` and `damageReplacementReaches` become one check. The authoring words stay (`prevent-damage`, `damage-rule`, `prevent-damage-from-chosen-source`, `prevent-all-combat-damage`), because they read like the printed sentence and 450 files would say the same thing longer; what they *make* is the one record.
+
+**One read, kept cheap.** Replacement lookups run on every event, so `Game.replacementsOf(event)` keeps a per-computed-cache-region index by event of the statics that have any replacement, as `playStaticsOf` does, plus the active records of that event. Today's per-event battlefield-times-statics scans become a table read; an event nothing replaces costs one lookup. Timed-static replacements read the same index.
+
+*Rules.*
+- **614.1a, 614.1b, 614.1c**: "instead" and "skip" are replacements; "enters with / as enters" are too, which is why enters stays its own shape (below).
+- **614.5**: one opportunity. `damageSteps`' `applied`, the redirect chain's map and a new transient `applying` set (keyed by source and ability, or record) keep a replacement off events inside its own effect. It's synchronous only, so an `effect` mustn't repeat its own event after a decision; that's stated in AUTHORING and is what `also` is for.
+- **614.6, 615.6**: a replaced event never happens, so no event, journal entry or trigger for it; only what happened instead. Prevented isn't replaced: `instead: { effect }` on damage works on unpreventable damage (615.12 stops prevention, not replacement) and emits no `damage-prevented`.
+- **614.7**: a replacement for an event that doesn't happen does nothing, and a `next` isn't spent. **614.9**: redirection with nowhere legal does nothing.
+- **614.10**: a skipped event waits for the next occurrence. **614.11, 614.11a**: draw replacements apply with an empty library, and all of one is done before the next draw of a sequence.
+- **615.3, 615.7, 615.8, 615.10**: a shield lasts until used or expired; "the next N" counts down, and with two sources at once its player chooses (worked out, the order best for them, as today); "the next time" is one instance from one source, covering the rest of one simultaneous event; a static's "prevent N" applies per event. **615.5**: `then` happens right after, reading the amount.
+- **616.1, 616.1f, 616.2**: the affected player chooses among applicable effects, again after each, and one can become applicable by another. As today it's worked out where only amounts differ (the user's call, 2026-10-14: least damage, most counters); a choice between *different* outcomes is asked with the `choose-modes` question draws use. **Worked out**, the order is one the player could have picked.
+- **Loops (`prepareForPriority`)**: replacements wrap their mutators and never enter the fixpoint themselves (ROADMAP *Architecture constraints*). A would-lose-game replacement runs inside the SBA step (704.5a); what it changes is seen by the next pass. Each replacement gets one chance per event (614.5), and "that player loses" is rechecked only if they still meet the condition.
+- **An `instead` that asks a decision suspends the event** the way draws already do: nothing's been done yet, the effect runs through `ctx.resumeAfterDecisions` (or, with a decision already outstanding in a sweep, parks behind it), and the event's remainder is that resumption's. A sequence of draws waits for it (614.11a). Combat damage is one event: each replaced recipient's effect runs once the sweep's dealing is done, as `then` does now. `may` needs its event to be able to wait, so it's accepted only on events that can (draw, tokens, lose-game); a pool-wide test refuses it elsewhere.
+
+*Moved or not, decided before building.* **Moved and deleted:** the nine amount spellings (about 280 card files, mechanically, by an AST script), `DrawReplacedByEffect`, `PreventionShield` and `GameState.preventionShields`, `PlayerEffect.damageReplacement`, `damageTo`, `nextDrawInstead`, `tokenMultiplier`, `graveyardExile`. **Plainly: this unifies what a replacement does, what keeps a resolved one, and the lookup; it doesn't make 16 event interfaces one.** Deliberately not moved, each for a reason:
+- *`enters-battlefield` and `others-enter-battlefield` (about 1,210 cards):* 614.1c "as it enters" modifies how a thing enters, asked before it moves (614.12), and its words (`tapped`, `counters`, `asEnters`, `sunburst`) aren't an amount or an effect. Moving them would be a rename of 1,200 files.
+- *The leave event's `instead`:* a zone change has to go somewhere, so it's a destination (widened to hand and library bottom) with `withCounters` / `then` / `linked`, not "any effect". Finality counters and `exileIfItWouldLeave` belong to the moving object.
+- *The token plan's kinds* (`plusTokens`, `tokensInstead`, `oneOfEach`, …): a plan over a list of kinds of token, `planTokenEvent`'s (only `multiplier` moves).
+- *Life gain's `prevent`, `gainsNoLifeInstead`, `becomesLoss`*: "can't gain life" is close to a prohibition, and each differs in rules (119.7); only its amounts move.
+- *`would-begin-turn`, `would-discard`, `would-counter-spell`* (7 cards): no amount and no general effect; each keeps its own small shape, with `may` where it has one.
+- *Keyword rules:* regeneration (701.19), dredge (702.52), madness, the commander's zone replacement (903.9). They're a keyword's or format's, with their own decisions.
+- *`tokensComeToOwner`, `entersTapped`, `keepsUnspentMana`, the land-mana `PlayerEffect` fields* (1 to 3 cards each): resolved, but about who or what mana rather than an event's amount or an effect; left and listed.
+
+*New events* only where a card proves it, tried first against today's vocabulary: `would-lose-game` (The Golden Throne, Stunning Reversal), `would-be-destroyed` (Harmonious Emergence), `would-untap`, `would-scry`, others if a proving card needs them.
+
+*Bots.* `effect-worth` and `target-polarity` read a `replacement-effect` by its `instead`; `features.ts` reads no replacement of any kind (they show up in simulated futures), so it has nothing to learn. `may` asks through `choose-modes`, so no new decision kind and no client change.
+
+*As built (step 7, B283).*
+- `replacements.ts`: `AmountChange`, `Instead` (`ReplacedByEffect`, `ModifiedEvent`), `DamagePrevention`, `DamageRedirection`, `LoseGameReplacement`, `ScryReplacement`. `state.ts`: `ActiveReplacement`, on one list, `GameState.activeReplacements`. `effects.ts`: `replacement-effect`, and the small `heal` effect Wolverine needs (701.69a). `Game.runReplacedBy` is the one place an event becomes its effect, binding `"x"`, `"trigger-object"`, `"trigger-recipient"` and `"trigger-player"`; it parks behind an outstanding decision only inside a damage sweep (a draw's own resume is what comes next).
+- **Moved and deleted, every user migrated:** the amount spellings (`multiplier`, `plus`, `plusOf`, `atLeast`, `halve`, `halved`, `draws`, `times`, `additional`), `preventAmount` / `preventAllBut` / `preventHalf`, `redirect` and the prevention `then` as flat fields, `DrawReplacedByEffect`, `PreventionShield`, `GameState.preventionShields` (`state.activeReplacements`), the `preventAllCombatDamage` flag and `combatDamagePreventedBy` (Fog is a record now), `PlayerEffect.damageReplacement`, `damageTo`, `nextDrawInstead`, `tokenMultiplier`, `graveyardExile`, and `Game.topsItselfInstead`. 246 card files, by a script that ran once (idempotent; a second pass finds nothing). The scaffolder's outputs moved with them, and it now reads "if you would scry a number of cards …" and "if you would lose the game, instead …".
+- **How much was replaced, plainly:** what a replacement *does* is one vocabulary, and a resolved one is one record read by one covers check, so `next`, durations and `modify` amounts work on damage and draws alike, and damage prevention gained `ifAtLeast`, `set` and `atMost`. **The 16 event interfaces are still 16** (plus 2 new), by the plan's call above: the match fields differ because the events do. **Not done as the design note said:** the per-region index. Replacement lookups still scan `staticSourceIds` per event, as they did, because a computed-cache region lasts one event here and an index would be rebuilt each time. Each event's cost is unchanged; a resolved record adds one check of an array that's almost always empty.
+- **614.5 in practice.** `Game.applyingReplacements` keeps a replacement off events inside its own effect while that effect runs synchronously; Plagiarize aimed at its own controller (found by the situation fuzzer) is the case it exists for.
+- **Behaviour changes, all rules fixes:** a static or record that changes damage now orders with shields (Fog beside a multiplier: 616.1 instead of Fog first). `would-mill`, `would-gain-life` and `would-lose-life` amounts read an `EffectAmount`.
+- **Not moved** is the design note's list, unchanged. Also still their own: `would-draw`'s `"you-draw"` and `"win-game"` outcomes, and `would-create-token`'s `becomes` beside the token-plan kinds, because a token event is a list of kinds whose plan `planTokenEvent` owns.
+- Cards (18): Moonlit Meditation, Wolverine, Fierce Fighter, Doc Samson, Super Psychiatrist, Quantum Riddler (flagged); The Golden Throne, Stunning Reversal, Isengard Unleashed, Forethought Amulet, Soul-Scar Mage, Hullbreacher, Blood Scrivener, Alms Collector, Eligeth, Crossroads Augur, Plagiarize, Nissa's Chosen, Necromancer's Magemark, Eruth, Tormented Prophet, Quest for Pure Flame. `test/instead-replacements.test.ts` covers each, with the rules above and pool-wide checks for the removed words.
+- Keys marked built: `replacement:lose-game-replacement`, `counter-replacement-you-put`, `counter-multiplier-on-costs`, `draw-instruction-plus-one`, `token-creation-replace-with-copies`, `damage-heals-prior-damage`, `damage-capped`, `temporary-prevent-damage-to-counters`, `draw-replacement-create-token`, `draw-replacement-life-loss`, `draw-two-or-more-shared`, `would-scry-draw-instead`, `temporary-draw-replacement-target-player`, `dies-to-library-bottom`, `dies-return-to-hand-instead`, `draw-replacement-exile-play`, `double-damage-from-your-sources-this-turn`, `damage-multiplier-this-turn` (18 keys; 16 were new to `built`).
+- **Left unbuilt, not marked:** every other key of the theme, by its card or a limit found building: `replacement:die-exile-with-counter` (Ravenloft Adventurer's other abilities, Rayami's keyword reads, Darigaaz: not tried), `damage-reflection` (Eye for an Eye, Harsh Judgment: `{ effect }` plus a reference to the source's controller), `would-scry-plus` (the event is built; Kenessos's look-at-top ability wasn't authored), `untap-step-remove-counter-instead`, `would-be-destroyed` keys, `explore`, dice, mana-pool and the `*as-enters*` and copy-as-enters keys. **A limit to know:** Moonlit Meditation's `may` is asked on `create-token` and `create-token-copy` effects only; a token made by amass, incubate, encore, myriad or populate isn't offered it (`docs/engine-gaps.md`).
+- Measured: a timed `bot:bench` (16 games, four players, 8 workers, nothing else running) played the same games (11-5, 38.1 turns on average) at 66.6 s a game and 115.8 ms a decision (226.1 s wall), against 66.9 s and 116.2 ms before (230.5 s wall). Inside the noise: lookups cost what they did. Both figures are in `engine/data/bench-log.jsonl`.
 
 ### 10. One play-permission record (78 keys, ~113 cards)
 

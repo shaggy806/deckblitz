@@ -28,6 +28,24 @@ test, `manual-check-presets.test.ts`, builds every board and matches them to the
 thing per test, its own board with only the cards it needs, plain words — no rule numbers or
 engine terms. A second thing to check is a second test.
 
+## "Instead": replacements and shields (2026-11-08)
+
+### Moonlit Meditation: you choose the first token event of the turn
+- **Do:** Cast Raise the Alarm.
+- **Expect:** A question asks "Create the tokens" or Moonlit Meditation's replacement. Choosing the replacement makes that many copies of the enchanted creature. The next token this turn is made as normal.
+
+### The Golden Throne: your life total becomes 1 instead of losing
+- **Do:** Cast Lava Axe on yourself.
+- **Expect:** You don't lose. The Golden Throne goes to exile and your life total becomes 1.
+
+### Soul-Scar Mage: damage becomes -1/-1 counters
+- **Do:** Cast Lightning Bolt on the opponent's Hill Giant.
+- **Expect:** Hill Giant gets three -1/-1 counters rather than damage, and dies.
+
+### Stunning Reversal: the next loss this turn is replaced once
+- **Do:** Cast Stunning Reversal, then cast Lava Axe on yourself.
+- **Expect:** You draw seven cards and your life total becomes 1. The spell is exiled. Losing again this turn is real.
+
 ## Spells, copies and mana from unusual places (2026-10-03, first round)
 
 ### Feather: your spell on your creature returns at the end step
