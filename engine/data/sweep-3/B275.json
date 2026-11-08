@@ -1,0 +1,354 @@
+{
+ "batch": "B275",
+ "status": "done",
+ "ranks": "Need-keys Phase 2: cards freed by built keys (author-freed over --stale), with need-key themes step 1's probably-expressible keys (docs/plans/need-key-themes.md, 2026-11-07): cost reduction for spells cast from anywhere but your hand, energy you get, a counter removed, snow and legendary landwalk, hexproof from monocolored, until-end-of-combat P/T, linked exile returned under your control.",
+ "authored": [
+  {
+   "name": "Advanced Reconstruction",
+   "files": [
+    "engine/src/cards/pool/advanced-reconstruction.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aether Revolt",
+   "files": [
+    "engine/src/cards/pool/aether-revolt.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ayumi, the Last Visitor",
+   "files": [
+    "engine/src/cards/pool/ayumi-the-last-visitor.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Barbarian Guides",
+   "files": [
+    "engine/src/cards/pool/barbarian-guides.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Bilbo, Thief in the Night",
+   "files": [
+    "engine/src/cards/pool/bilbo-thief-in-the-night.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Brotherhood Scribe",
+   "files": [
+    "engine/src/cards/pool/brotherhood-scribe.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Choreographed Sparks",
+   "files": [
+    "engine/src/cards/pool/choreographed-sparks.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Cold Storage",
+   "files": [
+    "engine/src/cards/pool/cold-storage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Defiler of Faith",
+   "files": [
+    "engine/src/cards/pool/defiler-of-faith.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Defiler of Flesh",
+   "files": [
+    "engine/src/cards/pool/defiler-of-flesh.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Defiler of Instinct",
+   "files": [
+    "engine/src/cards/pool/defiler-of-instinct.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Due Respect",
+   "files": [
+    "engine/src/cards/pool/due-respect.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Elenda, Saint of Dusk",
+   "files": [
+    "engine/src/cards/pool/elenda-saint-of-dusk.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fabrication Module",
+   "files": [
+    "engine/src/cards/pool/fabrication-module.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fortune Teller's Talent",
+   "files": [
+    "engine/src/cards/pool/fortune-tellers-talent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "General Ferrous Rokiric",
+   "files": [
+    "engine/src/cards/pool/general-ferrous-rokiric.ts",
+    "engine/src/cards/tokens/golem-token-red-white-4-4.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Glyph of Destruction",
+   "files": [
+    "engine/src/cards/pool/glyph-of-destruction.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Legions of Lim-Dûl",
+   "files": [
+    "engine/src/cards/pool/legions-of-lim-dul.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Livonya Silone",
+   "files": [
+    "engine/src/cards/pool/livonya-silone.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "March of Reckless Joy",
+   "files": [
+    "engine/src/cards/pool/march-of-reckless-joy.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Murk Dwellers",
+   "files": [
+    "engine/src/cards/pool/murk-dwellers.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Pir, Imaginative Rascal",
+   "files": [
+    "engine/src/cards/pool/pir-imaginative-rascal.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Promise of Tomorrow",
+   "files": [
+    "engine/src/cards/pool/promise-of-tomorrow.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Protean Hydra",
+   "files": [
+    "engine/src/cards/pool/protean-hydra.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Prowling Geistcatcher",
+   "files": [
+    "engine/src/cards/pool/prowling-geistcatcher.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Rime Dryad",
+   "files": [
+    "engine/src/cards/pool/rime-dryad.ts"
+   ],
+   "tested": false
+  },
+  {
+   "name": "Rooftop Storm",
+   "files": [
+    "engine/src/cards/pool/rooftop-storm.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Sage of the Beyond",
+   "files": [
+    "engine/src/cards/pool/sage-of-the-beyond.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Savvy Trader",
+   "files": [
+    "engine/src/cards/pool/savvy-trader.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Territorial Gorger",
+   "files": [
+    "engine/src/cards/pool/territorial-gorger.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "The Master, Transcendent",
+   "files": [
+    "engine/src/cards/pool/the-master-transcendent.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zellix, Sanity Flayer",
+   "files": [
+    "engine/src/cards/pool/zellix-sanity-flayer.ts",
+    "engine/src/cards/tokens/horror-token-black-1-1.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Zombie Musher",
+   "files": [
+    "engine/src/cards/pool/zombie-musher.ts"
+   ],
+   "tested": false
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Primitive Justice",
+   "needs": [
+    "cost:repeatable-additional-costs-adding-targets"
+   ],
+   "reason": "'{1}{R} and/or {1}{G} any number of times': two repeatable additional costs, each adding a target, one adding 1 life; kicker can't say it (the record's cost:multiple-alternative-costs didn't cover it)."
+  },
+  {
+   "name": "Chaotic Transformation",
+   "needs": [
+    "decision:order-per-target-reveal-until"
+   ],
+   "reason": "a player who controlled several exiled permanents chooses which to reveal for first (the ruling); a fixed slot order chooses for them."
+  },
+  {
+   "name": "Over the Top",
+   "needs": [
+    "effect:each-player-look-and-choose-together"
+   ],
+   "reason": "each player's permanents must enter in one event (rule 603.6a); for-each-player's simultaneous around look-and-choose moves nothing."
+  },
+  {
+   "name": "Dream Harvest",
+   "needs": [
+    "zone:cast-exiled-this-way-free-until-end-of-turn"
+   ],
+   "reason": "an until-end-of-turn free-cast permission over the cards reveal-until-count exiled."
+  },
+  {
+   "name": "Screeching Scorchbeast",
+   "needs": [
+    "trigger:mills-batched-across-players"
+   ],
+   "reason": "cards-milled is emitted per player; a simultaneous multi-player mill must trigger once with the total (the ruling)."
+  },
+  {
+   "name": "Glowing One",
+   "needs": [
+    "trigger:mills-per-card"
+   ],
+   "reason": "triggers once per nonland card milled (the ruling); mills has no perCard."
+  },
+  {
+   "name": "Infesting Radroach",
+   "needs": [
+    "trigger:mills-per-card"
+   ],
+   "reason": "one trigger per nonland card an opponent mills."
+  },
+  {
+   "name": "Cass, Hand of Vengeance",
+   "needs": [
+    "effect:return-aura-cards-that-were-attached-from-graveyard"
+   ],
+   "reason": "wasAttachedTo matches only objects on the battlefield, so the Aura cards in the graveyard can't be found."
+  },
+  {
+   "name": "The Ruinous Powers",
+   "needs": [
+    "trigger:cast-this-way-from-lasting-permission"
+   ],
+   "reason": "'when you cast a spell this way, its owner loses life' tied to an until-end-of-turn permission; Kefka's byOwner reads only a cast-now."
+  },
+  {
+   "name": "Last Night Together",
+   "needs": [
+    "effect:extra-combat-after-this-main-only-chosen-attack"
+   ],
+   "reason": "additional-combat without afterThisPhase adds a main phase the card doesn't; onlyAttackers can't name the chosen targets."
+  },
+  {
+   "name": "Benthic Anomaly",
+   "needs": [
+    "effect:token-copy-of-one-chosen-with-total-pt"
+   ],
+   "reason": "an untargeted choice per opponent, then a copy of one with the chosen creatures' total P/T, a colorless Eldrazi."
+  },
+  {
+   "name": "Corrupted Crossroads",
+   "needs": [
+    "filter:has-devoid"
+   ],
+   "reason": "devoid is only empty colours here, so a devoid spell can't be told from another colorless spell (its ruling)."
+  },
+  {
+   "name": "Ratchet, Field Medic // Ratchet, Rescue Racer",
+   "needs": [
+    "condition:converted-this-way"
+   ],
+   "reason": "'when you do' must not fire after a convert rule 701.28e ignores (the ruling)."
+  },
+  {
+   "name": "Watcher of Hours",
+   "needs": [
+    "trigger:time-counter-removed-in-exile-by-you-per-counter"
+   ],
+   "reason": "time-counter-removed has no amount or remover: it fires on anyone's removal, not per counter."
+  },
+  {
+   "name": "Flameskull",
+   "needs": [
+    "zone:impulse-play-one-including-exiled-self"
+   ],
+   "reason": "the one-play group spans the top card and Flameskull itself; impulse-exile's upTo covers only what it exiled."
+  },
+  {
+   "name": "Niv-Mizzet, Supreme",
+   "needs": [
+    "static:grant-jump-start-to-graveyard-cards"
+   ],
+   "reason": "GraveyardKeyword has no jump-start."
+  }
+ ]
+}

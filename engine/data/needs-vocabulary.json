@@ -2209,7 +2209,7 @@
    "family": "effect:attach-extensions",
    "example": "Gift of Immortality: The Aura returning attached to the returned creature.",
    "checked": "2026-10-27: partial",
-   "description": "Still missing (2026-10-27 check): Radiant Grace's Aura returning attached to a player: attachHost gives null for a player slot (rule 303.4i) Already there: src/effects.ts put-onto-battlefield attachedTo (EffectTargetRef) and attachHost(); returning an Aura attached to a returned creature works (Gift of Immortality, Next of Kin) Not a flicker of a host and its Auras: effect:flicker-host-and-auras-return-attached."
+   "description": "Still missing (2026-10-27 check): Radiant Grace's Aura returning attached to a player: attachHost gives null for a player slot (rule 303.4i) Already there: src/effects.ts put-onto-battlefield attachedTo (EffectTargetRef) and attachHost(); returning an Aura attached to a returned creature works (Gift of Immortality, Next of Kin) Not a flicker of a host and its Auras: effect:flicker-host-and-auras-return-attached. Does not cover Aura cards already in the graveyard (effect:return-aura-cards-that-were-attached-from-graveyard)."
   },
   "effect:batched-dies-total-power": {
    "family": "effect:amount-aggregate",
@@ -2767,7 +2767,8 @@
   },
   "effect:extra-combat-attack-restriction": {
    "family": "effect:additional-combat-after-this-phase",
-   "example": "Bumi, Unleashed: No way to say only land creatures can attack during the added combat phase."
+   "example": "Bumi, Unleashed: No way to say only land creatures can attack during the added combat phase.",
+   "description": "Bumi, Unleashed: No way to say only land creatures can attack during the added combat phase. Does not cover 'only the chosen creatures' or a combat with no extra main phase (effect:extra-combat-after-this-main-only-chosen-attack)."
   },
   "effect:fame-or-fortune": {
    "family": "effect:choices-by-other-players",
@@ -5119,7 +5120,8 @@
    "example": "Ashling, Flame Dancer: Magecraft ('cast or copy') and 'you don't lose unspent red mana'."
   },
   "trigger:counter-removed-trigger": {
-   "example": "Protean Hydra: no 'whenever a +1/+1 counter is removed' trigger; the prevention must remove 'that many' counters"
+   "example": "Protean Hydra: no 'whenever a +1/+1 counter is removed' trigger; the prevention must remove 'that many' counters",
+   "description": "Protean Hydra: no 'whenever a +1/+1 counter is removed' trigger; the prevention must remove 'that many' counters Does not cover a suspended card's own time counters removed 'by you', per counter (trigger:time-counter-removed-in-exile-by-you-per-counter)."
   },
   "trigger:counters-a-spell-trigger": {
    "example": "Baral, Chief of Compliance: 'Whenever a spell or ability you control counters a spell' — no trigger on countering."
@@ -5204,7 +5206,8 @@
    "example": "Caged Sun: \"Whenever a land's ability causes you to add mana of the chosen color\": any land mana ability, not just a {T} one, filtered by a chosen colour."
   },
   "trigger:mills-trigger": {
-   "example": "Zellix, Sanity Flayer: No trigger on 'a player mills'; put-into-graveyard from library would also fire on surveil/discard-from-library effects."
+   "example": "Zellix, Sanity Flayer: No trigger on 'a player mills'; put-into-graveyard from library would also fire on surveil/discard-from-library effects.",
+   "description": "Zellix, Sanity Flayer: No trigger on 'a player mills'; put-into-graveyard from library would also fire on surveil/discard-from-library effects. Does not cover one trigger for a simultaneous mill across players (trigger:mills-batched-across-players)."
   },
   "trigger:nth-counter-trigger": {
    "example": "Midnight Clock: 'When the twelfth hour counter is put on this' and 'shuffle your hand and graveyard into your library'."
@@ -5267,7 +5270,8 @@
    "example": "Senu, Keen-Eyed Protector: triggers while in exile on an unblocked legendary attacker"
   },
   "trigger:trigger-mills-nonland-card": {
-   "example": "Glowing One: rad counters and a per-nonland-card-milled trigger not modeled"
+   "example": "Glowing One: rad counters and a per-nonland-card-milled trigger not modeled",
+   "description": "Glowing One: rad counters and a per-nonland-card-milled trigger not modeled Does not cover one trigger per card milled (trigger:mills-per-card)."
   },
   "trigger:trigger-player-attacks-your-opponents": {
    "example": "Jolene, the Plunder Queen: 'create those plus an additional Treasure' replacement and 'whenever a player attacks one or more of your opponents' (attacking player creates) not expressible"
@@ -5819,7 +5823,8 @@
   },
   "effect:cast-this-way-owner-loses-life": {
    "family": "effect:this-way-results",
-   "example": "Kefka, Dancing Mad: 'each player who owns a spell you cast this way loses life equal to its mana value'"
+   "example": "Kefka, Dancing Mad: 'each player who owns a spell you cast this way loses life equal to its mana value'",
+   "description": "Kefka, Dancing Mad: 'each player who owns a spell you cast this way loses life equal to its mana value' Covers only a cast-now during resolution, not a lasting permission (trigger:cast-this-way-from-lasting-permission)."
   },
   "bug:chapter-ability-source-stint": {
    "family": "bug:lore-counters-fire-chapters",
@@ -8880,7 +8885,8 @@
   },
   "zone:impulse-play-only-one": {
    "family": "zone:impulse-permission-options",
-   "example": "Unlucky Witness"
+   "example": "Unlucky Witness",
+   "description": "Unlucky Witness Does not cover a group that includes the source itself (zone:impulse-play-one-including-exiled-self)."
   },
   "effect:must-attack-controllers-next-combat": {
    "family": "static:combat-restriction-extensions",
@@ -16099,6 +16105,81 @@
   "effect:perpetually": {
    "family": "mechanic:outside-the-game",
    "example": "Perpetually (digital-only, not in the Comprehensive Rules): Pearl Collector (MBC)."
+  },
+  "cost:repeatable-additional-costs-adding-targets": {
+   "family": "cost:multiple-alternative-costs",
+   "description": "Additional costs payable any number of times, each payment adding a target slot (and one a rider): '{1}{R} and/or {1}{G} any number of times' — kicker can't say it.",
+   "example": "Primitive Justice"
+  },
+  "decision:order-per-target-reveal-until": {
+   "family": "effect:reveal-until",
+   "description": "A reveal-until run per exiled permanent where a player who controlled several chooses the order (the ruling); a fixed slot order chooses for them.",
+   "example": "Chaotic Transformation"
+  },
+  "effect:each-player-look-and-choose-together": {
+   "family": "effect:reveal-x-put-all-matching",
+   "description": "Each player's look-and-choose put onto the battlefield in one event (rule 603.6a); for-each-player's simultaneous around look-and-choose moves nothing.",
+   "example": "Over the Top"
+  },
+  "zone:cast-exiled-this-way-free-until-end-of-turn": {
+   "family": "effect:reveal-until",
+   "description": "An until-end-of-turn, without-paying permission over the cards a reveal-until-count exiled; allow-cast-from-exile takes only a slot or the source, cast-now only resolves.",
+   "example": "Dream Harvest"
+  },
+  "trigger:mills-batched-across-players": {
+   "family": "trigger:mills-trigger",
+   "description": "A mills trigger once for a simultaneous mill across several players, with the total (cards-milled is emitted per player) — The Wise Mothman has the same gap.",
+   "example": "Screeching Scorchbeast"
+  },
+  "trigger:mills-per-card": {
+   "family": "trigger:trigger-mills-nonland-card",
+   "description": "A mills trigger once per matching card milled (`perCard`), each its own trigger.",
+   "example": "Glowing One"
+  },
+  "effect:return-aura-cards-that-were-attached-from-graveyard": {
+   "family": "effect:attach-extensions",
+   "description": "Return the Aura cards that were attached to a dying creature from the graveyard: wasAttachedTo only matches objects still on the battlefield.",
+   "example": "Cass, Hand of Vengeance"
+  },
+  "trigger:cast-this-way-from-lasting-permission": {
+   "family": "effect:this-way-results",
+   "description": "'When you cast a spell this way' tied to an until-end-of-turn play permission (Kefka's byOwner reads only a cast-now during resolution).",
+   "example": "The Ruinous Powers"
+  },
+  "effect:extra-combat-after-this-main-only-chosen-attack": {
+   "family": "effect:additional-combat-after-this-phase",
+   "description": "An additional combat after this main phase with no extra main phase, where only the chosen target creatures can attack (onlyAttackers can't name them).",
+   "example": "Last Night Together"
+  },
+  "effect:token-copy-of-one-chosen-with-total-pt": {
+   "family": "effect:copy-exceptions",
+   "description": "An untargeted choice of a creature per opponent, then a token copy of one with P/T equal to the chosen creatures' totals, made a colorless Eldrazi creature.",
+   "example": "Benthic Anomaly"
+  },
+  "filter:has-devoid": {
+   "family": "keyword:devoid",
+   "description": "A filter for objects with devoid: devoid is only empty colours here, so nothing tells a devoid spell from another colorless one.",
+   "example": "Corrupted Crossroads"
+  },
+  "condition:converted-this-way": {
+   "family": "mechanic:more-than-meets-the-eye",
+   "description": "'You may convert it. When you do, …' must not fire after a convert rule 701.28e ignores; this-way has no transformed kind.",
+   "example": "Ratchet, Field Medic // Ratchet, Rescue Racer"
+  },
+  "trigger:time-counter-removed-in-exile-by-you-per-counter": {
+   "family": "trigger:counter-removed-trigger",
+   "description": "'Whenever you remove a time counter from this card while it's exiled': time-counter-removed has no amount or remover, so it fires on any player's removal and not per counter.",
+   "example": "Watcher of Hours"
+  },
+  "zone:impulse-play-one-including-exiled-self": {
+   "family": "zone:impulse-permission-options",
+   "description": "A play-only-one group spanning the exiled top card and the source itself; impulse-exile's upTo covers only what it exiled.",
+   "example": "Flameskull"
+  },
+  "static:grant-jump-start-to-graveyard-cards": {
+   "family": "keyword:jump-start",
+   "description": "A static granting jump-start to graveyard cards matching a filter (GraveyardKeyword has no jump-start).",
+   "example": "Niv-Mizzet, Supreme"
   }
  },
  "groups": [

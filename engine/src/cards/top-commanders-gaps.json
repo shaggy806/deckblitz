@@ -1949,7 +1949,13 @@
   "keyword:devoid",
   "cost:cost-reduction-cast-not-from-hand",
   "trigger:energy-gained",
-  "trigger:counter-removed-trigger"
+  "trigger:counter-removed-trigger",
+  "keyword:snow-landwalk",
+  "keyword:legendary-landwalk",
+  "keyword:hexproof-from-monocolored",
+  "effect:pt-until-end-of-combat",
+  "effect:return-linked-under-your-control",
+  "static:look-at-top-card-any-time"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {
@@ -2669,7 +2675,7 @@
   "keyword:devoid": {
    "size": "small",
    "ui": false,
-   "description": "Devoid (rule 702.114): a colour-setting characteristic that makes the object colourless in every zone (layer 5)."
+   "description": "Devoid (rule 702.114): a colour-setting characteristic that makes the object colourless in every zone (layer 5). Does not cover telling a devoid object apart (filter:has-devoid)."
   },
   "keyword:discover": {
    "size": "medium",
