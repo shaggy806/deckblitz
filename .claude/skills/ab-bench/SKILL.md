@@ -25,6 +25,9 @@ others, seeded and seated exactly as `bot:bench` seats them.
   a worker grew to ~1 GB of garbage and 18 of them ran the machine out of
   memory (2026-10-02). Capped, 18 workers come to about 8 GB.
 
+- **Not across a change to the shape of the game state.** Every game is played on the working engine, so the baseline bot reads and simulates a state its own code doesn't know: 77 of 105 games ran out of worker memory against a baseline from before the need-key themes (2026-11-09). Compare such builds apart: `tune-bot.mjs bench` in each, same seeds and workers, the old one from `.scratch/baseline/<sha>/engine` with `git archive <sha> engine/scripts engine/data` unpacked there.
+- **Stopping a bench:** stopping the background shell leaves its `node` processes running on every core; check `Get-CimInstance Win32_Process` and stop them, or the next bench only times out.
+
 ## Run
 
 Background, with a check-in every few minutes (Monitor on the output file,

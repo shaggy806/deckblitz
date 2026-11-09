@@ -46,6 +46,7 @@ B274 found about a third of its flagged cards needed no engine code.
    from 2026-11-04, compare turn times on a big board, and play a few real games. This is the
    occasional bench `feedback_bench_sparingly` allows. The commit now live wasn't confirmed when
    this was written.
+   **Run 2026-11-09:** `bot:ab` can't compare across these migrations: it plays every game on the working engine, so the old bot reads and simulates a state of the new shape. Instead each build played v2 against v1 in its own engine, 40 games, 18 workers: today 67.6% [51.5, 80.4], 2026-11-04 (`a6a3485d6`) 66.7% [50.3, 79.8]; median game 111 s against 110 s, mean decision 219 ms against 197 ms. Level at this size (it would miss a drop under about 15 points). The games that timed out at 300 s (3 today, 4 then) hit the old build too.
 4. **Cut down the manual checks.** `docs/manual-checks.md` holds 1,817 tests, more than will ever
    be played by hand. Choose about 20 covering the player decisions added since 2026-11-04 (616.1's
    replacement orders first), and cover "this prompt appears" tests by script where one can. New
