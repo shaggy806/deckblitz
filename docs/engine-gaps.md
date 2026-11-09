@@ -48,9 +48,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   other "that card" reference (an impulse permission on an exiled permanent, Hostage Taker's) sees
   the object's own card alone. Fix: a `choose-pile`-style order decision for the first, and read
   `leftWith` wherever an effect follows a permanent into its new zone for the second.
-- **A resolve-time either/or between two effects.** Vhati il-Dal's "target creature's base power
-  or base toughness becomes 1" chooses between two effects as it resolves (608.2d); nothing can
-  say that yet (`animate`'s lone power/toughness exists since 2026-10-31).
 - **Simultaneous as-enters removals of every counter.** Two Thieves of Blood entering at once:
   the first applied takes every counter, where the player should choose which gets them
   (`removeAllCountersFrom`, 2026-10-31; 616.1).
@@ -128,11 +125,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   a conceding player's own pending decision is answered by the server first. Not yet: a choice an
   effect would ask of a player who has already left (800.4g–h: the object's controller picks
   another player, or the next in turn order makes it) — the engine skips that player instead.
-**Panglacial Wurm under Opposition Agent.** The Agent's controller makes every decision while the player searches, but in `effects.ts`,
-`case "search-library"` offers `cast-now` (`from: "while-searching"`) before `ctx.searchLibrary`, and `Game.beginSearchControl` only starts
-in `beginLibrarySearch`, so the searcher answers. Fix: begin the control before the offer and end it when the search's `choose-from-zone`
-is answered. Blocks no card; only this interaction is wrong. Found 2026-11-04.
-
 **A shuffled face-down pile keeps its object ids.** Become Anonymous and Expose the Culprit (`Game.cloakExiledPile`) exile cards face up,
 shuffle them and cloak one, but an object keeps its id through the exile, so a client reading the wire or animating by id can tell which
 face-down card is which, where rule 406.3 and the shuffle (rule 701.24) mean nobody should. Rules-wise the cards run; what's seen is the

@@ -3159,10 +3159,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Engine rules gaps
 
+- **A delayed trigger's `{ powerOf: "source" }` reads 0 after an ability sacrifices its own source** (2026-11-09, `87f27bc77`): A delayed ability reads a source that has left, a sacrificed token included, as it last existed (`DelayedTrigger.sourceWas`, rules 608.2h, 603.7c).
+- **A Draconic Visitor's replacement of an Incubator drops the counters** (2026-11-09, `4cb4881b8`): A token made in an Incubator's place or beside it enters with its counters (rule 701.53a and both cards' rulings).
+- **A resolve-time either/or between two effects** (2026-11-09, `no commit`, already fixed: a test now pins it): A `modal` without `announced` says this; Vhati il-Dal uses it.
+- **Panglacial Wurm under Opposition Agent** (2026-11-09, `fd7f8da56`): Opposition Agent's controller answers the offer to cast Panglacial Wurm (rule 723.2).
 - **Proliferate over a token stack** (2026-11-09, `d5cf8f8ef`): Proliferate chooses how many tokens of a stack get the counter: the offer's `copies`, the client's count menu (rule 701.34a). A driver naming a stack once now means one token.
 - **Distinct targets in one token stack** (2026-11-09, `f3986fd56`): "Another target" and any-number groups can take several tokens of one stack (`TargetFacts.stackSize`, rule 601.2c).
 - **A source of damage: a waiting effect's object and the command zone** (2026-11-09, `407d95124`): A source of damage can be a waiting effect's object or a command-zone object, picked from a popup (rule 609.7a). A referred object in a hand or library isn't offered: the client can't show it.
-- **Replacement order is chosen for the affected player, never asked** (2026-11-09, `8c46879a1`): The `replacement-order` decision (kind 32, rule 616.1): asked when the order changes the outcome; damage in combat and the `damage`, `damage-divided`, `damage-all`, `fight` and `destroy` effects. Open: counters (`counterTotal`), life gain, and damage the event can't wait on (pain from mana, redirected sub-events).
+- **Replacement order is chosen for the affected player, never asked** (2026-11-09, `8c46879a1`): The `replacement-order` decision (kind 32, rule 616.1): asked when the order changes the outcome; damage in combat and the `damage`, `damage-divided`, `damage-all`, `fight` and `destroy` effects. Open: counters (`counterTotal`), life gain, and damage the event can't wait on (pain from mana, redirected sub-events). Later that night the `add-counter`, `counters-divided` and `gain-life` effects ask too (`c54abe397`).
 - **"Enters untapped" always beats "enters tapped"** (2026-11-09, `e434c59d1`): The entering permanent's controller orders the two, by every entry through `askEnterChoice` (rule 616.1).
 - **Umbra armor's Aura is picked, and goes after the other shields** (2026-11-09, `eb62e8eb6`): What would save a permanent from destruction is its controller's choice, for destroy effects, mass destroy and lethal damage (rule 616.1).
 - **A regeneration shield goes before a shield counter** (2026-11-09, `eb62e8eb6`): The same choice as umbra armor (rule 616.1).

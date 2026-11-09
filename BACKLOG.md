@@ -586,8 +586,6 @@ section keeps only what to do next.
 
 ## Engine rules gaps
 
-- **A delayed trigger's `{ powerOf: "source" }` reads 0 after an ability sacrifices its own source** (a delayed trigger carries no `refs.source`; seen 2026-11-09 with a sacrificed token on a later turn).
-- **A Draconic Visitor's replacement of an Incubator drops the counters** (the `tokenEventPlan` path; the `Incubator Token` name check in the mint path).
 - **Token events a `may` replacement doesn't reach (Moonlit Meditation)** — amass, incubate, encore, myriad and populate make tokens without offering a `becomes` (`docs/engine-gaps.md`). (2026-11-09: amass, incubate, populate and encore fixed; myriad, amass with `who` and other direct `createTokens` callers are left.)
 
 One line each; the detail (rule numbers, code sites, the cards each blocks) is in
@@ -595,7 +593,6 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 there and move this line to `COMPLETED.md`.
 
 - **"Each player may" acts on each answer before asking the next** (rule 101.4; the tempting offers and Kwain). (2026-11-09: tokens and counters fixed; `modal` effects and `options` are left.)
-- **Panglacial Wurm under Opposition Agent** (the cast-while-searching offer comes before the search control begins, so the searcher answers it).
 - **A shuffled face-down pile keeps its object ids** (Become Anonymous, Expose the Culprit: a client reading the wire can tell which face-down card is which; needs a design call).
 - **A self-replacement beside an exile: no 616.1 choice** (Gravebane Zombie's and Blightsteel's own "instead" always beat Rest in Peace or a finality counter).
 
@@ -605,7 +602,6 @@ there and move this line to `COMPLETED.md`.
 - **Limited-duration control of a player** — rule 723.2's Word of Command and Opposition Agent; `player-control.ts` holds a next turn or a next combat only.
 - **A targeting restriction can't last a turn, or require a target**: `hexproofFrom`'s qualifiers are statics only; Display of Dominance's "… this turn" over permanents you control, Lurker's "unless it attacked or blocked this turn" and the Flagbearers' "must choose at least one Flagbearer" (601.2c) need more (`docs/engine-gaps.md`). (2026-11-09: only the Flagbearers' "at least one if able" over a whole target set is left, and it needs a client change.)
 - **A merged or melded permanent's cards go into a library or graveyard in an order nobody chose**: rule 730.3a and the meld ruling let the owner order them; and only a blink and the exile links find every card it became as "that card" (730.3c, `leftWith`, built 2026-10-31 with meld).
-- **A resolve-time either/or between two effects**: Vhati il-Dal's "base power or base toughness becomes 1" (`docs/engine-gaps.md`).
 - **Simultaneous as-enters removals of every counter**: two Thieves of Blood at once — the player should choose which gets them (`docs/engine-gaps.md`).
 - **An optional non-mana cost paid as a permanent enters**: Ulamog's Despoiler's "as this enters, you may put two cards … from exile" (`docs/engine-gaps.md`).
 - **Face-down leftovers**: Illusionary Mask, Ugin, the Ineffable, Kozilek, the Broken Reality, Ixidron, Vesuvan Shapeshifter and others, each needing its own face-down link or choice (`docs/engine-gaps.md`).
@@ -613,7 +609,7 @@ there and move this line to `COMPLETED.md`.
 - **Splice's limits** (702.47): only onto a spell with one plain `effect` (not modal, fused, divided or `resolve`), not with overload, at most four splice cards a cast, and a mana splice cost only. (2026-11-09: onto modal, fused and overloaded spells landed; a spliced card with targets onto a modal spell, divided and `resolve` spells, the four-card cap and 702.47b's order are left.)
 - **Blitz, dash, sneak, web-slinging and More Than Meets the Eye are offered only from the hand and the command zone** (702.152a, 702.109a, 702.190a, 702.188a, 702.162a).
 - **Not modeled**: banding, Companion, word-replacing text change (612.2).
-- **Replacement order is chosen for the affected player, never asked** (616.1): among them two opponents' Crafty Cutpurses on one token (first in turn order), and the Words cycle's next draw before a Notion Thief or a draw multiplier. (2026-11-09: the `replacement-order` decision asks for damage, combat and destroy effects; counters, life gain and events that can't wait are left.)
+- **Replacement order is chosen for the affected player, never asked** (616.1): among them two opponents' Crafty Cutpurses on one token (first in turn order), and the Words cycle's next draw before a Notion Thief or a draw multiplier. (2026-11-09: the `replacement-order` decision asks for damage, combat, destroy, and the `add-counter`, `counters-divided` and `gain-life` effects; entering counters, costs, lifelink, player counters, connive, proliferate and events that can't wait still take the best order.)
 - **"Each player may" with a choice inside it** (101.4): a search is done before the next player is asked (Tempt with Discovery, Innocent Traveler).
 - **Static-effect dependency ordering** (613.8) beyond layer 4's type grants.
 - **The rest of leaving the game** (800.4g–h): a choice asked of a player who has left is skipped, not handed to another player.
