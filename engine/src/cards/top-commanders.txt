@@ -1,5 +1,5 @@
 Top 500 Commander *commanders* by EDHREC deck count (fetched 2026-09-22)
-482 already implemented / 18 missing
+488 already implemented / 12 missing
 Ranked by how many decks run the card AS THEIR COMMANDER (EDHREC num_decks) —
 not by how often it is played across Commander decks, which is what
 top-commander-cards.txt ranks and which badly misorders commanders.
@@ -52,7 +52,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]   46  Arcades, the Strategist                        23135 decks  {1}{G}{W}{U}     Legendary Creature — Elder Dragon
 [x]   47  Ygra, Eater of All                             22997 decks  {3}{B}{G}        Legendary Creature — Elemental Cat
 [x]   48  The Necrobloom                                 22928 decks  {1}{W}{B}{G}     Legendary Creature — Plant
-[ ]   49  Mr. House, President and CEO                   22846 decks  {R}{W}{B}        Legendary Artifact Creature — Human
+[x]   49  Mr. House, President and CEO                   22846 decks  {R}{W}{B}        Legendary Artifact Creature — Human
 [x]   50  Flubs, the Fool                                22839 decks  {G}{U}{R}        Legendary Creature — Frog Scout
 [x]   51  Caesar, Legion's Emperor                       22746 decks  {1}{R}{W}{B}     Legendary Creature — Human Soldier
 [x]   52  Arabella, Abandoned Doll                       22645 decks  {R}{W}           Legendary Artifact Creature — Toy
@@ -201,7 +201,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  195  Wick, the Whorled Mind                         12497 decks  {3}{B}           Legendary Creature — Rat Warlock
 [x]  196  Zedruu the Greathearted                        12468 decks  {1}{U}{R}{W}     Legendary Creature — Minotaur Monk
 [x]  197  Light-Paws, Emperor's Voice                    12403 decks  {1}{W}           Legendary Creature — Fox Advisor
-[ ]  198  Hazel of the Rootbloom                         12374 decks  {2}{B}{G}        Legendary Creature — Squirrel Druid
+[x]  198  Hazel of the Rootbloom                         12374 decks  {2}{B}{G}        Legendary Creature — Squirrel Druid
 [x]  199  Stella Lee, Wild Card                          12366 decks  {1}{U}{R}        Legendary Creature — Human Rogue
 [x]  200  Anti-Venom, Horrifying Healer                  12251 decks  {W}{W}{W}{W}{W}  Legendary Creature — Symbiote Hero
 [x]  201  Judith, Carnage Connoisseur                    12173 decks  {3}{B}{R}        Legendary Creature — Human Shaman
@@ -214,7 +214,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  208  Thalia and The Gitrog Monster                  11891 decks  {1}{W}{B}{G}     Legendary Creature — Human Frog Horror
 [x]  209  Shadow the Hedgehog                            11880 decks  {B}{B}{R}{R}     Legendary Creature — Hedgehog Mercenary
 [x]  210  Derevi, Empyrial Tactician                     11868 decks  {G}{W}{U}        Legendary Creature — Bird Wizard
-[ ]  211  Indoraptor, the Perfect Hybrid                 11800 decks  {1}{B/G}{R}      Legendary Creature — Dinosaur Mutant
+[x]  211  Indoraptor, the Perfect Hybrid                 11800 decks  {1}{B/G}{R}      Legendary Creature — Dinosaur Mutant
 [x]  212  Arahbo, Roar of the World                      11780 decks  {3}{G}{W}        Legendary Creature — Cat Avatar
 [x]  213  The Jolly Balloon Man                          11747 decks  {1}{R}{W}        Legendary Creature — Human Clown
 [x]  214  Ovika, Enigma Goliath                          11524 decks  {5}{U}{R}        Legendary Creature — Phyrexian Nightmare
@@ -226,7 +226,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  220  Reyhan, Last of the Abzan                      11383 decks  {1}{B}{G}        Legendary Creature — Human Warrior
 [x]  221  Michelangelo, the Heart                        11379 decks  {1}{G}           Legendary Creature — Mutant Ninja Turtle
 [x]  222  Gonti, Canny Acquisitor                        11371 decks  {2}{B}{G}{U}     Legendary Creature — Aetherborn Rogue
-[ ]  223  Orvar, the All-Form                            11362 decks  {3}{U}           Legendary Creature — Shapeshifter
+[x]  223  Orvar, the All-Form                            11362 decks  {3}{U}           Legendary Creature — Shapeshifter
 [x]  224  Veyran, Voice of Duality                       11357 decks  {1}{U}{R}        Legendary Creature — Efreet Wizard
 [x]  225  Tinybones, Bauble Burglar                      11172 decks  {1}{B}           Legendary Creature — Skeleton Rogue
 [x]  226  Dina, Essence Brewer                           11138 decks  {1}{B}{G}        Legendary Creature — Dryad Druid
@@ -301,7 +301,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  295  Tannuk, Memorial Ensign                         9181 decks  {1}{R}{G}        Legendary Creature — Kavu Pilot
 [x]  296  Elsha, Threefold Master                         9167 decks  {U}{R}{W}        Legendary Creature — Djinn Monk
 [x]  297  Gargos, Vicious Watcher                         9116 decks  {3}{G}{G}{G}     Legendary Creature — Hydra
-[ ]  298  Noctis, Prince of Lucis                         9100 decks  {1}{W}{U}{B}     Legendary Creature — Human Noble
+[x]  298  Noctis, Prince of Lucis                         9100 decks  {1}{W}{U}{B}     Legendary Creature — Human Noble
 [x]  299  Syr Gwyn, Hero of Ashvale                       9089 decks  {3}{R}{W}{B}     Legendary Creature — Human Knight
 [x]  300  Athreos, God of Passage                         9079 decks  {1}{W}{B}        Legendary Enchantment Creature — God
 [ ]  301  Coram, the Undertaker                           9077 decks  {1}{B}{R}{G}     Legendary Creature — Human Warrior
@@ -312,7 +312,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  306  Toxrill, the Corrosive                          9006 decks  {5}{B}{B}        Legendary Creature — Slug Horror
 [ ]  307  Arna Kennerüd, Skycaptain                       8987 decks  {2}{W}{U}{B}     Legendary Creature — Human Knight
 [x]  308  Raggadragga, Goreguts Boss                      8971 decks  {2}{R}{G}        Legendary Creature — Human Boar
-[ ]  309  Minsc & Boo, Timeless Heroes                    8968 decks  {2}{R}{G}        Legendary Planeswalker — Minsc
+[x]  309  Minsc & Boo, Timeless Heroes                    8968 decks  {2}{R}{G}        Legendary Planeswalker — Minsc
 [x]  310  Ghalta, Primal Hunger                           8956 decks  {10}{G}{G}       Legendary Creature — Elder Dinosaur
 [x]  311  Dogmeat, Ever Loyal                             8944 decks  {R}{G}{W}        Legendary Creature — Dog
 [x]  312  Alexios, Deimos of Kosmos                       8932 decks  {3}{R}           Legendary Creature — Human Berserker

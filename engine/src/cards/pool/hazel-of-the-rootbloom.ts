@@ -20,7 +20,7 @@ export default defineCard({
   text: `${MANA_TEXT}\n${END_TEXT}`,
   activated: [
     {
-      cost: { mana: null, tap: true, payLife: 2, tapOthers: { count: "x", filter: { token: true } } },
+      cost: { mana: null, tap: true, payLife: 2, tapOthers: { count: "x", filter: { controlledBy: "you", token: true } } },
       targets: [],
       effect: { kind: "add-mana", mana: { oneOf: ["W", "U", "B", "R", "G"] }, amount: "x" },
       resolve: null,

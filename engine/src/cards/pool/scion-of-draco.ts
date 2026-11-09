@@ -20,7 +20,7 @@ export default defineCard({
   text: `${DOMAIN_TEXT}\nFlying\n${GRANT_TEXT}`,
   selfCostReduction: {
     condition: { kind: "controls", filter: {}, atLeast: 0 },
-    reduceGeneric: { product: [2, { basicLandTypes: "you" }] },
+    reduceGeneric: { product: [{ basicLandTypes: "you" }, 2] },
   },
   static: [
     { affects: { scope: "filter", filter: { type: "creature", controlledBy: "you", colors: ["W"] } }, grantKeywords: ["vigilance"], text: GRANT_TEXT },
