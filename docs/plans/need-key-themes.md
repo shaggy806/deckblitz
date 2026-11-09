@@ -1,6 +1,6 @@
 # Need-key themes: general engine changes under the open keys
 
-Status: plan of record (2026-11-07), steps 1-6 (B275-B280) and six pieces of step 7 (theme 7, B281; theme 10, B282; theme 9, B283; theme 11, B284; theme 13, B285; theme 12, B286) done; step 7 goes on to
+Status: plan of record (2026-11-07), steps 1-6 (B275-B280) and seven pieces of step 7 (theme 7, B281; theme 10, B282; theme 9, B283; theme 11, B284; theme 13, B285; theme 12, B286; theme 8, B287) done; step 7 goes on to
 the smaller themes — see *The plan* just below. The survey under it is a proposal.
 
 The 1,783 open need keys (2,265 waiting cards, re-counted after step 1; the survey's own count was 1,831 and 2,324)
@@ -73,7 +73,8 @@ touch. Each step:
    - **Done 2026-11-08 (B284).** One combat rule, requirements and restrictions (theme 11: `engine/src/combat/rules.ts`, see its design note and *As built*). 14 cards: Galactus, Devourer of Worlds and Silver Surfer, Galactus's Herald (flagged) and 12 of the theme's top keys; 6 keys marked built, their other cards left in `--stale` for `author-freed`.
    - **Done 2026-11-08 (B285).** Three reads of mana (theme 13: `engine/src/mana.ts`, see its design note and *As built*). 20 cards: Squandered Resources, Omnath, Locus of the Void (flagged) and 18 of the theme's top keys; 11 keys marked built, their other cards left in `--stale` for `author-freed`. Yavimaya Bloomsage stays flagged (see *Left unbuilt*).
    - **Done 2026-11-08 (B286).** Flips and rolls as records (theme 12: `engine/src/random-results.ts`, see its design note and *As built*). 14 cards: Ral Zarek, Guest Lecturer (flagged) and 13 of the theme's top keys; 15 keys marked built, their other cards left in `--stale` for `author-freed`.
-   - Next: the smaller themes (14, 16, 8, as `--by-rank` reaches their cards).
+   - **Done 2026-11-08 (B287).** One characteristics patch and one `become` effect (theme 8: `engine/src/characteristics-patch.ts`, see its design note and *As built*). 18 cards, none of the twelve flagged (no flagged card's key is under this theme): Mycosynth Lattice and 17 of the theme's top keys; 13 keys marked built, their other cards left in `--stale` for `author-freed`.
+   - Next: the smaller themes (14, 16, as `--by-rank` reaches their cards).
 
 ## How this was measured
 
@@ -1175,6 +1176,55 @@ Copying gets an `of: ObjectSetRef` (theme 1) and "a copy for each object it coul
 - the eight `effect:copy-exception-*` one-card keys, and ~90 more one-card keys.
 
 **Confidence: low-medium.** The patch is general, but many keys here are separate mechanics.
+
+**Design note (step 7, 2026-11-08): one patch, one `become`.** Picked by `--by-rank`, flagged cards first: none of the twelve flagged cards' keys fall under themes 14, 16 or 8, and Mycosynth Lattice (2058) comes before Akiri (2078, theme 14).
+
+*What's wrong today.* "This permanent is now these things" is said seven ways: the effects `animate`, `add-types`, `animate-all`, `lose-abilities`, `lose-abilities-all`, `become-color` and `lose-keywords`, each with its own subset of the same fields, its own `EffectContext` method and its own rules for timestamps and token stacks. So "creatures target player controls lose all abilities and have base P/T 0/2" (Sudden Spoiling) has no spelling: `animate-all` can't lose abilities, `lose-abilities-all` can't set P/T. Copy exceptions are an eighth list of the same words with its own spellings (`basePt`, `notLegendary`), plus a boolean that travels beside them through a dozen copy paths and onto the object. A static can set base P/T three ways (`setBasePt`, `setBasePtFromAffectedCounters`, `setBasePtFromSourceCount`), and none reads the permanent's own mana value. Off the battlefield only types are reachable, and only for your own cards. Supertypes can be added and never removed, and a one-shot can't take creature types away.
+
+*Where it lives.* `engine/src/characteristics-patch.ts`, the types and the one pure function from a patch to a modifier:
+
+- **`CharacteristicsPatch<Pt>`**, one declaration of what can change: `name`; layer 4 (`TypePatch`: `setTypes`, `addTypes`, `removeTypes`, `setSubtypes`, `addSubtypes`, `removeSubtypes`, `loseLandTypes`, `loseCreatureTypes`, `addSupertypes`, `removeSupertypes`); layer 5 (`ColorPatch`: `setColors`, `addColors`); layer 6 (`loseAbilities`, `keywords`, `loseKeywords`, `cantHaveKeywords`, `activated`, `triggered`, `static`, `toxic`); layer 7b (`power`, `toughness`, each alone or both). `Pt` is what a P/T can be: an `EffectAmount` on a one-shot (read once as it applies, 608.2h), a number on a copy exception.
+- **One effect.** `{ kind: "become", target | filter, …patch, duration }`, flat so a card reads as it always has; `exceptSource` and `controlledByTarget` belong to the `filter` form. One `ctx.become` and one `ctx.becomeAll`, the second giving every match one timestamp and leaving a token stack whole (613.7b, 611.2c). A patch changing only colours also reaches a spell on the stack, as `become-color` did. Every piece of a one-shot gets a fresh timestamp.
+- **One modifier path.** `patchModifier(patch)` builds the `PtModifier` fields for a one-shot and for a copy exception. `PtModifier` keeps its layer fields, which the fold already reads, and gains `removeSupertypes` and `loseCreatureTypes`.
+- **Copy exceptions are the patch** (`CopyExceptions extends CharacteristicsPatch<number>`) plus what only a copy can say: `noManaCost`, `thisAbility`, `legendRuleOff`, and **`ifCopied: [{ filter, patch }]`**, a piece that applies only if the copied values match ("if it's a creature", Moritte). `basePt` becomes `power` and `toughness`; `notLegendary` becomes `removeSupertypes: ["legendary"]`.
+- **Statics share the declarations.** `StaticAbility extends TypePatch, ColorPatch`, so the spellings are one list, and `setBasePt` takes one value form: `{ power?, toughness? }`, each a number, `"its-mana-value"`, `{ countersOnIt }` or `{ sourceCount }`.
+- **Off the battlefield.** `typesOutsideBattlefield` becomes `outsideBattlefield: { filter?, whose?, zones?, …TypePatch, …ColorPatch }`: colours as well as types, every player's cards as well as your own (Mycosynth Lattice).
+
+*Rules.*
+- **105.2c, 105.3**: "colorless" is having no colours, so `setColors: []`.
+- **205.1a, 205.3d, 205.4**: a "becomes" without "in addition" replaces; a lost card type takes its own subtypes; supertypes are independent of card types and come off alone (Melting).
+- **305.7**: setting a land's type takes its rules-text mana abilities, already done by the fold.
+- **604.3, 702.73a**: changeling is a CDA, so a copy exception giving it adds every creature type in layer 4 and a later loss of abilities doesn't undo that (the printed changeling's ruling).
+- **608.2h, 611.2c**: amounts are read once and the set of objects fixed once, as the effect starts.
+- **613.1, 613.4b, 613.6, 613.7**: layers as before. A static whose layer-4 part reached a permanent keeps that set for its later layers, so "each noncreature artifact is an artifact creature with P/T equal to its mana value" doesn't switch itself off in layer 7b.
+- **613.8a**: a scope depending on its own result needs a check (March of the Machines' "noncreature").
+- **707.9, 707.9b**: an exception is part of the copiable values, so "loses soulbond" and "has haste" are copied onward.
+- **707.9a**: a piece conditional on what's copied reads the copied values.
+
+*Moved or not, decided before building.* **Moved and deleted:** the seven effect kinds and their seven `EffectContext` methods; `CopyExceptions.basePt` and `notLegendary`; `create-token-copy`'s `notLegendary`, `GameObject.notLegendary`, `PtModifier.notLegendary`; `setBasePtFromAffectedCounters`, `setBasePtFromSourceCount`; `typesOutsideBattlefield`. Card files and the scaffolder's output by a script, run once, with a pool test refusing every removed spelling. Deliberately not moved:
+- *`grant-keyword`, `grant-triggered`, `grant-activated`, `grant-static` and their mass forms*: they're theme 16's, and a `sequence` of one with a `become` is still right.
+- *`grant-static`'s layer-4 part*: no card grants one, so a reader would have nothing to prove it.
+- *`setBasePtFromCount`*: a CDA in layer 7a, not a 7b set.
+- *`selfOutsideBattlefield`*: one card's own printed characteristic off the battlefield (113.6c).
+- *`modify-pt`*: layer 7c, not a change of what the permanent is.
+- *Which object a copy copies, and "a copy for each object it could target"*: separate mechanics; their keys stay open.
+- *Keywords with a number* (vanishing N, Flesh Duplicate): they're definition pieces, not keyword values, which is theme 16's first half.
+
+*Bots.* `target-polarity`'s one `become` row reads the patch: losing abilities is harm, a small body is harm, a keyword or creature type is help, as `animate`'s did, and `loseKeywords` keeps its harm reading. `effect-worth`'s `animate` row becomes `become`. No new decision kind is expected.
+
+*As built (step 7, B287).*
+- `characteristics-patch.ts`: `TypePatch`, `ColorPatch`, `CharacteristicsPatch<Pt>`, `ResolvedPatch`, `CopyExceptions<Pt>`, `StaticPt`, `patchModifier`, `changesOnlyColors`, `changesTypes`. `Game.become`, `ctx.become`, `ctx.becomeAll`, `copyExceptionModifiers`, `copiableTypesOf`, `outsideReaches`, `staticBasePt`.
+- **Moved and deleted, every user migrated:** the seven effect kinds (`animate`, `add-types`, `animate-all`, `lose-abilities`, `lose-abilities-all`, `become-color`, `lose-keywords`) and their seven `EffectContext` methods; `Game.animate`, `addTypes`, `loseKeywords`; `CopyExceptions.basePt` and `notLegendary`; `create-token-copy`'s `basePt` and `notLegendary`, folded into its `exceptions`; `GameObject.notLegendary`, `PtModifier.notLegendary`, `CopyValues.notLegendary`, `LastKnown.notLegendary`, and the boolean that travelled through `mintTokenBatch` and `mintFreshTokenObject`; `setBasePtFromAffectedCounters`, `setBasePtFromSourceCount`; `typesOutsideBattlefield`, now `outsideBattlefield`. 893 card, test and scaffolder files by a script, run once; `test/characteristics-patch.test.ts` refuses every removed spelling.
+- **One more than the note listed:** `EnterTypes` and the separate fields it was copied into on `EnterOptions` are the patch too (`EnterTypes extends ResolvedPatch`, `EnterOptions.asEntered`), since a permanent put onto the battlefield "as a 5/5 Elemental" says the same words.
+- **Differences from the note:** `ifCopied` takes `{ ofType, patch }`, not a filter, because the copy's values have to be read without going through the layer fold (`copiableTypesOf`). A copy exception with `changeling` among its keywords adds every creature type itself, so a copied changeling is authored as the keyword alone.
+- **Behaviour changes:** every one-shot gets a fresh timestamp, where `add-types` used to reuse the latest for a purely additive change; an `animate` that changed types but not both P/T values now logs "types-added" where it logged nothing. `power` and `toughness` are read signed (rule 107.1b), as a create-token-copy's always were, where `animate` floored them. Supertypes now fold in timestamp order with every other layer-4 change, so a later "becomes snow" beats an earlier "no longer snow" (Thermal Flux over Melting).
+- **Additions the proving cards needed:** `spendManaAs.everyone` (Mycosynth Lattice), `removeSubtypes` on a static.
+- Not benched: the layer fold now tracks supertypes as it goes, and an off-battlefield colour read walks the `outsideBattlefield` statics, usually none. Full verify and the bot gate (202/202) passed. Played live in the builder: Mycosynth Lattice (Serra Angel cast with Swamps alone) and Moritte of the Frost (the copy prompt, then a legendary Sol Ring with no counters).
+- Bots: as the note. `target-polarity`'s `become` row is built from the patch, and a mass form aims at a target player only for a small body or a loss. No new decision kind, so no bot prompt to check.
+- Scaffolder: every output moved. It doesn't read "gains all creature types", "is no longer snow" or a static P/T of "its mana value".
+- Cards (18): Mycosynth Lattice; Encroaching Mycosynth; Sudden Spoiling; Karn, the Great Creator; Starfield of Nyx; Opalescence; March of the Machines; Amoeboid Changeling; Nameless Inversion; Shields of Velis Vel; Ego Erasure; Omni-Changeling; Moritte of the Frost; Thermal Flux; Melting; Arcum's Weathervane; Day of Black Sun; Jade Statue. `test/characteristics-patch.test.ts` covers each, with a pool walk for the removed spellings.
+- Keys marked built: `static:all-permanents-artifacts-colorless`, `static:type-change-all-zones`, `static:set-base-pt-all`, `effect:loyalty-animate-until-your-next-turn`, `static:static-base-pt-own-mana-value`, `static:animate-pt-equal-mana-value`, `effect:gain-lose-all-creature-types`, `effect:copy-exception-changeling`, `effect:copy-exception-if-creature`, `static:lose-supertype`, `effect:animate-remove-supertype`, `effect:mass-lose-all-abilities`, `effect:animate-until-end-of-combat`.
+- **Left unbuilt, not marked:** the copy mechanics (`copy-spell-for-each-*`, `copy-next-loyalty-ability`, `token-copy-of-*`, `replacement:*-enter-as-copy`, the "of: ObjectSetRef" the theme proposed), which are separate from what a copy is. `effect:copy-exception-if-copied-lacks-ability` (Flesh Duplicate) and `effect:copy-exception-loses-ability` (Mirage Phalanx): vanishing N and soulbond are definition pieces, not keyword values, which is theme 16's first half. `effect:copy-exception-toxic` (Kinzu needs "pay 2 life and exile it" as an `each-player-may`, not tried; `toxic` on the patch is built). `static:set-base-pt-others-from-count` (Porcelain Gallery: its `{ sourceCount }` is built, the Room's other door wasn't tried). `static:lose-all-abilities-except-mana` (Blood Sun), `static:graveyard-cards-lose-abilities` (Yixlid Jailer), `effect:lose-specific-ability` (Glittering Lynx): losing part of a text, a separate reader. `effect:animated-this-way`. Titania's Song and Animate Artifact wait on their own conditions. The rest of the ~90 one-card keys.
 
 ### 9. Replacement effects with an arbitrary "instead" (101 keys, ~123 cards)
 

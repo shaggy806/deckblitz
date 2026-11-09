@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4729 already implemented / 271 missing (marks refreshed 2026-11-09)
+4735 already implemented / 265 missing (marks refreshed 2026-11-09)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2041,7 +2041,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2048  There and Back Again                     {3}{R}{R}        Enchantment — Saga
 [x]  2049  Single Combat                            {3}{W}{W}        Sorcery
 [ ]  2050  The Council of Four                      {3}{W}{U}        Legendary Creature — Human Noble
-[ ]  2051  Mycosynth Lattice                        {6}              Artifact
+[x]  2051  Mycosynth Lattice                        {6}              Artifact
 [x]  2052  Copy Enchantment                         {2}{U}           Enchantment
 [ ]  2053  Akiri, Fearless Voyager                  {1}{R}{W}        Legendary Creature — Kor Warrior
 [x]  2054  Crash Through                            {R}              Sorcery
@@ -2073,7 +2073,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2080  Grim Backwoods                           {0}              Land
 [x]  2081  Vengeful Ancestor                        {2}{R}{R}        Creature — Spirit Dragon
 [x]  2082  Sowing Mycospawn                         {3}{G}           Creature — Eldrazi Fungus
-[ ]  2083  Sudden Spoiling                          {1}{B}{B}        Instant
+[x]  2083  Sudden Spoiling                          {1}{B}{B}        Instant
 [x]  2084  Liliana, Death's Majesty                 {3}{B}{B}        Legendary Planeswalker — Liliana
 [x]  2085  Deathreap Ritual                         {2}{B}{G}        Enchantment
 [x]  2086  Nissa, Resurgent Animist                 {2}{G}           Legendary Creature — Elf Scout
@@ -2095,7 +2095,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2102  Grafdigger's Cage                        {1}              Artifact
 [x]  2103  Bruvac the Grandiloquent                 {2}{U}           Legendary Creature — Human Advisor
 [x]  2104  Mycoloth                                 {3}{G}{G}        Creature — Fungus
-[ ]  2105  Karn, the Great Creator                  {4}              Legendary Planeswalker — Karn
+[x]  2105  Karn, the Great Creator                  {4}              Legendary Planeswalker — Karn
 [x]  2106  Illustrious Wanderglyph                  {4}{W}           Artifact Creature — Golem
 [x]  2107  Weaver of Harmony                        {1}{G}           Enchantment Creature — Snake Druid
 [x]  2108  Liesa, Forgotten Archangel               {2}{W}{W}{B}     Legendary Creature — Angel
@@ -2258,7 +2258,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2265  Elder Gargaroth                          {3}{G}{G}        Creature — Beast
 [x]  2266  End the Festivities                      {R}              Sorcery
 [x]  2267  Satyr Enchanter                          {1}{G}{W}        Creature — Satyr Druid
-[ ]  2268  Starfield of Nyx                         {4}{W}           Enchantment
+[x]  2268  Starfield of Nyx                         {4}{W}           Enchantment
 [ ]  2269  Quilled Greatwurm                        {4}{G}{G}        Creature — Wurm
 [x]  2270  Tome of Legends                          {2}              Artifact — Book
 [x]  2271  Dracogenesis                             {6}{R}{R}        Enchantment
@@ -3975,7 +3975,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3982  Well Rested                              {1}{G}           Enchantment — Aura
 [ ]  3983  Minsc & Boo, Timeless Heroes             {2}{R}{G}        Legendary Planeswalker — Minsc
 [x]  3984  Lilypad Village                          {0}              Land
-[ ]  3985  Encroaching Mycosynth                    {3}{U}           Artifact
+[x]  3985  Encroaching Mycosynth                    {3}{U}           Artifact
 [x]  3986  Selfless Safewright                      {3}{G}{G}        Creature — Elf Warrior
 [x]  3987  Unsettled Mariner                        {W}{U}           Creature — Shapeshifter
 [x]  3988  Muxus, Goblin Grandee                    {4}{R}{R}        Legendary Creature — Goblin Noble
@@ -4906,7 +4906,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4913  Aphetto Alchemist                        {1}{U}           Creature — Human Wizard
 [x]  4914  Ardbert, Warrior of Darkness             {1}{W}{B}        Legendary Creature — Spirit Warrior
 [x]  4915  Thrumming Hivepool                       {6}              Artifact
-[ ]  4916  Amoeboid Changeling                      {1}{U}           Creature — Shapeshifter
+[x]  4916  Amoeboid Changeling                      {1}{U}           Creature — Shapeshifter
 [x]  4917  Behind the Scenes                        {2}{B}           Enchantment
 [x]  4918  Necron Deathmark                         {3}{B}{B}        Artifact Creature — Necron
 [x]  4919  Loyal Subordinate                        {2}{B}           Creature — Zombie

@@ -7820,3 +7820,15 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Ral Zarek, Guest Lecturer: skips a turn per heads
 - **Do:** Activate −7, targeting Bob.
 - **Expect:** The log shows five flips of heads or tails, none won or lost, and Bob skips one turn per heads.
+
+### Mycosynth Lattice: any mana, and everything colorless
+- **Do:** Cast Serra Angel using only your Swamps.
+- **Expect:** The white pips can be paid with black mana, and the card reads as colorless in hand and on the battlefield.
+
+### Moritte of the Frost: a noncreature copy gets no counters
+- **Do:** Cast Moritte and copy your Sol Ring.
+- **Expect:** It enters as a legendary snow Sol Ring with no +1/+1 counters and no creature types.
+
+### Karn, the Great Creator: until your next turn
+- **Do:** Activate +1 on your Sol Ring, then pass the turn to Bob and back.
+- **Expect:** Sol Ring is a 1/1 artifact creature through Bob's turn and stops being one when your turn begins.

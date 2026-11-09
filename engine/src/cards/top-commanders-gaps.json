@@ -2092,7 +2092,20 @@
   "effect:roll-two-keep-higher",
   "condition:trigger-roll-results",
   "trigger:rolls-at-least",
-  "condition:dice-rolled-doubles"
+  "condition:dice-rolled-doubles",
+  "static:all-permanents-artifacts-colorless",
+  "static:type-change-all-zones",
+  "static:set-base-pt-all",
+  "effect:loyalty-animate-until-your-next-turn",
+  "static:static-base-pt-own-mana-value",
+  "static:animate-pt-equal-mana-value",
+  "effect:gain-lose-all-creature-types",
+  "effect:copy-exception-changeling",
+  "effect:copy-exception-if-creature",
+  "static:lose-supertype",
+  "effect:animate-remove-supertype",
+  "effect:mass-lose-all-abilities",
+  "effect:animate-until-end-of-combat"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

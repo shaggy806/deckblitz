@@ -310,6 +310,24 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Mycosynth Lattice: any mana, and everything colorless',
+    board({
+      you: { bf: ['Mycosynth Lattice', 'Swamp*5'], hand: ['Serra Angel'] },
+    }),
+  ),
+  preset(
+    'Moritte of the Frost: a noncreature copy gets no counters',
+    board({
+      you: { bf: ['Sol Ring', 'Forest*2', 'Island*3'], hand: ['Moritte of the Frost'] },
+    }),
+  ),
+  preset(
+    'Karn, the Great Creator: until your next turn',
+    board({
+      you: { bf: ['Karn, the Great Creator', 'Sol Ring'] },
+    }),
+  ),
+  preset(
     'Krark: a lost flip returns the spell to your hand',
     board({
       you: { bf: ['Krark, the Thumbless', 'Mountain*6'], hand: ['Shock*3'] },
