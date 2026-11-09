@@ -55,6 +55,20 @@ describe("Silence the Believers", () => {
 });
 
 describe("Defiant Vanguard", () => {
+  it("destroys an attacker it blocked even after that attacker was removed from combat (506.4)", () => {
+    const { game, a, b } = table();
+    const vanguard = spawn(game, "Defiant Vanguard", B);
+    const giant = spawn(game, "Hill Giant", A);
+    b.declareBlockersFn = () => [{ blocker: vanguard, attacker: giant }];
+    a.declareAttackersFn = () => [{ attacker: giant, defender: B }];
+    toStep(game, "declare-blockers");
+    game.debugApplyEffect(A, { kind: "remove-from-combat", target: 0 }, [{ kind: "object", object: giant }]);
+    expect(game.state.objects[vanguard].blockedAttackers ?? []).not.toContain(giant);
+    toStep(game, "postcombat-main");
+    expect(zone(game, vanguard)).toBe("graveyard");
+    expect(zone(game, giant)).toBe("graveyard");
+  });
+
   it("at end of combat destroys itself and the creature it blocked", () => {
     const { game, a, b } = table();
     const vanguard = spawn(game, "Defiant Vanguard", B);
