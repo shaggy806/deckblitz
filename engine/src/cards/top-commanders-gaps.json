@@ -2077,7 +2077,22 @@
   "amount:highest-life-total",
   "filter:shares-creature-type-with-this-way",
   "condition:filter-total-power-toughness",
-  "effect:keep-count-equal-to-fewest"
+  "effect:keep-count-equal-to-fewest",
+  "effect:flip-coins-count-until-lose",
+  "mechanic:coin-flip-heads-tails",
+  "amount:coin-flips-won-this-way",
+  "replacement:roll-extra-ignore-lowest",
+  "trigger:rolls-dice-modified-result",
+  "condition:roll-result-compare",
+  "mechanic:coin-flip-result-replacement",
+  "mechanic:coin-flip-choose-to-stop",
+  "mechanic:coin-flip-by-other-player",
+  "trigger:rolls-natural-result",
+  "effect:roll-keep-highest",
+  "effect:roll-two-keep-higher",
+  "condition:trigger-roll-results",
+  "trigger:rolls-at-least",
+  "condition:dice-rolled-doubles"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

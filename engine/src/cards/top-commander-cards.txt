@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4725 already implemented / 275 missing (marks refreshed 2026-11-08)
+4729 already implemented / 271 missing (marks refreshed 2026-11-09)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -4049,7 +4049,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4056  Copy Artifact                            {1}{U}           Enchantment
 [x]  4057  In the Darkness Bind Them                {2}{U}{B}{R}     Enchantment — Saga
 [x]  4058  Sower of Temptation                      {2}{U}{U}        Creature — Faerie Wizard
-[ ]  4059  Barbarian Class                          {R}              Enchantment — Class
+[x]  4059  Barbarian Class                          {R}              Enchantment — Class
 [ ]  4060  Vines of Vastwood                        {G}              Instant
 [x]  4061  Creosote Heath                           {0}              Land — Desert
 [x]  4062  Viridian Revel                           {1}{G}{G}        Enchantment
@@ -4120,7 +4120,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4127  The Cruelty of Gix                       {3}{B}{B}        Enchantment — Saga
 [x]  4128  Pentad Prism                             {2}              Artifact
 [x]  4129  Teferi, Hero of Dominaria                {3}{W}{U}        Legendary Planeswalker — Teferi
-[ ]  4130  Mirror March                             {5}{R}           Enchantment
+[x]  4130  Mirror March                             {5}{R}           Enchantment
 [x]  4131  Ob Nixilis, the Hate-Twisted             {3}{B}{B}        Legendary Planeswalker — Nixilis
 [x]  4132  Crucible of the Spirit Dragon            {0}              Land
 [x]  4133  Tectonic Edge                            {0}              Land
@@ -4219,7 +4219,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4226  Emperor Mihail II                        {1}{U}{U}        Legendary Creature — Merfolk Noble
 [ ]  4227  Bandit's Talent                          {1}{B}           Enchantment — Class
 [x]  4228  Leap                                     {U}              Instant
-[ ]  4229  Wyll, Blade of Frontiers                 {1}{R}           Legendary Creature — Human Warlock
+[x]  4229  Wyll, Blade of Frontiers                 {1}{R}           Legendary Creature — Human Warlock
 [x]  4230  Decoction Module                         {2}              Artifact
 [x]  4231  Locke, Treasure Hunter                   {1}{B}{R}        Legendary Creature — Human Rogue
 [x]  4232  Zhur-Taa Druid                           {R}{G}           Creature — Human Druid
@@ -4470,7 +4470,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4477  Indomitable Ancients                     {2}{W}{W}        Creature — Treefolk Warrior
 [x]  4478  Purphoros, Bronze-Blooded                {4}{R}           Legendary Enchantment Creature — God
 [x]  4479  Angelic Field Marshal                    {2}{W}{W}        Creature — Angel
-[ ]  4480  Luck Bobblehead                          {3}              Artifact — Bobblehead
+[x]  4480  Luck Bobblehead                          {3}              Artifact — Bobblehead
 [x]  4481  Cryptcaller Chariot                      {3}{B}           Artifact — Vehicle
 [x]  4482  Lost Jitte                               {1}              Legendary Artifact — Equipment
 [x]  4483  Deeproot Pilgrimage                      {1}{U}           Enchantment

@@ -1,6 +1,6 @@
 # Need-key themes: general engine changes under the open keys
 
-Status: plan of record (2026-11-07), steps 1-6 (B275-B280) and five pieces of step 7 (theme 7, B281; theme 10, B282; theme 9, B283; theme 11, B284; theme 13, B285) done; step 7 goes on to
+Status: plan of record (2026-11-07), steps 1-6 (B275-B280) and six pieces of step 7 (theme 7, B281; theme 10, B282; theme 9, B283; theme 11, B284; theme 13, B285; theme 12, B286) done; step 7 goes on to
 the smaller themes — see *The plan* just below. The survey under it is a proposal.
 
 The 1,783 open need keys (2,265 waiting cards, re-counted after step 1; the survey's own count was 1,831 and 2,324)
@@ -72,7 +72,8 @@ touch. Each step:
    - **Done 2026-11-08 (B283).** One `instead` and one resolved-replacement record (theme 9: `engine/src/replacements.ts`, see its design note and *As built*). 18 cards: Doc Samson, Moonlit Meditation, Quantum Riddler and Wolverine, Fierce Fighter (flagged) and 14 of the theme's top keys; 18 keys marked built, their other cards left in `--stale` for `author-freed`.
    - **Done 2026-11-08 (B284).** One combat rule, requirements and restrictions (theme 11: `engine/src/combat/rules.ts`, see its design note and *As built*). 14 cards: Galactus, Devourer of Worlds and Silver Surfer, Galactus's Herald (flagged) and 12 of the theme's top keys; 6 keys marked built, their other cards left in `--stale` for `author-freed`.
    - **Done 2026-11-08 (B285).** Three reads of mana (theme 13: `engine/src/mana.ts`, see its design note and *As built*). 20 cards: Squandered Resources, Omnath, Locus of the Void (flagged) and 18 of the theme's top keys; 11 keys marked built, their other cards left in `--stale` for `author-freed`. Yavimaya Bloomsage stays flagged (see *Left unbuilt*).
-   - Next: the smaller themes (12, 14, 16, 8, as `--by-rank` reaches their cards).
+   - **Done 2026-11-08 (B286).** Flips and rolls as records (theme 12: `engine/src/random-results.ts`, see its design note and *As built*). 14 cards: Ral Zarek, Guest Lecturer (flagged) and 13 of the theme's top keys; 15 keys marked built, their other cards left in `--stale` for `author-freed`.
+   - Next: the smaller themes (14, 16, 8, as `--by-rank` reaches their cards).
 
 ## How this was measured
 
@@ -1424,6 +1425,51 @@ effect:flip-coins-count-until-lose 2; 42 one-card keys.
 call for (engine/CLAUDE.md, *Determinism*). Rules 705 and 706.
 
 **Confidence: medium.**
+
+**Design note (step 7, 2026-11-08): a flip and a roll are records.** Picked by `--by-rank`, flagged cards first: Ral Zarek, Guest Lecturer (the first flagged card under any of the four themes) needs "flip five coins" and how many came up heads.
+
+*What's wrong today.* A flip is a boolean handed back to the effect and forgotten: nothing can ask how many were won or came up heads, a flip with no winner exists only inside Molten Sentry's enters path, and `flip-coin` has no count. A roll is one `GameState.lastRoll` slot, overwritten by the next, which a trigger can't read (it gets the sum of the naturals, ignoring modifiers, 706.2). Neither is a replaceable event, so "flip two and ignore one" and "roll one more and ignore the lowest" have no reader. "Until you lose a flip" is a private loop inside `flip-coin` beside the general `repeat`.
+
+*Where it lives.* `engine/src/random-results.ts`, the types and pure reads:
+
+- **One record each.** `FlipLanding { came, won? }` (`won` absent on a flip that cares only about the side, 705.2; a flip with a call lands "heads" when won, the call being immaterial) and `RollRecord { player, sides, results, modifier, total, ignored? }` (`results` are the natural results kept, 706.2, 706.6). The events `coin-flipped` and `dice-rolled` carry them.
+- **Kept in the journal.** New kinds `flipped` and `rolled` (theme 6), with their event's `seq`. `GameState.lastRoll` goes: the last roll is read from the journal (`lastRollIn`), and a clone keeps it as it kept the slot. A trigger on a roll carries that roll in `lastKnownRefs.roll`, so "those results" are its own roll even if another happened before it resolved.
+- **One effect each, wider.** `flip-coin` gains `count` ("one or more coins" is one instruction), `sides: true` (705.2), `heads` / `tails` branches and `then` (what's done with the results, reading them this way). `untilLose` is deleted: "until you lose a flip" is `repeat` with `again` asking that pass's flips, so it composes with `times` ("that many times or until…", Squee's Revenge) and `mayAgain` ("or choose to stop", Fiery Gambit), and a decision in a won branch suspends properly. `roll-dice` gains `keepHighest` (706.6). "That player flips" and "each player flips" are the `as-player` and `for-each-player` wrappers that already exist.
+- **Read through what's already there.** `thisWay` and the `this-way` condition take four more words: `flips-won`, `flips-lost`, `coins-heads`, `coins-tails`, read from the journal entries since the scope began (so a `repeat`'s pass sees its own, and the sentence after it sees them all). `{ roll }` takes `"highest"`, `"distinct"` and `{ atLeast: n }` beside its five. Comparing them is the existing `amounts` condition.
+- **Replaceable.** Two `ReplacementSpec`s, read at the one place each happens: `would-flip-coin` (`instead: { modify: { plus: 1 } }` with `ignore: true`, Krark's Thumb; `comesUp`, `wins` and `firstEachTurn`, Edgar) and `would-roll-dice` (`instead: { modify: { plus: 1 } }` with `ignoreLowest: true`).
+- **Triggerable.** `loses-coin-flip` beside `wins-coin-flip`; `rolls-dice`'s value becomes the result with its modifier; a new `rolls-die` row is one occurrence per die, `{ on: "event", event: "rolls-die", die?: { atLeast?, natural? } }` (`natural: "highest"` is that die's top face), its value that die's result.
+
+*Rules.*
+- **705.2**: a flip with a call is won or lost by its flipper alone; a flip caring only about the side has no winner, so `wins-coin-flip` doesn't fire on it.
+- **705.3**: an effect naming a result ignores the actual one and can make a flip won that otherwise couldn't be. Edgar's coins come up heads and are won, even on a sides-only flip, and draw nothing from the random stream.
+- **706.2**: the natural result is the die's face; the result adds the modifiers. `results` stay natural, `total` adds the modifier, and a trigger's "the result" reads the total.
+- **706.3a-c**: tables as today; "roll again" re-rolls the same number of dice.
+- **706.5**: doubles is every result equal: `{ roll: "distinct" }` of 1 over two dice.
+- **706.6**: an ignored roll never happened: no event for it, no trigger, nothing reads it. Ties for lowest are the same number, so no one chooses. Krark's Thumb's ignored flip is the same; which to ignore is the flipper's choice, asked only when the flips differ (a `may` built by the engine, with no new decision kind).
+- **614.5, 614.6**: each replacement applies to what the event has become, so Krark's Thumbs double (two flip four, ignore three), and each die source adds one. Rolling N keeping K under a source rolls N+1 and ignores the lowest first, then keeps K.
+- **603.2, 603.3**: a trigger on a roll sees the one event for the kept dice; a per-die trigger fires once per die that qualifies (Mr. House's ruling shape).
+- **`RandomSource`**: one draw per coin or die actually flipped or rolled; none when a result is named. Without a replacement the draw order is the same as before.
+
+*Moved or not, decided before building.* **Moved and deleted:** `GameState.lastRoll`, `flip-coin`'s `untilLose` and `MAX_FLIPS`, the `came`-means-sides-only reading of `coin-flipped` (`came` is always set; `won` is what's optional), and a dead `dice-rolled` branch in the trigger value. Deliberately not moved:
+- *`choose-value` `"roll-result"`, `{ roll: "other" }`*: these read the record already and stay.
+- *Yusri's chain*: its per-flip branches work; `count` applies a branch after each coin as it lands, and rewriting a correct card proves nothing.
+- *Random picks* ("chosen at random", `effect:random-choice-among-chosen`, Chira's `trigger:random-action`): no flip or die, a different record over the existing random choosers. Left for a separate piece.
+- *The planar die* (706.7, Planechase isn't in the engine) and *stored results* (706.8, Centaur of Attention).
+
+*Bots.* `target-polarity` walks `heads`, `tails` and `then` as it walks `won` and `lost`. `effect-worth` reads a flip as the average of its branches, as a roll already is, and a landed one as its own branch, so the Thumb's `may` is weighed correctly. Nothing else is a new shape to them.
+
+*As built (step 7, B286).*
+- `random-results.ts`: `FlipLanding`, `RollRecord`, `RollQuery`, `rollRead`, `DieTest`, `matchingDice`, `keepHighest`, `FlipThisWay`, `flipsSince`, `lastRollIn`, `lastRollEntry`, `hasFlippedThisTurn`, `rollOfEvent`. `Game.flipCoinOutcomes` and `staticReplacementsFor`; `flipUntilLose` in `cards/helpers.ts`.
+- **Moved and deleted, every user migrated:** `GameState.lastRoll` (15 test files read `lastRollIn` now), `flip-coin`'s `untilLose` (Okaun, Zndrsplt), `MAX_FLIPS`, and the trigger value's dead `dice-rolled` branch. `came` is always set on `coin-flipped`, and `won` is what's absent on a sides-only flip.
+- **Differences from the note:** `would-flip-coin` has no `instead: { modify }`: flipping two and ignoring one is `ignore: true`, since each such effect doubles the coins (614.5) and a `plus` would have said something it couldn't do. A flip's `count` applies each coin's `won` / `lost` branch after that coin, not after all of them, so a printed "flip N coins, for each flip you win" should read `then` (Yusri, unchanged, keeps its chain). Nothing but Edgar has `firstEachTurn`.
+- **Behaviour changes:** `rolls-dice`'s `{ triggerValue }` is the result with its modifier (706.2), where it was the naturals alone. A `{ roll }` amount reads only what the journal still keeps, about a round, where the slot lasted the game; no card reads further back than its own resolution. Molten Sentry's flip now goes through the replacements, and under Krark's Thumb with the coins differing it asks as Primal Clay's forms do. **That one flip isn't journaled**, so Edgar would still name a later flip that turn: three cards in one corner, and it stays a known gap.
+- **Additions the proving cards needed:** none beyond the note.
+- Bots: as the note. `effect-worth` had no row for `flip-coin` at all, so a flip's worth was 0; it's now the average of its branches, which moves what the bots do with flip cards.
+- Scaffolder: reads "Flip a coin until you lose a flip.", and the two replacement lines. It doesn't read counts, sides, or "that player flips".
+- Cards (14): Ral Zarek, Guest Lecturer (flagged); Krark's Thumb; Edgar, King of Figaro; Wyll, Blade of Frontiers; Barbarian Class; Mirror March; Luck Bobblehead; Sword of Hours; Netherese Puzzle-Ward; Planar Chaos; Squee's Revenge; Fiery Gambit; Iron Mastiff; Farideh, Devil's Chosen. `test/random-results.test.ts` covers each but Luck Bobblehead's win and Barbarian Class's levels, with the rules above.
+- Not benched: nothing here runs on a hot path, since the new reads run only when a coin is flipped or a die rolled. The bot gate passed 202/202. Krark's Thumb's prompt was played live in the builder (a won flip kept, then stopping: 3 damage, one flip in the log).
+- Keys marked built: `effect:flip-coins-count-until-lose`, `mechanic:coin-flip-heads-tails`, `amount:coin-flips-won-this-way`, `replacement:roll-extra-ignore-lowest`, `trigger:rolls-dice-modified-result`, `condition:roll-result-compare`, `mechanic:coin-flip-result-replacement`, `mechanic:coin-flip-choose-to-stop`, `mechanic:coin-flip-by-other-player`, `trigger:rolls-natural-result`, `effect:roll-keep-highest`, `effect:roll-two-keep-higher`, `condition:trigger-roll-results`, `trigger:rolls-at-least`, `condition:dice-rolled-doubles`.
+- **Left unbuilt, not marked:** Vexing Puzzlebox has its trigger, but "{T}: Add one mana of any color. Roll a d20." is a mana ability with a rider, which `addsManaOnly` refuses, so it would wrongly use the stack (605.1a): `author-freed` should give it a narrow key. `effect:random-choice-among-chosen`, `trigger:random-action` (random picks, above). `effect:for-each-permanent-coin-flip` (Rakdos: the tails have to die together). `effect:each-player-rolls` (Chaos Dragon compares across players). `replacement:roll-as-enters`, `cost:roll-die-as-cost` (not tried), `effect:reflexive-with-roll-amount`, `effect:search-then-roll-destination`, `replacement:die-exile-with-counter`, `mechanic:planar-die`, `mechanic:d20`, `mechanic:dice-rolls`, and the rest of the one-card keys.
 
 ### 13. Mana: spent-mana queries and mana-ability hooks (56 keys, ~80 cards)
 

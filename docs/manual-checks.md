@@ -7812,3 +7812,11 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Mana Short: a player loses all unspent mana
 - **Do:** Switch to Bob and tap a Forest for mana by hand. Back as Alice, cast Mana Short on Bob.
 - **Expect:** Bob's lands are tapped and Bob's floating {G} is gone.
+
+### Krark's Thumb: which flip you keep
+- **Do:** Cast Fiery Gambit on Bob's creature. If the two coins differ, answer the prompt.
+- **Expect:** "Keep the won flip?" appears only when the coins differ, your answer decides the flip, and the log shows one flip.
+
+### Ral Zarek, Guest Lecturer: skips a turn per heads
+- **Do:** Activate −7, targeting Bob.
+- **Expect:** The log shows five flips of heads or tails, none won or lost, and Bob skips one turn per heads.
