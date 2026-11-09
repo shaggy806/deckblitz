@@ -38841,6 +38841,10 @@ controlledBy,
       addReplacementEffect: ({ fromObject, ...record }) => {
         const object = record.target?.kind === "object" ? this.state.objects[record.target.object] : undefined;
         const from = fromObject === undefined ? undefined : this.state.objects[fromObject];
+        // A shield's "if damage is prevented this way, …" (rule 615.5) is
+        // what the shield applies right after, however it was written.
+        const instead = record.replacement.event === "would-deal-damage" ? record.replacement.instead : undefined;
+        const then = instead !== undefined && "prevent" in instead ? instead.then : undefined;
         this.state.activeReplacements.push({
           ...record,
           owner: controller,
@@ -38849,6 +38853,7 @@ controlledBy,
           targetStints: this.stintsOfTargets(targets),
           x,
           madeIn: since,
+          ...(then !== undefined ? { then: { spec: then, by: source, controller, targets: [...targets] } } : {}),
           ...(object !== undefined ? { zoneChangeCount: object.zoneChangeCount ?? 0 } : {}),
           ...(from !== undefined ? { from: { object: from.id, zoneChangeCount: from.zoneChangeCount ?? 0, you: controller } } : {}),
         });
