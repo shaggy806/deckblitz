@@ -360,7 +360,7 @@ import {
 } from "./object-sets.js";
 import { goadersOf } from "./goad.js";
 import { answeringPlayer, attackChooser, decidingPlayer } from "./player-control.js";
-import type { AddedPhase, ChoosePermanentsResolution, LeftBattlefield, PlayerControl, ReplacementOrderResume } from "./state.js";
+import type { AddedPhase, ChoosePermanentsResolution, LeftBattlefield, PlayerControl, ReplacementOrderOption, ReplacementOrderResume } from "./state.js";
 import { blockersRequiredBy, defendersForAttacker, mustBeBlockedByExactlyOne } from "./combat/eligibility.js";
 import { combatRuleWord } from "./combat/rules.js";
 import { bandingAbilitiesOf } from "./combat/banding.js";
@@ -2346,8 +2346,8 @@ export class Game {
    * counter. Not game state: it only ever spans one synchronous call. */
   private shieldCountersSpent: Set<ObjectId> | null = null;
   /** Set while an effect that deals damage is gone through to see what would
-   * ask (`damageOrdersAsked`): `dealDamage` asks and deals nothing. */
-  private dryRunningDamage = false;
+   * ask (`replacementOrdersAsked`): `dealDamage` asks and deals nothing. */
+  private dryRunningEvents = false;
   /** Replacements carrying out their own effect (rule 614.5), so an event
    * inside it isn't replaced by them again. Synchronous only. */
   private applyingReplacements = new Set<string>();
@@ -34641,7 +34641,7 @@ export class Game {
       },
       // A source that has left the battlefield deals its damage as it last
       // existed there: its colours, lifelink, deathtouch and controller.
-      damageOrdersAsked: (run) => this.damageOrdersAsked(run),
+      replacementOrdersAsked: (run) => this.replacementOrdersAsked(run),
       dealDamage: (target, amount, from) => {
         const by = damageSource(from);
         if (by === undefined) return;
@@ -48144,6 +48144,10 @@ controlledBy,
     const id = split ? this.splitOneFromStack(target.object) : target.object;
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "battlefield") return;
+    if (this.dryRunningEvents) {
+      if (!(indestructible ?? this.objHasKeyword(id, "indestructible"))) this.destructionOrderAsked(id, cantBeRegenerated, true);
+      return;
+    }
     if (indestructible ?? this.objHasKeyword(id, "indestructible")) {
       this.emit({
         type: "permanent-destroy-prevented",
@@ -48152,13 +48156,21 @@ controlledBy,
       });
       return;
     }
-    if (!cantBeRegenerated && this.regenerateInstead(id)) return;
+    // Its controller's choice among what would replace this (rule 616.1):
+    // `destructionOrderAsked`. Unasked, the order below.
+    const chosen = this.state.replacementAnswers?.[`destroy:${id}`]?.[0];
+    if (chosen !== undefined && chosen.startsWith("umbra:")) {
+      const umbra = this.umbraArmorInstead(id, chosen.slice("umbra:".length) as ObjectId);
+      if (umbra !== null) {
+        this.destroyByEffect({ kind: "object", object: umbra }, false);
+        return;
+      }
+    }
+    if (chosen !== "shield-counter" && !cantBeRegenerated && this.regenerateInstead(id)) return;
     // A shield counter: "if this permanent would be destroyed as the result of
     // an effect, instead remove a shield counter from it" (rule 122.1c) — an
     // effect's destruction only; state-based actions still destroy it (the
-    // rulings). With a regeneration shield too its controller picks which
-    // applies (616.1); the regeneration shield, which ends with the turn,
-    // goes first — docs/engine-gaps.md.
+    // rulings).
     if ((object.counters.shield ?? 0) > 0) {
       this.removeShieldCounter(id);
       this.emit({ type: "permanent-destroy-prevented", object: id, reason: "a shield counter removed instead" });
@@ -48186,15 +48198,16 @@ controlledBy,
    * caller destroys instead; `null` if none is. Not regeneration (the
    * rulings): `id` isn't tapped or removed from combat, and "can't be
    * regenerated" doesn't stop it. With several, the permanent's controller
-   * picks which one goes (616.1); the engine picks for them — the one of
-   * least mana value, then the newest (docs/engine-gaps.md).
+   * picks which one goes (616.1, `destructionOrderAsked`, its answer `only`);
+   * unasked, the one of least mana value, then the newest.
    */
-  private umbraArmorInstead(id: ObjectId): ObjectId | null {
+  private umbraArmorInstead(id: ObjectId, only?: ObjectId): ObjectId | null {
     let best: ObjectId | null = null;
     let bestValue = Infinity;
     for (const auraId of this.state.zones.shared.battlefield) {
       const aura = this.state.objects[auraId];
       if (aura.attachedTo !== id || !this.objHasKeyword(auraId, "umbra-armor")) continue;
+      if (only !== undefined && auraId !== only) continue;
       const value = manaValueOfObject(this.registry, aura);
       if (value <= bestValue) {
         best = auraId;
@@ -48211,6 +48224,67 @@ controlledBy,
     invalidateComputedCache();
     this.emit({ type: "permanent-destroy-prevented", object: id, reason: "umbra armor" });
     return best;
+  }
+
+  /** What would replace `id` being destroyed, each as a question names it
+   * (rules 701.19a, 122.1c, 702.89a) — a shield counter only for an effect's
+   * destruction. The engine's own order first. */
+  private destructionReplacements(id: ObjectId, cantBeRegenerated: boolean, byEffect: boolean): ReplacementOrderOption[] {
+    const object = this.state.objects[id];
+    const options: ReplacementOrderOption[] = [];
+    if (!cantBeRegenerated && this.regenerationWouldApply(id)) {
+      options.push({ key: "regeneration", name: "Regeneration", text: "tap it and remove it from combat" });
+    }
+    if (byEffect && (object.counters.shield ?? 0) > 0) {
+      options.push({ key: "shield-counter", name: "Shield counter", text: "remove a shield counter from it" });
+    }
+    const umbras = this.state.zones.shared.battlefield
+      .filter((aura) => this.state.objects[aura].attachedTo === id && this.objHasKeyword(aura, "umbra-armor"))
+      .sort((a, b) => manaValueOfObject(this.registry, this.state.objects[a]) - manaValueOfObject(this.registry, this.state.objects[b]));
+    const seen = new Set<string>();
+    for (const aura of umbras) {
+      const name = this.state.objects[aura].cardName;
+      if (seen.has(name)) continue;
+      seen.add(name);
+      options.push({ key: `umbra:${aura}`, name, text: "destroy this Aura instead", object: aura });
+    }
+    return options;
+  }
+
+  /** Rule 616.1 for `id` about to be destroyed, where two different things
+   * would replace that: asks its controller which applies, or says a
+   * question is still owed. An answer waits for the destruction to come
+   * round again. */
+  private destructionOrderAsked(id: ObjectId, cantBeRegenerated: boolean, byEffect: boolean): boolean {
+    const answers = `destroy:${id}`;
+    if (this.state.replacementAnswers?.[answers] !== undefined) return false;
+    const options = this.destructionReplacements(id, cantBeRegenerated, byEffect);
+    if (options.length < 2) return false;
+    if (this.state.awaiting === null) {
+      const object = this.state.objects[id];
+      this.state.awaiting = {
+        kind: "replacement-order",
+        player: object.controller,
+        event: `${object.cardName} would be destroyed`,
+        options,
+        best: 0,
+        answers,
+        resume: { site: "effect" },
+      };
+    }
+    return true;
+  }
+
+  /** Whether a regeneration shield, or a static's regeneration, would apply
+   * to `id` being destroyed now (`regenerateInstead`, which applies it). */
+  private regenerationWouldApply(id: ObjectId): boolean {
+    const object = this.state.objects[id];
+    if (object === undefined || object.cantBeRegeneratedTurn === this.state.turn.number) return false;
+    if ((object.regenerationShields ?? 0) > 0) return true;
+    return (
+      !hasLostAbilities(this.state, this.registry, object) &&
+      this.registry.get(rulesTextName(object)).static.some((ability) => ability.regeneratesInstead === true && this.staticActive(object, ability))
+    );
   }
 
   /** A regeneration shield on `target` (rule 701.15a — see the
@@ -48744,6 +48818,15 @@ controlledBy,
    */
   private drainPendingDestruction(): void {
     if (this.state.awaiting !== null) return;
+    // Rule 616.1, for each that two things would save: asked before any go.
+    const regenBarred = new Set(this.state.pendingDestructionNoRegen ?? []);
+    const asking = this.state.pendingDestruction.some(
+      (id) =>
+        this.state.objects[id]?.zone === "battlefield" &&
+        !this.objHasKeyword(id, "indestructible") &&
+        this.destructionOrderAsked(id, regenBarred.has(id), true),
+    );
+    if (asking) return;
     this.withLeaveBatch(() => {
       this.snapshotLeaving(this.state.pendingDestruction);
       const noRegen = new Set(this.state.pendingDestructionNoRegen ?? []);
@@ -52611,7 +52694,7 @@ controlledBy,
 
     if (aLive && bLive && aPower > 0) this.dealDamage(a.object, b, aPower);
     if (!oneSided && aLive && bLive && bPower > 0) this.dealDamage(b.object, a, bPower);
-    if (this.dryRunningDamage) return;
+    if (this.dryRunningEvents) return;
     // Each fought (rule 701.14a) — whatever the damage came to — and one
     // that fought itself fought once (701.14c).
     if (!oneSided && aLive && bLive) {
@@ -54164,13 +54247,13 @@ controlledBy,
   /** An effect that deals damage asks first (`damageOrderAsked`): `run` is
    * that effect, gone through once without dealing anything, so every hit it
    * would make can ask; the first that does stops it there. */
-  private damageOrdersAsked(run: () => void): boolean {
-    if (this.dryRunningDamage || this.decisionOutstanding()) return false;
-    this.dryRunningDamage = true;
+  private replacementOrdersAsked(run: () => void): boolean {
+    if (this.dryRunningEvents || this.decisionOutstanding()) return false;
+    this.dryRunningEvents = true;
     try {
       run();
     } finally {
-      this.dryRunningDamage = false;
+      this.dryRunningEvents = false;
     }
     return this.state.awaiting !== null;
   }
@@ -54608,7 +54691,7 @@ controlledBy,
     applied: DamageApplied = NO_DAMAGE_APPLIED,
   ): number {
     if (amount <= 0) return 0;
-    if (this.dryRunningDamage) {
+    if (this.dryRunningEvents) {
       if (this.state.awaiting === null && applied === NO_DAMAGE_APPLIED) {
         this.damageOrderAsked(source, target, amount, combat, sourceLastKnown, sources, { site: "effect" });
       }
@@ -56492,16 +56575,24 @@ controlledBy,
           // counters, not marked damage (120.3d), and still kills.
           reason = "deathtouch";
         }
+        // Two different things would save it: its controller chooses (rule
+        // 616.1), and it waits for that here.
+        if (reason !== null && reason !== "toughness is 0 or less" && this.destructionOrderAsked(id, false, false)) {
+          reason = null;
+        }
+        const umbraChosen = this.state.replacementAnswers?.[`destroy:${id}`]?.[0]?.startsWith("umbra:")
+          ? (this.state.replacementAnswers[`destroy:${id}`][0].slice("umbra:".length) as ObjectId)
+          : undefined;
         // Both damage checks destroy it (704.5g-h), which a regeneration
         // shield replaces (701.15a); 0 toughness doesn't.
-        if (reason !== null && reason !== "toughness is 0 or less" && this.regenerateInstead(id)) {
+        if (reason !== null && reason !== "toughness is 0 or less" && umbraChosen === undefined && this.regenerateInstead(id)) {
           reason = null;
         }
         // So does umbra armor (702.89a) — once for every check at once (the
         // rulings) — and the game rules destroy the Aura instead, unless it
         // can't be.
         if (reason !== null && reason !== "toughness is 0 or less") {
-          const umbra = this.umbraArmorInstead(id);
+          const umbra = this.umbraArmorInstead(id, umbraChosen);
           if (umbra !== null) {
             reason = null;
             if (!this.objHasKeyword(umbra, "indestructible") && !this.regenerateInstead(umbra)) {

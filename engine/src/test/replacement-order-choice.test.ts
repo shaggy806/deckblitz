@@ -8,6 +8,7 @@
 import { describe, expect, it } from "vitest";
 
 import { defineCard } from "../cards/define.js";
+import { invalidateComputedCache } from "../characteristics.js";
 import type { ReplacementOrderOffer, ScriptedController } from "../controller.js";
 import type { Game } from "../game.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
@@ -145,6 +146,97 @@ describe("protection beside a creature's own damage replacement (616.1)", () => 
     cast(game, toHand(game, BLACK_BOLT), {});
     expect(asked).toHaveLength(1);
     expect(counters(game, phantom)).toBe(1);
+  });
+});
+
+const doomBlade = (game: Game, target: ObjectId): void => {
+  lands(game, "Swamp", 2);
+  cast(game, toHand(game, "Doom Blade"), { targets: [ref(target)] });
+};
+
+describe("what would save a permanent from being destroyed (616.1)", () => {
+  it("regeneration shield or shield counter: its controller chooses", () => {
+    const { game, b } = table();
+    const bears = spawn(game, "Grizzly Bears", B);
+    game.state.objects[bears].regenerationShields = 1;
+    game.state.objects[bears].counters.shield = 1;
+    const asked = answering(b, "Shield counter");
+    doomBlade(game, bears);
+    expect(asked).toHaveLength(1);
+    expect(counters(game, bears, "shield")).toBe(0);
+    expect(game.state.objects[bears].regenerationShields).toBe(1);
+    expect(game.state.objects[bears].tapped).toBe(false);
+    expect(game.state.objects[bears].zone).toBe("battlefield");
+  });
+
+  it("left alone, the regeneration shield goes first", () => {
+    const { game } = table();
+    const bears = spawn(game, "Grizzly Bears", B);
+    game.state.objects[bears].regenerationShields = 1;
+    game.state.objects[bears].counters.shield = 1;
+    doomBlade(game, bears);
+    expect(counters(game, bears, "shield")).toBe(1);
+    expect(game.state.objects[bears].tapped).toBe(true);
+  });
+
+  it("a lone shield counter asks nothing", () => {
+    const { game, b } = table();
+    const bears = spawn(game, "Grizzly Bears", B);
+    game.state.objects[bears].counters.shield = 1;
+    const asked = answering(b, "Shield counter");
+    doomBlade(game, bears);
+    expect(asked).toHaveLength(0);
+    expect(counters(game, bears, "shield")).toBe(0);
+  });
+
+  const withUmbras = (game: Game): { readonly host: ObjectId; readonly boar: ObjectId; readonly hyena: ObjectId } => {
+    const host = spawn(game, "Grizzly Bears", B);
+    const boar = spawn(game, "Boar Umbra", B);
+    const hyena = spawn(game, "Hyena Umbra", B);
+    game.state.objects[boar].attachedTo = host;
+    game.state.objects[hyena].attachedTo = host;
+    invalidateComputedCache();
+    return { host, boar, hyena };
+  };
+
+  it("two Auras with umbra armor: its controller picks which goes, from a destroy effect", () => {
+    const { game, b } = table();
+    const { host, boar, hyena } = withUmbras(game);
+    const asked = answering(b, "Boar Umbra");
+    doomBlade(game, host);
+    expect(asked).toHaveLength(1);
+    expect(game.state.objects[boar].zone).toBe("graveyard");
+    expect(game.state.objects[hyena].zone).toBe("battlefield");
+    expect(game.state.objects[host].zone).toBe("battlefield");
+  });
+
+  it("and from lethal damage, a state-based action", () => {
+    const { game, b } = table();
+    const { host, boar, hyena } = withUmbras(game);
+    const asked = answering(b, "Hyena Umbra");
+    lands(game, "Mountain", 1);
+    // 6 is lethal through Boar Umbra's and Hyena Umbra's bonuses.
+    game.state.objects[host].damageMarked = 40;
+    invalidateComputedCache();
+    bolt(game, B);
+    expect(asked).toHaveLength(1);
+    expect(game.state.objects[hyena].zone).toBe("graveyard");
+    expect(game.state.objects[boar].zone).toBe("battlefield");
+    expect(game.state.objects[host].zone).toBe("battlefield");
+  });
+
+  it("an umbra beside a regeneration shield: the Aura can be the one that goes", () => {
+    const { game, b } = table();
+    const host = spawn(game, "Grizzly Bears", B);
+    const hyena = spawn(game, "Hyena Umbra", B);
+    game.state.objects[hyena].attachedTo = host;
+    game.state.objects[host].regenerationShields = 1;
+    invalidateComputedCache();
+    const asked = answering(b, "Hyena Umbra");
+    doomBlade(game, host);
+    expect(asked).toHaveLength(1);
+    expect(game.state.objects[hyena].zone).toBe("graveyard");
+    expect(game.state.objects[host].regenerationShields).toBe(1);
   });
 });
 

@@ -10414,10 +10414,11 @@ export interface ModeOption {
 export interface EffectApi {
   /** `from`: the triggering object, or a target, deals it, not the effect's
    * source — see {@link ObjectRef}. */
-  /** Whether `run`, an effect about to deal damage, stopped to ask which
-   * replacement applies first (rule 616.1). It's gone through once without
-   * dealing anything; it then waits for the answer and runs again. */
-  damageOrdersAsked(run: () => void): boolean;
+  /** Whether `run`, an effect about to deal damage or destroy something,
+   * stopped to ask which replacement applies first (rule 616.1). It's gone
+   * through once without doing anything; it then waits for the answer and
+   * runs again. */
+  replacementOrdersAsked(run: () => void): boolean;
   dealDamage(target: TargetRef, amount: number, from?: ObjectRef): void;
   /** Run `fn` with every damage it deals unpreventable (rule 615.12 — a
    * `damage` effect's `cantBePrevented`). */
@@ -13090,10 +13091,10 @@ export function tokenRiders(spec: EffectSpec): TokenRiders {
   };
 }
 
-/** Whether this damage effect stopped to ask which replacement applies first
- * (rule 616.1): it runs again once that's answered. */
-function damageAsksOrder(spec: EffectSpec, ctx: ResolutionContext): boolean {
-  if (!ctx.damageOrdersAsked(() => applyEffectSpec(spec, ctx))) return false;
+/** Whether this effect stopped to ask which replacement applies first (rule
+ * 616.1): it runs again once that's answered. */
+function asksReplacementOrder(spec: EffectSpec, ctx: ResolutionContext): boolean {
+  if (!ctx.replacementOrdersAsked(() => applyEffectSpec(spec, ctx))) return false;
   ctx.resumeAfterDecisions(spec);
   return true;
 }
@@ -16173,7 +16174,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.behold(spec, spec.then);
       return;
     case "damage-divided-evenly": {
-      if (damageAsksOrder(spec, ctx)) return;
+      if (asksReplacementOrder(spec, ctx)) return;
       // A member found illegal as it resolved isn't there (rule 608.2b), and
       // doesn't count toward the division.
       const members = ctx.targets.slice(spec.from).filter((t): t is TargetRef => t !== undefined);
@@ -16182,7 +16183,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "damage": {
-      if (damageAsksOrder(spec, ctx)) return;
+      if (asksReplacementOrder(spec, ctx)) return;
       if (spec.cantBePrevented === true) {
         const { cantBePrevented: _, ...rest } = spec;
         ctx.unpreventably(() => applyEffectSpec(rest, ctx));
@@ -16460,6 +16461,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "destroy": {
+      if (asksReplacementOrder(spec, ctx)) return;
       const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.destroyPermanent(target, spec.cantBeRegenerated === true);
       return;
@@ -16506,7 +16508,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "damage-all": {
-      if (damageAsksOrder(spec, ctx)) return;
+      if (asksReplacementOrder(spec, ctx)) return;
       let players = spec.whose === undefined ? undefined : ctx.playersInScope(spec.whose);
       if (spec.controlledByTarget !== undefined) {
         // A player, or a permanent's controller — "each creature that player
@@ -16607,7 +16609,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "fight": {
-      if (damageAsksOrder(spec, ctx)) return;
+      if (asksReplacementOrder(spec, ctx)) return;
       const a = objectRefAct(spec.a, ctx);
       const b = objectRefAct(spec.b, ctx);
       if (a !== undefined && b !== undefined) ctx.fight(a, b, spec.oneSided === true);
@@ -18817,7 +18819,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "damage-divided":
-      if (damageAsksOrder(spec, ctx)) return;
+      if (asksReplacementOrder(spec, ctx)) return;
       ctx.division.forEach((amount, i) => {
         const target = ctx.targets[spec.from + i];
         if (target !== undefined && amount > 0) ctx.dealDamage(target, amount);

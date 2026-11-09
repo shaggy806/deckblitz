@@ -3232,6 +3232,9 @@ export interface ReplacementOrderOption {
   readonly result?: string;
   /** The permanent making it, where one is there to point at. */
   readonly object?: ObjectId;
+  /** The player it matters for, where two options differ by that (two
+   * players' Notion Thieves). */
+  readonly who?: PlayerId;
 }
 
 /** Where a game goes on once a `replacement-order` question is answered. */
