@@ -147,6 +147,7 @@ describe("Snapcaster Mage — a granted flashback", () => {
       cost: "{R}",
       untilEndOfTurn: true,
       by: snap,
+      ownManaCost: true,
     });
     expect(game.eventsOfType("flashback-granted").some((e) => e.object === bolt)).toBe(true);
 

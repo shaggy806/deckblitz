@@ -8760,6 +8760,7 @@ export class Game {
     // As a resolution does: what it does from here on is "this way", and
     // what it puts onto the battlefield is its source's doing.
     this.state.resolutionSince = this.state.eventSeq;
+    delete this.state.namedOffSlot;
     const debugSource = opts.source === undefined ? undefined : this.state.objects[opts.source];
     if (debugSource !== undefined) {
       this.state.resolvingSource = { source: debugSource.id, timestamp: debugSource.timestamp };
