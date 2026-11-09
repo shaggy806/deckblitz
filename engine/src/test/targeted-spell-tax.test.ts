@@ -235,7 +235,6 @@ describe("Kopala, Warden of Waves", () => {
               { kind: "destroy", target: 1 },
             ],
           },
-          resolve: null,
         }),
       )
       .register(

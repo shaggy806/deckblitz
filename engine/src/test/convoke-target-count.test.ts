@@ -24,7 +24,6 @@ const registry = createDefaultRegistry().register(
     text: "Convoke. Strive — {1} more for each target beyond the first. Any number of target creatures you control get +1/+1 counters.",
     targets: [{ kind: "any-number", of: "creature-you-control" }],
     effect: { kind: "for-each-target", from: 0, effect: { kind: "tap", target: 0 } },
-    resolve: null,
   }),
 );
 

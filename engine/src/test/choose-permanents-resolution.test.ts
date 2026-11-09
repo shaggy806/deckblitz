@@ -14,7 +14,7 @@ import type { EffectSpec } from "../effects.js";
 import { A, B, activate, cast, enter, spawn, table, toHand, toLibrary, zone } from "./harness.js";
 
 const spell = (name: string, targets: CardDefinition["targets"], effect: EffectSpec): CardDefinition =>
-  defineCard({ name, manaCost: "{0}", types: ["sorcery"], text: name, targets, effect, resolve: null });
+  defineCard({ name, manaCost: "{0}", types: ["sorcery"], text: name, targets, effect });
 
 const WATCHER = "Test Watcher";
 const KEEPER = "Test Keeper";

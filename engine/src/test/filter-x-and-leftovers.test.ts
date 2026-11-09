@@ -72,7 +72,6 @@ const registry = createDefaultRegistry()
         leftover: "stay",
         reveal: "chosen",
       },
-      resolve: null,
     }),
   )
   .register(
@@ -89,7 +88,6 @@ const registry = createDefaultRegistry()
         ifDid: { kind: "gain-life", amount: 1, who: "that-player" } as EffectSpec,
         ifDidnt: { kind: "lose-life", amount: 1, who: "that-player" } as EffectSpec,
       },
-      resolve: null,
     }),
   )
   .register(
