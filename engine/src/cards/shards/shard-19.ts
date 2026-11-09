@@ -256,6 +256,7 @@ import _poolDonLeoProblemSolvers from "../pool/don-leo-problem-solvers.js";
 import _poolDourPortMage from "../pool/dour-port-mage.js";
 import _poolDrJosephMbenga from "../pool/dr-joseph-mbenga.js";
 import _poolDraconianCylix from "../pool/draconian-cylix.js";
+import _poolDragonBroodmother from "../pool/dragon-broodmother.js";
 import _poolDragonScarredBear from "../pool/dragon-scarred-bear.js";
 import _poolDramaticFinale from "../pool/dramatic-finale.js";
 import _poolDreadFugue from "../pool/dread-fugue.js";
@@ -299,6 +300,7 @@ import _poolEusocialEngineering from "../pool/eusocial-engineering.js";
 import _poolEutropiaTheTwiceFavored from "../pool/eutropia-the-twice-favored.js";
 import _poolEvangelOfHeliod from "../pool/evangel-of-heliod.js";
 import _poolEvershrike from "../pool/evershrike.js";
+import _poolEvilTwin from "../pool/evil-twin.js";
 import _poolExemplarOfStrength from "../pool/exemplar-of-strength.js";
 import _poolExperimentTwelve from "../pool/experiment-twelve.js";
 import _poolExploreTheVastlands from "../pool/explore-the-vastlands.js";
@@ -355,6 +357,7 @@ import _poolFugue from "../pool/fugue.js";
 import _poolFungalColossus from "../pool/fungal-colossus.js";
 import _poolFurtiveCourier from "../pool/furtive-courier.js";
 import _poolFuryOfTheHorde from "../pool/fury-of-the-horde.js";
+import _poolGaddockTeeg from "../pool/gaddock-teeg.js";
 import _poolGaeasRevenge from "../pool/gaeas-revenge.js";
 import _poolGaladrielOfLothlorien from "../pool/galadriel-of-lothlorien.js";
 import _poolGallowbraid from "../pool/gallowbraid.js";
@@ -1303,6 +1306,7 @@ const shard: CardShard = {
     _poolDourPortMage,
     _poolDrJosephMbenga,
     _poolDraconianCylix,
+    _poolDragonBroodmother,
     _poolDragonScarredBear,
     _poolDramaticFinale,
     _poolDreadFugue,
@@ -1346,6 +1350,7 @@ const shard: CardShard = {
     _poolEutropiaTheTwiceFavored,
     _poolEvangelOfHeliod,
     _poolEvershrike,
+    _poolEvilTwin,
     _poolExemplarOfStrength,
     _poolExperimentTwelve,
     _poolExploreTheVastlands,
@@ -1402,6 +1407,7 @@ const shard: CardShard = {
     _poolFungalColossus,
     _poolFurtiveCourier,
     _poolFuryOfTheHorde,
+    _poolGaddockTeeg,
     _poolGaeasRevenge,
     _poolGaladrielOfLothlorien,
     _poolGallowbraid,

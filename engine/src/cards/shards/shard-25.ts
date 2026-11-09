@@ -312,6 +312,7 @@ import _poolFolkMedicine from "../pool/folk-medicine.js";
 import _poolFontOfFortunes from "../pool/font-of-fortunes.js";
 import _poolFootbottomFeast from "../pool/footbottom-feast.js";
 import _poolForgestokerDragon from "../pool/forgestoker-dragon.js";
+import _poolForthEorlingas from "../pool/forth-eorlingas.js";
 import _poolFortressKinGuard from "../pool/fortress-kin-guard.js";
 import _poolForumFilibuster from "../pool/forum-filibuster.js";
 import _poolFoundryOfTheConsuls from "../pool/foundry-of-the-consuls.js";
@@ -1289,6 +1290,7 @@ const shard: CardShard = {
     _poolFontOfFortunes,
     _poolFootbottomFeast,
     _poolForgestokerDragon,
+    _poolForthEorlingas,
     _poolFortressKinGuard,
     _poolForumFilibuster,
     _poolFoundryOfTheConsuls,

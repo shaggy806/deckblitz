@@ -255,6 +255,7 @@ import _poolEbonbladeReaper from "../pool/ebonblade-reaper.js";
 import _poolEchoOfDeathsWail from "../pool/echo-of-deaths-wail.js";
 import _poolEdgarMarkov from "../pool/edgar-markov.js";
 import _poolEidolonOfTheGreatRevel from "../pool/eidolon-of-the-great-revel.js";
+import _poolEightAndAHalfTails from "../pool/eight-and-a-half-tails.js";
 import _poolEivorBattleReady from "../pool/eivor-battle-ready.js";
 import _poolElderMastery from "../pool/elder-mastery.js";
 import _poolEldraziLinebreaker from "../pool/eldrazi-linebreaker.js";
@@ -1261,6 +1262,7 @@ const shard: CardShard = {
     _poolEchoOfDeathsWail,
     _poolEdgarMarkov,
     _poolEidolonOfTheGreatRevel,
+    _poolEightAndAHalfTails,
     _poolEivorBattleReady,
     _poolElderMastery,
     _poolEldraziLinebreaker,

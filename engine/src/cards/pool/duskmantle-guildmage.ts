@@ -21,7 +21,7 @@ export default defineCard({
       effect: {
         kind: "delayed-trigger",
         at: { whenever: { on: "put-into-graveyard", who: "opponent" } },
-        effect: { kind: "lose-life", amount: 1, who: "trigger-controller" },
+        effect: { kind: "lose-life", amount: 1, who: { ownerOf: "trigger-object" } },
         text: WATCH_TEXT,
       },
       resolve: null,

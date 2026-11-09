@@ -34,6 +34,7 @@ import _poolAngelsMercy from "../pool/angels-mercy.js";
 import _poolAnimalAttendant from "../pool/animal-attendant.js";
 import _poolAnnihilatingGlare from "../pool/annihilating-glare.js";
 import _poolAnotherChance from "../pool/another-chance.js";
+import _poolApheliaViperWhisperer from "../pool/aphelia-viper-whisperer.js";
 import _poolAppealToEirdu from "../pool/appeal-to-eirdu.js";
 import _poolArachnePsionicWeaver from "../pool/arachne-psionic-weaver.js";
 import _poolArcaneInvestigator from "../pool/arcane-investigator.js";
@@ -1028,6 +1029,7 @@ const shard: CardShard = {
     _poolAnimalAttendant,
     _poolAnnihilatingGlare,
     _poolAnotherChance,
+    _poolApheliaViperWhisperer,
     _poolAppealToEirdu,
     _poolArachnePsionicWeaver,
     _poolArcaneInvestigator,

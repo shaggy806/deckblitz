@@ -700,6 +700,7 @@ import _poolScavengingGhoul from "../pool/scavenging-ghoul.js";
 import _poolSchoolDaze from "../pool/school-daze.js";
 import _poolScorpionSeethingStriker from "../pool/scorpion-seething-striker.js";
 import _poolScoutTheBorders from "../pool/scout-the-borders.js";
+import _poolScreechingScorchbeast from "../pool/screeching-scorchbeast.js";
 import _poolScytheOfTheWretched from "../pool/scythe-of-the-wretched.js";
 import _poolSeaSpirit from "../pool/sea-spirit.js";
 import _poolSeaSprite from "../pool/sea-sprite.js";
@@ -742,6 +743,7 @@ import _poolSimicSkySwallower from "../pool/simic-sky-swallower.js";
 import _poolSimulacrumSynthesizer from "../pool/simulacrum-synthesizer.js";
 import _poolSingularityRupture from "../pool/singularity-rupture.js";
 import _poolSkaabWrangler from "../pool/skaab-wrangler.js";
+import _poolSkinShedder from "../pool/skin-shedder.js";
 import _poolSkybeastTracker from "../pool/skybeast-tracker.js";
 import _poolSkygames from "../pool/skygames.js";
 import _poolSlagstoneRefinery from "../pool/slagstone-refinery.js";
@@ -1692,6 +1694,7 @@ const shard: CardShard = {
     _poolSchoolDaze,
     _poolScorpionSeethingStriker,
     _poolScoutTheBorders,
+    _poolScreechingScorchbeast,
     _poolScytheOfTheWretched,
     _poolSeaSpirit,
     _poolSeaSprite,
@@ -1734,6 +1737,7 @@ const shard: CardShard = {
     _poolSimulacrumSynthesizer,
     _poolSingularityRupture,
     _poolSkaabWrangler,
+    _poolSkinShedder,
     _poolSkybeastTracker,
     _poolSkygames,
     _poolSlagstoneRefinery,

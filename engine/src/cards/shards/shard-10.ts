@@ -248,6 +248,7 @@ import _poolDroolingGroodion from "../pool/drooling-groodion.js";
 import _poolDryadsRevival from "../pool/dryads-revival.js";
 import _poolDuelTactics from "../pool/duel-tactics.js";
 import _poolDuelcraftTrainer from "../pool/duelcraft-trainer.js";
+import _poolDuskmantleGuildmage from "../pool/duskmantle-guildmage.js";
 import _poolDutyBeyondDeath from "../pool/duty-beyond-death.js";
 import _poolDwindle from "../pool/dwindle.js";
 import _poolEarthSector001 from "../pool/earth-sector-001.js";
@@ -1244,6 +1245,7 @@ const shard: CardShard = {
     _poolDryadsRevival,
     _poolDuelTactics,
     _poolDuelcraftTrainer,
+    _poolDuskmantleGuildmage,
     _poolDutyBeyondDeath,
     _poolDwindle,
     _poolEarthSector001,

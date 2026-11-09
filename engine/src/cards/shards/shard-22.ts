@@ -125,6 +125,7 @@ import _poolCartographersHawk from "../pool/cartographers-hawk.js";
 import _poolCaseOfTheLockedHothouse from "../pool/case-of-the-locked-hothouse.js";
 import _poolCaseOfTheUneatenFeast from "../pool/case-of-the-uneaten-feast.js";
 import _poolCatharticReunion from "../pool/cathartic-reunion.js";
+import _poolCelestialGatekeeper from "../pool/celestial-gatekeeper.js";
 import _poolCentaurVeteran from "../pool/centaur-veteran.js";
 import _poolCephalidConstable from "../pool/cephalid-constable.js";
 import _poolChainerDementiaMaster from "../pool/chainer-dementia-master.js";
@@ -191,6 +192,7 @@ import _poolDeathGrasp from "../pool/death-grasp.js";
 import _poolDeathbloomGardener from "../pool/deathbloom-gardener.js";
 import _poolDeathcapGlade from "../pool/deathcap-glade.js";
 import _poolDeathsHeadBuzzard from "../pool/deaths-head-buzzard.js";
+import _poolDecayingSoil from "../pool/decaying-soil.js";
 import _poolDeepwoodElder from "../pool/deepwood-elder.js";
 import _poolDefiantVanguard from "../pool/defiant-vanguard.js";
 import _poolDeliverUntoEvil from "../pool/deliver-unto-evil.js";
@@ -988,6 +990,7 @@ import _poolWuInfantry from "../pool/wu-infantry.js";
 import _poolWydwenTheBitingGale from "../pool/wydwen-the-biting-gale.js";
 import _poolXathridNecromancer from "../pool/xathrid-necromancer.js";
 import _poolXenagosGodOfRevels from "../pool/xenagos-god-of-revels.js";
+import _poolXiraTheGoldenSting from "../pool/xira-the-golden-sting.js";
 import _poolYargleAndMultani from "../pool/yargle-and-multani.js";
 import _poolYargleGluttonOfUrborg from "../pool/yargle-glutton-of-urborg.js";
 import _poolYavimayaElder from "../pool/yavimaya-elder.js";
@@ -1147,6 +1150,7 @@ const shard: CardShard = {
     _poolCaseOfTheLockedHothouse,
     _poolCaseOfTheUneatenFeast,
     _poolCatharticReunion,
+    _poolCelestialGatekeeper,
     _poolCentaurVeteran,
     _poolCephalidConstable,
     _poolChainerDementiaMaster,
@@ -1213,6 +1217,7 @@ const shard: CardShard = {
     _poolDeathbloomGardener,
     _poolDeathcapGlade,
     _poolDeathsHeadBuzzard,
+    _poolDecayingSoil,
     _poolDeepwoodElder,
     _poolDefiantVanguard,
     _poolDeliverUntoEvil,
@@ -2010,6 +2015,7 @@ const shard: CardShard = {
     _poolWydwenTheBitingGale,
     _poolXathridNecromancer,
     _poolXenagosGodOfRevels,
+    _poolXiraTheGoldenSting,
     _poolYargleAndMultani,
     _poolYargleGluttonOfUrborg,
     _poolYavimayaElder,

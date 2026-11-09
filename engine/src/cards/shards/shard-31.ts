@@ -11,6 +11,7 @@ import _poolAboshanCephalidEmperor from "../pool/aboshan-cephalid-emperor.js";
 import _poolAbzanBanner from "../pool/abzan-banner.js";
 import _poolAcademyManufactor from "../pool/academy-manufactor.js";
 import _poolAcolyteOfAclazotz from "../pool/acolyte-of-aclazotz.js";
+import _poolAcolyteOfBahamut from "../pool/acolyte-of-bahamut.js";
 import _poolAcquisitionsExpert from "../pool/acquisitions-expert.js";
 import _poolActOnImpulse from "../pool/act-on-impulse.js";
 import _poolAerialGuide from "../pool/aerial-guide.js";
@@ -645,6 +646,7 @@ import _poolOrcishVandal from "../pool/orcish-vandal.js";
 import _poolOrderOfTheSacredTorch from "../pool/order-of-the-sacred-torch.js";
 import _poolOrochiHatchery from "../pool/orochi-hatchery.js";
 import _poolOrochiSustainer from "../pool/orochi-sustainer.js";
+import _poolOverTheTop from "../pool/over-the-top.js";
 import _poolOverbeingOfMyth from "../pool/overbeing-of-myth.js";
 import _poolOverkill from "../pool/overkill.js";
 import _poolOvinize from "../pool/ovinize.js";
@@ -1069,6 +1071,7 @@ const shard: CardShard = {
     _poolAbzanBanner,
     _poolAcademyManufactor,
     _poolAcolyteOfAclazotz,
+    _poolAcolyteOfBahamut,
     _poolAcquisitionsExpert,
     _poolActOnImpulse,
     _poolAerialGuide,
@@ -1703,6 +1706,7 @@ const shard: CardShard = {
     _poolOrderOfTheSacredTorch,
     _poolOrochiHatchery,
     _poolOrochiSustainer,
+    _poolOverTheTop,
     _poolOverbeingOfMyth,
     _poolOverkill,
     _poolOvinize,

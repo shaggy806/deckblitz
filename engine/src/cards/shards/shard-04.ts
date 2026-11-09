@@ -963,6 +963,7 @@ import _tokens55ElephantToken from "../tokens/5-5-elephant-token.js";
 import _tokensBallisticBoulderToken from "../tokens/ballistic-boulder-token.js";
 import _tokensCatTokenLoyaltyCounters from "../tokens/cat-token-loyalty-counters.js";
 import _tokensDragonTokenAvatarRoku from "../tokens/dragon-token-avatar-roku.js";
+import _tokensDragonTokenDevour2 from "../tokens/dragon-token-devour-2.js";
 import _tokensEldraziAngelToken from "../tokens/eldrazi-angel-token.js";
 import _tokensGoblinWizardToken from "../tokens/goblin-wizard-token.js";
 import _tokensGremlinToken from "../tokens/gremlin-token.js";
@@ -1948,6 +1949,7 @@ const shard: CardShard = {
     _tokensBallisticBoulderToken,
     _tokensCatTokenLoyaltyCounters,
     _tokensDragonTokenAvatarRoku,
+    _tokensDragonTokenDevour2,
     _tokensEldraziAngelToken,
     _tokensGoblinWizardToken,
     _tokensGremlinToken,

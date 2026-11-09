@@ -413,6 +413,7 @@ import _poolHorridShadowspinner from "../pool/horrid-shadowspinner.js";
 import _poolHourOfEternity from "../pool/hour-of-eternity.js";
 import _poolHowlFromBeyond from "../pool/howl-from-beyond.js";
 import _poolHuatlisSpurring from "../pool/huatlis-spurring.js";
+import _poolHumanTorch from "../pool/human-torch.js";
 import _poolHuntedDragon from "../pool/hunted-dragon.js";
 import _poolHuntedNightmare from "../pool/hunted-nightmare.js";
 import _poolHuntingTriad from "../pool/hunting-triad.js";
@@ -1457,6 +1458,7 @@ const shard: CardShard = {
     _poolHourOfEternity,
     _poolHowlFromBeyond,
     _poolHuatlisSpurring,
+    _poolHumanTorch,
     _poolHuntedDragon,
     _poolHuntedNightmare,
     _poolHuntingTriad,

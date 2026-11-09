@@ -29461,7 +29461,8 @@ export class Game {
           condition === undefined ? undefined : this.abilityTurnKey(object),
           object.triggerValue,
         ) ||
-        (object.delayedTrigger !== undefined && !this.delayedIfHolds(object.delayedTrigger, object.triggerObject)) ||
+        (object.delayedTrigger !== undefined &&
+          !this.delayedIfHolds(object.delayedTrigger, object.triggerObject, object.lastKnownRefs)) ||
         !this.attackConditionsStillHold(ability, object)
       ) {
         this.removeOneAbilityCopy(id);
@@ -51046,7 +51047,7 @@ controlledBy,
   /** A delayed ability's intervening "if" (rule 603.4), asked as it would
    * trigger and again as it resolves. False as it would trigger, the ability
    * does nothing: one that fires once is used up all the same (603.7b). */
-  private delayedIfHolds(trigger: DelayedTrigger, triggerObject?: ObjectId): boolean {
+  private delayedIfHolds(trigger: DelayedTrigger, triggerObject?: ObjectId, refs?: LastKnownRefs): boolean {
     if (trigger.if === undefined) return true;
     return this.makeResolutionContext(
       trigger.source,
@@ -51055,6 +51056,10 @@ controlledBy,
       trigger.x ?? 0,
       0,
       triggerObject,
+      1,
+      0,
+      trigger.targetZones ?? [],
+      refs,
     ).conditionMet(trigger.if);
   }
 
@@ -51160,7 +51165,8 @@ controlledBy,
     const after = object.zoneChangeCount ?? 0;
     for (const watched of watching) {
       if (!("leaves" in watched.at) || !watched.at.to.includes(event.toZone)) continue;
-      if (!this.delayedIfHolds(watched, event.object)) continue;
+      // "If it has an egg counter on it" (Xira): as it last existed (603.10a).
+      if (!this.delayedIfHolds(watched, event.object, { triggerObject: stint, triggerObjectAfterLeaving: after })) continue;
       const trigger: DelayedTrigger =
         watched.source === event.object && watched.sourceStint !== undefined
           ? { ...watched, sourceStint: after }
