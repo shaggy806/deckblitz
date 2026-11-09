@@ -15477,7 +15477,8 @@ export interface ManaSplitAsk {
  * the instruction — damage to its controller, `also` — follows once.
  */
 function addManaChoice(spec: Extract<EffectSpec, { kind: "add-mana" }>, ctx: ResolutionContext): EffectSpec | null {
-  const mana = spec.mana === "chosen" ? (ctx.chosenColorOfSource() ?? "any-color") : spec.mana;
+  const mana = spec.mana === "chosen" ? ctx.chosenColorOfSource() : spec.mana;
+  if (mana === undefined) return null; // None chosen: no mana, and nothing to ask.
   let colors: readonly ManaType[];
   let same: boolean;
   if (mana === "any-color") {
@@ -16136,15 +16137,13 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             // One of each colour among them, `amount` times over.
             const times = amountValue(spec.amount, ctx);
             for (const type of ctx.manaTypesOf(mana)) ctx.addMana(player, type, times, spec);
-          } else ctx.addMana(
-            player,
-            // "The chosen color" — resolved against the source permanent; falls
-            // back to the payer's choice if the label isn't a colour (it always
-            // is on the cards that use this).
-            mana === "chosen" ? (ctx.chosenColorOfSource() ?? "any-color") : mana,
-            amountValue(spec.amount, ctx),
-            spec,
-          );
+          } else if (mana === "chosen") {
+            // "The chosen color", read off the source permanent. With none
+            // chosen it adds no mana (Shimmerwilds Growth's and Gauntlet of
+            // Power's rulings): an object that never entered in the way that asks.
+            const chosen = ctx.chosenColorOfSource();
+            if (chosen !== undefined) ctx.addMana(player, chosen, amountValue(spec.amount, ctx), spec);
+          } else ctx.addMana(player, mana, amountValue(spec.amount, ctx), spec);
         }
       };
       if (ctx.manaAbility === true) add();
