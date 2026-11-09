@@ -231,14 +231,43 @@ describe("chroma's colour word", () => {
   });
 });
 
+describe("adamant's colour word (rule 612.2)", () => {
+  it("Sleight of Mind on Ardenvale Paladin: three blue mana now earns the counter", () => {
+    const { game, a } = table();
+    lands(game, "Island", 3);
+    lands(game, "Plains", 1);
+    lands(game, "Island", 1);
+    const paladin = toHand(game, "Ardenvale Paladin");
+    cast(game, paladin, { settle: false });
+    answer(a, "white", "blue");
+    cast(game, toHand(game, "Sleight of Mind"), { targets: [ref(paladin)] });
+    expect(zone(game, paladin)).toBe("battlefield");
+    expect(game.state.objects[paladin].counters["+1/+1"] ?? 0).toBe(1);
+  });
+
+  it("the white mana that would have earned it no longer does", () => {
+    const { game, a } = table();
+    lands(game, "Plains", 4);
+    lands(game, "Island", 1);
+    const paladin = toHand(game, "Ardenvale Paladin");
+    cast(game, paladin, { settle: false });
+    answer(a, "white", "blue");
+    cast(game, toHand(game, "Sleight of Mind"), { targets: [ref(paladin)] });
+    expect(game.state.objects[paladin].counters["+1/+1"] ?? 0).toBe(0);
+  });
+
+  it("a Mythos's {W}{U} is mana symbols, and stays (612.2)", () => {
+    const def = registryOf(table().game).get("Mythos of Vadrok");
+    expect(changeDefinitionText(def, [{ from: "white", to: "black" }]).effect).toEqual(def.effect);
+  });
+});
+
 describe("the pool's text holds no colour word the change can't reach", () => {
   // A colour letter outside these fields is a mana symbol, a choice's
   // option or value, or a printed characteristic — none of them a word.
   // Mana symbols, not words (rule 612.2): "produces {B}" (Infernal Darkness,
-  // Deep Water) included, and an attack tax's {W/P} (Norn's Annex's
-  // `phyrexian`).
-  // A `manaSpent` clause's `type` isn't reached either (`docs/engine-gaps.md`,
-  // adamant's colour word).
+  // Deep Water) included, an attack tax's {W/P} (Norn's Annex's `phyrexian`),
+  // and a mana-spent clause's `type` ({U}{B}, the Mythoi).
   const NOT_WORDS = new Set(["mana", "oneOf", "thenOneOf", "elseOneOf", "all", "xColor", "chooseOnEnter", "value", "produces", "manaProduction", "payLifeForPips", "phyrexian", "type"]);
 
   it("every field holding a colour is a colour-word field or a known non-word one", () => {

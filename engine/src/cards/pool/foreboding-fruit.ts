@@ -19,7 +19,7 @@ export default defineCard({
       { kind: "lose-life", amount: 2, target: 0 },
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpent: [{ type: "B", amount: { op: "gte", n: 3 } }] } },
+        condition: { kind: "source", filter: { manaSpent: [{ colorWord: "B", amount: { op: "gte", n: 3 } }] } },
         then: { kind: "create-token", token: "Food Token", count: 1 },
       },
     ],

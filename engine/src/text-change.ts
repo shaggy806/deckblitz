@@ -13,8 +13,9 @@
  *
  * - a colour word is a colour in a field that names one in the text:
  *   `colors`, `notColors`, `setColors`, `addColors`, `devotionTo`,
- *   `keepsUnspentMana`, `unspentManaBecomes` — "nonblack creature", "protection from red",
- *   "becomes white", "devotion to black", "unspent green mana". A mana
+ *   `keepsUnspentMana`, `unspentManaBecomes`, a mana-spent clause's `colorWord` — "nonblack
+ *   creature", "protection from red", "becomes white", "devotion to black", "unspent green
+ *   mana", "three white mana was spent". A mana
  *   symbol is no word (`mana`, `oneOf`, `all`, `xColor`, every cost string),
  *   and neither is a choice's list of options (`chooseOnEnter`) or a chosen
  *   value;
@@ -132,6 +133,9 @@ export const COLOR_WORD_KEYS: ReadonlySet<string> = new Set([
   "setColors",
   "addColors",
   "devotionTo",
+  // Adamant's "at least three white mana was spent" (`ManaSpentQuery.colorWord`);
+  // a mana-spent clause's `type` is a symbol, {U}{B} (Mythos of Brokkos), and stays.
+  "colorWord",
   // Chroma's "each white mana symbol": the word names the colour (Light from
   // Within), though a symbol in a cost is no word.
   "manaSymbols",

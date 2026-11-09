@@ -57051,7 +57051,8 @@ controlledBy,
     asEntersCounters?: readonly string[],
   ): EnteringReplacement {
     const object = this.state.objects[id];
-    const def = this.registry.get(printedCardName(object));
+    // Its text as changed (rule 612.2), a permanent spell's change kept (400.7a).
+    const def = this.registry.get(rulesTextName(object));
     // Vesuva's "enter tapped as a copy" (rule 707.9e).
     let tapped = effectTapped || copyEnter?.tapped === true;
     let untapped = false;

@@ -15,7 +15,7 @@ export default defineCard({
     effects: [
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpent: [{ type: "B", amount: { op: "gte", n: 3 } }] } },
+        condition: { kind: "source", filter: { manaSpent: [{ colorWord: "B", amount: { op: "gte", n: 3 } }] } },
         then: { kind: "mill", target: "you", amount: 4 },
       },
       {

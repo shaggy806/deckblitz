@@ -15,7 +15,7 @@ export default defineCard({
       { kind: "draw", amount: 3 },
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpent: [{ type: "U", amount: { op: "gte", n: 3 } }] } },
+        condition: { kind: "source", filter: { manaSpent: [{ colorWord: "U", amount: { op: "gte", n: 3 } }] } },
         then: { kind: "scry", amount: 3 },
       },
     ],

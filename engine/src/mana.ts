@@ -306,6 +306,9 @@ export interface SpentMana {
  * `CardFilter.manaSpent` and the `{ manaSpentOf }` amount.
  *
  * - `type`: only mana of this type or these types ("{C}", rule 106.1b).
+ * - `colorWord`: as `type` for one colour the card spells as a word ("at least
+ *   three white mana" — adamant): a text-changing effect changes the word and
+ *   leaves a mana symbol alone (rule 612.2), so a clause says which it has.
  * - `from`: only mana made by a matching source ("mana from a Treasure"; {S},
  *   rule 107.4h).
  * - `count`: `"units"` (the default) counts mana; `"colors"` the different
@@ -316,6 +319,7 @@ export interface SpentMana {
  */
 export interface ManaSpentQuery {
   readonly type?: ManaType | readonly ManaType[];
+  readonly colorWord?: Color;
   readonly from?: ManaFromSpec;
   readonly count?: "units" | "colors" | "most-of-one-color";
   readonly per?: number;
@@ -329,8 +333,8 @@ export function spentManaCount(
   query: ManaSpentQuery,
   isFromSource?: (origin: ManaOrigin) => boolean,
 ): number {
-  const { type, from, count = "units", per } = query;
-  const types = type === undefined ? undefined : typeof type === "string" ? [type] : type;
+  const { type, colorWord, from, count = "units", per } = query;
+  const types = colorWord !== undefined ? [colorWord] : type === undefined ? undefined : typeof type === "string" ? [type] : type;
   const counted = units.filter((unit) => {
     if (types !== undefined && !types.includes(unit.type)) return false;
     if (from === undefined) return true;

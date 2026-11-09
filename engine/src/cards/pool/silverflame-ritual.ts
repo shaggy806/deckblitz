@@ -17,7 +17,7 @@ export default defineCard({
       { kind: "add-counter-all", filter: { type: "creature", controlledBy: "you" }, counter: "+1/+1", amount: 1 },
       {
         kind: "conditional",
-        condition: { kind: "source", filter: { manaSpent: [{ type: "W", amount: { op: "gte", n: 3 } }] } },
+        condition: { kind: "source", filter: { manaSpent: [{ colorWord: "W", amount: { op: "gte", n: 3 } }] } },
         then: {
           kind: "grant-keyword-all",
           filter: { type: "creature", controlledBy: "you" },
