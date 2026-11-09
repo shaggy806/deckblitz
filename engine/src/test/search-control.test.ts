@@ -75,6 +75,28 @@ describe("Opposition Agent: you control your opponents while they're searching t
     expect(controlOf(game.state, B)).toBeUndefined();
   });
 
+  it("answers the offer to cast Panglacial Wurm, which is part of the search", () => {
+    const { game, a } = table();
+    spawn(game, "Opposition Agent");
+    const [forest] = bobsTurn(game, "Forest", "Panglacial Wurm");
+    lands(game, "Forest", 9, B);
+    let answering: PlayerId | null = null;
+    a.standInFn = (p) => {
+      if (p !== B) return undefined;
+      const stand = new ScriptedController(p);
+      stand.chooseCastNowFn = () => {
+        answering = answeringPlayer(game.state, p);
+        return null;
+      };
+      stand.chooseFromZoneFn = (_view, eligible) => eligible.filter((id) => id === forest);
+      return stand;
+    };
+    cast(game, toHand(game, "Rampant Growth", B), { player: B });
+    expect(answering).toBe(A);
+    expect(zone(game, forest)).toBe("exile");
+    expect(game.state.playerControl).toBeUndefined();
+  });
+
   it("must find a card when the search states no quality (rule 701.23d, the ruling)", () => {
     const { game, a } = table();
     spawn(game, "Opposition Agent");

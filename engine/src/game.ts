@@ -38302,6 +38302,7 @@ controlledBy,
         }),
       cardsIn: (player, zone) => [...(this.state.zones.perPlayer[player]?.[zone] ?? [])],
       cantSearchLibrary: (player, owner) => this.cantSearchLibrary(player, owner),
+      beginSearchControl: (player) => this.beginSearchControl(player),
       castableWhileSearching: (player) => {
         // Not searching, no "while you're searching". Aven Mindcensor's search
         // sees only the top cards.
@@ -40444,11 +40445,13 @@ controlledBy,
   /** "You control your opponents while they're searching their libraries"
    * (rule 723.2), from the search's choice being raised to its being answered
    * (`endSearchControl`). It was created as the permanent entered, so a control
-   * created since still overwrites it (723.1a). */
+   * created since still overwrites it (723.1a). An offer made as the search
+   * starts (Panglacial Wurm) has begun it already. */
   private beginSearchControl(player: PlayerId): void {
     const control = searchControlOver(this.state, this.registry, player);
     if (control === null) return;
     const all = this.state.playerControl ?? [];
+    if (all.some((c) => c.during === "search" && c.controlled === player)) return;
     const later = all.findIndex((c) => (c.createdAt ?? 0) > control.source.timestamp);
     const at = later === -1 ? all.length : later;
     this.state.playerControl = [

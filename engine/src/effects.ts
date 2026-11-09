@@ -11076,6 +11076,9 @@ export interface EffectApi {
   /** The cards in `player`'s library they may cast while searching it
    * (`CardDefinition.castWhileSearchingLibrary`). */
   castableWhileSearching(player: PlayerId): readonly ObjectId[];
+  /** "You control your opponents while they're searching their libraries"
+   * begins for `player`, if it applies (`Game.beginSearchControl`). */
+  beginSearchControl(player: PlayerId): void;
   /** Whether `player` can't search `owner`'s library in what's resolving now
    * (`playerCantSearchLibrary`). */
   cantSearchLibrary(player: PlayerId, owner: PlayerId): boolean;
@@ -20147,6 +20150,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.outside !== "only" &&
         ctx.castableWhileSearching(searching).length > 0
       ) {
+        // The offer is part of the search, so whoever controls the player
+        // while they search answers it (rule 723.2, Opposition Agent).
+        ctx.beginSearchControl(searching);
         applyEffectSpec(
           {
             kind: "sequence",
