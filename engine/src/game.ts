@@ -2793,7 +2793,7 @@ export class Game {
         this.webSlingingReturnChoice = action.webSlingingReturn;
         this.phyrexianLifeChoice = action.phyrexianLife;
         try {
-          const spliceWhy = this.whyCannotSplice(action.player, action.card, action.face ?? 0, action.splice ?? [], action.overload === true);
+          const spliceWhy = this.whyCannotSplice(action.player, action.card, action.face ?? 0, action.splice ?? []);
           if (spliceWhy !== null) throw new Error(spliceWhy);
           this.withSplice(action.card, action.face ?? 0, action.splice, () => this.withWaterbendChoice(action.card, action.waterbend, () =>
             this.castSpell(
@@ -3058,7 +3058,7 @@ export class Game {
           }
         }
         {
-          const spliceWhy = this.whyCannotSplice(action.player, action.card, action.face ?? 0, action.splice ?? [], action.overload === true);
+          const spliceWhy = this.whyCannotSplice(action.player, action.card, action.face ?? 0, action.splice ?? []);
           if (spliceWhy !== null) return spliceWhy;
         }
         return this.withSplice(action.card, action.face ?? 0, action.splice, () =>
@@ -4837,7 +4837,7 @@ export class Game {
       for (let mask = 1; mask < 1 << spliceCards.length; mask += 1) {
         sets.push(spliceCards.filter((_id, i) => (mask & (1 << i)) !== 0));
       }
-      variants.push(...variants.filter((v) => !v.overload).flatMap((v) => sets.map((splice) => ({ ...v, splice }))));
+      variants.push(...variants.flatMap((v) => sets.map((splice) => ({ ...v, splice }))));
     }
     // An optional additional cost of life a permanent gives (the Defilers'
     // "you may pay 2 life", rule 601.2b): every way to cast it may pay any set
@@ -17315,8 +17315,13 @@ export class Game {
     caster: PlayerId,
   ): readonly TargetSpec[] {
     // Overload (rule 702.126a): "you can't choose targets for it". Cleave
-    // (702.148a) chooses the targets of its rewritten text instead.
-    if (overload) return def.overload?.targets ?? [];
+    // (702.148a) chooses the targets of its rewritten text instead. A spliced
+    // card's targets are chosen all the same (702.47d).
+    if (overload) {
+      const specs = def.overload?.targets ?? [];
+      const splice = this.activeSplice;
+      return splice !== null && splice.spellName === def.name ? [...specs, ...splice.specs] : specs;
+    }
     return this.spellSpecsWithAmounts(this.declaredTargetSpecs(def, modes, kicked), def, kicked, caster);
   }
 
@@ -17345,11 +17350,18 @@ export class Game {
     modes: readonly number[] | undefined,
     kicked: boolean | number,
   ): readonly TargetSpec[] {
+    const own = this.ownDeclaredTargetSpecs(def, modes, kicked);
     // Splice (rule 702.47d): the spliced cards' targets after the spell's own.
     const splice = this.activeSplice;
-    if (splice !== null && splice.spellName === def.name && def.castModal === null && !def.fuse) {
-      return [...(kicked && def.kicker?.targets !== undefined ? def.kicker.targets : def.targets), ...splice.specs];
-    }
+    return splice !== null && splice.spellName === def.name ? [...own, ...splice.specs] : own;
+  }
+
+  /** The target specs a spell declares for its own text (before splice). */
+  private ownDeclaredTargetSpecs(
+    def: CardDefinition,
+    modes: readonly number[] | undefined,
+    kicked: boolean | number,
+  ): readonly TargetSpec[] {
     if (kicked && def.kicker?.targets !== undefined) return def.kicker.targets;
     // A fused split spell (rule 702.102b): the left half's targets, then the
     // right half's.
@@ -19670,12 +19682,18 @@ export class Game {
   } | null = null;
 
   /** Whether `def` is a spell that `spliceCard`'s splice can go onto
-   * (rule 702.47a): an Arcane spell, or an instant or sorcery spell. Only
-   * a spell whose text is one `effect` — not a modal, fused or custom one,
-   * which have no place to add the spliced text yet. */
+   * (rule 702.47a): an Arcane spell, or an instant or sorcery spell. A
+   * custom `resolve` has no place to add the text; a divided spell's split
+   * would run into the spliced card's targets. A modal spell takes only a
+   * spliced card with no targets, since an offer's targets follow its modes
+   * alone, and not the kinds of modes that are one instruction or an
+   * opponent's (their `about-player` frame). */
   private spliceFits(spell: CardDefinition, spliceCard: CardDefinition): boolean {
     if (spliceCard.splice === null) return false;
-    if (spell.castModal !== null || spell.fuse || spell.resolve !== null || spell.effect === null || spell.divided !== null) return false;
+    if (spell.resolve !== null || spell.divided !== null) return false;
+    const modal = spell.castModal;
+    if (modal !== null && (spliceCard.targets.length > 0 || modal.simultaneous === true || modal.chosenBy === "opponent")) return false;
+    if (spell.effect === null && modal === null && !spell.fuse) return false;
     if (!spell.types.includes("instant") && !spell.types.includes("sorcery")) return false;
     return spliceCard.splice.onto === "instant-or-sorcery" || spell.subtypes.includes("Arcane");
   }
@@ -19696,9 +19714,8 @@ export class Game {
   }
 
   /** Why `splice` can't be spliced onto `card` (rule 702.47), or null. */
-  private whyCannotSplice(player: PlayerId, card: ObjectId, face: number, splice: readonly ObjectId[], overload: boolean): string | null {
+  private whyCannotSplice(player: PlayerId, card: ObjectId, face: number, splice: readonly ObjectId[]): string | null {
     if (splice.length === 0) return null;
-    if (overload) return "splice isn't offered with an overloaded or alternative-text cast";
     if (new Set(splice).size !== splice.length) return "each card can be spliced onto a spell only once (rule 702.47b)";
     const candidates = this.spliceCandidates(player, card, face);
     for (const id of splice) {
@@ -28221,7 +28238,7 @@ export class Game {
       // instructions, then each spliced card's, in order, each with its own
       // slice of the targets — its own slice whatever is left before the
       // spliced cards' (an "any number" group of its own included).
-      const spliced = object.spliced !== undefined && object.spliced.length > 0 && chosenModes === undefined && !def.fuse
+      const spliced = object.spliced !== undefined && object.spliced.length > 0
         ? object.spliced.map((name) => this.registry.get(name))
         : null;
       const mainEffect =
@@ -28230,19 +28247,29 @@ export class Game {
           : object.kicked === true
             ? (def.kicker?.effect ?? def.effect)
             : def.effect;
-      const parts: readonly ({ readonly targets?: readonly TargetSpec[]; readonly effect: EffectSpec; readonly count?: number } | undefined)[] | null =
+      type SpellPart = { readonly targets?: readonly TargetSpec[]; readonly effect: EffectSpec; readonly count?: number } | undefined;
+      const ownParts: readonly SpellPart[] | null =
         chosenModes !== undefined && def.castModal !== null
           ? chosenModes.map((mi) => def.castModal?.modes[mi])
           : def.fuse
             ? this.fusedHalves(def).map((half) => (half.effect === null ? undefined : { targets: half.targets, effect: half.effect }))
             : spliced !== null
-              ? [
-                  mainEffect === null
-                    ? undefined
-                    : { effect: mainEffect, count: targets.length - spliced.reduce((n, d) => n + d.targets.length, 0) },
-                  ...spliced.map((d) => (d.effect === null ? undefined : { targets: d.targets, effect: d.effect })),
-                ]
+              ? [mainEffect === null ? undefined : { effect: mainEffect }]
               : null;
+      // The spell's own last part takes every target that isn't the spliced
+      // cards', an "any number" group included (rule 702.47d).
+      const lastOwn = ownParts === null ? undefined : ownParts[ownParts.length - 1];
+      const ownBeforeLast = (ownParts ?? []).slice(0, -1).reduce((n, p) => n + (p?.targets?.length ?? 0), 0);
+      const parts: readonly SpellPart[] | null =
+        spliced === null || ownParts === null
+          ? ownParts
+          : [
+              ...ownParts.slice(0, -1),
+              lastOwn === undefined
+                ? undefined
+                : { ...lastOwn, count: targets.length - ownBeforeLast - spliced.reduce((n, d) => n + d.targets.length, 0) },
+              ...spliced.map((d) => (d.effect === null ? undefined : { targets: d.targets, effect: d.effect })),
+            ];
       if (parts !== null) {
         // A targeted modal spell (rule 700.2 — ROADMAP Phase 11 EG-2): each
         // chosen mode applies with its own slice of `targets`, a target gone
