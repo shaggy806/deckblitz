@@ -2,7 +2,7 @@
 import { describe, expect, it } from "vitest";
 
 import type { ObjectId } from "../primitives.js";
-import { printedCardName } from "../state.js";
+import { blockedAttackersOf, printedCardName } from "../state.js";
 import type { Game } from "../game.js";
 import {
   A,
@@ -63,7 +63,7 @@ describe("Defiant Vanguard", () => {
     a.declareAttackersFn = () => [{ attacker: giant, defender: B }];
     toStep(game, "declare-blockers");
     game.debugApplyEffect(A, { kind: "remove-from-combat", target: 0 }, [{ kind: "object", object: giant }]);
-    expect(game.state.objects[vanguard].blockedAttackers ?? []).not.toContain(giant);
+    expect(blockedAttackersOf(game.state, vanguard)).not.toContain(giant);
     toStep(game, "postcombat-main");
     expect(zone(game, vanguard)).toBe("graveyard");
     expect(zone(game, giant)).toBe("graveyard");

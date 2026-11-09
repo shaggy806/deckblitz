@@ -32,7 +32,7 @@ describe("the Defilers' optional life on a spell cast by an effect (rule 601.2b)
       const way = offer.casts.find((c) => c.optionalLife !== undefined)!;
       return { type: "cast-spell", player: A, card: bears, targets: [], via: way.via, optionalLife: way.optionalLife! };
     };
-    game.debugApplyEffect(A, { kind: "cast-now", from: "hand", filter: { name: "Grizzly Bears" } });
+    game.debugApplyEffect(A, { kind: "cast-now", from: "hand" });
     settle(game);
     expect(seen).toContainEqual([defiler]);
     expect(life(game, A)).toBe(18);
@@ -48,7 +48,7 @@ describe("the Defilers' optional life on a spell cast by an effect (rule 601.2b)
       expect(way.optionalLife).toEqual([defiler]);
       return { type: "cast-spell", player: A, card: bears, targets: [], via: way.via, free: true, optionalLife: way.optionalLife! };
     };
-    game.debugApplyEffect(A, { kind: "cast-now", from: "hand", filter: { name: "Grizzly Bears" }, free: true });
+    game.debugApplyEffect(A, { kind: "cast-now", from: "hand", free: true });
     settle(game);
     expect(life(game, A)).toBe(18);
     expect(zone(game, bears)).toBe("battlefield");
