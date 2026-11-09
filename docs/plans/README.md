@@ -24,7 +24,7 @@ is still unscoped.
 
 `need-keys-after-the-walk` (**in progress**: tooling, model trial, and Phase 1's merge and existence check done; the recheck round next) works down the blocked records once the set walk ends: tooling (`--audit`, `--greedy`, `--brief`), a check that every record is really blocked with keys merged by family, then building in greedy order a family per session, with cheap agents for the judging and scripts for the counting.
 
-`need-key-themes` (**plan of record**, 2026-11-07; steps 1-5 done by 2026-11-08, step 6 next) groups the 1,831 open need keys by the engine mechanism under them — object sets, declarative triggers, one duration type, cost amounts, choosers, a turn journal — and proposes a general change for each, with a build order.
+`need-key-themes` (**plan of record**, 2026-11-07; all done by 2026-11-09) groups the 1,831 open need keys by the engine mechanism under them — object sets, declarative triggers, one duration type, cost amounts, choosers, a turn journal — and proposes a general change for each, with a build order.
 
 `after-the-themes` (**proposed**, 2026-11-09) is the order of work once theme 15 lands: why building keys by rank stops paying (1,315 of 1,577 keys serve one card), re-attempting the top cards before building, a regression check before deploying, cutting down the manual checks, and a stopping rank for the user to set.
 

@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4765 already implemented / 235 missing (marks refreshed 2026-11-09)
+4766 already implemented / 234 missing (marks refreshed 2026-11-09)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -3376,7 +3376,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3383  Immaculate Magistrate                    {3}{G}           Creature — Elf Shaman
 [x]  3384  Vnwxt, Verbose Host                      {1}{U}           Legendary Creature — Homunculus
 [x]  3385  Ovika, Enigma Goliath                    {5}{U}{R}        Legendary Creature — Phyrexian Nightmare
-[ ]  3386  Ghostway                                 {2}{W}           Instant
+[x]  3386  Ghostway                                 {2}{W}           Instant
 [x]  3387  Esior, Wardwing Familiar                 {1}{U}           Legendary Creature — Bird
 [x]  3388  The Gold Saucer                          {0}              Land — Town
 [x]  3389  Daybreak Coronet                         {W}{W}           Enchantment — Aura

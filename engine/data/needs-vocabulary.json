@@ -16181,6 +16181,18 @@
    "description": "A static granting jump-start to graveyard cards matching a filter (GraveyardKeyword has no jump-start).",
    "example": "Niv-Mizzet, Supreme"
   },
+  "effect:flicker-exile-then-roll-and-return": {
+   "family": "effect:flicker-generalized",
+   "example": "Lae'zel's Acrobatics: a group exiled, then a d20 picks whether those cards return now and are exiled again."
+  },
+  "effect:delayed-step-chooses-targets": {
+   "family": "effect:delayed-trigger-extensions",
+   "example": "Feral Encounter: a step-timed delayed ability choosing its own targets as it triggers."
+  },
+  "condition:player-attacked-you-this-turn": {
+   "family": "condition:filter-this-turn-history",
+   "example": "Faramir, Prince of Ithilien: whether a named player attacked you this turn, from the journal, whatever has left since."
+  },
   "replacement:active-prevention-then": {
    "family": "replacement:prevention-then-per-damage",
    "example": "Ria Ivor, Bane of Bladehold: A resolved replacement-effect prevention shield prevents the damage but its 'then' made no Mites."

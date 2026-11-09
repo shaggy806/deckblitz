@@ -1,6 +1,6 @@
 # Need-key themes: general engine changes under the open keys
 
-Status: plan of record (2026-11-07), steps 1-6 (B275-B280) and ten pieces of step 7 (theme 7, B281; theme 10, B282; theme 9, B283; theme 11, B284; theme 13, B285; theme 12, B286; theme 8, B287; theme 14, B288; theme 16, B289; theme 3c, B290) done; step 7 goes on to
+Status: plan of record (2026-11-07), steps 1-6 (B275-B280) and all eleven pieces of step 7 (theme 7, B281; theme 10, B282; theme 9, B283; theme 11, B284; theme 13, B285; theme 12, B286; theme 8, B287; theme 14, B288; theme 16, B289; theme 3c, B290; theme 15, B292) done; the themes are finished
 the smaller themes — see *The plan* just below. The survey under it is a proposal.
 
 The 1,783 open need keys (2,265 waiting cards, re-counted after step 1; the survey's own count was 1,831 and 2,324)
@@ -77,7 +77,8 @@ touch. Each step:
    - **Done 2026-11-08 (B288).** One `attach`, what and where (theme 14: `engine/src/attachments.ts`, see its design note and *As built*). 16 cards, none of the twelve flagged (no flagged card's key is under this theme): Akiri and 15 of the theme's top keys; 16 keys marked built, their other cards left in `--stale` for `author-freed`.
    - **Done 2026-11-08 (B289).** Keyword values and a doubler by any event (theme 16: `engine/src/keyword-values.ts`, see its design note and *As built*). 18 cards, none of the twelve flagged (no flagged card's key is under this theme): Djinn Illuminatus and 17 of the theme's top keys; 13 keys marked built, their other cards left in `--stale` for `author-freed`.
    - **Done 2026-11-09 (B290).** One prohibition record (theme 3c: `engine/src/prohibitions.ts`, see its design note and *As built*). 33 cards: Frozen in Ice (flagged), Grafdigger's Cage, Angel of Jubilation, Sigarda, Lich's Tomb and 28 of the theme's top keys; 24 keys marked built, their other cards left in `--stale` for `author-freed`.
-   - Next: theme 15 (delayed triggers; Fight for the Throne is flagged), the last. After it the themes are done: `author-freed` for `--stale`, then `build-family` for the rest. The `next-theme` skill reads this line.
+   - **Done 2026-11-09 (B292).** One step timing, one watch duration, one intervening "if" (theme 15: `engine/src/delayed-at.ts`, see its design note and *As built*). 12 cards: Fight for the Throne and Loki Laufeyson (flagged) and 10 of the theme's top keys; 11 keys marked built, their other cards left in `--stale` for `author-freed`.
+   - Next: the themes are done. `author-freed` for `--stale`, then the order in `docs/plans/after-the-themes.md`. The `next-theme` skill reads this line.
 
 ## How this was measured
 
@@ -1712,6 +1713,40 @@ effect:delayed-trigger-next-combat-phase 2, effect:delayed-count-done-this-way 3
 expected.
 
 **Confidence: high.**
+
+**Design note (step 7, 2026-11-09): one step timing, one duration, one intervening "if".** Picked by the plan's order, the last theme; Fight for the Throne and Loki Laufeyson are the flagged cards under it. Theme 1 already built the captured context (`DelayedTrigger.x`, `.player`, `remember`), so this piece is the timing, the durations and the "if".
+
+*What's wrong today.* `DelayedTriggerTiming` is ten strings, each a fixed product of step, player and "which one", and the missing products are the blocked cards: the next combat, the next main phase this turn, a chosen player's end step, an owner's upkeep, the first main phase. `turnOf` and `turnBegan` sit beside it to patch two of the ten. `DelayedWheneverWatch` keeps its duration in four flags (`untilYourNextTurn`, `untilEndOfCombat`, `forGame`, `whileAnyExiled`), though the effect already says it as a `WatchDuration`. Only `losesControl` has an intervening "if" (`onlyIf`), so "when that creature dies this turn, **if** you control your commander" has nowhere to go. Read counts: `at` is written about 430 times across 510 pool files and about 25 test files, and read in 17 places in `game.ts`, 10 of them `typeof at === "object"` guards that would silently take a step timing for a watch once it's an object.
+
+*Where it lives.* `engine/src/delayed-at.ts`, the types and the pure question of whether a step fires one:
+
+- **`DelayedAt`** is what a card says: `{ step, whose?, which? }`. `step` is a `Step` that gives priority, or `"main"` for either main phase. `whose` is a `PlayerRef` or `"any"` (the default); `"you"` is the delayed ability's controller, since "you" in its text means that player (603.7d-e). `which` is `"next"` (the default, the next to begin), `"this-turn"` (lapses with the turn) or `"next-turn"` (in a turn of `whose` not begun yet; lapses unfired if that turn's step never comes).
+- **`DelayedStepWatch`** is what the state keeps: `whose` a `PlayerId` or `"any"`, `which` filled in, and `turnBegan` moved inside it. `delayedStep(...)` builds one for the engine's own calls.
+- **`delayedStepFires`** is the one switch, with the two guards that exist today (a step begun before the ability was made; an additional upkeep or end step) kept by step.
+- **`until: WatchDuration`** on the watch, in place of the four flags. `WatchDuration` gains `"end-of-turn"`, `"until-end-of-your-next-turn"` (Season of the Bold) and `"while-exiled"` (Dimensional Breach's flag).
+- **`if?: StaticCondition`** on the `delayed-trigger` effect, whatever it waits for, asked as it would trigger and again as it resolves (603.4).
+- **`flicker`'s `target`** takes `{ all: CardFilter }`: "exile each creature you control. Return those cards … at the beginning of the next end step" is the linked return (610.3) `returnAt` already builds.
+
+*Rules.*
+- **603.4**: an intervening "if" is checked as the event occurs and again on resolution.
+- **603.7b**: once, unless a duration is stated. **603.7c**: it affects its object only while that object stays where it's expected.
+- **603.7d-e**: its source and controller are those of what created it.
+- **502.4**: no player gets priority in the untap step, so `DelayedAt` doesn't offer it, and Undiscovered Paradise's "during your next untap step" stays blocked: it isn't a trigger.
+
+*Moved or not, decided before building.* **Moved and deleted:** `DelayedTriggerTiming`, `delayed-trigger`'s `turnOf`, `DelayedTrigger.turnOf` and `.turnBegan`, the watch's four flags, `DelayedLosesControl.onlyIf`, by a script over cards, tests and the scaffolder's output, with a pool test refusing the old spellings. **Not moved:**
+- *`returnOnOwnersTurn`*: one delayed ability per owner among the cards exiled, which no single `whose` can say.
+- *The other watches* (`leaves`, `nextSpell`, `attacksUnblocked`, `losesControl`, `thatCombat`): each waits on an event, not a step, and has no duration field to unify beyond what it has.
+- *`next-end-step` as a copy's `ends`* (a `CopyDuration` point) and `exile-at`-style durations: those are when an effect ends, not when an ability fires.
+
+*Bots.* `target-polarity`'s `delayed-trigger` row and `effect-worth` read `leaves`, `watching` and the inner effect, none of which move, and a step timing doesn't carry those keys. A flicker with `{ all }` names no slot, so nothing rates it, the same as `exile-all`. `if` needs nothing: a delayed trigger's worth is already its effect's, and a bot can't aim it.
+
+*As built (step 7, B292).*
+- `delayed-at.ts`: `DelayedAt`, `DelayedStepWatch`, `DelayedStep`, `DelayedWhich`, `delayedStep`, `readDelayedAt`, `isStepWatch`, `delayedStepFires`, `watchOutlastsItsTurn`. `Game.delayedIfHolds` is the one reader of `if`, at all six places a delayed ability can trigger and on resolution.
+- **Moved and deleted, every user migrated:** `DelayedTriggerTiming`, `delayed-trigger`'s `turnOf`, `DelayedTrigger.turnOf` and `.turnBegan`, the watch's `untilYourNextTurn`, `untilEndOfCombat`, `forGame` and `whileAnyExiled`, `DelayedLosesControl.onlyIf`. 468 spellings in 438 files by a script, run once; `test/delayed-at.test.ts` refuses them.
+- **Differences from the note:** `which: "this-turn"` skips the end-step guard, because an extra turn's "that turn's end step" is set up as the turn begins, while the step is still the last turn's. The `typeof at === "object"` guards went with the strings, each replaced by the key it was reaching for, so a step timing can't be read as a watch.
+- **Behaviour changes:** a delayed ability's X is now its creator's over the X of a spell that fired it, when the creator had one (Storm King's Thunder copying an X spell); a creator with none still reads the spell's (Brass Infiniscope). A `nextSpell` filter's `{ amount }` is read as the spell is cast rather than as the ability is set up (Loki's power, counters added since included). No pool card read it before.
+- **Cards, 12:** Fight for the Throne and Loki Laufeyson (flagged), Ghostway, Planar Guide, Legion's Initiative, Plasm Capture, Season of the Bold, Storm King's Thunder, Phytotitan, Vigorous Charge, Fire Giant's Fury, Vivien's Stampede. **Keys built, 11:** the delayed-trigger timing, intervening-if, live-amount, creator-X, next-turn watch and untargeted-group flicker keys, and `effect:delayed-combat-damage-that-much`, which needed no engine code. The other cards they free are in `--stale` for `author-freed`.
+- **Left unbuilt:** Nahiri's Resolve (`effect:flicker-chosen-group`: an untargeted choice, where `{ all }` takes every match), Lae'zel's Acrobatics (`effect:flicker-exile-then-roll-and-return`), Feral Encounter (`effect:delayed-step-chooses-targets`: a step-timed delayed ability choosing targets as it triggers), Faramir (`condition:player-attacked-you-this-turn`: `attackedYouThisTurn` misses an attacker that has left). `returnOnOwnersTurn` stays, one ability per owner. The pay-before-a-deadline family (Glass Asp) needs a window of its own.
 
 ### 16. Grants: any keyword with parameters; trigger multipliers by cause (37 keys, ~39 cards)
 

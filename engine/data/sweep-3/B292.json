@@ -1,0 +1,121 @@
+{
+ "batch": "B292",
+ "status": "done",
+ "ranks": "Need-key themes step 7, the last piece (docs/plans/need-key-themes.md, 2026-11-09): theme 15, one step timing, one watch duration and an intervening if; Fight for the Throne and Loki Laufeyson (flagged) and ten of the theme's top keys",
+ "authored": [
+  {
+   "name": "Fight for the Throne",
+   "files": [
+    "engine/src/cards/pool/fight-for-the-throne.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Loki Laufeyson",
+   "files": [
+    "engine/src/cards/pool/loki-laufeyson.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ghostway",
+   "files": [
+    "engine/src/cards/pool/ghostway.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Planar Guide",
+   "files": [
+    "engine/src/cards/pool/planar-guide.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Legion's Initiative",
+   "files": [
+    "engine/src/cards/pool/legions-initiative.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Plasm Capture",
+   "files": [
+    "engine/src/cards/pool/plasm-capture.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Season of the Bold",
+   "files": [
+    "engine/src/cards/pool/season-of-the-bold.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Storm King's Thunder",
+   "files": [
+    "engine/src/cards/pool/storm-kings-thunder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Phytotitan",
+   "files": [
+    "engine/src/cards/pool/phytotitan.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vigorous Charge",
+   "files": [
+    "engine/src/cards/pool/vigorous-charge.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Fire Giant's Fury",
+   "files": [
+    "engine/src/cards/pool/fire-giants-fury.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vivien's Stampede",
+   "files": [
+    "engine/src/cards/pool/viviens-stampede.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Nahiri's Resolve",
+   "needs": [
+    "effect:flicker-chosen-group"
+   ],
+   "why": "\"Exile any number of nontoken artifacts and/or creatures you control\" is an untargeted choice; flicker's { all } takes every match, not a chosen group."
+  },
+  {
+   "name": "Lae'zel's Acrobatics",
+   "needs": [
+    "effect:flicker-exile-then-roll-and-return"
+   ],
+   "why": "Exile, then a d20 picks between a delayed return and returning now to be exiled again."
+  },
+  {
+   "name": "Feral Encounter",
+   "needs": [
+    "effect:delayed-step-chooses-targets"
+   ],
+   "why": "The next combat this turn is { step: 'begin-combat', which: 'this-turn' } now, but a step-timed delayed ability can't choose its own targets as it triggers."
+  },
+  {
+   "name": "Faramir, Prince of Ithilien",
+   "needs": [
+    "condition:player-attacked-you-this-turn"
+   ],
+   "why": "Their next end step is whose: 'that-player' now; \"if they didn't attack you that turn\" needs the journal, as attackedYouThisTurn misses an attacker that has left."
+  }
+ ]
+}
