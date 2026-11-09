@@ -307,6 +307,92 @@ describe("a token copy is a token event too", () => {
   });
 });
 
+describe("tokens made inside another effect are token events too (rule 614.1a)", () => {
+  const moonlit = (game: ReturnType<typeof table>["game"]): void => {
+    const bears = spawn(game, "Grizzly Bears", A);
+    const aura = game.debugSpawn("Moonlit Meditation", A, "battlefield");
+    game.state.objects[aura].attachedTo = bears;
+  };
+  const tokens = (game: ReturnType<typeof table>["game"]): string[] =>
+    game.state.zones.shared.battlefield
+      .map((id) => game.state.objects[id])
+      .filter((o) => o.isToken === true)
+      .flatMap((o) => Array.from({ length: o.stackCount ?? 1 }, () => o.cardName));
+
+  it("incubate: taken, the copy instead of the Incubator", () => {
+    const { game, a } = table();
+    moonlit(game);
+    pickModes(a, 1);
+    game.debugApplyEffect(A, { kind: "incubate", amount: 2 });
+    settle(game);
+    expect(tokens(game)).toEqual(["Grizzly Bears"]);
+  });
+
+  it("incubate: declined, the Incubator with its counters", () => {
+    const { game, a } = table();
+    moonlit(game);
+    pickModes(a, 0);
+    game.debugApplyEffect(A, { kind: "incubate", amount: 2 });
+    settle(game);
+    expect(tokens(game)).toEqual(["Incubator Token"]);
+  });
+
+  it("amass with no Army: taken, the copy instead, and no Army to put counters on (701.47b)", () => {
+    const { game, a } = table();
+    moonlit(game);
+    pickModes(a, 1);
+    game.debugApplyEffect(A, { kind: "amass", amount: 2, creatureType: "Zombie" });
+    settle(game);
+    expect(tokens(game)).toEqual(["Grizzly Bears"]);
+  });
+
+  it("amass with an Army makes no token, so nothing is asked", () => {
+    const { game, a } = table();
+    game.debugApplyEffect(A, { kind: "amass", amount: 1, creatureType: "Zombie" });
+    settle(game);
+    moonlit(game);
+    nextTurn(game);
+    let asked = 0;
+    a.chooseModesFn = () => ((asked += 1), [1]);
+    game.debugApplyEffect(A, { kind: "amass", amount: 1, creatureType: "Zombie" });
+    settle(game);
+    expect(asked).toBe(0);
+  });
+
+  it("populate: taken, the copy of the enchanted permanent instead", () => {
+    const { game, a } = table();
+    game.debugApplyEffect(A, { kind: "create-token", token: "Bird Token", count: 1 });
+    settle(game);
+    nextTurn(game);
+    moonlit(game);
+    pickModes(a, 1);
+    game.debugApplyEffect(A, { kind: "populate" });
+    settle(game);
+    expect(tokens(game).sort()).toEqual(["Bird Token", "Grizzly Bears"]);
+  });
+
+  it("populate with no creature token makes none, so nothing is asked", () => {
+    const { game, a } = table();
+    moonlit(game);
+    let asked = 0;
+    a.chooseModesFn = () => ((asked += 1), [1]);
+    game.debugApplyEffect(A, { kind: "populate" });
+    settle(game);
+    expect(asked).toBe(0);
+    expect(tokens(game)).toEqual([]);
+  });
+
+  it("encore: taken, that many copies of the enchanted permanent, one for each opponent", () => {
+    const { game, a } = table({ players: 3 });
+    moonlit(game);
+    pickModes(a, 1);
+    const card = game.debugSpawn("Hill Giant", A, "exile");
+    game.debugApplyEffect(A, { kind: "encore" }, [], { source: card });
+    settle(game);
+    expect(tokens(game)).toEqual(["Grizzly Bears", "Grizzly Bears"]);
+  });
+});
+
 describe("the vocabulary, pool-wide", () => {
   const replacements = (): { card: string; r: ReplacementSpec }[] =>
     POOL_CARDS.flatMap((c) => (c.static ?? []).flatMap((s) => (s.replacement === undefined ? [] : [{ card: c.name, r: s.replacement }])));

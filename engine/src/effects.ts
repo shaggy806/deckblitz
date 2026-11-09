@@ -5867,6 +5867,8 @@ export type EffectSpec =
        * `choose-permanents`); with one, it's copied without asking.
        */
       readonly kind: "populate";
+      /** Set when a would-create-token replacement was asked, and declined (rule 616.1). */
+      readonly replacementAsked?: true;
     }
   | {
       /**
@@ -5893,6 +5895,11 @@ export type EffectSpec =
       /** Set only by the engine: the Army chosen, as the target slot a
        * `choose-permanents` binds it to — never authored. */
       readonly onto?: number;
+      /** Set when a would-create-token replacement was asked, and declined (rule 616.1). */
+      readonly replacementAsked?: true;
+      /** Set when one replaced the Army token: amass goes on with whatever
+       * Army there is, and makes none (rule 701.47b). */
+      readonly tokenReplaced?: true;
     }
   | {
       /**
@@ -6032,6 +6039,8 @@ export type EffectSpec =
        */
       readonly kind: "incubate";
       readonly amount: EffectAmount;
+      /** Set when a would-create-token replacement was asked, and declined (rule 616.1). */
+      readonly replacementAsked?: true;
     }
   | {
       /**
@@ -9368,6 +9377,8 @@ export type EffectSpec =
        * exiled it), which nothing else does.
        */
       readonly kind: "encore";
+      /** Set when a would-create-token replacement was asked, and declined (rule 616.1). */
+      readonly replacementAsked?: true;
     }
   | {
       /**
@@ -11826,7 +11837,7 @@ export interface EffectApi {
   populate(): void;
   /** See the `"amass"` {@link EffectSpec}. `onto`: the Army already
    * chosen. */
-  amass(amount: number, creatureType: string, onto?: ObjectId, player?: PlayerId): void;
+  amass(amount: number, creatureType: string, onto?: ObjectId, player?: PlayerId, noToken?: boolean): void;
   /** See the `"monstrosity"` {@link EffectSpec}. */
   monstrosity(amount: number): void;
   /** See the `"harness"` {@link EffectSpec}. */
@@ -12287,7 +12298,12 @@ export interface EffectApi {
   heal(target: TargetRef): void;
   /** If a `would-create-token` replacement's `becomes` applies to `count`
    * tokens of this `create-token`: true once it's replaced or asked. */
-  tokenEventReplaced(spec: Extract<EffectSpec, { kind: "create-token" | "create-token-copy" }>, count: number): boolean;
+  tokenEventReplaced(
+    spec: Extract<EffectSpec, { kind: "create-token" | "create-token-copy" | "populate" | "amass" | "incubate" | "encore" }>,
+    count: number,
+    /** What the effect still does once its tokens are replaced (amass). */
+    after?: EffectSpec,
+  ): boolean;
   /** Epic as the spell resolves — see the `epic` {@link EffectSpec}. */
   epic(): void;
   /** Paradigm as the spell resolves — see the `paradigm` {@link EffectSpec}. */
@@ -17615,6 +17631,13 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       });
       return;
     case "populate":
+      if (
+        spec.replacementAsked !== true &&
+        ctx.permanentsMatching({ type: "creature", token: true, controlledBy: "you" }).length > 0 &&
+        ctx.tokenEventReplaced(spec, 1)
+      ) {
+        return;
+      }
       ctx.populate();
       return;
     case "amass": {
@@ -17622,11 +17645,21 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (spec.onto !== undefined && chosen?.kind !== "object") return;
       const player = spec.who === undefined ? undefined : resolvePlayerRef(spec.who, ctx);
       if (spec.who !== undefined && player === undefined) return;
+      if (
+        spec.replacementAsked !== true &&
+        spec.who === undefined &&
+        spec.onto === undefined &&
+        ctx.permanentsMatching({ type: "creature", subtype: "Army", controlledBy: "you" }).length === 0 &&
+        ctx.tokenEventReplaced(spec, 1, { ...spec, replacementAsked: true, tokenReplaced: true })
+      ) {
+        return;
+      }
       ctx.amass(
         amountValue(spec.amount, ctx),
         spec.creatureType,
         chosen?.kind === "object" ? chosen.object : undefined,
         player,
+        spec.tokenReplaced === true,
       );
       return;
     }
@@ -17746,6 +17779,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "incubate":
+      if (spec.replacementAsked !== true && ctx.tokenEventReplaced(spec, 1)) return;
       ctx.incubate(amountValue(spec.amount, ctx));
       return;
     case "remove-from-combat": {
@@ -19753,6 +19787,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "encore":
+      if (spec.replacementAsked !== true && ctx.tokenEventReplaced(spec, ctx.playersInScope("each-opponent").length)) return;
       ctx.encore();
       return;
     case "goad": {

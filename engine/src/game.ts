@@ -36458,7 +36458,8 @@ controlledBy,
       earthbent: () => this.emit({ type: "bent", player: controller, how: "earth" }),
       addCounter: (target, counter, amount, by, training) =>
         this.addCounter(target, counter, amount, true, by ?? controller, training),
-      amass: (amount, creatureType, onto, player) => this.amass(player ?? controller, amount, creatureType, source, x, onto),
+      amass: (amount, creatureType, onto, player, noToken) =>
+        this.amass(player ?? controller, amount, creatureType, source, x, onto, noToken),
       exert: (target, asItAttacks) => {
         if (target.kind !== "object") return;
         this.exertPermanent(target.object, controller, asItAttacks);
@@ -38774,7 +38775,7 @@ controlledBy,
         object.damageMarked = 0;
         invalidateComputedCache();
       },
-      tokenEventReplaced: (spec, count) => this.tokenEventReplaced(spec, count, controller, source, targets, x),
+      tokenEventReplaced: (spec, count, after) => this.tokenEventReplaced(spec, count, controller, source, targets, x, after),
       addReplacementEffect: ({ fromObject, ...record }) => {
         const object = record.target?.kind === "object" ? this.state.objects[record.target.object] : undefined;
         const from = fromObject === undefined ? undefined : this.state.objects[fromObject];
@@ -40127,6 +40128,8 @@ controlledBy,
     source: ObjectId,
     x: number,
     onto?: ObjectId,
+    /** A would-create-token replacement took the Army token: none is made. */
+    noToken?: boolean,
   ): void {
     // Amass 0 still makes the Army and its type (rule 701.47a); only the
     // counters are none — and putting none is no event to replace.
@@ -40166,6 +40169,7 @@ controlledBy,
       army = armies[0];
     }
     if (army === undefined) {
+      if (noToken === true) return;
       const before = new Set(this.state.zones.shared.battlefield);
       this.createTokens(controller, "Army Token", 1);
       // "Choose an Army creature you control" (rule 701.47a): the token made,
@@ -42568,12 +42572,14 @@ controlledBy,
    * tokens are made as the `spec` said. Says whether it replaced or asked.
    */
   private tokenEventReplaced(
-    spec: Extract<EffectSpec, { kind: "create-token" | "create-token-copy" }>,
+    spec: Extract<EffectSpec, { kind: "create-token" | "create-token-copy" | "populate" | "amass" | "incubate" | "encore" }>,
     count: number,
     controller: PlayerId,
     source: ObjectId,
     targets: ResolvedTargets,
     x: number,
+    /** What the effect still does once its tokens are replaced (amass). */
+    after?: EffectSpec,
   ): boolean {
     if (count <= 0) return false;
     const first = journalTotal(this.state, "token-created", controller, "count") === 0;
@@ -42585,7 +42591,8 @@ controlledBy,
         if (r?.event !== "would-create-token" || r.becomes === undefined || (r.firstEachTurn === true && !first)) continue;
         if (!this.staticActive(by, ability)) continue;
         // Its own token copies are not a new event for it to replace (614.5).
-        const becomes = { ...r.becomes.effect, replacementAsked: true } as EffectSpec;
+        const replaced = { ...r.becomes.effect, replacementAsked: true } as EffectSpec;
+        const becomes: EffectSpec = after === undefined ? replaced : { kind: "sequence", effects: [replaced, after] };
         if (r.may !== true) {
           this.runReplacedBy(becomes, by.id, controller, { x: count, player: controller });
           return true;
