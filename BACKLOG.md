@@ -603,7 +603,6 @@ there and move this line to `COMPLETED.md`.
 - **A targeting restriction can't last a turn, or require a target**: `hexproofFrom`'s qualifiers are statics only; Display of Dominance's "… this turn" over permanents you control, Lurker's "unless it attacked or blocked this turn" and the Flagbearers' "must choose at least one Flagbearer" (601.2c) need more (`docs/engine-gaps.md`). (2026-11-09: only the Flagbearers' "at least one if able" over a whole target set is left, and it needs a client change.)
 - **A merged or melded permanent's cards go into a library or graveyard in an order nobody chose**: rule 730.3a and the meld ruling let the owner order them; and only a blink and the exile links find every card it became as "that card" (730.3c, `leftWith`, built 2026-10-31 with meld).
 - **Simultaneous as-enters removals of every counter**: two Thieves of Blood at once — the player should choose which gets them (`docs/engine-gaps.md`).
-- **An optional non-mana cost paid as a permanent enters**: Ulamog's Despoiler's "as this enters, you may put two cards … from exile" (`docs/engine-gaps.md`).
 - **Face-down leftovers**: Illusionary Mask, Ugin, the Ineffable, Kozilek, the Broken Reality, Ixidron, Vesuvan Shapeshifter and others, each needing its own face-down link or choice (`docs/engine-gaps.md`).
 - **`put-onto-battlefield` follows a target that changed zones during the resolution** (400.7): Celestial Gatekeeper's "exile it, then return target …" returns itself from exile (`bug:moved-target-card-still-acted-on`, batches 219 and 235). (2026-11-09: moved under another name is fixed; a target moved by a mass effect and then named by its slot is left.)
 - **Splice's limits** (702.47): only onto a spell with one plain `effect` (not modal, fused, divided or `resolve`), not with overload, at most four splice cards a cast, and a mana splice cost only. (2026-11-09: onto modal, fused and overloaded spells landed; a spliced card with targets onto a modal spell, divided and `resolve` spells, the four-card cap and 702.47b's order are left.)
@@ -611,7 +610,6 @@ there and move this line to `COMPLETED.md`.
 - **Not modeled**: banding, Companion, word-replacing text change (612.2).
 - **Replacement order is chosen for the affected player, never asked** (616.1): among them two opponents' Crafty Cutpurses on one token (first in turn order), and the Words cycle's next draw before a Notion Thief or a draw multiplier. (2026-11-09: the `replacement-order` decision asks for damage, combat, destroy, and the `add-counter`, `counters-divided` and `gain-life` effects; entering counters, costs, lifelink, player counters, connive, proliferate and events that can't wait still take the best order.)
 - **"Each player may" with a choice inside it** (101.4): a search is done before the next player is asked (Tempt with Discovery, Innocent Traveler).
-- **Static-effect dependency ordering** (613.8) beyond layer 4's type grants.
 - **The rest of leaving the game** (800.4g–h): a choice asked of a player who has left is skipped, not handed to another player.
 
 Latent: the engine departs from the rules here, but no pool card reaches it yet. Fix each

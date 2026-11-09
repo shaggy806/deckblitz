@@ -3159,6 +3159,8 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Engine rules gaps
 
+- **Static-effect dependency ordering** (2026-11-09, `b45d3575d`, already fixed: a test now pins it): Every pair a real card shows is ordered (layer 4 grants, statics that remove abilities, `grantsActivatedOf`, keyword-scoped statics, rule 613.8a); a test pins Chaosphere and Archetype of Imagination either way. Keyword-scoped statics are one level deep, and no real card chains them.
+- **An optional non-mana cost paid as a permanent enters** (2026-11-09, `c36d81b78`): `AsEntersAction.putFromExile`, all or none, through `choose-from-zone` (rule 614.12a); Ulamog's Despoiler authored.
 - **A delayed trigger's `{ powerOf: "source" }` reads 0 after an ability sacrifices its own source** (2026-11-09, `87f27bc77`): A delayed ability reads a source that has left, a sacrificed token included, as it last existed (`DelayedTrigger.sourceWas`, rules 608.2h, 603.7c).
 - **A Draconic Visitor's replacement of an Incubator drops the counters** (2026-11-09, `4cb4881b8`): A token made in an Incubator's place or beside it enters with its counters (rule 701.53a and both cards' rulings).
 - **A resolve-time either/or between two effects** (2026-11-09, `no commit`, already fixed: a test now pins it): A `modal` without `announced` says this; Vhati il-Dal uses it.

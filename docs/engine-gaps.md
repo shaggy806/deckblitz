@@ -51,11 +51,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
 - **Simultaneous as-enters removals of every counter.** Two Thieves of Blood entering at once:
   the first applied takes every counter, where the player should choose which gets them
   (`removeAllCountersFrom`, 2026-10-31; 616.1).
-- **An optional non-mana cost paid as a permanent enters.** Ulamog's Despoiler's "As this
-  creature enters, you may put two cards your opponents own from exile into their owners'
-  graveyards. If you do, it enters with four +1/+1 counters" needs a choice and a cost inside an
-  enters replacement (rule 614.12); the processors' `putFromExile` cost exists (2026-10-31) but
-  only as an activation or additional cost.
 - **Face-down leftovers.** Built 2026-10-31: faces down by an effect, manifest from another's
   library, `cant-turn-face-up`. Still open: Illusionary Mask (cast face down for X); Ugin, the
   Ineffable and Gustha's Scepter (a face-down exile linked to a token or source); Kozilek, the
@@ -117,9 +112,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   lose life — `asksNothing`) is done for everyone who said yes after the last answer. One that
   asks something else, a search above all, is still done before the next player is asked: Tempt
   with Discovery and Tempt with Immortality stay blocked on it, and so does Innocent Traveler ("if no one does").
-- **Static-effect dependency ordering** (rule 613.8) is implemented only for layer 4's additive
-  type grants (Kudo beside Mishra's Factory, `characteristics.ts`). Every other layer applies
-  its statics in timestamp order only.
 - **The rest of leaving the game** (rule 800.4). 800.4a, 800.4c (a control effect ending with the
   default controller gone exiles the permanent — `recomputeControl`) and 800.4m are modeled, and
   a conceding player's own pending decision is answered by the server first. Not yet: a choice an
