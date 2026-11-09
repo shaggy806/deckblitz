@@ -19,27 +19,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   whose characteristics are both halves (709.4), multicolored. The colour clauses use `def.colors`
   and are right. Fix: judge the offer as the face being cast, e.g. a face-aware read in
   `TargetSource` that `matchesFilter` honours, rather than mutating `face` under the computed cache.
-- **Two different "must be blocked by" filters on one attacker merge into one requirement** (found 2026-11-03). An attacker
-  under two filtered requirements should have each counted toward the most requirements possible (rule 509.1c).
-  `combat/blocking.ts`'s `mustBeBlockedByOneOf` holds one list per attacker, so a blocker matching either filter satisfies both.
-  Not checked: which cards in the pool can reach it.
-
-- **The auto-payer can find no plan for a payable cost** (found 2026-11-03, older than the finding: it fails
-  with `lifeLast` switched off too). `coverSpecific` (`mana-payment.ts`) takes pips in WUBRG order, each from
-  the free source first, and never takes one back: Fellwar Stone (making {W} and {R} off an opponent's lands)
-  and Silent Clearing make {W}{R}, but the Stone goes on the {W} for free and nothing is left for the {R}, so
-  `payMana` returns null and the spell isn't offered. The retries only reorder groups of sources, and without
-  a converter they don't run. Outline: a last pass that takes the pips scarcest first (fewest sources making
-  them), or a small matching over the coloured pips; it runs only where every other pass found nothing, so it
-  can't change a payment that works. Risk: `payMana` is on the affordability path, so measure the cost of a
-  further pass on a payment that truly can't be paid.
-- **The auto-payer can pay away a player's last life** (found 2026-11-03). `affordableOptions`
-  (`mana-payment.ts`) checks each option's toll against the life total alone, so at 2 life Silent Clearing and
-  Caves of Koilos together pay {W}{W} for 2 and the player loses, though its comment says the auto-payer never
-  kills its payer. Outline: count the tolls already taken as `openFunded` opens a source, and treat a toll that
-  would reach 0 as unaffordable. A design call: rule 119.4 lets a player pay life down to 0 and a painland's
-  damage (rule 120.3a) isn't a payment at all, so this makes such a spell uncastable by auto-pay; the
-  alternative is to keep it castable and ask first, a new decision.
 - **Mulligans are declared at once, and two opening-hand rules are loose** (found 2026-11-01, all older
   than the finding). Rule 103.5 has each player declare in turn order; `beginMulligans` (`game.ts`) asks in
   parallel, and changing it is a design call. Rule 103.5c gives the free mulligan to multiplayer and
@@ -49,28 +28,12 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   2026-11-01). Rule 616.1 lets the affected object's controller choose among replacement effects. With
   Obstinate Baloth, Dodecapod or Quagnoth discarded under Leyline of the Void, `game.ts` (~43286)
   always takes the battlefield. Almost always the choice a player would make, but not asked.
-- **Goad's defender narrowing ignores attack caps** (found 2026-11-01, unconfirmed by a test). Rule
-  508.1d maximises requirements obeyed within restrictions. `decisions/attackers.ts` narrows a goaded
-  creature's defenders without reading `combat/limits.ts`, so a second goaded creature facing a full
-  Crawlspace isn't sent at its goader. Related: `withinBlockCompany` (`combat/blocking.ts`) can reach
-  an empty set for two Lured menace attackers under Caverns of Despair, which may be refused. And a
-  global block limit (`blockersLeft`, `combat/limits.ts`) goes to whichever defender is asked first.
-- **A spell needing two target-keyed reductions at once is refused** (found 2026-11-01). Rule 601.2f
-  totals the cost after targets are chosen, so two targets that each earn a reduction both count.
-  `reducingTargetsNeeded` (`game.ts`) guarantees only one earning target in the offer, so a multi-target
-  spell affordable only with both (two Spellwild Ouphes, say) is refused at the cast: a legal play
-  missing, never an illegal one allowed. Narrow; no proving card reaches it.
 - **Limited-duration control of a player** (found 2026-11-01). Rule 723.2: Word of Command and
   Opposition Agent control a player for less than a turn. `player-control.ts` holds a next turn or a
   next combat, not these; Word of Command is on the stale list and needs its own narrow key.
 - **`exile-all` and `damage-all`'s `except` spare a whole token stack** (found 2026-11-01). They
   compare the stack's id, so a token stack as the source is spared whole, where `destroy-all`'s
   `exceptSource` spares one token and takes the rest. Representation must not change a result.
-- **A must-block creature's only companion can't legally join it** (found 2026-11-01).
-  `withinBlockCompany` (`combat/blocking.ts`) can answer with an illegal `[]` when a creature that
-  must block needs a companion (Craven Hulk's restriction) and its only companion can't join it, as
-  with an attacker that can't be blocked by more than one. A person would have no legal declaration
-  (rule 509.1c). Untested.
 - **A target tax's offers are approximate in two corners** (found 2026-11-01). Each only
   mis-offers, never mis-charges: `target-count.ts`'s sum over-counts a `targeting` tax with several
   targets, so a driver may pass on a legal cast; and a taxed ability that also has a two-slot
@@ -117,24 +80,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   other "that card" reference (an impulse permission on an exiled permanent, Hostage Taker's) sees
   the object's own card alone. Fix: a `choose-pile`-style order decision for the first, and read
   `leftWith` wherever an effect follows a permanent into its new zone for the second.
-- **An activation count restarts on a control change.** The `activated-this-turn { atLeast }`
-  condition (2026-11-01) counts in `GameState.abilityActivationsThisTurn` keyed by
-  `abilityTurnKey`, the object's timestamp. The agent that built it reports the engine gives a
-  permanent a new timestamp when it changes control — no rule asks for one (613.7d–e), and the
-  permanent is still the same object (400.7 is about zone changes) — so Dragon Whelp's "if
-  this ability has been activated four or more times this turn" counts from zero under its new
-  controller. `timesEachTurn`'s own limit is per object and survives it (tested). Fix: key on the
-  object id and its zone stint. Also: several existing comments cite "rule 602.5g", which the
-  2026-09-25 rules don't have (602.5b is the activation-limit rule).
-- **A text change misses a token's colours and a resolving spell's colour change.** The
-  `change-text` effect (`text-change.ts`, 2026-10-31) changes every colour word and basic land type
-  in an object's rules text, but a token created by the changed text ("create a white Soldier"
-  made "blue") keeps its token definition's colours, where the changed words define the token
-  (rules 612.1, and 612.4: a token's characteristics are defined by the ability that made it). Separately, `Game.becomeColor` on a permanent spell (Deathlace on a creature spell) is
-  dropped as the spell resolves, where 400.7a carries a change to a spell onto the permanent; the
-  text change already carries over as a `castRider`, the way to fix it. And no static changes
-  the text of every object (Swirl the Mists), though `cards:needs -- --stale` lists it freed.
-  Reported by the overnight agent that built text changes; not yet reproduced in a test.
 - **A spell's copy keeps none of its cost references.** Rule 707.10: a copy copies "all
   decisions made for it, including … additional or alternative costs", so a copy of Fling deals
   the sacrificed creature's power, and a copy of Volrath the Fallen's or Induce Despair's effect
@@ -170,13 +115,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   (`removeAllCountersFrom`, 2026-10-31; 616.1).
 - **Enlist leftovers.** Enlist ×N (702.154d) isn't built, and an attack tax paid by auto-tapping a
   mana creature is paid before enlist is asked, so it can tap the creature meant to be enlisted.
-- **Granted statics and cost changes, untested.** Since 2026-11-05 (Caduceus, Staff of Hermes)
-  `Game.staticsOfSource` lists a permanent's granted statics after its own, so damage
-  replacements and prevention, cost modifications, play permissions and prohibitions all read
-  them. Only prevention is proved by a card. Acolyte of Bahamut
-  (`static:granted-static-cost-modification`) likely runs through the same path; an untested draft
-  is at `engine/.cache/acolyte-of-bahamut.ts.draft` on the PC. Arterial Alchemy and Dancer's
-  Chakrams need checking the same way; Lymph Sliver needs absorb (rule 702.64).
 - **A split card's two names aren't both compared.** `sameNameAsAny` (built 2026-10-31) compares
   one name, so a split card's second name (rule 201.2a) never matches "the same name as".
 - **An optional non-mana cost paid as a permanent enters.** Ulamog's Despoiler's "As this
@@ -203,58 +141,8 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   (not "without paying its mana cost", which leaves no generic) is affected; no such pairing is
   known in the pool. Fix: suspend the resolution as `cast-now` does around a discard, and
   resume it after `resumeAssistedCast`.
-- **"Add one mana of the chosen color" with no colour chosen adds any colour.** `add-mana`'s
-  `"chosen"` (`effects.ts`, around line 9232) falls back to `"any-color"` when its source has
-  no `chosenOnEnter` colour; Shimmerwilds Growth's ruling says it adds no mana then. Only an
-  object that never entered the way that asks can reach it (a copy of the Aura made some other
-  way, an object becoming one), so it's rare. Heraldic Banner and Big Apple, 3 a.m. rely on the
-  same fallback. Fix: add nothing for an unchosen colour, after checking no card means the
-  fallback. Found by batch 249's group A.
-- **A permanent spell's changed characteristics don't follow it onto the battlefield.** Rule
-  400.7a: effects from spells and abilities that change the characteristics or controller of a
-  permanent spell on the stack continue to apply to the permanent it becomes. `moveObject`
-  (`game.ts`, `keptPrototype`, around line 37680) keeps only a stack object's `prototype` and
-  `castRider` modifiers as it moves to the battlefield, so a `become-color` on a creature spell
-  ("Target spell or permanent becomes white until end of turn") is gone on arrival. Blind Seer
-  (in the pool) has the ruling and is wrong for a permanent spell; Crimson Wisps-style
-  "spell or permanent" colour cards likely too. Keep a modifier set on the stack by a resolved
-  effect (not a static's) across that one move. Found by batch 244's group A; blocks
-  Eight-and-a-Half-Tails (`effect:spell-color-change-carries-to-permanent`).
-- **A mana ability with a `discard` cost never pays it.** In `game.ts` the mana-ability branch of
-  ability activation resolves the ability and returns (around line 15359) before the discard cost
-  is paid (around line 15521), and legality doesn't refuse it the way it refuses an
-  `exileFromGraveyard` cost on a mana ability ("mana ability can't exile cards from a graveyard
-  yet", around line 14971). So "Discard a card: Add {B}" would add mana for free. Rule 602.2b
-  has the whole cost paid; refuse it until it's paid. Found by batch 236; blocks Skirge Familiar
-  (`cost:mana-ability-discard-cost`).
-- **A delayed "whenever" on a batched damage event fires once per source.** A `DelayedWhenever`
-  on `deals-damage-batch` goes through `fireWheneverWatchers`, which has none of the
-  `damageBatch` grouping a permanent's own triggers get (rule 603.2c: one trigger per player dealt
-  damage in the batch), nor their per-card handling of `put-into-graveyard`. Found by batch 237's
-  group E: Aphelia, Viper Whisperer's delayed trigger halved a player's life twice when two Snakes
-  connected (18 to 4, where 9 is right). Jace, Cunning Castaway (in the pool, same `whenever`)
-  likely draws and discards once per connecting creature, not once per player; not yet checked by
-  a test. Blocks Aphelia and Forth Eorlingas! (`effect:delayed-whenever-batched-damage`) and
-  Duskmantle Guildmage (`effect:delayed-whenever-per-card-graveyard`).
-- **A threshold-gated granted dies trigger doesn't look back.** A `grantsTriggered` static
-  with a `condition` (threshold) is checked after the event when the granting permanent stays on
-  the battlefield and another creature dies, so the creature whose death makes the seventh card
-  in the graveyard still triggers it. Rule 603.10a says a leaves-the-battlefield trigger looks
-  back to just before the event, and Decaying Soil's ruling says threshold must already be met.
-  Reborn Hero is right, its own death being the event. Found by batch 225's group C; blocks
-  Decaying Soil (`trigger:conditional-grant-look-back`).
-- **An emblem's static applies only as a creatures-you-control anthem.** `characteristics.ts`
-  (the emblem loop after the battlefield statics, "Only the `creatures-you-control` scope is
-  supported") skips an emblem whose `affects.scope` is anything else. Nissa, Who Shakes the
-  World is in the pool with a −8 emblem written `scope: "filter"` (lands you control, grant
-  indestructible), so that emblem does nothing: a wrong card until the scope is read (or the card
-  comes out). Found by batch 235's group E, whose Elspeth, Knight-Errant ("Artifacts, creatures,
-  enchantments, and lands you control have indestructible") was tested and destroyed. Blocks
-  Elspeth (`effect:emblem-static-abilities`); Nissa is the only pool card with such an emblem.
-- **A look-and-choose's `then` loses `"that-player"`.** Inside a `for-each-player`, a
-  `look-and-choose` with `player: "that-player"` applies its `then` as the player who chose, in a
-  context without the enclosing loop's player binding (game.ts, where the choice's `then` is
-  applied), so `who: "that-player"` in the `then` reaches nobody and does nothing, silently.
+- **A delayed "whenever" over cards put into a graveyard fires once for the batch** (`effect:delayed-whenever-per-card-graveyard`, Duskmantle Guildmage). `fireWheneverWatchers` has none of a permanent's own per-card handling of `put-into-graveyard`. Its damage half landed 2026-11-09.
+
 - **`put-onto-battlefield` follows a target that changed zones during the resolution.** A
   target is checked once, as the spell or ability begins to resolve (`illegalSlot` reads the
   `illegalTargets` found then, rule 608.2b); a step of the same resolution that moves it first
@@ -300,16 +188,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   face-up object in the command zone. `chooseDamageSource` (game.ts) offers permanents, spells,
   and the departed source of an ability on the stack (picked by its stack entry), not those.
   No pool card is known to need them.
-- **`each-player-may` with `choices` drops the controller's own choice.** The `choices` form
-  hands each chooser a `choose-modes` decision with `modesController: controller`
-  (game.ts, the `each-player-may` resolver), but `beginModesChoice` keeps `modesController`
-  only when it differs from the chooser (`ability.modesController !== controller`). For the
-  controller's own choice it is dropped, so the resolution context gets no `player` in
-  `lastKnownRefs` and an option's `"that-player"` names no one: the controller's chosen option
-  does nothing. Every pool card using `choices` today is `each-opponent` (Sycorax Commander),
-  so none hits it; Truce (batch 160) is authored on the `effect` form around it. The likely fix
-  is to keep `modesController` whenever it's set; it needs a test with an `each-player`
-  `choices` spell.
 - **A cast prohibition reads the card, not the face or half being cast.** `whyProhibitedFromCasting`
   (`game.ts`) tests the card object's characteristics, so a split card's half (rule 709.3: Fire //
   Ice's half has mana value 2), an Adventure (715.3), an MDFC's back face (712.11) or a bestowed
@@ -426,57 +304,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   its own "enters tapped" the engine makes that player's choice for them — the one they'd make
   almost always, which is why the card is authored. A choice asked of the controller would close
   it.
-- **A target cost reduction two slots can earn is offered unrestricted.** Rule 601.2f fixes the
-  cost once targets are chosen. `Game.targetReductionOptions` offers only the earning targets when
-  the full price isn't affordable, but only when exactly one slot can hold one; with two (This Town
-  Ain't Big Enough's "up to two", both slots any nonland permanent) it offers every target in both,
-  so a cast naming two the caster doesn't control is offered and then refused for mana. Seen in the
-  fuzzer (`random-demo.mjs --players 4 --seed 19` with batch 151's second half forced): Thorn of
-  Amethyst made it {5}{U} against Carol's five mana. One offer can't say "at least one slot
-  earns"; the fix narrows the first earning slot to the earners (no legal cast lost while the
-  slots are alike, as here), and a skipped optional first slot still needs the cast refused or the
-  random controller kept from skipping it. Found 2026-10-23, batch 151's checks.
-
-**Counters of several kinds put at once fire a "one or more counters" trigger once per kind** (found
-2026-11-08, batch 279). `Game` emits one `counter-added` event per kind (`addCounter`), so a
-non-batched `counters-put` trigger ("whenever you put one or more counters on a creature") fires
-once for each kind an effect puts on one permanent at once (The Ozolith moving +1/+1 and flying
-counters, a "put a +1/+1 counter and a flying counter" effect), where rule 603.2c makes it one
-event for that permanent. Captain Marvel, Apex Avenger (in the pool) copies the same counters
-either way, but asks its "may" once per kind; a "draw a card" payoff would draw twice. The fix is
-one event per permanent per placement carrying every kind (the `withCounterBatch` batch already
-groups them), with `LastKnownRefs.counter` a list.
-
-**A "one or more cards milled" trigger fires once per player on a simultaneous mill** (found
-2026-11-07, batch 275). `Game` emits `cards-milled` once per milling player (game.ts, `this.emit({
-type: "cards-milled", player, objects: milled })`), so "whenever one or more nonland cards are
-milled" triggers once per player when an effect has several players mill at once (Locke's "each
-player mills"), where its rulings say once, for the total. Wrong today for The Wise Mothman (in
-the pool); blocks Screeching Scorchbeast (`trigger:mills-batched-across-players`), and a per-card
-mills trigger is its own gap (`trigger:mills-per-card`: Glowing One, Infesting Radroach). The fix
-is a mill batch like `withLeaveBatch`, emitting one event for a simultaneous mill.
-
-**`for-each-player` with `simultaneous: true` around a `look-and-choose` moves nothing, silently**
-(found 2026-11-07, batch 275). Over the Top's agent wrote each player's reveal-and-put that way to
-get one simultaneous entry (rule 603.6a) and no card moved, with no error. It should either work
-or be refused when the card is defined. Clear the Land, in the pool, does each player's
-reveal-and-put in turn order instead, so its permanents may enter as separate events: unchecked.
-Blocks Over the Top (`effect:each-player-look-and-choose-together`).
-
-**A static's own-type condition may read printed types** (suspected, 2026-11-06). Batch 266's
-agent authored Romulan Bird-of-Prey (Star Trek: a Spacecraft with station; "as long as this
-isn't a creature, it has hexproof") as a static with `condition: { kind: "source", filter: {
-notTypes: ["creature"] } }`, and its test found the hexproof still on at 8+ charge counters,
-where the station band has made it an artifact creature (layer 4). Hexproof is granted in
-layer 6, so the condition should see the layer-4 types (rules 613.1d, 613.1f). Unconfirmed: the
-card was dropped and the failing test went with it, so the first step is to rebuild that test
-and see whether the condition, the station band, or the agent's definition is at fault. Blocks
-Romulan Bird-of-Prey (`bug:static-condition-reads-printed-types`).
-
-**An all-your-life payment is only offered at even life, 2 to 20.** Rule 119.4 lets a player pay exactly their total. `Game.offersFor` adds
-those offers (K'rrik's {B}, a Phyrexian pip) at even life from 2 to 20, to spare a second enumeration, so with life already reserved by the
-cost (Liesa's commander tax) an odd total isn't offered. Above 20 no offer is added; that would take more than ten pips. Found 2026-11-04.
-
 **`withMain` from a precombat main runs M C+ C M M.** `Game.endStep`'s queue puts the turn's own combat straight after an added combat
 and its main phase after, where the rules give M C+ M C M. No pool ability has `additional-combat`'s `withMain` yet, so nothing reaches
 it. Found 2026-11-04, with Moraug's rulings (an `afterThisPhase` combat from the precombat main runs before the turn's own).
@@ -511,18 +338,9 @@ card face down allow it to be played; the engine offers a linked grant only to a
 splice set where one card's sacrifice would supply the cards another's exile needs, though rule 601.2h lets costs be
 paid in any order. Found 2026-11-02; not reported from play.
 
-**A shield's `then` runs once per damage event.** A simultaneous sweep split across Refraction Trap's 3 prevention
-deals its damage as two instances rather than one; the total is right (rule 615.5, the loop over `outcome.shields`
-in `game.ts`). Found 2026-11-02; not reported from play.
-
 **A token with riot is never asked.** A token enters without the riot choice and takes haste
 (`entersBattlefieldReplacement`, `game.ts`), though rule 702.136a gives it the choice as it enters. Blocks Spider-Punk's
 Spider tokens; Spider-Punk isn't authored. Found 2026-11-02; not reported from play.
-
-**A tap cost's choices leave out what the mana plan taps.** `tapCostOffer` (`game.ts`) offers only what the mana payment
-doesn't use, so a Sol Ring can't be tapped for a tap cost while lands pay the mana, unless its mana is floated first. Rule
-601.2h pays costs in any order. Existing behaviour, more visible since lands can pay these costs. Found 2026-11-02; not
-reported from play.
 
 **Token events a `may` replacement doesn't reach (Moonlit Meditation).** `would-create-token`'s `becomes` with `may` is asked at the two effects that make tokens as a resolution step, `create-token` and `create-token-copy` (a batch's copies aside). Tokens made inside another operation, amass (701.47), incubate, encore, myriad, populate and the like, go straight through `Game.createTokens`, which can't stop to ask: the replacement isn't offered for them, and only the tokens of a token doubler apply there (rule 614.1a). Moonlit Meditation's the only card with it so far.
 
