@@ -8,6 +8,7 @@ import { describe, expect, it } from "vitest";
 import { defineCard } from "../cards/define.js";
 import { createDefaultRegistry } from "../cards/registry.js";
 
+import type { ObjectId } from "../primitives.js";
 import { A, activate, destroy, life, settle, spawn, table } from "./harness.js";
 
 const delayed = {
@@ -39,7 +40,7 @@ const toUpkeep = (game: ReturnType<typeof table>["game"]): void => {
   game.advanceUntil((s) => s.turn.number === 2 && s.turn.step === "upkeep" && s.zones.shared.stack.length > 0);
   settle(game);
 };
-const counters = (game: ReturnType<typeof table>["game"], id: string, amount: number): void => {
+const counters = (game: ReturnType<typeof table>["game"], id: ObjectId, amount: number): void => {
   game.state.objects[id].counters = { "+1/+1": amount };
 };
 

@@ -34,6 +34,7 @@ import type { StaticCondition } from "./cards/define.js";
 import type { BeholdSpec, EffectAmount, EffectSpec } from "./effects.js";
 import type { CardFilter } from "./filter.js";
 import type { CardType } from "./cards.js";
+import type { ObjectId } from "./primitives.js";
 
 /**
  * A change to an event's amount, the one spelling of "that many plus one",
@@ -592,7 +593,7 @@ export interface CounterReplacementSteps {
  * (rule 616.1): `key` tells copies apart, `by` is the permanent making it. */
 export interface CounterStep {
   readonly key: string;
-  readonly by: string;
+  readonly by: ObjectId;
   readonly change: { readonly times?: number; readonly plus?: number; readonly half?: true };
 }
 

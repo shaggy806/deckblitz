@@ -7,10 +7,11 @@ import { describe, expect, it } from "vitest";
 
 import { A, settle, spawn, table } from "./harness.js";
 import type { Game } from "../game.js";
+import type { ObjectId } from "../primitives.js";
 
-const named = (game: Game, name: string): readonly string[] =>
+const named = (game: Game, name: string): readonly ObjectId[] =>
   game.state.zones.shared.battlefield.filter((id) => game.state.objects[id].cardName === name);
-const plusOnes = (game: Game, id: string): number => game.state.objects[id].counters["+1/+1"] ?? 0;
+const plusOnes = (game: Game, id: ObjectId): number => game.state.objects[id].counters["+1/+1"] ?? 0;
 const incubate = (game: Game, amount: number): void => {
   game.debugApplyEffect(A, { kind: "incubate", amount });
   settle(game);
