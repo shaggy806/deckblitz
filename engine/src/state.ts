@@ -2302,6 +2302,11 @@ export interface LastKnownRefs {
    * still its own if another is rolled before it resolves. */
   readonly roll?: RollRecord;
   readonly source?: number;
+  /** For a fired delayed ability: which stint of its source its effect reads
+   * information from (`DelayedTrigger.sourceWas`, rule 608.2h). Not `source`,
+   * which says what the ability can act on: "return this card" finds the card
+   * in the graveyard it went to, in a later stint. */
+  readonly sourceWas?: number;
   readonly triggerObject?: number;
   /** For a fired delayed ability: the resolution that set it up
    * (`DelayedTrigger.madeIn`). */
@@ -4841,6 +4846,11 @@ export interface DelayedTrigger {
    * hand at the beginning of the next end step" (The Locust God) finds
    * nothing once it has changed zones again (rule 400.7). */
   readonly sourceStint?: number;
+  /** The permanent its creator meant by its source, by battlefield stint:
+   * what "this creature's power" reads, as it last existed there, once it has
+   * left (rule 608.2h). Unlike `sourceStint` it stays that stint when the
+   * ability that made this sacrificed the source first. */
+  readonly sourceWas?: number;
   /** The `eventSeq` it was created at: it transforms its source only if the
    * source hasn't transformed since (rule 701.28f). */
   readonly createdAtSeq?: number;

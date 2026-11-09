@@ -34043,8 +34043,8 @@ export class Game {
     // else what it last was in that stint; a target was a permanent if it
     // was on the battlefield when targeted.
     const stintOf = (id: ObjectId): number | undefined =>
-      id === source && refs.source !== undefined
-        ? refs.source
+      id === source && (refs.source ?? refs.sourceWas) !== undefined
+        ? (refs.source ?? refs.sourceWas)
         : id === triggerObject && refs.triggerObject !== undefined
           ? refs.triggerObject
           : refs.granter?.object === id
@@ -34080,8 +34080,10 @@ export class Game {
       const stint = refs.source ?? (object?.zone === "battlefield" ? (object.zoneChangeCount ?? 0) : undefined);
       return stint === undefined ? null : { source, zoneChangeCount: stint };
     };
-    const departedSource = (): LastKnownInfo | undefined =>
-      refs.source === undefined ? undefined : this.lastKnownOfStint(source, refs.source);
+    const departedSource = (): LastKnownInfo | undefined => {
+      const stint = refs.source ?? refs.sourceWas;
+      return stint === undefined ? undefined : this.lastKnownOfStint(source, stint);
+    };
     // What the source chose as it entered, in the stint this refers to: as it
     // last existed once it has left (rule 608.2h), else as it is now.
     const chosenOfSource = (): string | null | undefined => {
@@ -50820,6 +50822,8 @@ controlledBy,
       creator.triggerObject !== undefined && carried === undefined
         ? this.state.ceasedTokens?.[creator.triggerObject]
         : undefined;
+    const sourceWas =
+      object?.zone === "battlefield" ? this.delayedSourceStint(object, creator.refs) : creator.refs?.source;
     this.state.delayedTriggers.push({
       ...(ceased !== undefined && creator.triggerObject !== undefined
         ? {
@@ -50872,6 +50876,10 @@ controlledBy,
       ...(object !== undefined && object.zone !== "stack"
         ? { sourceStint: this.delayedSourceStint(object, creator.refs) }
         : {}),
+      // Which stint of it the effect's "this creature" reads, as it last
+      // existed there (rule 608.2h): the permanent the creating ability
+      // meant, though a cost has sacrificed it already.
+      ...(sourceWas !== undefined ? { sourceWas } : {}),
       createdAtSeq: this.state.eventSeq,
       ...(this.state.resolutionSince !== undefined ? { madeIn: this.state.resolutionSince } : {}),
       // What else its creator knew (theme 15): its X, "that player", and the
@@ -51022,6 +51030,7 @@ controlledBy,
     if (trigger.targetZones !== undefined) object.targetZones = [...trigger.targetZones];
     if (trigger.targetStints !== undefined) object.targetStints = [...trigger.targetStints];
     if (trigger.sourceStint !== undefined) object.sourceZoneChangeCount = trigger.sourceStint;
+    if (trigger.sourceWas !== undefined) object.lastKnownRefs = { ...object.lastKnownRefs, sourceWas: trigger.sourceWas };
     if (trigger.madeIn !== undefined) object.lastKnownRefs = { ...object.lastKnownRefs, madeIn: trigger.madeIn };
     // Its creator's X, "that player" and remembered sets (theme 15).
     if (trigger.x !== undefined && (object.xValue ?? 0) === 0) object.xValue = trigger.x;
@@ -57993,7 +58002,10 @@ controlledBy,
       if (tributePaid === true) addCounters("+1/+1", def.tribute);
       else tributeUnpaid = true;
     }
-    // Incubate (rule 701.53a): the Incubator enters with its counters.
+    // Incubate (rule 701.53a): the Incubator enters with its counters, and so
+    // does a token a replacement makes in its place or beside it: what else
+    // the effect says of the token still applies (Draconic Visitor's and
+    // Chatterfang's rulings).
     if (this.incubating !== null && object.isToken && printedCardName(object) === "Incubator Token") {
       addCounters("+1/+1", this.incubating);
     }
