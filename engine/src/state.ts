@@ -3220,7 +3220,46 @@ export interface CombatChoice {
   readonly blockIfAble?: true;
 }
 
+/** One effect a player can apply first (rule 616.1): named by the card that
+ * makes it. `key` says which, and is what an answer records. */
+export interface ReplacementOrderOption {
+  readonly key: string;
+  /** The card or ability making the effect. */
+  readonly name: string;
+  /** What it does here: "doubles it", "prevents 3 of it". */
+  readonly text: string;
+  /** What comes of applying it first, when that can be said in a few words. */
+  readonly result?: string;
+  /** The permanent making it, where one is there to point at. */
+  readonly object?: ObjectId;
+}
+
+/** Where a game goes on once a `replacement-order` question is answered. */
+export type ReplacementOrderResume =
+  /** The resolving effect, which parked itself and asks again or goes on. */
+  | { readonly site: "effect" }
+  /** Combat damage, dealt once nothing more is to be asked. */
+  | { readonly site: "combat-damage" };
+
 export type AwaitingDecision =
+  | {
+      /**
+       * Which of several replacement or prevention effects applies first
+       * (rule 616.1), asked of the affected player or the affected object's
+       * controller, and only when the order can change what happens. Answered
+       * one at a time, as 616.1f has it.
+       */
+      readonly kind: "replacement-order";
+      readonly player: PlayerId;
+      /** The event being replaced, in words. */
+      readonly event: string;
+      readonly options: readonly ReplacementOrderOption[];
+      /** The option the engine would take: a bot's answer. */
+      readonly best: number;
+      /** `GameState.replacementAnswers`' key for this event. */
+      readonly answers: string;
+      readonly resume: ReplacementOrderResume;
+    }
   | {
       readonly kind: "attackers";
       readonly player: PlayerId;
@@ -5767,6 +5806,10 @@ export interface GameState {
    * chosen to keep so far (a token stack once per member kept), read and
    * cleared as the effect resumes. */
   keptByChoice?: ObjectId[];
+  /** The answers to `replacement-order` questions for what's happening now:
+   * by event, the keys of the effects chosen so far, in order (rule 616.1).
+   * Read as the event happens, cleared once nothing is waiting on anyone. */
+  replacementAnswers?: Record<string, readonly string[]>;
   /** A resolving `separate-into-piles`'s answers, read and cleared as the
    * effect resumes: the piles the separator made, then the pile chosen. */
   pilesAnswer?: { piles?: ObjectId[][]; chosen?: number };

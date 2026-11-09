@@ -242,6 +242,7 @@ import { chooseEnchant } from "./decisions/choose-enchant.js";
 import { choosePermanents } from "./decisions/choose-permanents.js";
 import { separatePiles } from "./decisions/separate-piles.js";
 import { choosePile } from "./decisions/choose-pile.js";
+import { replacementOrder } from "./decisions/replacement-order.js";
 import { chooseNumber } from "./decisions/choose-number.js";
 import { enterAttacking } from "./decisions/enter-attacking.js";
 import { legendRule } from "./decisions/legend-rule.js";
@@ -359,7 +360,7 @@ import {
 } from "./object-sets.js";
 import { goadersOf } from "./goad.js";
 import { answeringPlayer, attackChooser, decidingPlayer } from "./player-control.js";
-import type { AddedPhase, ChoosePermanentsResolution, LeftBattlefield, PlayerControl } from "./state.js";
+import type { AddedPhase, ChoosePermanentsResolution, LeftBattlefield, PlayerControl, ReplacementOrderResume } from "./state.js";
 import { blockersRequiredBy, defendersForAttacker, mustBeBlockedByExactlyOne } from "./combat/eligibility.js";
 import { combatRuleWord } from "./combat/rules.js";
 import { bandingAbilitiesOf } from "./combat/banding.js";
@@ -793,6 +794,9 @@ type DamageStep = DamageStepKind & {
   readonly ifAtLeast?: number;
   /** A "next time" record this step uses up, if it applies (615.8). */
   readonly spends?: ActiveReplacement;
+  /** Which effect this is, and what makes it: how a player's choice among
+   * them names it (rule 616.1). */
+  readonly made: { readonly key: string; readonly by: ObjectId };
 };
 
 type DamageStepKind =
@@ -1084,6 +1088,69 @@ function splitPrompt(split: readonly ZoneChoiceSplitCase[], most: number): strin
         ? "into your graveyard"
         : `onto the battlefield${c.enterTapped === true ? " tapped" : ""}`;
   return `Choose up to ${most} card${most === 1 ? "" : "s"}: ${split.map((c) => `${c.label} ${where(c)}`).join(", ")}`;
+}
+
+/** The name of a question about these effects for `player`, whichever hit of
+ * a simultaneous event raises it. */
+function damageAnswersKey(player: PlayerId, steps: readonly DamageStep[]): string {
+  return `damage:${player}:${steps.map((s) => s.made.key).sort().join(",")}`;
+}
+
+/** What a player would care about in how damage came out (rule 616.1): where
+ * it went and what it cost them. How much of a shield is left over isn't in
+ * it: the same damage for less of a shield is no choice at all. */
+function damageOutcomeKey(outcome: ReturnType<typeof runDamageSteps>): string {
+  return JSON.stringify([
+    outcome.dealt,
+    outcome.redirected === undefined ? null : [outcome.redirected.step.made.key, outcome.redirected.amount],
+    outcome.shields
+      .filter((s) => s.prevented > 0 && (s.shield.redirect !== undefined || s.shield.redirectToSource !== undefined || s.shield.gainLife !== undefined || s.shield.then !== undefined))
+      .map((s) => [s.shield.source, s.prevented]),
+    outcome.shieldCounter !== undefined && !outcome.shieldCounter.step.spent,
+    outcome.preventedAll?.step.then === undefined ? null : [outcome.preventedAll.step.made.key, outcome.preventedAll.thenAmount ?? outcome.preventedAll.amount],
+    outcome.replaced === undefined ? null : [outcome.replaced.step.key, outcome.replaced.amount],
+    outcome.alsos.map((a) => a.key),
+  ]);
+}
+
+/** A damage step's effect in a few words, for a question about it. */
+function damageStepText(step: DamageStep): string {
+  switch (step.kind) {
+    case "times":
+      return step.by === 2 ? "doubles it" : step.by === 3 ? "triples it" : `multiplies it by ${step.by}`;
+    case "plus":
+      return step.by >= 0 ? `adds ${step.by} to it` : `takes ${-step.by} off it`;
+    case "set":
+      return `makes it ${step.to}`;
+    case "at-least":
+      return `raises it to ${step.power}`;
+    case "at-most":
+      return `lowers it to ${step.to}`;
+    case "replaced":
+      return "replaces it";
+    case "also":
+      return "adds an effect to it";
+    case "prevent-all":
+      return step.then === undefined ? "prevents all of it" : "prevents all of it, with a cost";
+    case "shield":
+      return step.shield.redirect !== undefined || step.shield.redirectToSource !== undefined
+        ? "redirects it"
+        : shieldLeft(step.shield) === Infinity
+          ? "prevents all of it"
+          : `prevents ${shieldLeft(step.shield)} of it`;
+    case "shield-counter":
+      return "prevents all of it for a shield counter";
+    case "prevent-n":
+      return `prevents ${step.by} of it`;
+    case "prevent-all-but":
+      return `prevents all but ${step.leave} of it`;
+    case "prevent-half":
+      return "prevents half of it";
+    case "halve":
+      return "halves it";
+    case "redirect":
+      return "redirects it";
+  }
 }
 
 function permutationsOf<T>(items: readonly T[]): T[][] {
@@ -2277,6 +2344,9 @@ export class Game {
    * 122.1c, 614.5), so the rest of that damage is prevented with no second
    * counter. Not game state: it only ever spans one synchronous call. */
   private shieldCountersSpent: Set<ObjectId> | null = null;
+  /** Set while an effect that deals damage is gone through to see what would
+   * ask (`damageOrdersAsked`): `dealDamage` asks and deals nothing. */
+  private dryRunningDamage = false;
   /** Replacements carrying out their own effect (rule 614.5), so an event
    * inside it isn't replaced by them again. Synchronous only. */
   private applyingReplacements = new Set<string>();
@@ -2480,6 +2550,7 @@ export class Game {
       applyPutOnBottom: (player, cards) => this.applyPutOnBottom(player, cards),
       applyMulliganHandAbility: (player, card) => this.applyMulliganHandAbility(player, card),
       applyAssignCombatDamage: (p, a, forAll, unblocked) => this.applyAssignCombatDamage(p, a, forAll, unblocked),
+      applyReplacementOrder: (player, option) => this.applyReplacementOrder(player, option),
       applyAttackerDeclarations: (p, d, life) => this.applyAttackerDeclarations(p, d, life),
       applyBlockerDeclarations: (p, b) => this.applyBlockerDeclarations(p, b),
       applyChooseTargets: (p, t, d) => this.applyChooseTargets(p, t, d),
@@ -9730,6 +9801,7 @@ export class Game {
     // Nothing is waiting on anyone, so whatever resolved last is no longer
     // the reason for anything — see `GameState.decisionSource`.
     this.state.decisionSource = null;
+    delete this.state.replacementAnswers;
     // Tokens split off a stack that are the same again go back into one.
     this.refoldSplitTokens();
     const holder = this.state.costPriorityTo ?? player;
@@ -12941,6 +13013,7 @@ export class Game {
       };
       return;
     }
+    if (this.combatDamageOrderAsked()) return;
     this.applyCombatDamageSubPass();
   }
 
@@ -13137,6 +13210,34 @@ export class Game {
     assigned: Readonly<Record<string, readonly number[]>> = {},
     chosenUnblocked: readonly ObjectId[] = [],
   ): void {
+    const assignments = this.combatDamageAssignments(pass, assigned, chosenUnblocked);
+    // All combat damage in a pass is dealt simultaneously: one event, so a
+    // shield counter goes once for all of it (`shieldCountersSpent`), and a
+    // "prevent that damage and …" follows it once (`preventedThisEvent`).
+    this.shieldCountersSpent = new Set();
+    const owed: OwedPreventFollowUp[] = [];
+    this.preventedThisEvent = owed;
+    try {
+      this.dealCombatAssignments(assignments);
+    } finally {
+      this.shieldCountersSpent = null;
+      this.preventedThisEvent = null;
+    }
+    for (const { by, controller, then, amount, recipient } of owed) {
+      const ctx = this.makeResolutionContext(by, controller, [], amount, 0, undefined, 1, 0, [], { recipient });
+      // One already asking (Khârn the Betrayer's opponent of your choice):
+      // the next waits for its answer.
+      if (this.decisionOutstanding()) ctx.resumeAfterDecisions(then);
+      else applyEffectSpec(then, ctx);
+    }
+  }
+
+  /** Who deals what to whom in this pass of combat damage. Changes nothing. */
+  private combatDamageAssignments(
+    pass: "first" | "regular" | "all",
+    assigned: Readonly<Record<string, readonly number[]>>,
+    chosenUnblocked: readonly ObjectId[],
+  ): { source: ObjectId; target: TargetRef; amount: number; sources?: number }[] {
     const assignments: {
       source: ObjectId;
       target: TargetRef;
@@ -13239,25 +13340,7 @@ export class Game {
       }
     }
 
-    // All combat damage in a pass is dealt simultaneously: one event, so a
-    // shield counter goes once for all of it (`shieldCountersSpent`), and a
-    // "prevent that damage and …" follows it once (`preventedThisEvent`).
-    this.shieldCountersSpent = new Set();
-    const owed: OwedPreventFollowUp[] = [];
-    this.preventedThisEvent = owed;
-    try {
-      this.dealCombatAssignments(assignments);
-    } finally {
-      this.shieldCountersSpent = null;
-      this.preventedThisEvent = null;
-    }
-    for (const { by, controller, then, amount, recipient } of owed) {
-      const ctx = this.makeResolutionContext(by, controller, [], amount, 0, undefined, 1, 0, [], { recipient });
-      // One already asking (Khârn the Betrayer's opponent of your choice):
-      // the next waits for its answer.
-      if (this.decisionOutstanding()) ctx.resumeAfterDecisions(then);
-      else applyEffectSpec(then, ctx);
-    }
+    return assignments;
   }
 
   private dealCombatAssignments(
@@ -34557,6 +34640,7 @@ export class Game {
       },
       // A source that has left the battlefield deals its damage as it last
       // existed there: its colours, lifelink, deathtouch and controller.
+      damageOrdersAsked: (run) => this.damageOrdersAsked(run),
       dealDamage: (target, amount, from) => {
         const by = damageSource(from);
         if (by === undefined) return;
@@ -52526,6 +52610,7 @@ controlledBy,
 
     if (aLive && bLive && aPower > 0) this.dealDamage(a.object, b, aPower);
     if (!oneSided && aLive && bLive && bPower > 0) this.dealDamage(b.object, a, bPower);
+    if (this.dryRunningDamage) return;
     // Each fought (rule 701.14a) — whatever the damage came to — and one
     // that fought itself fought once (701.14c).
     if (!oneSided && aLive && bLive) {
@@ -53804,7 +53889,8 @@ controlledBy,
       if (!this.shieldCovers(record, target, combat, source, sourceLastKnown)) return;
       applying.push({ by, r, key, record, ...(record.next === true ? { spends: record } : {}) });
     });
-    const gate = (r: DamageMultiplierReplacement, spends?: ActiveReplacement) => ({
+    const gate = (r: DamageMultiplierReplacement, spends: ActiveReplacement | undefined, by: ObjectId, key: string) => ({
+      made: { key, by },
       ...(r.ifAtMost !== undefined ? { ifAtMost: r.ifAtMost } : {}),
       ...(r.ifAtLeast !== undefined ? { ifAtLeast: r.ifAtLeast } : {}),
       ...(spends !== undefined ? { spends } : {}),
@@ -53814,29 +53900,29 @@ controlledBy,
       return change === undefined ? [] : [{ ...a, change }];
     });
     const steps: DamageStep[] = [];
-    for (const { r, spends, change } of modified) if ((change.times ?? 1) !== 1) steps.push({ kind: "times", by: change.times ?? 1, ...gate(r, spends) });
+    for (const { by, key, r, spends, change } of modified) if ((change.times ?? 1) !== 1) steps.push({ kind: "times", by: change.times ?? 1, ...gate(r, spends, by.id, key) });
     // "Plus X, where X is Hawkeye's power": as the damage would be dealt.
-    for (const { by, r, spends, change } of modified) {
+    for (const { by, key, r, spends, change } of modified) {
       if (change.plus === undefined) continue;
       const plus = this.replacementAmount(change.plus, by);
-      if (plus !== 0) steps.push({ kind: "plus", by: plus, ...gate(r, spends) });
+      if (plus !== 0) steps.push({ kind: "plus", by: plus, ...gate(r, spends, by.id, key) });
     }
-    for (const { by, r, spends, change } of modified) {
-      if (change.set !== undefined) steps.push({ kind: "set", to: this.replacementAmount(change.set, by), ...gate(r, spends) });
+    for (const { by, key, r, spends, change } of modified) {
+      if (change.set !== undefined) steps.push({ kind: "set", to: this.replacementAmount(change.set, by), ...gate(r, spends, by.id, key) });
     }
     // "…less than ~'s power …, that source deals damage equal to ~'s power
     // instead": raised, never lowered.
-    for (const { by, r, spends, change } of modified) {
-      if (change.atLeast !== undefined) steps.push({ kind: "at-least", power: this.replacementAmount(change.atLeast, by), ...gate(r, spends) });
-      if (change.atMost !== undefined) steps.push({ kind: "at-most", to: this.replacementAmount(change.atMost, by), ...gate(r, spends) });
+    for (const { by, key, r, spends, change } of modified) {
+      if (change.atLeast !== undefined) steps.push({ kind: "at-least", power: this.replacementAmount(change.atLeast, by), ...gate(r, spends, by.id, key) });
+      if (change.atMost !== undefined) steps.push({ kind: "at-most", to: this.replacementAmount(change.atMost, by), ...gate(r, spends, by.id, key) });
     }
-    for (const { r, spends, change } of modified) {
-      if (change.half !== undefined) steps.push({ kind: "halve", round: change.half, ...gate(r, spends) });
+    for (const { by, key, r, spends, change } of modified) {
+      if (change.half !== undefined) steps.push({ kind: "halve", round: change.half, ...gate(r, spends, by.id, key) });
     }
     // Beside the damage: done before it's dealt (Wolverine).
     for (const a of applying) {
       if ("also" in a.r.instead && a.r.instead.also !== undefined) {
-        steps.push({ kind: "also", by: a.by.id, controller: a.by.controller, effect: a.r.instead.also, key: a.key, ...gate(a.r, a.spends) });
+        steps.push({ kind: "also", by: a.by.id, controller: a.by.controller, effect: a.r.instead.also, key: a.key, ...gate(a.r, a.spends, a.by.id, a.key) });
       }
     }
     // The event becomes an effect (Soul-Scar Mage, Delaying Shield).
@@ -53850,16 +53936,16 @@ controlledBy,
           effect: replaced.effect,
           key: a.key,
           ...(a.record !== undefined ? { record: a.record } : {}),
-          ...gate(a.r, a.spends),
+          ...gate(a.r, a.spends, a.by.id, a.key),
         });
       }
     }
-    for (const { by, r, spends } of applying) {
+    for (const { by, key, r, spends } of applying) {
       if (!("prevent" in r.instead)) continue;
       const { prevent, then, perEvent, thenCountsUnprevented } = r.instead;
-      if (typeof prevent === "number") steps.push({ kind: "prevent-n", by: prevent, ...gate(r, spends) });
-      else if (prevent !== true && "allBut" in prevent) steps.push({ kind: "prevent-all-but", leave: prevent.allBut, ...gate(r, spends) });
-      else if (prevent !== true) steps.push({ kind: "prevent-half", round: prevent.half, ...gate(r, spends) });
+      if (typeof prevent === "number") steps.push({ kind: "prevent-n", by: prevent, ...gate(r, spends, by.id, key) });
+      else if (prevent !== true && "allBut" in prevent) steps.push({ kind: "prevent-all-but", leave: prevent.allBut, ...gate(r, spends, by.id, key) });
+      else if (prevent !== true) steps.push({ kind: "prevent-half", round: prevent.half, ...gate(r, spends, by.id, key) });
       else {
         steps.push({
           kind: "prevent-all",
@@ -53868,7 +53954,7 @@ controlledBy,
           ...(then !== undefined ? { then } : {}),
           ...(perEvent === true ? { perEvent: true as const } : {}),
           ...(thenCountsUnprevented === true ? { thenCountsUnprevented: true as const } : {}),
-          ...gate(r, spends),
+          ...gate(r, spends, by.id, key),
         });
       }
     }
@@ -53878,22 +53964,23 @@ controlledBy,
       if (!("redirect" in r.instead)) continue;
       const to = this.staticRedirectDestination(r.instead.redirect, by, target);
       if (to === undefined || sameTargetRef(to, target) || !this.redirectDestinationStands(to)) continue;
-      steps.push({ kind: "redirect", to, key });
+      steps.push({ kind: "redirect", to, key, made: { key, by: by.id } });
     }
     // Prevention records (Healing Salve, Fog — rules 615.7, 615.8; 614.9).
     // Partial prevention by a "next time" one is `applying`'s, above.
-    for (const shield of this.state.activeReplacements) {
+    for (const [index, shield] of this.state.activeReplacements.entries()) {
       const r = shield.replacement;
       if (r.event !== "would-deal-damage" || !("prevent" in r.instead)) continue;
       if (applied.shields.includes(shield)) continue;
+      const shieldKey = `shield:${shield.source}:${index}`;
       if (!this.shieldCovers(shield, target, combat, source, sourceLastKnown)) continue;
       const by: DamageReplacer = { id: shield.source, controller: shield.owner, attachedTo: null };
       if (!this.damageReplacementReaches(r, by, source, target, combat, sourceLastKnown)) continue;
       const prevent = r.instead.prevent;
-      if (prevent === true) steps.push({ kind: "shield", shield });
-      else if (typeof prevent === "number") steps.push({ kind: "prevent-n", by: prevent, ...gate(r, shield.next === true ? shield : undefined) });
-      else if ("allBut" in prevent) steps.push({ kind: "prevent-all-but", leave: prevent.allBut, ...gate(r, shield.next === true ? shield : undefined) });
-      else steps.push({ kind: "prevent-half", round: prevent.half, ...gate(r, shield.next === true ? shield : undefined) });
+      if (prevent === true) steps.push({ kind: "shield", shield, made: { key: shieldKey, by: shield.source } });
+      else if (typeof prevent === "number") steps.push({ kind: "prevent-n", by: prevent, ...gate(r, shield.next === true ? shield : undefined, shield.source, shieldKey) });
+      else if ("allBut" in prevent) steps.push({ kind: "prevent-all-but", leave: prevent.allBut, ...gate(r, shield.next === true ? shield : undefined, shield.source, shieldKey) });
+      else steps.push({ kind: "prevent-half", round: prevent.half, ...gate(r, shield.next === true ? shield : undefined, shield.source, shieldKey) });
     }
     // Shield counters (rule 122.1c): not an ability, so one that lost its
     // abilities keeps the protection (the rulings).
@@ -53903,7 +53990,7 @@ controlledBy,
       // last counter gone or not.
       const spent = this.shieldCountersSpent?.has(target.object) ?? false;
       if (object !== undefined && object.zone === "battlefield" && (spent || (object.counters.shield ?? 0) > 0)) {
-        steps.push({ kind: "shield-counter", object: target.object, spent });
+        steps.push({ kind: "shield-counter", object: target.object, spent, made: { key: `shield-counter:${target.object}`, by: target.object } });
       }
     }
     return steps;
@@ -53927,14 +54014,16 @@ controlledBy,
     sources: number,
     steps: readonly DamageStep[],
     unpreventable = false,
+    /** Chosen by the player already (`damageOrderAsked`): these go first. */
+    first: readonly DamageStep[] = [],
   ): readonly DamageStep[] {
-    if (steps.length <= 1) return steps;
+    if (steps.length <= 1) return [...first, ...steps];
     // A few effects at most in practice; past six, the order they came in.
-    if (steps.length > 6) return steps;
+    if (steps.length > 6) return [...first, ...steps];
     // A shield counter spent is a lasting loss, so it ranks right after the
     // damage itself: a one-turn shield (Healing Salve) goes first.
     const score = (order: readonly DamageStep[]): readonly number[] => {
-      const outcome = runDamageSteps(amount, sources, order, shieldLeft, unpreventable);
+      const outcome = runDamageSteps(amount, sources, [...first, ...order], shieldLeft, unpreventable);
       const counterSpent = outcome.shieldCounter !== undefined && !outcome.shieldCounter.step.spent ? 1 : 0;
       // Damage redirected still lands somewhere (rule 614.9): a shield that
       // prevents it outright goes first.
@@ -53958,7 +54047,128 @@ controlledBy,
         bestScore = s;
       }
     }
-    return best;
+    return [...first, ...best];
+  }
+
+  /**
+   * Rule 616.1 as a question, where the damage can still wait for it: asks
+   * whoever is affected by `amount` damage from `source` which effect applies
+   * first, when two or more compete and the order changes more than how much
+   * of a shield is left over. Says whether it asked. The answers wait in
+   * `GameState.replacementAnswers`, under the affected player and the effects
+   * compete, so the hits of one simultaneous event sharing them are one
+   * question. Answered, it's asked again while the rest can still differ
+   * (616.1f).
+   */
+  private damageOrderAsked(
+    source: ObjectId,
+    target: TargetRef,
+    amount: number,
+    combat: boolean,
+    sourceLastKnown: LastKnownInfo | undefined,
+    sources: number,
+    resume: ReplacementOrderResume,
+  ): boolean {
+    const player = target.kind === "player" ? target.player : this.state.objects[target.object]?.controller;
+    if (player === undefined) return false;
+    const steps = this.damageSteps(source, target, combat, sourceLastKnown);
+    if (steps.length < 2 || steps.length > 6) return false;
+    const answers = damageAnswersKey(player, steps);
+    const unpreventable = this.damageUnpreventable(source, combat, sourceLastKnown);
+    const first = this.answeredDamageSteps(steps, answers);
+    const rest = steps.filter((s) => !first.includes(s));
+    if (rest.length < 2) return false;
+    const run = (order: readonly DamageStep[]) => runDamageSteps(amount, sources, order, shieldLeft, unpreventable);
+    const outcomes = new Set([rest, ...permutationsOf(rest)].map((order) => damageOutcomeKey(run([...first, ...order]))));
+    if (outcomes.size < 2) return false;
+    // Only an effect that would apply as things stand can be chosen (616.1e).
+    const each = run(first).dealt / sources;
+    const applicable = rest.filter(
+      (s) => (s.ifAtMost === undefined || each <= s.ifAtMost) && (s.ifAtLeast === undefined || each >= s.ifAtLeast),
+    );
+    const named = applicable.filter(
+      (s, i) => applicable.findIndex((o) => this.damageStepName(o) === this.damageStepName(s) && damageStepText(o) === damageStepText(s)) === i,
+    );
+    if (named.length < 2) return false;
+    const best = this.bestDamageOrder(amount, sources, rest, unpreventable, first)[first.length];
+    const options = named.map((step) => {
+      const after = this.bestDamageOrder(amount, sources, rest.filter((s) => s !== step), unpreventable, [...first, step]);
+      const outcome = run(after);
+      return {
+        key: step.made.key,
+        name: this.damageStepName(step),
+        text: damageStepText(step),
+        result: outcome.dealt > 0 ? `${outcome.dealt} damage is dealt` : outcome.redirected !== undefined ? "it's redirected" : "no damage is dealt",
+        ...(this.state.objects[step.made.by]?.zone === "battlefield" ? { object: step.made.by } : {}),
+      };
+    });
+    const sourceName = this.state.objects[source]?.cardName ?? "A source";
+    const victim = target.kind === "player" ? "you" : this.state.objects[target.object].cardName;
+    this.state.awaiting = {
+      kind: "replacement-order",
+      player,
+      event: `${sourceName} would deal ${amount * sources} damage to ${victim}`,
+      options,
+      best: Math.max(0, options.findIndex((o) => o.key === best?.made.key)),
+      answers,
+      resume,
+    };
+    return true;
+  }
+
+  /** The steps a player has already chosen for this event, in their order. */
+  private answeredDamageSteps(steps: readonly DamageStep[], answers: string): readonly DamageStep[] {
+    const chosen = this.state.replacementAnswers?.[answers] ?? [];
+    return chosen.flatMap((key) => steps.filter((s) => s.made.key === key));
+  }
+
+  /** The card a damage step's effect comes from, for a question about it. */
+  private damageStepName(step: DamageStep): string {
+    if (step.kind === "shield-counter") return "Shield counter";
+    return this.state.objects[step.made.by]?.cardName ?? "An effect";
+  }
+
+  /** An effect that deals damage asks first (`damageOrderAsked`): `run` is
+   * that effect, gone through once without dealing anything, so every hit it
+   * would make can ask; the first that does stops it there. */
+  private damageOrdersAsked(run: () => void): boolean {
+    if (this.dryRunningDamage || this.decisionOutstanding()) return false;
+    this.dryRunningDamage = true;
+    try {
+      run();
+    } finally {
+      this.dryRunningDamage = false;
+    }
+    return this.state.awaiting !== null;
+  }
+
+  /** Combat damage asks before any of it is dealt, one simultaneous event. */
+  private combatDamageOrderAsked(): boolean {
+    const cd = this.state.combatDamage;
+    if (cd === null) return false;
+    const assignments = this.combatDamageAssignments(this.subPassKind(cd.pass), cd.assigned, cd.asThoughUnblocked ?? []);
+    return assignments.some(({ source, target, amount, sources }) =>
+      this.damageOrderAsked(source, target, amount, true, undefined, sources ?? 1, { site: "combat-damage" }),
+    );
+  }
+
+  /** Answers a `replacement-order` question: the effect goes first, and what
+   * was waiting asks the next or goes on (rule 616.1f). */
+  private applyReplacementOrder(player: PlayerId, option: number): void {
+    const why = replacementOrder.whyCannot(this.decisionCtx, { type: "replacement-order", player, option }, player);
+    if (why !== null) throw new Error(why);
+    const awaiting = this.state.awaiting;
+    if (awaiting === null || awaiting.kind !== "replacement-order") {
+      throw new Error("unreachable: whyCannot should have caught this");
+    }
+    this.state.awaiting = null;
+    const chosen = awaiting.options[option];
+    const answers = this.state.replacementAnswers ?? {};
+    this.state.replacementAnswers = { ...answers, [awaiting.answers]: [...(answers[awaiting.answers] ?? []), chosen.key] };
+    this.emit({ type: "replacement-order-chosen", player, event: awaiting.event, effect: chosen.name });
+    if (awaiting.resume.site === "combat-damage") this.promptNextDamageAssignment();
+    const next = this.state.awaiting as AwaitingDecision | null;
+    this.prepareForPriority(next?.player ?? this.activePlayer);
   }
 
   /** An amount in a replacement, read as the event would happen from its
@@ -54365,6 +54575,12 @@ controlledBy,
     applied: DamageApplied = NO_DAMAGE_APPLIED,
   ): number {
     if (amount <= 0) return 0;
+    if (this.dryRunningDamage) {
+      if (this.state.awaiting === null && applied === NO_DAMAGE_APPLIED) {
+        this.damageOrderAsked(source, target, amount, combat, sourceLastKnown, sources, { site: "effect" });
+      }
+      return 0;
+    }
     // Who dealt it, for the log (a client's end-of-game damage tally).
     const dealtBy = sourceLastKnown?.controller ?? this.state.objects[source]?.controller;
     const by = dealtBy === undefined ? {} : { by: dealtBy };
@@ -54382,7 +54598,14 @@ controlledBy,
     if (steps.length === 0) {
       amount *= sources;
     } else {
-      const order = this.bestDamageOrder(amount, sources, steps, unpreventable);
+      // What the affected player chose, where the event could ask them
+      // (`damageOrderAsked`); the best order for them past that.
+      const recipient = target.kind === "player" ? target.player : this.state.objects[target.object]?.controller;
+      const chosen =
+        recipient === undefined || this.state.replacementAnswers === undefined
+          ? []
+          : this.answeredDamageSteps(steps, damageAnswersKey(recipient, steps));
+      const order = this.bestDamageOrder(amount, sources, steps.filter((s) => !chosen.includes(s)), unpreventable, chosen);
       const outcome = runDamageSteps(amount, sources, order, shieldLeft, unpreventable);
       const spent: ActiveReplacement[] = [];
       const redirected: { readonly to: TargetRef; readonly amount: number; readonly applied: DamageApplied }[] = [];

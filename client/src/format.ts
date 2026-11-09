@@ -415,6 +415,8 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       return `${who(event.player)} commits a crime with ${name(event.object)}`
     case 'card-name-chosen':
       return `${who(event.player)} names ${event.name} for ${name(event.object)}`
+    case 'replacement-order-chosen':
+      return `${who(event.player)} applies ${event.effect} first`
     case 'pile-chosen':
       return `${who(event.player)} chooses pile ${event.pile + 1} (${
         event.objects.length === 1 ? '1 object' : `${event.objects.length} objects`

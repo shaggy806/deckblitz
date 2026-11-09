@@ -49,6 +49,7 @@ import { scry } from "./scry.js";
 import { miracleReveal } from "./miracle-reveal.js";
 import { separatePiles } from "./separate-piles.js";
 import { choosePile } from "./choose-pile.js";
+import { replacementOrder } from "./replacement-order.js";
 import { chooseNumber } from "./choose-number.js";
 
 export { defineDecision } from "./define.js";
@@ -86,6 +87,7 @@ export const DECISIONS: Record<DecisionKind, AnyDecisionModule> = {
   "separate-piles": separatePiles,
   "choose-pile": choosePile,
   "choose-number": chooseNumber,
+  "replacement-order": replacementOrder,
 };
 
 /** The module for `kind`. Total, so this cannot fail. */

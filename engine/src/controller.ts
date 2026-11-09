@@ -63,6 +63,8 @@ import type { ObjectId, PlayerId } from "./primitives.js";
 export type SeparatePilesOffer = Extract<LegalAction, { kind: "separate-piles" }>;
 /** A `choose-pile` offer — see `PlayerController.choosePile`. */
 export type ChoosePileOffer = Extract<LegalAction, { kind: "choose-pile" }>;
+/** A `replacement-order` offer — see `PlayerController.chooseReplacementOrder`. */
+export type ReplacementOrderOffer = Extract<LegalAction, { kind: "replacement-order" }>;
 /** A `choose-number` offer — see `PlayerController.chooseNumber`. */
 export type ChooseNumberOffer = Extract<LegalAction, { kind: "choose-number" }>;
 import type { EnterAttackingChoice, GameObject, GameState, TriggerOrderEntry } from "./state.js";
@@ -328,6 +330,9 @@ export interface PlayerController {
   separatePiles(view: ControllerView, offer: SeparatePilesOffer): readonly (readonly ObjectId[])[];
   /** Choose one of the offered piles: its index. */
   choosePile(view: ControllerView, offer: ChoosePileOffer): number;
+  /** Which replacement or prevention effect applies first (rule 616.1): the
+   * index of one of the offer's options. */
+  chooseReplacementOrder(view: ControllerView, offer: ReplacementOrderOffer): number;
   /** Choose a number as a spell or ability resolves: a whole number from the
    * offer's `min`, up to its `max` when it has one. */
   chooseNumber(view: ControllerView, offer: ChooseNumberOffer): number;
@@ -812,6 +817,12 @@ export class AutomaticController implements PlayerController {
     return bestPileFor(offer.piles, offer.fates, offer.worth, offer.whose, view.player);
   }
 
+  /** The order the engine works out as best for the player: the least damage
+   * and the most shields kept. */
+  chooseReplacementOrder(_view: ControllerView, offer: ReplacementOrderOffer): number {
+    return offer.best;
+  }
+
   chooseNumber(_view: ControllerView, offer: ChooseNumberOffer): number {
     // The least allowed: nothing tells this controller what a number does
     // (Void's mana value, Squee's Revenge's flips). v2 searches the numbers
@@ -1179,6 +1190,7 @@ export class ScriptedController implements PlayerController {
   choosePileFn: (view: ControllerView, offer: ChoosePileOffer) => number = (view, offer) =>
     bestPileFor(offer.piles, offer.fates, offer.worth, offer.whose, view.player);
   chooseNumberFn: (view: ControllerView, offer: ChooseNumberOffer) => number = (_view, offer) => offer.min;
+  chooseReplacementOrderFn: (view: ControllerView, offer: ReplacementOrderOffer) => number = (_view, offer) => offer.best;
   chooseModesFn: ModesChooser = (_view, minModes) =>
     Array.from({ length: minModes }, (_unused, i) => i);
   chooseSacrificesFn: SacrificeChooser = (view, eligible, count) =>
@@ -1370,6 +1382,10 @@ export class ScriptedController implements PlayerController {
 
   choosePile(view: ControllerView, offer: ChoosePileOffer): number {
     return this.choosePileFn(view, offer);
+  }
+
+  chooseReplacementOrder(view: ControllerView, offer: ReplacementOrderOffer): number {
+    return this.chooseReplacementOrderFn(view, offer);
   }
 
   chooseNumber(view: ControllerView, offer: ChooseNumberOffer): number {

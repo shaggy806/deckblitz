@@ -17,7 +17,7 @@ import type { ObjectId, PlayerId } from "./primitives.js";
 import { EVERY_CREATURE_TYPE, hasSubtype, isCreatureType } from "./subtypes.js";
 import type { TargetRef, TargetSpec } from "./target.js";
 import type { TargetCountRange, TargetTaxShare } from "./target-count.js";
-import type { TriggerOrderEntry } from "./state.js";
+import type { ReplacementOrderOption, TriggerOrderEntry } from "./state.js";
 import type { ZoneChoiceTogether } from "./zone-choice-together.js";
 
 /** One creature tapped to help pay a convoke cost (rule 702.51a): it pays
@@ -870,6 +870,13 @@ export type Action =
       readonly type: "separate-piles";
       readonly player: PlayerId;
       readonly piles: readonly (readonly ObjectId[])[];
+    }
+  | {
+      /** Answers a pending `replacement-order` decision: the index of the
+       * effect to apply first (rule 616.1). */
+      readonly type: "replacement-order";
+      readonly player: PlayerId;
+      readonly option: number;
     }
   | {
       /** Answers a pending `choose-pile` decision: the index of the pile
@@ -2214,6 +2221,15 @@ export type LegalAction =
       /** Absent: no upper bound ("choose a number"). */
       readonly max?: number;
       readonly prompt?: string;
+    }
+  | {
+      /** Which replacement or prevention effect applies first — see
+       * `AwaitingDecision`'s `replacement-order`. */
+      readonly kind: "replacement-order";
+      readonly event: string;
+      readonly options: readonly ReplacementOrderOption[];
+      /** The option the engine would take itself. */
+      readonly best: number;
     }
   | {
       /** Choose one of two piles — see `AwaitingDecision`'s `choose-pile`. */

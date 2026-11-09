@@ -104,6 +104,18 @@ const FIXTURES: Partial<Record<DecisionKind, AwaitingDecision>> = {
     chooser: asPlayerId("bob"),
     fates: { chosen: "hand", rest: "graveyard" },
   },
+  "replacement-order": {
+    kind: "replacement-order",
+    player: ALICE,
+    event: "Lightning Bolt would deal 3 damage to you",
+    options: [
+      { key: "a", name: "Furnace of Rath", text: "doubles it" },
+      { key: "b", name: "Heal", text: "prevents 1 of it" },
+    ],
+    best: 1,
+    answers: "damage:alice:a,b",
+    resume: { site: "effect" },
+  },
   "choose-pile": {
     kind: "choose-pile",
     player: ALICE,
@@ -280,7 +292,7 @@ describe("decision registry", () => {
   it("covers all thirty-one kinds, with a fixture for each", () => {
     // The table is total now, so a missing module fails the build. This is
     // the check that the fixtures below don't fall behind it.
-    expect(Object.keys(DECISIONS)).toHaveLength(31);
+    expect(Object.keys(DECISIONS)).toHaveLength(32);
     for (const kind of Object.keys(DECISIONS) as DecisionKind[]) {
       expect(FIXTURES[kind], `no FIXTURES entry for "${kind}"`).toBeDefined();
     }

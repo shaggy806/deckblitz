@@ -1236,6 +1236,13 @@ export type GameEvent =
       readonly name: string;
     })
   | (Base & {
+      /** `player` chose `effect` to apply first to `event` (rule 616.1). */
+      readonly type: "replacement-order-chosen";
+      readonly player: PlayerId;
+      readonly event: string;
+      readonly effect: string;
+    })
+  | (Base & {
       /** `player` chose pile `pile` of a `separate-into-piles` (rule 700.3)
        * — `objects` are what was in it. */
       readonly type: "pile-chosen";

@@ -416,6 +416,7 @@ type ChoosePermanentsAction = Extract<LegalAction, { kind: 'choose-permanents' }
 type SeparatePilesAction = Extract<LegalAction, { kind: 'separate-piles' }>
 type ChoosePileAction = Extract<LegalAction, { kind: 'choose-pile' }>
 type ChooseNumberAction = Extract<LegalAction, { kind: 'choose-number' }>
+type ReplacementOrderAction = Extract<LegalAction, { kind: 'replacement-order' }>
 type ScryAction = Extract<LegalAction, { kind: 'scry' }>
 type CastNowAction = Extract<LegalAction, { kind: 'cast-now' }>
 
@@ -778,6 +779,7 @@ const AWAITING_LABEL: Record<NonNullable<PlayerView['awaiting']>['kind'], string
   'separate-piles': 'separate piles',
   'choose-pile': 'choose a pile',
   'choose-number': 'choose a number',
+  'replacement-order': 'choose which effect applies first',
   'choose-modes': 'choose a mode',
   'choose-targets': 'choose targets',
   'cast-now': 'decide whether to cast a spell',
@@ -2223,6 +2225,7 @@ function Table({
   const separatePilesAction = actions.find((a): a is SeparatePilesAction => a.kind === 'separate-piles')
   const choosePileAction = actions.find((a): a is ChoosePileAction => a.kind === 'choose-pile')
   const chooseNumberAction = actions.find((a): a is ChooseNumberAction => a.kind === 'choose-number')
+  const replacementOrderAction = actions.find((a): a is ReplacementOrderAction => a.kind === 'replacement-order')
   // Piles of permanents (Liliana of the Veil) are made and shown on the
   // board; piles of cards (Fact or Fiction) in a popup.
   const pilesOnBoard = useMemo(() => {
@@ -2348,6 +2351,7 @@ function Table({
     | 'separate-piles'
     | 'choose-pile'
     | 'choose-number'
+    | 'replacement-order'
     | 'choose-modes'
     | 'sacrifice'
     | 'proliferate'
@@ -2398,6 +2402,8 @@ function Table({
           ? 'choose-pile'
         : chooseNumberAction
           ? 'choose-number'
+        : replacementOrderAction
+          ? 'replacement-order'
         : pendingPhyrexian !== null && (modesChoiceAction || attackAction)
           ? 'choose-phyrexian'
         // "Unless you waterbend {2}": which tap, once the player says yes.
@@ -5489,6 +5495,22 @@ function Table({
         {...(chooseNumberAction.max !== undefined ? { max: chooseNumberAction.max } : {})}
         onChoose={(number) => game.dispatch({ type: 'choose-number', player: seat, number })}
       />
+    )
+  } else if (mode === 'replacement-order' && replacementOrderAction) {
+    controls = (
+      <div className="controls">
+        <span>{replacementOrderAction.event}. Which applies first?</span>
+        {replacementOrderAction.options.map((option, i) => (
+          <button
+            key={option.key}
+            type="button"
+            onClick={() => game.dispatch({ type: 'replacement-order', player: seat, option: i })}
+          >
+            {option.name}: {option.text}
+            {option.result === undefined ? '' : ` (${option.result})`}
+          </button>
+        ))}
+      </div>
     )
   } else if (mode === 'choose-pile' && choosePileAction) {
     const source = view.decisionSource ? `${view.decisionSource.cardName}: ` : ''

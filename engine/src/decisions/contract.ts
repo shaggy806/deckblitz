@@ -117,6 +117,7 @@ export const DECISION_ACTIONS = {
   "separate-piles": ["separate-piles"],
   "choose-pile": ["choose-pile"],
   "choose-number": ["choose-number"],
+  "replacement-order": ["replacement-order"],
 } as const satisfies Record<DecisionKind, readonly Action["type"][]>;
 
 /**
@@ -161,6 +162,7 @@ export const DECISION_OFFERS = {
   "separate-piles": ["separate-piles"],
   "choose-pile": ["choose-pile"],
   "choose-number": ["choose-number"],
+  "replacement-order": ["replacement-order"],
 } as const satisfies Record<DecisionKind, readonly LegalAction["kind"][]>;
 
 /**
@@ -342,6 +344,7 @@ export interface DecisionHost {
   readonly applySeparatePiles: (player: PlayerId, piles: readonly (readonly ObjectId[])[]) => void;
   readonly applyChoosePile: (player: PlayerId, pile: number) => void;
   readonly applyNumberChoice: (player: PlayerId, number: number) => void;
+  readonly applyReplacementOrder: (player: PlayerId, option: number) => void;
 }
 
 /**
