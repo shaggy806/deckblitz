@@ -104,6 +104,7 @@ import _poolBloodsoakedInsight from "../pool/bloodsoaked-insight.js";
 import _poolBloodthirstyBlade from "../pool/bloodthirsty-blade.js";
 import _poolBloombrute from "../pool/bloombrute.js";
 import _poolBlurredMongoose from "../pool/blurred-mongoose.js";
+import _poolBogWitch from "../pool/bog-witch.js";
 import _poolBoggartTrawler from "../pool/boggart-trawler.js";
 import _poolBoldwyrHeavyweights from "../pool/boldwyr-heavyweights.js";
 import _poolBolgOfTheNorth from "../pool/bolg-of-the-north.js";
@@ -1158,6 +1159,7 @@ const shard: CardShard = {
     _poolBloodthirstyBlade,
     _poolBloombrute,
     _poolBlurredMongoose,
+    _poolBogWitch,
     _poolBoggartTrawler,
     _poolBoldwyrHeavyweights,
     _poolBolgOfTheNorth,

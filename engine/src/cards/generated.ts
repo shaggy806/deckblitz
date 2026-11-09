@@ -2919,6 +2919,7 @@ import _poolBogSerpent from "./pool/bog-serpent.js";
 import _poolBogSmugglers from "./pool/bog-smugglers.js";
 import _poolBogStriderAsh from "./pool/bog-strider-ash.js";
 import _poolBogTatters from "./pool/bog-tatters.js";
+import _poolBogWitch from "./pool/bog-witch.js";
 import _poolBogWraith from "./pool/bog-wraith.js";
 import _poolBogWreckage from "./pool/bog-wreckage.js";
 import _poolBogardanDragonheart from "./pool/bogardan-dragonheart.js";
@@ -24080,6 +24081,7 @@ import _poolSkinrender from "./pool/skinrender.js";
 import _poolSkinshifter from "./pool/skinshifter.js";
 import _poolSkinthinner from "./pool/skinthinner.js";
 import _poolSkinwing from "./pool/skinwing.js";
+import _poolSkirgeFamiliar from "./pool/skirge-familiar.js";
 import _poolSkirkAlarmist from "./pool/skirk-alarmist.js";
 import _poolSkirkCommando from "./pool/skirk-commando.js";
 import _poolSkirkDrillSergeant from "./pool/skirk-drill-sergeant.js";
@@ -34924,6 +34926,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolBogSmugglers,
   _poolBogStriderAsh,
   _poolBogTatters,
+  _poolBogWitch,
   _poolBogWraith,
   _poolBogWreckage,
   _poolBogardanDragonheart,
@@ -56085,6 +56088,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSkinshifter,
   _poolSkinthinner,
   _poolSkinwing,
+  _poolSkirgeFamiliar,
   _poolSkirkAlarmist,
   _poolSkirkCommando,
   _poolSkirkDrillSergeant,
@@ -66942,6 +66946,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/bog-smugglers": _poolBogSmugglers,
   "pool/bog-strider-ash": _poolBogStriderAsh,
   "pool/bog-tatters": _poolBogTatters,
+  "pool/bog-witch": _poolBogWitch,
   "pool/bog-wraith": _poolBogWraith,
   "pool/bog-wreckage": _poolBogWreckage,
   "pool/bogardan-dragonheart": _poolBogardanDragonheart,
@@ -88103,6 +88108,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/skinshifter": _poolSkinshifter,
   "pool/skinthinner": _poolSkinthinner,
   "pool/skinwing": _poolSkinwing,
+  "pool/skirge-familiar": _poolSkirgeFamiliar,
   "pool/skirk-alarmist": _poolSkirkAlarmist,
   "pool/skirk-commando": _poolSkirkCommando,
   "pool/skirk-drill-sergeant": _poolSkirkDrillSergeant,

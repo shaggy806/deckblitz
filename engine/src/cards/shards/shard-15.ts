@@ -718,6 +718,7 @@ import _poolSizzlingChangeling from "../pool/sizzling-changeling.js";
 import _poolSkallaWolf from "../pool/skalla-wolf.js";
 import _poolSkarrgTheRagePits from "../pool/skarrg-the-rage-pits.js";
 import _poolSkateboard from "../pool/skateboard.js";
+import _poolSkirgeFamiliar from "../pool/skirge-familiar.js";
 import _poolSkirkDrillSergeant from "../pool/skirk-drill-sergeant.js";
 import _poolSkorpekhDestroyer from "../pool/skorpekh-destroyer.js";
 import _poolSkullwinder from "../pool/skullwinder.js";
@@ -1660,6 +1661,7 @@ const shard: CardShard = {
     _poolSkallaWolf,
     _poolSkarrgTheRagePits,
     _poolSkateboard,
+    _poolSkirgeFamiliar,
     _poolSkirkDrillSergeant,
     _poolSkorpekhDestroyer,
     _poolSkullwinder,
