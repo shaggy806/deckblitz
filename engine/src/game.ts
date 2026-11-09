@@ -38865,7 +38865,7 @@ controlledBy,
           targetStints: this.stintsOfTargets(targets),
           x,
           madeIn: since,
-          ...(then !== undefined ? { then: { spec: then, by: source, controller, targets: [...targets] } } : {}),
+          ...(then !== undefined ? { then: { spec: then, by: source, controller, targets: targets.map((t) => t ?? null) } } : {}),
           ...(object !== undefined ? { zoneChangeCount: object.zoneChangeCount ?? 0 } : {}),
           ...(from !== undefined ? { from: { object: from.id, zoneChangeCount: from.zoneChangeCount ?? 0, you: controller } } : {}),
         });

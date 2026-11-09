@@ -5767,6 +5767,8 @@ interface CardDraft {
   splice?: { readonly onto: "arcane" | "instant-or-sorcery"; readonly cost: string; readonly also?: KickerAlsoCost };
   kicker?: {
     readonly cost: string;
+    /** See `CardDefinition.kicker.minX`. */
+    readonly minX?: number;
     readonly targets?: readonly TargetSpec[];
     readonly effect?: EffectSpec;
     readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback" | "reveal" | "flash" | "additional cost" | "offering";
