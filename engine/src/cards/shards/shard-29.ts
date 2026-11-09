@@ -83,6 +83,7 @@ import _poolBookOfMazarbul from "../pool/book-of-mazarbul.js";
 import _poolBoromirWardenOfTheTower from "../pool/boromir-warden-of-the-tower.js";
 import _poolBothersomeNoisemaker from "../pool/bothersome-noisemaker.js";
 import _poolBraidwoodSextant from "../pool/braidwood-sextant.js";
+import _poolBrambleElemental from "../pool/bramble-elemental.js";
 import _poolBreakTheSpell from "../pool/break-the-spell.js";
 import _poolBrimstoneRoundup from "../pool/brimstone-roundup.js";
 import _poolBringLow from "../pool/bring-low.js";
@@ -161,6 +162,7 @@ import _poolDarkOffering from "../pool/dark-offering.js";
 import _poolDarkProphecy from "../pool/dark-prophecy.js";
 import _poolDarklingStalker from "../pool/darkling-stalker.js";
 import _poolDarksteelAngel from "../pool/darksteel-angel.js";
+import _poolDarksteelGarrison from "../pool/darksteel-garrison.js";
 import _poolDaruStinger from "../pool/daru-stinger.js";
 import _poolDataNewLife from "../pool/data-new-life.js";
 import _poolDaughterOfTheDeep from "../pool/daughter-of-the-deep.js";
@@ -1063,6 +1065,7 @@ const shard: CardShard = {
     _poolBoromirWardenOfTheTower,
     _poolBothersomeNoisemaker,
     _poolBraidwoodSextant,
+    _poolBrambleElemental,
     _poolBreakTheSpell,
     _poolBrimstoneRoundup,
     _poolBringLow,
@@ -1141,6 +1144,7 @@ const shard: CardShard = {
     _poolDarkProphecy,
     _poolDarklingStalker,
     _poolDarksteelAngel,
+    _poolDarksteelGarrison,
     _poolDaruStinger,
     _poolDataNewLife,
     _poolDaughterOfTheDeep,

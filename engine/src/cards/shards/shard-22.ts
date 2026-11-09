@@ -295,6 +295,7 @@ import _poolFootstepsOfTheGoryo from "../pool/footsteps-of-the-goryo.js";
 import _poolForgottenMonument from "../pool/forgotten-monument.js";
 import _poolForiysianInterceptor from "../pool/foriysian-interceptor.js";
 import _poolFountainport from "../pool/fountainport.js";
+import _poolFractalHarness from "../pool/fractal-harness.js";
 import _poolFrontlineSage from "../pool/frontline-sage.js";
 import _poolFrostfistStrider from "../pool/frostfist-strider.js";
 import _poolFulminatorMage from "../pool/fulminator-mage.js";
@@ -308,6 +309,7 @@ import _poolGenestealerLocus from "../pool/genestealer-locus.js";
 import _poolGhastlyDemise from "../pool/ghastly-demise.js";
 import _poolGhostform from "../pool/ghostform.js";
 import _poolGideonsTriumph from "../pool/gideons-triumph.js";
+import _poolGilgameshMasterAtArms from "../pool/gilgamesh-master-at-arms.js";
 import _poolGlacialFortress from "../pool/glacial-fortress.js";
 import _poolGlamorousOutlaw from "../pool/glamorous-outlaw.js";
 import _poolGlazeFiend from "../pool/glaze-fiend.js";
@@ -1312,6 +1314,7 @@ const shard: CardShard = {
     _poolForgottenMonument,
     _poolForiysianInterceptor,
     _poolFountainport,
+    _poolFractalHarness,
     _poolFrontlineSage,
     _poolFrostfistStrider,
     _poolFulminatorMage,
@@ -1325,6 +1328,7 @@ const shard: CardShard = {
     _poolGhastlyDemise,
     _poolGhostform,
     _poolGideonsTriumph,
+    _poolGilgameshMasterAtArms,
     _poolGlacialFortress,
     _poolGlamorousOutlaw,
     _poolGlazeFiend,

@@ -56,8 +56,8 @@ export default defineCard({
       effect: {
         kind: "attach",
         target: 0,
-        choose: {
-          filter: { subtypes: ["Aura", "Equipment"], controlledBy: "you" },
+        attachment: {
+          choose: { subtypes: ["Aura", "Equipment"], controlledBy: "you" },
           prompt: "Attach any number of Auras and Equipment you control",
         },
       },

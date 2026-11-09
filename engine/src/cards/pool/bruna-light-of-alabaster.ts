@@ -12,7 +12,7 @@ const EFFECT: EffectSpec = {
     {
       kind: "attach",
       target: "source",
-      choose: { filter: { subtype: "Aura" }, prompt: "Attach any number of Auras on the battlefield to Bruna" },
+      attachment: { choose: { subtype: "Aura" }, prompt: "Attach any number of Auras on the battlefield to Bruna" },
     },
     {
       kind: "return-from-graveyard",

@@ -18,6 +18,7 @@ import _poolAetherShockwave from "../pool/aether-shockwave.js";
 import _poolAethersphereHarvester from "../pool/aethersphere-harvester.js";
 import _poolAirCultElemental from "../pool/air-cult-elemental.js";
 import _poolAjanisPresence from "../pool/ajanis-presence.js";
+import _poolAkiriFearlessVoyager from "../pool/akiri-fearless-voyager.js";
 import _poolAkkiBattleSquad from "../pool/akki-battle-squad.js";
 import _poolAkromasDevoted from "../pool/akromas-devoted.js";
 import _poolAllSeeingArbiter from "../pool/all-seeing-arbiter.js";
@@ -174,6 +175,7 @@ import _poolCookingCampsite from "../pool/cooking-campsite.js";
 import _poolCoppercoatVanguard from "../pool/coppercoat-vanguard.js";
 import _poolCopperhornScout from "../pool/copperhorn-scout.js";
 import _poolCoralhelmChronicler from "../pool/coralhelm-chronicler.js";
+import _poolCoriSteelCutter from "../pool/cori-steel-cutter.js";
 import _poolCouncilOfTheAbsolute from "../pool/council-of-the-absolute.js";
 import _poolCounterspell from "../pool/counterspell.js";
 import _poolCovetousGeist from "../pool/covetous-geist.js";
@@ -353,6 +355,7 @@ import _poolGiftOfFangs from "../pool/gift-of-fangs.js";
 import _poolGiftOfGrowth from "../pool/gift-of-growth.js";
 import _poolGimlisFury from "../pool/gimlis-fury.js";
 import _poolGixianSkullflayer from "../pool/gixian-skullflayer.js";
+import _poolGlamerSpinners from "../pool/glamer-spinners.js";
 import _poolGlisteningDawn from "../pool/glistening-dawn.js";
 import _poolGlorfindelDauntlessRescuer from "../pool/glorfindel-dauntless-rescuer.js";
 import _poolGnarlbarkElm from "../pool/gnarlbark-elm.js";
@@ -1069,6 +1072,7 @@ const shard: CardShard = {
     _poolAethersphereHarvester,
     _poolAirCultElemental,
     _poolAjanisPresence,
+    _poolAkiriFearlessVoyager,
     _poolAkkiBattleSquad,
     _poolAkromasDevoted,
     _poolAllSeeingArbiter,
@@ -1225,6 +1229,7 @@ const shard: CardShard = {
     _poolCoppercoatVanguard,
     _poolCopperhornScout,
     _poolCoralhelmChronicler,
+    _poolCoriSteelCutter,
     _poolCouncilOfTheAbsolute,
     _poolCounterspell,
     _poolCovetousGeist,
@@ -1404,6 +1409,7 @@ const shard: CardShard = {
     _poolGiftOfGrowth,
     _poolGimlisFury,
     _poolGixianSkullflayer,
+    _poolGlamerSpinners,
     _poolGlisteningDawn,
     _poolGlorfindelDauntlessRescuer,
     _poolGnarlbarkElm,

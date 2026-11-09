@@ -496,6 +496,7 @@ import _poolLoyalRetainers from "../pool/loyal-retainers.js";
 import _poolLudevicsTestSubject from "../pool/ludevics-test-subject.js";
 import _poolLuminarchAscension from "../pool/luminarch-ascension.js";
 import _poolMacetailHystrodon from "../pool/macetail-hystrodon.js";
+import _poolMaddeningHex from "../pool/maddening-hex.js";
 import _poolMaelstromWanderer from "../pool/maelstrom-wanderer.js";
 import _poolMagdaBrazenOutlaw from "../pool/magda-brazen-outlaw.js";
 import _poolMagmaJet from "../pool/magma-jet.js";
@@ -1483,6 +1484,7 @@ const shard: CardShard = {
     _poolLudevicsTestSubject,
     _poolLuminarchAscension,
     _poolMacetailHystrodon,
+    _poolMaddeningHex,
     _poolMaelstromWanderer,
     _poolMagdaBrazenOutlaw,
     _poolMagmaJet,

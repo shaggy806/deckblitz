@@ -92,6 +92,7 @@ import {
   waitingTriggerDamage,
 } from "./target-polarity.js";
 import type { Polarity } from "./target-polarity.js";
+import { isAttachResolved } from "./attachments.js";
 
 export type { AttackerDeclaration, BlockerDeclaration };
 
@@ -2613,6 +2614,26 @@ export class HeuristicBotController extends AutomaticController {
       awaiting.then.kind === "become-ring-bearer"
     ) {
       return [this.bestRingBearer(view.state, eligible)];
+    }
+    // A host chosen as this resolves is a target in all but name: ranked as
+    // one, by what's going on it. A "may" with nothing on the right side is
+    // declined.
+    if (
+      cap === undefined &&
+      awaiting?.kind === "choose-permanents" &&
+      awaiting.then.kind === "attach" &&
+      isAttachResolved(awaiting.then.attachment)
+    ) {
+      const first = awaiting.then.attachment.resolved[0];
+      const moving = first?.kind === "object" ? view.state.objects[first.object] : undefined;
+      const def = moving === undefined ? undefined : this.registry.get(printedCardName(moving));
+      const aimed: Polarity = def?.subtypes.includes("Aura") === true ? auraPolarity(def) : "help";
+      const polarity: Polarity = aimed === "take" ? "harm" : aimed;
+      const options = eligible.map((object): TargetRef => ({ kind: "object", object }));
+      const best = rankTargets(view.state, this.registry, view.player, options, polarity)[0];
+      if (best?.kind !== "object") return [];
+      const rightSide = polarity === "either" || sideOf(view.state, best, view.player) === (polarity === "harm" ? "opponent" : "own");
+      return min > 0 || rightSide ? [best.object] : [];
     }
     // "Attach any number of Auras and Equipment you control to …" (Ardenn):
     // only the ones not already at work against an opponent — a Pacifism

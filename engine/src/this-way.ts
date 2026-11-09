@@ -368,6 +368,9 @@ export function thisWayEntries(
         // Whose: the attachment's controller, as it was attached.
         if (event.type === "permanent-attached") add(event.source, state.objects[event.source]?.controller, false);
         break;
+      case "unattached-from":
+        if (event.type === "permanent-unattached") add(event.from, state.objects[event.from]?.controller, false);
+        break;
       case "put-onto-battlefield":
         // Moved there from a zone — not a token created, nor a permanent
         // spell resolving.

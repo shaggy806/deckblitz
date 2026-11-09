@@ -25,8 +25,8 @@ export default defineCard({
         then: {
           kind: "attach",
           target: 0,
-          choose: {
-            filter: { subtype: "Equipment", controlledBy: "you" },
+          attachment: {
+            choose: { subtype: "Equipment", controlledBy: "you" },
             prompt: "Attach any number of Equipment you control to it",
           },
         },

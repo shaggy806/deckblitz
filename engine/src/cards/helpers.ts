@@ -1656,6 +1656,19 @@ export const equip = (cost: string): ActivatedAbility => ({
 });
 
 /**
+ * "Fortify {N}" (rule 702.67a): "{N}: Attach this Fortification to target
+ * land you control. Activate only as a sorcery."
+ */
+export const fortify = (cost: string): ActivatedAbility => ({
+  cost: { mana: cost, tap: false },
+  targets: [{ kind: "permanent", whose: "you", filter: { type: "land" } }],
+  effect: { kind: "attach", target: 0 },
+  resolve: null,
+  text: `Fortify ${cost}`,
+  sorcerySpeed: true,
+});
+
+/**
  * Exploit (rule 702.110a): "When this creature enters, you may sacrifice a
  * creature." Goes in `triggered`. The sacrifice is marked, so "when this
  * creature exploits a creature" (702.110b) is an `{ on: "exploits", who:

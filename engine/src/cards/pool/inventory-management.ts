@@ -14,10 +14,9 @@ export default defineCard({
     filter: { subtypes: ["Aura", "Equipment"], controlledBy: "you" },
     effect: {
       kind: "attach",
-      target: 0,
       attachment: 0,
-      ontoChosen: {
-        filter: { type: "creature", controlledBy: "you" },
+      target: {
+        among: { type: "creature", controlledBy: "you" },
         prompt: "You may attach it to a creature you control",
         optional: true,
       },

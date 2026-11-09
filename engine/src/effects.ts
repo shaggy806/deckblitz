@@ -68,6 +68,16 @@ import type { JournalWindow } from "./journal.js";
 import { isCardSet, isObjectSetRef, memberCount, onlyMember, type ObjectSetRef, type RememberSpec, type SetMember } from "./object-sets.js";
 import type { ObjectRef, PlayerRef } from "./refs.js";
 import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
+import {
+  isAttachAll,
+  isAttachChoice,
+  isAttachResolved,
+  isHostChoice,
+  isHostResolved,
+  type AttachChoice,
+  type AttachmentsRef,
+  type AttachTarget,
+} from "./attachments.js";
 export type { ObjectRef, PlayerRef } from "./refs.js";
 
 /**
@@ -1821,6 +1831,9 @@ export type ThisWayKind =
    * attached to that creature this way". One that was already there isn't
    * attached again (701.3b: nothing happens). */
   | "attached"
+  /** The permanents it unattached something from (rule 701.3d): Akiri's
+   * "tap **that creature**". Counted by each one's controller. */
+  | "unattached-from"
   | "exiled"
   /** Cards it exiled from a hand — Lost Legacy's "that player shuffles, then
    * draws a card **for each card exiled from their hand this way**" after a
@@ -2586,6 +2599,9 @@ export type EffectSpec =
        * With nobody left (two players and a third choice) it does nothing.
        * Not with `secret`. */
       readonly thenAnother?: Extract<EffectSpec, { kind: "choose-opponent" }>;
+      /** "**Another** one of your opponents": never the player this Aura
+       * enchants (Maddening Hex). With nobody left, nothing happens. */
+      readonly exceptEnchanted?: true;
       /** Set only by the engine: the players chosen earlier in a
        * `thenAnother` chain, who can't be chosen again. */
       readonly except?: readonly PlayerId[];
@@ -8100,81 +8116,35 @@ export type EffectSpec =
       readonly linkedToSource?: true;
     }
   | {
-      /** Attach an Aura or Equipment to a target permanent: the source (an
-       * Equip ability), or with `attachment` another one — Hammer of
-       * Nazahn's and Sigarda's Aid's "you may attach **that Equipment** to
-       * target creature you control" is `attachment: "trigger-object"`, the
-       * Equipment whose entering fired the trigger. Only the same object
-       * that did (rule 400.7), and only onto something it could legally be
-       * attached to (rule 301.5c); otherwise nothing moves.
+      /** Attach an Aura, Equipment or Fortification (rule 701.3a). `attachment`
+       * is what goes on and `target` where: see `attachments.ts`. Only the same
+       * object that was named (rule 400.7), and only onto something it could
+       * legally be attached to (rules 301.5, 301.6, 303.4j); otherwise it
+       * stays where it is (701.3b).
        *
        * `target: "created"` is the token an earlier step of this resolution
-       * created, rather than a target — living weapon's "create a 0/0 black
-       * Phyrexian Germ creature token, then attach this to it" (rule
-       * 702.92a), with `attachment: "source"`. With several made (Doubling
-       * Season), it goes onto one of them (the rulings).
+       * created: living weapon's "create a 0/0 black Phyrexian Germ creature
+       * token, then attach this to it" (rule 702.92a). With several made
+       * (Doubling Season), it goes onto one of them (the rulings).
        *
-       * `target` may also name an object without targeting it:
-       * `"trigger-object"`, the permanent whose entering fired the trigger —
-       * Hero's Blade's "whenever a legendary creature you control enters, you
-       * may attach this Equipment to **it**", Shielded by Faith's "attach this
-       * Aura to **that creature**" — or `"source"`, the ability's own
-       * permanent — Cloud, Ex-SOLDIER's "attach up to one target Equipment
-       * you control **to it**" (with `attachment: 0`). Each only while it is
-       * still the object it was (rule 400.7).
+       * `target` also names objects without targeting them: `"trigger-object"`
+       * (Hero's Blade's "attach this Equipment to **it**"), `"source"` (Cloud,
+       * Ex-SOLDIER's "attach up to one target Equipment you control **to
+       * it**", with `attachment: 0`), `"put-this-way"` (Pre-War Formalwear), or
+       * a `{ player }` (Archnemesis's "attach this Aura to that player"), each
+       * only while it's still the object it was.
        *
-       * `attachments` attaches **every** permanent matching the filter, each
-       * in turn, rather than one — Balan, Wandering Knight's "attach all
-       * Equipment you control to Balan" (`{ subtype: "Equipment",
-       * controlledBy: "you" }`, `target: "source"`). Each one that can't
-       * legally go there stays where it is (rule 701.3b).
-       *
-       * `choose` attaches **any number** of the permanents matching its
-       * filter, chosen as this resolves (not targeted) — Ardenn, Intrepid
-       * Archaeologist's "you may attach any number of Auras and Equipment
-       * you control to target permanent or player". A player is enchanted
-       * only by an Aura that can enchant them (a Curse — rule 303.4); one
-       * that can't go there stays where it is (701.3b). */
+       * What's attached is settled first, then the host, as printed: Gilgamesh's
+       * "you may attach one of them to a Samurai you control" chooses both, in
+       * that order. A group chosen a host goes on one that takes every member,
+       * or nothing moves (Fumble's and Glamer Spinners' rulings). */
       readonly kind: "attach";
-      /** What it's attached to — see {@link ObjectRef} (`"put-this-way"`:
-       * Pre-War Formalwear's "return target creature card … and attach this
-       * Equipment to it"), or a `{ player }` (Archnemesis's "attach this Aura
-       * to that player"). Ignored with `ontoChosen`. */
-      readonly target: ObjectRef | { readonly player: PlayerRef };
-      /** What's attached, when it isn't the source — see {@link ObjectRef}
-       * (`"put-this-way"`: Stonehewer Giant's found Equipment). */
-      readonly attachment?: ObjectRef;
+      readonly target: AttachTarget;
+      readonly attachment?: AttachmentsRef;
       /** "Equip planeswalker" (rule 702.6e, Luxior, Giada's Gift): this
        * Equipment goes on a planeswalker "as though that planeswalker were a
        * creature". */
       readonly planeswalkerToo?: true;
-      readonly attachments?: CardFilter;
-      /** `upTo`: at most that many — Vow to Erebor's "you may attach **an**
-       * Equipment you control to it" is `upTo: 1`. `min`: at least that many
-       * while there are as many (default 0) — Zack Fair's "attach **an**
-       * Equipment that was attached to Zack Fair" is `upTo: 1, min: 1`. */
-      readonly choose?: { readonly filter: CardFilter; readonly prompt: string; readonly upTo?: number; readonly min?: number };
-      /** Attach it to **a permanent chosen as this resolves**, not targeted
-       * (rule 608.2c): Stonehewer Giant's "attach it to a creature you
-       * control", Aura Graft's "attach it to another permanent it can
-       * enchant". The choice is the effect's controller's, among the
-       * permanents matching `filter` (read from their side) that the
-       * attachment could legally be attached to now (rules 301.5, 303.4,
-       * 701.3a) — `another`: not the one it's attached to already. Exactly
-       * one, or with `optional` none ("you may attach it"); with none it
-       * could go on, nothing happens. */
-      readonly ontoChosen?: {
-        readonly filter: CardFilter;
-        readonly prompt: string;
-        readonly optional?: true;
-        readonly another?: true;
-      };
-      /** Engine-built: where a `choose`'s picks go, carried past the choice
-       * (which rebinds target 0 to each pick). */
-      readonly onto?: TargetRef;
-      /** Engine-built: what an `ontoChosen` attaches, carried past the
-       * choice (which rebinds target 0 to the permanent chosen). */
-      readonly attaching?: TargetRef;
     }
   | {
       /** The source loses its enchant ability and gains `enchant`'s, or —
@@ -8196,12 +8166,13 @@ export type EffectSpec =
       readonly becomeAura?: true;
     }
   | {
-      /** Unattach `target` (an Aura or Equipment) from whatever it's attached
-       * to — reconfigure's second ability (rule 702.151a), "Unattach this
-       * permanent"; it stays on the battlefield. Nothing for one that isn't
-       * attached or has left (rule 400.7). */
+      /** Unattach `target` from whatever it's attached to (rule 701.3d):
+       * reconfigure's second ability (rule 702.151a), or a chosen Equipment
+       * (Akiri, `{ choose }`). It stays on the battlefield. Nothing for one
+       * that isn't attached or has left (rule 400.7). What it was on is
+       * `{ thisWay: "unattached-from" }`, "tap that creature". */
       readonly kind: "unattach";
-      readonly target: ObjectRef;
+      readonly target: AttachmentsRef;
     }
   | {
       /** A Licid's ability (`licid: true` on it): "~ loses this ability and
@@ -12279,15 +12250,10 @@ export interface EffectApi {
   /** The source becomes a Licid's Aura and is attached to `target` — see
    * the `"become-licid-aura"` {@link EffectSpec}. */
   becomeLicidAura(target: TargetRef, endCost: string): void;
-  /** Attach every permanent matching `filter` (from the source's
-   * controller's view) to `target`, each in turn — the `"attach"`
-   * {@link EffectSpec}'s `attachments`. */
-  attachAll(target: TargetRef, filter: CardFilter): void;
-  /** The permanents matching `filter` (from the controller's side) that the
-   * Aura or Equipment `attachment` could legally be attached to now (rules
-   * 301.5, 303.4, 701.3a) — `another`: not the one it's attached to. See the
-   * `attach` effect's `ontoChosen`. */
-  attachableHosts(attachment: ObjectId, filter: CardFilter, another: boolean): readonly ObjectId[];
+  /** Those of `candidates` that every one of `attachments` could legally be
+   * attached to now (rules 301.5, 301.6, 303.4j, 701.3a), `another`: not the
+   * one it's on already. See the `attach` effect's `{ among }`. */
+  attachableHosts(attachments: readonly ObjectId[], candidates: readonly ObjectId[], another: boolean): readonly ObjectId[];
   /** Transform `target` (a transforming DFC permanent) — see the `"transform"`
    * {@link EffectSpec}. `chosenPlayer`: the player chosen as it transforms
    * into a face with `choosePlayerOnTransform` (`null`: nobody could be). */
@@ -14534,6 +14500,93 @@ function resolvedTogether(
   return together;
 }
 
+/** `attachment` settled to objects: the ones named now, woken from a stack
+ * for `{ all }` so each token is its own attachment. `undefined` is the
+ * source, attached by its own path (`planeswalkerToo`, and not once it has
+ * left, 400.7). */
+function settledAttachments(ref: AttachmentsRef | undefined, ctx: ResolutionContext): readonly TargetRef[] | undefined {
+  if (ref === undefined) return undefined;
+  if (isAttachResolved(ref)) return ref.resolved;
+  if (isAttachAll(ref)) return ctx.eachPermanentMatching(ref.all, false, [], undefined).map(({ object }) => ({ kind: "object", object }));
+  if (isAttachChoice(ref)) return [];
+  const one = objectRefAct(ref, ctx);
+  return one === undefined ? [] : [one];
+}
+
+/** `target` settled to what's named now (a host to be chosen stays as it is),
+ * so a choice that rebinds slot 0 doesn't lose it. */
+function settledHost(target: AttachTarget, ctx: ResolutionContext): AttachTarget | undefined {
+  if (isHostChoice(target) || isHostResolved(target)) return target;
+  if (typeof target === "object" && "player" in target) {
+    const player = resolvePlayerRef(target.player, ctx);
+    return player === undefined ? undefined : { resolved: { kind: "player", player } };
+  }
+  const object = objectRefAct(target, ctx);
+  return object === undefined ? undefined : { resolved: object };
+}
+
+function chooseAttachments(choice: AttachChoice, ctx: ResolutionContext, then: (slot: 0) => EffectSpec): void {
+  const count = ctx.permanentsMatching(choice.choose).reduce((n, m) => n + m.count, 0);
+  if (count === 0) return;
+  const most = Math.min(count, choice.upTo ?? count);
+  ctx.choosePermanents(choice.choose, Math.min(most, choice.min ?? 0), most, then(0), choice.prompt);
+}
+
+function applyAttach(spec: Extract<EffectSpec, { kind: "attach" }>, ctx: ResolutionContext): void {
+  const what = spec.attachment;
+  // What's attached is settled first (the printed order), and the host named
+  // now, before the choice rebinds slot 0.
+  if (isAttachChoice(what)) {
+    const host = settledHost(spec.target, ctx);
+    if (host === undefined) return;
+    chooseAttachments(what, ctx, (slot) => ({ kind: "attach", target: host, attachment: slot }));
+    return;
+  }
+  const attachments = settledAttachments(what, ctx);
+  if (attachments !== undefined && attachments.length === 0) return;
+  const target = spec.target;
+  if (isHostChoice(target)) {
+    const moving =
+      attachments ?? (ctx.sourceLost === true ? [] : ([{ kind: "object", object: ctx.source }] as readonly TargetRef[]));
+    const ids = moving.flatMap((ref) => (ref.kind === "object" ? [ref.object] : []));
+    if (ids.length === 0) return;
+    const candidates = ctx.permanentsMatching(target.among).map((m) => m.object);
+    const hosts = ctx.attachableHosts(ids, candidates, target.another === true);
+    if (hosts.length === 0) return;
+    let chooser: PlayerId | undefined;
+    if (target.chooser !== undefined) {
+      chooser = chooserPlayer(target.chooser, ctx);
+      if (chooser === undefined) return;
+    }
+    ctx.choosePermanents(
+      target.among,
+      target.optional === true ? 0 : 1,
+      1,
+      { kind: "attach", target: 0, attachment: { resolved: moving } },
+      target.prompt,
+      false,
+      candidates.filter((id) => !hosts.includes(id)),
+      chooser,
+    );
+    return;
+  }
+  const host = settledHost(target, ctx);
+  if (host === undefined || !isHostResolved(host)) return;
+  if (attachments === undefined) {
+    if (ctx.sourceLost !== true) ctx.attach(host.resolved, undefined, spec.planeswalkerToo === true);
+    return;
+  }
+  for (const attachment of attachments) ctx.attach(host.resolved, attachment);
+}
+
+function applyUnattach(spec: Extract<EffectSpec, { kind: "unattach" }>, ctx: ResolutionContext): void {
+  if (isAttachChoice(spec.target)) {
+    chooseAttachments(spec.target, ctx, (slot) => ({ kind: "unattach", target: slot }));
+    return;
+  }
+  for (const attachment of settledAttachments(spec.target, ctx) ?? []) ctx.unattach(attachment);
+}
+
 function attachHost(ref: AttachHostRef | undefined, ctx: ResolutionContext): EnterAttachHost | undefined {
   if (ref === undefined) return undefined;
   if (typeof ref === "object" && "among" in ref) return { among: ref.among };
@@ -15786,6 +15839,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (whoIf !== undefined) among = among.filter((p) => ctx.aboutPlayer(p).conditionMet(whoIf));
       const except = spec.except ?? [];
       if (except.length > 0) among = among.filter((p) => !except.includes(p));
+      if (spec.exceptEnchanted === true) {
+        const host = objectRefRead("attached", ctx);
+        if (host?.kind === "player") among = among.filter((p) => p !== host.player);
+      }
       if (among.length === 0) return;
       const another = spec.thenAnother;
       const about = (player: PlayerId): EffectSpec => ({
@@ -19024,8 +19081,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "unattach": {
-      const target = objectRefAct(spec.target, ctx);
-      if (target !== undefined) ctx.unattach(target);
+      applyUnattach(spec, ctx);
       return;
     }
     case "become-licid-aura": {
@@ -19044,72 +19100,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "attach": {
-      if (spec.ontoChosen !== undefined && spec.attaching === undefined) {
-        // What's attached is settled now; the host is chosen next, among
-        // those it could legally go on (rule 701.3a).
-        const attaching =
-          spec.attachment === undefined
-            ? ctx.sourceLost === true
-              ? undefined
-              : ({ kind: "object", object: ctx.source } as const)
-            : objectRefAct(spec.attachment, ctx);
-        if (attaching?.kind !== "object") return;
-        const { filter, prompt, optional, another } = spec.ontoChosen;
-        const hosts = ctx.attachableHosts(attaching.object, filter, another === true);
-        if (hosts.length === 0) return;
-        ctx.choosePermanents(
-          filter,
-          optional === true ? 0 : 1,
-          1,
-          { kind: "attach", target: 0, attachment: 0, attaching },
-          prompt,
-          false,
-          ctx.permanentsMatching(filter).flatMap((m) => (hosts.includes(m.object) ? [] : [m.object])),
-        );
-        return;
-      }
-      if (spec.attaching !== undefined) {
-        // An `ontoChosen`'s answer: target 0 is the permanent chosen.
-        const host = ctx.targets[0];
-        if (host !== undefined) ctx.attach(host, spec.attaching);
-        return;
-      }
-      let target: TargetRef | undefined = spec.onto;
-      if (target === undefined) {
-        if (typeof spec.target === "object" && "player" in spec.target) {
-          const player = resolvePlayerRef(spec.target.player, ctx);
-          target = player === undefined ? undefined : { kind: "player", player };
-        } else {
-          target = objectRefAct(spec.target, ctx);
-        }
-      }
-      if (target === undefined) return;
-      if (spec.choose !== undefined) {
-        const count = ctx.permanentsMatching(spec.choose.filter).reduce((n, m) => n + m.count, 0);
-        if (count === 0) return;
-        const most = Math.min(count, spec.choose.upTo ?? count);
-        ctx.choosePermanents(
-          spec.choose.filter,
-          Math.min(most, spec.choose.min ?? 0),
-          most,
-          { kind: "attach", target: 0, attachment: 0, onto: target },
-          spec.choose.prompt,
-        );
-        return;
-      }
-      if (spec.attachments !== undefined) {
-        ctx.attachAll(target, spec.attachments);
-        return;
-      }
-      if (spec.attachment === undefined) {
-        // "Attach this …": not once the source has left and come back as a
-        // new object (rule 400.7).
-        if (ctx.sourceLost === true) return;
-        ctx.attach(target, undefined, spec.planeswalkerToo === true);
-        return;
-      }
-      const attachment = objectRefAct(spec.attachment, ctx);
-      if (attachment !== undefined) ctx.attach(target, attachment);
+      applyAttach(spec, ctx);
       return;
     }
     case "transform": {

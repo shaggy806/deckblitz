@@ -7931,7 +7931,7 @@ describe("prevention shields: to you, and divided among any number of targets (r
     expect(remedy.effect).toEqual({ kind: "prevent-damage-divided", from: 0 });
   });
 });
-describe("attach hosts (attachedTo among / a player / put-this-way, ontoChosen, attachOnlyTo)", () => {
+describe("attach hosts (attachedTo among / a player / put-this-way, a chosen host, attachOnlyTo)", () => {
   const face = (name: string, type_line: string, oracle_text: string) =>
     parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
   const YOURS = { among: { type: "creature", controlledBy: "you" } };
@@ -7974,7 +7974,7 @@ describe("attach hosts (attachedTo among / a player / put-this-way, ontoChosen, 
     expect(giant.activated[0].effect).toMatchObject({
       kind: "search-library",
       filter: { subtype: "Equipment" },
-      then: { kind: "attach", target: 0, attachment: 0, ontoChosen: { filter: { type: "creature", controlledBy: "you" } } },
+      then: { kind: "attach", attachment: 0, target: { among: { type: "creature", controlledBy: "you" } } },
     });
   });
 

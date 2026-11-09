@@ -47,7 +47,7 @@ export default defineCard({
             {
               kind: "attach",
               target: "created",
-              attachments: { subtype: "Equipment", controlledBy: "you", anyOf: NAMES.map((name) => ({ name })) },
+              attachment: { all: { subtype: "Equipment", controlledBy: "you", anyOf: NAMES.map((name) => ({ name })) } },
             },
           ],
         },

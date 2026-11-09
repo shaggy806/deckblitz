@@ -14673,10 +14673,15 @@ export class Game {
     const target = this.state.objects[host];
     if (target === undefined || target.zone !== "battlefield" || !this.inGame(target)) return false;
     const hostTypes = effectiveTypes(this.state, this.registry, target);
+    // A Fortification goes on a land where an Equipment goes on a creature
+    // (rule 301.6); everything else here applies to both.
+    if (effectiveSubtypes(this.state, this.registry, this.state.objects[equipment]).includes("Fortification")) {
+      if (!hostTypes.includes("land")) return false;
+    }
     // "Equip planeswalker": "as though that planeswalker were a creature"
     // (rule 702.6e) — for the attaching alone. It falls off afterwards unless
     // something makes the host a creature (704.5n).
-    if (!hostTypes.includes("creature") && !(planeswalkerToo && hostTypes.includes("planeswalker"))) return false;
+    else if (!hostTypes.includes("creature") && !(planeswalkerToo && hostTypes.includes("planeswalker"))) return false;
     if (
       computeCharacteristics(this.state, this.registry, equipment).types.includes("creature") &&
       !(attaching && this.hasReconfigure(equipment))
@@ -15689,6 +15694,24 @@ export class Game {
     );
   }
 
+  /** "{1} less for each color of the creature it targets" (rule 601.2f): the
+   * colors of the target chosen, or, while it's only offered, of the most
+   * colorful legal one. */
+  private targetColorReduction(
+    ability: ActivatedAbility,
+    player: PlayerId,
+    sourceId: ObjectId,
+    targets: readonly (TargetRef | null | undefined)[] | undefined,
+  ): number {
+    const named = targets ?? this.targetOptionsFor(ability.targets, player, this.permanentSource(sourceId)).flat();
+    let most = 0;
+    for (const t of named) {
+      if (t?.kind !== "object") continue;
+      most = Math.max(most, computeCharacteristics(this.state, this.registry, t.object).colors.size);
+    }
+    return most;
+  }
+
   /** Whether `targets` earn `ability`'s `targetCostReduction`: at least its
    * `count` distinct objects among them matching its filter from the
    * activator's side. Given every legal option, whether some choice could. */
@@ -15732,6 +15755,7 @@ export class Game {
       : options.map((slot) => [...slot]);
     const reduction = ability.targetCostReduction;
     if (reduction === undefined) return this.targetingSourceOptions(ability, player, sourceId, all, fullPriceOk, affordableWith);
+    if (reduction.reduceGeneric === "target-colors") return all.map((slot) => slot.filter((ref) => affordableWith([ref])));
     const earning = all.map((slot) =>
       slot.filter(
         (ref) =>
@@ -22351,7 +22375,10 @@ export class Game {
               sourceId,
               this.targetOptionsFor(ability.targets, player, this.permanentSource(sourceId)).flat(),
             );
-      if (earned) generic -= ability.targetCostReduction.reduceGeneric;
+      if (earned) {
+        const off = ability.targetCostReduction.reduceGeneric;
+        generic -= off === "target-colors" ? this.targetColorReduction(ability, player, sourceId, targets) : off;
+      }
     }
     generic -= mod.reduceGeneric;
     const whole: ManaCost = {
@@ -30989,7 +31016,13 @@ export class Game {
         return this.triggerFilterOk(spec.filter, event.object, self);
       }
       case "becomes-attached":
-        return event.type === "permanent-attached" && event.source === self.id && this.triggerFilterOk(spec.filter, event.target, self);
+        return (
+          event.type === "permanent-attached" &&
+          (spec.who !== "self" || event.source === self.id) &&
+          (spec.onto !== "self" || event.target === self.id) &&
+          this.triggerFilterOk(spec.attachment, event.source, self) &&
+          this.triggerFilterOk(spec.filter, event.target, self)
+        );
       case "becomes-unattached":
         // Its own leaving while attached is becoming unattached too (as it
         // last existed — 603.10a).
@@ -38097,20 +38130,7 @@ export class Game {
         }
         if (attachment.kind === "object") this.attachPermanent(attachment.object, target);
       },
-      attachableHosts: (attachment, filter, another) => this.attachableHosts(attachment, filter, controller, another),
-      attachAll: (target, filter) => {
-        // Every match now, each in turn; a stack of Equipment tokens one
-        // token at a time, each its own attachment.
-        const matches = this.state.zones.shared.battlefield.filter((id) =>
-          matchesFilter(this.state, this.registry, id, filter, { you: controller, source }),
-        );
-        for (const id of matches) {
-          while ((this.state.objects[id]?.stackCount ?? 1) > 1) {
-            this.attachPermanent(this.splitOneFromStack(id), target);
-          }
-          this.attachPermanent(id, target);
-        }
-      },
+      attachableHosts: (attachments, candidates, another) => this.attachableHosts(attachments, candidates, another),
       transform: (target, chosenPlayer) => {
         const t = this.splitTargetRef(target);
         if (t.kind !== "object" || !this.effectCanTransform(t.object, source, opts.transformSince)) return false;
@@ -43995,15 +44015,11 @@ export class Game {
     if (sourceObject.attachedTo === targetId) return;
     // A bestowed Aura moves as an Aura (rule 702.103b), and so does a Licid
     // or a Necromancy that became one.
-    const def = this.attachmentDefinition(sourceObject);
-    const legal = def.subtypes.includes("Aura")
-      ? this.canEnchant(source, targetId, sourceObject.controller, def)
-      : def.subtypes.includes("Equipment") && this.canEquip(source, targetId, true, planeswalkerToo);
-    if (!legal) return;
+    if (!this.canAttachTo(source, targetId, planeswalkerToo)) return;
     // Attaching an Equipment with reconfigure stops it being a creature until
     // it's unattached from that creature (rule 702.151b) — however it was
     // attached, reconfigure or not.
-    const reconfigured = def.subtypes.includes("Equipment") && this.hasReconfigure(source);
+    const reconfigured = this.attachmentKind(source) === "equipment" && this.hasReconfigure(source);
     const previous = sourceObject.attachedTo;
     sourceObject.attachedTo = targetId;
     delete sourceObject.attachedToPlayer;
@@ -48492,19 +48508,43 @@ export class Game {
    * The permanents matching `filter` from `player`'s side that `attachment`
    * — an Aura or Equipment on the battlefield — could legally be attached to
    * now (rules 301.5, 303.4j, 701.3a); `another` leaves out the one it's on.
-   * See the `attach` effect's `ontoChosen`.
+   * See the `attach` effect's `{ among }`.
    */
-  private attachableHosts(attachment: ObjectId, filter: CardFilter, player: PlayerId, another: boolean): ObjectId[] {
-    const object = this.state.objects[attachment];
-    if (object === undefined || object.zone !== "battlefield") return [];
-    const def = this.attachmentDefinition(object);
-    const aura = def.subtypes.includes("Aura");
-    if (!aura && !def.subtypes.includes("Equipment")) return [];
-    return this.battlefieldMatching(player, filter).filter(
-      (host) =>
-        (!another || host !== object.attachedTo) &&
-        (aura ? this.canEnchant(attachment, host, object.controller, def) : this.canEquip(attachment, host, true)),
+  private attachableHosts(attachments: readonly ObjectId[], candidates: readonly ObjectId[], another: boolean): ObjectId[] {
+    return candidates.filter((host) =>
+      attachments.every((id) => {
+        const object = this.state.objects[id];
+        return (
+          object !== undefined &&
+          object.zone === "battlefield" &&
+          (!another || host !== object.attachedTo) &&
+          this.canAttachTo(id, host)
+        );
+      }),
     );
+  }
+
+  /** What `id` is to the attaching rules as it is now (layer 4, rules 301.5c,
+   * 301.6), with bestow, a Licid and an enchant swap still Auras: `null` for
+   * anything else (303.4h). */
+  private attachmentKind(id: ObjectId): "aura" | "equipment" | "fortification" | null {
+    const object = this.state.objects[id];
+    if (object === undefined) return null;
+    if (this.attachmentDefinition(object).subtypes.includes("Aura")) return "aura";
+    const subtypes = effectiveSubtypes(this.state, this.registry, object);
+    if (subtypes.includes("Equipment")) return "equipment";
+    return subtypes.includes("Fortification") ? "fortification" : null;
+  }
+
+  /** Could `id`, on the battlefield, be attached to `host` now (rule 701.3a)? */
+  private canAttachTo(id: ObjectId, host: ObjectId, planeswalkerToo = false): boolean {
+    const kind = this.attachmentKind(id);
+    if (kind === null) return false;
+    if (kind === "aura") {
+      const object = this.state.objects[id];
+      return this.canEnchant(id, host, object.controller, this.attachmentDefinition(object));
+    }
+    return this.canEquip(id, host, true, planeswalkerToo);
   }
 
   /**
@@ -54783,9 +54823,12 @@ export class Game {
           continue;
         }
         if (object.attachedTo === null || !this.inGame(object)) continue;
-        const subtypes = this.registry.get(printedCardName(object)).subtypes;
-        if (subtypes.includes("Aura") || object.licid !== undefined || object.enchantSwap?.becameAura === true) continue;
-        if (subtypes.includes("Equipment") && this.canEquip(id, object.attachedTo)) continue;
+        // An Aura's check is 704.5m's, below. An Equipment or a Fortification
+        // that can't stay, or anything that's stopped being one (Armed with
+        // Proof gone), falls off and stays (704.5n, 704.5p).
+        const kind = this.attachmentKind(id);
+        if (kind === "aura") continue;
+        if (kind !== null && this.canEquip(id, object.attachedTo)) continue;
         const from = object.attachedTo;
         object.attachedTo = null;
         invalidateComputedCache();

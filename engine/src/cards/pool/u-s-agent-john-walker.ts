@@ -25,7 +25,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "create-token", token: "Sturdy Shield Token", count: 1 },
-          { kind: "attach", target: "source", attachments: { subtype: "Equipment", thisWay: "created" } },
+          { kind: "attach", target: "source", attachment: { all: { subtype: "Equipment", thisWay: "created" } } },
         ],
       },
       resolve: null,

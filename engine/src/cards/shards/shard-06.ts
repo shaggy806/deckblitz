@@ -382,6 +382,7 @@ import _poolGoblinGangLeader from "../pool/goblin-gang-leader.js";
 import _poolGoblinRally from "../pool/goblin-rally.js";
 import _poolGoblinTrashmaster from "../pool/goblin-trashmaster.js";
 import _poolGoblinTurncoat from "../pool/goblin-turncoat.js";
+import _poolGoldwardensGambit from "../pool/goldwardens-gambit.js";
 import _poolGraftSurgeon from "../pool/graft-surgeon.js";
 import _poolGraveUpheaval from "../pool/grave-upheaval.js";
 import _poolGravitationalShift from "../pool/gravitational-shift.js";
@@ -1373,6 +1374,7 @@ const shard: CardShard = {
     _poolGoblinRally,
     _poolGoblinTrashmaster,
     _poolGoblinTurncoat,
+    _poolGoldwardensGambit,
     _poolGraftSurgeon,
     _poolGraveUpheaval,
     _poolGravitationalShift,

@@ -285,6 +285,7 @@ import _poolFearlessSkald from "../pool/fearless-skald.js";
 import _poolFemerefArchers from "../pool/femeref-archers.js";
 import _poolFerrovore from "../pool/ferrovore.js";
 import _poolFetidHorror from "../pool/fetid-horror.js";
+import _poolFieldTestedFryingPan from "../pool/field-tested-frying-pan.js";
 import _poolFieryIntervention from "../pool/fiery-intervention.js";
 import _poolFinFangFoom from "../pool/fin-fang-foom.js";
 import _poolFinalFlare from "../pool/final-flare.js";
@@ -1302,6 +1303,7 @@ const shard: CardShard = {
     _poolFemerefArchers,
     _poolFerrovore,
     _poolFetidHorror,
+    _poolFieldTestedFryingPan,
     _poolFieryIntervention,
     _poolFinFangFoom,
     _poolFinalFlare,

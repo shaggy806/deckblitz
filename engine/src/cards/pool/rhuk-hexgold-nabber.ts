@@ -6,7 +6,7 @@ import { defineCard } from "../define.js";
 const nab = {
   kind: "may",
   prompt: "Attach all Equipment attached to that creature to Rhuk?",
-  effect: { kind: "attach", target: "source", attachments: { subtype: "Equipment", wasAttachedTo: "trigger-object" } },
+  effect: { kind: "attach", target: "source", attachment: { all: { subtype: "Equipment", wasAttachedTo: "trigger-object" } } },
 } as const;
 
 export default defineCard({

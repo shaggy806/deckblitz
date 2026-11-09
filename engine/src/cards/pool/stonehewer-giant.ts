@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 
 // "Attach it to a creature you control": the find (target 0 of the search's
 // `then`), onto a creature of yours chosen as this resolves, among those it
-// can legally equip (`ontoChosen` — rule 301.5); with none, it stays
+// can legally equip (`target: { among }` — rule 301.5); with none, it stays
 // unattached.
 
 const TEXT =
@@ -30,10 +30,9 @@ export default defineCard({
         max: 1,
         then: {
           kind: "attach",
-          target: 0,
           attachment: 0,
-          ontoChosen: {
-            filter: { type: "creature", controlledBy: "you" },
+          target: {
+            among: { type: "creature", controlledBy: "you" },
             prompt: "Choose a creature you control to attach it to",
           },
         },

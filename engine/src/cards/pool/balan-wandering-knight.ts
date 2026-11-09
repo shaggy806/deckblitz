@@ -33,7 +33,7 @@ export default defineCard({
       effect: {
         kind: "attach",
         target: "source",
-        attachments: { subtype: "Equipment", controlledBy: "you" },
+        attachment: { all: { subtype: "Equipment", controlledBy: "you" } },
       },
       resolve: null,
       text: ATTACH_TEXT,

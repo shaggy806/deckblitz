@@ -752,6 +752,7 @@ import _poolSiegeVeteran from "../pool/siege-veteran.js";
 import _poolSigilCaptain from "../pool/sigil-captain.js";
 import _poolSigilOfSleep from "../pool/sigil-of-sleep.js";
 import _poolSingingBellStrike from "../pool/singing-bell-strike.js";
+import _poolSionaCaptainOfThePyleas from "../pool/siona-captain-of-the-pyleas.js";
 import _poolSireOfSevenDeaths from "../pool/sire-of-seven-deaths.js";
 import _poolSirenReaver from "../pool/siren-reaver.js";
 import _poolSistersOfTheFlame from "../pool/sisters-of-the-flame.js";
@@ -1755,6 +1756,7 @@ const shard: CardShard = {
     _poolSigilCaptain,
     _poolSigilOfSleep,
     _poolSingingBellStrike,
+    _poolSionaCaptainOfThePyleas,
     _poolSireOfSevenDeaths,
     _poolSirenReaver,
     _poolSistersOfTheFlame,

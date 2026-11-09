@@ -12,7 +12,7 @@
  *   Spinner, Academy Researchers);
  * - `attach` onto the card this resolution put onto the battlefield
  *   (`"put-this-way"` — Pre-War Formalwear), or onto a permanent chosen as
- *   it resolves among those it can legally go on (`ontoChosen` — Stonehewer
+ *   it resolves among those it can legally go on (`{ among }` — Stonehewer
  *   Giant, Aura Graft);
  * - "This Equipment can be attached only to …" (`attachOnlyTo` — O-Naginata,
  *   Gate Smasher, rule 301.5c).

@@ -2183,6 +2183,10 @@ export function parseTrigger(clause) {
   if (c === "Whenever ~ becomes attached to a creature") {
     return [{ on: "becomes-attached", who: "self", filter: { type: "creature" } }];
   }
+  // "Whenever an Aura becomes attached to this creature" (Bramble Elemental).
+  if (c === "Whenever an Aura becomes attached to ~") {
+    return [{ on: "becomes-attached", onto: "self", attachment: { subtype: "Aura" } }];
+  }
   // A spell countered, seen from what countered it (Baral) or who cast it (Multani's Presence).
   if (c === "Whenever a spell or ability you control counters a spell") return [{ on: "counters-spell", who: "you" }];
   if (c === "Whenever a spell you've cast is countered") return [{ on: "spell-countered", who: "you" }];
@@ -5450,7 +5454,7 @@ export function parseSentence(sentence, ctx) {
   // "Search your library for a Curse card, put it onto the battlefield
   // attached to target player, then shuffle" (Bitterheart Witch); "…, put it
   // onto the battlefield, attach it to a creature you control, then shuffle"
-  // (Stonehewer Giant — the host chosen as it resolves, `ontoChosen`).
+  // (Stonehewer Giant — the host chosen as it resolves, `target: { among }`).
   if ((m = /^search your library for an? (.+?) card, put it onto the battlefield attached to (.+?), then shuffle\.$/i.exec(s))) {
     const filter = parseTypePhrase(m[1], { cards: true });
     const attachedTo = attachHostOf(m[2]);
@@ -5468,9 +5472,8 @@ export function parseSentence(sentence, ctx) {
       max: 1,
       then: {
         kind: "attach",
-        target: 0,
+        target: { among: { type: "creature", controlledBy: "you" }, prompt: "Choose a creature you control to attach it to" },
         attachment: 0,
-        ontoChosen: { filter: { type: "creature", controlledBy: "you" }, prompt: "Choose a creature you control to attach it to" },
       },
     };
   }
@@ -14028,6 +14031,18 @@ function parseFaceAsWritten(face, ctx = {}) {
     // card there (rule 303.4a, `enchantsGraveyardCard`).
     if ((m = /^Enchant (creature|instant|sorcery|artifact|enchantment|land) card in a graveyard$/.exec(line))) {
       out.enchant = { kind: "card-in-graveyard", whose: "any", filter: { type: m[1] } };
+      continue;
+    }
+    // "Fortify {3}" (rule 702.67a): attach to a land you control, as a sorcery.
+    if ((m = /^Fortify ((?:\{[^}]+\})+)\.?(?: \(.*\))?$/.exec(line))) {
+      out.activated.push({
+        cost: { mana: m[1], tap: false },
+        targets: [{ kind: "permanent", whose: "you", filter: { type: "land" } }],
+        effect: { kind: "attach", target: 0 },
+        resolve: null,
+        text: printed(raw),
+        sorcerySpeed: true,
+      });
       continue;
     }
     const equipReduced = /^Equip \{/.test(line) ? abilityReductionOf(line) : null;

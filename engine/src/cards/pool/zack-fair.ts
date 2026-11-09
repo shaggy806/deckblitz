@@ -34,8 +34,8 @@ export default defineCard({
           {
             kind: "attach",
             target: 0,
-            choose: {
-              filter: { subtype: "Equipment", wasAttachedTo: "source" },
+            attachment: {
+              choose: { subtype: "Equipment", wasAttachedTo: "source" },
               prompt: "Attach an Equipment that was attached to Zack Fair",
               upTo: 1,
               min: 1,

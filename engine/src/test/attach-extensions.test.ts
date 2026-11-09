@@ -303,7 +303,7 @@ describe("a bot answering Ardenn", () => {
       min: 0,
       max: 2,
       prompt: "Attach any number of Auras and Equipment you control",
-      then: { kind: "attach", target: 0, attachment: 0, onto: { kind: "object", object: mine } },
+      then: { kind: "attach", target: { resolved: { kind: "object", object: mine } }, attachment: 0 },
       source: splitter,
       x: 0,
     };

@@ -871,7 +871,10 @@ export interface ActivatedAbility {
    */
   readonly targetCostReduction?: {
     readonly filter: CardFilter;
-    readonly reduceGeneric: number;
+    /** `"target-colors"`: "{1} less for each color of the creature it
+     * targets" (Dragonfire Blade), read as the targets are chosen; offered
+     * for the targets it's affordable with. */
+    readonly reduceGeneric: number | "target-colors";
     readonly count?: number;
   };
   /** The least X the ability may be activated with — Ruthless Technomancer's
@@ -1117,7 +1120,16 @@ export type TriggerKind =
        * Shared Souls, Assimilation Aegis): moved from one to another counts,
        * on the one it's moved to. Its trigger object is what it's attached to. */
       readonly on: "becomes-attached";
-      readonly who: "self";
+      /** `"self"`: this permanent is what became attached. */
+      readonly who?: "self";
+      /** `"self"`: "whenever an Aura becomes attached **to this creature**"
+       * (Brood Keeper), a move from elsewhere or an Aura entering attached
+       * alike (the ruling). */
+      readonly onto?: "self";
+      /** What became attached: "an **Aura you control** becomes attached"
+       * (Siona), read from this ability's controller's side. */
+      readonly attachment?: CardFilter;
+      /** What it became attached to. */
       readonly filter?: CardFilter;
     }
   | {

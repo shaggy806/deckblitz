@@ -710,6 +710,7 @@ import _poolRentIsDue from "../pool/rent-is-due.js";
 import _poolReptilianReflection from "../pool/reptilian-reflection.js";
 import _poolResilientRoadrunner from "../pool/resilient-roadrunner.js";
 import _poolRestrictedOffice from "../pool/restricted-office.js";
+import _poolRetether from "../pool/retether.js";
 import _poolRetreatToEmeria from "../pool/retreat-to-emeria.js";
 import _poolRevTitheExtractor from "../pool/rev-tithe-extractor.js";
 import _poolRevelationOfPower from "../pool/revelation-of-power.js";
@@ -1759,6 +1760,7 @@ const shard: CardShard = {
     _poolReptilianReflection,
     _poolResilientRoadrunner,
     _poolRestrictedOffice,
+    _poolRetether,
     _poolRetreatToEmeria,
     _poolRevTitheExtractor,
     _poolRevelationOfPower,

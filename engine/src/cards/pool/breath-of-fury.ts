@@ -24,9 +24,8 @@ export default defineCard({
           { kind: "sacrifice-target", target: "attached" },
           {
             kind: "attach",
-            target: "source",
-            ontoChosen: {
-              filter: { type: "creature", controlledBy: "you" },
+            target: {
+              among: { type: "creature", controlledBy: "you" },
               prompt: "Attach Breath of Fury to a creature you control",
             },
           },

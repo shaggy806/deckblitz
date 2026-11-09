@@ -55,7 +55,7 @@ export default defineCard({
               then: {
                 kind: "attach",
                 target: 0,
-                attachments: { subtype: "Equipment", thisWay: "put-onto-battlefield" },
+                attachment: { all: { subtype: "Equipment", thisWay: "put-onto-battlefield" } },
               },
             },
           },

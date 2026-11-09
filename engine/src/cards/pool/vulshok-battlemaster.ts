@@ -30,7 +30,7 @@ export default defineCard({
     {
       trigger: { on: "enters-battlefield", who: "self" },
       targets: [],
-      effect: { kind: "attach", target: "source", attachments: { subtype: "Equipment" } },
+      effect: { kind: "attach", target: "source", attachment: { all: { subtype: "Equipment" } } },
       resolve: null,
       text: TEXT,
     },

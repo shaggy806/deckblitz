@@ -31,6 +31,7 @@ import _poolArcaneHeist from "../pool/arcane-heist.js";
 import _poolArcaneInfusion from "../pool/arcane-infusion.js";
 import _poolArgivianAvenger from "../pool/argivian-avenger.js";
 import _poolArmedAssailant from "../pool/armed-assailant.js";
+import _poolArmedWithProof from "../pool/armed-with-proof.js";
 import _poolArmoredArmadillo from "../pool/armored-armadillo.js";
 import _poolArmoredWolfRider from "../pool/armored-wolf-rider.js";
 import _poolArmorerGuildmage from "../pool/armorer-guildmage.js";
@@ -1028,6 +1029,7 @@ const shard: CardShard = {
     _poolArcaneInfusion,
     _poolArgivianAvenger,
     _poolArmedAssailant,
+    _poolArmedWithProof,
     _poolArmoredArmadillo,
     _poolArmoredWolfRider,
     _poolArmorerGuildmage,

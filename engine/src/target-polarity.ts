@@ -43,6 +43,7 @@ import { matchesFilter } from "./filter.js";
 import type { CardFilter } from "./filter.js";
 import type { EffectAmount, EffectSpec, PlayerScope } from "./effects.js";
 import type { ObjectRef } from "./refs.js";
+import { isAttachAll } from "./attachments.js";
 import { manaValue, parseManaCost } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { GameObject, GameState } from "./state.js";
@@ -838,6 +839,11 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   attach: (n, v) => {
     v.touch(n.target, "help", MINOR);
     v.touch(n.attachment, "help", MINOR);
+    // "Attach all Auras enchanting target permanent to another" (Glamer
+    // Spinners): whose side it's aimed at depends on those Auras.
+    if (isAttachAll(n.attachment) && typeof n.attachment.all.inSet === "object" && "attachmentsOf" in n.attachment.all.inSet) {
+      v.touch(n.attachment.all.inSet.attachmentsOf, "either", MINOR);
+    }
   },
   // Reconfigure's unattach is its own source: no target to place.
   unattach: none,

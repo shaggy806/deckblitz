@@ -21,9 +21,8 @@ export default defineCard({
       targets: [{ kind: "permanent", filter: { subtype: "Aura", attachedTo: { type: "creature" } } }],
       effect: {
         kind: "attach",
-        target: 0,
         attachment: 0,
-        ontoChosen: { filter: { type: "creature" }, prompt: "Attach that Aura to another creature", another: true },
+        target: { among: { type: "creature" }, prompt: "Attach that Aura to another creature", another: true },
       },
       resolve: null,
       text: TEXT,

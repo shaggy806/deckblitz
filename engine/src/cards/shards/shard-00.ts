@@ -307,6 +307,7 @@ import _poolFreyalisesRadiance from "../pool/freyalises-radiance.js";
 import _poolFrontlineRush from "../pool/frontline-rush.js";
 import _poolFrontlineStrategist from "../pool/frontline-strategist.js";
 import _poolFrozenAether from "../pool/frozen-aether.js";
+import _poolFumble from "../pool/fumble.js";
 import _poolFuneralLongboat from "../pool/funeral-longboat.js";
 import _poolFurnaceReins from "../pool/furnace-reins.js";
 import _poolFussBother from "../pool/fuss-bother.js";
@@ -1309,6 +1310,7 @@ const shard: CardShard = {
     _poolFrontlineRush,
     _poolFrontlineStrategist,
     _poolFrozenAether,
+    _poolFumble,
     _poolFuneralLongboat,
     _poolFurnaceReins,
     _poolFussBother,
