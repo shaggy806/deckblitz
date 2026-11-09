@@ -57383,7 +57383,9 @@ controlledBy,
     const all = this.drawEffectReplacementsFor(player, event);
     const seen = new Set<string>();
     const distinct = all.filter((r) => {
-      const key = JSON.stringify([printedCardName(this.state.objects[r.source]), r.effect]);
+      // A resolved replacement's source may be gone from the game.
+      const by = this.state.objects[r.source];
+      const key = JSON.stringify([by === undefined ? r.source : printedCardName(by), r.effect]);
       if (seen.has(key)) return false;
       seen.add(key);
       return true;
