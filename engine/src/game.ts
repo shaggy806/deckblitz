@@ -59384,6 +59384,10 @@ export class Game {
     }
     // Each death has its own events: this one only asks the triggers.
     if (full.type !== "permanents-died" && full.type !== "permanents-left") this.state.eventLog.push(full);
+    // The journal keeps each object as it is now, and what announced this has
+    // just changed it ("Non-Horror creatures with slime counters" lose all
+    // abilities with the counter): nothing computed before it may answer.
+    invalidateComputedCache();
     this.recordJournal(full);
     // A token comes into being on the battlefield, and a copy of a spell on
     // the stack, rather than moving there, so no zone change opened a public
