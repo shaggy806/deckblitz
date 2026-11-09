@@ -13320,6 +13320,21 @@ export class Game {
     };
   }
 
+  /** `fn` with the card read as the bestowed Aura spell it's about to be
+   * (rule 702.103b), before a cast has marked it. */
+  private withBestowed<T>(cardId: ObjectId, bestow: boolean, fn: () => T): T {
+    const card = this.state.objects[cardId];
+    if (!bestow || card === undefined || card.bestowed === true) return fn();
+    card.bestowed = true;
+    invalidateComputedCache();
+    try {
+      return fn();
+    } finally {
+      card.bestowed = undefined;
+      invalidateComputedCache();
+    }
+  }
+
   private withFace<T>(cardId: ObjectId, face: number, fn: () => T): T {
     const object = this.state.objects[cardId];
     if (object === undefined || object.faces === undefined || object.face === face) {
@@ -17592,9 +17607,12 @@ export class Game {
     if (this.castNeedsOtherChooser(def) && this.otherChoice?.for !== cardId) {
       return `an opponent chooses for ${def.name}: cast it naming one`;
     }
-    // Judged as the face being cast: only a split card's half exists as a
-    // spell (rule 709.3), so "spells with the chosen name" reads its name.
-    const prohibited = this.withFace(cardId, face, () => this.whyProhibitedFromCasting(player, cardId, def));
+    // Judged as the spell it would be: only a split card's half exists as a
+    // spell (rule 709.3), so "spells with the chosen name" reads its name;
+    // cast bestowed it's an Aura spell, not a creature spell (702.103b).
+    const prohibited = this.withBestowed(cardId, overload === true && def.overload?.keyword === "bestow", () =>
+      this.withFace(cardId, face, () => this.whyProhibitedFromCasting(player, cardId, def)),
+    );
     if (prohibited !== null) return prohibited;
     // A flip card is cast as its normal half only (rule 710.2): its
     // alternative half exists only on a flipped permanent.
@@ -27151,17 +27169,8 @@ export class Game {
     // A bestow cast is judged as the Aura spell it is (`bestowPurpose`),
     // before the cast has marked it bestowed.
     if (purpose?.kind === "cast" && purpose.bestow === true) {
-      const card = this.state.objects[purpose.card];
       const { bestow: _bestow, ...plain } = purpose;
-      if (card === undefined || card.bestowed === true) return this.manaUnitCanPay(player, unit, plain);
-      card.bestowed = true;
-      invalidateComputedCache();
-      try {
-        return this.manaUnitCanPay(player, unit, plain);
-      } finally {
-        card.bestowed = undefined;
-        invalidateComputedCache();
-      }
+      return this.withBestowed(purpose.card, true, () => this.manaUnitCanPay(player, unit, plain));
     }
     // A deny-list ("can't be spent to cast nonartifact spells" — Karn,
     // Legacy Reforged): everything but casting a matching spell, a ward
