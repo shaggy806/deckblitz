@@ -4213,6 +4213,10 @@ export type AwaitingDecision =
         readonly controller: PlayerId;
         readonly targets: readonly (TargetRef | undefined)[];
         readonly x: number;
+        /** What the replacement's tokens copy: the replacement's option runs
+         * as the replaced effect, with this after its targets, so what that
+         * effect says of its tokens still reads as it did. */
+        readonly copyHost?: ObjectId;
       };
       readonly nextDrawFor?: {
         readonly effects: readonly (number | null | "draw" | { readonly printed: ObjectId })[];
@@ -5013,6 +5017,8 @@ export interface EnteringTokenCopies {
   readonly attacking?: ResolvedEnterAttacking;
   readonly source?: ObjectId;
   readonly effectController?: PlayerId;
+  /** Counters the effect's controller puts on each once they're made. */
+  readonly thenCounters?: { readonly kind: string; readonly amount: number };
 }
 
 /**

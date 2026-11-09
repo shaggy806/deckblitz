@@ -8073,6 +8073,11 @@ export type EffectSpec =
       /** The tokens remember this effect's source — `create-token`'s
        * `linkedToSource`. */
       readonly linkedToSource?: true;
+      /** `create-token`'s, for the copies a replacement makes in its place
+       * (`tokenRiders`). */
+      readonly attacksThisCombat?: boolean;
+      /** `create-token`'s, for the same reason. */
+      readonly thenCounters?: { readonly kind: string; readonly amount: EffectAmount };
     }
   | {
       /** Attach an Aura, Equipment or Fortification (rule 701.3a). `attachment`
@@ -9384,6 +9389,9 @@ export type EffectSpec =
       readonly kind: "encore";
       /** Set when a would-create-token replacement was asked, and declined (rule 616.1). */
       readonly replacementAsked?: true;
+      /** Set only by the engine: a replacement made the tokens copies of what
+       * this target slot holds; the rest of encore still applies to them. */
+      readonly copying?: number;
     }
   | {
       /**
@@ -11635,7 +11643,7 @@ export interface EffectApi {
   /** `players` in turn order from the active player (rule 101.4). */
   apnap(players: readonly PlayerId[]): readonly PlayerId[];
   /** See the `"encore"` {@link EffectSpec}. */
-  encore(): void;
+  encore(copying?: ObjectId): void;
   /** The colour this effect's source named as it entered, or `undefined` —
    * see `GameObject.chosenOnEnter` and `add-mana`'s `"chosen"`. */
   chosenColorOfSource(): ManaType | undefined;
@@ -12177,6 +12185,10 @@ export interface EffectApi {
       sacrificeAtEndStep?: boolean;
       /** Keywords the copies gain until end of turn. */
       gainUntilEndOfTurn?: readonly Keyword[];
+      /** They attack this combat if able — `create-token`'s. */
+      attacksThisCombat?: boolean;
+      /** Counters this effect's controller puts on each, once they're made. */
+      thenCounters?: { readonly kind: string; readonly amount: number };
       /** Keywords and triggered abilities they gain with no end (not
        * copiable — see the effect's `gains`). */
       gainKeywords?: readonly Keyword[];
@@ -12306,8 +12318,16 @@ export interface EffectApi {
   tokenEventReplaced(
     spec: Extract<EffectSpec, { kind: "create-token" | "create-token-copy" | "populate" | "amass" | "incubate" | "encore" }>,
     count: number,
-    /** What the effect still does once its tokens are replaced (amass). */
-    after?: EffectSpec,
+    opts?: {
+      /** What the effect still does once its tokens are replaced (amass). */
+      readonly after?: EffectSpec;
+      /** What the effect says of its tokens besides {@link tokenRiders}
+       * (incubate's counters). */
+      readonly riders?: TokenRiders;
+      /** The whole effect again, copying what's in this target slot (encore,
+       * whose riders differ token by token). */
+      readonly copying?: (slot: number) => EffectSpec;
+    },
   ): boolean;
   /** Epic as the spell resolves — see the `epic` {@link EffectSpec}. */
   epic(): void;
@@ -13006,6 +13026,65 @@ const ASKS_NOTHING: ReadonlySet<EffectSpec["kind"]> = new Set<EffectSpec["kind"]
   "create-token-copy",
   "add-counter-all",
 ]);
+
+/** What an effect says of its tokens besides what they are, as a
+ * `create-token-copy`'s fields. */
+export type TokenRiders = Partial<
+  Pick<
+    Extract<EffectSpec, { kind: "create-token-copy" }>,
+    | "tapped"
+    | "attacking"
+    | "attacksThisCombat"
+    | "sacrificeAtEndStep"
+    | "exileAtEndStep"
+    | "exileAtEndOfCombat"
+    | "sacrificeAtEndOfCombat"
+    | "atYourNextEndStep"
+    | "gainsHaste"
+    | "gainUntilEndOfTurn"
+    | "gains"
+    | "goadedForGame"
+    | "linkedToSource"
+    | "thenCounters"
+  >
+>;
+
+/**
+ * What still applies to tokens a replacement makes instead (Divine
+ * Visitation's ruling: "anything else specified in the effect creating the
+ * token (such as tapped, attacking, 'That token gains haste,' …) still
+ * applies"). What they are — a `create-token-copy`'s `exceptions`, an X/X's
+ * size — is gone with them.
+ */
+export function tokenRiders(spec: EffectSpec): TokenRiders {
+  if (spec.kind !== "create-token" && spec.kind !== "create-token-copy") return {};
+  const gains =
+    spec.kind === "create-token"
+      ? spec.gainKeywords === undefined
+        ? undefined
+        : { keywords: spec.gainKeywords }
+      : spec.gains;
+  return {
+    ...(spec.tapped !== undefined ? { tapped: spec.tapped } : {}),
+    ...(spec.attacking !== undefined ? { attacking: spec.attacking } : {}),
+    ...(spec.attacksThisCombat !== undefined ? { attacksThisCombat: spec.attacksThisCombat } : {}),
+    ...(spec.sacrificeAtEndStep !== undefined ? { sacrificeAtEndStep: spec.sacrificeAtEndStep } : {}),
+    ...(spec.exileAtEndStep !== undefined ? { exileAtEndStep: spec.exileAtEndStep } : {}),
+    ...(spec.gainUntilEndOfTurn !== undefined ? { gainUntilEndOfTurn: spec.gainUntilEndOfTurn } : {}),
+    ...(gains !== undefined ? { gains } : {}),
+    ...(spec.goadedForGame !== undefined ? { goadedForGame: spec.goadedForGame } : {}),
+    ...(spec.linkedToSource !== undefined ? { linkedToSource: spec.linkedToSource } : {}),
+    ...(spec.thenCounters !== undefined ? { thenCounters: spec.thenCounters } : {}),
+    ...(spec.kind === "create-token-copy"
+      ? {
+          ...(spec.gainsHaste !== undefined ? { gainsHaste: spec.gainsHaste } : {}),
+          ...(spec.exileAtEndOfCombat !== undefined ? { exileAtEndOfCombat: spec.exileAtEndOfCombat } : {}),
+          ...(spec.sacrificeAtEndOfCombat !== undefined ? { sacrificeAtEndOfCombat: spec.sacrificeAtEndOfCombat } : {}),
+          ...(spec.atYourNextEndStep !== undefined ? { atYourNextEndStep: spec.atYourNextEndStep } : {}),
+        }
+      : {}),
+  };
+}
 
 function asksNothing(effect: EffectSpec): boolean {
   if (effect.kind === "sequence") return effect.effects.every(asksNothing);
@@ -17655,7 +17734,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.who === undefined &&
         spec.onto === undefined &&
         ctx.permanentsMatching({ type: "creature", subtype: "Army", controlledBy: "you" }).length === 0 &&
-        ctx.tokenEventReplaced(spec, 1, { ...spec, replacementAsked: true, tokenReplaced: true })
+        ctx.tokenEventReplaced(spec, 1, { after: { ...spec, replacementAsked: true, tokenReplaced: true } })
       ) {
         return;
       }
@@ -17784,7 +17863,14 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "incubate":
-      if (spec.replacementAsked !== true && ctx.tokenEventReplaced(spec, 1)) return;
+      // "An Incubator token that enters with N +1/+1 counters" (701.53a): the
+      // counters are what the effect specifies, not what the token is.
+      if (
+        spec.replacementAsked !== true &&
+        ctx.tokenEventReplaced(spec, 1, { riders: { thenCounters: { kind: "+1/+1", amount: spec.amount } } })
+      ) {
+        return;
+      }
       ctx.incubate(amountValue(spec.amount, ctx));
       return;
     case "remove-from-combat": {
@@ -19001,6 +19087,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           ...(spec.exileAtEndOfCombat === true ? { exileAtEndOfCombat: true } : {}),
           ...(spec.sacrificeAtEndOfCombat === true ? { sacrificeAtEndOfCombat: true } : {}),
           ...(spec.atYourNextEndStep === true ? { atYourNextEndStep: true } : {}),
+          ...(spec.attacksThisCombat === true ? { attacksThisCombat: true } : {}),
+          ...(spec.thenCounters !== undefined
+            ? { thenCounters: { kind: spec.thenCounters.kind, amount: amountValue(spec.thenCounters.amount, ctx) } }
+            : {}),
         });
       const specCount = amountValue(spec.count, ctx);
       if (ofSet !== undefined && permanentSet) {
@@ -19791,10 +19881,19 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       );
       return;
     }
-    case "encore":
-      if (spec.replacementAsked !== true && ctx.tokenEventReplaced(spec, ctx.playersInScope("each-opponent").length)) return;
-      ctx.encore();
+    case "encore": {
+      if (
+        spec.replacementAsked !== true &&
+        ctx.tokenEventReplaced(spec, ctx.playersInScope("each-opponent").length, {
+          copying: (slot) => ({ ...spec, replacementAsked: true, copying: slot }),
+        })
+      ) {
+        return;
+      }
+      const copying = spec.copying === undefined ? undefined : ctx.targets[spec.copying];
+      ctx.encore(copying?.kind === "object" ? copying.object : undefined);
       return;
+    }
     case "goad": {
       const forGame = spec.forGame === true;
       if (spec.who !== undefined) {

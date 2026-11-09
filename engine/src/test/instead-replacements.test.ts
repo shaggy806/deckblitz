@@ -3,7 +3,8 @@
  * 614.5, 614.6, 615.6, 615.7, 615.12, 616.1, and the proving cards.
  */
 import { describe, expect, it } from "vitest";
-import { A, B, cast, lands, nextTurn, pickModes, ref, settle, spawn, table, toHand, zone } from "./harness.js";
+import { A, B, C, cast, lands, nextTurn, pickModes, ref, settle, spawn, table, toHand, zone } from "./harness.js";
+import { aimedAt } from "./combat-probe.js";
 import { POOL_CARDS } from "../cards/generated.js";
 import type { ReplacementSpec } from "../replacements.js";
 
@@ -380,6 +381,99 @@ describe("tokens made inside another effect are token events too (rule 614.1a)",
     settle(game);
     expect(asked).toBe(0);
     expect(tokens(game)).toEqual([]);
+  });
+
+  // Divine Visitation's ruling: "Anything else specified in the effect
+  // creating the token … still applies."
+  const copies = (game: ReturnType<typeof table>["game"]) =>
+    game.state.zones.shared.battlefield.filter((id) => game.state.objects[id].isToken === true);
+
+  it("encore's copies still gain haste, are aimed at their opponents and are sacrificed", () => {
+    const { game, a } = table({ players: 3 });
+    moonlit(game);
+    pickModes(a, 1);
+    const card = game.debugSpawn("Hill Giant", A, "exile");
+    game.debugApplyEffect(A, { kind: "encore" }, [], { source: card });
+    settle(game);
+    const made = copies(game);
+    expect(made).toHaveLength(2);
+    expect(made.map((id) => aimedAt(game, id)).sort()).toEqual([B, C].sort());
+    for (const id of made) {
+      expect(game.characteristics(id).keywords.has("haste")).toBe(true);
+      expect(game.state.delayedTriggers.some((t) => t.at === "next-end-step" && t.targets.some((r) => r?.kind === "object" && r.object === id))).toBe(true);
+    }
+  });
+
+  it("a token that's tapped and attacking stays so", () => {
+    const { game, a } = table();
+    moonlit(game);
+    const attacker = spawn(game, "Hill Giant", A);
+    a.declareAttackersFn = () => [{ attacker, defender: B }];
+    game.advanceUntil((s) => s.turn.step === "declare-attackers" && s.awaiting === null && s.priority.holder === A);
+    pickModes(a, 1);
+    game.debugApplyEffect(A, { kind: "create-token", token: "Soldier Token", count: 1, tapped: true, attacking: "choose" });
+    settle(game);
+    const [token] = copies(game);
+    expect(game.state.objects[token].cardName).toBe("Grizzly Bears");
+    expect(game.state.objects[token].tapped).toBe(true);
+    expect(game.state.objects[token].attacking).toBe(B);
+  });
+
+  it("what the effect gives a token goes on the copy: haste, the end step, counters", () => {
+    const { game, a } = table();
+    moonlit(game);
+    pickModes(a, 1);
+    game.debugApplyEffect(A, {
+      kind: "create-token",
+      token: "Treasure Token",
+      count: 1,
+      gainUntilEndOfTurn: ["haste"],
+      sacrificeAtEndStep: true,
+      thenCounters: { kind: "+1/+1", amount: 2 },
+    });
+    settle(game);
+    const [token] = copies(game);
+    expect(game.state.objects[token].cardName).toBe("Grizzly Bears");
+    expect(game.characteristics(token).keywords.has("haste")).toBe(true);
+    expect(game.state.objects[token].counters["+1/+1"]).toBe(2);
+    expect(game.state.delayedTriggers.some((t) => t.at === "next-end-step" && t.targets.some((r) => r?.kind === "object" && r.object === token))).toBe(true);
+  });
+
+  it("a token copy's riders go on the replacement copy", () => {
+    const { game, a } = table();
+    moonlit(game);
+    const giant = spawn(game, "Hill Giant", A);
+    pickModes(a, 1);
+    game.debugApplyEffect(A, { kind: "create-token-copy", of: 0, count: 1, tapped: true, gainsHaste: true }, [ref(giant)]);
+    settle(game);
+    const [token] = copies(game);
+    expect(game.state.objects[token].cardName).toBe("Grizzly Bears");
+    expect(game.state.objects[token].tapped).toBe(true);
+    expect(game.characteristics(token).keywords.has("haste")).toBe(true);
+  });
+
+  it("an Incubator's counters go on the copy (701.53a)", () => {
+    const { game, a } = table();
+    moonlit(game);
+    pickModes(a, 1);
+    game.debugApplyEffect(A, { kind: "incubate", amount: 2 });
+    settle(game);
+    const [token] = copies(game);
+    expect(game.state.objects[token].counters["+1/+1"]).toBe(2);
+  });
+
+  it("amass still counts its X in the effect's own terms, with the copy an Army", () => {
+    const { game, a } = table();
+    const army = spawn(game, "Grizzly Bears", A);
+    const aura = game.debugSpawn("Moonlit Meditation", A, "battlefield");
+    game.state.objects[aura].attachedTo = army;
+    game.state.objects[army].modifiers.push({ power: 0, toughness: 0, keywords: [], addSubtypes: ["Army"], copiable: true, untilEndOfTurn: false, timestamp: -1 });
+    game.state.objects[army].controller = B;
+    pickModes(a, 1);
+    game.debugApplyEffect(A, { kind: "amass", amount: "x", creatureType: "Zombie" }, [], { x: 3 });
+    settle(game);
+    const [token] = copies(game);
+    expect(game.state.objects[token].counters["+1/+1"]).toBe(3);
   });
 
   it("encore: taken, that many copies of the enchanted permanent, one for each opponent", () => {

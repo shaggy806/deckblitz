@@ -13,7 +13,7 @@ import { keywordCostString } from "./keyword-values.js";
 import type { KeywordCostsPaid, KeywordValue, KeywordValueName } from "./keyword-values.js";
 import { playCostMode, playSpendsSomething, playGrantOf } from "./play-permission.js";
 import type { CardPlayPermission, EffectPlay, PlayFrom, PlayGrant, PlayTerms, StaticPlay } from "./play-permission.js";
-import { objectRefRead, resolvePlayerRef } from "./effects.js";
+import { objectRefRead, resolvePlayerRef, tokenRiders } from "./effects.js";
 import {
   abilityLifeCost,
   chosenCounterCost,
@@ -8092,13 +8092,15 @@ export class Game {
     // Meditation): the first mode makes the tokens as the effect said, under
     // its own source; the other is the replacement's effect.
     if (awaiting.replacedFor !== undefined) {
-      const { source: from, controller: by, targets, x } = awaiting.replacedFor;
+      const { source: from, controller: by, targets, x, copyHost } = awaiting.replacedFor;
       const chosen = awaiting.modes[modeIndices[0] ?? 0];
       this.state.awaiting = null;
       if (chosen !== undefined) {
         const ctx = (modeIndices[0] ?? 0) === 0
           ? this.makeResolutionContext(from, by, targets, x)
-          : this.makeResolutionContext(awaiting.source, by, [], awaiting.x);
+          : copyHost !== undefined
+            ? this.makeResolutionContext(from, by, [...targets, { kind: "object", object: copyHost }], x)
+            : this.makeResolutionContext(awaiting.source, by, [], awaiting.x);
         applyEffectSpec(chosen.effect, ctx);
       }
       if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
@@ -36574,7 +36576,7 @@ controlledBy,
         this.emit({ type: "became-renowned", object: source, amount });
       },
       populate: () => this.populate(controller, source, x),
-      encore: () => this.encore(controller, source),
+      encore: (copying) => this.encore(controller, source, copying),
       chosenColorOfSource: () => {
         const chosen = chosenOfSource();
         return MANA_TYPES.includes(chosen as ManaType) ? (chosen as ManaType) : undefined;
@@ -38850,7 +38852,7 @@ controlledBy,
         object.damageMarked = 0;
         invalidateComputedCache();
       },
-      tokenEventReplaced: (spec, count, after) => this.tokenEventReplaced(spec, count, controller, source, targets, x, after),
+      tokenEventReplaced: (spec, count, opts) => this.tokenEventReplaced(spec, count, controller, source, targets, x, opts),
       addReplacementEffect: ({ fromObject, ...record }) => {
         const object = record.target?.kind === "object" ? this.state.objects[record.target.object] : undefined;
         const from = fromObject === undefined ? undefined : this.state.objects[fromObject];
@@ -41678,14 +41680,19 @@ controlledBy,
    * to be put under `controller` explicitly — the exiled card's own
    * controller is meaningless.
    */
-  private encore(controller: PlayerId, source: ObjectId): void {
+  private encore(
+    controller: PlayerId,
+    source: ObjectId,
+    /** A replacement made them copies of this instead (Moonlit Meditation). */
+    copying?: ObjectId,
+  ): void {
     const made: ObjectId[] = [];
     for (const opponent of this.scopedPlayers(controller, "each-opponent")) {
       const before = new Set(this.state.zones.shared.battlefield);
       // "The tokens gain haste" (rule 702.141a): an effect on them, not a
       // copy exception — a copy of one doesn't have it, and Divine
       // Visitation's Angel still does.
-      this.createTokenCopy(source, 1, {
+      this.createTokenCopy(copying ?? source, 1, {
         gainsHaste: false,
         gainKeywords: ["haste"],
         exileAtEndStep: false,
@@ -42677,8 +42684,7 @@ controlledBy,
     source: ObjectId,
     targets: ResolvedTargets,
     x: number,
-    /** What the effect still does once its tokens are replaced (amass). */
-    after?: EffectSpec,
+    opts: Parameters<ResolutionContext["tokenEventReplaced"]>[2] = {},
   ): boolean {
     if (count <= 0) return false;
     const first = journalTotal(this.state, "token-created", controller, "count") === 0;
@@ -42692,10 +42698,32 @@ controlledBy,
         // Its own tokens are not a new event for it to replace (614.5), however
         // deep they sit in its effect (behind a choice, say).
         const replaced = tokensAlreadyAsked(r.becomes.effect) as EffectSpec;
+        const after = opts?.after;
         const becomes: EffectSpec = after === undefined ? replaced : { kind: "sequence", effects: [replaced, after] };
         if (r.may !== true) {
           this.runReplacedBy(becomes, by.id, controller, { x: count, player: controller });
           return true;
+        }
+        // Copies of what it's attached to: anything else the effect making the
+        // tokens says of them still applies (Divine Visitation's ruling), so
+        // they're made as that effect, reading its targets and X, with the
+        // permanent they copy in the slot after its targets.
+        const copiesHost =
+          r.becomes.effect.kind === "create-token-copy" && (r.becomes.effect.of === "enchanted" || r.becomes.effect.of === "equipped");
+        const copyHost = copiesHost && by.attachedTo !== null ? by.attachedTo : undefined;
+        let instead = becomes;
+        if (copyHost !== undefined) {
+          const made =
+            opts?.copying?.(targets.length) ??
+            ({
+              ...r.becomes.effect,
+              ...tokenRiders(spec),
+              ...opts?.riders,
+              of: targets.length,
+              count,
+              replacementAsked: true,
+            } as EffectSpec);
+          instead = after === undefined ? made : { kind: "sequence", effects: [made, after] };
         }
         this.state.awaiting = {
           kind: "choose-modes",
@@ -42705,11 +42733,11 @@ controlledBy,
           maxModes: 1,
           modes: [
             { text: "Create the tokens", effect: { ...spec, replacementAsked: true } },
-            { text: r.becomes.text ?? `${printedCardName(by)}'s replacement`, effect: becomes },
+            { text: r.becomes.text ?? `${printedCardName(by)}'s replacement`, effect: instead },
           ],
           x: count,
           targets: [],
-          replacedFor: { source, controller, targets: [...targets], x },
+          replacedFor: { source, controller, targets: [...targets], x, ...(copyHost !== undefined ? { copyHost } : {}) },
         };
         return true;
       }
@@ -42820,6 +42848,10 @@ controlledBy,
       exileAtEndOfCombat?: boolean;
       sacrificeAtEndOfCombat?: boolean;
       atYourNextEndStep?: boolean;
+      /** They attack this combat if able — part of making them. */
+      attacksThisCombat?: boolean;
+      /** Counters this effect's controller puts on each once they're made. */
+      thenCounters?: { readonly kind: string; readonly amount: number };
       /** "The tokens are goaded for the rest of the game", by this player. */
       goadedForGameBy?: PlayerId;
       /** The effect making them, for a delayed trigger it sets up. */
@@ -42883,6 +42915,18 @@ controlledBy,
       ...(opts.gainTriggered !== undefined && opts.gainTriggered.length > 0
         ? [{ power: 0, toughness: 0, keywords: [], grantsTriggered: [...opts.gainTriggered], untilEndOfTurn: false }]
         : []),
+      ...(opts.attacksThisCombat === true
+        ? [
+            {
+              power: 0,
+              toughness: 0,
+              keywords: [],
+              restrictions: ["must-attack" as const],
+              untilEndOfTurn: true,
+              untilEndOfCombat: true as const,
+            },
+          ]
+        : []),
     ];
     // Divine Visitation (rule 614.1a): a copy that would be created a
     // creature — by what it copies or a copy exception — is made as its
@@ -42921,6 +42965,7 @@ controlledBy,
       ...(opts.source !== undefined ? { source: opts.source } : {}),
       ...(opts.effectController !== undefined ? { effectController: opts.effectController } : {}),
       ...(opts.createdWith !== undefined ? { createdWith: opts.createdWith } : {}),
+      ...(opts.thenCounters !== undefined ? { thenCounters: opts.thenCounters } : {}),
     };
     if (this.heldTokenCopies !== null) this.heldTokenCopies.push(planned);
     else this.carryOutTokenCopies([planned]);
@@ -43062,7 +43107,7 @@ controlledBy,
         planned.tapped,
         planned.sacrificeAtEndStep,
         planned.goadedForGameBy,
-        planned.exileAtEndStep || planned.sacrificeAtEndStep,
+        planned.exileAtEndStep || planned.sacrificeAtEndStep || planned.thenCounters !== undefined,
       ),
       ...this.mintReplacedTokenCopies(planned),
     ]));
@@ -43091,7 +43136,12 @@ controlledBy,
 
   /** What an effect does with the token copies it made, once they're there. */
   private finishTokenCopies(group: PlannedTokenCopies | EnteringTokenCopies, made: readonly ObjectId[]): void {
-    const { controller, source, effectController, attacking } = group;
+    const { controller, source, effectController, attacking, thenCounters } = group;
+    if (thenCounters !== undefined && thenCounters.amount > 0) {
+      for (const id of made) {
+        this.addCounter({ kind: "object", object: id }, thenCounters.kind, thenCounters.amount, false, effectController ?? controller);
+      }
+    }
     // Tokens removed at the end step are each their own object, so the
     // delayed trigger over them reaches every one (`endStepTokenRemoval`).
     // "Exile / sacrifice them at the beginning of the next end step": one
