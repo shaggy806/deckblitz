@@ -12,6 +12,7 @@ import { COMMANDER_RULES } from "../state.js";
 import type { GameState } from "../state.js";
 import { asPlayerId } from "../primitives.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
+import { viewFor } from "../view.js";
 import { cast, lands, life, named, settle, spawn, table, toHand, watchTargets, zone } from "./harness.js";
 
 const A = asPlayerId("alice");
@@ -76,6 +77,19 @@ describe("opening-hand reveals (rule 103.6b)", () => {
     // Once only: bob's own first upkeep does nothing more.
     at(game, 2, "draw");
     expect(game.state.players[A].life).toBe(17);
+  });
+
+  it("keeps a revealed card revealed until the first turn begins (rule 103.6b)", () => {
+    const { game } = newGame(["Chancellor of the Spires"], ["Chancellor of the Spires"]);
+    const [alices] = inHand(game, A, "Chancellor of the Spires");
+    game.dispatch({ type: "choose-from-zone", player: A, chosen: [alices] });
+    // Bob's turn to reveal: Alice's card is shown to him while he decides.
+    expect(game.state.awaiting?.player).toBe(B);
+    expect(viewFor(game.state, game.registry, B).objects[alices]?.cardName).toBe("Chancellor of the Spires");
+    const [bobs] = inHand(game, B, "Chancellor of the Spires");
+    game.dispatch({ type: "choose-from-zone", player: B, chosen: [bobs] });
+    expect(game.state.turn.number).toBe(1);
+    expect(viewFor(game.state, game.registry, B).objects[alices]?.cardName).toBeUndefined();
   });
 
   it("does nothing for a card that wasn't revealed", () => {

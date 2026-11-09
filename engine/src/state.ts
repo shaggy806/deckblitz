@@ -2849,14 +2849,23 @@ export const DEFAULT_RULES: GameRules = {
 };
 
 /**
+ * A game's configured rules. `freeFirstMulligan` may also be `"multiplayer"`:
+ * rule 103.5c's own terms, on only in a multiplayer game (a game that begins
+ * with more than two players, rule 100.1b). `Game.create` settles it.
+ */
+export type GameRulesConfig = Omit<Partial<GameRules>, "freeFirstMulligan"> & {
+  readonly freeFirstMulligan?: boolean | "multiplayer";
+};
+
+/**
  * The rules a live Commander room plays under (rule 903.7: 40 starting life),
  * shared so the server's rooms and the bot benchmark (`scripts/tune-bot.mjs`)
  * can't drift apart — weights tuned at 20 life are tuned for a game nobody
  * plays.
  */
-export const COMMANDER_RULES: Partial<GameRules> = {
+export const COMMANDER_RULES: GameRulesConfig = {
   startingLife: 40,
-  freeFirstMulligan: true,
+  freeFirstMulligan: "multiplayer",
 };
 
 /**

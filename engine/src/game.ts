@@ -516,6 +516,7 @@ import type {
   ExtraTurnRider,
   GameObject,
   GameRules,
+  GameRulesConfig,
   GameState,
   GrantedAbilityRef,
   CastSpellRecord,
@@ -668,7 +669,7 @@ export interface GameConfig {
   readonly skipCompanionReveals?: boolean;
   readonly registry?: CardRegistry;
   readonly controllers?: Partial<Record<PlayerId, PlayerController>>;
-  readonly rules?: Partial<GameRules>;
+  readonly rules?: GameRulesConfig;
 }
 
 export interface SnapshotEnv {
@@ -2501,7 +2502,12 @@ export class Game {
     if (new Set(turnOrder).size !== turnOrder.length) {
       throw new Error("duplicate player id in decks");
     }
-    const rules: GameRules = { ...DEFAULT_RULES, ...config.rules };
+    const free = config.rules?.freeFirstMulligan ?? DEFAULT_RULES.freeFirstMulligan;
+    const rules: GameRules = {
+      ...DEFAULT_RULES,
+      ...config.rules,
+      freeFirstMulligan: free === "multiplayer" ? turnOrder.length > 2 : free,
+    };
     const startingPlayer = config.startingPlayer ?? turnOrder[0];
     if (!turnOrder.includes(startingPlayer)) {
       throw new Error("startingPlayer is not one of the players");

@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import { Game } from "../game.js";
 import type { GameConfig } from "../game.js";
 import { asPlayerId } from "../primitives.js";
+import { COMMANDER_RULES } from "../state.js";
 
 const A = asPlayerId("alice");
 const B = asPlayerId("bob");
@@ -245,5 +246,28 @@ describe("mulligans (opt-in via GameConfig.mulligans)", () => {
 
     expect(game.state.objects[commanderId].zone).toBe("command");
     expect(game.state.turn.number).toBe(1);
+  });
+
+  describe("the free mulligan under the Commander rules (rule 103.5c)", () => {
+    it("is free only in a multiplayer game", () => {
+      expect(newGame({ rules: COMMANDER_RULES }).state.rules.freeFirstMulligan).toBe(false);
+      expect(
+        newGame({
+          rules: COMMANDER_RULES,
+          decks: [
+            { player: A, cards: deck(40) },
+            { player: B, cards: deck(40) },
+            { player: C, cards: deck(40) },
+          ],
+        }).state.rules.freeFirstMulligan,
+      ).toBe(true);
+    });
+
+    it("costs a card from the first mulligan at two players", () => {
+      const game = newGame({ rules: COMMANDER_RULES });
+      game.dispatch({ type: "mulligan", player: A, keep: false });
+      game.dispatch({ type: "mulligan", player: A, keep: true });
+      expect(game.legalActions(A)).toEqual([{ kind: "put-on-bottom", count: 1, from: [...game.handOf(A)] }]);
+    });
   });
 });
