@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4750 already implemented / 250 missing (marks refreshed 2026-11-09)
+4763 already implemented / 237 missing (marks refreshed 2026-11-09)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2285,7 +2285,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2292  Plargg and Nassari                       {3}{R}{R}        Legendary Creature — Orc Efreet
 [x]  2293  Umbral Mantle                            {3}              Artifact — Equipment
 [x]  2294  Lightning Strike                         {1}{R}           Instant
-[ ]  2295  The Cabbage Merchant                     {2}{G}           Legendary Creature — Human Citizen
+[x]  2295  The Cabbage Merchant                     {2}{G}           Legendary Creature — Human Citizen
 [x]  2296  Nexus of Fate                            {5}{U}{U}        Instant
 [x]  2297  Blur                                     {2}{U}           Instant
 [x]  2298  Rest in Peace                            {1}{W}           Enchantment
@@ -2303,7 +2303,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2310  Urza's Workshop                          {0}              Land — Urza's
 [x]  2311  Super State                              {7}              Legendary Enchantment — Aura
 [ ]  2312  Turntimber Symbiosis // Turntimber, Serpentine Wood {7}              Sorcery // Land
-[ ]  2313  Kindred Summons                          {5}{G}{G}        Instant
+[x]  2313  Kindred Summons                          {5}{G}{G}        Instant
 [x]  2314  Arcane Bombardment                       {4}{R}{R}        Enchantment
 [x]  2315  Geth's Grimoire                          {4}              Artifact — Book
 [x]  2316  Rev, Tithe Extractor                     {3}{B}           Legendary Creature — Human Rogue
@@ -2322,7 +2322,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2329  Wrap in Vigor                            {1}{G}           Instant
 [x]  2330  Sanctum Seeker                           {2}{B}{B}        Creature — Vampire Knight
 [x]  2331  Brilliant Restoration                    {3}{W}{W}{W}{W}  Sorcery
-[ ]  2332  Inscription of Abundance                 {1}{G}           Instant
+[x]  2332  Inscription of Abundance                 {1}{G}           Instant
 [x]  2333  Vraska's Fall                            {2}{B}           Instant
 [x]  2334  Thalia, Guardian of Thraben              {1}{W}           Legendary Creature — Human Soldier
 [x]  2335  Summon: Yojimbo                          {3}{W}           Enchantment Creature — Saga Samurai
@@ -2358,7 +2358,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2365  Circle of Power                          {3}{B}           Sorcery
 [x]  2366  Bow of Nylea                             {1}{G}{G}        Legendary Enchantment Artifact
 [x]  2367  Worldspine Wurm                          {8}{G}{G}{G}     Creature — Wurm
-[ ]  2368  Bruenor Battlehammer                     {2}{R}{W}        Legendary Creature — Dwarf Warrior
+[x]  2368  Bruenor Battlehammer                     {2}{R}{W}        Legendary Creature — Dwarf Warrior
 [x]  2369  Dictate of the Twin Gods                 {3}{R}{R}        Enchantment
 [x]  2370  Kona, Rescue Beastie                     {3}{G}           Legendary Creature — Beast Survivor
 [x]  2371  Animar, Soul of Elements                 {G}{U}{R}        Legendary Creature — Elemental
@@ -2716,7 +2716,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2723  Domri, Anarch of Bolas                   {1}{R}{G}        Legendary Planeswalker — Domri
 [x]  2724  Cosmos Elixir                            {4}              Artifact
 [x]  2725  Court of Cunning                         {1}{U}{U}        Enchantment
-[ ]  2726  River of Tears                           {0}              Land
+[x]  2726  River of Tears                           {0}              Land
 [x]  2727  Deadpool, Trading Card                   {2}{B}{R}        Legendary Creature — Mutant Mercenary Hero
 [x]  2728  Rakdos, Patron of Chaos                  {4}{B}{R}        Legendary Creature — Demon
 [x]  2729  Vein Ripper                              {3}{B}{B}{B}     Creature — Vampire Assassin
@@ -2728,7 +2728,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2735  Mischievous Mystic                       {1}{U}           Creature — Human Wizard
 [x]  2736  Dusk Legion Duelist                      {1}{W}           Creature — Vampire Soldier
 [x]  2737  Infectious Bite                          {1}{G}           Instant
-[ ]  2738  Danny Pink                               {3}{U}           Legendary Creature — Human Soldier Advisor
+[x]  2738  Danny Pink                               {3}{U}           Legendary Creature — Human Soldier Advisor
 [x]  2739  Bite Down                                {1}{G}           Instant
 [x]  2740  Clifftop Lookout                         {2}{G}           Creature — Frog Scout
 [x]  2741  Aether Spellbomb                         {1}              Artifact
@@ -2745,7 +2745,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2752  Wilhelt, the Rotcleaver                  {2}{U}{B}        Legendary Creature — Zombie Warrior
 [ ]  2753  Virtue of Strength // Garenbrig Growth   {5}{G}{G} // {G} Enchantment // Sorcery — Adventure
 [x]  2754  Flesh Duplicate                          {U}{U}           Creature — Shapeshifter Rebel
-[ ]  2755  Charred Foyer // Warped Space            {3}{R} // {4}{R}{R} Enchantment — Room // Enchantment — Room
+[x]  2755  Charred Foyer // Warped Space            {3}{R} // {4}{R}{R} Enchantment — Room // Enchantment — Room
 [x]  2756  Retreat to Hagra                         {2}{B}           Enchantment
 [x]  2757  Rimewood Falls                           {0}              Snow Land — Forest Island
 [x]  2758  Bone Shards                              {B}              Sorcery
@@ -3627,7 +3627,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3634  Dragonborn Champion                      {2}{R}{G}        Creature — Dragon Warrior
 [x]  3635  Calix, Guided by Fate                    {1}{G}{W}        Legendary Enchantment Creature — Human Druid
 [ ]  3636  Rise and Shine                           {1}{U}           Sorcery
-[ ]  3637  Vexing Puzzlebox                         {3}              Artifact
+[x]  3637  Vexing Puzzlebox                         {3}              Artifact
 [x]  3638  Path of Discovery                        {3}{G}           Enchantment
 [x]  3639  Ghyrson Starn, Kelermorph                {1}{U}{R}        Legendary Creature — Tyranid Human
 [x]  3640  Sphinx's Tutelage                        {2}{U}           Enchantment
@@ -3698,7 +3698,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3705  Haunting Voyage                          {4}{B}{B}        Sorcery
 [ ]  3706  Screaming Nemesis                        {2}{R}           Creature — Spirit
 [x]  3707  Fire Lord Azula                          {1}{U}{B}{R}     Legendary Creature — Human Noble
-[ ]  3708  The Second Doctor                        {2}{W}{U}        Legendary Creature — Time Lord Doctor
+[x]  3708  The Second Doctor                        {2}{W}{U}        Legendary Creature — Time Lord Doctor
 [x]  3709  Yavimaya Hollow                          {0}              Legendary Land
 [x]  3710  Absorb                                   {W}{U}{U}        Instant
 [x]  3711  Polyraptor                               {6}{G}{G}        Creature — Dinosaur
@@ -3944,7 +3944,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3951  Traxos, Scourge of Kroog                 {4}              Legendary Artifact Creature — Dragon Construct
 [x]  3952  Apex of Power                            {7}{R}{R}{R}     Sorcery
 [x]  3953  General Ferrous Rokiric                  {1}{R}{W}        Legendary Creature — Human Soldier
-[ ]  3954  Elder Brain                              {5}{B}{B}        Creature — Horror
+[x]  3954  Elder Brain                              {5}{B}{B}        Creature — Horror
 [x]  3955  Composer of Spring                       {1}{G}           Creature — Satyr Bard
 [x]  3956  Broken Wings                             {2}{G}           Instant
 [x]  3957  Wilson, Refined Grizzly                  {1}{G}           Legendary Creature — Bear Warrior
@@ -4011,7 +4011,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4018  Marketback Walker                        {X}{X}           Artifact Creature — Construct
 [x]  4019  Sludge Monster                           {3}{U}{U}        Creature — Horror
 [x]  4020  Alloy Myr                                {3}              Artifact Creature — Myr
-[ ]  4021  Solitary Confinement                     {2}{W}           Enchantment
+[x]  4021  Solitary Confinement                     {2}{W}           Enchantment
 [x]  4022  Mana Echoes                              {2}{R}{R}        Enchantment
 [x]  4023  Akki Battle Squad                        {5}{R}           Creature — Goblin Samurai
 [x]  4024  Open the Vaults                          {4}{W}{W}        Sorcery
@@ -4280,7 +4280,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4287  Navigation Orb                           {3}              Artifact
 [ ]  4288  Umbra Mystic                             {2}{W}           Creature — Human Wizard
 [ ]  4289  Tyvar Kell                               {2}{G}{G}        Legendary Planeswalker — Tyvar
-[ ]  4290  Riveteers Ascendancy                     {B}{R}{G}        Enchantment
+[x]  4290  Riveteers Ascendancy                     {B}{R}{G}        Enchantment
 [x]  4291  Submerge                                 {4}{U}           Instant
 [x]  4292  Spectral Deluge                          {4}{U}{U}        Sorcery
 [x]  4293  Idyllic Grange                           {0}              Land — Plains
@@ -4618,7 +4618,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4625  Rite of Harmony                          {G}{W}           Instant
 [x]  4626  Growing Ranks                            {2}{G/W}{G/W}    Enchantment
 [ ]  4627  Cleaver Skaab                            {3}{U}           Creature — Zombie Horror
-[ ]  4628  Mirrormind Crown                         {4}              Artifact — Equipment
+[x]  4628  Mirrormind Crown                         {4}              Artifact — Equipment
 [ ]  4629  Grist, Voracious Larva // Grist, the Plague Swarm {1}              Legendary Creature — Insect // Legendary Planeswalker — Grist
 [x]  4630  Serpent of Yawning Depths                {4}{U}{U}        Enchantment Creature — Serpent
 [x]  4631  The Odd Acorn Gang                       {3}{B}{G}        Legendary Creature — Squirrel Warrior

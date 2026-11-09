@@ -33,7 +33,6 @@ import {
   toHand,
   toLibrary,
   tokensNamed,
-  toStep,
   zone,
 } from "./harness.js";
 

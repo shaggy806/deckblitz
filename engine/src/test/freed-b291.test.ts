@@ -39,7 +39,7 @@ describe("Pixie Guide", () => {
     const [mine] = game.eventsOfType("dice-rolled");
     expect(mine.results).toHaveLength(1);
     expect(mine.ignored).toHaveLength(1);
-    expect(mine.ignored[0]).toBeLessThanOrEqual(mine.results[0]);
+    expect(mine.ignored![0]).toBeLessThanOrEqual(mine.results[0]);
 
     apply(game, { kind: "roll-dice", sides: 20, count: 1 }, B);
     const theirs = game.eventsOfType("dice-rolled")[1];

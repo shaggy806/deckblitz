@@ -16180,6 +16180,130 @@
    "family": "keyword:jump-start",
    "description": "A static granting jump-start to graveyard cards matching a filter (GraveyardKeyword has no jump-start).",
    "example": "Niv-Mizzet, Supreme"
+  },
+  "replacement:active-prevention-then": {
+   "family": "replacement:prevention-then-per-damage",
+   "example": "Ria Ivor, Bane of Bladehold: A resolved replacement-effect prevention shield prevents the damage but its 'then' made no Mites."
+  },
+  "effect:player-cant-gain-life-bound": {
+   "family": "effect:players-cant-gain-life-this-turn",
+   "example": "Flames of the Blood Hand: would-gain-life can't be bound to one named player (who is opponent or any-player only)."
+  },
+  "effect:extra-loyalty-activation-this-turn": {
+   "family": "stat:loyalty-activation-tracking",
+   "example": "The Chain Veil: Nothing grants one more loyalty activation that stacks per resolution (its ruling); loyaltyActivationsEachTurn is fixed."
+  },
+  "trigger:activates-ability-source-controlled-by-activator": {
+   "family": "trigger:activates-mana-ability",
+   "example": "Avalanche of Sector 7: 'An artifact they control' can't be tied to the activating player."
+  },
+  "trigger:activates-ability-source-any-zone": {
+   "family": "trigger:activates-mana-ability",
+   "example": "Kai Winn, Faithless Leader: The source filter requires a permanent, so a chosen-name card's activations in other zones are missed."
+  },
+  "trigger:becomes-crewed-first-time": {
+   "family": "trigger:becomes-crewed-trigger",
+   "example": "Mighty Servant of Leuk-o: on:event triggers aren't timingCountable, so firstTimeEachTurn never fires."
+  },
+  "condition:attacked-player-this-turn-by-filter": {
+   "family": "trigger:player-loses-game-trigger",
+   "example": "Ramses, Assassin Lord: No read of 'that player was attacked this turn by an Assassin you controlled'."
+  },
+  "amount:colors-among-exiled-with-source": {
+   "family": "bug:cda-cards-exiled-with",
+   "example": "Sunbird Standard // Sunbird Effigy: colorsAmong and eachColorAmong read only the battlefield."
+  },
+  "effect:add-mana-each-color-among-exiled": {
+   "family": "bug:cda-cards-exiled-with",
+   "example": "Sunbird Standard // Sunbird Effigy: colorsAmong and eachColorAmong read only the battlefield."
+  },
+  "filter:directly-above-in-graveyard": {
+   "family": "condition:creature-cards-above-in-graveyard",
+   "example": "Death Spark: aboveSourceInGraveyard means anywhere above, not directly above."
+  },
+  "cost:alternative-cost-discard-shares-color": {
+   "family": "cost:alternative-cost-for-all-spells",
+   "example": "Dream Halls: alternativeCostForSpells takes mana only."
+  },
+  "cost:alternative-cost-generic-equal-spell-mana-value": {
+   "family": "cost:alternative-cost-for-spells-limits",
+   "example": "Kentaro, the Smiling Cat: alternativeCostForSpells.mana is a fixed string, so X = that spell's mana value can't be said."
+  },
+  "cost:exiled-card-effect-target": {
+   "family": "cost:exiled-card-ref",
+   "example": "Jhoira of the Ghitu: give-suspend's target {paid:'exiled'} didn't put the time counters on; reads like manaValueOf do work."
+  },
+  "filter:attached-to-enchanted-player": {
+   "family": "effect:curse-attach-player",
+   "example": "Curse of Misfortunes: A search can't compare with the Curses attached to the enchanted player."
+  },
+  "effect:return-auras-exile-if-would-leave": {
+   "family": "effect:return-auras-attached-to-chosen-creatures",
+   "example": "Storm Herald: return-from-graveyard's attachedTo has no exile-if-it-would-leave or delayed exile for the returned Auras."
+  },
+  "effect:token-copy-enters-attached": {
+   "family": "filter:attached-to-trigger-object",
+   "example": "Arna Kennerüd, Skycaptain: create-token-copy has no 'attached to that creature'; an Aura copy that can't attach isn't created (ruling)."
+  },
+  "filter:same-name-as-trigger-spell-target-slot": {
+   "family": "filter:same-name-as-trigger-spell",
+   "example": "Harness the Storm: A trigger's target slot with sameNameWith: trigger-object offered no target."
+  },
+  "filter:shares-creature-type-with-each-of-set": {
+   "family": "filter:shares-creature-type-with-this-way",
+   "example": "Cryptic Gateway: sharesCreatureTypeWith {paid:'tapped'} reads as sharing with any of the set, not each."
+  },
+  "condition:shares-color-with-produced-mana": {
+   "family": "trigger:tapped-for-mana-nonmana-trigger",
+   "example": "C.A.M.P.: No read of the colour of the mana a land produced."
+  },
+  "mechanic:coin-flip-doubling-stakes-loser-decides": {
+   "family": "mechanic:coin-flip-choose-to-stop",
+   "example": "Game of Chaos: No pass-indexed doubling amount; mayAgain only asks the controller, and here the loser decides."
+  },
+  "filter:attacking-you-or-your-planeswalker": {
+   "family": "effect:token-enters-blocking",
+   "example": "Mirror Match: attackingYou excludes planeswalkers and no filter covers both."
+  },
+  "effect:chosen-source-next-damage-doubled": {
+   "family": "replacement:double-damage-from-your-sources-this-turn",
+   "example": "Desperate Gambit: No shape doubles a chosen source's next damage; the source may be a spell (ruling)."
+  },
+  "replacement:mana-production-only-of-type": {
+   "family": "replacement:tap-for-mana-produces-colorless-instead",
+   "example": "Quarum Trench Gnomes: ManaProductionRule can't limit to white mana only (ruling)."
+  },
+  "replacement:damage-replaced-by-counter-removal-opponent-chooses": {
+   "family": "static:dont-lose-for-zero-life",
+   "example": "Soul Echo: Target opponent opts into each 1 damage removing a counter until your next upkeep."
+  },
+  "static:ward-doesnt-trigger": {
+   "family": "static:ignore-hexproof",
+   "example": "Nowhere to Run: No field stops ward triggering."
+  },
+  "zone:play-permission-when-you-do-rider": {
+   "family": "zone:cast-from-library-top-once-each-turn",
+   "example": "The Fourth Doctor: PlayTerms has no 'when you do' rider."
+  },
+  "replacement:token-event-becomes-with-decision": {
+   "family": "replacement:token-creation-replace-with-copies",
+   "example": "Esix, Fractal Bloom: A choice inside would-create-token's becomes loops until Game.advance's budget."
+  },
+  "cost:exile-from-graveyard-filter-x": {
+   "family": "effect:cost-exiled-cards-this-way",
+   "example": "Osgir, the Reconstructor: The cost's filter never sees the announced X, so 'an artifact card with mana value X' can only match mana value 0."
+  },
+  "amount:scavenge-power-in-graveyard": {
+   "family": "keyword:scavenge",
+   "example": "Dodgy Jalopy: Scavenge reads power from exile after the cost; the ruling is its power as it last existed in the graveyard."
+  },
+  "condition:attached-to-player-this-way": {
+   "family": "effect:curse-attach-player",
+   "example": "Lynde, Cheerful Tormentor: 'If you do' can't read an attach to a player: the this-way 'attached' doesn't see it, so she'd draw on a failed attach."
+  },
+  "keyword:kicker-x-minimum": {
+   "family": "keyword:kicker-x",
+   "example": "Thieving Skydiver: 'X can't be 0': kicker has no minimum X, so a kick for 0 still counts as kicked."
   }
  },
  "groups": [

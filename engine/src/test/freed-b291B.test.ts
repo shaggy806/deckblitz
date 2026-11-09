@@ -22,7 +22,6 @@ import {
   pickFromZone,
   pickModes,
   pickPermanents,
-  pickTargets,
   pt,
   ref,
   nextTurn,

@@ -521,6 +521,7 @@ section keeps only what to do next.
   leave trigger), Cait, Cage Brawler (two simultaneous discards; no scope names "you and defending player"), The Last Agni Kai ("until end of turn" mana keeping), Curse of
   Shaken Faith (other needs), Sudden Substitution (an exchange), Chef's Kiss (a random retarget), March of Burgeoning Life and March of Reckless Joy (their own effects). To
   check, likely authorable: Invert Polarity, Foreboding Steamboat, Last Chance, Aang, Airbending Master (airbend and upkeep lines unread).
+  **The freed queue is empty (B291, 2026-11-09):** the last 145 cards, 109 authored and 36 blocked on 32 narrow keys (`effect:player-cant-gain-life-bound` for Screaming Nemesis, Stigma Lasher and Flames of the Blood Hand; `amount:scavenge-power-in-graveyard`, `trigger:becomes-crewed-first-time` and `filter:directly-above-in-graveyard` two each). `cards:needs -- --stale` lists nothing until more keys land, so `next-theme` (theme 15) and then `build-family` are next.
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13
   to 2026-10-14). `npm run cards:needs -w engine -- --next 60` lists the next
