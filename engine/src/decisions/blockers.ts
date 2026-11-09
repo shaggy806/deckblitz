@@ -26,7 +26,7 @@ import {
   withinSingleBlockers,
 } from "../combat/blocking.js";
 import { blockTaxRates } from "../combat/tax.js";
-import { ableInCompany, blockCompanyOf } from "../combat/company.js";
+import { ableInCompany, blockCompanyOf, hasBlockCompany } from "../combat/company.js";
 import {
   blockedByAtMostOne,
   blockedOnlyByAll,
@@ -88,8 +88,29 @@ function blockersOffer(
     company: blockCompanyOf(restrictionsOf(ctx.state, ctx.registry, entry.blocker)) ?? undefined,
   }));
   const inCompany = limited.some((u) => u.company !== undefined);
-  const able = inCompany ? ableInCompany(limited, blockMost ?? undefined) : [];
-  const eligible = inCompany ? candidates.filter((entry) => able.includes(entry.blocker)) : candidates;
+  // Attackers that can't be blocked by more than one creature (Challenger
+  // Troll — rule 509.1b). A Craven Hulk's only companion can't stand beside it
+  // on one of those: it's no company, and each creature dropped may have been
+  // another's only companion.
+  const singleBlockerAttackers = attacking.filter((id) => blockedByAtMostOne(ctx.state, ctx.registry, id));
+  const single = new Set(singleBlockerAttackers);
+  let eligible = candidates;
+  if (inCompany) {
+    for (;;) {
+      const units = limited.filter((u) => eligible.some((e) => e.blocker === u.id));
+      const able = ableInCompany(units, blockMost ?? undefined);
+      const stays = (entry: (typeof candidates)[number]): boolean => {
+        const company = units.find((u) => u.id === entry.blocker)?.company;
+        return (
+          able.includes(entry.blocker) &&
+          (company === undefined || hasBlockCompany(entry, eligible, single, company.least))
+        );
+      };
+      const next = eligible.filter(stays);
+      if (next.length === eligible.length) break;
+      eligible = next;
+    }
+  }
   for (const { id, company } of limited) if (company !== undefined) blockCompany[id] = company.least;
   // Menace, or "can't be blocked except by N or more creatures" (rule
   // 702.111b, 509.1b): 0 or N creatures on it.
@@ -102,9 +123,6 @@ function blockersOffer(
   const blockedByAll = attacking.filter(
     (id) => blockedOnlyByAll(ctx.state, ctx.registry, id) && eligible.some((e) => e.canBlock.includes(id)),
   );
-  // Attackers that can't be blocked by more than one creature (Challenger
-  // Troll — rule 509.1b).
-  const singleBlockerAttackers = attacking.filter((id) => blockedByAtMostOne(ctx.state, ctx.registry, id));
   // Attackers this defender's creatures are *forced* to block (Lure — rule
   // 509.1c). One with menace too is forced only in pairs; `blockingViolations`
   // works out how many blocks that comes to. One that can be blocked by only

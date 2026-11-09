@@ -57,6 +57,53 @@ export function tokensFitting(units: readonly CompanyUnit[], size: number): numb
   return units.reduce((n, u) => n + (fitsCompany(u.company, size) ? u.tokens : 0), 0);
 }
 
+/** One creature, or a token stack, as a blocker its fellows could stand beside. */
+export interface BlockerSeat {
+  readonly blocker: ObjectId;
+  readonly copies?: number;
+  readonly canBlock: readonly ObjectId[];
+}
+
+/**
+ * Whether `entry` could block with `least` other creatures blocking beside it,
+ * out of `all` (the attackers `single` hold one creature each): the creatures
+ * who could stand beside it on something. A creature that can only block the
+ * attacker it would be alone on is no company (rule 509.1b).
+ */
+export function hasBlockCompany(
+  entry: BlockerSeat,
+  all: readonly BlockerSeat[],
+  single: ReadonlySet<ObjectId>,
+  least: number,
+): boolean {
+  // Its own other tokens are company too.
+  const others = all.flatMap((e) =>
+    e.blocker !== entry.blocker
+      ? [e]
+      : (e.copies ?? 1) > 1
+        ? [{ ...e, copies: (e.copies ?? 1) - 1 }]
+        : [],
+  );
+  return entry.canBlock.some((attacker) => {
+    let beside = 0;
+    const taken = new Set<ObjectId>(single.has(attacker) ? [attacker] : []);
+    for (const other of others) {
+      if (other.canBlock.some((a) => !single.has(a))) {
+        beside += other.copies ?? 1;
+        continue;
+      }
+      // Only attackers holding one: one token each, an attacker apiece.
+      for (let token = 0; token < (other.copies ?? 1); token += 1) {
+        const seat = other.canBlock.find((a) => !taken.has(a));
+        if (seat === undefined) break;
+        taken.add(seat);
+        beside += 1;
+      }
+    }
+    return beside >= least;
+  });
+}
+
 /**
  * Those of `units` that can be declared at all: each in some group of a size
  * that everyone in it allows. A lone Mogg Flunkies can't, nor two Orcish
