@@ -37,11 +37,11 @@ const DISPLAY = defineCard({
 const registry = createDefaultRegistry().register(DISPLAY);
 
 /** The objects `card` could target for `player`. */
-const targetsFor = (game: Game, card: ObjectId, player = B): unknown[] => {
+const targetsFor = (game: Game, card: ObjectId, player = B): readonly unknown[] => {
   const offer = game.legalActions(player).find((a): a is Cast => a.kind === "cast-spell" && a.card === card);
   return offer?.targetOptions?.[0] ?? [];
 };
-const has = (options: unknown[], id: ObjectId): boolean => options.some((o) => (o as { object?: ObjectId }).object === id);
+const has = (options: readonly unknown[], id: ObjectId): boolean => options.some((o) => (o as { object?: ObjectId }).object === id);
 
 /** Alice casts Display, and a Bears she leaves on the stack, then passes so Bob can respond. */
 const displayed = () => {
