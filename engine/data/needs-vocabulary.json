@@ -16361,6 +16361,9 @@
   "bug:copy-exception-static-self-reference": {
    "family": "effect:copy-exception-static-ability",
    "example": "Firion, Wild Rose Warrior: A create-token-copy exception's static can't say 'this Equipment': bindDynamicCompares binds isSource inside it to the resolving ability's source (Firion), and abilityCostModifiers reads printed statics only."
+  },
+  "bug:x-cost-affordability-slow-on-big-board": {
+   "example": "Ascend from Avernus: Authored and held back: Game.maxAffordableX's loop over payment plans took its situation-fuzz board (seed 51) to ~29 s of CPU, past the 30 s limit, in two verify runs. The card's own shape is return-from-graveyard with manaValue lte x."
   }
  },
  "groups": [

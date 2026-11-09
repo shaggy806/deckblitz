@@ -1374,7 +1374,6 @@ import _poolAryelKnightOfWindgrace from "./pool/aryel-knight-of-windgrace.js";
 import _poolArzakon from "./pool/arzakon.js";
 import _poolAsForetold from "./pool/as-foretold.js";
 import _poolAsariCaptain from "./pool/asari-captain.js";
-import _poolAscendFromAvernus from "./pool/ascend-from-avernus.js";
 import _poolAscendantAcolyte from "./pool/ascendant-acolyte.js";
 import _poolAscendantDustspeaker from "./pool/ascendant-dustspeaker.js";
 import _poolAscendantEvincar from "./pool/ascendant-evincar.js";
@@ -33537,7 +33536,6 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolArzakon,
   _poolAsForetold,
   _poolAsariCaptain,
-  _poolAscendFromAvernus,
   _poolAscendantAcolyte,
   _poolAscendantDustspeaker,
   _poolAscendantEvincar,
@@ -65713,7 +65711,6 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/arzakon": _poolArzakon,
   "pool/as-foretold": _poolAsForetold,
   "pool/asari-captain": _poolAsariCaptain,
-  "pool/ascend-from-avernus": _poolAscendFromAvernus,
   "pool/ascendant-acolyte": _poolAscendantAcolyte,
   "pool/ascendant-dustspeaker": _poolAscendantDustspeaker,
   "pool/ascendant-evincar": _poolAscendantEvincar,

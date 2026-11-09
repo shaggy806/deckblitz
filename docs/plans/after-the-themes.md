@@ -33,7 +33,7 @@ B274 found about a third of its flagged cards needed no engine code.
 1. **Theme 15, then `author-freed`.** The last theme (delayed triggers; `next-theme`), which ends
    the 10-member `DelayedTriggerTiming`. Then the cards it frees, with the 18 cards already fully
    freed on 2026-11-09.
-2. **Re-attempt before building.** **Done 2026-11-09 (B294):** 245 cards (231 + 18, 4 on both), 120 authored, 125 blocked on 124 narrow keys, so about half the records were out of date. Both records below corrected.
+2. **Re-attempt before building.** **Done 2026-11-09 (B294):** 245 cards (231 + 18, 4 on both), 119 authored, 126 blocked on 125 narrow keys, so about half the records were out of date. Both records below corrected.
    Take the 230 blocked cards in the top 5,000 and the 18 missing
    commanders, and try to write each against today's vocabulary before building anything for it
    (the `author-recheck` lists are the tool). Give whatever is still blocked a key that's true now.

@@ -218,20 +218,6 @@ describe("B294 group D", () => {
     expect(types(game, aclazotz)).toContain("creature");
   });
 
-  it("Ascend from Avernus: X reaches the filter", () => {
-    const { game } = table();
-    lands(game, "Plains", 6);
-    const bears = toGraveyard(game, "Grizzly Bears");
-    const jace = toGraveyard(game, "Jace Beleren");
-    const angel = toGraveyard(game, "Serra Angel");
-    const spell = toHand(game, "Ascend from Avernus");
-    cast(game, spell, { x: 3 });
-    expect(zone(game, bears)).toBe("battlefield");
-    expect(zone(game, jace)).toBe("battlefield");
-    expect(zone(game, angel)).toBe("graveyard");
-    expect(zone(game, spell)).toBe("exile");
-  });
-
   it("Lifestream's Blessing: X is fixed as cast; life only from exile", () => {
     const { game } = table();
     lands(game, "Forest", 6);
