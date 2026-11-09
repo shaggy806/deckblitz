@@ -5035,7 +5035,9 @@ export class Game {
           ? this.libraryTopMinX(player, card, face ?? 0, this.xPaymentCeiling(player))
           : altOffer?.suspendCost === true && def.suspend?.n === "x"
             ? 1
-            : 0;
+            : kicked && def.kicker?.minX !== undefined
+              ? def.kicker.minX
+              : 0;
       if (leastX === null) continue;
       const xFloor: number = leastX;
       const xFilter =
@@ -18129,6 +18131,10 @@ export class Game {
       return `${def.name} can't be kicked ${kicked} times`;
     }
     if (kicked && def.kicker === null) return `${def.name} has no kicker`;
+    // "Kicker {X}. X can't be 0" (Thieving Skydiver).
+    if (kicked && def.kicker?.minX !== undefined && xValue < def.kicker.minX) {
+      return `${def.name} can't be kicked with X less than ${def.kicker.minX}`;
+    }
     // A gift is promised to an opponent (rule 702.174a): none left, none.
     if (kicked && def.kicker?.keyword === "gift" && this.giftCandidates(player).length === 0) {
       return `${player} has no opponent to promise ${def.name}'s gift to`;

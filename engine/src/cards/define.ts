@@ -4234,6 +4234,9 @@ export interface CardDefinition {
    */
   readonly kicker: {
     readonly cost: string;
+    /** "Kicker {X}. X can't be 0": the least X the kicker may be paid with
+     * (Thieving Skydiver). Unkicked, X doesn't matter. */
+    readonly minX?: number;
     readonly targets?: readonly TargetSpec[];
     readonly effect?: EffectSpec;
     /**
