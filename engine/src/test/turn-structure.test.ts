@@ -124,6 +124,18 @@ describe("an additional combat phase after this one", () => {
     expect(game.eventsOfType("additional-combat-phase")).toHaveLength(1);
   });
 
+  it("from a precombat main, withMain runs M C+ M C M: the added main directly after the added combat (rule 500.8)", () => {
+    const { game } = setUp();
+    game.debugApplyEffect(A, { kind: "additional-combat", afterThisPhase: true, withMain: true });
+    toEndStep(game);
+    const phases = game
+      .eventsOfType("step-began")
+      .map((e) => e.step)
+      .filter((step) => step === "begin-combat" || step === "precombat-main" || step === "postcombat-main");
+    expect(phases).toEqual(["precombat-main", "begin-combat", "postcombat-main", "begin-combat", "postcombat-main"]);
+    expect(game.eventsOfType("additional-combat-phase")).toHaveLength(1);
+  });
+
   it("Najeela: …followed by an additional main phase", () => {
     const { game, a } = setUp();
     game.debugSpawn(NAJEELA, A, "battlefield");

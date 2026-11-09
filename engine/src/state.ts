@@ -3017,7 +3017,10 @@ export type AddedPhase =
        * main phase before it (rule 500.8), each of which comes first. */
       readonly regular?: true;
     }
-  | { readonly kind: "upkeep" };
+  | { readonly kind: "upkeep" }
+  /** The additional main phase of a `withMain` combat, directly after it
+   * (rule 500.8) with more phases still to come behind it. */
+  | { readonly kind: "main" };
 
 export interface TurnState {
   number: number;
@@ -3039,6 +3042,10 @@ export interface TurnState {
    * `"upkeep"`): when it ends, the turn goes on to whatever followed the
    * combat phase it came after, never to a draw step. */
   addedUpkeep?: boolean;
+  /** The `"postcombat-main"` step under way is an `AddedPhase` of kind
+   * `"main"`: a combat queued behind it doesn't end the turn, whose own
+   * main phase is still to come. */
+  addedMain?: boolean;
   /** The combat phase under way was added after the main phase that follows
    * combat (Grim Reaper's Sprint cast there): when it ends, the turn goes on
    * to the end step rather than to another main phase. */

@@ -9037,6 +9037,7 @@ export class Game {
     delete this.state.turnUnblockedAssignments;
     delete this.state.phasesAfterThisCombat;
     delete this.state.turn.addedUpkeep;
+    delete this.state.turn.addedMain;
     delete this.state.turn.endsAfterAddedCombat;
     delete this.state.turn.skipsThisTurn;
     delete this.state.turn.noCombat;
@@ -9762,6 +9763,7 @@ export class Game {
     delete this.state.extraMainPhases;
     delete this.state.phasesAfterThisCombat;
     delete this.state.turn.addedUpkeep;
+    delete this.state.turn.addedMain;
     delete this.state.turn.endsAfterAddedCombat;
     delete this.state.turn.cleanupHadPriority;
     delete this.state.turn.extraEndSteps;
@@ -9804,18 +9806,26 @@ export class Game {
     // its own with its untap and draw steps skipped (rules 500.10, 500.11).
     const addedUpkeepEnding = this.state.turn.step === "upkeep" && this.state.turn.addedUpkeep === true;
     if (addedUpkeepEnding) delete this.state.turn.addedUpkeep;
+    const addedMainEnding = this.state.turn.step === "postcombat-main" && this.state.turn.addedMain === true;
+    if (addedMainEnding) delete this.state.turn.addedMain;
     const after = this.state.phasesAfterThisCombat;
     if ((this.state.turn.step === "end-combat" || addedUpkeepEnding) && after !== undefined && after.length > 0) {
       const [next, ...rest] = after;
-      if (rest.length > 0) this.state.phasesAfterThisCombat = rest;
-      else delete this.state.phasesAfterThisCombat;
+      if (next.kind === "main") {
+        if (rest.length > 0) this.state.phasesAfterThisCombat = rest;
+        else delete this.state.phasesAfterThisCombat;
+        this.state.turn.addedMain = true;
+        this.enterStep("postcombat-main");
+        return;
+      }
       if (next.kind === "upkeep") {
+        if (rest.length > 0) this.state.phasesAfterThisCombat = rest;
+        else delete this.state.phasesAfterThisCombat;
         this.state.turn.addedUpkeep = true;
         this.enterStep("upkeep");
         return;
       }
-      if (next.withMain) this.state.extraMainPhases = (this.state.extraMainPhases ?? 0) + 1;
-      this.beginQueuedCombat(next);
+      this.takeQueuedCombat(next, rest);
       return;
     }
     // An additional combat phase made in the main phase before combat ("if
@@ -9824,10 +9834,7 @@ export class Game {
     // main phase, before the turn's own, which goes behind whatever else this
     // phase added and is an entry of its own now (rule 500.8).
     if (this.state.turn.step === "precombat-main" && after !== undefined && after[0]?.kind === "combat") {
-      const next = after[0];
-      this.state.phasesAfterThisCombat = [...after.slice(1), { kind: "combat", withMain: false, regular: true }];
-      if (next.withMain) this.state.extraMainPhases = (this.state.extraMainPhases ?? 0) + 1;
-      this.beginQueuedCombat(next);
+      this.takeQueuedCombat(after[0], [...after.slice(1), { kind: "combat", withMain: false, regular: true }]);
       return;
     }
     // One made in the main phase after combat: owed straight after this main
@@ -9836,10 +9843,16 @@ export class Game {
     // main phase", which is the main phase the turn reaches next anyway.
     if (this.state.turn.step === "postcombat-main" && after !== undefined && after[0]?.kind === "combat") {
       const next = after[0];
-      if (after.length > 1) this.state.phasesAfterThisCombat = after.slice(1);
-      else delete this.state.phasesAfterThisCombat;
-      if (!next.withMain) this.state.turn.endsAfterAddedCombat = true;
-      this.beginQueuedCombat(next);
+      const rest = after.slice(1);
+      // An added main phase with the turn's own still to come isn't the last.
+      if ((!next.withMain || rest.length > 0) && !addedMainEnding) this.state.turn.endsAfterAddedCombat = true;
+      if (next.withMain && rest.length === 0) {
+        // The main phase the turn reaches next anyway.
+        delete this.state.phasesAfterThisCombat;
+        this.beginQueuedCombat(next);
+        return;
+      }
+      this.takeQueuedCombat(next, rest);
       return;
     }
     if (this.state.turn.step === "end-combat" && this.state.turn.endsAfterAddedCombat === true) {
@@ -47988,6 +48001,18 @@ controlledBy,
     attacker.blocked = true;
     invalidateComputedCache();
     this.emit({ type: "attacker-blocked", attacker: id, blockers: [...attacker.blockedBy] });
+  }
+
+  /** `next`, a combat phase off the head of `phasesAfterThisCombat`, begins, the
+   * queue left as `rest`. Its "followed by an additional main phase" goes
+   * directly after it (rule 500.8), ahead of whatever else is queued; with
+   * nothing queued it's owed after the turn's own main phase instead. */
+  private takeQueuedCombat(next: Extract<AddedPhase, { kind: "combat" }>, rest: readonly AddedPhase[]): void {
+    const queue: AddedPhase[] = next.withMain && rest.length > 0 ? [{ kind: "main" }, ...rest] : [...rest];
+    if (queue.length > 0) this.state.phasesAfterThisCombat = queue;
+    else delete this.state.phasesAfterThisCombat;
+    if (next.withMain && rest.length === 0) this.state.extraMainPhases = (this.state.extraMainPhases ?? 0) + 1;
+    this.beginQueuedCombat(next);
   }
 
   /** A combat phase from `phasesAfterThisCombat` begins: its mark in place for
