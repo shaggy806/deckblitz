@@ -21,7 +21,7 @@ export default defineCard({
           { kind: "return-to-hand-all", filter: { subtype: "Aura", attachedToObject: 0 } },
           {
             kind: "delayed-trigger",
-            at: "next-upkeep",
+            at: { step: "upkeep" },
             text: "Draw a card at the beginning of the next turn's upkeep.",
             effect: { kind: "draw", amount: 1 },
           },

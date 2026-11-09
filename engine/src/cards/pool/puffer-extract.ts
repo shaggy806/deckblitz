@@ -19,7 +19,7 @@ export default defineCard({
           { kind: "modify-pt", target: 0, power: "x", toughness: "x", duration: "end-of-turn" },
           {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             effect: { kind: "destroy", target: 0 },
             text: "Destroy it at the beginning of the next end step.",
           },

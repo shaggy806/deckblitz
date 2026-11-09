@@ -41,7 +41,7 @@ export default defineCard({
               { kind: "grant-keyword", target: 0, keyword: "haste", duration: "permanent" },
               {
                 kind: "delayed-trigger",
-                at: "your-next-end-step",
+                at: { step: "end", whose: "you" },
                 effect: { kind: "exile", target: 0 },
                 text: "Exile the creature Kheru Lich Lord returned.",
               },

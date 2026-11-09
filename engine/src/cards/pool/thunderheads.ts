@@ -20,7 +20,7 @@ export default defineCard({
       { kind: "create-token", token: "Weird Token", count: 1, separate: true },
       {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         about: "created",
         effect: { kind: "exile", target: 0 },
         text: "Exile it at the beginning of the next end step.",

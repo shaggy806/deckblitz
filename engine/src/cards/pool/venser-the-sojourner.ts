@@ -29,7 +29,7 @@ export default defineCard({
         kind: "flicker",
         target: 0,
         underYourControl: true,
-        returnAt: "next-end-step",
+        returnAt: { step: "end" },
         returnText: "Return the exiled card to the battlefield under your control.",
       },
       resolve: null,

@@ -29,7 +29,7 @@ export default defineCard({
           targets: ["opponent"],
           effect: {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             effect: { kind: "put-onto-battlefield", target: "trigger-object", under: { target: 0 } },
             text: "That player puts this card from its owner's graveyard onto the battlefield under their control.",
           },

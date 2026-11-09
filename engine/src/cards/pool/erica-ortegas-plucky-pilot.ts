@@ -36,7 +36,7 @@ export default defineCard({
             condition: { kind: "this-way", what: "put-onto-battlefield" },
             then: {
               kind: "delayed-trigger",
-              at: "next-end-step",
+              at: { step: "end" },
               effect: {
                 kind: "choose-permanents",
                 filter: { type: "land", controlledBy: "you" },

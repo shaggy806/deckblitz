@@ -34,7 +34,7 @@ export default defineCard({
         attacking: { player: "trigger-player", orTheirPlaneswalker: true },
         then: {
           kind: "delayed-trigger",
-          at: "next-end-step",
+          at: { step: "end" },
           text: "Return that creature to its owner's hand.",
           effect: { kind: "return-to-hand", target: 0 },
         },

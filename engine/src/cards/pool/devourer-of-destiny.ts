@@ -15,7 +15,7 @@ export default defineCard({
   toughness: 6,
   text: `${REVEAL}\nWhen you cast this spell, exile target permanent that's one or more colors.`,
   openingHandReveal: {
-    at: "your-next-upkeep",
+    at: { step: "upkeep", whose: "you" },
     effect: {
       kind: "look-and-choose",
       zone: "library",

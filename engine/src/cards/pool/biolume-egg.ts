@@ -30,7 +30,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         effect: { kind: "put-onto-battlefield", target: "trigger-object", transformed: true },
         text: "Return Biolume Egg to the battlefield transformed under its owner's control.",
       },

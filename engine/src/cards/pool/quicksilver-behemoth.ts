@@ -12,7 +12,7 @@ const returnAtEndOfCombat = (on: "attacks" | "blocks"): TriggeredAbility => ({
   targets: [],
   effect: {
     kind: "delayed-trigger",
-    at: "end-of-combat",
+    at: { step: "end-combat" },
     effect: { kind: "return-to-hand", target: "source" },
     text: "Return Quicksilver Behemoth to its owner's hand.",
   },

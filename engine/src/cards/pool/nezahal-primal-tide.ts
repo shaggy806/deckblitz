@@ -37,7 +37,7 @@ export default defineCard({
       effect: {
         kind: "flicker",
         target: "source",
-        returnAt: "next-end-step",
+        returnAt: { step: "end" },
         tapped: true,
         returnText: "Return Nezahal, Primal Tide to the battlefield tapped under its owner's control.",
       },

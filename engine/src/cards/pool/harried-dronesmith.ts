@@ -25,7 +25,7 @@ export default defineCard({
           { kind: "create-token", token: "Thopter Token", count: 1, gainUntilEndOfTurn: ["haste"], separate: true },
           {
             kind: "delayed-trigger",
-            at: "your-next-end-step",
+            at: { step: "end", whose: "you" },
             about: "created",
             effect: { kind: "sacrifice-target", target: 0 },
             text: "Sacrifice it at the beginning of your next end step.",

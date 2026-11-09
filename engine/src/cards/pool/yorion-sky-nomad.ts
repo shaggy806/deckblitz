@@ -34,7 +34,7 @@ export default defineCard({
         then: {
           kind: "flicker",
           target: { from: 0 },
-          returnAt: "next-end-step",
+          returnAt: { step: "end" },
           returnText: "Return those cards to the battlefield.",
         },
         prompt: "Exile any number of other nonland permanents you own and control",

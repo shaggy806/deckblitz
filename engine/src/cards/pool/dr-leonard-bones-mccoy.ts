@@ -53,7 +53,7 @@ export default defineCard({
               at: { leaves: 0, to: ["graveyard"], thisTurn: true },
               effect: {
                 kind: "delayed-trigger",
-                at: "next-end-step",
+                at: { step: "end" },
                 effect: {
                   kind: "put-onto-battlefield",
                   target: "trigger-object",

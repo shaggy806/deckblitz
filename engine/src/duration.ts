@@ -203,7 +203,15 @@ export type DamageRuleDuration = Extract<Duration, "end-of-turn" | "until-your-n
 
 /** How long a "whenever" watch lasts (`DelayedWhenever`): this turn when
  * omitted. */
-export type WatchDuration = Extract<Duration, "until-your-next-turn" | "until-end-of-combat" | "permanent">;
+export type WatchDuration = Extract<
+  Duration,
+  | "end-of-turn"
+  | "until-your-next-turn"
+  | "until-end-of-your-next-turn"
+  | "until-end-of-combat"
+  | "permanent"
+  | "while-exiled"
+>;
 
 
 /**

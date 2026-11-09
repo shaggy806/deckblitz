@@ -603,6 +603,7 @@ import _poolPhyrexianBoon from "../pool/phyrexian-boon.js";
 import _poolPhyrexianCensor from "../pool/phyrexian-censor.js";
 import _poolPhyrexianSlayer from "../pool/phyrexian-slayer.js";
 import _poolPitilessPlunderer from "../pool/pitiless-plunderer.js";
+import _poolPlanarGuide from "../pool/planar-guide.js";
 import _poolPlanarIncision from "../pool/planar-incision.js";
 import _poolPlatedPegasus from "../pool/plated-pegasus.js";
 import _poolPloverKnights from "../pool/plover-knights.js";
@@ -1579,6 +1580,7 @@ const shard: CardShard = {
     _poolPhyrexianCensor,
     _poolPhyrexianSlayer,
     _poolPitilessPlunderer,
+    _poolPlanarGuide,
     _poolPlanarIncision,
     _poolPlatedPegasus,
     _poolPloverKnights,

@@ -34,7 +34,7 @@ export default defineCard({
             { kind: "add-counter", target: 0, counter: "charge", amount: 10 },
             {
               kind: "delayed-trigger",
-              at: "next-end-step",
+              at: { step: "end" },
               about: "counters-put",
               effect: { kind: "remove-counter", target: 0, counter: "charge", amount: 10 },
               text: "Remove ten charge counters from it.",

@@ -30,7 +30,7 @@ export default defineCard({
               condition: { kind: "target", index: 0, filter: { attachedToObject: 1 } },
               then: {
                 kind: "delayed-trigger",
-                at: "next-end-step",
+                at: { step: "end" },
                 effect: { kind: "unattach", target: 0 },
                 text: "At the beginning of the next end step, unattach that Equipment.",
               },

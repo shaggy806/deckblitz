@@ -35,7 +35,7 @@ export default defineCard({
           },
           {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             about: "created",
             text: "Exile that token unless Sauron is your Ring-bearer.",
             // "Unless Sauron is your Ring-bearer" as this resolves — the same

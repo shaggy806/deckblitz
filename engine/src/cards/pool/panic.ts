@@ -23,7 +23,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "restrict", target: 0, restrictions: ["cant-block"] },
-      { kind: "delayed-trigger", at: "next-upkeep", effect: { kind: "draw", amount: 1 }, text: "Draw a card." },
+      { kind: "delayed-trigger", at: { step: "upkeep" }, effect: { kind: "draw", amount: 1 }, text: "Draw a card." },
     ],
   },
 });

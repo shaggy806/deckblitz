@@ -10,7 +10,7 @@ const returnAtEndOfCombat = (on: "attacks" | "blocks"): TriggeredAbility => ({
   targets: [],
   effect: {
     kind: "delayed-trigger",
-    at: "end-of-combat",
+    at: { step: "end-combat" },
     effect: { kind: "return-to-hand", target: "source" },
     text: "Return Windscouter to its owner's hand.",
   },

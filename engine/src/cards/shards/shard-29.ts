@@ -704,6 +704,7 @@ import _poolScytheOfTheWretched from "../pool/scythe-of-the-wretched.js";
 import _poolSeaSpirit from "../pool/sea-spirit.js";
 import _poolSeaSprite from "../pool/sea-sprite.js";
 import _poolSearchForSurvivors from "../pool/search-for-survivors.js";
+import _poolSeasonOfTheBold from "../pool/season-of-the-bold.js";
 import _poolSeasonOfTheBurrow from "../pool/season-of-the-burrow.js";
 import _poolSeasonedPyromancer from "../pool/seasoned-pyromancer.js";
 import _poolSeasonedTactician from "../pool/seasoned-tactician.js";
@@ -1695,6 +1696,7 @@ const shard: CardShard = {
     _poolSeaSpirit,
     _poolSeaSprite,
     _poolSearchForSurvivors,
+    _poolSeasonOfTheBold,
     _poolSeasonOfTheBurrow,
     _poolSeasonedPyromancer,
     _poolSeasonedTactician,

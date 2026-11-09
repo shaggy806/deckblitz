@@ -21,7 +21,7 @@ export default defineCard({
       { kind: "create-token", token: "Construct Token (Ancient Stone Idol)", count: 1 },
       {
         kind: "delayed-trigger",
-        at: "your-next-end-step",
+        at: { step: "end", whose: "you" },
         about: "created",
         effect: { kind: "exile", target: 0 },
         text: "Exile it at the beginning of your next end step.",

@@ -28,7 +28,7 @@ export default defineCard({
           { kind: "grant-keyword", target: 0, keyword: "haste", duration: "permanent" },
           {
             kind: "delayed-trigger",
-            at: "your-next-end-step",
+            at: { step: "end", whose: "you" },
             effect: { kind: "return-to-hand", target: 0 },
             text: "Return the Vehicle Greasefang returned to its owner's hand.",
           },

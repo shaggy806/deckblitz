@@ -17,7 +17,7 @@ export default defineCard({
       { kind: "create-token", token: "3/1 Red Elemental Token", count: 2 },
       {
         kind: "delayed-trigger",
-        at: "your-next-upkeep",
+        at: { step: "upkeep", whose: "you" },
         about: "created",
         effect: {
           kind: "sequence",

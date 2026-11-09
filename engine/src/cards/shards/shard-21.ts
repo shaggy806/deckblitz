@@ -282,6 +282,7 @@ import _poolFestivalCrasher from "../pool/festival-crasher.js";
 import _poolFestival from "../pool/festival.js";
 import _poolFeywildVisitor from "../pool/feywild-visitor.js";
 import _poolFieryCannonade from "../pool/fiery-cannonade.js";
+import _poolFightForTheThrone from "../pool/fight-for-the-throne.js";
 import _poolFiligreeAttendant from "../pool/filigree-attendant.js";
 import _poolFinalStingFaerie from "../pool/final-sting-faerie.js";
 import _poolFireLitThicket from "../pool/fire-lit-thicket.js";
@@ -1232,6 +1233,7 @@ const shard: CardShard = {
     _poolFestival,
     _poolFeywildVisitor,
     _poolFieryCannonade,
+    _poolFightForTheThrone,
     _poolFiligreeAttendant,
     _poolFinalStingFaerie,
     _poolFireLitThicket,

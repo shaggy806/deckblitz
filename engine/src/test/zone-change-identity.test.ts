@@ -66,7 +66,7 @@ const registry = createDefaultRegistry()
         targets: [],
         effect: {
           kind: "delayed-trigger",
-          at: "next-end-step",
+          at: { step: "end" },
           effect: { kind: "return-to-hand", target: "source", from: "graveyard" },
           text: "Return it to its owner's hand.",
         },

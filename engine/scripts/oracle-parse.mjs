@@ -4806,7 +4806,7 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`exile all tokens created with (?:~|it) at the beginning of the next end step`).exec(s))) {
     return {
       kind: "delayed-trigger",
-      at: "next-end-step",
+      at: { step: "end" },
       effect: { kind: "exile-all", filter: { token: true, createdWithSource: true } },
       text: "Exile all tokens created with it.",
     };
@@ -6898,7 +6898,7 @@ export function parseSentence(sentence, ctx) {
     return { kind: "sequence", effects: [{ kind: "draw", amount: 1 }, { kind: "lose-life", amount: amount(m[1]) }] };
   }
   if (re("draw a card at the beginning of the next turn's upkeep").test(s)) {
-    return { kind: "delayed-trigger", at: "next-upkeep", effect: { kind: "draw", amount: 1 }, text: "Draw a card." };
+    return { kind: "delayed-trigger", at: { step: "upkeep" }, effect: { kind: "draw", amount: 1 }, text: "Draw a card." };
   }
 
   // Counterspells with a tax (Mana Leak): the spell's controller decides.
@@ -6951,7 +6951,7 @@ export function parseSentence(sentence, ctx) {
   }
   // Rocket Launcher, Crazed Armodon.
   if (/^destroy ~ at the beginning of the next end step\.$/i.test(s)) {
-    return { kind: "delayed-trigger", at: "next-end-step", text: "Destroy ~.", effect: { kind: "destroy", target: "source" } };
+    return { kind: "delayed-trigger", at: { step: "end" }, text: "Destroy ~.", effect: { kind: "destroy", target: "source" } };
   }
   // "Then discard a card unless you attacked this turn" (Chart a Course),
   // "… unless there are five or more mana values among cards in your
@@ -7163,7 +7163,7 @@ export function parseSentence(sentence, ctx) {
         const word = m[1].toLowerCase();
         return {
           kind: "delayed-trigger",
-          at: "end-of-combat",
+          at: { step: "end-combat" },
           effect: { kind: word, target: it },
           text: `${word.charAt(0).toUpperCase()}${word.slice(1)} that creature.`,
         };
@@ -9126,7 +9126,7 @@ export function parseEffect(text, outer) {
           effects: [
             { kind: "put-onto-battlefield", target: 0 },
             { kind: "grant-keyword", target: 0, keyword: "haste", duration: "end-of-turn" },
-            { kind: "delayed-trigger", at: "next-end-step", effect: { kind: "exile", target: 0 }, text: "Exile it." },
+            { kind: "delayed-trigger", at: { step: "end" }, effect: { kind: "exile", target: 0 }, text: "Exile it." },
           ],
         },
       },
@@ -10378,7 +10378,7 @@ export function parseEffect(text, outer) {
       const conditionally = /^if it's a creature/i.test(sentence);
       const delayed = {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         text: `Put a ${laterPrevented[1]} counter on ${conditionally ? "it" : "that creature"} for each 1 damage prevented this way.`,
         effect: { kind: "add-counter", target: 0, counter: laterPrevented[1], amount: { damagePreventedThisWay: true } },
       };
@@ -11057,7 +11057,7 @@ function handsFaceDownAt(sentences, i, ctx) {
         { kind: "draw", amount: 7, who: "each-player" },
         {
           kind: "delayed-trigger",
-          at: "next-end-step",
+          at: { step: "end" },
           about: "exiled",
           orNone: true,
           effect: { kind: "sequence", effects: [{ kind: "discard-hand", who: "each-player" }, back] },
@@ -11076,7 +11076,7 @@ function handsFaceDownAt(sentences, i, ctx) {
         exile("you"),
         {
           kind: "delayed-trigger",
-          at: "next-end-step",
+          at: { step: "end" },
           about: "exiled",
           orNone: true,
           effect: { kind: "sequence", effects: [back, { kind: "draw", amount: 1 }] },
@@ -11096,8 +11096,7 @@ function handsFaceDownAt(sentences, i, ctx) {
         exile(target),
         {
           kind: "delayed-trigger",
-          at: "your-next-turn-end-step",
-          turnOf: { target },
+          at: { step: "end", whose: { target }, which: "next-turn" },
           about: "exiled",
           effect: back,
           text: "That player returns those cards to their hand.",
@@ -11144,7 +11143,7 @@ function handsFaceDownAt(sentences, i, ctx) {
       effects: [
         {
           kind: "delayed-trigger",
-          at: "your-next-turn-end-step",
+          at: { step: "end", whose: "you", which: "next-turn" },
           about: "created",
           effect: { kind: "sacrifice-target", target: 0 },
           text: "Sacrifice that token.",
@@ -11168,7 +11167,7 @@ function blocksAtEndOfCombatAt(sentences, i, ctx) {
   return {
     effect: {
       kind: "delayed-trigger",
-      at: "end-of-combat-this-turn",
+      at: { step: "end-combat", which: "this-turn" },
       effect: { kind: "destroy-all", filter: { type: "creature", blockedThisTurn: { relation, of: target } } },
       text: `Destroy all creatures that ${then[1]} this turn.`,
     },
@@ -11669,7 +11668,7 @@ function forcedAttackAt(sentences, i, ctx) {
         { kind: "restrict", target, restrictions: ["must-attack"] },
         {
           kind: "delayed-trigger",
-          at: "next-end-step",
+          at: { step: "end" },
           text: "Destroy it if it didn't attack this turn.",
           effect: {
             kind: "conditional",
@@ -12312,7 +12311,7 @@ function exiledUntilOrWhileAt(sentences, i) {
           {
             kind: "delayed-trigger",
             about: "exiled",
-            at: { whenever: { on: "step-begins", step: "upkeep", who: "any" }, until: "permanent", whileAnyExiled: true },
+            at: { whenever: { on: "step-begins", step: "upkeep", who: "any" }, until: "while-exiled" },
             effect: {
               kind: "look-and-choose",
               zone: "targets",
@@ -13738,9 +13737,9 @@ function enteringFormOf(words) {
 
 /** The opening-hand reveal's two word orders, and when each moment is. */
 const OPENING_REVEAL_AT = {
-  "the first upkeep": "next-upkeep",
-  "your first upkeep": "your-next-upkeep",
-  "your first main phase of the game": "your-next-main-phase",
+  "the first upkeep": { step: "upkeep" },
+  "your first upkeep": { step: "upkeep", whose: "you" },
+  "your first main phase of the game": { step: "main", whose: "you" },
 };
 const OPENING_REVEAL_WHEN = "the first upkeep|your first upkeep|your first main phase of the game";
 const OPENING_REVEAL = new RegExp(

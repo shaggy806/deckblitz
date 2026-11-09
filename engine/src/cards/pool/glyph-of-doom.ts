@@ -11,7 +11,7 @@ export default defineCard({
   targets: [{ kind: "permanent", filter: { type: "creature", subtype: "Wall" } }],
   effect: {
     kind: "delayed-trigger",
-    at: "end-of-combat-this-turn",
+    at: { step: "end-combat", which: "this-turn" },
     effect: {
       kind: "destroy-all",
       filter: { type: "creature", blockedThisTurn: { relation: "blocked-by", of: 0 } },

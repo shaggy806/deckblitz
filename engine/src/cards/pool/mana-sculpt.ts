@@ -31,7 +31,7 @@ export default defineCard({
         condition: { kind: "controls", filter: { subtype: "Wizard" }, atLeast: 1 },
         then: {
           kind: "delayed-trigger",
-          at: "your-next-main-phase",
+          at: { step: "main", whose: "you" },
           effect: { kind: "add-mana", mana: "C", amount: { manaSpentOf: 0 } },
           text: "Add an amount of {C} equal to the amount of mana spent to cast the countered spell.",
         },

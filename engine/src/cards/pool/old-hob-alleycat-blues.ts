@@ -39,7 +39,7 @@ export default defineCard({
           { kind: "create-token", token: "Mutant Token", count: 1, gainUntilEndOfTurn: ["haste"], separate: true },
           {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             about: "created",
             effect: { kind: "destroy", target: 0 },
             text: "Destroy it at the beginning of the next end step.",

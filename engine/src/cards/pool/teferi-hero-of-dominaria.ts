@@ -31,7 +31,7 @@ export default defineCard({
           { kind: "draw", amount: 1 },
           {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             effect: {
               kind: "choose-permanents",
               filter: { type: "land" },

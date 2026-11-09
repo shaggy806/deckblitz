@@ -17,7 +17,7 @@ export default defineCard({
       { kind: "regenerate", target: 0 },
       {
         kind: "delayed-trigger",
-        at: "end-of-combat-this-turn",
+        at: { step: "end-combat", which: "this-turn" },
         effect: {
           kind: "destroy-all",
           filter: { type: "creature", blockedThisTurn: { relation: "either", of: 0 } },

@@ -16,7 +16,7 @@ export default defineCard({
       { kind: "put-onto-battlefield", target: 0 },
       {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         effect: { kind: "sacrifice-target", target: 0 },
         text: "Sacrifice the creature Footsteps of the Goryo returned to the battlefield.",
       },

@@ -27,7 +27,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "end-of-combat",
+        at: { step: "end-combat" },
         effect: { kind: "return-to-hand", target: "source" },
         text: "Return Wall of Junk to its owner's hand.",
       },

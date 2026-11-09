@@ -28,7 +28,7 @@ export default defineCard({
       effect: {
         kind: "flicker",
         target: 0,
-        returnAt: "next-end-step",
+        returnAt: { step: "end" },
         returnThen: {
           kind: "conditional",
           condition: { kind: "this-way", what: "put-onto-battlefield", who: "you" },

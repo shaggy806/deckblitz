@@ -24,7 +24,7 @@ export default defineCard({
   keywords: ["flying", "lifelink"],
   text: `${REVEAL}\nFlying, lifelink`,
   openingHandReveal: {
-    at: "next-upkeep",
+    at: { step: "upkeep" },
     effect: {
       kind: "sequence",
       effects: [

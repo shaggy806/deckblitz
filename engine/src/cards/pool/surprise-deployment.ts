@@ -28,7 +28,7 @@ export default defineCard({
     filter: { type: "creature", notColors: ["W"] },
     then: {
       kind: "delayed-trigger",
-      at: "next-end-step",
+      at: { step: "end" },
       effect: { kind: "return-to-hand", target: 0 },
       text: "Return the creature Surprise Deployment put onto the battlefield to your hand.",
     },

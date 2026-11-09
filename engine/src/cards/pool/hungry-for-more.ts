@@ -18,7 +18,7 @@ export default defineCard({
       { kind: "create-token", token: "Vampire Token (Hungry for More)", count: 1 },
       {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         about: "created",
         effect: { kind: "sacrifice-target", target: 0 },
         text: "Sacrifice it at the beginning of the next end step.",

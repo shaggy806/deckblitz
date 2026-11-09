@@ -18,7 +18,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         effect: { kind: "create-token", token: "Spirit Token", count: 1 },
         text: "At the beginning of the next end step, create a 1/1 white Spirit creature token with flying.",
       },

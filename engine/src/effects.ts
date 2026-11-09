@@ -43,13 +43,14 @@ import type {
   WatchDuration,
 } from "./duration.js";
 import { resolvePlayerDuration } from "./duration.js";
+import type { DelayedAt, DelayedStepWatch } from "./delayed-at.js";
+import { readDelayedAt } from "./delayed-at.js";
 import { bindCombatRule } from "./combat/rules.js";
 import type { CombatRuleRefs } from "./combat/rules.js";
 import { textWordKind, type TextChange } from "./text-change.js";
 import type {
   AttachmentRecord,
   AwaitingDecision,
-  DelayedTriggerTiming,
   EnterAttachHost,
   FaceDownAs,
   LeaveDestination,
@@ -422,10 +423,6 @@ export interface DelayedLosesControl {
    * the next turn begins — past the cleanup step that ends "until end of
    * turn" control. */
   readonly thisTurn?: true;
-  /** "…, if it's attached to a creature you control" (Stolen Uniform): an
-   * intervening "if" (rule 603.4) over the creating effect's targets. Asked as
-   * it would trigger; the effect asks it again as it resolves. */
-  readonly onlyIf?: StaticCondition;
 }
 
 /** "When you next cast a [filter] spell this turn" (Yuna, Grand Summoner;
@@ -474,17 +471,17 @@ export interface DelayedUnblocked {
 export interface DelayedWhenever {
   readonly whenever: TriggerSpec;
   /** How long it lasts, if not just this turn: `"until-your-next-turn"` until
-   * its controller's next turn begins; `"until-end-of-combat"` "…this combat"
+   * its controller's next turn begins; `"until-end-of-your-next-turn"` through
+   * that turn (Season of the Bold); `"until-end-of-combat"` "…this combat"
    * (Love on the Battlefield), lapsing as this combat's end of combat step
    * ends; `"permanent"` for as long as the game does — "at the beginning of
    * each of your upkeeps for the rest of the game", and a delayed "when" with
-   * no duration of its own (`once`, Coffin Queen). */
-  readonly until?: WatchDuration;
-  /** "**For as long as any of those cards remain exiled**, at the beginning of
-   * each player's upkeep" (Dimensional Breach), with `about`: used up, and not
+   * no duration of its own (`once`, Coffin Queen); `"while-exiled"`, "**for as
+   * long as any of those cards remain exiled**, at the beginning of each
+   * player's upkeep" (Dimensional Breach), with `about`: used up, and not
    * triggering, once none of the cards it's about is still in exile as the
    * object it was (rule 400.7). */
-  readonly whileAnyExiled?: true;
+  readonly until?: WatchDuration;
   readonly targets?: readonly TargetSpec[];
   /** "…deals combat damage to **that player** this turn" (Great Train
    * Heist): a target slot holding a player, fixed as this resolves; only
@@ -536,7 +533,7 @@ export interface FlickerOptions {
   readonly tapped?: boolean;
   /** It returns at once, face down (Shorecrasher Elemental). */
   readonly faceDown?: boolean;
-  readonly returnAt?: DelayedTriggerTiming;
+  readonly returnAt?: DelayedStepWatch;
   /** See `flicker`'s `returnOnOwnersTurn`. */
   readonly returnOnOwnersTurn?: boolean;
   readonly returnText?: string;
@@ -4100,13 +4097,15 @@ export type EffectSpec =
        * which are exiled together and return together — every one is on the
        * battlefield before any of their enters triggers is looked at. `{
        * from }` is every slot from that one on: an "any number of target …"
-       * group's members, all at once (Eerie Interlude).
+       * group's members, all at once (Eerie Interlude). `{ all }` is every
+       * permanent matching, untargeted (Ghostway's "exile each creature you
+       * control").
        *
        * `"source"` names the permanent the ability came from *as it was when
        * the ability was put on the stack*: one that has since left and come
        * back is a new object (rule 400.7), and is left alone.
        */
-      readonly target: ObjectRef | readonly number[] | { readonly from: number };
+      readonly target: ObjectRef | readonly number[] | { readonly from: number } | { readonly all: CardFilter };
       /** See {@link FlickerCounters} — Essence Flux's Spirit clause. */
       readonly thenCounters?: FlickerCounters;
       /** "Exile this creature, then return it to the battlefield **face down**
@@ -4132,8 +4131,8 @@ export type EffectSpec =
        * object and stays where it is, and nothing is set up at all when
        * nothing was exiled.
        */
-      readonly returnAt?: DelayedTriggerTiming;
-      /** With a `"your-…"` `returnAt`: the turn it waits for is **each
+      readonly returnAt?: DelayedAt;
+      /** With a `whose` on `returnAt`: the turn it waits for is **each
        * card's owner's**, not the controller's — The Eternal Wanderer's
        * "return that card to the battlefield under its owner's control at the
        * beginning of **that player's** next end step". One delayed ability
@@ -4554,7 +4553,7 @@ export type EffectSpec =
        * Shirei, Shizo's Caretaker) is the delayed ability's too, unless the
        * spell it waits for is. */
       readonly at:
-        | DelayedTriggerTiming
+        | DelayedAt
         | DelayedLeaves
         | DelayedNextSpell
         | DelayedUnblocked
@@ -4580,10 +4579,12 @@ export type EffectSpec =
        * to do than act on those cards: Ignorant Bliss's "return those cards to
        * your hand, **then draw a card**" with an empty hand. */
       readonly orNone?: true;
-      /** With a `"your-…"` step timing: **that player's** turn, not the
-       * controller's, whose ability it stays (rule 603.7d): Suppress's "the end
-       * step of that player's next turn". Fixed as this resolves. */
-      readonly turnOf?: PlayerRef;
+      /** Its intervening "if" (rule 603.4), whatever it waits for: "when the
+       * creature an opponent controls dies this turn, **if you control your
+       * commander**, you become the monarch" (Fight for the Throne). Asked as
+       * it would trigger and again as it resolves. False as it would trigger,
+       * one that fires once is used up all the same (rule 603.7b). */
+      readonly if?: StaticCondition;
       /**
        * Sets the delayed ability remembers, each captured as this resolves
        * (`object-sets.ts`) and read in `effect` as `{ remembered: name }` —
@@ -11018,7 +11019,7 @@ export interface EffectApi {
   couldEnterBattlefield(card: ObjectId): boolean;
   delayTrigger(
     at:
-      | DelayedTriggerTiming
+      | DelayedStepWatch
       | {
           readonly leaves: ObjectId;
           readonly to: readonly LeaveDestination[];
@@ -11027,17 +11028,18 @@ export interface EffectApi {
       | DelayedNextSpell
       | { readonly attacksUnblocked: ObjectId }
       | DelayedWheneverAt
-      | { readonly losesControl: ObjectId; readonly thisTurn?: true; readonly onlyIf?: StaticCondition }
+      | { readonly losesControl: ObjectId; readonly thisTurn?: true }
       | { readonly thatCombat: number },
     effect: EffectSpec,
     text: string,
     controller: PlayerId,
     /** Its targets, in place of the creating ability's (`about`). */
     targets?: readonly TargetRef[],
-    /** Whose turn a `"your-…"` timing waits for, if not `controller`'s. */
-    turnOf?: PlayerId,
-    /** The sets it remembers (`remember`), captured now. */
-    remembered?: { readonly [name: string]: readonly SetMember[] },
+    /** The sets it remembers (`remember`), captured now, and its `if`. */
+    extras?: {
+      readonly remembered?: { readonly [name: string]: readonly SetMember[] };
+      readonly if?: StaticCondition;
+    },
   ): void;
   /** See the `"enters-with-counters"` {@link EffectSpec}. */
   entersWithCounters(target: TargetRef, counter: string, amount: number, condition?: StaticCondition): void;
@@ -15269,6 +15271,13 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
     if (record["kind"] === "delayed-trigger" && mentionsCreatedWithSource(record["effect"])) {
       return walk({ ...record, effect: bindCreatedWithSource(record["effect"], createdWithThis()) });
     }
+    // What a delayed ability waits for is read as it would trigger: "with mana
+    // value less than or equal to Loki's power" is his power as the spell is
+    // cast, counters put on him since included (`fireCastWatchers`).
+    if (record["kind"] === "delayed-trigger" && typeof record["at"] === "object" && "nextSpell" in (record["at"] as object)) {
+      const { at, ...rest } = record;
+      return { ...(walk(rest) as object), at };
+    }
     // A reflexive ability `about` an object: `"trigger-object"` in it means
     // that object, which the creating resolution's context doesn't know, so
     // it's left to read it itself — its targets as they're chosen and rechecked
@@ -17053,24 +17062,30 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     }
     case "flicker": {
       const target = spec.target;
-      const refs: ObjectRef[] =
-        typeof target === "object" && "from" in target
-          ? Array.from({ length: Math.max(0, ctx.targets.length - target.from) }, (_unused, i) => target.from + i)
-          : Array.isArray(target)
-            ? [...(target as readonly number[])]
-            : [target as ObjectRef];
       const targets: TargetRef[] = [];
-      for (const ref of refs) {
-        const target = objectRefAct(ref, ctx);
-        if (target !== undefined) targets.push(target);
+      if (typeof target === "object" && "all" in target) {
+        for (const { object } of ctx.permanentsMatching(target.all)) targets.push({ kind: "object", object });
+      } else {
+        const refs: ObjectRef[] =
+          typeof target === "object" && "from" in target
+            ? Array.from({ length: Math.max(0, ctx.targets.length - target.from) }, (_unused, i) => target.from + i)
+            : Array.isArray(target)
+              ? [...(target as readonly number[])]
+              : [target as ObjectRef];
+        for (const ref of refs) {
+          const one = objectRefAct(ref, ctx);
+          if (one !== undefined) targets.push(one);
+        }
       }
       const parked = ctx.parkedCount();
       const returnUnder = spec.under === undefined ? undefined : resolvePlayerRef(spec.under, ctx);
+      const returnAt = spec.returnAt === undefined ? undefined : readDelayedAt(spec.returnAt, ctx.controller, (ref) => resolvePlayerRef(ref, ctx));
+      if (spec.returnAt !== undefined && returnAt === undefined) return;
       const returning = ctx.flicker(targets, {
         ...(spec.thenCounters !== undefined ? { thenCounters: spec.thenCounters } : {}),
         ...(spec.underYourControl === true ? { underYourControl: true } : {}),
         ...(returnUnder !== undefined ? { returnUnder } : {}),
-        ...(spec.returnAt !== undefined ? { returnAt: spec.returnAt } : {}),
+        ...(returnAt !== undefined ? { returnAt } : {}),
         ...(spec.returnOnOwnersTurn === true ? { returnOnOwnersTurn: true } : {}),
         ...(spec.returnText !== undefined ? { returnText: spec.returnText } : {}),
         ...(spec.returnThen !== undefined ? { returnThen: spec.returnThen } : {}),
@@ -17216,13 +17231,17 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "delayed-trigger": {
       // The sets it remembers, captured now (theme 15), handed to every
       // `delayTrigger` below.
-      if (spec.remember !== undefined) {
-        const remembered = rememberSets(spec.remember, ctx);
-        const { remember: _remember, ...rest } = spec;
+      // … and its intervening "if".
+      if (spec.remember !== undefined || spec.if !== undefined) {
+        const remembered = spec.remember === undefined ? undefined : rememberSets(spec.remember, ctx);
+        const { remember: _remember, if: condition, ...rest } = spec;
         applyEffectSpec(rest, {
           ...ctx,
-          delayTrigger: (at, effect, text, controller, own, turnOf) =>
-            ctx.delayTrigger(at, effect, text, controller, own, turnOf, remembered),
+          delayTrigger: (at, effect, text, controller, own) =>
+            ctx.delayTrigger(at, effect, text, controller, own, {
+              ...(remembered !== undefined ? { remembered } : {}),
+              ...(condition !== undefined ? { if: condition } : {}),
+            }),
         });
         return;
       }
@@ -17234,13 +17253,13 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         if (who === undefined) return;
         controller = who;
       }
-      if (typeof spec.at === "object" && "attacksUnblocked" in spec.at) {
+      if ("attacksUnblocked" in spec.at) {
         const watched = objectRefAct(spec.at.attacksUnblocked, ctx);
         if (watched?.kind !== "object") return;
         ctx.delayTrigger({ attacksUnblocked: watched.object }, spec.effect, spec.text, controller);
         return;
       }
-      if (typeof spec.at === "object" && "losesControl" in spec.at) {
+      if ("losesControl" in spec.at) {
         const watched = objectRefAct(spec.at.losesControl, ctx);
         if (watched?.kind !== "object") return;
         // "Sacrifice the creature": what this resolution put there (Seraph).
@@ -17253,7 +17272,6 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           {
             losesControl: watched.object,
             ...(spec.at.thisTurn === true ? { thisTurn: true as const } : {}),
-            ...(spec.at.onlyIf !== undefined ? { onlyIf: spec.at.onlyIf } : {}),
           },
           spec.effect,
           spec.text,
@@ -17262,7 +17280,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         );
         return;
       }
-      if (typeof spec.at === "object" && "whenever" in spec.at) {
+      if ("whenever" in spec.at) {
         // "…to that player this turn" (Great Train Heist): the player the
         // slot holds as this resolves.
         let player: PlayerId | undefined;
@@ -17306,7 +17324,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         );
         return;
       }
-      if (typeof spec.at === "object" && "nextSpell" in spec.at) {
+      if ("nextSpell" in spec.at) {
         ctx.delayTrigger(
           {
             nextSpell: spec.at.nextSpell,
@@ -17318,7 +17336,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         );
         return;
       }
-      if (typeof spec.at === "object") {
+      if ("leaves" in spec.at) {
         // "Exile that token", "put the exiled card into your hand": what this
         // resolution did that to, in place of the creating ability's targets.
         const about =
@@ -17353,24 +17371,24 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       // and the delayed ability has no target to lose if it has left by then.
       // "Destroy all creatures **that player** controls" (Siren's Call): who
       // that is is fixed now too.
+      const at = readDelayedAt(spec.at, controller, (ref) => resolvePlayerRef(ref, ctx));
+      if (at === undefined) return;
       const aboutBlocks = bindSetUpPlayers(bindBlockPartners(spec.effect, ctx), ctx);
       if (aboutBlocks !== spec.effect) {
-        ctx.delayTrigger(spec.at, aboutBlocks, spec.text, controller, []);
+        ctx.delayTrigger(at, aboutBlocks, spec.text, controller, []);
         return;
       }
       if (spec.about === "attached") {
         const host = objectRefAct("attached", ctx);
-        if (host !== undefined) ctx.delayTrigger(spec.at, spec.effect, spec.text, controller, [host]);
+        if (host !== undefined) ctx.delayTrigger(at, spec.effect, spec.text, controller, [host]);
         return;
       }
-      const turnOf = spec.turnOf === undefined ? undefined : resolvePlayerRef(spec.turnOf, ctx);
-      if (spec.turnOf !== undefined && turnOf === undefined) return;
       if (spec.about !== undefined) {
         const done = ctx.thisWay(spec.about).map((e) => ({ kind: "object", object: e.object }) as const);
-        if (done.length > 0 || spec.orNone === true) ctx.delayTrigger(spec.at, spec.effect, spec.text, controller, done, turnOf);
+        if (done.length > 0 || spec.orNone === true) ctx.delayTrigger(at, spec.effect, spec.text, controller, done);
         return;
       }
-      ctx.delayTrigger(spec.at, spec.effect, spec.text, controller, undefined, turnOf);
+      ctx.delayTrigger(at, spec.effect, spec.text, controller);
       return;
     }
     case "enters-with-counters": {

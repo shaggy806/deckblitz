@@ -18,7 +18,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "your-next-main-phase",
+        at: { step: "main", whose: "you" },
         effect: { kind: "add-mana", mana: "C", amount: 2 },
         text: "Add {C}{C}.",
       },

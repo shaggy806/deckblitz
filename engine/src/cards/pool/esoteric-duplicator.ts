@@ -38,7 +38,7 @@ export default defineCard({
         cost: "{2}",
         effect: {
           kind: "delayed-trigger",
-          at: "next-end-step",
+          at: { step: "end" },
           effect: { kind: "create-token-copy", of: "trigger-object", count: 1, who: "you" },
           text: "At the beginning of the next end step, create a token that's a copy of that artifact.",
         },

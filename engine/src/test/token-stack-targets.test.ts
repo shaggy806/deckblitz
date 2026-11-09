@@ -390,7 +390,7 @@ describe("the split-off target behaves like any single target", () => {
       A,
       {
         kind: "delayed-trigger",
-        at: "next-upkeep",
+        at: { step: "upkeep" },
         effect: { kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 },
         text: "Put a +1/+1 counter on that Goblin.",
       },

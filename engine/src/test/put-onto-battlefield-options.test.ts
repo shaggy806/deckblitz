@@ -76,7 +76,7 @@ describe("transformed", () => {
   });
 
   it("flickered, a card that isn't double-faced stays in exile, now or delayed", () => {
-    for (const returnAt of [undefined, "next-end-step"] as const) {
+    for (const returnAt of [undefined, { step: "end" }] as const) {
       const game = setUp();
       const card = game.debugSpawn("Grizzly Bears", A, "battlefield");
       run(game, { kind: "flicker", target: 0, transformed: true, ...(returnAt ? { returnAt } : {}) }, card);
@@ -118,7 +118,7 @@ describe("transformed", () => {
   it("…at a delayed return too", () => {
     const game = setUp();
     const card = game.debugSpawn(DFC, A, "battlefield");
-    run(game, { kind: "flicker", target: 0, transformed: true, returnAt: "next-end-step" }, card);
+    run(game, { kind: "flicker", target: 0, transformed: true, returnAt: { step: "end" } }, card);
     expect(game.state.objects[card].zone).toBe("exile");
     game.advanceUntil((s) => s.turn.step === "end" && quiet(s));
     expect(game.state.objects[card].zone).toBe("battlefield");

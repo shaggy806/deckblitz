@@ -25,7 +25,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "end-of-combat",
+        at: { step: "end-combat" },
         effect: { kind: "flicker", target: "source", transformed: true, underYourControl: true },
         text: "Exile Conqueror's Galleon, then return it to the battlefield transformed under your control.",
       },

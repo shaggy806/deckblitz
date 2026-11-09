@@ -31,7 +31,7 @@ export default defineCard({
               { kind: "grant-play", cards: 0, duration: "while-exiled", free: true },
               // Cast, it has left exile: a new object the return can't reach
               // (rule 400.7), and so "if you haven't cast it".
-              { kind: "delayed-trigger", at: "next-end-step", text: "Return it to its owner's hand.", effect: { kind: "return-to-hand", target: 0, from: "exile" } },
+              { kind: "delayed-trigger", at: { step: "end" }, text: "Return it to its owner's hand.", effect: { kind: "return-to-hand", target: 0, from: "exile" } },
             ],
           },
         },

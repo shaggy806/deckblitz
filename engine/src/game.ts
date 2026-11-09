@@ -377,6 +377,8 @@ import type {
   Vote,
   VoteChoice,
 } from "./events.js";
+import type { DelayedStepWatch } from "./delayed-at.js";
+import { delayedStep, delayedStepFires, isStepWatch, readDelayedAt, watchOutlastsItsTurn } from "./delayed-at.js";
 import type { Expiry, PermanentDuration, PermissionDuration, UntilPoint, WhileSource } from "./duration.js";
 import { endsThisTurn, untilPointOf } from "./duration.js";
 import type { JournalEntry } from "./journal.js";
@@ -513,7 +515,6 @@ import type {
   DelayedTrigger,
   EnterAttackingChoice,
   EntryRecord,
-  DelayedTriggerTiming,
   ExtraTurnRider,
   GameObject,
   GameRules,
@@ -1401,7 +1402,7 @@ const DECAYED_TRIGGER: TriggeredAbility = {
   targets: [],
   effect: {
     kind: "delayed-trigger",
-    at: "end-of-combat",
+    at: { step: "end-combat" },
     effect: { kind: "sacrifice-source" },
     text: "Sacrifice it at end of combat.",
   },
@@ -6326,10 +6327,10 @@ export class Game {
     for (const trigger of this.state.delayedTriggers) {
       pinned.add(trigger.source);
       for (const t of trigger.targets) if (t?.kind === "object") pinned.add(t.object);
-      if (typeof trigger.at === "object" && "leaves" in trigger.at) pinned.add(trigger.at.leaves);
-      if (typeof trigger.at === "object" && "losesControl" in trigger.at) pinned.add(trigger.at.losesControl);
-      if (typeof trigger.at === "object" && "attacksUnblocked" in trigger.at) pinned.add(trigger.at.attacksUnblocked);
-      if (typeof trigger.at === "object" && "whenever" in trigger.at) {
+      if ("leaves" in trigger.at) pinned.add(trigger.at.leaves);
+      if ("losesControl" in trigger.at) pinned.add(trigger.at.losesControl);
+      if ("attacksUnblocked" in trigger.at) pinned.add(trigger.at.attacksUnblocked);
+      if ("whenever" in trigger.at) {
         for (const watched of trigger.at.watching ?? []) pinned.add(watched.object);
         if (trigger.at.orLosesControl !== undefined) pinned.add(trigger.at.orLosesControl.object);
       }
@@ -7156,7 +7157,9 @@ export class Game {
       if (chosen.length > 0) this.revealCards(player, chosen, "hand");
       for (const id of chosen) {
         const spec = this.registry.get(this.state.objects[id].cardName).openingHandReveal;
-        if (spec !== null) this.createDelayedTrigger(id, player, spec.at, spec.effect, spec.text, []);
+        if (spec === null) continue;
+        const at = readDelayedAt(spec.at, player);
+        if (at !== undefined) this.createDelayedTrigger(id, player, at, spec.effect, spec.text, []);
       }
       this.beginOpeningHandActions(next);
       return;
@@ -9194,15 +9197,11 @@ export class Game {
     // "When that creature dies this turn" watches no longer, nor does "when
     // you next cast a spell this turn", nor "until end of turn, whenever …".
     // "Until your next turn, whenever …" waits for whose turn this is (below).
-    this.state.delayedTriggers = this.state.delayedTriggers.filter(
-      (t) =>
-        t.at !== "end-of-combat-this-turn" &&
-        t.at !== "this-turn-end-step" &&
-        (typeof t.at !== "object" ||
-          ("leaves" in t.at && t.at.thisTurn !== true) ||
-          ("losesControl" in t.at && t.at.thisTurn !== true) ||
-          ("whenever" in t.at && (t.at.untilYourNextTurn === true || t.at.forGame === true))),
-    );
+    this.state.delayedTriggers = this.state.delayedTriggers.filter((t) => {
+      if (isStepWatch(t.at)) return t.at.which !== "this-turn";
+      if ("leaves" in t.at || "losesControl" in t.at) return t.at.thisTurn !== true;
+      return "whenever" in t.at && watchOutlastsItsTurn(t.at.until) && t.at.inLastTurn !== true;
+    });
     // Nothing has attacked this turn yet — whoever controls it. (The untap
     // step only reaches the active player's permanents.)
     // No turn older than every player's most recent can be anyone's last, so
@@ -9350,7 +9349,7 @@ export class Game {
       if (rider.noPowerUps === true) this.state.powerUpsBarredThisTurn = true;
       if (rider.atEndStep !== undefined) {
         const { source, controller, effect, text } = rider.atEndStep;
-        this.createDelayedTrigger(source, controller, "this-turn-end-step", effect, text, []);
+        this.createDelayedTrigger(source, controller, delayedStep("end", "any", "this-turn"), effect, text, []);
       }
     }
     for (const player of this.state.turnOrder) {
@@ -9436,17 +9435,23 @@ export class Game {
       }
     }
     // So does "until your next turn, whenever …" (Vraska the Unseen's +1).
-    this.state.delayedTriggers = this.state.delayedTriggers.filter(
-      (t) => !(typeof t.at === "object" && "whenever" in t.at && t.at.forGame !== true && beginningFor.includes(t.controller)),
-    );
+    // "Until the end of your next turn, whenever …" (Season of the Bold): this
+    // is that turn, so the next to begin ends it.
+    this.state.delayedTriggers = this.state.delayedTriggers
+      .filter((t) => !("whenever" in t.at && t.at.until === "until-your-next-turn" && beginningFor.includes(t.controller)))
+      .map((t) =>
+        "whenever" in t.at && t.at.until === "until-end-of-your-next-turn" && beginningFor.includes(t.controller)
+          ? { ...t, at: { ...t.at, inLastTurn: true as const } }
+          : t,
+      );
     // "At the beginning of the end step of that player's next turn": that turn
     // is known once it begins, and one whose end step never came (a Sundial of
     // the Infinite) lets it lapse, unfired.
     this.state.delayedTriggers = this.state.delayedTriggers
-      .filter((t) => !(t.at === "your-next-turn-end-step" && t.turnBegan === true))
+      .filter((t) => !(isStepWatch(t.at) && t.at.which === "next-turn" && t.at.turnBegan === true))
       .map((t) =>
-        t.at === "your-next-turn-end-step" && beginningFor.includes(t.turnOf ?? t.controller)
-          ? { ...t, turnBegan: true as const }
+        isStepWatch(t.at) && t.at.which === "next-turn" && (t.at.whose === "any" || beginningFor.includes(t.at.whose))
+          ? { ...t, at: { ...t.at, turnBegan: true as const } }
           : t,
       );
     // "Until the end of your next turn": this is that turn, so this turn's
@@ -13486,7 +13491,7 @@ export class Game {
   private removeAllFromCombat(): void {
     // "Whenever either of those creatures deals combat damage … this combat."
     this.state.delayedTriggers = this.state.delayedTriggers.filter(
-      (t) => !(typeof t.at === "object" && "whenever" in t.at && t.at.untilEndOfCombat === true),
+      (t) => !("whenever" in t.at && t.at.until === "until-end-of-combat"),
     );
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
@@ -21593,7 +21598,7 @@ export class Game {
         controller: player,
         // Never consulted: the record goes straight on the stack, like a
         // mana-spend rider's.
-        at: "next-end-step",
+        at: delayedStep("end"),
         createdOnTurn: this.state.turn.number,
         createdDuringEndStep: false,
         source: spell.id,
@@ -27156,11 +27161,11 @@ export class Game {
     // set it up has moved on and the ability hasn't: its controller is "you".
     for (const delayed of this.state.delayedTriggers) {
       const at = delayed.at;
-      if (typeof at !== "object" || !("whenever" in at)) continue;
+      if (!("whenever" in at)) continue;
       const trigger = at.whenever;
       const effect = delayed.effect;
       if (trigger.on !== "tapped-for-mana" || effect.kind !== "add-mana" || !isDelayedManaAbility(trigger, at.targets, effect)) continue;
-      if (at.untilYourNextTurn !== true && at.forGame !== true && at.turn !== this.state.turn.number) continue;
+      if (!watchOutlastsItsTurn(at.until) && at.turn !== this.state.turn.number) continue;
       if (this.state.players[delayed.controller]?.hasLost !== false) continue;
       // A copy of a spell has ceased to exist by now (rule 707.10a — Molten
       // Tide, always a copy), and its ability goes on.
@@ -27757,7 +27762,7 @@ export class Game {
         // Never actually consulted — this record goes on the stack directly
         // rather than waiting on a step — but the shape is shared with real
         // delayed triggers, so it gets honest values.
-        at: "next-end-step",
+        at: delayedStep("end"),
         createdOnTurn: this.state.turn.number,
         createdDuringEndStep: false,
         source: rider.source,
@@ -28279,7 +28284,7 @@ export class Game {
       this.createDelayedTrigger(
         id,
         object.controller,
-        "next-end-step",
+        delayedStep("end"),
         { kind: "sacrifice-source" },
         "Blitz — sacrifice it at the beginning of the next end step.",
         [],
@@ -28293,7 +28298,7 @@ export class Game {
       this.createDelayedTrigger(
         id,
         object.controller,
-        "next-cleanup",
+        delayedStep("cleanup"),
         { kind: "sacrifice-source" },
         `Sacrifice ${def.name} at the beginning of the next cleanup step.`,
         [],
@@ -28315,7 +28320,7 @@ export class Game {
       this.createDelayedTrigger(
         id,
         object.controller,
-        "next-end-step",
+        delayedStep("end"),
         { kind: "return-to-hand", target: "source" },
         "Dash — return it to its owner's hand at the beginning of the next end step.",
         [],
@@ -28325,7 +28330,7 @@ export class Game {
       this.createDelayedTrigger(
         id,
         object.controller,
-        "next-end-step",
+        delayedStep("end"),
         {
           kind: "sequence",
           effects: [
@@ -28980,7 +28985,7 @@ export class Game {
     this.createDelayedTrigger(
       mark.source,
       mark.player,
-      "next-end-step",
+      delayedStep("end"),
       { kind: "return-to-hand", target: 0, from: "exile" },
       "Return it to your hand at the beginning of the next end step.",
       [{ kind: "object", object: id }],
@@ -29086,7 +29091,7 @@ export class Game {
     this.createDelayedTrigger(
       id,
       controller,
-      "your-next-upkeep",
+      delayedStep("upkeep", controller),
       { kind: "cast-now", target: 0, free: true },
       "Rebound — you may cast this card from exile without paying its mana cost.",
       [{ kind: "object", object: id }],
@@ -29456,6 +29461,7 @@ export class Game {
           condition === undefined ? undefined : this.abilityTurnKey(object),
           object.triggerValue,
         ) ||
+        (object.delayedTrigger !== undefined && !this.delayedIfHolds(object.delayedTrigger, object.triggerObject)) ||
         !this.attackConditionsStillHold(ability, object)
       ) {
         this.removeOneAbilityCopy(id);
@@ -30087,8 +30093,8 @@ export class Game {
     const usedUp: DelayedTrigger[] = [];
     for (const trigger of this.state.delayedTriggers) {
       const at = trigger.at;
-      if (typeof at !== "object" || !("whenever" in at)) continue;
-      if (at.untilYourNextTurn !== true && at.forGame !== true && at.turn !== this.state.turn.number) continue;
+      if (!("whenever" in at)) continue;
+      if (!watchOutlastsItsTurn(at.until) && at.turn !== this.state.turn.number) continue;
       if (this.state.players[trigger.controller]?.hasLost !== false) continue;
       // A triggered mana ability (rule 605.1b) doesn't use the stack:
       // `tappedForManaExtras` made its mana with the rest.
@@ -30119,7 +30125,8 @@ export class Game {
       if (subject === undefined) continue;
       const object = subject.controller === trigger.controller ? subject : { ...subject, controller: trigger.controller };
       if (!this.triggerMatches(at.whenever, event, object)) continue;
-      if (at.whileAnyExiled === true) {
+      if (!this.delayedIfHolds(trigger, this.eventTriggerObject(at.whenever, event))) continue;
+      if (at.until === "while-exiled") {
         const stints = trigger.targetStints ?? [];
         const anyLeft = trigger.targets.some(
           (t, slot) =>
@@ -36624,7 +36631,7 @@ export class Game {
         target.kind === "object" && this.state.objects[target.object]?.zone === "battlefield"
           ? { kind: "object", object: this.splitOneFromStack(target.object) }
           : target,
-      delayTrigger: (at, effect, text, delayedController, own, turnOf, remembered) =>
+      delayTrigger: (at, effect, text, delayedController, own, extras) =>
         this.createDelayedTrigger(
           source,
           delayedController,
@@ -36638,9 +36645,8 @@ export class Game {
           {
             ...(triggerObject !== undefined ? { triggerObject } : {}),
             refs,
-            ...(turnOf !== undefined ? { turnOf } : {}),
             x,
-            ...(remembered !== undefined ? { remembered } : {}),
+            ...extras,
           },
         ),
       entersWithCounters: (target, counter, given, condition) => {
@@ -43685,7 +43691,7 @@ controlledBy,
         effectController ?? controller,
         made,
         group.sacrificeAtEndStep ? "sacrifice" : "exile",
-        group.atYourNextEndStep ? "your-next-end-step" : "next-end-step",
+        group.atYourNextEndStep ? delayedStep("end", effectController ?? controller) : delayedStep("end"),
       );
     }
     // "…that's tapped and attacking" (rule 508.4).
@@ -43698,7 +43704,7 @@ controlledBy,
       this.createDelayedTrigger(
         source,
         effectController ?? controller,
-        "end-of-combat",
+        delayedStep("end-combat"),
         {
           kind: "for-each-target",
           from: 0,
@@ -50590,13 +50596,11 @@ controlledBy,
       this.createDelayedTrigger(
         source,
         controller,
-        delayed,
+        // The owner's turn, the ability still the controller's (rule 603.7e).
+        each.owner !== undefined ? { ...delayed, whose: each.owner } : delayed,
         options.returnThen === undefined ? returns : { kind: "sequence", effects: [returns, options.returnThen] },
         options.returnText ?? "Return the exiled card to the battlefield.",
         [],
-        [],
-        // The owner's turn, the ability still the controller's (rule 603.7e).
-        each.owner !== undefined ? { turnOf: each.owner } : {},
       );
     }
     return null;
@@ -50614,7 +50618,7 @@ controlledBy,
     this.createDelayedTrigger(
       source,
       controller,
-      "next-end-step",
+      delayedStep("end"),
       { kind: "return-flickered", link },
       "Return it to the battlefield under its owner's control.",
       [],
@@ -50821,7 +50825,7 @@ controlledBy,
     controller: PlayerId,
     made: readonly ObjectId[],
     how: "sacrifice" | "exile",
-    at: "next-end-step" | "your-next-end-step" = "next-end-step",
+    at: DelayedStepWatch = delayedStep("end"),
   ): void {
     if (made.length === 0) return;
     for (const id of made) {
@@ -50841,7 +50845,7 @@ controlledBy,
         simultaneous: true,
       },
       `${how === "sacrifice" ? "Sacrifice" : "Exile"} the tokens at the beginning of ${
-        at === "next-end-step" ? "the" : "your"
+        at.whose === "any" ? "the" : "your"
       } next end step.`,
       made.map((id) => ({ kind: "object", object: id })),
     );
@@ -50851,7 +50855,7 @@ controlledBy,
     source: ObjectId,
     controller: PlayerId,
     at:
-      | DelayedTriggerTiming
+      | DelayedStepWatch
       | {
           readonly leaves: ObjectId;
           readonly to: readonly LeaveDestination[];
@@ -50860,7 +50864,7 @@ controlledBy,
       | DelayedNextSpell
       | { readonly attacksUnblocked: ObjectId }
       | DelayedWheneverAt
-      | { readonly losesControl: ObjectId; readonly thisTurn?: true; readonly onlyIf?: StaticCondition }
+      | { readonly losesControl: ObjectId; readonly thisTurn?: true }
       | { readonly thatCombat: number },
     effect: EffectSpec,
     text: string,
@@ -50870,26 +50874,29 @@ controlledBy,
     creator: {
       readonly triggerObject?: ObjectId;
       readonly refs?: LastKnownRefs;
-      readonly turnOf?: PlayerId;
       /** Its X, and the sets it was told to remember (theme 15's captured
        * context — see `DelayedTrigger.x`). */
       readonly x?: number;
       readonly remembered?: { readonly [name: string]: readonly SetMember[] };
+      /** Its intervening "if" (rule 603.4). */
+      readonly if?: StaticCondition;
     } = {},
   ): void {
     let when:
-      | DelayedTriggerTiming
+      | DelayedStepWatch
       | DelayedLeaveWatch
       | DelayedCastWatch
       | DelayedUnblockedWatch
       | DelayedWheneverWatch
       | DelayedLoseControlWatch
       | { readonly thatCombat: number };
-    if (typeof at === "object" && "losesControl" in at) {
+    if ("step" in at) {
+      when = at;
+    } else if ("losesControl" in at) {
       const watched = this.state.objects[at.losesControl];
       if (watched?.zone !== "battlefield") return;
       when = { ...at, stint: watched.zoneChangeCount ?? 0 };
-    } else if (typeof at === "object" && "whenever" in at) {
+    } else if ("whenever" in at) {
       // Only what's on the battlefield now can be watched, each for this stint
       // of it (rule 400.7). With nothing left to watch, nothing is set up.
       const watching = at.watched?.flatMap((id) => {
@@ -50902,25 +50909,22 @@ controlledBy,
       when = {
         whenever: at.whenever,
         ...(at.targets !== undefined ? { targets: at.targets } : {}),
-        ...(at.until === "until-your-next-turn" ? { untilYourNextTurn: true as const } : {}),
-        ...(at.until === "until-end-of-combat" ? { untilEndOfCombat: true as const } : {}),
-        ...(at.until === "permanent" ? { forGame: true as const } : {}),
-        ...(at.whileAnyExiled === true ? { whileAnyExiled: true as const } : {}),
+        until: at.until ?? "end-of-turn",
         ...(at.player !== undefined ? { player: at.player } : {}),
         ...(watching !== undefined ? { watching } : {}),
         ...(at.once === true ? { once: true as const } : {}),
         ...(losing !== undefined ? { orLosesControl: { object: losing.id, stint: losing.zoneChangeCount ?? 0 } } : {}),
         turn: this.state.turn.number,
       };
-    } else if (typeof at === "object" && "thatCombat" in at) {
+    } else if ("thatCombat" in at) {
       when = at;
-    } else if (typeof at === "object" && "nextSpell" in at) {
+    } else if ("nextSpell" in at) {
       when = {
         nextSpell: at.nextSpell,
         ...(at.orNextAbility !== undefined ? { orNextAbility: at.orNextAbility } : {}),
         turn: this.state.turn.number,
       };
-    } else if (typeof at === "object" && "attacksUnblocked" in at) {
+    } else if ("attacksUnblocked" in at) {
       const watched = this.state.objects[at.attacksUnblocked];
       if (watched?.zone !== "battlefield") return;
       when = {
@@ -50928,12 +50932,10 @@ controlledBy,
         stint: watched.zoneChangeCount ?? 0,
         turn: this.state.turn.number,
       };
-    } else if (typeof at === "object") {
+    } else {
       const watched = this.state.objects[at.leaves];
       if (watched?.zone !== "battlefield") return;
       when = { ...at, to: [...at.to], stint: watched.zoneChangeCount ?? 0 };
-    } else {
-      when = at;
     }
     const object = this.state.objects[source];
     const carried =
@@ -50976,7 +50978,7 @@ controlledBy,
       id: `delayed-${this.state.nextObjectSeq++}`,
       controller,
       at: when,
-      ...(creator.turnOf !== undefined ? { turnOf: creator.turnOf } : {}),
+      ...(creator.if !== undefined ? { if: creator.if } : {}),
       createdOnTurn: this.state.turn.number,
       createdDuringEndStep:
         this.state.turn.step === "end" || this.state.turn.step === "cleanup",
@@ -51025,68 +51027,35 @@ controlledBy,
    * their own controller's turn.
    */
   private delayedTriggerFires(trigger: DelayedTrigger, step: Step): boolean {
+    const at = trigger.at;
     // "At the beginning of that combat": the one with its mark.
-    if (typeof trigger.at === "object" && "thatCombat" in trigger.at) {
-      return step === "begin-combat" && this.state.turn.addedCombat === trigger.at.thatCombat;
-    }
-    // A leave-keyed trigger waits on its permanent, not on a step.
-    if (typeof trigger.at === "object") return false;
-    const active = this.activePlayer;
-    const whose = trigger.turnOf ?? trigger.controller;
+    if ("thatCombat" in at) return step === "begin-combat" && this.state.turn.addedCombat === at.thatCombat;
+    // The event watches wait on their event, not on a step.
+    if (!isStepWatch(at)) return false;
     const laterTurn = this.state.turn.number > trigger.createdOnTurn;
-    // This turn's end step still counts, unless the trigger was created
-    // during it (or in cleanup) — then "the next end step" is next turn's, or
-    // an additional end step that begins after the one it was made in (rule
-    // 500.9 — Y'shtola Rhul's ruling).
-    const endStepOk =
-      laterTurn ||
-      !trigger.createdDuringEndStep ||
-      (trigger.createdInEndStep !== undefined && (this.state.turn.endSteps ?? 0) > trigger.createdInEndStep);
-    switch (trigger.at) {
-      case "next-end-step":
-        return step === "end" && endStepOk;
-      case "your-next-end-step":
-        return step === "end" && endStepOk && active === whose;
-      case "your-next-turn-end-step":
-        return step === "end" && trigger.turnBegan === true;
-      // A turn's own upkeep is over by the time anything could create one of
-      // these, so the next `enterStep("upkeep")` is a later turn's — or an
-      // additional upkeep step this turn (Obeka, Splitter of Seconds), which
-      // began after it was made and is the next upkeep (rule 500.10).
-      case "next-upkeep":
-        return step === "upkeep" && (laterTurn || this.state.turn.addedUpkeep === true);
-      case "your-next-upkeep":
-        return (
-          step === "upkeep" &&
-          (laterTurn || this.state.turn.addedUpkeep === true) &&
-          active === whose
-        );
-      // Made during this combat's end of combat step, it waits for the next
-      // one: this step began before it existed.
-      case "end-of-combat":
-        return step === "end-combat";
-      case "end-of-combat-this-turn":
-        return step === "end-combat" && !laterTurn;
-      case "this-turn-end-step":
-        return step === "end" && !laterTurn;
-      // Fired only once the cleanup step's turn-based actions are done (rule
-      // 514.3a); one made in that step's priority window waits for the
-      // cleanup step that follows it.
-      case "next-cleanup":
-        return step === "cleanup";
-      case "your-next-main-phase":
-        // The first main phase of yours to *begin* after it was created. This
-        // only runs as a step begins, and one created during a main phase was
-        // created after that phase began, so no turn check is needed: cast
-        // during your precombat main or combat, it's this turn's postcombat
-        // main; during your upkeep, this turn's precombat main; on someone
-        // else's turn, your next precombat main (Mana Drain's 2020-11-10
-        // ruling).
-        return (
-          (step === "precombat-main" || step === "postcombat-main") &&
-          active === whose
-        );
-    }
+    const anotherEndStep =
+      trigger.createdInEndStep !== undefined && (this.state.turn.endSteps ?? 0) > trigger.createdInEndStep;
+    return delayedStepFires(at, step, {
+      active: this.activePlayer,
+      laterTurn,
+      madeInThisEndStep: !laterTurn && trigger.createdDuringEndStep && !anotherEndStep,
+      addedUpkeep: this.state.turn.addedUpkeep === true,
+    });
+  }
+
+  /** A delayed ability's intervening "if" (rule 603.4), asked as it would
+   * trigger and again as it resolves. False as it would trigger, the ability
+   * does nothing: one that fires once is used up all the same (603.7b). */
+  private delayedIfHolds(trigger: DelayedTrigger, triggerObject?: ObjectId): boolean {
+    if (trigger.if === undefined) return true;
+    return this.makeResolutionContext(
+      trigger.source,
+      trigger.controller,
+      trigger.targets,
+      trigger.x ?? 0,
+      0,
+      triggerObject,
+    ).conditionMet(trigger.if);
   }
 
   /**
@@ -51108,6 +51077,7 @@ controlledBy,
     for (const trigger of [...firing].sort(
       (a, b) => order.indexOf(a.controller) - order.indexOf(b.controller),
     )) {
+      if (!this.delayedIfHolds(trigger)) continue;
       const id = this.mintAbilityObject(
         trigger.source,
         trigger.sourceName,
@@ -51156,7 +51126,10 @@ controlledBy,
     if (trigger.sourceWas !== undefined) object.lastKnownRefs = { ...object.lastKnownRefs, sourceWas: trigger.sourceWas };
     if (trigger.madeIn !== undefined) object.lastKnownRefs = { ...object.lastKnownRefs, madeIn: trigger.madeIn };
     // Its creator's X, "that player" and remembered sets (theme 15).
-    if (trigger.x !== undefined && (object.xValue ?? 0) === 0) object.xValue = trigger.x;
+    // Over the X of a spell that fired it: "copy that spell X times" (Storm
+    // King's Thunder) is its own X. A creator with no X leaves that spell's
+    // (Brass Infiniscope).
+    if (trigger.x !== undefined) object.xValue = trigger.x;
     if (trigger.player !== undefined && object.lastKnownRefs?.player === undefined) {
       object.lastKnownRefs = { ...object.lastKnownRefs, player: trigger.player };
     }
@@ -51178,7 +51151,7 @@ controlledBy,
     const stint = object?.lastKnown?.zoneChangeCount;
     if (object === undefined || stint === undefined) return;
     const watching = this.state.delayedTriggers.filter(
-      (t) => typeof t.at === "object" && "leaves" in t.at && t.at.leaves === event.object && t.at.stint === stint,
+      (t) => "leaves" in t.at && t.at.leaves === event.object && t.at.stint === stint,
     );
     if (watching.length === 0) return;
     this.state.delayedTriggers = this.state.delayedTriggers.filter((t) => !watching.includes(t));
@@ -51186,9 +51159,8 @@ controlledBy,
     // left (rule 603.7c), and still has to be that object when this resolves.
     const after = object.zoneChangeCount ?? 0;
     for (const watched of watching) {
-      if (typeof watched.at !== "object" || !("leaves" in watched.at) || !watched.at.to.includes(event.toZone)) {
-        continue;
-      }
+      if (!("leaves" in watched.at) || !watched.at.to.includes(event.toZone)) continue;
+      if (!this.delayedIfHolds(watched, event.object)) continue;
       const trigger: DelayedTrigger =
         watched.source === event.object && watched.sourceStint !== undefined
           ? { ...watched, sourceStint: after }
@@ -51230,7 +51202,7 @@ controlledBy,
     const usedUp: DelayedTrigger[] = [];
     for (const trigger of this.state.delayedTriggers) {
       const at = trigger.at;
-      if (typeof at === "object" && "whenever" in at && at.orLosesControl !== undefined) {
+      if ("whenever" in at && at.orLosesControl !== undefined) {
         // "When this creature becomes untapped or you lose control of it"
         // (Coffin Queen): whichever comes first.
         if (at.orLosesControl.object !== event.object || at.orLosesControl.stint !== stint || trigger.controller !== from) {
@@ -51238,7 +51210,6 @@ controlledBy,
         }
         if (at.once === true) usedUp.push(trigger);
       } else if (
-        typeof at !== "object" ||
         !("losesControl" in at) ||
         at.losesControl !== event.object ||
         at.stint !== stint ||
@@ -51246,18 +51217,11 @@ controlledBy,
       ) {
         continue;
       }
-      // The intervening "if" (rule 603.4), about the creating effect's targets.
-      if ("losesControl" in at) {
-        if (
-          at.onlyIf !== undefined &&
-          !this.makeResolutionContext(trigger.source, trigger.controller, trigger.targets, 0, 0, event.object).conditionMet(
-            at.onlyIf,
-          )
-        ) {
-          continue;
-        }
-        if (at.thisTurn !== true) usedUp.push(trigger);
+      if (!this.delayedIfHolds(trigger, event.object)) {
+        if ("losesControl" in at && at.thisTurn !== true) usedUp.push(trigger);
+        continue;
       }
+      if ("losesControl" in at && at.thisTurn !== true) usedUp.push(trigger);
       this.state.pendingTriggers.push({
         sourceObjectId: trigger.source,
         cardName: trigger.sourceName,
@@ -51314,11 +51278,11 @@ controlledBy,
     const stint = object.zoneChangeCount ?? 0;
     for (const trigger of this.state.delayedTriggers) {
       if (
-        typeof trigger.at !== "object" ||
         !("attacksUnblocked" in trigger.at) ||
         trigger.at.attacksUnblocked !== attacker ||
         trigger.at.stint !== stint ||
-        trigger.at.turn !== this.state.turn.number
+        trigger.at.turn !== this.state.turn.number ||
+        !this.delayedIfHolds(trigger, attacker)
       ) {
         continue;
       }
@@ -51346,7 +51310,6 @@ controlledBy,
     if (ability === undefined || ability.abilityKind !== "activated") return;
     const firing = this.state.delayedTriggers.filter(
       (t) =>
-        typeof t.at === "object" &&
         "nextSpell" in t.at &&
         t.at.orNextAbility !== undefined &&
         t.at.turn === this.state.turn.number &&
@@ -51358,6 +51321,7 @@ controlledBy,
     if (cost === undefined || parseManaCost(cost.mana).x === 0) return;
     this.state.delayedTriggers = this.state.delayedTriggers.filter((t) => !firing.includes(t));
     for (const trigger of firing) {
+      if (!this.delayedIfHolds(trigger, abilityId)) continue;
       this.state.pendingTriggers.push({
         sourceObjectId: trigger.source,
         cardName: trigger.sourceName,
@@ -51373,18 +51337,24 @@ controlledBy,
     if (this.state.delayedTriggers.length === 0) return;
     const firing = this.state.delayedTriggers.filter(
       (t) =>
-        typeof t.at === "object" &&
         "nextSpell" in t.at &&
         t.at.turn === this.state.turn.number &&
         t.controller === event.player &&
         // The source too, for "a spell with the chosen name" (Medomai's
         // Prophecy): `chosenName` reads the names its source chose, from its
         // last-known information once the Saga is gone.
-        matchesFilter(this.state, this.registry, event.object, t.at.nextSpell, { you: t.controller, source: t.source }),
+        // Its amounts too, as the spell is cast: "less than or equal to Loki's
+        // power".
+        matchesFilter(this.state, this.registry, event.object, t.at.nextSpell, {
+          you: t.controller,
+          source: t.source,
+          amount: this.filterAmounts({ source: t.source, controller: t.controller }),
+        }),
     );
     if (firing.length === 0) return;
     this.state.delayedTriggers = this.state.delayedTriggers.filter((t) => !firing.includes(t));
     for (const trigger of firing) {
+      if (!this.delayedIfHolds(trigger, event.object)) continue;
       // The X of the spell that fired it, as a cast trigger's is
       // (`triggerCastX`): Brass Infiniscope's "when you next cast a spell with
       // {X} … gain half X life" is that spell's X.

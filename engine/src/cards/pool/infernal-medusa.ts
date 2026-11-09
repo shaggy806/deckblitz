@@ -19,14 +19,14 @@ export default defineCard({
     {
       trigger: { on: "blocks", who: "self", object: "blocked" },
       targets: [],
-      effect: { kind: "delayed-trigger", at: "end-of-combat", effect: { kind: "destroy", target: "trigger-object" }, text: "Destroy that creature." },
+      effect: { kind: "delayed-trigger", at: { step: "end-combat" }, effect: { kind: "destroy", target: "trigger-object" }, text: "Destroy that creature." },
       resolve: null,
       text: T0,
     },
     {
       trigger: { on: "blocked-by", who: "self", blocker: { notSubtypes: ["Wall"] } },
       targets: [],
-      effect: { kind: "delayed-trigger", at: "end-of-combat", effect: { kind: "destroy", target: "trigger-object" }, text: "Destroy that creature." },
+      effect: { kind: "delayed-trigger", at: { step: "end-combat" }, effect: { kind: "destroy", target: "trigger-object" }, text: "Destroy that creature." },
       resolve: null,
       text: T1,
     },

@@ -45,7 +45,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "your-next-upkeep",
+        at: { step: "upkeep", whose: "you" },
         effect: { kind: "modal", minModes: 1, maxModes: 1, modes: MODES },
         text: "Choose a basic land type. Giant Slug gains landwalk of the chosen type until end of turn.",
       },

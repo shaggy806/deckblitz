@@ -25,7 +25,7 @@ export default defineCard({
           { kind: "exile", target: 0 },
           {
             kind: "delayed-trigger",
-            at: "your-next-upkeep",
+            at: { step: "upkeep", whose: "you" },
             about: "exiled",
             effect: { kind: "cast-now", target: 0, free: true, exileAfter: true },
             text: "At the beginning of your next upkeep, you may cast that card without paying its mana cost. If that spell would be put into your graveyard, exile it instead.",

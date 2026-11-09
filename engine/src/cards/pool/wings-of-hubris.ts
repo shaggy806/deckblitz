@@ -24,7 +24,7 @@ export default defineCard({
           { kind: "grant-keyword", target: "attached", keyword: "unblockable", duration: "end-of-turn" },
           {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             about: "attached",
             effect: { kind: "sacrifice-target", target: 0 },
             text: "Sacrifice it at the beginning of the next end step.",

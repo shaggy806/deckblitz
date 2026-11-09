@@ -46,7 +46,7 @@ export default defineCard({
                 { kind: "goad", target: 1 },
                 {
                   kind: "delayed-trigger",
-                  at: "next-end-step",
+                  at: { step: "end" },
                   // The same object: it kept its id across the move.
                   effect: { kind: "exile", target: 1 },
                   text: "Exile the creature The Beamtown Bullies put onto the battlefield.",

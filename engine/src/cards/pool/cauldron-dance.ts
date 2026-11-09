@@ -16,7 +16,7 @@ export default defineCard({
       { kind: "grant-keyword", target: 0, keyword: "haste", duration: "permanent" },
       {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         effect: { kind: "return-to-hand", target: 0 },
         text: "Return the creature Cauldron Dance returned to the battlefield to your hand.",
       },
@@ -34,7 +34,7 @@ export default defineCard({
             { kind: "grant-keyword", target: 0, keyword: "haste", duration: "permanent" },
             {
               kind: "delayed-trigger",
-              at: "next-end-step",
+              at: { step: "end" },
               effect: { kind: "sacrifice-target", target: 0, byItsController: true },
               text: "Its controller sacrifices the creature Cauldron Dance put onto the battlefield from your hand.",
             },

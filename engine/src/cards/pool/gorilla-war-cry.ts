@@ -23,7 +23,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "grant-keyword-all", filter: { type: "creature" }, keyword: "menace", duration: "end-of-turn" },
-      { kind: "delayed-trigger", at: "next-upkeep", effect: { kind: "draw", amount: 1 }, text: "Draw a card." },
+      { kind: "delayed-trigger", at: { step: "upkeep" }, effect: { kind: "draw", amount: 1 }, text: "Draw a card." },
     ],
   },
 });

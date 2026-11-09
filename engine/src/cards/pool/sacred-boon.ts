@@ -15,7 +15,7 @@ export default defineCard({
       { kind: "prevent-damage", target: 0, amount: 3 },
       {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         text: "Put a +0/+1 counter on that creature for each 1 damage prevented this way.",
         effect: { kind: "add-counter", target: 0, counter: "+0/+1", amount: { damagePreventedThisWay: true } },
       },

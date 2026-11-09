@@ -190,7 +190,7 @@ describe("Suppress: that player's next turn, whoever's it is now", () => {
     cast(game, toHand(game, "Suppress"), { targets: [ref(B)] });
     const [delayed] = game.state.delayedTriggers;
     expect(delayed.controller).toBe(A);
-    expect(delayed.turnOf).toBe(B);
+    expect(delayed.at).toMatchObject({ whose: B });
   });
 
   it("on yourself during your turn, it's your next turn and not this one", () => {
@@ -218,7 +218,7 @@ describe("Suppress: that player's next turn, whoever's it is now", () => {
     lands(game, "Island", 6, B);
     const stop = toHand(game, "Time Stop", B);
     game.advanceUntil((s) => s.turn.number === 2 && s.turn.step === "upkeep" && s.priority.holder === B);
-    expect(game.state.delayedTriggers[0].turnBegan).toBe(true);
+    expect(game.state.delayedTriggers[0].at).toMatchObject({ turnBegan: true });
     cast(game, stop, { player: B });
     untilTurn(game, 3, "upkeep");
     expect(game.state.delayedTriggers).toEqual([]);

@@ -15,7 +15,7 @@ export default defineCard({
       { kind: "grant-keyword", target: 0, keyword: "banding", duration: "end-of-turn" },
       {
         kind: "delayed-trigger",
-        at: "next-upkeep",
+        at: { step: "upkeep" },
         effect: { kind: "draw", amount: 1 },
         text: "Draw a card.",
       },

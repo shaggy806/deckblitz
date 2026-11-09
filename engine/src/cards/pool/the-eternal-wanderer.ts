@@ -30,7 +30,7 @@ export default defineCard({
       effect: {
         kind: "flicker",
         target: 0,
-        returnAt: "your-next-end-step",
+        returnAt: { step: "end", whose: "you" },
         returnOnOwnersTurn: true,
         returnText: "Return the exiled card to the battlefield under its owner's control.",
       },

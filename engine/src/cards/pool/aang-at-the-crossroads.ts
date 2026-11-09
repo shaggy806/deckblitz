@@ -44,7 +44,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "next-upkeep",
+        at: { step: "upkeep" },
         effect: { kind: "transform", target: "source" },
         text: "Transform Aang.",
       },

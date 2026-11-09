@@ -19,7 +19,7 @@ export default defineCard({
       { kind: "prevent-damage-from-chosen-source", to: "you", amount: "next-time", gainLifePrevented: true },
       {
         kind: "delayed-trigger",
-        at: "your-next-upkeep",
+        at: { step: "upkeep", whose: "you" },
         effect: {
           kind: "unless",
           chooser: "you",

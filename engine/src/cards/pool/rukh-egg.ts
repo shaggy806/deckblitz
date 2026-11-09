@@ -24,7 +24,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         effect: { kind: "create-token", token: "4/4 Red Bird Token", count: 1 },
         text: "Create a 4/4 red Bird creature token with flying.",
       },

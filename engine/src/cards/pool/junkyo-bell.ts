@@ -27,7 +27,7 @@ export default defineCard({
             { kind: "modify-pt", target: 0, power: X, toughness: X, duration: "end-of-turn" },
             {
               kind: "delayed-trigger",
-              at: "next-end-step",
+              at: { step: "end" },
               effect: { kind: "sacrifice-target", target: 0 },
               text: "Sacrifice the creature Junkyo Bell pumped.",
             },

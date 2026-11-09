@@ -48,7 +48,7 @@ export default defineCard({
       ],
       effect: {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         text: "Those planeswalkers phase out.",
         effect: { kind: "for-each-target", from: 0, simultaneous: true, effect: { kind: "phase-out", target: 0 } },
       },

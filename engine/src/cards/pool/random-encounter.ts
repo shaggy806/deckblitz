@@ -41,7 +41,7 @@ export default defineCard({
       },
       {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         about: "put-onto-battlefield",
         effect: {
           kind: "for-each-target",

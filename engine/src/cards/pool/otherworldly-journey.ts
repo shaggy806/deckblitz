@@ -25,7 +25,7 @@ export default defineCard({
   effect: {
     kind: "flicker",
     target: 0,
-    returnAt: "next-end-step",
+    returnAt: { step: "end" },
     thenCounters: { kind: "+1/+1", amount: 1, entering: true },
     returnText: "Return the exiled card to the battlefield under its owner's control with a +1/+1 counter on it.",
   },

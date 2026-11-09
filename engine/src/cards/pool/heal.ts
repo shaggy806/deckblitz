@@ -13,7 +13,7 @@ export default defineCard({
       { kind: "prevent-damage", target: 0, amount: 1 },
       {
         kind: "delayed-trigger",
-        at: "next-upkeep",
+        at: { step: "upkeep" },
         effect: { kind: "draw", amount: 1 },
         text: "Draw a card.",
       },

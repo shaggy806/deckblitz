@@ -27,7 +27,7 @@ export default defineCard({
       targets: [{ kind: "permanent", filter: { blocking: true, type: "creature" } }],
       effect: {
         kind: "delayed-trigger",
-        at: "end-of-combat",
+        at: { step: "end-combat" },
         text: "Destroy that creature.",
         effect: { kind: "destroy", target: 0 },
       },

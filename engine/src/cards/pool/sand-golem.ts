@@ -18,7 +18,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         effect: { kind: "put-onto-battlefield", target: "source", withCounters: { kind: "+1/+1", amount: 1 } },
         text: "Return Sand Golem from your graveyard to the battlefield with a +1/+1 counter on it.",
       },

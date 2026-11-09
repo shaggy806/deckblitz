@@ -29,7 +29,7 @@ export default defineCard({
           { kind: "draw", amount: 3 },
           {
             kind: "delayed-trigger",
-            at: "your-next-upkeep",
+            at: { step: "upkeep", whose: "you" },
             effect: { kind: "discard", target: "you", amount: 3, random: true },
             text: "Discard three cards at random.",
           },

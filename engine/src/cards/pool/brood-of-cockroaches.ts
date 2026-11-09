@@ -19,7 +19,7 @@ export default defineCard({
       // One effect at the end step (the ruling): the life loss isn't optional.
       effect: {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         effect: {
           kind: "sequence",
           effects: [

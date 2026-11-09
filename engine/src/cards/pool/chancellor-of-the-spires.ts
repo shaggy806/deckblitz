@@ -36,7 +36,7 @@ export default defineCard({
   keywords: ["flying"],
   text: `${REVEAL}\nFlying\n${ETB}`,
   openingHandReveal: {
-    at: "next-upkeep",
+    at: { step: "upkeep" },
     effect: { kind: "mill", target: "each-opponent", amount: 7 },
     text: REVEAL,
   },

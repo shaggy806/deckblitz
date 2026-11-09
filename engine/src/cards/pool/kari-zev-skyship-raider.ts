@@ -38,7 +38,7 @@ export default defineCard({
           // next end of combat step — this combat's.
           {
             kind: "delayed-trigger",
-            at: "end-of-combat",
+            at: { step: "end-combat" },
             about: "created",
             effect: { kind: "exile", target: 0 },
             text: "Exile that token at end of combat.",

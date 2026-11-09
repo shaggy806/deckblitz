@@ -153,7 +153,7 @@ describe("additional upkeep steps (Obeka, Splitter of Seconds)", () => {
     const { game } = setUp();
     game.debugApplyEffect(A, {
       kind: "delayed-trigger",
-      at: "next-upkeep",
+      at: { step: "upkeep" },
       effect: { kind: "gain-life", amount: 3 },
       text: "At the beginning of the next upkeep, you gain 3 life.",
     });

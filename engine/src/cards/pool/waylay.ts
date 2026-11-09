@@ -19,7 +19,7 @@ export default defineCard({
       { kind: "create-token", token: "2/2 White Knight Token", count: 3 },
       {
         kind: "delayed-trigger",
-        at: "next-cleanup",
+        at: { step: "cleanup" },
         about: "created",
         effect: { kind: "for-each-target", from: 0, effect: { kind: "exile", target: 0 } },
         text: "Exile those tokens.",

@@ -17,7 +17,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "end-of-combat",
+        at: { step: "end-combat" },
         effect: { kind: "phase-out", target: "trigger-object" },
         text: "It phases out.",
       },

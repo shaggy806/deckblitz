@@ -25,7 +25,7 @@ export default defineCard({
         effects: [
           {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             effect: { kind: "put-onto-battlefield", target: "trigger-object" },
             text: "Return Ivory Gargoyle to the battlefield under its owner's control.",
           },

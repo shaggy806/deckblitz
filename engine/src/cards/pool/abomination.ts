@@ -15,7 +15,7 @@ const TEXT = "Whenever this creature blocks or becomes blocked by a green or whi
 const GREEN_OR_WHITE = { anyOf: [{ colors: ["G"] }, { colors: ["W"] }] } as const;
 const DESTROY = {
   kind: "delayed-trigger",
-  at: "end-of-combat",
+  at: { step: "end-combat" },
   effect: { kind: "destroy", target: "trigger-object" },
   text: "Destroy that creature.",
 } as const;

@@ -24,7 +24,7 @@ export default defineCard({
       },
       {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         about: "exiled",
         text: "If you haven't cast the card, return it to its owner's hand.",
         effect: { kind: "return-to-hand", target: 0, from: "exile" },

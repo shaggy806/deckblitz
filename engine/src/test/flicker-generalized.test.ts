@@ -74,7 +74,7 @@ describe("flicker of several targets — exiled together, returned together", ()
     const bears = [0, 1].map(() => game.debugSpawn("Grizzly Bears", A, "battlefield"));
     game.debugApplyEffect(
       A,
-      { kind: "flicker", target: [0, 1], returnAt: "next-end-step" },
+      { kind: "flicker", target: [0, 1], returnAt: { step: "end" } },
       bears.map((object) => ({ kind: "object" as const, object })),
     );
     for (const id of bears) expect(game.state.objects[id].zone).toBe("exile");

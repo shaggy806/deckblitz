@@ -34,7 +34,8 @@ import type { CompanionCondition } from "../companion.js";
 import type { Color, ManaFromSpec, ManaProductionRule, ManaType, SpendAs } from "../mana.js";
 import type { Prohibition } from "../prohibitions.js";
 import type { ReplacementSpec } from "../replacements.js";
-import type { DelayedTriggerTiming, HeldPlayerCounter, PlayerCounterKind, JournalWhat, ZoneType } from "../state.js";
+import type { DelayedAt } from "../delayed-at.js";
+import type { HeldPlayerCounter, PlayerCounterKind, JournalWhat, ZoneType } from "../state.js";
 import type { JournalWindow } from "../journal.js";
 import type { ObjectRef } from "../refs.js";
 import type { TargetSpec } from "../target.js";
@@ -5462,9 +5463,9 @@ export interface CardDefinition {
    * of Foresight): once every hand is kept, its owner is asked, starting
    * player first, which such cards to reveal; each one revealed sets up a
    * delayed triggered ability (rule 603.7) its owner controls, firing `at`
-   * the first such step of the game — `"next-upkeep"` for "the first
-   * upkeep", `"your-next-upkeep"` for "your first upkeep",
-   * `"your-next-main-phase"` for "your first main phase of the game". The
+   * the first such step of the game — `{ step: "upkeep" }` for "the first
+   * upkeep", `{ step: "upkeep", whose: "you" }` for "your first upkeep",
+   * `{ step: "main", whose: "you" }` for "your first main phase of the game". The
    * card stays in the hand (`Game.beginOpeningHandActions`). */
   readonly openingHandReveal: OpeningHandReveal | null;
   /** "Any time you could mulligan and this card is in your hand, you may …"
@@ -5499,7 +5500,7 @@ export interface BeginsOnBattlefieldWith {
 
 /** See {@link CardDefinition.openingHandReveal}. */
 export interface OpeningHandReveal {
-  readonly at: Extract<DelayedTriggerTiming, "next-upkeep" | "your-next-upkeep" | "your-next-main-phase">;
+  readonly at: DelayedAt;
   readonly effect: EffectSpec;
   /** The delayed ability's text, for the log and the stack. */
   readonly text: string;

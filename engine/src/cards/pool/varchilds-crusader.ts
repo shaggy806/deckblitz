@@ -19,7 +19,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "restrict", target: "source", restrictions: [{ kind: "cant-be-blocked", by: { notSubtypes: ["Wall"] } }] },
-          { kind: "delayed-trigger", at: "next-end-step", effect: { kind: "sacrifice-source" }, text: "Sacrifice this creature at the beginning of the next end step." },
+          { kind: "delayed-trigger", at: { step: "end" }, effect: { kind: "sacrifice-source" }, text: "Sacrifice this creature at the beginning of the next end step." },
         ],
       },
       resolve: null,

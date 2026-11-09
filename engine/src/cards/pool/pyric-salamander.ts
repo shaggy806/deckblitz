@@ -28,7 +28,7 @@ export default defineCard({
           { kind: "modify-pt", target: "source", power: 1, toughness: 0, duration: "end-of-turn" },
           {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             effect: { kind: "sacrifice-source" },
             text: "Sacrifice Pyric Salamander.",
           },

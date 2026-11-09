@@ -28,7 +28,7 @@ export default defineCard({
         kind: "flip-coin",
         won: { kind: "modify-pt", target: 0, power: 1, toughness: 1, duration: "end-of-turn" },
       },
-      { kind: "delayed-trigger", at: "next-upkeep", effect: { kind: "draw", amount: 1 }, text: "Draw a card." },
+      { kind: "delayed-trigger", at: { step: "upkeep" }, effect: { kind: "draw", amount: 1 }, text: "Draw a card." },
     ],
   },
 });

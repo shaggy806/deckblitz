@@ -28,8 +28,7 @@ export default defineCard({
       targets: ["opponent"],
       effect: {
         kind: "delayed-trigger",
-        at: "your-next-upkeep",
-        turnOf: { target: 0 },
+        at: { step: "upkeep", whose: { target: 0 } },
         effect: { kind: "put-onto-battlefield", target: "source", under: { target: 0 } },
         text: "Return this creature to the battlefield under that player's control at the beginning of their next upkeep.",
       },

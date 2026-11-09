@@ -36,7 +36,8 @@ import type { CardFilter } from "./filter.js";
 import type { CardNameAim, CardNameFilter } from "./card-names.js";
 import type { Color, ManaProductionRule, ManaType, ManaUnit, SpendAs, SpentMana } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
-import type { Expiry, UntilCast, UntilPoint, WhileSource } from "./duration.js";
+import type { DelayedStepWatch } from "./delayed-at.js";
+import type { Expiry, UntilCast, UntilPoint, WatchDuration, WhileSource } from "./duration.js";
 import type { RollRecord } from "./random-results.js";
 import type { ReplacementSpec } from "./replacements.js";
 import type { CardPlayPermission, CastNowTerms, EffectPlay } from "./play-permission.js";
@@ -4599,46 +4600,6 @@ export interface ExtraTurnRider {
   };
 }
 
-/**
- * When a delayed triggered ability fires (rule 603.7).
- *
- * "Next" always means the next such step to *begin*, never one already in
- * progress — an effect that resolves during an end step and says "at the
- * beginning of the next end step" waits for the following turn's.
- */
-export type DelayedTriggerTiming =
-  /** The next end step, whoever's turn it is — the common one ("sacrifice it
-   * at the beginning of the next end step"). */
-  | "next-end-step"
-  /** The next upkeep, whoever's turn it is (Arcane Denial, Mishra's Bauble:
-   * "at the beginning of the next turn's upkeep"). */
-  | "next-upkeep"
-  /** Your own next upkeep / end step / precombat main phase — these wait for
-   * the ability's *controller* to be the active player (Mana Drain's "at the
-   * beginning of your next main phase"). */
-  | "your-next-upkeep"
-  | "your-next-end-step"
-  | "your-next-main-phase"
-  /** The end step of your next **turn**: never the turn it was made in, though
-   * `"your-next-end-step"` would be that turn's (Kav Landseeker; with
-   * `turnOf`, Suppress's "the end step of that player's next turn"). A next
-   * turn whose end step never comes lets it lapse, unfired. */
-  | "your-next-turn-end-step"
-  /** "At end of combat" — the beginning of the next end of combat step
-   * (rule 511.2): myriad's "exile the tokens at end of combat". */
-  | "end-of-combat"
-  /** "At this turn's next end of combat" (Venomous Breath): as `"end-of-combat"`,
-   * but with none left this turn it lapses with the turn, never firing. */
-  | "end-of-combat-this-turn"
-  /** This turn's end step and no other: "at the beginning of that turn's end
-   * step" of an extra turn (Warrior's Oath), which is set up as that turn
-   * begins. A turn whose end step never comes lets it lapse, unfired. */
-  | "this-turn-end-step"
-  /** "At the beginning of the next cleanup step" — put on the stack once that
-   * step's turn-based actions are done (rule 514.3a), the Mirage block's
-   * flash-and-sacrifice (`CardDefinition.flashThenSacrifice`). */
-  | "next-cleanup";
-
 /** Which combat phase: the turn's number, and which of that turn's combat
  * phases (`TurnState.combatPhases` as it began — 1 for the first). */
 export interface CombatId {
@@ -4710,20 +4671,18 @@ export interface DelayedUnblockedWatch {
 }
 
 /** A delayed trigger with a duration matching any event a trigger can name
- * — see `DelayedWhenever`. Fires each time; lapses as the next turn begins,
- * or with `untilYourNextTurn`, as its controller's next turn does. */
+ * — see `DelayedWhenever`. Fires each time, until `until` ends it. */
 export interface DelayedWheneverWatch {
   readonly whenever: TriggerSpec;
   /** Targets it chooses each time it triggers — absent, it reads the
    * creating ability's. */
   readonly targets?: readonly TargetSpec[];
-  readonly untilYourNextTurn?: true;
-  /** "…this combat": lapses as the end of combat step ends (rule 511.3). */
-  readonly untilEndOfCombat?: true;
-  /** `DelayedWhenever.until: "game"`: no duration ends it. */
-  readonly forGame?: true;
-  /** `DelayedWhenever.whileAnyExiled`: until none of its targets is still exiled. */
-  readonly whileAnyExiled?: true;
+  /** How long it lasts: `DelayedWhenever.until`, `"end-of-turn"` if that was
+   * omitted. */
+  readonly until: WatchDuration;
+  /** `"until-end-of-your-next-turn"`: that turn has begun and is this one, so
+   * the next turn to begin ends it. */
+  readonly inLastTurn?: true;
   /** Only damage dealt to this player — `DelayedWhenever.toPlayer`. */
   readonly player?: PlayerId;
   /** What `"self"` in `whenever` reads as, each in its stint on the
@@ -4747,8 +4706,6 @@ export interface DelayedLoseControlWatch {
   /** Which stint of it on the battlefield. */
   readonly stint: number;
   readonly thisTurn?: true;
-  /** `DelayedLosesControl.onlyIf`. */
-  readonly onlyIf?: StaticCondition;
 }
 
 export interface DelayedCastWatch {
@@ -4777,7 +4734,7 @@ export interface DelayedTrigger {
   /** The step it waits for, the permanent whose leaving it waits for, or
    * the spell its controller casts next. */
   readonly at:
-    | DelayedTriggerTiming
+    | DelayedStepWatch
     | DelayedLeaveWatch
     | DelayedCastWatch
     | DelayedUnblockedWatch
@@ -4787,11 +4744,9 @@ export interface DelayedTrigger {
      * the additional combat phase with this mark (`TurnState.addedCombat`),
      * this turn only. */
     | { readonly thatCombat: number };
-  /** The player whose turn a `"your-…"` timing waits for, when it isn't its
-   * controller's (rule 603.7d: the ability stays its creator's) — Suppress. */
-  readonly turnOf?: PlayerId;
-  /** `"your-next-turn-end-step"`: that turn has begun, and is this one. */
-  readonly turnBegan?: true;
+  /** Its intervening "if" (rule 603.4), asked as it would trigger and again
+   * as it resolves: the `delayed-trigger` effect's `if`. */
+  readonly if?: StaticCondition;
   /** The creating ability's trigger object, and its `zoneChangeCount` then
    * — "return **that card** to the battlefield" (Shirei, Shizo's Caretaker).
    * It's the delayed ability's trigger object too, as long as it's still that

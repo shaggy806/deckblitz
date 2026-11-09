@@ -30,7 +30,7 @@ export default defineCard({
           { kind: "exile-all", filter: { type: "creature", crewedSource: true } },
           {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             about: "exiled",
             effect: {
               kind: "for-each-target",

@@ -21,7 +21,7 @@ export default defineCard({
       { kind: "create-token", token: "Red Giant Token 4/4", count: 1 },
       {
         kind: "delayed-trigger",
-        at: "your-next-upkeep",
+        at: { step: "upkeep", whose: "you" },
         effect: {
           kind: "unless",
           chooser: "you",

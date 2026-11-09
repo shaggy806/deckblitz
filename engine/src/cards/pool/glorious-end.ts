@@ -15,7 +15,7 @@ export default defineCard({
       { kind: "end-the-turn" },
       {
         kind: "delayed-trigger",
-        at: "your-next-end-step",
+        at: { step: "end", whose: "you" },
         effect: { kind: "lose-game" },
         text: "At the beginning of your next end step, you lose the game.",
       },

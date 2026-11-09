@@ -594,6 +594,7 @@ import _poolPeterParkersCamera from "../pool/peter-parkers-camera.js";
 import _poolPharikasLibation from "../pool/pharikas-libation.js";
 import _poolPhelddagrif from "../pool/phelddagrif.js";
 import _poolPhyrexianVatmother from "../pool/phyrexian-vatmother.js";
+import _poolPhytotitan from "../pool/phytotitan.js";
 import _poolPillardropWarden from "../pool/pillardrop-warden.js";
 import _poolPiousWarrior from "../pool/pious-warrior.js";
 import _poolPithingNeedle from "../pool/pithing-needle.js";
@@ -789,6 +790,7 @@ import _poolStingbladeAssassin from "../pool/stingblade-assassin.js";
 import _poolStirUpTrouble from "../pool/stir-up-trouble.js";
 import _poolStormChargedSlasher from "../pool/storm-charged-slasher.js";
 import _poolStormEntity from "../pool/storm-entity.js";
+import _poolStormKingsThunder from "../pool/storm-kings-thunder.js";
 import _poolStormTheSeedcore from "../pool/storm-the-seedcore.js";
 import _poolStructuralCollapse from "../pool/structural-collapse.js";
 import _poolStructuralDistortion from "../pool/structural-distortion.js";
@@ -1583,6 +1585,7 @@ const shard: CardShard = {
     _poolPharikasLibation,
     _poolPhelddagrif,
     _poolPhyrexianVatmother,
+    _poolPhytotitan,
     _poolPillardropWarden,
     _poolPiousWarrior,
     _poolPithingNeedle,
@@ -1778,6 +1781,7 @@ const shard: CardShard = {
     _poolStirUpTrouble,
     _poolStormChargedSlasher,
     _poolStormEntity,
+    _poolStormKingsThunder,
     _poolStormTheSeedcore,
     _poolStructuralCollapse,
     _poolStructuralDistortion,

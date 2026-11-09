@@ -22,7 +22,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "your-next-upkeep",
+        at: { step: "upkeep", whose: "you" },
         text: "At the beginning of your next upkeep, create X 1/1 red, green, and white Sand Warrior creature tokens, where X is the number of lands you control.",
         effect: {
           kind: "create-token",

@@ -76,7 +76,7 @@ export const RING_EMBLEM_TRIGGERS: readonly TriggeredAbility[] = [
     targets: [],
     effect: {
       kind: "delayed-trigger",
-      at: "end-of-combat",
+      at: { step: "end-combat" },
       effect: { kind: "sacrifice-target", target: "trigger-object", byItsController: true },
       text: "The creature that blocked your Ring-bearer is sacrificed.",
     },

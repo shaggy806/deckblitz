@@ -28,7 +28,7 @@ export default defineCard({
         ...THREATEN,
         {
           kind: "delayed-trigger",
-          at: "next-end-step",
+          at: { step: "end" },
           effect: { kind: "sacrifice-target", target: 0 },
           text: "Sacrifice the creature In Thrall to the Pit gained control of.",
         },

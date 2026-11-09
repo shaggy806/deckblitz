@@ -31,7 +31,7 @@ export default defineCard({
             { kind: "create-token", token: "1/1 Red Elemental Token", count: "x", tapped: true, attacking: "choose" },
             {
               kind: "delayed-trigger",
-              at: "next-end-step",
+              at: { step: "end" },
               about: "created",
               effect: {
                 kind: "conditional",

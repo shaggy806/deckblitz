@@ -24,7 +24,7 @@ export default defineCard({
         kind: "add-mana",
         mana: "any-color",
         amount: 1,
-        also: { kind: "delayed-trigger", at: "next-upkeep", effect: { kind: "draw", amount: 1 }, text: "Draw a card." },
+        also: { kind: "delayed-trigger", at: { step: "upkeep" }, effect: { kind: "draw", amount: 1 }, text: "Draw a card." },
       },
       resolve: null,
       text: TEXT,

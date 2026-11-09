@@ -35,7 +35,7 @@ const exiler = defineCard({
           { kind: "exile", target: 0 },
           {
             kind: "delayed-trigger",
-            at: "next-upkeep",
+            at: { step: "upkeep" },
             effect: { kind: "gain-life", amount: { powerOf: 0 } },
             text: TEXT,
           },

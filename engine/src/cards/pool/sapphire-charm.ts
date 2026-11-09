@@ -20,7 +20,7 @@ export default defineCard({
         targets: ["player"],
         effect: {
           kind: "delayed-trigger",
-          at: "next-upkeep",
+          at: { step: "upkeep" },
           text: "That player draws a card.",
           effect: { kind: "draw", amount: 1, target: 0 },
         },

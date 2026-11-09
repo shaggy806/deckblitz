@@ -15,7 +15,7 @@ export default defineCard({
       { kind: "become-blocked", target: 0 },
       {
         kind: "delayed-trigger",
-        at: "next-upkeep",
+        at: { step: "upkeep" },
         effect: { kind: "draw", amount: 1 },
         text: "Draw a card.",
       },

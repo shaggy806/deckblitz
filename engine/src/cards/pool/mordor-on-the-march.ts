@@ -39,7 +39,7 @@ export default defineCard({
         { kind: "create-token-copy", of: 0, count: 1, who: "you", gainUntilEndOfTurn: ["haste"] },
         {
           kind: "delayed-trigger",
-          at: "next-end-step",
+          at: { step: "end" },
           about: "created",
           effect: { kind: "for-each-target", from: 0, effect: { kind: "exile", target: 0 } },
           text: "Exile it at the beginning of the next end step.",

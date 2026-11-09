@@ -49,7 +49,7 @@ export default defineCard({
             targets: [],
             effect: {
               kind: "delayed-trigger",
-              at: "next-end-step",
+              at: { step: "end" },
               effect: { kind: "put-onto-battlefield", target: "trigger-object", underYourControl: true },
               text: "Return that card to the battlefield under your control.",
             },

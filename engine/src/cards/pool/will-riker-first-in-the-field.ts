@@ -27,7 +27,7 @@ export default defineCard({
           { kind: "reveal-until-count", filter: { type: "land" }, count: 2, put: "battlefield", rest: "bottom-random" },
           {
             kind: "delayed-trigger",
-            at: "your-next-end-step",
+            at: { step: "end", whose: "you" },
             about: "put-onto-battlefield",
             effect: { kind: "for-each-target", from: 0, effect: { kind: "sacrifice-target", target: 0 }, simultaneous: true },
             text: "Sacrifice those lands.",

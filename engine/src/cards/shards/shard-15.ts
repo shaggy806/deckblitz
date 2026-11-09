@@ -307,6 +307,7 @@ import _poolGeneratorServant from "../pool/generator-servant.js";
 import _poolGetOut from "../pool/get-out.js";
 import _poolGeyserGlider from "../pool/geyser-glider.js";
 import _poolGhostLitNourisher from "../pool/ghost-lit-nourisher.js";
+import _poolGhostway from "../pool/ghostway.js";
 import _poolGiantOctopus from "../pool/giant-octopus.js";
 import _poolGiantShark from "../pool/giant-shark.js";
 import _poolGideonsReproach from "../pool/gideons-reproach.js";
@@ -1248,6 +1249,7 @@ const shard: CardShard = {
     _poolGetOut,
     _poolGeyserGlider,
     _poolGhostLitNourisher,
+    _poolGhostway,
     _poolGiantOctopus,
     _poolGiantShark,
     _poolGideonsReproach,

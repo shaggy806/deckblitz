@@ -53,7 +53,7 @@ export default defineCard({
             },
             {
               kind: "delayed-trigger",
-              at: "next-end-step",
+              at: { step: "end" },
               about: "put-onto-battlefield",
               effect: { kind: "return-to-hand", target: 0 },
               text: "Return it to your hand.",

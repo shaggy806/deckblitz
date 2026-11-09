@@ -15,7 +15,7 @@ export default defineCard({
       { kind: "prohibit", prohibits: [{ act: "play-land", who: { target: 0 } }] },
       {
         kind: "delayed-trigger",
-        at: "next-upkeep",
+        at: { step: "upkeep" },
         effect: { kind: "draw", amount: 1 },
         text: "Draw a card.",
       },

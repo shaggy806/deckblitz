@@ -19,7 +19,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "damage", amount: 1, target: 0 },
-          { kind: "delayed-trigger", at: "next-end-step", text: "Destroy this artifact.", effect: { kind: "destroy", target: "source" } },
+          { kind: "delayed-trigger", at: { step: "end" }, text: "Destroy this artifact.", effect: { kind: "destroy", target: "source" } },
         ],
       },
       resolve: null,

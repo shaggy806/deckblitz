@@ -37,7 +37,7 @@ export default defineCard({
             { kind: "grant-keyword", target: 0, keyword: "haste", duration: "end-of-turn" },
             {
               kind: "delayed-trigger",
-              at: "next-end-step",
+              at: { step: "end" },
               effect: { kind: "exile", target: 0 },
               text: "Exile the creature Dawn of the Dead returned to the battlefield.",
             },

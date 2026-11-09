@@ -14,7 +14,7 @@ export default defineCard({
       { kind: "mill", target: "you", amount: 7 },
       {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         effect: { kind: "look-and-choose", zone: "graveyard", min: 7, max: 7, destination: "exile", leftover: "stay" },
         text: DELAYED_TEXT,
       },

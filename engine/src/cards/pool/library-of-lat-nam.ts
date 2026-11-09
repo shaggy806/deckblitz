@@ -18,7 +18,7 @@ export default defineCard({
         text: "You draw three cards at the beginning of the next turn's upkeep.",
         effect: {
           kind: "delayed-trigger",
-          at: "next-upkeep",
+          at: { step: "upkeep" },
           effect: { kind: "draw", amount: 3 },
           text: "Draw three cards (Library of Lat-Nam).",
         },

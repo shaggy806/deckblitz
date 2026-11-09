@@ -11,7 +11,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "search-library", filter: {}, destination: "exile", min: 3, max: 3 },
-      { kind: "delayed-trigger", at: "next-upkeep", text: "Draw a card at the beginning of the next turn's upkeep.", effect: { kind: "draw", amount: 1 } },
+      { kind: "delayed-trigger", at: { step: "upkeep" }, text: "Draw a card at the beginning of the next turn's upkeep.", effect: { kind: "draw", amount: 1 } },
     ],
   },
 });

@@ -15,7 +15,7 @@ export default defineCard({
   effect: { kind: "set-life-total", who: "you", amount: 26 },
   targets: [],
   openingHandReveal: {
-    at: "next-upkeep",
+    at: { step: "upkeep" },
     effect: { kind: "set-life-total", who: "you", amount: 26 },
     text: REVEAL,
   },

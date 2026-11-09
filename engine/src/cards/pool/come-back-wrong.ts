@@ -29,7 +29,7 @@ export default defineCard({
         filter: { type: "creature", token: false, thisWay: "died" },
         then: {
           kind: "delayed-trigger",
-          at: "your-next-end-step",
+          at: { step: "end", whose: "you" },
           effect: { kind: "sacrifice-target", target: 0 },
           text: "Sacrifice the creature Come Back Wrong returned to the battlefield.",
         },

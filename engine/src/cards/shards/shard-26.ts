@@ -286,6 +286,7 @@ import _poolFieryEmancipation from "../pool/fiery-emancipation.js";
 import _poolFind from "../pool/find.js";
 import _poolFinishingBlow from "../pool/finishing-blow.js";
 import _poolFireAtWill from "../pool/fire-at-will.js";
+import _poolFireGiantsFury from "../pool/fire-giants-fury.js";
 import _poolFirecannonBlast from "../pool/firecannon-blast.js";
 import _poolFiresOfYavimaya from "../pool/fires-of-yavimaya.js";
 import _poolFlagstonesOfTrokair from "../pool/flagstones-of-trokair.js";
@@ -1295,6 +1296,7 @@ const shard: CardShard = {
     _poolFind,
     _poolFinishingBlow,
     _poolFireAtWill,
+    _poolFireGiantsFury,
     _poolFirecannonBlast,
     _poolFiresOfYavimaya,
     _poolFlagstonesOfTrokair,

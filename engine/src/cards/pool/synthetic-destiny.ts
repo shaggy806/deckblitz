@@ -21,7 +21,7 @@ export default defineCard({
       { kind: "exile-all", filter: { type: "creature", controlledBy: "you" } },
       {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         remember: { exiled: { set: { thisWay: "exiled" } } },
         effect: {
           kind: "reveal-until-count",

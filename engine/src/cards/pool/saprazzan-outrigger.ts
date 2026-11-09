@@ -12,7 +12,7 @@ const topAtEndOfCombat = (on: "attacks" | "blocks"): TriggeredAbility => ({
   targets: [],
   effect: {
     kind: "delayed-trigger",
-    at: "end-of-combat",
+    at: { step: "end-combat" },
     effect: { kind: "put-on-library", target: "source", position: "top" },
     text: "Put Saprazzan Outrigger on top of its owner's library.",
   },

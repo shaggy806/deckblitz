@@ -25,7 +25,7 @@ export default defineCard({
               { kind: "create-token", token: "4/4 Angel Token", count: 1, tapped: true, attacking: "choose" },
               {
                 kind: "delayed-trigger",
-                at: "end-of-combat",
+                at: { step: "end-combat" },
                 about: "created",
                 // Every token made, two with Doubling Season (Geist of Saint Traft's ruling).
                 effect: { kind: "for-each-target", from: 0, effect: { kind: "exile", target: 0 } },

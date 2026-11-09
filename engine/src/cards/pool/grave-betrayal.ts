@@ -32,7 +32,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         text: "Return that creature to the battlefield under your control with an additional +1/+1 counter on it. It's a black Zombie in addition to its other colors and types.",
         effect: {
           kind: "put-onto-battlefield",

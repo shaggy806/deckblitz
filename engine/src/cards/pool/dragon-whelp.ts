@@ -32,7 +32,7 @@ export default defineCard({
             condition: { kind: "activated-this-turn", atLeast: 4 },
             then: {
               kind: "delayed-trigger",
-              at: "next-end-step",
+              at: { step: "end" },
               effect: { kind: "sacrifice-source" },
               text: "Sacrifice Dragon Whelp.",
             },

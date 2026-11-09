@@ -21,7 +21,7 @@ const atEndOfCombat = (on: "attacks" | "blocks"): TriggeredAbility => ({
   targets: [],
   effect: {
     kind: "delayed-trigger",
-    at: "end-of-combat",
+    at: { step: "end-combat" },
     effect: {
       kind: "sequence",
       effects: [

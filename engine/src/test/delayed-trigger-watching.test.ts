@@ -8,7 +8,7 @@
  * dealt damage", Tamiyo, Field Researcher's "either of those creatures … until
  * your next turn". Coffin Queen's "when this creature becomes untapped or you
  * lose control of this creature" has no duration and fires once (603.7b).
- * Plague Reaver's return at a chosen opponent's next upkeep is `turnOf`, which
+ * Plague Reaver's return at a chosen opponent's next upkeep is `whose`, which
  * needed nothing new.
  */
 import { describe, expect, it } from "vitest";

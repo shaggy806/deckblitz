@@ -33,7 +33,7 @@ export default defineCard({
           },
           {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             text: "Sacrifice Chimeric Coils.",
             effect: { kind: "sacrifice-source" },
           },

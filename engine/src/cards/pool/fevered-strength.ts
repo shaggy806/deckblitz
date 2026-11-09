@@ -13,7 +13,7 @@ export default defineCard({
       { kind: "modify-pt", target: 0, power: 2, toughness: 0, duration: "end-of-turn" },
       {
         kind: "delayed-trigger",
-        at: "next-upkeep",
+        at: { step: "upkeep" },
         effect: { kind: "draw", amount: 1 },
         text: "Draw a card.",
       },

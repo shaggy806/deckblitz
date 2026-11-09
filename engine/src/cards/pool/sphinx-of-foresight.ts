@@ -26,7 +26,7 @@ export default defineCard({
   keywords: ["flying"],
   text: `${REVEAL}\nFlying\nAt the beginning of your upkeep, scry 1.`,
   openingHandReveal: {
-    at: "your-next-upkeep",
+    at: { step: "upkeep", whose: "you" },
     effect: { kind: "scry", amount: 3 },
     text: REVEAL,
   },

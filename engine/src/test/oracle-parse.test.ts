@@ -1853,7 +1853,7 @@ describe("costs and triggers", () => {
       "You may reveal this card from your opening hand. If you do, at the beginning of the first upkeep, your life total becomes 26.",
     );
     expect(providence.openingHandReveal).toMatchObject({
-      at: "next-upkeep",
+      at: { step: "upkeep" },
       effect: { kind: "set-life-total", who: "you", amount: 26 },
     });
     expect(providence.complete).toBe(true);
@@ -1864,11 +1864,11 @@ describe("costs and triggers", () => {
     expect(devourer.openingHandReveal).toBeUndefined();
     expect(devourer.complete).toBe(false);
     const sphinx = reveal("You may reveal this card from your opening hand. If you do, scry 3 at the beginning of your first upkeep.");
-    expect(sphinx.openingHandReveal).toMatchObject({ at: "your-next-upkeep", effect: { kind: "scry", amount: 3 } });
+    expect(sphinx.openingHandReveal).toMatchObject({ at: { step: "upkeep", whose: "you" }, effect: { kind: "scry", amount: 3 } });
     const tangle = reveal(
       "You may reveal this card from your opening hand. If you do, at the beginning of your first main phase of the game, add {G}.",
     );
-    expect(tangle.openingHandReveal).toMatchObject({ at: "your-next-main-phase" });
+    expect(tangle.openingHandReveal).toMatchObject({ at: { step: "main", whose: "you" } });
     // A moment no delayed timing covers stays a person's (Chancellor of the Annex).
     const annex = reveal(
       "You may reveal this card from your opening hand. If you do, when each opponent casts their first spell of the game, counter that spell unless that player pays {1}.",
@@ -2330,7 +2330,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     ],
     [
       "Draw a card at the beginning of the next turn's upkeep.",
-      { kind: "delayed-trigger", at: "next-upkeep", effect: { kind: "draw", amount: 1 }, text: "Draw a card." },
+      { kind: "delayed-trigger", at: { step: "upkeep" }, effect: { kind: "draw", amount: 1 }, text: "Draw a card." },
     ],
   ])("%s", (sentence, expected) => {
     expect(parseSentence(sentence, ctx())).toEqual(expected);
@@ -5830,7 +5830,7 @@ describe("distinct values and Equipment attached to the source", () => {
     expect(launcher.activated[0].condition).toEqual({ kind: "source", filter: { controlledContinuously: true } });
     expect(launcher.activated[0].effect.effects[1]).toMatchObject({
       kind: "delayed-trigger",
-      at: "next-end-step",
+      at: { step: "end" },
       effect: { kind: "destroy", target: "source" },
     });
     const imp = face(
@@ -9919,7 +9919,7 @@ describe("a sweep of the cards put into a graveyard from the battlefield this tu
         { kind: "draw", amount: 7, who: "each-player" },
         {
           kind: "delayed-trigger",
-          at: "next-end-step",
+          at: { step: "end" },
           about: "exiled",
           orNone: true,
           effect: { kind: "sequence", effects: [{ kind: "discard-hand", who: "each-player" }, back] },
@@ -9937,8 +9937,7 @@ describe("a sweep of the cards put into a graveyard from the battlefield this tu
         exile(0),
         {
           kind: "delayed-trigger",
-          at: "your-next-turn-end-step",
-          turnOf: { target: 0 },
+          at: { step: "end", whose: { target: 0 }, which: "next-turn" },
           about: "exiled",
           effect: back,
           text: "That player returns those cards to their hand.",
@@ -10251,7 +10250,7 @@ describe("the turn's blocks", () => {
     expect(breath.targets).toEqual(["creature"]);
     expect(breath.effect).toEqual({
       kind: "delayed-trigger",
-      at: "end-of-combat-this-turn",
+      at: { step: "end-combat", which: "this-turn" },
       effect: { kind: "destroy-all", filter: { type: "creature", blockedThisTurn: { relation: "either", of: 0 } } },
       text: "Destroy all creatures that blocked or were blocked by it this turn.",
     });
@@ -10440,7 +10439,7 @@ describe("the turn's blocks", () => {
     expect(viper.triggered[0].trigger).toEqual({ on: "deals-damage", who: "self", to: "creature", combat: true });
     expect(viper.triggered[0].effect).toEqual({
       kind: "delayed-trigger",
-      at: "end-of-combat",
+      at: { step: "end-combat" },
       effect: { kind: "destroy", target: "trigger-recipient" },
       text: "Destroy that creature.",
     });
@@ -12024,7 +12023,7 @@ describe("damage prevented this way", () => {
     (parseFace({ name: "Card", type_line: "Instant", oracle_text }, { tokenFor: () => null }) as unknown as { effect: unknown }).effect;
   const later = (on: string) => ({
     kind: "delayed-trigger",
-    at: "next-end-step",
+    at: { step: "end" },
     text: `Put a +0/+1 counter on ${on} for each 1 damage prevented this way.`,
     effect: { kind: "add-counter", target: 0, counter: "+0/+1", amount: { damagePreventedThisWay: true } },
   });
@@ -13478,7 +13477,7 @@ describe("tokens created with this", () => {
     );
     expect(card.todo).toEqual([]);
     expect(card.triggered[0].effect.kind).toBe("delayed-trigger");
-    expect(card.triggered[0].effect.at).toBe("next-end-step");
+    expect(card.triggered[0].effect.at).toEqual({ step: "end" });
   });
   it("links nothing on a card that never says so", () => {
     const card = read("Creature", "{T}: Create a 1/1 green Saproling creature token.");
@@ -14498,7 +14497,7 @@ describe("exile with its own way back", () => {
       kind: "sequence",
       effects: [
         { kind: "exile-all", filter: {} },
-        { kind: "delayed-trigger", about: "exiled", at: { until: "permanent", whileAnyExiled: true }, effect: { kind: "look-and-choose", player: "active-player" } },
+        { kind: "delayed-trigger", about: "exiled", at: { until: "while-exiled" }, effect: { kind: "look-and-choose", player: "active-player" } },
       ],
     });
   });

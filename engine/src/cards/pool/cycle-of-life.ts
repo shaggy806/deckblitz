@@ -26,7 +26,7 @@ export default defineCard({
           },
           {
             kind: "delayed-trigger",
-            at: "your-next-upkeep",
+            at: { step: "upkeep", whose: "you" },
             effect: { kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 },
             text: "At the beginning of your next upkeep, put a +1/+1 counter on that creature.",
           },

@@ -27,7 +27,7 @@ export default defineCard({
           targets: [],
           effect: {
             kind: "delayed-trigger",
-            at: "end-of-combat",
+            at: { step: "end-combat" },
             effect: { kind: "destroy", target: "trigger-recipient" },
             text: "Destroy that creature.",
           },

@@ -23,7 +23,7 @@ export default defineCard({
           { kind: "draw", amount: 7, who: "each-player" },
           {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             about: "exiled",
             orNone: true,
             effect: {

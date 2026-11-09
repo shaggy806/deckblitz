@@ -25,7 +25,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "end-of-combat",
+        at: { step: "end-combat" },
         effect: { kind: "gain-control", target: "trigger-object", untilEndOfTurn: false },
         text: "At end of combat, gain control of that creature.",
       },

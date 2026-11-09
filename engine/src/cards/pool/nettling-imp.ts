@@ -31,7 +31,7 @@ export default defineCard({
           { kind: "restrict", target: 0, restrictions: ["must-attack"] },
           {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             text: "Destroy it if it didn't attack this turn.",
             effect: {
               kind: "conditional",

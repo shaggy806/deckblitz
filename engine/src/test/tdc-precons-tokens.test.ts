@@ -1470,7 +1470,7 @@ describe("Divine Visitation", () => {
     expect(aimedAt(game, copy)).toBe(B);
     expect(
       game.state.delayedTriggers.some(
-        (t) => t.at === "next-end-step" && t.targets.some((r) => r?.kind === "object" && r.object === copy),
+        (t) => "step" in t.at && t.at.step === "end" && t.targets.some((r) => r?.kind === "object" && r.object === copy),
       ),
     ).toBe(true);
   });

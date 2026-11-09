@@ -29,7 +29,7 @@ export default defineCard({
               // Only this object (rule 400.7): one that has left and come
               // back by then isn't sacrificed.
               kind: "delayed-trigger",
-              at: "next-end-step",
+              at: { step: "end" },
               effect: { kind: "sacrifice-source" },
               text: "Sacrifice Attack-in-the-Box.",
             },

@@ -26,7 +26,7 @@ export default defineCard({
       effect: {
         kind: "flicker",
         target: 0,
-        returnAt: "next-end-step",
+        returnAt: { step: "end" },
         tapped: true,
         returnText: "Return the exiled creature to the battlefield tapped under its owner's control.",
       },

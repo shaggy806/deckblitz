@@ -26,7 +26,7 @@ export default defineCard({
     {
       trigger: { on: "blocked-by", who: "self", blocker: { subtypes: ["Wall"] } },
       targets: [],
-      effect: { kind: "delayed-trigger", at: "end-of-combat", effect: { kind: "destroy", target: "trigger-object" }, text: "Destroy that Wall." },
+      effect: { kind: "delayed-trigger", at: { step: "end-combat" }, effect: { kind: "destroy", target: "trigger-object" }, text: "Destroy that Wall." },
       resolve: null,
       text: WALL_TEXT,
     },

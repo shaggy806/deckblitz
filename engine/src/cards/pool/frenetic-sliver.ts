@@ -32,7 +32,7 @@ export default defineCard({
               won: {
                 kind: "flicker",
                 target: "source",
-                returnAt: "next-end-step",
+                returnAt: { step: "end" },
                 returnText: "Return it to the battlefield under its owner's control.",
               },
               lost: { kind: "sacrifice-source" },

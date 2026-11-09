@@ -34,7 +34,7 @@ export default defineCard({
           { kind: "exile-from-library", amount: 1, faceDown: true },
           {
             kind: "delayed-trigger",
-            at: "your-next-end-step",
+            at: { step: "end", whose: "you" },
             about: "exiled",
             effect: {
               kind: "for-each-target",

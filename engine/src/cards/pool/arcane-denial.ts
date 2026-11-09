@@ -23,14 +23,14 @@ export default defineCard({
       { kind: "counter", target: 0 },
       {
         kind: "delayed-trigger",
-        at: "next-upkeep",
+        at: { step: "upkeep" },
         controller: { controllerOf: 0 },
         effect: { kind: "may", effect: { kind: "draw", amount: 2 }, prompt: "Draw two cards?" },
         text: "Draw up to two cards (Arcane Denial).",
       },
       {
         kind: "delayed-trigger",
-        at: "next-upkeep",
+        at: { step: "upkeep" },
         effect: { kind: "draw", amount: 1 },
         text: "Draw a card (Arcane Denial).",
       },

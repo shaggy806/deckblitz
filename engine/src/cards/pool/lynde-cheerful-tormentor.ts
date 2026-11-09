@@ -24,7 +24,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         effect: { kind: "put-onto-battlefield", target: "trigger-object", attachedTo: { player: "you" } },
         text: "Return that Curse to the battlefield attached to you.",
       },

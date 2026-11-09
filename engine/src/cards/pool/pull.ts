@@ -35,7 +35,7 @@ export default defineCard({
       // One delayed ability for both, about what this put onto the battlefield.
       {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         about: "put-onto-battlefield",
         effect: {
           kind: "for-each-target",

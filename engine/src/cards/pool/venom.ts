@@ -17,7 +17,7 @@ const TEXT =
   "Whenever enchanted creature blocks or becomes blocked by a non-Wall creature, destroy the other creature at end of combat.";
 const DESTROY = {
   kind: "delayed-trigger",
-  at: "end-of-combat",
+  at: { step: "end-combat" },
   effect: { kind: "destroy", target: "trigger-object" },
   text: "Destroy the other creature.",
 } as const;

@@ -13,7 +13,7 @@ const sacrificeAtEndOfCombat = (on: "attacks" | "blocks"): TriggeredAbility => (
   targets: [],
   effect: {
     kind: "delayed-trigger",
-    at: "end-of-combat",
+    at: { step: "end-combat" },
     effect: { kind: "sacrifice-target", target: "source" },
     text: "Sacrifice Dorothea, Vengeful Victim.",
   },

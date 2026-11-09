@@ -5,7 +5,7 @@ const TEXT =
 // Dealt even if this creature has left the battlefield by then (the ruling).
 const DAMAGE = {
   kind: "delayed-trigger",
-  at: "end-of-combat",
+  at: { step: "end-combat" },
   effect: { kind: "damage", amount: 1, target: "trigger-object" },
   text: "Sawtooth Ogre deals 1 damage to that creature.",
 } as const;

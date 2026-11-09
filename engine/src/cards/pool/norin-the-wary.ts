@@ -10,7 +10,7 @@ import { defineCard } from "../define.js";
 const effect = {
   kind: "flicker",
   target: "source",
-  returnAt: "next-end-step",
+  returnAt: { step: "end" },
   returnText: "Return Norin the Wary to the battlefield under its owner's control.",
 } as const;
 

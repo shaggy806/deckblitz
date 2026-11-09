@@ -18,7 +18,7 @@ export default defineCard({
         // stack, so it includes the X it was cast with (rule 202.3e). A spell
         // that couldn't be countered still pays out (2020-11-10 ruling).
         kind: "delayed-trigger",
-        at: "your-next-main-phase",
+        at: { step: "main", whose: "you" },
         effect: { kind: "add-mana", mana: "C", amount: { manaValueOf: 0 } },
         text: "Add an amount of {C} equal to the countered spell's mana value.",
       },

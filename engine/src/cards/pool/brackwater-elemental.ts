@@ -12,7 +12,7 @@ const sacrificeAtNextEndStep = (on: "attacks" | "blocks"): TriggeredAbility => (
   targets: [],
   effect: {
     kind: "delayed-trigger",
-    at: "next-end-step",
+    at: { step: "end" },
     effect: { kind: "sacrifice-target", target: "source" },
     text: "Sacrifice Brackwater Elemental.",
   },
@@ -43,7 +43,7 @@ export default defineCard({
           { kind: "grant-keyword", target: "source", keyword: "haste", duration: "permanent" },
           {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             effect: { kind: "exile", target: "source" },
             text: "Exile the unearthed card.",
           },

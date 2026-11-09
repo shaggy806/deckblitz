@@ -18,7 +18,7 @@ export default defineCard({
     kind: "flicker",
     target: 0,
     thenCounters: { kind: "+1/+1", amount: 1, entering: true },
-    returnAt: "next-end-step",
+    returnAt: { step: "end" },
     returnText: "Return the exiled card to the battlefield under its owner's control with a +1/+1 counter on it.",
   },
   kicker: {

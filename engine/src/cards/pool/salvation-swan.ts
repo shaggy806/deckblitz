@@ -22,7 +22,7 @@ const EFFECT = {
   kind: "flicker",
   target: 0,
   thenCounters: { kind: "flying", amount: 1, entering: true },
-  returnAt: "next-end-step",
+  returnAt: { step: "end" },
   returnText: "Return the exiled card to the battlefield under its owner's control with a flying counter on it.",
 } as const;
 

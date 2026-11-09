@@ -482,6 +482,7 @@ import _poolLiquify from "../pool/liquify.js";
 import _poolLiveOrDie from "../pool/live-or-die.js";
 import _poolLivingArtifact from "../pool/living-artifact.js";
 import _poolLivingDeath from "../pool/living-death.js";
+import _poolLokiLaufeyson from "../pool/loki-laufeyson.js";
 import _poolLordOfExtinction from "../pool/lord-of-extinction.js";
 import _poolLotusVale from "../pool/lotus-vale.js";
 import _poolLull from "../pool/lull.js";
@@ -1477,6 +1478,7 @@ const shard: CardShard = {
     _poolLiveOrDie,
     _poolLivingArtifact,
     _poolLivingDeath,
+    _poolLokiLaufeyson,
     _poolLordOfExtinction,
     _poolLotusVale,
     _poolLull,

@@ -38,7 +38,7 @@ export default defineCard({
           { kind: "get-energy", amount: 2 },
           {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             about: "created",
             effect: {
               kind: "may",

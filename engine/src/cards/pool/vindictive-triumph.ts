@@ -28,7 +28,7 @@ export default defineCard({
         { kind: "flicker", target: 0, underYourControl: true, tapped: true },
         {
           kind: "delayed-trigger",
-          at: "next-end-step",
+          at: { step: "end" },
           about: "put-onto-battlefield",
           effect: { kind: "exile", target: 0 },
           text: "Exile it.",

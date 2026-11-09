@@ -26,7 +26,7 @@ export default defineCard({
           { kind: "grant-keyword", target: 0, keyword: "flying", duration: "end-of-turn" },
           {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             text: "Flip a coin. If you lose the flip, sacrifice that creature.",
             effect: { kind: "flip-coin", lost: { kind: "sacrifice-target", target: 0 } },
           },

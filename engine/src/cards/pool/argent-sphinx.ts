@@ -24,7 +24,7 @@ export default defineCard({
         kind: "flicker",
         target: "source",
         underYourControl: true,
-        returnAt: "next-end-step",
+        returnAt: { step: "end" },
         returnText: "Return Argent Sphinx to the battlefield under your control.",
       },
       resolve: null,

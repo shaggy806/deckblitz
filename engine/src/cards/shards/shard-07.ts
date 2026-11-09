@@ -924,6 +924,7 @@ import _poolVexingRadgull from "../pool/vexing-radgull.js";
 import _poolVibrance from "../pool/vibrance.js";
 import _poolVictorysHerald from "../pool/victorys-herald.js";
 import _poolVigilantBaloth from "../pool/vigilant-baloth.js";
+import _poolVigorousCharge from "../pool/vigorous-charge.js";
 import _poolVindictiveTriumph from "../pool/vindictive-triumph.js";
 import _poolViviOrnitier from "../pool/vivi-ornitier.js";
 import _poolViviensGrizzly from "../pool/viviens-grizzly.js";
@@ -1951,6 +1952,7 @@ const shard: CardShard = {
     _poolVibrance,
     _poolVictorysHerald,
     _poolVigilantBaloth,
+    _poolVigorousCharge,
     _poolVindictiveTriumph,
     _poolViviOrnitier,
     _poolViviensGrizzly,

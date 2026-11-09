@@ -48,7 +48,7 @@ export default defineCard({
           },
           {
             kind: "delayed-trigger",
-            at: "end-of-combat",
+            at: { step: "end-combat" },
             about: "created",
             effect: { kind: "sacrifice-target", target: 0 },
             text: "Sacrifice the token at end of combat.",

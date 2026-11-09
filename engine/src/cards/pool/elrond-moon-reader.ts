@@ -40,7 +40,7 @@ export default defineCard({
       effect: {
         kind: "flicker",
         target: { from: 0 },
-        returnAt: "next-end-step",
+        returnAt: { step: "end" },
         returnText: "Return those cards to the battlefield under their owner's control.",
       },
       resolve: null,

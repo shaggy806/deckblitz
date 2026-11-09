@@ -5,7 +5,7 @@ import type { EffectSpec } from "../../effects.js";
 // when the delayed ability is made, read at the next upkeep.
 const AT_NEXT_UPKEEP: EffectSpec = {
   kind: "delayed-trigger",
-  at: "next-upkeep",
+  at: { step: "upkeep" },
   remember: { returned: { set: { thisWay: "returned-to-hand" } } },
   effect: {
     kind: "create-token",

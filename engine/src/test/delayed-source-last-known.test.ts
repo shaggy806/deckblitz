@@ -13,7 +13,7 @@ import { A, activate, destroy, life, settle, spawn, table } from "./harness.js";
 
 const delayed = {
   kind: "delayed-trigger",
-  at: "next-upkeep",
+  at: { step: "upkeep" },
   effect: { kind: "gain-life", amount: { powerOf: "source" } },
   text: "At the beginning of the next upkeep, you gain life equal to this creature's power.",
 } as const;

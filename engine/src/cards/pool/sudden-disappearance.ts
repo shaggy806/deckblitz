@@ -18,7 +18,7 @@ export default defineCard({
       { kind: "exile-all", filter: { notTypes: ["land"], controlledBy: "you" }, controlledByTarget: 0 },
       {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         about: "exiled",
         effect: {
           kind: "for-each-target",

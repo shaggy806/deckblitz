@@ -56,7 +56,7 @@ export default defineCard({
           { kind: "grant-keyword", target: 0, keyword: "unblockable", duration: "end-of-turn" },
           {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             effect: { kind: "return-to-hand", target: 0 },
             text: "Return that creature to its owner's hand.",
           },

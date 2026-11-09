@@ -22,7 +22,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         text: "Put that card onto the battlefield under your control. Sacrifice the creature when you lose control of this creature.",
         effect: {
           kind: "sequence",

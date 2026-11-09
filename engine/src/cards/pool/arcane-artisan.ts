@@ -63,7 +63,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         effect: { kind: "exile-all", filter: { token: true, createdWithSource: true } },
         text: "Exile all tokens created with it.",
       },

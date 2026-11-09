@@ -26,7 +26,7 @@ export default defineCard({
           { kind: "turn-face-up", target: 0 },
           {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             effect: { kind: "sacrifice-target", target: 0 },
             text: "Sacrifice it.",
           },

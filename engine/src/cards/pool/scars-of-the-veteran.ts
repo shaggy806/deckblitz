@@ -19,7 +19,7 @@ export default defineCard({
         condition: { kind: "target", index: 0, filter: { type: "creature" } },
         then: {
           kind: "delayed-trigger",
-          at: "next-end-step",
+          at: { step: "end" },
           text: "Put a +0/+1 counter on it for each 1 damage prevented this way.",
           effect: { kind: "add-counter", target: 0, counter: "+0/+1", amount: { damagePreventedThisWay: true } },
         },

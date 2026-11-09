@@ -36,7 +36,7 @@ export default defineCard({
               kind: "flicker",
               target: 0,
               underYourControl: true,
-              returnAt: "next-end-step",
+              returnAt: { step: "end" },
               returnText: "Return the exiled creature to the battlefield under your control.",
             },
           },

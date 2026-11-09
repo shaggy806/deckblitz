@@ -24,7 +24,7 @@ export default defineCard({
       { kind: "untap", target: 1 },
       {
         kind: "delayed-trigger",
-        at: "end-of-combat-this-turn",
+        at: { step: "end-combat", which: "this-turn" },
         effect: {
           kind: "tap-all",
           filter: { type: "creature", blockedThisTurn: { relation: "blocked-by", of: "each-target" } },

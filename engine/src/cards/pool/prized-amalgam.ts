@@ -33,7 +33,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         effect: { kind: "put-onto-battlefield", target: "source", enterTapped: true },
         text: "Return Prized Amalgam from your graveyard to the battlefield tapped.",
       },

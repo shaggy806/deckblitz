@@ -22,7 +22,7 @@ export default defineCard({
         { kind: "shuffle-library" },
         {
           kind: "delayed-trigger",
-          at: "next-upkeep",
+          at: { step: "upkeep" },
           effect: { kind: "draw", amount: 2 },
           text: "Draw two cards.",
         },

@@ -25,7 +25,8 @@ export default defineCard({
       { kind: "attach", target: 0, attachment: 1 },
       {
         kind: "delayed-trigger",
-        at: { losesControl: 1, thisTurn: true, onlyIf: ATTACHED_TO_YOURS },
+        at: { losesControl: 1, thisTurn: true },
+        if: ATTACHED_TO_YOURS,
         effect: { kind: "conditional", condition: ATTACHED_TO_YOURS, then: { kind: "unattach", target: 1 } },
         text: "When you lose control of that Equipment this turn, if it's attached to a creature you control, unattach it.",
       },

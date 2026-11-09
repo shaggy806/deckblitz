@@ -48,7 +48,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         effect: { kind: "return-to-hand", target: "trigger-object", from: "graveyard" },
         text: "Return that card to its owner's hand.",
       },

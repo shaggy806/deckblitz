@@ -43,7 +43,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "end-of-combat",
+        at: { step: "end-combat" },
         effect: { kind: "transform", target: "source" },
         text: "At end of combat, convert Slicer.",
       },

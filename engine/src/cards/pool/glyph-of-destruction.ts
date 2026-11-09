@@ -20,7 +20,7 @@ export default defineCard({
       { kind: "prevent-damage", target: 0, amount: "all" },
       {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         effect: { kind: "destroy", target: 0 },
         text: "Destroy it.",
       },

@@ -19,7 +19,7 @@ export default defineCard({
     {
       trigger: { on: "blocks", who: "self", object: "blocked" },
       targets: [],
-      effect: { kind: "delayed-trigger", at: "end-of-combat", effect: { kind: "return-to-hand", target: "trigger-object" }, text: "Return that creature to its owner's hand." },
+      effect: { kind: "delayed-trigger", at: { step: "end-combat" }, effect: { kind: "return-to-hand", target: "trigger-object" }, text: "Return that creature to its owner's hand." },
       resolve: null,
       text: T0,
     },

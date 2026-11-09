@@ -18,7 +18,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "end-of-combat",
+        at: { step: "end-combat" },
         effect: { kind: "sacrifice-target", target: "source" },
         text: "Sacrifice Crumbling Colossus.",
       },

@@ -76,7 +76,7 @@ const registry = createDefaultRegistry()
           targets: [],
           effect: {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             effect: { kind: "transform", target: "source" },
             text: "Transform this.",
           },

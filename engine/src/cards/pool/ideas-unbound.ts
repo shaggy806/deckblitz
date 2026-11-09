@@ -20,7 +20,7 @@ export default defineCard({
       { kind: "draw", amount: 3 },
       {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         effect: { kind: "discard", target: "you", amount: 3 },
         text: DISCARD_TEXT,
       },

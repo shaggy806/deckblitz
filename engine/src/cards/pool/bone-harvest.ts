@@ -20,7 +20,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "put-on-libraries", what: { targetsFrom: 0 }, position: "top" },
-      { kind: "delayed-trigger", at: "next-upkeep", effect: { kind: "draw", amount: 1 }, text: "Draw a card." },
+      { kind: "delayed-trigger", at: { step: "upkeep" }, effect: { kind: "draw", amount: 1 }, text: "Draw a card." },
     ],
   },
 });

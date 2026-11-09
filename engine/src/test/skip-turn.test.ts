@@ -120,7 +120,7 @@ describe("what an effect says about that extra turn", () => {
     expect(active(game)).toBe(A);
     expect(game.state.turn.isExtra).toBe(true);
     expect(game.state.players[A].hasLost).toBe(false);
-    expect(game.state.delayedTriggers.map((t) => t.at)).toEqual(["this-turn-end-step"]);
+    expect(game.state.delayedTriggers.map((t) => t.at)).toEqual([{ step: "end", whose: "any", which: "this-turn" }]);
     game.advanceUntil((s) => s.players[A].hasLost || s.turn.number > 3);
     expect(game.state.players[A].hasLost).toBe(true);
   });
@@ -231,7 +231,7 @@ describe("what an effect says about that extra turn", () => {
     nextTurn(game);
     expect(game.state.turn.isExtra).toBe(true);
     expect(game.state.damageUnpreventableThisTurn).toBe(true);
-    expect(game.state.delayedTriggers.map((t) => t.at)).toEqual(["this-turn-end-step"]);
+    expect(game.state.delayedTriggers.map((t) => t.at)).toEqual([{ step: "end", whose: "any", which: "this-turn" }]);
   });
 
   it("Alchemist's Gambit cleaved loses the bracketed loss and keeps the rest", () => {

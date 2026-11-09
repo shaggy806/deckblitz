@@ -26,7 +26,7 @@ export default defineCard({
   toughness: 5,
   text: `${REVEAL}\n${ETB}`,
   openingHandReveal: {
-    at: "next-upkeep",
+    at: { step: "upkeep" },
     effect: { kind: "create-token", token: "Phyrexian Goblin Token (Haste)", count: 1 },
     text: REVEAL,
   },

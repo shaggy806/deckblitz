@@ -29,7 +29,7 @@ const COMBAT_TEXT =
 
 const RETURN: EffectSpec = {
   kind: "delayed-trigger",
-  at: "your-next-end-step",
+  at: { step: "end", whose: "you" },
   effect: { kind: "put-onto-battlefield", target: "trigger-object", underYourControl: true },
   text: "Put that card onto the battlefield under your control.",
 };

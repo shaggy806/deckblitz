@@ -400,7 +400,7 @@ describe("tokens made inside another effect are token events too (rule 614.1a)",
     expect(made.map((id) => aimedAt(game, id)).sort()).toEqual([B, C].sort());
     for (const id of made) {
       expect(game.characteristics(id).keywords.has("haste")).toBe(true);
-      expect(game.state.delayedTriggers.some((t) => t.at === "next-end-step" && t.targets.some((r) => r?.kind === "object" && r.object === id))).toBe(true);
+      expect(game.state.delayedTriggers.some((t) => "step" in t.at && t.at.step === "end" && t.targets.some((r) => r?.kind === "object" && r.object === id))).toBe(true);
     }
   });
 
@@ -436,7 +436,7 @@ describe("tokens made inside another effect are token events too (rule 614.1a)",
     expect(game.state.objects[token].cardName).toBe("Grizzly Bears");
     expect(game.characteristics(token).keywords.has("haste")).toBe(true);
     expect(game.state.objects[token].counters["+1/+1"]).toBe(2);
-    expect(game.state.delayedTriggers.some((t) => t.at === "next-end-step" && t.targets.some((r) => r?.kind === "object" && r.object === token))).toBe(true);
+    expect(game.state.delayedTriggers.some((t) => "step" in t.at && t.at.step === "end" && t.targets.some((r) => r?.kind === "object" && r.object === token))).toBe(true);
   });
 
   it("a token copy's riders go on the replacement copy", () => {

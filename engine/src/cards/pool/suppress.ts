@@ -16,8 +16,7 @@ export default defineCard({
       { kind: "exile-graveyard", target: 0, fromHand: "only", faceDown: true },
       {
         kind: "delayed-trigger",
-        at: "your-next-turn-end-step",
-        turnOf: { target: 0 },
+        at: { step: "end", whose: { target: 0 }, which: "next-turn" },
         about: "exiled",
         effect: {
           kind: "for-each-target",

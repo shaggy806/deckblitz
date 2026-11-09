@@ -292,7 +292,7 @@ describe("Y'shtola Rhul — an additional end step (rule 500.9)", () => {
     settle(game);
     expect(game.state.turn.step).toBe("end");
     const cards = hand(game).length;
-    game.debugApplyEffect(A, { kind: "delayed-trigger", at: "next-end-step", effect: { kind: "draw", amount: 1 }, text: "draw" });
+    game.debugApplyEffect(A, { kind: "delayed-trigger", at: { step: "end" }, effect: { kind: "draw", amount: 1 }, text: "draw" });
     nextTurn(game);
     expect(hand(game).length).toBe(cards + 1);
   });
@@ -301,7 +301,7 @@ describe("Y'shtola Rhul — an additional end step (rule 500.9)", () => {
     const { game } = table();
     toStep(game, "end");
     const cards = hand(game).length;
-    game.debugApplyEffect(A, { kind: "delayed-trigger", at: "next-end-step", effect: { kind: "draw", amount: 1 }, text: "draw" });
+    game.debugApplyEffect(A, { kind: "delayed-trigger", at: { step: "end" }, effect: { kind: "draw", amount: 1 }, text: "draw" });
     nextTurn(game);
     expect(hand(game).length).toBe(cards);
     expect(game.state.turn.number).toBe(2);

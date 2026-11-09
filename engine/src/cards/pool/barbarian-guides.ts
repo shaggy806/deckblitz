@@ -45,7 +45,7 @@ export default defineCard({
           },
           {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             effect: { kind: "return-to-hand", target: 0 },
             text: "Return that creature to its owner's hand.",
           },

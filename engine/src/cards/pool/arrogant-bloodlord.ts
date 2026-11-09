@@ -6,7 +6,7 @@ const TEXT =
   "Whenever this creature blocks or becomes blocked by a creature with power 1 or less, destroy this creature at end of combat.";
 const DESTROY = {
   kind: "delayed-trigger",
-  at: "end-of-combat",
+  at: { step: "end-combat" },
   effect: { kind: "destroy", target: "source" },
   text: "Destroy this creature.",
 } as const;

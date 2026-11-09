@@ -20,7 +20,7 @@ export default defineCard({
           { kind: "prevent-damage", target: 0, amount: 1 },
           {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             effect: { kind: "return-to-hand", target: "source" },
             text: "Return Rakalite to its owner's hand.",
           },

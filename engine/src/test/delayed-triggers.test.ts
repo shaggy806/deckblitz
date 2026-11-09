@@ -151,7 +151,7 @@ describe("timing", () => {
     game.state.delayedTriggers.push({
       id: "test-delayed",
       controller: A,
-      at: "next-end-step",
+      at: { step: "end", whose: "any", which: "next" },
       createdOnTurn: game.state.turn.number,
       createdDuringEndStep: true,
       source: whip,

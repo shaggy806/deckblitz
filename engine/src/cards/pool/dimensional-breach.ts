@@ -23,8 +23,7 @@ export default defineCard({
         about: "exiled",
         at: {
           whenever: { on: "step-begins", step: "upkeep", who: "any" },
-          until: "permanent",
-          whileAnyExiled: true,
+          until: "while-exiled",
         },
         effect: {
           kind: "look-and-choose",

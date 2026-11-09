@@ -53,7 +53,7 @@ export default defineCard({
           { kind: "put-onto-battlefield", target: 0, enterTapped: true, attacking: "choose" },
           {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             about: "put-onto-battlefield",
             effect: { kind: "sacrifice-target", target: 0 },
             text: "Sacrifice it.",

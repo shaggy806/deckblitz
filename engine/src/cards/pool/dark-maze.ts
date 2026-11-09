@@ -26,7 +26,7 @@ export default defineCard({
           { kind: "attack-despite-defender", target: "source" },
           {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             effect: { kind: "exile", target: "source" },
             text: "Exile Dark Maze.",
           },

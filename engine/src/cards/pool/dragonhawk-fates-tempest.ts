@@ -19,7 +19,7 @@ const EFFECT = {
     },
     {
       kind: "delayed-trigger",
-      at: "your-next-end-step",
+      at: { step: "end", whose: "you" },
       about: "exiled",
       effect: { kind: "damage", amount: { product: [2, { objectTargets: true }] }, who: "each-opponent" },
       text: "Dragonhawk deals 2 damage to each opponent for each of those cards that are still exiled.",

@@ -43,7 +43,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         effect: {
           kind: "may",
           prompt: "Return that card to its owner's hand?",

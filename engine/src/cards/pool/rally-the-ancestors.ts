@@ -27,7 +27,7 @@ export default defineCard({
       },
       {
         kind: "delayed-trigger",
-        at: "your-next-upkeep",
+        at: { step: "upkeep", whose: "you" },
         about: "put-onto-battlefield",
         effect: {
           kind: "for-each-target",

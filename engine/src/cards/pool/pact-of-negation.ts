@@ -20,7 +20,7 @@ export default defineCard({
       { kind: "counter", target: 0 },
       {
         kind: "delayed-trigger",
-        at: "your-next-upkeep",
+        at: { step: "upkeep", whose: "you" },
         effect: {
           kind: "unless",
           chooser: "you",

@@ -23,7 +23,7 @@ export default defineCard({
           { kind: "choose-random-card", zone: "hand", whose: 0, show: "look" },
           {
             kind: "delayed-trigger",
-            at: "next-upkeep",
+            at: { step: "upkeep" },
             effect: { kind: "draw", amount: 1 },
             text: "Draw a card.",
           },

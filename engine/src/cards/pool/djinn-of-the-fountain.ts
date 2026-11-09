@@ -47,7 +47,7 @@ export default defineCard({
             effect: {
               kind: "flicker",
               target: "source",
-              returnAt: "next-end-step",
+              returnAt: { step: "end" },
               returnText: "Return Djinn of the Fountain to the battlefield under its owner's control.",
             },
           },

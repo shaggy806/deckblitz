@@ -45,7 +45,7 @@ export default defineCard({
           },
           {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             effect: {
               kind: "for-each-target",
               from: 0,

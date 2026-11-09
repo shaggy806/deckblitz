@@ -24,7 +24,7 @@ export default defineCard({
   keywords: ["reach", "vigilance"],
   text: `${REVEAL}\nReach, vigilance`,
   openingHandReveal: {
-    at: "your-next-main-phase",
+    at: { step: "main", whose: "you" },
     effect: { kind: "add-mana", mana: "G", amount: 1 },
     text: REVEAL,
   },

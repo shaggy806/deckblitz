@@ -25,7 +25,7 @@ export default defineCard({
           { kind: "grant-keyword", target: "source", keyword: "trample", duration: "end-of-turn" },
           {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             text: "Destroy Crazed Armodon.",
             effect: { kind: "destroy", target: "source" },
           },

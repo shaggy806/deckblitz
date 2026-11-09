@@ -87,7 +87,7 @@ describe("a delayed trigger's carried targets", () => {
       A,
       {
         kind: "delayed-trigger",
-        at: "your-next-main-phase",
+        at: { step: "main", whose: "you" },
         effect: { kind: "add-mana", mana: "C", amount: { manaValueOf: 0 } },
         text: "Add an amount of {C} equal to the countered spell's mana value.",
       },

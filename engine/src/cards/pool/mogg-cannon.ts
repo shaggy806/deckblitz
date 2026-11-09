@@ -24,7 +24,7 @@ export default defineCard({
           { kind: "grant-keyword", target: 0, keyword: "flying", duration: "end-of-turn" },
           {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             effect: { kind: "destroy", target: 0 },
             text: "Destroy that creature.",
           },

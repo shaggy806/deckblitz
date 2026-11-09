@@ -36,7 +36,7 @@ export default defineCard({
       },
       {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         text: "Destroy all non-Wall creatures that player controls that didn't attack this turn.",
         effect: {
           kind: "destroy-all",

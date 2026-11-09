@@ -45,7 +45,7 @@ export default defineCard({
           { kind: "grant-keyword", target: 0, keyword: "haste", duration: "permanent" },
           {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             // `target: 0` is still the same object — it kept its id across the
             // graveyard-to-battlefield move.
             effect: { kind: "exile", target: 0 },

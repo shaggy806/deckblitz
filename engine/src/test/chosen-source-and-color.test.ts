@@ -42,7 +42,7 @@ describe("a source of damage off the battlefield and the stack (609.7a)", () => 
       ...{
         id: "test-delayed",
         controller: B,
-        at: "next-end-step",
+        at: { step: "end" },
         createdOnTurn: game.state.turn.number,
         createdDuringEndStep: false,
         source: bears,

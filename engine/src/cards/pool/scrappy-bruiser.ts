@@ -29,7 +29,7 @@ export default defineCard({
           { kind: "grant-keyword", target: 0, keyword: "trample", duration: "end-of-turn" },
           {
             kind: "delayed-trigger",
-            at: "end-of-combat",
+            at: { step: "end-combat" },
             effect: { kind: "return-to-hand", target: 0 },
             text: "Return that creature to its owner's hand.",
           },

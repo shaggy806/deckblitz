@@ -23,7 +23,7 @@ export default defineCard({
           { kind: "create-token", token: "Lander Token", count: 1 },
           {
             kind: "delayed-trigger",
-            at: "your-next-turn-end-step",
+            at: { step: "end", whose: "you", which: "next-turn" },
             about: "created",
             effect: { kind: "sacrifice-target", target: 0 },
             text: "Sacrifice that token.",

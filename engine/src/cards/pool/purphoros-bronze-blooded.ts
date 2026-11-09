@@ -64,7 +64,7 @@ export default defineCard({
         filter: { type: "creature", anyOf: [{ colors: ["R"] }, { type: "artifact" }] },
         then: {
           kind: "delayed-trigger",
-          at: "next-end-step",
+          at: { step: "end" },
           effect: { kind: "sacrifice-target", target: 0 },
           text: "Sacrifice the creature Purphoros put onto the battlefield.",
         },

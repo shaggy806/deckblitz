@@ -36,7 +36,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 2 },
         text: "Put two +1/+1 counters on it.",
       },

@@ -29,7 +29,7 @@ export default defineCard({
             { kind: "grant-keyword", target: 0, keyword: "haste", duration: "permanent" },
             {
               kind: "delayed-trigger",
-              at: "next-end-step",
+              at: { step: "end" },
               effect: { kind: "sacrifice-target", target: 0 },
               text: "At the beginning of the next end step, sacrifice that creature.",
             },

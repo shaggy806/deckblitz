@@ -38,7 +38,7 @@ export default defineCard({
             { kind: "create-token", token: "Robot Token", count: 1, tapped: true, attacking: "choose" },
             {
               kind: "delayed-trigger",
-              at: "end-of-combat",
+              at: { step: "end-combat" },
               about: "created",
               effect: { kind: "sacrifice-target", target: 0 },
               text: "Sacrifice that token at end of combat.",

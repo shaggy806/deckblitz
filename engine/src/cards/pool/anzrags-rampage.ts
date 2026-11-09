@@ -30,7 +30,7 @@ export default defineCard({
       { kind: "grant-keyword-all", filter: { thisWay: "put-onto-battlefield" }, keyword: "haste", duration: "permanent" },
       {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         about: "put-onto-battlefield",
         effect: { kind: "return-to-hand", target: 0 },
         text: "Return it to your hand.",

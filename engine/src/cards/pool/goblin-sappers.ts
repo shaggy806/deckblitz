@@ -26,7 +26,7 @@ export default defineCard({
           { kind: "restrict", target: 0, restrictions: ["cant-be-blocked"] },
           {
             kind: "delayed-trigger",
-            at: "end-of-combat",
+            at: { step: "end-combat" },
             text: "Destroy that creature and Goblin Sappers.",
             effect: {
               kind: "sequence",
@@ -51,7 +51,7 @@ export default defineCard({
           { kind: "restrict", target: 0, restrictions: ["cant-be-blocked"] },
           {
             kind: "delayed-trigger",
-            at: "end-of-combat",
+            at: { step: "end-combat" },
             text: "Destroy that creature.",
             effect: { kind: "destroy", target: 0 },
           },

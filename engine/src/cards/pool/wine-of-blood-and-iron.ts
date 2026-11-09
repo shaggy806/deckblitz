@@ -19,7 +19,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "modify-pt", target: 0, power: { powerOf: 0 }, toughness: 0, duration: "end-of-turn" },
-          { kind: "delayed-trigger", at: "next-end-step", effect: { kind: "sacrifice-source" }, text: "Sacrifice Wine of Blood and Iron." },
+          { kind: "delayed-trigger", at: { step: "end" }, effect: { kind: "sacrifice-source" }, text: "Sacrifice Wine of Blood and Iron." },
         ],
       },
       resolve: null,

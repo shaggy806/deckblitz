@@ -5,7 +5,7 @@ import { defineCard } from "../define.js";
 const SAC_TEXT = "When enchanted creature attacks or blocks, sacrifice this Aura at the beginning of the next cleanup step.";
 const SAC_LATER = {
   kind: "delayed-trigger",
-  at: "next-cleanup",
+  at: { step: "cleanup" },
   effect: { kind: "sacrifice-source" },
   text: "Sacrifice this Aura.",
 } as const;

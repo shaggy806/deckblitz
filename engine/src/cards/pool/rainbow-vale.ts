@@ -33,7 +33,7 @@ export default defineCard({
         amount: 1,
         also: {
           kind: "delayed-trigger",
-          at: "next-end-step",
+          at: { step: "end" },
           text: "An opponent gains control of Rainbow Vale.",
           effect: {
             kind: "choose-opponent",

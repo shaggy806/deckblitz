@@ -42,7 +42,7 @@ export default defineCard({
         effect: {
           kind: "flicker",
           target: "source",
-          returnAt: "your-next-upkeep",
+          returnAt: { step: "upkeep", whose: "you" },
           returnThen: {
             kind: "grant-keyword-all",
             filter: { thisWay: "put-onto-battlefield" },

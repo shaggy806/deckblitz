@@ -24,7 +24,7 @@ const EFFECT: EffectSpec = {
   effect: {
     kind: "flicker",
     target: 0,
-    returnAt: "next-end-step",
+    returnAt: { step: "end" },
     returnText: "Return the exiled card to the battlefield under its owner's control.",
   },
 };

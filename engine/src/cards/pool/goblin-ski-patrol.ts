@@ -27,7 +27,7 @@ export default defineCard({
           { kind: "grant-keyword", target: "source", keyword: "flying", duration: "permanent" },
           {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             text: "Its controller sacrifices Goblin Ski Patrol.",
             effect: { kind: "sacrifice-target", target: "source", byItsController: true },
           },

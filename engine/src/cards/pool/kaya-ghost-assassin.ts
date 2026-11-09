@@ -37,15 +37,15 @@ export default defineCard({
               modes: [
                 {
                   text: "Exile Kaya.",
-                  effect: { kind: "flicker", target: "source", returnAt: "your-next-upkeep", returnText: RETURN_TEXT },
+                  effect: { kind: "flicker", target: "source", returnAt: { step: "upkeep", whose: "you" }, returnText: RETURN_TEXT },
                 },
                 {
                   text: "Exile the target creature.",
-                  effect: { kind: "flicker", target: 0, returnAt: "your-next-upkeep", returnText: RETURN_TEXT },
+                  effect: { kind: "flicker", target: 0, returnAt: { step: "upkeep", whose: "you" }, returnText: RETURN_TEXT },
                 },
               ],
             },
-            else: { kind: "flicker", target: "source", returnAt: "your-next-upkeep", returnText: RETURN_TEXT },
+            else: { kind: "flicker", target: "source", returnAt: { step: "upkeep", whose: "you" }, returnText: RETURN_TEXT },
           },
           { kind: "lose-life", amount: 2 },
         ],

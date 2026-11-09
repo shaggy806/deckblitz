@@ -27,7 +27,7 @@ export default defineCard({
       cost: { mana: "{1}{W}", tap: false },
       zone: "hand",
       targets: [ARTIFACT_OR_CREATURE],
-      effect: { kind: "flicker", target: 0, returnAt: "next-end-step" },
+      effect: { kind: "flicker", target: 0, returnAt: { step: "end" } },
       resolve: null,
       text: CHANNEL_TEXT,
     },

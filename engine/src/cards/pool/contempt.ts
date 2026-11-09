@@ -21,7 +21,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "end-of-combat",
+        at: { step: "end-combat" },
         text: "Return it and this Aura to their owners' hands.",
         effect: {
           kind: "sequence",

@@ -36,7 +36,7 @@ export default defineCard({
     kind: "flicker",
     target: 0,
     thenCounters: { kind: "+1/+1", amount: 1, onlyIf: { type: "creature" }, entering: true },
-    returnAt: "next-end-step",
+    returnAt: { step: "end" },
     returnText:
       "Return the exiled card to the battlefield under its owner's control. If it enters as a creature, it enters with an additional +1/+1 counter on it.",
   },

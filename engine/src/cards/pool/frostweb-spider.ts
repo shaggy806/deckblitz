@@ -29,7 +29,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "end-of-combat",
+        at: { step: "end-combat" },
         effect: { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
         text: "At end of combat, put a +1/+1 counter on this creature.",
       },

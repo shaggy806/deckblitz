@@ -36,7 +36,7 @@ export default defineCard({
           { kind: "grant-keyword", target: 0, keyword: "haste", duration: "permanent" },
           {
             kind: "delayed-trigger",
-            at: "your-next-end-step",
+            at: { step: "end", whose: "you" },
             // Whip of Erebos's shape: the delayed ability remembers the
             // creature as the object it is once on the battlefield, so one
             // that has left by then (a new object, rule 400.7) is left be.

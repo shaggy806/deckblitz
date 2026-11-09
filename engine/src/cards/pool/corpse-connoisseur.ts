@@ -29,7 +29,7 @@ export default defineCard({
           { kind: "grant-keyword", target: "source", keyword: "haste", duration: "permanent" },
           {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             effect: { kind: "exile", target: "source" },
             text: "Exile the unearthed card.",
           },

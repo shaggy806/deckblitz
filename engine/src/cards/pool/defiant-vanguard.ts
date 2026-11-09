@@ -22,7 +22,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "end-of-combat",
+        at: { step: "end-combat" },
         text: "Destroy it and all creatures it blocked this turn.",
         effect: {
           kind: "sequence",

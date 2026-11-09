@@ -26,7 +26,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         effect: {
           kind: "conditional",
           condition: { kind: "source-on-battlefield" },

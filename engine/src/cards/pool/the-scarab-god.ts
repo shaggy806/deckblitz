@@ -43,7 +43,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         effect: { kind: "return-to-hand", target: "source", from: "graveyard" },
         text: "Return The Scarab God to its owner's hand.",
       },

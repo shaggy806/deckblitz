@@ -945,6 +945,7 @@ import _poolVillageReavers from "../pool/village-reavers.js";
 import _poolVineshaperMystic from "../pool/vineshaper-mystic.js";
 import _poolVioletPall from "../pool/violet-pall.js";
 import _poolVitalize from "../pool/vitalize.js";
+import _poolViviensStampede from "../pool/viviens-stampede.js";
 import _poolVodalianMage from "../pool/vodalian-mage.js";
 import _poolVolatileStormdrake from "../pool/volatile-stormdrake.js";
 import _poolVolcanicStrength from "../pool/volcanic-strength.js";
@@ -1967,6 +1968,7 @@ const shard: CardShard = {
     _poolVineshaperMystic,
     _poolVioletPall,
     _poolVitalize,
+    _poolViviensStampede,
     _poolVodalianMage,
     _poolVolatileStormdrake,
     _poolVolcanicStrength,

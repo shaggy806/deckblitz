@@ -31,7 +31,7 @@ export default defineCard({
             // A real delayed triggered ability (rule 603.7) on the token just
             // made — Ashling, the Limitless's shape.
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             about: "created",
             effect: { kind: "sacrifice-target", target: 0 },
             text: "Sacrifice that token at the beginning of the next end step.",

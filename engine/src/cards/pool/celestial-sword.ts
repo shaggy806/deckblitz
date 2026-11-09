@@ -24,7 +24,7 @@ export default defineCard({
           { kind: "modify-pt", target: 0, power: 3, toughness: 3, duration: "end-of-turn" },
           {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             text: "Its controller sacrifices it at the beginning of the next end step.",
             effect: { kind: "sacrifice-target", target: 0, byItsController: true },
           },

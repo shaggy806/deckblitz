@@ -21,7 +21,7 @@ export default defineCard({
         condition: { kind: "target", index: 0, filter: { colors: ["W"] } },
         then: { kind: "destroy", target: 0, cantBeRegenerated: true },
       },
-      { kind: "delayed-trigger", at: "next-upkeep", effect: { kind: "draw", amount: 1 }, text: "Draw a card." },
+      { kind: "delayed-trigger", at: { step: "upkeep" }, effect: { kind: "draw", amount: 1 }, text: "Draw a card." },
     ],
   },
 });

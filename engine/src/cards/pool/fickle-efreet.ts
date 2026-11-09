@@ -13,7 +13,7 @@ const TEXT =
 
 const AT_END_OF_COMBAT: EffectSpec = {
   kind: "delayed-trigger",
-  at: "end-of-combat",
+  at: { step: "end-combat" },
   text: "Flip a coin. If you lose the flip, an opponent gains control of Fickle Efreet.",
   effect: {
     kind: "flip-coin",

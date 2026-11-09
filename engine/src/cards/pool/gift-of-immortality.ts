@@ -25,7 +25,7 @@ export default defineCard({
           { kind: "put-onto-battlefield", target: "trigger-object" },
           {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             about: "put-onto-battlefield",
             effect: {
               kind: "conditional",

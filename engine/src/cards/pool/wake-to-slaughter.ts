@@ -34,7 +34,7 @@ export default defineCard({
             { kind: "grant-keyword", target: 0, keyword: "haste", duration: "permanent" },
             {
               kind: "delayed-trigger",
-              at: "next-end-step",
+              at: { step: "end" },
               effect: { kind: "exile", target: 0 },
               text: "Exile the creature Wake to Slaughter returned to the battlefield.",
             },

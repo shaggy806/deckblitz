@@ -22,7 +22,7 @@ export default defineCard({
           },
           {
             kind: "delayed-trigger",
-            at: "next-cleanup",
+            at: { step: "cleanup" },
             effect: { kind: "return-to-hand", target: "source" },
             text: "Return Thawing Glaciers to its owner's hand.",
           },

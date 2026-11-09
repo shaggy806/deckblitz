@@ -31,7 +31,7 @@ export default defineCard({
           targets: [],
           effect: {
             kind: "delayed-trigger",
-            at: "next-end-step",
+            at: { step: "end" },
             effect: { kind: "return-to-hand", target: "source" },
             text: "Return Sakashima the Impostor to its owner's hand.",
           },

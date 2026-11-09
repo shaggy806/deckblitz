@@ -23,7 +23,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         effect: { kind: "create-token", token: "Butterfly Token", count: 1 },
         text: "Create a 1/1 green Insect creature token with flying named Butterfly.",
       },

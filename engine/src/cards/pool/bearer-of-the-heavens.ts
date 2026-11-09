@@ -19,7 +19,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         text: "Destroy all permanents.",
         effect: { kind: "destroy-all", filter: {} },
       },

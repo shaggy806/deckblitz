@@ -10,7 +10,7 @@ const removeAtEndOfCombat = (on: "attacks" | "blocks"): TriggeredAbility => ({
   targets: [],
   effect: {
     kind: "delayed-trigger",
-    at: "end-of-combat",
+    at: { step: "end-combat" },
     effect: { kind: "remove-counter", target: "source", counter: "+1/+1", amount: 1 },
     text: "Remove a +1/+1 counter from Clockwork Vorrac.",
   },

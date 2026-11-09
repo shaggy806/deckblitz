@@ -27,7 +27,7 @@ export default defineCard({
       effect: {
         kind: "flicker",
         target: "source",
-        returnAt: "next-end-step",
+        returnAt: { step: "end" },
         returnText: "Return Aetherling to the battlefield under its owner's control.",
       },
       resolve: null,

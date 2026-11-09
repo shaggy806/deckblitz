@@ -25,7 +25,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "end-of-combat",
+        at: { step: "end-combat" },
         effect: { kind: "destroy-all", filter: { subtype: "Equipment", attachedToObject: "trigger-object" } },
         text: "Destroy all Equipment attached to that creature at end of combat.",
       },
@@ -38,7 +38,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "delayed-trigger",
-        at: "end-of-combat",
+        at: { step: "end-combat" },
         effect: { kind: "destroy-all", filter: { subtype: "Equipment", attachedToObject: "trigger-object" } },
         text: "Destroy all Equipment attached to that creature at end of combat.",
       },

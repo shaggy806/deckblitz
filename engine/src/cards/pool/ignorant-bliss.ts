@@ -12,7 +12,7 @@ export default defineCard({
       { kind: "exile-graveyard", target: "you", fromHand: "only", faceDown: true },
       {
         kind: "delayed-trigger",
-        at: "next-end-step",
+        at: { step: "end" },
         about: "exiled",
         // An empty hand still draws at the end step.
         orNone: true,

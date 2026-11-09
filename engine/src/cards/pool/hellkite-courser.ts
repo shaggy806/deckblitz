@@ -34,7 +34,7 @@ export default defineCard({
             { kind: "grant-keyword", target: 0, keyword: "haste", duration: "permanent" },
             {
               kind: "delayed-trigger",
-              at: "next-end-step",
+              at: { step: "end" },
               effect: { kind: "put-in-command-zone", target: 0 },
               text: "Return the commander Hellkite Courser put onto the battlefield to the command zone.",
             },

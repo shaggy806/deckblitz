@@ -136,7 +136,7 @@ describe("encore", () => {
       // Sacrificed by a delayed trigger at the next end step (rule 603.7).
       expect(
         game.state.delayedTriggers.some(
-          (t) => t.at === "next-end-step" && t.targets.some((r) => r?.kind === "object" && r.object === id),
+          (t) => "step" in t.at && t.at.step === "end" && t.targets.some((r) => r?.kind === "object" && r.object === id),
         ),
       ).toBe(true);
     }
