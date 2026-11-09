@@ -849,7 +849,77 @@ export function planManaPayment(
     richer = true;
     return { ...source, options };
   });
-  return richer ? planManaPaymentAs({ ...view, sources }, rawCost, avoid, exclude) : null;
+  const fromRicher = richer ? planManaPaymentAs({ ...view, sources }, rawCost, avoid, exclude) : null;
+  return fromRicher ?? planMatchingPips(view, rawCost, avoid, exclude);
+}
+
+/**
+ * The last try at a payment, where every pass above found nothing: each of
+ * them takes the pips in WUBRG order and never takes one back, so Fellwar Stone
+ * (making {W} and {R}) and Silent Clearing ({W} or {B}) can't pay {W}{R}: the
+ * Stone goes on the {W} for free and nothing is left for the {R}. Here the
+ * coloured pips are matched to sources first ({@link matchPips}). It only runs
+ * where nothing else did, so it can't change a payment that worked.
+ *
+ * All pips of one kind can't be misplaced, so such a cost is spared the pass.
+ */
+function planMatchingPips(
+  view: ManaPlanningView,
+  rawCost: ManaCost,
+  avoid: ObjectId | undefined,
+  exclude: ObjectId | undefined,
+): ManaPlanStep[] | null {
+  if (rawCost.snow > 0) return null;
+  const cost = costAsSpendable(rawCost, view.spendAs);
+  if (COLORS.filter((c) => cost.colored[c] > 0).length + (cost.colorless > 0 ? 1 : 0) < 2) return null;
+  return (
+    planManaPaymentOrdered(view, cost, avoid, exclude, "plain-first", false, true) ??
+    (view.sources.some(hasCostedOption)
+      ? planManaPaymentOrdered(view, cost, avoid, exclude, "converters-first", false, true)
+      : null)
+  );
+}
+
+/** Which source to take each coloured or `{C}` pip from, so that every pip has
+ * one: a bipartite matching by augmenting paths, a source holding as many pips
+ * as its largest option makes units. Sources that cost no life are tried first.
+ * `null` if some pip can have no source, which is the cheap answer for a cost
+ * that truly can't be paid. The units of one option are counted without asking
+ * whether they're the right ones (a {W}{U} pair holding two {W} pips), so a
+ * match is a plan to try, not a proof. */
+function matchPips(
+  need: Readonly<Record<ManaType, number>>,
+  sources: readonly ManaSource[],
+): Record<ManaType, ObjectId[]> | null {
+  const pips = (["W", "U", "B", "R", "G", "C"] as const).flatMap((m) => Array<ManaType>(need[m]).fill(m));
+  const toll = (s: ManaSource): number => Math.min(...s.options.map((o) => o.pain + o.lifeCost));
+  const byToll = [...sources].sort((a, b) => toll(a) - toll(b));
+  const capacity = (s: ManaSource): number => Math.max(...s.options.map((o) => o.fixed.length + o.anyColor));
+  const makes = (s: ManaSource, m: ManaType): boolean =>
+    s.options.some((o) => o.fixed.includes(m) || anyUnitMakes(o, m));
+  const held = new Map<ObjectId, number[]>();
+  const place = (pip: number, seen: Set<ObjectId>): boolean => {
+    for (const s of byToll) {
+      if (seen.has(s.id) || !makes(s, pips[pip])) continue;
+      seen.add(s.id);
+      const holds = held.get(s.id) ?? [];
+      if (holds.length < capacity(s)) {
+        held.set(s.id, [...holds, pip]);
+        return true;
+      }
+      for (let i = 0; i < holds.length; i += 1) {
+        if (place(holds[i], seen)) {
+          holds[i] = pip;
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+  for (let pip = 0; pip < pips.length; pip += 1) if (!place(pip, new Set())) return null;
+  const bound: Record<ManaType, ObjectId[]> = { W: [], U: [], B: [], R: [], G: [], C: [] };
+  for (const [id, holds] of held) for (const pip of holds) bound[pips[pip]].push(id);
+  return bound;
 }
 
 /** `rich` makes all `poor` does and more, for the same price. */
@@ -1135,6 +1205,8 @@ function planManaPaymentOrdered(
   exclude: ObjectId | undefined,
   order: SourceOrder,
   lifeLast: boolean,
+  /** Each coloured pip goes to the source {@link matchPips} gives it. */
+  matchingPips = false,
 ): ManaPlanStep[] | null {
   // Floating mana this payment is actually allowed to use. Restricted
   // units `view.canPay` turns down are invisible here, so the planner
@@ -1241,6 +1313,12 @@ function planManaPaymentOrdered(
   };
   // A stable sort: within a group, the order the sources came in.
   const sources = [...ordered].sort((a, b) => groupOf(a) - groupOf(b));
+  const pipSources = matchingPips ? matchPips(need, sources) : null;
+  if (matchingPips) {
+    // No more passes than can help, where a cost truly can't be paid.
+    const units = sources.reduce((n, s) => n + Math.max(...s.options.map((o) => o.fixed.length + o.anyColor)), 0);
+    if (pipSources === null || units < MANA_TYPES_ORDER.reduce((n, m) => n + need[m], genericNeed)) return null;
+  }
 
   /** A unit paying the cost itself: a coloured or `{C}` pip's (repaid in
    * kind), or the generic's (repaid with any unit). */
@@ -1505,6 +1583,12 @@ function planManaPaymentOrdered(
   };
   const coverSpecific = (m: ManaType): boolean => {
     for (const t of tapped) if (payWith(t, m)) return true;
+    const matchedId = pipSources?.[m].shift();
+    const matched = sources.find((s) => s.id === matchedId && !isTapped(s.id));
+    if (matched !== undefined) {
+      const t = openFunded(matched, m);
+      if (t !== null && payWith(t, m)) return true;
+    }
     const makes = (o: ManaOption): boolean => o.fixed.includes(m) || anyUnitMakes(o, m);
     const canMake = (s: ManaSource): boolean => s.options.some(makes);
     // Within its group (`SourceOrder` — a Treasure stays a last resort), a
