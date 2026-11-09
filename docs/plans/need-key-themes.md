@@ -76,7 +76,7 @@ touch. Each step:
    - **Done 2026-11-08 (B287).** One characteristics patch and one `become` effect (theme 8: `engine/src/characteristics-patch.ts`, see its design note and *As built*). 18 cards, none of the twelve flagged (no flagged card's key is under this theme): Mycosynth Lattice and 17 of the theme's top keys; 13 keys marked built, their other cards left in `--stale` for `author-freed`.
    - **Done 2026-11-08 (B288).** One `attach`, what and where (theme 14: `engine/src/attachments.ts`, see its design note and *As built*). 16 cards, none of the twelve flagged (no flagged card's key is under this theme): Akiri and 15 of the theme's top keys; 16 keys marked built, their other cards left in `--stale` for `author-freed`.
    - **Done 2026-11-08 (B289).** Keyword values and a doubler by any event (theme 16: `engine/src/keyword-values.ts`, see its design note and *As built*). 18 cards, none of the twelve flagged (no flagged card's key is under this theme): Djinn Illuminatus and 17 of the theme's top keys; 13 keys marked built, their other cards left in `--stale` for `author-freed`.
-   - Next: the build order's next theme, as `--by-rank` reaches its cards.
+   - Next: theme 3c (one prohibition/permission predicate; Frozen in Ice is flagged), then theme 15 (delayed triggers; Fight for the Throne is flagged). After those the themes are done: `author-freed` for `--stale`, then `build-family` for the rest. The `next-theme` skill reads this line.
 
 ## How this was measured
 

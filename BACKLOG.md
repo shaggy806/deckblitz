@@ -71,7 +71,7 @@ section keeps only what to do next.
   Jean-Luc Picard, Luminary (not in the snapshot yet); and re-read the vanilla preview commons
   (Starfleet Crew, Warship Flight Crew, Defense Force Aggressor) and Võx, Child of the Collective
   (blocked, also waiting on a ruling) against the released text.
-- **Need-key themes step 7 continues** (`docs/plans/need-key-themes.md`): theme 16 (keyword values and trigger doublers, B289) done; next the build order's next theme as `--by-rank` reaches its cards.
+- **Need-key themes step 7 continues** (`docs/plans/need-key-themes.md`): theme 16 (keyword values and trigger doublers, B289) done; next theme 3c (prohibitions), then theme 15 (delayed triggers). Run the `next-theme` skill.
 - **Next: work down the need keys** (the set walk ended 2026-10-27 with batch 234; its record moved to `COMPLETED.md`) (`docs/plans/need-keys-after-the-walk.md`,
   in progress; the tooling, the model trial, and Phase 1's merge and existence check landed
   2026-10-27): next, Phase 1 step 2, the recheck round. 863 cards were frozen 2026-10-27 into nine
