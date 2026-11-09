@@ -18388,7 +18388,7 @@ export class Game {
     );
     // Assist (rule 702.132a): the helper's share of the generic mana is paid
     // before the caster begins to pay — so before delve, convoke or mana.
-    const assisted = this.assistChoice?.for === cardId ? this.judgeAssist(player, cardId, def, totalCost.generic, via) : 0;
+    const assisted = this.assistChoice?.for === cardId ? this.judgeAssist(player, cardId, def, totalCost.generic) : 0;
     if (typeof assisted === "string") return assisted;
     const baseCost = assisted > 0 ? { ...totalCost, generic: totalCost.generic - assisted } : totalCost;
     // Delve (rule 702.66): each card exiled pays {1} of the total cost; a March's
@@ -18635,13 +18635,10 @@ export class Game {
    * the generic mana in the spell's total cost" — cost increases and
    * reductions included, the printed {N} only the reminder.
    */
-  private judgeAssist(player: PlayerId, cardId: ObjectId, def: CardDefinition, generic: number, via?: CastVia): string | number {
+  private judgeAssist(player: PlayerId, cardId: ObjectId, def: CardDefinition, generic: number): string | number {
     const choice = this.assistChoice;
     if (choice === undefined) return 0;
     if (!def.assist) return `${def.name} doesn't have assist`;
-    // A spell cast as something resolves (a `cast-now`) is cast inside that
-    // resolution, which can't wait on another player.
-    if (via === "effect") return "assist isn't offered for a spell cast while something resolves";
     if (!this.assistCandidates(player).includes(choice.player)) return `${choice.player} can't assist ${player}`;
     if (choice.strict && generic === 0) return `${def.name}'s total cost has no generic mana for another player to pay`;
     let amount: number;
@@ -18699,7 +18696,7 @@ export class Game {
       );
     }
     const alone = this.castSpellActionsAlone(player, card, cardName, def, opts);
-    if (!def.assist || opts.via === "effect" || this.assistChoice !== undefined) return alone;
+    if (!def.assist || this.assistChoice !== undefined) return alone;
     const helped: LegalAction[] = [];
     for (const other of this.assistCandidates(player)) {
       const most = this.assistCapacity(other, card, this.manaCapacityOf(other));
@@ -18748,9 +18745,10 @@ export class Game {
    * mana pays — before the cast goes on (`resumeAssistedCast`). Legal when
    * the caster could pay the rest were all of that paid for them. The spell
    * is shown to everyone while they decide: it's on the stack by then (rule
-   * 601.2a), here only in the hand until the cast is done.
+   * 601.2a), here only in the hand until the cast is done. A spell cast as
+   * something resolves (`castNow`) keeps that resolution waiting.
    */
-  private requestAssist(action: Extract<Action, { type: "cast-spell" }>): void {
+  private requestAssist(action: Extract<Action, { type: "cast-spell" }>, castNow?: CastNowAsk): void {
     const assistant = action.assist;
     if (assistant === undefined) return;
     const why = this.canDispatch(action);
@@ -18777,10 +18775,10 @@ export class Game {
       prompt:
         `Assist: pay up to ${max} of this spell's generic mana` +
         (need > 0 ? ` (less than ${need} and the cast is undone)` : ""),
-      assist: { cast: action, need },
+      assist: { cast: action, need, ...(castNow !== undefined ? { castNow } : {}) },
     };
     this.emit({ type: "assist-requested", player: assistant, caster: action.player, object: action.card, max });
-    this.afterPlayerAction(action.player);
+    if (castNow === undefined) this.afterPlayerAction(action.player);
   }
 
   /**
@@ -18788,22 +18786,32 @@ export class Game {
    * on with that much of its generic mana theirs to pay (`castSpell`), the
    * caster paying the rest — or, if the caster can't, the whole cast is
    * reversed and nothing is paid (rule 733.1), the caster keeping priority
-   * (733.2).
+   * (733.2). A spell cast as something resolves goes on under the same
+   * `cast-now` offer, and if reversed the resolution carries on.
    */
   private resumeAssistedCast(assistant: PlayerId, ask: AssistAsk, amount: number): void {
     const cast = ask.cast;
     this.emit({ type: "assist-chosen", player: assistant, caster: cast.player, object: cast.card, amount });
     // The caster held priority as they began casting: theirs again for the
     // rest of it, the helper's turn to answer over.
-    this.state.priority.holder = cast.player;
+    if (ask.castNow === undefined) this.state.priority.holder = cast.player;
     const choice: AssistChoice = { for: cast.card, player: assistant, amount, strict: true };
-    const why = this.withAssistChoice(choice, () => this.canDispatch(cast));
-    if (why !== null) {
-      this.emit({ type: "cast-reversed", player: cast.player, object: cast.card, reason: why });
-      this.prepareForPriority(cast.player);
-      return;
+    const castNowBefore = this.castNowProbe;
+    if (ask.castNow !== undefined) this.castNowProbe = ask.castNow;
+    try {
+      const why = this.withAssistChoice(choice, () => this.canDispatch(cast));
+      if (why !== null) {
+        this.emit({ type: "cast-reversed", player: cast.player, object: cast.card, reason: why });
+        this.prepareForPriority(ask.castNow === undefined ? cast.player : this.activePlayer);
+        return;
+      }
+      this.withAssistChoice(choice, () => {
+        if (ask.castNow !== undefined) this.carryOutCastNow(cast);
+        else this.dispatchOne(cast);
+      });
+    } finally {
+      this.castNowProbe = castNowBefore;
     }
-    this.withAssistChoice(choice, () => this.dispatchOne(cast));
   }
 
   /** Which of `alternativeCostsOf` the cast being judged or paid for is using,
@@ -19892,7 +19900,7 @@ export class Game {
     offers: readonly CastSpellOffer[],
   ): Extract<Action, { type: "cast-spell" }> | null {
     for (const offer of offers) {
-      if (offer.kicked === true || offer.keywordCosts !== undefined) continue;
+      if (offer.kicked === true || offer.keywordCosts !== undefined || offer.assist !== undefined) continue;
       const face = offer.face ?? 0;
       const def = this.faceDef(offer.card, face);
       const extra = def.additionalCost;
@@ -19980,6 +19988,13 @@ export class Game {
       const offer = this.castNowOffer(player, cast.card);
       if (offer === null) throw new Error("that card isn't being offered to cast now");
       this.requestOtherChoice(cast, offer);
+      return;
+    }
+    // Assist (rule 702.132a): likewise, the player named answers first.
+    if (cast.assist !== undefined) {
+      const offer = this.castNowOffer(player, cast.card);
+      if (offer === null) throw new Error("that card isn't being offered to cast now");
+      this.requestAssist(cast, offer);
       return;
     }
     const why = this.canDispatch(cast);

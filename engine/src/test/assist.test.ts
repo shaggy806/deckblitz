@@ -19,7 +19,26 @@ import type { Game } from "../game.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import { EvalBotController } from "../bot/eval-bot.js";
 import { viewFor } from "../view.js";
-import { A, B, C, cast, hand, lands, named, ref, settle, spawn, table, toHand, zone } from "./harness.js";
+import {
+  A,
+  B,
+  C,
+  attack,
+  cast,
+  enter,
+  hand,
+  lands,
+  life,
+  named,
+  pickTargets,
+  ref,
+  settle,
+  spawn,
+  table,
+  toGraveyard,
+  toHand,
+  zone,
+} from "./harness.js";
 
 type CastOffer = Extract<LegalAction, { kind: "cast-spell" }>;
 
@@ -229,5 +248,57 @@ describe("assist (rule 702.132a)", () => {
     );
     const binox = toHand(game, "Charging Binox");
     expect(game.canDispatch({ type: "cast-spell", player: A, card: binox, targets: [], assist: A })).not.toBeNull();
+  });
+
+  describe("on a spell cast while something resolves", () => {
+    /** Blue Mage's Cane attacks with a copy of Huddle Up on offer for {3}. */
+    const caneOffer = (aliceLands: number, bobLands: number, bobPays: number) => {
+      const t = table();
+      const { game, a, b } = t;
+      const cane = enter(game, "Blue Mage's Cane");
+      const hero = game.state.objects[cane].attachedTo as ObjectId;
+      game.state.objects[hero].summoningSick = false;
+      const wastes = lands(game, "Wastes", aliceLands);
+      const islands = lands(game, "Island", bobLands, B);
+      const huddle = toGraveyard(game, "Huddle Up", B);
+      pickTargets(a, huddle);
+      let assists: (PlayerId | undefined)[] = [];
+      a.chooseCastNowFn = (_v, o) => {
+        assists = o.casts.map((c) => c.assist);
+        const helped = o.casts.find((c) => c.assist === B);
+        return helped === undefined
+          ? null
+          : { type: "cast-spell", player: A, card: helped.card, targets: [ref(A), ref(B)], via: "effect", assist: B };
+      };
+      let asked: number | undefined;
+      b.chooseNumberFn = (_v, o) => {
+        asked = o.max;
+        return bobPays;
+      };
+      const before = [hand(game, A).length, hand(game, B).length];
+      attack(game, a, [hero]);
+      const drew = (): number[] => [hand(game, A).length - before[0], hand(game, B).length - before[1]];
+      return { ...t, wastes, islands, huddle, drew, assists: () => assists, asked: () => asked };
+    };
+
+    it("is offered and asked as the resolution waits; the helper's mana pays part of it (702.132a)", () => {
+      const { game, wastes, islands, drew, assists, asked } = caneOffer(2, 3, 1);
+      expect(assists()).toEqual([B]);
+      expect(asked()).toBe(3);
+      // Bob paid {1}, Alice the other {2}; the trigger's combat went on.
+      expect(tappedCount(game, wastes)).toBe(2);
+      expect(tappedCount(game, islands)).toBe(1);
+      expect(drew()).toEqual([1, 1]);
+      expect(life(game, B)).toBe(20 - 1);
+    });
+
+    it("is reversed if the helper pays too little, and the resolution still finishes (733.1)", () => {
+      const { game, wastes, islands, huddle } = caneOffer(2, 3, 0);
+      expect(tappedCount(game, wastes)).toBe(0);
+      expect(tappedCount(game, islands)).toBe(0);
+      expect(zone(game, huddle)).toBe("exile");
+      expect(eventsOf(game, "cast-reversed")).toHaveLength(1);
+      expect(life(game, B)).toBe(20 - 1);
+    });
   });
 });

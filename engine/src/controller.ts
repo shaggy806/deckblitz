@@ -3864,7 +3864,8 @@ export class HeuristicBotController extends AutomaticController {
   chooseCastNow(view: ControllerView, offer: CastNowOffer): CastSpellAction | PlayLandAction | null {
     const worth = (legal: CastSpellLegal): number => this.manaValueOf(legal.cardName);
     const life = view.state.players[this.playerId]?.life ?? 0;
-    for (const legal of [...offer.casts].sort((a, b) => worth(b) - worth(a))) {
+    // An assist variant waits on another player's help: not one of its plans.
+    for (const legal of offer.casts.filter((c) => c.assist === undefined).sort((a, b) => worth(b) - worth(a))) {
       // "By paying life equal to its mana value": not with the life to lose it.
       if (offer.byPayingLife === true && offer.mustCast !== true && worth(legal) >= life) continue;
       const action = this.toCastSpell(view.state, legal);

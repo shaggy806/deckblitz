@@ -2952,6 +2952,7 @@ export interface OtherChoiceAsk {
 export interface AssistAsk {
   readonly cast: Extract<Action, { type: "cast-spell" }>;
   readonly need: number;
+  readonly castNow?: CastNowAsk;
 }
 
 /**
