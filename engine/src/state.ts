@@ -4572,6 +4572,15 @@ export interface DeclaredAttacker {
   readonly taps: boolean;
 }
 
+/** What a declared attack owes besides its enlists (rules 508.1h-j): mana,
+ * life, and parts in permanents. */
+export interface AttackCostDue {
+  readonly mana: string;
+  readonly life: number;
+  readonly phyrexianLife?: number;
+  readonly parts: readonly AttackCostPart[];
+}
+
 /** `count` of one kind of permanent a declaration owes to attack, the taxes
  * asking for the same kind added up — see `GameState.pendingAttackCost`.
  * `source` is the permanent whose static first asked it. */
@@ -5684,9 +5693,9 @@ export interface GameState {
   /**
    * An attack being declared whose attackers' enlist costs (rule 702.154a —
    * optional costs to attack, 508.1g) are still being asked: the attackers
-   * have tapped and any attack tax is paid, but none is announced as
+   * have tapped and nothing else is paid yet, and none is announced as
    * attacking yet (508.1k), so nothing has triggered on the attack. `queue`
-   * is the attackers with enlist still to ask, one at a time
+   * is the attackers with enlist still to ask, once per instance, one at a time
    * (`Game.promptNextEnlist`); `declared` is the declaration, announced
    * once the last is answered (`Game.announceAttackers`). Optional so a
    * snapshot saved before it existed still loads.
@@ -5695,6 +5704,9 @@ export interface GameState {
     readonly player: PlayerId;
     readonly queue: readonly ObjectId[];
     readonly declared: readonly DeclaredAttacker[];
+    /** What else the attack owes, paid once every enlist is answered (508.1j)
+     * — unset on a snapshot saved before it was paid after them. */
+    readonly cost?: AttackCostDue;
   };
   /**
    * A declaration's costs to attack paid in permanents (rule 508.1h —

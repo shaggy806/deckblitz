@@ -490,6 +490,7 @@ import type {
   RevealedHandChoice,
   CasualtyAsk,
   ConspireAsk,
+  AttackCostDue,
   AttackCostPart,
   DeclaredAttacker,
   EnterAttachHost,
@@ -12180,23 +12181,34 @@ export class Game {
     // it became attacking (rule 508.1k, `announceAttackers`), every cost paid
     // and before enlist's bonus, which comes by a trigger; a creature put onto
     // the battlefield attacking was never declared (508.4).
-    if (tax.mana !== "") {
+    this.askEnlistsThenPay(player, declaredNow, {
+      mana: tax.mana,
+      life: tax.life,
+      parts: owedPermanents,
+      ...(phyrexianLife !== undefined ? { phyrexianLife } : {}),
+    });
+  }
+
+  /** The attack's mana and life (508.1j) are paid, then what it owes in
+   * permanents is chosen and paid; the attack is announced after that. */
+  private payAttackTaxesThenAnnounce(player: PlayerId, declaredNow: readonly DeclaredAttacker[], cost: AttackCostDue): void {
+    if (cost.mana !== "") {
       // Phyrexian pips (Norn's Annex) as the attacker chose: that many in
       // life, the rest in mana (rule 107.4f).
-      const payment = this.withLifeChoice(phyrexianLife, () => this.payMana(player, parseManaCost(tax.mana)));
-      if (payment === null) throw new Error(`${player} can't pay the ${tax.mana} it costs to attack`);
+      const payment = this.withLifeChoice(cost.phyrexianLife, () => this.payMana(player, parseManaCost(cost.mana)));
+      if (payment === null) throw new Error(`${player} can't pay the ${cost.mana} it costs to attack`);
       this.executePayment(player, payment);
     }
-    if (tax.life > 0) this.changeLife(player, -tax.life);
+    if (cost.life > 0) this.changeLife(player, -cost.life);
     // What's paid in permanents (Exalted Dragon), after the mana so a land can
     // tap for that first (508.1i) and be sacrificed for this.
-    if (owedPermanents.length > 0) {
-      this.state.pendingAttackCost = { player, parts: owedPermanents, sacrificed: [], returned: [], declared: declaredNow };
+    if (cost.parts.length > 0) {
+      this.state.pendingAttackCost = { player, parts: cost.parts, sacrificed: [], returned: [], declared: declaredNow };
       this.state.awaiting = null;
       this.continueAttackCosts();
       return;
     }
-    this.askEnlistsThenAnnounce(player, declaredNow);
+    this.announceAttackers(declaredNow);
   }
 
   /**
@@ -12307,23 +12319,26 @@ export class Game {
       }
     });
     for (const id of returned) this.returnToHandByEffect({ kind: "object", object: id });
-    const still = declared.filter((d) => this.state.objects[d.id]?.zone === "battlefield");
-    this.askEnlistsThenAnnounce(player, still);
+    this.announceAttackers(declared.filter((d) => this.state.objects[d.id]?.zone === "battlefield"));
   }
 
-  /** Enlist (rule 702.154b): an optional cost to attack, chosen and paid
-   * (508.1g-j) before any attacker becomes attacking (508.1k) — so the
-   * declaration is announced, and its attack triggers trigger, only once
-   * every enlist has been asked. Aradesh's "if it enlisted a creature
-   * this combat" sees it as its attack trigger triggers. */
-  private askEnlistsThenAnnounce(player: PlayerId, declaredNow: readonly DeclaredAttacker[]): void {
-    const enlisting = declaredNow.map((d) => d.id).filter((id) => this.hasEnlist(id));
+  /** Enlist (rule 702.154b): an optional cost to attack, chosen (508.1g)
+   * before the attack's total cost is locked in (508.1h) and any mana is made
+   * for it (508.1i) — so a creature meant to be enlisted isn't tapped for the
+   * attack tax first — and paid with the rest of it (508.1j), all before any
+   * attacker becomes attacking (508.1k). The declaration is announced, and its
+   * attack triggers trigger, only once every enlist has been asked. Aradesh's
+   * "if it enlisted a creature this combat" sees it as its attack trigger
+   * triggers. Each instance on a creature is asked on its own (702.154d). */
+  private askEnlistsThenPay(player: PlayerId, declaredNow: readonly DeclaredAttacker[], cost: AttackCostDue): void {
+    const enlisting = declaredNow.flatMap((d) => Array.from({ length: this.enlistInstances(d.id) }, () => d.id));
     if (enlisting.length > 0) {
-      this.state.pendingEnlist = { player, queue: enlisting, declared: declaredNow };
+      this.state.pendingEnlist = { player, queue: enlisting, declared: declaredNow, cost };
       this.state.awaiting = null;
       if (this.promptNextEnlist()) return;
+      delete this.state.pendingEnlist;
     }
-    this.announceAttackers(declaredNow);
+    this.payAttackTaxesThenAnnounce(player, declaredNow, cost);
   }
 
   /** If `player` still owes a skipped turn (`PlayerState.turnsToSkip`), the
@@ -12338,19 +12353,29 @@ export class Game {
     return true;
   }
 
-  /** Has `id`, a permanent, enlist (rule 702.154a — `StaticAbility.enlist`)? */
-  private hasEnlist(id: ObjectId): boolean {
+  /** How many instances of enlist `id`, a permanent, has (rule 702.154d —
+   * `StaticAbility.enlist`), each its own optional cost. */
+  private enlistInstances(id: ObjectId): number {
     const object = this.state.objects[id];
-    return object !== undefined && object.zone === "battlefield" && this.hasOwnStatic(object, (a) => a.enlist === true);
+    if (object === undefined || object.zone !== "battlefield") return 0;
+    const live = (a: StaticAbility): boolean => a.enlist === true && this.staticActive(object, a);
+    return (
+      grantedStatics(this.state, this.registry, object).filter(live).length +
+      (hasLostAbilities(this.state, this.registry, object)
+        ? 0
+        : this.registry.get(rulesTextName(object)).static.filter(live).length)
+    );
   }
 
   /** What `attacker` may enlist (rule 702.154a): an untapped creature its
    * controller controls that wasn't chosen to attack, other than itself,
    * with haste or under that player's control continuously since the turn
-   * began (as for a {T} ability — rule 302.6). */
+   * began (as for a {T} ability — rule 302.6), and whose tapping leaves
+   * the attack's mana still payable (508.1j: all of the cost or none). */
   private enlistCandidates(attacker: ObjectId): ObjectId[] {
     const by = this.state.objects[attacker];
     if (by === undefined || by.zone !== "battlefield") return [];
+    const due = this.state.pendingEnlist?.cost;
     return this.state.zones.shared.battlefield.filter((id) => {
       if (id === attacker) return false;
       const object = this.state.objects[id];
@@ -12360,9 +12385,21 @@ export class Game {
         !object.tapped &&
         object.attacking === null &&
         effectiveTypes(this.state, this.registry, object).includes("creature") &&
-        !this.tapAbilityBlockedBySickness(object)
+        !this.tapAbilityBlockedBySickness(object) &&
+        (due === undefined || due.mana === "" || this.attackManaPayableWithout(by.controller, id, due))
       );
     });
+  }
+
+  /** Could `player` still pay the attack's mana with `tapped` tapped for
+   * enlist? (All of a token stack held back, a little too careful about
+   * one taken from the only stack that could pay.) */
+  private attackManaPayableWithout(player: PlayerId, tapped: ObjectId, due: AttackCostDue): boolean {
+    return (
+      this.withLifeChoice(due.phyrexianLife, () =>
+        this.payMana(player, parseManaCost(due.mana), undefined, undefined, null, { withheld: new Set([tapped]) }),
+      ) !== null
+    );
   }
 
   /** Ask the next attacker's enlist (see `GameState.pendingEnlist`) as a
@@ -12443,7 +12480,9 @@ export class Game {
     if (this.promptNextEnlist()) return;
     const pending = this.state.pendingEnlist;
     delete this.state.pendingEnlist;
-    if (pending !== undefined) this.announceAttackers(pending.declared);
+    if (pending === undefined) return;
+    if (pending.cost !== undefined) this.payAttackTaxesThenAnnounce(player, pending.declared, pending.cost);
+    else this.announceAttackers(pending.declared);
   }
 
   /** Note `entry` in the journal. Statics read it (Kid Loki's "creature

@@ -12,6 +12,9 @@
  */
 import { describe, expect, it } from "vitest";
 
+import { createDefaultRegistry, defineCard } from "../cards.js";
+import { enlist } from "../cards/helpers.js";
+import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 
 import { A, B, attack, hand, life, pickPermanents, pt, spawn, table, toStep } from "./harness.js";
@@ -160,5 +163,73 @@ describe("enlist", () => {
     // 1 + the Goblin's 1 = 2, twice.
     expect(life(game, B)).toBe(16);
     expect(hand(game).length).toBe(before);
+  });
+
+  describe("with an attack tax (rules 508.1g-j: chosen before the cost is paid)", () => {
+    // Declared by hand: a scripted seat's attack is cut to the tax it could
+    // pay with every creature that might attack held back.
+    const declare = (game: Game, attacker: ObjectId): void => {
+      toStep(game, "declare-attackers", A);
+      game.dispatch({ type: "declare-attackers", player: A, attackers: [{ attacker, defender: B }] });
+      toStep(game, "postcombat-main", A);
+    };
+
+    it("the tax isn't paid first with the creature meant to be enlisted", () => {
+      const { game, a } = table();
+      const brute = spawn(game, "Coalition Warbrute");
+      spawn(game, "Ghostly Prison", B);
+      const elves = [spawn(game, "Llanowar Elves"), spawn(game, "Llanowar Elves"), spawn(game, "Llanowar Elves")];
+      const seen = pickPermanents(a, elves[2]);
+      declare(game, brute);
+      // Every Elf could be the one enlisted, the other two paying {2}.
+      expect([...seen.offered].sort()).toEqual([...elves].sort());
+      expect(elves.every((id) => game.state.objects[id].tapped)).toBe(true);
+      expect(life(game, B)).toBe(20 - 3 - 1);
+    });
+
+    it("no creature is offered if tapping it would leave the tax unpayable", () => {
+      const { game, a } = table();
+      const brute = spawn(game, "Coalition Warbrute");
+      spawn(game, "Ghostly Prison", B);
+      const elves = [spawn(game, "Llanowar Elves"), spawn(game, "Llanowar Elves")];
+      let asked = 0;
+      a.choosePermanentsFn = () => {
+        asked += 1;
+        return [];
+      };
+      declare(game, brute);
+      expect(asked).toBe(0);
+      expect(elves.every((id) => game.state.objects[id].tapped)).toBe(true);
+      expect(life(game, B)).toBe(17);
+    });
+  });
+
+  it("each instance is its own optional cost, its bonus only its own (702.154d)", () => {
+    const twice = defineCard({
+      name: "Test Double Enlister",
+      manaCost: "{1}",
+      types: ["creature"],
+      subtypes: ["Soldier"],
+      power: 1,
+      toughness: 1,
+      static: [enlist(), enlist()],
+      text: "Enlist, enlist",
+    });
+    const { game, a } = table({ registry: createDefaultRegistry().register(twice) });
+    const doubled = spawn(game, "Test Double Enlister");
+    const bears = spawn(game, "Grizzly Bears");
+    const giant = spawn(game, "Hill Giant");
+    const offered: ObjectId[][] = [];
+    a.choosePermanentsFn = (_view, eligible) => {
+      offered.push([...eligible]);
+      return [eligible[0]];
+    };
+    attack(game, a, [doubled]);
+    expect(offered.length).toBe(2);
+    expect(offered[1]).toHaveLength(1);
+    expect(game.state.objects[bears].tapped).toBe(true);
+    expect(game.state.objects[giant].tapped).toBe(true);
+    // 1 + the Bears' 2 + the Giant's 3.
+    expect(life(game, B)).toBe(14);
   });
 });
