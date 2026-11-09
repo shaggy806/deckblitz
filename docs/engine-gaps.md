@@ -250,20 +250,9 @@ applies, and these aren't self-replacement effects under 614.15. `moveObjectUnca
 `topsItselfInstead` first, assuming the owner prefers the library. Cards: Gravebane Zombie, the Blightsteel shuffle family. Needs a
 choice on a move that can't wait yet, as Pulmonic Sliver's key does. Found 2026-11-04.
 
-**A copy of a spell loses its sacrificed, discarded and revealed cost references.** Rule 707.10: a
-copy of a spell copies the choices made for it, and an effect reading "the sacrificed creature" on
-the copy reads the original's. `exiled-as-cost` now carries over to a copy
-(`lastKnownRefs.exiledCost`, `cost:choose-cards-as-cost`, 2026-11-02); the `sacrificed`, `discarded`
-and `revealed` refs of `AmountRef` don't, so a copy of such a spell reads nothing. Found building that
-family; not reported from play.
-
 **A player can't play another player's face-down exiled card blind.** Rule 406.3a lets the effect that exiled a
 card face down allow it to be played; the engine offers a linked grant only to a player who may look at the card
 (`linkedCastGrantFor`, `game.ts`). Blocks Urianger Augurelt and Lobelia. Found 2026-11-02; not reported from play.
-
-**A keyword's other cost counts the graveyard as the cast starts.** `whyCannotPayAlso` (`game.ts`) doesn't offer a
-splice set where one card's sacrifice would supply the cards another's exile needs, though rule 601.2h lets costs be
-paid in any order. Found 2026-11-02; not reported from play.
 
 **A token with riot is never asked.** A token enters without the riot choice and takes haste
 (`entersBattlefieldReplacement`, `game.ts`), though rule 702.136a gives it the choice as it enters. Blocks Spider-Punk's
@@ -353,11 +342,6 @@ at the same time decide in APNAP order, then the actions happen together. `each-
 so a choice raised by one player's draw (dredge, a draw replacement) comes before a later player
 answers. The seven tempting offers (Tempt with Bunnies among them) and Kwain share the shape.
 Found 2026-11-06, building Tempt with Bunnies.
-
-**An optional additional life payment isn't offered on a spell cast by an effect.** Defiler of
-Vigor's "you may pay 2 life" is a cast offer of its own on a normal cast, but `cast-now` (cascade,
-"cast it without paying") never offers it; declining is always legal, so nothing illegal happens,
-but a choice the player has is missing. Found 2026-11-06, building Defiler of Vigor.
 
 **Only the first mandatory draw replacement is offered beside an optional one.** With Abundance
 and two mandatory "instead of drawing" replacements (Underrealm Lich and another), rule 616.1
