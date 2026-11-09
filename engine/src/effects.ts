@@ -16976,7 +16976,10 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         if (who === undefined) continue;
         milled.push([{ kind: "player", player: who }, amountValue(spec.amount, ctx, who)]);
       }
-      for (const [target, count] of milled) ctx.mill(target, count);
+      // One instruction: every player's mill is one event (rule 603.2c).
+      ctx.simultaneously(() => {
+        for (const [target, count] of milled) ctx.mill(target, count);
+      });
       return;
     }
     case "skip-next-untap": {

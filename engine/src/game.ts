@@ -2118,6 +2118,11 @@ export class Game {
     { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number }
   > | null = null;
 
+  /** `mills` triggers owed for the simultaneous mill under way
+   * (`withMillBatch`), per watcher ability. Not game state, like
+   * `counterBatch`. */
+  private millBatch: Map<string, { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number }> | null = null;
+
   /** The permanents that have left the battlefield so far in the one
    * simultaneous event being carried out — a wrath, a sweep of state-based
    * actions, an edict every player answers — plus the commanders whose move
@@ -30069,6 +30074,25 @@ export class Game {
             }
             return;
           }
+          // "Whenever one or more nonland cards are milled": once for a
+          // simultaneous mill, whoever milled, "that many" the total (rule
+          // 603.2c; The Wise Mothman's ruling).
+          if (
+            ability.trigger.on === "mills" &&
+            ability.trigger.who === "any" &&
+            event.type === "cards-milled" &&
+            this.millBatch !== null
+          ) {
+            const key = `${id}#${index}`;
+            const owed = this.millBatch.get(key);
+            const trigger = withoutTriggerPlayer(base);
+            if (owed === undefined) {
+              this.millBatch.set(key, { ability, trigger, multiplier });
+            } else {
+              owed.trigger = { ...owed.trigger, triggerValue: (owed.trigger.triggerValue ?? 0) + (trigger.triggerValue ?? 0) };
+            }
+            return;
+          }
           // A player's counters in one simultaneous placement are one event
           // for that player, whatever their kinds or sources: two toxic
           // creatures connecting at once (All Will Be One's ruling).
@@ -35733,7 +35757,7 @@ export class Game {
       simultaneously: (fn) =>
         this.withLeaveBatch(() =>
           this.withGraveyardLeaveBatch(() =>
-            this.withEnterBatch(() => this.withDamageBatch(() => this.withTokenEvent(() => this.withCounterBatch(fn)))),
+            this.withEnterBatch(() => this.withDamageBatch(() => this.withTokenEvent(() => this.withCounterBatch(() => this.withMillBatch(fn))))),
           ),
         ),
       oneTokenEvent: (fn) => this.withTokenCopyEvent(fn),
@@ -54002,6 +54026,26 @@ export class Game {
       result = fn();
     } finally {
       this.counterBatch = null;
+    }
+    for (const { ability, trigger, multiplier } of batch.values()) this.queueTrigger(ability, trigger, multiplier);
+    return result;
+  }
+
+  /**
+   * Have several players mill all at once, then settle the `mills` triggers
+   * that watch any player's as one event (rule 603.2c): The Wise Mothman
+   * triggers once for "each player mills", for every card milled. Nested
+   * batches join the outer one; each player's own `cards-milled` stands.
+   */
+  private withMillBatch<T>(fn: () => T): T {
+    if (this.millBatch !== null) return fn();
+    const batch: NonNullable<Game["millBatch"]> = new Map();
+    this.millBatch = batch;
+    let result: T;
+    try {
+      result = fn();
+    } finally {
+      this.millBatch = null;
     }
     for (const { ability, trigger, multiplier } of batch.values()) this.queueTrigger(ability, trigger, multiplier);
     return result;

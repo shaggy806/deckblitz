@@ -1930,7 +1930,9 @@ export type TriggerKind =
        * `filter: { notTypes: ["land"] }`). Off `cards-milled`: once per mill,
        * however many cards, when at least one matches; `{ triggerValue: true
        * }` is how many matched ("where X is the number of nonland cards
-       * milled this way"). `who` is the player who milled. A milled card a
+       * milled this way"). `who` is the player who milled; `who: "any"` fires
+       * once for a mill several players do at once, for the total (rule
+       * 603.2c, `withMillBatch`). A milled card a
        * replacement sent elsewhere (Rest in Peace) was still milled and is
        * read where it went (701.17c). A surveil or a discard isn't a mill. */
       readonly on: "mills";
