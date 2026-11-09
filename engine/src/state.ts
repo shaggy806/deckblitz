@@ -3346,7 +3346,8 @@ export type AwaitingDecision =
        * `eligible`. Not in `ids`. */
       readonly alsoTaken?: readonly ObjectId[];
       /** "That player" of `then` (`LastKnownRefs.player`): whose zones a
-       * `search-library` with `whose` searched. */
+       * `search-library` with `whose` searched, or the player a
+       * `for-each-player` around a `look-and-choose` is about. */
       readonly thenPlayer?: PlayerId;
       /**
        * A behold (rule 701.4a — `Game.beginBehold`): `ids` are cards in

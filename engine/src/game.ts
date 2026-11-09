@@ -38951,7 +38951,14 @@ export class Game {
           // and a `leftoverIf` to be asked once the choice is answered.
           then === undefined && leftoverIf === undefined
             ? undefined
-            : { effect: then, source, x, ...(refs.source !== undefined ? { sourceStint: refs.source } : {}) },
+            : {
+                effect: then,
+                source,
+                x,
+                ...(refs.source !== undefined ? { sourceStint: refs.source } : {}),
+                // "That player" (a `for-each-player`'s) stays them in the `then`.
+                ...(refs.player !== undefined ? { player: refs.player } : {}),
+              },
           reveal ?? false,
           leftoverIf,
           secondPick,
@@ -39016,7 +39023,7 @@ export class Game {
     leftover: "bottom-random" | "bottom-any-order" | "top-any-order" | "stay" | "hand" | "graveyard" | "exile" | "exile-playable",
     filter: ZoneChoiceFilter | undefined,
     enterTapped = false,
-    then?: { effect: EffectSpec | undefined; source: ObjectId; x: number; sourceStint?: number },
+    then?: { effect: EffectSpec | undefined; source: ObjectId; x: number; sourceStint?: number; player?: PlayerId },
     reveal: boolean | "chosen" = false,
     leftoverIf?: LookAndChooseLeftoverIf,
     secondPick?: ZoneSecondPick,
@@ -39253,6 +39260,7 @@ export class Game {
       ...(then?.effect !== undefined ? { then: then.effect } : {}),
       ...(then !== undefined ? { thenSource: then.source, thenX: then.x } : {}),
       ...(then?.sourceStint !== undefined ? { thenSourceStint: then.sourceStint } : {}),
+      ...(then?.player !== undefined ? { thenPlayer: then.player } : {}),
       ...(leftoverIf !== undefined ? { leftoverIf } : {}),
       ...(secondPick !== undefined ? { secondPick } : {}),
       ...(exileLink !== undefined ? { exileLink } : {}),
