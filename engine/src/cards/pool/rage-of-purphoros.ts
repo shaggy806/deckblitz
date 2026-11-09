@@ -13,7 +13,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "damage", amount: 4, target: 0 },
-      { kind: "prohibit", target: 0, regeneration: true },
+      { kind: "cant-regenerate", target: 0 },
       { kind: "scry", amount: 1 },
     ],
   },

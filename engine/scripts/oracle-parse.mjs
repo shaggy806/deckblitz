@@ -2822,8 +2822,7 @@ function emblemStaticOf(quoted) {
     return {
       affects: { scope: "self" },
       condition: { kind: "controls", filter: { type: "planeswalker", subtype: "Gideon" }, atLeast: 1 },
-      cantLoseGame: true,
-      opponentsCantWinGame: true,
+      prohibits: [{ act: "lose-game", who: "you" }, { act: "win-game", who: "opponents" }],
       text,
     };
   }
@@ -2838,7 +2837,7 @@ function emblemStaticOf(quoted) {
     return { affects: { scope: "self" }, alternativeCostForSpells: { mana: "{0}", when: { castFrom: "hand" } }, text };
   }
   if (quoted === "Your opponents can't cast noncreature spells.") {
-    return { affects: { scope: "self" }, prohibits: { who: "opponents", spells: { notTypes: ["creature"] } }, text };
+    return { affects: { scope: "self" }, prohibits: [{ act: "cast", who: "opponents", filter: { notTypes: ["creature"] } }], text };
   }
   // "Instant and sorcery spells you cast have storm." (Ral, Crackling Wit).
   if (quoted === "Instant and sorcery spells you cast have storm.") {
@@ -3183,7 +3182,7 @@ export function parseSentence(sentence, ctx) {
   }
   // "Players can't search libraries this turn" (Shadow of Doubt).
   if (/^players can't search libraries this turn\.$/i.test(s)) {
-    return { kind: "player-effect", duration: "end-of-turn", cantSearchLibraries: "each-player" };
+    return { kind: "prohibit", prohibits: [{ act: "search", who: "each-player" }], duration: "end-of-turn" };
   }
   // "Until end of turn, if you tap a land you control for mana, it produces
   // {U} instead of any other type" (Deep Water — rule 106.12).
@@ -5144,12 +5143,12 @@ export function parseSentence(sentence, ctx) {
   // "Until your next turn, your opponents can't cast spells from anywhere
   // other than their hands."
   if (re("until your next turn, your opponents can't cast spells from anywhere other than their hands").test(s)) {
-    return { kind: "player-effect", duration: "until-your-next-turn", castOnlyFromHand: "each-opponent" };
+    return { kind: "prohibit", prohibits: [{ act: "cast", who: "each-opponent", notFrom: ["hand"] }], duration: "until-your-next-turn" };
   }
   // "You can cast only one more spell this turn" (Irencrag Feat).
   if ((m = re(`you can cast only ${N} more spells? this turn`).exec(s))) {
     const count = amount(m[1]);
-    if (typeof count === "number") return { kind: "player-effect", duration: "end-of-turn", castsLeft: { count } };
+    if (typeof count === "number") return { kind: "prohibit", prohibits: [{ act: "cast", who: "you", more: count }], duration: "end-of-turn" };
   }
   // A flash permission for this turn (rule 601.3b): "You may cast [creature]
   // spells this turn as though they had flash" (Borne Upon a Wind, Winding
@@ -6548,7 +6547,7 @@ export function parseSentence(sentence, ctx) {
   }
   // "Target creature can't be regenerated this turn" (Hurr Jackal — rule
   // 701.19c).
-  if ((m = re(`(${TARGET}) can't be regenerated this turn`).exec(s))) return { kind: "prohibit", target: slot(m[1]), regeneration: true };
+  if ((m = re(`(${TARGET}) can't be regenerated this turn`).exec(s))) return { kind: "cant-regenerate", target: slot(m[1]) };
   if ((m = re(`(~|${TARGET}) can't be blocked this turn`).exec(s))) {
     return { kind: "grant-keyword", target: m[1] === "~" ? "source" : slot(m[1]), keyword: "unblockable", duration: "end-of-turn" };
   }
@@ -6580,7 +6579,7 @@ export function parseSentence(sentence, ctx) {
       kind: "sequence",
       effects: [
         { kind: "restrict", target, restrictions: ["cant-attack", "cant-block"], duration: "until-your-next-turn" },
-        { kind: "prohibit", target, abilities: true, duration: "until-your-next-turn" },
+        { kind: "prohibit", prohibits: [{ act: "activate", who: "each-player", target: target }], duration: "until-your-next-turn" },
       ],
     };
   }
@@ -6591,7 +6590,7 @@ export function parseSentence(sentence, ctx) {
       kind: "sequence",
       effects: [
         { kind: "modify-pt", target, power: Number(m[2]), toughness: Number(m[3]), duration: "until-your-next-turn" },
-        { kind: "prohibit", target, abilities: true, duration: "until-your-next-turn" },
+        { kind: "prohibit", prohibits: [{ act: "activate", who: "each-player", target: target }], duration: "until-your-next-turn" },
       ],
     };
   }
@@ -7298,13 +7297,13 @@ export function parseSentence(sentence, ctx) {
   // "Target opponent becomes the monarch" (Jared Carthalion, True Heir).
   if ((m = re("(target player|target opponent) becomes the monarch").exec(s))) return { kind: "become-monarch", who: slot(m[1]) };
   // "You can't become the monarch this turn" (rule 725.4).
-  if (re("you can't become the monarch this turn").test(s)) return { kind: "prohibit", who: "you", monarch: true };
+  if (re("you can't become the monarch this turn").test(s)) return { kind: "prohibit", prohibits: [{ act: "become-monarch", who: "you" }] };
   // "Target player can't play lands this turn" (Turf Wound, Pardic Miner —
   // rule 305.2).
   if ((m = re("(target player|target opponent|you) can't play lands this turn").exec(s))) {
     return m[1].toLowerCase() === "you"
-      ? { kind: "prohibit", who: "you", lands: true }
-      : { kind: "prohibit", who: slot(m[1]), lands: true };
+      ? { kind: "prohibit", prohibits: [{ act: "play-land", who: "you" }] }
+      : { kind: "prohibit", prohibits: [{ act: "play-land", who: { target: slot(m[1]) } }] };
   }
   // The initiative (rule 726) — its abilities venture into Undercity — and
   // venturing (701.49): into one of the three Forgotten Realms dungeons.
@@ -8602,7 +8601,7 @@ export function parseEffect(text, outer) {
           kind: "sequence",
           effects: [
             { kind: "restrict", target, restrictions: ["cant-attack", "cant-block"], duration: "until-your-next-turn" },
-            { kind: "prohibit", target, abilities: true, duration: "until-your-next-turn" },
+            { kind: "prohibit", prohibits: [{ act: "activate", who: "each-player", target: target }], duration: "until-your-next-turn" },
           ],
         },
         todo: [],
@@ -10612,7 +10611,7 @@ export function parseEffect(text, outer) {
     // "It can't be regenerated this turn." after the one sentence that
     // targeted (Engulfing Flames, Rage of Purphoros — rule 701.19c).
     if (/^(?:it|that creature) can't be regenerated this turn\.$/i.test(sentence) && i > 0 && ctx.targets.length === 1 && parsed.length > 0) {
-      const cant = { kind: "prohibit", target: 0, regeneration: true };
+      const cant = { kind: "cant-regenerate", target: 0 };
       parsed.push(cant);
       hints.push({ sentence, effect: cant });
       continue;
@@ -10620,7 +10619,7 @@ export function parseEffect(text, outer) {
     // "A creature dealt damage this way can't be regenerated this turn." after
     // the damage (Incinerate, Flamebreak): whatever creature it damaged.
     if (/^(?:a creature|creatures) dealt damage this way can't be regenerated this turn\.$/i.test(sentence) && parsed.some(dealsDamage)) {
-      const cant = { kind: "prohibit", regeneration: true, dealtDamageThisWay: "creature" };
+      const cant = { kind: "cant-regenerate", dealtDamageThisWay: "creature" };
       parsed.push(cant);
       hints.push({ sentence, effect: cant });
       continue;
@@ -10632,7 +10631,7 @@ export function parseEffect(text, outer) {
       const cant = {
         kind: "conditional",
         condition: { kind: "target", index: 0, filter: { type: "creature" } },
-        then: { kind: "sequence", effects: [{ kind: "prohibit", target: 0, regeneration: true }, { kind: "exile-if-dies-this-turn", target: 0 }] },
+        then: { kind: "sequence", effects: [{ kind: "cant-regenerate", target: 0 }, { kind: "exile-if-dies-this-turn", target: 0 }] },
       };
       parsed.push(cant);
       hints.push({ sentence, effect: cant });
@@ -15020,12 +15019,15 @@ function parseFaceAsWritten(face, ctx = {}) {
       out.chooseCardNameOnEnter = { ...out.chooseCardNameOnEnter, aim: "opponent-permanents" };
       out.static.push({
         affects: { scope: "self" },
-        prohibits: {
-          who: "each-player",
-          abilitiesOf: { chosenName: true },
-          anyZone: true,
-          ...(m[1] !== undefined ? { exceptManaAbilities: true } : {}),
-        },
+        prohibits: [
+          {
+            act: "activate",
+            who: "each-player",
+            of: { chosenName: true },
+            ...(m[1] !== undefined ? { except: ["mana"] } : {}),
+            anyZone: true,
+          },
+        ],
         text: printed(raw),
       });
       continue;
@@ -15035,7 +15037,7 @@ function parseFaceAsWritten(face, ctx = {}) {
       (line === "Spells with the chosen name can't be cast." || line === "Your opponents can't cast spells with the chosen name.")
     ) {
       const who = line.startsWith("Your opponents") ? "opponents" : "each-player";
-      out.static.push({ affects: { scope: "self" }, prohibits: { who, spells: { chosenName: true } }, text: printed(raw) });
+      out.static.push({ affects: { scope: "self" }, prohibits: [{ act: "cast", who: who, filter: { chosenName: true } }], text: printed(raw) });
       continue;
     }
     // A name lock on a reference (`sameNameWith`, rule 201.2a): "the exiled
@@ -15046,7 +15048,7 @@ function parseFaceAsWritten(face, ctx = {}) {
       const who = m[1] === "Players" ? "each-player" : "opponents";
       const sameNameWith = m[3] !== "a nontoken permanent" ? "exiled-with-source" : { permanents: { token: false } };
       const prohibits =
-        m[2] === "cast spells" ? { who, spells: { sameNameWith } } : { who, lands: { notSupertype: "basic", sameNameWith } };
+        m[2] === "cast spells" ? [{ act: "cast", who, filter: { sameNameWith } }] : [{ act: "play-land", who, filter: { notSupertype: "basic", sameNameWith } }];
       out.static.push({ affects: { scope: "self" }, prohibits, text: printed(raw) });
       continue;
     }
@@ -15057,12 +15059,12 @@ function parseFaceAsWritten(face, ctx = {}) {
     // Frenzy).
     if ((m = /^(You|Your opponents|Players) can't play lands\.$/.exec(line))) {
       const who = m[1] === "You" ? "you" : m[1] === "Players" ? "each-player" : "opponents";
-      out.static.push({ affects: { scope: "self" }, prohibits: { who, lands: {} }, text: printed(raw) });
+      out.static.push({ affects: { scope: "self" }, prohibits: [{ act: "play-land", who: who }], text: printed(raw) });
       continue;
     }
     if ((m = /^(Your opponents|Players) can't cast spells from anywhere other than their hands\.$/.exec(line))) {
       const who = m[1] === "Players" ? "each-player" : "opponents";
-      out.static.push({ affects: { scope: "self" }, prohibits: { who, spells: true, notFrom: ["hand"] }, text: printed(raw) });
+      out.static.push({ affects: { scope: "self" }, prohibits: [{ act: "cast", who: who, notFrom: ["hand"] }], text: printed(raw) });
       continue;
     }
     // A limit on the spells a player casts each turn (`prohibits.castLimit`):
@@ -15078,14 +15080,14 @@ function parseFaceAsWritten(face, ctx = {}) {
       const phyrexian = /^non-([A-Z][a-z]+)$/.exec(m[2] ?? "");
       const spells = phyrexian !== null ? { notSubtypes: [phyrexian[1]] } : flashSpellsFilter(m[2]);
       if (spells !== null) {
-        out.static.push({ affects: { scope: "self" }, prohibits: { who, spells, castLimit: 1 }, text: printed(raw) });
+        out.static.push({ affects: { scope: "self" }, prohibits: [{ act: "cast", who, ...(spells === true ? {} : { filter: spells }), limit: 1 }], text: printed(raw) });
         continue;
       }
     }
     if (line === "You can't play lands or cast spells from your hand.") {
       out.static.push({
         affects: { scope: "self" },
-        prohibits: { who: "you", spells: true, lands: {}, from: ["hand"] },
+        prohibits: [{ act: "cast", who: "you", from: ["hand"] }, { act: "play-land", who: "you", from: ["hand"] }],
         text: printed(raw),
       });
       continue;
@@ -15295,19 +15297,19 @@ function parseFaceAsWritten(face, ctx = {}) {
     }
     // "Players can't search libraries" and its narrower kin (`cantSearchLibraries`).
     const noSearch = {
-      "Players can't search libraries.": { who: "any-player" },
-      "Your opponents can't search libraries.": { who: "opponent" },
+      "Players can't search libraries.": { who: "each-player" },
+      "Your opponents can't search libraries.": { who: "opponents" },
       "Spells and abilities your opponents control can't cause their controller to search their library.": {
-        who: "opponent",
+        who: "opponents",
         causedByThemselves: true,
       },
       "Players can't search libraries. Any player may pay {2} for that player to ignore this effect until end of turn.": {
-        who: "any-player",
+        who: "each-player",
         ignoreCost: "{2}",
       },
     }[line];
     if (noSearch !== undefined) {
-      out.static.push({ affects: { scope: "self" }, cantSearchLibraries: noSearch, text: printed(raw) });
+      out.static.push({ affects: { scope: "self" }, prohibits: [{ act: "search", ...noSearch }], text: printed(raw) });
       continue;
     }
     // Opposition Agent and Aven Mindcensor: what an opponent's search comes to.
@@ -17484,7 +17486,7 @@ function parseGrantedStatic(quoted) {
     };
   }
   if (quoted === "You can't lose the game and your opponents can't win the game.") {
-    return { affects: { scope: "self" }, cantLoseGame: true, opponentsCantWinGame: true, text: quoted };
+    return { affects: { scope: "self" }, prohibits: [{ act: "lose-game", who: "you" }, { act: "win-game", who: "opponents" }], text: quoted };
   }
   return null;
 }
@@ -18221,15 +18223,15 @@ function parseStatic(line, text) {
   }
   // Casting and activation rules with one reading each.
   const fixed = {
-    "Each opponent can cast spells only any time they could cast a sorcery.": { prohibits: { who: "opponents", castOnlyAsSorcery: true } },
+    "Each opponent can cast spells only any time they could cast a sorcery.": { prohibits: [{ act: "cast", who: "opponents", unless: "sorcery-timing" }] },
     "You may activate abilities of creatures you control as though those creatures had haste.": { activateAsThoughHaste: { type: "creature" } },
     "You may activate the loyalty abilities of planeswalkers you control twice each turn rather than only once.": { loyaltyActivationsEachTurn: 2 },
     "Creatures you control can boast twice during each of your turns rather than once.": { boastsEachOfYourTurns: 2 },
     "Players can't activate planeswalkers' loyalty abilities.": {
-      prohibits: { who: "each-player", abilitiesOf: { type: "planeswalker" }, onlyLoyaltyAbilities: true },
+      prohibits: [{ act: "activate", who: "each-player", of: { type: "planeswalker" }, only: "loyalty" }],
     },
     "Enchanted player can't activate abilities that aren't mana abilities or loyalty abilities.": {
-      prohibits: { who: "enchanted-player", abilitiesOf: {}, anyZone: true, exceptManaAbilities: true, exceptLoyaltyAbilities: true },
+      prohibits: [{ act: "activate", who: "enchanted-player", except: ["mana", "loyalty"], anyZone: true }],
     },
   }[line];
   if (fixed !== undefined) return { affects: { scope: "self" }, ...fixed, text };
@@ -18484,7 +18486,7 @@ function parseStatic(line, text) {
   // A static acting on a player. Abyssal Persecutor; the player a Curse
   // enchants: what they control, the damage dealt to them, the life they gain.
   if (line === "You can't win the game and your opponents can't lose the game.") {
-    return { affects: { scope: "self" }, cantWinGame: true, opponentsCantLoseGame: true, text };
+    return { affects: { scope: "self" }, prohibits: [{ act: "lose-game", who: "opponents" }, { act: "win-game", who: "you" }], text };
   }
   // "If [a player] would begin an extra turn, that player skips that turn instead"
   // (rule 614.10).
@@ -18777,6 +18779,11 @@ function parseStatic(line, text) {
             : m[1] === "Creatures"
               ? { scope: "all-creatures" }
               : { scope: "attached" };
+      // "Your opponents" on an Aura is its controller's, whoever controls the
+      // creature; "this creature's" controller is the Aura-less reading.
+      if (affects.scope === "attached" && Object.keys(hexproof).length === 0) {
+        return { affects: { scope: "self" }, prohibits: [{ act: "be-targeted", object: { hostOfSource: true }, by: "opponents" }], text };
+      }
       // Not the keyword, so a loss of hexproof doesn't take it (Shanna,
       // Sisay's Legacy against Shadowspear).
       return { affects, hexproofFrom: { ...hexproof, notHexproof: true }, text };
@@ -18785,7 +18792,7 @@ function parseStatic(line, text) {
   // "Cards in graveyards can't be the targets of spells or abilities"
   // (Ground Seal, Silent Gravestone — `graveyardCardsUntargetable`).
   if (line === "Cards in graveyards can't be the targets of spells or abilities.") {
-    return { affects: { scope: "self" }, graveyardCardsUntargetable: {}, text };
+    return { affects: { scope: "self" }, prohibits: [{ act: "be-targeted", object: { inZone: "graveyard" } }], text };
   }
   // What an Aura says of its host: Fall from Favor (its controller, read at each
   // untap step), Street Savvy (the blocker's side of rule 702.14), Power Artifact
@@ -18829,12 +18836,12 @@ function parseStatic(line, text) {
     return {
       affects: { scope: "attached" },
       grantPt: [Number(m[1]), Number(m[2])],
-      ...(m[3] === "is goaded" ? { goads: true } : { cantBecomeSuspected: true }),
+      ...(m[3] === "is goaded" ? { goads: true } : { prohibits: [{ act: "become-suspected", object: { hostOfSource: true } }] }),
       text,
     };
   }
   if (line === "Enchanted creature's activated abilities can't be activated.") {
-    return { affects: { scope: "attached" }, prohibits: { who: "each-player", abilitiesOf: { hostOfSource: true } }, text };
+    return { affects: { scope: "attached" }, prohibits: [{ act: "activate", who: "each-player", of: { hostOfSource: true } }], text };
   }
   // Favor of the Mighty: one comparison over every creature, ties all counted.
   if (line === "Each creature with the greatest mana value has protection from each color.") {
@@ -19331,7 +19338,7 @@ function parseStatic(line, text) {
     if (limit !== null) {
       return {
         affects: { scope: "self" },
-        prohibits: { who: limit[1] === "opponent" ? "opponents" : "each-player", drawsPerTurn: 1 },
+        prohibits: [{ act: "draw", who: limit[1] === "opponent" ? "opponents" : "each-player", perTurn: 1 }],
         text,
       };
     }
@@ -19339,7 +19346,7 @@ function parseStatic(line, text) {
     if (none !== null) {
       return {
         affects: { scope: "self" },
-        prohibits: { who: "each-player", drawsPerTurn: 0 },
+        prohibits: [{ act: "draw", who: "each-player", perTurn: 0 }],
         ...(none[1] === undefined ? {} : { replacement: { event: "would-gain-life", who: "any-player", prevent: true } }),
         text,
       };
@@ -19820,7 +19827,7 @@ function parseStatic(line, text) {
     };
   }
   if ((m = /^Your opponents can't cast spells with (odd|even) mana values\.$/.exec(line))) {
-    return { affects: { scope: "self" }, prohibits: { who: "opponents", spells: { manaValueParity: m[1] } }, text };
+    return { affects: { scope: "self" }, prohibits: [{ act: "cast", who: "opponents", filter: { manaValueParity: m[1] } }], text };
   }
   if ((m = /^Your opponents can't block with creatures with (odd|even) mana values\.$/.exec(line))) {
     return {
@@ -20401,12 +20408,15 @@ function parseStatic(line, text) {
     return {
       affects: { scope: "attached" },
       restrictions: ["cant-attack", "cant-block"],
-      prohibits: {
-        who: "each-player",
-        abilitiesOf: { hostOfSource: true },
-        ...(m[3] !== undefined ? { exceptManaAbilities: true } : {}),
-        ...(m[2] !== undefined ? { onlyTapAbilities: true } : {}),
-      },
+      prohibits: [
+        {
+          act: "activate",
+          who: "each-player",
+          of: { hostOfSource: true },
+          ...(m[3] !== undefined ? { except: ["mana"] } : {}),
+          ...(m[2] !== undefined ? { only: "tap" } : {}),
+        },
+      ],
       text,
     };
   }

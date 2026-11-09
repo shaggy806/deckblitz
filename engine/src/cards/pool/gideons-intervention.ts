@@ -15,7 +15,7 @@ export default defineCard({
   chooseCardNameOnEnter: {},
   text: `As this enchantment enters, choose a card name.\n${LOCK}\n${PREVENT}`,
   static: [
-    { affects: { scope: "self" }, prohibits: { who: "opponents", spells: { chosenName: true } }, text: LOCK },
+    { affects: { scope: "self" }, prohibits: [{ act: "cast", who: "opponents", filter: { chosenName: true } }], text: LOCK },
     // One prevention, split by recipient: a replacement's `to` names a player
     // and its `toFilter` a permanent.
     {

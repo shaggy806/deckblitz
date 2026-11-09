@@ -10,7 +10,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "add-mana", mana: "R", amount: 7 },
-      { kind: "player-effect", duration: "end-of-turn", castsLeft: { count: 1 } },
+      { kind: "prohibit", prohibits: [{ act: "cast", who: "you", more: 1 }], duration: "end-of-turn" },
     ],
   },
 });

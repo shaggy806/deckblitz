@@ -27,8 +27,8 @@ export default defineCard({
     { affects: { scope: "self" }, protection: { colors: ["G"] }, text: "Protection from green" },
     {
       affects: { scope: "self" },
-      preventsCounters: { permanents: { type: "creature", controlledBy: "opponent" }, kind: "+1/+1" },
       text: COUNTERS_TEXT,
+      prohibits: [{ act: "get-counters", object: { type: "creature", controlledBy: "opponent" }, kind: "+1/+1" }],
     },
   ],
 });

@@ -212,6 +212,7 @@ import _poolDocSamsonSuperPsychiatrist from "../pool/doc-samson-super-psychiatri
 import _poolDodecapod from "../pool/dodecapod.js";
 import _poolDongZhouTheTyrant from "../pool/dong-zhou-the-tyrant.js";
 import _poolDoomBlade from "../pool/doom-blade.js";
+import _poolDosanTheFallingLeaf from "../pool/dosan-the-falling-leaf.js";
 import _poolDraconauticsEngineer from "../pool/draconautics-engineer.js";
 import _poolDraconicMuralists from "../pool/draconic-muralists.js";
 import _poolDragonWings from "../pool/dragon-wings.js";
@@ -1231,6 +1232,7 @@ const shard: CardShard = {
     _poolDodecapod,
     _poolDongZhouTheTyrant,
     _poolDoomBlade,
+    _poolDosanTheFallingLeaf,
     _poolDraconauticsEngineer,
     _poolDraconicMuralists,
     _poolDragonWings,

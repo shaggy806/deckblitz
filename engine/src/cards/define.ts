@@ -32,6 +32,7 @@ import type { AggregateOf, AggregateSpec, CardFilter, ManaSpentClause, NumCompar
 import type { CardNameChoice } from "../card-names.js";
 import type { CompanionCondition } from "../companion.js";
 import type { Color, ManaFromSpec, ManaProductionRule, ManaType, SpendAs } from "../mana.js";
+import type { Prohibition } from "../prohibitions.js";
 import type { ReplacementSpec } from "../replacements.js";
 import type { DelayedTriggerTiming, HeldPlayerCounter, PlayerCounterKind, JournalWhat, ZoneType } from "../state.js";
 import type { JournalWindow } from "../journal.js";
@@ -2254,86 +2255,22 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    */
   readonly goads?: boolean;
   /**
-   * A prohibition on casting and activating ("can't" beats "can" — rule
-   * 101.2): `who` — `"opponents"`, `"you"` or `"each-player"`, from this
-   * permanent's controller's side — can't cast `spells` (every spell, or
-   * ones matching a filter: Codie, Vociferous Codex's "you can't cast
-   * permanent spells"), and can't activate abilities of permanents matching
-   * `abilitiesOf` — Myrel, Shield of Argive's "artifacts, creatures,
-   * enchantments, or planeswalkers", mana abilities included, so those
-   * can't pay for anything either. Time it with `condition`: Myrel's
-   * "during your turn" is `your-turn`, Marisi, Breaker of the Coil's "during
-   * combat" a `turn-structure` condition with `duringCombat`. `affects` is
-   * irrelevant. `who: "enchanted-player"` is the player this Aura enchants
-   * (Curse of Exhaustion).
+   * What can't be done while this applies ("can't" beats "can", rule 101.2):
+   * one {@link Prohibition} per act, its `who` and its filters from this
+   * permanent's controller's side. Time it with `condition`. `affects` is
+   * irrelevant. See `prohibitions.ts`.
    */
-  readonly prohibits?: {
-    readonly who: "opponents" | "you" | "each-player" | "enchanted-player";
-    readonly spells?: true | CardFilter;
-    /** `spells` binds a player only once they've cast this many spells
-     * matching it this turn: "each player can't cast more than one spell each
-     * turn" (Rule of Law — `spells: true`, `castLimit: 1`), "… more than one
-     * noncreature spell" (Deafening Silence — the filter), "each player who
-     * has cast a nonartifact spell this turn can't cast additional nonartifact
-     * spells" (Ethersworn Canonist — the same thing). The whole turn counts,
-     * spells cast before this permanent arrived and spells countered among
-     * them (the rulings), each read as it was cast
-     * (`PlayerState.spellsCastThisTurnAs`); a spell the filter doesn't match
-     * neither counts nor is barred. A copy of a spell isn't cast (rule 707.10),
-     * and a land isn't a spell. */
-    readonly castLimit?: number;
-    /** "Each opponent can't draw more than **one** card each turn" (Narset,
-     * Parter of Veils; Spirit of the Labyrinth's `who: "each-player"`), "players
-     * can't draw cards" (Maralen of the Mornsong — `0`): once they've drawn this
-     * many this turn, cards drawn before this permanent arrived among them, a
-     * draw doesn't happen — as an effect, as a cost or in the draw step (the
-     * rulings; rule 101.2). So nothing can replace it (Spirit of the Labyrinth's
-     * ruling), no empty library loses the game to it, and a draw some other
-     * replacement took the place of was never drawn, so doesn't count (Narset's
-     * ruling). "You may draw" that can't be done in full isn't offered (`may`).
-     * See `Game.cantDrawMore`. */
-    readonly drawsPerTurn?: number;
-    readonly abilitiesOf?: CardFilter;
-    /** "…can't be activated **unless they're mana abilities**" (Pithing
-     * Needle): `abilitiesOf` leaves mana abilities alone. */
-    readonly exceptManaAbilities?: true;
-    /** "…can't activate abilities that aren't mana abilities **or loyalty
-     * abilities**" (Overwhelming Splendor): `abilitiesOf` leaves loyalty
-     * abilities alone too. */
-    readonly exceptLoyaltyAbilities?: true;
-    /** "Players can't activate planeswalkers' **loyalty abilities**" (The
-     * Immortal Sun): `abilitiesOf` bars only those (rule 606). */
-    readonly onlyLoyaltyAbilities?: true;
-    /** "Each opponent can cast spells **only any time they could cast a
-     * sorcery**" (Teferi, Time Raveler): a prohibition, so it stops a cast at
-     * any other time whatever would allow it, flash included (rules 101.2,
-     * 601.3). With no `spells`, it stands alone. */
-    readonly castOnlyAsSorcery?: true;
-    /** "…its activated abilities **with {T} in their costs** can't be
-     * activated" (Serra Bestiary): `abilitiesOf` bars only abilities whose
-     * cost taps the permanent, mana abilities among them. */
-    readonly onlyTapAbilities?: true;
-    /** `abilitiesOf` reaches **sources** in every zone, not only permanents —
-     * "activated abilities of sources with the chosen name" (Pithing Needle)
-     * stops a card's cycling or channel in a hand and a graveyard ability
-     * too. */
-    readonly anyZone?: true;
-    /** "…and **lands** with the chosen names **can't be played**" (Null
-     * Chamber, rule 305.2): lands matching this filter, from this
-     * permanent's controller's side. `{}` is every land — Territorial
-     * Dispute's "players can't play lands". */
-    readonly lands?: CardFilter;
-    /** `spells` and `lands` bind only a card cast or played **from** one of
-     * these zones — Experimental Frenzy's "you can't play lands or cast
-     * spells from your hand" (`["hand"]`) — judged where the card is as the
-     * cast or the play begins (rule 601.2a). */
-    readonly from?: readonly ZoneType[];
-    /** `spells` and `lands` bind only a card **not** in one of these zones —
-     * Drannith Magistrate's "can't cast spells from anywhere other than
-     * their hands" (`["hand"]`): the command zone, a graveyard, exile and a
-     * library's top all barred, whatever permission offers the card (rule
-     * 101.2). */
-    readonly notFrom?: readonly ZoneType[];
+  readonly prohibits?: readonly Prohibition[];
+  /** "As though they didn't have hexproof" (Glaring Spotlight, Kaya, Bane of
+   * the Dead, rule 702.11): what this permanent's controller's spells and
+   * abilities may target past hexproof. `object`: permanents matching it,
+   * from this permanent's controller's side. `players: "opponents"`: their
+   * opponents. `anyController`: anyone's spells and abilities, not only this
+   * permanent's controller's (Nowhere to Run). Shroud isn't touched. */
+  readonly targetsIgnoringHexproof?: {
+    readonly object?: CardFilter;
+    readonly players?: "opponents";
+    readonly anyController?: true;
   };
   /** "You may activate abilities of creatures you control as though those
    * creatures had haste" (Thousand-Year Elixir, Shang-Chi): this permanent's
@@ -2870,27 +2807,6 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * sees it.
    */
   readonly damageAsThoughSourceHad?: { readonly keyword: "wither" | "infect" };
-  /**
-   * "Counters can't be put on …" and "players can't get counters" (rule
-   * 122 — Solemnity; Melira, Sylvok Outcast's "you can't get poison
-   * counters" and "creatures you control can't have -1/-1 counters put on
-   * them"). Nothing replaces the counters: they just aren't put (an effect
-   * does what else it can), a cost that would put them can't be paid, a
-   * permanent that would enter with them enters without them, and a counter
-   * that can't be put can't be moved there either (122.5).
-   */
-  readonly preventsCounters?: {
-    /** The permanents no counters can be put on, matched from this
-     * permanent's controller's side — Solemnity's "artifacts, creatures,
-     * enchantments, or lands" (a permanent, rule 109.2: a card with suspend
-     * in exile still gets its time counters). */
-    readonly permanents?: CardFilter;
-    /** The players who can't get counters — `"each"` (Solemnity's "players
-     * can't get counters") or `"you"` (Melira) — energy as well. */
-    readonly players?: "each" | "you";
-    /** Only counters of this kind — Melira's `"poison"`, `"-1/-1"`. */
-    readonly kind?: string;
-  };
   /** "Blitz costs you pay cost {1} less for each time you've cast your
    * commander from the command zone this game" (Henzie): every blitz cost
    * this permanent's controller pays, printed or granted, less that much
@@ -3043,7 +2959,7 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * opponents control. Like `noMaxHandSize`, a property of the player, read
    * off the battlefield as a target is checked (`playerHasHexproof`);
    * `affects` is ignored. */
-  readonly playerHexproof?: boolean;
+  readonly playerKeywords?: readonly ("hexproof" | "shroud")[];
   /**
    * "**You** have protection from …" (rule 702.16 — Serra's Emissary's "you
    * … have protection from the chosen card type", Runed Halo's "from the
@@ -3067,54 +2983,6 @@ export interface StaticAbility extends TypePatch, ColorPatch {
     /** Protection from players, as `protection`'s (rule 702.16k — Absolute
      * Virtue's "you have protection from each of your opponents"). */
     readonly fromPlayers?: "opponents" | "chosen";
-  };
-  /**
-   * "**You can't lose the game**" (Platinum Angel, Herald of Eternal Dawn):
-   * no state-based action and no effect that says so makes this permanent's
-   * controller lose — 0 life, ten poison counters, a draw from an empty
-   * library, 21 commander damage, "you lose the game" — for as long as they
-   * control it; a loss it held off happens at the next check once it's gone,
-   * if the cause is still there. Conceding still loses (rule 104.3a, the
-   * ruling). Like `playerHexproof`, a property of the player, read off the
-   * battlefield (`playerCantLoseGame`); `affects` is ignored.
-   */
-  readonly cantLoseGame?: boolean;
-  /**
-   * "**Your opponents can't win the game**" (Platinum Angel): an effect that
-   * says one of this permanent's controller's opponents wins does nothing
-   * (`playerCantWinGame`). Being the last player left still wins (rule
-   * 104.2a). `affects` is ignored.
-   */
-  readonly opponentsCantWinGame?: boolean;
-  /**
-   * The inverse pair (Abyssal Persecutor): "**you can't win the game**" — an
-   * effect saying this permanent's controller wins does nothing, though being
-   * the last player left still wins (rule 104.2a) — "**and your opponents can't
-   * lose the game**", which holds off each opponent's loss as `cantLoseGame`
-   * does their own, with conceding still losing (rule 104.3a). `affects` is
-   * ignored.
-   */
-  readonly cantWinGame?: boolean;
-  readonly opponentsCantLoseGame?: boolean;
-  /**
-   * "**Players can't search libraries**" (Mindlock Orb, `who: "any-player"`),
-   * "**Your opponents can't search libraries**" (Stranglehold, `"opponent"`):
-   * whoever it names can't look through a library, whoever's it is and whoever's
-   * effect told them to (`playerCantSearchLibrary`). "Search your library … then
-   * shuffle" still shuffles, and "you may search" can't be chosen (the rulings);
-   * only the word "search" is stopped, so a library's top still reads.
-   * `causedByThemselves`: "Spells and abilities your opponents control **can't
-   * cause their controller to search their library**" (Ashiok, Dream Render) —
-   * only a search of their own library, by an effect they control. `ignoreCost`:
-   * "**Any player may pay {2} for that player to ignore this effect until end of
-   * turn**" (Leonin Arbiter): a special action (rule 116.2d, the
-   * `ignore-static-effect` action), one permanent's effect at a time.
-   * Like `playerHexproof`, a property of the player; `affects` is ignored.
-   */
-  readonly cantSearchLibraries?: {
-    readonly who: "any-player" | "opponent";
-    readonly causedByThemselves?: true;
-    readonly ignoreCost?: string;
   };
   /**
    * "**You control your opponents while they're searching their libraries**"
@@ -3446,10 +3314,6 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * filter's "you" is this permanent's controller. `affects` is ignored.
    */
   readonly untapsDuringOthersUntap?: "self" | CardFilter;
-  /** "Enchanted creature … **can't become suspected**" (Airtight Alibi): the
-   * affected objects aren't suspected by a `suspect` (rule 701.60); one already
-   * suspected stays so. */
-  readonly cantBecomeSuspected?: true;
   /** Combat restrictions imposed on the affected objects (Pacifism, Juggernaut). */
   readonly restrictions?: readonly CombatRule[];
   /**
@@ -3589,20 +3453,6 @@ export interface StaticAbility extends TypePatch, ColorPatch {
      * the keyword "hexproof from [quality]" (rule 702.11e: Volatile
      * Stormdrake's "hexproof from activated and triggered abilities"). */
     readonly notHexproof?: true;
-  };
-  /**
-   * "Cards in graveyards can't be the targets of spells or abilities"
-   * (Ground Seal, Silent Gravestone, Dennick) — a restriction on legal targets (rules 115.2, 601.2c) this static
-   * lays on every card in every graveyard while its permanent is on the
-   * battlefield; `filter` narrows the cards ("land cards in graveyards" —
-   * Tomik, `{ type: "land" }`), and `byOpponents` only stops spells and
-   * abilities the source's controller's opponents control ("…your
-   * opponents control"). Read by `isLegalTarget` (`graveyardCardShielded`).
-   * `affects` is irrelevant to it (`"self"` by convention).
-   */
-  readonly graveyardCardsUntargetable?: {
-    readonly filter?: CardFilter;
-    readonly byOpponents?: true;
   };
   /** "Bands with other [quality]" (rule 702.22b-c) for the affected
    * creatures, the quality as a filter: the Legends lands' "bands with other

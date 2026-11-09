@@ -14,15 +14,12 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: { who: "each-player", spells: { sameNameWith: { permanents: { token: false } } } },
+      prohibits: [{ act: "cast", who: "each-player", filter: { sameNameWith: { permanents: { token: false } } } }],
       text: SPELLS_TEXT,
     },
     {
       affects: { scope: "self" },
-      prohibits: {
-        who: "each-player",
-        lands: { notSupertype: "basic", sameNameWith: { permanents: { token: false } } },
-      },
+      prohibits: [{ act: "play-land", who: "each-player", filter: { notSupertype: "basic", sameNameWith: { permanents: { token: false } } } }],
       text: LANDS_TEXT,
     },
   ],

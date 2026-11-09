@@ -101,6 +101,7 @@ import _poolCabalStronghold from "../pool/cabal-stronghold.js";
 import _poolCactarantula from "../pool/cactarantula.js";
 import _poolCalderaHellion from "../pool/caldera-hellion.js";
 import _poolCallOfTheHerd from "../pool/call-of-the-herd.js";
+import _poolCanopyCover from "../pool/canopy-cover.js";
 import _poolCaptainMarvelEarthsProtector from "../pool/captain-marvel-earths-protector.js";
 import _poolCarrionHowler from "../pool/carrion-howler.js";
 import _poolCastigate from "../pool/castigate.js";
@@ -414,6 +415,7 @@ import _poolJustTheWind from "../pool/just-the-wind.js";
 import _poolJyotiMoagAncient from "../pool/jyoti-moag-ancient.js";
 import _poolKalonianHydra from "../pool/kalonian-hydra.js";
 import _poolKamiOfFiresRoar from "../pool/kami-of-fires-roar.js";
+import _poolKarnsSylex from "../pool/karns-sylex.js";
 import _poolKavuScout from "../pool/kavu-scout.js";
 import _poolKayaIntangibleSlayer from "../pool/kaya-intangible-slayer.js";
 import _poolKeeningBanshee from "../pool/keening-banshee.js";
@@ -806,6 +808,7 @@ import _poolTaintedPact from "../pool/tainted-pact.js";
 import _poolTalismanOfCuriosity from "../pool/talisman-of-curiosity.js";
 import _poolTarFiend from "../pool/tar-fiend.js";
 import _poolTarnationVista from "../pool/tarnation-vista.js";
+import _poolTatterkite from "../pool/tatterkite.js";
 import _poolTeardropKami from "../pool/teardrop-kami.js";
 import _poolTeferisCurse from "../pool/teferis-curse.js";
 import _poolTeferisTimeTwist from "../pool/teferis-time-twist.js";
@@ -1088,6 +1091,7 @@ const shard: CardShard = {
     _poolCactarantula,
     _poolCalderaHellion,
     _poolCallOfTheHerd,
+    _poolCanopyCover,
     _poolCaptainMarvelEarthsProtector,
     _poolCarrionHowler,
     _poolCastigate,
@@ -1401,6 +1405,7 @@ const shard: CardShard = {
     _poolJyotiMoagAncient,
     _poolKalonianHydra,
     _poolKamiOfFiresRoar,
+    _poolKarnsSylex,
     _poolKavuScout,
     _poolKayaIntangibleSlayer,
     _poolKeeningBanshee,
@@ -1793,6 +1798,7 @@ const shard: CardShard = {
     _poolTalismanOfCuriosity,
     _poolTarFiend,
     _poolTarnationVista,
+    _poolTatterkite,
     _poolTeardropKami,
     _poolTeferisCurse,
     _poolTeferisTimeTwist,

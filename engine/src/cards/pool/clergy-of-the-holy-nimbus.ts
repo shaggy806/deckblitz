@@ -18,7 +18,7 @@ export default defineCard({
     {
       cost: { mana: "{1}", tap: false },
       targets: [],
-      effect: { kind: "prohibit", target: "source", regeneration: true },
+      effect: { kind: "cant-regenerate", target: "source" },
       resolve: null,
       anyPlayer: true,
       onlyOpponents: true,

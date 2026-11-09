@@ -177,12 +177,7 @@ describe("can't lose the game", () => {
 
   it("a player-effect lasts the turn: Angel's Grace holds 0 life until cleanup", () => {
     const game = makeGame([A, B]);
-    game.debugApplyEffect(A, {
-      kind: "player-effect",
-      duration: "end-of-turn",
-      cantLoseGame: "you",
-      cantWinGame: "each-opponent",
-    });
+    game.debugApplyEffect(A, { kind: "prohibit", prohibits: [{ act: "lose-game", who: "you" }, { act: "win-game", who: "each-opponent" }], duration: "end-of-turn" });
     game.debugApplyEffect(A, { kind: "lose-life", amount: 30, who: "you" });
     game.debugApplyEffect(B, { kind: "win-game" });
     expect(game.state.result.over).toBe(false);
@@ -270,11 +265,7 @@ describe("damage life floor", () => {
 
 describe("can't lose life (rule 119.8)", () => {
   const everybody = (game: Game) =>
-    game.debugApplyEffect(A, {
-      kind: "player-effect",
-      duration: "end-of-turn",
-      cantLoseLife: "each-player",
-    });
+    game.debugApplyEffect(A, { kind: "prohibit", prohibits: [{ act: "lose-life", who: "each-player" }], duration: "end-of-turn" });
 
   it("damage and life loss change nothing; gains still happen", () => {
     const game = makeGame([A, B]);

@@ -20,13 +20,7 @@ export default defineCard({
       {
         kind: "conditional",
         condition: { kind: "life-total", atMost: 5 },
-        then: {
-          kind: "player-effect",
-          duration: "end-of-turn",
-          cantLoseLife: "you",
-          cantLoseGame: "you",
-          cantWinGame: "each-opponent",
-        },
+        then: { kind: "prohibit", prohibits: [{ act: "lose-game", who: "you" }, { act: "win-game", who: "each-opponent" }, { act: "lose-life", who: "you" }], duration: "end-of-turn" },
       },
     ],
   },

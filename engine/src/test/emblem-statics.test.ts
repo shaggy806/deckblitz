@@ -10,7 +10,7 @@ import { describe, expect, it } from "vitest";
 
 import { POOL_CARDS } from "../cards.js";
 import type { StaticAbility } from "../cards.js";
-import { playerCantLoseGame, playerCantWinGame } from "../characteristics.js";
+import { playerCantLoseGame, playerCantWinGame } from "../prohibitions.js";
 import type { EffectSpec } from "../effects.js";
 import { Game } from "../game.js";
 import {
@@ -149,7 +149,7 @@ describe("a player's rules, off an emblem", () => {
     emblem(game, [
       {
         affects: { scope: "self" },
-        prohibits: { who: "opponents", spells: { notTypes: ["creature"] } },
+        prohibits: [{ act: "cast", who: "opponents", filter: { notTypes: ["creature"] } }],
         text: "Your opponents can't cast noncreature spells.",
       },
     ]);
@@ -360,6 +360,8 @@ describe("what is read off an emblem", () => {
     "cantWinGame",
     "opponentsCantWinGame",
     "prohibits",
+    "targetsIgnoringHexproof",
+    "playerKeywords",
     "costModification",
     "untapLimit",
     "loyaltyAtInstantSpeed",

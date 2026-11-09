@@ -19,5 +19,5 @@ export default defineCard({
   keywords: ["flying"],
   text: `Flying\n${NAME}\n${LOCK}`,
   chooseCardNameOnEnter: { filter: { notTypes: ["land"] }, reveal: "each-opponent-hand" },
-  static: [{ affects: { scope: "self" }, prohibits: { who: "opponents", spells: { chosenName: true } }, text: LOCK }],
+  static: [{ affects: { scope: "self" }, prohibits: [{ act: "cast", who: "opponents", filter: { chosenName: true } }], text: LOCK }],
 });

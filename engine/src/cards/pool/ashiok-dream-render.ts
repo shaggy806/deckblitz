@@ -18,8 +18,8 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantSearchLibraries: { who: "opponent", causedByThemselves: true },
       text: STATIC_TEXT,
+      prohibits: [{ act: "search", who: "opponents", causedByThemselves: true }],
     },
   ],
   activated: [

@@ -62,7 +62,7 @@ export default defineCard({
         text: EMBLEM,
         static: {
           affects: { scope: "self" },
-          prohibits: { who: "opponents", spells: { notTypes: ["creature"] } },
+          prohibits: [{ act: "cast", who: "opponents", filter: { notTypes: ["creature"] } }],
           text: EMBLEM,
         },
       },

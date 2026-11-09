@@ -26,7 +26,7 @@ export default defineCard({
         kind: "all",
         of: [{ kind: "your-turn" }, { kind: "source", filter: { attachedTo: { type: "creature" } } }],
       },
-      prohibits: { who: "opponents", spells: true },
+      prohibits: [{ act: "cast", who: "opponents" }],
       text: LOCK_TEXT,
     },
   ],

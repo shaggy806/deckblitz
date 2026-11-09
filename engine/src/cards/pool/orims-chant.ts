@@ -1,6 +1,6 @@
 import { defineCard } from "../define.js";
 
-const CANT_CAST = { kind: "prohibit", who: 0, spells: true } as const;
+const CANT_CAST = { kind: "prohibit", prohibits: [{ act: "cast", who: { target: 0 } }] } as const;
 
 // Kicked, the rule reaches every creature this turn, one that arrives later
 // included (a turn-wide `restrict`).

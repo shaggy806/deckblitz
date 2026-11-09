@@ -9,7 +9,7 @@ export default defineCard({
   colors: ["G"],
   types: ["enchantment"],
   text: `${ENTER_TEXT}\n${SEAL_TEXT}`,
-  static: [{ affects: { scope: "self" }, graveyardCardsUntargetable: {}, text: SEAL_TEXT }],
+  static: [{ affects: { scope: "self" }, text: SEAL_TEXT, prohibits: [{ act: "be-targeted", object: { inZone: "graveyard" } }] }],
   triggered: [
     {
       trigger: { on: "enters-battlefield", who: "self" },

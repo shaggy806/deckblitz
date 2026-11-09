@@ -462,8 +462,8 @@ describe("blight with counter prevention (rule 701.68b: unable to put the counte
       static: [
         {
           affects: { scope: "self" },
-          preventsCounters: { permanents: { subtype: "Bear", controlledBy: "you" }, kind: "-1/-1" },
           text: "Bears you control can't have -1/-1 counters put on them.",
+          prohibits: [{ act: "get-counters", object: { subtype: "Bear", controlledBy: "you" }, kind: "-1/-1" }],
         },
       ],
     });

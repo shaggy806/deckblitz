@@ -21,7 +21,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "turn-structure", duringCombat: true },
-      prohibits: { who: "opponents", spells: true },
+      prohibits: [{ act: "cast", who: "opponents" }],
       text: COMBAT_TEXT,
     },
   ],

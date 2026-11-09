@@ -9,7 +9,7 @@ export default defineCard({
   colors: [],
   types: ["artifact"],
   text: `${SEAL_TEXT}\n${EXILE_TEXT}`,
-  static: [{ affects: { scope: "self" }, graveyardCardsUntargetable: {}, text: SEAL_TEXT }],
+  static: [{ affects: { scope: "self" }, text: SEAL_TEXT, prohibits: [{ act: "be-targeted", object: { inZone: "graveyard" } }] }],
   activated: [
     {
       // Exiling itself is part of the effect, not the cost: it goes as the

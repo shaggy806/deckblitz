@@ -22,7 +22,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "controls", filter: { type: "land" }, atLeast: 10, anyController: true },
-      prohibits: { who: "each-player", lands: {} },
+      prohibits: [{ act: "play-land", who: "each-player" }],
       text: LOCK_TEXT,
     },
   ],

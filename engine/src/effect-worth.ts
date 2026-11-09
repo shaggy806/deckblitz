@@ -611,8 +611,8 @@ export function onlyUntilEndOfTurn(effect: EffectSpec | null | undefined): boole
     case "assign-as-though-unblocked":
       return true;
     // "Target creature can't be regenerated this turn" (Hurr Jackal) alone.
-    case "prohibit":
-      return effect.regeneration === true && effect.abilities !== true && effect.spells === undefined;
+    case "cant-regenerate":
+      return true;
     default:
       return false;
   }

@@ -21,7 +21,7 @@ export default defineCard({
   keywords: ["flying"],
   text: `Flying\n${HEXPROOF_TEXT}\n${TOKEN_TEXT}`,
   static: [
-    { affects: { scope: "self" }, playerHexproof: true, text: HEXPROOF_TEXT },
+    { affects: { scope: "self" }, playerKeywords: ["hexproof"], text: HEXPROOF_TEXT },
     {
       affects: { scope: "filter", filter: { subtype: "Human", controlledBy: "you" } },
       grantKeywords: ["hexproof"],

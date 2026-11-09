@@ -20,7 +20,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: false, sacrifice: "self" },
       targets: ["player"],
-      effect: { kind: "prohibit", who: 0, lands: true },
+      effect: { kind: "prohibit", prohibits: [{ act: "play-land", who: { target: 0 } }] },
       resolve: null,
       text: SAC_TEXT,
     },

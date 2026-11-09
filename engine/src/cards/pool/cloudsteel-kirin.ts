@@ -24,9 +24,8 @@ export default defineCard({
       grantsStatic: [
         {
           affects: { scope: "self" },
-          cantLoseGame: true,
-          opponentsCantWinGame: true,
           text: "You can't lose the game and your opponents can't win the game.",
+          prohibits: [{ act: "lose-game", who: "you" }, { act: "win-game", who: "opponents" }],
         },
       ],
       text: GRANT,

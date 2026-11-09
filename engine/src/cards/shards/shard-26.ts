@@ -39,6 +39,7 @@ import _poolAnointerOfValor from "../pool/anointer-of-valor.js";
 import _poolAntManElusiveAvenger from "../pool/ant-man-elusive-avenger.js";
 import _poolAntMansArmy from "../pool/ant-mans-army.js";
 import _poolAntagonism from "../pool/antagonism.js";
+import _poolAntiMagicAura from "../pool/anti-magic-aura.js";
 import _poolAntlerSkulkin from "../pool/antler-skulkin.js";
 import _poolAnuridBrushhopper from "../pool/anurid-brushhopper.js";
 import _poolApesOfRath from "../pool/apes-of-rath.js";
@@ -1039,6 +1040,7 @@ const shard: CardShard = {
     _poolAntManElusiveAvenger,
     _poolAntMansArmy,
     _poolAntagonism,
+    _poolAntiMagicAura,
     _poolAntlerSkulkin,
     _poolAnuridBrushhopper,
     _poolApesOfRath,

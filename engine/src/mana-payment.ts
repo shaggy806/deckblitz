@@ -342,6 +342,9 @@ export interface ManaPlanningView {
    * option is taken. A painland's damage is still fine — it's dealt, and
    * simply changes nothing. */
   readonly cantPayLife?: boolean;
+  /** No Phyrexian pip is paid with life, though a mana ability's own life
+   * cost still is (Karn's Sylex: "abilities that aren't mana abilities"). */
+  readonly cantPayLifeForPips?: boolean;
   /** The payer is at a quarter of the game's starting life or less (10 in
    * Commander): a Treasure goes before a point of life, where above that the
    * point of life goes first. Absent reads as not. */
@@ -707,7 +710,7 @@ function resolveReducedTwobrid(
         continue;
       }
     }
-    if (pip.some((o) => o.kind === "phyrexian") && view.cantPayLife !== true && view.life - life - 2 >= 1) {
+    if (pip.some((o) => o.kind === "phyrexian") && view.cantPayLifeForPips !== true && view.cantPayLife !== true && view.life - life - 2 >= 1) {
       life += 2;
       continue;
     }
@@ -776,6 +779,7 @@ export function resolveHybridCost(
       lifeFirst > 0 &&
       pip.some((o) => o.kind === "phyrexian") &&
       view.cantPayLife !== true &&
+      view.cantPayLifeForPips !== true &&
       startingLife - life >= 2
     ) {
       life += 2;
@@ -806,7 +810,7 @@ export function resolveHybridCost(
       concrete = chosen;
       continue;
     }
-    if (pip.some((o) => o.kind === "phyrexian") && view.cantPayLife !== true && startingLife - life - 2 >= 1) {
+    if (pip.some((o) => o.kind === "phyrexian") && view.cantPayLifeForPips !== true && view.cantPayLife !== true && startingLife - life - 2 >= 1) {
       life += 2;
       if (rather(pip)) lifeRather += 2;
       continue;

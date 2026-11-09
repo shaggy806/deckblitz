@@ -12,7 +12,7 @@ export default defineCard({
   types: ["artifact"],
   text: "You have hexproof. (You can't be the target of spells or abilities your opponents control.)\nIf a creature would deal damage to you, prevent 1 of that damage.",
   static: [
-    { affects: { scope: "self" }, playerHexproof: true, text: "You have hexproof." },
+    { affects: { scope: "self" }, playerKeywords: ["hexproof"], text: "You have hexproof." },
     {
       affects: { scope: "self" },
       replacement: { event: "would-deal-damage", to: "you", source: { type: "creature" }, instead: { prevent: 1 } },

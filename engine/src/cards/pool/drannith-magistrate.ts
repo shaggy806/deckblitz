@@ -21,7 +21,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: { who: "opponents", spells: true, notFrom: ["hand"] },
+      prohibits: [{ act: "cast", who: "opponents", notFrom: ["hand"] }],
       text: LOCK_TEXT,
     },
   ],

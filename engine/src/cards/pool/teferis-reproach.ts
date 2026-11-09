@@ -20,12 +20,7 @@ export default defineCard({
       {
         kind: "for-each-player",
         who: { target: 0 },
-        effect: {
-          kind: "player-effect",
-          duration: { untilTurnOf: "that-player" },
-          protectionFromEverything: "that-player",
-          lifeCantChange: "that-player",
-        },
+        effect: { kind: "sequence", effects: [{ kind: "player-effect", duration: { untilTurnOf: "that-player" }, protectionFromEverything: "that-player" }, { kind: "prohibit", prohibits: [{ act: "change-life", who: "that-player" }], duration: { untilTurnOf: "that-player" } }] },
       },
       { kind: "phase-out", filter: { notTypes: ["land"], controlledBy: "you" }, controlledByTarget: 0 },
     ],

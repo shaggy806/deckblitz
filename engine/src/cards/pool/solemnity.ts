@@ -18,13 +18,13 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      preventsCounters: { players: "each" },
       text: PLAYERS_TEXT,
+      prohibits: [{ act: "get-counters", who: "each-player" }],
     },
     {
       affects: { scope: "self" },
-      preventsCounters: { permanents: { typesAnyOf: ["artifact", "creature", "enchantment", "land"] } },
       text: PERMANENTS_TEXT,
+      prohibits: [{ act: "get-counters", object: { typesAnyOf: ["artifact", "creature", "enchantment", "land"] } }],
     },
   ],
 });

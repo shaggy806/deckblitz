@@ -18,7 +18,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "your-turn" },
-      prohibits: { who: "opponents", spells: true },
+      prohibits: [{ act: "cast", who: "opponents" }],
       text: STATIC_TEXT,
     },
   ],

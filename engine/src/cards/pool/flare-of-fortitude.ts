@@ -21,7 +21,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "player-effect", duration: "end-of-turn", lifeCantChange: "you" },
+      { kind: "prohibit", prohibits: [{ act: "change-life", who: "you" }], duration: "end-of-turn" },
       { kind: "grant-keyword-all", filter: { controlledBy: "you" }, keyword: "hexproof", duration: "end-of-turn" },
       { kind: "grant-keyword-all", filter: { controlledBy: "you" }, keyword: "indestructible", duration: "end-of-turn" },
     ],

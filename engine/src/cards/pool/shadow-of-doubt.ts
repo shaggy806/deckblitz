@@ -14,7 +14,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "player-effect", duration: "end-of-turn", cantSearchLibraries: "each-player" },
+      { kind: "prohibit", prohibits: [{ act: "search", who: "each-player" }], duration: "end-of-turn" },
       { kind: "draw", amount: 1 },
     ],
   },

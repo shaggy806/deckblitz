@@ -11,5 +11,5 @@ export default defineCard({
   power: 3,
   toughness: 4,
   text: TEXT,
-  static: [{ affects: { scope: "self" }, prohibits: { who: "you", spells: { type: "creature" } }, text: TEXT }],
+  static: [{ affects: { scope: "self" }, prohibits: [{ act: "cast", who: "you", filter: { type: "creature" } }], text: TEXT }],
 });

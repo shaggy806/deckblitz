@@ -15,7 +15,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: { who: "each-player", spells: { notSubtypes: ["Phyrexian"] }, castLimit: 1 },
+      prohibits: [{ act: "cast", who: "each-player", filter: { notSubtypes: ["Phyrexian"] }, limit: 1 }],
       text: LIMIT_TEXT,
     },
     {

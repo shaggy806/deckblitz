@@ -24,7 +24,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: { who: "opponents", spells: { sameNameWith: "exiled-with-source" } },
+      prohibits: [{ act: "cast", who: "opponents", filter: { sameNameWith: "exiled-with-source" } }],
       text: LOCK_TEXT,
     },
   ],

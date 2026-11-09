@@ -18,7 +18,7 @@ export default defineCard({
   chooseCardNameOnEnter: { filter: { notTypes: ["creature", "land"] } },
   text: `${NAME}\n${LOCK}\n${DISCOUNT}`,
   static: [
-    { affects: { scope: "self" }, prohibits: { who: "opponents", spells: { chosenName: true } }, text: LOCK },
+    { affects: { scope: "self" }, prohibits: [{ act: "cast", who: "opponents", filter: { chosenName: true } }], text: LOCK },
     {
       affects: { scope: "self" },
       costModification: { applies: { chosenName: true }, reduceGeneric: 2, when: { caster: "you" } },

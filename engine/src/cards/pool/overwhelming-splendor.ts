@@ -20,13 +20,7 @@ export default defineCard({
     },
     {
       affects: { scope: "self" },
-      prohibits: {
-        who: "enchanted-player",
-        abilitiesOf: {},
-        anyZone: true,
-        exceptManaAbilities: true,
-        exceptLoyaltyAbilities: true,
-      },
+      prohibits: [{ act: "activate", who: "enchanted-player", except: ["mana", "loyalty"], anyZone: true }],
       text: LOCK,
     },
   ],

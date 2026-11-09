@@ -18,12 +18,7 @@ export default defineCard({
     { affects: { scope: "self" }, costModification: { applies: { chosenName: true }, increaseGeneric: 3 }, text: TAX },
     {
       affects: { scope: "self" },
-      prohibits: {
-        who: "each-player",
-        abilitiesOf: { chosenName: true },
-        anyZone: true,
-        exceptManaAbilities: true,
-      },
+      prohibits: [{ act: "activate", who: "each-player", of: { chosenName: true }, except: ["mana"], anyZone: true }],
       text: LOCK,
     },
   ],

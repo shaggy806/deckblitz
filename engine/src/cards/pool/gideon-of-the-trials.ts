@@ -57,9 +57,8 @@ export default defineCard({
         static: {
           affects: { scope: "self" },
           condition: { kind: "controls", filter: { type: "planeswalker", subtype: "Gideon" }, atLeast: 1 },
-          cantLoseGame: true,
-          opponentsCantWinGame: true,
           text: EMBLEM,
+          prohibits: [{ act: "lose-game", who: "you" }, { act: "win-game", who: "opponents" }],
         },
       },
       resolve: null,

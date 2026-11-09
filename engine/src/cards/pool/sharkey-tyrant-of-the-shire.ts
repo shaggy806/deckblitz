@@ -21,11 +21,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: {
-        who: "each-player",
-        abilitiesOf: { type: "land", controlledBy: "opponent" },
-        exceptManaAbilities: true,
-      },
+      prohibits: [{ act: "activate", who: "each-player", of: { type: "land", controlledBy: "opponent" }, except: ["mana"] }],
       text: LOCK_TEXT,
     },
     {

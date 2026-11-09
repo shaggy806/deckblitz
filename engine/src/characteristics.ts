@@ -2229,58 +2229,28 @@ export function spellCantBeCountered(state: GameState, registry: CardRegistry, s
   );
 }
 
-/** Whether `player` has hexproof (rule 702.11d): from an effect that gave it
- * to them ("you gain hexproof until end of turn" — `GameState.hexproofPlayers`)
- * or a `playerHexproof` static of a permanent they control ("you have
- * hexproof" — Shalai, Voice of Plenty). */
-export function playerHasHexproof(state: GameState, registry: CardRegistry, player: PlayerId): boolean {
-  if (state.hexproofPlayers?.includes(player) === true) return true;
+/** Whether `player` has this keyword: hexproof (rule 702.11d) or shroud
+ * (702.18), from a `playerKeywords` static of a permanent they control or a
+ * timed static of theirs, or hexproof from an effect that gave it to them
+ * (`GameState.hexproofPlayers`). */
+export function playerHasKeyword(
+  state: GameState,
+  registry: CardRegistry,
+  player: PlayerId,
+  keyword: "hexproof" | "shroud",
+): boolean {
+  if (keyword === "hexproof" && state.hexproofPlayers?.includes(player) === true) return true;
+  const has = (source: GameObject, ability: StaticAbility): boolean =>
+    ability.playerKeywords?.includes(keyword) === true &&
+    (ability.condition === undefined || staticConditionMet(state, registry, source, ability.condition));
   for (const id of state.zones.shared.battlefield) {
     const source = state.objects[id];
     if (source === undefined || source.controller !== player || hasLostAbilities(state, registry, source)) continue;
     for (const ability of registry.get(rulesTextName(source)).static) {
-      if (
-        ability.playerHexproof === true &&
-        (ability.condition === undefined || staticConditionMet(state, registry, source, ability.condition))
-      ) {
-        return true;
-      }
+      if (has(source, ability)) return true;
     }
   }
-  return false;
-}
-
-/** Whether some active static of a permanent on the battlefield, controlled
- * by a player still in the game, answers `test` with `true` for its
- * controller. A permanent that has lost its abilities has none of these. */
-function playerStaticHolds(
-  state: GameState,
-  registry: CardRegistry,
-  test: (ability: StaticAbility, controller: PlayerId, source: GameObject) => boolean,
-): boolean {
-  for (const id of state.zones.shared.battlefield) {
-    const source = state.objects[id];
-    if (source === undefined) continue;
-    if (state.players[source.controller]?.hasLost !== false) continue;
-    const own = hasLostAbilities(state, registry, source) ? [] : registry.get(rulesTextName(source)).static;
-    for (const ability of [...own, ...grantedStatics(state, registry, source)]) {
-      if (
-        test(ability, source.controller, source) &&
-        (ability.condition === undefined || staticConditionMet(state, registry, source, ability.condition))
-      ) {
-        return true;
-      }
-    }
-  }
-  for (const { source, ability } of emblemStatics(state)) {
-    if (
-      test(ability, source.controller, source) &&
-      (ability.condition === undefined || staticConditionMet(state, registry, source, ability.condition))
-    ) {
-      return true;
-    }
-  }
-  return false;
+  return emblemStatics(state, player).some(({ source, ability }) => has(source, ability));
 }
 
 const NO_EMBLEM_STATICS: readonly { readonly source: GameObject; readonly ability: StaticAbility }[] = [];
@@ -2302,7 +2272,7 @@ export function emblemStatics(
   let out: { source: GameObject; ability: StaticAbility }[] | null = null;
   for (const emblem of state.emblems) {
     if (emblem.object === undefined || (owner !== undefined && emblem.owner !== owner)) continue;
-    if (state.players[emblem.owner]?.hasLost === true) continue;
+    if (state.players[emblem.owner]?.hasLost === true && emblem.expires === undefined) continue;
     const source = state.objects[emblem.object];
     if (source === undefined) continue;
     for (const ability of staticsOfEmblem(emblem)) (out ??= []).push({ source, ability });
@@ -2314,61 +2284,6 @@ export function emblemStatics(
 export function staticsOfEmblem(emblem: EmblemState): readonly StaticAbility[] {
   if (emblem.static === null) return emblem.moreStatics ?? [];
   return emblem.moreStatics === undefined ? [emblem.static] : [emblem.static, ...emblem.moreStatics];
-}
-
-/** Whether `player` can't lose the game right now (rule 104.3 — Platinum
- * Angel's "you can't lose the game", Angel's Grace's "this turn"): a
- * `cantLoseGame` static of a permanent they control, or a `player-effect`
- * that names them. Conceding isn't stopped by it (rule 104.3a). */
-export function playerCantLoseGame(state: GameState, registry: CardRegistry, player: PlayerId): boolean {
-  if ((state.playerEffects ?? []).some((e) => e.cantLoseGame?.includes(player) === true)) return true;
-  return playerStaticHolds(
-    state,
-    registry,
-    (ability, controller) =>
-      (ability.cantLoseGame === true && controller === player) ||
-      // The other way round: "your opponents can't lose the game" (Abyssal Persecutor).
-      (ability.opponentsCantLoseGame === true && controller !== player),
-  );
-}
-
-/** Whether `player` can't win the game right now: an opponent of theirs
- * controls an `opponentsCantWinGame` static (Platinum Angel), or a
- * `player-effect` names them ("your opponents can't win the game this
- * turn"). Being the last player left still wins (rule 104.2a). */
-export function playerCantWinGame(state: GameState, registry: CardRegistry, player: PlayerId): boolean {
-  if ((state.playerEffects ?? []).some((e) => e.cantWinGame?.includes(player) === true)) return true;
-  return playerStaticHolds(
-    state,
-    registry,
-    (ability, controller) =>
-      (ability.opponentsCantWinGame === true && controller !== player) ||
-      // "You can't win the game" (Abyssal Persecutor).
-      (ability.cantWinGame === true && controller === player),
-  );
-}
-
-/** Whether `searcher` can't search `owner`'s library right now, for a search
- * `causedBy` a spell or ability that player controls: "players can't search
- * libraries" (Mindlock Orb, Shadow of Doubt's "this turn"), "your opponents
- * can't" (Stranglehold), or a search of their own library by their own effect
- * (Ashiok, Dream Render) — unless they paid to ignore that permanent's effect
- * this turn (rule 116.2d — Leonin Arbiter), which is one permanent's effect at a
- * time, and covers any library (the rulings). */
-export function playerCantSearchLibrary(
-  state: GameState,
-  registry: CardRegistry,
-  searcher: PlayerId,
-  owner: PlayerId,
-  causedBy: PlayerId,
-): boolean {
-  if ((state.playerEffects ?? []).some((e) => e.cantSearchLibraries?.includes(searcher) === true)) return true;
-  return playerStaticHolds(state, registry, (ability, controller, source) => {
-    const rule = ability.cantSearchLibraries;
-    if (rule === undefined || (rule.who === "opponent" && controller === searcher)) return false;
-    if (rule.causedByThemselves === true && (causedBy !== searcher || owner !== searcher)) return false;
-    return !playerIgnoresStatic(state, searcher, source);
-  });
 }
 
 /** Each static on the battlefield answering `test`, of a permanent controlled
@@ -2446,14 +2361,15 @@ export function playerIgnoresStatic(state: GameState, player: PlayerId, source: 
   );
 }
 
-/** What it costs to ignore `source`'s effect (rule 116.2d — `cantSearchLibraries`'
+/** What it costs to ignore `source`'s effect (rule 116.2d — a `search` prohibition's
  * `ignoreCost`), while it has one that's on: `null` otherwise. */
 export function staticIgnoreCost(state: GameState, registry: CardRegistry, source: GameObject): string | null {
   if (source.zone !== "battlefield" || hasLostAbilities(state, registry, source)) return null;
   for (const ability of registry.get(rulesTextName(source)).static) {
-    const cost = ability.cantSearchLibraries?.ignoreCost;
-    if (cost !== undefined && (ability.condition === undefined || staticConditionMet(state, registry, source, ability.condition))) {
-      return cost;
+    const cost = ability.prohibits?.find((p) => p.act === "search" && p.ignoreCost !== undefined);
+    const ignoreCost = cost?.act === "search" ? cost.ignoreCost : undefined;
+    if (ignoreCost !== undefined && (ability.condition === undefined || staticConditionMet(state, registry, source, ability.condition))) {
+      return ignoreCost;
     }
   }
   return null;
@@ -2481,21 +2397,6 @@ export function playerDamageLifeFloor(state: GameState, registry: CardRegistry, 
   }
   for (const { source, ability } of emblemStatics(state, player)) raise(source, ability);
   return floor;
-}
-
-/** Whether `player` can't lose life (rule 119.8 — Everybody Lives!'s "players
- * can't lose life this turn"): a `player-effect` names them. */
-export function playerCantLoseLife(state: GameState, player: PlayerId): boolean {
-  return (state.playerEffects ?? []).some(
-    (e) => e.cantLoseLife?.includes(player) === true || e.lifeCantChange?.includes(player) === true,
-  );
-}
-
-/** Whether `player`'s life total can't change (Teferi's Protection — rules
- * 119.7, 119.8): they can't gain life or lose it. `playerCantLoseLife` says
- * yes for them too. */
-export function playerLifeCantChange(state: GameState, player: PlayerId): boolean {
-  return (state.playerEffects ?? []).some((e) => e.lifeCantChange?.includes(player) === true);
 }
 
 /** Whether `player` has protection from everything (rule 702.16j — Teferi's

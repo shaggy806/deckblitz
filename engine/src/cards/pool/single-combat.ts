@@ -10,15 +10,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "sacrifice-all-but", who: "each-player", keep: 1, filter: { typesAnyOf: ["creature", "planeswalker"] } },
-      {
-        kind: "player-effect",
-        duration: "until-end-of-your-next-turn",
-        cantCast: {
-          who: "each-player",
-          filter: { typesAnyOf: ["creature", "planeswalker"] },
-          label: "creature or planeswalker spells",
-        },
-      },
+      { kind: "prohibit", prohibits: [{ act: "cast", who: "each-player", filter: { typesAnyOf: ["creature", "planeswalker"] } }], duration: "until-end-of-your-next-turn" },
     ],
   },
 });

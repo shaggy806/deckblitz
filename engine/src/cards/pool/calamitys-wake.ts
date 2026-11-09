@@ -19,11 +19,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "exile-graveyard", target: "each-player" },
-      {
-        kind: "prohibit",
-        who: "each-player",
-        spells: { filter: { notTypes: ["creature"] }, label: "noncreature spells" },
-      },
+      { kind: "prohibit", prohibits: [{ act: "cast", who: "each-player", filter: { notTypes: ["creature"] } }] },
     ],
   },
 });

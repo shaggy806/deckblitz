@@ -12,7 +12,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: { who: "you", spells: true, castLimit: 1 },
+      prohibits: [{ act: "cast", who: "you", limit: 1 }],
       text: "You can't cast more than one spell each turn.",
     },
   ],

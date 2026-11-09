@@ -739,6 +739,7 @@ import _poolSickAndTired from "../pool/sick-and-tired.js";
 import _poolSidewinderNaga from "../pool/sidewinder-naga.js";
 import _poolSiegeSmash from "../pool/siege-smash.js";
 import _poolSierraNukasBiggestFan from "../pool/sierra-nukas-biggest-fan.js";
+import _poolSigardaHostOfHerons from "../pool/sigarda-host-of-herons.js";
 import _poolSilumgarsScorn from "../pool/silumgars-scorn.js";
 import _poolSilvanussInvoker from "../pool/silvanuss-invoker.js";
 import _poolSinewDancer from "../pool/sinew-dancer.js";
@@ -1743,6 +1744,7 @@ const shard: CardShard = {
     _poolSidewinderNaga,
     _poolSiegeSmash,
     _poolSierraNukasBiggestFan,
+    _poolSigardaHostOfHerons,
     _poolSilumgarsScorn,
     _poolSilvanussInvoker,
     _poolSinewDancer,

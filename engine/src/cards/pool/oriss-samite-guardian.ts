@@ -34,7 +34,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "prohibit", who: 0, spells: true },
+          { kind: "prohibit", prohibits: [{ act: "cast", who: { target: 0 } }] },
           {
             kind: "restrict",
             filter: { type: "creature", controlledBy: "you" },

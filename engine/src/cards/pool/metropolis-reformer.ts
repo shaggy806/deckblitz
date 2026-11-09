@@ -15,7 +15,7 @@ export default defineCard({
   toughness: 3,
   keywords: ["flying", "vigilance"],
   text: `Flying, vigilance\n${HEXPROOF_TEXT}\n${LIFE_TEXT}`,
-  static: [{ affects: { scope: "self" }, playerHexproof: true, text: HEXPROOF_TEXT }],
+  static: [{ affects: { scope: "self" }, playerKeywords: ["hexproof"], text: HEXPROOF_TEXT }],
   triggered: [
     {
       trigger: { on: "dealt-damage", who: "self" },

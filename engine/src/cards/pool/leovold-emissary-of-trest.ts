@@ -23,7 +23,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: { who: "opponents", drawsPerTurn: 1 },
+      prohibits: [{ act: "draw", who: "opponents", perTurn: 1 }],
       text: "Each opponent can't draw more than one card each turn.",
     },
   ],

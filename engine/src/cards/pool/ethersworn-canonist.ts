@@ -14,7 +14,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: { who: "each-player", spells: { notTypes: ["artifact"] }, castLimit: 1 },
+      prohibits: [{ act: "cast", who: "each-player", filter: { notTypes: ["artifact"] }, limit: 1 }],
       text: TEXT,
     },
   ],

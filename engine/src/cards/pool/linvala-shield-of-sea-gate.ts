@@ -55,7 +55,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "restrict", target: 0, restrictions: ["cant-attack", "cant-block"], duration: "until-your-next-turn" },
-          { kind: "prohibit", target: 0, abilities: true, duration: "until-your-next-turn" },
+          { kind: "prohibit", prohibits: [{ act: "activate", who: "each-player", target: 0 }], duration: "until-your-next-turn" },
         ],
       },
       resolve: null,

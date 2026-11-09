@@ -19,7 +19,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: { who: "each-player", abilitiesOf: { chosenName: true }, anyZone: true },
+      prohibits: [{ act: "activate", who: "each-player", of: { chosenName: true }, anyZone: true }],
       text: LOCK,
     },
   ],

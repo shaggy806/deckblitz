@@ -19,14 +19,13 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantLoseGame: true,
-      opponentsCantWinGame: true,
       text: LOCK,
+      prohibits: [{ act: "lose-game", who: "you" }, { act: "win-game", who: "opponents" }],
     },
     {
       affects: { scope: "self" },
-      preventsCounters: { permanents: { type: "creature", controlledBy: "you" }, kind: "-1/-1" },
       text: COUNTERS_TEXT,
+      prohibits: [{ act: "get-counters", object: { type: "creature", controlledBy: "you" }, kind: "-1/-1" }],
     },
   ],
 });

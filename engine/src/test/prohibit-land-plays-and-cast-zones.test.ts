@@ -28,7 +28,7 @@ describe("can't play lands this turn (the prohibit effect's lands)", () => {
     cast(game, toHand(game, "Turf Wound"), { targets: [ref(A)] });
     expect(hand(game).length).toBe(before + 1);
     expect(canPlay(game, forest)).toBe(false);
-    expect(() => game.dispatch({ type: "play-land", player: A, card: forest })).toThrow(/can't play lands/);
+    expect(() => game.dispatch({ type: "play-land", player: A, card: forest })).toThrow(/can't play/);
   });
 
   it("Turf Wound: a land from the library's top is barred too, and the next turn lands are back", () => {
@@ -48,7 +48,7 @@ describe("can't play lands this turn (the prohibit effect's lands)", () => {
     const { game } = table();
     lands(game, "Mountain", 3);
     cast(game, toHand(game, "Turf Wound"), { targets: [ref(B)] });
-    expect(game.state.turnProhibitions?.players).toEqual([{ player: B, spells: false, abilities: false, lands: true }]);
+    expect(game.state.emblems.at(-1)?.static?.prohibits).toEqual([{ act: "play-land", who: { players: [B] } }]);
     expect(canPlay(game, toHand(game, "Forest"))).toBe(true);
   });
 
@@ -148,11 +148,7 @@ describe("a prohibition by zone (prohibits.from / notFrom)", () => {
     lands(game, "Island", 3);
     game.debugApplyEffect(
       B,
-      {
-        kind: "player-effect",
-        duration: "until-your-next-turn",
-        cantCast: { who: "each-player", filter: {}, label: "cards from their hand", lands: true, from: ["hand"] },
-      },
+      { kind: "prohibit", prohibits: [{ act: "cast", who: "each-player", from: ["hand"] }, { act: "play-land", who: "each-player", from: ["hand"] }], duration: "until-your-next-turn" },
       [],
     );
     const handLand = toHand(game, "Forest");

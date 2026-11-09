@@ -15,7 +15,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: { who: "each-player", abilitiesOf: { type: "planeswalker" }, onlyLoyaltyAbilities: true },
+      prohibits: [{ act: "activate", who: "each-player", of: { type: "planeswalker" }, only: "loyalty" }],
       text: LOCK,
     },
     { affects: { scope: "self" }, costModification: { applies: {}, reduceGeneric: 1, when: { caster: "you" } }, text: COST },

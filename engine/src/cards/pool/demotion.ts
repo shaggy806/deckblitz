@@ -12,7 +12,7 @@ export default defineCard({
     {
       affects: { scope: "attached" },
       restrictions: ["cant-block"],
-      prohibits: { who: "each-player", abilitiesOf: { hostOfSource: true } },
+      prohibits: [{ act: "activate", who: "each-player", of: { hostOfSource: true } }],
       text: "Enchanted creature can't block, and its activated abilities can't be activated.",
     },
   ],

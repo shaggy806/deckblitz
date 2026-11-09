@@ -19,8 +19,8 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantSearchLibraries: { who: "any-player", ignoreCost: "{2}" },
       text: TEXT,
+      prohibits: [{ act: "search", who: "each-player", ignoreCost: "{2}" }],
     },
   ],
 });

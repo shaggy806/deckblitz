@@ -35,11 +35,7 @@ export default defineCard({
             {
               kind: "conditional",
               condition: { kind: "damage-dealt-this-way", to: 0, player: true },
-              then: {
-                kind: "prohibit",
-                who: 0,
-                spells: { filter: { notTypes: ["creature"] }, label: "noncreature spells" },
-              },
+              then: { kind: "prohibit", prohibits: [{ act: "cast", who: { target: 0 }, filter: { notTypes: ["creature"] } }] },
             },
           ],
         },

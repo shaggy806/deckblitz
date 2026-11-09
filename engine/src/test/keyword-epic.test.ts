@@ -18,9 +18,9 @@ describe("Epic", () => {
     cast(game, swarm);
     expect(zone(game, swarm)).toBe("graveyard");
     expect(tokensNamed(game, "Snake Token", A)).toBe(inHand);
-    expect(game.state.emblems.filter((e) => e.owner === A)).toHaveLength(1);
-    expect(game.state.players[A].cantCastSpellsForGame).toBe(true);
-    expect(game.canDispatch({ type: "cast-spell", player: A, card: held, targets: [] })).toMatch(/rest of the game/);
+    expect(game.state.emblems.filter((e) => e.owner === A && e.expires === undefined)).toHaveLength(1);
+    expect(game.state.emblems.some((e) => e.static?.prohibits !== undefined && e.expires === "permanent")).toBe(true);
+    expect(game.canDispatch({ type: "cast-spell", player: A, card: held, targets: [] })).toMatch(/can't cast/);
 
     // Bob's turn: no copy on his upkeep.
     nextTurn(game);
@@ -31,10 +31,10 @@ describe("Epic", () => {
     settle(game);
     expect(tokensNamed(game, "Snake Token", A)).toBe(inHand + before);
     // The copy has no epic ability: still the one emblem.
-    expect(game.state.emblems.filter((e) => e.owner === A)).toHaveLength(1);
+    expect(game.state.emblems.filter((e) => e.owner === A && e.expires === undefined)).toHaveLength(1);
     toStep(game, "upkeep");
     settle(game);
-    expect(game.state.emblems.filter((e) => e.owner === A)).toHaveLength(1);
+    expect(game.state.emblems.filter((e) => e.owner === A && e.expires === undefined)).toHaveLength(1);
   });
 
   it("Enduring Ideal: each upkeep's copy searches for another enchantment", () => {
@@ -49,6 +49,6 @@ describe("Epic", () => {
     toStep(game, "upkeep");
     settle(game);
     expect([first, second].every((id) => zone(game, id) === "battlefield")).toBe(true);
-    expect(game.state.players[B].cantCastSpellsForGame).toBeUndefined();
+    expect(game.state.emblems.some((e) => e.static?.prohibits !== undefined && e.owner === B)).toBe(false);
   });
 });

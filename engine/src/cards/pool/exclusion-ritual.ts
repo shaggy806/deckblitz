@@ -22,7 +22,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: { who: "each-player", spells: { sameNameWith: "exiled-with-source" } },
+      prohibits: [{ act: "cast", who: "each-player", filter: { sameNameWith: "exiled-with-source" } }],
       text: LOCK_TEXT,
     },
   ],

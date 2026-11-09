@@ -21,15 +21,7 @@ export default defineCard({
     {
       trigger: { on: "cast-spell", who: "you" },
       targets: [],
-      effect: {
-        kind: "player-effect",
-        duration: "until-your-next-turn",
-        cantCast: {
-          who: "each-opponent",
-          filter: { manaValue: { op: "eq", n: { amount: { manaValueOf: "trigger-object" } } } },
-          label: "spells with the same mana value as that spell",
-        },
-      },
+      effect: { kind: "prohibit", prohibits: [{ act: "cast", who: "each-opponent", filter: { manaValue: { op: "eq", n: { amount: { manaValueOf: "trigger-object" } } } } }], duration: "until-your-next-turn" },
       resolve: null,
       text: TEXT,
     },

@@ -165,23 +165,24 @@ describe("harness and ∞ (rules 701.64, 702.186)", () => {
 describe("players who can't search libraries, and a floor under a life total", () => {
   const read = (type_line: string, oracle_text: string) =>
     parseFace({ name: "Test Card", type_line, oracle_text, mana_cost: "{1}", colors: [] });
-  const search = (text: string) => read("Artifact", text).static[0].cantSearchLibraries;
+  const search = (text: string) => read("Artifact", text).static[0].prohibits?.[0];
   it("reads who can't search, as a static", () => {
-    expect(search("Players can't search libraries.")).toEqual({ who: "any-player" });
-    expect(search("Your opponents can't search libraries.")).toEqual({ who: "opponent" });
+    expect(search("Players can't search libraries.")).toEqual({ act: "search", who: "each-player" });
+    expect(search("Your opponents can't search libraries.")).toEqual({ act: "search", who: "opponents" });
     expect(search("Spells and abilities your opponents control can't cause their controller to search their library.")).toEqual({
-      who: "opponent",
+      act: "search",
+      who: "opponents",
       causedByThemselves: true,
     });
     expect(
       search("Players can't search libraries. Any player may pay {2} for that player to ignore this effect until end of turn."),
-    ).toEqual({ who: "any-player", ignoreCost: "{2}" });
+    ).toEqual({ act: "search", who: "each-player", ignoreCost: "{2}" });
   });
   it("reads it for this turn, on a spell", () => {
     expect(read("Instant", "Players can't search libraries this turn.\nDraw a card.").effect).toEqual({
       kind: "sequence",
       effects: [
-        { kind: "player-effect", duration: "end-of-turn", cantSearchLibraries: "each-player" },
+        { kind: "prohibit", prohibits: [{ act: "search", who: "each-player" }], duration: "end-of-turn" },
         { kind: "draw", amount: 1 },
       ],
     });
@@ -528,25 +529,12 @@ describe("when a spell may be cast or an ability activated", () => {
   });
 
   it("reads the statics of timing, haste and loyalty", () => {
-    expect(staticOf("Each opponent can cast spells only any time they could cast a sorcery.")?.prohibits).toEqual({
-      who: "opponents",
-      castOnlyAsSorcery: true,
-    });
+    expect(staticOf("Each opponent can cast spells only any time they could cast a sorcery.")?.prohibits).toEqual([{ act: "cast", who: "opponents", unless: "sorcery-timing" }]);
     expect(staticOf("You may activate abilities of creatures you control as though those creatures had haste.")?.activateAsThoughHaste).toEqual({ type: "creature" });
     expect(staticOf("You may activate the loyalty abilities of planeswalkers you control twice each turn rather than only once.")?.loyaltyActivationsEachTurn).toBe(2);
     expect(staticOf("Creatures you control can boast twice during each of your turns rather than once.")?.boastsEachOfYourTurns).toBe(2);
-    expect(staticOf("Players can't activate planeswalkers' loyalty abilities.")?.prohibits).toEqual({
-      who: "each-player",
-      abilitiesOf: { type: "planeswalker" },
-      onlyLoyaltyAbilities: true,
-    });
-    expect(staticOf("Enchanted player can't activate abilities that aren't mana abilities or loyalty abilities.")?.prohibits).toEqual({
-      who: "enchanted-player",
-      abilitiesOf: {},
-      anyZone: true,
-      exceptManaAbilities: true,
-      exceptLoyaltyAbilities: true,
-    });
+    expect(staticOf("Players can't activate planeswalkers' loyalty abilities.")?.prohibits).toEqual([{ act: "activate", who: "each-player", of: { type: "planeswalker" }, only: "loyalty" }]);
+    expect(staticOf("Enchanted player can't activate abilities that aren't mana abilities or loyalty abilities.")?.prohibits).toEqual([{ act: "activate", who: "enchanted-player", except: ["mana", "loyalty"], anyZone: true }]);
   });
 });
 
@@ -1048,8 +1036,7 @@ describe("an emblem's static abilities", () => {
       {
         affects: self,
         condition: { kind: "controls", filter: { type: "planeswalker", subtype: "Gideon" }, atLeast: 1 },
-        cantLoseGame: true,
-        opponentsCantWinGame: true,
+        prohibits: [{ act: "lose-game", who: "you" }, { act: "win-game", who: "opponents" }],
       },
     ],
     [
@@ -1062,7 +1049,7 @@ describe("an emblem's static abilities", () => {
     ],
     [
       "You get an emblem with \"Your opponents can't cast noncreature spells.\"",
-      { affects: self, prohibits: { who: "opponents", spells: { notTypes: ["creature"] } } },
+      { affects: self, prohibits: [{ act: "cast", who: "opponents", filter: { notTypes: ["creature"] } }] },
     ],
   ])("%s", (line, expected) => {
     const parsed = parseSentence(line, ctx());
@@ -1649,7 +1636,7 @@ describe("costs and triggers", () => {
     expect(ritual.complete).toBe(true);
     // The exile is linked to the lock that reads it (rule 607.2a).
     expect(ritual.triggered[0].effect).toEqual({ kind: "exile", target: 0, linked: true });
-    expect(ritual.static[0].prohibits).toEqual({ who: "each-player", spells: { sameNameWith: "exiled-with-source" } });
+    expect(ritual.static[0].prohibits).toEqual([{ act: "cast", who: "each-player", filter: { sameNameWith: "exiled-with-source" } }]);
     const market = parseFace({
       name: "Cornered Market",
       type_line: "Enchantment",
@@ -1658,8 +1645,8 @@ describe("costs and triggers", () => {
     });
     expect(market.complete).toBe(true);
     expect(market.static.map((s: { prohibits: unknown }) => s.prohibits)).toEqual([
-      { who: "each-player", spells: { sameNameWith: { permanents: { token: false } } } },
-      { who: "each-player", lands: { notSupertype: "basic", sameNameWith: { permanents: { token: false } } } },
+      [{ act: "cast", who: "each-player", filter: { sameNameWith: { permanents: { token: false } } } }],
+      [{ act: "play-land", who: "each-player", filter: { notSupertype: "basic", sameNameWith: { permanents: { token: false } } } }],
     ]);
     const singer = parseFace({
       name: "Cylian Sunsinger",
@@ -3019,7 +3006,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
     expect(
       parseSentence("Until your next turn, your opponents can't cast spells from anywhere other than their hands.", ctx()),
-    ).toEqual({ kind: "player-effect", duration: "until-your-next-turn", castOnlyFromHand: "each-opponent" });
+    ).toEqual({ kind: "prohibit", prohibits: [{ act: "cast", who: "each-opponent", notFrom: ["hand"] }], duration: "until-your-next-turn" });
   });
 
   it("phasing out (rule 702.26b): a target, up to one, any number, the source, the equipped creature, all you control, 'it'", () => {
@@ -3897,11 +3884,11 @@ describe("templates for features built since the parser began (2026-10-11)", () 
 
   it("a limit on drawing, and the next draw replaced (rule 614.1a)", () => {
     const prohibits = (line: string): unknown => face(line, "Enchantment").static[0].prohibits;
-    expect(prohibits("Each opponent can't draw more than one card each turn.")).toEqual({ who: "opponents", drawsPerTurn: 1 });
-    expect(prohibits("Each player can't draw more than one card each turn.")).toEqual({ who: "each-player", drawsPerTurn: 1 });
-    expect(prohibits("Players can't draw cards.")).toEqual({ who: "each-player", drawsPerTurn: 0 });
+    expect(prohibits("Each opponent can't draw more than one card each turn.")).toEqual([{ act: "draw", who: "opponents", perTurn: 1 }]);
+    expect(prohibits("Each player can't draw more than one card each turn.")).toEqual([{ act: "draw", who: "each-player", perTurn: 1 }]);
+    expect(prohibits("Players can't draw cards.")).toEqual([{ act: "draw", who: "each-player", perTurn: 0 }]);
     const aria = face("Players can't draw cards or gain life.", "Enchantment").static[0];
-    expect(aria.prohibits).toEqual({ who: "each-player", drawsPerTurn: 0 });
+    expect(aria.prohibits).toEqual([{ act: "draw", who: "each-player", perTurn: 0 }]);
     expect(aria.replacement).toEqual({ event: "would-gain-life", who: "any-player", prevent: true });
 
     const worship = face("{1}: The next time you would draw a card this turn, you gain 5 life instead.", "Enchantment");
@@ -4731,7 +4718,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(needle.static).toEqual([
       {
         affects: { scope: "self" },
-        prohibits: { who: "each-player", abilitiesOf: { chosenName: true }, anyZone: true, exceptManaAbilities: true },
+        prohibits: [{ act: "activate", who: "each-player", of: { chosenName: true }, except: ["mana"], anyZone: true }],
         text: "Activated abilities of sources with the chosen name can't be activated unless they're mana abilities.",
       },
     ]);
@@ -4741,7 +4728,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     );
     expect(mage.chooseCardNameOnEnter).toEqual({ filter: { notTypes: ["land"] } });
     expect(mage.static).toEqual([
-      { affects: { scope: "self" }, prohibits: { who: "each-player", spells: { chosenName: true } }, text: "Spells with the chosen name can't be cast." },
+      { affects: { scope: "self" }, prohibits: [{ act: "cast", who: "each-player", filter: { chosenName: true } }], text: "Spells with the chosen name can't be cast." },
     ]);
     const council = face(
       "As this creature enters, choose a noncreature, nonland card name.\nYour opponents can't cast spells with the chosen name.\nSpells with the chosen name you cast cost {2} less to cast.",
@@ -4750,7 +4737,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     expect(council.chooseCardNameOnEnter).toEqual({ filter: { notTypes: ["creature", "land"] } });
     expect(council.static[0]).toEqual({
       affects: { scope: "self" },
-      prohibits: { who: "opponents", spells: { chosenName: true } },
+      prohibits: [{ act: "cast", who: "opponents", filter: { chosenName: true } }],
       text: "Your opponents can't cast spells with the chosen name.",
     });
     // Only with the choice on the card.
@@ -5496,13 +5483,13 @@ describe("chosen counter costs, modal activated abilities, the host's prohibitio
     expect(arrest.static[0]).toMatchObject({
       affects: { scope: "attached" },
       restrictions: ["cant-attack", "cant-block"],
-      prohibits: { who: "each-player", abilitiesOf: { hostOfSource: true } },
+      prohibits: [{ act: "activate", who: "each-player", of: { hostOfSource: true } }],
     });
     const fetters = face(
       "Enchantment — Aura",
       "Enchant permanent\nEnchanted permanent can't attack or block, and its activated abilities can't be activated unless they're mana abilities.",
     );
-    expect(fetters.static[0].prohibits).toEqual({ who: "each-player", abilitiesOf: { hostOfSource: true }, exceptManaAbilities: true });
+    expect(fetters.static[0].prohibits).toEqual([{ act: "activate", who: "each-player", of: { hostOfSource: true }, except: ["mana"] }]);
   });
 });
 
@@ -6052,17 +6039,13 @@ describe("can't-do effects for a duration (prohibit's regeneration and monarch)"
   const face = (name: string, type_line: string, oracle_text: string) =>
     parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });
   it("reads 'target creature can't be regenerated this turn', and 'it' after a targeted sentence", () => {
-    expect(face("Hurr Jackal", "Creature — Jackal", "{T}: Target creature can't be regenerated this turn.").activated[0].effect).toEqual({
-      kind: "prohibit",
-      target: 0,
-      regeneration: true,
-    });
+    expect(face("Hurr Jackal", "Creature — Jackal", "{T}: Target creature can't be regenerated this turn.").activated[0].effect).toEqual({ kind: "cant-regenerate", target: 0 });
     const flames = face("Engulfing Flames", "Instant", "Engulfing Flames deals 1 damage to target creature. It can't be regenerated this turn.");
     expect(flames.effect).toEqual({
       kind: "sequence",
       effects: [
         { kind: "damage", amount: 1, target: 0 },
-        { kind: "prohibit", target: 0, regeneration: true },
+        { kind: "cant-regenerate", target: 0 },
       ],
     });
   });
@@ -6074,9 +6057,9 @@ describe("can't-do effects for a duration (prohibit's regeneration and monarch)"
       "Flamebreak deals 3 damage to each creature without flying and each player. Creatures dealt damage this way can't be regenerated this turn.",
     );
     expect(flamebreak.complete).toBe(true);
-    expect(flamebreak.effect.effects[1]).toEqual({ kind: "prohibit", regeneration: true, dealtDamageThisWay: "creature" });
+    expect(flamebreak.effect.effects[1]).toEqual({ kind: "cant-regenerate", dealtDamageThisWay: "creature" });
     const incinerate = face("Incinerate", "Instant", "Incinerate deals 3 damage to any target. A creature dealt damage this way can't be regenerated this turn.");
-    expect(incinerate.effect.effects[1]).toEqual({ kind: "prohibit", regeneration: true, dealtDamageThisWay: "creature" });
+    expect(incinerate.effect.effects[1]).toEqual({ kind: "cant-regenerate", dealtDamageThisWay: "creature" });
   });
 
   it("reads Disintegrate's 'if it's a creature' pair as one conditional", () => {
@@ -6091,7 +6074,7 @@ describe("can't-do effects for a duration (prohibit's regeneration and monarch)"
       then: {
         kind: "sequence",
         effects: [
-          { kind: "prohibit", target: 0, regeneration: true },
+          { kind: "cant-regenerate", target: 0 },
           { kind: "exile-if-dies-this-turn", target: 0 },
         ],
       },
@@ -6109,7 +6092,7 @@ describe("can't-do effects for a duration (prohibit's regeneration and monarch)"
       kind: "sequence",
       effects: [
         { kind: "become-monarch", who: 0 },
-        { kind: "prohibit", who: "you", monarch: true },
+        { kind: "prohibit", prohibits: [{ act: "become-monarch", who: "you" }] },
       ],
     });
   });
@@ -7865,7 +7848,7 @@ describe("can't be the target of … (hexproofFrom's qualifiers, graveyardCardsU
       anyController: true,
       notHexproof: true,
     });
-    expect(face("Plax C", "Enchantment — Aura", "Enchant creature\nEnchanted creature can't be the target of spells or abilities your opponents control.").static[0].hexproofFrom).toEqual({ notHexproof: true });
+    expect(face("Plax C", "Enchantment — Aura", "Enchant creature\nEnchanted creature can't be the target of spells or abilities your opponents control.").static[0].prohibits).toEqual([{ act: "be-targeted", object: { hostOfSource: true }, by: "opponents" }]);
     // Not the keyword, so a loss of hexproof leaves it (Shanna against Shadowspear).
     expect(
       face("Shanna D", "Creature — Human Warrior", "This creature can't be the target of abilities your opponents control.").static[0]
@@ -7875,7 +7858,7 @@ describe("can't be the target of … (hexproofFrom's qualifiers, graveyardCardsU
 
   it("reads the graveyard rule", () => {
     expect(face("Ground Seal", "Enchantment", "Cards in graveyards can't be the targets of spells or abilities.").static[0]).toMatchObject({
-      graveyardCardsUntargetable: {},
+      prohibits: [{ act: "be-targeted", object: { inZone: "graveyard" } }],
     });
   });
 });
@@ -7997,7 +7980,7 @@ describe("attach hosts (attachedTo among / a player / put-this-way, a chosen hos
     });
     expect(
       face("Cloudsteel Kirin", "Artifact Creature — Equipment Kirin", 'Equipped creature has flying and "You can\'t lose the game and your opponents can\'t win the game."').static[0],
-    ).toMatchObject({ affects: { scope: "attached" }, grantKeywords: ["flying"], grantsStatic: [{ cantLoseGame: true, opponentsCantWinGame: true }] });
+    ).toMatchObject({ affects: { scope: "attached" }, grantKeywords: ["flying"], grantsStatic: [{ prohibits: [{ act: "lose-game", who: "you" }, { act: "win-game", who: "opponents" }] }] });
     const rune = face("Rune of Might", "Enchantment — Aura Rune", 'Enchant permanent\nWhen this Aura enters, draw a card.\nAs long as enchanted permanent is a creature, it gets +1/+1 and has trample.\nAs long as enchanted permanent is an Equipment, it has "Equipped creature gets +1/+1 and has trample."');
     expect(rune.complete).toBe(true);
     expect(rune.static[1]).toMatchObject({
@@ -9073,13 +9056,13 @@ describe("land-play and cast-by-zone prohibitions", () => {
     expect(wound.effect).toEqual({
       kind: "sequence",
       effects: [
-        { kind: "prohibit", who: 0, lands: true },
+        { kind: "prohibit", prohibits: [{ act: "play-land", who: { target: 0 } }] },
         { kind: "draw", amount: 1 },
       ],
     });
     const miner = face("Pardic Miner", "Creature — Dwarf", "Sacrifice this creature: Target player can't play lands this turn.");
     expect(miner.complete).toBe(true);
-    expect(miner.activated[0].effect).toEqual({ kind: "prohibit", who: 0, lands: true });
+    expect(miner.activated[0].effect).toEqual({ kind: "prohibit", prohibits: [{ act: "play-land", who: { target: 0 } }] });
   });
 
   it("reads the static land-play lock and the casting locks by zone", () => {
@@ -9088,18 +9071,18 @@ describe("land-play and cast-by-zone prohibitions", () => {
       "Enchantment",
       "At the beginning of your upkeep, sacrifice this enchantment unless you sacrifice a land.\nPlayers can't play lands.",
     );
-    expect(dispute.static[0].prohibits).toEqual({ who: "each-player", lands: {} });
+    expect(dispute.static[0].prohibits).toEqual([{ act: "play-land", who: "each-player" }]);
     const mining = face("Aggressive Mining", "Enchantment", "You can't play lands.");
-    expect(mining.static[0].prohibits).toEqual({ who: "you", lands: {} });
+    expect(mining.static[0].prohibits).toEqual([{ act: "play-land", who: "you" }]);
     const magistrate = face(
       "Drannith Magistrate",
       "Creature — Human Wizard",
       "Your opponents can't cast spells from anywhere other than their hands.",
     );
     expect(magistrate.complete).toBe(true);
-    expect(magistrate.static[0].prohibits).toEqual({ who: "opponents", spells: true, notFrom: ["hand"] });
+    expect(magistrate.static[0].prohibits).toEqual([{ act: "cast", who: "opponents", notFrom: ["hand"] }]);
     const frenzy = face("Experimental Frenzy", "Enchantment", "You can't play lands or cast spells from your hand.");
-    expect(frenzy.static[0].prohibits).toEqual({ who: "you", spells: true, lands: {}, from: ["hand"] });
+    expect(frenzy.static[0].prohibits).toEqual([{ act: "cast", who: "you", from: ["hand"] }, { act: "play-land", who: "you", from: ["hand"] }]);
   });
 });
 
@@ -10289,7 +10272,7 @@ describe("the turn's blocks", () => {
       const card = face("Enchantment", line);
       expect(card.complete).toBe(true);
       expect(card.static).toEqual([
-        { affects: { scope: "self" }, prohibits: { who, spells, castLimit: 1 }, text: line },
+        { affects: { scope: "self" }, prohibits: [{ act: "cast", who, ...(spells === true ? {} : { filter: spells }), limit: 1 }], text: line },
       ]);
     };
     limit("each-player", true, "Each player can't cast more than one spell each turn.");
@@ -10308,7 +10291,7 @@ describe("the turn's blocks", () => {
       kind: "sequence",
       effects: [
         { kind: "add-mana", mana: "R", amount: 7 },
-        { kind: "player-effect", duration: "end-of-turn", castsLeft: { count: 1 } },
+        { kind: "prohibit", prohibits: [{ act: "cast", who: "you", more: 1 }], duration: "end-of-turn" },
       ],
     });
   });
@@ -10952,7 +10935,7 @@ describe("a static acting on a player", () => {
   it("reads Abyssal Persecutor's inverse pair", () => {
     const demon = face("Creature — Demon", "You can't win the game and your opponents can't lose the game.");
     expect(demon.complete).toBe(true);
-    expect(demon.static[0]).toMatchObject({ cantWinGame: true, opponentsCantLoseGame: true });
+    expect(demon.static[0]).toMatchObject({ prohibits: [{ act: "lose-game", who: "opponents" }, { act: "win-game", who: "you" }] });
   });
 });
 
@@ -13312,10 +13295,7 @@ describe("what an Aura says of the permanent it enchants", () => {
       "Enchant artifact\nEnchanted artifact's activated abilities cost {2} less to activate. This effect can't reduce the mana in that cost to less than one mana.",
     ).static;
     expect(cheaper.abilityCostModification).toEqual({ applies: { hostOfSource: true }, reduceGeneric: 2, leavesOneMana: true });
-    expect(aura("Enchanted creature's activated abilities can't be activated.").static[0].prohibits).toEqual({
-      who: "each-player",
-      abilitiesOf: { hostOfSource: true },
-    });
+    expect(aura("Enchanted creature's activated abilities can't be activated.").static[0].prohibits).toEqual([{ act: "activate", who: "each-player", of: { hostOfSource: true } }]);
     expect(aura("Enchanted creature can't attack.").static[0].restrictions).toEqual(["cant-attack"]);
     expect(aura("Prevent all combat damage that would be dealt by enchanted creature.").static[0].replacement).toEqual({
       event: "would-deal-damage",
@@ -14008,7 +13988,7 @@ describe("odd and even", () => {
       "Creature — Eldrazi",
       "Your opponents can't cast spells with even mana values. (Zero is even.)\nYour opponents can't block with creatures with even mana values.",
     );
-    expect(winnower.static[0]).toMatchObject({ prohibits: { who: "opponents", spells: { manaValueParity: "even" } } });
+    expect(winnower.static[0]).toMatchObject({ prohibits: [{ act: "cast", who: "opponents", filter: { manaValueParity: "even" } }] });
     expect(winnower.static[1]).toMatchObject({
       affects: { filter: { controlledBy: "opponent", manaValueParity: "even" } },
       restrictions: ["cant-block"],
@@ -14335,7 +14315,7 @@ describe("how one player's state compares with another's", () => {
     expect(reaver.activated[0].effect).toEqual({ kind: "counter", target: 0 });
     expect(
       read("Legendary Artifact — Equipment", "Your opponents can't cast spells with the same name as a card exiled with this Equipment.").static[0].prohibits,
-    ).toEqual({ who: "opponents", spells: { sameNameWith: "exiled-with-source" } });
+    ).toEqual([{ act: "cast", who: "opponents", filter: { sameNameWith: "exiled-with-source" } }]);
   });
 });
 
@@ -14349,7 +14329,7 @@ describe("restrictions for a duration", () => {
       kind: "sequence",
       effects: [
         { kind: "restrict", target: 0, restrictions: ["cant-attack", "cant-block"], duration: "until-your-next-turn" },
-        { kind: "prohibit", target: 0, abilities: true, duration: "until-your-next-turn" },
+        { kind: "prohibit", prohibits: [{ act: "activate", who: "each-player", target: 0 }], duration: "until-your-next-turn" },
       ],
     });
     const linvala = read(
@@ -14441,7 +14421,7 @@ describe("a goad whose end is a condition", () => {
     const blade = read("Artifact \u2014 Equipment", "Equipped creature gets +2/+0 and is goaded.");
     expect(blade.static[0]).toMatchObject({ affects: { scope: "attached" }, grantPt: [2, 0], goads: true });
     const alibi = read("Enchantment \u2014 Aura", "Enchant creature\nEnchanted creature gets +2/+2 and can't become suspected.");
-    expect(alibi.static[0]).toMatchObject({ grantPt: [2, 2], cantBecomeSuspected: true });
+    expect(alibi.static[0]).toMatchObject({ grantPt: [2, 2], prohibits: [{ act: "become-suspected", object: { hostOfSource: true } }] });
   });
 });
 

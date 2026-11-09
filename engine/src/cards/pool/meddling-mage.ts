@@ -15,5 +15,5 @@ export default defineCard({
   toughness: 2,
   text: `${NAME}\n${LOCK}`,
   chooseCardNameOnEnter: { filter: { notTypes: ["land"] } },
-  static: [{ affects: { scope: "self" }, prohibits: { who: "each-player", spells: { chosenName: true } }, text: LOCK }],
+  static: [{ affects: { scope: "self" }, prohibits: [{ act: "cast", who: "each-player", filter: { chosenName: true } }], text: LOCK }],
 });

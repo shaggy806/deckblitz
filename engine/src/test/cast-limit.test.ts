@@ -219,7 +219,7 @@ describe("you can cast only one more spell this turn", () => {
     lands(game, "Mountain", 5);
     cast(game, toHand(game, "Irencrag Feat"));
     cast(game, toHand(game, "Lightning Bolt"), { targets: [ref(B)] });
-    expect(game.state.playerEffects?.[0]?.castCaps).toEqual([{ player: A, total: 2 }]);
+    expect(game.state.emblems.at(-1)?.static?.prohibits).toEqual([{ act: "cast", who: { players: [A] }, limit: 2 }]);
   });
 
   it("Irencrag Feat permits nothing: Rule of Law still stops the spell it would allow", () => {

@@ -18,11 +18,5 @@ export default defineCard({
     "Split second (As long as this spell is on the stack, players can't cast spells or activate abilities that aren't mana abilities.)\n" +
     `${LOCK} ${FLOOR}`,
   splitSecond: true,
-  effect: {
-    kind: "player-effect",
-    duration: "end-of-turn",
-    cantLoseGame: "you",
-    cantWinGame: "each-opponent",
-    damageLifeFloor: { who: "you", floor: 1 },
-  },
+  effect: { kind: "sequence", effects: [{ kind: "player-effect", duration: "end-of-turn", damageLifeFloor: { who: "you", floor: 1 } }, { kind: "prohibit", prohibits: [{ act: "lose-game", who: "you" }, { act: "win-game", who: "each-opponent" }], duration: "end-of-turn" }] },
 });

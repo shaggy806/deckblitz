@@ -122,7 +122,7 @@ describe("can't be regenerated this turn", () => {
     const stack = spawn(game, "Wolf Token", B);
     game.state.objects[stack].isToken = true;
     game.state.objects[stack].stackCount = 2;
-    apply(game, A, { kind: "prohibit", target: 0, regeneration: true }, [stack]);
+    apply(game, A, { kind: "cant-regenerate", target: 0 }, [stack]);
     const marked = game.state.zones.shared.battlefield.filter(
       (id) => game.state.objects[id].cantBeRegeneratedTurn === game.state.turn.number,
     );
@@ -159,7 +159,7 @@ describe("you can't become the monarch this turn", () => {
     const { game } = table({ players: 3 });
     apply(game, A, { kind: "become-monarch", who: "each-opponent" });
     const monarch = game.state.monarch!;
-    apply(game, A, { kind: "prohibit", who: "you", monarch: true });
+    apply(game, A, { kind: "prohibit", prohibits: [{ act: "become-monarch", who: "you" }] });
     game.concede(monarch);
     settle(game);
     // Alice is active but can't; the next player still in the game can.
@@ -197,7 +197,7 @@ describe("a target's abilities prohibited until your next turn", () => {
   it("lasts through the opponent's turn and ends as the imposer's next turn begins", () => {
     const { game } = table();
     const sorcerer = spawn(game, "Prodigal Sorcerer", B);
-    apply(game, A, { kind: "prohibit", target: 0, abilities: true, duration: "until-your-next-turn" }, [sorcerer]);
+    apply(game, A, { kind: "prohibit", prohibits: [{ act: "activate", who: "each-player", target: 0 }], duration: "until-your-next-turn" }, [sorcerer]);
     nextTurn(game);
     expect(game.state.turn.number).toBe(2);
     expect(canActivate(game, sorcerer, B)).toBe(false);
@@ -208,7 +208,7 @@ describe("a target's abilities prohibited until your next turn", () => {
   it("this turn only, by default", () => {
     const { game } = table();
     const sorcerer = spawn(game, "Prodigal Sorcerer", B);
-    apply(game, A, { kind: "prohibit", target: 0, abilities: true }, [sorcerer]);
+    apply(game, A, { kind: "prohibit", prohibits: [{ act: "activate", who: "each-player", target: 0 }] }, [sorcerer]);
     expect(canActivate(game, sorcerer, B)).toBe(false);
     nextTurn(game);
     expect(canActivate(game, sorcerer, B)).toBe(true);

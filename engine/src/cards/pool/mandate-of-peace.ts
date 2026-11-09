@@ -13,7 +13,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "prohibit", who: "each-opponent", spells: true },
+      { kind: "prohibit", prohibits: [{ act: "cast", who: "each-opponent" }] },
       { kind: "end-the-combat-phase" },
     ],
   },

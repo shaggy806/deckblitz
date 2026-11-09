@@ -12,7 +12,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "prohibit", who: 0, lands: true },
+      { kind: "prohibit", prohibits: [{ act: "play-land", who: { target: 0 } }] },
       {
         kind: "delayed-trigger",
         at: "next-upkeep",

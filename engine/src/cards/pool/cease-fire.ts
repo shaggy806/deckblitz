@@ -16,7 +16,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "prohibit", who: 0, spells: { filter: { type: "creature" }, label: "creature spells" } },
+      { kind: "prohibit", prohibits: [{ act: "cast", who: { target: 0 }, filter: { type: "creature" } }] },
       { kind: "draw", amount: 1 },
     ],
   },

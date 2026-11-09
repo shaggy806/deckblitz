@@ -15,7 +15,7 @@ export default defineCard({
       affects: { scope: "self" },
       condition: { kind: "your-turn" },
       grantKeywords: ["hexproof"],
-      playerHexproof: true,
+      playerKeywords: ["hexproof"],
       text: "During your turn, you and this creature have hexproof.",
     },
   ],

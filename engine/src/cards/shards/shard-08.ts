@@ -47,6 +47,7 @@ import _poolAmpedRaptor from "../pool/amped-raptor.js";
 import _poolAnaraWolvidFamiliar from "../pool/anara-wolvid-familiar.js";
 import _poolAncientKavu from "../pool/ancient-kavu.js";
 import _poolAncientVendetta from "../pool/ancient-vendetta.js";
+import _poolAngelOfJubilation from "../pool/angel-of-jubilation.js";
 import _poolAngelOfSalvation from "../pool/angel-of-salvation.js";
 import _poolAngelicArmaments from "../pool/angelic-armaments.js";
 import _poolAngelicCub from "../pool/angelic-cub.js";
@@ -347,6 +348,7 @@ import _poolGhoulcallersBell from "../pool/ghoulcallers-bell.js";
 import _poolGhoulflesh from "../pool/ghoulflesh.js";
 import _poolGhoulraiser from "../pool/ghoulraiser.js";
 import _poolGiantHarbinger from "../pool/giant-harbinger.js";
+import _poolGildedLight from "../pool/gilded-light.js";
 import _poolGildedScuttler from "../pool/gilded-scuttler.js";
 import _poolGiltgroveStalker from "../pool/giltgrove-stalker.js";
 import _poolGiselaTheBrokenBlade from "../pool/gisela-the-broken-blade.js";
@@ -1087,6 +1089,7 @@ const shard: CardShard = {
     _poolAnaraWolvidFamiliar,
     _poolAncientKavu,
     _poolAncientVendetta,
+    _poolAngelOfJubilation,
     _poolAngelOfSalvation,
     _poolAngelicArmaments,
     _poolAngelicCub,
@@ -1387,6 +1390,7 @@ const shard: CardShard = {
     _poolGhoulflesh,
     _poolGhoulraiser,
     _poolGiantHarbinger,
+    _poolGildedLight,
     _poolGildedScuttler,
     _poolGiltgroveStalker,
     _poolGiselaTheBrokenBlade,

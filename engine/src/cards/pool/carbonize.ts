@@ -19,7 +19,7 @@ export default defineCard({
         then: {
           kind: "sequence",
           effects: [
-            { kind: "prohibit", target: 0, regeneration: true },
+            { kind: "cant-regenerate", target: 0 },
             { kind: "exile-if-dies-this-turn", target: 0 },
           ],
         },

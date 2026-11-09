@@ -26,7 +26,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "modify-pt", target: 0, power: -3, toughness: 0, duration: "until-your-next-turn" },
-          { kind: "prohibit", target: 0, abilities: true, duration: "until-your-next-turn" },
+          { kind: "prohibit", prohibits: [{ act: "activate", who: "each-player", target: 0 }], duration: "until-your-next-turn" },
         ],
       },
       resolve: null,

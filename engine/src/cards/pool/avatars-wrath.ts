@@ -29,7 +29,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "exile-all", filter: { type: "creature" }, airbend: true, exceptTarget: 0 },
-      { kind: "player-effect", duration: "until-your-next-turn", castOnlyFromHand: "each-opponent" },
+      { kind: "prohibit", prohibits: [{ act: "cast", who: "each-opponent", notFrom: ["hand"] }], duration: "until-your-next-turn" },
     ],
   },
 });

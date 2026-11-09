@@ -22,7 +22,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "self-counters", counter: "shield", compare: { op: "gte", n: 1 } },
-      playerHexproof: true,
+      playerKeywords: ["hexproof"],
       text: "As long as Captain America has a shield counter on him, you and other Heroes you control have hexproof.",
     },
     {

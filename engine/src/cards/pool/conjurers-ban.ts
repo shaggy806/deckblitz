@@ -16,16 +16,7 @@ export default defineCard({
     then: {
       kind: "sequence",
       effects: [
-        {
-          kind: "player-effect",
-          duration: "until-your-next-turn",
-          cantCast: {
-            who: "each-player",
-            filter: { hasName: CHOSEN_CARD_NAME },
-            label: "spells with the chosen name",
-            lands: true,
-          },
-        },
+        { kind: "prohibit", prohibits: [{ act: "cast", who: "each-player", filter: { hasName: CHOSEN_CARD_NAME } }, { act: "play-land", who: "each-player", filter: { hasName: CHOSEN_CARD_NAME } }], duration: "until-your-next-turn" },
         { kind: "draw", amount: 1 },
       ],
     },

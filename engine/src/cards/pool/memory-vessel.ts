@@ -29,11 +29,7 @@ export default defineCard({
             byOwner: true,
             play: true,
           },
-          {
-            kind: "player-effect",
-            duration: "until-your-next-turn",
-            cantCast: { who: "each-player", filter: {}, lands: true, from: ["hand"], label: "cards from their hand" },
-          },
+          { kind: "prohibit", prohibits: [{ act: "cast", who: "each-player", from: ["hand"] }, { act: "play-land", who: "each-player", from: ["hand"] }], duration: "until-your-next-turn" },
         ],
       },
       resolve: null,

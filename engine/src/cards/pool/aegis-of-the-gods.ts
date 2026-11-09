@@ -12,5 +12,5 @@ export default defineCard({
   power: 2,
   toughness: 1,
   text: HEXPROOF_TEXT,
-  static: [{ affects: { scope: "self" }, playerHexproof: true, text: HEXPROOF_TEXT }],
+  static: [{ affects: { scope: "self" }, playerKeywords: ["hexproof"], text: HEXPROOF_TEXT }],
 });

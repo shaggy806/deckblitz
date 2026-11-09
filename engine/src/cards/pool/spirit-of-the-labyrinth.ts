@@ -17,7 +17,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: { who: "each-player", drawsPerTurn: 1 },
+      prohibits: [{ act: "draw", who: "each-player", perTurn: 1 }],
       text: TEXT,
     },
   ],

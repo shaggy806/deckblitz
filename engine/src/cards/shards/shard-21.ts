@@ -299,6 +299,7 @@ import _poolFragmentize from "../pool/fragmentize.js";
 import _poolFrontierBivouac from "../pool/frontier-bivouac.js";
 import _poolFrostBite from "../pool/frost-bite.js";
 import _poolFrostwindInvoker from "../pool/frostwind-invoker.js";
+import _poolFrozenInIce from "../pool/frozen-in-ice.js";
 import _poolFulminousForte from "../pool/fulminous-forte.js";
 import _poolFungalReaches from "../pool/fungal-reaches.js";
 import _poolFurnaceHostCharger from "../pool/furnace-host-charger.js";
@@ -1240,6 +1241,7 @@ const shard: CardShard = {
     _poolFrontierBivouac,
     _poolFrostBite,
     _poolFrostwindInvoker,
+    _poolFrozenInIce,
     _poolFulminousForte,
     _poolFungalReaches,
     _poolFurnaceHostCharger,

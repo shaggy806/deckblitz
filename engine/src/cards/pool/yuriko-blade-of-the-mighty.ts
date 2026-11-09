@@ -14,7 +14,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "turn-structure", duringCombat: true },
-      prohibits: { who: "each-player", spells: true, abilitiesOf: {}, anyZone: true, exceptManaAbilities: true },
+      prohibits: [{ act: "cast", who: "each-player" }, { act: "activate", who: "each-player", except: ["mana"], anyZone: true }],
       text: "During combat, players can't cast spells or activate abilities that aren't mana abilities.",
     },
   ],

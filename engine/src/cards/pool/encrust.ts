@@ -25,7 +25,7 @@ export default defineCard({
     {
       affects: { scope: "attached" },
       restrictions: ["doesnt-untap"],
-      prohibits: { who: "each-player", abilitiesOf: { hostOfSource: true } },
+      prohibits: [{ act: "activate", who: "each-player", of: { hostOfSource: true } }],
       text: LOCK_TEXT,
     },
   ],

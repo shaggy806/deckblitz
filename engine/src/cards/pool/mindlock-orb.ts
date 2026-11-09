@@ -11,5 +11,5 @@ export default defineCard({
   colors: ["U"],
   types: ["artifact"],
   text: TEXT,
-  static: [{ affects: { scope: "self" }, cantSearchLibraries: { who: "any-player" }, text: TEXT }],
+  static: [{ affects: { scope: "self" }, text: TEXT, prohibits: [{ act: "search", who: "each-player" }] }],
 });

@@ -20,7 +20,7 @@ const TYPES = ["artifact", "enchantment", "instant", "sorcery", "planeswalker"] 
 const prohibition = (type: (typeof TYPES)[number]): StaticAbility => ({
   affects: { scope: "self" },
   condition: { kind: "chosen-on-enter", value: type },
-  prohibits: { who: "each-player", spells: { type } },
+  prohibits: [{ act: "cast", who: "each-player", filter: { type } }],
   text: `Players can't cast spells of the chosen type (${type}).`,
 });
 

@@ -107,6 +107,7 @@ import _poolBlisterpod from "../pool/blisterpod.js";
 import _poolBloodTithe from "../pool/blood-tithe.js";
 import _poolBloodTyrant from "../pool/blood-tyrant.js";
 import _poolBloodlineRecollector from "../pool/bloodline-recollector.js";
+import _poolBlossombind from "../pool/blossombind.js";
 import _poolBlossomingTortoise from "../pool/blossoming-tortoise.js";
 import _poolBlossomingWreath from "../pool/blossoming-wreath.js";
 import _poolBlueMarvelAdamBrashear from "../pool/blue-marvel-adam-brashear.js";
@@ -885,6 +886,7 @@ import _poolToymaker from "../pool/toymaker.js";
 import _poolTraverseEternity from "../pool/traverse-eternity.js";
 import _poolTraxosAcademyGuardian from "../pool/traxos-academy-guardian.js";
 import _poolTriskelion from "../pool/triskelion.js";
+import _poolTrueBeliever from "../pool/true-believer.js";
 import _poolTrystansCommand from "../pool/trystans-command.js";
 import _poolTsaganRaiderWarlord from "../pool/tsagan-raider-warlord.js";
 import _poolTuktukTheExplorer from "../pool/tuktuk-the-explorer.js";
@@ -1096,6 +1098,7 @@ const shard: CardShard = {
     _poolBloodTithe,
     _poolBloodTyrant,
     _poolBloodlineRecollector,
+    _poolBlossombind,
     _poolBlossomingTortoise,
     _poolBlossomingWreath,
     _poolBlueMarvelAdamBrashear,
@@ -1874,6 +1877,7 @@ const shard: CardShard = {
     _poolTraverseEternity,
     _poolTraxosAcademyGuardian,
     _poolTriskelion,
+    _poolTrueBeliever,
     _poolTrystansCommand,
     _poolTsaganRaiderWarlord,
     _poolTuktukTheExplorer,

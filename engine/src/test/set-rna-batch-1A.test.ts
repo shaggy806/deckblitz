@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { playerHasHexproof } from "../characteristics.js";
+import { playerHasKeyword } from "../characteristics.js";
 import {
   A,
   B,
@@ -63,10 +63,10 @@ describe("RNA batch 1A", () => {
   it("Gruul Spellbreaker gives you and itself hexproof during your turn only", () => {
     const { game } = table();
     const ogre = spawn(game, "Gruul Spellbreaker");
-    expect(playerHasHexproof(game.state, game.registry, A)).toBe(true);
+    expect(playerHasKeyword(game.state, game.registry, A, "hexproof")).toBe(true);
     expect(keywords(game, ogre).has("hexproof")).toBe(true);
     nextTurn(game);
-    expect(playerHasHexproof(game.state, game.registry, A)).toBe(false);
+    expect(playerHasKeyword(game.state, game.registry, A, "hexproof")).toBe(false);
     expect(keywords(game, ogre).has("hexproof")).toBe(false);
   });
 

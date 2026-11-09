@@ -424,6 +424,7 @@ import _poolIronVerdict from "../pool/iron-verdict.js";
 import _poolIronrootWarlord from "../pool/ironroot-warlord.js";
 import _poolIronwrightsCleansing from "../pool/ironwrights-cleansing.js";
 import _poolItDoesntAddUp from "../pool/it-doesnt-add-up.js";
+import _poolIvoryMask from "../pool/ivory-mask.js";
 import _poolJabsMistressOfMockery from "../pool/jabs-mistress-of-mockery.js";
 import _poolJacesMachinations from "../pool/jaces-machinations.js";
 import _poolJacesSentinel from "../pool/jaces-sentinel.js";
@@ -780,6 +781,7 @@ import _poolSoulOfMagma from "../pool/soul-of-magma.js";
 import _poolSoulSnuffers from "../pool/soul-snuffers.js";
 import _poolSoulcatcher from "../pool/soulcatcher.js";
 import _poolSoulfireGrandMaster from "../pool/soulfire-grand-master.js";
+import _poolSoullessJailer from "../pool/soulless-jailer.js";
 import _poolSoultetherGolem from "../pool/soultether-golem.js";
 import _poolSozinsComet from "../pool/sozins-comet.js";
 import _poolSpatialContortion from "../pool/spatial-contortion.js";
@@ -933,6 +935,7 @@ import _poolWanderingMusicians from "../pool/wandering-musicians.js";
 import _poolWarDance from "../pool/war-dance.js";
 import _poolWarWingSiren from "../pool/war-wing-siren.js";
 import _poolWardSliver from "../pool/ward-sliver.js";
+import _poolWardscaleDragon from "../pool/wardscale-dragon.js";
 import _poolWarhornBlast from "../pool/warhorn-blast.js";
 import _poolWarrenInstigator from "../pool/warren-instigator.js";
 import _poolWaterspoutWarden from "../pool/waterspout-warden.js";
@@ -1413,6 +1416,7 @@ const shard: CardShard = {
     _poolIronrootWarlord,
     _poolIronwrightsCleansing,
     _poolItDoesntAddUp,
+    _poolIvoryMask,
     _poolJabsMistressOfMockery,
     _poolJacesMachinations,
     _poolJacesSentinel,
@@ -1769,6 +1773,7 @@ const shard: CardShard = {
     _poolSoulSnuffers,
     _poolSoulcatcher,
     _poolSoulfireGrandMaster,
+    _poolSoullessJailer,
     _poolSoultetherGolem,
     _poolSozinsComet,
     _poolSpatialContortion,
@@ -1922,6 +1927,7 @@ const shard: CardShard = {
     _poolWarDance,
     _poolWarWingSiren,
     _poolWardSliver,
+    _poolWardscaleDragon,
     _poolWarhornBlast,
     _poolWarrenInstigator,
     _poolWaterspoutWarden,

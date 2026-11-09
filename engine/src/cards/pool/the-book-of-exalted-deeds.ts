@@ -26,9 +26,8 @@ export default defineCard({
             target: 0,
             ability: {
               affects: { scope: "self" },
-              cantLoseGame: true,
-              opponentsCantWinGame: true,
               text: "You can't lose the game and your opponents can't win the game.",
+              prohibits: [{ act: "lose-game", who: "you" }, { act: "win-game", who: "opponents" }],
             },
             duration: "permanent",
           },

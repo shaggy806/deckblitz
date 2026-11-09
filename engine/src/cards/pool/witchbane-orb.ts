@@ -19,5 +19,5 @@ export default defineCard({
       text: ENTERS,
     },
   ],
-  static: [{ affects: { scope: "self" }, playerHexproof: true, text: HEXPROOF }],
+  static: [{ affects: { scope: "self" }, playerKeywords: ["hexproof"], text: HEXPROOF }],
 });

@@ -14,7 +14,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: { who: "each-player", spells: { type: "creature" } },
+      prohibits: [{ act: "cast", who: "each-player", filter: { type: "creature" } }],
       text: "Creature spells can't be cast.",
     },
   ],

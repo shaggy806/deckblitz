@@ -26,10 +26,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: {
-        who: "you",
-        spells: { typesAnyOf: ["artifact", "creature", "enchantment", "land", "planeswalker", "battle"] },
-      },
+      prohibits: [{ act: "cast", who: "you", filter: { typesAnyOf: ["artifact", "creature", "enchantment", "land", "planeswalker", "battle"] } }],
       text: PROHIBIT_TEXT,
     },
   ],

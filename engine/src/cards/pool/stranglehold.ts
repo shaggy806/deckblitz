@@ -13,7 +13,7 @@ export default defineCard({
   types: ["enchantment"],
   text: `${NO_SEARCH}\n${NO_EXTRA_TURN}`,
   static: [
-    { affects: { scope: "self" }, cantSearchLibraries: { who: "opponent" }, text: NO_SEARCH },
+    { affects: { scope: "self" }, text: NO_SEARCH, prohibits: [{ act: "search", who: "opponents" }] },
     {
       affects: { scope: "self" },
       replacement: { event: "would-begin-turn", who: "opponent", extraOnly: true },

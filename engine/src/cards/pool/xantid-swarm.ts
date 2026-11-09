@@ -23,7 +23,7 @@ export default defineCard({
       // player it attacks, or the controller of the planeswalker it attacks.
       trigger: { on: "attacks", who: "self" },
       targets: [],
-      effect: { kind: "prohibit", who: "trigger-player", spells: true },
+      effect: { kind: "prohibit", prohibits: [{ act: "cast", who: "trigger-player" }] },
       resolve: null,
       text: "Whenever this creature attacks, defending player can't cast spells this turn.",
     },

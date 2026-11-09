@@ -56,7 +56,7 @@ export default defineCard({
     { affects: { scope: "attached" }, grantPt: [3, 3], text: "Equipped creature gets +3/+3." },
     {
       affects: { scope: "self" },
-      prohibits: { who: "opponents", spells: { sameNameWith: "exiled-with-source" } },
+      prohibits: [{ act: "cast", who: "opponents", filter: { sameNameWith: "exiled-with-source" } }],
       text: LOCK,
     },
   ],

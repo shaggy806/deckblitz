@@ -19,11 +19,7 @@ export default defineCard({
       // Mana abilities are activated abilities too, so an opponent's lands
       // (not artifacts, creatures or enchantments) still tap, while their mana
       // rocks and dorks don't.
-      prohibits: {
-        who: "opponents",
-        spells: true,
-        abilitiesOf: { typesAnyOf: ["artifact", "creature", "enchantment"] },
-      },
+      prohibits: [{ act: "cast", who: "opponents" }, { act: "activate", who: "opponents", of: { typesAnyOf: ["artifact", "creature", "enchantment"] } }],
       text: TEXT,
     },
   ],

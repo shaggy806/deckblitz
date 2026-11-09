@@ -653,6 +653,7 @@ import _poolPilferingHawk from "../pool/pilfering-hawk.js";
 import _poolPiousWayfarer from "../pool/pious-wayfarer.js";
 import _poolPitilessHorde from "../pool/pitiless-horde.js";
 import _poolPlasmaJockey from "../pool/plasma-jockey.js";
+import _poolPlatinumEmperion from "../pool/platinum-emperion.js";
 import _poolPlazaOfHeroes from "../pool/plaza-of-heroes.js";
 import _poolPleaForGuidance from "../pool/plea-for-guidance.js";
 import _poolPoisonTheWell from "../pool/poison-the-well.js";
@@ -1669,6 +1670,7 @@ const shard: CardShard = {
     _poolPiousWayfarer,
     _poolPitilessHorde,
     _poolPlasmaJockey,
+    _poolPlatinumEmperion,
     _poolPlazaOfHeroes,
     _poolPleaForGuidance,
     _poolPoisonTheWell,

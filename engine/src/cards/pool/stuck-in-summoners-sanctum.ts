@@ -27,7 +27,7 @@ export default defineCard({
     {
       affects: { scope: "attached" },
       restrictions: ["doesnt-untap"],
-      prohibits: { who: "each-player", abilitiesOf: { hostOfSource: true } },
+      prohibits: [{ act: "activate", who: "each-player", of: { hostOfSource: true } }],
       text: "Enchanted permanent doesn't untap during its controller's untap step and its activated abilities can't be activated.",
     },
   ],

@@ -38,7 +38,7 @@ export default defineCard({
       effect: {
         kind: "conditional",
         condition: { kind: "cast-this-turn", atLeast: 0, atMost: 0 },
-        then: { kind: "cast-now", target: 0, then: { kind: "prohibit", who: "you", spells: true } },
+        then: { kind: "cast-now", target: 0, then: { kind: "prohibit", prohibits: [{ act: "cast", who: "you" }] } },
       },
       resolve: null,
       text: CAST_TEXT,

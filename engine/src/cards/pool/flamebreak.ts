@@ -22,7 +22,7 @@ export default defineCard({
           { kind: "damage", amount: 3, who: "each-player" },
         ],
       },
-      { kind: "prohibit", regeneration: true, dealtDamageThisWay: "creature" },
+      { kind: "cant-regenerate", dealtDamageThisWay: "creature" },
     ],
   },
 });

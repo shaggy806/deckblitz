@@ -14,7 +14,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: { who: "each-player", spells: true, castLimit: 1 },
+      prohibits: [{ act: "cast", who: "each-player", limit: 1 }],
       text: "Each player can't cast more than one spell each turn.",
     },
   ],

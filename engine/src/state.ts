@@ -2551,12 +2551,6 @@ export interface PlayerState {
    */
   lastUpkeepSeq?: number;
   previousUpkeepSeq?: number;
-  /** "You can't become the monarch this turn" (the `prohibit` effect's
-   * `monarch` — Jared Carthalion, True Heir): the turn number it was said
-   * on. While `state.turn.number` still equals it, nothing makes this player
-   * the monarch (rule 725.4's "a player who can become the monarch"); "this
-   * turn" ends with the turn, so no sweep clears it. */
-  cantBecomeMonarchTurn?: number;
   /** How many times the Ring has tempted this player this game (rule
    * 701.54c) — what the Ring emblem's later abilities are gated on. Absent
    * until it first does. */
@@ -2625,9 +2619,6 @@ export interface PlayerState {
    * an additional land this turn". Reset as each turn begins; the ongoing
    * kind (Azusa) is a static, `extraLandsPerTurn`. */
   extraLandsThisTurn?: number;
-  /** "For the rest of the game, you can't cast spells" — set as an epic
-   * spell this player controls resolves (rule 702.50b). Absent until then. */
-  cantCastSpellsForGame?: true;
   /** The names of the spells with paradigm this player has controlled as one
    * resolved (rule 702.192a: only the first with a name sets it up). */
   paradigmResolved?: readonly string[];
@@ -5216,6 +5207,13 @@ export interface CombatDamageState {
  * `"creatures-you-control"` anthem `static` is modeled (the common
  * planeswalker-ultimate emblem) — folded in by the layer system. `text` is for
  * the log / client. */
+/** A timed static waiting for "during that player's next turn" (rule 611.2c):
+ * it starts as that turn begins and lasts through its cleanup. */
+export interface LaterTimedStatic {
+  readonly owner: PlayerId;
+  readonly timedStatic: StaticAbility;
+}
+
 /**
  * A continuous effect a resolved spell or ability gave a player for a while
  * — an emblem that expires. See the `player-effect` EffectSpec.
@@ -5241,25 +5239,9 @@ export interface PlayerEffect {
     /** Every player's matching spells, not only `owner`'s. */
     readonly allCasters?: true;
   };
-  /** `players` can't cast spells matching `filter` (from `owner`'s side),
-   * and with `lands` can't play lands matching it either (Academic
-   * Probation, Conjurer's Ban). See `whyProhibitedFromCasting`. */
-  readonly cantCast?: {
-    readonly players: readonly PlayerId[];
-    readonly filter: CardFilter;
-    readonly label: string;
-    readonly lands?: true;
-    /** Only cards cast or played from these zones (Memory Vessel's "from
-     * their hand"), where the card is as the cast or play begins. */
-    readonly from?: readonly ZoneType[];
-  };
   /** `owner` may cast matching spells from their hand without paying their
    * mana costs. */
   readonly castFromHandFree?: { readonly filter?: CardFilter };
-  /** Each `player` can't cast a spell once they've cast `total` this turn —
-   * "you can cast only one more spell this turn" (Irencrag Feat), the count
-   * so far plus how many more, fixed as the effect began. */
-  readonly castCaps?: readonly { readonly player: PlayerId; readonly total: number }[];
   /** `owner` may cast spells matching `filter` (every spell without one) as
    * though they had flash (rule 601.3b) — "you may cast spells this turn as
    * though they had flash" (Borne Upon a Wind). With `next`, only the next
@@ -5274,23 +5256,6 @@ export interface PlayerEffect {
   /** These players play with their hands revealed while this lasts (Sen
    * Triplets), to every player, as a `visibility` static has them do. */
   readonly handsRevealed?: readonly PlayerId[];
-  /** These players can't lose the game (Angel's Grace: "you can't lose the
-   * game this turn") — no state-based action and no effect that says they
-   * lose makes them lose; conceding still does (rule 104.3a). See
-   * `playerCantLoseGame`. */
-  readonly cantLoseGame?: readonly PlayerId[];
-  /** These players can't win the game ("your opponents can't win the game
-   * this turn") — an effect that says they win does nothing. Being the last
-   * player left still wins (rule 104.2a). See `playerCantWinGame`. */
-  readonly cantWinGame?: readonly PlayerId[];
-  /** These players can't lose life (rule 119.8 — Everybody Lives!): damage
-   * dealt to them is still dealt but changes nothing, an effect that says
-   * they lose life does nothing, and a cost that has them pay life (more
-   * than 0, rule 119.4b) can't be paid. See `playerCantLoseLife`. */
-  readonly cantLoseLife?: readonly PlayerId[];
-  /** These players can't search libraries ("Players can't search libraries
-   * this turn" — Shadow of Doubt). See `playerCantSearchLibrary`. */
-  readonly cantSearchLibraries?: readonly PlayerId[];
   /** `owner` doesn't lose unspent mana of these types as steps and phases
    * end (rule 500.5 — The Last Agni Kai's "until end of turn, you don't lose
    * unspent red mana"). See `Game.keptManaTypes`. */
@@ -5299,9 +5264,6 @@ export interface PlayerEffect {
    * (rule 116.2d — Leonin Arbiter's "any player may pay {2} for that player to
    * ignore this effect"): the permanent, in the stint it was paid for. */
   readonly ignoresStatic?: { readonly source: ObjectId; readonly stint: number };
-  /** These players can't cast spells from anywhere other than their hands
-   * (Avatar's Wrath) — see `whyProhibitedFromCasting`. */
-  readonly castOnlyFromHand?: readonly PlayerId[];
   /** "Damage that would reduce your life total to less than `floor` reduces
    * it to `floor` instead" (Angel's Grace, `floor: 1`) — for damage dealt to
    * one of `players`. Only damage, and only a total at or above the floor:
@@ -5323,12 +5285,6 @@ export interface PlayerEffect {
    * (rules 106.12b, 614.1a), with "you" being `owner`. See
    * `Game.manaProductionRules`. */
   readonly manaProduction?: ManaProductionRule;
-  /** "Your life total can't change" (Teferi's Protection): these players can
-   * neither gain nor lose life (rules 119.7, 119.8) — a gain or a loss, from
-   * damage or an effect, does nothing; a cost that has them pay more than 0
-   * life or gain life can't be paid; an exchange of life totals doesn't
-   * happen. Damage is still dealt. See `playerLifeCantChange`. */
-  readonly lifeCantChange?: readonly PlayerId[];
   /** "You gain protection from everything" (rule 702.16j): these players
    * can't be the target of spells or abilities, can't be enchanted by Auras
    * (a Curse on one goes, 704.5m), and all damage that would be dealt to them
@@ -6036,24 +5992,7 @@ export interface GameState {
    * Postman): each waits here, doing nothing, until `turnOf`'s next turn
    * after turn `after` begins, then holds through that turn's cleanup. One
    * whose player has left the game never begins (rule 800.4m). */
-  laterPlayerEffects?: { readonly turnOf: PlayerId; readonly after: number; readonly effect: PlayerEffect }[];
-  /** This turn's one-shot prohibitions (the `prohibit` effect): players who
-   * can't cast spells and/or activate abilities, and permanents — the stint
-   * they were in — whose activated abilities can't be activated. Turn-scoped. */
-  turnProhibitions?: {
-    players: {
-      readonly player: PlayerId;
-      readonly spells: boolean;
-      readonly abilities: boolean;
-      /** Only the spells matching this, from `you`'s side — "can't cast
-       * noncreature spells this turn". */
-      readonly spellsMatching?: { readonly filter: CardFilter; readonly you: PlayerId };
-      /** "Target player can't play lands this turn" (Turf Wound — rule
-       * 305.2): no land play, from any zone, by any permission. */
-      readonly lands?: true;
-    }[];
-    permanents: { readonly object: ObjectId; readonly zoneChangeCount: number }[];
-  };
+  laterPlayerEffects?: { readonly turnOf: PlayerId; readonly after: number; readonly effect: PlayerEffect | LaterTimedStatic }[];
   /** The permanents some effect lasts "for as long as [it] remains on the
    * battlefield" for (a modifier's or control effect's `whileSource`) — so a
    * permanent leaving looks for effects to end only when it's one of these. */

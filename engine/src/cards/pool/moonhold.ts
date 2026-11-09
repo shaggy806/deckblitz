@@ -15,12 +15,12 @@ export default defineCard({
       {
         kind: "conditional",
         condition: { kind: "source", filter: { manaSpent: [{ type: "R", amount: { op: "gte", n: 1 } }] } },
-        then: { kind: "prohibit", who: 0, lands: true },
+        then: { kind: "prohibit", prohibits: [{ act: "play-land", who: { target: 0 } }] },
       },
       {
         kind: "conditional",
         condition: { kind: "source", filter: { manaSpent: [{ type: "W", amount: { op: "gte", n: 1 } }] } },
-        then: { kind: "prohibit", who: 0, spells: { filter: { type: "creature" }, label: "creature spells" } },
+        then: { kind: "prohibit", prohibits: [{ act: "cast", who: { target: 0 }, filter: { type: "creature" } }] },
       },
     ],
   },

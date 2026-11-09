@@ -43,7 +43,7 @@ export default defineCard({
       effects: [
         { kind: "gift", gift: "treasure" },
         { kind: "return-to-hand", target: 0, from: "stack" },
-        { kind: "prohibit", who: "each-player", spells: true },
+        { kind: "prohibit", prohibits: [{ act: "cast", who: "each-player" }] },
       ],
     },
   },

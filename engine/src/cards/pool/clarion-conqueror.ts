@@ -24,7 +24,7 @@ export default defineCard({
       // Collector Ouphe's `prohibits`, widened to three types (mana and
       // loyalty abilities included, as the card says).
       affects: { scope: "self" },
-      prohibits: { who: "each-player", abilitiesOf: { typesAnyOf: ["artifact", "creature", "planeswalker"] } },
+      prohibits: [{ act: "activate", who: "each-player", of: { typesAnyOf: ["artifact", "creature", "planeswalker"] } }],
       text: TEXT,
     },
   ],

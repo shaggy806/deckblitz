@@ -10,5 +10,5 @@ export default defineCard({
   subtypes: ["Aura", "Curse"],
   text: `Enchant player\n${TEXT}`,
   targets: ["player"],
-  static: [{ affects: { scope: "self" }, prohibits: { who: "enchanted-player", spells: true, castLimit: 1 }, text: TEXT }],
+  static: [{ affects: { scope: "self" }, prohibits: [{ act: "cast", who: "enchanted-player", limit: 1 }], text: TEXT }],
 });

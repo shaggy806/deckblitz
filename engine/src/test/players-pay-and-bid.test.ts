@@ -206,7 +206,7 @@ describe("paying life, until no one pays", () => {
 
   it("can't pay more life than you have, and can't pay at all while your life can't change", () => {
     const { game } = table({ deck: "Swamp" });
-    game.debugApplyEffect(B, { kind: "player-effect", duration: "end-of-turn", cantLoseLife: "you" }, []);
+    game.debugApplyEffect(B, { kind: "prohibit", prohibits: [{ act: "lose-life", who: "you" }], duration: "end-of-turn" }, []);
     lands(game, "Swamp", 7);
     game.state.players[A].life = 2;
     cast(game, toHand(game, "Plague of Vermin"), { settle: false });

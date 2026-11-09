@@ -21,13 +21,13 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      preventsCounters: { players: "you", kind: "poison" },
       text: POISON_TEXT,
+      prohibits: [{ act: "get-counters", who: "you", kind: "poison" }],
     },
     {
       affects: { scope: "self" },
-      preventsCounters: { permanents: { type: "creature", controlledBy: "you" }, kind: "-1/-1" },
       text: COUNTERS_TEXT,
+      prohibits: [{ act: "get-counters", object: { type: "creature", controlledBy: "you" }, kind: "-1/-1" }],
     },
     {
       affects: { scope: "filter", filter: { type: "creature", controlledBy: "opponent" } },

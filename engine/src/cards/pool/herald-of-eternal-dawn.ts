@@ -18,9 +18,8 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      cantLoseGame: true,
-      opponentsCantWinGame: true,
       text: LOCK,
+      prohibits: [{ act: "lose-game", who: "you" }, { act: "win-game", who: "opponents" }],
     },
   ],
 });

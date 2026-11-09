@@ -43,11 +43,7 @@ export default defineCard({
         kind: "may",
         prompt: "Untap all lands you control? If you do, you can't cast spells until your next turn.",
         effect: { kind: "untap-all", filter: { type: "land", controlledBy: "you" } },
-        then: {
-          kind: "player-effect",
-          duration: "until-your-next-turn",
-          cantCast: { who: "you", filter: {}, label: "spells" },
-        },
+        then: { kind: "prohibit", prohibits: [{ act: "cast", who: "you" }], duration: "until-your-next-turn" },
       },
       resolve: null,
       text: END_TEXT,

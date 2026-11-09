@@ -19,13 +19,7 @@ export default defineCard({
       { kind: "grant-keyword-all", filter: { type: "creature" }, keyword: "hexproof", duration: "end-of-turn" },
       { kind: "grant-keyword-all", filter: { type: "creature" }, keyword: "indestructible", duration: "end-of-turn" },
       { kind: "grant-player-hexproof", who: "each-player" },
-      {
-        kind: "player-effect",
-        duration: "end-of-turn",
-        cantLoseLife: "each-player",
-        cantLoseGame: "each-player",
-        cantWinGame: "each-player",
-      },
+      { kind: "prohibit", prohibits: [{ act: "lose-game", who: "each-player" }, { act: "win-game", who: "each-player" }, { act: "lose-life", who: "each-player" }], duration: "end-of-turn" },
     ],
   },
 });

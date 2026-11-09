@@ -331,6 +331,7 @@ import _poolGoblinScouts from "../pool/goblin-scouts.js";
 import _poolGodPharaohsStatue from "../pool/god-pharaohs-statue.js";
 import _poolGorehornMinotaurs from "../pool/gorehorn-minotaurs.js";
 import _poolGrafRats from "../pool/graf-rats.js";
+import _poolGrafdiggersCage from "../pool/grafdiggers-cage.js";
 import _poolGraveBramble from "../pool/grave-bramble.js";
 import _poolGravelgillScoundrel from "../pool/gravelgill-scoundrel.js";
 import _poolGraveshifter from "../pool/graveshifter.js";
@@ -439,6 +440,7 @@ import _poolKraulRaider from "../pool/kraul-raider.js";
 import _poolKrovikanScoundrel from "../pool/krovikan-scoundrel.js";
 import _poolKujarSeedsculptor from "../pool/kujar-seedsculptor.js";
 import _poolKulrathZealot from "../pool/kulrath-zealot.js";
+import _poolKunorosHoundOfAthreos from "../pool/kunoros-hound-of-athreos.js";
 import _poolLairOfTheHydra from "../pool/lair-of-the-hydra.js";
 import _poolLanternScout from "../pool/lantern-scout.js";
 import _poolLeadershipVacuum from "../pool/leadership-vacuum.js";
@@ -716,6 +718,7 @@ import _poolShadowcloakVampire from "../pool/shadowcloak-vampire.js";
 import _poolSharedAnimosity from "../pool/shared-animosity.js";
 import _poolShatterskullSmashing from "../pool/shatterskull-smashing.js";
 import _poolShieldOfTheRealm from "../pool/shield-of-the-realm.js";
+import _poolShieldingPlax from "../pool/shielding-plax.js";
 import _poolShieldsUp from "../pool/shields-up.js";
 import _poolShimmercreep from "../pool/shimmercreep.js";
 import _poolShivanPhoenix from "../pool/shivan-phoenix.js";
@@ -1314,6 +1317,7 @@ const shard: CardShard = {
     _poolGodPharaohsStatue,
     _poolGorehornMinotaurs,
     _poolGrafRats,
+    _poolGrafdiggersCage,
     _poolGraveBramble,
     _poolGravelgillScoundrel,
     _poolGraveshifter,
@@ -1422,6 +1426,7 @@ const shard: CardShard = {
     _poolKrovikanScoundrel,
     _poolKujarSeedsculptor,
     _poolKulrathZealot,
+    _poolKunorosHoundOfAthreos,
     _poolLairOfTheHydra,
     _poolLanternScout,
     _poolLeadershipVacuum,
@@ -1699,6 +1704,7 @@ const shard: CardShard = {
     _poolSharedAnimosity,
     _poolShatterskullSmashing,
     _poolShieldOfTheRealm,
+    _poolShieldingPlax,
     _poolShieldsUp,
     _poolShimmercreep,
     _poolShivanPhoenix,

@@ -17,12 +17,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: {
-        who: "each-player",
-        abilitiesOf: { chosenName: true },
-        anyZone: true,
-        exceptManaAbilities: true,
-      },
+      prohibits: [{ act: "activate", who: "each-player", of: { chosenName: true }, except: ["mana"], anyZone: true }],
       text: LOCK,
     },
   ],

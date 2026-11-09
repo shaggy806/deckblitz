@@ -307,6 +307,7 @@ import _poolGlareOfSubdual from "../pool/glare-of-subdual.js";
 import _poolGleamingBastion from "../pool/gleaming-bastion.js";
 import _poolGluttonousGuest from "../pool/gluttonous-guest.js";
 import _poolGoblinBattleJester from "../pool/goblin-battle-jester.js";
+import _poolGoblinBrawler from "../pool/goblin-brawler.js";
 import _poolGoblinCharbelcher from "../pool/goblin-charbelcher.js";
 import _poolGoblinGoon from "../pool/goblin-goon.js";
 import _poolGoblinMasons from "../pool/goblin-masons.js";
@@ -1288,6 +1289,7 @@ const shard: CardShard = {
     _poolGleamingBastion,
     _poolGluttonousGuest,
     _poolGoblinBattleJester,
+    _poolGoblinBrawler,
     _poolGoblinCharbelcher,
     _poolGoblinGoon,
     _poolGoblinMasons,

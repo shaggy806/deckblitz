@@ -346,6 +346,7 @@ import _poolGiltLeafSeer from "../pool/gilt-leaf-seer.js";
 import _poolGimliCounterOfKills from "../pool/gimli-counter-of-kills.js";
 import _poolGlacialGrasp from "../pool/glacial-grasp.js";
 import _poolGlacialPlating from "../pool/glacial-plating.js";
+import _poolGlaringSpotlight from "../pool/glaring-spotlight.js";
 import _poolGloom from "../pool/gloom.js";
 import _poolGnostroVoiceOfTheCrags from "../pool/gnostro-voice-of-the-crags.js";
 import _poolGoShintaiOfLifesOrigin from "../pool/go-shintai-of-lifes-origin.js";
@@ -1350,6 +1351,7 @@ const shard: CardShard = {
     _poolGimliCounterOfKills,
     _poolGlacialGrasp,
     _poolGlacialPlating,
+    _poolGlaringSpotlight,
     _poolGloom,
     _poolGnostroVoiceOfTheCrags,
     _poolGoShintaiOfLifesOrigin,

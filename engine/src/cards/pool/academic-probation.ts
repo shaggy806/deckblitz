@@ -27,11 +27,7 @@ export default defineCard({
         effect: {
           kind: "choose-card-name",
           filter: { notTypes: ["land"] },
-          then: {
-            kind: "player-effect",
-            duration: "until-your-next-turn",
-            cantCast: { who: "each-opponent", filter: { hasName: CHOSEN_CARD_NAME }, label: "spells with the chosen name" },
-          },
+          then: { kind: "prohibit", prohibits: [{ act: "cast", who: "each-opponent", filter: { hasName: CHOSEN_CARD_NAME } }], duration: "until-your-next-turn" },
         },
       },
       // Detain's exact wording (rule 701.35a), mana abilities included.

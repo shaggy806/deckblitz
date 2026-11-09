@@ -29,12 +29,7 @@ export default defineCard({
         { kind: "gift", gift: "extra-turn" },
         BIRDS,
         { kind: "phase-out", filter: { controlledBy: "you" } },
-        {
-          kind: "player-effect",
-          duration: "until-your-next-turn",
-          lifeCantChange: "you",
-          protectionFromEverything: "you",
-        },
+        { kind: "sequence", effects: [{ kind: "player-effect", duration: "until-your-next-turn", protectionFromEverything: "you" }, { kind: "prohibit", prohibits: [{ act: "change-life", who: "you" }], duration: "until-your-next-turn" }] },
       ],
     },
   },

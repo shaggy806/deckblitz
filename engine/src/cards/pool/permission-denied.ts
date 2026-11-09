@@ -22,11 +22,7 @@ export default defineCard({
     effects: [
       { kind: "counter", target: 0 },
       // Ranger-Captain of Eos's lock.
-      {
-        kind: "prohibit",
-        who: "each-opponent",
-        spells: { filter: { notTypes: ["creature"] }, label: "noncreature spells" },
-      },
+      { kind: "prohibit", prohibits: [{ act: "cast", who: "each-opponent", filter: { notTypes: ["creature"] } }] },
     ],
   },
 });

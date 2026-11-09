@@ -22,7 +22,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: { who: "opponents", drawsPerTurn: 1 },
+      prohibits: [{ act: "draw", who: "opponents", perTurn: 1 }],
       text: LIMIT_TEXT,
     },
   ],

@@ -17,7 +17,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: { who: "opponents", spells: { ofChosenColor: true } },
+      prohibits: [{ act: "cast", who: "opponents", filter: { ofChosenColor: true } }],
       text: TEXT,
     },
   ],

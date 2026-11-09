@@ -24,11 +24,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "your-turn" },
-      prohibits: {
-        who: "opponents",
-        spells: true,
-        abilitiesOf: { typesAnyOf: ["artifact", "creature", "enchantment"] },
-      },
+      prohibits: [{ act: "cast", who: "opponents" }, { act: "activate", who: "opponents", of: { typesAnyOf: ["artifact", "creature", "enchantment"] } }],
       text: PROHIBIT_TEXT,
     },
   ],

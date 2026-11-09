@@ -35,7 +35,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "become-monarch", who: 0 },
-          { kind: "prohibit", who: "you", monarch: true },
+          { kind: "prohibit", prohibits: [{ act: "become-monarch", who: "you" }] },
         ],
       },
       resolve: null,

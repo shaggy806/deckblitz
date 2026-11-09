@@ -30,7 +30,7 @@ export default defineCard({
       // Only its {T} abilities, mana abilities among them.
       affects: { scope: "attached" },
       restrictions: ["cant-attack", "cant-block"],
-      prohibits: { who: "each-player", abilitiesOf: { hostOfSource: true }, onlyTapAbilities: true },
+      prohibits: [{ act: "activate", who: "each-player", of: { hostOfSource: true }, only: "tap" }],
       text: "Enchanted creature can't attack or block, and its activated abilities with {T} in their costs can't be activated.",
     },
   ],

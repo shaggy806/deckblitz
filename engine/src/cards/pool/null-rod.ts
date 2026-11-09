@@ -15,7 +15,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: { who: "each-player", abilitiesOf: { type: "artifact" } },
+      prohibits: [{ act: "activate", who: "each-player", of: { type: "artifact" } }],
       text: TEXT,
     },
   ],

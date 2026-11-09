@@ -27,7 +27,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: { who: "you", spells: true, castLimit: 1 },
+      prohibits: [{ act: "cast", who: "you", limit: 1 }],
       text: ONE_TEXT,
     },
     { affects: { scope: "self" }, mayPlay: { from: "graveyard", play: true, filter: { type: "land" } }, text: GRAVEYARD_TEXT },

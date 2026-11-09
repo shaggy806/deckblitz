@@ -18,7 +18,7 @@ export default defineCard({
     {
       trigger: { on: "blocks", who: "self", object: "blocked" },
       targets: [],
-      effect: { kind: "prohibit", target: "trigger-object", regeneration: true },
+      effect: { kind: "cant-regenerate", target: "trigger-object" },
       resolve: null,
       text: TEXT,
     },
@@ -26,7 +26,7 @@ export default defineCard({
       trigger: { on: "blocked-by", who: "self" },
       sameAbilityAs: 0,
       targets: [],
-      effect: { kind: "prohibit", target: "trigger-object", regeneration: true },
+      effect: { kind: "cant-regenerate", target: "trigger-object" },
       resolve: null,
       text: TEXT,
     },

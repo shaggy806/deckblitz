@@ -16,7 +16,7 @@ export default defineCard({
   keywords: ["hexproof"],
   text: `Hexproof\n${PROHIBIT_TEXT}\n${LOSE_TEXT}\n${DISCARD_TEXT}`,
   discardedByOpponentEnters: {},
-  static: [{ affects: { scope: "self" }, prohibits: { who: "you", spells: { notTypes: ["creature"] } }, text: PROHIBIT_TEXT }],
+  static: [{ affects: { scope: "self" }, prohibits: [{ act: "cast", who: "you", filter: { notTypes: ["creature"] } }], text: PROHIBIT_TEXT }],
   activated: [
     {
       cost: { mana: "{2}", tap: false },

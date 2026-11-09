@@ -13,11 +13,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: {
-        who: "each-player",
-        abilitiesOf: { typesAnyOf: ["artifact", "creature"] },
-        exceptManaAbilities: true,
-      },
+      prohibits: [{ act: "activate", who: "each-player", of: { typesAnyOf: ["artifact", "creature"] }, except: ["mana"] }],
       text: TEXT,
     },
   ],

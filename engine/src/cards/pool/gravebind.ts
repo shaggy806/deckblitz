@@ -12,7 +12,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "prohibit", target: 0, regeneration: true },
+      { kind: "cant-regenerate", target: 0 },
       {
         kind: "delayed-trigger",
         at: "next-upkeep",

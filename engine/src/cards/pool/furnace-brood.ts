@@ -15,7 +15,7 @@ export default defineCard({
     {
       cost: { mana: "{R}", tap: false },
       targets: ["creature"],
-      effect: { kind: "prohibit", target: 0, regeneration: true },
+      effect: { kind: "cant-regenerate", target: 0 },
       resolve: null,
       text: "{R}: Target creature can't be regenerated this turn.",
     },

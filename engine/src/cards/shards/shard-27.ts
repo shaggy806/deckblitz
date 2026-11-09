@@ -100,6 +100,7 @@ import _poolBorderlandRanger from "../pool/borderland-ranger.js";
 import _poolBorosGarrison from "../pool/boros-garrison.js";
 import _poolBraidssFrightfulReturn from "../pool/braidss-frightful-return.js";
 import _poolBrambleFamiliar from "../pool/bramble-familiar.js";
+import _poolBrandOfIllOmen from "../pool/brand-of-ill-omen.js";
 import _poolBrassInfiniscope from "../pool/brass-infiniscope.js";
 import _poolBreakneckRider from "../pool/breakneck-rider.js";
 import _poolBrigidHeroOfKinsbaile from "../pool/brigid-hero-of-kinsbaile.js";
@@ -1071,6 +1072,7 @@ const shard: CardShard = {
     _poolBorosGarrison,
     _poolBraidssFrightfulReturn,
     _poolBrambleFamiliar,
+    _poolBrandOfIllOmen,
     _poolBrassInfiniscope,
     _poolBreakneckRider,
     _poolBrigidHeroOfKinsbaile,

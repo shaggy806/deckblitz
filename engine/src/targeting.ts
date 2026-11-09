@@ -1,5 +1,6 @@
 /** Legality checks for spell / ability targets. */
 
+import { targetProhibited, targetsIgnoreHexproof } from "./prohibitions.js";
 import type { CardDefinition, CardRegistry, CardType } from "./cards.js";
 import type { EffectAmount } from "./effects.js";
 import {
@@ -10,7 +11,7 @@ import {
   effectiveTypes,
   grantedStatics,
   hasLostAbilities,
-  playerHasHexproof,
+  playerHasKeyword,
   playerHasProtectionFromEverything,
   protectionPlayers,
   staticConditionMet,
@@ -226,36 +227,6 @@ export function playerHexproofFromBlocks(state: GameState, registry: CardRegistr
       filters: grant.from.filter === undefined ? [] : [grant.from.filter],
     };
     if (qualityMatches(state, registry, player, quality, source)) return true;
-  }
-  return false;
-}
-
-/** Whether a card in a graveyard can't be targeted by `forPlayer`'s spell or
- * ability: a permanent on the battlefield has a `graveyardCardsUntargetable`
- * static ("cards in graveyards can't be the targets of spells or abilities"
- * — Ground Seal; rules 115.2, 601.2c) that covers it — its `filter` matched
- * against the card, `byOpponents` only against its controller's opponents
- * ("…your opponents control" — Tomik). */
-export function graveyardCardShielded(
-  state: GameState,
-  registry: CardRegistry,
-  card: ObjectId,
-  forPlayer: PlayerId,
-): boolean {
-  const object = state.objects[card];
-  if (object === undefined || object.zone !== "graveyard") return false;
-  for (const id of state.zones.shared.battlefield) {
-    const holder = state.objects[id];
-    if (holder === undefined) continue;
-    const own = hasLostAbilities(state, registry, holder) ? [] : registry.get(rulesTextName(holder)).static;
-    for (const ability of [...own, ...grantedStatics(state, registry, holder)]) {
-      const rule = ability.graveyardCardsUntargetable;
-      if (rule === undefined) continue;
-      if (rule.byOpponents === true && holder.controller === forPlayer) continue;
-      if (ability.condition !== undefined && !staticConditionMet(state, registry, holder, ability.condition)) continue;
-      if (rule.filter !== undefined && !matchesFilter(state, registry, card, rule.filter, { you: holder.controller, source: holder.id })) continue;
-      return true;
-    }
   }
   return false;
 }
@@ -545,7 +516,9 @@ function isLegalTargetUncached(
     if (object !== undefined && object.zone === "battlefield") {
       const keywords = computeCharacteristics(state, registry, ref.object).keywords;
       if (keywords.has("shroud")) return false;
-      if (object.controller !== forPlayer && keywords.has("hexproof")) return false;
+      if (object.controller !== forPlayer && keywords.has("hexproof") && !targetsIgnoreHexproof(state, registry, ref, forPlayer)) {
+        return false;
+      }
     }
     // Protection (rule 702.16) — can't be targeted by a matching source.
     if (source !== undefined && protectionBlocks(state, registry, ref.object, source, undefined, forPlayer)) {
@@ -554,14 +527,19 @@ function isLegalTargetUncached(
     if (source !== undefined && hexproofFromBlocks(state, registry, ref.object, source, forPlayer)) {
       return false;
     }
-    if (graveyardCardShielded(state, registry, ref.object, forPlayer)) return false;
+    if (targetProhibited(state, registry, ref, forPlayer, source)) return false;
+  } else if (targetProhibited(state, registry, ref, forPlayer, source)) {
+    return false;
+  } else if (playerHasKeyword(state, registry, ref.player, "shroud")) {
+    return false;
   } else if (
     // A player with hexproof (Lazotep Plating's "you … gain hexproof",
     // Shalai's "you … have hexproof") can't be the target of spells or
     // abilities their opponents control, which at a multiplayer table is
     // everyone else (rule 702.11d).
     ref.player !== forPlayer &&
-    playerHasHexproof(state, registry, ref.player)
+    playerHasKeyword(state, registry, ref.player, "hexproof") &&
+    !targetsIgnoreHexproof(state, registry, ref, forPlayer)
   ) {
     return false;
   } else if (ref.player !== forPlayer && source !== undefined && playerHexproofFromBlocks(state, registry, ref.player, source)) {

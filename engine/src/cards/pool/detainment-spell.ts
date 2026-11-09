@@ -23,7 +23,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "attached" },
-      prohibits: { who: "each-player", abilitiesOf: { hostOfSource: true } },
+      prohibits: [{ act: "activate", who: "each-player", of: { hostOfSource: true } }],
       text: PROHIBIT_TEXT,
     },
   ],

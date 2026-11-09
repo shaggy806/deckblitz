@@ -12,7 +12,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: { who: "you", spells: { type: "creature" } },
+      prohibits: [{ act: "cast", who: "you", filter: { type: "creature" } }],
       text: "You can't cast creature spells.",
     },
   ],

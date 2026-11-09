@@ -11,7 +11,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "counter", target: 0 },
-      { kind: "as-player", who: { controllerOf: 0 }, effect: { kind: "prohibit", who: "you", spells: true } },
+      { kind: "as-player", who: { controllerOf: 0 }, effect: { kind: "prohibit", prohibits: [{ act: "cast", who: "you" }] } },
     ],
   },
 });

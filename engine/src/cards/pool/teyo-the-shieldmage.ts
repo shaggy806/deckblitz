@@ -12,7 +12,7 @@ export default defineCard({
   subtypes: ["Teyo"],
   loyalty: 5,
   text: `${HEXPROOF_TEXT}\n${WALL_TEXT}`,
-  static: [{ affects: { scope: "self" }, playerHexproof: true, text: HEXPROOF_TEXT }],
+  static: [{ affects: { scope: "self" }, playerKeywords: ["hexproof"], text: HEXPROOF_TEXT }],
   activated: [
     {
       loyaltyCost: -2,

@@ -14,7 +14,7 @@ export default defineCard({
     {
       affects: { scope: "attached" },
       grantPt: [-1, -1],
-      prohibits: { who: "each-player", abilitiesOf: { hostOfSource: true } },
+      prohibits: [{ act: "activate", who: "each-player", of: { hostOfSource: true } }],
       text: "Enchanted creature gets -1/-1, and its activated abilities can't be activated.",
     },
   ],

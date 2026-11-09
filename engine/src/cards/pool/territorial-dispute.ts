@@ -31,7 +31,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: { who: "each-player", lands: {} },
+      prohibits: [{ act: "play-land", who: "each-player" }],
       text: LANDS_TEXT,
     },
   ],

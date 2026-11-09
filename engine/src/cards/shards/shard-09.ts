@@ -411,6 +411,7 @@ import _poolIcefall from "../pool/icefall.js";
 import _poolIcequake from "../pool/icequake.js";
 import _poolIcyReception from "../pool/icy-reception.js";
 import _poolIllegitimateBusiness from "../pool/illegitimate-business.js";
+import _poolImmerwolf from "../pool/immerwolf.js";
 import _poolImmolatingGyre from "../pool/immolating-gyre.js";
 import _poolImpendingDisaster from "../pool/impending-disaster.js";
 import _poolImposingGrandeur from "../pool/imposing-grandeur.js";
@@ -1427,6 +1428,7 @@ const shard: CardShard = {
     _poolIcequake,
     _poolIcyReception,
     _poolIllegitimateBusiness,
+    _poolImmerwolf,
     _poolImmolatingGyre,
     _poolImpendingDisaster,
     _poolImposingGrandeur,

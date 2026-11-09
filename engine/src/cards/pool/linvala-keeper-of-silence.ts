@@ -29,10 +29,7 @@ export default defineCard({
       // controller's side, so "creatures your opponents control". Mana
       // abilities included; a prohibition reaches battlefield permanents only
       // (the rulings: unearth, bloodrush still work).
-      prohibits: {
-        who: "each-player",
-        abilitiesOf: { type: "creature", controlledBy: "opponent" },
-      },
+      prohibits: [{ act: "activate", who: "each-player", of: { type: "creature", controlledBy: "opponent" } }],
       text: SILENCE_TEXT,
     },
   ],

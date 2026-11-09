@@ -435,6 +435,7 @@ import _poolKariZevSkyshipRaider from "../pool/kari-zev-skyship-raider.js";
 import _poolKarma from "../pool/karma.js";
 import _poolKarplusanYeti from "../pool/karplusan-yeti.js";
 import _poolKarvanistaLoyalLupari from "../pool/karvanista-loyal-lupari.js";
+import _poolKayaBaneOfTheDead from "../pool/kaya-bane-of-the-dead.js";
 import _poolKeigaTheTideStar from "../pool/keiga-the-tide-star.js";
 import _poolKeldonVandals from "../pool/keldon-vandals.js";
 import _poolKenzoTheHardhearted from "../pool/kenzo-the-hardhearted.js";
@@ -1454,6 +1455,7 @@ const shard: CardShard = {
     _poolKarma,
     _poolKarplusanYeti,
     _poolKarvanistaLoyalLupari,
+    _poolKayaBaneOfTheDead,
     _poolKeigaTheTideStar,
     _poolKeldonVandals,
     _poolKenzoTheHardhearted,

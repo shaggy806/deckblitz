@@ -66,6 +66,7 @@ import type {
 } from "./state.js";
 import type { JournalWindow } from "./journal.js";
 import { isCardSet, isObjectSetRef, memberCount, onlyMember, type ObjectSetRef, type RememberSpec, type SetMember } from "./object-sets.js";
+import type { BoundObject, EffectProhibition, Prohibition } from "./prohibitions.js";
 import type { ObjectRef, PlayerRef } from "./refs.js";
 import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
 import {
@@ -6155,13 +6156,9 @@ export type EffectSpec =
        * cast spells from your hand this turn without paying their mana costs"
        * (Yusri, Fortune's Flame), `filter` narrowing which.
        *
-       * The game-outcome locks, each over the players a scope names as it
-       * resolves: `cantLoseGame` ("you can't lose the game this turn"),
-       * `cantWinGame` ("your opponents can't win the game this turn" —
-       * `"each-opponent"`), `cantLoseLife` ("players can't lose life this
-       * turn", rule 119.8), and `damageLifeFloor` ("until end of turn, damage
-       * that would reduce your life total to less than 1 reduces it to 1
-       * instead" — `floor: 1`). Angel's Grace, Everybody Lives!.
+       * `damageLifeFloor`: "until end of turn, damage that would reduce your
+       * life total to less than 1 reduces it to 1 instead" (`floor: 1`, Angel's
+       * Grace). Anything a player can't do for a while is a `prohibit`.
        */
       readonly kind: "player-effect";
       /** See `PlayerDuration`: `"until-end-of-combat"` is gone as the combat
@@ -6183,32 +6180,7 @@ export type EffectSpec =
         readonly reduceGeneric: EffectAmount;
         readonly allCasters?: true;
       };
-      /** "Until your next turn, **your opponents can't cast spells** with the
-       * chosen name" (Academic Probation, Comply): the players `who` names as
-       * this resolves can't cast spells matching `filter` (from the
-       * controller's side); `lands` — "and lands with the chosen name can't be
-       * played" (Conjurer's Ban, rule 305.2). `label` names them in the log.
-       * `from`: only cards cast or played from these zones — Memory Vessel's
-       * "until your next turn, … they can't play cards from their hand"
-       * (`filter: {}`, `lands`, `from: ["hand"]`), judged where the card is
-       * as the cast or play begins (601.2a). */
-      readonly cantCast?: {
-        /** `{ ownerOf }`: "that creature's owner" (Reflector Mage). */
-        readonly who: PlayerScope;
-        readonly filter: CardFilter;
-        readonly label: string;
-        readonly lands?: true;
-        readonly from?: readonly ZoneType[];
-      };
       readonly castFromHandFree?: { readonly filter?: CardFilter };
-      /** "You can cast **only one more spell** this turn" (Irencrag Feat):
-       * the players `who` names (default you) may cast `count` more spells
-       * while this lasts, whatever they've cast so far — counted from this
-       * resolving, so the spell doing it isn't one of them. A prohibition
-       * (rules 101.2, 601.3): it stops a cast another effect allows or
-       * instructs, it permits nothing, and it leaves lands and abilities
-       * alone (the rulings). */
-      readonly castsLeft?: { readonly who?: PlayerScope; readonly count: number };
       /** "You may cast spells this turn as though they had flash" (Borne
        * Upon a Wind, Emergence Zone; Winding Canyons' `filter` "creature
        * spells") — rule 601.3b; with `next`, "**the next** sorcery spell you
@@ -6226,18 +6198,6 @@ export type EffectSpec =
       /** "…and plays with their hand revealed" (Sen Triplets): the player in
        * this target slot, to every player, while this lasts. */
       readonly handRevealed?: number;
-      readonly cantLoseGame?: PlayerScope;
-      readonly cantWinGame?: PlayerScope;
-      readonly cantLoseLife?: PlayerScope;
-      /** "Players can't search libraries this turn" (Shadow of Doubt —
-       * `"each-player"`): see the static's `cantSearchLibraries`. */
-      readonly cantSearchLibraries?: PlayerScope;
-      /** "Until your next turn, your opponents can't cast spells from
-       * anywhere other than their hands" (Avatar's Wrath — `"each-opponent"`,
-       * fixed as it resolves): a rule about casting (101.2), so no
-       * permission gets past it — a commander, a flashback, an airbended or
-       * impulse-exiled card, a copy cast from exile, all barred. */
-      readonly castOnlyFromHand?: PlayerScope;
       readonly damageLifeFloor?: { readonly who: PlayerScope; readonly floor: number };
       /** "Each token that would be created under an opponent's control this
        * turn is created under your control instead" (Crafty Cutpurse, rules
@@ -6267,10 +6227,6 @@ export type EffectSpec =
        * permanent makes, as a static's `manaProduction` entry, with "you"
        * being the effect's controller. */
       readonly manaProduction?: ManaProductionRule;
-      /** "Your life total can't change" (Teferi's Protection — rules 119.7,
-       * 119.8): no gain and no loss, from damage or an effect; no life paid
-       * but 0; no exchange of life totals. */
-      readonly lifeCantChange?: PlayerScope;
       /** "You gain protection from everything" (rule 702.16j): not a target
        * of spells or abilities, not enchanted by Auras, all damage to them
        * prevented. */
@@ -6468,50 +6424,31 @@ export type EffectSpec =
     }
   | {
       /**
-       * Prohibitions until end of turn: "this turn, that player can't cast
-       * spells or activate abilities" (Sen Triplets — `who`, a target slot
-       * holding a player or a scope, default you, with `spells` and/or
-       * `abilities`), "its activated abilities can't be activated this turn"
-       * (Koma, Cosmos Serpent — `target`, a permanent, this stint of it).
-       * Mana abilities are activated abilities too. `spells` may name only
-       * some spells: Ranger-Captain of Eos's "your opponents can't cast
-       * **noncreature** spells this turn" is `{ filter: { notTypes:
-       * ["creature"] }, label: "noncreature spells" }` — the filter matched
-       * against the card as it would be cast, from this effect's controller's
-       * side; `label` is how the log names them.
-       *
-       * The forbidden action can also be:
-       * - `regeneration`: "target creature can't be regenerated this turn"
-       *   (Hurr Jackal — rule 701.19c: its regeneration shields aren't
-       *   applied; activating or casting a regeneration effect still works).
-       *   On `target`, or with `dealtDamageThisWay: "creature"` on every
-       *   creature the resolution under way has dealt damage to so far
-       *   ("creatures dealt damage this way can't be regenerated this turn"
-       *   — Flamebreak; damage prevented was never dealt, rule 615.1). Not
-       *   an ability the creature has: it follows the permanent through a
-       *   loss of abilities and ends with the turn or a zone change (400.7).
-       * - `monarch`: "you can't become the monarch this turn" (Jared
-       *   Carthalion, True Heir — rule 725.4's "a player who can become the
-       *   monarch"): on the `who` players.
-       * - `lands`: "target player can't play lands this turn" (Turf Wound,
-       *   Pardic Miner — rule 305.2): on the `who` players, a land from any
-       *   zone, whatever permission offers it. Moonhold's two halves are each
-       *   a `conditional` on the mana spent, one `lands`, one `spells`.
-       * On `target`, `abilities` is the default when neither is named.
-       * `duration: "until-your-next-turn"` makes a `target`'s abilities
-       * prohibition last until this effect's controller's next turn (Dovin
-       * Baan's +1) instead of this turn.
+       * "Can't", for a while: one {@link EffectProhibition} per act, fixed as
+       * this resolves and lasting `duration` (this turn when omitted). `who`
+       * is a `PlayerScope`; an activate's or an object act's `target` is the
+       * object as it is now (rule 400.7); filters stay filters, so "permanents
+       * you control" reaches whatever comes later (rule 611.2c). Lowered to a
+       * timed static. Mana abilities are activated abilities too.
        */
       readonly kind: "prohibit";
-      readonly who?: number | PlayerScope;
+      readonly prohibits: readonly EffectProhibition[];
+      readonly duration?: PlayerDuration;
+    }
+  | {
+      /**
+       * "Target creature can't be regenerated this turn" (Hurr Jackal, rule
+       * 701.19c: its regeneration shields aren't applied; activating or
+       * casting a regeneration effect still works). On `target`, or with
+       * `dealtDamageThisWay: "creature"` on every creature the resolution
+       * under way has dealt damage to so far (Flamebreak; damage prevented was
+       * never dealt, rule 615.1). Not an ability the creature has: it follows
+       * the permanent through a loss of abilities and ends with the turn or a
+       * zone change (400.7).
+       */
+      readonly kind: "cant-regenerate";
       readonly target?: ObjectRef;
-      readonly spells?: boolean | { readonly filter: CardFilter; readonly label: string };
-      readonly abilities?: boolean;
-      readonly lands?: boolean;
-      readonly regeneration?: boolean;
-      readonly monarch?: boolean;
       readonly dealtDamageThisWay?: "creature";
-      readonly duration?: Extract<Duration, "until-your-next-turn">;
     }
   | {
       /**
@@ -11734,28 +11671,13 @@ export interface EffectApi {
   /** The roll a `{ roll }` amount reads: one this resolution made, else the
    * roll this ability triggered on, else the controller's last this turn. */
   lastRoll(): RollRecord | undefined;
-  /** See the `"prohibit"` {@link EffectSpec}: `players` can't cast spells
-   * (every one, or those matching a filter) and/or activate abilities this
-   * turn, or `object`'s activated abilities can't be activated. */
-  prohibit(
-    players: readonly PlayerId[],
-    object: TargetRef | undefined,
-    spells: boolean | { readonly filter: CardFilter; readonly label: string; readonly you: PlayerId },
-    abilities: boolean,
-    /** An `object`'s abilities prohibition until the controller's next turn
-     * rather than this turn. */
-    untilYourNextTurn?: boolean,
-  ): void;
-  /** See the `"prohibit"` {@link EffectSpec}'s `regeneration`: `target`, or
-   * every creature this resolution has dealt damage to so far, can't be
+  /** See the `"prohibit"` {@link EffectSpec}: these, bound as it resolved,
+   * until `expires`; with `during`, only during that player's next turn. */
+  prohibit(prohibits: readonly Prohibition[], expires: Expiry, during?: PlayerId): void;
+  /** See the `"cant-regenerate"` {@link EffectSpec}: `target`, or every
+   * creature this resolution has dealt damage to so far, can't be
    * regenerated this turn (rule 701.19c). */
   prohibitRegeneration(target: TargetRef | "dealt-damage-this-way"): void;
-  /** See the `"prohibit"` {@link EffectSpec}'s `lands`: `players` can't play
-   * lands this turn (rule 305.2). */
-  prohibitLandPlays(players: readonly PlayerId[]): void;
-  /** See the `"prohibit"` {@link EffectSpec}'s `monarch`: `players` can't
-   * become the monarch this turn. */
-  prohibitMonarch(players: readonly PlayerId[]): void;
   /** See the `"restrict"` {@link EffectSpec}: the rules, bound, on `target`
    * or the permanents matching `filter` as this resolves, for `duration`. */
   restrict(
@@ -12714,10 +12636,38 @@ function isPlayerSlotRef(who: PlayerScope): who is Exclude<PlayerRef, string> {
   return typeof who === "object" && !("otherThan" in who);
 }
 
-/** Who a `player-effect`'s `cantCast` binds as it resolves: a scope, or the
- * owner of a target, who hasn't left the game. */
-function cantCastPlayers(who: PlayerScope, ctx: ResolutionContext): readonly PlayerId[] {
-  return ctx.playersInScope(who);
+/**
+ * One written prohibition, bound as the effect resolves: its players, its
+ * target (this stint of it, rule 400.7) and "only N more" read now. Naming
+ * nobody (an illegal target, rule 608.2b), nothing. A `more` is one record per
+ * player, each counted from what they've cast so far.
+ */
+function bindProhibition(written: EffectProhibition, ctx: ResolutionContext): readonly Prohibition[] {
+  const { who, ...rest } = written as EffectProhibition & { readonly who?: PlayerScope };
+  const players = who === undefined ? undefined : ctx.playersInScope(who);
+  if (players?.length === 0) return [];
+  const side = rest as { readonly target?: ObjectRef };
+  let objects: readonly BoundObject[] | undefined;
+  if (side.target !== undefined) {
+    const target = objectRefAct(side.target, ctx);
+    if (target?.kind !== "object") return [];
+    objects = [{ object: target.object, stint: ctx.zoneChangeCountOf(target.object) ?? 0 }];
+  }
+  const { target: _target, ...kept } = rest as typeof rest & { readonly target?: ObjectRef };
+  const bound = { ...kept, ...(objects !== undefined ? { objects } : {}) };
+  const make = (forPlayers: readonly PlayerId[] | undefined, extra: object): Prohibition =>
+    ({ ...bound, ...(forPlayers !== undefined ? { who: { players: forPlayers } } : {}), ...extra }) as Prohibition;
+  if (written.act === "cast" && written.more !== undefined) {
+    const { more } = written;
+    return (players ?? [ctx.controller]).map((player) => {
+      const { more: _more, ...record } = make([player], { limit: ctx.spellsCastThisTurn(player) + more }) as Extract<
+        Prohibition,
+        { readonly act: "cast" }
+      >;
+      return record;
+    });
+  }
+  return [make(players, {})];
 }
 
 /** Where a card goes in its owner's library — see `put-on-library`. */
@@ -18119,40 +18069,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             }
           : {}),
         ...(spec.castFromHandFree !== undefined ? { castFromHandFree: spec.castFromHandFree } : {}),
-        ...(spec.castsLeft !== undefined
-          ? {
-              castCaps: ctx.playersInScope(spec.castsLeft.who ?? "you").map((player) => ({
-                player,
-                total: ctx.spellsCastThisTurn(player) + (spec.castsLeft?.count ?? 0),
-              })),
-            }
-          : {}),
         ...(spec.castAsThoughFlash !== undefined ? { castAsThoughFlash: spec.castAsThoughFlash } : {}),
         ...(spec.mayPlay !== undefined ? { mayPlay: resolveEffectPlay(spec.mayPlay, ctx) } : {}),
         ...(spec.handRevealed !== undefined && ctx.targets[spec.handRevealed]?.kind === "player"
           ? { handsRevealed: [(ctx.targets[spec.handRevealed] as { readonly player: PlayerId }).player] }
           : {}),
-        ...(spec.cantLoseGame !== undefined ? { cantLoseGame: ctx.playersInScope(spec.cantLoseGame) } : {}),
-        ...(spec.cantWinGame !== undefined ? { cantWinGame: ctx.playersInScope(spec.cantWinGame) } : {}),
-        ...(spec.cantLoseLife !== undefined ? { cantLoseLife: ctx.playersInScope(spec.cantLoseLife) } : {}),
-        ...(spec.cantSearchLibraries !== undefined
-          ? { cantSearchLibraries: ctx.playersInScope(spec.cantSearchLibraries) }
-          : {}),
         ...(spec.keepsUnspentMana !== undefined ? { keepsUnspentMana: spec.keepsUnspentMana } : {}),
-        ...(spec.castOnlyFromHand !== undefined
-          ? { castOnlyFromHand: ctx.playersInScope(spec.castOnlyFromHand) }
-          : {}),
-        ...(spec.cantCast !== undefined
-          ? {
-              cantCast: {
-                players: cantCastPlayers(spec.cantCast.who, ctx),
-                filter: spec.cantCast.filter,
-                label: spec.cantCast.label,
-                ...(spec.cantCast.lands === true ? { lands: true as const } : {}),
-                ...(spec.cantCast.from !== undefined ? { from: spec.cantCast.from } : {}),
-              },
-            }
-          : {}),
         ...(spec.damageLifeFloor !== undefined
           ? {
               damageLifeFloor: {
@@ -18165,7 +18087,6 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ...(spec.looksAtOwnLibraryTop === true ? { looksAtOwnLibraryTop: true as const } : {}),
         ...(spec.entersTapped !== undefined ? { entersTapped: spec.entersTapped } : {}),
         ...(spec.manaProduction !== undefined ? { manaProduction: spec.manaProduction } : {}),
-        ...(spec.lifeCantChange !== undefined ? { lifeCantChange: ctx.playersInScope(spec.lifeCantChange) } : {}),
         ...(spec.protectionFromEverything !== undefined
           ? { protectionFromEverything: ctx.playersInScope(spec.protectionFromEverything) }
           : {}),
@@ -18237,40 +18158,21 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       applyRepeat(spec, ctx);
       return;
     case "prohibit": {
-      if (spec.regeneration === true && spec.dealtDamageThisWay !== undefined) {
+      const lasts = resolvePlayerDuration(spec.duration ?? "end-of-turn", ctx.controller, (ref) => resolvePlayerRef(ref, ctx));
+      if (lasts === undefined) return;
+      const bound = spec.prohibits.flatMap((written) => bindProhibition(written, ctx));
+      if (bound.length === 0) return;
+      ctx.prohibit(bound, "expires" in lasts ? lasts.expires : "end-of-turn", "during" in lasts ? lasts.during : undefined);
+      return;
+    }
+    case "cant-regenerate": {
+      if (spec.dealtDamageThisWay !== undefined) {
         ctx.prohibitRegeneration("dealt-damage-this-way");
         return;
       }
-      if (spec.target !== undefined) {
-        const target = objectRefAct(spec.target, ctx);
-        if (target === undefined) return;
-        if (spec.regeneration === true) ctx.prohibitRegeneration(target);
-        // Abilities: named, or the default when nothing else is.
-        if (spec.abilities === true || spec.regeneration !== true) {
-          ctx.prohibit([], target, false, true, spec.duration === "until-your-next-turn");
-        }
-        return;
-      }
-      const slot = typeof spec.who === "number" ? ctx.targets[spec.who] : undefined;
-      const players =
-        spec.who === undefined
-          ? [ctx.controller]
-          : typeof spec.who === "number"
-            ? slot?.kind === "player"
-              ? [slot.player]
-              : []
-            : ctx.playersInScope(spec.who);
-      if (spec.monarch === true) ctx.prohibitMonarch(players);
-      if (spec.lands === true) ctx.prohibitLandPlays(players);
-      if ((spec.monarch === true || spec.lands === true) && spec.spells === undefined && spec.abilities === undefined) {
-        return;
-      }
-      ctx.prohibit(
-        players,
-        undefined,
-        typeof spec.spells === "object" ? { ...spec.spells, you: ctx.controller } : spec.spells === true,
-        spec.abilities === true,
-      );
+      if (spec.target === undefined) return;
+      const target = objectRefAct(spec.target, ctx);
+      if (target !== undefined) ctx.prohibitRegeneration(target);
       return;
     }
     case "restrict": {

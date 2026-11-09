@@ -120,7 +120,7 @@ describe("until that player's next turn (Teferi's Reproach)", () => {
     // Protection from everything: Healing Salve can't target him; his life
     // total can't change.
     expect(() => salve(game, B)).toThrow(/illegal target/);
-    expect(game.state.playerEffects?.[0]).toMatchObject({ expires: { untilTurnOf: B }, lifeCantChange: [B] });
+    expect(game.state.emblems.at(-1)).toMatchObject({ expires: { untilTurnOf: B }, static: { prohibits: [{ act: "change-life", who: { players: [B] } }] } });
     // Bob's turn: over, and his creature is back.
     nextTurn(game);
     expect(activePlayerOf(game.state)).toBe(B);
@@ -273,7 +273,7 @@ describe("during that player's next turn, a prohibition (Sphinx's Decree, Azor)"
     nextTurn(game);
     expect(activePlayerOf(game.state)).toBe(C);
     expect(game.state.laterPlayerEffects).toBeUndefined();
-    expect(game.state.playerEffects?.map((e) => e.cantCast?.players)).toEqual([[C]]);
+    expect(game.state.emblems.at(-1)?.static?.prohibits?.map((p) => (p as { readonly who?: unknown }).who)).toEqual([{ players: [C] }]);
   });
 
   it("is Azor's as it enters", () => {

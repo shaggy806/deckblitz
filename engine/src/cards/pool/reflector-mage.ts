@@ -22,15 +22,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          {
-            kind: "player-effect",
-            duration: "until-your-next-turn",
-            cantCast: {
-              who: { ownerOf: 0 },
-              filter: { sameNameWith: 0 },
-              label: "spells with the same name as that creature",
-            },
-          },
+          { kind: "prohibit", prohibits: [{ act: "cast", who: { ownerOf: 0 }, filter: { sameNameWith: 0 } }], duration: "until-your-next-turn" },
           { kind: "return-to-hand", target: 0 },
         ],
       },

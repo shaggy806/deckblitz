@@ -8,5 +8,5 @@ export default defineCard({
   colors: ["W"],
   types: ["enchantment"],
   text: TEXT,
-  static: [{ affects: { scope: "self" }, prohibits: { who: "each-player", spells: true, castLimit: 1 }, text: TEXT }],
+  static: [{ affects: { scope: "self" }, prohibits: [{ act: "cast", who: "each-player", limit: 1 }], text: TEXT }],
 });

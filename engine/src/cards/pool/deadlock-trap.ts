@@ -34,7 +34,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "tap", target: 0 },
-          { kind: "prohibit", target: 0, abilities: true },
+          { kind: "prohibit", prohibits: [{ act: "activate", who: "each-player", target: 0 }] },
         ],
       },
       resolve: null,

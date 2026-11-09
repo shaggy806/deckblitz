@@ -203,6 +203,7 @@ import _poolDemoralize from "../pool/demoralize.js";
 import _poolDesist from "../pool/desist.js";
 import _poolDespoilerOfSouls from "../pool/despoiler-of-souls.js";
 import _poolDestructiveFlow from "../pool/destructive-flow.js";
+import _poolDetectionTower from "../pool/detection-tower.js";
 import _poolDevilishValet from "../pool/devilish-valet.js";
 import _poolDevouringHellion from "../pool/devouring-hellion.js";
 import _poolDictateOfKruphix from "../pool/dictate-of-kruphix.js";
@@ -1176,6 +1177,7 @@ const shard: CardShard = {
     _poolDesist,
     _poolDespoilerOfSouls,
     _poolDestructiveFlow,
+    _poolDetectionTower,
     _poolDevilishValet,
     _poolDevouringHellion,
     _poolDictateOfKruphix,

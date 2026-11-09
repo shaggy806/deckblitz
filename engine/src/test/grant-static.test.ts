@@ -210,7 +210,7 @@ describe("grant-static", () => {
     run(game, {
       kind: "grant-static",
       target: 0,
-      ability: { affects: { scope: "self" }, cantLoseGame: true, text: "You can't lose the game." },
+      ability: { affects: { scope: "self" }, text: "You can't lose the game.", prohibits: [{ act: "lose-game", who: "you" }] },
       duration: "permanent",
     }, angel);
     run(game, { kind: "lose-life", who: "you", amount: 25 });

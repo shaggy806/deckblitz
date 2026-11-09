@@ -16,12 +16,12 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: { who: "each-player", spells: { chosenName: true } },
+      prohibits: [{ act: "cast", who: "each-player", filter: { chosenName: true } }],
       text: "Spells with the chosen name can't be cast.",
     },
     {
       affects: { scope: "self" },
-      prohibits: { who: "each-player", abilitiesOf: { chosenName: true }, anyZone: true },
+      prohibits: [{ act: "activate", who: "each-player", of: { chosenName: true }, anyZone: true }],
       text: "Activated abilities of sources with the chosen name can't be activated.",
     },
   ],

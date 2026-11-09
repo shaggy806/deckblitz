@@ -10,7 +10,7 @@
 import { describe, expect, it } from "vitest";
 
 import { createDefaultRegistry } from "../cards.js";
-import { computeCharacteristics, playerHasHexproof } from "../characteristics.js";
+import { computeCharacteristics, playerHasKeyword } from "../characteristics.js";
 import { ScriptedController } from "../controller.js";
 import { Game } from "../game.js";
 import { asPlayerId } from "../primitives.js";
@@ -335,8 +335,8 @@ describe("can't lose / can't win", () => {
     game.advanceUntil(quiet);
     const bear = computeCharacteristics(game.state, registry, bears);
     expect([...bear.keywords]).toEqual(expect.arrayContaining(["hexproof", "indestructible"]));
-    expect(playerHasHexproof(game.state, registry, A)).toBe(true);
-    expect(playerHasHexproof(game.state, registry, B)).toBe(true);
+    expect(playerHasKeyword(game.state, registry, A, "hexproof")).toBe(true);
+    expect(playerHasKeyword(game.state, registry, B, "hexproof")).toBe(true);
     const life = game.state.players[B].life;
     game.debugApplyEffect(A, { kind: "damage", who: "each-opponent", amount: 40 });
     expect(game.state.players[B].life).toBe(life);
@@ -345,7 +345,7 @@ describe("can't lose / can't win", () => {
     expect(game.state.result.over).toBe(false);
     // All of it ends at cleanup.
     game.advanceUntil((s) => s.turn.number === 2 || s.result.over);
-    expect(playerHasHexproof(game.state, registry, B)).toBe(false);
+    expect(playerHasKeyword(game.state, registry, B, "hexproof")).toBe(false);
     game.debugApplyEffect(A, { kind: "win-game" });
     expect(game.state.result.winner).toBe(A);
   });

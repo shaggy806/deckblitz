@@ -19,7 +19,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: { who: "you", spells: { notTypes: ["creature"] } },
+      prohibits: [{ act: "cast", who: "you", filter: { notTypes: ["creature"] } }],
       text: PROHIBIT_TEXT,
     },
   ],

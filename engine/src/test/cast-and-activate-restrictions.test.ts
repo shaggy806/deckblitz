@@ -65,20 +65,16 @@ const registry = createDefaultRegistry()
   .register(
     enchantment(MYREL, {
       condition: { kind: "your-turn" },
-      prohibits: {
-        who: "opponents",
-        spells: true,
-        abilitiesOf: { typesAnyOf: ["artifact", "creature", "enchantment", "planeswalker"] },
-      },
+      prohibits: [{ act: "cast", who: "opponents" }, { act: "activate", who: "opponents", of: { typesAnyOf: ["artifact", "creature", "enchantment", "planeswalker"] } }],
     }),
   )
   .register(
     enchantment(MARISI, {
       condition: { kind: "turn-structure", duringCombat: true },
-      prohibits: { who: "opponents", spells: true },
+      prohibits: [{ act: "cast", who: "opponents" }],
     }),
   )
-  .register(enchantment(CODIE, { prohibits: { who: "you", spells: { typesAnyOf: [...PERMANENT_TYPES] } } }))
+  .register(enchantment(CODIE, { prohibits: [{ act: "cast", who: "you", filter: { typesAnyOf: [...PERMANENT_TYPES] } }] }))
   .register(enchantment(HELIOD, { castAsThoughFlash: true }))
   .register(
     enchantment(RIOT, {
@@ -248,7 +244,7 @@ describe("one-shot prohibitions", () => {
   it("Sen Triplets: that player can't cast spells or activate abilities this turn", () => {
     const game = setUp({ [B]: ["Lightning Bolt"] });
     const pinger = game.debugSpawn(PINGER, B, "battlefield", { summoningSick: false });
-    run(game, { kind: "prohibit", who: 0, spells: true, abilities: true }, [B]);
+    run(game, { kind: "prohibit", prohibits: [{ act: "cast", who: { target: 0 } }, { act: "activate", who: { target: 0 } }] }, [B]);
     const bolt = inHand(game, B, "Lightning Bolt");
     priorityTo(game, B, "precombat-main");
     expect(castable(game, B, bolt)).toBe(false);
@@ -261,7 +257,7 @@ describe("one-shot prohibitions", () => {
   it("Koma: a permanent's activated abilities can't be activated this turn — until it's a new object", () => {
     const game = setUp();
     const pinger = game.debugSpawn(PINGER, B, "battlefield", { summoningSick: false });
-    run(game, { kind: "prohibit", target: 0 }, [pinger]);
+    run(game, { kind: "prohibit", prohibits: [{ act: "activate", who: "each-player", target: 0 }] }, [pinger]);
     priorityTo(game, B, "precombat-main");
     expect(activatable(game, B, pinger)).toBe(false);
     run(game, { kind: "flicker", target: 0 }, [pinger]);

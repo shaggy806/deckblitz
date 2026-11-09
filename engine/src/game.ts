@@ -171,18 +171,13 @@ import {
   plainTapMana,
   spellHasSplitSecond,
   spellCantBeCountered,
-  playerCantLoseGame,
-  playerCantLoseLife,
   librarySearchTop,
-  playerCantSearchLibrary,
   searchControlOver,
   searchExileFor,
   playerDamageLifeFloor,
   playerIgnoresStatic,
   staticIgnoreCost,
-  playerCantWinGame,
   playerHasProtectionFromEverything,
-  playerLifeCantChange,
   invalidateComputedCache,
   staticConditionMet,
   spellGrantReaches,
@@ -199,6 +194,21 @@ import {
   withChangeling,
 } from "./characteristics.js";
 import type { Characteristics } from "./characteristics.js";
+import {
+  causeProhibited,
+  costExempt,
+  liveProhibitions,
+  objectProhibited,
+  playerCantLoseGame,
+  playerCantLoseLife,
+  playerCantSearchLibrary,
+  playerCantWinGame,
+  playerLifeCantChange,
+  prohibitionsOnPlayer,
+  reachesObject,
+  whoBinds,
+  type Prohibition,
+} from "./prohibitions.js";
 import { changesOnlyColors, changesTypes, patchModifier, type ResolvedPatch } from "./characteristics-patch.js";
 import { planTokenEvent } from "./token-replacements.js";
 import type { PlannedTokens, TokenKind, TokenReplacementInstance } from "./token-replacements.js";
@@ -2330,7 +2340,7 @@ export class Game {
       whyCannotPlayLandNow: (land) => this.whyCannotPlayLandNow(land.player, land.card, land.face ?? 0),
       attackTaxOf: (defender) => this.attackTaxOn(defender),
       attackTaxBudget: (player, attackers) => this.attackTaxBudget(player, attackers),
-      attackTaxLifeBudget: (player) => (this.canPayLife(player, 1) ? this.state.players[player].life : 0),
+      attackTaxLifeBudget: (player) => (this.canPayLife(player, 1, "not-a-cost") ? this.state.players[player].life : 0),
       whyCannotPayAttackTax: (player, declarations, phyrexianLife) => {
         const owed = this.attackCostParts(declarations);
         if (!this.attackCostPartsPayable(player, owed)) {
@@ -2352,14 +2362,14 @@ export class Game {
           mana === "" ? null : this.withLifeChoice(phyrexianLife, () => this.attackTaxPayment(player, declarations, mana));
         if (mana !== "" && payment === null) return `${player} can't pay the ${mana} it costs to attack`;
         // A mana source paying in life draws on the same total (rule 119.4).
-        return this.canPayLife(player, life + (payment?.life ?? 0))
+        return this.canPayLife(player, life + (payment?.life ?? 0), "not-a-cost")
           ? null
           : `${player} can't pay the ${life} life it costs to attack`;
       },
       whyCannotPayBlockTax: (player, { generic, life }) => {
         const payment = generic === 0 ? null : this.payMana(player, parseManaCost(`{${generic}}`));
         if (generic > 0 && payment === null) return `${player} can't pay the {${generic}} it costs to block`;
-        return life + (payment?.life ?? 0) === 0 || this.canPayLife(player, life + (payment?.life ?? 0))
+        return life + (payment?.life ?? 0) === 0 || this.canPayLife(player, life + (payment?.life ?? 0), "not-a-cost")
           ? null
           : `${player} can't pay the ${life} life it costs to block`;
       },
@@ -5149,7 +5159,7 @@ export class Game {
               ...manaXPlan,
               maxX: Math.min(
                 manaXPlan.maxX,
-                playerCantLoseLife(this.state, player) ? 0 : Math.max(0, this.state.players[player].life),
+                playerCantLoseLife(this.state, this.registry, player) ? 0 : Math.max(0, this.state.players[player].life),
               ),
             }
           : manaXPlan;
@@ -5593,7 +5603,7 @@ export class Game {
             ? // "Pay X life" — the ceiling is what you have, not what your
               // lands can make (rule 118.4: any amount of life you have);
               // nothing but 0 while they can't lose life (119.8).
-              { xCost: { maxX: playerCantLoseLife(this.state, player) ? 0 : Math.max(0, this.state.players[player].life) } }
+              { xCost: { maxX: playerCantLoseLife(this.state, this.registry, player) ? 0 : Math.max(0, this.state.players[player].life) } }
             : def.additionalCost?.chooseNumber !== undefined
               ? // "Choose a number between 0 and 5" (Liquid Fire): no more than
                 // the card's range says, whatever there is to pay with.
@@ -7184,7 +7194,7 @@ export class Game {
       if (land?.zone !== "battlefield" || land.controller !== offer.player || !land.tapped) {
         continue;
       }
-      if (!this.canPayLife(offer.player, offer.life)) continue;
+      if (!this.canPayLife(offer.player, offer.life, "not-a-cost")) continue;
       state.awaiting = { kind: "pay-life-for-untapped", ...offer };
       return;
     }
@@ -7221,7 +7231,7 @@ export class Game {
     const { source, life } = awaiting;
     this.state.awaiting = null;
     const object = this.state.objects[source];
-    if (pay && object !== undefined && object.zone === "battlefield" && this.canPayLife(player, life)) {
+    if (pay && object !== undefined && object.zone === "battlefield" && this.canPayLife(player, life, "not-a-cost")) {
       object.tapped = false;
       this.emit({ type: "permanent-untapped", object: source, asItEntered: true });
       this.changeLife(player, -life);
@@ -7913,7 +7923,7 @@ export class Game {
    * energy? */
   private canPayLifeAndEnergy(player: PlayerId, life: number, energy: number): boolean {
     const ps = this.state.players[player];
-    return this.canPayLife(player, life) && (energy <= 0 || ps.energy >= energy);
+    return this.canPayLife(player, life, "not-a-cost") && (energy <= 0 || ps.energy >= energy);
   }
 
   /** Answers a pending `choose-modes` decision. Applies the chosen modes'
@@ -8904,7 +8914,6 @@ export class Game {
     delete this.state.combatBlockLimits;
     delete this.state.turnDefenderAttacks;
     delete this.state.turnUnblockedAssignments;
-    delete this.state.turnProhibitions;
     delete this.state.phasesAfterThisCombat;
     delete this.state.turn.addedUpkeep;
     delete this.state.turn.endsAfterAddedCombat;
@@ -9187,6 +9196,11 @@ export class Game {
     const left = later.filter((e) => !(moment.turnBegins.includes(e.turnOf) && turn > e.after));
     for (const e of later) {
       if (left.includes(e) || e.turnOf !== this.activePlayer) continue;
+      if ("timedStatic" in e.effect) {
+        this.createEmblem(e.effect.owner, "", e.effect.timedStatic, undefined, [], e.effect.owner, [], "end-of-turn");
+        invalidateComputedCache();
+        continue;
+      }
       (this.state.playerEffects ??= []).push({ ...e.effect, expires: "end-of-turn" });
     }
     if (left.length > 0) this.state.laterPlayerEffects = left;
@@ -10084,6 +10098,9 @@ export class Game {
   private untapUnlessStunned(id: ObjectId): boolean {
     const object = this.state.objects[id];
     if (object === undefined || !object.tapped) return false;
+    // "Can't become untapped" (Frozen in Ice): it never would, so no stun
+    // counter comes off either (rule 122.1d is a replacement of an untap).
+    if (objectProhibited(this.state, this.registry, "untap", id)) return false;
     if ((object.counters.stun ?? 0) > 0) {
       object.counters.stun -= 1;
       if (object.counters.stun <= 0) delete object.counters.stun;
@@ -13627,27 +13644,15 @@ export class Game {
    * Chamber's static), judged as the face `cardId` would be played as;
    * `null` when nothing bars it. */
   private whyLandPlayProhibited(player: PlayerId, cardId: ObjectId, face: number, def: CardDefinition): string | null {
-    // "Target player can't play lands this turn" (Turf Wound).
-    if (this.state.turnProhibitions?.players.some((p) => p.player === player && p.lands === true) === true) {
-      return `${player} can't play lands this turn`;
-    }
-    // "…and lands with the chosen name can't be played" until a turn
-    // (Conjurer's Ban).
-    for (const effect of this.state.playerEffects ?? []) {
-      const cant = effect.cantCast;
-      if (cant?.lands !== true || !cant.players.includes(player) || !this.prohibitionReachesZone(cant, cardId)) continue;
-      const barred = this.withFace(cardId, face, () =>
-        matchesFilter(this.state, this.registry, cardId, cant.filter, { you: effect.owner }),
-      );
-      if (barred) return `${player} can't play ${def.name}`;
-    }
-    for (const { source, prohibits } of this.prohibitionsOn(player)) {
-      const lands = prohibits.lands;
-      if (lands === undefined || !this.prohibitionReachesZone(prohibits, cardId)) continue;
-      const barred = this.withFace(cardId, face, () =>
-        matchesFilter(this.state, this.registry, cardId, lands, { you: source.controller, source: source.id }),
-      );
-      if (barred) return `${player} can't play ${def.name} (${printedCardName(source)})`;
+    for (const { source, prohibition } of prohibitionsOnPlayer(this.state, this.registry, "play-land", player)) {
+      if (!this.prohibitionReachesZone(prohibition, cardId)) continue;
+      const filter = prohibition.filter;
+      const barred =
+        filter === undefined ||
+        this.withFace(cardId, face, () =>
+          matchesFilter(this.state, this.registry, cardId, filter, { you: source.controller, source: source.id }),
+        );
+      if (barred) return `${player} can't play ${def.name} (${this.prohibitionSourceName(source)})`;
     }
     return null;
   }
@@ -14644,7 +14649,7 @@ export class Game {
   }
 
   private canEnchant(aura: ObjectId, host: ObjectId, controller: PlayerId, def: CardDefinition): boolean {
-    if (host === aura) return false;
+    if (host === aura || this.attachProhibited("aura", aura, host)) return false;
     const target = this.state.objects[host];
     if (target === undefined || !this.inGame(target)) return false;
     const auraObject = this.state.objects[aura];
@@ -14768,7 +14773,7 @@ export class Game {
    * being one as it attaches, 702.151b); one still a creature once attached
    * (March of the Machines) becomes unattached (its rulings). */
   private canEquip(equipment: ObjectId, host: ObjectId, attaching = false, planeswalkerToo = false): boolean {
-    if (host === equipment) return false;
+    if (host === equipment || this.attachProhibited("equipment", equipment, host)) return false;
     const target = this.state.objects[host];
     if (target === undefined || target.zone !== "battlefield" || !this.inGame(target)) return false;
     const hostTypes = effectiveTypes(this.state, this.registry, target);
@@ -20919,7 +20924,7 @@ export class Game {
       type: "creature",
       controlledBy: "you",
       power: { op: "gte", n: amount },
-    }).filter((id) => this.canBeSacrificed(id));
+    }).filter((id) => this.canBeSacrificed(id) && !this.sacrificeCostProhibited(player, id));
   }
 
   /** Ask the next casualty cost owed (see `queueCasualty`) as a
@@ -21295,7 +21300,7 @@ export class Game {
     if (sac === undefined) return [];
     // A cost naming a permanent that can't be sacrificed can't be paid (rule
     // 701.21a), and one letting the player choose never offers it.
-    if (sac === "self") return this.canBeSacrificed(sourceId) ? [sourceId] : [];
+    if (sac === "self") return this.canBeSacrificed(sourceId) && !this.sacrificeCostProhibited(player, sourceId) ? [sourceId] : [];
     // "Sacrifice Ninja's Kunai": the granting permanent, only while the
     // activating player controls it (701.21a).
     if (sac === "granter") {
@@ -21310,7 +21315,7 @@ export class Game {
       // source out of its own sacrifice cost. Its targets are left alone.
       if (ability.otherOnly === true && id === sourceId) return false;
       // Exiled rather than sacrificed, what can't be sacrificed still pays.
-      const payable = ability.cost.exilesSacrifice === true || this.canBeSacrificed(id);
+      const payable = (ability.cost.exilesSacrifice === true || this.canBeSacrificed(id)) && !this.sacrificeCostProhibited(player, id);
       if (sac === "creature-you-control") {
         // What's a creature *now*: an animated land can be sacrificed, a
         // creature that stopped being one can't.
@@ -25175,7 +25180,7 @@ export class Game {
         // discarding, and an exhaust ability's single use.
         if (ability.cost.tapOthers !== undefined) return;
         // A Treasure that can't be sacrificed can't pay its own cost.
-        if (ability.cost.sacrifice === "self" && !this.canBeSacrificed(id)) return;
+        if (ability.cost.sacrifice === "self" && (!this.canBeSacrificed(id) || this.sacrificeCostProhibited(player, id, true))) return;
         // A counter put on the source as the cost (Wall of Roots) is paid by
         // `useManaSource`, but only on an untapped once-a-turn ability — the
         // shape every such card prints.
@@ -25252,7 +25257,7 @@ export class Game {
         if (ability.effect.who !== undefined && ability.effect.who !== "you") return;
         const pain = ability.effect.painToController ?? 0;
         const lifeCost = abilityLifeCost(this.state, player, ability.cost);
-        if (lifeCost === null) return;
+        if (lifeCost === null || (lifeCost > 0 && this.lifeCostProhibited(player, true))) return;
         // "Add one mana of the chosen color" resolves to whatever this
         // permanent's controller named as it entered; before that choice is
         // answered it produces nothing.
@@ -25744,7 +25749,8 @@ export class Game {
     return {
       pool: this.state.players[player].manaPool,
       life: this.state.players[player].life - reserved,
-      ...(playerCantLoseLife(this.state, player) ? { cantPayLife: true } : {}),
+      ...(playerCantLoseLife(this.state, this.registry, player) || this.lifeCostProhibited(player, true) ? { cantPayLife: true } : {}),
+      ...(this.lifeCostProhibited(player, false) ? { cantPayLifeForPips: true } : {}),
       ...(this.state.players[player].life - reserved <= this.state.rules.startingLife / 4 ? { lowLife: true } : {}),
       ...(this.phyrexianLifeChoice !== undefined ? { phyrexianLife: this.phyrexianLifeChoice } : {}),
       ...(lifeForPips.length > 0 ? { lifeForPips } : {}),
@@ -36831,7 +36837,7 @@ export class Game {
           .map((id) => facts(id, false));
       },
       lifePaymentsOf: (each) =>
-        playerCantLoseLife(this.state, controller) || each <= 0
+        playerCantLoseLife(this.state, this.registry, controller) || each <= 0
           ? 0
           : Math.max(0, Math.floor(this.state.players[controller].life / each)),
       discardCard: (card) => {
@@ -37207,8 +37213,7 @@ export class Game {
         if (object === undefined || object.zone !== "battlefield" || object.isCommander !== true) return;
         this.moveObject(target.object, "command");
       },
-      prohibit: (players, object, spells, abilities, untilYourNextTurn) =>
-        this.prohibit(players, object, spells, abilities, untilYourNextTurn === true ? controller : undefined),
+      prohibit: (prohibits, expires, during) => this.prohibit(controller, source, prohibits, expires, during),
       prohibitRegeneration: (target) => {
         const turn = this.state.turn.number;
         if (target === "dealt-damage-this-way") {
@@ -37236,20 +37241,6 @@ export class Game {
         if (object === undefined || object.zone !== "battlefield") return;
         object.cantBeRegeneratedTurn = turn;
         this.emit({ type: "prohibition-imposed", players: [], object: id, spells: false, abilities: false, regeneration: true });
-      },
-      prohibitMonarch: (players) => {
-        const live = players.filter((p) => this.state.players[p]?.hasLost === false);
-        if (live.length === 0) return;
-        for (const p of live) this.state.players[p].cantBecomeMonarchTurn = this.state.turn.number;
-        this.emit({ type: "prohibition-imposed", players: live, spells: false, abilities: false, monarch: true });
-      },
-      prohibitLandPlays: (players) => {
-        const live = players.filter((p) => this.state.players[p]?.hasLost === false);
-        if (live.length === 0) return;
-        const record = (this.state.turnProhibitions ??= { players: [], permanents: [] });
-        for (const player of live) record.players.push({ player, spells: false, abilities: false, lands: true });
-        // No log line: the client's prohibition line names only spells and
-        // abilities, so a lands-only one would read "can't  this turn".
       },
       spellsCastThisTurn: (player) => this.state.players[player]?.spellsCastThisTurnAs?.length ?? 0,
       addPlayerEffect: (effect, during) => {
@@ -40134,9 +40125,9 @@ export class Game {
           this.withLifeChoice(Number.MAX_SAFE_INTEGER, () =>
             this.payMana(player, parseManaCost(option.pay), undefined, undefined, otherCostPurpose(option.pay, option.paysX === true, option.paysFor)),
           );
-        return payment !== null && this.canPayLife(player, payment.life + (option.andLife ?? 0));
+        return payment !== null && this.canPayLife(player, payment.life + (option.andLife ?? 0), "not-a-cost");
       }
-      if ("payLife" in option) return this.canPayLife(player, option.payLife);
+      if ("payLife" in option) return this.canPayLife(player, option.payLife, "not-a-cost");
       if ("payEnergy" in option) return this.state.players[player].energy >= option.payEnergy;
       if ("putCounter" in option) return hasPermanent(option.on);
       if ("returnToHand" in option) return hasPermanent(option.returnToHand);
@@ -44378,103 +44369,109 @@ export class Game {
 
   /** See the `"lose-keywords"` {@link EffectSpec}: a modifier that takes the
    * keywords away in layer 6 at its timestamp (rule 613.7). */
-  /** See the `"prohibit"` {@link EffectSpec}. */
+  /** See the `"prohibit"` {@link EffectSpec}: a timed static (rule 611.2c)
+   * holding what was bound as it resolved. */
   private prohibit(
-    players: readonly PlayerId[],
-    target: TargetRef | undefined,
-    spells: boolean | { readonly filter: CardFilter; readonly label: string; readonly you: PlayerId },
-    abilities: boolean,
-    /** An object's prohibition lasts until this player's next turn (Dovin
-     * Baan): a modifier like detain's, ending when their next turn begins. */
-    untilTurnOf?: PlayerId,
+    controller: PlayerId,
+    sourceId: ObjectId,
+    prohibits: readonly Prohibition[],
+    expires: Expiry,
+    during?: PlayerId,
   ): void {
-    if (target !== undefined && untilTurnOf !== undefined) {
-      if (target.kind !== "object") return;
-      const id = this.splitOneFromStack(target.object);
-      const object = this.state.objects[id];
-      if (object === undefined || object.zone !== "battlefield") return;
-      object.modifiers.push({
-        power: 0,
-        toughness: 0,
-        keywords: [],
-        abilitiesCantBeActivated: true,
-        untilEndOfTurn: false,
-        untilTurnOf,
-      });
-      invalidateComputedCache();
-      this.emit({
-        type: "prohibition-imposed",
-        players: [],
-        object: id,
-        spells: false,
-        abilities: true,
-        untilYourNextTurn: true,
-        by: untilTurnOf,
+    // Naming one token of a stack singles it out.
+    const bound = prohibits.map((p): Prohibition => {
+      const objects = (p as { readonly objects?: readonly { readonly object: ObjectId }[] }).objects;
+      if (objects === undefined) return p;
+      return {
+        ...p,
+        objects: objects.map(({ object }) => {
+          const id = this.splitOneFromStack(object);
+          return { object: id, stint: this.state.objects[id]?.zoneChangeCount ?? 0 };
+        }),
+      } as Prohibition;
+    });
+    const made: StaticAbility = { affects: { scope: "self" }, prohibits: bound, text: "" };
+    if (during !== undefined) {
+      (this.state.laterPlayerEffects ??= []).push({
+        turnOf: during,
+        after: this.state.turn.number,
+        effect: { owner: controller, timedStatic: made },
       });
       return;
     }
-    const record = (this.state.turnProhibitions ??= { players: [], permanents: [] });
-    if (target !== undefined) {
-      if (target.kind !== "object") return;
-      const object = this.state.objects[target.object];
-      if (object === undefined || object.zone !== "battlefield") return;
-      record.permanents.push({ object: object.id, zoneChangeCount: object.zoneChangeCount ?? 0 });
-      this.emit({ type: "prohibition-imposed", players: [], object: object.id, spells: false, abilities: true });
-      return;
-    }
-    if (players.length === 0 || (spells === false && !abilities)) return;
-    if (typeof spells === "object") {
-      // Only some spells — judged from the imposing effect's controller's
-      // side.
-      for (const player of players) {
-        record.players.push({
-          player,
-          spells: false,
-          abilities,
-          spellsMatching: { filter: spells.filter, you: spells.you },
-        });
-      }
-      this.emit({
-        type: "prohibition-imposed",
-        players: [...players],
-        spells: true,
-        spellsLabel: spells.label,
-        abilities,
-      });
-      return;
-    }
-    for (const player of players) record.players.push({ player, spells, abilities });
-    this.emit({ type: "prohibition-imposed", players: [...players], spells, abilities });
+    this.createEmblem(controller, "", made, this.nameOfSource(sourceId), [], controller, [], expires);
+    invalidateComputedCache();
+    this.emitProhibitions(bound, expires, controller);
   }
 
-  /**
-   * The battlefield statics whose `prohibits` binds `player` right now (its
-   * `who` from the static's controller's side, its `condition` met), each
-   * with its source.
-   */
-  private prohibitionsOn(
-    player: PlayerId,
-  ): { readonly source: GameObject; readonly prohibits: NonNullable<StaticAbility["prohibits"]> }[] {
-    const out: { source: GameObject; prohibits: NonNullable<StaticAbility["prohibits"]> }[] = [];
-    for (const id of this.staticSourceIds()) {
-      const source = this.state.objects[id];
-      if (hasLostAbilities(this.state, this.registry,source) || this.state.players[source.controller]?.hasLost === true) continue;
-      for (const ability of this.staticsOfSource(source)) {
-        const prohibits = ability.prohibits;
-        if (prohibits === undefined) continue;
-        const binds =
-          prohibits.who === "each-player" ||
-          (prohibits.who === "enchanted-player"
-            ? player === source.attachedToPlayer
-            : prohibits.who === "you"
-              ? player === source.controller
-              : player !== source.controller);
-        if (!binds) continue;
-        if (ability.condition !== undefined && !this.staticActive(source, ability)) continue;
-        out.push({ source, prohibits });
+  /** The source's name, for what a timed static came from. */
+  private nameOfSource(sourceId: ObjectId): string | undefined {
+    const from = this.state.objects[sourceId];
+    return from === undefined ? undefined : printedCardName(from);
+  }
+
+  /** The log's line for what was just prohibited. Acts the client's line
+   * doesn't name say nothing. */
+  private emitProhibitions(prohibits: readonly Prohibition[], expires: Expiry, controller: PlayerId): void {
+    const until = typeof expires === "object" && "untilTurnOf" in expires ? { untilYourNextTurn: true as const, by: controller } : {};
+    for (const p of prohibits) {
+      if (p.act === "activate" && p.objects !== undefined) {
+        for (const { object } of p.objects) {
+          this.emit({ type: "prohibition-imposed", players: [], object, spells: false, abilities: true, ...until });
+        }
+        continue;
+      }
+      if (p.act !== "cast" && p.act !== "activate" && p.act !== "become-monarch") continue;
+      if (typeof p.who !== "object") continue;
+      const players = [...p.who.players];
+      if (p.act === "become-monarch") {
+        this.emit({ type: "prohibition-imposed", players, spells: false, abilities: false, monarch: true });
+      } else if (p.act === "activate") {
+        this.emit({ type: "prohibition-imposed", players, spells: false, abilities: true });
+      } else {
+        this.emit({
+          type: "prohibition-imposed",
+          players,
+          spells: true,
+          ...(p.filter !== undefined || p.from !== undefined || p.notFrom !== undefined ? { spellsLabel: "certain spells" } : {}),
+          abilities: false,
+        });
       }
     }
-    return out;
+  }
+
+  /** Whether `host` "can't be enchanted" or "can't be equipped"; `other`
+   * spares the permanent that says so (Consecrate Land). */
+  private attachProhibited(attachment: "aura" | "equipment", id: ObjectId, host: ObjectId): boolean {
+    return liveProhibitions(this.state, this.registry, "be-attached").some(
+      (live) =>
+        live.prohibition.attachment === attachment &&
+        !(live.prohibition.other === true && live.source.id === id) &&
+        reachesObject(this.state, this.registry, live, host),
+    );
+  }
+
+  /** Whether `player` is barred from paying life for a spell or ability. */
+  private lifeCostProhibited(player: PlayerId, mana: boolean): boolean {
+    return prohibitionsOnPlayer(this.state, this.registry, "pay-life", player).some(
+      ({ prohibition }) => !costExempt(prohibition.except, mana),
+    );
+  }
+
+  /** Whether `player` is barred from sacrificing `id` for a spell or ability. */
+  private sacrificeCostProhibited(player: PlayerId, id: ObjectId, mana = false): boolean {
+    return prohibitionsOnPlayer(this.state, this.registry, "sacrifice-for-cost", player).some(
+      ({ source, prohibition }) =>
+        !costExempt(prohibition.except, mana) &&
+        (prohibition.filter === undefined ||
+          matchesFilter(this.state, this.registry, id, prohibition.filter, { you: source.controller, source: source.id })),
+    );
+  }
+
+  /** What a prohibition's reason names: its permanent, or the effect's card. */
+  private prohibitionSourceName(source: GameObject): string {
+    if (source.kind !== "emblem") return printedCardName(source);
+    return this.state.emblems.find((e) => e.object === source.id)?.sourceName ?? "an effect";
   }
 
   /** Whether a static prohibition's `from` / `notFrom` lets it reach
@@ -44506,67 +44503,29 @@ export class Game {
         return `${printedCardName(spell)} has split second`;
       }
     }
-    // Epic (rule 702.50b).
-    if (this.state.players[player]?.cantCastSpellsForGame === true) {
-      return `${player} can't cast spells for the rest of the game`;
-    }
-    for (const p of this.state.turnProhibitions?.players ?? []) {
-      if (p.player !== player) continue;
-      if (p.spells) return `${player} can't cast spells this turn`;
-      const only = p.spellsMatching;
-      if (only !== undefined && matchesFilter(this.state, this.registry, cardId, only.filter, { you: only.you })) {
-        return `${player} can't cast ${def.name} this turn`;
-      }
-    }
-    // "Until your next turn, your opponents can't cast spells with the chosen
-    // name" (Academic Probation).
-    for (const effect of this.state.playerEffects ?? []) {
-      const cant = effect.cantCast;
-      if (cant === undefined || !cant.players.includes(player) || !this.prohibitionReachesZone(cant, cardId)) continue;
-      if (matchesFilter(this.state, this.registry, cardId, cant.filter, { you: effect.owner })) {
-        return `${player} can't cast ${cant.label}`;
-      }
-    }
-    // "You can cast only one more spell this turn" (Irencrag Feat).
     const castSoFar = this.state.players[player]?.spellsCastThisTurnAs ?? [];
-    for (const effect of this.state.playerEffects ?? []) {
-      const cap = effect.castCaps?.find((c) => c.player === player);
-      if (cap !== undefined && castSoFar.length >= cap.total) return `${player} can't cast any more spells this turn`;
-    }
-    // "Until your next turn, your opponents can't cast spells from anywhere
-    // other than their hands" (Avatar's Wrath): the command zone, a
-    // graveyard, exile and a library top all barred.
-    if (
-      (this.state.playerEffects ?? []).some((e) => e.castOnlyFromHand?.includes(player) === true) &&
-      !this.state.zones.perPlayer[player].hand.includes(cardId)
-    ) {
-      return `${player} can't cast spells from anywhere other than their hand`;
-    }
-    for (const { source, prohibits } of this.prohibitionsOn(player)) {
-      // "Only any time they could cast a sorcery" (Teferi, Time Raveler).
-      if (prohibits.castOnlyAsSorcery === true && this.whyNotSorcerySpeed(player, `cast ${def.name}`) !== null) {
-        return `${player} can cast spells only as a sorcery (${printedCardName(source)})`;
-      }
-      const spells = prohibits.spells;
-      if (spells === undefined || !this.prohibitionReachesZone(prohibits, cardId)) continue;
+    for (const { source, prohibition } of prohibitionsOnPlayer(this.state, this.registry, "cast", player)) {
+      const { filter, limit, unless } = prohibition;
+      // "Only any time they could cast a sorcery" (Teferi, Time Raveler);
+      // "only during their own turns" (Dosan). With no more than that, it
+      // stands alone.
+      if (unless === "sorcery-timing" && this.whyNotSorcerySpeed(player, `cast ${def.name}`) === null) continue;
+      if (unless === "own-turn" && this.activePlayer === player) continue;
+      if (!this.prohibitionReachesZone(prohibition, cardId)) continue;
+      const context = { you: source.controller, source: source.id };
+      if (filter !== undefined && !matchesFilter(this.state, this.registry, cardId, filter, context)) continue;
+      // "Can't cast more than one spell each turn" (Rule of Law): only once
+      // they've cast that many, each read as it was cast.
       if (
-        (spells === true ||
-          matchesFilter(this.state, this.registry, cardId, spells, { you: source.controller, source: source.id })) &&
-        // "Can't cast more than one spell each turn" (Rule of Law): only once
-        // they've cast that many, each read as it was cast.
-        (prohibits.castLimit === undefined ||
-          castSoFar.filter(
-            ({ id, spell }) =>
-              spells === true ||
-              matchesFilter(this.state, this.registry, id, spells, {
-                you: source.controller,
-                source: source.id,
-                snapshot: spell,
-              }),
-          ).length >= prohibits.castLimit)
+        limit !== undefined &&
+        castSoFar.filter(
+          ({ id, spell }) =>
+            filter === undefined || matchesFilter(this.state, this.registry, id, filter, { ...context, snapshot: spell }),
+        ).length < limit
       ) {
-        return `${player} can't cast ${def.name} (${printedCardName(source)})`;
+        continue;
       }
+      return `${player} can't cast ${def.name} (${this.prohibitionSourceName(source)})`;
     }
     const object = this.state.objects[cardId];
     if (
@@ -44599,33 +44558,24 @@ export class Game {
   private abilitiesProhibited(player: PlayerId, source: GameObject, mana: boolean, tap = false, loyalty = false): boolean {
     // Detained (rule 701.35a) — the modifier is gone once its duration ends.
     if (source.modifiers.some((m) => m.abilitiesCantBeActivated === true)) return true;
-    const turn = this.state.turnProhibitions;
-    if (turn !== undefined) {
-      if (turn.players.some((p) => p.player === player && p.abilities)) return true;
-      if (
-        turn.permanents.some(
-          (p) => p.object === source.id && p.zoneChangeCount === (source.zoneChangeCount ?? 0),
-        )
-      ) {
-        return true;
-      }
-    }
     // "Of artifacts" reaches permanents alone (rule 109.2); "of sources"
     // reaches a card in any zone (`anyZone`).
     const onBattlefield = source.zone === "battlefield";
-    return this.prohibitionsOn(player).some(
-      ({ source: by, prohibits }) =>
-        prohibits.abilitiesOf !== undefined &&
-        (onBattlefield || prohibits.anyZone === true) &&
-        !(mana && prohibits.exceptManaAbilities === true) &&
-        !(loyalty && prohibits.exceptLoyaltyAbilities === true) &&
-        (prohibits.onlyLoyaltyAbilities !== true || loyalty) &&
-        (prohibits.onlyTapAbilities !== true || tap) &&
-        matchesFilter(this.state, this.registry, source.id, prohibits.abilitiesOf, {
-          you: by.controller,
-          source: by.id,
-        }),
-    );
+    return prohibitionsOnPlayer(this.state, this.registry, "activate", player).some(({ source: by, prohibition }) => {
+      if (prohibition.unless === "own-turn" && this.activePlayer === player) return false;
+      if (prohibition.unless === "sorcery-timing" && this.whyNotSorcerySpeed(player, "activate") === null) return false;
+      if (costExempt(prohibition.except, mana, loyalty)) return false;
+      if (prohibition.only === "loyalty" && !loyalty) return false;
+      if (prohibition.only === "tap" && !tap) return false;
+      if (prohibition.objects !== undefined) {
+        return prohibition.objects.some((b) => b.object === source.id && b.stint === (source.zoneChangeCount ?? 0));
+      }
+      if (!onBattlefield && prohibition.anyZone !== true) return false;
+      return (
+        prohibition.of === undefined ||
+        matchesFilter(this.state, this.registry, source.id, prohibition.of, { you: by.controller, source: by.id })
+      );
+    });
   }
 
   /** "You may cast spells as though they had flash" (Heliod, the Warped
@@ -44848,7 +44798,7 @@ export class Game {
     // A player who can't gain life can't be given a higher life total this
     // way, nor one who can't lose life a lower one (rules 119.7–8).
     if (delta > 0 && this.playerCantGainLife(player)) return;
-    if (delta < 0 && playerCantLoseLife(this.state, player)) return;
+    if (delta < 0 && playerCantLoseLife(this.state, this.registry, player)) return;
     object.modifiers.push({
       timestamp: this.freshTimestamp(),
       power: 0,
@@ -44875,7 +44825,7 @@ export class Game {
     const [higher, lower] = delta > 0 ? [first, second] : [second, first];
     // Rules 119.7–8: no higher life total for one who can't gain life, no
     // lower one for one who can't lose it.
-    if (this.playerCantGainLife(higher) || playerCantLoseLife(this.state, lower)) return;
+    if (this.playerCantGainLife(higher) || playerCantLoseLife(this.state, this.registry, lower)) return;
     this.changeLife(first, delta);
     this.changeLife(second, -delta);
   }
@@ -44885,7 +44835,7 @@ export class Game {
    * gain life"). Asked before an exchange, which can't happen at all then
    * (rule 701.12a). */
   private playerCantGainLife(player: PlayerId): boolean {
-    if (playerLifeCantChange(this.state, player)) return true;
+    if (playerLifeCantChange(this.state, this.registry, player)) return true;
     return this.playerEventReplacements(player).some(
       ({ r }) => r.event === "would-gain-life" && r.prevent === true && r.gainsNoLifeInstead !== true,
     );
@@ -45130,17 +45080,9 @@ export class Game {
   }
 
   /** Whether a battlefield static says `object` can't become suspected
-   * (Airtight Alibi's `cantBecomeSuspected`). */
+   * (Airtight Alibi). */
   private cantBecomeSuspected(object: GameObject): boolean {
-    for (const id of this.state.zones.shared.battlefield) {
-      const source = this.state.objects[id];
-      if (source === undefined || hasLostAbilities(this.state, this.registry, source)) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
-        if (ability.cantBecomeSuspected !== true || !this.staticActive(source, ability)) continue;
-        if (staticReaches(this.state, this.registry, source, ability, object)) return true;
-      }
-    }
-    return false;
+    return objectProhibited(this.state, this.registry, "become-suspected", object.id);
   }
 
   /** `id` becomes suspected (rule 701.60a) — unless it already is (701.60d),
@@ -45626,6 +45568,7 @@ export class Game {
     const object = this.state.objects[id];
     if (object === undefined || object.zone !== "battlefield") return;
     if (!this.isTransformingDfc(id)) return;
+    if (objectProhibited(this.state, this.registry, "transform", id)) return;
     object.face = (object.face ?? 0) === 0 ? 1 : 0;
     if (chosenPlayer !== undefined && this.registry.get(rulesTextName(object)).choosePlayerOnTransform !== undefined) {
       if (chosenPlayer === null) delete object.chosenPlayer;
@@ -47635,7 +47578,7 @@ export class Game {
    */
   private phaseOut(ids: readonly ObjectId[], until?: PhasedOutStatus["until"]): ObjectId[] {
     const battlefield = this.state.zones.shared.battlefield;
-    const direct = ids.filter((id, i) => ids.indexOf(id) === i && this.state.objects[id]?.zone === "battlefield");
+    const direct = ids.filter((id, i) => ids.indexOf(id) === i && !objectProhibited(this.state, this.registry, "phase-out", id) && this.state.objects[id]?.zone === "battlefield");
     if (direct.length === 0) return [];
     // What phases out with what: everything attached to one phasing out.
     const withHost = new Map<ObjectId, ObjectId>();
@@ -47693,7 +47636,7 @@ export class Game {
    * rulings). Returns what phased in.
    */
   private phaseIn(ids: readonly ObjectId[], tapped: readonly ObjectId[] = []): ObjectId[] {
-    const queue = ids.filter((id, i) => ids.indexOf(id) === i && this.state.objects[id]?.zone === "phased-out");
+    const queue = ids.filter((id, i) => ids.indexOf(id) === i && !objectProhibited(this.state, this.registry, "phase-in", id) && this.state.objects[id]?.zone === "phased-out");
     const all = new Set<ObjectId>(queue);
     const order: ObjectId[] = [];
     while (queue.length > 0) {
@@ -48120,6 +48063,9 @@ export class Game {
     // being asked can still be told why (see `GameState.decisionSource`).
     const source = this.state.decisionSource;
     for (const player of players) {
+      // "Spells and abilities your opponents control can't cause you to
+      // sacrifice permanents" (Sigarda, Host of Herons).
+      if (causeProhibited(this.state, this.registry, "sacrifice", player, controller)) continue;
       // A per-player count ("half the creatures they control") is read for
       // each player now, before anyone sacrifices (rule 608.2h).
       const theirs = typeof count === "number" ? count : count(player);
@@ -48957,7 +48903,7 @@ export class Game {
       if (also.reveal !== undefined && this.revealCostCandidates(player, also.reveal, id).length < also.reveal.count) {
         return `${player} has too few ${also.reveal.text} in hand to turn it face up`;
       }
-      if (also.payLife !== undefined && !this.canPayLife(player, also.payLife)) {
+      if (also.payLife !== undefined && !this.canPayLife(player, also.payLife, "not-a-cost")) {
         return `${player} does not have ${also.payLife} life to pay`;
       }
       if (also.sacrifice !== undefined) {
@@ -50701,7 +50647,7 @@ export class Game {
   /** The active statics of the permanents `controller` controls that `pick`
    * selects, with their sources — none once they have left the game, and
    * none of a permanent that has lost its abilities. */
-  /** Whether a `preventsCounters` static (Solemnity, Melira) stops counters
+  /** Whether a `get-counters` prohibition (Solemnity, Melira) stops counters
    * of `kind` going on `on` — a permanent, as it is or as it enters, or a
    * player. */
   private countersPrevented(
@@ -50711,26 +50657,13 @@ export class Game {
      * counters it enters with (Solemnity's ruling). */
     enteringWith?: ReadonlySet<ObjectId>,
   ): boolean {
-    for (const id of this.state.zones.shared.battlefield) {
-      const source = this.state.objects[id];
-      if (source === undefined || hasLostAbilities(this.state, this.registry,source) || enteringWith?.has(id) === true) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
-        const prevents = ability.preventsCounters;
-        if (prevents === undefined || (prevents.kind !== undefined && prevents.kind !== kind)) continue;
-        if (!this.staticActive(source, ability)) continue;
-        if ("player" in on) {
-          if (prevents.players === "each" || (prevents.players === "you" && on.player === source.controller)) {
-            return true;
-          }
-        } else if (
-          prevents.permanents !== undefined &&
-          matchesFilter(this.state, this.registry, on.object, prevents.permanents, { you: source.controller, source: id })
-        ) {
-          return true;
-        }
-      }
-    }
-    return false;
+    return liveProhibitions(this.state, this.registry, "get-counters").some((live) => {
+      const { source, prohibition } = live;
+      if (enteringWith?.has(source.id) === true) return false;
+      if (prohibition.kind !== undefined && prohibition.kind !== kind) return false;
+      if ("player" in on) return prohibition.who !== undefined && whoBinds(this.state, source, prohibition.who, on.player);
+      return reachesObject(this.state, this.registry, live, on.object);
+    });
   }
 
   private activeStaticsOf(
@@ -50759,7 +50692,7 @@ export class Game {
     const battlefield = this.state.zones.shared.battlefield;
     if (this.state.emblems.length === 0) return battlefield;
     const emblems = this.state.emblems.flatMap((e) =>
-      e.object !== undefined && this.state.players[e.owner]?.hasLost !== true ? [e.object] : [],
+      e.object !== undefined && (this.state.players[e.owner]?.hasLost !== true || e.expires !== undefined) ? [e.object] : [],
     );
     return emblems.length === 0 ? battlefield : [...battlefield, ...emblems];
   }
@@ -51642,7 +51575,7 @@ export class Game {
         if (step.sacrifice) spent.set(step.source, (spent.get(step.source) ?? 0) + 1);
       }
     }
-    if (cost.payLife !== undefined && (lifeLeft < cost.payLife || !this.canPayLife(player, cost.payLife))) {
+    if (cost.payLife !== undefined && (lifeLeft < cost.payLife || !this.canPayLife(player, cost.payLife, "not-a-cost"))) {
       return false;
     }
     if (cost.sacrifice !== undefined) {
@@ -51703,7 +51636,7 @@ export class Game {
     if (sourceId === null || sourceId === undefined || stint === undefined) return { countered };
     const source = this.state.objects[sourceId];
     if (source === undefined || source.zone !== "battlefield" || (source.zoneChangeCount ?? 0) !== stint) return { countered };
-    if (lockSource && countered) this.prohibit([], { kind: "object", object: sourceId }, false, true);
+    if (lockSource && countered) this.prohibit(controller, sourceId, [{ act: "activate", who: "each-player", objects: [{ object: sourceId, stint }] }], "end-of-turn");
     return { countered, sourcePermanent: sourceId };
   }
 
@@ -52288,6 +52221,7 @@ export class Game {
     // What's resolving (or paying a cost) caused it — its controller is the
     // discard's cause (Psychic Purge). Nothing is at cleanup (rule 514.1).
     const cause = this.state.decisionSource?.controller;
+    if (this.costDiscardFor === null && causeProhibited(this.state, this.registry, "discard", player, cause)) return;
     if (this.costDiscardFor === null && this.discardToLibraryReplacement(player, cause) !== null) {
       const source = this.state.decisionSource;
       (this.state.pendingDiscardsToLibrary ??= []).push({
@@ -54172,10 +54106,18 @@ export class Game {
   /** Whether `player` can pay `amount` life (rule 119.4): 0 always (119.4b);
    * more only with at least that much life, and not while they can't lose
    * life (119.8 — Everybody Lives!). */
-  private canPayLife(player: PlayerId, amount: number): boolean {
+  private canPayLife(
+    player: PlayerId,
+    amount: number,
+    /** A cost to cast a spell or activate an ability, which "can't pay life
+     * to cast spells or activate abilities" stops (a mana ability's apart,
+     * for Karn's Sylex), or anything else: a shock land, a ward cost. */
+    paying: "cost" | "mana-ability" | "not-a-cost" = "cost",
+  ): boolean {
     if (amount <= 0) return true;
+    if (paying !== "not-a-cost" && this.lifeCostProhibited(player, paying === "mana-ability")) return false;
     const state = this.state.players[player];
-    return state !== undefined && state.life >= amount && !playerCantLoseLife(this.state, player);
+    return state !== undefined && state.life >= amount && !playerCantLoseLife(this.state, this.registry, player);
   }
 
   /** `amount` life `player` would lose, changed: "…they lose twice that much
@@ -54191,14 +54133,14 @@ export class Game {
   private changeLife(player: PlayerId, delta: number, lossReplaced = false): void {
     // "Players can't lose life this turn" (rule 119.8): a loss, from damage
     // or an effect, doesn't happen.
-    if (delta < 0 && playerCantLoseLife(this.state, player)) return;
+    if (delta < 0 && playerCantLoseLife(this.state, this.registry, player)) return;
     // Every loss comes through here: an effect's, damage's (having asked for
     // itself, for the floor beside it), a cost's, a set or exchanged total's.
     if (delta < 0 && !lossReplaced) delta = -this.lifeLossReplaced(player, -delta);
     // "Your life total can't change" (rule 119.7): no gain either — and so
     // nothing that would replace one applies (the Teferi's Protection
     // rulings).
-    if (delta > 0 && playerLifeCantChange(this.state, player)) return;
+    if (delta > 0 && playerLifeCantChange(this.state, this.registry, player)) return;
     // Gaining life, changed: "…that much life plus 1 instead" (Bilbo),
     // "…twice that much life instead" (Rhox Faithmender), or not at all
     // ("your opponents can't gain life"). Rule 616.1 lets the player gaining
@@ -54414,9 +54356,9 @@ export class Game {
   }
 
   /** Whether `player` can become the monarch now: not under a "you can't
-   * become the monarch this turn" (`PlayerState.cantBecomeMonarchTurn`). */
+   * become the monarch this turn". */
   private canBecomeMonarch(player: PlayerId): boolean {
-    return this.state.players[player]?.cantBecomeMonarchTurn !== this.state.turn.number;
+    return prohibitionsOnPlayer(this.state, this.registry, "become-monarch", player).length === 0;
   }
 
   /** `player` takes the initiative (rule 726) — also when they already have
@@ -54680,7 +54622,7 @@ export class Game {
     if (spell === undefined || spell.zone !== "stack" || spell.kind !== "card" || spell.withoutEpic === true) return;
     const player = this.state.players[controller];
     if (player === undefined) return;
-    player.cantCastSpellsForGame = true;
+    this.prohibit(controller, sourceId, [{ act: "cast", who: { players: [controller] } }], "permanent");
     const name = printedCardName(spell);
     const snapshot: SpellSnapshot = { ...this.spellSnapshot(spell), withoutEpic: true };
     const text = `For the rest of the game, you can't cast spells. At the beginning of each of your upkeeps, copy ${name} except for its epic ability.`;
@@ -54869,7 +54811,9 @@ export class Game {
         const playerState = this.state.players[player];
         if (playerState.hasLost) continue;
         let reason: string | null = null;
-        if (playerState.life <= 0) {
+        // "You don't lose the game for having 0 or less life" (Lich's Tomb)
+        // stops rule 704.5a's loss alone, so the others are still looked at.
+        if (playerState.life <= 0 && !playerCantLoseGame(this.state, this.registry, player, "zero-life")) {
           reason = "life total is 0 or less";
         } else if ((playerState.counters.poison ?? 0) >= POISON_LETHAL) {
           reason = `has ${POISON_LETHAL} or more poison counters`;
@@ -55833,13 +55777,13 @@ export class Game {
     });
   }
 
-  /** Whether a `prohibits`'s `drawsPerTurn` stops `player` drawing another card
+  /** Whether a `draw` prohibition stops `player` drawing another card
    * now, with `more` of them about to be drawn: read from the turn's real draws
    * (the journal's), those before the permanent arrived included. */
   private cantDrawMore(player: PlayerId, more = 1): boolean {
     const drawn = journalTotal(this.state, "card-drawn", player, "count");
-    return this.prohibitionsOn(player).some(
-      ({ prohibits }) => prohibits.drawsPerTurn !== undefined && drawn + more > prohibits.drawsPerTurn,
+    return prohibitionsOnPlayer(this.state, this.registry, "draw", player).some(
+      ({ prohibition }) => drawn + more > prohibition.perTurn,
     );
   }
 
@@ -57635,6 +57579,9 @@ export class Game {
     // A phased-out permanent can't be affected by anything (rule 702.26b):
     // it goes nowhere until it phases in.
     if (object.zone === "phased-out") return false;
+    // "Creature cards in graveyards and libraries can't enter the battlefield"
+    // (Grafdigger's Cage): it stays where it is.
+    if (to === "battlefield" && objectProhibited(this.state, this.registry, "enter", id)) return false;
     // A token that has left the battlefield can't move to another zone or
     // come back onto it (rule 111.8): it stays where it is until state-based
     // actions end it (111.7). Tokens are minted straight onto the battlefield,
@@ -58606,7 +58553,7 @@ export class Game {
       // this land — the offer waits its turn in `pendingPayLifeForUntapped`.
       if (entering.mayPayLife > 0) {
         object.tapped = true;
-        if (this.canPayLife(enteringController, entering.mayPayLife)) {
+        if (this.canPayLife(enteringController, entering.mayPayLife, "not-a-cost")) {
           const offer = { player: enteringController, source: id, life: entering.mayPayLife };
           if (this.state.awaiting === null) {
             this.state.awaiting = { kind: "pay-life-for-untapped", ...offer };

@@ -39,11 +39,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: false, sacrifice: "self" },
       targets: [],
-      effect: {
-        kind: "prohibit",
-        who: "each-opponent",
-        spells: { filter: { notTypes: ["creature"] }, label: "noncreature spells" },
-      },
+      effect: { kind: "prohibit", prohibits: [{ act: "cast", who: "each-opponent", filter: { notTypes: ["creature"] } }] },
       resolve: null,
       text: LOCK_TEXT,
     },

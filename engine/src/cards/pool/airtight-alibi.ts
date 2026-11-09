@@ -33,7 +33,7 @@ export default defineCard({
     {
       affects: { scope: "attached" },
       grantPt: [2, 2],
-      cantBecomeSuspected: true,
+      prohibits: [{ act: "become-suspected", object: { hostOfSource: true } }],
       text: STATIC_TEXT,
     },
   ],

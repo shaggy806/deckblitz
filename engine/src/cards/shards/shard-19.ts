@@ -350,6 +350,7 @@ import _poolFugue from "../pool/fugue.js";
 import _poolFungalColossus from "../pool/fungal-colossus.js";
 import _poolFurtiveCourier from "../pool/furtive-courier.js";
 import _poolFuryOfTheHorde from "../pool/fury-of-the-horde.js";
+import _poolGaeasRevenge from "../pool/gaeas-revenge.js";
 import _poolGaladrielOfLothlorien from "../pool/galadriel-of-lothlorien.js";
 import _poolGallowbraid from "../pool/gallowbraid.js";
 import _poolGarlandKnightOfCornelia from "../pool/garland-knight-of-cornelia.js";
@@ -524,6 +525,7 @@ import _poolLeap from "../pool/leap.js";
 import _poolLeapingAmbush from "../pool/leaping-ambush.js";
 import _poolLecturingScornmage from "../pool/lecturing-scornmage.js";
 import _poolLeoninShikari from "../pool/leonin-shikari.js";
+import _poolLichsTomb from "../pool/lichs-tomb.js";
 import _poolLifeOfTheParty from "../pool/life-of-the-party.js";
 import _poolLifecraftersBestiary from "../pool/lifecrafters-bestiary.js";
 import _poolLifelink from "../pool/lifelink.js";
@@ -975,6 +977,7 @@ import _poolWaterbenderAscension from "../pool/waterbender-ascension.js";
 import _poolWaveOfReckoning from "../pool/wave-of-reckoning.js";
 import _poolWayOfTheParadox from "../pool/way-of-the-paradox.js";
 import _poolWaywardSwordtooth from "../pool/wayward-swordtooth.js";
+import _poolWeatheredRunestone from "../pool/weathered-runestone.js";
 import _poolWeldingSparks from "../pool/welding-sparks.js";
 import _poolWhelmingWave from "../pool/whelming-wave.js";
 import _poolWhirlwindOfThought from "../pool/whirlwind-of-thought.js";
@@ -1386,6 +1389,7 @@ const shard: CardShard = {
     _poolFungalColossus,
     _poolFurtiveCourier,
     _poolFuryOfTheHorde,
+    _poolGaeasRevenge,
     _poolGaladrielOfLothlorien,
     _poolGallowbraid,
     _poolGarlandKnightOfCornelia,
@@ -1560,6 +1564,7 @@ const shard: CardShard = {
     _poolLeapingAmbush,
     _poolLecturingScornmage,
     _poolLeoninShikari,
+    _poolLichsTomb,
     _poolLifeOfTheParty,
     _poolLifecraftersBestiary,
     _poolLifelink,
@@ -2011,6 +2016,7 @@ const shard: CardShard = {
     _poolWaveOfReckoning,
     _poolWayOfTheParadox,
     _poolWaywardSwordtooth,
+    _poolWeatheredRunestone,
     _poolWeldingSparks,
     _poolWhelmingWave,
     _poolWhirlwindOfThought,

@@ -15,5 +15,5 @@ export default defineCard({
   toughness: 6,
   keywords: ["flying", "trample"],
   text: `Flying, trample\n${TEXT}`,
-  static: [{ affects: { scope: "self" }, cantWinGame: true, opponentsCantLoseGame: true, text: TEXT }],
+  static: [{ affects: { scope: "self" }, text: TEXT, prohibits: [{ act: "lose-game", who: "opponents" }, { act: "win-game", who: "you" }] }],
 });

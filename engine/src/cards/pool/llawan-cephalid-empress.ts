@@ -28,7 +28,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: { who: "opponents", spells: { type: "creature", colors: ["U"] } },
+      prohibits: [{ act: "cast", who: "opponents", filter: { type: "creature", colors: ["U"] } }],
       text: STATIC_TEXT,
     },
   ],

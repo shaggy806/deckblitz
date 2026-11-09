@@ -36,7 +36,7 @@ const setLife = (game: Game, player: PlayerId, n: number): void => {
 };
 /** Their life total can't change (Teferi's Protection's half): rules 119.7–8. */
 const lifeFrozen = (game: Game, player: PlayerId): void => {
-  game.debugApplyEffect(player, { kind: "player-effect", duration: "until-your-next-turn", lifeCantChange: "you" });
+  game.debugApplyEffect(player, { kind: "prohibit", prohibits: [{ act: "change-life", who: "you" }], duration: "until-your-next-turn" });
 };
 const horror = (game: Game): ObjectId | undefined =>
   game.state.zones.shared.battlefield.find((id) => game.state.objects[id].cardName.startsWith("Horror Token"));

@@ -13,7 +13,7 @@ export default defineCard({
   subtypes: ["Teferi"],
   loyalty: 4,
   text: `${LOCK}\n${PLUS}\n${MINUS}`,
-  static: [{ affects: { scope: "self" }, prohibits: { who: "opponents", castOnlyAsSorcery: true }, text: LOCK }],
+  static: [{ affects: { scope: "self" }, prohibits: [{ act: "cast", who: "opponents", unless: "sorcery-timing" }], text: LOCK }],
   activated: [
     {
       loyaltyCost: 1,

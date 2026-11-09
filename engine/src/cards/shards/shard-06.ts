@@ -908,6 +908,7 @@ import _poolVerdantEmbrace from "../pool/verdant-embrace.js";
 import _poolVeteranAdventurer from "../pool/veteran-adventurer.js";
 import _poolVeteranSoldier from "../pool/veteran-soldier.js";
 import _poolVictoriousDestruction from "../pool/victorious-destruction.js";
+import _poolVinesOfVastwood from "../pool/vines-of-vastwood.js";
 import _poolVizierOfTumblingSands from "../pool/vizier-of-tumbling-sands.js";
 import _poolVoiceOfDuty from "../pool/voice-of-duty.js";
 import _poolVolcanicHammer from "../pool/volcanic-hammer.js";
@@ -1901,6 +1902,7 @@ const shard: CardShard = {
     _poolVeteranAdventurer,
     _poolVeteranSoldier,
     _poolVictoriousDestruction,
+    _poolVinesOfVastwood,
     _poolVizierOfTumblingSands,
     _poolVoiceOfDuty,
     _poolVolcanicHammer,

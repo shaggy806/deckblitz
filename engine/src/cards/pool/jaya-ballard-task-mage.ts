@@ -27,7 +27,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "damage", amount: 3, target: 0 },
-          { kind: "prohibit", regeneration: true, dealtDamageThisWay: "creature" },
+          { kind: "cant-regenerate", dealtDamageThisWay: "creature" },
         ],
       },
       resolve: null,

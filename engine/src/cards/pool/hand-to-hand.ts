@@ -12,13 +12,7 @@ export default defineCard({
     {
       affects: { scope: "self" },
       condition: { kind: "turn-structure", duringCombat: true },
-      prohibits: {
-        who: "each-player",
-        spells: { type: "instant" },
-        abilitiesOf: {},
-        anyZone: true,
-        exceptManaAbilities: true,
-      },
+      prohibits: [{ act: "cast", who: "each-player", filter: { type: "instant" } }, { act: "activate", who: "each-player", except: ["mana"], anyZone: true }],
       text: TEXT,
     },
   ],

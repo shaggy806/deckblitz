@@ -14,11 +14,7 @@ export default defineCard({
   text: "Aftermath (Cast this spell only from your graveyard. Then exile it.)\nChoose a card name. Until your next turn, your opponents can't cast spells with the chosen name.",
   effect: {
     kind: "choose-card-name",
-    then: {
-      kind: "player-effect",
-      duration: "until-your-next-turn",
-      cantCast: { who: "each-opponent", filter: { hasName: CHOSEN_CARD_NAME }, label: "spells with the chosen name" },
-    },
+    then: { kind: "prohibit", prohibits: [{ act: "cast", who: "each-opponent", filter: { hasName: CHOSEN_CARD_NAME } }], duration: "until-your-next-turn" },
   },
   faces: FACES,
   split: true,

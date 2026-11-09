@@ -489,6 +489,7 @@ import _poolMasterHealer from "../pool/master-healer.js";
 import _poolMasterOfTheHunt from "../pool/master-of-the-hunt.js";
 import _poolMawcor from "../pool/mawcor.js";
 import _poolMeetingOfTheFive from "../pool/meeting-of-the-five.js";
+import _poolMelirasKeepers from "../pool/meliras-keepers.js";
 import _poolMemnarchTheWarden from "../pool/memnarch-the-warden.js";
 import _poolMemorysJourney from "../pool/memorys-journey.js";
 import _poolMentalNote from "../pool/mental-note.js";
@@ -797,6 +798,7 @@ import _poolSzarekhTheSilentKing from "../pool/szarekh-the-silent-king.js";
 import _poolTahCropElite from "../pool/tah-crop-elite.js";
 import _poolTaintedIndulgence from "../pool/tainted-indulgence.js";
 import _poolTajNarSwordsmith from "../pool/taj-nar-swordsmith.js";
+import _poolTajuruPreserver from "../pool/tajuru-preserver.js";
 import _poolTakePossession from "../pool/take-possession.js";
 import _poolTamiyoTheMoonSage from "../pool/tamiyo-the-moon-sage.js";
 import _poolTamsResistance from "../pool/tams-resistance.js";
@@ -872,6 +874,7 @@ import _poolUrsineFylgja from "../pool/ursine-fylgja.js";
 import _poolValorOfTheWorthy from "../pool/valor-of-the-worthy.js";
 import _poolVampireChampion from "../pool/vampire-champion.js";
 import _poolVaultSkirge from "../pool/vault-skirge.js";
+import _poolVeilstoneAmulet from "../pool/veilstone-amulet.js";
 import _poolVenomizedCat from "../pool/venomized-cat.js";
 import _poolVenomousFangs from "../pool/venomous-fangs.js";
 import _poolVergeRangers from "../pool/verge-rangers.js";
@@ -1463,6 +1466,7 @@ const shard: CardShard = {
     _poolMasterOfTheHunt,
     _poolMawcor,
     _poolMeetingOfTheFive,
+    _poolMelirasKeepers,
     _poolMemnarchTheWarden,
     _poolMemorysJourney,
     _poolMentalNote,
@@ -1771,6 +1775,7 @@ const shard: CardShard = {
     _poolTahCropElite,
     _poolTaintedIndulgence,
     _poolTajNarSwordsmith,
+    _poolTajuruPreserver,
     _poolTakePossession,
     _poolTamiyoTheMoonSage,
     _poolTamsResistance,
@@ -1846,6 +1851,7 @@ const shard: CardShard = {
     _poolValorOfTheWorthy,
     _poolVampireChampion,
     _poolVaultSkirge,
+    _poolVeilstoneAmulet,
     _poolVenomizedCat,
     _poolVenomousFangs,
     _poolVergeRangers,

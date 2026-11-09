@@ -17,7 +17,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: { who: "opponents", spells: { manaValueParity: "even" } },
+      prohibits: [{ act: "cast", who: "opponents", filter: { manaValueParity: "even" } }],
       text: CAST_TEXT,
     },
     {

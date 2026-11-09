@@ -13,10 +13,6 @@ export default defineCard({
   effect: {
     kind: "for-each-player",
     who: "each-opponent",
-    effect: {
-      kind: "player-effect",
-      duration: { duringTurnOf: "that-player" },
-      cantCast: { who: "that-player", filter: { typesAnyOf: ["instant", "sorcery"] }, label: "instant or sorcery spells" },
-    },
+    effect: { kind: "prohibit", prohibits: [{ act: "cast", who: "that-player", filter: { typesAnyOf: ["instant", "sorcery"] } }], duration: { duringTurnOf: "that-player" } },
   },
 });

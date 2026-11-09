@@ -20,7 +20,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: { who: "opponents", spells: { manaValue: { op: "lte", n: 3 } } },
+      prohibits: [{ act: "cast", who: "opponents", filter: { manaValue: { op: "lte", n: 3 } } }],
       text: CAST_TEXT,
     },
   ],

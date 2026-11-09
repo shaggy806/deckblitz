@@ -782,6 +782,7 @@ import _poolSoulsOfTheFaultless from "../pool/souls-of-the-faultless.js";
 import _poolSoulswornSpirit from "../pool/soulsworn-spirit.js";
 import _poolSpareFromEvil from "../pool/spare-from-evil.js";
 import _poolSparringConstruct from "../pool/sparring-construct.js";
+import _poolSpatialBinding from "../pool/spatial-binding.js";
 import _poolSpawningPool from "../pool/spawning-pool.js";
 import _poolSpellSyphon from "../pool/spell-syphon.js";
 import _poolSpellboundDragon from "../pool/spellbound-dragon.js";
@@ -1786,6 +1787,7 @@ const shard: CardShard = {
     _poolSoulswornSpirit,
     _poolSpareFromEvil,
     _poolSparringConstruct,
+    _poolSpatialBinding,
     _poolSpawningPool,
     _poolSpellSyphon,
     _poolSpellboundDragon,

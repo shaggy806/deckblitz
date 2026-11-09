@@ -38,7 +38,8 @@ import type { LegalAction } from "./actions.js";
 import type { CardRegistry } from "./cards.js";
 import type { CardDefinition } from "./cards/define.js";
 import { bestowedDefinition, enchantsGraveyardCard, licidDefinition } from "./cards/define.js";
-import { computeCharacteristics, playerCantLoseGame, playerCantLoseLife } from "./characteristics.js";
+import { computeCharacteristics } from "./characteristics.js";
+import { playerCantLoseGame, playerCantLoseLife } from "./prohibitions.js";
 import { matchesFilter } from "./filter.js";
 import type { CardFilter } from "./filter.js";
 import type { EffectAmount, EffectSpec, PlayerScope } from "./effects.js";
@@ -666,9 +667,13 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     v.child(n.repeat);
   },
   prohibit: (n, v) => {
-    v.touch(n.target, "harm", MINOR);
-    v.touch(n.who, "harm", MINOR);
+    for (const p of n.prohibits) {
+      v.touch((p as { readonly target?: ObjectRef }).target, "harm", MINOR);
+      const who = (p as { readonly who?: unknown }).who;
+      if (typeof who === "object" && who !== null && "target" in who) v.touch((who as { readonly target: number }).target, "harm", MINOR);
+    }
   },
+  "cant-regenerate": (n, v) => v.touch(n.target, "harm", MINOR),
   detain: (n, v) => v.touch(n.target, "harm", MINOR),
   // Bound to block, or to attack (and at whom), as a goad is: a drawback on its
   // creature or its player's creatures. The player attacked is the one it's
@@ -1833,7 +1838,7 @@ export function rankTargets(
     ref.kind === "player" &&
     ref.player !== me &&
     (state.players[ref.player]?.life ?? Infinity) <= damage &&
-    !playerCantLoseLife(state, ref.player) &&
+    !playerCantLoseLife(state, registry, ref.player) &&
     !playerCantLoseGame(state, registry, ref.player);
   const scored = options.map((ref, index) => ({
     ref,

@@ -21,7 +21,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: { who: "each-player", abilitiesOf: { type: "creature", controlledBy: "opponent" } },
+      prohibits: [{ act: "activate", who: "each-player", of: { type: "creature", controlledBy: "opponent" } }],
       text: LOCK_TEXT,
     },
     {

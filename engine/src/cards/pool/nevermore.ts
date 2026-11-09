@@ -12,7 +12,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      prohibits: { who: "each-player", spells: { chosenName: true } },
+      prohibits: [{ act: "cast", who: "each-player", filter: { chosenName: true } }],
       text: "Spells with the chosen name can't be cast.",
     },
   ],

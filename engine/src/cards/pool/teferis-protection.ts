@@ -22,7 +22,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "player-effect", duration: "until-your-next-turn", lifeCantChange: "you", protectionFromEverything: "you" },
+      { kind: "sequence", effects: [{ kind: "player-effect", duration: "until-your-next-turn", protectionFromEverything: "you" }, { kind: "prohibit", prohibits: [{ act: "change-life", who: "you" }], duration: "until-your-next-turn" }] },
       { kind: "phase-out", filter: { controlledBy: "you" } },
     ],
   },

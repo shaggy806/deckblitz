@@ -15,7 +15,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      playerHexproof: true,
+      playerKeywords: ["hexproof"],
       text: "You have hexproof. (You can't be the target of spells or abilities your opponents control.)",
     },
   ],

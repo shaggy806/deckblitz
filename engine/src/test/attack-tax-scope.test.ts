@@ -173,8 +173,8 @@ describe("an attack tax paid in life", () => {
     const bears = spawn(game, "Grizzly Bears");
     game.state.playerEffects = [
       { owner: B, expires: { untilTurnOf: B }, attackTax: { generic: 0, life: 2, covers: "you" } },
-      { owner: A, expires: "end-of-turn", cantLoseLife: [A] },
     ];
+    game.debugApplyEffect(A, { kind: "prohibit", prohibits: [{ act: "lose-life", who: "you" }] }, []);
     const offer = toAttackers(game);
     expect(offer.attackTax?.lifeBudget).toBe(0);
     expect(game.canDispatch(declare([bears], B))).toMatch(/can't pay the 2 life/);

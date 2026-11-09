@@ -36,7 +36,7 @@ export default defineCard({
     },
     {
       affects: { scope: "self" },
-      prohibits: { who: "you", spells: true, lands: {}, from: ["hand"] },
+      prohibits: [{ act: "cast", who: "you", from: ["hand"] }, { act: "play-land", who: "you", from: ["hand"] }],
       text: LOCK_TEXT,
     },
   ],
