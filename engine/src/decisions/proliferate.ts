@@ -9,6 +9,8 @@
  */
 
 import type { Action, LegalAction } from "../actions.js";
+import type { ObjectId } from "../primitives.js";
+import type { GameState } from "../state.js";
 import type { TargetRef } from "../target.js";
 import { defineDecision } from "./define.js";
 
@@ -17,14 +19,43 @@ import { defineDecision } from "./define.js";
 const refKey = (t: TargetRef): string =>
   t.kind === "player" ? `p:${t.player}` : `o:${t.object}`;
 
+/** The size of each compacted token stack among `eligible`. A stack is many
+ * permanents, so it can be chosen in part (701.34a): named once per token. */
+function stackSizes(
+  ctx: { readonly state: GameState },
+  eligible: readonly TargetRef[],
+): Readonly<Record<ObjectId, number>> {
+  const copies: Record<ObjectId, number> = {};
+  for (const target of eligible) {
+    if (target.kind !== "object") continue;
+    const n = ctx.state.objects[target.object]?.stackCount ?? 1;
+    if (n > 1) copies[target.object] = n;
+  }
+  return copies;
+}
+
+/** `eligible` with a stack repeated once per token. */
+function expand(eligible: readonly TargetRef[], copies: Readonly<Record<ObjectId, number>>): TargetRef[] {
+  return eligible.flatMap((t) =>
+    Array<TargetRef>(t.kind === "object" ? (copies[t.object] ?? 1) : 1).fill(t),
+  );
+}
+
 export const proliferate = defineDecision({
   kind: "proliferate",
 
   hasSource: true,
 
-  legal: (_ctx, awaiting): LegalAction[] => [
-    { kind: "proliferate", eligible: [...awaiting.eligible] },
-  ],
+  legal: (ctx, awaiting): LegalAction[] => {
+    const copies = stackSizes(ctx, awaiting.eligible);
+    return [
+      {
+        kind: "proliferate",
+        eligible: [...awaiting.eligible],
+        ...(Object.keys(copies).length > 0 ? { copies } : {}),
+      },
+    ];
+  },
 
   whyCannot: (ctx, action, player): string | null => {
     if (action.type !== "proliferate") return `${player} is not being asked to proliferate`;
@@ -33,12 +64,15 @@ export const proliferate = defineDecision({
       return `${player} is not being asked to proliferate`;
     }
     const eligible = new Set(awaiting.eligible.map(refKey));
-    const seen = new Set<string>();
+    const copies = stackSizes(ctx, awaiting.eligible);
+    const seen = new Map<string, number>();
     for (const target of action.chosen) {
       const k = refKey(target);
       if (!eligible.has(k)) return `${k} has no counters to proliferate`;
-      if (seen.has(k)) return `${player} chose ${k} twice`;
-      seen.add(k);
+      const named = (seen.get(k) ?? 0) + 1;
+      const limit = target.kind === "object" ? (copies[target.object] ?? 1) : 1;
+      if (named > limit) return limit > 1 ? `${k} is only ${limit} tokens` : `${player} chose ${k} twice`;
+      seen.set(k, named);
     }
     // No length check on purpose: zero is a legal answer (rule 701.27a).
     return null;
@@ -52,7 +86,9 @@ export const proliferate = defineDecision({
   ask: (controller, view, awaiting, player): Action => ({
     type: "proliferate",
     player,
-    chosen: controller.chooseProliferate(view, awaiting.eligible),
+    // A controller picks from one entry per token, so "everything of mine"
+    // reaches a whole stack.
+    chosen: controller.chooseProliferate(view, expand(awaiting.eligible, stackSizes(view, awaiting.eligible))),
   }),
 
   /**
@@ -67,7 +103,8 @@ export const proliferate = defineDecision({
    */
   candidates: (legal, player, _limit, helpers): Action[] => {
     if (legal.kind !== "proliferate") return [];
-    const mine = legal.eligible.filter((t) =>
+    const units = expand(legal.eligible, legal.copies ?? {});
+    const mine = units.filter((t) =>
       t.kind === "player" ? t.player === player : helpers.controllerOf(t.object) === player,
     );
     // What the default answer picks: your permanents, poison on an opponent
@@ -77,7 +114,7 @@ export const proliferate = defineDecision({
     const owned =
       poisonOf === undefined
         ? mine
-        : legal.eligible.filter((t) =>
+        : units.filter((t) =>
             t.kind === "player"
               ? t.player === player
                 ? poisonOf(t.player) === 0
@@ -85,7 +122,7 @@ export const proliferate = defineDecision({
               : helpers.controllerOf(t.object) === player,
           );
     const seen = new Set<string>();
-    return [owned, mine, legal.eligible, []]
+    return [owned, mine, units, []]
       .filter((chosen) => {
         const key = chosen.map((t) => (t.kind === "player" ? t.player : t.object)).join(",");
         if (seen.has(key)) return false;
@@ -101,6 +138,6 @@ export const proliferate = defineDecision({
   randomAnswer: (legal, player, rng): Action => ({
     type: "proliferate",
     player,
-    chosen: legal.eligible.filter(() => rng.random() < 0.5),
+    chosen: expand(legal.eligible, legal.copies ?? {}).filter(() => rng.random() < 0.5),
   }),
 });

@@ -7876,3 +7876,7 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Herigast: any creature spell can emerge
 - **Do:** Cast Grizzly Bears, choosing to emerge by sacrificing Hill Giant.
 - **Expect:** The offer shows the Giant's mana value off, leaving {G} to pay; the Giant is gone and the Bears are on the battlefield.
+
+### Proliferate: some of a stack of tokens
+- **Do:** Cast Secure the Wastes for X=8 (the Warriors make one stack), Basri's Solidarity, then Volt Charge at Bob. When asked to proliferate, click the Warrior stack and choose "Proliferate 3" in its menu, then Confirm.
+- **Expect:** The tile reads 3/8 while you choose. Afterwards three Warriors are 3/3 with two counters, on a tile of their own, and the other five stay 2/2 with one.

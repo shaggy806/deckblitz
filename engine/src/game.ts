@@ -46744,7 +46744,21 @@ controlledBy,
     this.state.awaiting = null;
 
     this.withCounterBatch(() => {
-      for (const target of chosen) this.anotherCounterOfEachKind(target, player);
+      // A stack named n times is n of its tokens: those split off together
+      // (they get a counter the rest don't), the whole stack as it stands.
+      const named = new Map<string, { target: TargetRef; times: number }>();
+      for (const target of chosen) {
+        const key = target.kind === "player" ? `p:${target.player}` : `o:${target.object}`;
+        const entry = named.get(key);
+        if (entry === undefined) named.set(key, { target, times: 1 });
+        else entry.times += 1;
+      }
+      for (const { target, times } of named.values()) {
+        this.anotherCounterOfEachKind(
+          target.kind === "object" ? { kind: "object", object: this.splitCountFromStack(target.object, times) } : target,
+          player,
+        );
+      }
     });
     this.emit({ type: "proliferated", player, count: chosen.length });
 

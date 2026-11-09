@@ -11876,4 +11876,11 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: [] },
     }),
   ),
+  preset(
+    'Proliferate: some of a stack of tokens',
+    board({
+      you: { bf: ['Plains*11', 'Mountain*3'], hand: ['Secure the Wastes', "Basri's Solidarity", 'Volt Charge'] },
+      opp: { bf: [] },
+    }),
+  ),
 ]

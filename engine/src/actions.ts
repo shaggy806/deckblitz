@@ -2326,6 +2326,10 @@ export type LegalAction =
        * including none. No `count`: that is the point of the card. */
       readonly kind: "proliferate";
       readonly eligible: readonly TargetRef[];
+      /** How many tokens each compacted stack in `eligible` is, for those
+       * of two or more. The answer names a stack once per token it reaches
+       * (rule 701.34a chooses permanents, and each token is one). */
+      readonly copies?: Readonly<Record<ObjectId, number>>;
     }
   | {
       /** Which counters to remove, from which of `eligible` — a cost's

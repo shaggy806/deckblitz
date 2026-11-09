@@ -3434,6 +3434,12 @@ function Table({
       }
       if (mode === 'proliferate' && proliferateAction) {
         if (!eligibleToProliferate(proliferateAction, id)) return
+        // A token stack is one tile for several tokens: how many of it is a
+        // count, as for a sacrifice.
+        if ((proliferateAction.copies?.[id] ?? 1) > 1) {
+          setStackMenu((cur) => (cur === id ? null : id))
+          return
+        }
         // A plain toggle, with no cap: "any number" has no count to enforce,
         // which is the one thing that makes this different from every other
         // multi-select decision on the board.
@@ -3992,9 +3998,11 @@ function Table({
       selected = pick !== undefined
       if (pick !== undefined) badge = pick === 1 ? '+1 time' : '−1 time'
     } else if (mode === 'proliferate' && proliferateAction) {
-      const picked = proliferatePicks.some((t) => t.kind === 'object' && t.object === id)
-      highlight = eligibleToProliferate(proliferateAction, id) && !picked
-      selected = picked
+      const taken = proliferatePicks.filter((t) => t.kind === 'object' && t.object === id).length
+      const of = proliferateAction.copies?.[id] ?? 1
+      highlight = eligibleToProliferate(proliferateAction, id) && taken === 0
+      selected = taken > 0
+      if (of > 1 && taken > 0) badge = `✓ ${taken}/${of}`
     } else if (mode === 'priority') {
       // On another player's board too: an ability anyone may activate (Excavation,
       // Capricopian), which only comes in the offers when this seat may.
@@ -5597,11 +5605,16 @@ function Table({
     )
   } else if (mode === 'proliferate' && proliferateAction) {
     // A player's own counters are theirs to want, poison aside.
-    const mine = proliferateAction.eligible.filter((t) =>
-      t.kind === 'player'
-        ? t.player === seat && (view.players[seat]?.counters.poison ?? 0) === 0
-        : view.objects[t.object]?.controller === seat,
-    )
+    const mine = proliferateAction.eligible
+      .filter((t) =>
+        t.kind === 'player'
+          ? t.player === seat && (view.players[seat]?.counters.poison ?? 0) === 0
+          : view.objects[t.object]?.controller === seat,
+      )
+      // A token stack is named once per token.
+      .flatMap((t) =>
+        Array<TargetRef>(t.kind === 'object' ? (proliferateAction.copies?.[t.object] ?? 1) : 1).fill(t),
+      )
     // Permanents and players alike are picked on the board: a player's
     // panel shows the counters they have.
     controls = (
@@ -6830,6 +6843,19 @@ function Table({
             of: sacrificeAction.copies?.[stackMenu] ?? 1,
             picks: sacrificePicks,
             set: (next: readonly ObjectId[]) => setSacrificePicks(next),
+          }
+        : mode === 'proliferate' && proliferateAction
+        ? {
+            verb: 'Proliferate',
+            // "Any number": the stack's own size is the only cap.
+            count: Number.POSITIVE_INFINITY,
+            of: proliferateAction.copies?.[stackMenu] ?? 1,
+            picks: proliferatePicks.flatMap((t) => (t.kind === 'object' ? [t.object] : [])),
+            set: (next: readonly ObjectId[]) =>
+              setProliferatePicks((cur) => [
+                ...cur.filter((t) => t.kind === 'player'),
+                ...next.map((object): TargetRef => ({ kind: 'object', object })),
+              ]),
           }
         : mode === 'choose-permanents' && choosePermanentsAction
           ? {
