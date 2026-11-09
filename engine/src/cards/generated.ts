@@ -28550,6 +28550,7 @@ import _poolUlamogTheCeaselessHunger from "./pool/ulamog-the-ceaseless-hunger.js
 import _poolUlamogTheDefiler from "./pool/ulamog-the-defiler.js";
 import _poolUlamogTheInfiniteGyre from "./pool/ulamog-the-infinite-gyre.js";
 import _poolUlamogsCrusher from "./pool/ulamogs-crusher.js";
+import _poolUlamogsDespoiler from "./pool/ulamogs-despoiler.js";
 import _poolUlamogsDreadsire from "./pool/ulamogs-dreadsire.js";
 import _poolUlamogsNullifier from "./pool/ulamogs-nullifier.js";
 import _poolUlamogsReclaimer from "./pool/ulamogs-reclaimer.js";
@@ -60542,6 +60543,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUlamogTheDefiler,
   _poolUlamogTheInfiniteGyre,
   _poolUlamogsCrusher,
+  _poolUlamogsDespoiler,
   _poolUlamogsDreadsire,
   _poolUlamogsNullifier,
   _poolUlamogsReclaimer,
@@ -92547,6 +92549,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/ulamog-the-defiler": _poolUlamogTheDefiler,
   "pool/ulamog-the-infinite-gyre": _poolUlamogTheInfiniteGyre,
   "pool/ulamogs-crusher": _poolUlamogsCrusher,
+  "pool/ulamogs-despoiler": _poolUlamogsDespoiler,
   "pool/ulamogs-dreadsire": _poolUlamogsDreadsire,
   "pool/ulamogs-nullifier": _poolUlamogsNullifier,
   "pool/ulamogs-reclaimer": _poolUlamogsReclaimer,
