@@ -13995,7 +13995,11 @@ export class Game {
     | null {
     const object = this.state.objects[id];
     const answered = object.enterChoice;
-    const def = this.registry.get(printedCardName(object));
+    // Entering transformed, it enters with its back face up (rule 712.14a):
+    // that face's choices, not the front's.
+    const back =
+      this.isTransformingDfc(id) && this.entersTransformed(id, answered?.transformed === true) ? object.faces?.[1] : undefined;
+    const def = this.registry.get(back ?? printedCardName(object));
     // Entering under a static loss of all abilities (rule 614.12 — Humility,
     // Dress Down), it has none of its own "as this enters" abilities: only
     // what the rules ask of it (an Aura's object, a battle's protector).
@@ -14446,9 +14450,17 @@ export class Game {
    * could enchant doesn't enter at all (303.4g — `moveObject` leaves it where
    * it is).
    */
-  private askEnterChoice(id: ObjectId, chooser: PlayerId): boolean {
+  private askEnterChoice(
+    id: ObjectId,
+    chooser: PlayerId,
+    /** The effect putting it there puts it there transformed (rule 712.14a). */
+    transformed = false,
+  ): boolean {
     const object = this.state.objects[id];
     if (object === undefined) return false;
+    if (transformed && object.enterChoice?.transformed !== true) {
+      object.enterChoice = { ...object.enterChoice, transformed: true };
+    }
     for (let next = this.nextEnterChoice(id, chooser); next !== null; next = this.nextEnterChoice(id, chooser)) {
       if (next.kind === "choose") {
         const looked = next.look === true ? this.lookAtOpponentHandOnEnter(id, chooser) : undefined;
@@ -49245,7 +49257,7 @@ controlledBy,
     // copies something): nothing moves until they're made. Face down, it has
     // none (708.3: turned face down before it enters), nor with no abilities.
     this.markEnteringWithoutAbilities(target.object, types);
-    if (types?.faceDown === undefined && this.askEnterChoice(target.object, under ?? object.owner)) return true;
+    if (types?.faceDown === undefined && this.askEnterChoice(target.object, under ?? object.owner, transformed)) return true;
     this.moveObject(target.object, "battlefield", {
       tapped: enterTapped,
       ...(under !== undefined ? { under } : {}),
@@ -50058,7 +50070,7 @@ controlledBy,
         exiled.some(
           (id) =>
             (options.transformed !== true || this.isDoubleFacedCard(id)) &&
-            this.askEnterChoice(id, returnUnder ?? this.state.objects[id].owner),
+            this.askEnterChoice(id, returnUnder ?? this.state.objects[id].owner, options.transformed === true),
         )
       ) {
         const returnLink = `flicker-${this.state.nextObjectSeq++}`;
@@ -50151,7 +50163,7 @@ controlledBy,
       returning.some(
         (id) =>
           (!transformed || this.isDoubleFacedCard(id)) &&
-          this.askEnterChoice(id, returnUnder ?? this.state.objects[id].owner),
+          this.askEnterChoice(id, returnUnder ?? this.state.objects[id].owner, transformed),
       )
     ) {
       return true;
