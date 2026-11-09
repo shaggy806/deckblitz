@@ -26,6 +26,8 @@ is still unscoped.
 
 `need-key-themes` (**plan of record**, 2026-11-07; steps 1-5 done by 2026-11-08, step 6 next) groups the 1,831 open need keys by the engine mechanism under them — object sets, declarative triggers, one duration type, cost amounts, choosers, a turn journal — and proposes a general change for each, with a build order.
 
+`after-the-themes` (**proposed**, 2026-11-09) is the order of work once theme 15 lands: why building keys by rank stops paying (1,315 of 1,577 keys serve one card), re-attempting the top cards before building, a regression check before deploying, cutting down the manual checks, and a stopping rank for the user to set.
+
 `scaling-rooms` (**planning**) plans how the server holds more rooms at once and makes use of a bigger box: measure first (a load harness, event-loop delay on `/status`), trim the one thread's work (frames with only new events), then rooms sharded across worker threads — without which a bigger box runs the same one thread — then the box, sized from the measurement, and deploys that don't end games.
 
 `initiative-dungeons` (built 2026-10-19, but for its animation and the Forgotten Realms dungeons) designs venture into the dungeon and the
