@@ -29780,11 +29780,22 @@ export class Game {
           : this.effectiveTriggeredEntries(id, triggerGrantors);
       // A conditional grant's leaves-the-battlefield ability it had just
       // before the event and has since lost with the condition (603.10a).
+      // And one it has only since the event: the creature whose death made
+      // the seventh card doesn't trigger Decaying Soil's threshold grant.
       const lookedBack = leaving ? this.grantLookBack?.entries.get(id) : undefined;
+      const hadThen = (e: TriggeredEntry): boolean =>
+        !leaving ||
+        this.grantLookBack === null ||
+        e.ref?.kind !== "static" ||
+        e.lost === true ||
+        !LOOK_BACK_TRIGGERS.has(e.ability.trigger.on) ||
+        this.registry.get(e.ref.cardName).static[e.ref.staticIndex]?.condition === undefined ||
+        (lookedBack?.some((then) => sameGrantRef(then.ref, e.ref)) ?? false);
+      const since = current.filter(hadThen);
       const entries =
         lookedBack === undefined
-          ? current
-          : [...current, ...lookedBack.filter((e) => !current.some((c) => sameGrantRef(c.ref, e.ref)))];
+          ? since
+          : [...since, ...lookedBack.filter((e) => !since.some((c) => sameGrantRef(c.ref, e.ref)))];
       entries.forEach(({ ability, ref, lost }, index) => {
         // Layer 6 — a printed ability it has lost doesn't trigger.
         if (lost === true) return;
