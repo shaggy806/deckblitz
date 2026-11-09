@@ -81,6 +81,17 @@ describe("an anthem emblem of any scope", () => {
     expect(game.state.zones.shared.command).not.toContain(object);
   });
 
+  it("Nissa, Who Shakes the World: lands you control, the ones that come later too", () => {
+    const { game } = table();
+    ultimate(game, "Nissa, Who Shakes the World", -8);
+    const land = spawn(game, "Forest");
+    const bears = spawn(game, "Grizzly Bears");
+    const theirs = spawn(game, "Forest", B);
+    expect(keywords(game, land).has("indestructible")).toBe(true);
+    expect(keywords(game, bears).has("indestructible")).toBe(false);
+    expect(keywords(game, theirs).has("indestructible")).toBe(false);
+  });
+
   it("Saheeli, Filigree Master: two statics, an anthem by filter and a cost reduction", () => {
     const { game } = table();
     ultimate(game, "Saheeli, Filigree Master", -4);
