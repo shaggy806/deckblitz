@@ -2164,7 +2164,9 @@
   "cost:exile-from-graveyard-filter-x",
   "condition:attached-to-player-this-way",
   "keyword:kicker-x-minimum",
-  "trigger:becomes-crewed-first-time"
+  "trigger:becomes-crewed-first-time",
+  "replacement:active-prevention-then",
+  "replacement:token-event-becomes-with-decision"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

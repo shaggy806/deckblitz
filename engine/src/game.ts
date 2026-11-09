@@ -739,6 +739,18 @@ interface DamageApplied {
 const NO_DAMAGE_APPLIED: DamageApplied = { statics: [], shields: [] };
 
 /** Whether a `costModification` applies only to a spell with certain targets. */
+/** A copy of `spec` with every token-making effect in it marked
+ * `replacementAsked`: the tokens a `would-create-token` replacement's own
+ * effect makes (rule 614.5). */
+function tokensAlreadyAsked(spec: unknown): unknown {
+  if (Array.isArray(spec)) return spec.map(tokensAlreadyAsked);
+  if (spec === null || typeof spec !== "object") return spec;
+  const out: Record<string, unknown> = {};
+  for (const [key, value] of Object.entries(spec)) out[key] = tokensAlreadyAsked(value);
+  if (out.kind === "create-token" || out.kind === "create-token-copy") out.replacementAsked = true;
+  return out;
+}
+
 /** Whether an amount reads the Equipment an "unattach" cost names (`{ paid:
  * "unattached" }`). */
 function amountReadsSacrificed(amount: EffectAmount): boolean {
@@ -42676,8 +42688,9 @@ controlledBy,
         const r = ability.replacement;
         if (r?.event !== "would-create-token" || r.becomes === undefined || (r.firstEachTurn === true && !first)) continue;
         if (!this.staticActive(by, ability)) continue;
-        // Its own token copies are not a new event for it to replace (614.5).
-        const replaced = { ...r.becomes.effect, replacementAsked: true } as EffectSpec;
+        // Its own tokens are not a new event for it to replace (614.5), however
+        // deep they sit in its effect (behind a choice, say).
+        const replaced = tokensAlreadyAsked(r.becomes.effect) as EffectSpec;
         const becomes: EffectSpec = after === undefined ? replaced : { kind: "sequence", effects: [replaced, after] };
         if (r.may !== true) {
           this.runReplacedBy(becomes, by.id, controller, { x: count, player: controller });
