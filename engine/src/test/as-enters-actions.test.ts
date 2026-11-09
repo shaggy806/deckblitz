@@ -344,6 +344,24 @@ describe("Mimeoplasm, Revered One", () => {
   });
 });
 
+describe("riot on a token copy (rule 702.136a)", () => {
+  it("is asked as it enters, the counter or haste", () => {
+    const { game, a } = table();
+    const spellbreaker = spawn(game, "Gruul Spellbreaker", A);
+    const asked: string[] = [];
+    a.chooseCreatureTypeFn = (_view, _source, options) => {
+      asked.push(options.join(" / "));
+      return "+1/+1 counter";
+    };
+    game.debugApplyEffect(A, { kind: "create-token-copy", of: 0, count: 1 }, [ref(spellbreaker)]);
+    settle(game);
+    expect(asked).toEqual(["+1/+1 counter / Haste"]);
+    const token = game.state.zones.shared.battlefield.find((id) => game.state.objects[id].isToken === true)!;
+    expect(counters(game, token)).toBe(1);
+    expect(game.characteristics(token).keywords.has("haste")).toBe(false);
+  });
+});
+
 describe("Frankenstein's Monster", () => {
   it("exiles X and picks a counter for each", () => {
     const { game, a } = table();

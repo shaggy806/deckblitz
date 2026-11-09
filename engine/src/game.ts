@@ -42852,21 +42852,31 @@ controlledBy,
     else this.enterTokenCopies(entry);
   }
 
+  /** Minting a token that has still to enter (`mintEnteringToken`): riot's
+   * haste waits for the answer it gets as it does. Spans that one call. */
+  private mintingToEnter = false;
+
   /** A token of `planned`, not on the battlefield yet: `zone: "outside"`, in
    * no zone's list, so nothing in the game can see or affect it (rule
    * 400.11c) while its "as this enters" choices wait on it. `moveObject` takes
    * it from there, keeping what it was made as. */
   private mintEnteringToken(planned: PlannedTokenCopies): ObjectId {
-    const id = this.withTokenLink(planned.createdWith, () => this.mintFreshTokenObject(
-      planned.controller,
-      planned.copyName,
-      planned.copyName,
-      planned.modifiers,
-      planned.exileAtEndStep,
-      true,
-      false,
-      planned.sacrificeAtEndStep,
-    ));
+    this.mintingToEnter = true;
+    let id: ObjectId;
+    try {
+      id = this.withTokenLink(planned.createdWith, () => this.mintFreshTokenObject(
+        planned.controller,
+        planned.copyName,
+        planned.copyName,
+        planned.modifiers,
+        planned.exileAtEndStep,
+        true,
+        false,
+        planned.sacrificeAtEndStep,
+      ));
+    } finally {
+      this.mintingToEnter = false;
+    }
     const token = this.state.objects[id];
     token.zone = "outside";
     // What minting it applied is applied again as it enters, answers and all.
@@ -43365,7 +43375,7 @@ controlledBy,
       this.state.objects[id].counters[c.kind] =
         (this.state.objects[id].counters[c.kind] ?? 0) + c.amount;
     }
-    if (entering.riotHaste) this.gainRiotHaste(id);
+    if (entering.riotHaste && !this.mintingToEnter) this.gainRiotHaste(id);
     if (entering.tributeUnpaid) this.state.objects[id].tributeUnpaid = true;
     if (count > 1) this.state.objects[id].stackCount = count;
     if (!skipBattlefield) {
