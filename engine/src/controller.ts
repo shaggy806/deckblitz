@@ -1515,34 +1515,40 @@ export function fitCastTargets(
   const fitted =
     counted === null || legal.reducingTargets === undefined
       ? counted
-      : withReducingTarget(counted, options, legal.reducingTargets);
+      : withReducingTarget(counted, options, legal.reducingTargets, legal.reducingTargetsAtLeast ?? 1);
   return fitted === null || !targetsWithinTaxes(legal, fitted) ? null : fitted;
 }
 
 /**
  * `chosen` with one of `reducing` among its targets — a spell offered only at
  * the price its `targetCostReduction` earns (`LegalAction.reducingTargets`):
- * as it stands if one already is, else the first slot that can take one not
- * already chosen elsewhere gets the first such. `null` when none can.
+ * as it stands if enough already are (`atLeast`), else each time the first
+ * slot not already holding one that can take one not chosen elsewhere gets the
+ * first such. `null` when none can.
  */
 function withReducingTarget(
   chosen: (TargetRef | null)[],
   options: readonly (readonly TargetRef[])[],
   reducing: readonly ObjectId[],
+  atLeast: number,
 ): (TargetRef | null)[] | null {
-  const earns = (ref: TargetRef | null): boolean => ref?.kind === "object" && reducing.includes(ref.object);
-  if (chosen.some(earns)) return chosen;
-  const taken = (ref: TargetRef): boolean =>
-    chosen.some((c) => c?.kind === "object" && ref.kind === "object" && c.object === ref.object);
-  for (let i = 0; i < options.length; i += 1) {
-    const pick = options[i].find((ref) => earns(ref) && !taken(ref));
-    if (pick === undefined) continue;
-    const out = [...chosen];
-    while (out.length < i) out.push(null);
-    out[i] = pick;
-    return out;
+  const earns = (ref: TargetRef | null | undefined): boolean => ref?.kind === "object" && reducing.includes(ref.object);
+  const out = [...chosen];
+  while (out.filter(earns).length < atLeast) {
+    const taken = (ref: TargetRef): boolean =>
+      out.some((c) => c?.kind === "object" && ref.kind === "object" && c.object === ref.object);
+    let placed = false;
+    for (let i = 0; i < options.length && !placed; i += 1) {
+      if (earns(out[i])) continue;
+      const pick = options[i].find((ref) => earns(ref) && !taken(ref));
+      if (pick === undefined) continue;
+      while (out.length < i) out.push(null);
+      out[i] = pick;
+      placed = true;
+    }
+    if (!placed) return null;
   }
-  return null;
+  return out;
 }
 
 function castExtras(

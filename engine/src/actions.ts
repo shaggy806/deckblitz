@@ -1399,6 +1399,9 @@ export type LegalAction =
        * must be among these, or the cast is refused (`fitCastTargets` keeps
        * one). An X spell says it in `xCost.reducingTargets` instead. */
       readonly reducingTargets?: readonly ObjectId[];
+      /** How many of `reducingTargets` the cast must name, when one isn't
+       * enough (two Spellwild Ouphes at once — rule 601.2f). */
+      readonly reducingTargetsAtLeast?: number;
       /** Set when some offered target makes the spell cost more
        * (`targetedBySpellsCost`'s mana — Boreal Elemental): what each adds,
        * and the most generic mana the caster can add at the X this was

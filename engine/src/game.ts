@@ -1785,6 +1785,10 @@ function castableFaces(def: CardDefinition): readonly (number | undefined)[] {
   return def.faces.flatMap((_n, i) => (def.split && i === 0 ? [] : [i]));
 }
 
+/** Whether an {X} cost string: an X spell says its reducing targets on its
+ * `xCost` instead. */
+const xPlanCost = (cost: string | null): boolean => cost !== null && parseManaCost(cost).x > 0;
+
 /** The most sets of picks `tapCostOffer` tries for one candidate. */
 const TAP_CHOICE_TRIALS = 64;
 
@@ -5143,6 +5147,12 @@ export class Game {
         () => castableAt(pricedAt).castable,
       );
       const reducingTargets = this.reducingTargetsNeeded(def, player, card, options, () => castableAt(pricedAt).castable);
+      const reducingTargetsAtLeast =
+        reducingTargets === undefined || xPlanCost(variantCost)
+          ? undefined
+          : this.earnersNeeded(player, reducingTargets, options.length, (targets) =>
+              this.withFace(card, face ?? 0, () => this.castingCostOf(player, card, def, 0, variantCost, pricedAt, targets)),
+            );
       // Rule 601.2c — a spell can't be cast without a legal target for every
       // slot that demands one. An *optional* slot ("up to one target
       // creature") with nothing to point at is simply skipped, so it never
@@ -5609,6 +5619,7 @@ export class Game {
         ...(targetCount !== undefined ? { targetCount } : {}),
         ...(xGroup !== null ? { targetCount: xGroup.targetCount } : {}),
         ...(reducingTargets !== undefined ? { reducingTargets } : {}),
+        ...(reducingTargetsAtLeast !== undefined && reducingTargetsAtLeast > 1 ? { reducingTargetsAtLeast } : {}),
         ...(xPlan !== null
           ? {
               xCost:
@@ -16036,6 +16047,26 @@ export class Game {
       this.targetCostReductionOff = false;
     }
     return full ? undefined : earning;
+  }
+
+  /**
+   * How many of `earning` (the targets that can pay for a spell) a cast must
+   * name to be affordable: the same as a player's cost once it knows its
+   * targets (rule 601.2f), each earner counted separately. Those worth most
+   * first; `undefined` if no count within `slots` slots makes it payable.
+   */
+  private earnersNeeded(
+    player: PlayerId,
+    earning: readonly ObjectId[],
+    slots: number,
+    costOf: (targets: readonly TargetRef[]) => ManaCost,
+  ): number | undefined {
+    const worth = (id: ObjectId): number => manaValue(costOf([{ kind: "object", object: id }]));
+    const best = [...earning].sort((a, b) => worth(a) - worth(b)).map((object): TargetRef => ({ kind: "object", object }));
+    for (let k = 1; k <= Math.min(slots, best.length); k += 1) {
+      if (this.payMana(player, costOf(best.slice(0, k))) !== null) return k;
+    }
+    return undefined;
   }
 
   /** Whether what `player` would pay for `cardId` depends on how many
