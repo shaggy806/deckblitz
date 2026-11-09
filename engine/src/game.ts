@@ -1583,7 +1583,8 @@ const PERMANENT_TYPES: ReadonlySet<CardType> = new Set<CardType>([
 /** A `deals-damage-batch` trigger owed by the damage event under way: the
  * players it has dealt damage to so far and how much. */
 interface OwedDamageBatchTrigger {
-  readonly ability: TriggeredAbility;
+  /** `null`: a delayed ability (`fireWheneverWatchers`), its trigger whole. */
+  readonly ability: TriggeredAbility | null;
   readonly trigger: PendingTrigger;
   readonly multiplier: number;
   readonly players: Set<PlayerId>;
@@ -29393,6 +29394,41 @@ export class Game {
    * its own is queued as an ability that chooses them as it goes on the
    * stack; one without acts on the creating ability's.
    */
+  /** Add `event`'s damage to what a `deals-damage-batch` trigger is owed for
+   * the damage event under way: one entry per watcher (`watcher`) and, unless
+   * it fires once per event, per player dealt damage. */
+  private oweDamageToTrigger(
+    batch: NonNullable<Game["damageBatch"]>,
+    watcher: string,
+    ability: TriggeredAbility | null,
+    trigger: PendingTrigger,
+    multiplier: number,
+    perEvent: boolean,
+    event: Extract<GameEvent, { type: "damage-dealt" }>,
+    player: PlayerId,
+  ): void {
+    const key = perEvent ? watcher : `${watcher}@${player}`;
+    const owed = batch.damageTo.get(key);
+    const source = this.state.objects[event.source];
+    const stint = source?.zone === "battlefield" ? (source.zoneChangeCount ?? 0) : source?.lastKnown?.zoneChangeCount;
+    const counted = stint === undefined ? [] : [{ object: event.source, zoneChangeCount: stint }];
+    if (owed === undefined) {
+      batch.damageTo.set(key, {
+        ability,
+        trigger,
+        multiplier,
+        players: new Set([player]),
+        amount: event.amount,
+        perEvent,
+        sources: counted,
+      });
+    } else {
+      owed.players.add(player);
+      owed.amount += event.amount;
+      for (const s of counted) if (!owed.sources.some((o) => o.object === s.object)) owed.sources.push(s);
+    }
+  }
+
   private fireWheneverWatchers(event: GameEvent): void {
     const usedUp: DelayedTrigger[] = [];
     for (const trigger of this.state.delayedTriggers) {
@@ -29479,6 +29515,19 @@ export class Game {
             },
           });
           if (at.once === true) break;
+        }
+        continue;
+      }
+      // "Whenever one or more creatures deal combat damage to a player this
+      // turn" (Jace, Cunning Castaway): once per player, or per event, for
+      // the whole simultaneous event, as a printed one (rule 603.2c).
+      if (at.whenever.on === "deals-damage-batch" && event.type === "damage-dealt" && event.target.kind === "player") {
+        const perEvent = at.whenever.once === "per-event";
+        const owedTrigger = perEvent ? withoutTriggerPlayer(pending) : pending;
+        if (this.damageBatch === null) {
+          this.state.pendingTriggers.push({ ...owedTrigger, triggerValue: perEvent ? 1 : event.amount });
+        } else {
+          this.oweDamageToTrigger(this.damageBatch, `delayed:${trigger.id}`, null, owedTrigger, 1, perEvent, event, event.target.player);
         }
         continue;
       }
@@ -30153,26 +30202,7 @@ export class Game {
               this.queueTrigger(ability, { ...trigger, triggerValue: perEvent ? 1 : event.amount }, multiplier);
               return;
             }
-            const key = perEvent ? `${id}#${index}` : `${id}#${index}@${player}`;
-            const owed = damageBatch.damageTo.get(key);
-            const source = this.state.objects[event.source];
-            const stint = source?.zone === "battlefield" ? (source.zoneChangeCount ?? 0) : source?.lastKnown?.zoneChangeCount;
-            const counted = stint === undefined ? [] : [{ object: event.source, zoneChangeCount: stint }];
-            if (owed === undefined) {
-              damageBatch.damageTo.set(key, {
-                ability,
-                trigger,
-                multiplier,
-                players: new Set([player]),
-                amount: event.amount,
-                perEvent,
-                sources: counted,
-              });
-            } else {
-              owed.players.add(player);
-              owed.amount += event.amount;
-              for (const s of counted) if (!owed.sources.some((o) => o.object === s.object)) owed.sources.push(s);
-            }
+            this.oweDamageToTrigger(damageBatch, `${id}#${index}`, ability, trigger, multiplier, perEvent, event, player);
             return;
           }
           // "Whenever this deals damage", with nothing said of what to: once
@@ -54119,23 +54149,21 @@ export class Game {
       if (enough(ability, trigger)) this.queueTrigger(ability, trigger, multiplier);
     }
     for (const owed of batch.damageTo.values()) {
-      this.queueTrigger(
-        owed.ability,
-        {
-          ...owed.trigger,
-          triggerValue: owed.perEvent ? owed.players.size : owed.amount,
-          // "Tap those creatures" (Tamiyo, Upriser Crowned): the sources.
-          lastKnownRefs: {
-            ...(owed.trigger.lastKnownRefs ?? {}),
-            sets: addToSet(
-              owed.trigger.lastKnownRefs?.sets,
-              "batch",
-              owed.sources.map(({ object, zoneChangeCount }) => ({ object, stint: zoneChangeCount })),
-            ),
-          },
+      const settled: PendingTrigger = {
+        ...owed.trigger,
+        triggerValue: owed.perEvent ? owed.players.size : owed.amount,
+        // "Tap those creatures" (Tamiyo, Upriser Crowned): the sources.
+        lastKnownRefs: {
+          ...(owed.trigger.lastKnownRefs ?? {}),
+          sets: addToSet(
+            owed.trigger.lastKnownRefs?.sets,
+            "batch",
+            owed.sources.map(({ object, zoneChangeCount }) => ({ object, stint: zoneChangeCount })),
+          ),
         },
-        owed.multiplier,
-      );
+      };
+      if (owed.ability === null) this.state.pendingTriggers.push(settled);
+      else this.queueTrigger(owed.ability, settled, owed.multiplier);
     }
     for (const { controller, amount } of batch.lifelink.values()) this.changeLife(controller, amount);
   }
