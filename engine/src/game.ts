@@ -13507,13 +13507,20 @@ export class Game {
    */
   offersFor(player: PlayerId): LegalAction[] {
     const plain = this.legalActions(player);
-    // It takes exactly all of their life, 2 a pip: an even total, and no cost
-    // has more than ten such pips. Most boards are spared a second enumeration.
-    const life = this.state.players[player]?.life ?? 0;
-    if (life < 2 || life > 20 || life % 2 !== 0) return plain;
-    const allOfIt = life / 2;
+    // It takes exactly all of their life, 2 a pip, past what a commander tax
+    // paid in life takes (2 a cast, `commanderTaxLife`): an even total either
+    // way, and no cost has more than ten such pips. Most boards are spared a
+    // second enumeration.
+    const seat = this.state.players[player];
+    const life = seat?.life ?? 0;
+    const mostTax = 2 * Math.max(0, ...Object.values(seat?.commanderCastCounts ?? {}));
+    if (life < 2 || life - mostTax > 20 || life % 2 !== 0) return plain;
+    const pipsToZero = (offer: LegalAction): number =>
+      (life - (offer.kind === "cast-spell" ? this.commanderTaxLife(player, offer.card) : 0)) / 2;
     const toZero = (offer: LegalAction): LegalAction =>
-      "phyrexianPips" in offer ? { ...offer, phyrexianPips: allOfIt, phyrexianLifeAtLeast: allOfIt } : offer;
+      "phyrexianPips" in offer
+        ? { ...offer, phyrexianPips: pipsToZero(offer), phyrexianLifeAtLeast: pipsToZero(offer) }
+        : offer;
     const awaiting = this.state.awaiting;
     if (awaiting !== null) {
       // The question is the same either way (`optionModes`, the `may` raise):
@@ -13530,7 +13537,8 @@ export class Game {
     const key = (offer: LegalAction): string => JSON.stringify({ ...offer, xCost: undefined });
     const known = new Set(plain.map(key));
     const extra = this.withLifeChoice(Number.MAX_SAFE_INTEGER, () => this.legalActions(player)).filter(
-      (offer) => "phyrexianPips" in offer && offer.phyrexianPips !== undefined && !known.has(key(offer)),
+      (offer) =>
+        "phyrexianPips" in offer && offer.phyrexianPips !== undefined && !known.has(key(offer)) && pipsToZero(offer) > 0,
     );
     return extra.length === 0 ? plain : [...plain, ...extra.map(toZero)];
   }
