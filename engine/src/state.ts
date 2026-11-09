@@ -2268,6 +2268,16 @@ export interface CastSpellRecord {
   readonly spell: LastKnownInfo;
 }
 
+/** A `choose-permanents` effect's resolution, for its `then`, which runs once
+ * the choice is answered (`Game.applyChoosePermanents`): the trigger it reads
+ * and where each kept target was (rule 608.2h). */
+export interface ChoosePermanentsResolution {
+  readonly triggerValue: number;
+  readonly triggerObject?: ObjectId;
+  readonly targetZones: readonly (ZoneType | null)[];
+  readonly lastKnownRefs: LastKnownRefs;
+}
+
 /**
  * Which battlefield stint of the objects a spell or ability refers to it
  * means, for last-known information (rule 608.2h). Each is the referred
@@ -4136,6 +4146,8 @@ export type AwaitingDecision =
       /** A `choose-permanents` effect's `keepTargets`: the resolution's own
        * targets, which `then` reads from slot 1 (Crush Underfoot). */
       readonly thenTargets?: readonly (TargetRef | undefined)[];
+      /** What `then` reads of the resolution that asked. */
+      readonly thenResolution?: ChoosePermanentsResolution;
       /** A `choose-permanents` effect's `thenTogether`: `then` runs once, every
        * permanent chosen in the target slots from 0 (Expose the Culprit). */
       readonly thenTogether?: true;

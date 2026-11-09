@@ -7186,8 +7186,7 @@ Delete an entry in the same commit as the feature that retires it.
   opponent ends up drawing; the engine takes the one first in turn order
   after them. (Against one opponent, however many Thieves they have, there's
   nothing to choose.) The same for Crafty Cutpurse effects of two different
-  opponents on one token (`Game.tokenCreatorAfterRedirects`). No damage
-  **redirection** to a third object (Harm's Way).
+  opponents on one token (`Game.tokenCreatorAfterRedirects`).
 - **Snow mana of a spell's colours** — Boreal Outrider's "if {S} of any of
   that spell's colors was spent": a clause can't yet read the spell's colours
   for its `type`. Snow mana itself

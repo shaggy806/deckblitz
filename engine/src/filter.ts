@@ -141,53 +141,6 @@ export function filterReadsX(filter: CardFilter): boolean {
   );
 }
 
-/**
- * `filter` with every bare `n: "x"` of {@link filterReadsX}'s clauses read as
- * `x`: for a filter judged after its spell or ability's `{X}` is no longer at
- * hand — a `look-and-choose`'s, matched as the choice is offered and answered
- * (Evershrike's "an Aura card with mana value X or less"). The same object
- * when nothing in it reads a bare X.
- */
-export function filterAtX(filter: CardFilter, x: number): CardFilter {
-  const at = (cmp: NumCompare | undefined): NumCompare | undefined =>
-    cmp !== undefined && cmp.n === "x" ? { ...cmp, n: x } : cmp;
-  const keys = [
-    "manaValue",
-    "power",
-    "toughness",
-    "basePower",
-    "baseToughness",
-    "equipmentAttached",
-    "coloredManaSymbols",
-    "cardTypeCount",
-  ] as const;
-  let out: CardFilter = filter;
-  const set = (patch: Partial<CardFilter>): void => {
-    out = { ...out, ...patch };
-  };
-  for (const key of keys) {
-    const cmp = filter[key];
-    if (cmp !== undefined && cmp.n === "x") set({ [key]: at(cmp) });
-  }
-  if (filter.manaSpent?.some((clause) => clause.amount?.n === "x")) {
-    set({ manaSpent: filter.manaSpent.map((clause) => (clause.amount === undefined ? clause : { ...clause, amount: at(clause.amount) })) });
-  }
-  if (filter.counters?.compare?.n === "x") set({ counters: { ...filter.counters, compare: at(filter.counters.compare)! } });
-  if (filter.nameDiffersFromEach !== undefined) {
-    const inner = filterAtX(filter.nameDiffersFromEach, x);
-    if (inner !== filter.nameDiffersFromEach) set({ nameDiffersFromEach: inner });
-  }
-  if (filter.anyOf !== undefined) {
-    const inner = filter.anyOf.map((f) => filterAtX(f, x));
-    if (inner.some((f, i) => f !== filter.anyOf![i])) set({ anyOf: inner });
-  }
-  if (filter.not !== undefined) {
-    const inner = filterAtX(filter.not, x);
-    if (inner !== filter.not) set({ not: inner });
-  }
-  return out;
-}
-
 /** One condition on the mana spent on something: {@link ManaSpentQuery} says
  * what to count, `amount` how much must be there (absent, at least one). */
 export interface ManaSpentClause extends ManaSpentQuery {
@@ -617,6 +570,10 @@ export interface CardFilter {
    * same. Without a source, nothing is it.
    */
   readonly isSource?: boolean;
+  /** The object `isSource` and `sameNameAsSource` mean, in an effect's
+   * filter, however that filter is then matched: bound by
+   * `bindDynamicCompares`, never authored. */
+  readonly appliedBy?: ObjectId;
   /**
    * With `sameNameAsTarget`: the namesakes must be tokens, the target itself
    * needn't be — Legions to Ashes' "exile target nonland permanent an opponent
@@ -2171,9 +2128,22 @@ export function matchesFilter(
     if (!isOne) return false;
   }
   if (filter.sameNameAsSource !== undefined) {
-    const from = ctx.source === undefined ? undefined : state.objects[ctx.source];
+    const applying = filter.appliedBy ?? ctx.source;
+    const from = applying === undefined ? undefined : state.objects[applying];
     const names = live !== undefined ? namesOf(registry, live) : lastKnownNames(registry, lki!);
-    const same = from !== undefined && namesOf(registry, from).some((n) => names.includes(n));
+    // A source that has left the battlefield goes by the name it last had
+    // there (rules 113.7a, 608.2h): a Clone's ability doesn't start asking
+    // for "Clone" because the Clone died in response.
+    const gone =
+      applying === undefined
+        ? undefined
+        : from === undefined
+          ? state.ceasedTokens?.[applying]
+          : from.zone !== "battlefield" && from.zone !== "stack"
+            ? from.lastKnown
+            : undefined;
+    const sourceNames = gone !== undefined ? lastKnownNames(registry, gone) : from !== undefined ? namesOf(registry, from) : [];
+    const same = sourceNames.some((n) => names.includes(n));
     if (same !== filter.sameNameAsSource) return false;
   }
   if (filter.sameNameWith !== undefined) {
@@ -2394,8 +2364,9 @@ export function matchesFilter(
     const stint = live !== undefined ? (live.zoneChangeCount ?? 0) : lki!.zoneChangeCount;
     if (!blockedThisTurnMatches(state, registry, id, stint, filter.blockedThisTurn, ctx)) return false;
   }
-  if (filter.isSource !== undefined && (ctx.source !== undefined && ctx.source === id) !== filter.isSource) {
-    return false;
+  if (filter.isSource !== undefined) {
+    const applying = filter.appliedBy ?? ctx.source;
+    if ((applying !== undefined && applying === id) !== filter.isSource) return false;
   }
   if (filter.hostOfSource !== undefined) {
     const by = ctx.source === undefined ? undefined : state.objects[ctx.source];

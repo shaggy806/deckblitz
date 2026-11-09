@@ -359,7 +359,7 @@ import {
 } from "./object-sets.js";
 import { goadersOf } from "./goad.js";
 import { answeringPlayer, attackChooser, decidingPlayer } from "./player-control.js";
-import type { AddedPhase, LeftBattlefield, PlayerControl } from "./state.js";
+import type { AddedPhase, ChoosePermanentsResolution, LeftBattlefield, PlayerControl } from "./state.js";
 import { blockersRequiredBy, defendersForAttacker, mustBeBlockedByExactlyOne } from "./combat/eligibility.js";
 import { combatRuleWord } from "./combat/rules.js";
 import { bandingAbilitiesOf } from "./combat/banding.js";
@@ -10726,7 +10726,8 @@ export class Game {
       // A wish's find is revealed from outside the game (rule 701.23j); a
       // face-up exiled card it may take instead is already public.
       const zoneOf = (id: ObjectId): ZoneType | undefined => this.state.objects[id]?.zone;
-      this.revealCards(player, chosen.filter((id) => zoneOf(id) !== "outside" && zoneOf(id) !== "exile"), "library");
+      this.revealCards(player, chosen.filter((id) => zoneOf(id) === "library"), "library");
+      this.revealCards(player, chosen.filter((id) => zoneOf(id) === "hand"), "hand");
       this.revealCards(player, chosen.filter((id) => zoneOf(id) === "outside"), "sideboard");
     }
     // "Reveal any number of green cards in your hand" (the Scents): revealed
@@ -34410,6 +34411,7 @@ export class Game {
             triggerValue,
             signed: true,
             ...(triggerObject !== undefined ? { triggerObject } : {}),
+            targetZones,
             lastKnownRefs: refs,
           }),
           // "If that player has 10 or less life" (Ezio Auditore da Firenze),
@@ -37566,7 +37568,12 @@ controlledBy,
         ),
       timeCountersOnSuspended: (amount) => this.timeCountersOnSuspended(amount),
       choosePermanents: (filter, min, max, then, prompt, exceptSource, except, chooser, together, thenTargets, thenTogether) =>
-        this.beginChoosePermanents(source, chooser ?? controller, x, filter, min, max, then, prompt, exceptSource === true, except, together, thenTargets, thenTogether),
+        this.beginChoosePermanents(source, chooser ?? controller, x, filter, min, max, then, prompt, exceptSource === true, except, together, thenTargets, thenTogether, {
+          triggerValue,
+          ...(triggerObject !== undefined ? { triggerObject } : {}),
+          targetZones,
+          lastKnownRefs: refs,
+        }),
       blight: (player, amount, then) => this.beginBlight(player, source, amount, { x, ...(opts.payingCost !== undefined ? { priorityTo: opts.payingCost } : {}), ...(then !== undefined ? { then } : {}) }),
       bolster: (amount) => this.beginBolster(controller, source, amount, x),
       behold: (spec, then) => this.beginBehold(controller, source, spec, { x, ...(then !== undefined ? { then } : {}) }),
@@ -39689,7 +39696,7 @@ controlledBy,
         : {}),
       // "You may reveal a historic card from among them and put it into your
       // hand": only what's taken is shown, as it's taken.
-      ...(reveal === "chosen" && zone === "library" ? { reveal: true } : {}),
+      ...(reveal === "chosen" && (zone === "library" || zone === "hand") ? { reveal: true } : {}),
     };
     if (anOpponentPicks) {
       this.offerToAnOpponent(decision, player, source);
@@ -40826,7 +40833,10 @@ controlledBy,
         ? this.optionModes(player, spec.options, source, targets, x)
         : spec.effect !== undefined
           ? { modes: [{ text: spec.prompt ?? "Do it?", effect: spec.effect }] }
-          : null;
+          : spec.prompt !== undefined
+            ? // Only a question: what a yes does is in `ifDid`.
+              { modes: [{ text: spec.prompt, effect: { kind: "sequence" as const, effects: [] } }] }
+            : null;
     if (offer === null) return;
     this.beginModesChoice(
       source,
@@ -41554,7 +41564,8 @@ controlledBy,
     const expiry = permission.expiry;
     const during = typeof expiry === "object" && "whileSource" in expiry ? expiry.whileSource : undefined;
     if (permission.gate !== undefined) {
-      const gateSource = during != null ? this.state.objects[during.id] : card;
+      // "You" is whoever holds the permission, not the exiled card's owner.
+      const gateSource = during != null ? this.state.objects[during.id] : { ...card, controller: player };
       if (gateSource === undefined || !staticConditionMet(this.state, this.registry, gateSource, permission.gate)) return false;
     }
     if (during !== undefined) {
@@ -47537,6 +47548,7 @@ controlledBy,
     togetherRule?: ChoosePermanentsTogether,
     thenTargets?: ResolvedTargets,
     thenTogether?: true,
+    thenResolution?: ChoosePermanentsResolution,
   ): void {
     // With the source, for a filter about it: "equipped creature" (Hand of
     // Vecna's `hostOfSource`), "attached to this".
@@ -47566,6 +47578,7 @@ controlledBy,
       ...(together !== undefined ? { together } : {}),
       ...(thenTargets !== undefined ? { thenTargets } : {}),
       ...(thenTogether === true ? { thenTogether: true as const } : {}),
+      ...(thenResolution !== undefined ? { thenResolution } : {}),
     };
   }
 
@@ -47862,7 +47875,7 @@ controlledBy,
       if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
       return;
     }
-    const { then, source, x, priorityTo, costOf, blight, bolster } = awaiting;
+    const { then, source, x, priorityTo, costOf, blight, bolster, thenResolution: resumed } = awaiting;
     this.state.awaiting = null;
     if (costOf !== undefined) for (const id of chosen) this.recordReturnedAttacking(costOf, id);
     // A blight's creature is singled out of its stack before the counters
@@ -47883,7 +47896,18 @@ controlledBy,
       if (chosen.length > 0) {
         applyEffectSpec(
           then,
-          this.makeResolutionContext(source, player, chosen.map((object) => ({ kind: "object", object })), x),
+          this.makeResolutionContext(
+            source,
+            player,
+            chosen.map((object) => ({ kind: "object", object })),
+            x,
+            resumed?.triggerValue ?? 0,
+            resumed?.triggerObject,
+            1,
+            0,
+            [],
+            resumed?.lastKnownRefs,
+          ),
         );
       }
       if (this.state.awaiting === null) this.prepareForPriority(priorityTo ?? this.activePlayer);
@@ -47915,11 +47939,13 @@ controlledBy,
               player,
               [{ kind: "object", object: id }, ...(awaiting.thenTargets ?? [])],
               x,
-              0,
-              undefined,
+              resumed?.triggerValue ?? 0,
+              resumed?.triggerObject,
               1,
               0,
-              [zone],
+              // A kept target's slot is one on from its own, and so is where it was.
+              [zone, ...(awaiting.thenTargets !== undefined ? (resumed?.targetZones ?? []) : [])],
+              resumed?.lastKnownRefs,
             ),
           );
         }

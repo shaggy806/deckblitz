@@ -407,7 +407,7 @@ describe("Evershrike", () => {
     expect(named(game, "Evershrike", A).filter((id) => zone(game, id) === "battlefield")).toEqual([]);
   });
   // Its filter's bare `n: "x"` is the activation's X: a look-and-choose's filter
-  // read 0 there until `filterAtX` (B265).
+  // read 0 there until it was bound as the effect began (B265).
   it("with an Aura put on it, it stays, +2/+2", () => {
     const { game, a } = table();
     const shrike = toGraveyard(game, "Evershrike");

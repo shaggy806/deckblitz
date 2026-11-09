@@ -23,7 +23,6 @@ import type {
   TurnStat,
 } from "./cards.js";
 import type { AggregateSpec, CardFilter, DamageSourceClause, ShareReference, SharedTypes } from "./filter.js";
-import { filterAtX } from "./filter.js";
 import type { CardNameAim, CardNameFilter } from "./card-names.js";
 import { differentManaSplits, spentManaCount, type Color, type ManaCastFrom, type ManaProductionRule, type ManaSpendPurpose, type ManaSpentQuery, type ManaType, type SpendAs, type SpentMana } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
@@ -3711,7 +3710,8 @@ export type EffectSpec =
        *   `CHOSEN_CARD_TYPE` in `then` — Blood Oath.
        * - `"counter-kind"`: a kind of counter on the object in target slot
        *   `on` ("choose a counter on target permanent" — Ichormoon Gauntlet),
-       *   or on any permanent its controller controls matching `among`;
+       *   or on any permanent matching `among` (`controlledBy: "you"` for
+       *   "a permanent you control");
        *   `CHOSEN_COUNTER` in `then`. With no counter there, nothing is
        *   chosen and `then` doesn't happen (Clockspinning's ruling: "nothing
        *   happens").
@@ -15091,6 +15091,12 @@ function isAmountCompare(value: Record<string, unknown>): boolean {
   return "op" in value && typeof n === "object" && n !== null && "amount" in n;
 }
 
+/** Is this a `NumCompare` written `n: "x"`? Bound like an `{ amount: "x" }`:
+ * a filter is applied by dozens of paths, and most have no X at hand. */
+function isBareXCompare(value: Record<string, unknown>): boolean {
+  return "op" in value && value["n"] === "x";
+}
+
 /** Card data is immutable, so whether a spec holds anything to bind is worth
  * remembering: nearly every resolution asks, and nearly none do. */
 const dynamicCompareMemo = new WeakMap<object, boolean>();
@@ -15102,6 +15108,9 @@ function containsDynamicCompare(value: unknown): boolean {
   const found = Array.isArray(value)
     ? value.some(containsDynamicCompare)
     : isAmountCompare(value as Record<string, unknown>) ||
+      isBareXCompare(value as Record<string, unknown>) ||
+      "isSource" in value ||
+      "sameNameAsSource" in value ||
       "sharesCardTypeWith" in value ||
       "sharesPermanentTypeWith" in value ||
       "sharesCreatureTypeWith" in value ||
@@ -15237,6 +15246,7 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
       const operand = record["n"] as { readonly amount: EffectAmount };
       return { ...record, n: amountValue(operand.amount, ctx) };
     }
+    if (isBareXCompare(record)) return { ...record, n: ctx.x };
     // A delayed ability binds as it resolves, when its source may be a new
     // object: "exile all tokens created with it at the beginning of the next
     // end step" means the permanent that has just left (rule 400.7).
@@ -15351,6 +15361,9 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
     if (blocked?.of !== undefined && blocked.with === undefined) {
       walked = { ...walked, blockedThisTurn: { ...blocked, with: blockPartners(blocked.of, ctx) } };
     }
+    // "This" in a filter: the object this effect is from, however the filter
+    // is then matched (most mass effects' matching has no source at hand).
+    if ("isSource" in walked || "sameNameAsSource" in walked) walked = { ...walked, appliedBy: ctx.source };
     // "With the same name as it / the exiled card / a permanent": the names
     // of what the reference names now (or last had) — every reference, since
     // an effect's matching has no source to read the live ones from.
@@ -17926,7 +17939,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (filter !== undefined) {
         const scopeTo = scopedController(controlledByTarget, ctx);
         if (controlledByTarget !== undefined && scopeTo === undefined) return;
-        ctx.becomeAll(filterAtX(filter, ctx.x), read, duration, {
+        ctx.becomeAll(filter, read, duration, {
           ...(exceptSource === true ? { exceptSource: true } : {}),
           ...(scopeTo !== undefined ? { scopeTo } : {}),
         });
@@ -20225,9 +20238,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         amountValue(spec.max, ctx),
         spec.destination,
         spec.leftover,
-        // A bare `n: "x"` is this resolution's X: the filter is matched later,
-        // as the choice is offered and answered, where no X is at hand.
-        spec.filter === undefined ? undefined : filterAtX(spec.filter, ctx.x),
+        spec.filter,
         spec.enterTapped === true,
         spec.then,
         spec.reveal ?? false,
@@ -20235,7 +20246,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         spec.secondPick === undefined
           ? undefined
           : {
-              ...(spec.secondPick.filter !== undefined ? { filter: filterAtX(spec.secondPick.filter, ctx.x) } : {}),
+              ...(spec.secondPick.filter !== undefined ? { filter: spec.secondPick.filter } : {}),
               min: spec.secondPick.min,
               max: amountValue(spec.secondPick.max, ctx),
               destination: spec.secondPick.destination,
