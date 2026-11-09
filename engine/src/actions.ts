@@ -1891,6 +1891,10 @@ export type LegalAction =
        * (Slayer's Cleaver's "by an Eldrazi"): the attacker, and which of this
        * defender's it needs among its blockers. Absent when there are none. */
       readonly mustBeBlockedByOneOf?: Readonly<Record<ObjectId, readonly ObjectId[]>>;
+      /** An attacker under two or more different such filters: each its own
+       * requirement (rule 509.1c), which of this defender's obey each. Absent
+       * where one list says it all. */
+      readonly mustBeBlockedByEach?: Readonly<Record<ObjectId, readonly (readonly ObjectId[])[]>>;
       /** Those of `mustBeBlockedIfAble` that "must be blocked by exactly one
        * creature if able" (Nacatl War-Pride): two on it obey it no more than
        * none. Absent when there are none. */

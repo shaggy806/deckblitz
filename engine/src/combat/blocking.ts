@@ -321,29 +321,30 @@ export function blockingViolations(
     // Blocked enough: on one creature of it, for an attacking stack.
     const most = (attacker: ObjectId): number =>
       Math.max(0, ...[...perAttacker.values()].filter((v) => v.attacker === attacker).map((v) => v.count));
-    const obeyed = ifAble.filter((a) => {
-      // Room for one creature only, and that one obeying a requirement of its
-      // own to block this: one requirement for another (rule 509.1c).
-      if (
-        roomForOne(offer, a) &&
-        blocks.some(
-          (b) =>
-            b.attacker === a && (offer.blockRequirements ?? []).some((r) => r.blocker === b.blocker && r.attacker === a),
-        )
-      ) {
-        return true;
-      }
-      // "By an Eldrazi": one of those among however many block it.
-      const by = offer.mustBeBlockedByOneOf?.[a];
-      if (by !== undefined && !blocks.some((b) => b.attacker === a && by.includes(b.blocker))) return false;
-      // "Exactly one": two on it obey it no more than none.
-      if (offer.mustBeBlockedByExactlyOne?.includes(a) === true) return most(a) === 1;
-      return most(a) >= need(a);
-    });
-    if (obeyed.length < plan.required) {
+    /** How many of the requirements on `a` this declaration obeys. */
+    const obeyedOn = (a: ObjectId): number =>
+      requirementsOn(offer, a).filter((by) => {
+        // Room for one creature only, and that one obeying a requirement of its
+        // own to block this: one requirement for another (rule 509.1c).
+        if (
+          roomForOne(offer, a) &&
+          blocks.some(
+            (b) =>
+              b.attacker === a && (offer.blockRequirements ?? []).some((r) => r.blocker === b.blocker && r.attacker === a),
+          )
+        ) {
+          return true;
+        }
+        // "By an Eldrazi": one of those among however many block it.
+        if (by !== undefined && !blocks.some((b) => b.attacker === a && by.includes(b.blocker))) return false;
+        // "Exactly one": two on it obey it no more than none.
+        if (offer.mustBeBlockedByExactlyOne?.includes(a) === true) return most(a) === 1;
+        return most(a) >= need(a);
+      }).length;
+    if (ifAble.reduce((n, a) => n + obeyedOn(a), 0) < plan.required) {
       const planned = new Set(plan.assignment.values());
       for (const attacker of ifAble) {
-        if (planned.has(attacker) && !obeyed.includes(attacker)) {
+        if (planned.has(attacker) && obeyedOn(attacker) < requirementsOn(offer, attacker).length) {
           out.push({ kind: "must-be-blocked-if-able", attacker });
         }
       }
@@ -458,6 +459,12 @@ function roomForOne(offer: BlockOffer, attacker: ObjectId): boolean {
     offer.singleBlockerAttackers?.includes(attacker) === true ||
     offer.mustBeBlockedByExactlyOne?.includes(attacker) === true
   );
+}
+
+/** Each "must be blocked if able" on `attacker`, as the creatures able to obey
+ * it (`undefined`: anyone): one, or one a filter (rule 509.1c). */
+function requirementsOn(offer: BlockOffer, attacker: ObjectId): readonly (readonly ObjectId[] | undefined)[] {
+  return offer.mustBeBlockedByEach?.[attacker] ?? [offer.mustBeBlockedByOneOf?.[attacker]];
 }
 
 /** Whether `blocker`, as `blocks` declares it, obeys one of its own
@@ -586,10 +593,10 @@ export function ifAblePlan(offer: BlockOffer): LurePlan {
   // another minimum of N — the smallest groups of entries that make N
   // creatures between them (a stack counting as every token in it), no
   // entry in a group it isn't needed in. Bounded like the search.
-  const ways = attackers.map((attacker) => {
+  const requirements = attackers.flatMap((attacker) => requirementsOn(offer, attacker).map((by) => ({ attacker, by })));
+  const ways = requirements.map(({ attacker, by }) => {
     const able = free.filter((e) => e.canBlock.includes(attacker) && blockIsFree(offer, e.blocker, attacker));
     const need = leastBlockers(offer, attacker);
-    const by = offer.mustBeBlockedByOneOf?.[attacker];
     // "Exactly one" under menace can't be obeyed at all (rule 509.1c).
     if (need > 1 && offer.mustBeBlockedByExactlyOne?.includes(attacker) === true) return [];
     if (need === 1) return able.filter((e) => by === undefined || by.includes(e.blocker)).map((e) => [e.blocker]);
@@ -615,26 +622,33 @@ export function ifAblePlan(offer: BlockOffer): LurePlan {
     grow(0, 0);
     return out;
   });
-  const used = new Set<ObjectId>();
-  const choice: (ObjectId[] | null)[] = attackers.map(() => null);
+  // Who's already taken, and on which attacker: a creature blocking it can
+  // obey two of its requirements at once, but only that attacker's.
+  const used = new Map<ObjectId, ObjectId>();
+  const choice: (ObjectId[] | null)[] = requirements.map(() => null);
   let best = 0;
   let bestChoice: (ObjectId[] | null)[] = [...choice];
   let steps = 0;
   const search = (i: number, value: number): boolean => {
     steps += 1;
     if (steps > LURE_SEARCH_LIMIT) return false;
-    if (value + (attackers.length - i) <= best) return true;
-    if (i === attackers.length) {
+    if (value + (requirements.length - i) <= best) return true;
+    if (i === requirements.length) {
       best = value;
       bestChoice = [...choice];
       return true;
     }
+    const attacker = requirements[i].attacker;
+    // Room for one: a different creature has no place beside the one there.
+    const onIt = [...used].filter(([, on]) => on === attacker).map(([b]) => b);
     for (const way of ways[i]) {
-      if (way.some((b) => used.has(b))) continue;
-      for (const b of way) used.add(b);
+      if (way.some((b) => used.has(b) && used.get(b) !== attacker)) continue;
+      if (roomForOne(offer, attacker) && onIt.length > 0 && way.some((b) => !onIt.includes(b))) continue;
+      const added = way.filter((b) => !used.has(b));
+      for (const b of added) used.set(b, attacker);
       choice[i] = way;
       const finished = search(i + 1, value + 1);
-      for (const b of way) used.delete(b);
+      for (const b of added) used.delete(b);
       choice[i] = null;
       if (!finished) return false;
     }
@@ -642,7 +656,7 @@ export function ifAblePlan(offer: BlockOffer): LurePlan {
   };
   search(0, 0);
   bestChoice.forEach((way, i) => {
-    for (const blocker of way ?? []) assignment.set(blocker, attackers[i]);
+    for (const blocker of way ?? []) assignment.set(blocker, requirements[i].attacker);
   });
   return { required: best, assignment };
 }

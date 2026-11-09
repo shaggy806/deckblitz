@@ -142,12 +142,16 @@ function blockersOffer(
     attacking.map((id) => [id, blockersRequiredBy(ctx.state, ctx.registry, id, eligibleIds)] as const),
   );
   const mustBeBlockedByOneOf: Record<ObjectId, readonly ObjectId[]> = {};
+  const mustBeBlockedByEach: Record<ObjectId, readonly (readonly ObjectId[])[]> = {};
   for (const [attacker, wanted] of required) {
-    const by = wanted
+    const each = wanted
       .filter((w) => !w.all)
-      .flatMap((w) => w.by)
-      .filter((blocker) => eligible.find((e) => e.blocker === blocker)?.canBlock.includes(attacker) === true);
-    if (by.length > 0) mustBeBlockedByOneOf[attacker] = [...new Set(by)];
+      .map((w) => [...new Set(w.by.filter((blocker) => eligible.find((e) => e.blocker === blocker)?.canBlock.includes(attacker) === true))])
+      .filter((by) => by.length > 0);
+    if (each.length > 0) mustBeBlockedByOneOf[attacker] = [...new Set(each.flat())];
+    // Two different filters are two requirements (a repeated one is just one).
+    const distinct = each.filter((by, i) => each.findIndex((other) => other.join() === by.join()) === i);
+    if (distinct.length > 1) mustBeBlockedByEach[attacker] = distinct;
   }
   const mustBeBlockedIfAble = attacking.filter(
     (id) =>
@@ -209,6 +213,7 @@ function blockersOffer(
     mustBlock,
     ...(mustBeBlockedIfAble.length > 0 ? { mustBeBlockedIfAble } : {}),
     ...(Object.keys(mustBeBlockedByOneOf).length > 0 ? { mustBeBlockedByOneOf } : {}),
+    ...(Object.keys(mustBeBlockedByEach).length > 0 ? { mustBeBlockedByEach } : {}),
     ...(exactlyOne.length > 0 ? { mustBeBlockedByExactlyOne: exactlyOne } : {}),
     ...(blockRequirements.length > 0 ? { blockRequirements } : {}),
     ...(Object.keys(attackerTokens).length > 0 ? { attackerTokens } : {}),
