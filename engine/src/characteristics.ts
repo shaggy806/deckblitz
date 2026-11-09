@@ -18,8 +18,9 @@
  * "becomes a N/N" and a static's `setBasePt`), **layer 7c** (counters, then
  * P/T bonuses + modifiers — rule 613.4c), **layer 7d** (`PtModifier.switchPt`
  * — 613.4d), timestamp-ordered within a layer.
- * NOT yet: a creature-type word's text change, and dependency
- * ordering (rule 613.8) outside layer 4's additive type grants. Layer 2
+ * NOT yet: a creature-type word's text change. Dependency ordering (rule
+ * 613.8) is applied where a real card shows one (layer 4's grants, abilities
+ * that lose abilities, keyword-scoped statics); no other layer has a pair. Layer 2
  * (control-change) is modeled in `game.ts` by reassigning
  * `GameObject.controller`, not here.
  */
