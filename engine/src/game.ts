@@ -587,7 +587,7 @@ import {
   thisWayEntries,
 } from "./this-way.js";
 import type { ThisWayEntry } from "./this-way.js";
-import { textWords } from "./text-change.js";
+import { textWords, tokenColorsAfter, type TextChange } from "./text-change.js";
 import type { TargetCopies, TargetCountRange } from "./target-count.js";
 import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
 import {
@@ -38275,7 +38275,7 @@ export class Game {
         if (target.kind === "object") this.turnFaceDown(target.object, as);
       },
       sourceStintNow: () => tokenLinkToSource()?.zoneChangeCount,
-      createToken: (token, count, who, tapped, sacrificeAtEndStep, gainUntilEndOfTurn, goadedForGame, thenCounters, basePt, attacking, separate, exileAtEndStep, attacksThisCombat, gainKeywords, attachTo, linkedToSource) => {
+      createToken: (token, count, who, tapped, sacrificeAtEndStep, gainUntilEndOfTurn, goadedForGame, thenCounters, basePt, attacking, separate, exileAtEndStep, attacksThisCombat, gainKeywords, attachTo, linkedToSource, textChanges) => {
         const link = linkedToSource === true ? tokenLinkToSource() : null;
         // "The tokens are goaded for the rest of the game": by this effect's
         // controller, whoever creates them (Rendmaw, Creaking Nest).
@@ -38297,6 +38297,7 @@ export class Game {
             attacksThisCombat === true,
             gainKeywords,
             attachTo,
+            textChanges,
           ));
           // "Sacrifice / exile them at the beginning of the next end step":
           // a delayed triggered ability over these tokens (rule 603.7).
@@ -42218,6 +42219,8 @@ export class Game {
      * enchant, and none is created (the Role rulings). See the effect's
      * `attachedTo`. */
     attachTo?: ObjectId | null,
+    /** The colour words changed in the text making them (`tokenTextChanges`). */
+    textChanges?: readonly TextChange[],
   ): readonly ObjectId[] {
     const def = this.registry.get(tokenName); // validate the token is a known definition
     controller = this.tokenCreatorAfterRedirects(controller);
@@ -42254,6 +42257,7 @@ export class Game {
           ]
         : []),
     ];
+    const changedColors = tokenColorsAfter(def.colors, textChanges);
     return this.withEnterBatch(() => [
       ...this.mintTokenBatch(
         controller,
@@ -42261,6 +42265,21 @@ export class Game {
         null,
         total,
         [
+          // The colour the changed text gave it, a copiable value (rules
+          // 111.3, 612.2), under every other colour-setting effect.
+          ...(changedColors === undefined
+            ? []
+            : [
+                {
+                  power: 0,
+                  toughness: 0,
+                  keywords: [],
+                  copiable: true as const,
+                  setColors: [...changedColors],
+                  untilEndOfTurn: false,
+                  timestamp: -1,
+                },
+              ]),
           // A token named after a real card carries its name as a copiable
           // value (`CardDefinition.tokenName`, rule 111.3).
           ...(def.tokenName === undefined

@@ -7591,6 +7591,10 @@ export type EffectSpec =
     }
   | {
       readonly kind: "create-token";
+      /** Only built by a text change (`text-change.ts`): the colour words
+       * changed in this text, in order — "create a 1/1 white Soldier" made
+       * "blue" makes a blue one (rules 111.3, 612.2). */
+      readonly tokenTextChanges?: readonly TextChange[];
       /** Set when a would-create-token replacement was asked, and declined (rule 616.1). */
       readonly replacementAsked?: true;
       /** Name of a token definition in the {@link CardRegistry}. */
@@ -12120,6 +12124,8 @@ export interface EffectApi {
     attachTo?: ObjectId | null,
     /** The new tokens remember this effect's source (`GameObject.createdWith`). */
     linkedToSource?: boolean,
+    /** The colour words changed in the creating text (`tokenTextChanges`). */
+    textChanges?: readonly TextChange[],
   ): void;
   /** Which stint on the battlefield the resolving ability means by its source
    * (rule 607.2a): the one it came from, though the source may have left since;
@@ -18723,6 +18729,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
               spec.gainKeywords,
               undefined,
               spec.linkedToSource === true,
+              spec.tokenTextChanges,
             );
         }
         return;
@@ -18754,6 +18761,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
             ? null
             : ((host) => (host?.kind === "object" ? host.object : null))(objectRefAct(spec.attachedTo, ctx)),
         spec.linkedToSource === true,
+        spec.tokenTextChanges,
       );
       return;
     case "vote":

@@ -11,12 +11,12 @@
 import { describe, expect, it } from "vitest";
 
 import { BUILTIN_CARDS, TOKEN_CARDS } from "../cards/generated.js";
-import { computeCharacteristics } from "../characteristics.js";
+import { computeCharacteristics, effectiveColors } from "../characteristics.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 import { rulesTextName } from "../state.js";
 import { changeDefinitionText, COLOR_WORD_KEYS } from "../text-change.js";
-import { A, B, cast, keywords, lands, nextTurn, pt, ref, registryOf, settle, spawn, subtypes, table, toHand, zone } from "./harness.js";
+import { A, B, cast, keywords, lands, nextTurn, pt, ref, registryOf, settle, spawn, subtypes, table, toHand, tokensNamed, zone } from "./harness.js";
 
 const protectionColors = (game: Game, id: ObjectId): string[] => [
   ...computeCharacteristics(game.state, registryOf(game), id).protectionFrom.colors,
@@ -95,6 +95,38 @@ describe("Sleight of Mind — one colour word for another", () => {
     cast(game, toHand(game, "Sleight of Mind"), { targets: [ref(knight)] });
     expect(zone(game, knight)).toBe("battlefield");
     expect(protectionColors(game, knight)).toEqual(["U"]);
+  });
+
+  it("the tokens a changed spell makes are its new colour, a copy of one too (612.2, 111.3)", () => {
+    const { game, a } = table();
+    lands(game, "Plains", 2);
+    lands(game, "Island", 1);
+    const alarm = toHand(game, "Raise the Alarm");
+    cast(game, alarm, { settle: false });
+    answer(a, "white", "blue");
+    cast(game, toHand(game, "Sleight of Mind"), { targets: [ref(alarm)] });
+    const colorsOf = (id: ObjectId): string[] => [...effectiveColors(game.state, registryOf(game), game.state.objects[id])];
+    const tokens = game.battlefield.filter((id) => game.state.objects[id].isToken === true);
+    expect(tokensNamed(game, "Soldier Token", A)).toBe(2);
+    for (const id of tokens) expect(colorsOf(id)).toEqual(["U"]);
+    game.debugApplyEffect(A, { kind: "create-token-copy", of: 0, count: 1, who: "you" }, [ref(tokens[0])]);
+    settle(game);
+    const copy = game.battlefield.find((id) => game.state.objects[id].isToken === true && !tokens.includes(id))!;
+    expect(colorsOf(copy)).toEqual(["U"]);
+    // Untouched by the change: the definition's own colour.
+    expect(colorsOf(spawn(game, "Soldier Token"))).toEqual(["W"]);
+  });
+
+  it("a change to a word the token doesn't have leaves it alone", () => {
+    const { game, a } = table();
+    lands(game, "Plains", 2);
+    lands(game, "Island", 1);
+    const alarm = toHand(game, "Raise the Alarm");
+    cast(game, alarm, { settle: false });
+    answer(a, "black", "blue");
+    cast(game, toHand(game, "Sleight of Mind"), { targets: [ref(alarm)] });
+    const token = game.battlefield.find((id) => game.state.objects[id].isToken === true)!;
+    expect([...effectiveColors(game.state, registryOf(game), game.state.objects[token])]).toEqual(["W"]);
   });
 
   it("never changes a mana symbol: Dark Ritual still adds {B}{B}{B}", () => {

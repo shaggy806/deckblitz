@@ -31,9 +31,11 @@
  * Adventure, a split half) are characteristics, not text, and stay. Nor what
  * a granted ability says (612.3): only the definition's own text changes.
  *
- * NOT yet: a token a changed ability creates keeps its definition's colours
- * and subtypes (612.4's "create a 1/1 white Soldier" would make a blue one);
- * and a static that changes every object's text (Swirl the Mists).
+ * A token a changed ability creates takes the changed colour words ("create a
+ * 1/1 white Soldier" made a blue one, rule 111.3: `create-token`'s
+ * `tokenTextChanges`, a copiable colour on the token). Its land type words
+ * and subtypes stay. NOT yet: a static that changes every object's text
+ * (Swirl the Mists).
  */
 
 import type { CardDefinition } from "./cards/define.js";
@@ -228,6 +230,11 @@ function changeValue(value: unknown, key: string | null, change: TextChange, nam
     for (const [k, v] of Object.entries(value)) {
       out[k] = face && FACE_KEYS.has(k) ? v : changeValue(v, k, change, names);
     }
+    // "Create a 1/1 white Soldier": the token's colour is one of this text's
+    // words (rule 111.3), read off the token's definition as it's made.
+    if (out.kind === "create-token" && textWordKind(change.from) === "color") {
+      out.tokenTextChanges = [...((out.tokenTextChanges as readonly TextChange[] | undefined) ?? []), change];
+    }
     return out;
   }
   if (typeof value !== "string") return value;
@@ -246,6 +253,25 @@ function changeValue(value: unknown, key: string | null, change: TextChange, nam
   const keyword = LAND_KEYWORD.exec(value);
   if (keyword !== null && keyword[1] === change.from.toLowerCase()) return change.to.toLowerCase() + keyword[2];
   return value;
+}
+
+/**
+ * A created token's colours under its creating text's changes (rule 111.3),
+ * or `undefined` if they stay its definition's: one word at a time, in order.
+ */
+export function tokenColorsAfter(
+  colors: readonly Color[],
+  changes: readonly TextChange[] | undefined,
+): readonly Color[] | undefined {
+  if (changes === undefined) return undefined;
+  let out = colors;
+  for (const change of changes) {
+    const from = COLOR_OF_WORD[change.from];
+    if (from !== undefined && out.includes(from)) {
+      out = [...new Set(out.map((color) => (color === from ? COLOR_OF_WORD[change.to] : color)))];
+    }
+  }
+  return out === colors ? undefined : out;
 }
 
 /**
