@@ -12,7 +12,7 @@ built.
 Each waits on a decision only the user can make. Once one is answered, move the work it
 decides into its section below.
 
-None open.
+- **Does "dies" reach a noncreature, nonplaneswalker permanent?** Rule 700.4 says any permanent "is put into a graveyard from the battlefield"; the Glossary says "a creature or planeswalker", and so does Oracle's practice (Boggart Mischief says "Goblin creature"). The engine follows the Glossary (`dies-creature-only.test.ts`). The BACKLOG line **"A Zombie … dies" is read as a Zombie creature** waits on this: keep it, or close it.
 
 ## Commander gap (the current priority)
 
@@ -586,7 +586,8 @@ section keeps only what to do next.
 
 ## Engine rules gaps
 
-- **Adamant's colour word and a text change** — Sleight of Mind can't change the colour word in "at least three white mana": `text-change.ts` doesn't read a `manaSpent` clause's `type` (`docs/engine-gaps.md`).
+- **A delayed trigger's `{ powerOf: "source" }` reads 0 after an ability sacrifices its own source** (a delayed trigger carries no `refs.source`; seen 2026-11-09 with a sacrificed token on a later turn).
+- **A Draconic Visitor's replacement of an Incubator drops the counters** (the `tokenEventPlan` path; the `Incubator Token` name check in the mint path).
 - **Token events a `may` replacement doesn't reach (Moonlit Meditation)** — amass, incubate, encore, myriad and populate make tokens without offering a `becomes` (`docs/engine-gaps.md`). (2026-11-09: amass, incubate, populate and encore fixed; myriad, amass with `who` and other direct `createTokens` callers are left.)
 
 One line each; the detail (rule numbers, code sites, the cards each blocks) is in
@@ -595,31 +596,25 @@ there and move this line to `COMPLETED.md`.
 
 - **"Each player may" acts on each answer before asking the next** (rule 101.4; the tempting offers and Kwain). (2026-11-09: tokens and counters fixed; `modal` effects and `options` are left.)
 - **Only the first mandatory draw replacement is offered beside an optional one** (rule 616.1; Abundance beside two "instead of drawing" replacements).
-- **`withMain` from a precombat main runs M C+ C M M** (the rules say M C+ M C M; no pool ability reaches it yet).
 - **Panglacial Wurm under Opposition Agent** (the cast-while-searching offer comes before the search control begins, so the searcher answers it).
 - **A shuffled face-down pile keeps its object ids** (Become Anonymous, Expose the Culprit: a client reading the wire can tell which face-down card is which; needs a design call).
 - **A self-replacement beside an exile: no 616.1 choice** (Gravebane Zombie's and Blightsteel's own "instead" always beat Rest in Peace or a finality counter).
 
 - **A player can't play another player's face-down exiled card blind** (rule 406.3a; blocks Urianger Augurelt, Lobelia).
 - **A token with riot is never asked** (it takes haste; blocks Spider-Punk's Spider tokens). (2026-11-09: token copies are asked; named tokens would have to go through `enterTokenCopies`. Only Spider-Punk needs it.)
-- **Mulligans are declared at once, and two opening-hand rules are loose** — rule 103.5 has turn-order declarations but `beginMulligans` asks in parallel (a design call); `COMMANDER_RULES` gives the free mulligan at two players, while 103.5c names multiplayer and Brawl; a revealed opening-hand card isn't kept revealed until the first turn (103.6b).
+- **Mulligans are declared at once, and two opening-hand rules are loose** — rule 103.5 has turn-order declarations but `beginMulligans` asks in parallel (a design call); `COMMANDER_RULES` gives the free mulligan at two players, while 103.5c names multiplayer and Brawl; a revealed opening-hand card isn't kept revealed until the first turn (103.6b). (2026-11-09: 103.5c and 103.6b settled; only turn-order declarations are left.)
 - **An opponent-caused discard's replacement beats the graveyard ones without asking** — `Game` puts Obstinate Baloth onto the battlefield rather than asking its controller (616.1) when Leyline of the Void also applies.
 - **Limited-duration control of a player** — rule 723.2's Word of Command and Opposition Agent; `player-control.ts` holds a next turn or a next combat only.
 - **A target tax's offers are approximate in two corners** — `target-count.ts`'s sum over a `targeting` tax and a two-slot `targetCostReduction` beside a tax mis-offer, never mis-charge.
 - **Buyback always beats an "exile it instead" replacement**: rule 616.1 gives the owner the choice; and no turn-long graveyard-to-exile `player-effect` — Yawgmoth's Will (`docs/engine-gaps.md`).
-- **A targeting restriction can't last a turn, or require a target**: `hexproofFrom`'s qualifiers are statics only; Display of Dominance's "… this turn" over permanents you control, Lurker's "unless it attacked or blocked this turn" and the Flagbearers' "must choose at least one Flagbearer" (601.2c) need more (`docs/engine-gaps.md`).
+- **A targeting restriction can't last a turn, or require a target**: `hexproofFrom`'s qualifiers are statics only; Display of Dominance's "… this turn" over permanents you control, Lurker's "unless it attacked or blocked this turn" and the Flagbearers' "must choose at least one Flagbearer" (601.2c) need more (`docs/engine-gaps.md`). (2026-11-09: only the Flagbearers' "at least one if able" over a whole target set is left, and it needs a client change.)
 - **A merged or melded permanent's cards go into a library or graveyard in an order nobody chose**: rule 730.3a and the meld ruling let the owner order them; and only a blink and the exile links find every card it became as "that card" (730.3c, `leftWith`, built 2026-10-31 with meld).
-- **Of several granted alternative costs, only the first is offered**: rule 118.9 lets the caster pick any one; with Jodah, Archmage Eternal and Nissa, Worldsoul Speaker both out, only Jodah's is offered (`alternativeCostOf`; found 2026-10-31 with the energy alternative cost).
 - **A resolve-time either/or between two effects**: Vhati il-Dal's "base power or base toughness becomes 1" (`docs/engine-gaps.md`).
 - **Simultaneous as-enters removals of every counter**: two Thieves of Blood at once — the player should choose which gets them (`docs/engine-gaps.md`).
-- **Enlist leftovers**: enlist ×N, and an attack tax auto-paid before enlist is asked (`docs/engine-gaps.md`).
 - **An optional non-mana cost paid as a permanent enters**: Ulamog's Despoiler's "as this enters, you may put two cards … from exile" (`docs/engine-gaps.md`).
-- **A divided total beyond plain X isn't offered**: Meteor Shower's "X plus 1" and Shatterskull Smashing's "twice X" need the offer to carry the amount, not just `x` (`docs/engine-gaps.md`).
 - **Face-down leftovers**: Illusionary Mask, Ugin, the Ineffable, Kozilek, the Broken Reality, Ixidron, Vesuvan Shapeshifter and others, each needing its own face-down link or choice (`docs/engine-gaps.md`).
-- **Assist isn't offered on a spell cast while something resolves**: a `cast-now` cast of an assist card (rule 702.132a) can't ask another player to help, since the resolution can't wait on that answer; the cast alone is still offered (built 2026-10-31, `requestAssist`).
-- **A delayed "whenever" over cards put into a graveyard fires once for the batch** (Duskmantle Guildmage: `effect:delayed-whenever-per-card-graveyard`, `docs/engine-gaps.md`).
 - **`put-onto-battlefield` follows a target that changed zones during the resolution** (400.7): Celestial Gatekeeper's "exile it, then return target …" returns itself from exile (`bug:moved-target-card-still-acted-on`, batches 219 and 235). (2026-11-09: moved under another name is fixed; a target moved by a mass effect and then named by its slot is left.)
-- **Splice's limits** (702.47): only onto a spell with one plain `effect` (not modal, fused, divided or `resolve`), not with overload, at most four splice cards a cast, and a mana splice cost only.
+- **Splice's limits** (702.47): only onto a spell with one plain `effect` (not modal, fused, divided or `resolve`), not with overload, at most four splice cards a cast, and a mana splice cost only. (2026-11-09: onto modal, fused and overloaded spells landed; a spliced card with targets onto a modal spell, divided and `resolve` spells, the four-card cap and 702.47b's order are left.)
 - **A source of damage: a waiting effect's object and the command zone** (609.7a) aren't offered.
 - **"Enters untapped" always beats "enters tapped"**: the entering permanent's controller should order the two (rule 616.1) — Archelos, Lagoon Mystic on an opponent's permanent.
 - **Umbra armor's Aura is picked, and goes after the other shields** (616.1): with several umbras on one creature, or a regeneration shield or shield counter beside one, its controller should choose; the engine destroys the umbra of least mana value, and only once neither shield applies.
@@ -642,15 +637,11 @@ there and move this line to `COMPLETED.md`.
 Latent: the engine departs from the rules here, but no pool card reaches it yet. Fix each
 when a card that needs it is authored.
 
-- **A count of what's attached to a source that has left reads 0** (608.2h): `attachedTo: { isSource: true }` reads the board now, so Kemba, Kha Regent, in the pool, is suspect, and six cards wait (`amount:attached-to-source-last-known`).
 - **Overlapping damage redirections are ordered without asking** (616.1): `bestDamageOrder` chooses for the affected player (Saving Grace, in the pool; Gideon's Sacrifice and Ascent of the Worthy wait, `decision:damage-redirect-order`).
 - **Smaller engine leads from batch 258**: `look-and-choose`'s `manaValue: { n: "x" }` matched nothing on an ability where `{ n: { amount: "x" } }` works; its `reveal: "chosen"` silently does nothing for `zone: "hand"`; `spawn` of a transforming card's back face by name leaves its trigger not firing; `sameNameAsSource` reads a source that has left live (four pool cards use it); AUTHORING §15's "no damage redirection to a third object" looks stale. From batch 259: `manaValue: { n: "x" }` also matches nothing in an `exile-all` filter on a −X ability, though it reads the announced X in a `card-in-graveyard` target; `each-player-may` with only a `prompt` asks nobody and counts everyone as "didn't"; only the typecheck catches a bad card shape (`castAsThoughFlash: { type: "sorcery" }` gave flash to every spell under vitest).
 - **Smaller engine leads from batch 257**: `choose-permanents`' `then` loses the trigger object (a `trigger-object` read gives 0); `keepTargets` doesn't shift `targetZones` with the slots; an impulse `gate` reads "you" from the exiled card's owner; `isSource` in an `exile-all` filter seems not to match; `amounts` conditions may miss last-known information on a destroyed target; `while-source-tapped` misses an untap and retap (Preacher's ruling); `choose-value`'s `among` offers an opponent's counter kinds, against its doc.
 - **"A Zombie … dies" is read as a Zombie creature**: rule 700.4's "dies" takes any permanent, so a noncreature Kindred permanent with that subtype is missed. The parser and the 42 pool cards agree on `type: "creature"`, so a fix changes them together.
-- **A token with devour never devours** (702.82a): token creation never calls `askEnterChoice` — Dragon Broodmother waits (`mechanic:token-devour`).
 - **Convoke with a target-dependent cost.**
-- **A ceased token's last-known information lasts only the turn** (`ceasedTokens`).
-- **A double-faced Aura put onto the battlefield transformed is asked what it enchants** (712.14a): `askEnterChoice` reads its front face, so Skin Invasion's back face returns only with something to enchant, unattached; blocks Skin Invasion (`bug:aura-enters-transformed-asks-enchant`).
 
 ## Bots
 

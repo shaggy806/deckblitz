@@ -68,49 +68,23 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   follow: `beginModesChoice` with the two outcomes). Blocks Yawgmoth's Will, together with its
   turn-long graveyard-to-exile replacement (a `player-effect` the engine doesn't have yet — the
   battlefield statics are scanned by `graveyardExileReplacements`).
-- **Of several granted alternative costs, only the first is offered.** Rule 118.9 lets the
-  caster choose any one alternative cost that applies (118.9a: only one). `Game.alternativeCostOf`
-  returns the first `alternativeCostForSpells` static that matches the spell (skipping an energy
-  one the caster can't pay), and the cast's `altCost: true` names no grant: with Jodah, Archmage
-  Eternal and Nissa, Worldsoul Speaker both out, a permanent spell is offered only Jodah's
-  {W}{U}{B}{R}{G}; Fist of Suns, Runeforge Champion and Primal Prayers pair the same way. A
-  card's own alternative cost (Sephara) also hides every grant. Fix: list every applying grant,
-  name the chosen one on the cast (an index, as `graveyardGrant` names a graveyard permission),
-  and offer a variant each, its `altCostText` telling them apart.
 - **A resolve-time either/or between two effects.** Vhati il-Dal's "target creature's base power
   or base toughness becomes 1" chooses between two effects as it resolves (608.2d); nothing can
   say that yet (`animate`'s lone power/toughness exists since 2026-10-31).
 - **Simultaneous as-enters removals of every counter.** Two Thieves of Blood entering at once:
   the first applied takes every counter, where the player should choose which gets them
   (`removeAllCountersFrom`, 2026-10-31; 616.1).
-- **Enlist leftovers.** Enlist ×N (702.154d) isn't built, and an attack tax paid by auto-tapping a
-  mana creature is paid before enlist is asked, so it can tap the creature meant to be enlisted.
 - **An optional non-mana cost paid as a permanent enters.** Ulamog's Despoiler's "As this
   creature enters, you may put two cards your opponents own from exile into their owners'
   graveyards. If you do, it enters with four +1/+1 counters" needs a choice and a cost inside an
   enters replacement (rule 614.12); the processors' `putFromExile` cost exists (2026-10-31) but
   only as an activation or additional cost.
-- **A divided total beyond plain X isn't offered.** Meteor Shower ("X plus 1") and Shatterskull
-  Smashing ("twice X") divide a total computed from X, but a cast offer's `divide` names only a
-  number or `x`, so the client can't show the total to split. Fix: send the amount (or the total
-  per X) on the offer and have the client compute it.
 - **Face-down leftovers.** Built 2026-10-31: faces down by an effect, manifest from another's
   library, `cant-turn-face-up`. Still open: Illusionary Mask (cast face down for X); Ugin, the
   Ineffable and Gustha's Scepter (a face-down exile linked to a token or source); Kozilek, the
   Broken Reality (manifest from hands with a "manifested this way" count); Ixidron (as it enters,
   turn others face down); Vesuvan Shapeshifter; Thieving Amalgam (a trigger's "its owner"
   player); Death in Heaven (an exile linked to the Saga).
-- **Assist isn't offered on a spell cast while something resolves.** Rule 702.132a lets the
-  caster of any spell with assist choose a helper, however it's cast. `Game.castSpellActions`
-  adds assist variants only for a cast from priority, and `judgeAssist` refuses `via: "effect"`:
-  a `cast-now` cast happens inside the resolution that offered it, which would have to suspend
-  on the helper's `choose-number` (`requestAssist` raises it and returns). The caster can still
-  cast it paying everything. Only an assist card cast by an effect that makes its caster pay
-  (not "without paying its mana cost", which leaves no generic) is affected; no such pairing is
-  known in the pool. Fix: suspend the resolution as `cast-now` does around a discard, and
-  resume it after `resumeAssistedCast`.
-- **A delayed "whenever" over cards put into a graveyard fires once for the batch** (`effect:delayed-whenever-per-card-graveyard`, Duskmantle Guildmage). `fireWheneverWatchers` has none of a permanent's own per-card handling of `put-into-graveyard`. Its damage half landed 2026-11-09.
-
 - **`put-onto-battlefield` follows a target that changed zones during the resolution.** A
   target is checked once, as the spell or ability begins to resolve (`illegalSlot` reads the
   `illegalTargets` found then, rule 608.2b); a step of the same resolution that moves it first
@@ -231,10 +205,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   its own "enters tapped" the engine makes that player's choice for them — the one they'd make
   almost always, which is why the card is authored. A choice asked of the controller would close
   it.
-**`withMain` from a precombat main runs M C+ C M M.** `Game.endStep`'s queue puts the turn's own combat straight after an added combat
-and its main phase after, where the rules give M C+ M C M. No pool ability has `additional-combat`'s `withMain` yet, so nothing reaches
-it. Found 2026-11-04, with Moraug's rulings (an `afterThisPhase` combat from the precombat main runs before the turn's own).
-
 **Panglacial Wurm under Opposition Agent.** The Agent's controller makes every decision while the player searches, but in `effects.ts`,
 `case "search-library"` offers `cast-now` (`from: "while-searching"`) before `ctx.searchLibrary`, and `Game.beginSearchControl` only starts
 in `beginLibrarySearch`, so the searcher answers. Fix: begin the control before the offer and end it when the search's `choose-from-zone`
@@ -265,21 +235,6 @@ Spider tokens; Spider-Punk isn't authored. Found 2026-11-02; not reported from p
 The engine departs from the rules here, but no pool card reaches it yet: fix each when a card
 that needs it is authored.
 
-- **A double-faced Aura put onto the battlefield transformed is asked what it enchants.** Rule
-  712.14a puts it onto the battlefield back face up, so Skin Invasion returns as Skin Shedder, a
-  creature with nothing to enchant. `Game.askEnterChoice` (and `nextEnterChoice`) read the card's
-  current face, the front Aura's, before the move applies `transformed`: with no creature to
-  enchant it stays in the graveyard (303.4g), and with one the player is asked a meaningless
-  enchant choice and Skin Shedder enters unattached. The fix asks the enter choices of the face it
-  will enter as. Blocks Skin Invasion (`bug:aura-enters-transformed-asks-enchant`). (The same
-  front-face reading kept an instant or sorcery card from entering transformed — Startled Awake —
-  until batch 151.)
-
-- **A count of what's attached to a source that has left reads 0.** Rule 608.2h: `countOf` with
-  `attachedTo: { isSource: true }` reads the board now, and the Equipment is already unattached.
-  Tests for Wyleth, Valduk, Captain America, Shagrat and Whiplash each got 0. Kemba, Kha Regent's
-  upkeep trigger, in the pool, has the same read and is unchecked. Six cards wait
-  (`amount:attached-to-source-last-known`). Found by batch 257.
 - **Overlapping damage redirections are ordered without asking.** Rule 616.1: the affected player
   chooses; `bestDamageOrder` chooses for them. Saving Grace, in the pool, has it. Gideon's
   Sacrifice's ruling asks for the choice (`decision:damage-redirect-order`). Found by batch 257.
@@ -307,21 +262,9 @@ that needs it is authored.
   Apprentice is in the pool and has one: checked 2026-11-04, it makes {B}{B}{B} and the hand stays
   as it was. Blocks Bog Witch (`cost:mana-ability-discard`). Found by an authoring agent,
   2026-10-23 (B144).
-- **A token with devour never devours.** Rule 702.82a: devour is a replacement as the permanent
-  enters. It's asked through `askEnterChoice`, which a spell resolving, a reanimation and a blink
-  call, but token creation (`createTokens`, `mintTokenBatch`) never does, so a `create-token` of
-  a token definition with `devour` makes the token without the choice (AUTHORING §15 notes the
-  same for a token copy's "as this enters" choices). No pool token has devour; blocks Dragon
-  Broodmother (`mechanic:token-devour`). Found by an authoring agent, 2026-10-23 (B144).
 - **Convoke with a target-dependent cost.** The offered `proof` is priced at the dearer end of
   the target-count range.
 
-- **A ceased token's last-known information lasts only the turn.** `GameState.ceasedTokens`
-  (a token that has ceased to exist, rule 704.5d, read by last-known information) is emptied as
-  each turn begins. Since 2026-10-09 a delayed trigger whose trigger object was such a token keeps
-  its snapshot (`DelayedTrigger.triggerObjectCeased` — Esoteric Duplicator copying a Clue
-  sacrificed in an end step, at the next turn's end step), but anything else reading a ceased
-  token on a later turn still loses it. Latent: no other pool card is known to.
 - **Umbra armor's Aura is picked, and goes after the other shields.** With several Auras with
   umbra armor on one permanent (rule 702.89a), or a regeneration shield or a shield counter
   beside one, the permanent's controller chooses which replacement applies (616.1, the
@@ -348,4 +291,3 @@ and two mandatory "instead of drawing" replacements (Underrealm Lich and another
 lets the player pick any of them; `Game.optionalDrawReplacementAsked` offers the first mandatory
 one in battlefield order, as the draw did before. Found 2026-11-06, building Abundance.
 
-**Adamant's colour word and a text change.** Rule 612.2 lets a text-changing effect change a colour word, and adamant's "if at least three white mana was spent" has one. `text-change.ts` doesn't read a `manaSpent` clause's `type` (it didn't read the old `manaSpentOfColors` either; theme 13's pool test named it). `{U}{B}` symbol clauses (the Mythos cycle) are mana symbols and must stay as they are (rule 612.2), so a clause needs to say which it is before the walker can change it. Cards: every adamant card, Ardenvale Paladin first.
