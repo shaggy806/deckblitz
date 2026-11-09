@@ -1,6 +1,6 @@
 # Need-key themes: general engine changes under the open keys
 
-Status: plan of record (2026-11-07), steps 1-6 (B275-B280) and seven pieces of step 7 (theme 7, B281; theme 10, B282; theme 9, B283; theme 11, B284; theme 13, B285; theme 12, B286; theme 8, B287) done; step 7 goes on to
+Status: plan of record (2026-11-07), steps 1-6 (B275-B280) and eight pieces of step 7 (theme 7, B281; theme 10, B282; theme 9, B283; theme 11, B284; theme 13, B285; theme 12, B286; theme 8, B287; theme 14, B288) done; step 7 goes on to
 the smaller themes — see *The plan* just below. The survey under it is a proposal.
 
 The 1,783 open need keys (2,265 waiting cards, re-counted after step 1; the survey's own count was 1,831 and 2,324)
@@ -74,7 +74,8 @@ touch. Each step:
    - **Done 2026-11-08 (B285).** Three reads of mana (theme 13: `engine/src/mana.ts`, see its design note and *As built*). 20 cards: Squandered Resources, Omnath, Locus of the Void (flagged) and 18 of the theme's top keys; 11 keys marked built, their other cards left in `--stale` for `author-freed`. Yavimaya Bloomsage stays flagged (see *Left unbuilt*).
    - **Done 2026-11-08 (B286).** Flips and rolls as records (theme 12: `engine/src/random-results.ts`, see its design note and *As built*). 14 cards: Ral Zarek, Guest Lecturer (flagged) and 13 of the theme's top keys; 15 keys marked built, their other cards left in `--stale` for `author-freed`.
    - **Done 2026-11-08 (B287).** One characteristics patch and one `become` effect (theme 8: `engine/src/characteristics-patch.ts`, see its design note and *As built*). 18 cards, none of the twelve flagged (no flagged card's key is under this theme): Mycosynth Lattice and 17 of the theme's top keys; 13 keys marked built, their other cards left in `--stale` for `author-freed`.
-   - Next: the smaller themes (14, 16, as `--by-rank` reaches their cards).
+   - **Done 2026-11-08 (B288).** One `attach`, what and where (theme 14: `engine/src/attachments.ts`, see its design note and *As built*). 16 cards, none of the twelve flagged (no flagged card's key is under this theme): Akiri and 15 of the theme's top keys; 16 keys marked built, their other cards left in `--stale` for `author-freed`.
+   - Next: theme 16 (grants), as `--by-rank` reaches its cards.
 
 ## How this was measured
 
@@ -1604,6 +1605,52 @@ keyword:fortify 2, effect:create-token-attached-each 2, effect:attach-equipment-
 effect:return-aura-after-host-died 2. Existing: `AttachRef`/`AttachHostRef` (effects.ts:105, 126).
 
 **Confidence: medium.**
+
+**Design note (step 7, 2026-11-08): one `attach`, what and where.** Picked by `--by-rank`, flagged cards first: none of the twelve flagged cards' keys fall under themes 14 or 16, and Akiri (2078) comes before any theme-16 card.
+
+*What's wrong today.* `attach` says "what goes on" four ways (`attachment`, `attachments`, `choose`, nothing) and "where" two ways (`target`, `ontoChosen`), and two more fields carry a half-done choice past the rebinding of slot 0 (`onto`, `attaching`). The combinations the fields can't hold are the blocked cards: a chosen attachment going on a chosen host (Gilgamesh), a whole group going on one chosen host (Fumble, Glamer Spinners), a host another player chooses (Steam Vines, Kudzu). Legality reads the *printed* subtypes (`def.subtypes.includes("Equipment")`), so "Clues you control are Equipment" can't be attached, and Fortification exists only as a word in `subtypes.ts`. `unattach` takes one fixed object and forgets what it was on (Akiri). A trigger on "becomes attached" sees only the source becoming attached, never another Aura arriving on the source (Brood Keeper, Siona).
+
+*Where it lives.* `engine/src/attachments.ts`, the types and the pure reads:
+
+- **`attachment` names what.** `AttachmentsRef`: an `ObjectRef` (the one object; absent, this permanent), `{ all: CardFilter }` (every match, a group that moves together), `{ choose: CardFilter, prompt, upTo?, min? }` (chosen as this resolves). Sets come through the filter's `inSet` clause, so "the Equipment that were attached to it" is `{ all: { inSet: { attachmentsOf: 0 }, subtype: "Equipment" } }`, and no second set field exists.
+- **`target` names where.** `AttachTarget`: an `ObjectRef`, a `{ player }`, or `{ among: CardFilter, prompt, optional?, another?, chooser? }` (a host chosen as this resolves, not targeted, 608.2c). `chooser` is theme 5's `ChooserRef` ("that player attaches this Aura to a land of their choice").
+- **One engine-built form,** `{ resolved }` on either side, replaces `onto` and `attaching`.
+- **What's attached is settled first, then the host,** as printed ("attach one of them to a Samurai you control"). A group's host must take every member (Fumble's and Glamer Spinners' rulings: if no single host can, nothing moves).
+- **Legality is one question.** `Game.attachmentKind` reads the permanent as it is (layer 4, keeping bestow, Licid and the enchant swap), `canEquip` also answers Fortifications (land, not creature), and the state-based check uses the same kind.
+- **`fortify(cost)`** beside `equip(cost)` in `cards/helpers.ts`.
+- **`unattach`** takes an `AttachmentsRef`, and what it took them from is the this-way set `{ thisWay: "unattached-from" }` ("tap that creature").
+- **`becomes-attached`** takes `onto: "self"` and `attachment: CardFilter` beside `who: "self"`, with `filter` still the host.
+
+*Rules.*
+- **301.5, 301.5c, 301.6**: an Equipment attaches only to a creature and a Fortification only to a land; neither while it's a creature (reconfigure aside); a permanent that stops being Equipment can't equip and falls off (Armed with Proof's ruling).
+- **303.4f, 303.4j**: an Aura attached by an effect goes only where it can enchant, or doesn't move.
+- **608.2c**: "another creature" chosen as it resolves isn't targeted, so hexproof doesn't stop it (Fumble's ruling).
+- **701.3a-c**: attaching to what it's already on does nothing, and an attachment that moves gets a new timestamp.
+- **701.3d**: unattaching leaves it on the battlefield.
+- **702.16d-e**: protection stops being enchanted, equipped or fortified.
+- **702.67a**: fortify. **704.5m, 704.5n**: an illegal Aura goes to the graveyard, an illegal Equipment or Fortification falls off.
+
+*Moved or not, decided before building.* **Moved and deleted:** `attach`'s `attachments`, `choose`, `ontoChosen`, `onto` and `attaching`, by a script over the card files and the scaffolder's output, with a pool test refusing the old spellings; `Game.attachableHosts`' filter parameter (it takes candidates, so `thisWay` and `inSet` work); every printed-subtype read of attachment legality. Deliberately not moved:
+- *`AttachHostRef` on the entering effects* (`create-token`, `put-onto-battlefield`, `return-from-graveyard`, `look-and-choose`): entering has its own rules (303.4f, 301.5e), and the shape already takes any host.
+- *`swap-enchant`, `become-licid-aura`, bestow*: an object becoming an Aura is a different question from attaching one.
+- *`choosePermanentOnEnter.attach`*, *living weapon*, *the cost `unattach`*: each is one fixed shape with nothing blocked behind it.
+- *Theme 16's grants*: "have equip {2}" uses the `grantActivated` a static already has.
+
+*Bots.* `target-polarity`'s `attach` row reads the object forms of `target` and `attachment`; `controller.ts`'s choose-permanents cap reads the new shape; a chosen host is a `help` pick, as a chosen attachment already is, unless the chooser isn't the Aura's controller. `isPointlessReattach` needs no change.
+
+*As built (step 7, B288).*
+- `attachments.ts`: `AttachAll`, `AttachChoice`, `AttachResolved`, `AttachmentsRef`, `AttachHostChoice`, `AttachHostResolved`, `AttachTarget`. `applyAttach` and `applyUnattach` in `effects.ts`; `Game.attachmentKind`, `canAttachTo`; `fortify` in `cards/helpers.ts`.
+- **Moved and deleted, every user migrated:** `attach`'s `attachments`, `choose`, `ontoChosen`, `onto` and `attaching`; `ctx.attachAll`, `Game`'s `attachAll`; the printed-subtype reads in `attachPermanent` and the state-based check. 27 card and test files by a script, run once; `test/attach-what-and-where.test.ts` refuses `attachments:` and `ontoChosen` in the pool.
+- **Differences from the note:** `{ all }` wakes a token stack as it's settled (`eachPermanentMatching`), so `attachAll` had no reason to stay. `attachableHosts` takes candidates, read through `ctx.permanentsMatching`, so a `{ thisWay }` or `controlledByRef` host filter works.
+- **Behaviour changes:** a permanent that stops being Equipment falls off (704.5p), where the check read printed subtypes. The bots rank a chosen host as a target and decline a `may` with nothing on the right side; before this, an `ontoChosen` host went through the "don't move what's working against an opponent" filter meant for attachments.
+- **Additions the proving cards needed:** `targetCostReduction.reduceGeneric: "target-colors"` (Dragonfire Blade: read as targets are chosen, offered for the targets it's affordable with); `choose-opponent`'s `exceptEnchanted` (Maddening Hex).
+- Not benched: the new reads run only on attachments, and `attachmentKind` only for permanents that are attached.
+- Bots: as the note. No new decision kind.
+- Scaffolder: every output moved; reads "Fortify {N}" and "Whenever an Aura becomes attached to ~". It doesn't read a chosen host or `{ all }`.
+- Cards (16): Akiri, Fearless Voyager; Dragonfire Blade; Retether; Maddening Hex; Cori-Steel Cutter; Gilgamesh, Master-at-Arms; Field-Tested Frying Pan; Fractal Harness; Bramble Elemental; Siona, Captain of the Pyleas; Goldwardens' Gambit; Fumble; Armed with Proof; Darksteel Garrison; Glamer Spinners; Steam Vines. `test/attach-what-and-where.test.ts` covers each.
+- Played live in the builder at 1366x768: Darksteel Garrison (only the land offered, the Garrison under it), Armed with Proof (a Clue equipped, Bears 4/2, one Clue left), Cori-Steel Cutter (the Monk prompt, Confirm at 0 chosen).
+- Keys marked built: `effect:unattached-from-creature-ref`, `cost:equip-cost-per-color`, `effect:return-auras-attached-to-chosen-creatures`, `effect:reattach-curse-random-opponent`, `effect:choose-which-created-token-to-attach`, `effect:reflexive-attach-one-of-put-this-way`, `effect:create-token-attach-equipment`, `effect:attach-to-created-token-by-filter`, `effect:attach-equipment-to-each-created-token`, `effect:gain-control-attachments`, `static:attach-as-granted-equipment`, `keyword:fortify`, `trigger:aura-becomes-attached-to-permanent`, `effect:move-auras-to-chosen-permanent`, `effect:attach-aura-to-land-chosen-by-player`, `effect:attach-chosen-by-other-player`.
+- **Left unbuilt, not marked:** `effect:attach-to-chosen-creature` (Crown of the Ages, Enchantment Alteration: likely `target: 1, attachment: 0`, not tried), `effect:create-token-attached-each` (Asinine Antics, Twisted Sewer-Witch: likely a `for-each-permanent` over `create-token`'s `attachedTo`, not tried), the Aura-after-host-died family (`effect:return-aura-after-host-died`, `effect:return-as-aura-with-granted-ability`), `effect:aura-onto-each-created-token`, `effect:create-aura-token-attached-to-player`, `effect:attach-granting-aura`, `effect:flicker-host-and-auras-return-attached`, and the rest of the one-card keys. C.A.M.P. has fortify but also needs "shares a color with the mana that land produced".
 
 ### 15. Delayed triggers: any step, any player, captured context (31 keys + ~20 elsewhere, ~41 cards)
 

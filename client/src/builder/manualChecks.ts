@@ -328,6 +328,43 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Akiri, Fearless Voyager: an Equipment comes off its creature',
+    board({
+      you: { bf: ['Akiri, Fearless Voyager', 'Grizzly Bears', '+2 Mace', 'Plains*4'] },
+    }),
+  ),
+  preset(
+    'Dragonfire Blade: equip costs less per color',
+    board({
+      you: { bf: ['Dragonfire Blade', 'Akiri, Fearless Voyager', 'Grizzly Bears', 'Plains*2'] },
+    }),
+  ),
+  preset(
+    'Darksteel Garrison: fortify goes on a land',
+    board({
+      you: { bf: ['Darksteel Garrison', 'Plains*3', 'Grizzly Bears'] },
+    }),
+  ),
+  preset(
+    'Armed with Proof: a Clue can be equipped',
+    board({
+      you: { bf: ['Plains*5', 'Grizzly Bears'], hand: ['Armed with Proof'] },
+    }),
+  ),
+  preset(
+    'Cori-Steel Cutter: you may attach it to the Monk',
+    board({
+      you: { bf: ['Cori-Steel Cutter', 'Mountain*5'], hand: ['Shock*2'] },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    'Steam Vines: the land\'s controller picks the next land',
+    board({
+      you: { bf: ['Forest', 'Swamp', 'Mountain*3'], hand: ['Steam Vines'] },
+    }),
+  ),
+  preset(
     'Krark: a lost flip returns the spell to your hand',
     board({
       you: { bf: ['Krark, the Thumbless', 'Mountain*6'], hand: ['Shock*3'] },

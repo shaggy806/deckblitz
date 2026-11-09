@@ -7832,3 +7832,27 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Karn, the Great Creator: until your next turn
 - **Do:** Activate +1 on your Sol Ring, then pass the turn to Bob and back.
 - **Expect:** Sol Ring is a 1/1 artifact creature through Bob's turn and stops being one when your turn begins.
+
+### Akiri, Fearless Voyager: an Equipment comes off its creature
+- **Do:** Equip the +2 Mace to Grizzly Bears, then activate Akiri's {W} ability and choose the Mace.
+- **Expect:** The Mace stays on the battlefield unattached, and Grizzly Bears is tapped and indestructible.
+
+### Dragonfire Blade: equip costs less per color
+- **Do:** With only two lands untapped, activate Equip on the Blade.
+- **Expect:** You can pick Akiri (red and white) but not Grizzly Bears (one color).
+
+### Darksteel Garrison: fortify goes on a land
+- **Do:** Activate Fortify {3} on the Garrison.
+- **Expect:** You can pick a land but not a creature. The Garrison then sits on that land, and the land has indestructible.
+
+### Armed with Proof: a Clue can be equipped
+- **Do:** Cast Armed with Proof, then use a Clue's equip {2} on Grizzly Bears.
+- **Expect:** Grizzly Bears is 4/2 with the Clue attached.
+
+### Cori-Steel Cutter: you may attach it to the Monk
+- **Do:** Cast two Shocks at Bob, and when asked, decline to attach.
+- **Expect:** After the second Shock a Monk token appears and you're asked about attaching. The Cutter stays where it was.
+
+### Steam Vines: the land's controller picks the next land
+- **Do:** Cast Steam Vines on your Forest, then tap the Forest for mana.
+- **Expect:** The Forest is destroyed, you take 1 damage, and you're asked which land Steam Vines goes on next.

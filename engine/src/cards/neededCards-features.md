@@ -2047,7 +2047,7 @@ The need-keys Phase 2 family `effect:attach-extensions`, features only. An
 chosen as the card enters (an Aura's 303.4f choice limited to the filter; an
 Equipment's `enterChoice.attachHost`, none and it enters unattached, 301.5e).
 `attach` takes `"put-this-way"` (the card the resolution put onto the
-battlefield) and `ontoChosen` (a host chosen as it resolves among those it
+battlefield) and `target: { among }` (a host chosen as it resolves among those it
 can legally go on, `another` for "another permanent"). The static
 `attachOnlyTo` ("can be attached only to a creature with power 3 or greater",
 rule 301.5c) is read by `canEquip`, so equip resolves without moving it and
