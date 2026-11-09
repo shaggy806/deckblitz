@@ -3462,16 +3462,21 @@ export class Game {
     // `graveyardGrant`.
     for (const card of this.state.zones.perPlayer[player].graveyard) {
       const cardName = this.state.objects[card].cardName;
-      const def = this.registry.get(cardName);
-      const flashbacks = this.flashbacksOf(card);
-      for (const flashback of flashbacks) {
-        out.push(
-          ...this.castSpellActions(player, card, cardName, def, {
-            via: "flashback",
-            costString: flashback.cost,
-            ...(flashbacks.length > 1 ? { graveyardGrant: { source: flashback.grantor ?? card } } : {}),
-          }),
-        );
+      const whole = this.registry.get(cardName);
+      // A split card is cast as either half, each for its own cost (709.3).
+      for (const face of whole.split ? castableFaces(whole) : [undefined]) {
+        const def = face === undefined ? whole : this.faceDef(card, face);
+        const flashbacks = this.flashbacksOf(card, face);
+        for (const flashback of flashbacks) {
+          out.push(
+            ...this.castSpellActions(player, card, def.name, def, {
+              via: "flashback",
+              ...(face !== undefined ? { face } : {}),
+              costString: flashback.cost,
+              ...(flashbacks.length > 1 ? { graveyardGrant: { source: flashback.grantor ?? card } } : {}),
+            }),
+          );
+        }
       }
     }
 
@@ -17161,7 +17166,7 @@ export class Game {
       : evoke !== null
         ? this.evokeCostOf(cardId, def, via, caster ?? this.state.objects[cardId]?.owner, evoke)
         : via === "flashback"
-        ? (this.flashbackOf(cardId, graveyardGrant)?.cost ?? null)
+        ? (this.flashbackOf(cardId, graveyardGrant, face)?.cost ?? null)
         : via === "harmonize"
         ? this.castKeywordCostOf(cardId, "harmonize", def.harmonize?.cost ?? null, graveyardGrant)
         : via === "retrace"
@@ -48118,8 +48123,8 @@ controlledBy,
   ): void {
     const spared = except === undefined ? undefined : this.oneTokenSpared(except);
     // A source that was split off to be spared is that one token from here.
-    if (spared !== undefined && until?.source === except) until = { ...until, source: spared };
-    if (spared !== undefined && linkedTo?.source === except) linkedTo = { ...linkedTo, source: spared };
+    if (spared !== undefined && until !== undefined && until.source === except) until = { ...until, source: spared };
+    if (spared !== undefined && linkedTo !== undefined && linkedTo.source === except) linkedTo = { ...linkedTo, source: spared };
     this.withLeaveBatch(() => {
       const victims = this.battlefieldMatching(you, filter).filter((id) => id !== spared);
       this.snapshotLeaving(victims);
@@ -50820,7 +50825,7 @@ controlledBy,
     if (object === undefined || object.zone !== "graveyard") return;
     const cost = fixedCost ?? this.registry.get(printedCardName(object)).manaCost;
     if (cost === null) return;
-    object.grantedFlashback = { cost, untilEndOfTurn: true, by };
+    object.grantedFlashback = { cost, untilEndOfTurn: true, by, ...(fixedCost === undefined ? { ownManaCost: true } : {}) };
     this.emit({ type: "flashback-granted", object: target.object, cost });
   }
 
@@ -50833,9 +50838,12 @@ controlledBy,
    * cast it, named by its `grantor`. Flashbacks identical in cost are listed
    * once, since nothing tells them apart.
    */
-  private flashbacksOf(cardId: ObjectId): FlashbackOption[] {
+  private flashbacksOf(cardId: ObjectId, face?: number): FlashbackOption[] {
     const object = this.state.objects[cardId];
     if (object === undefined) return [];
+    // A split card's half is cast for that half's mana cost (rule 709.3).
+    const ownManaCost = (): string =>
+      (face === undefined ? this.registry.get(object.cardName) : this.faceDef(cardId, face)).manaCost;
     const out: FlashbackOption[] = [];
     const add = (option: FlashbackOption): void => {
       if (
@@ -50865,7 +50873,9 @@ controlledBy,
       );
     }
     const granted = object.grantedFlashback;
-    if (granted != null) add({ cost: granted.cost, ...(granted.by !== undefined ? { grantor: granted.by } : {}) });
+    if (granted != null) {
+      add({ cost: (granted.ownManaCost === true ? ownManaCost() : null) ?? granted.cost, ...(granted.by !== undefined ? { grantor: granted.by } : {}) });
+    }
     if (object.zone !== "graveyard") return out;
     for (const { source, ability } of this.activeStaticsOf(
       object.owner,
@@ -50874,7 +50884,7 @@ controlledBy,
       const grant = ability.grantsToGraveyard!;
       if (!matchesFilter(this.state, this.registry, cardId, grant.filter, { you: object.owner })) continue;
       const spec = grant.flashback!;
-      const cost = spec.cost === "mana-cost" ? this.registry.get(object.cardName).manaCost : spec.cost;
+      const cost = spec.cost === "mana-cost" ? ownManaCost() : spec.cost;
       if (cost !== null) add({ cost, grantor: source.id });
     }
     return out;
@@ -50883,8 +50893,8 @@ controlledBy,
   /** The flashback `cardId` is cast with: the one `grant` names — the
    * granting object, or the card itself for its own flashback — or, unnamed,
    * the first of {@link flashbacksOf}. `null` when there's no such flashback. */
-  private flashbackOf(cardId: ObjectId, grant?: GraveyardGrant): FlashbackOption | null {
-    const flashbacks = this.flashbacksOf(cardId);
+  private flashbackOf(cardId: ObjectId, grant?: GraveyardGrant, face?: number): FlashbackOption | null {
+    const flashbacks = this.flashbacksOf(cardId, face);
     if (grant === undefined) return flashbacks[0] ?? null;
     return flashbacks.find((f) => (f.grantor ?? cardId) === grant.source) ?? null;
   }

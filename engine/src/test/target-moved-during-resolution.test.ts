@@ -50,7 +50,7 @@ const selfBlink = defineCard({
   text: "{0}: Exile target creature, then return it to the battlefield.",
   activated: [
     {
-      cost: { tap: false },
+      cost: { mana: "{0}", tap: false },
       targets: ["creature"],
       effect: {
         kind: "sequence",

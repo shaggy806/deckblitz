@@ -1131,7 +1131,14 @@ export interface GameObject {
    * `CardDefinition.flashback`. Cleared on any zone change and (when
    * `untilEndOfTurn`) in cleanup. `by` is the source of the effect that gave
    * it (Past in Flames), which names this flashback beside the card's own. */
-  grantedFlashback?: { cost: string; untilEndOfTurn: boolean; by?: ObjectId } | null;
+  grantedFlashback?: {
+    cost: string;
+    untilEndOfTurn: boolean;
+    by?: ObjectId;
+    /** "Equal to its mana cost" (Snapcaster Mage): the face being cast's,
+     * read then — a split card's half's (rule 709.3). */
+    ownManaCost?: true;
+  } | null;
   /** Keyword abilities a one-shot effect gave this card in a graveyard until
    * end of turn (`grant-graveyard-keyword` — Cursecloth Wrappings' embalm,
    * Ghost Ark's unearth), each with its cost as a string (`""` for retrace,
