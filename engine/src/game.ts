@@ -28784,7 +28784,9 @@ export class Game {
         // Buyback (rule 702.27a), or the spell's own "return ~ to its
         // owner's hand": into its owner's hand as it resolves. Cast with
         // flashback too, it's exiled instead (`moveObject`, 702.34a).
-        this.moveObject(id, "hand");
+        if (this.boughtBack(object) && this.buybackAgainstExileAsked(id)) return;
+        if (this.state.replacementAnswers?.[`leave-stack:${id}`]?.[0] === "exile") this.moveObject(id, "graveyard");
+        else this.moveObject(id, "hand");
       } else {
         const controller = object.controller;
         this.moveObject(id, def.exileOnResolve ? "exile" : "graveyard");
@@ -28852,6 +28854,40 @@ export class Game {
       [{ kind: "object", object: id }],
       ["exile"],
     );
+  }
+
+  /**
+   * Buyback beside "exile it instead" (rule 616.1; Yawgmoth's Will's ruling):
+   * each replaces the bought-back spell going to the graveyard, and its owner
+   * chooses which applies. Asked as it leaves the stack, it waiting there for
+   * the answer; says whether it asked.
+   */
+  private buybackAgainstExileAsked(id: ObjectId): boolean {
+    const answers = `leave-stack:${id}`;
+    if (this.state.replacementAnswers?.[answers] !== undefined || this.state.awaiting !== null) return false;
+    const object = this.state.objects[id];
+    if (object.castVia === "flashback") return false;
+    const exile = this.graveyardExileReplacements(id, false, true)[0];
+    if (exile === undefined) return false;
+    const by = exile.source === undefined ? undefined : this.state.objects[exile.source];
+    this.state.awaiting = {
+      kind: "replacement-order",
+      player: object.owner,
+      event: `${object.cardName} would leave the stack`,
+      options: [
+        { key: "hand", name: "Buyback", text: "put it into your hand" },
+        {
+          key: "exile",
+          name: by?.cardName ?? "An effect",
+          text: "exile it instead",
+          ...(exile.source !== undefined ? { object: exile.source } : {}),
+        },
+      ],
+      best: 0,
+      answers,
+      resume: { site: "leave-stack", spell: id },
+    };
+    return true;
   }
 
   /** Whether the resolving spell `object` had its buyback cost paid (rule

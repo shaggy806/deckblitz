@@ -332,6 +332,37 @@ describe("mandatory draw replacements (616.1)", () => {
   });
 });
 
+describe("buyback against an exile replacement (616.1, Yawgmoth's Will's ruling)", () => {
+  const capsize = (game: Game): ObjectId => {
+    lands(game, "Island", 6);
+    const spell = toHand(game, "Capsize");
+    const dreadmaw = spawn(game, "Colossal Dreadmaw", B);
+    cast(game, spell, { targets: [ref(dreadmaw)], kicked: true });
+    return spell;
+  };
+
+  it("left alone, buyback applies", () => {
+    const { game } = table();
+    spawn(game, "Rest in Peace", B);
+    expect(game.state.objects[capsize(game)].zone).toBe("hand");
+  });
+
+  it("its owner can choose the exile", () => {
+    const { game, a } = table();
+    spawn(game, "Rest in Peace", B);
+    const asked = answering(a, "Rest in Peace");
+    expect(game.state.objects[capsize(game)].zone).toBe("exile");
+    expect(asked).toHaveLength(1);
+  });
+
+  it("with nothing to exile it, nothing is asked", () => {
+    const { game, a } = table();
+    const asked = answering(a, "Rest in Peace");
+    expect(game.state.objects[capsize(game)].zone).toBe("hand");
+    expect(asked).toHaveLength(0);
+  });
+});
+
 describe("enters tapped against enters untapped (616.1, Archelos's ruling)", () => {
   it("left alone, it enters untapped", () => {
     const { game } = table();
