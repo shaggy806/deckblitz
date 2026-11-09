@@ -58006,7 +58006,7 @@ controlledBy,
     // does a token a replacement makes in its place or beside it: what else
     // the effect says of the token still applies (Draconic Visitor's and
     // Chatterfang's rulings).
-    if (this.incubating !== null && object.isToken && printedCardName(object) === "Incubator Token") {
+    if (this.incubating !== null && object.isToken) {
       addCounters("+1/+1", this.incubating);
     }
     // Devour (rule 702.82a): N +1/+1 counters for each permanent sacrificed
