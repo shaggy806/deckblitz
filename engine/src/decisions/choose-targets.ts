@@ -23,7 +23,7 @@ import type { Action, LegalAction } from "../actions.js";
 import type { PlayerId } from "../primitives.js";
 import { divisionOf, normalizeTargets, otherSlotConflict, sameTargetRef } from "../target.js";
 import type { ResolvedTargets, TargetRef } from "../target.js";
-import { invalidTargetReason } from "../targeting.js";
+import { invalidTargetReason, stateTargetFacts } from "../targeting.js";
 import type { TargetSource } from "../targeting.js";
 import type { ObjectId } from "../primitives.js";
 import { defineDecision } from "./define.js";
@@ -79,7 +79,7 @@ function whyNotCopyTargets(
   // characteristics can't stand in for that, so only the slots' relations
   // to each other are checked again.
   if (ctx.state.objects[awaiting.source]?.kind === "ability") {
-    const conflict = otherSlotConflict(awaiting.specs, chosen);
+    const conflict = otherSlotConflict(awaiting.specs, chosen, stateTargetFacts(ctx.state, ctx.registry));
     return conflict === null ? null : `target ${conflict.slot + 1} must be another than target ${conflict.than + 1}`;
   }
   // The source the options were judged from (`Game.stackTargetSlots`), with

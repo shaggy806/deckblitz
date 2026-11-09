@@ -507,7 +507,10 @@ const topUpGroup = (
   const { min } = groupBounds(specs[group] ?? "creature");
   for (const ref of candidates) {
     if (picked.length - group >= min) break;
-    if (!picked.includes(ref) && slotOptions(specs, options, picked.length, picked, facts).includes(ref)) picked.push(ref);
+    // A token stack can be taken once per token.
+    while (picked.length - group < min && slotOptions(specs, options, picked.length, picked, facts).includes(ref)) {
+      picked.push(ref);
+    }
   }
 };
 

@@ -521,6 +521,29 @@ export interface TargetFacts {
   /** The permanent it's attached to, if any — for an `other` slot's
    * `attachedToThan`. Without it that narrows nothing. */
   readonly attachedTo?: (ref: TargetRef) => ObjectId | undefined;
+  /** How many tokens it is, for a compacted stack on the battlefield (else
+   * 1). Each token is another object, so "another target" may name a stack
+   * once per token (601.2c, `lockInTargets` then gives each slot its own).
+   * Without it a stack is one object: the bots' `targetCombos` search. */
+  readonly stackSize?: (ref: TargetRef) => number;
+}
+
+/** How many of `ref`'s tokens `picked` hasn't yet named: 0 for anything but
+ * a compacted stack with some left, so what's already picked stays out. */
+function tokensLeft(
+  ref: TargetRef,
+  picked: readonly (TargetRef | null | undefined)[],
+  facts: TargetFacts | undefined,
+): number {
+  const size = facts?.stackSize?.(ref) ?? 1;
+  if (size <= 1) return 0;
+  return Math.max(0, size - picked.filter((p) => p !== null && p !== undefined && sameTarget(ref, p)).length);
+}
+
+/** How many different objects `refs` are between them, a stack each of its
+ * tokens: what an "another target" group can be filled from. */
+export function targetUnits(refs: readonly TargetRef[], facts: TargetFacts | undefined): number {
+  return refs.reduce((n, ref) => n + (facts?.stackSize?.(ref) ?? 1), 0);
 }
 
 /** Must slot `spec` be attached to the slots its relation names
@@ -1034,7 +1057,9 @@ export function slotOptions(
     if (taken.length >= groupBounds(spec).max) {
       return [];
     }
-    let left = (options[group] ?? []).filter((ref) => !taken.some((t) => sameTarget(ref, t)));
+    let left = (options[group] ?? []).filter(
+      (ref) => !taken.some((t) => sameTarget(ref, t)) || tokensLeft(ref, picked, facts) > 0,
+    );
     // A group `other` than an earlier slot offers nothing that slot named
     // (rule 601.2c): its member's spec, judged as a plain slot over what's left.
     if (typeof spec === "object" && spec.kind === "any-number" && typeof otherThan(spec.of) === "object") {
@@ -1093,7 +1118,9 @@ export function slotOptions(
     .filter((ref): ref is TargetRef => ref !== null && ref !== undefined);
   if (earlier.length === 0) return all;
   const mayRepeat = specs[i] !== undefined && sameObjectAllowedOf(specs[i]);
-  let distinct = mayRepeat ? all : all.filter((ref) => !earlier.some((e) => sameTarget(ref, e)));
+  let distinct = mayRepeat
+    ? all
+    : all.filter((ref) => !earlier.some((e) => sameTarget(ref, e)) || tokensLeft(ref, picked, facts) > 0);
   if (facts === undefined || specs[i] === undefined) return distinct;
   // "…that share a card type", "…share no creature types": only those
   // keeping it with every earlier one.
@@ -1146,7 +1173,14 @@ export function targetsFillable(
     const spec = specs[group];
     const { min } = spec === undefined ? { min: 0 } : groupBounds(spec);
     const taken = picked.slice(group).filter((ref) => ref !== null).length;
-    if (taken < min && taken + slotOptions(specs, options, from, picked, facts).length < min) return false;
+    if (taken < min) {
+      // A stack counts each token not yet named.
+      const left = slotOptions(specs, options, from, picked, facts).reduce(
+        (n, ref) => n + Math.max(1, tokensLeft(ref, picked, facts)),
+        0,
+      );
+      if (taken + left < min) return false;
+    }
   }
   if (from >= options.length) return true;
   // The cheap answers first: a required slot with nothing at all, or no
@@ -1159,7 +1193,7 @@ export function targetsFillable(
   if (group >= from && group < options.length) {
     const spec = specs[group];
     const min = spec === undefined ? 0 : groupBounds(spec).min;
-    if (spec !== undefined && options[group].length < min) return false;
+    if (spec !== undefined && targetUnits(options[group], facts) < min) return false;
     // "From a single graveyard": that many in one player's — or, tied to a
     // slot, in the graveyard of a player that slot could be.
     const same = typeof spec === "object" && spec.kind === "any-number" ? spec.sameController : undefined;
@@ -1167,7 +1201,7 @@ export function targetsFillable(
       const counts = new Map<PlayerId | undefined, number>();
       for (const ref of options[group]) {
         const player = playerOfTarget(ref, facts);
-        counts.set(player, (counts.get(player) ?? 0) + 1);
+        counts.set(player, (counts.get(player) ?? 0) + (facts.stackSize?.(ref) ?? 1));
       }
       const enough = (player: PlayerId | undefined): boolean => player !== undefined && (counts.get(player) ?? 0) >= min;
       if (same === true && ![...counts.keys()].some(enough)) return false;
@@ -1208,7 +1242,10 @@ export function otherSlotConflict(
     for (const slot of otherThanSlots(than)) {
       const theirs = chosen[slot];
       if (theirs === null || theirs === undefined) continue;
-      if (sameTarget(mine, theirs) && !sameObjectAllowedOf(specs[i])) return { slot: i, than: slot };
+      if (sameTarget(mine, theirs) && !sameObjectAllowedOf(specs[i])) {
+        // One token of a stack each, while it has that many (601.2c).
+        if (tokensLeft(mine, chosen.slice(0, i), facts) === 0) return { slot: i, than: slot };
+      }
       // "…that share a card type" (Shifting Loyalties, Rivals' Duel).
       if (share !== undefined && facts !== undefined && sharesHold(mine, theirs, share, facts) === false) {
         return { slot: i, than: slot };

@@ -7880,3 +7880,7 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Proliferate: some of a stack of tokens
 - **Do:** Cast Secure the Wastes for X=8 (the Warriors make one stack), Basri's Solidarity, then Volt Charge at Bob. When asked to proliferate, click the Warrior stack and choose "Proliferate 3" in its menu, then Confirm.
 - **Expect:** The tile reads 3/8 while you choose. Afterwards three Warriors are 3/3 with two counters, on a tile of their own, and the other five stay 2/2 with one.
+
+### Reckless Spite: two tokens of one stack
+- **Do:** Cast Secure the Wastes for X=8 (the Warriors make one stack), then Reckless Spite. Click the Warrior stack and choose "Target 2" in its menu, then Done.
+- **Expect:** The tile reads 2/8 while you choose. The spell destroys two Warriors, six stay on one tile, and you lose 5 life.

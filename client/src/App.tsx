@@ -711,7 +711,26 @@ const viewTargetFacts = (view: PlayerView): TargetFacts => ({
     const cost = ref.kind === 'object' ? view.objects[ref.object]?.manaCost : null
     return cost === null || cost === undefined ? 0 : manaValue(parseManaCost(cost))
   },
+  stackSize: (ref) =>
+    ref.kind === 'object' && view.zones.battlefield.includes(ref.object)
+      ? (view.objects[ref.object]?.stackCount ?? 1)
+      : 1,
 })
+
+/** The most tokens of the stack `id` an "any number of" group could hold,
+ * with its other members as picked: each counts against the group's limits
+ * (`currentSlotOptions`), so this is the top of the stack's count menu. */
+function mostOfStackInGroup(t: Targeting, id: ObjectId, size: number): number {
+  const group = anyNumberSlot(t.specs)
+  const named = (r: TargetRef | null): boolean => r?.kind === 'object' && r.object === id
+  let picked: readonly (TargetRef | null)[] = [...t.picked.slice(0, group), ...t.picked.slice(group).filter((r) => !named(r))]
+  let most = 0
+  while (most < size && currentSlotOptions({ ...t, picked }).some(named)) {
+    picked = [...picked, { kind: 'object', object: id }]
+    most += 1
+  }
+  return most
+}
 
 /** Whether the next pick is another member of an "any number of target …"
  * group — always the last slot, and every pick past its start. */
@@ -3217,6 +3236,13 @@ function Table({
         return
       }
       if (mode === 'targeting' && activeTargeting) {
+        // In an "any number of" group a token stack is a count, as for a
+        // sacrifice: more than one of it can be among the group's targets.
+        const size = activeTargeting.facts?.stackSize?.({ kind: 'object', object: id }) ?? 1
+        if (inTargetGroup(activeTargeting) && mostOfStackInGroup(activeTargeting, id, size) > 1) {
+          setStackMenu((cur) => (cur === id ? null : id))
+          return
+        }
         const slot = currentSlotOptions(activeTargeting)
         if (slot.some((o) => o.kind === 'object' && o.object === id)) {
           pickTarget({ kind: 'object', object: id })
@@ -3851,6 +3877,10 @@ function Table({
         targetSlot.some((o) => o.kind === 'object' && o.object === i),
       )
       selected = ids.some((i) => pickedObjKeys.has(i))
+      // A token stack can be named once per token.
+      const named = (activeTargeting?.picked ?? []).filter((r) => r?.kind === 'object' && r.object === id).length
+      const of = activeTargeting?.facts?.stackSize?.({ kind: 'object', object: id }) ?? 1
+      if (of > 1 && named > 0) badge = `✓ ${named}/${of}`
     } else if (mode === 'attackers' && attackAction) {
       // An opponent's planeswalker is a legal defender: highlight it once a
       // group is waiting, so it can be clicked as the attack target.
@@ -6844,6 +6874,29 @@ function Table({
             picks: sacrificePicks,
             set: (next: readonly ObjectId[]) => setSacrificePicks(next),
           }
+        : mode === 'targeting' && activeTargeting && inTargetGroup(activeTargeting)
+        ? ((t: Targeting) => {
+            const group = anyNumberSlot(t.specs)
+            const objects = t.picked.slice(group).flatMap((r) => (r?.kind === 'object' ? [r.object] : []))
+            const of = t.facts?.stackSize?.({ kind: 'object', object: stackMenu }) ?? 1
+            const others = objects.filter((x) => x !== stackMenu).length
+            return {
+              verb: 'Target',
+              count: others + mostOfStackInGroup(t, stackMenu, of),
+              of,
+              picks: objects,
+              set: (next: readonly ObjectId[]) => {
+                const players = t.picked.slice(group).filter((r) => r?.kind === 'player')
+                const picked = [
+                  ...t.picked.slice(0, group),
+                  ...players,
+                  ...next.map((object): TargetRef => ({ kind: 'object', object })),
+                ]
+                if (t.kind === 'choose-targets') setCtPicks(picked)
+                else setTargeting({ ...t, picked })
+              },
+            }
+          })(activeTargeting)
         : mode === 'proliferate' && proliferateAction
         ? {
             verb: 'Proliferate',

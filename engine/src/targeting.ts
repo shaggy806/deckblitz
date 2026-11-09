@@ -1198,6 +1198,10 @@ export function invalidTargetReason(
  */
 export function stateTargetFacts(state: GameState, registry: CardRegistry): TargetFacts {
   return {
+    stackSize: (ref) => {
+      const object = ref.kind === "object" ? state.objects[ref.object] : undefined;
+      return object?.zone === "battlefield" ? (object.stackCount ?? 1) : 1;
+    },
     controllerOf: (ref) => (ref.kind === "object" ? state.objects[ref.object]?.controller : undefined),
     powerOf: (ref) =>
       ref.kind === "object" && state.objects[ref.object] !== undefined

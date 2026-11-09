@@ -11877,6 +11877,13 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Reckless Spite: two tokens of one stack',
+    board({
+      you: { bf: ['Plains*9', 'Swamp*3'], hand: ['Secure the Wastes', 'Reckless Spite'] },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
     'Proliferate: some of a stack of tokens',
     board({
       you: { bf: ['Plains*11', 'Mountain*3'], hand: ['Secure the Wastes', "Basri's Solidarity", 'Volt Charge'] },

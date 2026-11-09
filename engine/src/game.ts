@@ -564,6 +564,7 @@ import {
   groupReadsCastAmount,
   groupReadsX,
   otherSlotConflict,
+  targetUnits,
   otherThanSlots,
   specsAtX,
   specsCappedByDivision,
@@ -5950,9 +5951,9 @@ export class Game {
     const atLeast = typeof spec === "object" && spec.kind === "any-number" && spec.min === "x";
     const candidates = options[group] ?? [];
     const copies = this.targetCopies(candidates);
-    // Each member is another than the ones before it (`concreteTargetSpecs`),
-    // so a candidate — a token stack too — is named once.
-    const members = candidates.length;
+    // Each member is another than the ones before it (`concreteTargetSpecs`):
+    // a candidate is named once, a token stack once per token.
+    const members = candidates.reduce((n, ref) => n + (ref.kind === "object" ? (copies[ref.object] ?? 1) : 1), 0);
     const groupMax =
       totalByX !== undefined && typeof spec === "object" && spec.kind === "any-number" && typeof spec.max === "number"
         ? spec.max
@@ -6372,6 +6373,10 @@ export class Game {
    * synchronous dispatch. No human game gets near the cap.
    */
   static readonly MAX_EFFECT_INSTANCES = 1000;
+
+  /** How many tokens of one stack `targetCountBoundsFor` prices a "for each
+   * target" cost over. */
+  static readonly MAX_GROUP_TOKENS_PRICED = 64;
   /** The most splice cards in one hand offered onto one spell (rule 702.47):
    * every set of them is its own variant, so 2^N of them. */
   static readonly MAX_SPLICE_OFFERED = 4;
@@ -16437,7 +16442,14 @@ export class Game {
       // optional. Fewer candidates than its `min`, and it can't be cast.
       const group = anyNumberSlot(declared);
       const bounds = group >= 0 ? groupBounds(declared[group]) : { min: 0, max: 0 };
-      const members = group >= 0 ? Math.min(offered[group]?.length ?? 0, bounds.max) : 0;
+      // A stack is one member per token, the most any cost could want of it
+      // capped so an enormous stack doesn't make this a quadratic slot list.
+      const facts = stateTargetFacts(this.state, this.registry);
+      const units = (offered[group] ?? []).reduce(
+        (n, ref) => n + Math.min(Game.MAX_GROUP_TOKENS_PRICED, facts.stackSize?.(ref) ?? 1),
+        0,
+      );
+      const members = group >= 0 ? Math.min(units, bounds.max) : 0;
       if (group >= 0 && members < bounds.min) return null;
       const specs =
         group < 0
@@ -19395,7 +19407,7 @@ export class Game {
       if (!awaiting.options[i].some((o) => sameTargetRef(o, t))) return `that isn't a legal target for slot ${i + 1}`;
     }
     // Two of their slots can't name the same object for one "target".
-    const conflict = otherSlotConflict(awaiting.specs, targets);
+    const conflict = otherSlotConflict(awaiting.specs, targets, stateTargetFacts(this.state, this.registry));
     return conflict === null ? null : `target ${conflict.slot + 1} must be another than target ${conflict.than + 1}`;
   }
 
@@ -33382,7 +33394,7 @@ export class Game {
       const options = legalTargets(this.state, this.registry, spec, trigger.controller, triggerSource);
       // "Two target lands you control" as one group (`any-number`, `min:
       // 2`) with one land to point at: no legal choice (rule 603.3d).
-      if (options.length < groupBounds(spec).min) {
+      if (targetUnits(options, stateTargetFacts(this.state, this.registry)) < groupBounds(spec).min) {
         this.emit({ type: "trigger-removed", source: trigger.sourceObjectId, reason: "no legal targets" });
         return "done";
       }

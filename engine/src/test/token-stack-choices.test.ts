@@ -7,9 +7,18 @@ import { describe, expect, it } from "vitest";
 
 import type { Game } from "../game.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
-import { A, ref, settle, table } from "./harness.js";
+import { otherSlotConflict, slotOptions, targetsFillable, type TargetSpec } from "../target.js";
+import { A, B, cast, lands, ref, settle, spawn, table, toHand, tokensNamed } from "./harness.js";
 
 const GOBLIN = "Goblin Token";
+
+/** "N target creatures", the way `distinctTargets` writes it. */
+const distinctSpecs = (n: number): readonly TargetSpec[] =>
+  Array.from({ length: n }, (_v, i) =>
+    i === 0
+      ? ("creature" as const)
+      : ({ kind: "other", of: "creature", than: { slots: Array.from({ length: i }, (_u, j) => j) } } as const),
+  );
 
 function stackOf(game: Game, player: PlayerId, count: number, plusOnes = 0): ObjectId {
   game.debugApplyEffect(player, { kind: "create-token", token: GOBLIN, count });
@@ -28,6 +37,88 @@ const piles = (game: Game): readonly string[] =>
     .filter((o) => o.cardName === GOBLIN)
     .map((o) => `${o.stackCount ?? 1}x${o.counters["+1/+1"] ?? 0}`)
     .sort();
+
+describe("distinct targets in one token stack (601.2c)", () => {
+  it("destroys two Goblins of one stack with \"two target creatures\"", () => {
+    const { game } = table();
+    const stack = stackOf(game, B, 8);
+    lands(game, "Swamp", 3);
+    cast(game, toHand(game, "Reckless Spite"), { targets: [ref(stack), ref(stack)] });
+    expect(tokensNamed(game, GOBLIN)).toBe(6);
+  });
+
+  it("casts it with one stack of two on the battlefield and nothing else", () => {
+    const { game } = table();
+    const stack = stackOf(game, B, 8);
+    game.state.objects[stack].stackCount = 2;
+    lands(game, "Swamp", 3);
+    const spite = toHand(game, "Reckless Spite");
+    expect(game.legalActions(A).some((l) => l.kind === "cast-spell" && l.card === spite)).toBe(true);
+    cast(game, spite, { targets: [ref(stack), ref(stack)] });
+    expect(tokensNamed(game, GOBLIN)).toBe(0);
+  });
+
+  it("refuses three of a stack of two for a group of up to three", () => {
+    const { game } = table();
+    const stack = stackOf(game, B, 8);
+    game.state.objects[stack].stackCount = 2;
+    lands(game, "Swamp", 3);
+    const spite = toHand(game, "Reckless Spite");
+    expect(
+      game.canDispatch({ type: "cast-spell", player: A, card: spite, targets: [ref(stack), ref(stack), ref(stack)] }),
+    ).not.toBeNull();
+  });
+
+  it("isn't castable at one token and nothing else", () => {
+    const { game } = table();
+    spawn(game, GOBLIN, B);
+    lands(game, "Swamp", 3);
+    const spite = toHand(game, "Reckless Spite");
+    expect(game.legalActions(A).some((l) => l.kind === "cast-spell" && l.card === spite)).toBe(false);
+  });
+
+  it("refuses more targets on a stack than it has tokens", () => {
+    const facts = { controllerOf: () => undefined, powerOf: () => 0, stackSize: () => 2 };
+    const stack = { kind: "object", object: "stack" as ObjectId } as const;
+    const group = [{ kind: "any-number", of: "creature", min: 0, max: 3 } as const];
+    const slot2 = slotOptions(group, [[stack]], 1, [stack], facts);
+    expect(slot2).toEqual([stack]);
+    expect(slotOptions(group, [[stack]], 2, [stack, stack], facts)).toEqual([]);
+    const specs = distinctSpecs(3);
+    expect(otherSlotConflict(specs, [stack, stack], facts)).toBeNull();
+    expect(otherSlotConflict(specs, [stack, stack, stack], facts)).toEqual({ slot: 2, than: 0 });
+  });
+
+  it("without the facts a stack is still one object", () => {
+    const stack = { kind: "object", object: "stack" as ObjectId } as const;
+    expect(otherSlotConflict(distinctSpecs(2), [stack, stack])).toEqual({ slot: 1, than: 0 });
+  });
+
+  it("removes a trigger that wants more than the stack has, and keeps one it can fill", () => {
+    const facts = { controllerOf: () => undefined, powerOf: () => 0, stackSize: () => 3 };
+    const stack = { kind: "object", object: "stack" as ObjectId } as const;
+    const twoOf = [{ kind: "any-number", of: "creature", min: 2, max: 2 } as const];
+    expect(targetsFillable(twoOf, [[stack]], [], 0, facts)).toBe(true);
+    expect(targetsFillable(twoOf, [[stack]], [], 0, { ...facts, stackSize: () => 1 })).toBe(false);
+  });
+
+  it("divides Inferno Titan's damage over three Goblins of one stack", () => {
+    const { game } = table();
+    const stack = stackOf(game, B, 8);
+    const titan = spawn(game, "Inferno Titan", A);
+    game.advanceUntil((s) => s.awaiting?.kind === "attackers");
+    game.dispatch({ type: "declare-attackers", player: A, attackers: [{ attacker: titan, defender: B }] });
+    game.advanceUntil((s) => s.awaiting?.kind === "choose-targets");
+    game.dispatch({
+      type: "choose-targets",
+      player: A,
+      targets: [ref(stack), ref(stack), ref(stack)],
+      division: [1, 1, 1],
+    });
+    game.advanceUntil((s) => s.turn.step === "postcombat-main");
+    expect(tokensNamed(game, GOBLIN, B)).toBe(5);
+  });
+});
 
 describe("proliferate over a token stack (701.34a)", () => {
   it("offers a stack with its size", () => {
