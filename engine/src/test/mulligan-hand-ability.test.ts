@@ -252,7 +252,7 @@ describe("how far mulligans go (rule 103.5)", () => {
   });
 
   it("a free first mulligan doesn't count toward the limit (rule 103.5c)", () => {
-    const game = newGame({ alice: deck(), bob: deck() }, { rules: COMMANDER_RULES });
+    const game = newGame({ alice: deck(), bob: deck() }, { rules: { ...COMMANDER_RULES, freeFirstMulligan: true } });
     taken(game, A, 7);
     expect(game.legalActions(A)).toEqual([{ kind: "mulligan", count: 7 }]);
     taken(game, A, 1);
