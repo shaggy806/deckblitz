@@ -153,13 +153,15 @@ describe("bindDynamicCompares and sameNameWith", () => {
     source: "src",
     controller: A,
     targets: [ref(asObjectId("obj-9")), ref(B)],
-    nameForMatching: (object: ObjectId) => (object === "obj-9" ? "Grizzly Bears" : object === "src" ? "Cylian Sunsinger" : null),
+    slotStillMeant: (held: unknown) => held,
+    noteNamedOffSlot: () => undefined,
+    namesForMatching: (object: ObjectId) => (object === "obj-9" ? ["Grizzly Bears"] : object === "src" ? ["Cylian Sunsinger"] : []),
     permanentsMatching: () => [{ object: "obj-9", count: 1 }],
   } as unknown as ResolutionContext;
 
   it("binds a target slot to the target's name, and a player slot to none", () => {
     const at = (reference: number): EffectSpec => ({ kind: "destroy-all", filter: { sameNameWith: reference } });
-    expect(bindDynamicCompares(at(0), ctx)).toEqual({ kind: "destroy-all", filter: { sameNameAs: { object: "obj-9", name: "Grizzly Bears" } } });
+    expect(bindDynamicCompares(at(0), ctx)).toEqual({ kind: "destroy-all", filter: { sameNameAs: { object: "obj-9", names: ["Grizzly Bears"] } } });
     expect(bindDynamicCompares(at(1), ctx)).toEqual({ kind: "destroy-all", filter: { sameNameAsAny: [] } });
   });
 

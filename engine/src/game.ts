@@ -478,7 +478,6 @@ import {
   rulesTextName,
   textNameOf,
   nameOf,
-  LOCKED_ROOM,
   tokenFoldKey,
   speedOf,
   playerCountersHeld,
@@ -5023,7 +5022,9 @@ export class Game {
       if (leastX === null) continue;
       const xFloor: number = leastX;
       const xFilter =
-        def.castModal === null && this.effectiveTargetSpecs(def, undefined, kicked, overload, player).some(targetSpecReadsX);
+        def.castModal === null &&
+        (this.effectiveTargetSpecs(def, undefined, kicked, overload, player).some(targetSpecReadsX) ||
+          (variantCost !== null && parseManaCost(variantCost).x > 0 && this.castProhibitionReadsManaValue(player)));
       let perX: readonly number[] | null = null;
       // A sacrifice of any number that lowers the cost (Dargo): how many may
       // be announced, and the filter.
@@ -44787,6 +44788,14 @@ controlledBy,
    * cast" prohibition this turn or from a static, or the card's own
    * `castOnlyIf`. `null` if none.
    */
+  /** A "can't cast" on `player` that reads mana value: an X spell is then
+   * offered X by X, since the X values it bars may leave a gap (rule 202.3e). */
+  private castProhibitionReadsManaValue(player: PlayerId): boolean {
+    return prohibitionsOnPlayer(this.state, this.registry, "cast", player).some(
+      ({ prohibition }) => prohibition.filter !== undefined && JSON.stringify(prohibition.filter).includes('"manaValue'),
+    );
+  }
+
   private whyProhibitedFromCasting(player: PlayerId, cardId: ObjectId, def: CardDefinition, xValue?: number): string | null {
     for (const id of this.state.zones.shared.stack) {
       const spell = this.state.objects[id];
@@ -50842,7 +50851,7 @@ controlledBy,
     const object = this.state.objects[cardId];
     if (object === undefined) return [];
     // A split card's half is cast for that half's mana cost (rule 709.3).
-    const ownManaCost = (): string =>
+    const ownManaCost = (): string | null =>
       (face === undefined ? this.registry.get(object.cardName) : this.faceDef(cardId, face)).manaCost;
     const out: FlashbackOption[] = [];
     const add = (option: FlashbackOption): void => {

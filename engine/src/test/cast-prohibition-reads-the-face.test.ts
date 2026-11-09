@@ -65,7 +65,7 @@ describe("a cast prohibition reads the face or half being cast", () => {
     expect(at(2)).toBeNull();
     expect(at(3)).toMatch(/can't cast/);
     expect(at(4)).toMatch(/can't cast/);
-    expect(castsOf(game, blaze)[0].xCost?.maxX).toBe(2);
+    expect(castsOf(game, blaze).map((a) => a.xCost?.maxX)).toEqual([0, 1, 2]);
   });
 
   it("Nikya: a bestowed Aura spell is a noncreature spell, the creature can still be cast", () => {

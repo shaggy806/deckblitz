@@ -217,6 +217,8 @@ describe("bindDynamicCompares binds the shares clauses", () => {
       targets: [],
       triggerObject: undefined,
       objectSet: () => [],
+      slotStillMeant: (held: unknown) => held,
+      noteNamedOffSlot: () => undefined,
       attachedHost: () => undefined,
       attachedOwner: () => undefined,
       chosenPermanent: () => undefined,

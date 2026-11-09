@@ -37,7 +37,7 @@ import { hasRingBearerDesignation, isRingBearer } from "./ring.js";
 import type { Color, ManaCost, ManaOrigin, ManaSpentQuery } from "./mana.js";
 import { COLORS, colorSymbols, manaValue, parseManaCost, spentManaCount } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
-import { LOCKED_ROOM, spellCaster, activePlayerOf, blockedAttackersOf, controllersLastTurn, isTokenNow, manaCostOverride, nameOf, permanentCount, printedCardName, rulesTextName } from "./state.js";
+import { spellCaster, activePlayerOf, blockedAttackersOf, controllersLastTurn, isTokenNow, manaCostOverride, nameOf, permanentCount, printedCardName, rulesTextName } from "./state.js";
 import type { AttachmentRecord, GameObject, GameState, LastKnownInfo, ZoneType } from "./state.js";
 import { CREATURE_TYPES } from "./creature-types.js";
 import { EVERY_CREATURE_TYPE, EVERY_LAND_TYPE, hasSubtype, isCreatureType, isLandType, isTypeMarker } from "./subtypes.js";
