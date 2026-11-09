@@ -68,6 +68,23 @@ describe("each player chooses, then all act (rule 101.4)", () => {
     expect(life(game, B)).toBe(20);
   });
 
+  it("Miasmic Mummy: each player's discard is chosen unseen and they go together", () => {
+    const { game, a, b } = table();
+    const giant = toHand(game, "Hill Giant", A);
+    const bears = toHand(game, "Grizzly Bears", B);
+    a.chooseDiscardsFn = () => [giant];
+    let seenByBob: string | undefined;
+    b.chooseDiscardsFn = () => {
+      seenByBob = zone(game, giant);
+      return [bears];
+    };
+    game.debugApplyEffect(A, { kind: "discard", target: "each-player", amount: 1 });
+    settle(game);
+    expect(seenByBob).toBe("hand");
+    expect(zone(game, giant)).toBe("graveyard");
+    expect(zone(game, bears)).toBe("graveyard");
+  });
+
   it("a player who declines loses the life; one who discards doesn't", () => {
     const { game, a } = table({ players: 3 });
     const giant = toHand(game, "Hill Giant", A);
