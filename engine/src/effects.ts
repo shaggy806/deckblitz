@@ -7738,7 +7738,9 @@ export type EffectSpec =
        * theirs, and only then do the chosen cards enter, all at once (rule
        * 101.4, the ruling). A card already chosen can't be chosen again:
        * Rejoin the Fight's "that hasn't been chosen". For a `look-and-choose`
-       * onto the battlefield from a hand or a graveyard, or a `search-library`
+       * onto the battlefield from a hand, a graveyard, or the top of a library
+       * with the rest going to a graveyard, exile or a hand (Clear the Land —
+       * `simultaneous` can't do that, for a look-and-choose asks), or a `search-library`
        * of `who: "that-player"` onto the battlefield: "**each player searches**
        * their library for a basic land card, puts it onto the battlefield,
        * then shuffles" (Field of Ruin), the shuffles after the entries. */

@@ -10596,6 +10596,12 @@ export class Game {
       awaiting.enterAttachedTo === undefined &&
       awaiting.enterAlong === undefined &&
       awaiting.reveal !== true;
+    // "Each player reveals the top five cards of their library, puts all land
+    // cards revealed this way onto the battlefield tapped, and exiles the
+    // rest" (Clear the Land): what's put waits in the library with the
+    // others', and the rest goes now.
+    const lookedAtFind =
+      !searchFind && awaiting.leftoverIf === undefined && ["graveyard", "exile", "hand"].includes(awaiting.leftover);
     if (
       held !== undefined &&
       awaiting.priorityTo === undefined &&
@@ -10603,7 +10609,7 @@ export class Game {
       (chosen.length > 0 || (searchFind && shuffles)) &&
       chosen.every((id) => {
         const from = this.state.objects[id]?.zone;
-        return from === "hand" || from === "graveyard" || (searchFind && from === "library");
+        return from === "hand" || from === "graveyard" || ((searchFind || lookedAtFind) && from === "library");
       }) &&
       awaiting.then === undefined &&
       awaiting.secondPick === undefined &&
@@ -10632,6 +10638,10 @@ export class Game {
       };
       this.emit({ type: "cards-chosen-from-zone", player, objects: [...chosen] });
       this.state.awaiting = null;
+      if (lookedAtFind && chosen.some((id) => this.state.objects[id]?.zone === "library")) {
+        const chosenHere = new Set<ObjectId>(chosen);
+        this.moveChosenFromZone(awaiting, player, [], awaiting.ids.filter((id) => !chosenHere.has(id)));
+      }
       this.prepareForPriority(this.activePlayer);
       return;
     }

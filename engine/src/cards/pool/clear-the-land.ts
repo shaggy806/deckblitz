@@ -10,6 +10,8 @@ export default defineCard({
   effect: {
     kind: "for-each-player",
     who: "each-player",
+    // Held: every land enters at once, after every player has revealed.
+    choicesHeld: true,
     effect: {
       kind: "look-and-choose",
       player: "that-player",
