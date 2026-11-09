@@ -579,11 +579,13 @@ import _poolPainbringer from "../pool/painbringer.js";
 import _poolPairedTactician from "../pool/paired-tactician.js";
 import _poolPanicAttack from "../pool/panic-attack.js";
 import _poolParcelMyr from "../pool/parcel-myr.js";
+import _poolPartyThrasher from "../pool/party-thrasher.js";
 import _poolPathToRedemption from "../pool/path-to-redemption.js";
 import _poolPedalToTheMetal from "../pool/pedal-to-the-metal.js";
 import _poolPerimeterEnforcer from "../pool/perimeter-enforcer.js";
 import _poolPhantasmalForces from "../pool/phantasmal-forces.js";
 import _poolPhyrexianEtchings from "../pool/phyrexian-etchings.js";
+import _poolPhyrexianVindicator from "../pool/phyrexian-vindicator.js";
 import _poolPillarOfWar from "../pool/pillar-of-war.js";
 import _poolPitilessGorgon from "../pool/pitiless-gorgon.js";
 import _poolPlagueBoiler from "../pool/plague-boiler.js";
@@ -754,6 +756,7 @@ import _poolSolitarySanctuary from "../pool/solitary-sanctuary.js";
 import _poolSolsticeZealot from "../pool/solstice-zealot.js";
 import _poolSongOfSerenity from "../pool/song-of-serenity.js";
 import _poolSoothsayerAdept from "../pool/soothsayer-adept.js";
+import _poolSorcererClass from "../pool/sorcerer-class.js";
 import _poolSorinMarkov from "../pool/sorin-markov.js";
 import _poolSorinsVengeance from "../pool/sorins-vengeance.js";
 import _poolSoulTithe from "../pool/soul-tithe.js";
@@ -854,10 +857,12 @@ import _poolTianaShipsCaretaker from "../pool/tiana-ships-caretaker.js";
 import _poolTibaltsRager from "../pool/tibalts-rager.js";
 import _poolTidalForce from "../pool/tidal-force.js";
 import _poolTimeVault from "../pool/time-vault.js";
+import _poolTinybonesJoinsUp from "../pool/tinybones-joins-up.js";
 import _poolTobyBeastieBefriender from "../pool/toby-beastie-befriender.js";
 import _poolTolariaWest from "../pool/tolaria-west.js";
 import _poolTonicPeddler from "../pool/tonic-peddler.js";
 import _poolTonyStark from "../pool/tony-stark.js";
+import _poolToralfGodOfFury from "../pool/toralf-god-of-fury.js";
 import _poolTormentorExarch from "../pool/tormentor-exarch.js";
 import _poolToskiBearerOfSecrets from "../pool/toski-bearer-of-secrets.js";
 import _poolTotallyLost from "../pool/totally-lost.js";
@@ -1574,11 +1579,13 @@ const shard: CardShard = {
     _poolPairedTactician,
     _poolPanicAttack,
     _poolParcelMyr,
+    _poolPartyThrasher,
     _poolPathToRedemption,
     _poolPedalToTheMetal,
     _poolPerimeterEnforcer,
     _poolPhantasmalForces,
     _poolPhyrexianEtchings,
+    _poolPhyrexianVindicator,
     _poolPillarOfWar,
     _poolPitilessGorgon,
     _poolPlagueBoiler,
@@ -1749,6 +1756,7 @@ const shard: CardShard = {
     _poolSolsticeZealot,
     _poolSongOfSerenity,
     _poolSoothsayerAdept,
+    _poolSorcererClass,
     _poolSorinMarkov,
     _poolSorinsVengeance,
     _poolSoulTithe,
@@ -1849,10 +1857,12 @@ const shard: CardShard = {
     _poolTibaltsRager,
     _poolTidalForce,
     _poolTimeVault,
+    _poolTinybonesJoinsUp,
     _poolTobyBeastieBefriender,
     _poolTolariaWest,
     _poolTonicPeddler,
     _poolTonyStark,
+    _poolToralfGodOfFury,
     _poolTormentorExarch,
     _poolToskiBearerOfSecrets,
     _poolTotallyLost,

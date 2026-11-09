@@ -346,6 +346,7 @@ import _poolHaraldKingOfSkemfar from "../pool/harald-king-of-skemfar.js";
 import _poolHardHittingQuestion from "../pool/hard-hitting-question.js";
 import _poolHardlightContainment from "../pool/hardlight-containment.js";
 import _poolHareApparent from "../pool/hare-apparent.js";
+import _poolHatefulEidolon from "../pool/hateful-eidolon.js";
 import _poolHazardousConditions from "../pool/hazardous-conditions.js";
 import _poolHazeriderDrake from "../pool/hazerider-drake.js";
 import _poolHeadlessSkaab from "../pool/headless-skaab.js";
@@ -526,6 +527,7 @@ import _poolMysteriousLimousine from "../pool/mysterious-limousine.js";
 import _poolMysticSubdual from "../pool/mystic-subdual.js";
 import _poolNaggingThoughts from "../pool/nagging-thoughts.js";
 import _poolNashiMoonsLegacy from "../pool/nashi-moons-legacy.js";
+import _poolNazgul from "../pool/nazgul.js";
 import _poolNecrosynthesis from "../pool/necrosynthesis.js";
 import _poolNeedleSpecter from "../pool/needle-specter.js";
 import _poolNeedletoothRaptor from "../pool/needletooth-raptor.js";
@@ -557,6 +559,7 @@ import _poolOnThinIce from "../pool/on-thin-ice.js";
 import _poolOngoingInvestigation from "../pool/ongoing-investigation.js";
 import _poolOrderOfMidnight from "../pool/order-of-midnight.js";
 import _poolOrimSamiteHealer from "../pool/orim-samite-healer.js";
+import _poolOriqLoremage from "../pool/oriq-loremage.js";
 import _poolOtterPenguin from "../pool/otter-penguin.js";
 import _poolOvereagerApprentice from "../pool/overeager-apprentice.js";
 import _poolOvergrownTomb from "../pool/overgrown-tomb.js";
@@ -676,6 +679,7 @@ import _poolSaprazzanRaider from "../pool/saprazzan-raider.js";
 import _poolSarkhanTheMad from "../pool/sarkhan-the-mad.js";
 import _poolSarkhansRage from "../pool/sarkhans-rage.js";
 import _poolSarkhansTriumph from "../pool/sarkhans-triumph.js";
+import _poolSatoruTheInfiltrator from "../pool/satoru-the-infiltrator.js";
 import _poolScarbladeScout from "../pool/scarblade-scout.js";
 import _poolScatteredGroves from "../pool/scattered-groves.js";
 import _poolScattershotArcher from "../pool/scattershot-archer.js";
@@ -1330,6 +1334,7 @@ const shard: CardShard = {
     _poolHardHittingQuestion,
     _poolHardlightContainment,
     _poolHareApparent,
+    _poolHatefulEidolon,
     _poolHazardousConditions,
     _poolHazeriderDrake,
     _poolHeadlessSkaab,
@@ -1510,6 +1515,7 @@ const shard: CardShard = {
     _poolMysticSubdual,
     _poolNaggingThoughts,
     _poolNashiMoonsLegacy,
+    _poolNazgul,
     _poolNecrosynthesis,
     _poolNeedleSpecter,
     _poolNeedletoothRaptor,
@@ -1541,6 +1547,7 @@ const shard: CardShard = {
     _poolOngoingInvestigation,
     _poolOrderOfMidnight,
     _poolOrimSamiteHealer,
+    _poolOriqLoremage,
     _poolOtterPenguin,
     _poolOvereagerApprentice,
     _poolOvergrownTomb,
@@ -1660,6 +1667,7 @@ const shard: CardShard = {
     _poolSarkhanTheMad,
     _poolSarkhansRage,
     _poolSarkhansTriumph,
+    _poolSatoruTheInfiltrator,
     _poolScarbladeScout,
     _poolScatteredGroves,
     _poolScattershotArcher,

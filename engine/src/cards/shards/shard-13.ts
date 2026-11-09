@@ -402,6 +402,7 @@ import _poolInvent from "../pool/invent.js";
 import _poolInvokeTheWinds from "../pool/invoke-the-winds.js";
 import _poolIsolatedChapel from "../pool/isolated-chapel.js";
 import _poolIzoniCenterOfTheWeb from "../pool/izoni-center-of-the-web.js";
+import _poolIzzetGeneratorium from "../pool/izzet-generatorium.js";
 import _poolIzzetLocket from "../pool/izzet-locket.js";
 import _poolJaceCunningCastaway from "../pool/jace-cunning-castaway.js";
 import _poolJacesDefeat from "../pool/jaces-defeat.js";
@@ -455,6 +456,7 @@ import _poolLeechingSliver from "../pool/leeching-sliver.js";
 import _poolLeeringGargoyle from "../pool/leering-gargoyle.js";
 import _poolLegionLoyalty from "../pool/legion-loyalty.js";
 import _poolLegionsOfLimDul from "../pool/legions-of-lim-dul.js";
+import _poolLembas from "../pool/lembas.js";
 import _poolLeylineDowser from "../pool/leyline-dowser.js";
 import _poolLightningHelix from "../pool/lightning-helix.js";
 import _poolLightningReflexes from "../pool/lightning-reflexes.js";
@@ -571,6 +573,7 @@ import _poolPeelFromReality from "../pool/peel-from-reality.js";
 import _poolPersonalTutor from "../pool/personal-tutor.js";
 import _poolPhantasmalAbomination from "../pool/phantasmal-abomination.js";
 import _poolPhotonBlastBarrage from "../pool/photon-blast-barrage.js";
+import _poolPhyresisOutbreak from "../pool/phyresis-outbreak.js";
 import _poolPhyrexianDelver from "../pool/phyrexian-delver.js";
 import _poolPhyrexianDriver from "../pool/phyrexian-driver.js";
 import _poolPhyrexianHydra from "../pool/phyrexian-hydra.js";
@@ -826,6 +829,7 @@ import _poolTeferisMoat from "../pool/teferis-moat.js";
 import _poolTelJiladFallen from "../pool/tel-jilad-fallen.js";
 import _poolTeleminPerformance from "../pool/telemin-performance.js";
 import _poolTempleGarden from "../pool/temple-garden.js";
+import _poolTempleOfCultivation from "../pool/temple-of-cultivation.js";
 import _poolTenthDistrictVeteran from "../pool/tenth-district-veteran.js";
 import _poolTerrarion from "../pool/terrarion.js";
 import _poolTevalsJudgment from "../pool/tevals-judgment.js";
@@ -853,6 +857,7 @@ import _poolTogetherAsOne from "../pool/together-as-one.js";
 import _poolTombBlade from "../pool/tomb-blade.js";
 import _poolTomeOfLegends from "../pool/tome-of-legends.js";
 import _poolToothOfChissGoria from "../pool/tooth-of-chiss-goria.js";
+import _poolToralfsHammer from "../pool/toralfs-hammer.js";
 import _poolTouchstone from "../pool/touchstone.js";
 import _poolTragedyFeaster from "../pool/tragedy-feaster.js";
 import _poolTrailblazer from "../pool/trailblazer.js";
@@ -1375,6 +1380,7 @@ const shard: CardShard = {
     _poolInvokeTheWinds,
     _poolIsolatedChapel,
     _poolIzoniCenterOfTheWeb,
+    _poolIzzetGeneratorium,
     _poolIzzetLocket,
     _poolJaceCunningCastaway,
     _poolJacesDefeat,
@@ -1428,6 +1434,7 @@ const shard: CardShard = {
     _poolLeeringGargoyle,
     _poolLegionLoyalty,
     _poolLegionsOfLimDul,
+    _poolLembas,
     _poolLeylineDowser,
     _poolLightningHelix,
     _poolLightningReflexes,
@@ -1544,6 +1551,7 @@ const shard: CardShard = {
     _poolPersonalTutor,
     _poolPhantasmalAbomination,
     _poolPhotonBlastBarrage,
+    _poolPhyresisOutbreak,
     _poolPhyrexianDelver,
     _poolPhyrexianDriver,
     _poolPhyrexianHydra,
@@ -1799,6 +1807,7 @@ const shard: CardShard = {
     _poolTelJiladFallen,
     _poolTeleminPerformance,
     _poolTempleGarden,
+    _poolTempleOfCultivation,
     _poolTenthDistrictVeteran,
     _poolTerrarion,
     _poolTevalsJudgment,
@@ -1826,6 +1835,7 @@ const shard: CardShard = {
     _poolTombBlade,
     _poolTomeOfLegends,
     _poolToothOfChissGoria,
+    _poolToralfsHammer,
     _poolTouchstone,
     _poolTragedyFeaster,
     _poolTrailblazer,

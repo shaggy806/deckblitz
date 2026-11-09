@@ -54,6 +54,7 @@ import _poolAwakenTheAncient from "../pool/awaken-the-ancient.js";
 import _poolAwakenedSkyclave from "../pool/awakened-skyclave.js";
 import _poolBalefulForce from "../pool/baleful-force.js";
 import _poolBallistaCharger from "../pool/ballista-charger.js";
+import _poolBalor from "../pool/balor.js";
 import _poolBalothGorger from "../pool/baloth-gorger.js";
 import _poolBankruptInBlood from "../pool/bankrupt-in-blood.js";
 import _poolBarbedBloodletter from "../pool/barbed-bloodletter.js";
@@ -832,6 +833,7 @@ import _poolTeferiHeroOfDominaria from "../pool/teferi-hero-of-dominaria.js";
 import _poolTemperedInSolitude from "../pool/tempered-in-solitude.js";
 import _poolTempleAcolyte from "../pool/temple-acolyte.js";
 import _poolTendrilOfTheMycotyrant from "../pool/tendril-of-the-mycotyrant.js";
+import _poolTenuousTruce from "../pool/tenuous-truce.js";
 import _poolTerrifyingPresence from "../pool/terrifying-presence.js";
 import _poolTestamentOfFaith from "../pool/testament-of-faith.js";
 import _poolThalakosSeer from "../pool/thalakos-seer.js";
@@ -899,6 +901,7 @@ import _poolUnsettlingTwins from "../pool/unsettling-twins.js";
 import _poolUnsparingBoltcaster from "../pool/unsparing-boltcaster.js";
 import _poolUnstableAmulet from "../pool/unstable-amulet.js";
 import _poolUnstoppableOgre from "../pool/unstoppable-ogre.js";
+import _poolUrabraskHereticPraetor from "../pool/urabrask-heretic-praetor.js";
 import _poolUroTitanOfNaturesWrath from "../pool/uro-titan-of-natures-wrath.js";
 import _poolUrzasEngine from "../pool/urzas-engine.js";
 import _poolVATS from "../pool/v-a-t-s.js";
@@ -1048,6 +1051,7 @@ const shard: CardShard = {
     _poolAwakenedSkyclave,
     _poolBalefulForce,
     _poolBallistaCharger,
+    _poolBalor,
     _poolBalothGorger,
     _poolBankruptInBlood,
     _poolBarbedBloodletter,
@@ -1826,6 +1830,7 @@ const shard: CardShard = {
     _poolTemperedInSolitude,
     _poolTempleAcolyte,
     _poolTendrilOfTheMycotyrant,
+    _poolTenuousTruce,
     _poolTerrifyingPresence,
     _poolTestamentOfFaith,
     _poolThalakosSeer,
@@ -1893,6 +1898,7 @@ const shard: CardShard = {
     _poolUnsparingBoltcaster,
     _poolUnstableAmulet,
     _poolUnstoppableOgre,
+    _poolUrabraskHereticPraetor,
     _poolUroTitanOfNaturesWrath,
     _poolUrzasEngine,
     _poolVATS,

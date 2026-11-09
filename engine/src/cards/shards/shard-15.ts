@@ -111,6 +111,7 @@ import _poolCaughtInTheCrossfire from "../pool/caught-in-the-crossfire.js";
 import _poolCausticWasps from "../pool/caustic-wasps.js";
 import _poolCentaursHerald from "../pool/centaurs-herald.js";
 import _poolCephalidSage from "../pool/cephalid-sage.js";
+import _poolChainOfSmog from "../pool/chain-of-smog.js";
 import _poolChampionOfThePath from "../pool/champion-of-the-path.js";
 import _poolChandraAcolyteOfFlame from "../pool/chandra-acolyte-of-flame.js";
 import _poolChandrasRevolution from "../pool/chandras-revolution.js";
@@ -182,6 +183,7 @@ import _poolDemonicGifts from "../pool/demonic-gifts.js";
 import _poolDemonicVigor from "../pool/demonic-vigor.js";
 import _poolDemonmailHauberk from "../pool/demonmail-hauberk.js";
 import _poolDenyTheWitch from "../pool/deny-the-witch.js";
+import _poolDescendantsPath from "../pool/descendants-path.js";
 import _poolDespark from "../pool/despark.js";
 import _poolDestined from "../pool/destined.js";
 import _poolDevourInFlames from "../pool/devour-in-flames.js";
@@ -415,6 +417,7 @@ import _poolIzzetCluestone from "../pool/izzet-cluestone.js";
 import _poolJhovallQueen from "../pool/jhovall-queen.js";
 import _poolJillShivasDominant from "../pool/jill-shivas-dominant.js";
 import _poolJoinForces from "../pool/join-forces.js";
+import _poolJoleneThePlunderQueen from "../pool/jolene-the-plunder-queen.js";
 import _poolJubilantSkybonder from "../pool/jubilant-skybonder.js";
 import _poolJungleHollow from "../pool/jungle-hollow.js";
 import _poolJungleWayfinder from "../pool/jungle-wayfinder.js";
@@ -627,8 +630,10 @@ import _poolPyrewoodGearhulk from "../pool/pyrewood-gearhulk.js";
 import _poolPyromancy from "../pool/pyromancy.js";
 import _poolPyrotechnicPerformer from "../pool/pyrotechnic-performer.js";
 import _poolQuakefootCyclops from "../pool/quakefoot-cyclops.js";
+import _poolQuartzwoodCrasher from "../pool/quartzwood-crasher.js";
 import _poolQuench from "../pool/quench.js";
 import _poolQuicken from "../pool/quicken.js";
+import _poolQuilledGreatwurm from "../pool/quilled-greatwurm.js";
 import _poolQuistisTrepe from "../pool/quistis-trepe.js";
 import _poolRagingGoblinoids from "../pool/raging-goblinoids.js";
 import _poolRakdosAugermage from "../pool/rakdos-augermage.js";
@@ -1054,6 +1059,7 @@ const shard: CardShard = {
     _poolCausticWasps,
     _poolCentaursHerald,
     _poolCephalidSage,
+    _poolChainOfSmog,
     _poolChampionOfThePath,
     _poolChandraAcolyteOfFlame,
     _poolChandrasRevolution,
@@ -1125,6 +1131,7 @@ const shard: CardShard = {
     _poolDemonicVigor,
     _poolDemonmailHauberk,
     _poolDenyTheWitch,
+    _poolDescendantsPath,
     _poolDespark,
     _poolDestined,
     _poolDevourInFlames,
@@ -1358,6 +1365,7 @@ const shard: CardShard = {
     _poolJhovallQueen,
     _poolJillShivasDominant,
     _poolJoinForces,
+    _poolJoleneThePlunderQueen,
     _poolJubilantSkybonder,
     _poolJungleHollow,
     _poolJungleWayfinder,
@@ -1570,8 +1578,10 @@ const shard: CardShard = {
     _poolPyromancy,
     _poolPyrotechnicPerformer,
     _poolQuakefootCyclops,
+    _poolQuartzwoodCrasher,
     _poolQuench,
     _poolQuicken,
+    _poolQuilledGreatwurm,
     _poolQuistisTrepe,
     _poolRagingGoblinoids,
     _poolRakdosAugermage,

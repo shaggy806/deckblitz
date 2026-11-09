@@ -420,6 +420,7 @@ import _poolJumpScare from "../pool/jump-scare.js";
 import _poolJundCharm from "../pool/jund-charm.js";
 import _poolJundPanorama from "../pool/jund-panorama.js";
 import _poolKarnTheGreatCreator from "../pool/karn-the-great-creator.js";
+import _poolKatildaDawnhartPrime from "../pool/katilda-dawnhart-prime.js";
 import _poolKayaGeistHunter from "../pool/kaya-geist-hunter.js";
 import _poolKayasGuile from "../pool/kayas-guile.js";
 import _poolKeeperOfTheAccord from "../pool/keeper-of-the-accord.js";
@@ -638,6 +639,7 @@ import _poolRedeem from "../pool/redeem.js";
 import _poolRefuse from "../pool/refuse.js";
 import _poolRejoinTheFight from "../pool/rejoin-the-fight.js";
 import _poolRelentlessDrednok from "../pool/relentless-drednok.js";
+import _poolRelicOfProgenitus from "../pool/relic-of-progenitus.js";
 import _poolRelicPutrescence from "../pool/relic-putrescence.js";
 import _poolRendmawCreakingNest from "../pool/rendmaw-creaking-nest.js";
 import _poolRenegadeRallier from "../pool/renegade-rallier.js";
@@ -817,6 +819,7 @@ import _poolTheInvincibleIronMan from "../pool/the-invincible-iron-man.js";
 import _poolTheMasterMesmerist from "../pool/the-master-mesmerist.js";
 import _poolTheRegalia from "../pool/the-regalia.js";
 import _poolTheSibsigCeremony from "../pool/the-sibsig-ceremony.js";
+import _poolTheSoundOfDrums from "../pool/the-sound-of-drums.js";
 import _poolTheoreticalDuplication from "../pool/theoretical-duplication.js";
 import _poolThornbowArcher from "../pool/thornbow-archer.js";
 import _poolThornwoodFalls from "../pool/thornwood-falls.js";
@@ -889,6 +892,7 @@ import _poolVictory from "../pool/victory.js";
 import _poolVileRebirth from "../pool/vile-rebirth.js";
 import _poolViridescentBog from "../pool/viridescent-bog.js";
 import _poolVirtueOfKnowledge from "../pool/virtue-of-knowledge.js";
+import _poolVoharVodalianDesecrator from "../pool/vohar-vodalian-desecrator.js";
 import _poolVoicesFromTheVoid from "../pool/voices-from-the-void.js";
 import _poolVoidpouncer from "../pool/voidpouncer.js";
 import _poolVoraciousNull from "../pool/voracious-null.js";
@@ -910,6 +914,7 @@ import _poolWhiteDragon from "../pool/white-dragon.js";
 import _poolWildEndeavor from "../pool/wild-endeavor.js";
 import _poolWillOfTheSultai from "../pool/will-of-the-sultai.js";
 import _poolWillbender from "../pool/willbender.js";
+import _poolWindingConstrictor from "../pool/winding-constrictor.js";
 import _poolWinterMoon from "../pool/winter-moon.js";
 import _poolWintermoonMesa from "../pool/wintermoon-mesa.js";
 import _poolWirewoodHerald from "../pool/wirewood-herald.js";
@@ -1371,6 +1376,7 @@ const shard: CardShard = {
     _poolJundCharm,
     _poolJundPanorama,
     _poolKarnTheGreatCreator,
+    _poolKatildaDawnhartPrime,
     _poolKayaGeistHunter,
     _poolKayasGuile,
     _poolKeeperOfTheAccord,
@@ -1589,6 +1595,7 @@ const shard: CardShard = {
     _poolRefuse,
     _poolRejoinTheFight,
     _poolRelentlessDrednok,
+    _poolRelicOfProgenitus,
     _poolRelicPutrescence,
     _poolRendmawCreakingNest,
     _poolRenegadeRallier,
@@ -1768,6 +1775,7 @@ const shard: CardShard = {
     _poolTheMasterMesmerist,
     _poolTheRegalia,
     _poolTheSibsigCeremony,
+    _poolTheSoundOfDrums,
     _poolTheoreticalDuplication,
     _poolThornbowArcher,
     _poolThornwoodFalls,
@@ -1840,6 +1848,7 @@ const shard: CardShard = {
     _poolVileRebirth,
     _poolViridescentBog,
     _poolVirtueOfKnowledge,
+    _poolVoharVodalianDesecrator,
     _poolVoicesFromTheVoid,
     _poolVoidpouncer,
     _poolVoraciousNull,
@@ -1861,6 +1870,7 @@ const shard: CardShard = {
     _poolWildEndeavor,
     _poolWillOfTheSultai,
     _poolWillbender,
+    _poolWindingConstrictor,
     _poolWinterMoon,
     _poolWintermoonMesa,
     _poolWirewoodHerald,

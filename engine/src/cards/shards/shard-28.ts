@@ -38,6 +38,7 @@ import _poolAngelicObserver from "../pool/angelic-observer.js";
 import _poolAniktheaHandOfErebos from "../pool/anikthea-hand-of-erebos.js";
 import _poolAnimPakalThousandthMoon from "../pool/anim-pakal-thousandth-moon.js";
 import _poolAnnieJoinsUp from "../pool/annie-joins-up.js";
+import _poolAnotherRound from "../pool/another-round.js";
 import _poolAnuridBarkripper from "../pool/anurid-barkripper.js";
 import _poolAnuridScavenger from "../pool/anurid-scavenger.js";
 import _poolArabaMothrider from "../pool/araba-mothrider.js";
@@ -212,6 +213,7 @@ import _poolDefossilize from "../pool/defossilize.js";
 import _poolDemonfire from "../pool/demonfire.js";
 import _poolDemonsHerald from "../pool/demons-herald.js";
 import _poolDenryKlinEditorInChief from "../pool/denry-klin-editor-in-chief.js";
+import _poolDesert from "../pool/desert.js";
 import _poolDiamondKnight from "../pool/diamond-knight.js";
 import _poolDinoDna from "../pool/dino-dna.js";
 import _poolDiregrafGhoul from "../pool/diregraf-ghoul.js";
@@ -583,6 +585,7 @@ import _poolOonasBlackguard from "../pool/oonas-blackguard.js";
 import _poolOonasGrace from "../pool/oonas-grace.js";
 import _poolOozePatrol from "../pool/ooze-patrol.js";
 import _poolOrderOfTheEbonHand from "../pool/order-of-the-ebon-hand.js";
+import _poolOrvarTheAllForm from "../pool/orvar-the-all-form.js";
 import _poolOsseousSticktwister from "../pool/osseous-sticktwister.js";
 import _poolOutmuscle from "../pool/outmuscle.js";
 import _poolOvergrownBattlement from "../pool/overgrown-battlement.js";
@@ -742,6 +745,7 @@ import _poolScribeOfTheMindful from "../pool/scribe-of-the-mindful.js";
 import _poolScrollOfGriselbrand from "../pool/scroll-of-griselbrand.js";
 import _poolScuttlingButler from "../pool/scuttling-butler.js";
 import _poolSeasonOfLoss from "../pool/season-of-loss.js";
+import _poolSecretArcadeDustyParlor from "../pool/secret-arcade-dusty-parlor.js";
 import _poolSecuritronSquadron from "../pool/securitron-squadron.js";
 import _poolSeedcradleWitch from "../pool/seedcradle-witch.js";
 import _poolSelectiveMemory from "../pool/selective-memory.js";
@@ -835,6 +839,7 @@ import _poolSunbeamSpellbomb from "../pool/sunbeam-spellbomb.js";
 import _poolSunscapeApprentice from "../pool/sunscape-apprentice.js";
 import _poolSunstarExpansionist from "../pool/sunstar-expansionist.js";
 import _poolSurgeMare from "../pool/surge-mare.js";
+import _poolSurgeToVictory from "../pool/surge-to-victory.js";
 import _poolSurveillancePhantasm from "../pool/surveillance-phantasm.js";
 import _poolSwallowedByLeviathan from "../pool/swallowed-by-leviathan.js";
 import _poolSwatAway from "../pool/swat-away.js";
@@ -1058,6 +1063,7 @@ const shard: CardShard = {
     _poolAniktheaHandOfErebos,
     _poolAnimPakalThousandthMoon,
     _poolAnnieJoinsUp,
+    _poolAnotherRound,
     _poolAnuridBarkripper,
     _poolAnuridScavenger,
     _poolArabaMothrider,
@@ -1232,6 +1238,7 @@ const shard: CardShard = {
     _poolDemonfire,
     _poolDemonsHerald,
     _poolDenryKlinEditorInChief,
+    _poolDesert,
     _poolDiamondKnight,
     _poolDinoDna,
     _poolDiregrafGhoul,
@@ -1603,6 +1610,7 @@ const shard: CardShard = {
     _poolOonasGrace,
     _poolOozePatrol,
     _poolOrderOfTheEbonHand,
+    _poolOrvarTheAllForm,
     _poolOsseousSticktwister,
     _poolOutmuscle,
     _poolOvergrownBattlement,
@@ -1762,6 +1770,7 @@ const shard: CardShard = {
     _poolScrollOfGriselbrand,
     _poolScuttlingButler,
     _poolSeasonOfLoss,
+    _poolSecretArcadeDustyParlor,
     _poolSecuritronSquadron,
     _poolSeedcradleWitch,
     _poolSelectiveMemory,
@@ -1855,6 +1864,7 @@ const shard: CardShard = {
     _poolSunscapeApprentice,
     _poolSunstarExpansionist,
     _poolSurgeMare,
+    _poolSurgeToVictory,
     _poolSurveillancePhantasm,
     _poolSwallowedByLeviathan,
     _poolSwatAway,

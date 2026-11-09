@@ -439,6 +439,7 @@ import _poolJadedResponse from "../pool/jaded-response.js";
 import _poolJennikaBadAppleBigSister from "../pool/jennika-bad-apple-big-sister.js";
 import _poolJennyFlint from "../pool/jenny-flint.js";
 import _poolJoGrant from "../pool/jo-grant.js";
+import _poolJourneyToEternity from "../pool/journey-to-eternity.js";
 import _poolJungleWeaver from "../pool/jungle-weaver.js";
 import _poolJwariShapeshifter from "../pool/jwari-shapeshifter.js";
 import _poolKalastriaHealer from "../pool/kalastria-healer.js";
@@ -468,6 +469,7 @@ import _poolKorSkyClimber from "../pool/kor-sky-climber.js";
 import _poolKoseiPenitentWarlord from "../pool/kosei-penitent-warlord.js";
 import _poolKraulWarrior from "../pool/kraul-warrior.js";
 import _poolKrosanVorine from "../pool/krosan-vorine.js";
+import _poolKroxaTitanOfDeathsHunger from "../pool/kroxa-titan-of-deaths-hunger.js";
 import _poolKrydleOfBaldursGate from "../pool/krydle-of-baldurs-gate.js";
 import _poolLadyCaleria from "../pool/lady-caleria.js";
 import _poolLadyEvangela from "../pool/lady-evangela.js";
@@ -493,6 +495,7 @@ import _poolLobberCrew from "../pool/lobber-crew.js";
 import _poolLodestoneGolem from "../pool/lodestone-golem.js";
 import _poolLokisScepter from "../pool/lokis-scepter.js";
 import _poolLoneRevenant from "../pool/lone-revenant.js";
+import _poolLongTermPlans from "../pool/long-term-plans.js";
 import _poolLongtuskCub from "../pool/longtusk-cub.js";
 import _poolLordXanderTheCollector from "../pool/lord-xander-the-collector.js";
 import _poolLoreSeeker from "../pool/lore-seeker.js";
@@ -556,6 +559,7 @@ import _poolMoonlightGeist from "../pool/moonlight-geist.js";
 import _poolMorgulKnifeWound from "../pool/morgul-knife-wound.js";
 import _poolMournersSurprise from "../pool/mourners-surprise.js";
 import _poolMoxAmber from "../pool/mox-amber.js";
+import _poolMrHousePresidentAndCeo from "../pool/mr-house-president-and-ceo.js";
 import _poolMuckDrubb from "../pool/muck-drubb.js";
 import _poolMundasVanguard from "../pool/mundas-vanguard.js";
 import _poolMusesEncouragement from "../pool/muses-encouragement.js";
@@ -605,6 +609,7 @@ import _poolOnulet from "../pool/onulet.js";
 import _poolOpenIntoWonder from "../pool/open-into-wonder.js";
 import _poolOranRiefHydra from "../pool/oran-rief-hydra.js";
 import _poolOrbOfDragonkind from "../pool/orb-of-dragonkind.js";
+import _poolOrzhovAdvokist from "../pool/orzhov-advokist.js";
 import _poolOtrimiTheEverPlayful from "../pool/otrimi-the-ever-playful.js";
 import _poolOubliette from "../pool/oubliette.js";
 import _poolOvergrowth from "../pool/overgrowth.js";
@@ -876,6 +881,7 @@ import _poolTerohsFaithful from "../pool/terohs-faithful.js";
 import _poolTerrorOfKruinPass from "../pool/terror-of-kruin-pass.js";
 import _poolTethmosHighPriest from "../pool/tethmos-high-priest.js";
 import _poolTeyoTheShieldmage from "../pool/teyo-the-shieldmage.js";
+import _poolTheArgentEtchings from "../pool/the-argent-etchings.js";
 import _poolTheCyberController from "../pool/the-cyber-controller.js";
 import _poolTheFalconSamWilson from "../pool/the-falcon-sam-wilson.js";
 import _poolTheLastRonin from "../pool/the-last-ronin.js";
@@ -1504,6 +1510,7 @@ const shard: CardShard = {
     _poolJennikaBadAppleBigSister,
     _poolJennyFlint,
     _poolJoGrant,
+    _poolJourneyToEternity,
     _poolJungleWeaver,
     _poolJwariShapeshifter,
     _poolKalastriaHealer,
@@ -1533,6 +1540,7 @@ const shard: CardShard = {
     _poolKoseiPenitentWarlord,
     _poolKraulWarrior,
     _poolKrosanVorine,
+    _poolKroxaTitanOfDeathsHunger,
     _poolKrydleOfBaldursGate,
     _poolLadyCaleria,
     _poolLadyEvangela,
@@ -1558,6 +1566,7 @@ const shard: CardShard = {
     _poolLodestoneGolem,
     _poolLokisScepter,
     _poolLoneRevenant,
+    _poolLongTermPlans,
     _poolLongtuskCub,
     _poolLordXanderTheCollector,
     _poolLoreSeeker,
@@ -1621,6 +1630,7 @@ const shard: CardShard = {
     _poolMorgulKnifeWound,
     _poolMournersSurprise,
     _poolMoxAmber,
+    _poolMrHousePresidentAndCeo,
     _poolMuckDrubb,
     _poolMundasVanguard,
     _poolMusesEncouragement,
@@ -1670,6 +1680,7 @@ const shard: CardShard = {
     _poolOpenIntoWonder,
     _poolOranRiefHydra,
     _poolOrbOfDragonkind,
+    _poolOrzhovAdvokist,
     _poolOtrimiTheEverPlayful,
     _poolOubliette,
     _poolOvergrowth,
@@ -1941,6 +1952,7 @@ const shard: CardShard = {
     _poolTerrorOfKruinPass,
     _poolTethmosHighPriest,
     _poolTeyoTheShieldmage,
+    _poolTheArgentEtchings,
     _poolTheCyberController,
     _poolTheFalconSamWilson,
     _poolTheLastRonin,

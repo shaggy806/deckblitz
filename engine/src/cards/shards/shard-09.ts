@@ -65,6 +65,7 @@ import _poolAvenTactician from "../pool/aven-tactician.js";
 import _poolAwakeningHall from "../pool/awakening-hall.js";
 import _poolAyaraFirstOfLocthwain from "../pool/ayara-first-of-locthwain.js";
 import _poolBaithookAngler from "../pool/baithook-angler.js";
+import _poolBanditsTalent from "../pool/bandits-talent.js";
 import _poolBaneAlleyBroker from "../pool/bane-alley-broker.js";
 import _poolBanehound from "../pool/banehound.js";
 import _poolBantPanorama from "../pool/bant-panorama.js";
@@ -197,6 +198,7 @@ import _poolDecoratedGriffin from "../pool/decorated-griffin.js";
 import _poolDefiantKhenra from "../pool/defiant-khenra.js";
 import _poolDefiantThundermaw from "../pool/defiant-thundermaw.js";
 import _poolDescentOfTheDragons from "../pool/descent-of-the-dragons.js";
+import _poolDesecrateReality from "../pool/desecrate-reality.js";
 import _poolDesiccatedNaga from "../pool/desiccated-naga.js";
 import _poolDevastatingDreams from "../pool/devastating-dreams.js";
 import _poolDiamondPickAxe from "../pool/diamond-pick-axe.js";
@@ -238,6 +240,7 @@ import _poolEliminateTheImpossible from "../pool/eliminate-the-impossible.js";
 import _poolEmberHauler from "../pool/ember-hauler.js";
 import _poolEmberheartChallenger from "../pool/emberheart-challenger.js";
 import _poolEmergeUnscathed from "../pool/emerge-unscathed.js";
+import _poolEmeriaShepherd from "../pool/emeria-shepherd.js";
 import _poolEmmaraSoulOfTheAccord from "../pool/emmara-soul-of-the-accord.js";
 import _poolEntropicDecay from "../pool/entropic-decay.js";
 import _poolEpharasRadiance from "../pool/epharas-radiance.js";
@@ -961,6 +964,7 @@ import _poolWanderingEye from "../pool/wandering-eye.js";
 import _poolWarBehemoth from "../pool/war-behemoth.js";
 import _poolWarEffort from "../pool/war-effort.js";
 import _poolWardedBattlements from "../pool/warded-battlements.js";
+import _poolWardenOfTheGrove from "../pool/warden-of-the-grove.js";
 import _poolWatchfulAutomaton from "../pool/watchful-automaton.js";
 import _poolWaveElemental from "../pool/wave-elemental.js";
 import _poolWaveWingElemental from "../pool/wave-wing-elemental.js";
@@ -1089,6 +1093,7 @@ const shard: CardShard = {
     _poolAwakeningHall,
     _poolAyaraFirstOfLocthwain,
     _poolBaithookAngler,
+    _poolBanditsTalent,
     _poolBaneAlleyBroker,
     _poolBanehound,
     _poolBantPanorama,
@@ -1221,6 +1226,7 @@ const shard: CardShard = {
     _poolDefiantKhenra,
     _poolDefiantThundermaw,
     _poolDescentOfTheDragons,
+    _poolDesecrateReality,
     _poolDesiccatedNaga,
     _poolDevastatingDreams,
     _poolDiamondPickAxe,
@@ -1262,6 +1268,7 @@ const shard: CardShard = {
     _poolEmberHauler,
     _poolEmberheartChallenger,
     _poolEmergeUnscathed,
+    _poolEmeriaShepherd,
     _poolEmmaraSoulOfTheAccord,
     _poolEntropicDecay,
     _poolEpharasRadiance,
@@ -1985,6 +1992,7 @@ const shard: CardShard = {
     _poolWarBehemoth,
     _poolWarEffort,
     _poolWardedBattlements,
+    _poolWardenOfTheGrove,
     _poolWatchfulAutomaton,
     _poolWaveElemental,
     _poolWaveWingElemental,

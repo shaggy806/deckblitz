@@ -253,6 +253,7 @@ import _poolDulcetSirens from "../pool/dulcet-sirens.js";
 import _poolDuneDiviner from "../pool/dune-diviner.js";
 import _poolDuskUrchins from "../pool/dusk-urchins.js";
 import _poolDusk from "../pool/dusk.js";
+import _poolDustyParlor from "../pool/dusty-parlor.js";
 import _poolDwarvenProvisioner from "../pool/dwarven-provisioner.js";
 import _poolDyfedTheGuidingHand from "../pool/dyfed-the-guiding-hand.js";
 import _poolEclipsedKithkin from "../pool/eclipsed-kithkin.js";
@@ -357,6 +358,7 @@ import _poolGitaxianSpellstalker from "../pool/gitaxian-spellstalker.js";
 import _poolGlacierwoodSiege from "../pool/glacierwood-siege.js";
 import _poolGlaringAegis from "../pool/glaring-aegis.js";
 import _poolGlasspoolShore from "../pool/glasspool-shore.js";
+import _poolGlimpseTheImpossible from "../pool/glimpse-the-impossible.js";
 import _poolGlitteringStockpile from "../pool/glittering-stockpile.js";
 import _poolGoblinBoomKeg from "../pool/goblin-boom-keg.js";
 import _poolGoblinMachinist from "../pool/goblin-machinist.js";
@@ -463,6 +465,7 @@ import _poolJechtReluctantGuardian from "../pool/jecht-reluctant-guardian.js";
 import _poolJenniferWalters from "../pool/jennifer-walters.js";
 import _poolJeskaiElder from "../pool/jeskai-elder.js";
 import _poolJonIrenicusShatteredOne from "../pool/jon-irenicus-shattered-one.js";
+import _poolJoshuaPhoenixsDominant from "../pool/joshua-phoenixs-dominant.js";
 import _poolJunkJet from "../pool/junk-jet.js";
 import _poolJwariScuttler from "../pool/jwari-scuttler.js";
 import _poolKabiraTakedown from "../pool/kabira-takedown.js";
@@ -1298,6 +1301,7 @@ const shard: CardShard = {
     _poolDuneDiviner,
     _poolDuskUrchins,
     _poolDusk,
+    _poolDustyParlor,
     _poolDwarvenProvisioner,
     _poolDyfedTheGuidingHand,
     _poolEclipsedKithkin,
@@ -1402,6 +1406,7 @@ const shard: CardShard = {
     _poolGlacierwoodSiege,
     _poolGlaringAegis,
     _poolGlasspoolShore,
+    _poolGlimpseTheImpossible,
     _poolGlitteringStockpile,
     _poolGoblinBoomKeg,
     _poolGoblinMachinist,
@@ -1508,6 +1513,7 @@ const shard: CardShard = {
     _poolJenniferWalters,
     _poolJeskaiElder,
     _poolJonIrenicusShatteredOne,
+    _poolJoshuaPhoenixsDominant,
     _poolJunkJet,
     _poolJwariScuttler,
     _poolKabiraTakedown,

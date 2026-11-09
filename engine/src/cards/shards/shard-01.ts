@@ -72,6 +72,7 @@ import _poolBespokeBo from "../pool/bespoke-bo.js";
 import _poolBestialFury from "../pool/bestial-fury.js";
 import _poolBetrothedOfFire from "../pool/betrothed-of-fire.js";
 import _poolBiolumeEgg from "../pool/biolume-egg.js";
+import _poolBirthingRitual from "../pool/birthing-ritual.js";
 import _poolBlackKnight from "../pool/black-knight.js";
 import _poolBlackMagesRod from "../pool/black-mages-rod.js";
 import _poolBlacklanceParagon from "../pool/blacklance-paragon.js";
@@ -297,6 +298,7 @@ import _poolGerrardsCommand from "../pool/gerrards-command.js";
 import _poolGhastlyDeathTyrant from "../pool/ghastly-death-tyrant.js";
 import _poolGhostsOfTheInnocent from "../pool/ghosts-of-the-innocent.js";
 import _poolGhoulcallersAccomplice from "../pool/ghoulcallers-accomplice.js";
+import _poolGhoulishImpetus from "../pool/ghoulish-impetus.js";
 import _poolGibberingBarricade from "../pool/gibbering-barricade.js";
 import _poolGiftOfStrands from "../pool/gift-of-strands.js";
 import _poolGiltBladeProwler from "../pool/gilt-blade-prowler.js";
@@ -429,6 +431,7 @@ import _poolKazanduBlademaster from "../pool/kazandu-blademaster.js";
 import _poolKeeperOfTheLens from "../pool/keeper-of-the-lens.js";
 import _poolKefkaDancingMad from "../pool/kefka-dancing-mad.js";
 import _poolKeldonWarlord from "../pool/keldon-warlord.js";
+import _poolKellanTheFaeBlooded from "../pool/kellan-the-fae-blooded.js";
 import _poolKenrithTheReturnedKing from "../pool/kenrith-the-returned-king.js";
 import _poolKillmongerScourgeOfWakanda from "../pool/killmonger-scourge-of-wakanda.js";
 import _poolKioraMasterOfTheDepths from "../pool/kiora-master-of-the-depths.js";
@@ -492,6 +495,7 @@ import _poolMakindiStampede from "../pool/makindi-stampede.js";
 import _poolMalakirFamiliar from "../pool/malakir-familiar.js";
 import _poolMalakirMire from "../pool/malakir-mire.js";
 import _poolMalboro from "../pool/malboro.js";
+import _poolMalevolentHermit from "../pool/malevolent-hermit.js";
 import _poolManaSculpt from "../pool/mana-sculpt.js";
 import _poolManorSkeleton from "../pool/manor-skeleton.js";
 import _poolMantaRiders from "../pool/manta-riders.js";
@@ -1063,6 +1067,7 @@ const shard: CardShard = {
     _poolBestialFury,
     _poolBetrothedOfFire,
     _poolBiolumeEgg,
+    _poolBirthingRitual,
     _poolBlackKnight,
     _poolBlackMagesRod,
     _poolBlacklanceParagon,
@@ -1288,6 +1293,7 @@ const shard: CardShard = {
     _poolGhastlyDeathTyrant,
     _poolGhostsOfTheInnocent,
     _poolGhoulcallersAccomplice,
+    _poolGhoulishImpetus,
     _poolGibberingBarricade,
     _poolGiftOfStrands,
     _poolGiltBladeProwler,
@@ -1420,6 +1426,7 @@ const shard: CardShard = {
     _poolKeeperOfTheLens,
     _poolKefkaDancingMad,
     _poolKeldonWarlord,
+    _poolKellanTheFaeBlooded,
     _poolKenrithTheReturnedKing,
     _poolKillmongerScourgeOfWakanda,
     _poolKioraMasterOfTheDepths,
@@ -1483,6 +1490,7 @@ const shard: CardShard = {
     _poolMalakirFamiliar,
     _poolMalakirMire,
     _poolMalboro,
+    _poolMalevolentHermit,
     _poolManaSculpt,
     _poolManorSkeleton,
     _poolMantaRiders,

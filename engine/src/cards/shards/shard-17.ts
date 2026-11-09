@@ -81,6 +81,7 @@ import _poolBattleScarredGoblin from "../pool/battle-scarred-goblin.js";
 import _poolBattleflightEagle from "../pool/battleflight-eagle.js";
 import _poolBattlewiseValor from "../pool/battlewise-valor.js";
 import _poolBaylenTheHaymaker from "../pool/baylen-the-haymaker.js";
+import _poolBeaconOfImmortality from "../pool/beacon-of-immortality.js";
 import _poolBelisariusCawl from "../pool/belisarius-cawl.js";
 import _poolBelligerentBrontodon from "../pool/belligerent-brontodon.js";
 import _poolBelltowerSphinx from "../pool/belltower-sphinx.js";
@@ -201,6 +202,7 @@ import _poolDeclareDominance from "../pool/declare-dominance.js";
 import _poolDecoyPloy from "../pool/decoy-ploy.js";
 import _poolDecreeOfSilence from "../pool/decree-of-silence.js";
 import _poolDeepfathomSkulker from "../pool/deepfathom-skulker.js";
+import _poolDeterminedIteration from "../pool/determined-iteration.js";
 import _poolDetonate from "../pool/detonate.js";
 import _poolDevotedPaladin from "../pool/devoted-paladin.js";
 import _poolDimirCharm from "../pool/dimir-charm.js";
@@ -1076,6 +1078,7 @@ const shard: CardShard = {
     _poolBattleflightEagle,
     _poolBattlewiseValor,
     _poolBaylenTheHaymaker,
+    _poolBeaconOfImmortality,
     _poolBelisariusCawl,
     _poolBelligerentBrontodon,
     _poolBelltowerSphinx,
@@ -1196,6 +1199,7 @@ const shard: CardShard = {
     _poolDecoyPloy,
     _poolDecreeOfSilence,
     _poolDeepfathomSkulker,
+    _poolDeterminedIteration,
     _poolDetonate,
     _poolDevotedPaladin,
     _poolDimirCharm,

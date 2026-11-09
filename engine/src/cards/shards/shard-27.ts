@@ -212,6 +212,7 @@ import _poolDodgyJalopy from "../pool/dodgy-jalopy.js";
 import _poolDonatellosTechnique from "../pool/donatellos-technique.js";
 import _poolDoorkeeper from "../pool/doorkeeper.js";
 import _poolDoorman from "../pool/doorman.js";
+import _poolDoorsOfDurin from "../pool/doors-of-durin.js";
 import _poolDragonCursedHalls from "../pool/dragon-cursed-halls.js";
 import _poolDragonEgg from "../pool/dragon-egg.js";
 import _poolDragonlordsPrerogative from "../pool/dragonlords-prerogative.js";
@@ -390,6 +391,7 @@ import _poolImpendingDoom from "../pool/impending-doom.js";
 import _poolIncendiaryOracle from "../pool/incendiary-oracle.js";
 import _poolIncendiary from "../pool/incendiary.js";
 import _poolIncrementalBlight from "../pool/incremental-blight.js";
+import _poolIndoraptorThePerfectHybrid from "../pool/indoraptor-the-perfect-hybrid.js";
 import _poolInfernalKirin from "../pool/infernal-kirin.js";
 import _poolInfernalPhantom from "../pool/infernal-phantom.js";
 import _poolInfuse from "../pool/infuse.js";
@@ -1190,6 +1192,7 @@ const shard: CardShard = {
     _poolDonatellosTechnique,
     _poolDoorkeeper,
     _poolDoorman,
+    _poolDoorsOfDurin,
     _poolDragonCursedHalls,
     _poolDragonEgg,
     _poolDragonlordsPrerogative,
@@ -1368,6 +1371,7 @@ const shard: CardShard = {
     _poolIncendiaryOracle,
     _poolIncendiary,
     _poolIncrementalBlight,
+    _poolIndoraptorThePerfectHybrid,
     _poolInfernalKirin,
     _poolInfernalPhantom,
     _poolInfuse,

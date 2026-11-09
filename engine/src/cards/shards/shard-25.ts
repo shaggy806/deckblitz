@@ -30,6 +30,7 @@ import _poolAltarOfDementia from "../pool/altar-of-dementia.js";
 import _poolAlwaysWatching from "../pool/always-watching.js";
 import _poolAmberGristleOmaul from "../pool/amber-gristle-omaul.js";
 import _poolAmrouKithkin from "../pool/amrou-kithkin.js";
+import _poolAncientCellarspawn from "../pool/ancient-cellarspawn.js";
 import _poolAncientGrudge from "../pool/ancient-grudge.js";
 import _poolAngelOfFury from "../pool/angel-of-fury.js";
 import _poolAngelicGuardian from "../pool/angelic-guardian.js";
@@ -54,6 +55,7 @@ import _poolAssimilateEssence from "../pool/assimilate-essence.js";
 import _poolAstralDrift from "../pool/astral-drift.js";
 import _poolAstralSteel from "../pool/astral-steel.js";
 import _poolAtogatog from "../pool/atogatog.js";
+import _poolAtzalCaveOfEternity from "../pool/atzal-cave-of-eternity.js";
 import _poolAuramancersGuise from "../pool/auramancers-guise.js";
 import _poolAvatarAang from "../pool/avatar-aang.js";
 import _poolAvatarYangchen from "../pool/avatar-yangchen.js";
@@ -327,6 +329,7 @@ import _poolGaeasGift from "../pool/gaeas-gift.js";
 import _poolGaleriderSliver from "../pool/galerider-sliver.js";
 import _poolGalvanicGiant from "../pool/galvanic-giant.js";
 import _poolGamble from "../pool/gamble.js";
+import _poolGarenbrigGrowth from "../pool/garenbrig-growth.js";
 import _poolGateSmasher from "../pool/gate-smasher.js";
 import _poolGateToTheAether from "../pool/gate-to-the-aether.js";
 import _poolGenasiEnforcers from "../pool/genasi-enforcers.js";
@@ -519,6 +522,7 @@ import _poolMineRaider from "../pool/mine-raider.js";
 import _poolMinisterOfPain from "../pool/minister-of-pain.js";
 import _poolMinotaurAbomination from "../pool/minotaur-abomination.js";
 import _poolMinotaurIllusionist from "../pool/minotaur-illusionist.js";
+import _poolMinscBooTimelessHeroes from "../pool/minsc-boo-timeless-heroes.js";
 import _poolMirranMettle from "../pool/mirran-mettle.js";
 import _poolMirrorOfTheForebears from "../pool/mirror-of-the-forebears.js";
 import _poolMiscalculation from "../pool/miscalculation.js";
@@ -874,6 +878,7 @@ import _poolTricorder from "../pool/tricorder.js";
 import _poolTrigonOfInfestation from "../pool/trigon-of-infestation.js";
 import _poolTroiWingingIt from "../pool/troi-winging-it.js";
 import _poolTrygonPrime from "../pool/trygon-prime.js";
+import _poolTurntimberSymbiosis from "../pool/turntimber-symbiosis.js";
 import _poolTurtleshellChangeling from "../pool/turtleshell-changeling.js";
 import _poolTuskguardCaptain from "../pool/tuskguard-captain.js";
 import _poolTyvarThePummeler from "../pool/tyvar-the-pummeler.js";
@@ -1008,6 +1013,7 @@ const shard: CardShard = {
     _poolAlwaysWatching,
     _poolAmberGristleOmaul,
     _poolAmrouKithkin,
+    _poolAncientCellarspawn,
     _poolAncientGrudge,
     _poolAngelOfFury,
     _poolAngelicGuardian,
@@ -1032,6 +1038,7 @@ const shard: CardShard = {
     _poolAstralDrift,
     _poolAstralSteel,
     _poolAtogatog,
+    _poolAtzalCaveOfEternity,
     _poolAuramancersGuise,
     _poolAvatarAang,
     _poolAvatarYangchen,
@@ -1305,6 +1312,7 @@ const shard: CardShard = {
     _poolGaleriderSliver,
     _poolGalvanicGiant,
     _poolGamble,
+    _poolGarenbrigGrowth,
     _poolGateSmasher,
     _poolGateToTheAether,
     _poolGenasiEnforcers,
@@ -1497,6 +1505,7 @@ const shard: CardShard = {
     _poolMinisterOfPain,
     _poolMinotaurAbomination,
     _poolMinotaurIllusionist,
+    _poolMinscBooTimelessHeroes,
     _poolMirranMettle,
     _poolMirrorOfTheForebears,
     _poolMiscalculation,
@@ -1852,6 +1861,7 @@ const shard: CardShard = {
     _poolTrigonOfInfestation,
     _poolTroiWingingIt,
     _poolTrygonPrime,
+    _poolTurntimberSymbiosis,
     _poolTurtleshellChangeling,
     _poolTuskguardCaptain,
     _poolTyvarThePummeler,

@@ -53,6 +53,7 @@ import _poolAyumiTheLastVisitor from "../pool/ayumi-the-last-visitor.js";
 import _poolAzusasManyJourneys from "../pool/azusas-many-journeys.js";
 import _poolBakeIntoAPie from "../pool/bake-into-a-pie.js";
 import _poolBaronStruckerHydraOverlord from "../pool/baron-strucker-hydra-overlord.js";
+import _poolBarrowgoyf from "../pool/barrowgoyf.js";
 import _poolBattlefrontKrushok from "../pool/battlefront-krushok.js";
 import _poolBeastWithin from "../pool/beast-within.js";
 import _poolBeastmastersMagemark from "../pool/beastmasters-magemark.js";
@@ -627,6 +628,7 @@ import _poolSatyrHoplite from "../pool/satyr-hoplite.js";
 import _poolScamperingSurveyor from "../pool/scampering-surveyor.js";
 import _poolScavengedBlade from "../pool/scavenged-blade.js";
 import _poolScepterOfEmpires from "../pool/scepter-of-empires.js";
+import _poolScionOfDraco from "../pool/scion-of-draco.js";
 import _poolScorchingLava from "../pool/scorching-lava.js";
 import _poolScrapTrawler from "../pool/scrap-trawler.js";
 import _poolScytheSpecter from "../pool/scythe-specter.js";
@@ -967,6 +969,7 @@ const shard: CardShard = {
     _poolAzusasManyJourneys,
     _poolBakeIntoAPie,
     _poolBaronStruckerHydraOverlord,
+    _poolBarrowgoyf,
     _poolBattlefrontKrushok,
     _poolBeastWithin,
     _poolBeastmastersMagemark,
@@ -1541,6 +1544,7 @@ const shard: CardShard = {
     _poolScamperingSurveyor,
     _poolScavengedBlade,
     _poolScepterOfEmpires,
+    _poolScionOfDraco,
     _poolScorchingLava,
     _poolScrapTrawler,
     _poolScytheSpecter,

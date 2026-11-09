@@ -7,6 +7,7 @@ import _poolAangSwiftSavior from "../pool/aang-swift-savior.js";
 import _poolAbandonThePost from "../pool/abandon-the-post.js";
 import _poolAbsorbingManAndTitania from "../pool/absorbing-man-and-titania.js";
 import _poolAccorderPaladin from "../pool/accorder-paladin.js";
+import _poolAclazotzDeepestBetrayal from "../pool/aclazotz-deepest-betrayal.js";
 import _poolActiveVolcano from "../pool/active-volcano.js";
 import _poolAdagiaWindsweptBastion from "../pool/adagia-windswept-bastion.js";
 import _poolAdaptiveSnapjaw from "../pool/adaptive-snapjaw.js";
@@ -350,6 +351,7 @@ import _poolGatewaySneak from "../pool/gateway-sneak.js";
 import _poolGeierReachSanitarium from "../pool/geier-reach-sanitarium.js";
 import _poolGeistOfTheLonelyVigil from "../pool/geist-of-the-lonely-vigil.js";
 import _poolGenemorphImago from "../pool/genemorph-imago.js";
+import _poolGenerousPatron from "../pool/generous-patron.js";
 import _poolGenjiGlove from "../pool/genji-glove.js";
 import _poolGenjuOfTheRealm from "../pool/genju-of-the-realm.js";
 import _poolGhituAmplifier from "../pool/ghitu-amplifier.js";
@@ -600,6 +602,7 @@ import _poolNightbladeBrigade from "../pool/nightblade-brigade.js";
 import _poolNirkanaCutthroat from "../pool/nirkana-cutthroat.js";
 import _poolNiveaBelovedBattlemage from "../pool/nivea-beloved-battlemage.js";
 import _poolNobleHierarch from "../pool/noble-hierarch.js";
+import _poolNoctisPrinceOfLucis from "../pool/noctis-prince-of-lucis.js";
 import _poolNorinTheWary from "../pool/norin-the-wary.js";
 import _poolNorritt from "../pool/norritt.js";
 import _poolNorthamptonFarm from "../pool/northampton-farm.js";
@@ -610,6 +613,7 @@ import _poolNykthosParagon from "../pool/nykthos-paragon.js";
 import _poolOakhollowVillage from "../pool/oakhollow-village.js";
 import _poolObsidianGiant from "../pool/obsidian-giant.js";
 import _poolOcularHalo from "../pool/ocular-halo.js";
+import _poolOjerKaslemDeepestGrowth from "../pool/ojer-kaslem-deepest-growth.js";
 import _poolOkoShadowmoorScion from "../pool/oko-shadowmoor-scion.js";
 import _poolOliviasMidnightAmbush from "../pool/olivias-midnight-ambush.js";
 import _poolOneThousandLashes from "../pool/one-thousand-lashes.js";
@@ -809,6 +813,7 @@ import _poolSteamBlast from "../pool/steam-blast.js";
 import _poolSteamcoreWeird from "../pool/steamcore-weird.js";
 import _poolSteelformSliver from "../pool/steelform-sliver.js";
 import _poolStegronTheDinosaurMan from "../pool/stegron-the-dinosaur-man.js";
+import _poolStensianSanguinist from "../pool/stensian-sanguinist.js";
 import _poolStolenStarkTech from "../pool/stolen-stark-tech.js";
 import _poolStompedByTheFoot from "../pool/stomped-by-the-foot.js";
 import _poolStoneIdolGenerator from "../pool/stone-idol-generator.js";
@@ -856,6 +861,7 @@ import _poolTheDarknessCrystal from "../pool/the-darkness-crystal.js";
 import _poolTheGoldSaucer from "../pool/the-gold-saucer.js";
 import _poolTheGoldenThrone from "../pool/the-golden-throne.js";
 import _poolTheHorusHeresy from "../pool/the-horus-heresy.js";
+import _poolTheIrencrag from "../pool/the-irencrag.js";
 import _poolTheLadyOfTheMountain from "../pool/the-lady-of-the-mountain.js";
 import _poolTheOzolith from "../pool/the-ozolith.js";
 import _poolTheRingGoesSouth from "../pool/the-ring-goes-south.js";
@@ -989,6 +995,7 @@ import _tokensRobotVillainToken from "../tokens/robot-villain-token.js";
 import _tokensSorcererRoleToken from "../tokens/sorcerer-role-token.js";
 import _tokensSpiritTokenPhantomInterference from "../tokens/spirit-token-phantom-interference.js";
 import _tokensTuktukTheReturned from "../tokens/tuktuk-the-returned.js";
+import _tokensVampireTokenLifelink from "../tokens/vampire-token-lifelink.js";
 import _tokensWolfTokenKessigWolfrider from "../tokens/wolf-token-kessig-wolfrider.js";
 import _tokensZabu from "../tokens/zabu.js";
 import _tokensZombieTokenOnWingsOfGold from "../tokens/zombie-token-on-wings-of-gold.js";
@@ -999,6 +1006,7 @@ const shard: CardShard = {
     _poolAbandonThePost,
     _poolAbsorbingManAndTitania,
     _poolAccorderPaladin,
+    _poolAclazotzDeepestBetrayal,
     _poolActiveVolcano,
     _poolAdagiaWindsweptBastion,
     _poolAdaptiveSnapjaw,
@@ -1342,6 +1350,7 @@ const shard: CardShard = {
     _poolGeierReachSanitarium,
     _poolGeistOfTheLonelyVigil,
     _poolGenemorphImago,
+    _poolGenerousPatron,
     _poolGenjiGlove,
     _poolGenjuOfTheRealm,
     _poolGhituAmplifier,
@@ -1592,6 +1601,7 @@ const shard: CardShard = {
     _poolNirkanaCutthroat,
     _poolNiveaBelovedBattlemage,
     _poolNobleHierarch,
+    _poolNoctisPrinceOfLucis,
     _poolNorinTheWary,
     _poolNorritt,
     _poolNorthamptonFarm,
@@ -1602,6 +1612,7 @@ const shard: CardShard = {
     _poolOakhollowVillage,
     _poolObsidianGiant,
     _poolOcularHalo,
+    _poolOjerKaslemDeepestGrowth,
     _poolOkoShadowmoorScion,
     _poolOliviasMidnightAmbush,
     _poolOneThousandLashes,
@@ -1801,6 +1812,7 @@ const shard: CardShard = {
     _poolSteamcoreWeird,
     _poolSteelformSliver,
     _poolStegronTheDinosaurMan,
+    _poolStensianSanguinist,
     _poolStolenStarkTech,
     _poolStompedByTheFoot,
     _poolStoneIdolGenerator,
@@ -1848,6 +1860,7 @@ const shard: CardShard = {
     _poolTheGoldSaucer,
     _poolTheGoldenThrone,
     _poolTheHorusHeresy,
+    _poolTheIrencrag,
     _poolTheLadyOfTheMountain,
     _poolTheOzolith,
     _poolTheRingGoesSouth,
@@ -1983,6 +1996,7 @@ const shard: CardShard = {
     _tokensSorcererRoleToken,
     _tokensSpiritTokenPhantomInterference,
     _tokensTuktukTheReturned,
+    _tokensVampireTokenLifelink,
     _tokensWolfTokenKessigWolfrider,
     _tokensZabu,
     _tokensZombieTokenOnWingsOfGold,

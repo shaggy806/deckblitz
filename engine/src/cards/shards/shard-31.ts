@@ -51,6 +51,7 @@ import _poolArenaAthlete from "../pool/arena-athlete.js";
 import _poolArgentDais from "../pool/argent-dais.js";
 import _poolArmoredCancrix from "../pool/armored-cancrix.js";
 import _poolArterialFlow from "../pool/arterial-flow.js";
+import _poolAscendFromAvernus from "../pool/ascend-from-avernus.js";
 import _poolAshesOfTheFallen from "../pool/ashes-of-the-fallen.js";
 import _poolAshnodsIntervention from "../pool/ashnods-intervention.js";
 import _poolAtraxaPraetorsVoice from "../pool/atraxa-praetors-voice.js";
@@ -82,6 +83,7 @@ import _poolBeanstalkWurm from "../pool/beanstalk-wurm.js";
 import _poolBeastWalkers from "../pool/beast-walkers.js";
 import _poolBelieve from "../pool/believe.js";
 import _poolBenalishCommander from "../pool/benalish-commander.js";
+import _poolBenevolentGeist from "../pool/benevolent-geist.js";
 import _poolBestowGreatness from "../pool/bestow-greatness.js";
 import _poolBigBertha from "../pool/big-bertha.js";
 import _poolBindingTheOldGods from "../pool/binding-the-old-gods.js";
@@ -238,6 +240,7 @@ import _poolDisturbedSlumber from "../pool/disturbed-slumber.js";
 import _poolDivineArrow from "../pool/divine-arrow.js";
 import _poolDizzySpell from "../pool/dizzy-spell.js";
 import _poolDizzyingSwoop from "../pool/dizzying-swoop.js";
+import _poolDomriAnarchOfBolas from "../pool/domri-anarch-of-bolas.js";
 import _poolDonatelloTheBrains from "../pool/donatello-the-brains.js";
 import _poolDoomskarTitan from "../pool/doomskar-titan.js";
 import _poolDorotheaVengefulVictim from "../pool/dorothea-vengeful-victim.js";
@@ -605,6 +608,7 @@ import _poolMuddleTheEverChanging from "../pool/muddle-the-ever-changing.js";
 import _poolMycosynthFiend from "../pool/mycosynth-fiend.js";
 import _poolMyojinOfBloomingDawn from "../pool/myojin-of-blooming-dawn.js";
 import _poolNantukoMonastery from "../pool/nantuko-monastery.js";
+import _poolNashiMoonSagesScion from "../pool/nashi-moon-sages-scion.js";
 import _poolNaturalSpring from "../pool/natural-spring.js";
 import _poolNebelgastIntruder from "../pool/nebelgast-intruder.js";
 import _poolNeedleStorm from "../pool/needle-storm.js";
@@ -773,6 +777,7 @@ import _poolScrounge from "../pool/scrounge.js";
 import _poolSeaGateLoremaster from "../pool/sea-gate-loremaster.js";
 import _poolSeaSerpent from "../pool/sea-serpent.js";
 import _poolSealOfFire from "../pool/seal-of-fire.js";
+import _poolSecretArcade from "../pool/secret-arcade.js";
 import _poolSecureTheScene from "../pool/secure-the-scene.js";
 import _poolSeedpodCaretaker from "../pool/seedpod-caretaker.js";
 import _poolSeismicAssault from "../pool/seismic-assault.js";
@@ -1111,6 +1116,7 @@ const shard: CardShard = {
     _poolArgentDais,
     _poolArmoredCancrix,
     _poolArterialFlow,
+    _poolAscendFromAvernus,
     _poolAshesOfTheFallen,
     _poolAshnodsIntervention,
     _poolAtraxaPraetorsVoice,
@@ -1142,6 +1148,7 @@ const shard: CardShard = {
     _poolBeastWalkers,
     _poolBelieve,
     _poolBenalishCommander,
+    _poolBenevolentGeist,
     _poolBestowGreatness,
     _poolBigBertha,
     _poolBindingTheOldGods,
@@ -1298,6 +1305,7 @@ const shard: CardShard = {
     _poolDivineArrow,
     _poolDizzySpell,
     _poolDizzyingSwoop,
+    _poolDomriAnarchOfBolas,
     _poolDonatelloTheBrains,
     _poolDoomskarTitan,
     _poolDorotheaVengefulVictim,
@@ -1665,6 +1673,7 @@ const shard: CardShard = {
     _poolMycosynthFiend,
     _poolMyojinOfBloomingDawn,
     _poolNantukoMonastery,
+    _poolNashiMoonSagesScion,
     _poolNaturalSpring,
     _poolNebelgastIntruder,
     _poolNeedleStorm,
@@ -1833,6 +1842,7 @@ const shard: CardShard = {
     _poolSeaGateLoremaster,
     _poolSeaSerpent,
     _poolSealOfFire,
+    _poolSecretArcade,
     _poolSecureTheScene,
     _poolSeedpodCaretaker,
     _poolSeismicAssault,

@@ -25,6 +25,7 @@ import _poolAnarchist from "../pool/anarchist.js";
 import _poolAncientCornucopia from "../pool/ancient-cornucopia.js";
 import _poolAncientRunes from "../pool/ancient-runes.js";
 import _poolAndraditeLeech from "../pool/andradite-leech.js";
+import _poolAngelOfSerenity from "../pool/angel-of-serenity.js";
 import _poolAnimusOfNightsReach from "../pool/animus-of-nights-reach.js";
 import _poolAppliedGeometry from "../pool/applied-geometry.js";
 import _poolArchaicsAgony from "../pool/archaics-agony.js";
@@ -347,6 +348,7 @@ import _poolHardenedTactician from "../pool/hardened-tactician.js";
 import _poolHarvesterTroll from "../pool/harvester-troll.js";
 import _poolHauntTheNetwork from "../pool/haunt-the-network.js";
 import _poolHauntedCloak from "../pool/haunted-cloak.js";
+import _poolHauntedOne from "../pool/haunted-one.js";
 import _poolHauntingVoyage from "../pool/haunting-voyage.js";
 import _poolHearthCharm from "../pool/hearth-charm.js";
 import _poolHearthbornBattler from "../pool/hearthborn-battler.js";
@@ -456,6 +458,7 @@ import _poolLegionGuildmage from "../pool/legion-guildmage.js";
 import _poolLegionLeadership from "../pool/legion-leadership.js";
 import _poolLevelUp from "../pool/level-up.js";
 import _poolLevitation from "../pool/levitation.js";
+import _poolLeylineOfHope from "../pool/leyline-of-hope.js";
 import _poolLifeAndLimb from "../pool/life-and-limb.js";
 import _poolLifesparkSpellbomb from "../pool/lifespark-spellbomb.js";
 import _poolLightbringer from "../pool/lightbringer.js";
@@ -701,6 +704,7 @@ import _poolScholarOfAthreos from "../pool/scholar-of-athreos.js";
 import _poolScientistSupremeOfAIM from "../pool/scientist-supreme-of-a-i-m.js";
 import _poolScourgeOfTheUndercity from "../pool/scourge-of-the-undercity.js";
 import _poolScrap from "../pool/scrap.js";
+import _poolScytheclawRaptor from "../pool/scytheclaw-raptor.js";
 import _poolSeaGodsRevenge from "../pool/sea-gods-revenge.js";
 import _poolSearingMeditation from "../pool/searing-meditation.js";
 import _poolSecurityBlockade from "../pool/security-blockade.js";
@@ -865,6 +869,7 @@ import _poolTolarianWinds from "../pool/tolarian-winds.js";
 import _poolTombTrawler from "../pool/tomb-trawler.js";
 import _poolTomeAnima from "../pool/tome-anima.js";
 import _poolTomeScour from "../pool/tome-scour.js";
+import _poolTophTheBlindBandit from "../pool/toph-the-blind-bandit.js";
 import _poolTorment from "../pool/torment.js";
 import _poolToughCookie from "../pool/tough-cookie.js";
 import _poolTowerDefense from "../pool/tower-defense.js";
@@ -993,6 +998,7 @@ import _tokensSphinxToken from "../tokens/sphinx-token.js";
 import _tokensSpiritTokenGreatArashinCity from "../tokens/spirit-token-great-arashin-city.js";
 import _tokensSpiritTokenKuraTheBoundlessSky from "../tokens/spirit-token-kura-the-boundless-sky.js";
 import _tokensSturdyShieldToken from "../tokens/sturdy-shield-token.js";
+import _tokensToyToken from "../tokens/toy-token.js";
 import _tokensWalkerToken from "../tokens/walker-token.js";
 import _tokensWhiteDogToken11 from "../tokens/white-dog-token-1-1.js";
 import _tokensWolvesOfTheHunt from "../tokens/wolves-of-the-hunt.js";
@@ -1023,6 +1029,7 @@ const shard: CardShard = {
     _poolAncientCornucopia,
     _poolAncientRunes,
     _poolAndraditeLeech,
+    _poolAngelOfSerenity,
     _poolAnimusOfNightsReach,
     _poolAppliedGeometry,
     _poolArchaicsAgony,
@@ -1345,6 +1352,7 @@ const shard: CardShard = {
     _poolHarvesterTroll,
     _poolHauntTheNetwork,
     _poolHauntedCloak,
+    _poolHauntedOne,
     _poolHauntingVoyage,
     _poolHearthCharm,
     _poolHearthbornBattler,
@@ -1454,6 +1462,7 @@ const shard: CardShard = {
     _poolLegionLeadership,
     _poolLevelUp,
     _poolLevitation,
+    _poolLeylineOfHope,
     _poolLifeAndLimb,
     _poolLifesparkSpellbomb,
     _poolLightbringer,
@@ -1699,6 +1708,7 @@ const shard: CardShard = {
     _poolScientistSupremeOfAIM,
     _poolScourgeOfTheUndercity,
     _poolScrap,
+    _poolScytheclawRaptor,
     _poolSeaGodsRevenge,
     _poolSearingMeditation,
     _poolSecurityBlockade,
@@ -1863,6 +1873,7 @@ const shard: CardShard = {
     _poolTombTrawler,
     _poolTomeAnima,
     _poolTomeScour,
+    _poolTophTheBlindBandit,
     _poolTorment,
     _poolToughCookie,
     _poolTowerDefense,
@@ -1993,6 +2004,7 @@ const shard: CardShard = {
     _tokensSpiritTokenGreatArashinCity,
     _tokensSpiritTokenKuraTheBoundlessSky,
     _tokensSturdyShieldToken,
+    _tokensToyToken,
     _tokensWalkerToken,
     _tokensWhiteDogToken11,
     _tokensWolvesOfTheHunt,

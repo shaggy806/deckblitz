@@ -483,6 +483,7 @@ import _poolKnightOfTheHolyNimbus from "../pool/knight-of-the-holy-nimbus.js";
 import _poolKnighthood from "../pool/knighthood.js";
 import _poolKomaCosmosSerpent from "../pool/koma-cosmos-serpent.js";
 import _poolKomasFaithful from "../pool/komas-faithful.js";
+import _poolKozilekTheBrokenReality from "../pool/kozilek-the-broken-reality.js";
 import _poolKozileksTranslator from "../pool/kozileks-translator.js";
 import _poolKraulSwarm from "../pool/kraul-swarm.js";
 import _poolKrenkosCommand from "../pool/krenkos-command.js";
@@ -875,6 +876,7 @@ import _poolThoseOldScientists from "../pool/those-old-scientists.js";
 import _poolThoughtweftGambit from "../pool/thoughtweft-gambit.js";
 import _poolThousandMoonsInfantry from "../pool/thousand-moons-infantry.js";
 import _poolThousandYearElixir from "../pool/thousand-year-elixir.js";
+import _poolThrakkusTheButcher from "../pool/thrakkus-the-butcher.js";
 import _poolThrillingDiscovery from "../pool/thrilling-discovery.js";
 import _poolThroatSlitter from "../pool/throat-slitter.js";
 import _poolThrummingHivepool from "../pool/thrumming-hivepool.js";
@@ -941,6 +943,7 @@ import _poolViashinoSandswimmer from "../pool/viashino-sandswimmer.js";
 import _poolVigeanIntuition from "../pool/vigean-intuition.js";
 import _poolVindictiveMob from "../pool/vindictive-mob.js";
 import _poolVinelasherAdept from "../pool/vinelasher-adept.js";
+import _poolVirtueOfStrength from "../pool/virtue-of-strength.js";
 import _poolVirtusTheVeiled from "../pool/virtus-the-veiled.js";
 import _poolVisionOfLove from "../pool/vision-of-love.js";
 import _poolVisionsOfBeyond from "../pool/visions-of-beyond.js";
@@ -1488,6 +1491,7 @@ const shard: CardShard = {
     _poolKnighthood,
     _poolKomaCosmosSerpent,
     _poolKomasFaithful,
+    _poolKozilekTheBrokenReality,
     _poolKozileksTranslator,
     _poolKraulSwarm,
     _poolKrenkosCommand,
@@ -1880,6 +1884,7 @@ const shard: CardShard = {
     _poolThoughtweftGambit,
     _poolThousandMoonsInfantry,
     _poolThousandYearElixir,
+    _poolThrakkusTheButcher,
     _poolThrillingDiscovery,
     _poolThroatSlitter,
     _poolThrummingHivepool,
@@ -1946,6 +1951,7 @@ const shard: CardShard = {
     _poolVigeanIntuition,
     _poolVindictiveMob,
     _poolVinelasherAdept,
+    _poolVirtueOfStrength,
     _poolVirtusTheVeiled,
     _poolVisionOfLove,
     _poolVisionsOfBeyond,

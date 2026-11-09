@@ -347,6 +347,7 @@ import _poolHaruOnna from "../pool/haru-onna.js";
 import _poolHatcherySpider from "../pool/hatchery-spider.js";
 import _poolHauntedScreen from "../pool/haunted-screen.js";
 import _poolHavocFestival from "../pool/havoc-festival.js";
+import _poolHazelOfTheRootbloom from "../pool/hazel-of-the-rootbloom.js";
 import _poolHeWhoHungers from "../pool/he-who-hungers.js";
 import _poolHeartOfBogardan from "../pool/heart-of-bogardan.js";
 import _poolHeavyBallista from "../pool/heavy-ballista.js";
@@ -821,6 +822,7 @@ import _poolSurveillanceMonitor from "../pool/surveillance-monitor.js";
 import _poolSurvivorsBond from "../pool/survivors-bond.js";
 import _poolSwallowingPlague from "../pool/swallowing-plague.js";
 import _poolSwarmGuildmage from "../pool/swarm-guildmage.js";
+import _poolSwashbucklerExtraordinaire from "../pool/swashbuckler-extraordinaire.js";
 import _poolSwashbuckling from "../pool/swashbuckling.js";
 import _poolSwordOfWarAndPeace from "../pool/sword-of-war-and-peace.js";
 import _poolSyphonEssence from "../pool/syphon-essence.js";
@@ -1372,6 +1374,7 @@ const shard: CardShard = {
     _poolHatcherySpider,
     _poolHauntedScreen,
     _poolHavocFestival,
+    _poolHazelOfTheRootbloom,
     _poolHeWhoHungers,
     _poolHeartOfBogardan,
     _poolHeavyBallista,
@@ -1846,6 +1849,7 @@ const shard: CardShard = {
     _poolSurvivorsBond,
     _poolSwallowingPlague,
     _poolSwarmGuildmage,
+    _poolSwashbucklerExtraordinaire,
     _poolSwashbuckling,
     _poolSwordOfWarAndPeace,
     _poolSyphonEssence,

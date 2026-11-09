@@ -229,6 +229,7 @@ import _poolDevouringTendrils from "../pool/devouring-tendrils.js";
 import _poolDimirGuildmage from "../pool/dimir-guildmage.js";
 import _poolDinOfTheFireherd from "../pool/din-of-the-fireherd.js";
 import _poolDiningRoom from "../pool/dining-room.js";
+import _poolDireFleetDaredevil from "../pool/dire-fleet-daredevil.js";
 import _poolDireFleetInterloper from "../pool/dire-fleet-interloper.js";
 import _poolDiscipleOfGrace from "../pool/disciple-of-grace.js";
 import _poolDiscipleOfLaw from "../pool/disciple-of-law.js";
@@ -268,6 +269,7 @@ import _poolEnduringCourage from "../pool/enduring-courage.js";
 import _poolEnduringVitality from "../pool/enduring-vitality.js";
 import _poolEnergyChamber from "../pool/energy-chamber.js";
 import _poolEnervate from "../pool/enervate.js";
+import _poolEowynFearlessKnight from "../pool/eowyn-fearless-knight.js";
 import _poolEpicureOfBlood from "../pool/epicure-of-blood.js";
 import _poolEpistolaryLibrarian from "../pool/epistolary-librarian.js";
 import _poolEssenceBottle from "../pool/essence-bottle.js";
@@ -734,6 +736,7 @@ import _poolSephirothOneWingedAngel from "../pool/sephiroth-one-winged-angel.js"
 import _poolSepulchralPrimordial from "../pool/sepulchral-primordial.js";
 import _poolSerpentineKavu from "../pool/serpentine-kavu.js";
 import _poolSerraDisciple from "../pool/serra-disciple.js";
+import _poolShadowOfMortality from "../pool/shadow-of-mortality.js";
 import _poolShadowStinger from "../pool/shadow-stinger.js";
 import _poolShamblingStrider from "../pool/shambling-strider.js";
 import _poolShaoJun from "../pool/shao-jun.js";
@@ -900,6 +903,7 @@ import _poolTricksOfTheTrade from "../pool/tricks-of-the-trade.js";
 import _poolTriclopeanSight from "../pool/triclopean-sight.js";
 import _poolTundraWall from "../pool/tundra-wall.js";
 import _poolTurntimberBasilisk from "../pool/turntimber-basilisk.js";
+import _poolTurntimberSerpentineWood from "../pool/turntimber-serpentine-wood.js";
 import _poolTwilightProphet from "../pool/twilight-prophet.js";
 import _poolTwinbladeInvocation from "../pool/twinblade-invocation.js";
 import _poolTwistedRiddlekeeper from "../pool/twisted-riddlekeeper.js";
@@ -1238,6 +1242,7 @@ const shard: CardShard = {
     _poolDimirGuildmage,
     _poolDinOfTheFireherd,
     _poolDiningRoom,
+    _poolDireFleetDaredevil,
     _poolDireFleetInterloper,
     _poolDiscipleOfGrace,
     _poolDiscipleOfLaw,
@@ -1277,6 +1282,7 @@ const shard: CardShard = {
     _poolEnduringVitality,
     _poolEnergyChamber,
     _poolEnervate,
+    _poolEowynFearlessKnight,
     _poolEpicureOfBlood,
     _poolEpistolaryLibrarian,
     _poolEssenceBottle,
@@ -1743,6 +1749,7 @@ const shard: CardShard = {
     _poolSepulchralPrimordial,
     _poolSerpentineKavu,
     _poolSerraDisciple,
+    _poolShadowOfMortality,
     _poolShadowStinger,
     _poolShamblingStrider,
     _poolShaoJun,
@@ -1909,6 +1916,7 @@ const shard: CardShard = {
     _poolTriclopeanSight,
     _poolTundraWall,
     _poolTurntimberBasilisk,
+    _poolTurntimberSerpentineWood,
     _poolTwilightProphet,
     _poolTwinbladeInvocation,
     _poolTwistedRiddlekeeper,

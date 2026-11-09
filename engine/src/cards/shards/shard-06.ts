@@ -120,6 +120,7 @@ import _poolBottleGolems from "../pool/bottle-golems.js";
 import _poolBottledCloister from "../pool/bottled-cloister.js";
 import _poolBottomlessPit from "../pool/bottomless-pit.js";
 import _poolBountifulPromenade from "../pool/bountiful-promenade.js";
+import _poolBraidOfFire from "../pool/braid-of-fire.js";
 import _poolBrazenUpstart from "../pool/brazen-upstart.js";
 import _poolBreakingPoint from "../pool/breaking-point.js";
 import _poolBriarberryCohort from "../pool/briarberry-cohort.js";
@@ -246,6 +247,7 @@ import _poolDihadaBinderOfWills from "../pool/dihada-binder-of-wills.js";
 import _poolDinrovaHorror from "../pool/dinrova-horror.js";
 import _poolDisembowel from "../pool/disembowel.js";
 import _poolDisruptorPistol from "../pool/disruptor-pistol.js";
+import _poolDissipationField from "../pool/dissipation-field.js";
 import _poolDivineSmite from "../pool/divine-smite.js";
 import _poolDjinnOfTheLamp from "../pool/djinn-of-the-lamp.js";
 import _poolDockworkerDrone from "../pool/dockworker-drone.js";
@@ -479,6 +481,7 @@ import _poolKindredJudgment from "../pool/kindred-judgment.js";
 import _poolKingDarienXlviii from "../pool/king-darien-xlviii.js";
 import _poolKinsbaileBorderguard from "../pool/kinsbaile-borderguard.js";
 import _poolKinscaerHarpoonist from "../pool/kinscaer-harpoonist.js";
+import _poolKitesailLarcenist from "../pool/kitesail-larcenist.js";
 import _poolKitsuneLoreweaver from "../pool/kitsune-loreweaver.js";
 import _poolKjeldoranKnight from "../pool/kjeldoran-knight.js";
 import _poolKlauthsWill from "../pool/klauths-will.js";
@@ -640,6 +643,7 @@ import _poolPrismaticVista from "../pool/prismatic-vista.js";
 import _poolProfessorOnyx from "../pool/professor-onyx.js";
 import _poolProhibit from "../pool/prohibit.js";
 import _poolProsperTomeBound from "../pool/prosper-tome-bound.js";
+import _poolProteanHulk from "../pool/protean-hulk.js";
 import _poolProwlerClawedThief from "../pool/prowler-clawed-thief.js";
 import _poolPsychicDrain from "../pool/psychic-drain.js";
 import _poolPsychoticEpisode from "../pool/psychotic-episode.js";
@@ -669,6 +673,7 @@ import _poolRamunapRuins from "../pool/ramunap-ruins.js";
 import _poolRankleMasterOfPranks from "../pool/rankle-master-of-pranks.js";
 import _poolRashkaTheSlayer from "../pool/rashka-the-slayer.js";
 import _poolRatColony from "../pool/rat-colony.js";
+import _poolReaverTitan from "../pool/reaver-titan.js";
 import _poolRebuildTheCity from "../pool/rebuild-the-city.js";
 import _poolRedScarab from "../pool/red-scarab.js";
 import _poolRedoubledStormsinger from "../pool/redoubled-stormsinger.js";
@@ -847,6 +852,7 @@ import _poolTheFallOfLordKonda from "../pool/the-fall-of-lord-konda.js";
 import _poolTheGooseMother from "../pool/the-goose-mother.js";
 import _poolTheLastRide from "../pool/the-last-ride.js";
 import _poolTheWanderer from "../pool/the-wanderer.js";
+import _poolThiefOfSanity from "../pool/thief-of-sanity.js";
 import _poolThomilTheDestroyer from "../pool/thomil-the-destroyer.js";
 import _poolThopterEngineer from "../pool/thopter-engineer.js";
 import _poolThopterFabricator from "../pool/thopter-fabricator.js";
@@ -1119,6 +1125,7 @@ const shard: CardShard = {
     _poolBottledCloister,
     _poolBottomlessPit,
     _poolBountifulPromenade,
+    _poolBraidOfFire,
     _poolBrazenUpstart,
     _poolBreakingPoint,
     _poolBriarberryCohort,
@@ -1245,6 +1252,7 @@ const shard: CardShard = {
     _poolDinrovaHorror,
     _poolDisembowel,
     _poolDisruptorPistol,
+    _poolDissipationField,
     _poolDivineSmite,
     _poolDjinnOfTheLamp,
     _poolDockworkerDrone,
@@ -1478,6 +1486,7 @@ const shard: CardShard = {
     _poolKingDarienXlviii,
     _poolKinsbaileBorderguard,
     _poolKinscaerHarpoonist,
+    _poolKitesailLarcenist,
     _poolKitsuneLoreweaver,
     _poolKjeldoranKnight,
     _poolKlauthsWill,
@@ -1639,6 +1648,7 @@ const shard: CardShard = {
     _poolProfessorOnyx,
     _poolProhibit,
     _poolProsperTomeBound,
+    _poolProteanHulk,
     _poolProwlerClawedThief,
     _poolPsychicDrain,
     _poolPsychoticEpisode,
@@ -1668,6 +1678,7 @@ const shard: CardShard = {
     _poolRankleMasterOfPranks,
     _poolRashkaTheSlayer,
     _poolRatColony,
+    _poolReaverTitan,
     _poolRebuildTheCity,
     _poolRedScarab,
     _poolRedoubledStormsinger,
@@ -1846,6 +1857,7 @@ const shard: CardShard = {
     _poolTheGooseMother,
     _poolTheLastRide,
     _poolTheWanderer,
+    _poolThiefOfSanity,
     _poolThomilTheDestroyer,
     _poolThopterEngineer,
     _poolThopterFabricator,

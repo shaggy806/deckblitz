@@ -19,6 +19,7 @@ import _poolAgentPhilCoulson from "../pool/agent-phil-coulson.js";
 import _poolAhnCropChampion from "../pool/ahn-crop-champion.js";
 import _poolAjaniOutlandChaperone from "../pool/ajani-outland-chaperone.js";
 import _poolAleatory from "../pool/aleatory.js";
+import _poolAllOutAssault from "../pool/all-out-assault.js";
 import _poolAlluringScent from "../pool/alluring-scent.js";
 import _poolAlphaAuthority from "../pool/alpha-authority.js";
 import _poolAlpharaelStonechosen from "../pool/alpharael-stonechosen.js";
@@ -80,6 +81,7 @@ import _poolBidentOfThassa from "../pool/bident-of-thassa.js";
 import _poolBigWheel from "../pool/big-wheel.js";
 import _poolBiotechSpecialist from "../pool/biotech-specialist.js";
 import _poolBirdAdmirer from "../pool/bird-admirer.js";
+import _poolBirthrightBoon from "../pool/birthright-boon.js";
 import _poolBladebrand from "../pool/bladebrand.js";
 import _poolBlasphemousAct from "../pool/blasphemous-act.js";
 import _poolBleedDry from "../pool/bleed-dry.js";
@@ -434,6 +436,7 @@ import _poolJacesSentinel from "../pool/jaces-sentinel.js";
 import _poolJackalPup from "../pool/jackal-pup.js";
 import _poolJaradsOrders from "../pool/jarads-orders.js";
 import _poolJayasImmolatingInferno from "../pool/jayas-immolating-inferno.js";
+import _poolJeskaThriceReborn from "../pool/jeska-thrice-reborn.js";
 import _poolJeskaiBanner from "../pool/jeskai-banner.js";
 import _poolJeweledLotus from "../pool/jeweled-lotus.js";
 import _poolJhoiraWeatherlightCaptain from "../pool/jhoira-weatherlight-captain.js";
@@ -478,6 +481,7 @@ import _poolLifeforce from "../pool/lifeforce.js";
 import _poolLightningTalons from "../pool/lightning-talons.js";
 import _poolLikenessLooter from "../pool/likeness-looter.js";
 import _poolLilahUndefeatedSlickshot from "../pool/lilah-undefeated-slickshot.js";
+import _poolLionUmbra from "../pool/lion-umbra.js";
 import _poolLionheartGlimmer from "../pool/lionheart-glimmer.js";
 import _poolLiquify from "../pool/liquify.js";
 import _poolLiveOrDie from "../pool/live-or-die.js";
@@ -507,6 +511,7 @@ import _poolMarduDevotee from "../pool/mardu-devotee.js";
 import _poolMarduHateblade from "../pool/mardu-hateblade.js";
 import _poolMarduScout from "../pool/mardu-scout.js";
 import _poolMarjhan from "../pool/marjhan.js";
+import _poolMartialImpetus from "../pool/martial-impetus.js";
 import _poolMarut from "../pool/marut.js";
 import _poolMascotInterception from "../pool/mascot-interception.js";
 import _poolMathemagics from "../pool/mathemagics.js";
@@ -629,6 +634,7 @@ import _poolPrismaticEnding from "../pool/prismatic-ending.js";
 import _poolPrismaticGeoscope from "../pool/prismatic-geoscope.js";
 import _poolPrismaticOmen from "../pool/prismatic-omen.js";
 import _poolPrismaticStrands from "../pool/prismatic-strands.js";
+import _poolPrisonersDilemma from "../pool/prisoners-dilemma.js";
 import _poolPropagatorDrone from "../pool/propagator-drone.js";
 import _poolProwlersHelm from "../pool/prowlers-helm.js";
 import _poolPunkFrogs from "../pool/punk-frogs.js";
@@ -1016,6 +1022,7 @@ const shard: CardShard = {
     _poolAhnCropChampion,
     _poolAjaniOutlandChaperone,
     _poolAleatory,
+    _poolAllOutAssault,
     _poolAlluringScent,
     _poolAlphaAuthority,
     _poolAlpharaelStonechosen,
@@ -1077,6 +1084,7 @@ const shard: CardShard = {
     _poolBigWheel,
     _poolBiotechSpecialist,
     _poolBirdAdmirer,
+    _poolBirthrightBoon,
     _poolBladebrand,
     _poolBlasphemousAct,
     _poolBleedDry,
@@ -1431,6 +1439,7 @@ const shard: CardShard = {
     _poolJackalPup,
     _poolJaradsOrders,
     _poolJayasImmolatingInferno,
+    _poolJeskaThriceReborn,
     _poolJeskaiBanner,
     _poolJeweledLotus,
     _poolJhoiraWeatherlightCaptain,
@@ -1475,6 +1484,7 @@ const shard: CardShard = {
     _poolLightningTalons,
     _poolLikenessLooter,
     _poolLilahUndefeatedSlickshot,
+    _poolLionUmbra,
     _poolLionheartGlimmer,
     _poolLiquify,
     _poolLiveOrDie,
@@ -1504,6 +1514,7 @@ const shard: CardShard = {
     _poolMarduHateblade,
     _poolMarduScout,
     _poolMarjhan,
+    _poolMartialImpetus,
     _poolMarut,
     _poolMascotInterception,
     _poolMathemagics,
@@ -1626,6 +1637,7 @@ const shard: CardShard = {
     _poolPrismaticGeoscope,
     _poolPrismaticOmen,
     _poolPrismaticStrands,
+    _poolPrisonersDilemma,
     _poolPropagatorDrone,
     _poolProwlersHelm,
     _poolPunkFrogs,

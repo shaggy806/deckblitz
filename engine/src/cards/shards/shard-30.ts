@@ -224,6 +224,7 @@ import _poolDiregrafColossus from "../pool/diregraf-colossus.js";
 import _poolDirtwaterWraith from "../pool/dirtwater-wraith.js";
 import _poolDisappearingAct from "../pool/disappearing-act.js";
 import _poolDisperse from "../pool/disperse.js";
+import _poolDollmakersShop from "../pool/dollmakers-shop.js";
 import _poolDominatingLicid from "../pool/dominating-licid.js";
 import _poolDonatelloMutantMechanic from "../pool/donatello-mutant-mechanic.js";
 import _poolDracogenesis from "../pool/dracogenesis.js";
@@ -461,6 +462,7 @@ import _poolIxidorsWill from "../pool/ixidors-will.js";
 import _poolJaceRealitySculptor from "../pool/jace-reality-sculptor.js";
 import _poolJaceTelepathUnbound from "../pool/jace-telepath-unbound.js";
 import _poolJackalFamiliar from "../pool/jackal-familiar.js";
+import _poolJackdawSavior from "../pool/jackdaw-savior.js";
 import _poolJadeGuardian from "../pool/jade-guardian.js";
 import _poolJadeLeech from "../pool/jade-leech.js";
 import _poolJadziStewardOfFate from "../pool/jadzi-steward-of-fate.js";
@@ -550,6 +552,7 @@ import _poolMarshHulk from "../pool/marsh-hulk.js";
 import _poolMartyrsTomb from "../pool/martyrs-tomb.js";
 import _poolMaryJaneWatson from "../pool/mary-jane-watson.js";
 import _poolMaskOfTheJadecrafter from "../pool/mask-of-the-jadecrafter.js";
+import _poolMaskedVandal from "../pool/masked-vandal.js";
 import _poolMassacreGirl from "../pool/massacre-girl.js";
 import _poolMasterfulFlourish from "../pool/masterful-flourish.js";
 import _poolMeditationPools from "../pool/meditation-pools.js";
@@ -647,6 +650,7 @@ import _poolPeregrination from "../pool/peregrination.js";
 import _poolPestilentSpirit from "../pool/pestilent-spirit.js";
 import _poolPhantasmalFiend from "../pool/phantasmal-fiend.js";
 import _poolPhantasmalShieldback from "../pool/phantasmal-shieldback.js";
+import _poolPhoenixWardenOfFire from "../pool/phoenix-warden-of-fire.js";
 import _poolPhyrexianTribute from "../pool/phyrexian-tribute.js";
 import _poolPiaDeterminedRebuilder from "../pool/pia-determined-rebuilder.js";
 import _poolPiety from "../pool/piety.js";
@@ -713,6 +717,7 @@ import _poolReturnToBattle from "../pool/return-to-battle.js";
 import _poolRighteousValkyrie from "../pool/righteous-valkyrie.js";
 import _poolRilsaRaelKingpin from "../pool/rilsa-rael-kingpin.js";
 import _poolRiparianTiger from "../pool/riparian-tiger.js";
+import _poolRiseAndShine from "../pool/rise-and-shine.js";
 import _poolRiseFromTheGrave from "../pool/rise-from-the-grave.js";
 import _poolRiteOfBelzenlok from "../pool/rite-of-belzenlok.js";
 import _poolRiteOfReplication from "../pool/rite-of-replication.js";
@@ -1245,6 +1250,7 @@ const shard: CardShard = {
     _poolDirtwaterWraith,
     _poolDisappearingAct,
     _poolDisperse,
+    _poolDollmakersShop,
     _poolDominatingLicid,
     _poolDonatelloMutantMechanic,
     _poolDracogenesis,
@@ -1482,6 +1488,7 @@ const shard: CardShard = {
     _poolJaceRealitySculptor,
     _poolJaceTelepathUnbound,
     _poolJackalFamiliar,
+    _poolJackdawSavior,
     _poolJadeGuardian,
     _poolJadeLeech,
     _poolJadziStewardOfFate,
@@ -1571,6 +1578,7 @@ const shard: CardShard = {
     _poolMartyrsTomb,
     _poolMaryJaneWatson,
     _poolMaskOfTheJadecrafter,
+    _poolMaskedVandal,
     _poolMassacreGirl,
     _poolMasterfulFlourish,
     _poolMeditationPools,
@@ -1668,6 +1676,7 @@ const shard: CardShard = {
     _poolPestilentSpirit,
     _poolPhantasmalFiend,
     _poolPhantasmalShieldback,
+    _poolPhoenixWardenOfFire,
     _poolPhyrexianTribute,
     _poolPiaDeterminedRebuilder,
     _poolPiety,
@@ -1734,6 +1743,7 @@ const shard: CardShard = {
     _poolRighteousValkyrie,
     _poolRilsaRaelKingpin,
     _poolRiparianTiger,
+    _poolRiseAndShine,
     _poolRiseFromTheGrave,
     _poolRiteOfBelzenlok,
     _poolRiteOfReplication,

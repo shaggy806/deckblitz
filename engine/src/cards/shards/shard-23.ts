@@ -165,6 +165,7 @@ import _poolCoeurl from "../pool/coeurl.js";
 import _poolCogworkAssembler from "../pool/cogwork-assembler.js";
 import _poolCogworkSpy from "../pool/cogwork-spy.js";
 import _poolCommandChair from "../pool/command-chair.js";
+import _poolCommunalBrewing from "../pool/communal-brewing.js";
 import _poolCommuneWithLava from "../pool/commune-with-lava.js";
 import _poolCommuneWithTheGods from "../pool/commune-with-the-gods.js";
 import _poolCongregationGryff from "../pool/congregation-gryff.js";
@@ -217,6 +218,7 @@ import _poolDistinguishedConjurer from "../pool/distinguished-conjurer.js";
 import _poolDisturbingPlot from "../pool/disturbing-plot.js";
 import _poolDiviningDuelist from "../pool/divining-duelist.js";
 import _poolDokuchiShadowWalker from "../pool/dokuchi-shadow-walker.js";
+import _poolDollmakersShopPorcelainGallery from "../pool/dollmakers-shop-porcelain-gallery.js";
 import _poolDolmenGate from "../pool/dolmen-gate.js";
 import _poolDominionInfiltration from "../pool/dominion-infiltration.js";
 import _poolDoomgape from "../pool/doomgape.js";
@@ -506,6 +508,7 @@ import _poolManaPrism from "../pool/mana-prism.js";
 import _poolMandibleJusticiar from "../pool/mandible-justiciar.js";
 import _poolManticore from "../pool/manticore.js";
 import _poolMaraudingDreadship from "../pool/marauding-dreadship.js";
+import _poolMaraudingRaptor from "../pool/marauding-raptor.js";
 import _poolMarchFromTheBlackGate from "../pool/march-from-the-black-gate.js";
 import _poolMarchesasSmuggler from "../pool/marchesas-smuggler.js";
 import _poolMarkOfFury from "../pool/mark-of-fury.js";
@@ -731,6 +734,7 @@ import _poolSelesnyaEulogist from "../pool/selesnya-eulogist.js";
 import _poolSelesnyaSignet from "../pool/selesnya-signet.js";
 import _poolSelfReflection from "../pool/self-reflection.js";
 import _poolSelfcraftMechan from "../pool/selfcraft-mechan.js";
+import _poolSemblanceAnvil from "../pool/semblance-anvil.js";
 import _poolSenatorPeacock from "../pool/senator-peacock.js";
 import _poolSentryOak from "../pool/sentry-oak.js";
 import _poolServoExhibition from "../pool/servo-exhibition.js";
@@ -1173,6 +1177,7 @@ const shard: CardShard = {
     _poolCogworkAssembler,
     _poolCogworkSpy,
     _poolCommandChair,
+    _poolCommunalBrewing,
     _poolCommuneWithLava,
     _poolCommuneWithTheGods,
     _poolCongregationGryff,
@@ -1225,6 +1230,7 @@ const shard: CardShard = {
     _poolDisturbingPlot,
     _poolDiviningDuelist,
     _poolDokuchiShadowWalker,
+    _poolDollmakersShopPorcelainGallery,
     _poolDolmenGate,
     _poolDominionInfiltration,
     _poolDoomgape,
@@ -1514,6 +1520,7 @@ const shard: CardShard = {
     _poolMandibleJusticiar,
     _poolManticore,
     _poolMaraudingDreadship,
+    _poolMaraudingRaptor,
     _poolMarchFromTheBlackGate,
     _poolMarchesasSmuggler,
     _poolMarkOfFury,
@@ -1739,6 +1746,7 @@ const shard: CardShard = {
     _poolSelesnyaSignet,
     _poolSelfReflection,
     _poolSelfcraftMechan,
+    _poolSemblanceAnvil,
     _poolSenatorPeacock,
     _poolSentryOak,
     _poolServoExhibition,

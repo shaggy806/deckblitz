@@ -529,6 +529,7 @@ import _poolLongLakeNuisance from "../pool/long-lake-nuisance.js";
 import _poolLordOfShatterskullPass from "../pool/lord-of-shatterskull-pass.js";
 import _poolLostLeonin from "../pool/lost-leonin.js";
 import _poolLuckyClover from "../pool/lucky-clover.js";
+import _poolLuluSternGuardian from "../pool/lulu-stern-guardian.js";
 import _poolLumberingMegasloth from "../pool/lumbering-megasloth.js";
 import _poolLushOasis from "../pool/lush-oasis.js";
 import _poolMaceOfTheValiant from "../pool/mace-of-the-valiant.js";
@@ -631,6 +632,7 @@ import _poolOrzhovEuthanist from "../pool/orzhov-euthanist.js";
 import _poolOrzhovKeyrune from "../pool/orzhov-keyrune.js";
 import _poolOssification from "../pool/ossification.js";
 import _poolOutOfAir from "../pool/out-of-air.js";
+import _poolOutOfTheTombs from "../pool/out-of-the-tombs.js";
 import _poolOvergrownArmasaur from "../pool/overgrown-armasaur.js";
 import _poolOversimplify from "../pool/oversimplify.js";
 import _poolOverwhelmingInstinct from "../pool/overwhelming-instinct.js";
@@ -650,6 +652,7 @@ import _poolPippinGuardOfTheCitadel from "../pool/pippin-guard-of-the-citadel.js
 import _poolPixieDust from "../pool/pixie-dust.js";
 import _poolPollenLullaby from "../pool/pollen-lullaby.js";
 import _poolPontiffOfBlight from "../pool/pontiff-of-blight.js";
+import _poolPorcelainGallery from "../pool/porcelain-gallery.js";
 import _poolPristineAngel from "../pool/pristine-angel.js";
 import _poolPristineTalisman from "../pool/pristine-talisman.js";
 import _poolProfaneTutor from "../pool/profane-tutor.js";
@@ -1584,6 +1587,7 @@ const shard: CardShard = {
     _poolLordOfShatterskullPass,
     _poolLostLeonin,
     _poolLuckyClover,
+    _poolLuluSternGuardian,
     _poolLumberingMegasloth,
     _poolLushOasis,
     _poolMaceOfTheValiant,
@@ -1686,6 +1690,7 @@ const shard: CardShard = {
     _poolOrzhovKeyrune,
     _poolOssification,
     _poolOutOfAir,
+    _poolOutOfTheTombs,
     _poolOvergrownArmasaur,
     _poolOversimplify,
     _poolOverwhelmingInstinct,
@@ -1705,6 +1710,7 @@ const shard: CardShard = {
     _poolPixieDust,
     _poolPollenLullaby,
     _poolPontiffOfBlight,
+    _poolPorcelainGallery,
     _poolPristineAngel,
     _poolPristineTalisman,
     _poolProfaneTutor,

@@ -276,6 +276,7 @@ import _poolEarthenArms from "../pool/earthen-arms.js";
 import _poolEchoingDeeps from "../pool/echoing-deeps.js";
 import _poolEldraziSkyspawner from "../pool/eldrazi-skyspawner.js";
 import _poolElectrozoa from "../pool/electrozoa.js";
+import _poolEleshNorn from "../pool/elesh-norn.js";
 import _poolElfhameDruid from "../pool/elfhame-druid.js";
 import _poolElvenAmbush from "../pool/elven-ambush.js";
 import _poolElvenCache from "../pool/elven-cache.js";
@@ -601,7 +602,9 @@ import _poolMirarisWake from "../pool/miraris-wake.js";
 import _poolMiresGrasp from "../pool/mires-grasp.js";
 import _poolMirozel from "../pool/mirozel.js";
 import _poolMirrorBox from "../pool/mirror-box.js";
+import _poolMissionBriefing from "../pool/mission-briefing.js";
 import _poolMitoticManipulation from "../pool/mitotic-manipulation.js";
+import _poolMnemonicBetrayal from "../pool/mnemonic-betrayal.js";
 import _poolMoldervineReclamation from "../pool/moldervine-reclamation.js";
 import _poolMoltenBirth from "../pool/molten-birth.js";
 import _poolMonoistCircuitFeeder from "../pool/monoist-circuit-feeder.js";
@@ -680,6 +683,7 @@ import _poolPettyLarceny from "../pool/petty-larceny.js";
 import _poolPhabineBosssConfidant from "../pool/phabine-bosss-confidant.js";
 import _poolPhantasmalDragon from "../pool/phantasmal-dragon.js";
 import _poolPhenaxGodOfDeception from "../pool/phenax-god-of-deception.js";
+import _poolPhialOfGaladriel from "../pool/phial-of-galadriel.js";
 import _poolPhytohydra from "../pool/phytohydra.js";
 import _poolPineWalker from "../pool/pine-walker.js";
 import _poolPiratePeddlers from "../pool/pirate-peddlers.js";
@@ -876,6 +880,7 @@ import _poolStreakingOilgorger from "../pool/streaking-oilgorger.js";
 import _poolStrikingSliver from "../pool/striking-sliver.js";
 import _poolStromkirkNoble from "../pool/stromkirk-noble.js";
 import _poolSummonGfIfrit from "../pool/summon-gf-ifrit.js";
+import _poolSummonGoodKingMogXii from "../pool/summon-good-king-mog-xii.js";
 import _poolSummonKnightsOfRound from "../pool/summon-knights-of-round.js";
 import _poolSunCrestedPterodon from "../pool/sun-crested-pterodon.js";
 import _poolSunDroplet from "../pool/sun-droplet.js";
@@ -902,6 +907,7 @@ import _poolTasteOfDeath from "../pool/taste-of-death.js";
 import _poolTazeemRoilmage from "../pool/tazeem-roilmage.js";
 import _poolTeleportal from "../pool/teleportal.js";
 import _poolTemptWithBunnies from "../pool/tempt-with-bunnies.js";
+import _poolTemptingContract from "../pool/tempting-contract.js";
 import _poolTenaciousTosk from "../pool/tenacious-tosk.js";
 import _poolTezzeretsGatebreaker from "../pool/tezzerets-gatebreaker.js";
 import _poolTheBalrogFlameOfUdun from "../pool/the-balrog-flame-of-udun.js";
@@ -941,6 +947,7 @@ import _poolUginTheIneffable from "../pool/ugin-the-ineffable.js";
 import _poolUlamogsDreadsire from "../pool/ulamogs-dreadsire.js";
 import _poolUltimatePrice from "../pool/ultimate-price.js";
 import _poolUltronTheAnnihilator from "../pool/ultron-the-annihilator.js";
+import _poolUmbraMystic from "../pool/umbra-mystic.js";
 import _poolUncoverTheMoonLetters from "../pool/uncover-the-moon-letters.js";
 import _poolUnderTheSkin from "../pool/under-the-skin.js";
 import _poolUndercoverSkrull from "../pool/undercover-skrull.js";
@@ -1326,6 +1333,7 @@ const shard: CardShard = {
     _poolEchoingDeeps,
     _poolEldraziSkyspawner,
     _poolElectrozoa,
+    _poolEleshNorn,
     _poolElfhameDruid,
     _poolElvenAmbush,
     _poolElvenCache,
@@ -1651,7 +1659,9 @@ const shard: CardShard = {
     _poolMiresGrasp,
     _poolMirozel,
     _poolMirrorBox,
+    _poolMissionBriefing,
     _poolMitoticManipulation,
+    _poolMnemonicBetrayal,
     _poolMoldervineReclamation,
     _poolMoltenBirth,
     _poolMonoistCircuitFeeder,
@@ -1730,6 +1740,7 @@ const shard: CardShard = {
     _poolPhabineBosssConfidant,
     _poolPhantasmalDragon,
     _poolPhenaxGodOfDeception,
+    _poolPhialOfGaladriel,
     _poolPhytohydra,
     _poolPineWalker,
     _poolPiratePeddlers,
@@ -1926,6 +1937,7 @@ const shard: CardShard = {
     _poolStrikingSliver,
     _poolStromkirkNoble,
     _poolSummonGfIfrit,
+    _poolSummonGoodKingMogXii,
     _poolSummonKnightsOfRound,
     _poolSunCrestedPterodon,
     _poolSunDroplet,
@@ -1952,6 +1964,7 @@ const shard: CardShard = {
     _poolTazeemRoilmage,
     _poolTeleportal,
     _poolTemptWithBunnies,
+    _poolTemptingContract,
     _poolTenaciousTosk,
     _poolTezzeretsGatebreaker,
     _poolTheBalrogFlameOfUdun,
@@ -1991,6 +2004,7 @@ const shard: CardShard = {
     _poolUlamogsDreadsire,
     _poolUltimatePrice,
     _poolUltronTheAnnihilator,
+    _poolUmbraMystic,
     _poolUncoverTheMoonLetters,
     _poolUnderTheSkin,
     _poolUndercoverSkrull,

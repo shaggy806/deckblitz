@@ -148,6 +148,7 @@ import _poolCathedralOfWar from "../pool/cathedral-of-war.js";
 import _poolCaughtInTheBrights from "../pool/caught-in-the-brights.js";
 import _poolChampionsOfMinasTirith from "../pool/champions-of-minas-tirith.js";
 import _poolChandler from "../pool/chandler.js";
+import _poolChandraHopesBeacon from "../pool/chandra-hopes-beacon.js";
 import _poolChandraLegacyOfFire from "../pool/chandra-legacy-of-fire.js";
 import _poolChangeOfHeart from "../pool/change-of-heart.js";
 import _poolChanneledForce from "../pool/channeled-force.js";
@@ -240,6 +241,7 @@ import _poolEdgeOfTheDivinity from "../pool/edge-of-the-divinity.js";
 import _poolEladamriLordOfLeaves from "../pool/eladamri-lord-of-leaves.js";
 import _poolEliteArrester from "../pool/elite-arrester.js";
 import _poolEllynHarbreezeBusybody from "../pool/ellyn-harbreeze-busybody.js";
+import _poolElspethConquersDeath from "../pool/elspeth-conquers-death.js";
 import _poolElspethKnightErrant from "../pool/elspeth-knight-errant.js";
 import _poolElvenRiders from "../pool/elven-riders.js";
 import _poolElvishArchdruid from "../pool/elvish-archdruid.js";
@@ -465,6 +467,7 @@ import _poolLichenthrope from "../pool/lichenthrope.js";
 import _poolLichsMirror from "../pool/lichs-mirror.js";
 import _poolLiesaShroudOfDusk from "../pool/liesa-shroud-of-dusk.js";
 import _poolLifesmith from "../pool/lifesmith.js";
+import _poolLifestreamsBlessing from "../pool/lifestreams-blessing.js";
 import _poolLightOfDay from "../pool/light-of-day.js";
 import _poolLightningSecuritySergeant from "../pool/lightning-security-sergeant.js";
 import _poolLinvalaKeeperOfSilence from "../pool/linvala-keeper-of-silence.js";
@@ -640,6 +643,7 @@ import _poolRalCracklingWit from "../pool/ral-crackling-wit.js";
 import _poolRallyTheAncestors from "../pool/rally-the-ancestors.js";
 import _poolRallyTheRighteous from "../pool/rally-the-righteous.js";
 import _poolRampagingCyclops from "../pool/rampaging-cyclops.js";
+import _poolRampagingYaoGuai from "../pool/rampaging-yao-guai.js";
 import _poolRasputinTheOneiromancer from "../pool/rasputin-the-oneiromancer.js";
 import _poolRathiDragon from "../pool/rathi-dragon.js";
 import _poolRavagerWurm from "../pool/ravager-wurm.js";
@@ -650,6 +654,7 @@ import _poolRavenousLindwurm from "../pool/ravenous-lindwurm.js";
 import _poolRayOfFrost from "../pool/ray-of-frost.js";
 import _poolRayOfRuin from "../pool/ray-of-ruin.js";
 import _poolRealityScramble from "../pool/reality-scramble.js";
+import _poolRealmbreakerTheInvasionTree from "../pool/realmbreaker-the-invasion-tree.js";
 import _poolReassemblingSkeleton from "../pool/reassembling-skeleton.js";
 import _poolReckonerShakedown from "../pool/reckoner-shakedown.js";
 import _poolReclamationSage from "../pool/reclamation-sage.js";
@@ -771,6 +776,7 @@ import _poolSokkasCharge from "../pool/sokkas-charge.js";
 import _poolSolidarityOfHeroes from "../pool/solidarity-of-heroes.js";
 import _poolSoltariEmissary from "../pool/soltari-emissary.js";
 import _poolSoltariMonk from "../pool/soltari-monk.js";
+import _poolSongbirdsBlessing from "../pool/songbirds-blessing.js";
 import _poolSoratamiCloudskater from "../pool/soratami-cloudskater.js";
 import _poolSorceresssSchemes from "../pool/sorceresss-schemes.js";
 import _poolSorinsThirst from "../pool/sorins-thirst.js";
@@ -900,6 +906,7 @@ import _poolTromellSeymoursButler from "../pool/tromell-seymours-butler.js";
 import _poolTurn from "../pool/turn.js";
 import _poolTurntimberRanger from "../pool/turntimber-ranger.js";
 import _poolTurretOgre from "../pool/turret-ogre.js";
+import _poolTwilightDiviner from "../pool/twilight-diviner.js";
 import _poolTwinshotSniper from "../pool/twinshot-sniper.js";
 import _poolTwistedFates from "../pool/twisted-fates.js";
 import _poolTyrantOfDiscord from "../pool/tyrant-of-discord.js";
@@ -1158,6 +1165,7 @@ const shard: CardShard = {
     _poolCaughtInTheBrights,
     _poolChampionsOfMinasTirith,
     _poolChandler,
+    _poolChandraHopesBeacon,
     _poolChandraLegacyOfFire,
     _poolChangeOfHeart,
     _poolChanneledForce,
@@ -1250,6 +1258,7 @@ const shard: CardShard = {
     _poolEladamriLordOfLeaves,
     _poolEliteArrester,
     _poolEllynHarbreezeBusybody,
+    _poolElspethConquersDeath,
     _poolElspethKnightErrant,
     _poolElvenRiders,
     _poolElvishArchdruid,
@@ -1475,6 +1484,7 @@ const shard: CardShard = {
     _poolLichsMirror,
     _poolLiesaShroudOfDusk,
     _poolLifesmith,
+    _poolLifestreamsBlessing,
     _poolLightOfDay,
     _poolLightningSecuritySergeant,
     _poolLinvalaKeeperOfSilence,
@@ -1650,6 +1660,7 @@ const shard: CardShard = {
     _poolRallyTheAncestors,
     _poolRallyTheRighteous,
     _poolRampagingCyclops,
+    _poolRampagingYaoGuai,
     _poolRasputinTheOneiromancer,
     _poolRathiDragon,
     _poolRavagerWurm,
@@ -1660,6 +1671,7 @@ const shard: CardShard = {
     _poolRayOfFrost,
     _poolRayOfRuin,
     _poolRealityScramble,
+    _poolRealmbreakerTheInvasionTree,
     _poolReassemblingSkeleton,
     _poolReckonerShakedown,
     _poolReclamationSage,
@@ -1781,6 +1793,7 @@ const shard: CardShard = {
     _poolSolidarityOfHeroes,
     _poolSoltariEmissary,
     _poolSoltariMonk,
+    _poolSongbirdsBlessing,
     _poolSoratamiCloudskater,
     _poolSorceresssSchemes,
     _poolSorinsThirst,
@@ -1910,6 +1923,7 @@ const shard: CardShard = {
     _poolTurn,
     _poolTurntimberRanger,
     _poolTurretOgre,
+    _poolTwilightDiviner,
     _poolTwinshotSniper,
     _poolTwistedFates,
     _poolTyrantOfDiscord,

@@ -941,6 +941,7 @@ import _poolViridianHarvest from "../pool/viridian-harvest.js";
 import _poolViridianJoiner from "../pool/viridian-joiner.js";
 import _poolVisionSynthezoidAvenger from "../pool/vision-synthezoid-avenger.js";
 import _poolVitalityCharm from "../pool/vitality-charm.js";
+import _poolVivienChampionOfTheWilds from "../pool/vivien-champion-of-the-wilds.js";
 import _poolVizierOfTheTrue from "../pool/vizier-of-the-true.js";
 import _poolVodalianIllusionist from "../pool/vodalian-illusionist.js";
 import _poolVodalianWaveKnight from "../pool/vodalian-wave-knight.js";
@@ -996,6 +997,7 @@ import _poolZukosConviction from "../pool/zukos-conviction.js";
 import _poolZurEternalSchemer from "../pool/zur-eternal-schemer.js";
 import _poolZurgoThundersDecree from "../pool/zurgo-thunders-decree.js";
 import _tokensDemonBerserkerToken from "../tokens/demon-berserker-token.js";
+import _tokensDinosaurBeastToken from "../tokens/dinosaur-beast-token.js";
 import _tokensDinosaurDragonToken from "../tokens/dinosaur-dragon-token.js";
 import _tokensDragonSpiritTokenTatsumasa from "../tokens/dragon-spirit-token-tatsumasa.js";
 import _tokensDroneToken from "../tokens/drone-token.js";
@@ -1952,6 +1954,7 @@ const shard: CardShard = {
     _poolViridianJoiner,
     _poolVisionSynthezoidAvenger,
     _poolVitalityCharm,
+    _poolVivienChampionOfTheWilds,
     _poolVizierOfTheTrue,
     _poolVodalianIllusionist,
     _poolVodalianWaveKnight,
@@ -2009,6 +2012,7 @@ const shard: CardShard = {
   ],
   tokens: [
     _tokensDemonBerserkerToken,
+    _tokensDinosaurBeastToken,
     _tokensDinosaurDragonToken,
     _tokensDragonSpiritTokenTatsumasa,
     _tokensDroneToken,
