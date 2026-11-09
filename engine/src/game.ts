@@ -10860,7 +10860,8 @@ export class Game {
     // is next looked at.
     if (awaiting.asEntersOf !== undefined) {
       this.state.awaiting = null;
-      this.exileAsEntering(awaiting.asEntersOf, chosen);
+      if (awaiting.destination === "graveyard") this.putFromExileAsEntering(awaiting.asEntersOf, chosen, awaiting.max);
+      else this.exileAsEntering(awaiting.asEntersOf, chosen);
       if (this.state.awaiting === null) this.prepareForPriority(this.activePlayer);
       return;
     }
@@ -14473,6 +14474,29 @@ export class Game {
       };
       return true;
     }
+    if (spec.putFromExile !== undefined) {
+      const count = spec.putFromExile;
+      const { eligible, faceDownGroups } = this.exileChoiceCandidates(chooser, { ownedBy: "opponent" }, undefined, id);
+      if (eligible.length < count) {
+        object.enterChoice = { ...answered, asEntersDone: 0 };
+        return false;
+      }
+      // "You may", all or nothing: anything short of `count` declines it.
+      this.state.awaiting = {
+        kind: "choose-from-zone",
+        player: chooser,
+        ids: eligible,
+        eligible,
+        min: 0,
+        max: count,
+        destination: "graveyard",
+        leftover: "stay",
+        prompt: `You may put ${count} cards your opponents own in exile into their owners' graveyards as ${nameOf(object)} enters (fewer than ${count} declines)`,
+        ...(faceDownGroups.length > 0 ? { faceDownGroups } : {}),
+        asEntersOf: id,
+      };
+      return true;
+    }
     if (exile === undefined) {
       object.enterChoice = { ...answered, asEntersDone: 0 };
       return false;
@@ -14511,6 +14535,19 @@ export class Game {
       asEntersOf: id,
     };
     return true;
+  }
+
+  /** An {@link AsEntersAction}'s `putFromExile`: done only with all `count`
+   * chosen, and then done whatever a replacement did with each card. */
+  private putFromExileAsEntering(id: ObjectId, cards: readonly ObjectId[], count: number): void {
+    const done = cards.length === count;
+    if (done) {
+      this.withGraveyardEnterBatch(() => {
+        for (const card of cards) this.moveObject(card, "graveyard");
+      });
+    }
+    const entering = this.state.objects[id];
+    entering.enterChoice = { ...entering.enterChoice, asEntersDone: done ? count : 0 };
   }
 
   /** An {@link AsEntersAction}'s exile, one move: linked to `id` as it enters. */

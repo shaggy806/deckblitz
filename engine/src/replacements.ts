@@ -280,6 +280,11 @@ export interface AsEntersAction {
   /** "You may return [filter] you control to its owner's hand": up to one,
    * already on the battlefield under its controller. */
   readonly returnPermanent?: { readonly filter: CardFilter };
+  /** "You may put two cards your opponents own from exile into their owners'
+   * graveyards. If you do …" (Ulamog's Despoiler): that many or none, chosen
+   * with the `choose-from-zone` popup a `putFromExile` cost uses. It counts as
+   * done even when a replacement keeps a card in exile (its 2015-08-25 ruling). */
+  readonly putFromExile?: number;
 }
 
 /** As the source permanent enters the battlefield (rule 614.1c). A self-
