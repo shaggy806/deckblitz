@@ -53217,6 +53217,16 @@ controlledBy,
       this.raiseNextDiscardToLibrary();
       return;
     }
+    if (this.costDiscardFor === null && this.discardEntersAsked(player, ids, cause)) {
+      const source = this.state.decisionSource;
+      (this.state.pendingDiscardsToLibrary ??= []).push({
+        player,
+        objects: [...ids],
+        ...(cause !== undefined ? { cause } : {}),
+        ...(source !== null ? { source } : {}),
+      });
+      return;
+    }
     const mad = this.moveDiscardedCards([{ objects: ids, cause }]);
     if (this.costDiscardFor !== null) this.recordCostDiscard(this.costDiscardFor, ids);
     this.emit({ type: "cards-discarded", player, objects: [...ids], ...(cause !== undefined ? { cause } : {}) });
@@ -53246,6 +53256,55 @@ controlledBy,
     return found;
   }
 
+  /** The first of `ids` a discard `cause` caused that would enter instead
+   * (Obstinate Baloth) with an "exile it instead" competing with that, and
+   * that replacement (rule 616.1). */
+  private discardEntersCompeting(
+    player: PlayerId,
+    ids: readonly ObjectId[],
+    cause: PlayerId | undefined,
+  ): { readonly card: ObjectId; readonly exile: ObjectId | undefined } | null {
+    if (cause === undefined || cause === player) return null;
+    for (const id of ids) {
+      const object = this.state.objects[id];
+      if (object?.zone !== "hand" || !this.registry.has(object.cardName)) continue;
+      if (this.registry.get(object.cardName).discardedByOpponentEnters === null) continue;
+      if (this.state.replacementAnswers?.[`discard:${id}`] !== undefined) continue;
+      const exile = this.graveyardExileReplacements(id, false, true)[0];
+      if (exile !== undefined) return { card: id, exile: exile.source };
+    }
+    return null;
+  }
+
+  /** Asks about the first discard {@link discardEntersCompeting} finds, and
+   * says whether it asked. The discard waits in the queue Library of Leng's
+   * question uses. */
+  private discardEntersAsked(player: PlayerId, ids: readonly ObjectId[], cause: PlayerId | undefined): boolean {
+    if (this.state.awaiting !== null) return false;
+    const competing = this.discardEntersCompeting(player, ids, cause);
+    if (competing === null) return false;
+    const { card, exile } = competing;
+    const name = this.state.objects[card].cardName;
+    this.state.awaiting = {
+      kind: "replacement-order",
+      player,
+      event: `${name} would be discarded`,
+      options: [
+        { key: "enters", name, text: "put it onto the battlefield instead" },
+        {
+          key: "exile",
+          name: exile === undefined ? "An effect" : this.state.objects[exile].cardName,
+          text: "exile it instead",
+          ...(exile !== undefined ? { object: exile } : {}),
+        },
+      ],
+      best: 0,
+      answers: `discard:${card}`,
+      resume: { site: "effect" },
+    };
+    return true;
+  }
+
   /** Ask about the next discard waiting on a `would-discard` replacement, once
    * nothing else is being asked. A card that has left the hand since isn't
    * discarded; a replacement gone since is nothing to ask, and it's discarded. */
@@ -53257,6 +53316,10 @@ controlledBy,
       const hand = this.state.zones.perPlayer[player].hand;
       const ids = objects.filter((id) => hand.includes(id));
       if (ids.length === 0) continue;
+      if (this.discardEntersAsked(player, ids, cause)) {
+        queue.unshift({ player, objects: ids, ...(cause !== undefined ? { cause } : {}), ...(source !== undefined ? { source } : {}) });
+        return;
+      }
       const replacement = this.discardToLibraryReplacement(player, cause);
       if (replacement === null) {
         this.finishDiscardToLibrary(player, ids, [], cause, false);
@@ -53328,7 +53391,7 @@ controlledBy,
             object?.zone === "hand" && cause !== undefined && cause !== object.owner && this.registry.has(object.cardName)
               ? this.registry.get(object.cardName).discardedByOpponentEnters
               : null;
-          if (enters !== null) {
+          if (enters !== null && this.state.replacementAnswers?.[`discard:${id}`]?.[0] !== "exile") {
             entering.push(id);
             if (enters.withCounters !== undefined) withCounters[id] = enters.withCounters;
           } else if (this.moveDiscarded(id)) {
@@ -53426,7 +53489,9 @@ controlledBy,
       }))
       .filter((d) => d.objects.length > 0);
     // A discard Library of Leng's question holds up goes after the others.
-    const offered = discards.filter((d) => this.discardToLibraryReplacement(d.player, d.cause) !== null);
+    const offered = discards.filter(
+      (d) => this.discardToLibraryReplacement(d.player, d.cause) !== null || this.discardEntersCompeting(d.player, d.objects, d.cause) !== null,
+    );
     const plain = discards.filter((d) => !offered.includes(d));
     if (plain.length > 0) {
       const mad = this.moveDiscardedCards(plain.map(({ objects, cause }) => ({ objects, cause })));

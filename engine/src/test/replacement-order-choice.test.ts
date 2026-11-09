@@ -332,6 +332,41 @@ describe("mandatory draw replacements (616.1)", () => {
   });
 });
 
+describe("a discard's replacement beside the graveyard's (616.1)", () => {
+  const mindRot = (game: Game, baloth: ObjectId): void => {
+    lands(game, "Swamp", 3);
+    void baloth;
+    cast(game, toHand(game, "Mind Rot"), { targets: [ref(B)] });
+  };
+
+  it("left alone, Obstinate Baloth enters", () => {
+    const { game } = table();
+    spawn(game, "Leyline of the Void", A);
+    const baloth = toHand(game, "Obstinate Baloth", B);
+    mindRot(game, baloth);
+    expect(game.state.objects[baloth].zone).toBe("battlefield");
+  });
+
+  it("its owner can take the exile first", () => {
+    const { game, b } = table();
+    spawn(game, "Leyline of the Void", A);
+    const baloth = toHand(game, "Obstinate Baloth", B);
+    const asked = answering(b, "Leyline of the Void");
+    mindRot(game, baloth);
+    expect(asked).toHaveLength(1);
+    expect(game.state.objects[baloth].zone).toBe("exile");
+  });
+
+  it("with no exile effect, nothing is asked", () => {
+    const { game, b } = table();
+    const baloth = toHand(game, "Obstinate Baloth", B);
+    const asked = answering(b, "Leyline of the Void");
+    mindRot(game, baloth);
+    expect(asked).toHaveLength(0);
+    expect(game.state.objects[baloth].zone).toBe("battlefield");
+  });
+});
+
 describe("buyback against an exile replacement (616.1, Yawgmoth's Will's ruling)", () => {
   const capsize = (game: Game): ObjectId => {
     lands(game, "Island", 6);
