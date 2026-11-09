@@ -1131,6 +1131,7 @@ function damageStepText(step: DamageStep): string {
     case "also":
       return "adds an effect to it";
     case "prevent-all":
+      if (step.made.key.startsWith("protection:")) return "its protection prevents all of it";
       return step.then === undefined ? "prevents all of it" : "prevents all of it, with a cost";
     case "shield":
       return step.shield.redirect !== undefined || step.shield.redirectToSource !== undefined
@@ -53993,6 +53994,26 @@ controlledBy,
         steps.push({ kind: "shield-counter", object: target.object, spent, made: { key: `shield-counter:${target.object}`, by: target.object } });
       }
     }
+    // Protection's prevention (rule 702.16e) is one of them too, beside
+    // anything else this event would be changed by: with nothing else it's
+    // only the prevention `dealDamage` makes after these.
+    if (steps.length > 0 && target.kind === "object" && (sourceLastKnown !== undefined || this.state.objects[source] !== undefined)) {
+      const object = this.state.objects[target.object];
+      const blocked =
+        object !== undefined &&
+        object.zone === "battlefield" &&
+        protectionBlocks(
+          this.state,
+          this.registry,
+          target.object,
+          sourceLastKnown !== undefined
+            ? { colors: sourceLastKnown.colors, types: sourceLastKnown.types, object: source, lastKnown: sourceLastKnown }
+            : this.permanentSource(source),
+        );
+      if (blocked) {
+        steps.push({ kind: "prevent-all", by: target.object, controller: object.controller, made: { key: `protection:${target.object}`, by: target.object } });
+      }
+    }
     return steps;
   }
 
@@ -54032,7 +54053,10 @@ controlledBy,
           (n, s) => n + (s.shield.redirect !== undefined || s.shield.redirectToSource !== undefined ? s.prevented : 0),
           0,
         ) + (outcome.redirected?.amount ?? 0);
-      return [outcome.dealt, redirected, counterSpent, outcome.shieldUsed, outcome.preventedAll?.amount ?? 0];
+      // What a "prevent that damage and …" follows up with, and only that:
+      // protection's prevention costs nothing (Phantom Centaur's ruling).
+      const followUp = outcome.preventedAll?.step.then === undefined ? 0 : outcome.preventedAll.amount;
+      return [outcome.dealt, redirected, counterSpent, outcome.shieldUsed, followUp];
     };
     const better = (a: readonly number[], b: readonly number[]): boolean => {
       for (let i = 0; i < a.length; i += 1) if (a[i] !== b[i]) return a[i]! < b[i]!;
@@ -54087,7 +54111,7 @@ controlledBy,
       (s) => (s.ifAtMost === undefined || each <= s.ifAtMost) && (s.ifAtLeast === undefined || each >= s.ifAtLeast),
     );
     const named = applicable.filter(
-      (s, i) => applicable.findIndex((o) => this.damageStepName(o) === this.damageStepName(s) && damageStepText(o) === damageStepText(s)) === i,
+      (s, i) => applicable.findIndex((o) => this.damageStepName(o) === this.damageStepName(s) && this.damageStepText(o) === this.damageStepText(s)) === i,
     );
     if (named.length < 2) return false;
     const best = this.bestDamageOrder(amount, sources, rest, unpreventable, first)[first.length];
@@ -54097,7 +54121,7 @@ controlledBy,
       return {
         key: step.made.key,
         name: this.damageStepName(step),
-        text: damageStepText(step),
+        text: this.damageStepText(step),
         result: outcome.dealt > 0 ? `${outcome.dealt} damage is dealt` : outcome.redirected !== undefined ? "it's redirected" : "no damage is dealt",
         ...(this.state.objects[step.made.by]?.zone === "battlefield" ? { object: step.made.by } : {}),
       };
@@ -54120,6 +54144,15 @@ controlledBy,
   private answeredDamageSteps(steps: readonly DamageStep[], answers: string): readonly DamageStep[] {
     const chosen = this.state.replacementAnswers?.[answers] ?? [];
     return chosen.flatMap((key) => steps.filter((s) => s.made.key === key));
+  }
+
+  /** A damage step's effect in a few words; a redirection says where to, as
+   * two copies of one card can differ by nothing else. */
+  private damageStepText(step: DamageStep): string {
+    const to =
+      step.kind === "redirect" ? step.to : step.kind === "shield" ? step.shield.redirect?.to : undefined;
+    if (to === undefined) return damageStepText(step);
+    return `redirects it to ${to.kind === "player" ? "you" : (this.state.objects[to.object]?.cardName ?? "another permanent")}`;
   }
 
   /** The card a damage step's effect comes from, for a question about it. */
