@@ -7115,8 +7115,9 @@ Delete an entry in the same commit as the feature that retires it.
   one instruction's have chosen, then entering together; a copy of a Clone
   that copied something copies what it copied, and a Clone's copy replaces the
   first copy's exceptions, rule 707.3). Not asked — it enters with nothing
-  chosen — for a token made by name (`create-token`, so a token with devour —
-  Dragon Broodmother — waits on `mechanic:token-devour`) and `debugSpawn`.
+  chosen — for a token made by name (`create-token`), a token with devour
+  excepted (Dragon Broodmother's Dragons: asked as a token copy is), and
+  `debugSpawn`.
   An `others-enter-battlefield` replacement's filter reads its permanent as
   its source, so Metallic Mimic's "each other creature you control **of the
   chosen type** enters with an additional +1/+1 counter" is `ofChosenType`
