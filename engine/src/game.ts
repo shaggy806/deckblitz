@@ -10420,6 +10420,7 @@ export class Game {
 
     // A cost's discard: the spell or ability it pays for remembers the cards.
     const forCost = this.state.awaiting?.kind === "discard" ? this.state.awaiting.forCost : undefined;
+    const manaAfter = this.state.awaiting?.kind === "discard" ? this.state.awaiting.thenManaAbility : undefined;
 
     if (fromEffect && priorityTo === undefined && this.state.heldChoices !== undefined) {
       // Chosen now, discarded once every player has chosen (rule 101.4).
@@ -10437,7 +10438,9 @@ export class Game {
     this.state.awaiting = null;
 
     if (fromEffect) {
-      // A spell/ability caused this (Mind Rot) — just resume the game.
+      // A spell/ability caused this (Mind Rot) — just resume the game. A mana
+      // ability's cost, its mana first (rule 605.3b).
+      if (manaAfter !== undefined) this.resolveWaitingManaAbility(manaAfter, player);
       this.prepareForPriority(priorityTo ?? this.activePlayer);
       return;
     }
@@ -10654,24 +10657,28 @@ export class Game {
     this.finishZoneChoice({ kind: "zone-choice", awaiting, player, chosen: taken });
     // A mana ability's "exile a card from your hand": its mana, now the cost is
     // paid (rule 605.3b).
-    const manaAfter = awaiting.thenManaAbility;
-    if (manaAfter !== undefined) {
-      const ability = this.effectiveActivated(manaAfter.source)[manaAfter.abilityIndex];
-      if (ability !== undefined) {
-        this.resolveManaAbility(
-          manaAfter.source,
-          player,
-          ability,
-          manaAfter.x,
-          manaAfter.manaColors,
-          this.activatedRefFor(manaAfter.source, manaAfter.abilityIndex),
-          undefined,
-        );
-      }
-    }
+    if (awaiting.thenManaAbility !== undefined) this.resolveWaitingManaAbility(awaiting.thenManaAbility, player);
     // A cost's choice hands priority back to whoever activated (rule
     // 117.3c); a resolution's goes on as the resolution does.
     this.prepareForPriority(awaiting.priorityTo ?? this.activePlayer);
+  }
+
+  /** A mana ability whose cost waited on a decision, now answered: its mana. */
+  private resolveWaitingManaAbility(
+    waiting: NonNullable<Extract<AwaitingDecision, { kind: "choose-from-zone" }>["thenManaAbility"]>,
+    player: PlayerId,
+  ): void {
+    const ability = this.effectiveActivated(waiting.source)[waiting.abilityIndex];
+    if (ability === undefined) return;
+    this.resolveManaAbility(
+      waiting.source,
+      player,
+      ability,
+      waiting.x,
+      waiting.manaColors,
+      this.activatedRefFor(waiting.source, waiting.abilityIndex),
+      undefined,
+    );
   }
 
   /**
@@ -23877,6 +23884,25 @@ export class Game {
         this.withDecisionSource(sourceId, () =>
           this.beginCollectEvidence(player, sourceId, evidence, { x: chosenX, priorityTo: player, thenManaAbility: manaAfter }),
         );
+      }
+      // "Discard a card: Add {B}" (Skirge Familiar): the same wait where
+      // there's a choice to make (rules 602.2b, 605.3b).
+      const manaDiscard = ability.cost.discard;
+      if (manaDiscard !== undefined) {
+        this.withDecisionSource(sourceId, () =>
+          this.discardByEffect(
+            { kind: "player", player },
+            manaDiscard.count === "x" ? chosenX : manaDiscard.count,
+            manaDiscard.random === true,
+            discardCostFilterAtX(manaDiscard, chosenX),
+          ),
+        );
+        const asked = this.state.awaiting;
+        if (asked?.kind === "discard") {
+          this.state.awaiting = { ...asked, priorityTo: player, thenManaAbility: manaAfter };
+          this.afterPlayerAction(player);
+          return;
+        }
       }
       if (ability.cost.do !== undefined) {
         // Rule 605.3b: no stack. The mana waits on the answer to whatever the

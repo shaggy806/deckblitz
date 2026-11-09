@@ -3220,6 +3220,14 @@ export type AwaitingDecision =
        * which remembers the cards discarded (`LastKnownRefs.discarded` —
        * "the discarded card's mana value"). */
       readonly forCost?: ObjectId;
+      /** A mana ability's discard (Skirge Familiar's "Discard a card: Add
+       * {B}"), as `choose-from-zone`'s: what adds its mana once it's answered. */
+      readonly thenManaAbility?: {
+        readonly source: ObjectId;
+        readonly abilityIndex: number;
+        readonly x: number;
+        readonly manaColors?: readonly ManaType[];
+      };
     }
   | {
       /**
