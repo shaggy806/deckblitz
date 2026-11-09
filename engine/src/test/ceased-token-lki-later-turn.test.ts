@@ -27,7 +27,7 @@ const exiler = defineCard({
   text: TEXT,
   activated: [
     {
-      cost: { tap: false },
+      cost: { mana: "{0}", tap: false },
       targets: ["creature"],
       effect: {
         kind: "sequence",

@@ -56,9 +56,9 @@ describe("an Aura put onto the battlefield transformed (rule 712.14a)", () => {
     const { game, a } = table({ registry });
     spawn(game, "Grizzly Bears");
     let asked = false;
-    a.chooseEnchantFn = () => {
+    a.chooseEnchantFn = (_view, _source, options) => {
       asked = true;
-      return null;
+      return options[0];
     };
     const card = toGraveyard(game, FRONT);
     returnTransformed(game, card);
