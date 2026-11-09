@@ -20,6 +20,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "sequence",
+        together: true,
         effects: [
           { kind: "manifest-dread" },
           { kind: "add-counter-all", filter: { thisWay: "put-onto-battlefield" }, counter: "+1/+1", amount: 2 },

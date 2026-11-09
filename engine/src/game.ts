@@ -30102,7 +30102,14 @@ export class Game {
             if (owed === undefined) {
               this.counterBatch.set(key, { ability, trigger: base, multiplier });
             } else {
-              owed.trigger = { ...owed.trigger, triggerValue: (owed.trigger.triggerValue ?? 0) + event.amount };
+              const before = owed.trigger.lastKnownRefs;
+              owed.trigger = {
+                ...owed.trigger,
+                triggerValue: (owed.trigger.triggerValue ?? 0) + event.amount,
+                ...(before !== undefined
+                  ? { lastKnownRefs: { ...before, counters: [...(before.counters ?? []), { kind: event.counter, amount: event.amount }] } }
+                  : {}),
+              };
             }
             return;
           }
@@ -30468,9 +30475,9 @@ export class Game {
     // The player a generic trigger's row names: who proliferated, the new
     // monarch, the player who lost the game (trigger-events.ts).
     if (player === undefined) player = triggerEventPlayer(event);
-    // "The same kind of counters" (Captain Marvel, Apex Avenger): the kind
-    // whose placement fired it.
-    const counter = event.type === "counter-added" ? event.counter : undefined;
+    // "The same number and kind of counters" (Captain Marvel, Apex Avenger):
+    // what went on, one kind here and the rest joined by `withCounterBatch`.
+    const counters = event.type === "counter-added" ? [{ kind: event.counter, amount: event.amount }] : undefined;
     // "Those results": the roll it triggered on, whatever is rolled next.
     const roll = event.type === "dice-rolled" ? rollOfEvent(event) : undefined;
     if (
@@ -30481,7 +30488,7 @@ export class Game {
       recipient === undefined &&
       player === undefined &&
       attackers === undefined &&
-      counter === undefined
+      counters === undefined
     ) {
       return undefined;
     }
@@ -30495,7 +30502,7 @@ export class Game {
       ...(player !== undefined ? { player } : {}),
       ...(roll !== undefined ? { roll } : {}),
       ...(attackers !== undefined ? { attackers } : {}),
-      ...(counter !== undefined ? { counter } : {}),
+      ...(counters !== undefined ? { counters } : {}),
     };
   }
 
@@ -34005,7 +34012,7 @@ export class Game {
           }
         : {}),
       objectSet: (ref, each) => objectSet(ref, each),
-      triggerCounterKind: () => refs.counter,
+      triggerCounters: () => refs.counters ?? [],
       memberMatches: (m, filter) => {
         const now = this.state.objects[m.object];
         if (m.was === undefined && now !== undefined && (now.zoneChangeCount ?? 0) === m.stint) {

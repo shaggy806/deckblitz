@@ -2371,10 +2371,12 @@ export interface LastKnownRefs {
    * `"each-other-opponent"` scopes read.
    */
   readonly player?: PlayerId;
-  /** For a trigger fired by counters being put on something: their kind —
-   * "the same number and kind of counters" (Captain Marvel, Apex Avenger;
-   * the number is the trigger value). */
-  readonly counter?: string;
+  /** For a trigger fired by counters being put on something: what went on,
+   * kind by kind — "the same number and kind of counters" (Captain Marvel,
+   * Apex Avenger; `put-counters-of`'s `"trigger-placement"`). Several kinds
+   * put on a permanent at once are one event for it (rule 603.2c), so one
+   * trigger carries them all. */
+  readonly counters?: readonly { readonly kind: string; readonly amount: number }[];
 }
 
 /**

@@ -17,7 +17,7 @@ export default defineCard({
   activated: [
     powerUp(
       "{5}{W}{W}",
-      { kind: "sequence", effects: [{ kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 }, { kind: "add-counter", target: "source", counter: "indestructible", amount: 1 }] },
+      { kind: "sequence", together: true, effects: [{ kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 }, { kind: "add-counter", target: "source", counter: "indestructible", amount: 1 }] },
       "Power-up — {5}{W}{W}: Put a +1/+1 counter and an indestructible counter on Captain Marvel. (Activate each power-up ability only once. Reduce the cost by her mana cost if she entered this turn.)",
     ),
   ],

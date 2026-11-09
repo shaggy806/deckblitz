@@ -1,10 +1,8 @@
 import { defineCard } from "../define.js";
 
-// "The same number and kind": the trigger value and the kind whose placement
-// fired it (`counterOfTrigger`). Counters of two kinds put at once are two
-// placements here, each copied by its own trigger — the same counters as one
-// trigger copying both. "If it's not a Kree" is an intervening if (rule
-// 603.4), asked as it triggers and again as it resolves.
+// "The same number and kind": every kind in the placement that fired it, each
+// at its own number (`"trigger-placement"`). "If it's not a Kree" is an
+// intervening if (rule 603.4), asked as it triggers and again as it resolves.
 const TEXT =
   "Whenever you put one or more counters on another creature, if it's not a Kree, you may put the same number and kind of counters on Captain Marvel.";
 
@@ -27,13 +25,7 @@ export default defineCard({
       effect: {
         kind: "may",
         prompt: "Put the same number and kind of counters on Captain Marvel?",
-        effect: {
-          kind: "add-counter",
-          target: "source",
-          counter: "+1/+1",
-          counterOfTrigger: true,
-          amount: { triggerValue: true },
-        },
+        effect: { kind: "put-counters-of", of: "trigger-placement", target: "source" },
       },
       resolve: null,
       text: TEXT,

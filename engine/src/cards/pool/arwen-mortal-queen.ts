@@ -38,6 +38,7 @@ export default defineCard({
       targets: [{ kind: "other", of: "creature" }],
       effect: {
         kind: "sequence",
+        together: true,
         effects: [
           { kind: "grant-keyword", target: 0, keyword: "indestructible", duration: "end-of-turn" },
           { kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 },

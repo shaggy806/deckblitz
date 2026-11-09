@@ -11,6 +11,7 @@ export default defineCard({
   targets: ["creature"],
   effect: {
     kind: "sequence",
+    together: true,
     effects: [
       { kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 },
       { kind: "add-counter", target: 0, counter: "lifelink", amount: 1 },

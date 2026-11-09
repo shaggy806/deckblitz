@@ -44,6 +44,7 @@ export default defineCard({
           targets: [{ kind: "permanent", filter: { type: "creature", attacking: true } }],
           effect: {
             kind: "sequence",
+            together: true,
             effects: [
               { kind: "add-counter", target: 0, counter: "+1/+1", amount: 2 },
               { kind: "add-counter", target: 0, counter: "flying", amount: 1 },

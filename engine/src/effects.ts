@@ -5544,10 +5544,6 @@ export type EffectSpec =
       readonly kind: "add-counter";
       readonly target: ObjectRef;
       readonly counter: string;
-      /** "The same kind of counters" as those whose placement fired this
-       * trigger (`LastKnownRefs.counter` — Captain Marvel, Apex Avenger), in
-       * place of `counter`, which names the kind it most often is. */
-      readonly counterOfTrigger?: true;
       /** A fixed amount, `"x"`, or a live count (Will of the Sultai: "X
        * +1/+1 counters, where X is the number of lands you control" —
        * needed-cards P16). */
@@ -5727,7 +5723,10 @@ export type EffectSpec =
        * `create-token` `separate`, so each is its own object).
        */
       readonly kind: "put-counters-of";
-      readonly of: ObjectRef;
+      /** `"trigger-placement"`: the same number and kind of counters as those
+       * whose placement fired this trigger (Captain Marvel, Apex Avenger),
+       * every kind if several went on at once. */
+      readonly of: ObjectRef | "trigger-placement";
       readonly target: ObjectRef | "created";
     }
   | {
@@ -12534,9 +12533,9 @@ export interface ResolutionContext extends EffectApi {
   /** Whether a set's member matches `filter`, read as an aggregate reads it
    * (as it is in its stint, else as it was). */
   memberMatches(member: SetMember, filter: CardFilter): boolean;
-  /** The kind of the counters whose placement fired this trigger, if it was
-   * one (`LastKnownRefs.counter`). */
-  triggerCounterKind(): string | undefined;
+  /** The counters whose placement fired this trigger, kind by kind, if it
+   * was one (`LastKnownRefs.counters`). */
+  triggerCounters(): readonly { readonly kind: string; readonly amount: number }[];
   /** How many real, independent firings this resolution stands for — see
    * `GameObject.stackMultiplier`. `1` outside a scaled resolution. Only
    * `create-token` / `create-token-copy` read it (the only effect kinds
@@ -12610,7 +12609,7 @@ export function isCountScalableEffect(effect: EffectSpec): boolean {
  * of `add-counter`s. */
 function counterRunLength(steps: readonly EffectSpec[], from: number): number {
   let end = from;
-  while (end < steps.length && steps[end].kind === "add-counter") end += 1;
+  while (end < steps.length && (steps[end].kind === "add-counter" || steps[end].kind === "add-counter-all")) end += 1;
   return end - from;
 }
 
@@ -12786,11 +12785,14 @@ function applyMoveCounters(spec: MoveCountersSpec, ctx: ResolutionContext): void
     if (from === undefined || to === undefined) return;
     if (amount === "all" || amount === "each-kind-missing") {
       const onTo = ctx.countersHere(to) ?? {};
-      for (const kind of kindsHere(ctx, from, spec.counter)) {
-        if (amount === "each-kind-missing" && (onTo[kind] ?? 0) > 0) continue;
-        const n = amount === "all" ? (ctx.countersHere(from)?.[kind] ?? 0) : 1;
-        ctx.moveCounters(from, to, kind, n);
-      }
+      // One instruction: every kind goes on as one event (rule 603.2c).
+      ctx.simultaneously(() => {
+        for (const kind of kindsHere(ctx, from, spec.counter)) {
+          if (amount === "each-kind-missing" && (onTo[kind] ?? 0) > 0) continue;
+          const n = amount === "all" ? (ctx.countersHere(from)?.[kind] ?? 0) : 1;
+          ctx.moveCounters(from, to, kind, n);
+        }
+      });
       return;
     }
     // "A counter": of the named kind, or of one its controller chooses among
@@ -17987,7 +17989,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       applyMoveCounters(spec, ctx);
       return;
     case "put-counters-of": {
-      const of = objectRefRead(spec.of, ctx);
+      const of = spec.of === "trigger-placement" ? undefined : objectRefRead(spec.of, ctx);
       const onto: readonly TargetRef[] =
         spec.target === "created"
           ? ctx
@@ -17995,15 +17997,19 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
               .filter((entry) => !entry.departed)
               .map((entry): TargetRef => ({ kind: "object", object: entry.object }))
           : [objectRefAct(spec.target, ctx)].filter((t): t is TargetRef => t !== undefined);
-      if (of === undefined) return;
+      if (of === undefined && spec.of !== "trigger-placement") return;
       // The same number of each kind it had (rule 122.8), each put as any
       // counter is — a -1/-1 among them too. Read once, before any goes on.
-      const kinds = Object.entries(ctx.counterKindsOf(of));
-      for (const target of onto) {
-        for (const [kind, n] of kinds) {
-          if (n > 0) ctx.addCounter(target, kind, n);
+      const kinds: readonly (readonly [string, number])[] =
+        of !== undefined ? Object.entries(ctx.counterKindsOf(of)) : ctx.triggerCounters().map((c) => [c.kind, c.amount] as const);
+      // One instruction: every kind goes on as one event (rule 603.2c).
+      ctx.simultaneously(() => {
+        for (const target of onto) {
+          for (const [kind, n] of kinds) {
+            if (n > 0) ctx.addCounter(target, kind, n);
+          }
         }
-      }
+      });
       return;
     }
     case "add-counter": {
@@ -18012,9 +18018,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       // "That player puts a counter on it": no such player, no counter.
       const by = spec.by === undefined ? undefined : resolvePlayerRef(spec.by, ctx);
       if (spec.by !== undefined && by === undefined) return;
-      const counter = spec.counterOfTrigger === true ? ctx.triggerCounterKind() : spec.counter;
-      if (counter === undefined) return;
-      ctx.addCounter(target, counter, amountValue(spec.amount, ctx), by, spec.training === true);
+      ctx.addCounter(target, spec.counter, amountValue(spec.amount, ctx), by, spec.training === true);
       return;
     }
     case "time-travel":

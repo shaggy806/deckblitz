@@ -28,6 +28,7 @@ export default defineCard({
       // A reach counter is a keyword counter (rule 122.1b).
       effect: {
         kind: "sequence",
+        together: true,
         effects: [
           { kind: "add-counter", target: 0, counter: "+1/+1", amount: 2 },
           { kind: "add-counter", target: 0, counter: "reach", amount: 1 },

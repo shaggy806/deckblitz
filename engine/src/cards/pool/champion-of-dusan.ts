@@ -26,6 +26,7 @@ export default defineCard({
       targets: ["creature"],
       effect: {
         kind: "sequence",
+        together: true,
         effects: [
           { kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 },
           // A keyword counter (rule 122.1b).
