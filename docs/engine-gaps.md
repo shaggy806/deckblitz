@@ -11,10 +11,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   parallel, and changing it is a design call. Rule 103.5c gives the free mulligan to multiplayer and
   Brawl; `COMMANDER_RULES` gives it at two players too. Rule 103.6b keeps a revealed opening-hand card
   revealed until the first turn begins; the engine reveals it once.
-- **An opponent-caused discard's replacement beats the graveyard ones without asking** (found
-  2026-11-01). Rule 616.1 lets the affected object's controller choose among replacement effects. With
-  Obstinate Baloth, Dodecapod or Quagnoth discarded under Leyline of the Void, `game.ts` (~43286)
-  always takes the battlefield. Almost always the choice a player would make, but not asked.
 - **Limited-duration control of a player** (found 2026-11-01). Rule 723.2: Word of Command and
   Opposition Agent control a player for less than a turn. `player-control.ts` holds a next turn or a
   next combat, not these; Word of Command is on the stale list and needs its own narrow key.
@@ -52,17 +48,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   other "that card" reference (an impulse permission on an exiled permanent, Hostage Taker's) sees
   the object's own card alone. Fix: a `choose-pile`-style order decision for the first, and read
   `leftWith` wherever an effect follows a permanent into its new zone for the second.
-- **Buyback always beats an "exile it instead" replacement.** Rule 616.1 lets the affected
-  object's owner (or controller) choose which of two replacement effects applies first; a
-  resolving spell whose buyback was paid (rule 702.27a, itself "put into its owner's hand
-  instead") under Rest in Peace, Yawgmoth's Agenda or Yawgmoth's Will's "if a card would be put
-  into your graveyard from anywhere this turn, exile that card instead" should let its owner pick
-  (Yawgmoth's Will's ruling: "You get to choose if the Buyback returns the card to your hand or
-  the card gets exiled"). `Game`'s spell-resolution finish moves a bought-back spell to the hand
-  before any graveyard replacement is asked (beside Feather's 616.1 choice, which it could
-  follow: `beginModesChoice` with the two outcomes). Blocks Yawgmoth's Will, together with its
-  turn-long graveyard-to-exile replacement (a `player-effect` the engine doesn't have yet — the
-  battlefield statics are scanned by `graveyardExileReplacements`).
 - **A resolve-time either/or between two effects.** Vhati il-Dal's "target creature's base power
   or base toughness becomes 1" chooses between two effects as it resolves (608.2d); nothing can
   say that yet (`animate`'s lone power/toughness exists since 2026-10-31).
@@ -114,29 +99,12 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   graveyard grant, the top of a library) isn't offered its blitz cost there, though rule
   702.152a allows it; `Game.dashCostOf` the same (702.109a). Henzie's discount also moves only a cost's generic number, never an `{X}`
   (no blitz cost in the pool has one yet).
-- **An optional "instead create copies" token replacement can't be asked.** Moonlit Meditation,
-  Mirrormind Crown and Esix, Fractal Bloom: "the first time you would create one or more tokens each
-  turn, you may instead create that many tokens that are copies of …". The "you may" is a player
-  choice made as the tokens would be created, but `Game.createTokens` and `createTokenCopy` return
-  the new ids to callers that use them at once (`thenCounters`, end-step removal, entering
-  attacking), across about a dozen creation paths (`effects.ts`' create-token branches, populate,
-  amass, Incubator, the predefined tokens' switch in `game.ts`). It needs a pausable token-creation
-  event, a per-player "would have created tokens this turn" flag (declining spends the turn's chance,
-  per the rulings; `createdTokenThisTurn` doesn't say that), and a call on its order beside
-  Chatterfang or Tippy-Toe (rule 616.1): `token-replacements.ts` takes whichever order makes the most
-  tokens, which an optional replacement doesn't fit. Key `replacement:token-creation-replace-with-copies`
-  (B274, 2026-11-07).
 - **Not modeled.** Banding, Companion, and text change that replaces words (612.2: Artificial Evolution, Mind Bend, Magical Hack, New Blood — a rework
   of the card format the user ruled not worth one cycle of cards, 2026-10-09; exchanging text
   boxes, 612.5, is built). Battles, dungeons and the Initiative, and snow sources paying {S}, are
   built. ROADMAP's Phase 10 deferred the rest as large or niche. None of them
   blocks ordinary Commander play. The alt-cast long tail left by Phase 6 (retrace, Warp,
   Bestow, Prototype, …) is in AUTHORING §15 and the limitation ledger.
-- **Protection's prevention always comes after a creature's own damage replacements.** Rule 616.1
-  lets the controller apply protection's prevention (rule 702.16e) before a "prevent that damage and
-  remove a +1/+1 counter" replacement, so a black source's damage to Phantom Centaur (protection
-  from black) costs no counter (its ruling); `Game`'s damage path runs `damageSteps`/`bestDamageOrder`
-  before the protection check, so the counter would be removed. Blocks Phantom Centaur (B217).
 - **Replacement order is chosen for the affected player, never asked.** Rule 616.1 has the
   affected player (or the controller of the affected object) order the replacement and
   prevention effects that apply to one event. The engine picks the order best for them, as
@@ -151,11 +119,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   beside another exiling replacement asks today. One-shot redirection shields exist
   (`prevent-damage`'s `redirectTo`, rule 614.9), but a redirection's order is chosen the same
   way — a plain prevention shield first, never asked.
-- **Two opponents' Notion Thieves aren't ordered by the drawing player.** At a table of three
-  or more, when Thieves controlled by different opponents could each take a draw, the drawing
-  player chooses which applies first (the ruling), which decides who ends up drawing;
-  `Game.drawRedirectFor` takes the opponent first in turn order. Asking needs a draw that can
-  stop mid-effect for a decision (`drawCard` is synchronous at every call site).
 - **"Each player may" with a choice inside it.** Rule 101.4: every player chooses, then it all
   happens at once. `each-player-may` holds discards and sacrifices until the last answer
   (`GameState.heldChoices`), and an effect that asks nothing more (draw, discard a hand, gain or
@@ -178,15 +141,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   two tokens of one stack (five Treasures in one stack are one target). Needs the relation checks
   to allow a repeat up to `stackCount` and a client control for picking a stack more than once.
   See `docs/plans/token-stack-choices.md`.
-- **"Enters untapped" always beats "enters tapped".** When an enters-the-battlefield replacement
-  that makes a permanent enter untapped meets one that makes it enter tapped, the engine applies
-  the untapped one last, so the permanent enters untapped (`game.ts`, where the enters
-  replacements fold — the comment there assumes the untapped effect is the entering permanent's
-  own controller's). Rule 616.1 gives the entering permanent's controller the order. Archelos,
-  Lagoon Mystic (batch 113) reaches every player's permanents, so on an opponent's permanent with
-  its own "enters tapped" the engine makes that player's choice for them — the one they'd make
-  almost always, which is why the card is authored. A choice asked of the controller would close
-  it.
 **Panglacial Wurm under Opposition Agent.** The Agent's controller makes every decision while the player searches, but in `effects.ts`,
 `case "search-library"` offers `cast-now` (`from: "while-searching"`) before `ctx.searchLibrary`, and `Game.beginSearchControl` only starts
 in `beginLibrarySearch`, so the searcher answers. Fix: begin the control before the offer and end it when the search's `choose-from-zone`
@@ -217,9 +171,6 @@ Spider tokens; Spider-Punk isn't authored. Found 2026-11-02; not reported from p
 The engine departs from the rules here, but no pool card reaches it yet: fix each when a card
 that needs it is authored.
 
-- **Overlapping damage redirections are ordered without asking.** Rule 616.1: the affected player
-  chooses; `bestDamageOrder` chooses for them. Saving Grace, in the pool, has it. Gideon's
-  Sacrifice's ruling asks for the choice (`decision:damage-redirect-order`). Found by batch 257.
 - **Smaller leads from batch 258, none traced further than the report.** A `look-and-choose` filter's
   `manaValue: { op: "eq", n: "x" }` matched nothing on Ashiok's −X, where `{ n: { amount: "x" } }` works.
   `reveal: "chosen"` does nothing for `zone: "hand"` (`game.ts` ~37677, library only), though the type
@@ -244,29 +195,10 @@ that needs it is authored.
   Apprentice is in the pool and has one: checked 2026-11-04, it makes {B}{B}{B} and the hand stays
   as it was. Blocks Bog Witch (`cost:mana-ability-discard`). Found by an authoring agent,
   2026-10-23 (B144).
-- **Umbra armor's Aura is picked, and goes after the other shields.** With several Auras with
-  umbra armor on one permanent (rule 702.89a), or a regeneration shield or a shield counter
-  beside one, the permanent's controller chooses which replacement applies (616.1, the
-  rulings); `Game.umbraArmorInstead` destroys the umbra of least mana value (the newest of
-  equals), and `Game.destroyByEffect` tries it only after the regeneration shield and the
-  shield counter — keeping the Aura's bonus, which usually matters more. Latent: no pool deck
-  stacks umbras on purpose (found 2026-10-25, building umbra armor).
-- **A regeneration shield goes before a shield counter.** Both replace "this permanent would
-  be destroyed" (rules 701.15a, 122.1c), so with both on it the permanent's controller chooses
-  which applies (616.1); `Game.destroyByEffect` always spends the regeneration shield first,
-  which ends with the turn anyway, keeping the lasting counter — the better choice unless being
-  tapped and removed from combat matters. Latent: no pool card regenerates a shielded permanent
-  on purpose (found 2026-10-19, building shield counters).
-
 **"Each player may" acts on each answer before asking the next.** Rule 101.4: players choosing
 at the same time decide in APNAP order, then the actions happen together. `each-player-may`
 (`effects.ts`, near line 9561) carries out each player's draw or token before the next decides,
 so a choice raised by one player's draw (dredge, a draw replacement) comes before a later player
 answers. The seven tempting offers (Tempt with Bunnies among them) and Kwain share the shape.
 Found 2026-11-06, building Tempt with Bunnies.
-
-**Only the first mandatory draw replacement is offered beside an optional one.** With Abundance
-and two mandatory "instead of drawing" replacements (Underrealm Lich and another), rule 616.1
-lets the player pick any of them; `Game.optionalDrawReplacementAsked` offers the first mandatory
-one in battlefield order, as the draw did before. Found 2026-11-06, building Abundance.
 

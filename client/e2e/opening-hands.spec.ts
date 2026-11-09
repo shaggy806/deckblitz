@@ -24,11 +24,11 @@ test('Serum Powder replaces the hand, and the popup asks again without it', asyn
   await expect(popup).toHaveCount(0, { timeout: 60_000 })
 })
 
-test('after eight mulligans (the first free) the hand can only be kept', async ({ page }) => {
+test('after seven mulligans the hand can only be kept (a two-player game has no free one)', async ({ page }) => {
   test.setTimeout(240_000)
   const popup = await playCheck(page, 'Mulligan: you can go no further')
   const mulligan = popup.getByRole('button', { name: 'Mulligan', exact: true })
-  for (let taken = 1; taken <= 8; taken += 1) {
+  for (let taken = 1; taken <= 7; taken += 1) {
     await mulligan.click({ timeout: 30_000 })
     await expect(popup).toContainText(`Mulligan #${taken} taken`, { timeout: 30_000 })
   }

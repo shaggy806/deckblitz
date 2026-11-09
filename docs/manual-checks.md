@@ -6214,9 +6214,9 @@ These boards start before the first turn (the builder's `openingHands`), with th
 - **Expect:** Each opponent's own mulligan goes on without holding yours up. You keep the new seven and the game begins, with the first turn yours.
 
 ### Mulligan: you can go no further than an empty hand
-- **Do:** Click Mulligan eight times.
-- **Expect:** After the eighth the popup offers Keep alone. Keep asks for seven cards for the bottom of your library, and the game starts with no hand.
-- **Not a bug:** The first mulligan is free in this game, so eight, not seven.
+- **Do:** Click Mulligan seven times.
+- **Expect:** After the seventh the popup offers Keep alone. Keep asks for seven cards for the bottom of your library, and the game starts with no hand.
+- **Not a bug:** Seven, not eight: the free first mulligan is only for games of more than two players (rule 103.5c).
 
 ### Leyline Axe: begin the game with it on the battlefield
 - **Do:** Click Keep and wait for the bot. In the "Opening hand: choose any of these to begin the game with on the battlefield" popup, click Leyline Axe, then Confirm.

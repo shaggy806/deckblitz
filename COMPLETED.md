@@ -3159,6 +3159,17 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Engine rules gaps
 
+- **Replacement order is chosen for the affected player, never asked** (2026-11-09, `8c46879a1`): The `replacement-order` decision (kind 32, rule 616.1): asked when the order changes the outcome; damage in combat and the `damage`, `damage-divided`, `damage-all`, `fight` and `destroy` effects. Open: counters (`counterTotal`), life gain, and damage the event can't wait on (pain from mana, redirected sub-events).
+- **"Enters untapped" always beats "enters tapped"** (2026-11-09, `e434c59d1`): The entering permanent's controller orders the two, by every entry through `askEnterChoice` (rule 616.1).
+- **Umbra armor's Aura is picked, and goes after the other shields** (2026-11-09, `eb62e8eb6`): What would save a permanent from destruction is its controller's choice, for destroy effects, mass destroy and lethal damage (rule 616.1).
+- **A regeneration shield goes before a shield counter** (2026-11-09, `eb62e8eb6`): The same choice as umbra armor (rule 616.1).
+- **Protection's prevention always comes after a creature's own damage replacements** (2026-11-09, `9b29bad83`): Left alone, protection goes first, and the affected player can choose (rule 616.1).
+- **Overlapping damage redirections are ordered without asking** (2026-11-09, `9b29bad83`): The affected player orders them (rule 616.1).
+- **Two opponents' Notion Thieves aren't ordered by the drawing player.** (2026-11-09, `4d426e246`): The drawing player orders them, per card; the button names who gets the card (rule 616.1).
+- **Only the first mandatory draw replacement is offered beside an optional one** (2026-11-09, `4d426e246`): Two different mandatory draw replacements now ask (rule 616.1).
+- **Buyback always beats an "exile it instead" replacement** (2026-11-09, `507e39d42`): The owner orders them (rule 616.1).
+- **An opponent-caused discard's replacement beats the graveyard ones without asking** (2026-11-09, `2751fedc7`): The discarding player orders them (rule 616.1).
+- **An optional "instead create copies" token replacement can't be asked** (2026-11-09, `no commit`, already fixed: a test now pins it): Moonlit Meditation's `instead-replacements` tests cover it.
 - **Smaller engine leads from batch 258** (2026-11-09, `7ea492d1f`): A bare X, `isSource` and `sameNameAsSource` are bound as an effect begins (rules 113.7a, 608.2h; frees `filter:same-name-as-source-last-known`); `reveal: "chosen"` from a hand; a prompt-only `each-player-may` asks; `card:find` reads nested `text`.
 - **Smaller engine leads from batch 257** (2026-11-09, `7ea492d1f`): A choose-permanents' `then` keeps its trigger and kept targets' zones; `amounts` conditions read last-known (608.2h); an impulse gate reads its holder.
 - **Toxic's last two shapes** (2026-11-09, `no commit`, already fixed: a test now pins it): `grant-toxic` and `hasToxic` exist; Skrelv and Skrelv's Hive are in the pool.

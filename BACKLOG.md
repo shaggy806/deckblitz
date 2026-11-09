@@ -595,7 +595,6 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 there and move this line to `COMPLETED.md`.
 
 - **"Each player may" acts on each answer before asking the next** (rule 101.4; the tempting offers and Kwain). (2026-11-09: tokens and counters fixed; `modal` effects and `options` are left.)
-- **Only the first mandatory draw replacement is offered beside an optional one** (rule 616.1; Abundance beside two "instead of drawing" replacements).
 - **Panglacial Wurm under Opposition Agent** (the cast-while-searching offer comes before the search control begins, so the searcher answers it).
 - **A shuffled face-down pile keeps its object ids** (Become Anonymous, Expose the Culprit: a client reading the wire can tell which face-down card is which; needs a design call).
 - **A self-replacement beside an exile: no 616.1 choice** (Gravebane Zombie's and Blightsteel's own "instead" always beat Rest in Peace or a finality counter).
@@ -603,9 +602,7 @@ there and move this line to `COMPLETED.md`.
 - **A player can't play another player's face-down exiled card blind** (rule 406.3a; blocks Urianger Augurelt, Lobelia).
 - **A token with riot is never asked** (it takes haste; blocks Spider-Punk's Spider tokens). (2026-11-09: token copies are asked; named tokens would have to go through `enterTokenCopies`. Only Spider-Punk needs it.)
 - **Mulligans are declared at once, and two opening-hand rules are loose** — rule 103.5 has turn-order declarations but `beginMulligans` asks in parallel (a design call); `COMMANDER_RULES` gives the free mulligan at two players, while 103.5c names multiplayer and Brawl; a revealed opening-hand card isn't kept revealed until the first turn (103.6b). (2026-11-09: 103.5c and 103.6b settled; only turn-order declarations are left.)
-- **An opponent-caused discard's replacement beats the graveyard ones without asking** — `Game` puts Obstinate Baloth onto the battlefield rather than asking its controller (616.1) when Leyline of the Void also applies.
 - **Limited-duration control of a player** — rule 723.2's Word of Command and Opposition Agent; `player-control.ts` holds a next turn or a next combat only.
-- **Buyback always beats an "exile it instead" replacement**: rule 616.1 gives the owner the choice; and no turn-long graveyard-to-exile `player-effect` — Yawgmoth's Will (`docs/engine-gaps.md`).
 - **A targeting restriction can't last a turn, or require a target**: `hexproofFrom`'s qualifiers are statics only; Display of Dominance's "… this turn" over permanents you control, Lurker's "unless it attacked or blocked this turn" and the Flagbearers' "must choose at least one Flagbearer" (601.2c) need more (`docs/engine-gaps.md`). (2026-11-09: only the Flagbearers' "at least one if able" over a whole target set is left, and it needs a client change.)
 - **A merged or melded permanent's cards go into a library or graveyard in an order nobody chose**: rule 730.3a and the meld ruling let the owner order them; and only a blink and the exile links find every card it became as "that card" (730.3c, `leftWith`, built 2026-10-31 with meld).
 - **A resolve-time either/or between two effects**: Vhati il-Dal's "base power or base toughness becomes 1" (`docs/engine-gaps.md`).
@@ -615,15 +612,9 @@ there and move this line to `COMPLETED.md`.
 - **`put-onto-battlefield` follows a target that changed zones during the resolution** (400.7): Celestial Gatekeeper's "exile it, then return target …" returns itself from exile (`bug:moved-target-card-still-acted-on`, batches 219 and 235). (2026-11-09: moved under another name is fixed; a target moved by a mass effect and then named by its slot is left.)
 - **Splice's limits** (702.47): only onto a spell with one plain `effect` (not modal, fused, divided or `resolve`), not with overload, at most four splice cards a cast, and a mana splice cost only. (2026-11-09: onto modal, fused and overloaded spells landed; a spliced card with targets onto a modal spell, divided and `resolve` spells, the four-card cap and 702.47b's order are left.)
 - **A source of damage: a waiting effect's object and the command zone** (609.7a) aren't offered.
-- **"Enters untapped" always beats "enters tapped"**: the entering permanent's controller should order the two (rule 616.1) — Archelos, Lagoon Mystic on an opponent's permanent.
-- **Umbra armor's Aura is picked, and goes after the other shields** (616.1): with several umbras on one creature, or a regeneration shield or shield counter beside one, its controller should choose; the engine destroys the umbra of least mana value, and only once neither shield applies.
-- **A regeneration shield goes before a shield counter** (616.1): with both, the permanent's controller should choose which replaces an effect's destroy; the engine always spends the regeneration shield.
 - **Blitz, dash, sneak, web-slinging and More Than Meets the Eye are offered only from the hand and the command zone** (702.152a, 702.109a, 702.190a, 702.188a, 702.162a).
-- **An optional "instead create copies" token replacement can't be asked** (616.1): token creation can't pause for a choice (Moonlit Meditation, Mirrormind Crown, Esix, Fractal Bloom).
 - **Not modeled**: banding, Companion, word-replacing text change (612.2).
 - **Replacement order is chosen for the affected player, never asked** (616.1): among them two opponents' Crafty Cutpurses on one token (first in turn order), and the Words cycle's next draw before a Notion Thief or a draw multiplier.
-- **Protection's prevention always comes after a creature's own damage replacements** (616.1): Phantom Centaur.
-- **Two opponents' Notion Thieves aren't ordered by the drawing player.**
 - **"Each player may" with a choice inside it** (101.4): a search is done before the next player is asked (Tempt with Discovery, Innocent Traveler).
 - **Static-effect dependency ordering** (613.8) beyond layer 4's type grants.
 - **The rest of leaving the game** (800.4g–h): a choice asked of a player who has left is skipped, not handed to another player.
@@ -633,7 +624,6 @@ there and move this line to `COMPLETED.md`.
 Latent: the engine departs from the rules here, but no pool card reaches it yet. Fix each
 when a card that needs it is authored.
 
-- **Overlapping damage redirections are ordered without asking** (616.1): `bestDamageOrder` chooses for the affected player (Saving Grace, in the pool; Gideon's Sacrifice and Ascent of the Worthy wait, `decision:damage-redirect-order`).
 - **"A Zombie … dies" is read as a Zombie creature**: rule 700.4's "dies" takes any permanent, so a noncreature Kindred permanent with that subtype is missed. The parser and the 42 pool cards agree on `type: "creature"`, so a fix changes them together.
 
 ## Bots
