@@ -1437,6 +1437,9 @@ function enterTypesEntry(types: EnterTypes | undefined): Pick<EnterOptions, "asE
  * (see `Game.entersBattlefieldReplacement`). */
 interface EnteringReplacement {
   readonly tapped: boolean;
+  /** An "enters tapped" and an "enters untapped" both reach it: what makes
+   * each (`Game.enterTapOrderAsked`). */
+  readonly tapOrder?: { readonly tapped: ObjectId | "effect"; readonly untapped: ObjectId };
   readonly transformed: boolean;
   readonly counters: readonly { readonly kind: string; readonly amount: number }[];
   readonly painIfUntapped: number;
@@ -14945,7 +14948,7 @@ export class Game {
       }
       object.enterChoice = { ...object.enterChoice, copyOf: null };
     }
-    return false;
+    return this.enterTapOrderAsked(id, chooser);
   }
 
   /**
@@ -57614,6 +57617,37 @@ controlledBy,
     return entering;
   }
 
+  /** Rule 616.1 for a permanent about to enter that an "enters tapped" and an
+   * "enters untapped" both reach (Archelos's ruling): the one applied last
+   * says how it enters, and it's its controller's to choose. Asked before it
+   * moves, with its other "as this enters" choices; says whether it asked. */
+  private enterTapOrderAsked(id: ObjectId, chooser: PlayerId): boolean {
+    const answers = `enter:${id}`;
+    if (this.state.awaiting !== null || this.state.replacementAnswers?.[answers] !== undefined) return false;
+    const { tapOrder } = withDevotionUnseen(new Set([id, ...(this.enterBatch ?? [])]), () => this.enteringReplacementOf(id, false));
+    if (tapOrder === undefined) return false;
+    const objects = this.state.objects;
+    this.state.awaiting = {
+      kind: "replacement-order",
+      player: chooser,
+      event: `${objects[id].cardName} would enter the battlefield`,
+      options: [
+        {
+          key: "tapped",
+          name: tapOrder.tapped === "effect" ? "An effect" : objects[tapOrder.tapped].cardName,
+          text: "enters tapped",
+          result: "it enters untapped",
+          ...(tapOrder.tapped === "effect" || tapOrder.tapped === id ? {} : { object: tapOrder.tapped }),
+        },
+        { key: "untapped", name: objects[tapOrder.untapped].cardName, text: "enters untapped", result: "it enters tapped", object: tapOrder.untapped },
+      ],
+      best: 0,
+      answers,
+      resume: { site: "effect" },
+    };
+    return true;
+  }
+
   private enteringReplacementOf(
     id: ObjectId,
     effectTapped: boolean,
@@ -57634,6 +57668,11 @@ controlledBy,
     // Vesuva's "enter tapped as a copy" (rule 707.9e).
     let tapped = effectTapped || copyEnter?.tapped === true;
     let untapped = false;
+    // What says so, for an "enters tapped" and "enters untapped" that compete
+    // (rule 616.1): a replacement's, not the effect's "put it onto the
+    // battlefield tapped" (Archelos's ruling). `"effect"` has no permanent.
+    let tappedBy: ObjectId | "effect" | undefined;
+    let untappedBy: ObjectId | undefined;
     let transformed = effectTransformed;
     let prepared = false;
     let painIfUntapped = 0;
@@ -57666,7 +57705,10 @@ controlledBy,
       const r = ability.replacement;
       if (r === undefined || r.event !== "enters-battlefield") continue;
       if (!this.staticActive(object, ability)) continue;
-      if (r.tapped) tapped = true;
+      if (r.tapped) {
+        tapped = true;
+        tappedBy = id;
+      }
       // What it counts is what's already there: a land entering alongside it
       // isn't yet (rule 614.12 — the check-land rulings).
       const failsCondition =
@@ -57689,6 +57731,7 @@ controlledBy,
       // Either sparing it (Temple of the Dragon Queen), or each needed.
       if (r.revealOrCondition === true ? failsCondition && failsReveal : failsCondition || failsReveal) {
         tapped = true;
+        tappedBy = id;
       }
       // A behold land (rule 701.4a — Theorist's Sanctum), the same way: what
       // was beheld as it was about to enter, or whether anything could be.
@@ -57697,6 +57740,7 @@ controlledBy,
         (reveal === undefined ? !this.canBehold(object.controller, r.tappedUnlessBehold, id) : reveal === null)
       ) {
         tapped = true;
+        tappedBy = id;
       }
       if (r.painIfUntapped !== undefined) painIfUntapped = r.painIfUntapped;
       if (r.mayPayLife !== undefined) mayPayLife = r.mayPayLife;
@@ -57808,8 +57852,14 @@ controlledBy,
         if (!matchesFilter(this.state, this.registry, id, r.filter, { you: source.controller, source: sourceId })) {
           continue;
         }
-        if (r.tapped === true) tapped = true;
-        if (r.untapped === true) untapped = true;
+        if (r.tapped === true) {
+          tapped = true;
+          tappedBy = sourceId;
+        }
+        if (r.untapped === true) {
+          untapped = true;
+          untappedBy = sourceId;
+        }
         if (r.counters !== undefined) {
           // A compacted stack of such permanents is that many replacements.
           const each = this.enteringCounterAmount(sourceId, source.controller, id, r.counters.amount);
@@ -57821,13 +57871,16 @@ controlledBy,
     // Lithoforming — rule 614.1d), from its controller's side.
     for (const effect of this.state.playerEffects ?? []) {
       if (effect.entersTapped === undefined || this.state.players[effect.owner]?.hasLost === true) continue;
-      if (matchesFilter(this.state, this.registry, id, effect.entersTapped, { you: effect.owner })) tapped = true;
+      if (matchesFilter(this.state, this.registry, id, effect.entersTapped, { you: effect.owner })) {
+        tapped = true;
+        tappedBy = "effect";
+      }
     }
-    // "Enters untapped" is applied last: the entering permanent's controller
-    // orders the replacements (rule 616.1), and it only ever reaches
-    // permanents its own controller controls. With nothing left to pay for,
-    // a shock land isn't offered its life payment.
-    if (untapped) tapped = false;
+    // Of "enters tapped" and "enters untapped", the one applied last says how
+    // it enters: the entering permanent's controller orders them (rule 616.1,
+    // `enterTapOrderAsked`), and unasked, it's "untapped" that's last. With
+    // nothing left to pay for, a shock land isn't offered its life payment.
+    if (untapped && this.state.replacementAnswers?.[`enter:${id}`]?.[0] !== "untapped") tapped = false;
     // Each kind it enters with is one placement (rule 122.6), changed once:
     // Hardened Scales adds one to the total, not to each source of it.
     const placed = counters
@@ -57835,6 +57888,7 @@ controlledBy,
       .filter((c) => c.amount > 0);
     return {
       tapped,
+      ...(tappedBy !== undefined && untappedBy !== undefined ? { tapOrder: { tapped: tappedBy, untapped: untappedBy } } : {}),
       transformed,
       counters: placed,
       painIfUntapped: tapped ? 0 : painIfUntapped,

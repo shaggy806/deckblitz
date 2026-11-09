@@ -304,7 +304,7 @@ describe("mandatory draw replacements (616.1)", () => {
     spawn(game, "Abundance");
     let offered: readonly string[] = [];
     a.chooseModesFn = (_view, _min, _max, modes) => {
-      offered = modes.map((m) => m.text);
+      offered = [...modes];
       return [offered.findIndex((t) => t.includes("gain 1 life"))];
     };
     const before = life(game);
@@ -322,13 +322,48 @@ describe("mandatory draw replacements (616.1)", () => {
     let offered = 0;
     a.chooseModesFn = (_view, _min, _max, modes) => {
       offered = modes.length;
-      return [modes.findIndex((m) => m.text.includes("gain 1 life"))];
+      return [modes.findIndex((t) => t.includes("gain 1 life"))];
     };
     const before = life(game);
     game.debugApplyEffect(A, { kind: "draw", amount: 1 });
     settle(game);
     expect(offered).toBe(2);
     expect(life(game)).toBe(before + 1);
+  });
+});
+
+describe("enters tapped against enters untapped (616.1, Archelos's ruling)", () => {
+  it("left alone, it enters untapped", () => {
+    const { game } = table();
+    spawn(game, "Archelos, Lagoon Mystic", B);
+    const gate = toHand(game, "Dimir Guildgate");
+    game.dispatch({ type: "play-land", player: A, card: gate });
+    settle(game);
+    expect(game.state.objects[gate].zone).toBe("battlefield");
+    expect(game.state.objects[gate].tapped).toBe(false);
+  });
+
+  it("its controller can apply the untapped one first, and it enters tapped", () => {
+    const { game, a } = table();
+    spawn(game, "Archelos, Lagoon Mystic", B);
+    const asked = answering(a, "Archelos, Lagoon Mystic");
+    const gate = toHand(game, "Dimir Guildgate");
+    game.dispatch({ type: "play-land", player: A, card: gate });
+    settle(game);
+    expect(asked).toHaveLength(1);
+    expect(game.state.objects[gate].zone).toBe("battlefield");
+    expect(game.state.objects[gate].tapped).toBe(true);
+  });
+
+  it("a land with no \"enters tapped\" asks nothing", () => {
+    const { game, a } = table();
+    spawn(game, "Archelos, Lagoon Mystic", B);
+    const asked = answering(a, "Archelos, Lagoon Mystic");
+    const land = toHand(game, "Swamp");
+    game.dispatch({ type: "play-land", player: A, card: land });
+    settle(game);
+    expect(asked).toHaveLength(0);
+    expect(game.state.objects[land].tapped).toBe(false);
   });
 });
 
