@@ -11189,6 +11189,14 @@ export interface EffectApi {
   defendingPlayerOf(target: TargetRef): PlayerId | undefined;
   /** The object's `zoneChangeCount` now; `undefined` once it's gone. */
   stintNow(object: ObjectId): number | undefined;
+  /** This step names `object` by something other than a target slot
+   * (`GameState.namedOffSlot`). */
+  noteNamedOffSlot(object: ObjectId): void;
+  /** `held`, what a target slot holds, for this step: nothing, if an earlier
+   * step named its object another way and that object has since changed zones
+   * (rule 400.7). A slot named first keeps following its object ("exile
+   * target creature, then return it"). */
+  slotStillMeant(held: TargetRef | undefined): TargetRef | undefined;
   /** The permanent an {@link ObjectRef} `"chosen"` names: the source's
    * chosen permanent (`GameObject.chosenPermanent`) — as the source last
    * existed, if it has left (rule 608.2h) — while that one is still on the
@@ -14789,12 +14797,14 @@ export function objectRefAct(
     return "hostOf" in ref ? ctx.hostOf(inner, true) : ctx.pairedWith(inner);
   }
   if (ref === "source") {
-    return ctx.sourceLost === true ? undefined : { kind: "object", object: ctx.source };
+    if (ctx.sourceLost === true) return undefined;
+    ctx.noteNamedOffSlot(ctx.source);
+    return { kind: "object", object: ctx.source };
   }
   if (ref === "trigger-object") {
-    return ctx.triggerObject !== undefined && ctx.triggerObjectLost !== true
-      ? { kind: "object", object: ctx.triggerObject }
-      : undefined;
+    if (ctx.triggerObject === undefined || ctx.triggerObjectLost === true) return undefined;
+    ctx.noteNamedOffSlot(ctx.triggerObject);
+    return { kind: "object", object: ctx.triggerObject };
   }
   if (ref === "attached") {
     const host = ctx.attachedHost();
@@ -14808,7 +14818,7 @@ export function objectRefAct(
     return ctx.granter !== undefined && ctx.granterLost !== true ? { kind: "object", object: ctx.granter } : undefined;
   }
   if (ref === "trigger-recipient") return ctx.triggerRecipient();
-  return ctx.targets[ref];
+  return ctx.slotStillMeant(ctx.targets[ref]);
 }
 
 /** Where a redirection's `redirectTo` sends the damage (rule 614.9), or

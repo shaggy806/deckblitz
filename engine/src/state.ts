@@ -5966,6 +5966,12 @@ export interface GameState {
    * and everything it parked have finished; absent between resolutions.
    */
   resolutionSince?: number;
+  /** The objects this resolution has named by something other than a target
+   * slot ("exile **it**"), each with its zone-change count then. A slot still
+   * holding one that has since moved no longer means it (rule 400.7), so
+   * "exile it, then return target card" doesn't return it from exile
+   * (`ResolutionContext.slotStillMeant`). */
+  namedOffSlot?: Record<ObjectId, number>;
   /**
    * The `eventSeq` the `repeat` now under way began at (each of its passes
    * moves `resolutionSince` to its own start): what a `this-way` condition's

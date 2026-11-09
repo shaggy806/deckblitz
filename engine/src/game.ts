@@ -27407,6 +27407,7 @@ export class Game {
     // what an ability puts onto the battlefield, its source's doing
     // (`EntryRecord.by`).
     this.state.resolutionSince = this.state.eventSeq;
+    delete this.state.namedOffSlot;
     const top = this.state.objects[this.state.zones.shared.stack[this.state.zones.shared.stack.length - 1]];
     if (top?.kind === "ability" && top.sourceObjectId !== undefined && top.sourceObjectId !== null) {
       this.state.resolvingSource = { source: top.sourceObjectId, timestamp: top.sourceTimestamp ?? 0 };
@@ -34321,6 +34322,21 @@ export class Game {
       stintNow: (id) => {
         const object = this.state.objects[id];
         return object === undefined ? undefined : (object.zoneChangeCount ?? 0);
+      },
+      noteNamedOffSlot: (id) => {
+        const object = this.state.objects[id];
+        if (object === undefined) return;
+        this.state.namedOffSlot ??= {};
+        this.state.namedOffSlot[id] ??= object.zoneChangeCount ?? 0;
+      },
+      slotStillMeant: (held) => {
+        if (held?.kind !== "object") return held;
+        const named = this.state.namedOffSlot?.[held.object];
+        if (named === undefined) return held;
+        if (named !== (this.state.objects[held.object]?.zoneChangeCount ?? 0)) return undefined;
+        // Named by its slot now: from here "it" follows the object.
+        delete this.state.namedOffSlot?.[held.object];
+        return held;
       },
       chosenPermanent: () => {
         // "The chosen creature" (rule 607.2d): the source's choice — as the
