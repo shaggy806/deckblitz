@@ -2158,7 +2158,8 @@
   "trigger:aura-becomes-attached-to-permanent",
   "effect:move-auras-to-chosen-permanent",
   "effect:attach-aura-to-land-chosen-by-player",
-  "effect:attach-chosen-by-other-player"
+  "effect:attach-chosen-by-other-player",
+  "effect:player-cant-gain-life-bound"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

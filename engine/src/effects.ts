@@ -1972,6 +1972,11 @@ export type PlayerScope =
    * resolution doesn't change who they are. */
   | "each-friend"
   | "each-foe"
+  /** "**If a player is dealt damage this way, they** …" (Screaming Nemesis):
+   * each player the resolution under way has dealt damage to so far, wherever
+   * the damage was aimed, in turn order. Prevented damage was never dealt
+   * (rule 615.1), so nobody for that. */
+  | "players-dealt-damage-this-way"
   /** "**Each of that player's opponents**" / "each other player", of the
    * `"trigger-controller"`: the opponents of the player who cast the spell
    * (Standstill, Heartwood Storyteller; every other player is an opponent,

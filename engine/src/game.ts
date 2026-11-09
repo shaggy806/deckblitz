@@ -203,7 +203,7 @@ import {
   playerCantLoseLife,
   playerCantSearchLibrary,
   playerCantWinGame,
-  playerLifeCantChange,
+  playerGainLifeProhibited,
   prohibitionsOnPlayer,
   reachesObject,
   whoBinds,
@@ -758,10 +758,11 @@ interface DrawEffectReplacement {
   readonly record?: ActiveReplacement;
 }
 
-/** A player event's replacement and the permanent it's on. */
+/** A player event's replacement and the permanent it's on, or a resolved
+ * effect's source and controller. */
 interface PlayerEventReplacement<R> {
   readonly r: R;
-  readonly by: GameObject;
+  readonly by: DamageReplacer;
 }
 
 /** Who's replacing a damage event: a permanent, or a resolved effect's
@@ -33737,6 +33738,13 @@ export class Game {
         const p = departed !== undefined ? departed.chosenPlayer : this.state.objects[source]?.chosenPlayer;
         return p === undefined || this.state.players[p]?.hasLost !== false ? [] : [p];
       }
+      if (who === "players-dealt-damage-this-way") {
+        const dealt = new Set<PlayerId>();
+        for (const event of this.eventsSince(since)) {
+          if (event.type === "damage-dealt" && event.target.kind === "player") dealt.add(event.target.player);
+        }
+        return this.state.turnOrder.filter((p) => dealt.has(p) && this.state.players[p]?.hasLost === false);
+      }
       if (who === "each-friend" || who === "each-foe") {
         // Every answer this resolution holds: a later `vote` ("each foe
         // chooses …") mustn't hide them, as it would in `votes()`.
@@ -45173,7 +45181,7 @@ controlledBy,
    * gain life"). Asked before an exchange, which can't happen at all then
    * (rule 701.12a). */
   private playerCantGainLife(player: PlayerId): boolean {
-    if (playerLifeCantChange(this.state, this.registry, player)) return true;
+    if (playerGainLifeProhibited(this.state, this.registry, player)) return true;
     return this.playerEventReplacements(player).some(
       ({ r }) => r.event === "would-gain-life" && r.prevent === true && r.gainsNoLifeInstead !== true,
     );
@@ -54517,10 +54525,10 @@ controlledBy,
     // Every loss comes through here: an effect's, damage's (having asked for
     // itself, for the floor beside it), a cost's, a set or exchanged total's.
     if (delta < 0 && !lossReplaced) delta = -this.lifeLossReplaced(player, -delta);
-    // "Your life total can't change" (rule 119.7): no gain either — and so
-    // nothing that would replace one applies (the Teferi's Protection
-    // rulings).
-    if (delta > 0 && playerLifeCantChange(this.state, this.registry, player)) return;
+    // "Your life total can't change" or "can't gain life" (rule 119.7): no
+    // gain either — and so nothing that would replace one applies (the
+    // Teferi's Protection and Stigma Lasher rulings).
+    if (delta > 0 && playerGainLifeProhibited(this.state, this.registry, player)) return;
     // Gaining life, changed: "…that much life plus 1 instead" (Bilbo),
     // "…twice that much life instead" (Rhox Faithmender), or not at all
     // ("your opponents can't gain life"). Rule 616.1 lets the player gaining
@@ -54590,6 +54598,7 @@ controlledBy,
       who === "you-and-opponents-who-voted-with-you" ||
       who === "each-friend" ||
       who === "each-foe" ||
+      who === "players-dealt-damage-this-way" ||
       who === "chosen-player"
     ) {
       return [];
@@ -56556,6 +56565,17 @@ controlledBy,
         if (!reaches || !this.staticActive(source, ability)) continue;
         out.push({ r, by: source });
       }
+    }
+    // A resolved spell's or ability's for a while ("if that player would gain
+    // life this turn" — Flames of the Blood Hand; rule 611.2c).
+    for (const record of this.state.activeReplacements) {
+      const r = record.replacement;
+      if (record.next === true || (r.event !== "would-mill" && r.event !== "would-gain-life" && r.event !== "would-lose-life")) continue;
+      const reaches =
+        record.onlyPlayers !== undefined
+          ? record.onlyPlayers.includes(player)
+          : r.who === "any-player" || (r.who === "you" ? player === record.owner : r.who === "opponent" && player !== record.owner);
+      if (reaches) out.push({ r, by: { id: record.source, controller: record.owner, attachedTo: null } });
     }
     return out;
   }

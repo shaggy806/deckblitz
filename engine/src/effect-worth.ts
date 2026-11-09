@@ -162,6 +162,7 @@ function playersIn(scope: PlayerScope, ctx: WorthContext): readonly PlayerId[] |
     case "you-and-opponents-who-voted-with-you":
     case "each-friend":
     case "each-foe":
+    case "players-dealt-damage-this-way":
       // Not known until the votes are in.
       return null;
     case "player-to-your-left":

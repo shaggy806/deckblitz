@@ -147,6 +147,13 @@ export type Prohibition<W = ProhibitedPlayer> =
       readonly who: W;
     }
   | {
+      /** "Can't gain life" (rule 119.7), for a resolved effect that names its
+       * player (Stigma Lasher, "for the rest of the game"). A static's "can't
+       * gain life" is still a `would-gain-life` `prevent`. */
+      readonly act: "gain-life";
+      readonly who: W;
+    }
+  | {
       /** "Your life total can't change" (rules 119.7, 119.8). */
       readonly act: "change-life";
       readonly who: W;
@@ -351,6 +358,15 @@ export function playerCantWinGame(state: GameState, registry: CardRegistry, play
 /** Whether `player`'s life total can't change (rules 119.7, 119.8). */
 export function playerLifeCantChange(state: GameState, registry: CardRegistry, player: PlayerId): boolean {
   return prohibitionsOnPlayer(state, registry, "change-life", player).length > 0;
+}
+
+/** Whether a prohibition stops `player` gaining life (rule 119.7). A life
+ * total that can't change can't go up either. */
+export function playerGainLifeProhibited(state: GameState, registry: CardRegistry, player: PlayerId): boolean {
+  return (
+    prohibitionsOnPlayer(state, registry, "gain-life", player).length > 0 ||
+    playerLifeCantChange(state, registry, player)
+  );
 }
 
 /** Whether `player` can't lose life (rule 119.8). A life total that can't
