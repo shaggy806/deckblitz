@@ -1487,6 +1487,9 @@ export interface EachPlayerMayProgress {
   readonly toAsk: readonly PlayerId[];
   /** A search, once everyone has answered: who is still to search. */
   readonly searching?: readonly PlayerId[];
+  /** An effect done for everyone at once, stopped for one player's question:
+   * who it is still to be done for. */
+  readonly doing?: readonly PlayerId[];
   /** Once everyone has answered: the follow-ups still to apply. */
   readonly results?: readonly { readonly player: PlayerId; readonly did: boolean }[];
 }
@@ -9041,8 +9044,9 @@ export type EffectSpec =
        * players other than the effect's controller, or to several of them.
        * Each player in `who` is asked in turn, from the active player (rule
        * 101.4), with a `choose-modes` decision of their own — each question
-       * waits for the answer before it, and what one player does is done
-       * before the next is asked. What they may do is `effect` (asked with
+       * waits for the answer before it, and an `effect` that asks them
+       * nothing more (a draw, a token) is done for everyone who took it
+       * once the last has answered. What they may do is `effect` (asked with
        * `prompt`: Kwain, Itinerant Meddler's "each player may draw a card",
        * Wernog's "each opponent may investigate") or one of `options`, each
        * offered only to a player who can take it (Kynaios and Tiro's "put a
@@ -12977,6 +12981,9 @@ const ASKS_NOTHING: ReadonlySet<EffectSpec["kind"]> = new Set<EffectSpec["kind"]
   "discard-hand",
   "gain-life",
   "lose-life",
+  "create-token",
+  "create-token-copy",
+  "add-counter-all",
 ]);
 
 function asksNothing(effect: EffectSpec): boolean {
@@ -13066,10 +13073,24 @@ function applyEachPlayerMay(
       }
     } else if (deferred && spec.effect !== undefined) {
       const effect = spec.effect;
-      const yes = asked.filter((player) => ctx.tookEachPlayerMay(player, since));
+      let doing = spec.progress?.doing ?? asked.filter((player) => ctx.tookEachPlayerMay(player, since));
+      let parkedHere = false;
+      // A replacement can stop to ask its player something (dredge, a `may`
+      // token replacement): the rest of them carry on after the answer.
       ctx.simultaneously(() => {
-        for (const player of yes) ctx.applyEachPlayerMayAs(player, effect);
+        while (doing.length > 0 && !parkedHere) {
+          const player = doing[0];
+          doing = doing.slice(1);
+          const before = ctx.parkedCount();
+          const waiting = ctx.decisionPending();
+          ctx.applyEachPlayerMayAs(player, effect);
+          if (!waiting && ctx.decisionPending()) {
+            park({ since, asked, toAsk: [], doing }, before);
+            parkedHere = true;
+          }
+        }
       });
+      if (parkedHere) return;
     }
   }
   if (spec.ifDid === undefined && spec.ifDidnt === undefined) return;
