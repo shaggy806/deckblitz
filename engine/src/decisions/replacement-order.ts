@@ -5,8 +5,8 @@
  * happens. The options are named by the cards making the effects.
  *
  * Raised by `Game` where the event can still wait: before a resolving effect
- * or a combat-damage step deals its damage, a draw, a spell leaving the
- * stack. The answer waits in `GameState.replacementAnswers` for the event.
+ * or a combat-damage step deals its damage, an effect puts counters or has a
+ * player gain life, a draw, a spell leaving the stack. The answer waits in `GameState.replacementAnswers` for the event.
  */
 
 import type { Action, LegalAction } from "../actions.js";

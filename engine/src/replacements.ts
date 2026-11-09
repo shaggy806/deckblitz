@@ -588,6 +588,44 @@ export interface CounterReplacementSteps {
   readonly halved: number;
 }
 
+/** One replacement on a placement of counters, for its controller to order
+ * (rule 616.1): `key` tells copies apart, `by` is the permanent making it. */
+export interface CounterStep {
+  readonly key: string;
+  readonly by: string;
+  readonly change: { readonly times?: number; readonly plus?: number; readonly half?: true };
+}
+
+/** Counters of this kind are ones a player wants the fewest of. */
+export function fewestCountersWanted(kind: string): boolean {
+  return kind === "-1/-1" || kind === "poison" || kind === "rad";
+}
+
+/** `value` counters after this replacement. */
+export function applyCounterStep(value: number, step: CounterStep): number {
+  const { times, plus, half } = step.change;
+  let out = value;
+  if (plus !== undefined) out = Math.max(0, out + plus);
+  if (times !== undefined) out *= times;
+  if (half === true) out = Math.floor(out / 2);
+  return out;
+}
+
+/** `value` counters after these, in this order; once none would be put,
+ * nothing more applies ("one or more"). */
+export function runCounterSteps(value: number, order: readonly CounterStep[]): number {
+  return order.reduce((n, step) => (n <= 0 ? 0 : applyCounterStep(n, step)), value);
+}
+
+/** `steps` as `counterTotalInBestOrder` reads them. */
+export function counterStepsTally(steps: readonly CounterStep[]): CounterReplacementSteps {
+  return {
+    multipliers: steps.flatMap((s) => (s.change.times !== undefined ? [s.change.times] : [])),
+    plus: steps.flatMap((s) => (s.change.plus !== undefined ? [s.change.plus] : [])),
+    halved: steps.filter((s) => s.change.half === true).length,
+  };
+}
+
 /**
  * How many `kind` counters a placement of `amount` comes to under `steps`. The
  * permanent's controller or the player orders them (rule 616.1), and the order
@@ -596,7 +634,7 @@ export interface CounterReplacementSteps {
  * Once none would be put, nothing more applies ("one or more").
  */
 export function counterTotalInBestOrder(kind: string, amount: number, steps: CounterReplacementSteps): number {
-  const fewest = kind === "-1/-1" || kind === "poison" || kind === "rad";
+  const fewest = fewestCountersWanted(kind);
   const { multipliers, plus, halved } = steps;
   if (halved === 0) {
     const mult = multipliers.reduce((all, m) => all * m, 1);

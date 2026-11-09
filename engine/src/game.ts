@@ -212,10 +212,10 @@ import {
 import { changesOnlyColors, changesTypes, patchModifier, type ResolvedPatch } from "./characteristics-patch.js";
 import { planTokenEvent } from "./token-replacements.js";
 import type { PlannedTokens, TokenKind, TokenReplacementInstance } from "./token-replacements.js";
-import { counterTotalInBestOrder, insteadEffect, insteadModify } from "./replacements.js";
+import { applyCounterStep, counterStepsTally, counterTotalInBestOrder, fewestCountersWanted, insteadEffect, insteadModify, runCounterSteps } from "./replacements.js";
+import type { CounterStep } from "./replacements.js";
 import type {
   CounterMultiplierReplacement,
-  CounterReplacementSteps,
   DamageMultiplierReplacement,
   DamageRedirection,
   DrawRedirectReplacement,
@@ -783,6 +783,65 @@ interface PlayerEventReplacement<R> {
   readonly by: DamageReplacer;
 }
 
+/** One replacement on a gain of life, for the player to order (rule 616.1). */
+type LifeGainStep = { readonly key: string; readonly by: DamageReplacer } & (
+  | { readonly kind: "none" }
+  | { readonly kind: "effect"; readonly effect: EffectSpec }
+  | { readonly kind: "loss" }
+  | { readonly kind: "change"; readonly plus: number; readonly times: number }
+);
+
+type LifeGainOutcome =
+  | { readonly kind: "none" }
+  | { readonly kind: "effect"; readonly step: Extract<LifeGainStep, { kind: "effect" }>; readonly amount: number }
+  | { readonly kind: "loss"; readonly amount: number }
+  | { readonly kind: "gain"; readonly amount: number };
+
+/** What comes of `amount` life under these, in this order: one that makes it
+ * something else ends it as a gain, and the rest no longer apply (614.6). */
+function runLifeGainSteps(amount: number, order: readonly LifeGainStep[]): LifeGainOutcome {
+  let value = amount;
+  for (const step of order) {
+    if (step.kind === "none") return { kind: "none" };
+    if (step.kind === "effect") return { kind: "effect", step, amount: value };
+    if (step.kind === "loss") return { kind: "loss", amount: value };
+    value = (value + step.plus) * step.times;
+  }
+  return { kind: "gain", amount: value };
+}
+
+/** The order the player would take if nobody asked: nothing happening first,
+ * then whatever else it becomes, before anything can grow it; additions
+ * before doublings, which gains the most. */
+function bestLifeOrder(steps: readonly LifeGainStep[]): readonly LifeGainStep[] {
+  const rank = (s: LifeGainStep): number =>
+    s.kind === "none" ? 0 : s.kind === "effect" ? 1 : s.kind === "loss" ? 2 : s.plus !== 0 ? 3 : 4;
+  return [...steps].sort((a, b) => rank(a) - rank(b));
+}
+
+function lifeAnswersKey(player: PlayerId, steps: readonly LifeGainStep[]): string {
+  return `life:${player}:${steps.map((s) => s.key).sort().join(",")}`;
+}
+
+function lifeOutcomeKey(outcome: LifeGainOutcome): string {
+  if (outcome.kind === "none") return "none";
+  return outcome.kind === "effect" ? `effect:${outcome.step.key}:${outcome.amount}` : `${outcome.kind}:${outcome.amount}`;
+}
+
+function lifeOutcomeWords(outcome: LifeGainOutcome): string {
+  if (outcome.kind === "none") return "you gain no life";
+  if (outcome.kind === "loss") return `you lose ${outcome.amount} life`;
+  return outcome.kind === "gain" ? `you gain ${outcome.amount} life` : `it does what it says for ${outcome.amount}`;
+}
+
+function lifeStepText(step: LifeGainStep): string {
+  if (step.kind === "none") return "you gain no life instead";
+  if (step.kind === "effect") return "replaces the gain with its effect";
+  if (step.kind === "loss") return "you lose that much life instead";
+  if (step.plus !== 0) return `that much life plus ${step.plus}`;
+  return step.times === 2 ? "twice that much life" : `${step.times} times that much life`;
+}
+
 /** Who's replacing a damage event: a permanent, or a resolved effect's
  * source and controller. */
 type DamageReplacer = Pick<GameObject, "id" | "controller" | "attachedTo" | "attachedToPlayer">;
@@ -1093,6 +1152,20 @@ function splitPrompt(split: readonly ZoneChoiceSplitCase[], most: number): strin
 
 /** The name of a question about these effects for `player`, whichever hit of
  * a simultaneous event raises it. */
+/** Where the answers for a placement of counters wait: the placements of one
+ * effect under the same replacements are one question. */
+function counterAnswersKey(player: PlayerId, kind: string, steps: readonly CounterStep[]): string {
+  return `counters:${player}:${kind}:${steps.map((s) => s.key).sort().join(",")}`;
+}
+
+/** A counter replacement's effect in a few words. */
+function counterStepText(step: CounterStep): string {
+  const { times, plus, half } = step.change;
+  if (half === true) return "half that many, rounded down";
+  if (plus !== undefined) return plus < 0 ? `that many minus ${-plus}` : `that many plus ${plus}`;
+  return times === 2 ? "twice that many" : `${times} times that many`;
+}
+
 function damageAnswersKey(player: PlayerId, steps: readonly DamageStep[]): string {
   return `damage:${player}:${steps.map((s) => s.made.key).sort().join(",")}`;
 }
@@ -46604,6 +46677,16 @@ controlledBy,
     // Zero counters is no counters (a "for each" that came to none): nothing
     // is put, nothing is announced, and no token is split off a stack for it.
     if (target.kind !== "object" || amount <= 0) return;
+    if (this.dryRunningEvents) {
+      if (
+        this.state.awaiting === null &&
+        this.state.objects[target.object]?.zone === "battlefield" &&
+        !this.countersPrevented({ object: target.object }, counter)
+      ) {
+        this.counterOrderAsked(target.object, counter, amount, by);
+      }
+      return;
+    }
     // A time counter on a suspended card (rule 702.62b — Pardic Dragon, Curse
     // of the Cabal): not a permanent, so what acts on a permanent's counters
     // doesn't apply.
@@ -55443,7 +55526,81 @@ controlledBy,
     return loss;
   }
 
+  /** The would-gain-life replacements on `player`'s gain, for them to order
+   * (rule 616.1). */
+  private lifeGainSteps(player: PlayerId): readonly LifeGainStep[] {
+    const replacements = this.playerEventReplacements(player).filter(
+      (e): e is PlayerEventReplacement<LifeGainReplacement> => e.r.event === "would-gain-life",
+    );
+    return replacements.map(({ r, by }, i) => {
+      const effect = insteadEffect(r.instead)?.effect;
+      const key = `${by.id}:${i}`;
+      if (r.prevent === true) return { key, by, kind: "none" as const };
+      if (effect !== undefined) return { key, by, kind: "effect" as const, effect };
+      if (r.becomesLoss === true) return { key, by, kind: "loss" as const };
+      const modify = insteadModify(r.instead);
+      return {
+        key,
+        by,
+        kind: "change" as const,
+        plus: modify?.plus === undefined ? 0 : this.replacementAmount(modify.plus, by),
+        times: modify?.times ?? 1,
+      };
+    });
+  }
+
+  /** The steps `player` has already chosen for this gain, in their order. */
+  private answeredLifeSteps(steps: readonly LifeGainStep[], player: PlayerId): readonly LifeGainStep[] {
+    if (this.state.replacementAnswers === undefined || steps.length < 2) return [];
+    const chosen = this.state.replacementAnswers[lifeAnswersKey(player, steps)] ?? [];
+    return chosen.flatMap((key) => steps.filter((s) => s.key === key));
+  }
+
+  /** Whether `player`'s gain of `amount` asks them first which replacement
+   * applies (rule 616.1), the order being able to change what comes of it:
+   * an effect's gain, gone through dry (`replacementOrdersAsked`). A gain
+   * that can't wait (lifelink, a cost) takes the order best for them. */
+  private lifeOrderAsked(player: PlayerId, amount: number): void {
+    const steps = this.lifeGainSteps(player);
+    if (steps.length < 2 || steps.length > 6) return;
+    const first = this.answeredLifeSteps(steps, player);
+    const rest = steps.filter((s) => !first.includes(s));
+    if (rest.length < 2) return;
+    const key = (order: readonly LifeGainStep[]): string => lifeOutcomeKey(runLifeGainSteps(amount, order));
+    if (new Set([rest, ...permutationsOf(rest)].map((order) => key([...first, ...order]))).size < 2) return;
+    const nameOf = (s: LifeGainStep): string => this.state.objects[s.by.id]?.cardName ?? "An effect";
+    const named = rest.filter(
+      (s, i) => rest.findIndex((o) => nameOf(o) === nameOf(s) && lifeStepText(o) === lifeStepText(s)) === i,
+    );
+    if (named.length < 2) return;
+    const best = bestLifeOrder(rest)[0];
+    this.state.awaiting = {
+      kind: "replacement-order",
+      player,
+      event: `You would gain ${amount} life`,
+      options: named.map((step) => ({
+        key: step.key,
+        name: nameOf(step),
+        text: lifeStepText(step),
+        result: lifeOutcomeWords(runLifeGainSteps(amount, [...first, step, ...bestLifeOrder(rest.filter((s) => s !== step))])),
+        ...(this.state.objects[step.by.id]?.zone === "battlefield" ? { object: step.by.id } : {}),
+      })),
+      best: Math.max(
+        0,
+        named.findIndex((s) => nameOf(s) === nameOf(best) && lifeStepText(s) === lifeStepText(best)),
+      ),
+      answers: lifeAnswersKey(player, steps),
+      resume: { site: "effect" },
+    };
+  }
+
   private changeLife(player: PlayerId, delta: number, lossReplaced = false): void {
+    if (this.dryRunningEvents) {
+      if (delta > 0 && this.state.awaiting === null && !playerGainLifeProhibited(this.state, this.registry, player)) {
+        this.lifeOrderAsked(player, delta);
+      }
+      return;
+    }
     // "Players can't lose life this turn" (rule 119.8): a loss, from damage
     // or an effect, doesn't happen.
     if (delta < 0 && playerCantLoseLife(this.state, this.registry, player)) return;
@@ -55457,30 +55614,26 @@ controlledBy,
     // Gaining life, changed: "…that much life plus 1 instead" (Bilbo),
     // "…twice that much life instead" (Rhox Faithmender), or not at all
     // ("your opponents can't gain life"). Rule 616.1 lets the player gaining
-    // order them, and additions before doublings is the order that gains most.
+    // order them: what they chose (`lifeOrderAsked`), and past that the best
+    // for them (`bestLifeOrder`).
     if (delta > 0) {
-      const replacements = this.playerEventReplacements(player).filter(
-        (e): e is PlayerEventReplacement<LifeGainReplacement> => e.r.event === "would-gain-life",
-      );
-      if (replacements.some(({ r }) => r.prevent === true)) return;
+      const steps = this.lifeGainSteps(player);
+      const chosen = this.answeredLifeSteps(steps, player);
+      const order = [...chosen, ...bestLifeOrder(steps.filter((s) => !chosen.includes(s)))];
+      const outcome = runLifeGainSteps(delta, order);
+      if (outcome.kind === "none") return;
       // "If you would gain life, draw that many cards instead" (Lich): the
       // gain never happens (rule 614.6).
-      const becomes = replacements.find(({ r }) => insteadEffect(r.instead) !== undefined);
-      if (becomes !== undefined) {
-        this.runReplacedBy(insteadEffect(becomes.r.instead)!.effect, becomes.by.id, becomes.by.controller, { x: delta, player });
+      if (outcome.kind === "effect") {
+        this.runReplacedBy(outcome.step.effect, outcome.step.by.id, outcome.step.by.controller, { x: outcome.amount, player });
         return;
       }
-      // "…loses that much life instead" (Tainted Remedy), before anything
-      // that would add to the gain: the order the player gaining would take.
-      if (replacements.some(({ r }) => r.becomesLoss === true)) {
-        this.changeLife(player, -delta);
+      // "…loses that much life instead" (Tainted Remedy).
+      if (outcome.kind === "loss") {
+        this.changeLife(player, -outcome.amount);
         return;
       }
-      for (const { r, by } of replacements) {
-        const plus = insteadModify(r.instead)?.plus;
-        if (plus !== undefined) delta += this.replacementAmount(plus, by);
-      }
-      for (const { r } of replacements) delta *= insteadModify(r.instead)?.times ?? 1;
+      delta = outcome.amount;
     }
     const playerState = this.state.players[player];
     playerState.life += delta;
@@ -58302,8 +58455,8 @@ controlledBy,
    * the would-add-counter replacements of its controller's permanents change
    * it: Doubling Season's "twice that many" and Hardened Scales' "that many
    * plus one" (each applies once to the placement). Its controller orders
-   * them (rule 616.1), and the order taken is the one best for them, worked
-   * out rather than asked (the user's call, 2026-10-14): additions before
+   * them (rule 616.1), asked where the event can wait (`counterOrderAsked`);
+   * past that, the order taken is the one best for them: additions before
    * doublings, the most counters — or for -1/-1 counters, which they'd want
    * fewest of, doublings first. `entering`: counters it enters with, which
    * its own replacements don't see (it isn't on the battlefield yet). `by`:
@@ -58320,40 +58473,103 @@ controlledBy,
   ): number {
     const targetObject = this.state.objects[target];
     if (targetObject === undefined || amount <= 0) return amount;
-    const steps = this.counterReplacementSteps(kind, asCost, by ?? targetObject.controller, (r, source, id) =>
-      !(entering && id === target) &&
-      !(r.other === true && id === target) &&
-      (r.whoPuts !== undefined || r.anyController === true || source.controller === targetObject.controller) &&
+    const steps = this.counterStepsOn(targetObject, kind, entering, asCost, by);
+    const chosen = this.answeredCounterSteps(steps, targetObject.controller, kind);
+    const left = counterStepsTally(steps.filter((s) => !chosen.includes(s)));
+    return counterTotalInBestOrder(kind, runCounterSteps(amount, chosen), left);
+  }
+
+  /** The replacements on this placement of counters on `target`. */
+  private counterStepsOn(
+    target: GameObject,
+    kind: string,
+    entering: boolean,
+    asCost: boolean,
+    by: PlayerId | undefined,
+  ): readonly CounterStep[] {
+    return this.counterReplacementStepList(kind, asCost, by ?? target.controller, (r, source, id) =>
+      !(entering && id === target.id) &&
+      !(r.other === true && id === target.id) &&
+      (r.whoPuts !== undefined || r.anyController === true || source.controller === target.controller) &&
       (r.filter === undefined ||
-        matchesFilter(this.state, this.registry, target, r.filter, { you: source.controller, source: id })),
+        matchesFilter(this.state, this.registry, target.id, r.filter, { you: source.controller, source: id })),
     );
-    return counterTotalInBestOrder(kind, amount, steps);
+  }
+
+  /** The steps a player has already chosen for this placement, in their order. */
+  private answeredCounterSteps(steps: readonly CounterStep[], player: PlayerId, kind: string): readonly CounterStep[] {
+    if (this.state.replacementAnswers === undefined || steps.length < 2) return [];
+    const chosen = this.state.replacementAnswers[counterAnswersKey(player, kind, steps)] ?? [];
+    return chosen.flatMap((key) => steps.filter((s) => s.key === key));
+  }
+
+  /** Whether putting these counters first asks their permanent's controller
+   * which replacement applies first (rule 616.1), the order being able to
+   * change how many are put: an effect's placement, gone through dry
+   * (`replacementOrdersAsked`). As one enters or for a cost nothing can wait,
+   * so there the best order is taken. Answered, it's asked again while the
+   * rest can still differ (616.1f). */
+  private counterOrderAsked(id: ObjectId, kind: string, amount: number, by: PlayerId | undefined): void {
+    const object = this.state.objects[id];
+    const steps = this.counterStepsOn(object, kind, false, false, by);
+    if (steps.length < 2 || steps.length > 6) return;
+    const first = this.answeredCounterSteps(steps, object.controller, kind);
+    const rest = steps.filter((s) => !first.includes(s));
+    if (rest.length < 2) return;
+    const start = runCounterSteps(amount, first);
+    if (new Set([rest, ...permutationsOf(rest)].map((order) => runCounterSteps(start, order))).size < 2) return;
+    const nameOf = (s: CounterStep): string => this.state.objects[s.by]?.cardName ?? "An effect";
+    const named = rest.filter(
+      (s, i) => rest.findIndex((o) => nameOf(o) === nameOf(s) && counterStepText(o) === counterStepText(s)) === i,
+    );
+    if (named.length < 2) return;
+    const totals = named.map((step) => {
+      const left = counterStepsTally(rest.filter((s) => s !== step));
+      return counterTotalInBestOrder(kind, applyCounterStep(start, step), left);
+    });
+    const best = (fewestCountersWanted(kind) ? Math.min : Math.max)(...totals);
+    const plural = (n: number): string => `${n} ${kind} counter${n === 1 ? "" : "s"}`;
+    this.state.awaiting = {
+      kind: "replacement-order",
+      player: object.controller,
+      event: `${plural(amount)} would be put on ${object.cardName}`,
+      options: named.map((step, i) => ({
+        key: step.key,
+        name: nameOf(step),
+        text: counterStepText(step),
+        result: `${plural(totals[i])} are put`,
+        ...(this.state.objects[step.by]?.zone === "battlefield" ? { object: step.by } : {}),
+      })),
+      best: totals.indexOf(best),
+      answers: counterAnswersKey(object.controller, kind, steps),
+      resume: { site: "effect" },
+    };
   }
 
   /** {@link counterTotal} for counters put on a player — only "… or player"
    * replacements reach them. The player orders them (rule 616.1). */
   private playerCounterTotal(player: PlayerId, kind: string, amount: number, by: PlayerId): number {
     if (amount <= 0) return amount;
-    const steps = this.counterReplacementSteps(kind, false, by, (r, source) =>
+    const steps = this.counterReplacementStepList(kind, false, by, (r, source) =>
       r.onPlayers === "any" || (r.onPlayers === "you" && source.controller === player),
     );
-    return counterTotalInBestOrder(kind, amount, steps);
+    return counterTotalInBestOrder(kind, amount, counterStepsTally(steps));
   }
 
   /** Every `would-add-counter` on the battlefield that reaches this placement
    * of `kind`, put by `by`: `reaches` is the part about what they go on. */
-  private counterReplacementSteps(
+  private counterReplacementStepList(
     kind: string,
     asCost: boolean,
     by: PlayerId,
     reaches: (replacement: CounterMultiplierReplacement, source: GameObject, id: ObjectId) => boolean,
-  ): CounterReplacementSteps {
-    const multipliers: number[] = [];
-    const plus: number[] = [];
-    let halved = 0;
+  ): readonly CounterStep[] {
+    const steps: CounterStep[] = [];
     for (const id of this.state.zones.shared.battlefield) {
       const object = this.state.objects[id];
-      for (const ability of this.registry.get(rulesTextName(object)).static) {
+      const statics = this.registry.get(rulesTextName(object)).static;
+      for (let index = 0; index < statics.length; index += 1) {
+        const ability = statics[index];
         const r = ability.replacement;
         if (
           r?.event === "would-add-counter" &&
@@ -58367,14 +58583,20 @@ controlledBy,
           // A token stack of them is that many replacements.
           for (let i = 0; i < (object.stackCount ?? 1); i += 1) {
             const change = r.instead.modify;
-            if (change.times !== undefined) multipliers.push(change.times);
-            if (change.plus !== undefined) plus.push(this.replacementAmount(change.plus, object));
-            if (change.half !== undefined) halved += 1;
+            steps.push({
+              key: `${id}:${index}:${i}`,
+              by: id,
+              change: {
+                ...(change.times !== undefined ? { times: change.times } : {}),
+                ...(change.plus !== undefined ? { plus: this.replacementAmount(change.plus, object) } : {}),
+                ...(change.half !== undefined ? { half: true as const } : {}),
+              },
+            });
           }
         }
       }
     }
-    return { multipliers, plus, halved };
+    return steps;
   }
 
   /** Whether a battlefield permanent replaces "put `cardId` into a graveyard"

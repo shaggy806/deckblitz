@@ -16348,6 +16348,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       }
       return;
     case "gain-life": {
+      if (asksReplacementOrder(spec, ctx)) return;
       const gained = amountValue(spec.amount, ctx);
       if (spec.toControllerOfTarget !== undefined) {
         const of = ctx.targets[spec.toControllerOfTarget];
@@ -17788,6 +17789,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.renown(amountValue(spec.amount, ctx));
       return;
     case "add-counter-all": {
+      if (spec.andSuspended !== true && asksReplacementOrder(spec, ctx)) return;
       const scopeTo =
         spec.controlledByPlayer !== undefined
           ? resolvePlayerRef(spec.controlledByPlayer, ctx)
@@ -18210,6 +18212,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "add-counter": {
+      if (asksReplacementOrder(spec, ctx)) return;
       const target = objectRefAct(spec.target, ctx);
       if (target === undefined) return;
       // "That player puts a counter on it": no such player, no counter.
@@ -18826,6 +18829,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       });
       return;
     case "counters-divided":
+      if (asksReplacementOrder(spec, ctx)) return;
       ctx.simultaneously(() => {
         ctx.division.forEach((amount, i) => {
           const target = ctx.targets[spec.from + i];
