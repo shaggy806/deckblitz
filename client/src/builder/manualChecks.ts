@@ -11853,6 +11853,23 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Furnace of Rath and Heal: you choose which applies first',
+    board({
+      you: {
+        bf: ['Furnace of Rath', 'Colossal Dreadmaw', 'Mountain', 'Plains'],
+        hand: ['Heal', 'Lightning Bolt'],
+      },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    "Two opponents' Notion Thieves: you choose who draws",
+    board({
+      you: { bf: ['Island*3'], hand: ['Divination'] },
+      opp: [{ bf: ['Notion Thief'] }, { bf: ['Notion Thief'] }, { bf: [] }],
+    }),
+  ),
+  preset(
     'Herigast: any creature spell can emerge',
     board({
       you: { bf: ['Herigast, Erupting Nullkite', 'Hill Giant', 'Forest'], hand: ['Grizzly Bears'] },

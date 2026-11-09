@@ -240,6 +240,12 @@ describe("what would save a permanent from being destroyed (616.1)", () => {
   });
 });
 
+const handSizes = (game: Game): { a: number; b: number; c: number } => ({
+  a: hand(game, A).length,
+  b: hand(game, B).length,
+  c: hand(game, C).length,
+});
+
 describe("two opponents' Notion Thieves (616.1, the ruling)", () => {
   it("the drawing player chooses whose applies, card by card", () => {
     const { game, a } = table({ players: 3 });
@@ -250,22 +256,21 @@ describe("two opponents' Notion Thieves (616.1, the ruling)", () => {
       asked.push(offer);
       return offer.options.findIndex((o) => o.who === (asked.length === 1 ? C : B));
     };
+    const before = handSizes(game);
     game.debugApplyEffect(A, { kind: "draw", amount: 2 });
     settle(game);
     expect(asked).toHaveLength(2);
-    expect(hand(game, B)).toHaveLength(1);
-    expect(hand(game, C)).toHaveLength(1);
-    expect(hand(game, A)).toHaveLength(0);
+    expect(handSizes(game)).toEqual({ a: before.a, b: before.b + 1, c: before.c + 1 });
   });
 
-  it("left alone, the next opponent in turn order", () => {
+  it("left alone, the next opponent's applies first, and the draw is handed on to the last", () => {
     const { game } = table({ players: 3 });
     spawn(game, "Notion Thief", C);
     spawn(game, "Notion Thief", B);
+    const before = handSizes(game);
     game.debugApplyEffect(A, { kind: "draw", amount: 1 });
     settle(game);
-    expect(hand(game, B)).toHaveLength(1);
-    expect(hand(game, C)).toHaveLength(0);
+    expect(handSizes(game)).toEqual({ a: before.a, b: before.b, c: before.c + 1 });
   });
 
   it("one player's two Thieves ask nothing", () => {
@@ -273,10 +278,11 @@ describe("two opponents' Notion Thieves (616.1, the ruling)", () => {
     spawn(game, "Notion Thief", B);
     spawn(game, "Notion Thief", B);
     const asked = answering(a, "Notion Thief");
+    const before = handSizes(game);
     game.debugApplyEffect(A, { kind: "draw", amount: 1 });
     settle(game);
     expect(asked).toHaveLength(0);
-    expect(hand(game, B)).toHaveLength(1);
+    expect(handSizes(game).b).toBe(before.b + 1);
   });
 });
 
@@ -333,17 +339,17 @@ describe("mandatory draw replacements (616.1)", () => {
 });
 
 describe("a discard's replacement beside the graveyard's (616.1)", () => {
-  const mindRot = (game: Game, baloth: ObjectId): void => {
+  const mindRot = (game: Game, b: ScriptedController, baloth: ObjectId): void => {
+    b.chooseDiscardsFn = (cards, count) => [baloth, ...cards.map((c) => c.id).filter((id) => id !== baloth)].slice(0, count);
     lands(game, "Swamp", 3);
-    void baloth;
     cast(game, toHand(game, "Mind Rot"), { targets: [ref(B)] });
   };
 
   it("left alone, Obstinate Baloth enters", () => {
-    const { game } = table();
+    const { game, b } = table();
     spawn(game, "Leyline of the Void", A);
     const baloth = toHand(game, "Obstinate Baloth", B);
-    mindRot(game, baloth);
+    mindRot(game, b, baloth);
     expect(game.state.objects[baloth].zone).toBe("battlefield");
   });
 
@@ -352,7 +358,7 @@ describe("a discard's replacement beside the graveyard's (616.1)", () => {
     spawn(game, "Leyline of the Void", A);
     const baloth = toHand(game, "Obstinate Baloth", B);
     const asked = answering(b, "Leyline of the Void");
-    mindRot(game, baloth);
+    mindRot(game, b, baloth);
     expect(asked).toHaveLength(1);
     expect(game.state.objects[baloth].zone).toBe("exile");
   });
@@ -361,7 +367,7 @@ describe("a discard's replacement beside the graveyard's (616.1)", () => {
     const { game, b } = table();
     const baloth = toHand(game, "Obstinate Baloth", B);
     const asked = answering(b, "Leyline of the Void");
-    mindRot(game, baloth);
+    mindRot(game, b, baloth);
     expect(asked).toHaveLength(0);
     expect(game.state.objects[baloth].zone).toBe("battlefield");
   });

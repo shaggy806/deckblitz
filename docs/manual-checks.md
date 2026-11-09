@@ -28,6 +28,18 @@ test, `manual-check-presets.test.ts`, builds every board and matches them to the
 thing per test, its own board with only the cards it needs, plain words — no rule numbers or
 engine terms. A second thing to check is a second test.
 
+## Which effect applies first (2026-11-09)
+
+### Furnace of Rath and Heal: you choose which applies first
+- **Do:** Cast Heal on your Colossal Dreadmaw, then Lightning Bolt on it.
+- **Expect:** The banner says "Lightning Bolt would deal 3 damage to Colossal Dreadmaw. Which applies first?", with a button each for Furnace of Rath and Heal and how much damage each leads to. Picking Furnace of Rath puts 5 damage on the Dreadmaw; picking Heal would put 4.
+- **Not a bug:** two Furnaces of Rath together ask nothing: their order changes nothing.
+
+### Two opponents' Notion Thieves: you choose who draws
+- **Do:** Cast Divination.
+- **Expect:** Each of the two cards asks "You would draw a card. Which applies first?", with a Notion Thief button for each of Bob and Carol saying "the card goes to" that player. Whoever the button you pick names gets that card; you draw neither.
+- **Not a bug:** the Thief you pick isn't the one whose owner gets the card: the other Thief then takes the draw.
+
 ## "Instead": replacements and shields (2026-11-08)
 
 ### Moonlit Meditation: you choose the first token event of the turn

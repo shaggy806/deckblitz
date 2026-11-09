@@ -3232,8 +3232,8 @@ export interface ReplacementOrderOption {
   readonly result?: string;
   /** The permanent making it, where one is there to point at. */
   readonly object?: ObjectId;
-  /** The player it matters for, where two options differ by that (two
-   * players' Notion Thieves). */
+  /** The player `text` ends by naming, where options differ by that (two
+   * players' Notion Thieves: who ends up with the card). */
   readonly who?: PlayerId;
 }
 

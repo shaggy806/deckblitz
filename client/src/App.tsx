@@ -5507,6 +5507,7 @@ function Table({
             onClick={() => game.dispatch({ type: 'replacement-order', player: seat, option: i })}
           >
             {option.name}: {option.text}
+            {option.who === undefined ? '' : ` ${playerLabel(option.who, game.seats)}`}
             {option.result === undefined ? '' : ` (${option.result})`}
           </button>
         ))}

@@ -53206,7 +53206,10 @@ controlledBy,
     // discard's cause (Psychic Purge). Nothing is at cleanup (rule 514.1).
     const cause = this.state.decisionSource?.controller;
     if (this.costDiscardFor === null && causeProhibited(this.state, this.registry, "discard", player, cause)) return;
-    if (this.costDiscardFor === null && this.discardToLibraryReplacement(player, cause) !== null) {
+    if (
+      this.costDiscardFor === null &&
+      (this.discardToLibraryReplacement(player, cause) !== null || this.discardEntersCompeting(player, ids, cause) !== null)
+    ) {
       const source = this.state.decisionSource;
       (this.state.pendingDiscardsToLibrary ??= []).push({
         player,
@@ -53215,16 +53218,6 @@ controlledBy,
         ...(source !== null ? { source } : {}),
       });
       this.raiseNextDiscardToLibrary();
-      return;
-    }
-    if (this.costDiscardFor === null && this.discardEntersAsked(player, ids, cause)) {
-      const source = this.state.decisionSource;
-      (this.state.pendingDiscardsToLibrary ??= []).push({
-        player,
-        objects: [...ids],
-        ...(cause !== undefined ? { cause } : {}),
-        ...(source !== null ? { source } : {}),
-      });
       return;
     }
     const mad = this.moveDiscardedCards([{ objects: ids, cause }]);
@@ -57519,23 +57512,39 @@ controlledBy,
     if (this.state.awaiting !== null || this.state.replacementAnswers?.[answers] !== undefined) return false;
     const all = this.drawRedirectsFor(player, new Map());
     const byPlayer = all.filter((r, i) => all.findIndex((o) => o.to === r.to) === i);
-    if (byPlayer.length < 2) return false;
+    // What matters is who ends up with the card: the draw each Thief takes
+    // can be handed on again by the others.
+    const options = byPlayer.map((r) => ({ r, drawer: this.finalDrawerAfter(r) }));
+    if (new Set(options.map((o) => o.drawer)).size < 2) return false;
     this.state.awaiting = {
       kind: "replacement-order",
       player,
       event: "You would draw a card",
-      options: byPlayer.map((r) => ({
+      options: options.map(({ r, drawer }) => ({
         key: r.source,
         name: this.state.objects[r.source].cardName,
-        text: "its controller draws it instead",
+        text: "applied first, the card goes to",
         object: r.source,
-        who: r.to,
+        who: drawer,
       })),
       best: 0,
       answers,
       resume: { site: "draw", player },
     };
     return true;
+  }
+
+  /** Who ends up drawing once `first` has taken a draw, each other Thief
+   * applying once as `drawCard` applies them (rule 614.5). */
+  private finalDrawerAfter(first: { readonly source: ObjectId; readonly to: PlayerId }): PlayerId {
+    const applied = new Map([[first.source, 1]]);
+    let drawer = first.to;
+    for (;;) {
+      const next = this.drawRedirectsFor(drawer, applied)[0];
+      if (next === undefined) return drawer;
+      applied.set(next.source, (applied.get(next.source) ?? 0) + 1);
+      drawer = next.to;
+    }
   }
 
   /** The Thieves that could take `player`'s draw now, the opponent first in
