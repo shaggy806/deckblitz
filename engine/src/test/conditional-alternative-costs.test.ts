@@ -345,3 +345,26 @@ describe("if this spell's madness cost was paid", () => {
     expect(controller(game, wurm)).toBe(B);
   });
 });
+
+describe("of several granted alternative costs, the caster picks one (rule 118.9a)", () => {
+  it("Jodah's and Nissa's are both offered, told apart, and the one chosen is what's paid", () => {
+    const { game } = table();
+    game.state.players[A].energy = 8;
+    lands(game, "Island", 1);
+    lands(game, "Plains", 1);
+    lands(game, "Swamp", 1);
+    lands(game, "Mountain", 1);
+    lands(game, "Forest", 1);
+    spawn(game, "Jodah, Archmage Eternal", A);
+    spawn(game, "Nissa, Worldsoul Speaker", A);
+    const bears = toHand(game, "Grizzly Bears");
+    const granted = offers(game, bears).filter((o) => o.altCost === true);
+    expect(granted).toHaveLength(2);
+    expect(new Set(granted.map((o) => o.altCostText)).size).toBe(2);
+    const energy = granted.find((o) => o.altCostIndex === 1);
+    expect(energy).toBeDefined();
+    cast(game, bears, { altCost: true, altCostIndex: 1 });
+    expect(game.state.players[A].energy).toBe(0);
+    expect(zone(game, bears)).toBe("battlefield");
+  });
+});
