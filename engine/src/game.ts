@@ -22474,7 +22474,7 @@ export class Game {
         granted?.kind === "static"
           ? `static:${granted.cardName}:${granted.staticIndex}:${granted.list}:${granted.index}`
           : `activated:${abilityIndex}`;
-      key = `${sourceId}@${source.timestamp ?? 0}#${which}`;
+      key = `${sourceId}@${source.zoneChangeCount ?? 0}#${which}`;
     }
     const before = key === undefined ? [] : this.modesChosenFor(key, ever);
     const asker = this.permanentSource(sourceId);
@@ -29137,7 +29137,7 @@ export class Game {
    * the per-turn records key it — see `ResolutionContext.abilityKey`. A
    * delayed trigger is no object's ability, and has none. */
   /** `abilityTurnKey` for a trigger not yet on the stack — the same key the
-   * ability object it becomes will have (its source's timestamp is the one
+   * ability object it becomes will have (its source's stint is the one
    * `mintAbilityObject` records). */
   private pendingTriggerTurnKey(trigger: PendingTrigger): string | undefined {
     if (trigger.delayed !== undefined || trigger.reflexive !== undefined) return undefined;
@@ -29164,7 +29164,7 @@ export class Game {
       granted?.kind === "static"
         ? `static:${granted.cardName}:${granted.staticIndex}:${granted.list}:${granted.index}`
         : `${chapter ? "chapter" : "triggered"}:${same ?? abilityIndex}`;
-    return `${sourceId}@${source?.timestamp ?? 0}#${which}`;
+    return `${sourceId}@${source?.zoneChangeCount ?? 0}#${which}`;
   }
 
   private abilityTurnKey(object: GameObject): string | undefined {
@@ -29180,7 +29180,9 @@ export class Game {
       granted?.kind === "static"
         ? `static:${granted.cardName}:${granted.staticIndex}:${granted.list}:${granted.index}`
         : `${object.abilityKind}:${same ?? index}`;
-    return `${object.sourceObjectId ?? object.id}@${object.sourceTimestamp ?? 0}#${which}`;
+    // Per object, one stint in a zone (rule 400.7): not a timestamp, which an
+    // Equipment becoming attached or a permanent transforming renews (613.7e, g).
+    return `${object.sourceObjectId ?? object.id}@${object.sourceZoneChangeCount ?? 0}#${which}`;
   }
 
   /** Take one copy of the ability `id` off the stack, having resolved,

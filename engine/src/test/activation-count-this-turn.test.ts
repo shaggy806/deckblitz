@@ -8,6 +8,8 @@
  */
 import { describe, expect, it } from "vitest";
 
+import { defineCard } from "../cards/define.js";
+import { createDefaultRegistry } from "../cards/registry.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
 import { A, B, activate, life, lands, nextTurn, pt, ref, settle, spawn, table, toStep, zone } from "./harness.js";
@@ -117,6 +119,48 @@ describe("a limit read from a count (Withering Wisps)", () => {
   });
 });
 
+describe("the count belongs to the object, however its timestamp moves (400.7)", () => {
+  const equipment = defineCard({
+    name: "Gap Test Counted Equipment",
+    manaCost: "{0}",
+    types: ["artifact"],
+    subtypes: ["Equipment"],
+    text: "{0}: If this ability has been activated twice or more this turn, you gain 1 life.\nEquip {0}",
+    activated: [
+      {
+        cost: { mana: "{0}", tap: false },
+        targets: [],
+        effect: {
+          kind: "conditional",
+          condition: { kind: "activated-this-turn", atLeast: 2 },
+          then: { kind: "gain-life", amount: 1 },
+        },
+        resolve: null,
+        text: "{0}: If this ability has been activated twice or more this turn, you gain 1 life.",
+      },
+      {
+        cost: { mana: "{0}", tap: false },
+        targets: ["creature-you-control"],
+        effect: { kind: "attach", target: 0 },
+        resolve: null,
+        text: "Equip {0}",
+        sorcerySpeed: true,
+      },
+    ],
+  });
+
+  it("an Equipment becoming attached (a new timestamp, 613.7e) doesn't start it again", () => {
+    const { game } = table({ registry: createDefaultRegistry().register(equipment) });
+    const gear = spawn(game, equipment.name);
+    const bear = spawn(game, "Grizzly Bears");
+    activate(game, gear, 0);
+    expect(life(game)).toBe(20);
+    activate(game, gear, 1, { targets: [ref(bear)] });
+    activate(game, gear, 0);
+    expect(life(game)).toBe(21);
+  });
+});
+
 describe("if this ability has been activated N or more times this turn (Dragon Whelp)", () => {
   it("three activations: no sacrifice at the end step", () => {
     const { game } = table();
@@ -148,6 +192,24 @@ describe("if this ability has been activated N or more times this turn (Dragon W
     for (let i = 0; i < 4; i += 1) hold(game, whelp);
     settle(game);
     expect((game.state.delayedTriggers ?? []).length).toBe(4);
+  });
+
+  it("the count stays with the object through a change of control (602.5b, 400.7)", () => {
+    const { game } = table();
+    lands(game, "Mountain", 4);
+    lands(game, "Mountain", 1, B);
+    const whelp = spawn(game, "Dragon Whelp");
+    for (let i = 0; i < 3; i += 1) activate(game, whelp);
+    game.debugApplyEffect(B, { kind: "gain-control", target: 0, untilEndOfTurn: false }, [ref(whelp)]);
+    settle(game);
+    expect(game.state.objects[whelp].controller).toBe(B);
+    // Bob gets priority with something on the stack.
+    hold(game, spawn(game, "Dragon Whelp"));
+    game.dispatch({ type: "pass-priority", player: A });
+    expect(game.state.priority.holder).toBe(B);
+    expect((game.state.delayedTriggers ?? []).length).toBe(0);
+    activate(game, whelp, 0, { player: B });
+    expect((game.state.delayedTriggers ?? []).length).toBe(1);
   });
 
   it("the count restarts each turn", () => {
