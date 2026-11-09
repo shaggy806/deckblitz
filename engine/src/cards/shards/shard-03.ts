@@ -174,6 +174,7 @@ import _poolDementiaBat from "../pool/dementia-bat.js";
 import _poolDemonPossessedWitch from "../pool/demon-possessed-witch.js";
 import _poolDemonsHorn from "../pool/demons-horn.js";
 import _poolDenseFoliage from "../pool/dense-foliage.js";
+import _poolDermoplasm from "../pool/dermoplasm.js";
 import _poolDesertWereWorm from "../pool/desert-were-worm.js";
 import _poolDesmondMiles from "../pool/desmond-miles.js";
 import _poolDespair from "../pool/despair.js";
@@ -209,6 +210,7 @@ import _poolDwarvenWeaponsmith from "../pool/dwarven-weaponsmith.js";
 import _poolEarthbrawn from "../pool/earthbrawn.js";
 import _poolEarthshaker from "../pool/earthshaker.js";
 import _poolEdenSeatOfTheSanctum from "../pool/eden-seat-of-the-sanctum.js";
+import _poolElderBrain from "../pool/elder-brain.js";
 import _poolElementalSummoning from "../pool/elemental-summoning.js";
 import _poolEliteSkirmisher from "../pool/elite-skirmisher.js";
 import _poolEloiseNephaliaSleuth from "../pool/eloise-nephalia-sleuth.js";
@@ -456,6 +458,7 @@ import _poolMahadiEmporiumMaster from "../pool/mahadi-emporium-master.js";
 import _poolMakindiMesas from "../pool/makindi-mesas.js";
 import _poolMalevolentAwakening from "../pool/malevolent-awakening.js";
 import _poolMammothUmbra from "../pool/mammoth-umbra.js";
+import _poolManaClash from "../pool/mana-clash.js";
 import _poolMandibularKite from "../pool/mandibular-kite.js";
 import _poolMapTheFrontier from "../pool/map-the-frontier.js";
 import _poolMarchOfWretchedSorrow from "../pool/march-of-wretched-sorrow.js";
@@ -1085,6 +1088,7 @@ const shard: CardShard = {
     _poolDemonPossessedWitch,
     _poolDemonsHorn,
     _poolDenseFoliage,
+    _poolDermoplasm,
     _poolDesertWereWorm,
     _poolDesmondMiles,
     _poolDespair,
@@ -1120,6 +1124,7 @@ const shard: CardShard = {
     _poolEarthbrawn,
     _poolEarthshaker,
     _poolEdenSeatOfTheSanctum,
+    _poolElderBrain,
     _poolElementalSummoning,
     _poolEliteSkirmisher,
     _poolEloiseNephaliaSleuth,
@@ -1367,6 +1372,7 @@ const shard: CardShard = {
     _poolMakindiMesas,
     _poolMalevolentAwakening,
     _poolMammothUmbra,
+    _poolManaClash,
     _poolMandibularKite,
     _poolMapTheFrontier,
     _poolMarchOfWretchedSorrow,

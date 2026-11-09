@@ -119,6 +119,7 @@ import _poolCallOfTheDeathDweller from "../pool/call-of-the-death-dweller.js";
 import _poolCallToArms from "../pool/call-to-arms.js";
 import _poolCallToServe from "../pool/call-to-serve.js";
 import _poolCanonizedInBlood from "../pool/canonized-in-blood.js";
+import _poolCaptainAmericaLiberator from "../pool/captain-america-liberator.js";
 import _poolCaptainOfTheMists from "../pool/captain-of-the-mists.js";
 import _poolCaptainsClaws from "../pool/captains-claws.js";
 import _poolCapturedByLagacs from "../pool/captured-by-lagacs.js";
@@ -226,6 +227,7 @@ import _poolDreamFighter from "../pool/dream-fighter.js";
 import _poolDreamwinder from "../pool/dreamwinder.js";
 import _poolDrinkerOfSorrow from "../pool/drinker-of-sorrow.js";
 import _poolDrogskolInfantry from "../pool/drogskol-infantry.js";
+import _poolDrownedJungle from "../pool/drowned-jungle.js";
 import _poolDuress from "../pool/duress.js";
 import _poolDuskLegionZealot from "../pool/dusk-legion-zealot.js";
 import _poolDuskborneSkymarcher from "../pool/duskborne-skymarcher.js";
@@ -387,6 +389,7 @@ import _poolHoneyMammoth from "../pool/honey-mammoth.js";
 import _poolHourglassOfTheLost from "../pool/hourglass-of-the-lost.js";
 import _poolHugsGrislyGuardian from "../pool/hugs-grisly-guardian.js";
 import _poolHydraTroopers from "../pool/hydra-troopers.js";
+import _poolIcewroughtSentry from "../pool/icewrought-sentry.js";
 import _poolIchneumonDruid from "../pool/ichneumon-druid.js";
 import _poolIgnobleSoldier from "../pool/ignoble-soldier.js";
 import _poolIlysianCaryatid from "../pool/ilysian-caryatid.js";
@@ -404,6 +407,7 @@ import _poolIronHillsStalwart from "../pool/iron-hills-stalwart.js";
 import _poolIronStar from "../pool/iron-star.js";
 import _poolJaceVrynsProdigy from "../pool/jace-vryns-prodigy.js";
 import _poolJacesErasure from "../pool/jaces-erasure.js";
+import _poolJacobHaukenInspector from "../pool/jacob-hauken-inspector.js";
 import _poolJakeSiskoWarCorrespondent from "../pool/jake-sisko-war-correspondent.js";
 import _poolJaradGolgariLichLord from "../pool/jarad-golgari-lich-lord.js";
 import _poolJasperaSentinel from "../pool/jaspera-sentinel.js";
@@ -499,6 +503,7 @@ import _poolMinistrantOfObligation from "../pool/ministrant-of-obligation.js";
 import _poolMiresToll from "../pool/mires-toll.js";
 import _poolMirrorEntity from "../pool/mirror-entity.js";
 import _poolMirrorMarch from "../pool/mirror-march.js";
+import _poolMirrormindCrown from "../pool/mirrormind-crown.js";
 import _poolMisguidedRage from "../pool/misguided-rage.js";
 import _poolMishrasDomination from "../pool/mishras-domination.js";
 import _poolMisthoofKirin from "../pool/misthoof-kirin.js";
@@ -603,10 +608,12 @@ import _poolProctorsGaze from "../pool/proctors-gaze.js";
 import _poolPromisingStairs from "../pool/promising-stairs.js";
 import _poolPromisingVein from "../pool/promising-vein.js";
 import _poolProudWildbonder from "../pool/proud-wildbonder.js";
+import _poolPsionicRitual from "../pool/psionic-ritual.js";
 import _poolPsychicSpear from "../pool/psychic-spear.js";
 import _poolPullFromTheDeep from "../pool/pull-from-the-deep.js";
 import _poolPulseOfTheDross from "../pool/pulse-of-the-dross.js";
 import _poolPyreHound from "../pool/pyre-hound.js";
+import _poolPyreOfTheWorldTree from "../pool/pyre-of-the-world-tree.js";
 import _poolPyroclasticHellion from "../pool/pyroclastic-hellion.js";
 import _poolPyrostaticPillar from "../pool/pyrostatic-pillar.js";
 import _poolQuickDrawDagger from "../pool/quick-draw-dagger.js";
@@ -846,6 +853,7 @@ import _poolTurbulentSteppe from "../pool/turbulent-steppe.js";
 import _poolTuyaBearclaw from "../pool/tuya-bearclaw.js";
 import _poolTymaretCallsTheDead from "../pool/tymaret-calls-the-dead.js";
 import _poolTyvarJubilantBrawler from "../pool/tyvar-jubilant-brawler.js";
+import _poolUSSEnterpriseDGalaxyClass from "../pool/u-s-s-enterprise-d-galaxy-class.js";
 import _poolUginTheSpiritDragon from "../pool/ugin-the-spirit-dragon.js";
 import _poolUginsMastery from "../pool/ugins-mastery.js";
 import _poolUmaraEntangler from "../pool/umara-entangler.js";
@@ -1061,6 +1069,7 @@ const shard: CardShard = {
     _poolCallToArms,
     _poolCallToServe,
     _poolCanonizedInBlood,
+    _poolCaptainAmericaLiberator,
     _poolCaptainOfTheMists,
     _poolCaptainsClaws,
     _poolCapturedByLagacs,
@@ -1168,6 +1177,7 @@ const shard: CardShard = {
     _poolDreamwinder,
     _poolDrinkerOfSorrow,
     _poolDrogskolInfantry,
+    _poolDrownedJungle,
     _poolDuress,
     _poolDuskLegionZealot,
     _poolDuskborneSkymarcher,
@@ -1329,6 +1339,7 @@ const shard: CardShard = {
     _poolHourglassOfTheLost,
     _poolHugsGrislyGuardian,
     _poolHydraTroopers,
+    _poolIcewroughtSentry,
     _poolIchneumonDruid,
     _poolIgnobleSoldier,
     _poolIlysianCaryatid,
@@ -1346,6 +1357,7 @@ const shard: CardShard = {
     _poolIronStar,
     _poolJaceVrynsProdigy,
     _poolJacesErasure,
+    _poolJacobHaukenInspector,
     _poolJakeSiskoWarCorrespondent,
     _poolJaradGolgariLichLord,
     _poolJasperaSentinel,
@@ -1441,6 +1453,7 @@ const shard: CardShard = {
     _poolMiresToll,
     _poolMirrorEntity,
     _poolMirrorMarch,
+    _poolMirrormindCrown,
     _poolMisguidedRage,
     _poolMishrasDomination,
     _poolMisthoofKirin,
@@ -1545,10 +1558,12 @@ const shard: CardShard = {
     _poolPromisingStairs,
     _poolPromisingVein,
     _poolProudWildbonder,
+    _poolPsionicRitual,
     _poolPsychicSpear,
     _poolPullFromTheDeep,
     _poolPulseOfTheDross,
     _poolPyreHound,
+    _poolPyreOfTheWorldTree,
     _poolPyroclasticHellion,
     _poolPyrostaticPillar,
     _poolQuickDrawDagger,
@@ -1788,6 +1803,7 @@ const shard: CardShard = {
     _poolTuyaBearclaw,
     _poolTymaretCallsTheDead,
     _poolTyvarJubilantBrawler,
+    _poolUSSEnterpriseDGalaxyClass,
     _poolUginTheSpiritDragon,
     _poolUginsMastery,
     _poolUmaraEntangler,

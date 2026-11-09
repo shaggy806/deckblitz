@@ -16,6 +16,7 @@ import _poolAetherBurst from "../pool/aether-burst.js";
 import _poolAetherSpellbomb from "../pool/aether-spellbomb.js";
 import _poolAetherWeb from "../pool/aether-web.js";
 import _poolAetherfluxReservoir from "../pool/aetherflux-reservoir.js";
+import _poolAgilityBobblehead from "../pool/agility-bobblehead.js";
 import _poolAimHigh from "../pool/aim-high.js";
 import _poolAirElemental from "../pool/air-elemental.js";
 import _poolAirshipCrash from "../pool/airship-crash.js";
@@ -198,6 +199,7 @@ import _poolDeathRattleOni from "../pool/death-rattle-oni.js";
 import _poolDecreeOfPain from "../pool/decree-of-pain.js";
 import _poolDefensiveManeuvers from "../pool/defensive-maneuvers.js";
 import _poolDelifsCone from "../pool/delifs-cone.js";
+import _poolDennickPiousApparition from "../pool/dennick-pious-apparition.js";
 import _poolDidntSayPlease from "../pool/didnt-say-please.js";
 import _poolDinaEssenceBrewer from "../pool/dina-essence-brewer.js";
 import _poolDireMimic from "../pool/dire-mimic.js";
@@ -459,6 +461,7 @@ import _poolLegacyWeapon from "../pool/legacy-weapon.js";
 import _poolLeoninLightscribe from "../pool/leonin-lightscribe.js";
 import _poolLeoninOfTheLostPride from "../pool/leonin-of-the-lost-pride.js";
 import _poolLichenthrope from "../pool/lichenthrope.js";
+import _poolLichsMirror from "../pool/lichs-mirror.js";
 import _poolLiesaShroudOfDusk from "../pool/liesa-shroud-of-dusk.js";
 import _poolLifesmith from "../pool/lifesmith.js";
 import _poolLightOfDay from "../pool/light-of-day.js";
@@ -612,6 +615,7 @@ import _poolPowerOfPersuasion from "../pool/power-of-persuasion.js";
 import _poolPowerTaint from "../pool/power-taint.js";
 import _poolPrayerOfBinding from "../pool/prayer-of-binding.js";
 import _poolPredatorsHour from "../pool/predators-hour.js";
+import _poolPretendersClaim from "../pool/pretenders-claim.js";
 import _poolPriestOfTheHauntedEdge from "../pool/priest-of-the-haunted-edge.js";
 import _poolProdigalSorcerer from "../pool/prodigal-sorcerer.js";
 import _poolPromiseOfBunrei from "../pool/promise-of-bunrei.js";
@@ -636,6 +640,7 @@ import _poolRallyTheRighteous from "../pool/rally-the-righteous.js";
 import _poolRampagingCyclops from "../pool/rampaging-cyclops.js";
 import _poolRasputinTheOneiromancer from "../pool/rasputin-the-oneiromancer.js";
 import _poolRathiDragon from "../pool/rathi-dragon.js";
+import _poolRavagerWurm from "../pool/ravager-wurm.js";
 import _poolRavagingBlaze from "../pool/ravaging-blaze.js";
 import _poolRaveningWarg from "../pool/ravening-warg.js";
 import _poolRavenousDaggertooth from "../pool/ravenous-daggertooth.js";
@@ -796,6 +801,7 @@ import _poolStaffOfTitania from "../pool/staff-of-titania.js";
 import _poolStalwartValkyrie from "../pool/stalwart-valkyrie.js";
 import _poolStampedingElkHerd from "../pool/stampeding-elk-herd.js";
 import _poolStarlightSnare from "../pool/starlight-snare.js";
+import _poolStarscreamPowerHungry from "../pool/starscream-power-hungry.js";
 import _poolStartlingDevelopment from "../pool/startling-development.js";
 import _poolStaticSnare from "../pool/static-snare.js";
 import _poolStensiaMasquerade from "../pool/stensia-masquerade.js";
@@ -919,6 +925,7 @@ import _poolVeilOfBirds from "../pool/veil-of-birds.js";
 import _poolVengevine from "../pool/vengevine.js";
 import _poolVenomousVines from "../pool/venomous-vines.js";
 import _poolVenomousWords from "../pool/venomous-words.js";
+import _poolVenserCorpsePuppet from "../pool/venser-corpse-puppet.js";
 import _poolVerdantSuccession from "../pool/verdant-succession.js";
 import _poolVgerTheIntruder from "../pool/vger-the-intruder.js";
 import _poolViashinoSlasher from "../pool/viashino-slasher.js";
@@ -1017,6 +1024,7 @@ const shard: CardShard = {
     _poolAetherSpellbomb,
     _poolAetherWeb,
     _poolAetherfluxReservoir,
+    _poolAgilityBobblehead,
     _poolAimHigh,
     _poolAirElemental,
     _poolAirshipCrash,
@@ -1199,6 +1207,7 @@ const shard: CardShard = {
     _poolDecreeOfPain,
     _poolDefensiveManeuvers,
     _poolDelifsCone,
+    _poolDennickPiousApparition,
     _poolDidntSayPlease,
     _poolDinaEssenceBrewer,
     _poolDireMimic,
@@ -1460,6 +1469,7 @@ const shard: CardShard = {
     _poolLeoninLightscribe,
     _poolLeoninOfTheLostPride,
     _poolLichenthrope,
+    _poolLichsMirror,
     _poolLiesaShroudOfDusk,
     _poolLifesmith,
     _poolLightOfDay,
@@ -1613,6 +1623,7 @@ const shard: CardShard = {
     _poolPowerTaint,
     _poolPrayerOfBinding,
     _poolPredatorsHour,
+    _poolPretendersClaim,
     _poolPriestOfTheHauntedEdge,
     _poolProdigalSorcerer,
     _poolPromiseOfBunrei,
@@ -1637,6 +1648,7 @@ const shard: CardShard = {
     _poolRampagingCyclops,
     _poolRasputinTheOneiromancer,
     _poolRathiDragon,
+    _poolRavagerWurm,
     _poolRavagingBlaze,
     _poolRaveningWarg,
     _poolRavenousDaggertooth,
@@ -1797,6 +1809,7 @@ const shard: CardShard = {
     _poolStalwartValkyrie,
     _poolStampedingElkHerd,
     _poolStarlightSnare,
+    _poolStarscreamPowerHungry,
     _poolStartlingDevelopment,
     _poolStaticSnare,
     _poolStensiaMasquerade,
@@ -1920,6 +1933,7 @@ const shard: CardShard = {
     _poolVengevine,
     _poolVenomousVines,
     _poolVenomousWords,
+    _poolVenserCorpsePuppet,
     _poolVerdantSuccession,
     _poolVgerTheIntruder,
     _poolViashinoSlasher,

@@ -31,6 +31,7 @@ import _poolAlphaBrawl from "../pool/alpha-brawl.js";
 import _poolAltarsReap from "../pool/altars-reap.js";
 import _poolAmbitiousFarmhand from "../pool/ambitious-farmhand.js";
 import _poolAmbushWolf from "../pool/ambush-wolf.js";
+import _poolAminatouVeilPiercer from "../pool/aminatou-veil-piercer.js";
 import _poolAmugaba from "../pool/amugaba.js";
 import _poolAmuletOfVigor from "../pool/amulet-of-vigor.js";
 import _poolAnaBattlemage from "../pool/ana-battlemage.js";
@@ -244,6 +245,7 @@ import _poolElvishVatkeeper from "../pool/elvish-vatkeeper.js";
 import _poolEmberethBlaze from "../pool/embereth-blaze.js";
 import _poolEmergentSequence from "../pool/emergent-sequence.js";
 import _poolEndlessSwarm from "../pool/endless-swarm.js";
+import _poolEnds from "../pool/ends.js";
 import _poolEpicProportions from "../pool/epic-proportions.js";
 import _poolEriettesWhisper from "../pool/eriettes-whisper.js";
 import _poolErrantDoomsayers from "../pool/errant-doomsayers.js";
@@ -559,6 +561,7 @@ import _poolPathfindingAxejaw from "../pool/pathfinding-axejaw.js";
 import _poolPatrollingPeacemaker from "../pool/patrolling-peacemaker.js";
 import _poolPatternMatcher from "../pool/pattern-matcher.js";
 import _poolPearlspearCourier from "../pool/pearlspear-courier.js";
+import _poolPenance from "../pool/penance.js";
 import _poolPerilousResearch from "../pool/perilous-research.js";
 import _poolPerimeterSergeant from "../pool/perimeter-sergeant.js";
 import _poolPestilence from "../pool/pestilence.js";
@@ -572,6 +575,7 @@ import _poolPitilessVizier from "../pool/pitiless-vizier.js";
 import _poolPlagueSpores from "../pool/plague-spores.js";
 import _poolPlowThroughReito from "../pool/plow-through-reito.js";
 import _poolPoisedPractitioner from "../pool/poised-practitioner.js";
+import _poolPortInspector from "../pool/port-inspector.js";
 import _poolPowerPack from "../pool/power-pack.js";
 import _poolPreordain from "../pool/preordain.js";
 import _poolPreyUpon from "../pool/prey-upon.js";
@@ -647,6 +651,7 @@ import _poolRitualOfTheReturned from "../pool/ritual-of-the-returned.js";
 import _poolRiverHeraldScout from "../pool/river-herald-scout.js";
 import _poolRiverHeraldsBoon from "../pool/river-heralds-boon.js";
 import _poolRiverMerfolk from "../pool/river-merfolk.js";
+import _poolRiverOfTears from "../pool/river-of-tears.js";
 import _poolRiverwheelAerialists from "../pool/riverwheel-aerialists.js";
 import _poolRmsTitanic from "../pool/rms-titanic.js";
 import _poolRoad from "../pool/road.js";
@@ -1003,6 +1008,7 @@ const shard: CardShard = {
     _poolAltarsReap,
     _poolAmbitiousFarmhand,
     _poolAmbushWolf,
+    _poolAminatouVeilPiercer,
     _poolAmugaba,
     _poolAmuletOfVigor,
     _poolAnaBattlemage,
@@ -1216,6 +1222,7 @@ const shard: CardShard = {
     _poolEmberethBlaze,
     _poolEmergentSequence,
     _poolEndlessSwarm,
+    _poolEnds,
     _poolEpicProportions,
     _poolEriettesWhisper,
     _poolErrantDoomsayers,
@@ -1531,6 +1538,7 @@ const shard: CardShard = {
     _poolPatrollingPeacemaker,
     _poolPatternMatcher,
     _poolPearlspearCourier,
+    _poolPenance,
     _poolPerilousResearch,
     _poolPerimeterSergeant,
     _poolPestilence,
@@ -1544,6 +1552,7 @@ const shard: CardShard = {
     _poolPlagueSpores,
     _poolPlowThroughReito,
     _poolPoisedPractitioner,
+    _poolPortInspector,
     _poolPowerPack,
     _poolPreordain,
     _poolPreyUpon,
@@ -1619,6 +1628,7 @@ const shard: CardShard = {
     _poolRiverHeraldScout,
     _poolRiverHeraldsBoon,
     _poolRiverMerfolk,
+    _poolRiverOfTears,
     _poolRiverwheelAerialists,
     _poolRmsTitanic,
     _poolRoad,

@@ -496,6 +496,7 @@ import _poolKederektParasite from "../pool/kederekt-parasite.js";
 import _poolKeepSafe from "../pool/keep-safe.js";
 import _poolKellanTheKid from "../pool/kellan-the-kid.js";
 import _poolKhenraEternal from "../pool/khenra-eternal.js";
+import _poolKingOfTheOathbreakers from "../pool/king-of-the-oathbreakers.js";
 import _poolKioraOfSaltAndSand from "../pool/kiora-of-salt-and-sand.js";
 import _poolKioraSovereignOfTheDeep from "../pool/kiora-sovereign-of-the-deep.js";
 import _poolKitesailCleric from "../pool/kitesail-cleric.js";
@@ -1487,6 +1488,7 @@ const shard: CardShard = {
     _poolKeepSafe,
     _poolKellanTheKid,
     _poolKhenraEternal,
+    _poolKingOfTheOathbreakers,
     _poolKioraOfSaltAndSand,
     _poolKioraSovereignOfTheDeep,
     _poolKitesailCleric,

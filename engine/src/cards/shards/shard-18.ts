@@ -36,6 +36,7 @@ import _poolArdentDustspeaker from "../pool/ardent-dustspeaker.js";
 import _poolArdynTheUsurper from "../pool/ardyn-the-usurper.js";
 import _poolArgothianTreefolk from "../pool/argothian-treefolk.js";
 import _poolArrowVolleyTrap from "../pool/arrow-volley-trap.js";
+import _poolArterialAlchemy from "../pool/arterial-alchemy.js";
 import _poolAstrolabe from "../pool/astrolabe.js";
 import _poolAuntiesSentence from "../pool/aunties-sentence.js";
 import _poolAuroraGriffin from "../pool/aurora-griffin.js";
@@ -93,6 +94,7 @@ import _poolBrightcapBadger from "../pool/brightcap-badger.js";
 import _poolBrimstoneTrebuchet from "../pool/brimstone-trebuchet.js";
 import _poolBrinelinTheMoonKraken from "../pool/brinelin-the-moon-kraken.js";
 import _poolBrotherhoodRegalia from "../pool/brotherhood-regalia.js";
+import _poolBruenorBattlehammer from "../pool/bruenor-battlehammer.js";
 import _poolBubblingBeebles from "../pool/bubbling-beebles.js";
 import _poolBuccaneersBravado from "../pool/buccaneers-bravado.js";
 import _poolBurningTreeEmissary from "../pool/burning-tree-emissary.js";
@@ -207,6 +209,7 @@ import _poolDreamStrix from "../pool/dream-strix.js";
 import _poolDreamcallerSiren from "../pool/dreamcaller-siren.js";
 import _poolDrelnoch from "../pool/drelnoch.js";
 import _poolDroverGrizzly from "../pool/drover-grizzly.js";
+import _poolDrownerOfTruth from "../pool/drowner-of-truth.js";
 import _poolDuneBroodNephilim from "../pool/dune-brood-nephilim.js";
 import _poolDuplicity from "../pool/duplicity.js";
 import _poolDuskCharger from "../pool/dusk-charger.js";
@@ -359,6 +362,7 @@ import _poolHeroicDefiance from "../pool/heroic-defiance.js";
 import _poolHeroicFeast from "../pool/heroic-feast.js";
 import _poolHeronBlessedGeist from "../pool/heron-blessed-geist.js";
 import _poolHiddenHerd from "../pool/hidden-herd.js";
+import _poolHiddenRetreat from "../pool/hidden-retreat.js";
 import _poolHideOnTheCeiling from "../pool/hide-on-the-ceiling.js";
 import _poolHighStride from "../pool/high-stride.js";
 import _poolHillGiantHerdgorger from "../pool/hill-giant-herdgorger.js";
@@ -392,6 +396,7 @@ import _poolInnocentTraveler from "../pool/innocent-traveler.js";
 import _poolInsatiableGorgers from "../pool/insatiable-gorgers.js";
 import _poolInspiredInsurgent from "../pool/inspired-insurgent.js";
 import _poolInspiringCaptain from "../pool/inspiring-captain.js";
+import _poolIntermediateChirography from "../pool/intermediate-chirography.js";
 import _poolInventiveIteration from "../pool/inventive-iteration.js";
 import _poolInvigoratingSurge from "../pool/invigorating-surge.js";
 import _poolIridescentTiger from "../pool/iridescent-tiger.js";
@@ -466,6 +471,7 @@ import _poolLlanowarWastes from "../pool/llanowar-wastes.js";
 import _poolLoathsomeChimera from "../pool/loathsome-chimera.js";
 import _poolLochMare from "../pool/loch-mare.js";
 import _poolLocustSpray from "../pool/locust-spray.js";
+import _poolLokiGodOfLies from "../pool/loki-god-of-lies.js";
 import _poolLostLegacy from "../pool/lost-legacy.js";
 import _poolLostSoul from "../pool/lost-soul.js";
 import _poolLoxodonWarhammer from "../pool/loxodon-warhammer.js";
@@ -676,6 +682,7 @@ import _poolRunicShot from "../pool/runic-shot.js";
 import _poolRuthlessWaterbender from "../pool/ruthless-waterbender.js";
 import _poolSadisticGlee from "../pool/sadistic-glee.js";
 import _poolSadisticObsession from "../pool/sadistic-obsession.js";
+import _poolSaheelisLattice from "../pool/saheelis-lattice.js";
 import _poolSakikoMotherOfSummer from "../pool/sakiko-mother-of-summer.js";
 import _poolSalivatingGremlins from "../pool/salivating-gremlins.js";
 import _poolSaltMarsh from "../pool/salt-marsh.js";
@@ -979,6 +986,7 @@ import _tokensMonsterRoleToken from "../tokens/monster-role-token.js";
 import _tokensPhyrexianHorrorToken from "../tokens/phyrexian-horror-token.js";
 import _tokensPhyrexianHydraTokenReach from "../tokens/phyrexian-hydra-token-reach.js";
 import _tokensRatTokenCantBlock from "../tokens/rat-token-cant-block.js";
+import _tokensRedElementalTokenSpellFlashbackCount from "../tokens/red-elemental-token-spell-flashback-count.js";
 import _tokensSkeletonPirateToken from "../tokens/skeleton-pirate-token.js";
 import _tokensSmokeBlessingToken from "../tokens/smoke-blessing-token.js";
 import _tokensSphinxToken from "../tokens/sphinx-token.js";
@@ -1026,6 +1034,7 @@ const shard: CardShard = {
     _poolArdynTheUsurper,
     _poolArgothianTreefolk,
     _poolArrowVolleyTrap,
+    _poolArterialAlchemy,
     _poolAstrolabe,
     _poolAuntiesSentence,
     _poolAuroraGriffin,
@@ -1083,6 +1092,7 @@ const shard: CardShard = {
     _poolBrimstoneTrebuchet,
     _poolBrinelinTheMoonKraken,
     _poolBrotherhoodRegalia,
+    _poolBruenorBattlehammer,
     _poolBubblingBeebles,
     _poolBuccaneersBravado,
     _poolBurningTreeEmissary,
@@ -1197,6 +1207,7 @@ const shard: CardShard = {
     _poolDreamcallerSiren,
     _poolDrelnoch,
     _poolDroverGrizzly,
+    _poolDrownerOfTruth,
     _poolDuneBroodNephilim,
     _poolDuplicity,
     _poolDuskCharger,
@@ -1349,6 +1360,7 @@ const shard: CardShard = {
     _poolHeroicFeast,
     _poolHeronBlessedGeist,
     _poolHiddenHerd,
+    _poolHiddenRetreat,
     _poolHideOnTheCeiling,
     _poolHighStride,
     _poolHillGiantHerdgorger,
@@ -1382,6 +1394,7 @@ const shard: CardShard = {
     _poolInsatiableGorgers,
     _poolInspiredInsurgent,
     _poolInspiringCaptain,
+    _poolIntermediateChirography,
     _poolInventiveIteration,
     _poolInvigoratingSurge,
     _poolIridescentTiger,
@@ -1456,6 +1469,7 @@ const shard: CardShard = {
     _poolLoathsomeChimera,
     _poolLochMare,
     _poolLocustSpray,
+    _poolLokiGodOfLies,
     _poolLostLegacy,
     _poolLostSoul,
     _poolLoxodonWarhammer,
@@ -1666,6 +1680,7 @@ const shard: CardShard = {
     _poolRuthlessWaterbender,
     _poolSadisticGlee,
     _poolSadisticObsession,
+    _poolSaheelisLattice,
     _poolSakikoMotherOfSummer,
     _poolSalivatingGremlins,
     _poolSaltMarsh,
@@ -1971,6 +1986,7 @@ const shard: CardShard = {
     _tokensPhyrexianHorrorToken,
     _tokensPhyrexianHydraTokenReach,
     _tokensRatTokenCantBlock,
+    _tokensRedElementalTokenSpellFlashbackCount,
     _tokensSkeletonPirateToken,
     _tokensSmokeBlessingToken,
     _tokensSphinxToken,

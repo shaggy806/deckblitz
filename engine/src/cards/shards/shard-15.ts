@@ -588,6 +588,7 @@ import _poolPearlOfWisdom from "../pool/pearl-of-wisdom.js";
 import _poolPersonalSanctuary from "../pool/personal-sanctuary.js";
 import _poolPetraSphinx from "../pool/petra-sphinx.js";
 import _poolPetrifyingMeddler from "../pool/petrifying-meddler.js";
+import _poolPhyrexianDevourer from "../pool/phyrexian-devourer.js";
 import _poolPhyrexianScriptures from "../pool/phyrexian-scriptures.js";
 import _poolPhyrexianScuta from "../pool/phyrexian-scuta.js";
 import _poolPiercingExhale from "../pool/piercing-exhale.js";
@@ -693,6 +694,7 @@ import _poolSealOfCleansing from "../pool/seal-of-cleansing.js";
 import _poolSealOfPrimordium from "../pool/seal-of-primordium.js";
 import _poolSeasideHaven from "../pool/seaside-haven.js";
 import _poolSeedbornMuse from "../pool/seedborn-muse.js";
+import _poolSeizeTheStorm from "../pool/seize-the-storm.js";
 import _poolSelflessSpirit from "../pool/selfless-spirit.js";
 import _poolSentryBot from "../pool/sentry-bot.js";
 import _poolSepticRats from "../pool/septic-rats.js";
@@ -730,6 +732,7 @@ import _poolSolidGround from "../pool/solid-ground.js";
 import _poolSoltariFootSoldier from "../pool/soltari-foot-soldier.js";
 import _poolSoulGuideLantern from "../pool/soul-guide-lantern.js";
 import _poolSoulWarden from "../pool/soul-warden.js";
+import _poolSoullessOne from "../pool/soulless-one.js";
 import _poolSparasAdjudicators from "../pool/sparas-adjudicators.js";
 import _poolSpartanVeteran from "../pool/spartan-veteran.js";
 import _poolSpawnwrithe from "../pool/spawnwrithe.js";
@@ -1526,6 +1529,7 @@ const shard: CardShard = {
     _poolPersonalSanctuary,
     _poolPetraSphinx,
     _poolPetrifyingMeddler,
+    _poolPhyrexianDevourer,
     _poolPhyrexianScriptures,
     _poolPhyrexianScuta,
     _poolPiercingExhale,
@@ -1631,6 +1635,7 @@ const shard: CardShard = {
     _poolSealOfPrimordium,
     _poolSeasideHaven,
     _poolSeedbornMuse,
+    _poolSeizeTheStorm,
     _poolSelflessSpirit,
     _poolSentryBot,
     _poolSepticRats,
@@ -1668,6 +1673,7 @@ const shard: CardShard = {
     _poolSoltariFootSoldier,
     _poolSoulGuideLantern,
     _poolSoulWarden,
+    _poolSoullessOne,
     _poolSparasAdjudicators,
     _poolSpartanVeteran,
     _poolSpawnwrithe,

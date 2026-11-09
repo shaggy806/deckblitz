@@ -693,7 +693,9 @@ import _poolRipSpawnHunter from "../pool/rip-spawn-hunter.js";
 import _poolRiseToTheChallenge from "../pool/rise-to-the-challenge.js";
 import _poolRitualOfRejuvenation from "../pool/ritual-of-rejuvenation.js";
 import _poolRiverKaijin from "../pool/river-kaijin.js";
+import _poolRiveteersAscendancy from "../pool/riveteers-ascendancy.js";
 import _poolRoadsGoEverEverOn from "../pool/roads-go-ever-ever-on.js";
+import _poolRockJockey from "../pool/rock-jockey.js";
 import _poolRockcasterPlatoon from "../pool/rockcaster-platoon.js";
 import _poolRofellossGift from "../pool/rofelloss-gift.js";
 import _poolRollingEarthquake from "../pool/rolling-earthquake.js";
@@ -903,6 +905,7 @@ import _poolTwistedRiddlekeeper from "../pool/twisted-riddlekeeper.js";
 import _poolTwoHeadedHunter from "../pool/two-headed-hunter.js";
 import _poolType03BorgVessel from "../pool/type-03-borg-vessel.js";
 import _poolTyroxSauridTyrant from "../pool/tyrox-saurid-tyrant.js";
+import _poolUbaMask from "../pool/uba-mask.js";
 import _poolUltimateAlliance from "../pool/ultimate-alliance.js";
 import _poolUndeadWarchief from "../pool/undead-warchief.js";
 import _poolUndergroundMortuary from "../pool/underground-mortuary.js";
@@ -1698,7 +1701,9 @@ const shard: CardShard = {
     _poolRiseToTheChallenge,
     _poolRitualOfRejuvenation,
     _poolRiverKaijin,
+    _poolRiveteersAscendancy,
     _poolRoadsGoEverEverOn,
+    _poolRockJockey,
     _poolRockcasterPlatoon,
     _poolRofellossGift,
     _poolRollingEarthquake,
@@ -1908,6 +1913,7 @@ const shard: CardShard = {
     _poolTwoHeadedHunter,
     _poolType03BorgVessel,
     _poolTyroxSauridTyrant,
+    _poolUbaMask,
     _poolUltimateAlliance,
     _poolUndeadWarchief,
     _poolUndergroundMortuary,

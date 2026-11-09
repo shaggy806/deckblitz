@@ -412,6 +412,7 @@ import _poolHeartwoodStoryteller from "../pool/heartwood-storyteller.js";
 import _poolHedronArchive from "../pool/hedron-archive.js";
 import _poolHeirToTheNight from "../pool/heir-to-the-night.js";
 import _poolHelicarrierStrike from "../pool/helicarrier-strike.js";
+import _poolHeliosOne from "../pool/helios-one.js";
 import _poolHellholeFlailer from "../pool/hellhole-flailer.js";
 import _poolHellkiteCharger from "../pool/hellkite-charger.js";
 import _poolHellkiteTyrant from "../pool/hellkite-tyrant.js";
@@ -1000,6 +1001,7 @@ import _poolWearyPrisoner from "../pool/weary-prisoner.js";
 import _poolWeatherseedFaeries from "../pool/weatherseed-faeries.js";
 import _poolWeddingCrasher from "../pool/wedding-crasher.js";
 import _poolWickTheWhorledMind from "../pool/wick-the-whorled-mind.js";
+import _poolWildPair from "../pool/wild-pair.js";
 import _poolWillieLumpkinPostman from "../pool/willie-lumpkin-postman.js";
 import _poolWindsOfRebuke from "../pool/winds-of-rebuke.js";
 import _poolWingrattleScarecrow from "../pool/wingrattle-scarecrow.js";
@@ -1022,6 +1024,7 @@ import _poolYavimayaSapherd from "../pool/yavimaya-sapherd.js";
 import _poolYusriFortunesFlame from "../pool/yusri-fortunes-flame.js";
 import _poolZebraUnicorn from "../pool/zebra-unicorn.js";
 import _poolZedruuTheGreathearted from "../pool/zedruu-the-greathearted.js";
+import _poolZeframCochraneWarpPioneer from "../pool/zefram-cochrane-warp-pioneer.js";
 import _poolZimonesHypothesis from "../pool/zimones-hypothesis.js";
 import _poolZulaportChainmage from "../pool/zulaport-chainmage.js";
 import _poolZurTheEnchanter from "../pool/zur-the-enchanter.js";
@@ -1466,6 +1469,7 @@ const shard: CardShard = {
     _poolHedronArchive,
     _poolHeirToTheNight,
     _poolHelicarrierStrike,
+    _poolHeliosOne,
     _poolHellholeFlailer,
     _poolHellkiteCharger,
     _poolHellkiteTyrant,
@@ -2054,6 +2058,7 @@ const shard: CardShard = {
     _poolWeatherseedFaeries,
     _poolWeddingCrasher,
     _poolWickTheWhorledMind,
+    _poolWildPair,
     _poolWillieLumpkinPostman,
     _poolWindsOfRebuke,
     _poolWingrattleScarecrow,
@@ -2076,6 +2081,7 @@ const shard: CardShard = {
     _poolYusriFortunesFlame,
     _poolZebraUnicorn,
     _poolZedruuTheGreathearted,
+    _poolZeframCochraneWarpPioneer,
     _poolZimonesHypothesis,
     _poolZulaportChainmage,
     _poolZurTheEnchanter,

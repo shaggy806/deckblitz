@@ -22,6 +22,7 @@ import _poolAlexisCloak from "../pool/alexis-cloak.js";
 import _poolAmmitEternal from "../pool/ammit-eternal.js";
 import _poolAngelicCaptain from "../pool/angelic-captain.js";
 import _poolAngelicWall from "../pool/angelic-wall.js";
+import _poolAnimateArtifact from "../pool/animate-artifact.js";
 import _poolAnsweredPrayers from "../pool/answered-prayers.js";
 import _poolApexAltisaur from "../pool/apex-altisaur.js";
 import _poolApexWitchstalker from "../pool/apex-witchstalker.js";
@@ -240,6 +241,7 @@ import _poolDreadSlag from "../pool/dread-slag.js";
 import _poolDreadWarlock from "../pool/dread-warlock.js";
 import _poolDreamChisel from "../pool/dream-chisel.js";
 import _poolDrogskolReinforcements from "../pool/drogskol-reinforcements.js";
+import _poolDropOfHoney from "../pool/drop-of-honey.js";
 import _poolDrownyardTemple from "../pool/drownyard-temple.js";
 import _poolDualNature from "../pool/dual-nature.js";
 import _poolDuneBeetle from "../pool/dune-beetle.js";
@@ -470,6 +472,7 @@ import _poolKessigRecluse from "../pool/kessig-recluse.js";
 import _poolKherKeep from "../pool/kher-keep.js";
 import _poolKiliTheResourceful from "../pool/kili-the-resourceful.js";
 import _poolKillianDecisiveMentor from "../pool/killian-decisive-mentor.js";
+import _poolKindredSummons from "../pool/kindred-summons.js";
 import _poolKingOfThePride from "../pool/king-of-the-pride.js";
 import _poolKinsbaileBalloonist from "../pool/kinsbaile-balloonist.js";
 import _poolKirtarsWrath from "../pool/kirtars-wrath.js";
@@ -484,6 +487,7 @@ import _poolKozileksTranslator from "../pool/kozileks-translator.js";
 import _poolKraulSwarm from "../pool/kraul-swarm.js";
 import _poolKrenkosCommand from "../pool/krenkos-command.js";
 import _poolKrrikSonOfYawgmoth from "../pool/krrik-son-of-yawgmoth.js";
+import _poolKudzu from "../pool/kudzu.js";
 import _poolKytheonsTactics from "../pool/kytheons-tactics.js";
 import _poolLambholtRavager from "../pool/lambholt-ravager.js";
 import _poolLandrovalHorizonWitness from "../pool/landroval-horizon-witness.js";
@@ -778,6 +782,7 @@ import _poolSmileAtDeath from "../pool/smile-at-death.js";
 import _poolSmogsteedRider from "../pool/smogsteed-rider.js";
 import _poolSnowCoveredIsland from "../pool/snow-covered-island.js";
 import _poolSoldierOfTheGreyHost from "../pool/soldier-of-the-grey-host.js";
+import _poolSolitaryConfinement from "../pool/solitary-confinement.js";
 import _poolSomberwaldBeastmaster from "../pool/somberwald-beastmaster.js";
 import _poolSomberwaldStag from "../pool/somberwald-stag.js";
 import _poolSongOfTotentanz from "../pool/song-of-totentanz.js";
@@ -906,6 +911,7 @@ import _poolUncagedFury from "../pool/uncaged-fury.js";
 import _poolUncheckedGrowth from "../pool/unchecked-growth.js";
 import _poolUndercityScavenger from "../pool/undercity-scavenger.js";
 import _poolUnderwaterTunnel from "../pool/underwater-tunnel.js";
+import _poolUnderworldCerberus from "../pool/underworld-cerberus.js";
 import _poolUnmask from "../pool/unmask.js";
 import _poolUnscrupulousContractor from "../pool/unscrupulous-contractor.js";
 import _poolUntamedKavu from "../pool/untamed-kavu.js";
@@ -987,6 +993,7 @@ import _poolZombieOgre from "../pool/zombie-ogre.js";
 import _poolZuberiGoldenFeather from "../pool/zuberi-golden-feather.js";
 import _tokens22RedDwarfToken from "../tokens/2-2-red-dwarf-token.js";
 import _tokensBeastToken55 from "../tokens/beast-token-5-5.js";
+import _tokensBirdSoldierToken44Flying from "../tokens/bird-soldier-token-4-4-flying.js";
 import _tokensElementalToken33BlueRedFlying from "../tokens/elemental-token-3-3-blue-red-flying.js";
 import _tokensGnomeToken from "../tokens/gnome-token.js";
 import _tokensGolemToken from "../tokens/golem-token.js";
@@ -1020,6 +1027,7 @@ const shard: CardShard = {
     _poolAmmitEternal,
     _poolAngelicCaptain,
     _poolAngelicWall,
+    _poolAnimateArtifact,
     _poolAnsweredPrayers,
     _poolApexAltisaur,
     _poolApexWitchstalker,
@@ -1238,6 +1246,7 @@ const shard: CardShard = {
     _poolDreadWarlock,
     _poolDreamChisel,
     _poolDrogskolReinforcements,
+    _poolDropOfHoney,
     _poolDrownyardTemple,
     _poolDualNature,
     _poolDuneBeetle,
@@ -1468,6 +1477,7 @@ const shard: CardShard = {
     _poolKherKeep,
     _poolKiliTheResourceful,
     _poolKillianDecisiveMentor,
+    _poolKindredSummons,
     _poolKingOfThePride,
     _poolKinsbaileBalloonist,
     _poolKirtarsWrath,
@@ -1482,6 +1492,7 @@ const shard: CardShard = {
     _poolKraulSwarm,
     _poolKrenkosCommand,
     _poolKrrikSonOfYawgmoth,
+    _poolKudzu,
     _poolKytheonsTactics,
     _poolLambholtRavager,
     _poolLandrovalHorizonWitness,
@@ -1776,6 +1787,7 @@ const shard: CardShard = {
     _poolSmogsteedRider,
     _poolSnowCoveredIsland,
     _poolSoldierOfTheGreyHost,
+    _poolSolitaryConfinement,
     _poolSomberwaldBeastmaster,
     _poolSomberwaldStag,
     _poolSongOfTotentanz,
@@ -1904,6 +1916,7 @@ const shard: CardShard = {
     _poolUncheckedGrowth,
     _poolUndercityScavenger,
     _poolUnderwaterTunnel,
+    _poolUnderworldCerberus,
     _poolUnmask,
     _poolUnscrupulousContractor,
     _poolUntamedKavu,
@@ -1987,6 +2000,7 @@ const shard: CardShard = {
   tokens: [
     _tokens22RedDwarfToken,
     _tokensBeastToken55,
+    _tokensBirdSoldierToken44Flying,
     _tokensElementalToken33BlueRedFlying,
     _tokensGnomeToken,
     _tokensGolemToken,

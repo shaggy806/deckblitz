@@ -53,6 +53,7 @@ import _poolArdentRecruit from "../pool/ardent-recruit.js";
 import _poolArzakon from "../pool/arzakon.js";
 import _poolAscendantAcolyte from "../pool/ascendant-acolyte.js";
 import _poolAshayaSoulOfTheWild from "../pool/ashaya-soul-of-the-wild.js";
+import _poolAshenGhoul from "../pool/ashen-ghoul.js";
 import _poolAshioksSkulker from "../pool/ashioks-skulker.js";
 import _poolAshlingTheExtinguisher from "../pool/ashling-the-extinguisher.js";
 import _poolAstralCornucopia from "../pool/astral-cornucopia.js";
@@ -290,6 +291,7 @@ import _poolFetchQuest from "../pool/fetch-quest.js";
 import _poolFiddleheadKami from "../pool/fiddlehead-kami.js";
 import _poolFieryConclusion from "../pool/fiery-conclusion.js";
 import _poolFireNationAttacks from "../pool/fire-nation-attacks.js";
+import _poolFiresOfInvention from "../pool/fires-of-invention.js";
 import _poolFixWhatsBroken from "../pool/fix-whats-broken.js";
 import _poolFlameSpirit from "../pool/flame-spirit.js";
 import _poolFlamespeakersWill from "../pool/flamespeakers-will.js";
@@ -928,6 +930,7 @@ import _poolWeldfastWingsmith from "../pool/weldfast-wingsmith.js";
 import _poolWhaleboneGlider from "../pool/whalebone-glider.js";
 import _poolWheelAndDeal from "../pool/wheel-and-deal.js";
 import _poolWheelOfFate from "../pool/wheel-of-fate.js";
+import _poolWhipVine from "../pool/whip-vine.js";
 import _poolWhiptailMoloch from "../pool/whiptail-moloch.js";
 import _poolWhirlerVirtuoso from "../pool/whirler-virtuoso.js";
 import _poolWildColos from "../pool/wild-colos.js";
@@ -1042,6 +1045,7 @@ const shard: CardShard = {
     _poolArzakon,
     _poolAscendantAcolyte,
     _poolAshayaSoulOfTheWild,
+    _poolAshenGhoul,
     _poolAshioksSkulker,
     _poolAshlingTheExtinguisher,
     _poolAstralCornucopia,
@@ -1279,6 +1283,7 @@ const shard: CardShard = {
     _poolFiddleheadKami,
     _poolFieryConclusion,
     _poolFireNationAttacks,
+    _poolFiresOfInvention,
     _poolFixWhatsBroken,
     _poolFlameSpirit,
     _poolFlamespeakersWill,
@@ -1917,6 +1922,7 @@ const shard: CardShard = {
     _poolWhaleboneGlider,
     _poolWheelAndDeal,
     _poolWheelOfFate,
+    _poolWhipVine,
     _poolWhiptailMoloch,
     _poolWhirlerVirtuoso,
     _poolWildColos,

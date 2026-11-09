@@ -360,6 +360,7 @@ import _poolHaloScarab from "../pool/halo-scarab.js";
 import _poolHaphazardBombardment from "../pool/haphazard-bombardment.js";
 import _poolHarmonicConvergence from "../pool/harmonic-convergence.js";
 import _poolHarvestWurm from "../pool/harvest-wurm.js";
+import _poolHaukensInsight from "../pool/haukens-insight.js";
 import _poolHauntedAngel from "../pool/haunted-angel.js";
 import _poolHavocJester from "../pool/havoc-jester.js";
 import _poolHawkeyeClintBarton from "../pool/hawkeye-clint-barton.js";
@@ -409,6 +410,7 @@ import _poolIncandescentAria from "../pool/incandescent-aria.js";
 import _poolIncitedRabble from "../pool/incited-rabble.js";
 import _poolIncurableOgre from "../pool/incurable-ogre.js";
 import _poolInfernalCaptor from "../pool/infernal-captor.js";
+import _poolInsultInjury from "../pool/insult-injury.js";
 import _poolIntegrityIntervention from "../pool/integrity-intervention.js";
 import _poolInvasionOfNewCapenna from "../pool/invasion-of-new-capenna.js";
 import _poolInvasionOfNewPhyrexia from "../pool/invasion-of-new-phyrexia.js";
@@ -583,6 +585,7 @@ import _poolObNixilisReignited from "../pool/ob-nixilis-reignited.js";
 import _poolOblivionRing from "../pool/oblivion-ring.js";
 import _poolObscuraCharm from "../pool/obscura-charm.js";
 import _poolOchranAssassin from "../pool/ochran-assassin.js";
+import _poolOdds from "../pool/odds.js";
 import _poolOhranFrostfang from "../pool/ohran-frostfang.js";
 import _poolOhranViper from "../pool/ohran-viper.js";
 import _poolOlorinsSearingLight from "../pool/olorins-searing-light.js";
@@ -595,6 +598,7 @@ import _poolOrneryGoblin from "../pool/ornery-goblin.js";
 import _poolOutCold from "../pool/out-cold.js";
 import _poolOvergrownFarmland from "../pool/overgrown-farmland.js";
 import _poolOxidize from "../pool/oxidize.js";
+import _poolPactWeapon from "../pool/pact-weapon.js";
 import _poolPadeemConsulOfInnovation from "../pool/padeem-consul-of-innovation.js";
 import _poolPainfulQuandary from "../pool/painful-quandary.js";
 import _poolPalisadeGiant from "../pool/palisade-giant.js";
@@ -808,6 +812,7 @@ import _poolStensiaUprising from "../pool/stensia-uprising.js";
 import _poolStitchersGraft from "../pool/stitchers-graft.js";
 import _poolStonewoodInvocation from "../pool/stonewood-invocation.js";
 import _poolStoneworkPackbeast from "../pool/stonework-packbeast.js";
+import _poolStormElemental from "../pool/storm-elemental.js";
 import _poolStormHerd from "../pool/storm-herd.js";
 import _poolStormbloodBerserker from "../pool/stormblood-berserker.js";
 import _poolStormchaserChimera from "../pool/stormchaser-chimera.js";
@@ -1362,6 +1367,7 @@ const shard: CardShard = {
     _poolHaphazardBombardment,
     _poolHarmonicConvergence,
     _poolHarvestWurm,
+    _poolHaukensInsight,
     _poolHauntedAngel,
     _poolHavocJester,
     _poolHawkeyeClintBarton,
@@ -1411,6 +1417,7 @@ const shard: CardShard = {
     _poolIncitedRabble,
     _poolIncurableOgre,
     _poolInfernalCaptor,
+    _poolInsultInjury,
     _poolIntegrityIntervention,
     _poolInvasionOfNewCapenna,
     _poolInvasionOfNewPhyrexia,
@@ -1585,6 +1592,7 @@ const shard: CardShard = {
     _poolOblivionRing,
     _poolObscuraCharm,
     _poolOchranAssassin,
+    _poolOdds,
     _poolOhranFrostfang,
     _poolOhranViper,
     _poolOlorinsSearingLight,
@@ -1597,6 +1605,7 @@ const shard: CardShard = {
     _poolOutCold,
     _poolOvergrownFarmland,
     _poolOxidize,
+    _poolPactWeapon,
     _poolPadeemConsulOfInnovation,
     _poolPainfulQuandary,
     _poolPalisadeGiant,
@@ -1810,6 +1819,7 @@ const shard: CardShard = {
     _poolStitchersGraft,
     _poolStonewoodInvocation,
     _poolStoneworkPackbeast,
+    _poolStormElemental,
     _poolStormHerd,
     _poolStormbloodBerserker,
     _poolStormchaserChimera,

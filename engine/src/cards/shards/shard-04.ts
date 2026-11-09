@@ -33,6 +33,7 @@ import _poolAshnodsHarvester from "../pool/ashnods-harvester.js";
 import _poolAssassinsBlade from "../pool/assassins-blade.js";
 import _poolAstarionsThirst from "../pool/astarions-thirst.js";
 import _poolAtarkaMonument from "../pool/atarka-monument.js";
+import _poolAtarkasCommand from "../pool/atarkas-command.js";
 import _poolAthreosShroudVeiled from "../pool/athreos-shroud-veiled.js";
 import _poolAtraxaGrandUnifier from "../pool/atraxa-grand-unifier.js";
 import _poolAtraxasSkitterfang from "../pool/atraxas-skitterfang.js";
@@ -143,6 +144,7 @@ import _poolCubwarden from "../pool/cubwarden.js";
 import _poolCulberAndStametsStarCrossed from "../pool/culber-and-stamets-star-crossed.js";
 import _poolCultistOfTheAbsolute from "../pool/cultist-of-the-absolute.js";
 import _poolCurseOfShallowGraves from "../pool/curse-of-shallow-graves.js";
+import _poolCurseOfVengeance from "../pool/curse-of-vengeance.js";
 import _poolCurseOfVitality from "../pool/curse-of-vitality.js";
 import _poolCursedCourtier from "../pool/cursed-courtier.js";
 import _poolCustodiPeacekeeper from "../pool/custodi-peacekeeper.js";
@@ -211,6 +213,7 @@ import _poolEarthRumble from "../pool/earth-rumble.js";
 import _poolEasternPaladin from "../pool/eastern-paladin.js";
 import _poolEbonyRhino from "../pool/ebony-rhino.js";
 import _poolEidolonOfAstralWinds from "../pool/eidolon-of-astral-winds.js";
+import _poolElbrusTheBindingBlade from "../pool/elbrus-the-binding-blade.js";
 import _poolElderfangDisciple from "../pool/elderfang-disciple.js";
 import _poolElderfangRitualist from "../pool/elderfang-ritualist.js";
 import _poolElderscaleWurm from "../pool/elderscale-wurm.js";
@@ -459,6 +462,7 @@ import _poolLifeMatrix from "../pool/life-matrix.js";
 import _poolLightFromWithin from "../pool/light-from-within.js";
 import _poolLightningElemental from "../pool/lightning-elemental.js";
 import _poolLimDulsHex from "../pool/lim-duls-hex.js";
+import _poolLinessaZephyrMage from "../pool/linessa-zephyr-mage.js";
 import _poolLingeringDeath from "../pool/lingering-death.js";
 import _poolLivingPhone from "../pool/living-phone.js";
 import _poolLoafingGiant from "../pool/loafing-giant.js";
@@ -916,6 +920,7 @@ import _poolWarden from "../pool/warden.js";
 import _poolWarehouseThief from "../pool/warehouse-thief.js";
 import _poolWarmth from "../pool/warmth.js";
 import _poolWarpedDevotion from "../pool/warped-devotion.js";
+import _poolWarpedSpace from "../pool/warped-space.js";
 import _poolWarsToll from "../pool/wars-toll.js";
 import _poolWarshipFlightCrew from "../pool/warship-flight-crew.js";
 import _poolWasteManagement from "../pool/waste-management.js";
@@ -1010,6 +1015,7 @@ const shard: CardShard = {
     _poolAssassinsBlade,
     _poolAstarionsThirst,
     _poolAtarkaMonument,
+    _poolAtarkasCommand,
     _poolAthreosShroudVeiled,
     _poolAtraxaGrandUnifier,
     _poolAtraxasSkitterfang,
@@ -1120,6 +1126,7 @@ const shard: CardShard = {
     _poolCulberAndStametsStarCrossed,
     _poolCultistOfTheAbsolute,
     _poolCurseOfShallowGraves,
+    _poolCurseOfVengeance,
     _poolCurseOfVitality,
     _poolCursedCourtier,
     _poolCustodiPeacekeeper,
@@ -1188,6 +1195,7 @@ const shard: CardShard = {
     _poolEasternPaladin,
     _poolEbonyRhino,
     _poolEidolonOfAstralWinds,
+    _poolElbrusTheBindingBlade,
     _poolElderfangDisciple,
     _poolElderfangRitualist,
     _poolElderscaleWurm,
@@ -1436,6 +1444,7 @@ const shard: CardShard = {
     _poolLightFromWithin,
     _poolLightningElemental,
     _poolLimDulsHex,
+    _poolLinessaZephyrMage,
     _poolLingeringDeath,
     _poolLivingPhone,
     _poolLoafingGiant,
@@ -1893,6 +1902,7 @@ const shard: CardShard = {
     _poolWarehouseThief,
     _poolWarmth,
     _poolWarpedDevotion,
+    _poolWarpedSpace,
     _poolWarsToll,
     _poolWarshipFlightCrew,
     _poolWasteManagement,

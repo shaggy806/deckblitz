@@ -74,6 +74,7 @@ import _poolBlessedReversal from "../pool/blessed-reversal.js";
 import _poolBlightedBat from "../pool/blighted-bat.js";
 import _poolBlindingAngel from "../pool/blinding-angel.js";
 import _poolBlisterBeetle from "../pool/blister-beetle.js";
+import _poolBloodClock from "../pool/blood-clock.js";
 import _poolBloodHound from "../pool/blood-hound.js";
 import _poolBloodcrusherOfKhorne from "../pool/bloodcrusher-of-khorne.js";
 import _poolBloodswornSquire from "../pool/bloodsworn-squire.js";
@@ -141,6 +142,7 @@ import _poolCoralBarrier from "../pool/coral-barrier.js";
 import _poolCoriMountainMonastery from "../pool/cori-mountain-monastery.js";
 import _poolCourtOfEmbereth from "../pool/court-of-embereth.js";
 import _poolCravenKnight from "../pool/craven-knight.js";
+import _poolCriticalHit from "../pool/critical-hit.js";
 import _poolCrookOfCondemnation from "../pool/crook-of-condemnation.js";
 import _poolCrumblingVestige from "../pool/crumbling-vestige.js";
 import _poolCrushingVines from "../pool/crushing-vines.js";
@@ -402,6 +404,7 @@ import _poolInfirmaryHealer from "../pool/infirmary-healer.js";
 import _poolInfuseWithVitality from "../pool/infuse-with-vitality.js";
 import _poolIngeniousArtillerist from "../pool/ingenious-artillerist.js";
 import _poolInnerChamberGuard from "../pool/inner-chamber-guard.js";
+import _poolInscriptionOfAbundance from "../pool/inscription-of-abundance.js";
 import _poolInspiredFire from "../pool/inspired-fire.js";
 import _poolInstillInfection from "../pool/instill-infection.js";
 import _poolInterdict from "../pool/interdict.js";
@@ -476,6 +479,7 @@ import _poolManorGate from "../pool/manor-gate.js";
 import _poolMantisEngine from "../pool/mantis-engine.js";
 import _poolMartyrsBond from "../pool/martyrs-bond.js";
 import _poolMasterWarcraft from "../pool/master-warcraft.js";
+import _poolMastercraftRaptor from "../pool/mastercraft-raptor.js";
 import _poolMatsuTribeBirdstalker from "../pool/matsu-tribe-birdstalker.js";
 import _poolMechanAssembler from "../pool/mechan-assembler.js";
 import _poolMedicineRunner from "../pool/medicine-runner.js";
@@ -831,6 +835,7 @@ import _poolThalakosSeer from "../pool/thalakos-seer.js";
 import _poolThaliasLieutenant from "../pool/thalias-lieutenant.js";
 import _poolTheArchimandrite from "../pool/the-archimandrite.js";
 import _poolTheBlackstaffOfWaterdeep from "../pool/the-blackstaff-of-waterdeep.js";
+import _poolTheEaglesAreComing from "../pool/the-eagles-are-coming.js";
 import _poolTheFirstSliver from "../pool/the-first-sliver.js";
 import _poolTheMasterOfKeys from "../pool/the-master-of-keys.js";
 import _poolTheNiptonLottery from "../pool/the-nipton-lottery.js";
@@ -1060,6 +1065,7 @@ const shard: CardShard = {
     _poolBlightedBat,
     _poolBlindingAngel,
     _poolBlisterBeetle,
+    _poolBloodClock,
     _poolBloodHound,
     _poolBloodcrusherOfKhorne,
     _poolBloodswornSquire,
@@ -1127,6 +1133,7 @@ const shard: CardShard = {
     _poolCoriMountainMonastery,
     _poolCourtOfEmbereth,
     _poolCravenKnight,
+    _poolCriticalHit,
     _poolCrookOfCondemnation,
     _poolCrumblingVestige,
     _poolCrushingVines,
@@ -1388,6 +1395,7 @@ const shard: CardShard = {
     _poolInfuseWithVitality,
     _poolIngeniousArtillerist,
     _poolInnerChamberGuard,
+    _poolInscriptionOfAbundance,
     _poolInspiredFire,
     _poolInstillInfection,
     _poolInterdict,
@@ -1462,6 +1470,7 @@ const shard: CardShard = {
     _poolMantisEngine,
     _poolMartyrsBond,
     _poolMasterWarcraft,
+    _poolMastercraftRaptor,
     _poolMatsuTribeBirdstalker,
     _poolMechanAssembler,
     _poolMedicineRunner,
@@ -1817,6 +1826,7 @@ const shard: CardShard = {
     _poolThaliasLieutenant,
     _poolTheArchimandrite,
     _poolTheBlackstaffOfWaterdeep,
+    _poolTheEaglesAreComing,
     _poolTheFirstSliver,
     _poolTheMasterOfKeys,
     _poolTheNiptonLottery,

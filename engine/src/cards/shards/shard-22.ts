@@ -903,10 +903,12 @@ import _poolTurbulentSprings from "../pool/turbulent-springs.js";
 import _poolTurnTheTables from "../pool/turn-the-tables.js";
 import _poolTwoHeadedCerberus from "../pool/two-headed-cerberus.js";
 import _poolTwoHeadedDragon from "../pool/two-headed-dragon.js";
+import _poolTwoHeadedGiant from "../pool/two-headed-giant.js";
 import _poolTyphoon from "../pool/typhoon.js";
 import _poolTyrantsMachine from "../pool/tyrants-machine.js";
 import _poolUlamogTheDefiler from "../pool/ulamog-the-defiler.js";
 import _poolUltimaOriginOfOblivion from "../pool/ultima-origin-of-oblivion.js";
+import _poolUmbilicus from "../pool/umbilicus.js";
 import _poolUnburden from "../pool/unburden.js";
 import _poolUncannySpeed from "../pool/uncanny-speed.js";
 import _poolUncontrollableAnger from "../pool/uncontrollable-anger.js";
@@ -1923,10 +1925,12 @@ const shard: CardShard = {
     _poolTurnTheTables,
     _poolTwoHeadedCerberus,
     _poolTwoHeadedDragon,
+    _poolTwoHeadedGiant,
     _poolTyphoon,
     _poolTyrantsMachine,
     _poolUlamogTheDefiler,
     _poolUltimaOriginOfOblivion,
+    _poolUmbilicus,
     _poolUnburden,
     _poolUncannySpeed,
     _poolUncontrollableAnger,

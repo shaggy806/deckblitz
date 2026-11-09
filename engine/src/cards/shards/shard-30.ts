@@ -440,6 +440,7 @@ import _poolIngeniousSkaab from "../pool/ingenious-skaab.js";
 import _poolInkriseInfiltrator from "../pool/inkrise-infiltrator.js";
 import _poolInsidiousDreams from "../pool/insidious-dreams.js";
 import _poolInspiringCall from "../pool/inspiring-call.js";
+import _poolInsult from "../pool/insult.js";
 import _poolIntetTheDreamer from "../pool/intet-the-dreamer.js";
 import _poolIntimidation from "../pool/intimidation.js";
 import _poolIntroductionToAnnihilation from "../pool/introduction-to-annihilation.js";
@@ -865,6 +866,7 @@ import _poolTemporalFirestorm from "../pool/temporal-firestorm.js";
 import _poolTestOfConviction from "../pool/test-of-conviction.js";
 import _poolTheAkroanWar from "../pool/the-akroan-war.js";
 import _poolTheBalrogOfMoria from "../pool/the-balrog-of-moria.js";
+import _poolTheBrothersWar from "../pool/the-brothers-war.js";
 import _poolTheFirstIroanGames from "../pool/the-first-iroan-games.js";
 import _poolTheFloodOfMars from "../pool/the-flood-of-mars.js";
 import _poolTheLastAgniKai from "../pool/the-last-agni-kai.js";
@@ -953,6 +955,7 @@ import _poolVodalianArcanist from "../pool/vodalian-arcanist.js";
 import _poolVodalianMystic from "../pool/vodalian-mystic.js";
 import _poolVoiceOfReason from "../pool/voice-of-reason.js";
 import _poolVoidSnare from "../pool/void-snare.js";
+import _poolVoidwingHybrid from "../pool/voidwing-hybrid.js";
 import _poolVoltCharge from "../pool/volt-charge.js";
 import _poolVoltaicBrawler from "../pool/voltaic-brawler.js";
 import _poolVulpineGoliath from "../pool/vulpine-goliath.js";
@@ -1457,6 +1460,7 @@ const shard: CardShard = {
     _poolInkriseInfiltrator,
     _poolInsidiousDreams,
     _poolInspiringCall,
+    _poolInsult,
     _poolIntetTheDreamer,
     _poolIntimidation,
     _poolIntroductionToAnnihilation,
@@ -1882,6 +1886,7 @@ const shard: CardShard = {
     _poolTestOfConviction,
     _poolTheAkroanWar,
     _poolTheBalrogOfMoria,
+    _poolTheBrothersWar,
     _poolTheFirstIroanGames,
     _poolTheFloodOfMars,
     _poolTheLastAgniKai,
@@ -1970,6 +1975,7 @@ const shard: CardShard = {
     _poolVodalianMystic,
     _poolVoiceOfReason,
     _poolVoidSnare,
+    _poolVoidwingHybrid,
     _poolVoltCharge,
     _poolVoltaicBrawler,
     _poolVulpineGoliath,

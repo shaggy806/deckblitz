@@ -94,6 +94,7 @@ import _poolBondsOfMortality from "../pool/bonds-of-mortality.js";
 import _poolBonePicker from "../pool/bone-picker.js";
 import _poolBoonOfBoseiju from "../pool/boon-of-boseiju.js";
 import _poolBorgQueenPerfectionManifest from "../pool/borg-queen-perfection-manifest.js";
+import _poolBotanicalBrawler from "../pool/botanical-brawler.js";
 import _poolBoulderfall from "../pool/boulderfall.js";
 import _poolBountyAgent from "../pool/bounty-agent.js";
 import _poolBraceForImpact from "../pool/brace-for-impact.js";
@@ -223,6 +224,7 @@ import _poolDireFleetCaptain from "../pool/dire-fleet-captain.js";
 import _poolDiscordantDirge from "../pool/discordant-dirge.js";
 import _poolDisfigure from "../pool/disfigure.js";
 import _poolDisplacerKitten from "../pool/displacer-kitten.js";
+import _poolDivinePresence from "../pool/divine-presence.js";
 import _poolDivineResilience from "../pool/divine-resilience.js";
 import _poolDocOcksTentacles from "../pool/doc-ocks-tentacles.js";
 import _poolDosansOldestChant from "../pool/dosans-oldest-chant.js";
@@ -334,6 +336,7 @@ import _poolGloinDwarfEmissary from "../pool/gloin-dwarf-emissary.js";
 import _poolGloomRipper from "../pool/gloom-ripper.js";
 import _poolGloomStalker from "../pool/gloom-stalker.js";
 import _poolGobhobblerRats from "../pool/gobhobbler-rats.js";
+import _poolGoblinAssassin from "../pool/goblin-assassin.js";
 import _poolGoblinGathering from "../pool/goblin-gathering.js";
 import _poolGoblinShortcutter from "../pool/goblin-shortcutter.js";
 import _poolGoblinSwineRider from "../pool/goblin-swine-rider.js";
@@ -561,6 +564,7 @@ import _poolMudbuttonCursetosser from "../pool/mudbutton-cursetosser.js";
 import _poolMultaniYavimayasAvatar from "../pool/multani-yavimayas-avatar.js";
 import _poolMummyParamount from "../pool/mummy-paramount.js";
 import _poolMurderousRider from "../pool/murderous-rider.js";
+import _poolMurderousSpoils from "../pool/murderous-spoils.js";
 import _poolMuseVessel from "../pool/muse-vessel.js";
 import _poolMycologist from "../pool/mycologist.js";
 import _poolMyojinOfInfiniteRage from "../pool/myojin-of-infinite-rage.js";
@@ -589,6 +593,7 @@ import _poolNyleaKeenEyed from "../pool/nylea-keen-eyed.js";
 import _poolOakshadeStalker from "../pool/oakshade-stalker.js";
 import _poolOcelotPride from "../pool/ocelot-pride.js";
 import _poolOctopusUmbra from "../pool/octopus-umbra.js";
+import _poolOddsEnds from "../pool/odds-ends.js";
 import _poolOfHerbsAndStewedRabbit from "../pool/of-herbs-and-stewed-rabbit.js";
 import _poolOldGrowthEducator from "../pool/old-growth-educator.js";
 import _poolOldOneEye from "../pool/old-one-eye.js";
@@ -1014,6 +1019,7 @@ import _tokensSpiderToken21BlackMenaceReach from "../tokens/spider-token-2-1-bla
 import _tokensSpiritTokenQuintorius from "../tokens/spirit-token-quintorius.js";
 import _tokensVampireDemonToken from "../tokens/vampire-demon-token.js";
 import _tokensWaspToken from "../tokens/wasp-token.js";
+import _tokensWhiteBlueElementalToken44 from "../tokens/white-blue-elemental-token-4-4.js";
 import _tokensWhiteGiantWarriorToken55 from "../tokens/white-giant-warrior-token-5-5.js";
 import _tokensWraithToken from "../tokens/wraith-token.js";
 import _tokensWurmTokenTrample from "../tokens/wurm-token-trample.js";
@@ -1114,6 +1120,7 @@ const shard: CardShard = {
     _poolBonePicker,
     _poolBoonOfBoseiju,
     _poolBorgQueenPerfectionManifest,
+    _poolBotanicalBrawler,
     _poolBoulderfall,
     _poolBountyAgent,
     _poolBraceForImpact,
@@ -1243,6 +1250,7 @@ const shard: CardShard = {
     _poolDiscordantDirge,
     _poolDisfigure,
     _poolDisplacerKitten,
+    _poolDivinePresence,
     _poolDivineResilience,
     _poolDocOcksTentacles,
     _poolDosansOldestChant,
@@ -1354,6 +1362,7 @@ const shard: CardShard = {
     _poolGloomRipper,
     _poolGloomStalker,
     _poolGobhobblerRats,
+    _poolGoblinAssassin,
     _poolGoblinGathering,
     _poolGoblinShortcutter,
     _poolGoblinSwineRider,
@@ -1581,6 +1590,7 @@ const shard: CardShard = {
     _poolMultaniYavimayasAvatar,
     _poolMummyParamount,
     _poolMurderousRider,
+    _poolMurderousSpoils,
     _poolMuseVessel,
     _poolMycologist,
     _poolMyojinOfInfiniteRage,
@@ -1609,6 +1619,7 @@ const shard: CardShard = {
     _poolOakshadeStalker,
     _poolOcelotPride,
     _poolOctopusUmbra,
+    _poolOddsEnds,
     _poolOfHerbsAndStewedRabbit,
     _poolOldGrowthEducator,
     _poolOldOneEye,
@@ -2036,6 +2047,7 @@ const shard: CardShard = {
     _tokensSpiritTokenQuintorius,
     _tokensVampireDemonToken,
     _tokensWaspToken,
+    _tokensWhiteBlueElementalToken44,
     _tokensWhiteGiantWarriorToken55,
     _tokensWraithToken,
     _tokensWurmTokenTrample,

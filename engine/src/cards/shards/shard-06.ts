@@ -195,6 +195,7 @@ import _poolCrabappleCohort from "../pool/crabapple-cohort.js";
 import _poolCrackTheEarth from "../pool/crack-the-earth.js";
 import _poolCradleToGrave from "../pool/cradle-to-grave.js";
 import _poolCraterclawColossus from "../pool/craterclaw-colossus.js";
+import _poolCrazedFirecat from "../pool/crazed-firecat.js";
 import _poolCrimsonWisps from "../pool/crimson-wisps.js";
 import _poolCrumbAndGetIt from "../pool/crumb-and-get-it.js";
 import _poolCrustaceanCommando from "../pool/crustacean-commando.js";
@@ -443,6 +444,7 @@ import _poolInfernalCaretaker from "../pool/infernal-caretaker.js";
 import _poolInfernoTitan from "../pool/inferno-titan.js";
 import _poolInfuriate from "../pool/infuriate.js";
 import _poolInitiatesCompanion from "../pool/initiates-companion.js";
+import _poolInjury from "../pool/injury.js";
 import _poolInklingSummoning from "../pool/inkling-summoning.js";
 import _poolInkshapeDemonstrator from "../pool/inkshape-demonstrator.js";
 import _poolInsatiableAvarice from "../pool/insatiable-avarice.js";
@@ -916,6 +918,7 @@ import _poolVolcanicWind from "../pool/volcanic-wind.js";
 import _poolVolcanoHellion from "../pool/volcano-hellion.js";
 import _poolVoltstormAngel from "../pool/voltstorm-angel.js";
 import _poolVulpikeet from "../pool/vulpikeet.js";
+import _poolVultureFeatheredFiend from "../pool/vulture-feathered-fiend.js";
 import _poolWalkingArchive from "../pool/walking-archive.js";
 import _poolWallOfBlood from "../pool/wall-of-blood.js";
 import _poolWallOfOmens from "../pool/wall-of-omens.js";
@@ -1189,6 +1192,7 @@ const shard: CardShard = {
     _poolCrackTheEarth,
     _poolCradleToGrave,
     _poolCraterclawColossus,
+    _poolCrazedFirecat,
     _poolCrimsonWisps,
     _poolCrumbAndGetIt,
     _poolCrustaceanCommando,
@@ -1437,6 +1441,7 @@ const shard: CardShard = {
     _poolInfernoTitan,
     _poolInfuriate,
     _poolInitiatesCompanion,
+    _poolInjury,
     _poolInklingSummoning,
     _poolInkshapeDemonstrator,
     _poolInsatiableAvarice,
@@ -1910,6 +1915,7 @@ const shard: CardShard = {
     _poolVolcanoHellion,
     _poolVoltstormAngel,
     _poolVulpikeet,
+    _poolVultureFeatheredFiend,
     _poolWalkingArchive,
     _poolWallOfBlood,
     _poolWallOfOmens,

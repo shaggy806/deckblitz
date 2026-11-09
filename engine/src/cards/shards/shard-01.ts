@@ -143,6 +143,7 @@ import _poolCloudsculptTechnician from "../pool/cloudsculpt-technician.js";
 import _poolCoastWatcher from "../pool/coast-watcher.js";
 import _poolCoastalDrake from "../pool/coastal-drake.js";
 import _poolCodexShredder from "../pool/codex-shredder.js";
+import _poolCoinOfFate from "../pool/coin-of-fate.js";
 import _poolComeBackWrong from "../pool/come-back-wrong.js";
 import _poolCommandSubadjunct from "../pool/command-subadjunct.js";
 import _poolCommuneWithBeavers from "../pool/commune-with-beavers.js";
@@ -499,8 +500,10 @@ import _poolMarchOfTheDrowned from "../pool/march-of-the-drowned.js";
 import _poolMarchOfTheWorldOoze from "../pool/march-of-the-world-ooze.js";
 import _poolMarchesaDealerOfDeath from "../pool/marchesa-dealer-of-death.js";
 import _poolMarchesasInfiltrator from "../pool/marchesas-infiltrator.js";
+import _poolMarinaVendrellsGrimoire from "../pool/marina-vendrells-grimoire.js";
 import _poolMarionetteMaster from "../pool/marionette-master.js";
 import _poolMarshalingTheTroops from "../pool/marshaling-the-troops.js";
+import _poolMasterOfTheVeil from "../pool/master-of-the-veil.js";
 import _poolMasterSplicer from "../pool/master-splicer.js";
 import _poolMatterbendingMage from "../pool/matterbending-mage.js";
 import _poolMausoleumWanderer from "../pool/mausoleum-wanderer.js";
@@ -656,6 +659,7 @@ import _poolRescueSkiff from "../pool/rescue-skiff.js";
 import _poolResistanceIsFutile from "../pool/resistance-is-futile.js";
 import _poolResize from "../pool/resize.js";
 import _poolRestorativeTechnique from "../pool/restorative-technique.js";
+import _poolRestoreBalance from "../pool/restore-balance.js";
 import _poolRetromancer from "../pool/retromancer.js";
 import _poolRhoxBodyguard from "../pool/rhox-bodyguard.js";
 import _poolRiddlemasterSphinx from "../pool/riddlemaster-sphinx.js";
@@ -906,6 +910,7 @@ import _poolVengefulDead from "../pool/vengeful-dead.js";
 import _poolVengefulPossession from "../pool/vengeful-possession.js";
 import _poolVentifactBottle from "../pool/ventifact-bottle.js";
 import _poolVeteranCavalier from "../pool/veteran-cavalier.js";
+import _poolVexingPuzzlebox from "../pool/vexing-puzzlebox.js";
 import _poolVicFontaineOneNightOnly from "../pool/vic-fontaine-one-night-only.js";
 import _poolVipersKiss from "../pool/vipers-kiss.js";
 import _poolVirusBeetle from "../pool/virus-beetle.js";
@@ -935,6 +940,7 @@ import _poolWavesifter from "../pool/wavesifter.js";
 import _poolWaxmaneBaku from "../pool/waxmane-baku.js";
 import _poolWayOfTheCryomancer from "../pool/way-of-the-cryomancer.js";
 import _poolWeatheredWayfarer from "../pool/weathered-wayfarer.js";
+import _poolWeaverOfLies from "../pool/weaver-of-lies.js";
 import _poolWeftbladeEnhancer from "../pool/weftblade-enhancer.js";
 import _poolWestWindAvatar from "../pool/west-wind-avatar.js";
 import _poolWestvaleAbbey from "../pool/westvale-abbey.js";
@@ -1125,6 +1131,7 @@ const shard: CardShard = {
     _poolCoastWatcher,
     _poolCoastalDrake,
     _poolCodexShredder,
+    _poolCoinOfFate,
     _poolComeBackWrong,
     _poolCommandSubadjunct,
     _poolCommuneWithBeavers,
@@ -1481,8 +1488,10 @@ const shard: CardShard = {
     _poolMarchOfTheWorldOoze,
     _poolMarchesaDealerOfDeath,
     _poolMarchesasInfiltrator,
+    _poolMarinaVendrellsGrimoire,
     _poolMarionetteMaster,
     _poolMarshalingTheTroops,
+    _poolMasterOfTheVeil,
     _poolMasterSplicer,
     _poolMatterbendingMage,
     _poolMausoleumWanderer,
@@ -1638,6 +1647,7 @@ const shard: CardShard = {
     _poolResistanceIsFutile,
     _poolResize,
     _poolRestorativeTechnique,
+    _poolRestoreBalance,
     _poolRetromancer,
     _poolRhoxBodyguard,
     _poolRiddlemasterSphinx,
@@ -1888,6 +1898,7 @@ const shard: CardShard = {
     _poolVengefulPossession,
     _poolVentifactBottle,
     _poolVeteranCavalier,
+    _poolVexingPuzzlebox,
     _poolVicFontaineOneNightOnly,
     _poolVipersKiss,
     _poolVirusBeetle,
@@ -1917,6 +1928,7 @@ const shard: CardShard = {
     _poolWaxmaneBaku,
     _poolWayOfTheCryomancer,
     _poolWeatheredWayfarer,
+    _poolWeaverOfLies,
     _poolWeftbladeEnhancer,
     _poolWestWindAvatar,
     _poolWestvaleAbbey,

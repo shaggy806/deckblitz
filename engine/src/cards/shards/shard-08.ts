@@ -657,6 +657,7 @@ import _poolPilgrimOfTheFires from "../pool/pilgrim-of-the-fires.js";
 import _poolPiliPala from "../pool/pili-pala.js";
 import _poolPirImaginativeRascal from "../pool/pir-imaginative-rascal.js";
 import _poolPitKeeper from "../pool/pit-keeper.js";
+import _poolPixieGuide from "../pool/pixie-guide.js";
 import _poolPlagonLordOfTheBeach from "../pool/plagon-lord-of-the-beach.js";
 import _poolPlanarBirth from "../pool/planar-birth.js";
 import _poolPlanarCollapse from "../pool/planar-collapse.js";
@@ -912,6 +913,7 @@ import _poolTownSentry from "../pool/town-sentry.js";
 import _poolToxicNim from "../pool/toxic-nim.js";
 import _poolTragicTrajectory from "../pool/tragic-trajectory.js";
 import _poolTrapDigger from "../pool/trap-digger.js";
+import _poolTreefolkMystic from "../pool/treefolk-mystic.js";
 import _poolTreeshakerChimera from "../pool/treeshaker-chimera.js";
 import _poolTreetopDefense from "../pool/treetop-defense.js";
 import _poolTrialOfAgony from "../pool/trial-of-agony.js";
@@ -1699,6 +1701,7 @@ const shard: CardShard = {
     _poolPiliPala,
     _poolPirImaginativeRascal,
     _poolPitKeeper,
+    _poolPixieGuide,
     _poolPlagonLordOfTheBeach,
     _poolPlanarBirth,
     _poolPlanarCollapse,
@@ -1954,6 +1957,7 @@ const shard: CardShard = {
     _poolToxicNim,
     _poolTragicTrajectory,
     _poolTrapDigger,
+    _poolTreefolkMystic,
     _poolTreeshakerChimera,
     _poolTreetopDefense,
     _poolTrialOfAgony,

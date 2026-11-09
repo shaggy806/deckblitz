@@ -98,6 +98,7 @@ import _poolBloodbraidChallenger from "../pool/bloodbraid-challenger.js";
 import _poolBloodiedGhost from "../pool/bloodied-ghost.js";
 import _poolBloodrageVampire from "../pool/bloodrage-vampire.js";
 import _poolBloodtitheCollector from "../pool/bloodtithe-collector.js";
+import _poolBlotOut from "../pool/blot-out.js";
 import _poolBoarQPine from "../pool/boar-q-pine.js";
 import _poolBogardanPhoenix from "../pool/bogardan-phoenix.js";
 import _poolBondOfPassion from "../pool/bond-of-passion.js";
@@ -1117,6 +1118,7 @@ const shard: CardShard = {
     _poolBloodiedGhost,
     _poolBloodrageVampire,
     _poolBloodtitheCollector,
+    _poolBlotOut,
     _poolBoarQPine,
     _poolBogardanPhoenix,
     _poolBondOfPassion,

@@ -838,6 +838,7 @@ import _poolTangleGolem from "../pool/tangle-golem.js";
 import _poolTasigurTheGoldenFang from "../pool/tasigur-the-golden-fang.js";
 import _poolTatteredRatter from "../pool/tattered-ratter.js";
 import _poolTattooWard from "../pool/tattoo-ward.js";
+import _poolTectonicInstability from "../pool/tectonic-instability.js";
 import _poolTelJiladDefiance from "../pool/tel-jilad-defiance.js";
 import _poolTemperedSteel from "../pool/tempered-steel.js";
 import _poolTempleOfCyclicalTime from "../pool/temple-of-cyclical-time.js";
@@ -1843,6 +1844,7 @@ const shard: CardShard = {
     _poolTasigurTheGoldenFang,
     _poolTatteredRatter,
     _poolTattooWard,
+    _poolTectonicInstability,
     _poolTelJiladDefiance,
     _poolTemperedSteel,
     _poolTempleOfCyclicalTime,

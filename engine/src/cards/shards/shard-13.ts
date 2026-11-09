@@ -171,6 +171,7 @@ import _poolCommuneWithSpirits from "../pool/commune-with-spirits.js";
 import _poolConcealedWeapon from "../pool/concealed-weapon.js";
 import _poolConstrictingSliver from "../pool/constricting-sliver.js";
 import _poolConsumedByGreed from "../pool/consumed-by-greed.js";
+import _poolContestedGameBall from "../pool/contested-game-ball.js";
 import _poolCooperate from "../pool/cooperate.js";
 import _poolCopperGnomes from "../pool/copper-gnomes.js";
 import _poolCopyEnchantment from "../pool/copy-enchantment.js";
@@ -484,6 +485,7 @@ import _poolMarshGas from "../pool/marsh-gas.js";
 import _poolMarshalsPathcruiser from "../pool/marshals-pathcruiser.js";
 import _poolMassacreWurm from "../pool/massacre-wurm.js";
 import _poolMeatsqueakHoardLord from "../pool/meatsqueak-hoard-lord.js";
+import _poolMeekAttack from "../pool/meek-attack.js";
 import _poolMephiticVapors from "../pool/mephitic-vapors.js";
 import _poolMerfolkOfTheDepths from "../pool/merfolk-of-the-depths.js";
 import _poolMerfolkSovereign from "../pool/merfolk-sovereign.js";
@@ -928,6 +930,7 @@ import _poolWingedTempleOfOrazca from "../pool/winged-temple-of-orazca.js";
 import _poolWingfoldPteron from "../pool/wingfold-pteron.js";
 import _poolWingmantleChaplain from "../pool/wingmantle-chaplain.js";
 import _poolWinotaJoinerOfForces from "../pool/winota-joiner-of-forces.js";
+import _poolWithengarUnbound from "../pool/withengar-unbound.js";
 import _poolWizardsRockets from "../pool/wizards-rockets.js";
 import _poolWolfhuntersQuiver from "../pool/wolfhunters-quiver.js";
 import _poolWolfirSilverheart from "../pool/wolfir-silverheart.js";
@@ -1141,6 +1144,7 @@ const shard: CardShard = {
     _poolConcealedWeapon,
     _poolConstrictingSliver,
     _poolConsumedByGreed,
+    _poolContestedGameBall,
     _poolCooperate,
     _poolCopperGnomes,
     _poolCopyEnchantment,
@@ -1454,6 +1458,7 @@ const shard: CardShard = {
     _poolMarshalsPathcruiser,
     _poolMassacreWurm,
     _poolMeatsqueakHoardLord,
+    _poolMeekAttack,
     _poolMephiticVapors,
     _poolMerfolkOfTheDepths,
     _poolMerfolkSovereign,
@@ -1898,6 +1903,7 @@ const shard: CardShard = {
     _poolWingfoldPteron,
     _poolWingmantleChaplain,
     _poolWinotaJoinerOfForces,
+    _poolWithengarUnbound,
     _poolWizardsRockets,
     _poolWolfhuntersQuiver,
     _poolWolfirSilverheart,

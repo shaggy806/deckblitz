@@ -10,7 +10,7 @@ export default defineCard({
   castModal: {
     minModes: 1,
     maxModes: 1,
-    kickedModes: { min: 1, max: 3 },
+    kickedModes: { min: 0, max: 3 },
     modes: [
       { text: "Target opponent discards two cards.", targets: ["opponent"], effect: { kind: "discard", target: 0, amount: 2 } },
       {

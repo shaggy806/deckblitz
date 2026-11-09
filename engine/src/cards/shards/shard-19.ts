@@ -135,6 +135,7 @@ import _poolCathedralOfSerra from "../pool/cathedral-of-serra.js";
 import _poolCausticRain from "../pool/caustic-rain.js";
 import _poolCaveOfTheFrostDragon from "../pool/cave-of-the-frost-dragon.js";
 import _poolCecilyHauntedMage from "../pool/cecily-haunted-mage.js";
+import _poolCemeteryIlluminator from "../pool/cemetery-illuminator.js";
 import _poolCephalidInkmage from "../pool/cephalid-inkmage.js";
 import _poolCerebralVortex from "../pool/cerebral-vortex.js";
 import _poolChainOfPlasma from "../pool/chain-of-plasma.js";
@@ -175,6 +176,7 @@ import _poolColorstormStallion from "../pool/colorstorm-stallion.js";
 import _poolColossusOfSardia from "../pool/colossus-of-sardia.js";
 import _poolCommandersInsight from "../pool/commanders-insight.js";
 import _poolConfoundingRiddle from "../pool/confounding-riddle.js";
+import _poolConsecrateLand from "../pool/consecrate-land.js";
 import _poolConsecratedByBlood from "../pool/consecrated-by-blood.js";
 import _poolConsumingSinkhole from "../pool/consuming-sinkhole.js";
 import _poolContactOtherPlane from "../pool/contact-other-plane.js";
@@ -206,7 +208,9 @@ import _poolCunning from "../pool/cunning.js";
 import _poolCursedRonin from "../pool/cursed-ronin.js";
 import _poolCylianSunsinger from "../pool/cylian-sunsinger.js";
 import _poolCytoplastRootKin from "../pool/cytoplast-root-kin.js";
+import _poolDackFayden from "../pool/dack-fayden.js";
 import _poolDangerous from "../pool/dangerous.js";
+import _poolDannyPink from "../pool/danny-pink.js";
 import _poolDaringApprentice from "../pool/daring-apprentice.js";
 import _poolDarkRemedy from "../pool/dark-remedy.js";
 import _poolDarkwaterCatacombs from "../pool/darkwater-catacombs.js";
@@ -299,6 +303,7 @@ import _poolExemplarOfStrength from "../pool/exemplar-of-strength.js";
 import _poolExperimentTwelve from "../pool/experiment-twelve.js";
 import _poolExploreTheVastlands from "../pool/explore-the-vastlands.js";
 import _poolExpunge from "../pool/expunge.js";
+import _poolExquisiteArchangel from "../pool/exquisite-archangel.js";
 import _poolExsanguinate from "../pool/exsanguinate.js";
 import _poolExsanguinatorCavalry from "../pool/exsanguinator-cavalry.js";
 import _poolFabledPassage from "../pool/fabled-passage.js";
@@ -484,6 +489,7 @@ import _poolJadedAnalyst from "../pool/jaded-analyst.js";
 import _poolJeskaiBarricade from "../pool/jeskai-barricade.js";
 import _poolJetsam from "../pool/jetsam.js";
 import _poolJodahsAvenger from "../pool/jodahs-avenger.js";
+import _poolJohannApprenticeSorcerer from "../pool/johann-apprentice-sorcerer.js";
 import _poolJoinShields from "../pool/join-shields.js";
 import _poolJourneyToTheOracle from "../pool/journey-to-the-oracle.js";
 import _poolJoustThrough from "../pool/joust-through.js";
@@ -902,6 +908,7 @@ import _poolTheLegendOfYangchen from "../pool/the-legend-of-yangchen.js";
 import _poolTheMendingOfDominaria from "../pool/the-mending-of-dominaria.js";
 import _poolTheMountainKingsReturn from "../pool/the-mountain-kings-return.js";
 import _poolThePrideOfHullClade from "../pool/the-pride-of-hull-clade.js";
+import _poolTheSecondDoctor from "../pool/the-second-doctor.js";
 import _poolThereAndBackAgain from "../pool/there-and-back-again.js";
 import _poolThornElemental from "../pool/thorn-elemental.js";
 import _poolThoughtEater from "../pool/thought-eater.js";
@@ -1174,6 +1181,7 @@ const shard: CardShard = {
     _poolCausticRain,
     _poolCaveOfTheFrostDragon,
     _poolCecilyHauntedMage,
+    _poolCemeteryIlluminator,
     _poolCephalidInkmage,
     _poolCerebralVortex,
     _poolChainOfPlasma,
@@ -1214,6 +1222,7 @@ const shard: CardShard = {
     _poolColossusOfSardia,
     _poolCommandersInsight,
     _poolConfoundingRiddle,
+    _poolConsecrateLand,
     _poolConsecratedByBlood,
     _poolConsumingSinkhole,
     _poolContactOtherPlane,
@@ -1245,7 +1254,9 @@ const shard: CardShard = {
     _poolCursedRonin,
     _poolCylianSunsinger,
     _poolCytoplastRootKin,
+    _poolDackFayden,
     _poolDangerous,
+    _poolDannyPink,
     _poolDaringApprentice,
     _poolDarkRemedy,
     _poolDarkwaterCatacombs,
@@ -1338,6 +1349,7 @@ const shard: CardShard = {
     _poolExperimentTwelve,
     _poolExploreTheVastlands,
     _poolExpunge,
+    _poolExquisiteArchangel,
     _poolExsanguinate,
     _poolExsanguinatorCavalry,
     _poolFabledPassage,
@@ -1523,6 +1535,7 @@ const shard: CardShard = {
     _poolJeskaiBarricade,
     _poolJetsam,
     _poolJodahsAvenger,
+    _poolJohannApprenticeSorcerer,
     _poolJoinShields,
     _poolJourneyToTheOracle,
     _poolJoustThrough,
@@ -1941,6 +1954,7 @@ const shard: CardShard = {
     _poolTheMendingOfDominaria,
     _poolTheMountainKingsReturn,
     _poolThePrideOfHullClade,
+    _poolTheSecondDoctor,
     _poolThereAndBackAgain,
     _poolThornElemental,
     _poolThoughtEater,

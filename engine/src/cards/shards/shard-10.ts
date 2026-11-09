@@ -139,6 +139,7 @@ import _poolChangelingWayfinder from "../pool/changeling-wayfinder.js";
 import _poolChaosMutation from "../pool/chaos-mutation.js";
 import _poolChapelGeist from "../pool/chapel-geist.js";
 import _poolChargeAcrossTheAraba from "../pool/charge-across-the-araba.js";
+import _poolCharredFoyerWarpedSpace from "../pool/charred-foyer-warped-space.js";
 import _poolChemistersTrick from "../pool/chemisters-trick.js";
 import _poolChildOfThePack from "../pool/child-of-the-pack.js";
 import _poolChimericEgg from "../pool/chimeric-egg.js";
@@ -416,6 +417,7 @@ import _poolInescapableBlaze from "../pool/inescapable-blaze.js";
 import _poolInescapableBrute from "../pool/inescapable-brute.js";
 import _poolInfernalSovereign from "../pool/infernal-sovereign.js";
 import _poolInformationDealer from "../pool/information-dealer.js";
+import _poolInscriptionOfInsight from "../pool/inscription-of-insight.js";
 import _poolInspiringRoar from "../pool/inspiring-roar.js";
 import _poolInvasionOfGobakhan from "../pool/invasion-of-gobakhan.js";
 import _poolInvocationOfSaintTraft from "../pool/invocation-of-saint-traft.js";
@@ -1131,6 +1133,7 @@ const shard: CardShard = {
     _poolChaosMutation,
     _poolChapelGeist,
     _poolChargeAcrossTheAraba,
+    _poolCharredFoyerWarpedSpace,
     _poolChemistersTrick,
     _poolChildOfThePack,
     _poolChimericEgg,
@@ -1408,6 +1411,7 @@ const shard: CardShard = {
     _poolInescapableBrute,
     _poolInfernalSovereign,
     _poolInformationDealer,
+    _poolInscriptionOfInsight,
     _poolInspiringRoar,
     _poolInvasionOfGobakhan,
     _poolInvocationOfSaintTraft,

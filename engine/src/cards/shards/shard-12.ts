@@ -189,7 +189,9 @@ import _poolCurzonDaxBoundByBlood from "../pool/curzon-dax-bound-by-blood.js";
 import _poolCutOfTheProfits from "../pool/cut-of-the-profits.js";
 import _poolCutthroatManeuver from "../pool/cutthroat-maneuver.js";
 import _poolCyclopeanMummy from "../pool/cyclopean-mummy.js";
+import _poolDanLewis from "../pool/dan-lewis.js";
 import _poolDanceOfTheDead from "../pool/dance-of-the-dead.js";
+import _poolDanielsTemporalAgent from "../pool/daniels-temporal-agent.js";
 import _poolDaringFiendbonder from "../pool/daring-fiendbonder.js";
 import _poolDaringThief from "../pool/daring-thief.js";
 import _poolDarkmossBridge from "../pool/darkmoss-bridge.js";
@@ -941,6 +943,7 @@ import _poolWaywardGuideBeast from "../pool/wayward-guide-beast.js";
 import _poolWeaponRack from "../pool/weapon-rack.js";
 import _poolWelderAutomaton from "../pool/welder-automaton.js";
 import _poolWhipSpineDrake from "../pool/whip-spine-drake.js";
+import _poolWhiplashVengefulEngineer from "../pool/whiplash-vengeful-engineer.js";
 import _poolWhirlpoolDrake from "../pool/whirlpool-drake.js";
 import _poolWhiteManaBattery from "../pool/white-mana-battery.js";
 import _poolWhiteScarab from "../pool/white-scarab.js";
@@ -985,6 +988,7 @@ import _tokensPhyrexianZombieToken from "../tokens/phyrexian-zombie-token.js";
 import _tokensRobotTokenFlying from "../tokens/robot-token-flying.js";
 import _tokensRogueToken from "../tokens/rogue-token.js";
 import _tokensSoldierTokenFinaleOfGlory from "../tokens/soldier-token-finale-of-glory.js";
+import _tokensTheHollowSentinelToken from "../tokens/the-hollow-sentinel-token.js";
 import _tokensVampireTokenSorinTheMirthless from "../tokens/vampire-token-sorin-the-mirthless.js";
 import _tokensVampireToken from "../tokens/vampire-token.js";
 import _tokensWurmToken66 from "../tokens/wurm-token-6-6.js";
@@ -1179,7 +1183,9 @@ const shard: CardShard = {
     _poolCutOfTheProfits,
     _poolCutthroatManeuver,
     _poolCyclopeanMummy,
+    _poolDanLewis,
     _poolDanceOfTheDead,
+    _poolDanielsTemporalAgent,
     _poolDaringFiendbonder,
     _poolDaringThief,
     _poolDarkmossBridge,
@@ -1931,6 +1937,7 @@ const shard: CardShard = {
     _poolWeaponRack,
     _poolWelderAutomaton,
     _poolWhipSpineDrake,
+    _poolWhiplashVengefulEngineer,
     _poolWhirlpoolDrake,
     _poolWhiteManaBattery,
     _poolWhiteScarab,
@@ -1977,6 +1984,7 @@ const shard: CardShard = {
     _tokensRobotTokenFlying,
     _tokensRogueToken,
     _tokensSoldierTokenFinaleOfGlory,
+    _tokensTheHollowSentinelToken,
     _tokensVampireTokenSorinTheMirthless,
     _tokensVampireToken,
     _tokensWurmToken66,

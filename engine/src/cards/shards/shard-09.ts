@@ -350,6 +350,7 @@ import _poolGoldmawChampion from "../pool/goldmaw-champion.js";
 import _poolGoldmeadowNomad from "../pool/goldmeadow-nomad.js";
 import _poolGoldveinHydra from "../pool/goldvein-hydra.js";
 import _poolGolemArtisan from "../pool/golem-artisan.js";
+import _poolGomazoa from "../pool/gomazoa.js";
 import _poolGontiNightMinister from "../pool/gonti-night-minister.js";
 import _poolGoreclawTerrorOfQalSisma from "../pool/goreclaw-terror-of-qal-sisma.js";
 import _poolGraftedWargear from "../pool/grafted-wargear.js";
@@ -405,6 +406,7 @@ import _poolHourOfGlory from "../pool/hour-of-glory.js";
 import _poolHowlingBanshee from "../pool/howling-banshee.js";
 import _poolHyenaPack from "../pool/hyena-pack.js";
 import _poolHyenaUmbra from "../pool/hyena-umbra.js";
+import _poolHyldaOfTheIcyCrown from "../pool/hylda-of-the-icy-crown.js";
 import _poolIcatianLieutenant from "../pool/icatian-lieutenant.js";
 import _poolIceStorm from "../pool/ice-storm.js";
 import _poolIcefall from "../pool/icefall.js";
@@ -660,6 +662,7 @@ import _poolRagnarokDivineDeliverance from "../pool/ragnarok-divine-deliverance.
 import _poolRainSlickedCopse from "../pool/rain-slicked-copse.js";
 import _poolRakkaMar from "../pool/rakka-mar.js";
 import _poolRakshasasBargain from "../pool/rakshasas-bargain.js";
+import _poolRalZarek from "../pool/ral-zarek.js";
 import _poolRallyThePeasants from "../pool/rally-the-peasants.js";
 import _poolRathiIntimidator from "../pool/rathi-intimidator.js";
 import _poolRavenousCosmozoan from "../pool/ravenous-cosmozoan.js";
@@ -768,6 +771,7 @@ import _poolSidisisPet from "../pool/sidisis-pet.js";
 import _poolSilkbindFaerie from "../pool/silkbind-faerie.js";
 import _poolSilkguard from "../pool/silkguard.js";
 import _poolSimicAscendancy from "../pool/simic-ascendancy.js";
+import _poolSimicGuildmage from "../pool/simic-guildmage.js";
 import _poolSinisterStrength from "../pool/sinister-strength.js";
 import _poolSkaabGoliath from "../pool/skaab-goliath.js";
 import _poolSkyScourer from "../pool/sky-scourer.js";
@@ -863,6 +867,7 @@ import _poolThalakosDeceiver from "../pool/thalakos-deceiver.js";
 import _poolThaumatog from "../pool/thaumatog.js";
 import _poolThaumatonTorpedo from "../pool/thaumaton-torpedo.js";
 import _poolTheBirthOfMeletis from "../pool/the-birth-of-meletis.js";
+import _poolTheCabbageMerchant from "../pool/the-cabbage-merchant.js";
 import _poolTheDalekEmperor from "../pool/the-dalek-emperor.js";
 import _poolTheDominionBracelet from "../pool/the-dominion-bracelet.js";
 import _poolTheElderDragonWar from "../pool/the-elder-dragon-war.js";
@@ -1367,6 +1372,7 @@ const shard: CardShard = {
     _poolGoldmeadowNomad,
     _poolGoldveinHydra,
     _poolGolemArtisan,
+    _poolGomazoa,
     _poolGontiNightMinister,
     _poolGoreclawTerrorOfQalSisma,
     _poolGraftedWargear,
@@ -1422,6 +1428,7 @@ const shard: CardShard = {
     _poolHowlingBanshee,
     _poolHyenaPack,
     _poolHyenaUmbra,
+    _poolHyldaOfTheIcyCrown,
     _poolIcatianLieutenant,
     _poolIceStorm,
     _poolIcefall,
@@ -1677,6 +1684,7 @@ const shard: CardShard = {
     _poolRainSlickedCopse,
     _poolRakkaMar,
     _poolRakshasasBargain,
+    _poolRalZarek,
     _poolRallyThePeasants,
     _poolRathiIntimidator,
     _poolRavenousCosmozoan,
@@ -1785,6 +1793,7 @@ const shard: CardShard = {
     _poolSilkbindFaerie,
     _poolSilkguard,
     _poolSimicAscendancy,
+    _poolSimicGuildmage,
     _poolSinisterStrength,
     _poolSkaabGoliath,
     _poolSkyScourer,
@@ -1880,6 +1889,7 @@ const shard: CardShard = {
     _poolThaumatog,
     _poolThaumatonTorpedo,
     _poolTheBirthOfMeletis,
+    _poolTheCabbageMerchant,
     _poolTheDalekEmperor,
     _poolTheDominionBracelet,
     _poolTheElderDragonWar,

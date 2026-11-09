@@ -114,6 +114,7 @@ import _poolBorgScoutSphere from "../pool/borg-scout-sphere.js";
 import _poolBorosLocket from "../pool/boros-locket.js";
 import _poolBothersomeQuasit from "../pool/bothersome-quasit.js";
 import _poolBounceOff from "../pool/bounce-off.js";
+import _poolBoundByMoonsilver from "../pool/bound-by-moonsilver.js";
 import _poolBoundInGold from "../pool/bound-in-gold.js";
 import _poolBragoKingEternal from "../pool/brago-king-eternal.js";
 import _poolBrambleSovereign from "../pool/bramble-sovereign.js";
@@ -353,6 +354,7 @@ import _poolGeistFueledScarecrow from "../pool/geist-fueled-scarecrow.js";
 import _poolGenerousRevival from "../pool/generous-revival.js";
 import _poolGenestealerPatriarch from "../pool/genestealer-patriarch.js";
 import _poolGeodeGrotto from "../pool/geode-grotto.js";
+import _poolGeorgiouTerranEmperor from "../pool/georgiou-terran-emperor.js";
 import _poolGerminateRecruits from "../pool/germinate-recruits.js";
 import _poolGhalmasWarden from "../pool/ghalmas-warden.js";
 import _poolGhastlyRemains from "../pool/ghastly-remains.js";
@@ -702,6 +704,7 @@ import _poolRebelSalvo from "../pool/rebel-salvo.js";
 import _poolRecklessAssault from "../pool/reckless-assault.js";
 import _poolRecklessRage from "../pool/reckless-rage.js";
 import _poolRedcapHeelslasher from "../pool/redcap-heelslasher.js";
+import _poolReenactTheCrime from "../pool/reenact-the-crime.js";
 import _poolRefresh from "../pool/refresh.js";
 import _poolRekindledFlame from "../pool/rekindled-flame.js";
 import _poolReliefCaptain from "../pool/relief-captain.js";
@@ -1165,6 +1168,7 @@ const shard: CardShard = {
     _poolBorosLocket,
     _poolBothersomeQuasit,
     _poolBounceOff,
+    _poolBoundByMoonsilver,
     _poolBoundInGold,
     _poolBragoKingEternal,
     _poolBrambleSovereign,
@@ -1404,6 +1408,7 @@ const shard: CardShard = {
     _poolGenerousRevival,
     _poolGenestealerPatriarch,
     _poolGeodeGrotto,
+    _poolGeorgiouTerranEmperor,
     _poolGerminateRecruits,
     _poolGhalmasWarden,
     _poolGhastlyRemains,
@@ -1753,6 +1758,7 @@ const shard: CardShard = {
     _poolRecklessAssault,
     _poolRecklessRage,
     _poolRedcapHeelslasher,
+    _poolReenactTheCrime,
     _poolRefresh,
     _poolRekindledFlame,
     _poolReliefCaptain,

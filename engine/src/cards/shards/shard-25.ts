@@ -121,6 +121,7 @@ import _poolBrinebarrowIntruder from "../pool/brinebarrow-intruder.js";
 import _poolBrinkOfMadness from "../pool/brink-of-madness.js";
 import _poolBristlingBoar from "../pool/bristling-boar.js";
 import _poolBrokenVisage from "../pool/broken-visage.js";
+import _poolBroodKeeper from "../pool/brood-keeper.js";
 import _poolBrotherhoodSpy from "../pool/brotherhood-spy.js";
 import _poolBroughtBack from "../pool/brought-back.js";
 import _poolBubbleSmuggler from "../pool/bubble-smuggler.js";
@@ -146,6 +147,7 @@ import _poolChancellorOfTheTangle from "../pool/chancellor-of-the-tangle.js";
 import _poolChandraHeartOfFire from "../pool/chandra-heart-of-fire.js";
 import _poolChaoticGoo from "../pool/chaotic-goo.js";
 import _poolChargingTroll from "../pool/charging-troll.js";
+import _poolCharredFoyer from "../pool/charred-foyer.js";
 import _poolChiefOfTheEdge from "../pool/chief-of-the-edge.js";
 import _poolCinderGlade from "../pool/cinder-glade.js";
 import _poolCindervines from "../pool/cindervines.js";
@@ -1095,6 +1097,7 @@ const shard: CardShard = {
     _poolBrinkOfMadness,
     _poolBristlingBoar,
     _poolBrokenVisage,
+    _poolBroodKeeper,
     _poolBrotherhoodSpy,
     _poolBroughtBack,
     _poolBubbleSmuggler,
@@ -1120,6 +1123,7 @@ const shard: CardShard = {
     _poolChandraHeartOfFire,
     _poolChaoticGoo,
     _poolChargingTroll,
+    _poolCharredFoyer,
     _poolChiefOfTheEdge,
     _poolCinderGlade,
     _poolCindervines,

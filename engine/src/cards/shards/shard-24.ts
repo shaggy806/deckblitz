@@ -226,6 +226,7 @@ import _poolDeepWater from "../pool/deep-water.js";
 import _poolDefiantStand from "../pool/defiant-stand.js";
 import _poolDelay from "../pool/delay.js";
 import _poolDemonOfCatastrophes from "../pool/demon-of-catastrophes.js";
+import _poolDennickPiousApprentice from "../pool/dennick-pious-apprentice.js";
 import _poolDesdemonaFreedomsEdge from "../pool/desdemona-freedoms-edge.js";
 import _poolDesertOfTheFervent from "../pool/desert-of-the-fervent.js";
 import _poolDespoticScepter from "../pool/despotic-scepter.js";
@@ -333,6 +334,7 @@ import _poolGatesAblaze from "../pool/gates-ablaze.js";
 import _poolGeistOfSaintThalia from "../pool/geist-of-saint-thalia.js";
 import _poolGemstoneMine from "../pool/gemstone-mine.js";
 import _poolGeothermalCrevice from "../pool/geothermal-crevice.js";
+import _poolGhostArk from "../pool/ghost-ark.js";
 import _poolGibberingFiend from "../pool/gibbering-fiend.js";
 import _poolGiftedAetherborn from "../pool/gifted-aetherborn.js";
 import _poolGilacorn from "../pool/gilacorn.js";
@@ -1217,6 +1219,7 @@ const shard: CardShard = {
     _poolDefiantStand,
     _poolDelay,
     _poolDemonOfCatastrophes,
+    _poolDennickPiousApprentice,
     _poolDesdemonaFreedomsEdge,
     _poolDesertOfTheFervent,
     _poolDespoticScepter,
@@ -1324,6 +1327,7 @@ const shard: CardShard = {
     _poolGeistOfSaintThalia,
     _poolGemstoneMine,
     _poolGeothermalCrevice,
+    _poolGhostArk,
     _poolGibberingFiend,
     _poolGiftedAetherborn,
     _poolGilacorn,

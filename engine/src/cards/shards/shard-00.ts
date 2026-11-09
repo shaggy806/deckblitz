@@ -56,6 +56,7 @@ import _poolAwakeningZone from "../pool/awakening-zone.js";
 import _poolAyulasInfluence from "../pool/ayulas-influence.js";
 import _poolAzcantaTheSunkenRuin from "../pool/azcanta-the-sunken-ruin.js";
 import _poolAzoriusCluestone from "../pool/azorius-cluestone.js";
+import _poolBalancingAct from "../pool/balancing-act.js";
 import _poolBalladOfTheBlackFlag from "../pool/ballad-of-the-black-flag.js";
 import _poolBalmOfRestoration from "../pool/balm-of-restoration.js";
 import _poolBaneOfBalaGed from "../pool/bane-of-bala-ged.js";
@@ -422,6 +423,7 @@ import _poolInkDissolver from "../pool/ink-dissolver.js";
 import _poolInstrumentsOfWar from "../pool/instruments-of-war.js";
 import _poolInterceptorShadowsHound from "../pool/interceptor-shadows-hound.js";
 import _poolInvasionOfAmonkhet from "../pool/invasion-of-amonkhet.js";
+import _poolInvasionOfKaldheim from "../pool/invasion-of-kaldheim.js";
 import _poolIridescentDrake from "../pool/iridescent-drake.js";
 import _poolIronLance from "../pool/iron-lance.js";
 import _poolIronSuitcase from "../pool/iron-suitcase.js";
@@ -645,6 +647,7 @@ import _poolRavensRunDragoon from "../pool/ravens-run-dragoon.js";
 import _poolReapingTheRewards from "../pool/reaping-the-rewards.js";
 import _poolRebelliousCaptives from "../pool/rebellious-captives.js";
 import _poolRecklessCohort from "../pool/reckless-cohort.js";
+import _poolRecklessCrew from "../pool/reckless-crew.js";
 import _poolRecklessRansacking from "../pool/reckless-ransacking.js";
 import _poolRecklessReveler from "../pool/reckless-reveler.js";
 import _poolRedcapMelee from "../pool/redcap-melee.js";
@@ -724,6 +727,7 @@ import _poolSerpentineSpike from "../pool/serpentine-spike.js";
 import _poolSetonKrosanProtector from "../pool/seton-krosan-protector.js";
 import _poolSewerVeillanceCam from "../pool/sewer-veillance-cam.js";
 import _poolShadowOfTheGrave from "../pool/shadow-of-the-grave.js";
+import _poolShagratLootBearer from "../pool/shagrat-loot-bearer.js";
 import _poolShangChiMasterOfKungFu from "../pool/shang-chi-master-of-kung-fu.js";
 import _poolSharpshooterElf from "../pool/sharpshooter-elf.js";
 import _poolShatterTheSky from "../pool/shatter-the-sky.js";
@@ -782,6 +786,7 @@ import _poolStandUpForYourself from "../pool/stand-up-for-yourself.js";
 import _poolStarfieldMystic from "../pool/starfield-mystic.js";
 import _poolStarfighterPilot from "../pool/starfighter-pilot.js";
 import _poolStarkIndustries from "../pool/stark-industries.js";
+import _poolStarscreamSeekerLeader from "../pool/starscream-seeker-leader.js";
 import _poolStenchskipper from "../pool/stenchskipper.js";
 import _poolStepBetweenWorlds from "../pool/step-between-worlds.js";
 import _poolSterlingKeykeeper from "../pool/sterling-keykeeper.js";
@@ -883,6 +888,7 @@ import _poolTorture from "../pool/torture.js";
 import _poolTrackDown from "../pool/track-down.js";
 import _poolTraitorsRoar from "../pool/traitors-roar.js";
 import _poolTranquilGrove from "../pool/tranquil-grove.js";
+import _poolTranscendence from "../pool/transcendence.js";
 import _poolTranspose from "../pool/transpose.js";
 import _poolTranswarpHub from "../pool/transwarp-hub.js";
 import _poolTrapRunner from "../pool/trap-runner.js";
@@ -1061,6 +1067,7 @@ const shard: CardShard = {
     _poolAyulasInfluence,
     _poolAzcantaTheSunkenRuin,
     _poolAzoriusCluestone,
+    _poolBalancingAct,
     _poolBalladOfTheBlackFlag,
     _poolBalmOfRestoration,
     _poolBaneOfBalaGed,
@@ -1427,6 +1434,7 @@ const shard: CardShard = {
     _poolInstrumentsOfWar,
     _poolInterceptorShadowsHound,
     _poolInvasionOfAmonkhet,
+    _poolInvasionOfKaldheim,
     _poolIridescentDrake,
     _poolIronLance,
     _poolIronSuitcase,
@@ -1650,6 +1658,7 @@ const shard: CardShard = {
     _poolReapingTheRewards,
     _poolRebelliousCaptives,
     _poolRecklessCohort,
+    _poolRecklessCrew,
     _poolRecklessRansacking,
     _poolRecklessReveler,
     _poolRedcapMelee,
@@ -1729,6 +1738,7 @@ const shard: CardShard = {
     _poolSetonKrosanProtector,
     _poolSewerVeillanceCam,
     _poolShadowOfTheGrave,
+    _poolShagratLootBearer,
     _poolShangChiMasterOfKungFu,
     _poolSharpshooterElf,
     _poolShatterTheSky,
@@ -1787,6 +1797,7 @@ const shard: CardShard = {
     _poolStarfieldMystic,
     _poolStarfighterPilot,
     _poolStarkIndustries,
+    _poolStarscreamSeekerLeader,
     _poolStenchskipper,
     _poolStepBetweenWorlds,
     _poolSterlingKeykeeper,
@@ -1888,6 +1899,7 @@ const shard: CardShard = {
     _poolTrackDown,
     _poolTraitorsRoar,
     _poolTranquilGrove,
+    _poolTranscendence,
     _poolTranspose,
     _poolTranswarpHub,
     _poolTrapRunner,

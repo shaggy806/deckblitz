@@ -81,6 +81,7 @@ import _poolBlastfireBolt from "../pool/blastfire-bolt.js";
 import _poolBlessedGhoul from "../pool/blessed-ghoul.js";
 import _poolBlessingOfTheNephilim from "../pool/blessing-of-the-nephilim.js";
 import _poolBlessing from "../pool/blessing.js";
+import _poolBlindFury from "../pool/blind-fury.js";
 import _poolBlindPhantasm from "../pool/blind-phantasm.js";
 import _poolBlindingLight from "../pool/blinding-light.js";
 import _poolBlistercoilWeird from "../pool/blistercoil-weird.js";
@@ -442,6 +443,7 @@ import _poolJungleWeaver from "../pool/jungle-weaver.js";
 import _poolJwariShapeshifter from "../pool/jwari-shapeshifter.js";
 import _poolKalastriaHealer from "../pool/kalastria-healer.js";
 import _poolKangTemporalTyrant from "../pool/kang-temporal-tyrant.js";
+import _poolKangeeAerieKeeper from "../pool/kangee-aerie-keeper.js";
 import _poolKarnsTouch from "../pool/karns-touch.js";
 import _poolKataraHeroicHealer from "../pool/katara-heroic-healer.js";
 import _poolKathariBomber from "../pool/kathari-bomber.js";
@@ -1144,6 +1146,7 @@ const shard: CardShard = {
     _poolBlessedGhoul,
     _poolBlessingOfTheNephilim,
     _poolBlessing,
+    _poolBlindFury,
     _poolBlindPhantasm,
     _poolBlindingLight,
     _poolBlistercoilWeird,
@@ -1505,6 +1508,7 @@ const shard: CardShard = {
     _poolJwariShapeshifter,
     _poolKalastriaHealer,
     _poolKangTemporalTyrant,
+    _poolKangeeAerieKeeper,
     _poolKarnsTouch,
     _poolKataraHeroicHealer,
     _poolKathariBomber,
