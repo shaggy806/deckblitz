@@ -16,7 +16,7 @@ import type { Color, ManaType } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import { EVERY_CREATURE_TYPE, hasSubtype, isCreatureType } from "./subtypes.js";
 import type { TargetRef, TargetSpec } from "./target.js";
-import type { TargetCountRange } from "./target-count.js";
+import type { TargetCountRange, TargetTaxShare } from "./target-count.js";
 import type { TriggerOrderEntry } from "./state.js";
 import type { ZoneChoiceTogether } from "./zone-choice-together.js";
 
@@ -1413,7 +1413,7 @@ export type LegalAction =
        * pass alone can still be too dear together, and that cast is refused
        * (`targetsWithinTaxes`, which `fitCastTargets` reads). */
       readonly targetTaxes?: {
-        readonly taxes: readonly { readonly object: ObjectId; readonly generic: number }[];
+        readonly taxes: readonly { readonly object: ObjectId; readonly generic: number; readonly once?: readonly TargetTaxShare[] }[];
         readonly afford: number;
       };
       /** Present when this is an alternative-permission cast (not from the hand

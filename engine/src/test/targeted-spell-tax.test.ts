@@ -12,10 +12,12 @@
 import { describe, expect, it } from "vitest";
 
 import type { LegalAction } from "../actions.js";
+import { defineCard } from "../cards/define.js";
+import { createDefaultRegistry } from "../cards/registry.js";
 import { fitCastTargets } from "../controller.js";
 import type { Game } from "../game.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
-import { maxXForTargets } from "../target-count.js";
+import { maxXForTargets, targetsWithinTaxes } from "../target-count.js";
 import { A, B, activate, cast, controller, lands, ref, spawn, table, toGraveyard, toHand, zone } from "./harness.js";
 
 type CastOffer = Extract<LegalAction, { kind: "cast-spell" }>;
@@ -203,6 +205,60 @@ describe("Kopala, Warden of Waves", () => {
     const reejerey = spawn(game, "Merrow Reejerey", B);
     lands(game, "Island", 5);
     cast(game, toHand(game, "Frost Breath"), { targets: [ref(lord), ref(reejerey)] });
+    expect(untappedLands(game)).toBe(0);
+  });
+
+  it("the offer counts its {2} once however many Merfolk are named", () => {
+    const { game } = table();
+    spawn(game, "Kopala, Warden of Waves", B);
+    const lord = spawn(game, "Lord of Atlantis", B);
+    const reejerey = spawn(game, "Merrow Reejerey", B);
+    lands(game, "Island", 5);
+    const offer = castOffers(game, toHand(game, "Frost Breath"))[0];
+    expect(targetsWithinTaxes(offer, [ref(lord), ref(reejerey)])).toBe(true);
+  });
+
+  it("a target offered through another slot's reduction (rule 601.2f)", () => {
+    const registry = createDefaultRegistry()
+      .register(
+        defineCard({
+          name: "Test Two Slot Discount",
+          manaCost: "{4}",
+          types: ["sorcery"],
+          text: "This spell costs {2} less if it targets a creature you control. Tap target creature. Destroy target creature.",
+          targetCostReduction: { filter: { type: "creature", controlledBy: "you" }, reduceGeneric: 2 },
+          targets: ["creature", "creature"],
+          effect: {
+            kind: "sequence",
+            effects: [
+              { kind: "tap", target: 0 },
+              { kind: "destroy", target: 1 },
+            ],
+          },
+          resolve: null,
+        }),
+      )
+      .register(
+        defineCard({
+          name: "Test Taxed Bear",
+          manaCost: "{1}",
+          types: ["creature"],
+          subtypes: ["Bear"],
+          power: 2,
+          toughness: 2,
+          text: "Spells that target this cost {2} more.",
+          static: [{ affects: { scope: "self" }, targetedBySpellsCost: { payGeneric: 2 }, text: "tax" }],
+        }),
+      );
+    const { game } = table({ registry });
+    const mine = spawn(game, "Grizzly Bears", A);
+    const taxed = spawn(game, "Test Taxed Bear", B);
+    spawn(game, "Grizzly Bears", B);
+    lands(game, "Wastes", 4);
+    const card = toHand(game, "Test Two Slot Discount");
+    const offer = castOffers(game, card)[0];
+    expect(offer.targetOptions[0]).toContainEqual(ref(taxed));
+    cast(game, card, { targets: [ref(mine), ref(taxed)] });
     expect(untappedLands(game)).toBe(0);
   });
 

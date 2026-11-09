@@ -227,15 +227,22 @@ export interface XCostOffer {
   readonly targetTaxes?: readonly { readonly object: ObjectId; readonly x: number }[];
 }
 
+/** A part of a target's tax charged once however many chosen targets it
+ * reaches — a "that target a Merfolk you control", `key`ed by what charges
+ * it. */
+export interface TargetTaxShare {
+  readonly key: string;
+  readonly generic: number;
+}
+
 /** Whether `targets` leave the spell affordable by what the offer says they
  * add (`LegalAction` cast-spell's `targetTaxes`): false when a driver should
- * pick something else, since the cast would be refused. The sum is an upper
- * bound — a "that target a Merfolk you control" counts once however many are
- * chosen — so it never lets through what would be refused. */
+ * pick something else, since the cast would be refused. Each tax is counted
+ * once for each target it's on, its shared part once in all. */
 export function targetsWithinTaxes(
   legal: {
     readonly targetTaxes?: {
-      readonly taxes: readonly { readonly object: ObjectId; readonly generic: number }[];
+      readonly taxes: readonly { readonly object: ObjectId; readonly generic: number; readonly once?: readonly TargetTaxShare[] }[];
       readonly afford: number;
     };
   },
@@ -244,9 +251,16 @@ export function targetsWithinTaxes(
   const offer = legal.targetTaxes;
   if (offer === undefined) return true;
   let total = 0;
+  const once = new Map<string, number>();
   for (const tax of offer.taxes) {
-    if (targets.some((t) => t?.kind === "object" && t.object === tax.object)) total += tax.generic;
+    if (!targets.some((t) => t?.kind === "object" && t.object === tax.object)) continue;
+    total += tax.generic;
+    for (const share of tax.once ?? []) {
+      total -= share.generic;
+      once.set(share.key, share.generic);
+    }
   }
+  for (const share of once.values()) total += share;
   return total <= offer.afford;
 }
 

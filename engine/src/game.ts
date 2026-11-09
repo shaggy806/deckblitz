@@ -591,7 +591,7 @@ import {
 } from "./this-way.js";
 import type { ThisWayEntry } from "./this-way.js";
 import { textWords, tokenColorsAfter, type TextChange } from "./text-change.js";
-import type { TargetCopies, TargetCountRange } from "./target-count.js";
+import type { TargetCopies, TargetCountRange, TargetTaxShare } from "./target-count.js";
 import type { ResolvedTargets, TargetRef, TargetSpec } from "./target.js";
 import {
   cardSource,
@@ -15535,27 +15535,39 @@ export class Game {
     kicked = false,
     overload = false,
   ): {
-    readonly taxes: readonly { readonly object: ObjectId; readonly generic: number }[];
+    readonly taxes: readonly { readonly object: ObjectId; readonly generic: number; readonly once?: readonly TargetTaxShare[] }[];
     readonly afford: number;
     readonly within: (ref: TargetRef) => boolean;
   } | null {
     if (!this.targetedCostsInPlay().mana && def.targetCostIncrease === null) return null;
     const source = this.cardSource(def, card, x);
     const taxOf = new Map<ObjectId, number>();
+    const onceOf = new Map<ObjectId, readonly TargetTaxShare[]>();
     const taxOfPlayer = new Map<PlayerId, number>();
+    const earners = new Set<ObjectId>();
+    const reduces = this.spellPricedByTargets(def, player, card);
     const look = (specs: readonly TargetSpec[]): void => {
       for (const ref of this.targetOptionsFor(specs, player, source).flat()) {
+        if (reduces && specs.length > 1 && ref.kind === "object" && this.targetsEarnReduction(def, player, card, [ref])) {
+          earners.add(ref.object);
+        }
         if (ref.kind === "player") {
           if (!taxOfPlayer.has(ref.player)) taxOfPlayer.set(ref.player, this.targetingCost(player, [ref]).generic);
           continue;
         }
         if (ref.kind !== "object" || taxOf.has(ref.object)) continue;
         taxOf.set(ref.object, this.targetingCost(player, [ref]).generic + this.ownTargetTax(def, player, card, [ref]));
+        const shared = this.onceTargetTaxes(def, player, card, ref.object);
+        if (shared.length > 0) onceOf.set(ref.object, shared);
       }
     };
     look(this.effectiveTargetSpecs(def, undefined, kicked, overload, player));
     for (const mode of def.castModal?.modes ?? []) look(mode.targets ?? []);
-    const taxes = [...taxOf].flatMap(([object, generic]) => (generic > 0 ? [{ object, generic }] : []));
+    const taxes = [...taxOf].flatMap(([object, generic]) => {
+      if (generic <= 0) return [];
+      const once = onceOf.get(object);
+      return [{ object, generic, ...(once !== undefined ? { once } : {}) }];
+    });
     const playerTaxes = [...taxOfPlayer.values()].filter((generic) => generic > 0);
     if (taxes.length === 0 && playerTaxes.length === 0) return null;
     const cap = taxes.reduce((sum, tax) => sum + tax.generic, 0) + playerTaxes.reduce((sum, tax) => sum + tax, 0);
@@ -15577,7 +15589,6 @@ export class Game {
         this.targetCostReductionOff = wasOff;
       }
     };
-    const reduces = this.spellPricedByTargets(def, player, card);
     const atFullPrice = most(reduces);
     const whenEarned = reduces ? most(false) : atFullPrice;
     return {
@@ -15586,9 +15597,36 @@ export class Game {
       within: (ref) => {
         const tax = ref.kind === "object" ? (taxOf.get(ref.object) ?? 0) : ref.kind === "player" ? (taxOfPlayer.get(ref.player) ?? 0) : 0;
         if (tax === 0) return true;
-        return tax <= (reduces && this.targetsEarnReduction(def, player, card, [ref]) ? whenEarned : atFullPrice);
+        // Another slot may earn the reduction this target doesn't (rule
+        // 601.2f): judged slot by slot, so offered if any pairing can be paid.
+        const earned =
+          reduces &&
+          (this.targetsEarnReduction(def, player, card, [ref]) ||
+            [...earners].some((id) => ref.kind !== "object" || id !== ref.object));
+        return tax <= (earned ? whenEarned : atFullPrice);
       },
     };
+  }
+
+  /** What of a target's tax (`targetTaxOffer`) is charged once however many
+   * targets it reaches: a "that target a Merfolk you control" static's, and
+   * the spell's own `targetCostIncrease`. Keyed so that two targets sharing
+   * one are charged it once. */
+  private onceTargetTaxes(def: CardDefinition, player: PlayerId, card: ObjectId, object: ObjectId): readonly TargetTaxShare[] {
+    const out: TargetTaxShare[] = [];
+    for (const [sourceId, costs] of this.activeTargetedCosts()) {
+      const source = this.state.objects[sourceId];
+      if (source === undefined || source.controller === player) continue;
+      costs.forEach((cost, i) => {
+        if (cost.targeting === undefined || (cost.payGeneric ?? 0) <= 0) return;
+        if (matchesFilter(this.state, this.registry, object, cost.targeting, { you: source.controller, source: sourceId })) {
+          out.push({ key: `${sourceId}:${i}`, generic: cost.payGeneric ?? 0 });
+        }
+      });
+    }
+    const own = this.ownTargetTax(def, player, card, [{ kind: "object", object }]);
+    if (own > 0) out.push({ key: "own", generic: own });
+    return out;
   }
 
   /** `options` less the targets whose life cost (`targetingLifeCost`)
