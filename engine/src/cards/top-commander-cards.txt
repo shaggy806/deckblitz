@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4884 already implemented / 116 missing (marks refreshed 2026-11-09)
+4885 already implemented / 115 missing (marks refreshed 2026-11-09)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2583,7 +2583,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2590  Spine of Ish Sah                         {7}              Artifact
 [x]  2591  Priest of Fell Rites                     {W}{B}           Creature — Human Warlock
 [x]  2592  Soul's Fire                              {2}{R}           Instant
-[ ]  2593  Ascend from Avernus                      {X}{W}{W}{W}     Sorcery
+[x]  2593  Ascend from Avernus                      {X}{W}{W}{W}     Sorcery
 [x]  2594  Bloodthirster                            {5}{R}           Creature — Demon
 [x]  2595  Brass Squire                             {3}              Artifact Creature — Myr
 [x]  2596  Echo of Eons                             {4}{U}{U}        Sorcery
