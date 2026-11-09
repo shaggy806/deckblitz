@@ -12,7 +12,7 @@ import { invalidateComputedCache } from "../characteristics.js";
 import type { ReplacementOrderOffer, ScriptedController } from "../controller.js";
 import type { Game } from "../game.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
-import { A, B, attack, cast, counters, lands, ref, spawn, table, toHand } from "./harness.js";
+import { A, B, C, attack, cast, counters, hand, lands, life, ref, settle, spawn, table, toHand } from "./harness.js";
 
 /** Answers each question with the option whose name is `pick`, noting them. */
 function answering(seat: ScriptedController, pick: string): ReplacementOrderOffer[] {
@@ -237,6 +237,98 @@ describe("what would save a permanent from being destroyed (616.1)", () => {
     expect(asked).toHaveLength(1);
     expect(game.state.objects[hyena].zone).toBe("graveyard");
     expect(game.state.objects[host].regenerationShields).toBe(1);
+  });
+});
+
+describe("two opponents' Notion Thieves (616.1, the ruling)", () => {
+  it("the drawing player chooses whose applies, card by card", () => {
+    const { game, a } = table({ players: 3 });
+    spawn(game, "Notion Thief", B);
+    spawn(game, "Notion Thief", C);
+    const asked: ReplacementOrderOffer[] = [];
+    a.chooseReplacementOrderFn = (_view, offer) => {
+      asked.push(offer);
+      return offer.options.findIndex((o) => o.who === (asked.length === 1 ? C : B));
+    };
+    game.debugApplyEffect(A, { kind: "draw", amount: 2 });
+    settle(game);
+    expect(asked).toHaveLength(2);
+    expect(hand(game, B)).toHaveLength(1);
+    expect(hand(game, C)).toHaveLength(1);
+    expect(hand(game, A)).toHaveLength(0);
+  });
+
+  it("left alone, the next opponent in turn order", () => {
+    const { game } = table({ players: 3 });
+    spawn(game, "Notion Thief", C);
+    spawn(game, "Notion Thief", B);
+    game.debugApplyEffect(A, { kind: "draw", amount: 1 });
+    settle(game);
+    expect(hand(game, B)).toHaveLength(1);
+    expect(hand(game, C)).toHaveLength(0);
+  });
+
+  it("one player's two Thieves ask nothing", () => {
+    const { game, a } = table({ players: 3 });
+    spawn(game, "Notion Thief", B);
+    spawn(game, "Notion Thief", B);
+    const asked = answering(a, "Notion Thief");
+    game.debugApplyEffect(A, { kind: "draw", amount: 1 });
+    settle(game);
+    expect(asked).toHaveLength(0);
+    expect(hand(game, B)).toHaveLength(1);
+  });
+});
+
+const SECOND_LICH = "Test Second Lich";
+const secondLich = defineCard({
+  name: SECOND_LICH,
+  manaCost: "{0}",
+  types: ["enchantment"],
+  text: "If you would draw a card, you gain 1 life instead.",
+  static: [
+    {
+      affects: { scope: "self" },
+      replacement: { event: "would-draw", who: "you", instead: { text: "gain 1 life instead", effect: { kind: "gain-life", amount: 1 } } },
+      text: "If you would draw a card, you gain 1 life instead.",
+    },
+  ],
+});
+
+describe("mandatory draw replacements (616.1)", () => {
+  it("beside an optional one, every mandatory one is offered", () => {
+    const { game, a } = table();
+    game.registry.register(secondLich);
+    spawn(game, "Underrealm Lich");
+    spawn(game, SECOND_LICH);
+    spawn(game, "Abundance");
+    let offered: readonly string[] = [];
+    a.chooseModesFn = (_view, _min, _max, modes) => {
+      offered = modes.map((m) => m.text);
+      return [offered.findIndex((t) => t.includes("gain 1 life"))];
+    };
+    const before = life(game);
+    game.debugApplyEffect(A, { kind: "draw", amount: 1 });
+    settle(game);
+    expect(offered).toHaveLength(3);
+    expect(life(game)).toBe(before + 1);
+  });
+
+  it("two different mandatory ones are the player's to choose between", () => {
+    const { game, a } = table();
+    game.registry.register(secondLich);
+    spawn(game, "Underrealm Lich");
+    spawn(game, SECOND_LICH);
+    let offered = 0;
+    a.chooseModesFn = (_view, _min, _max, modes) => {
+      offered = modes.length;
+      return [modes.findIndex((m) => m.text.includes("gain 1 life"))];
+    };
+    const before = life(game);
+    game.debugApplyEffect(A, { kind: "draw", amount: 1 });
+    settle(game);
+    expect(offered).toBe(2);
+    expect(life(game)).toBe(before + 1);
   });
 });
 

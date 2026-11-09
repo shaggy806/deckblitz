@@ -3242,7 +3242,11 @@ export type ReplacementOrderResume =
   /** The resolving effect, which parked itself and asks again or goes on. */
   | { readonly site: "effect" }
   /** Combat damage, dealt once nothing more is to be asked. */
-  | { readonly site: "combat-damage" };
+  | { readonly site: "combat-damage" }
+  /** The draw that asked, made again with the answer. */
+  | { readonly site: "draw"; readonly player: PlayerId }
+  /** A resolved spell leaving the stack, tried again with the answer. */
+  | { readonly site: "leave-stack"; readonly spell: ObjectId };
 
 export type AwaitingDecision =
   | {

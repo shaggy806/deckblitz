@@ -54282,7 +54282,10 @@ controlledBy,
     const answers = this.state.replacementAnswers ?? {};
     this.state.replacementAnswers = { ...answers, [awaiting.answers]: [...(answers[awaiting.answers] ?? []), chosen.key] };
     this.emit({ type: "replacement-order-chosen", player, event: awaiting.event, effect: chosen.name });
-    if (awaiting.resume.site === "combat-damage") this.promptNextDamageAssignment();
+    const { resume } = awaiting;
+    if (resume.site === "combat-damage") this.promptNextDamageAssignment();
+    else if (resume.site === "draw") this.drawCard(resume.player, true);
+    else if (resume.site === "leave-stack") this.leaveStackAfterResolving(resume.spell);
     const next = this.state.awaiting as AwaitingDecision | null;
     this.prepareForPriority(next?.player ?? this.activePlayer);
   }
@@ -56819,6 +56822,10 @@ controlledBy,
         return;
       }
     }
+    // Notion Thieves of different players could each take this draw: the
+    // drawing player chooses which applies first (rule 616.1, the ruling),
+    // and the draw is made again with the answer.
+    if (this.drawRedirectOrderAsked(player)) return;
     // "If you would draw a card while your library has no cards in it, you
     // win the game instead" (Laboratory Maniac — rule 614.11: it applies
     // though there's no card to draw). The draw is replaced whether or not
@@ -56854,6 +56861,8 @@ controlledBy,
       drawer = next.to;
       if (this.drawWonInstead(drawer)) return;
     }
+    // Each draw is its own choice.
+    if (this.state.replacementAnswers !== undefined) delete this.state.replacementAnswers[`draw:${player}`];
     if (redirected) {
       // The draw is the Thief's controller's now, and theirs to replace.
       if (!this.nextDrawReplaced(drawer, drawEvent)) this.drawCardRaw(drawer);
@@ -57271,24 +57280,26 @@ controlledBy,
    * the drawing player chooses which replacement applies, and one they don't
    * choose doesn't): when an optional effect replacement of `player`'s could
    * replace this draw, asks them by a `choose-modes` question — each such
-   * replacement (identical ones once), a mandatory one of theirs (Underrealm
-   * Lich, the first in battlefield order) as the alternative to them, or,
-   * with none, "Draw a card". Says whether it asked.
+   * replacement (identical ones once), each mandatory one of theirs
+   * (Underrealm Lich) as an alternative to them, or, with none, "Draw a
+   * card"; two different mandatory ones ask the same. Says whether it asked.
    */
   private optionalDrawReplacementAsked(player: PlayerId, event: WouldDrawEvent): boolean {
     const all = this.drawEffectReplacementsFor(player, event);
-    if (!all.some((r) => r.may)) return false;
-    const options: { readonly choice: "draw" | { readonly printed: ObjectId }; readonly text: string; readonly source: ObjectId }[] = [];
-    const mandatory = all.find((r) => !r.may);
-    if (mandatory === undefined) options.push({ choice: "draw", text: "Draw a card", source: all[0].source });
-    else options.push({ choice: { printed: mandatory.source }, text: mandatory.text, source: mandatory.source });
     const seen = new Set<string>();
-    for (const r of all) {
-      if (!r.may) continue;
+    const distinct = all.filter((r) => {
       const key = JSON.stringify([printedCardName(this.state.objects[r.source]), r.effect]);
-      if (seen.has(key)) continue;
+      if (seen.has(key)) return false;
       seen.add(key);
-      options.push({ choice: { printed: r.source }, text: r.text, source: r.source });
+      return true;
+    });
+    const musts = distinct.filter((r) => !r.may);
+    if (!all.some((r) => r.may) && musts.length < 2) return false;
+    const options: { readonly choice: "draw" | { readonly printed: ObjectId }; readonly text: string; readonly source: ObjectId }[] = [];
+    if (musts.length === 0) options.push({ choice: "draw", text: "Draw a card", source: all[0].source });
+    for (const r of musts) options.push({ choice: { printed: r.source }, text: r.text, source: r.source });
+    for (const r of distinct) {
+      if (r.may) options.push({ choice: { printed: r.source }, text: r.text, source: r.source });
     }
     const asked = all.find((r) => r.may)?.source ?? options[0].source;
     this.state.awaiting = {
@@ -57384,21 +57395,58 @@ controlledBy,
    * spare this one — or `null` when none is left.
    *
    * When Thieves of two different opponents could apply, the drawing player
-   * would choose which (rule 616.1, and the Notion Thief ruling): that isn't
-   * asked — the opponent first in turn order after them goes first
-   * (AUTHORING §15, "Replacement ordering").
+   * chooses which (rule 616.1, and the Notion Thief ruling —
+   * `drawRedirectOrderAsked`); where they weren't asked, the opponent first
+   * in turn order after them goes first.
    */
   private drawRedirectFor(
     player: PlayerId,
     applied: ReadonlyMap<ObjectId, number>,
   ): { readonly source: ObjectId; readonly to: PlayerId } | null {
+    const all = this.drawRedirectsFor(player, applied);
+    const chosen = applied.size === 0 ? this.state.replacementAnswers?.[`draw:${player}`]?.[0] : undefined;
+    return all.find((r) => r.source === chosen) ?? all[0] ?? null;
+  }
+
+  /** Asks `player`, about to draw, whose Notion Thief applies first, when
+   * Thieves of different players could; says whether it asked. */
+  private drawRedirectOrderAsked(player: PlayerId): boolean {
+    const answers = `draw:${player}`;
+    if (this.state.awaiting !== null || this.state.replacementAnswers?.[answers] !== undefined) return false;
+    const all = this.drawRedirectsFor(player, new Map());
+    const byPlayer = all.filter((r, i) => all.findIndex((o) => o.to === r.to) === i);
+    if (byPlayer.length < 2) return false;
+    this.state.awaiting = {
+      kind: "replacement-order",
+      player,
+      event: "You would draw a card",
+      options: byPlayer.map((r) => ({
+        key: r.source,
+        name: this.state.objects[r.source].cardName,
+        text: "its controller draws it instead",
+        object: r.source,
+        who: r.to,
+      })),
+      best: 0,
+      answers,
+      resume: { site: "draw", player },
+    };
+    return true;
+  }
+
+  /** The Thieves that could take `player`'s draw now, the opponent first in
+   * turn order after them first. */
+  private drawRedirectsFor(
+    player: PlayerId,
+    applied: ReadonlyMap<ObjectId, number>,
+  ): readonly { readonly source: ObjectId; readonly to: PlayerId }[] {
     const seat = this.state.players[player];
     const firstInDrawStep =
       this.state.turn.step === "draw" && player === this.activePlayer && seat?.drewInDrawStepThisTurn !== true;
     const order = this.state.turnOrder;
     const after = (p: PlayerId): number =>
       (order.indexOf(p) - order.indexOf(player) + order.length) % order.length;
-    let best: { readonly source: ObjectId; readonly to: PlayerId } | null = null;
+    const found: { readonly source: ObjectId; readonly to: PlayerId }[] = [];
     for (const id of this.state.zones.shared.battlefield) {
       const source = this.state.objects[id];
       if (hasLostAbilities(this.state, this.registry,source) || source.controller === player) continue;
@@ -57408,10 +57456,11 @@ controlledBy,
         if (r?.event !== "would-draw" || r.who !== "opponent" || r.instead !== "you-draw") continue;
         if (r.exceptFirstInDrawStep === true && firstInDrawStep) continue;
         if (!this.staticActive(source, ability)) continue;
-        if (best === null || after(source.controller) < after(best.to)) best = { source: id, to: source.controller };
+        found.push({ source: id, to: source.controller });
       }
     }
-    return best;
+    // A stable sort, so battlefield order settles a tie, as it always has.
+    return found.sort((x, y) => after(x.to) - after(y.to));
   }
 
   private drawCardRaw(player: PlayerId): void {
