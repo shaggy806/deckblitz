@@ -5019,6 +5019,9 @@ export interface TokenLink {
 
 export interface EnteringTokenCopies {
   readonly tokens: readonly ObjectId[];
+  /** Plain tokens of the named definition, not copies of anything — a token
+   * with devour stops to ask as it enters just as a copy does (rule 702.82a). */
+  readonly created?: true;
   /** What they're created with — see `GameObject.createdWith`. */
   readonly createdWith?: TokenLink;
   readonly controller: PlayerId;

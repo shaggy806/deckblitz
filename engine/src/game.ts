@@ -42643,13 +42643,7 @@ controlledBy,
         : []),
     ];
     const changedColors = tokenColorsAfter(def.colors, textChanges);
-    return this.withEnterBatch(() => [
-      ...this.mintTokenBatch(
-        controller,
-        tokenName,
-        null,
-        total,
-        [
+    const modifiers: PtModifier[] = [
           // The colour the changed text gave it, a copiable value (rules
           // 111.3, 612.2), under every other colour-setting effect.
           ...(changedColors === undefined
@@ -42697,7 +42691,38 @@ controlledBy,
                   timestamp: -1,
                 },
               ]),
-        ],
+    ];
+    // Devour is "as this enters" (rule 702.82a): a token with it stops to ask
+    // before it's there, as an entering token copy does.
+    if (def.devour !== null && total > 0) {
+      this.carryOutTokenCopies([
+        {
+          controller,
+          copyName: tokenName,
+          created: true,
+          total,
+          replaced: plan.flatMap((t) => (t.name === null ? [] : [{ name: t.name, count: t.count }])),
+          modifiers,
+          riders,
+          tapped,
+          exileAtEndStep,
+          sacrificeAtEndStep,
+          atYourNextEndStep: false,
+          exileAtEndOfCombat: false,
+          sacrificeAtEndOfCombat: false,
+          ...(goadedForGameBy !== undefined ? { goadedForGameBy } : {}),
+          ...(this.mintingLink !== null ? { createdWith: this.mintingLink } : {}),
+        },
+      ]);
+      return [];
+    }
+    return this.withEnterBatch(() => [
+      ...this.mintTokenBatch(
+        controller,
+        tokenName,
+        null,
+        total,
+        modifiers,
         exileAtEndStep,
         false,
         tapped,
@@ -43134,7 +43159,7 @@ controlledBy,
       id = this.withTokenLink(planned.createdWith, () => this.mintFreshTokenObject(
         planned.controller,
         planned.copyName,
-        planned.copyName,
+        planned.created === true ? null : planned.copyName,
         planned.modifiers,
         planned.exileAtEndStep,
         true,
@@ -43204,7 +43229,7 @@ controlledBy,
           }
           if (group.goadedForGameBy !== undefined) this.state.objects[id].goadedForGameBy = [group.goadedForGameBy];
           this.noteTokensCreated(group.controller);
-          if (!copiedAgain) this.emit({ type: "permanent-copied", object: id, copyOf: copyName });
+          if (!copiedAgain && group.created !== true) this.emit({ type: "permanent-copied", object: id, copyOf: copyName });
           this.emit({ type: "permanent-entered-battlefield", object: id });
           entered.push(id);
         }
