@@ -4377,6 +4377,9 @@ export class Game {
     // A bestowed Aura spell is an enchantment, not a creature (rule 702.103b).
     const base = cardSource(card?.bestowed === true ? bestowedDefinition(def) : def, object);
     if (object === undefined || card === undefined) return base;
+    // Being cast as a face it isn't showing (rule 709.3): what can be asked
+    // only of the object is asked of that face.
+    const castFace = card.faces?.indexOf(def.name) ?? -1;
     // A spell's own {X} (rule 107.3) — the X it's being cast for while it's
     // cast (`x`), the X it was cast for once it's on the stack, and zero
     // until it's been chosen. A target filter's `n: "x"` (Stolen by the
@@ -4394,6 +4397,9 @@ export class Game {
       ...base,
       ...(spellX !== undefined ? { x: spellX } : {}),
       ...(chooser !== undefined ? { chooser } : {}),
+      ...(castFace >= 0 && castFace !== (card.face ?? 0)
+        ? { asCastFace: <T>(read: () => T): T => this.withFace(object, castFace, read) }
+        : {}),
       amount: this.filterAmounts({ source: object, controller: card.controller, x: spellX ?? card.xValue ?? 0 }),
     };
   }

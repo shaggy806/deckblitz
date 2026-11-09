@@ -48,6 +48,10 @@ export interface TargetSource {
    * attacking to know who the defending player is, and an `other` slot
    * (`than: "source"`) leaves it out. */
   readonly object?: ObjectId;
+  /** A card being cast as a face or half it isn't showing (rule 709.3): runs
+   * a read of `object` with it as that face. Filter-based protection asks the
+   * object what `colors` and `types` already answer for the half. */
+  readonly asCastFace?: <T>(read: () => T) => T;
   /** For a triggered ability, the object and the player its event names —
    * what an `other` slot's `than: "trigger-object"` / `"trigger-player"`
    * leaves out. */
@@ -367,12 +371,10 @@ function qualityMatches(
       ...(source.spell === true ? { asSpell: true as const } : {}),
     };
     const own = filterSource !== undefined ? { ...read, source: filterSource } : read;
-    if (
+    const matches = (): boolean =>
       prot.filters.some((filter) => matchesFilter(state, registry, from, filter, own)) ||
-      bound.some((b) => matchesFilter(state, registry, from, b.filter, { ...read, source: b.source }))
-    ) {
-      return true;
-    }
+      bound.some((b) => matchesFilter(state, registry, from, b.filter, { ...read, source: b.source }));
+    if (source.asCastFace !== undefined ? source.asCastFace(matches) : matches()) return true;
   }
   return false;
 }
