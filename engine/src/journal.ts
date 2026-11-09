@@ -19,6 +19,7 @@
  */
 
 import type { ObjectId, PlayerId } from "./primitives.js";
+import type { FlipLanding, RollRecord } from "./random-results.js";
 import type { GameState, LastKnownInfo, ZoneType } from "./state.js";
 import type { TargetRef } from "./target.js";
 
@@ -118,7 +119,13 @@ export type JournalKind =
    * `object`. */
   | "crime"
   /** `player` cycled `object` (702.29c). */
-  | "cycled";
+  | "cycled"
+  /** `player` flipped a coin (rule 705): `flip` how it landed, `seq` the
+   * event's. An ignored flip never happened (706.6's way) and isn't here. */
+  | "flipped"
+  /** `player` rolled one or more dice as one roll (rule 706): `roll` what
+   * came up, `seq` the event's. */
+  | "rolled";
 
 /** One event the journal keeps. Each field means one thing for every kind;
  * a kind leaves out what it doesn't have. */
@@ -167,6 +174,12 @@ export interface JournalEntry {
   readonly ability?: string;
   /** The mode chosen (`did`), by index. */
   readonly mode?: number;
+  /** How a coin landed (`flipped`). */
+  readonly flip?: FlipLanding;
+  /** What came up (`rolled`). */
+  readonly roll?: RollRecord;
+  /** The event's `seq` (`flipped`, `rolled`), for what's "this way". */
+  readonly seq?: number;
 }
 
 /** A turn the journal still keeps entries for, and whose it was (extra

@@ -17,6 +17,7 @@
 
 import type { TriggerSpec } from "./abilities.js";
 import type { GameEvent } from "./events.js";
+import { rollOfEvent } from "./random-results.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 
 type EventOf<T extends GameEvent["type"]> = Extract<GameEvent, { type: T }>;
@@ -54,9 +55,13 @@ function row<T extends GameEvent["type"]>(r: TriggerEventRow<T>): TriggerEventRo
 export const TRIGGER_EVENTS = {
   /** "Whenever you forage" (rule 701.61a — Corpseberry Cultivator). */
   forages: row({ type: "foraged", player: (e) => e.player }),
-  /** "Whenever you roll one or more dice" (rule 706); the value is the sum
-   * of the results. */
-  "rolls-dice": row({ type: "dice-rolled", player: (e) => e.player, amount: (e) => e.results.reduce((n, r) => n + r, 0) }),
+  /** "Whenever you roll one or more dice" (rule 706); the value is the
+   * result, the natural results plus the modifier (706.2). */
+  "rolls-dice": row({ type: "dice-rolled", player: (e) => e.player, amount: (e) => rollOfEvent(e).total }),
+  /** "Whenever you roll a 4 or higher", "a natural 20": once per die that
+   * passes the trigger's `die` test, the value being that die's result
+   * (`diceOccurrences`). */
+  "rolls-die": row({ type: "dice-rolled", player: (e) => e.player }),
   /** "Whenever you take the initiative" (rule 726) — again when they already
    * had it (726.5). */
   "takes-initiative": row({ type: "initiative-taken", player: (e) => e.player }),
@@ -90,7 +95,9 @@ export const TRIGGER_EVENTS = {
    * per fighter, each its own event. */
   fights: row({ type: "creature-fought", object: (e) => e.object }),
   /** "Whenever you win a coin flip" (rule 705). */
-  "wins-coin-flip": row({ type: "coin-flipped", when: (e) => e.won, player: (e) => e.player }),
+  "wins-coin-flip": row({ type: "coin-flipped", when: (e) => e.won === true, player: (e) => e.player }),
+  /** "Whenever you lose a coin flip" (rule 705). */
+  "loses-coin-flip": row({ type: "coin-flipped", when: (e) => e.won === false, player: (e) => e.player }),
   /** "Whenever a permanent becomes untapped" — not one entering untapped
    * (603.2e). */
   "becomes-untapped": row({ type: "permanent-untapped", when: (e) => e.asItEntered !== true, object: (e) => e.object }),

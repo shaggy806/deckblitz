@@ -604,6 +604,7 @@ import _poolNaturalSpring from "../pool/natural-spring.js";
 import _poolNebelgastIntruder from "../pool/nebelgast-intruder.js";
 import _poolNeedleStorm from "../pool/needle-storm.js";
 import _poolNetherVoid from "../pool/nether-void.js";
+import _poolNetheresePuzzleWard from "../pool/netherese-puzzle-ward.js";
 import _poolNeutralizingBlast from "../pool/neutralizing-blast.js";
 import _poolNewHorizons from "../pool/new-horizons.js";
 import _poolNezumiBladeblesser from "../pool/nezumi-bladeblesser.js";
@@ -1653,6 +1654,7 @@ const shard: CardShard = {
     _poolNebelgastIntruder,
     _poolNeedleStorm,
     _poolNetherVoid,
+    _poolNetheresePuzzleWard,
     _poolNeutralizingBlast,
     _poolNewHorizons,
     _poolNezumiBladeblesser,

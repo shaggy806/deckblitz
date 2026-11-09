@@ -33,6 +33,7 @@ import {
   tokensNamed,
   zone,
 } from "./harness.js";
+import { lastRollIn } from "../random-results.js";
 
 const BEARS = "Grizzly Bears"; // 2/2
 const DREADMAW = "Colossal Dreadmaw"; // 6/6
@@ -85,7 +86,7 @@ describe("Thunderwave", () => {
       build(t);
       cast(t.game, toHand(t.game, "Thunderwave", A));
       settle(t.game);
-      const roll = t.game.state.lastRoll?.results[0] ?? 0;
+      const roll = lastRollIn(t.game.state)?.results[0] ?? 0;
       if (roll >= min && roll <= max) return t;
     }
     throw new Error(`no seed rolled ${min}-${max}`);

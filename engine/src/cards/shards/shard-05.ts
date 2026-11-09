@@ -69,6 +69,7 @@ import _poolAvengersAssemble from "../pool/avengers-assemble.js";
 import _poolAvizoa from "../pool/avizoa.js";
 import _poolBairdArgivianRecruiter from "../pool/baird-argivian-recruiter.js";
 import _poolBalanceOfPower from "../pool/balance-of-power.js";
+import _poolBarbarianClass from "../pool/barbarian-class.js";
 import _poolBarbarianRing from "../pool/barbarian-ring.js";
 import _poolBarktoothWarbeard from "../pool/barktooth-warbeard.js";
 import _poolBaronSengir from "../pool/baron-sengir.js";
@@ -1055,6 +1056,7 @@ const shard: CardShard = {
     _poolAvizoa,
     _poolBairdArgivianRecruiter,
     _poolBalanceOfPower,
+    _poolBarbarianClass,
     _poolBarbarianRing,
     _poolBarktoothWarbeard,
     _poolBaronSengir,

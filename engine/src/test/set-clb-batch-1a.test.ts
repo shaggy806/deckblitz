@@ -41,6 +41,7 @@ import {
   watchTargets,
   zone,
 } from "./harness.js";
+import { lastRollIn } from "../random-results.js";
 
 const canBlock = (offer: ReturnType<typeof blockOffer>, blocker: ObjectId): readonly ObjectId[] =>
   offer.eligible.find((e) => e.blocker === blocker)?.canBlock ?? [];
@@ -166,7 +167,7 @@ describe("Recruitment Drive", () => {
       const { game } = table({ seed });
       lands(game, "Plains", 3);
       cast(game, toHand(game, "Recruitment Drive"));
-      const roll = game.state.lastRoll?.total ?? 0;
+      const roll = lastRollIn(game.state)?.total ?? 0;
       expect(roll).toBeGreaterThanOrEqual(1);
       const soldiers = tokensNamed(game, "Soldier Token", A);
       const knights = tokensNamed(game, "2/2 White Knight Token", A);
@@ -245,7 +246,7 @@ describe("Overwhelming Encounter", () => {
       expect(keywords(game, bears).has("vigilance")).toBe(true);
       expect(keywords(game, bears).has("trample")).toBe(true);
       expect(keywords(game, theirs).has("trample")).toBe(false);
-      const roll = game.state.lastRoll?.total ?? 0;
+      const roll = lastRollIn(game.state)?.total ?? 0;
       if (roll <= 9) {
         expect(pt(game, bears)).toEqual({ power: 4, toughness: 4 });
         expect(counters(game, bears)).toBe(0);

@@ -301,6 +301,7 @@ import _poolExquisiteFirecraft from "../pool/exquisite-firecraft.js";
 import _poolEyeOfSingularity from "../pool/eye-of-singularity.js";
 import _poolEyeblightCullers from "../pool/eyeblight-cullers.js";
 import _poolFactOrFiction from "../pool/fact-or-fiction.js";
+import _poolFaridehDevilsChosen from "../pool/farideh-devils-chosen.js";
 import _poolFatefulHandoff from "../pool/fateful-handoff.js";
 import _poolFaultRiders from "../pool/fault-riders.js";
 import _poolFavorOfJukai from "../pool/favor-of-jukai.js";
@@ -312,6 +313,7 @@ import _poolFeywildTrickster from "../pool/feywild-trickster.js";
 import _poolFiendOfTheShadows from "../pool/fiend-of-the-shadows.js";
 import _poolFierceWitchstalker from "../pool/fierce-witchstalker.js";
 import _poolFieryConfluence from "../pool/fiery-confluence.js";
+import _poolFieryGambit from "../pool/fiery-gambit.js";
 import _poolFinalParting from "../pool/final-parting.js";
 import _poolFireNationAmbushers from "../pool/fire-nation-ambushers.js";
 import _poolFiresOfUndeath from "../pool/fires-of-undeath.js";
@@ -1348,6 +1350,7 @@ const shard: CardShard = {
     _poolEyeOfSingularity,
     _poolEyeblightCullers,
     _poolFactOrFiction,
+    _poolFaridehDevilsChosen,
     _poolFatefulHandoff,
     _poolFaultRiders,
     _poolFavorOfJukai,
@@ -1359,6 +1362,7 @@ const shard: CardShard = {
     _poolFiendOfTheShadows,
     _poolFierceWitchstalker,
     _poolFieryConfluence,
+    _poolFieryGambit,
     _poolFinalParting,
     _poolFireNationAmbushers,
     _poolFiresOfUndeath,

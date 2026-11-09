@@ -37,6 +37,7 @@ import {
   tokensNamed,
   zone,
 } from "./harness.js";
+import { lastRollIn } from "../random-results.js";
 
 const ventures = (game: Game, player = A): number =>
   game.state.eventLog.filter((e) => e.type === "ventured" && e.player === player).length;
@@ -270,7 +271,7 @@ describe("Herald of Hadar", () => {
       const herald = spawn(game, "Herald of Hadar");
       lands(game, "Swamp", 6);
       activate(game, herald);
-      const total = game.state.lastRoll!.total;
+      const total = lastRollIn(game.state)!.total;
       expect(life(game, B)).toBe(18);
       expect(life(game, A)).toBe(total <= 9 ? 20 : 22);
       expect(tokensNamed(game, "Treasure Token", A)).toBe(total === 20 ? 2 : 0);

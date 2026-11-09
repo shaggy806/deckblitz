@@ -359,6 +359,11 @@ export type GameEvent =
       readonly player: PlayerId;
       readonly sides: number;
       readonly results: readonly number[];
+      /** What the instruction adds to the natural results (rule 706.2). */
+      readonly modifier?: number;
+      /** Natural results rolled and ignored, for the log and the dice thrown:
+       * no trigger or effect sees them (706.6). */
+      readonly ignored?: readonly number[];
       /** What rolled them, if a permanent or a spell did. */
       readonly source?: ObjectId;
     })
@@ -1468,11 +1473,11 @@ export type GameEvent =
       /** A player flipped a coin (rule 705) and won or lost the flip. */
       readonly type: "coin-flipped";
       readonly player: PlayerId;
-      readonly won: boolean;
-      /** A flip that cares only about heads or tails (Molten Sentry): no
-       * player wins or loses it (rule 705.2), so `won` is false, and no
-       * `wins-coin-flip` trigger fires on it. */
-      readonly came?: "heads" | "tails";
+      readonly came: "heads" | "tails";
+      /** Absent on a flip that cares only about heads or tails (Molten
+       * Sentry): no player wins or loses it (rule 705.2), so neither
+       * `wins-coin-flip` nor `loses-coin-flip` fires on it. */
+      readonly won?: boolean;
     })
   | (Base & {
       /** A player clashed (rule 701.30) — one event per clashing player,

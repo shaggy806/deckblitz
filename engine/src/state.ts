@@ -36,6 +36,7 @@ import type { CardNameAim, CardNameFilter } from "./card-names.js";
 import type { Color, ManaProductionRule, ManaType, ManaUnit, SpendAs, SpentMana } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { Expiry, UntilCast, UntilPoint, WhileSource } from "./duration.js";
+import type { RollRecord } from "./random-results.js";
 import type { ReplacementSpec } from "./replacements.js";
 import type { CardPlayPermission, CastNowTerms, EffectPlay } from "./play-permission.js";
 import type { Journal } from "./journal.js";
@@ -2267,6 +2268,9 @@ export interface LastKnownRefs {
    * "if mana from a Treasure was spent to activate this ability". It goes
    * with the refs so a resolution parked on a decision still has it. */
   readonly manaSpent?: readonly SpentMana[];
+  /** For a triggered ability on a roll: that roll, so "those results" are
+   * still its own if another is rolled before it resolves. */
+  readonly roll?: RollRecord;
   readonly source?: number;
   readonly triggerObject?: number;
   /** For a fired delayed ability: the resolution that set it up
@@ -6222,10 +6226,6 @@ export interface GameState {
    * no zone and can't be removed. Its `ability` is applied by the layer system
    * (a `"creatures-you-control"` anthem) and/or `detectTriggers`. */
   emblems: EmblemState[];
-  /** The last die roll made (rule 706), what a `roll-dice`'s results and
-   * `{ roll }` amounts read: who rolled, each die's natural result, and the
-   * result with the roll's modifier. */
-  lastRoll?: { readonly player: PlayerId; readonly sides: number; readonly results: readonly number[]; readonly total: number };
   /** The combat-damage step in progress (rule 510 — ROADMAP Phase 11 EG-4).
    * Tracks which sub-pass is running (first strike / regular), whether a
    * regular sub-pass is still owed, and any blocked attackers whose

@@ -496,6 +496,7 @@ import _poolMinionsReturn from "../pool/minions-return.js";
 import _poolMinistrantOfObligation from "../pool/ministrant-of-obligation.js";
 import _poolMiresToll from "../pool/mires-toll.js";
 import _poolMirrorEntity from "../pool/mirror-entity.js";
+import _poolMirrorMarch from "../pool/mirror-march.js";
 import _poolMisguidedRage from "../pool/misguided-rage.js";
 import _poolMishrasDomination from "../pool/mishras-domination.js";
 import _poolMisthoofKirin from "../pool/misthoof-kirin.js";
@@ -1435,6 +1436,7 @@ const shard: CardShard = {
     _poolMinistrantOfObligation,
     _poolMiresToll,
     _poolMirrorEntity,
+    _poolMirrorMarch,
     _poolMisguidedRage,
     _poolMishrasDomination,
     _poolMisthoofKirin,

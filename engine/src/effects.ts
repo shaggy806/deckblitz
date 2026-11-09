@@ -32,6 +32,7 @@ import { EVERY_CREATURE_TYPE, EVERY_LAND_TYPE, isCreatureType, isLandType } from
 import { sameVoteChoice } from "./events.js";
 import type { RandomPick, Vote, VoteChoice } from "./events.js";
 import type { ThisWayEntry } from "./this-way.js";
+import { isFlipThisWay, rollRead, type FlipLanding, type FlipThisWay, type RollQuery, type RollRecord } from "./random-results.js";
 import type {
   CopyDuration,
   DamageRuleDuration,
@@ -690,14 +691,17 @@ export type EffectAmount =
    * casts. 0 for a player with no commander.
    */
   | { readonly commanderCasts: "you" | number }
-  /** The last die roll this effect's controller made (rule 706 — a
+  /** The last die roll this effect's controller made, or the roll a
+   * triggered ability triggered on (rule 706 — a
    * `roll-dice`'s `then` or table row): `"total"`, the result (natural
    * results plus the roll's modifier); `"odd"` / `"even"`, how many dice came
    * up odd / even ("for each odd result" — Clown Car); `{ equals: N }`, how
-   * many came up exactly N; `"other"`, with a `choose-value` of `"roll-result"`
-   * having read the chosen result as `"x"`, "the other result" (Reckless
-   * Endeavor). 0 before any roll. */
-  | { readonly roll: "total" | "odd" | "even" | "other" | { readonly equals: number } }
+   * many came up exactly N; `{ atLeast: N }`, how many came up N or higher;
+   * `"highest"`, the highest natural result; `"distinct"`, how many different
+   * numbers came up (706.5: doubles is 1 over two dice); `"other"`, with a
+   * `choose-value` of `"roll-result"` having read the chosen result as `"x"`,
+   * "the other result" (Reckless Endeavor). 0 before any roll. */
+  | { readonly roll: RollQuery }
   /** A current life total: the effect controller's (`"you"` — Ajani, Caller
    * of the Pride's ultimate: "create X 2/2 white Cat creature tokens, where X
    * is your life total"), or `"each"`, the life of **each player the effect
@@ -1876,6 +1880,10 @@ export type ThisWayKind =
    * tapping them, then this. One already tapped isn't tapped again, and so
    * isn't counted. */
   | "tapped"
+  /** Coins it flipped, by how they landed (rule 705): won and lost are of
+   * flips with a call (705.2), heads and tails of any. Read from the journal,
+   * by the flipper; no object is involved. */
+  | FlipThisWay
   /** Counters it removed, counted one by one — Garnet, Princess of
    * Alexandria's "for each lore counter removed this way", Mister Hyde's "If
    * you do" (a `remove-counters` effect's, or a `remove-counter`'s). As an
@@ -6300,15 +6308,29 @@ export type EffectSpec =
        * "Flip a coin. If you win the flip, [won]. If you lose the flip,
        * [lost]." (rule 705) — the effect's controller flips, on the game's
        * seeded random stream, and `won` / `lost` are their effect after it.
-       * `untilLose` is "flip a coin until you lose a flip" (Okaun, Eye of
-       * Chaos; Zndrsplt, Eye of Wisdom): every flip won is its own
-       * `coin-flipped` event, which a `wins-coin-flip` trigger fires on, and
-       * `won` applies once per win.
+       * Each flip is its own `coin-flipped` event, which a `wins-coin-flip` /
+       * `loses-coin-flip` trigger fires on, and journal entry, which `thisWay:
+       * "flips-won"` and its fellows count. "Flip a coin until you lose a flip"
+       * is a `repeat` (`flipUntilLose` in cards/helpers).
        */
       readonly kind: "flip-coin";
       readonly won?: EffectSpec;
       readonly lost?: EffectSpec;
-      readonly untilLose?: boolean;
+      /** "Flip five coins": as one instruction ("one or more coins", Edgar),
+       * each coin's branch after that coin. */
+      readonly count?: EffectAmount;
+      /** The flip cares only about the side: no player wins or loses it (rule
+       * 705.2), so neither trigger fires. `heads` / `tails` are its branches. */
+      readonly sides?: true;
+      readonly heads?: EffectSpec;
+      readonly tails?: EffectSpec;
+      /** What's done with the results, after the last coin, reading them this
+       * way: "for each flip you won", "the number of coins that came up
+       * heads". */
+      readonly then?: EffectSpec;
+      /** Engine-built, never authored: how this coin landed, once the
+       * flipper has chosen among what replacement effects left. */
+      readonly landed?: FlipLanding;
     }
   | {
       /**
@@ -6416,6 +6438,9 @@ export type EffectSpec =
       readonly sides: number;
       readonly count?: EffectAmount;
       readonly modifier?: EffectAmount;
+      /** "Roll two d20 and ignore the lower roll", "ignore all but the
+       * highest": this many dice are kept, the lowest ignored (rule 706.6). */
+      readonly keepHighest?: number;
       readonly table?: readonly DieResultRow[];
       readonly then?: EffectSpec;
     }
@@ -12002,18 +12027,26 @@ export interface EffectApi {
   addPlayerEffect(effect: PlayerEffect, during?: PlayerId): void;
   /** How many spells `player` has cast this turn so far (`castsLeft`). */
   spellsCastThisTurn(player: PlayerId): number;
-  /** Flip a coin for this effect's controller (see the `"flip-coin"`
-   * {@link EffectSpec}): `true` if they won the flip. */
-  flipCoin(): boolean;
+  /** How the next `count` coins this effect's controller flips will land, one
+   * list a coin: one landing, or the two a flipper who ignores one may keep.
+   * Draws what the flips need and emits nothing (see the `"flip-coin"`
+   * {@link EffectSpec}). */
+  flipCoinOutcomes(count: number, sides: boolean): readonly (readonly FlipLanding[])[];
+  /** A coin of this effect's controller landed: its event and journal entry. */
+  coinLanded(landing: FlipLanding): void;
+  /** How many of the coins flipped this way landed as `what`, by `players`
+   * (everyone when absent). */
+  flipsThisWay(what: FlipThisWay, players?: readonly PlayerId[]): number;
   /** A clash is over (see the `"clash"` {@link EffectSpec}): a `clashed`
    * event for each player who clashed, saying whether they won. */
   clashed(results: readonly { readonly player: PlayerId; readonly won: boolean }[]): void;
   /** Roll `count` `sides`-sided dice for the controller (rule 706), on the
-   * seeded stream; returns the result — the natural total plus `modifier` —
-   * and keeps the roll for `lastRoll`. */
-  rollDice(sides: number, count: number, modifier: number): number;
-  /** The controller's last roll: each die's natural result, and the total. */
-  lastRoll(): { readonly results: readonly number[]; readonly total: number } | undefined;
+   * seeded stream, keeping the `keep` highest if given; returns the result —
+   * the natural total plus `modifier` — and journals the roll. */
+  rollDice(sides: number, count: number, modifier: number, keep?: number): number;
+  /** The roll a `{ roll }` amount reads: one this resolution made, else the
+   * roll this ability triggered on, else the controller's last this turn. */
+  lastRoll(): RollRecord | undefined;
   /** See the `"prohibit"` {@link EffectSpec}: `players` can't cast spells
    * (every one, or those matching a filter) and/or activate abilities this
    * turn, or `object`'s activated abilities can't be activated. */
@@ -13741,6 +13774,42 @@ function distributeCounters(spec: Extract<EffectSpec, { kind: "counters-distribu
   });
 }
 
+/**
+ * One `flip-coin`. The coins land first, as replacement effects leave them
+ * (705.3, 706.6's way); then, in order, each coin's event and branch, a coin
+ * with two landings to keep asking its flipper first; then `then`. Steps of a
+ * sequence, so a branch that stops to ask holds up what's after it.
+ */
+function applyFlipCoin(spec: Extract<EffectSpec, { kind: "flip-coin" }>, ctx: ResolutionContext): void {
+  if (spec.landed !== undefined) {
+    ctx.coinLanded(spec.landed);
+    const branch =
+      spec.sides === true
+        ? spec.landed.came === "heads"
+          ? spec.heads
+          : spec.tails
+        : spec.landed.won === true
+          ? spec.won
+          : spec.lost;
+    if (branch !== undefined) applyEffectSpec(branch, ctx);
+    return;
+  }
+  const count = spec.count === undefined ? 1 : Math.max(0, Math.floor(amountValue(spec.count, ctx)));
+  const { count: _count, then, ...coin } = spec;
+  const steps: EffectSpec[] = ctx.flipCoinOutcomes(count, spec.sides === true).map(([first, second]) =>
+    second === undefined
+      ? { ...coin, landed: first }
+      : {
+          kind: "may",
+          prompt: spec.sides === true ? `Keep ${first.came} (ignore ${second.came})?` : `Keep the ${first.won === true ? "won" : "lost"} flip?`,
+          effect: { ...coin, landed: first },
+          else: { ...coin, landed: second },
+        },
+  );
+  if (then !== undefined) steps.push(then);
+  if (steps.length > 0) applyEffectSpec(steps.length === 1 ? steps[0] : { kind: "sequence", effects: steps }, ctx);
+}
+
 function applyRepeat(spec: Extract<EffectSpec, { kind: "repeat" }>, ctx: ResolutionContext): void {
   let progress = spec.progress;
   const finish = (done: { readonly outer: number; readonly outerRepeat?: number }): void => {
@@ -13815,7 +13884,7 @@ function applyRepeat(spec: Extract<EffectSpec, { kind: "repeat" }>, ctx: Resolut
 }
 
 /** How many times "if you win, repeat this process" clashes at most — a
- * guard, like `MAX_FLIPS`; a library runs out long before. */
+ * guard, like `MAX_REPEATS`; a library runs out long before. */
 const MAX_CLASHES = 200;
 
 /**
@@ -14338,9 +14407,6 @@ function placeCastNowRest(
   }
 }
 
-/** How many flips "flip a coin until you lose a flip" makes at most — a
- * bound the seeded stream practically never reaches, against a loop. */
-const MAX_FLIPS = 1000;
 
 /** The most copies one `copy-spell` with a `count` puts on the stack — the
  * same resource bound as `Game.MAX_EFFECT_INSTANCES`, which this module
@@ -14600,7 +14666,11 @@ export function signedAmountValue(
     // 122.1 — Leeches' "loses all poison counters … that much damage"),
     // unless the amount asks about objects only (a filter).
     const fromPlayers =
-      amount.thisWay === "counters-removed" && amount.filter === undefined ? ctx.playerCountersRemovedThisWay(players) : 0;
+      amount.thisWay === "counters-removed" && amount.filter === undefined
+        ? ctx.playerCountersRemovedThisWay(players)
+        : isFlipThisWay(amount.thisWay)
+          ? ctx.flipsThisWay(amount.thisWay, players)
+          : 0;
     return done.reduce((n, entry) => n + entry.count, fromPlayers);
   }
   if ("countPlayers" in amount) {
@@ -14721,13 +14791,7 @@ export function signedAmountValue(
   }
   if ("roll" in amount) {
     const last = ctx.lastRoll();
-    if (last === undefined) return 0;
-    if (amount.roll === "total") return last.total;
-    if (amount.roll === "odd") return last.results.filter((r) => r % 2 === 1).length;
-    if (amount.roll === "even") return last.results.filter((r) => r % 2 === 0).length;
-    if (amount.roll === "other") return last.results.reduce((n, r) => n + r, 0) - ctx.x;
-    const n = amount.roll.equals;
-    return last.results.filter((r) => r === n).length;
+    return last === undefined ? 0 : rollRead(last, amount.roll, ctx.x);
   }
   if ("commanderCastsOf" in amount) {
     const ref = objectRefRead(amount.commanderCastsOf, ctx);
@@ -18415,7 +18479,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       // Signed: "roll a d20 and subtract the number of cards in your hand"
       // (The Deck of Many Things) can come out at 0 or less (rule 706.2).
       const modifier = spec.modifier === undefined ? 0 : signedAmountValue(spec.modifier, ctx);
-      const total = ctx.rollDice(spec.sides, count, modifier);
+      const total = ctx.rollDice(spec.sides, count, modifier, spec.keepHighest);
       const row = spec.table?.find((r) => total >= r.min && (r.max === undefined || total <= r.max));
       // A row's "you may roll again" comes after what the row and any `then`
       // do with this roll. The number of dice stays what it was (rule 706.3c).
@@ -18427,17 +18491,9 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (steps.length > 0) applyEffectSpec(steps.length === 1 ? steps[0] : { kind: "sequence", effects: steps }, ctx);
       return;
     }
-    case "flip-coin": {
-      // One flip, or flips until one is lost — each flip's branch applied as
-      // it lands, since what a win does can matter to the next.
-      for (let i = 0; i < MAX_FLIPS; i += 1) {
-        const won = ctx.flipCoin();
-        const branch = won ? spec.won : spec.lost;
-        if (branch !== undefined) applyEffectSpec(branch, ctx);
-        if (!won || spec.untilLose !== true) return;
-      }
+    case "flip-coin":
+      applyFlipCoin(spec, ctx);
       return;
-    }
     case "clash":
       applyClash(spec, ctx);
       return;

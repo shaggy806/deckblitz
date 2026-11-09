@@ -8,6 +8,7 @@ import { describe, expect, it } from "vitest";
 import type { Game } from "../game.js";
 import type { ScriptedController } from "../controller.js";
 import { A, B, C, cast, D, lands, named, spawn, table, toHand, toLibrary, tokensNamed, zone } from "./harness.js";
+import { lastRollIn } from "../random-results.js";
 
 const BEARS = "Grizzly Bears"; // 2/2
 const DREADMAW = "Colossal Dreadmaw"; // 6/6
@@ -24,7 +25,7 @@ function answering(seat: ScriptedController, pick: "high" | "low"): { offered: r
   return asked;
 }
 
-const rolled = (game: Game): readonly number[] => game.state.lastRoll?.results ?? [];
+const rolled = (game: Game): readonly number[] => lastRollIn(game.state)?.results ?? [];
 
 /** A seed whose first roll of two `sides`-sided dice comes out to these two
  * results apart (or the same): the search is short, on the seeded stream. */

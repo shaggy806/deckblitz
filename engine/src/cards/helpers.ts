@@ -114,6 +114,20 @@ export const thisOrAnother = (ability: TriggeredAbility, self?: CardFilter): Tri
  * read as it last existed — rule 603.10a); anyone's spell cast for its warp
  * cost, countered since or not (rule 702.185c and its ruling).
  */
+/** "Flip a coin until you lose a flip" (rule 705): passes of one flip, going on
+ * while that pass's coin was won. `times` is "that many times or until…"
+ * (Squee's Revenge); `mayStop`, "or choose to stop flipping" (Fiery Gambit).
+ * After it, `thisWay: "flips-won"` counts every pass. */
+export const flipUntilLose = (
+  options: { readonly won?: EffectSpec; readonly times?: EffectAmount; readonly mayStop?: true } = {},
+): EffectSpec => ({
+  kind: "repeat",
+  effect: { kind: "flip-coin", ...(options.won !== undefined ? { won: options.won } : {}) },
+  again: { kind: "this-way", what: "flips-won" },
+  ...(options.times !== undefined ? { times: options.times } : {}),
+  ...(options.mayStop === true ? { mayAgain: true } : {}),
+});
+
 export const VOID_CONDITION: StaticCondition = {
   kind: "any",
   of: [

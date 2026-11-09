@@ -938,6 +938,7 @@ import _poolWorfDefiantCommander from "../pool/worf-defiant-commander.js";
 import _poolWorkshopAssistant from "../pool/workshop-assistant.js";
 import _poolWrathOfTheBloodmane from "../pool/wrath-of-the-bloodmane.js";
 import _poolWurmcalling from "../pool/wurmcalling.js";
+import _poolWyllBladeOfFrontiers from "../pool/wyll-blade-of-frontiers.js";
 import _poolYavimayaBarbarian from "../pool/yavimaya-barbarian.js";
 import _poolYomijiWhoBarsTheWay from "../pool/yomiji-who-bars-the-way.js";
 import _poolYoungBlueDragon from "../pool/young-blue-dragon.js";
@@ -1910,6 +1911,7 @@ const shard: CardShard = {
     _poolWorkshopAssistant,
     _poolWrathOfTheBloodmane,
     _poolWurmcalling,
+    _poolWyllBladeOfFrontiers,
     _poolYavimayaBarbarian,
     _poolYomijiWhoBarsTheWay,
     _poolYoungBlueDragon,

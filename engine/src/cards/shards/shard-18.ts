@@ -467,6 +467,7 @@ import _poolLostLegacy from "../pool/lost-legacy.js";
 import _poolLostSoul from "../pool/lost-soul.js";
 import _poolLoxodonWarhammer from "../pool/loxodon-warhammer.js";
 import _poolLucidDreams from "../pool/lucid-dreams.js";
+import _poolLuckBobblehead from "../pool/luck-bobblehead.js";
 import _poolLunarConvocation from "../pool/lunar-convocation.js";
 import _poolLunaticPandora from "../pool/lunatic-pandora.js";
 import _poolLupinflowerVillage from "../pool/lupinflower-village.js";
@@ -760,6 +761,7 @@ import _poolSpiritOfTheHearth from "../pool/spirit-of-the-hearth.js";
 import _poolSpiritualFocus from "../pool/spiritual-focus.js";
 import _poolSpiteOfMogis from "../pool/spite-of-mogis.js";
 import _poolSquanderedResources from "../pool/squandered-resources.js";
+import _poolSqueesRevenge from "../pool/squees-revenge.js";
 import _poolStalkingVengeance from "../pool/stalking-vengeance.js";
 import _poolStandingTroops from "../pool/standing-troops.js";
 import _poolStarAthlete from "../pool/star-athlete.js";
@@ -1451,6 +1453,7 @@ const shard: CardShard = {
     _poolLostSoul,
     _poolLoxodonWarhammer,
     _poolLucidDreams,
+    _poolLuckBobblehead,
     _poolLunarConvocation,
     _poolLunaticPandora,
     _poolLupinflowerVillage,
@@ -1744,6 +1747,7 @@ const shard: CardShard = {
     _poolSpiritualFocus,
     _poolSpiteOfMogis,
     _poolSquanderedResources,
+    _poolSqueesRevenge,
     _poolStalkingVengeance,
     _poolStandingTroops,
     _poolStarAthlete,

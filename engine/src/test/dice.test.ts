@@ -11,6 +11,7 @@ import { describe, expect, it } from "vitest";
 import type { Game } from "../game.js";
 
 import { A, B, attack, cast, counters, lands, life, settle, spawn, table, toHand, tokensNamed } from "./harness.js";
+import { lastRollIn } from "../random-results.js";
 
 const rolls = (game: Game) => game.state.eventLog.filter((e) => e.type === "dice-rolled");
 
@@ -21,7 +22,7 @@ describe("roll-dice", () => {
       const dragon = spawn(game, "Ancient Copper Dragon");
       attack(game, a, [dragon]);
       settle(game);
-      return game.state.lastRoll?.results ?? [];
+      return lastRollIn(game.state)?.results ?? [];
     };
     const first = once();
     expect(first).toHaveLength(1);
@@ -50,7 +51,7 @@ describe("roll-dice", () => {
       const ogre = spawn(game, "Hoarding Ogre");
       attack(game, a, [ogre]);
       settle(game);
-      const total = game.state.lastRoll!.total;
+      const total = lastRollIn(game.state)!.total;
       const expected = total <= 9 ? 1 : total <= 19 ? 2 : 3;
       expect(tokensNamed(game, "Treasure Token", A)).toBe(expected);
     }
@@ -61,7 +62,7 @@ describe("roll-dice", () => {
     lands(game, "Wastes", 4);
     const car = toHand(game, "Clown Car");
     cast(game, car, { x: 4 });
-    const last = game.state.lastRoll!;
+    const last = lastRollIn(game.state)!;
     expect(last.results).toHaveLength(4);
     const odd = last.results.filter((r) => r % 2 === 1).length;
     expect(tokensNamed(game, "Clown Robot Token", A)).toBe(odd);
@@ -90,7 +91,7 @@ describe("roll-dice", () => {
     const bears = spawn(game, "Grizzly Bears", B);
     cast(game, toHand(game, "Contraband Livestock"), { targets: [{ kind: "object", object: bears }] });
     expect(game.state.objects[bears].zone).toBe("exile");
-    const total = game.state.lastRoll!.total;
+    const total = lastRollIn(game.state)!.total;
     const token = total <= 9 ? "4/4 Green Ox Token" : total <= 19 ? "Boar Token" : "Goat Token";
     expect(tokensNamed(game, token, B)).toBe(1);
     expect(tokensNamed(game, token, A)).toBe(0);

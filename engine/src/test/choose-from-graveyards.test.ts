@@ -41,6 +41,7 @@ import {
   tokensNamed,
   zone,
 } from "./harness.js";
+import { lastRollIn } from "../random-results.js";
 
 describe("a card from any graveyard", () => {
   it("Cemetery Gatekeeper: exiles from any player's, and its damage asks about what's played or cast", () => {
@@ -148,7 +149,7 @@ describe("The Deck of Many Things", () => {
       for (let i = 0; i < cards; i += 1) toHand(t.game, "Forest", A);
       setup?.(t.game, t.a);
       activate(t.game, deck);
-      const result = t.game.state.lastRoll?.total ?? Number.NaN;
+      const result = lastRollIn(t.game.state)?.total ?? Number.NaN;
       if (result >= min && result <= max) return { ...t, deck, result };
     }
     throw new Error("no seed rolled it");

@@ -429,6 +429,18 @@ function untargetedWorth(effect: EffectSpec, ctx: WorthContext): number {
       const row = rows.reduce((sum, r) => sum + untargetedWorth(r.effect, ctx), 0) / Math.max(1, rows.length);
       return row + (effect.then !== undefined ? untargetedWorth(effect.then, ctx) : 0);
     }
+    case "flip-coin": {
+      // A coin that has landed is what it landed as; one yet to, the average
+      // of its sides, as a roll is of its rows.
+      const branches =
+        effect.landed !== undefined
+          ? [effect.sides === true ? (effect.landed.came === "heads" ? effect.heads : effect.tails) : effect.landed.won === true ? effect.won : effect.lost]
+          : effect.sides === true
+            ? [effect.heads, effect.tails]
+            : [effect.won, effect.lost];
+      const worth = branches.reduce((sum, b) => sum + (b === undefined ? 0 : untargetedWorth(b, ctx)), 0) / branches.length;
+      return worth + (effect.then !== undefined ? untargetedWorth(effect.then, ctx) : 0);
+    }
     case "create-token-copy":
       // A token copy that's ours — of our own source, or one that enters under
       // us — is a token's worth like any other: a myriad copy attacking another

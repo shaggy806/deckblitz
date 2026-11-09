@@ -23,6 +23,7 @@ import {
   toStep,
   zone,
 } from "./harness.js";
+import { lastRollIn } from "../random-results.js";
 
 describe("Gandalf, Friend of the Shire", () => {
   it("draws when another creature is chosen as Ring-bearer, not when Gandalf is", () => {
@@ -96,7 +97,7 @@ describe("Ancient Bronze Dragon", () => {
     const bears = spawn(game, "Grizzly Bears");
     pickTargets(a, dragon, bears);
     attack(game, a, [dragon]);
-    const total = game.state.lastRoll!.total;
+    const total = lastRollIn(game.state)!.total;
     expect(total).toBeGreaterThanOrEqual(1);
     expect(counters(game, dragon)).toBe(total);
     expect(counters(game, bears)).toBe(total);
@@ -108,7 +109,7 @@ describe("Ancient Bronze Dragon", () => {
     const bears = spawn(game, "Grizzly Bears");
     pickTargets(a, bears, null);
     attack(game, a, [dragon]);
-    expect(counters(game, bears)).toBe(game.state.lastRoll!.total);
+    expect(counters(game, bears)).toBe(lastRollIn(game.state)!.total);
     expect(counters(game, dragon)).toBe(0);
   });
 });

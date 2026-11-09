@@ -662,6 +662,9 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "flip-coin": (n, v) => {
     v.child(n.won);
     v.child(n.lost);
+    v.child(n.heads);
+    v.child(n.tails);
+    v.child(n.then);
   },
   clash: (n, v) => {
     v.child(n.won);

@@ -8,6 +8,7 @@
 import { describe, expect, it } from "vitest";
 
 import { defineCard } from "../cards/define.js";
+import { flipUntilLose } from "../cards/helpers.js";
 import { createDefaultRegistry } from "../cards/registry.js";
 import { ScriptedController } from "../controller.js";
 import type { EffectSpec } from "../effects.js";
@@ -91,7 +92,7 @@ describe("flip a coin", () => {
       const game = setUp(seed);
       game.debugSpawn(ZNDRSPLT, A, "battlefield");
       const hand = game.handOf(A).length;
-      run(game, { kind: "flip-coin", untilLose: true });
+      run(game, flipUntilLose());
       const all = flips(game);
       expect(all.at(-1)?.won).toBe(false);
       expect(all.slice(0, -1).every((f) => f.won)).toBe(true);

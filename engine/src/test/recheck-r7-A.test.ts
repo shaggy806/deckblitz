@@ -6,6 +6,7 @@
 import { describe, expect, it } from "vitest";
 
 import { B, C, cast, lands, spawn, table, toHand, zone } from "./harness.js";
+import { lastRollIn } from "../random-results.js";
 
 describe("Myrkul's Edict", () => {
   it("applies the d20 row that holds the roll", () => {
@@ -16,7 +17,7 @@ describe("Myrkul's Edict", () => {
       const big = [spawn(game, "Hill Giant", B), spawn(game, "Hill Giant", C)];
       lands(game, "Swamp", 2);
       cast(game, toHand(game, "Myrkul's Edict"));
-      const total = game.state.lastRoll!.total;
+      const total = lastRollIn(game.state)!.total;
       const gone = (id: (typeof small)[number]) => zone(game, id) !== "battlefield";
       const lostB = [small[0], big[0]].filter(gone).length;
       const lostC = [small[1], big[1]].filter(gone).length;

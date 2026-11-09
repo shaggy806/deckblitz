@@ -38,6 +38,7 @@ import {
   watchTargets,
   zone,
 } from "./harness.js";
+import { lastRollIn } from "../random-results.js";
 
 const ventures = (game: Game, player = A): number =>
   game.state.eventLog.filter((e) => e.type === "ventured" && e.player === player).length;
@@ -48,7 +49,7 @@ const intoLostMine = (seat: ScriptedController): void => {
 };
 
 const roll = (game: Game): { natural: number; total: number } => {
-  const last = game.state.lastRoll!;
+  const last = lastRollIn(game.state)!;
   return { natural: last.results.reduce((n, r) => n + r, 0), total: last.total };
 };
 

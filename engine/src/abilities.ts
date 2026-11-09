@@ -17,6 +17,7 @@ import type { ObjectId, PlayerId } from "./primitives.js";
 import type { CardFilter } from "./filter.js";
 import type { TargetSpec } from "./target.js";
 import type { Step } from "./turn.js";
+import type { DieTest } from "./random-results.js";
 import type { TriggerEventName } from "./trigger-events.js";
 
 /** A non-mana, non-tap component of an ability cost that sacrifices a permanent. */
@@ -2438,6 +2439,8 @@ export type TriggerKind =
        * controller ("you" — "whenever **you** …"). */
       readonly by?: TriggerWho;
       readonly batched?: true;
+      /** With `rolls-die`: which dice. Absent, every one. */
+      readonly die?: DieTest;
     };
 
 /**

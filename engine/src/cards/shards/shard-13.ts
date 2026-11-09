@@ -582,6 +582,7 @@ import _poolPinionFeast from "../pool/pinion-feast.js";
 import _poolPiousInterdiction from "../pool/pious-interdiction.js";
 import _poolPiranhaFly from "../pool/piranha-fly.js";
 import _poolPlanarAlly from "../pool/planar-ally.js";
+import _poolPlanarChaos from "../pool/planar-chaos.js";
 import _poolPlanarVoid from "../pool/planar-void.js";
 import _poolPlasmaCascade from "../pool/plasma-cascade.js";
 import _poolPoppetStitcher from "../pool/poppet-stitcher.js";
@@ -601,6 +602,7 @@ import _poolRagamuffyn from "../pool/ragamuffyn.js";
 import _poolRageOfPurphoros from "../pool/rage-of-purphoros.js";
 import _poolRainbowVale from "../pool/rainbow-vale.js";
 import _poolRakdosGuildgate from "../pool/rakdos-guildgate.js";
+import _poolRalZarekGuestLecturer from "../pool/ral-zarek-guest-lecturer.js";
 import _poolRampantGrowth from "../pool/rampant-growth.js";
 import _poolRamunapHydra from "../pool/ramunap-hydra.js";
 import _poolRangersPath from "../pool/rangers-path.js";
@@ -1549,6 +1551,7 @@ const shard: CardShard = {
     _poolPiousInterdiction,
     _poolPiranhaFly,
     _poolPlanarAlly,
+    _poolPlanarChaos,
     _poolPlanarVoid,
     _poolPlasmaCascade,
     _poolPoppetStitcher,
@@ -1568,6 +1571,7 @@ const shard: CardShard = {
     _poolRageOfPurphoros,
     _poolRainbowVale,
     _poolRakdosGuildgate,
+    _poolRalZarekGuestLecturer,
     _poolRampantGrowth,
     _poolRamunapHydra,
     _poolRangersPath,

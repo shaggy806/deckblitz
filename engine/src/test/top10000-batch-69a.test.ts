@@ -39,6 +39,7 @@ import {
   tokensNamed,
   zone,
 } from "./harness.js";
+import { lastRollIn } from "../random-results.js";
 
 /** The seat casts the first card offered that's in `wanted` (each once),
  * free, with no targets; declines once none is left. Records what was
@@ -242,7 +243,7 @@ describe("Underdark Rift", () => {
     const bears = spawn(game, "Grizzly Bears", B);
     activate(game, rift, 1, { targets: [ref(bears)] });
     expect(zone(game, rift)).toBe("exile");
-    const x = game.state.lastRoll!.total;
+    const x = lastRollIn(game.state)!.total;
     expect(x).toBeGreaterThanOrEqual(1);
     expect(game.state.zones.perPlayer[B].library.indexOf(bears)).toBe(x);
   });

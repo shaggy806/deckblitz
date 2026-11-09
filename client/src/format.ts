@@ -533,7 +533,7 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
     case 'dice-rolled':
       return `${who(event.player)} rolls ${event.results.length === 1 ? `a d${event.sides}` : `${event.results.length}d${event.sides}`}: ${event.results.join(', ')}${event.results.length > 1 ? ` (total ${event.results.reduce((n, r) => n + r, 0)})` : ''}`
     case 'coin-flipped':
-      return event.came !== undefined
+      return event.won === undefined
         ? `${who(event.player)} flips a coin: ${event.came}`
         : `${who(event.player)} ${event.won ? 'wins' : 'loses'} a coin flip`
     case 'cards-put-into-exile':

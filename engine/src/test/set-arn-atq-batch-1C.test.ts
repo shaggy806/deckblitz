@@ -26,7 +26,7 @@ describe("Mijae Djinn", () => {
       const djinn = spawn(game, "Mijae Djinn");
       attack(game, a, [djinn]);
       const [flip] = game.eventsOfType("coin-flipped");
-      outcomes.add(flip.won);
+      outcomes.add(flip.won === true);
       expect(life(game, B)).toBe(flip.won ? 14 : 20);
       expect(game.state.objects[djinn].tapped).toBe(true);
     }

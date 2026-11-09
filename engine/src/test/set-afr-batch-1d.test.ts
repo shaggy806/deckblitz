@@ -31,8 +31,9 @@ import {
   types,
   zone,
 } from "./harness.js";
+import { lastRollIn } from "../random-results.js";
 
-const rolled = (game: Game): number => game.state.lastRoll!.total;
+const rolled = (game: Game): number => lastRollIn(game.state)!.total;
 const battlefieldOf = (game: Game, player: typeof A): number =>
   game.state.zones.shared.battlefield.filter((id) => game.state.objects[id].controller === player).length;
 
@@ -99,7 +100,7 @@ describe("Ebony Fly", () => {
     lands(game, "Wastes", 4);
     a.chooseModesFn = () => [];
     activate(game, fly, 1);
-    expect(game.state.lastRoll).toBeDefined();
+    expect(lastRollIn(game.state)).toBeDefined();
     expect(types(game, fly)).not.toContain("creature");
   });
 

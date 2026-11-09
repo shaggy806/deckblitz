@@ -371,6 +371,19 @@ import {
   modesDoneThisTurn,
 } from "./journal.js";
 import {
+  flipsSince,
+  hasFlippedThisTurn,
+  isFlipThisWay,
+  keepHighest,
+  lastRollEntry,
+  lastRollIn,
+  matchingDice,
+  rollOfEvent,
+  type CoinSide,
+  type FlipLanding,
+} from "./random-results.js";
+import type { CoinFlipReplacement, DiceRollReplacement, ReplacementSpec } from "./replacements.js";
+import {
   COLORS,
   MANA_TYPES,
   cheapestManaAmount,
@@ -12293,6 +12306,57 @@ export class Game {
     appendJournal(this.state, entry);
   }
 
+  /** The static abilities on the table replacing `event` for `player`. */
+  private staticReplacementsFor<E extends "would-flip-coin" | "would-roll-dice">(
+    player: PlayerId,
+    event: E,
+  ): readonly { readonly by: GameObject; readonly replacement: Extract<ReplacementSpec, { event: E }> }[] {
+    const out: { by: GameObject; replacement: Extract<ReplacementSpec, { event: E }> }[] = [];
+    for (const id of this.staticSourceIds()) {
+      const by = this.state.objects[id];
+      if (by === undefined || hasLostAbilities(this.state, this.registry, by)) continue;
+      for (const ability of this.staticsOfSource(by)) {
+        const r = ability.replacement;
+        if (r?.event !== event) continue;
+        const who = (r as CoinFlipReplacement | DiceRollReplacement).who;
+        if (who !== "any-player" && (who === "you") !== (player === by.controller)) continue;
+        if (this.staticActive(by, ability)) out.push({ by, replacement: r as Extract<ReplacementSpec, { event: E }> });
+      }
+    }
+    return out;
+  }
+
+  /**
+   * How `count` coins `player` is about to flip will land, one list a coin:
+   * one landing, or the two sides a flipper who ignores one may keep, heads
+   * first. A named result is the result, with no flip made (rule 705.3); each
+   * "flip two and ignore one" doubles the coins (614.5). One draw per coin.
+   */
+  private flipCoinOutcomes(player: PlayerId, count: number, sides: boolean): readonly (readonly FlipLanding[])[] {
+    let named: FlipLanding | undefined;
+    let flips = 1;
+    for (const { replacement } of this.staticReplacementsFor(player, "would-flip-coin")) {
+      if (replacement.ignore === true) flips *= 2;
+      if (replacement.comesUp !== undefined && (replacement.firstEachTurn !== true || !hasFlippedThisTurn(this.state, player))) {
+        named = { came: replacement.comesUp, ...(replacement.wins === true ? { won: true } : {}) };
+      }
+    }
+    const outcomes: (readonly FlipLanding[])[] = [];
+    for (let coin = 0; coin < count; coin += 1) {
+      if (named !== undefined) {
+        outcomes.push([named]);
+        continue;
+      }
+      const landed = new Set<CoinSide>();
+      // Past 2^16 coins nothing is left to learn from another.
+      for (let flip = 0; flip < Math.min(flips, 65536); flip += 1) landed.add(this.rng.next() < 0.5 ? "heads" : "tails");
+      this.state.rngState = this.rng.seed;
+      const landing = (came: CoinSide): FlipLanding => (sides ? { came } : { came, won: came === "heads" });
+      outcomes.push((["heads", "tails"] as const).filter((side) => landed.has(side)).map(landing));
+    }
+    return outcomes;
+  }
+
   /** `id` was declared as an attacker at `defender` (rule 508.1): its journal
    * entry, as it was declared. */
   private journalAttack(id: ObjectId, defender: PlayerId | ObjectId): void {
@@ -14105,10 +14169,17 @@ export class Game {
         // "As this creature enters, flip a coin" (Molten Sentry): nothing to
         // ask, and nobody wins or loses it (rule 705.2); it moves on as
         // whatever the coin said.
-        const heads = this.rng.next() < 0.5;
-        this.state.rngState = this.rng.seed;
-        this.emit({ type: "coin-flipped", player: chooser, won: false, came: heads ? "heads" : "tails" });
-        object.enterChoice = { ...object.enterChoice, chosen: heads ? next.heads : next.tails };
+        const [landed, otherSide] = this.flipCoinOutcomes(chooser, 1, true)[0];
+        if (otherSide !== undefined) {
+          // Two coins came up differently and one is ignored: the flipper's
+          // choice (Krark's Thumb), asked as Primal Clay's forms are.
+          this.beginCreatureTypeChoice(id, chooser, [next.heads, next.tails]);
+          const asked = this.state.awaiting as AwaitingDecision | null;
+          if (asked?.kind === "choose-creature-type") this.state.awaiting = { ...asked, prompt: "Which flip do you keep?" };
+          return true;
+        }
+        this.emit({ type: "coin-flipped", player: chooser, ...landed });
+        object.enterChoice = { ...object.enterChoice, chosen: landed.came === "heads" ? next.heads : next.tails };
         continue;
       }
       if (next.kind === "name") {
@@ -28901,8 +28972,6 @@ export class Game {
         : // The X paid to turn it face up (rules 702.37f, 702.168e).
           event.type === "permanent-turned-face-up"
         ? event.x ?? 0
-        : event.type === "dice-rolled"
-        ? event.results.reduce((n, r) => n + r, 0)
         : // "If you won": 1 for a clash won, 0 for one lost.
           trigger.on === "clashes" && event.type === "clashed"
           ? event.won ? 1 : 0
@@ -29674,6 +29743,13 @@ export class Game {
               return;
             }
           }
+          // "Whenever you roll a 4 or higher": once per die, its result the value.
+          if (ability.trigger.on === "event" && ability.trigger.event === "rolls-die" && event.type === "dice-rolled") {
+            for (const result of matchingDice(rollOfEvent(event), ability.trigger.die)) {
+              this.queueTrigger(ability, { ...base, triggerValue: result }, multiplier);
+            }
+            return;
+          }
           // "Whenever a creature card leaves your graveyard": once per card too.
           if (
             ability.trigger.on === "leaves-graveyard" &&
@@ -30153,7 +30229,10 @@ export class Game {
     // "The same kind of counters" (Captain Marvel, Apex Avenger): the kind
     // whose placement fired it.
     const counter = event.type === "counter-added" ? event.counter : undefined;
+    // "Those results": the roll it triggered on, whatever is rolled next.
+    const roll = event.type === "dice-rolled" ? rollOfEvent(event) : undefined;
     if (
+      roll === undefined &&
       sourceStint === undefined &&
       triggerStint === undefined &&
       triggerSpell === undefined &&
@@ -30172,6 +30251,7 @@ export class Game {
       ...(afterLeaving !== undefined ? { triggerObjectAfterLeaving: afterLeaving } : {}),
       ...(recipient !== undefined ? { recipient } : {}),
       ...(player !== undefined ? { player } : {}),
+      ...(roll !== undefined ? { roll } : {}),
       ...(attackers !== undefined ? { attackers } : {}),
       ...(counter !== undefined ? { counter } : {}),
     };
@@ -33552,6 +33632,16 @@ export class Game {
         if (condition.to !== undefined && ref === undefined) return false;
         return damageDealtSince(this.state, since, ref, condition.player) > 0;
       }
+      if (condition.kind === "this-way" && isFlipThisWay(condition.what)) {
+        const flips = flipsSince(
+          this.state,
+          condition.what,
+          condition.acrossPasses === true ? (this.state.repeatSince ?? since) : since,
+          condition.who === undefined ? undefined : scoped(condition.who),
+        );
+        const least = condition.atLeast === "x" ? x : (condition.atLeast ?? (condition.atMost === undefined ? 1 : 0));
+        return flips >= least && (condition.atMost === undefined || flips <= condition.atMost);
+      }
       if (condition.kind === "this-way") {
         const entries = thisWayDone(
           condition.what,
@@ -35028,8 +35118,8 @@ export class Game {
           return;
         }
         if (spec.value === "roll-result") {
-          const last = this.state.lastRoll;
-          const results = last !== undefined && last.player === controller ? [...new Set(last.results)] : [];
+          const last = lastRollIn(this.state, controller);
+          const results = last !== undefined ? [...new Set(last.results)] : [];
           // The same number on each die, or no roll: nothing to choose between.
           if (results.length <= 1) {
             this.resumeResolution(spec.then, source, { ...resume, x: results[0] ?? 0 });
@@ -36954,35 +37044,46 @@ export class Game {
         }
         (this.state.playerEffects ??= []).push(made);
       },
-      flipCoin: () => {
-        const won = this.rng.next() < 0.5;
-        this.state.rngState = this.rng.seed;
-        this.emit({ type: "coin-flipped", player: controller, won });
-        return won;
-      },
+      flipCoinOutcomes: (count, sides) => this.flipCoinOutcomes(controller, count, sides),
+      coinLanded: (landing) => this.emit({ type: "coin-flipped", player: controller, ...landing }),
+      flipsThisWay: (what, players) => flipsSince(this.state, what, this.state.resolutionSince ?? this.state.eventSeq, players),
       clashed: (results) => {
         for (const { player, won } of results) this.emit({ type: "clashed", player, won });
       },
-      rollDice: (sides, count, modifier) => {
+      rollDice: (sides, count, modifier, keep) => {
+        // Each source adds its own die and ignores its own lowest (614.5).
+        let ignoring = 0;
+        let extra = 0;
+        for (const { by, replacement } of this.staticReplacementsFor(controller, "would-roll-dice")) {
+          const plus = replacement.instead.modify.plus;
+          const added = plus === undefined ? 0 : this.replacementAmount(plus, by);
+          extra += added;
+          if (replacement.ignoreLowest === true) ignoring += added;
+        }
         // Each die has `sides` equally likely outcomes, 1 to N (rule 706.1a).
-        const results: number[] = [];
-        for (let i = 0; i < count; i += 1) results.push(1 + Math.floor(this.rng.next() * sides));
+        const rolled: number[] = [];
+        for (let i = 0; i < count + extra; i += 1) rolled.push(1 + Math.floor(this.rng.next() * sides));
         this.state.rngState = this.rng.seed;
-        const total = results.reduce((n, r) => n + r, 0) + modifier;
-        this.state.lastRoll = { player: controller, sides, results, total };
+        // What's ignored never happened (706.6): nothing reads it.
+        const kept = count + extra - ignoring;
+        const { kept: results, ignored } = keepHighest(rolled, Math.min(keep ?? kept, kept));
         const from = this.state.objects[source];
         this.emit({
           type: "dice-rolled",
           player: controller,
           sides,
           results,
+          ...(modifier !== 0 ? { modifier } : {}),
+          ...(ignored.length > 0 ? { ignored } : {}),
           ...(from !== undefined ? { source } : {}),
         });
-        return total;
+        return results.reduce((n, r) => n + r, 0) + modifier;
       },
       lastRoll: () => {
-        const last = this.state.lastRoll;
-        return last !== undefined && last.player === controller ? last : undefined;
+        const last = lastRollEntry(this.state, controller);
+        // One this resolution made, or the roll this ability triggered on.
+        if (last?.seq !== undefined && last.seq >= Math.min(since, this.state.repeatSince ?? since)) return last.roll;
+        return refs.roll ?? last?.roll;
       },
       grantTriggered: (target, ability, duration) =>
         this.grantTriggered(target, ability, lastingHere(duration)),
@@ -50234,6 +50335,17 @@ export class Game {
         return;
       case "scried":
         add({ kind: "scried", player: event.player, how: event.mode });
+        return;
+      case "coin-flipped":
+        add({
+          kind: "flipped",
+          player: event.player,
+          flip: { came: event.came, ...(event.won !== undefined ? { won: event.won } : {}) },
+          seq: event.seq,
+        });
+        return;
+      case "dice-rolled":
+        add({ kind: "rolled", player: event.player, roll: rollOfEvent(event), seq: event.seq });
         return;
       case "counter-added": {
         const permanent = this.state.objects[event.object];

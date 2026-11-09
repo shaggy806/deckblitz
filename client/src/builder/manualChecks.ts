@@ -11776,4 +11776,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: [] },
     }),
   ),
+  preset(
+    "Krark's Thumb: which flip you keep",
+    board({
+      you: { bf: ["Krark's Thumb", 'Mountain*3'], hand: ['Fiery Gambit'] },
+      opp: { bf: ['Serra Angel'] },
+    }),
+  ),
+  preset(
+    'Ral Zarek, Guest Lecturer: skips a turn per heads',
+    board({
+      you: { bf: ['Ral Zarek, Guest Lecturer'] },
+      opp: { bf: [] },
+    }),
+  ),
 ]

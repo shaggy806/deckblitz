@@ -1,5 +1,5 @@
 import { defineCard } from "../define.js";
-import { partnerWithTrigger } from "../helpers.js";
+import { partnerWithTrigger, flipUntilLose } from "../helpers.js";
 
 // #258 in top-commanders.txt.
 const FLIP_TEXT = "At the beginning of combat on your turn, flip a coin until you lose a flip.";
@@ -23,7 +23,7 @@ export default defineCard({
     {
       trigger: { on: "step-begins", step: "begin-combat", who: "you" },
       targets: [],
-      effect: { kind: "flip-coin", untilLose: true },
+      effect: flipUntilLose(),
       resolve: null,
       text: FLIP_TEXT,
     },

@@ -9289,6 +9289,19 @@ export function parseEffect(text, outer) {
     }
     ctx.targets.length = slots;
   }
+  // "Flip a coin until you lose a flip." (rule 705, Okaun): passes of one flip,
+  // going on while that pass's coin was won (`flipUntilLose`).
+  if (text === "Flip a coin until you lose a flip.") {
+    return {
+      effect: {
+        kind: "repeat",
+        effect: { kind: "flip-coin" },
+        again: { kind: "this-way", what: "flips-won" },
+      },
+      todo: [],
+      hints: [],
+    };
+  }
   // "Flip a coin. If you win the flip, … If you lose the flip, …" (rule 705, Goblin
   // Bangchuckers): one sentence each way. Nothing read, no target is kept.
   const flip = /^Flip a coin\. If you win the flip, (.+?\.) If you lose the flip, (.+?\.)$/.exec(text);
@@ -18552,6 +18565,14 @@ function parseStatic(line, text) {
       },
       text,
     };
+  }
+  // "…instead roll that many dice plus one and ignore the lowest roll" (Wyll,
+  // Barbarian Class, Pixie Guide); "…instead flip two coins and ignore one".
+  if (line === "If you would roll one or more dice, instead roll that many dice plus one and ignore the lowest roll.") {
+    return { affects: { scope: "self" }, replacement: { event: "would-roll-dice", who: "you", instead: { modify: { plus: 1 } }, ignoreLowest: true }, text };
+  }
+  if (line === "If you would flip a coin, instead flip two coins and ignore one.") {
+    return { affects: { scope: "self" }, replacement: { event: "would-flip-coin", who: "you", ignore: true }, text };
   }
   // "If you would scry a number of cards, scry that many cards plus one
   // instead" (Kenessos), "draw that many cards instead" (Eligeth).

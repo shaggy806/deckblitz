@@ -204,7 +204,7 @@ export const makeFormatter = (game) => {
       case "cards-put-into-graveyard":
         return `${e.arrivals.map((a) => name(a.object)).join(", ")} put into a graveyard`;
       case "coin-flipped":
-        return e.came !== undefined ? `${e.player} flips ${e.came}` : `${e.player} ${e.won ? "wins" : "loses"} a coin flip`;
+        return e.won === undefined ? `${e.player} flips ${e.came}` : `${e.player} ${e.won ? "wins" : "loses"} a coin flip`;
       case "cards-put-into-exile":
         return `${e.arrivals.map((a) => name(a.object)).join(", ")} put into exile`;
       case "player-attacked":

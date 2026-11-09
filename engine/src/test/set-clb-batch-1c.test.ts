@@ -41,6 +41,7 @@ import {
   watchTargets,
   zone,
 } from "./harness.js";
+import { lastRollIn } from "../random-results.js";
 
 const damageOn = (game: Game, id: ObjectId): number => game.state.objects[id].damageMarked;
 
@@ -302,7 +303,7 @@ describe("Nothic", () => {
     const nothic = spawn(game, "Nothic");
     const before = hand(game).length;
     destroy(game, nothic);
-    const roll = game.state.lastRoll;
+    const roll = lastRollIn(game.state);
     expect(roll?.sides).toBe(20);
     const n = roll!.total === 20 ? 7 : roll!.total >= 10 ? 2 : 1;
     expect(hand(game).length).toBe(before + n);

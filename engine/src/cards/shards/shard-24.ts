@@ -256,6 +256,7 @@ import _poolDwarvenVigilantes from "../pool/dwarven-vigilantes.js";
 import _poolEarthKingdomSoldier from "../pool/earth-kingdom-soldier.js";
 import _poolEarthbendingLesson from "../pool/earthbending-lesson.js";
 import _poolEclipsedBoggart from "../pool/eclipsed-boggart.js";
+import _poolEdgarKingOfFigaro from "../pool/edgar-king-of-figaro.js";
 import _poolEfreetWeaponmaster from "../pool/efreet-weaponmaster.js";
 import _poolEiganjoExemplar from "../pool/eiganjo-exemplar.js";
 import _poolElectrostaticBolt from "../pool/electrostatic-bolt.js";
@@ -1244,6 +1245,7 @@ const shard: CardShard = {
     _poolEarthKingdomSoldier,
     _poolEarthbendingLesson,
     _poolEclipsedBoggart,
+    _poolEdgarKingOfFigaro,
     _poolEfreetWeaponmaster,
     _poolEiganjoExemplar,
     _poolElectrostaticBolt,

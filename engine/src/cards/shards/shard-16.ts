@@ -841,6 +841,7 @@ import _poolSurrakAndGoreclaw from "../pool/surrak-and-goreclaw.js";
 import _poolSurviveTheNight from "../pool/survive-the-night.js";
 import _poolSutureSpirit from "../pool/suture-spirit.js";
 import _poolSwitcheroo from "../pool/switcheroo.js";
+import _poolSwordOfHours from "../pool/sword-of-hours.js";
 import _poolSwordsmansSteel from "../pool/swordsmans-steel.js";
 import _poolSyggsCommand from "../pool/syggs-command.js";
 import _poolSylviaBrightspear from "../pool/sylvia-brightspear.js";
@@ -1898,6 +1899,7 @@ const shard: CardShard = {
     _poolSurviveTheNight,
     _poolSutureSpirit,
     _poolSwitcheroo,
+    _poolSwordOfHours,
     _poolSwordsmansSteel,
     _poolSyggsCommand,
     _poolSylviaBrightspear,

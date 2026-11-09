@@ -475,6 +475,7 @@ import _poolKinscaerHarpoonist from "../pool/kinscaer-harpoonist.js";
 import _poolKitsuneLoreweaver from "../pool/kitsune-loreweaver.js";
 import _poolKjeldoranKnight from "../pool/kjeldoran-knight.js";
 import _poolKlauthsWill from "../pool/klauths-will.js";
+import _poolKrarksThumb from "../pool/krarks-thumb.js";
 import _poolKraulHarpooner from "../pool/kraul-harpooner.js";
 import _poolKreeSentinel from "../pool/kree-sentinel.js";
 import _poolKrugeGenesisSeeker from "../pool/kruge-genesis-seeker.js";
@@ -1464,6 +1465,7 @@ const shard: CardShard = {
     _poolKitsuneLoreweaver,
     _poolKjeldoranKnight,
     _poolKlauthsWill,
+    _poolKrarksThumb,
     _poolKraulHarpooner,
     _poolKreeSentinel,
     _poolKrugeGenesisSeeker,

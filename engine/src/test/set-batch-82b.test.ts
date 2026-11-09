@@ -74,7 +74,7 @@ describe("Setzer, Wandering Gambler", () => {
       const flips = game.eventsOfType("coin-flipped");
       expect(flips).toHaveLength(1);
       const won = flips[0].won;
-      outcomes.push(won);
+      outcomes.push(won === true);
       expect(tokensNamed(game, "Treasure Token", A)).toBe(won ? 2 : 0);
       for (const t of named(game, "Treasure Token", A)) expect(game.state.objects[t].tapped).toBe(true);
     }

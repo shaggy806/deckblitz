@@ -42,6 +42,7 @@ import {
   zone,
 } from "./harness.js";
 import type { BlockOffer } from "./harness.js";
+import { lastRollIn } from "../random-results.js";
 
 const ventures = (game: Game, player = A): number =>
   game.state.eventLog.filter((e) => e.type === "ventured" && e.player === player).length;
@@ -152,7 +153,7 @@ describe("Farideh's Fireball", () => {
       const angel = spawn(game, "Serra Angel", B);
       cast(game, toHand(game, "Farideh's Fireball"), { targets: [ref(angel)] });
       expect(zone(game, angel)).toBe("graveyard");
-      const total = game.state.lastRoll!.total;
+      const total = lastRollIn(game.state)!.total;
       expect(life(game, B)).toBe(18);
       expect(life(game, A)).toBe(total <= 9 ? 18 : 20);
     }
@@ -224,7 +225,7 @@ describe("Djinni Windseer and Feywild Trickster", () => {
         return [];
       };
       enter(game, "Djinni Windseer");
-      const total = game.state.lastRoll!.total;
+      const total = lastRollIn(game.state)!.total;
       expect(looked).toBe(total <= 9 ? 1 : total <= 19 ? 2 : 3);
       expect(tokensNamed(game, "Faerie Dragon Token", A)).toBe(1);
     }
@@ -268,7 +269,7 @@ describe("Bag of Tricks", () => {
         toLibrary(game, name),
       );
       activate(game, bag);
-      const total = game.state.lastRoll!.total;
+      const total = lastRollIn(game.state)!.total;
       const onField = creatures.filter((id) => zone(game, id) === "battlefield");
       const registry = registryOf(game);
       const matching = creatures.filter((id) => manaValueOfObject(registry, game.state.objects[id]) === total);
@@ -371,7 +372,7 @@ describe("Loathsome Troll", () => {
       lands(game, "Forest", 4);
       const troll = toGraveyard(game, "Loathsome Troll");
       activate(game, troll);
-      const total = game.state.lastRoll!.total;
+      const total = lastRollIn(game.state)!.total;
       if (total <= 9) {
         expect(zone(game, troll)).toBe("library");
         expect(game.state.zones.perPlayer[A].library[0]).toBe(troll);

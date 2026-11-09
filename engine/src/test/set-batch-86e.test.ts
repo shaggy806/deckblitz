@@ -39,9 +39,10 @@ import {
   watchTargets,
   zone,
 } from "./harness.js";
+import { lastRollIn } from "../random-results.js";
 
 const isTapped = (game: Game, id: ObjectId): boolean => game.state.objects[id].tapped === true;
-const lastRoll = (game: Game): number => game.state.lastRoll?.total ?? 0;
+const lastRoll = (game: Game): number => lastRollIn(game.state)?.total ?? 0;
 
 /** `count` of the token `token` for `player`, made by an effect (real tokens). */
 function makeTokens(game: Game, token: string, count: number, player = A): void {
@@ -366,7 +367,7 @@ describe("Velukan Dragon", () => {
     const roll = lastRoll(game);
     expect(roll).toBeGreaterThanOrEqual(1);
     expect(roll).toBeLessThanOrEqual(6);
-    expect(game.state.lastRoll?.sides).toBe(6);
+    expect(lastRollIn(game.state)?.sides).toBe(6);
     expect(pt(game, dragon)).toEqual({ power: 5 + roll - 1, toughness: 5 });
     expect(life(game, B)).toBe(20 - (5 + roll - 1));
   });
@@ -379,7 +380,7 @@ describe("Velukan Dragon", () => {
     b.declareAttackersFn = () => [{ attacker: bears, defender: A }];
     a.declareBlockersFn = () => [{ blocker: dragon, attacker: bears }];
     toStep(game, "postcombat-main", B);
-    expect(game.state.lastRoll?.player).toBe(A);
+    expect(lastRollIn(game.state)?.player).toBe(A);
     expect(pt(game, dragon)).toEqual({ power: 5 + lastRoll(game) - 1, toughness: 5 });
     expect(zone(game, bears)).toBe("graveyard");
   });

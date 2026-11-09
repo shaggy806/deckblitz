@@ -112,7 +112,39 @@ export type ReplacementSpec =
   | ProliferateReplacement
   | SpellCopyReplacement
   | LoseGameReplacement
-  | ScryReplacement;
+  | ScryReplacement
+  | CoinFlipReplacement
+  | DiceRollReplacement;
+
+/**
+ * "If you would flip a coin, instead flip two coins and ignore one" (Krark's
+ * Thumb: `ignore: true`, the flipper choosing which when they differ, rule
+ * 706.6's way); "the first time you flip one or more coins each turn, those
+ * coins come up heads and you win those flips" (Edgar: `comesUp`, `wins`,
+ * `firstEachTurn`, rule 705.3: no flip is made). `Game.flipCoinOutcomes`.
+ */
+export interface CoinFlipReplacement {
+  readonly event: "would-flip-coin";
+  readonly who: "you" | "opponent" | "any-player";
+  readonly ignore?: true;
+  readonly comesUp?: "heads" | "tails";
+  readonly wins?: true;
+  readonly firstEachTurn?: true;
+}
+
+/**
+ * "If you would roll one or more dice, instead roll that many dice plus one
+ * and ignore the lowest roll" (Wyll, Barbarian Class): `instead: { modify:
+ * { plus: 1 } }`, `ignoreLowest`. Each source adds its own die and ignores
+ * its own lowest (rule 614.5), so the dice kept are as many as were called
+ * for. `Game.rollDice`.
+ */
+export interface DiceRollReplacement {
+  readonly event: "would-roll-dice";
+  readonly who: "you" | "opponent" | "any-player";
+  readonly instead: ModifiedEvent;
+  readonly ignoreLowest?: true;
+}
 
 /**
  * "If you would lose the game, instead exile The Golden Throne and your life

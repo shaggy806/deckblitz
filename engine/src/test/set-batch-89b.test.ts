@@ -130,7 +130,7 @@ describe("Breeches, the Blastmaker", () => {
       const flips = game.eventsOfType("coin-flipped");
       expect(flips).toHaveLength(1);
       const won = flips[0].won;
-      outcomes.add(won);
+      outcomes.add(won === true);
       // The copy of a creature spell resolves as a token Grizzly Bears.
       expect(tokensOf(game, "Grizzly Bears")).toHaveLength(won ? 1 : 0);
       expect(named(game, "Grizzly Bears", A)).toHaveLength(won ? 2 : 1);

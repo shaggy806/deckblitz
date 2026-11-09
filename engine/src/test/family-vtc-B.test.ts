@@ -34,6 +34,7 @@ import {
   toStep,
   zone,
 } from "./harness.js";
+import { lastRollIn } from "../random-results.js";
 
 describe("Death Kiss", () => {
   it("doubles an opponent's creature attacking another opponent, not one attacking you", () => {
@@ -316,7 +317,7 @@ describe("Ancient Brass Dragon", () => {
       return [ref(lions)];
     };
     attack(game, a, [dragon]);
-    expect(cap).toBe(game.state.lastRoll!.total);
+    expect(cap).toBe(lastRollIn(game.state)!.total);
     expect(zone(game, lions)).toBe("battlefield");
     expect(controller(game, lions)).toBe(A);
     expect(graveyard(game, B)).not.toContain(lions);
