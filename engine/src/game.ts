@@ -6135,6 +6135,23 @@ export class Game {
    * would end up on a whole stack, so these are never folded: a split-off
    * target a delayed trigger will come back for has to still be there.
    */
+  /** A new turn forgets the tokens that have ceased to exist, except those a
+   * delayed ability still names: "the next end step" may be a later turn's,
+   * and it reads them by last-known information (rule 608.2h). */
+  private forgetCeasedTokens(): void {
+    const ceased = this.state.ceasedTokens;
+    if (ceased === undefined) return;
+    const named = new Set<ObjectId>();
+    for (const trigger of this.state.delayedTriggers) {
+      named.add(trigger.source);
+      if (trigger.triggerObject !== undefined) named.add(trigger.triggerObject);
+      for (const t of trigger.targets) if (t?.kind === "object") named.add(t.object);
+    }
+    const kept = [...named].filter((id) => ceased[id] !== undefined);
+    if (kept.length === 0) delete this.state.ceasedTokens;
+    else this.state.ceasedTokens = Object.fromEntries(kept.map((id) => [id, ceased[id]]));
+  }
+
   private pinnedTokenIds(): Set<ObjectId> {
     const pinned = new Set<ObjectId>();
     for (const id of this.state.zones.shared.battlefield) {
@@ -8998,7 +9015,7 @@ export class Game {
     // it; past the turn it stops being rendered rather than lingering as a
     // permanent window into a hand.
     this.state.revealedThisTurn = [];
-    delete this.state.ceasedTokens;
+    this.forgetCeasedTokens();
     delete this.state.damageUnpreventableThisTurn;
     delete this.state.powerUpsBarredThisTurn;
     // "When that creature dies this turn" watches no longer, nor does "when
@@ -50401,7 +50418,6 @@ controlledBy,
             triggerObject: creator.triggerObject,
             triggerObjectStint: ceased.zoneChangeCount,
             triggerObjectRefs: { triggerObject: ceased.zoneChangeCount },
-            triggerObjectCeased: ceased,
           }
         : {}),
       // "That card": the creating ability's trigger object, as the object
@@ -50553,11 +50569,6 @@ controlledBy,
     for (const trigger of [...firing].sort(
       (a, b) => order.indexOf(a.controller) - order.indexOf(b.controller),
     )) {
-      // A ceased token is read from `ceasedTokens` (rule 608.2h), which a
-      // new turn has emptied if this was set up on an earlier one.
-      if (trigger.triggerObject !== undefined && trigger.triggerObjectCeased !== undefined) {
-        (this.state.ceasedTokens ??= {})[trigger.triggerObject] ??= trigger.triggerObjectCeased;
-      }
       const id = this.mintAbilityObject(
         trigger.source,
         trigger.sourceName,

@@ -4737,12 +4737,6 @@ export interface DelayedTrigger {
    * creature** at end of combat" (Ohran Viper). The delayed ability's too
    * (603.7c), as long as it's still that permanent (rule 400.7). */
   readonly recipient?: LastKnownRefs["recipient"];
-  /** A trigger object that was a token and has ceased to exist (rule 111.7),
-   * as it last existed on the battlefield — "create a token that's a copy
-   * of that artifact" of a sacrificed Treasure (Esoteric Duplicator). Kept
-   * here because `GameState.ceasedTokens` lasts only the turn, and "the
-   * next end step" may be the next turn's. */
-  readonly triggerObjectCeased?: LastKnownInfo;
   /** The turn it was created on, so "the next end step" can't mean one the
    * game is already in. */
   readonly createdOnTurn: number;
@@ -5507,8 +5501,10 @@ export interface GameState {
    * turn (rule 111.7), keyed by its old id: the object is deleted, but an
    * ability on the stack may still read it by last-known information —
    * Clement, the Worrywort's "lesser mana value" after a token copy that
-   * entered was killed in response, a Saproling's dies trigger. Cleared as
-   * the next turn begins; absent when no such token has been deleted.
+   * entered was killed in response, a Saproling's dies trigger. Each is
+   * forgotten as the next turn begins unless a delayed ability still names it
+   * ("the next end step" may be a later turn's — Esoteric Duplicator); absent
+   * when no such token is remembered.
    */
   ceasedTokens?: Record<ObjectId, LastKnownInfo>;
   /**
