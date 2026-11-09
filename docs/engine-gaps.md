@@ -18,11 +18,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
 - **Limited-duration control of a player** (found 2026-11-01). Rule 723.2: Word of Command and
   Opposition Agent control a player for less than a turn. `player-control.ts` holds a next turn or a
   next combat, not these; Word of Command is on the stale list and needs its own narrow key.
-- **A target tax's offers are approximate in two corners** (found 2026-11-01). Each only
-  mis-offers, never mis-charges: `target-count.ts`'s sum over-counts a `targeting` tax with several
-  targets, so a driver may pass on a legal cast; and a taxed ability that also has a two-slot
-  `targetCostReduction` can over-filter its targets.
-
 - **A static can't require attacking one player.** `AttackRequirementRule` (`state.ts`, read by
   `combat/eligibility.ts`'s `attackRequirementRulesOf` and `aimedRequirements`) is created only by a
   resolving `attack-requirement` effect. Public Enemy's "all creatures attack enchanted creature's
@@ -131,15 +126,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   Chatterfang or Tippy-Toe (rule 616.1): `token-replacements.ts` takes whichever order makes the most
   tokens, which an optional replacement doesn't fit. Key `replacement:token-creation-replace-with-copies`
   (B274, 2026-11-07).
-- **A mana restriction reads the spell before it's cast.** `ManaRestriction.spell` is matched
-  against the card in its pre-cast zone, so an ability a static grants a spell as it's cast
-  (Abaddon the Despoiler's cascade) is missed: Jasmine Boreal of the Seven's "only to cast
-  creature spells with no abilities" (her ruling) would wrongly pay for it. She waits on it
-  (`cost:mana-restriction-at-cast` in the gaps JSON).
-- **Delve and convoke together on an {X} spell.** `xCost.maxX` is the better of the two alone
-  (`xPlanFor`), so Chord of Calling under Teval, Arbiter of Virtue can't reach the X both would
-  pay together, and its offer's convoke proof and delve ranges are each worked out without the
-  other. Needs a joint plan: convoke the creatures, delve the rest of the generic.
 - **Not modeled.** Banding, Companion, and text change that replaces words (612.2: Artificial Evolution, Mind Bend, Magical Hack, New Blood — a rework
   of the card format the user ruled not worth one cycle of cards, 2026-10-09; exchanging text
   boxes, 612.5, is built). Battles, dungeons and the Initiative, and snow sources paying {S}, are
@@ -170,10 +156,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   player chooses which applies first (the ruling), which decides who ends up drawing;
   `Game.drawRedirectFor` takes the opponent first in turn order. Asking needs a draw that can
   stop mid-effect for a decision (`drawCard` is synchronous at every call site).
-- **Toxic's last two shapes.** "Gains toxic N until end of turn" (no modifier carries toxic —
-  Skrelv, Defector Mite, which also needs hexproof from a colour) and a static scoped to
-  "creatures with toxic" (Skrelv's Hive: toxic is folded in the layer such a scope would have
-  to wait for).
 - **"Each player may" with a choice inside it.** Rule 101.4: every player chooses, then it all
   happens at once. `each-player-may` holds discards and sacrifices until the last answer
   (`GameState.heldChoices`), and an effect that asks nothing more (draw, discard a hand, gain or
@@ -262,9 +244,6 @@ that needs it is authored.
   Apprentice is in the pool and has one: checked 2026-11-04, it makes {B}{B}{B} and the hand stays
   as it was. Blocks Bog Witch (`cost:mana-ability-discard`). Found by an authoring agent,
   2026-10-23 (B144).
-- **Convoke with a target-dependent cost.** The offered `proof` is priced at the dearer end of
-  the target-count range.
-
 - **Umbra armor's Aura is picked, and goes after the other shields.** With several Auras with
   umbra armor on one permanent (rule 702.89a), or a regeneration shield or a shield counter
   beside one, the permanent's controller chooses which replacement applies (616.1, the

@@ -3159,6 +3159,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Engine rules gaps
 
+- **Smaller engine leads from batch 258** (2026-11-09, `7ea492d1f`): A bare X, `isSource` and `sameNameAsSource` are bound as an effect begins (rules 113.7a, 608.2h; frees `filter:same-name-as-source-last-known`); `reveal: "chosen"` from a hand; a prompt-only `each-player-may` asks; `card:find` reads nested `text`.
+- **Smaller engine leads from batch 257** (2026-11-09, `7ea492d1f`): A choose-permanents' `then` keeps its trigger and kept targets' zones; `amounts` conditions read last-known (608.2h); an impulse gate reads its holder.
+- **Toxic's last two shapes** (2026-11-09, `no commit`, already fixed: a test now pins it): `grant-toxic` and `hasToxic` exist; Skrelv and Skrelv's Hive are in the pool.
+- **A mana restriction reads the spell before it's cast** (2026-11-09, `no commit`, already fixed: a test now pins it): `filter.hasAbilities` goes through `asSpellBeingCast`; Jasmine is in the pool.
+- **Delve and convoke together on an {X} spell** (2026-11-09, `248a4013f`): `xPlanByConvoke` delves what generic the creatures leave: Chord under Teval reaches both (rules 702.51a, 702.66a).
+- **Convoke with a target-dependent cost** (2026-11-09, `6cddba100`): A convoke offer proves a payment per target count (`proofByTargetCount`, rule 702.51a).
+- **A target tax's offers are approximate in two corners** (2026-11-09, `67bdea70e`): A shared target tax counts once (`TargetTaxShare`); a taxed target stays offered when another slot earns the reduction (rule 601.2f).
 - **Assist isn't offered on a spell cast while something resolves** (2026-11-09, `f6fa812c6`): Assist is offered on a `cast-now` cast: the resolution waits on the helper, and a reversed cast lets it finish (rule 702.132a).
 - **Enlist leftovers** (2026-11-09, `6cf0481ce`): Enlist is asked before the attack tax is paid, and once per instance; a creature whose tapping would leave the tax unpayable isn't offered (rules 702.154d, 508.1g-j).
 - **Splice's limits** (2026-11-09, `96d3b7ab9`): Splice goes onto modal (spliced card with no targets), fused and overloaded spells (rule 702.47). Open: a spliced card with targets onto a modal spell, divided and `resolve` spells, the four-card cap, the caster's order of spliced effects (702.47b).

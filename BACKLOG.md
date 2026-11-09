@@ -605,7 +605,6 @@ there and move this line to `COMPLETED.md`.
 - **Mulligans are declared at once, and two opening-hand rules are loose** — rule 103.5 has turn-order declarations but `beginMulligans` asks in parallel (a design call); `COMMANDER_RULES` gives the free mulligan at two players, while 103.5c names multiplayer and Brawl; a revealed opening-hand card isn't kept revealed until the first turn (103.6b). (2026-11-09: 103.5c and 103.6b settled; only turn-order declarations are left.)
 - **An opponent-caused discard's replacement beats the graveyard ones without asking** — `Game` puts Obstinate Baloth onto the battlefield rather than asking its controller (616.1) when Leyline of the Void also applies.
 - **Limited-duration control of a player** — rule 723.2's Word of Command and Opposition Agent; `player-control.ts` holds a next turn or a next combat only.
-- **A target tax's offers are approximate in two corners** — `target-count.ts`'s sum over a `targeting` tax and a two-slot `targetCostReduction` beside a tax mis-offer, never mis-charge.
 - **Buyback always beats an "exile it instead" replacement**: rule 616.1 gives the owner the choice; and no turn-long graveyard-to-exile `player-effect` — Yawgmoth's Will (`docs/engine-gaps.md`).
 - **A targeting restriction can't last a turn, or require a target**: `hexproofFrom`'s qualifiers are statics only; Display of Dominance's "… this turn" over permanents you control, Lurker's "unless it attacked or blocked this turn" and the Flagbearers' "must choose at least one Flagbearer" (601.2c) need more (`docs/engine-gaps.md`). (2026-11-09: only the Flagbearers' "at least one if able" over a whole target set is left, and it needs a client change.)
 - **A merged or melded permanent's cards go into a library or graveyard in an order nobody chose**: rule 730.3a and the meld ruling let the owner order them; and only a blink and the exile links find every card it became as "that card" (730.3c, `leftWith`, built 2026-10-31 with meld).
@@ -621,13 +620,10 @@ there and move this line to `COMPLETED.md`.
 - **A regeneration shield goes before a shield counter** (616.1): with both, the permanent's controller should choose which replaces an effect's destroy; the engine always spends the regeneration shield.
 - **Blitz, dash, sneak, web-slinging and More Than Meets the Eye are offered only from the hand and the command zone** (702.152a, 702.109a, 702.190a, 702.188a, 702.162a).
 - **An optional "instead create copies" token replacement can't be asked** (616.1): token creation can't pause for a choice (Moonlit Meditation, Mirrormind Crown, Esix, Fractal Bloom).
-- **A mana restriction reads the spell before it's cast** (Jasmine Boreal of the Seven waits).
-- **Delve and convoke together on an {X} spell** (Chord of Calling under Teval).
 - **Not modeled**: banding, Companion, word-replacing text change (612.2).
 - **Replacement order is chosen for the affected player, never asked** (616.1): among them two opponents' Crafty Cutpurses on one token (first in turn order), and the Words cycle's next draw before a Notion Thief or a draw multiplier.
 - **Protection's prevention always comes after a creature's own damage replacements** (616.1): Phantom Centaur.
 - **Two opponents' Notion Thieves aren't ordered by the drawing player.**
-- **Toxic's last two shapes** (Skrelv, Defector Mite; Skrelv's Hive).
 - **"Each player may" with a choice inside it** (101.4): a search is done before the next player is asked (Tempt with Discovery, Innocent Traveler).
 - **Static-effect dependency ordering** (613.8) beyond layer 4's type grants.
 - **The rest of leaving the game** (800.4g–h): a choice asked of a player who has left is skipped, not handed to another player.
@@ -638,10 +634,7 @@ Latent: the engine departs from the rules here, but no pool card reaches it yet.
 when a card that needs it is authored.
 
 - **Overlapping damage redirections are ordered without asking** (616.1): `bestDamageOrder` chooses for the affected player (Saving Grace, in the pool; Gideon's Sacrifice and Ascent of the Worthy wait, `decision:damage-redirect-order`).
-- **Smaller engine leads from batch 258**: `look-and-choose`'s `manaValue: { n: "x" }` matched nothing on an ability where `{ n: { amount: "x" } }` works; its `reveal: "chosen"` silently does nothing for `zone: "hand"`; `spawn` of a transforming card's back face by name leaves its trigger not firing; `sameNameAsSource` reads a source that has left live (four pool cards use it); AUTHORING §15's "no damage redirection to a third object" looks stale. From batch 259: `manaValue: { n: "x" }` also matches nothing in an `exile-all` filter on a −X ability, though it reads the announced X in a `card-in-graveyard` target; `each-player-may` with only a `prompt` asks nobody and counts everyone as "didn't"; only the typecheck catches a bad card shape (`castAsThoughFlash: { type: "sorcery" }` gave flash to every spell under vitest).
-- **Smaller engine leads from batch 257**: `choose-permanents`' `then` loses the trigger object (a `trigger-object` read gives 0); `keepTargets` doesn't shift `targetZones` with the slots; an impulse `gate` reads "you" from the exiled card's owner; `isSource` in an `exile-all` filter seems not to match; `amounts` conditions may miss last-known information on a destroyed target; `while-source-tapped` misses an untap and retap (Preacher's ruling); `choose-value`'s `among` offers an opponent's counter kinds, against its doc.
 - **"A Zombie … dies" is read as a Zombie creature**: rule 700.4's "dies" takes any permanent, so a noncreature Kindred permanent with that subtype is missed. The parser and the 42 pool cards agree on `type: "creature"`, so a fix changes them together.
-- **Convoke with a target-dependent cost.**
 
 ## Bots
 
