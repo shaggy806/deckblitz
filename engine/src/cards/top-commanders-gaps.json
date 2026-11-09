@@ -2194,6 +2194,51 @@
   "replacement:token-event-becomes-with-decision"
  ],
  "features": {
+  "effect:add-mana-combination-of-card-colors": {
+   "size": "medium",
+   "ui": false,
+   "description": "No add-mana form reads a card's colors."
+  },
+  "replacement:as-enters-discard-any-number": {
+   "size": "medium",
+   "ui": false,
+   "description": "AsEntersAction has no discard."
+  },
+  "static:cast-from-any-graveyard-put-from-library-this-turn": {
+   "size": "medium",
+   "ui": false,
+   "description": "A static mayPlay from a graveyard has no whose; only your own graveyard."
+  },
+  "effect:clash-with-named-opponent": {
+   "size": "medium",
+   "ui": false,
+   "description": "The clash effect's opponent is engine-built, so authored clash can only pick among opponents."
+  },
+  "effect:token-copy-enters-attached": {
+   "size": "medium",
+   "ui": false,
+   "description": "create-token-copy has no attached form."
+  },
+  "decision:zone-choice-card-types-among": {
+   "size": "medium",
+   "ui": true,
+   "description": "SearchTogether has no card-types-among rule."
+  },
+  "replacement:copy-on-enter-exile-two-counters-from-other": {
+   "size": "medium",
+   "ui": false,
+   "description": "Clone-on-enter with two exiled cards and a counter count isn't expressible."
+  },
+  "effect:noted-card-name-copy": {
+   "size": "medium",
+   "ui": false,
+   "description": "No noted name to carry onto the face-down permanent and copy from."
+  },
+  "zone:play-from-graveyard-this-turn-enters-tapped": {
+   "size": "medium",
+   "ui": false,
+   "description": "landsEnterTapped covers lands only, and this needs permanent spells too."
+  },
   "bug:as-enters-choices-any-entry": {
    "size": "medium",
    "ui": false,
@@ -4617,10 +4662,7 @@
    "rank": 149,
    "name": "Omnath, Locus of All",
    "needs": [
-    "condition:filter-card-property-clauses",
-    "effect:add-mana-extensions",
-    "replacement:mana-pool-emptying",
-    "zone:visibility-extensions"
+    "effect:add-mana-combination-of-card-colors"
    ]
   },
   {
@@ -5346,8 +5388,7 @@
    "rank": 235,
    "name": "Ob Nixilis, Captive Kingpin",
    "needs": [
-    "trigger:opponents-lose-exactly-n-life",
-    "zone:impulse-permission-options"
+    "trigger:opponents-lose-exactly-n-life"
    ]
   },
   {
@@ -5840,10 +5881,7 @@
    "rank": 294,
    "name": "Indominus Rex, Alpha",
    "needs": [
-    "bug:as-enters-choices-any-entry",
-    "decision:discard-any-number",
-    "effect:amount-counters-on-object",
-    "mechanic:keyword-counters"
+    "replacement:as-enters-discard-any-number"
    ]
   },
   {
@@ -5889,19 +5927,14 @@
    "rank": 301,
    "name": "Coram, the Undertaker",
    "needs": [
-    "effect:amount-aggregate",
-    "effect:player-scope-extensions",
-    "stat:milled-this-turn",
-    "zone:cast-cards-you-dont-own",
-    "zone:graveyard-cast-permissions"
+    "static:cast-from-any-graveyard-put-from-library-this-turn"
    ]
   },
   {
    "rank": 302,
    "name": "Marvo, Deep Operative",
    "needs": [
-    "effect:cast-during-resolution",
-    "mechanic:clash"
+    "effect:clash-with-named-opponent"
    ]
   },
   {
@@ -5940,10 +5973,7 @@
    "rank": 307,
    "name": "Arna Kennerüd, Skycaptain",
    "needs": [
-    "condition:filter-attachments",
-    "decision:ward-payment",
-    "effect:attach-extensions",
-    "effect:double-counters-each-kind"
+    "effect:token-copy-enters-attached"
    ]
   },
   {
@@ -6735,9 +6765,7 @@
    "rank": 406,
    "name": "Winter, Cynical Opportunist",
    "needs": [
-    "decision:choose-from-zone-extensions",
-    "effect:this-way-results",
-    "replacement:exile-instead"
+    "decision:zone-choice-card-types-among"
    ]
   },
   {
@@ -6839,10 +6867,7 @@
    "rank": 418,
    "name": "The Mimeoplasm",
    "needs": [
-    "bug:as-enters-choices-any-entry",
-    "decision:choose-from-zone-extensions",
-    "effect:amount-fields-dynamic",
-    "replacement:copy-on-enter-options"
+    "replacement:copy-on-enter-exile-two-counters-from-other"
    ]
   },
   {
@@ -7071,9 +7096,7 @@
    "rank": 446,
    "name": "Magar of the Magic Strings",
    "needs": [
-    "effect:cast-during-resolution",
-    "mechanic:face-down",
-    "replacement:exile-instead"
+    "effect:noted-card-name-copy"
    ]
   },
   {
@@ -7190,10 +7213,7 @@
    "rank": 461,
    "name": "Jaws, Relentless Predator",
    "needs": [
-    "cost:choose-cards-as-cost",
-    "effect:missing-tokens",
-    "trigger:destroyed",
-    "trigger:sacrifice-filter"
+    "trigger:destroyed"
    ]
   },
   {
@@ -7397,11 +7417,7 @@
    "rank": 484,
    "name": "Tevesh Szat, Doom of Fools",
    "needs": [
-    "bug:player-leaves-game-cleanup",
-    "effect:control-change-extensions",
-    "effect:may-sacrifice-then",
-    "effect:put-commanders-onto-battlefield",
-    "effect:sacrificed-object-lki"
+    "effect:put-commanders-onto-battlefield"
    ]
   },
   {
@@ -7517,9 +7533,7 @@
    "rank": 499,
    "name": "Jorn, God of Winter",
    "needs": [
-    "bug:color-identity-back-face",
-    "replacement:enters-modifier-via-permission",
-    "zone:graveyard-cast-permissions"
+    "zone:play-from-graveyard-this-turn-enters-tapped"
    ]
   },
   {

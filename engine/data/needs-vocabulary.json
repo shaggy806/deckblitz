@@ -16321,6 +16321,46 @@
   "keyword:kicker-x-minimum": {
    "family": "keyword:kicker-x",
    "example": "Thieving Skydiver: 'X can't be 0': kicker has no minimum X, so a kick for 0 still counts as kicked."
+  },
+  "cost:ability-cost-reduction-when-targeting": {
+   "family": "cost:ability-cost-modification",
+   "example": "Strong Back: abilityCostModification's targeting branch applies only increaseGeneric; \"equip abilities that target enchanted creature cost {3} less\" needs a reduction there and in the offer's affordability."
+  },
+  "zone:play-permission-grants-triggered-ability": {
+   "family": "zone:graveyard-cast-permissions",
+   "example": "Serra Paragon: PlayTerms has entersWith and gainsHaste, nothing for \"it gains [a triggered ability]\"; the record's once-shared half is expressible, only this half is missing."
+  },
+  "replacement:prevention-then-names-damaged-player": {
+   "family": "replacement:damage-modification",
+   "example": "Sokrates, Athenian Teacher: A damage-prevention then can't name the damaged player; tested, who: trigger-player draws for nobody."
+  },
+  "amount:base-power": {
+   "family": "effect:amount-new-variants",
+   "example": "Sovereign Okinec Ahau: Filter basePower only compares a number; no amount gives power minus base power."
+  },
+  "trigger:opponents-lose-life-batched": {
+   "family": "trigger:loses-life-first-time-each-turn",
+   "example": "Emet-Selch of the Third Seat: on: loses-life fires per player losing life; \"one or more opponents lose life\" is one trigger."
+  },
+  "effect:flicker-return-with-two-counter-kinds": {
+   "family": "effect:flicker-generalized",
+   "example": "Gilraen, Dúnedain Protector: FlickerCounters is one kind; returnThen would add after entering."
+  },
+  "effect:clash-with-named-opponent": {
+   "family": "mechanic:clash",
+   "example": "Marvo, Deep Operative: The clash effect's opponent is engine-built, so authored clash can only pick among opponents."
+  },
+  "effect:choose-counter-kind-on-player": {
+   "family": "effect:add-counter-of-chosen-existing-kind",
+   "example": "Animation Module: \"Choose a counter on target permanent or player\": choose-value's counter-kind reads an object in a target slot, no player branch."
+  },
+  "filter:not-this-way-by-you": {
+   "family": "effect:this-way-results",
+   "example": "Rise of the Witch-king: notThisWay has no player scope: \"another\" would also bar a card you own that an opponent sacrificed, where the ruling bars only the one you sacrificed (Deadly Brew shares this)."
+  },
+  "bug:copy-exception-static-self-reference": {
+   "family": "effect:copy-exception-static-ability",
+   "example": "Firion, Wild Rose Warrior: A create-token-copy exception's static can't say 'this Equipment': bindDynamicCompares binds isSource inside it to the resolving ability's source (Firion), and abilityCostModifiers reads printed statics only."
   }
  },
  "groups": [

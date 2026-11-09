@@ -16,39 +16,26 @@ decides into its section below.
 
 ## Commander gap (the current priority)
 
-**429 of the 500 most-played commanders are implemented** (`top-commanders.txt`; re-mark with
+**488 of the 500 most-played commanders are implemented** (`top-commanders.txt`; re-mark with
 `npm run cmdrs:mark -w engine`). An imported decklist usually has its commander substituted, and
 that one card is the reason the deck exists. Live numbers for everything below come from
 `npm run cmdrs:gaps -w engine`.
 
-- **Ready to author, no engine work: none.** Jasmine Boreal of the Seven was listed as ready,
-  but her real blocker is the mana-restriction gap under Engine rules gaps, now recorded in her
-  gaps record as `cost:mana-restriction-at-cast`.
-- **Build down the greedy order.** `cmdrs:gaps` ranks every missing engine feature over
-  `engine/src/cards/top-commanders-gaps.json`. When a feature lands, add its key to that file's
-  `built` array and author the commanders it unblocks in the same commit. The next ones,
-  engine-only, with the commanders each fully unblocks (+1 each): `replacement:as-transforms`,
-  `trigger:bends`, `trigger:you-tap-opponent-creature`, `keyword:bloodthirst`,
-  `effect:amount-aggregate`, `effect:repeat-process`, `effect:put-commanders-onto-battlefield`,
-  `keyword:freerunning`, `replacement:mana-pool-emptying`, `static:mana-pool-reads`. Lynde, Cheerful
-  Tormentor also waits on `effect:curse-attach-player` (a Curse put onto the battlefield
-  attached to a player, or moved to an opponent); attaching one to a player is built
-  (`attachPermanent` takes a player), but `attachedTo` on a card entering names only a
-  permanent so far.
-- **Most-needed features overall** (commanders needing each, 2026-10-16 after the backlog pass that
-  built parts of the five-commander features — `COMPLETED.md`): `decision:variable-target-count`,
-  `decision:choose-permanent`, `replacement:mana-pool-emptying` (4 each), then
-  `decision:manual-payment-choices`, `decision:choose-from-zone-extensions` (Winter's "a permanent
-  card from among them onto the battlefield with a finality counter"), `zone:visibility-extensions`,
-  `effect:attach-extensions` and `effect:divide-among-targets` (3 each). Orvar needs `decision:choose-permanent` and
-  `trigger:discards-extensions`. Ulalek needs `cost:colorless-hybrid-mana` and `keyword:devoid`.
-- **UI-bound features.** These need a new client decision and a browser check:
-  `effect:cast-during-resolution` (what's left after the `cast-now` effect is in its
-  `top-commanders-gaps.json` description), `effect:attach-extensions`,
-  `cost:sacrifice-multiple`, `decision:choose-permanent`, `decision:variable-target-count` and
-  `decision:choose-from-zone-extensions`. Sen Triplets also needs
-  `zone:cast-from-opponents-hand` (playing cards from the target's revealed hand), on top of
-  the revealed hand itself.
+- **Ready to author, no engine work: none.** B294 (2026-11-09) re-attempted all 18 still missing
+  and authored 6 (Mr. House, Hazel of the Rootbloom, Indoraptor, Orvar, Noctis, Minsc & Boo). Each
+  of the other 12 waits on one narrow key, recorded in `engine/src/cards/top-commanders-gaps.json`.
+- **The 12 left, each with its key** (`cmdrs:gaps` ranks them; when a key lands, add it to that
+  file's `built` array and author its commander in the same commit): Omnath, Locus of All
+  `effect:add-mana-combination-of-card-colors`; Ob Nixilis, Captive Kingpin
+  `trigger:opponents-lose-exactly-n-life`; Indominus Rex, Alpha
+  `replacement:as-enters-discard-any-number`; Coram, the Undertaker
+  `static:cast-from-any-graveyard-put-from-library-this-turn`; Marvo, Deep Operative
+  `effect:clash-with-named-opponent`; Arna Kennerüd, Skycaptain `effect:token-copy-enters-attached`;
+  Winter, Cynical Opportunist `decision:zone-choice-card-types-among`; The Mimeoplasm
+  `replacement:copy-on-enter-exile-two-counters-from-other`; Magar of the Magic Strings
+  `effect:noted-card-name-copy`; Jaws, Relentless Predator `trigger:destroyed`; Tevesh Szat, Doom of
+  Fools `effect:put-commanders-onto-battlefield`; Jorn, God of Winter
+  `zone:play-from-graveyard-this-turn-enters-tapped`.
 
 ## Card backlog (by EDHREC rank, and the precons)
 
@@ -71,7 +58,7 @@ section keeps only what to do next.
   Jean-Luc Picard, Luminary (not in the snapshot yet); and re-read the vanilla preview commons
   (Starfleet Crew, Warship Flight Crew, Defense Force Aggressor) and Võx, Child of the Collective
   (blocked, also waiting on a ruling) against the released text.
-- **Need-key themes step 7 continues** (`docs/plans/need-key-themes.md`): all done (theme 15, B292, the last). Next `author-freed` for `--stale`, then the order in `docs/plans/after-the-themes.md`.
+- **Need-key themes step 7 continues** (`docs/plans/need-key-themes.md`): all done (theme 15, B292, the last). Next the order in `docs/plans/after-the-themes.md` (step 2, the re-attempt, done: B294, 2026-11-09; step 3 next).
 - **Next: work down the need keys** (the set walk ended 2026-10-27 with batch 234; its record moved to `COMPLETED.md`) (`docs/plans/need-keys-after-the-walk.md`,
   in progress; the tooling, the model trial, and Phase 1's merge and existence check landed
   2026-10-27): next, Phase 1 step 2, the recheck round. 863 cards were frozen 2026-10-27 into nine
@@ -521,6 +508,7 @@ section keeps only what to do next.
   leave trigger), Cait, Cage Brawler (two simultaneous discards; no scope names "you and defending player"), The Last Agni Kai ("until end of turn" mana keeping), Curse of
   Shaken Faith (other needs), Sudden Substitution (an exchange), Chef's Kiss (a random retarget), March of Burgeoning Life and March of Reckless Joy (their own effects). To
   check, likely authorable: Invert Polarity, Foreboding Steamboat, Last Chance, Aang, Airbending Master (airbend and upkeep lines unread).
+  **The re-attempt (B294, 2026-11-09):** all 245 cards still missing from the top 5,000 and the top 500 commanders, read against today's vocabulary: 120 authored, 125 blocked on 124 narrow keys (only `effect:additional-beginning-phase` serves two). So about half the blocker records were out of date. 10 of the keys are new; the rest were already true. Top 5,000: 4,885 of 5,000 (116 authored here); commanders 488 of 500. The queue (`--stale`) stays empty.
   **The queue emptied again 2026-11-09 (B293):** the 20 cards theme 15 and the last engine gaps freed, 19 authored (Forth Eorlingas!, Skirge Familiar, Screeching Scorchbeast, Xira, Evil Twin, Callidus Assassin, Human Torch, ...), Sanctum Prelate blocked (`static:choose-any-number-on-enter`). What comes next is in `docs/plans/after-the-themes.md`.
   **The freed queue is empty (B291, 2026-11-09):** the last 145 cards, 109 authored and 36 blocked on 32 narrow keys (`effect:player-cant-gain-life-bound` for Screaming Nemesis, Stigma Lasher and Flames of the Blood Hand; `amount:scavenge-power-in-graveyard`, `trigger:becomes-crewed-first-time` and `filter:directly-above-in-graveyard` two each). `cards:needs -- --stale` lists nothing until more keys land, so `next-theme` (theme 15) and then `build-family` are next. Tonight's gap agents then authored 12 of those 36 (`COMPLETED.md`, Engine rules gaps).
 
@@ -593,6 +581,7 @@ One line each; the detail (rule numbers, code sites, the cards each blocks) is i
 **`docs/engine-gaps.md`**, under the same bold title. When a gap closes, delete its detail
 there and move this line to `COMPLETED.md`.
 
+- **B294's small gaps** (2026-11-09) — `notThisWay` has no player scope (Deadly Brew; Rise of the Witch-king blocked); `amounts` conditions and dynamic filter operands aren't read in static or cost contexts (Hagra Mauling, Thryx, Ensnaring Bridge, Lavinia); three more the agents reported, unverified. An `{X}` spell's `maxAffordableX` loop is slow on a big board: Ascend from Avernus's situation seed 51 is ~29 s of CPU, at the fuzzer's 30 s limit (`node scripts/situation-fuzz.mjs --with "Ascend from Avernus" --seed 51 --scenarios 1 --timeout 150`).
 - **"Each player may" acts on each answer before asking the next** (rule 101.4; the tempting offers and Kwain). (2026-11-09: tokens and counters fixed; `modal` effects and `options` are left.)
 - **A shuffled face-down pile keeps its object ids** (Become Anonymous, Expose the Culprit: a client reading the wire can tell which face-down card is which; needs a design call).
 - **A self-replacement beside an exile: no 616.1 choice** (Gravebane Zombie's and Blightsteel's own "instead" always beat Rest in Peace or a finality counter).

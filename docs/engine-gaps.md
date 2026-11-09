@@ -6,6 +6,19 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
+- **B294's small gaps** (2026-11-09, what the re-attempt's agents and reader reported while writing cards).
+  Checked against the code: `CardFilter.notThisWay` (`filter.ts`) has no player scope, so Deadly Brew's and
+  Rise of the Witch-king's "another" also bars a card you own that an opponent sacrificed, where the ruling
+  bars only the one you sacrificed (Rise blocked, `filter:not-this-way-by-you`). A `create-token-copy`
+  exception's static can't say "this object": `bindDynamicCompares` binds `isSource` to the resolving ability's
+  source, and `abilityCostModifiers` reads printed statics only (Firion, `bug:copy-exception-static-self-reference`).
+  Reported, not checked: an `amounts` condition or a dynamic `{ amount }` filter operand isn't evaluated in
+  static or cost contexts (`selfCostReduction`, `affects.filter`; Hagra Mauling, Thryx, Ensnaring Bridge,
+  Lavinia); `would-draw` with `instruction: { atLeast }` doesn't honour `whileHandAtMost` (Phial of Galadriel
+  uses the static's `condition`); `of-player "that-player"` in `whileCondition` never holds on a `cast-spell`
+  trigger (The Council of Four uses a filter); `put-into-graveyard` on a set ref moves only one object
+  (Glimpse the Impossible and Mnemonic Betrayal use `for-each-target`).
+
 - **Mulligans are declared at once, and two opening-hand rules are loose** (found 2026-11-01, all older
   than the finding). Rule 103.5 has each player declare in turn order; `beginMulligans` (`game.ts`) asks in
   parallel, and changing it is a design call. Rule 103.5c gives the free mulligan to multiplayer and
