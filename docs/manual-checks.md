@@ -7884,3 +7884,7 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Reckless Spite: two tokens of one stack
 - **Do:** Cast Secure the Wastes for X=8 (the Warriors make one stack), then Reckless Spite. Click the Warrior stack and choose "Target 2" in its menu, then Done.
 - **Expect:** The tile reads 2/8 while you choose. The spell destroys two Warriors, six stay on one tile, and you lose 5 life.
+
+### Circle of Protection: Red: a commander in the command zone as the source
+- **Do:** Activate Circle of Protection: Red.
+- **Expect:** A popup offers Krenko, Mob Boss, from the command zone. Choosing it and confirming resolves the ability with no error.

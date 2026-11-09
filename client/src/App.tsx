@@ -3792,6 +3792,20 @@ function Table({
     ? `${activeTargeting.kind}:${activeTargeting.source}:${activeTargeting.abilityIndex}:${activeTargeting.picked.length}`
     : null
   const zoneTargetCollapsed = zoneTargetKey !== null && zoneTargetHidden === zoneTargetKey
+  // What a choice of a source of damage names that the board and the stack
+  // don't show (rule 609.7a): a commander in the command zone, or a card a
+  // waiting effect refers to. A departed source is picked by its ability on
+  // the stack (`Stack`'s `pickSources`).
+  const permanentPopupIds =
+    mode === 'choose-permanents' && choosePermanentsAction
+      ? choosePermanentsAction.eligible.filter(
+          (id) =>
+            view.objects[id] !== undefined &&
+            !view.zones.battlefield.includes(id) &&
+            !view.zones.stack.includes(id) &&
+            !view.zones.stack.some((entry) => view.objects[entry]?.sourceObjectId === id),
+        )
+      : []
   const pickedObjKeys = new Set(
     (activeTargeting?.picked ?? [])
       .filter((r) => r?.kind === 'object')
@@ -5615,6 +5629,11 @@ function Table({
                 : `${permanentPicks.length} chosen`
               : `${permanentPicks.length}/${max} chosen`}
         </span>
+        {permanentPopupIds.length > 0 && decisionCollapsed ? (
+          <button type="button" onClick={() => setDecisionCollapsed(false)}>
+            Show choices
+          </button>
+        ) : null}
         <button
           type="button"
           disabled={permanentPicks.length === 0}
@@ -7916,6 +7935,28 @@ function Table({
           }}
           collapsed={zoneTargetCollapsed}
           onCollapse={() => setZoneTargetHidden(zoneTargetKey)}
+        />
+      ) : null}
+
+      {mode === 'choose-permanents' && choosePermanentsAction && permanentPopupIds.length > 0 ? (
+        <ZoneViewer
+          key={`permanents:${permanentPopupIds.join(',')}`}
+          title={`${view.decisionSource?.cardName ?? 'Choose'} — ${choosePermanentsAction.prompt.toLowerCase()}`}
+          ids={permanentPopupIds}
+          resolve={(id) => view.objects[id]}
+          selection={{
+            // With sources on the board too, it may be answered there.
+            min: permanentPopupIds.length === choosePermanentsAction.eligible.length ? 1 : 0,
+            max: 1,
+            eligible: permanentPopupIds,
+            noneLabel: 'Choose on the board',
+            onConfirm: (chosen) => {
+              if (chosen[0] === undefined) setDecisionCollapsed(true)
+              else game.dispatch({ type: 'choose-permanents', player: seat, permanents: [chosen[0]] })
+            },
+          }}
+          collapsed={decisionCollapsed}
+          onCollapse={() => setDecisionCollapsed(true)}
         />
       ) : null}
 

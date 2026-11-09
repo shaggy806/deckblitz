@@ -21,6 +21,65 @@ const ping = (game: Game, source: ObjectId): void =>
     source,
   });
 
+describe("a source of damage off the battlefield and the stack (609.7a)", () => {
+  it("offers a face-up red object in the command zone", () => {
+    const { game, a } = table();
+    const circle = spawn(game, "Circle of Protection: Red");
+    lands(game, "Plains", 2);
+    const commander = game.debugSpawn("Raging Goblin", B, "command");
+    const seen = pickPermanents(a, commander);
+    activate(game, circle, 0);
+    expect(seen.offered).toContain(commander);
+  });
+
+  it("offers the object a waiting delayed trigger refers to, gone to the graveyard", () => {
+    const { game, a } = table();
+    const circle = spawn(game, "Circle of Protection: Red");
+    lands(game, "Plains", 2);
+    const goblin = spawn(game, "Raging Goblin", B);
+    const bears = game.debugSpawn("Raging Goblin", B, "graveyard");
+    game.state.delayedTriggers.push({
+      ...{
+        id: "test-delayed",
+        controller: B,
+        at: "next-end-step",
+        createdOnTurn: game.state.turn.number,
+        createdDuringEndStep: false,
+        source: bears,
+        sourceName: "Raging Goblin",
+        targets: [],
+      },
+    } as unknown as (typeof game.state.delayedTriggers)[number]);
+    const seen = pickPermanents(a, goblin);
+    activate(game, circle, 0);
+    expect(seen.offered).toContain(bears);
+    game.state.delayedTriggers.length = 0;
+  });
+
+  it("doesn't offer a card in a graveyard nothing refers to", () => {
+    const { game, a } = table();
+    const circle = spawn(game, "Circle of Protection: Red");
+    lands(game, "Plains", 2);
+    const goblin = spawn(game, "Raging Goblin", B);
+    const idle = game.debugSpawn("Raging Goblin", B, "graveyard");
+    const seen = pickPermanents(a, goblin);
+    activate(game, circle, 0);
+    expect(seen.offered).not.toContain(idle);
+  });
+
+  it("offers nothing but the command zone's when nothing else is red", () => {
+    const { game, a } = table();
+    const circle = spawn(game, "Circle of Protection: Red");
+    lands(game, "Plains", 2);
+    const commander = game.debugSpawn("Raging Goblin", B, "command");
+    const seen = pickPermanents(a, commander);
+    activate(game, circle, 0);
+    expect(seen.offered).toEqual([commander]);
+    ping(game, spawn(game, "Raging Goblin", B));
+    expect(life(game, A)).toBe(18);
+  });
+});
+
 describe("prevent-damage-from-chosen-source", () => {
   it("Circle of Protection: Red stops the chosen red source's next damage to you, once", () => {
     const { game, a } = table();

@@ -11877,6 +11877,10 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     }),
   ),
   preset(
+    'Circle of Protection: Red: a commander in the command zone as the source',
+    board({ you: { cmd: ['Krenko, Mob Boss'], bf: ['Circle of Protection: Red', 'Plains*2', 'Mountain'] }, opp: { bf: [] } }),
+  ),
+  preset(
     'Reckless Spite: two tokens of one stack',
     board({
       you: { bf: ['Plains*9', 'Swamp*3'], hand: ['Secure the Wastes', 'Reckless Spite'] },

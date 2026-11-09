@@ -39341,13 +39341,12 @@ controlledBy,
         this.emit({ type: "prevention-shield-created", target, amount });
       },
       chooseDamageSource: (filter, then) => {
-        // Rule 609.7a: a permanent, a spell on the stack, or the source of
-        // an ability on the stack that has left the battlefield — a creature
+        // Rule 609.7a: a permanent, a spell on the stack, the source of an
+        // ability on the stack that has left the battlefield — a creature
         // that died with its "deals damage" trigger waiting, read as it last
-        // existed (608.2h). (A waiting replacement or delayed trigger's
-        // object and face-up command-zone objects aren't offered —
-        // docs/engine-gaps.md.)
-        // "Of the chosen color" (Story Circle) reads the colour chosen for
+        // existed (608.2h) — what a waiting replacement or prevention effect
+        // or delayed trigger refers to, or a face-up object in the command
+        // zone. "Of the chosen color" (Story Circle) reads the colour chosen for
         // this ability's source, as it is now (rule 608.2h).
         filter = fixChosenColor(this.state, filter, source);
         const spells = this.state.zones.shared.stack.filter((id) => {
@@ -39361,7 +39360,33 @@ controlledBy,
           if (from === undefined || object === undefined || object.zone === "battlefield" || object.zone === "stack") return [];
           return matchesFilter(this.state, this.registry, from, filter, { you: controller }) ? [from] : [];
         });
-        const eligible = [...new Set([...this.battlefieldMatching(controller, filter), ...spells, ...departedSources])];
+        const objectsOf = (refs: readonly (TargetRef | null | undefined)[]): ObjectId[] =>
+          refs.flatMap((ref) => (ref?.kind === "object" ? [ref.object] : []));
+        const referred = [
+          ...this.state.activeReplacements.flatMap((r) => [
+            r.source,
+            ...(r.from === undefined ? [] : [r.from.object]),
+            ...objectsOf([r.target, ...(r.targets ?? [])]),
+          ]),
+          ...this.state.delayedTriggers.flatMap((d) => [
+            d.source,
+            ...(d.triggerObject === undefined ? [] : [d.triggerObject]),
+            ...objectsOf(d.targets),
+          ]),
+          ...this.state.zones.shared.command.filter((id) => this.state.objects[id]?.faceDown === undefined),
+        ].filter((id) => {
+          const object = this.state.objects[id];
+          // Off the battlefield and the stack, those being offered above;
+          // not a card in a hand or library, which can't be shown to choose.
+          return (
+            object !== undefined &&
+            (object.zone === "graveyard" || object.zone === "exile" || object.zone === "command") &&
+            matchesFilter(this.state, this.registry, id, filter, { you: controller })
+          );
+        });
+        const eligible = [
+          ...new Set([...this.battlefieldMatching(controller, filter), ...spells, ...departedSources, ...referred]),
+        ];
         if (eligible.length === 0) return;
         this.state.awaiting = {
           kind: "choose-permanents",
