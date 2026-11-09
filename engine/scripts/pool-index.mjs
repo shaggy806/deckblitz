@@ -83,10 +83,14 @@ export function normalise(text, name) {
   return grams;
 }
 
-/** An authored shape as one line of JSON: its `text` (already shown) and
- * null fields left out. */
+/** An authored shape as one line of JSON: its own `text` (already shown) and
+ * null fields left out. A nested `text` stays: on a modal mode, an `unless`
+ * option or a cost it's required, and a shape copied without it doesn't
+ * type-check. */
 export const shapeOf = (shape) =>
-  JSON.stringify(shape, (key, value) => (key === "text" || value === null ? undefined : value));
+  JSON.stringify(shape, function (key, value) {
+    return (key === "text" && this === shape) || value === null ? undefined : value;
+  });
 
 // ------------------------------------------------------------------ walks
 
