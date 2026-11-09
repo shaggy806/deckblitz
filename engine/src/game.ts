@@ -2351,6 +2351,8 @@ export class Game {
   /** Set while an effect that deals damage is gone through to see what would
    * ask (`replacementOrdersAsked`): `dealDamage` asks and deals nothing. */
   private dryRunningEvents = false;
+  /** Set during `debugApplyEffect`, which nothing resumes. */
+  private applyingDebugEffect = false;
   /** Replacements carrying out their own effect (rule 614.5), so an event
    * inside it isn't replaced by them again. Synchronous only. */
   private applyingReplacements = new Set<string>();
@@ -6297,7 +6299,8 @@ export class Game {
    * never-compacted token would have been. */
   private splitOneFromStack(id: ObjectId): ObjectId {
     const stack = this.state.objects[id];
-    if (stack === undefined || (stack.stackCount ?? 1) <= 1) return id;
+    // Going through an effect to see what it would ask changes nothing.
+    if (stack === undefined || this.dryRunningEvents || (stack.stackCount ?? 1) <= 1) return id;
     const remaining = (stack.stackCount ?? 1) - 1;
     if (remaining <= 1) delete stack.stackCount;
     else stack.stackCount = remaining;
@@ -8876,15 +8879,22 @@ export class Game {
     if (debugSource !== undefined) {
       this.state.resolvingSource = { source: debugSource.id, timestamp: debugSource.timestamp };
     }
-    applyEffectSpec(
-      effect,
-      this.makeResolutionContext(
-        opts.source ?? asObjectId("debug-effect-source"),
-        player,
-        targets,
-        opts.x ?? 0,
-      ),
-    );
+    // Applied at once, nothing to wait on a `replacement-order` answer: its
+    // effect's own events take the best order.
+    this.applyingDebugEffect = true;
+    try {
+      applyEffectSpec(
+        effect,
+        this.makeResolutionContext(
+          opts.source ?? asObjectId("debug-effect-source"),
+          player,
+          targets,
+          opts.x ?? 0,
+        ),
+      );
+    } finally {
+      this.applyingDebugEffect = false;
+    }
     // As a resolution ending would: creatures it put onto the battlefield
     // attacking with a choice of target ask their controller now.
     if (this.state.awaiting === null && (this.state.pendingEnterAttacking?.length ?? 0) > 0) {
@@ -54343,7 +54353,7 @@ controlledBy,
    * that effect, gone through once without dealing anything, so every hit it
    * would make can ask; the first that does stops it there. */
   private replacementOrdersAsked(run: () => void): boolean {
-    if (this.dryRunningEvents || this.decisionOutstanding()) return false;
+    if (this.dryRunningEvents || this.applyingDebugEffect || this.decisionOutstanding()) return false;
     this.dryRunningEvents = true;
     try {
       run();
