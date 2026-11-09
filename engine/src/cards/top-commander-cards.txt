@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4744 already implemented / 256 missing (marks refreshed 2026-11-09)
+4750 already implemented / 250 missing (marks refreshed 2026-11-09)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2092,7 +2092,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [ ]  2099  Party Thrasher                           {1}{R}           Creature — Lizard Wizard
 [x]  2100  Drown in Dreams                          {X}{2}{U}        Instant
 [x]  2101  Flicker of Fate                          {1}{W}           Instant
-[ ]  2102  Grafdigger's Cage                        {1}              Artifact
+[x]  2102  Grafdigger's Cage                        {1}              Artifact
 [x]  2103  Bruvac the Grandiloquent                 {2}{U}           Legendary Creature — Human Advisor
 [x]  2104  Mycoloth                                 {3}{G}{G}        Creature — Fungus
 [x]  2105  Karn, the Great Creator                  {4}              Legendary Planeswalker — Karn
@@ -3239,7 +3239,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3246  Vorel of the Hull Clade                  {1}{G}{U}        Legendary Creature — Human Merfolk
 [x]  3247  Solar Transformer                        {2}              Artifact
 [x]  3248  Skyhunter Strike Force                   {2}{W}           Creature — Cat Knight
-[ ]  3249  Soulless Jailer                          {2}              Artifact Creature — Phyrexian Golem
+[x]  3249  Soulless Jailer                          {2}              Artifact Creature — Phyrexian Golem
 [x]  3250  Extract from Darkness                    {3}{U}{B}        Sorcery
 [ ]  3251  Satoru, the Infiltrator                  {U}{B}           Legendary Creature — Human Ninja Rogue
 [x]  3252  Wakening Sun's Avatar                    {5}{W}{W}{W}     Creature — Dinosaur Avatar
@@ -3605,7 +3605,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3612  Risky Shortcut                           {2}{B}           Sorcery
 [x]  3613  Mind's Desire                            {4}{U}{U}        Sorcery
 [x]  3614  Hungering Hydra                          {X}{G}           Creature — Hydra
-[ ]  3615  Detection Tower                          {0}              Land
+[x]  3615  Detection Tower                          {0}              Land
 [x]  3616  Hunter's Talent                          {1}{G}           Enchantment — Class
 [x]  3617  Yavimaya Elder                           {1}{G}{G}        Creature — Human Druid
 [x]  3618  Bureau Headmaster                        {R}{W}           Creature — Human Assassin
@@ -4050,7 +4050,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4057  In the Darkness Bind Them                {2}{U}{B}{R}     Enchantment — Saga
 [x]  4058  Sower of Temptation                      {2}{U}{U}        Creature — Faerie Wizard
 [x]  4059  Barbarian Class                          {R}              Enchantment — Class
-[ ]  4060  Vines of Vastwood                        {G}              Instant
+[x]  4060  Vines of Vastwood                        {G}              Instant
 [x]  4061  Creosote Heath                           {0}              Land — Desert
 [x]  4062  Viridian Revel                           {1}{G}{G}        Enchantment
 [x]  4063  Essence Channeler                        {1}{W}           Creature — Bat Cleric
@@ -4316,7 +4316,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4323  Shifting Sliver                          {3}{U}           Creature — Sliver
 [x]  4324  Permission Denied                        {W}{U}           Instant
 [x]  4325  Ossification                             {1}{W}           Enchantment — Aura
-[ ]  4326  Canopy Cover                             {1}{G}           Enchantment — Aura
+[x]  4326  Canopy Cover                             {1}{G}           Enchantment — Aura
 [x]  4327  Ao, the Dawn Sky                         {3}{W}{W}        Legendary Creature — Dragon Spirit
 [ ]  4328  Vizier of Many Faces                     {2}{U}{U}        Creature — Shapeshifter Cleric
 [x]  4329  Children of Korlis                       {W}              Creature — Human Rebel Cleric
@@ -4855,7 +4855,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4862  Adriana, Captain of the Guard            {3}{R}{W}        Legendary Creature — Human Knight
 [x]  4863  Ultima Weapon                            {7}              Legendary Artifact — Equipment
 [x]  4864  Snort                                    {3}{R}           Sorcery
-[ ]  4865  Platinum Emperion                        {8}              Artifact Creature — Golem
+[x]  4865  Platinum Emperion                        {8}              Artifact Creature — Golem
 [x]  4866  Sword of Once and Future                 {3}              Artifact — Equipment
 [x]  4867  Primal Rage                              {1}{G}           Enchantment
 [x]  4868  Maelstrom Nexus                          {W}{U}{B}{R}{G}  Enchantment
