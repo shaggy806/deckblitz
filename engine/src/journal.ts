@@ -89,6 +89,8 @@ export type JournalKind =
   | "targeted"
   /** `object` became saddled (702.171b) under `player`, in `stint`. */
   | "saddled"
+  /** The Vehicle `object` became crewed (702.122c) under `player`, in `stint`. */
+  | "crewed"
   /** `player` bent (`how`: water, earth, fire or air — rules 701.65b,
    * 701.66b, 701.67c, 702.189b). */
   | "bent"

@@ -17,6 +17,7 @@
 
 import type { TriggerSpec } from "./abilities.js";
 import type { GameEvent } from "./events.js";
+import type { JournalKind } from "./journal.js";
 import { rollOfEvent } from "./random-results.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 
@@ -46,6 +47,10 @@ export interface TriggerEventRow<T extends GameEvent["type"] = GameEvent["type"]
   by?(event: EventOf<T>): PlayerId | undefined;
   /** What `triggerValue` reads: "that much", "that many". */
   amount?(event: EventOf<T>): number;
+  /** The journal kind that records this event, per subject, for the timing
+   * wrapper ("for the first time each turn"); the act journals itself just
+   * before it emits. Absent, the wrapper can't count it. */
+  readonly journaled?: JournalKind;
 }
 
 function row<T extends GameEvent["type"]>(r: TriggerEventRow<T>): TriggerEventRow {
@@ -125,7 +130,7 @@ export const TRIGGER_EVENTS = {
   bends: row({ type: "bent", player: (e) => e.player }),
   /** "Whenever this Vehicle becomes crewed" (rule 702.122c): as its crew
    * ability resolves. The value is how many creatures crewed it. */
-  "becomes-crewed": row({ type: "became-crewed", object: (e) => e.object, amount: (e) => e.crew.length }),
+  "becomes-crewed": row({ type: "became-crewed", object: (e) => e.object, amount: (e) => e.crew.length, journaled: "crewed" }),
 } satisfies Record<string, TriggerEventRow>;
 
 export type TriggerEventName = keyof typeof TRIGGER_EVENTS;
@@ -198,6 +203,8 @@ export function triggerEventObject(event: GameEvent): ObjectId | undefined {
  */
 export function timingCountable(spec: TriggerSpec): boolean {
   switch (spec.on) {
+    case "event":
+      return TRIGGER_EVENTS[spec.event].journaled !== undefined;
     case "gains-life":
     case "loses-life":
     case "draws":

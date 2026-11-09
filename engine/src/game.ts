@@ -379,7 +379,7 @@ import type {
 import type { Expiry, PermanentDuration, PermissionDuration, UntilPoint, WhileSource } from "./duration.js";
 import { endsThisTurn, untilPointOf } from "./duration.js";
 import type { JournalEntry } from "./journal.js";
-import { timingCountable, triggerEventObject, triggerEventPlayer, triggerEventRow, triggerEventSubjects } from "./trigger-events.js";
+import { TRIGGER_EVENTS, timingCountable, triggerEventObject, triggerEventPlayer, triggerEventRow, triggerEventSubjects } from "./trigger-events.js";
 import {
   abilityCountThisTurn,
   appendJournal,
@@ -28995,6 +28995,7 @@ export class Game {
           object.lastKnownRefs?.triggerSpell,
           object.lastKnownRefs?.player,
           condition === undefined ? undefined : this.abilityTurnKey(object),
+          object.triggerValue,
         ) ||
         !this.attackConditionsStillHold(ability, object)
       ) {
@@ -29136,6 +29137,7 @@ export class Game {
     // "Whenever this Vehicle becomes crewed": whenever its crew ability
     // resolves (rule 702.122e).
     if (object.crewedWith !== undefined && this.state.objects[source]?.zone === "battlefield") {
+      this.journal({ kind: "crewed", player: object.controller, object: source, stint: this.state.objects[source].zoneChangeCount ?? 0 });
       this.emit({ type: "became-crewed", object: source, player: object.controller, crew: object.crewedWith });
     }
     // An ability leaves the stack as the final part of its resolution (rule
@@ -30003,6 +30005,7 @@ export class Game {
             ability.condition === undefined
               ? undefined
               : this.triggerTurnKey(id, index, ref, false),
+            ability.condition === undefined ? undefined : this.triggerValueOf(ability.trigger, event, object),
           ) &&
           // "Whenever … while …" — part of the trigger condition, asked only
           // now (rule 603.1), never again as it resolves. "That player" is the
@@ -31235,6 +31238,19 @@ export class Game {
     };
     const stintOf = (id: ObjectId): number => this.state.objects[id]?.zoneChangeCount ?? 0;
     switch (spec.on) {
+      case "event": {
+        // A row that names what it journals: this object's (in this stint),
+        // or this player's.
+        const journaled = TRIGGER_EVENTS[spec.event].journaled;
+        const subjects = triggerEventSubjects(spec.event, event);
+        if (journaled === undefined || subjects === undefined) return undefined;
+        if (subjects.objects !== undefined) {
+          const [id] = subjects.objects;
+          const stint = stintOf(id);
+          return count(journaled, (e) => e.object === id && e.stint === stint) - 1;
+        }
+        return count(journaled, (e) => e.player === subjects.player) - 1;
+      }
       case "gains-life":
       case "loses-life": {
         if (event.type !== "life-changed") return undefined;
@@ -32144,6 +32160,9 @@ export class Game {
     thatPlayer?: PlayerId,
     /** Which ability it is — see `ConditionOptions.abilityKey`. */
     abilityKey?: string,
+    /** The trigger's `triggerValue`: "if it was crewed by exactly two
+     * creatures" (`Game.triggerValueOf`). */
+    triggerValue?: number,
   ): boolean {
     if (condition === undefined) return true;
     return staticConditionMet(this.state, this.registry, source, condition, {
@@ -32154,6 +32173,7 @@ export class Game {
         controller: source.controller,
         signed: true,
         ...(x !== undefined ? { x } : {}),
+        ...(triggerValue !== undefined ? { triggerValue } : {}),
         ...(triggerObject !== undefined ? { triggerObject } : {}),
         // The spell that fired it, gone from the stack since (608.2h).
         ...(triggerSpellStint !== undefined ? { lastKnownRefs: { triggerSpell: triggerSpellStint } } : {}),
