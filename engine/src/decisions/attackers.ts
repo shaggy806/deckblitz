@@ -22,6 +22,7 @@ import {
   attackCompanyViolations,
   attackingViolations,
   mostRequirementsObeyed,
+  seatAttackers,
   withinAttackCompany,
   withinAttackTax,
   withRequiredAttackers,
@@ -95,6 +96,31 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
   // Warcraft: its first names the group.
   const readCaps = attackCaps(ctx.state, ctx.registry);
   const caps = readCaps === null || !naming ? readCaps : readCaps.most !== undefined ? { most: readCaps.most } : null;
+  // A requirement narrows a creature's defenders creature by creature, but
+  // only the whole declaration can say a capped defender is full: where those
+  // it aims at have too few seats for all of them, each may go anywhere else
+  // it could, and as many as there are seats still have to take one (508.1d).
+  // A goaded creature facing a full Crawlspace attacks its goader.
+  const aimed: Record<ObjectId, readonly string[]> = {};
+  let aimedSeats = 0;
+  if (caps?.perDefender !== undefined) {
+    const perDefender = caps.perDefender;
+    const wider = (id: ObjectId): readonly (PlayerId | ObjectId)[] =>
+      defenders.filter((d) => whyCannotAttack(ctx.state, ctx.registry, player, id, d) === null);
+    const narrowed = (Object.keys(defendersFor) as ObjectId[]).filter(
+      (id) => defendersFor[id].every((d) => perDefender[d] !== undefined) && wider(id).length > defendersFor[id].length,
+    );
+    const seating = narrowed.map((id) => ({ tokens: tokensOf(id), defenders: defendersFor[id] }));
+    const { seated } = seatAttackers(seating, perDefender);
+    if (seated < seating.reduce((n, u) => n + u.tokens, 0)) {
+      aimedSeats = seated;
+      for (const id of narrowed) {
+        aimed[id] = defendersFor[id];
+        defendersFor[id] = wider(id);
+      }
+    }
+  }
+  const isAimed = Object.keys(aimed).length > 0;
   const inCompany = Object.keys(limits).length > 0 || caps !== null;
   if (inCompany) {
     const units = (Object.keys(defendersFor) as ObjectId[]).map((id) => ({
@@ -194,7 +220,17 @@ function attackersOffer(ctx: DecisionReadCtx, player: PlayerId): AttackOffer {
       ? required.filter((id) => mostRequirementsObeyed(units.filter((u) => u.id !== id), caps ?? undefined) < most)
       : required,
     ...(attackIf.length > 0 ? { attackIf } : {}),
-    ...(inCompany ? { company: { limits, tokens: stacks, required, ...(caps !== null ? { caps } : {}) } } : {}),
+    ...(inCompany
+      ? {
+          company: {
+            limits,
+            tokens: stacks,
+            required,
+            ...(caps !== null ? { caps } : {}),
+            ...(isAimed ? { aimed, aimedSeats } : {}),
+          },
+        }
+      : {}),
     ...(taxed && !naming
       ? {
           attackTax: {
@@ -271,7 +307,11 @@ export const attackers = defineDecision({
       // "attacks a player other than you if able" (701.15b), encore's
       // "attacks that opponent if able". One that can't be obeyed (only the
       // goader left to attack) rules nothing out.
-      if (attackRequirementsForbid(ctx.state, ctx.registry, player, attacker, defender)) {
+      // (Past a full capped defender, the offer widened it: `aimed`.)
+      if (
+        attackRequirementsForbid(ctx.state, ctx.registry, player, attacker, defender) &&
+        !(attackCaps(ctx.state, ctx.registry)?.perDefender !== undefined && attackersOffer(ctx, player).defendersFor[attacker]?.includes(defender) === true)
+      ) {
         return attackRequirementsReason(ctx.state, ctx.registry, attacker);
       }
     }

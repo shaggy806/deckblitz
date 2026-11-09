@@ -1807,6 +1807,12 @@ export type LegalAction =
         readonly tokens: Readonly<Record<ObjectId, number>>;
         readonly required: readonly ObjectId[];
         readonly caps?: AttackCaps;
+        /** Rule 508.1d: creatures whose requirement aims them at capped
+         * defenders with too few seats for them all (a goaded creature and a
+         * full Crawlspace), and those defenders. Each may go elsewhere (in
+         * `defendersFor`), but as many as `aimedSeats` tokens must be seated. */
+        readonly aimed?: Readonly<Record<ObjectId, readonly string[]>>;
+        readonly aimedSeats?: number;
       };
     }
   | {

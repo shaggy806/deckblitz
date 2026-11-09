@@ -142,7 +142,7 @@ function attackUnits(offer: AttackOffer): AttackUnit[] {
  * none), and who's where: each capped defender's seats, by index into `units`.
  * A defender with no cap has room for anyone, so isn't in `seats`.
  */
-function seatAttackers(
+export function seatAttackers(
   units: readonly Pick<AttackUnit, "tokens" | "defenders">[],
   caps: Readonly<Record<string, number>>,
 ): { readonly seated: number; readonly seats: ReadonlyMap<string, number[]> } {
@@ -240,6 +240,60 @@ export function attackCompanyViolations(
   const obeyed = attackersDeclared(required, company.tokens);
   const possible = mostRequirementsObeyed(attackUnits(offer), caps);
   if (obeyed < possible) out.push({ kind: "fewer-requirements", obeyed, possible });
+  // As many of them as there are seats on the defenders their requirement
+  // aims them at (rule 508.1d, the goaded and a full Crawlspace).
+  if (company.aimed !== undefined && company.aimedSeats !== undefined) {
+    const aimed = company.aimed;
+    const seated = attackersDeclared(declared.filter((d) => aimed[d.attacker]?.includes(d.defender) === true), company.tokens);
+    if (seated < company.aimedSeats) out.push({ kind: "fewer-requirements", obeyed: seated, possible: company.aimedSeats });
+  }
+  return out;
+}
+
+/**
+ * `declared` with as many of the offer's `aimed` creatures on the defenders
+ * they're aimed at as there are seats (a matching, as `seatAttackers` is). One
+ * with no seat stays where it was declared, one not aimed at all gives up a
+ * seat first, for another defender with room or to stay home. A requirement
+ * forbids nothing else, so one short of the seats is left to the validator.
+ */
+function withAimedSeated(declared: readonly AttackerDeclaration[], offer: AttackOffer): AttackerDeclaration[] {
+  const company = offer.company;
+  const aimed = company?.aimed;
+  const perDefender = company?.caps?.perDefender;
+  if (company === undefined || aimed === undefined || perDefender === undefined) return [...declared];
+  const entries = declared.filter((d) => aimed[d.attacker] !== undefined);
+  const units = entries.map((d) => ({ tokens: d.count ?? company.tokens[d.attacker] ?? 1, defenders: aimed[d.attacker] }));
+  const { seats } = seatAttackers(units, perDefender);
+  const tokensOf = (d: AttackerDeclaration): number => d.count ?? company.tokens[d.attacker] ?? 1;
+  const seated = new Map<AttackerDeclaration, Map<string, number>>();
+  const taken = new Map<string, number>();
+  for (const [defender, here] of seats) {
+    for (const unit of here) {
+      const places = seated.get(entries[unit]) ?? new Map<string, number>();
+      places.set(defender, (places.get(defender) ?? 0) + 1);
+      seated.set(entries[unit], places);
+      taken.set(defender, (taken.get(defender) ?? 0) + 1);
+    }
+  }
+  const out: AttackerDeclaration[] = [];
+  const send = (d: AttackerDeclaration, defender: string, n: number): void => {
+    const { count: _count, ...rest } = d;
+    out.push({ ...rest, defender: defender as PlayerId | ObjectId, ...(n === (company.tokens[d.attacker] ?? 1) ? {} : { count: n }) });
+  };
+  for (const d of declared) {
+    let left = tokensOf(d);
+    for (const [defender, n] of seated.get(d) ?? []) {
+      send(d, defender, n);
+      left -= n;
+    }
+    if (left === 0) continue;
+    const roomOn = (at: string): boolean => perDefender[at] === undefined || (taken.get(at) ?? 0) + left <= perDefender[at];
+    const goes = [d.defender, ...(offer.defendersFor[d.attacker] ?? [])].find(roomOn);
+    if (goes === undefined) continue;
+    taken.set(goes, (taken.get(goes) ?? 0) + left);
+    send(d, goes, left);
+  }
   return out;
 }
 
@@ -339,7 +393,7 @@ export function withinAttackCompany(
     const defender = freeDefender(u);
     if (defender !== undefined) place(u.id, defender, u.tokens, u.tokens);
   }
-  return out;
+  return withAimedSeated(out, offer);
 }
 
 /** The generic mana `attacker` attacking `defender` costs under `offer`'s attack tax. */
