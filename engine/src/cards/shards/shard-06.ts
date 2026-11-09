@@ -285,6 +285,7 @@ import _poolEnergybending from "../pool/energybending.js";
 import _poolEntrustTheSpark from "../pool/entrust-the-spark.js";
 import _poolEomerMarshalOfRohan from "../pool/eomer-marshal-of-rohan.js";
 import _poolEshkiTemursRoar from "../pool/eshki-temurs-roar.js";
+import _poolEsixFractalBloom from "../pool/esix-fractal-bloom.js";
 import _poolEsperTerra from "../pool/esper-terra.js";
 import _poolEternalScourge from "../pool/eternal-scourge.js";
 import _poolEternalThirst from "../pool/eternal-thirst.js";
@@ -317,6 +318,7 @@ import _poolFireNationSoldier from "../pool/fire-nation-soldier.js";
 import _poolFireNationTurret from "../pool/fire-nation-turret.js";
 import _poolFlameBurst from "../pool/flame-burst.js";
 import _poolFlameSpill from "../pool/flame-spill.js";
+import _poolFlamesOfTheBloodHand from "../pool/flames-of-the-blood-hand.js";
 import _poolFlashFoliage from "../pool/flash-foliage.js";
 import _poolFlashback from "../pool/flashback.js";
 import _poolFlowOfIdeas from "../pool/flow-of-ideas.js";
@@ -1282,6 +1284,7 @@ const shard: CardShard = {
     _poolEntrustTheSpark,
     _poolEomerMarshalOfRohan,
     _poolEshkiTemursRoar,
+    _poolEsixFractalBloom,
     _poolEsperTerra,
     _poolEternalScourge,
     _poolEternalThirst,
@@ -1314,6 +1317,7 @@ const shard: CardShard = {
     _poolFireNationTurret,
     _poolFlameBurst,
     _poolFlameSpill,
+    _poolFlamesOfTheBloodHand,
     _poolFlashFoliage,
     _poolFlashback,
     _poolFlowOfIdeas,

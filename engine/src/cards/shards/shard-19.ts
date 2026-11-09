@@ -552,6 +552,7 @@ import _poolLunarchVeteran from "../pool/lunarch-veteran.js";
 import _poolLunkErrant from "../pool/lunk-errant.js";
 import _poolLurkingPredators from "../pool/lurking-predators.js";
 import _poolLylaHolographicAssistant from "../pool/lyla-holographic-assistant.js";
+import _poolLyndeCheerfulTormentor from "../pool/lynde-cheerful-tormentor.js";
 import _poolMODOKEvilIntellect from "../pool/m-o-d-o-k-evil-intellect.js";
 import _poolMabel from "../pool/mabel.js";
 import _poolMadcapSkills from "../pool/madcap-skills.js";
@@ -1598,6 +1599,7 @@ const shard: CardShard = {
     _poolLunkErrant,
     _poolLurkingPredators,
     _poolLylaHolographicAssistant,
+    _poolLyndeCheerfulTormentor,
     _poolMODOKEvilIntellect,
     _poolMabel,
     _poolMadcapSkills,

@@ -208,6 +208,7 @@ import _poolDirty from "../pool/dirty.js";
 import _poolDispersalShield from "../pool/dispersal-shield.js";
 import _poolDisruptiveStudent from "../pool/disruptive-student.js";
 import _poolDocksideChef from "../pool/dockside-chef.js";
+import _poolDodgyJalopy from "../pool/dodgy-jalopy.js";
 import _poolDonatellosTechnique from "../pool/donatellos-technique.js";
 import _poolDoorkeeper from "../pool/doorkeeper.js";
 import _poolDoorman from "../pool/doorman.js";
@@ -1185,6 +1186,7 @@ const shard: CardShard = {
     _poolDispersalShield,
     _poolDisruptiveStudent,
     _poolDocksideChef,
+    _poolDodgyJalopy,
     _poolDonatellosTechnique,
     _poolDoorkeeper,
     _poolDoorman,

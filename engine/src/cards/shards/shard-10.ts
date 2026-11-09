@@ -521,6 +521,7 @@ import _poolMigrationPath from "../pool/migration-path.js";
 import _poolMindDrillAssailant from "../pool/mind-drill-assailant.js";
 import _poolMindIntoMatter from "../pool/mind-into-matter.js";
 import _poolMindlessAutomaton from "../pool/mindless-automaton.js";
+import _poolMindlinkMech from "../pool/mindlink-mech.js";
 import _poolMindwrackDemon from "../pool/mindwrack-demon.js";
 import _poolMishrasFoundry from "../pool/mishras-foundry.js";
 import _poolMistformDreamer from "../pool/mistform-dreamer.js";
@@ -1515,6 +1516,7 @@ const shard: CardShard = {
     _poolMindDrillAssailant,
     _poolMindIntoMatter,
     _poolMindlessAutomaton,
+    _poolMindlinkMech,
     _poolMindwrackDemon,
     _poolMishrasFoundry,
     _poolMistformDreamer,

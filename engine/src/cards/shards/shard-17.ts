@@ -601,6 +601,7 @@ import _poolOrcishSettlers from "../pool/orcish-settlers.js";
 import _poolOrderOfSacredDusk from "../pool/order-of-sacred-dusk.js";
 import _poolOriginOfThor from "../pool/origin-of-thor.js";
 import _poolOrzhovPontiff from "../pool/orzhov-pontiff.js";
+import _poolOsgirTheReconstructor from "../pool/osgir-the-reconstructor.js";
 import _poolOstracize from "../pool/ostracize.js";
 import _poolOutlawsFury from "../pool/outlaws-fury.js";
 import _poolOutriderOfJhess from "../pool/outrider-of-jhess.js";
@@ -1593,6 +1594,7 @@ const shard: CardShard = {
     _poolOrderOfSacredDusk,
     _poolOriginOfThor,
     _poolOrzhovPontiff,
+    _poolOsgirTheReconstructor,
     _poolOstracize,
     _poolOutlawsFury,
     _poolOutriderOfJhess,

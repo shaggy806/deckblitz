@@ -696,6 +696,7 @@ import _poolRevokeExistence from "../pool/revoke-existence.js";
 import _poolRhoxFaithmender from "../pool/rhox-faithmender.js";
 import _poolRhoxVeteran from "../pool/rhox-veteran.js";
 import _poolRhythmOfTheWild from "../pool/rhythm-of-the-wild.js";
+import _poolRiaIvorBaneOfBladehold from "../pool/ria-ivor-bane-of-bladehold.js";
 import _poolRidersOfRohan from "../pool/riders-of-rohan.js";
 import _poolRiftElemental from "../pool/rift-elemental.js";
 import _poolRighteousFury from "../pool/righteous-fury.js";
@@ -1722,6 +1723,7 @@ const shard: CardShard = {
     _poolRhoxFaithmender,
     _poolRhoxVeteran,
     _poolRhythmOfTheWild,
+    _poolRiaIvorBaneOfBladehold,
     _poolRidersOfRohan,
     _poolRiftElemental,
     _poolRighteousFury,

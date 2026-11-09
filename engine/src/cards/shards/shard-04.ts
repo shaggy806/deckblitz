@@ -824,6 +824,7 @@ import _poolTheReaperKingNoMore from "../pool/the-reaper-king-no-more.js";
 import _poolTheSensationalSheHulk from "../pool/the-sensational-she-hulk.js";
 import _poolTheVision from "../pool/the-vision.js";
 import _poolThiefOfExistence from "../pool/thief-of-existence.js";
+import _poolThievingSkydiver from "../pool/thieving-skydiver.js";
 import _poolThievingVarmint from "../pool/thieving-varmint.js";
 import _poolThirdPathIconoclast from "../pool/third-path-iconoclast.js";
 import _poolThirstingBloodlord from "../pool/thirsting-bloodlord.js";
@@ -1806,6 +1807,7 @@ const shard: CardShard = {
     _poolTheSensationalSheHulk,
     _poolTheVision,
     _poolThiefOfExistence,
+    _poolThievingSkydiver,
     _poolThievingVarmint,
     _poolThirdPathIconoclast,
     _poolThirstingBloodlord,

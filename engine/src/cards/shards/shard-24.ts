@@ -683,6 +683,7 @@ import _poolScourgeOfValkas from "../pool/scourge-of-valkas.js";
 import _poolScrapperChampion from "../pool/scrapper-champion.js";
 import _poolScrapworkCohort from "../pool/scrapwork-cohort.js";
 import _poolScreamingFury from "../pool/screaming-fury.js";
+import _poolScreamingNemesis from "../pool/screaming-nemesis.js";
 import _poolScreamingSwarm from "../pool/screaming-swarm.js";
 import _poolScrivener from "../pool/scrivener.js";
 import _poolScytheLeopard from "../pool/scythe-leopard.js";
@@ -1676,6 +1677,7 @@ const shard: CardShard = {
     _poolScrapperChampion,
     _poolScrapworkCohort,
     _poolScreamingFury,
+    _poolScreamingNemesis,
     _poolScreamingSwarm,
     _poolScrivener,
     _poolScytheLeopard,

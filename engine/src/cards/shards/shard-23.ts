@@ -985,6 +985,7 @@ import _poolXandersPact from "../pool/xanders-pact.js";
 import _poolYavimayaSteelcrusher from "../pool/yavimaya-steelcrusher.js";
 import _poolYoshimaruBelovedCompanion from "../pool/yoshimaru-beloved-companion.js";
 import _poolYouCannotPass from "../pool/you-cannot-pass.js";
+import _poolYoungDeathclaws from "../pool/young-deathclaws.js";
 import _poolZaffaiAndTheTempests from "../pool/zaffai-and-the-tempests.js";
 import _poolZagorkaMotherOfSanctum from "../pool/zagorka-mother-of-sanctum.js";
 import _poolZaskSkitteringSwarmlord from "../pool/zask-skittering-swarmlord.js";
@@ -1992,6 +1993,7 @@ const shard: CardShard = {
     _poolYavimayaSteelcrusher,
     _poolYoshimaruBelovedCompanion,
     _poolYouCannotPass,
+    _poolYoungDeathclaws,
     _poolZaffaiAndTheTempests,
     _poolZagorkaMotherOfSanctum,
     _poolZaskSkitteringSwarmlord,

@@ -849,6 +849,7 @@ import _poolStartledRelicSloth from "../pool/startled-relic-sloth.js";
 import _poolStensiaBloodhall from "../pool/stensia-bloodhall.js";
 import _poolSternLesson from "../pool/stern-lesson.js";
 import _poolSternMarshal from "../pool/stern-marshal.js";
+import _poolStigmaLasher from "../pool/stigma-lasher.js";
 import _poolStingingLicid from "../pool/stinging-licid.js";
 import _poolStinkdrinkerBandit from "../pool/stinkdrinker-bandit.js";
 import _poolStoneGiant from "../pool/stone-giant.js";
@@ -1906,6 +1907,7 @@ const shard: CardShard = {
     _poolStensiaBloodhall,
     _poolSternLesson,
     _poolSternMarshal,
+    _poolStigmaLasher,
     _poolStingingLicid,
     _poolStinkdrinkerBandit,
     _poolStoneGiant,

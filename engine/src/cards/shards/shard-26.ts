@@ -513,6 +513,7 @@ import _poolMetathranElite from "../pool/metathran-elite.js";
 import _poolMidnightScavengers from "../pool/midnight-scavengers.js";
 import _poolMightOfOldKrosa from "../pool/might-of-old-krosa.js";
 import _poolMightOfTheMasses from "../pool/might-of-the-masses.js";
+import _poolMightyServantOfLeukO from "../pool/mighty-servant-of-leuk-o.js";
 import _poolMilesMorales from "../pool/miles-morales.js";
 import _poolMilitantInquisitor from "../pool/militant-inquisitor.js";
 import _poolMilitiasPride from "../pool/militias-pride.js";
@@ -1521,6 +1522,7 @@ const shard: CardShard = {
     _poolMidnightScavengers,
     _poolMightOfOldKrosa,
     _poolMightOfTheMasses,
+    _poolMightyServantOfLeukO,
     _poolMilesMorales,
     _poolMilitantInquisitor,
     _poolMilitiasPride,
