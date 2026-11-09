@@ -1121,9 +1121,12 @@ function planSnowPayment(
       if ((tried += 1) > SNOW_COMBINATIONS_TRIED) return null;
       const steps = chosen.map((i) => stepOf(candidates[i]));
       const used = new Set(steps.map((s) => s.source));
+      const toll = planToll(steps);
+      if (toll > 0 && toll >= view.life) return null;
       const plan = planManaPayment(
         {
           ...view,
+          life: view.life - toll,
           pool: [...pool, ...steps.flatMap(leftover)],
           sources: view.sources.filter((s) => !used.has(s.id)),
         },
@@ -1245,9 +1248,10 @@ function planManaPaymentOrdered(
   // else and stays free to attack — but still taps itself if nothing else
   // can cover the cost.
   // The auto-payer won't spend life it can't safely afford (a painland /
-  // trikeland option whose toll would drop it to 0 or below) — a human's
+  // trikeland option whose toll would drop it to 0 or below, alone here and
+  // on top of the tolls already taken in `tollBearable`) — a human's
   // casts are auto-paid too, and "kill yourself to cast a spell" is never
-  // the intent. Consistent with `resolveHybridCost`'s Phyrexian "never
+  // the intent; a person who means it can tap the lands by hand. Consistent with `resolveHybridCost`'s Phyrexian "never
   // below 1 life" rule. A toll-free option always stays: `view.life` can be
   // 0 when the rest of the cost spends every point of life (Liesa's
   // commander tax paid down to exactly 0), and a Plains costs none of it.
@@ -1372,6 +1376,11 @@ function planManaPaymentOrdered(
   // later coloured need. A free option always beats an equally-useful one
   // that costs life (a painland taps for `{C}` for free before it hurts).
   const lifeToll = (o: ManaOption): number => o.pain + o.lifeCost;
+  /** Whether this option's toll, on top of the tolls already taken, leaves
+   * the payer alive: `affordableOptions` for the payment as a whole. Silent
+   * Clearing and Caves of Koilos are 1 life each and, together, all of 2. */
+  const tollBearable = (o: ManaOption): boolean =>
+    lifeToll(o) === 0 || tapped.reduce((n, t) => n + t.pain + t.lifeCost, lifeToll(o)) < currentLife;
   /** A source's options in the order to try them: the first is the one to
    * commit to, and the rest are what `openFunded` falls back on when an
    * option's own cost can't be funded — a filter land's free `{C}` after its
@@ -1470,6 +1479,7 @@ function planManaPaymentOrdered(
   let borrowedFor: Lent[] | null = null;
   const openFunded = (src: ManaSource, want: ManaType | null): Tapped | null => {
     for (const opt of optionsFor(src, want)) {
+      if (!tollBearable(opt)) continue;
       const mark = tapped.length;
       const taken = tapped.map((t) => ({ t, ...snapshotOf(t) }));
       const spareBefore = { ...spare };
@@ -1674,7 +1684,8 @@ function planManaPaymentOrdered(
     }
     // A source opened here is never funded itself, so only its free options
     // count: a filter land funds another with its {C}, or not at all.
-    const freeOptions = (s: ManaSource): ManaOption[] => s.options.filter((o) => !costsMana(o) && paysAbilities(o.tag));
+    const freeOptions = (s: ManaSource): ManaOption[] =>
+      s.options.filter((o) => !costsMana(o) && paysAbilities(o.tag) && tollBearable(o));
     const makesOne = (s: ManaSource): boolean =>
       freeOptions(s).some((o) => of === null || of.some((m) => o.fixed.includes(m) || anyUnitMakes(o, m)));
     const free = sources.filter((s) => !isTapped(s.id) && s.id !== exclude && makesOne(s));
@@ -1886,7 +1897,8 @@ export function planPayment(
 ): ManaPayment | null {
   const resolved = resolveHybridCost(view, withLifeForPips(pipsAsSpendable(cost, view.spendUnits), view.lifeForPips), avoid, exclude);
   if (resolved === null) return null;
-  const steps = planManaPayment(view, resolved.concrete, avoid, exclude);
+  // The life the pips take comes out of what the tolls may spend.
+  const steps = planManaPayment({ ...view, life: view.life - resolved.life }, resolved.concrete, avoid, exclude);
   if (steps === null) return null;
   // What `spendFromPool` takes: the cost as this payment may pay it, so a
   // unit spent "as though it were mana of any color" isn't asked to be the
