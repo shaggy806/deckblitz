@@ -21,7 +21,7 @@ export default defineCard({
     {
       cost: TAP_A_ZOMBIE,
       targets: ["land"],
-      effect: { kind: "add-types", target: 0, setSubtypes: ["Swamp"], duration: "end-of-turn" },
+      effect: { kind: "become", target: 0, setSubtypes: ["Swamp"], duration: "end-of-turn" },
       resolve: null,
       text: "Tap an untapped Zombie you control: Target land becomes a Swamp until end of turn.",
     },

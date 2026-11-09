@@ -17,7 +17,7 @@ export default defineCard({
       targets: ["creature-you-control"],
       // Layer 7b, timestamped as it resolves: it overrides a leveler's level
       // symbol (the rulings); pumps and counters still apply on top.
-      effect: { kind: "animate", target: 0, power: 7, toughness: 7, addTypes: [], addSubtypes: [], duration: "end-of-turn" },
+      effect: { kind: "become", target: 0, power: 7, toughness: 7, duration: "end-of-turn" },
       resolve: null,
       text: ABILITY,
     },

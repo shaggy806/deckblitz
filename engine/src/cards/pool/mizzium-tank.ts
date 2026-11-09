@@ -24,7 +24,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "add-types", target: "source", addTypes: ["artifact", "creature"], duration: "end-of-turn" },
+          { kind: "become", target: "source", addTypes: ["artifact", "creature"], duration: "end-of-turn" },
           { kind: "modify-pt", target: "source", power: 1, toughness: 1, duration: "end-of-turn" },
         ],
       },

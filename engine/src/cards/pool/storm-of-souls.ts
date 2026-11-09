@@ -18,7 +18,7 @@ export default defineCard({
     effects: [
       { kind: "return-from-graveyard", filter: { type: "creature" }, destination: "battlefield", count: "all" },
       {
-        kind: "animate-all",
+        kind: "become",
         filter: { thisWay: "put-onto-battlefield" },
         power: 1,
         toughness: 1,

@@ -34,12 +34,11 @@ export default defineCard({
           filter: { thisWay: "put-onto-battlefield" },
           as: 0,
           effect: {
-            kind: "animate",
+            kind: "become",
             target: 0,
             power: 3,
             toughness: 3,
             addTypes: ["creature"],
-            addSubtypes: [],
             setColors: ["G"],
             keywords: ["haste"],
             duration: "permanent",

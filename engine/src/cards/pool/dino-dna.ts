@@ -27,7 +27,7 @@ export default defineCard({
         of: 0,
         count: 1,
         who: "you",
-        exceptions: { basePt: [6, 6], setColors: ["G"], setSubtypes: ["Dinosaur"], keywords: ["trample"] },
+        exceptions: { power: 6, toughness: 6, setColors: ["G"], setSubtypes: ["Dinosaur"], keywords: ["trample"] },
       },
       resolve: null,
       text: COPY,

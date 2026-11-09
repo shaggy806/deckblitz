@@ -4,7 +4,7 @@ import { defineCard } from "../define.js";
 // EDHREC rank 17931.
 //
 // The type is chosen as the trigger resolves and replaces its creature types
-// for good (`add-types`' `setSubtypes`, rule 205.1a — it stays an artifact).
+// for good (`become`' `setSubtypes`, rule 205.1a — it stays an artifact).
 
 const FACE_UP_TEXT =
   "When this creature is turned face up, it becomes the creature type of your choice. (This effect lasts indefinitely.)";
@@ -25,7 +25,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "choose-creature-type",
-        then: { kind: "add-types", target: "source", setSubtypes: [CHOSEN_CREATURE_TYPE], duration: "permanent" },
+        then: { kind: "become", target: "source", setSubtypes: [CHOSEN_CREATURE_TYPE], duration: "permanent" },
       },
       resolve: null,
       text: FACE_UP_TEXT,

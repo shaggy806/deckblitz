@@ -42,7 +42,7 @@ const castable = (game: Game, name: string): boolean => {
   return game.legalActions(A).some((action) => action.kind === "cast-spell" && action.card === card);
 };
 const everyLandType = (game: Game, id: ObjectId): void =>
-  game.debugApplyEffect(A, { kind: "add-types", target: 0, addSubtypes: [EVERY_LAND_TYPE], duration: "permanent" }, [
+  game.debugApplyEffect(A, { kind: "become", target: 0, addSubtypes: [EVERY_LAND_TYPE], duration: "permanent" }, [
     { kind: "object", object: id },
   ]);
 /** It becomes a Mountain, and nothing else changes (rule 305.7). */
@@ -50,12 +50,10 @@ const mountain = (game: Game, id: ObjectId): void =>
   game.debugApplyEffect(
     B,
     {
-      kind: "animate",
+      kind: "become",
       target: 0,
       power: 0,
       toughness: 0,
-      addTypes: [],
-      addSubtypes: [],
       setSubtypes: ["Mountain"],
       duration: "permanent",
     },
@@ -143,7 +141,7 @@ describe("intrinsic mana abilities", () => {
   it("none once it has lost all its abilities, a type it gained later included", () => {
     const game = setUp();
     const forest = game.debugSpawn("Forest", A, "battlefield");
-    game.debugApplyEffect(B, { kind: "lose-abilities", target: 0, duration: "permanent" }, [
+    game.debugApplyEffect(B, { kind: "become", loseAbilities: true, target: 0, duration: "permanent" }, [
       { kind: "object", object: forest },
     ]);
     everyLandType(game, forest);

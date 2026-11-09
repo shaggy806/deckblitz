@@ -21,7 +21,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       {
-        kind: "animate-all",
+        kind: "become",
         filter: { type: "creature", controlledBy: "you" },
         power: 3,
         toughness: 3,

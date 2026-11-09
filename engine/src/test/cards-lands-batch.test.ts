@@ -270,12 +270,11 @@ describe("High Market", () => {
     game.debugApplyEffect(
       A,
       {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 2,
         toughness: 2,
         addTypes: ["creature"],
-        addSubtypes: [],
         duration: "end-of-turn",
       },
       [{ kind: "object", object: forest }],

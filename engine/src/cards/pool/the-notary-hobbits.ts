@@ -28,7 +28,7 @@ export default defineCard({
       trigger: { on: "enters-battlefield", who: "self" },
       condition: { kind: "source", filter: { token: false } },
       targets: [],
-      effect: { kind: "create-token-copy", of: "source", count: 2, who: "you", notLegendary: true },
+      effect: { kind: "create-token-copy", of: "source", count: 2, who: "you", exceptions: { removeSupertypes: ["legendary"] } },
       resolve: null,
       text: COPY_TEXT,
     },

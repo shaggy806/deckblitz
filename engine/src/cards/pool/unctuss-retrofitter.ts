@@ -17,7 +17,7 @@ import { defineCard } from "../define.js";
 //     specific values. Any power- or toughness-setting effects that start to apply after Unctus's
 //     Retrofitter's ability resolves will overwrite this effect.
 //
-// `animate` with `addTypes` (types kept, abilities kept, base P/T set in
+// `become` with `addTypes` (types kept, abilities kept, base P/T set in
 // layer 7b in timestamp order) for `"while-source"`: it ends as the
 // Retrofitter leaves, and does nothing at all if it already has (rule 611.2b
 // — the first ruling).
@@ -40,12 +40,11 @@ export default defineCard({
       trigger: { on: "enters-battlefield", who: "self" },
       targets: [{ kind: "optional", of: { kind: "permanent", whose: "you", filter: { type: "artifact" } } }],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 4,
         toughness: 4,
         addTypes: ["artifact", "creature"],
-        addSubtypes: [],
         duration: "while-source",
       },
       resolve: null,

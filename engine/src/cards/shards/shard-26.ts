@@ -729,6 +729,7 @@ import _poolShefetArchfiend from "../pool/shefet-archfiend.js";
 import _poolShellShield from "../pool/shell-shield.js";
 import _poolShelobChildOfUngoliant from "../pool/shelob-child-of-ungoliant.js";
 import _poolShepherdOfTheLost from "../pool/shepherd-of-the-lost.js";
+import _poolShieldsOfVelisVel from "../pool/shields-of-velis-vel.js";
 import _poolShinkaGatekeeper from "../pool/shinka-gatekeeper.js";
 import _poolShinryuTranscendentRival from "../pool/shinryu-transcendent-rival.js";
 import _poolShipwreckSentry from "../pool/shipwreck-sentry.js";
@@ -1728,6 +1729,7 @@ const shard: CardShard = {
     _poolShellShield,
     _poolShelobChildOfUngoliant,
     _poolShepherdOfTheLost,
+    _poolShieldsOfVelisVel,
     _poolShinkaGatekeeper,
     _poolShinryuTranscendentRival,
     _poolShipwreckSentry,

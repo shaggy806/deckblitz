@@ -61,7 +61,7 @@ describe("dealt combat damage by a filter this turn", () => {
     const before = library(t);
     t.a.declareAttackersFn = () => [{ attacker: bears, defender: B }];
     t.game.advanceUntil((s) => s.turn.step === "combat-damage" && s.priority.holder === A);
-    t.game.debugApplyEffect(A, { kind: "add-types", target: 0, addSubtypes: ["Zombie"], duration: "end-of-turn" }, [ref(bears)]);
+    t.game.debugApplyEffect(A, { kind: "become", target: 0, addSubtypes: ["Zombie"], duration: "end-of-turn" }, [ref(bears)]);
     expect(subtypes(t.game, bears)).toContain("Zombie");
     toStep(t.game, "postcombat-main");
     settle(t.game);

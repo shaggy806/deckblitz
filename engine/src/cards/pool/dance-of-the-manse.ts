@@ -24,7 +24,7 @@ const put = (enterAs?: true): EffectSpec => ({
   effect: {
     kind: "put-onto-battlefield",
     target: 0,
-    ...(enterAs ? { enterAs: { addTypes: ["creature"], basePt: [4, 4] } } : {}),
+    ...(enterAs ? { enterAs: { addTypes: ["creature"], power: 4, toughness: 4 } } : {}),
   },
 });
 

@@ -23,9 +23,9 @@ export default defineCard({
         duration: "end-of-turn",
       },
       {
-        kind: "lose-keywords",
+        kind: "become",
         filter: { type: "creature", attacking: true, keyword: "flying" },
-        keywords: ["flying"],
+        loseKeywords: ["flying"],
         duration: "end-of-turn",
       },
     ],

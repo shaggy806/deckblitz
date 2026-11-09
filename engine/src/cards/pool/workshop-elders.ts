@@ -29,12 +29,11 @@ export default defineCard({
         kind: "may",
         prompt: "Have that artifact become a 0/0 artifact creature with four +1/+1 counters?",
         effect: {
-          kind: "animate",
+          kind: "become",
           target: 0,
           power: 0,
           toughness: 0,
           addTypes: ["artifact", "creature"],
-          addSubtypes: [],
           duration: "permanent",
         },
         then: { kind: "add-counter", target: 0, counter: "+1/+1", amount: 4 },

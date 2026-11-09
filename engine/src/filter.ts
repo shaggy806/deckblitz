@@ -250,10 +250,8 @@ export function supertypesOf(registry: CardRegistry, object: GameObject): readon
   for (const m of object.modifiers) {
     if (m.copiable !== true) continue;
     for (const s of m.addSupertypes ?? []) if (!out.includes(s)) out = [...out, s];
-    if (m.notLegendary === true) withoutLegendary();
+    if (m.removeSupertypes !== undefined) out = out.filter((s) => !m.removeSupertypes!.includes(s));
   }
-  // A token copy's own "except it isn't legendary", over what it copied.
-  if (object.notLegendary === true) withoutLegendary();
   if (
     isTokenNow(object) &&
     object.zone === "battlefield" &&

@@ -16,10 +16,10 @@ export default defineCard({
       { kind: "modify-pt", target: 0, power: 1, toughness: 1, duration: "end-of-turn" },
       { kind: "grant-keyword", target: 0, keyword: "first-strike", duration: "end-of-turn" },
       {
-        kind: "lose-keywords",
+        kind: "become",
         filter: { type: "creature", controlledBy: "you" },
         controlledByTarget: 1,
-        keywords: ["first-strike", "double-strike"],
+        loseKeywords: ["first-strike", "double-strike"],
         duration: "end-of-turn",
       },
     ],

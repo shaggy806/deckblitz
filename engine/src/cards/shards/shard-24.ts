@@ -492,6 +492,7 @@ import _poolMaliciousInvader from "../pool/malicious-invader.js";
 import _poolManaShort from "../pool/mana-short.js";
 import _poolManaclesOfDecay from "../pool/manacles-of-decay.js";
 import _poolMarbleGargoyle from "../pool/marble-gargoyle.js";
+import _poolMarchOfTheMachines from "../pool/march-of-the-machines.js";
 import _poolMarchOfTheMultitudes from "../pool/march-of-the-multitudes.js";
 import _poolMarshCrocodile from "../pool/marsh-crocodile.js";
 import _poolMartyrOfSands from "../pool/martyr-of-sands.js";
@@ -1481,6 +1482,7 @@ const shard: CardShard = {
     _poolManaShort,
     _poolManaclesOfDecay,
     _poolMarbleGargoyle,
+    _poolMarchOfTheMachines,
     _poolMarchOfTheMultitudes,
     _poolMarshCrocodile,
     _poolMartyrOfSands,

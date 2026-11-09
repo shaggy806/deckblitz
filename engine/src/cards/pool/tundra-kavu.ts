@@ -24,7 +24,7 @@ export default defineCard({
         kind: "choose-creature-type",
         options: ["Plains", "Island"],
         prompt: "Choose Plains or Island",
-        then: { kind: "add-types", target: 0, setSubtypes: [CHOSEN_CREATURE_TYPE], duration: "end-of-turn" },
+        then: { kind: "become", target: 0, setSubtypes: [CHOSEN_CREATURE_TYPE], duration: "end-of-turn" },
       },
       resolve: null,
       text: TEXT,

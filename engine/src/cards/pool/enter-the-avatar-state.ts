@@ -13,7 +13,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "add-types", target: 0, addSubtypes: ["Avatar"], duration: "end-of-turn" },
+      { kind: "become", target: 0, addSubtypes: ["Avatar"], duration: "end-of-turn" },
       { kind: "grant-keyword", target: 0, keyword: "flying", duration: "end-of-turn" },
       { kind: "grant-keyword", target: 0, keyword: "first-strike", duration: "end-of-turn" },
       { kind: "grant-keyword", target: 0, keyword: "lifelink", duration: "end-of-turn" },

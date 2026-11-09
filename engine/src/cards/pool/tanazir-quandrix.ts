@@ -32,7 +32,7 @@ export default defineCard({
         kind: "may",
         prompt: "Have the base power and toughness of your other creatures become Tanazir Quandrix's?",
         effect: {
-          kind: "animate-all",
+          kind: "become",
           filter: { type: "creature", controlledBy: "you" },
           exceptSource: true,
           power: { powerOf: "source" },

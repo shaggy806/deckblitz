@@ -46,7 +46,7 @@ export default defineCard({
             who: "you",
             asCard: true,
             gainUntilEndOfTurn: ["haste"],
-            exceptions: { setColors: ["B"], setSubtypes: ["Zombie"], basePt: [4, 4] },
+            exceptions: { setColors: ["B"], setSubtypes: ["Zombie"], power: 4, toughness: 4 },
           },
         },
       },

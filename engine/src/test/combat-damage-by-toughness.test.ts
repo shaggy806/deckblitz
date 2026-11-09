@@ -265,12 +265,10 @@ describe("combatDamageByToughness", () => {
     apply(
       game,
       {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 1,
         toughness: 1,
-        addTypes: [],
-        addSubtypes: [],
         loseAbilities: true,
         duration: "end-of-turn",
       },
@@ -390,12 +388,10 @@ describe("Arcades, the Strategist", () => {
     apply(
       game,
       {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 0,
         toughness: 3,
-        addTypes: [],
-        addSubtypes: [],
         loseAbilities: true,
         duration: "end-of-turn",
       },

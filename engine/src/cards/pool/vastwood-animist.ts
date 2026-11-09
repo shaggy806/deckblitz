@@ -23,7 +23,7 @@ export default defineCard({
       cost: { mana: null, tap: true },
       targets: ["land-you-control"],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: ALLIES,
         toughness: ALLIES,

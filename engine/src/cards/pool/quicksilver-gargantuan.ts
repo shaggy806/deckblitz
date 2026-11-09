@@ -13,5 +13,5 @@ export default defineCard({
   power: 7,
   toughness: 7,
   text: "You may have this creature enter as a copy of any creature on the battlefield, except it's 7/7.",
-  copyOnEnter: { filter: { type: "creature" }, except: { basePt: [7, 7] } },
+  copyOnEnter: { filter: { type: "creature" }, except: { power: 7, toughness: 7 } },
 });

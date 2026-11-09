@@ -20,6 +20,7 @@ import _poolAlienInvasion from "../pool/alien-invasion.js";
 import _poolAllFatesScroll from "../pool/all-fates-scroll.js";
 import _poolAmbitionsCost from "../pool/ambitions-cost.js";
 import _poolAmbulatoryReactor from "../pool/ambulatory-reactor.js";
+import _poolAmoeboidChangeling from "../pool/amoeboid-changeling.js";
 import _poolAnafenzaKinTreeSpirit from "../pool/anafenza-kin-tree-spirit.js";
 import _poolAnaxHardenedInTheForge from "../pool/anax-hardened-in-the-forge.js";
 import _poolAncestorsEmbrace from "../pool/ancestors-embrace.js";
@@ -1021,6 +1022,7 @@ const shard: CardShard = {
     _poolAllFatesScroll,
     _poolAmbitionsCost,
     _poolAmbulatoryReactor,
+    _poolAmoeboidChangeling,
     _poolAnafenzaKinTreeSpirit,
     _poolAnaxHardenedInTheForge,
     _poolAncestorsEmbrace,

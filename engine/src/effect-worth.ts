@@ -598,7 +598,7 @@ export function onlyUntilEndOfTurn(effect: EffectSpec | null | undefined): boole
     case "grant-keyword-all":
     case "grant-protection":
     case "grant-activated-of":
-    case "animate":
+    case "become":
       return effect.duration === "end-of-turn";
     // Not `player-effect` or `timed-static` this turn: a rule for the rest of
     // the turn ("you may cast spells from your hand this turn without paying

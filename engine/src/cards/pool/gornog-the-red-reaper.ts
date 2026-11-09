@@ -22,7 +22,7 @@ export default defineCard({
     {
       trigger: { on: "attacks-player", who: "you", defender: "any", filter: { subtype: "Warrior" } },
       targets: [{ kind: "permanent", whose: "trigger-player", filter: { type: "creature" } }],
-      effect: { kind: "add-types", target: 0, setSubtypes: ["Coward"], duration: "permanent" },
+      effect: { kind: "become", target: 0, setSubtypes: ["Coward"], duration: "permanent" },
       resolve: null,
       text: ATTACK,
     },

@@ -19,12 +19,11 @@ export default defineCard({
   text: "Until end of turn, target creature loses all abilities and becomes a green Elephant with base power and toughness 3/3.",
   targets: ["creature"],
   effect: {
-    kind: "animate",
+    kind: "become",
     target: 0,
     power: 3,
     toughness: 3,
     addTypes: ["creature"],
-    addSubtypes: [],
     setSubtypes: ["Elephant"],
     setColors: ["G"],
     loseAbilities: true,

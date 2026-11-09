@@ -22,11 +22,9 @@ export default defineCard({
       },
       targets: ["creature-you-control"],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 2,
-        addTypes: [],
-        addSubtypes: [],
         duration: "end-of-turn",
       },
       resolve: null,

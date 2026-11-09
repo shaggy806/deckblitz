@@ -474,11 +474,10 @@ describe("Blech, Loafing Pest", () => {
     const nest = game.debugSpawn("Hornet Nest", A); // an Insect
     const bears = game.debugSpawn("Grizzly Bears", A);
     game.debugApplyEffect(A, {
-      kind: "animate",
+      kind: "become",
       target: 0,
       power: 0,
       toughness: 2,
-      addTypes: [],
       addSubtypes: ["Spider"],
       duration: "end-of-turn",
     }, [{ kind: "object", object: nest }]);

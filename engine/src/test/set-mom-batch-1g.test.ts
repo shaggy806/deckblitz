@@ -52,7 +52,7 @@ describe("Flywheel Racer", () => {
     expect(canActivate(game, racer, 0)).toBe(false);
     game.debugApplyEffect(
       A,
-      { kind: "add-types", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" },
+      { kind: "become", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" },
       [ref(racer)],
     );
     expect(canActivate(game, racer, 0)).toBe(true);

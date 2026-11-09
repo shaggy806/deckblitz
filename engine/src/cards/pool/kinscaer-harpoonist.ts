@@ -21,7 +21,7 @@ export default defineCard({
       effect: {
         kind: "may",
         prompt: "Have the target creature lose flying until end of turn?",
-        effect: { kind: "lose-keywords", target: 0, keywords: ["flying"], duration: "end-of-turn" },
+        effect: { kind: "become", target: 0, loseKeywords: ["flying"], duration: "end-of-turn" },
       },
       resolve: null,
       text: "Whenever this creature attacks, you may have target creature lose flying until end of turn.",

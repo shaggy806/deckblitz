@@ -66,7 +66,7 @@ describe("Miirym, Sentinel Wyrm — a permanent, non-legendary copy", () => {
 
     const copies = tokensOf(game, A, "Lathliss, Dragon Queen");
     expect(copies).toHaveLength(1); // survives — the copy is not legendary
-    expect(game.state.objects[copies[0]].notLegendary).toBe(true);
+    expect(game.state.objects[copies[0]].modifiers.some((m) => m.removeSupertypes?.includes("legendary"))).toBe(true);
     expect(
       game.battlefield.filter(
         (id) =>

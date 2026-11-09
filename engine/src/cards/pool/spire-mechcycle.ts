@@ -24,7 +24,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           // No duration: it stays an artifact creature (Rocketeer Boostbuggy).
-          { kind: "add-types", target: "source", addTypes: ["artifact", "creature"], duration: "permanent" },
+          { kind: "become", target: "source", addTypes: ["artifact", "creature"], duration: "permanent" },
           {
             kind: "add-counter",
             target: "source",
@@ -45,7 +45,7 @@ export default defineCard({
       },
       targets: [],
       effect: {
-        kind: "add-types",
+        kind: "become",
         target: "source",
         addTypes: ["artifact", "creature"],
         duration: "end-of-turn",

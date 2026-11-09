@@ -27,7 +27,7 @@ export default defineCard({
         kind: "may",
         prompt: "Have this enchantment become a 5/4 Dinosaur creature with trample and haste until end of turn?",
         effect: {
-          kind: "animate",
+          kind: "become",
           target: "source",
           power: 5,
           toughness: 4,

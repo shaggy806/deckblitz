@@ -25,12 +25,11 @@ export default defineCard({
       trigger: { on: "step-begins", step: "begin-combat", who: "you" },
       targets: [{ kind: "permanent", filter: { typesAnyOf: ["artifact", "creature"] } }],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 5,
         toughness: 5,
         addTypes: ["artifact", "creature"],
-        addSubtypes: [],
         keywords: ["flying"],
         duration: "permanent",
       },

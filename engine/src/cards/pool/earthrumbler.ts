@@ -18,7 +18,7 @@ export default defineCard({
       cost: { mana: null, tap: false, exileFromGraveyard: { count: 1, filter: { typesAnyOf: ["artifact", "creature"] } } },
       targets: [],
       effect: {
-        kind: "add-types",
+        kind: "become",
         target: "source",
         addTypes: ["artifact", "creature"],
         duration: "end-of-turn",
@@ -34,7 +34,7 @@ export default defineCard({
       },
       targets: [],
       effect: {
-        kind: "add-types",
+        kind: "become",
         target: "source",
         addTypes: ["artifact", "creature"],
         duration: "end-of-turn",

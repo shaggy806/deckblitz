@@ -18,7 +18,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           {
-            kind: "animate",
+            kind: "become",
             target: "source",
             addTypes: ["creature"],
             addSubtypes: ["Plant", "Zombie"],

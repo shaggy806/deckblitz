@@ -16,7 +16,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "lose-keywords", filter: CREATURES_AND_VEHICLES, keywords: ["indestructible"], duration: "end-of-turn" },
+      { kind: "become", filter: CREATURES_AND_VEHICLES, loseKeywords: ["indestructible"], duration: "end-of-turn" },
       { kind: "destroy-all", filter: CREATURES_AND_VEHICLES },
     ],
   },

@@ -16,7 +16,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "choose-creature-type",
-        then: { kind: "add-types", target: "source", setSubtypes: ["$chosen"], duration: "end-of-turn" },
+        then: { kind: "become", target: "source", setSubtypes: ["$chosen"], duration: "end-of-turn" },
       },
       resolve: null,
       text: "{1}: This creature becomes the creature type of your choice until end of turn.",
@@ -30,7 +30,7 @@ export default defineCard({
           kind: "for-each-permanent",
           filter: { type: "creature", controlledBy: "you" },
           simultaneous: true,
-          effect: { kind: "add-types", target: 0, setSubtypes: ["$chosen"], duration: "end-of-turn" },
+          effect: { kind: "become", target: 0, setSubtypes: ["$chosen"], duration: "end-of-turn" },
         },
       },
       resolve: null,

@@ -24,7 +24,7 @@ export default defineCard({
         effects: [
           { kind: "tap-all", filter: { type: "land", controlledBy: "you" } },
           {
-            kind: "animate",
+            kind: "become",
             target: "source",
             power: 3,
             toughness: 3,

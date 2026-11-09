@@ -51,7 +51,7 @@ describe("this or another X: the source's own event counts whatever it is", () =
     const game = setUp();
     const ayara = spawn(game, "Ayara, First of Locthwain");
     const before = life(game, B);
-    run(game, { kind: "create-token-copy", of: 0, count: 1, exceptions: { setColors: ["W"], notLegendary: true } }, ayara);
+    run(game, { kind: "create-token-copy", of: 0, count: 1, exceptions: { setColors: ["W"], removeSupertypes: ["legendary"] } }, ayara);
     // The copy is "Ayara", so its own entry counts; the original sees a white
     // creature enter, which doesn't.
     expect(life(game, B)).toBe(before - 1);
@@ -68,7 +68,7 @@ describe("this or another X: the source's own event counts whatever it is", () =
   it("Millicent: a token copy of her dying is Millicent dying, though it isn't a nontoken Spirit", () => {
     const game = setUp();
     const millicent = spawn(game, "Millicent, Restless Revenant");
-    run(game, { kind: "create-token-copy", of: 0, count: 1, exceptions: { notLegendary: true } }, millicent);
+    run(game, { kind: "create-token-copy", of: 0, count: 1, exceptions: { removeSupertypes: ["legendary"] } }, millicent);
     const copy = named(game, "Millicent, Restless Revenant").find((id) => id !== millicent) as ObjectId;
     expect(game.state.objects[copy].isToken).toBe(true);
     run(game, { kind: "destroy", target: 0 }, copy);

@@ -30,12 +30,10 @@ export default defineCard({
       trigger: { on: "cast-spell", who: "you", filter: { colors: ["G", "U"] } },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 5,
         toughness: 3,
-        addTypes: [],
-        addSubtypes: [],
         keywords: ["trample"],
         duration: "end-of-turn",
       },

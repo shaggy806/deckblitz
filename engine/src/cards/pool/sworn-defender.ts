@@ -18,12 +18,10 @@ export default defineCard({
       cost: { mana: "{1}", tap: false },
       targets: [{ kind: "permanent", filter: { type: "creature", blockingRelation: { relation: "either" } } }],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: { difference: [{ toughnessOf: 0 }, 1] },
         toughness: { sum: [{ powerOf: 0 }, 1] },
-        addTypes: [],
-        addSubtypes: [],
         duration: "end-of-turn",
       },
       resolve: null,

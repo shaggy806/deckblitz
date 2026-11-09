@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 // The Brothers' War. Prototype (rule 718): cast for {2}{G}{G} it's a green
 // 3/3. "If you cast it" is an intervening-if on the source (cast by you). The
 // land's base P/T is this creature's P/T as the trigger resolves, or as it
-// last existed on the battlefield (the ruling) — `animate` reads a live amount
+// last existed on the battlefield (the ruling) — `become` reads a live amount
 // once and keeps it (rule 608.2h). No duration is printed, so it stays a
 // Treefolk for as long as it's on the battlefield.
 const ENTERS_TEXT =
@@ -32,7 +32,7 @@ export default defineCard({
         effects: [
           { kind: "untap", target: 0 },
           {
-            kind: "animate",
+            kind: "become",
             target: 0,
             power: { powerOf: "source" },
             toughness: { toughnessOf: "source" },

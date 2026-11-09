@@ -49,7 +49,7 @@ function creatureWalker(game: Game, player: PlayerId): ReturnType<typeof spawn> 
   game.debugApplyEffect(
     player,
     {
-      kind: "animate-all",
+      kind: "become",
       filter: { name: "Jace Beleren" },
       power: 4,
       toughness: 4,

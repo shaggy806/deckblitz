@@ -1196,10 +1196,6 @@ export interface GameObject {
    * turn, so no sweep clears it — and any zone change clears it (rule
    * 400.7). */
   exileIfDiesTurn?: number;
-  /** True on a token copy created "except it's not legendary" (Miirym — rule
-   * 707 / needed-cards P5b). The legend-rule SBA skips it. Intrinsic, like
-   * `isToken` — never reset. */
-  notLegendary?: boolean;
   /** True while this card is foretold — exiled face-down for `{2}`, castable
    * later for its foretell cost (rule 702.143 — ROADMAP Phase 6b).
    * `foretoldOnTurn` is the turn it was foretold (can't be cast the same
@@ -1662,7 +1658,6 @@ export interface SpellSnapshot {
 export interface CopyValues {
   readonly copyOf: string | null;
   readonly modifiers: readonly PtModifier[];
-  readonly notLegendary?: true;
 }
 
 /** When a copy effect with a duration ends: in the cleanup step ("until end
@@ -1743,6 +1738,9 @@ export interface PtModifier {
   /** Layer 4 — card types this modifier adds (a man-land's "becomes a …
    * creature. It's still a land." keeps the printed types and adds these). */
   addTypes?: CardType[];
+  /** Layer 4 — it loses all its creature types and keeps its other subtypes
+   * (Nameless Inversion). */
+  loseCreatureTypes?: true;
   /** Layer 4 — it loses all its land types (Ultima, Origin of Oblivion's
    * blight); its other subtypes, card types and supertypes stay. */
   loseLandTypes?: true;
@@ -1752,11 +1750,11 @@ export interface PtModifier {
    * Applied before `addTypes`. */
   setTypes?: CardType[];
   /** Layer 4 — card types taken away, with every subtype that went only with
-   * them (rule 205.1a): `add-types`' `removeTypes`, and reconfigure's "while
+   * them (rule 205.1a): `become`' `removeTypes`, and reconfigure's "while
    * attached, this isn't a creature", folded in as one at its attachment's
    * timestamp (`reconfiguredModifier`). */
   removeTypes?: CardType[];
-  /** Layer 4 — subtypes taken away, its types left: `add-types`'
+  /** Layer 4 — subtypes taken away, its types left: `become`'
    * `removeSubtypes` ("it isn't an Equipment" — Dancing Sword). */
   removeSubtypes?: string[];
   /** Layer 4 — subtypes this modifier adds (e.g. `["Blinkmoth"]`). */
@@ -1786,14 +1784,14 @@ export interface PtModifier {
   /** Layer 7b — sets base toughness alone, ordered with `setPt` by
    * timestamp: an exchange of a life total with a toughness (rule 701.12g —
    * Tree of Redemption's "exchange your life total with this creature's
-   * toughness"), which leaves its power as it was, or an `animate` with only
+   * toughness"), which leaves its power as it was, or an `become` with only
    * a `toughness` (Chariot of the Sun's "has base toughness 1"). */
   setToughness?: number;
   /** Layer 7b — sets base power alone, ordered with `setPt` by timestamp:
-   * an `animate` with only a `power` ("target creature with flying has base
+   * an `become` with only a `power` ("target creature with flying has base
    * power 0 until end of turn" — Island of Wak-Wak; Riptide Mangler's "base
    * power becomes equal to target creature's power"). Its toughness stays as
-   * it was. An `animate` with only a `toughness` sets `setToughness`. */
+   * it was. An `become` with only a `toughness` sets `setToughness`. */
   setPower?: number;
   /** Layer 7d — "switch its power and toughness" (rule 613.4d, the
    * `switch-pt` effect): applied after every other P/T effect and counter,
@@ -1885,9 +1883,10 @@ export interface PtModifier {
    * Vitu-Ghazi: a copy of it doesn't have that name). Read through
    * {@link nameOf}. */
   setName?: string;
-  /** It isn't legendary — a copy exception's "and it isn't legendary"
-   * (Spark Double). Read through `supertypesOf`. */
-  notLegendary?: true;
+  /** Supertypes it no longer has: a copy exception's "and it isn't
+   * legendary" (Spark Double, read through `supertypesOf` and copied onward),
+   * an effect's "is no longer snow" (Thermal Flux, layer 4 in timestamp order). */
+  removeSupertypes?: Supertype[];
   /** Supertypes it has in addition — a copy exception's "it's legendary in
    * addition to its other types" (Sakashima the Impostor). Read through
    * `supertypesOf`. */
@@ -2167,7 +2166,6 @@ export interface LastKnownInfo {
    * left copies (rule 608.2h — Ratadrabik of Urborg's "a copy of that
    * creature"). Absent when it had none. */
   readonly copiable?: readonly PtModifier[];
-  readonly notLegendary?: true;
   /** The creature type chosen as it entered, if one was — what an ability
    * of it that resolves after it left reads for "of the chosen type" (rule
    * 608.2h: Herald's Horn's upkeep look). */
@@ -6678,7 +6676,6 @@ export function tokenFoldKey(o: GameObject): string {
     o.face ?? 0,
     o.exileAtEndStep ?? false,
     o.sacrificeAtEndStep ?? false,
-    o.notLegendary ?? false,
     o.goadedBy ?? [],
     o.goadedForGameBy ?? [],
     o.suspectedAt ?? null,

@@ -19,12 +19,11 @@ export default defineCard({
       cost: { mana: null, tap: false, removeCounter: { kind: "charge", count: 3 } },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 6,
         toughness: 6,
         addTypes: ["artifact", "creature"],
-        addSubtypes: [],
         setSubtypes: ["Construct"],
         keywords: ["trample"],
         duration: "end-of-turn",

@@ -32,12 +32,10 @@ export default defineCard({
       targets: [{ kind: "optional", of: "creature" }],
       // Base P/T (layer 7b): pumps and counters still apply over it (the ruling).
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 0,
         toughness: 2,
-        addTypes: [],
-        addSubtypes: [],
         duration: "until-your-next-turn",
       },
       resolve: null,

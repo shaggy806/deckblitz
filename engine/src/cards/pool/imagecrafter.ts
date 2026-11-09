@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 
 // EDHREC rank 14252.
 //
-// `choose-creature-type` with `exclude`, then `add-types`' `setSubtypes` (rule 205.1a).
+// `choose-creature-type` with `exclude`, then `become`' `setSubtypes` (rule 205.1a).
 
 export default defineCard({
   name: "Imagecrafter",
@@ -21,7 +21,7 @@ export default defineCard({
       effect: {
         kind: "choose-creature-type",
         exclude: ["Wall"],
-        then: { kind: "add-types", target: 0, setSubtypes: [CHOSEN_CREATURE_TYPE], duration: "end-of-turn" },
+        then: { kind: "become", target: 0, setSubtypes: [CHOSEN_CREATURE_TYPE], duration: "end-of-turn" },
       },
       resolve: null,
       text: "{T}: Choose a creature type other than Wall. Target creature becomes that type until end of turn.",

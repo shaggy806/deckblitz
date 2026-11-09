@@ -23,7 +23,7 @@ const MODES: ModeOption[] = Array.from({ length: 31 }, (_, i) => i + 1)
   .sort((x, y) => x.length - y.length)
   .map((picked) => ({
     text: picked.map(([, word]) => word).join(", "),
-    effect: { kind: "become-color", target: 0, colors: picked.map(([color]) => color), duration: "end-of-turn" },
+    effect: { kind: "become", target: 0, setColors: picked.map(([color]) => color), duration: "end-of-turn" },
   }));
 
 export default defineCard({

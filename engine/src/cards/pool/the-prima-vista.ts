@@ -29,7 +29,7 @@ export default defineCard({
     {
       trigger: { on: "cast-spell", who: "you", filter: { notTypes: ["creature"], manaSpent: [{ amount: { op: "gte", n: 4 } }] } },
       targets: [],
-      effect: { kind: "add-types", target: "source", addTypes: ["artifact", "creature"], duration: "end-of-turn" },
+      effect: { kind: "become", target: "source", addTypes: ["artifact", "creature"], duration: "end-of-turn" },
       resolve: null,
       text: CAST_TEXT,
     },

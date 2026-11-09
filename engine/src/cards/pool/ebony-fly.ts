@@ -26,7 +26,7 @@ export default defineCard({
           kind: "may",
           prompt: "Have Ebony Fly become an X/X Insect artifact creature with flying until end of turn?",
           effect: {
-            kind: "animate",
+            kind: "become",
             target: "source",
             power: { roll: "total" },
             toughness: { roll: "total" },

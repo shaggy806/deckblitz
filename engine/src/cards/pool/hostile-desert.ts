@@ -27,7 +27,7 @@ export default defineCard({
       cost: { mana: "{2}", tap: false, exileFromGraveyard: { count: 1, filter: { type: "land" } } },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 3,
         toughness: 4,

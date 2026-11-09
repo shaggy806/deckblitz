@@ -26,7 +26,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           {
-            kind: "animate",
+            kind: "become",
             target: "source",
             power: 1,
             toughness: 4,

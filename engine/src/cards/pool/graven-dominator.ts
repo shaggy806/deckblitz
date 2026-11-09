@@ -33,7 +33,7 @@ export default defineCard({
       trigger: { on: "enters-battlefield", who: "self" },
       targets: [],
       effect: {
-        kind: "animate-all",
+        kind: "become",
         filter: { type: "creature" },
         power: 1,
         toughness: 1,
@@ -48,7 +48,7 @@ export default defineCard({
       sameAbilityAs: 1,
       targets: [],
       effect: {
-        kind: "animate-all",
+        kind: "become",
         filter: { type: "creature" },
         power: 1,
         toughness: 1,

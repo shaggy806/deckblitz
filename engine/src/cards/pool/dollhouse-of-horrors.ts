@@ -27,7 +27,7 @@ export default defineCard({
         exceptions: {
           addTypes: ["artifact"],
           addSubtypes: ["Construct"],
-          basePt: [0, 0],
+          power: 0, toughness: 0,
           static: [
             {
               affects: { scope: "self" },

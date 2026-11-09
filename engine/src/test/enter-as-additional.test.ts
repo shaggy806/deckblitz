@@ -150,7 +150,7 @@ describe("Lim-Dûl the Necromancer — only if it's a creature", () => {
       // Made a creature afterwards: a Zombie only if the entry made it one.
       game.debugApplyEffect(
         A,
-        { kind: "animate", target: 0, power: 1, toughness: 1, addTypes: ["creature"], addSubtypes: [], duration: "permanent" },
+        { kind: "become", target: 0, power: 1, toughness: 1, addTypes: ["creature"], duration: "permanent" },
         [ref(ring)],
       );
       return { game, ring };

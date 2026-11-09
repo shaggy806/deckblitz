@@ -26,7 +26,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "modify-pt", target: 0, power: 3, toughness: 1, duration: "end-of-turn" },
-          { kind: "add-types", target: 0, addSubtypes: ["Dinosaur"], duration: "end-of-turn" },
+          { kind: "become", target: 0, addSubtypes: ["Dinosaur"], duration: "end-of-turn" },
         ],
       },
       resolve: null,

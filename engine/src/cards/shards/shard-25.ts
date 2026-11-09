@@ -502,6 +502,7 @@ import _poolMaskedAdmirers from "../pool/masked-admirers.js";
 import _poolMasterOfEtherium from "../pool/master-of-etherium.js";
 import _poolMastersGuideMural from "../pool/masters-guide-mural.js";
 import _poolMelancholy from "../pool/melancholy.js";
+import _poolMelting from "../pool/melting.js";
 import _poolMeltstridersGear from "../pool/meltstriders-gear.js";
 import _poolMemorialTeamLeader from "../pool/memorial-team-leader.js";
 import _poolMemoryGuardian from "../pool/memory-guardian.js";
@@ -1474,6 +1475,7 @@ const shard: CardShard = {
     _poolMasterOfEtherium,
     _poolMastersGuideMural,
     _poolMelancholy,
+    _poolMelting,
     _poolMeltstridersGear,
     _poolMemorialTeamLeader,
     _poolMemoryGuardian,

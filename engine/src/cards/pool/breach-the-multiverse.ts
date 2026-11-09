@@ -37,7 +37,7 @@ export default defineCard({
       {
         kind: "for-each-permanent",
         filter: { type: "creature", controlledBy: "you" },
-        effect: { kind: "add-types", target: 0, addSubtypes: ["Phyrexian"], duration: "permanent" },
+        effect: { kind: "become", target: 0, addSubtypes: ["Phyrexian"], duration: "permanent" },
       },
     ],
   },

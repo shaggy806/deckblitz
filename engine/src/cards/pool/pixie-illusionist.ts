@@ -22,7 +22,7 @@ export default defineCard({
         kind: "choose-creature-type",
         options: BASIC_LAND_TYPE_CHOICES,
         prompt: "choose a basic land type",
-        then: { kind: "add-types", target: 0, setSubtypes: [CHOSEN_CREATURE_TYPE], duration: "end-of-turn" },
+        then: { kind: "become", target: 0, setSubtypes: [CHOSEN_CREATURE_TYPE], duration: "end-of-turn" },
       },
       resolve: null,
       text: "{T}: Target land you control becomes the basic land type of your choice until end of turn.",

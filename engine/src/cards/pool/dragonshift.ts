@@ -4,12 +4,10 @@ import type { EffectSpec } from "../../effects.js";
 // EDHREC rank 21501. Overloaded, only the creatures you control as it resolves;
 // each keeps its other card types (the rulings).
 const shift = (target: number): EffectSpec => ({
-  kind: "animate",
+  kind: "become",
   target,
   power: 4,
   toughness: 4,
-  addTypes: [],
-  addSubtypes: [],
   setSubtypes: ["Dragon"],
   setColors: ["U", "R"],
   loseAbilities: true,

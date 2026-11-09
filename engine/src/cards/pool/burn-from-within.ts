@@ -28,7 +28,7 @@ export default defineCard({
         then: {
           kind: "sequence",
           effects: [
-            { kind: "lose-keywords", target: 0, keywords: ["indestructible"], duration: "end-of-turn" },
+            { kind: "become", target: 0, loseKeywords: ["indestructible"], duration: "end-of-turn" },
             { kind: "exile-if-dies-this-turn", target: 0 },
           ],
         },

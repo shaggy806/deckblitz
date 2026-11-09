@@ -16,7 +16,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "add-types", target: 0, addTypes: ["artifact"], duration: "end-of-turn" },
+      { kind: "become", target: 0, addTypes: ["artifact"], duration: "end-of-turn" },
       { kind: "draw", amount: 1 },
     ],
   },

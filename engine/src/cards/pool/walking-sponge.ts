@@ -30,15 +30,15 @@ export default defineCard({
         modes: [
           {
             text: "Flying",
-            effect: { kind: "lose-keywords", target: 0, keywords: ["flying"], duration: "end-of-turn" },
+            effect: { kind: "become", target: 0, loseKeywords: ["flying"], duration: "end-of-turn" },
           },
           {
             text: "First strike",
-            effect: { kind: "lose-keywords", target: 0, keywords: ["first-strike"], duration: "end-of-turn" },
+            effect: { kind: "become", target: 0, loseKeywords: ["first-strike"], duration: "end-of-turn" },
           },
           {
             text: "Trample",
-            effect: { kind: "lose-keywords", target: 0, keywords: ["trample"], duration: "end-of-turn" },
+            effect: { kind: "become", target: 0, loseKeywords: ["trample"], duration: "end-of-turn" },
           },
         ],
       },

@@ -37,7 +37,7 @@ export default defineCard({
         filter: { token: false, type: "creature" },
       },
       targets: [],
-      effect: { kind: "create-token-copy", of: "trigger-object", count: 1, notLegendary: true, who: "you" },
+      effect: { kind: "create-token-copy", of: "trigger-object", count: 1, who: "you", exceptions: { removeSupertypes: ["legendary"] } },
       resolve: null,
       text: TEXT,
     },

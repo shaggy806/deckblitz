@@ -22,7 +22,7 @@ export default defineCard({
         { kind: "optional", of: { kind: "permanent", filter: { subtype: "Blood", token: true, controlledBy: "you" } } },
       ],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 2,
         toughness: 2,

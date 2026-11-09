@@ -24,7 +24,7 @@ export default defineCard({
       cost: { mana: "{W}", tap: false },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 2,
         toughness: 2,
@@ -50,7 +50,7 @@ export default defineCard({
         kind: "may",
         prompt: "Have Glint Hawk Idol become a 2/2 Bird artifact creature with flying until end of turn?",
         effect: {
-          kind: "animate",
+          kind: "become",
           target: "source",
           power: 2,
           toughness: 2,

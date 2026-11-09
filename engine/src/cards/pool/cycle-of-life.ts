@@ -18,12 +18,10 @@ export default defineCard({
         kind: "sequence",
         effects: [
           {
-            kind: "animate",
+            kind: "become",
             target: 0,
             power: 0,
             toughness: 1,
-            addTypes: [],
-            addSubtypes: [],
             duration: "until-your-next-upkeep",
           },
           {

@@ -94,7 +94,7 @@ import {
   licidDefinition,
   readsGraveyardOrder,
 } from "./cards/define.js";
-import type { CyclingAbility, KickerAlsoCost, MorphCost, SpellCastClause, Supertype } from "./cards/define.js";
+import type { CyclingAbility, KickerAlsoCost, MorphCost, SpellCastClause } from "./cards/define.js";
 import { costActMaxX, costActPaidLast, costActPayable, payableCostAct } from "./cost-acts.js";
 import { DUNGEONS } from "./cards/dungeons.js";
 import { MADNESS_EFFECT, MADNESS_TEXT } from "./cards/madness.js";
@@ -133,6 +133,7 @@ import {
   colorsAmongPermanents,
   computeCharacteristics,
   effectiveSupertypes,
+  copiableTypesOf,
   grantableKeywords,
   computedCacheMemo,
   effectiveColors,
@@ -194,6 +195,7 @@ import {
   withChangeling,
 } from "./characteristics.js";
 import type { Characteristics } from "./characteristics.js";
+import { changesOnlyColors, changesTypes, patchModifier, type ResolvedPatch } from "./characteristics-patch.js";
 import { planTokenEvent } from "./token-replacements.js";
 import type { PlannedTokens, TokenKind, TokenReplacementInstance } from "./token-replacements.js";
 import { counterTotalInBestOrder, insteadEffect, insteadModify } from "./replacements.js";
@@ -1163,7 +1165,7 @@ interface TriggeredEntry {
  * (rule 707.9b) — see {@link CopyExceptions}. "This ability" (`thisAbility`)
  * is looked up in `registry`, and becomes one of the abilities it has (rule
  * 707.9a). */
-function copyExceptionModifier(exceptions: CopyExceptions, registry?: CardRegistry): PtModifier {
+function copyExceptionModifier(exceptions: ResolvedPatch & CopyExceptions, registry?: CardRegistry): PtModifier {
   const own = exceptions.thisAbility;
   if (own !== undefined && registry === undefined) throw new Error("copy exception 'thisAbility' needs the registry");
   const ownDef = own === undefined ? undefined : registry!.get(own.card);
@@ -1174,31 +1176,39 @@ function copyExceptionModifier(exceptions: CopyExceptions, registry?: CardRegist
   }
   const activated = [...(exceptions.activated ?? []), ...(ownActivated !== undefined ? [ownActivated] : [])];
   const triggered = [...(exceptions.triggered ?? []), ...(ownTriggered !== undefined ? [ownTriggered] : [])];
+  // Changeling read off the copiable values is every creature type (rule
+  // 702.73a), as a printed one is (`withChangeling`).
+  const addSubtypes = (exceptions.keywords ?? []).includes("changeling")
+    ? [...(exceptions.addSubtypes ?? []), EVERY_CREATURE_TYPE]
+    : exceptions.addSubtypes;
   return {
-    power: 0,
-    toughness: 0,
-    keywords: [...(exceptions.keywords ?? [])],
-    ...(exceptions.setTypes !== undefined ? { setTypes: [...exceptions.setTypes] } : {}),
-    ...(exceptions.setSubtypes !== undefined ? { setSubtypes: [...exceptions.setSubtypes] } : {}),
-    ...(exceptions.addTypes !== undefined ? { addTypes: [...exceptions.addTypes] } : {}),
-    ...(activated.length > 0 ? { grantsActivated: activated } : {}),
-    ...(triggered.length > 0 ? { grantsTriggered: triggered } : {}),
-    ...(exceptions.static !== undefined ? { grantsStatic: [...exceptions.static] } : {}),
-    ...(exceptions.notLegendary === true ? { notLegendary: true as const } : {}),
-    ...(exceptions.addSupertypes !== undefined ? { addSupertypes: [...exceptions.addSupertypes] } : {}),
+    ...patchModifier({
+      ...exceptions,
+      activated,
+      triggered,
+      ...(addSubtypes !== undefined ? { addSubtypes } : {}),
+    }),
     ...(exceptions.legendRuleOff !== undefined ? { legendRuleOff: exceptions.legendRuleOff } : {}),
-    ...(exceptions.addSubtypes !== undefined ? { addSubtypes: [...exceptions.addSubtypes] } : {}),
-    ...(exceptions.setColors !== undefined ? { setColors: [...exceptions.setColors] } : {}),
-    ...(exceptions.addColors !== undefined ? { addColors: [...exceptions.addColors] } : {}),
-    ...(exceptions.basePt !== undefined
-      ? { setPt: [exceptions.basePt[0], exceptions.basePt[1]] as [number, number] }
-      : {}),
-    ...(exceptions.name !== undefined ? { setName: exceptions.name } : {}),
     ...(exceptions.noManaCost === true ? { noManaCost: true as const } : {}),
     untilEndOfTurn: false,
     copiable: true,
     timestamp: -1,
   };
+}
+
+/** The modifiers a copy effect's exceptions make: the exceptions, then each
+ * `ifCopied` piece whose card type the copied values have (`copiedTypes`). */
+function copyExceptionModifiers(
+  exceptions: CopyExceptions,
+  registry: CardRegistry,
+  copiedTypes: readonly CardType[],
+): PtModifier[] {
+  return [
+    copyExceptionModifier(exceptions, registry),
+    ...(exceptions.ifCopied ?? [])
+      .filter((piece) => copiedTypes.includes(piece.ofType))
+      .map((piece) => copyExceptionModifier(piece.patch, registry)),
+  ];
 }
 
 /** Shared empty result for `effectiveTriggeredEntries`' common no-triggers
@@ -1260,7 +1270,6 @@ interface PlannedTokenCopies extends Omit<EnteringTokenCopies, "tokens"> {
   readonly copyName: string;
   readonly total: number;
   readonly modifiers: PtModifier[];
-  readonly notLegendary: boolean;
 }
 
 interface EnterOptions {
@@ -1274,40 +1283,12 @@ interface EnterOptions {
   /** "…onto the battlefield flipped" — it enters with the flipped status
    * (rule 710; Homura, Human Ascendant). */
   readonly flipped?: boolean;
-  /** The card types the effect putting it there says it has — the Enduring
-   * cycle's "return it to the battlefield … It's an enchantment. (It's not a
-   * creature.)": a lasting layer-4 effect on the permanent it becomes, in
-   * place from the moment it enters, so it enters as that (the replacements
-   * that apply as it enters and every trigger that sees it arrive judge it
-   * by these types — rule 614.12) and loses the subtypes that went only with
-   * the types it lost (rule 205.1a). */
-  readonly setTypes?: readonly CardType[];
-  /** Subtypes it has in addition to its own, the same way — Portal to
-   * Phyrexia's "It's a Phyrexian in addition to its other types." */
-  readonly addSubtypes?: readonly string[];
-  /** It has no abilities, the same way (layer 6) — Xu-Ifit,
-   * Osteoharmonist's "It's a Skeleton in addition to its other types and has
-   * no abilities": lost before its own enters replacements could apply or
-   * its enters triggers could trigger (rule 614.12, the ruling). */
-  readonly loseAbilities?: true;
-  /** Subtypes instead of its own of the same kind, the same way (rule
-   * 205.1a) — assimilate's "It's a Borg artifact creature and loses all
-   * other creature types". */
-  readonly setSubtypes?: readonly string[];
-  /** Colours it has in addition to its own, the same way (layer 5) —
-   * Necromantic Selection's "It's a black Zombie in addition to its other
-   * colors and types." */
-  readonly addColors?: readonly Color[];
-  /** Card types in addition to its own, its base P/T (layer 7b) and keywords
-   * it has (layer 6), the same way — Relive the Past's "They are 5/5
-   * Elemental creatures in addition to their other types" (see
-   * {@link EnterTypes}). */
-  readonly addTypes?: readonly CardType[];
-  readonly basePt?: readonly [number, number];
-  readonly keywords?: readonly Keyword[];
-  /** Its colours instead of its own (layer 5) — Chainer's "That creature is
-   * black". */
-  readonly setColors?: readonly Color[];
+  /** What the effect putting it there says it is (`EnterTypes`): a lasting
+   * effect on the permanent it becomes, in place from the moment it enters, so
+   * it enters as that. The replacements that apply as it enters and every
+   * trigger that sees it arrive judge it by this (rule 614.12), and its own
+   * abilities lost this way never apply (Xu-Ifit, Osteoharmonist's ruling). */
+  readonly asEntered?: ResolvedPatch;
   /** All of the above only if it's a creature as it enters (Lim-Dûl the
    * Necromancer's "If it's a creature, it's a Zombie …") — judged on the
    * battlefield, with every other effect applying (rule 614.12). */
@@ -1343,24 +1324,12 @@ function faceDownEntry(types: EnterTypes | undefined): Pick<EnterOptions, "faceD
 /** The {@link EnterOptions} for what an effect says a permanent is as it
  * enters (its {@link EnterTypes} less `faceDown` — see
  * {@link faceDownEntry}). Nothing for none. */
-function enterTypesEntry(
-  types: EnterTypes | undefined,
-): Pick<
-  EnterOptions,
-  "setTypes" | "addTypes" | "addSubtypes" | "setSubtypes" | "addColors" | "setColors" | "basePt" | "keywords" | "ifCreature" | "loseAbilities"
-> {
+function enterTypesEntry(types: EnterTypes | undefined): Pick<EnterOptions, "asEntered" | "ifCreature"> {
   if (types === undefined) return {};
+  const { faceDown: _faceDown, ifCreature, ...asEntered } = types;
   return {
-    ...(types.loseAbilities === true ? { loseAbilities: true as const } : {}),
-    ...(types.setTypes !== undefined ? { setTypes: types.setTypes } : {}),
-    ...(types.addTypes !== undefined ? { addTypes: types.addTypes } : {}),
-    ...(types.addSubtypes !== undefined ? { addSubtypes: types.addSubtypes } : {}),
-    ...(types.setSubtypes !== undefined ? { setSubtypes: types.setSubtypes } : {}),
-    ...(types.addColors !== undefined ? { addColors: types.addColors } : {}),
-    ...(types.setColors !== undefined ? { setColors: types.setColors } : {}),
-    ...(types.basePt !== undefined ? { basePt: types.basePt } : {}),
-    ...(types.keywords !== undefined ? { keywords: types.keywords } : {}),
-    ...(types.ifCreature === true ? { ifCreature: true as const } : {}),
+    ...(Object.keys(asEntered).length > 0 ? { asEntered } : {}),
+    ...(ifCreature === true ? { ifCreature: true as const } : {}),
   };
 }
 
@@ -7293,7 +7262,7 @@ export class Game {
     const ownPt = ownPrototype ?? ([ownDef.power ?? 0, ownDef.toughness ?? 0] as const);
     const except =
       spec?.ownPt === true
-        ? { ...spec.except, basePt: [ownPt[0], ownPt[1]] as const }
+        ? { ...spec.except, power: ownPt[0], toughness: ownPt[1] }
         : spec?.except;
     // "…if you control that creature" (Undercover Operative), as it's chosen.
     const copiedIsYours = copied !== undefined && copied.controller === chooser;
@@ -7313,8 +7282,7 @@ export class Game {
               ...(copied.zone === "battlefield"
                 ? copied.modifiers.filter((m) => m.copiable === true).map((m) => ({ ...m, untilEndOfTurn: false }))
                 : []),
-              ...(copied.notLegendary === true ? [copyExceptionModifier({ notLegendary: true })] : []),
-              ...(except !== undefined ? [copyExceptionModifier(except, this.registry)] : []),
+              ...(except !== undefined ? copyExceptionModifiers(except, this.registry, copiableTypesOf(this.registry, this.unflippedName(printedCardName(copied)), copied.zone === "battlefield" ? copied.modifiers : [])) : []),
             ],
       // What copying adds to how it enters (rule 707.9e) — only if it copies.
       ...(copied !== undefined &&
@@ -25606,9 +25574,9 @@ export class Game {
       const found: (NonNullable<StaticAbility["spendManaAs"]> & { readonly from: ObjectId })[] = [];
       for (const id of this.state.zones.shared.battlefield) {
         const source = this.state.objects[id];
-        if (source.controller !== player || hasLostAbilities(this.state, this.registry,source)) continue;
+        if (hasLostAbilities(this.state, this.registry,source)) continue;
         for (const ability of this.registry.get(rulesTextName(source)).static) {
-          if (ability.spendManaAs !== undefined && this.staticActive(source, ability)) {
+          if (ability.spendManaAs !== undefined && (source.controller === player || ability.spendManaAs.everyone === true) && this.staticActive(source, ability)) {
             found.push({ ...ability.spendManaAs, from: id });
           }
         }
@@ -27334,7 +27302,7 @@ export class Game {
           {
             trigger: { on: "enters-battlefield", who: "self" },
             targets: [],
-            effect: { kind: "create-token-copy", of: "source", count: 1, basePt: [1, 1] },
+            effect: { kind: "create-token-copy", of: "source", count: 1, exceptions: { power: 1, toughness: 1 } },
             resolve: null,
             text: "Offspring — when this permanent enters, create a 1/1 token copy of it.",
           },
@@ -36899,18 +36867,6 @@ export class Game {
             : this.battlefieldMatching(controller, on as CardFilter);
         this.reselectAttack(ids, controller, onlyPlayers);
       },
-      loseKeywords: (on, keywords, duration, scopeTo, cantHave) => {
-        const lasting = lastingHere(duration);
-        if ("kind" in on && (on.kind === "object" || on.kind === "player")) {
-          this.loseKeywords(on, keywords, lasting, true, undefined, cantHave);
-          return;
-        }
-        // One effect, one timestamp (rule 613.7b), however many it reaches.
-        const timestamp = this.freshTimestamp();
-        for (const id of this.battlefieldMatching(scopeTo ?? controller, on as CardFilter)) {
-          this.loseKeywords({ kind: "object", object: id }, keywords, lasting, false, timestamp, cantHave);
-        }
-      },
       restrict: (target, filter, rules, duration, scope) =>
         typeof duration === "object" && "laterAt" in duration
           ? this.restrictLater(controller, target, rules, duration.laterAt, duration.player)
@@ -37155,46 +37111,6 @@ export class Game {
             ...durationFields(kept),
           });
         }
-      },
-      loseAbilities: (target, opts) => {
-        if (target.kind !== "object") return;
-        const id = this.splitOneFromStack(target.object);
-        const object = this.state.objects[id];
-        const kept = lastingHere(opts.duration);
-        if (object === undefined || object.zone !== "battlefield" || !durationBegins(object, kept)) return;
-        object.modifiers.push({
-          // What it has after the loss is granted by the same effect, so it
-          // isn't lost with the rest (rule 613.7).
-          timestamp: this.freshTimestamp(),
-          power: 0,
-          toughness: 0,
-          keywords: [],
-          loseAbilities: true,
-          ...(opts.loseLandTypes ? { loseLandTypes: true as const } : {}),
-          ...(opts.activated.length > 0 ? { grantsActivated: [...opts.activated] } : {}),
-          ...durationFields(kept),
-        });
-        // Nothing is announced, so nothing else invalidates the fold.
-        invalidateComputedCache();
-      },
-      loseAbilitiesAll: (filter, duration) => {
-        const kept = lasting(duration, controller);
-        // One effect, one timestamp (rule 613.7b), over what matches now
-        // (611.2c); a token stack loses them whole.
-        const timestamp = this.freshTimestamp();
-        for (const id of this.battlefieldMatching(controller, filter)) {
-          const object = this.state.objects[id];
-          if (object === undefined || object.zone !== "battlefield" || !durationBegins(object, kept)) continue;
-          object.modifiers.push({
-            timestamp,
-            power: 0,
-            toughness: 0,
-            keywords: [],
-            loseAbilities: true,
-            ...durationFields(kept),
-          });
-        }
-        invalidateComputedCache();
       },
       grantSpellsThisTurn: (grant) => {
         (this.state.spellGrantsThisTurn ??= []).push({
@@ -37959,19 +37875,16 @@ export class Game {
         if (target?.kind !== "object" || this.state.objects[target.object]?.zone !== "battlefield") return;
         this.phaseOut([this.splitOneFromStack(target.object)], until);
       },
-      animate: (target, opts) => this.animate(target, { ...opts, duration: lastingHere(opts.duration) }),
-      addTypes: (target, types, subtypes, duration, set) =>
-        this.addTypes(target, types, subtypes, lastingHere(duration), set),
-      animateAll: (filter, opts) => {
-        // Every match is fixed before the first one changes (a Treasure made
-        // a creature mustn't change what the filter matches mid-loop), and a
-        // token stack is animated whole, like any mass effect's.
+      become: (target, patch, duration) => this.become(target, patch, lastingHere(duration)),
+      becomeAll: (filter, patch, duration, { exceptSource, scopeTo }) => {
+        // One effect, one timestamp, over what matches now (rules 613.7b,
+        // 611.2c): every match is fixed before the first one changes, and a
+        // token stack changes whole, like any mass effect's.
         const timestamp = this.freshTimestamp();
-        const { exceptSource, scopeTo, ...rest } = opts;
-        const kept = { ...rest, duration: lastingHere(opts.duration) };
+        const kept = lastingHere(duration);
         for (const id of this.battlefieldMatching(scopeTo ?? controller, filter)) {
           if (exceptSource === true && id === source) continue;
-          this.animate({ kind: "object", object: id }, kept, false, timestamp);
+          this.become({ kind: "object", object: id }, patch, kept, false, timestamp);
         }
       },
       manifestTop: (player, kind, library) => this.manifestTop(player, kind, library ?? player),
@@ -38559,32 +38472,6 @@ export class Game {
           from: from.object,
           ...(amount === "next-time" ? { nextTime: true as const } : {}),
           ...(redirectTo !== undefined ? { redirectTo } : {}),
-        });
-      },
-      becomeColor: (target, colors, duration, inAddition) => {
-        if (target.kind !== "object") return;
-        const id = this.splitOneFromStack(target.object);
-        const object = this.state.objects[id];
-        // A permanent, or a spell while it's on the stack (`moveObject` clears
-        // modifiers as it leaves).
-        if (object === undefined) return;
-        if (object.zone !== "battlefield" && !(object.zone === "stack" && object.kind === "card")) return;
-        const lasting = lastingHere(duration);
-        if (!durationBegins(object, lasting)) return;
-        object.modifiers.push({
-          timestamp: this.freshTimestamp(),
-          power: 0,
-          toughness: 0,
-          keywords: [],
-          // "In addition to its other colors" adds (rule 105.3).
-          ...(inAddition === true ? { addColors: [...colors] } : { setColors: [...colors] }),
-          ...durationFields(lasting),
-        });
-        invalidateComputedCache();
-        this.emit({
-          type: "color-changed",
-          object: id,
-          colors: inAddition === true ? [...computeCharacteristics(this.state, this.registry, id).colors] : [...colors],
         });
       },
       changeText: (target, change, duration) => {
@@ -41206,7 +41093,6 @@ export class Game {
         gainsHaste: false,
         gainKeywords: ["haste"],
         exileAtEndStep: false,
-        notLegendary: false,
         under: controller,
       });
       for (const id of this.state.zones.shared.battlefield) {
@@ -41924,7 +41810,6 @@ export class Game {
     this.createTokenCopy(tokens[0], 1, {
       gainsHaste: false,
       exileAtEndStep: false,
-      notLegendary: false,
     });
   }
 
@@ -42032,7 +41917,6 @@ export class Game {
         ],
         exileAtEndStep,
         false,
-        false,
         tapped,
         sacrificeAtEndStep,
         goadedForGameBy,
@@ -42049,7 +41933,6 @@ export class Game {
               t.count,
               [...this.tokenNameModifier(t.name), ...riders.map((m) => ({ ...m }))],
               exileAtEndStep,
-              false,
               false,
               tapped,
               sacrificeAtEndStep,
@@ -42264,8 +42147,6 @@ export class Game {
       gainsHaste: boolean;
       exileAtEndStep: boolean;
       sacrificeAtEndStep?: boolean;
-      notLegendary: boolean;
-      basePt?: readonly [number, number];
       under?: PlayerId;
       gainUntilEndOfTurn?: readonly Keyword[];
       /** Keywords they gain with no end — encore's "the tokens gain haste":
@@ -42336,20 +42217,7 @@ export class Game {
             },
           ]
         : []),
-      ...(opts.basePt
-        ? [
-            {
-              power: 0,
-              toughness: 0,
-              keywords: [],
-              setPt: [opts.basePt[0], opts.basePt[1]] as [number, number],
-              untilEndOfTurn: false,
-              copiable: true as const,
-              timestamp: -1,
-            },
-          ]
-        : []),
-      ...(opts.exceptions !== undefined ? [copyExceptionModifier(opts.exceptions, this.registry)] : []),
+      ...(opts.exceptions !== undefined ? copyExceptionModifiers(opts.exceptions, this.registry, copiableTypesOf(this.registry, copyName, inherited)) : []),
       ...untilEndOfTurnKeywords(opts.gainUntilEndOfTurn ?? []),
       ...(opts.gainKeywords !== undefined && opts.gainKeywords.length > 0
         ? [{ power: 0, toughness: 0, keywords: [...opts.gainKeywords], untilEndOfTurn: false }]
@@ -42384,7 +42252,6 @@ export class Game {
       replaced: plan.flatMap((t) => (t.name === null ? [] : [{ name: t.name, count: t.count }])),
       modifiers,
       riders: modifiers.filter((m) => m.copiable !== true),
-      notLegendary: opts.notLegendary || (departed !== undefined ? departed.notLegendary === true : of!.notLegendary === true),
       tapped: opts.tapped === true,
       exileAtEndStep: opts.exileAtEndStep,
       sacrificeAtEndStep: opts.sacrificeAtEndStep === true,
@@ -42418,7 +42285,7 @@ export class Game {
     const groups = plans.map((p): EnteringTokenCopies => {
       const tokens: ObjectId[] = [];
       for (let i = 0; i < Math.min(p.total, Game.MAX_EFFECT_INSTANCES); i += 1) tokens.push(this.mintEnteringToken(p));
-      const { copyName: _name, total: _total, modifiers: _modifiers, notLegendary: _legendary, ...rest } = p;
+      const { copyName: _name, total: _total, modifiers: _modifiers, ...rest } = p;
       return { ...rest, tokens };
     });
     const entry = { kind: "token-copies", groups } as const;
@@ -42438,7 +42305,6 @@ export class Game {
       planned.copyName,
       planned.modifiers,
       planned.exileAtEndStep,
-      planned.notLegendary,
       true,
       false,
       planned.sacrificeAtEndStep,
@@ -42524,7 +42390,6 @@ export class Game {
         planned.total,
         planned.modifiers,
         planned.exileAtEndStep,
-        planned.notLegendary,
         true,
         planned.tapped,
         planned.sacrificeAtEndStep,
@@ -42547,7 +42412,6 @@ export class Game {
         t.count,
         [...this.tokenNameModifier(t.name), ...group.riders.map((m) => ({ ...m }))],
         group.exileAtEndStep,
-        false,
         false,
         group.tapped,
         group.sacrificeAtEndStep,
@@ -42619,7 +42483,7 @@ export class Game {
     if (source === undefined) return;
     const copied: PtModifier[] = [
       ...source.modifiers,
-      ...(exceptions !== undefined ? [copyExceptionModifier(exceptions, this.registry)] : []),
+      ...(exceptions !== undefined ? copyExceptionModifiers(exceptions, this.registry, copiableTypesOf(this.registry, source.copyOf ?? "", source.modifiers)) : []),
     ].map((m) => ({ ...m, timestamp: -2 }));
     const changed: ObjectId[] = [];
     for (const id of ids) {
@@ -42651,15 +42515,14 @@ export class Game {
     asCard: boolean,
     departed: LastKnownInfo | undefined,
   ): (CopyValues & { readonly copyOf: string }) | undefined {
-    const withoutDuration = (modifiers: readonly PtModifier[], notLegendary: boolean): PtModifier[] => [
+    const withoutDuration = (modifiers: readonly PtModifier[]): PtModifier[] => [
       ...modifiers.filter((m) => m.copiable === true).map((m) => ({ ...m, untilEndOfTurn: false })),
-      ...(notLegendary ? [copyExceptionModifier({ notLegendary: true })] : []),
     ];
     if (!asCard && departed !== undefined) {
       this.registry.get(departed.name); // validate it's a known definition
       return {
         copyOf: this.unflippedName(departed.name),
-        modifiers: withoutDuration(departed.copiable ?? [], departed.notLegendary === true),
+        modifiers: withoutDuration(departed.copiable ?? []),
       };
     }
     const of = this.state.objects[ofId];
@@ -42667,7 +42530,7 @@ export class Game {
     if (!asCard && (of.zone === "battlefield" || of.zone === "stack")) {
       return {
         copyOf: this.unflippedName(printedCardName(of)),
-        modifiers: withoutDuration(of.modifiers, of.notLegendary === true),
+        modifiers: withoutDuration(of.modifiers),
       };
     }
     if (of.isToken === true) return undefined;
@@ -42689,7 +42552,6 @@ export class Game {
       object.copyBase ??= {
         copyOf: object.copyOf,
         modifiers: object.modifiers.filter((m) => m.copiable === true),
-        ...(object.notLegendary === true ? { notLegendary: true as const } : {}),
       };
       object.temporaryCopies = [...(object.temporaryCopies ?? []), { ...values, ends }];
     }
@@ -42702,8 +42564,6 @@ export class Game {
       ...object.modifiers.filter((m) => m.copiable !== true),
       ...values.modifiers.map((m) => ({ ...m })),
     ];
-    if (values.notLegendary === true) object.notLegendary = true;
-    else delete object.notLegendary;
     // A flipped permanent that becomes a copy of a flip card shows that
     // card's alternative half (rule 707.3's example).
     this.refreshFlippedName(object);
@@ -42769,7 +42629,6 @@ export class Game {
     total: number,
     modifiers: PtModifier[],
     exileAtEndStep: boolean,
-    notLegendary: boolean,
     copied: boolean,
     tapped = false,
     sacrificeAtEndStep = false,
@@ -42793,7 +42652,6 @@ export class Game {
           copyOf,
           modifiers,
           exileAtEndStep,
-          notLegendary,
           false,
           tapped,
           sacrificeAtEndStep,
@@ -42832,7 +42690,6 @@ export class Game {
       copyOf,
       modifiers,
       exileAtEndStep,
-      notLegendary,
       true, // skipBattlefield — the representative is only ever compared
       tapped,
       sacrificeAtEndStep,
@@ -42860,7 +42717,6 @@ export class Game {
         copyOf,
         modifiers,
         exileAtEndStep,
-        notLegendary,
         false,
         tapped,
         sacrificeAtEndStep,
@@ -42883,7 +42739,6 @@ export class Game {
     copyOf: string | null,
     modifiers: PtModifier[],
     exileAtEndStep: boolean,
-    notLegendary: boolean,
     skipBattlefield = false,
     tapped = false,
     sacrificeAtEndStep = false,
@@ -42934,7 +42789,6 @@ export class Game {
       controlEndsAtCleanup: false,
       copyOf,
       ...(exileAtEndStep ? { exileAtEndStep: true } : {}),
-      ...(notLegendary ? { notLegendary: true } : {}),
       ...(goadedForGameBy !== undefined ? { goadedForGameBy: [goadedForGameBy] } : {}),
       // A double-faced token (an Incubator, rule 111.10i) has its faces, front
       // up — a copy of a permanent copies only the face it shows (rule
@@ -44261,30 +44115,6 @@ export class Game {
 
   /** See the `"lose-keywords"` {@link EffectSpec}: a modifier that takes the
    * keywords away in layer 6 at its timestamp (rule 613.7). */
-  private loseKeywords(
-    target: TargetRef,
-    keywords: readonly Keyword[],
-    duration: Expiry,
-    split = true,
-    timestamp?: number,
-    cantHave?: boolean,
-  ): void {
-    if (target.kind !== "object") return;
-    const id = split ? this.splitOneFromStack(target.object) : target.object;
-    const object = this.state.objects[id];
-    if (object === undefined || object.zone !== "battlefield" || !durationBegins(object, duration)) return;
-    object.modifiers.push({
-      timestamp: timestamp ?? this.freshTimestamp(),
-      power: 0,
-      toughness: 0,
-      keywords: [],
-      loseKeywords: [...keywords],
-      ...(cantHave === true ? { cantHaveKeywords: [...keywords] } : {}),
-      ...durationFields(duration),
-    });
-    this.emit({ type: "keywords-lost", object: id, keywords: [...keywords], duration });
-  }
-
   /** See the `"prohibit"` {@link EffectSpec}. */
   private prohibit(
     players: readonly PlayerId[],
@@ -45278,123 +45108,50 @@ export class Game {
    * only a `power` or only a `toughness` it sets that alone (7b, rule
    * 613.4b — Island of Wak-Wak's "has base power 0"), the other left as it
    * is. */
-  private animate(
-    target: TargetRef,
-    opts: {
-      readonly power?: number;
-      readonly toughness?: number;
-      readonly addTypes: readonly CardType[];
-      readonly setTypes?: readonly CardType[];
-      readonly addSubtypes: readonly string[];
-      readonly setSubtypes?: readonly string[];
-      readonly setColors?: readonly Color[];
-      readonly addColors?: readonly Color[];
-      readonly loseAbilities?: boolean;
-      readonly addSupertypes?: readonly Supertype[];
-      readonly setName?: string;
-      readonly keywords: readonly Keyword[];
-      readonly duration: Expiry;
-    },
-    split = true,
-    timestamp?: number,
-  ): void {
+  /** See the `"become"` {@link EffectSpec}: `target` becomes what `patch`
+   * says. A token is split off its stack first unless `split` is false (a mass
+   * effect's stack changes whole), and a mass effect passes its one
+   * `timestamp` (rule 613.7b). */
+  private become(target: TargetRef, patch: ResolvedPatch, duration: Expiry, split = true, timestamp?: number): void {
     if (target.kind !== "object") return;
     const id = split ? this.splitOneFromStack(target.object) : target.object;
     const object = this.state.objects[id];
-    if (object === undefined || object.zone !== "battlefield" || !durationBegins(object, opts.duration)) return;
+    if (object === undefined || !durationBegins(object, duration)) return;
+    // A permanent, or a spell whose colours alone change (`moveObject` clears
+    // modifiers as it leaves the stack).
+    const onlyColors = changesOnlyColors(patch);
+    if (object.zone !== "battlefield" && !(onlyColors && object.zone === "stack" && object.kind === "card")) return;
     object.modifiers.push({
       // Ordered against type-granting and P/T-setting statics, and in layer 6
       // against keyword grants (rule 613.7).
       timestamp: timestamp ?? this.freshTimestamp(),
-      power: 0,
-      toughness: 0,
-      keywords: [...grantableKeywords(this.state, this.registry, object, opts.keywords)],
-      addTypes: [...opts.addTypes],
-      ...(opts.setTypes ? { setTypes: [...opts.setTypes] } : {}),
-      addSubtypes: [...opts.addSubtypes],
-      ...(opts.setSubtypes ? { setSubtypes: [...opts.setSubtypes] } : {}),
-      ...(opts.setColors ? { setColors: [...opts.setColors] } : {}),
-      ...(opts.addColors ? { addColors: [...opts.addColors] } : {}),
-      ...(opts.loseAbilities ? { loseAbilities: true } : {}),
-      ...(opts.addSupertypes ? { addSupertypes: [...opts.addSupertypes] } : {}),
-      ...(opts.setName !== undefined ? { setName: opts.setName } : {}),
-      ...(opts.power !== undefined && opts.toughness !== undefined
-        ? { setPt: [opts.power, opts.toughness] as [number, number] }
-        : opts.power !== undefined
-          ? { setPower: opts.power }
-          : opts.toughness !== undefined
-            ? { setToughness: opts.toughness }
-            : {}),
-      ...durationFields(opts.duration),
-    });
-    if (opts.power !== undefined && opts.toughness !== undefined) {
-      this.emit({
-        type: "permanent-animated",
-        object: id,
-        power: opts.power,
-        toughness: opts.toughness,
-        duration: opts.duration,
-      });
-    } else {
-      // Base power or toughness alone: nothing "became an N/N", but the
-      // computed P/T changed, so drop what's been read.
-      invalidateComputedCache();
-    }
-  }
-
-  /** See the `"add-types"` {@link EffectSpec}: layer 4 alone. */
-  private addTypes(
-    target: TargetRef,
-    types: readonly CardType[],
-    subtypes: readonly string[],
-    duration: Expiry,
-    set: {
-      readonly setTypes?: readonly CardType[];
-      readonly removeTypes?: readonly CardType[];
-      readonly removeSubtypes?: readonly string[];
-      readonly setSubtypes?: readonly string[];
-      readonly addColors?: readonly Color[];
-    } = {},
-  ): void {
-    const replaces =
-      set.setTypes !== undefined ||
-      set.removeTypes !== undefined ||
-      set.removeSubtypes !== undefined ||
-      set.setSubtypes !== undefined;
-    const colors = set.addColors ?? [];
-    if (target.kind !== "object" || (types.length === 0 && subtypes.length === 0 && !replaces && colors.length === 0)) return;
-    const id = this.splitOneFromStack(target.object);
-    const object = this.state.objects[id];
-    if (object === undefined || object.zone !== "battlefield" || !durationBegins(object, duration)) return;
-    object.modifiers.push({
-      // Ordered against type-granting statics (rule 613.7); a replacement
-      // ("becomes a Coward", "becomes an enchantment") gets a timestamp of
-      // its own, so it outranks every earlier type change.
-      // So does a colour added "in addition" (layer 5): after every earlier
-      // colour change, under every later one.
-      timestamp: replaces || colors.length > 0 ? this.freshTimestamp() : this.state.timestampSeq,
-      power: 0,
-      toughness: 0,
-      keywords: [],
-      ...(set.setTypes !== undefined ? { setTypes: [...set.setTypes] } : {}),
-      ...(set.removeTypes !== undefined ? { removeTypes: [...set.removeTypes] } : {}),
-      ...(set.removeSubtypes !== undefined ? { removeSubtypes: [...set.removeSubtypes] } : {}),
-      ...(set.setSubtypes !== undefined ? { setSubtypes: [...set.setSubtypes] } : {}),
-      ...(colors.length > 0 ? { addColors: [...colors] } : {}),
-      addTypes: [...types],
-      addSubtypes: [...subtypes],
+      ...patchModifier(patch, grantableKeywords(this.state, this.registry, object, patch.keywords ?? [])),
       ...durationFields(duration),
     });
     invalidateComputedCache();
-    this.emit({
-      type: "types-added",
-      object: id,
-      types: [...(set.setTypes ?? []), ...types],
-      subtypes: [...(set.setSubtypes ?? []), ...subtypes],
-      duration,
-      ...(replaces ? { replaces: true as const } : {}),
-    });
+    if (patch.power !== undefined && patch.toughness !== undefined) {
+      this.emit({ type: "permanent-animated", object: id, power: patch.power, toughness: patch.toughness, duration });
+    } else if (changesTypes(patch)) {
+      this.emit({
+        type: "types-added",
+        object: id,
+        types: [...(patch.setTypes ?? []), ...(patch.addTypes ?? [])],
+        subtypes: [...(patch.setSubtypes ?? []), ...(patch.addSubtypes ?? [])],
+        duration,
+        ...(patch.setTypes !== undefined || patch.removeTypes !== undefined || patch.removeSubtypes !== undefined || patch.setSubtypes !== undefined
+          ? { replaces: true as const }
+          : {}),
+      });
+    } else if (onlyColors) {
+      this.emit({
+        type: "color-changed",
+        object: id,
+        colors: patch.addColors !== undefined ? [...computeCharacteristics(this.state, this.registry, id).colors] : [...(patch.setColors ?? [])],
+      });
+    }
+    if (patch.loseKeywords !== undefined) this.emit({ type: "keywords-lost", object: id, keywords: [...patch.loseKeywords], duration });
   }
+
 
   /** The front face's `CardDefinition` for `id`'s card — resolves through
    * `faces[0]` for a multi-face card. Used to read the shared `transform` flag
@@ -57323,7 +57080,6 @@ export class Game {
       ...(object.modifiers.some((m) => m.copiable === true)
         ? { copiable: object.modifiers.filter((m) => m.copiable === true).map((m) => ({ ...m })) }
         : {}),
-      ...(object.notLegendary === true ? { notLegendary: true as const } : {}),
       ...(granted.length > 0 ? { grantedTriggers: granted } : {}),
     };
   }
@@ -58226,7 +57982,6 @@ export class Game {
           // of the first copy too (rule 707.3, layer 1's order — 613.7).
           if (object.isToken) {
             object.modifiers = object.modifiers.filter((m) => m.copiable !== true);
-            delete object.notLegendary;
           }
           object.modifiers.push(...copied);
         }
@@ -58558,30 +58313,12 @@ export class Game {
       // a creature" is judged now, on the face it has, under every other
       // effect.
       if (
-        (enter.setTypes !== undefined ||
-          enter.addTypes !== undefined ||
-          enter.addSubtypes !== undefined ||
-          enter.setSubtypes !== undefined ||
-          enter.addColors !== undefined ||
-          enter.setColors !== undefined ||
-          enter.basePt !== undefined ||
-          enter.keywords !== undefined ||
-          enter.loseAbilities === true) &&
+        enter.asEntered !== undefined &&
         (enter.ifCreature !== true || effectiveTypes(this.state, this.registry, object).includes("creature"))
       ) {
         object.modifiers.push({
           timestamp: object.timestamp,
-          power: 0,
-          toughness: 0,
-          keywords: [...(enter.keywords ?? [])],
-          ...(enter.loseAbilities === true ? { loseAbilities: true } : {}),
-          ...(enter.setTypes !== undefined ? { setTypes: [...enter.setTypes] } : {}),
-          ...(enter.addTypes !== undefined ? { addTypes: [...enter.addTypes] } : {}),
-          ...(enter.addSubtypes !== undefined ? { addSubtypes: [...enter.addSubtypes] } : {}),
-          ...(enter.setSubtypes !== undefined ? { setSubtypes: [...enter.setSubtypes] } : {}),
-          ...(enter.addColors !== undefined ? { addColors: [...enter.addColors] } : {}),
-          ...(enter.setColors !== undefined ? { setColors: [...enter.setColors] } : {}),
-          ...(enter.basePt !== undefined ? { setPt: [enter.basePt[0], enter.basePt[1]] as [number, number] } : {}),
+          ...patchModifier(enter.asEntered),
           untilEndOfTurn: false,
         });
       }

@@ -33,7 +33,7 @@ export default defineCard({
     {
       cost: { mana: "{2}", tap: true },
       targets: [{ kind: "permanent", whose: "you", filter: { subtype: "Vehicle" } }],
-      effect: { kind: "add-types", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" },
+      effect: { kind: "become", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" },
       resolve: null,
       text: VEHICLE_TEXT,
     },

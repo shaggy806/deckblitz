@@ -87,12 +87,11 @@ describe("disturb — the back face's own exile replacement", () => {
     game.debugApplyEffect(
       B,
       {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 1,
         toughness: 1,
         addTypes: ["creature"],
-        addSubtypes: [],
         setSubtypes: ["Frog"],
         setColors: ["U"],
         loseAbilities: true,

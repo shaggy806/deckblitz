@@ -63,7 +63,7 @@ describe("Lovestruck Beast", () => {
     expect(whyCannotAttack(game.state, game.registry, A, beast, B)).not.toBeNull();
     game.debugApplyEffect(
       A,
-      { kind: "animate", target: 0, power: 1, toughness: 1, addTypes: [], addSubtypes: [], duration: "end-of-turn" },
+      { kind: "become", target: 0, power: 1, toughness: 1, duration: "end-of-turn" },
       [ref(beast)],
     );
     settle(game);

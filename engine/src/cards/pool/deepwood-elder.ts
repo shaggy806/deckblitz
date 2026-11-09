@@ -4,7 +4,7 @@ import { defineCard } from "../define.js";
 //
 // "Become Forests" sets their land types (rule 305.7): each loses the
 // abilities its rules text gave it and has "{T}: Add {G}" until end of turn —
-// `add-types`' `setSubtypes` of a basic land type.
+// `become`' `setSubtypes` of a basic land type.
 
 const TEXT = "{X}{G}{G}, {T}, Discard a card: X target lands become Forests until end of turn.";
 
@@ -24,7 +24,7 @@ export default defineCard({
       effect: {
         kind: "for-each-target",
         from: 0,
-        effect: { kind: "add-types", target: 0, setSubtypes: ["Forest"], duration: "end-of-turn" },
+        effect: { kind: "become", target: 0, setSubtypes: ["Forest"], duration: "end-of-turn" },
       },
       resolve: null,
       text: TEXT,

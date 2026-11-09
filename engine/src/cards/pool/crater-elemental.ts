@@ -8,7 +8,7 @@ import { defineCard } from "../define.js";
 //   [2015-02-25] Crater Elemental's last ability overrides all previous effects that set its power
 //     to a specific value.
 //
-// "Has base power 8" sets power alone (`animate` with no `toughness`, rule
+// "Has base power 8" sets power alone (`become` with no `toughness`, rule
 // 613.4b); formidable is Atarka Beastbreaker's activation condition.
 const SAC_TEXT = "{R}, {T}, Sacrifice this creature: It deals 4 damage to target creature.";
 const FORMIDABLE_TEXT =
@@ -39,7 +39,7 @@ export default defineCard({
         compare: { op: "gte", n: 8 },
       },
       targets: [],
-      effect: { kind: "animate", target: "source", power: 8, addTypes: [], addSubtypes: [], duration: "end-of-turn" },
+      effect: { kind: "become", target: "source", power: 8, duration: "end-of-turn" },
       resolve: null,
       text: FORMIDABLE_TEXT,
     },

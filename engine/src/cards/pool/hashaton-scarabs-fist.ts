@@ -33,7 +33,7 @@ export default defineCard({
           asCard: true,
           tapped: true,
           who: "you",
-          exceptions: { setColors: ["B"], setSubtypes: ["Zombie"], basePt: [4, 4] },
+          exceptions: { setColors: ["B"], setSubtypes: ["Zombie"], power: 4, toughness: 4 },
         },
       },
       resolve: null,

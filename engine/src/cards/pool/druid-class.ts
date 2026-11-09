@@ -30,7 +30,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "animate", target: 0, addTypes: ["creature"], addSubtypes: [], keywords: ["haste"], duration: "permanent" },
+          { kind: "become", target: 0, addTypes: ["creature"], keywords: ["haste"], duration: "permanent" },
           {
             kind: "grant-static",
             target: 0,

@@ -18,7 +18,7 @@ const MODES: ModeOption[] = COLORS.map(([color, word]) => ({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "become-color", target: "source", colors: [color], duration: "end-of-turn" },
+      { kind: "become", target: "source", setColors: [color], duration: "end-of-turn" },
       { kind: "grant-protection", asHexproof: true, target: "source", from: { colors: [color] }, duration: "end-of-turn" },
     ],
   },

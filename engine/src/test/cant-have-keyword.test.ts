@@ -1,6 +1,6 @@
 /**
  * "Can't have or gain" a keyword — `StaticAbility.cantHaveKeywords` (the
- * Archetypes) and the `lose-keywords` effect's `cantHave` (Arcane Lighthouse):
+ * Archetypes) and the `become` effect's `cantHave` (Arcane Lighthouse):
  * no timestamp beats it, a static grant waits it out, and a resolving grant
  * made while it applies is never created. Colossus Hammer is the plain
  * "loses flying" beside it, which timestamps do decide. Written from the
@@ -62,11 +62,10 @@ describe("can't have or gain a keyword (the Archetypes)", () => {
     game.debugApplyEffect(
       B,
       {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 4,
         toughness: 4,
-        addTypes: [],
         addSubtypes: ["Elemental"],
         keywords: ["flying", "vigilance"],
         duration: "end-of-turn",

@@ -22,7 +22,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "add-counter", target: "source", counter: "+1/+1", amount: 3 },
-          { kind: "add-types", target: "source", addSubtypes: ["Demon"], addColors: ["B"], duration: "permanent" },
+          { kind: "become", target: "source", addSubtypes: ["Demon"], addColors: ["B"], duration: "permanent" },
         ],
       },
       resolve: null,

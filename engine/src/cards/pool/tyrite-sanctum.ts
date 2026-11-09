@@ -19,7 +19,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "add-types", target: 0, addSubtypes: ["God"], duration: "permanent" },
+          { kind: "become", target: 0, addSubtypes: ["God"], duration: "permanent" },
           { kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 },
         ],
       },

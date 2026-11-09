@@ -25,7 +25,7 @@ export default defineCard({
         effect: {
           kind: "for-each-permanent",
           filter: { inSet: "trigger-batch", isSource: false },
-          effect: { kind: "animate", target: 0, power: 4, toughness: 3, addTypes: [], addSubtypes: [], duration: "end-of-turn" },
+          effect: { kind: "become", target: 0, power: 4, toughness: 3, duration: "end-of-turn" },
         },
       },
       resolve: null,

@@ -10,7 +10,7 @@ import { defineCard } from "../define.js";
 //   [2004-10-04] The new color replaces all previous colors.
 //
 // Caldera Kavu's colour ability: the colour is chosen on resolution, as a
-// `modal`, and `become-color` replaces every previous colour.
+// `modal`, and `become` replaces every previous colour.
 const COLOR = "{G}: This creature becomes the color of your choice until end of turn.";
 
 const COLORS: readonly (readonly [Color, string])[] = [
@@ -23,7 +23,7 @@ const COLORS: readonly (readonly [Color, string])[] = [
 
 const MODES: ModeOption[] = COLORS.map(([color, word]) => ({
   text: word,
-  effect: { kind: "become-color", target: "source", colors: [color], duration: "end-of-turn" },
+  effect: { kind: "become", target: "source", setColors: [color], duration: "end-of-turn" },
 }));
 
 export default defineCard({

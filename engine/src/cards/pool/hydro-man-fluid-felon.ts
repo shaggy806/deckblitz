@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 
 // EDHREC rank 11993.
 //
-// "He becomes a land" replaces his card types (`add-types`' setTypes — his creature
+// "He becomes a land" replaces his card types (`become`' setTypes — his creature
 // types go with the creature type), and the mana ability is granted for the same
 // while: both until his controller's next turn begins.
 //
@@ -43,7 +43,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "untap", target: "source" },
-          { kind: "add-types", target: "source", setTypes: ["land"], duration: "until-your-next-turn" },
+          { kind: "become", target: "source", setTypes: ["land"], duration: "until-your-next-turn" },
           {
             kind: "grant-activated",
             target: "source",

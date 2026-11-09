@@ -44,7 +44,7 @@ export default defineCard({
         effects: [
           { kind: "add-counter", target: 0, counter: "blight", amount: 1 },
           {
-            kind: "lose-abilities",
+            kind: "become", loseAbilities: true,
             target: 0,
             loseLandTypes: true,
             activated: [BLIGHT_MANA],

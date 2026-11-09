@@ -10,12 +10,11 @@ export default defineCard({
     "with base power and toughness 1/1.",
   targets: ["creature"],
   effect: {
-    kind: "animate",
+    kind: "become",
     target: 0,
     power: 1,
     toughness: 1,
     addTypes: ["creature"],
-    addSubtypes: [],
     setSubtypes: ["Frog"],
     setColors: ["U"],
     loseAbilities: true,

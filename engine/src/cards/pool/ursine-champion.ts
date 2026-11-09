@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 
 // EDHREC rank 28223.
 //
-// "Becomes a Bear Berserker" replaces its creature types (`add-types`' `setSubtypes`):
+// "Becomes a Bear Berserker" replaces its creature types (`become`' `setSubtypes`):
 // no longer a Human.
 
 export default defineCard({
@@ -22,7 +22,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "modify-pt", target: "source", power: 3, toughness: 3, duration: "end-of-turn" },
-          { kind: "add-types", target: "source", setSubtypes: ["Bear", "Berserker"], duration: "end-of-turn" },
+          { kind: "become", target: "source", setSubtypes: ["Bear", "Berserker"], duration: "end-of-turn" },
         ],
       },
       resolve: null,

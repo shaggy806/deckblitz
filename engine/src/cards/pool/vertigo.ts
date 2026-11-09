@@ -13,7 +13,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "damage", amount: 2, target: 0 },
-      { kind: "lose-keywords", target: 0, keywords: ["flying"], duration: "end-of-turn" },
+      { kind: "become", target: 0, loseKeywords: ["flying"], duration: "end-of-turn" },
     ],
   },
 });

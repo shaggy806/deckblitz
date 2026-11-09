@@ -590,6 +590,7 @@ import _poolOctopusUmbra from "../pool/octopus-umbra.js";
 import _poolOfHerbsAndStewedRabbit from "../pool/of-herbs-and-stewed-rabbit.js";
 import _poolOldGrowthEducator from "../pool/old-growth-educator.js";
 import _poolOldOneEye from "../pool/old-one-eye.js";
+import _poolOmniChangeling from "../pool/omni-changeling.js";
 import _poolOnTheTrail from "../pool/on-the-trail.js";
 import _poolOnakkeOgre from "../pool/onakke-ogre.js";
 import _poolOnduRising from "../pool/ondu-rising.js";
@@ -1606,6 +1607,7 @@ const shard: CardShard = {
     _poolOfHerbsAndStewedRabbit,
     _poolOldGrowthEducator,
     _poolOldOneEye,
+    _poolOmniChangeling,
     _poolOnTheTrail,
     _poolOnakkeOgre,
     _poolOnduRising,

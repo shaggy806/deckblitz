@@ -152,7 +152,7 @@ describe("token copies", () => {
       .reduce((n, id) => n + (game.state.objects[id].stackCount ?? 1), 0);
   /** Applied Geometry's copy, with nothing read after it. */
   const fractal = (bears: ObjectId): [EffectSpec, TargetRef[]] => [
-    { kind: "create-token-copy", of: 0, count: 1, who: "you", exceptions: { basePt: [0, 0], addTypes: ["creature"], addSubtypes: ["Fractal"] } },
+    { kind: "create-token-copy", of: 0, count: 1, who: "you", exceptions: { power: 0, toughness: 0, addTypes: ["creature"], addSubtypes: ["Fractal"] } },
     [ref(bears)],
   ];
 

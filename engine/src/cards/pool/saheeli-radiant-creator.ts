@@ -49,7 +49,7 @@ export default defineCard({
             count: 1,
             who: "you",
             sacrificeAtEndStep: true,
-            exceptions: { basePt: [5, 5], addTypes: ["artifact", "creature"], keywords: ["haste"] },
+            exceptions: { power: 5, toughness: 5, addTypes: ["artifact", "creature"], keywords: ["haste"] },
           },
           text: WHEN_YOU_DO,
         },

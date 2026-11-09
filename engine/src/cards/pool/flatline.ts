@@ -9,7 +9,7 @@ import { defineCard } from "../define.js";
 //     existing effects or counters that raise, lower, or switch a creature's power and/or
 //     toughness continue to apply to the creature's newly-set power and toughness.
 //
-// `animate-all` with no added types: a layer-7b base P/T set over the matches
+// `become` with no added types: a layer-7b base P/T set over the matches
 // fixed as it resolves (both rulings).
 
 export default defineCard({
@@ -19,7 +19,7 @@ export default defineCard({
   types: ["instant"],
   text: "Creatures your opponents control have base power and toughness 0/1 until end of turn.",
   effect: {
-    kind: "animate-all",
+    kind: "become",
     filter: { type: "creature", controlledBy: "opponent" },
     power: 0,
     toughness: 1,

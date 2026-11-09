@@ -51,7 +51,7 @@ const settle = (game: Game): void => {
 };
 const ZOMBIE: CopyExceptions = {
   name: "Test Zombie",
-  basePt: [3, 3],
+  power: 3, toughness: 3,
   setColors: ["B"],
   addTypes: ["artifact"],
   addSubtypes: ["Zombie"],
@@ -107,7 +107,7 @@ describe("copy exceptions", () => {
     const bears = game.debugSpawn("Grizzly Bears", A, "battlefield");
     const token = copyOf(game, bears, ZOMBIE);
     expect(looks(game, copyOf(game, token))).toEqual(ZOMBIE_BEAR);
-    const small = copyOf(game, token, { basePt: [1, 1] });
+    const small = copyOf(game, token, { power: 1, toughness: 1 });
     expect(looks(game, small)).toEqual({ ...ZOMBIE_BEAR, pt: [1, 1] });
   });
 
@@ -239,7 +239,7 @@ describe("copy exceptions", () => {
     const before = new Set(game.state.zones.shared.battlefield);
     game.debugApplyEffect(
       A,
-      { kind: "create-token-copy", of: 0, count: 1, who: "you", notLegendary: true },
+      { kind: "create-token-copy", of: 0, count: 1, who: "you", exceptions: { removeSupertypes: ["legendary"] } },
       [{ kind: "object", object: krenko }],
     );
     const copy = game.state.zones.shared.battlefield.find((id) => !before.has(id))!;

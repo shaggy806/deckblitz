@@ -10,7 +10,7 @@ import { defineCard } from "../define.js";
 //     ability can be activated again.
 //
 // A Vehicle with no crew: the exhaust ability makes it an artifact creature
-// for as long as it stays (crew's `add-types`, with no end), its printed 0/0
+// for as long as it stays (crew's `become`, with no end), its printed 0/0
 // then its power and toughness (rule 301.7b) with the three counters on top.
 // The Vehicle itself may tap to help pay the waterbend cost.
 
@@ -43,7 +43,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "add-types", target: "source", addTypes: ["artifact", "creature"], duration: "permanent" },
+          { kind: "become", target: "source", addTypes: ["artifact", "creature"], duration: "permanent" },
           { kind: "add-counter", target: "source", counter: "+1/+1", amount: 3 },
         ],
       },

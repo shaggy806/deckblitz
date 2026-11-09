@@ -27,12 +27,10 @@ export default defineCard({
       condition: { kind: "controls", filter: { type: "planeswalker", subtype: "Oko" }, atLeast: 1 },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 10,
         toughness: 10,
-        addTypes: [],
-        addSubtypes: [],
         duration: "end-of-turn",
       },
       resolve: null,

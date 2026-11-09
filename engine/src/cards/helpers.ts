@@ -952,7 +952,7 @@ export const awaken = (
         ...steps,
         { kind: "add-counter", target: land, counter: "+1/+1", amount: n },
         {
-          kind: "animate",
+          kind: "become",
           target: land,
           power: 0,
           toughness: 0,
@@ -1058,7 +1058,7 @@ export const afflict = (n: number): TriggeredAbility => ({
 export const crew = (n: number, text = `Crew ${n}`): ActivatedAbility => ({
   cost: { mana: null, tap: false, tapOthers: { count: 0, totalPower: n, filter: { type: "creature" } } },
   targets: [],
-  effect: { kind: "add-types", target: "source", addTypes: ["artifact", "creature"], duration: "end-of-turn" },
+  effect: { kind: "become", target: "source", addTypes: ["artifact", "creature"], duration: "end-of-turn" },
   resolve: null,
   crew: true,
   text,
@@ -1895,7 +1895,7 @@ export const offspringTrigger = (): TriggeredAbility => ({
   trigger: { on: "enters-battlefield", who: "self" },
   condition: { kind: "self-kicked" },
   targets: [],
-  effect: { kind: "create-token-copy", of: "source", count: 1, basePt: [1, 1] },
+  effect: { kind: "create-token-copy", of: "source", count: 1, exceptions: { power: 1, toughness: 1 } },
   resolve: null,
   text: "When this creature enters, if its offspring cost was paid, create a 1/1 token copy of it.",
 });
@@ -1996,7 +1996,7 @@ export const GIFT_KICKER = { cost: "", keyword: "gift" } as const;
  * creature" keeps every other type and subtype it had and replaces its
  * creature types (rule 205.1b), for good, from the moment it enters (rule
  * 614.12): `addTypes`, `setSubtypes`. Assimilating a permanent is
- * `gain-control`, `add-counter` and `add-types` with the same parts. */
+ * `gain-control`, `add-counter` and `become` with the same parts. */
 export const ASSIMILATE = {
   withCounters: { kind: "+1/+1", amount: 1 },
   enterAs: { addTypes: ["artifact", "creature"], setSubtypes: ["Borg"] },
@@ -2047,7 +2047,7 @@ export const eternalizeAbility = (cost: string, text: string): ActivatedAbility 
     count: 1,
     who: "you",
     asCard: true,
-    exceptions: { basePt: [4, 4], setColors: ["B"], addSubtypes: ["Zombie"], noManaCost: true },
+    exceptions: { power: 4, toughness: 4, setColors: ["B"], addSubtypes: ["Zombie"], noManaCost: true },
   },
   resolve: null,
   text,

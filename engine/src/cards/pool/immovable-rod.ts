@@ -27,7 +27,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "lose-abilities", target: 0, duration: "while-source-tapped" },
+          { kind: "become", loseAbilities: true, target: 0, duration: "while-source-tapped" },
           { kind: "restrict", target: 0, restrictions: ["cant-attack", "cant-block"], duration: "while-source-tapped" },
         ],
       },

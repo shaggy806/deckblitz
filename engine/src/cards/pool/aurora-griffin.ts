@@ -16,7 +16,7 @@ export default defineCard({
     {
       cost: { mana: "{W}", tap: false },
       targets: ["permanent"],
-      effect: { kind: "become-color", target: 0, colors: ["W"], duration: "end-of-turn" },
+      effect: { kind: "become", target: 0, setColors: ["W"], duration: "end-of-turn" },
       resolve: null,
       text: "{W}: Target permanent becomes white until end of turn.",
     },

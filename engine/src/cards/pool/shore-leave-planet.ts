@@ -32,7 +32,7 @@ export default defineCard({
         target: "source",
         of: 0,
         until: "end-of-turn",
-        exceptions: { notLegendary: true, addTypes: ["artifact"], addSubtypes: ["Robot"] },
+        exceptions: { removeSupertypes: ["legendary"], addTypes: ["artifact"], addSubtypes: ["Robot"] },
       },
       resolve: null,
       text: COPY_TEXT,

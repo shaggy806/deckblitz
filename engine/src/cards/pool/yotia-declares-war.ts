@@ -57,12 +57,11 @@ export default defineCard({
       at: [3],
       targets: [{ kind: "optional", of: { kind: "permanent", whose: "you", filter: { type: "artifact" } } }],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 4,
         toughness: 4,
         addTypes: ["artifact", "creature"],
-        addSubtypes: [],
         duration: "end-of-turn",
       },
       resolve: null,

@@ -33,7 +33,7 @@ export default defineCard({
         kind: "create-token-copy",
         of: "trigger-object",
         count: 1,
-        notLegendary: true,
+        exceptions: { removeSupertypes: ["legendary"] },
       },
       resolve: null,
       text:

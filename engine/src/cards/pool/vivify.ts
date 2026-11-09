@@ -13,12 +13,11 @@ export default defineCard({
     kind: "sequence",
     effects: [
       {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 3,
         toughness: 3,
         addTypes: ["creature"],
-        addSubtypes: [],
         duration: "end-of-turn",
       },
       { kind: "draw", amount: 1 },

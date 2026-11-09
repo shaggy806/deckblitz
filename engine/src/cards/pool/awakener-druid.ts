@@ -21,7 +21,7 @@ export default defineCard({
       trigger: { on: "enters-battlefield", who: "self" },
       targets: [{ kind: "permanent", filter: { subtype: "Forest" } }],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 4,
         toughness: 5,

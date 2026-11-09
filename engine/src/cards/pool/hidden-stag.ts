@@ -4,7 +4,7 @@ import { defineCard } from "../define.js";
 //
 // Hidden Herd's animation, on any land an opponent plays (`plays-land`, the
 // special action — never a land an effect puts onto the battlefield); and back
-// for good: "it becomes an enchantment" replaces its card types (`add-types`'
+// for good: "it becomes an enchantment" replaces its card types (`become`'
 // `setTypes`, rule 205.1a), so its creature types go with them. Each is a
 // later timestamp than the one before, so the latest wins.
 //
@@ -28,13 +28,11 @@ export default defineCard({
       condition: { kind: "source", filter: { type: "enchantment" } },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 3,
         toughness: 2,
         setTypes: ["creature"],
-        addTypes: [],
-        addSubtypes: [],
         setSubtypes: ["Elk", "Beast"],
         duration: "permanent",
       },
@@ -45,7 +43,7 @@ export default defineCard({
       trigger: { on: "plays-land", who: "you" },
       condition: { kind: "source", filter: { type: "creature" } },
       targets: [],
-      effect: { kind: "add-types", target: "source", setTypes: ["enchantment"], duration: "permanent" },
+      effect: { kind: "become", target: "source", setTypes: ["enchantment"], duration: "permanent" },
       resolve: null,
       text: HIDE_TEXT,
     },

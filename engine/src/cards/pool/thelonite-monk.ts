@@ -15,7 +15,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: true, sacrifice: { filter: { type: "creature", colors: ["G"] } } },
       targets: ["land"],
-      effect: { kind: "add-types", target: 0, setSubtypes: ["Forest"], duration: "permanent" },
+      effect: { kind: "become", target: 0, setSubtypes: ["Forest"], duration: "permanent" },
       resolve: null,
       text: "{T}, Sacrifice a green creature: Target land becomes a Forest.",
     },

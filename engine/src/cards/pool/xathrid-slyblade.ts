@@ -21,7 +21,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "lose-keywords", target: "source", keywords: ["hexproof"], duration: "end-of-turn" },
+          { kind: "become", target: "source", loseKeywords: ["hexproof"], duration: "end-of-turn" },
           { kind: "grant-keyword", target: "source", keyword: "first-strike", duration: "end-of-turn" },
           { kind: "grant-keyword", target: "source", keyword: "deathtouch", duration: "end-of-turn" },
         ],

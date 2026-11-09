@@ -20,7 +20,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "add-types", target: 0, setSubtypes: ["Swamp"], duration: "permanent" },
+          { kind: "become", target: 0, setSubtypes: ["Swamp"], duration: "permanent" },
           { kind: "exile", target: "trigger-object" },
         ],
       },

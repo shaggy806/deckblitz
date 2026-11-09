@@ -25,7 +25,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "modify-pt", target: 0, power: -2, toughness: 0, duration: "until-your-next-turn" },
-          { kind: "lose-keywords", target: 0, keywords: ["flying"], duration: "until-your-next-turn" },
+          { kind: "become", target: 0, loseKeywords: ["flying"], duration: "until-your-next-turn" },
         ],
       },
       resolve: null,

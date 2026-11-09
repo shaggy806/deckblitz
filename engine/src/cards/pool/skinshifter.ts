@@ -32,12 +32,10 @@ export default defineCard({
           {
             text: "Until end of turn, this creature becomes a Rhino with base power and toughness 4/4 and gains trample.",
             effect: {
-              kind: "animate",
+              kind: "become",
               target: "source",
               power: 4,
               toughness: 4,
-              addTypes: [],
-              addSubtypes: [],
               setSubtypes: ["Rhino"],
               keywords: ["trample"],
               duration: "end-of-turn",
@@ -46,12 +44,10 @@ export default defineCard({
           {
             text: "Until end of turn, this creature becomes a Bird with base power and toughness 2/2 and gains flying.",
             effect: {
-              kind: "animate",
+              kind: "become",
               target: "source",
               power: 2,
               toughness: 2,
-              addTypes: [],
-              addSubtypes: [],
               setSubtypes: ["Bird"],
               keywords: ["flying"],
               duration: "end-of-turn",
@@ -60,12 +56,10 @@ export default defineCard({
           {
             text: "Until end of turn, this creature becomes a Plant with base power and toughness 0/8.",
             effect: {
-              kind: "animate",
+              kind: "become",
               target: "source",
               power: 0,
               toughness: 8,
-              addTypes: [],
-              addSubtypes: [],
               setSubtypes: ["Plant"],
               duration: "end-of-turn",
             },

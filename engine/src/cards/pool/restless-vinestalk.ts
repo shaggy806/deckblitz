@@ -10,7 +10,7 @@ import { defineCard } from "../define.js";
 //     last ability will still trigger whenever it attacks.
 
 // Restless Ridgeline's shape; the attack trigger sets a base P/T with Azure
-// Beastbinder's `animate` that adds no types (layer 7b, so pumps and counters
+// Beastbinder's `become` that adds no types (layer 7b, so pumps and counters
 // still apply over it).
 const ANIMATE_TEXT =
   "{3}{G}{U}: Until end of turn, this land becomes a 5/5 green and blue Plant creature with trample. It's still a land.";
@@ -34,7 +34,7 @@ export default defineCard({
       cost: { mana: "{3}{G}{U}", tap: false },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 5,
         toughness: 5,
@@ -54,12 +54,10 @@ export default defineCard({
       trigger: { on: "attacks", who: "self" },
       targets: [{ kind: "optional", of: { kind: "other", of: "creature" } }],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 3,
         toughness: 3,
-        addTypes: [],
-        addSubtypes: [],
         duration: "end-of-turn",
       },
       resolve: null,

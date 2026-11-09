@@ -22,7 +22,7 @@ export default defineCard({
         filter: { type: "creature", controlledBy: "you", anyOf: [{ subtype: "Sliver" }, { token: false }] },
       },
       addsChosenCreatureType: true,
-      typesOutsideBattlefield: { ofType: "creature", addsChosenCreatureType: true },
+      outsideBattlefield: { ofType: ["creature"], addsChosenCreatureType: true },
       text: TYPE_TEXT,
     },
   ],

@@ -19,7 +19,7 @@ export default defineCard({
       // drops Equipment, an artifact subtype, with the artifact type), then
       // artifact is added back in the same layer-4 modifier, and Spirit.
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 4,
         toughness: 4,

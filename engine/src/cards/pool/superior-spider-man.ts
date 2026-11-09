@@ -21,7 +21,7 @@ export default defineCard({
   copyOnEnter: {
     filter: { type: "creature" },
     from: "graveyards",
-    except: { name: "Superior Spider-Man", basePt: [4, 4], addSubtypes: ["Spider", "Human", "Hero"] },
+    except: { name: "Superior Spider-Man", power: 4, toughness: 4, addSubtypes: ["Spider", "Human", "Hero"] },
     whenYouDo: { effect: { kind: "exile", target: "trigger-object" }, text: WHEN_YOU_DO },
   },
 });

@@ -23,7 +23,7 @@ export default defineCard({
       {
         text: "+ {1} — All creatures lose all abilities until end of turn.",
         spreeCost: "{1}",
-        effect: { kind: "lose-abilities-all", filter: { type: "creature" }, duration: "end-of-turn" },
+        effect: { kind: "become", loseAbilities: true, filter: { type: "creature" }, duration: "end-of-turn" },
       },
       {
         text: "+ {1} — Choose a creature you control. It gains indestructible until end of turn.",

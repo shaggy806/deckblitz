@@ -64,7 +64,7 @@ export default defineCard({
             of: 0,
             count: 1,
             who: "you",
-            exceptions: { basePt: [4, 4], setColors: ["B"], setSubtypes: ["Zombie"] },
+            exceptions: { power: 4, toughness: 4, setColors: ["B"], setSubtypes: ["Zombie"] },
           },
         ],
       },

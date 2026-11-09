@@ -24,14 +24,14 @@ export default defineCard({
     {
       cost: { mana: "{R}", tap: false },
       targets: ["creature"],
-      effect: { kind: "add-types", target: 0, setSubtypes: ["Coward"], duration: "end-of-turn" },
+      effect: { kind: "become", target: 0, setSubtypes: ["Coward"], duration: "end-of-turn" },
       resolve: null,
       text: COWARD_TEXT,
     },
     {
       cost: { mana: "{2}{R}", tap: false },
       targets: ["creature"],
-      effect: { kind: "add-types", target: 0, setSubtypes: ["Warrior"], duration: "end-of-turn" },
+      effect: { kind: "become", target: 0, setSubtypes: ["Warrior"], duration: "end-of-turn" },
       resolve: null,
       text: WARRIOR_TEXT,
     },

@@ -29,12 +29,10 @@ const MODES: EffectSpec = {
         effects: [
           { kind: "add-counter", target: 0, counter: "saurian", amount: 1 },
           {
-            kind: "animate",
+            kind: "become",
             target: 0,
             power: 5,
             toughness: 5,
-            addTypes: [],
-            addSubtypes: [],
             setSubtypes: ["Dinosaur"],
             setColors: ["G"],
             duration: { whileCounter: "saurian" },

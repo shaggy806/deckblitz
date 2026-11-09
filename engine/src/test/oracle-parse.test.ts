@@ -899,7 +899,7 @@ describe("the players a sentence names by another target, the Aura's host and th
     const dragon = face(CREATURE, "Whenever this creature attacks, creatures defending player controls get -1/-1 until end of turn.");
     expect(dragon.triggered[0].effect).toMatchObject({ kind: "modify-pt-all", controlledByPlayer: "trigger-player", power: -1 });
     expect(face("Sorcery", "Until your next turn, creatures target player controls have base power and toughness 1/1.").effect).toEqual({
-      kind: "animate-all",
+      kind: "become",
       filter: { type: "creature", controlledBy: "you" },
       controlledByTarget: 0,
       power: 1,
@@ -3315,7 +3315,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     ]);
     expect(
       face('{T}: Target creature loses banding and all "bands with other" abilities until end of turn.').activated[0].effect,
-    ).toEqual({ kind: "lose-keywords", target: 0, keywords: ["banding", "bands-with-other"], duration: "end-of-turn" });
+    ).toEqual({ kind: "become", target: 0, loseKeywords: ["banding", "bands-with-other"], duration: "end-of-turn" });
     expect(face("{3}: Attacking creatures banded with this creature gain trample until end of turn.").activated[0].effect).toEqual({
       kind: "grant-keyword-all",
       filter: { type: "creature", attacking: true, bandedWithSource: true },
@@ -3738,7 +3738,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
           { kind: "return-to-hand", target: 0 },
           { kind: "add-counter", target: 1, counter: "+1/+1", amount: 3 },
           {
-            kind: "animate",
+            kind: "become",
             target: 1,
             power: 0,
             toughness: 0,
@@ -4198,7 +4198,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     });
     const lace = face("Target spell or permanent becomes black. (Mana symbols on that permanent remain unchanged.)", "Instant");
     expect(lace.targets).toEqual([{ kind: "spell-or-permanent" }]);
-    expect(lace.effect).toEqual({ kind: "become-color", target: 0, colors: ["B"], duration: "permanent" });
+    expect(lace.effect).toEqual({ kind: "become", target: 0, setColors: ["B"], duration: "permanent" });
     expect(lace.complete).toBe(true);
   });
 
@@ -4239,10 +4239,9 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     const faerie = face("{U}: Target permanent becomes blue in addition to its other colors until end of turn.", "Creature — Faerie Wizard");
     expect(faerie.activated[0].targets).toEqual(["permanent"]);
     expect(faerie.activated[0].effect).toEqual({
-      kind: "become-color",
+      kind: "become",
       target: 0,
-      colors: ["U"],
-      inAddition: true,
+      addColors: ["U"],
       duration: "end-of-turn",
     });
     const unctus = face(
@@ -4251,7 +4250,7 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     );
     expect(unctus.activated[0].targets).toEqual(["creature-you-control"]);
     expect(unctus.activated[0].effect).toEqual({
-      kind: "add-types",
+      kind: "become",
       target: 0,
       addTypes: ["artifact"],
       addColors: ["U"],
@@ -5051,21 +5050,17 @@ describe("templates for features built since the parser began (2026-10-11)", () 
   it("base power or base toughness alone (effect:set-base-power-only)", () => {
     const wak = face("{T}: Target creature with flying has base power 0 until end of turn.", "Land");
     expect(wak.activated[0].effect).toEqual({
-      kind: "animate",
+      kind: "become",
       target: 0,
       power: 0,
-      addTypes: [],
-      addSubtypes: [],
       duration: "end-of-turn",
     });
     expect(wak.complete).toBe(true);
     const duck = face("{3}: Until end of turn, this creature has base power 4 and gains trample.", "Creature — Turtle Bird");
     expect(duck.activated[0].effect).toEqual({
-      kind: "animate",
+      kind: "become",
       target: "source",
       power: 4,
-      addTypes: [],
-      addSubtypes: [],
       keywords: ["trample"],
       duration: "end-of-turn",
     });
@@ -5073,19 +5068,19 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       "{2}, {T}: Until end of turn, target creature you control gains flying and has base toughness 1.",
       "Artifact",
     );
-    expect(chariot.activated[0].effect).toMatchObject({ kind: "animate", target: 0, toughness: 1, keywords: ["flying"] });
+    expect(chariot.activated[0].effect).toMatchObject({ kind: "become", target: 0, toughness: 1, keywords: ["flying"] });
     expect(chariot.activated[0].effect.power).toBeUndefined();
     const mangler = face(
       "{1}{U}: This creature's base power becomes equal to target creature's power. (This effect lasts indefinitely.)",
       "Creature — Beast",
     );
-    expect(mangler.activated[0].effect).toMatchObject({ kind: "animate", target: "source", power: { powerOf: 0 }, duration: "permanent" });
+    expect(mangler.activated[0].effect).toMatchObject({ kind: "become", target: "source", power: { powerOf: 0 }, duration: "permanent" });
     const wall = face(
       "At the beginning of your upkeep, this creature's base toughness becomes equal to 1 plus the number of creature cards in your graveyard. (This effect lasts indefinitely.)",
       "Creature — Wall",
     );
     expect(wall.triggered[0].effect).toMatchObject({
-      kind: "animate",
+      kind: "become",
       target: "source",
       toughness: { sum: [1, { countInGraveyard: { type: "creature", ownedBy: "you" } }] },
       duration: "permanent",
@@ -5421,7 +5416,7 @@ describe("block limits, lost abilities and chosen types (B249)", () => {
   it("reads 'becomes the creature type of your choice'", () => {
     expect(face("Creature — Illusion", "{1}: This creature becomes the creature type of your choice until end of turn.").activated[0].effect).toEqual({
       kind: "choose-creature-type",
-      then: { kind: "add-types", target: "source", setSubtypes: ["$chosen"], duration: "end-of-turn" },
+      then: { kind: "become", target: "source", setSubtypes: ["$chosen"], duration: "end-of-turn" },
     });
   });
 });
@@ -5559,7 +5554,7 @@ describe("damage by this source, switches, defending-player restrictions, a targ
     expect(ravine.activated[0].effect).toMatchObject({
       kind: "sequence",
       effects: [
-        { kind: "animate", target: "source", power: 3, toughness: 3, addTypes: ["creature"], addSubtypes: ["Elemental"], setColors: ["R", "G"], duration: "end-of-turn" },
+        { kind: "become", target: "source", power: 3, toughness: 3, addTypes: ["creature"], addSubtypes: ["Elemental"], setColors: ["R", "G"], duration: "end-of-turn" },
         { kind: "grant-triggered", target: "source", ability: { trigger: { on: "attacks", who: "self" } }, duration: "end-of-turn" },
       ],
     });
@@ -6984,7 +6979,7 @@ describe("face down by an effect (rule 708.2)", () => {
     ).toEqual({
       kind: "put-onto-battlefield",
       target: 0,
-      enterAs: { keywords: ["flying", "haste"], basePt: [4, 4], addSubtypes: ["Construct"], addTypes: ["artifact", "creature"] },
+      enterAs: { keywords: ["flying", "haste"], power: 4, toughness: 4, addSubtypes: ["Construct"], addTypes: ["artifact", "creature"] },
     });
     expect(
       parseEffect(
@@ -7010,7 +7005,7 @@ describe("face down by an effect (rule 708.2)", () => {
       "Copy target creature spell you control, except it isn't legendary if the spell is legendary. (A copy of a creature spell becomes a token.)",
     );
     expect(major.complete).toBe(true);
-    expect(major.effect).toEqual({ kind: "copy-spell", target: 0, except: { notLegendary: true } });
+    expect(major.effect).toEqual({ kind: "copy-spell", target: 0, except: { removeSupertypes: ["legendary"] } });
     expect(major.targets).toEqual([{ kind: "spell", whose: "you", filter: { type: "creature" } }]);
     const twin = parseEffect("Copy target instant or sorcery spell. You may choose new targets for the copy.", ctx());
     expect(twin.effect).toEqual({ kind: "copy-spell", target: 0, newTargets: true });
@@ -7022,7 +7017,7 @@ describe("face down by an effect (rule 708.2)", () => {
     );
     expect(toy.triggered[0].effect).toMatchObject({
       kind: "may",
-      effect: { kind: "copy-spell", target: "trigger-spell", except: { basePt: [1, 1], addSubtypes: ["Spirit"], addTypes: ["artifact"] } },
+      effect: { kind: "copy-spell", target: "trigger-spell", except: { power: 1, toughness: 1, addSubtypes: ["Spirit"], addTypes: ["artifact"] } },
     });
     // Outside a cast trigger "copy it" isn't the spell; an exception it
     // doesn't read stays to author.
@@ -9363,21 +9358,21 @@ describe("cards outside the battlefield", () => {
     ).toEqual({ filter: { notTypes: ["land"] }, reducedBy: 2 });
     expect(
       statics("Artifact", "Each creature card in your graveyard has the chosen creature type in addition to its other types.")
-        .typesOutsideBattlefield,
-    ).toEqual({ ofType: "creature", zones: ["graveyard"], addsChosenCreatureType: true });
+        .outsideBattlefield,
+    ).toEqual({ ofType: ["creature"], zones: ["graveyard"], addsChosenCreatureType: true });
     const same =
       "The same is true for creature spells you control and creature cards you own that aren't on the battlefield.";
     const conspiracy = statics("Enchantment", `Creatures you control are the chosen type. ${same}`);
     expect(conspiracy.setsChosenCreatureType).toBe(true);
-    expect(conspiracy.typesOutsideBattlefield).toEqual({ ofType: "creature", setsChosenCreatureType: true });
-    expect(statics("Enchantment", `Creatures you control are artifacts in addition to their other types. ${same}`).typesOutsideBattlefield).toEqual({
-      ofType: "creature",
+    expect(conspiracy.outsideBattlefield).toEqual({ ofType: ["creature"], setsChosenCreatureType: true });
+    expect(statics("Enchantment", `Creatures you control are artifacts in addition to their other types. ${same}`).outsideBattlefield).toEqual({
+      ofType: ["creature"],
       addTypes: ["artifact"],
     });
     expect(
       statics("Creature — Plant", "Lands you control and land cards you own that aren't on the battlefield are Deserts in addition to their other types.")
-        .typesOutsideBattlefield,
-    ).toEqual({ ofType: "land", addSubtypes: ["Desert"] });
+        .outsideBattlefield,
+    ).toEqual({ ofType: ["land"], addSubtypes: ["Desert"] });
   });
 
   it("reads 'gains [keyword] until end of turn' of a graveyard card, and 'whenever you foretell a card'", () => {
@@ -9515,7 +9510,7 @@ describe("token copies of a linked source", () => {
         "Enchantment — Aura",
         "Enchant creature\nAt the beginning of your upkeep, create a token that's a copy of enchanted creature, except the token is 1/1.",
       ).triggered[0].effect,
-    ).toEqual({ kind: "create-token-copy", of: "enchanted", count: 1, who: "you", basePt: [1, 1] });
+    ).toEqual({ kind: "create-token-copy", of: "enchanted", count: 1, who: "you", exceptions: { power: 1, toughness: 1 } });
   });
 
   it("reads the card exiled with this: one chosen, or the exiled card", () => {
@@ -9536,8 +9531,7 @@ describe("token copies of a linked source", () => {
       kind: "create-token-copy",
       of: { paid: "exiled" },
       count: 1,
-      notLegendary: true,
-      exceptions: { addSubtypes: ["Mutant"] },
+      exceptions: { removeSupertypes: ["legendary"], addSubtypes: ["Mutant"] },
     });
   });
 });
@@ -10136,12 +10130,12 @@ describe("entering as a copy, or as a choice of forms", () => {
       "As this creature enters, it becomes your choice of a 3/3 artifact creature, a 2/2 artifact creature with flying, or a 1/6 Wall artifact creature with defender in addition to its other types.",
     ).becomesOnEnter;
     expect(clay.forms.map((f: { label: string }) => f.label)).toEqual(["3/3 artifact creature", "2/2 artifact creature with flying", "1/6 Wall artifact creature with defender"]);
-    expect(clay.forms[2].as).toEqual({ basePt: [1, 6], addTypes: ["artifact", "creature"], addSubtypes: ["Wall"], keywords: ["defender"] });
+    expect(clay.forms[2].as).toEqual({ power: 1, toughness: 6, addTypes: ["artifact", "creature"], addSubtypes: ["Wall"], keywords: ["defender"] });
     const sentry = creature(
       "As this creature enters, flip a coin. If the coin comes up heads, this creature enters as a 5/2 creature with haste. If it comes up tails, this creature enters as a 2/5 creature with defender.",
     ).becomesOnEnter;
     expect(sentry.flip).toBe(true);
-    expect(sentry.forms[0]).toEqual({ label: "5/2 creature with haste", as: { basePt: [5, 2], keywords: ["haste"] } });
+    expect(sentry.forms[0]).toEqual({ label: "5/2 creature with haste", as: { power: 5, toughness: 2, keywords: ["haste"] } });
   });
 });
 
@@ -12038,7 +12032,7 @@ describe("an effect done to each other permanent", () => {
     });
     expect(each("All other creatures lose flying until end of turn.")).toMatchObject({
       kind: "for-each-permanent",
-      effect: { kind: "lose-keywords", target: 0, keywords: ["flying"] },
+      effect: { kind: "become", target: 0, loseKeywords: ["flying"] },
     });
   });
 });
@@ -12280,7 +12274,7 @@ describe("a static that adds a supertype", () => {
       {
         affects: { scope: "filter", filter: { type: "land", controlledBy: "you" } },
         addSupertypes: ["basic"],
-        typesOutsideBattlefield: { ofType: "land", zones: ["library"], addSupertypes: ["basic"] },
+        outsideBattlefield: { ofType: ["land"], zones: ["library"], addSupertypes: ["basic"] },
         text,
       },
     ]);
@@ -12330,10 +12324,10 @@ describe("can't have or gain a keyword", () => {
       ctx(),
     );
     expect(parsed.effect).toEqual({
-      kind: "lose-keywords",
+      kind: "become",
       filter: { type: "creature", controlledBy: "opponent" },
-      keywords: ["hexproof", "shroud"],
-      cantHave: true,
+      loseKeywords: ["hexproof", "shroud"],
+      cantHaveKeywords: ["hexproof", "shroud"],
       duration: "end-of-turn",
     });
   });
@@ -12355,7 +12349,7 @@ describe("a duration to a point in a later turn", () => {
       duration: "until-end-of-your-next-upkeep",
     });
     expect(parseEffect("Target land becomes a Swamp until its controller's next untap step.", ctx()).effect).toEqual({
-      kind: "add-types",
+      kind: "become",
       target: 0,
       setSubtypes: ["Swamp"],
       duration: "until-its-controllers-next-untap-step",
@@ -12373,12 +12367,11 @@ describe("a duration to a point in a later turn", () => {
       ctx(),
     );
     expect(parsed.effect).toEqual({
-      kind: "animate",
+      kind: "become",
       target: 0,
       power: { manaValueOf: 0 },
       toughness: { manaValueOf: 0 },
       addTypes: ["artifact", "creature"],
-      addSubtypes: [],
       duration: "until-your-next-upkeep",
     });
   });
@@ -12420,7 +12413,7 @@ describe("an animate that sets creature characteristics", () => {
     expect(parsed.effect).toEqual({
       kind: "sequence",
       effects: [
-        { kind: "animate", target: "source", addTypes: ["creature"], addSubtypes: ["Monk", "Avatar"], duration: "end-of-turn" },
+        { kind: "become", target: "source", addTypes: ["creature"], addSubtypes: ["Monk", "Avatar"], duration: "end-of-turn" },
         {
           kind: "grant-static",
           target: "source",
@@ -12436,7 +12429,7 @@ describe("an animate that sets creature characteristics", () => {
   });
   it("reads a card type taken away for the turn", () => {
     expect(parseEffect("~ isn't a creature until end of turn.", ctx()).effect).toEqual({
-      kind: "add-types",
+      kind: "become",
       target: "source",
       removeTypes: ["creature"],
       duration: "end-of-turn",
@@ -12702,18 +12695,18 @@ describe("any number of … with different names or powers", () => {
       kind: "for-each-permanent",
       filter: { subtype: "Vehicle", controlledBy: "you" },
       simultaneous: true,
-      effect: { kind: "add-types", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" },
+      effect: { kind: "become", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" },
     });
     expect(spell("Lands you control gain all basic land types until end of turn.")).toMatchObject({
       kind: "for-each-permanent",
       filter: { type: "land", controlledBy: "you" },
-      effect: { kind: "add-types", addSubtypes: ["Plains", "Island", "Swamp", "Mountain", "Forest"] },
+      effect: { kind: "become", addSubtypes: ["Plains", "Island", "Swamp", "Mountain", "Forest"] },
     });
     expect(spell("Until end of turn, creatures you control get +2/+0 and gain all creature types.")).toMatchObject({
       kind: "sequence",
       effects: [
         { kind: "modify-pt-all", power: 2, toughness: 0 },
-        { kind: "for-each-permanent", effect: { kind: "add-types", addSubtypes: ["(every creature type)"] } },
+        { kind: "for-each-permanent", effect: { kind: "become", addSubtypes: ["(every creature type)"] } },
       ],
     });
     expect(spell("Choose a basic land type. Each land you control becomes that type until end of turn.")).toMatchObject({
@@ -12721,7 +12714,7 @@ describe("any number of … with different names or powers", () => {
       then: {
         kind: "for-each-permanent",
         filter: { type: "land", controlledBy: "you" },
-        effect: { kind: "add-types", setSubtypes: ["$chosen"] },
+        effect: { kind: "become", setSubtypes: ["$chosen"] },
       },
     });
   });
@@ -12757,7 +12750,7 @@ describe("any number of … with different names or powers", () => {
         oracle_text:
           "Each planeswalker with one or more loyalty counters on it loses all abilities and is a creature with power and toughness each equal to the number of loyalty counters on it.",
       }).static[0],
-    ).toMatchObject({ loseAllAbilities: true, setTypes: ["creature"], setBasePtFromAffectedCounters: "loyalty" });
+    ).toMatchObject({ loseAllAbilities: true, setTypes: ["creature"], setBasePt: { power: { countersOnIt: "loyalty" }, toughness: { countersOnIt: "loyalty" } } });
   });
 
   it("reads a base P/T set to your life total, and every nonbasic land type", () => {
@@ -12767,7 +12760,7 @@ describe("any number of … with different names or powers", () => {
         type_line: "Legendary Artifact — Equipment",
         oracle_text: "Equipped creature has base power and toughness X/X, where X is your life total.\nEquip {5}",
       }).static[0],
-    ).toMatchObject({ affects: { scope: "attached" }, setBasePtFromSourceCount: "your-life-total" });
+    ).toMatchObject({ affects: { scope: "attached" }, setBasePt: { power: { sourceCount: "your-life-total" }, toughness: { sourceCount: "your-life-total" } } });
     const nexus = parseFace({
       name: "Planar Nexus",
       type_line: "Land",
@@ -13186,7 +13179,7 @@ describe("mana abilities from a hand, and paid by exiling from a graveyard", () 
       "{T}: Add {C}.\n{1}: This land becomes a 2/2 creature with all creature types until end of turn. It's still a land.",
     );
     expect(animate.effect).toEqual({
-      kind: "animate",
+      kind: "become",
       target: "source",
       power: 2,
       toughness: 2,
@@ -15493,7 +15486,7 @@ describe("an effect that names a permanent", () => {
       effects: [
         { kind: "add-counter", target: 0, counter: "+1/+1", amount: 9 },
         {
-          kind: "animate",
+          kind: "become",
           target: 0,
           power: 0,
           toughness: 0,
@@ -15501,7 +15494,7 @@ describe("an effect that names a permanent", () => {
           addSubtypes: ["Elemental"],
           addSupertypes: ["legendary"],
           keywords: ["haste"],
-          setName: "Vitu-Ghazi",
+          name: "Vitu-Ghazi",
           duration: "permanent",
         },
       ],
@@ -16248,7 +16241,7 @@ describe("a target with mana value X on an activated ability, and a copy as a 4/
       kind: "sequence",
       effects: [
         { kind: "exile", target: 0 },
-        { kind: "create-token-copy", of: 0, count: 1, who: "you", exceptions: { basePt: [4, 4], setColors: ["B"], setSubtypes: ["Zombie"] } },
+        { kind: "create-token-copy", of: 0, count: 1, who: "you", exceptions: { power: 4, toughness: 4, setColors: ["B"], setSubtypes: ["Zombie"] } },
       ],
     });
   });
@@ -16758,7 +16751,7 @@ describe("flagged cards' lines (2026-11-07): target player adds mana, a host's t
         effects: [
           { kind: "create-token-copy", of: "trigger-object", count: 1, who: "you" },
           {
-            kind: "animate-all",
+            kind: "become",
             filter: { thisWay: "created", notTypes: ["creature"] },
             power: 2,
             toughness: 2,

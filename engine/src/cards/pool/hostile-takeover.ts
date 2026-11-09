@@ -17,21 +17,17 @@ export default defineCard({
     kind: "sequence",
     effects: [
       {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 1,
         toughness: 1,
-        addTypes: [],
-        addSubtypes: [],
         duration: "end-of-turn",
       },
       {
-        kind: "animate",
+        kind: "become",
         target: 1,
         power: 4,
         toughness: 4,
-        addTypes: [],
-        addSubtypes: [],
         duration: "end-of-turn",
       },
       { kind: "damage-all", amount: 3, filter: { type: "creature" } },

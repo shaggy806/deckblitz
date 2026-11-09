@@ -16,9 +16,9 @@ export default defineCard({
     "a 0/12 creature with defender.",
   becomesOnEnter: {
     forms: [
-      { label: "3/3 creature with flying", as: { basePt: [3, 3], keywords: ["flying"] } },
-      { label: "2/5 creature with vigilance", as: { basePt: [2, 5], keywords: ["vigilance"] } },
-      { label: "0/12 creature with defender", as: { basePt: [0, 12], keywords: ["defender"] } },
+      { label: "3/3 creature with flying", as: { power: 3, toughness: 3, keywords: ["flying"] } },
+      { label: "2/5 creature with vigilance", as: { power: 2, toughness: 5, keywords: ["vigilance"] } },
+      { label: "0/12 creature with defender", as: { power: 0, toughness: 12, keywords: ["defender"] } },
     ],
   },
 });

@@ -13,7 +13,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "become-color", target: 0, colors: ["R"], duration: "end-of-turn" },
+      { kind: "become", target: 0, setColors: ["R"], duration: "end-of-turn" },
       { kind: "restrict", target: 0, restrictions: ["must-attack"] },
     ],
   },

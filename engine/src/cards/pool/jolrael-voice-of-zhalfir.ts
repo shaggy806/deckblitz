@@ -11,7 +11,7 @@ import { defineCard } from "../define.js";
 //     toughness of the land creature won't change if the number of cards in your hand changes
 //     later in the turn.
 //
-// `animate` reads a live amount once, as it applies (rule 608.2h), which is
+// `become` reads a live amount once, as it applies (rule 608.2h), which is
 // the second ruling's lock-in. Restless Anchorage's shape for the Bird, on a
 // chosen land rather than itself; the draw trigger is any land creature you
 // control (the first ruling).
@@ -34,7 +34,7 @@ export default defineCard({
       trigger: { on: "step-begins", step: "begin-combat", who: "you" },
       targets: [{ kind: "optional", of: "land-you-control" }],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: { cardsInHand: "you" },
         toughness: { cardsInHand: "you" },

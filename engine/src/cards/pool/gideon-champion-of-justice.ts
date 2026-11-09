@@ -73,7 +73,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           {
-            kind: "animate",
+            kind: "become",
             target: "source",
             power: { countersOn: "source", counter: "loyalty" },
             toughness: { countersOn: "source", counter: "loyalty" },

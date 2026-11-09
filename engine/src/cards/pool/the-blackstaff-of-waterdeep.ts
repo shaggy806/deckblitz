@@ -17,12 +17,11 @@ export default defineCard({
       cost: { mana: "{1}{U}", tap: true },
       targets: [{ kind: "other", of: { kind: "permanent", whose: "you", filter: { type: "artifact", token: false } } }],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 4,
         toughness: 4,
         addTypes: ["artifact", "creature"],
-        addSubtypes: [],
         duration: "while-source-tapped",
       },
       sorcerySpeed: true,

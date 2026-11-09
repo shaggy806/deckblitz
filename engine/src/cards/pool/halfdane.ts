@@ -20,12 +20,10 @@ export default defineCard({
       trigger: { on: "step-begins", step: "upkeep", who: "you" },
       targets: [{ kind: "other", of: "creature" }],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: { powerOf: 0 },
         toughness: { toughnessOf: 0 },
-        addTypes: [],
-        addSubtypes: [],
         duration: "until-end-of-your-next-upkeep",
       },
       resolve: null,

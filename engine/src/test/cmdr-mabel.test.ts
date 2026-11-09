@@ -114,11 +114,10 @@ const makeMouse = (game: Game, player: PlayerId, id: ObjectId, base: readonly [n
   game.debugApplyEffect(
     player,
     {
-      kind: "animate",
+      kind: "become",
       target: 0,
       power: base[0],
       toughness: base[1],
-      addTypes: [],
       addSubtypes: ["Mouse"],
       duration: "permanent",
     },

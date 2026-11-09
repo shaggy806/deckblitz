@@ -2,14 +2,14 @@
  * Statics that reach other permanents through a `CardFilter` scope
  * (`AffectSpec` `scope: "filter"`), grant them types in layer 4
  * (`StaticAbility.addTypes` / `addSubtypes`) and set their base P/T in layer
- * 7b (`setBasePt`), plus the one-shot `animate-all` effect.
+ * 7b (`setBasePt`), plus the one-shot `become` effect.
  *
  * What the tests pin down, rule by rule:
  * - 613.1d: a type granted in layer 4 is a type everywhere — filters,
  *   targeting, sacrifice costs, other statics' scopes all see it.
  * - 613.4b / 613.4c: a base P/T set in 7b sits under counters (7c) and
  *   bonuses (7d).
- * - 613.7: within a layer, timestamp order — a static against an `animate`;
+ * - 613.7: within a layer, timestamp order — a static against an `become`;
  *   613.8: except that a type grant applies after the additions its scope
  *   depends on (Kudo reaches a land animated after it arrived).
  * - 613.6: a static's later layers reach what its layer-4 part reached.
@@ -238,12 +238,11 @@ describe("layer 4: types granted to other permanents", () => {
     game.debugApplyEffect(
       B,
       {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 3,
         toughness: 3,
         addTypes: ["creature"],
-        addSubtypes: [],
         duration: "end-of-turn",
       },
       [{ kind: "object", object: ring }],
@@ -381,7 +380,7 @@ describe("layer 7b: base P/T set on other permanents", () => {
       )!;
     game.debugApplyEffect(
       A,
-      { kind: "create-token-copy", of: 0, count: 1, basePt: [1, 1] },
+      { kind: "create-token-copy", of: 0, count: 1, exceptions: { power: 1, toughness: 1 } },
       [{ kind: "object", object: wurm }],
     );
     const copy = copyOf();
@@ -391,12 +390,10 @@ describe("layer 7b: base P/T set on other permanents", () => {
     game.debugApplyEffect(
       A,
       {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 5,
         toughness: 5,
-        addTypes: [],
-        addSubtypes: [],
         duration: "end-of-turn",
       },
       [{ kind: "object", object: copy }],
@@ -428,7 +425,7 @@ describe("animate-all", () => {
     const ring = spawn(game, "Sol Ring", A);
     const theirs = spawn(game, "Sol Ring", B);
     game.debugApplyEffect(A, {
-      kind: "animate-all",
+      kind: "become",
       filter: { controlledBy: "you" },
       power: 5,
       toughness: 5,
@@ -450,7 +447,7 @@ describe("animate-all", () => {
     const { game } = makeGame();
     const giant = spawn(game, "Hill Giant", B);
     game.debugApplyEffect(A, {
-      kind: "animate-all",
+      kind: "become",
       filter: { type: "creature", controlledBy: "opponent" },
       power: 1,
       toughness: 1,

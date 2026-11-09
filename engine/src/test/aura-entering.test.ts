@@ -229,12 +229,11 @@ describe("state-based actions for attachments", () => {
     const { game } = setUp();
     const island = spawn(game, "Island");
     apply(game, {
-      kind: "animate",
+      kind: "become",
       target: 0,
       power: 2,
       toughness: 2,
       addTypes: ["creature"],
-      addSubtypes: [],
       duration: "end-of-turn",
     }, [obj(island)]);
     const pacifism = spawn(game, "Pacifism", B);

@@ -170,7 +170,7 @@ describe("a static over many permanents", () => {
     const humility = spawn(game, "Humility", A);
     game.debugApplyEffect(
       A,
-      { kind: "animate", target: 0, power: 4, toughness: 4, addTypes: ["creature"], addSubtypes: [], duration: "permanent" },
+      { kind: "become", target: 0, power: 4, toughness: 4, addTypes: ["creature"], duration: "permanent" },
       [ref(humility)],
     );
     const angel = spawn(game, "Serra Angel", B);

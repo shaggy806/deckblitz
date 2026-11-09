@@ -40,12 +40,10 @@ export default defineCard({
         kind: "may",
         prompt: "Have this creature's base power and toughness become 4/2 until end of turn?",
         effect: {
-          kind: "animate",
+          kind: "become",
           target: "source",
           power: 4,
           toughness: 2,
-          addTypes: [],
-          addSubtypes: [],
           duration: "end-of-turn",
         },
       },

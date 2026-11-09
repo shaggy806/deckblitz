@@ -13,7 +13,7 @@ import { defineCard } from "../define.js";
 //     will still apply no matter when they took effect. The same is true for +1/+1 counters.
 //
 // - The granted trigger is Supernatural Stamina's.
-// - "Has the chosen base power and toughness" is an `animate` adding no types:
+// - "Has the chosen base power and toughness" is an `become` adding no types:
 //   base P/T set in layer 7b until end of turn, so counters and pumps still
 //   apply on top (the ruling).
 const RETURN_TEXT = "When this creature dies, return it to the battlefield tapped under its owner's control";
@@ -38,12 +38,10 @@ const limitBreak = (power: number): EffectSpec => ({
       },
     },
     {
-      kind: "animate",
+      kind: "become",
       target: 0,
       power,
       toughness: 2,
-      addTypes: [],
-      addSubtypes: [],
       duration: "end-of-turn",
     },
   ],

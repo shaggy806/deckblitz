@@ -27,7 +27,7 @@ export default defineCard({
             kind: "may",
             prompt: "Have each other creature you control's base power and toughness become Sita Varma's power?",
             effect: {
-              kind: "animate-all",
+              kind: "become",
               filter: { type: "creature", controlledBy: "you" },
               exceptSource: true,
               power: { powerOf: "source" },

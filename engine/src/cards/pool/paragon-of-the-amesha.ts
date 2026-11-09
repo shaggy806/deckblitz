@@ -29,7 +29,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "add-types", target: "source", setSubtypes: ["Angel"], duration: "end-of-turn" },
+          { kind: "become", target: "source", setSubtypes: ["Angel"], duration: "end-of-turn" },
           { kind: "modify-pt", target: "source", power: 3, toughness: 3, duration: "end-of-turn" },
           { kind: "grant-keyword", target: "source", keyword: "flying", duration: "end-of-turn" },
           { kind: "grant-keyword", target: "source", keyword: "lifelink", duration: "end-of-turn" },

@@ -33,7 +33,7 @@ export default defineCard({
           target: "source",
           of: 0,
           until: "end-of-turn",
-          exceptions: { basePt: [1, 4], keywords: ["unblockable"] },
+          exceptions: { power: 1, toughness: 4, keywords: ["unblockable"] },
         },
       },
       resolve: null,

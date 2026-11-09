@@ -11,11 +11,10 @@ export default defineCard({
   text: "Changeling (This card is every creature type.)\nUntil end of turn, target creature has base power and toughness 4/4, gains all creature types, and gains flying.",
   targets: ["creature"],
   effect: {
-    kind: "animate",
+    kind: "become",
     target: 0,
     power: 4,
     toughness: 4,
-    addTypes: [],
     addSubtypes: [EVERY_CREATURE_TYPE],
     keywords: ["flying"],
     duration: "end-of-turn",

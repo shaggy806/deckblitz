@@ -119,7 +119,7 @@ describe("Depala, Pilot Exemplar", () => {
     expect(types(game, cruiser)).not.toContain("creature");
     game.debugApplyEffect(
       A,
-      { kind: "add-types", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" },
+      { kind: "become", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" },
       [ref(cruiser)],
     );
     expect(pt(game, cruiser)).toEqual({ power: 6, toughness: 4 });

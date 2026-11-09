@@ -38,7 +38,7 @@ const vehicle = (game: Game, player: PlayerId = A): ObjectId => {
   const id = game.debugSpawn("Grizzly Bears", player, "battlefield", { summoningSick: false });
   game.debugApplyEffect(
     player,
-    { kind: "add-types", target: 0, addTypes: ["artifact"], addSubtypes: ["Vehicle"], duration: "permanent" },
+    { kind: "become", target: 0, addTypes: ["artifact"], addSubtypes: ["Vehicle"], duration: "permanent" },
     [{ kind: "object", object: id }],
   );
   return id;

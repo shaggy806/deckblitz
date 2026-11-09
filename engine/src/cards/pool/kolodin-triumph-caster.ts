@@ -35,7 +35,7 @@ export default defineCard({
     {
       trigger: { on: "enters-battlefield", who: "you-control", filter: { subtype: "Vehicle" } },
       targets: [],
-      effect: { kind: "add-types", target: "trigger-object", addTypes: ["artifact", "creature"], duration: "end-of-turn" },
+      effect: { kind: "become", target: "trigger-object", addTypes: ["artifact", "creature"], duration: "end-of-turn" },
       resolve: null,
       text: VEHICLE_TEXT,
     },

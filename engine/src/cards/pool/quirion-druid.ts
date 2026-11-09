@@ -20,12 +20,11 @@ export default defineCard({
       cost: { mana: "{G}", tap: true },
       targets: ["land"],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 2,
         toughness: 2,
         addTypes: ["creature"],
-        addSubtypes: [],
         setColors: ["G"],
         duration: "permanent",
       },

@@ -24,7 +24,7 @@ export default defineCard({
   copyOnEnter: {
     filter: { type: "creature" },
     except: {
-      notLegendary: true,
+      removeSupertypes: ["legendary"],
       static: [
         {
           affects: { scope: "self" },

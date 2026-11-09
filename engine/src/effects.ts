@@ -8,18 +8,17 @@
  * into the spell's or ability's chosen targets, or the literal `"source"`.
  */
 
+import type { CharacteristicsPatch, CopyExceptions, ResolvedPatch } from "./characteristics-patch.js";
 import type { CastNowTerms, EffectPlay, EffectPlaySpec, PlayGrant } from "./play-permission.js";
 import type { AmountChange, ReplacementSpec } from "./replacements.js";
 import type { ActiveReplacement } from "./state.js";
 import type { ActivatedAbility, TriggeredAbility, TriggerSpec } from "./abilities.js";
 import type {
-  AffectSpec,
   CardType,
   CombatRule,
   Keyword,
   StaticAbility,
   StaticCondition,
-  Supertype,
   CountersPutSpec,
   TurnStat,
 } from "./cards.js";
@@ -6095,32 +6094,39 @@ export type EffectSpec =
       readonly filter?: CardFilter;
       readonly onlyPlayers?: true;
     }
-  | {
+  | ({
       /**
-       * "Target creature **loses flying** until end of turn" (Emerald Charm):
-       * the keywords are taken away in layer 6 at this effect's timestamp
-       * (rule 613.7) — from what had them before, printed or granted earlier;
-       * a grant after it gives one back. `target` is one permanent; `filter`
-       * instead is each permanent matching it as this resolves (rule 611.2c
-       * — "permanents your opponents control lose hexproof and
-       * indestructible until end of turn", Shadowspear), all with one
-       * timestamp.
+       * "[It] becomes [these things]", in every wording: "becomes a 4/4 Elemental
+       * creature", "becomes a Coward", "loses all abilities", "becomes blue in
+       * addition to its other colors", "loses flying", "has base power 0". What
+       * changes is the {@link CharacteristicsPatch} spelled flat on this record;
+       * every part applies in its own layer (rule 613.6). See theme 8's note.
+       *
+       * `target` is one permanent, a token split off a stack first. `filter`
+       * instead is every permanent matching it as this begins (rule 611.2c), a
+       * token stack whole, all under one timestamp (613.7b); a permanent that
+       * arrives later isn't changed. A patch that changes only colours also
+       * reaches a spell on the stack.
+       *
+       * `power` and `toughness` are read once as this applies (rule 608.2h) and
+       * stay that. Either alone sets base power or toughness alone (613.4b). With
+       * neither its P/T is what it was, or what a `grant-static`'s
+       * `setBasePtFromCount` beside it says (Myth Realized). Any other whole
+       * ability it becomes a creature "with" is a grant beside it in one
+       * `sequence`, or this record's `triggered`, `activated` or `static`.
        */
-      readonly kind: "lose-keywords";
+      readonly kind: "become";
       readonly target?: ObjectRef;
       readonly filter?: CardFilter;
-      /** With `filter`: read from the side of the player in this target slot
-       * — Quick Draw's "creatures **target opponent** controls" is `{ type:
-       * "creature", controlledBy: "you" }` here. Nothing when that target
-       * has gone illegal (rule 608.2b). */
+      /** With `filter`, "each **other** creature": not the effect's own
+       * permanent. Read from exile (a haunt trigger), nothing is left out. */
+      readonly exceptSource?: boolean;
+      /** With `filter`: read from the side of the player in this target slot,
+       * "creatures **target player** controls". Nothing when that target has
+       * gone illegal (rule 608.2b). */
       readonly controlledByTarget?: number;
-      readonly keywords: readonly Keyword[];
       readonly duration: PermanentDuration;
-      /** "… and can't have hexproof or shroud" (Arcane Lighthouse): for the
-       * duration, what it reached can't have these at all, whatever gives
-       * them and whatever the timestamps (`PtModifier.cantHaveKeywords`). */
-      readonly cantHave?: boolean;
-    }
+    } & CharacteristicsPatch<EffectAmount>)
   | {
       /**
        * A continuous effect for the controller, for a while — an emblem that
@@ -6728,34 +6734,6 @@ export type EffectSpec =
       readonly kind: "grant-triggered";
       readonly target: ObjectRef;
       readonly ability: TriggeredAbility;
-      readonly duration: PermanentDuration;
-    }
-  | {
-      /**
-       * `target` loses all its abilities (layer 6) — with `loseLandTypes`,
-       * its land types too (layer 4; its other types and supertypes stay) —
-       * and has `activated` besides, granted by the same effect so they
-       * aren't lost with the rest (rule 613.7): Ultima, Origin of Oblivion's
-       * "it loses all land types and abilities and has '{T}: Add {C}.'"
-       */
-      readonly kind: "lose-abilities";
-      readonly target: ObjectRef;
-      readonly loseLandTypes?: boolean;
-      readonly activated?: readonly ActivatedAbility[];
-      readonly duration: PermanentDuration;
-    }
-  | {
-      /**
-       * Every battlefield permanent matching `filter` loses all its
-       * abilities (layer 6) — Final Showdown's "all creatures lose all
-       * abilities until end of turn". The mass form of `lose-abilities`:
-       * the permanents are the ones that match as it applies (rule 611.2c),
-       * under one effect with one timestamp, so an ability an effect grants
-       * one of them afterwards isn't lost (rule 613.7 — the ruling), and a
-       * creature that arrives later keeps its own.
-       */
-      readonly kind: "lose-abilities-all";
-      readonly filter: CardFilter;
       readonly duration: PermanentDuration;
     }
   | {
@@ -7566,146 +7544,6 @@ export type EffectSpec =
       readonly tappedOnReturn?: boolean;
     }
   | {
-      /** `target` becomes a creature (rule 613 layer 4 for the added/set
-       * types + subtypes, layer 5 for `setColors`, layer 6 for `keywords` /
-       * `loseAbilities`, layer 7b for the set P/T). Printed types are kept —
-       * a man-land is "still a land". `"source"` is the usual target
-       * (man-lands animate themselves); Turn to Frog targets a creature. */
-      readonly kind: "animate";
-      readonly target: ObjectRef;
-      /** Its base P/T. A live amount is read once, as the effect applies
-       * (rule 608.2h — Zur, Eternal Schemer's "base power and base
-       * toughness each equal to its mana value"), and stays that.
-       *
-       * Either alone sets **base power or base toughness alone** in layer
-       * 7b (rule 613.4b), the other left as it is: Island of Wak-Wak's
-       * "target creature with flying has base power 0 until end of turn" is
-       * `{ power: 0, addTypes: [], addSubtypes: [] }`, Riptide Mangler's
-       * "this creature's base power becomes equal to target creature's
-       * power" `power: { powerOf: 0 }` with `duration: "permanent"`, Chariot
-       * of the Sun's "has base toughness 1" `toughness: 1`. With no
-       * `addTypes` nothing becomes a creature; it only sets the value. With
-       * neither, its P/T is what it was, or what a `grant-static`'s
-       * `setBasePtFromCount` beside it says: "becomes a Monk Avatar creature
-       * … and gains 'This creature's power and toughness are each equal to
-       * the number of lore counters on it'" (Myth Realized), read live.
-       * Any other whole ability it becomes a creature "with" goes the same way,
-       * a grant beside it in one `sequence`: `grant-triggered` (Raging Ravine),
-       * `grant-static` (Restless Spire), `grant-protection` (Opal Guardian). */
-      readonly power?: EffectAmount;
-      readonly toughness?: EffectAmount;
-      readonly addTypes: readonly CardType[];
-      /** "Becomes a [type]" with no "in addition" and no "it's still a …":
-       * these card types *replace* its others (rule 205.1a), and a subtype
-       * that went only with a lost type goes too — Sarkhan, the
-       * Dragonspeaker's +1, "becomes a legendary 4/4 red Dragon creature",
-       * stops being a planeswalker (no Sarkhan type, no loyalty lost while
-       * it isn't one). Supertypes stay. */
-      readonly setTypes?: readonly CardType[];
-      readonly addSubtypes: readonly string[];
-      /** Replace its subtypes of the same kind (Turn to Frog: "a … Frog" —
-       * its creature types; rule 205.1a). */
-      readonly setSubtypes?: readonly string[];
-      /** Set the colours (Turn to Frog: "blue"). */
-      readonly setColors?: readonly Color[];
-      /** Colours **in addition to its other colors** (layer 5, rule 105.3 —
-       * Phantasmal Form's "become blue Illusions in addition to their other
-       * colors and types", Halsin's "a green Bear creature … in addition"). */
-      readonly addColors?: readonly Color[];
-      /** The permanent loses all of its own abilities (Turn to Frog). */
-      readonly loseAbilities?: boolean;
-      readonly keywords?: readonly Keyword[];
-      /** "It becomes **a legendary** 0/0 Elemental creature" (Awakening of
-       * Vitu-Ghazi), in addition to its supertypes (rule 205.4b). */
-      readonly addSupertypes?: readonly Supertype[];
-      /** "…**named Vitu-Ghazi**": its only name for as long as this lasts, a
-       * copy of it not having it. */
-      readonly setName?: string;
-      readonly duration: PermanentDuration;
-    }
-  | {
-      /**
-       * "[It] becomes a Demon **in addition to its other types**" (Clavileño,
-       * First of the Blessed; Jenova, Ancient Calamity's "that creature
-       * becomes a Mutant"): types and/or subtypes added in layer 4, and
-       * nothing else — its P/T, colours and abilities are left alone, unlike
-       * `animate`. `"end-of-turn"` or `"permanent"` (for as long as it's on
-       * the battlefield). `target` is a slot, `"source"` or
-       * `"trigger-object"`; a card returned to the battlefield earlier in the
-       * same resolution keeps its id, so its slot still reaches it there.
-       */
-      readonly kind: "add-types";
-      readonly target: ObjectRef;
-      readonly addTypes?: readonly CardType[];
-      readonly addSubtypes?: readonly string[];
-      /**
-       * "Becomes a [type]" with no "in addition": these **replace** its card
-       * types (rule 205.1a — Opal Acrolith's "it becomes an enchantment", no
-       * longer a creature; its subtypes that went only with a lost type go
-       * too, its supertypes stay), applied before `addTypes`.
-       */
-      readonly setTypes?: readonly CardType[];
-      /**
-       * "**Isn't** a creature until end of turn" (Blink's Alien Angel), "isn't
-       * an artifact" (Neurok Transmuter): these card types go, its others stay,
-       * and a subtype that went only with them goes too (rule 205.1a's reading
-       * of a lost type, Weeping Angel's ruling). An attacker or blocker is
-       * removed from combat (rule 506.4).
-       */
-      readonly removeTypes?: readonly CardType[];
-      /**
-       * "It **isn't an Equipment**" (Dancing Sword): these subtypes go, its
-       * types stay.
-       */
-      readonly removeSubtypes?: readonly string[];
-      /**
-       * "Becomes a Coward" / "becomes the creature type of your choice"
-       * (Boldwyr Intimidator, the Mistforms — `CHOSEN_CREATURE_TYPE` under a
-       * `choose-creature-type`): these replace its subtypes of the same kind
-       * (205.1a — every creature type goes), applied before `addSubtypes`.
-       */
-      readonly setSubtypes?: readonly string[];
-      /** Colours in addition to its others (layer 5, rule 105.3) — Unctus,
-       * Grand Metatect's "becomes a blue artifact in addition to its other
-       * colors and types", Possessed Goat's "a black Demon in addition". */
-      readonly addColors?: readonly Color[];
-      readonly duration: PermanentDuration;
-    }
-  | {
-      /**
-       * Every battlefield permanent matching `filter` (from the effect's
-       * controller's perspective) becomes an N/N at once — Vihaan's "have
-       * Treasures you control become 3/3 Construct Assassin artifact creatures
-       * in addition to their other types until end of turn". The mass form of
-       * `animate`, with the same layers: types and subtypes added in layer 4,
-       * keywords in 6, base P/T set in 7b. With no `addTypes` it only sets
-       * base P/T ("creatures your opponents control have base power and
-       * toughness 1/1 until end of turn").
-       *
-       * The matches are fixed as the effect begins, and a token stack is
-       * animated whole rather than split. The P/T may be a live amount, read
-       * once as the effect applies and fixed from then on (rule 608.2h) —
-       * Mirror Entity's "{X}: … creatures you control have base power and
-       * toughness X/X" is `"x"`.
-       */
-      readonly kind: "animate-all";
-      readonly filter: CardFilter;
-      readonly power: EffectAmount;
-      readonly toughness: EffectAmount;
-      readonly addTypes?: readonly CardType[];
-      readonly addSubtypes?: readonly string[];
-      readonly keywords?: readonly Keyword[];
-      readonly duration: PermanentDuration;
-      /** "Each **other** creature" — not the effect's own permanent (Graven
-       * Dominator). Read from exile (a haunt trigger), nothing is left out. */
-      readonly exceptSource?: boolean;
-      /** "Creatures **target player** controls have base power and toughness
-       * 1/1" (Mass Diminish): `filter` read from the side of the player in
-       * this target slot, as `modify-pt-all`'s. Nothing when that target has
-       * gone illegal (rule 608.2b). */
-      readonly controlledByTarget?: number;
-    }
-  | {
       /** "Manifest the top card of your library" (rule 701.40), or cloak it
        * (701.58): it goes onto the battlefield face down as a 2/2 — with ward
        * {2} if cloaked — under the manifesting player, from their own library.
@@ -8231,8 +8069,6 @@ export type EffectSpec =
        * (Kiki-Jiki, Mirror Breaker) — the difference is whether dies-triggers
        * see them go. */
       readonly sacrificeAtEndStep?: boolean;
-      /** The copies are not legendary (Miirym — "except it's not legendary"). */
-      readonly notLegendary?: boolean;
       /** Who the token enters under. Default is the *copied* permanent's own
        * controller (Miirym copying your own Dragons); `"you"` puts it under
        * the effect's controller instead, which is what a card that copies
@@ -8246,15 +8082,13 @@ export type EffectSpec =
       /** "**The tokens are goaded for the rest of the game**" (Life of the
        * Party), by this effect's controller — `create-token`'s. */
       readonly goadedForGame?: boolean;
-      /** Override the copies' base power/toughness, as part of their copiable
-       * values (rule 707.9b), so counters and anthems still apply: "except
-       * it's 1/1", or Saw in Half's "except their power is half that
-       * creature's power …" — `{ half: { powerOf: 0 }, round: "up" }`, read
-       * as the destroyed creature last existed (its ruling). Read signed: a
-       * value that *sets* power or toughness may be negative (rule 107.1b). */
-      readonly basePt?: readonly [EffectAmount, EffectAmount];
-      /** The rest of a copy's exceptions — see {@link CopyExceptions}. */
-      readonly exceptions?: CopyExceptions;
+      /** How the copies differ — see {@link CopyExceptions}. Part of their
+       * copiable values (rule 707.9b), so counters and anthems still apply.
+       * Its `power` and `toughness` may be amounts, read once as the copy is
+       * made and read signed (rule 107.1b): Saw in Half's "except their power
+       * is half that creature's power …" is `{ half: { powerOf: 0 }, round:
+       * "up" }`, read as the destroyed creature last existed (its ruling). */
+      readonly exceptions?: CopyExceptions<EffectAmount>;
       /** A copy of **the card as it is now**, where the default copies a
        * permanent that has left as it last existed on the battlefield
        * (rule 608.2h): Myrkul, Lord of Bones's "a copy of that card", the
@@ -8466,7 +8300,7 @@ export type EffectSpec =
       readonly of: ObjectRef;
       readonly ofCard?: true | "when-a-card";
       readonly until?: CopyDuration;
-      readonly exceptions?: CopyExceptions;
+      readonly exceptions?: CopyExceptions<EffectAmount>;
     }
   | {
       /** The game becomes day or night (rule 726 — ROADMAP Phase 10b). All
@@ -8878,22 +8712,6 @@ export type EffectSpec =
        * `then` reads (Refraction Trap's "deals that much damage to any
        * target") — the answer's copy has the source chosen as target 0. */
       readonly ownTargets?: readonly (TargetRef | null)[];
-    }
-  | {
-      /** "Target spell or permanent becomes black" (Deathlace — rule 613.1e,
-       * layer 5): its colours become `colors`, replacing its others, for
-       * `duration` — for good (`"permanent"`) for the Laces, `"end-of-turn"`
-       * for Crimson Wisps. A spell keeps it while on the stack; the
-       * permanent it becomes is a new object with its own colours (rule
-       * 400.7). Mana symbols in its cost don't change. */
-      readonly kind: "become-color";
-      readonly target: ObjectRef;
-      readonly colors: readonly Color[];
-      readonly duration: PermanentDuration;
-      /** "Becomes blue **in addition to its other colors**" (Indigo
-       * Faerie — rule 105.3): `colors` are added to its others instead of
-       * replacing them, in timestamp order with the rest of layer 5. */
-      readonly inAddition?: true;
     }
   | {
       /**
@@ -10417,41 +10235,7 @@ export type EffectSpec =
  * 611.2c), in its layer — types 4, colours 5, abilities 6, base P/T 7b
  * (613.1d–f, 613.4b) — and in place from the moment it enters, so "whenever
  * a Zombie / an artifact / a creature enters" sees it arrive as one. */
-export interface EnterTypes {
-  readonly setTypes?: readonly CardType[];
-  /** Card types **in addition to its other types** — The War in Heaven's
-   * "They're artifacts in addition to their other types", Relive the Past's
-   * "They are 5/5 Elemental creatures in addition to their other types"
-   * (`addTypes: ["creature"]` with `basePt` and `addSubtypes`). */
-  readonly addTypes?: readonly CardType[];
-  readonly addSubtypes?: readonly string[];
-  /** It **has no abilities** (layer 6) — Xu-Ifit, Osteoharmonist's "It's a
-   * Skeleton in addition to its other types and has no abilities". Lost
-   * before it enters (rule 614.12, the ruling): it makes none of its own "as
-   * this enters" choices (no Clone copy), its own enters replacements don't
-   * apply (no "enters tapped", no counters of its own) and its enters
-   * triggers don't trigger. Abilities it gains afterwards it keeps (a later
-   * timestamp, rule 613.7). */
-  readonly loseAbilities?: true;
-  /** Subtypes **instead of** its own of the same kind (rule 205.1a: a
-   * creature type replaces its creature types, its artifact and other
-   * subtypes kept) — assimilate's "It's a Borg artifact creature and loses
-   * all other creature types" (`addTypes: ["artifact", "creature"]`,
-   * `setSubtypes: ["Borg"]`: 205.1b's "[creature type] artifact creature"
-   * keeps every prior type and subtype but its creature types). Applied
-   * before `addSubtypes`. */
-  readonly setSubtypes?: readonly string[];
-  /** Its colours instead of its own (layer 5) — Chainer, Dementia Master's
-   * "That creature is black and is a Nightmare in addition to its other
-   * creature types": "is black", with no "in addition", sets them. */
-  readonly setColors?: readonly Color[];
-  /** Its base power and toughness (layer 7b — rule 613.4b): Relive the
-   * Past's "5/5", Excava's "It's a 1/1 Spirit creature". Counters and other
-   * P/T changes apply over it. */
-  readonly basePt?: readonly [number, number];
-  /** Keywords it has (layer 6) — Excava's "a 1/1 Spirit creature **with
-   * flying**". */
-  readonly keywords?: readonly Keyword[];
+export interface EnterTypes extends ResolvedPatch {
   /** "**If it's a creature**, it's a Zombie in addition to its other
    * creature types" (Lim-Dûl the Necromancer): every part applies only if
    * the permanent is a creature as it enters — judged on the battlefield
@@ -10459,10 +10243,6 @@ export interface EnterTypes {
    * the battlefield"), its face down or transformed face included. Not with
    * `faceDown`. */
   readonly ifCreature?: true;
-  /** Colours in addition to its own (Necromantic Selection's "It's a black
-   * Zombie in addition to its other colors and types" — a colourless card
-   * is then simply black, its ruling). */
-  readonly addColors?: readonly Color[];
   /** It enters **face down** (rule 708.3 — turned face down before it
    * enters, so it has no "as this enters" choices and its enters abilities
    * neither trigger nor apply): `true` as a 2/2 with no name, text,
@@ -10496,71 +10276,7 @@ export interface SpellCopyChange {
   readonly gains?: SpellCopyGains;
 }
 
-/**
- * What a copy effect makes different about its copy — "except it's a 3/3
- * black Zombie creature in addition to its other types" (Anikthea, Hand of
- * Erebos), "except its name is Mishra's Warform" (Mishra, Eminent One).
- * Exceptions are part of the copy's copiable values (rule 707.9b): every
- * other effect applies over them, and anything that copies the copy copies
- * them too. `setColors` replaces its colours ("it's black"); `addColors`,
- * `addTypes` and `addSubtypes` are "in addition to its other …";
- * `keywords` are abilities it has ("and it has flying and haste").
- */
-export interface CopyExceptions {
-  readonly name?: string;
-  /** "It's an enchantment and loses all other card types" (Myrkul). */
-  readonly setTypes?: readonly CardType[];
-  /** Subtypes it has instead of its own — Shelob, Child of Ungoliant's "a
-   * Food artifact … and it loses all other card types" loses every other
-   * subtype too (its ruling). */
-  readonly setSubtypes?: readonly string[];
-  readonly addTypes?: readonly CardType[];
-  readonly addSubtypes?: readonly string[];
-  readonly setColors?: readonly Color[];
-  readonly addColors?: readonly Color[];
-  readonly basePt?: readonly [number, number];
-  /** "…with no mana cost" (eternalize, embalm): its mana value is 0. */
-  readonly noManaCost?: boolean;
-  readonly keywords?: readonly Keyword[];
-  /** Activated abilities it has — "and it has '{2}, {T}, Sacrifice this
-   * token: You gain 3 life.'" (Brenard, Ginger Sculptor). */
-  readonly activated?: readonly ActivatedAbility[];
-  /** Triggered abilities it has — Phantasmal Image's "and it has 'When this
-   * creature becomes the target of a spell or ability, sacrifice it.'" (rule
-   * 707.9a: a copiable value, so a copy of the copy has it too). */
-  readonly triggered?: readonly TriggeredAbility[];
-  /** Static abilities it has — Dollhouse of Horrors's "and it has 'This
-   * token gets +1/+1 for each Construct you control.'" (rule 707.9a, as
-   * `triggered`). */
-  readonly static?: readonly StaticAbility[];
-  /** "…except it has **this ability**" (Thespian's Stage, Court of Vantress,
-   * Irma, Part-Time Mutant): the ability of `card`'s definition at that
-   * index of its `activated` or `triggered` list — the very ability making
-   * the copy, named by its card rather than by the object, which by then may
-   * be a copy of something else that has it only this way. Looked up as the
-   * copy is made, and from then on it's like `activated` / `triggered`: a
-   * copiable value (rule 707.9a), so a copy of the copy has it too (Court of
-   * Vantress's ruling). */
-  readonly thisAbility?: {
-    readonly card: string;
-    readonly activated?: number;
-    readonly triggered?: number;
-  };
-  /** "…and it isn't legendary" (Spark Double, Auton Soldier) — copiable, so
-   * a later copy of it isn't either (Spark Double's ruling). Read through
-   * `supertypesOf`. */
-  readonly notLegendary?: true;
-  /** Supertypes it has in addition to its own — Sakashima the Impostor's
-   * "it's legendary in addition to its other types". */
-  readonly addSupertypes?: readonly Supertype[];
-  /** "The 'legend rule' doesn't apply to [these permanents]" as an ability
-   * it has — Sakashima of a Thousand Faces' "except it has Sakashima's other
-   * abilities", which are that static and partner (a deck-construction
-   * ability that does nothing once the game has begun — rule 702.124a). The
-   * scope is read from the copy's own side, as the static's `affects` is
-   * (see `StaticAbility.legendRuleOff`). */
-  readonly legendRuleOff?: AffectSpec;
-}
+export type { CopyExceptions } from "./characteristics-patch.js";
 
 /**
  * What a `separate-into-piles` separates:
@@ -12271,15 +11987,6 @@ export interface EffectApi {
   /** See the `"reselect-attack"` {@link EffectSpec}: one creature, or every
    * attacker matching `filter`. */
   reselectAttack(on: TargetRef | CardFilter, onlyPlayers: boolean): void;
-  /** See the `"lose-keywords"` {@link EffectSpec}: one permanent, or every
-   * one matching `filter`. */
-  loseKeywords(
-    on: TargetRef | CardFilter,
-    keywords: readonly Keyword[],
-    duration: PermanentDuration,
-    scopeTo?: PlayerId,
-    cantHave?: boolean,
-  ): void;
   /** See the `"grant-triggered"` {@link EffectSpec}. */
   grantTriggered(
     target: TargetRef,
@@ -12292,17 +11999,16 @@ export interface EffectApi {
   grantActivated(target: TargetRef, ability: ActivatedAbility, duration: PermanentDuration): void;
   /** See the `"grant-activated-of"` {@link EffectSpec}. */
   grantActivatedOf(target: TargetRef, of: TargetRef, duration: PermanentDuration): void;
-  /** See the `"lose-abilities"` {@link EffectSpec}. */
-  loseAbilities(
-    target: TargetRef,
-    opts: {
-      readonly loseLandTypes: boolean;
-      readonly activated: readonly ActivatedAbility[];
-      readonly duration: PermanentDuration;
-    },
+  /** `target` becomes what `patch` says — see the `"become"` {@link EffectSpec}. */
+  become(target: TargetRef, patch: ResolvedPatch, duration: PermanentDuration): void;
+  /** Every permanent matching `filter` as this begins becomes what `patch`
+   * says, under one timestamp — see the `"become"` {@link EffectSpec}. */
+  becomeAll(
+    filter: CardFilter,
+    patch: ResolvedPatch,
+    duration: PermanentDuration,
+    opts: { readonly exceptSource?: boolean; readonly scopeTo?: PlayerId },
   ): void;
-  /** See the `"lose-abilities-all"` {@link EffectSpec}. */
-  loseAbilitiesAll(filter: CardFilter, duration: PermanentDuration): void;
   /** See the `"grant-activated-all"` {@link EffectSpec}. */
   grantActivatedAll(filter: CardFilter, ability: ActivatedAbility, duration: PermanentDuration): void;
   /** `player` takes an extra turn after this one (Time Warp). */
@@ -12475,56 +12181,6 @@ export interface EffectApi {
     readonly untilSourceLeaves?: boolean;
     readonly tappedOnReturn?: boolean;
   }): void;
-  /** `target` becomes a creature — see the `"animate"` {@link EffectSpec}.
-   * A `power` or `toughness` left out is left as it is. */
-  animate(
-    target: TargetRef,
-    opts: {
-      readonly power?: number;
-      readonly toughness?: number;
-      readonly addTypes: readonly CardType[];
-      readonly setTypes?: readonly CardType[];
-      readonly addSubtypes: readonly string[];
-      readonly setSubtypes?: readonly string[];
-      readonly setColors?: readonly Color[];
-      readonly addColors?: readonly Color[];
-      readonly loseAbilities?: boolean;
-      readonly keywords: readonly Keyword[];
-      readonly addSupertypes?: readonly Supertype[];
-      readonly setName?: string;
-      readonly duration: PermanentDuration;
-    },
-  ): void;
-  /** `target` gains types and subtypes — see the `"add-types"`
-   * {@link EffectSpec}. */
-  addTypes(
-    target: TargetRef,
-    types: readonly CardType[],
-    subtypes: readonly string[],
-    duration: PermanentDuration,
-    set?: {
-      readonly setTypes?: readonly CardType[];
-      readonly removeTypes?: readonly CardType[];
-      readonly removeSubtypes?: readonly string[];
-      readonly setSubtypes?: readonly string[];
-      readonly addColors?: readonly Color[];
-    },
-  ): void;
-  /** Every permanent matching `filter` becomes a creature (or just has its
-   * base P/T set) — see the `"animate-all"` {@link EffectSpec}. */
-  animateAll(
-    filter: CardFilter,
-    opts: {
-      readonly power: number;
-      readonly toughness: number;
-      readonly addTypes: readonly CardType[];
-      readonly addSubtypes: readonly string[];
-      readonly keywords: readonly Keyword[];
-      readonly duration: PermanentDuration;
-      readonly exceptSource?: boolean;
-      readonly scopeTo?: PlayerId;
-    },
-  ): void;
   /** `player` manifests (or cloaks) the top card of their library — see the
    * `"manifest"` {@link EffectSpec}; `library` is another player's library
    * it comes from (its `from`). */
@@ -12590,8 +12246,6 @@ export interface EffectApi {
       /** "Sacrifice it at the beginning of the next end step" (Kiki-Jiki) —
        * sacrificed rather than exiled, so dies-triggers see it go. */
       sacrificeAtEndStep?: boolean;
-      notLegendary: boolean;
-      basePt?: readonly [number, number];
       /** Keywords the copies gain until end of turn. */
       gainUntilEndOfTurn?: readonly Keyword[];
       /** Keywords and triggered abilities they gain with no end (not
@@ -12758,8 +12412,6 @@ export interface EffectApi {
       readonly gainLifeFrom?: CardFilter;
     },
   ): void;
-  /** `target` becomes `colors` — see the `"become-color"` {@link EffectSpec}. */
-  becomeColor(target: TargetRef, colors: readonly Color[], duration: PermanentDuration, inAddition?: boolean): void;
   /** `target`'s text has every `change.from` replaced by `change.to` — see
    * the `"change-text"` {@link EffectSpec}. */
   changeText(target: TargetRef, change: TextChange, duration: PermanentDuration): void;
@@ -14456,6 +14108,29 @@ export function amountValue(
  * power is half that creature's power". Not clamped: rule 107.1b lets a value
  * that sets power or toughness be negative.
  */
+/** `patch` with its amounts read, once, as it applies (rule 608.2h). */
+function readPatch(patch: CharacteristicsPatch<EffectAmount>, ctx: ResolutionContext): ResolvedPatch {
+  const { power, toughness, ...rest } = patch;
+  return {
+    ...rest,
+    ...(power !== undefined ? { power: ptSetValue(power, ctx) } : {}),
+    ...(toughness !== undefined ? { toughness: ptSetValue(toughness, ctx) } : {}),
+  };
+}
+
+/** A copy effect's exceptions with their amounts read. */
+function readCopyExceptions(exceptions: CopyExceptions<EffectAmount>, ctx: ResolutionContext): CopyExceptions {
+  const { power, toughness, ifCopied, ...rest } = exceptions;
+  return {
+    ...rest,
+    ...(power !== undefined ? { power: ptSetValue(power, ctx) } : {}),
+    ...(toughness !== undefined ? { toughness: ptSetValue(toughness, ctx) } : {}),
+    ...(ifCopied !== undefined
+      ? { ifCopied: ifCopied.map(({ ofType, patch }) => ({ ofType, patch: readPatch(patch, ctx) })) }
+      : {}),
+  };
+}
+
 export function ptSetValue(amount: EffectAmount, ctx: ResolutionContext): number {
   return signedAmountValue(amount, ctx);
 }
@@ -17564,12 +17239,11 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       const target = spec.target;
       applyEffectSpec(
         {
-          kind: "animate",
+          kind: "become",
           target,
           power: 0,
           toughness: 0,
           addTypes: ["creature"],
-          addSubtypes: [],
           keywords: ["haste"],
           duration: "permanent",
         },
@@ -18071,15 +17745,20 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (target !== undefined) ctx.reselectAttack(target, spec.onlyPlayers === true);
       return;
     }
-    case "lose-keywords": {
-      if (spec.filter !== undefined) {
-        const scopeTo = scopedController(spec.controlledByTarget, ctx);
-        if (spec.controlledByTarget !== undefined && scopeTo === undefined) return;
-        ctx.loseKeywords(spec.filter, spec.keywords, spec.duration, scopeTo, spec.cantHave);
+    case "become": {
+      const { kind: _kind, target: on, filter, exceptSource, controlledByTarget, duration, ...patch } = spec;
+      const read = readPatch(patch, ctx);
+      if (filter !== undefined) {
+        const scopeTo = scopedController(controlledByTarget, ctx);
+        if (controlledByTarget !== undefined && scopeTo === undefined) return;
+        ctx.becomeAll(filterAtX(filter, ctx.x), read, duration, {
+          ...(exceptSource === true ? { exceptSource: true } : {}),
+          ...(scopeTo !== undefined ? { scopeTo } : {}),
+        });
         return;
       }
-      const target = spec.target === undefined ? undefined : objectRefAct(spec.target, ctx);
-      if (target !== undefined) ctx.loseKeywords(target, spec.keywords, spec.duration, undefined, spec.cantHave);
+      const target = on === undefined ? undefined : objectRefAct(on, ctx);
+      if (target !== undefined) ctx.become(target, read, duration);
       return;
     }
     case "connive": {
@@ -18690,20 +18369,6 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
     case "grant-activated-all":
       ctx.grantActivatedAll(spec.filter, spec.ability, spec.duration);
       return;
-    case "lose-abilities-all":
-      ctx.loseAbilitiesAll(spec.filter, spec.duration);
-      return;
-    case "lose-abilities": {
-      const target = objectRefAct(spec.target, ctx);
-      if (target !== undefined) {
-        ctx.loseAbilities(target, {
-          loseLandTypes: spec.loseLandTypes === true,
-          activated: spec.activated ?? [],
-          duration: spec.duration,
-        });
-      }
-      return;
-    }
     case "gift":
       ctx.giveGift(spec.gift);
       return;
@@ -19056,55 +18721,6 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       if (target !== undefined) ctx.phaseOut({ target, ...until });
       return;
     }
-    case "animate": {
-      const target = objectRefAct(spec.target, ctx);
-      if (target !== undefined) {
-        ctx.animate(target, {
-          ...(spec.power !== undefined ? { power: amountValue(spec.power, ctx) } : {}),
-          ...(spec.toughness !== undefined ? { toughness: amountValue(spec.toughness, ctx) } : {}),
-          addTypes: spec.addTypes,
-          setTypes: spec.setTypes,
-          addSubtypes: spec.addSubtypes,
-          setSubtypes: spec.setSubtypes,
-          setColors: spec.setColors,
-          ...(spec.addColors !== undefined ? { addColors: spec.addColors } : {}),
-          loseAbilities: spec.loseAbilities,
-          keywords: spec.keywords ?? [],
-          ...(spec.addSupertypes !== undefined ? { addSupertypes: spec.addSupertypes } : {}),
-          ...(spec.setName !== undefined ? { setName: spec.setName } : {}),
-          duration: spec.duration,
-        });
-      }
-      return;
-    }
-    case "add-types": {
-      const target = objectRefAct(spec.target, ctx);
-      if (target !== undefined) {
-        ctx.addTypes(target, spec.addTypes ?? [], spec.addSubtypes ?? [], spec.duration, {
-          ...(spec.setTypes !== undefined ? { setTypes: spec.setTypes } : {}),
-          ...(spec.removeTypes !== undefined ? { removeTypes: spec.removeTypes } : {}),
-          ...(spec.removeSubtypes !== undefined ? { removeSubtypes: spec.removeSubtypes } : {}),
-          ...(spec.setSubtypes !== undefined ? { setSubtypes: spec.setSubtypes } : {}),
-          ...(spec.addColors !== undefined ? { addColors: spec.addColors } : {}),
-        });
-      }
-      return;
-    }
-    case "animate-all": {
-      const scopeTo = scopedController(spec.controlledByTarget, ctx);
-      if (spec.controlledByTarget !== undefined && scopeTo === undefined) return;
-      ctx.animateAll(spec.filter, {
-        power: amountValue(spec.power, ctx),
-        toughness: amountValue(spec.toughness, ctx),
-        addTypes: spec.addTypes ?? [],
-        addSubtypes: spec.addSubtypes ?? [],
-        keywords: spec.keywords ?? [],
-        duration: spec.duration,
-        ...(spec.exceptSource === true ? { exceptSource: true } : {}),
-        ...(scopeTo !== undefined ? { scopeTo } : {}),
-      });
-      return;
-    }
     case "create-token":
       if (spec.replacementAsked !== true && spec.who === undefined && ctx.tokenEventReplaced(spec, amountValue(spec.count, ctx) * ctx.stackMultiplier)) return;
       // A per-player count ("its controller creates a token for each
@@ -19328,16 +18944,12 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           gainsHaste: spec.gainsHaste ?? false,
           sacrificeAtEndStep: spec.sacrificeAtEndStep ?? false,
           exileAtEndStep: spec.exileAtEndStep ?? false,
-          notLegendary: spec.notLegendary ?? false,
           under: named ?? (spec.who === "you" || ofCards ? ctx.controller : undefined),
           ...(spec.linkedToSource === true ? { linkedToSource: true } : {}),
-          ...(spec.basePt
-            ? { basePt: [ptSetValue(spec.basePt[0], ctx), ptSetValue(spec.basePt[1], ctx)] as const }
-            : {}),
           ...(spec.gainUntilEndOfTurn ? { gainUntilEndOfTurn: spec.gainUntilEndOfTurn } : {}),
           ...(spec.gains?.keywords !== undefined ? { gainKeywords: spec.gains.keywords } : {}),
           ...(spec.gains?.triggered !== undefined ? { gainTriggered: spec.gains.triggered } : {}),
-          ...(spec.exceptions ? { exceptions: spec.exceptions } : {}),
+          ...(spec.exceptions ? { exceptions: readCopyExceptions(spec.exceptions, ctx) } : {}),
           ...(spec.asCard === true || ofCards ? { asCard: true } : {}),
           ...(spec.tapped === true ? { tapped: true } : {}),
           ...(spec.attacking !== undefined ? { attacking: resolveEnterAttacking(spec.attacking, ctx) } : {}),
@@ -19562,7 +19174,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       ctx.becomeCopy(targets, of.object, {
         ...(ofCard ? { ofCard: true } : {}),
         ...(until !== undefined ? { until } : {}),
-        ...(spec.exceptions !== undefined ? { exceptions: spec.exceptions } : {}),
+        ...(spec.exceptions !== undefined ? { exceptions: readCopyExceptions(spec.exceptions, ctx) } : {}),
       });
       return;
     }
@@ -19821,11 +19433,6 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
         ...(redirect !== undefined ? { redirect } : {}),
         ...(spec.then !== undefined ? { ownTargets: ctx.targets.map((t) => t ?? null) } : {}),
       });
-      return;
-    }
-    case "become-color": {
-      const target = objectRefAct(spec.target, ctx);
-      if (target !== undefined) ctx.becomeColor(target, spec.colors, spec.duration, spec.inAddition === true);
       return;
     }
     case "change-text": {

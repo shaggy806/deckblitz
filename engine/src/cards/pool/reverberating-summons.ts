@@ -21,7 +21,7 @@ export default defineCard({
       condition: { kind: "cast-this-turn", who: "you", atLeast: 2 },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 3,
         toughness: 3,

@@ -1,7 +1,7 @@
 import { defineCard } from "../define.js";
 
 // "Becomes a 4/4 Phyrexian Eye artifact creature" with no "loses its other
-// types": `animate` adds creature and the creature types, keeps artifact
+// types": `become` adds creature and the creature types, keeps artifact
 // (rule 205.1b), and sets its base P/T until end of turn.
 
 const SCRY_TEXT = "When this artifact enters, scry 2.";
@@ -31,7 +31,7 @@ export default defineCard({
       },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 4,
         toughness: 4,

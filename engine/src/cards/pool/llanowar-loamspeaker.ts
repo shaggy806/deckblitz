@@ -32,7 +32,7 @@ export default defineCard({
       // Types added, not set ("it's still a land"), and no colour named, so it
       // keeps its own. It isn't untapped (the ruling).
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 3,
         toughness: 3,

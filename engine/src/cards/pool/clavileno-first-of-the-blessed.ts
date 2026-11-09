@@ -36,7 +36,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "add-types", target: 0, addSubtypes: ["Demon"], duration: "permanent" },
+          { kind: "become", target: 0, addSubtypes: ["Demon"], duration: "permanent" },
           {
             kind: "grant-triggered",
             target: 0,

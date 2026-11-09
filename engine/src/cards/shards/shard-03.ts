@@ -35,6 +35,7 @@ import _poolArcboundSlith from "../pool/arcbound-slith.js";
 import _poolArchnemesis from "../pool/archnemesis.js";
 import _poolArchonOfCruelty from "../pool/archon-of-cruelty.js";
 import _poolArchonsGlory from "../pool/archons-glory.js";
+import _poolArcumsWeathervane from "../pool/arcums-weathervane.js";
 import _poolArgentMutation from "../pool/argent-mutation.js";
 import _poolArmageddonClock from "../pool/armageddon-clock.js";
 import _poolArmoredGalleon from "../pool/armored-galleon.js";
@@ -492,6 +493,7 @@ import _poolMossViper from "../pool/moss-viper.js";
 import _poolMoxPearl from "../pool/mox-pearl.js";
 import _poolMurasaSproutling from "../pool/murasa-sproutling.js";
 import _poolMurderousCut from "../pool/murderous-cut.js";
+import _poolMycosynthLattice from "../pool/mycosynth-lattice.js";
 import _poolMythosOfVadrok from "../pool/mythos-of-vadrok.js";
 import _poolNadirKraken from "../pool/nadir-kraken.js";
 import _poolNajalTheStormRunner from "../pool/najal-the-storm-runner.js";
@@ -944,6 +946,7 @@ const shard: CardShard = {
     _poolArchnemesis,
     _poolArchonOfCruelty,
     _poolArchonsGlory,
+    _poolArcumsWeathervane,
     _poolArgentMutation,
     _poolArmageddonClock,
     _poolArmoredGalleon,
@@ -1401,6 +1404,7 @@ const shard: CardShard = {
     _poolMoxPearl,
     _poolMurasaSproutling,
     _poolMurderousCut,
+    _poolMycosynthLattice,
     _poolMythosOfVadrok,
     _poolNadirKraken,
     _poolNajalTheStormRunner,

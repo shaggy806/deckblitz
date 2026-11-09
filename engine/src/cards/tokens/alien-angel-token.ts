@@ -18,7 +18,7 @@ export default defineCard({
     {
       trigger: { on: "cast-spell", who: "opponent", filter: { type: "creature" } },
       targets: [],
-      effect: { kind: "add-types", target: "source", removeTypes: ["creature"], duration: "end-of-turn" },
+      effect: { kind: "become", target: "source", removeTypes: ["creature"], duration: "end-of-turn" },
       resolve: null,
       text: TEXT,
     },

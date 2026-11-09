@@ -24,7 +24,7 @@ export default defineCard({
       targets: [],
       // No duration (the ruling): it stays a 7/7 Beast while it's on the battlefield.
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 7,
         toughness: 7,

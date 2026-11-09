@@ -33,12 +33,10 @@ export default defineCard({
       otherOnly: true,
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 4,
         toughness: 4,
-        addTypes: [],
-        addSubtypes: [],
         setSubtypes: ["Dragon"],
         keywords: ["flying", "haste"],
         duration: "end-of-turn",

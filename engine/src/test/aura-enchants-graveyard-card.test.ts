@@ -103,7 +103,7 @@ describe("Animate Dead", () => {
     const animate = toHand(game, "Animate Dead");
     swamps(game, 2);
     cast(game, animate, { targets: [ref(bears)] });
-    game.debugApplyEffect(A, { kind: "add-types", target: 0, setTypes: ["artifact"], duration: "permanent" }, [ref(bears)]);
+    game.debugApplyEffect(A, { kind: "become", target: 0, setTypes: ["artifact"], duration: "permanent" }, [ref(bears)]);
     expect(types(game, bears)).toEqual(["artifact"]);
     // The state-based check, as the next spell resolves.
     swamps(game, 1);

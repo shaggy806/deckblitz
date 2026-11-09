@@ -20,9 +20,9 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "lose-abilities-all", filter: { type: "creature", controlledBy: "opponent" }, duration: "end-of-turn" },
+          { kind: "become", loseAbilities: true, filter: { type: "creature", controlledBy: "opponent" }, duration: "end-of-turn" },
           {
-            kind: "animate-all",
+            kind: "become",
             filter: { type: "creature", controlledBy: "opponent" },
             power: 1,
             toughness: 1,

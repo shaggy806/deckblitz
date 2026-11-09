@@ -27,12 +27,10 @@ export default defineCard({
         kind: "sequence",
         effects: [
           {
-            kind: "animate",
+            kind: "become",
             target: "source",
             power: 1,
             toughness: 1,
-            addTypes: [],
-            addSubtypes: [],
             setSubtypes: ["Human"],
             loseAbilities: true,
             keywords: ["hexproof"],

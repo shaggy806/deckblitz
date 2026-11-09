@@ -39,12 +39,11 @@ export default defineCard({
       cost: { mana: "{2}{B}", tap: false },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 5,
         toughness: 5,
         addTypes: ["artifact", "creature"],
-        addSubtypes: [],
         setSubtypes: ["Phyrexian", "Horror"],
         setColors: ["B"],
         keywords: ["trample"],

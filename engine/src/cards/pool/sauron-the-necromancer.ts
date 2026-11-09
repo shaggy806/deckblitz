@@ -31,7 +31,7 @@ export default defineCard({
             attacking: "choose",
             // A Wraith instead of its other subtypes, black instead of its
             // colours, base 3/3 (the rulings), with menace.
-            exceptions: { basePt: [3, 3], setColors: ["B"], setSubtypes: ["Wraith"], keywords: ["menace"] },
+            exceptions: { power: 3, toughness: 3, setColors: ["B"], setSubtypes: ["Wraith"], keywords: ["menace"] },
           },
           {
             kind: "delayed-trigger",

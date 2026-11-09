@@ -1,7 +1,7 @@
 import { defineCard } from "../define.js";
 import { addManaAbility } from "../helpers.js";
 
-// −2 is `animate` with `setTypes`/`setSubtypes` (rule 205.1a: her ruling's
+// −2 is `become` with `setTypes`/`setSubtypes` (rule 205.1a: her ruling's
 // "only a Treasure artifact", its supertypes kept) and `loseAbilities`, then
 // the mana ability granted after the loss, so that it stays (rule 613.7).
 // Its colors, name and mana cost stay too.
@@ -47,11 +47,9 @@ export default defineCard({
         kind: "sequence",
         effects: [
           {
-            kind: "animate",
+            kind: "become",
             target: 0,
-            addTypes: [],
             setTypes: ["artifact"],
-            addSubtypes: [],
             setSubtypes: ["Treasure"],
             loseAbilities: true,
             duration: "permanent",

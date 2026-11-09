@@ -39,7 +39,7 @@ export default defineCard({
           effects: [
             { kind: "create-token-copy", of: "trigger-object", count: 1, who: "you" },
             {
-              kind: "animate-all",
+              kind: "become",
               filter: { thisWay: "created", notTypes: ["creature"] },
               power: 2,
               toughness: 2,

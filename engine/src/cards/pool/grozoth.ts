@@ -21,7 +21,7 @@ export default defineCard({
     {
       cost: { mana: "{4}", tap: false },
       targets: [],
-      effect: { kind: "lose-keywords", target: "source", keywords: ["defender"], duration: "end-of-turn" },
+      effect: { kind: "become", target: "source", loseKeywords: ["defender"], duration: "end-of-turn" },
       resolve: null,
       text: LOSE,
     },

@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 
 // EDHREC rank 10435.
 
-// Each mode is an `animate` with no new card type: "becomes a Citizen" sets
+// Each mode is an `become` with no new card type: "becomes a Citizen" sets
 // its creature types (rule 205.1a — `setSubtypes`), and the base P/T and
 // keywords come with it, all until end of turn.
 const CONCEAL_MODE =
@@ -24,12 +24,10 @@ export default defineCard({
         text: CONCEAL_MODE,
         targets: ["creature-you-control"],
         effect: {
-          kind: "animate",
+          kind: "become",
           target: 0,
           power: 1,
           toughness: 1,
-          addTypes: [],
-          addSubtypes: [],
           setSubtypes: ["Citizen"],
           keywords: ["hexproof"],
           duration: "end-of-turn",
@@ -39,12 +37,10 @@ export default defineCard({
         text: REVEAL_MODE,
         targets: ["creature-you-control"],
         effect: {
-          kind: "animate",
+          kind: "become",
           target: 0,
           power: 3,
           toughness: 4,
-          addTypes: [],
-          addSubtypes: [],
           setSubtypes: ["Hero"],
           keywords: ["flying", "vigilance"],
           duration: "end-of-turn",

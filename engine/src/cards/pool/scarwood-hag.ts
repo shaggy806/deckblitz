@@ -20,7 +20,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: true },
       targets: ["creature"],
-      effect: { kind: "lose-keywords", target: 0, keywords: ["forestwalk"], duration: "end-of-turn" },
+      effect: { kind: "become", target: 0, loseKeywords: ["forestwalk"], duration: "end-of-turn" },
       resolve: null,
       text: "{T}: Target creature loses forestwalk until end of turn.",
     },

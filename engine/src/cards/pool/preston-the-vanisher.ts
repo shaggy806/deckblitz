@@ -28,7 +28,7 @@ export default defineCard({
         kind: "create-token-copy",
         of: "trigger-object",
         count: 1,
-        exceptions: { basePt: [0, 1], setColors: ["W"], setSubtypes: ["Illusion"] },
+        exceptions: { power: 0, toughness: 1, setColors: ["W"], setSubtypes: ["Illusion"] },
       },
       resolve: null,
       text: "Whenever another nontoken creature you control enters, if it wasn't cast, create a token that's a copy of that creature, except it's a 0/1 white Illusion.",

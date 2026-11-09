@@ -22,7 +22,7 @@ export default defineCard({
     {
       trigger: { on: "cast-spell", who: "you", filter: { anyOf: [{ subtype: "Spirit" }, { subtype: "Arcane" }] } },
       targets: ["land"],
-      effect: { kind: "animate", target: 0, power: 3, toughness: 3, addTypes: ["creature"], addSubtypes: [], duration: "end-of-turn" },
+      effect: { kind: "become", target: 0, power: 3, toughness: 3, addTypes: ["creature"], duration: "end-of-turn" },
       resolve: null,
       text: TEXT,
     },

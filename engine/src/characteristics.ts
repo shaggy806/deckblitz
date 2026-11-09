@@ -24,6 +24,7 @@
  * `GameObject.controller`, not here.
  */
 
+import type { StaticPt } from "./characteristics-patch.js";
 import { isManaAbility, isTriggeredManaAbility } from "./abilities.js";
 import type { ActivatedAbility } from "./abilities.js";
 import type {
@@ -3209,8 +3210,10 @@ export function withChangeling(
 export interface LayerFour {
   readonly types: readonly CardType[];
   readonly subtypes: readonly string[];
-  /** The supertypes statics add, over `supertypesOf`'s: {@link effectiveSupertypes}. */
+  /** The supertypes statics add, over {@link supertypesWithEffects}'s, and
+   * those they take away: {@link effectiveSupertypes}. */
   readonly addedSupertypes: readonly Supertype[];
+  readonly removedSupertypes: readonly Supertype[];
   /**
    * The statics with a layer-4 part (`addTypes` / `addSubtypes`) that
    * applied to this permanent. Rule 613.6: an effect keeps applying to the
@@ -3335,6 +3338,7 @@ function applyModifierTypes(
     st = [...st.filter((s) => !kinds.has(subtypeKind(s))), ...modifier.setSubtypes];
   }
   if (modifier.loseLandTypes) st = st.filter((s) => s !== EVERY_LAND_TYPE && !isLandType(s));
+  if (modifier.loseCreatureTypes) st = st.filter((s) => subtypeKind(s) !== "creature");
   if (modifier.addTypes && modifier.addTypes.length > 0) t = union(t, modifier.addTypes);
   if (modifier.addSubtypes && modifier.addSubtypes.length > 0) {
     // A copy exception's subtypes are fixed with the copiable values (rule
@@ -3362,7 +3366,7 @@ function union<T>(a: readonly T[], b: readonly T[]): readonly T[] {
 /**
  * Layer 4 for one object: printed types and subtypes (subtypes after layer
  * 3), then every type-changing effect in timestamp order (rule 613.7) — the
- * object's own modifiers (an `animate`, amass's "it's also a Zombie", Turn to
+ * object's own modifiers (an `become`, amass's "it's also a Zombie", Turn to
  * Frog's "becomes a Frog") and, on the battlefield, every static with an
  * `addTypes` / `addSubtypes` part whose scope reaches it (Kudo's Bears,
  * Ragost's Foods, Bello's creatures).
@@ -3396,7 +3400,7 @@ export function layerFour(
   return foldLayerFour(state, registry, object, sources);
 }
 
-/** Every battlefield static with a `typesOutsideBattlefield` part, in
+/** Every battlefield static with a `outsideBattlefield` part, in
  * battlefield order — usually none. As {@link typeGrantSources} has it, one
  * that has lost its abilities still applies here, layer 6 coming after layer 4. */
 function outsideTypeSources(state: GameState, registry: CardRegistry): readonly ContributingStatic[] {
@@ -3405,7 +3409,7 @@ function outsideTypeSources(state: GameState, registry: CardRegistry): readonly 
   let out: ContributingStatic[] | null = null;
   for (const sourceId of state.zones.shared.battlefield) {
     const source = state.objects[sourceId];
-    const statics = staticsOf(registry, rulesTextName(source)).outsideTypes;
+    const statics = staticsOf(registry, rulesTextName(source)).outside;
     if (statics.length === 0 || state.players[source.controller]?.hasLost === true) continue;
     for (const ability of statics) (out ??= []).push({ source, ability });
   }
@@ -3426,9 +3430,29 @@ function selfOutsideBattlefield(
   return staticsOf(registry, rulesTextName(object)).selfOutside[0]?.selfOutsideBattlefield;
 }
 
+/** Whether a static's `outsideBattlefield` reaches `object`, a card or a
+ * spell off the battlefield whose card types as they stand without it are
+ * `types`: yours (a spell's controller, a card's owner) unless it says
+ * `whose: "all"`, of its card types, in its zones. */
+function outsideReaches(
+  state: GameState,
+  registry: CardRegistry,
+  source: GameObject,
+  ability: StaticAbility,
+  object: GameObject,
+  types: readonly CardType[],
+): boolean {
+  const grant = ability.outsideBattlefield!;
+  if (grant.whose !== "all" && (object.zone === "stack" ? object.controller : object.owner) !== source.controller) return false;
+  if (grant.ofType !== undefined && !grant.ofType.some((t) => types.includes(t))) return false;
+  if (grant.notType !== undefined && types.includes(grant.notType)) return false;
+  if (grant.zones !== undefined && !(grant.zones as readonly string[]).includes(object.zone)) return false;
+  return ability.condition === undefined || staticConditionMet(state, registry, source, ability.condition);
+}
+
 /**
  * Layer 4 for an object off the battlefield: its own, then each
- * `typesOutsideBattlefield` static that reaches it, in timestamp order (rule
+ * `outsideBattlefield` static that reaches it, in timestamp order (rule
  * 613.7) — a card its controller owns, a spell they control. The grants only
  * read its card type as it stands without them, so nothing here can loop. A
  * face-down card has no types to add to (rule 708.2), and an ability on the
@@ -3449,11 +3473,8 @@ function outsideLayerFour(state: GameState, registry: CardRegistry, object: Game
   let addedSupertypes = NO_SUPERTYPES;
   const ordered = sources.length === 1 ? sources : [...sources].sort((a, b) => a.source.timestamp - b.source.timestamp);
   for (const { source, ability } of ordered) {
-    const grant = ability.typesOutsideBattlefield!;
-    const yours = object.zone === "stack" ? object.controller : object.owner;
-    if (yours !== source.controller || !own.types.includes(grant.ofType)) continue;
-    if (grant.zones !== undefined && !(grant.zones as readonly string[]).includes(object.zone)) continue;
-    if (ability.condition !== undefined && !staticConditionMet(state, registry, source, ability.condition)) continue;
+    const grant = ability.outsideBattlefield!;
+    if (!outsideReaches(state, registry, source, ability, object, own.types)) continue;
     if (grant.addTypes !== undefined) types = union(types, grant.addTypes);
     if (grant.addSubtypes !== undefined) subtypes = union(subtypes, grant.addSubtypes);
     if (grant.addSupertypes !== undefined) addedSupertypes = union(addedSupertypes, grant.addSupertypes);
@@ -3464,7 +3485,7 @@ function outsideLayerFour(state: GameState, registry: CardRegistry, object: Game
       subtypes = [...subtypes.filter((s) => subtypeKind(s) !== "creature"), chosen];
     }
   }
-  return { types, subtypes, addedSupertypes, applied: NO_STATICS };
+  return { types, subtypes, addedSupertypes, removedSupertypes: NO_SUPERTYPES, applied: NO_STATICS };
 }
 
 /** Layer 4 from the object's own modifiers alone — everything there was
@@ -3476,7 +3497,7 @@ function ownLayerFour(registry: CardRegistry, object: GameObject): LayerFour {
   for (const modifier of typeModifiers(object)) {
     ({ types, subtypes } = applyModifierTypes(modifier, types, subtypes));
   }
-  return { types, subtypes, addedSupertypes: NO_SUPERTYPES, applied: NO_STATICS };
+  return { types, subtypes, addedSupertypes: NO_SUPERTYPES, removedSupertypes: NO_SUPERTYPES, applied: NO_STATICS };
 }
 
 /**
@@ -3551,7 +3572,8 @@ function foldLayerFourOnce(
   let seenTypes = types;
   let seenSubtypes = subtypes;
   const baseSupertypes = supertypesWithEffects(registry, object);
-  let addedSupertypes = NO_SUPERTYPES;
+  // Printed and copied, then every effect in timestamp order (rule 613.7).
+  let supertypes = supertypesOf(registry, object);
   const applied: ContributingStatic[] = [];
   // Statics that reach `object` only through what a later step gives it
   // (Glaciers' "all Mountains are Plains" over a Forest a later effect made a
@@ -3585,6 +3607,10 @@ function foldLayerFourOnce(
       const kinds = new Set(set.map(subtypeKind));
       subtypes = [...subtypes.filter((s) => !kinds.has(subtypeKind(s))), ...set];
     }
+    if (ability.removeSubtypes !== undefined) {
+      const removed = ability.removeSubtypes;
+      subtypes = subtypes.filter((s) => !removed.includes(s));
+    }
     // Curse of Conformity's "lose all creature types" (205.1a).
     if (ability.loseCreatureTypes === true) subtypes = subtypes.filter((s) => subtypeKind(s) !== "creature");
     // Lithoform Blight's "loses all land types" (305.7).
@@ -3597,7 +3623,7 @@ function foldLayerFourOnce(
       subtypes = [...subtypes.filter((s) => s !== EVERY_LAND_TYPE && !isLandType(s)), chosen];
     }
     if (ability.addSubtypes !== undefined) subtypes = union(subtypes, ability.addSubtypes);
-    if (ability.addSupertypes !== undefined) addedSupertypes = union(addedSupertypes, ability.addSupertypes);
+    supertypes = patchedSupertypes(ability, supertypes);
     if (ability.addsChosenCreatureType === true) {
       // Titan of Littjara's "is the chosen type in addition": its source's
       // choice, a creature type (`chooseCreatureTypeOnEnter`).
@@ -3618,10 +3644,11 @@ function foldLayerFourOnce(
     seenSubtypes = union(seenSubtypes, subtypes);
   };
   const supertypesSeen = (): readonly Supertype[] =>
-    previous !== null ? previous.supertypes : union(baseSupertypes, addedSupertypes);
+    previous !== null ? previous.supertypes : supertypes;
   for (const step of steps) {
     if ("modifier" in step) {
       ({ types, subtypes } = applyModifierTypes(step.modifier, types, subtypes));
+      if (step.modifier.copiable !== true) supertypes = patchedSupertypes(step.modifier, supertypes);
       see();
       continue;
     }
@@ -3649,8 +3676,14 @@ function foldLayerFourOnce(
     }
   }
   return {
-    four: { types, subtypes, addedSupertypes, applied },
-    seen: { types: seenTypes, subtypes: seenSubtypes, supertypes: union(baseSupertypes, addedSupertypes) },
+    four: {
+      types,
+      subtypes,
+      addedSupertypes: supertypes.filter((s) => !baseSupertypes.includes(s)),
+      removedSupertypes: baseSupertypes.filter((s) => !supertypes.includes(s)),
+      applied,
+    },
+    seen: { types: seenTypes, subtypes: seenSubtypes, supertypes },
   };
 }
 
@@ -3662,6 +3695,7 @@ function assertSameLayerFour(cached: LayerFour, fresh: LayerFour, id: ObjectId):
       types: [...l.types].sort(),
       subtypes: [...l.subtypes].sort(),
       addedSupertypes: [...l.addedSupertypes].sort(),
+      removedSupertypes: [...l.removedSupertypes].sort(),
       applied: l.applied.map((a) => `${a.source.id}:${a.ability.text}`),
     });
   const a = show(cached);
@@ -3680,7 +3714,9 @@ export function hasLayerFourPart(ability: StaticAbility): boolean {
     ability.addTypes !== undefined ||
     ability.addSubtypes !== undefined ||
     ability.addSupertypes !== undefined ||
+    ability.removeSupertypes !== undefined ||
     ability.setSubtypes !== undefined ||
+    ability.removeSubtypes !== undefined ||
     ability.setTypes !== undefined ||
     ability.removeTypes !== undefined ||
     ability.loseLandTypes === true ||
@@ -3789,7 +3825,7 @@ export function effectiveSubtypes(
 }
 
 /**
- * A permanent's current card types: printed → layer 4 (an `animate` — a
+ * A permanent's current card types: printed → layer 4 (an `become` — a
  * man-land becoming a creature — and every type-granting static; see
  * {@link layerFour}). Answers without the rest of the layer fold, which is
  * what lets `matchesFilter` ask a type question without recursing into
@@ -3815,17 +3851,41 @@ export function effectiveSupertypes(
   object: GameObject,
 ): readonly Supertype[] {
   const base = supertypesWithEffects(registry, object);
-  const added = layerFour(state, registry, object).addedSupertypes;
-  return added.length === 0 ? base : union(base, added);
+  const { addedSupertypes: added, removedSupertypes: removed } = layerFour(state, registry, object);
+  const withAdded = added.length === 0 ? base : union(base, added);
+  return removed.length === 0 ? withAdded : withAdded.filter((s) => !removed.includes(s));
+}
+
+/** `current` with what `patch` adds and takes away (rule 205.4). */
+function patchedSupertypes(
+  patch: { readonly addSupertypes?: readonly Supertype[]; readonly removeSupertypes?: readonly Supertype[] },
+  current: readonly Supertype[],
+): readonly Supertype[] {
+  const added = patch.addSupertypes === undefined ? current : union(current, patch.addSupertypes);
+  const removed = patch.removeSupertypes;
+  return removed === undefined ? added : added.filter((s) => !removed.includes(s));
+}
+
+/** The card types `name`'s copiable values have, its printed ones and then
+ * each copiable modifier's (rule 707.2): what an exception conditional on
+ * what's copied reads. */
+export function copiableTypesOf(
+  registry: CardRegistry,
+  name: string,
+  modifiers: readonly PtModifier[],
+): readonly CardType[] {
+  let types: readonly CardType[] = registry.get(name).types;
+  for (const modifier of modifiers) {
+    if (modifier.copiable === true) ({ types } = applyModifierTypes(modifier, types, []));
+  }
+  return types;
 }
 
 /** `supertypesOf`, and an effect's "it becomes a legendary …" (Awakening of
  * Vitu-Ghazi), which isn't copiable. */
 function supertypesWithEffects(registry: CardRegistry, object: GameObject): readonly Supertype[] {
   let out = supertypesOf(registry, object);
-  for (const m of object.modifiers) {
-    if (m.copiable !== true && m.addSupertypes !== undefined) out = union(out, m.addSupertypes);
-  }
+  for (const m of object.modifiers) if (m.copiable !== true) out = patchedSupertypes(m, out);
   return out;
 }
 
@@ -3833,6 +3893,15 @@ function supertypesWithEffects(registry: CardRegistry, object: GameObject): read
  * condition that asks about colours again reads the object without statics
  * rather than looping (as `layer4InProgress` does for layer 4). */
 const layer5InProgress = new Set<ObjectId>();
+
+/** The `outsideBattlefield` statics with a colour part, in timestamp order. */
+function orderedOutsideColors(state: GameState, registry: CardRegistry): readonly ContributingStatic[] {
+  const sources = outsideTypeSources(state, registry);
+  if (sources.length === 0) return sources;
+  return sources
+    .filter((s) => s.ability.outsideBattlefield!.setColors !== undefined || s.ability.outsideBattlefield!.addColors !== undefined)
+    .sort((a, b) => a.source.timestamp - b.source.timestamp);
+}
 
 /** A permanent's current colours: printed → layer 5 (`setColors` replaces,
  * `addColors` unions), in timestamp order (rule 613.7) — its own modifiers
@@ -3845,6 +3914,15 @@ export function effectiveColors(
   object: GameObject,
 ): Set<Color> {
   let colors = new Set<Color>(registry.get(printedCardName(object)).colors);
+  if (state !== null && object.zone !== "battlefield" && object.zone !== "phased-out" && object.kind === "card") {
+    for (const { source, ability } of orderedOutsideColors(state, registry)) {
+      if (object.faceDown !== undefined || object.foretold === true || object.exiledFaceDown !== undefined) break;
+      if (!outsideReaches(state, registry, source, ability, object, ownLayerFour(registry, object).types)) continue;
+      const grant = ability.outsideBattlefield!;
+      if (grant.setColors !== undefined) colors = new Set(grant.setColors);
+      if (grant.addColors !== undefined) for (const c of grant.addColors) colors.add(c);
+    }
+  }
   const sources =
     state !== null && object.zone === "battlefield" && !layer5InProgress.has(object.id)
       ? colorSetSources(state, registry)
@@ -4076,15 +4154,27 @@ function countSide(state: GameState, object: GameObject, forChosenPlayer: true |
   return chosen !== undefined && state.players[chosen]?.hasLost !== true ? chosen : undefined;
 }
 
-/** A `setBasePtFromSourceCount`'s X/X: the count read from `source`'s side. */
-function sourceCountPt(
+/** A static's `setBasePt` as it reaches `target`: each value read live, the
+ * permanent's own or from `source`'s side (rule 613.4b). */
+function staticBasePt(
   state: GameState,
   registry: CardRegistry,
   source: GameObject,
-  countOf: CountSpec,
-): { readonly power: number; readonly toughness: number } {
-  const n = basePtCount(state, registry, source, { countOf, plusPower: 0, plusToughness: 0 });
-  return { power: n, toughness: n };
+  value: NonNullable<StaticAbility["setBasePt"]>,
+  target: GameObject,
+): { readonly power?: number; readonly toughness?: number } {
+  const read = (v: StaticPt<CountSpec>): number =>
+    typeof v === "number"
+      ? v
+      : v === "its-mana-value"
+        ? manaValueOfObject(registry, target)
+        : "countersOnIt" in v
+          ? (target.counters[v.countersOnIt] ?? 0)
+          : basePtCount(state, registry, source, { countOf: v.sourceCount, plusPower: 0, plusToughness: 0 });
+  return {
+    ...(value.power !== undefined ? { power: read(value.power) } : {}),
+    ...(value.toughness !== undefined ? { toughness: read(value.toughness) } : {}),
+  };
 }
 
 /** A `setBasePtFromCount`'s count on `object`: the one permanent that knows
@@ -5040,8 +5130,8 @@ interface StaticsInfo {
   readonly layer4: readonly StaticAbility[];
   /** What {@link selfOutsideBattlefield} takes. */
   readonly selfOutside: readonly StaticAbility[];
-  /** What {@link outsideTypeSources} takes (`typesOutsideBattlefield`). */
-  readonly outsideTypes: readonly StaticAbility[];
+  /** What {@link outsideTypeSources} takes (`outsideBattlefield`). */
+  readonly outside: readonly StaticAbility[];
   /** What {@link colorSetSources} takes (a `setColors`). */
   readonly layer5: readonly StaticAbility[];
   /** What {@link abilityGrantSources} takes. */
@@ -5072,7 +5162,7 @@ function staticsInfo(registry: CardRegistry, name: string): StaticsInfo | null {
     contributing: statics.filter((a) => a.fromGraveyard !== true && contributesToCharacteristics(a)),
     fromGraveyard: statics.filter((a) => a.fromGraveyard === true && contributesToCharacteristics(a)),
     layer4: statics.filter(hasLayerFourPart),
-    outsideTypes: statics.filter((a) => a.typesOutsideBattlefield !== undefined),
+    outside: statics.filter((a) => a.outsideBattlefield !== undefined),
     selfOutside: statics.filter((a) => a.selfOutsideBattlefield !== undefined),
     layer5: statics.filter((a) => a.setColors !== undefined || a.addColors !== undefined || a.setsChosenColor === true),
     grants: statics.filter((a) => a.grantsActivated !== undefined || a.grantsTriggered !== undefined),
@@ -5137,9 +5227,7 @@ function contributesToCharacteristics(ability: StaticAbility): boolean {
     ability.hexproofFrom !== undefined ||
     ability.bandsWithOther !== undefined ||
     ability.landwalk !== undefined ||
-    ability.setBasePt !== undefined ||
-    ability.setBasePtFromAffectedCounters !== undefined ||
-    ability.setBasePtFromSourceCount !== undefined
+    ability.setBasePt !== undefined
   );
 }
 
@@ -5457,15 +5545,7 @@ function collectStaticEffects(
       hexproofFrom: ability.hexproofFrom ?? null,
       bandsWithOther: ability.bandsWithOther ?? null,
       landwalk: walk.land,
-      setBase:
-        ability.setBasePtFromAffectedCounters !== undefined
-          ? {
-              power: target.counters[ability.setBasePtFromAffectedCounters] ?? 0,
-              toughness: target.counters[ability.setBasePtFromAffectedCounters] ?? 0,
-            }
-          : ability.setBasePtFromSourceCount !== undefined
-          ? sourceCountPt(state, registry, source, ability.setBasePtFromSourceCount)
-          : (ability.setBasePt ?? null),
+      setBase: ability.setBasePt === undefined ? null : staticBasePt(state, registry, source, ability.setBasePt, target),
     };
   };
   let keywordScoped = false;
@@ -5673,7 +5753,7 @@ function computeCharacteristicsUncached(
   const subtypes: readonly string[] = layer4?.subtypes ?? withChangeling(def, def.subtypes, text);
   // Layer 5 — colour-changing effects.
   // A spell on the stack has any an effect gave it ("target spell becomes
-  // black" — Deathlace, `become-color`) as well as copiable ones (a
+  // black" — Deathlace, `become`) as well as copiable ones (a
   // prototyped spell's — rule 718.3b); elsewhere off the battlefield only
   // copiable values change them.
   const colors: ReadonlySet<Color> = onBattlefield || object.zone === "stack"

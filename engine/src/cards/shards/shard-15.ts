@@ -752,6 +752,7 @@ import _poolSquareUp from "../pool/square-up.js";
 import _poolSqueakingPieSneak from "../pool/squeaking-pie-sneak.js";
 import _poolSquelchingLeeches from "../pool/squelching-leeches.js";
 import _poolStampedingHorncrest from "../pool/stampeding-horncrest.js";
+import _poolStarfieldOfNyx from "../pool/starfield-of-nyx.js";
 import _poolStarfleetSecurity from "../pool/starfleet-security.js";
 import _poolStatureYoungAvenger from "../pool/stature-young-avenger.js";
 import _poolStatus from "../pool/status.js";
@@ -1689,6 +1690,7 @@ const shard: CardShard = {
     _poolSqueakingPieSneak,
     _poolSquelchingLeeches,
     _poolStampedingHorncrest,
+    _poolStarfieldOfNyx,
     _poolStarfleetSecurity,
     _poolStatureYoungAvenger,
     _poolStatus,

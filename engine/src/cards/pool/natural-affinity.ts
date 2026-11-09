@@ -13,7 +13,7 @@ export default defineCard({
   text: "All lands become 2/2 creatures until end of turn. They're still lands.",
   targets: [],
   effect: {
-    kind: "animate-all",
+    kind: "become",
     filter: { type: "land" },
     power: 2,
     toughness: 2,

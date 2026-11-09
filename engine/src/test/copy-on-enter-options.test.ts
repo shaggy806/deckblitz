@@ -300,7 +300,7 @@ describe("edges of the copy choice", () => {
     const s = setUp();
     lands(s.game, "Island", 8);
     const krenko = spawn(s.game, "Krenko, Mob Boss");
-    s.game.debugApplyEffect(A, { kind: "create-token-copy", of: 0, count: 1, notLegendary: true }, [
+    s.game.debugApplyEffect(A, { kind: "create-token-copy", of: 0, count: 1, exceptions: { removeSupertypes: ["legendary"] } }, [
       { kind: "object", object: krenko },
     ]);
     settle(s.game);

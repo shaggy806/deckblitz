@@ -25,13 +25,11 @@ export default defineCard({
       {
         text: "A blue Frog creature with base power and toughness 1/1",
         effect: {
-          kind: "animate",
+          kind: "become",
           target: 0,
           power: 1,
           toughness: 1,
           setTypes: ["creature"],
-          addTypes: [],
-          addSubtypes: [],
           setSubtypes: ["Frog"],
           setColors: ["U"],
           loseAbilities: true,
@@ -41,13 +39,11 @@ export default defineCard({
       {
         text: "A blue Octopus creature with base power and toughness 4/4",
         effect: {
-          kind: "animate",
+          kind: "become",
           target: 0,
           power: 4,
           toughness: 4,
           setTypes: ["creature"],
-          addTypes: [],
-          addSubtypes: [],
           setSubtypes: ["Octopus"],
           setColors: ["U"],
           loseAbilities: true,

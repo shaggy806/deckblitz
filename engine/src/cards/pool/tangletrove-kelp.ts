@@ -30,7 +30,7 @@ export default defineCard({
       trigger: { on: "step-begins", step: "begin-combat", who: "any" },
       targets: [],
       effect: {
-        kind: "animate-all",
+        kind: "become",
         filter: { subtype: "Clue", controlledBy: "you" },
         exceptSource: true,
         power: 6,

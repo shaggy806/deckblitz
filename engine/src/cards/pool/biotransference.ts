@@ -15,7 +15,7 @@ export default defineCard({
     {
       affects: { scope: "creatures-you-control" },
       addTypes: ["artifact"],
-      typesOutsideBattlefield: { ofType: "creature", addTypes: ["artifact"] },
+      outsideBattlefield: { ofType: ["creature"], addTypes: ["artifact"] },
       text: TYPE_TEXT,
     },
   ],

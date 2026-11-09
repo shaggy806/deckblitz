@@ -5,11 +5,10 @@ import { defineCard } from "../define.js";
 
 const form = (target: number) =>
   ({
-    kind: "animate",
+    kind: "become",
     target,
     power: 3,
     toughness: 3,
-    addTypes: [],
     addSubtypes: ["Illusion"],
     addColors: ["U"],
     keywords: ["flying"],

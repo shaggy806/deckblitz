@@ -41,7 +41,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "add-counter", target: 0, counter: "trample", amount: 1 },
-          { kind: "add-types", target: 0, addSubtypes: ["Bear"], duration: "permanent" },
+          { kind: "become", target: 0, addSubtypes: ["Bear"], duration: "permanent" },
           {
             kind: "conditional",
             condition: { kind: "controls", filter: { subtype: "Bear" }, atLeast: 3 },

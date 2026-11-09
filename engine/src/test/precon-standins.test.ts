@@ -406,7 +406,7 @@ describe("a planeswalker that's also a creature (rule 120.3)", () => {
     const ob = spawn(game, "Ob Nixilis Reignited");
     game.debugApplyEffect(
       A,
-      { kind: "animate", target: 0, power: 6, toughness: 6, addTypes: ["creature"], addSubtypes: [], duration: "end-of-turn" },
+      { kind: "become", target: 0, power: 6, toughness: 6, addTypes: ["creature"], duration: "end-of-turn" },
       [ref(ob)],
     );
     game.debugApplyEffect(B, { kind: "damage", amount: 2, target: 0 }, [ref(ob)]);

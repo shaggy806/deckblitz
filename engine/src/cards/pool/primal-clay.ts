@@ -14,14 +14,14 @@ export default defineCard({
     "or a 1/6 Wall artifact creature with defender in addition to its other types. (A creature with defender can't attack.)",
   becomesOnEnter: {
     forms: [
-      { label: "3/3 artifact creature", as: { basePt: [3, 3], addTypes: ["artifact", "creature"] } },
+      { label: "3/3 artifact creature", as: { power: 3, toughness: 3, addTypes: ["artifact", "creature"] } },
       {
         label: "2/2 artifact creature with flying",
-        as: { basePt: [2, 2], addTypes: ["artifact", "creature"], keywords: ["flying"] },
+        as: { power: 2, toughness: 2, addTypes: ["artifact", "creature"], keywords: ["flying"] },
       },
       {
         label: "1/6 Wall artifact creature with defender",
-        as: { basePt: [1, 6], addTypes: ["artifact", "creature"], addSubtypes: ["Wall"], keywords: ["defender"] },
+        as: { power: 1, toughness: 6, addTypes: ["artifact", "creature"], addSubtypes: ["Wall"], keywords: ["defender"] },
       },
     ],
   },

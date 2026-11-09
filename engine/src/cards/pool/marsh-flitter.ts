@@ -1,6 +1,6 @@
 import { defineCard } from "../define.js";
 
-// "Has base power and toughness 3/3" is a layer-7b `animate` with no new
+// "Has base power and toughness 3/3" is a layer-7b `become` with no new
 // types, as Brokers Initiate.
 export default defineCard({
   name: "Marsh Flitter",
@@ -17,12 +17,10 @@ export default defineCard({
       cost: { mana: null, tap: false, sacrifice: { filter: { subtype: "Goblin" } } },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 3,
         toughness: 3,
-        addTypes: [],
-        addSubtypes: [],
         duration: "end-of-turn",
       },
       resolve: null,

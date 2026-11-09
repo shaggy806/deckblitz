@@ -121,7 +121,7 @@ describe("Wurmweaver Coil", () => {
     const elf = spawn(second.game, "Grizzly Bears");
     const coil2 = toHand(second.game, "Wurmweaver Coil");
     cast(second.game, coil2, { targets: [ref(elf)] });
-    second.game.debugApplyEffect(A, { kind: "become-color", target: 0, colors: ["B"], duration: "permanent" }, [ref(elf)]);
+    second.game.debugApplyEffect(A, { kind: "become", target: 0, setColors: ["B"], duration: "permanent" }, [ref(elf)]);
     // The state-based check runs as a player next gets priority.
     toStep(second.game, "postcombat-main");
     expect(zone(second.game, coil2)).toBe("graveyard");

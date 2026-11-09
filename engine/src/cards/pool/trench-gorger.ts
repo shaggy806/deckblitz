@@ -28,12 +28,10 @@ export default defineCard({
           effects: [
             { kind: "search-library", filter: { type: "land" }, destination: "exile", min: 0, max: { librarySize: "you" } },
             {
-              kind: "animate",
+              kind: "become",
               target: "source",
               power: { thisWay: "exiled" },
               toughness: { thisWay: "exiled" },
-              addTypes: [],
-              addSubtypes: [],
               duration: "permanent",
             },
           ],

@@ -18,7 +18,7 @@ export default defineCard({
       cost: { mana: "{2}{U}{B}", tap: false },
       targets: [],
       effect: {
-        kind: "animate-all",
+        kind: "become",
         filter: { type: "creature", unblocked: true },
         power: 4,
         toughness: 1,

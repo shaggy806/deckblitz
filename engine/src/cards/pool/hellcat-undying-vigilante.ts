@@ -26,7 +26,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "put-onto-battlefield", target: "trigger-object", withCounters: { kind: "+1/+1", amount: 1 } },
-          { kind: "lose-abilities", target: "trigger-object", duration: "permanent" },
+          { kind: "become", loseAbilities: true, target: "trigger-object", duration: "permanent" },
           { kind: "grant-keyword", target: "trigger-object", keyword: "haste", duration: "permanent" },
         ],
       },

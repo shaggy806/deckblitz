@@ -33,7 +33,7 @@ export default defineCard({
         effect: {
           kind: "copy-spell",
           target: "trigger-spell",
-          except: { basePt: [1, 1], addSubtypes: ["Spirit"] },
+          except: { power: 1, toughness: 1, addSubtypes: ["Spirit"] },
         },
       },
       resolve: null,

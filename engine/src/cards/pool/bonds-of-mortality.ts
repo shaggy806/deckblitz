@@ -19,9 +19,9 @@ export default defineCard({
       cost: { mana: "{G}", tap: false },
       targets: [],
       effect: {
-        kind: "lose-keywords",
+        kind: "become",
         filter: { type: "creature", controlledBy: "opponent" },
-        keywords: ["hexproof", "indestructible"],
+        loseKeywords: ["hexproof", "indestructible"],
         duration: "end-of-turn",
       },
       resolve: null,

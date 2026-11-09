@@ -22,7 +22,7 @@ export default defineCard({
       cost: { mana: "{X}", tap: false },
       targets: [],
       effect: {
-        kind: "animate-all",
+        kind: "become",
         filter: { type: "creature", controlledBy: "you" },
         power: "x",
         toughness: "x",

@@ -16,7 +16,7 @@ export default defineCard({
     {
       cost: { mana: "{U}", tap: false },
       targets: ["creature"],
-      effect: { kind: "add-types", target: 0, addTypes: ["artifact"], duration: "end-of-turn" },
+      effect: { kind: "become", target: 0, addTypes: ["artifact"], duration: "end-of-turn" },
       resolve: null,
       text: ADD,
     },
@@ -26,8 +26,8 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "add-types", target: 0, removeTypes: ["artifact"], duration: "end-of-turn" },
-          { kind: "become-color", target: 0, colors: ["U"], duration: "end-of-turn" },
+          { kind: "become", target: 0, removeTypes: ["artifact"], duration: "end-of-turn" },
+          { kind: "become", target: 0, setColors: ["U"], duration: "end-of-turn" },
         ],
       },
       resolve: null,

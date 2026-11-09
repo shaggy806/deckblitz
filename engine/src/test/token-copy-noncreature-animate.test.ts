@@ -1,7 +1,7 @@
 /**
  * "Create a token that's a copy of it. If the token isn't a creature, it
  * becomes a 2/2 Robot Villain creature in addition to its other types"
- * (Ultron, Artificial Malevolence): `create-token-copy`, then `animate-all`
+ * (Ultron, Artificial Malevolence): `create-token-copy`, then `become`
  * over the token made this way (`thisWay: "created"`) that isn't a creature
  * as this resolves. Not a copy exception — no "except" — so a copy of the
  * token is a plain copy of the artifact (rule 707.2: an effect that isn't a

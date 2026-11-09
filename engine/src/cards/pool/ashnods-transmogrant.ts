@@ -1,7 +1,7 @@
 import { defineCard } from "../define.js";
 
 // Ruling: it's the ability, not the counter, that makes the creature an
-// artifact — it stays one if the counter is removed (a lasting `add-types`).
+// artifact — it stays one if the counter is removed (a lasting `become`).
 
 export default defineCard({
   name: "Ashnod's Transmogrant",
@@ -17,7 +17,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 },
-          { kind: "add-types", target: 0, addTypes: ["artifact"], duration: "permanent" },
+          { kind: "become", target: 0, addTypes: ["artifact"], duration: "permanent" },
         ],
       },
       resolve: null,

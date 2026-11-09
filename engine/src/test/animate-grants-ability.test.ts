@@ -1,5 +1,5 @@
 /**
- * "Becomes a creature with [an ability]": `animate` beside a grant of the whole
+ * "Becomes a creature with [an ability]": `become` beside a grant of the whole
  * ability in one sequence — `grant-triggered` (Raging Ravine, Veiled Apparition,
  * Dancing Sword's ward), `grant-static` (Restless Spire's conditional first
  * strike, Veiled Serpent's can't-attack, Monument to Perfection's toxic) and
@@ -135,7 +135,7 @@ describe("the opal and veiled enchantments, whose ability comes with the change"
     const serpent = spawn(game, "Veiled Serpent", A);
     bobCastsBears(game);
     expect(defendersForAttacker(game.state, game.registry, A, serpent)).toEqual([]);
-    game.debugApplyEffect(A, { kind: "lose-abilities", target: 0, duration: "permanent" }, [ref(serpent)]);
+    game.debugApplyEffect(A, { kind: "become", loseAbilities: true, target: 0, duration: "permanent" }, [ref(serpent)]);
     expect(defendersForAttacker(game.state, game.registry, A, serpent)).toEqual([B]);
   });
 

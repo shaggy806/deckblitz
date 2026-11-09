@@ -13,7 +13,7 @@ import { defineCard } from "../define.js";
 //   [2021-04-16]  If an effect creates multiple copies of an instant or sorcery spell, magecraft
 //     abilities trigger once for each copy created by the effect.
 //
-// The base 8/8 is a layer-7b set (`animate` adding no types — Azure
+// The base 8/8 is a layer-7b set (`become` adding no types — Azure
 // Beastbinder's shape), so counters and pumps still apply on top.
 const REDUCE_TEXT =
   "This spell costs {8} less to cast if you have eight or more instant and/or sorcery cards in your graveyard.";
@@ -45,12 +45,10 @@ export default defineCard({
       },
       targets: ["creature"],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 8,
         toughness: 8,
-        addTypes: [],
-        addSubtypes: [],
         duration: "end-of-turn",
       },
       resolve: null,

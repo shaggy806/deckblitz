@@ -26,10 +26,7 @@ export default defineCard({
           kind: "create-token-copy",
           of: 0,
           count: 2,
-          basePt: [
-            { half: { powerOf: 0 }, round: "up" },
-            { half: { toughnessOf: 0 }, round: "up" },
-          ],
+          exceptions: { power: { half: { powerOf: 0 }, round: "up" }, toughness: { half: { toughnessOf: 0 }, round: "up" } },
         },
       },
     ],

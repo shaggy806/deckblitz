@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 // Draconic Destruction.
 //
 // - The +1 makes him a legendary 4/4 red Dragon creature and nothing else
-//   until end of turn (`animate`'s `setTypes`, rule 205.1a): not a
+//   until end of turn (`become`'s `setTypes`, rule 205.1a): not a
 //   planeswalker, so damage to him is marked and takes no loyalty, and the
 //   loyalty counters he had stay on him (its ruling). He was already on the
 //   battlefield — nothing "enters" (its ruling) — and a copy of him that
@@ -32,12 +32,11 @@ export default defineCard({
       cost: { mana: null, tap: false },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 4,
         toughness: 4,
         setTypes: ["creature"],
-        addTypes: [],
         addSubtypes: ["Dragon"],
         setColors: ["R"],
         keywords: ["flying", "indestructible", "haste"],

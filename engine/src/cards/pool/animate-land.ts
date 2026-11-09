@@ -10,12 +10,11 @@ export default defineCard({
   text: "Until end of turn, target land becomes a 3/3 creature that's still a land.",
   targets: ["land"],
   effect: {
-    kind: "animate",
+    kind: "become",
     target: 0,
     power: 3,
     toughness: 3,
     addTypes: ["creature"],
-    addSubtypes: [],
     duration: "end-of-turn",
   },
 });

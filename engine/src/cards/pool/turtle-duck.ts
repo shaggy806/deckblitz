@@ -19,11 +19,9 @@ export default defineCard({
       cost: { mana: "{3}", tap: false },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 4,
-        addTypes: [],
-        addSubtypes: [],
         keywords: ["trample"],
         duration: "end-of-turn",
       },

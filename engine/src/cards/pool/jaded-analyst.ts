@@ -20,7 +20,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "lose-keywords", target: "source", keywords: ["defender"], duration: "end-of-turn" },
+          { kind: "become", target: "source", loseKeywords: ["defender"], duration: "end-of-turn" },
           { kind: "grant-keyword", target: "source", keyword: "vigilance", duration: "end-of-turn" },
         ],
       },

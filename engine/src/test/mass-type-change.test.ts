@@ -1,5 +1,5 @@
 /**
- * A mass change of types, `add-types` under `for-each-permanent`: everything matching changes, its P/T left
+ * A mass change of types, `become` under `for-each-permanent`: everything matching changes, its P/T left
  * alone — "Vehicles you control become artifact creatures" (Start Your Engines,
  * The Thanos-Copter), "lands you control gain all basic land types"
  * (Energybending), "creatures you control gain all creature types" (Volatile
@@ -83,7 +83,7 @@ describe("Vehicles you control become artifact creatures", () => {
       kind: "for-each-permanent",
       filter: { subtype: "Thopter", controlledBy: "you" },
       simultaneous: true,
-      effect: { kind: "add-types", target: 0, addSubtypes: ["Vehicle"], duration: "end-of-turn" },
+      effect: { kind: "become", target: 0, addSubtypes: ["Vehicle"], duration: "end-of-turn" },
     });
     const tokens = game.state.zones.shared.battlefield.filter((id) => game.state.objects[id].cardName === "Thopter Token");
     const total = tokens.reduce((n, id) => n + (game.state.objects[id].stackCount ?? 1), 0);

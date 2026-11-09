@@ -6,7 +6,7 @@ import { defineCard } from "../define.js";
 //   As Tough Cookie's second ability resolves, the target permanent keeps any other types and
 //     subtypes it had before it became an artifact creature.
 //
-// `animate` keeps the target's printed types and subtypes (a Food stays a
+// `become` keeps the target's printed types and subtypes (a Food stays a
 // Food, rule 205.1b) and adds creature; it's an artifact already.
 const ETB_TEXT =
   "When this creature enters, create a Food token. (It's an artifact with \"{2}, {T}, Sacrifice this token: You gain 3 life.\")";
@@ -36,12 +36,11 @@ export default defineCard({
       cost: { mana: "{2}{G}", tap: false },
       targets: [{ kind: "permanent", whose: "you", filter: { type: "artifact", notTypes: ["creature"] } }],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 4,
         toughness: 4,
         addTypes: ["artifact", "creature"],
-        addSubtypes: [],
         duration: "end-of-turn",
       },
       resolve: null,

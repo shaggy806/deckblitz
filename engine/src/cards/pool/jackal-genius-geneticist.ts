@@ -26,7 +26,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "copy-spell", target: "trigger-spell", except: { notLegendary: true } },
+          { kind: "copy-spell", target: "trigger-spell", except: { removeSupertypes: ["legendary"] } },
           { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
         ],
       },

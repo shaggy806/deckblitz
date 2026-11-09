@@ -18,12 +18,10 @@ export default defineCard({
   text: "Until end of turn, target creature you control becomes a blue Dragon Illusion with base power and toughness 4/4, loses all abilities, and gains flying.",
   targets: ["creature-you-control"],
   effect: {
-    kind: "animate",
+    kind: "become",
     target: 0,
     power: 4,
     toughness: 4,
-    addTypes: [],
-    addSubtypes: [],
     setSubtypes: ["Dragon", "Illusion"],
     setColors: ["U"],
     loseAbilities: true,

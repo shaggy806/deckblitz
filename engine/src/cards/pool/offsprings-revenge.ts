@@ -36,7 +36,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "exile", target: 0 },
-          { kind: "create-token-copy", of: 0, count: 1, who: "you", exceptions: { basePt: [1, 1] } },
+          { kind: "create-token-copy", of: 0, count: 1, who: "you", exceptions: { power: 1, toughness: 1 } },
           { kind: "grant-keyword-all", filter: { thisWay: "created" }, keyword: "haste", duration: "until-your-next-turn" },
         ],
       },

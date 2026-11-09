@@ -18,7 +18,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: false, sacrifice: { filter: { type: "land" }, count: 3 } },
       targets: [],
-      effect: { kind: "lose-keywords", target: "source", keywords: ["defender"], duration: "end-of-turn" },
+      effect: { kind: "become", target: "source", loseKeywords: ["defender"], duration: "end-of-turn" },
       resolve: null,
       text: TEXT,
     },

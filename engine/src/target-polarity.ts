@@ -636,13 +636,6 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   "reselect-attack": (n, v) => {
     if (n.target !== undefined) v.touch(n.target, "either", MAJOR);
   },
-  // Losing a keyword hurts — but losing defender helps (Jaded Analyst).
-  "lose-keywords": (n, v) => {
-    const side = n.keywords.every((k) => k === "defender") ? "help" : "harm";
-    if (n.target !== undefined) v.touch(n.target, side, MINOR);
-    // "Creatures target opponent controls lose first strike" (Quick Draw).
-    if (n.controlledByTarget !== undefined) v.touch(n.controlledByTarget, side, MINOR);
-  },
   "player-effect": none,
   // What a resolved replacement will do is what its targets get (Words of
   // War's 2 damage).
@@ -695,8 +688,6 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     if (n.target !== undefined) v.touch(n.target, "help", MAJOR);
   },
   "grant-triggered": (n, v) => v.touch(n.target, "help", MAJOR),
-  "lose-abilities": (n, v) => v.touch(n.target, "harm", MAJOR),
-  "lose-abilities-all": none,
   gift: none,
   // An ability that sacrifices the permanent is little consolation beside
   // what a `sequence` did to it first (Vraska, Betrayal's Sting's Treasure).
@@ -803,16 +794,21 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // says which: losing abilities or a tiny base (Multiply by Zero's 0/0) is
   // harm; keywords, a big base or becoming a creature is help. A middling
   // base on a creature (Fractalize's X+1) is still the board's call.
-  // A slot its P/T only reads ("equal to the power and toughness of target
-  // creature" — Halfdane) is the board's call.
-  animate: (n, v) => {
-    v.touch(n.target, animatePolarity(n), MAJOR);
+  // What a "becomes" does to its target, by what it changes: see
+  // `becomeTouch`. A slot its P/T only reads ("equal to the power and
+  // toughness of target creature" — Halfdane) is the board's call.
+  become: (n, v) => {
+    const { side, weight } = becomeTouch(n);
+    if (n.filter !== undefined) {
+      // A target player's creatures changed together (Mass Diminish's 1/1s,
+      // Quick Draw's "lose first strike", Sudden Spoiling): a small body or a
+      // loss is the only way this aims at them.
+      const small = typeof n.toughness === "number" && n.toughness <= 2;
+      if (n.loseAbilities === true || small || n.loseKeywords !== undefined) v.touch(n.controlledByTarget, side, MINOR);
+      return;
+    }
+    if (n.target !== undefined) v.touch(n.target, side, weight);
     for (const slot of slotsReadBy([n.power, n.toughness])) if (slot !== n.target) v.touch(slot, "either", MINOR);
-  },
-  "add-types": (n, v) => v.touch(n.target, "either", MINOR),
-  // A target player's creatures made small (Mass Diminish's 1/1s).
-  "animate-all": (n, v) => {
-    if (typeof n.toughness === "number" && n.toughness <= 1) v.touch(n.controlledByTarget, "harm", MINOR);
   },
   // "Its controller creates a 3/3 Beast" rides on the removal it follows.
   // Reality Shift's manifest is the consolation for the creature exiled: it
@@ -915,7 +911,6 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
   // A colour isn't good or bad by itself: what it's for (dodging a Circle of
   // Protection, or walking into one) decides.
   // Whether a colour helps depends on what it dodges or walks into.
-  "become-color": (n, v) => v.touch(n.target, "either", MINOR),
   // Which side a changed word helps depends on the words — it's the search
   // that tells (the choices are a resolving menu).
   "change-text": (n, v) => v.touch(n.target, "either", MINOR),
@@ -1188,9 +1183,20 @@ function slotsReadBy(amount: unknown): number[] {
   );
 }
 
-/** Which way an `animate` points at its target — see the table's entry. */
-function animatePolarity(n: Extract<EffectSpec, { kind: "animate" }>): Polarity {
-  if (n.loseAbilities === true) return "harm";
+/** How much a `become` points at its target, by what it changes: only
+ * keywords lost is a small harm (a small help for defender, Jaded Analyst);
+ * losing every ability, or a new body, is a major one either way; a change of
+ * type or colour alone is the board's call. */
+function becomeTouch(n: Extract<EffectSpec, { kind: "become" }>): { side: Polarity; weight: number } {
+  if (n.loseAbilities === true) return { side: "harm", weight: MAJOR };
+  const body = n.power !== undefined || n.toughness !== undefined || n.keywords !== undefined || (n.addTypes ?? []).includes("creature");
+  if (body) return { side: becomePolarity(n), weight: MAJOR };
+  if (n.loseKeywords !== undefined) return { side: n.loseKeywords.every((k) => k === "defender") ? "help" : "harm", weight: MINOR };
+  return { side: "either", weight: MINOR };
+}
+
+/** Which way a `become` that gives a new body points at its target. */
+function becomePolarity(n: Extract<EffectSpec, { kind: "become" }>): Polarity {
   const fixed = (a: unknown): number | null => (typeof a === "number" ? a : null);
   const power = fixed(n.power);
   const toughness = fixed(n.toughness);

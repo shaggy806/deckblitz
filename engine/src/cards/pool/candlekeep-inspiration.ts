@@ -16,7 +16,7 @@ export default defineCard({
   text: "Until end of turn, creatures you control have base power and toughness X/X, where X is the number of cards you own in exile and in your graveyard that are instant cards, are sorcery cards, and/or have an Adventure.",
   targets: [],
   effect: {
-    kind: "animate-all",
+    kind: "become",
     filter: { type: "creature", controlledBy: "you" },
     power: X,
     toughness: X,

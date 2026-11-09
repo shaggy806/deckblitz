@@ -20,7 +20,7 @@ export default defineCard({
     effects: [
       { kind: "put-onto-battlefield", target: 0 },
       { kind: "add-counter", target: 0, counter: "flying", amount: 1 },
-      { kind: "add-types", target: 0, addSubtypes: ["Spirit"], duration: "permanent" },
+      { kind: "become", target: 0, addSubtypes: ["Spirit"], duration: "permanent" },
     ],
   },
 });

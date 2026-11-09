@@ -32,7 +32,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "animate", target: "source", addTypes: ["creature"], addSubtypes: ["Monk", "Avatar"], duration: "end-of-turn" },
+          { kind: "become", target: "source", addTypes: ["creature"], addSubtypes: ["Monk", "Avatar"], duration: "end-of-turn" },
           {
             kind: "grant-static",
             target: "source",

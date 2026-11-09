@@ -21,7 +21,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "grant-keyword", target: 0, keyword: "flying", duration: "end-of-turn" },
-          { kind: "become-color", target: 0, colors: ["U"], duration: "end-of-turn" },
+          { kind: "become", target: 0, setColors: ["U"], duration: "end-of-turn" },
         ],
       },
       resolve: null,

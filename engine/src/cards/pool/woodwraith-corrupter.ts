@@ -27,7 +27,7 @@ export default defineCard({
       cost: { mana: "{1}{B}{G}", tap: true },
       targets: [{ kind: "permanent", filter: { subtype: "Forest" } }],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 4,
         toughness: 4,

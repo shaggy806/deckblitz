@@ -18,7 +18,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "grant-keyword", target: "source", keyword: "flying", duration: "end-of-turn" },
-          { kind: "lose-keywords", target: "source", keywords: ["trample"], duration: "end-of-turn" },
+          { kind: "become", target: "source", loseKeywords: ["trample"], duration: "end-of-turn" },
         ],
       },
       resolve: null,

@@ -543,6 +543,7 @@ import _poolMulch from "../pool/mulch.js";
 import _poolMutagenManLivingOoze from "../pool/mutagen-man-living-ooze.js";
 import _poolMysticConfluence from "../pool/mystic-confluence.js";
 import _poolNagaVitalist from "../pool/naga-vitalist.js";
+import _poolNamelessInversion from "../pool/nameless-inversion.js";
 import _poolNantukoShade from "../pool/nantuko-shade.js";
 import _poolNascentMetamorph from "../pool/nascent-metamorph.js";
 import _poolNastyLittleRabbit from "../pool/nasty-little-rabbit.js";
@@ -1531,6 +1532,7 @@ const shard: CardShard = {
     _poolMutagenManLivingOoze,
     _poolMysticConfluence,
     _poolNagaVitalist,
+    _poolNamelessInversion,
     _poolNantukoShade,
     _poolNascentMetamorph,
     _poolNastyLittleRabbit,

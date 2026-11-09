@@ -19,7 +19,7 @@ export default defineCard({
       effect: {
         kind: "may",
         prompt: "Have the land become a Plains?",
-        effect: { kind: "add-types", target: 0, setSubtypes: ["Plains"], duration: "while-source" },
+        effect: { kind: "become", target: 0, setSubtypes: ["Plains"], duration: "while-source" },
       },
       resolve: null,
       text: "Whenever this creature deals combat damage to a player, you may have target land become a Plains until this creature leaves the battlefield.",

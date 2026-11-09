@@ -145,7 +145,7 @@ describe("the block as it was", () => {
     const blue = { blockedThisTurn: { relation: "either", partner: { colors: ["U"] } } } as const;
     const green = { blockedThisTurn: { relation: "either", partner: { colors: ["G"] } } } as const;
     // Bears were green at the block. Turned blue now, they still were.
-    game.debugApplyEffect(A, { kind: "become-color", target: 0, colors: ["U"], duration: "end-of-turn" }, [ref(bears)]);
+    game.debugApplyEffect(A, { kind: "become", target: 0, setColors: ["U"], duration: "end-of-turn" }, [ref(bears)]);
     settle(game);
     expect(asks(game, wall, green)).toBe(true);
     expect(asks(game, wall, blue)).toBe(false);

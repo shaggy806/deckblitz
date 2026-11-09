@@ -16,11 +16,9 @@ export default defineCard({
       cost: { mana: null, tap: true },
       targets: [{ kind: "permanent", filter: { attacking: true, type: "creature" } }],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 0,
-        addTypes: [],
-        addSubtypes: [],
         duration: "end-of-turn",
       },
       resolve: null,

@@ -42,7 +42,7 @@ export default defineCard({
               kind: "for-each-permanent",
               filter: { type: "land", subtype: FIRST_CHOSEN_TYPE },
               simultaneous: true,
-              effect: { kind: "add-types", target: 0, setSubtypes: [CHOSEN_CREATURE_TYPE], duration: "end-of-turn" },
+              effect: { kind: "become", target: 0, setSubtypes: [CHOSEN_CREATURE_TYPE], duration: "end-of-turn" },
             },
           },
         },

@@ -147,12 +147,11 @@ describe("one or more cards (batched)", () => {
       run(
         game,
         {
-          kind: "animate",
+          kind: "become",
           target: 0,
           power: 1,
           toughness: 1,
           addTypes: ["creature"],
-          addSubtypes: [],
           duration: "end-of-turn",
         },
         land,

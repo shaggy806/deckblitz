@@ -19,7 +19,7 @@ export default defineCard({
       cost: { mana: "{3}{G}", tap: true, collectEvidence: 4 },
       targets: ["land-you-control"],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 5,
         toughness: 5,

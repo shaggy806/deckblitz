@@ -18,7 +18,7 @@ export default defineCard({
     {
       trigger: { on: "enters-battlefield", who: "self" },
       targets: ["land"],
-      effect: { kind: "add-types", target: 0, setSubtypes: ["Island"], duration: "while-source" },
+      effect: { kind: "become", target: 0, setSubtypes: ["Island"], duration: "while-source" },
       resolve: null,
       text: "When this creature enters, if it was kicked, target land becomes an Island for as long as this creature remains on the battlefield.",
       condition: { kind: "self-kicked" },

@@ -16,7 +16,7 @@ export default defineCard({
     {
       trigger: { on: "attacks", who: "any", filter: { keyword: "flying" } },
       targets: [],
-      effect: { kind: "lose-keywords", target: "trigger-object", keywords: ["flying"], duration: "end-of-turn" },
+      effect: { kind: "become", target: "trigger-object", loseKeywords: ["flying"], duration: "end-of-turn" },
       resolve: null,
       text: TEXT,
     },

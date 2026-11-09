@@ -16,10 +16,10 @@ export default defineCard({
   colors: ["G"],
   types: ["sorcery"],
   text: "Until your next turn, all lands you control become 2/2 Elemental creatures with reach, indestructible, and haste. They're still lands.",
-  // The lands are fixed as it resolves (`animate-all` — the first ruling),
+  // The lands are fixed as it resolves (`become` — the first ruling),
   // and stop being creatures as your next turn begins (the third).
   effect: {
-    kind: "animate-all",
+    kind: "become",
     filter: { type: "land", controlledBy: "you" },
     power: 2,
     toughness: 2,

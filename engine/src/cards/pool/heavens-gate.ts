@@ -12,6 +12,6 @@ export default defineCard({
   effect: {
     kind: "for-each-target",
     from: 0,
-    effect: { kind: "become-color", target: 0, colors: ["W"], duration: "end-of-turn" },
+    effect: { kind: "become", target: 0, setColors: ["W"], duration: "end-of-turn" },
   },
 });

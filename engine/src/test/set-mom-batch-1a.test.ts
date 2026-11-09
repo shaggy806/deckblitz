@@ -39,7 +39,7 @@ import type { ObjectId } from "../primitives.js";
 const crewed = (game: Game, id: ObjectId): void =>
   game.debugApplyEffect(
     game.state.objects[id].controller,
-    { kind: "add-types", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" },
+    { kind: "become", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" },
     [ref(id)],
   );
 

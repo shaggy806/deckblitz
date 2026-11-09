@@ -26,7 +26,7 @@ export default defineCard({
         filter: { type: "creature" },
         exceptSource: true,
         simultaneous: true,
-        effect: { kind: "lose-keywords", target: 0, keywords: ["flying"], duration: "end-of-turn" },
+        effect: { kind: "become", target: 0, loseKeywords: ["flying"], duration: "end-of-turn" },
       },
       resolve: null,
       text: "{3}{U}: All other creatures lose flying until end of turn.",

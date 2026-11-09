@@ -23,10 +23,10 @@ export default defineCard({
       cost: { mana: "{1}", tap: true },
       targets: [],
       effect: {
-        kind: "lose-keywords",
+        kind: "become",
         filter: { type: "creature", controlledBy: "opponent" },
-        keywords: ["hexproof", "shroud"],
-        cantHave: true,
+        loseKeywords: ["hexproof", "shroud"],
+        cantHaveKeywords: ["hexproof", "shroud"],
         duration: "end-of-turn",
       },
       resolve: null,

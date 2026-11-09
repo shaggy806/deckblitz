@@ -15,7 +15,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: true },
       targets: ["land"],
-      effect: { kind: "add-types", target: 0, setSubtypes: ["Swamp"], duration: "end-of-turn" },
+      effect: { kind: "become", target: 0, setSubtypes: ["Swamp"], duration: "end-of-turn" },
       resolve: null,
       text: "{T}: Target land becomes a Swamp until end of turn.",
     },

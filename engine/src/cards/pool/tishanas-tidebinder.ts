@@ -22,7 +22,7 @@ export default defineCard({
         target: 0,
         thenSource: {
           filter: { typesAnyOf: ["artifact", "creature", "planeswalker"] },
-          effect: { kind: "lose-abilities", target: 0, duration: "while-source" },
+          effect: { kind: "become", loseAbilities: true, target: 0, duration: "while-source" },
         },
       },
       resolve: null,

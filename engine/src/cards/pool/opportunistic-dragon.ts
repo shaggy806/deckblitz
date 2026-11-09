@@ -32,7 +32,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "gain-control", target: 0, untilEndOfTurn: false, whileSource: true },
-          { kind: "lose-abilities", target: 0, duration: "while-source" },
+          { kind: "become", loseAbilities: true, target: 0, duration: "while-source" },
           { kind: "restrict", target: 0, restrictions: ["cant-attack", "cant-block"], duration: "while-source" },
         ],
       },

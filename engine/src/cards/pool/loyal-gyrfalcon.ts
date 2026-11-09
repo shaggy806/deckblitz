@@ -18,7 +18,7 @@ export default defineCard({
     {
       trigger: { on: "cast-spell", who: "you", filter: { colors: ["W"] } },
       targets: [],
-      effect: { kind: "lose-keywords", target: "source", keywords: ["defender"], duration: "end-of-turn" },
+      effect: { kind: "become", target: "source", loseKeywords: ["defender"], duration: "end-of-turn" },
       resolve: null,
       text: TEXT,
     },

@@ -4,9 +4,9 @@ import { defineCard } from "../define.js";
 //
 // Each ability checks his creature types as it resolves (the rulings: a
 // `conditional` on the source) and has no duration. "Becomes a Human Faerie
-// Detective" replaces his creature types and nothing else (`add-types`'
+// Detective" replaces his creature types and nothing else (`become`'
 // `setSubtypes`); "becomes a 3/2 Human Faerie Rogue" sets his base P/T too
-// (`animate`, layer 7b at its timestamp — the first ruling).
+// (`become`, layer 7b at its timestamp — the first ruling).
 //
 // Rulings:
 //   Neither of these abilities have durations. If one of them resolves, it will remain in effect
@@ -43,7 +43,7 @@ export default defineCard({
         then: {
           kind: "sequence",
           effects: [
-            { kind: "add-types", target: "source", setSubtypes: ["Human", "Faerie", "Detective"], duration: "permanent" },
+            { kind: "become", target: "source", setSubtypes: ["Human", "Faerie", "Detective"], duration: "permanent" },
             {
               kind: "grant-triggered",
               target: "source",
@@ -69,12 +69,10 @@ export default defineCard({
         kind: "conditional",
         condition: { kind: "source", filter: { subtype: "Detective" } },
         then: {
-          kind: "animate",
+          kind: "become",
           target: "source",
           power: 3,
           toughness: 2,
-          addTypes: [],
-          addSubtypes: [],
           setSubtypes: ["Human", "Faerie", "Rogue"],
           keywords: ["double-strike"],
           duration: "permanent",

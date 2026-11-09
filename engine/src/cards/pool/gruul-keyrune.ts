@@ -31,7 +31,7 @@ export default defineCard({
       cost: { mana: "{R}{G}", tap: false },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 3,
         toughness: 2,

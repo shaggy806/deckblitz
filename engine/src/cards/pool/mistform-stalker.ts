@@ -4,7 +4,7 @@ import { defineCard } from "../define.js";
 // EDHREC rank 31203.
 //
 // The type is chosen as the ability resolves (`choose-creature-type`) and replaces
-// its creature types (`add-types`' `setSubtypes`, rule 205.1a).
+// its creature types (`become`' `setSubtypes`, rule 205.1a).
 
 export default defineCard({
   name: "Mistform Stalker",
@@ -21,7 +21,7 @@ export default defineCard({
       targets: [],
       effect: {
         kind: "choose-creature-type",
-        then: { kind: "add-types", target: "source", setSubtypes: [CHOSEN_CREATURE_TYPE], duration: "end-of-turn" },
+        then: { kind: "become", target: "source", setSubtypes: [CHOSEN_CREATURE_TYPE], duration: "end-of-turn" },
       },
       resolve: null,
       text: "{1}: This creature becomes the creature type of your choice until end of turn.",

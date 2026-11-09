@@ -22,7 +22,7 @@ const flood = (on: "enters-battlefield" | "attacks"): TriggeredAbility => ({
     kind: "sequence",
     effects: [
       { kind: "add-counter", target: 0, counter: "flood", amount: 1 },
-      { kind: "add-types", target: 0, addSubtypes: ["Island"], duration: { whileCounter: "flood" } },
+      { kind: "become", target: 0, addSubtypes: ["Island"], duration: { whileCounter: "flood" } },
     ],
   },
   resolve: null,

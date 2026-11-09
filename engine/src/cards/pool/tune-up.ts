@@ -20,7 +20,7 @@ export default defineCard({
       {
         kind: "conditional",
         condition: { kind: "target", index: 0, filter: { subtype: "Vehicle" } },
-        then: { kind: "add-types", target: 0, addTypes: ["artifact", "creature"], duration: "permanent" },
+        then: { kind: "become", target: 0, addTypes: ["artifact", "creature"], duration: "permanent" },
       },
     ],
   },

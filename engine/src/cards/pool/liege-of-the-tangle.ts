@@ -34,7 +34,7 @@ export default defineCard({
           effects: [
             { kind: "add-counter", target: 0, counter: "awakening", amount: 1 },
             {
-              kind: "animate",
+              kind: "become",
               target: 0,
               power: 8,
               toughness: 8,

@@ -20,7 +20,7 @@ export default defineCard({
       },
       targets: [],
       effect: {
-        kind: "add-types",
+        kind: "become",
         target: "source",
         addTypes: ["artifact", "creature"],
         duration: "end-of-turn",

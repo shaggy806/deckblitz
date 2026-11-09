@@ -48,12 +48,10 @@ export default defineCard({
       condition: distinctLands(7),
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 7,
         toughness: 9,
-        addTypes: [],
-        addSubtypes: [],
         duration: "permanent",
       },
       resolve: null,

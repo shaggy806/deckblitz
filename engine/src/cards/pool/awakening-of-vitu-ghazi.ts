@@ -14,7 +14,7 @@ export default defineCard({
     effects: [
       { kind: "add-counter", target: 0, counter: "+1/+1", amount: 9 },
       {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 0,
         toughness: 0,
@@ -22,7 +22,7 @@ export default defineCard({
         addSubtypes: ["Elemental"],
         addSupertypes: ["legendary"],
         keywords: ["haste"],
-        setName: "Vitu-Ghazi",
+        name: "Vitu-Ghazi",
         duration: "permanent",
       },
     ],

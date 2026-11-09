@@ -34,12 +34,11 @@ export default defineCard({
         kind: "conditional",
         condition: { kind: "target", index: 0, filter: { notTypes: ["creature"], notSubtypes: ["Vehicle"] } },
         then: {
-          kind: "animate",
+          kind: "become",
           target: 0,
           power: 0,
           toughness: 0,
           addTypes: ["artifact", "creature"],
-          addSubtypes: [],
           setSubtypes: ["Construct"],
           duration: "permanent",
         },

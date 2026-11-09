@@ -21,8 +21,7 @@ const TOKEN: EffectSpec = {
   who: "you",
   tapped: true,
   attacking: "choose",
-  notLegendary: true,
-  exceptions: {
+  exceptions: { removeSupertypes: ["legendary"],
     triggered: [
       {
         trigger: { on: "step-begins", step: "end-combat", who: "any" },

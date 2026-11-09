@@ -168,7 +168,7 @@ describe("Hulk's Thunderclap", () => {
     const thunderclap = toHand(game, "Hulk's Thunderclap");
     expect(game.legalActions(A).some((x) => x.kind === "cast-spell" && x.card === thunderclap && x.kicked === true)).toBe(false);
     // A Gamma creature card isn't in the pool to reveal, so a Bears plays one.
-    game.debugApplyEffect(A, { kind: "add-types", target: 0, addSubtypes: ["Gamma"], duration: "end-of-turn" }, [ref(bears)]);
+    game.debugApplyEffect(A, { kind: "become", target: 0, addSubtypes: ["Gamma"], duration: "end-of-turn" }, [ref(bears)]);
     settle(game);
     cast(game, thunderclap, { targets: [ref(bears), ref(theirs), ref(relic)], kicked: true });
     expect(zone(game, theirs)).toBe("graveyard");

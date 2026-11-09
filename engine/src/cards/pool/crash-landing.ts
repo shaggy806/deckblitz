@@ -15,7 +15,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "lose-keywords", target: 0, keywords: ["flying"], duration: "end-of-turn" },
+      { kind: "become", target: 0, loseKeywords: ["flying"], duration: "end-of-turn" },
       {
         kind: "damage",
         amount: { countOf: { subtype: "Forest", controlledBy: "you" } },

@@ -29,7 +29,7 @@ export default defineCard({
       effect: {
         kind: "for-each-target",
         from: 0,
-        effect: { kind: "animate", target: 0, power: 4, toughness: 4, addTypes: [], addSubtypes: [], duration: "permanent" },
+        effect: { kind: "become", target: 0, power: 4, toughness: 4, duration: "permanent" },
       },
       resolve: null,
       text: TWO,

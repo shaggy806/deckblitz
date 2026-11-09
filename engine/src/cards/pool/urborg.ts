@@ -40,11 +40,11 @@ export default defineCard({
         modes: [
           {
             text: "First strike",
-            effect: { kind: "lose-keywords", target: 0, keywords: ["first-strike"], duration: "end-of-turn" },
+            effect: { kind: "become", target: 0, loseKeywords: ["first-strike"], duration: "end-of-turn" },
           },
           {
             text: "Swampwalk",
-            effect: { kind: "lose-keywords", target: 0, keywords: ["swampwalk"], duration: "end-of-turn" },
+            effect: { kind: "become", target: 0, loseKeywords: ["swampwalk"], duration: "end-of-turn" },
           },
         ],
       },

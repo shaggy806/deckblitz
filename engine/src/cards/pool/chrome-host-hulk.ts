@@ -30,12 +30,10 @@ export default defineCard({
       trigger: { on: "attacks", who: "self" },
       targets: [{ kind: "optional", of: { kind: "other", of: "creature" } }],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 5,
         toughness: 5,
-        addTypes: [],
-        addSubtypes: [],
         duration: "end-of-turn",
       },
       resolve: null,

@@ -7,7 +7,7 @@ import { ward } from "../helpers.js";
 // effect, its modes announced as it goes on the stack (rules 603.3c,
 // 700.2b), each mode with a target of its own — the same creature may be
 // both (rule 115.3, the ruling), and the modes happen in the listed order, so
-// the later 1/1 wins in layer 7b. Base P/T is an `animate` of no types (Quandrix
+// the later 1/1 wins in layer 7b. Base P/T is an `become` of no types (Quandrix
 // Charm's shape): counters and other modifications still apply on top.
 //
 // Rulings:
@@ -24,12 +24,10 @@ const BIG_TEXT = "Target creature has base power and toughness 7/7 until end of 
 const SMALL_TEXT = "Target creature has base power and toughness 1/1 until end of turn.";
 
 const setBase = (n: number): EffectSpec => ({
-  kind: "animate",
+  kind: "become",
   target: 0,
   power: n,
   toughness: n,
-  addTypes: [],
-  addSubtypes: [],
   duration: "end-of-turn",
 });
 

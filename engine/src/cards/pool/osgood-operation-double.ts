@@ -53,7 +53,7 @@ export default defineCard({
     {
       trigger: { on: "this-cast" },
       targets: [],
-      effect: { kind: "create-token-copy", of: "source", count: 1, notLegendary: true, who: "you" },
+      effect: { kind: "create-token-copy", of: "source", count: 1, who: "you", exceptions: { removeSupertypes: ["legendary"] } },
       resolve: null,
       text: CAST_TEXT,
     },

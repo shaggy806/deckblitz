@@ -76,12 +76,11 @@ export default defineCard({
       cost: { mana: null, tap: false },
       targets: [{ kind: "permanent", whose: "you", filter: { type: "artifact" } }],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 9,
         toughness: 9,
         addTypes: ["artifact", "creature"],
-        addSubtypes: [],
         setSubtypes: ["Construct"],
         keywords: ["vigilance", "indestructible", "unblockable"],
         duration: "permanent",

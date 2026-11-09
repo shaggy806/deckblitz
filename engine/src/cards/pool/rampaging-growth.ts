@@ -25,7 +25,7 @@ export default defineCard({
         max: 1,
       },
       {
-        kind: "animate-all",
+        kind: "become",
         filter: { type: "land", thisWay: "put-onto-battlefield" },
         power: 4,
         toughness: 3,

@@ -14,11 +14,9 @@ export default defineCard({
       cost: { mana: "{2}", tap: true },
       targets: ["creature-you-control"],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         toughness: 1,
-        addTypes: [],
-        addSubtypes: [],
         keywords: ["flying"],
         duration: "end-of-turn",
       },

@@ -226,7 +226,7 @@ describe("a token copy's as-enters choices", () => {
     expect(game.state.objects[token].controller).toBe(A);
     expect(pt(game, token)).toEqual({ power: 2, toughness: 2 });
     expect(subtypes(game, token)).toContain("Coward");
-    expect(game.state.objects[token].notLegendary).toBe(true);
+    expect(game.state.objects[token].modifiers.some((m) => m.removeSupertypes?.includes("legendary"))).toBe(true);
   });
 
   it("asks an Aura token what it enchants, not by targeting (rule 303.4f)", () => {

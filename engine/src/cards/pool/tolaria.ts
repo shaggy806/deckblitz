@@ -23,9 +23,9 @@ export default defineCard({
       cost: { mana: null, tap: true },
       targets: ["creature"],
       effect: {
-        kind: "lose-keywords",
+        kind: "become",
         target: 0,
-        keywords: ["banding", "bands-with-other"],
+        loseKeywords: ["banding", "bands-with-other"],
         duration: "end-of-turn",
       },
       resolve: null,

@@ -21,7 +21,7 @@ export default defineCard({
         of: 0,
         count: 2,
         who: "you",
-        exceptions: { addTypes: ["creature"], addSubtypes: ["Dragon"], basePt: [3, 3], keywords: ["flying"] },
+        exceptions: { addTypes: ["creature"], addSubtypes: ["Dragon"], power: 3, toughness: 3, keywords: ["flying"] },
       },
       resolve: null,
       text: "Project Image — When this creature enters, create two tokens that are copies of target noncreature permanent, except they're 3/3 Dragon creatures in addition to their other types, and they have flying.",

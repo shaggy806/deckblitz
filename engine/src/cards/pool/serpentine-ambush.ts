@@ -10,12 +10,11 @@ export default defineCard({
   text: "Until end of turn, target creature becomes a blue Serpent with base power and toughness 5/5.",
   targets: ["creature"],
   effect: {
-    kind: "animate",
+    kind: "become",
     target: 0,
     power: 5,
     toughness: 5,
     addTypes: ["creature"],
-    addSubtypes: [],
     setSubtypes: ["Serpent"],
     setColors: ["U"],
     duration: "end-of-turn",

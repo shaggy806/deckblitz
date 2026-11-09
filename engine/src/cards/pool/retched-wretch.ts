@@ -32,7 +32,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "put-onto-battlefield", target: "trigger-object" },
-          { kind: "lose-abilities", target: "trigger-object", duration: "permanent" },
+          { kind: "become", loseAbilities: true, target: "trigger-object", duration: "permanent" },
         ],
       },
       resolve: null,

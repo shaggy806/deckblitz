@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 
 const TEXT =
   "Whenever this creature blocks or becomes blocked by a creature, that creature loses first strike until end of turn.";
-const LOSE = { kind: "lose-keywords", target: "trigger-object", keywords: ["first-strike"], duration: "end-of-turn" } as const;
+const LOSE = { kind: "become", target: "trigger-object", loseKeywords: ["first-strike"], duration: "end-of-turn" } as const;
 
 export default defineCard({
   name: "Talruum Champion",

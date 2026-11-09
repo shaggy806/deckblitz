@@ -10,5 +10,5 @@ export default defineCard({
   types: ["instant"],
   text: "Target spell or permanent becomes red. (Its mana symbols remain unchanged.)",
   targets: [{ kind: "spell-or-permanent" }],
-  effect: { kind: "become-color", target: 0, colors: ["R"], duration: "permanent" },
+  effect: { kind: "become", target: 0, setColors: ["R"], duration: "permanent" },
 });

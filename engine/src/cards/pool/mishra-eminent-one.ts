@@ -35,7 +35,7 @@ export default defineCard({
         gainUntilEndOfTurn: ["haste"],
         exceptions: {
           name: "Mishra's Warform",
-          basePt: [4, 4],
+          power: 4, toughness: 4,
           addTypes: ["artifact", "creature"],
           addSubtypes: ["Construct"],
         },

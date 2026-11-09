@@ -3,7 +3,7 @@
  * abilities (rule 604.1, a static reaching another zone as its text says):
  * `grantsToGraveyard.keywords` and `grant-graveyard-keyword` (unearth, encore,
  * embalm, harmonize, retrace, sneak), `grantsCyclingInHand`,
- * `grantsForetellInHand`, and `typesOutsideBattlefield`, the same reach for
+ * `grantsForetellInHand`, and `outsideBattlefield`, the same reach for
  * layer 4.
  */
 import { describe, expect, it } from "vitest";
@@ -448,7 +448,7 @@ describe("grantsForetellInHand", () => {
   });
 });
 
-describe("typesOutsideBattlefield", () => {
+describe("outsideBattlefield", () => {
   const choose = (game: Game, id: ObjectId, type: string): void => {
     game.state.objects[id].chosenCreatureType = type;
   };

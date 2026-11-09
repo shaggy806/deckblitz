@@ -44,7 +44,7 @@ export default defineCard({
         kind: "put-onto-battlefield",
         target: 0,
         underYourControl: true,
-        enterAs: { setColors: ["G"], setSubtypes: ["Mutant"], basePt: [3, 3] },
+        enterAs: { setColors: ["G"], setSubtypes: ["Mutant"], power: 3, toughness: 3 },
       },
       resolve: null,
       text: TAP_TEXT,

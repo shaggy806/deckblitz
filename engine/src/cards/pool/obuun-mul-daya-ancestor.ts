@@ -25,7 +25,7 @@ export default defineCard({
       trigger: { on: "step-begins", step: "begin-combat", who: "you" },
       targets: [{ kind: "optional", of: "land-you-control" }],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: { powerOf: "source" },
         toughness: { powerOf: "source" },

@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 
 // EDHREC rank 21897.
 //
-// "Becomes a Werewolf" replaces its creature types for good (`add-types`'
+// "Becomes a Werewolf" replaces its creature types for good (`become`'
 // `setSubtypes`, the ruling: no longer a Human). "Activate only once" is once
 // for as long as the object exists — the `exhaust` bookkeeping, Haunted
 // Screen's.
@@ -30,7 +30,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "add-types", target: "source", setSubtypes: ["Werewolf"], duration: "permanent" },
+          { kind: "become", target: "source", setSubtypes: ["Werewolf"], duration: "permanent" },
           { kind: "add-counter", target: "source", counter: "+1/+1", amount: 2 },
           { kind: "draw", amount: 1 },
         ],

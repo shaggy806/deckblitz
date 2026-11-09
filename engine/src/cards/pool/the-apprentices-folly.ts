@@ -40,7 +40,7 @@ export default defineCard({
         count: 1,
         who: "you",
         gainsHaste: true,
-        exceptions: { notLegendary: true, addSubtypes: ["Reflection"] },
+        exceptions: { removeSupertypes: ["legendary"], addSubtypes: ["Reflection"] },
       },
       resolve: null,
       text: COPY_TEXT,

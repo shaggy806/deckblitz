@@ -69,7 +69,7 @@ describe("storied", () => {
   it("a storied permanent that lost its abilities grants nothing", () => {
     const { game } = table();
     const ori = spawn(game, "Ori, Keeper of Songs");
-    game.debugApplyEffect(B, { kind: "lose-abilities", target: 0, duration: "permanent" }, [
+    game.debugApplyEffect(B, { kind: "become", loseAbilities: true, target: 0, duration: "permanent" }, [
       { kind: "object", object: ori },
     ]);
     spawn(game, "Sol Ring");

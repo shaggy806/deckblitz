@@ -13,7 +13,7 @@ const COMBAT_TEXT =
 // The finality counter needs no rider of its own — `moveObject` exiles any
 // permanent carrying one that would go to a graveyard from the battlefield
 // (rule 122). "It has base power and toughness 4/4" has no duration, so it's
-// a permanent layer-7b set (an `animate` that adds nothing else), lasting
+// a permanent layer-7b set (an `become` that adds nothing else), lasting
 // until the creature leaves the battlefield.
 export default defineCard({
   name: "Admiral Brass, Unsinkable",
@@ -56,12 +56,10 @@ export default defineCard({
             withCounters: { kind: "finality", amount: 1 },
           },
           {
-            kind: "animate",
+            kind: "become",
             target: 0,
             power: 4,
             toughness: 4,
-            addTypes: [],
-            addSubtypes: [],
             duration: "permanent",
           },
           { kind: "grant-keyword", target: 0, keyword: "haste", duration: "end-of-turn" },

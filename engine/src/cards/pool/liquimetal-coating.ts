@@ -1,6 +1,6 @@
 import { defineCard } from "../define.js";
 
-// EDHREC rank 3691. Liquimetal Torque's `add-types`, over any permanent.
+// EDHREC rank 3691. Liquimetal Torque's `become`, over any permanent.
 //
 // Rulings:
 //   [2011-01-01] Becoming an artifact doesn't change what color(s) a permanent is.
@@ -18,7 +18,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: true },
       targets: ["permanent"],
-      effect: { kind: "add-types", target: 0, addTypes: ["artifact"], duration: "end-of-turn" },
+      effect: { kind: "become", target: 0, addTypes: ["artifact"], duration: "end-of-turn" },
       resolve: null,
       text: TEXT,
     },

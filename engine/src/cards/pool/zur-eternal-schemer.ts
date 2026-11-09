@@ -33,12 +33,11 @@ export default defineCard({
       cost: { mana: "{1}{W}", tap: false },
       targets: [{ kind: "permanent", whose: "you", filter: { type: "enchantment", notSubtypes: ["Aura"] } }],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: { manaValueOf: 0 },
         toughness: { manaValueOf: 0 },
         addTypes: ["creature"],
-        addSubtypes: [],
         duration: "permanent",
       },
       resolve: null,

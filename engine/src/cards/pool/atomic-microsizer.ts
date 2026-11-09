@@ -10,7 +10,7 @@ import { equip } from "../helpers.js";
 //     they took effect. The same is true for +1/+1 counters.
 //
 // "Has base power and toughness 1/1" is a layer-7b set (Perfected Theory's
-// `animate` with no new types), so counters and bonuses still apply over it.
+// `become` with no new types), so counters and bonuses still apply over it.
 // Any creature, either side's: up to one, so the slot may be declined.
 
 const ATTACK_TEXT =
@@ -33,12 +33,10 @@ export default defineCard({
         effects: [
           { kind: "grant-keyword", target: 0, keyword: "unblockable", duration: "end-of-turn" },
           {
-            kind: "animate",
+            kind: "become",
             target: 0,
             power: 1,
             toughness: 1,
-            addTypes: [],
-            addSubtypes: [],
             duration: "end-of-turn",
           },
         ],

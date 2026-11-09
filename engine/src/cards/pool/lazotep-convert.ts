@@ -18,7 +18,7 @@ export default defineCard({
   copyOnEnter: {
     filter: { type: "creature" },
     from: "graveyards",
-    except: { basePt: [4, 4], addColors: ["B"], addSubtypes: ["Zombie"] },
+    except: { power: 4, toughness: 4, addColors: ["B"], addSubtypes: ["Zombie"] },
   },
   faces: ["Invasion of Amonkhet", "Lazotep Convert"],
   transform: true,

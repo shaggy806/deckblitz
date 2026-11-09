@@ -59,7 +59,7 @@ describe("Inspiring Leader", () => {
     game.state.objects[commander].isCommander = true;
     const mine = token(game, A);
     expect(pt(game, mine)).toEqual({ power: 3, toughness: 3 });
-    game.debugApplyEffect(B, { kind: "lose-abilities", target: 0, duration: "end-of-turn" }, [ref(commander)]);
+    game.debugApplyEffect(B, { kind: "become", loseAbilities: true, target: 0, duration: "end-of-turn" }, [ref(commander)]);
     expect(pt(game, mine)).toEqual({ power: 1, toughness: 1 });
   });
 

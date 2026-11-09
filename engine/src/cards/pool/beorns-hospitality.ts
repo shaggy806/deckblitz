@@ -25,7 +25,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "animate", target: "source", addTypes: ["creature"], addSubtypes: ["Bear"], duration: "permanent" },
+          { kind: "become", target: "source", addTypes: ["creature"], addSubtypes: ["Bear"], duration: "permanent" },
           {
             kind: "grant-static",
             target: "source",

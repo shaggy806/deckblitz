@@ -23,7 +23,7 @@ export default defineCard({
   text: "Target land becomes a 3/3 Elemental creature with flying until end of turn. It's still a land.",
   targets: ["land"],
   effect: {
-    kind: "animate",
+    kind: "become",
     target: 0,
     power: 3,
     toughness: 3,

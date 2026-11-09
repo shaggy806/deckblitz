@@ -8,7 +8,7 @@ import { defineCard } from "../define.js";
 //   [2023-11-10] Belligerent Yearling's ability overwrites any previous effects that set its
 //     power, including previous instances of that ability.
 //
-// Base power alone (`animate` with `power` and no `toughness`, rule
+// Base power alone (`become` with `power` and no `toughness`, rule
 // 613.4b), the entering Dinosaur's power read as the trigger resolves.
 const TEXT =
   "Whenever another Dinosaur you control enters, you may have this creature's base power become equal to that creature's power until end of turn.";
@@ -31,11 +31,9 @@ export default defineCard({
         kind: "may",
         prompt: "Have Belligerent Yearling's base power become that creature's power until end of turn?",
         effect: {
-          kind: "animate",
+          kind: "become",
           target: "source",
           power: { powerOf: "trigger-object" },
-          addTypes: [],
-          addSubtypes: [],
           duration: "end-of-turn",
         },
       },

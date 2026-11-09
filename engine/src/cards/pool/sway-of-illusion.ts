@@ -23,7 +23,7 @@ const MODES: ModeOption[] = COLORS.map(([color, word]) => ({
   effect: {
     kind: "for-each-target",
     from: 0,
-    effect: { kind: "become-color", target: 0, colors: [color], duration: "end-of-turn" },
+    effect: { kind: "become", target: 0, setColors: [color], duration: "end-of-turn" },
   },
 }));
 

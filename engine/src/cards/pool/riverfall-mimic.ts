@@ -26,12 +26,10 @@ export default defineCard({
         kind: "sequence",
         effects: [
           {
-            kind: "animate",
+            kind: "become",
             target: "source",
             power: 3,
             toughness: 3,
-            addTypes: [],
-            addSubtypes: [],
             duration: "end-of-turn",
           },
           { kind: "restrict", target: "source", restrictions: ["cant-be-blocked"] },

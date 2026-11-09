@@ -46,7 +46,7 @@ export default defineCard({
     {
       cost: { mana: "{U/P}", tap: false },
       targets: ["creature-you-control"],
-      effect: { kind: "add-types", target: 0, addTypes: ["artifact"], addColors: ["U"], duration: "end-of-turn" },
+      effect: { kind: "become", target: 0, addTypes: ["artifact"], addColors: ["U"], duration: "end-of-turn" },
       resolve: null,
       sorcerySpeed: true,
       text: "{U/P}: Until end of turn, target creature you control becomes a blue artifact in addition to its other colors and types. Activate only as a sorcery.",

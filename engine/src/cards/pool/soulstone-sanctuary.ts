@@ -26,7 +26,7 @@ export default defineCard({
       targets: [],
       // No duration (the ruling): it lasts until it leaves the battlefield.
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 3,
         toughness: 3,

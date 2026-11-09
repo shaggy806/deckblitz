@@ -20,7 +20,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "modify-pt", target: 0, power: 2, toughness: 2, duration: "end-of-turn" },
-          { kind: "lose-abilities", target: 0, duration: "end-of-turn" },
+          { kind: "become", loseAbilities: true, target: 0, duration: "end-of-turn" },
         ],
       },
       resolve: null,

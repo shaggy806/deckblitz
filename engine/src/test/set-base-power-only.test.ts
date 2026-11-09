@@ -1,6 +1,6 @@
 /**
  * Setting base power or base toughness alone (the
- * `effect:set-base-power-only` family): an `animate` given only a `power` or
+ * `effect:set-base-power-only` family): an `become` given only a `power` or
  * only a `toughness` sets that one in layer 7b (rule 613.4b) — fixed or a
  * live amount read once as it resolves (608.2h), until end of turn or
  * indefinitely — and leaves the other as it was; counters and pumps (7c)

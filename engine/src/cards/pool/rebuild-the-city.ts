@@ -16,6 +16,6 @@ export default defineCard({
     of: 0,
     count: 3,
     who: "you",
-    exceptions: { addTypes: ["creature"], basePt: [3, 3], keywords: ["vigilance", "menace"] },
+    exceptions: { addTypes: ["creature"], power: 3, toughness: 3, keywords: ["vigilance", "menace"] },
   },
 });

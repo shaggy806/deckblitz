@@ -27,11 +27,10 @@ export default defineCard({
       trigger: { on: "enters-battlefield", who: "self" },
       targets: [{ kind: "optional", of: { kind: "other", of: "creature" } }],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 4,
         toughness: 4,
-        addTypes: [],
         addSubtypes: [EVERY_CREATURE_TYPE],
         duration: "end-of-turn",
       },

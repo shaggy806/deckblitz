@@ -13,6 +13,6 @@ export default defineCard({
   effect: {
     kind: "for-each-target",
     from: 0,
-    effect: { kind: "become-color", target: 0, colors: ["R"], duration: "end-of-turn" },
+    effect: { kind: "become", target: 0, setColors: ["R"], duration: "end-of-turn" },
   },
 });

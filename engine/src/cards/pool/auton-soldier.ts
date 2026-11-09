@@ -21,6 +21,6 @@ export default defineCard({
   text: COPY_TEXT,
   copyOnEnter: {
     filter: { type: "creature" },
-    except: { notLegendary: true, addTypes: ["artifact"], triggered: [myriad()] },
+    except: { removeSupertypes: ["legendary"], addTypes: ["artifact"], triggered: [myriad()] },
   },
 });

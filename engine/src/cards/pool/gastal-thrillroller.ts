@@ -23,7 +23,7 @@ export default defineCard({
       },
       targets: [],
       effect: {
-        kind: "add-types",
+        kind: "become",
         target: "source",
         addTypes: ["artifact", "creature"],
         duration: "end-of-turn",
@@ -47,7 +47,7 @@ export default defineCard({
     {
       trigger: { on: "enters-battlefield", who: "self" },
       targets: [],
-      effect: { kind: "add-types", target: "source", addTypes: ["artifact", "creature"], duration: "end-of-turn" },
+      effect: { kind: "become", target: "source", addTypes: ["artifact", "creature"], duration: "end-of-turn" },
       resolve: null,
       text: ENTER_TEXT,
     },

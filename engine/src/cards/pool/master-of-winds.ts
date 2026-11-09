@@ -58,24 +58,20 @@ export default defineCard({
             {
               text: "Base power and toughness 4/1 until end of turn",
               effect: {
-                kind: "animate",
+                kind: "become",
                 target: "source",
                 power: 4,
                 toughness: 1,
-                addTypes: [],
-                addSubtypes: [],
                 duration: "end-of-turn",
               },
             },
             {
               text: "Base power and toughness 1/4 until end of turn",
               effect: {
-                kind: "animate",
+                kind: "become",
                 target: "source",
                 power: 1,
                 toughness: 4,
-                addTypes: [],
-                addSubtypes: [],
                 duration: "end-of-turn",
               },
             },

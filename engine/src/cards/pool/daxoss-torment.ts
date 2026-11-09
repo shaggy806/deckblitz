@@ -15,7 +15,7 @@ export default defineCard({
       trigger: { on: "enters-battlefield", who: "you-control", filter: { type: "enchantment" } },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 5,
         toughness: 5,

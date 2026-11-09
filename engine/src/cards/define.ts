@@ -12,6 +12,7 @@
  * escape hatch). Vanilla permanents need neither.
  */
 
+import type { ColorPatch, StaticPt, TypePatch } from "../characteristics-patch.js";
 import type { SelfPlay, StaticPlay } from "../play-permission.js";
 import type { AbilityCost, AbilityKindName, ActivatedAbility, TriggeredAbility } from "../abilities.js";
 import type {
@@ -446,7 +447,7 @@ export type Keyword =
    * this keyword is what the fold adds while any instance survives, so a
    * creature shows it, what `blockableDespiteLandwalk` names for "as though
    * they didn't have those abilities" (Staff of the Ages), and what a
-   * `lose-keywords` names to take them (Hammerheim). Never granted on its
+   * `become` names to take them (Hammerheim). Never granted on its
    * own. */
   | "landwalk"
   /** Daybound (rule 702.145 — ROADMAP Phase 10b): the front face of a modern
@@ -466,8 +467,8 @@ export type Keyword =
    * (`subtypes.ts`'s `hasSubtype`). A creature that loses all its abilities
    * stays every creature type — layer 4 comes before the layer-6 loss (the
    * changeling rulings) — while one an effect later makes "a Frog" is just a
-   * Frog. Only a printed (or copied) changeling is modeled: granting the
-   * keyword to something else wouldn't change its types.
+   * Frog. Printed, or given by a copy's exceptions (a copiable value): an
+   * effect granting the keyword otherwise wouldn't change its types.
    */
   | "changeling";
 
@@ -1966,7 +1967,16 @@ export interface CombatPermanentTax {
   readonly noun: string;
 }
 
-export interface StaticAbility {
+/*
+ * Its layer 4 and 5 parts are the words of `TypePatch` and `ColorPatch`
+ * (`characteristics-patch.ts`), applied in timestamp order with the
+ * permanents' own changes. A static with a layer-4 part keeps the set of
+ * permanents that part reached for its later layers too (rule 613.6): its
+ * keywords, granted abilities and P/T apply to exactly those. A layer-4 part
+ * still applies once the permanent has lost its abilities, layer 6 coming
+ * later.
+ */
+export interface StaticAbility extends TypePatch, ColorPatch {
   readonly affects: AffectSpec;
   /**
    * Eminence (an ability word, rule 207.2c: no rules of its own; the text
@@ -2002,43 +2012,6 @@ export interface StaticAbility {
   /** `[power, toughness]` bonus applied in layer 7d. */
   readonly grantPt?: readonly [number, number];
   /**
-   * Layer 4 — card types the affected permanents have "in addition to their
-   * other types" (Bello's "is a … creature"). Applied in timestamp order with
-   * the permanent's own type-changing modifiers, after any addition its scope
-   * depends on (see `layerFour`); everything that reads a
-   * permanent's types (`effectiveTypes`, so `matchesFilter`, targeting and
-   * every other static's scope) sees them.
-   *
-   * A static with a layer-4 part keeps the set of permanents that part
-   * reached for its later layers too (rule 613.6): its keywords, granted
-   * abilities and P/T apply to exactly the permanents it gave the type to.
-   */
-  readonly addTypes?: readonly CardType[];
-  /**
-   * Layer 4 — card types the affected permanents **don't** have: the Theros
-   * Gods' "as long as your devotion to white is less than five, Heliod isn't
-   * a creature" is `removeTypes: ["creature"]` under a `devotion`
-   * condition, `affects: { scope: "self" }`. The subtypes that went only
-   * with a removed type go with it (rule 205.1a — a God that isn't a
-   * creature isn't a God either, its rulings), and its supertypes stay. In
-   * timestamp order with the rest of layer 4, so a later effect that makes
-   * it a creature wins. Like every layer-4 part it still applies once the
-   * permanent has lost its abilities (layer 6 comes later — the Gods'
-   * ruling). Damage and counters stay on it, meaningless (205.1a).
-   */
-  readonly removeTypes?: readonly CardType[];
-  /**
-   * Layer 4 — the affected permanents' card types are **replaced** by these
-   * (rule 205.1a): Arixmethes, Slumbering Isle's "as long as Arixmethes has a
-   * slumber counter on it, it's a land. (It's not a creature.)" is
-   * `setTypes: ["land"]`; Swift Reconfiguration's "enchanted permanent is a
-   * Vehicle artifact … and it loses all other card types" `setTypes:
-   * ["artifact"]` with `addSubtypes: ["Vehicle"]`. Subtypes tied only to a
-   * lost type go (205.1a); supertypes stay. Applied before the static's own
-   * `addTypes` / `addSubtypes`.
-   */
-  readonly setTypes?: readonly CardType[];
-  /**
    * Layer 4 — the creature type this static's own permanent chose as it
    * entered (`chooseCreatureTypeOnEnter`, its `chosenCreatureType`), added to
    * the affected permanents' types: Titan of Littjara's "This creature is the
@@ -2058,32 +2031,6 @@ export interface StaticAbility {
    * that modify devotion are taken into account).
    */
   readonly devotionBonus?: number;
-  /** Layer 4 — subtypes added the same way ("are Bears in addition to their
-   * other types", "Artifacts you control are Foods"). */
-  readonly addSubtypes?: readonly string[];
-  /**
-   * Layer 4 — subtypes that **replace** the affected permanents' existing
-   * subtypes of the same kind (rule 205.1a): Goddric, Cloaked Reveler's
-   * "is a Dragon … (He loses all other creature types.)" is
-   * `setSubtypes: ["Dragon"]` — every creature type goes, its other
-   * subtypes stay. The static counterpart of an `animate` effect's
-   * `setSubtypes`, applied in timestamp order with the rest of layer 4.
-   */
-  readonly setSubtypes?: readonly string[];
-  /**
-   * Layer 5 — the affected permanents' colours become exactly these (rule
-   * 105.3): a Zendikon's "enchanted land is a 3/3 black Ooze creature" is
-   * `setColors: ["B"]` beside its `addTypes`/`addSubtypes`/`setBasePt`.
-   * Applied in timestamp order with the permanents' own colour modifiers
-   * (`effectiveColors`).
-   */
-  readonly setColors?: readonly Color[];
-  /**
-   * Layer 5 — colours the affected permanents have **in addition to** their
-   * others (Deep Freeze's "is a blue Wall in addition to its other colors
-   * and types"), in timestamp order with the rest of layer 5.
-   */
-  readonly addColors?: readonly Color[];
   /**
    * Layer 5 — the affected permanents are exactly the colour this static's
    * own permanent chose as it entered (`chooseOnEnter` over the five
@@ -2092,16 +2039,6 @@ export interface StaticAbility {
    * color". Nothing changes while no colour is chosen.
    */
   readonly setsChosenColor?: true;
-  /**
-   * Layer 4 — the affected permanents lose all land types (rule 305.7 takes
-   * their intrinsic mana abilities with them): Lithoform Blight's "enchanted
-   * land loses all land types and abilities", Alpine Moon's. Other subtypes
-   * and every card type stay.
-   */
-  readonly loseLandTypes?: true;
-  /** Layer 4 — the affected permanents lose all creature types, and keep
-   * their other subtypes (Curse of Conformity). */
-  readonly loseCreatureTypes?: true;
   /**
    * Layer 4 — the affected permanents' land types are the basic land type
    * this static's own permanent chose as it entered (`chooseOnEnter` over
@@ -2118,25 +2055,13 @@ export interface StaticAbility {
    * (Kudo: "have base power and toughness 2/2"; a lone `toughness` is "have
    * base toughness 1"). After characteristic-defining abilities, in
    * timestamp order with "becomes an N/N" effects (`PtModifier.setPt`), and
-   * before counters (7c) and bonuses (7d).
+   * before counters (7c) and bonuses (7d). A value may be `"its-mana-value"`
+   * (Opalescence), `{ countersOnIt: kind }` (Spark Rupture's "power and
+   * toughness each equal to the number of loyalty counters on it") or
+   * `{ sourceCount }`, a count read from this permanent's side (Aettir and
+   * Priwen's "where X is your life total"), each read live.
    */
-  readonly setBasePt?: { readonly power?: number; readonly toughness?: number };
-  /**
-   * Layer 7b, like `setBasePt` — each affected permanent's base power and
-   * toughness are each the number of counters of this kind on **it** (Spark
-   * Rupture's "is a creature with power and toughness each equal to the
-   * number of loyalty counters on it"), its own count, read live.
-   */
-  readonly setBasePtFromAffectedCounters?: string;
-  /**
-   * Layer 7b, like `setBasePt` — each affected permanent's base power and
-   * toughness are both a live count read from **this** permanent's side
-   * (its controller's "you"): Aettir and Priwen's "equipped creature has
-   * base power and toughness X/X, where X is your life total" is
-   * `"your-life-total"` (rule 613.4b). Counted as characteristics are
-   * computed, so it follows the life total as it changes.
-   */
-  readonly setBasePtFromSourceCount?: CountSpec;
+  readonly setBasePt?: { readonly power?: StaticPt<CountSpec>; readonly toughness?: StaticPt<CountSpec> };
   /**
    * A layer-7d bonus that *scales* with a live count — Skycat Sovereign's
    * "gets +1/+1 for each **other** creature you control with flying".
@@ -2584,14 +2509,6 @@ export interface StaticAbility {
    * or granted earlier — and a grant after it gives the keyword back. */
   readonly loseKeywords?: readonly Keyword[];
   /**
-   * Layer 4 (rule 613.1d): supertypes the affected permanents have in addition
-   * to their others — "enchanted creature is legendary" (On Serra's Wings),
-   * "all nonland permanents are legendary" (Leyline of Singularity), "enchanted
-   * land is snow" (Glittering Frost). Read through `effectiveSupertypes`, as
-   * every filter, the legend and world rules, snow mana and the view do.
-   */
-  readonly addSupertypes?: readonly Supertype[];
-  /**
    * Keywords the affected objects **can't have** — "creatures your opponents
    * control lose flying and can't have or gain flying" (the Archetypes). No
    * timestamp beats it: whatever would give the keyword, printed, granted
@@ -2612,7 +2529,7 @@ export interface StaticAbility {
    * ("…and has '{T}: Add {C}'", `grantsActivated` / `grantKeywords`), or by a
    * later effect — stays (rule 613.7). A loss reaching another such static's
    * permanent takes that static away first (dependency, rule 613.8a); see
-   * `staticAbilityLosses`. The static counterpart of the `lose-abilities`
+   * `staticAbilityLosses`. The static counterpart of the `become`
    * effect.
    */
   readonly loseAllAbilities?: true;
@@ -2812,13 +2729,18 @@ export interface StaticAbility {
     readonly power: number;
     readonly toughness: number;
   };
-  readonly typesOutsideBattlefield?: {
-    readonly ofType: CardType;
+  readonly outsideBattlefield?: TypePatch & ColorPatch & {
+    /** Every player's cards and spells ("All cards that aren't on the
+     * battlefield", Mycosynth Lattice), where the default is yours: a spell
+     * you control, a card you own. */
+    readonly whose?: "all";
+    /** Only cards and spells that are one of these card types, as they
+     * stand without this. */
+    readonly ofType?: readonly CardType[];
+    /** And not this card type ("nonland permanent cards", Encroaching
+     * Mycosynth). */
+    readonly notType?: CardType;
     readonly zones?: readonly ("hand" | "library" | "graveyard" | "exile" | "command" | "stack")[];
-    readonly addTypes?: readonly CardType[];
-    readonly addSubtypes?: readonly string[];
-    /** Supertypes too: Rootpath Purifier's "land cards in your library are basic". */
-    readonly addSupertypes?: readonly Supertype[];
     readonly addsChosenCreatureType?: true;
     /** "Are the chosen type" with no "in addition" (Conspiracy): every other
      * creature type goes (rule 205.1a). */
@@ -3606,6 +3528,8 @@ export interface StaticAbility {
    * (Drana and Linvala's "to activate **those** abilities").
    */
   readonly spendManaAs?: {
+    /** "**Players** may spend mana as though" (Mycosynth Lattice): every player, not only this permanent's controller. */
+    readonly everyone?: true;
     readonly as: SpendAs;
     readonly spell?: CardFilter;
     readonly activating?: "this" | "granted";

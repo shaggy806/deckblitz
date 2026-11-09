@@ -24,12 +24,10 @@ export default defineCard({
       trigger: { on: "cast-spell", who: "you", noncreatureOnly: true },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 4,
         toughness: 4,
-        addTypes: [],
-        addSubtypes: [],
         duration: "end-of-turn",
       },
       resolve: null,

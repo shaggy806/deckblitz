@@ -12,7 +12,7 @@ import type { Color } from "../../mana.js";
 // The colours are chosen as the ability resolves — an unannounced `modal`
 // (Wash Out's "of your choice" shape), one mode for each of the 31 non-empty
 // combinations of the five colours, single colours first. The creature's
-// colours become exactly those, for good (layer 5 — `become-color`).
+// colours become exactly those, for good (layer 5 — `become`).
 const COLORS: readonly (readonly [Color, string])[] = [
   ["W", "White"],
   ["U", "Blue"],
@@ -26,7 +26,7 @@ const MODES: ModeOption[] = Array.from({ length: 31 }, (_, i) => i + 1)
   .sort((x, y) => x.length - y.length)
   .map((picked) => ({
     text: picked.map(([, word]) => word).join(", "),
-    effect: { kind: "become-color", target: "attached", colors: picked.map(([color]) => color), duration: "permanent" },
+    effect: { kind: "become", target: "attached", setColors: picked.map(([color]) => color), duration: "permanent" },
   }));
 
 export default defineCard({

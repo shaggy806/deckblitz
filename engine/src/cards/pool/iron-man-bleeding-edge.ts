@@ -20,7 +20,7 @@ export default defineCard({
       effect: {
         kind: "may",
         prompt: "Copy it, except the copy isn't legendary?",
-        effect: { kind: "copy-spell", target: "trigger-spell", except: { notLegendary: true } },
+        effect: { kind: "copy-spell", target: "trigger-spell", except: { removeSupertypes: ["legendary"] } },
         oncePerTurn: true,
       },
       resolve: null,

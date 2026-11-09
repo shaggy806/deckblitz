@@ -928,7 +928,7 @@ export type GameEvent =
     })
   | (Base & {
       /** A permanent loses keywords for a while ("loses flying until end of
-       * turn" — the `lose-keywords` effect). */
+       * turn" — the `become` effect). */
       readonly type: "keywords-lost";
       readonly object: ObjectId;
       readonly keywords: readonly string[];
@@ -949,7 +949,7 @@ export type GameEvent =
     })
   | (Base & {
       /** A permanent gained types or subtypes "in addition to its other
-       * types" (the `add-types` effect — layer 4). */
+       * types" (the `become` effect — layer 4). */
       readonly type: "types-added";
       readonly object: ObjectId;
       readonly types: readonly CardType[];
@@ -1438,7 +1438,7 @@ export type GameEvent =
       readonly intendedZone: "graveyard" | "hand" | "library";
     })
   | (Base & {
-      /** A spell or permanent's colours were set (`become-color` — Deathlace). */
+      /** A spell or permanent's colours were set (`become` — Deathlace). */
       readonly type: "color-changed";
       readonly object: ObjectId;
       readonly colors: readonly Color[];

@@ -12,7 +12,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "become-color", target: 0, colors: ["R"], duration: "end-of-turn" },
+      { kind: "become", target: 0, setColors: ["R"], duration: "end-of-turn" },
       { kind: "grant-keyword", target: 0, keyword: "haste", duration: "end-of-turn" },
       { kind: "draw", amount: 1 },
     ],

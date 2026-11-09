@@ -39,7 +39,7 @@ export default defineCard({
           else: {
             kind: "put-onto-battlefield",
             target: 0,
-            enterAs: { addTypes: ["creature"], addSubtypes: ["Robot"], basePt: [3, 3], keywords: ["flying"] },
+            enterAs: { addTypes: ["creature"], addSubtypes: ["Robot"], power: 3, toughness: 3, keywords: ["flying"] },
           },
         },
       },

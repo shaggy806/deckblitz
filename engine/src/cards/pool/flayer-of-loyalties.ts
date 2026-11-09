@@ -12,7 +12,7 @@ import { annihilator } from "../helpers.js";
 //     It may be blocked. If it isn't blocked, it simply won't deal combat damage to anything.
 //
 // The cast trigger resolves before the spell, even if the spell is countered.
-// "Base power and toughness 10/10" is an `animate` adding no types (layer
+// "Base power and toughness 10/10" is an `become` adding no types (layer
 // 7b), with trample and haste; annihilator 2 is a granted triggered ability.
 const CAST_TEXT =
   "When you cast this spell, gain control of target creature until end of turn. Untap that creature. Until end of turn, it has base power and toughness 10/10 and gains trample, annihilator 2, and haste.";
@@ -37,12 +37,10 @@ export default defineCard({
           { kind: "gain-control", target: 0, untilEndOfTurn: true },
           { kind: "untap", target: 0 },
           {
-            kind: "animate",
+            kind: "become",
             target: 0,
             power: 10,
             toughness: 10,
-            addTypes: [],
-            addSubtypes: [],
             keywords: ["trample", "haste"],
             duration: "end-of-turn",
           },

@@ -19,7 +19,7 @@ export default defineCard({
     {
       affects: { scope: "filter", filter: { type: "creature", controlledBy: "you" }, excludeSelf: true },
       addSubtypes: ["Assassin"],
-      typesOutsideBattlefield: { ofType: "creature", addSubtypes: ["Assassin"] },
+      outsideBattlefield: { ofType: ["creature"], addSubtypes: ["Assassin"] },
       text: TYPE_TEXT,
     },
     {

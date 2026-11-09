@@ -27,9 +27,9 @@ export default defineCard({
         kind: "conditional",
         condition: { kind: "source", filter: { manaSpent: [{ type: "G", amount: { op: "gte", n: 1 } }] } },
         then: {
-          kind: "lose-keywords",
+          kind: "become",
           filter: { type: "creature", controlledBy: "opponent" },
-          keywords: ["flying"],
+          loseKeywords: ["flying"],
           duration: "end-of-turn",
         },
       },

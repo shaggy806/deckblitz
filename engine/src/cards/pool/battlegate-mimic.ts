@@ -7,7 +7,7 @@ import { defineCard } from "../define.js";
 //   other colors it is. Cast another one and it triggers again, setting base P/T again over
 //   earlier setting effects; modifying effects and counters still apply (layer 7b vs 7c-d).
 //
-// Stature, Young Avenger's base-P/T `animate` until end of turn, on a spell filtered to
+// Stature, Young Avenger's base-P/T `become` until end of turn, on a spell filtered to
 // both colours (`colors` must include all).
 
 export default defineCard({
@@ -27,12 +27,10 @@ export default defineCard({
         kind: "sequence",
         effects: [
           {
-            kind: "animate",
+            kind: "become",
             target: "source",
             power: 4,
             toughness: 2,
-            addTypes: [],
-            addSubtypes: [],
             duration: "end-of-turn",
           },
           { kind: "grant-keyword", target: "source", keyword: "first-strike", duration: "end-of-turn" },

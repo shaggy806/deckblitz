@@ -112,7 +112,7 @@ describe("prepare", () => {
   it("losing its abilities doesn't unprepare it (the ruling)", () => {
     const { game } = table();
     const year = enterPrepared(game, "Studious First-Year");
-    game.debugApplyEffect(B, { kind: "lose-abilities", target: 0, duration: "permanent" }, [
+    game.debugApplyEffect(B, { kind: "become", loseAbilities: true, target: 0, duration: "permanent" }, [
       { kind: "object", object: year },
     ]);
     settle(game);

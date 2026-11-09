@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 
 // Rulings:
 //   [2007-10-01] The value of X is determined when the ability resolves. It won’t change later,
-//     even if the number of Elves you control changes. (`animate` reads its amounts once.)
+//     even if the number of Elves you control changes. (`become` reads its amounts once.)
 //   [2007-10-01] If you control no Elves when the ability resolves, the Forest will become a 0/0
 //     creature and be put into the graveyard.
 
@@ -20,7 +20,7 @@ export default defineCard({
       cost: { mana: null, tap: true },
       targets: [{ kind: "permanent", filter: { subtype: "Forest" } }],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: { countOf: { subtype: "Elf", controlledBy: "you" } },
         toughness: { countOf: { subtype: "Elf", controlledBy: "you" } },

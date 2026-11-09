@@ -34,7 +34,7 @@ export default defineCard({
             kind: "conditional",
             condition: { kind: "controls", filter: { subtype: "Wraith" }, atLeast: 9 },
             then: {
-              kind: "animate-all",
+              kind: "become",
               filter: { subtype: "Wraith", controlledBy: "you" },
               power: 9,
               toughness: 9,

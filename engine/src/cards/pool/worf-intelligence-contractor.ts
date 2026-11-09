@@ -17,7 +17,7 @@ const perOpponent = (seat: number): TargetSpec => ({
 const steal = (slot: number): EffectSpec[] => [
   { kind: "gain-control", target: slot, untilEndOfTurn: true },
   { kind: "untap", target: slot },
-  { kind: "add-types", target: slot, addSubtypes: ["Warrior"], duration: "end-of-turn" },
+  { kind: "become", target: slot, addSubtypes: ["Warrior"], duration: "end-of-turn" },
   { kind: "grant-keyword", target: slot, keyword: "haste", duration: "end-of-turn" },
 ];
 

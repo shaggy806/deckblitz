@@ -16,7 +16,7 @@ const COLORS: readonly (readonly [Color, string])[] = [
 
 const MODES: ModeOption[] = COLORS.map(([color, word]) => ({
   text: word,
-  effect: { kind: "become-color", target: "source", colors: [color], duration: "end-of-turn" },
+  effect: { kind: "become", target: "source", setColors: [color], duration: "end-of-turn" },
 }));
 
 export default defineCard({

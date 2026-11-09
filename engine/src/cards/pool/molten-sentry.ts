@@ -15,8 +15,8 @@ export default defineCard({
   becomesOnEnter: {
     flip: true,
     forms: [
-      { label: "5/2 creature with haste", as: { basePt: [5, 2], keywords: ["haste"] } },
-      { label: "2/5 creature with defender", as: { basePt: [2, 5], keywords: ["defender"] } },
+      { label: "5/2 creature with haste", as: { power: 5, toughness: 2, keywords: ["haste"] } },
+      { label: "2/5 creature with defender", as: { power: 2, toughness: 5, keywords: ["defender"] } },
     ],
   },
 });

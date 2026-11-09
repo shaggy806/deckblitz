@@ -146,12 +146,10 @@ describe("earthbend", () => {
       game,
       bender,
       {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 1,
         toughness: 1,
-        addTypes: [],
-        addSubtypes: [],
         loseAbilities: true,
         duration: "end-of-turn",
       },

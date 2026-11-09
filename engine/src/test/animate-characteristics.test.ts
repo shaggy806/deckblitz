@@ -78,7 +78,7 @@ describe("a granted P/T, read live", () => {
     game.debugApplyEffect(A, { kind: "add-counter", target: 0, counter: "lore", amount: 2 }, [ref(myth)]);
     activate(game, myth, 1);
     expect(pt(game, myth)).toEqual({ power: 2, toughness: 2 });
-    game.debugApplyEffect(B, { kind: "lose-abilities", target: 0, duration: "end-of-turn" }, [ref(myth)]);
+    game.debugApplyEffect(B, { kind: "become", loseAbilities: true, target: 0, duration: "end-of-turn" }, [ref(myth)]);
     expect(pt(game, myth)).toEqual({ power: 0, toughness: 0 });
   });
 

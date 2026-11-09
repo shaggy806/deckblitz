@@ -38,7 +38,7 @@ import {
 /** A permanent made a creature for good — a Vehicle that can attack without
  * crewing it. */
 const animate = (game: ReturnType<typeof table>["game"], id: ObjectId): void =>
-  game.debugApplyEffect(A, { kind: "add-types", target: 0, addTypes: ["creature"], duration: "permanent" }, [ref(id)]);
+  game.debugApplyEffect(A, { kind: "become", target: 0, addTypes: ["creature"], duration: "permanent" }, [ref(id)]);
 
 describe("Damocles Base, Sword of Kang", () => {
   it("the damaged player chooses to sacrifice a nontoken creature", () => {

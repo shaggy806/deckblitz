@@ -14,13 +14,11 @@ export default defineCard({
       targets: [],
       // It's no longer an enchantment (its ruling).
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 4,
         toughness: 4,
         setTypes: ["creature"],
-        addTypes: [],
-        addSubtypes: [],
         setSubtypes: ["Phyrexian", "Horror"],
         keywords: ["flying"],
         duration: "permanent",

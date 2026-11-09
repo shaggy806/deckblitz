@@ -39,7 +39,7 @@ export default defineCard({
         target: "source",
         of: 0,
         until: "until-your-next-turn",
-        exceptions: { basePt: [7, 5], thisAbility: { card: "Volrath, the Shapestealer", activated: 0 } },
+        exceptions: { power: 7, toughness: 5, thisAbility: { card: "Volrath, the Shapestealer", activated: 0 } },
       },
       resolve: null,
       text: COPY_TEXT,

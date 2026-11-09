@@ -99,7 +99,7 @@ describe("blocking a band (rule 702.22h)", () => {
       { attacker: bears, defender: B, band: 1 },
     ];
     game.advanceUntil((s) => s.awaiting?.kind === "blockers");
-    game.debugApplyEffect(A, { kind: "lose-keywords", target: 0, keywords: ["banding"], duration: "end-of-turn" }, [
+    game.debugApplyEffect(A, { kind: "become", target: 0, loseKeywords: ["banding"], duration: "end-of-turn" }, [
       { kind: "object", object: hero },
     ]);
     expect(keywords(game, hero).has("banding")).toBe(false);

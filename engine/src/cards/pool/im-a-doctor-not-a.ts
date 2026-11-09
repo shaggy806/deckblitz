@@ -14,7 +14,7 @@ export default defineCard({
       { kind: "untap", target: 0 },
       { kind: "modify-pt", target: 0, power: 1, toughness: 1, duration: "end-of-turn" },
       // Every creature type goes; its other subtypes stay (rule 205.1a).
-      { kind: "add-types", target: 0, setSubtypes: ["Doctor"], duration: "end-of-turn" },
+      { kind: "become", target: 0, setSubtypes: ["Doctor"], duration: "end-of-turn" },
     ],
   },
 });

@@ -52,7 +52,7 @@ type Cast = Extract<Action, { type: "cast-spell" }>;
 const animate = (game: Game, id: ObjectId): void => {
   game.debugApplyEffect(
     A,
-    { kind: "add-types", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" },
+    { kind: "become", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" },
     [ref(id)],
   );
 };

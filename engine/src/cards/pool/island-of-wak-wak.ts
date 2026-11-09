@@ -13,7 +13,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: true },
       targets: [{ kind: "permanent", filter: { type: "creature", keyword: "flying" } }],
-      effect: { kind: "animate", target: 0, power: 0, addTypes: [], addSubtypes: [], duration: "end-of-turn" },
+      effect: { kind: "become", target: 0, power: 0, duration: "end-of-turn" },
       resolve: null,
       text: ABILITY,
     },

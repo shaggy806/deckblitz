@@ -25,6 +25,6 @@ export default defineCard({
     exceptOf: true,
     of: 0,
     until: "end-of-turn",
-    exceptions: { notLegendary: true },
+    exceptions: { removeSupertypes: ["legendary"] },
   },
 });

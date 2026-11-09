@@ -2,7 +2,7 @@
  * Top-5000 batch 6 (ranks 872–1210) and what it needed: "spells you control
  * can't be countered" (`grantsToSpells.cantBeCountered`), triggered abilities
  * that work in the graveyard (`fromGraveyard` — Bloodghast, and Spit Flame,
- * whose return never fired), base P/T set to a live amount by `animate-all`
+ * whose return never fired), base P/T set to a live amount by `become`
  * (Mirror Entity), a subtype added as a card enters (Portal to Phyrexia),
  * "when you play another land" (City of Traitors), "you have hexproof"
  * (Shalai), living weapon, and a count of counters on the source (Door of

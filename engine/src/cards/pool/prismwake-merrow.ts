@@ -7,7 +7,7 @@ import type { Color } from "../../mana.js";
 // Prismatic Lace's choice until end of turn: the colours are chosen as the
 // trigger resolves — an unannounced `modal`, one mode for each of the 31
 // non-empty combinations of the five colours (never colorless — the rulings).
-// The permanent's colours become exactly those (layer 5 — `become-color`).
+// The permanent's colours become exactly those (layer 5 — `become`).
 const COLORS: readonly (readonly [Color, string])[] = [
   ["W", "White"],
   ["U", "Blue"],
@@ -21,7 +21,7 @@ const MODES: ModeOption[] = Array.from({ length: 31 }, (_, i) => i + 1)
   .sort((x, y) => x.length - y.length)
   .map((picked) => ({
     text: picked.map(([, word]) => word).join(", "),
-    effect: { kind: "become-color", target: 0, colors: picked.map(([color]) => color), duration: "end-of-turn" },
+    effect: { kind: "become", target: 0, setColors: picked.map(([color]) => color), duration: "end-of-turn" },
   }));
 
 const TEXT = "When this creature enters, target permanent becomes the color or colors of your choice until end of turn.";

@@ -34,7 +34,7 @@ export default defineCard({
       cost: { mana: null, tap: false },
       targets: ["land-you-control"],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 4,
         toughness: 4,
@@ -69,7 +69,7 @@ export default defineCard({
             max: { librarySize: "you" },
           },
           {
-            kind: "animate-all",
+            kind: "become",
             filter: { type: "land", thisWay: "put-onto-battlefield" },
             power: 4,
             toughness: 4,

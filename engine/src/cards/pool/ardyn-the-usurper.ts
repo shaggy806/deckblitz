@@ -42,7 +42,7 @@ export default defineCard({
               count: 1,
               who: "you",
               asCard: true,
-              exceptions: { setTypes: ["creature"], setSubtypes: ["Demon"], setColors: ["B"], basePt: [5, 5] },
+              exceptions: { setTypes: ["creature"], setSubtypes: ["Demon"], setColors: ["B"], power: 5, toughness: 5 },
             },
           },
         ],

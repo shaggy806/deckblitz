@@ -5,7 +5,7 @@ import { defineCard } from "../define.js";
 // enters (`enterAs`): its base P/T is 5/5 (layer 7b) and it keeps its own
 // types, so a land is a 5/5 Elemental creature land that still taps for
 // mana. An Equipment that becomes a creature this way can't equip anything.
-const ENTER_AS = { addTypes: ["creature"], addSubtypes: ["Elemental"], basePt: [5, 5] } as const;
+const ENTER_AS = { addTypes: ["creature"], addSubtypes: ["Elemental"], power: 5, toughness: 5 } as const;
 
 export default defineCard({
   name: "Relive the Past",

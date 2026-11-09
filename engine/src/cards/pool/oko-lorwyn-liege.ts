@@ -40,7 +40,7 @@ import { defineCard } from "../define.js";
 //
 // A transforming double-faced planeswalker (Ashling, Rekindled's shape); the
 // back face is Oko, Shadowmoor Scion. "Your first main phase" is the precombat
-// main phase. The +2's "gains all creature types" is a layer-4 `add-types`
+// main phase. The +2's "gains all creature types" is a layer-4 `become`
 // with no end (the ruling: it outlasts Oko leaving or transforming).
 const TRANSFORM_TEXT = "At the beginning of your first main phase, you may pay {G}. If you do, transform Oko.";
 const PLUS_TWO_TEXT = "+2: Up to one target creature gains all creature types. (This effect doesn't end.)";
@@ -60,7 +60,7 @@ export default defineCard({
       loyaltyCost: 2,
       cost: { mana: null, tap: false },
       targets: [{ kind: "optional", of: "creature" }],
-      effect: { kind: "add-types", target: 0, addSubtypes: ["(every creature type)"], duration: "permanent" },
+      effect: { kind: "become", target: 0, addSubtypes: ["(every creature type)"], duration: "permanent" },
       resolve: null,
       text: PLUS_TWO_TEXT,
     },

@@ -21,7 +21,7 @@ export default defineCard({
     {
       trigger: { on: "cast-spell", who: "you", nthEachTurn: 2 },
       targets: [],
-      effect: { kind: "copy-spell", target: "trigger-spell", newTargets: true, except: { notLegendary: true } },
+      effect: { kind: "copy-spell", target: "trigger-spell", newTargets: true, except: { removeSupertypes: ["legendary"] } },
       resolve: null,
       text: TEXT,
     },

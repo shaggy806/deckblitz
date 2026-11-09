@@ -799,6 +799,7 @@ import _poolStrengthTestingHammer from "../pool/strength-testing-hammer.js";
 import _poolStuffyDoll from "../pool/stuffy-doll.js";
 import _poolSubterraneanShambler from "../pool/subterranean-shambler.js";
 import _poolSuccumbToTemptation from "../pool/succumb-to-temptation.js";
+import _poolSuddenSpoiling from "../pool/sudden-spoiling.js";
 import _poolSummonersPact from "../pool/summoners-pact.js";
 import _poolSunbringersTouch from "../pool/sunbringers-touch.js";
 import _poolSunscorchedDivide from "../pool/sunscorched-divide.js";
@@ -1778,6 +1779,7 @@ const shard: CardShard = {
     _poolStuffyDoll,
     _poolSubterraneanShambler,
     _poolSuccumbToTemptation,
+    _poolSuddenSpoiling,
     _poolSummonersPact,
     _poolSunbringersTouch,
     _poolSunscorchedDivide,

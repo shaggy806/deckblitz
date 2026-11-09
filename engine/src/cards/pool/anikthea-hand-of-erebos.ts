@@ -21,7 +21,7 @@ const EXILE_AND_COPY: EffectSpec = {
       of: 0,
       count: 1,
       who: "you",
-      exceptions: { basePt: [3, 3], setColors: ["B"], addTypes: ["creature"], addSubtypes: ["Zombie"] },
+      exceptions: { power: 3, toughness: 3, setColors: ["B"], addTypes: ["creature"], addSubtypes: ["Zombie"] },
     },
   ],
 };

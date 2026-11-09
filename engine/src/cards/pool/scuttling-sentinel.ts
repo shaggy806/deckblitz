@@ -20,8 +20,8 @@ export default defineCard({
           { kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 },
           // "Becomes a blue Crab": its colour becomes blue (rule 105.3), its
           // types gain Crab.
-          { kind: "become-color", target: 0, colors: ["U"], duration: "end-of-turn" },
-          { kind: "add-types", target: 0, addSubtypes: ["Crab"], duration: "end-of-turn" },
+          { kind: "become", target: 0, setColors: ["U"], duration: "end-of-turn" },
+          { kind: "become", target: 0, addSubtypes: ["Crab"], duration: "end-of-turn" },
           { kind: "grant-keyword", target: 0, keyword: "hexproof", duration: "end-of-turn" },
         ],
       },

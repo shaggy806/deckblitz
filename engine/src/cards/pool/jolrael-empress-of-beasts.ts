@@ -20,7 +20,7 @@ export default defineCard({
       cost: { mana: "{2}{G}", tap: true, discard: { count: 2 } },
       targets: ["player"],
       effect: {
-        kind: "animate-all",
+        kind: "become",
         filter: { type: "land", controlledBy: "you" },
         controlledByTarget: 0,
         power: 3,

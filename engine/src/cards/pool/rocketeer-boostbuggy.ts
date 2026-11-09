@@ -33,7 +33,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "add-types", target: "source", addTypes: ["artifact", "creature"], duration: "permanent" },
+          { kind: "become", target: "source", addTypes: ["artifact", "creature"], duration: "permanent" },
           { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
         ],
       },
@@ -49,7 +49,7 @@ export default defineCard({
       },
       targets: [],
       effect: {
-        kind: "add-types",
+        kind: "become",
         target: "source",
         addTypes: ["artifact", "creature"],
         duration: "end-of-turn",

@@ -1,8 +1,8 @@
 /**
- * "Becomes a [type]" as a one-shot effect — `add-types` with `setTypes` /
+ * "Becomes a [type]" as a one-shot effect — `become` with `setTypes` /
  * `setSubtypes`, which replace its card types or its subtypes of a kind
- * (rule 205.1a) and touch nothing else, unlike `animate`; and "the creature
- * type of your choice" (`choose-creature-type` then `add-types`), with
+ * (rule 205.1a) and touch nothing else, unlike `become`; and "the creature
+ * type of your choice" (`choose-creature-type` then `become`), with
  * `exclude` for "other than Wall".
  */
 import { describe, expect, it } from "vitest";
@@ -67,7 +67,7 @@ describe("becomes a [type], no P/T", () => {
     const champion = spawn(game, "Ursine Champion", A);
     lands(game, "Forest", 6);
     activate(game, champion, 0);
-    game.debugApplyEffect(A, { kind: "add-types", target: 0, addSubtypes: ["Elf"], duration: "end-of-turn" }, [
+    game.debugApplyEffect(A, { kind: "become", target: 0, addSubtypes: ["Elf"], duration: "end-of-turn" }, [
       ref(champion),
     ]);
     expect(subtypes(game, champion)).toEqual(["Bear", "Berserker", "Elf"]);
@@ -76,7 +76,7 @@ describe("becomes a [type], no P/T", () => {
   it("setTypes replaces its card types (205.1a)", () => {
     const { game } = table();
     const bears = spawn(game, "Grizzly Bears", A);
-    game.debugApplyEffect(A, { kind: "add-types", target: 0, setTypes: ["enchantment"], duration: "permanent" }, [
+    game.debugApplyEffect(A, { kind: "become", target: 0, setTypes: ["enchantment"], duration: "permanent" }, [
       ref(bears),
     ]);
     expect(types(game, bears)).toEqual(["enchantment"]);

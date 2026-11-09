@@ -23,12 +23,10 @@ export default defineCard({
       cost: { mana: "{1}{W/B}", tap: false },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 3,
         toughness: 3,
-        addTypes: [],
-        addSubtypes: [],
         setSubtypes: ["Human", "Warrior"],
         duration: "permanent",
       },
@@ -44,7 +42,7 @@ export default defineCard({
         then: {
           kind: "sequence",
           effects: [
-            { kind: "add-types", target: "source", setSubtypes: ["Human", "Spirit", "Warrior"], duration: "permanent" },
+            { kind: "become", target: "source", setSubtypes: ["Human", "Spirit", "Warrior"], duration: "permanent" },
             { kind: "grant-keyword", target: "source", keyword: "trample", duration: "permanent" },
             { kind: "grant-keyword", target: "source", keyword: "lifelink", duration: "permanent" },
           ],

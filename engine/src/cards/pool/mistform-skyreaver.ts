@@ -23,7 +23,7 @@ export default defineCard({
       effect: {
         kind: "choose-creature-type",
         then: {
-          kind: "add-types",
+          kind: "become",
           target: "source",
           setSubtypes: ["$chosen"],
           duration: "end-of-turn",

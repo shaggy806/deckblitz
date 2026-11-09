@@ -33,7 +33,7 @@ export default defineCard({
       },
       loseAllAbilities: true,
       setTypes: ["creature"],
-      setBasePtFromAffectedCounters: "loyalty",
+      setBasePt: { power: { countersOnIt: "loyalty" }, toughness: { countersOnIt: "loyalty" } },
       text: STATIC,
     },
   ],

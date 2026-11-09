@@ -13,7 +13,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "lose-keywords", filter: { type: "creature" }, keywords: ["indestructible"], duration: "end-of-turn" },
+      { kind: "become", filter: { type: "creature" }, loseKeywords: ["indestructible"], duration: "end-of-turn" },
       {
         kind: "damage-all",
         filter: { anyOf: [{ type: "creature" }, { type: "planeswalker", notSubtypes: ["Bolas"] }] },

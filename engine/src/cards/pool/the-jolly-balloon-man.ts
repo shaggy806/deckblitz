@@ -33,7 +33,7 @@ export default defineCard({
         who: "you",
         sacrificeAtEndStep: true,
         exceptions: {
-          basePt: [1, 1],
+          power: 1, toughness: 1,
           addColors: ["R"],
           addTypes: ["creature"],
           addSubtypes: ["Balloon"],

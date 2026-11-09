@@ -10,12 +10,10 @@ export default defineCard({
   text: "Until end of turn, target creature becomes a Dragon with base power and toughness 4/4 and gains flying. (It loses all other creature types.)",
   targets: ["creature"],
   effect: {
-    kind: "animate",
+    kind: "become",
     target: 0,
     power: 4,
     toughness: 4,
-    addTypes: [],
-    addSubtypes: [],
     setSubtypes: ["Dragon"],
     keywords: ["flying"],
     duration: "end-of-turn",

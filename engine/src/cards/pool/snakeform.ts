@@ -19,12 +19,11 @@ export default defineCard({
     kind: "sequence",
     effects: [
       {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 1,
         toughness: 1,
         addTypes: ["creature"],
-        addSubtypes: [],
         setSubtypes: ["Snake"],
         setColors: ["G"],
         loseAbilities: true,

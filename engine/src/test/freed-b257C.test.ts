@@ -92,7 +92,7 @@ describe("B257 group C", () => {
     spawn(game, "Sol Ring", B);
     spawn(game, "Mind Stone", B);
     spawn(game, "Sol Ring", C);
-    game.debugApplyEffect(A, { kind: "add-types", target: 0, addTypes: ["creature"], duration: "end-of-turn" }, [ref(hauler)]);
+    game.debugApplyEffect(A, { kind: "become", target: 0, addTypes: ["creature"], duration: "end-of-turn" }, [ref(hauler)]);
     attack(game, a, [hauler]);
     expect(tokensNamed(game, "Treasure Token", A)).toBe(2);
   });

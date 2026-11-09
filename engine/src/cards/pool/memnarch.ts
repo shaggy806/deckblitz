@@ -29,7 +29,7 @@ export default defineCard({
     {
       cost: { mana: "{1}{U}{U}", tap: false },
       targets: ["permanent"],
-      effect: { kind: "add-types", target: 0, addTypes: ["artifact"], duration: "permanent" },
+      effect: { kind: "become", target: 0, addTypes: ["artifact"], duration: "permanent" },
       resolve: null,
       text: ARTIFACT_TEXT,
     },

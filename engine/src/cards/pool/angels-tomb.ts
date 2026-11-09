@@ -22,7 +22,7 @@ export default defineCard({
         kind: "may",
         prompt: "Have Angel's Tomb become a 3/3 white Angel artifact creature with flying until end of turn?",
         effect: {
-          kind: "animate",
+          kind: "become",
           target: "source",
           power: 3,
           toughness: 3,

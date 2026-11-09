@@ -26,7 +26,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: false, removeCounter: { kind: "oil", count: 1 } },
       targets: [],
-      effect: { kind: "add-types", target: "source", addTypes: ["artifact", "creature"], duration: "end-of-turn" },
+      effect: { kind: "become", target: "source", addTypes: ["artifact", "creature"], duration: "end-of-turn" },
       resolve: null,
       text: ANIMATE_TEXT,
     },
@@ -37,7 +37,7 @@ export default defineCard({
         tapOthers: { count: 0, totalPower: 3, filter: { type: "creature" } },
       },
       targets: [],
-      effect: { kind: "add-types", target: "source", addTypes: ["artifact", "creature"], duration: "end-of-turn" },
+      effect: { kind: "become", target: "source", addTypes: ["artifact", "creature"], duration: "end-of-turn" },
       resolve: null,
       crew: true,
       text: "Crew 3",

@@ -26,7 +26,7 @@ export default defineCard({
             kind: "sequence",
             effects: [
               { kind: "modify-pt", target: "source", power: 2, toughness: 0, duration: "end-of-turn" },
-              { kind: "lose-keywords", target: "source", keywords: ["defender"], duration: "end-of-turn" },
+              { kind: "become", target: "source", loseKeywords: ["defender"], duration: "end-of-turn" },
             ],
           },
         },

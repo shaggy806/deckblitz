@@ -21,7 +21,7 @@ const THREATEN: EffectSpec = {
     { kind: "gain-control", target: 0, untilEndOfTurn: true },
     { kind: "untap", target: 0 },
     { kind: "grant-keyword", target: 0, keyword: "haste", duration: "end-of-turn" },
-    { kind: "add-types", target: 0, addSubtypes: ["Pirate"], duration: "end-of-turn" },
+    { kind: "become", target: 0, addSubtypes: ["Pirate"], duration: "end-of-turn" },
   ],
 };
 

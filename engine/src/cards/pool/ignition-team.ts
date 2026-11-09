@@ -29,7 +29,7 @@ export default defineCard({
       cost: { mana: "{2}{R}", tap: false, removeCounter: { kind: "+1/+1", count: 1 } },
       targets: ["land"],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 4,
         toughness: 4,

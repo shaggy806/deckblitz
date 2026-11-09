@@ -29,12 +29,10 @@ export default defineCard({
       condition: { kind: "controls", filter: { subtype: "Dragon" }, atLeast: 3 },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 5,
         toughness: 5,
-        addTypes: [],
-        addSubtypes: [],
         setSubtypes: ["Dragon"],
         keywords: ["flying"],
         duration: "end-of-turn",

@@ -11,9 +11,9 @@ import { defineCard } from "../define.js";
 //
 // One ability with two trigger events (`sameAbilityAs` — Cockatrice's shape):
 // the creature it blocks, or each creature blocking it, becomes green for
-// good (layer 5 — `become-color`, `"permanent"`), however the Leprechaun fares.
+// good (layer 5 — `become`, `"permanent"`), however the Leprechaun fares.
 const TEXT = "Whenever this creature blocks or becomes blocked by a creature, that creature becomes green.";
-const GREEN = { kind: "become-color", target: "trigger-object", colors: ["G"], duration: "permanent" } as const;
+const GREEN = { kind: "become", target: "trigger-object", setColors: ["G"], duration: "permanent" } as const;
 
 export default defineCard({
   name: "Aisling Leprechaun",

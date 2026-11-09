@@ -21,7 +21,7 @@ export default defineCard({
         effects: [
           { kind: "gain-control", target: 0, untilEndOfTurn: true },
           { kind: "untap", target: 0 },
-          { kind: "add-types", target: 0, addSubtypes: ["Villain"], duration: "end-of-turn" },
+          { kind: "become", target: 0, addSubtypes: ["Villain"], duration: "end-of-turn" },
           { kind: "grant-keyword", target: 0, keyword: "haste", duration: "end-of-turn" },
         ],
       },

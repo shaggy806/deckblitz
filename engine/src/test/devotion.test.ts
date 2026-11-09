@@ -54,9 +54,9 @@ describe("a God that isn't a creature (rules 700.5, 205.1a)", () => {
   it("still isn't a creature once it has lost its abilities (layer 4 before 6 — the ruling); a later effect making it one wins (613.7)", () => {
     const { game } = table();
     const heliod = spawn(game, "Heliod, God of the Sun");
-    game.debugApplyEffect(B, { kind: "lose-abilities", target: 0, duration: "end-of-turn" }, [ref(heliod)]);
+    game.debugApplyEffect(B, { kind: "become", loseAbilities: true, target: 0, duration: "end-of-turn" }, [ref(heliod)]);
     expect(types(game, heliod)).toEqual(["enchantment"]);
-    game.debugApplyEffect(A, { kind: "add-types", target: 0, addTypes: ["creature"], duration: "end-of-turn" }, [ref(heliod)]);
+    game.debugApplyEffect(A, { kind: "become", target: 0, addTypes: ["creature"], duration: "end-of-turn" }, [ref(heliod)]);
     expect(types(game, heliod)).toEqual(["enchantment", "creature"]);
   });
 

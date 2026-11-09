@@ -16,9 +16,9 @@ export default defineCard({
     effect: {
       kind: "sequence",
       effects: [
-        { kind: "animate", target: 1, power: 1, toughness: 1, addTypes: [], addSubtypes: [], loseAbilities: true, duration: "end-of-turn" },
-        { kind: "add-types", target: 1, setSubtypes: ["Frog"], duration: "end-of-turn" },
-        { kind: "become-color", target: 1, colors: ["U"], duration: "end-of-turn" },
+        { kind: "become", target: 1, power: 1, toughness: 1, loseAbilities: true, duration: "end-of-turn" },
+        { kind: "become", target: 1, setSubtypes: ["Frog"], duration: "end-of-turn" },
+        { kind: "become", target: 1, setColors: ["U"], duration: "end-of-turn" },
       ],
     },
   },

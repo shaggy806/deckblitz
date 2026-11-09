@@ -37,7 +37,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "add-counter", target: 0, counter: "shadow", amount: 1 },
-          { kind: "add-types", target: 0, addSubtypes: ["Wraith"], duration: { whileCounter: "shadow" } },
+          { kind: "become", target: 0, addSubtypes: ["Wraith"], duration: { whileCounter: "shadow" } },
         ],
       },
       resolve: null,

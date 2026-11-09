@@ -30,12 +30,10 @@ export default defineCard({
       cost: { mana: "{S}{S}", tap: false },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 2,
         toughness: 3,
-        addTypes: [],
-        addSubtypes: [],
         setSubtypes: ["Spirit", "Warrior"],
         duration: "permanent",
       },
@@ -53,12 +51,10 @@ export default defineCard({
           effects: [
             { kind: "add-counter", target: "source", counter: "flying", amount: 1 },
             {
-              kind: "animate",
+              kind: "become",
               target: "source",
               power: 4,
               toughness: 4,
-              addTypes: [],
-              addSubtypes: [],
               setSubtypes: ["Spirit", "Warrior", "Angel"],
               duration: "permanent",
             },

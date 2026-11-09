@@ -23,7 +23,7 @@ export default defineCard({
         kind: "for-each-permanent",
         filter: { subtype: "Vehicle", controlledBy: "you" },
         simultaneous: true,
-        effect: { kind: "add-types", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" },
+        effect: { kind: "become", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" },
       },
       resolve: null,
       text: ENTERS,

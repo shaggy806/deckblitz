@@ -31,7 +31,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "create-token-copy", of: 0, count: 1, who: "you", exceptions: { notLegendary: true } },
+          { kind: "create-token-copy", of: 0, count: 1, who: "you", exceptions: { removeSupertypes: ["legendary"] } },
           {
             kind: "conditional",
             condition: { kind: "this-way", what: "created", filter: { subtype: "Aura" } },

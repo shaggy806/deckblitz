@@ -79,7 +79,7 @@ describe("Urza, Chief Artificer", () => {
       expect(game.characteristics(id).keywords.has("menace")).toBe(false);
     }
     game.debugApplyEffect(A, {
-      kind: "animate-all",
+      kind: "become",
       filter: { name: "Sol Ring" },
       power: 1,
       toughness: 1,

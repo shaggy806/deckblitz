@@ -26,7 +26,7 @@ export default defineCard({
           of: { kind: "other", of: { kind: "permanent", whose: "you", filter: { subtype: "Vehicle" } } },
         },
       ],
-      effect: { kind: "add-types", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" },
+      effect: { kind: "become", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" },
       resolve: null,
       text: CREWED_TEXT,
     },

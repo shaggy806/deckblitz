@@ -64,7 +64,7 @@ describe("start your engines! (rule 702.179a, 704.5aa)", () => {
   it("one that lost its abilities starts nothing", () => {
     const { game } = table();
     const sarcophagus = spawn(game, "Walking Sarcophagus");
-    game.debugApplyEffect(B, { kind: "lose-abilities", target: 0, duration: "permanent" }, [
+    game.debugApplyEffect(B, { kind: "become", loseAbilities: true, target: 0, duration: "permanent" }, [
       { kind: "object", object: sarcophagus },
     ]);
     check(game);

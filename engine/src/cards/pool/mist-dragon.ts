@@ -20,7 +20,7 @@ export default defineCard({
     {
       cost: { mana: "{0}", tap: false },
       targets: [],
-      effect: { kind: "lose-keywords", target: "source", keywords: ["flying"], duration: "permanent" },
+      effect: { kind: "become", target: "source", loseKeywords: ["flying"], duration: "permanent" },
       resolve: null,
       text: "{0}: This creature loses flying.",
     },

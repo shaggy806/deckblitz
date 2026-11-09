@@ -13,7 +13,7 @@ const TEXT =
   "Whenever this creature attacks, target creature defending player controls loses all abilities and has base power and toughness 0/1 until end of turn.";
 
 // Azure Beastbinder's shape: one timestamped layer-6 loss plus a layer-7b
-// base P/T (an `animate` adding no types), so later grants and P/T-setting
+// base P/T (an `become` adding no types), so later grants and P/T-setting
 // effects still apply over it, and counters and pumps still modify it.
 export default defineCard({
   name: "Warkite Marauder",
@@ -30,12 +30,10 @@ export default defineCard({
       trigger: { on: "attacks", who: "self" },
       targets: ["creature-defending-player-controls"],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 0,
         toughness: 1,
-        addTypes: [],
-        addSubtypes: [],
         loseAbilities: true,
         duration: "end-of-turn",
       },

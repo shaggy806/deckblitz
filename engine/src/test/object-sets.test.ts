@@ -81,7 +81,7 @@ describe("the pool on object sets", () => {
     const bad: string[] = [];
     for (const def of [...POOL_CARDS, ...TOKEN_CARDS]) {
       for (const st of def.static ?? []) {
-        const counted = [st.setBasePtFromCount, st.grantPtPerCount, st.setBasePtFromSourceCount];
+        const counted = [st.setBasePtFromCount, st.grantPtPerCount, st.setBasePt];
         for (const zoneIn of valuesAt(counted, "in")) {
           for (const one of Array.isArray(zoneIn) ? zoneIn : [zoneIn]) {
             if (isObjectSetRef(one) && one !== "exiled-with-source" && !(typeof one === "object" && "attachmentsOf" in one)) {

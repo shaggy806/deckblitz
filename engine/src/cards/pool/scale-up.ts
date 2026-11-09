@@ -4,12 +4,10 @@ import type { EffectSpec } from "../../effects.js";
 // EDHREC rank 7125. They keep their abilities (the ruling); overloaded, only
 // the creatures you control as it resolves.
 const wurm = (target: number): EffectSpec => ({
-  kind: "animate",
+  kind: "become",
   target,
   power: 6,
   toughness: 4,
-  addTypes: [],
-  addSubtypes: [],
   setSubtypes: ["Wurm"],
   setColors: ["G"],
   duration: "end-of-turn",

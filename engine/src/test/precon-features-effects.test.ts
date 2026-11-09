@@ -349,7 +349,7 @@ describe("Goddric, Cloaked Reveler", () => {
     const goddric = spawn(game, "Goddric, Cloaked Reveler");
     spawn(game, "Grizzly Bears", A, true);
     spawn(game, "Sol Ring", A, true);
-    game.debugApplyEffect(B, { kind: "lose-abilities", target: 0, duration: "end-of-turn" }, [obj(goddric)]);
+    game.debugApplyEffect(B, { kind: "become", loseAbilities: true, target: 0, duration: "end-of-turn" }, [obj(goddric)]);
     const c = game.characteristics(goddric);
     expect([c.power, c.toughness]).toEqual([4, 4]);
     expect([...c.subtypes]).toEqual(["Dragon"]);

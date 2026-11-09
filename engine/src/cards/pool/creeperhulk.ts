@@ -22,12 +22,10 @@ export default defineCard({
       cost: { mana: "{1}{G}", tap: false },
       targets: ["creature-you-control"],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 5,
         toughness: 5,
-        addTypes: [],
-        addSubtypes: [],
         keywords: ["trample"],
         duration: "end-of-turn",
       },

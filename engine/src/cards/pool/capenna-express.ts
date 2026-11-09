@@ -16,7 +16,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: false, sacrifice: { filter: { subtype: "Treasure" } } },
       targets: [],
-      effect: { kind: "add-types", target: "source", addTypes: ["artifact", "creature"], duration: "end-of-turn" },
+      effect: { kind: "become", target: "source", addTypes: ["artifact", "creature"], duration: "end-of-turn" },
       resolve: null,
       text: SAC_TEXT,
     },

@@ -17,9 +17,9 @@ export default defineCard({
     kind: "sequence",
     effects: [
       {
-        kind: "lose-keywords",
+        kind: "become",
         filter: { notTypes: ["land"], controlledBy: "opponent" },
-        keywords: ["indestructible"],
+        loseKeywords: ["indestructible"],
         duration: "end-of-turn",
       },
       { kind: "destroy-all", filter: { notTypes: ["land"] } },

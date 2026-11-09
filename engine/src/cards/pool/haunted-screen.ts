@@ -42,7 +42,7 @@ export default defineCard({
         effects: [
           { kind: "add-counter", target: "source", counter: "+1/+1", amount: 7 },
           {
-            kind: "animate",
+            kind: "become",
             target: "source",
             power: 0,
             toughness: 0,

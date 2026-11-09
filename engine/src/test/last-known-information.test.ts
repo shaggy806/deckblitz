@@ -245,7 +245,7 @@ describe("a leaves-the-battlefield trigger matches the permanent as it last exis
     apply(
       game,
       {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 3,
         toughness: 3,
@@ -271,12 +271,10 @@ describe("a leaves-the-battlefield trigger matches the permanent as it last exis
     const bears = game.debugSpawn("Grizzly Bears", A);
     const [saproling] = tokens(game, "Saproling Token", 1);
     const becomes = (subtype: string): EffectSpec => ({
-      kind: "animate",
+      kind: "become",
       target: 0,
       power: 2,
       toughness: 2,
-      addTypes: [],
-      addSubtypes: [],
       setSubtypes: [subtype],
       duration: "end-of-turn",
     });
@@ -323,12 +321,10 @@ describe("a leaves-the-battlefield trigger matches the permanent as it last exis
         effects: [
           { kind: "destroy", target: 0 },
           {
-            kind: "animate",
+            kind: "become",
             target: 1,
             power: 0,
             toughness: 0,
-            addTypes: [],
-            addSubtypes: [],
             loseAbilities: true,
             duration: "end-of-turn",
           },
@@ -805,12 +801,11 @@ describe("Elas il-Kor, Sadistic Pilgrim", () => {
     apply(
       game,
       {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 1,
         toughness: 1,
         addTypes: ["creature"],
-        addSubtypes: [],
         duration: "end-of-turn",
       },
       land,

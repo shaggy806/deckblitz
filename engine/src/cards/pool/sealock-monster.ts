@@ -33,7 +33,7 @@ export default defineCard({
     {
       trigger: { on: "event", event: "becomes-monstrous", who: "self" },
       targets: ["land"],
-      effect: { kind: "add-types", target: 0, addSubtypes: ["Island"], duration: "permanent" },
+      effect: { kind: "become", target: 0, addSubtypes: ["Island"], duration: "permanent" },
       resolve: null,
       text: ISLAND,
     },

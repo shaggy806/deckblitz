@@ -33,17 +33,16 @@ export default defineCard({
         then: {
           kind: "sequence",
           effects: [
-            { kind: "add-types", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" },
+            { kind: "become", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" },
             { kind: "grant-keyword", target: 0, keyword: "flying", duration: "end-of-turn" },
           ],
         },
         else: {
-          kind: "animate",
+          kind: "become",
           target: 0,
           power: 1,
           toughness: 1,
           addTypes: ["artifact", "creature"],
-          addSubtypes: [],
           keywords: ["flying"],
           duration: "end-of-turn",
         },

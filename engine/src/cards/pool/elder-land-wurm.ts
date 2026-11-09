@@ -21,7 +21,7 @@ export default defineCard({
     {
       trigger: { on: "blocks", who: "self" },
       targets: [],
-      effect: { kind: "lose-keywords", target: "source", keywords: ["defender"], duration: "permanent" },
+      effect: { kind: "become", target: "source", loseKeywords: ["defender"], duration: "permanent" },
       resolve: null,
       text: BLOCKS_TEXT,
     },

@@ -33,7 +33,7 @@ export default defineCard({
     {
       cost: { mana: "{U}", tap: false },
       targets: [{ kind: "permanent", filter: { types: ["artifact", "creature"] } }],
-      effect: { kind: "become-color", target: 0, colors: ["U"], duration: "end-of-turn" },
+      effect: { kind: "become", target: 0, setColors: ["U"], duration: "end-of-turn" },
       resolve: null,
       text: BLUE,
     },

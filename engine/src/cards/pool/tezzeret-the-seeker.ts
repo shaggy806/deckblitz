@@ -48,7 +48,7 @@ export default defineCard({
       cost: { mana: null, tap: false },
       targets: [],
       effect: {
-        kind: "animate-all",
+        kind: "become",
         filter: { type: "artifact", controlledBy: "you" },
         power: 5,
         toughness: 5,

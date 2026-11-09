@@ -14,7 +14,6 @@ export default defineCard({
     of: 0,
     count: 1,
     who: "you",
-    notLegendary: true,
-    exceptions: { keywords: ["flying"] },
+    exceptions: { removeSupertypes: ["legendary"], keywords: ["flying"] },
   },
 });

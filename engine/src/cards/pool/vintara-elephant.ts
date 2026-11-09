@@ -18,7 +18,7 @@ export default defineCard({
     {
       cost: { mana: "{3}", tap: false },
       targets: [],
-      effect: { kind: "lose-keywords", target: "source", keywords: ["trample"], duration: "end-of-turn" },
+      effect: { kind: "become", target: "source", loseKeywords: ["trample"], duration: "end-of-turn" },
       resolve: null,
       anyPlayer: true,
       text: TEXT,

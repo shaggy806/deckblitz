@@ -101,7 +101,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "add-types", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" },
+          { kind: "become", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" },
           { kind: "grant-keyword", target: 0, keyword: "haste", duration: "end-of-turn" },
         ],
       },

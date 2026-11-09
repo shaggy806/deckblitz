@@ -28,7 +28,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "damage", amount: 1, target: 0 },
-          { kind: "add-types", target: 0, addSubtypes: ["Vampire"], duration: "permanent" },
+          { kind: "become", target: 0, addSubtypes: ["Vampire"], duration: "permanent" },
           { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
         ],
       },

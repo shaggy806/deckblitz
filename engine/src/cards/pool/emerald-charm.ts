@@ -23,7 +23,7 @@ export default defineCard({
       {
         text: FLYING_MODE,
         targets: ["creature"],
-        effect: { kind: "lose-keywords", target: 0, keywords: ["flying"], duration: "end-of-turn" },
+        effect: { kind: "become", target: 0, loseKeywords: ["flying"], duration: "end-of-turn" },
       },
     ],
   },

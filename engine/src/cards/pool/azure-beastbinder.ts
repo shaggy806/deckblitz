@@ -51,23 +51,21 @@ export default defineCard({
         },
       ],
       // A creature: one timestamped layer-6 loss plus a layer-7b base P/T of
-      // 2/2 (Turn to Frog's `animate`, adding no types), so a later grant or
+      // 2/2 (Turn to Frog's `become`, adding no types), so a later grant or
       // P/T-setting effect still applies over it (the rulings). Anything else
       // only loses its abilities.
       effect: {
         kind: "conditional",
         condition: { kind: "target", index: 0, filter: { type: "creature" } },
         then: {
-          kind: "animate",
+          kind: "become",
           target: 0,
           power: 2,
           toughness: 2,
-          addTypes: [],
-          addSubtypes: [],
           loseAbilities: true,
           duration: "until-your-next-turn",
         },
-        else: { kind: "lose-abilities", target: 0, duration: "until-your-next-turn" },
+        else: { kind: "become", loseAbilities: true, target: 0, duration: "until-your-next-turn" },
       },
       resolve: null,
       text: ATTACK_TEXT,

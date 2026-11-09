@@ -16,7 +16,7 @@ export default defineCard({
   text: "Until end of turn, target artifact or creature becomes a Dinosaur artifact creature with base power and toughness 4/3 in addition to its other types.",
   targets: [{ kind: "permanent", filter: { typesAnyOf: ["artifact", "creature"] } }],
   effect: {
-    kind: "animate",
+    kind: "become",
     target: 0,
     power: 4,
     toughness: 3,

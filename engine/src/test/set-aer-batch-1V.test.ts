@@ -38,7 +38,7 @@ const energy = (game: Game, player = A): number => game.state.players[player].en
 const tapped = (game: Game, id: ObjectId): boolean => game.state.objects[id].tapped === true;
 /** A Vehicle becomes an artifact creature until end of turn, as crewing would. */
 const animate = (game: Game, id: ObjectId): void =>
-  game.debugApplyEffect(A, { kind: "add-types", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" }, [ref(id)]);
+  game.debugApplyEffect(A, { kind: "become", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" }, [ref(id)]);
 const canBlock = (offer: BlockOffer, blocker: ObjectId): readonly ObjectId[] =>
   offer.eligible.find((e) => e.blocker === blocker)?.canBlock ?? [];
 

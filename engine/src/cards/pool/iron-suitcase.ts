@@ -17,12 +17,11 @@ export default defineCard({
       cost: { mana: "{3}", tap: false },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 3,
         toughness: 3,
         addTypes: ["artifact", "creature"],
-        addSubtypes: [],
         setSubtypes: ["Construct"],
         keywords: ["flying"],
         duration: "end-of-turn",

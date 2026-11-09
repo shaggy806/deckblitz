@@ -23,12 +23,11 @@ export default defineCard({
       cost: { mana: "{3}", tap: false },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 1,
         toughness: 5,
         addTypes: ["artifact", "creature"],
-        addSubtypes: [],
         setSubtypes: ["Spirit"],
         keywords: ["flying"],
         duration: "end-of-turn",

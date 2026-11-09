@@ -154,7 +154,7 @@ describe("station symbols (rule 721.2)", () => {
     const hull = spawn(game, HEARTHHULL);
     game.debugApplyEffect(
       A,
-      { kind: "animate", target: 0, power: 3, toughness: 3, addTypes: ["creature"], addSubtypes: [], duration: "end-of-turn" },
+      { kind: "become", target: 0, power: 3, toughness: 3, addTypes: ["creature"], duration: "end-of-turn" },
       [{ kind: "object", object: hull }],
     );
     const c = game.characteristics(hull);
@@ -308,7 +308,7 @@ describe("Infinite Guideline Station", () => {
     game.state.objects[station].counters.charge = 11;
     game.debugApplyEffect(
       A,
-      { kind: "animate", target: 0, power: 3, toughness: 3, addTypes: ["creature"], addSubtypes: [], duration: "end-of-turn" },
+      { kind: "become", target: 0, power: 3, toughness: 3, addTypes: ["creature"], duration: "end-of-turn" },
       [{ kind: "object", object: station }],
     );
     a.declareAttackersFn = () => [{ attacker: station, defender: B }];

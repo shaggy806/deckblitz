@@ -176,6 +176,7 @@ import _poolDarkDwellerOracle from "../pool/dark-dweller-oracle.js";
 import _poolDarkHatchling from "../pool/dark-hatchling.js";
 import _poolDarkslickShores from "../pool/darkslick-shores.js";
 import _poolDaxossTorment from "../pool/daxoss-torment.js";
+import _poolDayOfBlackSun from "../pool/day-of-black-sun.js";
 import _poolDeathHoodCobra from "../pool/death-hood-cobra.js";
 import _poolDeconstruct from "../pool/deconstruct.js";
 import _poolDeepAnalysis from "../pool/deep-analysis.js";
@@ -1144,6 +1145,7 @@ const shard: CardShard = {
     _poolDarkHatchling,
     _poolDarkslickShores,
     _poolDaxossTorment,
+    _poolDayOfBlackSun,
     _poolDeathHoodCobra,
     _poolDeconstruct,
     _poolDeepAnalysis,

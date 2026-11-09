@@ -14,12 +14,11 @@ export default defineCard({
       targets: [],
       // Levitating Statue's shape, green.
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 4,
         toughness: 4,
         addTypes: ["artifact", "creature"],
-        addSubtypes: [],
         setSubtypes: ["Bear"],
         setColors: ["G"],
         duration: "end-of-turn",

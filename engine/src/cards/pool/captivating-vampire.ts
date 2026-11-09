@@ -51,7 +51,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "gain-control", target: 0, untilEndOfTurn: false },
-          { kind: "add-types", target: 0, addSubtypes: ["Vampire"], duration: "permanent" },
+          { kind: "become", target: 0, addSubtypes: ["Vampire"], duration: "permanent" },
         ],
       },
       resolve: null,

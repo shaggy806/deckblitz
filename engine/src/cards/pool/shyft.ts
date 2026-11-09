@@ -13,7 +13,7 @@ import type { Color } from "../../mana.js";
 // Dream Coat's shape: one mode for each of the 31 non-empty combinations of
 // the five colours (never colourless — the first ruling), behind a `may`. The
 // creature's colours become exactly those, with no duration (layer 5 —
-// `become-color`, "permanent").
+// `become`, "permanent").
 const COLORS: readonly (readonly [Color, string])[] = [
   ["W", "White"],
   ["U", "Blue"],
@@ -27,7 +27,7 @@ const MODES: ModeOption[] = Array.from({ length: 31 }, (_, i) => i + 1)
   .sort((x, y) => x.length - y.length)
   .map((picked) => ({
     text: picked.map(([, word]) => word).join(", "),
-    effect: { kind: "become-color", target: "source", colors: picked.map(([color]) => color), duration: "permanent" },
+    effect: { kind: "become", target: "source", setColors: picked.map(([color]) => color), duration: "permanent" },
   }));
 
 export default defineCard({

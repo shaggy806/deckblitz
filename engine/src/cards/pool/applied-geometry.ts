@@ -38,7 +38,7 @@ export default defineCard({
         of: 0,
         count: 1,
         who: "you",
-        exceptions: { basePt: [0, 0], addTypes: ["creature"], addSubtypes: ["Fractal"] },
+        exceptions: { power: 0, toughness: 0, addTypes: ["creature"], addSubtypes: ["Fractal"] },
       },
       { kind: "add-counter-all", filter: { thisWay: "created" }, counter: "+1/+1", amount: 6 },
     ],

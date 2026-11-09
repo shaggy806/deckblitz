@@ -22,12 +22,10 @@ export default defineCard({
         kind: "may",
         prompt: "Have the Human's base power and toughness become equal to this creature's power and toughness?",
         effect: {
-          kind: "animate",
+          kind: "become",
           target: 0,
           power: { powerOf: "source" },
           toughness: { toughnessOf: "source" },
-          addTypes: [],
-          addSubtypes: [],
           duration: "end-of-turn",
         },
       },

@@ -16,7 +16,7 @@ export default defineCard({
     {
       trigger: { on: "step-begins", step: "upkeep", who: "you" },
       targets: [],
-      effect: { kind: "create-token-copy", of: "enchanted", count: 1, who: "you", basePt: [1, 1] },
+      effect: { kind: "create-token-copy", of: "enchanted", count: 1, who: "you", exceptions: { power: 1, toughness: 1 } },
       resolve: null,
       text: UPKEEP_TEXT,
     },

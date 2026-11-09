@@ -57,12 +57,11 @@ export default defineCard({
             trigger: { on: "step-begins", step: "begin-combat", who: "you" },
             targets: [{ kind: "permanent", filter: { type: "artifact", controlledBy: "you" } }],
             effect: {
-              kind: "animate",
+              kind: "become",
               target: 0,
               power: 5,
               toughness: 5,
               addTypes: ["artifact", "creature"],
-              addSubtypes: [],
               duration: "permanent",
             },
             resolve: null,

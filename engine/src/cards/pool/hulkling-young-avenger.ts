@@ -35,7 +35,7 @@ export default defineCard({
         until: "end-of-turn",
         exceptions: {
           name: "Hulkling, Young Avenger",
-          basePt: [4, 4],
+          power: 4, toughness: 4,
           keywords: ["flying"],
           thisAbility: { card: "Hulkling, Young Avenger", triggered: 0 },
         },

@@ -40,7 +40,7 @@ export default defineCard({
         tapOthers: { count: 2, filter: { token: true, controlledBy: "you" }, includeSelf: true },
       },
       targets: [],
-      effect: { kind: "add-types", target: "source", addTypes: ["artifact", "creature"], duration: "end-of-turn" },
+      effect: { kind: "become", target: "source", addTypes: ["artifact", "creature"], duration: "end-of-turn" },
       resolve: null,
       text: ANIMATE_TEXT,
     },

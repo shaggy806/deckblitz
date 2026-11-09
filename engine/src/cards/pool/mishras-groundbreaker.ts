@@ -13,12 +13,11 @@ export default defineCard({
       cost: { mana: null, tap: true, sacrifice: "self" },
       targets: ["land"],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 3,
         toughness: 3,
         addTypes: ["artifact", "creature"],
-        addSubtypes: [],
         duration: "permanent",
       },
       resolve: null,

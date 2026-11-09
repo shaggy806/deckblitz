@@ -34,7 +34,7 @@ export default defineCard({
         target: "source",
         of: 0,
         ofCard: true,
-        exceptions: { basePt: [0, 0], thisAbility: { card: "Mimeoplasm, Revered One", activated: 0 } },
+        exceptions: { power: 0, toughness: 0, thisAbility: { card: "Mimeoplasm, Revered One", activated: 0 } },
       },
       resolve: null,
       text: COPY_TEXT,

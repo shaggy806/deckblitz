@@ -22,8 +22,8 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "lose-keywords", target: "source", keywords: ["defender"], duration: "end-of-turn" },
-          { kind: "add-types", target: "source", setSubtypes: ["Human"], duration: "end-of-turn" },
+          { kind: "become", target: "source", loseKeywords: ["defender"], duration: "end-of-turn" },
+          { kind: "become", target: "source", setSubtypes: ["Human"], duration: "end-of-turn" },
         ],
       },
       resolve: null,

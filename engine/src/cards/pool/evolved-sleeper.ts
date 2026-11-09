@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 
 // Dominaria United (DMU). EDHREC rank 16349.
 //
-// Each "becomes" is an `animate` of itself with no duration: its creature
+// Each "becomes" is an `become` of itself with no duration: its creature
 // types are set (layer 4 — they replace Human, and each other) and its base
 // P/T (layer 7b), both by timestamp, so activating the first ability again
 // after the second makes it a 2/2 Human Cleric once more (the ruling), and a
@@ -30,12 +30,10 @@ export default defineCard({
       cost: { mana: "{B}", tap: false },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 2,
         toughness: 2,
-        addTypes: [],
-        addSubtypes: [],
         setSubtypes: ["Human", "Cleric"],
         duration: "permanent",
       },
@@ -53,12 +51,10 @@ export default defineCard({
           effects: [
             { kind: "add-counter", target: "source", counter: "deathtouch", amount: 1 },
             {
-              kind: "animate",
+              kind: "become",
               target: "source",
               power: 3,
               toughness: 3,
-              addTypes: [],
-              addSubtypes: [],
               setSubtypes: ["Phyrexian", "Human", "Cleric"],
               duration: "permanent",
             },

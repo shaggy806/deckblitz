@@ -7,7 +7,7 @@ import { defineCard } from "../define.js";
 //     until the ability resolves.
 //
 // The choice is made as it resolves (a `modal` that isn't `announced`), and
-// sets one base value alone, the other unchanged (`animate`, rule 613.4b).
+// sets one base value alone, the other unchanged (`become`, rule 613.4b).
 const TEXT = "{T}: Until end of turn, target creature has base power 1 or base toughness 1.";
 
 export default defineCard({
@@ -31,11 +31,11 @@ export default defineCard({
         modes: [
           {
             text: "Base power 1",
-            effect: { kind: "animate", target: 0, power: 1, addTypes: [], addSubtypes: [], duration: "end-of-turn" },
+            effect: { kind: "become", target: 0, power: 1, duration: "end-of-turn" },
           },
           {
             text: "Base toughness 1",
-            effect: { kind: "animate", target: 0, toughness: 1, addTypes: [], addSubtypes: [], duration: "end-of-turn" },
+            effect: { kind: "become", target: 0, toughness: 1, duration: "end-of-turn" },
           },
         ],
       },

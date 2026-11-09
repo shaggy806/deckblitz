@@ -79,7 +79,7 @@ export default defineCard({
             kind: "conditional",
             condition: { kind: "target", index: 0, filter: { notTypes: ["creature"] } },
             then: {
-              kind: "animate",
+              kind: "become",
               target: 0,
               power: 0,
               toughness: 0,

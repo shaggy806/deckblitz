@@ -5,7 +5,7 @@ import { defineCard } from "../define.js";
 // Rulings:
 //   [2025-09-19] The effect from Lizard's triggered ability doesn't end at the end of the turn.
 
-// Turn to Frog's `animate`, for good: "becomes a green Lizard creature" sets
+// Turn to Frog's `become`, for good: "becomes a green Lizard creature" sets
 // its card type (rule 205.1a — an artifact creature stops being an artifact,
 // Sarkhan's `setTypes`), its creature types (`setSubtypes`), its colour and
 // its base P/T, and it loses all abilities.
@@ -28,13 +28,11 @@ export default defineCard({
       trigger: { on: "enters-battlefield", who: "self" },
       targets: [{ kind: "optional", of: { kind: "other", of: "creature" } }],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 4,
         toughness: 4,
         setTypes: ["creature"],
-        addTypes: [],
-        addSubtypes: [],
         setSubtypes: ["Lizard"],
         setColors: ["G"],
         loseAbilities: true,

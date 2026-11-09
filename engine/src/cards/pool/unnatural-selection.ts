@@ -4,7 +4,7 @@ import { defineCard } from "../define.js";
 // EDHREC rank 13371.
 //
 // Imagecrafter's ability for {1}: `choose-creature-type` with `exclude`, then
-// `add-types`' `setSubtypes` (rule 205.1a).
+// `become`' `setSubtypes` (rule 205.1a).
 //
 // Rulings:
 //   You must choose a creature type that already exists in Magic.
@@ -24,7 +24,7 @@ export default defineCard({
       effect: {
         kind: "choose-creature-type",
         exclude: ["Wall"],
-        then: { kind: "add-types", target: 0, setSubtypes: [CHOSEN_CREATURE_TYPE], duration: "end-of-turn" },
+        then: { kind: "become", target: 0, setSubtypes: [CHOSEN_CREATURE_TYPE], duration: "end-of-turn" },
       },
       resolve: null,
       text: TEXT,

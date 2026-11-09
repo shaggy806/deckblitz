@@ -19,7 +19,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: false, tapOthers: { count: 2, filter: { type: "artifact", controlledBy: "you" } } },
       targets: [],
-      effect: { kind: "add-types", target: "source", addTypes: ["artifact", "creature"], duration: "end-of-turn" },
+      effect: { kind: "become", target: "source", addTypes: ["artifact", "creature"], duration: "end-of-turn" },
       resolve: null,
       text: ANIMATE_TEXT,
     },

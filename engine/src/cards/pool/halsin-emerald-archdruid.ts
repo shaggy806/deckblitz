@@ -21,7 +21,7 @@ export default defineCard({
       cost: { mana: "{1}", tap: false },
       targets: [{ kind: "permanent", whose: "you", filter: { token: true } }],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 4,
         toughness: 4,

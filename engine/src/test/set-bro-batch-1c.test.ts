@@ -647,12 +647,10 @@ describe("Surge Engine", () => {
     game.debugApplyEffect(
       A,
       {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 3,
         toughness: 2,
-        addTypes: [],
-        addSubtypes: [],
         setColors: ["U"],
         duration: "end-of-turn",
       },

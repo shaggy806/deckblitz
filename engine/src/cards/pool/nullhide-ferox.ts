@@ -21,7 +21,7 @@ export default defineCard({
     {
       cost: { mana: "{2}", tap: false },
       targets: [],
-      effect: { kind: "lose-abilities", target: "source", duration: "end-of-turn" },
+      effect: { kind: "become", loseAbilities: true, target: "source", duration: "end-of-turn" },
       resolve: null,
       text: LOSE_TEXT,
       anyPlayer: true,

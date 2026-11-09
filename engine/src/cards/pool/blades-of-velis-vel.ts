@@ -19,9 +19,9 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "modify-pt", target: 0, power: 2, toughness: 0, duration: "end-of-turn" },
-      { kind: "add-types", target: 0, addSubtypes: ["(every creature type)"], duration: "end-of-turn" },
+      { kind: "become", target: 0, addSubtypes: ["(every creature type)"], duration: "end-of-turn" },
       { kind: "modify-pt", target: 1, power: 2, toughness: 0, duration: "end-of-turn" },
-      { kind: "add-types", target: 1, addSubtypes: ["(every creature type)"], duration: "end-of-turn" },
+      { kind: "become", target: 1, addSubtypes: ["(every creature type)"], duration: "end-of-turn" },
     ],
   },
 });

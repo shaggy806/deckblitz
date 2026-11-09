@@ -17,7 +17,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: true },
       targets: ["land"],
-      effect: { kind: "add-types", target: 0, setSubtypes: ["Swamp"], duration: "until-its-controllers-next-untap-step" },
+      effect: { kind: "become", target: 0, setSubtypes: ["Swamp"], duration: "until-its-controllers-next-untap-step" },
       resolve: null,
       text: TEXT,
     },

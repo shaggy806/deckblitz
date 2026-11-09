@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 
 // EDHREC rank 20078.
 //
-// The base P/T set is layer 7b (`animate` with no types added), so counters
+// The base P/T set is layer 7b (`become` with no types added), so counters
 // and pumps still apply on top of the 6/6.
 const DRAW_TEXT =
   "Whenever you draw your second card each turn, until end of turn, Moon Girl and Devil Dinosaur's base power and toughness become 6/6 and they gain trample.";
@@ -26,12 +26,10 @@ export default defineCard({
         kind: "sequence",
         effects: [
           {
-            kind: "animate",
+            kind: "become",
             target: "source",
             power: 6,
             toughness: 6,
-            addTypes: [],
-            addSubtypes: [],
             duration: "end-of-turn",
           },
           { kind: "grant-keyword", target: "source", keyword: "trample", duration: "end-of-turn" },

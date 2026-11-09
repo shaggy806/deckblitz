@@ -204,12 +204,10 @@ describe("changeling — every creature type (rule 702.73a)", () => {
     const game = makeGame();
     const morophon = spawn(game, MOROPHON);
     on(game, morophon, {
-      kind: "animate",
+      kind: "become",
       target: 0,
       power: 6,
       toughness: 6,
-      addTypes: [],
-      addSubtypes: [],
       loseAbilities: true,
       duration: "end-of-turn",
     });
@@ -231,7 +229,7 @@ describe("changeling — every creature type (rule 702.73a)", () => {
     // Not Morophon: a copy of it would stop to choose a creature type.
     const automaton = spawn(game, "Universal Automaton");
     const before = new Set(game.battlefield);
-    on(game, automaton, { kind: "create-token-copy", of: 0, count: 1, notLegendary: true });
+    on(game, automaton, { kind: "create-token-copy", of: 0, count: 1, exceptions: { removeSupertypes: ["legendary"] } });
     const copy = game.battlefield.find((id) => !before.has(id))!;
     expect(game.state.objects[copy].isToken).toBe(true);
     expect(matches(game, copy, { subtype: "Goblin" })).toBe(true);
@@ -331,7 +329,7 @@ describe("every land type", () => {
     const wastes = spawn(game, "Wastes", B);
     expect(matches(game, wastes, { subtype: "Forest" })).toBe(false);
     game.debugApplyEffect(B, {
-      kind: "add-types",
+      kind: "become",
       target: 0,
       addSubtypes: [EVERY_LAND_TYPE],
       duration: "permanent",
@@ -353,7 +351,7 @@ describe("every land type", () => {
     const bears = spawn(game, "Grizzly Bears");
     spawn(game, "Goblin Chieftain");
     expect(game.characteristics(bears).power).toBe(2);
-    on(game, bears, { kind: "add-types", target: 0, addSubtypes: [EVERY_CREATURE_TYPE], duration: "permanent" });
+    on(game, bears, { kind: "become", target: 0, addSubtypes: [EVERY_CREATURE_TYPE], duration: "permanent" });
     expect(game.characteristics(bears).power).toBe(3);
     expect(game.viewFor(A).objects[bears]!.subtypes).toEqual(["Bear"]);
   });

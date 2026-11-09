@@ -24,7 +24,7 @@ export default defineCard({
           of: 0,
           count: 1,
           who: "you",
-          exceptions: { basePt: [4, 4], addTypes: ["creature"], addSubtypes: ["Dragon"], keywords: ["flying"] },
+          exceptions: { power: 4, toughness: 4, addTypes: ["creature"], addSubtypes: ["Dragon"], keywords: ["flying"] },
         },
       },
       {

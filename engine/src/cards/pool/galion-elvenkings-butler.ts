@@ -31,12 +31,10 @@ export default defineCard({
       // Galion's actual power and toughness, read once as it resolves (as it last existed if it
       // has left) and fixed for the turn — the rulings.
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: { powerOf: "source" },
         toughness: { toughnessOf: "source" },
-        addTypes: [],
-        addSubtypes: [],
         duration: "end-of-turn",
       },
       resolve: null,

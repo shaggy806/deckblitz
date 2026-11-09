@@ -46,7 +46,7 @@ describe("restrict: can't be blocked by [filter] this turn", () => {
     const bears = spawn(game, "Grizzly Bears", B);
     spawn(game, "Hill Giant", B); // so B is asked to block at all
     run(game, SMALL_CANT_BLOCK, giant);
-    run(game, { kind: "lose-abilities", target: 0, duration: "end-of-turn" }, giant);
+    run(game, { kind: "become", loseAbilities: true, target: 0, duration: "end-of-turn" }, giant);
     expect(canBlock(blockOffer(game, a, [giant]), bears)).toEqual([]);
   });
 
@@ -120,7 +120,7 @@ describe("grant-static", () => {
       ability: { affects: { scope: "self" }, grantPt: [2, 2], text: "This creature gets +2/+2." },
       duration: "end-of-turn",
     };
-    const lose: EffectSpec = { kind: "lose-abilities", target: 0, duration: "end-of-turn" };
+    const lose: EffectSpec = { kind: "become", loseAbilities: true, target: 0, duration: "end-of-turn" };
     const first = table();
     const bears = spawn(first.game, "Grizzly Bears", A);
     run(first.game, pump, bears);
@@ -153,7 +153,7 @@ describe("grant-static", () => {
     run(game, handPower, bears);
     expect(pt(game, bears)).toEqual({ power: hand, toughness: 2 });
     // A later "becomes 1/1" sets over it.
-    run(game, { kind: "animate", target: 0, power: 1, toughness: 1, addTypes: [], addSubtypes: [], duration: "end-of-turn" }, bears);
+    run(game, { kind: "become", target: 0, power: 1, toughness: 1, duration: "end-of-turn" }, bears);
     expect(pt(game, bears)).toEqual({ power: 1, toughness: 1 });
   });
 

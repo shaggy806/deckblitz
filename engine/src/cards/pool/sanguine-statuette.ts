@@ -31,7 +31,7 @@ export default defineCard({
         kind: "may",
         prompt: "Have Sanguine Statuette become a 3/3 Vampire artifact creature with haste until end of turn?",
         effect: {
-          kind: "animate",
+          kind: "become",
           target: "source",
           power: 3,
           toughness: 3,

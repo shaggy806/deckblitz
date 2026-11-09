@@ -56,7 +56,7 @@ export default defineCard({
       loyaltyCost: -5,
       cost: { mana: null, tap: false },
       targets: [],
-      effect: { kind: "create-token-copy", of: "source", count: 2, who: "you", notLegendary: true },
+      effect: { kind: "create-token-copy", of: "source", count: 2, who: "you", exceptions: { removeSupertypes: ["legendary"] } },
       resolve: null,
       text: COPY_TEXT,
     },

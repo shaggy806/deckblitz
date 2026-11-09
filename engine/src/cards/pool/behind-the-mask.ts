@@ -12,12 +12,11 @@ export default defineCard({
   text: "As an additional cost to cast this spell, you may collect evidence 6. (Exile cards with total mana value 6 or greater from your graveyard.)\nUntil end of turn, target artifact or creature becomes an artifact creature with base power and toughness 4/3. If evidence was collected, it has base power and toughness 1/1 until end of turn instead.",
   targets: [{ kind: "permanent", filter: { typesAnyOf: ["artifact", "creature"] } }],
   effect: {
-    kind: "animate",
+    kind: "become",
     target: 0,
     power: 4,
     toughness: 3,
     addTypes: ["artifact", "creature"],
-    addSubtypes: [],
     duration: "end-of-turn",
   },
   kicker: {
@@ -25,12 +24,11 @@ export default defineCard({
     keyword: "collect-evidence",
     collectEvidence: 6,
     effect: {
-      kind: "animate",
+      kind: "become",
       target: 0,
       power: 1,
       toughness: 1,
       addTypes: ["artifact", "creature"],
-      addSubtypes: [],
       duration: "end-of-turn",
     },
   },

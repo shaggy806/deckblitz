@@ -15,7 +15,7 @@ export default defineCard({
       cost: { mana: "{2}", tap: false, discard: { count: 1, filter: { subtypes: ["Spirit", "Arcane"] } } },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: { manaValueOf: { paid: "discarded" } },
         toughness: { manaValueOf: { paid: "discarded" } },

@@ -30,7 +30,7 @@ export default defineCard({
         filter: { type: "creature" },
         destination: "battlefield",
         withCounters: { kind: "flying", amount: 1 },
-        enterAs: { basePt: [1, 1], addSubtypes: ["Spirit"] },
+        enterAs: { power: 1, toughness: 1, addSubtypes: ["Spirit"] },
         leftover: "stay",
       },
       resolve: null,

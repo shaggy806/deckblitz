@@ -38,7 +38,7 @@ export default defineCard({
       at: [3],
       targets: [],
       effect: {
-        kind: "animate-all",
+        kind: "become",
         filter: { type: "artifact", controlledBy: "you" },
         power: 5,
         toughness: 5,

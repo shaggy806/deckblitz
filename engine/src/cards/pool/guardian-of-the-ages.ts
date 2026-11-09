@@ -22,7 +22,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "lose-keywords", target: "source", keywords: ["defender"], duration: "permanent" },
+          { kind: "become", target: "source", loseKeywords: ["defender"], duration: "permanent" },
           { kind: "grant-keyword", target: "source", keyword: "trample", duration: "permanent" },
         ],
       },

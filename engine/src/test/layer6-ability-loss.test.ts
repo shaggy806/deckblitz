@@ -152,12 +152,10 @@ describe("losing all abilities, by timestamp (rule 613.7)", () => {
     apply(
       game,
       {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 1,
         toughness: 1,
-        addTypes: [],
-        addSubtypes: [],
         loseAbilities: true,
         keywords: ["trample"],
         duration: "end-of-turn",
@@ -316,7 +314,7 @@ describe("losing all abilities, by timestamp (rule 613.7)", () => {
     expect(stamp(bears)).toBeDefined();
     expect(stamp(bears)).toBe(stamp(giant));
     apply(game, {
-      kind: "animate-all",
+      kind: "become",
       filter: { type: "creature" },
       power: 4,
       toughness: 4,

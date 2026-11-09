@@ -15,7 +15,7 @@ export default defineCard({
     {
       cost: { mana: "{U}", tap: false, sacrifice: { filter: { subtype: "Island" } } },
       targets: [{ kind: "permanent", whose: "opponent", filter: { type: "land" } }],
-      effect: { kind: "add-types", target: 0, setSubtypes: ["Island"], duration: "end-of-turn" },
+      effect: { kind: "become", target: 0, setSubtypes: ["Island"], duration: "end-of-turn" },
       resolve: null,
       text: "{U}, Sacrifice an Island: Target land an opponent controls becomes an Island until end of turn.",
     },

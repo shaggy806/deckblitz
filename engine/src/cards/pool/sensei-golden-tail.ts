@@ -36,7 +36,7 @@ export default defineCard({
           { kind: "add-counter", target: 0, counter: "training", amount: 1 },
           { kind: "grant-triggered", target: 0, ability: blocks, duration: "permanent" },
           { kind: "grant-triggered", target: 0, ability: blocked, duration: "permanent" },
-          { kind: "add-types", target: 0, addSubtypes: ["Samurai"], duration: "permanent" },
+          { kind: "become", target: 0, addSubtypes: ["Samurai"], duration: "permanent" },
         ],
       },
       resolve: null,

@@ -46,7 +46,7 @@ export default defineCard({
         ],
       },
       targets: [],
-      effect: { kind: "create-token-copy", of: "source", count: 1, who: "you", notLegendary: true },
+      effect: { kind: "create-token-copy", of: "source", count: 1, who: "you", exceptions: { removeSupertypes: ["legendary"] } },
       resolve: null,
       text: "When Ran and Shaw enter, if you cast them and there are three or more Dragon and/or Lesson cards in your graveyard, create a token that's a copy of Ran and Shaw, except it's not legendary.",
     },

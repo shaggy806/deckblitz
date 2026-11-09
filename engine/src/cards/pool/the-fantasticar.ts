@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 // EDHREC rank 17626. Marvel Super Heroes Commander.
 //
 // A Vehicle with no crew: it becomes a creature only through its first
-// trigger, which is crew's own effect (`add-types`, until end of turn). The
+// trigger, which is crew's own effect (`become`, until end of turn). The
 // fourth noncreature spell counts noncreature spells only (`nthEachTurn`
 // with a filter counts matching spells), judged as each spell was cast. On
 // that spell both abilities trigger. "If you do" is `sacrifice-source`'s
@@ -31,7 +31,7 @@ export default defineCard({
       effect: {
         kind: "may",
         prompt: "Have The Fantasticar become an artifact creature until end of turn?",
-        effect: { kind: "add-types", target: "source", addTypes: ["artifact", "creature"], duration: "end-of-turn" },
+        effect: { kind: "become", target: "source", addTypes: ["artifact", "creature"], duration: "end-of-turn" },
       },
       resolve: null,
       text: ANIMATE_TEXT,

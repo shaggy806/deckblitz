@@ -31,7 +31,7 @@ export default defineCard({
       targets: ["land-you-control"],
       // X is read once, as the ability resolves (the ruling).
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: { countOf: { subtype: "Gate", controlledBy: "you" }, times: 2 },
         toughness: { countOf: { subtype: "Gate", controlledBy: "you" }, times: 2 },

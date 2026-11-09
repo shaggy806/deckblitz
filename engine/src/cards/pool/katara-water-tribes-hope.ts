@@ -7,7 +7,7 @@ import { defineCard } from "../define.js";
 //     a creature's base power and/or toughness. Any existing effects or counters that raise or
 //     lower a creature's power and/or toughness continue to apply.
 //
-// Biomass Mutation's `animate-all` (layer 7b) with the ability's own X — "X
+// Biomass Mutation's `become` (layer 7b) with the ability's own X — "X
 // can't be 0" is `minX: 1`. "Waterbend {X}": X of its generic may be paid by
 // tapping artifacts and creatures, so the creatures it makes X/X may be the
 // ones that paid for it.
@@ -43,7 +43,7 @@ export default defineCard({
       condition: { kind: "your-turn" },
       targets: [],
       effect: {
-        kind: "animate-all",
+        kind: "become",
         filter: { type: "creature", controlledBy: "you" },
         power: "x",
         toughness: "x",

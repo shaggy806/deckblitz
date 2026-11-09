@@ -17,7 +17,7 @@ export default defineCard({
     {
       cost: { mana: "{2}", tap: false },
       targets: [],
-      effect: { kind: "become-color", target: "source", colors: [], duration: "end-of-turn" },
+      effect: { kind: "become", target: "source", setColors: [], duration: "end-of-turn" },
       resolve: null,
       text: TEXT,
     },

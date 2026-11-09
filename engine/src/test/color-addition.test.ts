@@ -1,8 +1,8 @@
 /**
  * Colours added "in addition to its other colors" (rule 105.3, layer 5) —
- * for a duration (Indigo Faerie's `become-color` with `inAddition`), with a
- * type (Unctus, Grand Metatect's `add-types` with `addColors`), as an
- * animation (Phantasmal Form's `animate` with `addColors`), or as a static on
+ * for a duration (Indigo Faerie's `become` with `inAddition`), with a
+ * type (Unctus, Grand Metatect's `become` with `addColors`), as an
+ * animation (Phantasmal Form's `become` with `addColors`), or as a static on
  * what it's attached to (Ghoulflesh's `addColors`).
  */
 

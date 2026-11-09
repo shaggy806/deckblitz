@@ -15,7 +15,7 @@ export default defineCard({
     {
       cost: { mana: "{U}", tap: false, removeCounter: { kind: "+1/+1", count: 1 } },
       targets: ["land"],
-      effect: { kind: "add-types", target: 0, setSubtypes: ["Island"], duration: "end-of-turn" },
+      effect: { kind: "become", target: 0, setSubtypes: ["Island"], duration: "end-of-turn" },
       resolve: null,
       text: "{U}, Remove a +1/+1 counter from this creature: Target land becomes an Island until end of turn.",
     },

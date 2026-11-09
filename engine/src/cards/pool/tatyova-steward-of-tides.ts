@@ -39,7 +39,7 @@ export default defineCard({
       condition: { kind: "controls", filter: { type: "land" }, atLeast: 7 },
       targets: [{ kind: "optional", of: "land-you-control" }],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 3,
         toughness: 3,

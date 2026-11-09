@@ -47,7 +47,7 @@ export default defineCard({
           addSupertypes: ["legendary"],
           addTypes: ["creature"],
           addSubtypes: ["Human", "Villain"],
-          basePt: [4, 4],
+          power: 4, toughness: 4,
           keywords: ["vigilance"],
         },
       },

@@ -24,12 +24,11 @@ export default defineCard({
         spreeCost: "{1}",
         targets: ["creature"],
         effect: {
-          kind: "animate",
+          kind: "become",
           target: 0,
           power: 0,
           toughness: 1,
           addTypes: ["creature"],
-          addSubtypes: [],
           setSubtypes: ["Rabbit"],
           setColors: ["W"],
           duration: "end-of-turn",

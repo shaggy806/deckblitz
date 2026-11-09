@@ -70,7 +70,7 @@ describe("Caduceus, Staff of Hermes", () => {
     lands(game, "Plains", 2);
     const caduceus = spawn(game, "Caduceus, Staff of Hermes");
     const giant = spawn(game, "Hill Giant");
-    game.debugApplyEffect(B, { kind: "lose-abilities", target: 0, duration: "end-of-turn" }, [ref(giant)]);
+    game.debugApplyEffect(B, { kind: "become", loseAbilities: true, target: 0, duration: "end-of-turn" }, [ref(giant)]);
     activate(game, caduceus, 0, { targets: [ref(giant)] });
     lands(game, "Mountain", 1);
     cast(game, toHand(game, "Lightning Bolt"), { targets: [ref(giant)] });
@@ -79,7 +79,7 @@ describe("Caduceus, Staff of Hermes", () => {
 
   it("one that loses its abilities after it's equipped loses the prevention too", () => {
     const { game, giant } = equipped(30);
-    game.debugApplyEffect(B, { kind: "lose-abilities", target: 0, duration: "end-of-turn" }, [ref(giant)]);
+    game.debugApplyEffect(B, { kind: "become", loseAbilities: true, target: 0, duration: "end-of-turn" }, [ref(giant)]);
     lands(game, "Mountain", 1);
     cast(game, toHand(game, "Lightning Bolt"), { targets: [ref(giant)] });
     expect(damage(game, giant)).toBe(3);

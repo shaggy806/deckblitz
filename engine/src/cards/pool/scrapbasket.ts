@@ -18,7 +18,7 @@ export default defineCard({
     {
       cost: { mana: "{1}", tap: false },
       targets: [],
-      effect: { kind: "become-color", target: "source", colors: ["W", "U", "B", "R", "G"], duration: "end-of-turn" },
+      effect: { kind: "become", target: "source", setColors: ["W", "U", "B", "R", "G"], duration: "end-of-turn" },
       resolve: null,
       text: "{1}: This creature becomes all colors until end of turn.",
     },

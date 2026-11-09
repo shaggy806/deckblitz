@@ -191,7 +191,7 @@ describe("Jackdaw", () => {
   it("may discard its controller's hand to draw a card for each artifact they control", () => {
     const { game, a } = table();
     const jackdaw = spawn(game, "Jackdaw");
-    game.debugApplyEffect(A, { kind: "add-types", target: 0, addTypes: ["creature"], duration: "permanent" }, [ref(jackdaw)]);
+    game.debugApplyEffect(A, { kind: "become", target: 0, addTypes: ["creature"], duration: "permanent" }, [ref(jackdaw)]);
     spawn(game, "Food Token");
     spawn(game, "Sol Ring");
     const before = [...hand(game, A)];

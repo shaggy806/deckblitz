@@ -12,5 +12,5 @@ export default defineCard({
   text:
     "Copy target creature spell you control, except it isn't legendary if the spell is legendary. (A copy of a creature spell becomes a token.)",
   targets: [{ kind: "spell", whose: "you", filter: { type: "creature" } }],
-  effect: { kind: "copy-spell", target: 0, except: { notLegendary: true } },
+  effect: { kind: "copy-spell", target: 0, except: { removeSupertypes: ["legendary"] } },
 });

@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 
 // EDHREC rank 22301.
 //
-// "You may have the base power and toughness … become X/X": an `animate` of
+// "You may have the base power and toughness … become X/X": an `become` of
 // the target that adds no types (Fractalize's shape — layer 7b only, so
 // counters and pumps still apply on top, the ruling), behind a `may`. X is
 // this creature's power read once as the ability resolves (the ruling; as it
@@ -43,12 +43,10 @@ export default defineCard({
         kind: "may",
         prompt: "Have its base power and toughness become X/X, where X is this creature's power?",
         effect: {
-          kind: "animate",
+          kind: "become",
           target: 0,
           power: { powerOf: "source" },
           toughness: { powerOf: "source" },
-          addTypes: [],
-          addSubtypes: [],
           duration: "end-of-turn",
         },
       },

@@ -12,7 +12,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: true },
       targets: ["nonland-permanent"],
-      effect: { kind: "add-types", target: 0, addTypes: ["artifact"], duration: "end-of-turn" },
+      effect: { kind: "become", target: 0, addTypes: ["artifact"], duration: "end-of-turn" },
       resolve: null,
       text: "{T}: Target nonland permanent becomes an artifact in addition to its other types until end of turn.",
     },

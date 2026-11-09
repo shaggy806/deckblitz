@@ -51,7 +51,7 @@ const colorsOf = (game: Game, id: ObjectId): string[] => [
 const library = (game: Game, player: PlayerId = A): readonly ObjectId[] => game.state.zones.perPlayer[player].library;
 /** `id` becomes an artifact creature until end of turn — a crewed Vehicle. */
 const crewed = (game: Game, id: ObjectId): void =>
-  game.debugApplyEffect(A, { kind: "add-types", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" }, [
+  game.debugApplyEffect(A, { kind: "become", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" }, [
     ref(id),
   ]);
 /** Bob casts Grizzly Bears on his turn; alice gets priority with it on the stack. */

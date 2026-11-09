@@ -2,7 +2,7 @@
  * B249 group A — cards freed by the static loss of all abilities, block limits
  * and type-setting effects: Auras that set a creature's types, colours and base
  * P/T beside the loss, the `blockAdditional` statics and effect, and
- * `add-types`' setTypes / setSubtypes.
+ * `become`' setTypes / setSubtypes.
  */
 import { describe, expect, it } from "vitest";
 

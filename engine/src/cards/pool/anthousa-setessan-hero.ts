@@ -33,7 +33,7 @@ export default defineCard({
         kind: "for-each-target",
         from: 0,
         effect: {
-          kind: "animate",
+          kind: "become",
           target: 0,
           power: 2,
           toughness: 2,

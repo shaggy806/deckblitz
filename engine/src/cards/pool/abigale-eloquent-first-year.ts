@@ -33,7 +33,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "lose-abilities", target: 0, duration: "permanent" },
+          { kind: "become", loseAbilities: true, target: 0, duration: "permanent" },
           { kind: "add-counter", target: 0, counter: "flying", amount: 1 },
           { kind: "add-counter", target: 0, counter: "first-strike", amount: 1 },
           { kind: "add-counter", target: 0, counter: "lifelink", amount: 1 },

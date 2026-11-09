@@ -190,7 +190,7 @@ describe("the left list reads each permanent as it was in the stint it left (rul
     const ring = spawn(game, "Sol Ring");
     game.debugApplyEffect(
       A,
-      { kind: "animate", target: 0, power: 2, toughness: 2, addTypes: ["creature"], addSubtypes: [], duration: "end-of-turn" },
+      { kind: "become", target: 0, power: 2, toughness: 2, addTypes: ["creature"], duration: "end-of-turn" },
       [ref(ring)],
     );
     destroy(game, ring);

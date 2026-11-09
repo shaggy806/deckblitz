@@ -27,12 +27,10 @@ export default defineCard({
         kind: "may",
         prompt: "Have Eldrazi Mimic's base power and toughness become that creature's until end of turn?",
         effect: {
-          kind: "animate",
+          kind: "become",
           target: "source",
           power: { powerOf: "trigger-object" },
           toughness: { toughnessOf: "trigger-object" },
-          addTypes: [],
-          addSubtypes: [],
           duration: "end-of-turn",
         },
       },

@@ -36,12 +36,10 @@ export default defineCard({
       condition: { kind: "completed-dungeon" },
       targets: [{ kind: "optional", of: "creature" }],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 1,
         toughness: 1,
-        addTypes: [],
-        addSubtypes: [],
         setSubtypes: ["Bird"],
         keywords: ["flying"],
         duration: "end-of-turn",

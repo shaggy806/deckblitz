@@ -17,7 +17,7 @@ export default defineCard({
     {
       cost: { mana: "{1}{S}", tap: false },
       targets: ["creature"],
-      effect: { kind: "lose-keywords", target: 0, keywords: ["flying"], duration: "end-of-turn" },
+      effect: { kind: "become", target: 0, loseKeywords: ["flying"], duration: "end-of-turn" },
       resolve: null,
       text: "{1}{S}: Target creature loses flying until end of turn.",
     },

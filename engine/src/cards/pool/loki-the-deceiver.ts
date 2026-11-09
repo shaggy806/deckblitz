@@ -35,8 +35,7 @@ export default defineCard({
             who: "you",
             tapped: true,
             attacking: "choose",
-            notLegendary: true,
-            exceptions: { addSubtypes: ["Illusion"] },
+            exceptions: { removeSupertypes: ["legendary"], addSubtypes: ["Illusion"] },
           },
           {
             kind: "delayed-trigger",

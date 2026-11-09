@@ -13,5 +13,5 @@ export default defineCard({
     "Create a token that's a copy of target creature you control, except it isn't legendary.\n" +
     "Flashback {5}{U}{U} (You may cast this card from your graveyard for its flashback cost. Then exile it.)",
   targets: ["creature-you-control"],
-  effect: { kind: "create-token-copy", of: 0, count: 1, who: "you", notLegendary: true },
+  effect: { kind: "create-token-copy", of: 0, count: 1, who: "you", exceptions: { removeSupertypes: ["legendary"] } },
 });

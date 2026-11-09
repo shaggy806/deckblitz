@@ -383,12 +383,11 @@ describe("leaves-graveyard — a filter, read as the cards were in the graveyard
         effects: [
           { kind: "put-onto-battlefield", target: 0 },
           {
-            kind: "animate",
+            kind: "become",
             target: 0,
             power: 2,
             toughness: 2,
             addTypes: ["artifact"],
-            addSubtypes: [],
             duration: "permanent",
           },
         ],

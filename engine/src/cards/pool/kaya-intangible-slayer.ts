@@ -94,7 +94,7 @@ export default defineCard({
               count: 1,
               who: "you",
               exceptions: {
-                basePt: [1, 1],
+                power: 1, toughness: 1,
                 setColors: ["W"],
                 addTypes: ["creature"],
                 addSubtypes: ["Spirit"],

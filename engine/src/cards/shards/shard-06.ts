@@ -278,6 +278,7 @@ import _poolEmeriaTheSkyRuin from "../pool/emeria-the-sky-ruin.js";
 import _poolEmptyCityRuse from "../pool/empty-city-ruse.js";
 import _poolEmpyreanEagle from "../pool/empyrean-eagle.js";
 import _poolEnclaveElite from "../pool/enclave-elite.js";
+import _poolEncroachingMycosynth from "../pool/encroaching-mycosynth.js";
 import _poolEndurance from "../pool/endurance.js";
 import _poolEnergybending from "../pool/energybending.js";
 import _poolEntrustTheSpark from "../pool/entrust-the-spark.js";
@@ -1268,6 +1269,7 @@ const shard: CardShard = {
     _poolEmptyCityRuse,
     _poolEmpyreanEagle,
     _poolEnclaveElite,
+    _poolEncroachingMycosynth,
     _poolEndurance,
     _poolEnergybending,
     _poolEntrustTheSpark,

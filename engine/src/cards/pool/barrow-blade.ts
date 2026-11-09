@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 // Once for each creature it blocks or is blocked by.
 const TEXT =
   "Whenever equipped creature blocks or becomes blocked by a creature, that creature loses all abilities until end of turn.";
-const LOSES = { kind: "lose-abilities", target: "trigger-object", duration: "end-of-turn" } as const;
+const LOSES = { kind: "become", loseAbilities: true, target: "trigger-object", duration: "end-of-turn" } as const;
 
 export default defineCard({
   name: "Barrow-Blade",

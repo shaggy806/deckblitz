@@ -24,12 +24,11 @@ export default defineCard({
       cost: { mana: "{2}", tap: false },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 2,
         toughness: 2,
         addTypes: ["artifact", "creature"],
-        addSubtypes: [],
         setSubtypes: ["Golem"],
         duration: "end-of-turn",
       },

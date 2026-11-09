@@ -15,7 +15,7 @@ export default defineCard({
     {
       cost: { mana: null, tap: true },
       targets: ["land"],
-      effect: { kind: "add-types", target: 0, setSubtypes: ["Forest"], duration: "end-of-turn" },
+      effect: { kind: "become", target: 0, setSubtypes: ["Forest"], duration: "end-of-turn" },
       resolve: null,
       text: "{T}: Target land becomes a Forest until end of turn.",
     },

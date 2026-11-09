@@ -45,7 +45,7 @@ export default defineCard({
                 effects: [
                   { kind: "add-counter", target: "trigger-object", counter: "+1/+1", amount: 1 },
                   { kind: "grant-keyword", target: "trigger-object", keyword: "haste", duration: "end-of-turn" },
-                  { kind: "add-types", target: "trigger-object", addSubtypes: ["Vampire"], duration: "permanent" },
+                  { kind: "become", target: "trigger-object", addSubtypes: ["Vampire"], duration: "permanent" },
                 ],
               },
             },

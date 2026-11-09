@@ -35,7 +35,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "lose-keywords", target: "source", keywords: ["defender"], duration: "permanent" },
+          { kind: "become", target: "source", loseKeywords: ["defender"], duration: "permanent" },
           { kind: "grant-keyword", target: "source", keyword: "unblockable", duration: "permanent" },
         ],
       },
@@ -49,12 +49,10 @@ export default defineCard({
       condition: { kind: "source", filter: { notKeyword: "defender" } },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 5,
         toughness: 4,
-        addTypes: [],
-        addSubtypes: [],
         setColors: ["U"],
         duration: "permanent",
       },

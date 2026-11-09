@@ -21,12 +21,10 @@ import { defineCard } from "../define.js";
 const TEXT =
   "Whenever this creature blocks or becomes blocked by a creature, this creature's base power and toughness become equal to that creature's power and toughness until end of turn.";
 const BECOME = {
-  kind: "animate",
+  kind: "become",
   target: "source",
   power: { powerOf: "trigger-object" },
   toughness: { toughnessOf: "trigger-object" },
-  addTypes: [],
-  addSubtypes: [],
   duration: "end-of-turn",
 } as const;
 

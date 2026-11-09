@@ -35,7 +35,7 @@ export default defineCard({
           kind: "sequence",
           effects: [
             { kind: "add-counter", target: 0, counter: "feather", amount: 1 },
-            { kind: "animate", target: 0, power: 3, toughness: 1, addTypes: [], addSubtypes: [], duration: FEATHER },
+            { kind: "become", target: 0, power: 3, toughness: 1, duration: FEATHER },
             { kind: "grant-keyword", target: 0, keyword: "flying", duration: FEATHER },
           ],
         },

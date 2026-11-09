@@ -25,11 +25,10 @@ export default defineCard({
         as: 1,
         simultaneous: true,
         effect: {
-          kind: "animate",
+          kind: "become",
           target: 1,
           power: 1,
           toughness: 1,
-          addTypes: [],
           addSubtypes: ["Coward"],
           loseAbilities: true,
           duration: "permanent",

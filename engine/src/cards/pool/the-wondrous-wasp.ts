@@ -28,7 +28,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "tap", target: 0 },
-          { kind: "lose-abilities", target: 0, duration: "while-source" },
+          { kind: "become", loseAbilities: true, target: 0, duration: "while-source" },
         ],
       },
       resolve: null,

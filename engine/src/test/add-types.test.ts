@@ -1,8 +1,8 @@
 /**
- * "[It] becomes a Demon **in addition to its other types**" — the `add-types`
+ * "[It] becomes a Demon **in addition to its other types**" — the `become`
  * effect (Clavileño, First of the Blessed; Jenova, Ancient Calamity): types
  * and subtypes added in layer 4 and nothing else, until end of turn or for as
- * long as the permanent stays on the battlefield. Unlike `animate` it leaves
+ * long as the permanent stays on the battlefield. Unlike `become` it leaves
  * P/T alone, and because it is layer 4 a lord reads the new type.
  */
 
@@ -61,7 +61,7 @@ const quiet = (s: GameState): boolean =>
 const subtypes = (game: Game, id: ObjectId): readonly string[] =>
   effectiveSubtypes(game.state, registry, game.state.objects[id]);
 const becomeDemon = (duration: "end-of-turn" | "permanent"): EffectSpec => ({
-  kind: "add-types",
+  kind: "become",
   target: 0,
   addSubtypes: ["Demon"],
   duration,
@@ -108,7 +108,7 @@ describe("becomes a Demon in addition to its other types", () => {
   it("adds card types too", () => {
     const game = setUp();
     const bears = game.debugSpawn("Grizzly Bears", A, "battlefield");
-    apply(game, { kind: "add-types", target: 0, addTypes: ["artifact"], duration: "permanent" }, bears);
+    apply(game, { kind: "become", target: 0, addTypes: ["artifact"], duration: "permanent" }, bears);
     expect(effectiveTypes(game.state, registry, game.state.objects[bears])).toEqual(
       expect.arrayContaining(["creature", "artifact"]),
     );
@@ -123,7 +123,7 @@ describe("becomes a Demon in addition to its other types", () => {
         kind: "sequence",
         effects: [
           { kind: "put-onto-battlefield", target: 0 },
-          { kind: "add-types", target: 0, addSubtypes: ["Zombie"], duration: "permanent" },
+          { kind: "become", target: 0, addSubtypes: ["Zombie"], duration: "permanent" },
         ],
       },
       bears,

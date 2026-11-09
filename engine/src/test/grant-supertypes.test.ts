@@ -53,7 +53,7 @@ describe("On Serra's Wings", () => {
     const { game } = table();
     const printed = spawn(game, "Krenko, Mob Boss");
     const twin = spawn(game, "Krenko, Mob Boss");
-    game.state.objects[twin].notLegendary = true;
+    game.state.objects[twin].modifiers.push({ power: 0, toughness: 0, keywords: [], removeSupertypes: ["legendary"], untilEndOfTurn: false, copiable: true, timestamp: -1 });
     mana(game);
     cast(game, toHand(game, "On Serra's Wings"), { targets: [ref(twin)] });
     // Two legendary permanents of one name now: one goes to the graveyard.
@@ -123,7 +123,7 @@ describe("Leyline of Singularity", () => {
     spawn(game, "Leyline of Singularity");
     game.debugApplyEffect(
       A,
-      { kind: "animate", target: 0, power: 2, toughness: 2, addTypes: ["creature"], addSubtypes: [], keywords: [], duration: "end-of-turn" },
+      { kind: "become", target: 0, power: 2, toughness: 2, addTypes: ["creature"], keywords: [], duration: "end-of-turn" },
       [ref(land)],
     );
     expect(supertypes(game, land)).not.toContain("legendary");

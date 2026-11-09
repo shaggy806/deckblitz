@@ -39,7 +39,7 @@ export default defineCard({
         kind: "put-onto-battlefield",
         target: 0,
         withCounters: { kind: "finality", amount: 1 },
-        enterAs: { addTypes: ["creature"], addSubtypes: ["Spirit"], basePt: [1, 1], keywords: ["flying"] },
+        enterAs: { addTypes: ["creature"], addSubtypes: ["Spirit"], power: 1, toughness: 1, keywords: ["flying"] },
       },
       resolve: null,
       text: ATTACK_TEXT,

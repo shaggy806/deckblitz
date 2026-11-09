@@ -2888,7 +2888,7 @@ const LATER_POINTS = [
 
 /** The effect kinds whose `duration` is a `PtDuration`. */
 const PT_DURATION_KINDS = new Set(
-  "add-types animate animate-all become-color block-additional cant-be-sacrificed change-text double-pt-all grant-activated grant-activated-all grant-keyword grant-keyword-all grant-protection grant-static grant-toxic grant-triggered grant-triggered-all lose-abilities lose-abilities-all lose-keywords modify-pt modify-pt-all switch-pt".split(
+  "become block-additional cant-be-sacrificed change-text double-pt-all grant-activated grant-activated-all grant-keyword grant-keyword-all grant-protection grant-static grant-toxic grant-triggered grant-triggered-all modify-pt modify-pt-all switch-pt".split(
     " ",
   ),
 );
@@ -4886,7 +4886,7 @@ export function parseSentence(sentence, ctx) {
       return eachOther(m[1], { kind: "return-to-hand", target: 0 });
     }
     if ((m = re(`all other ([a-z]+s) lose (flying) until end of turn`).exec(s))) {
-      return eachOther(m[1], { kind: "lose-keywords", target: 0, keywords: [m[2].toLowerCase()], duration: "end-of-turn" });
+      return eachOther(m[1], { kind: "become", target: 0, loseKeywords: [m[2].toLowerCase()], duration: "end-of-turn" });
     }
   }
   if ((m = re(`return (${TARGET}) ${NAMESAKES} to their owners' hands`).exec(s))) {
@@ -5665,7 +5665,7 @@ export function parseSentence(sentence, ctx) {
   // and toughness 1/1" (Mass Diminish): fixed as it resolves (rule 611.2c).
   if ((m = re("until your next turn, creatures target (player|opponent) controls have base power and toughness (\\d+)/(\\d+)").exec(s))) {
     return {
-      kind: "animate-all",
+      kind: "become",
       filter: { type: "creature", controlledBy: "you" },
       controlledByTarget: ctx.target(m[1].toLowerCase()),
       power: Number(m[2]),
@@ -5994,7 +5994,7 @@ export function parseSentence(sentence, ctx) {
       duration: "end-of-turn",
     };
   }
-  // A mass change of types, P/T left alone: `add-types` over a
+  // A mass change of types, P/T left alone: `become` over a
   // `for-each-permanent`. "Become artifact creatures" keeps every type (rule
   // 205.1b), and the Vehicle's printed P/T.
   if (re("vehicles you control become artifact creatures until end of turn").test(s)) {
@@ -6002,7 +6002,7 @@ export function parseSentence(sentence, ctx) {
       kind: "for-each-permanent",
       filter: { subtype: "Vehicle", controlledBy: "you" },
       simultaneous: true,
-      effect: { kind: "add-types", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" },
+      effect: { kind: "become", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" },
     };
   }
   if (re("lands you control gain all basic land types until end of turn").test(s)) {
@@ -6011,7 +6011,7 @@ export function parseSentence(sentence, ctx) {
       filter: { type: "land", controlledBy: "you" },
       simultaneous: true,
       effect: {
-        kind: "add-types",
+        kind: "become",
         target: 0,
         addSubtypes: ["Plains", "Island", "Swamp", "Mountain", "Forest"],
         duration: "end-of-turn",
@@ -6028,7 +6028,7 @@ export function parseSentence(sentence, ctx) {
           kind: "for-each-permanent",
           filter,
           simultaneous: true,
-          effect: { kind: "add-types", target: 0, addSubtypes: ["(every creature type)"], duration: "end-of-turn" },
+          effect: { kind: "become", target: 0, addSubtypes: ["(every creature type)"], duration: "end-of-turn" },
         },
       ],
     };
@@ -6039,7 +6039,7 @@ export function parseSentence(sentence, ctx) {
     return {
       kind: "choose-creature-type",
       then: {
-        kind: "add-types",
+        kind: "become",
         target: m[1] === "~" ? "source" : slot(m[1]),
         setSubtypes: ["$chosen"],
         duration: "end-of-turn",
@@ -6048,11 +6048,11 @@ export function parseSentence(sentence, ctx) {
   }
   // Rule 305.7: "becomes a Swamp" replaces its land types.
   if ((m = re(`(${TARGET}) becomes an? (Plains|Island|Swamp|Mountain|Forest) until end of turn`).exec(s))) {
-    return { kind: "add-types", target: slot(m[1]), setSubtypes: [m[2]], duration: "end-of-turn" };
+    return { kind: "become", target: slot(m[1]), setSubtypes: [m[2]], duration: "end-of-turn" };
   }
   // "This token isn't a creature until end of turn" (Blink's Alien Angel).
   if ((m = re(`(~|${TARGET}) isn't an? (creature|artifact|enchantment|land) until end of turn`).exec(s))) {
-    return { kind: "add-types", target: m[1] === "~" ? "source" : slot(m[1]), removeTypes: [m[2]], duration: "end-of-turn" };
+    return { kind: "become", target: m[1] === "~" ? "source" : slot(m[1]), removeTypes: [m[2]], duration: "end-of-turn" };
   }
   // Myth Realized, Chimeric Mass, Beorn's Hospitality: a granted P/T, read live
   // (not a CDA once granted, rule 604.3a).
@@ -6064,12 +6064,12 @@ export function parseSentence(sentence, ctx) {
       "lands you control": { countOf: { type: "land", controlledBy: "you" } },
       "creature cards in your graveyard": { countInGraveyard: { type: "creature", ownedBy: "you" } },
     }[m[3]];
-    if (add !== null && add.basePt === undefined && add.keywords === undefined && add.addColors === undefined) {
+    if (add !== null && add.power === undefined && add.keywords === undefined && add.addColors === undefined) {
       const duration = m[1] !== undefined ? "end-of-turn" : "permanent";
       return {
         kind: "sequence",
         effects: [
-          { kind: "animate", target: "source", addTypes: add.addTypes ?? [], addSubtypes: add.addSubtypes ?? [], duration },
+          { kind: "become", target: "source", addTypes: add.addTypes ?? [], addSubtypes: add.addSubtypes ?? [], duration },
           {
             kind: "grant-static",
             target: "source",
@@ -6088,12 +6088,11 @@ export function parseSentence(sentence, ctx) {
   if ((m = re(`(${TARGET}) becomes an artifact creature with power and toughness each equal to its mana value until end of turn`).exec(s))) {
     const target = slot(m[1]);
     return {
-      kind: "animate",
+      kind: "become",
       target,
       power: { manaValueOf: target },
       toughness: { manaValueOf: target },
       addTypes: ["artifact", "creature"],
-      addSubtypes: [],
       duration: "end-of-turn",
     };
   }
@@ -6109,10 +6108,10 @@ export function parseSentence(sentence, ctx) {
     const lost = [m[1], m[2]].map((k) => k.toLowerCase());
     if (lost[0] === m[3].toLowerCase() && lost[1] === m[4].toLowerCase()) {
       return {
-        kind: "lose-keywords",
+        kind: "become",
         filter: { type: "creature", controlledBy: "opponent" },
-        keywords: lost.map((k) => KEYWORDS[k]),
-        cantHave: true,
+        loseKeywords: lost.map((k) => KEYWORDS[k]),
+        cantHaveKeywords: lost.map((k) => KEYWORDS[k]),
         duration: "end-of-turn",
       };
     }
@@ -6121,9 +6120,9 @@ export function parseSentence(sentence, ctx) {
   // banding, which takes them too (Tolaria).
   if ((m = re(`(${TARGET}) loses (banding and )?all "bands with other" abilities until end of turn`).exec(s))) {
     return {
-      kind: "lose-keywords",
+      kind: "become",
       target: slot(m[1]),
-      keywords: m[2] ? ["banding", "bands-with-other"] : ["bands-with-other"],
+      loseKeywords: m[2] ? ["banding", "bands-with-other"] : ["bands-with-other"],
       duration: "end-of-turn",
     };
   }
@@ -6448,29 +6447,29 @@ export function parseSentence(sentence, ctx) {
   // "Target spell or permanent" is read only here: a bounce of one (Venser)
   // needs a step per zone.
   if ((m = re(`target spell or permanent becomes (white|blue|black|red|green)(?: \(mana symbols on that permanent remain unchanged\.\))?`).exec(s))) {
-    return { kind: "become-color", target: ctx.target({ kind: "spell-or-permanent" }), colors: [COLOR_WORDS[m[1].toLowerCase()]], duration: "permanent" };
+    return { kind: "become", target: ctx.target({ kind: "spell-or-permanent" }), setColors: [COLOR_WORDS[m[1].toLowerCase()]], duration: "permanent" };
   }
   // Layer 5 "in addition" (rule 105.3 — Indigo Faerie): a colour added to
   // its others, not replacing them.
   if ((m = re(`(~|${TARGET}) becomes (white|blue|black|red|green) in addition to its other colors( until end of turn)?`).exec(s))) {
     const target = m[1] === "~" ? "source" : slot(m[1]);
     if (target === undefined) return null;
-    return { kind: "become-color", target, colors: [COLOR_WORDS[m[2].toLowerCase()]], inAddition: true, duration: m[3] ? "end-of-turn" : "permanent" };
+    return { kind: "become", target, addColors: [COLOR_WORDS[m[2].toLowerCase()]], duration: m[3] ? "end-of-turn" : "permanent" };
   }
   // A colour and types in addition, nothing else (Unctus, Grand Metatect's
   // "becomes a blue artifact in addition to its other colors and types"):
-  // `add-types` with `addColors`.
+  // `become` with `addColors`.
   if ((m = re(`(until end of turn, )?(~|${TARGET}) becomes (.+?) in addition to its other colors and types( until end of turn)?`).exec(s))) {
     const add = additionOf(m[3]);
     const target =
-      add === null || add.addColors === undefined || add.basePt !== undefined || add.keywords !== undefined
+      add === null || add.addColors === undefined || add.power !== undefined || add.keywords !== undefined
         ? undefined
         : m[2] === "~"
           ? "source"
           : slot(m[2]);
     if (add !== null && target !== undefined) {
       return {
-        kind: "add-types",
+        kind: "become",
         target,
         ...(add.addTypes !== undefined ? { addTypes: add.addTypes } : {}),
         ...(add.addSubtypes !== undefined ? { addSubtypes: add.addSubtypes } : {}),
@@ -6624,7 +6623,7 @@ export function parseSentence(sentence, ctx) {
   if (ctx.it === "trigger-object" && ctx.targets.length === 0) {
     if ((m = re(`~ deals ${N} damage to it`).exec(s))) return { kind: "damage", amount: amount(m[1]), target: "trigger-object" };
     if (re(`it loses all abilities until end of turn`).test(s)) {
-      return { kind: "lose-abilities", target: "trigger-object", duration: "end-of-turn" };
+      return { kind: "become", loseAbilities: true, target: "trigger-object", duration: "end-of-turn" };
     }
   }
   // Rule 508.7: the `enter-attacking` decision, staying being an answer, so
@@ -6722,7 +6721,7 @@ export function parseSentence(sentence, ctx) {
     };
   }
 
-  // Base power or base toughness alone (layer 7b, rule 613.4b — `animate`
+  // Base power or base toughness alone (layer 7b, rule 613.4b — `become`
   // with only a `power` or a `toughness`): Island of Wak-Wak's "target
   // creature with flying has base power 0 until end of turn", Turtle-Duck's
   // "until end of turn, ~ has base power 4 and gains trample", Chariot of the
@@ -6737,11 +6736,9 @@ export function parseSentence(sentence, ctx) {
       if (target === undefined || value === null) return null;
       const kws = keywords.filter(Boolean).map((k) => KEYWORDS[k.toLowerCase()]);
       return {
-        kind: "animate",
+        kind: "become",
         target,
         [which.toLowerCase()]: value,
-        addTypes: [],
-        addSubtypes: [],
         ...(kws.length > 0 ? { keywords: kws } : {}),
         duration,
       };
@@ -6936,7 +6933,7 @@ export function parseSentence(sentence, ctx) {
       of: 0,
       count: 1,
       who: "you",
-      exceptions: { basePt: [Number(m[1]), Number(m[2])], setColors: ["B"], setSubtypes: ["Zombie"] },
+      exceptions: { power: Number(m[1]), toughness: Number(m[2]), setColors: ["B"], setSubtypes: ["Zombie"] },
     };
   }
   if (/^create a token that's a copy of enchanted (?:creature|artifact)\.$/i.test(s)) {
@@ -8124,7 +8121,7 @@ function becomesAllTypesOf(text) {
   const keyword = m[3] === undefined ? undefined : KEYWORDS[m[3].toLowerCase()];
   if (m[3] !== undefined && keyword === undefined) return null;
   return {
-    kind: "animate",
+    kind: "become",
     target: "source",
     power: Number(m[1]),
     toughness: Number(m[2]),
@@ -8136,7 +8133,7 @@ function becomesAllTypesOf(text) {
 }
 
 /**
- * "~ becomes a 3/3 red and green Elemental creature with "Whenever …"": `animate`
+ * "~ becomes a 3/3 red and green Elemental creature with "Whenever …"": `become`
  * with the whole ability granted beside it (`grant-triggered`, `grant-static`,
  * `grant-protection`), by the animation's duration — Raging Ravine, Restless
  * Spire, Veiled Serpent, Veiled Apparition, Opal Guardian. "It's still a land"
@@ -8182,13 +8179,13 @@ function becomesWithAbilitiesOf(text) {
     kind: "sequence",
     effects: [
       {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: Number(m[2]),
         toughness: Number(m[3]),
         ...(still !== null
           ? { addTypes: ["creature"], addSubtypes: subtypes }
-          : { setTypes: ["creature"], addTypes: [], addSubtypes: [], setSubtypes: subtypes }),
+          : { setTypes: ["creature"], setSubtypes: subtypes }),
         ...(colors.length > 0 ? { setColors: colors } : {}),
         ...(keywords.length > 0 ? { keywords } : {}),
         duration,
@@ -11791,13 +11788,13 @@ function exiledCardPickAt(sentences, i, ctx) {
 }
 
 /** "If the token isn't a creature, it becomes a 2/2 Robot Villain creature in
- * addition to its other types" — after a token copy: `animate-all` over the
+ * addition to its other types" — after a token copy: `become` over the
  * token made this way that isn't a creature, for good. Or `null`. */
 function noncreatureTokenAnimate(sentence) {
   const m = /^[Ii]f the token isn't a creature, it becomes an? (\d+)\/(\d+) ((?:[A-Z][a-z]+ )*)creature in addition to its other types\.$/.exec(sentence);
   if (m === null) return null;
   return {
-    kind: "animate-all",
+    kind: "become",
     filter: { thisWay: "created", notTypes: ["creature"] },
     power: Number(m[1]),
     toughness: Number(m[2]),
@@ -13277,7 +13274,7 @@ function chosenValueAt(sentences, i, ctx) {
           kind: "for-each-permanent",
           filter: { type: "land", controlledBy: "you" },
           simultaneous: true,
-          effect: { kind: "add-types", target: 0, setSubtypes: ["$chosen"], duration: "end-of-turn" },
+          effect: { kind: "become", target: 0, setSubtypes: ["$chosen"], duration: "end-of-turn" },
         },
       },
       used: 2,
@@ -13421,7 +13418,7 @@ function pilesAt(sentences, i, ctx) {
         effects: [
           { kind: "add-counter", target, counter: "+1/+1", amount: numberOf(landCounters[1]) },
           {
-            kind: "animate",
+            kind: "become",
             target,
             power: Number(named[1]),
             toughness: Number(named[2]),
@@ -13429,7 +13426,7 @@ function pilesAt(sentences, i, ctx) {
             addSubtypes: [named[3]],
             addSupertypes: ["legendary"],
             keywords: [KEYWORDS[named[4].toLowerCase()]],
-            setName: named[5],
+            name: named[5],
             duration: "permanent",
           },
         ],
@@ -13729,7 +13726,7 @@ function enteringFormOf(words) {
   return {
     label: words.replace(/^an? /, ""),
     as: {
-      basePt: [Number(m[1]), Number(m[2])],
+      power: Number(m[1]), toughness: Number(m[2]),
       ...(m[4] !== undefined ? { addTypes: ["artifact", "creature"] } : {}),
       ...(m[3] !== undefined ? { addSubtypes: [m[3]] } : {}),
       ...(m[5] !== undefined ? { keywords: [m[5]] } : {}),
@@ -15263,7 +15260,7 @@ function parseFaceAsWritten(face, ctx = {}) {
     // "Equipped creature has base power and toughness X/X, where X is your
     // life total" (Aettir and Priwen): a live layer-7b set, read from here.
     if ((m = /^(Equipped|Enchanted) creature has base power and toughness X\/X, where X is your life total\.$/.exec(line))) {
-      out.static.push({ affects: { scope: "attached" }, setBasePtFromSourceCount: "your-life-total", text: printed(raw) });
+      out.static.push({ affects: { scope: "attached" }, setBasePt: { power: { sourceCount: "your-life-total" }, toughness: { sourceCount: "your-life-total" } }, text: printed(raw) });
       continue;
     }
     // Imprint's "the exiled card's card types" (Mirror Golem).
@@ -16899,7 +16896,8 @@ function additionOf(phrase) {
   desc = desc.replace(/^an? /i, "");
   const pt = /^(\d+)\/(\d+) /.exec(`${desc} `);
   if (pt !== null) {
-    out.basePt = [Number(pt[1]), Number(pt[2])];
+    out.power = Number(pt[1]);
+    out.toughness = Number(pt[2]);
     desc = desc.slice(pt[0].length);
   }
   if (desc === "") return null;
@@ -16932,18 +16930,18 @@ function additionOf(phrase) {
  * fields. `null` unless every word is read. */
 function tokenCopyExceptOf(phrase) {
   const pt = /^(?:the token|it)(?: is|'s) (\d+)\/(\d+)$/i.exec(phrase);
-  if (pt !== null) return { basePt: [Number(pt[1]), Number(pt[2])] };
-  if (/^it isn't legendary$/i.test(phrase)) return { notLegendary: true };
+  if (pt !== null) return { exceptions: { power: Number(pt[1]), toughness: Number(pt[2]) } };
+  if (/^it isn't legendary$/i.test(phrase)) return { exceptions: { removeSupertypes: ["legendary"] } };
   const both = /^it isn't legendary and is (.+) in addition to its other types$/i.exec(phrase);
   const also = both?.[1] ?? /^it's (.+) in addition to its other types$/i.exec(phrase)?.[1];
   if (also === undefined) return null;
   const added = additionOf(also);
   if (added === null || added.addColors !== undefined) return null;
-  return { ...(both !== null ? { notLegendary: true } : {}), exceptions: added };
+  return { exceptions: { ...(both !== null ? { removeSupertypes: ["legendary"] } : {}), ...added } };
 }
 
 export function copyExceptOf(phrase) {
-  if (/^(?:the copy|it) isn't legendary(?: if the spell is legendary)?$/i.test(phrase)) return { notLegendary: true };
+  if (/^(?:the copy|it) isn't legendary(?: if the spell is legendary)?$/i.test(phrase)) return { removeSupertypes: ["legendary"] };
   const m = /^the copy is (.+?) in addition to its other types$/i.exec(phrase);
   if (m === null) return null;
   const out = additionOf(m[1]);
@@ -16973,7 +16971,7 @@ export function enterAsOf(sentence) {
   if ((m[3].toLowerCase() === "colors and types") !== (out.addColors !== undefined)) return null;
   if (m[3].toLowerCase() === "creature types" && Object.keys(out).some((k) => k !== "addSubtypes")) return null;
   // A P/T only for a creature it is or is made.
-  if (out.basePt !== undefined && !(out.addTypes ?? []).includes("creature")) return null;
+  if (out.power !== undefined && !(out.addTypes ?? []).includes("creature")) return null;
   if (Object.keys(out).length === 0) return null;
   if (m[1]) out.ifCreature = true;
   return out;
@@ -17516,7 +17514,7 @@ function grantedCardsFilter(phrase, thats) {
  * (`grantsToGraveyard.keywords`) or a hand (`grantsCyclingInHand`,
  * `grantsForetellInHand`), sneak cast from the graveyard
  * (`castWithSneakFromGraveyard`), and types off the battlefield
- * (`typesOutsideBattlefield`). `null` for any other line.
+ * (`outsideBattlefield`). `null` for any other line.
  */
 function outsideBattlefieldStaticOf(line, text) {
   let m;
@@ -17563,7 +17561,7 @@ function outsideBattlefieldStaticOf(line, text) {
   if (line === "Each creature card in your graveyard has the chosen creature type in addition to its other types.") {
     return {
       ...self,
-      typesOutsideBattlefield: { ofType: "creature", zones: ["graveyard"], addsChosenCreatureType: true },
+      outsideBattlefield: { ofType: ["creature"], zones: ["graveyard"], addsChosenCreatureType: true },
       text,
     };
   }
@@ -17578,7 +17576,7 @@ function outsideBattlefieldStaticOf(line, text) {
     return {
       affects: { scope: "creatures-you-control" },
       ...part,
-      typesOutsideBattlefield: { ofType: "creature", ...part },
+      outsideBattlefield: { ofType: ["creature"], ...part },
       text,
     };
   }
@@ -17587,7 +17585,7 @@ function outsideBattlefieldStaticOf(line, text) {
     return {
       affects: { scope: "filter", filter: { type: "land", controlledBy: "you" } },
       ...part,
-      typesOutsideBattlefield: { ofType: "land", ...part },
+      outsideBattlefield: { ofType: ["land"], ...part },
       text,
     };
   }
@@ -18185,7 +18183,7 @@ function parseStatic(line, text) {
         },
         loseAllAbilities: true,
         setTypes: ["creature"],
-        setBasePtFromAffectedCounters: "loyalty",
+        setBasePt: { power: { countersOnIt: "loyalty" }, toughness: { countersOnIt: "loyalty" } },
         text,
       };
     }
@@ -19750,7 +19748,7 @@ function parseStatic(line, text) {
     return {
       affects: { scope: "filter", filter: { type: "land", controlledBy: "you" } },
       addSupertypes: ["basic"],
-      typesOutsideBattlefield: { ofType: "land", zones: ["library"], addSupertypes: ["basic"] },
+      outsideBattlefield: { ofType: ["land"], zones: ["library"], addSupertypes: ["basic"] },
       text,
     };
   }

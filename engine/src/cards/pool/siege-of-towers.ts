@@ -29,12 +29,11 @@ export default defineCard({
   // it has no creature type.
   targets: [{ kind: "permanent", filter: { subtype: "Mountain" } }],
   effect: {
-    kind: "animate",
+    kind: "become",
     target: 0,
     power: 3,
     toughness: 1,
     addTypes: ["creature"],
-    addSubtypes: [],
     duration: "permanent",
   },
 });

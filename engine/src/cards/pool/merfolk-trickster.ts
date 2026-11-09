@@ -29,7 +29,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "tap", target: 0 },
-          { kind: "lose-abilities", target: 0, duration: "end-of-turn" },
+          { kind: "become", loseAbilities: true, target: 0, duration: "end-of-turn" },
         ],
       },
       resolve: null,

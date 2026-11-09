@@ -6,10 +6,10 @@ import type { Color } from "../../mana.js";
 //
 // The colour is chosen as the ability resolves — an unannounced `modal`, one
 // mode per colour (Wash Out's "of your choice" shape). The permanent becomes
-// that one colour only, for good (layer 5 — `become-color`).
+// that one colour only, for good (layer 5 — `become`).
 const become = (color: Color, word: string): ModeOption => ({
   text: word,
-  effect: { kind: "become-color", target: 0, colors: [color], duration: "permanent" },
+  effect: { kind: "become", target: 0, setColors: [color], duration: "permanent" },
 });
 
 export default defineCard({

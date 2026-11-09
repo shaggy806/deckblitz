@@ -2,9 +2,9 @@ import { defineCard } from "../define.js";
 
 // EDHREC rank 26662.
 //
-// "Becomes a Bird Giant" replaces its creature types for good (`add-types`'
+// "Becomes a Bird Giant" replaces its creature types for good (`become`'
 // `setSubtypes` — no longer a Wall), and it loses defender for good (Elder
-// Land Wurm's `lose-keywords`).
+// Land Wurm's `become`).
 //
 // Rulings:
 //   [2004-10-04] It becomes both creature type Giant and creature type Bird.
@@ -30,8 +30,8 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "add-types", target: "source", setSubtypes: ["Bird", "Giant"], duration: "permanent" },
-          { kind: "lose-keywords", target: "source", keywords: ["defender"], duration: "permanent" },
+          { kind: "become", target: "source", setSubtypes: ["Bird", "Giant"], duration: "permanent" },
+          { kind: "become", target: "source", loseKeywords: ["defender"], duration: "permanent" },
         ],
       },
       resolve: null,

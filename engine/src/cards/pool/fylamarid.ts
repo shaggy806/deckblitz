@@ -23,7 +23,7 @@ export default defineCard({
     {
       cost: { mana: "{U}", tap: false },
       targets: ["creature"],
-      effect: { kind: "become-color", target: 0, colors: ["U"], duration: "end-of-turn" },
+      effect: { kind: "become", target: 0, setColors: ["U"], duration: "end-of-turn" },
       resolve: null,
       text: "{U}: Target creature becomes blue until end of turn.",
     },

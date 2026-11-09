@@ -29,7 +29,7 @@ export default defineCard({
         {
           kind: "conditional",
           condition: { kind: "this-way", what: "put-onto-battlefield", filter: { notSupertype: "legendary" } },
-          then: { kind: "create-token-copy", of: 0, count: 1, who: "you", basePt: [1, 1] },
+          then: { kind: "create-token-copy", of: 0, count: 1, who: "you", exceptions: { power: 1, toughness: 1 } },
         },
       ],
     },

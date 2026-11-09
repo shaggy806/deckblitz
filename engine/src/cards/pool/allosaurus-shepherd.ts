@@ -28,7 +28,7 @@ export default defineCard({
       cost: { mana: "{4}{G}{G}", tap: false },
       targets: [],
       effect: {
-        kind: "animate-all",
+        kind: "become",
         filter: { type: "creature", subtype: "Elf", controlledBy: "you" },
         power: 5,
         toughness: 5,

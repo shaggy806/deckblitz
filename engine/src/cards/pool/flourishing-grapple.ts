@@ -22,7 +22,7 @@ export default defineCard({
   effect: {
     kind: "sequence",
     effects: [
-      { kind: "lose-abilities", target: 0, duration: "end-of-turn" },
+      { kind: "become", loseAbilities: true, target: 0, duration: "end-of-turn" },
       { kind: "fight", a: 1, b: 0, oneSided: true },
     ],
   },

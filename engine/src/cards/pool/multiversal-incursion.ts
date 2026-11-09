@@ -13,6 +13,6 @@ export default defineCard({
     kind: "create-token-copy",
     of: { each: { type: "creature", token: false, controlledBy: "you" } },
     count: 1,
-    notLegendary: true,
+    exceptions: { removeSupertypes: ["legendary"] },
   },
 });

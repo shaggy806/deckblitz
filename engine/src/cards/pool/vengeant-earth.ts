@@ -15,7 +15,7 @@ import { defineCard } from "../define.js";
 //     land that's also a 0/0 creature and has three +1/+1 counters on it, the resulting land
 //     creature will be 7/7.
 //
-// Disturbed Slumber's shape: `animate` adds the types (layer 4), haste
+// Disturbed Slumber's shape: `become` adds the types (layer 4), haste
 // (layer 6) and sets base P/T 4/4 (layer 7b), keeping its other types and
 // abilities; counters and modifications still apply on top.
 
@@ -30,7 +30,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 4,
         toughness: 4,

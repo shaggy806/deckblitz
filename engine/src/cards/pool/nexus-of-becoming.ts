@@ -35,7 +35,7 @@ export default defineCard({
               count: 1,
               who: "you",
               asCard: true,
-              exceptions: { addTypes: ["artifact", "creature"], addSubtypes: ["Golem"], basePt: [3, 3] },
+              exceptions: { addTypes: ["artifact", "creature"], addSubtypes: ["Golem"], power: 3, toughness: 3 },
             },
           },
         ],

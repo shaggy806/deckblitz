@@ -26,13 +26,11 @@ export default defineCard({
           kind: "sequence",
           effects: [
             {
-              kind: "animate",
+              kind: "become",
               target: 0,
               power: 3,
               toughness: 3,
-              addTypes: [],
               setTypes: ["creature"],
-              addSubtypes: [],
               setSubtypes: ["Bird"],
               setColors: ["U"],
               keywords: ["flying", "hexproof"],

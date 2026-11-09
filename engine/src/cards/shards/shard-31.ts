@@ -901,6 +901,7 @@ import _poolTheSwarmlord from "../pool/the-swarmlord.js";
 import _poolTheTraveler from "../pool/the-traveler.js";
 import _poolTheWanderingEmperor from "../pool/the-wandering-emperor.js";
 import _poolTheWatcherInTheWater from "../pool/the-watcher-in-the-water.js";
+import _poolThermalFlux from "../pool/thermal-flux.js";
 import _poolTheyCameFromThePipes from "../pool/they-came-from-the-pipes.js";
 import _poolThievingOtter from "../pool/thieving-otter.js";
 import _poolThorinsLastStand from "../pool/thorins-last-stand.js";
@@ -1951,6 +1952,7 @@ const shard: CardShard = {
     _poolTheTraveler,
     _poolTheWanderingEmperor,
     _poolTheWatcherInTheWater,
+    _poolThermalFlux,
     _poolTheyCameFromThePipes,
     _poolThievingOtter,
     _poolThorinsLastStand,

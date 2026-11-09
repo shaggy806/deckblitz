@@ -17,12 +17,11 @@ export default defineCard({
     kind: "sequence",
     effects: [
       {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 0,
         toughness: 0,
         addTypes: ["artifact", "creature"],
-        addSubtypes: [],
         duration: "permanent",
       },
       { kind: "add-counter", target: 0, counter: "+1/+1", amount: 4 },

@@ -18,7 +18,7 @@ export default defineCard({
       cost: { mana: "{2}", tap: false },
       targets: [{ kind: "permanent", whose: "you", filter: { type: "land", supertype: "snow" } }],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 4,
         toughness: 4,

@@ -4,8 +4,8 @@ import { defineCard } from "../define.js";
 //
 // Ascendant Spirit's shape: each ability checks his creature types as it
 // resolves (a `conditional` on the source) and lasts indefinitely. "Becomes a
-// Halfling Scout with base power and toughness 2/3" is `animate` (layer 7b);
-// "becomes a Halfling Rogue" replaces only his creature types (`add-types`'
+// Halfling Scout with base power and toughness 2/3" is `become` (layer 7b);
+// "becomes a Halfling Rogue" replaces only his creature types (`become`'
 // `setSubtypes`). The granted trigger reads the Ring's count as it resolves.
 //
 // Rulings:
@@ -40,12 +40,10 @@ export default defineCard({
         kind: "conditional",
         condition: { kind: "source", filter: { subtype: "Citizen" } },
         then: {
-          kind: "animate",
+          kind: "become",
           target: "source",
           power: 2,
           toughness: 3,
-          addTypes: [],
-          addSubtypes: [],
           setSubtypes: ["Halfling", "Scout"],
           keywords: ["lifelink"],
           duration: "permanent",
@@ -63,7 +61,7 @@ export default defineCard({
         then: {
           kind: "sequence",
           effects: [
-            { kind: "add-types", target: "source", setSubtypes: ["Halfling", "Rogue"], duration: "permanent" },
+            { kind: "become", target: "source", setSubtypes: ["Halfling", "Rogue"], duration: "permanent" },
             {
               kind: "grant-triggered",
               target: "source",

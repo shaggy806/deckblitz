@@ -8,5 +8,5 @@ export default defineCard({
   flashback: { cost: "{G}" },
   text: "Target creature loses flying until end of turn.\nFlashback {G} (You may cast this card from your graveyard for its flashback cost. Then exile it.)",
   targets: ["creature"],
-  effect: { kind: "lose-keywords", target: 0, keywords: ["flying"], duration: "end-of-turn" },
+  effect: { kind: "become", target: 0, loseKeywords: ["flying"], duration: "end-of-turn" },
 });

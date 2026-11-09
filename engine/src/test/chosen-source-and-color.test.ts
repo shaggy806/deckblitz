@@ -3,7 +3,7 @@
  * Protection, Reverse Damage, Healing Grace): the source, a permanent or a
  * spell on the stack, is chosen as the effect resolves; the shield prevents
  * only that source's damage, rechecks its colour (609.7b), and isn't used up
- * by damage it doesn't cover. And `become-color` (layer 5 — the Laces, the
+ * by damage it doesn't cover. And `become` (layer 5 — the Laces, the
  * Wisps): a spell or permanent's colours set, for good or until end of turn.
  */
 import { describe, expect, it } from "vitest";

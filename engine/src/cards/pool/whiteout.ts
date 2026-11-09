@@ -11,7 +11,7 @@ export default defineCard({
   types: ["instant"],
   text: `All creatures lose flying until end of turn.\n${RETURN_TEXT}`,
   targets: [],
-  effect: { kind: "lose-keywords", filter: { type: "creature" }, keywords: ["flying"], duration: "end-of-turn" },
+  effect: { kind: "become", filter: { type: "creature" }, loseKeywords: ["flying"], duration: "end-of-turn" },
   activated: [
     {
       cost: { mana: null, tap: false, sacrifice: { filter: { type: "land", supertype: "snow" } } },

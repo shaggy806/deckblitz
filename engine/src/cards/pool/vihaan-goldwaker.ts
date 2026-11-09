@@ -36,7 +36,7 @@ export default defineCard({
         kind: "may",
         prompt: "Have your Treasures become 3/3 Construct Assassin artifact creatures?",
         effect: {
-          kind: "animate-all",
+          kind: "become",
           filter: { subtype: "Treasure", controlledBy: "you" },
           power: 3,
           toughness: 3,

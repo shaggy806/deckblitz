@@ -142,7 +142,7 @@ describe("rule 305.7: a land set to a basic land type", () => {
     const { game } = setUp();
     put(game, GLACIERS);
     const forest = put(game, "Forest");
-    game.debugApplyEffect(A, { kind: "add-types", target: 0, setSubtypes: ["Mountain"], duration: "end-of-turn" }, [
+    game.debugApplyEffect(A, { kind: "become", target: 0, setSubtypes: ["Mountain"], duration: "end-of-turn" }, [
       { kind: "object", object: forest },
     ]);
     expect(subtypes(game, forest)).toEqual(["Plains"]);
@@ -193,7 +193,7 @@ describe("the basic land type of your choice, on resolution", () => {
         kind: "choose-creature-type",
         options: BASIC_LAND_TYPE_CHOICES,
         prompt: "choose a basic land type",
-        then: { kind: "add-types", target: 0, setSubtypes: ["$chosen"], duration: "end-of-turn" },
+        then: { kind: "become", target: 0, setSubtypes: ["$chosen"], duration: "end-of-turn" },
       },
       [{ kind: "object", object: coast }],
     );

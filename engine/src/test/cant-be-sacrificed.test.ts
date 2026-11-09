@@ -217,12 +217,10 @@ describe("can't be sacrificed", () => {
       game,
       B,
       {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 1,
         toughness: 1,
-        addTypes: [],
-        addSubtypes: [],
         setSubtypes: ["Frog"],
         setColors: ["U"],
         loseAbilities: true,

@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 
 // EDHREC rank 11987. Dreadmobile's "sacrifice another artifact or creature"
 // cost; the counter stays, the animation lasts the turn (Restless Fortress's
-// `add-types` with a creature type added).
+// `become` with a creature type added).
 const TEXT =
   "Sacrifice another artifact or creature: Put a +1/+1 counter on this Vehicle. It becomes a Spirit artifact creature in addition to its other types until end of turn.";
 
@@ -25,7 +25,7 @@ export default defineCard({
         effects: [
           { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
           {
-            kind: "add-types",
+            kind: "become",
             target: "source",
             addTypes: ["artifact", "creature"],
             addSubtypes: ["Spirit"],

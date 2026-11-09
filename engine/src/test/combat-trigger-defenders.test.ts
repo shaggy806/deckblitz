@@ -236,7 +236,7 @@ describe("what a declaration of attackers holds", () => {
     const vehicle = spawn(game, "Grizzly Bears");
     game.debugApplyEffect(
       A,
-      { kind: "add-types", target: 0, addTypes: ["artifact"], addSubtypes: ["Vehicle"], duration: "permanent" },
+      { kind: "become", target: 0, addTypes: ["artifact"], addSubtypes: ["Vehicle"], duration: "permanent" },
       [ref(vehicle)],
     );
     game.advanceUntil(quiet);

@@ -231,6 +231,7 @@ import _poolEarthSurge from "../pool/earth-surge.js";
 import _poolEcstaticElectromancer from "../pool/ecstatic-electromancer.js";
 import _poolEdgarMarkovsCoffin from "../pool/edgar-markovs-coffin.js";
 import _poolEdricSpymasterOfTrest from "../pool/edric-spymaster-of-trest.js";
+import _poolEgoErasure from "../pool/ego-erasure.js";
 import _poolElendaAndAzor from "../pool/elenda-and-azor.js";
 import _poolElimGarakSimpleTailor from "../pool/elim-garak-simple-tailor.js";
 import _poolEliminateTheImpossible from "../pool/eliminate-the-impossible.js";
@@ -1246,6 +1247,7 @@ const shard: CardShard = {
     _poolEcstaticElectromancer,
     _poolEdgarMarkovsCoffin,
     _poolEdricSpymasterOfTrest,
+    _poolEgoErasure,
     _poolElendaAndAzor,
     _poolElimGarakSimpleTailor,
     _poolEliminateTheImpossible,

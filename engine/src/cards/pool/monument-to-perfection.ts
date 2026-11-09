@@ -34,13 +34,11 @@ export default defineCard({
         kind: "sequence",
         effects: [
           {
-            kind: "animate",
+            kind: "become",
             target: "source",
             power: 9,
             toughness: 9,
             setTypes: ["artifact", "creature"],
-            addTypes: [],
-            addSubtypes: [],
             setSubtypes: ["Phyrexian", "Construct"],
             loseAbilities: true,
             keywords: ["indestructible"],

@@ -14,7 +14,7 @@ export default defineCard({
     {
       trigger: { on: "attacks", who: "any", attackingYou: true, defender: "player" },
       targets: [],
-      effect: { kind: "lose-keywords", target: "trigger-object", keywords: ["flanking"], duration: "end-of-turn" },
+      effect: { kind: "become", target: "trigger-object", loseKeywords: ["flanking"], duration: "end-of-turn" },
       resolve: null,
       text: "Whenever a creature attacks you, it loses flanking until end of turn.",
     },

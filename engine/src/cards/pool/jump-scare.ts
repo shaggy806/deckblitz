@@ -17,7 +17,7 @@ export default defineCard({
       { kind: "modify-pt", target: 0, power: 2, toughness: 2, duration: "end-of-turn" },
       { kind: "grant-keyword", target: 0, keyword: "flying", duration: "end-of-turn" },
       {
-        kind: "add-types",
+        kind: "become",
         target: 0,
         addTypes: ["enchantment", "creature"],
         addSubtypes: ["Horror"],

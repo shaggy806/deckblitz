@@ -10,5 +10,5 @@ export default defineCard({
   types: ["instant"],
   text: "Target spell or permanent becomes white. (Mana symbols on that permanent remain unchanged.)",
   targets: [{ kind: "spell-or-permanent" }],
-  effect: { kind: "become-color", target: 0, colors: ["W"], duration: "permanent" },
+  effect: { kind: "become", target: 0, setColors: ["W"], duration: "permanent" },
 });

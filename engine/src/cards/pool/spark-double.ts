@@ -20,7 +20,7 @@ export default defineCard({
   text: COPY_TEXT,
   copyOnEnter: {
     filter: { typesAnyOf: ["creature", "planeswalker"], controlledBy: "you" },
-    except: { notLegendary: true },
+    except: { removeSupertypes: ["legendary"] },
     counters: [
       { kind: "+1/+1", amount: 1, ifType: "creature" },
       { kind: "loyalty", amount: 1, ifType: "planeswalker" },

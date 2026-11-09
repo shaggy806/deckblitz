@@ -19,7 +19,7 @@ export default defineCard({
         kind: "for-each-permanent",
         filter: YOURS,
         simultaneous: true,
-        effect: { kind: "add-types", target: 0, addSubtypes: [EVERY_CREATURE_TYPE], duration: "end-of-turn" },
+        effect: { kind: "become", target: 0, addSubtypes: [EVERY_CREATURE_TYPE], duration: "end-of-turn" },
       },
     ],
   },

@@ -35,7 +35,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "earthbend", target: 0, amount: { cardsInHand: "you" } },
-          { kind: "add-types", target: 0, addSubtypes: ["Island"], duration: "permanent" },
+          { kind: "become", target: 0, addSubtypes: ["Island"], duration: "permanent" },
         ],
       },
       resolve: null,

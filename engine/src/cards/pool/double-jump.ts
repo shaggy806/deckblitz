@@ -15,12 +15,10 @@ export default defineCard({
     effects: [
       { kind: "add-counter", target: 0, counter: "flying", amount: 1 },
       {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 5,
         toughness: 5,
-        addTypes: [],
-        addSubtypes: [],
         duration: "end-of-turn",
       },
     ],

@@ -65,7 +65,7 @@ describe("Ratadrabik of Urborg", () => {
     expect([c.power, c.toughness]).toEqual([2, 2]);
     expect([...c.colors].sort()).toEqual(["B", "R"]);
     expect(c.subtypes).toEqual(expect.arrayContaining(["Goblin", "Zombie"]));
-    expect(game.state.objects[token].notLegendary).toBe(true);
+    expect(game.state.objects[token].modifiers.some((m) => m.removeSupertypes?.includes("legendary"))).toBe(true);
     // A Zombie: Ratadrabik gives it vigilance.
     expect(c.keywords.has("vigilance")).toBe(true);
   });
@@ -94,13 +94,13 @@ describe("Ratadrabik of Urborg", () => {
     ]);
     const [legendToken] = tokens(game);
     expect(legendToken).toBeDefined();
-    expect(game.state.objects[legendToken].notLegendary).toBeUndefined();
+    expect(game.state.objects[legendToken].modifiers.some((m) => m.removeSupertypes?.includes("legendary"))).toBe(false);
     kill(game, legendToken);
     expect(game.state.objects[legendToken]).toBeUndefined();
     const [copy] = tokens(game);
     expect(copy).toBeDefined();
     expect(nameOf(game.state.objects[copy])).toBe("Krenko, Mob Boss");
-    expect(game.state.objects[copy].notLegendary).toBe(true);
+    expect(game.state.objects[copy].modifiers.some((m) => m.removeSupertypes?.includes("legendary"))).toBe(true);
   });
 
   it("a copy that dies keeps its own copy exceptions in the new copy", () => {

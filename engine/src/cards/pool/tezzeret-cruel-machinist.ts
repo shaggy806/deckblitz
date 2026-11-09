@@ -32,12 +32,11 @@ export default defineCard({
       cost: { mana: null, tap: false },
       targets: [{ kind: "permanent", whose: "you", filter: { type: "artifact" } }],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 5,
         toughness: 5,
         addTypes: ["creature"],
-        addSubtypes: [],
         duration: "until-your-next-turn",
       },
       resolve: null,

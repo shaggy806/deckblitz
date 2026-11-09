@@ -14,7 +14,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "modify-pt", target: 0, power: 1, toughness: 0, duration: "end-of-turn" },
-      { kind: "become-color", target: 0, colors: ["B"], duration: "end-of-turn" },
+      { kind: "become", target: 0, setColors: ["B"], duration: "end-of-turn" },
       { kind: "grant-keyword", target: 0, keyword: "shadow", duration: "end-of-turn" },
     ],
   },

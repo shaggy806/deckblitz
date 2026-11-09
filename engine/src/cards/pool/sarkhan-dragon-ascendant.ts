@@ -42,7 +42,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
-          { kind: "add-types", target: "source", addSubtypes: ["Dragon"], duration: "end-of-turn" },
+          { kind: "become", target: "source", addSubtypes: ["Dragon"], duration: "end-of-turn" },
           { kind: "grant-keyword", target: "source", keyword: "flying", duration: "end-of-turn" },
         ],
       },

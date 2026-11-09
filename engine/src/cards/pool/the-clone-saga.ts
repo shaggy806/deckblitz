@@ -22,7 +22,7 @@ export default defineCard({
       effect: {
         kind: "delayed-trigger",
         at: { nextSpell: { type: "creature" } },
-        effect: { kind: "copy-spell", target: "trigger-spell", except: { notLegendary: true } },
+        effect: { kind: "copy-spell", target: "trigger-spell", except: { removeSupertypes: ["legendary"] } },
         text: "When you next cast a creature spell this turn, copy it, except the copy isn't legendary.",
       },
       resolve: null,

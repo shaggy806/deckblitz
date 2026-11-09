@@ -16,12 +16,11 @@ export default defineCard({
       // types and subtypes but replaces its creature types (rule 205.1b); it
       // keeps its abilities and colors (the ruling).
       {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 4,
         toughness: 4,
         addTypes: ["artifact", "creature"],
-        addSubtypes: [],
         setSubtypes: ["Angel"],
         keywords: ["flying"],
         duration: "end-of-turn",

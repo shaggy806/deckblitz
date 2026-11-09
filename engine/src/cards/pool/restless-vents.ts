@@ -27,7 +27,7 @@ export default defineCard({
       targets: [],
       // Restless Reef's shape.
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 2,
         toughness: 3,

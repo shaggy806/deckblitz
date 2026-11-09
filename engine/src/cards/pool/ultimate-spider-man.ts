@@ -27,7 +27,7 @@ export default defineCard({
         effects: [
           { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
           { kind: "grant-keyword", target: "source", keyword: "hexproof", duration: "end-of-turn" },
-          { kind: "become-color", target: "source", colors: [], duration: "end-of-turn" },
+          { kind: "become", target: "source", setColors: [], duration: "end-of-turn" },
         ],
       },
       resolve: null,

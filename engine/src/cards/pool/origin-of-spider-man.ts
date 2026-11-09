@@ -27,9 +27,8 @@ export default defineCard({
         effects: [
           { kind: "add-counter", target: 0, counter: "+1/+1", amount: 1 },
           {
-            kind: "animate",
+            kind: "become",
             target: 0,
-            addTypes: [],
             addSubtypes: ["Spider", "Hero"],
             addSupertypes: ["legendary"],
             duration: "permanent",

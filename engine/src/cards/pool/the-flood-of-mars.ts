@@ -43,7 +43,7 @@ export default defineCard({
           {
             kind: "conditional",
             condition: { kind: "target", index: 0, filter: { type: "land" } },
-            then: { kind: "add-types", target: 0, addSubtypes: ["Island"], duration: "permanent" },
+            then: { kind: "become", target: 0, addSubtypes: ["Island"], duration: "permanent" },
           },
         ],
       },

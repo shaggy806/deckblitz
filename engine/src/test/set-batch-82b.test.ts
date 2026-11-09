@@ -44,7 +44,7 @@ import {
 
 /** `id` becomes an artifact creature until end of turn — a crewed Vehicle. */
 const crewed = (game: Game, id: ObjectId): void =>
-  game.debugApplyEffect(A, { kind: "add-types", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" }, [
+  game.debugApplyEffect(A, { kind: "become", target: 0, addTypes: ["artifact", "creature"], duration: "end-of-turn" }, [
     ref(id),
   ]);
 

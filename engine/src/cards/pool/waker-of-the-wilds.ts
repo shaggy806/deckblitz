@@ -26,7 +26,7 @@ export default defineCard({
         effects: [
           { kind: "add-counter", target: 0, counter: "+1/+1", amount: "x" },
           {
-            kind: "animate",
+            kind: "become",
             target: 0,
             power: 0,
             toughness: 0,

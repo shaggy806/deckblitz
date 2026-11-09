@@ -37,7 +37,7 @@ export default defineCard({
             kind: "may",
             prompt: "Have Crawling Barrens become a 0/0 Elemental creature until end of turn?",
             effect: {
-              kind: "animate",
+              kind: "become",
               target: "source",
               power: 0,
               toughness: 0,

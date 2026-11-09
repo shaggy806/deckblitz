@@ -1,5 +1,5 @@
 /**
- * Keyword loss — "loses flying until end of turn" (the `lose-keywords`
+ * Keyword loss — "loses flying until end of turn" (the `become`
  * effect) and "equipped creature … loses flying" (`StaticAbility
  * .loseKeywords`): applied in layer 6 at its timestamp (rule 613.7), so it
  * takes away what had the keyword before and a later grant gives it back.

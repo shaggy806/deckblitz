@@ -44,7 +44,7 @@ describe("supertypes in a view", () => {
     const krenko = game.debugSpawn("Krenko, Mob Boss", A, "battlefield");
     game.debugApplyEffect(
       A,
-      { kind: "create-token-copy", of: 0, count: 1, who: "you", notLegendary: true },
+      { kind: "create-token-copy", of: 0, count: 1, who: "you", exceptions: { removeSupertypes: ["legendary"] } },
       [{ kind: "object", object: krenko }],
     );
     const copy = game.battlefield.find((id) => id !== krenko && game.state.objects[id].cardName === "Krenko, Mob Boss");

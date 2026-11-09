@@ -19,12 +19,11 @@ export default defineCard({
       // Iron Suitcase's shape. Its +1/+1 counters apply on top of the base
       // 1/1 (layer 7c over 7b).
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 1,
         toughness: 1,
         addTypes: ["artifact", "creature"],
-        addSubtypes: [],
         setSubtypes: ["Construct"],
         duration: "end-of-turn",
       },

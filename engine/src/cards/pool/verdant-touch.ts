@@ -19,12 +19,11 @@ export default defineCard({
   text: "Buyback {3} (You may pay an additional {3} as you cast this spell. If you do, put this card into your hand as it resolves.)\nTarget land becomes a 2/2 creature that's still a land. (This effect lasts indefinitely.)",
   targets: ["land"],
   effect: {
-    kind: "animate",
+    kind: "become",
     target: 0,
     power: 2,
     toughness: 2,
     addTypes: ["creature"],
-    addSubtypes: [],
     duration: "permanent",
   },
 });

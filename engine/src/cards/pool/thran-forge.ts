@@ -23,7 +23,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "modify-pt", target: 0, power: 1, toughness: 0, duration: "end-of-turn" },
-          { kind: "add-types", target: 0, addTypes: ["artifact"], duration: "end-of-turn" },
+          { kind: "become", target: 0, addTypes: ["artifact"], duration: "end-of-turn" },
         ],
       },
       resolve: null,

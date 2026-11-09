@@ -38,7 +38,7 @@ export default defineCard({
           {
             text: "Target creature becomes a Coward until end of turn.",
             targets: ["creature"],
-            effect: { kind: "add-types", target: 0, setSubtypes: ["Coward"], duration: "end-of-turn" },
+            effect: { kind: "become", target: 0, setSubtypes: ["Coward"], duration: "end-of-turn" },
           },
           {
             text: "Target Warrior gains trample until end of turn.",

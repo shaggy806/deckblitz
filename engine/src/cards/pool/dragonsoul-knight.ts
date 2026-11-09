@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 
 // EDHREC rank 28873.
 //
-// "Becomes a Dragon" replaces its creature types (`add-types`' setSubtypes) and
+// "Becomes a Dragon" replaces its creature types (`become`' setSubtypes) and
 // nothing else.
 //
 // Rulings:
@@ -30,7 +30,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "add-types", target: "source", setSubtypes: ["Dragon"], duration: "end-of-turn" },
+          { kind: "become", target: "source", setSubtypes: ["Dragon"], duration: "end-of-turn" },
           { kind: "modify-pt", target: "source", power: 5, toughness: 3, duration: "end-of-turn" },
           { kind: "grant-keyword", target: "source", keyword: "flying", duration: "end-of-turn" },
           { kind: "grant-keyword", target: "source", keyword: "trample", duration: "end-of-turn" },

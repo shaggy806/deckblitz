@@ -28,12 +28,10 @@ export default defineCard({
         kind: "sequence",
         effects: [
           {
-            kind: "animate",
+            kind: "become",
             target: "source",
             power: 4,
             toughness: 4,
-            addTypes: [],
-            addSubtypes: [],
             duration: "end-of-turn",
           },
           { kind: "grant-keyword", target: "source", keyword: "flying", duration: "end-of-turn" },

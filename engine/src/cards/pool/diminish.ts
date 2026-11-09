@@ -9,5 +9,5 @@ export default defineCard({
   types: ["instant"],
   text: "Target creature has base power and toughness 1/1 until end of turn.",
   targets: ["creature"],
-  effect: { kind: "animate", target: 0, power: 1, toughness: 1, addTypes: [], addSubtypes: [], duration: "end-of-turn" },
+  effect: { kind: "become", target: 0, power: 1, toughness: 1, duration: "end-of-turn" },
 });

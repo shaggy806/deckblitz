@@ -39,7 +39,7 @@ export default defineCard({
         target: 0,
         of: 1,
         until: "end-of-turn",
-        exceptions: { notLegendary: true },
+        exceptions: { removeSupertypes: ["legendary"] },
       },
       resolve: null,
       text: COPY_TEXT,

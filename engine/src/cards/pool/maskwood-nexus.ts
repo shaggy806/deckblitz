@@ -14,7 +14,7 @@ export default defineCard({
     {
       affects: { scope: "creatures-you-control" },
       addSubtypes: ["(every creature type)"],
-      typesOutsideBattlefield: { ofType: "creature", addSubtypes: ["(every creature type)"] },
+      outsideBattlefield: { ofType: ["creature"], addSubtypes: ["(every creature type)"] },
       text: TEXT,
     },
   ],

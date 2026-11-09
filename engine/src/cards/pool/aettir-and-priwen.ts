@@ -23,7 +23,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "attached" },
-      setBasePtFromSourceCount: "your-life-total",
+      setBasePt: { power: { sourceCount: "your-life-total" }, toughness: { sourceCount: "your-life-total" } },
       text: "Equipped creature has base power and toughness X/X, where X is your life total.",
     },
   ],

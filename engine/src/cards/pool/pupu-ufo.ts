@@ -8,7 +8,7 @@ import { defineCard } from "../define.js";
 //   [2025-06-13] Use the number of Towns you control when PuPu UFO's last ability resolves to
 //     determine PuPu UFO's new base power.
 //
-// Base power alone (`animate` with no `toughness`, rule 613.4b), fixed at the
+// Base power alone (`become` with no `toughness`, rule 613.4b), fixed at the
 // Towns counted as it resolves.
 const LAND_TEXT = "{T}: You may put a land card from your hand onto the battlefield.";
 const POWER_TEXT = "{3}: Until end of turn, this creature's base power becomes equal to the number of Towns you control.";
@@ -43,11 +43,9 @@ export default defineCard({
       cost: { mana: "{3}", tap: false },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: { countOf: { subtype: "Town", controlledBy: "you" } },
-        addTypes: [],
-        addSubtypes: [],
         duration: "end-of-turn",
       },
       resolve: null,

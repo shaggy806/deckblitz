@@ -49,7 +49,7 @@ export default defineCard({
       // Llanowar Loamspeaker's shape: types added, not set (it keeps its other
       // types and abilities — the ruling), and no colour named.
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 1,
         toughness: 1,

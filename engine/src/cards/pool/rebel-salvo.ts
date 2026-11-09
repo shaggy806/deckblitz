@@ -15,7 +15,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "damage", amount: 5, target: 0 },
-      { kind: "lose-keywords", target: 0, keywords: ["indestructible"], duration: "end-of-turn" },
+      { kind: "become", target: 0, loseKeywords: ["indestructible"], duration: "end-of-turn" },
     ],
   },
 });

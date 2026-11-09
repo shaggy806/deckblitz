@@ -23,7 +23,7 @@ export default defineCard({
       effect: {
         kind: "sequence",
         effects: [
-          { kind: "animate", target: "source", addTypes: ["artifact", "creature"], addSubtypes: ["Construct"], duration: "end-of-turn" },
+          { kind: "become", target: "source", addTypes: ["artifact", "creature"], addSubtypes: ["Construct"], duration: "end-of-turn" },
           {
             kind: "grant-static",
             target: "source",

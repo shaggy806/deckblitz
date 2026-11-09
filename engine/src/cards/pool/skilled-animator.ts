@@ -18,12 +18,11 @@ export default defineCard({
       trigger: { on: "enters-battlefield", who: "self" },
       targets: [{ kind: "permanent", whose: "you", filter: { type: "artifact" } }],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 5,
         toughness: 5,
         addTypes: ["artifact", "creature"],
-        addSubtypes: [],
         duration: "while-source",
       },
       resolve: null,

@@ -36,11 +36,10 @@ export default defineCard({
       cost: { mana: "{X}", tap: false },
       targets: ["creature-you-control"],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: "x",
         toughness: "x",
-        addTypes: [],
         addSubtypes: ["Giant"],
         duration: "end-of-turn",
       },

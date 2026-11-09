@@ -31,7 +31,7 @@ export default defineCard({
             kind: "conditional",
             condition: { kind: "source", filter: { notTypes: ["creature"] } },
             then: {
-              kind: "animate",
+              kind: "become",
               target: "source",
               power: 3,
               toughness: 3,

@@ -23,7 +23,7 @@ export default defineCard({
       },
       oncePerTurn: true,
       targets: [],
-      effect: { kind: "copy-spell", target: "trigger-spell", except: { notLegendary: true } },
+      effect: { kind: "copy-spell", target: "trigger-spell", except: { removeSupertypes: ["legendary"] } },
       resolve: null,
       text: TEXT,
     },

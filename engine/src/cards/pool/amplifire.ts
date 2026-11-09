@@ -27,12 +27,10 @@ export default defineCard({
         kind: "sequence",
         effects: [
           {
-            kind: "animate",
+            kind: "become",
             target: "source",
             power: 0,
             toughness: 0,
-            addTypes: [],
-            addSubtypes: [],
             duration: "until-your-next-turn",
           },
           {
@@ -40,12 +38,10 @@ export default defineCard({
             filter: { type: "creature" },
             rest: "bottom-random",
             then: {
-              kind: "animate",
+              kind: "become",
               target: "source",
               power: { product: [{ powerOf: 0 }, 2] },
               toughness: { product: [{ toughnessOf: 0 }, 2] },
-              addTypes: [],
-              addSubtypes: [],
               duration: "until-your-next-turn",
             },
           },

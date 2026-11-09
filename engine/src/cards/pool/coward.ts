@@ -15,7 +15,7 @@ export default defineCard({
     kind: "sequence",
     effects: [
       { kind: "restrict", target: 0, restrictions: ["cant-block"] },
-      { kind: "add-types", target: 0, addSubtypes: ["Coward"], duration: "end-of-turn" },
+      { kind: "become", target: 0, addSubtypes: ["Coward"], duration: "end-of-turn" },
       { kind: "time-travel" },
     ],
   },

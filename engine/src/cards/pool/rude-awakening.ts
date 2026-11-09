@@ -10,7 +10,7 @@ import { defineCard } from "../define.js";
 //   [2013-06-07] Lands that enter the battlefield or otehrwise come under your control after Rude
 //     Awakening resolves won’t be affected.
 //
-// The second mode is `animate-all`, which animates the lands matching as it
+// The second mode is `become`, which animates the lands matching as it
 // resolves (rule 611.2c — the second ruling). Entwine is Flourishing Strike's
 // shape: `kicker.keyword: "entwine"` with `kickedModes: 2`.
 
@@ -34,7 +34,7 @@ export default defineCard({
         text: "Until end of turn, lands you control become 2/2 creatures that are still lands.",
         targets: [],
         effect: {
-          kind: "animate-all",
+          kind: "become",
           filter: { type: "land", controlledBy: "you" },
           power: 2,
           toughness: 2,

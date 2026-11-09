@@ -36,7 +36,7 @@ export default defineCard({
             effect: { kind: "add-counter", target: 0, counter: "cell", amount: 1 },
           },
           {
-            kind: "animate-all",
+            kind: "become",
             filter: { type: "creature", controlledBy: "you", modified: true },
             power: 7,
             toughness: 5,

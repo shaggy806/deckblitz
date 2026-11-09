@@ -18,7 +18,7 @@ export default defineCard({
     {
       cost: { mana: "{0}", tap: false },
       targets: [],
-      effect: { kind: "add-types", target: "source", setTypes: ["enchantment"], duration: "permanent" },
+      effect: { kind: "become", target: "source", setTypes: ["enchantment"], duration: "permanent" },
       resolve: null,
       text: ENCHANTMENT_TEXT,
     },
@@ -29,13 +29,11 @@ export default defineCard({
       condition: { kind: "source", filter: { type: "enchantment" } },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 2,
         toughness: 4,
         setTypes: ["creature"],
-        addTypes: [],
-        addSubtypes: [],
         setSubtypes: ["Soldier"],
         duration: "permanent",
       },

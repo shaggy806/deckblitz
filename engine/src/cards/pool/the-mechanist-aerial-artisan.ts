@@ -41,12 +41,11 @@ export default defineCard({
       // creature types (the rulings), and base 3/1 overwrites earlier
       // P/T-setting effects (layer 7b).
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 3,
         toughness: 1,
         addTypes: ["artifact", "creature"],
-        addSubtypes: [],
         setSubtypes: ["Construct"],
         keywords: ["flying"],
         duration: "end-of-turn",

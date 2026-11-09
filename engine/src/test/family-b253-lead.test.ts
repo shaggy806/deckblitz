@@ -85,7 +85,7 @@ describe("B253 lead cards", () => {
     const { game } = table();
     spawn(game, "Glaciers", A);
     const forest = spawn(game, "Forest", A);
-    game.debugApplyEffect(A, { kind: "add-types", target: 0, setSubtypes: ["Mountain"], duration: "end-of-turn" }, [ref(forest)]);
+    game.debugApplyEffect(A, { kind: "become", target: 0, setSubtypes: ["Mountain"], duration: "end-of-turn" }, [ref(forest)]);
     settle(game);
     expect(subtypes(game, forest)).toEqual(["Plains"]);
   });

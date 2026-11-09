@@ -64,7 +64,7 @@ describe("Mishra's Factory", () => {
     game.debugApplyEffect(
       A,
       {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 2,
         toughness: 2,

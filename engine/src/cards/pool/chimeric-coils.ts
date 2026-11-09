@@ -23,12 +23,11 @@ export default defineCard({
         kind: "sequence",
         effects: [
           {
-            kind: "animate",
+            kind: "become",
             target: "source",
             power: "x",
             toughness: "x",
             addTypes: ["artifact", "creature"],
-            addSubtypes: [],
             setSubtypes: ["Construct"],
             duration: "permanent",
           },

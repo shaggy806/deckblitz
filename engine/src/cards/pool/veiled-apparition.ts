@@ -18,13 +18,11 @@ export default defineCard({
         kind: "sequence",
         effects: [
           {
-            kind: "animate",
+            kind: "become",
             target: "source",
             power: 3,
             toughness: 3,
             setTypes: ["creature"],
-            addTypes: [],
-            addSubtypes: [],
             setSubtypes: ["Illusion"],
             keywords: ["flying"],
             duration: "permanent",

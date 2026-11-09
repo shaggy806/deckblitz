@@ -22,7 +22,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "modify-pt", target: "source", power: -2, toughness: 2, duration: "end-of-turn" },
-          { kind: "lose-keywords", target: "source", keywords: ["flying"], duration: "end-of-turn" },
+          { kind: "become", target: "source", loseKeywords: ["flying"], duration: "end-of-turn" },
         ],
       },
       resolve: null,

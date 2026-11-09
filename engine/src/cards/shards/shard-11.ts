@@ -604,6 +604,7 @@ import _poolOldGrowthDryads from "../pool/old-growth-dryads.js";
 import _poolOmoQueenOfVesuva from "../pool/omo-queen-of-vesuva.js";
 import _poolOneWithTheMachine from "../pool/one-with-the-machine.js";
 import _poolOpalEyeKondasYojimbo from "../pool/opal-eye-kondas-yojimbo.js";
+import _poolOpalescence from "../pool/opalescence.js";
 import _poolOpalineUnicorn from "../pool/opaline-unicorn.js";
 import _poolOrcishCaptain from "../pool/orcish-captain.js";
 import _poolOrganGrinder from "../pool/organ-grinder.js";
@@ -1606,6 +1607,7 @@ const shard: CardShard = {
     _poolOmoQueenOfVesuva,
     _poolOneWithTheMachine,
     _poolOpalEyeKondasYojimbo,
+    _poolOpalescence,
     _poolOpalineUnicorn,
     _poolOrcishCaptain,
     _poolOrganGrinder,

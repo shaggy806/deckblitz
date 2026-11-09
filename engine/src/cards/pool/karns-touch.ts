@@ -8,12 +8,11 @@ export default defineCard({
   text: "Target noncreature artifact becomes an artifact creature with power and toughness each equal to its mana value until end of turn. (It retains its abilities.)",
   targets: [{ kind: "permanent", filter: { type: "artifact", notTypes: ["creature"] } }],
   effect: {
-    kind: "animate",
+    kind: "become",
     target: 0,
     power: { manaValueOf: 0 },
     toughness: { manaValueOf: 0 },
     addTypes: ["artifact", "creature"],
-    addSubtypes: [],
     duration: "end-of-turn",
   },
 });

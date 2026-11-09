@@ -19,12 +19,11 @@ export default defineCard({
       cost: { mana: "{U}", tap: false },
       targets: [{ kind: "permanent", filter: { type: "artifact", notTypes: ["creature"] } }],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: { manaValueOf: 0 },
         toughness: { manaValueOf: 0 },
         addTypes: ["artifact", "creature"],
-        addSubtypes: [],
         duration: "end-of-turn",
       },
       resolve: null,

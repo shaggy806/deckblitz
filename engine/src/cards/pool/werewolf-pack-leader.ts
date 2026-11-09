@@ -32,16 +32,14 @@ export default defineCard({
         kind: "sequence",
         effects: [
           {
-            kind: "animate",
+            kind: "become",
             target: "source",
             power: 5,
             toughness: 3,
-            addTypes: [],
-            addSubtypes: [],
             keywords: ["trample"],
             duration: "end-of-turn",
           },
-          { kind: "add-types", target: "source", removeSubtypes: ["Human"], duration: "end-of-turn" },
+          { kind: "become", target: "source", removeSubtypes: ["Human"], duration: "end-of-turn" },
         ],
       },
       resolve: null,

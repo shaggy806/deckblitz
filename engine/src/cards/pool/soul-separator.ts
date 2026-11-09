@@ -25,7 +25,7 @@ export default defineCard({
             of: 0,
             count: 1,
             who: "you",
-            exceptions: { basePt: [1, 1], addSubtypes: ["Spirit"], keywords: ["flying"] },
+            exceptions: { power: 1, toughness: 1, addSubtypes: ["Spirit"], keywords: ["flying"] },
           },
           {
             kind: "create-token",

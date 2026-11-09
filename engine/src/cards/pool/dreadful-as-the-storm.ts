@@ -20,12 +20,10 @@ export default defineCard({
     kind: "sequence",
     effects: [
       {
-        kind: "animate",
+        kind: "become",
         target: 0,
         power: 5,
         toughness: 5,
-        addTypes: [],
-        addSubtypes: [],
         duration: "end-of-turn",
       },
       { kind: "the-ring-tempts-you" },

@@ -30,7 +30,7 @@ export default defineCard({
         kind: "may",
         prompt: "Have this enchantment become a 3/3 Sphinx creature with flying until end of turn?",
         effect: {
-          kind: "animate",
+          kind: "become",
           target: "source",
           power: 3,
           toughness: 3,

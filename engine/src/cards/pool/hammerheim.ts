@@ -22,9 +22,9 @@ export default defineCard({
       cost: { mana: null, tap: true },
       targets: ["creature"],
       effect: {
-        kind: "lose-keywords",
+        kind: "become",
         target: 0,
-        keywords: ["plainswalk", "islandwalk", "swampwalk", "mountainwalk", "forestwalk", "desertwalk", "landwalk"],
+        loseKeywords: ["plainswalk", "islandwalk", "swampwalk", "mountainwalk", "forestwalk", "desertwalk", "landwalk"],
         duration: "end-of-turn",
       },
       resolve: null,

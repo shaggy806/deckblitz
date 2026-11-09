@@ -19,7 +19,7 @@ export default defineCard({
     {
       affects: { scope: "filter", filter: { type: "land", controlledBy: "you" } },
       addSupertypes: ["basic"],
-      typesOutsideBattlefield: { ofType: "land", zones: ["library"], addSupertypes: ["basic"] },
+      outsideBattlefield: { ofType: ["land"], zones: ["library"], addSupertypes: ["basic"] },
       text: TEXT,
     },
   ],

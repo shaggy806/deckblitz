@@ -25,7 +25,7 @@ export default defineCard({
       },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 3,
         toughness: 3,

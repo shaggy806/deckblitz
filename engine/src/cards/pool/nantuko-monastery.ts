@@ -23,7 +23,7 @@ export default defineCard({
       condition: { kind: "threshold" },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         power: 4,
         toughness: 4,

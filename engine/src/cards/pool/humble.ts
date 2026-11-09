@@ -10,12 +10,10 @@ export default defineCard({
   text: "Until end of turn, target creature loses all abilities and has base power and toughness 0/1.",
   targets: ["creature"],
   effect: {
-    kind: "animate",
+    kind: "become",
     target: 0,
     power: 0,
     toughness: 1,
-    addTypes: [],
-    addSubtypes: [],
     loseAbilities: true,
     duration: "end-of-turn",
   },

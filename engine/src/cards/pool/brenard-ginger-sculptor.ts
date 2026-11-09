@@ -62,7 +62,7 @@ export default defineCard({
                 count: 1,
                 who: "you",
                 exceptions: {
-                  basePt: [1, 1],
+                  power: 1, toughness: 1,
                   addTypes: ["artifact", "creature"],
                   addSubtypes: ["Food", "Golem"],
                   activated: [FOOD],

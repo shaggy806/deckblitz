@@ -17,7 +17,7 @@ const COLORS: readonly (readonly [Color, string])[] = [
 
 const MODES: ModeOption[] = COLORS.map(([color, word]) => ({
   text: word,
-  effect: { kind: "become-color", target: 0, colors: [color], duration: "permanent" },
+  effect: { kind: "become", target: 0, setColors: [color], duration: "permanent" },
 }));
 
 const TEXT = "{T}: Target instant or sorcery spell becomes the color of your choice.";

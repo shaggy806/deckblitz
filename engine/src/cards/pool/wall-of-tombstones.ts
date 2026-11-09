@@ -21,11 +21,9 @@ export default defineCard({
       trigger: { on: "step-begins", step: "upkeep", who: "you" },
       targets: [],
       effect: {
-        kind: "animate",
+        kind: "become",
         target: "source",
         toughness: { sum: [1, { countInGraveyard: { type: "creature", ownedBy: "you" } }] },
-        addTypes: [],
-        addSubtypes: [],
         duration: "permanent",
       },
       resolve: null,

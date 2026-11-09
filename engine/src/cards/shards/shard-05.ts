@@ -573,6 +573,7 @@ import _poolMoltenPrimordial from "../pool/molten-primordial.js";
 import _poolMonsterManual from "../pool/monster-manual.js";
 import _poolMoonwingMoth from "../pool/moonwing-moth.js";
 import _poolMoorlandHaunt from "../pool/moorland-haunt.js";
+import _poolMoritteOfTheFrost from "../pool/moritte-of-the-frost.js";
 import _poolMornsongAria from "../pool/mornsong-aria.js";
 import _poolMortiphobia from "../pool/mortiphobia.js";
 import _poolMossMonster from "../pool/moss-monster.js";
@@ -1560,6 +1561,7 @@ const shard: CardShard = {
     _poolMonsterManual,
     _poolMoonwingMoth,
     _poolMoorlandHaunt,
+    _poolMoritteOfTheFrost,
     _poolMornsongAria,
     _poolMortiphobia,
     _poolMossMonster,

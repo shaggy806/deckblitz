@@ -29,7 +29,7 @@ export default defineCard({
         kind: "may",
         prompt: "Have the target land become a 3/3 Elemental creature with haste until end of turn?",
         effect: {
-          kind: "animate",
+          kind: "become",
           target: 0,
           power: 3,
           toughness: 3,

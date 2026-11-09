@@ -11,7 +11,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      typesOutsideBattlefield: { ofType: "creature", zones: ["graveyard"], addsChosenCreatureType: true },
+      outsideBattlefield: { ofType: ["creature"], zones: ["graveyard"], addsChosenCreatureType: true },
       text: "Each creature card in your graveyard has the chosen creature type in addition to its other types.",
     },
   ],

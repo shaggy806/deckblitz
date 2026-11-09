@@ -213,12 +213,10 @@ describe("basePower / baseToughness — base P/T (rule 613.4b)", () => {
     expect(matches(game, wurm, TWO_TWO)).toBe(true);
     const elves = spawn(game, "Llanowar Elves");
     on(game, elves, {
-      kind: "animate",
+      kind: "become",
       target: 0,
       power: 2,
       toughness: 2,
-      addTypes: [],
-      addSubtypes: [],
       duration: "end-of-turn",
     });
     expect(matches(game, elves, TWO_TWO)).toBe(true);
@@ -486,12 +484,11 @@ describe("cardTypeCount — how many card types", () => {
     const wastes = spawn(game, "Wastes");
     expect(matches(game, wastes, twoPlus)).toBe(false);
     on(game, wastes, {
-      kind: "animate",
+      kind: "become",
       target: 0,
       power: 2,
       toughness: 2,
       addTypes: ["creature"],
-      addSubtypes: [],
       duration: "end-of-turn",
     });
     expect(matches(game, wastes, twoPlus)).toBe(true);

@@ -11,7 +11,7 @@ import { defineCard } from "../define.js";
 //   [2013-01-24] Choosing 0 as the value for X will likely cause creatures you control to become
 //     0/0 and be put into the graveyard.
 //
-// Mirror Entity's `animate-all` (a layer-7b base P/T set, so counters and
+// Mirror Entity's `become` (a layer-7b base P/T set, so counters and
 // pumps still apply on top), with the spell's own X.
 
 const TEXT = "Creatures you control have base power and toughness X/X until end of turn.";
@@ -23,7 +23,7 @@ export default defineCard({
   types: ["instant"],
   text: TEXT,
   effect: {
-    kind: "animate-all",
+    kind: "become",
     filter: { type: "creature", controlledBy: "you" },
     power: "x",
     toughness: "x",

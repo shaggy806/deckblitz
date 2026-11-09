@@ -54,12 +54,11 @@ export default defineCard({
           // A layer-7b base P/T set with its own timestamp: it beats a
           // station band's or a crewed Vehicle's printed size (the rulings).
           effect: {
-            kind: "animate",
+            kind: "become",
             target: 0,
             power: 2,
             toughness: 2,
             addTypes: ["artifact", "creature"],
-            addSubtypes: [],
             keywords: ["flying"],
             duration: "end-of-turn",
           },

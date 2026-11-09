@@ -2,7 +2,7 @@ import { defineCard } from "../define.js";
 
 // EDHREC rank 14792.
 //
-// Base power and toughness set in layer 7b (Quandrix Charm's `animate` with
+// Base power and toughness set in layer 7b (Quandrix Charm's `become` with
 // no types), so counters and pumps still apply on top (the ruling). The six
 // lands are counted as it resolves.
 
@@ -10,7 +10,7 @@ const LANDFALL_TEXT =
   "Landfall — Whenever a land you control enters, target creature has base power and toughness 3/3 until end of turn. If you control six or more lands, that creature has base power and toughness 6/6 until end of turn instead.";
 
 const base = (n: number) =>
-  ({ kind: "animate", target: 0, power: n, toughness: n, addTypes: [], addSubtypes: [], duration: "end-of-turn" }) as const;
+  ({ kind: "become", target: 0, power: n, toughness: n, duration: "end-of-turn" }) as const;
 
 export default defineCard({
   name: "Genemorph Imago",

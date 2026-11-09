@@ -34,7 +34,7 @@ export default defineCard({
         kind: "sequence",
         effects: [
           { kind: "add-counter", target: 0, counter: "menace", amount: 1 },
-          { kind: "add-types", target: 0, addSubtypes: ["Rogue"], duration: "permanent" },
+          { kind: "become", target: 0, addSubtypes: ["Rogue"], duration: "permanent" },
         ],
       },
       resolve: null,

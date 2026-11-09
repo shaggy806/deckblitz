@@ -21,12 +21,10 @@ export default defineCard({
         text: HUMBLE,
         targets: ["creature"],
         effect: {
-          kind: "animate",
+          kind: "become",
           target: 0,
           power: 1,
           toughness: 1,
-          addTypes: [],
-          addSubtypes: [],
           loseAbilities: true,
           duration: "end-of-turn",
         },
