@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4763 already implemented / 237 missing (marks refreshed 2026-11-09)
+4765 already implemented / 235 missing (marks refreshed 2026-11-09)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2333,7 +2333,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2340  Tainted Strike                           {B}              Instant
 [x]  2341  Hazel's Brewmaster                       {3}{B}           Creature — Squirrel Warlock
 [x]  2342  Slaughter the Strong                     {1}{W}{W}        Sorcery
-[ ]  2343  Thieving Skydiver                        {1}{U}           Creature — Merfolk Rogue
+[x]  2343  Thieving Skydiver                        {1}{U}           Creature — Merfolk Rogue
 [ ]  2344  Chthonian Nightmare                      {1}{B}           Enchantment
 [x]  2345  Conduit of Ruin                          {6}              Creature — Eldrazi
 [x]  2346  Escape to the Wilds                      {3}{R}{G}        Sorcery
@@ -3696,7 +3696,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3703  Astarion's Thirst                        {3}{B}           Instant
 [x]  3704  Ambition's Cost                          {3}{B}           Sorcery
 [x]  3705  Haunting Voyage                          {4}{B}{B}        Sorcery
-[ ]  3706  Screaming Nemesis                        {2}{R}           Creature — Spirit
+[x]  3706  Screaming Nemesis                        {2}{R}           Creature — Spirit
 [x]  3707  Fire Lord Azula                          {1}{U}{B}{R}     Legendary Creature — Human Noble
 [x]  3708  The Second Doctor                        {2}{W}{U}        Legendary Creature — Time Lord Doctor
 [x]  3709  Yavimaya Hollow                          {0}              Legendary Land

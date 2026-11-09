@@ -6,19 +6,6 @@ rule number, the code that does it today and the cards it blocks. `BACKLOG.md` k
 per gap under the same bold title; when a gap closes, delete it here and move its
 `BACKLOG.md` line to `COMPLETED.md`.
 
-- **A split card's target offer reads both halves for filter-based protection** (found 2026-11-06,
-  batch 268's situation fuzzer: `node scripts/situation-fuzz.mjs --with "Curzon Dax, Bound by Blood"
-  --seed 31 --scenarios 1`, Curzon Dax only on the board). Casting Malice (Spite // Malice), the
-  target offer listed Guardian of the Guildpact (protection from monocolored), and `castSpell`
-  then refused it, "illegal target for Malice". Rule 709.3: a split card cast as one half has only
-  that half's characteristics, so Malice is mono-black and the refusal is right. `castSpell` sets
-  `object.face` up front (game.ts ~19455) before `whyTargetsInvalid`, but the offer paths
-  (`whyCannotCastSpell`'s `legalTargets` ~17706, `castingCostOf` ~15396, `costModificationFor`
-  ~15984) pass `cardSource(def, cardId)` with the card still on its default face. `protectionBlocks`'
-  filter clauses (`matchesFilter` on `source.object`, targeting.ts ~390) then read the card in hand,
-  whose characteristics are both halves (709.4), multicolored. The colour clauses use `def.colors`
-  and are right. Fix: judge the offer as the face being cast, e.g. a face-aware read in
-  `TargetSource` that `matchesFilter` honours, rather than mutating `face` under the computed cache.
 - **Mulligans are declared at once, and two opening-hand rules are loose** (found 2026-11-01, all older
   than the finding). Rule 103.5 has each player declare in turn order; `beginMulligans` (`game.ts`) asks in
   parallel, and changing it is a design call. Rule 103.5c gives the free mulligan to multiplayer and
@@ -31,9 +18,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
 - **Limited-duration control of a player** (found 2026-11-01). Rule 723.2: Word of Command and
   Opposition Agent control a player for less than a turn. `player-control.ts` holds a next turn or a
   next combat, not these; Word of Command is on the stale list and needs its own narrow key.
-- **`exile-all` and `damage-all`'s `except` spare a whole token stack** (found 2026-11-01). They
-  compare the stack's id, so a token stack as the source is spared whole, where `destroy-all`'s
-  `exceptSource` spares one token and takes the rest. Representation must not change a result.
 - **A target tax's offers are approximate in two corners** (found 2026-11-01). Each only
   mis-offers, never mis-charges: `target-count.ts`'s sum over-counts a `targeting` tax with several
   targets, so a driver may pass on a legal cast; and a taxed ability that also has a two-slot
@@ -61,13 +45,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   Coalition Flag) are the reverse: "while an opponent is choosing targets … must choose at least
   one Flagbearer on the battlefield if able" is a requirement on the choice (601.2c), checked over
   a whole target set, which `invalidTargetReason` has no hook for.
-- **"Creatures it blocked this turn" has no record.** `CardFilter.blockingRelation`
-  (`filter.ts`, `inBlockingRelation`) reads the blocks as they stand — `blockedAttackersOf`, or a
-  partner's `lastKnown.blockedAttackers` once it has left — which is exact for "creatures blocked
-  by this creature" (a creature removed from combat is no longer blocked by it, rule 506.4). Defiant
-  Vanguard's "destroy it and all creatures it blocked this turn" also counts an attacker it blocked
-  that has since been removed from combat, so it needs a per-turn record on the blocker of the
-  attackers it was declared blocking (509.1g), kept like `saddledThisTurn`. Blocks: Defiant Vanguard.
 - **A merged or melded permanent's cards go into a library or graveyard in an order nobody chose.**
   Rules 730.3a and the meld ruling ("if the cards are put on the top or bottom of your library,
   you choose their relative order") let the owner arrange the cards a merged or melded permanent
@@ -80,13 +57,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   other "that card" reference (an impulse permission on an exiled permanent, Hostage Taker's) sees
   the object's own card alone. Fix: a `choose-pile`-style order decision for the first, and read
   `leftWith` wherever an effect follows a permanent into its new zone for the second.
-- **A spell's copy keeps none of its cost references.** Rule 707.10: a copy copies "all
-  decisions made for it, including … additional or alternative costs", so a copy of Fling deals
-  the sacrificed creature's power, and a copy of Volrath the Fallen's or Induce Despair's effect
-  reads the discarded or revealed card. `copySpellFrom` (`game.ts`) copies the spell's
-  characteristics, targets and X but not its `LastKnownRefs` (`sacrificed`, `discarded`,
-  `revealed`), so the copy reads 0. Reported by the overnight agent that built the revealed-card
-  cost (2026-10-31); not yet reproduced in a test. Fix: carry the refs onto the copy.
 - **Buyback always beats an "exile it instead" replacement.** Rule 616.1 lets the affected
   object's owner (or controller) choose which of two replacement effects applies first; a
   resolving spell whose buyback was paid (rule 702.27a, itself "put into its owner's hand
@@ -115,8 +85,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   (`removeAllCountersFrom`, 2026-10-31; 616.1).
 - **Enlist leftovers.** Enlist ×N (702.154d) isn't built, and an attack tax paid by auto-tapping a
   mana creature is paid before enlist is asked, so it can tap the creature meant to be enlisted.
-- **A split card's two names aren't both compared.** `sameNameAsAny` (built 2026-10-31) compares
-  one name, so a split card's second name (rule 201.2a) never matches "the same name as".
 - **An optional non-mana cost paid as a permanent enters.** Ulamog's Despoiler's "As this
   creature enters, you may put two cards your opponents own from exile into their owners'
   graveyards. If you do, it enters with four +1/+1 counters" needs a choice and a cost inside an
@@ -156,14 +124,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   only because the step runs as the choosing player. The fix carries the binding into the
   `then`'s context.
 
-- **A spell filter's `targets` never matches a copy of a spell.** `spellTargetsMatch`
-  (filter.ts) returns false for any stack object whose `kind` isn't `"card"`, so a copy of a
-  spell (rule 707.10) that targets you, or a permanent, is never "a spell that targets you": Dawn
-  Charm's "counter target spell that targets you" and Shell of the Last Kappa's "exile target
-  instant or sorcery spell that targets you" can't be aimed at a copy, though a copy is a spell
-  (rule 707.10) with the copied targets. Found 2026-10-26 authoring Shell of the Last Kappa (B212).
-  The fix reads a copy's own `targets` the same way.
-
 - **Splice's limits.** Splice (rule 702.47, `CardDefinition.splice`, `Game.spliceFits` and
   `castSpellActions` in game.ts) is offered only onto a spell with one plain `effect` — not a
   modal (`castModal`), fused, divided or `resolve` spell, where the spliced text has no place to
@@ -173,44 +133,11 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   blue creature you control") isn't paid: `cost:splice-non-mana`. Found building splice
   (B202, 2026-10-26).
 
-- **Flashback never offers a split card's halves.** A split instant or sorcery in a graveyard
-  that has or gains flashback (Snapcaster Mage, Past in Flames — rule 702.34a) may be cast as
-  either half for that half's flashback cost (709.3: only the half cast is evaluated; Past in
-  Flames' "equal to its mana cost" is the half's). The flashback offer loop in
-  `Game.legalActions` (game.ts, "Flashback (rule 702.34)") casts `cardName` — the whole card,
-  face 0 — rather than each of `castableFaces`, so no half is offered, and the whole is
-  refused. Found 2026-10-26 while testing fuse (B173): nothing is cast wrongly, the cast is just
-  never offered. The fix offers each half with its own cost when the grant's cost is
-  `"mana-cost"`.
-
 - **A source of damage: a waiting effect's object and the command zone.** Rule 609.7a also allows
   an object a waiting replacement or prevention effect or a delayed trigger refers to, and a
   face-up object in the command zone. `chooseDamageSource` (game.ts) offers permanents, spells,
   and the departed source of an ability on the stack (picked by its stack entry), not those.
   No pool card is known to need them.
-- **A cast prohibition reads the card, not the face or half being cast.** `whyProhibitedFromCasting`
-  (`game.ts`) tests the card object's characteristics, so a split card's half (rule 709.3: Fire //
-  Ice's half has mana value 2), an Adventure (715.3), an MDFC's back face (712.11) or a bestowed
-  Aura spell is judged as the whole card. Found authoring Gaddock Teeg (batch 189,
-  `static:prohibit-cast-by-face`); unverified whether Archon of Valor's Reach and Nikya of the Old
-  Ways misjudge such spells today.
-- **A mana-value cast prohibition reads an X spell before X is chosen.** On the stack an X
-  spell's mana value counts the X chosen (rule 202.3e), and Sanctum Prelate's ruling has X
-  chosen before its mana value is checked. `whyProhibitedFromCasting` (game.ts) matches a
-  `prohibits.spells` filter against the card in hand, X as 0, so a `manaValue` prohibition bars
-  an X spell at every X or none. No pool card's prohibition reads mana value today; Sanctum
-  Prelate (`static:cant-cast-chosen-mana-value-with-x`, `B142.json`) waits on it.
-- **"Each player discards" isn't chosen in secret.** Rule 101.4: when every player makes a choice
-  at once, the active player chooses first, then the others in turn order, and then the choices
-  take effect together; the rulings of Miasmic Mummy, Neheb, the Worthy and Delirium Skeins add
-  "no one sees what the other players are discarding before deciding". A scoped `discard`
-  (`GameState.pendingDiscards`, drained by `promptNextDiscard`) asks one player at a time and
-  discards each player's cards before the next chooses, so a later player sees the earlier
-  discards, and each discard is its own event. **Fix (outline):** collect every scoped player's
-  choice first (rule 101.4's choose-then-act machinery, built for the Forgotten Realms set — batch
-  109), hidden from the others, then discard them all as one graveyard batch. Miasmic Mummy and
-  Neheb are in the pool on today's behaviour; blocks Delirium Skeins, Stronghold Rats and
-  Cunning Lethemancer (`effect:hidden-simultaneous-choices`). Found by an authoring agent, 2026-10-23 (B144).
 - **Blitz, dash, sneak, web-slinging and More Than Meets the Eye are offered only from the hand and the command zone.** (More Than Meets the Eye since 2026-11-07, Slicer: 702.162a lets it be cast from any zone the card may be cast from.) The same
   limit holds for sneak's and web-slinging's offers (`legalActions`' sneak and web-slinging loops,
   rules 702.190a and 702.188a allow any zone a card may be cast from). `Game.blitzCostOf` gates on
