@@ -257,7 +257,7 @@ import { chooseFromZone } from "./decisions/choose-from-zone.js";
 import { chooseModes } from "./decisions/choose-modes.js";
 import { chooseCreatureType } from "./decisions/choose-creature-type.js";
 import { chooseCardName } from "./decisions/choose-card-name.js";
-import { isNameableAs, namesOf } from "./card-names.js";
+import { isNameableAs, lastKnownNames, namesOf } from "./card-names.js";
 import { proliferate } from "./decisions/proliferate.js";
 import { splitMana } from "./decisions/split-mana.js";
 import { timeTravel } from "./decisions/time-travel.js";
@@ -34808,7 +34808,7 @@ export class Game {
         const it = this.state.objects[object];
         return it === undefined ? "That permanent" : printedCardName(it);
       },
-      nameForMatching: (object) => {
+      namesForMatching: (object) => {
         const it = this.state.objects[object];
         // A permanent gone since is named as it last existed (rule 608.2h): a
         // Clone that died a copy of Grizzly Bears was Grizzly Bears, and a
@@ -34816,7 +34816,7 @@ export class Game {
         const stint = stintOf(object);
         const gone =
           stint !== undefined ? this.lastKnownOfStint(object, stint) : it === undefined ? this.state.ceasedTokens?.[object] : undefined;
-        if (gone !== undefined) return gone.faceDown === true || gone.name === LOCKED_ROOM ? null : (gone.renamed ?? gone.name);
+        if (gone !== undefined) return lastKnownNames(this.registry, gone);
         // A spell this targeted, since gone from the stack: named as it was
         // there (608.2h), a modal double-faced card's back face being a name it
         // doesn't have in the graveyard (Tibalt's Trickery's ruling).
@@ -34826,10 +34826,9 @@ export class Game {
           it.lastOnStack !== undefined &&
           expectedZoneOf({ kind: "object", object }) === "stack"
         ) {
-          return it.lastOnStack.cardName;
+          return [it.lastOnStack.cardName];
         }
-        if (it === undefined || it.faceDown !== undefined || printedCardName(it) === LOCKED_ROOM) return null;
-        return nameOf(it);
+        return it === undefined ? [] : namesOf(this.registry, it);
       },
       explored: (result) =>
         this.emit({

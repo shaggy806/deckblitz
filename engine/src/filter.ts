@@ -635,7 +635,7 @@ export interface CardFilter {
   /** `sameNameAsTarget` / `sameNameAsTriggerObject` bound — written by `bindDynamicCompares`, never
    * authored: the target itself, and the name it has (`null` for none — a
    * face-down permanent, rule 708.2a — which nothing else shares, 201.2a). */
-  readonly sameNameAs?: { readonly object: ObjectId; readonly name: string | null };
+  readonly sameNameAs?: { readonly object: ObjectId; readonly names: readonly string[] };
   /**
    * Has (`true`) or doesn't have (`false`) the same name as the object
    * applying the filter — `FilterContext.source`, as it is now (rule 201.2a)
@@ -2158,7 +2158,7 @@ export function matchesFilter(
     // face-down permanent, or a Room with both doors locked (709.5) — and
     // one name in common is enough.
     const names = live !== undefined ? namesOf(registry, live) : lastKnownNames(registry, lki!);
-    if (filter.sameNameAs.name === null || !names.includes(filter.sameNameAs.name)) return false;
+    if (!names.some((n) => filter.sameNameAs!.names.includes(n))) return false;
     if (filter.sameNameTokensOnly === true && !(live !== undefined ? isTokenNow(live) : lki!.isToken)) return false;
   }
   if (filter.doubleFaced === true) {
@@ -2172,11 +2172,8 @@ export function matchesFilter(
   }
   if (filter.sameNameAsSource !== undefined) {
     const from = ctx.source === undefined ? undefined : state.objects[ctx.source];
-    const nameless =
-      live !== undefined ? live.faceDown !== undefined || name === LOCKED_ROOM : lki!.faceDown === true;
-    const fromNameless =
-      from === undefined || from.faceDown !== undefined || printedCardName(from) === LOCKED_ROOM;
-    const same = !nameless && !fromNameless && nameOf(from) === named;
+    const names = live !== undefined ? namesOf(registry, live) : lastKnownNames(registry, lki!);
+    const same = from !== undefined && namesOf(registry, from).some((n) => names.includes(n));
     if (same !== filter.sameNameAsSource) return false;
   }
   if (filter.sameNameWith !== undefined) {

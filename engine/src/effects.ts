@@ -10581,10 +10581,11 @@ export interface EffectApi {
   onBattlefield(object: ObjectId): boolean;
   /** `object`'s name, as a player sees it (a choice's text). */
   objectName(object: ObjectId): string;
-  /** `object`'s name as rule 201.2a compares names — a copy's, if one renamed
-   * it — or `null` when it has none (a face-down permanent, a Room with both
-   * doors locked). See `CardFilter.sameNameAsTarget`. */
-  nameForMatching(object: ObjectId): string | null;
+  /** `object`'s names as rule 201.2a compares them — a copy's, if one renamed
+   * it, either half's for a split card (709.4a) — none when it has none (a
+   * face-down permanent, a Room with both doors locked). See
+   * `CardFilter.sameNameAsTarget`. */
+  namesForMatching(object: ObjectId): readonly string[];
   /** See the `{ opponentsAttacked }` {@link EffectAmount}. */
   opponentsAttacked(): number;
   /** See the `{ attackingPlayer }` {@link EffectAmount}: creatures
@@ -14133,7 +14134,7 @@ export function signedAmountValue(
       const priced = ctx.priced;
       if (priced === undefined) return 0;
       return ctx.countInGraveyard(
-        { ...amount.countInGraveyard, sameNameAs: { object: priced, name: ctx.nameForMatching(priced) } },
+        { ...amount.countInGraveyard, sameNameAs: { object: priced, names: ctx.namesForMatching(priced) } },
         undefined,
         priced,
       );
@@ -15240,10 +15241,9 @@ export function bindDynamicCompares(spec: EffectSpec, ctx: ResolutionContext): E
       // and its name now — a face-down one has none (rule 201.2a) but still
       // matches itself. Every other reference is its names.
       if ((typeof reference === "number" || reference === "trigger-object") && objects.length === 1) {
-        walked = { ...rest, sameNameAs: { object: objects[0], name: ctx.nameForMatching(objects[0]) } };
+        walked = { ...rest, sameNameAs: { object: objects[0], names: ctx.namesForMatching(objects[0]) } };
       } else {
-        const names = objects.map((object) => ctx.nameForMatching(object)).filter((name): name is string => name !== null);
-        walked = { ...rest, sameNameAsAny: [...new Set(names)] };
+        walked = { ...rest, sameNameAsAny: [...new Set(objects.flatMap((object) => ctx.namesForMatching(object)))] };
       }
     }
     // "And each other … that shares a color with it" (radiance), Spreading
