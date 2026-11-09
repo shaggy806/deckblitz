@@ -77,7 +77,7 @@ describe("tap N untapped permanents as an additional cost", () => {
     expect(zone(game, gaze)).toBe("exile");
   });
 
-  it("the mana and the tap can't both use one land: any it needs for mana isn't on offer", () => {
+  it("the mana and the tap can't both use one land: a land is offered only if the mana is still paid without it", () => {
     const { game } = table();
     lands(game, "Plains", 3);
     const elite = toHand(game, "Warlord's Elite");
@@ -85,7 +85,8 @@ describe("tap N untapped permanents as an additional cost", () => {
     expect(castOffers(game, elite)).toHaveLength(0);
     lands(game, "Plains", 2);
     const [offer] = castOffers(game, elite);
-    expect(offer.tapCost?.choices.length).toBe(2);
+    // Five: any two tapped leave three for {2}{W} (rule 601.2h).
+    expect(offer.tapCost?.choices.length).toBe(5);
   });
 });
 
