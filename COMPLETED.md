@@ -3159,6 +3159,9 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Engine rules gaps
 
+- **Proliferate over a token stack** (2026-11-09, `d5cf8f8ef`): Proliferate chooses how many tokens of a stack get the counter: the offer's `copies`, the client's count menu (rule 701.34a). A driver naming a stack once now means one token.
+- **Distinct targets in one token stack** (2026-11-09, `f3986fd56`): "Another target" and any-number groups can take several tokens of one stack (`TargetFacts.stackSize`, rule 601.2c).
+- **A source of damage: a waiting effect's object and the command zone** (2026-11-09, `407d95124`): A source of damage can be a waiting effect's object or a command-zone object, picked from a popup (rule 609.7a). A referred object in a hand or library isn't offered: the client can't show it.
 - **Replacement order is chosen for the affected player, never asked** (2026-11-09, `8c46879a1`): The `replacement-order` decision (kind 32, rule 616.1): asked when the order changes the outcome; damage in combat and the `damage`, `damage-divided`, `damage-all`, `fight` and `destroy` effects. Open: counters (`counterTotal`), life gain, and damage the event can't wait on (pain from mana, redirected sub-events).
 - **"Enters untapped" always beats "enters tapped"** (2026-11-09, `e434c59d1`): The entering permanent's controller orders the two, by every entry through `askEnterChoice` (rule 616.1).
 - **Umbra armor's Aura is picked, and goes after the other shields** (2026-11-09, `eb62e8eb6`): What would save a permanent from destruction is its controller's choice, for destroy effects, mass destroy and lethal damage (rule 616.1).

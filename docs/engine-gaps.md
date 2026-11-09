@@ -87,11 +87,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   blue creature you control") isn't paid: `cost:splice-non-mana`. Found building splice
   (B202, 2026-10-26).
 
-- **A source of damage: a waiting effect's object and the command zone.** Rule 609.7a also allows
-  an object a waiting replacement or prevention effect or a delayed trigger refers to, and a
-  face-up object in the command zone. `chooseDamageSource` (game.ts) offers permanents, spells,
-  and the departed source of an ability on the stack (picked by its stack entry), not those.
-  No pool card is known to need them.
 - **Blitz, dash, sneak, web-slinging and More Than Meets the Eye are offered only from the hand and the command zone.** (More Than Meets the Eye since 2026-11-07, Slicer: 702.162a lets it be cast from any zone the card may be cast from.) The same
   limit holds for sneak's and web-slinging's offers (`legalActions`' sneak and web-slinging loops,
   rules 702.190a and 702.188a allow any zone a card may be cast from). `Game.blitzCostOf` gates on
@@ -133,14 +128,6 @@ per gap under the same bold title; when a gap closes, delete it here and move it
   a conceding player's own pending decision is answered by the server first. Not yet: a choice an
   effect would ask of a player who has already left (800.4g–h: the object's controller picks
   another player, or the next in turn order makes it) — the engine skips that player instead.
-- **Proliferate over a token stack.** A stack is one proliferate entry and every member gets the
-  counter; choosing some of them isn't built. See `docs/plans/token-stack-choices.md`.
-- **Distinct targets in one token stack.** An "another target" relation (`distinctTargets`, an
-  `any-number` group) names a stack once (`otherSlotConflict`, `slotOptions`), so "two target
-  creatures", Terastodon's three, Curse of the Swine's X or Pest Infestation's up to X can't take
-  two tokens of one stack (five Treasures in one stack are one target). Needs the relation checks
-  to allow a repeat up to `stackCount` and a client control for picking a stack more than once.
-  See `docs/plans/token-stack-choices.md`.
 **Panglacial Wurm under Opposition Agent.** The Agent's controller makes every decision while the player searches, but in `effects.ts`,
 `case "search-library"` offers `cast-now` (`from: "while-searching"`) before `ctx.searchLibrary`, and `Game.beginSearchControl` only starts
 in `beginLibrarySearch`, so the searcher answers. Fix: begin the control before the offer and end it when the search's `choose-from-zone`
