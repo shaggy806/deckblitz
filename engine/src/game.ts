@@ -36480,7 +36480,12 @@ controlledBy,
           if (linked && card.exiledFaceDown !== undefined) card.exiledFaceDown = undefined;
         }
       },
-      countMatching: (filter, except, you) => this.countBattlefieldMatching(you ?? controller, filter, except, source),
+      countMatching: (filter, except, you) => {
+        const gone = filter.attachedTo?.isSource === true ? departedSource() : undefined;
+        return gone !== undefined
+          ? this.countAttachedToDeparted(you ?? controller, filter, gone, source, except)
+          : this.countBattlefieldMatching(you ?? controller, filter, except, source);
+      },
       // "Among them": the attackers of the declaration that fired this
       // trigger, as `AggregateZone` "attackers" reads them.
       aggregate: (spec, except, you = controller, each) =>
@@ -45747,6 +45752,32 @@ controlledBy,
       (id) => matchesFilter(this.state, this.registry, id, filter, ctx),
       except,
     ).reduce((n, m) => n + m.weight, 0);
+  }
+
+  /**
+   * "For each Equipment attached to [this]" when this has left: rule 608.2h
+   * reads it as it last existed, so what's counted is what was attached then
+   * (`LastKnownInfo.attachments`), however each has fared since — an Equipment
+   * unattached where it stands (704.5n), an Aura read as it last existed from
+   * a graveyard (704.5m).
+   */
+  private countAttachedToDeparted(
+    you: PlayerId,
+    filter: CardFilter,
+    gone: LastKnownInfo,
+    source: ObjectId,
+    except: readonly ObjectId[] = [],
+  ): number {
+    const { attachedTo: host, ...rest } = filter;
+    if (host !== undefined && !matchesFilter(this.state, this.registry, source, host, { you, source, snapshot: gone })) {
+      return 0;
+    }
+    return (gone.attachments ?? []).filter(({ object, stint }) => {
+      if (except.includes(object)) return false;
+      const was = this.lastKnownOfStint(object, stint);
+      if (was === undefined && this.state.objects[object]?.zone !== "battlefield") return false;
+      return matchesFilter(this.state, this.registry, object, rest, { you, source, ...(was !== undefined ? { snapshot: was } : {}) });
+    }).length;
   }
 
   /** A sum or maximum over the permanents matching `spec.filter` from
