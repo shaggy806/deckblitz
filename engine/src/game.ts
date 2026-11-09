@@ -6126,6 +6126,13 @@ export class Game {
     return pinned;
   }
 
+  /** "All other …": the one token of a stack that's left out, its fellows
+   * being others (a stack is a representation, so it may not change a
+   * result). The id to compare a mass effect's matches against. */
+  private oneTokenSpared(id: ObjectId): ObjectId {
+    return this.state.objects[id]?.zone === "battlefield" ? this.splitOneFromStack(id) : id;
+  }
+
   /** If `id` names a compacted token stack (`stackCount > 1`), peel exactly
    * one member off into its own ordinary object — decrementing the stack
    * (clearing the field entirely once it drops to 1) — and return the new
@@ -35138,16 +35145,18 @@ export class Game {
           },
         );
       },
-      eachPermanentMatching: (filter, exceptSource, except, scopeTo) =>
-        this.battlefieldMatching(scopeTo ?? controller, filter, x, source)
-          .filter((id) => !(exceptSource && id === source) && !except.includes(id))
+      eachPermanentMatching: (filter, exceptSource, except, scopeTo) => {
+        const sparedSource = exceptSource ? this.oneTokenSpared(source) : undefined;
+        return this.battlefieldMatching(scopeTo ?? controller, filter, x, source)
+          .filter((id) => id !== sparedSource && !except.includes(id))
           // Each token of a stack is an object of its own (rule 700.3b); past
           // the cap the rest of a stack stays together, one unit.
           .flatMap((id) => {
             const parts = this.materializeStack(id);
             return parts.includes(id) ? parts : [...parts, id];
           })
-          .map((object) => ({ object, stint: this.state.objects[object].zoneChangeCount ?? 0 })),
+          .map((object) => ({ object, stint: this.state.objects[object].zoneChangeCount ?? 0 }));
+      },
       tappedNow: (target) => {
         const found = target.kind === "object" ? this.state.objects[target.object] : undefined;
         return found?.zone === "battlefield" ? found.tapped : undefined;
@@ -36194,11 +36203,11 @@ export class Game {
           filter,
           untilEndOfTurn,
           who,
-          exceptSource ? source : undefined,
-          controlledBy,
+          exceptSource ? this.oneTokenSpared(source) : undefined,
+controlledBy,
         ),
       rotateControl: (filter, direction, exceptSource) =>
-        this.rotateControlByEffect(controller, filter, direction, exceptSource ? source : undefined),
+        this.rotateControlByEffect(controller, filter, direction, exceptSource ? this.oneTokenSpared(source) : undefined),
       giveControlTogether: (moves) => this.giveControlTogether(moves),
       exchangeControl: (first, second) => this.exchangeControl(first, second),
       exchangeControlAll: (filter, other, untilEndOfTurn) =>
@@ -36342,7 +36351,7 @@ export class Game {
           power,
           toughness,
           lastingHere(duration),
-          exceptSource === true ? source : undefined,
+          exceptSource === true ? this.oneTokenSpared(source) : undefined,
         ),
       grantToxic: (on, amount, duration, exceptSource) => {
         const lasting = lastingHere(duration);
@@ -36356,8 +36365,9 @@ export class Game {
         } else {
           // One effect, one timestamp (rule 613.7b), over what matches now.
           const timestamp = this.freshTimestamp();
+          const sparedSource = exceptSource === true ? this.oneTokenSpared(source) : undefined;
           for (const id of this.battlefieldMatching(controller, on as CardFilter)) {
-            if (exceptSource === true && id === source) continue;
+            if (id === sparedSource) continue;
             grant(id, timestamp);
           }
         }
@@ -36387,8 +36397,9 @@ export class Game {
         const first = on.target?.kind === "object" ? this.splitOneFromStack(on.target.object) : undefined;
         if (first !== undefined) grant(first);
         if (on.filter !== undefined) {
+          const sparedSource = on.exceptSource === true ? this.oneTokenSpared(source) : undefined;
           for (const id of this.battlefieldMatching(controller, on.filter)) {
-            if (id === first || (on.exceptSource === true && id === source)) continue;
+            if (id === first || id === sparedSource) continue;
             grant(id);
           }
         }
@@ -36400,10 +36411,10 @@ export class Game {
           filter,
           keyword,
           lastingHere(duration),
-          exceptSource === true ? source : undefined,
+          exceptSource === true ? this.oneTokenSpared(source) : undefined,
         ),
       doublePtAll: (filter, duration, powerOnly, exceptSource) =>
-        this.doublePtAll(controller, filter, lastingHere(duration), powerOnly, exceptSource ? source : undefined),
+        this.doublePtAll(controller, filter, lastingHere(duration), powerOnly, exceptSource ? this.oneTokenSpared(source) : undefined),
       doubleCountersAll: (filter, counterKind) =>
         this.doubleCountersAll(controller, filter, counterKind),
       connived: (object, player, nonland) => this.emit({ type: "connived", object, player, nonland }),
@@ -37211,8 +37222,9 @@ export class Game {
         // and mutate the battlefield array underneath the loop. With
         // "equal to that creature's toughness", every count is read before
         // any counter goes on.
+        const sparedSource = exceptSource === true ? this.oneTokenSpared(source) : undefined;
         const each = this.battlefieldMatching(scopeTo ?? controller, filter)
-          .filter((id) => (exceptSource !== true || id !== source) && id !== except)
+          .filter((id) => id !== sparedSource && id !== except)
           .map((id) => ({
             id,
             n: amount === "own-toughness" ? this.characteristics(id).toughness : amount,
@@ -38287,8 +38299,9 @@ export class Game {
         seat.extraLandsThisTurn = (seat.extraLandsThisTurn ?? 0) + amount;
       },
       untapAll: (filter, scopeTo, exceptSource) => {
+        const sparedSource = exceptSource === true ? this.oneTokenSpared(source) : undefined;
         for (const id of this.battlefieldMatching(scopeTo ?? controller, filter)) {
-          if (exceptSource === true && id === source) continue;
+          if (id === sparedSource) continue;
           this.untapUnlessStunned(id);
         }
       },
@@ -38348,8 +38361,9 @@ export class Game {
         // token stack changes whole, like any mass effect's.
         const timestamp = this.freshTimestamp();
         const kept = lastingHere(duration);
+        const sparedSource = exceptSource === true ? this.oneTokenSpared(source) : undefined;
         for (const id of this.battlefieldMatching(scopeTo ?? controller, filter)) {
-          if (exceptSource === true && id === source) continue;
+          if (id === sparedSource) continue;
           this.become({ kind: "object", object: id }, patch, kept, false, timestamp);
         }
       },
@@ -47110,8 +47124,9 @@ export class Game {
   ): void {
     // With the source, for a filter about it: "equipped creature" (Hand of
     // Vecna's `hostOfSource`), "attached to this".
+    const sparedSource = exceptSource ? this.oneTokenSpared(source) : undefined;
     const matching = this.battlefieldMatching(player, filter, x, source).filter(
-      (id) => (!exceptSource || id !== source) && !except.includes(id),
+      (id) => id !== sparedSource && !except.includes(id),
     );
     const together = togetherRule === undefined ? undefined : this.searchTogether(togetherRule, matching, player, x);
     const eligible = eligibleForTogether(together, matching);
@@ -48038,9 +48053,8 @@ export class Game {
       damagedBy === undefined
         ? null
         : (this.state.objects[damagedBy]?.combatDamagedPlayersThisTurn ?? []);
-    // "All other": one token of a stack is the one left, its fellows are others.
     const spared =
-      except !== undefined && this.state.objects[except]?.zone === "battlefield" ? this.splitOneFromStack(except) : undefined;
+      except === undefined ? undefined : this.oneTokenSpared(except);
     for (const id of [...this.state.zones.shared.battlefield]) {
       if (id === spared) continue;
       if (
@@ -48071,8 +48085,12 @@ export class Game {
      * linked to, counted on the source as `exile`'s `linked` does. */
     linkedTo?: { readonly source: ObjectId; readonly zoneChangeCount: number },
   ): void {
+    const spared = except === undefined ? undefined : this.oneTokenSpared(except);
+    // A source that was split off to be spared is that one token from here.
+    if (spared !== undefined && until?.source === except) until = { ...until, source: spared };
+    if (spared !== undefined && linkedTo?.source === except) linkedTo = { ...linkedTo, source: spared };
     this.withLeaveBatch(() => {
-      const victims = this.battlefieldMatching(you, filter).filter((id) => id !== except);
+      const victims = this.battlefieldMatching(you, filter).filter((id) => id !== spared);
       this.snapshotLeaving(victims);
       for (const id of victims) {
         const before = this.state.objects[id]?.zoneChangeCount;
@@ -48162,6 +48180,7 @@ export class Game {
     whose?: readonly PlayerId[],
   ): void {
     if (amount <= 0) return;
+    if (exceptSource) source = this.oneTokenSpared(source);
     this.withDamageBatch(() => {
       for (const id of [...this.state.zones.shared.battlefield]) {
         if (exceptSource && id === source) continue;
@@ -48220,8 +48239,9 @@ export class Game {
     if (amount !== "its-power" && amount <= 0) return;
     if (to !== "itself" && to !== "host" && to.length === 0) return;
     const dealing: { readonly id: ObjectId; readonly amount: number }[] = [];
+    const sparedSource = dealers.exceptSource ? this.oneTokenSpared(source) : undefined;
     for (const id of this.state.zones.shared.battlefield) {
-      if (dealers.exceptSource && id === source) continue;
+      if (id === sparedSource) continue;
       if (id === dealers.except) continue;
       if (dealers.whose !== undefined && this.state.objects[id].controller !== dealers.whose) continue;
       if (!matchesFilter(this.state, this.registry, id, dealers.filter, { you })) continue;
