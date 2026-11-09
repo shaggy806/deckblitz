@@ -17023,8 +17023,8 @@ export class Game {
    * exiled pays one generic, X's included), at least `floor`  or `floor`
    * for a spell without delve. Delving the most it may is never worse, so
    * each X is tried with every card it could exile; dearer monotonically in
-   * X, so binary-searched. Not combined with convoke: a spell with both
-   * reaches the better of the two alone.
+   * X, so binary-searched. A spell with convoke too is worked out beside it,
+   * in `xPlanByConvoke`.
    */
   private maxXByDelve(
     player: PlayerId,
@@ -17071,6 +17071,10 @@ export class Game {
     manaOnly: number,
   ): { maxX: number; convoke: PaidConvoke[] } {
     if (!this.tapsToPay(def, cardId, player)) return { maxX: manaOnly, convoke: [] };
+    // Delve beside it (Chord of Calling under Teval): the creatures tap
+    // first, for the colours only they can pay, then the graveyard pays what
+    // generic is left (rules 702.51a, 702.66a).
+    const delve = this.delvePoolFor(player, def, cardId);
     return this.withFace(cardId, face, () => {
       const purpose: ManaPurpose = { kind: "cast", card: cardId, ...castPaying(undefined, costString) };
       const payable = (k: number, pool: readonly ObjectId[]): PaidConvoke[] | null => {
@@ -17078,7 +17082,11 @@ export class Game {
         const proof = this.maxConvokeFor(pool, cost, def, cardId, player);
         const arrangement =
           proof.length > 0 ? { withheld: new Set(proof.map((p) => p.creature)) } : undefined;
-        const rest = proof.length > 0 ? this.reduceCostByConvoke(cost, proof) : cost;
+        const tapped = proof.length > 0 ? this.reduceCostByConvoke(cost, proof) : cost;
+        const rest =
+          delve.length > 0 && pool.length > 0
+            ? this.reduceCostByDelve(tapped, delve.slice(0, this.delveReach(delve, tapped.generic, def)), def)
+            : tapped;
         return this.payMana(player, rest, undefined, undefined, purpose, arrangement) === null
           ? null
           : proof;
@@ -17099,7 +17107,10 @@ export class Game {
         let proof = payable(lo, pool);
         if (proof === null) continue;
         // A stack convokes once per token.
-        const hi0 = manaCap + pool.reduce((n, id) => n + (this.state.objects[id].stackCount ?? 1), 0);
+        const hi0 =
+          manaCap +
+          pool.reduce((n, id) => n + (this.state.objects[id].stackCount ?? 1), 0) +
+          delve.length * Math.max(1, def.additionalCost?.exileFromHandReduces?.each ?? 1);
         let hi = Math.max(lo, hi0);
         while (lo < hi) {
           const mid = Math.ceil((lo + hi) / 2);

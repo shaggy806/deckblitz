@@ -101,6 +101,34 @@ describe("convoke paying for X — Chord of Calling", () => {
     expect(game.state.objects[bears].zone).toBe("battlefield");
   });
 
+  it("with delve beside it, X reaches what the creatures and the graveyard pay together (Teval)", () => {
+    const game = mkGame();
+    forests(game, 3);
+    spawn(game, "Teval, Arbiter of Virtue");
+    const angels = [spawn(game, "Serra Angel"), spawn(game, "Serra Angel")];
+    const yard = Array.from({ length: 3 }, () => game.debugSpawn("Island", A, "graveyard"));
+    const chord = game.debugSpawn("Chord of Calling", A, "hand");
+
+    // GGG from the Forests; 3 creatures (Teval too) and 3 cards for X.
+    const offer = castOffer(game, chord);
+    expect(offer?.xCost?.maxX).toBe(6);
+    expect(offer?.delve?.byX?.[6]).toMatchObject({ minCards: 3, maxCards: 3 });
+
+    const teval = game.state.zones.shared.battlefield.find((id) => game.state.objects[id].cardName.startsWith("Teval"))!;
+    game.dispatch({
+      type: "cast-spell",
+      player: A,
+      card: chord,
+      targets: [],
+      xValue: 6,
+      convoke: [...angels, teval].map((creature) => ({ creature })),
+      delve: yard,
+    });
+    expect(game.state.objects[chord].zone).toBe("stack");
+    expect(game.state.objects[chord].xValue).toBe(6);
+    for (const id of yard) expect(game.state.objects[id].zone).toBe("exile");
+  });
+
   it("offers X as far as the creatures that could convoke reach", () => {
     const game = mkGame();
     forests(game, 3);
