@@ -220,7 +220,12 @@ describe("counters put on a whole stack are put on each token in it", () => {
     cast(game, A, "Contentious Plan");
     for (let i = 0; i < 20 && game.state.awaiting?.kind !== "proliferate"; i += 1) pass(game);
     const stack = stackOf(game, WARRIOR);
-    game.dispatch({ type: "proliferate", player: A, chosen: [{ kind: "object", object: stack }] });
+    // Each token named: the answer names a stack once per token it reaches.
+    game.dispatch({
+      type: "proliferate",
+      player: A,
+      chosen: Array.from({ length: 10 }, () => ({ kind: "object", object: stack }) as const),
+    });
     resolveStack(game);
 
     expect(stackOf(game, WARRIOR)).toBe(stack);
