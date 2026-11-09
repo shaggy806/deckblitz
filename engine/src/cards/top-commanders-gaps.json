@@ -2159,7 +2159,9 @@
   "effect:move-auras-to-chosen-permanent",
   "effect:attach-aura-to-land-chosen-by-player",
   "effect:attach-chosen-by-other-player",
-  "effect:player-cant-gain-life-bound"
+  "effect:player-cant-gain-life-bound",
+  "amount:scavenge-power-in-graveyard",
+  "cost:exile-from-graveyard-filter-x"
  ],
  "features": {
   "bug:as-enters-choices-any-entry": {

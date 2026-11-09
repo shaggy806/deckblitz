@@ -339,6 +339,8 @@ import {
   manaValueOfObject,
   creaturesBlocking,
   ownManaCostOf,
+  filterAtX,
+  filterReadsX,
   matchesFilter,
   ownerOnly,
   printedManaCost,
@@ -3951,7 +3953,10 @@ export class Game {
       const exileX =
         ability.cost.exileFromGraveyard?.count === "x"
           ? this.graveyardCostCandidates(player, ability.cost.exileFromGraveyard.filter, source).length
-          : undefined;
+          : ability.cost.exileFromGraveyard?.filter !== undefined && filterReadsX(ability.cost.exileFromGraveyard.filter)
+            ? // "An artifact card with mana value X": checked at each X below.
+              Math.max(0, ...this.state.zones.perPlayer[player].graveyard.map((id) => manaValueOfObject(this.registry, this.state.objects[id])))
+            : undefined;
       // "Discard X cards": as many as there are to discard. "A card with
       // mana value X": up to the largest there is.
       const discardX =
@@ -4132,9 +4137,16 @@ export class Game {
       // offered once per X too.
       const tapsX = ability.cost.tapOthers?.count === "x";
       const discardAtX = ability.cost.discard?.manaValueX === true ? ability.cost.discard : undefined;
+      const graveyardExile = ability.cost.exileFromGraveyard;
+      const exileAtX = graveyardExile?.filter !== undefined && filterReadsX(graveyardExile.filter) ? graveyardExile : undefined;
       if (
         maxX !== undefined &&
-        (taxed || tapsX || discardAtX !== undefined || ability.targets.some(targetSpecReadsX) || groupReadsX(ability.targets))
+        (taxed ||
+          tapsX ||
+          discardAtX !== undefined ||
+          exileAtX !== undefined ||
+          ability.targets.some(targetSpecReadsX) ||
+          groupReadsX(ability.targets))
       ) {
         // "Target Saga card with mana value X": what may be targeted depends
         // on X, so the ability is offered once per X that has a legal set of
@@ -4153,6 +4165,10 @@ export class Game {
             this.discardCandidates(player, discardCostFilterAtX(discardAtX, x), source).length < (discardAtX.count === "x" ? x : discardAtX.count)
           ) {
             continue;
+          }
+          if (exileAtX !== undefined) {
+            const { count, filter } = this.graveyardExileCostAt(player, exileAtX, x);
+            if (this.graveyardCostCandidates(player, filter, source).length < count) continue;
           }
           const specs = this.activatedSpecsAt(ability.targets, source, player, x);
           const all = this.targetOptionsFor(specs, player, this.permanentSource(source, x));
@@ -23369,13 +23385,14 @@ export class Game {
       if (ability.cost.discard !== undefined || ability.cost.returnToHand !== undefined || sacrificeParts !== null) {
         return `${def.name}'s ability can't ask for two cost choices at once yet`;
       }
-      const { count, filter, singleGraveyard } = ability.cost.exileFromGraveyard;
+      const { count, filter: written, singleGraveyard } = ability.cost.exileFromGraveyard;
       const n =
         count === "x"
           ? (x ?? ability.minX ?? 0)
           : count === "opponents"
             ? this.scopedPlayers(player, "each-opponent").length
             : count;
+      const filter = written === undefined ? undefined : filterAtX(written, x ?? ability.minX ?? 0);
       if (singleGraveyard === true) {
         if (this.singleGraveyardCostCandidates(player, n, filter, sourceId).length < n) {
           return `no graveyard has enough cards to pay ${def.name}'s cost`;
@@ -24656,7 +24673,8 @@ export class Game {
   ): { count: number; filter?: CardFilter; fromTop?: true; singleGraveyard?: true } {
     return {
       count: cost.count === "x" ? x : cost.count === "opponents" ? this.scopedPlayers(player, "each-opponent").length : cost.count,
-      ...(cost.filter !== undefined ? { filter: cost.filter } : {}),
+      // "An artifact card with mana value X": the X announced (rule 107.3a).
+      ...(cost.filter !== undefined ? { filter: filterAtX(cost.filter, x) } : {}),
       ...(cost.fromTop === true ? { fromTop: true as const } : {}),
       ...(cost.singleGraveyard === true ? { singleGraveyard: true as const } : {}),
     };
