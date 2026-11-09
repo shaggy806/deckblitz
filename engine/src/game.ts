@@ -17611,7 +17611,7 @@ export class Game {
     // spell (rule 709.3), so "spells with the chosen name" reads its name;
     // cast bestowed it's an Aura spell, not a creature spell (702.103b).
     const prohibited = this.withBestowed(cardId, overload === true && def.overload?.keyword === "bestow", () =>
-      this.withFace(cardId, face, () => this.whyProhibitedFromCasting(player, cardId, def)),
+      this.withFace(cardId, face, () => this.whyProhibitedFromCasting(player, cardId, def, xValue)),
     );
     if (prohibited !== null) return prohibited;
     // A flip card is cast as its normal half only (rule 710.2): its
@@ -44782,7 +44782,7 @@ controlledBy,
    * cast" prohibition this turn or from a static, or the card's own
    * `castOnlyIf`. `null` if none.
    */
-  private whyProhibitedFromCasting(player: PlayerId, cardId: ObjectId, def: CardDefinition): string | null {
+  private whyProhibitedFromCasting(player: PlayerId, cardId: ObjectId, def: CardDefinition, xValue?: number): string | null {
     for (const id of this.state.zones.shared.stack) {
       const spell = this.state.objects[id];
       if (id === cardId || spell?.kind !== "card") continue;
@@ -44799,7 +44799,8 @@ controlledBy,
       if (unless === "sorcery-timing" && this.whyNotSorcerySpeed(player, `cast ${def.name}`) === null) continue;
       if (unless === "own-turn" && this.activePlayer === player) continue;
       if (!this.prohibitionReachesZone(prohibition, cardId)) continue;
-      const context = { you: source.controller, source: source.id };
+      // A spell's X counts in its mana value once chosen (rule 202.3e).
+      const context = { you: source.controller, source: source.id, ...(xValue !== undefined ? { castX: xValue } : {}) };
       if (filter !== undefined && !matchesFilter(this.state, this.registry, cardId, filter, context)) continue;
       // "Can't cast more than one spell each turn" (Rule of Law): only once
       // they've cast that many, each read as it was cast.

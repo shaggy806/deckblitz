@@ -12,7 +12,7 @@ import { defineCard } from "../cards/define.js";
 import { createDefaultRegistry } from "../cards/registry.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
-import { A, lands, spawn, table, toHand } from "./harness.js";
+import { A, B, lands, spawn, table, toHand } from "./harness.js";
 
 const NO_BIG = "Spells with mana value 4 or greater can't be cast.";
 const gate = defineCard({
@@ -53,6 +53,19 @@ describe("a cast prohibition reads the face or half being cast", () => {
     const card = toHand(game, "Bonecrusher Giant");
     const faces = castsOf(game, card).map((a) => a.face ?? 0);
     expect(faces).toEqual([0]);
+  });
+
+  it("an X spell's mana value counts the X chosen (202.3e): Blaze at X=3 is mana value 4", () => {
+    const { game } = table({ registry: createDefaultRegistry().register(gate) });
+    flooded(game);
+    spawn(game, "Test Mana Gate");
+    const blaze = toHand(game, "Blaze");
+    const at = (x: number): string | null =>
+      game.canDispatch({ type: "cast-spell", player: A, card: blaze, targets: [{ kind: "player", player: B }], xValue: x });
+    expect(at(2)).toBeNull();
+    expect(at(3)).toMatch(/can't cast/);
+    expect(at(4)).toMatch(/can't cast/);
+    expect(castsOf(game, blaze).map((a) => a.xValue)).toEqual(expect.not.arrayContaining([3, 4]));
   });
 
   it("Nikya: a bestowed Aura spell is a noncreature spell, the creature can still be cast", () => {
