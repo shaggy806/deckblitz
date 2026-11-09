@@ -1785,6 +1785,34 @@ function castableFaces(def: CardDefinition): readonly (number | undefined)[] {
   return def.faces.flatMap((_n, i) => (def.split && i === 0 ? [] : [i]));
 }
 
+/** The most sets of picks `tapCostOffer` tries for one candidate. */
+const TAP_CHOICE_TRIALS = 64;
+
+/** Whether `test` holds of every `size`-element subset of `items` — no past
+ * `trials` of them, without finding out. */
+function everySubsetHolds<T>(
+  items: readonly T[],
+  size: number,
+  trials: number,
+  test: (subset: readonly T[]) => boolean,
+): boolean {
+  let left = trials;
+  const walk = (from: number, chosen: T[]): boolean => {
+    if (chosen.length === size) {
+      left -= 1;
+      return left >= 0 && test(chosen);
+    }
+    for (let i = from; i <= items.length - (size - chosen.length); i += 1) {
+      chosen.push(items[i]);
+      const holds = walk(i + 1, chosen);
+      chosen.pop();
+      if (!holds) return false;
+    }
+    return true;
+  };
+  return walk(0, []);
+}
+
 interface ManaSourceArrangement {
   readonly first?: ReadonlySet<ObjectId>;
   readonly last?: ReadonlySet<ObjectId>;
@@ -41805,6 +41833,7 @@ export class Game {
       readonly filter: CardFilter;
       readonly includeSelf?: boolean;
       readonly shareCreatureType?: true;
+      readonly perExtraMode?: true;
     },
     manaCost: ManaCost,
     avoid: ObjectId | undefined,
@@ -41821,7 +41850,21 @@ export class Game {
     });
     if (plan === null) return null;
     const used = new Set(plan.steps.map((step) => step.source));
-    const unused = candidates.filter((id) => !used.has(id));
+    const unused = [...candidates.filter((id) => !used.has(id))];
+    // Rule 601.2h: the parts of a cost are paid in any order, so a candidate
+    // the plan taps is a choice too, if the mana can be paid with whatever
+    // else is picked beside it. Any `count` of them still has to leave the
+    // mana payable: each subset with a new one in it is tried. Not for a pick
+    // with no set size (`perExtraMode`), or one token out of a stack.
+    if (spec.perExtraMode !== true) {
+      for (const id of candidates) {
+        if (!used.has(id) || (this.state.objects[id].stackCount ?? 1) > 1) continue;
+        const picks = spec.totalPower !== undefined || spec.anyNumber === true ? unused.length + 1 : spec.count;
+        const payable = (rest: readonly ObjectId[]): boolean =>
+          this.payMana(player, manaCost, avoid, exclude, purpose, { withheld: new Set([id, ...rest]) }) !== null;
+        if (everySubsetHolds(unused, picks - 1, TAP_CHOICE_TRIALS, payable)) unused.push(id);
+      }
+    }
     const allCopies: Record<ObjectId, number> = {};
     for (const id of unused) {
       const n = this.state.objects[id].stackCount ?? 1;
