@@ -11,7 +11,7 @@ import { describe, expect, it } from "vitest";
 import { computeCharacteristics } from "../characteristics.js";
 import type { Game } from "../game.js";
 import type { ObjectId } from "../primitives.js";
-import { A, B, activate, cast, lands, life, nextTurn, pickPermanents, ref, registryOf, spawn, table, toHand } from "./harness.js";
+import { A, B, activate, cast, lands, life, nextTurn, pickPermanents, ref, registryOf, settle, spawn, table, toHand } from "./harness.js";
 
 const colorsOf = (game: Game, id: ObjectId): string[] =>
   [...computeCharacteristics(game.state, registryOf(game), id).colors].sort();
@@ -126,7 +126,7 @@ describe("become-color", () => {
     expect(colorsOf(game, lions)).toEqual(["W"]);
   });
 
-  it("a spell on the stack changes colour, and the permanent it becomes has its own", () => {
+  it("a spell on the stack changes colour, and the permanent it becomes keeps it (400.7a)", () => {
     const { game } = table();
     lands(game, "Forest", 2);
     lands(game, "Swamp", 1);
@@ -141,6 +141,22 @@ describe("become-color", () => {
     game.dispatch({ type: "pass-priority", player: A });
     game.dispatch({ type: "pass-priority", player: B });
     expect(game.state.objects[bears].zone).toBe("battlefield");
+    expect(colorsOf(game, bears)).toEqual(["B"]);
+    nextTurn(game);
+    nextTurn(game);
+    expect(colorsOf(game, bears)).toEqual(["B"]); // Deathlace sets no end.
+  });
+
+  it("'until end of turn' on a permanent spell ends on the permanent (Blind Seer's ruling, 400.7a)", () => {
+    const { game } = table();
+    lands(game, "Forest", 2);
+    const bears = toHand(game, "Grizzly Bears");
+    cast(game, bears, { settle: false });
+    game.debugApplyEffect(A, { kind: "become", target: 0, setColors: ["U"], duration: "end-of-turn" }, [ref(bears)]);
+    settle(game);
+    expect(game.state.objects[bears].zone).toBe("battlefield");
+    expect(colorsOf(game, bears)).toEqual(["U"]);
+    nextTurn(game);
     expect(colorsOf(game, bears)).toEqual(["G"]);
   });
 });

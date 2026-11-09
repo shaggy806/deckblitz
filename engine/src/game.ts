@@ -45462,15 +45462,16 @@ export class Game {
     const id = split ? this.splitOneFromStack(target.object) : target.object;
     const object = this.state.objects[id];
     if (object === undefined || !durationBegins(object, duration)) return;
-    // A permanent, or a spell whose colours alone change (`moveObject` clears
-    // modifiers as it leaves the stack).
-    const onlyColors = changesOnlyColors(patch);
-    if (object.zone !== "battlefield" && !(onlyColors && object.zone === "stack" && object.kind === "card")) return;
+    // A permanent, or a spell whose colours alone change, which go with it
+    // onto the battlefield (rule 400.7a: a `castRider`).
+    const onStack = changesOnlyColors(patch) && object.zone === "stack" && object.kind === "card";
+    if (object.zone !== "battlefield" && !onStack) return;
     object.modifiers.push({
       // Ordered against type-granting and P/T-setting statics, and in layer 6
       // against keyword grants (rule 613.7).
       timestamp: timestamp ?? this.freshTimestamp(),
       ...patchModifier(patch, grantableKeywords(this.state, this.registry, object, patch.keywords ?? [])),
+      ...(onStack ? { castRider: true as const } : {}),
       ...durationFields(duration),
     });
     invalidateComputedCache();
@@ -45487,7 +45488,7 @@ export class Game {
           ? { replaces: true as const }
           : {}),
       });
-    } else if (onlyColors) {
+    } else if (changesOnlyColors(patch)) {
       this.emit({
         type: "color-changed",
         object: id,
