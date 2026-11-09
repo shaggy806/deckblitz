@@ -1324,6 +1324,12 @@ export type GameEvent =
       readonly target: ObjectId;
     })
   | (Base & {
+      /** An Aura moved onto a player (rule 303.4): a Curse. */
+      readonly type: "permanent-attached-to-player";
+      readonly source: ObjectId;
+      readonly player: PlayerId;
+    })
+  | (Base & {
       readonly type: "damage-dealt";
       /** How many identical sources dealt it, each `amount / sources`: an
        * unblocked token stack attacking as one counted object (`Game.

@@ -44610,6 +44610,7 @@ controlledBy,
       this.state.timestampSeq += 1;
       aura.timestamp = this.state.timestampSeq;
       invalidateComputedCache();
+      this.emit({ type: "permanent-attached-to-player", source, player: target.player });
       return;
     }
     const targetId = this.splitOneFromStack(target.object);

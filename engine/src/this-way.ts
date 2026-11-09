@@ -366,7 +366,9 @@ export function thisWayEntries(
         break;
       case "attached":
         // Whose: the attachment's controller, as it was attached.
-        if (event.type === "permanent-attached") add(event.source, state.objects[event.source]?.controller, false);
+        if (event.type === "permanent-attached" || event.type === "permanent-attached-to-player") {
+          add(event.source, state.objects[event.source]?.controller, false);
+        }
         break;
       case "unattached-from":
         if (event.type === "permanent-unattached") add(event.from, state.objects[event.from]?.controller, false);
