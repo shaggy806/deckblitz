@@ -51,6 +51,7 @@ import _poolArenaAthlete from "../pool/arena-athlete.js";
 import _poolArgentDais from "../pool/argent-dais.js";
 import _poolArmoredCancrix from "../pool/armored-cancrix.js";
 import _poolArterialFlow from "../pool/arterial-flow.js";
+import _poolAscendFromAvernus from "../pool/ascend-from-avernus.js";
 import _poolAshesOfTheFallen from "../pool/ashes-of-the-fallen.js";
 import _poolAshnodsIntervention from "../pool/ashnods-intervention.js";
 import _poolAtraxaPraetorsVoice from "../pool/atraxa-praetors-voice.js";
@@ -1115,6 +1116,7 @@ const shard: CardShard = {
     _poolArgentDais,
     _poolArmoredCancrix,
     _poolArterialFlow,
+    _poolAscendFromAvernus,
     _poolAshesOfTheFallen,
     _poolAshnodsIntervention,
     _poolAtraxaPraetorsVoice,

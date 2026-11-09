@@ -1742,12 +1742,19 @@ function planManaPaymentOrdered(
     }
     return out;
   })();
+  // Kept for the whole plan: a source's options don't change, and `byKeep` asks
+  // about every source for every unit of generic (80 Treasures and an {X} spell
+  // spent seconds here, 2026-11-09).
+  const made = new Map<ManaSource, Set<ManaType>>();
   const makesOf = (src: ManaSource): Set<ManaType> => {
+    const known = made.get(src);
+    if (known !== undefined) return known;
     const makes = new Set<ManaType>();
     for (const o of src.options) {
       for (const m of o.fixed) makes.add(m);
       if (o.anyColor > 0) for (const m of o.anyColorOf ?? COLORS) makes.add(m);
     }
+    made.set(src, makes);
     return makes;
   };
   // How many sources this payment leaves making each colour: a colour wanted
@@ -1755,15 +1762,21 @@ function planManaPaymentOrdered(
   // twenty Islands isn't. Counted as the payment goes, not once up front: a
   // fixed count scored all three Forests below either Island, and a {3} took
   // every Forest (a live bot misplay, 2026-10-07: Urza's Incubator, then no
-  // green for Miirym).
-  const supplyLeft = (m: ManaType): number =>
-    sources.filter((src) => !isTapped(src.id) && makesOf(src).has(m)).length;
+  // green for Miirym). `counted` holds one ranking's counts: nothing is tapped
+  // while `byKeep` scores the sources.
+  const supplyLeft = (m: ManaType, counted: Map<ManaType, number>): number => {
+    const known = counted.get(m);
+    if (known !== undefined) return known;
+    const left = sources.filter((src) => !isTapped(src.id) && makesOf(src).has(m)).length;
+    counted.set(m, left);
+    return left;
+  };
   // A source's worth to the rest of the hand: for each colour it makes, how
   // much that colour is wanted over how many untapped sources still make it.
-  const keepScore = (src: ManaSource): number => {
+  const keepScore = (src: ManaSource, counted: Map<ManaType, number>): number => {
     if (keep === undefined) return 0;
     let score = 0;
-    for (const m of makesOf(src)) score += (keep[m] ?? 0) / Math.max(1, supplyLeft(m));
+    for (const m of makesOf(src)) score += (keep[m] ?? 0) / Math.max(1, supplyLeft(m, counted));
     return score;
   };
   const colourCount = (src: ManaSource): number =>
@@ -1795,10 +1808,11 @@ function planManaPaymentOrdered(
       colours: colourCount(src),
     };
   });
-  const byKeep = (): ManaSource[] =>
-    ranked
+  const byKeep = (): ManaSource[] => {
+    const counted = new Map<ManaType, number>();
+    return ranked
       .filter((e) => !isTapped(e.src.id))
-      .map((e) => ({ ...e, keep: keepScore(e.src) }))
+      .map((e) => ({ ...e, keep: keepScore(e.src, counted) }))
       .sort(
         (a, b) =>
           a.group - b.group ||
@@ -1810,6 +1824,7 @@ function planManaPaymentOrdered(
           a.i - b.i,
       )
       .map((e) => e.src);
+  };
   /** Take one generic from `t` toward the cost itself, recording it as
    * lendable. */
   const payGenericWith = (t: Tapped): boolean => {
