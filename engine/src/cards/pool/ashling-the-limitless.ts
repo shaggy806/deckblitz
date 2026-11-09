@@ -3,7 +3,7 @@ import { defineCard } from "../define.js";
 // #37 in top-commanders.txt.
 //
 // - Evoke is granted to the spell as it's cast from the hand
-//   (`grantsEvokeToSpells`), and the permanent it becomes keeps evoke's
+//   (a `grantsToSpells` keyword value), and the permanent it becomes keeps evoke's
 //   sacrifice trigger even if Ashling has left by then (the ruling).
 // - The token copies the sacrificed Elemental as it last existed (rule
 //   608.2h) — copiable values only, so no counters or pumps (the ruling).
@@ -29,11 +29,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      grantsEvokeToSpells: {
-        cost: "{4}",
-        filter: { subtype: "Elemental", notTypes: ["instant", "sorcery"] },
-        fromHand: true,
-      },
+      grantsToSpells: { filter: { subtype: "Elemental", notTypes: ["instant", "sorcery"] }, castFrom: ["hand"], keywordValues: [{ keyword: "evoke", cost: "{4}" }] },
       text: GRANT_TEXT,
     },
   ],

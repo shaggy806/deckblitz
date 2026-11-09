@@ -9,6 +9,7 @@
  * Costs and effects reuse the spell vocabulary.
  */
 
+import type { KeywordAbilityName } from "./characteristics-patch.js";
 import type { StaticCondition, TurnStat } from "./cards/define.js";
 import type { EffectAmount, EffectSpec, SpellResolver } from "./effects.js";
 import { costActLosesSource, costActMovesLibrary, costActReadsX } from "./cost-acts.js";
@@ -2483,6 +2484,8 @@ export interface TriggerTiming {
 export type TriggerSpec = TriggerKind & TriggerTiming;
 
 export interface TriggeredAbility {
+  /** The keyword this ability is part of (`vanishing()`, `soulbond()`). */
+  readonly keywordOf?: KeywordAbilityName;
   /**
    * Who chooses its targets, when not its controller — "target creature **of
    * their choice**" (Ley Line's `"active-player"` in "each player's

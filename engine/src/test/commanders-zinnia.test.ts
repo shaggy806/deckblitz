@@ -44,8 +44,8 @@ describe("Zinnia, Valley's Voice", () => {
     for (let i = 0; i < 4; i += 1) game.debugSpawn("Forest", A, "battlefield");
     const bears = game.debugSpawn("Grizzly Bears", A, "hand");
     const offers = game.legalActions(A).filter((a) => a.kind === "cast-spell" && a.card === bears);
-    expect(offers.map((o) => (o.kind === "cast-spell" ? o.offspring === true : null)).sort()).toEqual([false, true]);
-    game.dispatch({ type: "cast-spell", player: A, card: bears, targets: [], offspring: true });
+    expect(offers.map((o) => (o.kind === "cast-spell" ? o.keywordCosts?.offspring === true : null)).sort()).toEqual([false, true]);
+    game.dispatch({ type: "cast-spell", player: A, card: bears, targets: [], keywordCosts: { offspring: true } });
     quiet(game);
     const all = game.battlefield.filter((id) => game.state.objects[id].cardName === "Grizzly Bears");
     expect(all).toHaveLength(2);
@@ -64,7 +64,7 @@ describe("Zinnia, Valley's Voice", () => {
     expect(game.battlefield.filter((id) => game.state.objects[id].cardName === "Grizzly Bears")).toHaveLength(1);
     const growth = game.debugSpawn("Giant Growth", A, "hand");
     expect(
-      game.legalActions(A).some((a) => a.kind === "cast-spell" && a.card === growth && a.offspring === true),
+      game.legalActions(A).some((a) => a.kind === "cast-spell" && a.card === growth && a.keywordCosts?.offspring === true),
     ).toBe(false);
   });
 
@@ -75,9 +75,9 @@ describe("Zinnia, Valley's Voice", () => {
     const agate = game.debugSpawn("Agate Instigator", A, "hand");
     const both = game
       .legalActions(A)
-      .find((a) => a.kind === "cast-spell" && a.card === agate && a.kicked === true && a.offspring === true);
+      .find((a) => a.kind === "cast-spell" && a.card === agate && a.kicked === true && a.keywordCosts?.offspring === true);
     expect(both).toBeDefined();
-    game.dispatch({ type: "cast-spell", player: A, card: agate, targets: [], kicked: true, offspring: true });
+    game.dispatch({ type: "cast-spell", player: A, card: agate, targets: [], kicked: true, keywordCosts: { offspring: true } });
     quiet(game);
     expect(game.battlefield.filter((id) => game.state.objects[id].cardName === "Agate Instigator")).toHaveLength(3);
   });

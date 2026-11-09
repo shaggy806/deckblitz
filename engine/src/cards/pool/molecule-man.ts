@@ -15,7 +15,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      grantsToHand: { filter: { notTypes: ["land"] }, miracle: { cost: "{0}" } },
+      grantsToHand: { filter: { notTypes: ["land"] }, keywordValues: [{ keyword: "miracle", cost: "{0}" }] },
       text: TEXT,
     },
   ],

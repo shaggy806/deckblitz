@@ -358,6 +358,8 @@ export interface CardFilter {
    * mono-coloured *and* colourless, which is what "nonmulticolored" means.
    * Not expressible as `colors`, which asks for specific ones. */
   readonly multicolored?: boolean;
+  /** Exactly this many colours ("exactly three colors", Threefold Signal). */
+  readonly colorCount?: number;
   readonly manaValue?: NumCompare;
   /** Has an odd or even mana value (zero is even): Void Winnower's "spells with
    * even mana values", Extinction Event's "each creature with mana value of the
@@ -2254,6 +2256,7 @@ export function matchesFilter(
     filter.notColors !== undefined ||
     filter.colorless !== undefined ||
     filter.multicolored !== undefined ||
+    filter.colorCount !== undefined ||
     filter.ofChosenColor !== undefined
   ) {
     const colors: ReadonlySet<Color> =
@@ -2274,6 +2277,7 @@ export function matchesFilter(
     if (filter.multicolored !== undefined && colors.size >= 2 !== filter.multicolored) {
       return false;
     }
+    if (filter.colorCount !== undefined && colors.size !== filter.colorCount) return false;
   }
 
   if (filter.blocking !== undefined) {

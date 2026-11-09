@@ -319,6 +319,7 @@ import _poolFirstSliversChosen from "../pool/first-slivers-chosen.js";
 import _poolFlareOfDuplication from "../pool/flare-of-duplication.js";
 import _poolFlawlessForgery from "../pool/flawless-forgery.js";
 import _poolFledglingMawcor from "../pool/fledgling-mawcor.js";
+import _poolFleshDuplicate from "../pool/flesh-duplicate.js";
 import _poolFlickACoin from "../pool/flick-a-coin.js";
 import _poolFlowstoneBlade from "../pool/flowstone-blade.js";
 import _poolForbiddenFriendship from "../pool/forbidden-friendship.js";
@@ -1358,6 +1359,7 @@ const shard: CardShard = {
     _poolFlareOfDuplication,
     _poolFlawlessForgery,
     _poolFledglingMawcor,
+    _poolFleshDuplicate,
     _poolFlickACoin,
     _poolFlowstoneBlade,
     _poolForbiddenFriendship,

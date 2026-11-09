@@ -147,6 +147,8 @@ export function describeMove(state: GameState, action: Action, registry?: CardRe
         action.xValue !== undefined ? `X=${action.xValue}` : "",
         action.modes !== undefined ? `modes ${action.modes.map((m) => m + 1).join("+")}` : "",
         action.kicked === true ? (action.kickCount !== undefined ? `kicked ${action.kickCount}×` : "kicked") : "",
+        action.keywordCosts?.offspring === true ? "offspring" : "",
+        action.keywordCosts?.replicate !== undefined ? `replicate ${action.keywordCosts.replicate.join("+")}×` : "",
         action.sacrifice !== undefined ? `sacrificing ${nameOf(state, action.sacrifice)}` : "",
       ].filter((part) => part !== "");
       return `Cast ${nameOf(state, action.card)}${targetsText(state, action.targets)}${extra.length > 0 ? ` (${extra.join(", ")})` : ""}`;

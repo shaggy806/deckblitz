@@ -384,6 +384,7 @@ import _poolGoodFortuneUnicorn from "../pool/good-fortune-unicorn.js";
 import _poolGoretuskFirebeast from "../pool/goretusk-firebeast.js";
 import _poolGranGran from "../pool/gran-gran.js";
 import _poolGranted from "../pool/granted.js";
+import _poolGraveScrabbler from "../pool/grave-scrabbler.js";
 import _poolGravedigger from "../pool/gravedigger.js";
 import _poolGraveyardMarshal from "../pool/graveyard-marshal.js";
 import _poolGrazilaxxIllithidScholar from "../pool/grazilaxx-illithid-scholar.js";
@@ -1434,6 +1435,7 @@ const shard: CardShard = {
     _poolGoretuskFirebeast,
     _poolGranGran,
     _poolGranted,
+    _poolGraveScrabbler,
     _poolGravedigger,
     _poolGraveyardMarshal,
     _poolGrazilaxxIllithidScholar,

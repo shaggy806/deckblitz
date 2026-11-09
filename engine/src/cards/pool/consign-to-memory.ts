@@ -7,7 +7,7 @@ export default defineCard({
   manaCost: "{U}",
   colors: ["U"],
   types: ["instant"],
-  kicker: { cost: "{1}", keyword: "replicate", multi: true },
+  replicate: { cost: "{1}" },
   text:
     "Replicate {1} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)\nCounter target triggered ability or colorless spell.",
   targets: [

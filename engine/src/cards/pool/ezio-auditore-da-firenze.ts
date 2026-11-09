@@ -18,7 +18,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      grantsToSpells: { filter: { subtype: "Assassin" }, freerunning: "{B}{B}" },
+      grantsToSpells: { filter: { subtype: "Assassin" }, keywordValues: [{ keyword: "freerunning", cost: "{B}{B}" }] },
       text: FREERUNNING_TEXT,
     },
   ],

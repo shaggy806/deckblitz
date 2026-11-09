@@ -18,7 +18,7 @@ export default defineCard({
   text: "Vanishing 1 (This creature enters with a time counter on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)\nWhenever a creature you control deals combat damage to a player, put a time counter on this creature.",
   triggered: [
     {
-      trigger: { on: "step-begins", step: "upkeep", who: "you" },
+      keywordOf: "vanishing", trigger: { on: "step-begins", step: "upkeep", who: "you" },
       condition: { kind: "self-counters", counter: "time", compare: { op: "gte", n: 1 } },
       targets: [],
       effect: { kind: "remove-counter", target: "source", counter: "time", amount: 1 },
@@ -26,7 +26,7 @@ export default defineCard({
       text: "At the beginning of your upkeep, if this permanent has a time counter on it, remove a time counter from it.",
     },
     {
-      trigger: { on: "counters-removed", who: "self", counter: "time", last: true },
+      keywordOf: "vanishing", trigger: { on: "counters-removed", who: "self", counter: "time", last: true },
       targets: [],
       effect: { kind: "sacrifice-source" },
       resolve: null,
@@ -43,7 +43,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "enters-battlefield", counters: { kind: "time", amount: 1 } },
+      keywordOf: "vanishing", replacement: { event: "enters-battlefield", counters: { kind: "time", amount: 1 } },
       text: "Vanishing 1 (This permanent enters with a time counter on it.)",
     },
   ],

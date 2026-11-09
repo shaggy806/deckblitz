@@ -14,7 +14,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      grantsForetellInHand: { filter: { notTypes: ["land"] }, reducedBy: 2 },
+      grantsToHand: { filter: { notTypes: ["land"] }, keywordValues: [{ keyword: "foretell", cost: { manaCostLess: 2 } }] },
       text: "Each nonland card in your hand without foretell has foretell. Its foretell cost is equal to its mana cost reduced by {2}.",
     },
   ],

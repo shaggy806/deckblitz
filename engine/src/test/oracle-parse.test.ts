@@ -2438,8 +2438,8 @@ describe("templates for features built since the parser began (2026-10-11)", () 
         "Replicate {1}{R} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)",
         "Instant",
         {},
-      ).kicker,
-    ).toEqual({ cost: "{1}{R}", keyword: "replicate", multi: true });
+      ).replicate,
+    ).toEqual({ cost: "{1}{R}" });
     // Haunt (rule 702.55a): the dies trigger, or the resolved spell's.
     expect(face("Haunt (When this creature dies, exile it haunting target creature.)").triggered[0]).toMatchObject({
       trigger: { on: "dies", who: "self" },
@@ -7292,7 +7292,7 @@ describe("casting abilities given to the spells you cast (grantsToSpells)", () =
     expect(
       statics("Hunting Velociraptor", "Creature — Dinosaur", "First strike\nDinosaur spells you cast have prowl {2}{R}.")[0]
         ?.grantsToSpells,
-    ).toEqual({ filter: { subtype: "Dinosaur" }, prowl: "{2}{R}" });
+    ).toEqual({ filter: { subtype: "Dinosaur" }, keywordValues: [{ keyword: "prowl", cost: "{2}{R}" }] });
     expect(statics("Test Broodlord", "Creature — Dragon", "Spells you cast from exile have convoke.")[0]?.grantsToSpells).toEqual({
       castFrom: ["exile"],
       convoke: true,
@@ -9342,20 +9342,19 @@ describe("cards outside the battlefield", () => {
     expect(statics("Artifact", "You may cast creature spells from your graveyard using their sneak abilities.").castWithSneakFromGraveyard).toEqual(
       { filter: { type: "creature" } },
     );
-    expect(statics("Artifact", "Each creature card in your hand has cycling {1}{U}.").grantsCyclingInHand).toEqual({
-      cost: "{1}{U}",
+    expect(statics("Artifact", "Each creature card in your hand has cycling {1}{U}.").grantsToHand).toEqual({
       filter: { type: "creature" },
+      keywordValues: [{ keyword: "cycling", cost: "{1}{U}" }],
     });
-    expect(statics("Artifact", "Each Sliver card in each player's hand has slivercycling {3}.").grantsCyclingInHand).toEqual({
-      cost: "{3}",
+    expect(statics("Artifact", "Each Sliver card in each player's hand has slivercycling {3}.").grantsToHand).toEqual({
       filter: { subtype: "Sliver" },
-      search: { subtype: "Sliver" },
+      keywordValues: [{ keyword: "cycling", cost: "{3}", search: { subtype: "Sliver" } }],
       eachPlayer: true,
     });
     expect(
       statics("Artifact", "Each nonland card in your hand without foretell has foretell. Its foretell cost is equal to its mana cost reduced by {2}.")
-        .grantsForetellInHand,
-    ).toEqual({ filter: { notTypes: ["land"] }, reducedBy: 2 });
+        .grantsToHand,
+    ).toEqual({ filter: { notTypes: ["land"] }, keywordValues: [{ keyword: "foretell", cost: { manaCostLess: 2 } }] });
     expect(
       statics("Artifact", "Each creature card in your graveyard has the chosen creature type in addition to its other types.")
         .outsideBattlefield,

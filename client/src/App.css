@@ -4186,9 +4186,26 @@
    rule is only meant for the small secondary action buttons (Suspend/
    Foretell/Cycle/multi-face plays, cast-from-zone) that sit alongside it. */
 .zone-viewer-card > button:not(.card-tile),
-.hand-card > button:not(.card-tile) {
+.hand-card > button:not(.card-tile),
+.hand-card-ways > button {
   font-size: var(--text-sm);
   padding: 2px 8px;
+}
+/* More than three ways to cast a card: stacked above it, over the board, and
+   scrolling if even that isn't room enough. */
+.hand-card-ways {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 40vw;
+  max-height: 45vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25vh;
+  z-index: 30;
 }
 /* The turn-over button on a double-faced card in the zone viewer: a round
    corner badge over the top of the art (the title bar's right end is the

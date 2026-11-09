@@ -11,7 +11,7 @@ export default defineCard({
   colors: ["U"],
   types: ["instant"],
   text: "Replicate {U} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)\nTap target permanent.",
-  kicker: { cost: "{U}", keyword: "replicate", multi: true },
+  replicate: { cost: "{U}" },
   targets: ["permanent"],
   effect: { kind: "tap", target: 0 },
 });

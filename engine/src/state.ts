@@ -6,6 +6,7 @@
  * instance and is the only thing that writes to it; everything else reads.
  */
 
+import type { KeywordAbilityName } from "./characteristics-patch.js";
 import type { Action, CastSpellOffer, CastVia, PlayLandOffer } from "./actions.js";
 import type { ActivatedAbility, TriggeredAbility, TriggerSpec } from "./abilities.js";
 import type {
@@ -1066,6 +1067,10 @@ export interface GameObject {
    * permanent it becomes gets offspring's trigger as it enters. Cleared on
    * any zone change after that. */
   offspringGrantPaid?: boolean;
+  /** The madness cost a `grantsToHand` static gave this card as it was
+   * discarded (rule 702.35a): the keyword's trigger reads it in exile, where
+   * the grant doesn't reach. Cleared on any zone change after that. */
+  madnessCostGiven?: string;
   /** Gift (rule 702.174): the opponent this spell's gift was promised to —
    * chosen as its gift cost was paid (`GiftAsk`), copied to a copy of it
    * (the ruling). Cleared on any zone change; a permanent spell carries it
@@ -1804,6 +1809,8 @@ export interface PtModifier {
    * Insight). The ongoing, static equivalent is
    * `StaticAbility.grantsTriggered`. */
   grantsTriggered?: TriggeredAbility[];
+  /** Keywords printed as abilities that it loses (`CharacteristicsPatch.loseKeywordAbilities`). */
+  loseKeywordAbilities?: readonly KeywordAbilityName[];
   /** Layer 6 — the ability "If this creature would leave the battlefield,
    * exile it instead of putting it anywhere else", granted by an effect that
    * says it **gains** it (Geth, Thane of Contracts — `put-onto-battlefield

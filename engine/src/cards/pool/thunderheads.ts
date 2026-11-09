@@ -12,7 +12,7 @@ export default defineCard({
   colors: ["U"],
   types: ["instant"],
   text: "Replicate {2}{U} (When you cast this spell, copy it for each time you paid its replicate cost.)\nCreate a 3/3 blue Weird creature token with defender and flying. Exile it at the beginning of the next end step.",
-  kicker: { cost: "{2}{U}", keyword: "replicate", multi: true },
+  replicate: { cost: "{2}{U}" },
   targets: [],
   effect: {
     kind: "sequence",

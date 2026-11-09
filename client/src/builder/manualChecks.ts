@@ -11845,4 +11845,18 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: [] },
     }),
   ),
+  preset(
+    "Djinn Illuminatus: replicate is offered at the spell's own cost",
+    board({
+      you: { bf: ['Djinn Illuminatus', 'Mountain*4'], hand: ['Lightning Bolt'] },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    'Herigast: any creature spell can emerge',
+    board({
+      you: { bf: ['Herigast, Erupting Nullkite', 'Hill Giant', 'Forest'], hand: ['Grizzly Bears'] },
+      opp: { bf: [] },
+    }),
+  ),
 ]

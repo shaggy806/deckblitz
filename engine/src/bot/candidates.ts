@@ -57,7 +57,8 @@ function castExtras(legal: CastSpellLegal): {
   return {
     ...(legal.kicked === true ? { kicked: true } : {}),
     ...(legal.kickCount !== undefined ? { kickCount: legal.kickCount } : {}),
-    ...(legal.offspring === true ? { offspring: true } : {}),
+    ...(legal.keywordCosts !== undefined ? { keywordCosts: legal.keywordCosts } : {}),
+    ...(legal.emergeCost !== undefined ? { emergeCost: legal.emergeCost } : {}),
     ...(legal.optionalLife !== undefined ? { optionalLife: legal.optionalLife } : {}),
     ...(legal.evoke === true ? { evoke: true, evokeCost: legal.evokeCost } : {}),
     ...(legal.prototype === true ? { prototype: true } : {}),

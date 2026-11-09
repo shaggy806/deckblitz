@@ -391,6 +391,7 @@ import _poolHeatWave from "../pool/heat-wave.js";
 import _poolHelitrooper from "../pool/helitrooper.js";
 import _poolHellfireMongrel from "../pool/hellfire-mongrel.js";
 import _poolHematiteGolem from "../pool/hematite-golem.js";
+import _poolHerigastEruptingNullkite from "../pool/herigast-erupting-nullkite.js";
 import _poolHewTheEntwood from "../pool/hew-the-entwood.js";
 import _poolHideousFleshwheeler from "../pool/hideous-fleshwheeler.js";
 import _poolHighPerfectMorcant from "../pool/high-perfect-morcant.js";
@@ -536,6 +537,7 @@ import _poolMikaeusTheUnhallowed from "../pool/mikaeus-the-unhallowed.js";
 import _poolMillstone from "../pool/millstone.js";
 import _poolMindreaver from "../pool/mindreaver.js";
 import _poolMindshrieker from "../pool/mindshrieker.js";
+import _poolMiragePhalanx from "../pool/mirage-phalanx.js";
 import _poolMirkwoodNurturer from "../pool/mirkwood-nurturer.js";
 import _poolMirranBardiche from "../pool/mirran-bardiche.js";
 import _poolMirrorpool from "../pool/mirrorpool.js";
@@ -685,6 +687,7 @@ import _poolRecall from "../pool/recall.js";
 import _poolRedtoothGenealogist from "../pool/redtooth-genealogist.js";
 import _poolReflectingPool from "../pool/reflecting-pool.js";
 import _poolRegalUnicorn from "../pool/regal-unicorn.js";
+import _poolReiteratingBolt from "../pool/reiterating-bolt.js";
 import _poolReleaseTheGremlins from "../pool/release-the-gremlins.js";
 import _poolRelicGolem from "../pool/relic-golem.js";
 import _poolRelicSloth from "../pool/relic-sloth.js";
@@ -1450,6 +1453,7 @@ const shard: CardShard = {
     _poolHelitrooper,
     _poolHellfireMongrel,
     _poolHematiteGolem,
+    _poolHerigastEruptingNullkite,
     _poolHewTheEntwood,
     _poolHideousFleshwheeler,
     _poolHighPerfectMorcant,
@@ -1595,6 +1599,7 @@ const shard: CardShard = {
     _poolMillstone,
     _poolMindreaver,
     _poolMindshrieker,
+    _poolMiragePhalanx,
     _poolMirkwoodNurturer,
     _poolMirranBardiche,
     _poolMirrorpool,
@@ -1744,6 +1749,7 @@ const shard: CardShard = {
     _poolRedtoothGenealogist,
     _poolReflectingPool,
     _poolRegalUnicorn,
+    _poolReiteratingBolt,
     _poolReleaseTheGremlins,
     _poolRelicGolem,
     _poolRelicSloth,

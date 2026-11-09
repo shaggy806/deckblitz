@@ -6,6 +6,7 @@
  * the engine through the same entry point.
  */
 
+import type { KeywordCostsPaid } from "./keyword-values.js";
 import type { CardType } from "./cards/define.js";
 import type { CombatCompany } from "./combat/company.js";
 import type { AttackCaps } from "./combat/limits.js";
@@ -573,10 +574,13 @@ export type Action =
        * `splice`; `targets` then hold the spell's own targets followed by
        * each spliced card's. */
       readonly splice?: readonly ObjectId[];
-      /** Pay a granted offspring cost too (`grantsOffspringToSpells` — Zinnia,
-       * Valley's Voice): its own additional cost beside any kicker (rule
-       * 702.175b). Echoed from the offer's `offspring`. */
-      readonly offspring?: boolean;
+      /** The keyword costs this cast pays beyond kicker: a granted offspring,
+       * each replicate instance's count (rules 702.175b, 702.56b). Echoed from
+       * the offer's `keywordCosts`. */
+      readonly keywordCosts?: KeywordCostsPaid;
+      /** Which emerge cost it pays, when it has more than one (rule 702.119a).
+       * Echoed from the offer's `emergeCost`. */
+      readonly emergeCost?: string;
       /** The permanents whose optional "you may pay 2 life" additional cost
        * this cast pays (a `costModification`'s `optionalLife` — the Defilers,
        * rule 601.2b), each taking its reduction off too. Echoed from the
@@ -1446,12 +1450,13 @@ export type LegalAction =
        * token — which, asked once it's cast; `kickerCost` empty), `"offering"`
        * (702.48a: the variant that sacrifices the permanent `kickerCost` names,
        * and what comes off for it). */
-      readonly kickerKeyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback" | "replicate" | "reveal" | "flash" | "additional cost" | "offering";
-      /** A variant that pays a granted offspring cost as well (Zinnia) —
-       * echoed back as the action's `offspring`; `offspringCost` for
-       * labelling. */
-      readonly offspring?: true;
-      readonly offspringCost?: string;
+      readonly kickerKeyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback" | "reveal" | "flash" | "additional cost" | "offering";
+      /** A variant that pays these keyword costs beyond kicker: echoed back
+       * as the action's `keywordCosts`; `keywordCostsText` for labelling. */
+      readonly keywordCosts?: KeywordCostsPaid;
+      readonly keywordCostsText?: string;
+      /** Which emerge cost this variant pays, when it has more than one. */
+      readonly emergeCost?: string;
       /** A variant that pays these permanents' optional life costs as well
        * (the Defilers' "you may pay 2 life", rule 601.2b) — echoed back as the
        * action's `optionalLife`; `optionalLifeText` for labelling ("paying 2

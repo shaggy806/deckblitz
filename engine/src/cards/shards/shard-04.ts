@@ -823,6 +823,7 @@ import _poolThirdPathIconoclast from "../pool/third-path-iconoclast.js";
 import _poolThirstingBloodlord from "../pool/thirsting-bloodlord.js";
 import _poolThorGuardianOfMidgard from "../pool/thor-guardian-of-midgard.js";
 import _poolThorinOakenshield from "../pool/thorin-oakenshield.js";
+import _poolThreefoldSignal from "../pool/threefold-signal.js";
 import _poolThrorsMap from "../pool/thrors-map.js";
 import _poolThunderheads from "../pool/thunderheads.js";
 import _poolThunderingSparkmage from "../pool/thundering-sparkmage.js";
@@ -1796,6 +1797,7 @@ const shard: CardShard = {
     _poolThirstingBloodlord,
     _poolThorGuardianOfMidgard,
     _poolThorinOakenshield,
+    _poolThreefoldSignal,
     _poolThrorsMap,
     _poolThunderheads,
     _poolThunderingSparkmage,

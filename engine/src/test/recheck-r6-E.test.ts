@@ -39,7 +39,7 @@ describe("Changing Loyalty", () => {
     const bears = spawn(game, "Grizzly Bears", B);
     const giant = spawn(game, "Hill Giant", B);
     a.chooseTargetsFn = () => [ref(giant)];
-    cast(game, toHand(game, "Changing Loyalty"), { targets: [ref(bears)], kicked: true, kickCount: 1 });
+    cast(game, toHand(game, "Changing Loyalty"), { targets: [ref(bears)], keywordCosts: { replicate: [1] } });
     const auras = named(game, "Changing Loyalty");
     expect(auras.length).toBe(2);
     expect(auras.filter((id) => game.state.objects[id].isToken === true).length).toBe(1);

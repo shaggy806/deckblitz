@@ -11,7 +11,7 @@ export default defineCard({
   colors: ["U"],
   types: ["sorcery"],
   text: "Replicate {1}{U} (When you cast this spell, copy it for each time you paid its replicate cost.)\nDraw a card.",
-  kicker: { cost: "{1}{U}", keyword: "replicate", multi: true },
+  replicate: { cost: "{1}{U}" },
   targets: [],
   effect: { kind: "draw", amount: 1 },
 });

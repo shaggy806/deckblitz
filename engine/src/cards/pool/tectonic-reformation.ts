@@ -11,7 +11,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      grantsCyclingInHand: { cost: "{R}", filter: { type: "land" } },
+      grantsToHand: { filter: { type: "land" }, keywordValues: [{ keyword: "cycling", cost: "{R}" }] },
       text: "Each land card in your hand has cycling {R}.",
     },
   ],

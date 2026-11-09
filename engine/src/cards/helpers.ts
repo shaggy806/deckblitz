@@ -414,12 +414,14 @@ export const vanishing = (
       : [
           {
             affects: { scope: "self" },
+            keywordOf: "vanishing" as const,
             replacement: { event: "enters-battlefield", counters: { kind: "time", amount: n } },
             text: `Vanishing ${n} (This permanent enters with ${n} time counters on it.)`,
           },
         ],
   triggered: [
     {
+      keywordOf: "vanishing" as const,
       trigger: { on: "step-begins", step: "upkeep", who: "you" },
       condition: { kind: "self-counters", counter: "time", compare: { op: "gte", n: 1 } },
       targets: [],
@@ -428,6 +430,7 @@ export const vanishing = (
       text: "At the beginning of your upkeep, if this permanent has a time counter on it, remove a time counter from it.",
     },
     {
+      keywordOf: "vanishing" as const,
       trigger: { on: "counters-removed", who: "self", counter: "time", last: true },
       targets: [],
       effect: { kind: "sacrifice-source" },
@@ -2146,6 +2149,7 @@ const UNPAIRED_CREATURE: CardFilter = { type: "creature", controlledBy: "you", p
  */
 export const soulbond = (): TriggeredAbility[] => [
   {
+    keywordOf: "soulbond" as const,
     trigger: { on: "enters-battlefield", who: "self" },
     condition: {
       kind: "all",
@@ -2167,6 +2171,7 @@ export const soulbond = (): TriggeredAbility[] => [
     text: SOULBOND_TEXT,
   },
   {
+    keywordOf: "soulbond" as const,
     trigger: { on: "enters-battlefield", who: "you-control", filter: { type: "creature" }, otherOnly: true },
     condition: {
       kind: "all",

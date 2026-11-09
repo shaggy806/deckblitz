@@ -204,6 +204,7 @@ import _poolDronepackKindred from "../pool/dronepack-kindred.js";
 import _poolDrownyardBehemoth from "../pool/drownyard-behemoth.js";
 import _poolDrownyardExplorers from "../pool/drownyard-explorers.js";
 import _poolDualShot from "../pool/dual-shot.js";
+import _poolDungeonDelver from "../pool/dungeon-delver.js";
 import _poolDwarvenBloodboiler from "../pool/dwarven-bloodboiler.js";
 import _poolDwellOnThePast from "../pool/dwell-on-the-past.js";
 import _poolDyingWish from "../pool/dying-wish.js";
@@ -1186,6 +1187,7 @@ const shard: CardShard = {
     _poolDrownyardBehemoth,
     _poolDrownyardExplorers,
     _poolDualShot,
+    _poolDungeonDelver,
     _poolDwarvenBloodboiler,
     _poolDwellOnThePast,
     _poolDyingWish,

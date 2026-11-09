@@ -26,7 +26,7 @@ export default defineCard({
   text: "Flying\nVanishing 3 (This creature enters with three time counters on it. At the beginning of your upkeep, remove a time counter from it. When the last is removed, sacrifice it.)\nWhen this creature dies, if it had no time counters on it, create two tokens that are copies of it.",
   triggered: [
     {
-      trigger: { on: "step-begins", step: "upkeep", who: "you" },
+      keywordOf: "vanishing", trigger: { on: "step-begins", step: "upkeep", who: "you" },
       condition: { kind: "self-counters", counter: "time", compare: { op: "gte", n: 1 } },
       targets: [],
       effect: { kind: "remove-counter", target: "source", counter: "time", amount: 1 },
@@ -34,7 +34,7 @@ export default defineCard({
       text: "At the beginning of your upkeep, if this permanent has a time counter on it, remove a time counter from it.",
     },
     {
-      trigger: { on: "counters-removed", who: "self", counter: "time", last: true },
+      keywordOf: "vanishing", trigger: { on: "counters-removed", who: "self", counter: "time", last: true },
       targets: [],
       effect: { kind: "sacrifice-source" },
       resolve: null,
@@ -55,7 +55,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      replacement: { event: "enters-battlefield", counters: { kind: "time", amount: 3 } },
+      keywordOf: "vanishing", replacement: { event: "enters-battlefield", counters: { kind: "time", amount: 3 } },
       text: "Vanishing 3 (This permanent enters with 3 time counters on it.)",
     },
   ],

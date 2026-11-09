@@ -13,7 +13,7 @@ export default defineCard({
   manaCost: "{U}",
   colors: ["U"],
   types: ["sorcery"],
-  kicker: { cost: "{2}{U}{U}", keyword: "replicate", multi: true },
+  replicate: { cost: "{2}{U}{U}" },
   text: "Target player mills four cards. You shuffle up to four cards from your graveyard into your library.\nReplicate {2}{U}{U} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)",
   targets: ["player"],
   effect: {

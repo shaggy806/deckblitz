@@ -32,7 +32,7 @@ export default defineCard({
     },
     {
       affects: { scope: "self" },
-      grantsOffspringToSpells: { cost: "{2}", filter: { type: "creature" } },
+      grantsToSpells: { filter: { type: "creature" }, keywordValues: [{ keyword: "offspring", cost: "{2}" }] },
       text: GRANT_TEXT,
     },
   ],

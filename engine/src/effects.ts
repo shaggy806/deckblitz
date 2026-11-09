@@ -14092,7 +14092,7 @@ function readCopyExceptions(exceptions: CopyExceptions<EffectAmount>, ctx: Resol
     ...(power !== undefined ? { power: ptSetValue(power, ctx) } : {}),
     ...(toughness !== undefined ? { toughness: ptSetValue(toughness, ctx) } : {}),
     ...(ifCopied !== undefined
-      ? { ifCopied: ifCopied.map(({ ofType, patch }) => ({ ofType, patch: readPatch(patch, ctx) })) }
+      ? { ifCopied: ifCopied.map((piece) => ({ ...piece, patch: readPatch(piece.patch, ctx) })) }
       : {}),
   };
 }

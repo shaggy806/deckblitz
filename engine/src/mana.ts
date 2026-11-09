@@ -487,6 +487,20 @@ export function colorSymbols(cost: ManaCost, colors: readonly Color[]): number {
   return symbols;
 }
 
+/**
+ * `cost` with up to `n` generic mana off it (rule 118.7a: generic only).
+ * Coloured symbols and X stay. The whole generic number gone reads as no
+ * symbol, or `{0}` for a cost left with nothing at all.
+ */
+export function reduceGenericInCost(cost: string, n: number): string {
+  if (n <= 0) return cost;
+  const match = /\{(\d+)\}/.exec(cost);
+  if (match === null) return cost;
+  const left = Math.max(0, Number(match[1]) - n);
+  const rest = cost.replace(match[0], left === 0 ? "" : `{${left}}`);
+  return rest === "" ? "{0}" : rest;
+}
+
 /** Mana value (converted mana cost). `{X}` counts as 0 (rule 202.3f). */
 export function manaValue(cost: ManaCost): number {
   return (

@@ -16,5 +16,5 @@ export default defineCard({
   toughness: 2,
   keywords: ["first-strike"],
   text: `First strike\n${TEXT}`,
-  static: [{ affects: { scope: "self" }, grantsToSpells: { filter: { subtype: "Dinosaur" }, prowl: "{2}{R}" }, text: TEXT }],
+  static: [{ affects: { scope: "self" }, grantsToSpells: { filter: { subtype: "Dinosaur" }, keywordValues: [{ keyword: "prowl", cost: "{2}{R}" }] }, text: TEXT }],
 });

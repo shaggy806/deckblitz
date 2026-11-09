@@ -17,13 +17,7 @@ export default defineCard({
     {
       // "One or more colors": any of the five.
       affects: { scope: "self" },
-      grantsToSpells: {
-        filter: {
-          supertype: "legendary",
-          anyOf: [{ colors: ["W"] }, { colors: ["U"] }, { colors: ["B"] }, { colors: ["R"] }, { colors: ["G"] }],
-        },
-        webSlinging: "{G}{W}{U}",
-      },
+      grantsToSpells: { filter: { supertype: "legendary", anyOf: [{ colors: ["W"] }, { colors: ["U"] }, { colors: ["B"] }, { colors: ["R"] }, { colors: ["G"] }], }, keywordValues: [{ keyword: "web-slinging", cost: "{G}{W}{U}" }] },
       text: "Each legendary spell you cast that's one or more colors has web-slinging {G}{W}{U}.",
     },
   ],

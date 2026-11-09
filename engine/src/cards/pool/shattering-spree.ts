@@ -18,7 +18,7 @@ export default defineCard({
   colors: ["R"],
   types: ["sorcery"],
   text: "Replicate {R} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)\nDestroy target artifact.",
-  kicker: { cost: "{R}", keyword: "replicate", multi: true },
+  replicate: { cost: "{R}" },
   targets: ["artifact"],
   effect: { kind: "destroy", target: 0 },
 });

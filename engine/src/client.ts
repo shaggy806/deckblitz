@@ -40,6 +40,7 @@ export { blockCompanyViolations, blockingViolations } from "./combat/blocking.js
 export { damageAssignmentViolations, defaultAssignment, standardAssignment } from "./combat/damage.js";
 export { fitsSoFar, fitsTogether, slotsLeft } from "./zone-choice-together.js";
 export { stackCopyKey } from "./stack-copies.js";
+export type { KeywordCostsPaid } from "./keyword-values.js";
 export type { StackCopyFields } from "./stack-copies.js";
 export { defaultTapPicks, delvePicksFit, tapCountForModes, tapPicksPower, waterbendAt } from "./actions.js";
 export type { ZoneChoiceTogether } from "./zone-choice-together.js";

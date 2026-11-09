@@ -11,7 +11,7 @@ export default defineCard({
   colors: ["R"],
   types: ["instant"],
   text: "Replicate {1}{R} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)\nPyromatics deals 1 damage to any target.",
-  kicker: { cost: "{1}{R}", keyword: "replicate", multi: true },
+  replicate: { cost: "{1}{R}" },
   targets: ["any-target"],
   effect: { kind: "damage", amount: 1, target: 0 },
 });

@@ -19,10 +19,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      grantsCyclingInHand: {
-        cost: "{2}{W}",
-        filter: { anyOf: [{ type: "artifact" }, { supertype: "legendary" }, { subtype: "Saga" }] },
-      },
+      grantsToHand: { filter: { anyOf: [{ type: "artifact" }, { supertype: "legendary" }, { subtype: "Saga" }] }, keywordValues: [{ keyword: "cycling", cost: "{2}{W}" }] },
       text: CYCLING_TEXT,
     },
   ],

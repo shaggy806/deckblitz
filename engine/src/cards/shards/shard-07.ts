@@ -968,6 +968,7 @@ import _poolWorkshopWarchief from "../pool/workshop-warchief.js";
 import _poolWorthyCost from "../pool/worthy-cost.js";
 import _poolWretchedGryff from "../pool/wretched-gryff.js";
 import _poolWrithingChrysalis from "../pool/writhing-chrysalis.js";
+import _poolWulfgarOfIcewindDale from "../pool/wulfgar-of-icewind-dale.js";
 import _poolXandeDarkMage from "../pool/xande-dark-mage.js";
 import _poolXenobotanist from "../pool/xenobotanist.js";
 import _poolXolatoyacTheSmilingFlood from "../pool/xolatoyac-the-smiling-flood.js";
@@ -1986,6 +1987,7 @@ const shard: CardShard = {
     _poolWorthyCost,
     _poolWretchedGryff,
     _poolWrithingChrysalis,
+    _poolWulfgarOfIcewindDale,
     _poolXandeDarkMage,
     _poolXenobotanist,
     _poolXolatoyacTheSmilingFlood,

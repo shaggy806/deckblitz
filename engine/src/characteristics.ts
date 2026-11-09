@@ -24,6 +24,7 @@
  * `GameObject.controller`, not here.
  */
 
+import type { KeywordAbilityName } from "./characteristics-patch.js";
 import type { StaticPt } from "./characteristics-patch.js";
 import { isManaAbility, isTriggeredManaAbility } from "./abilities.js";
 import type { ActivatedAbility } from "./abilities.js";
@@ -3879,6 +3880,29 @@ export function copiableTypesOf(
     if (modifier.copiable === true) ({ types } = applyModifierTypes(modifier, types, []));
   }
   return types;
+}
+
+/** The keywords printed as abilities (`keywordOf`) that copiable values have:
+ * `name`'s, what its copiable modifiers add, less what they take. */
+export function copiableKeywordAbilities(
+  registry: CardRegistry,
+  name: string,
+  modifiers: readonly PtModifier[],
+): readonly KeywordAbilityName[] {
+  const def = registry.get(name);
+  const out = new Set<KeywordAbilityName>();
+  const add = (keyword: KeywordAbilityName | undefined): void => {
+    if (keyword !== undefined) out.add(keyword);
+  };
+  for (const ability of def.triggered) add(ability.keywordOf);
+  for (const ability of def.static) add(ability.keywordOf);
+  for (const modifier of modifiers) {
+    if (modifier.copiable !== true) continue;
+    for (const ability of modifier.grantsTriggered ?? []) add(ability.keywordOf);
+    for (const ability of modifier.grantsStatic ?? []) add(ability.keywordOf);
+    for (const keyword of modifier.loseKeywordAbilities ?? []) out.delete(keyword);
+  }
+  return [...out];
 }
 
 /** `supertypesOf`, and an effect's "it becomes a legendary …" (Awakening of

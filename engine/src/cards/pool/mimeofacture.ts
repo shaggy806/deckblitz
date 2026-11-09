@@ -9,7 +9,7 @@ export default defineCard({
   manaCost: "{3}{U}",
   colors: ["U"],
   types: ["sorcery"],
-  kicker: { cost: "{3}{U}", keyword: "replicate", multi: true },
+  replicate: { cost: "{3}{U}" },
   text: "Replicate {3}{U} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)\nChoose target permanent an opponent controls. Search that player's library for a card with the same name and put it onto the battlefield under your control. Then that player shuffles.",
   targets: [{ kind: "permanent", whose: "opponent", filter: {} }],
   effect: {

@@ -8,6 +8,9 @@
  * and destroy creatures with lethal damage or non-positive toughness. No combat.
  */
 
+import type { KeywordAbilityName } from "./characteristics-patch.js";
+import { keywordCostString } from "./keyword-values.js";
+import type { KeywordCostsPaid, KeywordValue, KeywordValueName } from "./keyword-values.js";
 import { playCostMode, playSpendsSomething, playGrantOf } from "./play-permission.js";
 import type { CardPlayPermission, EffectPlay, PlayFrom, PlayGrant, PlayTerms, StaticPlay } from "./play-permission.js";
 import { objectRefRead, resolvePlayerRef } from "./effects.js";
@@ -133,6 +136,7 @@ import {
   colorsAmongPermanents,
   computeCharacteristics,
   effectiveSupertypes,
+  copiableKeywordAbilities,
   copiableTypesOf,
   grantableKeywords,
   computedCacheMemo,
@@ -400,6 +404,7 @@ import {
   repeatedManaCost,
   withGenericReducedBy,
   reduceManaCost,
+  reduceGenericInCost,
 } from "./mana.js";
 import type {
   Color,
@@ -1197,16 +1202,17 @@ function copyExceptionModifier(exceptions: ResolvedPatch & CopyExceptions, regis
 }
 
 /** The modifiers a copy effect's exceptions make: the exceptions, then each
- * `ifCopied` piece whose card type the copied values have (`copiedTypes`). */
+ * `ifCopied` piece whose test the copied values pass: a card type they have, or a keyword they lack. */
 function copyExceptionModifiers(
   exceptions: CopyExceptions,
   registry: CardRegistry,
   copiedTypes: readonly CardType[],
+  copiedKeywords: readonly KeywordAbilityName[],
 ): PtModifier[] {
   return [
     copyExceptionModifier(exceptions, registry),
     ...(exceptions.ifCopied ?? [])
-      .filter((piece) => copiedTypes.includes(piece.ofType))
+      .filter((piece) => ('ofType' in piece ? copiedTypes.includes(piece.ofType) : !copiedKeywords.includes(piece.lacksKeyword)))
       .map((piece) => copyExceptionModifier(piece.patch, registry)),
   ];
 }
@@ -1390,6 +1396,7 @@ function alsoTimes(also: KickerAlsoCost, n: number): KickerAlsoCost {
     ...(also.payLife !== undefined ? { payLife: also.payLife * n } : {}),
     ...(also.discard !== undefined ? { discard: also.discard * n } : {}),
     ...(also.opponentGainsLife !== undefined ? { opponentGainsLife: also.opponentGainsLife * n } : {}),
+    ...(also.do?.kind === "pay-energy" && typeof also.do.amount === "number" ? { do: { ...also.do, amount: also.do.amount * n } } : {}),
     ...(sacrifice !== undefined ? { sacrifice } : {}),
     ...(returnToHand !== undefined ? { returnToHand } : {}),
     ...(tapUntapped !== undefined ? { tapUntapped } : {}),
@@ -1933,15 +1940,6 @@ type ManaExtra = {
  * 111.10i), or `null` for a token with one face. */
 function tokenFaces(registry: CardRegistry, cardName: string): readonly string[] | null {
   return registry.get(cardName).faces;
-}
-
-function reduceGenericInCost(cost: string, n: number): string {
-  if (n <= 0) return cost;
-  const match = /\{(\d+)\}/.exec(cost);
-  if (match === null) return cost;
-  const left = Math.max(0, Number(match[1]) - n);
-  const rest = cost.replace(match[0], left === 0 ? "" : `{${left}}`);
-  return rest === "" ? "{0}" : rest;
 }
 
 /** `duration` as an effect `you` control keeps it: "until your next turn"
@@ -2684,6 +2682,14 @@ export class Game {
           this.withOptionalLifePick(action.optionalLife, () => this.dispatchOne(action));
           break;
         }
+        // Which keyword costs it pays beyond kicker, and which emerge.
+        if (
+          (action.keywordCosts !== undefined && this.keywordCostsPick !== action.keywordCosts) ||
+          (action.emergeCost !== undefined && this.emergeCostPick !== action.emergeCost)
+        ) {
+          this.withCastPicks(action.keywordCosts, action.emergeCost, () => this.dispatchOne(action));
+          break;
+        }
         // "Of an opponent's choice" (rules 601.2c, 700.2e): the opponent
         // named answers first; the cast comes back through here, its targets
         // and modes whole, once they have.
@@ -2724,7 +2730,6 @@ export class Game {
               action.graveyardGrant,
               action.escapeExile,
               action.prototype === true,
-              action.offspring === true,
               action.evoke === true ? (action.evokeCost ?? "") : null,
               action.division,
               action.delve,
@@ -2931,6 +2936,12 @@ export class Game {
         if (action.optionalLife !== undefined && this.optionalLifePick !== action.optionalLife) {
           return this.withOptionalLifePick(action.optionalLife, () => this.canDispatch(action));
         }
+        if (
+          (action.keywordCosts !== undefined && this.keywordCostsPick !== action.keywordCosts) ||
+          (action.emergeCost !== undefined && this.emergeCostPick !== action.emergeCost)
+        ) {
+          return this.withCastPicks(action.keywordCosts, action.emergeCost, () => this.canDispatch(action));
+        }
         // Naming the opponent who chooses (rules 601.2c, 700.2e): legal when
         // the cast would be with a choice of theirs in place.
         if (action.otherChooser !== undefined) {
@@ -2986,7 +2997,6 @@ export class Game {
               distinctTargetCount(action.targets, this.targetCopies(action.targets ?? [])),
               action.escapeExile,
               action.prototype === true,
-              action.offspring === true,
               action.evoke === true ? (action.evokeCost ?? "") : null,
               action.delve,
               action.targets,
@@ -3214,19 +3224,22 @@ export class Game {
           // creature that could be sacrificed, each priced with that
           // creature's mana value off (so one too small to make it
           // affordable isn't offered). Normal timing.
-          if (def.emerge !== null) {
-            for (const victim of this.emergeSacrifices(player, def)) {
-              const offers = this.withEmergeSacrifice(victim, () =>
+          const emergeOptions = this.emergeOptionsOf(player, card, def);
+          for (const emerge of emergeOptions) {
+            for (const victim of this.emergeSacrifices(player, emerge)) {
+              const emergeCost = emergeOptions.length > 1 ? emerge.cost : undefined;
+              const offers = this.withCastPicks(this.keywordCostsPick, emergeCost, () => this.withEmergeSacrifice(victim, () =>
                 this.castSpellActions(player, card, cardName, def, {
                   ...faceProp,
                   via: "emerge",
-                  costString: def.emerge?.cost ?? null,
+                  costString: emerge.cost,
                 }),
-              );
+              ));
               for (const offer of offers) {
                 if (offer.kind !== "cast-spell") continue;
                 out.push({
                   ...offer,
+                  ...(emergeCost !== undefined ? { emergeCost } : {}),
                   sacrifice: { choices: [victim] },
                   emergeSacrifice: {
                     object: victim,
@@ -4519,7 +4532,7 @@ export class Game {
       altCostIndex?: number;
       costOption?: number;
       prototype?: boolean;
-      offspring?: boolean;
+      keywordCosts?: KeywordCostsPaid;
       /** The evoke cost this variant pays (see `evokeCostsOf`). */
       evoke?: string;
       /** A multikicker variant's number of times kicked (rule 702.33c). */
@@ -4658,12 +4671,25 @@ export class Game {
     // Offspring granted as it's cast (Zinnia, Valley's Voice): an additional
     // cost of its own (rule 702.175), so every variant that pays a cost it
     // can add to is castable with it paid too.
-    const offspringCost = this.grantedOffspringCost(card, player);
+    const offspringCost = this.spellKeywordCosts(player, card, def, "offspring")[0] ?? null;
     if (offspringCost !== null) {
       variants.push(
         ...variants
           .filter((v) => !v.free && !v.overload && v.altCost !== true)
-          .map((v) => ({ ...v, offspring: true })),
+          .map((v) => ({ ...v, keywordCosts: { offspring: true as const } })),
+      );
+    }
+    // Replicate (rule 702.56a), printed or granted: an additional cost paid
+    // any number of times, so it's beside any alternative cost (118.9d), one
+    // variant per way to pay each instance (702.56b). Overload's early return
+    // prices the overload alone, and a face-down spell has no abilities.
+    const replicates = via === "face-down" ? [] : this.replicateInstancesOf(player, card, def);
+    if (replicates.length > 0) {
+      const counts = this.replicateCounts(player, card, replicates);
+      variants.push(
+        ...variants
+          .filter((v) => !v.overload)
+          .flatMap((v) => counts.map((replicate) => ({ ...v, keywordCosts: { ...v.keywordCosts, replicate } }))),
       );
     }
     // Evoke (rule 702.74a), printed or granted (Ashling, the Limitless): an
@@ -4717,14 +4743,16 @@ export class Game {
     }
     const pickBefore = this.altCostPick;
     const lifePickBefore = this.optionalLifePick;
-    for (const { kicked: kickedFlag, kickCount, overload, free, altCost, altCostIndex, costOption, prototype, offspring, evoke, harmonizeTap, splice, optionalLife } of variants) {
+    const keywordPickBefore = this.keywordCostsPick;
+    for (const { kicked: kickedFlag, kickCount, overload, free, altCost, altCostIndex, costOption, prototype, keywordCosts, evoke, harmonizeTap, splice, optionalLife } of variants) {
       // This variant's alternative cost, for everything that reads one below.
       this.altCostPick = altCost === true ? altCostIndex : undefined;
       this.optionalLifePick = optionalLife;
+      this.keywordCostsPick = keywordCosts;
       const ownAltPaid = altCost === true && (altCostIndex ?? 0) === 0;
       // A multikicker variant passes its count where `kicked` goes.
       const kicked: boolean | number = kickCount ?? kickedFlag;
-      const kickKey = `${free}|${altCost}|${altCostIndex}|${costOption}|${prototype}|${offspring}|${evoke}|${splice?.join(",")}|${optionalLife?.join(",")}`;
+      const kickKey = `${free}|${altCost}|${altCostIndex}|${costOption}|${prototype}|${JSON.stringify(keywordCosts)}|${evoke}|${splice?.join(",")}|${optionalLife?.join(",")}`;
       if (kickCount !== undefined && kickCount > 1 && def.kicker?.second === undefined && kickFailed.has(kickKey)) continue;
       const offeredBefore = out.length;
       // A prototyped variant is worked out as the prototyped spell it is: its
@@ -4769,7 +4797,6 @@ export class Game {
           targetCount,
           undefined,
           false,
-          offspring === true,
           evoke ?? null,
           delve,
         ) === null;
@@ -4816,7 +4843,6 @@ export class Game {
             targetCount,
             undefined,
             false,
-            offspring === true,
             evoke ?? null,
           ) === null;
         const manaAffordable = castable;
@@ -4843,7 +4869,6 @@ export class Game {
                 costOption,
                 player,
                 graveyardGrant,
-                offspring === true,
                 evoke ?? null,
               ),
               targetCount,
@@ -4871,7 +4896,6 @@ export class Game {
               targetCount,
               undefined,
               false,
-              offspring === true,
               evoke ?? null,
             ) === null
           ) {
@@ -4902,7 +4926,6 @@ export class Game {
         costOption,
         player,
         graveyardGrant,
-        offspring === true,
         evoke ?? null,
       );
       // Cast from the top of the library, a permission's filter can read X
@@ -5016,7 +5039,7 @@ export class Game {
           const modesK = Array.from({ length: k }, (_v, i) => i);
           const withModes = this.withFace(card, face ?? 0, () =>
             this.castCostString(card, via, face, kicked, overload, free, altCost === true, costOption, player,
-              graveyardGrant, offspring === true, evoke ?? null, modesK),
+              graveyardGrant, evoke ?? null, modesK),
           );
           if (withModes === null) continue;
           const total = this.withFace(card, face ?? 0, () =>
@@ -5043,7 +5066,7 @@ export class Game {
       // can't be cast this way at all: at least one mode must be chosen.
       const spreeSets = this.spreeModeSets(def, (modes) =>
         this.whyCannotCastSpell(player, card, via, face ?? 0, modes, kicked, undefined, overload, free, undefined,
-          altCost === true, costOption, undefined, graveyardGrant, xFloor, 0, undefined, false, offspring === true,
+          altCost === true, costOption, undefined, graveyardGrant, xFloor, 0, undefined, false,
           evoke ?? null) === null,
       );
       if (spreeSets !== null && spreeSets.length === 0) continue;
@@ -5106,12 +5129,10 @@ export class Game {
         : overload && def.overload !== null
           ? def.overload.cost
           : kicked && def.kicker !== null && paidBase !== null
-            ? paidBase + kickerCostPaid(def.kicker, kickCount ?? 1) + (offspring === true ? (offspringCost ?? "") : "")
-            : paidBase !== null && offspring === true
-              ? paidBase + (offspringCost ?? "")
-              : paidBase;
+            ? paidBase + kickerCostPaid(def.kicker, kickCount ?? 1)
+            : paidBase;
       // An additional "waterbend {X}" makes it an {X} spell (rule 701.67a).
-      const cost = costBeforeWaterbend === null ? null : costBeforeWaterbend + Game.waterbendCostString(def);
+      const cost = costBeforeWaterbend === null ? null : costBeforeWaterbend + this.keywordCostsString(card, def, player) + Game.waterbendCostString(def);
       const sacrifices = this.additionalCostSacrifices(
         player,
         def,
@@ -5284,7 +5305,7 @@ export class Game {
               ...(def.overload.keyword !== undefined ? { overloadKeyword: def.overload.keyword } : {}),
             }
           : {}),
-        ...(offspring === true && offspringCost !== null ? { offspring: true, offspringCost } : {}),
+        ...(keywordCosts !== undefined ? { keywordCosts, keywordCostsText: this.keywordCostsText(card, def, player, keywordCosts) } : {}),
         ...(evoke !== undefined ? { evoke: true, evokeCost: evoke } : {}),
         ...(evoke !== undefined && evoke === def.evoke?.cost && def.evoke.exileFromHand !== undefined
           ? { altCostText: `exile ${def.evoke.exileFromHand.text} from your hand` }
@@ -5677,6 +5698,7 @@ export class Game {
     }
     this.altCostPick = pickBefore;
     this.optionalLifePick = lifePickBefore;
+    this.keywordCostsPick = keywordPickBefore;
     return out;
   }
 
@@ -6114,6 +6136,9 @@ export class Game {
   /** The most splice cards in one hand offered onto one spell (rule 702.47):
    * every set of them is its own variant, so 2^N of them. */
   static readonly MAX_SPLICE_OFFERED = 4;
+  /** The most times one replicate cost is offered (702.56a allows any number;
+   * past this a player has long since paid for more copies than matter). */
+  static readonly MAX_REPLICATE_OFFERED = 20;
   /** The most permanents whose optional life cost (the Defilers) is offered
    * on one spell: every set of them is its own variant, so 2^N of them. Five
    * Defilers, one a color, reach any one spell at most once each. */
@@ -7282,7 +7307,7 @@ export class Game {
               ...(copied.zone === "battlefield"
                 ? copied.modifiers.filter((m) => m.copiable === true).map((m) => ({ ...m, untilEndOfTurn: false }))
                 : []),
-              ...(except !== undefined ? copyExceptionModifiers(except, this.registry, copiableTypesOf(this.registry, this.unflippedName(printedCardName(copied)), copied.zone === "battlefield" ? copied.modifiers : [])) : []),
+              ...(except !== undefined ? copyExceptionModifiers(except, this.registry, copiableTypesOf(this.registry, this.unflippedName(printedCardName(copied)), copied.zone === "battlefield" ? copied.modifiers : []), copiableKeywordAbilities(this.registry, this.unflippedName(printedCardName(copied)), copied.zone === "battlefield" ? copied.modifiers : [])) : []),
             ],
       // What copying adds to how it enters (rule 707.9e) — only if it copies.
       ...(copied !== undefined &&
@@ -13287,12 +13312,86 @@ export class Game {
   private miracleCostOf(card: GameObject): string | null {
     const own = this.registry.get(card.cardName).miracle;
     if (own !== null) return own.cost;
-    if (card.zone !== "hand") return null;
-    for (const { ability } of this.activeStaticsOf(card.owner, (a) => a.grantsToHand !== undefined)) {
-      const grant = ability.grantsToHand!;
-      if (matchesFilter(this.state, this.registry, card.id, grant.filter, { you: card.owner })) return grant.miracle.cost;
+    return this.handKeywordCost(card, "miracle");
+  }
+
+  /** A card's madness cost (rule 702.35a): its own, the one it was given as
+   * it was discarded, or one a `grantsToHand` static gives it while it's in a
+   * hand (Falkenrath Gorger). `null` for none. */
+  private madnessCostOf(card: GameObject): string | null {
+    const own = this.registry.get(card.cardName).madness;
+    if (own !== null) return own.cost;
+    return card.madnessCostGiven ?? this.handKeywordCost(card, "madness");
+  }
+
+  /**
+   * The keyword values `grantsToHand` statics give `card` in a hand (rule
+   * 604.1): one per static reaching it, in battlefield order. A static reaches
+   * its controller's hand, or every hand with `eachPlayer` (Homing Sliver).
+   */
+  private handKeywordValues(card: GameObject, keyword: KeywordValueName): readonly KeywordValue[] {
+    if (card.zone !== "hand") return [];
+    const out: KeywordValue[] = [];
+    for (const id of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[id];
+      if (source === undefined || hasLostAbilities(this.state, this.registry, source)) continue;
+      if (this.state.players[source.controller]?.hasLost !== false) continue;
+      for (const ability of this.registry.get(rulesTextName(source)).static) {
+        const grant = ability.grantsToHand;
+        if (grant === undefined || (source.controller !== card.owner && grant.eachPlayer !== true)) continue;
+        if (!this.staticActive(source, ability)) continue;
+        if (!matchesFilter(this.state, this.registry, card.id, grant.filter, { you: card.owner })) continue;
+        for (const value of grant.keywordValues) {
+          if (value.keyword === keyword) out.push(value);
+        }
+      }
+    }
+    return out;
+  }
+
+  /** The first cost `grantsToHand` statics give `card` for `keyword`, read
+   * against its printed mana cost, or `null`. */
+  private handKeywordCost(card: GameObject, keyword: KeywordValueName): string | null {
+    const def = this.registry.get(card.cardName);
+    for (const value of this.handKeywordValues(card, keyword)) {
+      const cost = keywordCostString(value.cost, def);
+      if (cost !== null) return cost;
     }
     return null;
+  }
+
+  /**
+   * The costs `keyword` has for `cardId` as `player` would cast it, every
+   * `grantsToSpells` static's that reaches it (`castGrantReaches`, rule
+   * 601.2b), read against the face being cast: `def`'s mana cost for "equal to
+   * its mana cost" (Djinn Illuminatus). One cost once.
+   */
+  private spellKeywordCosts(
+    player: PlayerId,
+    cardId: ObjectId,
+    def: CardDefinition,
+    keyword: KeywordValueName,
+  ): readonly string[] {
+    const out: string[] = [];
+    const add = (source: GameObject, ability: StaticAbility): void => {
+      for (const value of ability.grantsToSpells?.keywordValues ?? []) {
+        if (value.keyword !== keyword) continue;
+        if (!castGrantReaches(this.state, this.registry, source, ability, cardId, player)) continue;
+        const cost = keywordCostString(value.cost, def);
+        if (cost !== null && !out.includes(cost)) out.push(cost);
+      }
+    };
+    for (const id of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[id];
+      if (source === undefined) continue;
+      for (const ability of this.registry.get(rulesTextName(source)).static) {
+        if (ability.grantsToSpells?.keywordValues !== undefined) add(source, ability);
+      }
+    }
+    for (const { source, ability } of emblemStatics(this.state)) {
+      if (ability.grantsToSpells?.keywordValues !== undefined) add(source, ability);
+    }
+    return out;
   }
 
   /** A graveyard card's dredge N (rule 702.52): its own, or one a
@@ -15278,17 +15377,14 @@ export class Game {
     return null;
   }
 
-  /** How far a `grantsForetellInHand` static of a permanent its owner
-   * controls reduces the mana cost of `card` in hand for its foretell cost
-   * (`GameObject.foretoldReducedBy`), or `null`: none for a card with no mana
-   * cost. */
+  /** How far a `grantsToHand` static's foretell reduces the mana cost of
+   * `card` in hand for its foretell cost (`GameObject.foretoldReducedBy`), or
+   * `null`: none for a card with no mana cost. */
   private grantedForetellReduction(card: GameObject): number | null {
     if (this.registry.get(card.cardName).manaCost === null) return null;
-    for (const { ability } of this.activeStaticsOf(card.owner, (a) => a.grantsForetellInHand !== undefined)) {
-      const grant = ability.grantsForetellInHand!;
-      if (matchesFilter(this.state, this.registry, card.id, grant.filter, { you: card.owner })) {
-        return grant.reducedBy;
-      }
+    for (const { cost } of this.handKeywordValues(card, "foretell")) {
+      if (cost === "mana-cost") return 0;
+      if (typeof cost !== "string") return cost.manaCostLess;
     }
     return null;
   }
@@ -16309,61 +16405,68 @@ export class Game {
   /** How many active `doubleEntryTriggers` statics `controller` has that
    * apply to `enteringId` entering (Panharmonicon-style — needed-cards P15).
    * Two such statics make an ETB trigger fire three times total (1 + 2). */
-  /** How many `doubleTriggers` statics `controller` has whose cause is
-   * `event` — each makes a trigger that event causes fire once more. */
-  private causeTriggerDoublers(controller: PlayerId, event: GameEvent): number {
-    type Cause = NonNullable<StaticAbility["doubleTriggers"]>["cause"];
-    const subject = (cause: Cause): ObjectId | null | undefined => {
+  /** How many `doubleTriggers` statics `controller` has that this event
+   * causes (rule 603.2): each makes a trigger it causes fire once more.
+   * `sourceId` is whose ability it is, for a static's `source`. */
+  private causeTriggerDoublers(controller: PlayerId, event: GameEvent, sourceId: ObjectId): number {
+    type Doubler = NonNullable<StaticAbility["doubleTriggers"]>;
+    type Cause = Exclude<Doubler["cause"], readonly unknown[]>;
+    /** What `cause` says this event was about: objects to test a filter on,
+     * `null` for an event that's that cause with no object, `undefined` for
+     * an event that isn't. */
+    const subjects = (cause: Cause): readonly ObjectId[] | null | undefined => {
       switch (cause) {
         case "enters":
-          return event.type === "permanent-entered-battlefield" ? event.object : undefined;
+          return event.type === "permanent-entered-battlefield" ? [event.object] : undefined;
+        case "leaves":
+          if (event.type === "permanent-left-battlefield") return [event.object];
+          return event.type === "permanents-left" ? event.left.map((left) => left.object) : undefined;
         case "attacks":
-          if (event.type === "attacker-declared" || event.type === "attacked-alone") return event.attacker;
-          // Whole-declaration events: no one attacker to test a filter on.
-          return event.type === "attackers-declared" || event.type === "player-attacked"
-            ? null
-            : undefined;
+          if (event.type === "attacker-declared" || event.type === "attacked-alone") return [event.attacker];
+          // A whole declaration: any attacker of the filter's kind caused it.
+          return event.type === "attackers-declared" || event.type === "player-attacked" ? event.attackers : undefined;
         case "combat-damage-to-player":
           return event.type === "damage-dealt" && event.combat && event.target.kind === "player"
-            ? event.source
+            ? [event.source]
             : undefined;
         case "cast-or-copy":
-          return event.type === "spell-cast"
-            ? event.object
-            : event.type === "spell-copied"
-              ? event.copy
-              : undefined;
+          return event.type === "spell-cast" ? [event.object] : event.type === "spell-copied" ? [event.copy] : undefined;
         case "dealt-damage":
-          return event.type === "damage-dealt" && event.target.kind === "object"
-            ? event.target.object
-            : undefined;
+          return event.type === "damage-dealt" && event.target.kind === "object" ? [event.target.object] : undefined;
         case "dies":
           // Its dies triggers hang off one of these and its
           // leaves-the-battlefield ones off the other.
+          if (event.type === "permanents-died") return event.died;
           return event.type === "permanent-destroyed" ||
             (event.type === "permanent-left-battlefield" && event.toZone === "graveyard")
-            ? event.object
+            ? [event.object]
             : undefined;
         case "draws":
-          return event.type === "card-drawn" ? event.object : undefined;
+          return event.type === "card-drawn" ? [event.object] : undefined;
+        case "turned-face-up":
+          return event.type === "permanent-turned-face-up" ? [event.object] : undefined;
+        case "room":
+          return undefined;
+        default: {
+          const held = triggerEventSubjects(cause, event);
+          return held === undefined ? undefined : held.objects ?? null;
+        }
       }
     };
-    const doubles = (d: NonNullable<StaticAbility["doubleTriggers"]>): boolean => {
-      // "One or more" died: any of them that's the doubler's kind caused it.
-      if (d.cause === "dies" && event.type === "permanents-died") {
-        return event.died.some(
-          (id) =>
-            d.filter === undefined ||
-            matchesFilter(this.state, this.registry, id, d.filter, { you: controller, lastKnown: true }),
-        );
+    const doubles = (d: Doubler): boolean => {
+      if (d.source !== undefined && !matchesFilter(this.state, this.registry, sourceId, d.source, { you: controller, lastKnown: true })) {
+        return false;
       }
-      const who = subject(d.cause);
-      if (who === undefined) return false;
-      if (d.filter === undefined) return true;
-      if (who === null) return false;
-      // A creature that died is matched as it last existed.
-      const lastKnown = d.cause === "dies";
-      return matchesFilter(this.state, this.registry, who, d.filter, { you: controller, lastKnown });
+      const causes: readonly Cause[] = typeof d.cause === "string" ? [d.cause] : d.cause;
+      return causes.some((cause) => {
+        const who = subjects(cause);
+        if (who === undefined) return false;
+        if (d.filter === undefined) return true;
+        if (who === null) return false;
+        // What died or left is matched as it last existed.
+        const lastKnown = cause === "dies" || cause === "leaves";
+        return who.some((id) => matchesFilter(this.state, this.registry, id, d.filter!, { you: controller, lastKnown }));
+      });
     };
     let count = 0;
     for (const id of this.state.zones.shared.battlefield) {
@@ -16375,8 +16478,8 @@ export class Game {
         if (doubles(d)) count += 1;
       }
     }
-    // A creature dying at the same time as the doubler — the doubler itself
-    // included — still makes abilities trigger an additional time (Teysa
+    // A creature dying at the same time as the doubler, the doubler itself
+    // included, still makes abilities trigger an additional time (Teysa
     // Karlov's rulings): a leave event also looks back at its own subject and
     // at the rest of its batch that has already left, each as it last
     // existed there (rule 603.10a). Only an unconditional static, since its
@@ -16392,6 +16495,20 @@ export class Game {
           const d = ability.doubleTriggers;
           if (d !== undefined && ability.condition === undefined && doubles(d)) count += 1;
         }
+      }
+    }
+    return count;
+  }
+
+  /** How many statics make `player`'s dungeon room abilities trigger an
+   * additional time (Hama Pashar; Dungeon Delver's, granted to a creature). */
+  private roomTriggerDoublers(player: PlayerId): number {
+    let count = 0;
+    for (const id of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[id];
+      if (source === undefined || source.controller !== player || hasLostAbilities(this.state, this.registry, source)) continue;
+      for (const ability of this.staticsOfSource(source)) {
+        if (ability.doubleTriggers?.cause === "room" && this.staticActive(source, ability)) count += 1;
       }
     }
     return count;
@@ -16822,8 +16939,6 @@ export class Game {
     caster?: PlayerId,
     /** For an escape cast, which escape — see `escapeOf`. */
     graveyardGrant?: GraveyardGrant,
-    /** Paying a granted offspring cost too (`grantsOffspringToSpells`). */
-    offspring = false,
     /** Cast for an evoke cost (rule 702.74) rather than its mana cost —
      * which one (`""` for the first it has); `null` when not evoked. */
     evoke: string | null = null,
@@ -16847,6 +16962,9 @@ export class Game {
       spree +
       Game.waterbendCostString(def) +
       (this.activeSplice?.card === cardId ? this.activeSplice.cost : "") +
+      // Granted offspring and replicate are additional costs of their own
+      // beside any kicker (rules 702.56b, 702.175b).
+      this.keywordCostsString(cardId, def, caster ?? this.state.objects[cardId]?.owner) +
       // "By paying {R}{R} in addition to its other costs" (Ogre Battlecaster).
       (via === "effect" ? (this.castNowOffer(caster ?? this.state.objects[cardId]?.owner, cardId)?.alsoPaying ?? "") : "");
     // A chosen additional-cost branch that is paid in mana (Redirect
@@ -16911,7 +17029,7 @@ export class Game {
         : via === "web-slinging"
           ? this.webSlingingCostOf(caster ?? this.state.objects[cardId]?.owner ?? "", cardId, def)
         : via === "emerge"
-          ? (def.emerge?.cost ?? null)
+          ? (this.emergeOptionPicked(caster ?? this.state.objects[cardId]?.owner, cardId, def)?.cost ?? null)
         : // Airbend (rule 701.65a): {2} rather than its mana cost.
           via === "airbend"
           ? Game.AIRBEND_COST
@@ -16951,12 +17069,7 @@ export class Game {
         ? withOption
         : withOption + kickerCostPaid(def.kicker, kicked === true ? 1 : kicked);
     const withKicker = kickedCost === null ? null : kickedCost + escalate;
-    // Granted offspring (Zinnia) is an additional cost of its own beside any
-    // kicker or printed offspring (rule 702.175b), so it concatenates too.
-    if (!offspring || withKicker === null) return withKicker;
-    const who = caster ?? this.state.objects[cardId]?.owner;
-    const grant = who === undefined ? null : this.grantedOffspringCost(cardId, who);
-    return grant === null ? withKicker : withKicker + grant;
+    return withKicker;
   }
 
   /** A fuse card's two halves, left then right (rule 702.102) — `def` is the
@@ -17069,7 +17182,7 @@ export class Game {
   ): CardFilter | undefined {
     if (this.offeringProbe?.card === card) return this.faceDef(card, face).kicker?.offering;
     if (via === "emerge") {
-      const emerge = this.faceDef(card, face).emerge;
+      const emerge = this.emergeOptionPicked(player, card, this.faceDef(card, face));
       return emerge === null ? undefined : Game.emergeFilter(emerge);
     }
     if (!isPermissionCast(via)) return undefined;
@@ -17082,10 +17195,119 @@ export class Game {
     return emerge.from ?? { type: "creature" };
   }
 
-  /** The permanents `player` could sacrifice to pay `def`'s emerge cost
-   * (rule 702.119a). */
-  private emergeSacrifices(player: PlayerId, def: CardDefinition): ObjectId[] {
-    return def.emerge === null ? [] : this.eligibleSacrifices(player, Game.emergeFilter(def.emerge));
+  /** The permanents `player` could sacrifice to pay `emerge` (rule 702.119a). */
+  private emergeSacrifices(player: PlayerId, emerge: NonNullable<CardDefinition["emerge"]> | null): ObjectId[] {
+    return emerge === null ? [] : this.eligibleSacrifices(player, Game.emergeFilter(emerge));
+  }
+
+  /** Each emerge `player` may cast `cardId` with (rule 702.119a): its own, and
+   * those a `grantsToSpells` static gives it (Herigast), one offer a cost. */
+  private emergeOptionsOf(
+    player: PlayerId | undefined,
+    cardId: ObjectId,
+    def: CardDefinition,
+  ): readonly NonNullable<CardDefinition["emerge"]>[] {
+    const printed = def.emerge === null ? [] : [def.emerge];
+    if (player === undefined) return printed;
+    const granted = this.spellKeywordCosts(player, cardId, def, "emerge")
+      .filter((cost) => !printed.some((option) => option.cost === cost))
+      .map((cost) => ({ cost }));
+    return [...printed, ...granted];
+  }
+
+  /** The emerge the cast being judged pays: `emergeCostPick`'s, else its first. */
+  private emergeOptionPicked(
+    player: PlayerId | undefined,
+    cardId: ObjectId,
+    def: CardDefinition,
+  ): NonNullable<CardDefinition["emerge"]> | null {
+    const options = this.emergeOptionsOf(player, cardId, def);
+    return options.find((option) => option.cost === this.emergeCostPick) ?? options[0] ?? null;
+  }
+
+  /** The keyword costs a cast judged or paid for pays beyond kicker
+   * (`Action.keywordCosts`), only for as long as that takes. */
+  private keywordCostsPick: KeywordCostsPaid | undefined;
+
+  /** Which of a card's emerge costs the cast being judged or paid for uses
+   * (`Action.emergeCost`), only for as long as that takes. */
+  private emergeCostPick: string | undefined;
+
+  /** Run `fn` judging or paying a cast with these keyword costs and emerge. */
+  private withCastPicks<T>(keywordCosts: KeywordCostsPaid | undefined, emergeCost: string | undefined, fn: () => T): T {
+    const keywordBefore = this.keywordCostsPick;
+    const emergeBefore = this.emergeCostPick;
+    this.keywordCostsPick = keywordCosts;
+    this.emergeCostPick = emergeCost;
+    try {
+      return fn();
+    } finally {
+      this.keywordCostsPick = keywordBefore;
+      this.emergeCostPick = emergeBefore;
+    }
+  }
+
+  /** The mana of the keyword costs the cast being judged pays (see
+   * {@link keywordCostsPick}). */
+  private keywordCostsString(cardId: ObjectId, def: CardDefinition, caster: PlayerId | undefined): string {
+    const paid = this.keywordCostsPick;
+    if (paid === undefined || caster === undefined) return "";
+    let out = "";
+    if (paid.offspring === true) out += this.spellKeywordCosts(caster, cardId, def, "offspring")[0] ?? "";
+    if (paid.replicate !== undefined) {
+      const instances = this.replicateInstancesOf(caster, cardId, def);
+      paid.replicate.forEach((times, index) => {
+        out += (instances[index]?.cost ?? "").repeat(times);
+      });
+    }
+    return out;
+  }
+
+  /** Each replicate `player` may pay for `cardId` as they cast it (rule
+   * 702.56): its own, then those a `grantsToSpells` static gives it, each
+   * read against this face's mana cost (Djinn Illuminatus). */
+  private replicateInstancesOf(
+    player: PlayerId,
+    cardId: ObjectId,
+    def: CardDefinition,
+  ): readonly { readonly cost: string; readonly also?: KickerAlsoCost }[] {
+    const printed = def.replicate === null ? [] : [def.replicate];
+    const granted = this.spellKeywordCosts(player, cardId, def, "replicate").map((cost) => ({ cost }));
+    return [...printed, ...granted];
+  }
+
+  /** The ways to pay `instances`' replicate costs (rule 702.56a), each a count
+   * per instance, no instance paid more than the mana there is could cover.
+   * Two instances at one cost are one row: a copy is a copy. Most-paid last. */
+  private replicateCounts(
+    player: PlayerId,
+    card: ObjectId,
+    instances: readonly { readonly cost: string; readonly also?: KickerAlsoCost }[],
+  ): readonly (readonly number[])[] {
+    const manaCap =
+      this.manaSources(player).reduce((n, s) => n + Game.sourceCapacity(s), 0) +
+      this.state.players[player].manaPool.length;
+    const seen = new Set<string>();
+    const caps = instances.map((instance) => {
+      const key = `${instance.cost}|${instance.also?.text ?? ""}`;
+      if (seen.has(key)) return { mana: 0, most: 0 };
+      seen.add(key);
+      const mana = manaValue(parseManaCost(instance.cost));
+      const alsoCap = instance.also === undefined ? Infinity : this.alsoCostCap(player, card, instance.also);
+      const manaLimit = mana > 0 || alsoCap === Infinity ? Math.floor(manaCap / Math.max(1, mana)) : Infinity;
+      return { mana, most: Math.min(Game.MAX_REPLICATE_OFFERED, manaLimit, alsoCap) };
+    });
+    const out: number[][] = [];
+    const walk = (index: number, counts: readonly number[], spent: number): void => {
+      if (index === caps.length) {
+        if (counts.some((n) => n > 0)) out.push([...counts]);
+        return;
+      }
+      const { mana, most } = caps[index];
+      for (let n = 0; n <= most && spent + n * mana <= manaCap; n += 1) walk(index + 1, [...counts, n], spent + n * mana);
+    };
+    walk(0, [], 0);
+    return out.sort((a, b) => a.reduce((n, c) => n + c, 0) - b.reduce((n, c) => n + c, 0)).slice(0, Game.MAX_REPLICATE_OFFERED * 2);
   }
 
   /** The most modes `card` may be cast with: its `maxModesIf`'s count while
@@ -17161,7 +17383,6 @@ export class Game {
     targetCount = 0,
     escapeExile?: readonly ObjectId[],
     prototype = false,
-    offspring = false,
     evoke: string | null = null,
     delve?: readonly ObjectId[],
     /** The targets chosen, once they are: a `targetCostReduction` is priced
@@ -17177,7 +17398,7 @@ export class Game {
         if (probe === null) return `that isn't a permanent ${this.faceDef(cardId, face).name}'s offering can sacrifice`;
         return this.withOffering(probe, () =>
           this.whyCannotCastSpell(player, cardId, via, face, modes, kicked, sacrifice, overload, free, convoke,
-            altCost, undefined, tap, graveyardGrant, xValue, targetCount, escapeExile, prototype, offspring, evoke, delve,
+            altCost, undefined, tap, graveyardGrant, xValue, targetCount, escapeExile, prototype, evoke, delve,
             targets),
         );
       }
@@ -17189,7 +17410,7 @@ export class Game {
       if (this.faceDef(cardId, face).prototype === null) return `${this.faceDef(cardId, face).name} has no prototype`;
       return this.withPrototype(cardId, () =>
         this.whyCannotCastSpell(player, cardId, via, face, modes, kicked, sacrifice, overload, free, convoke,
-          altCost, costOption, tap, graveyardGrant, xValue, targetCount, escapeExile, true, offspring, evoke, delve),
+          altCost, costOption, tap, graveyardGrant, xValue, targetCount, escapeExile, true, evoke, delve),
       );
     }
     // Face down (morph, megamorph, disguise — rules 702.37c, 702.168a): judged
@@ -17202,13 +17423,13 @@ export class Game {
       const kind = this.faceDownKindOf(cardId);
       if (kind === null) return "that card has no morph or disguise";
       if (face !== 0) return "a card is cast face down as itself, not one of its faces";
-      if (free || altCost || overload || evoke !== null || prototype || offspring || kicked !== false) {
+      if (free || altCost || overload || evoke !== null || prototype || this.keywordCostsPick !== undefined || kicked !== false) {
         return "casting face down is an alternative cost, and can't be combined with another";
       }
       if (this.state.objects[cardId]?.faceDown === undefined) {
         return this.withFaceDown(cardId, kind, () =>
           this.whyCannotCastSpell(player, cardId, via, face, modes, kicked, sacrifice, overload, free, convoke,
-            altCost, costOption, tap, graveyardGrant, xValue, targetCount, escapeExile, prototype, offspring, evoke, delve),
+            altCost, costOption, tap, graveyardGrant, xValue, targetCount, escapeExile, prototype, evoke, delve),
         );
       }
     }
@@ -17218,7 +17439,7 @@ export class Game {
       const restore = this.enterKickedReduction(cardId, this.faceDef(cardId, face), kicked);
       try {
         return this.whyCannotCastSpell(player, cardId, via, face, modes, kicked, sacrifice, overload, free, convoke,
-          altCost, costOption, tap, graveyardGrant, xValue, targetCount, escapeExile, prototype, offspring, evoke, delve);
+          altCost, costOption, tap, graveyardGrant, xValue, targetCount, escapeExile, prototype, evoke, delve);
       } finally {
         restore();
       }
@@ -17347,7 +17568,7 @@ export class Game {
         if (!this.harmonizeProbed) {
           return this.withHarmonizeTap(tapped, () =>
             this.whyCannotCastSpell(player, cardId, via, face, modes, kicked, sacrifice, overload, free, convoke,
-              altCost, costOption, tap, graveyardGrant, xValue, targetCount, escapeExile, prototype, offspring, evoke, delve),
+              altCost, costOption, tap, graveyardGrant, xValue, targetCount, escapeExile, prototype, evoke, delve),
           );
         }
       }
@@ -17471,7 +17692,8 @@ export class Game {
       // Rule 702.119a — from the hand (or a commander from the command zone),
       // sacrificing a creature: an alternative cost (118.9a). Timing is the
       // spell's own.
-      if (def.emerge === null) return `${def.name} doesn't have emerge`;
+      const emerge = this.emergeOptionPicked(player, cardId, def);
+      if (emerge === null) return `${def.name} doesn't have emerge`;
       if (!this.state.zones.perPlayer[player].hand.includes(cardId) && !this.isCastableCommander(player, cardId)) {
         return `${player} does not have that card in hand`;
       }
@@ -17483,7 +17705,7 @@ export class Game {
       if (def.additionalCost?.sacrifice !== undefined || def.additionalCost?.options?.some((o) => o.sacrifice !== undefined)) {
         return `${def.name}'s emerge can't be paid beside a sacrifice of its own`;
       }
-      const victims = this.emergeSacrifices(player, def);
+      const victims = this.emergeSacrifices(player, emerge);
       const victim = sacrifice ?? this.emergeProbed ?? victims[0];
       if (victim === undefined) return `${def.name}'s emerge sacrifices a creature, and ${player} controls none`;
       if (!victims.includes(victim)) return `that permanent cannot be sacrificed for ${def.name}'s emerge`;
@@ -17491,7 +17713,7 @@ export class Game {
       if (this.emergeProbed !== victim) {
         return this.withEmergeSacrifice(victim, () =>
           this.whyCannotCastSpell(player, cardId, via, face, modes, kicked, victim, overload, free, convoke,
-            altCost, costOption, tap, graveyardGrant, xValue, targetCount, escapeExile, prototype, offspring, evoke, delve,
+            altCost, costOption, tap, graveyardGrant, xValue, targetCount, escapeExile, prototype, evoke, delve,
             targets),
         );
       }
@@ -17797,8 +18019,15 @@ export class Game {
       // Two kicker costs: 2 is the second alone, 3 both (rule 702.33b).
       if (def.kicker?.second === undefined || kicked > 3) return `${def.name}'s kicker can be paid only once`;
     }
-    if (offspring && (free || overload || altCost || this.grantedOffspringCost(cardId, player) === null)) {
+    const paidKeywords = this.keywordCostsPick;
+    if (paidKeywords?.offspring === true && (free || overload || altCost || this.spellKeywordCosts(player, cardId, def, "offspring").length === 0)) {
       return `${def.name} has no offspring to pay for this way`;
+    }
+    if (paidKeywords?.replicate !== undefined) {
+      const instances = this.replicateInstancesOf(player, cardId, def);
+      if (overload || paidKeywords.replicate.length > instances.length || paidKeywords.replicate.some((n) => !Number.isInteger(n) || n < 0)) {
+        return `${def.name} has no replicate to pay that way`;
+      }
     }
     // Evoke (rule 702.74a) is an alternative cost: only one applies (118.9a).
     if (evoke !== null) {
@@ -17954,7 +18183,7 @@ export class Game {
     // "or pay {3}{B}") is part of the total cost (rule 601.2f), so it's
     // priced in here with the rest.
     const costString = this.withFace(cardId, face, () =>
-      this.castCostString(cardId, via, face, kicked, overload, free, altCost, costOption, player, graveyardGrant, offspring, evoke,
+      this.castCostString(cardId, via, face, kicked, overload, free, altCost, costOption, player, graveyardGrant, evoke,
         modes ?? []),
     );
     if (costString === null) return `${def.name} has no mana cost to pay (rule 118.6)`;
@@ -19358,7 +19587,7 @@ export class Game {
     // Madness's cast (rule 702.35a): its one card, for its madness cost.
     const madness =
       options.madness === true && cards.length === 1
-        ? this.registry.get(this.state.objects[cards[0]]?.cardName ?? "").madness?.cost
+        ? (this.state.objects[cards[0]] === undefined ? undefined : (this.madnessCostOf(this.state.objects[cards[0]]) ?? undefined))
         : undefined;
     if (options.madness === true && madness === undefined) return;
     // Miracle's cast (rule 702.94a): its one card, still in hand, for its
@@ -19469,7 +19698,7 @@ export class Game {
     offers: readonly CastSpellOffer[],
   ): Extract<Action, { type: "cast-spell" }> | null {
     for (const offer of offers) {
-      if (offer.kicked === true || offer.offspring === true) continue;
+      if (offer.kicked === true || offer.keywordCosts !== undefined) continue;
       const face = offer.face ?? 0;
       const def = this.faceDef(offer.card, face);
       const extra = def.additionalCost;
@@ -19621,7 +19850,6 @@ export class Game {
     graveyardGrant?: GraveyardGrant,
     escapeExile?: readonly ObjectId[],
     prototype = false,
-    offspring = false,
     evoke: string | null = null,
     division?: readonly number[],
     delve?: readonly ObjectId[],
@@ -19631,7 +19859,7 @@ export class Game {
     if (via === "graveyard-permission" && this.castGrantScope?.card !== cardId) {
       this.withCastGrantScope(cardId, graveyardGrant, () =>
         this.castSpell(player, cardId, targets, xValue, via, face, modes, kicked, sacrifice, overload, free,
-          convoke, altCost, costOption, tap, graveyardGrant, escapeExile, prototype, offspring, evoke, division, delve),
+          convoke, altCost, costOption, tap, graveyardGrant, escapeExile, prototype, evoke, division, delve),
       );
       return;
     }
@@ -19642,7 +19870,7 @@ export class Game {
       if (probe === null) throw new Error(`that isn't a permanent ${this.faceDef(cardId, face).name}'s offering can sacrifice`);
       this.withOffering(probe, () =>
         this.castSpell(player, cardId, targets, xValue, via, face, modes, kicked, sacrifice, overload, free,
-          convoke, altCost, undefined, tap, graveyardGrant, escapeExile, prototype, offspring, evoke, division, delve),
+          convoke, altCost, undefined, tap, graveyardGrant, escapeExile, prototype, evoke, division, delve),
       );
       return;
     }
@@ -19653,18 +19881,18 @@ export class Game {
       if (why !== null) throw new Error(why);
       this.withHarmonizeTap(tap[0], () =>
         this.castSpell(player, cardId, targets, xValue, via, face, modes, kicked, sacrifice, overload, free,
-          convoke, altCost, costOption, tap, graveyardGrant, escapeExile, prototype, offspring, evoke, division, delve),
+          convoke, altCost, costOption, tap, graveyardGrant, escapeExile, prototype, evoke, division, delve),
       );
       return;
     }
     // Emerge (rule 702.119a): every cost below is priced with the sacrificed
     // creature's mana value off — the one named, else the first that could be.
     if (via === "emerge") {
-      const victim = sacrifice ?? this.emergeSacrifices(player, this.faceDef(cardId, face))[0];
+      const victim = sacrifice ?? this.emergeSacrifices(player, this.emergeOptionPicked(player, cardId, this.faceDef(cardId, face)))[0];
       if (victim !== undefined && this.emergeProbed !== victim) {
         this.withEmergeSacrifice(victim, () =>
           this.castSpell(player, cardId, targets, xValue, via, face, modes, kicked, victim, overload, free,
-            convoke, altCost, costOption, tap, graveyardGrant, escapeExile, prototype, offspring, evoke, division, delve),
+            convoke, altCost, costOption, tap, graveyardGrant, escapeExile, prototype, evoke, division, delve),
         );
         return;
       }
@@ -19673,7 +19901,7 @@ export class Game {
       if (this.faceDef(cardId, face).prototype === null) throw new Error(`${this.faceDef(cardId, face).name} has no prototype`);
       this.withPrototype(cardId, () =>
         this.castSpell(player, cardId, targets, xValue, via, face, modes, kicked, sacrifice, overload, free,
-          convoke, altCost, costOption, tap, graveyardGrant, escapeExile, true, offspring, evoke, division, delve),
+          convoke, altCost, costOption, tap, graveyardGrant, escapeExile, true, evoke, division, delve),
       );
       return;
     }
@@ -19684,7 +19912,7 @@ export class Game {
       if (kind === null) throw new Error("that card has no morph or disguise");
       this.withFaceDown(cardId, kind, () =>
         this.castSpell(player, cardId, targets, xValue, via, face, modes, kicked, sacrifice, overload, free,
-          convoke, altCost, costOption, tap, graveyardGrant, escapeExile, prototype, offspring, evoke, division, delve),
+          convoke, altCost, costOption, tap, graveyardGrant, escapeExile, prototype, evoke, division, delve),
       );
       return;
     }
@@ -19694,7 +19922,7 @@ export class Game {
       const restore = this.enterKickedReduction(cardId, this.faceDef(cardId, face), kicked);
       try {
         this.castSpell(player, cardId, targets, xValue, via, face, modes, kicked, sacrifice, overload, free,
-          convoke, altCost, costOption, tap, graveyardGrant, escapeExile, prototype, offspring, evoke, division, delve);
+          convoke, altCost, costOption, tap, graveyardGrant, escapeExile, prototype, evoke, division, delve);
       } finally {
         restore();
       }
@@ -19722,7 +19950,6 @@ export class Game {
       targetCount,
       escapeExile,
       false,
-      offspring,
       evoke,
       delve,
       targets,
@@ -19795,7 +20022,6 @@ export class Game {
       costOption,
       player,
       graveyardGrant,
-      offspring,
       evoke,
       modes ?? [],
     );
@@ -20137,7 +20363,7 @@ export class Game {
       object.kicked = true;
       object.kickedByControl = true;
     }
-    if (offspring) object.offspringGrantPaid = true;
+    if (this.keywordCostsPick?.offspring === true) object.offspringGrantPaid = true;
     // Splice (rule 702.47a): the spliced cards are revealed and stay in hand;
     // the spell has their text until it leaves the stack (702.47e).
     if (this.activeSplice?.card === cardId) {
@@ -20556,7 +20782,7 @@ export class Game {
       );
     }
     if (kicked && def.kicker?.keyword === "gift") this.queueGift(player, cardId, priorityTo);
-    if (kicked && def.kicker?.keyword === "replicate") this.queueReplicate(player, cardId);
+    if (this.keywordCostsPick?.replicate !== undefined) this.queueReplicate(player, cardId, this.keywordCostsPick.replicate);
     // "You may sacrifice one or more creatures. When you do, copy this spell
     // for each creature sacrificed this way" (Plumb the Forbidden): a
     // reflexive trigger of the casting (rule 603.12), there only when any
@@ -20796,16 +21022,34 @@ export class Game {
    * Replicate (rule 702.56a): "when you cast this spell, if a replicate cost
    * was paid for it, copy it for each time its replicate cost was paid. If
    * the spell has any targets, you may choose new targets for any of the
-   * copies" — one trigger making every copy, the count the multikicker-style
-   * cost's (`timesKicked`), fixed as it was paid.
+   * copies" — one trigger per instance, each making that instance's copies
+   * (702.56b), the counts fixed as they were paid.
    */
-  private queueReplicate(player: PlayerId, spellId: ObjectId): void {
+  private queueReplicate(player: PlayerId, spellId: ObjectId, instances: readonly number[]): void {
     const spell = this.state.objects[spellId];
     if (spell === undefined || spell.zone !== "stack") return;
-    const times = spell.timesKicked ?? 1;
-    if (times <= 0) return;
-    const text = `Replicate — copy ${nameOf(spell)} for each time its replicate cost was paid (${times}). You may choose new targets for the copies.`;
-    this.queuePaidCostCopy(spell, player, text, `replicate-${this.state.nextObjectSeq}`, times);
+    instances.forEach((times, index) => {
+      if (times <= 0) return;
+      const text = `Replicate — copy ${nameOf(spell)} for each time its replicate cost was paid (${times}). You may choose new targets for the copies.`;
+      this.queuePaidCostCopy(spell, player, text, `replicate-${this.state.nextObjectSeq}-${index}`, times);
+    });
+  }
+
+  /** The words for a cast offer's keyword costs: "offspring {2}", "replicate
+   * {1}{G} ×2". */
+  private keywordCostsText(cardId: ObjectId, def: CardDefinition, player: PlayerId, paid: KeywordCostsPaid): string {
+    const parts: string[] = [];
+    if (paid.offspring === true) parts.push(`offspring ${this.spellKeywordCosts(player, cardId, def, "offspring")[0] ?? ""}`.trim());
+    if (paid.replicate !== undefined) {
+      const instances = this.replicateInstancesOf(player, cardId, def);
+      paid.replicate.forEach((times, index) => {
+        if (times <= 0) return;
+        const instance = instances[index];
+        const cost = instance?.also !== undefined && instance.cost === "" ? instance.also.text : (instance?.cost ?? "");
+        parts.push(`replicate ${cost} ×${times}`);
+      });
+    }
+    return parts.join(", ");
   }
 
   /**
@@ -21454,8 +21698,11 @@ export class Game {
       return EMPTY_TRIGGERED_ENTRIES;
     }
     const lostAt = abilitiesLostAt(this.state, this.registry,target);
+    const lostKeywords = target.modifiers.length === 0 ? [] : target.modifiers.flatMap((m) => m.loseKeywordAbilities ?? []);
     const printed: readonly TriggeredEntry[] = printedAbilities.map((ability) =>
-      lostAt === null ? { ability } : { ability, lost: true },
+      lostAt === null && (ability.keywordOf === undefined || !lostKeywords.includes(ability.keywordOf))
+        ? { ability }
+        : { ability, lost: true },
     );
     const granted: { ability: TriggeredAbility; ref: GrantedAbilityRef }[] = [];
     // A one-shot grant rides on the object's own modifiers, so it works off
@@ -21950,10 +22197,8 @@ export class Game {
   }
 
   /** The activated abilities a card in a hand has from a permanent: ninjutsu
-   * (`grantsNinjutsuInHand` — Satoru Umezawa) from one its owner controls, and
-   * cycling (`grantsCyclingInHand` — Rhet-Tomb Mystic) from one its owner
-   * controls or that reaches each player's hand (Homing Sliver), one per grant
-   * that reaches it, in the order the battlefield lists them. */
+   * (Satoru Umezawa) and cycling (Rhet-Tomb Mystic), `grantsToHand` values, one
+   * per grant that reaches it, in the order the battlefield lists them. */
   private handGrantedActivated(
     card: GameObject,
   ): readonly { readonly ability: ActivatedAbility; readonly ref: GrantedAbilityRef }[] {
@@ -21972,22 +22217,17 @@ export class Game {
         if (!cyclesByName(printed)) add(cyclingAbilityFrom(cycling, cyclingText(cycling)));
       }
     }
-    for (const { ability } of this.activeStaticsOf(card.owner, (a) => a.grantsNinjutsuInHand !== undefined)) {
-      const grant = ability.grantsNinjutsuInHand!;
-      if (!matchesFilter(this.state, this.registry, card.id, grant.filter, { you: card.owner })) continue;
-      add(ninjutsu(grant.cost));
-    }
-    for (const id of this.state.zones.shared.battlefield) {
-      const source = this.state.objects[id];
-      if (source === undefined) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
-        const grant = ability.grantsCyclingInHand;
-        if (grant === undefined || (source.controller !== card.owner && grant.eachPlayer !== true)) continue;
-        if (this.state.players[source.controller]?.hasLost !== false) continue;
-        if (hasLostAbilities(this.state, this.registry, source) || !this.staticActive(source, ability)) continue;
-        if (!matchesFilter(this.state, this.registry, card.id, grant.filter, { you: card.owner })) continue;
-        add(cyclingAbilityFrom(grant, `${grant.search === undefined ? "Cycling" : "Typecycling"} ${grant.cost}`));
-        cyclings.push(grant);
+    if (printed !== null) {
+      for (const value of this.handKeywordValues(card, "ninjutsu")) {
+        const cost = keywordCostString(value.cost, printed);
+        if (cost !== null) add(ninjutsu(cost));
+      }
+      for (const value of this.handKeywordValues(card, "cycling")) {
+        const cost = keywordCostString(value.cost, printed);
+        if (cost === null || value.keyword !== "cycling") continue;
+        const cycling = { cost, ...(value.search !== undefined ? { search: value.search } : {}) };
+        add(cyclingAbilityFrom(cycling, `${value.search === undefined ? "Cycling" : "Typecycling"} ${cost}`));
+        cyclings.push(cycling);
       }
     }
     // "You may pay {0} rather than pay cycling costs" (New Perspectives; Gavi,
@@ -23550,7 +23790,7 @@ export class Game {
       } finally {
         this.cyclingDiscard = null;
       }
-      // Cycling a static gave the card (`grantsCyclingInHand`), or a printed
+      // Cycling a static gave the card (`grantsToHand`), or a printed
       // cost that had to be activated, is cycling to everything watching for
       // it, as `cycleCard` has a plain printed one.
       if (ability.cycling === true) this.noteCycled(player, sourceId, chosenX);
@@ -29685,6 +29925,7 @@ export class Game {
                 ability.trigger.on === "dies" && event.type === "permanents-died"
                   ? { ...event, died: this.diedBatchMatching(ability.trigger, event, object) }
                   : event,
+                id,
               ) +
               this.sourceTriggerDoublers(object.controller, id, lastSeen !== undefined);
           // "Triggers only once each turn": this firing is the one, whatever
@@ -41266,6 +41507,9 @@ export class Game {
       ...(altAlso !== undefined ? [altAlso] : []),
       ...(fromFlashback !== undefined ? [fromFlashback] : []),
     ];
+    // A printed replicate's cost that isn't mana (Exterminate!), each time paid.
+    const replicated = this.keywordCostsPick?.replicate?.[0] ?? 0;
+    if (def.replicate?.also !== undefined && replicated > 0) additional.push(alsoTimes(def.replicate.also, replicated));
     if (kickerAlso === undefined) return additional.length === 0 ? spliced : [...additional, ...spliced];
     const times = def.kicker?.multi === true && typeof kicked === "number" ? kicked : 1;
     return [...additional, alsoTimes(kickerAlso, times), ...spliced];
@@ -41334,6 +41578,9 @@ export class Game {
     const caps = [
       also.payLife === undefined ? Infinity : Math.floor(this.state.players[player].life / Math.max(1, also.payLife)),
       also.discard === undefined ? Infinity : Math.floor(hand / Math.max(1, also.discard)),
+      also.do?.kind === "pay-energy" && typeof also.do.amount === "number"
+        ? Math.floor(this.state.players[player].energy / Math.max(1, also.do.amount))
+        : Infinity,
       also.exileFromGraveyard === undefined
         ? Infinity
         : Math.floor(
@@ -42237,7 +42484,7 @@ export class Game {
             },
           ]
         : []),
-      ...(opts.exceptions !== undefined ? copyExceptionModifiers(opts.exceptions, this.registry, copiableTypesOf(this.registry, copyName, inherited)) : []),
+      ...(opts.exceptions !== undefined ? copyExceptionModifiers(opts.exceptions, this.registry, copiableTypesOf(this.registry, copyName, inherited), copiableKeywordAbilities(this.registry, copyName, inherited)) : []),
       ...untilEndOfTurnKeywords(opts.gainUntilEndOfTurn ?? []),
       ...(opts.gainKeywords !== undefined && opts.gainKeywords.length > 0
         ? [{ power: 0, toughness: 0, keywords: [...opts.gainKeywords], untilEndOfTurn: false }]
@@ -42503,7 +42750,7 @@ export class Game {
     if (source === undefined) return;
     const copied: PtModifier[] = [
       ...source.modifiers,
-      ...(exceptions !== undefined ? copyExceptionModifiers(exceptions, this.registry, copiableTypesOf(this.registry, source.copyOf ?? "", source.modifiers)) : []),
+      ...(exceptions !== undefined ? copyExceptionModifiers(exceptions, this.registry, copiableTypesOf(this.registry, source.copyOf ?? "", source.modifiers), copiableKeywordAbilities(this.registry, source.copyOf ?? "", source.modifiers)) : []),
     ].map((m) => ({ ...m, timestamp: -2 }));
     const changed: ObjectId[] = [];
     for (const id of ids) {
@@ -49398,35 +49645,14 @@ export class Game {
   }
 
   /** Whether `player` may pay a freerunning cost now (rule 702.173a). */
-  /** The cost of an alternative cost `key` that a `grantsToSpells` static
-   * gives `cardId` as `player` would cast it (Ezio's freerunning {B}{B}, Amazing
-   * Spider-Man's web-slinging {G}{W}{U}) — the first one found — or `null`. */
-  private grantedCastCost(player: PlayerId, cardId: ObjectId, key: "freerunning" | "webSlinging" | "prowl"): string | null {
-    for (const id of this.state.zones.shared.battlefield) {
-      const source = this.state.objects[id];
-      if (source === undefined) continue;
-      for (const ability of this.registry.get(rulesTextName(source)).static) {
-        const cost = ability.grantsToSpells?.[key];
-        if (cost !== undefined && castGrantReaches(this.state, this.registry, source, ability, cardId, player)) {
-          return cost;
-        }
-      }
-    }
-    for (const { source, ability } of emblemStatics(this.state)) {
-      const cost = ability.grantsToSpells?.[key];
-      if (cost !== undefined && castGrantReaches(this.state, this.registry, source, ability, cardId, player)) return cost;
-    }
-    return null;
-  }
-
   /** Its freerunning cost (rule 702.173a): printed on `def`, or granted. */
   private freerunningCostOf(player: PlayerId, cardId: ObjectId, def: CardDefinition): string | null {
-    return def.freerunning?.cost ?? this.grantedCastCost(player, cardId, "freerunning");
+    return def.freerunning?.cost ?? this.spellKeywordCosts(player, cardId, def, "freerunning")[0] ?? null;
   }
 
   /** Its web-slinging cost (rule 702.188a): printed on `def`, or granted. */
   private webSlingingCostOf(player: PlayerId, cardId: ObjectId, def: CardDefinition): string | null {
-    return def.webSlinging?.cost ?? this.grantedCastCost(player, cardId, "webSlinging");
+    return def.webSlinging?.cost ?? this.spellKeywordCosts(player, cardId, def, "web-slinging")[0] ?? null;
   }
 
   private freerunningAllowed(player: PlayerId): boolean {
@@ -50556,26 +50782,9 @@ export class Game {
   }
 
   /**
-   * The offspring cost a `grantsOffspringToSpells` static of a permanent
-   * `player` controls gives `cardId` as they cast it (Zinnia, Valley's
-   * Voice's "creature spells you cast gain offspring {2} as you cast them"),
-   * or `null`. With several, the first; each is a separate offspring (rule
-   * 702.175b), but no pool card grants it twice.
-   */
-  private grantedOffspringCost(cardId: ObjectId, player: PlayerId): string | null {
-    for (const { ability } of this.activeStaticsOf(player, (a) => a.grantsOffspringToSpells !== undefined)) {
-      const grant = ability.grantsOffspringToSpells!;
-      if (grant.filter === undefined || matchesFilter(this.state, this.registry, cardId, grant.filter, { you: player })) {
-        return grant.cost;
-      }
-    }
-    return null;
-  }
-
-  /**
    * The evoke costs (rule 702.74) `player` may cast `cardId` for: its own,
-   * and any a `grantsEvokeToSpells` static of a permanent they control gives
-   * it as it's cast (Ashling, the Limitless). Empty when it has none, or when
+   * and any a `grantsToSpells` static gives it as it's cast (Ashling, the
+   * Limitless). Empty when it has none, or when
    * it's being cast for another alternative cost already — flashback,
    * escape, foretell, disturb, warp, a suspend or cascade cast (118.9a).
    */
@@ -50592,14 +50801,8 @@ export class Game {
       (player !== undefined && this.canBehold(player, Game.pitchSpec(def.evoke.exileFromHand), cardId)));
     const costs: string[] = def.evoke !== null && printedPayable ? [def.evoke.cost] : [];
     if (player === undefined) return costs;
-    const fromHand = via === undefined && this.state.zones.perPlayer[player].hand.includes(cardId);
-    for (const { ability } of this.activeStaticsOf(player, (a) => a.grantsEvokeToSpells !== undefined)) {
-      const grant = ability.grantsEvokeToSpells!;
-      if (grant.fromHand === true && !fromHand) continue;
-      if (costs.includes(grant.cost)) continue;
-      if (grant.filter === undefined || matchesFilter(this.state, this.registry, cardId, grant.filter, { you: player })) {
-        costs.push(grant.cost);
-      }
+    for (const cost of this.spellKeywordCosts(player, cardId, def, "evoke")) {
+      if (!costs.includes(cost)) costs.push(cost);
     }
     return costs;
   }
@@ -50630,7 +50833,7 @@ export class Game {
 
   /**
    * The warp cost `player` may cast `cardId` from their hand for (rule
-   * 702.185): its own, or one a `grantsWarpInHand` static of a permanent they
+   * 702.185): its own, or one a `grantsToHand` static of a permanent they
    * control gives it (Tannuk, Steadfast Second). `null` when it has none, or
    * isn't in their hand.
    */
@@ -50641,8 +50844,8 @@ export class Game {
 
   /**
    * The blitz cost `player` may cast `cardId` for from their hand, or as a
-   * commander from the command zone (rule 702.152a): its own, or its mana cost where a `grantsBlitzInHand` static
-   * of a permanent they control gives it blitz (Henzie "Toolbox" Torre) —
+   * commander from the command zone (rule 702.152a): its own, or one a `grantsToSpells` static
+   * of a permanent they control gives it (Henzie "Toolbox" Torre's, its mana cost) —
    * less {1} for each time they've cast a commander from the command zone
    * when a `blitzCostReductionPerCommanderCast` static applies (Henzie).
    * `null` when it has none, or isn't where it may be cast from that way.
@@ -50654,15 +50857,7 @@ export class Game {
     if (!this.state.zones.perPlayer[player].hand.includes(cardId) && !this.isCastableCommander(player, cardId)) {
       return null;
     }
-    let cost: string | null = def.blitz?.cost ?? null;
-    if (cost === null && def.types.includes("creature")) {
-      for (const { ability } of this.activeStaticsOf(player, (a) => a.grantsBlitzInHand !== undefined)) {
-        if (matchesFilter(this.state, this.registry, cardId, ability.grantsBlitzInHand!.filter, { you: player })) {
-          cost = def.manaCost;
-          break;
-        }
-      }
-    }
+    const cost = def.blitz?.cost ?? this.spellKeywordCosts(player, cardId, def, "blitz")[0] ?? null;
     if (cost === null) return null;
     const discounts = this.activeStaticsOf(player, (a) => a.blitzCostReductionPerCommanderCast === true).length;
     if (discounts === 0) return cost;
@@ -50686,11 +50881,7 @@ export class Game {
   private warpCostOf(cardId: ObjectId, def: CardDefinition, player: PlayerId): string | null {
     if (!this.state.zones.perPlayer[player].hand.includes(cardId)) return null;
     if (def.warp !== null) return def.warp.cost;
-    for (const { ability } of this.activeStaticsOf(player, (a) => a.grantsWarpInHand !== undefined)) {
-      const grant = ability.grantsWarpInHand!;
-      if (matchesFilter(this.state, this.registry, cardId, grant.filter, { you: player })) return grant.cost;
-    }
-    return null;
+    return this.handKeywordCost(this.state.objects[cardId], "warp");
   }
 
   /**
@@ -50791,7 +50982,7 @@ export class Game {
     // you cast have prowl {2}{R}"): while a source the caster controlled
     // with any of the card's creature types dealt combat damage to a player
     // this turn, as a printed prowl's condition reads.
-    const prowl = this.grantedCastCost(caster, cardId, "prowl");
+    const prowl = this.spellKeywordCosts(caster, cardId, def, "prowl")[0] ?? null;
     if (prowl !== null && card !== undefined && staticConditionMet(this.state, this.registry, card, { kind: "prowl" })) {
       out.push({ mana: prowl, keyword: "prowl" });
     }
@@ -52241,11 +52432,13 @@ export class Game {
   private moveDiscarded(id: ObjectId): boolean {
     const object = this.state.objects[id];
     if (object === undefined) return false;
-    const madness =
-      object.zone === "hand" && this.registry.has(object.cardName)
-        ? this.registry.get(object.cardName).madness
-        : null;
-    if (madness !== null && this.moveObject(id, "exile")) return true;
+    const madness = object.zone === "hand" && this.registry.has(object.cardName) ? this.madnessCostOf(object) : null;
+    if (madness !== null && this.moveObject(id, "exile")) {
+      // A granted madness keeps its cost past the hand (Falkenrath Gorger):
+      // the trigger is already under way (rule 702.35a).
+      object.madnessCostGiven = madness;
+      return true;
+    }
     this.moveObject(id, "graveyard");
     return false;
   }
@@ -54334,13 +54527,15 @@ export class Game {
     if (def === undefined) return;
     ps.dungeon = { ...current, room };
     this.emit({ type: "ventured", player, dungeon: current.name, room, roomName: def.name, entered });
-    this.state.pendingTriggers.push({
-      sourceObjectId: current.object,
-      cardName: current.name,
-      abilityIndex: room,
-      controller: player,
-      reflexive: { targets: [...def.targets], effect: def.effect, text: `${def.name} — ${def.text}` },
-    });
+    for (let times = this.roomTriggerDoublers(player); times >= 0; times -= 1) {
+      this.state.pendingTriggers.push({
+        sourceObjectId: current.object,
+        cardName: current.name,
+        abilityIndex: room,
+        controller: player,
+        reflexive: { targets: [...def.targets], effect: def.effect, text: `${def.name} — ${def.text}` },
+      });
+    }
   }
 
   /** `player` completes their dungeon (rule 309.7): it's removed from the
@@ -56305,7 +56500,10 @@ export class Game {
     // 614.12 — Humility, Toxicrene), none of its own entering abilities
     // apply: no "enters tapped", no counters of its own, no riot.
     const ownLost = entersWithoutAbilities(this.state, this.registry, object);
-    for (const ability of ownLost ? [] : def.static) {
+    // What a copy's exception added counts as printed here (rule 707.9b:
+    // Flesh Duplicate's vanishing 3 enters with its time counters).
+    const copiedStatics = object.modifiers.flatMap((m) => (m.copiable === true ? (m.grantsStatic ?? []) : []));
+    for (const ability of ownLost ? [] : copiedStatics.length === 0 ? def.static : [...def.static, ...copiedStatics]) {
       const r = ability.replacement;
       if (r === undefined || r.event !== "enters-battlefield") continue;
       if (!this.staticActive(object, ability)) continue;
@@ -57759,6 +57957,7 @@ export class Game {
     // already here (Verix Bladewing). Cleared like any other zone-scoped
     // flag on the *next* move, so a Verix that dies and returns is unkicked.
     const enteringKicked = object.zone === "stack" && to === "battlefield" && object.kicked === true;
+    const enteringAlternativeCost = object.zone === "stack" && to === "battlefield" ? object.alternativeCostPaid : undefined;
     const enteringSpectacle = object.zone === "stack" && to === "battlefield" && object.spectaclePaid === true;
     const enteringSurge = object.zone === "stack" && to === "battlefield" && object.surgePaid === true;
     const enteringProwl = object.zone === "stack" && to === "battlefield" && object.prowlPaid === true;
@@ -58161,6 +58360,7 @@ export class Game {
     object.turnedFaceUpOnTurn = undefined;
     object.spliced = undefined;
     object.offspringGrantPaid = undefined;
+    object.madnessCostGiven = undefined;
     object.giftTo = undefined;
     object.evokePaid = undefined;
     object.flashSacrificeOwed = undefined;
@@ -58168,6 +58368,8 @@ export class Game {
     object.surgePaid = undefined;
     object.prowlPaid = undefined;
     delete object.alternativeCostPaid;
+    // A permanent spell's "if its madness cost was paid" is asked as it enters.
+    if (enteringAlternativeCost !== undefined) object.alternativeCostPaid = enteringAlternativeCost;
     // "That spell can't be countered" was about this casting, so it ends when
     // the spell leaves the stack (Cavern of Souls). So does what the casting
     // sacrificed ("the sacrificed creature" — see `LastKnownRefs`).

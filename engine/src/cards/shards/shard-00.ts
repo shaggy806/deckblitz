@@ -373,6 +373,7 @@ import _poolGwaihirTheWindlord from "../pool/gwaihir-the-windlord.js";
 import _poolGyreSage from "../pool/gyre-sage.js";
 import _poolHallOfEchoes from "../pool/hall-of-echoes.js";
 import _poolHallOfStormGiants from "../pool/hall-of-storm-giants.js";
+import _poolHamaPasharRuinSeeker from "../pool/hama-pashar-ruin-seeker.js";
 import _poolHannaShipsNavigator from "../pool/hanna-ships-navigator.js";
 import _poolHannasCustody from "../pool/hannas-custody.js";
 import _poolHanweirBattlements from "../pool/hanweir-battlements.js";
@@ -1376,6 +1377,7 @@ const shard: CardShard = {
     _poolGyreSage,
     _poolHallOfEchoes,
     _poolHallOfStormGiants,
+    _poolHamaPasharRuinSeeker,
     _poolHannaShipsNavigator,
     _poolHannasCustody,
     _poolHanweirBattlements,

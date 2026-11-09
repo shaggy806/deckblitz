@@ -370,6 +370,7 @@ import _poolHandOfThePraetors from "../pool/hand-of-the-praetors.js";
 import _poolHanweirGarrison from "../pool/hanweir-garrison.js";
 import _poolHaradrimSpearmaster from "../pool/haradrim-spearmaster.js";
 import _poolHarshScrutiny from "../pool/harsh-scrutiny.js";
+import _poolHatcherySliver from "../pool/hatchery-sliver.js";
 import _poolHauntOfTheDeadMarshes from "../pool/haunt-of-the-dead-marshes.js";
 import _poolHaveForDinner from "../pool/have-for-dinner.js";
 import _poolHazardousBlast from "../pool/hazardous-blast.js";
@@ -1360,6 +1361,7 @@ const shard: CardShard = {
     _poolHanweirGarrison,
     _poolHaradrimSpearmaster,
     _poolHarshScrutiny,
+    _poolHatcherySliver,
     _poolHauntOfTheDeadMarshes,
     _poolHaveForDinner,
     _poolHazardousBlast,

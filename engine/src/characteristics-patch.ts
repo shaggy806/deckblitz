@@ -14,6 +14,11 @@ import type { AffectSpec } from "./cards/define.js";
 import type { Color } from "./mana.js";
 import type { PtModifier } from "./state.js";
 
+/** A keyword that's printed as abilities (vanishing, soulbond): those
+ * abilities carry its name (`keywordOf`), so a copy can ask whether it has the
+ * keyword and lose it. */
+export type KeywordAbilityName = "vanishing" | "soulbond";
+
 /** Layer 4: card types, subtypes and supertypes (rules 205, 613.1d). */
 export interface TypePatch {
   /** "Becomes a [type]" with no "in addition": these **replace** its card
@@ -72,6 +77,10 @@ export interface CharacteristicsPatch<Pt> extends TypePatch, ColorPatch {
   /** Keywords it can't have while this lasts, whatever would give them
    * (Arcane Lighthouse). */
   readonly cantHaveKeywords?: readonly Keyword[];
+  /** Keywords printed as abilities that it loses (layer 6): "except it has
+   * haste and loses soulbond" (Mirage Phalanx). Those abilities stay listed,
+   * marked lost, so the indices don't move. */
+  readonly loseKeywordAbilities?: readonly KeywordAbilityName[];
   /** Toxic N it has, one more instance, added to the total (702.164b). */
   readonly toxic?: number;
   /** Activated abilities it has. */
@@ -115,9 +124,14 @@ export interface CopyExceptions<Pt = number> extends CharacteristicsPatch<Pt> {
   /**
    * Pieces that apply only if the copied values are of `ofType` (rule 707.9a
    * reads what's copied, not what's now on it): "and, **if it's a creature**,
-   * it has changeling" (Moritte of the Frost).
+   * it has changeling" (Moritte of the Frost); or only if they lack
+   * `lacksKeyword`: "except it has vanishing 3 if that creature doesn't have
+   * vanishing" (Flesh Duplicate).
    */
-  readonly ifCopied?: readonly { readonly ofType: CardType; readonly patch: CharacteristicsPatch<Pt> }[];
+  readonly ifCopied?: readonly (
+    | { readonly ofType: CardType; readonly patch: CharacteristicsPatch<Pt> }
+    | { readonly lacksKeyword: KeywordAbilityName; readonly patch: CharacteristicsPatch<Pt> }
+  )[];
 }
 
 /** A static's base P/T value: `"its-mana-value"` and `countersOnIt` read the
@@ -175,6 +189,7 @@ export function patchModifier(
     ...(patch.loseAbilities === true ? { loseAbilities: true } : {}),
     ...(patch.loseKeywords !== undefined ? { loseKeywords: [...patch.loseKeywords] } : {}),
     ...(patch.cantHaveKeywords !== undefined ? { cantHaveKeywords: [...patch.cantHaveKeywords] } : {}),
+    ...(patch.loseKeywordAbilities !== undefined ? { loseKeywordAbilities: [...patch.loseKeywordAbilities] } : {}),
     ...(patch.toxic !== undefined ? { toxic: patch.toxic } : {}),
     ...(patch.activated !== undefined && patch.activated.length > 0 ? { grantsActivated: [...patch.activated] } : {}),
     ...(patch.triggered !== undefined && patch.triggered.length > 0 ? { grantsTriggered: [...patch.triggered] } : {}),

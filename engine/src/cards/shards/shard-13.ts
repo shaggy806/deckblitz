@@ -218,6 +218,7 @@ import _poolDimensionalExile from "../pool/dimensional-exile.js";
 import _poolDismalFailure from "../pool/dismal-failure.js";
 import _poolDivergentEquation from "../pool/divergent-equation.js";
 import _poolDivinerSpirit from "../pool/diviner-spirit.js";
+import _poolDjinnIlluminatus from "../pool/djinn-illuminatus.js";
 import _poolDoctorDoomUnrivaled from "../pool/doctor-doom-unrivaled.js";
 import _poolDoctorJaneFoster from "../pool/doctor-jane-foster.js";
 import _poolDoomsday from "../pool/doomsday.js";
@@ -1187,6 +1188,7 @@ const shard: CardShard = {
     _poolDismalFailure,
     _poolDivergentEquation,
     _poolDivinerSpirit,
+    _poolDjinnIlluminatus,
     _poolDoctorDoomUnrivaled,
     _poolDoctorJaneFoster,
     _poolDoomsday,

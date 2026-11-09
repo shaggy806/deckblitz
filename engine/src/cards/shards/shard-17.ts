@@ -606,6 +606,7 @@ import _poolOvergrownZealot from "../pool/overgrown-zealot.js";
 import _poolOverrule from "../pool/overrule.js";
 import _poolPaladinOfPredation from "../pool/paladin-of-predation.js";
 import _poolPalianoTheHighCity from "../pool/paliano-the-high-city.js";
+import _poolPanopticProjektor from "../pool/panoptic-projektor.js";
 import _poolParallaxNexus from "../pool/parallax-nexus.js";
 import _poolPassagewaySeer from "../pool/passageway-seer.js";
 import _poolPathOfTheEnigma from "../pool/path-of-the-enigma.js";
@@ -1594,6 +1595,7 @@ const shard: CardShard = {
     _poolOverrule,
     _poolPaladinOfPredation,
     _poolPalianoTheHighCity,
+    _poolPanopticProjektor,
     _poolParallaxNexus,
     _poolPassagewaySeer,
     _poolPathOfTheEnigma,

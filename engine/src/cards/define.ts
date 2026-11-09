@@ -12,7 +12,9 @@
  * escape hatch). Vanilla permanents need neither.
  */
 
-import type { ColorPatch, StaticPt, TypePatch } from "../characteristics-patch.js";
+import type { KeywordValue } from "../keyword-values.js";
+import type { TriggerEventName } from "../trigger-events.js";
+import type { ColorPatch, KeywordAbilityName, StaticPt, TypePatch } from "../characteristics-patch.js";
 import type { SelfPlay, StaticPlay } from "../play-permission.js";
 import type { AbilityCost, AbilityKindName, ActivatedAbility, TriggeredAbility } from "../abilities.js";
 import type {
@@ -1976,7 +1978,25 @@ export interface CombatPermanentTax {
  * still applies once the permanent has lost its abilities, layer 6 coming
  * later.
  */
+/** What can cause a triggered ability to trigger an additional time
+ * (`StaticAbility.doubleTriggers`). `"room"` is a dungeon's room ability
+ * (rule 309.4c). */
+export type TriggerCause =
+  | "enters"
+  | "leaves"
+  | "attacks"
+  | "combat-damage-to-player"
+  | "cast-or-copy"
+  | "dealt-damage"
+  | "dies"
+  | "draws"
+  | "turned-face-up"
+  | "room"
+  | TriggerEventName;
+
 export interface StaticAbility extends TypePatch, ColorPatch {
+  /** The keyword this ability is part of (`vanishing()`). */
+  readonly keywordOf?: KeywordAbilityName;
   readonly affects: AffectSpec;
   /**
    * Eminence (an ability word, rule 207.2c: no rules of its own; the text
@@ -2655,11 +2675,19 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    */
   readonly mayPlay?: StaticPlay;
   /**
-   * A keyword this permanent gives cards in its controller's **hand** (rule
-   * 604.1): "each instant and sorcery card in your hand has miracle {2}"
-   * (Lorehold, the Historian). A card with miracle of its own uses its own.
+   * Keywords with costs this permanent gives cards in a **hand** (rule 604.1):
+   * "each creature card in your hand has ninjutsu {2}{U}{B}" (Satoru Umezawa),
+   * "each instant and sorcery card in your hand has miracle {2}" (Lorehold), "each
+   * Vampire creature card you own that isn't on the battlefield has madness"
+   * (Falkenrath Gorger: madness does nothing outside a hand, rule 702.35a).
+   * `eachPlayer` reaches every player's hand, not just this permanent's
+   * controller's (Homing Sliver). A card with the keyword printed has both.
    */
-  readonly grantsToHand?: { readonly filter: CardFilter; readonly miracle: { readonly cost: string } };
+  readonly grantsToHand?: {
+    readonly filter: CardFilter;
+    readonly keywordValues: readonly KeywordValue[];
+    readonly eachPlayer?: true;
+  };
   /**
    * Keywords this permanent gives cards in its controller's **graveyard**
    * (rule 604.1 — a static ability reaches another zone when its text says
@@ -2795,23 +2823,6 @@ export interface StaticAbility extends TypePatch, ColorPatch {
     readonly when?: SpellCastClause;
     readonly anyPlayer?: true;
   };
-  /**
-   * Cards matching `filter` in this permanent's controller's hand have warp
-   * for `cost` (rule 702.185) — Tannuk, Steadfast Second's "artifact cards
-   * and red creature cards in your hand have warp {2}{R}". Offered exactly as
-   * a printed warp is (`via: "warp"`), and a permanent cast that way is
-   * exiled at the next end step and may be cast from exile later like any
-   * warped one; a card with warp of its own uses its own.
-   */
-  readonly grantsWarpInHand?: { readonly cost: string; readonly filter: CardFilter };
-  /**
-   * Cards matching `filter` in this permanent's controller's hand have
-   * ninjutsu for `cost` (rule 702.49) — Satoru Umezawa's "each creature card
-   * in your hand has ninjutsu {2}{U}{B}". The ability is the `ninjutsu()`
-   * helper's, listed after the card's own (a card with ninjutsu of its own
-   * has both), so a "ninjutsu abilities you activate" static or trigger sees it.
-   */
-  readonly grantsNinjutsuInHand?: { readonly cost: string; readonly filter: CardFilter };
   /** "Each power-up ability of permanents you control can be activated an
    * additional time" (Wonder Man, Hollywood Hero): each power-up ability its
    * controller's permanents have may be activated this many more times, in the
@@ -2836,38 +2847,6 @@ export interface StaticAbility extends TypePatch, ColorPatch {
     readonly mana: string;
     readonly firstEachTurn?: true;
   };
-  /**
-   * Cards matching `filter` in this permanent's controller's hand have
-   * cycling for `cost` (rule 702.29a) — Rhet-Tomb Mystic's "each creature card
-   * in your hand has cycling {1}{U}", Jo Grant's for historic cards. `search`
-   * makes it typecycling (702.29e); `eachPlayer` reaches every player's hand,
-   * not just this permanent's controller's — Homing Sliver's "each Sliver
-   * card in each player's hand has slivercycling {3}". A card with cycling of
-   * its own has both.
-   */
-  readonly grantsCyclingInHand?: {
-    readonly cost: string;
-    readonly filter: CardFilter;
-    readonly search?: CardFilter;
-    readonly eachPlayer?: true;
-  };
-  /**
-   * Cards matching `filter` in this permanent's controller's hand that have
-   * no foretell of their own have foretell (rule 702.143a), with a foretell
-   * cost equal to their mana cost less `reducedBy` generic mana (rule 118.7a)
-   * — Dream Devourer's "each nonland card in your hand without foretell has
-   * foretell. Its foretell cost is equal to its mana cost reduced by {2}". A
-   * card with no mana cost gets nothing. Once foretold, the card keeps that
-   * cost, this permanent gone or not.
-   */
-  readonly grantsForetellInHand?: { readonly filter: CardFilter; readonly reducedBy: number };
-  /**
-   * The creature spells this permanent's controller casts that match
-   * `filter` have blitz, its cost equal to their mana cost (rule 702.152a —
-   * Henzie "Toolbox" Torre's "each creature spell you cast with mana value 4
-   * or greater has blitz"): offered as the `via: "blitz"` cast a printed
-   * blitz is, from the hand. */
-  readonly grantsBlitzInHand?: { readonly filter: CardFilter };
   /**
    * "Damage can't be prevented" (rule 615.12 — Leyline of Punishment, `{}`):
    * prevention effects prevent none of the damage it covers (their other
@@ -2918,25 +2897,6 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * generic mana. */
   readonly blitzCostReductionPerCommanderCast?: boolean;
   /**
-   * The spells this permanent's controller casts that match `filter` gain
-   * offspring for `cost` as they're cast (rule 702.175) — Zinnia, Valley's
-   * Voice's "creature spells you cast gain offspring {2} as you cast them":
-   * an optional additional cost of its own, beside any kicker or printed
-   * offspring (702.175b), offered as the cast's `offspring` variant, and the
-   * permanent that spell becomes enters with offspring's trigger.
-   */
-  readonly grantsOffspringToSpells?: { readonly cost: string; readonly filter?: CardFilter };
-  /**
-   * The spells this permanent's controller casts that match `filter` gain
-   * evoke for `cost` as they're cast (rule 702.74) — Ashling, the Limitless's
-   * "Elemental permanent spells you cast from your hand gain evoke {4} as you
-   * cast them": offered as the cast's `evoke` variant, exactly as a printed
-   * evoke is. `fromHand` limits it to spells cast from the hand. The
-   * permanent such a spell becomes keeps evoke's trigger even if this
-   * permanent has left by then (the ruling).
-   */
-  readonly grantsEvokeToSpells?: { readonly cost: string; readonly filter?: CardFilter; readonly fromHand?: boolean };
-  /**
    * Keywords and abilities the spells this permanent's controller casts have
    * while they're on the stack (rule 113.6 — a spell's abilities work there):
    * Abaddon the Despoiler's "during your turn, spells you cast from your hand
@@ -2953,6 +2913,13 @@ export interface StaticAbility extends TypePatch, ColorPatch {
     readonly filter?: CardFilter;
     readonly castFrom?: readonly ZoneType[];
     readonly keywords?: readonly Keyword[];
+    /** Keywords with costs the spells have as they're cast (see
+     * {@link KeywordValue}): "each creature spell you cast has emerge. The
+     * emerge cost is equal to its mana cost" (Herigast), "artifact spells you
+     * cast have replicate {2}{U}" (Hugh), blitz, evoke, offspring, prowl,
+     * freerunning, web-slinging. Judged as the card would be cast
+     * (`castGrantReaches`, rule 601.2b), beside any printed one. */
+    readonly keywordValues?: readonly KeywordValue[];
     readonly triggered?: readonly TriggeredAbility[];
     /** The spells have split second (rule 702.61) while they're on the stack
      * — Shadow the Hedgehog's "each spell you cast has split second if mana
@@ -2983,15 +2950,6 @@ export interface StaticAbility extends TypePatch, ColorPatch {
      * one more instance beside a printed one, each paid and copying
      * separately (702.78b). Read as the spell is cast. */
     readonly conspire?: boolean;
-    /** The spells have freerunning with this cost (rule 702.173) — Ezio
-     * Auditore da Firenze's "Assassin spells you cast have freerunning
-     * {B}{B}": offered beside a printed freerunning, judged against the card
-     * as it would be cast. */
-    readonly freerunning?: string;
-    /** The spells have web-slinging with this cost (rule 702.188) — Amazing
-     * Spider-Man's "each legendary spell you cast that's one or more colors
-     * has web-slinging {G}{W}{U}". */
-    readonly webSlinging?: string;
     /** The spells have **convoke** (rule 702.51) — Chief Engineer's
      * "artifact spells you cast have convoke", Hoarding Broodlord's "spells
      * you cast from exile" (`castFrom: ["exile"]`). Judged as the spell is
@@ -3003,13 +2961,6 @@ export interface StaticAbility extends TypePatch, ColorPatch {
      * "nonartifact spells you cast have improvise": each artifact tapped
      * pays {1}. Read as `convoke` is. */
     readonly improvise?: true;
-    /** The spells have **prowl** for this cost (rule 702.76) — Hunting
-     * Velociraptor's "Dinosaur spells you cast have prowl {2}{R}": an
-     * alternative cost (118.9) offered while a source you controlled with
-     * any of the spell's creature types dealt combat damage to a player this
-     * turn, as a printed prowl is; a card with an alternative cost of its
-     * own offers that one instead. */
-    readonly prowl?: string;
     /** Only the first spell matching `filter` its controller casts each turn
      * — Anhelo, the Painter's "**the first** instant or sorcery spell you
      * cast each turn has casualty 2". Spells cast earlier this turn count,
@@ -3898,15 +3849,15 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * `doubleTriggersOf` and itself (two sources, three times).
    */
   readonly doubleTriggers?: {
-    readonly cause:
-      | "enters"
-      | "attacks"
-      | "combat-damage-to-player"
-      | "cast-or-copy"
-      | "dealt-damage"
-      | "dies"
-      | "draws";
+    /** What caused it: one cause or several ("entering or leaving", Gandalf
+     * the White). Beside the named causes, any `TRIGGER_EVENTS` row, whose
+     * subject the `filter` reads (rule 603.2). */
+    readonly cause: TriggerCause | readonly TriggerCause[];
+    /** Matched against what caused it. */
     readonly filter?: CardFilter;
+    /** Whose ability, matched from this static's controller's side, beside
+     * the cause: "… of an Equipment you control". */
+    readonly source?: CardFilter;
   };
   /**
    * "If a triggered ability of [a permanent] triggers, that ability triggers
@@ -4482,15 +4433,6 @@ export interface CardDefinition {
      * owner's hand instead of the graveyard as it resolves — not when it's
      * countered or fizzles (it doesn't resolve). A mana cost only.
      *
-     * `"replicate"` (rule 702.56a) is "as an additional cost to cast this
-     * spell, you may pay [cost] any number of times" and "when you cast this
-     * spell, if a replicate cost was paid for it, copy it for each time its
-     * replicate cost was paid. If the spell has any targets, you may choose
-     * new targets for any of the copies": with `multi: true` (the count is
-     * multikicker's), and no `targets` / `effect` of its own — the copies are
-     * the whole difference. The one copy trigger is queued as the spell is
-     * cast (`queueReplicate`).
-     *
      * `"reveal"` is "as an additional cost to cast this spell, you may
      * reveal a [quality] card from your hand": `cost` is `""`, `behold` the
      * quality with `fromHand`, and the kicked variant the one that reveals,
@@ -4507,7 +4449,7 @@ export interface CardDefinition {
      * rule 118.8). "If this spell's additional cost was paid" is the spell
      * being kicked, to itself alone, as for bargain.
      */
-    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback" | "replicate" | "reveal" | "flash" | "additional cost" | "offering";
+    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback" | "reveal" | "flash" | "additional cost" | "offering";
     /**
      * "This spell costs {N} less to cast if it's bargained" (Ice Out,
      * Hamlet Glutton): N generic off the kicked variant's total cost, after
@@ -5186,6 +5128,12 @@ export interface CardDefinition {
    * from [quality]" (702.119b): a permanent matching it rather than a
    * creature. The spell's `castVia` is `"emerge"`. `null` for none.
    */
+  /** Replicate (rule 702.56a): "as an additional cost to cast this spell, you
+   * may pay [cost] any number of times", and "when you cast this spell, if a
+   * replicate cost was paid for it, copy it for each time its replicate cost
+   * was paid". A cost that isn't only mana goes in `also` (Exterminate!'s
+   * "tap an untapped Dalek you control", `cost: ""`), paid each time over. */
+  readonly replicate: { readonly cost: string; readonly also?: KickerAlsoCost } | null;
   readonly emerge: { readonly cost: string; readonly from?: CardFilter } | null;
   /** Flashback (rule 702.34) — this instant/sorcery may be cast from its
    * owner's graveyard for `cost` instead of its mana cost; a spell so cast is
@@ -5844,6 +5792,7 @@ const PRINTED_ABILITY: {
   meldOf: false,
   meldCard: false,
   disturb: (def) => def.disturb !== null,
+  replicate: (def) => def.replicate !== null,
   adventure: false,
   omen: false,
   // Neither is an ability (rule 722.2: alternative characteristics, cast
@@ -5967,7 +5916,7 @@ interface CardDraft {
     readonly cost: string;
     readonly targets?: readonly TargetSpec[];
     readonly effect?: EffectSpec;
-    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback" | "replicate" | "reveal" | "flash" | "additional cost" | "offering";
+    readonly keyword?: "offspring" | "gift" | "teamwork" | "blight" | "behold" | "waterbend" | "squad" | "collect-evidence" | "bargain" | "entwine" | "buyback" | "reveal" | "flash" | "additional cost" | "offering";
     readonly reduceGeneric?: number;
     readonly behold?: BeholdSpec;
     readonly orControls?: CardFilter;
@@ -6129,6 +6078,7 @@ interface CardDraft {
   split?: boolean;
   divided?: { readonly total: EffectAmount; readonly slot: number; readonly of?: string; readonly x?: true };
   disturb?: { readonly cost: string };
+  replicate?: NonNullable<CardDefinition["replicate"]>;
   adventure?: boolean;
   omen?: boolean;
   prepareSpell?: string;
@@ -6431,6 +6381,7 @@ export function defineCard(draft: CardDraft): CardDefinition {
  * `defineCard`'s literal to stay under its limit (see there). */
 function rareCardFields(draft: CardDraft) {
   return {
+    replicate: draft.replicate ?? null,
     ...(draft.tokenName !== undefined ? { tokenName: draft.tokenName } : {}),
     ...(draft.alsoSubtypes !== undefined ? { alsoSubtypes: draft.alsoSubtypes } : {}),
     ...(draft.flashIf !== undefined ? { flashIf: draft.flashIf } : {}),

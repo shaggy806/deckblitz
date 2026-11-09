@@ -14528,7 +14528,7 @@ function parseFaceAsWritten(face, ctx = {}) {
     // Replicate [cost] (rule 702.56a): a multikicker by another name; the
     // engine copies the spell once per payment as it's cast.
     if (isSpell && (m = /^Replicate ((?:\{[^}]+\})+)$/.exec(line))) {
-      out.kicker = { cost: m[1], keyword: "replicate", multi: true };
+      out.replicate = { cost: m[1] };
       continue;
     }
     // Haunt (rule 702.55a): the `haunt()` / `hauntSpell()` helpers' trigger.
@@ -17526,8 +17526,8 @@ function grantedCardsFilter(phrase, thats) {
 /**
  * The statics that reach cards outside the battlefield (rule 604.1): keyword
  * abilities with their cost for cards in your graveyard
- * (`grantsToGraveyard.keywords`) or a hand (`grantsCyclingInHand`,
- * `grantsForetellInHand`), sneak cast from the graveyard
+ * (`grantsToGraveyard.keywords`) or a hand (`grantsToHand`), sneak cast from
+ * the graveyard
  * (`castWithSneakFromGraveyard`), and types off the battlefield
  * (`outsideBattlefield`). `null` for any other line.
  */
@@ -17561,17 +17561,16 @@ function outsideBattlefieldStaticOf(line, text) {
     const search = m[3] === "" ? undefined : { subtype: m[3][0].toUpperCase() + m[3].slice(1) };
     return {
       ...self,
-      grantsCyclingInHand: {
-        cost: m[4],
+      grantsToHand: {
         filter,
-        ...(search !== undefined ? { search } : {}),
+        keywordValues: [{ keyword: "cycling", cost: m[4], ...(search !== undefined ? { search } : {}) }],
         ...(m[2] === "each player's hand" ? { eachPlayer: true } : {}),
       },
       text,
     };
   }
   if ((m = /^Each nonland card in your hand without foretell has foretell\. Its foretell cost is equal to its mana cost reduced by \{(\d+)\}\.$/.exec(line))) {
-    return { ...self, grantsForetellInHand: { filter: { notTypes: ["land"] }, reducedBy: Number(m[1]) }, text };
+    return { ...self, grantsToHand: { filter: { notTypes: ["land"] }, keywordValues: [{ keyword: "foretell", cost: { manaCostLess: Number(m[1]) } }] }, text };
   }
   if (line === "Each creature card in your graveyard has the chosen creature type in addition to its other types.") {
     return {
@@ -18723,7 +18722,7 @@ function parseStatic(line, text) {
           ? lowered
           : parseTypePhrase(m[1]);
     if (filter !== null && (m[1] === undefined || Object.keys(filter).length > 0)) {
-      const grant = m[3] === "convoke" ? { convoke: true } : m[3] === "improvise" ? { improvise: true } : { prowl: m[4] };
+      const grant = m[3] === "convoke" ? { convoke: true } : m[3] === "improvise" ? { improvise: true } : { keywordValues: [{ keyword: "prowl", cost: m[4] }] };
       return {
         affects: { scope: "self" },
         grantsToSpells: {
@@ -20187,7 +20186,7 @@ function parseStatic(line, text) {
   if ((m = /^(Each instant and sorcery card|Nonland cards) in your hand ha(?:s|ve) miracle ((?:\{[^}]+\})+)\.$/.exec(line))) {
     return {
       affects: { scope: "self" },
-      grantsToHand: { filter: m[1] === "Nonland cards" ? { notTypes: ["land"] } : { typesAnyOf: ["instant", "sorcery"] }, miracle: { cost: m[2] } },
+      grantsToHand: { filter: m[1] === "Nonland cards" ? { notTypes: ["land"] } : { typesAnyOf: ["instant", "sorcery"] }, keywordValues: [{ keyword: "miracle", cost: m[2] }] },
       text,
     };
   }

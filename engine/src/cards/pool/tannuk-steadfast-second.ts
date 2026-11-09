@@ -26,10 +26,7 @@ export default defineCard({
     },
     {
       affects: { scope: "self" },
-      grantsWarpInHand: {
-        cost: "{2}{R}",
-        filter: { anyOf: [{ type: "artifact" }, { type: "creature", colors: ["R"] }] },
-      },
+      grantsToHand: { filter: { anyOf: [{ type: "artifact" }, { type: "creature", colors: ["R"] }] }, keywordValues: [{ keyword: "warp", cost: "{2}{R}" }] },
       text: WARP_TEXT,
     },
   ],

@@ -29,7 +29,7 @@ export default defineCard({
   subtypes: ["Aura"],
   keywords: ["flash"],
   text: `Flash\nReplicate {2} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies. Copies become tokens.)\nEnchant creature\n${DIES_TEXT}`,
-  kicker: { cost: "{2}", keyword: "replicate", multi: true },
+  replicate: { cost: "{2}" },
   targets: ["creature"],
   triggered: [
     {

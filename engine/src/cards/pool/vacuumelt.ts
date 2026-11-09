@@ -11,7 +11,7 @@ export default defineCard({
   colors: ["U"],
   types: ["sorcery"],
   text: "Replicate {2}{U} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)\nReturn target creature to its owner's hand.",
-  kicker: { cost: "{2}{U}", keyword: "replicate", multi: true },
+  replicate: { cost: "{2}{U}" },
   targets: ["creature"],
   effect: { kind: "return-to-hand", target: 0 },
 });

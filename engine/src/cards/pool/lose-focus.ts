@@ -12,7 +12,7 @@ export default defineCard({
   colors: ["U"],
   types: ["instant"],
   text: "Replicate {U} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)\nCounter target spell unless its controller pays {2}.",
-  kicker: { cost: "{U}", keyword: "replicate", multi: true },
+  replicate: { cost: "{U}" },
   targets: ["spell"],
   effect: { kind: "unless", chooser: 0, options: [{ pay: "{2}", text: "Pay {2}" }], otherwise: { kind: "counter", target: 0 } },
 });

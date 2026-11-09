@@ -22,7 +22,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      grantsBlitzInHand: { filter: { type: "creature", manaValue: { op: "gte", n: 4 } } },
+      grantsToSpells: { filter: { type: "creature", manaValue: { op: "gte", n: 4 } }, keywordValues: [{ keyword: "blitz", cost: "mana-cost" }] },
       text: GRANT_TEXT,
     },
     {

@@ -264,6 +264,7 @@ import _poolExtremisElite from "../pool/extremis-elite.js";
 import _poolFaceOfDivinity from "../pool/face-of-divinity.js";
 import _poolFaerieMiscreant from "../pool/faerie-miscreant.js";
 import _poolFaerieSlumberParty from "../pool/faerie-slumber-party.js";
+import _poolFalkenrathGorger from "../pool/falkenrath-gorger.js";
 import _poolFalkenrathPerforator from "../pool/falkenrath-perforator.js";
 import _poolFalseDefeat from "../pool/false-defeat.js";
 import _poolFatalBlow from "../pool/fatal-blow.js";
@@ -397,6 +398,7 @@ import _poolIronManTitanOfInnovation from "../pool/iron-man-titan-of-innovation.
 import _poolIwamoriOfTheOpenFist from "../pool/iwamori-of-the-open-fist.js";
 import _poolJadeCastSentinel from "../pool/jade-cast-sentinel.js";
 import _poolJaheirasRespite from "../pool/jaheiras-respite.js";
+import _poolJandorFortunedTraveler from "../pool/jandor-fortuned-traveler.js";
 import _poolJarlOfTheForsaken from "../pool/jarl-of-the-forsaken.js";
 import _poolJetsBrainwashing from "../pool/jets-brainwashing.js";
 import _poolJohannsStopgap from "../pool/johanns-stopgap.js";
@@ -1233,6 +1235,7 @@ const shard: CardShard = {
     _poolFaceOfDivinity,
     _poolFaerieMiscreant,
     _poolFaerieSlumberParty,
+    _poolFalkenrathGorger,
     _poolFalkenrathPerforator,
     _poolFalseDefeat,
     _poolFatalBlow,
@@ -1366,6 +1369,7 @@ const shard: CardShard = {
     _poolIwamoriOfTheOpenFist,
     _poolJadeCastSentinel,
     _poolJaheirasRespite,
+    _poolJandorFortunedTraveler,
     _poolJarlOfTheForsaken,
     _poolJetsBrainwashing,
     _poolJohannsStopgap,

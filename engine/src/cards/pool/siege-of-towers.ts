@@ -24,7 +24,7 @@ export default defineCard({
   colors: ["R"],
   types: ["sorcery"],
   text: "Replicate {1}{R} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)\nTarget Mountain becomes a 3/1 creature. It's still a land.",
-  kicker: { cost: "{1}{R}", keyword: "replicate", multi: true },
+  replicate: { cost: "{1}{R}" },
   // "Becomes a 3/1 creature" with no duration is for good (the 2006 ruling);
   // it has no creature type.
   targets: [{ kind: "permanent", filter: { subtype: "Mountain" } }],

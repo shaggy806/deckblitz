@@ -17,12 +17,12 @@ describe("replicate", () => {
     const offers = game
       .legalActions(A)
       .filter((o) => o.kind === "cast-spell" && o.card === card)
-      .map((o) => (o.kind === "cast-spell" ? [o.kicked === true, o.kickCount, o.kickerKeyword] : null));
+      .map((o) => (o.kind === "cast-spell" ? o.keywordCosts?.replicate ?? null : null));
     expect(offers).toEqual(
       expect.arrayContaining([
-        [false, undefined, undefined],
-        [true, 1, "replicate"],
-        [true, 2, "replicate"],
+        null,
+        [1],
+        [2],
       ]),
     );
   });
@@ -31,7 +31,7 @@ describe("replicate", () => {
     const { game, a } = table();
     lands(game, "Mountain", 6);
     a.chooseTargetsFn = () => [ref(B)];
-    cast(game, toHand(game, "Pyromatics"), { targets: [ref(B)], kicked: true, kickCount: 2 });
+    cast(game, toHand(game, "Pyromatics"), { targets: [ref(B)], keywordCosts: { replicate: [2] } });
     expect(life(game, B)).toBe(17);
   });
 
@@ -48,7 +48,7 @@ describe("replicate", () => {
     lands(game, "Mountain", 4);
     const bear = spawn(game, "Grizzly Bears", B);
     a.chooseTargetsFn = () => [ref(bear)];
-    cast(game, toHand(game, "Pyromatics"), { targets: [ref(B)], kicked: true, kickCount: 1 });
+    cast(game, toHand(game, "Pyromatics"), { targets: [ref(B)], keywordCosts: { replicate: [1] } });
     expect(life(game, B)).toBe(19);
     expect(game.state.objects[bear].damageMarked).toBe(1);
   });
@@ -58,7 +58,7 @@ describe("replicate", () => {
     lands(game, "Island", 4);
     const train = toHand(game, "Train of Thought");
     const before = hand(game).length;
-    cast(game, train, { kicked: true, kickCount: 1, settle: false });
+    cast(game, train, { keywordCosts: { replicate: [1] }, settle: false });
     // The replicate trigger waits above the spell; counter the spell first.
     game.debugApplyEffect(B, { kind: "counter", target: 0 }, [ref(train)]);
     settle(game);
@@ -70,7 +70,7 @@ describe("replicate", () => {
   it("Thunderheads paid once: two 3/3 Weirds, exiled at the next end step", () => {
     const { game } = table();
     lands(game, "Island", 6);
-    cast(game, toHand(game, "Thunderheads"), { kicked: true, kickCount: 1 });
+    cast(game, toHand(game, "Thunderheads"), { keywordCosts: { replicate: [1] } });
     expect(tokensNamed(game, "Weird Token", A)).toBe(2);
     expect(graveyard(game).length).toBe(1);
   });
@@ -83,7 +83,7 @@ describe("replicate — cards it unblocked", () => {
     const one = spawn(game, "Ornithopter", B);
     const two = spawn(game, "Ornithopter", B);
     a.chooseTargetsFn = () => [ref(two)];
-    cast(game, toHand(game, "Shattering Spree"), { targets: [ref(one)], kicked: true, kickCount: 1 });
+    cast(game, toHand(game, "Shattering Spree"), { targets: [ref(one)], keywordCosts: { replicate: [1] } });
     expect(zone(game, one)).toBe("graveyard");
     expect(zone(game, two)).toBe("graveyard");
   });

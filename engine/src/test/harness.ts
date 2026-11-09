@@ -76,12 +76,15 @@ export function table(
     sideboard?: readonly string[];
     /** Cards each player opens with (the rules' default otherwise). */
     openingHandSize?: number;
+    /** The cards the game plays with, for a test that defines its own. */
+    registry?: CardRegistry;
   } = {},
 ): Table {
   const players = SEATS.slice(0, opts.players ?? 2);
   const seats = players.map((p) => new ScriptedController(p));
   const game = Game.create({
     seed: opts.seed ?? 1,
+    ...(opts.registry !== undefined ? { registry: opts.registry } : {}),
     shuffle: false,
     startingPlayer: A,
     rules: {

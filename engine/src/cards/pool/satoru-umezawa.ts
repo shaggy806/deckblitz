@@ -63,7 +63,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      grantsNinjutsuInHand: { cost: "{2}{U}{B}", filter: { type: "creature" } },
+      grantsToHand: { filter: { type: "creature" }, keywordValues: [{ keyword: "ninjutsu", cost: "{2}{U}{B}" }] },
       text: "Each creature card in your hand has ninjutsu {2}{U}{B}.",
     },
   ],

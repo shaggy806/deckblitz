@@ -15,7 +15,7 @@ export default defineCard({
   static: [
     {
       affects: { scope: "self" },
-      grantsCyclingInHand: { cost: "{3}", filter: { subtype: "Sliver" }, search: { subtype: "Sliver" }, eachPlayer: true },
+      grantsToHand: { filter: { subtype: "Sliver" }, eachPlayer: true, keywordValues: [{ keyword: "cycling", cost: "{3}", search: { subtype: "Sliver" } }] },
       text: "Each Sliver card in each player's hand has slivercycling {3}.",
     },
   ],

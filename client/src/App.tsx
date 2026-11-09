@@ -4,6 +4,7 @@ import type {
   Action,
   CastVia,
   GraveyardGrant,
+  KeywordCostsPaid,
   LegalAction,
   ManaType,
   ObjectId,
@@ -235,7 +236,7 @@ function graveyardVariantLabel(
     if (a.kicked) parts.push(`${a.kickerKeyword ?? 'kicked'} ${a.kickerCost ?? ''}`.trim())
     if (a.xCost?.minX !== undefined && a.xCost.minX === a.xCost.maxX) parts.push(`X=${a.xCost.maxX}`)
     if (a.prototype) parts.push(`prototype ${a.prototypeCost ?? ''}`.trim())
-    if (a.offspring) parts.push(`offspring ${a.offspringCost ?? ''}`.trim())
+    if (a.keywordCostsText) parts.push(a.keywordCostsText)
     if (a.optionalLifeText !== undefined) parts.push(a.optionalLifeText)
     if (a.splice) parts.push(`splicing ${a.splice.map((s) => `${s.cardName} ${s.cost}`).join(' and ')}`)
     if (a.evoke) parts.push(a.altCostText !== undefined ? `evoke: ${a.altCostText}` : `evoke ${a.evokeCost ?? ''}`.trim())
@@ -266,7 +267,8 @@ const castExtras = (cast: CastAction) => ({
   ...(cast.kicked === true ? { kicked: true } : {}),
   ...(cast.kickCount !== undefined ? { kickCount: cast.kickCount } : {}),
   ...(cast.prototype === true ? { prototype: true } : {}),
-  ...(cast.offspring === true ? { offspring: true } : {}),
+  ...(cast.keywordCosts !== undefined ? { keywordCosts: cast.keywordCosts } : {}),
+  ...(cast.emergeCost !== undefined ? { emergeCost: cast.emergeCost } : {}),
   // The Defilers' optional life (rule 601.2b): the permanents it pays for.
   ...(cast.optionalLife !== undefined ? { optionalLife: cast.optionalLife } : {}),
   ...(cast.evoke === true ? { evoke: true, evokeCost: cast.evokeCost } : {}),
@@ -600,8 +602,10 @@ interface Targeting {
   readonly kickCount?: number
   /** A prototyped cast (rule 718) — echoed back like `kicked`. */
   readonly prototype?: boolean
-  /** Paying a granted offspring cost too (Zinnia) — echoed back like `kicked`. */
-  readonly offspring?: boolean
+  /** The keyword costs this cast pays beyond kicker — echoed back like `kicked`. */
+  readonly keywordCosts?: KeywordCostsPaid
+  /** Which emerge cost it pays, when it has more than one. */
+  readonly emergeCost?: string
   /** The permanents whose optional "you may pay 2 life" this cast pays (the
    * Defilers) — echoed back like `kicked`. */
   readonly optionalLife?: readonly ObjectId[]
@@ -2513,7 +2517,8 @@ function Table({
         | 'kicked'
         | 'kickCount'
         | 'prototype'
-        | 'offspring'
+        | 'keywordCosts'
+        | 'emergeCost'
         | 'optionalLife'
         | 'evoke'
         | 'evokeCost'
@@ -2562,7 +2567,8 @@ function Table({
                 ...(t.kicked === true ? { kicked: true } : {}),
                 ...(t.kickCount !== undefined ? { kickCount: t.kickCount } : {}),
                 ...(t.prototype === true ? { prototype: true } : {}),
-                ...(t.offspring === true ? { offspring: true } : {}),
+                ...(t.keywordCosts !== undefined ? { keywordCosts: t.keywordCosts } : {}),
+                ...(t.emergeCost !== undefined ? { emergeCost: t.emergeCost } : {}),
                 ...(t.optionalLife !== undefined ? { optionalLife: [...t.optionalLife] } : {}),
                 ...(t.assist !== undefined ? { assist: t.assist } : {}),
                 ...(t.otherChooser !== undefined ? { otherChooser: t.otherChooser } : {}),
@@ -5731,7 +5737,7 @@ function Table({
             ) : c.free ? ' (free)' : ''}
             {castNowAction.anyMana === true ? ' (mana of any type)' : null}
             {c.prototype ? <> (prototype <Symbols text={c.prototypeCost ?? ''} />)</> : null}
-            {c.offspring ? <> (offspring <Symbols text={c.offspringCost ?? ''} />)</> : null}
+            {c.keywordCostsText ? <> (<Symbols text={c.keywordCostsText} />)</> : null}
             {c.evoke ? <> (evoke <Symbols text={c.evokeCost ?? ''} />)</> : null}
             {c.splice?.map((s) => (
               <span key={s.object}> (splicing {s.cardName} <Symbols text={s.cost} />)</span>
@@ -7132,6 +7138,11 @@ function Table({
           // that names it — never a click on the card that sacrifices silently.
           // So is a cast that asks another player to help pay (assist).
           const multiFace = faceOpts.length > 1 || faceOpts.some(needsOwnButton)
+          // Many ways to cast it (a multikicker, a replicate paid n times)
+          // open upward over the board: below the card they run off a short
+          // screen.
+          const wrapWays = (ways: ReactNode): ReactNode =>
+            faceOpts.length > 3 ? <div className="hand-card-ways">{ways}</div> : ways
           return (
             <div key={id} className="hand-card" data-obj-id={id} style={slotStyle}>
               <CardTile
@@ -7151,7 +7162,7 @@ function Table({
               />
               <KeywordTips obj={obj} className={`hand-kw-tips${fanOffset > 0 ? ' to-left' : ''}`} />
               {multiFace
-                ? faceOpts.map((a, i) => (
+                ? wrapWays(faceOpts.map((a, i) => (
                     <button key={i} type="button" onClick={() => playFace(a)}>
                       {a.kind === 'play-land' ? 'Play' : 'Cast'} {a.cardName}
                       {a.kind === 'cast-spell' && a.kicked ? (
@@ -7176,8 +7187,8 @@ function Table({
                       {a.kind === 'cast-spell' && a.via === 'impending' ? ' (impending)' : ''}
                       {a.kind === 'cast-spell' && a.via === 'more-than-meets-the-eye' ? ' (More Than Meets the Eye)' : ''}
                       {a.kind === 'cast-spell' && a.via === 'freerunning' ? ' (freerunning)' : ''}
-                      {a.kind === 'cast-spell' && a.offspring ? (
-                        <> (offspring <Symbols text={a.offspringCost ?? ''} />)</>
+                      {a.kind === 'cast-spell' && a.keywordCostsText ? (
+                        <> (<Symbols text={a.keywordCostsText} />)</>
                       ) : null}
                       {a.kind === 'cast-spell' && a.optionalLifeText !== undefined ? ` (${a.optionalLifeText})` : ''}
                       {a.kind === 'cast-spell' && a.assist !== undefined
@@ -7223,7 +7234,7 @@ function Table({
                           ))
                         : null}
                     </button>
-                  ))
+                  )))
                 : null}
               {suspend ? (
                 <button

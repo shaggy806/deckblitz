@@ -11,7 +11,7 @@ export default defineCard({
   colors: ["U", "R"],
   types: ["instant"],
   text: "Replicate {U}{R} (When you cast this spell, copy it for each time you paid its replicate cost. You may choose new targets for the copies.)\nTarget creature gets +1/+0 and gains flying and first strike until end of turn.",
-  kicker: { cost: "{U}{R}", keyword: "replicate", multi: true },
+  replicate: { cost: "{U}{R}" },
   targets: ["creature"],
   effect: {
     kind: "sequence",
