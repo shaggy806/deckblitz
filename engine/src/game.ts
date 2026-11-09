@@ -2088,6 +2088,9 @@ export class Game {
      * whole of it — a creature's combat damage to two blockers, a sweeper's
      * to every creature — and go once it's dealt. */
     readonly nextTimeSpent: ActiveReplacement[];
+    /** "If damage is prevented this way, …" owed for this event, per shield:
+     * once, for all it prevented (rule 615.5). */
+    readonly shieldThens: Map<NonNullable<ActiveReplacement["then"]>, { prevented: number; readonly source: ObjectId }>;
     readonly dealtDamage: Map<
       string,
       { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number }
@@ -53744,7 +53747,15 @@ export class Game {
         // "If damage is prevented this way, …" (615.5): right after.
         if (shield.then !== undefined && shield.redirect === undefined && shield.redirectToSource === undefined) {
           const t = shield.then;
-          this.applyPreventionFollowUp(t.spec, t.by, t.controller, t.targets, prevented, source);
+          // Part of a simultaneous event: once for all of it, after it.
+          const owed = this.damageBatch?.shieldThens;
+          if (owed === undefined) {
+            this.applyPreventionFollowUp(t.spec, t.by, t.controller, t.targets, prevented, source);
+          } else {
+            const same = owed.get(t);
+            if (same === undefined) owed.set(t, { prevented, source });
+            else same.prevented += prevented;
+          }
         }
       }
       for (const also of outcome.alsos) {
@@ -54125,6 +54136,7 @@ export class Game {
     const batch = {
       lifelink: new Map<ObjectId, { controller: PlayerId; amount: number }>(),
       nextTimeSpent: [] as ActiveReplacement[],
+      shieldThens: new Map<NonNullable<ActiveReplacement["then"]>, { prevented: number; readonly source: ObjectId }>(),
       dealtDamage: new Map<
         string,
         { ability: TriggeredAbility; trigger: PendingTrigger; multiplier: number }
@@ -54145,6 +54157,9 @@ export class Game {
       this.withCounterBatch(fn);
     } finally {
       this.damageBatch = null;
+    }
+    for (const [t, { prevented, source }] of batch.shieldThens) {
+      this.applyPreventionFollowUp(t.spec, t.by, t.controller, t.targets, prevented, source);
     }
     if (batch.nextTimeSpent.length > 0) {
       this.state.activeReplacements = this.state.activeReplacements.filter((s) => !batch.nextTimeSpent.includes(s));
