@@ -54200,15 +54200,13 @@ controlledBy,
   /**
    * The order to apply `steps` to `amount` damage from each of `sources`
    * identical sources (rule 616.1): the player being dealt the damage, or
-   * the controller of the permanent being dealt it, chooses — and the order
-   * chosen is the one best for them, worked out rather than asked (the
-   * user's call, 2026-10-14): the least damage, then the most of their
-   * prevention shields kept, then the least "prevent that damage and …"
-   * follow-up (The Mindskinner's mill); among equals, the order `damageSteps`
-   * lists them in. A player who wants *more* damage — their own creature's
-   * enrage, their own Phyrexian Unlife — isn't asked; that's a known limit.
-   * Once one applies, those that no longer would — anything after the damage
-   * is all prevented — don't (616.1f).
+   * the controller of the permanent being dealt it, chooses, where the event
+   * can ask them (`damageOrderAsked`). This is the order best for them, for
+   * what they didn't choose or a bot's answer: the least damage, then the
+   * most of their prevention shields kept, then the least "prevent that
+   * damage and …" follow-up (The Mindskinner's mill); among equals, the order
+   * `damageSteps` lists them in. Once one applies, those that no longer would
+   * — anything after the damage is all prevented — don't (616.1f).
    */
   private bestDamageOrder(
     amount: number,

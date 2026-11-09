@@ -2,10 +2,11 @@
  * The order of replacement and prevention effects (rule 616.1): the affected
  * player — the one being dealt the damage or controlling the permanent, the
  * one gaining the life, the controller of the permanent getting the counters
- * — chooses which applies first. The engine chooses for them, the best order:
- * the least damage, the most +1/+1 counters (the fewest -1/-1), a life gain
- * turned to loss before anything grows it. A player who wants the other
- * order isn't asked (a known limitation, docs/engine-gaps.md).
+ * — chooses which applies first. Here, the best order for them, what a seat
+ * that doesn't choose otherwise gets: the least damage, the most +1/+1
+ * counters (the fewest -1/-1), a life gain turned to loss before anything
+ * grows it. Damage is asked (`replacement-order-choice.test.ts`); counters and
+ * life aren't yet (docs/engine-gaps.md).
  *
  * Also the additive counter replacements ("that many plus one" — Hardened
  * Scales and its kin) and the damage and life cards that came with them.
