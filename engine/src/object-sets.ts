@@ -47,8 +47,10 @@ export interface SetMember {
 /** What a spell's or ability's cost can take (rules 601.2h, 602.2b): the
  * objects `{ paid }` names. `"unattached"` is the Equipment an "unattach an
  * Equipment" cost moved (rule 701.3d — Captain America's "that Equipment's
- * mana value"). */
-export type PaidKind = "sacrificed" | "discarded" | "exiled" | "revealed" | "tapped" | "unattached";
+ * mana value"). `"exiled-self"` is the card a graveyard ability's own "exile
+ * this card from your graveyard" took, kept as it last was there (the card
+ * you exiled, rule 702.97a; Dodgy Jalopy's ruling). */
+export type PaidKind = "sacrificed" | "discarded" | "exiled" | "exiled-self" | "revealed" | "tapped" | "unattached";
 
 /**
  * A set of objects, by where it comes from:

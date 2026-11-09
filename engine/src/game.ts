@@ -22451,7 +22451,12 @@ export class Game {
   private graveyardKeywordCost(card: GameObject, grant: GraveyardKeywordGrant): string | null {
     if (grant.keyword === "retrace") return "";
     const cost = grant.cost ?? "mana-cost";
-    if (cost === "mana-cost") return this.registry.get(card.cardName).manaCost;
+    if (cost === "mana-cost") {
+      const manaCost = this.registry.get(card.cardName).manaCost;
+      // "If the creature card you scavenge has {X} in its mana cost, X is 0"
+      // (Young Deathclaws' ruling): no X is announced for it.
+      return grant.keyword === "scavenge" && manaCost !== null ? manaCost.replace(/\{X\}/g, "") || "{0}" : manaCost;
+    }
     if (cost === "mana-value") return `{${manaValueOfObject(this.registry, card)}}`;
     return cost;
   }
@@ -23958,7 +23963,12 @@ export class Game {
       // resolution, and stands even if the ability is countered. A
       // `staysInZone` ability (Reassembling Skeleton) has no such cost: the
       // card waits in the graveyard for its own effect to move it.
-      if (ability.staysInZone !== true) this.moveObject(sourceId, "exile");
+      if (ability.staysInZone !== true) {
+        const was = this.takeLastKnown(sourceId);
+        this.moveObject(sourceId, "exile");
+        const stint = this.state.objects[sourceId]?.zoneChangeCount ?? 0;
+        paidSets = addToSet(paidSets, { paid: "exiled-self" }, [{ object: sourceId, stint, was }]);
+      }
     }
     // A command-zone ability (Derevi) costs no zone change either — putting
     // the card onto the battlefield is its *effect*, which is why it isn't
@@ -37215,7 +37225,7 @@ controlledBy,
       // as it left, mills nothing (its ruling).
       powerOf: (target) => {
         const lki = lastKnownOf(target);
-        if (lki !== undefined) return lki.types.includes("creature") ? lki.power : 0;
+        if (lki !== undefined) return lki.offBattlefield === true || lki.types.includes("creature") ? lki.power : 0;
         if (target.kind !== "object" || this.state.objects[target.object] === undefined) return 0;
         const chars = computeCharacteristics(this.state, this.registry, target.object);
         return this.state.objects[target.object].zone === "battlefield" && !chars.types.includes("creature")
@@ -37224,7 +37234,7 @@ controlledBy,
       },
       toughnessOf: (target) => {
         const lki = lastKnownOf(target);
-        if (lki !== undefined) return lki.types.includes("creature") ? lki.toughness : 0;
+        if (lki !== undefined) return lki.offBattlefield === true || lki.types.includes("creature") ? lki.toughness : 0;
         if (target.kind !== "object" || this.state.objects[target.object] === undefined) return 0;
         const chars = computeCharacteristics(this.state, this.registry, target.object);
         return this.state.objects[target.object].zone === "battlefield" && !chars.types.includes("creature")
@@ -57584,6 +57594,7 @@ controlledBy,
       name,
       owner: object.owner,
       controller: object.controller,
+      ...(object.zone !== "battlefield" ? { offBattlefield: true as const } : {}),
       power: c.power,
       toughness: c.toughness,
       basePower: c.basePower,

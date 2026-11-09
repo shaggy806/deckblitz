@@ -2017,6 +2017,10 @@ export interface AttachmentRecord {
  * rest of the turn.
  */
 export interface LastKnownInfo {
+  /** Read in a zone other than the battlefield: a card, so rule 208.3's "a
+   * noncreature permanent has no power or toughness" doesn't touch it (a
+   * Vehicle card's power in a graveyard). */
+  readonly offBattlefield?: true;
   /** How many times it had mutated (`GameObject.merged.timesMutated`). */
   readonly timesMutated?: number;
   /** A token's `GameObject.linkedExile`: what its leaves-the-battlefield

@@ -1846,7 +1846,7 @@ export const scavenge = (cost: string): ActivatedAbility => ({
   zone: "graveyard",
   sorcerySpeed: true,
   targets: [{ kind: "permanent", whose: "any", filter: { type: "creature" } }],
-  effect: { kind: "add-counter", target: 0, counter: "+1/+1", amount: { powerOf: "source" } },
+  effect: { kind: "add-counter", target: 0, counter: "+1/+1", amount: { powerOf: { paid: "exiled-self" } } },
   resolve: null,
   text: `Scavenge ${cost} (${cost}, Exile this card from your graveyard: Put a number of +1/+1 counters equal to this card's power on target creature. Scavenge only as a sorcery.)`,
 });
