@@ -1,0 +1,150 @@
+{
+ "batch": "B293",
+ "status": "done",
+ "ranks": "Need-keys Phase 2: cards freed by the need-key themes and the last engine gaps (20, the queue's end)",
+ "authored": [
+  {
+   "name": "Bog Witch",
+   "files": [
+    "engine/src/cards/pool/bog-witch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skirge Familiar",
+   "files": [
+    "engine/src/cards/pool/skirge-familiar.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Skin Invasion // Skin Shedder",
+   "files": [
+    "engine/src/cards/pool/skin-invasion.ts",
+    "engine/src/cards/pool/skin-shedder.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Celestial Gatekeeper",
+   "files": [
+    "engine/src/cards/pool/celestial-gatekeeper.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Human Torch",
+   "files": [
+    "engine/src/cards/pool/human-torch.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Xira, the Golden Sting",
+   "files": [
+    "engine/src/cards/pool/xira-the-golden-sting.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Aphelia, Viper Whisperer",
+   "files": [
+    "engine/src/cards/pool/aphelia-viper-whisperer.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Forth Eorlingas!",
+   "files": [
+    "engine/src/cards/pool/forth-eorlingas.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Duskmantle Guildmage",
+   "files": [
+    "engine/src/cards/pool/duskmantle-guildmage.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Over the Top",
+   "files": [
+    "engine/src/cards/pool/over-the-top.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Eight-and-a-Half-Tails",
+   "files": [
+    "engine/src/cards/pool/eight-and-a-half-tails.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Ersatz Gnomes",
+   "files": [
+    "engine/src/cards/pool/ersatz-gnomes.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Callidus Assassin",
+   "files": [
+    "engine/src/cards/pool/callidus-assassin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Evil Twin",
+   "files": [
+    "engine/src/cards/pool/evil-twin.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Dragon Broodmother",
+   "files": [
+    "engine/src/cards/pool/dragon-broodmother.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Acolyte of Bahamut",
+   "files": [
+    "engine/src/cards/pool/acolyte-of-bahamut.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Gaddock Teeg",
+   "files": [
+    "engine/src/cards/pool/gaddock-teeg.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Decaying Soil",
+   "files": [
+    "engine/src/cards/pool/decaying-soil.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Screeching Scorchbeast",
+   "files": [
+    "engine/src/cards/pool/screeching-scorchbeast.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": [
+  {
+   "name": "Sanctum Prelate",
+   "needs": [
+    "static:choose-any-number-on-enter"
+   ],
+   "why": "\"Choose a number\" has no upper bound, and chooseOnEnter is a fixed menu of strings, so any capped menu takes away part of the printed choice. The cast prohibition itself is built."
+  }
+ ]
+}

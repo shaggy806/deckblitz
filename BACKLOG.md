@@ -521,6 +521,7 @@ section keeps only what to do next.
   leave trigger), Cait, Cage Brawler (two simultaneous discards; no scope names "you and defending player"), The Last Agni Kai ("until end of turn" mana keeping), Curse of
   Shaken Faith (other needs), Sudden Substitution (an exchange), Chef's Kiss (a random retarget), March of Burgeoning Life and March of Reckless Joy (their own effects). To
   check, likely authorable: Invert Polarity, Foreboding Steamboat, Last Chance, Aang, Airbending Master (airbend and upkeep lines unread).
+  **The queue emptied again 2026-11-09 (B293):** the 20 cards theme 15 and the last engine gaps freed, 19 authored (Forth Eorlingas!, Skirge Familiar, Screeching Scorchbeast, Xira, Evil Twin, Callidus Assassin, Human Torch, ...), Sanctum Prelate blocked (`static:choose-any-number-on-enter`). What comes next is in `docs/plans/after-the-themes.md`.
   **The freed queue is empty (B291, 2026-11-09):** the last 145 cards, 109 authored and 36 blocked on 32 narrow keys (`effect:player-cant-gain-life-bound` for Screaming Nemesis, Stigma Lasher and Flames of the Blood Hand; `amount:scavenge-power-in-graveyard`, `trigger:becomes-crewed-first-time` and `filter:directly-above-in-graveyard` two each). `cards:needs -- --stale` lists nothing until more keys land, so `next-theme` (theme 15) and then `build-family` are next. Tonight's gap agents then authored 12 of those 36 (`COMPLETED.md`, Engine rules gaps).
 
 - **Or: more cards, in EDHREC rank order** (the `author-top-cards` skill; the priority 2026-10-13

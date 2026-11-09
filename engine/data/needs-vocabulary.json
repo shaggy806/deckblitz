@@ -16193,6 +16193,11 @@
    "family": "condition:filter-this-turn-history",
    "example": "Faramir, Prince of Ithilien: whether a named player attacked you this turn, from the journal, whatever has left since."
   },
+  "static:choose-any-number-on-enter": {
+   "family": "static:prohibit-spells-by-chosen-number",
+   "description": "As it enters, choose a number with no upper bound: chooseOnEnter is a fixed menu of strings.",
+   "example": "Sanctum Prelate: \"As this creature enters, choose a number.\""
+  },
   "replacement:active-prevention-then": {
    "family": "replacement:prevention-then-per-damage",
    "example": "Ria Ivor, Bane of Bladehold: A resolved replacement-effect prevention shield prevents the damage but its 'then' made no Mites."

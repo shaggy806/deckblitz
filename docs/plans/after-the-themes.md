@@ -1,6 +1,6 @@
 # After the need-key themes
 
-Status: **proposed order of work** (2026-11-09), step 1's theme 15 landed (B292); `author-freed` next. Step 5 waits on a decision from the
+Status: **proposed order of work** (2026-11-09), step 1 done (theme 15, B292; its freed cards, B293); step 2 next. Step 5 waits on a decision from the
 user. It takes over from `need-key-themes` when theme 15 lands, and changes what `build-family` is
 pointed at after that.
 

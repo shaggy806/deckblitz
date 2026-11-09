@@ -926,6 +926,7 @@ missing. Re-run `--greedy` for Phase 2's order.
 - **2026-11-06: `build-family overnight`, by rank, five agents (stopped early at the user's call).** Shatterskull Smashing (1423, re-landed with its fix), Defiler of Vigor (1656), Skrelv's Hive, Norn's Annex, Summon: Fenrir, Winds of Abandon, The Last Agni Kai, Aven Interrupter, Inti, Thirst for Knowledge, Abundance, Temur Sabertooth, Mutational Advantage, Tempt with Bunnies and Wild Magic Surge (1999): fifteen cards, fifteen keys, seven of them needing no engine code; `--stale` 4 (three Defilers, Chaotic Transformation).
 - **2026-11-07: `author-freed`, batch 275, with need-key themes step 1** (`docs/plans/need-key-themes.md`). 33 authored (one agent of 44, a blind reader over all of them, 0 wrong), 16 given 15 new narrow keys; 13 duplicate keys merged, nine keys built (six with no engine code); `--stale` 0.
 - **2026-11-09: `author-freed overnight`, batch 291: the queue is empty.** The last 145 freed cards: 109 authored, 36 blocked on 32 narrow keys (`B291.json`). A blind read of all 131 files found one card that could never pay its cost (Osgir) and two that broke a ruling (scavenge reading power from exile), all blocked; the situation fuzzer found the journal reading a stale cache.
+- **2026-11-09: `author-freed`, batch 293.** The 20 cards theme 15 and the last engine gaps freed: 19 authored, one blocked. The queue is empty again.
 
 ## Rough size
 

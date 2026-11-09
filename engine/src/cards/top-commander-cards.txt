@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4766 already implemented / 234 missing (marks refreshed 2026-11-09)
+4769 already implemented / 231 missing (marks refreshed 2026-11-09)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2921,7 +2921,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2928  Crystalline Crawler                      {4}              Artifact Creature — Construct
 [x]  2929  Derevi, Empyrial Tactician               {G}{W}{U}        Legendary Creature — Bird Wizard
 [x]  2930  Legion Loyalty                           {6}{W}{W}        Enchantment
-[ ]  2931  Skirge Familiar                          {4}{B}           Creature — Phyrexian Imp
+[x]  2931  Skirge Familiar                          {4}{B}           Creature — Phyrexian Imp
 [x]  2932  Mudflat Village                          {0}              Land
 [ ]  2933  Duplicant                                {6}              Artifact Creature — Shapeshifter
 [x]  2934  Savage Beating                           {3}{R}{R}        Instant
@@ -3193,7 +3193,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3200  Betor, Kin to All                        {2}{W}{B}{G}     Legendary Creature — Spirit Dragon
 [ ]  3201  Geode Golem                              {5}              Artifact Creature — Golem
 [x]  3202  Collective Effort                        {1}{W}{W}        Sorcery
-[ ]  3203  Forth Eorlingas!                         {X}{R}{W}        Sorcery
+[x]  3203  Forth Eorlingas!                         {X}{R}{W}        Sorcery
 [x]  3204  Flayer of Loyalties                      {8}{C}{C}        Creature — Eldrazi
 [x]  3205  Impostor Syndrome                        {4}{U}{U}        Enchantment
 [x]  3206  Zimone, Paradox Sculptor                 {2}{G}{U}        Legendary Creature — Human Wizard
@@ -4234,7 +4234,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4241  Dance with Calamity                      {7}{R}           Sorcery
 [x]  4242  Revitalize                               {1}{W}           Instant
 [x]  4243  Mechanized Warfare                       {1}{R}{R}        Enchantment
-[ ]  4244  Screeching Scorchbeast                   {4}{B}{B}        Creature — Bat Mutant
+[x]  4244  Screeching Scorchbeast                   {4}{B}{B}        Creature — Bat Mutant
 [ ]  4245  Neyith of the Dire Hunt                  {2}{G}{G}        Legendary Creature — Human Warrior
 [x]  4246  Herd Baloth                              {3}{G}{G}        Creature — Beast
 [x]  4247  Manakin                                  {2}              Artifact Creature — Construct
