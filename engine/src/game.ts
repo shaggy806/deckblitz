@@ -10736,7 +10736,7 @@ export class Game {
       // A wish's find is revealed from outside the game (rule 701.23j); a
       // face-up exiled card it may take instead is already public.
       const zoneOf = (id: ObjectId): ZoneType | undefined => this.state.objects[id]?.zone;
-      this.revealCards(player, chosen.filter((id) => zoneOf(id) === "library"), "library");
+      this.revealCards(player, chosen.filter((id) => zoneOf(id) === "library" || zoneOf(id) === "graveyard"), "library");
       this.revealCards(player, chosen.filter((id) => zoneOf(id) === "hand"), "hand");
       this.revealCards(player, chosen.filter((id) => zoneOf(id) === "outside"), "sideboard");
     }
