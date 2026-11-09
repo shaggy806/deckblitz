@@ -1789,6 +1789,25 @@ function castableFaces(def: CardDefinition): readonly (number | undefined)[] {
  * `xCost` instead. */
 const xPlanCost = (cost: string | null): boolean => cost !== null && parseManaCost(cost).x > 0;
 
+/** Whether `def`'s target slots `slots` can be swapped without changing the
+ * spell (This Town Ain't Big Enough's two return-to-hands): the same spec, and
+ * a `sequence` doing the same thing to each. */
+function targetSlotsInterchangeable(def: CardDefinition, slots: readonly number[]): boolean {
+  const bare = (spec: TargetSpec | undefined): string => {
+    let s: TargetSpec | undefined = spec;
+    while (typeof s === "object" && s !== null && (s.kind === "optional" || s.kind === "other")) s = s.of;
+    return JSON.stringify(s ?? null);
+  };
+  const specs = def.targets;
+  if (specs.length !== slots.length) return false;
+  if (new Set(slots.map((i) => bare(specs[i]))).size !== 1) return false;
+  const effect = def.effect as { readonly kind?: string; readonly effects?: readonly unknown[] } | null;
+  if (effect?.kind !== "sequence" || effect.effects?.length !== slots.length) return false;
+  const shapes = new Set(effect.effects.map((e) => JSON.stringify(e).replace(/"target":\d+/g, '"target":0')));
+  const reads = new Set(effect.effects.map((e) => JSON.stringify(e).match(/"target":(\d+)/)?.[1]));
+  return shapes.size === 1 && reads.size === slots.length;
+}
+
 /** The most sets of picks `tapCostOffer` tries for one candidate. */
 const TAP_CHOICE_TRIALS = 64;
 
@@ -16007,7 +16026,9 @@ export class Game {
     if (!this.spellPricedByTargets(def, player, cardId)) return all;
     const earning = all.map((slot) => slot.filter((ref) => this.targetsEarnReduction(def, player, cardId, [ref])));
     const slots = earning.flatMap((slot, i) => (slot.length > 0 ? [i] : []));
-    if (slots.length !== 1) return all;
+    // More than one slot can earn it: narrow one only where the slots are
+    // interchangeable, so no legal cast is lost by its earner going first.
+    if (slots.length === 0 || (slots.length > 1 && !targetSlotsInterchangeable(def, slots))) return all;
     this.targetCostReductionOff = true;
     let full: boolean;
     try {
