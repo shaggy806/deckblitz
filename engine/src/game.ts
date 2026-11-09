@@ -19961,7 +19961,7 @@ export class Game {
    * answered, or once the opponent it named has chosen
    * (`resumeOtherChoice`). */
   private carryOutCastNow(cast: Extract<Action, { type: "cast-spell" }>): void {
-    {
+    this.withOptionalLifePick(cast.optionalLife, () => {
       this.withWaterbendChoice(cast.card, cast.waterbend, () =>
         this.castSpell(
           cast.player,
@@ -19984,7 +19984,7 @@ export class Game {
           cast.prototype === true,
         ),
       );
-    }
+    });
   }
 
   private castSpell(

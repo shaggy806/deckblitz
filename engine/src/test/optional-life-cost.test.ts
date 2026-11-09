@@ -11,7 +11,7 @@ import { describe, expect, it } from "vitest";
 import type { LegalAction } from "../actions.js";
 import type { Game } from "../game.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
-import { A, B, cast, counters, hand, lands, life, spawn, table, toHand, toLibrary, zone } from "./harness.js";
+import { A, B, cast, counters, hand, lands, life, settle, spawn, table, toHand, toLibrary, zone } from "./harness.js";
 
 type CastOffer = Extract<LegalAction, { kind: "cast-spell" }>;
 const offers = (game: Game, card: ObjectId, player: PlayerId = A): CastOffer[] =>
@@ -19,6 +19,41 @@ const offers = (game: Game, card: ObjectId, player: PlayerId = A): CastOffer[] =
 const paying = (game: Game, card: ObjectId): (readonly ObjectId[] | undefined)[] =>
   offers(game, card).map((o) => o.optionalLife);
 const untapped = (game: Game, ids: readonly ObjectId[]): number => ids.filter((id) => game.state.objects[id].tapped !== true).length;
+
+describe("the Defilers' optional life on a spell cast by an effect (rule 601.2b)", () => {
+  it("a cast-now offers it, paying it costs the life and takes {G} off", () => {
+    const { game, a } = table();
+    const defiler = spawn(game, "Defiler of Vigor");
+    lands(game, "Forest", 1);
+    const bears = toHand(game, "Grizzly Bears");
+    const seen: (readonly ObjectId[] | undefined)[] = [];
+    a.chooseCastNowFn = (_view, offer) => {
+      seen.push(...offer.casts.map((c) => c.optionalLife));
+      const way = offer.casts.find((c) => c.optionalLife !== undefined)!;
+      return { type: "cast-spell", player: A, card: bears, targets: [], via: way.via, optionalLife: way.optionalLife! };
+    };
+    game.debugApplyEffect(A, { kind: "cast-now", from: "hand", filter: { name: "Grizzly Bears" } });
+    settle(game);
+    expect(seen).toContainEqual([defiler]);
+    expect(life(game, A)).toBe(18);
+    expect(zone(game, bears)).toBe("battlefield");
+  });
+
+  it("offered without paying its mana cost too (Defiler's life, still announced)", () => {
+    const { game, a } = table();
+    const defiler = spawn(game, "Defiler of Vigor");
+    const bears = toHand(game, "Grizzly Bears");
+    a.chooseCastNowFn = (_view, offer) => {
+      const way = offer.casts.find((c) => c.optionalLife !== undefined)!;
+      expect(way.optionalLife).toEqual([defiler]);
+      return { type: "cast-spell", player: A, card: bears, targets: [], via: way.via, free: true, optionalLife: way.optionalLife! };
+    };
+    game.debugApplyEffect(A, { kind: "cast-now", from: "hand", filter: { name: "Grizzly Bears" }, free: true });
+    settle(game);
+    expect(life(game, A)).toBe(18);
+    expect(zone(game, bears)).toBe("battlefield");
+  });
+});
 
 describe("the Defilers' optional life (Defiler of Vigor)", () => {
   it("pays 2 life for {G} off a green permanent spell, the rest still paid", () => {
