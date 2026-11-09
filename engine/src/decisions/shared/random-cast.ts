@@ -10,7 +10,7 @@ import type { Action, CastSpellOffer } from "../../actions.js";
 import { convokeProofFor, delvePicks, tapCountForModes, tapPicksPower } from "../../actions.js";
 import type { ObjectId, PlayerId } from "../../primitives.js";
 import type { TargetRef, TargetSpec } from "../../target.js";
-import { fitTargetCount, maxXForTargets, minXForTargets, targetsWithinTaxes } from "../../target-count.js";
+import { distinctTargetCount, fitTargetCount, maxXForTargets, minXForTargets, targetsWithinTaxes } from "../../target-count.js";
 import type { RandomSource } from "../contract.js";
 
 /**
@@ -112,7 +112,7 @@ export function randomCast(
       tap.push(pool.splice(rng.pickIndex(pool.length), 1)[0]);
     }
   }
-  const convoke = legal.convoke === undefined ? [] : convokeProofFor(legal.convoke, xValue ?? 0);
+  const convoke = legal.convoke === undefined ? [] : convokeProofFor(legal.convoke, xValue ?? 0, distinctTargetCount(targets));
   return {
     type: "cast-spell",
     player,

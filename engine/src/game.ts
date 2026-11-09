@@ -5636,6 +5636,16 @@ export class Game {
                   // made unpaid). Otherwise it's the allocation `castableAt`
                   // proved.
                   proof: manaAffordable ? [] : this.maxConvokeFor(candidates, full, def, card, player),
+                  ...(!manaAffordable && xPlan === null && targetCount !== undefined && targetCount.min < targetCount.max
+                    ? {
+                        proofByTargetCount: Object.fromEntries(
+                          Array.from({ length: targetCount.max - targetCount.min + 1 }, (_unused, i) => targetCount!.min + i).map((n) => [
+                            n,
+                            this.maxConvokeFor(candidates, this.castingCostOf(player, card, def, 0, cost, n), def, card, player),
+                          ]),
+                        ),
+                      }
+                    : {}),
                   ...(this.improvisesOnly(def, card, player) ? { improvise: true as const } : {}),
                   ...(this.tapPayKinds(def, card, player).convoke && this.tapPayKinds(def, card, player).improvise
                     ? { alsoImprovise: true as const }

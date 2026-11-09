@@ -1034,7 +1034,11 @@ export type ConvokeOffer = NonNullable<Extract<LegalAction, { kind: "cast-spell"
  * is one the cost no longer has, and with fewer creatures tapped the mana
  * can pay whatever remains as well as it could before.
  */
-export function convokeProofFor(offer: ConvokeOffer, xValue = 0): ConvokePayment[] {
+export function convokeProofFor(offer: ConvokeOffer, xValue = 0, targetCount?: number): ConvokePayment[] {
+  // Where the cost turns on how many targets are chosen (`proof` is for the
+  // dearest count): the payment proved for this many.
+  const counted = targetCount === undefined ? undefined : offer.proofByTargetCount?.[targetCount];
+  if (counted !== undefined) return [...counted];
   const x = offer.xProof;
   if (x === undefined) return [...offer.proof];
   let drop = Math.max(0, x.atX - Math.max(0, Math.floor(xValue))) * x.genericPerX;
@@ -1590,6 +1594,12 @@ export type LegalAction =
          * allocation could tap a mana creature the cost needs for its colour.
          */
         readonly proof: readonly ConvokePayment[];
+        /** For a spell whose cost turns on how many targets it has (Strive,
+         * `TargetCountRange`), a payment that works for each count on
+         * offer: `proof` is for the dearest, and overpays the others (a
+         * cast with too many creatures tapped is refused, rule 702.51a).
+         * Keyed by distinct target count. */
+        readonly proofByTargetCount?: Readonly<Record<number, readonly ConvokePayment[]>>;
         /** Whether the spell can be paid for with mana alone. When it can't,
          * convoking isn't optional, and `proof` is a set that works. */
         readonly manaAffordable: boolean;
