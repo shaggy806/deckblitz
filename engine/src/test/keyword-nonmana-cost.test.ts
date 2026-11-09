@@ -205,6 +205,23 @@ describe("splice: a cost that isn't mana", () => {
     expect(pt(game, blocker).power).toBe(2);
   });
 
+  it("a sacrifice can supply the cards another spliced card's exile needs (rule 601.2h)", () => {
+    const { game, a } = table();
+    const mountains = lands(game, "Mountain", 2);
+    const whisper = toHand(game, "Horobi's Whisper");
+    const torrent = toHand(game, "Torrent of Stone");
+    const ray = toHand(game, "Glacial Ray");
+    const cards = graveyardOf(game, 3);
+    const hill = spawn(game, "Hill Giant", B);
+    const angel = spawn(game, "Serra Angel", B);
+    const exiled = pickFromZone(a, ...cards, mountains[0]);
+    expect(offersOf(game, ray).some((o) => o.splice?.length === 2)).toBe(true);
+    cast(game, ray, { targets: [ref(B), ref(hill), ref(angel)], splice: [whisper, torrent] });
+    expect(exiled.offered).toEqual([...cards, ...mountains]);
+    for (const id of [...cards, mountains[0]]) expect(zone(game, id)).toBe("exile");
+    expect(zone(game, mountains[1])).toBe("graveyard");
+  });
+
   it("several spliced cards are paid one after another", () => {
     const { game, a } = table();
     const mountains = lands(game, "Mountain", 2);

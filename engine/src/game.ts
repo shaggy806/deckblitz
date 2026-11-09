@@ -41808,7 +41808,26 @@ controlledBy,
       }
     }
     for (const { filter, count } of countsByFilter(costs.flatMap((also) => also.exileFromGraveyard ?? []))) {
-      if (this.graveyardCostCandidates(player, filter, cardId).length < count) {
+      // Costs are paid in any order (rule 601.2h): what one sacrifice puts
+      // into the graveyard can be what another's exile takes.
+      const fromSacrifices = countsByFilter(costs.flatMap((also) => also.sacrifice ?? [])).reduce(
+        (n, sacrifice) =>
+          n +
+          Math.min(
+            sacrifice.count,
+            this.costSacrificeEligible(player, sacrifice.filter as CardFilter, undefined).filter((id) => {
+              const object = this.state.objects[id];
+              return (
+                object !== undefined &&
+                object.isToken !== true &&
+                object.owner === player &&
+                (filter === undefined || matchesFilter(this.state, this.registry, id, filter, { you: player }))
+              );
+            }).length,
+          ),
+        0,
+      );
+      if (this.graveyardCostCandidates(player, filter, cardId).length + fromSacrifices < count) {
         return `${player} has too few cards in their graveyard to pay ${def.name}'s ${keyword} cost`;
       }
     }
