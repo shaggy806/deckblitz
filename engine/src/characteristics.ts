@@ -132,12 +132,18 @@ const COMBAT_STEPS: ReadonlySet<Step> = new Set<Step>([
  * Ids whose static `condition` is currently being evaluated. A condition that
  * reads other permanents' *computed* characteristics (`controls` / `metalcraft`)
  * can loop back here — two Kird Apes each ask "does the other satisfy my
- * condition?". Re-entry for an id already on this stack returns `false`
- * (conservative): the inner call resolves that permanent's non-conditional
- * characteristics (type / subtypes), which is all the outer scan needs.
+ * condition?". Re-entry for a condition already on this stack, for the same
+ * id, returns `false` (conservative): the inner call resolves that permanent's
+ * non-conditional characteristics (type / subtypes), which is all the outer
+ * scan needs. A *different* condition of the same permanent is still asked: a
+ * Spacecraft's "as long as this isn't a creature" folds its layer-4 types,
+ * which its station band's own condition decides (rules 613.1d, 613.1f). The
+ * conditions on one id's stack stop at {@link MAX_CONDITIONS_IN_PROGRESS}, for
+ * a condition built afresh at each ask, whose identity never repeats.
  * Transient computation scaffolding — never part of `GameState`.
  */
-const conditionInProgress = new Set<ObjectId>();
+const conditionInProgress = new Map<ObjectId, StaticCondition[]>();
+const MAX_CONDITIONS_IN_PROGRESS = 8;
 
 /**
  * Ids whose characteristic-defining count (`setBasePtFromCount`) is currently
@@ -579,7 +585,7 @@ export function devotionOf(
  *
  * By default the battlefield scan skips `source` itself (see
  * {@link ConditionOptions.includeSelf}), and a re-entrant call for the same id
- * short-circuits to `false` (see `conditionInProgress`). Full dependency
+ * and condition short-circuits to `false` (see `conditionInProgress`). Full dependency
  * ordering between mutually-conditional permanents is not modeled (the same
  * gap noted for layers generally).
  * ROADMAP Phase 11 EG-3; extended to triggered abilities in needed-cards P7.
@@ -592,12 +598,15 @@ export function staticConditionMet(
   opts: ConditionOptions = {},
 ): boolean {
   if (opts.outsideFold === true) return evalStaticCondition(state, registry, source, condition, opts);
-  if (conditionInProgress.has(source.id)) return false;
-  conditionInProgress.add(source.id);
+  let asking = conditionInProgress.get(source.id);
+  if (asking !== undefined && (asking.includes(condition) || asking.length >= MAX_CONDITIONS_IN_PROGRESS)) return false;
+  if (asking === undefined) conditionInProgress.set(source.id, (asking = []));
+  asking.push(condition);
   try {
     return evalStaticCondition(state, registry, source, condition, opts);
   } finally {
-    conditionInProgress.delete(source.id);
+    asking.pop();
+    if (asking.length === 0) conditionInProgress.delete(source.id);
   }
 }
 
