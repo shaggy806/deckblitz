@@ -29845,6 +29845,24 @@ export class Game {
         }
         continue;
       }
+      // "Whenever a card is put into an opponent's graveyard … this turn"
+      // (Duskmantle Guildmage): once per card, each its own trigger object
+      // where it landed, as a printed `put-into-graveyard` trigger.
+      if (at.whenever.on === "put-into-graveyard" && at.whenever.batched !== true && event.type === "cards-put-into-graveyard") {
+        for (const card of this.graveyardArrivals(at.whenever, event.arrivals, object)) {
+          const { triggerValue: _count, ...single } = pending;
+          this.state.pendingTriggers.push({
+            ...single,
+            triggerObject: card,
+            lastKnownRefs: {
+              ...(pending.lastKnownRefs ?? {}),
+              triggerObjectAfterLeaving: this.state.objects[card]?.zoneChangeCount ?? 0,
+            },
+          });
+          if (at.once === true) break;
+        }
+        continue;
+      }
       // "Whenever one or more creatures deal combat damage to a player this
       // turn" (Jace, Cunning Castaway): once per player, or per event, for
       // the whole simultaneous event, as a printed one (rule 603.2c).
