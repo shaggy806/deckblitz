@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4741 already implemented / 259 missing (marks refreshed 2026-11-09)
+4744 already implemented / 256 missing (marks refreshed 2026-11-09)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -2675,7 +2675,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2682  Freyalise, Llanowar's Fury               {3}{G}{G}        Legendary Planeswalker — Freyalise
 [ ]  2683  Gilded Drake                             {1}{U}           Creature — Drake
 [x]  2684  Jwari Disruption // Jwari Ruins          {2}              Instant // Land
-[ ]  2685  Gandalf the White                        {3}{W}{W}        Legendary Creature — Avatar Wizard
+[x]  2685  Gandalf the White                        {3}{W}{W}        Legendary Creature — Avatar Wizard
 [x]  2686  Shadrix Silverquill                      {3}{W}{B}        Legendary Creature — Elder Dragon
 [x]  2687  Zenith Chronicler                        {2}              Artifact Creature — Phyrexian Construct
 [x]  2688  Invisible Stalker                        {1}{U}           Creature — Human Rogue
@@ -2744,7 +2744,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  2751  Heartless Summoning                      {1}{B}           Enchantment
 [x]  2752  Wilhelt, the Rotcleaver                  {2}{U}{B}        Legendary Creature — Zombie Warrior
 [ ]  2753  Virtue of Strength // Garenbrig Growth   {5}{G}{G} // {G} Enchantment // Sorcery — Adventure
-[ ]  2754  Flesh Duplicate                          {U}{U}           Creature — Shapeshifter Rebel
+[x]  2754  Flesh Duplicate                          {U}{U}           Creature — Shapeshifter Rebel
 [ ]  2755  Charred Foyer // Warped Space            {3}{R} // {4}{R}{R} Enchantment — Room // Enchantment — Room
 [x]  2756  Retreat to Hagra                         {2}{B}           Enchantment
 [x]  2757  Rimewood Falls                           {0}              Snow Land — Forest Island
@@ -4743,7 +4743,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4750  Restless Spire                           {0}              Land
 [x]  4751  Heronblade Elite                         {2}{G}           Creature — Human Warrior
 [x]  4752  Swarm Intelligence                       {6}{U}           Enchantment
-[ ]  4753  Wulfgar of Icewind Dale                  {3}{R}{G}        Legendary Creature — Human Barbarian
+[x]  4753  Wulfgar of Icewind Dale                  {3}{R}{G}        Legendary Creature — Human Barbarian
 [x]  4754  Season of Loss                           {3}{B}{B}        Sorcery
 [x]  4755  Quandrix Campus                          {0}              Land
 [x]  4756  Danitha, Benalia's Hope                  {4}{W}           Legendary Creature — Human Knight

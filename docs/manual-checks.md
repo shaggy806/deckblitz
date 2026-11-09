@@ -7856,3 +7856,11 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Steam Vines: the land's controller picks the next land
 - **Do:** Cast Steam Vines on your Forest, then tap the Forest for mana.
 - **Expect:** The Forest is destroyed, you take 1 damage, and you're asked which land Steam Vines goes on next.
+
+### Djinn Illuminatus: replicate is offered at the spell's own cost
+- **Do:** Cast Lightning Bolt at Bob, and look at the ways to pay for it.
+- **Expect:** Offers beside the plain cast read replicate {R} ×1, ×2 and ×3. Choosing ×2 makes three Bolts: Bob at 31.
+
+### Herigast: any creature spell can emerge
+- **Do:** Cast Grizzly Bears, choosing to emerge by sacrificing Hill Giant.
+- **Expect:** The offer shows the Giant's mana value off, leaving {G} to pay; the Giant is gone and the Bears are on the battlefield.

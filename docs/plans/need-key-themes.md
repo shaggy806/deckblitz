@@ -1,6 +1,6 @@
 # Need-key themes: general engine changes under the open keys
 
-Status: plan of record (2026-11-07), steps 1-6 (B275-B280) and eight pieces of step 7 (theme 7, B281; theme 10, B282; theme 9, B283; theme 11, B284; theme 13, B285; theme 12, B286; theme 8, B287; theme 14, B288) done; step 7 goes on to
+Status: plan of record (2026-11-07), steps 1-6 (B275-B280) and nine pieces of step 7 (theme 7, B281; theme 10, B282; theme 9, B283; theme 11, B284; theme 13, B285; theme 12, B286; theme 8, B287; theme 14, B288; theme 16, B289) done; step 7 goes on to
 the smaller themes — see *The plan* just below. The survey under it is a proposal.
 
 The 1,783 open need keys (2,265 waiting cards, re-counted after step 1; the survey's own count was 1,831 and 2,324)
@@ -75,7 +75,8 @@ touch. Each step:
    - **Done 2026-11-08 (B286).** Flips and rolls as records (theme 12: `engine/src/random-results.ts`, see its design note and *As built*). 14 cards: Ral Zarek, Guest Lecturer (flagged) and 13 of the theme's top keys; 15 keys marked built, their other cards left in `--stale` for `author-freed`.
    - **Done 2026-11-08 (B287).** One characteristics patch and one `become` effect (theme 8: `engine/src/characteristics-patch.ts`, see its design note and *As built*). 18 cards, none of the twelve flagged (no flagged card's key is under this theme): Mycosynth Lattice and 17 of the theme's top keys; 13 keys marked built, their other cards left in `--stale` for `author-freed`.
    - **Done 2026-11-08 (B288).** One `attach`, what and where (theme 14: `engine/src/attachments.ts`, see its design note and *As built*). 16 cards, none of the twelve flagged (no flagged card's key is under this theme): Akiri and 15 of the theme's top keys; 16 keys marked built, their other cards left in `--stale` for `author-freed`.
-   - Next: theme 16 (grants), as `--by-rank` reaches its cards.
+   - **Done 2026-11-08 (B289).** Keyword values and a doubler by any event (theme 16: `engine/src/keyword-values.ts`, see its design note and *As built*). 18 cards, none of the twelve flagged (no flagged card's key is under this theme): Djinn Illuminatus and 17 of the theme's top keys; 13 keys marked built, their other cards left in `--stale` for `author-freed`.
+   - Next: the build order's next theme, as `--by-rank` reaches its cards.
 
 ## How this was measured
 
@@ -1691,6 +1692,48 @@ effect:trigger-spell-gains-keyword 2; about 30 one-card keys.
 cost equals the spell's mana cost).
 
 **Confidence: medium.**
+
+**Design note (step 7, 2026-11-08): keyword values, and a doubler by any event.** No flagged card's key falls under this theme (the twelve are all blocked elsewhere), so the proving cards are the theme's own top keys.
+
+*What's wrong today.* A keyword with a cost can be granted only if somebody added a field for that keyword: `grantsWarpInHand`, `grantsNinjutsuInHand`, `grantsCyclingInHand`, `grantsForetellInHand`, `grantsBlitzInHand`, `grantsOffspringToSpells`, `grantsEvokeToSpells`, plus `grantsToHand.miracle` and `grantsToSpells.freerunning`, `.webSlinging`, `.prowl`. Each has its own reader and each says "its mana cost" its own way, or can't. So replicate, emerge and madness have no spelling. Vanishing and soulbond are spread abilities with no name, so a copy can't ask "does it have vanishing" or "lose soulbond". And `doubleTriggers.cause` is a closed list of seven events.
+
+*Measured first.* `kicker` is read off the definition about 56 times in `game.ts` (9 more in `actions.ts`, 8 in `filter.ts`), as theme 4 warned. A caster-aware "effective kicker" would rewrite all of them and still couldn't hold a spell with a printed kicker and a granted replicate, which are separate additional costs (702.56b; Zinnia's offspring already sits apart for the same reason, 702.175b). So replicate **stops being a kicker**: it takes the channel offspring already has, and no `kicker` read changes.
+
+*Where it lives.* `engine/src/keyword-values.ts`, the types and the pure cost read:
+
+- **`KeywordCost`**: a mana string, `"mana-cost"` ("equal to its mana cost"), or `{ manaCostLess: N }` (Dream Devourer's foretell, 118.7a). `keywordCostString(cost, def)` reads it against the face being cast, null for a card with no mana cost.
+- **`KeywordValue`**: `{ keyword, cost, …what that keyword also takes }` for warp, ninjutsu, cycling (`search`), foretell, miracle, madness, blitz, evoke, offspring, replicate, emerge, freerunning, web-slinging, prowl.
+- **Two grant fields, both already there.** `grantsToHand: { filter, keywordValues, eachPlayer? }` for "each [card] in your hand has…" and `grantsToSpells.keywordValues` for "[spells] you cast have…", which brings `castFrom`, `firstEachTurn`, `allSpells` and `castGrantReaches` with it.
+- **One read each way.** `Game.handKeywordValues(card, keyword)` and `Game.castKeywordCosts(player, card, def, keyword)`, printed field first and then every grant, so a printed keyword and a granted one are both there as the rules have them. `grantedCastCost` goes.
+- **`KeywordCostsPaid`** (`offspring?`, `replicate?: number[]`, one count per instance) is one cast-action field in place of `offspring`, threaded where `offspring` was. Replicate is `def.replicate` (`cost`, `also?`), read through the same cast read. Each instance makes its own copy trigger (702.56b).
+- **Keyword abilities that are printed pieces get a name.** `vanishing()` and `soulbond()` stamp their abilities `keywordOf`. `ifCopied` takes `{ lacksKeyword, patch }` beside `{ ofType, patch }`. `loseKeywordAbilities` on the patch marks stamped abilities lost, so a copy "loses soulbond" and the indices don't move.
+- **Emerge** becomes a list: printed and granted are each an offer, as evoke's are.
+- **Madness** is read in the hand, where a discard happens, and the cost travels with the cast offer. "Each Vampire card you own that isn't on the battlefield" reaches further, but the keyword does nothing anywhere else (702.35a), so `grantsToHand` says it.
+
+*Part (b).* `doubleTriggers` takes `{ cause: TriggerCause | readonly TriggerCause[], filter?, source? }`: `TriggerCause` is the seven names, `"leaves"`, `"turned-face-up"`, and any `TriggerEventName` from theme 2's table, whose subject the filter reads. `source` filters whose ability it is, beside the doubler's own side. The room abilities are `{ cause: "room" }`.
+
+*Rules.* 702.56a-b replicate; 702.119a emerge; 702.35a madness; 702.94a miracle; 702.143a foretell; 702.74a evoke; 702.175a-b offspring; 702.185a warp; 702.152a blitz; 702.49a ninjutsu; 702.29a cycling; 702.63a vanishing; 702.95a soulbond; 707.9a-b copy exceptions; 118.7a generic reductions; 118.9a one alternative cost; 603.2 causes; 113.6 grants reaching other zones.
+
+*Moved or not, decided before building.* **Moved and deleted:** the seven `grants*` fields, `grantsToHand.miracle`, `grantsToSpells.freerunning`/`webSlinging`/`prowl`, `kicker.keyword: "replicate"`, the `offspring` action field and offer fields. A script over the card files and the scaffolder's output, with a pool test refusing the removed spellings. Deliberately not moved:
+- *The printed fields* (`def.madness`, `def.evoke`, …): each has its own extras (`evoke.exileFromHand`, `cycling.search`) and one read now folds it with the grants, so storing it differently buys nothing and churns 450 card files.
+- *`grantsToSpells.casualty`, `.conspire`, `.convoke`, `.improvise`*: read on the stack or with no parameter; no key waits on them.
+- *`grantsToGraveyard`*: its own shape already takes `keywords`, and it needs no new reader here.
+- *Kicker*: see above.
+
+*Bots.* A cast offer's `keywordCosts` and `emergeCost` are echoed like `kicked` (`candidates.ts`, `random-cast.ts`, `controller.ts`). The bots already judge a multikicker by playing it out, so no `effect-worth` row was added: each replicate payment is one more copy in the simulation. The capture label names the payments. No new decision kind.
+
+*As built (step 7, B289).* Both parts fit one session.
+- `keyword-values.ts`: `KeywordCost`, `KeywordValue`, `KeywordValueName`, `KeywordCostsPaid`, `keywordCostString`. `Game.handKeywordValues`, `handKeywordCost`, `spellKeywordCosts`, `replicateInstancesOf`, `replicateCounts`, `keywordCostsString`, `keywordCostsText`, `withCastPicks`, `emergeOptionsOf`, `emergeOptionPicked`, `madnessCostOf`, `roomTriggerDoublers`. `reduceGenericInCost` moved to `mana.ts`.
+- **Moved and deleted, every user migrated:** the seven `grants*` fields, `grantsToHand.miracle`, `grantsToSpells.freerunning`, `.webSlinging`, `.prowl`, `Game.grantedCastCost`, `grantedOffspringCost`, `kicker.keyword: "replicate"` (14 printed cards to `def.replicate`), the `offspring` action field and `offspringCost` offer field, and the positional `offspring` parameter through the cast pipeline, about 30 call sites, now the `keywordCostsPick` pick. 29 card and test files by a script, run once; `test/keyword-values.test.ts` refuses the removed spellings.
+- **Differences from the note:** the fold is called `spellKeywordCosts`, because `castKeywordCosts` was taken by harmonize's and sneak's. Keyword costs join the additional-cost string `castCostString` already builds, so an alternative cost and a free cast take them too; overload's early return doesn't, so a replicate isn't offered beside overload. Saddle needed no value: `grantsActivated: [saddle(2)]` says it (Jandor).
+- **Behaviour changes:** a permanent spell keeps `alternativeCostPaid` as it enters, so "if its madness cost was paid" is asked of the permanent (Grave Scrabbler). A static a copy exception adds now applies as the copy enters (rule 707.9b). A whole-declaration attack event tests a doubler's filter against every attacker, where a filter used to make it not double.
+- **Additions the proving cards needed:** `CardFilter.colorCount` (Threefold Signal); a `do: pay-energy` also-cost scales and caps with the number of payments (Reiterating Bolt).
+- Not benched: every new read runs only for cards with a grant in play or a printed replicate. `Game.replicateCounts` bounds the offers at `MAX_REPLICATE_OFFERED`.
+- Scaffolder: every output moved. It doesn't read a granted replicate, emerge or madness, or the new doubler causes.
+- Cards (18): Djinn Illuminatus; Hatchery Sliver; Ian Chesterton; Hugh, First of Many; Threefold Signal; Herigast, Erupting Nullkite; Falkenrath Gorger; Grave Scrabbler; Flesh Duplicate; Mirage Phalanx; Exterminate!; Reiterating Bolt; Hama Pashar, Ruin Seeker; Dungeon Delver; Wulfgar of Icewind Dale; Gandalf the White; Jandor, Fortuned Traveler; Panoptic Projektor. `test/keyword-values.test.ts` covers each but Dungeon Delver, whose grant is Hama Pashar's static with one more read through `staticsOfSource`.
+- Keys marked built: `static:grant-replicate`, `static:grant-emerge`, `static:grant-madness`, `condition:self-madness-paid`, `cost:replicate-tap-permanent`, `cost:replicate-energy`, `effect:copy-exception-if-copied-lacks-ability`, `effect:copy-exception-loses-ability`, `static:room-abilities-trigger-twice`, `static:double-triggers-on-leaves`, `static:double-attack-triggers-your-attackers`, `static:trigger-doubler-turned-face-up`, `static:grant-saddle`.
+- Expressible without new engine code when tried: `static:grant-saddle` (Jandor), and `condition:self-madness-paid` needed only the flag to survive entering; `static:double-attack-triggers-your-attackers` only the filter fix above.
+- **Left unbuilt, not marked:** `static:granted-dies-trigger-doubling` (The Masamune: "or an emblem you own", and doublers don't reach emblems), `static:grant-jump-start-to-graveyard-cards` and `effect:grant-jump-start` (jump-start is a printed flashback's `keyword`, with no grant reader), `static:grant-enter-choice-keyword` (Tesak), `effect:trigger-spell-gains-keyword`, `effect:spell-on-stack-gains-keyword`, `amount:emerge-sacrificed-creature`, `trigger:sacrificed-for-emerge`. Psionic Ritual's replicate is built, the card wasn't tried, and it's in `--stale`.
 
 ---
 

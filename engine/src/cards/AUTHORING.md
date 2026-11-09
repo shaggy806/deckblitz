@@ -1970,7 +1970,7 @@ foretelling it: `card-foretold` isn't emitted. `target` is the `then` of an exil
 `costReducedBy: 2` is "its foretell cost is its mana cost reduced by {2}", generic mana only, on the
 mana cost of the face cast, a land face never: a card that has its own foretell cost has both
 (`via: "foretell"` the printed, `via: "foretell-given"` this, offered unless they're equal). No
-mana cost, no cost given. Dream Devourer's `grantsForetellInHand` gives one the same way
+mana cost, no cost given. Dream Devourer's `grantsToHand` foretell gives one the same way
 (`GameObject.foretoldReducedBy`).
 
 **Cards chosen for each to have something done to them** ("choose two cards in your hand drawn this
@@ -4995,7 +4995,6 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   `{ type: "artifact" }`).
 - `mayPlay: { from: "graveyard", … }` — see **`mayPlay` / `grant-play` / `impulse-exile`** in §6. Each permission that applies is offered as its own `via: "graveyard-permission"` variant carrying a `graveyardGrant: { source, asType? }` the driver echoes back, so which one is spent is the player's choice (601.3). A land face is only offered under a permission that spends something (Muldrotha's `perType` with `"land"`); one that doesn't has nothing to name (Ramunap Excavator).
 
-- `grantsToHand: { filter, miracle: { cost } }` — "each instant and sorcery card in your hand has miracle {2}" (Lorehold, the Historian; rule 604.1): a card with miracle of its own uses its own.
 - `grantsToGraveyard: { filter, flashback?: { cost }, escape?: { cost,
   exileCount } }` — cards in your graveyard matching `filter` **have**
   flashback or escape (rule 604.1): Iroh, Grand Lotus's "during your turn,
@@ -5083,33 +5082,17 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   has conspire" is `{ filter: { typesAnyOf: ["instant", "sorcery"], anyOf:
   [{ colors: ["R"] }, { colors: ["G"] }] }, conspire: true }`, an instance
   beside a printed one, each asked and copying separately (702.78b).
-- `grantsOffspringToSpells: { cost, filter? }` — the spells you cast that
-  match `filter` gain offspring for `cost` (rule 702.175 — Zinnia, Valley's
-  Voice's "creature spells you cast gain offspring {2} as you cast them"):
-  its own additional cost beside any kicker or printed offspring (702.175b),
-  offered as the cast's `offspring` variant; paid, the permanent enters
-  with offspring's trigger.
-- `grantsEvokeToSpells: { cost, filter?, fromHand? }` — the spells you cast
-  that match `filter` gain evoke for `cost` as you cast them (rule 702.74 —
-  Ashling, the Limitless's "Elemental permanent spells you cast from your
-  hand gain evoke {4}" is `{ cost: "{4}", filter: { subtype: "Elemental",
-  notTypes: ["instant", "sorcery"] }, fromHand: true }`): offered exactly as
-  a printed `evoke` is, and a card with evoke of its own is offered both
-  (each its own `evokeCost`). The permanent keeps evoke's trigger if the
-  granting permanent leaves before the spell resolves (the ruling).
-- `grantsWarpInHand: { cost, filter }` — cards matching `filter` in your
-  hand have warp for `cost` (rule 702.185 — Tannuk, Steadfast Second's
-  "artifact cards and red creature cards in your hand have warp {2}{R}"):
-  offered and resolved exactly as a printed warp.
-- `grantsNinjutsuInHand: { cost, filter }` — cards matching `filter` in your
-  hand have ninjutsu for `cost` (rule 702.49 — Satoru Umezawa's "each creature
-  card in your hand has ninjutsu {2}{U}{B}"): the `ninjutsu()` helper's
-  ability, listed after the card's own, so "ninjutsu abilities you activate"
-  (a cost reduction, an `activates-ability` trigger) sees it.
-- `grantsCyclingInHand: { cost, filter, search?, eachPlayer? }` — cards matching
-  `filter` in your hand have cycling for `cost` (rule 702.29a — Rhet-Tomb
-  Mystic); `search` makes it typecycling and `eachPlayer` reaches every hand
-  (Homing Sliver). It's a `cycles` trigger's cycling like a printed one.
+- `grantsToSpells: { filter, castFrom?, keywordValues: [{ keyword, cost }] }` — the spells you cast that
+  match `filter` have a keyword with a cost (rule 113.6, `keyword-values.ts`). `keyword` is `"replicate"`
+  ("each instant and sorcery spell you cast has replicate. The replicate cost is equal to its mana cost",
+  Djinn Illuminatus, `cost: "mana-cost"`; `"{2}{U}"` for Hugh), `"emerge"`, `"blitz"`, `"evoke"`,
+  `"offspring"`, `"prowl"`, `"freerunning"` or `"web-slinging"`. Judged as the card would be cast, and
+  each is beside any printed one. `cost` is a mana string, `"mana-cost"`, or `{ manaCostLess: N }`.
+- `grantsToHand: { filter, keywordValues, eachPlayer? }` — cards in your hand have a keyword with a cost:
+  `"warp"`, `"ninjutsu"`, `"cycling"` (with `search` for typecycling), `"foretell"`, `"miracle"`,
+  `"madness"` (read in the hand, so "each card you own that isn't on the battlefield has madness" says this,
+  Falkenrath Gorger). `eachPlayer` reaches every hand (Homing Sliver). A foretold card keeps the cost it
+  was given once the grant is gone.
 - `equipAtInstantSpeed: true` — "you may activate equip abilities any time you could
   cast an instant" (Leonin Shikari; a `your-turn` `condition` for Forge Anew's "during
   your turn"). `alternativeAbilityCost: { kind: "equip", mana, firstEachTurn? }` (or `kind: "cycling"`, `"power-up"`) — "you may pay {0}
@@ -5124,14 +5107,6 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   "as long as you have seven or more cards in hand" (`{ kind: "hand-size", atLeast:
   7 }`); `firstEachTurn` is Gavi, Nest Warden's "the first card you cycle each turn",
   counting what was cycled before she arrived.
-- `grantsForetellInHand: { filter, reducedBy }` — cards matching `filter` in your
-  hand with no foretell of their own have foretell (rule 702.143a), at their mana
-  cost less `reducedBy` generic (Dream Devourer). The foretold card keeps the
-  cost once the grant is gone; `foretells` is "whenever you foretell a card".
-- `grantsBlitzInHand: { filter }` — the creature spells you cast matching
-  `filter` have blitz for their mana cost (rule 702.152a — Henzie "Toolbox"
-  Torre's "each creature spell you cast with mana value 4 or greater has
-  blitz"): offered and resolved exactly as a printed blitz.
 - `blitzCostReductionPerCommanderCast: true` — every blitz cost you pay,
   printed or granted, costs {1} less for each time you've cast a commander
   from the command zone this game (Henzie). Only the cost's generic number
