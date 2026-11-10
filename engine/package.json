@@ -75,6 +75,8 @@
     "bot:ab": "node scripts/bot-ab.mjs",
     "bot:diff": "node scripts/bot-diff.mjs",
     "bot:replay": "node scripts/bot-replay.mjs",
+    "bot:anatomy": "node scripts/bot-anatomy.mjs",
+    "bot:timings": "node scripts/bot-timings.mjs",
     "bot:decks": "node scripts/deck-winrates.mjs",
     "bot:autopsy": "node scripts/deck-autopsy.mjs",
     "bot:crackback": "node scripts/bot-crackback.mjs"

@@ -13,7 +13,9 @@
 // .scratch/replays/seed-N-tTURN.json and plays on), --from FILE (a snapshot,
 // or a capture or bug report from `captures/`), --until TURN
 // (stop once this turn begins), --slow MS (log decisions slower than this,
-// default 2000), --quiet-before TURN (log only from this turn on).
+// default 2000), --quiet-before TURN (log only from this turn on), --budget
+// MS|live (v2's wall-clock budget per decision, `live` the rooms' own; the
+// game then no longer replays exactly).
 //
 // Turn numbers count every player's turns: at four players turn 37 is the
 // first player's tenth.
@@ -27,6 +29,7 @@ import {
   EvalBotController,
   Game,
   HeuristicBotController,
+  LIVE_BOT_BUDGET_MS,
   createDefaultRegistry,
   describeMove,
 } from "../dist/index.js";
@@ -45,6 +48,9 @@ const snapshotAt = flag("snapshot-at", null) === null ? null : Number(flag("snap
 const from = flag("from", null);
 const until = flag("until", null) === null ? Infinity : Number(flag("until", null));
 const slowMs = Number(flag("slow", "2000"));
+// "live" is the rooms' own budget; a number is milliseconds; absent, count budgets.
+const budgetFlag = flag("budget", null);
+const budgetMs = budgetFlag === null ? null : budgetFlag === "live" ? LIVE_BOT_BUDGET_MS : Number(budgetFlag);
 const quietBefore = Number(flag("quiet-before", "0"));
 
 const registry = createDefaultRegistry();
@@ -52,7 +58,7 @@ const controllersFor = (seats) => {
   const controllers = {};
   for (const seat of seats) {
     const c =
-      bot === "v1" ? new HeuristicBotController(seat, registry) : new EvalBotController(seat, registry, {});
+      bot === "v1" ? new HeuristicBotController(seat, registry) : new EvalBotController(seat, registry, budgetMs === null ? {} : { timeBudgetMs: budgetMs });
     const act = c.act.bind(c);
     c.act = (view) => {
       const t0 = performance.now();

@@ -1,6 +1,6 @@
 // What a person watching the bots play would notice, counted.
 //
-//   npm run bot:behaviour -w engine                    # 24 four-player v2 games at the live 300 ms budget
+//   npm run bot:behaviour -w engine                    # 24 four-player v2 games at the live rooms' budget
 //   npm run bot:behaviour -w engine -- --games 40 --players 2
 //   npm run bot:behaviour -w engine -- --budget none --workers 18   # count budgets: exact, and faster
 //   npm run bot:behaviour -w engine -- --bot v1
@@ -25,8 +25,8 @@
 //   real choices, decisions and combat — against the room's budget.
 //
 // Every seat is the same bot, dealt the precon seatings `bot-seating.mjs`
-// deals. `--budget MS` is a wall-clock budget per decision (default 300, what
-// live rooms use); timing under it depends on how busy the machine is, which
+// deals. `--budget MS` is a wall-clock budget per decision (default what
+// live rooms use, `LIVE_BOT_BUDGET_MS`); timing under it depends on how busy the machine is, which
 // is why this defaults to 8 workers rather than one per core. `--budget none`
 // runs count budgets only, where the games replay exactly and any worker count
 // gives the same numbers.
@@ -46,7 +46,7 @@ import { WORKER_LIMITS } from "./worker-limits.mjs";
 import { writeFileSync } from "node:fs";
 import os from "node:os";
 import { fileURLToPath } from "node:url";
-import { DEFAULT_WEIGHTS } from "../dist/index.js";
+import { DEFAULT_WEIGHTS, LIVE_BOT_BUDGET_MS } from "../dist/index.js";
 
 const args = process.argv.slice(2);
 const flag = (name, fallback) => {
@@ -57,7 +57,7 @@ const flag = (name, fallback) => {
 const players = Math.min(4, Math.max(2, Number(flag("players", "4"))));
 const games = Number(flag("games", "24"));
 const bot = flag("bot", "v2");
-const budgetFlag = flag("budget", "300");
+const budgetFlag = flag("budget", String(LIVE_BOT_BUDGET_MS));
 const budget = budgetFlag === "none" ? null : Number(budgetFlag);
 const defaultWorkers = budget === null ? os.cpus().length - 2 : 8;
 const workers = Math.max(1, Math.min(Number(flag("workers", String(defaultWorkers))), games));

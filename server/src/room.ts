@@ -28,7 +28,7 @@
  * push at the end — which is what tests and scripts drive rooms with.
  */
 
-import { EvalBotController, Game, actionPlayer, activePlayerOf, isSettled } from "engine/local";
+import { EvalBotController, Game, LIVE_BOT_BUDGET_MS, actionPlayer, activePlayerOf, isSettled } from "engine/local";
 import { answeringPlayer, askedPlayer, autoAnswerFor, decidingPlayer, forcedZoneChoice, playersControlledBy, stackCopyKey, standInFor } from "engine/local";
 import type { CaptureFactory, CaptureLog } from "./capture.js";
 import { cardRegistry } from "./card-registry.js";
@@ -152,7 +152,7 @@ const BOT_MIN_THINK_MS = 350;
  * first, so an expired search degrades to v1-quality play rather than to
  * nothing, and a plan past the deadline gives way to the one-move answer.
  */
-const BOT_DECISION_BUDGET_MS = 1000;
+const BOT_DECISION_BUDGET_MS = LIVE_BOT_BUDGET_MS;
 /** Where each bot decision's time goes, in microseconds. */
 export interface DecisionRecorder {
   record(micros: number): void;
