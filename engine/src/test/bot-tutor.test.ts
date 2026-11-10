@@ -6,6 +6,7 @@
 
 import { describe, expect, it } from "vitest";
 
+import { EvalBotController } from "../bot/eval-bot.js";
 import { createDefaultRegistry } from "../cards.js";
 import { HeuristicBotController } from "../controller.js";
 import { Game } from "../game.js";
@@ -25,6 +26,23 @@ function boardWithLands(lands: number): Game {
   for (let i = 0; i < lands; i += 1) game.debugSpawn("Forest", A, "battlefield");
   return game;
 }
+
+describe("v2 casts a tutor when it has nothing better", () => {
+  // A tutor swaps one card in hand for another, so the evaluation scores it
+  // as passing; like a cantrip, it's cast at its moment (`isCantripDue`).
+  // An instant one (Dina's Guidance) waits, as Opt does, for the end of the
+  // turn before ours.
+  it.each(["Demonic Tutor", "Diabolic Tutor"])("casts %s in its main phase", (tutor) => {
+    const game = boardWithLands(2);
+    game.debugSpawn("Swamp", A, "battlefield");
+    game.debugSpawn("Swamp", A, "battlefield");
+    game.state.zones.perPlayer[A].hand = [];
+    game.debugSpawn(tutor, A, "hand");
+    game.debugSpawn("Craw Wurm", A, "library");
+    const action = new EvalBotController(A, registry).act(game.controllerView(A));
+    expect(action.type === "cast-spell" ? game.state.objects[action.card]?.cardName : action.type).toBe(tutor);
+  });
+});
 
 describe("v1's pick from a library search", () => {
   it("takes the dear spell the board can cast over the one that comes first", () => {

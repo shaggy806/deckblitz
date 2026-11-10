@@ -1383,6 +1383,10 @@ export type LegalAction =
         /** X is a number chosen as an additional cost, nothing paid for it
          * (`CardDefinition.additionalCost.chooseNumber` — Liquid Fire). */
         readonly chosenNumber?: true;
+        /** X is paid in life alone (`additionalCost.payLifeX` — Toxic Deluge),
+         * so `maxX` is the life total: a bot tries X across its range
+         * (`bot/candidates.ts`), not only at the top. */
+        readonly paidInLife?: true;
         readonly maxXByTargetCount?: readonly number[];
         readonly minXByTargetCount?: readonly number[];
         /** See `XCostOffer.maxXUnreduced`. */

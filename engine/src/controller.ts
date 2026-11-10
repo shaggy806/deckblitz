@@ -4970,6 +4970,18 @@ function isCardFlow(effect: EffectSpec | null | undefined): boolean {
         }
         return e.leftover !== "hand";
       }
+      // A tutor into hand (Demonic Tutor, Dina's Guidance, Dig Up's land) is
+      // a card for a card too, and what it's for — the right card — leaves
+      // nothing in the state to score either: v2 held Dina's Guidance with
+      // nothing else to do (2026-11-09). One onto the library's top
+      // (Vampiric, Worldly) puts nothing in hand and stays out.
+      case "search-library": {
+        if (e.destination !== "hand") return false;
+        const n = count(e.max);
+        if (n === null) return false;
+        gained += n;
+        return true;
+      }
       case "sequence":
         return e.effects.every(walk);
       case "may":

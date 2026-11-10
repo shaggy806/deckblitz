@@ -234,9 +234,25 @@ function castCandidates(legal: CastSpellLegal, player: PlayerId): Action[] {
     const key = JSON.stringify(targets);
     if (seen.has(key)) continue;
     seen.add(key);
-    out.push({ ...common, ...xValueOf(legal, targets), targets });
+    const withX = { ...common, ...xValueOf(legal, targets), targets };
+    out.push(...(legal.xCost?.paidInLife === true ? lifeXLadder(legal.xCost).map((xValue) => ({ ...withX, xValue })) : [withX]));
   }
   return out;
+}
+
+/**
+ * The X values tried for an X paid in life (Toxic Deluge): its maximum is the
+ * whole life total, which no board is worth, so the search weighs a ladder
+ * instead — each X up to 8, then wider steps, smallest first — and each X's
+ * life against what it does. At the maximum alone, v2 never cast Toxic
+ * Deluge (0 of 10 games it could, 2026-11-09) and v1 paid 20 life for it.
+ */
+const LIFE_X_LADDER = [1, 2, 3, 4, 5, 6, 7, 8, 10, 13, 16, 20] as const;
+
+function lifeXLadder(xCost: { readonly maxX: number; readonly minX?: number }): number[] {
+  const low = Math.max(1, xCost.minX ?? 0);
+  const xs = LIFE_X_LADDER.filter((x) => x >= low && x <= xCost.maxX);
+  return xs.length > 0 ? xs : [xCost.maxX];
 }
 
 function fitTargets(

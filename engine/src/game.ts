@@ -5882,7 +5882,12 @@ export class Game {
             ? // "Pay X life" — the ceiling is what you have, not what your
               // lands can make (rule 118.4: any amount of life you have);
               // nothing but 0 while they can't lose life (119.8).
-              { xCost: { maxX: playerCantLoseLife(this.state, this.registry, player) ? 0 : Math.max(0, this.state.players[player].life) } }
+              {
+                xCost: {
+                  maxX: playerCantLoseLife(this.state, this.registry, player) ? 0 : Math.max(0, this.state.players[player].life),
+                  paidInLife: true,
+                },
+              }
             : def.additionalCost?.chooseNumber !== undefined
               ? // "Choose a number between 0 and 5" (Liquid Fire): no more than
                 // the card's range says, whatever there is to pay with.
