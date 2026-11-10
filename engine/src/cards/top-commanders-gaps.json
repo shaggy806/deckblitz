@@ -2191,7 +2191,8 @@
   "keyword:kicker-x-minimum",
   "trigger:becomes-crewed-first-time",
   "replacement:active-prevention-then",
-  "replacement:token-event-becomes-with-decision"
+  "replacement:token-event-becomes-with-decision",
+  "trigger:self-put-into-graveyard-from-library"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
