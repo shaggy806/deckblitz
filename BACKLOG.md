@@ -575,6 +575,7 @@ section keeps only what to do next.
 
 ## Engine rules gaps
 
+- **A bot's cast the engine refuses takes the shard down** — live, 2026-11-10: a bot's Conclave Tribunal (convoke) threw "cannot pay the cost" and the uncaught throw lost every room on the shard (`docs/engine-gaps.md`).
 - **Token events a `may` replacement doesn't reach (Moonlit Meditation)** — amass, incubate, encore, myriad and populate make tokens without offering a `becomes` (`docs/engine-gaps.md`). (2026-11-09: amass, incubate, populate and encore fixed; myriad, amass with `who` and other direct `createTokens` callers are left.)
 
 One line each; the detail (rule numbers, code sites, the cards each blocks) is in
@@ -614,7 +615,7 @@ live games for" (wraths since `threat`, pumping an opponent's attacker, the `"ac
 big boards and deep stacks under count budgets, deck biases, 1/1 tokens since `smallTokens`,
 Shiko or the other spell, and haste enablers in the crackback).
 
-- **The bot audit's findings** (2026-11-10, `docs/plans/bot-audit-2026-11.md`, proposed; the order of work is `docs/plans/bot-audit-fixes.md`, steps 0 (tools), 1 (four misplays) and 2 (the clock) built, step 2b (deploy, and test live) next; one step a session with the `bot-audit-next` skill) — left: a memo for repeated empty-stack windows and a narrower `castPayoff`; no trigger scan on the two priority events; sacrifice fodder that spares the payoff, the crackback check in the turn planner, "payoff first" and "landfall first" as ordering hints; a per-card worth for the hand. It also corrects three items below: the two baselines don't both always run, the several-sacrifice kill is found with tokens, and `followUps` is unreachable by default.
+- **The bot audit's findings** (2026-11-10, `docs/plans/bot-audit-2026-11.md`, proposed; the order of work is `docs/plans/bot-audit-fixes.md`, steps 0 (tools), 1 (four misplays) and 2 (the clock) built and live, step 4 (search that buys nothing) next, then step 3; one step a session with the `bot-audit-next` skill) — left: a memo for repeated empty-stack windows and a narrower `castPayoff`; no trigger scan on the two priority events; sacrifice fodder that spares the payoff, the crackback check in the turn planner, "payoff first" and "landfall first" as ordering hints; a per-card worth for the hand. It also corrects three items below: the two baselines don't both always run, the several-sacrifice kill is found with tokens, and `followUps` is unreachable by default.
 
 - **Sylvan Library's bots** (probed 2026-11-04): v2, with Lightning Bolt, Craw Wurm and Sol Ring on top, declines "draw two additional
   cards?" at every life total tried, 10 to 1000, though it pays for a land draw at 40 or more; v1 draws but never pays 4 life, even at 1000. Why not yet looked into.

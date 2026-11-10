@@ -3347,6 +3347,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Bots
 
+- **The bot audit's fixes, step 2b: deployed, and measured live** (2026-11-10; `9a0290c21` live;
+  `docs/plans/bot-audit-fixes.md`, *Live figures*): two four-bot lobby rooms on the box to turn
+  24. The clock holds (worst decision 1,053 ms, none over twice the budget); the search is thin
+  (1-4 simulations a decision at 40-55 permanents, 3-5 times the development PC's cost a
+  simulation), so step 4 goes before step 3. A blitz runs in the player's browser, not on the
+  box. Found: a bot's refused cast crashes the shard (`BACKLOG.md`, Engine rules gaps).
+
 - **The bot audit's fixes, step 2: the clock** (2026-11-10; `0fb9b8bec`, `72b1173f4`;
   `docs/plans/bot-audit-fixes.md`, *As built*): a rollout is stopped at its decision's deadline
   (`withRolloutDeadline`, `simulate.ts`) instead of running its length past it; a priority

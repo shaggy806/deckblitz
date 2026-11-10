@@ -1,6 +1,6 @@
 # Fixing what the bot audit found
 
-Status: **in progress** (2026-11-10): step 0 built, step 1 next. The findings, their evidence and
+Status: **in progress** (2026-11-10): steps 0-2 built and live, step 4 next. The findings, their evidence and
 their finding numbers (S1-S8, Q1-Q8) are in `bot-audit-2026-11.md`; this file is only the order,
 what each step changes, and how each is checked. Three choices near the end are the user's.
 
@@ -9,12 +9,13 @@ what each step changes, and how each is checked. Three choices near the end are 
 One step a session, with the `bot-audit-next` skill. When a step lands, tick it here with its date
 and commit, write its *As built* lines under the step, and move `Next`.
 
-- Next: **step 2b** (deploy, and test live).
+- Next: **step 4** (search that buys nothing), then step 3: on the live box the clock holds and
+  the search is thin, 1-4 simulations a decision at 40-55 permanents (*Live figures*).
 - [x] Step 0. Tools (2026-11-10)
 - [x] Step 1. Four misplays (2026-11-10; `d15599f95` Q3, `752a7550e` Q6, `aadc42a5a` and
   `e1b359709` Q7, `f626a7351` Q5)
 - [x] Step 2. The clock (2026-11-10; `0fb9b8bec` the bots, `72b1173f4` the server's figures)
-- [ ] Step 2b. Deploy, and test live
+- [x] Step 2b. Deploy, and test live (2026-11-10; `9a0290c21` live)
 - [ ] Step 3. Engine cost per tick
 - [ ] Step 4. Search that buys nothing
 - [ ] Step 5. The evaluation (several sessions; its sub-steps are ticked in the step itself)
@@ -276,7 +277,51 @@ that isn't one of the audit's is a `bug-report` or `bot-misplay`, not this step'
 
 ### Live figures
 
-*(none yet)*
+Deployed 2026-11-10 (`9a0290c21`; the box idle, no game ended). Measured the same day.
+
+**A blitz doesn't run on the box.** It plays in a Web Worker in the player's own browser
+(`local-rooms.md`, on by default since October), so the box's bots only play in lobby rooms, or
+with `?local=0`. Both games here were lobby rooms on the server, every seat a bot (the human seat
+handed over with "Let a bot play for me"), bot speed Fast, read from `/status` every 20 s and from
+the service log's slow-decision lines. So these are the box's figures, which is what a lobby with
+bots gets; a blitz gets the player's machine, which this step didn't measure (the low-end laptop
+would be the one to try).
+
+| | Decks | Turns | Over 1 s | Over 2 s | Worst | Boards of the slow ones | Shard busy |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Game 1 | Token Triumph ×2, World Shaper, Draconic Destruction | 24 (crashed, below) | 18 | 0 | 1,053 ms | 28-54 permanents | ~75% from turn 14 |
+| Game 2 | World Shaper, Tramplesaurus Rex, Token Triumph, Jeskai Striker | 24, won | 1 | 0 | 1,001 ms | 36 | 43-49% |
+
+The development PC, `bot:timings`, 12 four-player games of the bench decks from seed 1, 6
+workers, same build: 3,229 searched decisions, 11 over 1 s, none over 1.5 s, worst 1,024 ms, p90
+887 ms; ms a simulation 13 (0-9 permanents), 20, 29, 37, 43 (40-49), 55 (50-59), 68 (60-79),
+179 (80-99); one `no time` window in the twelve games.
+
+What they say:
+
+- **Step 2's clock holds on the box.** The worst decision was 53 ms past the budget and nothing
+  reached twice it; no bot stopped acting, and no pause of several seconds showed (S1, S2).
+- **The search is thin there.** The box's slow decisions finished 1-4 simulations in the second
+  at 38-54 permanents (two had 8 and 11, at 28 and 40), where the PC's slowest finished 8-11 at
+  42-71: **250-500 ms a simulation against 90-120, so 3-5 times slower** on the decisions that
+  hit the clock (the same ratio `local-rooms.md` gave, 3-4). Ten of game 1's eighteen were
+  `no time` windows, the baselines alone using the second, against one in 3,229 on the PC; one
+  was answered by `v1's cast`. From turn 14 the shard's p99 decision sat at 0.9-1.0 s.
+- **Not measured**: ms a simulation by board size on the box. The server logs only decisions
+  over budget, so the figures above are that tail, not an average; `bot:timings` on the box
+  itself would give the table, and wasn't run (a benchmark on the production machine is the
+  user's call).
+
+**Next is step 4, then step 3.** By the rule above: decisions over budget are bounded, and the
+search is thin on mid-size boards. Step 3's 15-25% off a rollout turns two simulations into two
+and a half; step 4 stops paying for searches that change nothing (the repeated empty-stack
+windows, the `"acting"` rollouts `castPayoff` asks for, the planner's cut levels), which is what
+a search that affords two simulations needs first.
+
+**A fault that isn't the audit's**, found in game 1 and recorded in `docs/engine-gaps.md`
+("A bot's cast the engine refuses takes the shard down"): at turn 24 a bot's cast of Conclave
+Tribunal (convoke) threw `alice cannot pay the cost of Conclave Tribunal` from `Game.castSpell`;
+nothing catches a bot's move in `Room`, so the shard exited and every room on it was lost.
 
 ## Step 3. Engine cost per tick (one session, engine only)
 

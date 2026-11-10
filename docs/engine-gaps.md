@@ -150,6 +150,20 @@ Spider tokens; Spider-Punk isn't authored. Found 2026-11-02; not reported from p
 
 **Token events a `may` replacement doesn't reach (Moonlit Meditation).** `would-create-token`'s `becomes` with `may` is asked at the two effects that make tokens as a resolution step, `create-token` and `create-token-copy` (a batch's copies aside). Tokens made inside another operation, amass (701.47), incubate, encore, myriad, populate and the like, go straight through `Game.createTokens`, which can't stop to ask: the replacement isn't offered for them, and only the tokens of a token doubler apply there (rule 614.1a). Moonlit Meditation's the only card with it so far.
 
+**A bot's cast the engine refuses takes the shard down.** Seen on deckblitz.net, 2026-11-10 (build `9a0290c21`), in a
+four-bot lobby room (Token Triumph ×2, World Shaper, Draconic Destruction; seat alice a Token Triumph seat handed to a
+bot), turn 24, precombat main, ~54 permanents: `[shard 0] crashed: Error: alice cannot pay the cost of Conclave Tribunal`,
+thrown by `Game.castSpell` under `Game.dispatch` from `Room.openGate` (the bot's held move, which is only dispatched on the
+board it was decided on, or decided afresh). Two faults. (1) The bot offered a cast-spell of a convoke spell with a payment
+`castSpell` then refused: either the legal-action list and `castSpell` disagree about a convoke payment on that board, or
+the bot built the payment itself. Not reproduced: no capture, and 12 `bot:timings` games with the same decks the same
+day threw nothing; first try is bot games seating Token Triumph with a throw from `dispatch` caught and the state
+saved. The decision wasn't one the clock cut (no slow-decision line for alice at that turn). (2) `Room` dispatches a
+bot's move with nothing around it (`dispatchForBot`, and the `this.game.dispatch(move)` sites in `settle`), so
+one refused move exits the shard and loses every room on it; in a local blitz the same throw would end the player's
+worker. A refused bot move should be logged with the state and replaced by a legal fallback (pass priority, or v1's
+answer), not thrown.
+
 ## Latent
 
 The engine departs from the rules here, but no pool card reaches it yet: fix each when a card
