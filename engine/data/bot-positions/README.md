@@ -25,6 +25,15 @@ As measured when they were checked in (2026-11-10, the development PC, six decis
 | `seed-5-t34-b87` | 228 | 1,257 | 6.75 | 1.28 | 1.36 |
 | `seed-5-t28-b50` | 144 | 2,282 | 1.54 | 0.88 | 1.71 |
 
+After step 3's parts 1 and 2 (2026-11-10, same machine, same decisions, simulations and ticks):
+
+| File | ms a simulation | ms a tick |
+| --- | --- | --- |
+| `seed-50-t40-b73` | 799 | 4.67 |
+| `seed-10-t40-b94` (3 decisions) | 204 | 10.65 |
+| `seed-5-t34-b87` | 186 | 5.45 |
+| `seed-5-t28-b50` | 131 | 1.38 |
+
 A snapshot is a whole `GameState`: when a change to the state's shape stops one loading, take it
 again (`bot:replay --seed N --snapshot-at T`, or `bot:timings --snaps`) and note the new figures
 here, rather than patching the file.

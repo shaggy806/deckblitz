@@ -51,7 +51,12 @@ Read a file's entry before changing that file; you don't need the rest.
   `Game.timingCount` — never a per-kind flag; a kind it can't count yet goes in `timingCountable`.
 - **Computed-value cache** (`characteristics.ts`): wrap new read-only hot paths in
   `withComputedCache`, and never let a region span a mutation without `invalidateComputedCache()`.
-  `MTG_CACHE_CHECK=1` on the fuzzer verifies it.
+  `MTG_CACHE_CHECK=1` on the fuzzer verifies it. A few lists are also kept *outside* a region,
+  per mutation epoch (`boardScan`, `staticAbilityLosses`): the epoch moves in
+  `invalidateComputedCache`, and through `noteStateMutation` after every effect instruction and
+  dispatched action, so a write `Game` makes anywhere else (and any a test makes by hand) must
+  call one of them before the next read. `emit` skips the trigger scan for the two priority
+  events: nothing may trigger on them (`trigger-scan.test.ts`).
 - **`defineCard`'s object literal stays under 128 entries.** At 128 every definition silently gets
   a hidden class of its own: the pool imports 4x slower and play 40% slower. A new field most
   cards don't set goes in `rareCardFields` (`test/card-definition-shape.test.ts`).

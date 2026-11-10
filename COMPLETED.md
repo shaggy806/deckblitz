@@ -3347,6 +3347,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Bots
 
+- **The bot audit's fixes, step 3, parts 1 and 2: the engine's cost per tick** (2026-11-10;
+  `8cf669edc`, `ced532adf`; `docs/plans/bot-audit-fixes.md`, *As built*): no trigger scan for `priority-passed` and
+  `priority-received`, and the three whole-board lists of statics kept per mutation outside a
+  cache region (`boardScan`), with the mutation epoch now also moved after every effect
+  instruction and dispatched action (`noteStateMutation`). A simulation is 12% cheaper on an
+  ordinary board and 19-28% on the wide ones (149→131, 229→186, 284→204, 992→799 ms), same
+  simulations, ticks and end states.
 - **The bot audit's fixes, step 4, part 3: a turn plan that keeps what a cut level paid for**
   (2026-11-10; `ef5e18906`; `docs/plans/bot-audit-fixes.md`, *As built*): each move is passed
   out as soon as it has resolved, the best line's first; first moves the one-move search rolled

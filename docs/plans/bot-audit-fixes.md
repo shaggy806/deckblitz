@@ -9,14 +9,17 @@ what each step changes, and how each is checked. Three choices near the end are 
 One step a session, with the `bot-audit-next` skill. When a step lands, tick it here with its date
 and commit, write its *As built* lines under the step, and move `Next`.
 
-- Next: **step 3** (the engine's cost per tick: no trigger scan on the two priority events,
-  S6, then the memoised grant sources), then step 5.
+- Next: **step 3, part 3** (a short session: the journal's last-known snapshot per entered
+  permanent and a lazy resolution context, 9.7% and 8.8% of the token turn as measured after
+  parts 1 and 2), then step 5.
 - [x] Step 0. Tools (2026-11-10)
 - [x] Step 1. Four misplays (2026-11-10; `d15599f95` Q3, `752a7550e` Q6, `aadc42a5a` and
   `e1b359709` Q7, `f626a7351` Q5)
 - [x] Step 2. The clock (2026-11-10; `0fb9b8bec` the bots, `72b1173f4` the server's figures)
 - [x] Step 2b. Deploy, and test live (2026-11-10; `9a0290c21` live)
-- [ ] Step 3. Engine cost per tick
+- [x] Step 3, parts 1 and 2. Engine cost per tick: no trigger scan on the priority events, the
+  board scans kept per mutation (2026-11-10; `8cf669edc` the scan, `ced532adf` the lists)
+- [ ] Step 3, part 3. The journal's snapshots and the resolution context
 - [x] Step 4. Search that buys nothing (2026-11-10; `70c51a5c8` S5, `b741490be` S3,
   `ef5e18906` S4)
 - [ ] Step 5. The evaluation (several sessions; its sub-steps are ticked in the step itself)
@@ -341,6 +344,60 @@ nothing catches a bot's move in `Room`, so the shard exited and every room on it
 Not planned: a general epoch-keyed characteristics cache (unsound as first proposed); making the
 name helpers faster (their time is scan volume, which (2) removes); anything in the evaluation
 or the clone.
+
+### As built (2026-11-10): parts 1 and 2
+
+**Part 1.** `Game.emit` returns before `detectTriggers` for `priority-passed` and
+`priority-received`, after the cache flush. Read first: every case of `triggerKindMatches` tests
+the event's type before anything else (the generic `{ on: "event" }` kind through
+`triggerEventSubjects`, which reads a `TRIGGER_EVENTS` row's type), the scan's own special cases
+and its watchers (`fireLeaveWatchers` and the rest) are each behind a type test, and
+`fireWheneverWatchers` goes through the same matcher. `trigger-scan.test.ts` holds the table half:
+no `TRIGGER_EVENTS` row is a priority event.
+
+**Part 2.** `typeGrantSources`, `contributingStaticSources` and `abilityGrantSources` go through
+one `boardScan` (`characteristics.ts`): the last answer of each, kept on (state, registry,
+mutation epoch) as `staticAbilityLosses` is, never kept or served inside a re-entrancy guard, and
+under `MTG_CACHE_CHECK` recomputed on each epoch's first hit and one hit in 16 after.
+
+**Where it differs from the plan.** The plan took the epoch as it was. It isn't enough: the
+epoch moved only in `invalidateComputedCache`, and a write between cache regions that never
+called it was safe only because a region clears as it opens. Three tests failed on the memo
+alone. Two wrote the state by hand (now they say so); the third was real: the `grant-static`
+effect adds its modifier and announces nothing, so the next instruction read the old list. So
+the epoch now also moves at the end of every effect instruction (`applyEffectSpec`) and every
+dispatched action (`Game.dispatchOne`), through `noteStateMutation`, which leaves an open
+region's cache alone. This is the audit's own warning about a general cache, met for these
+three lists; a wider epoch-keyed cache would still need the same care at every write.
+
+**Checks.** The engine suite; the end state of a v1 rollout from each fixed position (up to 400
+acts) hashed equal before, after part 1 and after part 2; simulations and ticks a decision
+unchanged; with `MTG_CACHE_CHECK=1`, 40 two-player games with every memo hit recomputed, then on
+the build as shipped 40 two-player and 8 four-player games (12 more at four players before the
+epoch's wider net went in), and the situation fuzzer over twelve
+cards with layer-4 and lose-all statics (Blood Moon, Humility, Urborg, Opalescence, Mycosynth
+Lattice and others, every hit recomputed). Recomputing every hit at four players was too slow to
+finish a game in 17 minutes, which is why the check samples.
+
+**Measured** (`bot:anatomy`, the development PC, alone, ms a simulation; simulations and ticks
+identical in every column):
+
+| Position | Before | Part 1 | Parts 1 and 2 | Off |
+| --- | --- | --- | --- | --- |
+| `seed-5-t28-b50` (ordinary) | 149 | 136 | 131 | 12% |
+| `seed-5-t34-b87` | 229 | 225 | 186 | 19% |
+| `seed-10-t40-b94` (widest) | 284 | 283 | 204 | 28% |
+| `seed-50-t40-b73` (token turn) | 992 | 905 | 799 | 19% |
+
+Part 1 gave 9% on the ordinary board and the token turn and nothing on the two wide combat
+boards: less than the audit's 17-27%, which was on quiet 20-43 permanent boards where the two
+priority events are most of what happens. Part 2 gave nothing much on the ordinary board and
+17-28% on the wide ones, more than the 5-15% guessed.
+
+**Left: part 3.** A profile of the token turn after both parts still shows
+`recordJournal` → `takeLastKnown` at 9.7% and `makeResolutionContext` at 8.8% self (garbage
+collection 11.9%), so both are worth building; `detectTriggers` is still 21.6% inclusive there,
+which is real events now.
 
 ## Step 4. Search that buys nothing (one or two sessions)
 
