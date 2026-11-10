@@ -1,0 +1,95 @@
+{
+ "batch": "B295",
+ "status": "done",
+ "ranks": "Asked for by name (2026-11-10): the ten cards the bots' strong decks play stand-ins for, and two cards that shared their keys",
+ "authored": [
+  {
+   "name": "Gaea's Blessing",
+   "files": [
+    "engine/src/cards/pool/gaeas-blessing.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Tyvar Kell",
+   "files": [
+    "engine/src/cards/pool/tyvar-kell.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Celestial Mantle",
+   "files": [
+    "engine/src/cards/pool/celestial-mantle.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Scion of the Ur-Dragon",
+   "files": [
+    "engine/src/cards/pool/scion-of-the-ur-dragon.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Savage Order",
+   "files": [
+    "engine/src/cards/pool/savage-order.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Instrument of the Bards",
+   "files": [
+    "engine/src/cards/pool/instrument-of-the-bards.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Angelic Arbiter",
+   "files": [
+    "engine/src/cards/pool/angelic-arbiter.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Green Sun's Twilight",
+   "files": [
+    "engine/src/cards/pool/green-suns-twilight.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Vorinclex // The Grand Evolution",
+   "files": [
+    "engine/src/cards/pool/vorinclex.ts",
+    "engine/src/cards/pool/the-grand-evolution.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Revival of the Ancestors",
+   "files": [
+    "engine/src/cards/pool/revival-of-the-ancestors.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Jin-Gitaxias // The Great Synthesis",
+   "files": [
+    "engine/src/cards/pool/jin-gitaxias.ts",
+    "engine/src/cards/pool/the-great-synthesis.ts"
+   ],
+   "tested": true
+  },
+  {
+   "name": "Welcome to . . . // Jurassic Park",
+   "files": [
+    "engine/src/cards/pool/welcome-to.ts",
+    "engine/src/cards/pool/jurassic-park.ts"
+   ],
+   "tested": true
+  }
+ ],
+ "blocked": []
+}
