@@ -646,7 +646,16 @@ Shiko or the other spell, and haste enablers in the crackback).
 - **Explore aiming bot removal by EDHREC rank or salt score** (the user, 2026-11-06): a bot picks
   removal targets by simulated board value alone; try weighting the pick by how played or how hated
   a card is (`cards/edhrec-rank.ts` has the rank, `cards/salt-score.ts` the salt score since
-  2026-11-06). To explore first, not a settled design.
+  2026-11-06). **Salt started 2026-11-09, unfinished**, on the local `strong-decks-pilot` branch
+  only (not main: the 650 KB salt table would ship in the browser's bot bundle): a `salt` evaluation
+  term (`bot/features.ts`, each nontoken permanent's salt score; weight 0). In built positions
+  weight 1 tips close calls (Disenchant takes Rhystic Study over passing), 4 overrides board value
+  (Vindicate takes Smothering Tithe over a Craw Wurm). The bench decks hold almost no salty cards
+  (Sol Ring alone), so it's measured on the real decks: `BENCH_POOL=strong npm run bot:ab -w engine
+  -- --budget 1000` (both flags new on the branch). Weight 3 against main, stopped at 55 of 400
+  games: 24.1%, even, too few to say. Left: finish that A/B (about 4.5 h at 8 workers; each worker
+  holds two builds, and one game hit the 768 MB heap cap), then weigh shipping against the bundle
+  (a table of only the cards above about 0.5 salt would be small). EDHREC rank untried.
 - **Deeper lookahead** (the user, 2026-10-18): let the bot look further ahead, a clock off, to see
   whether it finds smarter lines. The yardstick is `bot/benchmarks.ts` (`npm run bot:benchmarks -w
   engine`): seventeen hard positions played out over whole turns and judged on the outcome — goals,
