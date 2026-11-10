@@ -80,7 +80,7 @@ import {
 } from "./simulate.js";
 import type { Horizon, RolloutPolicy } from "./simulate.js";
 import { boardKey, nextTurnValue, passLine, planTurn } from "./turn-plan.js";
-import type { PlanStep, PlannedLine, TurnPlanHooks, TurnPlanLimits } from "./turn-plan.js";
+import type { PlanStep, PlannedLine, ScoredFirst, TurnPlanHooks, TurnPlanLimits } from "./turn-plan.js";
 
 export interface EvalBotOptions {
   readonly weights?: EvalWeights;
@@ -890,6 +890,14 @@ export class EvalBotController extends HeuristicBotController {
   /** The candidates the last priority search ranked unsafe for the
    * crackback (`tapsIntoCrackback`), for the replay. */
   lastUnsafe: Action[] = [];
+  /**
+   * Where the last priority search's rollout of each candidate ended, when
+   * that rollout is the one a plan scores a line by — our seat passing to
+   * the end of the turn (`score`) — so the plan takes its one-step lines
+   * from here and rolls none of them out again (`planTurn`'s `scored`; the
+   * bot audit's S4).
+   */
+  private lastEnds = new Map<Action, ScoredFirst>();
   /** The wipe the last priority search chose and the payoff it cast first
    * instead (`payoffBeforeWipe`), for the replay. */
   lastWipePayoff: { readonly wipe: Action; readonly payoff: Action } | null = null;
@@ -1084,6 +1092,7 @@ export class EvalBotController extends HeuristicBotController {
     // what it taps or sacrifices (`crackbackGuard`), read once per decision.
     this.tapGuard = this.crackbackGuard(view.state);
     this.lastUnsafe = [];
+    this.lastEnds = new Map();
     this.lastRefusedTies = [];
     this.lastWipePayoff = null;
     // A cast payoff in play or about to be (Shiko and Narset's Flurry, a
@@ -2734,6 +2743,11 @@ export class EvalBotController extends HeuristicBotController {
     if (after === null) return null;
     if (mustKill !== undefined && after.players[mustKill]?.hasLost !== true) return null;
     const value = evaluateState(after, this.cards, this.playerId, this.weights);
+    // The plan's own rollout of this move — it resolved, then our seat
+    // passing through v1's combat to the end of the turn — and so its
+    // one-step line (`lastEnds`). Not a kill that had to land, which no plan
+    // starts from.
+    if (this.plansAsScored() && mustKill === undefined) this.lastEnds.set(action, { end: after, value });
     if (!this.tapsIntoCrackback(view.state, action, budget)) return value;
     this.lastUnsafe.push(action);
     return UNSAFE + value;
@@ -2894,6 +2908,18 @@ export class EvalBotController extends HeuristicBotController {
     };
   }
 
+  /**
+   * Whether this decision's one-move rollouts are the plan's: to the end of
+   * the turn, under the `"combat"` policy, our seat answered by its
+   * stand-in. Under `"acting"` they play our turn on, and a line passed out
+   * is on another scale (about half differ, by up to 60 points: the bot
+   * audit's S4), so there the plan scores its own first moves and is
+   * compared with its own line for the one-move answer (`planLines`).
+   */
+  private plansAsScored(): boolean {
+    return this.horizon === "turn" && this.decisionRollout === "combat" && !this.rolloutDecisions;
+  }
+
   private planLimits(): TurnPlanLimits {
     return { depth: PLAN_DEPTH, beam: PLAN_BEAM, simulations: this.planSimulations };
   }
@@ -2953,7 +2979,19 @@ export class EvalBotController extends HeuristicBotController {
       clock: { out: () => outOfTime(budget), timed: <T>(simulate: () => T): T => timed(budget, simulate) },
     };
     const unknown = new Set(state.zones.perPlayer[me]?.library ?? []);
-    const lines = planTurn(state, this.cards, me, firsts, hooks, limits, unknown, this.planMode === "turn");
+    const asScored = this.plansAsScored();
+    const lines = planTurn(
+      state,
+      this.cards,
+      me,
+      firsts,
+      hooks,
+      limits,
+      unknown,
+      this.planMode === "turn",
+      asScored ? this.lastEnds : undefined,
+      asScored || best.type === "pass-priority" ? undefined : best,
+    );
     // Each line traced as an answer for its first move, as a follow-up pair
     // is (`scoreFrom`), so `scenario-fit.ts`' replay weighs what the plan
     // weighed.
@@ -3013,13 +3051,31 @@ export class EvalBotController extends HeuristicBotController {
       }
       if (chosen.steps.length === 0 || !this.lineSafe(chosen, budget)) return null;
     } else {
-      // The best line that beats the one-move answer and taps nothing into
-      // the crackback along the way (`lineSafe`).
+      // What a line must beat: the one-move answer, on the lines' own scale.
+      // That is its score when the search rolled it out as a line is
+      // (`plansAsScored`). When it didn't (`"acting"` plays our turn on
+      // after the move, so a line passed out was held to a bar it mostly
+      // couldn't reach, and now and then cleared one it shouldn't have: the
+      // bot audit's S4), it's the plan's own line for that move, or for
+      // passing. An answer that isn't one plain move (a batch, an untap
+      // plan, a land with its crack) has no such line and keeps its score,
+      // as does one no line may begin with (a wipe held for combat).
+      let bar = bestScore;
+      if (!asScored && scored.get(best) === bestScore) {
+        bar = alone?.value ?? bestScore;
+      } else if (!asScored && best.type === "pass-priority") {
+        if (outOfTime(budget)) return null;
+        const passed = timed(budget, () => passLine(state, this.cards, me, hooks));
+        if (passed === null) return null;
+        bar = passed.value;
+      }
+      // The best line that beats it and taps nothing into the crackback
+      // along the way (`lineSafe`).
       const safe = lines.find((line, i) => {
-        if (!(line.value > bestScore + TIE)) return true;
+        if (!(line.value > bar + TIE)) return true;
         return i < PLAN_SAFE_LINES && this.lineSafe(line, budget);
       });
-      if (safe === undefined || !(safe.value > bestScore + TIE)) return null;
+      if (safe === undefined || !(safe.value > bar + TIE)) return null;
       chosen = safe;
     }
     const [first, ...rest] = chosen.steps;

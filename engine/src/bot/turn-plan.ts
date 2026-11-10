@@ -201,12 +201,34 @@ interface Node {
   readonly combatDone: boolean;
 }
 
+/** A first move the caller has already rolled out to the end of the turn
+ * with our seat passing: where it ended, and that state's value. */
+export interface ScoredFirst {
+  readonly end: GameState;
+  readonly value: number;
+}
+
 /**
  * The best lines for our turn from `state` (our priority, a main phase,
  * nothing on the stack), best first; `firsts` are the moves to start from,
  * as the caller listed them. Every line is at least one step long, so the
  * caller's own answer — a single move, or passing — is weighed beside them
  * by its own score.
+ *
+ * **A cut keeps what it paid for** (the bot audit's S4, 2026-11-10). Past
+ * the first moves, a move is passed out and scored as soon as it has
+ * resolved, the best line's moves before the next best's, so a plan the
+ * simulations or the clock stop has every line it resolved; a level used to
+ * resolve every move of every kept line before scoring any, and a cut level
+ * scored none. And a kept line is one that can go on: a line with no step
+ * left takes no place among the `beam`.
+ *
+ * **First moves the caller scored cost nothing** (`scored`): the one-move
+ * search's rollout of a move, our seat passing to the end of the turn, is
+ * the move resolved and then passed out, so its end is the one-step line's.
+ * When every first move has one, they're resolved best first and only until
+ * `beam` of them can go on; otherwise all of them, as before, since their
+ * order isn't known until each is passed out.
  */
 export function planTurn(
   state: GameState,
@@ -222,6 +244,15 @@ export function planTurn(
    * finding that out costs only the moves resolved. Finished games are
    * still returned. */
   onlyIfChained = false,
+  scored?: ReadonlyMap<Action, ScoredFirst>,
+  /**
+   * The caller's own answer, when it wasn't chosen by a line's measure (the
+   * `"acting"` rollout): the first move whose line is kept among the `beam`
+   * whatever passing out after it scored, so the lines it begins are weighed
+   * beside the rest. Opt before Shiko's copied Bolt is worth nothing passed
+   * out, and without this no line began with it.
+   */
+  lead?: Action,
 ): PlannedLine[] {
   let left = limits.simulations;
   const clock = limits.clock;
@@ -232,6 +263,7 @@ export function planTurn(
     return clock === undefined ? simulate() : clock.timed(simulate);
   };
   const lines: PlannedLine[] = [];
+  const done = (): PlannedLine[] => lines.sort((a, b) => b.value - a.value);
   const scoreLine = (node: Node): PlannedLine | null => {
     if (out()) return null;
     const end = spend(() => passOut(node.game.state, registry, me));
@@ -240,87 +272,133 @@ export function planTurn(
     lines.push(line);
     return line;
   };
-  const known = (action: Action): boolean => {
+  const usable = (action: Action): boolean => {
     const id = usedCard(action);
     return id === undefined || !unknown.has(id);
   };
+  const movesOf = (node: Node): readonly Action[] =>
+    (node.moves ??= hooks.moves(node.game.controllerView(me)).filter(usable));
+  /** `node` with `step` after it, on the board `game`. */
+  const after = (node: Node, step: PlanStep, board: string, game: Game, combatDone = node.combatDone): Node => ({
+    game,
+    steps: [...node.steps, step],
+    boards: [...node.boards, board],
+    before: [...node.before, node.game.state],
+    combatDone,
+  });
+  /**
+   * `move` resolved on `node`'s board: the line so far, or `null` when it
+   * never comes back to us. A move that ends the game is a finished line,
+   * scored as it ended — a win, never expanded or passed out.
+   * `simulateSettled` answers `null` for it, priority never coming back, so
+   * a `null` is asked once more how the move resolves.
+   */
+  const settle = (node: Node, move: Action, board: string): Node | null => {
+    const [settled, ended] = spend(() => {
+      const s = simulateSettled(node.game.state, registry, me, move);
+      return [s, s === null ? simulateAction(node.game.state, registry, move, "stack", "combat") : s.state] as const;
+    });
+    if (ended?.result.over === true) {
+      const line = after(node, move, board, node.game);
+      lines.push({ steps: line.steps, boards: line.boards, before: line.before, value: hooks.value(ended), end: ended });
+      return null;
+    }
+    return settled === null ? null : after(node, move, board, settled);
+  };
+  /**
+   * Through combat, when something is still to do in the second main phase
+   * and a creature of ours could attack first: a line that only passes is
+   * the caller's own "pass", and with nothing to attack with, a move after
+   * combat is the same move before it.
+   */
+  const combat = (node: Node, board: string): Node | null => {
+    if (node.combatDone || out() || !hooks.mayAttack(node.game.state)) return null;
+    const fought = spend(() => throughCombat(node.game.state, registry, me));
+    if (fought === null) return null;
+    const child = after(node, "combat", board, fought, true);
+    return movesOf(child).length > 0 ? child : null;
+  };
+  /** Whether a line has a step left to try. */
+  const goesOn = (node: Node): boolean =>
+    movesOf(node).length > 0 || (!node.combatDone && hooks.mayAttack(node.game.state));
+  /** The best `beam` of `children` that can go on, best first. */
+  const keep = (children: { node: Node; value: number }[]): Node[] => {
+    const kept: Node[] = [];
+    for (const child of children.sort((a, b) => b.value - a.value)) {
+      if (kept.length >= limits.beam) break;
+      if (goesOn(child.node)) kept.push(child.node);
+    }
+    return kept;
+  };
 
-  let frontier: Node[] = [
-    {
-      game: Game.fromSnapshot(state, { registry }),
-      steps: [],
-      boards: [],
-      before: [],
-      combatDone: state.turn.step !== "precombat-main",
-    },
-  ];
-  for (let depth = 0; depth < limits.depth && frontier.length > 0 && !out(); depth += 1) {
-    const pending: Node[] = [];
-    const movesOf = (node: Node): readonly Action[] =>
-      (node.moves ??= hooks.moves(node.game.controllerView(me)).filter(known));
-    for (const node of frontier) {
-      const moves = depth === 0 ? firsts.filter(known) : movesOf(node);
-      const board = boardKey(node.game.state, me);
-      for (const move of moves) {
-        if (out()) break;
-        // A move that ends the game is a finished line, scored as it ended —
-        // a win, never expanded or passed out. `simulateSettled` answers
-        // `null` for it, priority never coming back, so a `null` is asked
-        // once more how the move resolves.
-        const [settled, ended] = spend(() => {
-          const s = simulateSettled(node.game.state, registry, me, move);
-          return [s, s === null ? simulateAction(node.game.state, registry, move, "stack", "combat") : s.state] as const;
-        });
-        if (ended?.result.over === true) {
-          lines.push({
-            steps: [...node.steps, move],
-            boards: [...node.boards, board],
-            before: [...node.before, node.game.state],
-            value: hooks.value(ended),
-            end: ended,
-          });
-          continue;
-        }
-        if (settled === null) continue;
-        const child: Node = {
-          game: settled,
-          steps: [...node.steps, move],
-          boards: [...node.boards, board],
-          before: [...node.before, node.game.state],
-          combatDone: node.combatDone,
-        };
-        pending.push(child);
-      }
-      // Through combat, when something is still to do in the second main
-      // phase and a creature of ours could attack first: a line that only
-      // passes is the caller's own "pass", and with nothing to attack with,
-      // a move after combat is the same move before it.
-      if (!node.combatDone && !out() && hooks.mayAttack(node.game.state)) {
-        const after = spend(() => throughCombat(node.game.state, registry, me));
-        if (after !== null) {
-          const child: Node = {
-            game: after,
-            steps: [...node.steps, "combat"],
-            boards: [...node.boards, board],
-            before: [...node.before, node.game.state],
-            combatDone: true,
-          };
-          if (movesOf(child).length > 0) pending.push(child);
-        }
-      }
+  if (limits.depth <= 0) return lines;
+  const root: Node = {
+    game: Game.fromSnapshot(state, { registry }),
+    steps: [],
+    boards: [],
+    before: [],
+    combatDone: state.turn.step !== "precombat-main",
+  };
+  const rootBoard = boardKey(state, me);
+
+  // The first moves. One the caller scored is a line already; the rest are
+  // lines once resolved and passed out.
+  const starts = firsts.filter(usable);
+  const given = (move: Action): ScoredFirst | undefined => scored?.get(move);
+  const allGiven = starts.every((move) => given(move) !== undefined);
+  for (const move of starts) {
+    const first = given(move);
+    if (first !== undefined) {
+      lines.push({ steps: [move], boards: [rootBoard], before: [state], value: first.value, end: first.end });
     }
-    if (depth === 0 && onlyIfChained && !pending.some((n) => n.steps[0] === "combat" || movesOf(n).length > 0)) {
-      return lines.sort((a, b) => b.value - a.value);
-    }
-    const children: { node: Node; value: number }[] = [];
-    for (const child of pending) {
-      const line = scoreLine(child);
-      if (line !== null) children.push({ node: child, value: line.value });
-    }
-    children.sort((a, b) => b.value - a.value);
-    frontier = children.slice(0, limits.beam).map((c) => c.node);
   }
-  return lines.sort((a, b) => b.value - a.value);
+  const ordered = allGiven
+    ? [...starts].sort((a, b) => (given(b)?.value ?? 0) - (given(a)?.value ?? 0))
+    : starts;
+  const pending: Node[] = [];
+  let open = 0;
+  for (const move of ordered) {
+    if (out() || (allGiven && open >= limits.beam)) break;
+    // A game the caller's rollout ended is a finished line, already in.
+    if (given(move)?.end.result.over === true) continue;
+    const child = settle(root, move, rootBoard);
+    if (child === null) continue;
+    pending.push(child);
+    if (allGiven && goesOn(child)) open += 1;
+  }
+  const fought = combat(root, rootBoard);
+  if (fought !== null) pending.push(fought);
+  if (onlyIfChained && !pending.some((n) => n.steps[0] === "combat" || movesOf(n).length > 0)) return done();
+  const children: { node: Node; value: number }[] = [];
+  for (const child of pending) {
+    const move = child.steps[0];
+    const first = move === undefined || move === "combat" ? undefined : given(move);
+    const value = first?.value ?? scoreLine(child)?.value;
+    if (value !== undefined) children.push({ node: child, value });
+  }
+  let frontier = limits.depth > 1 ? keep(children) : [];
+  const led = lead === undefined ? undefined : children.find((c) => c.node.steps[0] === lead)?.node;
+  if (limits.depth > 1 && led !== undefined && !frontier.includes(led) && goesOn(led)) {
+    frontier = [led, ...frontier.slice(0, Math.max(0, limits.beam - 1))];
+  }
+
+  for (let depth = 1; depth < limits.depth && frontier.length > 0 && !out(); depth += 1) {
+    const next: { node: Node; value: number }[] = [];
+    const score = (child: Node | null): void => {
+      const line = child === null ? null : scoreLine(child);
+      if (child !== null && line !== null) next.push({ node: child, value: line.value });
+    };
+    for (const node of frontier) {
+      const board = boardKey(node.game.state, me);
+      for (const move of movesOf(node)) {
+        if (out()) break;
+        score(settle(node, move, board));
+      }
+      score(combat(node, board));
+    }
+    frontier = depth + 1 < limits.depth ? keep(next) : [];
+  }
+  return done();
 }
 
 /** Passing, as a line of no steps: the turn passed out from `state`. `null`

@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { BOT_BENCHMARKS, runBenchmark } from "../bot/benchmarks.js";
 import { candidateActions } from "../bot/candidates.js";
 import { EvalBotController } from "../bot/eval-bot.js";
-import { boardKey, planTurn, type PlanClock, type TurnPlanHooks } from "../bot/turn-plan.js";
+import { boardKey, planTurn, type PlanClock, type ScoredFirst, type TurnPlanHooks } from "../bot/turn-plan.js";
 import { createDefaultRegistry } from "../cards.js";
 import type { Action } from "../actions.js";
 import { Game } from "../game.js";
@@ -137,9 +137,9 @@ describe("a plan on the decision's clock", () => {
       mayAttack: () => false,
     };
     const firsts = hooks.moves(game.controllerView(me));
-    const plan = (clock?: PlanClock) =>
-      planTurn(game.state, registry, me, firsts, hooks, { depth: 5, beam: 3, simulations: 48, clock });
-    return plan;
+    const plan = (clock?: PlanClock, simulations = 48, depth = 5, scored?: ReadonlyMap<Action, ScoredFirst>) =>
+      planTurn(game.state, registry, me, firsts, hooks, { depth, beam: 3, simulations, clock }, undefined, false, scored);
+    return Object.assign(plan, { firsts });
   };
   const steps = (lines: ReturnType<ReturnType<typeof position>>) =>
     lines.map((line) => line.steps.map((step) => (step === "combat" ? step : step.type)).join(" "));
@@ -157,5 +157,34 @@ describe("a plan on the decision's clock", () => {
     let timed = 0;
     plan({ out: () => timed >= 2, timed: (simulate) => ((timed += 1), simulate()) });
     expect(timed).toBe(2);
+  });
+
+  // The bot audit's S4: a level resolved every move of every kept line
+  // before scoring any, so a level the budget cut scored nothing.
+  it("keeps the two-move line it had resolved when the simulations ran out", () => {
+    const plan = position();
+    // Each first move resolved and passed out, then two more: one second
+    // move resolved, and passed out.
+    const lines = plan(undefined, plan.firsts.length * 2 + 2);
+    expect(lines.some((line) => line.steps.length === 2)).toBe(true);
+  });
+
+  it("takes the first moves the caller scored as lines, and rolls none of them out", () => {
+    const plan = position();
+    const scored = new Map<Action, ScoredFirst>();
+    for (const line of plan(undefined, 48, 1)) {
+      const step = line.steps[0];
+      if (step !== undefined && step !== "combat") scored.set(step, { end: line.end, value: line.value });
+    }
+    expect(scored.size).toBe(plan.firsts.length);
+    const count = (given?: ReadonlyMap<Action, ScoredFirst>) => {
+      let timed = 0;
+      const lines = plan({ out: () => false, timed: (simulate) => ((timed += 1), simulate()) }, 48, 5, given);
+      return { timed, lines: steps(lines).sort() };
+    };
+    const own = count();
+    const given = count(scored);
+    expect(given.lines).toEqual(own.lines);
+    expect(given.timed).toBeLessThanOrEqual(own.timed - plan.firsts.length);
   });
 });
