@@ -322,6 +322,21 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A search, then something about the card it found — no engine code, 2026-11-10
+
+The key `effect:search-then-act-on-found`, asked for by name (the strong bot
+decks' stand-ins). Its three records predate what the search already had:
+`search-library`'s `then` runs with the finds as its targets, so slot 0 is "that
+card", and `{ thisWay: "put-onto-battlefield" }` is "it" once it has entered.
+Scion of the Ur-Dragon is a `then` of `become-copy` (`target: "source"`, `of: 0`,
+`ofCard`, until end of turn) under a `conditional` on the find being in the
+graveyard — its "If you do": a find Rest in Peace exiled isn't copied. Savage
+Order is the search and a `grant-keyword-all` over what was put onto the
+battlefield this way, until your next turn; its "sacrifice a creature with power
+4 or greater" is `additionalCost.sacrifice` with a `power` clause. Instrument of
+the Bards, the key's last card, is a `conditional` on slot 0 being legendary.
+Tests: `search-then-act-on-found.test.ts`.
+
 ### An emblem that gives others abilities — built 2026-11-03
 
 The need-keys family `effect:emblem-triggered-abilities`' top group. An emblem's

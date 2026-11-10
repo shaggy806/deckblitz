@@ -2194,7 +2194,8 @@
   "replacement:token-event-becomes-with-decision",
   "trigger:self-put-into-graveyard-from-library",
   "effect:trigger-spell-gains-keyword",
-  "effect:double-life-total"
+  "effect:double-life-total",
+  "effect:search-then-act-on-found"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
