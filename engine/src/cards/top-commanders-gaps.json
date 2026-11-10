@@ -887,6 +887,7 @@
   "mechanic:coin-flip",
   "trigger:surveils",
   "static:max-hand-size",
+  "effect:no-max-hand-size-while-you-control-source",
   "keyword:melee",
   "effect:temporary-player-effect",
   "effect:this-way-results",

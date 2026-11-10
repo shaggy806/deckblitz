@@ -10476,6 +10476,7 @@ export class Game {
   private endWhileSourceCondition(id: ObjectId, ended: (w: WhileSource) => boolean): void {
     if (this.state.whileSourceIds?.includes(id) !== true) return;
     const over = (w: WhileSource | undefined): boolean => w !== undefined && w.id === id && ended(w);
+    this.endPlayerWhileSource(over);
     const expired: ObjectId[] = [];
     let controlEnded = false;
     for (const other of [...this.state.zones.shared.battlefield, ...phasedOutIds(this.state)]) {
@@ -38980,6 +38981,10 @@ controlledBy,
         if (target.kind === "object") this.turnFaceDown(target.object, as);
       },
       sourceStintNow: () => tokenLinkToSource()?.zoneChangeCount,
+      whileSourceHere: (duration) => {
+        const kept = lastingHere(duration);
+        return typeof kept === "object" && "whileSource" in kept ? kept.whileSource : null;
+      },
       createToken: (token, count, who, tapped, sacrificeAtEndStep, gainUntilEndOfTurn, goadedForGame, thenCounters, basePt, attacking, separate, exileAtEndStep, attacksThisCombat, gainKeywords, attachTo, linkedToSource, textChanges) => {
         const link = linkedToSource === true ? tokenLinkToSource() : null;
         // "The tokens are goaded for the rest of the game": by this effect's
@@ -60981,6 +60986,27 @@ controlledBy,
     return this.state.zones.shared[zone];
   }
 
+  /** End every player effect and timed static that lasted "for as long as"
+   * a source `over` says has stopped remaining — "you have no maximum hand
+   * size for as long as you control this Saga" (The Great Synthesis; rule
+   * 611.2b: ended for good, so taking it back restores nothing). */
+  private endPlayerWhileSource(over: (w: WhileSource | undefined) => boolean): void {
+    const ends = (expiry: Expiry | undefined): boolean =>
+      typeof expiry === "object" && "whileSource" in expiry && expiry.whileSource !== null && over(expiry.whileSource);
+    let changed = false;
+    const effects = this.state.playerEffects;
+    if (effects !== undefined && effects.some((e) => ends(e.expires))) {
+      this.state.playerEffects = effects.filter((e) => !ends(e.expires));
+      changed = true;
+    }
+    if (this.state.emblems.some((e) => ends(e.expires))) {
+      for (const e of this.state.emblems) if (ends(e.expires) && e.object !== undefined) delete this.state.objects[e.object];
+      this.state.emblems = this.state.emblems.filter((e) => !ends(e.expires));
+      changed = true;
+    }
+    if (changed) invalidateComputedCache();
+  }
+
   /** Remember that some effect lasts for as long as `id` remains on the
    * battlefield, so its leaving ends it (`endWhileSourceEffects`). */
   private noteWhileSource(id: ObjectId): void {
@@ -61010,6 +61036,7 @@ controlledBy,
       (id) => !ending.has(id) || this.state.objects[id]?.zone === "battlefield",
     );
     if (this.state.whileSourceIds.length === 0) delete this.state.whileSourceIds;
+    this.endPlayerWhileSource(over);
     const expired: ObjectId[] = [];
     let controlEnded = false;
     // A phased-out permanent's effects end too (rule 702.26f).

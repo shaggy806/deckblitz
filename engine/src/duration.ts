@@ -67,7 +67,8 @@ export type DurationPlayer = Exclude<PlayerRef, "you">;
  * - `"while-source-tapped"`: "for as long as [this] remains tapped"
  *   (Ashnod's Battle Gear).
  * - `"while-you-control-source"`: "for as long as you control [this]"
- *   (Aegis Angel; Lightning, Security Sergeant's permission).
+ *   (Aegis Angel; Lightning, Security Sergeant's permission; on a player,
+ *   The Great Synthesis's "you have no maximum hand size").
  * - `"while-you-control-source-tapped"`: both (Rubinia Soulsinger).
  * - `"while-its-controller-controls-source"`: "for as long as **they**
  *   control it", said just after someone else gained control of the source
@@ -150,7 +151,9 @@ export type PermanentDuration = Extract<
 >;
 
 /** What an effect on a player, or a timed static, can last (`PlayerEffect`,
- * `EmblemState.expires` — see {@link resolvePlayerDuration}). */
+ * `EmblemState.expires` — see {@link resolvePlayerDuration}). The source's
+ * two — "you have no maximum hand size for as long as you control this Saga"
+ * (The Great Synthesis) — end through `Game.endPlayerWhileSource`. */
 export type PlayerDuration = Extract<
   Duration,
   | "end-of-turn"
@@ -164,6 +167,8 @@ export type PlayerDuration = Extract<
   | { readonly untilTurnOf: DurationPlayer }
   | { readonly throughTurnOf: DurationPlayer }
   | { readonly duringTurnOf: DurationPlayer }
+  | "while-source"
+  | "while-you-control-source"
 >;
 
 /** What a copy effect with a duration can last (`become-copy`'s `until`,
@@ -304,14 +309,22 @@ export function untilPointOf(duration: PointDuration, you: PlayerId): UntilPoint
  * that player's next turn and lasts through it. `playerOf` reads a
  * {@link DurationPlayer} as the effect resolves; `undefined` when it names
  * nobody (an illegal target, a player who has left), and the effect then
- * does nothing.
+ * does nothing. `sourceHere` reads the effect's source for "for as long as
+ * [you control] this": `null` when that already isn't so as the effect would
+ * begin, and it then does nothing either (rule 611.2b).
  */
 export function resolvePlayerDuration(
   duration: PlayerDuration,
   you: PlayerId,
   playerOf: (ref: DurationPlayer) => PlayerId | undefined,
-): { readonly expires: Expiry } | { readonly during: PlayerId } | undefined {
+  sourceHere: (duration: "while-source" | "while-you-control-source") => WhileSource | null = () => null,
+):{ readonly expires: Expiry } | { readonly during: PlayerId } | undefined {
   switch (duration) {
+    case "while-source":
+    case "while-you-control-source": {
+      const whileSource = sourceHere(duration);
+      return whileSource === null ? undefined : { expires: { whileSource } };
+    }
     case "end-of-turn":
     case "permanent":
       return { expires: duration };

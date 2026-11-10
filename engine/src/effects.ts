@@ -37,6 +37,7 @@ import type {
   Duration,
   DurationPlayer,
   Expiry,
+  WhileSource,
   PermanentDuration,
   PlayerDuration,
   PointDuration,
@@ -12178,6 +12179,11 @@ export interface EffectApi {
    * (rule 607.2a): the one it came from, though the source may have left since;
    * none for a spell's. `createdWithSource` binds to it. */
   sourceStintNow(): number | undefined;
+  /** The resolving effect's source for a player-side "for as long as [you
+   * control] this" (`resolvePlayerDuration`): the permanent in the stint the
+   * effect refers to, noted so its leaving or changing hands ends the effect —
+   * or `null` when that already isn't so (rule 611.2b). */
+  whileSourceHere(duration: "while-source" | "while-you-control-source"): WhileSource | null;
   /** Create `count` token(s) that are copies of the permanent `of` — see the
    * `"create-token-copy"` {@link EffectSpec}. */
   createTokenCopy(
@@ -18277,7 +18283,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "player-effect": {
-      const lasts = resolvePlayerDuration(spec.duration, ctx.controller, (ref) => resolvePlayerRef(ref, ctx));
+      const lasts = resolvePlayerDuration(spec.duration, ctx.controller, (ref) => resolvePlayerRef(ref, ctx), ctx.whileSourceHere);
       if (lasts === undefined) return;
       ctx.addPlayerEffect({
         owner: ctx.controller,
@@ -18383,7 +18389,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       applyRepeat(spec, ctx);
       return;
     case "prohibit": {
-      const lasts = resolvePlayerDuration(spec.duration ?? "end-of-turn", ctx.controller, (ref) => resolvePlayerRef(ref, ctx));
+      const lasts = resolvePlayerDuration(spec.duration ?? "end-of-turn", ctx.controller, (ref) => resolvePlayerRef(ref, ctx), ctx.whileSourceHere);
       if (lasts === undefined) return;
       const bound = spec.prohibits.flatMap((written) => bindProhibition(written, ctx));
       if (bound.length === 0) return;
@@ -18433,6 +18439,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
           (spec.duration ?? "end-of-turn") as PlayerDuration,
           ctx.controller,
           (ref) => resolvePlayerRef(ref, ctx),
+          ctx.whileSourceHere,
         );
         if (lasts === undefined) return;
         ctx.restrictOverGame(
@@ -19414,7 +19421,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "timed-static": {
-      const lasts = resolvePlayerDuration(spec.duration, ctx.controller, (ref) => resolvePlayerRef(ref, ctx));
+      const lasts = resolvePlayerDuration(spec.duration, ctx.controller, (ref) => resolvePlayerRef(ref, ctx), ctx.whileSourceHere);
       if (lasts !== undefined && "expires" in lasts) ctx.addTimedStatic(spec.text, spec.static, lasts.expires);
       return;
     }
@@ -19424,7 +19431,7 @@ export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): vo
       return;
     }
     case "replacement-effect": {
-      const lasts = resolvePlayerDuration(spec.duration, ctx.controller, (ref) => resolvePlayerRef(ref, ctx));
+      const lasts = resolvePlayerDuration(spec.duration, ctx.controller, (ref) => resolvePlayerRef(ref, ctx), ctx.whileSourceHere);
       if (lasts === undefined || !("expires" in lasts)) return;
       const left = spec.next === undefined || spec.next === true ? undefined : amountValue(spec.next, ctx);
       if (left !== undefined && left <= 0) return;
