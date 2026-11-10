@@ -36,8 +36,8 @@ which needs a design of its own.
 - **Check each cited line still says what the audit says.** The audit read the code on
   2026-11-10; a line number that has moved is fine, a function that has changed shape means
   re-reading the finding against today's code before trusting its fix.
-- The audit's probes: in `engine/scripts/` once step 0 has landed (`bot:anatomy`,
-  `bot:harvest`); before that, and for the positions behind Q3-Q7, in `.scratch/bot-audit/` on
+- The audit's probes: in `engine/scripts/` (`bot:anatomy`, and `bot:timings`, which is the
+  audit's `harvest.mjs`: `bot:harvest` was taken); for the positions behind Q3-Q7, in `.scratch/bot-audit/` on
   the development PC (git-ignored: `blood.mjs`, `interact.mjs`, `stun.mjs`, `ablate.mjs`,
   `check-planner/q6.mjs`, `check-rules/q7.mjs`). If `.scratch/bot-audit/` isn't there, rebuild
   the position from the audit's description; each is a few cards.
@@ -83,7 +83,7 @@ wait.
    and refs, not screenshots. Note the turn and board size of anything the step lists to watch
    for.
 3. Read the server's figures as the step says, and the development PC's for the same decks from
-   `bot:harvest`.
+   `bot:timings`.
 4. Write them under the plan's *Live figures*, and move `Next` to step 3 or step 4 by the rule in
    the step, with the reason.
 

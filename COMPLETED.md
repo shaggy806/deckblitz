@@ -3347,6 +3347,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Bots
 
+- **The bot audit's fixes, step 0: tools** (2026-11-10; `docs/plans/bot-audit-fixes.md`): nothing
+  that changes a bot's play. `EvalBotOptions.now`, a clock a test can drive, with finding S1 held
+  as an expected failure for step 2; `bot:anatomy` (where a decision's time goes, from a saved
+  position) and `bot:timings` (what decisions cost in bench games at the live budget, by board
+  size); four big bench-deck positions in `engine/data/bot-positions/`; `bot:replay --budget`;
+  one `LIVE_BOT_BUDGET_MS` for the rooms and the scripts.
+
 - **A target group's min in a cast's target range and the bots' picks** (2026-10-31,
   `416041552`): Reckless Spite's "two target nonblack creatures" under Hinata, Dawn-Crowned's
   per-target tax was offered at zero targets — `targetCountBoundsFor` counted every group member

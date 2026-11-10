@@ -155,7 +155,8 @@ authoring, run just the files you touched** (`npx vitest run cmdr-sokka pool.tes
   or activated in many small random boards, seconds a card; the per-card check `verify` runs, and
   each failure prints a one-line replay.
 - `bot:bench`, `bot:scenarios`, `bot:benchmarks`, `bot:behaviour`, `bot:crackback`, `bot:ab`, `bot:diff`,
-  `bot:replay`: bot measurement (the `ab-bench`, `decision-diff` and `replay-seed` skills drive them).
+  `bot:replay`, `bot:anatomy` (where a decision's time goes, on `data/bot-positions/`), `bot:timings`
+  (decision cost in bench games at the live budget): bot measurement (the `ab-bench`, `decision-diff` and `replay-seed` skills drive them).
 - `bot:bench:last`: whether this engine code already has a bench figure on this machine, so a "before" needn't be
   played again (`data/bench-log.jsonl`, keyed by a hash of the non-card source; a plain `bot:bench` appends to it, and
   the file is committed with the work it measured).

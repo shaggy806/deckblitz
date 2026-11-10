@@ -1,6 +1,6 @@
 # Fixing what the bot audit found
 
-Status: **proposed order of work** (2026-11-10); nothing built. The findings, their evidence and
+Status: **in progress** (2026-11-10): step 0 built, step 1 next. The findings, their evidence and
 their finding numbers (S1-S8, Q1-Q8) are in `bot-audit-2026-11.md`; this file is only the order,
 what each step changes, and how each is checked. Three choices near the end are the user's.
 
@@ -9,8 +9,8 @@ what each step changes, and how each is checked. Three choices near the end are 
 One step a session, with the `bot-audit-next` skill. When a step lands, tick it here with its date
 and commit, write its *As built* lines under the step, and move `Next`.
 
-- Next: **step 0** (tools).
-- [ ] Step 0. Tools
+- Next: **step 1** (four misplays).
+- [x] Step 0. Tools (2026-11-10)
 - [ ] Step 1. Four misplays
 - [ ] Step 2. The clock
 - [ ] Step 2b. Deploy, and test live
@@ -39,8 +39,8 @@ Nothing here changes how a bot plays.
    path and stays for what it tests.
 2. **The probes, tracked.** Move from `.scratch/bot-audit/` into `engine/scripts/`:
    `anatomy.mjs` as `bot:anatomy` (unit costs, ticks, ms a tick, from a snapshot), `harvest.mjs`
-   as `bot:harvest` (games at a wall-clock budget, one row per searched decision, the
-   by-board-size table), `expiry.mjs` folded into scenarios once (1) exists. `bot:harvest` draws
+   as `bot:timings` (games at a wall-clock budget, one row per searched decision, the
+   by-board-size table), `expiry.mjs` folded into scenarios once (1) exists. `bot:timings` draws
    from `BENCH_DECKS` by default, so nothing from the pilot branch is needed or named.
 3. **Three or four big-board snapshots checked in** under `engine/data/bot-positions/`, taken
    from bench-deck games (`seed-50-t40` is one): the fixed positions every speed step is timed
@@ -50,6 +50,32 @@ Nothing here changes how a bot plays.
 
 Done when: `npm run bot:anatomy -w engine -- --from <snapshot>` prints the audit's numbers for
 that position, and a scenario using `now` fails on today's S1 behaviour.
+
+*As built* (2026-11-10). `EvalBotOptions.now` is carried on each search's budget, so `onClock`,
+`outOfTime`, `timed` and the audit's `expired` all read the one clock. The S1 position is a test,
+not yet a gate scenario, because the gate has to stay green until step 2: `eval-bot.test.ts`
+drives a clock that jumps 2 s once the first simulation is scored (through `trace`), checks the
+search ends at one simulation, expired, where v1 and an unhurried v2 both cast, and holds "plays
+v1's cast" as an `it.fails` — step 2 turns that into a plain test and adds the gate scenario.
+`expiry.mjs` is not carried over; that test is what it measured. The probes are `bot:anatomy`
+and **`bot:timings`** (the audit's `harvest.mjs`; `bot:harvest` was already the fit's training
+set), which prints its own summary and saves positions with `--snaps`. `bot:timings` deals the
+bench seatings (`bot-seating.mjs`). Four positions are in `engine/data/bot-positions/` with a
+README of where each came from and its figures: `seed-50-t40-b73` (the audit's; 995 ms a
+simulation and 5.83 ms a tick here over its first six searched decisions, against the audit's
+740 ms for one simulation), and boards of 94, 87 and 50 from this step's run. Bench decks don't
+reach the pilot decks' sizes: the widest board in 12 games was 95. `bot:replay` takes
+`--budget MS|live`; `LIVE_BOT_BUDGET_MS` (`eval-bot.ts`) is what `room.ts` seats bots with and
+`bot:behaviour` now defaults to (it said 300 ms, the budget before 2026-10-18).
+
+The baseline for step 2, from that run (12 bench games from seed 1, the live budget, 6 workers,
+the development PC): 3,095 searched decisions, p50 154 ms, p90 892 ms, worst 1,700 ms; 22 over
+1 s and 2 over 1.5 s; 146 ended at one simulation (88 of them land searches, 36 decisions, 21
+attack declarations, none a priority search); 5 priority searches were cut to their two
+baselines and passed where a fresh v1 acts (4 activations, 1 cast). On boards of 60-79, 27% of
+searches were cut and a simulation cost 89 ms. So on bench decks on this machine S1's own case
+(one simulation, then a pass) didn't occur: the pilot's decks or a slower machine are where it
+shows, which step 2b measures.
 
 ## Step 1. Four misplays, each a few lines (one session)
 
@@ -96,7 +122,7 @@ In this order, because each makes the next testable:
    the budget and over twice it, and one `console.warn` per over-budget decision with board size
    and `lastDecision`. `/status` shows the max and the count.
 
-Check: scenarios through `now` for 1, 2 and 4; `bot:harvest` before and after on the same seeds
+Check: scenarios through `now` for 1, 2 and 4; `bot:timings` before and after on the same seeds
 — decisions over 1.5 s should go to about zero and the share of one-simulation passes with it;
 the gate at `timeBudgetMs: 1000` still 182/182; server and client suites.
 
@@ -116,7 +142,7 @@ players use.
    over-budget lines from step 2's (5)): the slowest decision, how many ran over the budget and
    over twice it, and the board sizes they happened on.
 4. **Record them here**, under *Live figures*, beside the development PC's for the same decks
-   from `bot:harvest`: decisions over 1 s, the worst decision, ms a simulation by board size.
+   from `bot:timings`: decisions over 1 s, the worst decision, ms a simulation by board size.
    The ratio between the two machines is the number every later estimate in this plan needs.
 5. **Decide the next step from them.** If the live box is still over budget often after step 2,
    step 3 (cost per tick) goes next as written. If over-budget decisions are rare but the search
@@ -152,7 +178,7 @@ or the clone.
 
 1. **S5, narrow `castPayoff`.** True only on our own turn, with the payoff on the battlefield or
    castable this turn, and another castable spell its trigger's filter would see. Keep the Shiko
-   and Guttersnipe scenarios green. Check with `bot:harvest`: the share of searches under
+   and Guttersnipe scenarios green. Check with `bot:timings`: the share of searches under
    "acting" (30% today) and ms a simulation.
 2. **S3, a memo for repeated empty-stack windows.** A completed, uncut search that passed is
    remembered for the turn under: the candidate set; whether attackers and blockers are
