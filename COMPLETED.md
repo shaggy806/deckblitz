@@ -3347,6 +3347,11 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Bots
 
+- **The bot audit's fixes, step 5, sub-step 1: scenarios for answers at an uneven table**
+  (2026-11-10; `1103c8bb4`; `docs/plans/bot-audit-fixes.md`, *As built*): three training scenarios
+  the evaluation gets wrong (Rhystic Study and Smothering Tithe from a player who isn't ahead,
+  Smothering Tithe on a level table) and three gate ones (the leader's six-drop countered, a
+  trailing player's mana rock let through, Demonic Tutor cast in the main phase).
 - **The bot audit's fixes, step 3, part 3: the resolution context and the journal's snapshots**
   (2026-11-10; `1acc7f27a`; `docs/plans/bot-audit-fixes.md`, *As built*): `makeResolutionContext`'s
   ~490-key literal began with spreads, so it cost 2 ms a call; the optional fields are assigned

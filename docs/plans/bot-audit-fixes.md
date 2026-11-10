@@ -1,6 +1,6 @@
 # Fixing what the bot audit found
 
-Status: **in progress** (2026-11-10): steps 0-2 built and live, step 4 built, step 3 next. The findings, their evidence and
+Status: **in progress** (2026-11-10): steps 0-2 built and live, steps 3 and 4 built, step 5 under way (its scenarios in; hand quality next). The findings, their evidence and
 their finding numbers (S1-S8, Q1-Q8) are in `bot-audit-2026-11.md`; this file is only the order,
 what each step changes, and how each is checked. Three choices near the end are the user's.
 
@@ -9,7 +9,7 @@ what each step changes, and how each is checked. Three choices near the end are 
 One step a session, with the `bot-audit-next` skill. When a step lands, tick it here with its date
 and commit, write its *As built* lines under the step, and move `Next`.
 
-- Next: **step 5** (the evaluation; several sessions, its sub-steps ticked in the step itself).
+- Next: **step 5, sub-step 2** (hand quality, Q2; sub-step 1, the scenarios, is built).
 - [x] Step 0. Tools (2026-11-10)
 - [x] Step 1. Four misplays (2026-11-10; `d15599f95` Q3, `752a7550e` Q6, `aadc42a5a` and
   `e1b359709` Q7, `f626a7351` Q5)
@@ -597,6 +597,32 @@ The slow part, and the only one where "is the bot stronger" is the question.
 One A/B at the end of this step, at the live budget, paired by seed if the tooling exists by
 then (`docs-challenge` in the audit's notes): it is the first point at which strength, not
 correctness or speed, is what changed.
+
+- [x] 1. Asymmetric scenarios (2026-11-10; `1103c8bb4`)
+- [ ] 2. Hand quality, and the rules it retires
+- [ ] 3. Engines that aren't draw or creature tokens
+- [ ] 4. Interaction scored on the affected opponent
+- [ ] 5. The sequencing rules retired; the A/B
+
+### As built (2026-11-10): sub-step 1, the scenarios
+
+Six scenarios in `engine/src/bot/scenarios.ts`, under "answers at an uneven table", from
+`interact.mjs`'s positions (four players, six lands each, opponents holding three; "carol ahead"
+is two Craw Wurms and two more lands). No weight or rule changed, so no `bot:diff`.
+
+- **Training** (wrong today, 0 of 3, as the audit's table says): *counters a draw engine from a
+  player who isn't ahead* (bob's Rhystic Study, carol ahead: sub-step 4's), *counters a tax
+  engine* (bob's Smothering Tithe, level table: sub-step 3's) and *counters a tax engine from a
+  player who isn't ahead* (both).
+- **Gate** (right today, to stay right as the weights move): *counters the leader's big threat*
+  (carol ahead and casting the Craw Wurm), *saves Counterspell from a trailing player's mana
+  rock* (bob's Arcane Signet, carol ahead: what sub-step 4 mustn't overshoot into), and *casts a
+  tutor in its own main phase* (Demonic Tutor on two Swamps with better cards in the library).
+  The tutor had no scenario at all; it passes only through `isCantripDue`'s tutor branch, so it
+  is the check sub-step 2 needs when that rule is tried off.
+- **Left out on purpose**: a trailing player's Craw Wurm with carol ahead, and a tutor on the
+  stack. The audit calls holding the counter defensible in both, so neither answer is asserted.
+  Move a training scenario to the gate (drop its `kind`) in the sub-step that turns it right.
 
 ## Housekeeping, any time
 
