@@ -6770,7 +6770,11 @@ vocabulary before adding one back.
   `aftermath.test.ts`.
 - **Saga** — `chapters: [{ at: number[], targets, effect, resolve, text }]`.
   `at` lists the lore counts that fire the chapter (`[1]`, `[2]`, `[1, 2]` for
-  a shared "I, II"). `history-of-benalia.ts`. Once its final chapter ability
+  a shared "I, II"). `history-of-benalia.ts`. A chapter takes a triggered
+  ability's `divided` (rule 603.3d): "II — Distribute seven +1/+1 counters
+  among any number of target creatures you control" is an `any-number` group,
+  `divided: { total: 7, slot: 0, of: "+1/+1 counters" }` and a
+  `counters-divided` (`the-grand-evolution.ts`). Once its final chapter ability
   has left the stack its controller sacrifices it (rule 714.4) — a real
   sacrifice, so "whenever you sacrifice an enchantment" sees it — and the
   `chapter-resolves` trigger (§9) fires as each chapter ability resolves.

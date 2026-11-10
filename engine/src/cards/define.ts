@@ -5715,10 +5715,14 @@ export type CommanderPairing =
 
 /** One chapter ability of a Saga (rule 714.2c). `at` lists the lore-counter
  * counts that fire it — usually `[1]` / `[2]` / `[3]`, but a shared "I, II"
- * ability uses `[1, 2]`. Shaped like a targeted triggered ability. */
+ * ability uses `[1, 2]`. Shaped like a targeted triggered ability.
+ * `divided` is a triggered ability's (rule 603.3d): "II — Distribute seven
+ * +1/+1 counters among any number of target creatures you control" (The
+ * Grand Evolution), split as the chapter ability is put on the stack. */
 export interface SagaChapter {
   readonly at: readonly number[];
   readonly targets: readonly TargetSpec[];
+  readonly divided?: TriggeredAbility["divided"];
   readonly effect: EffectSpec | null;
   readonly resolve: SpellResolver | null;
   readonly text: string;

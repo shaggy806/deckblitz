@@ -739,6 +739,7 @@
   "keyword:sneak",
   "keyword:opus",
   "effect:divided-damage-trigger",
+  "effect:saga-chapter-divided",
   "condition:filter-x-in-mana-cost",
   "trigger:nth-counter-trigger",
   "keyword:teamwork",
