@@ -851,6 +851,7 @@ import _poolAngelheartProtector from "./pool/angelheart-protector.js";
 import _poolAngelheartVial from "./pool/angelheart-vial.js";
 import _poolAngelicAberration from "./pool/angelic-aberration.js";
 import _poolAngelicAccord from "./pool/angelic-accord.js";
+import _poolAngelicArbiter from "./pool/angelic-arbiter.js";
 import _poolAngelicArmaments from "./pool/angelic-armaments.js";
 import _poolAngelicAscension from "./pool/angelic-ascension.js";
 import _poolAngelicBenediction from "./pool/angelic-benediction.js";
@@ -11457,6 +11458,7 @@ import _poolGreenGoblin from "./pool/green-goblin.js";
 import _poolGreenManaBattery from "./pool/green-mana-battery.js";
 import _poolGreenScarab from "./pool/green-scarab.js";
 import _poolGreenSlime from "./pool/green-slime.js";
+import _poolGreenSunsTwilight from "./pool/green-suns-twilight.js";
 import _poolGreenSunsZenith from "./pool/green-suns-zenith.js";
 import _poolGreenWard from "./pool/green-ward.js";
 import _poolGreenbeltGuardian from "./pool/greenbelt-guardian.js";
@@ -33020,6 +33022,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAngelheartVial,
   _poolAngelicAberration,
   _poolAngelicAccord,
+  _poolAngelicArbiter,
   _poolAngelicArmaments,
   _poolAngelicAscension,
   _poolAngelicBenediction,
@@ -43626,6 +43629,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGreenManaBattery,
   _poolGreenScarab,
   _poolGreenSlime,
+  _poolGreenSunsTwilight,
   _poolGreenSunsZenith,
   _poolGreenWard,
   _poolGreenbeltGuardian,
@@ -65202,6 +65206,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/angelheart-vial": _poolAngelheartVial,
   "pool/angelic-aberration": _poolAngelicAberration,
   "pool/angelic-accord": _poolAngelicAccord,
+  "pool/angelic-arbiter": _poolAngelicArbiter,
   "pool/angelic-armaments": _poolAngelicArmaments,
   "pool/angelic-ascension": _poolAngelicAscension,
   "pool/angelic-benediction": _poolAngelicBenediction,
@@ -75808,6 +75813,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/green-mana-battery": _poolGreenManaBattery,
   "pool/green-scarab": _poolGreenScarab,
   "pool/green-slime": _poolGreenSlime,
+  "pool/green-suns-twilight": _poolGreenSunsTwilight,
   "pool/green-suns-zenith": _poolGreenSunsZenith,
   "pool/green-ward": _poolGreenWard,
   "pool/greenbelt-guardian": _poolGreenbeltGuardian,

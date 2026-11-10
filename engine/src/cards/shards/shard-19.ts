@@ -32,6 +32,7 @@ import _poolAnchorToTheAether from "../pool/anchor-to-the-aether.js";
 import _poolAncientAdamantoise from "../pool/ancient-adamantoise.js";
 import _poolAncientSilverback from "../pool/ancient-silverback.js";
 import _poolAncientTomb from "../pool/ancient-tomb.js";
+import _poolAngelicArbiter from "../pool/angelic-arbiter.js";
 import _poolAngelicExaltation from "../pool/angelic-exaltation.js";
 import _poolAngrathCaptainOfChaos from "../pool/angrath-captain-of-chaos.js";
 import _poolAnrakyrTheTraveller from "../pool/anrakyr-the-traveller.js";
@@ -1089,6 +1090,7 @@ const shard: CardShard = {
     _poolAncientAdamantoise,
     _poolAncientSilverback,
     _poolAncientTomb,
+    _poolAngelicArbiter,
     _poolAngelicExaltation,
     _poolAngrathCaptainOfChaos,
     _poolAnrakyrTheTraveller,
