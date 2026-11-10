@@ -337,6 +337,20 @@ export function invalidateComputedCache(): void {
 }
 
 /**
+ * Move the mutation epoch alone, leaving an active region's cache as it is:
+ * the broad safety net for what is kept per mutation *outside* a region
+ * ({@link boardScan}, {@link staticAbilityLosses}). A region is cleared as it
+ * opens, so a write between regions that calls no
+ * {@link invalidateComputedCache} was always covered there; those memos
+ * outlive a region, so each effect instruction and each dispatched action
+ * ends with this. Inside a region the contract is unchanged: a mutation calls
+ * `invalidateComputedCache`.
+ */
+export function noteStateMutation(): void {
+  mutationEpoch += 1;
+}
+
+/**
  * Run `fn` with no cache region active, then restore the suspended region
  * *cleared*. For mutation-heavy code whose reads and writes interleave too
  * finely for point invalidation (`Game.moveObject`): inside, every read
@@ -3650,6 +3664,12 @@ function typeGrantSources(
   registry: CardRegistry,
 ): readonly ContributingStatic[] {
   if (activeCache !== null && activeCache.typeSources !== null) return activeCache.typeSources;
+  const result = boardScan("type", state, registry, scanTypeGrantSources);
+  if (activeCache !== null) activeCache.typeSources = result;
+  return result;
+}
+
+function scanTypeGrantSources(state: GameState, registry: CardRegistry): readonly ContributingStatic[] {
   let out: ContributingStatic[] | null = null;
   for (const sourceId of state.zones.shared.battlefield) {
     const source = state.objects[sourceId];
@@ -3664,9 +3684,72 @@ function typeGrantSources(
     if (state.players[source.controller]?.hasLost === true) continue;
     for (const ability of layer4) (out ??= []).push({ source, ability });
   }
-  const result = out === null ? NO_STATICS : withoutTextLostSources(state, registry, out);
-  if (activeCache !== null) activeCache.typeSources = result;
-  return result;
+  return out === null ? NO_STATICS : withoutTextLostSources(state, registry, out);
+}
+
+/** The three whole-board lists of statics, which every characteristics read
+ * asks for: {@link typeGrantSources}, {@link contributingStaticSources} and
+ * {@link abilityGrantSources}. */
+type BoardScanKind = "type" | "contributing" | "abilityGrant";
+
+/** The last answer of each board scan, and what it was for; `hits` is how
+ * often it has been served. */
+const boardScanMemos: Record<
+  BoardScanKind,
+  {
+    readonly state: GameState;
+    readonly registry: CardRegistry;
+    readonly epoch: number;
+    readonly value: readonly ContributingStatic[];
+    hits: number;
+  } | null
+> = { type: null, contributing: null, abilityGrant: null };
+let boardScanHits = 0;
+/** Under the cache check, a hit in this many is recomputed beside each
+ * epoch's first (as `STATIC_LOSSES_CHECK_EVERY`, and for its reason). */
+const BOARD_SCAN_CHECK_EVERY = 16;
+
+/**
+ * One of the board scans, kept per mutation as {@link staticAbilityLosses}
+ * is, region or not. A region keeps each list already, but most reads come
+ * outside one (`moveObject`, combat damage, the journal's snapshots, what a
+ * bot's stand-in reads), where every `layerFour` of every permanent walked the
+ * whole battlefield again: 20% of a bot's simulation on a wide board (the bot
+ * audit's S6, 2026-11-10). The key is the state itself, since a bot's copies
+ * share object ids, and the epoch every {@link invalidateComputedCache}
+ * moves. Asked from inside a guard, the scan's reads are conservative:
+ * answered, never kept, and nothing kept is served.
+ */
+function boardScan(
+  kind: BoardScanKind,
+  state: GameState,
+  registry: CardRegistry,
+  scan: (state: GameState, registry: CardRegistry) => readonly ContributingStatic[],
+): readonly ContributingStatic[] {
+  if (guardActive()) return scan(state, registry);
+  const memo = boardScanMemos[kind];
+  if (memo !== null && memo.state === state && memo.registry === registry && memo.epoch === mutationEpoch) {
+    boardScanHits += 1;
+    if (
+      cacheCheck &&
+      (memo.hits === 0 || boardScanHits % BOARD_SCAN_CHECK_EVERY === 0) &&
+      !sameSources(memo.value, scan(state, registry))
+    ) {
+      throw new Error(`computed-cache divergence (${kind} sources): a mutation is missing an invalidateComputedCache() call`);
+    }
+    memo.hits += 1;
+    return memo.value;
+  }
+  const value = scan(state, registry);
+  boardScanMemos[kind] = { state, registry, epoch: mutationEpoch, value, hits: 0 };
+  return value;
+}
+
+function sameSources(a: readonly ContributingStatic[], b: readonly ContributingStatic[]): boolean {
+  return (
+    a.length === b.length &&
+    a.every((x, i) => x.source === b[i].source && x.ability === b[i].ability && x.timestamp === b[i].timestamp)
+  );
 }
 
 /**
@@ -4544,6 +4627,12 @@ function abilityGrantSources(
   if (activeCache !== null && activeCache.abilityGrantSources !== null) {
     return activeCache.abilityGrantSources;
   }
+  const result = boardScan("abilityGrant", state, registry, scanAbilityGrantSources);
+  if (activeCache !== null) activeCache.abilityGrantSources = result;
+  return result;
+}
+
+function scanAbilityGrantSources(state: GameState, registry: CardRegistry): readonly ContributingStatic[] {
   let out: ContributingStatic[] | null = null;
   for (const sourceId of state.zones.shared.battlefield) {
     const source = state.objects[sourceId];
@@ -4573,9 +4662,7 @@ function abilityGrantSources(
       (out ??= []).push({ source, ability });
     }
   }
-  const result = out ?? NO_STATICS;
-  if (activeCache !== null) activeCache.abilityGrantSources = result;
-  return result;
+  return out ?? NO_STATICS;
 }
 
 /**
@@ -5194,6 +5281,14 @@ function contributingStaticSources(
   if (activeCache !== null && activeCache.staticSources !== null) {
     return activeCache.staticSources;
   }
+  const out = boardScan("contributing", state, registry, scanContributingStaticSources);
+  // Not while a granted static's lookup is in progress: what it found may
+  // be the guard's conservative answer.
+  if (activeCache !== null && staticGrantsInProgress.size === 0) activeCache.staticSources = out;
+  return out;
+}
+
+function scanContributingStaticSources(state: GameState, registry: CardRegistry): readonly ContributingStatic[] {
   const out: ContributingStatic[] = [];
   for (const sourceId of state.zones.shared.battlefield) {
     const source = state.objects[sourceId];
@@ -5261,9 +5356,6 @@ function contributingStaticSources(
   for (const { source, ability } of emblemStatics(state)) {
     if (contributesToCharacteristics(ability) && !hasLayerFourPart(ability)) out.push({ source, ability });
   }
-  // Not while a granted static's lookup is in progress: what it found may
-  // be the guard's conservative answer.
-  if (activeCache !== null && staticGrantsInProgress.size === 0) activeCache.staticSources = out;
   return out;
 }
 

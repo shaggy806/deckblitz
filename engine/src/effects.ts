@@ -26,6 +26,7 @@ import type { AggregateSpec, CardFilter, DamageSourceClause, ShareReference, Sha
 import type { CardNameAim, CardNameFilter } from "./card-names.js";
 import { differentManaSplits, spentManaCount, type Color, type ManaCastFrom, type ManaProductionRule, type ManaSpendPurpose, type ManaSpentQuery, type ManaType, type SpendAs, type SpentMana } from "./mana.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
+import { noteStateMutation } from "./characteristics.js";
 import { EVERY_CREATURE_TYPE, EVERY_LAND_TYPE, isCreatureType, isLandType } from "./subtypes.js";
 import { sameVoteChoice } from "./events.js";
 import type { RandomPick, Vote, VoteChoice } from "./events.js";
@@ -15816,6 +15817,16 @@ export function readsCreatedTokens(value: unknown): boolean {
 }
 
 export function applyEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
+  try {
+    applyOneEffectSpec(unbound, ctx);
+  } finally {
+    // Whatever it changed, the lists kept per mutation outside a cache
+    // region (`noteStateMutation`) are asked afresh by the next instruction.
+    noteStateMutation();
+  }
+}
+
+function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
   // A player won mid-resolution (Laboratory Maniac's draw, Thassa's Oracle):
   // the game is over (rule 104.1), and the rest of the instructions with it.
   // (Optional only for the bare contexts some tests hand in.)

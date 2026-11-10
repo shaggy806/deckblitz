@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { ScriptedController } from "../controller.js";
 import { Game } from "../game.js";
+import { invalidateComputedCache } from "../characteristics.js";
 import { asObjectId, asPlayerId } from "../primitives.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import type { GameState } from "../state.js";
@@ -78,6 +79,8 @@ describe("Pacifism — can't attack or block", () => {
       (id) => id !== pacifism,
     );
     game.state.objects[pacified].attachedTo = null;
+    // Written by hand, so said by hand: the engine's own writes say it.
+    invalidateComputedCache();
     expect(eligibleAttackers(game)).toContain(pacified);
   });
 

@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import { createDefaultRegistry, defineCard } from "../cards.js";
 import { ScriptedController } from "../controller.js";
 import { Game } from "../game.js";
+import { invalidateComputedCache } from "../characteristics.js";
 import { matchesFilter } from "../filter.js";
 import { asObjectId, asPlayerId } from "../primitives.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
@@ -48,6 +49,8 @@ const spawn = (
     controlEndsAtCleanup: false, copyOf: null,
   };
   game.state.zones.shared.battlefield.push(id);
+  // Written by hand, so said by hand: the engine's own writes say it.
+  invalidateComputedCache();
   return id;
 };
 

@@ -179,6 +179,7 @@ import {
   staticIgnoreCost,
   playerHasProtectionFromEverything,
   invalidateComputedCache,
+  noteStateMutation,
   staticConditionMet,
   spellGrantReaches,
   castGrantReaches,
@@ -2853,6 +2854,15 @@ export class Game {
   }
 
   private dispatchOne(given: Action): void {
+    try {
+      this.applyAction(given);
+    } finally {
+      // Whatever the action changed: see `noteStateMutation`.
+      noteStateMutation();
+    }
+  }
+
+  private applyAction(given: Action): void {
     // A decision applies through its module, which calls the same `apply*`
     // this switch used to call directly. What is left below is the seven
     // priority actions — the things a player does when nothing is pending.
