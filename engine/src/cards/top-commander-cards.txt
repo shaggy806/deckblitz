@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4886 already implemented / 114 missing (marks refreshed 2026-11-10)
+4888 already implemented / 112 missing (marks refreshed 2026-11-10)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -3258,7 +3258,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3265  Infantry Shield                          {2}{R}           Artifact — Equipment
 [x]  3266  Manaweft Sliver                          {1}{G}           Creature — Sliver
 [x]  3267  Conspicuous Snoop                        {R}{R}           Creature — Goblin Rogue
-[ ]  3268  Jin-Gitaxias // The Great Synthesis      {5}              Legendary Creature — Phyrexian Praetor // Enchantment — Saga
+[x]  3268  Jin-Gitaxias // The Great Synthesis      {5}              Legendary Creature — Phyrexian Praetor // Enchantment — Saga
 [x]  3269  World at War                             {3}{R}{R}        Sorcery
 [x]  3270  Keeper of Secrets                        {5}{R}           Creature — Demon
 [x]  3271  Mistblade Shinobi                        {2}{U}           Creature — Human Ninja
@@ -3266,7 +3266,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  3273  Grievous Wound                           {3}{B}{B}        Enchantment — Aura
 [x]  3274  Ezuri, Stalker of Spheres                {2}{G}{U}        Legendary Creature — Phyrexian Elf Warrior
 [x]  3275  Slagwoods Bridge                         {0}              Artifact Land
-[ ]  3276  Vorinclex // The Grand Evolution         {5}              Legendary Creature — Phyrexian Praetor // Enchantment — Saga
+[x]  3276  Vorinclex // The Grand Evolution         {5}              Legendary Creature — Phyrexian Praetor // Enchantment — Saga
 [x]  3277  Test of Endurance                        {2}{W}{W}        Enchantment
 [x]  3278  Dockside Chef                            {B}              Enchantment Creature — Human Citizen
 [x]  3279  Celestial Armor                          {2}{W}           Artifact — Equipment
