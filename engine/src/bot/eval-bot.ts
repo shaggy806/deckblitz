@@ -49,6 +49,7 @@ import {
   specSide,
   targetValue,
 } from "../target-polarity.js";
+import { ActivationCap, isFreeCost } from "./activation-cap.js";
 import { candidateActions } from "./candidates.js";
 import { findUntapPlans } from "./untap-plans.js";
 import { collapseTwins } from "./twins.js";
@@ -790,6 +791,8 @@ export class EvalBotController extends HeuristicBotController {
    * planned on.
    */
   private turnPlan: { readonly turn: number; steps: PlanStep[]; boards: string[] } | null = null;
+  /** How often each ability has been activated this turn (`activation-cap.ts`). */
+  readonly activationCap = new ActivationCap();
   /** What the last priority search played in place of passing, when the
    * search's best was to pass (a due cantrip — `isCantripDue`), so a replay
    * of its scores can do the same (`scenario-fit.ts`). Written, never read. */
@@ -845,9 +848,24 @@ export class EvalBotController extends HeuristicBotController {
    * front of it, never off a position its own search only simulated — see
    * `withTrackRecordEvidence`. */
   act(view: ControllerView): Action {
-    return this.onClock(() =>
+    const action = this.onClock(() =>
       this.deferToPlan(view, withTrackRecordEvidence(view.state, () => this.actSearched(view))),
     );
+    if (action.type !== "activate-ability") return action;
+    // The search leaves out what the cap has reached; v1's pick and a turn
+    // plan's step come by other roads.
+    if (!this.mayActivate(view.state, action.source, action.abilityIndex)) {
+      return { type: "pass-priority", player: this.playerId };
+    }
+    this.activationCap.note(view.state.turn.number, action.source, action.abilityIndex);
+    return action;
+  }
+
+  /** Whether `activationCap` still allows this ability this turn. */
+  private mayActivate(state: GameState, source: ObjectId, abilityIndex: number): boolean {
+    const name = state.objects[source]?.cardName;
+    const cost = name !== undefined && this.cards.has(name) ? this.cards.get(name).activated?.[abilityIndex]?.cost : undefined;
+    return this.activationCap.allows(state.turn.number, source, abilityIndex, cost !== undefined && isFreeCost(cost));
   }
 
   /**
@@ -1361,6 +1379,7 @@ export class EvalBotController extends HeuristicBotController {
         // and on a wide board they're nearly every candidate there is — 27 of
         // 30 on one 38-permanent board, which made a single decision a 2s search.
         if (legal.kind === "activate-ability" && this.isManaOnlyAbility(legal)) continue;
+        if (legal.kind === "activate-ability" && !this.mayActivate(view.state, legal.source, legal.abilityIndex)) continue;
         // An {X} ability affordable only at X = 0, whose effect is all X
         // (`inertAtZeroX`): Necropolis Fiend's -0/-0.
         if (legal.kind === "activate-ability" && this.inertAtZeroX(legal)) continue;
