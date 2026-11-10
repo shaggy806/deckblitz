@@ -927,6 +927,7 @@ import _poolVoidslime from "../pool/voidslime.js";
 import _poolVolatileClaws from "../pool/volatile-claws.js";
 import _poolVoloGuideToMonsters from "../pool/volo-guide-to-monsters.js";
 import _poolVolrathTheShapestealer from "../pool/volrath-the-shapestealer.js";
+import _poolVorinclex from "../pool/vorinclex.js";
 import _poolVotaryOfTheConclave from "../pool/votary-of-the-conclave.js";
 import _poolVraskasFinisher from "../pool/vraskas-finisher.js";
 import _poolWallOfIce from "../pool/wall-of-ice.js";
@@ -1924,6 +1925,7 @@ const shard: CardShard = {
     _poolVolatileClaws,
     _poolVoloGuideToMonsters,
     _poolVolrathTheShapestealer,
+    _poolVorinclex,
     _poolVotaryOfTheConclave,
     _poolVraskasFinisher,
     _poolWallOfIce,

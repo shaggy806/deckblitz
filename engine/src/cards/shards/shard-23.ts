@@ -867,6 +867,7 @@ import _poolTheChaseIsOn from "../pool/the-chase-is-on.js";
 import _poolTheCrowdGoesWild from "../pool/the-crowd-goes-wild.js";
 import _poolTheCrueltyOfGix from "../pool/the-cruelty-of-gix.js";
 import _poolTheFinalDays from "../pool/the-final-days.js";
+import _poolTheGreatSynthesis from "../pool/the-great-synthesis.js";
 import _poolTheLordMasterOfHell from "../pool/the-lord-master-of-hell.js";
 import _poolThermoAlchemist from "../pool/thermo-alchemist.js";
 import _poolThicketCrasher from "../pool/thicket-crasher.js";
@@ -1879,6 +1880,7 @@ const shard: CardShard = {
     _poolTheCrowdGoesWild,
     _poolTheCrueltyOfGix,
     _poolTheFinalDays,
+    _poolTheGreatSynthesis,
     _poolTheLordMasterOfHell,
     _poolThermoAlchemist,
     _poolThicketCrasher,

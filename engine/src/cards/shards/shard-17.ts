@@ -450,6 +450,7 @@ import _poolJarethLeonineTitan from "../pool/jareth-leonine-titan.js";
 import _poolJeskaiMonument from "../pool/jeskai-monument.js";
 import _poolJhovallRider from "../pool/jhovall-rider.js";
 import _poolJolenePlunderingPugilist from "../pool/jolene-plundering-pugilist.js";
+import _poolJurassicPark from "../pool/jurassic-park.js";
 import _poolKabiraEvangel from "../pool/kabira-evangel.js";
 import _poolKadenaSlinkingSorcerer from "../pool/kadena-slinking-sorcerer.js";
 import _poolKaerveksPurge from "../pool/kaerveks-purge.js";
@@ -1447,6 +1448,7 @@ const shard: CardShard = {
     _poolJeskaiMonument,
     _poolJhovallRider,
     _poolJolenePlunderingPugilist,
+    _poolJurassicPark,
     _poolKabiraEvangel,
     _poolKadenaSlinkingSorcerer,
     _poolKaerveksPurge,

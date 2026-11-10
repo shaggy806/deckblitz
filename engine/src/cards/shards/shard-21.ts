@@ -415,6 +415,7 @@ import _poolJasperaSentinel from "../pool/jaspera-sentinel.js";
 import _poolJeskaiShrinekeeper from "../pool/jeskai-shrinekeeper.js";
 import _poolJetmirNexusOfRevels from "../pool/jetmir-nexus-of-revels.js";
 import _poolJeweledTorque from "../pool/jeweled-torque.js";
+import _poolJinGitaxias from "../pool/jin-gitaxias.js";
 import _poolJumboCactuar from "../pool/jumbo-cactuar.js";
 import _poolJumpScare from "../pool/jump-scare.js";
 import _poolJundCharm from "../pool/jund-charm.js";
@@ -1371,6 +1372,7 @@ const shard: CardShard = {
     _poolJeskaiShrinekeeper,
     _poolJetmirNexusOfRevels,
     _poolJeweledTorque,
+    _poolJinGitaxias,
     _poolJumboCactuar,
     _poolJumpScare,
     _poolJundCharm,

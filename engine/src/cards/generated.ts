@@ -13954,6 +13954,7 @@ import _poolJillShivasDominant from "./pool/jill-shivas-dominant.js";
 import _poolJilt from "./pool/jilt.js";
 import _poolJinGitaxiasCoreAugur from "./pool/jin-gitaxias-core-augur.js";
 import _poolJinGitaxiasProgressTyrant from "./pool/jin-gitaxias-progress-tyrant.js";
+import _poolJinGitaxias from "./pool/jin-gitaxias.js";
 import _poolJinSakaiGhostOfTsushima from "./pool/jin-sakai-ghost-of-tsushima.js";
 import _poolJinx from "./pool/jinx.js";
 import _poolJinxedChoker from "./pool/jinxed-choker.js";
@@ -14085,6 +14086,7 @@ import _poolJunkyardGenius from "./pool/junkyard-genius.js";
 import _poolJunkyoBell from "./pool/junkyo-bell.js";
 import _poolJuntuStakes from "./pool/juntu-stakes.js";
 import _poolJununEfreet from "./pool/junun-efreet.js";
+import _poolJurassicPark from "./pool/jurassic-park.js";
 import _poolJuratiCordialQueen from "./pool/jurati-cordial-queen.js";
 import _poolJuriMasterOfTheRevue from "./pool/juri-master-of-the-revue.js";
 import _poolJushiApprentice from "./pool/jushi-apprentice.js";
@@ -21606,6 +21608,7 @@ import _poolReverseThePolarity from "./pool/reverse-the-polarity.js";
 import _poolRevitalize from "./pool/revitalize.js";
 import _poolRevitalizingRepast from "./pool/revitalizing-repast.js";
 import _poolRevivalExperiment from "./pool/revival-experiment.js";
+import _poolRevivalOfTheAncestors from "./pool/revival-of-the-ancestors.js";
 import _poolReviveTheFallen from "./pool/revive-the-fallen.js";
 import _poolReviveTheShire from "./pool/revive-the-shire.js";
 import _poolRevive from "./pool/revive.js";
@@ -27257,10 +27260,12 @@ import _poolTheGoldSaucer from "./pool/the-gold-saucer.js";
 import _poolTheGoldenGearColossus from "./pool/the-golden-gear-colossus.js";
 import _poolTheGoldenThrone from "./pool/the-golden-throne.js";
 import _poolTheGooseMother from "./pool/the-goose-mother.js";
+import _poolTheGrandEvolution from "./pool/the-grand-evolution.js";
 import _poolTheGreatAurora from "./pool/the-great-aurora.js";
 import _poolTheGreatGoblin from "./pool/the-great-goblin.js";
 import _poolTheGreatHenge from "./pool/the-great-henge.js";
 import _poolTheGreatMound from "./pool/the-great-mound.js";
+import _poolTheGreatSynthesis from "./pool/the-great-synthesis.js";
 import _poolTheGreatWork from "./pool/the-great-work.js";
 import _poolTheGreyHavens from "./pool/the-grey-havens.js";
 import _poolTheGrimCaptain from "./pool/the-grim-captain.js";
@@ -29884,6 +29889,7 @@ import _poolVorapede from "./pool/vorapede.js";
 import _poolVorelOfTheHullClade from "./pool/vorel-of-the-hull-clade.js";
 import _poolVorinclexMonstrousRaider from "./pool/vorinclex-monstrous-raider.js";
 import _poolVorinclexVoiceOfHunger from "./pool/vorinclex-voice-of-hunger.js";
+import _poolVorinclex from "./pool/vorinclex.js";
 import _poolVoroshTheHunter from "./pool/vorosh-the-hunter.js";
 import _poolVorpalSword from "./pool/vorpal-sword.js";
 import _poolVorracBattlehorns from "./pool/vorrac-battlehorns.js";
@@ -30414,6 +30420,7 @@ import _poolWelcomeHome from "./pool/welcome-home.js";
 import _poolWelcomeTheDead from "./pool/welcome-the-dead.js";
 import _poolWelcomeToSweettooth from "./pool/welcome-to-sweettooth.js";
 import _poolWelcomeToTheFold from "./pool/welcome-to-the-fold.js";
+import _poolWelcomeTo from "./pool/welcome-to.js";
 import _poolWelcomingVampire from "./pool/welcoming-vampire.js";
 import _poolWelderAutomaton from "./pool/welder-automaton.js";
 import _poolWeldfastEngineer from "./pool/weldfast-engineer.js";
@@ -46125,6 +46132,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolJilt,
   _poolJinGitaxiasCoreAugur,
   _poolJinGitaxiasProgressTyrant,
+  _poolJinGitaxias,
   _poolJinSakaiGhostOfTsushima,
   _poolJinx,
   _poolJinxedChoker,
@@ -46256,6 +46264,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolJunkyoBell,
   _poolJuntuStakes,
   _poolJununEfreet,
+  _poolJurassicPark,
   _poolJuratiCordialQueen,
   _poolJuriMasterOfTheRevue,
   _poolJushiApprentice,
@@ -53777,6 +53786,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRevitalize,
   _poolRevitalizingRepast,
   _poolRevivalExperiment,
+  _poolRevivalOfTheAncestors,
   _poolReviveTheFallen,
   _poolReviveTheShire,
   _poolRevive,
@@ -59428,10 +59438,12 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTheGoldenGearColossus,
   _poolTheGoldenThrone,
   _poolTheGooseMother,
+  _poolTheGrandEvolution,
   _poolTheGreatAurora,
   _poolTheGreatGoblin,
   _poolTheGreatHenge,
   _poolTheGreatMound,
+  _poolTheGreatSynthesis,
   _poolTheGreatWork,
   _poolTheGreyHavens,
   _poolTheGrimCaptain,
@@ -62055,6 +62067,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVorelOfTheHullClade,
   _poolVorinclexMonstrousRaider,
   _poolVorinclexVoiceOfHunger,
+  _poolVorinclex,
   _poolVoroshTheHunter,
   _poolVorpalSword,
   _poolVorracBattlehorns,
@@ -62585,6 +62598,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWelcomeTheDead,
   _poolWelcomeToSweettooth,
   _poolWelcomeToTheFold,
+  _poolWelcomeTo,
   _poolWelcomingVampire,
   _poolWelderAutomaton,
   _poolWeldfastEngineer,
@@ -78309,6 +78323,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/jilt": _poolJilt,
   "pool/jin-gitaxias-core-augur": _poolJinGitaxiasCoreAugur,
   "pool/jin-gitaxias-progress-tyrant": _poolJinGitaxiasProgressTyrant,
+  "pool/jin-gitaxias": _poolJinGitaxias,
   "pool/jin-sakai-ghost-of-tsushima": _poolJinSakaiGhostOfTsushima,
   "pool/jinx": _poolJinx,
   "pool/jinxed-choker": _poolJinxedChoker,
@@ -78440,6 +78455,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/junkyo-bell": _poolJunkyoBell,
   "pool/juntu-stakes": _poolJuntuStakes,
   "pool/junun-efreet": _poolJununEfreet,
+  "pool/jurassic-park": _poolJurassicPark,
   "pool/jurati-cordial-queen": _poolJuratiCordialQueen,
   "pool/juri-master-of-the-revue": _poolJuriMasterOfTheRevue,
   "pool/jushi-apprentice": _poolJushiApprentice,
@@ -85961,6 +85977,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/revitalize": _poolRevitalize,
   "pool/revitalizing-repast": _poolRevitalizingRepast,
   "pool/revival-experiment": _poolRevivalExperiment,
+  "pool/revival-of-the-ancestors": _poolRevivalOfTheAncestors,
   "pool/revive-the-fallen": _poolReviveTheFallen,
   "pool/revive-the-shire": _poolReviveTheShire,
   "pool/revive": _poolRevive,
@@ -91612,10 +91629,12 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/the-golden-gear-colossus": _poolTheGoldenGearColossus,
   "pool/the-golden-throne": _poolTheGoldenThrone,
   "pool/the-goose-mother": _poolTheGooseMother,
+  "pool/the-grand-evolution": _poolTheGrandEvolution,
   "pool/the-great-aurora": _poolTheGreatAurora,
   "pool/the-great-goblin": _poolTheGreatGoblin,
   "pool/the-great-henge": _poolTheGreatHenge,
   "pool/the-great-mound": _poolTheGreatMound,
+  "pool/the-great-synthesis": _poolTheGreatSynthesis,
   "pool/the-great-work": _poolTheGreatWork,
   "pool/the-grey-havens": _poolTheGreyHavens,
   "pool/the-grim-captain": _poolTheGrimCaptain,
@@ -94239,6 +94258,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/vorel-of-the-hull-clade": _poolVorelOfTheHullClade,
   "pool/vorinclex-monstrous-raider": _poolVorinclexMonstrousRaider,
   "pool/vorinclex-voice-of-hunger": _poolVorinclexVoiceOfHunger,
+  "pool/vorinclex": _poolVorinclex,
   "pool/vorosh-the-hunter": _poolVoroshTheHunter,
   "pool/vorpal-sword": _poolVorpalSword,
   "pool/vorrac-battlehorns": _poolVorracBattlehorns,
@@ -94769,6 +94789,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/welcome-the-dead": _poolWelcomeTheDead,
   "pool/welcome-to-sweettooth": _poolWelcomeToSweettooth,
   "pool/welcome-to-the-fold": _poolWelcomeToTheFold,
+  "pool/welcome-to": _poolWelcomeTo,
   "pool/welcoming-vampire": _poolWelcomingVampire,
   "pool/welder-automaton": _poolWelderAutomaton,
   "pool/weldfast-engineer": _poolWeldfastEngineer,

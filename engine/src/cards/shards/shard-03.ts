@@ -787,6 +787,7 @@ import _poolTezzeretsStrider from "../pool/tezzerets-strider.js";
 import _poolTheCore from "../pool/the-core.js";
 import _poolTheFantasticFour from "../pool/the-fantastic-four.js";
 import _poolTheGaffer from "../pool/the-gaffer.js";
+import _poolTheGrandEvolution from "../pool/the-grand-evolution.js";
 import _poolTheImmortalSun from "../pool/the-immortal-sun.js";
 import _poolTheIncredibleHulk from "../pool/the-incredible-hulk.js";
 import _poolTheScorpionGod from "../pool/the-scorpion-god.js";
@@ -1703,6 +1704,7 @@ const shard: CardShard = {
     _poolTheCore,
     _poolTheFantasticFour,
     _poolTheGaffer,
+    _poolTheGrandEvolution,
     _poolTheImmortalSun,
     _poolTheIncredibleHulk,
     _poolTheScorpionGod,

@@ -963,6 +963,7 @@ import _poolWarrenScourgeElf from "../pool/warren-scourge-elf.js";
 import _poolWarriorsSword from "../pool/warriors-sword.js";
 import _poolWatchdog from "../pool/watchdog.js";
 import _poolWeiScout from "../pool/wei-scout.js";
+import _poolWelcomeTo from "../pool/welcome-to.js";
 import _poolWhipOfErebos from "../pool/whip-of-erebos.js";
 import _poolWhiptailWurm from "../pool/whiptail-wurm.js";
 import _poolWhispersOfEmrakul from "../pool/whispers-of-emrakul.js";
@@ -1972,6 +1973,7 @@ const shard: CardShard = {
     _poolWarriorsSword,
     _poolWatchdog,
     _poolWeiScout,
+    _poolWelcomeTo,
     _poolWhipOfErebos,
     _poolWhiptailWurm,
     _poolWhispersOfEmrakul,
