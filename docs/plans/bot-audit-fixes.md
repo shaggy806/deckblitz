@@ -9,9 +9,10 @@ what each step changes, and how each is checked. Three choices near the end are 
 One step a session, with the `bot-audit-next` skill. When a step lands, tick it here with its date
 and commit, write its *As built* lines under the step, and move `Next`.
 
-- Next: **step 1** (four misplays).
+- Next: **step 2** (the clock).
 - [x] Step 0. Tools (2026-11-10)
-- [ ] Step 1. Four misplays
+- [x] Step 1. Four misplays (2026-11-10; `d15599f95` Q3, `752a7550e` Q6, `aadc42a5a` and
+  `e1b359709` Q7, `f626a7351` Q5)
 - [ ] Step 2. The clock
 - [ ] Step 2b. Deploy, and test live
 - [ ] Step 3. Engine cost per tick
@@ -95,6 +96,58 @@ to 120-250 ms (measured in the audit); nothing else moves.
 Also here, docs only: the three `BACKLOG.md` corrections the audit lists (the baselines line,
 the several-sacrifice line, the `followUps` line) and the stale comments (`simulate.ts`'s 0.3 ms,
 `eval-bot.ts`'s header, `bot-behaviour.mjs`'s 300 ms, the `ab-bench` skill's 18 workers).
+
+### As built (2026-11-10)
+
+- **Q3** (`d15599f95`). `cheapestFodder` (`controller.ts`) pays a sacrifice *cost* with the
+  cheapest choice that isn't the ability's own source or a permanent that watches things die, be
+  sacrificed or leave (`watchesSacrifices`), while another choice exists; v1's casts and
+  activations and `isCantripDue` use it, and v2's `withSacrificeChoices` offers the plain
+  cheapest as a second candidate where the two differ. Narrower than the plan in one way: a
+  permanent that triggers only on its *own* death (Doomed Traveler) is not ranked last, being
+  the best fodder there is. An edict's or an effect's sacrifice still gives up the cheapest by
+  stats. Scenario: "pays Viscera Seer with the Bears, not Blood Artist, and drains an opponent
+  out" (judged over the turn: an opponent dead).
+- **Q6** (`752a7550e`). `planLines` drops `lastUnsafe` moves from its first moves; a line is
+  taken only if every step passes the one-move search's own check on the board that step is
+  played on (`lineSafe`; `PlannedLine.before` keeps those states), tried on up to six lines that
+  beat the one-move answer (`PLAN_SAFE_LINES`), and free while no tap could be lethal; and
+  `continueTurnPlan` re-reads the guard on the real board before replaying a cast or an
+  activation, dropping the plan if it is unsafe now. A step isn't blamed for a board the planned
+  attack had already left open. Two scenarios, each judged over the turn (the Bears stays
+  untapped): with a Forest in hand (the land chains), and with a Memnite in hand (Memnite,
+  station, station).
+- **Q7** (`aadc42a5a`, `e1b359709`). In v2 neither rule returns: the pick is the first candidate
+  scored. With a landfall permanent castable, the fetch, the only land and the land search wait
+  for that search too, since a land played first is what the rule was there to prevent.
+  `payoffFirst`'s cast branch (v1's too) asks that the spell castable after the payoff match
+  its trigger's filter. **Found by `bot:diff`**: a land drop had never been weighed against
+  passing, and now could be: when a play was held for combat the answer became a pass and two
+  lands stayed in hand (seed 5, turn 34). The land rules are now one answer (`landRule`), asked
+  again when the search passed with a landfall permanent in hand; that window then costs a
+  search and a land search. The `"payoff first"` and `"landfall first"` audit labels are gone.
+  Two scenarios, judged over the turn (Murder cast, or held with its mana up): Beast Whisperer,
+  Opt and Murder; Jaddi Offshoot, a Swamp and Murder. The seven older payoff and landfall
+  scenarios pass unchanged.
+- **Q5** (`f626a7351`). `UNSCORED_COUNTERS` takes `HARMFUL_COUNTERS` (stun, blight, flood,
+  -1/-1) and `age`. **Not done: "a creature with a stun counter isn't an untapped body".** An
+  untapped creature with a stun counter blocks and attacks as usual; the counter only replaces
+  its next untapping (rule 122.1d), so the plan's wording would have been wrong for it. A
+  *tapped* stunned creature staying down a turn longer is not modelled. Three tests in
+  `test/bot-features.test.ts`, watched fail first.
+- **Checks.** Each scenario failed on the code before its fix. Gate 207 of 207 (202 before, the
+  resolved captures included). `bot:diff` against `origin/main`, six four-player games, before
+  the land fix: 19 of 11,314 decisions differ. Thirteen are Q7 by the cards alone (a land, Sol
+  Ring, a removal spell or another creature ahead of Elsha, Jaws of Defeat, Omnath, Ob Nixilis,
+  Manaform Hellkite or Champion of Lambholt, and what followed from the new order); one was
+  the pass that became the land fix; two read as Q6 but were not replayed (a Clue cracked
+  instead of a stationing; Champion of Lambholt instead of a convoked Nissa's Expedition); and
+  three were not traced to a cause (Hearthhull's draw ability at beginning of combat where the
+  old bot passed; Carven Caryatid where it passed; Citanul Hierophants ahead of Thunderfoot
+  Baloth). Only the pass was replayed and read on its board. Not re-run after the land fix, and the cost of the decisions that used to
+  return at once (the audit's 120-250 ms) was not re-measured.
+- Docs: the three `BACKLOG.md` corrections, `simulate.ts`'s cost figure, `eval-bot.ts`'s header
+  and the `ab-bench` skill's worker advice (`bot-behaviour.mjs` was fixed in step 0).
 
 ## Step 2. The clock (one session, after step 0)
 

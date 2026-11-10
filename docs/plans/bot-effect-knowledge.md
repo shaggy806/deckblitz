@@ -645,6 +645,15 @@ No `bot:diff`: the feature is 0 in every recorded position, since none has the i
 
 **Play permissions (2026-11-08, need-key themes step 7, theme 10).** A permission is one record now: `candidates` already see what it offers, through the legal actions. `effect-worth` values `impulse-exile` (most of a card each, less for "this turn") and `grant-play`; `target-polarity` reads `grant-play`'s slot; `features.ts` reads `mayPlaySelf`.
 
+### The audit's step 1 (2026-11-10)
+
+Four misplays from `bot-audit-2026-11.md`, fixed as `bot-audit-fixes.md` step 1 records: a
+sacrifice cost spares the outlet and whatever watches the sacrifice (`cheapestFodder`); the turn
+planner obeys the crackback guard at its first move and at every step (`lineSafe`); in v2
+"payoff first" and "landfall first" are the first candidate the search scores, not an answer
+given before it, so removal the turn needs can win; and harmful counters and age counters score
+nothing. Two of this record's rules are therefore ordering hints in v2 now, and rules only in v1.
+
 ## Watching live games for
 
 Moved from BACKLOG (2026-10-04; the last four on 2026-10-09): each of these is open only until

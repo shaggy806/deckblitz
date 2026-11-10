@@ -3347,6 +3347,13 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Bots
 
+- **The bot audit's fixes, step 1: four misplays** (2026-11-10; `d15599f95`, `752a7550e`,
+  `aadc42a5a`, `e1b359709`, `f626a7351`; `docs/plans/bot-audit-fixes.md`, *As built*): a
+  sacrifice cost is no longer paid with the outlet or the payoff that watches it
+  (`cheapestFodder`); the turn planner keeps to the crackback guard, first move and every step
+  (`lineSafe`); v2's "payoff first" and "landfall first" picks are scored first by the search
+  instead of returned before it, with the land rules as its fallback; stun, blight, flood and
+  age counters score nothing. Five gate scenarios and three evaluation tests.
 - **The bot audit's fixes, step 0: tools** (2026-11-10; `docs/plans/bot-audit-fixes.md`): nothing
   that changes a bot's play. `EvalBotOptions.now`, a clock a test can drive, with finding S1 held
   as an expected failure for step 2; `bot:anatomy` (where a decision's time goes, from a saved

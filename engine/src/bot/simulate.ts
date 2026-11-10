@@ -1,11 +1,13 @@
 /**
  * "What would the board look like if I did this?"
  *
- * The engine makes this nearly free: `GameState` is one plain
+ * The engine makes this simple: `GameState` is one plain
  * `structuredClone`-able tree, `Game.fromSnapshot` rebuilds a working `Game`
  * from one, and `dispatch` is the only writer — so a candidate move can be
  * played out against a throwaway copy with no risk to the real game and no
- * per-card special-casing. Measured at roughly 0.3ms per candidate mid-game.
+ * per-card special-casing. Not free: a rollout to the end of the turn measured 20 ms on a
+ * near-empty board and 60-160 ms mid-game (the bot audit, 2026-11-10;
+ * `npm run bot:anatomy`).
  *
  * Two things here are load-bearing and easy to get wrong:
  *
