@@ -21,6 +21,8 @@
 // (default 6, at most 8), --budget MS|live|none (default live:
 // `LIVE_BOT_BUDGET_MS`), --game-cap S (stop a game after this long, default
 // 720), --out DIR (default .scratch/bot-timings, emptied first; git-ignored),
+// --pass-memo on|off|check (the bots' `passMemo` option; `check` searches at
+// every memo hit and counts the ones the search answered differently),
 // --snaps (also save the position before the first searched decision in each
 // board-size bucket, and before up to four decisions a game slower than --slow
 // MS, default 4000: bare snapshots `bot:anatomy --from` and `bot:replay --from`
@@ -110,6 +112,27 @@ function summarise(dir) {
     `${games.length} games (${games.filter((g) => g.over).length} finished, turns ${games.map((g) => g.turns).join(",")}; biggest boards ${games.map((g) => g.maxBoard).join(",")}): ` +
       `${sum("searched") + sum("trivial")} decisions, ${sum("searched")} searched, ${sum("over1s")} over 1 s, ${sum("wallS")} s of games`,
   );
+  // The pass memo (`--pass-memo`): searches answered from it, and under
+  // `check` how many of its hits the search agreed with.
+  const priority = rows.filter((r) => r.kind === "priority");
+  const acting = priority.filter((r) => r.via === "search" && r.rollout === "acting");
+  const searches = priority.filter((r) => r.via === "search");
+  const secs = (set) => Math.round(set.reduce((n, r) => n + r.ms, 0) / 1000);
+  console.log(
+    `priority searches under "acting": ${acting.length} of ${searches.length} (${secs(acting)} s of ${secs(searches)} s)`,
+  );
+  const memo = games.reduce(
+    (m, g) => ({
+      hits: m.hits + (g.memo?.hits ?? 0),
+      saved: m.saved + (g.memo?.saved ?? 0),
+      wrong: [...m.wrong, ...(g.memo?.wrong ?? []).map((w) => `seed ${g.seed} ${w}`)],
+    }),
+    { hits: 0, saved: 0, wrong: [] },
+  );
+  if (memo.hits > 0) {
+    console.log(`pass memo, checked: ${memo.hits} hits (${memo.saved} simulations), ${memo.wrong.length} the search answered differently`);
+    for (const w of memo.wrong.slice(0, 20)) console.log(`  ${w}`);
+  }
   const errors = games.filter((g) => g.error);
   for (const g of errors) console.log(`  seed ${g.seed} ERROR: ${g.error}`);
 }
@@ -129,6 +152,7 @@ if (isMainThread) {
     slowMs: Number(flag("slow", "4000")),
     gameCapMs: Number(flag("game-cap", "720")) * 1000,
     snaps: args.includes("--snaps"),
+    passMemo: flag("pass-memo", null),
     out: OUT,
   };
   rmSync(OUT, { recursive: true, force: true });
@@ -171,7 +195,7 @@ if (isMainThread) {
   summarise(OUT);
   process.exit(0);
 } else {
-  const { dist, budget, slowMs, gameCapMs, seed, snaps, out } = workerData;
+  const { dist, budget, slowMs, gameCapMs, seed, snaps, passMemo, out } = workerData;
   const engine = await import(dist);
   const { COMMANDER_RULES, EvalBotController, HeuristicBotController, Game, createDefaultRegistry } = engine;
   // The seatings come from this checkout's build; `--dist` swaps the bots and
@@ -193,7 +217,10 @@ if (isMainThread) {
   const started = performance.now();
   const controllers = {};
   for (const seat of seats) {
-    const c = new EvalBotController(seat, registry, budgetMs === null ? {} : { timeBudgetMs: budgetMs });
+    const c = new EvalBotController(seat, registry, {
+      ...(budgetMs === null ? {} : { timeBudgetMs: budgetMs }),
+      ...(passMemo === null ? {} : { passMemo }),
+    });
     const act = c.act.bind(c);
     c.act = (view) => {
       // The position as asked, kept only if a snapshot may be wanted: the
@@ -290,6 +317,14 @@ if (isMainThread) {
     over1s,
     maxMs: Math.round(maxMs),
     maxBoard,
+    memo: Object.values(controllers).reduce(
+      (m, c) => ({
+        hits: m.hits + (c.passMemoChecks?.hits ?? 0),
+        saved: m.saved + (c.passMemoChecks?.saved ?? 0),
+        wrong: [...m.wrong, ...(c.passMemoChecks?.wrong ?? [])],
+      }),
+      { hits: 0, saved: 0, wrong: [] },
+    ),
     error,
   });
 }

@@ -117,6 +117,13 @@ export interface EvalBotOptions {
    * before, with `followUps`.
    */
   readonly plan?: "turn" | "next-turn" | "off";
+  /** Whether a window like one already searched and passed on this turn
+   * passes without a search (`EvalBotController.passMemo`); on by default
+   * (checked over 12 four-player games at count budgets, 2026-11-10: 355
+   * hits, the search agreeing at every one). `"check"`
+   * searches anyway and counts the memo's hits and misses
+   * (`passMemoChecks`), a measurement. */
+  readonly passMemo?: "on" | "off" | "check";
   /** Simulations one plan may spend (`TurnPlanLimits.simulations`); 48 by
    * default, and as many again for each next-turn look. */
   readonly planSimulations?: number;
@@ -803,6 +810,23 @@ export class EvalBotController extends HeuristicBotController {
   /** The stack this bot last passed on, and on which turn — see
    * `holdPass`. */
   private passedOn: { readonly turn: number; readonly stack: readonly ObjectId[] } | null = null;
+  /**
+   * The last empty-stack window, outside our own main phases, whose whole
+   * search passed: its `passMemoKey` — the candidates and everything in the
+   * state but the step and who holds priority. A later window of the same
+   * turn with the same key passes without a search or v1's `act` (the bot
+   * audit's S3, 2026-11-10: a seat holding an instant searched every step of
+   * every turn, and acted at 1.1% of an opponent's empty-stack windows). The
+   * key holds the turn's number, so it never outlives the turn. What depends
+   * on the step still runs first, in `listCandidates`: a held fetch or
+   * creature released changes the candidates, and a cantrip that came due is
+   * played on a hit.
+   */
+  private passMemo: string | null = null;
+  private readonly passMemoMode: "on" | "off" | "check";
+  /** Under `passMemo: "check"`: the memo's hits, the simulations a skip
+   * would have saved, and each hit the search answered differently. */
+  readonly passMemoChecks: { hits: number; saved: number; wrong: string[] } = { hits: 0, saved: 0, wrong: [] };
   /** The stack a searched action (not a pass) was chosen on — see
    * `holdPass`. */
   private actedOn: { readonly turn: number; readonly stack: readonly ObjectId[] } | null = null;
@@ -894,6 +918,18 @@ export class EvalBotController extends HeuristicBotController {
     this.timeBudgetMs = options.timeBudgetMs ?? Infinity;
     this.now = options.now ?? Date.now;
     this.trace = options.trace;
+    this.passMemoMode = options.passMemo ?? "on";
+  }
+
+  /** Whether this window is one `passMemo` covers: an empty stack, nothing
+   * to answer, outside our own main phases, and not the last window before
+   * our turn, where the end-of-turn rules release what they held. */
+  private passMemoWindow(state: GameState): boolean {
+    if (this.passMemoMode === "off" || state.awaiting !== null || state.zones.shared.stack.length > 0) return false;
+    const step = state.turn.step;
+    const ours = state.turnOrder[state.turn.activePlayerIndex] === this.playerId;
+    if (ours && (step === "precombat-main" || step === "postcombat-main")) return false;
+    return !this.isEndOfTurnBeforeOurs(state);
   }
 
   /** Another player's decisions (rule 723) are answered for this bot's good. */
@@ -998,6 +1034,44 @@ export class EvalBotController extends HeuristicBotController {
       if (continued.type === "pass-priority") this.rememberPass(view);
       return continued;
     }
+    // **A window already searched, and passed on** (`passMemo`): the same
+    // candidates on the same board at a later step of the turn.
+    const early = this.passMemoWindow(view.state) ? this.listCandidates(view) : null;
+    const memoKey = early !== null && early.candidates.length > 0 ? passMemoKey(view.state, early) : null;
+    if (early !== null && memoKey !== null && this.passMemo === memoKey) {
+      const answer = early.cantrip ?? ({ type: "pass-priority", player: this.playerId } as const);
+      if (this.passMemoMode === "on") {
+        this.lastUnsafe = [];
+        this.lastRefusedTies = [];
+        this.lastWipePayoff = null;
+        this.lastPassFallback = early.cantrip;
+        this.lastDecision = audit("priority", null, "pass memo");
+        return this.settle(view, answer);
+      }
+      // `"check"`: search anyway, and count whether the memo was right.
+      const searched = this.searchWindow(view, early, memoKey);
+      this.passMemoChecks.hits += 1;
+      this.passMemoChecks.saved += (this.lastDecision as DecisionAudit | null)?.simulations ?? 0;
+      if (!sameAction(searched, answer)) {
+        this.passMemoChecks.wrong.push(
+          `turn ${view.state.turn.number} ${view.state.turn.step}: searched ${describeMove(view.state, searched)}`,
+        );
+      }
+      return searched;
+    }
+    return this.searchWindow(view, early, memoKey);
+  }
+
+  /**
+   * A priority window's search: `actSearched` once no replay, held pass or
+   * memo has answered. `early` is the window's candidates when they were
+   * listed for the memo, and `memoKey` what a pass is remembered under.
+   */
+  private searchWindow(
+    view: ControllerView,
+    early: ReturnType<EvalBotController["listCandidates"]> | null,
+    memoKey: string | null,
+  ): Action {
     const inherited = super.propose(view);
     // `super.propose` has already routed anything the engine is waiting on
     // through `answerAwaited`, which calls back into this class's own
@@ -1023,7 +1097,7 @@ export class EvalBotController extends HeuristicBotController {
     this.decisionRollout =
       this.rollout !== "acting" && castPayoff(view, this.cards, this.playerId) ? "acting" : this.rollout;
 
-    const listed = this.listCandidates(view);
+    const listed = early ?? this.listCandidates(view);
     const { candidates, mustKill, heldForCombat } = listed;
     let cantrip = listed.cantrip;
 
@@ -1440,6 +1514,13 @@ export class EvalBotController extends HeuristicBotController {
     if (best.type === "pass-priority" && landfall !== undefined) {
       const land = landRule();
       if (land !== null) return land;
+    }
+    // A whole search that passed is remembered for the turn (`passMemo`):
+    // not one the count or the clock cut, nor a pass that stands for a play
+    // held for combat.
+    if (memoKey !== null) {
+      const whole = !budget.cut && (budget.until === Infinity || budget.now() < budget.until);
+      this.passMemo = best.type === "pass-priority" && whole && heldForCombat.size === 0 ? memoKey : null;
     }
     this.lastPassFallback = cantrip;
     if (best.type === "pass-priority" && cantrip !== null) best = cantrip;
@@ -3260,6 +3341,41 @@ function castPayoff(view: ControllerView, cards: CardRegistry, player: PlayerId)
       ),
     );
   return inPlay.some(seenBy) || held.some((id) => castable.has(id) && seenBy(id));
+}
+
+/**
+ * What `EvalBotController.passMemo` remembers a passed window under: its
+ * candidates and due cantrip, and the whole state but the event log and its
+ * counter, the step and who holds priority. The whole state, not a list of what a rollout
+ * reads: combat declared, tapped state, damage, counters, life, every zone,
+ * effects that last the turn and the journal are all in it, and so is
+ * anything added later. A few milliseconds on a big board, against a search.
+ */
+function passMemoKey(
+  state: GameState,
+  listed: { readonly candidates: readonly Action[]; readonly cantrip: Action | null },
+): string {
+  return JSON.stringify([
+    listed.candidates,
+    listed.cantrip,
+    {
+      ...state,
+      eventLog: undefined,
+      // Counts every event, a pass of priority among them.
+      eventSeq: undefined,
+      priority: undefined,
+      // The step, and the turn's counts of the phases begun, which say no
+      // more than the step does.
+      turn: { ...state.turn, step: undefined, mainPhases: undefined, combatPhases: undefined, endSteps: undefined },
+    },
+  ]);
+}
+
+/** A move in a few words, for a diagnostic line. */
+function describeMove(state: GameState, action: Action): string {
+  if (action.type === "cast-spell") return `cast ${state.objects[action.card]?.cardName}`;
+  if (action.type === "activate-ability") return `activate ${state.objects[action.source]?.cardName} #${action.abilityIndex}`;
+  return action.type;
 }
 
 /** Whether a land-drop candidate is the one `inherited` plays. */

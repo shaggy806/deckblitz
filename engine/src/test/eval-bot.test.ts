@@ -253,6 +253,35 @@ describe("what a decision costs", () => {
     expect(bot.lastDecision?.simulations).toBe(0);
   });
 
+  it("passes without a second search at a later step of the turn, until the board changes (S3)", () => {
+    const islands = (player: PlayerId) => ({ player, cards: Array<string>(40).fill("Island") });
+    const game = Game.create({ seed: 4, registry, decks: [islands(A), islands(B)] });
+    const bobs = (step: string) => (s: Game["state"]) =>
+      s.priority.holder === A && s.turn.step === step && s.turnOrder[s.turn.activePlayerIndex] === B;
+    game.advanceUntil(bobs("draw"));
+    game.state.zones.perPlayer[A].hand = [];
+    game.debugSpawn("Mountain", A, "battlefield");
+    game.debugSpawn("Grizzly Bears", B, "battlefield");
+    game.debugSpawn("Lightning Bolt", A, "hand");
+    const bot = new EvalBotController(A, registry);
+    const pass = { type: "pass-priority", player: A };
+    expect(bot.act(viewOf(game))).toEqual(pass);
+    expect(bot.lastDecision?.via).toBe("search");
+    // Bob's main phase: nothing has changed but the step.
+    game.advanceUntil(bobs("precombat-main"));
+    expect(bot.act(viewOf(game))).toEqual(pass);
+    expect(bot.lastDecision).toEqual({ kind: "priority", simulations: 0, ms: 0, via: "pass memo", expired: false, cut: false });
+    // A second creature of Bob's: a new board, a new search.
+    game.debugSpawn("Grizzly Bears", B, "battlefield");
+    bot.act(viewOf(game));
+    expect(bot.lastDecision?.via).toBe("search");
+    // And with the memo off, the unchanged window is searched.
+    const plain = new EvalBotController(A, registry, { passMemo: "off" });
+    plain.act(viewOf(game));
+    plain.act(viewOf(game));
+    expect(plain.lastDecision?.via).toBe("search");
+  });
+
   it("still searches a real choice, passing included", () => {
     const game = atUpkeep();
     game.advanceUntil((s) => s.priority.holder === A && s.turn.step === "precombat-main");
