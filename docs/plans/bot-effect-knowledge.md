@@ -565,10 +565,12 @@ the push (one seat on 9ef11193 against three on b1fb5793, four players, 400 game
 level: 25.9% [21.9, 30.4], three timeouts counted as even.
 
 **After the plan: chained spells (2026-10-04).** A first spell of the turn was never worth the
-payoff it set up, since the rollouts pass our own seat for the rest of the turn. While we have a
-"whenever you cast" payoff on the battlefield, in hand or in the command zone (Shiko and Narset
-cast from there is the turn's first spell herself — the user), the priority search uses the
-`"acting"` rollout (`castPayoff` in `eval-bot.ts`); a castable payoff permanent goes first when
+payoff it set up, since the rollouts pass our own seat for the rest of the turn. On our own
+turn, while we have a "whenever you cast" payoff on the battlefield or the stack, or castable
+from hand or the command zone (Shiko and Narset cast from there is the turn's first spell
+herself — the user), and a spell castable now that its trigger would see, the priority search
+uses the `"acting"` rollout (`castPayoff` in `eval-bot.ts`; narrowed to that 2026-11-10, the bot
+audit's S5 — it had been on at every window of the game for any seat holding such a card); a castable payoff permanent goes first when
 something can follow it (`payoffFirst`); and v1, which plays our seat in that rollout, aims a
 spell copy's new targets away from the original's (`chooseTargets`/`copyPolarities` — it kept a
 copied Bolt on the Bears the original was killing). `bot:diff` against fc11d433: 203 of 32,924

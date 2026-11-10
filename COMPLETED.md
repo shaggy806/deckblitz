@@ -3347,6 +3347,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Bots
 
+- **The bot audit's fixes, step 4, parts 1 and 2: `castPayoff` narrowed, and a pass memo**
+  (2026-11-10; `70c51a5c8`, `b741490be`; `docs/plans/bot-audit-fixes.md`, *As built*): the `"acting"`
+  rollout only on our own turn with a payoff in play or castable and a spell castable now that
+  its trigger would see (S5: 17.6% of priority searches to 8.4%, none on others' turns), and a
+  whole search that passed at an empty-stack window is remembered under the whole state, so
+  the same window at a later step passes without a search (S3: checked against a real search
+  at 452 hits, all agreeing; 1,117 such searches in 12 games to 800). About 7% of
+  priority-search time on the development PC.
 - **The bot audit's fixes, step 2b: deployed, and measured live** (2026-11-10; `9a0290c21` live;
   `docs/plans/bot-audit-fixes.md`, *Live figures*): two four-bot lobby rooms on the box to turn
   24. The clock holds (worst decision 1,053 ms, none over twice the budget); the search is thin

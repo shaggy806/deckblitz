@@ -1,6 +1,6 @@
 # Fixing what the bot audit found
 
-Status: **in progress** (2026-11-10): steps 0-2 built and live, step 4 next. The findings, their evidence and
+Status: **in progress** (2026-11-10): steps 0-2 built and live, step 4's first two parts built, its planner part next. The findings, their evidence and
 their finding numbers (S1-S8, Q1-Q8) are in `bot-audit-2026-11.md`; this file is only the order,
 what each step changes, and how each is checked. Three choices near the end are the user's.
 
@@ -9,15 +9,17 @@ what each step changes, and how each is checked. Three choices near the end are 
 One step a session, with the `bot-audit-next` skill. When a step lands, tick it here with its date
 and commit, write its *As built* lines under the step, and move `Next`.
 
-- Next: **step 4** (search that buys nothing), then step 3: on the live box the clock holds and
-  the search is thin, 1-4 simulations a decision at 40-55 permanents (*Live figures*).
+- Next: **step 4, part 3** (S4, the planner: score each child as it is settled, expand best
+  first), then step 3. Parts 1 and 2 (S5, S3) are built; the planner's level loop is a rewrite
+  of its own, left for a second session as the step allowed.
 - [x] Step 0. Tools (2026-11-10)
 - [x] Step 1. Four misplays (2026-11-10; `d15599f95` Q3, `752a7550e` Q6, `aadc42a5a` and
   `e1b359709` Q7, `f626a7351` Q5)
 - [x] Step 2. The clock (2026-11-10; `0fb9b8bec` the bots, `72b1173f4` the server's figures)
 - [x] Step 2b. Deploy, and test live (2026-11-10; `9a0290c21` live)
 - [ ] Step 3. Engine cost per tick
-- [ ] Step 4. Search that buys nothing
+- [ ] Step 4. Search that buys nothing — parts 1 (S5) and 2 (S3) built 2026-11-10 (`70c51a5c8`,
+  `b741490be`); part 3 (S4, the planner) left
 - [ ] Step 5. The evaluation (several sessions; its sub-steps are ticked in the step itself)
 
 ## Principles
@@ -362,6 +364,59 @@ or the clone.
    one-move search. Compare plan lines with a baseline scored under the same policy (the
    "acting" mismatch). The budget stays at 48: the planner is what carries the sequencing rules
    (Q1).
+
+### As built (2026-11-10): parts 1 and 2
+
+**S5, `castPayoff`.** Now true only on our own turn, with a "whenever you cast" payoff of ours
+on the battlefield or the stack, or in hand or the command zone and castable now, and a spell
+castable now (not the payoff itself) that the trigger's filter takes. "Castable" is the window's
+own legal casts, which is narrower than the plan's "castable this turn": before the land drop, a
+spell the land would pay for doesn't count. Gate 209 of 209, the Shiko and Guttersnipe scenarios
+among them. `bot:diff` against `origin/main`, six games: 2 of 11,335 decisions changed, both on
+the seat's own turn with a payoff out and nothing castable (which land of two; a Necropolis
+Fiend activation at begin combat that the passive rollout passes on).
+
+**S3, the pass memo** (`EvalBotController.passMemo`, `passMemoKey`). A whole search that passed
+at an empty-stack window outside our own main phases is remembered; a later window with the
+same key passes without the search or v1's `act`. Where it differs from the plan:
+
+- **The key is the whole state**, serialised, not a list of fields: every candidate and the due
+  cantrip, then the state but its event log and event counter, who holds priority, the step, and
+  the turn's three phase counters (`mainPhases`, `combatPhases`, `endSteps`, which say no more
+  than the step). Everything the plan listed is in it, and so is whatever a rollout reads that
+  the list would have missed. A few milliseconds on a big board. The turn's number is in the
+  key, so the memo never outlives the turn; one entry is kept, the last passed search.
+- **The step-dependent rules run inside `listCandidates`**, which is called before the memo is
+  asked: a fetch or a creature a hold released changes the candidates and so the key, and a
+  cantrip that came due is played on a hit. The last window before our untap never uses it
+  (`isEndOfTurnBeforeOurs`).
+- Not remembered: a search the count or the clock cut, or one whose pass stood for a play held
+  for combat. Off with `passMemo: "off"`; `"check"` searches at every hit and counts.
+
+The two things to settle first: **rollouts of an identical state are deterministic enough** —
+with `bot:timings --budget none --pass-memo check`, 12 four-player games, the memo hit 452
+times (1,440 simulations a skip saves) and the real search gave the memo's answer at all 452;
+the same run twice played the same games. And the key's cost is a serialisation of the state
+against a search of several rollouts. With the phase counters left in the key it hit 355 times;
+with the event counter left in, never.
+
+**Measured** (`bot:timings`, 12 games from seed 1, 6 workers, live budget, the development PC;
+clocked games don't replay exactly, so the two runs are nearby games, not the same ones):
+
+| | Before | After |
+| --- | --- | --- |
+| Priority searches | 2,091, 659 s | 1,830, 615 s |
+| … under "acting" | 368 (17.6%), 170 s | 154 (8.4%), 115 s |
+| … on others' turns under "acting" | 121 | 0 |
+| Empty-stack searches outside own main phases | 1,117, 156 s | 800, 117 s |
+| ms a simulation, all searched decisions | 42.1 | 42.8 |
+| Decisions over 1 s | 17 | 10 |
+
+So about 7% of priority-search time on this machine, less than the audit's two guesses added
+together (10-15% for a third of seats, and 11%): the "acting" share was already 18% on these
+decks, not the harvest's 30%, and the sound key hits 38% of the eligible windows where the
+coarse one hit half. On the live box, where a simulation costs 3-5 times as much, the skipped
+searches are the same count and so a larger time. `bot:timings` now prints the "acting" share.
 
 ## Step 5. The evaluation, and the rules it would retire (several sessions; needs a bench)
 
