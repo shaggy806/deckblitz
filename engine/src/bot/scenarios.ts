@@ -382,6 +382,24 @@ function playOutTurn(
   return taken;
 }
 
+/** Whether, after our turn, Murder killed `dragon` or can still be cast
+ * (three untapped lands, two of them Swamps). */
+function murderKept(game: Game, dragon: ObjectId, taken: readonly Action[]): ScenarioResult {
+  const state = game.state;
+  const killed = !state.zones.shared.battlefield.includes(dragon);
+  const untapped = state.zones.shared.battlefield.filter(
+    (id) => state.objects[id].controller === A && !state.objects[id].tapped && /Forest|Swamp|Island/.test(state.objects[id].cardName),
+  );
+  const held =
+    state.zones.perPlayer[A].hand.some((id) => state.objects[id].cardName === "Murder") &&
+    untapped.length >= 3 &&
+    untapped.filter((id) => state.objects[id].cardName === "Swamp").length >= 2;
+  return {
+    passed: killed || held,
+    detail: killed ? "Murder killed the Dragon" : held ? "Murder held with its mana up" : `no Murder: ${taken.map(describeAction).join(" | ")}`,
+  };
+}
+
 const evalBotFactory: BotFactory = (player, registry, weights) =>
   new EvalBotController(player, registry, { weights });
 
@@ -635,6 +653,30 @@ const SCENARIOS: readonly BotScenario[] = [
       };
     },
   }),
+  {
+    name: "pays Viscera Seer with the Bears, not Blood Artist, and drains an opponent out",
+    rule: "A sacrifice cost is paid with what does nothing else: never the payoff that watches the sacrifice, or the outlet itself, while a plain creature is there.",
+    run(weights, registry, makeBot) {
+      // The bot audit's Q3 (2026-11-10): fodder was ranked by stats alone
+      // (`cheapestPermanents`: Blood Artist 2, the Seer 3, Grizzly Bears 6),
+      // and one candidate an ability was offered, so v2 sacrificed Blood
+      // Artist, then the Seer to itself, and nobody died. Two Bears into the
+      // Seer with the Artist watching is 2 life from an opponent at 2.
+      const game = fourPlayerMain(registry);
+      onBoard(game, "Viscera Seer", A);
+      onBoard(game, "Blood Artist", A);
+      onBoard(game, "Grizzly Bears", A);
+      onBoard(game, "Grizzly Bears", A);
+      for (const player of [B, C, D]) {
+        game.state.players[player].life = 2;
+        onBoard(game, "Craw Wurm", player);
+        onBoard(game, "Craw Wurm", player);
+      }
+      const taken = playOutTurn(game, makeBot(A, registry, weights), A, () => false);
+      const dead = [B, C, D].some((player) => game.state.players[player].hasLost || game.state.players[player].life <= 0);
+      return { passed: dead, detail: dead ? "an opponent is dead" : `nobody died: ${taken.map(describeAction).join(" | ")}` };
+    },
+  },
   asked({
     name: "leaves a Flickerwisped commander in exile for its return",
     rule: "A commander blinked with a delayed return comes back at the end step for free; the command zone makes it a new object the return can't find (rule 400.7).",

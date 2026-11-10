@@ -2894,7 +2894,7 @@ export class HeuristicBotController extends AutomaticController {
     // `legalActions` proved.)
     const sacrificeChoices = legal.sacrifice?.choices ?? [];
     const pickLast = (): number =>
-      sacrificeChoices.indexOf(this.cheapestPermanents(state, sacrificeChoices, 1)[0]);
+      sacrificeChoices.indexOf(this.cheapestFodder(state, sacrificeChoices)!);
     if (legal.castModal !== undefined) {
       const cm = legal.castModal;
       const byMode = modalPolarities(this.registry, legal, polarityBias(state, this.playerId));
@@ -3040,7 +3040,7 @@ export class HeuristicBotController extends AutomaticController {
     // the cheapest choice, as the search pays — is spare (`isSpareFodder`).
     let given = 0;
     if (legal.sacrifice !== undefined) {
-      const fodder = this.cheapestPermanents(state, legal.sacrifice.choices, 1)[0];
+      const fodder = this.cheapestFodder(state, legal.sacrifice.choices);
       if (fodder === undefined || !this.isSpareFodder(state, fodder)) return false;
       given = 1;
     }
@@ -3313,7 +3313,7 @@ export class HeuristicBotController extends AutomaticController {
         offerDamage(this.registry, legal),
       ),
       ...(sac !== undefined && sac.choices.length > 0
-        ? { sacrifice: this.cheapestPermanents(state, sac.choices, 1)[0] }
+        ? { sacrifice: this.cheapestFodder(state, sac.choices, legal.source) }
         : {}),
       // A "−X" loyalty ability: one counter kept, so the planeswalker stays.
       ...(legal.xCost !== undefined
@@ -3325,6 +3325,38 @@ export class HeuristicBotController extends AutomaticController {
       ...(legal.modes !== undefined ? { modes: legal.modes } : {}),
       ...(legal.otherChooser !== undefined ? { otherChooser: legal.otherChooser } : {}),
     };
+  }
+
+  /**
+   * What a sacrifice *cost* is paid with: the cheapest of `choices`
+   * (`cheapestPermanents`) that isn't what the sacrifice is for — the
+   * ability's own `source`, or a permanent that watches things die, be
+   * sacrificed or leave (`watchesSacrifices`) — while any other choice
+   * exists. Stats alone put Blood Artist (2) and Viscera Seer (3) under
+   * Grizzly Bears (6), so the Seer was fed the Artist, then itself, with two
+   * Bears beside them and every opponent at 2 (the bot audit's Q3,
+   * 2026-11-10). An edict or an effect's sacrifice isn't asked this way:
+   * there the watcher dying is no worse than anything else.
+   */
+  protected cheapestFodder(state: GameState, choices: readonly ObjectId[], source?: ObjectId): ObjectId | undefined {
+    const plain = choices.filter((id) => id !== source && !this.watchesSacrifices(state, id));
+    return this.cheapestPermanents(state, plain.length > 0 ? plain : choices, 1)[0];
+  }
+
+  /** Whether a permanent has a trigger on something else dying, being
+   * sacrificed or leaving the battlefield: a payoff for a sacrifice, which
+   * sacrificing it throws away. One that watches only itself (Doomed
+   * Traveler) is the opposite, and isn't one. */
+  protected watchesSacrifices(state: GameState, id: ObjectId): boolean {
+    const object = state.objects[id];
+    if (object === undefined) return false;
+    const name = rulesTextName(object);
+    if (!this.registry.has(name)) return false;
+    return (this.registry.get(name).triggered ?? []).some((t) => {
+      const trigger = t.trigger;
+      if (trigger.on !== "dies" && trigger.on !== "sacrifice" && trigger.on !== "leaves-battlefield") return false;
+      return trigger.who !== "self" && !(trigger.on === "sacrifice" && trigger.selfOnly === true);
+    });
   }
 
   /**

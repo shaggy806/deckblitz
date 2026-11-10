@@ -1549,11 +1549,19 @@ export class EvalBotController extends HeuristicBotController {
       // control but don't own, going back at the end of the turn anyway:
       // Act of Treason's Craw Wurm, not the Seer.
       const borrowed = choices.find((id) => (state.objects[id]?.owner ?? this.playerId) !== this.playerId);
+      // Not the ability's own source or a permanent that watches the
+      // sacrifice while something plain is there (`cheapestFodder`); and
+      // where that isn't the cheapest of all, the cheapest is a second
+      // candidate, for the search to tell apart.
+      const source = legal.kind === "activate-ability" ? legal.source : undefined;
+      const fodder = borrowed ?? this.cheapestFodder(state, choices, source);
       const cheapest = borrowed ?? this.cheapestPermanents(state, choices, 1)[0];
-      return actions.map((action) =>
+      return actions.flatMap((action) =>
         (action.type === "cast-spell" || action.type === "activate-ability") && action.sacrifice !== undefined
-          ? { ...action, sacrifice: cheapest }
-          : action,
+          ? fodder === cheapest
+            ? [{ ...action, sacrifice: fodder }]
+            : [{ ...action, sacrifice: fodder }, { ...action, sacrifice: cheapest }]
+          : [action],
       );
     }
     const seen = new Set<string>();
