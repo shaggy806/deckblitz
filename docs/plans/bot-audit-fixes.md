@@ -1,6 +1,6 @@
 # Fixing what the bot audit found
 
-Status: **in progress** (2026-11-10): steps 0-2 built and live, step 4's first two parts built, its planner part next. The findings, their evidence and
+Status: **in progress** (2026-11-10): steps 0-2 built and live, step 4 built, step 3 next. The findings, their evidence and
 their finding numbers (S1-S8, Q1-Q8) are in `bot-audit-2026-11.md`; this file is only the order,
 what each step changes, and how each is checked. Three choices near the end are the user's.
 
@@ -9,17 +9,16 @@ what each step changes, and how each is checked. Three choices near the end are 
 One step a session, with the `bot-audit-next` skill. When a step lands, tick it here with its date
 and commit, write its *As built* lines under the step, and move `Next`.
 
-- Next: **step 4, part 3** (S4, the planner: score each child as it is settled, expand best
-  first), then step 3. Parts 1 and 2 (S5, S3) are built; the planner's level loop is a rewrite
-  of its own, left for a second session as the step allowed.
+- Next: **step 3** (the engine's cost per tick: no trigger scan on the two priority events,
+  S6, then the memoised grant sources), then step 5.
 - [x] Step 0. Tools (2026-11-10)
 - [x] Step 1. Four misplays (2026-11-10; `d15599f95` Q3, `752a7550e` Q6, `aadc42a5a` and
   `e1b359709` Q7, `f626a7351` Q5)
 - [x] Step 2. The clock (2026-11-10; `0fb9b8bec` the bots, `72b1173f4` the server's figures)
 - [x] Step 2b. Deploy, and test live (2026-11-10; `9a0290c21` live)
 - [ ] Step 3. Engine cost per tick
-- [ ] Step 4. Search that buys nothing — parts 1 (S5) and 2 (S3) built 2026-11-10 (`70c51a5c8`,
-  `b741490be`); part 3 (S4, the planner) left
+- [x] Step 4. Search that buys nothing (2026-11-10; `70c51a5c8` S5, `b741490be` S3,
+  `ef5e18906` S4)
 - [ ] Step 5. The evaluation (several sessions; its sub-steps are ticked in the step itself)
 
 ## Principles
@@ -417,6 +416,58 @@ together (10-15% for a third of seats, and 11%): the "acting" share was already 
 decks, not the harvest's 30%, and the sound key hits 38% of the eligible windows where the
 coarse one hit half. On the live box, where a simulation costs 3-5 times as much, the skipped
 searches are the same count and so a larger time. `bot:timings` now prints the "acting" share.
+
+### As built (2026-11-10): part 3, the planner
+
+**S4** (`planTurn`, `turn-plan.ts`; `planLines`). Three changes to the level loop, and one to
+what a line must beat:
+
+- **A move is passed out as soon as it has resolved**, the best kept line's moves first, so a
+  level the simulations or the clock cut keeps every line it paid for.
+- **First moves the one-move search scored are lines for nothing** (`lastEnds`, `planTurn`'s
+  `scored`), where its rollout is the plan's own: the `"turn"` horizon, the `"combat"` rollout, no
+  `rolloutDecisions` (`plansAsScored`). Then they're resolved best first, and only until
+  `PLAN_BEAM` of them can go on, where every one used to be resolved and passed out. A land
+  scored with its crack isn't one, and such a window resolves and scores its first moves as before.
+- **Only a line with a step left takes a place in the beam**: one with nothing more to do
+  can't begin a longer one. Not in the plan; it fell out of resolving best first.
+- **Under `"acting"`** the plan scores its own first moves, as before, and a line must beat the
+  plan's own line for the one-move answer (for passing, the turn passed out: one simulation),
+  not the answer's `"acting"` score. The answer's line also keeps a place in the beam whatever
+  it scored passed out (`planTurn`'s `lead`): with the new bar alone, the Shiko scenario failed —
+  Opt passed out is worth nothing, no line began with it, and Bolt-then-Opt beat Opt's own line.
+  An answer that isn't one plain move (a batch, an untap plan, a land with its crack), or that
+  no line may begin with (a wipe held for combat), keeps its score as the bar.
+
+**The reuse is exact**: in six bench games to turn 30, at each planner call every scored first
+move was also resolved and passed out by the plan itself: 491 values, all equal.
+
+**Measured** (`.scratch/bot-audit/s4-step/planner-games.mjs`: six four-player bench games,
+seeds 1-6, to turn 30, count budgets; the games part ways at the first changed decision, so
+these are like games, not the same ones):
+
+| | Before | After |
+| --- | --- | --- |
+| Planner calls that spent a simulation | 185 | 199 |
+| Planner simulations (of all the searches') | 3,001 (43% of 7,014) | 3,200 (44% of 7,239) |
+| … a call | 16.2 | 16.1 |
+| Two-move-or-longer lines scored | 612 (3.3 a call) | 925 (4.6 a call) |
+| Calls that returned a plan | 38 (21%) | 48 (24%) |
+| … under `"acting"` | 6 of 36 | 14 of 37 |
+| Simulations in calls that scored no longer line | 482 | 358 |
+
+**So no simulations are saved**, against the audit's guess of 5-10%: what the first moves no
+longer cost is spent on longer lines, the budget staying at 48 as the step said, and the plan
+finds half again as many lines for it. The waste the audit measured (calls that spend and score
+no longer line) is down a quarter; what is left of it is mostly finding out that nothing chains,
+which costs the first moves resolved. The planner is 43% of simulations in these games, not the
+audit's 29%: turns 1-30 are when hands are full.
+
+Gate 209 of 209. `bot:diff` against `origin/main`, six games: 25 of 12,110 decisions changed, at
+16 windows, all on the seat's own turn: a different first step of a longer line (Kishla
+Skimmer, Disciple of Bolas, combat, then Phyrexian Reclamation, where the old plan stopped at
+two moves), and passes in combat that hold a later step of the plan for after it. Two unit
+tests in `turn-plan.test.ts`, each failing on the old loop.
 
 ## Step 5. The evaluation, and the rules it would retire (several sessions; needs a bench)
 

@@ -3347,6 +3347,14 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Bots
 
+- **The bot audit's fixes, step 4, part 3: a turn plan that keeps what a cut level paid for**
+  (2026-11-10; `ef5e18906`; `docs/plans/bot-audit-fixes.md`, *As built*): each move is passed
+  out as soon as it has resolved, the best line's first; first moves the one-move search rolled
+  out the plan's way are lines at no cost (491 values checked, all equal); only a line with a
+  step left takes a beam place; under `"acting"` a line must beat the plan's own line for the
+  one-move answer (S4). No simulations saved at the count budget (16 a call before and after):
+  the plan scores half again as many longer lines for them (3.3 a call to 4.6) and returns a
+  plan at 24% of calls where it was 21%.
 - **The bot audit's fixes, step 4, parts 1 and 2: `castPayoff` narrowed, and a pass memo**
   (2026-11-10; `70c51a5c8`, `b741490be`; `docs/plans/bot-audit-fixes.md`, *As built*): the `"acting"`
   rollout only on our own turn with a payoff in play or castable and a spell castable now that
