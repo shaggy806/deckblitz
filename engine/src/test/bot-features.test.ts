@@ -141,3 +141,38 @@ describe("lifeCost", () => {
     expect(lifeCost(24, 4, DEFAULT_WEIGHTS)).toBeCloseTo(2.5 * lifeCost(40, 4, DEFAULT_WEIGHTS));
   });
 });
+
+describe("counters nobody wants", () => {
+  // The bot audit's Q5: every counter kind not listed scored 0.5 for its
+  // controller, stun and age among them.
+  const board = (): { game: Game; mine: ReturnType<Game["debugSpawn"]>; theirs: ReturnType<Game["debugSpawn"]> } => {
+    const game = newGame();
+    const mine = game.debugSpawn("Craw Wurm", A, "battlefield", { summoningSick: false });
+    const theirs = game.debugSpawn("Craw Wurm", B, "battlefield", { summoningSick: false });
+    return { game, mine, theirs };
+  };
+  const value = (game: Game): number => evaluateState(game.state, game.registry, A, DEFAULT_WEIGHTS);
+
+  it("does not lower our score for a stun counter on an opponent's creature", () => {
+    const { game, theirs } = board();
+    const before = value(game);
+    game.state.objects[theirs].counters = { stun: 2 };
+    expect(value(game)).toBeGreaterThanOrEqual(before);
+  });
+
+  it("does not raise our score for stun or age counters on our own", () => {
+    const { game, mine } = board();
+    const before = value(game);
+    for (const kind of ["stun", "age", "blight", "flood"]) {
+      game.state.objects[mine].counters = { [kind]: 3 };
+      expect(value(game), kind).toBeLessThanOrEqual(before);
+    }
+  });
+
+  it("still counts a charge counter", () => {
+    const { game, mine } = board();
+    const before = value(game);
+    game.state.objects[mine].counters = { charge: 3 };
+    expect(value(game)).toBeGreaterThan(before);
+  });
+});

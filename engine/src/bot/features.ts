@@ -49,6 +49,7 @@ import type { EffectSpec } from "../effects.js";
 import { manaValue, parseManaCost } from "../mana.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import { POISON_LETHAL, printedCardName, rulesTextName, settledTally } from "../state.js";
+import { HARMFUL_COUNTERS } from "../target-polarity.js";
 import { playersAttackableNextTurn } from "../combat/eligibility.js";
 import { canBlock, combatCreatures } from "./combat-math.js";
 import type { CombatCreature } from "./combat-math.js";
@@ -302,13 +303,17 @@ const COMBAT_KEYWORDS: readonly Keyword[] = [
 ];
 
 /** Counter kinds another feature already accounts for, or that measure
- * progress rather than value. */
+ * progress rather than value — or that are no good to whoever has them
+ * (`HARMFUL_COUNTERS`: stun, blight, flood; and age, a cumulative upkeep's
+ * growing bill). Each used to score 0.5 for its controller, so stunning an
+ * opponent's creature lowered our score (the bot audit's Q5, 2026-11-10). */
 const UNSCORED_COUNTERS: ReadonlySet<string> = new Set([
   "+1/+1",
-  "-1/-1",
   "loyalty",
   "lore",
   "time",
+  "age",
+  ...HARMFUL_COUNTERS,
 ]);
 
 /** A +X/+Y or -X/-Y counter (rule 122.1a), which the P/T already counts. */

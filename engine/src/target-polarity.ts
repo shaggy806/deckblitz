@@ -95,7 +95,7 @@ const none = (): void => {};
 
 /** Counters that are bad to have. Everything else a targeted `add-counter`
  * puts in the pool is `+1/+1`, loyalty, a keyword counter or a resource. */
-const HARMFUL_COUNTERS: ReadonlySet<string> = new Set(["-1/-1", "blight", "flood", "stun"]);
+export const HARMFUL_COUNTERS: ReadonlySet<string> = new Set(["-1/-1", "blight", "flood", "stun"]);
 
 /** The sign of an amount: a live count is never negative unless it is scaled
  * by a negative `times`, or is a `product` with a negative factor — "-X/-X"
