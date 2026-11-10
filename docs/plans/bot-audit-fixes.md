@@ -2,7 +2,21 @@
 
 Status: **proposed order of work** (2026-11-10); nothing built. The findings, their evidence and
 their finding numbers (S1-S8, Q1-Q8) are in `bot-audit-2026-11.md`; this file is only the order,
-what each step changes, and how each is checked. Four choices near the end are the user's.
+what each step changes, and how each is checked. Three choices near the end are the user's.
+
+## Progress
+
+One step a session, with the `bot-audit-next` skill. When a step lands, tick it here with its date
+and commit, write its *As built* lines under the step, and move `Next`.
+
+- Next: **step 0** (tools).
+- [ ] Step 0. Tools
+- [ ] Step 1. Four misplays
+- [ ] Step 2. The clock
+- [ ] Step 2b. Deploy, and test live
+- [ ] Step 3. Engine cost per tick
+- [ ] Step 4. Search that buys nothing
+- [ ] Step 5. The evaluation (several sessions; its sub-steps are ticked in the step itself)
 
 ## Principles
 
@@ -86,8 +100,35 @@ Check: scenarios through `now` for 1, 2 and 4; `bot:harvest` before and after on
 — decisions over 1.5 s should go to about zero and the share of one-simulation passes with it;
 the gate at `timeBudgetMs: 1000` still 182/182; server and client suites.
 
-Deploy after this step. It is the part a player can feel, and (5) is the only way to learn what
-the live box really does.
+## Step 2b. Deploy, and test live (a short session; the user's call, 2026-11-10)
+
+Steps 0-2 go live together, and the live box is measured before anything is optimised for it.
+Every time in the audit is the development PC's; this is the first figure from the machine
+players use.
+
+1. **Deploy** with the `deploy` skill, once CI is green on the commit that ends step 2.
+2. **Play it live, on big boards.** Two blitz games on deckblitz.net (a decklist against three
+   bots), in the browser, to at least turn 25 or the game's end, with decks that go wide (a token
+   deck and a ramp deck from the bench decks). Watch for: a bot that stops acting on a wide
+   board (S1), a pause of several seconds on one bot decision (S2), a bot that passes its whole
+   turn with castable spells in hand.
+3. **Read the server's figures** after each game (`/status.json` over SSH, and the service log's
+   over-budget lines from step 2's (5)): the slowest decision, how many ran over the budget and
+   over twice it, and the board sizes they happened on.
+4. **Record them here**, under *Live figures*, beside the development PC's for the same decks
+   from `bot:harvest`: decisions over 1 s, the worst decision, ms a simulation by board size.
+   The ratio between the two machines is the number every later estimate in this plan needs.
+5. **Decide the next step from them.** If the live box is still over budget often after step 2,
+   step 3 (cost per tick) goes next as written. If over-budget decisions are rare but the search
+   is thin (few simulations a decision on mid-size boards), step 4 goes first. Say which, and
+   why, in *Progress*.
+
+Done when the figures are in this file and `Next` names step 3 or step 4. A fault found in play
+that isn't one of the audit's is a `bug-report` or `bot-misplay`, not this step's to fix.
+
+### Live figures
+
+*(none yet)*
 
 ## Step 3. Engine cost per tick (one session, engine only)
 
@@ -173,8 +214,6 @@ wall time, and list what they dropped.
 1. **Start with step 1 or step 2?** Recommended: step 0, then 1, then 2. Step 1 is small and
    each fix is a watched misplay; step 2 is what a player feels on a big board but needs step
    0's clock to test.
-2. **Deploy after step 2**, to read the live box's decision times before steps 3-4?
-   Recommended: yes.
-3. **Delete `followUps`** (about 300 unreachable lines) in step 5, or keep it as the `plan:
+2. **Delete `followUps`** (about 300 unreachable lines) in step 5, or keep it as the `plan:
    "off"` fallback? Recommended: delete, once the planner has the crackback check.
-4. **The step 5 A/B** costs hours. Recommended: one, at the end of step 5, and none before.
+3. **The step 5 A/B** costs hours. Recommended: one, at the end of step 5, and none before.
