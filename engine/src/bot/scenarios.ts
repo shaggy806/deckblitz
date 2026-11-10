@@ -400,24 +400,6 @@ function murderKept(game: Game, dragon: ObjectId, taken: readonly Action[]): Sce
   };
 }
 
-/** Whether, after our turn, Murder killed `dragon` or can still be cast
- * (three untapped lands, two of them Swamps). */
-function murderKept(game: Game, dragon: ObjectId, taken: readonly Action[]): ScenarioResult {
-  const state = game.state;
-  const killed = !state.zones.shared.battlefield.includes(dragon);
-  const untapped = state.zones.shared.battlefield.filter(
-    (id) => state.objects[id].controller === A && !state.objects[id].tapped && /Forest|Swamp|Island/.test(state.objects[id].cardName),
-  );
-  const held =
-    state.zones.perPlayer[A].hand.some((id) => state.objects[id].cardName === "Murder") &&
-    untapped.length >= 3 &&
-    untapped.filter((id) => state.objects[id].cardName === "Swamp").length >= 2;
-  return {
-    passed: killed || held,
-    detail: killed ? "Murder killed the Dragon" : held ? "Murder held with its mana up" : `no Murder: ${taken.map(describeAction).join(" | ")}`,
-  };
-}
-
 const evalBotFactory: BotFactory = (player, registry, weights) =>
   new EvalBotController(player, registry, { weights });
 
@@ -2308,6 +2290,39 @@ const SCENARIOS: readonly BotScenario[] = [
       const taken = playOutTurn(game, makeBot(A, registry, weights), A, () => false);
       const home = game.state.objects[bears]?.tapped === false;
       return { passed: home, detail: home ? "the Bears stayed home" : `tapped the Bears: ${taken.map(describeAction).join(" | ")}` };
+    },
+  },
+  {
+    name: "keeps Murder's mana from Beast Whisperer under a lethal Shivan Dragon",
+    rule: "A payoff goes first only when the search agrees: not when its mana is the answer to what kills us.",
+    run(weights, registry, makeBot) {
+      // The bot audit's Q7 (2026-11-10): "payoff first" returned Beast
+      // Whisperer before any search because Opt was castable behind it (which
+      // doesn't even trigger it), leaving one land for Murder; the Dragon
+      // then killed us from 5.
+      const game = table(registry, [A, B], A);
+      game.state.players[A].life = 5;
+      lands(game, "Forest", A, 2);
+      lands(game, "Swamp", A, 2);
+      lands(game, "Island", A, 1);
+      const dragon = onBoard(game, "Shivan Dragon", B);
+      for (const name of ["Beast Whisperer", "Opt", "Murder"]) game.debugSpawn(name, A, "hand");
+      return murderKept(game, dragon, playOutTurn(game, makeBot(A, registry, weights), A, () => false));
+    },
+  },
+  {
+    name: "keeps Murder's mana from Jaddi Offshoot under a lethal Shivan Dragon",
+    rule: "A landfall permanent goes before the land only when the search agrees.",
+    run(weights, registry, makeBot) {
+      // Q7's other rule: "landfall first" cast Jaddi Offshoot with the
+      // Forest, and the Swamp played after it left two lands for Murder.
+      const game = table(registry, [A, B], A);
+      game.state.players[A].life = 5;
+      lands(game, "Forest", A, 1);
+      lands(game, "Swamp", A, 1);
+      const dragon = onBoard(game, "Shivan Dragon", B);
+      for (const name of ["Jaddi Offshoot", "Swamp", "Murder"]) game.debugSpawn(name, A, "hand");
+      return murderKept(game, dragon, playOutTurn(game, makeBot(A, registry, weights), A, () => false));
     },
   },
   {

@@ -1,7 +1,9 @@
 /**
- * A one-ply searching bot: at each priority window, enumerate the concrete
- * actions available, play each one out against a throwaway copy of the game,
- * score the result, and take the best.
+ * A searching bot: at each priority window, enumerate the concrete actions
+ * available, play each one out against a throwaway copy of the game, score
+ * the result, and take the best — and, in its own main phase, plan the rest
+ * of the turn from the best of them (`planLines`, `turn-plan.ts`; the
+ * default since 2026-10-18), so it is no longer one move deep there.
  *
  * It extends {@link HeuristicBotController} rather than replacing it. Decisions
  * the engine waits on mid-resolution — a trigger's targets, modes, "you may",
@@ -1034,11 +1036,13 @@ export class EvalBotController extends HeuristicBotController {
     // Shiko from the command zone first, the Bolt after her copied
     // (`payoffFirst`). The search, even rolling our turn out, found "something
     // now, Shiko later" and lost the Flurry.
+    //
+    // It used to be played here, before any search, and so could not be
+    // overruled: Beast Whisperer went first with Opt castable behind it, and
+    // Murder's mana went with it under a Shivan Dragon that then killed us
+    // (the bot audit's Q7, 2026-11-10). Now it is the first candidate
+    // scored (`preferred`, below), which wins every tie.
     const payoff = payoffFirst(view, this.cards, candidates);
-    if (payoff !== null) {
-      this.lastDecision = audit("priority", null, "payoff first");
-      return this.acted(view, payoff);
-    }
     // A cost reducer goes first when it lets a second spell fit in the turn
     // (`reducerFirst`): the rollouts pass our own seat, so Urza's Incubator
     // first read as three mana for nothing and Miirym's cheaper cast after it
@@ -1070,18 +1074,19 @@ export class EvalBotController extends HeuristicBotController {
     // And before a fetch, for the land it finds: a fetch costs no mana, so the
     // payoff is as castable after it as before (a live misplay, 2026-10-07:
     // Kresh cracked five fetches, then cast Omnath, Locus of Rage).
-    if (lands.length > 0 || fetches.length > 0) {
-      const landfall = candidates.find(
-        (a) =>
-          a.type === "cast-spell" &&
-          a.face === undefined &&
-          isLandfallPermanent(this.cards, view.state.objects[a.card]?.cardName ?? ""),
-      );
-      if (landfall !== undefined) {
-        this.lastDecision = audit("priority", null, "landfall first");
-        return this.acted(view, landfall);
-      }
-    }
+    //
+    // Not played here either (Q7: Jaddi Offshoot took the Forest Murder
+    // needed): with one to cast, the land drop and the fetch wait for the
+    // search, which scores it first, the land beside it.
+    const landfall =
+      lands.length > 0 || fetches.length > 0
+        ? candidates.find(
+            (a) =>
+              a.type === "cast-spell" &&
+              a.face === undefined &&
+              isLandfallPermanent(this.cards, view.state.objects[a.card]?.cardName ?? ""),
+          )
+        : undefined;
     // **Nor is cracking a fetch** (`isFreeFetch`): it makes no mana, so
     // holding it gains nothing, and the evaluation scores a land traded for a
     // tapped land as a wash and passed. Which land to find is still searched,
@@ -1089,16 +1094,16 @@ export class EvalBotController extends HeuristicBotController {
     // A creature that fetches by sacrificing itself (Sakura-Tribe Elder) joins
     // them at the end of the turn before ours (`isCreatureFetchDue`): the
     // evaluation kept the 0/2 over the land and never ramped.
-    const fetch = lands.length === 0 ? fetches[0] : undefined;
+    const fetch = lands.length === 0 && landfall === undefined ? fetches[0] : undefined;
     if (fetch !== undefined) {
       this.lastDecision = audit("priority", null, "fetch");
       return fetch;
     }
-    if (lands.length === 1) {
+    if (lands.length === 1 && landfall === undefined) {
       this.lastDecision = audit("priority", null, "only land");
       return lands[0];
     }
-    if (lands.length > 1) {
+    if (lands.length > 1 && landfall === undefined) {
       // v1's pick goes first, so it wins every tie: the rollouts pass our own
       // seat for the rest of the turn, so a land that lets us cast a spell now
       // scores no better than one that doesn't, and every basic ties. v1
@@ -1182,6 +1187,11 @@ export class EvalBotController extends HeuristicBotController {
       const [preferred] = candidates.splice(inheritedFirst, 1);
       candidates.unshift(preferred);
     }
+    // Ahead of that, the payoff or the landfall permanent to cast before
+    // the turn's other plays (above): scored first, it wins every tie.
+    const first = payoff ?? landfall;
+    const firstAt = first === undefined || first === null ? -1 : candidates.indexOf(first);
+    if (firstAt > 0) candidates.unshift(...candidates.splice(firstAt, 1));
 
     // Under the `"acting"` rollout, passing is scored with the spells our own
     // seat casts later in the turn, so it ties with casting the first of them

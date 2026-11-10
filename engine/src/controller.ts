@@ -2253,8 +2253,19 @@ export function payoffFirst<T extends Action>(
     }
     const name = view.state.objects[offer.card]?.cardName ?? "";
     if (isCastPayoff(registry, name)) {
+      // A spell it would see: one its trigger's filter takes (Beast
+      // Whisperer's creature spells, not the Opt that used to count — the
+      // bot audit's Q7, 2026-11-10).
+      const filters = registry.get(name).triggered.flatMap((ability) => {
+        const trigger = ability.trigger;
+        return trigger.on === "cast-spell" && trigger.who === "you" ? [trigger.filter] : [];
+      });
+      const triggers = (card: ObjectId): boolean =>
+        filters.some(
+          (filter) => filter === undefined || matchesFilter(view.state, registry, card, filter, { you: offer.player }),
+        );
       const after = view.legalActionsAfter?.(offer);
-      if (after?.some((a) => a.kind === "cast-spell" && a.card !== offer.card)) return offer;
+      if (after?.some((a) => a.kind === "cast-spell" && a.card !== offer.card && triggers(a.card))) return offer;
       continue;
     }
     const filters = entersPayoffFilters(registry, name);
