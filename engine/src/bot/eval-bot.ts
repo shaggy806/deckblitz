@@ -1094,16 +1094,22 @@ export class EvalBotController extends HeuristicBotController {
     // A creature that fetches by sacrificing itself (Sakura-Tribe Elder) joins
     // them at the end of the turn before ours (`isCreatureFetchDue`): the
     // evaluation kept the 0/2 over the land and never ramped.
-    const fetch = lands.length === 0 && landfall === undefined ? fetches[0] : undefined;
+    // The land rules, as one answer: asked here unless a landfall permanent
+    // waits for the search, and after that search if it passed — a land
+    // drop is never weighed against passing, whichever way it got there
+    // (seen in `bot:diff`, 2026-11-10: a play held for combat turned the
+    // answer to a pass, and two lands stayed in hand beside Hedron Crab).
+    const landRule = (): Action | null => {
+    const fetch = lands.length === 0 ? fetches[0] : undefined;
     if (fetch !== undefined) {
       this.lastDecision = audit("priority", null, "fetch");
       return fetch;
     }
-    if (lands.length === 1 && landfall === undefined) {
+    if (lands.length === 1) {
       this.lastDecision = audit("priority", null, "only land");
       return lands[0];
     }
-    if (lands.length > 1 && landfall === undefined) {
+    if (lands.length > 1) {
       // v1's pick goes first, so it wins every tie: the rollouts pass our own
       // seat for the rest of the turn, so a land that lets us cast a spell now
       // scores no better than one that doesn't, and every basic ties. v1
@@ -1161,6 +1167,12 @@ export class EvalBotController extends HeuristicBotController {
       }
       this.lastDecision = audit("priority", landBudget, "land search");
       return bestLand;
+    }
+    return null;
+    };
+    if (landfall === undefined) {
+      const land = landRule();
+      if (land !== null) return land;
     }
 
     // Passing is a candidate like any other, rolled out to the same horizon.
@@ -1386,6 +1398,10 @@ export class EvalBotController extends HeuristicBotController {
         this.lastWipePayoff = { wipe: best, payoff };
         best = payoff;
       }
+    }
+    if (best.type === "pass-priority" && landfall !== undefined) {
+      const land = landRule();
+      if (land !== null) return land;
     }
     this.lastPassFallback = cantrip;
     if (best.type === "pass-priority" && cantrip !== null) best = cantrip;
