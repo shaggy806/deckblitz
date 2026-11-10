@@ -1,5 +1,5 @@
 Top 5000 Commander cards by EDHREC popularity (fetched 2026-09-26)
-4885 already implemented / 115 missing (marks refreshed 2026-11-09)
+4886 already implemented / 114 missing (marks refreshed 2026-11-10)
 Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 
 [x]     1  Sol Ring                                 {1}              Artifact
@@ -4279,7 +4279,7 @@ Legend: [x] name already exists in cards/pool/   [ ] not yet authored
 [x]  4286  Spawning Pit                             {2}              Artifact
 [x]  4287  Navigation Orb                           {3}              Artifact
 [x]  4288  Umbra Mystic                             {2}{W}           Creature — Human Wizard
-[ ]  4289  Tyvar Kell                               {2}{G}{G}        Legendary Planeswalker — Tyvar
+[x]  4289  Tyvar Kell                               {2}{G}{G}        Legendary Planeswalker — Tyvar
 [x]  4290  Riveteers Ascendancy                     {B}{R}{G}        Enchantment
 [x]  4291  Submerge                                 {4}{U}           Instant
 [x]  4292  Spectral Deluge                          {4}{U}{U}        Sorcery
