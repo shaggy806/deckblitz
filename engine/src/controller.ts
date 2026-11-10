@@ -68,7 +68,7 @@ export type ReplacementOrderOffer = Extract<LegalAction, { kind: "replacement-or
 /** A `choose-number` offer — see `PlayerController.chooseNumber`. */
 export type ChooseNumberOffer = Extract<LegalAction, { kind: "choose-number" }>;
 import type { EnterAttackingChoice, GameObject, GameState, TriggerOrderEntry } from "./state.js";
-import { activePlayerOf, printedCardName } from "./state.js";
+import { activePlayerOf, printedCardName, rulesTextName } from "./state.js";
 import { anyNumberSlot, concatModeSpecs, groupBounds, groupReadsX, isOptionalSpec, slotOptions, targetsFillable } from "./target.js";
 import type { TargetFacts, TargetRef, TargetSpec } from "./target.js";
 import { legalTargets, stateTargetFacts } from "./targeting.js";
@@ -3035,9 +3035,44 @@ export class HeuristicBotController extends AutomaticController {
     if (legal.kind !== "cast-spell" || !this.registry.has(legal.cardName)) return false;
     if (legal.castModal !== undefined || legal.face !== undefined) return false;
     const def = this.registry.get(legal.cardName);
-    if (!isCardFlow(def.effect)) return false;
+    // A sacrifice for cards (Deadly Dispute, Village Rites) gives up a card's
+    // worth of board too, so it's card flow only when what it pays with —
+    // the cheapest choice, as the search pays — is spare (`isSpareFodder`).
+    let given = 0;
+    if (legal.sacrifice !== undefined) {
+      const fodder = this.cheapestPermanents(state, legal.sacrifice.choices, 1)[0];
+      if (fodder === undefined || !this.isSpareFodder(state, fodder)) return false;
+      given = 1;
+    }
+    if (!isCardFlow(def.effect, this.registry, given)) return false;
     if (def.types.includes("instant")) return this.isEndOfTurnBeforeOurs(state);
     return def.types.includes("sorcery");
+  }
+
+  /**
+   * A permanent a sacrifice for cards gives up nothing real for: a token, or
+   * a nontoken creature, not a commander, of 4 power and toughness together
+   * or less, whose only abilities are keywords and a trigger on its own
+   * entering — Grizzly Bears, or Wood Elves once its land is found: a body,
+   * and two cards beat it. The evaluation can't see that, pricing a creature
+   * at two and a half cards whatever it does, so v2 held Deadly Dispute and
+   * Village Rites with a Grizzly Bears to pay (2026-11-09). A creature with
+   * anything ongoing (Blood Artist, a mana elf, a lord) is never spare.
+   */
+  protected isSpareFodder(state: GameState, id: ObjectId): boolean {
+    const object = state.objects[id];
+    if (object === undefined || object.isCommander === true) return false;
+    if (object.isToken === true) return true;
+    const characteristics = computeCharacteristics(state, this.registry, id);
+    if (!characteristics.types.includes("creature")) return false;
+    if (characteristics.power + characteristics.toughness > 4) return false;
+    const name = rulesTextName(object);
+    if (!this.registry.has(name)) return false;
+    const def = this.registry.get(name);
+    if ((def.static ?? []).length > 0 || (def.activated ?? []).length > 0) return false;
+    return (def.triggered ?? []).every(
+      (t) => t.trigger.on === "enters-battlefield" && "who" in t.trigger && t.trigger.who === "self",
+    );
   }
 
   /**
@@ -4932,8 +4967,8 @@ type Sweep = Extract<
  * card down outside a graveyard deck. A draw aimed at a player counts only
  * when the bot aims it at itself (`aimedOnlyAt` in `bot/eval-bot.ts`).
  */
-function isCardFlow(effect: EffectSpec | null | undefined): boolean {
-  let gained = 0;
+function isCardFlow(effect: EffectSpec | null | undefined, registry: CardRegistry, given = 0): boolean {
+  let gained = -given;
   const count = (a: unknown): number | null => (typeof a === "number" ? a : null);
   const walk = (e: EffectSpec | null | undefined): boolean => {
     if (e === null || e === undefined) return true;
@@ -4981,6 +5016,12 @@ function isCardFlow(effect: EffectSpec | null | undefined): boolean {
         if (n === null) return false;
         gained += n;
         return true;
+      }
+      // A Treasure, Clue or Food beside the cards (Deadly Dispute's): spent
+      // by sacrificing itself, it adds a use, never a cost.
+      case "create-token": {
+        const token = typeof e.token === "string" && registry.has(e.token) ? registry.get(e.token) : null;
+        return token !== null && (token.activated ?? []).some((a) => a.cost.sacrifice === "self");
       }
       case "sequence":
         return e.effects.every(walk);

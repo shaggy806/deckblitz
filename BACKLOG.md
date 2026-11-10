@@ -638,7 +638,11 @@ Shiko or the other spell, and haste enablers in the crackback).
   record (`docs/plans/bot-v3-search.md`) is why it stays within our own turn.
 - **The autopsies' open bot items** (`docs/plans/deck-autopsies.md`, "Left"): token payoffs
   beyond engines (sacrifice outlets, leaves-the-battlefield); premium removal fired at weak
-  targets past the first two rounds.
+  targets past the first two rounds. Probed 2026-11-09: Yawgmoth, Priest of Forgotten Gods, a
+  one-sacrifice Blood Artist kill and Deadly Dispute in response to removal are right; Dispute
+  and Village Rites on a spare creature now are (`isSpareFodder`). **Left: a kill that takes
+  several sacrifices** — every opponent at 2 with Viscera Seer, Blood Artist and two tokens, both
+  bots pass: one drain kills nobody, and nothing aims a second trigger where the first went.
 - **Explore aiming bot removal by EDHREC rank or salt score** (the user, 2026-11-06): a bot picks
   removal targets by simulated board value alone; try weighting the pick by how played or how hated
   a card is (`cards/edhrec-rank.ts` has the rank, `cards/salt-score.ts` the salt score since
