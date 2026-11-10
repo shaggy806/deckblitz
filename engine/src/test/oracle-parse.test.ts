@@ -5653,6 +5653,13 @@ describe("damage by this source, switches, defending-player restrictions, a targ
     expect(repay.effect).toEqual({ kind: "set-life-total", who: "each-player", amount: { amongPlayers: "least", of: { lifeTotal: "each" } } });
     const stone = face("Sorcery", "Your life total becomes half your starting life total, rounded up.");
     expect(stone.effect).toEqual({ kind: "set-life-total", who: "you", amount: { half: { startingLifeTotal: true }, round: "up" } });
+    // Rule 701.10d: doubled is twice what it is.
+    const enforcer = face("Creature — Angel", "Whenever this creature attacks, double your life total.");
+    expect(enforcer.triggered[0].effect).toEqual({
+      kind: "set-life-total",
+      who: "you",
+      amount: { product: [{ lifeTotal: "you" }, 2] },
+    });
     const mercy = face("Sorcery", "Your life total becomes equal to your starting life total.");
     expect(mercy.effect).toEqual({ kind: "set-life-total", who: "you", amount: { startingLifeTotal: true } });
     // "Becomes X" with nothing reading X isn't read.

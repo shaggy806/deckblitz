@@ -2193,7 +2193,8 @@
   "replacement:active-prevention-then",
   "replacement:token-event-becomes-with-decision",
   "trigger:self-put-into-graveyard-from-library",
-  "effect:trigger-spell-gains-keyword"
+  "effect:trigger-spell-gains-keyword",
+  "effect:double-life-total"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

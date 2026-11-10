@@ -4198,6 +4198,11 @@ export function parseSentence(sentence, ctx) {
       }
     }
   }
+  // "Double your life total" (rule 701.10d: a gain or loss up to twice what
+  // it is — Live Long and Prosper, Angelic Enforcer's attack trigger).
+  if (/^double your life total\.?$/i.test(s)) {
+    return { kind: "set-life-total", who: "you", amount: { product: [{ lifeTotal: "you" }, 2] } };
+  }
   if ((m = re(`(?:you )?gain ${N} life`).exec(s))) return { kind: "gain-life", amount: amount(m[1]) };
   if ((m = re(`each opponent loses ${N} life`).exec(s))) {
     return { kind: "lose-life", amount: amount(m[1]), who: "each-opponent" };
