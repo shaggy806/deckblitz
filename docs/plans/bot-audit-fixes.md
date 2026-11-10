@@ -1,0 +1,180 @@
+# Fixing what the bot audit found
+
+Status: **proposed order of work** (2026-11-10); nothing built. The findings, their evidence and
+their finding numbers (S1-S8, Q1-Q8) are in `bot-audit-2026-11.md`; this file is only the order,
+what each step changes, and how each is checked. Four choices near the end are the user's.
+
+## Principles
+
+- **One finding, one commit, one scenario.** Every decision-quality fix lands with the gate
+  scenario built from the audit's own position, watched fail on today's code first.
+- **Ship on the gate and a sane `bot:diff`**, as bot changes do now. No A/B is planned before
+  step 5; the audit's own point is that an A/B at count budgets can't see most of this.
+- **Speed is measured, before and after, on the same positions.** The audit's probes become
+  tracked tools in step 0 so "17-27% faster" can be re-measured on the fix itself, not on a stub.
+- **Smallest sound change first.** Where the audit's checkers narrowed a fix (the window memo,
+  the characteristics cache, the deadline's callers), the narrow form is what's planned.
+
+## Step 0. Tools the rest depends on (half a session)
+
+Nothing here changes how a bot plays.
+
+1. **A clock the tests can drive.** `EvalBotOptions.now` (default `Date.now`), read by
+   `onClock`, `outOfTime` and `timed`. A scenario can then say "the clock runs out during the
+   first simulation" through the real path; today's `maxSimulations: 1` stand-in is a different
+   path and stays for what it tests.
+2. **The probes, tracked.** Move from `.scratch/bot-audit/` into `engine/scripts/`:
+   `anatomy.mjs` as `bot:anatomy` (unit costs, ticks, ms a tick, from a snapshot), `harvest.mjs`
+   as `bot:harvest` (games at a wall-clock budget, one row per searched decision, the
+   by-board-size table), `expiry.mjs` folded into scenarios once (1) exists. `bot:harvest` draws
+   from `BENCH_DECKS` by default, so nothing from the pilot branch is needed or named.
+3. **Three or four big-board snapshots checked in** under `engine/data/bot-positions/`, taken
+   from bench-deck games (`seed-50-t40` is one): the fixed positions every speed step is timed
+   on. Bench decks only, so they are publishable.
+4. `--budget` on `bot:replay`; `bot:behaviour`'s default budget read from one exported
+   `LIVE_BOT_BUDGET_MS` that `room.ts` also uses.
+
+Done when: `npm run bot:anatomy -w engine -- --from <snapshot>` prints the audit's numbers for
+that position, and a scenario using `now` fails on today's S1 behaviour.
+
+## Step 1. Four misplays, each a few lines (one session)
+
+Independent of each other; any order. Each gets its scenario in `scenarios.ts`.
+
+| Finding | Change | Scenario |
+| --- | --- | --- |
+| Q3 sacrifice fodder | `cheapestPermanents` (and `withSacrificeChoices`' single candidate) rank a permanent that is the ability's own source, or has a dies / sacrifice / leaves trigger, after every other choice, reusing `isSpareFodder`'s test. If the cheapest and the cheapest-spare differ, offer both. | Seer, Blood Artist, two Grizzly Bears, opponents at 2 behind blockers: sacrifices a Bear, and an opponent is dead by end of turn. |
+| Q6 planner past the crackback guard | `planLines` drops `lastUnsafe` moves from its first moves; the chosen line's board is checked with `crackbackLethal` after each step that taps or sacrifices a creature of ours, and a failing line is refused. `continueTurnPlan` drops the plan if the guard is set and the step would be unsafe now. | The gate's station position with one more land in play (the checker's position), and the Memnite variant: passes instead of stationing. |
+| Q7 "payoff first", "landfall first" | In v2 only, both stop returning: the pick moves to the front of the candidate list and wins ties. v1 keeps its rule (it has no search). `payoffFirst`'s cast branch also learns to ask whether the follow-up would trigger the payoff. | Beast Whisperer, Opt and Murder against a lethal Shivan Dragon: Murder is cast. Jaddi Offshoot, a land and Murder: the same. The five existing payoff scenarios and the two landfall ones stay green. |
+| Q5 counters | `UNSCORED_COUNTERS` takes `HARMFUL_COUNTERS` from `target-polarity.ts` plus `age`; a creature with a stun counter isn't an untapped or deterring body. | Evaluation-level test: stun on theirs doesn't lower our score, stun or age on ours doesn't raise it. |
+
+Check: gate (now 182 + ~7), `bot:diff` against `origin/main` on six bench games read for
+anything that isn't one of these four. Expected cost: the "payoff first" decisions go from ~5 ms
+to 120-250 ms (measured in the audit); nothing else moves.
+
+Also here, docs only: the three `BACKLOG.md` corrections the audit lists (the baselines line,
+the several-sacrifice line, the `followUps` line) and the stale comments (`simulate.ts`'s 0.3 ms,
+`eval-bot.ts`'s header, `bot-behaviour.mjs`'s 300 ms, the `ab-bench` skill's 18 workers).
+
+## Step 2. The clock (one session, after step 0)
+
+In this order, because each makes the next testable:
+
+1. **S1, an expired search.** When the clock stopped the main search with no candidate scored,
+   return v1's pick if it is a cast that survived `listCandidates`; otherwise pass as now. Match
+   v1's pick to a candidate by offer (card + via + face, or source + ability), not by
+   `JSON.stringify`. Fix the comment at `eval-bot.ts:1148-1157` and `room.ts`'s.
+2. **Skip a baseline that can't fit.** Keep the last decision's longest simulation on the
+   controller, keyed by turn; when it alone exceeds the budget, answer at zero simulations by
+   (1)'s rule. This is the change that turns a 1-3 s window into tens of ms.
+3. **v1's proposal must not count as an activation** (`controller.ts:4589-4592`): count where
+   the action is returned to the engine, not where it is proposed. A precondition for leaning on
+   v1's pick.
+4. **S2, a deadline inside a rollout.** One shared predicate wrapper (`withDeadline(pred,
+   until, now)`) used by `horizonTest` and by every inline predicate (`simulateSettled`,
+   `simulateCombat`, `simulateTurns`, `simulatePlan`, `turn-plan.ts`'s three); it throws one
+   module-level `ABORTED`. `simulate*` return a distinct aborted result, not `null`. The four
+   callers that misread a null are fixed in the same commit: `tapsIntoCrackback` (aborted is
+   "unsafe"), `nextTurnValue`, the attackers search (falls back to v1's swing), the pass baseline
+   (falls to rule 1). The stand-in's nested `bestDecision` inherits the outer deadline. Count
+   budgets (`until === Infinity`) take none of this, so the gate and benches stay deterministic.
+5. **The server can see a slow decision**: beside the histogram, a max since start, counts over
+   the budget and over twice it, and one `console.warn` per over-budget decision with board size
+   and `lastDecision`. `/status` shows the max and the count.
+
+Check: scenarios through `now` for 1, 2 and 4; `bot:harvest` before and after on the same seeds
+— decisions over 1.5 s should go to about zero and the share of one-simulation passes with it;
+the gate at `timeBudgetMs: 1000` still 182/182; server and client suites.
+
+Deploy after this step. It is the part a player can feel, and (5) is the only way to learn what
+the live box really does.
+
+## Step 3. Engine cost per tick (one session, engine only)
+
+1. **No trigger scan for `priority-passed` / `priority-received`** (S6). First read every branch
+   of the trigger matcher for a kind that ignores event type, and grep the card pool's trigger
+   kinds once more; then skip `detectTriggers` for those two types in `emit`. Keep the cache
+   flush. Check: the whole engine suite, the 2- and 4-player fuzzers with `MTG_CACHE_CHECK=1`, the
+   situation fuzzer, and end-state hashes equal on the step-0 snapshots. Expect 15-25% off a
+   rollout on ordinary boards, ~5% on token turns (the audit measured it by stubbing).
+2. **Memoise `typeGrantSources`, `contributingStaticSources` and the ability-grant sources** on
+   (state, mutation epoch), the way `staticLossesMemo` is. Same checks. Expect 5-15% (a guess).
+3. **Only if (1) and (2) land clean and `bot:anatomy` still shows them**: the journal's uncached
+   last-known snapshot per entered permanent, and building the resolution context lazily. Each is
+   a token-turn cost; neither is planned until measured again.
+
+Not planned: a general epoch-keyed characteristics cache (unsound as first proposed); making the
+name helpers faster (their time is scan volume, which (2) removes); anything in the evaluation
+or the clone.
+
+## Step 4. Search that buys nothing (one or two sessions)
+
+1. **S5, narrow `castPayoff`.** True only on our own turn, with the payoff on the battlefield or
+   castable this turn, and another castable spell its trigger's filter would see. Keep the Shiko
+   and Guttersnipe scenarios green. Check with `bot:harvest`: the share of searches under
+   "acting" (30% today) and ms a simulation.
+2. **S3, a memo for repeated empty-stack windows.** A completed, uncut search that passed is
+   remembered for the turn under: the candidate set; whether attackers and blockers are
+   declared; battlefield ids with tapped state, damage and counters; life totals; our hand; every
+   hand size; until-end-of-turn effects; who is alive. A hit skips the search and v1's `act`,
+   then still runs the step-dependent rules (`isCantripDue`, `isSuspendDue`,
+   `holdsCreatureFetch`, `holdsForASpell`) and never applies at the last window before our
+   untap. Two things to settle before building: that a rollout of an identical state is
+   deterministic (the audit didn't check), and the signature's cost against a search's.
+   Check: a `bot:diff`-style run in which the memo's answer is compared with a real search at
+   every hit — it must agree in all of them before the search is actually skipped.
+3. **S4, the planner.** Score each child as it is settled and expand best first, so a level the
+   budget cuts keeps what it paid for; under the default rollout take depth-0 values from the
+   one-move search. Compare plan lines with a baseline scored under the same policy (the
+   "acting" mismatch). The budget stays at 48: the planner is what carries the sequencing rules
+   (Q1).
+
+## Step 5. The evaluation, and the rules it would retire (several sessions; needs a bench)
+
+The slow part, and the only one where "is the bot stronger" is the question.
+
+1. **Asymmetric scenarios first** (Q4): the counterspell positions with another player ahead,
+   Smothering Tithe and Rhystic Study on the stack, a tutor in hand, as *training* scenarios —
+   they say what right looks like before any weight moves.
+2. **Hand quality** (Q2): a per-card worth in hand from `effect-worth.ts` and the board features,
+   discounted by castability, scaled so an average card stays near 2. Read with `bot:diff`; then
+   try `isCantripDue`, the tutor branch, `isFreeFetch` and `isSuspendDue` off one at a time
+   (`ablate.mjs`'s method, moved into `engine/scripts` in step 0) and delete each rule the gate
+   no longer needs.
+3. **Engines that aren't draw or creature tokens** (Q4): resource tokens, drain per trigger,
+   cost reduction as mana, through `engineRate`'s consumers.
+4. **Interaction scored on the affected opponent at full weight**, for counterspells, removal
+   and wipes only.
+5. **Retire the sequencing rules** the planner now covers — `reducerFirst`, `payoffBeforeWipe`,
+   `holdsTapForCombat` — one at a time against `bot:diff` on real games, after step 1 has made
+   "payoff first" a hint. Write a gate scenario that makes `hideawayFirst`, `holdsForNextSpell`
+   and "only land" fire, or delete them. Delete `followUps`, `scoreFrom` and
+   `FOLLOW_UP_SIMULATIONS` once Q6's check lives in the planner.
+
+One A/B at the end of this step, at the live budget, paired by seed if the tooling exists by
+then (`docs-challenge` in the audit's notes): it is the first point at which strength, not
+correctness or speed, is what changed.
+
+## Housekeeping, any time
+
+Bench pools default to 8 workers and record the count in `bench-log.jsonl`; re-measure the
+32 MB young-generation cap before keeping it; benches stop a game on a turn cap rather than
+wall time, and list what they dropped.
+
+## What this plan does not take on
+
+- **Opponents that respond inside a rollout** (Q8) and holding instants for a better moment: a
+  design of its own, after step 5 shows what the evaluation alone fixes.
+- **Hidden information** (rollouts read the real library order): unprobed in the audit.
+- **A worker thread for bots**: reconsider once step 2's server figures exist.
+
+## Choices for the user
+
+1. **Start with step 1 or step 2?** Recommended: step 0, then 1, then 2. Step 1 is small and
+   each fix is a watched misplay; step 2 is what a player feels on a big board but needs step
+   0's clock to test.
+2. **Deploy after step 2**, to read the live box's decision times before steps 3-4?
+   Recommended: yes.
+3. **Delete `followUps`** (about 300 unreachable lines) in step 5, or keep it as the `plan:
+   "off"` fallback? Recommended: delete, once the planner has the crackback check.
+4. **The step 5 A/B** costs hours. Recommended: one, at the end of step 5, and none before.
