@@ -149,10 +149,33 @@ const BOT_MIN_THINK_MS = 350;
  * can now take up to a second, holding up the other rooms on its thread as
  * long (`docs/plans/room-shards.md`). The search returns its best candidate
  * so far when the budget runs out, having scored passing and v1's own choice
- * first, so an expired search degrades to v1-quality play rather than to
- * nothing, and a plan past the deadline gives way to the one-move answer.
+ * first, and a plan past the deadline gives way to the one-move answer. A
+ * rollout still running at the deadline is stopped there; a search stopped
+ * before any candidate was scored plays v1's cast unscored, or passes; and
+ * once one rollout hasn't fit, the rest of that turn is answered without one
+ * (the bot audit's S1 and S2, 2026-11-10 — until then such a search passed,
+ * whatever v1 wanted, a second or more late).
  */
 const BOT_DECISION_BUDGET_MS = LIVE_BOT_BUDGET_MS;
+
+/**
+ * This thread's bot decisions since it started: the slowest, and how many
+ * ran past the budget and past twice it. Beside the histogram below, which
+ * `LoadMonitor` empties every ten seconds and reads a p99 from — over every
+ * `act`, the trivial passes included, so one 3 s decision among a hundred
+ * passes never showed (the bot audit's S8).
+ */
+export interface BotDecisionTotals {
+  readonly maxMs: number;
+  readonly overBudget: number;
+  readonly overTwiceBudget: number;
+  /** The budget they were measured against (`BOT_DECISION_BUDGET_MS`). */
+  readonly budgetMs: number;
+}
+
+const decisionTotals = { maxMs: 0, overBudget: 0, overTwiceBudget: 0 };
+
+export const botDecisionTotals = (): BotDecisionTotals => ({ ...decisionTotals, budgetMs: BOT_DECISION_BUDGET_MS });
 /** Where each bot decision's time goes, in microseconds. */
 export interface DecisionRecorder {
   record(micros: number): void;
@@ -1150,9 +1173,27 @@ export class Room {
     this.searchTrace = [];
     const asked = performance.now();
     const action = forAnother ? standInFor(bot, askedPlayerNow).act(view) : bot.act(view);
-    decisionRecorder?.record(Math.max(1, Math.round((performance.now() - asked) * 1000)));
+    const took = performance.now() - asked;
+    decisionRecorder?.record(Math.max(1, Math.round(took * 1000)));
+    const audit = "lastDecision" in bot ? ((bot as { lastDecision: DecisionAudit | null }).lastDecision ?? null) : null;
+    if (took > decisionTotals.maxMs) decisionTotals.maxMs = Math.round(took);
+    if (took > BOT_DECISION_BUDGET_MS) {
+      decisionTotals.overBudget += 1;
+      if (took > 2 * BOT_DECISION_BUDGET_MS) decisionTotals.overTwiceBudget += 1;
+      // One line a slow decision, with what says why: the board's size and
+      // which search it was.
+      const { turn, zones } = this.game.state;
+      console.warn(
+        `[bot] slow decision: ${Math.round(took)} ms (budget ${BOT_DECISION_BUDGET_MS}), seat ${seat}, ` +
+          `turn ${turn.number} ${turn.step}, ${zones.shared.battlefield.length} permanents, ` +
+          `${zones.shared.stack.length} on the stack; ` +
+          (audit === null
+            ? "no search recorded"
+            : `${audit.kind} via ${audit.via}, ${audit.simulations} simulation(s) in ${Math.round(audit.ms)} ms` +
+              `${audit.expired ? ", expired" : ""}${audit.cut ? ", cut" : ""}`),
+      );
+    }
     if (captured !== null) {
-      const audit = "lastDecision" in bot ? ((bot as { lastDecision: DecisionAudit | null }).lastDecision ?? null) : null;
       this.captures?.record(seat, captured, action, { audit, trace: this.searchTrace });
     }
     this.searchTrace = [];

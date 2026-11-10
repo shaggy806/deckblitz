@@ -19,7 +19,7 @@ import type { ImportDeps } from "./import-deck.js";
 import { LoadMonitor } from "./load-monitor.js";
 import { PendingRoom } from "./pending-room.js";
 import { Room } from "./room.js";
-import { botDecisions } from "./bot-decisions.js";
+import { botDecisions, botDecisionTotals } from "./bot-decisions.js";
 import { RoomManager } from "./room-manager.js";
 import { RoomService } from "./room-service.js";
 import type { ConnId, RoomEvent } from "./room-host.js";
@@ -129,7 +129,7 @@ export function createShard(
     },
   );
 
-  const monitor = new LoadMonitor({ decisions: botDecisions() });
+  const monitor = new LoadMonitor({ decisions: botDecisions(), totals: botDecisionTotals });
   const load = (): ShardLoad => ({ ...monitor.read(), rooms: manager.all().length });
   const loadTimer = setInterval(() => post({ t: "load", report: load() }, []), config.loadReportMs);
   loadTimer.unref();

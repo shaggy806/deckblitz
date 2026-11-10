@@ -26,6 +26,7 @@ import type { Server } from "node:http";
 import type { RecordableHistogram } from "node:perf_hooks";
 import { LoadMonitor } from "./load-monitor.js";
 import type { LoadReport } from "./load-monitor.js";
+import type { BotDecisionTotals } from "./room.js";
 
 export interface SeatSummary {
   readonly player: string;
@@ -147,6 +148,15 @@ const duration = (ms: number): string => {
   return `${h}h ${m % 60}m`;
 };
 
+/** A thread's bot decisions: the window's p99, then since it started the
+ * slowest and how many ran over the budget (and over twice it). */
+const botLine = (load: LoadReport): string =>
+  `${load.botDecisionP99Ms === null ? "—" : `${load.botDecisionP99Ms} ms`}` +
+  (load.botDecisionMaxMs === null
+    ? ""
+    : `, max ${load.botDecisionMaxMs} ms, ${load.botDecisionsOverBudget ?? 0} over ${load.botDecisionBudgetMs ?? 0} ms` +
+      ` (${load.botDecisionsOverTwiceBudget ?? 0} over ${2 * (load.botDecisionBudgetMs ?? 0)})`);
+
 const loadLine = (load: LoadReport): string =>
   `delay p50 ${load.delayP50Ms} ms, p99 ${load.delayP99Ms} ms, max ${load.delayMaxMs} ms; ` +
   `busy ${Math.round(load.elu * 100)}%`;
@@ -162,6 +172,9 @@ export function renderStatus(snapshot: StatusSnapshot): string {
   );
   lines.push(`  memory   rss ${snapshot.rssMb} MB, heap ${snapshot.heapUsedMb} MB`);
   if (snapshot.main !== null) lines.push(`  loop     ${loadLine(snapshot.main)}`);
+  if (snapshot.main !== null && snapshot.main.botDecisionMaxMs !== null) {
+    lines.push(`  bots     p99 ${botLine(snapshot.main)}`);
+  }
   lines.push(
     `  rooms    ${snapshot.counts.total} live — ${snapshot.counts.waiting} waiting, ` +
       `${snapshot.counts.playing} playing, ${snapshot.counts.finished} finished` +
@@ -173,7 +186,7 @@ export function renderStatus(snapshot: StatusSnapshot): string {
     lines.push("");
     lines.push(
       `  ${"SHARD".padEnd(7)}${"STATE".padEnd(14)}${"ROOMS w/p/f".padEnd(13)}${"BUSY".padEnd(6)}` +
-        `${"DELAY p50/p99".padEnd(16)}${"HEAP".padEnd(8)}BOT p99`,
+        `${"DELAY p50/p99".padEnd(16)}${"HEAP".padEnd(8)}BOT p99, since start`,
     );
     for (const shard of snapshot.shards) {
       const state =
@@ -193,7 +206,7 @@ export function renderStatus(snapshot: StatusSnapshot): string {
           `${(load === null ? "—" : `${Math.round(load.elu * 100)}%`).padEnd(6)}` +
           `${(load === null ? "—" : `${load.delayP50Ms}/${load.delayP99Ms} ms`).padEnd(16)}` +
           `${(load === null ? "—" : `${load.heapUsedMb} MB`).padEnd(8)}` +
-          `${load?.botDecisionP99Ms === null || load === null ? "—" : `${load.botDecisionP99Ms} ms`}`,
+          `${load === null ? "—" : botLine(load)}`,
       );
     }
   }
@@ -244,8 +257,13 @@ export function startStatusServer(
   port: number,
   /** This thread's bot decision times, when it runs the rooms itself. */
   decisions?: RecordableHistogram,
+  /** And its totals since it started (`botDecisionTotals`). */
+  totals?: () => BotDecisionTotals,
 ): Server {
-  const monitor = new LoadMonitor(decisions !== undefined ? { decisions } : {});
+  const monitor = new LoadMonitor({
+    ...(decisions !== undefined ? { decisions } : {}),
+    ...(totals !== undefined ? { totals } : {}),
+  });
   const snapshot = async (): Promise<StatusSnapshot> => assembleStatus(await source(), monitor.read());
   const server = createServer((req, res) => {
     const url = (req.url ?? "/").split("?")[0];

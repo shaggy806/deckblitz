@@ -10,6 +10,8 @@ import { createHistogram } from "node:perf_hooks";
 import type { RecordableHistogram } from "node:perf_hooks";
 import { recordBotDecisionsTo } from "./room.js";
 
+export { botDecisionTotals } from "./room.js";
+
 let histogram: RecordableHistogram | null = null;
 
 /** This thread's histogram, recording from the first call on. */

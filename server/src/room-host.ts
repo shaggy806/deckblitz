@@ -12,6 +12,7 @@ import type { RecordableHistogram } from "node:perf_hooks";
 import type { ClientMessage } from "protocol";
 import type { StatusParts } from "./status-server.js";
 import type { ImportSink } from "./import-route.js";
+import type { BotDecisionTotals } from "./room.js";
 
 /** A socket's id, given by the transport: incrementing, never reused, so a
  * late message about a closed socket can't reach its successor. */
@@ -64,6 +65,8 @@ export interface RoomHost {
   importDeck(text: string, sink: ImportSink): void;
   /** Bot decision times on this thread, when the host runs rooms on it. */
   readonly decisions?: RecordableHistogram;
+  /** And that thread's totals since it started (`botDecisionTotals`). */
+  readonly decisionTotals?: () => BotDecisionTotals;
   /** Stops the host's own timers (and whatever else it runs). */
   stop(): Promise<void>;
 }

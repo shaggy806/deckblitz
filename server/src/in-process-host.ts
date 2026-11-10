@@ -14,7 +14,7 @@ import type { ClientLink, ConnId, RoomEvent, RoomHost } from "./room-host.js";
 import { allocateRoomCode } from "./room-code.js";
 import { sendMessage } from "./transport.js";
 import type { RoomManager } from "./room-manager.js";
-import { botDecisions } from "./bot-decisions.js";
+import { botDecisions, botDecisionTotals } from "./bot-decisions.js";
 import { RoomService } from "./room-service.js";
 import type { RoomServerOptions } from "./room-service.js";
 import { statusParts } from "./status.js";
@@ -57,6 +57,7 @@ const ONE_SHARD: readonly ShardCandidate[] = [{ index: 0, up: true, elu: null, d
 export class InProcessRoomHost implements RoomHost {
   readonly service: RoomService;
   readonly decisions = botDecisions();
+  readonly decisionTotals = botDecisionTotals;
   /** The open sockets, by id: a message the service sends to one that has
    * closed since goes nowhere. */
   private readonly links = new Map<ConnId, ClientLink>();

@@ -103,6 +103,10 @@ describe("status snapshot", () => {
       heapUsedMb: 120,
       botDecisions: 40,
       botDecisionP99Ms: 310,
+      botDecisionMaxMs: 2140,
+      botDecisionsOverBudget: 3,
+      botDecisionsOverTwiceBudget: 1,
+      botDecisionBudgetMs: 1000,
       windowMs: 10_000,
     };
     const shard = (index: number, over: Partial<ShardStatus> = {}): ShardStatus => ({
@@ -133,7 +137,7 @@ describe("status snapshot", () => {
     );
     expect(text).toContain("delay p50 10.2 ms, p99 31.5 ms, max 80 ms; busy 25%");
     expect(text).toMatch(/SHARD/);
-    expect(text).toMatch(/\n {2}0 +up +1\/2\/0 +25% +10.2\/31.5 ms +120 MB +310 ms\n/);
+    expect(text).toMatch(/\n {2}0 +up +1\/2\/0 +25% +10.2\/31.5 ms +120 MB +310 ms, max 2140 ms, 3 over 1000 ms \(1 over 2000\)\n/);
     expect(text).toMatch(/\n {2}1 +unresponsive \(2x\)/);
     expect(text).toMatch(/\n {2}2 +restarting +1\/2\/0 +— +— +— +—\n/);
     expect(text).toMatch(/\n {2}3 +crash-looped \(5x\)/);

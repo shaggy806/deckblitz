@@ -11,6 +11,7 @@
 import { monitorEventLoopDelay, performance } from "node:perf_hooks";
 import type { EventLoopUtilization, IntervalHistogram, RecordableHistogram } from "node:perf_hooks";
 import { getHeapStatistics } from "node:v8";
+import type { BotDecisionTotals } from "./room.js";
 
 /** One thread's load over the last window. Times in milliseconds. */
 export interface LoadReport {
@@ -25,6 +26,13 @@ export interface LoadReport {
    * none, or on a thread that runs no rooms). */
   readonly botDecisions: number;
   readonly botDecisionP99Ms: number | null;
+  /** Since the thread started, not the window (`botDecisionTotals` in
+   * `room.ts`): the slowest decision, and how many ran past the bots' budget
+   * and past twice it. `null` on a thread that runs no rooms. */
+  readonly botDecisionMaxMs: number | null;
+  readonly botDecisionsOverBudget: number | null;
+  readonly botDecisionsOverTwiceBudget: number | null;
+  readonly botDecisionBudgetMs: number | null;
   /** How long the window ran. */
   readonly windowMs: number;
 }
@@ -39,6 +47,7 @@ const ms = (ns: number): number => Math.max(0, Math.round((ns / 1e6 - RESOLUTION
 export class LoadMonitor {
   private readonly delay: IntervalHistogram;
   private readonly decisions: RecordableHistogram | null;
+  private readonly totals: (() => BotDecisionTotals) | null;
   private readonly timer: ReturnType<typeof setInterval>;
   private elu: EventLoopUtilization;
   private startedAt: number;
@@ -46,10 +55,18 @@ export class LoadMonitor {
 
   /** `decisions`: a histogram of bot decision times in microseconds
    * (`BOT_DECISIONS` in `room.ts`), on a thread that runs rooms. */
-  constructor(options: { readonly windowMs?: number; readonly decisions?: RecordableHistogram } = {}) {
+  constructor(
+    options: {
+      readonly windowMs?: number;
+      readonly decisions?: RecordableHistogram;
+      /** The same thread's totals since it started (`botDecisionTotals`). */
+      readonly totals?: () => BotDecisionTotals;
+    } = {},
+  ) {
     this.delay = monitorEventLoopDelay({ resolution: RESOLUTION_MS });
     this.delay.enable();
     this.decisions = options.decisions ?? null;
+    this.totals = options.totals ?? null;
     this.elu = performance.eventLoopUtilization();
     this.startedAt = performance.now();
     this.timer = setInterval(() => {
@@ -75,6 +92,7 @@ export class LoadMonitor {
   private measure(): LoadReport {
     const decisions = this.decisions;
     const count = decisions?.count ?? 0;
+    const totals = this.totals?.() ?? null;
     return {
       elu: Math.round(performance.eventLoopUtilization(this.elu).utilization * 1000) / 1000,
       // An empty histogram reads NaN (or a huge minimum) before its first
@@ -85,6 +103,10 @@ export class LoadMonitor {
       heapUsedMb: Math.round(getHeapStatistics().used_heap_size / 1024 / 1024),
       botDecisions: count,
       botDecisionP99Ms: decisions !== null && count > 0 ? Math.round(decisions.percentile(99) / 1000) : null,
+      botDecisionMaxMs: totals?.maxMs ?? null,
+      botDecisionsOverBudget: totals?.overBudget ?? null,
+      botDecisionsOverTwiceBudget: totals?.overTwiceBudget ?? null,
+      botDecisionBudgetMs: totals?.budgetMs ?? null,
       windowMs: Math.round(performance.now() - this.startedAt),
     };
   }

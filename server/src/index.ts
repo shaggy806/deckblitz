@@ -147,7 +147,7 @@ const httpServer = createServer((req, res) => {
 
 const wss = new WebSocketServer({ server: httpServer, perMessageDeflate: COMPRESSION });
 attachTransport(wss, host);
-const statusServer = startStatusServer(() => host.status(), statusPort, host.decisions);
+const statusServer = startStatusServer(() => host.status(), statusPort, host.decisions, host.decisionTotals);
 
 httpServer.listen(port, () => {
   console.log(`Deck Blitz room server listening on ws://localhost:${port}`);
