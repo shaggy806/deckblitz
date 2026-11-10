@@ -2192,7 +2192,8 @@
   "trigger:becomes-crewed-first-time",
   "replacement:active-prevention-then",
   "replacement:token-event-becomes-with-decision",
-  "trigger:self-put-into-graveyard-from-library"
+  "trigger:self-put-into-graveyard-from-library",
+  "effect:trigger-spell-gains-keyword"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
