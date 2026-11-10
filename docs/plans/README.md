@@ -28,6 +28,8 @@ is still unscoped.
 
 `after-the-themes` (**proposed**, 2026-11-09) is the order of work once theme 15 lands: why building keys by rank stops paying (1,315 of 1,577 keys serve one card), re-attempting the top cards before building, a regression check before deploying, cutting down the manual checks, and a stopping rank for the user to set.
 
+`bot-audit-2026-11` (**proposed**, 2026-11-10) audits the bots for speed and decision quality without changing them: measured at the live 1 s budget (24 games between the pilot's decks), on CPU profiles and with the gate run one rule off at a time, each finding checked by an independent refuter. An expired search passes rather than playing v1's move; 43% of search time goes to opponents' turns; a trigger scan on every priority event is 17-27% of an ordinary rollout; three demonstrated misplays (sacrifice fodder, the planner past the crackback guard, "payoff first"); which rules around the search still hold anything up; and where it disagrees with the other records.
+
 `scaling-rooms` (**planning**) plans how the server holds more rooms at once and makes use of a bigger box: measure first (a load harness, event-loop delay on `/status`), trim the one thread's work (frames with only new events), then rooms sharded across worker threads — without which a bigger box runs the same one thread — then the box, sized from the measurement, and deploys that don't end games.
 
 `initiative-dungeons` (built 2026-10-19, but for its animation and the Forgotten Realms dungeons) designs venture into the dungeon and the

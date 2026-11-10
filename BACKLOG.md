@@ -614,6 +614,8 @@ live games for" (wraths since `threat`, pumping an opponent's attacker, the `"ac
 big boards and deep stacks under count budgets, deck biases, 1/1 tokens since `smallTokens`,
 Shiko or the other spell, and haste enablers in the crackback).
 
+- **The bot audit's findings** (2026-11-10, `docs/plans/bot-audit-2026-11.md`, proposed, nothing built) — first: an expired search should play v1's cast rather than pass, with a deadline inside a rollout; a memo for repeated empty-stack windows and a narrower `castPayoff`; no trigger scan on the two priority events; sacrifice fodder that spares the payoff, the crackback check in the turn planner, "payoff first" and "landfall first" as ordering hints; a per-card worth for the hand. It also corrects three items below: the two baselines don't both always run, the several-sacrifice kill is found with tokens, and `followUps` is unreachable by default.
+
 - **Sylvan Library's bots** (probed 2026-11-04): v2, with Lightning Bolt, Craw Wurm and Sol Ring on top, declines "draw two additional
   cards?" at every life total tried, 10 to 1000, though it pays for a land draw at 40 or more; v1 draws but never pays 4 life, even at 1000. Why not yet looked into.
 - **A bot answers "as this enters, choose odd or even" with the first option** (Ashling's Prerogative, Gollum): `decisions/choose-creature-type.ts`'s candidates skip as-enters menus, so it's legal but unaimed.
