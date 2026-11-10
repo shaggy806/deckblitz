@@ -45428,7 +45428,7 @@ controlledBy,
         continue;
       }
       if (p.act !== "cast" && p.act !== "activate" && p.act !== "become-monarch") continue;
-      if (typeof p.who !== "object") continue;
+      if (typeof p.who !== "object" || !("players" in p.who)) continue;
       const players = [...p.who.players];
       if (p.act === "become-monarch") {
         this.emit({ type: "prohibition-imposed", players, spells: false, abilities: false, monarch: true });

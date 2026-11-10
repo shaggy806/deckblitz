@@ -27,11 +27,12 @@ import {
   hasManaAbility,
   journalReader,
   pairedPartner,
+  turnStatOf,
 } from "./characteristics.js";
 import type { CastVia } from "./actions.js";
 import type { CardRegistry, CardType, Keyword, Supertype } from "./cards.js";
 import type { EffectAmount, ThisWayKind } from "./effects.js";
-import type { CardDefinition } from "./cards/define.js";
+import type { CardDefinition, TurnDid } from "./cards/define.js";
 import { goadersOf, isGoaded } from "./goad.js";
 import { hasRingBearerDesignation, isRingBearer } from "./ring.js";
 import type { Color, ManaCost, ManaOrigin, ManaSpentQuery } from "./mana.js";
@@ -884,6 +885,12 @@ export interface CardFilter {
   /** "A creature **whose controller has eight or more cards in their
    * graveyard**" (Lullmage's Domination's `targetCostReduction`). */
   readonly controllerGraveyardAtLeast?: number;
+  /** Its controller's running total of a {@link TurnStat} this turn is at
+   * least `atLeast` (1): the creatures of "each opponent **who cast a spell
+   * this turn** can't attack with creatures" (Angelic Arbiter). Read from the
+   * journal, so what the player did before the asking permanent arrived
+   * counts (its ruling). */
+  readonly controllerThisTurn?: TurnDid;
   /** A battle protected by the filtering player / anyone else (rule 310.8) —
    * Portent Tracker's "if **an opponent protects** it". Nothing that has no
    * protector matches either. */
@@ -2569,6 +2576,12 @@ export function matchesFilter(
   if (
     filter.controllerGraveyardAtLeast !== undefined &&
     (state.zones.perPlayer[controller]?.graveyard.length ?? 0) < filter.controllerGraveyardAtLeast
+  ) {
+    return false;
+  }
+  if (
+    filter.controllerThisTurn !== undefined &&
+    turnStatOf(state, controller, filter.controllerThisTurn.stat) < (filter.controllerThisTurn.atLeast ?? 1)
   ) {
     return false;
   }

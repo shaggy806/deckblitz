@@ -709,6 +709,16 @@ export type CountSpec =
  * exception, and only as a *read* of `PlayerState.spellsCastThisTurn`, for
  * an amount ("1 life for each spell you've cast this turn").
  */
+/** "Who [did this] this turn", of one player: their {@link TurnStat} has
+ * reached `atLeast` (1) — "who cast a spell this turn" is `{ stat:
+ * "spells-cast" }`, "who attacked with a creature this turn" `{ stat:
+ * "attacked" }`. On a filter (`CardFilter.controllerThisTurn`) and on who a
+ * static's prohibition binds (`PlayersWhoDid`). */
+export interface TurnDid {
+  readonly stat: TurnStat;
+  readonly atLeast?: number;
+}
+
 /** `"spells-cast"` counts every spell the player cast this turn, countered or
  * not and whatever they controlled at the time (Aetherflux Reservoir). */
 export type TurnStat =

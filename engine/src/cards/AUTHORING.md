@@ -2301,6 +2301,11 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
 - **What an opponent's search comes to** is a static: `controlsOpponentsSearching: true` ("You control your opponents
   while they're searching their libraries"), `exilesOpponentsFinds: { spendAs? }` (they exile each card they find, for
   you to play; Opposition Agent), `opponentsSearchTop: { top }` (Aven Mindcensor). Every `search-library` obeys them unwritten.
+- **"Each opponent who [did this] this turn can't …"** asks each player for themselves, through a `TurnDid` (`{ stat: TurnStat, atLeast? }`,
+  1 by default): on a prohibition, `who: { who: "opponents", thisTurn: { stat: "attacked" } }` ("each opponent who attacked with a creature
+  this turn can't cast spells"); on a filter, `controllerThisTurn: { stat: "spells-cast" }` ("each opponent who cast a spell this turn can't
+  attack with creatures" is `cant-attack` on `{ type: "creature", controlledBy: "opponent", controllerThisTurn: … }`). Angelic Arbiter. What
+  the player did before the permanent arrived counts (the journal).
 - **"Players can't search libraries"** is a `prohibits` `search` act (Mindlock Orb, Stranglehold; `causedByThemselves`, Ashiok; `ignoreCost: "{2}"`, Leonin Arbiter, rule 116.2d); "this turn" is the `prohibit` effect's (Shadow of Doubt). Every `search-library` obeys it unwritten: it finds nothing and still shuffles, a `may` or `each-player-may` around it isn't asked, and an and/or `modal` loses that mode.
 - **"Damage that would reduce your life total to less than N reduces it to N instead"** is a static,
   `damageLifeFloor: N` (Ali from Cairo; with a `condition`, Worship, Elderscale Wurm), or for a while a

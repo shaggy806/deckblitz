@@ -9,7 +9,7 @@
  */
 
 import type { CardRegistry } from "./cards/card-registry.js";
-import type { StaticAbility } from "./cards/define.js";
+import type { StaticAbility, TurnDid } from "./cards/define.js";
 import {
   computedCacheMemo,
   emblemStatics,
@@ -17,6 +17,7 @@ import {
   hasLostAbilities,
   playerIgnoresStatic,
   staticConditionMet,
+  turnStatOf,
 } from "./characteristics.js";
 import { defendingPlayerOf } from "./combat/eligibility.js";
 import type { PlayerScope } from "./effects.js";
@@ -44,8 +45,21 @@ export interface BoundPlayers {
   readonly players: readonly PlayerId[];
 }
 
-/** What's stored: a static's words, or the players an effect named. */
-export type ProhibitedPlayer = StaticWho | BoundPlayers;
+/**
+ * "Each opponent **who cast a spell this turn** can't …" (Angelic Arbiter):
+ * the players `who` names whose own {@link TurnDid} holds, each asked for
+ * themselves as the gate is read. What a player did before the static's
+ * source arrived counts, and nothing binds once the source is gone (the
+ * Arbiter's rulings).
+ */
+export interface PlayersWhoDid {
+  readonly who: StaticWho;
+  readonly thisTurn: TurnDid;
+}
+
+/** What's stored: a static's words, those players by what each did this
+ * turn, or the players an effect named. */
+export type ProhibitedPlayer = StaticWho | PlayersWhoDid | BoundPlayers;
 
 /** One permanent in the stint an effect named it (rule 400.7). */
 export interface BoundObject {
@@ -275,7 +289,13 @@ export function liveProhibitions<A extends ProhibitionAct>(
 
 /** Whether `who`, as `source`'s controller reads it, names `player`. */
 export function whoBinds(state: GameState, source: GameObject, who: ProhibitedPlayer, player: PlayerId): boolean {
-  if (typeof who === "object") return who.players.includes(player);
+  if (typeof who === "object") {
+    if ("players" in who) return who.players.includes(player);
+    return (
+      whoBinds(state, source, who.who, player) &&
+      turnStatOf(state, player, who.thisTurn.stat) >= (who.thisTurn.atLeast ?? 1)
+    );
+  }
   switch (who) {
     case "each-player":
       return true;
