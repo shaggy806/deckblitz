@@ -22,7 +22,7 @@
  * evaluation's feature list is shaped the way it is.
  */
 
-import type { Action, AttackerDeclaration, BlockerDeclaration, LegalAction } from "../actions.js";
+import type { Action, AttackerDeclaration, BlockerDeclaration, ChosenTargets, LegalAction } from "../actions.js";
 import type { CardRegistry } from "../cards.js";
 import { withRequiredAttackers } from "../combat/attacking.js";
 import { defaultRegistry } from "../cards/default-registry.js";
@@ -239,6 +239,22 @@ const outOfTime = (budget: SearchBudget): boolean => {
   if (budget.simulations < budget.baselines) return false;
   return now + budget.longest >= budget.until;
 };
+
+/**
+ * Whether every target a planned step chose is still among `offer`'s options.
+ * A plan is made in rollouts, and a rollout's choices aren't the real game's:
+ * Goblin Engineer's search put one artifact in the graveyard there and
+ * another here, and the plan's step, replayed, aimed at the card still in the
+ * library — which the engine refused, ending the game (2026-11-09). The
+ * graveyard isn't in `boardKey`, so the board check doesn't catch it.
+ */
+function targetsStillOffered(step: Action, offer: LegalAction): boolean {
+  const chosen = "targets" in step && Array.isArray(step.targets) ? (step.targets as ChosenTargets) : [];
+  if (chosen.length === 0) return true;
+  const options = "targetOptions" in offer ? offer.targetOptions.flat() : [];
+  const open = new Set(options.map((t) => JSON.stringify(t)));
+  return chosen.every((t) => t === null || open.has(JSON.stringify(t)));
+}
 
 /** Run one simulation, charging its time to `budget`. */
 function timed<T>(budget: SearchBudget, simulate: () => T): T {
@@ -2791,12 +2807,13 @@ export class EvalBotController extends HeuristicBotController {
       this.turnPlan = null;
       return null;
     }
-    const offered = view.legalActions().some((l) =>
-      step.type === "cast-spell" || step.type === "play-land"
-        ? l.kind === step.type && l.card === step.card
-        : step.type === "activate-ability"
-          ? l.kind === "activate-ability" && l.source === step.source && l.abilityIndex === step.abilityIndex
-          : false,
+    const offered = view.legalActions().some(
+      (l) =>
+        (step.type === "cast-spell" || step.type === "play-land"
+          ? l.kind === step.type && l.card === step.card
+          : step.type === "activate-ability"
+            ? l.kind === "activate-ability" && l.source === step.source && l.abilityIndex === step.abilityIndex
+            : false) && targetsStillOffered(step, l),
     );
     if (!offered) {
       this.turnPlan = null;

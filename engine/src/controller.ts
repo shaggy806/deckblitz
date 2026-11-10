@@ -4167,9 +4167,19 @@ export class HeuristicBotController extends AutomaticController {
     ) {
       return this.leastUsefulTo(view.state, this.playerId, eligible, min);
     }
+    const take = Math.max(min, Math.min(max, eligible.length));
     // A land search takes a colour we can't make yet first (`land-colors.ts`).
-    const ranked = newColorsFirst(view.state, this.registry, this.playerId, eligible);
-    return ranked.slice(0, Math.max(min, Math.min(max, ranked.length)));
+    const allLands = eligible.every((id) => {
+      const name = view.state.objects[id]?.cardName;
+      return name !== undefined && this.registry.has(name) && this.registry.get(name).types.includes("land");
+    });
+    if (allLands) return newColorsFirst(view.state, this.registry, this.playerId, eligible).slice(0, take);
+    // Anything else, the cards we'd most want in hand, read as a hand is read
+    // mid-game (`mostUsefulTo`): the dear spells the board can nearly cast.
+    // It used to be library order, so Demonic Tutor found whatever card was
+    // next, and v2 kept that pick: its rollouts can't tell one card in hand
+    // from another (`docs/plans/strong-bot-decks.md`, 2026-11-09).
+    return this.mostUsefulTo(view.state, this.playerId, eligible, take);
   }
 
   /**

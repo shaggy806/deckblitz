@@ -3,11 +3,16 @@ import { describe, expect, it } from "vitest";
 import { BOT_BENCHMARKS, runBenchmark } from "../bot/benchmarks.js";
 import { candidateActions } from "../bot/candidates.js";
 import { EvalBotController } from "../bot/eval-bot.js";
-import { planTurn, type PlanClock, type TurnPlanHooks } from "../bot/turn-plan.js";
+import { boardKey, planTurn, type PlanClock, type TurnPlanHooks } from "../bot/turn-plan.js";
 import { createDefaultRegistry } from "../cards.js";
-import type { PlayerId } from "../primitives.js";
+import type { Action } from "../actions.js";
+import { Game } from "../game.js";
+import { asPlayerId } from "../primitives.js";
+import type { ObjectId, PlayerId } from "../primitives.js";
 
 const registry = createDefaultRegistry();
+const A = asPlayerId("alice");
+const B = asPlayerId("bob");
 
 const benchmark = (name: string) => {
   const found = BOT_BENCHMARKS.find((b) => b.name === name);
@@ -66,6 +71,60 @@ describe("planning our own turn", () => {
 // Under a live room's clock (`timeBudgetMs`) the plan shares its decision's
 // deadline: it stopped only once the deadline had passed, and ran 120 to 500ms
 // past it on wide four-player boards (2026-10-18).
+describe("replaying a plan's step", () => {
+  // Goblin Engineer's return, planned at one artifact in the graveyard; the
+  // real game (seed 84 of the strong-deck pilot) had a different one there,
+  // and the replay aimed at a card still in the library.
+  const engineerBoard = () => {
+    const game = Game.create({
+      seed: 3,
+      registry,
+      decks: [A, B].map((player) => ({ player, cards: Array<string>(40).fill("Mountain") })),
+    });
+    game.advanceUntil((s) => s.priority.holder === A && s.turn.step === "precombat-main");
+    game.state.zones.perPlayer[A].hand = [];
+    const engineer = game.debugSpawn("Goblin Engineer", A, "battlefield", { summoningSick: false });
+    const ring = game.debugSpawn("Sol Ring", A, "battlefield");
+    game.debugSpawn("Mountain", A, "battlefield");
+    const inGraveyard = game.debugSpawn("Liquimetal Torque", A, "graveyard");
+    const inLibrary = game.debugSpawn("Liquimetal Torque", A, "library");
+    return { game, engineer, ring, inGraveyard, inLibrary };
+  };
+  const planned = (engineer: ObjectId, ring: ObjectId, target: ObjectId): Action => ({
+    type: "activate-ability",
+    player: A,
+    source: engineer,
+    abilityIndex: 0,
+    sacrifice: ring,
+    targets: [{ kind: "object", object: target }],
+  });
+  const withPlan = (game: Game, step: Action): EvalBotController => {
+    const bot = new EvalBotController(A, registry);
+    (bot as unknown as { turnPlan: unknown }).turnPlan = {
+      turn: game.state.turn.number,
+      steps: [step],
+      boards: [boardKey(game.state, A)],
+    };
+    return bot;
+  };
+
+  it("replays a step whose target is still on offer", () => {
+    const { game, engineer, ring, inGraveyard } = engineerBoard();
+    const step = planned(engineer, ring, inGraveyard);
+    const bot = withPlan(game, step);
+    expect(bot.act(game.controllerView(A))).toEqual(step);
+  });
+
+  it("drops a step whose target the real game put somewhere else", () => {
+    const { game, engineer, ring, inLibrary } = engineerBoard();
+    const action = withPlan(game, planned(engineer, ring, inLibrary)).act(game.controllerView(A));
+    const aimed = action.type === "activate-ability" ? action.targets?.[0] : undefined;
+    expect(aimed?.kind === "object" ? aimed.object : null).not.toBe(inLibrary);
+    // Whatever it chose instead, the engine takes it.
+    expect(() => game.dispatch(action)).not.toThrow();
+  });
+});
+
 describe("a plan on the decision's clock", () => {
   const position = () => {
     const game = benchmark("two Rituals into Grave Titan").setup(registry);
