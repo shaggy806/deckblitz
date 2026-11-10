@@ -56,6 +56,66 @@ export type Horizon = "stack" | "turn" | "round" | "next-turn";
 export const isDeepHorizon = (horizon: Horizon): boolean => horizon === "round" || horizon === "next-turn";
 
 /**
+ * **The deadline inside a rollout** (the bot audit's S2, 2026-11-10). A
+ * search reads its clock between simulations, so one rollout started in time
+ * ran its whole length past the deadline: 2.7-3.6 s on boards of 35-72
+ * permanents against a budget of one. `withRolloutDeadline` sets the deadline
+ * of the decision being made; every rollout's stop test (`untilDeadline`)
+ * reads it between ticks and throws `ABORTED`, which `rollout` turns into the
+ * `null` every caller already takes for a simulation that fell over, with
+ * `rolloutAborted()` saying which of the two it was.
+ *
+ * Module state rather than a parameter on every function here: a rollout's
+ * stand-ins run rollouts of their own (`DecisionRolloutController`), built
+ * with no clock, and those inherit the outer decision's deadline this way
+ * without being told. The engine is synchronous, so one decision is under
+ * way at a time. With no deadline set (count budgets: the gate, the benches)
+ * nothing here is read and a rollout is exactly what it was.
+ */
+let deadline: { readonly until: number; readonly now: () => number } | null = null;
+let aborted = false;
+const ABORTED = Symbol("rollout aborted");
+
+/** Run `decide` with every rollout inside it stopped once `now()` reaches
+ * `until`. Nested calls keep the outer deadline. */
+export function withRolloutDeadline<T>(until: number, now: () => number, decide: () => T): T {
+  if (deadline !== null || until === Infinity) return decide();
+  deadline = { until, now };
+  try {
+    return decide();
+  } finally {
+    deadline = null;
+  }
+}
+
+/** Whether the simulation that last returned was stopped by the deadline
+ * (its `null` is "ran out of time", not "the engine refused it"). */
+export const rolloutAborted = (): boolean => aborted;
+
+/** A rollout's stop test, with the deadline in front of it. */
+export function untilDeadline(test: (s: GameState) => boolean): (s: GameState) => boolean {
+  const limit = deadline;
+  if (limit === null) return test;
+  return (s) => {
+    if (limit.now() >= limit.until) throw ABORTED;
+    return test(s);
+  };
+}
+
+/** One simulation: `null` when the engine refused something in it, or when
+ * the deadline stopped it (`rolloutAborted`). */
+export function rollout<T>(run: () => T | null): T | null {
+  try {
+    const result = run();
+    aborted = false;
+    return result;
+  } catch (error) {
+    aborted = error === ABORTED;
+    return null;
+  }
+}
+
+/**
  * The test that ends a rollout at `horizon`, for `me`, from `startingTurn`,
  * with its step ceiling: `MAX_STEPS` within a turn, and as many again for
  * every player turn a deep horizon may cross. The returned test keeps state
@@ -73,7 +133,7 @@ function horizonTest(
   let steps = 0;
   let ourTurn: number | null = null;
   const activeIsMe = (s: GameState): boolean => s.turnOrder[s.turn.activePlayerIndex] === me;
-  return (s) => {
+  return untilDeadline((s) => {
     steps += 1;
     if (steps > ceiling) return true;
     switch (horizon) {
@@ -92,7 +152,7 @@ function horizonTest(
         if (ourTurn === null && s.turn.number !== startingTurn && activeIsMe(s)) ourTurn = s.turn.number;
         return ourTurn !== null && s.turn.number !== ourTurn;
     }
-  };
+  });
 }
 
 /**
@@ -192,7 +252,7 @@ export function simulateRepeated(
   const seed: GameState = { ...state, eventLog: [] };
   const startingTurn = state.turn.number;
 
-  try {
+  return rollout(() => {
     const sim = Game.fromSnapshot(seed, {
       registry,
       controllers: rolloutControllers(state, registry, action.player, policy, self),
@@ -209,9 +269,7 @@ export function simulateRepeated(
     }
     sim.advanceUntil(horizonTest(horizon, state, action.player, startingTurn));
     return { state: sim.state, times };
-  } catch {
-    return null;
-  }
+  });
 }
 
 /**
@@ -233,7 +291,7 @@ export function simulatePlan(
   self: PlayerController | undefined,
 ): GameState | null {
   const startingTurn = state.turn.number;
-  try {
+  return rollout(() => {
     const sim = Game.fromSnapshot(
       { ...state, eventLog: [] },
       { registry, controllers: rolloutControllers(state, registry, me, policy, self) },
@@ -245,9 +303,7 @@ export function simulatePlan(
     sim.dispatch(last);
     sim.advanceUntil(horizonTest(horizon, state, me, startingTurn));
     return sim.state;
-  } catch {
-    return null;
-  }
+  });
 }
 
 /**
@@ -267,7 +323,7 @@ export function simulateSettled(
   self?: PlayerController,
 ): Game | null {
   const { number, step } = state.turn;
-  try {
+  return rollout(() => {
     const sim = Game.fromSnapshot(
       { ...state, eventLog: [] },
       { registry, controllers: rolloutControllers(state, registry, me, "combat", self) },
@@ -275,7 +331,7 @@ export function simulateSettled(
     sim.dispatch(action);
     let steps = 0;
     let back = false;
-    sim.advanceUntil((s) => {
+    sim.advanceUntil(untilDeadline((s) => {
       if (s.result.over || s.turn.number !== number || s.turn.step !== step) return true;
       // A trigger the action set off (landfall from a land, which never uses
       // the stack) waits in `pendingTriggers` until the next tick puts it on
@@ -291,11 +347,9 @@ export function simulateSettled(
       }
       steps += 1;
       return steps > MAX_STEPS;
-    });
+    }));
     return back ? sim : null;
-  } catch {
-    return null;
-  }
+  });
 }
 
 /**
@@ -318,14 +372,14 @@ export function simulateAfterCombat(
   self: PlayerController | undefined,
 ): GameState | null {
   const startingTurn = state.turn.number;
-  try {
+  return rollout(() => {
     const sim = Game.fromSnapshot(
       { ...state, eventLog: [] },
       { registry, controllers: rolloutControllers(state, registry, me, policy, self) },
     );
     sim.dispatch({ type: "pass-priority", player: me });
     let steps = 0;
-    sim.advanceUntil((s) => {
+    sim.advanceUntil(untilDeadline((s) => {
       steps += 1;
       if (steps > MAX_STEPS) return true;
       return (
@@ -335,14 +389,12 @@ export function simulateAfterCombat(
           s.awaiting === null &&
           s.zones.shared.stack.length === 0)
       );
-    });
+    }));
     if (sim.state.turn.number !== startingTurn || sim.state.turn.step !== "postcombat-main") return null;
     sim.dispatch(action);
     sim.advanceUntil(horizonTest(horizon, state, me, startingTurn));
     return sim.state;
-  } catch {
-    return null;
-  }
+  });
 }
 
 /** Whether `action`, an activation just dispatched, can be dispatched again
@@ -408,22 +460,20 @@ export function simulateCombat(
     controllers[player] = new CombatRolloutController(player, registry);
   }
   const startingTurn = state.turn.number;
-  try {
+  return rollout(() => {
     const sim = Game.fromSnapshot(seed, { registry, controllers });
     sim.dispatch(action);
     let steps = 0;
-    sim.advanceUntil((s) => {
+    sim.advanceUntil(untilDeadline((s) => {
       steps += 1;
       return (
         steps > MAX_STEPS ||
         s.turn.number !== startingTurn ||
         (!COMBAT_STEPS.has(s.turn.step) && s.zones.shared.stack.length === 0)
       );
-    });
+    }));
     return sim.state;
-  } catch {
-    return null;
-  }
+  });
 }
 
 /** Holds back from attacking; otherwise v1's answers, like its parent. */
@@ -466,24 +516,22 @@ export function simulateTurns(
 ): GameState | null {
   const seed: GameState = { ...state, eventLog: [] };
   const until = state.turn.number + Math.max(1, depth.turns);
-  try {
+  return rollout(() => {
     const sim = Game.fromSnapshot(seed, {
       registry,
       controllers: rolloutControllers(state, registry, action.player, policy, self),
     });
     sim.dispatch(action);
     let steps = 0;
-    sim.advanceUntil((s) => {
+    sim.advanceUntil(untilDeadline((s) => {
       steps += 1;
       // A deeper rollout runs many more ticks than a one-turn one, so the step
       // ceiling scales with the depth rather than staying at `MAX_STEPS` and
       // silently truncating every rollout at the same place.
       return steps > MAX_STEPS * depth.turns || s.turn.number >= until;
-    });
+    }));
     return sim.state;
-  } catch {
-    return null;
-  }
+  });
 }
 
 function rolloutControllers(

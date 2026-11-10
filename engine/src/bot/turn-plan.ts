@@ -34,7 +34,15 @@ import type { ControllerView, PlayerController } from "../controller.js";
 import { Game } from "../game.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import type { GameState } from "../state.js";
-import { CombatRolloutController, DefendingRolloutController, simulateAction, simulateSettled } from "./simulate.js";
+import {
+  CombatRolloutController,
+  DefendingRolloutController,
+  rollout,
+  rolloutAborted,
+  simulateAction,
+  simulateSettled,
+  untilDeadline,
+} from "./simulate.js";
 
 /** A step of a plan: a move, or passing on to our second main phase through
  * combat. */
@@ -122,41 +130,39 @@ const CEILING = 2_000;
  * to our second, with priority back and nothing on the stack; `null` if the
  * turn ends first. */
 function throughCombat(state: GameState, registry: CardRegistry, me: PlayerId): Game | null {
-  try {
+  return rollout(() => {
     const sim = Game.fromSnapshot({ ...state, eventLog: [] }, { registry, controllers: combatSeats(state, registry) });
     const turn = state.turn.number;
     sim.dispatch({ type: "pass-priority", player: me });
     let steps = 0;
     sim.advanceUntil(
-      (s) =>
-        (steps += 1) > CEILING ||
-        s.turn.number !== turn ||
-        (s.turn.step === "postcombat-main" &&
-          s.priority.holder === me &&
-          s.awaiting === null &&
-          s.zones.shared.stack.length === 0),
+      untilDeadline(
+        (s) =>
+          (steps += 1) > CEILING ||
+          s.turn.number !== turn ||
+          (s.turn.step === "postcombat-main" &&
+            s.priority.holder === me &&
+            s.awaiting === null &&
+            s.zones.shared.stack.length === 0),
+      ),
     );
     return sim.state.turn.number === turn && sim.state.turn.step === "postcombat-main" && !sim.state.result.over
       ? sim
       : null;
-  } catch {
-    return null;
-  }
+  });
 }
 
 /** Pass the rest of the turn out — our attack as v1's, if it's still to come
  * — to the start of the next player's turn. */
 function passOut(state: GameState, registry: CardRegistry, me: PlayerId): GameState | null {
-  try {
+  return rollout(() => {
     const sim = Game.fromSnapshot({ ...state, eventLog: [] }, { registry, controllers: combatSeats(state, registry) });
     const turn = state.turn.number;
     sim.dispatch({ type: "pass-priority", player: me });
     let steps = 0;
-    sim.advanceUntil((s) => (steps += 1) > CEILING || s.turn.number !== turn);
+    sim.advanceUntil(untilDeadline((s) => (steps += 1) > CEILING || s.turn.number !== turn));
     return sim.state;
-  } catch {
-    return null;
-  }
+  });
 }
 
 /**
@@ -166,7 +172,7 @@ function passOut(state: GameState, registry: CardRegistry, me: PlayerId): GameSt
  * there.
  */
 function toOurNextTurn(state: GameState, registry: CardRegistry, me: PlayerId): Game | null {
-  try {
+  return rollout(() => {
     const seats: Record<PlayerId, PlayerController> = {};
     for (const player of state.turnOrder) {
       seats[player] =
@@ -180,11 +186,9 @@ function toOurNextTurn(state: GameState, registry: CardRegistry, me: PlayerId): 
       s.priority.holder === me &&
       s.awaiting === null &&
       s.zones.shared.stack.length === 0;
-    sim.advanceUntil((s) => (steps += 1) > CEILING * state.turnOrder.length || ours(s));
+    sim.advanceUntil(untilDeadline((s) => (steps += 1) > CEILING * state.turnOrder.length || ours(s)));
     return ours(sim.state) && !sim.state.result.over ? sim : null;
-  } catch {
-    return null;
-  }
+  });
 }
 
 interface Node {
@@ -331,7 +335,9 @@ export function passLine(state: GameState, registry: CardRegistry, me: PlayerId,
  * opponents' turns passed through without attacks (`toOurNextTurn`), then
  * the best line for that turn by `planTurn`, never with a card we don't know
  * of yet. Falls back on the end of the turn itself when we never get there —
- * a won game, a lost one.
+ * a won game, a lost one. `null` when the decision's deadline stopped one of
+ * its rollouts (`rolloutAborted`): the turn's own end, or a turn half
+ * planned, is another state's value and not this line's (the bot audit's S2).
  */
 export function nextTurnValue(
   line: PlannedLine,
@@ -340,17 +346,19 @@ export function nextTurnValue(
   hooks: TurnPlanHooks,
   limits: TurnPlanLimits,
   unknown: ReadonlySet<ObjectId>,
-): number {
+): number | null {
   if (line.end.result.over) return hooks.value(line.end);
   const next = toOurNextTurn(line.end, registry, me);
-  if (next === null) return hooks.value(line.end);
+  if (next === null) return rolloutAborted() ? null : hooks.value(line.end);
   const view = next.controllerView(me);
   const firsts = hooks.moves(view).filter((a) => {
     const id = usedCard(a);
     return id === undefined || !unknown.has(id);
   });
   const passed = passOut(next.state, registry, me);
+  if (passed === null && rolloutAborted()) return null;
   const idle = passed === null ? hooks.value(next.state) : hooks.value(passed);
   const best = planTurn(next.state, registry, me, firsts, hooks, limits, unknown)[0];
+  if (limits.clock?.out() === true && rolloutAborted()) return null;
   return Math.max(idle, best?.value ?? -Infinity);
 }

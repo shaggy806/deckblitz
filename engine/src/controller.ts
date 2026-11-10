@@ -4529,6 +4529,36 @@ export class HeuristicBotController extends AutomaticController {
   }
 
   act(view: ControllerView): Action {
+    const action = this.propose(view);
+    const proposed = this.proposedActivation;
+    if (proposed !== null) this.noteActivation(view.state.turn.number, proposed.source, proposed.abilityIndex);
+    return action;
+  }
+
+  /**
+   * Counts an activation that is being handed to the engine, toward
+   * `MAX_ACTIVATIONS_PER_TURN`. Counted there and not where it's proposed
+   * (the bot audit, 2026-11-10): v2 asks this class what it would do at
+   * every window (`propose`) and plays something else at most of them, and
+   * each ask used to spend one of the ability's four — after four windows v1
+   * stopped proposing an activation that had never happened.
+   */
+  protected noteActivation(turn: number, source: ObjectId, abilityIndex: number): void {
+    if (turn !== this.activationTurn) {
+      this.activationTurn = turn;
+      this.activations.clear();
+    }
+    const key = `${source}:${abilityIndex}`;
+    this.activations.set(key, (this.activations.get(key) ?? 0) + 1);
+  }
+
+  /** The ability `propose` last picked by worth, the pick `act` counts. */
+  private proposedActivation: { readonly source: ObjectId; readonly abilityIndex: number } | null = null;
+
+  /** What this bot would do now, with nothing counted as done: `act` for a
+   * subclass that may play something else (`EvalBotController`). */
+  protected propose(view: ControllerView): Action {
+    this.proposedActivation = null;
     this.reachMemo = null;
     const awaited = answerAwaited(this, view);
     if (awaited !== null) return awaited;
@@ -4630,8 +4660,7 @@ export class HeuristicBotController extends AutomaticController {
       }
     }
     if (ability !== undefined) {
-      const key = `${ability.source}:${ability.abilityIndex}`;
-      this.activations.set(key, (this.activations.get(key) ?? 0) + 1);
+      this.proposedActivation = { source: ability.source, abilityIndex: ability.abilityIndex };
       return this.toActivateAbility(view.state, ability);
     }
 

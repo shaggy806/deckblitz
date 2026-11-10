@@ -5,6 +5,12 @@
 //   npm run bot:scenarios -w engine -- --weights-file data/fitted.json
 //   npm run bot:scenarios -w engine -- --champion aggressive
 //   npm run bot:scenarios -w engine -- --weights '{"life":4}'
+//   npm run bot:scenarios -w engine -- --budget 1000    # on the live rooms' clock
+//
+// `--budget MS` gives the bot a wall-clock budget (`timeBudgetMs`), as a live
+// room does: the gate should pass the same there, the scenarios' boards being
+// small enough that the clock never bites. Not the default: a clocked search
+// isn't reproducible.
 //
 // This is the gate a candidate vector has to pass before it ships, and the one
 // measurement that can't be gamed by exploiting whatever the benchmark
@@ -43,8 +49,10 @@ const label = champion ?? weightsFile ?? "current defaults";
 // The suite asserts what the bot *does*, never how it decided, so the same
 // positions would gate any other search — a new one earns the same
 // correctness bar as the one it replaces.
-const makeBot = (player, registry, w) => new EvalBotController(player, registry, { weights: w });
-console.log(`scenarios: ${label}`);
+const budget = flag("budget", null);
+const clock = budget === null ? {} : { timeBudgetMs: Number(budget) };
+const makeBot = (player, registry, w) => new EvalBotController(player, registry, { weights: w, ...clock });
+console.log(`scenarios: ${label}${budget === null ? "" : `, at ${budget} ms a decision`}`);
 
 const registry = createDefaultRegistry();
 // Resolved captures (`captures/resolved/`, git-ignored) gate beside the

@@ -67,12 +67,14 @@ import {
   CombatRolloutController,
   isDeepHorizon,
   MAX_BATCH,
+  rolloutAborted,
   simulateAction,
   simulateAfterCombat,
   simulateCombat,
   simulatePlan,
   simulateRepeated,
   simulateSettled,
+  withRolloutDeadline,
 } from "./simulate.js";
 import type { Horizon, RolloutPolicy } from "./simulate.js";
 import { boardKey, nextTurnValue, passLine, planTurn } from "./turn-plan.js";
@@ -142,8 +144,11 @@ export interface EvalBotOptions {
    *
    * When it expires the search returns the best candidate found *so far*, and
    * candidates are ordered so that "so far" is worth something: passing and
-   * v1's own choice are scored first, so an early cutoff degrades to v1-quality
-   * play rather than to whatever happened to be enumerated first.
+   * v1's own choice are scored first. A rollout still running at the deadline
+   * is stopped there (`withRolloutDeadline`), and a priority search stopped
+   * with no candidate scored plays v1's cast, unscored, or passes
+   * (`unscoredCast`); a board where one rollout doesn't fit is then answered
+   * that way for the rest of the turn without simulating at all (`tooSlow`).
    */
   readonly timeBudgetMs?: number;
   /**
@@ -195,6 +200,9 @@ interface SearchBudget {
   longest: number;
   /** {@link spent} said stop at least once: something was left unscored. */
   cut: boolean;
+  /** The deadline stopped the search's *first* simulation in flight: one
+   * rollout doesn't fit this board's budget (`EvalBotController.tooSlow`). */
+  stalled: boolean;
 }
 
 const newBudget = (left: number, until: number, baselines = 2, now: () => number = Date.now): SearchBudget => ({
@@ -206,6 +214,7 @@ const newBudget = (left: number, until: number, baselines = 2, now: () => number
   ms: 0,
   longest: 0,
   cut: false,
+  stalled: false,
 });
 
 /**
@@ -229,8 +238,8 @@ const newBudget = (left: number, until: number, baselines = 2, now: () => number
  *
  * **Except for its baselines.** A priority search scores two first — passing
  * and v1's move, as an attack declaration scores v1's swing and the empty
- * attack — so that an expired search degrades to v1's play rather than to
- * doing nothing. Predicted from one expensive baseline, the second never ran:
+ * attack — so that a search cut short has v1's play weighed against doing
+ * nothing. Predicted from one expensive baseline, the second never ran:
  * measured, 79 windows in 24 four-player games passed where v1 would have
  * acted in 65 of them. So the prediction waits for both, and only the
  * deadline itself can stop the second. A search with one baseline — v1's
@@ -276,6 +285,7 @@ function timed<T>(budget: SearchBudget, simulate: () => T): T {
     return simulate();
   } finally {
     const ms = budget.now() - started;
+    if (budget.simulations === 0 && budget.until !== Infinity && rolloutAborted()) budget.stalled = true;
     budget.simulations += 1;
     budget.ms += ms;
     if (ms > budget.longest) budget.longest = ms;
@@ -295,7 +305,8 @@ export interface DecisionAudit {
   /** Which path answered: `"search"`, or the shortcut taken instead of one
    * (`"batch replay"`, `"held pass"`, `"no candidates"`, `"payoff first"`,
    * `"reducer first"`, `"landfall first"`, `"fetch"`, `"only land"`, `"land search"`,
-   * `"v1's answer"`). A capture records it (`server/src/capture.ts`), so a
+   * `"v1's answer"`; under a clock `"v1's cast"` and `"no time"`, an expired
+   * search's unscored answer — `unscoredCast`). A capture records it (`server/src/capture.ts`), so a
    * decision the saved position can't reproduce says which branch it took. */
   readonly via: string;
   /** The wall-clock budget ran out before the search finished. */
@@ -834,6 +845,8 @@ export class EvalBotController extends HeuristicBotController {
   private turnPlan: { readonly turn: number; steps: PlanStep[]; boards: string[] } | null = null;
   /** How often each ability has been activated this turn (`activation-cap.ts`). */
   readonly activationCap = new ActivationCap();
+  /** The turn on which one rollout didn't fit the clock (`noteCost`), or -1. */
+  private tooSlow = -1;
   /** What the last priority search played in place of passing, when the
    * search's best was to pass (a due cantrip — `isCantripDue`), so a replay
    * of its scores can do the same (`scenario-fit.ts`). Written, never read. */
@@ -900,6 +913,9 @@ export class EvalBotController extends HeuristicBotController {
       return { type: "pass-priority", player: this.playerId };
     }
     this.activationCap.note(view.state.turn.number, action.source, action.abilityIndex);
+    // v1's own count too (`MAX_ACTIVATIONS_PER_TURN`): of what is played, not
+    // of what v1 proposed and the search turned down.
+    this.noteActivation(view.state.turn.number, action.source, action.abilityIndex);
     return action;
   }
 
@@ -925,7 +941,8 @@ export class EvalBotController extends HeuristicBotController {
     if (this.timeBudgetMs === Infinity || this.askedAt !== null) return decide();
     this.askedAt = this.now();
     try {
-      return decide();
+      // The same deadline inside every rollout the decision runs.
+      return withRolloutDeadline(this.askedAt + this.timeBudgetMs, this.now, decide);
     } finally {
       this.askedAt = null;
     }
@@ -979,8 +996,8 @@ export class EvalBotController extends HeuristicBotController {
       if (continued.type === "pass-priority") this.rememberPass(view);
       return continued;
     }
-    const inherited = super.act(view);
-    // `super.act` has already routed anything the engine is waiting on
+    const inherited = super.propose(view);
+    // `super.propose` has already routed anything the engine is waiting on
     // through `answerAwaited`, which calls back into this class's own
     // `declareAttackers`/`declareBlockers`. The rest are searched here.
     if (view.state.awaiting !== null) return this.decide(view, inherited);
@@ -1181,9 +1198,25 @@ export class EvalBotController extends HeuristicBotController {
     // implicit weight — a land drop sits almost exactly on it.
     const budget = this.budget();
     let best: Action = pass;
+    // **No time to score anything** (the bot audit's S1): v1's cast,
+    // unscored, or a pass (`unscoredCast`), then what a pass falls to anyway
+    // — the land a landfall permanent was waiting on, a due cantrip.
+    const unsearched = (): Action => {
+      const cast = this.unscoredCast(inherited, candidates, mustKill, heldForCombat);
+      if (cast === null && landfall !== undefined) {
+        const land = landRule();
+        if (land !== null) return land;
+      }
+      this.lastPassFallback = cast === null ? cantrip : null;
+      this.lastDecision = audit("priority", budget, cast !== null ? "v1's cast" : "no time");
+      this.noteCost(view.state, budget);
+      return this.settle(view, cast ?? cantrip ?? pass);
+    };
+    // A rollout already didn't fit this turn: none is started.
+    if (this.tooSlow === view.state.turn.number && budget.until !== Infinity) return unsearched();
     // Passing is always legal at a priority window, so a `null` here means the
-    // simulation itself fell over; treat it as "no baseline" rather than
-    // letting it veto every alternative.
+    // simulation itself fell over, or the deadline stopped it; treat it as "no
+    // baseline" rather than letting it veto every alternative.
     budget.left -= 1;
     let bestScore = this.score(view, pass, budget) ?? -Infinity;
 
@@ -1193,7 +1226,9 @@ export class EvalBotController extends HeuristicBotController {
     // without this an early cutoff would leave the bot choosing between
     // passing and whichever card happened to be enumerated first. Scoring v1's
     // choice first makes the floor "v1's move, or passing, whichever actually
-    // measured better", which is a policy worth degrading to.
+    // measured better" — once it *has* been scored. When the clock stops the
+    // search before that (the pass baseline alone took the budget, or was
+    // stopped in flight), nothing was measured, and `unsearched` answers.
     const inheritedFirst = candidates.findIndex((a) => sameAction(a, inherited));
     if (inheritedFirst > 0) {
       const [preferred] = candidates.splice(inheritedFirst, 1);
@@ -1247,6 +1282,7 @@ export class EvalBotController extends HeuristicBotController {
       bestScore = score;
       best = action;
     }
+    if (scored.size === 0 && outOfTime(budget)) return unsearched();
 
     // **Batches.** An ability that can be activated again at once — a pump,
     // firebreathing, "{R}: Dragons you control get +1/+0" — is also tried as
@@ -1406,11 +1442,66 @@ export class EvalBotController extends HeuristicBotController {
     this.lastPassFallback = cantrip;
     if (best.type === "pass-priority" && cantrip !== null) best = cantrip;
     this.lastDecision = audit("priority", budget);
+    this.noteCost(view.state, budget);
+    return this.settle(view, best);
+  }
+
+  /** A priority search's answer on its way out: a pass remembered
+   * (`rememberPass`), a play noted for the window after it (`actedOn`). */
+  private settle(view: ControllerView, best: Action): Action {
     if (best.type === "pass-priority") this.rememberPass(view);
     else if (this.batch === null && view.state.awaiting === null) {
       this.actedOn = { turn: view.state.turn.number, stack: [...view.state.zones.shared.stack] };
     }
     return best;
+  }
+
+  /**
+   * What a priority search plays when its clock stopped it with no candidate
+   * scored: v1's pick (`inherited`) if that is a cast the search would have
+   * weighed — still among `candidates`, so past every hold and filter of
+   * `listCandidates`, and not one kept only on a condition a rollout has to
+   * show (`mustKill`) or held for after combat. `null` is "pass".
+   *
+   * It used to pass, whatever v1 wanted: with the clock made to expire during
+   * the first rollout, 180 of 180 windows passed where v1 cast in 64 (the bot
+   * audit's S1, 2026-11-10). A cast only, never v1's activation: searched in
+   * full, v2 passes at 20 of 22 windows where v1 wants to activate and acts
+   * at 19 of 24 where it wants to cast.
+   *
+   * Matched by offer — the card, how it's cast and which face — and not by
+   * the whole action: v1 and the search aim the same spell differently, and
+   * the search's own filling (its best-ranked, listed first) is the one that
+   * passed its filters.
+   */
+  private unscoredCast(
+    inherited: Action,
+    candidates: readonly Action[],
+    mustKill: ReadonlyMap<Action, PlayerId>,
+    heldForCombat: ReadonlySet<Action>,
+  ): Action | null {
+    if (inherited.type !== "cast-spell") return null;
+    const sameOffer = (a: Action): boolean =>
+      a.type === "cast-spell" &&
+      a.card === inherited.card &&
+      a.face === inherited.face &&
+      JSON.stringify(a.via) === JSON.stringify(inherited.via);
+    const offered = candidates.filter((a) => sameOffer(a) && !mustKill.has(a) && !heldForCombat.has(a));
+    return offered.find((a) => sameAction(a, inherited)) ?? offered[0] ?? null;
+  }
+
+  /**
+   * Remembers, for the rest of the turn, that one rollout doesn't fit the
+   * clock on this board (`tooSlow`): the search's first simulation was
+   * stopped by the deadline, or some simulation alone outlasted the whole
+   * budget. Every later window this turn would spend its budget the same way
+   * to learn nothing — 1-3.6 s each, measured — so it is answered at once
+   * (`unsearched`, `decide`). A new turn tries again: the board may have
+   * shrunk, or the turn be a cheaper one to play out.
+   */
+  private noteCost(state: GameState, budget: SearchBudget): void {
+    if (budget.until === Infinity) return;
+    if (budget.stalled || budget.longest > this.timeBudgetMs) this.tooSlow = state.turn.number;
   }
 
   /**
@@ -1830,6 +1921,12 @@ export class EvalBotController extends HeuristicBotController {
     if (view.state.awaiting?.kind === "commander-replacement" && this.horizon === "next-turn") {
       return this.commanderToGraveyard(view, inherited);
     }
+    // A rollout already didn't fit this turn (`noteCost`): v1's answer, which
+    // is what the search would come back with after spending its budget.
+    if (this.tooSlow === view.state.turn.number && this.timeBudgetMs !== Infinity) {
+      this.lastDecision ??= audit("decision", null, "v1's answer");
+      return inherited;
+    }
     // One baseline: v1's answer, which every other is compared with.
     const budget = this.budget(Math.min(DECISION_ROLLOUTS, this.maxSimulations), 1);
     const answer = bestDecision(
@@ -1847,6 +1944,7 @@ export class EvalBotController extends HeuristicBotController {
     // by its own method on the way through `super.act`; `bestDecision` has no
     // candidates for it, so that record is the one worth keeping.
     this.lastDecision ??= audit("decision", budget);
+    this.noteCost(view.state, budget);
     return answer;
   }
 
@@ -2094,6 +2192,11 @@ export class EvalBotController extends HeuristicBotController {
       budget,
     );
     this.lastDecision = audit("attackers", budget);
+    // The deadline stopped the declaration's first simulation in flight, so
+    // nothing was scored and the climb never left its start: v1's swing, as
+    // every other search falls to v1's answer — not no attack at all, which
+    // is what an unscored climb returns.
+    if (budget.stalled) return fallback;
     return fallbackScore !== null && fallbackScore > builtScore ? fallback : built;
   }
 
@@ -2818,6 +2921,8 @@ export class EvalBotController extends HeuristicBotController {
       let top = -Infinity;
       for (const line of order) {
         const value = nextTurnValue(line, this.cards, me, hooks, limits, unknown);
+        // Stopped by the deadline: the one-move answer stands.
+        if (value === null) return null;
         if (value > top + (line === order[0] ? 0 : TIE)) {
           top = value;
           chosen = line;
@@ -2964,7 +3069,9 @@ export class EvalBotController extends HeuristicBotController {
     const guard = this.tapGuard;
     if (guard === null || (action.type !== "cast-spell" && action.type !== "activate-ability")) return false;
     const resolved = timed(budget, () => simulateAction(state, this.cards, action, "stack", "passive"));
-    if (resolved === null || resolved.result.over) return false;
+    // Stopped by the deadline, it wasn't shown safe: unsafe (it read as safe).
+    if (resolved === null) return budget.until !== Infinity && rolloutAborted();
+    if (resolved.result.over) return false;
     return this.crackbackLethal(resolved, guard.grown);
   }
 

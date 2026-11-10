@@ -204,14 +204,15 @@ describe("the decision time budget", () => {
     expect(new HeuristicBotController(A, registry).act(view).type).toBe("cast-spell");
     expect(new EvalBotController(A, registry).act(view).type).toBe("cast-spell");
     bot.act(view);
-    expect(bot.lastDecision).toMatchObject({ kind: "priority", via: "search", simulations: 1, expired: true });
+    expect(bot.lastDecision).toMatchObject({ kind: "priority", via: "v1's cast", simulations: 1, expired: true });
   });
 
-  // Finding S1 of docs/plans/bot-audit-2026-11.md: the expired search passes
-  // and v1's cast is never scored. `fails` until step 2 of
-  // docs/plans/bot-audit-fixes.md lands, which turns this into a plain `it`
-  // (and a gate scenario).
-  it.fails("plays v1's cast when the clock stopped the search at its pass baseline (S1)", () => {
+  // Finding S1 of docs/plans/bot-audit-2026-11.md: the expired search passed
+  // and v1's cast was never scored. Fixed in step 2 of
+  // docs/plans/bot-audit-fixes.md (`unscoredCast`); the gate scenario "casts
+  // v1's spell when the clock stops the search before anything is scored"
+  // stops the first rollout in flight instead, and asks a second window.
+  it("plays v1's cast when the clock stopped the search at its pass baseline (S1)", () => {
     const { bot, game } = firstSimulationOutlastsTheBudget();
     expect(bot.act(viewOf(game)).type).toBe("cast-spell");
   });

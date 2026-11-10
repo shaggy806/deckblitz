@@ -2250,6 +2250,78 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   },
   {
+    name: "does not station into a lethal crackback when the clock stops the check",
+    rule: "A crackback check the deadline stopped in flight wasn't shown safe: the play is unsafe, not safe.",
+    run(weights, registry) {
+      // The bot audit's S2 (2026-11-10): a rollout is now stopped at the
+      // decision's deadline, and `tapsIntoCrackback` read a stopped check's
+      // `null` as "safe". The board above, with the clock made to run out
+      // between the station's own rollout and its crackback check (`trace`
+      // is told each candidate between the two).
+      const game = table(registry, [A, B], A);
+      game.state.players[A].life = 6;
+      const hull = onBoard(game, "Hearthhull, the Worldseed", A);
+      onBoard(game, "Grizzly Bears", A);
+      onBoard(game, "Hill Giant", B);
+      onBoard(game, "Grizzly Bears", B);
+      const reached = toSecondMain(game);
+      if (reached !== null) return reached;
+      let clock = 0;
+      let checked = false;
+      const bot = new EvalBotController(A, registry, {
+        weights,
+        timeBudgetMs: 1000,
+        now: () => clock,
+        trace: (action) => {
+          if (action.type !== "activate-ability" || action.source !== hull) return;
+          checked = true;
+          clock = 5000;
+        },
+      });
+      const action = bot.act(viewOf(game, A));
+      if (!checked) return { passed: false, detail: "the station was never scored, so its check never ran" };
+      const stations = action.type === "activate-ability" && action.source === hull;
+      return { passed: !stations, detail: `chose ${describeAction(action)}` };
+    },
+  },
+  {
+    name: "casts v1's spell when the clock stops the search before anything is scored",
+    rule: "An expired search with no candidate scored plays v1's cast, and the rest of that turn is answered without a rollout.",
+    run(weights, registry) {
+      // The bot audit's S1 (2026-11-10): on a board where one rollout
+      // outlasts the budget, the pass baseline was all that ran, and the bot
+      // passed at 180 of 180 windows where v1 cast in 64. The clock here
+      // jumps past the deadline during the first rollout (its fourth read:
+      // the ask, the rollout's start, one tick), as a live room's slow board
+      // does — `maxSimulations: 1` stops on the count instead, another branch.
+      const game = table(registry, [A, B], A);
+      lands(game, "Forest", A, 4);
+      game.debugSpawn("Grizzly Bears", A, "hand");
+      game.debugSpawn("Grizzly Bears", A, "hand");
+      if (new HeuristicBotController(A, registry).act(viewOf(game, A)).type !== "cast-spell") {
+        return { passed: false, detail: "v1 doesn't cast here, so there is nothing to fall back to" };
+      }
+      let reads = 0;
+      const bot = new EvalBotController(A, registry, {
+        weights,
+        timeBudgetMs: 1000,
+        now: () => ((reads += 1) <= 3 ? 0 : 5000),
+      });
+      const first = bot.act(viewOf(game, A));
+      if (first.type !== "cast-spell") return { passed: false, detail: `the search ran out and chose ${describeAction(first)}` };
+      // The second Bears, the same turn: the first window showed a rollout
+      // doesn't fit, so this one starts none (step 2 of the audit's plan).
+      game.dispatch(first);
+      game.advanceUntil((s) => (s.priority.holder === A && s.zones.shared.stack.length === 0) || s.result.over);
+      const second = bot.act(viewOf(game, A));
+      const simulations = bot.lastDecision?.simulations ?? -1;
+      return {
+        passed: second.type === "cast-spell" && simulations === 0,
+        detail: `cast the first; then ${describeAction(second)} after ${simulations} simulation(s)`,
+      };
+    },
+  },
+  {
     name: "does not station its only blocker into a lethal crackback with a land still to play",
     rule: "A move the crackback guard marked unsafe is not the first step of a turn plan either.",
     run(weights, registry, makeBot) {
