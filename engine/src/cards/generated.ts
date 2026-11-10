@@ -4111,6 +4111,7 @@ import _poolCelestialFlare from "./pool/celestial-flare.js";
 import _poolCelestialForce from "./pool/celestial-force.js";
 import _poolCelestialGatekeeper from "./pool/celestial-gatekeeper.js";
 import _poolCelestialKirin from "./pool/celestial-kirin.js";
+import _poolCelestialMantle from "./pool/celestial-mantle.js";
 import _poolCelestialMessenger from "./pool/celestial-messenger.js";
 import _poolCelestialPrism from "./pool/celestial-prism.js";
 import _poolCelestialPurge from "./pool/celestial-purge.js";
@@ -10135,6 +10136,7 @@ import _poolGadwicksFirstDuel from "./pool/gadwicks-first-duel.js";
 import _poolGaeasAnthem from "./pool/gaeas-anthem.js";
 import _poolGaeasAvenger from "./pool/gaeas-avenger.js";
 import _poolGaeasBalance from "./pool/gaeas-balance.js";
+import _poolGaeasBlessing from "./pool/gaeas-blessing.js";
 import _poolGaeasBounty from "./pool/gaeas-bounty.js";
 import _poolGaeasCourser from "./pool/gaeas-courser.js";
 import _poolGaeasCradle from "./pool/gaeas-cradle.js";
@@ -13438,6 +13440,7 @@ import _poolInstigatorGang from "./pool/instigator-gang.js";
 import _poolInstigator from "./pool/instigator.js";
 import _poolInstillFuror from "./pool/instill-furor.js";
 import _poolInstillInfection from "./pool/instill-infection.js";
+import _poolInstrumentOfTheBards from "./pool/instrument-of-the-bards.js";
 import _poolInstrumentsOfWar from "./pool/instruments-of-war.js";
 import _poolInsubordination from "./pool/insubordination.js";
 import _poolInsufferableBalladeer from "./pool/insufferable-balladeer.js";
@@ -22703,6 +22706,7 @@ import _poolSavageLandDinosaur from "./pool/savage-land-dinosaur.js";
 import _poolSavageLands from "./pool/savage-lands.js";
 import _poolSavageMansion from "./pool/savage-mansion.js";
 import _poolSavageOffensive from "./pool/savage-offensive.js";
+import _poolSavageOrder from "./pool/savage-order.js";
 import _poolSavagePackmate from "./pool/savage-packmate.js";
 import _poolSavagePunch from "./pool/savage-punch.js";
 import _poolSavageSilhouette from "./pool/savage-silhouette.js";
@@ -22864,6 +22868,7 @@ import _poolScionOfOona from "./pool/scion-of-oona.js";
 import _poolScionOfOpulence from "./pool/scion-of-opulence.js";
 import _poolScionOfStygia from "./pool/scion-of-stygia.js";
 import _poolScionOfTheSwarm from "./pool/scion-of-the-swarm.js";
+import _poolScionOfTheUrDragon from "./pool/scion-of-the-ur-dragon.js";
 import _poolScionOfTheWild from "./pool/scion-of-the-wild.js";
 import _poolScionOfUgin from "./pool/scion-of-ugin.js";
 import _poolScionOfVituGhazi from "./pool/scion-of-vitu-ghazi.js";
@@ -28663,6 +28668,7 @@ import _poolTyrranaxRex from "./pool/tyrranax-rex.js";
 import _poolTyrranax from "./pool/tyrranax.js";
 import _poolTyrsBlessing from "./pool/tyrs-blessing.js";
 import _poolTyvarJubilantBrawler from "./pool/tyvar-jubilant-brawler.js";
+import _poolTyvarKell from "./pool/tyvar-kell.js";
 import _poolTyvarThePummeler from "./pool/tyvar-the-pummeler.js";
 import _poolTyvarsStand from "./pool/tyvars-stand.js";
 import _poolTzaangorShaman from "./pool/tzaangor-shaman.js";
@@ -36274,6 +36280,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCelestialForce,
   _poolCelestialGatekeeper,
   _poolCelestialKirin,
+  _poolCelestialMantle,
   _poolCelestialMessenger,
   _poolCelestialPrism,
   _poolCelestialPurge,
@@ -42298,6 +42305,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGaeasAnthem,
   _poolGaeasAvenger,
   _poolGaeasBalance,
+  _poolGaeasBlessing,
   _poolGaeasBounty,
   _poolGaeasCourser,
   _poolGaeasCradle,
@@ -45601,6 +45609,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolInstigator,
   _poolInstillFuror,
   _poolInstillInfection,
+  _poolInstrumentOfTheBards,
   _poolInstrumentsOfWar,
   _poolInsubordination,
   _poolInsufferableBalladeer,
@@ -54866,6 +54875,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSavageLands,
   _poolSavageMansion,
   _poolSavageOffensive,
+  _poolSavageOrder,
   _poolSavagePackmate,
   _poolSavagePunch,
   _poolSavageSilhouette,
@@ -55027,6 +55037,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolScionOfOpulence,
   _poolScionOfStygia,
   _poolScionOfTheSwarm,
+  _poolScionOfTheUrDragon,
   _poolScionOfTheWild,
   _poolScionOfUgin,
   _poolScionOfVituGhazi,
@@ -60826,6 +60837,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTyrranax,
   _poolTyrsBlessing,
   _poolTyvarJubilantBrawler,
+  _poolTyvarKell,
   _poolTyvarThePummeler,
   _poolTyvarsStand,
   _poolTzaangorShaman,
@@ -68450,6 +68462,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/celestial-force": _poolCelestialForce,
   "pool/celestial-gatekeeper": _poolCelestialGatekeeper,
   "pool/celestial-kirin": _poolCelestialKirin,
+  "pool/celestial-mantle": _poolCelestialMantle,
   "pool/celestial-messenger": _poolCelestialMessenger,
   "pool/celestial-prism": _poolCelestialPrism,
   "pool/celestial-purge": _poolCelestialPurge,
@@ -74474,6 +74487,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gaeas-anthem": _poolGaeasAnthem,
   "pool/gaeas-avenger": _poolGaeasAvenger,
   "pool/gaeas-balance": _poolGaeasBalance,
+  "pool/gaeas-blessing": _poolGaeasBlessing,
   "pool/gaeas-bounty": _poolGaeasBounty,
   "pool/gaeas-courser": _poolGaeasCourser,
   "pool/gaeas-cradle": _poolGaeasCradle,
@@ -77777,6 +77791,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/instigator": _poolInstigator,
   "pool/instill-furor": _poolInstillFuror,
   "pool/instill-infection": _poolInstillInfection,
+  "pool/instrument-of-the-bards": _poolInstrumentOfTheBards,
   "pool/instruments-of-war": _poolInstrumentsOfWar,
   "pool/insubordination": _poolInsubordination,
   "pool/insufferable-balladeer": _poolInsufferableBalladeer,
@@ -87042,6 +87057,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/savage-lands": _poolSavageLands,
   "pool/savage-mansion": _poolSavageMansion,
   "pool/savage-offensive": _poolSavageOffensive,
+  "pool/savage-order": _poolSavageOrder,
   "pool/savage-packmate": _poolSavagePackmate,
   "pool/savage-punch": _poolSavagePunch,
   "pool/savage-silhouette": _poolSavageSilhouette,
@@ -87203,6 +87219,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/scion-of-opulence": _poolScionOfOpulence,
   "pool/scion-of-stygia": _poolScionOfStygia,
   "pool/scion-of-the-swarm": _poolScionOfTheSwarm,
+  "pool/scion-of-the-ur-dragon": _poolScionOfTheUrDragon,
   "pool/scion-of-the-wild": _poolScionOfTheWild,
   "pool/scion-of-ugin": _poolScionOfUgin,
   "pool/scion-of-vitu-ghazi": _poolScionOfVituGhazi,
@@ -93002,6 +93019,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/tyrranax": _poolTyrranax,
   "pool/tyrs-blessing": _poolTyrsBlessing,
   "pool/tyvar-jubilant-brawler": _poolTyvarJubilantBrawler,
+  "pool/tyvar-kell": _poolTyvarKell,
   "pool/tyvar-the-pummeler": _poolTyvarThePummeler,
   "pool/tyvars-stand": _poolTyvarsStand,
   "pool/tzaangor-shaman": _poolTzaangorShaman,

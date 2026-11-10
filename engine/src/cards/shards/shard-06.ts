@@ -724,6 +724,7 @@ import _poolScalestormSummoner from "../pool/scalestorm-summoner.js";
 import _poolScepterOfCelebration from "../pool/scepter-of-celebration.js";
 import _poolScepterOfInsight from "../pool/scepter-of-insight.js";
 import _poolScionOfCalamity from "../pool/scion-of-calamity.js";
+import _poolScionOfTheUrDragon from "../pool/scion-of-the-ur-dragon.js";
 import _poolScorchingSpear from "../pool/scorching-spear.js";
 import _poolScourgeServant from "../pool/scourge-servant.js";
 import _poolScrabblingClaws from "../pool/scrabbling-claws.js";
@@ -1729,6 +1730,7 @@ const shard: CardShard = {
     _poolScepterOfCelebration,
     _poolScepterOfInsight,
     _poolScionOfCalamity,
+    _poolScionOfTheUrDragon,
     _poolScorchingSpear,
     _poolScourgeServant,
     _poolScrabblingClaws,

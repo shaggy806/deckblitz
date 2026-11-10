@@ -144,6 +144,7 @@ import _poolCastleGarenbrig from "../pool/castle-garenbrig.js";
 import _poolCataclysm from "../pool/cataclysm.js";
 import _poolCaveOfTemptation from "../pool/cave-of-temptation.js";
 import _poolCelestialKirin from "../pool/celestial-kirin.js";
+import _poolCelestialMantle from "../pool/celestial-mantle.js";
 import _poolCephalidShrine from "../pool/cephalid-shrine.js";
 import _poolChainedThroatseeker from "../pool/chained-throatseeker.js";
 import _poolChancellorGorkon from "../pool/chancellor-gorkon.js";
@@ -1157,6 +1158,7 @@ const shard: CardShard = {
     _poolCataclysm,
     _poolCaveOfTemptation,
     _poolCelestialKirin,
+    _poolCelestialMantle,
     _poolCephalidShrine,
     _poolChainedThroatseeker,
     _poolChancellorGorkon,

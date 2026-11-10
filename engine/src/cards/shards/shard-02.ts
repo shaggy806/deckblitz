@@ -438,6 +438,7 @@ import _poolInnkeepersTalent from "../pool/innkeepers-talent.js";
 import _poolInquisitorGreyfax from "../pool/inquisitor-greyfax.js";
 import _poolInsectileAberration from "../pool/insectile-aberration.js";
 import _poolInsideSource from "../pool/inside-source.js";
+import _poolInstrumentOfTheBards from "../pool/instrument-of-the-bards.js";
 import _poolIntoTheVoid from "../pool/into-the-void.js";
 import _poolIntuition from "../pool/intuition.js";
 import _poolInvasionOfKaladesh from "../pool/invasion-of-kaladesh.js";
@@ -1446,6 +1447,7 @@ const shard: CardShard = {
     _poolInquisitorGreyfax,
     _poolInsectileAberration,
     _poolInsideSource,
+    _poolInstrumentOfTheBards,
     _poolIntoTheVoid,
     _poolIntuition,
     _poolInvasionOfKaladesh,

@@ -886,6 +886,7 @@ import _poolTurnToDust from "../pool/turn-to-dust.js";
 import _poolTwiceTheRage from "../pool/twice-the-rage.js";
 import _poolTwilightPanther from "../pool/twilight-panther.js";
 import _poolType2Phaser from "../pool/type-2-phaser.js";
+import _poolTyvarKell from "../pool/tyvar-kell.js";
 import _poolUSSEnterpriseCTimeTossed from "../pool/u-s-s-enterprise-c-time-tossed.js";
 import _poolUlamogsDespoiler from "../pool/ulamogs-despoiler.js";
 import _poolUlnaAlleyShopkeep from "../pool/ulna-alley-shopkeep.js";
@@ -1881,6 +1882,7 @@ const shard: CardShard = {
     _poolTwiceTheRage,
     _poolTwilightPanther,
     _poolType2Phaser,
+    _poolTyvarKell,
     _poolUSSEnterpriseCTimeTossed,
     _poolUlamogsDespoiler,
     _poolUlnaAlleyShopkeep,
