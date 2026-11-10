@@ -1301,6 +1301,87 @@ const SCENARIOS: readonly BotScenario[] = [
       },
     }),
   ),
+  // --- answers at an uneven table (the bot audit, Q4) -------------------------
+  // Every answers scenario above is a level table, where whoever casts is the
+  // strongest opponent by construction. `scoreOutcome` takes the strongest
+  // opponent's score at 1 and the average of the others at 0.5, so at four
+  // players a permanent of anyone but the leader counts at a quarter; and an
+  // engine that is neither card draw nor creature tokens (Smothering Tithe's
+  // Treasures) is a blank permanent to the features at any seat. These say
+  // what right looks like before the evaluation moves (bot-audit-fixes.md,
+  // step 5): the training ones are what it gets wrong today, the gate ones
+  // what the fix must not break. A trailing player's vanilla six-drop with
+  // another player ahead is left out on purpose: holding the only counter
+  // there is defensible either way.
+  ...(
+    [
+      // name, the spell, its caster, the caster's lands, carol ahead, counter it, training
+      ["counters the leader's big threat", "Craw Wurm", C, "Forest", true, true, false],
+      ["saves Counterspell from a trailing player's mana rock", "Arcane Signet", B, "Forest", true, false, false],
+      ["counters a draw engine from a player who isn't ahead", "Rhystic Study", B, "Island", true, true, true],
+      ["counters a tax engine", "Smothering Tithe", B, "Plains", false, true, true],
+      ["counters a tax engine from a player who isn't ahead", "Smothering Tithe", B, "Plains", true, true, true],
+    ] as const
+  ).map(([name, card, caster, land, carolAhead, counter, training]) =>
+    asked({
+      name,
+      ...(training ? { kind: "training" as const } : {}),
+      rule: counter
+        ? "A counterspell answers the spell for what it would do to us, whoever's ahead: an engine keeps paying its controller every turn."
+        : "A mana rock isn't worth the only counter, whoever's ahead.",
+      position(registry) {
+        const game = table(registry, [A, B, C, D], caster);
+        for (const player of [A, B, C, D]) {
+          lands(game, player === A ? "Island" : player === caster ? land : "Forest", player, 6);
+        }
+        if (carolAhead) {
+          onBoard(game, "Craw Wurm", C);
+          onBoard(game, "Craw Wurm", C);
+          lands(game, "Forest", C, 2);
+        }
+        holding(game, [B, C, D], 3);
+        game.debugSpawn("Counterspell", A, "hand");
+        castAndPassTo(game, caster, game.debugSpawn(card, caster, "hand"), A);
+        if (game.state.zones.shared.stack.length !== 1 || game.state.priority.holder !== A) {
+          return { passed: false, detail: `${card} never reached alice on the stack` };
+        }
+        return {
+          game,
+          player: A,
+          judge: (action) => ({
+            passed: (action.type === "cast-spell") === counter,
+            detail: `with ${String(caster)}'s ${card} on the stack${carolAhead ? " and carol ahead" : ""}, chose ${describeAction(action)}`,
+          }),
+        };
+      },
+    }),
+  ),
+  asked({
+    name: "casts a tutor in its own main phase",
+    rule: "A tutor trades itself for the best card in the library: cast it when the mana is there.",
+    position(registry) {
+      // The audit's Q2: Demonic Tutor scores -0.10 against passing (a card in
+      // hand is 2 + 0.05 x mana value whatever it is, so one card for another
+      // is a wash), and is cast only because `isCantripDue` counts a tutor as
+      // card flow. This holds the answer while step 5's hand-quality feature
+      // takes the rule's place.
+      const game = table(registry, [A, B, C, D], A);
+      lands(game, "Swamp", A, 2);
+      for (const name of ["Craw Wurm", "Sol Ring", "Swords to Plowshares"]) {
+        game.debugSpawn(name, A, "library");
+      }
+      holding(game, [B, C, D], 3);
+      const tutor = game.debugSpawn("Demonic Tutor", A, "hand");
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "cast-spell" && action.card === tutor,
+          detail: `holding Demonic Tutor on two Swamps, chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
   asked({
     name: "sacrifices its least creature to an edict",
     rule: "An edict takes the creature we'd miss least.",
