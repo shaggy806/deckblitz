@@ -400,6 +400,24 @@ function murderKept(game: Game, dragon: ObjectId, taken: readonly Action[]): Sce
   };
 }
 
+/** Whether, after our turn, Murder killed `dragon` or can still be cast
+ * (three untapped lands, two of them Swamps). */
+function murderKept(game: Game, dragon: ObjectId, taken: readonly Action[]): ScenarioResult {
+  const state = game.state;
+  const killed = !state.zones.shared.battlefield.includes(dragon);
+  const untapped = state.zones.shared.battlefield.filter(
+    (id) => state.objects[id].controller === A && !state.objects[id].tapped && /Forest|Swamp|Island/.test(state.objects[id].cardName),
+  );
+  const held =
+    state.zones.perPlayer[A].hand.some((id) => state.objects[id].cardName === "Murder") &&
+    untapped.length >= 3 &&
+    untapped.filter((id) => state.objects[id].cardName === "Swamp").length >= 2;
+  return {
+    passed: killed || held,
+    detail: killed ? "Murder killed the Dragon" : held ? "Murder held with its mana up" : `no Murder: ${taken.map(describeAction).join(" | ")}`,
+  };
+}
+
 const evalBotFactory: BotFactory = (player, registry, weights) =>
   new EvalBotController(player, registry, { weights });
 
@@ -2247,6 +2265,49 @@ const SCENARIOS: readonly BotScenario[] = [
       const action = makeBot(A, registry, weights).act(viewOf(game, A));
       const stations = action.type === "activate-ability" && action.source === hull;
       return { passed: !stations, detail: `chose ${describeAction(action)}` };
+    },
+  },
+  {
+    name: "does not station its only blocker into a lethal crackback with a land still to play",
+    rule: "A move the crackback guard marked unsafe is not the first step of a turn plan either.",
+    run(weights, registry, makeBot) {
+      // The bot audit's Q6 (2026-11-10): the scenario above with one thing
+      // that chains. The one-move search scored stationing UNSAFE and
+      // preferred passing; the turn planner, valuing its lines with no such
+      // term, returned the same stationing and the Bears was tapped.
+      const game = table(registry, [A, B], A);
+      game.state.players[A].life = 6;
+      onBoard(game, "Hearthhull, the Worldseed", A);
+      const bears = onBoard(game, "Grizzly Bears", A);
+      onBoard(game, "Hill Giant", B);
+      onBoard(game, "Grizzly Bears", B);
+      game.debugSpawn("Forest", A, "hand");
+      const reached = toSecondMain(game);
+      if (reached !== null) return reached;
+      const taken = playOutTurn(game, makeBot(A, registry, weights), A, () => false);
+      const home = game.state.objects[bears]?.tapped === false;
+      return { passed: home, detail: home ? "the Bears stayed home" : `tapped the Bears: ${taken.map(describeAction).join(" | ")}` };
+    },
+  },
+  {
+    name: "does not follow a plan's later steps into a lethal crackback",
+    rule: "Each step of a turn plan that taps a creature of ours is checked against the swing back, as a single move is.",
+    run(weights, registry, makeBot) {
+      // Q6's second form: with a Memnite in hand the plan was Memnite,
+      // station, station, and the later steps were replayed unchecked.
+      // Stationing with the Memnite alone is fine: the Bears still blocks.
+      const game = table(registry, [A, B], A);
+      game.state.players[A].life = 6;
+      onBoard(game, "Hearthhull, the Worldseed", A);
+      const bears = onBoard(game, "Grizzly Bears", A);
+      onBoard(game, "Hill Giant", B);
+      onBoard(game, "Grizzly Bears", B);
+      game.debugSpawn("Memnite", A, "hand");
+      const reached = toSecondMain(game);
+      if (reached !== null) return reached;
+      const taken = playOutTurn(game, makeBot(A, registry, weights), A, () => false);
+      const home = game.state.objects[bears]?.tapped === false;
+      return { passed: home, detail: home ? "the Bears stayed home" : `tapped the Bears: ${taken.map(describeAction).join(" | ")}` };
     },
   },
   {

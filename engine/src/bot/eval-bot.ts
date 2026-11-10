@@ -381,6 +381,11 @@ export const TIE = 1e-9;
  * (`withSacrificeChoices`): each is a simulation. */
 const MAX_SACRIFICE_CHOICES = 5;
 
+/** How many of the planner's best lines are checked against the crackback
+ * (`lineSafe`) before the one-move answer stands: each check is a simulation
+ * a step, paid only where a tap could be lethal. */
+const PLAN_SAFE_LINES = 6;
+
 /** What a creature is worth to the evaluation, roughly: its creature, power
  * and toughness terms. Only used to rank moves, never to choose one. The
  * `power` term counts combat damage (`features.ts`), so this does too: under
@@ -2714,8 +2719,17 @@ export class EvalBotController extends HeuristicBotController {
     // A window the plan has a step for was replayed (`continueTurnPlan`)
     // before any search; one searched here plans afresh.
     this.turnPlan = null;
+    // Not a move the one-move search just marked unsafe (`lastUnsafe`): a
+    // line is valued by the plain evaluation, which has no such term, so the
+    // planner returned the stationing the search had refused (the bot
+    // audit's Q6, 2026-11-10).
     const firsts = candidates.filter(
-      (a) => a.type !== "pass-priority" && scored.has(a) && !mustKill.has(a) && !heldForCombat.has(a),
+      (a) =>
+        a.type !== "pass-priority" &&
+        scored.has(a) &&
+        !mustKill.has(a) &&
+        !heldForCombat.has(a) &&
+        !this.lastUnsafe.includes(a),
     );
     if (firsts.length === 0) return null;
     const hooks = this.planHooks();
@@ -2783,9 +2797,16 @@ export class EvalBotController extends HeuristicBotController {
           chosen = line;
         }
       }
-      if (chosen.steps.length === 0) return null;
-    } else if (!(chosen.value > bestScore + TIE)) {
-      return null;
+      if (chosen.steps.length === 0 || !this.lineSafe(chosen, budget)) return null;
+    } else {
+      // The best line that beats the one-move answer and taps nothing into
+      // the crackback along the way (`lineSafe`).
+      const safe = lines.find((line, i) => {
+        if (!(line.value > bestScore + TIE)) return true;
+        return i < PLAN_SAFE_LINES && this.lineSafe(line, budget);
+      });
+      if (safe === undefined || !(safe.value > bestScore + TIE)) return null;
+      chosen = safe;
     }
     const [first, ...rest] = chosen.steps;
     if (first === undefined) return null;
@@ -2801,6 +2822,24 @@ export class EvalBotController extends HeuristicBotController {
     const then = rest.find((step): step is Action => step !== "combat");
     if (then !== undefined) this.lastFollowUp = { action, score: chosen.value, then };
     return { action, score: Math.max(chosen.value, bestScore) };
+  }
+
+  /**
+   * Whether no step of a planned line leaves us dead to the crackback where
+   * we weren't before it (`tapsIntoCrackback`, on the board the step is
+   * played on): the one-move search's check, for every step of a line, which
+   * is valued by the plain evaluation. Free while no tap could matter
+   * (`tapGuard`). A step after a planned attack that already left us open
+   * isn't blamed for it: the attack declaration holds back what it must.
+   */
+  private lineSafe(line: PlannedLine, budget: SearchBudget): boolean {
+    const guard = this.tapGuard;
+    if (guard === null) return true;
+    return line.steps.every((step, i) => {
+      const state = line.before[i];
+      if (step === "combat" || state === undefined) return true;
+      return this.crackbackLethal(state, guard.grown) || !this.tapsIntoCrackback(state, step, budget);
+    });
   }
 
   /**
@@ -2844,6 +2883,15 @@ export class EvalBotController extends HeuristicBotController {
             : false) && targetsStillOffered(step, l),
     );
     if (!offered) {
+      this.turnPlan = null;
+      return null;
+    }
+    // The step was checked when the line was chosen (`lineSafe`), on the
+    // board the plan foresaw; this is the board it is played on, read as a
+    // fresh decision would read it. Unsafe now, the plan is dropped and the
+    // window searched.
+    this.tapGuard = this.crackbackGuard(state);
+    if (this.tapGuard !== null && this.tapsIntoCrackback(state, step, this.budget())) {
       this.turnPlan = null;
       return null;
     }

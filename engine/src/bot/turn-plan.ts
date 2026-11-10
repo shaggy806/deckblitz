@@ -45,6 +45,9 @@ export interface PlannedLine {
   /** The board each step is played on (`boardKey`), in order: what a replay
    * checks before playing it. */
   readonly boards: readonly string[];
+  /** The state each step is played on, in order: what a check of one step
+   * (the crackback guard) reads. */
+  readonly before: readonly GameState[];
   /** The line, then the turn passed out, scored. */
   readonly value: number;
   /** Where passing out the turn after it ended — the start of the next
@@ -190,6 +193,7 @@ interface Node {
   moves?: readonly Action[];
   readonly steps: readonly PlanStep[];
   readonly boards: readonly string[];
+  readonly before: readonly GameState[];
   readonly combatDone: boolean;
 }
 
@@ -228,7 +232,7 @@ export function planTurn(
     if (out()) return null;
     const end = spend(() => passOut(node.game.state, registry, me));
     if (end === null) return null;
-    const line = { steps: node.steps, boards: node.boards, value: hooks.value(end), end };
+    const line = { steps: node.steps, boards: node.boards, before: node.before, value: hooks.value(end), end };
     lines.push(line);
     return line;
   };
@@ -242,6 +246,7 @@ export function planTurn(
       game: Game.fromSnapshot(state, { registry }),
       steps: [],
       boards: [],
+      before: [],
       combatDone: state.turn.step !== "precombat-main",
     },
   ];
@@ -263,7 +268,13 @@ export function planTurn(
           return [s, s === null ? simulateAction(node.game.state, registry, move, "stack", "combat") : s.state] as const;
         });
         if (ended?.result.over === true) {
-          lines.push({ steps: [...node.steps, move], boards: [...node.boards, board], value: hooks.value(ended), end: ended });
+          lines.push({
+            steps: [...node.steps, move],
+            boards: [...node.boards, board],
+            before: [...node.before, node.game.state],
+            value: hooks.value(ended),
+            end: ended,
+          });
           continue;
         }
         if (settled === null) continue;
@@ -271,6 +282,7 @@ export function planTurn(
           game: settled,
           steps: [...node.steps, move],
           boards: [...node.boards, board],
+          before: [...node.before, node.game.state],
           combatDone: node.combatDone,
         };
         pending.push(child);
@@ -286,6 +298,7 @@ export function planTurn(
             game: after,
             steps: [...node.steps, "combat"],
             boards: [...node.boards, board],
+            before: [...node.before, node.game.state],
             combatDone: true,
           };
           if (movesOf(child).length > 0) pending.push(child);
@@ -310,7 +323,7 @@ export function planTurn(
  * if the rollout fell over. */
 export function passLine(state: GameState, registry: CardRegistry, me: PlayerId, hooks: TurnPlanHooks): PlannedLine | null {
   const end = passOut(state, registry, me);
-  return end === null ? null : { steps: [], boards: [], value: hooks.value(end), end };
+  return end === null ? null : { steps: [], boards: [], before: [], value: hooks.value(end), end };
 }
 
 /**
