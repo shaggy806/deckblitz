@@ -28,6 +28,16 @@ test, `manual-check-presets.test.ts`, builds every board and matches them to the
 thing per test, its own board with only the cards it needs, plain words — no rule numbers or
 engine terms. A second thing to check is a second test.
 
+## Chosen cards, one choice of where they go (2026-11-10)
+
+### Green Sun's Twilight: battlefield or hand, one choice for both
+- **Do:** Cast Green Sun's Twilight for X=5. In the popup pick Grizzly Bears and Island and confirm, then choose "Put the chosen cards onto the battlefield".
+- **Expect:** The popup shows six revealed cards; one creature card and one land card can be confirmed, and with two creature cards picked Confirm stays off. After you confirm, a second choice offers "Put the chosen cards onto the battlefield" and "Put the chosen cards into your hand". Both cards enter the battlefield, the Island untapped; the other four go to the bottom of your library.
+
+### Green Sun's Twilight: below X 5 the cards go to your hand
+- **Do:** Cast Green Sun's Twilight for X=2. Pick Grizzly Bears and Forest and confirm.
+- **Expect:** The popup shows three revealed cards. Both picked cards go to your hand with no second question, and Sol Ring goes to the bottom of your library.
+
 ## Which effect applies first (2026-11-09)
 
 ### Furnace of Rath and Heal: you choose which applies first

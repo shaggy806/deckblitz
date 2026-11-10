@@ -11894,4 +11894,23 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: [] },
     }),
   ),
+  // --- Chosen cards, one choice of where they go (2026-11-10) ---------------------------
+  preset(
+    "Green Sun's Twilight: battlefield or hand, one choice for both",
+    board({
+      you: {
+        bf: ['Forest*6'],
+        hand: ["Green Sun's Twilight"],
+        lib: ['Grizzly Bears', 'Forest', 'Sol Ring', 'Runeclaw Bear', 'Island', 'Shock'],
+      },
+      opp: { bf: [] },
+    }),
+  ),
+  preset(
+    "Green Sun's Twilight: below X 5 the cards go to your hand",
+    board({
+      you: { bf: ['Forest*3'], hand: ["Green Sun's Twilight"], lib: ['Grizzly Bears', 'Forest', 'Sol Ring', 'Island'] },
+      opp: [{ bf: [] }, { bf: [] }, { bf: [] }],
+    }),
+  ),
 ]

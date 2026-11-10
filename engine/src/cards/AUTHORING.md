@@ -2301,6 +2301,10 @@ card" (Oblivion Ring) is two abilities, and its return is a real trigger:
 - **What an opponent's search comes to** is a static: `controlsOpponentsSearching: true` ("You control your opponents
   while they're searching their libraries"), `exilesOpponentsFinds: { spendAs? }` (they exile each card they find, for
   you to play; Opposition Agent), `opponentsSearchTop: { top }` (Aven Mindcensor). Every `search-library` obeys them unwritten.
+- **"Put the chosen cards onto the battlefield or into your hand"** — one choice of where, the same for every chosen card, made after
+  they're chosen — is a `look-and-choose` with `destination: "stay"` (the rest still go where `leftover` says) and a `then` that's a
+  `modal` of one mode, each mode a `for-each-target` (`from: 0`, `simultaneous: true`) over the chosen cards: `put-onto-battlefield`, or
+  `return-to-hand` with `from: "library"`. Green Sun's Twilight, under a `conditional` on `{ kind: "x", compare }`.
 - **"Each opponent who [did this] this turn can't …"** asks each player for themselves, through a `TurnDid` (`{ stat: TurnStat, atLeast? }`,
   1 by default): on a prohibition, `who: { who: "opponents", thisTurn: { stat: "attacked" } }` ("each opponent who attacked with a creature
   this turn can't cast spells"); on a filter, `controllerThisTurn: { stat: "spells-cast" }` ("each opponent who cast a spell this turn can't

@@ -2196,7 +2196,9 @@
   "effect:trigger-spell-gains-keyword",
   "effect:double-life-total",
   "effect:search-then-act-on-found",
-  "static:prohibit-by-player-turn-history"
+  "static:prohibit-by-player-turn-history",
+  "static:prohibit-by-player-turn-history",
+  "effect:look-and-choose-destination-choice"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {
