@@ -16,7 +16,9 @@ import {
   A,
   B,
   activate,
+  cast,
   counters,
+  destroy,
   keywords,
   lands,
   nextTurn,
@@ -26,6 +28,7 @@ import {
   spawn,
   subtypes,
   table,
+  toHand,
   toLibrary,
   tokensNamed,
   zone,
@@ -170,3 +173,79 @@ describe("Instrument of the Bards", () => {
 function toLibraryProbe(game: Game): ObjectId {
   return game.state.zones.perPlayer[A].library[0];
 }
+
+describe("Savage Order", () => {
+  it("can't be cast without a creature of power 4 or greater to sacrifice", () => {
+    const { game } = table();
+    const order = toHand(game, "Savage Order");
+    lands(game, "Forest", 4);
+    const bears = spawn(game, "Grizzly Bears");
+    toLibrary(game, "Colossal Dreadmaw");
+    const offered = (): boolean => game.legalActions(A).some((x) => x.kind === "cast-spell" && x.card === order);
+    expect(offered()).toBe(false);
+    expect(() => cast(game, order, { sacrifice: bears })).toThrow(/sacrific/i);
+    // An opponent's doesn't pay it either.
+    const theirs = spawn(game, "Craw Wurm", B);
+    expect(offered()).toBe(false);
+    expect(() => cast(game, order, { sacrifice: theirs })).toThrow(/sacrific/i);
+    expect(zone(game, order)).toBe("hand");
+    // One of the caster's own does.
+    spawn(game, "Craw Wurm");
+    expect(offered()).toBe(true);
+  });
+
+  it("sacrifices, fetches a Dinosaur creature, and it's indestructible until your next turn", () => {
+    const { game, a } = table();
+    const order = toHand(game, "Savage Order");
+    lands(game, "Forest", 4);
+    const wurm = spawn(game, "Craw Wurm");
+    const dino = toLibrary(game, "Colossal Dreadmaw");
+    toLibrary(game, "Shivan Dragon");
+    const seen = pickFromZone(a, dino);
+    cast(game, order, { sacrifice: wurm });
+    expect(zone(game, wurm)).toBe("graveyard");
+    expect(seen.offered).toEqual([dino]);
+    expect(zone(game, dino)).toBe("battlefield");
+    expect(game.state.objects[dino].controller).toBe(A);
+    expect(keywords(game, dino).has("indestructible")).toBe(true);
+    destroy(game, dino);
+    expect(zone(game, dino)).toBe("battlefield");
+    // Through the opponent's turn…
+    nextTurn(game);
+    expect(activePlayerOf(game.state)).toBe(B);
+    expect(keywords(game, dino).has("indestructible")).toBe(true);
+    // …and gone as the caster's next turn begins.
+    nextTurn(game);
+    expect(activePlayerOf(game.state)).toBe(A);
+    expect(keywords(game, dino).has("indestructible")).toBe(false);
+    destroy(game, dino);
+    expect(zone(game, dino)).toBe("graveyard");
+  });
+
+  it("finding nothing still costs the sacrifice, and nothing else gains indestructible", () => {
+    const { game, a } = table();
+    const order = toHand(game, "Savage Order");
+    lands(game, "Forest", 4);
+    const wurm = spawn(game, "Craw Wurm");
+    const other = spawn(game, "Colossal Dreadmaw");
+    toLibrary(game, "Colossal Dreadmaw");
+    pickFromZone(a);
+    cast(game, order, { sacrifice: wurm });
+    expect(zone(game, wurm)).toBe("graveyard");
+    expect(zone(game, order)).toBe("graveyard");
+    expect(keywords(game, other).has("indestructible")).toBe(false);
+  });
+
+  it("a Dinosaur that can't enter stays in the library and gains nothing", () => {
+    const { game, a } = table();
+    const order = toHand(game, "Savage Order");
+    lands(game, "Forest", 4);
+    const wurm = spawn(game, "Craw Wurm");
+    spawn(game, "Grafdigger's Cage", B);
+    const dino = toLibrary(game, "Colossal Dreadmaw");
+    pickFromZone(a, dino);
+    cast(game, order, { sacrifice: wurm });
+    expect(zone(game, dino)).toBe("library");
+    expect(keywords(game, dino).has("indestructible")).toBe(false);
+  });
+});
