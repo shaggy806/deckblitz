@@ -654,6 +654,18 @@ planner obeys the crackback guard at its first move and at every step (`lineSafe
 given before it, so removal the turn needs can win; and harmful counters and age counters score
 nothing. Two of this record's rules are therefore ordering hints in v2 now, and rules only in v1.
 
+### The audit's step 2: the clock (2026-11-10)
+
+How v2 answers when its wall clock runs out (live rooms only; with no clock nothing changed).
+A rollout is stopped at the decision's deadline instead of finishing past it. A priority search
+stopped before any candidate was scored plays v1's pick when that is a cast the search listed,
+unscored, and otherwise passes: it used to pass whatever v1 wanted. Never v1's activation,
+which a full search turns down at most windows. Once a search's first rollout hasn't fit, the
+rest of that turn starts none: priority windows are answered the same way, awaited decisions
+with v1's answer. So on a board too big to search, v2 plays roughly v1's casts and v1's
+answers, at v1's speed, and searches again when a new turn's first rollout fits.
+`bot-audit-fixes.md` step 2 has the mechanism and the measurements.
+
 ## Watching live games for
 
 Moved from BACKLOG (2026-10-04; the last four on 2026-10-09): each of these is open only until

@@ -3347,6 +3347,16 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Bots
 
+- **The bot audit's fixes, step 2: the clock** (2026-11-10; `0fb9b8bec`, `72b1173f4`;
+  `docs/plans/bot-audit-fixes.md`, *As built*): a rollout is stopped at its decision's deadline
+  (`withRolloutDeadline`, `simulate.ts`) instead of running its length past it; a priority
+  search the clock stopped with nothing scored plays v1's cast, unscored, where it used to pass
+  (`unscoredCast`); once one rollout hasn't fit, the rest of that turn starts none (`tooSlow`);
+  v1 counts an activation when it's played, not when v2 asks what it would do; and the server
+  keeps the slowest bot decision and the counts over budget since start, on `/status`, with a
+  log line for each. Measured over 12 games at the live budget: worst decision 1,850 ms to
+  1,036 ms, decisions over 1.5 s 2 to 0. Two gate scenarios, on an injected clock;
+  `bot:scenarios -- --budget MS`.
 - **The bot audit's fixes, step 1: four misplays** (2026-11-10; `d15599f95`, `752a7550e`,
   `aadc42a5a`, `e1b359709`, `f626a7351`; `docs/plans/bot-audit-fixes.md`, *As built*): a
   sacrifice cost is no longer paid with the outlet or the payoff that watches it

@@ -9,11 +9,11 @@ what each step changes, and how each is checked. Three choices near the end are 
 One step a session, with the `bot-audit-next` skill. When a step lands, tick it here with its date
 and commit, write its *As built* lines under the step, and move `Next`.
 
-- Next: **step 2** (the clock).
+- Next: **step 2b** (deploy, and test live).
 - [x] Step 0. Tools (2026-11-10)
 - [x] Step 1. Four misplays (2026-11-10; `d15599f95` Q3, `752a7550e` Q6, `aadc42a5a` and
   `e1b359709` Q7, `f626a7351` Q5)
-- [ ] Step 2. The clock
+- [x] Step 2. The clock (2026-11-10; `0fb9b8bec` the bots, `72b1173f4` the server's figures)
 - [ ] Step 2b. Deploy, and test live
 - [ ] Step 3. Engine cost per tick
 - [ ] Step 4. Search that buys nothing
@@ -178,6 +178,75 @@ In this order, because each makes the next testable:
 Check: scenarios through `now` for 1, 2 and 4; `bot:timings` before and after on the same seeds
 — decisions over 1.5 s should go to about zero and the share of one-simulation passes with it;
 the gate at `timeBudgetMs: 1000` still 182/182; server and client suites.
+
+### As built (2026-11-10)
+
+All five parts, in `0fb9b8bec` (the bots) and `72b1173f4` (the server).
+
+- **(1) An expired search** (`unscoredCast`, `eval-bot.ts`). When the clock has stopped a
+  priority search with no candidate scored, it plays v1's pick if that is a cast still among the
+  search's candidates and not one kept on a condition only a rollout shows (`mustKill`, held for
+  after combat); otherwise it passes, and a pass still falls to the land a landfall permanent
+  was waiting on and to a due cantrip, as before. Matched by card, `via` and face; the
+  candidate played is v1's own filling if the search listed it, else the search's first.
+  `lastDecision.via` reads `"v1's cast"` or `"no time"`.
+- **(2) A baseline that can't fit** (`tooSlow`, `noteCost`). A search whose *first* simulation
+  the deadline stopped, or in which one simulation outlasted the whole budget, marks the turn;
+  for the rest of that turn a priority window is answered by (1) with no simulation and an
+  awaited decision with v1's answer. Keyed by turn number, as planned, so the first window of
+  each player's turn tries again. Differs from the plan in what it remembers: not the longest
+  simulation's length (with (4) no simulation can run much past the budget, so the length says
+  little) but that the first one didn't finish. Attack and block declarations still search
+  every time: they have v1's declaration to fall to, at the cost of one budget.
+- **(3) v1's proposal** (`controller.ts`). `HeuristicBotController.act` is now `propose` (what
+  it would do, nothing counted) under an `act` that counts the activation it hands to the
+  engine (`noteActivation`); v2 asks `propose` and counts what it actually plays. v1's own play
+  is unchanged.
+- **(4) A deadline inside a rollout** (`simulate.ts`). Differs from the plan in mechanism, not
+  in effect: the deadline is module state set for the length of one decision
+  (`withRolloutDeadline`, from `onClock`), not a parameter threaded through every `simulate*`;
+  each stop test is wrapped (`untilDeadline`: `horizonTest`, the four inline tests in
+  `simulate.ts`, `turn-plan.ts`'s three) and throws `ABORTED`, and one wrapper (`rollout`)
+  replaces every function's `try`/`catch`. A stopped rollout still returns `null`, and
+  `rolloutAborted()` says that the last `null` was the clock: a flag beside the `null` rather
+  than a distinct result type, because most callers already do the right thing with a `null`
+  (skip the candidate; the next clock check ends the loop) and only the four the audit named
+  have to ask. Those four: `tapsIntoCrackback` reads an aborted check as unsafe;
+  `nextTurnValue` returns `null` and `planLines` then keeps the one-move answer; the attackers
+  search returns v1's swing when its first simulation was stopped; a stopped pass baseline
+  leads to (1). A stand-in's nested `bestDecision` inherits the deadline through the module
+  state without being given a clock. With no clock nothing is wrapped or read.
+- **(5) The server** (`room.ts`, `load-monitor.ts`, `status-server.ts`). Per thread, since it
+  started: the slowest decision and the counts over the budget and over twice it
+  (`botDecisionTotals`), carried in the load report; `/status` prints them beside the p99, for
+  the main thread (a new `bots` line) and for each shard, and `/status.json` has the fields.
+  One `console.warn` per over-budget decision: its time, seat, turn and step, permanents,
+  stack size, and `lastDecision` (kind, via, simulations, expired, cut).
+- **Also**: `bot:scenarios -- --budget MS` runs the gate on a clock.
+
+Scenarios (two; both read the clock through `now`): "casts v1's spell when the clock stops the
+search before anything is scored" (the clock jumps during the first rollout; it also asks a
+second window the same turn and requires zero simulations, which is (2)) — fails on the code
+before this step; and "does not station into a lethal crackback when the clock stops the
+check" (the clock jumps between a candidate's rollout and its crackback check) — which can't
+fail before (4) exists, so it was watched failing with the `tapsIntoCrackback` line put back
+to "safe", as (2)'s half was with the `tooSlow` check removed.
+
+Measured, `bot:timings`, 12 four-player games from seed 1 at the live budget, 6 workers, the
+bench decks, the build before this step against the one after (a clocked game doesn't replay
+exactly, so these are neighbouring games, not the same ones):
+
+| | Searched decisions | Over 1 s | Over 1.5 s | Worst | p90 | Cut to baselines |
+| --- | --- | --- | --- | --- | --- | --- |
+| Before | 3,069 | 24 | 2 | 1,850 ms | 884 ms | 5 (3 passes where v1 acted) |
+| After | 3,054 | 16 | 0 | 1,036 ms | 894 ms | 1 (a cast, as v1's) |
+
+The 16 still over a second are all within 36 ms of it: the budget plus the tick in flight. One
+window in the twelve games was answered by (1) (`no time`). So on this machine and these decks
+the step bounds the tail and changes little else, which is what the audit predicted ("no
+average gain"); the boards where one rollout doesn't fit (the pilot's decks, the live box) are
+what step 2b measures. `bot:diff` against `origin/main` at count budgets: 0 of 11,316
+decisions differ over six games. The gate is 209/209, and 209/209 at `--budget 1000`.
 
 ## Step 2b. Deploy, and test live (a short session; the user's call, 2026-11-10)
 
