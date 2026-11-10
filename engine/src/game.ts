@@ -2482,6 +2482,10 @@ export class Game {
   private enterBatchFired: Set<string> | null = null;
   /** …and that entry's announcements, which a batched trigger counts. */
   private enterBatchEvents: readonly GameEventInput[] | null = null;
+  /** Each permanent of the enter batch being announced, as it was once all of
+   * them had entered: the journal's `entered` snapshots, taken together in
+   * `withEnterBatch` so they share one pass of the computed cache. */
+  private enterBatchSnapshots: ReadonlyMap<ObjectId, LastKnownInfo> | null = null;
   /** The `plusOneToken` replacements that have had their one opportunity at
    * the token-creation event under way (rule 614.5), while one instruction
    * makes several kinds of token: see {@link withTokenEvent}. Not game state:
@@ -31455,15 +31459,32 @@ export class Game {
     // the others enter (rule 603.6a): "whenever another creature enters"
     // among them triggers for all the rest, whichever the engine moved
     // first (the Elas il-Kor ruling).
-    const outer = [this.enterBatchFired, this.enterBatchEvents] as const;
+    const outer = [this.enterBatchFired, this.enterBatchEvents, this.enterBatchSnapshots] as const;
     this.enterBatchFired = new Set();
     this.enterBatchEvents = entered;
+    // The journal keeps each as it entered (`recordJournal`). They entered
+    // together, so they are read together, before the first is announced:
+    // one pass of the cache for the batch, where a snapshot taken inside each
+    // `emit` rescanned the board for every one of them (a tenth of a token
+    // turn, the bot audit's S6).
+    this.enterBatchSnapshots = null;
+    if (entered.length > 1) {
+      invalidateComputedCache();
+      this.enterBatchSnapshots = withComputedCache(() => {
+        const snapshots = new Map<ObjectId, LastKnownInfo>();
+        for (const event of entered) {
+          if (event.type !== "permanent-entered-battlefield" || snapshots.has(event.object)) continue;
+          if (this.state.objects[event.object] !== undefined) snapshots.set(event.object, this.takeLastKnown(event.object));
+        }
+        return snapshots;
+      });
+    }
     try {
       this.withCounterBatch(() => {
         for (const event of entered) this.emit(event);
       });
     } finally {
-      [this.enterBatchFired, this.enterBatchEvents] = outer;
+      [this.enterBatchFired, this.enterBatchEvents, this.enterBatchSnapshots] = outer;
       this.firstTokenCreators.clear();
     }
     return result;
@@ -34763,17 +34784,14 @@ export class Game {
         })
       );
     };
-    const context: ResolutionContext = {
-      controller,
-      source,
-      targets,
+    // The fields only some resolutions have. Kept out of the literal below
+    // and assigned after it: a spread anywhere in an object literal makes the
+    // runtime define every property after it one at a time, and with ~490
+    // of them that was 2 ms a context (7% of a token turn, the bot audit's
+    // S6); a plain literal is laid out once and copied.
+    const sometimes = {
       ...(opts.readTargets !== undefined ? { readTargets: opts.readTargets } : {}),
       ...(opts.illegalTargets !== undefined ? { illegalTargets: opts.illegalTargets } : {}),
-      x,
-      triggerValue,
-      triggerObject,
-      stackMultiplier,
-      resolutionCount,
       ...(opts.sourceLost === true ? { sourceLost: true } : {}),
       // A trigger object that left the battlefield as the ability triggered,
       // and has changed zones again since, is a new object (rule 400.7) —
@@ -34800,6 +34818,16 @@ export class Game {
               : {}),
           }
         : {}),
+    } satisfies Partial<ResolutionContext>;
+    const context: ResolutionContext = {
+      controller,
+      source,
+      targets,
+      x,
+      triggerValue,
+      triggerObject,
+      stackMultiplier,
+      resolutionCount,
       objectSet: (ref, each) => objectSet(ref, each),
       triggerCounters: () => refs.counters ?? [],
       memberMatches: (m, filter) => {
@@ -39784,6 +39812,7 @@ controlledBy,
         );
       },
     };
+    Object.assign(context, sometimes);
     return context;
   }
 
@@ -51430,12 +51459,18 @@ controlledBy,
       case "permanent-entered-battlefield": {
         const object = this.state.objects[event.object];
         if (object === undefined) return;
+        // Taken with the rest of its batch where it entered with others
+        // (`withEnterBatch`), unless it has moved since.
+        const together = this.enterBatchSnapshots?.get(event.object);
         add({
           kind: "entered",
           player: object.controller,
           object: event.object,
           stint: stintOf(event.object),
-          was: this.takeLastKnown(event.object),
+          was:
+            together !== undefined && together.zoneChangeCount === stintOf(event.object)
+              ? together
+              : this.takeLastKnown(event.object),
           ...((event.count ?? 1) !== 1 ? { count: event.count } : {}),
         });
         return;
