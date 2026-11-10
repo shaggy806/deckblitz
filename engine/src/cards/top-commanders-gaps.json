@@ -910,6 +910,7 @@
   "stat:countered-spell-mana-spent",
   "effect:look-and-choose-leftover",
   "bug:transform-fixes",
+  "bug:saga-exile-return-transformed",
   "effect:exile-library-all-but-bottom",
   "mechanic:keyword-counters",
   "bug:mana-any-one-color",
