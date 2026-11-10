@@ -32,6 +32,8 @@ import { HeuristicBotController, StandInController, compareReach, isLandfallPerm
 import type { ControllerView, LandReach, PlayerController } from "../controller.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
 import type { GameState } from "../state.js";
+import { matchesFilter } from "../filter.js";
+import type { CardFilter } from "../filter.js";
 import { manaValue, parseManaCost } from "../mana.js";
 import { computeCharacteristics, withComputedCache } from "../characteristics.js";
 import { whyCannotAttack } from "../combat/eligibility.js";
@@ -1019,7 +1021,7 @@ export class EvalBotController extends HeuristicBotController {
     // bot's own, so with a payoff out a candidate was compared with a pass
     // rolled out differently (a diagnosis, 2026-10-07).
     this.decisionRollout =
-      this.rollout !== "acting" && castPayoff(view.state, this.cards, this.playerId) ? "acting" : this.rollout;
+      this.rollout !== "acting" && castPayoff(view, this.cards, this.playerId) ? "acting" : this.rollout;
 
     const listed = this.listCandidates(view);
     const { candidates, mustKill, heldForCombat } = listed;
@@ -3211,33 +3213,53 @@ function heldOnOffer(board: GameState, cards: CardRegistry, me: PlayerId, held: 
 }
 
 /**
- * Whether `player` has a payoff for casting spells — a "whenever you cast"
+ * Whether, on `player`'s own turn, they have a payoff for casting spells with
+ * a spell castable now that it would see — a "whenever you cast"
  * trigger (Shiko and Narset's Flurry, prowess, Young Pyromancer) — on the
- * battlefield, on the stack about to be, or in hand or the command zone to be
- * cast this turn: Shiko cast from the command zone is the turn's first spell
+ * battlefield, on the stack about to be, or in hand or the command zone and
+ * castable now: Shiko cast from the command zone is the turn's first spell
  * herself, so the next one is the second. On the stack too, or a window
  * searched with Guttersnipe there rolled our seat out passive, the Bolt in
  * hand never cast after it, and casting it in response won (a live misplay,
  * 2026-10-08).
  */
-function castPayoff(state: GameState, cards: CardRegistry, player: PlayerId): boolean {
+function castPayoff(view: ControllerView, cards: CardRegistry, player: PlayerId): boolean {
+  const state = view.state;
+  // Our own turn only: "play out the rest of our turn" is not what a rollout
+  // from an opponent's turn is for, and it costs about twice a passive one
+  // (the bot audit's S5, 2026-11-10: on from turn one for a third of seats).
+  if (state.turnOrder[state.turn.activePlayerIndex] !== player) return false;
   const own = state.zones.perPlayer[player];
-  const ids = [
+  const inPlay = [
     ...state.zones.shared.battlefield.filter((id) => state.objects[id]?.controller === player),
     ...state.zones.shared.stack.filter(
       (id) => state.objects[id]?.kind === "card" && state.objects[id]?.controller === player,
     ),
-    ...own.hand,
-    ...state.zones.shared.command.filter((id) => state.objects[id]?.owner === player),
   ];
-  return ids.some((id) => {
+  const held = [...own.hand, ...state.zones.shared.command.filter((id) => state.objects[id]?.owner === player)];
+  /** The filters of `id`'s "whenever you cast" triggers (`undefined`: any spell). */
+  const filtersOf = (id: ObjectId): readonly (CardFilter | undefined)[] => {
     const object = state.objects[id];
-    if (object === undefined || !cards.has(object.cardName)) return false;
-    return cards.get(object.cardName).triggered.some((ability) => {
-      const trigger = ability.trigger as { readonly on?: unknown; readonly who?: unknown };
-      return trigger.on === "cast-spell" && trigger.who === "you";
+    if (object === undefined || !cards.has(object.cardName)) return [];
+    return cards.get(object.cardName).triggered.flatMap((ability) => {
+      const trigger = ability.trigger as { readonly on?: unknown; readonly who?: unknown; readonly filter?: CardFilter };
+      return trigger.on === "cast-spell" && trigger.who === "you" ? [trigger.filter] : [];
     });
-  });
+  };
+  if (![...inPlay, ...held].some((id) => filtersOf(id).length > 0)) return false;
+  // The spells castable now: a payoff with nothing to pay off (a commander
+  // with such a trigger and an empty hand, a hand of lands) changes nothing
+  // a passive rollout doesn't show.
+  const castable = new Set<ObjectId>();
+  for (const legal of view.legalActions()) if (legal.kind === "cast-spell") castable.add(legal.card);
+  if (castable.size === 0) return false;
+  const seenBy = (payoff: ObjectId): boolean =>
+    filtersOf(payoff).some((filter) =>
+      [...castable].some(
+        (card) => card !== payoff && (filter === undefined || matchesFilter(state, cards, card, filter, { you: player })),
+      ),
+    );
+  return inPlay.some(seenBy) || held.some((id) => castable.has(id) && seenBy(id));
 }
 
 /** Whether a land-drop candidate is the one `inherited` plays. */
