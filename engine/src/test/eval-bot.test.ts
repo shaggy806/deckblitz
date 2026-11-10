@@ -174,6 +174,47 @@ describe("the decision time budget", () => {
     expect(twice.turn.number).toBe(once.turn.number);
     expect(twice.eventLog.length).toBe(once.eventLog.length);
   }, GAME_TIMEOUT_MS);
+
+  // A clock the test drives (`EvalBotOptions.now`): it stands still until the
+  // first simulation has been scored (`trace`), then jumps past the deadline —
+  // a board whose one rollout outlasts the budget, through the path a live
+  // room's slow board takes.
+  const firstSimulationOutlastsTheBudget = (): { bot: EvalBotController; game: Game } => {
+    const game = Game.create({ seed: 4, registry, decks: seatsFor([A, B]) });
+    game.advanceUntil((s) => s.priority.holder === A && s.turn.step === "precombat-main");
+    game.state.zones.perPlayer[A].hand = [];
+    for (let i = 0; i < 2; i += 1) game.debugSpawn("Forest", A, "battlefield");
+    game.debugSpawn("Grizzly Bears", A, "hand");
+    let clock = 0;
+    const bot = new EvalBotController(A, registry, {
+      timeBudgetMs: 1000,
+      now: () => clock,
+      trace: () => {
+        clock += 2000;
+      },
+    });
+    return { bot, game };
+  };
+
+  it("reads its clock from `now`: one simulation, then the deadline has passed", () => {
+    const { bot, game } = firstSimulationOutlastsTheBudget();
+    const view = viewOf(game);
+    // The position is one where the clock matters: v1 casts, and so does an
+    // unhurried v2.
+    expect(new HeuristicBotController(A, registry).act(view).type).toBe("cast-spell");
+    expect(new EvalBotController(A, registry).act(view).type).toBe("cast-spell");
+    bot.act(view);
+    expect(bot.lastDecision).toMatchObject({ kind: "priority", via: "search", simulations: 1, expired: true });
+  });
+
+  // Finding S1 of docs/plans/bot-audit-2026-11.md: the expired search passes
+  // and v1's cast is never scored. `fails` until step 2 of
+  // docs/plans/bot-audit-fixes.md lands, which turns this into a plain `it`
+  // (and a gate scenario).
+  it.fails("plays v1's cast when the clock stopped the search at its pass baseline (S1)", () => {
+    const { bot, game } = firstSimulationOutlastsTheBudget();
+    expect(bot.act(viewOf(game)).type).toBe("cast-spell");
+  });
 });
 
 describe("what a decision costs", () => {

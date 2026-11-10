@@ -145,6 +145,14 @@ export interface EvalBotOptions {
    */
   readonly timeBudgetMs?: number;
   /**
+   * The clock `timeBudgetMs` is read on, in milliseconds; `Date.now` when
+   * omitted. For tests and scenarios: one that jumps during the first
+   * simulation is a board whose single rollout outlasts the budget, through
+   * the same path a live room's slow board takes (`maxSimulations: 1` stops
+   * on the count instead, a different branch).
+   */
+  readonly now?: () => number;
+  /**
    * Told every candidate a priority window or a decision simulates, with the
    * state its rollout ended in (`null` when the engine refused it), in the
    * order they were scored; the first of any tie is the one played, and a
@@ -174,6 +182,8 @@ export interface EvalBotOptions {
 interface SearchBudget {
   left: number;
   readonly until: number;
+  /** The clock `until` is a stamp on (`EvalBotOptions.now`). */
+  readonly now: () => number;
   /** Simulations the clock lets start whatever they're predicted to cost —
    * the search's baselines ({@link outOfTime}). */
   readonly baselines: number;
@@ -185,9 +195,10 @@ interface SearchBudget {
   cut: boolean;
 }
 
-const newBudget = (left: number, until: number, baselines = 2): SearchBudget => ({
+const newBudget = (left: number, until: number, baselines = 2, now: () => number = Date.now): SearchBudget => ({
   left,
   until,
+  now,
   baselines,
   simulations: 0,
   ms: 0,
@@ -234,7 +245,7 @@ const spent = (budget: SearchBudget): boolean => {
  * leaves count-bounded searches exactly as they were. */
 const outOfTime = (budget: SearchBudget): boolean => {
   if (budget.until === Infinity) return false;
-  const now = Date.now();
+  const now = budget.now();
   if (now >= budget.until) return true;
   if (budget.simulations < budget.baselines) return false;
   return now + budget.longest >= budget.until;
@@ -258,11 +269,11 @@ function targetsStillOffered(step: Action, offer: LegalAction): boolean {
 
 /** Run one simulation, charging its time to `budget`. */
 function timed<T>(budget: SearchBudget, simulate: () => T): T {
-  const started = Date.now();
+  const started = budget.now();
   try {
     return simulate();
   } finally {
-    const ms = Date.now() - started;
+    const ms = budget.now() - started;
     budget.simulations += 1;
     budget.ms += ms;
     if (ms > budget.longest) budget.longest = ms;
@@ -298,7 +309,7 @@ const audit = (kind: DecisionAudit["kind"], budget: SearchBudget | null, via = "
   simulations: budget?.simulations ?? 0,
   ms: budget?.ms ?? 0,
   via,
-  expired: budget !== null && budget.until !== Infinity && Date.now() >= budget.until,
+  expired: budget !== null && budget.until !== Infinity && budget.now() >= budget.until,
   cut: budget?.cut ?? false,
 });
 
@@ -309,6 +320,12 @@ const audit = (kind: DecisionAudit["kind"], budget: SearchBudget | null, via = "
 const sameAction = (a: Action, b: Action): boolean => JSON.stringify(a) === JSON.stringify(b);
 
 const DEFAULT_MAX_SIMULATIONS = 200;
+
+/** The wall-clock budget a live room gives each bot decision
+ * (`timeBudgetMs`), in milliseconds: the one figure `server/src/room.ts`
+ * seats bots with and the measuring scripts default to (`bot:behaviour`,
+ * `bot:timings`), so a measurement "at the live budget" can't drift from it. */
+export const LIVE_BOT_BUDGET_MS = 1000;
 
 type DeclareAttackersLegal = Extract<LegalAction, { kind: "declare-attackers" }>;
 type DeclareBlockersLegal = Extract<LegalAction, { kind: "declare-blockers" }>;
@@ -759,6 +776,7 @@ export class EvalBotController extends HeuristicBotController {
   private readonly rolloutDecisions: boolean;
   private readonly maxSimulations: number;
   private readonly timeBudgetMs: number;
+  private readonly now: () => number;
   /** When the decision under way was asked, under a clock (`onClock`). */
   private askedAt: number | null = null;
   private readonly trace: EvalBotOptions["trace"];
@@ -852,6 +870,7 @@ export class EvalBotController extends HeuristicBotController {
     this.planSimulations = options.planSimulations ?? DEFAULT_PLAN_SIMULATIONS;
     this.maxSimulations = options.maxSimulations ?? DEFAULT_MAX_SIMULATIONS;
     this.timeBudgetMs = options.timeBudgetMs ?? Infinity;
+    this.now = options.now ?? Date.now;
     this.trace = options.trace;
   }
 
@@ -897,7 +916,7 @@ export class EvalBotController extends HeuristicBotController {
    */
   private onClock<T>(decide: () => T): T {
     if (this.timeBudgetMs === Infinity || this.askedAt !== null) return decide();
-    this.askedAt = Date.now();
+    this.askedAt = this.now();
     try {
       return decide();
     } finally {
@@ -1750,8 +1769,9 @@ export class EvalBotController extends HeuristicBotController {
   private budget(left: number = this.maxSimulations, baselines = 2): SearchBudget {
     return newBudget(
       left,
-      this.timeBudgetMs === Infinity ? Infinity : (this.askedAt ?? Date.now()) + this.timeBudgetMs,
+      this.timeBudgetMs === Infinity ? Infinity : (this.askedAt ?? this.now()) + this.timeBudgetMs,
       baselines,
+      this.now,
     );
   }
 
