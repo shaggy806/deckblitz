@@ -9,9 +9,7 @@ what each step changes, and how each is checked. Three choices near the end are 
 One step a session, with the `bot-audit-next` skill. When a step lands, tick it here with its date
 and commit, write its *As built* lines under the step, and move `Next`.
 
-- Next: **step 3, part 3** (a short session: the journal's last-known snapshot per entered
-  permanent and a lazy resolution context, 9.7% and 8.8% of the token turn as measured after
-  parts 1 and 2), then step 5.
+- Next: **step 5** (the evaluation; several sessions, its sub-steps ticked in the step itself).
 - [x] Step 0. Tools (2026-11-10)
 - [x] Step 1. Four misplays (2026-11-10; `d15599f95` Q3, `752a7550e` Q6, `aadc42a5a` and
   `e1b359709` Q7, `f626a7351` Q5)
@@ -19,7 +17,8 @@ and commit, write its *As built* lines under the step, and move `Next`.
 - [x] Step 2b. Deploy, and test live (2026-11-10; `9a0290c21` live)
 - [x] Step 3, parts 1 and 2. Engine cost per tick: no trigger scan on the priority events, the
   board scans kept per mutation (2026-11-10; `8cf669edc` the scan, `ced532adf` the lists)
-- [ ] Step 3, part 3. The journal's snapshots and the resolution context
+- [x] Step 3, part 3. The journal's snapshots and the resolution context (2026-11-10;
+  `1acc7f27a`)
 - [x] Step 4. Search that buys nothing (2026-11-10; `70c51a5c8` S5, `b741490be` S3,
   `ef5e18906` S4)
 - [ ] Step 5. The evaluation (several sessions; its sub-steps are ticked in the step itself)
@@ -398,6 +397,53 @@ priority events are most of what happens. Part 2 gave nothing much on the ordina
 `recordJournal` → `takeLastKnown` at 9.7% and `makeResolutionContext` at 8.8% self (garbage
 collection 11.9%), so both are worth building; `detectTriggers` is still 21.6% inclusive there,
 which is real events now.
+
+### As built (2026-11-10): part 3
+
+**The resolution context.** Not built lazily: it didn't need to be. `makeResolutionContext`
+cost 2 ms a call (measured alone, 20,000 calls), and the profile spread that evenly over its
+lines, which is not what 690 closures cost. The cause was the literal's head: five spreads for
+the optional fields (`readTargets`, `sourceLost`, `granter`…) among its first dozen keys, and
+after a spread the runtime defines every later property one at a time, ~480 of them into a
+dictionary. The optional fields are now gathered in their own small object and assigned after a
+plain literal (`Object.assign`): **5 microseconds a call**, 400 times less. The context's keys
+and values are the same; only their order differs.
+
+**The journal's snapshots.** Counted on the token turn (one v1 turn from `seed-50-t40-b73`): 405
+`entered` snapshots, in batches of 7 to 17 permanents, each taken inside its own `emit` just
+after the flush, so each rescanned the board's statics (the scans part 2 keeps per mutation, and
+`emit` moves the epoch). `withEnterBatch` now takes the batch's snapshots together, in one cache
+region, before the first is announced; `recordJournal` uses one while its permanent is still in
+that stint. They entered together (rule 603.6a), and nothing between two announcements is meant
+to show in the later snapshot. A batch of one is unchanged.
+
+**Not taken on.** The `damage-dealt` snapshot of the source (141 on that turn, 0.7% of it; most
+of the journal's cost on a combat board): the damage is marked between two of them, so they
+aren't one read. The other callers (`moveObject`'s departures) each have their own state.
+
+**Checks.** The engine suite (32,377 tests); the end state of a v1 play-out from each fixed
+position (up to 400 acts) hashed equal before and after; simulations and ticks a decision
+unchanged; with `MTG_CACHE_CHECK=1` 40 two-player and 8 four-player games (seed 24 timed out at
+60 s beside the other two jobs and passes alone); the situation fuzzer over five token makers.
+
+**Measured** (`bot:anatomy`, the development PC, alone, ms a simulation; simulations and ticks
+identical in every column; *before* is parts 1 and 2, re-measured this session where marked):
+
+| Position | Before | Context alone | Both | Off |
+| --- | --- | --- | --- | --- |
+| `seed-5-t28-b50` (ordinary) | 133 (re-measured) | 99 | 99 | 26% |
+| `seed-5-t34-b87` | 186 | — | 145 | 22% |
+| `seed-10-t40-b94` (widest) | 204 | — | 183 | 10% |
+| `seed-50-t40-b73` (token turn) | 814 (re-measured) | 698 | 638 | 22% |
+
+The context was a guess of "up to 8% on token turns" and gave 14% there and 26% on the ordinary
+board, where a resolving ability is a larger share of a short rollout. The batch snapshots gave
+a further 7% of the token turn (9% of what was left) and nothing elsewhere, as expected.
+
+**Found on the way, not fixed** (`BACKLOG.md`, Bots): a v1 turn played for real from
+`seed-50-t40-b73` takes 110 s for 312 acts, 89% of it in `legalActions` planning mana for an X
+spell (`maxAffordableX` → `planManaPayment` → `coverGeneric` → `keepScore` → `supplyLeft`, which
+looks quadratic in mana sources). Rollouts don't show it; a live seat on that board would.
 
 ## Step 4. Search that buys nothing (one or two sessions)
 

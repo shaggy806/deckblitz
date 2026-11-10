@@ -3347,6 +3347,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Bots
 
+- **The bot audit's fixes, step 3, part 3: the resolution context and the journal's snapshots**
+  (2026-11-10; `1acc7f27a`; `docs/plans/bot-audit-fixes.md`, *As built*): `makeResolutionContext`'s
+  ~490-key literal began with spreads, so it cost 2 ms a call; the optional fields are assigned
+  after a plain literal and it costs 5 microseconds. An enter batch's journal snapshots are taken
+  together in one cache region. 10-26% off a simulation on the four fixed positions (22% on the
+  token turn), same simulations, ticks and end states.
 - **The bot audit's fixes, step 3, parts 1 and 2: the engine's cost per tick** (2026-11-10;
   `8cf669edc`, `ced532adf`; `docs/plans/bot-audit-fixes.md`, *As built*): no trigger scan for `priority-passed` and
   `priority-received`, and the three whole-board lists of statics kept per mutation outside a
