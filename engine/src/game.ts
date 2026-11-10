@@ -61172,6 +61172,13 @@ controlledBy,
     // broad safety net for the computed-value cache: whatever just changed,
     // `detectTriggers` and everything after it read fresh values.
     invalidateComputedCache();
+    // Nothing triggers on priority changing hands: no `TriggerSpec` kind and
+    // no `TRIGGER_EVENTS` row reads either event, and no watcher does (every
+    // branch of `triggerKindMatches` tests the event's type first; checked
+    // 2026-11-10, and `trigger-scan.test.ts` holds the table). They are a
+    // quarter of a busy turn's events and most of a quiet one's, and the
+    // whole-board scan for each was up to a quarter of a bot's rollout.
+    if (full.type === "priority-passed" || full.type === "priority-received") return;
     this.detectTriggers(full);
   }
 }
