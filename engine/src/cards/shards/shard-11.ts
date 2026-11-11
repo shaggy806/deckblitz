@@ -540,6 +540,7 @@ import _poolMeteorite from "../pool/meteorite.js";
 import _poolMeticulousCommons from "../pool/meticulous-commons.js";
 import _poolMinasMorgulDarkFortress from "../pool/minas-morgul-dark-fortress.js";
 import _poolMindDrain from "../pool/mind-drain.js";
+import _poolMindGrind from "../pool/mind-grind.js";
 import _poolMindwrackLiege from "../pool/mindwrack-liege.js";
 import _poolMirkwoodBats from "../pool/mirkwood-bats.js";
 import _poolMirranSafehouse from "../pool/mirran-safehouse.js";
@@ -1559,6 +1560,7 @@ const shard: CardShard = {
     _poolMeticulousCommons,
     _poolMinasMorgulDarkFortress,
     _poolMindDrain,
+    _poolMindGrind,
     _poolMindwrackLiege,
     _poolMirkwoodBats,
     _poolMirranSafehouse,

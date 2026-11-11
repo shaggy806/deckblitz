@@ -853,6 +853,7 @@ import _poolSyndicateGuildmage from "../pool/syndicate-guildmage.js";
 import _poolSynthesizerLabship from "../pool/synthesizer-labship.js";
 import _poolSyrVondamTheLucent from "../pool/syr-vondam-the-lucent.js";
 import _poolTajuruPathwarden from "../pool/tajuru-pathwarden.js";
+import _poolTamMindfulFirstYear from "../pool/tam-mindful-first-year.js";
 import _poolTeferisReproach from "../pool/teferis-reproach.js";
 import _poolTelJiladLifebreather from "../pool/tel-jilad-lifebreather.js";
 import _poolTemper from "../pool/temper.js";
@@ -1883,6 +1884,7 @@ const shard: CardShard = {
     _poolSynthesizerLabship,
     _poolSyrVondamTheLucent,
     _poolTajuruPathwarden,
+    _poolTamMindfulFirstYear,
     _poolTeferisReproach,
     _poolTelJiladLifebreather,
     _poolTemper,

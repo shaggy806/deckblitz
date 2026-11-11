@@ -16983,6 +16983,7 @@ import _poolMindDrillAssailant from "./pool/mind-drill-assailant.js";
 import _poolMindFlayer from "./pool/mind-flayer.js";
 import _poolMindFuneral from "./pool/mind-funeral.js";
 import _poolMindGames from "./pool/mind-games.js";
+import _poolMindGrind from "./pool/mind-grind.js";
 import _poolMindHarness from "./pool/mind-harness.js";
 import _poolMindIntoMatter from "./pool/mind-into-matter.js";
 import _poolMindKnives from "./pool/mind-knives.js";
@@ -26836,6 +26837,7 @@ import _poolTalruumChampion from "./pool/talruum-champion.js";
 import _poolTalruumMinotaur from "./pool/talruum-minotaur.js";
 import _poolTalruumPiper from "./pool/talruum-piper.js";
 import _poolTalusPaladin from "./pool/talus-paladin.js";
+import _poolTamMindfulFirstYear from "./pool/tam-mindful-first-year.js";
 import _poolTamObservantSequencer from "./pool/tam-observant-sequencer.js";
 import _poolTamThePossibility from "./pool/tam-the-possibility.js";
 import _poolTamanoa from "./pool/tamanoa.js";
@@ -29695,6 +29697,7 @@ import _poolVexingGull from "./pool/vexing-gull.js";
 import _poolVexingPuzzlebox from "./pool/vexing-puzzlebox.js";
 import _poolVexingRadgull from "./pool/vexing-radgull.js";
 import _poolVexingScuttler from "./pool/vexing-scuttler.js";
+import _poolVexingShusher from "./pool/vexing-shusher.js";
 import _poolVeyranVoiceOfDuality from "./pool/veyran-voice-of-duality.js";
 import _poolVgerTheIntruder from "./pool/vger-the-intruder.js";
 import _poolVhalCandlekeepResearcher from "./pool/vhal-candlekeep-researcher.js";
@@ -49379,6 +49382,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMindFlayer,
   _poolMindFuneral,
   _poolMindGames,
+  _poolMindGrind,
   _poolMindHarness,
   _poolMindIntoMatter,
   _poolMindKnives,
@@ -59232,6 +59236,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTalruumMinotaur,
   _poolTalruumPiper,
   _poolTalusPaladin,
+  _poolTamMindfulFirstYear,
   _poolTamObservantSequencer,
   _poolTamThePossibility,
   _poolTamanoa,
@@ -62091,6 +62096,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVexingPuzzlebox,
   _poolVexingRadgull,
   _poolVexingScuttler,
+  _poolVexingShusher,
   _poolVeyranVoiceOfDuality,
   _poolVgerTheIntruder,
   _poolVhalCandlekeepResearcher,
@@ -81788,6 +81794,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/mind-flayer": _poolMindFlayer,
   "pool/mind-funeral": _poolMindFuneral,
   "pool/mind-games": _poolMindGames,
+  "pool/mind-grind": _poolMindGrind,
   "pool/mind-harness": _poolMindHarness,
   "pool/mind-into-matter": _poolMindIntoMatter,
   "pool/mind-knives": _poolMindKnives,
@@ -91641,6 +91648,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/talruum-minotaur": _poolTalruumMinotaur,
   "pool/talruum-piper": _poolTalruumPiper,
   "pool/talus-paladin": _poolTalusPaladin,
+  "pool/tam-mindful-first-year": _poolTamMindfulFirstYear,
   "pool/tam-observant-sequencer": _poolTamObservantSequencer,
   "pool/tam-the-possibility": _poolTamThePossibility,
   "pool/tamanoa": _poolTamanoa,
@@ -94500,6 +94508,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/vexing-puzzlebox": _poolVexingPuzzlebox,
   "pool/vexing-radgull": _poolVexingRadgull,
   "pool/vexing-scuttler": _poolVexingScuttler,
+  "pool/vexing-shusher": _poolVexingShusher,
   "pool/veyran-voice-of-duality": _poolVeyranVoiceOfDuality,
   "pool/vger-the-intruder": _poolVgerTheIntruder,
   "pool/vhal-candlekeep-researcher": _poolVhalCandlekeepResearcher,
