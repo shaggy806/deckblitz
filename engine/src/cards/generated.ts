@@ -21344,6 +21344,7 @@ import _poolReclusiveTaxidermist from "./pool/reclusive-taxidermist.js";
 import _poolReclusiveWight from "./pool/reclusive-wight.js";
 import _poolRecoil from "./pool/recoil.js";
 import _poolRecollect from "./pool/recollect.js";
+import _poolRecommission from "./pool/recommission.js";
 import _poolReconCraftTheta from "./pool/recon-craft-theta.js";
 import _poolReconnaissanceMission from "./pool/reconnaissance-mission.js";
 import _poolReconnaissancePartition from "./pool/reconnaissance-partition.js";
@@ -30740,6 +30741,7 @@ import _poolWetlandSambar from "./pool/wetland-sambar.js";
 import _poolWhack from "./pool/whack.js";
 import _poolWhaleboneGlider from "./pool/whalebone-glider.js";
 import _poolWharfInfiltrator from "./pool/wharf-infiltrator.js";
+import _poolWhatMustBeDone from "./pool/what-must-be-done.js";
 import _poolWheelAndDeal from "./pool/wheel-and-deal.js";
 import _poolWheelOfFate from "./pool/wheel-of-fate.js";
 import _poolWheelOfFortune from "./pool/wheel-of-fortune.js";
@@ -53811,6 +53813,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolReclusiveWight,
   _poolRecoil,
   _poolRecollect,
+  _poolRecommission,
   _poolReconCraftTheta,
   _poolReconnaissanceMission,
   _poolReconnaissancePartition,
@@ -63207,6 +63210,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWhack,
   _poolWhaleboneGlider,
   _poolWharfInfiltrator,
+  _poolWhatMustBeDone,
   _poolWheelAndDeal,
   _poolWheelOfFate,
   _poolWheelOfFortune,
@@ -86291,6 +86295,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/reclusive-wight": _poolReclusiveWight,
   "pool/recoil": _poolRecoil,
   "pool/recollect": _poolRecollect,
+  "pool/recommission": _poolRecommission,
   "pool/recon-craft-theta": _poolReconCraftTheta,
   "pool/reconnaissance-mission": _poolReconnaissanceMission,
   "pool/reconnaissance-partition": _poolReconnaissancePartition,
@@ -95687,6 +95692,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/whack": _poolWhack,
   "pool/whalebone-glider": _poolWhaleboneGlider,
   "pool/wharf-infiltrator": _poolWharfInfiltrator,
+  "pool/what-must-be-done": _poolWhatMustBeDone,
   "pool/wheel-and-deal": _poolWheelAndDeal,
   "pool/wheel-of-fate": _poolWheelOfFate,
   "pool/wheel-of-fortune": _poolWheelOfFortune,

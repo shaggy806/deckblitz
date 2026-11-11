@@ -651,6 +651,7 @@ import _poolReaperKing from "../pool/reaper-king.js";
 import _poolReaperOfSheoldred from "../pool/reaper-of-sheoldred.js";
 import _poolRebornHero from "../pool/reborn-hero.js";
 import _poolRecklessStormseeker from "../pool/reckless-stormseeker.js";
+import _poolRecommission from "../pool/recommission.js";
 import _poolReconstructHistory from "../pool/reconstruct-history.js";
 import _poolRecruitmentDrive from "../pool/recruitment-drive.js";
 import _poolRecurringNightmare from "../pool/recurring-nightmare.js";
@@ -1652,6 +1653,7 @@ const shard: CardShard = {
     _poolReaperOfSheoldred,
     _poolRebornHero,
     _poolRecklessStormseeker,
+    _poolRecommission,
     _poolReconstructHistory,
     _poolRecruitmentDrive,
     _poolRecurringNightmare,
