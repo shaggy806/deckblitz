@@ -2299,6 +2299,18 @@ export interface StaticAbility extends TypePatch, ColorPatch {
    * not controlled continuously since their turn began (rule 302.6). It gives
    * no haste: they still can't attack. */
   readonly activateAsThoughHaste?: CardFilter;
+  /** "[The affected creature] can attack as though it had haste" (Instill
+   * Energy's enchanted creature): it may be declared as an attacker though
+   * its controller hasn't controlled it continuously since their turn began
+   * (rules 302.6, 508.1a, 702.10b). It gives no haste — nothing that asks
+   * for haste sees it, and its {T} abilities stay shut (702.10c). Read only
+   * as attackers are declared (`attacksAsThoughHaste`).
+   *
+   * `"your-opponents"` lifts it against some defenders only: Frenzied
+   * Saddlebrute's "can attack **your opponents and planeswalkers your
+   * opponents control** as though those creatures had haste" — "you" this
+   * permanent's controller, whoever controls the attacker. */
+  readonly attackAsThoughHaste?: true | "your-opponents";
   /** "You may activate the loyalty abilities of planeswalkers you control
    * **twice each turn** rather than only once" (Oath of Teferi, rule 606.3):
    * how many times this permanent's controller may. Two of them are still

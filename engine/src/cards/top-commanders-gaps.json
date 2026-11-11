@@ -2206,7 +2206,9 @@
   "trigger:cast-spell-with-cascade",
   "static:attack-direction-restriction",
   "stat:players-dealt-combat-damage-by-name-this-game",
-  "target:loyalty-ability"
+  "target:loyalty-ability",
+  "target:loyalty-ability",
+  "static:attack-as-though-haste"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

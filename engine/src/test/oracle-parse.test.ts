@@ -531,6 +531,10 @@ describe("when a spell may be cast or an ability activated", () => {
   it("reads the statics of timing, haste and loyalty", () => {
     expect(staticOf("Each opponent can cast spells only any time they could cast a sorcery.")?.prohibits).toEqual([{ act: "cast", who: "opponents", unless: "sorcery-timing" }]);
     expect(staticOf("You may activate abilities of creatures you control as though those creatures had haste.")?.activateAsThoughHaste).toEqual({ type: "creature" });
+    expect(staticOf("Enchanted creature can attack as though it had haste.")).toMatchObject({ affects: { scope: "attached" }, attackAsThoughHaste: true });
+    expect(
+      staticOf("All creatures can attack your opponents and planeswalkers your opponents control as though those creatures had haste."),
+    ).toMatchObject({ affects: { scope: "all-creatures" }, attackAsThoughHaste: "your-opponents" });
     expect(staticOf("You may activate the loyalty abilities of planeswalkers you control twice each turn rather than only once.")?.loyaltyActivationsEachTurn).toBe(2);
     expect(staticOf("Creatures you control can boast twice during each of your turns rather than once.")?.boastsEachOfYourTurns).toBe(2);
     expect(staticOf("Players can't activate planeswalkers' loyalty abilities.")?.prohibits).toEqual([{ act: "activate", who: "each-player", of: { type: "planeswalker" }, only: "loyalty" }]);

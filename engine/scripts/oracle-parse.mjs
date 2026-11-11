@@ -18840,6 +18840,14 @@ function parseStatic(line, text) {
       text,
     };
   }
+  // A permission to attack, not haste (rules 302.6, 702.10b): Instill Energy,
+  // and Frenzied Saddlebrute's against its controller's opponents only.
+  if (line === "Enchanted creature can attack as though it had haste.") {
+    return { affects: { scope: "attached" }, attackAsThoughHaste: true, text };
+  }
+  if (line === "All creatures can attack your opponents and planeswalkers your opponents control as though those creatures had haste.") {
+    return { affects: { scope: "all-creatures" }, attackAsThoughHaste: "your-opponents", text };
+  }
   if (line === "Enchanted creature gets +0/+2 and can block creatures with landwalk abilities as though they didn't have those abilities.") {
     return { affects: { scope: "attached" }, grantPt: [0, 2], blocksDespiteLandwalk: true, text };
   }

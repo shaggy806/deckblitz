@@ -63,6 +63,46 @@ function landwalkIgnoredForBlocks(state: GameState, registry: CardRegistry): Set
   });
 }
 
+/** Whether a static lets `attacker` attack `target` as though it had haste
+ * (`StaticAbility.attackAsThoughHaste` — Instill Energy, Frenzied
+ * Saddlebrute; rules 302.6, 702.10b): it gives no haste, only this
+ * permission. `"your-opponents"` holds only against an opponent of the
+ * static's controller or a planeswalker one controls (never a battle). */
+export function attacksAsThoughHaste(
+  state: GameState,
+  registry: CardRegistry,
+  attacker: GameObject,
+  target: PlayerId | ObjectId,
+): boolean {
+  const sources = computedCacheMemo("attacks-as-though-haste", () => {
+    const out: { readonly source: GameObject; readonly ability: StaticAbility }[] = [];
+    for (const id of state.zones.shared.battlefield) {
+      const source = state.objects[id];
+      if (source === undefined || state.players[source.controller]?.hasLost === true) continue;
+      if (hasLostAbilities(state, registry, source)) continue;
+      for (const ability of registry.get(rulesTextName(source)).static) {
+        if (ability.attackAsThoughHaste !== undefined) out.push({ source, ability });
+      }
+    }
+    return out;
+  });
+  return sources.some(({ source, ability }) => {
+    if (ability.attackAsThoughHaste === "your-opponents") {
+      if (isPlaneswalkerTarget(state, target)) {
+        const attacked = state.objects[target];
+        if (!effectiveTypes(state, registry, attacked).includes("planeswalker")) return false;
+        if (attacked.controller === source.controller) return false;
+      } else if (target === source.controller) {
+        return false;
+      }
+    }
+    return (
+      staticAffects(state, registry, ability.affects, source, attacker) &&
+      (ability.condition === undefined || staticConditionMet(state, registry, source, ability.condition))
+    );
+  });
+}
+
 /** Whether a static says `blocker` can block landwalkers as though they didn't
  * have landwalk (`StaticAbility.blocksDespiteLandwalk`, Street Savvy). Asked
  * only about a blocker facing a landwalker. */
@@ -297,7 +337,8 @@ function whyCannotAttackUncached(
   if (
     asOf.nextTurn !== true &&
     hasSummoningSickness(object) &&
-    !objHasKeyword(state, registry, creatureId, "haste")
+    !objHasKeyword(state, registry, creatureId, "haste") &&
+    !attacksAsThoughHaste(state, registry, object, target)
   ) {
     return `${def.name} has summoning sickness`;
   }

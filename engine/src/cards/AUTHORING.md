@@ -5524,6 +5524,14 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   graveyard (Riftstone Portal's mana ability for lands) doesn't yet, and
   any other part — a replacement, a type change — would work from the
   battlefield instead, so `pool.test.ts` refuses one.
+- `attackAsThoughHaste: true` — the affected creatures "can attack as though
+  they had haste" (Instill Energy on `"attached"`): they may be declared as
+  attackers though summoning sick (rules 302.6, 702.10b). It gives no haste:
+  a `hasKeyword: "haste"` read misses them and their {T} abilities stay shut
+  (702.10c — that half is `activateAsThoughHaste`). `"your-opponents"` lifts
+  it only against an opponent of this permanent's controller or a
+  planeswalker one controls, whoever controls the attacker (Frenzied
+  Saddlebrute, on `"all-creatures"`).
 - `canAttackAsThoughNoDefender: true` — the affected creatures "can attack as
   though they didn't have defender" (Arcades, Felothar, High Alert). Lifts
   defender's "can't attack" and nothing else: summoning sickness and
