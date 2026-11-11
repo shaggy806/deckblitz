@@ -14494,6 +14494,17 @@ export class Game {
           ...(becoming.chooseOnEnterLook !== null ? { look: true as const } : {}),
         };
       }
+      // Read ahead it will have on the battlefield (rules 614.12, 702.155b):
+      // "Sagas you control have read ahead" (Barbara Wright). The same
+      // choice a printed read ahead makes, one to its final chapter number
+      // (714.2d).
+      if (
+        becoming.chapters !== null &&
+        enteringKeywordInstances(this.state, this.registry, object, "read-ahead", under ?? object.controller) > 0
+      ) {
+        const final = Math.max(0, ...becoming.chapters.flatMap((chapter) => chapter.at));
+        if (final > 0) return { kind: "choose", options: Array.from({ length: final }, (_, i) => String(i + 1)) };
+      }
       // "It becomes your choice of …" (Primal Clay) — printed, or a copy's,
       // which chooses again over what it copied (the rulings) — or the flip
       // of a coin (Molten Sentry).
@@ -15859,7 +15870,11 @@ export class Game {
     // triggers only if the Saga has exactly that chapter's number of lore
     // counters — the chapters a read-ahead Saga skipped by entering past them
     // never trigger.
-    const exactOnly = def.readAhead && object.enteredBattlefieldOnTurn === this.state.turn.number;
+    // Its own, or one a static gives it now ("Sagas you control have read
+    // ahead" — Barbara Wright).
+    const exactOnly =
+      object.enteredBattlefieldOnTurn === this.state.turn.number &&
+      (def.readAhead || computeCharacteristics(this.state, this.registry, sagaId).keywords.has("read-ahead"));
     const reached = chapters
       .flatMap((chapter, index) =>
         chapter.at.filter((n) => n > before && n <= after && (!exactOnly || n === after)).map((n) => ({ index, n })),
@@ -61443,7 +61458,13 @@ controlledBy,
       // trigger this turn (702.155a).
       const sagaDef = this.registry.get(rulesTextName(object));
       if (sagaDef.chapters !== null) {
-        const chosen = sagaDef.readAhead ? Number(object.chosenOnEnter) : 1;
+        // A granted read ahead's number was chosen the same way: a Saga with
+        // no choice of its own to make as it enters that made one all the
+        // same (`nextEnterChoice`).
+        const readAhead =
+          sagaDef.readAhead ||
+          (sagaDef.chooseOnEnter === null && !sagaDef.chooseCreatureTypeOnEnter && enterChoice?.chosen !== undefined);
+        const chosen = readAhead ? Number(object.chosenOnEnter) : 1;
         this.addLoreCounter(id, this.counterTotal(id, "lore", Number.isInteger(chosen) && chosen > 0 ? chosen : 1));
       }
       // Counters it entered with were *put* on it (rule 122.6), so a

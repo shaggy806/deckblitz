@@ -2296,7 +2296,9 @@
   "effect:cant-sacrifice-those-this-turn",
   "effect:loyalty-abilities-twice-this-turn",
   "decision:each-opponent-may-pay-life-for-revealed-card",
-  "effect:counter-into-battlefield"
+  "effect:counter-into-battlefield",
+  "effect:counter-into-battlefield",
+  "static:grant-read-ahead"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

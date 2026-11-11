@@ -20165,6 +20165,15 @@ function parseStatic(line, text) {
   if ((m = /^Each spell that would cost less than (two|three|four|five) mana to cast costs \1 mana to cast\.$/.exec(line))) {
     return { affects: { scope: "self" }, costModification: { applies: {}, minimumMana: NUMBERS[m[1]] }, text };
   }
+  // "Sagas you control have read ahead" (Barbara Wright): each chooses its
+  // chapter as it enters (rules 614.12, 702.155b).
+  if (/^Sagas you control have read ahead\.(?: \(.*\))?$/.test(line)) {
+    return {
+      affects: { scope: "filter", filter: { subtype: "Saga", controlledBy: "you" } },
+      grantKeywords: ["read-ahead"],
+      text,
+    };
+  }
   // "Nontoken creatures you control have riot" (Rhythm of the Wild, Uncivil
   // Unrest): asked of each as it enters (rule 614.12).
   if (line === "Nontoken creatures you control have riot.") {

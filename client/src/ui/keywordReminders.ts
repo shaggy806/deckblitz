@@ -73,6 +73,10 @@ export const KEYWORD_REMINDER: Record<Keyword, { readonly name: string; readonly
     name: 'Ascend',
     text: "If you control ten or more permanents, you get the city's blessing for the rest of the game.",
   },
+  'read-ahead': {
+    name: 'Read ahead',
+    text: 'Chose a chapter as it entered and started with that many lore counters. Skipped chapters don’t trigger.',
+  },
   riot: { name: 'Riot', text: 'Enters with your choice of a +1/+1 counter or haste.' },
   rebound: {
     name: 'Rebound',

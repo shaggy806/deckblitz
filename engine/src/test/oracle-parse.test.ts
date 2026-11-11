@@ -18523,3 +18523,21 @@ describe("a countered spell's card put onto the battlefield", () => {
     });
   });
 });
+
+describe("read ahead given to Sagas", () => {
+  it("reads Barbara Wright's static under its ability word", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Legendary Creature — Human Advisor",
+      oracle_text:
+        "History Teacher — Sagas you control have read ahead. (As a Saga enters, choose a chapter and start with that many lore counters. Skipped chapters don't trigger.)\nDoctor's companion (You can have two commanders if the other is the Doctor.)",
+    } as never) as unknown as { static: Record<string, unknown>[]; pairing: unknown };
+    expect(face.static).toMatchObject([
+      {
+        affects: { scope: "filter", filter: { subtype: "Saga", controlledBy: "you" } },
+        grantKeywords: ["read-ahead"],
+      },
+    ]);
+    expect(face.pairing).toEqual({ kind: "doctors-companion" });
+  });
+});

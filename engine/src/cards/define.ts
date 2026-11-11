@@ -388,6 +388,13 @@ export type Keyword =
    * gained as a spell (Domri, Chaos Bringer); each instance is asked apart
    * (702.136b). */
   | "riot"
+  /** Read ahead (rule 702.155), when a static gives it to a Saga: "Sagas you
+   * control have read ahead" (Barbara Wright). A Saga that will have it on
+   * the battlefield chooses its chapter as it enters (rules 614.12,
+   * 702.155b — `Game.nextEnterChoice`), and one that has it the turn it
+   * entered triggers only the chapter it stands on (702.155a). A Saga's own
+   * is the card's `readAhead`. */
+  | "read-ahead"
   /** Rebound (rule 702.88a), when something gives it to an instant or sorcery
    * spell: "it gains rebound" (Taigam, Ojutai Master), "have rebound" (Cast
    * Through Time). Read as the spell resolves; one printed is the card's

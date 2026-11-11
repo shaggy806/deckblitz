@@ -11,7 +11,7 @@ import type { Game } from "../game.js";
 import type { ScriptedController } from "../controller.js";
 import type { ObjectId } from "../primitives.js";
 
-import { A, B, counters, lands, life, nextTurn, settle, spawn, table, toLibrary, toHand, tokensNamed } from "./harness.js";
+import { A, B, counters, keywords, lands, life, nextTurn, settle, spawn, table, toLibrary, toHand, tokensNamed } from "./harness.js";
 
 /** Cast `name` for alice, answering its read-ahead choice with `chapter` (and recording the
  * options it was offered). */
@@ -75,5 +75,84 @@ describe("read ahead", () => {
     expect(game.state.awaiting?.kind).not.toBe("choose-creature-type");
     expect(lore(game, card)).toBe(1);
     expect(B).toBeDefined();
+  });
+});
+
+describe("read ahead a static gives (Barbara Wright: Sagas you control have read ahead)", () => {
+  /** Alice casts History of Benalia (I, II: a Knight; III: a pump), her seat
+   * answering any chapter choice with `chapter`: the options of each one asked. */
+  function castHistory(game: Game, a: ScriptedController, chapter: string): { saga: ObjectId; offered: string[][] } {
+    lands(game, "Plains", 3);
+    const offered: string[][] = [];
+    a.chooseCreatureTypeFn = (_view, _source, options) => {
+      offered.push([...options]);
+      return chapter;
+    };
+    const saga = toHand(game, "History of Benalia");
+    game.dispatch({ type: "cast-spell", player: A, card: saga, targets: [] });
+    settle(game);
+    return { saga, offered };
+  }
+
+  it("a Saga entering under your control chooses its chapter, and the skipped one never triggers", () => {
+    const { game, a } = table();
+    spawn(game, "Barbara Wright");
+    const { saga, offered } = castHistory(game, a, "2");
+    expect(offered).toEqual([["1", "2", "3"]]);
+    expect(lore(game, saga)).toBe(2);
+    // Chapter II's Knight alone: chapter I's didn't trigger (rule 702.155a).
+    expect(tokensNamed(game, "Knight Token")).toBe(1);
+    expect(keywords(game, saga).has("read-ahead")).toBe(true);
+  });
+
+  it("starting on the final chapter fires it alone, and the Saga is sacrificed", () => {
+    const { game, a } = table();
+    spawn(game, "Barbara Wright");
+    const { saga } = castHistory(game, a, "3");
+    expect(tokensNamed(game, "Knight Token")).toBe(0);
+    expect(game.state.objects[saga]?.zone).toBe("graveyard");
+  });
+
+  it("goes on from the chosen chapter on later turns", () => {
+    const { game, a } = table();
+    spawn(game, "Barbara Wright");
+    const { saga } = castHistory(game, a, "1");
+    expect(lore(game, saga)).toBe(1);
+    expect(tokensNamed(game, "Knight Token")).toBe(1);
+    nextTurn(game);
+    nextTurn(game);
+    settle(game);
+    expect(lore(game, saga)).toBe(2);
+    expect(tokensNamed(game, "Knight Token")).toBe(2);
+  });
+
+  it("a Saga put onto the battlefield chooses too (rule 614.12)", () => {
+    const { game, a } = table();
+    spawn(game, "Barbara Wright");
+    a.chooseCreatureTypeFn = () => "2";
+    const saga = toHand(game, "History of Benalia");
+    game.debugApplyEffect(A, { kind: "put-onto-battlefield", target: 0 }, [{ kind: "object", object: saga }]);
+    settle(game);
+    expect(game.state.objects[saga]?.zone).toBe("battlefield");
+    expect(lore(game, saga)).toBe(2);
+    expect(tokensNamed(game, "Knight Token")).toBe(1);
+  });
+
+  it("an opponent's Barbara gives your Sagas nothing", () => {
+    const { game, a } = table();
+    spawn(game, "Barbara Wright", B);
+    const { saga, offered } = castHistory(game, a, "2");
+    expect(offered).toEqual([]);
+    expect(lore(game, saga)).toBe(1);
+    expect(tokensNamed(game, "Knight Token")).toBe(1);
+  });
+
+  it("is Barbara's ability: lost, a Saga enters on chapter I", () => {
+    const { game, a } = table();
+    spawn(game, "Barbara Wright");
+    spawn(game, "Humility");
+    const { saga, offered } = castHistory(game, a, "2");
+    expect(offered).toEqual([]);
+    expect(lore(game, saga)).toBe(1);
   });
 });
