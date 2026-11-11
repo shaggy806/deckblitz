@@ -10388,6 +10388,7 @@ import _poolGatstafArsonists from "./pool/gatstaf-arsonists.js";
 import _poolGatstafHowler from "./pool/gatstaf-howler.js";
 import _poolGatstafRavagers from "./pool/gatstaf-ravagers.js";
 import _poolGatstafShepherd from "./pool/gatstaf-shepherd.js";
+import _poolGattaAndLuzzu from "./pool/gatta-and-luzzu.js";
 import _poolGauFeralYouth from "./pool/gau-feral-youth.js";
 import _poolGauntletOfMight from "./pool/gauntlet-of-might.js";
 import _poolGauntletOfPower from "./pool/gauntlet-of-power.js";
@@ -16422,6 +16423,7 @@ import _poolMarinaVendrell from "./pool/marina-vendrell.js";
 import _poolMarinaVendrellsGrimoire from "./pool/marina-vendrells-grimoire.js";
 import _poolMarionetteApprentice from "./pool/marionette-apprentice.js";
 import _poolMarionetteMaster from "./pool/marionette-master.js";
+import _poolMariposaMilitaryBase from "./pool/mariposa-military-base.js";
 import _poolMarisiBreakerOfTheCoil from "./pool/marisi-breaker-of-the-coil.js";
 import _poolMarisisTwinclaws from "./pool/marisis-twinclaws.js";
 import _poolMaritLagesSlumber from "./pool/marit-lages-slumber.js";
@@ -22506,6 +22508,7 @@ import _poolSHIELDHelicarrier from "./pool/s-h-i-e-l-d-helicarrier.js";
 import _poolSHIELDSpyKit from "./pool/s-h-i-e-l-d-spy-kit.js";
 import _poolSSBotanyBay from "./pool/s-s-botany-bay.js";
 import _poolSaavikStoicStudent from "./pool/saavik-stoic-student.js";
+import _poolSabSunenLuxaEmbodied from "./pool/sab-sunen-luxa-embodied.js";
 import _poolSaberAnts from "./pool/saber-ants.js";
 import _poolSaberToothMooseLion from "./pool/saber-tooth-moose-lion.js";
 import _poolSaberclawGolem from "./pool/saberclaw-golem.js";
@@ -42774,6 +42777,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolGatstafHowler,
   _poolGatstafRavagers,
   _poolGatstafShepherd,
+  _poolGattaAndLuzzu,
   _poolGauFeralYouth,
   _poolGauntletOfMight,
   _poolGauntletOfPower,
@@ -48808,6 +48812,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMarinaVendrellsGrimoire,
   _poolMarionetteApprentice,
   _poolMarionetteMaster,
+  _poolMariposaMilitaryBase,
   _poolMarisiBreakerOfTheCoil,
   _poolMarisisTwinclaws,
   _poolMaritLagesSlumber,
@@ -54892,6 +54897,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSHIELDSpyKit,
   _poolSSBotanyBay,
   _poolSaavikStoicStudent,
+  _poolSabSunenLuxaEmbodied,
   _poolSaberAnts,
   _poolSaberToothMooseLion,
   _poolSaberclawGolem,
@@ -75173,6 +75179,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/gatstaf-howler": _poolGatstafHowler,
   "pool/gatstaf-ravagers": _poolGatstafRavagers,
   "pool/gatstaf-shepherd": _poolGatstafShepherd,
+  "pool/gatta-and-luzzu": _poolGattaAndLuzzu,
   "pool/gau-feral-youth": _poolGauFeralYouth,
   "pool/gauntlet-of-might": _poolGauntletOfMight,
   "pool/gauntlet-of-power": _poolGauntletOfPower,
@@ -81207,6 +81214,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/marina-vendrells-grimoire": _poolMarinaVendrellsGrimoire,
   "pool/marionette-apprentice": _poolMarionetteApprentice,
   "pool/marionette-master": _poolMarionetteMaster,
+  "pool/mariposa-military-base": _poolMariposaMilitaryBase,
   "pool/marisi-breaker-of-the-coil": _poolMarisiBreakerOfTheCoil,
   "pool/marisis-twinclaws": _poolMarisisTwinclaws,
   "pool/marit-lages-slumber": _poolMaritLagesSlumber,
@@ -87291,6 +87299,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/s-h-i-e-l-d-spy-kit": _poolSHIELDSpyKit,
   "pool/s-s-botany-bay": _poolSSBotanyBay,
   "pool/saavik-stoic-student": _poolSaavikStoicStudent,
+  "pool/sab-sunen-luxa-embodied": _poolSabSunenLuxaEmbodied,
   "pool/saber-ants": _poolSaberAnts,
   "pool/saber-tooth-moose-lion": _poolSaberToothMooseLion,
   "pool/saberclaw-golem": _poolSaberclawGolem,

@@ -20319,7 +20319,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     }
     case "ward":
-      ctx.ward(bindWardCost(spec.cost, (amount) => amountValue(amount, ctx)));
+      ctx.ward(spec.cost === null ? null : bindWardCost(spec.cost, (amount) => amountValue(amount, ctx)));
       return;
     case "scry":
       ctx.scry(amountValue(spec.amount, ctx), false, spec.then);

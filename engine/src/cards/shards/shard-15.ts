@@ -305,6 +305,7 @@ import _poolGameOver from "../pool/game-over.js";
 import _poolGanaxAstralHunter from "../pool/ganax-astral-hunter.js";
 import _poolGarrisonGriffin from "../pool/garrison-griffin.js";
 import _poolGastalBlockbuster from "../pool/gastal-blockbuster.js";
+import _poolGattaAndLuzzu from "../pool/gatta-and-luzzu.js";
 import _poolGaviNestWarden from "../pool/gavi-nest-warden.js";
 import _poolGavonyTownship from "../pool/gavony-township.js";
 import _poolGazeOfGranite from "../pool/gaze-of-granite.js";
@@ -502,6 +503,7 @@ import _poolManticoreOfTheGauntlet from "../pool/manticore-of-the-gauntlet.js";
 import _poolMarblePriest from "../pool/marble-priest.js";
 import _poolMarchFromTheTomb from "../pool/march-from-the-tomb.js";
 import _poolMarchOfRecklessJoy from "../pool/march-of-reckless-joy.js";
+import _poolMariposaMilitaryBase from "../pool/mariposa-military-base.js";
 import _poolMarketFestival from "../pool/market-festival.js";
 import _poolMarkovEnforcer from "../pool/markov-enforcer.js";
 import _poolMarrowBats from "../pool/marrow-bats.js";
@@ -1264,6 +1266,7 @@ const shard: CardShard = {
     _poolGanaxAstralHunter,
     _poolGarrisonGriffin,
     _poolGastalBlockbuster,
+    _poolGattaAndLuzzu,
     _poolGaviNestWarden,
     _poolGavonyTownship,
     _poolGazeOfGranite,
@@ -1461,6 +1464,7 @@ const shard: CardShard = {
     _poolMarblePriest,
     _poolMarchFromTheTomb,
     _poolMarchOfRecklessJoy,
+    _poolMariposaMilitaryBase,
     _poolMarketFestival,
     _poolMarkovEnforcer,
     _poolMarrowBats,
