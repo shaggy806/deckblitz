@@ -49,6 +49,11 @@
 .about-page a {
   color: var(--accent);
 }
+.about-page .about-credits {
+  margin: 0 0 0.75em;
+  padding-left: 1.25em;
+  color: var(--muted);
+}
 .about-page .about-lead {
   color: var(--text);
 }

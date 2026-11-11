@@ -152,7 +152,7 @@ Shiko or the other spell, and haste enablers in the crackback).
 - **91 targeted slots have no polarity rating** (of 12,164, 2026-11-02; `target-polarity.test.ts`' ratchet prints them): some only read their target (Biomantic Mastery), some are Roles on a slot whose spec already picks the side (Betroth the Beast), and some look like real misses ("target player draws, then discards", Cephalid Looter; `as-player`'s and `for-each-player`'s player, Wheel and Deal, Muse Vessel). A bot reads an unrated slot as `either`.
 
 - **A bot controlling another player only passes** (2026-11-01) — `eval-bot.ts`'s stand-in makes that player's forced decisions one step ahead and casts nothing, so a bot's Mindslaver turn is legal but timid.
-- **One v2 simulation can take 3-9 s on a huge board, past any decision budget** (2026-11-09) — real bracket 4 decks (`docs/plans/strong-bot-decks.md`, on the local `strong-decks-pilot` branch) reached 50-270 permanents (discover chains, 1,097 legal actions), and decisions ran 40-80 such simulations: 240-475 s unbudgeted. The wait is bounded since 2026-11-10 (the audit's step 2: a rollout is stopped at the deadline, an unscored search plays v1's cast, and the rest of that turn starts no rollout), so on such a board the bot now plays about as v1 does; **left: the cost itself**, so that it searches there at all (steps 3 and 4). No engine hot spot stood out in a profile (characteristics, triggers and SBAs, spread out); the cost is how much a rollout plays.
+- **One v2 simulation can take 3-9 s on a huge board, past any decision budget** (2026-11-09) — real bracket 4 decks (`docs/plans/strong-bot-decks.md`; `STRONG_DECKS`, a room's "Strong" bot decks since 2026-11-11) reached 50-270 permanents (discover chains, 1,097 legal actions), and decisions ran 40-80 such simulations: 240-475 s unbudgeted. The wait is bounded since 2026-11-10 (the audit's step 2: a rollout is stopped at the deadline, an unscored search plays v1's cast, and the rest of that turn starts no rollout), so on such a board the bot now plays about as v1 does; **left: the cost itself**, so that it searches there at all (steps 3 and 4). No engine hot spot stood out in a profile (characteristics, triggers and SBAs, spread out); the cost is how much a rollout plays.
 - **Bots never band, and price a band's blocker as blocking one creature** (2026-10-28, B247): a bot's attack never sets `AttackerDeclaration.band`, and `bot/combat-math.ts` judges a block as one blocker on one attacker, though a blocker of a band blocks all of it and takes all their damage (rule 702.22h). Dividing damage under banding is right already (`opposedAssignment`).
 - **Play with the bots' simulation budget** (the user, 2026-10-13): v2 stops on whichever comes first,
   a count (`maxSimulations`, default 200 a decision; 12 rollouts for a non-priority decision) or the
@@ -228,14 +228,23 @@ Shiko or the other spell, and haste enablers in the crackback).
   `bot:scenarios` and `bot:fit-scenarios` read as training scenarios, as does each blunder
   `bot:behaviour` shows. `npm run bot:captures -w engine` lists them with v2's answer today;
   once one is fixed, `-- resolve` moves it to `captures/resolved/`, where it gates.
-- **A wider pool of bot decks (later — raised 2026-09-26).** `SAMPLE_DECKS` (fourteen precons,
-  `docs/plans/precon-decks.md`) and the five upgraded TDC precons (`UPGRADED_DECKS`,
-  `docs/plans/upgraded-decks.md`). Still unscoped: more power levels, and upgrades of the
-  other nine.
-- **Sultai Arisen and Jeskai Striker (Upgraded) didn't measure stronger than their precons**
-  (16.7% and 8.3% against 20.8% and 14.6%, 48 games each, within noise; Temur Roar's upgrade
-  went 35% to 69%). More rounds, autopsies of their losses for cards the bots misuse, and
-  revised swaps: `docs/plans/upgraded-decks.md`, "Open".
+- **The bots don't know "assigns combat damage equal to its toughness"** (2026-11-11): nothing
+  under `engine/src/bot/` or `controller.ts` reads `combatDamageByToughness` (Felothar the
+  Steadfast, Doran, Assault Formation, Huatli), so both bots' combat math price a 0/7 wall as
+  dealing nothing and attack with one creature a turn. Abzan Armor wins 4% of blitz-field games
+  with either list (`docs/plans/upgraded-decks.md`, "Open").
+- **The upgraded precons aren't an even field** (2026-11-11): among the fourteen, Temur Roar
+  (Upgraded) wins 65% of its games, Abzan Armor 4% (the item above) and Jeskai Striker 8% (v2
+  doesn't plan a turn of chained cheap spells); nine sit within noise of 25%. Figures:
+  `docs/plans/upgraded-decks.md`.
+- **v2 leaves passive enchantments and mana rocks in hand** (2026-11-11, the upgraded decks'
+  card-usage report): Guardian Project cast in 0 of 6 games it could have been, Ghostly Prison 0
+  of 8, Rooftop Storm 1 of 4, Fellwar Stone 4 of 10, Mind Stone 2 of 6. The lists took creatures
+  with the same effect instead; a fix would be an evaluation term for what such a permanent will
+  be worth (`docs/plans/upgraded-decks.md`).
+- **The About page doesn't say how a creator can have a strong deck removed** (2026-11-11): the
+  site has no contact route; the user's call what it should be
+  (`docs/plans/strong-bot-decks.md`).
 - **`crackbackGrowth` is unbenched since its last change** (2026-10-05, merged to main on the user's call with the tests, scenario gate and a 20-game fuzzer pass clean): the scaled crackback check now applies only while holding back passes it. Still to do: rerun the paired `bot:crackback` (0.5 against `--weights '{"crackbackGrowth":0}'`, 120+ seeds) to confirm the 25 swings into a plainly lethal board are gone and the 3.5% → 2.0% holds, re-bench against main, and add a training scenario (`docs/plans/smarter-bots.md`, "Combat: the alpha strike and crackback").
 
 ## Client / UI

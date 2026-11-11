@@ -9,7 +9,7 @@ import type { DeckContents, PickableDeck } from '../deck-builder/decks.ts'
 import { CommanderArt } from './CommanderArt.tsx'
 import { DeckPickerModal } from './DeckPickerModal.tsx'
 import { RoomSettingsPanel } from './RoomSettingsPanel.tsx'
-import { randomBotDeck } from './randomBotDeck.ts'
+import { BOT_DECK_POOLS, randomBotDeck } from './randomBotDeck.ts'
 import './lobby.css'
 
 /** A table is 2-4 seats. Mirrors `PendingRoom`'s own limits, which are what
@@ -271,16 +271,26 @@ export function SeatBoard({ game, children }: { readonly game: NetworkGame; read
                         </button>
                       )
                     ) : host && !s.claimed && !s.isBot ? (
-                      <button
-                        type="button"
-                        className="seat-panel-add-bot"
-                        data-tour="lobby-add-bot"
-                        onClick={() =>
-                          game.addBot(s.player, randomBotDeck(game.seats, Math.random, game.roomSettings?.botDecks))
-                        }
-                      >
-                        Add bot (random deck)
-                      </button>
+                      // One button per strength of deck, so a table can mix
+                      // them (the user's ask, 2026-11-11; it was one button
+                      // and a room-wide "Bot decks" setting).
+                      <div className="seat-panel-add-bots" role="group" aria-label="Add a bot" data-tour="lobby-add-bot">
+                        <span className="seat-panel-add-bots-label" aria-hidden="true">
+                          + Bot
+                        </span>
+                        {BOT_DECK_POOLS.map(({ pool, label, hint }) => (
+                          <button
+                            key={pool}
+                            type="button"
+                            className="seat-panel-add-bot"
+                            title={hint}
+                            aria-label={`Add ${label.toLowerCase()} bot`}
+                            onClick={() => game.addBot(s.player, randomBotDeck(game.seats, Math.random, pool))}
+                          >
+                            {label}
+                          </button>
+                        ))}
+                      </div>
                     ) : null}
                   </div>
                 </div>

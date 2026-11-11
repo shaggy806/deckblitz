@@ -1,15 +1,28 @@
-import { SAMPLE_DECKS, UPGRADED_DECKS } from 'engine/client'
+import { SAMPLE_DECKS, STRONG_DECKS, UPGRADED_DECKS } from 'engine/client'
 import type { SampleDeck } from 'engine/client'
-import type { BotDeckPool, SeatStatus, WireDeck } from 'protocol'
+import type { SeatStatus, WireDeck } from 'protocol'
 
-/** The decks a pool deals from (`RoomSettings.botDecks`): the starter decks
- * the deck builder offers, or the upgraded precons. */
+/** How strong a deck a bot is dealt: a precon as printed, an upgraded
+ * precon, or a real player's deck. The host picks one per bot, by which of
+ * a seat's three "Add bot" buttons they press (`SeatBoard`). */
+export type BotDeckPool = 'precon' | 'upgraded' | 'strong'
+
+/** The pools in the order the lobby offers them, each with its button's
+ * label and what it says on hover. */
+export const BOT_DECK_POOLS: readonly { pool: BotDeckPool; label: string; hint: string }[] = [
+  { pool: 'precon', label: 'Precon', hint: 'Add a bot playing a random precon, as printed' },
+  { pool: 'upgraded', label: 'Upgraded', hint: 'Add a bot playing a random upgraded precon' },
+  { pool: 'strong', label: 'Strong', hint: "Add a bot playing a real player's deck (credited on the About page)" },
+]
+
+/** The decks a pool deals from: the precons, the upgraded precons, or the
+ * real players' decks (bots only: the deck builder doesn't offer those). */
 export function botDecksOf(pool: BotDeckPool): readonly SampleDeck[] {
-  return pool === 'upgraded' ? UPGRADED_DECKS : SAMPLE_DECKS
+  return pool === 'strong' ? STRONG_DECKS : pool === 'upgraded' ? UPGRADED_DECKS : SAMPLE_DECKS
 }
 
 /**
- * The deck the lobby's "Add bot (random deck)" gives a bot: one of `pool`'s
+ * The deck one of the lobby's "Add bot" buttons gives a bot: one of `from`'s
  * decks (`botDecksOf`) at random — one no other seat at the table is
  * already playing, while there is one. `random` is `Math.random`, passed in
  * for tests.

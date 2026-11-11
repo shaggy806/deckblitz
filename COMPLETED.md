@@ -3847,6 +3847,19 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Bots
 
+- **Upgraded lists for all fourteen precons, and the strong decks as a third bot pool**
+  (2026-11-11): `UPGRADED_DECKS` rebuilt by hand, the five from October replaced and the other
+  nine added: one strong mana base in every deck (duals, shocks, fetches, the untapped two-colour
+  lands), and 21-28 spells a deck chosen for what the bots play well, with EDHREC a source of
+  candidates only. Against their precons the upgrades won 108 games to 60 (168 games, 1 s a
+  decision); Sultai Arisen's and Jeskai Striker's now measure above their precons. A blitz still
+  deals this pool. **`STRONG_DECKS`**: the eight real Archidekt decks of the pilot, no stand-ins
+  left, published with the user's go-ahead, for bots only, each named for its creator and linked
+  from the About page. **Three "Add bot" buttons on an open seat** (Precon, Upgraded, Strong), so
+  the host picks each bot's strength and a table can mix them, in place of the room-wide "Bot
+  decks" setting (`RoomSettings.botDecks`, removed). `deck-winrates.mjs` gained
+  `--budget`, the card-usage report (both from the pilot branch) and `--pool blitz | strong`.
+  `docs/plans/upgraded-decks.md`, `docs/plans/strong-bot-decks.md`.
 - **The bot audit's fixes, step 5, sub-step 5: the sequencing rules retired, and the step's
   A/B** (2026-11-10; `6b51bd9a7`, `ae27b5c70`, `3dfe7c9cd`, `aa3218a45`;
   `docs/plans/bot-audit-fixes.md`, *As built*): v2 no longer asks `reducerFirst`,

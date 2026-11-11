@@ -92,17 +92,20 @@ test('the host can allow only Commander-legal decks, and everyone sees it', asyn
   await guest.context().close()
 })
 
-test("the host picks the bots' decks: upgraded precons for every bot added", async ({ browser }) => {
+test("the host picks each bot's deck by its strength: a precon, an upgraded precon or a player's deck", async ({ browser }) => {
   const { host, guest } = await twoPlayerRoom(browser)
-  const pool = (page: Page) => page.locator('.rs-options[aria-label="Bot decks"]')
-  await expect(pool(host).getByRole('button', { name: 'Precons' })).toHaveClass(/active/)
-  await pool(host).getByRole('button', { name: 'Upgraded' }).click()
-  await expect(pool(host).getByRole('button', { name: 'Upgraded' })).toHaveClass(/active/)
-  await expect(guest.getByText('Upgraded precons')).toBeVisible()
   const grid = host.locator('.seat-board-grid')
+  // The guest is no host: an open seat shows them no buttons.
   await grid.getByRole('button', { name: /Add player/ }).first().click()
-  await host.getByRole('button', { name: 'Add bot (random deck)' }).first().click()
+  await expect(host.getByRole('group', { name: 'Add a bot' })).toHaveCount(1)
+  await expect(guest.getByRole('group', { name: 'Add a bot' })).toHaveCount(0)
+  await shots(host, 'lobby-add-bot-buttons')
+  await host.getByRole('button', { name: 'Add upgraded bot' }).first().click()
   await expect(host.locator('.seat-deck-name', { hasText: '(Upgraded)' })).toHaveCount(1)
+  // Strong: a real player's deck, named for its creator.
+  await grid.getByRole('button', { name: /Add player/ }).first().click()
+  await host.getByRole('button', { name: 'Add strong bot' }).first().click()
+  await expect(host.locator('.seat-deck-name', { hasText: ' by ' })).toHaveCount(1)
   await shots(host, 'lobby-upgraded-bots')
   await host.context().close()
   await guest.context().close()
@@ -123,8 +126,8 @@ test('a full room can be watched: the seat board, then the game with no hand', a
   await addPlayer.first().click()
   await expect(host.locator('.seat-panel')).toHaveCount(4)
   for (let i = 0; i < 3; i += 1) {
-    await host.getByRole('button', { name: 'Add bot (random deck)' }).first().click()
-    await expect(host.getByRole('button', { name: 'Add bot (random deck)' })).toHaveCount(2 - i)
+    await host.getByRole('button', { name: 'Add precon bot' }).first().click()
+    await expect(host.getByRole('button', { name: 'Add precon bot' })).toHaveCount(2 - i)
   }
 
   const watcher = await newPage(browser)

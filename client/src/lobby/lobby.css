@@ -344,9 +344,30 @@ button.seat-add-panel:hover {
   background: color-mix(in srgb, var(--good) 12%, transparent);
   box-shadow: var(--bevel-pressed);
 }
+/* An open seat's three "Add bot" buttons, one per strength of deck, in one
+   row under a small caption that sits in the row's own height. */
+.seat-panel-add-bots {
+  display: grid;
+  /* Each button as wide as its word: equal columns clipped "Upgraded" at
+     four seats on a 1366px screen. */
+  grid-template-columns: auto repeat(3, minmax(0, max-content));
+  justify-content: space-between;
+  align-items: center;
+  /* Tight on purpose, and not growing with the screen: at 1440p the text
+     scales up and the seat doesn't widen with it. */
+  gap: clamp(2px, 0.2vw, 4px);
+}
+.seat-panel-add-bots-label {
+  font-size: var(--text-xs);
+  color: var(--muted);
+  white-space: nowrap;
+}
 .seat-panel-add-bot {
   font-size: var(--text-xs);
-  padding: 4px 8px;
+  padding: 4px clamp(2px, 0.2vw, 3px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 /* A seat's action, over a hidden Ready button that holds the row's height
    whether the seat shows Ready, Add bot or nothing: a seat lost its button

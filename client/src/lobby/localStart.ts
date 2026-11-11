@@ -1,4 +1,4 @@
-import { SAMPLE_DECKS, UPGRADED_DECKS } from 'engine/client'
+import { SAMPLE_DECKS, STRONG_DECKS, UPGRADED_DECKS } from 'engine/client'
 import type { PlayerId } from 'engine/client'
 import type { BotSpeed, RoomSettings, SeatStatus, WireDeck } from 'protocol'
 
@@ -70,14 +70,14 @@ export function localStart(lobby: LobbyState): LocalStartVerdict {
 }
 
 /** The whole list behind a seat's deck: the one this client sent for it,
- * else one of the same name among the starter and upgraded decks (what the
+ * else one of the same name among the starter, upgraded and strong decks (what the
  * server deals a seat sent none) or the decks saved here. */
 function deckFor(status: SeatStatus, lobby: LobbyState): WireDeck | null {
   const name = status.deck?.name
   if (name === undefined) return null
   const sent = lobby.sent.get(status.player)
   if (sent !== undefined && (sent.name ?? null) === name) return sent
-  const starter = [...SAMPLE_DECKS, ...UPGRADED_DECKS].find((d) => d.name === name)
+  const starter = [...SAMPLE_DECKS, ...UPGRADED_DECKS, ...STRONG_DECKS].find((d) => d.name === name)
   if (starter !== undefined) {
     return {
       cards: starter.cards,

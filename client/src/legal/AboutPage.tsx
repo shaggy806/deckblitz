@@ -1,3 +1,4 @@
+import { STRONG_DECKS } from 'engine/client'
 import {
   ART_RIGHTS,
   FAN_CONTENT_POLICY_URL,
@@ -13,8 +14,8 @@ import './legal.css'
 
 /**
  * `/about`: what Deck Blitz is, the Fan Content Policy notice in full, and
- * where its card data and images come from. A network-free page like the
- * library: no room, no WebSocket, no card pool.
+ * where its card data, images and the bots' strong decks come from. A
+ * network-free page like the library: no room, no WebSocket, no card pool.
  */
 export function AboutPage() {
   return (
@@ -51,6 +52,30 @@ export function AboutPage() {
             Scryfall
           </a>
           . {SITE_TITLE} isn&apos;t produced by, affiliated with or endorsed by Scryfall.
+        </p>
+      </section>
+
+      <section>
+        <h2>Players&apos; decks</h2>
+        <p>
+          A bot can be given a &ldquo;Strong&rdquo; deck: one of these real Commander decks that players built and shared on
+          Archidekt, each played exactly as its creator listed it on {STRONG_DECKS[0]?.credit?.taken} and named for
+          them. Their own pages show their latest versions:
+        </p>
+        <ul className="about-credits">
+          {STRONG_DECKS.map((deck) =>
+            deck.credit === undefined ? null : (
+              <li key={deck.name}>
+                <a href={`https://archidekt.com/decks/${deck.credit.archidektId}`} target="_blank" rel="noreferrer">
+                  {deck.credit.title}
+                </a>{' '}
+                by {deck.credit.author} ({deck.commanders?.[0]})
+              </li>
+            ),
+          )}
+        </ul>
+        <p>
+          {SITE_TITLE} isn&apos;t affiliated with or endorsed by Archidekt or these players.
         </p>
       </section>
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { BENCH_DECKS, SAMPLE_DECKS, UPGRADED_DECKS } from 'engine/client'
+import { BENCH_DECKS, SAMPLE_DECKS, STARTER_DECKS, STRONG_DECKS, UPGRADED_DECKS } from 'engine/client'
 import type { SeatStatus } from 'protocol'
 import { randomBotDeck, randomBotDecks } from './randomBotDeck.ts'
 
@@ -44,5 +44,18 @@ describe('the upgraded pool', () => {
     expect(randomBotDeck([], () => 0, 'upgraded').name).toBe(UPGRADED_DECKS[0].name)
     const decks = randomBotDecks(3, [], () => 0, 'upgraded')
     expect(decks.map((d) => d.name)).toEqual(UPGRADED_DECKS.slice(0, 3).map((d) => d.name))
+  })
+})
+
+describe('the strong pool', () => {
+  it("deals the real players' decks, each named for its creator", () => {
+    const decks = randomBotDecks(3, [], () => 0, 'strong')
+    expect(decks.map((d) => d.name)).toEqual(STRONG_DECKS.slice(0, 3).map((d) => d.name))
+    for (const deck of decks) expect(deck.name).toMatch(/ by /)
+  })
+
+  it('is no part of the starter decks a player is offered', () => {
+    const starters = new Set(STARTER_DECKS.map((d) => d.name))
+    expect(STRONG_DECKS.filter((d) => starters.has(d.name))).toEqual([])
   })
 })

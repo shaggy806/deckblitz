@@ -18,7 +18,7 @@ const lobby = (over: Partial<LobbyState> = {}): LobbyState => ({
   isHost: true,
   pending: true,
   spectators: 0,
-  settings: { startingLife: 30, firstPlayer: 'bob' as PlayerId, commanderLegalOnly: false, botDecks: 'precon' },
+  settings: { startingLife: 30, firstPlayer: 'bob' as PlayerId, commanderLegalOnly: false },
   botSpeed: 'fast',
   sent: new Map([['alice' as PlayerId, mine]]),
   ...over,
