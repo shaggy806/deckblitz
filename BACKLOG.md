@@ -49,14 +49,14 @@ section keeps only what to do next.
   a major engine change.** `npm run -s cards:goal -w engine` lists what's left, best rank first,
   each with its open need keys and its size; `-- --size small --keys` is the build list, one key a
   unit. After B296-B298 (161 cards re-attempted and authored with no engine code) 383 were left;
-  the first overnight run down the small list (2026-11-11, 90 keys, 98 cards, `COMPLETED.md`)
-  leaves 288: 92 sized **small** (a field, an amount, a filter clause, a trigger event), 47
+  the first overnight run down the small list (2026-11-11, 92 keys, 101 cards, `COMPLETED.md`)
+  leaves 285: 88 sized **small** (a field, an amount, a filter clause, a trigger event), 48
   **major** (a new decision, a new subsystem, a core rule changed — flagged, not built), 149
   **unsized** (records from B291-B296, read against today's engine but before sizes were
   recorded: size each as it is picked up). Every one needs engine work; the sizes are the
-  authoring agents' estimates from reading, and held well on the small list: of 92 units tried,
-  two were really major (Kamahl's Will, Soulfire Eruption) and about one in five needed no engine
-  code. The next small unit is Hellish Rebuke's key, then Spectral Searchlight's. 23 triaged cards
+  authoring agents' estimates from reading, and held well on the small list: of 95 units tried,
+  three were really major (Kamahl's Will, Soulfire Eruption, Spectral Searchlight) and about one in five needed no engine
+  code. The next small units are Chiss-Goria's key, then Ratchet's and Curse of Hospitality's (read, not started). 23 triaged cards
   the run's keys freed wait in `cards:needs -- --stale` for `author-freed`, which will also give
   narrow keys to the few it left half-covered (Twists and Turns, Diplomatic Escort, Light Up the
   Night, Urgent Necropsy, Consume Spirit, Soul Burn).
