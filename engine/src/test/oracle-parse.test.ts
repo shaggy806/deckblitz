@@ -13754,6 +13754,21 @@ describe("one target slot over players and permanents", () => {
     });
     expect(targetOfLine("{T}: This creature deals 1 damage to any target that isn't a commander.").filter.isCommander).toBe(false);
   });
+  it("any target that was dealt damage this turn", () => {
+    expect(targetOfLine("{T}: This creature deals 1 damage to any target that was dealt damage this turn.")).toEqual({
+      kind: "permanent",
+      filter: { typesAnyOf: ["creature", "planeswalker", "battle"], damagedThisTurnBy: {} },
+      orPlayer: "any",
+      playerWith: { turnStat: "damage-taken" },
+    });
+    // Needle Drop, whole: the damage, then the draw.
+    const drop = parseFace(
+      { name: "Needle Drop", type_line: "Instant", oracle_text: "Needle Drop deals 1 damage to any target that was dealt damage this turn.\nDraw a card." },
+      { tokenFor: (d: string) => d },
+    );
+    expect(drop.todo).toEqual([]);
+    expect(drop.targets?.[0]).toMatchObject({ orPlayer: "any", playerWith: { turnStat: "damage-taken" } });
+  });
   it("a creature token, a player or a planeswalker", () => {
     expect(targetOfLine("{2}{R}: This creature deals 1 damage to target creature token, player, or planeswalker.")).toEqual({
       kind: "permanent",
@@ -13785,7 +13800,7 @@ describe("one target slot over players and permanents", () => {
   });
   it("leaves a line it can't read to the author", () => {
     const card = parseFace(
-      { name: "Card", type_line: "Creature", oracle_text: "{T}: This creature deals 1 damage to any target that was dealt damage this turn." },
+      { name: "Card", type_line: "Creature", oracle_text: "{T}: This creature deals 1 damage to any target that gained life this turn." },
       { tokenFor: (d: string) => d },
     );
     expect(card.complete).toBe(false);

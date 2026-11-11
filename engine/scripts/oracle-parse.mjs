@@ -1177,6 +1177,16 @@ function partedTargetOf(phrase) {
       orPlayer: "any",
     };
   }
+  // "Any target that was dealt damage this turn" (Needle Drop): the permanent
+  // by its damage record, the player by the turn's `damage-taken`.
+  if (phrase === "any target that was dealt damage this turn") {
+    return {
+      kind: "permanent",
+      filter: { typesAnyOf: ["creature", "planeswalker", "battle"], damagedThisTurnBy: {} },
+      orPlayer: "any",
+      playerWith: { turnStat: "damage-taken" },
+    };
+  }
   const creature = /^target player, planeswalker, or ([a-z]+) creature$/.exec(phrase);
   if (creature !== null) {
     return {
@@ -1335,7 +1345,7 @@ function quantifiedSlots(phrase, ctx) {
 // Non-capturing: a template wraps it in its own group where it wants the match,
 // so a nested group never shifts the numbering of the ones after it. After the
 // fixed phrases, a "target …" one `modifiedTargetOf` reads or rejects.
-const TARGET = `(?:any target that isn't an? [a-z]+|target player, planeswalker, or [a-z]+ creature|${TARGET_PHRASES.map(([p]) => escapeRe(p)).join("|")}|target [a-z' ]+?(?: with (?:flying|reach|(?:power|toughness|mana value) \\d+ or (?:greater|less)))?)`;
+const TARGET = `(?:any target that isn't an? [a-z]+|any target that was dealt damage this turn|target player, planeswalker, or [a-z]+ creature|${TARGET_PHRASES.map(([p]) => escapeRe(p)).join("|")}|target [a-z' ]+?(?: with (?:flying|reach|(?:power|toughness|mana value) \\d+ or (?:greater|less)))?)`;
 
 /** "(non-Wall) creature(s) blocking or blocked by this creature", "creatures
  * it's blocking", "creatures blocking enchanted creature": a creature filter

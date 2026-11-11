@@ -1,6 +1,6 @@
 /** Reference types for spell / ability targets. Pure data, no logic. */
 
-import type { CardType } from "./cards.js";
+import type { CardType, TurnStat } from "./cards.js";
 import type { EffectAmount } from "./effects.js";
 import type { CardFilter, SpellTargetsFilter } from "./filter.js";
 import type { Color } from "./mana.js";
@@ -160,6 +160,13 @@ export type TargetSpec =
        * creature an opponent controls, or planeswalker an opponent controls"
        * (Nicol Bolas, God-Pharaoh) is `whose: "opponent"` with `"opponent"`. */
       readonly orPlayer?: "opponent" | "any";
+      /** What the player part asks of a player, as `filter` asks of a
+       * permanent: only one whose `turnStat` this turn is above 0. "Any target
+       * **that was dealt damage this turn**" (Needle Drop) is the three
+       * permanent types with `damagedThisTurnBy: {}`, `orPlayer: "any"` and
+       * `{ turnStat: "damage-taken" }`. Part of the targeting requirement:
+       * read as the target is chosen and again as it resolves (rule 608.2b). */
+      readonly playerWith?: { readonly turnStat: TurnStat };
     }
   /**
    * "Target opponent who has **more life than you do** as you activate this
@@ -1486,7 +1493,10 @@ export function describeTargetSpec(spec: TargetSpec | string): string {
               ? `${noun} defending player controls`
               : noun;
     // "…, or opponent" / "…, or player", whichever permanents those are.
-    return spec.orPlayer === undefined ? owned : `${owned} or ${spec.orPlayer === "opponent" ? "opponent" : "player"}`;
+    const either = spec.orPlayer === undefined ? owned : `${owned} or ${spec.orPlayer === "opponent" ? "opponent" : "player"}`;
+    return spec.playerWith?.turnStat === "damage-taken" && spec.filter.damagedThisTurnBy !== undefined
+      ? `${either} that was dealt damage this turn`
+      : either;
   }
   if (spec.kind === "card-in-exile") {
     const what = spec.filter?.type === undefined ? "card" : `${spec.filter.type} card`;

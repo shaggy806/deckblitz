@@ -15,6 +15,7 @@ import {
   playerHasProtectionFromEverything,
   protectionPlayers,
   staticConditionMet,
+  turnStatOf,
   withComputedCache,
 } from "./characteristics.js";
 import { filterReadsX, manaValueOfObject, matchesFilter, stackObjectTargetsMatch } from "./filter.js";
@@ -646,7 +647,9 @@ function isLegalTargetUncached(
       return (
         spec.orPlayer !== undefined &&
         isLivingPlayer(state, ref) &&
-        (spec.orPlayer === "any" || ref.player !== forPlayer)
+        (spec.orPlayer === "any" || ref.player !== forPlayer) &&
+        // "…that was dealt damage this turn": the player's side of it.
+        (spec.playerWith === undefined || turnStatOf(state, ref.player, spec.playerWith.turnStat) > 0)
       );
     }
     if (ref.kind !== "object") return false;
