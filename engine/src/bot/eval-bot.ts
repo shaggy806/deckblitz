@@ -1157,15 +1157,9 @@ export class EvalBotController extends HeuristicBotController {
     // (the bot audit's Q7, 2026-11-10). Now it is the first candidate
     // scored (`preferred`, below), which wins every tie.
     const payoff = payoffFirst(view, this.cards, candidates);
-    // A cost reducer goes first when it lets a second spell fit in the turn
-    // (`reducerFirst`): the rollouts pass our own seat, so Urza's Incubator
-    // first read as three mana for nothing and Miirym's cheaper cast after it
-    // was never seen.
-    const reducer = this.reducerFirst(view, candidates);
-    if (reducer !== null) {
-      this.lastDecision = audit("priority", null, "reducer first");
-      return this.acted(view, reducer);
-    }
+    // A cost reducer before what it reduces (Urza's Incubator, then Miirym)
+    // is the turn planner's to find: v1's `reducerFirst` is not asked here
+    // (the bot audit's Q1, retired 2026-11-10).
     // A hideaway land's free card goes before a spell that would tap the
     // land to pay for it, when the spell still fits afterwards
     // (`hideawayFirst`): the land was last to be scored, and Mosswort
