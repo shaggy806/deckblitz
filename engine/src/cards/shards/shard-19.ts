@@ -208,6 +208,7 @@ import _poolCulvertAmbusher from "../pool/culvert-ambusher.js";
 import _poolCunningStrike from "../pool/cunning-strike.js";
 import _poolCunningSurvivor from "../pool/cunning-survivor.js";
 import _poolCunning from "../pool/cunning.js";
+import _poolCurseOfFoolsWisdom from "../pool/curse-of-fools-wisdom.js";
 import _poolCursedRonin from "../pool/cursed-ronin.js";
 import _poolCylianSunsinger from "../pool/cylian-sunsinger.js";
 import _poolCytoplastRootKin from "../pool/cytoplast-root-kin.js";
@@ -1273,6 +1274,7 @@ const shard: CardShard = {
     _poolCunningStrike,
     _poolCunningSurvivor,
     _poolCunning,
+    _poolCurseOfFoolsWisdom,
     _poolCursedRonin,
     _poolCylianSunsinger,
     _poolCytoplastRootKin,

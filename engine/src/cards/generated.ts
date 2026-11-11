@@ -1190,6 +1190,7 @@ import _poolArchmagesCharm from "./pool/archmages-charm.js";
 import _poolArchmagesNewt from "./pool/archmages-newt.js";
 import _poolArchnemesis from "./pool/archnemesis.js";
 import _poolArchonOfAbsolution from "./pool/archon-of-absolution.js";
+import _poolArchonOfCoronation from "./pool/archon-of-coronation.js";
 import _poolArchonOfCruelty from "./pool/archon-of-cruelty.js";
 import _poolArchonOfEmeria from "./pool/archon-of-emeria.js";
 import _poolArchonOfFallingStars from "./pool/archon-of-falling-stars.js";
@@ -5782,6 +5783,7 @@ import _poolCurseOfConformity from "./pool/curse-of-conformity.js";
 import _poolCurseOfDeathSHold from "./pool/curse-of-death-s-hold.js";
 import _poolCurseOfDisturbance from "./pool/curse-of-disturbance.js";
 import _poolCurseOfExhaustion from "./pool/curse-of-exhaustion.js";
+import _poolCurseOfFoolsWisdom from "./pool/curse-of-fools-wisdom.js";
 import _poolCurseOfInertia from "./pool/curse-of-inertia.js";
 import _poolCurseOfMaritLage from "./pool/curse-of-marit-lage.js";
 import _poolCurseOfOblivion from "./pool/curse-of-oblivion.js";
@@ -8914,6 +8916,7 @@ import _poolFallajiChaindancer from "./pool/fallaji-chaindancer.js";
 import _poolFallajiDragonEngine from "./pool/fallaji-dragon-engine.js";
 import _poolFallajiExcavation from "./pool/fallaji-excavation.js";
 import _poolFallajiVanguard from "./pool/fallaji-vanguard.js";
+import _poolFallajiWayfarer from "./pool/fallaji-wayfarer.js";
 import _poolFallenAngel from "./pool/fallen-angel.js";
 import _poolFallenAskari from "./pool/fallen-askari.js";
 import _poolFallenCleric from "./pool/fallen-cleric.js";
@@ -33608,6 +33611,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolArchmagesNewt,
   _poolArchnemesis,
   _poolArchonOfAbsolution,
+  _poolArchonOfCoronation,
   _poolArchonOfCruelty,
   _poolArchonOfEmeria,
   _poolArchonOfFallingStars,
@@ -38200,6 +38204,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCurseOfDeathSHold,
   _poolCurseOfDisturbance,
   _poolCurseOfExhaustion,
+  _poolCurseOfFoolsWisdom,
   _poolCurseOfInertia,
   _poolCurseOfMaritLage,
   _poolCurseOfOblivion,
@@ -41332,6 +41337,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolFallajiDragonEngine,
   _poolFallajiExcavation,
   _poolFallajiVanguard,
+  _poolFallajiWayfarer,
   _poolFallenAngel,
   _poolFallenAskari,
   _poolFallenCleric,
@@ -66039,6 +66045,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/archmages-newt": _poolArchmagesNewt,
   "pool/archnemesis": _poolArchnemesis,
   "pool/archon-of-absolution": _poolArchonOfAbsolution,
+  "pool/archon-of-coronation": _poolArchonOfCoronation,
   "pool/archon-of-cruelty": _poolArchonOfCruelty,
   "pool/archon-of-emeria": _poolArchonOfEmeria,
   "pool/archon-of-falling-stars": _poolArchonOfFallingStars,
@@ -70631,6 +70638,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/curse-of-death-s-hold": _poolCurseOfDeathSHold,
   "pool/curse-of-disturbance": _poolCurseOfDisturbance,
   "pool/curse-of-exhaustion": _poolCurseOfExhaustion,
+  "pool/curse-of-fools-wisdom": _poolCurseOfFoolsWisdom,
   "pool/curse-of-inertia": _poolCurseOfInertia,
   "pool/curse-of-marit-lage": _poolCurseOfMaritLage,
   "pool/curse-of-oblivion": _poolCurseOfOblivion,
@@ -73763,6 +73771,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/fallaji-dragon-engine": _poolFallajiDragonEngine,
   "pool/fallaji-excavation": _poolFallajiExcavation,
   "pool/fallaji-vanguard": _poolFallajiVanguard,
+  "pool/fallaji-wayfarer": _poolFallajiWayfarer,
   "pool/fallen-angel": _poolFallenAngel,
   "pool/fallen-askari": _poolFallenAskari,
   "pool/fallen-cleric": _poolFallenCleric,

@@ -40,6 +40,7 @@ import _poolArcaneSubtraction from "../pool/arcane-subtraction.js";
 import _poolArcboundHybrid from "../pool/arcbound-hybrid.js";
 import _poolArcboundWanderer from "../pool/arcbound-wanderer.js";
 import _poolArchmageOfRunes from "../pool/archmage-of-runes.js";
+import _poolArchonOfCoronation from "../pool/archon-of-coronation.js";
 import _poolArchonOfSunsGrace from "../pool/archon-of-suns-grace.js";
 import _poolArcticFlats from "../pool/arctic-flats.js";
 import _poolArgivianArchaeologist from "../pool/argivian-archaeologist.js";
@@ -1071,6 +1072,7 @@ const shard: CardShard = {
     _poolArcboundHybrid,
     _poolArcboundWanderer,
     _poolArchmageOfRunes,
+    _poolArchonOfCoronation,
     _poolArchonOfSunsGrace,
     _poolArcticFlats,
     _poolArgivianArchaeologist,
