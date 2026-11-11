@@ -40323,6 +40323,11 @@ controlledBy,
             triggerObject,
             stackMultiplier,
             resolutionCount,
+            [],
+            // What the resolution refers to goes on into `then`: "that
+            // player" of a `for-each-player` around it (Protection Racket),
+            // the stints of its source and triggering object (rule 608.2h).
+            refs,
           ),
         );
       },

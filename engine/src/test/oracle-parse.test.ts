@@ -18440,6 +18440,35 @@ describe("what you can't do with the creatures you took this turn", () => {
   });
 });
 
+describe("a card revealed for each opponent in turn", () => {
+  it("reads Protection Racket", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Enchantment",
+      oracle_text:
+        "At the beginning of your upkeep, repeat the following process for each opponent in turn order. Reveal the top card of your library. That player may pay life equal to that card's mana value. If they do, exile that card. Otherwise, put it into your hand.",
+    } as never) as unknown as { triggered: Record<string, unknown>[] };
+    expect(face.triggered[0]).toMatchObject({
+      trigger: { on: "step-begins", step: "upkeep", who: "you" },
+      targets: [],
+      effect: {
+        kind: "for-each-player",
+        who: "each-opponent",
+        effect: {
+          kind: "reveal-top",
+          then: {
+            kind: "each-player-may",
+            who: "that-player",
+            options: [{ payLifeAmount: { manaValueOf: 0 }, text: "Pay {X} life" }],
+            ifDid: { kind: "exile", target: 0 },
+            ifDidnt: { kind: "return-to-hand", target: 0, from: "library" },
+          },
+        },
+      },
+    });
+  });
+});
+
 describe("loyalty abilities twice this turn", () => {
   it("reads Kaito, Dancing Shadow's trigger and +1", () => {
     const face = parseFace({

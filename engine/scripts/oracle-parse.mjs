@@ -9059,6 +9059,35 @@ export function parseEffect(text, outer) {
       hints: [],
     };
   }
+  // "Repeat the following process for each opponent in turn order. Reveal the
+  // top card of your library. That player may pay life equal to that card's
+  // mana value. If they do, exile that card. Otherwise, put it into your
+  // hand." (Protection Racket): a card revealed for each opponent in turn,
+  // that opponent asked about it before the next is revealed.
+  if (
+    text ===
+    "Repeat the following process for each opponent in turn order. Reveal the top card of your library. That player may pay life equal to that card's mana value. If they do, exile that card. Otherwise, put it into your hand."
+  ) {
+    return {
+      effect: {
+        kind: "for-each-player",
+        who: "each-opponent",
+        effect: {
+          kind: "reveal-top",
+          then: {
+            kind: "each-player-may",
+            who: "that-player",
+            prompt: "Pay life equal to the revealed card's mana value to exile it? Otherwise it goes to its owner's hand.",
+            options: [{ payLifeAmount: { manaValueOf: 0 }, text: "Pay {X} life" }],
+            ifDid: { kind: "exile", target: 0 },
+            ifDidnt: { kind: "return-to-hand", target: 0, from: "library" },
+          },
+        },
+      },
+      todo: [],
+      hints: [],
+    };
+  }
   // "For each opponent, exile up to one target nonland permanent that player
   // controls until ~ leaves the battlefield" (Grasp of Fate): one optional slot
   // per seat, exiled together (a game seats at most four).
