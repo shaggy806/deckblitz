@@ -514,6 +514,13 @@ export interface EvalOutcome {
   /** Opponents who have lost, and the round — what `eliminations` scores. */
   readonly eliminated?: number;
   readonly round?: number;
+  /** Who each of `theirs` is, in the same order. */
+  readonly players?: readonly PlayerId[];
+  /** Set on the outcome of an **interaction** — a counterspell, removal or
+   * a wipe (`interaction.ts`) — by {@link aimedOutcome}: beside each of
+   * `theirs`, that opponent's features had we passed instead, for those the
+   * action was aimed at (`null` for the rest). See {@link scoreOutcome}. */
+  readonly hit?: readonly (PlayerFeatures | null)[];
 }
 
 export function outcomeOf(
@@ -537,12 +544,38 @@ export function outcomeOf(
   const own = state.players[me];
   const mine =
     own === undefined || own.hasLost ? null : playerFeatures(state, registry, me, true, landCap);
-  const theirs = state.turnOrder
-    .filter((player) => player !== me && !state.players[player].hasLost)
-    .map((player) => playerFeatures(state, registry, player, false, landCap));
+  const players = state.turnOrder.filter((player) => player !== me && !state.players[player].hasLost);
+  const theirs = players.map((player) => playerFeatures(state, registry, player, false, landCap));
   const ownWeights = deckBias(state, me)?.ownWeights;
-  const base = { mine, theirs, eliminated, round };
+  const base = { mine, theirs, eliminated, round, players };
   return ownWeights === undefined ? base : { ...base, ownWeights };
+}
+
+/**
+ * `after`, the outcome of an interaction, marked with whom it was aimed at
+ * (`"all"` for a wipe) and how each of them stood in `passed`, the outcome
+ * of passing instead. Unchanged when either game is over, or nobody aimed
+ * at is in both.
+ */
+export function aimedOutcome(
+  after: EvalOutcome,
+  passed: EvalOutcome,
+  aimed: readonly PlayerId[] | "all",
+): EvalOutcome {
+  if (after.decided !== undefined || passed.decided !== undefined) return after;
+  const players = after.players;
+  const before = passed.players;
+  if (players === undefined || before === undefined) return after;
+  let any = false;
+  const hit = players.map((player) => {
+    if (aimed !== "all" && !aimed.includes(player)) return null;
+    const at = before.indexOf(player);
+    const features = at < 0 ? undefined : passed.theirs[at];
+    if (features === undefined) return null;
+    any = true;
+    return features;
+  });
+  return any ? { ...after, hit } : after;
 }
 
 const withOwn = new WeakMap<EvalWeights, WeakMap<object, EvalWeights>>();
@@ -594,21 +627,52 @@ function ownWeightsOf(weights: EvalWeights, own: Readonly<Partial<EvalWeights>> 
  * seats the game started with fixed that too, but also halved the second
  * opponent's weight in every three-player endgame (a decision-diff), so the
  * bonus carries it alone.
+ *
+ * **An interaction is scored on the player it hits** (the bot audit's Q4).
+ * By standings, a permanent of anyone but the leader counts at
+ * `otherOpponents` over the players averaged, a quarter at four players,
+ * so Rhystic Study was countered from the leader and let through from
+ * anyone else, though it pays its controller the same either way. For a
+ * counterspell, removal or a wipe (`outcome.hit`), the opponent it was aimed
+ * at who is left furthest below where a pass would have left them is put
+ * back at that pass's score among the standings, and what they lost is
+ * subtracted at `opponent` in full: the answer is worth what it took from
+ * the player it was spent on, and everything else that changed is weighed as
+ * ever. Only for those actions: a softened leader for every move lost its
+ * bench (`docs/plans/deck-autopsies.md`), and a wipe counts one board in
+ * full, not three.
  */
 export function scoreOutcome(outcome: EvalOutcome, weights: EvalWeights): number {
   if (outcome.decided !== undefined) return outcome.decided;
   const mine =
     outcome.mine === null ? DEAD : scoreFeatures(outcome.mine, ownWeightsOf(weights, outcome.ownWeights));
-  const theirs = outcome.theirs.map((f) => scoreFeatures(f, weights)).sort((a, b) => b - a);
+  const theirs = outcome.theirs.map((f) => scoreFeatures(f, weights));
+  let taken = 0;
+  if (outcome.hit !== undefined) {
+    let at = -1;
+    let stood = 0;
+    outcome.hit.forEach((before, i) => {
+      if (before === null || theirs[i] === undefined) return;
+      const was = scoreFeatures(before, weights);
+      if (was - theirs[i] > taken) {
+        taken = was - theirs[i];
+        at = i;
+        stood = was;
+      }
+    });
+    if (at >= 0) theirs[at] = stood;
+  }
+  theirs.sort((a, b) => b - a);
   const kills =
     outcome.eliminated !== undefined && outcome.eliminated > 0
       ? weights.eliminations * eliminationShare(outcome.round ?? ELIMINATION_FULL_ROUND) * outcome.eliminated
       : 0;
   if (theirs.length === 0) return mine + kills;
+  const hit = weights.opponent * taken;
 
   const [strongest, ...rest] = theirs;
   const others = rest.length > 0 ? rest.reduce((a, b) => a + b, 0) / rest.length : 0;
-  return mine - weights.opponent * strongest - weights.otherOpponents * others + kills;
+  return mine - weights.opponent * strongest - weights.otherOpponents * others + kills + hit;
 }
 
 /** Score `state` from `me`'s seat — see {@link scoreOutcome}. */

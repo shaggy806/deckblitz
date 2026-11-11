@@ -62,7 +62,10 @@ import type { Polarity } from "../target-polarity.js";
 import { decisionCandidates } from "./decisions.js";
 import { canBlock, combatCreatures, crackback, damageThrough, isLethal } from "./combat-math.js";
 import type { CombatCreature } from "./combat-math.js";
-import { DEFAULT_WEIGHTS, evaluateState, normalizeWeights } from "./evaluate.js";
+import { DEFAULT_WEIGHTS, aimedOutcome, evaluateState, normalizeWeights, outcomeOf, scoreOutcome } from "./evaluate.js";
+import type { EvalOutcome } from "./evaluate.js";
+import { aimedAt, aimedByLine } from "./interaction.js";
+import type { Aimed } from "./interaction.js";
 import { engineScore, lifeCost, withTrackRecordEvidence } from "./features.js";
 import type { EvalWeights } from "./evaluate.js";
 import {
@@ -177,9 +180,11 @@ export interface EvalBotOptions {
    * can replay its choice under any vector from these states alone. A
    * decision's rollouts can (a further decision inside one is searched with
    * them), and combat declarations aren't reported at all: that search is
-   * steered by the weights as it goes.
+   * steered by the weights as it goes. `scoredAs` is given when the answer
+   * wasn't scored as `after` plainly reads: an interaction, on the opponent
+   * it hit (`aimedOutcome`).
    */
-  readonly trace?: (action: Action, after: GameState | null) => void;
+  readonly trace?: (action: Action, after: GameState | null, scoredAs?: EvalOutcome) => void;
 }
 
 /**
@@ -898,6 +903,11 @@ export class EvalBotController extends HeuristicBotController {
    * bot audit's S4).
    */
   private lastEnds = new Map<Action, ScoredFirst>();
+  /** How this decision's pass came out, and its pass scored alone
+   * (`scoreAlone`): what an interaction's outcome is read against
+   * (`valueAimed`). `null` until that pass is scored. */
+  private passOutcome: EvalOutcome | null = null;
+  private passAloneOutcome: EvalOutcome | null = null;
   /** The wipe the last priority search chose and the payoff it cast first
    * instead (`payoffBeforeWipe`), for the replay. */
   lastWipePayoff: { readonly wipe: Action; readonly payoff: Action } | null = null;
@@ -1093,6 +1103,8 @@ export class EvalBotController extends HeuristicBotController {
     this.tapGuard = this.crackbackGuard(view.state);
     this.lastUnsafe = [];
     this.lastEnds = new Map();
+    this.passOutcome = null;
+    this.passAloneOutcome = null;
     this.lastRefusedTies = [];
     this.lastWipePayoff = null;
     // A cast payoff in play or about to be (Shiko and Narset's Flurry, a
@@ -2742,10 +2754,19 @@ export class EvalBotController extends HeuristicBotController {
         this.selfInPriorityRollouts(view.state),
       ),
     );
-    this.trace?.(action, after);
-    if (after === null) return null;
+    if (after === null) {
+      this.trace?.(action, after);
+      return null;
+    }
+    const outcome = this.outcomeAimed(
+      after,
+      action.type === "pass-priority" ? null : aimedAt(view.state, this.cards, this.playerId, action),
+      this.passOutcome,
+    );
+    if (action.type === "pass-priority") this.passOutcome = outcome;
+    this.trace?.(action, after, outcome.hit === undefined ? undefined : outcome);
     if (mustKill !== undefined && after.players[mustKill]?.hasLost !== true) return null;
-    const value = evaluateState(after, this.cards, this.playerId, this.weights);
+    const value = scoreOutcome(outcome, this.weights);
     // The plan's own rollout of this move — it resolved, then our seat
     // passing through v1's combat to the end of the turn — and so its
     // one-step line (`lastEnds`). Not a kill that had to land, which no plan
@@ -2776,7 +2797,25 @@ export class EvalBotController extends HeuristicBotController {
         this.rolloutDecisions ? this.selfInRollouts() : undefined,
       ),
     );
-    return after === null ? null : evaluateState(after, this.cards, this.playerId, this.weights);
+    if (after === null) return null;
+    const outcome = this.outcomeAimed(
+      after,
+      action.type === "pass-priority" ? null : aimedAt(view.state, this.cards, this.playerId, action),
+      this.passAloneOutcome,
+    );
+    if (action.type === "pass-priority") this.passAloneOutcome = outcome;
+    return scoreOutcome(outcome, this.weights);
+  }
+
+  /**
+   * How `after` reads for us, marked as an interaction's outcome when what
+   * led to it was `aimed` at an opponent (`interaction.ts`): a counterspell,
+   * removal or a wipe is scored on the player it hit, against how they stood
+   * in `passed`, this decision's pass (the bot audit's Q4; `scoreOutcome`).
+   */
+  private outcomeAimed(after: GameState, aimed: Aimed, passed: EvalOutcome | null): EvalOutcome {
+    const outcome = outcomeOf(after, this.cards, this.playerId, this.weights.landCap);
+    return aimed === null || passed === null ? outcome : aimedOutcome(outcome, passed, aimed);
   }
 
   /**
@@ -2895,7 +2934,19 @@ export class EvalBotController extends HeuristicBotController {
           (a) => a.type !== "pass-priority" && !listed.mustKill.has(a) && !listed.heldForCombat.has(a),
         );
       },
-      value: (state) => evaluateState(state, this.cards, this.playerId, this.weights),
+      // A line with an interaction in it is scored as the one-move search
+      // scores that move, against the same pass.
+      value: (state, line) =>
+        line === undefined || this.passOutcome === null
+          ? evaluateState(state, this.cards, this.playerId, this.weights)
+          : scoreOutcome(
+              this.outcomeAimed(
+                state,
+                aimedByLine(this.cards, this.playerId, line.steps, line.before),
+                this.passOutcome,
+              ),
+              this.weights,
+            ),
       mayAttack: (state) => {
         const me = this.playerId;
         const opponents = state.turnOrder.filter((p) => p !== me && !state.players[p].hasLost);
@@ -3044,9 +3095,12 @@ export class EvalBotController extends HeuristicBotController {
       const order = baseline === null ? close : [baseline, ...close.filter((line) => line !== baseline)];
       let top = -Infinity;
       for (const line of order) {
-        const value = nextTurnValue(line, this.cards, me, hooks, limits, unknown);
+        const later = nextTurnValue(line, this.cards, me, hooks, limits, unknown);
         // Stopped by the deadline: the one-move answer stands.
-        if (value === null) return null;
+        if (later === null) return null;
+        // Our next turn is scored plainly; what an interaction in this line
+        // took from the player it hit is still this line's.
+        const value = later + (hooks.value(line.end, line) - hooks.value(line.end));
         if (value > top + (line === order[0] ? 0 : TIE)) {
           top = value;
           chosen = line;

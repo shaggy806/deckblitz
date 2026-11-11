@@ -1318,9 +1318,9 @@ const SCENARIOS: readonly BotScenario[] = [
       // name, the spell, its caster, the caster's lands, carol ahead, counter it, training
       ["counters the leader's big threat", "Craw Wurm", C, "Forest", true, true, false],
       ["saves Counterspell from a trailing player's mana rock", "Arcane Signet", B, "Forest", true, false, false],
-      ["counters a draw engine from a player who isn't ahead", "Rhystic Study", B, "Island", true, true, true],
+      ["counters a draw engine from a player who isn't ahead", "Rhystic Study", B, "Island", true, true, false],
       ["counters a tax engine", "Smothering Tithe", B, "Plains", false, true, false],
-      ["counters a tax engine from a player who isn't ahead", "Smothering Tithe", B, "Plains", true, true, true],
+      ["counters a tax engine from a player who isn't ahead", "Smothering Tithe", B, "Plains", true, true, false],
     ] as const
   ).map(([name, card, caster, land, carolAhead, counter, training]) =>
     asked({

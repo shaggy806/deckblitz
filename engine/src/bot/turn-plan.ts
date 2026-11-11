@@ -67,8 +67,10 @@ export interface TurnPlanHooks {
   /** The moves the search would consider on `view`'s board: our priority, a
    * main phase, nothing on the stack. */
   moves(view: ControllerView): readonly Action[];
-  /** A state, scored for us. */
-  value(state: GameState): number;
+  /** A state, scored for us; `line`, when the state is where a line of
+   * moves ended, is those moves and the board each was made from, so an
+   * interaction among them is scored as one (`interaction.ts`). */
+  value(state: GameState, line?: { readonly steps: readonly PlanStep[]; readonly before: readonly GameState[] }): number;
   /** Whether a creature of ours could attack this turn on `state`'s board:
    * without one, passing through combat changes nothing a move after it is
    * worth, and the step isn't tried. */
@@ -268,7 +270,7 @@ export function planTurn(
     if (out()) return null;
     const end = spend(() => passOut(node.game.state, registry, me));
     if (end === null) return null;
-    const line = { steps: node.steps, boards: node.boards, before: node.before, value: hooks.value(end), end };
+    const line = { steps: node.steps, boards: node.boards, before: node.before, value: hooks.value(end, node), end };
     lines.push(line);
     return line;
   };
@@ -300,7 +302,7 @@ export function planTurn(
     });
     if (ended?.result.over === true) {
       const line = after(node, move, board, node.game);
-      lines.push({ steps: line.steps, boards: line.boards, before: line.before, value: hooks.value(ended), end: ended });
+      lines.push({ steps: line.steps, boards: line.boards, before: line.before, value: hooks.value(ended, line), end: ended });
       return null;
     }
     return settled === null ? null : after(node, move, board, settled);

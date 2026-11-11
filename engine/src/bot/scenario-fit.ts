@@ -91,8 +91,11 @@ export function recordScenario(
   const seen: { action: Action; outcome: EvalOutcome | null }[] = [];
   const bot = new EvalBotController(player, registry, {
     weights,
-    trace: (action, after) =>
-      seen.push({ action, outcome: after === null ? null : outcomeOf(after, registry, player, weights.landCap) }),
+    trace: (action, after, scoredAs) =>
+      seen.push({
+        action,
+        outcome: after === null ? null : (scoredAs ?? outcomeOf(after, registry, player, weights.landCap)),
+      }),
   });
   const exact = game.state.awaiting === null;
   const chosen = bot.act(game.controllerView(player));
