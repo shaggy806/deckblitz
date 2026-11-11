@@ -263,6 +263,7 @@ import _poolEiganjoFreeRiders from "../pool/eiganjo-free-riders.js";
 import _poolEladamrisCall from "../pool/eladamris-call.js";
 import _poolElectrify from "../pool/electrify.js";
 import _poolElephantGuide from "../pool/elephant-guide.js";
+import _poolElshaOfTheInfinite from "../pool/elsha-of-the-infinite.js";
 import _poolElspethTirel from "../pool/elspeth-tirel.js";
 import _poolElusiveOtter from "../pool/elusive-otter.js";
 import _poolElvishGuidance from "../pool/elvish-guidance.js";
@@ -1274,6 +1275,7 @@ const shard: CardShard = {
     _poolEladamrisCall,
     _poolElectrify,
     _poolElephantGuide,
+    _poolElshaOfTheInfinite,
     _poolElspethTirel,
     _poolElusiveOtter,
     _poolElvishGuidance,

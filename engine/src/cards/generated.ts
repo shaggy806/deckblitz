@@ -3825,6 +3825,7 @@ import _poolCanonizedInBlood from "./pool/canonized-in-blood.js";
 import _poolCanoptekScarabSwarm from "./pool/canoptek-scarab-swarm.js";
 import _poolCanoptekSpyder from "./pool/canoptek-spyder.js";
 import _poolCanoptekTombSentinel from "./pool/canoptek-tomb-sentinel.js";
+import _poolCanoptekWraith from "./pool/canoptek-wraith.js";
 import _poolCanopyBaloth from "./pool/canopy-baloth.js";
 import _poolCanopyClaws from "./pool/canopy-claws.js";
 import _poolCanopyCover from "./pool/canopy-cover.js";
@@ -8001,6 +8002,7 @@ import _poolElrondLordOfRivendell from "./pool/elrond-lord-of-rivendell.js";
 import _poolElrondMasterOfHealing from "./pool/elrond-master-of-healing.js";
 import _poolElrondMoonReader from "./pool/elrond-moon-reader.js";
 import _poolElsewhereFlask from "./pool/elsewhere-flask.js";
+import _poolElshaOfTheInfinite from "./pool/elsha-of-the-infinite.js";
 import _poolElsha from "./pool/elsha.js";
 import _poolElspethConquersDeath from "./pool/elspeth-conquers-death.js";
 import _poolElspethKnightErrant from "./pool/elspeth-knight-errant.js";
@@ -24126,6 +24128,7 @@ import _poolSigardaHeronsGrace from "./pool/sigarda-herons-grace.js";
 import _poolSigardaHostOfHerons from "./pool/sigarda-host-of-herons.js";
 import _poolSigardasAid from "./pool/sigardas-aid.js";
 import _poolSigardasImprisonment from "./pool/sigardas-imprisonment.js";
+import _poolSigardasSplendor from "./pool/sigardas-splendor.js";
 import _poolSigardasSummons from "./pool/sigardas-summons.js";
 import _poolSigardasVanguard from "./pool/sigardas-vanguard.js";
 import _poolSigardianPaladin from "./pool/sigardian-paladin.js";
@@ -36256,6 +36259,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCanoptekScarabSwarm,
   _poolCanoptekSpyder,
   _poolCanoptekTombSentinel,
+  _poolCanoptekWraith,
   _poolCanopyBaloth,
   _poolCanopyClaws,
   _poolCanopyCover,
@@ -40432,6 +40436,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolElrondMasterOfHealing,
   _poolElrondMoonReader,
   _poolElsewhereFlask,
+  _poolElshaOfTheInfinite,
   _poolElsha,
   _poolElspethConquersDeath,
   _poolElspethKnightErrant,
@@ -56557,6 +56562,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSigardaHostOfHerons,
   _poolSigardasAid,
   _poolSigardasImprisonment,
+  _poolSigardasSplendor,
   _poolSigardasSummons,
   _poolSigardasVanguard,
   _poolSigardianPaladin,
@@ -68700,6 +68706,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/canoptek-scarab-swarm": _poolCanoptekScarabSwarm,
   "pool/canoptek-spyder": _poolCanoptekSpyder,
   "pool/canoptek-tomb-sentinel": _poolCanoptekTombSentinel,
+  "pool/canoptek-wraith": _poolCanoptekWraith,
   "pool/canopy-baloth": _poolCanopyBaloth,
   "pool/canopy-claws": _poolCanopyClaws,
   "pool/canopy-cover": _poolCanopyCover,
@@ -72876,6 +72883,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/elrond-master-of-healing": _poolElrondMasterOfHealing,
   "pool/elrond-moon-reader": _poolElrondMoonReader,
   "pool/elsewhere-flask": _poolElsewhereFlask,
+  "pool/elsha-of-the-infinite": _poolElshaOfTheInfinite,
   "pool/elsha": _poolElsha,
   "pool/elspeth-conquers-death": _poolElspethConquersDeath,
   "pool/elspeth-knight-errant": _poolElspethKnightErrant,
@@ -89001,6 +89009,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sigarda-host-of-herons": _poolSigardaHostOfHerons,
   "pool/sigardas-aid": _poolSigardasAid,
   "pool/sigardas-imprisonment": _poolSigardasImprisonment,
+  "pool/sigardas-splendor": _poolSigardasSplendor,
   "pool/sigardas-summons": _poolSigardasSummons,
   "pool/sigardas-vanguard": _poolSigardasVanguard,
   "pool/sigardian-paladin": _poolSigardianPaladin,

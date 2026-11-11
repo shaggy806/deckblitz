@@ -134,6 +134,7 @@ import _poolCaldaiaGuardian from "../pool/caldaia-guardian.js";
 import _poolCallTheSkybreaker from "../pool/call-the-skybreaker.js";
 import _poolCall from "../pool/call.js";
 import _poolCampsiteCuisine from "../pool/campsite-cuisine.js";
+import _poolCanoptekWraith from "../pool/canoptek-wraith.js";
 import _poolCanyonLurkers from "../pool/canyon-lurkers.js";
 import _poolCaptainAmericaUnbowed from "../pool/captain-america-unbowed.js";
 import _poolCaptainLanneryStorm from "../pool/captain-lannery-storm.js";
@@ -1166,6 +1167,7 @@ const shard: CardShard = {
     _poolCallTheSkybreaker,
     _poolCall,
     _poolCampsiteCuisine,
+    _poolCanoptekWraith,
     _poolCanyonLurkers,
     _poolCaptainAmericaUnbowed,
     _poolCaptainLanneryStorm,

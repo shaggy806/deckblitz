@@ -828,6 +828,7 @@ import _poolShortcutToMushrooms from "../pool/shortcut-to-mushrooms.js";
 import _poolShuEliteInfantry from "../pool/shu-elite-infantry.js";
 import _poolShuko from "../pool/shuko.js";
 import _poolSift from "../pool/sift.js";
+import _poolSigardasSplendor from "../pool/sigardas-splendor.js";
 import _poolSigilOfTheNayanGods from "../pool/sigil-of-the-nayan-gods.js";
 import _poolSignInBlood from "../pool/sign-in-blood.js";
 import _poolSilvanReveler from "../pool/silvan-reveler.js";
@@ -1894,6 +1895,7 @@ const shard: CardShard = {
     _poolShuEliteInfantry,
     _poolShuko,
     _poolSift,
+    _poolSigardasSplendor,
     _poolSigilOfTheNayanGods,
     _poolSignInBlood,
     _poolSilvanReveler,
