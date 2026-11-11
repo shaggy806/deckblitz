@@ -48,12 +48,18 @@ section keeps only what to do next.
 - **The rank goal (the user's, 2026-11-11): every card to EDHREC rank 10,000, but for those needing
   a major engine change.** `npm run -s cards:goal -w engine` lists what's left, best rank first,
   each with its open need keys and its size; `-- --size small --keys` is the build list, one key a
-  unit. After B296-B298 (161 cards re-attempted and authored with no engine code) 383 are left:
-  189 sized **small** (a field, an amount, a filter clause, a trigger event), 45 **major** (a new
-  decision, a new subsystem, a core rule changed — flagged, not built), 149 **unsized** (records
-  from B291-B296, read against today's engine but before sizes were recorded: size each as it is
-  picked up). Every one needs engine work; the sizes are the authoring agents' estimates from
-  reading, not checked against the code.
+  unit. After B296-B298 (161 cards re-attempted and authored with no engine code) 383 were left;
+  the first overnight run down the small list (2026-11-11, 90 keys, 98 cards, `COMPLETED.md`)
+  leaves 288: 92 sized **small** (a field, an amount, a filter clause, a trigger event), 47
+  **major** (a new decision, a new subsystem, a core rule changed — flagged, not built), 149
+  **unsized** (records from B291-B296, read against today's engine but before sizes were
+  recorded: size each as it is picked up). Every one needs engine work; the sizes are the
+  authoring agents' estimates from reading, and held well on the small list: of 92 units tried,
+  two were really major (Kamahl's Will, Soulfire Eruption) and about one in five needed no engine
+  code. The next small unit is Hellish Rebuke's key, then Spectral Searchlight's. 23 triaged cards
+  the run's keys freed wait in `cards:needs -- --stale` for `author-freed`, which will also give
+  narrow keys to the few it left half-covered (Twists and Turns, Diplomatic Escort, Light Up the
+  Night, Urgent Necropsy, Consume Spirit, Soul Burn).
 - **The set walk, upcoming sets first**: Star Trek (TRK) and Star Trek Commander
   (TRC) are whole from their previews (batches 266-268, `COMPLETED.md`; assimilate built,
   `ASSIMILATE` in `helpers.ts`), and so are Marvel: Darkhold Destiny's previews (MDD, MDC) and
@@ -586,7 +592,10 @@ section keeps only what to do next.
 
 - **`triggerValue` reads 0 inside an `unless`'s `otherwise`** — B298: Archfiend of Spite's "loses that much life" lost none once the opponent declined; pool cards reading `triggerValue` there may be wrong (`docs/engine-gaps.md`).
 - **Definition traps that fail silently** — B298: "opponent" on a `targetsChosenBy` trigger is read from the ability's controller, not the chooser; a spell's any-number bound other than a literal `"x"` becomes 0; `exile` of a card in hand without `fromHand` does nothing; `look-and-choose` over `exiled-this-way` with `max: 0` skips `leftover` (`docs/engine-gaps.md`).
-- **A creature type outlives being a creature** — rule 205.1b: an Angel subtype given permanently stays on a permanent that stops being a creature; blocks Archangel Elspeth, and Valkyrie's Call and Guide of Souls carry it (`docs/engine-gaps.md`).
+- **`thenCounters` reaches tokens a replacement adds** — a token copy's `thenCounters` also lands on tokens made in addition (Chatterfang's Squirrels); `withCounters` tells them apart since 2026-11-11 (`docs/engine-gaps.md`).
+- **An exile cost asks the sacrifice prohibition** — an `exilesSacrifice` cost (Food Chain, Primordial Mist) is refused under "can't sacrifice … to activate abilities", though nothing is sacrificed (`docs/engine-gaps.md`).
+- **Combat damage replaced one attacker at a time** — several Zombies under Undead Alchemist mill in separate events, so a "one or more cards are milled" trigger fires once per attacker (`docs/engine-gaps.md`).
+- **A door's unlock timestamp is read by some statics only** — P/T, keywords, restrictions, protection and hand size read it; a type-granting or other rule-changing door static would not (`docs/engine-gaps.md`).
 - **`sameAbilityAs` counts one way only** — two abilities naming each other never count as one; only the second naming the first does, and nothing warns (`docs/engine-gaps.md`).
 - **A back face spawned by name isn't a working permanent** — `debugSpawn("The Myriad Pools")` couldn't tap for mana; test-only so far (`docs/engine-gaps.md`).
 - **A bot's cast the engine refuses takes the shard down** — live, 2026-11-10: a bot's Conclave Tribunal (convoke) threw "cannot pay the cost" and the uncaught throw lost every room on the shard (`docs/engine-gaps.md`).

@@ -200,7 +200,13 @@ so a choice raised by one player's draw (dredge, a draw replacement) comes befor
 answers. The seven tempting offers (Tempt with Bunnies among them) and Kwain share the shape.
 Found 2026-11-06, building Tempt with Bunnies.
 
-**A creature type outlives being a creature.** Rule 205.1b: a creature subtype is lost when the permanent stops being a creature. A Forest animated by Life, then given Angel by a permanent `become { addSubtypes }`, still shows `["Forest", "Angel"]` after the animation ends (B297, tested). Blocks Archangel Elspeth; Valkyrie's Call and Guide of Souls are in the pool with it (a Vehicle or animated land that returns keeps "Angel" while not a creature).
+**`thenCounters` reaches tokens a replacement adds.** `finishTokenCopies` (`game.ts`) puts a token copy's `thenCounters` on every token in `made`, which holds the copies and the tokens a would-create-token replacement added (Chatterfang's Squirrels) in one flat list. Tokens made *instead* should keep them (Divine Visitation's ruling: what the creating effect specifies still applies); tokens made *in addition* should not. `withCounters` already tells them apart through `PlannedTokens.inPlace` (2026-11-11, Littjara Mirrorlake); `thenCounters` needs `made` split the same way.
+
+**An exile cost asks the sacrifice prohibition.** A cost written as `sacrifice` + `exilesSacrifice` (Food Chain, Primordial Mist) still asks `sacrificeCostProhibited` beside `canBeSacrificed` in `game.ts`'s `payable` line, so "creatures can't be sacrificed to activate abilities" would wrongly stop it. Found 2026-11-11, not yet shown by a pool card in play.
+
+**Combat damage replaced one attacker at a time.** `dealDamage` runs a `would-deal-damage` `instead: { effect }` once per source, so two Zombies hitting one player under Undead Alchemist make two mill events in sequence. Combat damage is dealt at once (rule 510.2); if the mills count as one event, a "whenever one or more cards are put into a graveyard from a library" trigger (Sidisi, The Wise Mothman) should fire once. Untested either way (2026-11-11).
+
+**A door's unlock timestamp is read by some statics only.** `staticTimestamp` (`characteristics.ts`, Steaming Sauna's ruling, 2026-11-11) is read in `scanContributingStaticSources` and `Game.maxHandSizeOf`. A door static that grants a type (layer 4) or changes another rule would still take the Room's own timestamp; no Room in the pool has one. A Room whose text box was exchanged also falls back to the Room's timestamp.
 
 **`sameAbilityAs` counts one way only.** Set on two abilities pointing at each other, "the second time this ability has resolved" never counted across them; only the second entry naming the first works, and nothing warns (B297, South Pole Voyager).
 
