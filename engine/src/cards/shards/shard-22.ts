@@ -254,6 +254,7 @@ import _poolEnterTheAvatarState from "../pool/enter-the-avatar-state.js";
 import _poolEnthusiasticStudy from "../pool/enthusiastic-study.js";
 import _poolEpharaEverSheltering from "../pool/ephara-ever-sheltering.js";
 import _poolEpicFight from "../pool/epic-fight.js";
+import _poolErebosSIntervention from "../pool/erebos-s-intervention.js";
 import _poolEssenceOfOrthodoxy from "../pool/essence-of-orthodoxy.js";
 import _poolEtherswornAdjudicator from "../pool/ethersworn-adjudicator.js";
 import _poolEverdawnChampion from "../pool/everdawn-champion.js";
@@ -1288,6 +1289,7 @@ const shard: CardShard = {
     _poolEnthusiasticStudy,
     _poolEpharaEverSheltering,
     _poolEpicFight,
+    _poolErebosSIntervention,
     _poolEssenceOfOrthodoxy,
     _poolEtherswornAdjudicator,
     _poolEverdawnChampion,

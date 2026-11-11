@@ -896,6 +896,7 @@ import _poolTazriBeaconOfUnity from "../pool/tazri-beacon-of-unity.js";
 import _poolTeferiTimebender from "../pool/teferi-timebender.js";
 import _poolTeferisResponse from "../pool/teferis-response.js";
 import _poolTeferisTutelage from "../pool/teferis-tutelage.js";
+import _poolTemporalExtortion from "../pool/temporal-extortion.js";
 import _poolTemurBattlecrier from "../pool/temur-battlecrier.js";
 import _poolTerrapactIntimidator from "../pool/terrapact-intimidator.js";
 import _poolTerrorBallista from "../pool/terror-ballista.js";
@@ -1966,6 +1967,7 @@ const shard: CardShard = {
     _poolTeferiTimebender,
     _poolTeferisResponse,
     _poolTeferisTutelage,
+    _poolTemporalExtortion,
     _poolTemurBattlecrier,
     _poolTerrapactIntimidator,
     _poolTerrorBallista,

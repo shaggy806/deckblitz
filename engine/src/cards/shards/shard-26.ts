@@ -157,6 +157,7 @@ import _poolChandraHopesBeacon from "../pool/chandra-hopes-beacon.js";
 import _poolChandraLegacyOfFire from "../pool/chandra-legacy-of-fire.js";
 import _poolChangeOfHeart from "../pool/change-of-heart.js";
 import _poolChanneledForce from "../pool/channeled-force.js";
+import _poolChaosDefiler from "../pool/chaos-defiler.js";
 import _poolChaosTheEndless from "../pool/chaos-the-endless.js";
 import _poolChaplainsBlessing from "../pool/chaplains-blessing.js";
 import _poolChromaticOrrery from "../pool/chromatic-orrery.js";
@@ -1187,6 +1188,7 @@ const shard: CardShard = {
     _poolChandraLegacyOfFire,
     _poolChangeOfHeart,
     _poolChanneledForce,
+    _poolChaosDefiler,
     _poolChaosTheEndless,
     _poolChaplainsBlessing,
     _poolChromaticOrrery,

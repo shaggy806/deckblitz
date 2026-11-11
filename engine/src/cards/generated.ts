@@ -4355,6 +4355,7 @@ import _poolChantOfTheSkifsang from "./pool/chant-of-the-skifsang.js";
 import _poolChantOfVituGhazi from "./pool/chant-of-vitu-ghazi.js";
 import _poolChaosChanneler from "./pool/chaos-channeler.js";
 import _poolChaosCharm from "./pool/chaos-charm.js";
+import _poolChaosDefiler from "./pool/chaos-defiler.js";
 import _poolChaosHarlequin from "./pool/chaos-harlequin.js";
 import _poolChaosImps from "./pool/chaos-imps.js";
 import _poolChaosMaw from "./pool/chaos-maw.js";
@@ -8389,6 +8390,7 @@ import _poolErdwalRipper from "./pool/erdwal-ripper.js";
 import _poolEreborFlamesmith from "./pool/erebor-flamesmith.js";
 import _poolErebosBleakHearted from "./pool/erebos-bleak-hearted.js";
 import _poolErebosGodOfTheDead from "./pool/erebos-god-of-the-dead.js";
+import _poolErebosSIntervention from "./pool/erebos-s-intervention.js";
 import _poolErebossEmissary from "./pool/ereboss-emissary.js";
 import _poolErebossTitan from "./pool/ereboss-titan.js";
 import _poolErestorOfTheCouncil from "./pool/erestor-of-the-council.js";
@@ -18158,6 +18160,7 @@ import _poolNeverendingTorment from "./pool/neverending-torment.js";
 import _poolNevermaker from "./pool/nevermaker.js";
 import _poolNevermore from "./pool/nevermore.js";
 import _poolNeverwinterDryad from "./pool/neverwinter-dryad.js";
+import _poolNeverwinterHydra from "./pool/neverwinter-hydra.js";
 import _poolNevinyrralUrborgTyrant from "./pool/nevinyrral-urborg-tyrant.js";
 import _poolNevinyrralsDisk from "./pool/nevinyrrals-disk.js";
 import _poolNewBenalia from "./pool/new-benalia.js";
@@ -19095,6 +19098,7 @@ import _poolOutOfAir from "./pool/out-of-air.js";
 import _poolOutOfBounds from "./pool/out-of-bounds.js";
 import _poolOutOfTheTombs from "./pool/out-of-the-tombs.js";
 import _poolOutOfTheWay from "./pool/out-of-the-way.js";
+import _poolOutOfTime from "./pool/out-of-time.js";
 import _poolOutbreak from "./pool/outbreak.js";
 import _poolOutcasterGreenblade from "./pool/outcaster-greenblade.js";
 import _poolOutcasterTrailblazer from "./pool/outcaster-trailblazer.js";
@@ -24075,6 +24079,7 @@ import _poolSidequestRaiseAChocobo from "./pool/sidequest-raise-a-chocobo.js";
 import _poolSidewinderNaga from "./pool/sidewinder-naga.js";
 import _poolSidewinderSliver from "./pool/sidewinder-sliver.js";
 import _poolSidisiBroodTyrant from "./pool/sidisi-brood-tyrant.js";
+import _poolSidisiRegentOfTheMire from "./pool/sidisi-regent-of-the-mire.js";
 import _poolSidisiUndeadVizier from "./pool/sidisi-undead-vizier.js";
 import _poolSidisisFaithful from "./pool/sidisis-faithful.js";
 import _poolSidisisPet from "./pool/sidisis-pet.js";
@@ -27117,6 +27122,7 @@ import _poolTemporalCleansing from "./pool/temporal-cleansing.js";
 import _poolTemporalConqueror from "./pool/temporal-conqueror.js";
 import _poolTemporalDistortion from "./pool/temporal-distortion.js";
 import _poolTemporalEddy from "./pool/temporal-eddy.js";
+import _poolTemporalExtortion from "./pool/temporal-extortion.js";
 import _poolTemporalFirestorm from "./pool/temporal-firestorm.js";
 import _poolTemporalFissure from "./pool/temporal-fissure.js";
 import _poolTemporalIntervention from "./pool/temporal-intervention.js";
@@ -36764,6 +36770,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolChantOfVituGhazi,
   _poolChaosChanneler,
   _poolChaosCharm,
+  _poolChaosDefiler,
   _poolChaosHarlequin,
   _poolChaosImps,
   _poolChaosMaw,
@@ -40798,6 +40805,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEreborFlamesmith,
   _poolErebosBleakHearted,
   _poolErebosGodOfTheDead,
+  _poolErebosSIntervention,
   _poolErebossEmissary,
   _poolErebossTitan,
   _poolErestorOfTheCouncil,
@@ -50567,6 +50575,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolNevermaker,
   _poolNevermore,
   _poolNeverwinterDryad,
+  _poolNeverwinterHydra,
   _poolNevinyrralUrborgTyrant,
   _poolNevinyrralsDisk,
   _poolNewBenalia,
@@ -51504,6 +51513,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolOutOfBounds,
   _poolOutOfTheTombs,
   _poolOutOfTheWay,
+  _poolOutOfTime,
   _poolOutbreak,
   _poolOutcasterGreenblade,
   _poolOutcasterTrailblazer,
@@ -56484,6 +56494,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSidewinderNaga,
   _poolSidewinderSliver,
   _poolSidisiBroodTyrant,
+  _poolSidisiRegentOfTheMire,
   _poolSidisiUndeadVizier,
   _poolSidisisFaithful,
   _poolSidisisPet,
@@ -59526,6 +59537,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTemporalConqueror,
   _poolTemporalDistortion,
   _poolTemporalEddy,
+  _poolTemporalExtortion,
   _poolTemporalFirestorm,
   _poolTemporalFissure,
   _poolTemporalIntervention,
@@ -69186,6 +69198,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/chant-of-vitu-ghazi": _poolChantOfVituGhazi,
   "pool/chaos-channeler": _poolChaosChanneler,
   "pool/chaos-charm": _poolChaosCharm,
+  "pool/chaos-defiler": _poolChaosDefiler,
   "pool/chaos-harlequin": _poolChaosHarlequin,
   "pool/chaos-imps": _poolChaosImps,
   "pool/chaos-maw": _poolChaosMaw,
@@ -73220,6 +73233,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/erebor-flamesmith": _poolEreborFlamesmith,
   "pool/erebos-bleak-hearted": _poolErebosBleakHearted,
   "pool/erebos-god-of-the-dead": _poolErebosGodOfTheDead,
+  "pool/erebos-s-intervention": _poolErebosSIntervention,
   "pool/ereboss-emissary": _poolErebossEmissary,
   "pool/ereboss-titan": _poolErebossTitan,
   "pool/erestor-of-the-council": _poolErestorOfTheCouncil,
@@ -82989,6 +83003,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/nevermaker": _poolNevermaker,
   "pool/nevermore": _poolNevermore,
   "pool/neverwinter-dryad": _poolNeverwinterDryad,
+  "pool/neverwinter-hydra": _poolNeverwinterHydra,
   "pool/nevinyrral-urborg-tyrant": _poolNevinyrralUrborgTyrant,
   "pool/nevinyrrals-disk": _poolNevinyrralsDisk,
   "pool/new-benalia": _poolNewBenalia,
@@ -83926,6 +83941,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/out-of-bounds": _poolOutOfBounds,
   "pool/out-of-the-tombs": _poolOutOfTheTombs,
   "pool/out-of-the-way": _poolOutOfTheWay,
+  "pool/out-of-time": _poolOutOfTime,
   "pool/outbreak": _poolOutbreak,
   "pool/outcaster-greenblade": _poolOutcasterGreenblade,
   "pool/outcaster-trailblazer": _poolOutcasterTrailblazer,
@@ -88906,6 +88922,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/sidewinder-naga": _poolSidewinderNaga,
   "pool/sidewinder-sliver": _poolSidewinderSliver,
   "pool/sidisi-brood-tyrant": _poolSidisiBroodTyrant,
+  "pool/sidisi-regent-of-the-mire": _poolSidisiRegentOfTheMire,
   "pool/sidisi-undead-vizier": _poolSidisiUndeadVizier,
   "pool/sidisis-faithful": _poolSidisisFaithful,
   "pool/sidisis-pet": _poolSidisisPet,
@@ -91948,6 +91965,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/temporal-conqueror": _poolTemporalConqueror,
   "pool/temporal-distortion": _poolTemporalDistortion,
   "pool/temporal-eddy": _poolTemporalEddy,
+  "pool/temporal-extortion": _poolTemporalExtortion,
   "pool/temporal-firestorm": _poolTemporalFirestorm,
   "pool/temporal-fissure": _poolTemporalFissure,
   "pool/temporal-intervention": _poolTemporalIntervention,

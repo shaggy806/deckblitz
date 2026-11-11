@@ -795,6 +795,7 @@ import _poolShriekOfDread from "../pool/shriek-of-dread.js";
 import _poolShuriVibraniumTechnologist from "../pool/shuri-vibranium-technologist.js";
 import _poolSibsigIcebreakers from "../pool/sibsig-icebreakers.js";
 import _poolSidequestCatchAFish from "../pool/sidequest-catch-a-fish.js";
+import _poolSidisiRegentOfTheMire from "../pool/sidisi-regent-of-the-mire.js";
 import _poolSiegeModification from "../pool/siege-modification.js";
 import _poolSilentDeparture from "../pool/silent-departure.js";
 import _poolSilentSkimmer from "../pool/silent-skimmer.js";
@@ -1848,6 +1849,7 @@ const shard: CardShard = {
     _poolShuriVibraniumTechnologist,
     _poolSibsigIcebreakers,
     _poolSidequestCatchAFish,
+    _poolSidisiRegentOfTheMire,
     _poolSiegeModification,
     _poolSilentDeparture,
     _poolSilentSkimmer,
