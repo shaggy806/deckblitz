@@ -1203,8 +1203,48 @@ export class Room {
   /** Synthesizes and dispatches `seat`'s bot decision in-process — no
    * `Connection` involved, unlike a human seat's `dispatch`. */
   private dispatchForBot(seat: PlayerId): void {
-    this.game.dispatch(this.botAction(seat));
+    this.dispatchBotMove(seat, this.botAction(seat));
+  }
+
+  /**
+   * Dispatches a move `seat`'s bot decided. One the engine refuses — the
+   * legal-action list and the action's own check disagreeing, as over a
+   * convoke payment on deckblitz.net, 2026-11-10 — is logged and replaced by
+   * a plain answer (passing priority, or the stand-in's answer to a
+   * decision), so the game carries on. A refusal changes nothing, so it's
+   * told from an engine error by the event log standing where it was; a
+   * throw after the game moved, or from the fallback too, goes on to
+   * `settle`'s catch (or the gate's), which stops this room alone.
+   */
+  private dispatchBotMove(seat: PlayerId, move: Action): void {
+    const eventsBefore = this.game.events.length;
+    const seqBefore = this.game.state.eventSeq;
+    try {
+      this.game.dispatch(move);
+    } catch (error) {
+      if (this.game.events.length !== eventsBefore || this.game.state.eventSeq !== seqBefore) throw error;
+      const { turn } = this.game.state;
+      console.error(
+        `room ${this.id}: the engine refused a bot's move (seat ${seat}, turn ${turn.number} ${turn.step}): ` +
+          `${error instanceof Error ? error.message : String(error)}; the move: ${JSON.stringify(move)}`,
+      );
+      const fallback = this.fallbackMove(seat);
+      // The same move again would only be refused again.
+      if (JSON.stringify(fallback) === JSON.stringify(move)) throw error;
+      this.game.dispatch(fallback);
+    }
     this.lastActivityAt = Date.now();
+  }
+
+  /** What stands in for a bot's move the engine refused: the stand-in's
+   * answer to a pending decision, else passing priority. */
+  private fallbackMove(seat: PlayerId): Action {
+    const state = this.game.state;
+    const asked = askedPlayer(state) ?? seat;
+    if (state.awaiting === null) return { type: "pass-priority", player: state.priority.holder ?? asked };
+    const bot = this.bots.get(seat);
+    if (bot === undefined) throw new Error(`no bot on seat ${seat}`);
+    return standInFor(bot, asked).act(this.game.controllerView(asked));
   }
 
   /** Has `seat`'s auto-pass condition been reached? Clears it if so. */
@@ -1515,8 +1555,7 @@ export class Room {
           // `isDeadForMana` short-circuits before `move` is read, but the bot
           // has already been asked either way, so dispatching `move` rather
           // than asking again is both correct and free.
-          this.game.dispatch(move);
-          this.lastActivityAt = Date.now();
+          this.dispatchBotMove(bot, move);
           if (yielded(i + 1)) return;
           continue;
         }
@@ -1531,12 +1570,20 @@ export class Room {
           // re-derived; if it didn't — the overwhelmingly common case — the
           // answer we already have is the right one, and asking again would
           // advance the bot's own state a second time.
-          const stillUp = this.currentBotActor();
-          if (stillUp === bot && this.game.state.eventSeq === decidedAt) {
-            this.game.dispatch(move);
-            this.lastActivityAt = Date.now();
-          } else if (stillUp !== null) {
-            this.dispatchForBot(stillUp);
+          //
+          // This runs from the gate's timer or a client's ack, outside
+          // `settle`'s catch: a throw here once took the whole shard down
+          // (2026-11-10), so it stops the room as one inside `settle` does.
+          try {
+            const stillUp = this.currentBotActor();
+            if (stillUp === bot && this.game.state.eventSeq === decidedAt) {
+              this.dispatchBotMove(bot, move);
+            } else if (stillUp !== null) {
+              this.dispatchForBot(stillUp);
+            }
+          } catch (error) {
+            this.stop(error);
+            return;
           }
           this.settle();
         });
