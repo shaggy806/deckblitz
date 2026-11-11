@@ -56,3 +56,6 @@ deck tester rather than competitive matchmaking) with what would reopen it.
 from `mtg.tobyens.com` to deckblitz.net: Cloudflare and the tunnel stay, why the instance needs
 2 GB, what burstable CPU does to the bots' time budget, players' saved decks not following the
 domain, the cutover order, and how deploying changes.
+
+`verify-speed-audit` (**audit done, nothing built**) times `npm run verify` step by step and ranks
+what would make it faster without changing what it catches, with the coverage holes found on the way.
