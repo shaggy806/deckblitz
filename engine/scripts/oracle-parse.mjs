@@ -1764,8 +1764,10 @@ export function parseCost(text) {
       if (filter === null || Object.keys(filter).length === 0) return null;
       cost.exileSpell = { filter };
     } else if (part === "Exile a spell you control") cost.exileSpell = {};
-    else if ((m = /^Exile (an?|another) (.+?) you control$/.exec(part))) {
-      const filter = parseTypePhrase(m[2]);
+    else if ((m = /^Exile (an?|another) (.+?) you control(?: face up)?$/.exec(part))) {
+      // "A face-down permanent you control face up" (Primordial Mist): exile
+      // is face up anyway.
+      const filter = m[2] === "face-down permanent" ? { faceDown: true } : parseTypePhrase(m[2]);
       if (filter === null || Object.keys(filter).length === 0) return null;
       cost.sacrifice = { filter: { ...filter, controlledBy: "you" } };
       cost.exilesSacrifice = true;
@@ -16750,6 +16752,19 @@ function parseFaceAsWritten(face, ctx = {}) {
           .replace(/, where X is the number of (?:[\w+/-]+ )?counters removed this way\./, ".")
           .replace(/ deals damage to (.+?) equal to the number of (?:[\w+/-]+ )?counters removed this way\./, " deals X damage to $1.")
           .replace(/ deals that much damage to /, " deals X damage to ");
+      }
+      // "Exile a face-down permanent you control face up: You may play that
+      // card this turn." (Primordial Mist): the permission is on the card the
+      // cost exiled, where it lies in exile.
+      if (ability.cost.exilesSacrifice === true && /^You may (?:play|cast) that card this turn\.$/.test(rest)) {
+        ability.effect = {
+          kind: "grant-play",
+          cards: { paid: "sacrificed" },
+          duration: "end-of-turn",
+          ...(/^You may play/.test(rest) ? { play: true } : {}),
+        };
+        out.activated.push(ability);
+        continue;
       }
       // "{R}, Sacrifice this creature: It deals 2 damage to …" (Tinder Wall,
       // Barbarian Lunatic): a permanent's own ability, so "it" is its source.

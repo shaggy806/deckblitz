@@ -4133,7 +4133,10 @@ removeCounter?, addCounter?, payEnergy?, discard?, tapOthers?, untap?, do? }`.
   Shadows; `otherOnly` for "another"): offered and named as a sacrifice is, read back as
   `"sacrificed"` (`manaValueOf`, the `sacrificed` condition), but exiled: no sacrifice event, and
   what can't be sacrificed still pays. On a spell, `additionalCost: { sacrifice, exilesSacrifice: true }`
-  (Necrotic Fumes). `exile-chosen-costs.test.ts`.
+  (Necrotic Fumes). `exile-chosen-costs.test.ts`. "Exile a **face-down permanent** you control face
+  up: You may play that card this turn" (Primordial Mist) is the same cost over `{ faceDown: true }`
+  with `grant-play` of `cards: { paid: "sacrificed" }` — the card where it lies in exile, a land as
+  the land play, nothing for a token (`exile-face-down-to-play.test.ts`).
 - `exileFromHand: { count, filter? }` — "Exile a card from your hand" (Cadaverous Bloom), asked with
   a `choose-from-zone`; a mana ability adds its mana with the answer (rule 605.3b).
 - `exileSpell: { filter? }` — "Exile an instant or sorcery spell you control" (Nivmagus Elemental):

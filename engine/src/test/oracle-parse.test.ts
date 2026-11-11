@@ -18289,6 +18289,25 @@ describe("living at 0 or less life", () => {
   });
 });
 
+describe("exiling a face-down permanent to play its card", () => {
+  it("reads Primordial Mist's two abilities", () => {
+    const face = parseFace({
+      name: "Test Card",
+      type_line: "Enchantment",
+      oracle_text:
+        "At the beginning of your end step, you may manifest the top card of your library. (Put it onto the battlefield face down as a 2/2 creature. Turn it face up any time for its mana cost if it's a creature card.)\nExile a face-down permanent you control face up: You may play that card this turn. (You still pay its costs. Timing rules still apply.)",
+    } as never) as unknown as { triggered: Record<string, unknown>[]; activated: Record<string, unknown>[]; todo: string[] };
+    expect(face.todo).toEqual([]);
+    expect(face.triggered[0]).toMatchObject({
+      effect: { kind: "may", prompt: "Manifest the top card of your library?", effect: { kind: "manifest", who: "you" } },
+    });
+    expect(face.activated[0]).toMatchObject({
+      cost: { mana: null, tap: false, sacrifice: { filter: { faceDown: true, controlledBy: "you" } }, exilesSacrifice: true },
+      effect: { kind: "grant-play", cards: { paid: "sacrificed" }, duration: "end-of-turn", play: true },
+    });
+  });
+});
+
 describe("a token copy that enters with counters", () => {
   it("reads Littjara Mirrorlake's last ability", () => {
     const face = parseFace({
