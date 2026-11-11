@@ -3149,6 +3149,18 @@ describe("templates for features built since the parser began (2026-10-11)", () 
       otherOnly: true,
     });
     expect(gyatso.triggered[0].effect).toEqual({ kind: "may", prompt: "Airbend that creature?", effect: airbend("trigger-object") });
+    // "… or a creature spell you control": spells on the stack too (Surrak, Elusive Hunter).
+    const surrak = face(
+      "Whenever a creature you control or a creature spell you control becomes the target of a spell or ability an opponent controls, draw a card.",
+    );
+    expect(surrak.complete).toBe(true);
+    expect(surrak.triggered[0].trigger).toEqual({
+      on: "becomes-target",
+      who: "you-control",
+      filter: { type: "creature" },
+      orSpell: true,
+      byOpponentOnly: true,
+    });
     expect(parseSentence("Choose up to one target creature, then airbend all other creatures.", ctx())).toEqual({
       kind: "exile-all",
       filter: { type: "creature" },

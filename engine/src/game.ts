@@ -25955,7 +25955,12 @@ export class Game {
       if (announced.has(target.object)) continue;
       announced.add(target.object);
       const object = this.state.objects[target.object];
-      if (object === undefined || object.zone !== "battlefield") continue;
+      if (object === undefined) continue;
+      // A spell on the stack is an object too (rule 115.1): "a creature you
+      // control or a creature spell you control becomes the target" (Surrak,
+      // Elusive Hunter). An ability on the stack isn't one any card watches.
+      const spell = object.zone === "stack" && object.kind === "card";
+      if (object.zone !== "battlefield" && !spell) continue;
       // Valiant's "for the first time each turn": journaled before anything
       // looks, as this object (rule 400.7).
       this.journal({
@@ -25967,7 +25972,15 @@ export class Game {
         // ability" — Professor Hojo): a triggered one is plain "ability".
         how: bySpell ? "spell" : this.state.objects[stackObject]?.abilityKind === "activated" ? "activated" : "ability",
       });
-      this.emit({ type: "object-targeted", object: target.object, by, source, stackObject, bySpell });
+      this.emit({
+        type: "object-targeted",
+        object: target.object,
+        by,
+        source,
+        stackObject,
+        bySpell,
+        ...(spell ? { spell: true as const } : {}),
+      });
     }
   }
 
@@ -32533,6 +32546,9 @@ export class Game {
         return (
           by &&
           spec.playerOnly !== true &&
+          // A spell on the stack counts only where the card says "or a …
+          // spell you control" (Surrak, Elusive Hunter).
+          (event.spell !== true || spec.orSpell === true) &&
           !(spec.otherOnly === true && event.object === self.id) &&
           this.matchesWho(spec.who, event.object, self) &&
           this.triggerFilterOk(spec.filter, event.object, self)

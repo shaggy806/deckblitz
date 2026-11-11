@@ -2138,6 +2138,14 @@ export function parseTrigger(clause) {
   if (/^Whenever ~ becomes the target of a spell or ability an opponent controls$/.test(c)) {
     return [{ on: "becomes-target", who: "self", byOpponentOnly: true }];
   }
+  // "Whenever a creature you control or a creature spell you control becomes
+  // the target of a spell or ability an opponent controls" (Surrak, Elusive
+  // Hunter): `orSpell` reads spells on the stack by the same filter.
+  if ((m = /^Whenever a (\w+) you control or a (\w+) spell you control becomes the target of a spell or ability( an opponent controls)?$/.exec(c)) && m[1] === m[2]) {
+    const filter = parseTypePhrase(m[1]);
+    if (filter === null || filter.type === undefined) return null;
+    return [{ on: "becomes-target", who: "you-control", filter, orSpell: true, ...(m[3] !== undefined ? { byOpponentOnly: true } : {}) }];
+  }
   // "Whenever another creature you control becomes the target of a spell or
   // ability" (Monk Gyatso): its trigger object is the creature.
   if ((m = /^Whenever (another|a) (\w+) you control becomes the target of a spell or ability$/.exec(c))) {

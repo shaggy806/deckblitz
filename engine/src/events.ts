@@ -803,7 +803,11 @@ export type GameEvent =
        * at all.
        */
       readonly type: "object-targeted";
+      /** A permanent, or with `spell` a spell on the stack. */
       readonly object: ObjectId;
+      /** The object is a spell on the stack, not a permanent — read only by a
+       * `becomes-target` trigger with `orSpell` (Surrak, Elusive Hunter). */
+      readonly spell?: true;
       readonly by: PlayerId;
       readonly source: ObjectId;
       /** The spell or ability object doing the targeting — the spell itself

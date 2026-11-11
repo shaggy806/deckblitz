@@ -1357,6 +1357,12 @@ export type TriggerKind =
       /** "Another …" — this permanent itself becoming a target doesn't count
        * (Monk Gyatso). */
       readonly otherOnly?: boolean;
+      /** Spells on the stack count beside permanents, read by the same `who`
+       * and `filter`: "a creature you control **or a creature spell you
+       * control** becomes the target" (Surrak, Elusive Hunter). A spell is an
+       * object a spell or ability can target (rule 115.1); an ability on the
+       * stack never counts. */
+      readonly orSpell?: true;
       /** Only when the spell or ability belongs to an opponent of this
        * permanent's controller — which is how every printed card of this
        * shape words it. */
