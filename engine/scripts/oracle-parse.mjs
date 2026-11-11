@@ -2072,7 +2072,7 @@ export function parseTrigger(clause) {
     const as = [...(/crews/.test(m[1]) ? ["crew"] : []), ...(/saddles/.test(m[1]) ? ["saddle"] : [])];
     return [{ on: "crews-or-saddles", who: "self", as }];
   }
-  if (/^Whenever ~ deals combat damage to a player$|^Whenever ~ deals combat damage to an opponent$/.test(c)) {
+  if (/^When(?:ever)? ~ deals combat damage to a player$|^Whenever ~ deals combat damage to an opponent$/.test(c)) {
     return self("deals-combat-damage-to-player");
   }
   if (c === "Whenever ~ deals damage") return [{ on: "deals-damage", who: "self" }];
@@ -8934,6 +8934,53 @@ export function parseEffect(text, outer) {
         : { payLifeAmount: { half: { lifeTotal: "each" }, round: payToCounter[2] }, text: "Pay {X} life" };
     return {
       effect: { kind: "each-player-may", who: "each-player", options: [option], ifDid: { kind: "counter", target: "source" } },
+      todo: [],
+      hints: [],
+    };
+  }
+
+  // "You may pay {3} and sacrifice it. If you do, choose a land you control.
+  // Then search your library for up to two basic land cards which have the same
+  // name as the chosen land, put them onto the battlefield tapped, then
+  // shuffle." (Canoptek Wraith): one cost of two parts, offered only while the
+  // source is still there to sacrifice; the land is this resolution's choice
+  // (`remember`, never a target) and the search reads its name (rule 201.2a).
+  const scout =
+    /^You may pay ((?:\{[^}]+\})+) and sacrifice (?:it|~)\. If you do, choose a land you control\. Then search your library for up to (two|three) basic land cards which have the same name as the chosen land, put them onto the battlefield tapped, then shuffle\.$/i.exec(text);
+  if (scout !== null) {
+    const fetch = {
+      kind: "sequence",
+      effects: [
+        {
+          kind: "choose-permanents",
+          filter: { type: "land", controlledBy: "you" },
+          min: 1,
+          upTo: 1,
+          remember: true,
+          then: { kind: "sequence", effects: [] },
+          prompt: "Choose a land you control",
+        },
+        {
+          kind: "search-library",
+          filter: { type: "land", supertype: "basic", sameNameWith: { thisWay: "chosen" } },
+          destination: "battlefield",
+          enterTapped: true,
+          min: 0,
+          max: scout[2] === "two" ? 2 : 3,
+        },
+      ],
+    };
+    return {
+      effect: {
+        kind: "conditional",
+        condition: { kind: "source-on-battlefield" },
+        then: {
+          kind: "may",
+          prompt: `Pay ${scout[1]} and sacrifice it to search for up to ${scout[2]} basic lands?`,
+          cost: scout[1],
+          effect: { kind: "sacrifice-source", then: fetch },
+        },
+      },
       todo: [],
       hints: [],
     };

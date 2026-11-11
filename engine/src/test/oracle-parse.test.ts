@@ -8399,6 +8399,29 @@ describe("counters put or removed this way", () => {
     expect(ability.effect).toEqual({ kind: "put-onto-battlefield", target: 0 });
   });
 
+  it("reads Canoptek Wraith's basics with the same name as the chosen land", () => {
+    const wraith = face(
+      "Canoptek Wraith",
+      "Artifact Creature — Wraith",
+      "Wraith Form — This creature can't be blocked.\nTransdimensional Scout — When this creature deals combat damage to a player, you may pay {3} and sacrifice it. If you do, choose a land you control. Then search your library for up to two basic land cards which have the same name as the chosen land, put them onto the battlefield tapped, then shuffle.",
+    );
+    expect(wraith.complete).toBe(true);
+    expect(wraith.static[0].grantKeywords).toEqual(["unblockable"]);
+    const may = wraith.triggered[0].effect.then;
+    expect(wraith.triggered[0].effect.condition).toEqual({ kind: "source-on-battlefield" });
+    expect(may.cost).toBe("{3}");
+    expect(may.effect.kind).toBe("sacrifice-source");
+    expect(may.effect.then.effects[0]).toMatchObject({ kind: "choose-permanents", remember: true, min: 1, upTo: 1 });
+    expect(may.effect.then.effects[1]).toEqual({
+      kind: "search-library",
+      filter: { type: "land", supertype: "basic", sameNameWith: { thisWay: "chosen" } },
+      destination: "battlefield",
+      enterTapped: true,
+      min: 0,
+      max: 2,
+    });
+  });
+
   it("reads Sigarda's Splendor's noted life total: as it enters, compared and noted again", () => {
     const splendor = face(
       "Sigarda's Splendor",

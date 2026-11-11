@@ -717,6 +717,10 @@ trigger object also matches itself, as "that permanent and all others with the s
 controls"; `controlledByTarget` on an effect is the older form, for a slot, and reads the whole filter
 from that player's side). All are bound as the effect applies; only `"source"`, `"attached"` and
 `{ attachmentsOf: "source" }` read inside a static (a test holds the pool to it).
+"Choose a land you control. Then search … for basic land cards **which have the same name as the
+chosen land**" (Canoptek Wraith) is a `choose-permanents` with `remember: true` and an empty `then`,
+followed by a `search-library` whose filter is `sameNameWith: { thisWay: "chosen" }`: the pick is
+this resolution's even after the source was sacrificed, and with nothing chosen nothing matches.
 `greatestInZone` and `greatestAmongItsController` take `least: true`. `hasKeyword: CardKeyword` is one
 row per printed keyword read off the text box (morph, madness, kicker, flashback, cycling, fading, ...);
 `keyword` is still the computed evergreen list. `hasKeyword: "partner"` is partner or "partner with",
