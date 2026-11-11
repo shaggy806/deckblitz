@@ -5,7 +5,7 @@
  * v2 scores one move at a time, each rolled out with our seat passing, so a
  * line whose worth only shows several moves in — Dark Ritual, Dark Ritual,
  * Grave Titan; Act of Treason, the attack, then the sacrifice — scores its
- * first move as mana spent for nothing. `followUps` looks one move further.
+ * first move as mana spent for nothing.
  * This looks as far as `depth`, by a beam search over our own moves, each
  * played until it has resolved and we have priority again
  * (`simulateSettled`), and a step through combat to our second main phase
@@ -24,7 +24,7 @@
  * window by window (`EvalBotController`'s `turnPlan`) while the board is the
  * one it was planned on, rather than searched again.
  *
- * As `followUps` does, it never plans with a card that was in our library
+ * It never plans with a card that was in our library
  * when it began: the rollout knows what a draw finds, and we don't.
  */
 

@@ -320,7 +320,7 @@ describe("follow-ups", () => {
 
   it("plays the move that sets up a better one this turn", () => {
     const game = atMain();
-    const alone = new EvalBotController(A, registry, { followUps: false });
+    const alone = new EvalBotController(A, registry, { plan: "off" });
     expect(cardOf(game, alone.act(viewOf(game)))).toBe("Centaur Courser");
     const ahead = new EvalBotController(A, registry);
     expect(cardOf(game, ahead.act(viewOf(game)))).toBe("Sol Ring");
@@ -788,8 +788,8 @@ describe("the acting rollout", () => {
     for (const name of hand) game.debugSpawn(name, A, "hand");
     return game;
   };
-  const choose = (game: Game, rollout: "combat" | "acting", followUps = false): string => {
-    const action = new EvalBotController(A, registry, { rollout, followUps }).act({
+  const choose = (game: Game, rollout: "combat" | "acting", planned = false): string => {
+    const action = new EvalBotController(A, registry, { rollout, plan: planned ? "turn" : "off" }).act({
       state: game.state,
       player: A,
       legalActions: () => game.legalActions(A),

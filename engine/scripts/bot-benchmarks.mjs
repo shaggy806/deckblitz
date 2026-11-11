@@ -42,7 +42,7 @@ const options = {
   ...(flag("rollout", null) !== null ? { rollout: flag("rollout") } : {}),
   ...(flag("horizon", null) !== null ? { horizon: flag("horizon") } : {}),
   ...(has("rollout-decisions") ? { rolloutDecisions: true } : {}),
-  ...(has("no-follow-ups") ? { followUps: false } : {}),
+  ...(has("no-follow-ups") ? { plan: "off" } : {}),
   ...(flag("plan", null) !== null ? { plan: flag("plan") } : {}),
   ...(flag("plan-sims", null) !== null ? { planSimulations: Number(flag("plan-sims")) } : {}),
 };

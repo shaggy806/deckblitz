@@ -67,8 +67,6 @@ export interface ScenarioRecord {
   readonly refusedTies?: readonly Action[];
   /** Candidates ranked below every safe one for the crackback (`lastUnsafe`). */
   readonly unsafe?: readonly Action[];
-  /** A wipe the bot played a payoff before (`lastWipePayoff`). */
-  readonly wipePayoff?: { readonly wipe: Action; readonly payoff: Action } | null;
 }
 
 /**
@@ -115,7 +113,6 @@ export function recordScenario(
     tiesAct: bot.lastTiesAct,
     refusedTies: bot.lastRefusedTies,
     unsafe: bot.lastUnsafe,
-    wipePayoff: bot.lastWipePayoff,
   };
 }
 
@@ -151,13 +148,6 @@ export function replayChoice(record: ScenarioRecord, weights: EvalWeights): numb
   if (heldBest) {
     const pass = record.answers.findIndex((a) => a.action.type === "pass-priority");
     if (pass !== -1) return pass;
-  }
-  // A wipe that takes our creatures goes after a payoff that sees them go
-  // (`payoffBeforeWipe`).
-  const wipePayoff = record.wipePayoff;
-  if (wipePayoff != null && key(record.answers[best]?.action) === key(wipePayoff.wipe)) {
-    const at = record.answers.findIndex((a) => key(a.action) === key(wipePayoff.payoff));
-    if (at !== -1) return at;
   }
   const fallback = record.passFallback;
   if (fallback != null && record.answers[best]?.action.type === "pass-priority") {

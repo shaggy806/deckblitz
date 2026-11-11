@@ -4918,6 +4918,56 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   }),
   asked({
+    name: "keeps Adaptive Training Post's counters with no spell to copy",
+    rule: "A copy of the next instant or sorcery is spent only with one to cast: with none, three counters buy nothing.",
+    position(registry) {
+      // Capture HB5MR t31 (2026-10-05): carol removed the Post's three
+      // counters with no instant or sorcery to follow. No gate scenario made
+      // `holdsForNextSpell` fire (the bot audit's Q1); this one does.
+      const game = table(registry, [A, B], A);
+      lands(game, "Island", A, 4);
+      lands(game, "Forest", B, 4);
+      const post = game.debugSpawn("Adaptive Training Post", A, "battlefield");
+      game.state.objects[post].counters.charge = 3;
+      game.debugSpawn("Grizzly Bears", B, "battlefield");
+      game.debugSpawn("Wind Drake", A, "hand");
+      game.debugSpawn("Lightning Bolt", A, "library");
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type !== "activate-ability",
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
+    name: "plays its only land with more lands than it has a use for",
+    rule: "A land drop costs nothing: the one land in hand is played, however many are out.",
+    position(registry) {
+      // The "only land" rule plays it before any search. No gate scenario
+      // made it fire (the bot audit's Q1): past the evaluation's land cap a
+      // land on the battlefield is worth less than a card in hand, so a
+      // search that weighed the drop against passing would keep it.
+      const game = table(registry, [A, B], A);
+      lands(game, "Forest", A, 3);
+      lands(game, "Forest", B, 3);
+      const land = game.debugSpawn("Forest", A, "hand");
+      game.debugSpawn("Grizzly Bears", A, "hand");
+      game.debugSpawn("Centaur Courser", A, "hand");
+      game.debugSpawn("Rumbling Baloth", A, "hand");
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "play-land" && action.card === land,
+          detail: `chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
+  asked({
     name: "casts Omnath, Locus of Rage before cracking its fetch lands",
     rule: "A landfall payoff goes down before the lands enter: each fetch cracked after it is another trigger.",
     position(registry) {

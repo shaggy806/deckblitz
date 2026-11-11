@@ -74,11 +74,9 @@ import {
   MAX_BATCH,
   rolloutAborted,
   simulateAction,
-  simulateAfterCombat,
   simulateCombat,
   simulatePlan,
   simulateRepeated,
-  simulateSettled,
   withRolloutDeadline,
 } from "./simulate.js";
 import type { Horizon, RolloutPolicy } from "./simulate.js";
@@ -105,19 +103,14 @@ export interface EvalBotOptions {
    */
   readonly rolloutDecisions?: boolean;
   /**
-   * Whether a priority search in our own main phase also weighs what each
-   * move lets us do next this turn (`followUps`). On by default; off plays
-   * the one-move search alone, for an A/B.
-   */
-  readonly followUps?: boolean;
-  /**
-   * Plan our own turn (`turn-plan.ts`) in place of `followUps`: lines of
+   * Plan our own turn (`turn-plan.ts`): lines of
    * moves across both main phases, the opponents only blocking. `"turn"` by
    * default (since 2026-10-18: lookahead benchmarks 7 to 9 of 17, every gate
    * scenario, no cost a decision; head to head with the bot before it, level,
    * 24.9% [21.3, 28.5] over 546 four-player games); `"next-turn"` also plays our next turn on from the best line
-   * of each of the best few first moves, an experiment; `"off"` searches as
-   * before, with `followUps`.
+   * of each of the best few first moves, an experiment; `"off"` plays the
+   * one-move search alone (the follow-up search it used to fall back on was
+   * deleted 2026-11-10, unreachable since the plan became the default).
    */
   readonly plan?: "turn" | "next-turn" | "off";
   /** Whether a window like one already searched and passed on this turn
@@ -484,18 +477,6 @@ function hillClimb<T>(
 const DECISION_ROLLOUTS = 12;
 const NESTED_DECISION_ROLLOUTS = 2;
 
-/**
- * Simulations one priority search may spend on follow-ups (`followUps`), the
- * settling of each first move included — its own ceiling, under the decision's.
- * Every move times every move after it grows with the square of a wide board:
- * with only the decision's 200 to stop it, one search on a 79-permanent
- * four-player board ran 381 simulations and 126 s, and its bench game timed
- * out (seed 232, 2026-10-14). A search needed about 13 at the 90th
- * percentile, so this bites only on the wide boards, where what each move
- * opens up decides what's reached.
- */
-const FOLLOW_UP_SIMULATIONS = 24;
-
 /** `TurnPlanLimits` for a plan (`planLines`): moves in a line, lines kept at
  * each depth, and simulations by default (`EvalBotOptions.planSimulations`). */
 const PLAN_DEPTH = 5;
@@ -802,8 +783,9 @@ export class EvalBotController extends HeuristicBotController {
   /** This priority decision's `crackbackGuard`: null when nothing a cast or
    * activation taps or sacrifices could make the crackback lethal. */
   private tapGuard: { readonly grown: boolean } | null = null;
-  /** A play held for after combat this turn (`holdsWipeForCombat`,
-   * `holdsTapForCombat`): our combat steps keep its mana (`spendsHeldMana`). */
+  /** A play held for after combat this turn (`holdsWipeForCombat`, or a
+   * planned line's move after combat): our combat steps keep its mana
+   * (`spendsHeldMana`). */
   private heldPlay: { readonly turn: number; readonly action: Action } | null = null;
   private readonly rolloutDecisions: boolean;
   private readonly maxSimulations: number;
@@ -862,10 +844,9 @@ export class EvalBotController extends HeuristicBotController {
   /** See {@link DecisionAudit}. Written, never read. */
   lastDecision: DecisionAudit | null = null;
   /** When the last priority search's move won by what it lets us do next
-   * (`followUps`): the move, its best follow-up and their score. `null` when
-   * no follow-up beat the moves scored alone. Written, never read. */
+   * (`planLines`): the move, the line's next step and the line's value. `null`
+   * when no line beat the moves scored alone. Written, never read. */
   lastFollowUp: { readonly action: Action; readonly score: number; readonly then: Action } | null = null;
-  private readonly followUpsOn: boolean;
   private readonly planMode: "turn" | "next-turn" | null;
   private readonly planSimulations: number;
   /**
@@ -908,9 +889,6 @@ export class EvalBotController extends HeuristicBotController {
    * (`valueAimed`). `null` until that pass is scored. */
   private passOutcome: EvalOutcome | null = null;
   private passAloneOutcome: EvalOutcome | null = null;
-  /** The wipe the last priority search chose and the payoff it cast first
-   * instead (`payoffBeforeWipe`), for the replay. */
-  lastWipePayoff: { readonly wipe: Action; readonly payoff: Action } | null = null;
 
   constructor(
     playerId: PlayerId,
@@ -927,10 +905,8 @@ export class EvalBotController extends HeuristicBotController {
     this.rollout = options.rollout ?? (isDeepHorizon(this.horizon) ? "playing" : "combat");
     this.decisionRollout = this.rollout;
     this.rolloutDecisions = options.rolloutDecisions ?? false;
-    this.followUpsOn = options.followUps ?? true;
-    // `followUps: false` asks for the one-move search alone: no plan either.
     const plan = options.plan ?? "turn";
-    this.planMode = plan === "off" || options.followUps === false ? null : plan;
+    this.planMode = plan === "off" ? null : plan;
     this.planSimulations = options.planSimulations ?? DEFAULT_PLAN_SIMULATIONS;
     this.maxSimulations = options.maxSimulations ?? DEFAULT_MAX_SIMULATIONS;
     this.timeBudgetMs = options.timeBudgetMs ?? Infinity;
@@ -1061,7 +1037,6 @@ export class EvalBotController extends HeuristicBotController {
       if (this.passMemoMode === "on") {
         this.lastUnsafe = [];
         this.lastRefusedTies = [];
-        this.lastWipePayoff = null;
         this.lastPassFallback = early.cantrip;
         this.lastDecision = audit("priority", null, "pass memo");
         return this.settle(view, answer);
@@ -1106,7 +1081,6 @@ export class EvalBotController extends HeuristicBotController {
     this.passOutcome = null;
     this.passAloneOutcome = null;
     this.lastRefusedTies = [];
-    this.lastWipePayoff = null;
     // A cast payoff in play or about to be (Shiko and Narset's Flurry, a
     // prowess creature, Young Pyromancer): the rollouts play the rest of our
     // turn (`"acting"`), or a cheap first spell is never worth the second
@@ -1350,7 +1324,7 @@ export class EvalBotController extends HeuristicBotController {
     const tiesAct = this.decisionRollout === "acting" || isDeepHorizon(this.horizon);
     this.lastTiesAct = tiesAct;
     let passAlone: number | null | undefined;
-    // Each move's own score, for the follow-ups to order by (`followUps`).
+    // Each move's own score, for the turn plan's first moves (`planLines`).
     const scored = new Map<Action, number>();
     for (const action of candidates) {
       if (spent(budget)) break;
@@ -1463,14 +1437,14 @@ export class EvalBotController extends HeuristicBotController {
       batch = null;
       plan = { untap: p.untap, cast: p.cast.card };
     }
-    // **Follow-ups**: a move is also worth what it lets us do next this
-    // turn (`followUps`) — the cost reducer before what it reduces, the
-    // ramp before what it pays for. Last of all, so under a clock they spend
+    // **The turn plan**: a move is also worth what it lets us do next this
+    // turn (`planLines`) — the cost reducer before what it reduces, the
+    // ramp before what it pays for. Last of all, so under a clock it spends
     // only the time every single move, batch and untap plan has left.
     const followed =
       this.planMode !== null
         ? this.planLines(view, candidates, scored, mustKill, heldForCombat, best, bestScore, budget)
-        : this.followUps(view, candidates, scored, mustKill, heldForCombat, bestScore, budget);
+        : null;
     if (followed !== null) {
       best = followed.action;
       bestScore = followed.score;
@@ -1499,33 +1473,21 @@ export class EvalBotController extends HeuristicBotController {
     // A sacrifice for cards or a suspend scores a wash against passing — see
     // `isSacrificeForCardsDue` and `isSuspendDue`.
     // A held wipe that scored best waits for the second main phase, and
-    // nothing else spends its mana now (not even a cantrip). So does a play
-    // that taps a vigilance creature that could attack first
-    // (`holdsTapForCombat`).
-    if (
-      plan === null &&
-      batch === null &&
-      !heldForCombat.has(best) &&
-      this.holdsTapForCombat(view.state, best, bestScore, budget)
-    ) {
-      heldForCombat.add(best);
-    }
+    // nothing else spends its mana now (not even a cantrip). A play that
+    // taps a vigilance creature that could attack first (Faeburrow Elder's
+    // mana) is the turn planner's: its lines pass to combat and play after
+    // (the rule that held it here, `holdsTapForCombat`, was retired
+    // 2026-11-10, the bot audit's Q1).
     this.lastHeldForCombat = [...heldForCombat];
     if (heldForCombat.has(best)) this.heldPlay = { turn: view.state.turn.number, action: best };
     if (heldForCombat.has(best)) {
       best = pass;
       cantrip = null;
     }
-    // A wipe that takes our creatures waits for a castable "dies" payoff
-    // that sees them go (`payoffBeforeWipe`: Colfenor's Urn, then Citywide
-    // Bust).
-    if (best.type === "cast-spell" && plan === null && batch === null) {
-      const payoff = this.payoffBeforeWipe(view, best, candidates);
-      if (payoff !== null) {
-        this.lastWipePayoff = { wipe: best, payoff };
-        best = payoff;
-      }
-    }
+    // A "dies" payoff before the wipe that feeds it (Colfenor's Urn, then
+    // Citywide Bust) is a line the turn planner finds: v1's
+    // `payoffBeforeWipe` is not asked here (the bot audit's Q1, retired
+    // 2026-11-10).
     if (best.type === "pass-priority" && landfall !== undefined) {
       const land = landRule();
       if (land !== null) return land;
@@ -1607,7 +1569,7 @@ export class EvalBotController extends HeuristicBotController {
    * hold or a filter says aren't worth a simulation now, each concrete
    * filling of its targets and sacrifices (`aimOffer`, `withSacrificeChoices`).
    * Read on the real board for the window itself, and on a rollout's board
-   * after one of them has resolved for the follow-ups (`followUps`).
+   * after one of them has resolved for the turn plan (`planHooks`).
    */
   private listCandidates(view: ControllerView): {
     readonly candidates: Action[];
@@ -2812,114 +2774,8 @@ export class EvalBotController extends HeuristicBotController {
     return aimed === null || passed === null ? outcome : aimedOutcome(outcome, passed, aimed);
   }
 
-  /**
-   * **One more step of our own turn.** A move scored on its own is "I do
-   * this, and then the rollout plays the turn out" — and the rollout passes
-   * our seat, so a move whose worth is what it lets us do next (a cost
-   * reducer, a mana rock, an untap, a sacrifice outlet) scores below one that
-   * is worth something by itself, and the follow-up it was for is never seen.
-   * So in our own main phase, with nothing on the stack, each move is also
-   * played until it has resolved (`simulateSettled`), and every move we'd
-   * search on that board (`listCandidates`) is scored from there: the move is
-   * worth the best of those, if that beats everything scored so far. Only
-   * that first move is played; the next window searches again.
-   *
-   * Which moves are expanded is decided by what they open up, not by their
-   * own score, which is exactly what undersells a setup move: every move
-   * that leaves a follow-up is expanded, those that make something castable
-   * that wasn't first (the reducer, the rock), then the rest by their own
-   * score. Under a clock, what isn't reached by then keeps its own score.
-   * `null` when nothing beat `bestScore`.
-   */
-  private followUps(
-    view: ControllerView,
-    candidates: readonly Action[],
-    scored: ReadonlyMap<Action, number>,
-    mustKill: ReadonlyMap<Action, PlayerId>,
-    heldForCombat: ReadonlySet<Action>,
-    bestScore: number,
-    budget: SearchBudget,
-  ): { readonly action: Action; readonly score: number } | null {
-    this.lastFollowUp = null;
-    if (!this.followUpsOn) return null;
-    const state = view.state;
-    const me = this.playerId;
-    if (state.turnOrder[state.turn.activePlayerIndex] !== me) return null;
-    if (state.turn.step !== "precombat-main" && state.turn.step !== "postcombat-main") return null;
-    if (state.zones.shared.stack.length > 0 || state.awaiting !== null) return null;
-    // What's on offer now, by the offer a move comes from: a follow-up from
-    // anything else is something the first move opened up.
-    const offerKey = (a: Action): string =>
-      a.type === "cast-spell"
-        ? `cast:${a.card}`
-        : a.type === "activate-ability"
-          ? `ability:${a.source}:${a.abilityIndex}`
-          : a.type;
-    const offeredNow = new Set(candidates.map(offerKey));
-    // A follow-up can't be a card that was in our library: the rollout knows
-    // which cards a draw finds, and we don't. Followed by what it drew, Read
-    // the Bones at 5 life was worth its 2 life (the scenario "keeps its life
-    // when it is running out").
-    const library = new Set(state.zones.perPlayer[me]?.library ?? []);
-    const known = (b: Action): boolean => {
-      const id =
-        b.type === "cast-spell" || b.type === "play-land"
-          ? b.card
-          : b.type === "activate-ability"
-            ? b.source
-            : undefined;
-      return id === undefined || !library.has(id);
-    };
-    // The cheapest first moves are settled first: what a move leaves to spend
-    // is what a follow-up needs, and a setup move — a rock, a reducer — is
-    // usually cheap. Their own score only breaks ties, so a wide board's cap
-    // doesn't fall back on the score that undersells a setup move.
-    const spends = (a: Action): number =>
-      a.type === "cast-spell" ? this.manaValueOf(state.objects[a.card]?.cardName ?? "") : 0;
-    const firsts = candidates
-      .filter((a) => a.type !== "pass-priority" && scored.has(a) && !mustKill.has(a) && !heldForCombat.has(a))
-      .sort((x, y) => spends(x) - spends(y) || (scored.get(y) ?? 0) - (scored.get(x) ?? 0));
-    // Their own ceiling (`FOLLOW_UP_SIMULATIONS`), counted in simulations as
-    // `timed` counts them: half of it at most on settling, so a wide board
-    // still gets follow-ups scored.
-    const startedAt = budget.simulations;
-    const used = (): number => budget.simulations - startedAt;
-    const settled: { first: Action; board: ControllerView; next: readonly Action[]; opened: number }[] = [];
-    for (const first of firsts) {
-      if (spent(budget) || used() >= FOLLOW_UP_SIMULATIONS / 2) break;
-      budget.left -= 1;
-      const sim = timed(budget, () => simulateSettled(state, this.cards, me, first));
-      if (sim === null) continue;
-      const board = sim.controllerView(me);
-      // Moves that must kill aren't followed up: the kill is read at the end
-      // of their own rollout.
-      const listed = this.listCandidates(board);
-      const next = listed.candidates.filter(
-        (b) => known(b) && !listed.mustKill.has(b) && !listed.heldForCombat.has(b),
-      );
-      if (next.length === 0) continue;
-      const opened = new Set(next.map(offerKey).filter((k) => !offeredNow.has(k))).size;
-      settled.push({ first, board, next, opened });
-    }
-    settled.sort((x, y) => y.opened - x.opened || (scored.get(y.first) ?? 0) - (scored.get(x.first) ?? 0));
-    let found: { action: Action; score: number; then: Action } | null = null;
-    let bar = bestScore;
-    scoring: for (const { first, board, next } of settled) {
-      for (const then of next) {
-        if (spent(budget) || used() >= FOLLOW_UP_SIMULATIONS) break scoring;
-        budget.left -= 1;
-        const value = this.scoreFrom(board, first, then, budget);
-        if (value === null || !(value > bar + TIE)) continue;
-        bar = value;
-        found = { action: first, score: value, then };
-      }
-    }
-    this.lastFollowUp = found;
-    return found;
-  }
-
   /** The hooks `turn-plan.ts` plans with: the moves the search would list on
-   * a board, as `followUps` takes them, and the evaluation. */
+   * a board, and the evaluation. */
   private planHooks(): TurnPlanHooks {
     return {
       moves: (board) => {
@@ -2973,7 +2829,7 @@ export class EvalBotController extends HeuristicBotController {
   }
 
   /**
-   * `followUps` as a whole plan (`plan`): the best line for our turn
+   * What a move lets us do next, as a whole plan (`plan`): the best line for our turn
    * (`planTurn`), its first step played if the line beats `bestScore`, the
    * one-move search's best, and the rest kept for `continueTurnPlan`. Under
    * `"next-turn"` the best line for each of the best `PLAN_REFINE_LINES`
@@ -3040,9 +2896,8 @@ export class EvalBotController extends HeuristicBotController {
       asScored ? this.lastEnds : undefined,
       asScored || best.type === "pass-priority" ? undefined : best,
     );
-    // Each line traced as an answer for its first move, as a follow-up pair
-    // is (`scoreFrom`), so `scenario-fit.ts`' replay weighs what the plan
-    // weighed.
+    // Each line traced as an answer for its first move, so
+    // `scenario-fit.ts`' replay weighs what the plan weighed.
     for (const line of lines) {
       const step = line.steps[0];
       if (step !== undefined) this.trace?.(step === "combat" ? { type: "pass-priority", player: me } : step, line.end);
@@ -3219,30 +3074,6 @@ export class EvalBotController extends HeuristicBotController {
     return step;
   }
 
-  /** `score` for a follow-up `action`, on the board `first` left
-   * (`followUps`): the same rollout and the same crackback check. Traced as
-   * an answer for `first` — playing it is what the pair means — so a replay
-   * of this window (`scenario-fit.ts`) weighs the pair as the search did; an
-   * unsafe pair isn't, the replay having no way to mark it so, and it can
-   * only win where every move was unsafe too. */
-  private scoreFrom(board: ControllerView, first: Action, action: Action, budget: SearchBudget): number | null {
-    const after = timed(budget, () =>
-      simulateAction(
-        board.state,
-        this.cards,
-        action,
-        this.horizon,
-        this.decisionRollout,
-        this.selfInPriorityRollouts(board.state),
-      ),
-    );
-    if (after === null) return null;
-    const value = evaluateState(after, this.cards, this.playerId, this.weights);
-    if (this.tapsIntoCrackback(board.state, action, budget)) return UNSAFE + value;
-    this.trace?.(first, after);
-    return value;
-  }
-
   /**
    * Whether a priority candidate's own resolution — what it taps or
    * sacrifices to pay for itself, a mana creature its payment taps, a
@@ -3296,58 +3127,6 @@ export class EvalBotController extends HeuristicBotController {
     if (attacked.length === 0) return "drop";
     const weakest = attacked.reduce((a, b) => (state.players[b].life < state.players[a].life ? b : a));
     return { kills: weakest };
-  }
-
-  /**
-   * Whether the search's best play, in our first main phase, taps a vigilance
-   * creature of ours that could attack — Faeburrow Elder's mana paying for an
-   * Orzhov Signet (a capture, 2026-10-06, NZP7Q turn 17; the user: "creatures
-   * with tap abilities and vigilance usually should use these abilities after
-   * combat") — and the same play put off to our second main phase
-   * (`simulateAfterCombat`) scores at least as well. Vigilance lets it attack
-   * and still tap afterwards; tapped first, it can't attack at all. The
-   * rollouts pass our seat, so the search never sees main 2. Only for the
-   * play it chose, so it costs one or two simulations a turn; and a play
-   * worth making before combat (a haste creature, a blocker removed) scores
-   * worse put off, and stays.
-   */
-  private holdsTapForCombat(state: GameState, action: Action, score: number, budget: SearchBudget): boolean {
-    if (action.type !== "cast-spell" && action.type !== "activate-ability") return false;
-    const me = this.playerId;
-    if (state.turn.step !== "precombat-main" || state.turnOrder[state.turn.activePlayerIndex] !== me) return false;
-    if (state.zones.shared.stack.length > 0) return false;
-    const opponents = state.turnOrder.filter((p) => p !== me && !state.players[p].hasLost);
-    const attackers = withComputedCache(() =>
-      state.zones.shared.battlefield.filter((id) => {
-        const object = state.objects[id];
-        if (object === undefined || object.controller !== me || object.tapped) return false;
-        const c = computeCharacteristics(state, this.cards, id);
-        return (
-          c.types.includes("creature") &&
-          c.keywords.has("vigilance") &&
-          opponents.some((p) => whyCannotAttack(state, this.cards, me, id, p) === null)
-        );
-      }),
-    );
-    if (attackers.length === 0) return false;
-    // Out of time, the search's play stands: this is a second rollout of it,
-    // which ran 120ms past the deadline unchecked (2026-10-18).
-    if (outOfTime(budget)) return false;
-    const resolved = timed(budget, () => simulateAction(state, this.cards, action, "stack", "passive"));
-    if (resolved === null || !attackers.some((id) => resolved.objects[id]?.tapped === true)) return false;
-    budget.left -= 1;
-    const later = timed(budget, () =>
-      simulateAfterCombat(
-        state,
-        this.cards,
-        me,
-        action,
-        this.horizon,
-        this.decisionRollout,
-        this.selfInPriorityRollouts(state),
-      ),
-    );
-    return later !== null && evaluateState(later, this.cards, me, this.weights) >= score;
   }
 
   /**
@@ -3533,7 +3312,7 @@ export class DeepRolloutController extends CombatRolloutController {
     this.responder = new EvalBotController(playerId, registry, {
       weights,
       maxSimulations: DEEP_RESPONSE_SIMULATIONS,
-      followUps: false,
+      plan: "off",
     });
   }
 
