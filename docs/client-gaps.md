@@ -25,8 +25,6 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   the navigation, in the same yellow as "Create a game", worded "Have a deck copied? Click here to blitz!".
   When the clipboard is refused, the paste form opens with its Blitz button just below the fold at 768px
   (top at 770, the page scrolls).
-- **The history log's layout** (found 2026-11-02). It's a full-screen popup, so it can't be read beside the
-  board; each line carries its event number; and the phase banner ("MAIN PHASE") draws over it.
 - **The hand's rules text is tiny at rest** (found 2026-11-02). At 1366×768 a hand card's rules are 9.5px and
   its type line 8.5px, on a tilted card; hovering makes one readable. The mulligan's fan looks the same.
 - **The stack's card hides a seat's board** (found 2026-11-02). At 1366×768 it sits over the fourth player's

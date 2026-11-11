@@ -160,7 +160,7 @@ export function EventLog({ events, nameAt, seats, onSelect }: EventLogProps) {
   }, [shown.length])
 
   return (
-    <div className="event-log" ref={boxRef}>
+    <div className={detailed ? 'event-log detailed' : 'event-log'} ref={boxRef}>
       <div className="event-log-head">
         <h3>Log</h3>
         <label className="event-log-toggle">
@@ -180,7 +180,9 @@ export function EventLog({ events, nameAt, seats, onSelect }: EventLogProps) {
             onClick={onSelect ? () => onSelect(event) : undefined}
             title={onSelect ? 'Show on the board' : undefined}
           >
-            <span className="ev-seq">{event.seq}</span>
+            {/* The event's number is for telling a bug report's lines apart:
+                only the detailed view carries it. */}
+            {detailed ? <span className="ev-seq">{event.seq}</span> : null}
             <EventText event={event} nameAt={nameAt} seats={seats} lookup={lookup} />
           </li>
         ))}

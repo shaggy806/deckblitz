@@ -250,7 +250,6 @@ delete its detail there and move this line to `COMPLETED.md`.
 - **Which seat you see while controlling another player** (the user's call, after playing it) — today the table flips to the controlled player's seat; the other option is to stay in your own seat with a clear marker.
 - **Too many priority stops with a land like Bountiful Landscape** (a design call) — a non-mana ability on the battlefield stopped the game about 40 times in one four-player round, and Auto-pass pauses on each opposing spell.
 - **Blitz is the last thing on the landing page** — the site's main feature sits under the navigation, in the same yellow as "Create a game", with its paste form's button just below the fold at 768px.
-- **The history log's layout** — a full-screen popup you can't read beside the board, event numbers on every line, and the phase banner draws over it.
 - **The hand's rules text is tiny at rest** — 8.5-9.5px and tilted at 1366×768, readable only on hover.
 - **The stack's card hides a seat's board** — at 1366×768 it covers the fourth player's board while you decide whether to respond.
 - **A hand card's Cycle, Foretell and Plot buttons are small** — plain buttons under the card, easy to miss beside it (they aren't a popup: nothing for Escape to close).

@@ -1610,7 +1610,7 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
                 : undefined
             }
           />
-          <button type="button" data-tour="game-history" onClick={() => setShowHistory(true)}>
+          <button type="button" data-tour="game-history" aria-expanded={showHistory} onClick={() => setShowHistory((open) => !open)}>
             History
           </button>
           {/* A developer's server only (`--capture`), and only its host. */}
@@ -1683,7 +1683,11 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
       />
 
       {showHistory ? (
-        <div className="zone-viewer-overlay" onClick={() => setShowHistory(false)}>
+        // A panel down the right edge, not a popup over the board: the log is
+        // for reading beside the game it tells of (it was a full-screen box
+        // you had to close to see the board). Nothing behind it is covered by
+        // a scrim or blocked: Close, the History button or Escape puts it away.
+        <div className="zone-viewer-overlay history-overlay">
           <div
             className="zone-viewer-box history-box"
             onClick={(e) => e.stopPropagation()}
@@ -1719,10 +1723,9 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
               )}
               seats={game.seats}
               onSelect={(event) => {
-                // Close the log so the board is in view, then point the
-                // entry's cards and players out on it once it's drawn.
-                setShowHistory(false)
-                window.setTimeout(() => highlightEvent(event), 50)
+                // The board is in view beside the panel: point the entry's
+                // cards and players out on it.
+                highlightEvent(event)
               }}
             />
           </div>
