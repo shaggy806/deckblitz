@@ -13316,6 +13316,7 @@ import _poolIncendiarySabotage from "./pool/incendiary-sabotage.js";
 import _poolIncendiary from "./pool/incendiary.js";
 import _poolIncinerate from "./pool/incinerate.js";
 import _poolIncineratingBlast from "./pool/incinerating-blast.js";
+import _poolIncineratorOfTheGuilty from "./pool/incinerator-of-the-guilty.js";
 import _poolIncisorGlider from "./pool/incisor-glider.js";
 import _poolInciteHysteria from "./pool/incite-hysteria.js";
 import _poolInciteRebellion from "./pool/incite-rebellion.js";
@@ -45773,6 +45774,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolIncendiary,
   _poolIncinerate,
   _poolIncineratingBlast,
+  _poolIncineratorOfTheGuilty,
   _poolIncisorGlider,
   _poolInciteHysteria,
   _poolInciteRebellion,
@@ -78243,6 +78245,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/incendiary": _poolIncendiary,
   "pool/incinerate": _poolIncinerate,
   "pool/incinerating-blast": _poolIncineratingBlast,
+  "pool/incinerator-of-the-guilty": _poolIncineratorOfTheGuilty,
   "pool/incisor-glider": _poolIncisorGlider,
   "pool/incite-hysteria": _poolInciteHysteria,
   "pool/incite-rebellion": _poolInciteRebellion,

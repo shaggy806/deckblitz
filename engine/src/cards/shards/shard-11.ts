@@ -423,6 +423,7 @@ import _poolImperialRecoveryUnit from "../pool/imperial-recovery-unit.js";
 import _poolImplementOfImprovement from "../pool/implement-of-improvement.js";
 import _poolImprovisedArsenal from "../pool/improvised-arsenal.js";
 import _poolInallaArchmageRitualist from "../pool/inalla-archmage-ritualist.js";
+import _poolIncineratorOfTheGuilty from "../pool/incinerator-of-the-guilty.js";
 import _poolIndebtedSpirit from "../pool/indebted-spirit.js";
 import _poolIndex from "../pool/index.js";
 import _poolIndulgingPatrician from "../pool/indulging-patrician.js";
@@ -1446,6 +1447,7 @@ const shard: CardShard = {
     _poolImplementOfImprovement,
     _poolImprovisedArsenal,
     _poolInallaArchmageRitualist,
+    _poolIncineratorOfTheGuilty,
     _poolIndebtedSpirit,
     _poolIndex,
     _poolIndulgingPatrician,
