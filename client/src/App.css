@@ -59,7 +59,7 @@
    a second line (the step pips shrink/scroll before that happens). */
 .top-strip {
   flex: none;
-  height: clamp(30px, 3.6vh, 40px);
+  height: var(--top-strip-h);
   display: flex;
   align-items: center;
   gap: clamp(10px, 1.4vw, 20px);
@@ -67,7 +67,7 @@
   margin: -12px -20px 8px;
   background: var(--panel);
   border-bottom: 1px solid var(--border);
-  font-size: clamp(11px, 1.05vw, 13px);
+  font-size: clamp(11px, 1.05vw, calc(13px * var(--ui)));
 }
 .ts-room {
   color: var(--muted-dim);
@@ -1687,7 +1687,7 @@
      re-resolve against each board's own width -- a custom property declared
      on :root would substitute :root's value once and inherit the frozen
      result down. */
-  --mt-banner-h: clamp(11px, calc(var(--mini-w) * 0.19), 18px);
+  --mt-banner-h: clamp(11px, calc(var(--mini-w) * 0.19), calc(18px * var(--ui)));
   --mini-h: calc(var(--mini-w) * 0.75 + var(--mt-banner-h));
   flex: 1;
   min-width: 0;
@@ -2006,7 +2006,7 @@
   width: var(--card-w);
 }
 .library-top .card-tile {
-  --ct-scale: calc(var(--card-w) / var(--card-w-max));
+  --ct-scale: calc(var(--card-w) / var(--card-w-max) * var(--ui));
   width: 100%;
   height: calc(var(--card-w) * 1.4);
 }
@@ -2281,7 +2281,7 @@
    smaller/dimmer/rotated by its own custom-property styling (computed
    per-depth in Stack.tsx), not a separate CSS size rule. */
 .stack-entry .card-tile {
-  --ct-scale: calc(var(--card-w) / var(--card-w-max));
+  --ct-scale: calc(var(--card-w) / var(--card-w-max) * var(--ui));
   border-color: color-mix(in srgb, var(--gold) 75%, transparent);
   box-shadow:
     0 0 0 2px color-mix(in srgb, var(--gold) 55%, transparent),
@@ -2432,7 +2432,7 @@
   /* Clear of the top strip, and of the bottom-right corner where every
      decision is asked and the pass buttons sit: the log never hides the
      prompt it's being read to answer. */
-  padding: clamp(30px, 3.6vh, 40px) 0 clamp(110px, 22vh, 220px);
+  padding: var(--top-strip-h) 0 clamp(110px, 22vh, 220px);
   z-index: 10002;
 }
 .history-overlay .history-box {
@@ -3620,7 +3620,7 @@
   z-index: 140;
 }
 .mini-tile-popover .card-tile {
-  --ct-scale: calc(var(--card-w) / var(--card-w-max));
+  --ct-scale: calc(var(--card-w) / var(--card-w-max) * var(--ui));
 }
 /* A double-faced card's other face (OtherFace), the same size as the card
    and next to it, before the keyword tips — so on the card's left for a
@@ -4358,7 +4358,7 @@
      Capped against viewport height for the usual reason (a card box is 1.4x
      its width and the two axes scale independently). */
   --card-w: min(calc(var(--card-w-max) * 1.4), 26vh);
-  --ct-scale: calc(var(--card-w) / var(--card-w-max));
+  --ct-scale: calc(var(--card-w) / var(--card-w-max) * var(--ui));
   width: var(--card-w);
   border-color: color-mix(in srgb, var(--gold) 80%, transparent);
   box-shadow:
@@ -4434,7 +4434,7 @@
    `var(--ct-scale, 1)`; unset (1) everywhere else, so the board, hand and
    zone viewers are untouched. */
 .played-card-fly .card-tile {
-  --ct-scale: calc(var(--card-w) / var(--card-w-max));
+  --ct-scale: calc(var(--card-w) / var(--card-w-max) * var(--ui));
 }
 /* The global `button:disabled { opacity: 0.4 }` (index.css) otherwise caps
    this card's own opacity no matter what the keyframes below say, since

@@ -16,8 +16,6 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   easy to miss. They aren't a popup, so there is nothing for Escape to close (the first report said otherwise).
 - **The deck builder's hover preview can cover the search box and filters** (found 2026-11-02). The last of
   its rough edges; the rest landed 2026-11-11.
-- **The game's top bar and labels stay small at 2560×1440** (found 2026-11-02). Judged by eye from a
-  screenshot, on the user's own monitor size; measure before changing.
 
 - **What the scenario builder can't say yet** (`docs/plans/scenario-builder.md`). A
   `ScenarioSpec` has no controller apart from the owner (a stolen permanent), no transformed or

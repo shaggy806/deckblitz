@@ -252,7 +252,6 @@ delete its detail there and move this line to `COMPLETED.md`.
 - **The stack's card hides a seat's board** — at 1366×768 it covers the fourth player's board while you decide whether to respond.
 - **A hand card's Cycle, Foretell and Plot buttons are small** — plain buttons under the card, easy to miss beside it (they aren't a popup: nothing for Escape to close).
 - **The deck builder's hover preview can cover the search box and filters** — the last of its rough edges.
-- **The game's top bar and labels stay small at 2560×1440** — judged by eye; measure before changing.
 - **What the scenario builder can't say yet** — stolen, transformed or face-down cards (manifested ones), turn-long effects, the stack.
 - **The initiative and the venture marker have no animation** — the 🗝️ chip changes hands and the dungeon marker moves with no cue (`docs/plans/initiative-dungeons.md` §6). Also: the builder's scenario can't hold the initiative or a dungeon position.
 - **Quality-of-life room options (house rules)**, opt-in per room.

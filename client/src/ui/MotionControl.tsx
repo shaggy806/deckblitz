@@ -112,14 +112,16 @@ export function MotionControl({
             />
             Skip mana stops — pass when tapping for mana is all I could do
           </label>
-          <label className="motion-row">
+          <label
+            className="motion-row"
+            title="Outside your own main phases, with nothing on the stack. A stop on the step keeps its window."
+          >
             <input
               type="checkbox"
               checked={pass.skipAbilityOnly !== false}
               onChange={(e) => setPassSettings({ skipAbilityOnly: e.target.checked })}
             />
-            Skip ability stops — outside my main phases, pass when a permanent's ability is all I could use (a stop on the
-            step keeps it)
+            Skip ability stops — pass when a permanent's ability is all I could use
           </label>
           <label className="motion-row">
             <input

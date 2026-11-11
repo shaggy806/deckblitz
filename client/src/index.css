@@ -97,8 +97,14 @@
      App.css's .quadrant-body .side-zone) narrows --card-w for its own
      subtree against that ceiling, so every card-shaped thing inside it
      still derives from one number rather than re-deriving the clamp. */
-  --card-w-max: clamp(96px, calc((100vw - var(--side-panel)) * 0.09), 150px);
+  --card-w-max: clamp(96px, calc((100vw - var(--side-panel)) * 0.09), calc(150px * var(--ui)));
   --card-w: var(--card-w-max);
+  /* Card text is sized for a card `--card-w-max` wide at 1080p, and scales
+     with its card from there (`--ct-scale`, which a subtree with cards of
+     another size sets for itself). */
+  --ct-scale: var(--ui);
+  /* The game's top strip, and what docks under it. */
+  --top-strip-h: clamp(30px, 3.6vh, calc(40px * var(--ui)));
   /* A panel docked at the right edge that the game makes room for rather
      than sitting under (the scenario builder's drawer, `data-side-panel`):
      the page narrows by this much, and everything sized or placed against
@@ -128,13 +134,20 @@
      is one of these. Card text scales with its card (App.css's --ct-scale),
      icon glyphs (×, +, arrows) are sized as glyphs, and a page's hero
      heading is fluid (clamp()), so those three stay as they are. */
-  --text-2xs: 10px; /* small-caps labels and badges */
-  --text-xs: 11px; /* secondary details: zone counts, captions */
-  --text-sm: 12px; /* dense UI: menus, lists, toasts */
-  --text-md: 13px; /* the default for panels and dialogs */
-  --text-base: 15px; /* body text, names, primary buttons */
-  --text-lg: 18px; /* dialog and pane headings */
-  --text-xl: 22px; /* page titles, life totals */
+  /* How much larger than its 1080p design the interface draws: 1 up to a
+     1080p screen, more on a 1440p one (the media queries at the foot of this
+     block's file). Every size was capped at what suits 1920x1080, so at
+     2560x1440 the top bar was 13px, its buttons 11px and a board card 150px
+     wide, as at 1366x768 (measured 2026-11-11). The text tokens, the card's
+     widest size and card text all take it. */
+  --ui: 1;
+  --text-2xs: calc(10px * var(--ui)); /* small-caps labels and badges */
+  --text-xs: calc(11px * var(--ui)); /* secondary details: zone counts, captions */
+  --text-sm: calc(12px * var(--ui)); /* dense UI: menus, lists, toasts */
+  --text-md: calc(13px * var(--ui)); /* the default for panels and dialogs */
+  --text-base: calc(15px * var(--ui)); /* body text, names, primary buttons */
+  --text-lg: calc(18px * var(--ui)); /* dialog and pane headings */
+  --text-xl: calc(22px * var(--ui)); /* page titles, life totals */
 
   font-family: var(--font-body);
   font-size: var(--text-base);
@@ -368,4 +381,18 @@ h3 {
    the game narrows to make room for it. The same width as `.builder-panel`. */
 :root[data-side-panel] {
   --side-panel: clamp(300px, 26vw, 440px);
+}
+
+/* The interface's scale (`--ui`): a 1440p monitor has room, and a reader
+   further from more pixels, so everything draws larger there. Both width and
+   height, so a wide but short window keeps the 1080p sizes. */
+@media (min-width: 2240px) and (min-height: 1260px) {
+  :root {
+    --ui: 1.15;
+  }
+}
+@media (min-width: 2540px) and (min-height: 1400px) {
+  :root {
+    --ui: 1.3;
+  }
 }
