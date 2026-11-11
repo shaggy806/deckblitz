@@ -1385,6 +1385,40 @@ export function groupManaValueBroken(
   return distinct && new Set(values).size < values.length;
 }
 
+/** The nouns a target label is built from: the word a count makes plural. */
+const TARGET_NOUNS = new Set([
+  "creature", "permanent", "artifact", "enchantment", "land", "planeswalker", "battle", "spell", "card",
+  "player", "opponent", "token", "ability", "source", "target", "commander",
+]);
+
+/** Where a label's noun phrase ends and what narrows it begins: "creature |
+ * you control", "card | in a graveyard", "opponent | with more life than you". */
+const LABEL_TAIL = / (?:you |an opponent |that |with |without |in |from |of |other than |\().*$/;
+
+const pluralWord = (word: string): string =>
+  /(?:s|x|ch|sh)$/.test(word) ? `${word}es` : /[^aeiou]y$/.test(word) ? `${word.slice(0, -1)}ies` : `${word}s`;
+
+/**
+ * A target label for several of them: "creatures you control", "artifacts or
+ * creatures", "instant or sorcery spells", "other creatures". The noun
+ * phrase's last word takes the plural, and so does each alternative before
+ * it that ends in a noun ("creature or planeswalker"), where "instant or
+ * sorcery spell" keeps its two adjectives.
+ */
+export function pluralTargetLabel(label: string): string {
+  if (label.startsWith("another ")) return `other ${pluralTargetLabel(label.slice("another ".length))}`;
+  const tail = LABEL_TAIL.exec(label)?.[0] ?? "";
+  const head = tail === "" ? label : label.slice(0, label.length - tail.length);
+  const parts = head.split(" or ");
+  const plural = parts.map((part, i) => {
+    const words = part.split(" ");
+    const last = words[words.length - 1];
+    if (i < parts.length - 1 && !TARGET_NOUNS.has(last)) return part;
+    return [...words.slice(0, -1), pluralWord(last)].join(" ");
+  });
+  return `${plural.join(" or ")}${tail}`;
+}
+
 /**
  * A short human label for a target slot, for a UI prompt ("choose a
  * creature"). The string specs are already their own label; the structured
@@ -1412,7 +1446,10 @@ export function describeTargetSpec(spec: TargetSpec | string): string {
           : spec.max !== undefined
             ? "up to X"
             : "any number of";
-    if (spec.of !== "any-target") return `${many} ${describeTargetSpec(spec.of)}`;
+    if (spec.of !== "any-target") {
+      const one = many === "1" || many === "up to 1";
+      return `${many} ${one ? describeTargetSpec(spec.of) : pluralTargetLabel(describeTargetSpec(spec.of))}`;
+    }
     return many === "1" || many === "up to 1" ? `${many} target` : `${many} targets`;
   }
   if (spec.kind === "other") {

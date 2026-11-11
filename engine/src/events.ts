@@ -537,6 +537,10 @@ export type GameEvent =
       /** Chosen and not moved (a `destination: "stay"` choice — Sylvan
        * Library's two cards): what's done with them comes next. */
       readonly chosenOnly?: true;
+      /** Where the chosen cards were put, when not a hand or a library: the
+       * log says "puts onto the battlefield", "puts into a graveyard" or
+       * "exiles" rather than "takes". */
+      readonly to?: "battlefield" | "graveyard" | "exile";
     })
   | (Base & {
       /** A player shuffled their library (after a search / tutor). */
@@ -733,6 +737,9 @@ export type GameEvent =
       readonly type: "crime-committed";
       readonly player: PlayerId;
       readonly object: ObjectId;
+      /** The source of the ability that committed it, when `object` is an
+       * ability: the log names it once the ability has left the stack. */
+      readonly source?: ObjectId;
     })
   | (Base & {
       /** A card in exile became plotted (rule 702.170) — `player` plotted it
@@ -1115,6 +1122,9 @@ export type GameEvent =
       /** What was countered was an ability, not a spell (rule 701.6a counters
        * either): "counters a spell" asks. */
       readonly ability?: true;
+      /** That ability's source: the ability itself is gone by now, so the
+       * log names it by this. */
+      readonly source?: ObjectId;
       /** Who cast it, if it was cast: not a copy (rule 707.10) or an ability. */
       readonly castBy?: PlayerId;
     })
@@ -1540,6 +1550,8 @@ export type GameEvent =
       readonly regeneration?: true;
       /** The players can't become the monarch this turn (rule 725.4). */
       readonly monarch?: true;
+      /** The players can't play lands this turn (Turf Wound). */
+      readonly lands?: true;
       /** Until the imposing player's next turn rather than this turn
        * (detain, Dovin Baan). */
       readonly untilYourNextTurn?: true;

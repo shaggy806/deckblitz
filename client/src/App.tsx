@@ -20,7 +20,10 @@ import type {
 } from 'engine/client'
 import {
   anyNumberSlot,
+  attackCompanyViolations,
   attackingViolations,
+  blockCompanyViolations,
+  blockTaxTotal,
   blockingViolations,
   concatModeSpecs,
   damageAssignmentViolations,
@@ -40,6 +43,7 @@ import {
   defaultAssignment,
   delvePicksFit,
   tapCountForModes,
+  shareACreatureType,
   tapPicksPower,
   targetCountAtX,
   waterbendAt,
@@ -871,7 +875,13 @@ export default function App() {
         return view.events
           .filter((e) => !isDetailOnlyEvent(e))
           .slice(-5)
-          .map((e) => describeEvent(e, (id) => logNameAt(view.publicStints, nameOf, id, e.seq), seats))
+          .map((e) =>
+            describeEvent(
+              e,
+              (id, heldBy) => logNameAt(view.publicStints, nameOf, id, e.seq, heldBy !== undefined && heldBy !== seat),
+              seats,
+            ),
+          )
       },
     }
   }, [view, seat, nameOf, seats])
@@ -1608,7 +1618,9 @@ function GameScreen({ game }: { readonly game: NetworkGame }) {
             </div>
             <EventLog
               events={view.events}
-              nameAt={(id, seq) => logNameAt(view.publicStints, game.nameOf, id, seq)}
+              nameAt={(id, seq, heldBy) =>
+                logNameAt(view.publicStints, game.nameOf, id, seq, heldBy !== undefined && heldBy !== game.seat)
+              }
               seats={game.seats}
               onSelect={(event) => {
                 // Close the log so the board is in view, then point the
@@ -5089,6 +5101,12 @@ function Table({
     // Crew (rule 702.122a): any number of creatures, their powers adding up
     // to at least N.
     const power = tapPicksPower(offer, picks)
+    // "Tap two untapped creatures you control that share a creature type"
+    // (Weight of Conscience): the engine's own check, so Confirm isn't
+    // refused after the fact.
+    const typesOf = offer.creatureTypes
+    const shareNoType =
+      typesOf !== undefined && picks.length > 1 && !shareACreatureType(picks.map((id) => typesOf[realId(id)] ?? []))
     controls = (
       <div className="controls">
         <span>
@@ -5097,6 +5115,7 @@ function Table({
             : offer.totalPower !== undefined
               ? `${what}: tap creatures with total power ${offer.totalPower} — power ${power}/${offer.totalPower}`
               : `${what}: tap ${offer.count} — ${picks.length}/${offer.count} chosen`}
+          {offer.creatureTypes !== undefined ? (shareNoType ? ' · these share no creature type' : ' · sharing a creature type') : ''}
         </span>
         <button
           type="button"
@@ -5105,7 +5124,7 @@ function Table({
               ? false
               : offer.totalPower !== undefined
                 ? power < offer.totalPower
-                : picks.length !== offer.count
+                : picks.length !== offer.count || shareNoType
           }
           onClick={() => {
             setPendingTap(null)
@@ -6149,6 +6168,30 @@ function Table({
       })),
       attackAction,
     ).map((v) => v.attacker)
+    // Rules keyed to the other attackers (a lone Mogg Flunkies, one too many
+    // under Silent Arbiter): the engine's check again, so Confirm is off
+    // rather than refused with a toast.
+    const companyBroken =
+      enterAttackingAction !== undefined
+        ? []
+        : attackCompanyViolations(collapseAttacks(attackAssignments, stackMembers), attackAction).flatMap((v) =>
+            v.kind === 'attacks-alone'
+              ? [`${game.nameOf(v.attacker)} can only attack alone`]
+              : v.kind === 'needs-company'
+                ? [`${game.nameOf(v.attacker)} can't attack without ${v.others === 1 ? 'another attacker' : `${v.others} other attackers`}`]
+                : v.kind === 'too-many'
+                  ? [
+                      `no more than ${v.most} creature${v.most === 1 ? '' : 's'} can attack${
+                        v.defender !== undefined && game.seats.some((s) => s.player === v.defender)
+                          ? ` ${playerLabel(v.defender as PlayerId, game.seats)}`
+                          : ''
+                      }`,
+                    ]
+                  : // Fewer than must attack: named above when it's a creature not yet sent.
+                    unmetMusts.length > 0
+                    ? []
+                    : [`${v.possible - v.obeyed} more must attack`],
+          )
     // A tile of several with some attacking: a count per defender, rather
     // than a click per creature (game/attackGroups.ts).
     const pairs = attackPairs(attackAssignments, attackPicks, defendersFor, tileOf)
@@ -6179,6 +6222,7 @@ function Table({
           {unmetMusts.length > 0 && enterAttackingAction === undefined
             ? ` · ${unmetMusts.map((id) => game.nameOf(id)).join(', ')} must attack`
             : ''}
+          {companyBroken.length > 0 ? ` · ${companyBroken.join(' · ')}` : ''}
           {attackAtWrong ? ' · not whom the lesson asked: press Clear to start again' : ''}
           {attackManaText !== '' || attackTax.life > 0 || attackTax.permanents.length > 0 ? (
             <>
@@ -6298,7 +6342,11 @@ function Table({
         >
           Clear
         </button>
-        <button type="button" disabled={unmetMusts.length > 0 || assignedCount < declareAtLeast || attackAtWrong} onClick={confirmAttackers}>
+        <button
+          type="button"
+          disabled={unmetMusts.length > 0 || companyBroken.length > 0 || assignedCount < declareAtLeast || attackAtWrong}
+          onClick={confirmAttackers}
+        >
           {enterAttackingAction !== undefined ? (
             'Confirm'
           ) : (
@@ -6332,6 +6380,18 @@ function Table({
     const overBlocked = violations.flatMap((v) => (v.kind === 'single-blocker' ? [v.attacker] : []))
     // A creature that has to block if able (provoke) and isn't.
     const requiredBlockers = violations.flatMap((v) => (v.kind === 'block-requirement' ? [v.blocker] : []))
+    // What Confirm sends: the company rules (a lone Craven Hulk) and the cost
+    // of blocking (rule 509.1d) are read from it, as the engine reads them.
+    const declaredBlocks = [...collapseBlocks(blockAssign, stackMembers, blockPerToken), ...extraBlocks(blockExtra, blockAssign)]
+    const lonelyBlockers = blockCompanyViolations(declaredBlocks, blockAction).map((v) =>
+      v.others === 1
+        ? `${game.nameOf(v.blocker)} can't block alone`
+        : `${game.nameOf(v.blocker)} can't block unless at least ${v.others} other creatures block`,
+    )
+    const blockCost =
+      blockAction.blockTax === undefined
+        ? { generic: 0, life: 0 }
+        : blockTaxTotal(declaredBlocks, blockAction.blockTax, (id) => view.objects[id]?.stackCount ?? 1)
     // A folded tile of yours with blocks out: a count to set, rather than a
     // click per creature (game/blockGroups.ts).
     const pairs = blockPairs(blockAction, blockAssign, tileOf)
@@ -6372,6 +6432,15 @@ function Table({
                 .map((id) => game.nameOf(id))
                 .join(', ')} can't be blocked by more than one creature`
             : ''}
+          {lonelyBlockers.length > 0 ? ` · ${lonelyBlockers.join(' · ')}` : ''}
+          {blockCost.generic > 0 || blockCost.life > 0 ? (
+            <>
+              {' '}
+              · costs {blockCost.generic > 0 ? <Symbols text={`{${blockCost.generic}}`} /> : null}
+              {blockCost.generic > 0 && blockCost.life > 0 ? ' and ' : ''}
+              {blockCost.life > 0 ? `${blockCost.life} life` : ''}
+            </>
+          ) : null}
         </span>
         {pairs.length > 0 ? (
           <span className="stack-counts">
@@ -6443,6 +6512,7 @@ function Table({
             requiredBlockers.length > 0 ||
             unblockedMusts.length > 0 ||
             overBlocked.length > 0 ||
+            lonelyBlockers.length > 0 ||
             n < declareAtLeast
           }
           onClick={confirmBlockers}
@@ -6461,8 +6531,17 @@ function Table({
         <span>
           {fromEffect
             ? `${view.decisionSource ? `${view.decisionSource.cardName}: ` : ''}Discard ${
-                discardAction.upTo === true ? 'any number of cards' : discardAction.count
-              }${discardAction.upTo === true ? '' : ` card${discardAction.count === 1 ? '' : 's'}`}`
+                discardAction.upTo !== true
+                  ? discardAction.count
+                  : // A cap below the cards there are to choose from (Jaya Ballard's +1).
+                    discardAction.count < discardAction.from.length
+                    ? `up to ${discardAction.count}`
+                    : 'any number of cards'
+              }${
+                discardAction.upTo === true && discardAction.count >= discardAction.from.length
+                  ? ''
+                  : ` card${discardAction.count === 1 ? '' : 's'}`
+              }`
             : 'Discard to hand size'}
           {discardAction.orOneOf !== undefined
             ? `, or one ${discardAction.orOneKind ?? 'qualifying'} card`
@@ -6739,10 +6818,22 @@ function Table({
                 {view.zones.stack.reduce((n, id) => n + (view.objects[id]?.stackCount ?? 1), 0)})
               </button>
             ) : null}
-            <button type="button" data-tour="game-pass" onClick={pass} disabled={!canPass}>
+            <button
+              type="button"
+              data-tour="game-pass"
+              onClick={pass}
+              disabled={!canPass}
+              title="Pass priority once: do nothing now, so the top of the stack resolves or the turn moves to its next step (space)"
+            >
               Pass (space)
             </button>
-            <button type="button" data-tour="game-pass-turn" onClick={game.passTurn} disabled={!canPassTurn}>
+            <button
+              type="button"
+              data-tour="game-pass-turn"
+              onClick={game.passTurn}
+              disabled={!canPassTurn}
+              title="Keep passing for the rest of this turn — pauses if something happens you may want to answer"
+            >
               Pass Turn
             </button>
             {/* Short labels so all four fit one row; `title` carries the full

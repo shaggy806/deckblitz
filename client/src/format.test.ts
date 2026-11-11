@@ -83,6 +83,12 @@ describe('logNameAt', () => {
   it('uses what this seat knows it as otherwise', () => {
     expect(logNameAt({}, () => 'Hill Giant', id, 6)).toBe('Hill Giant')
   })
+
+  it("doesn't name a card that was hidden then by what the seat knows it as now", () => {
+    // Another player's draw, played since: "draws Swamp" would say what they drew.
+    expect(logNameAt({ [id]: [{ from: 20, name: 'Swamp' }] }, () => 'Swamp', id, 6, true)).toBe(HIDDEN_CARD)
+    expect(logNameAt(stints, () => 'Grizzly Bears', id, 6, true)).toBe('Grizzly Bears')
+  })
 })
 
 describe('logName', () => {
@@ -125,5 +131,48 @@ describe('a seat named "You", as a lesson names its player', () => {
     expect(forYou('Rowan plays Mountain')).toBe('Rowan plays Mountain')
     expect(forYou('Younger plays Swamp')).toBe('Younger plays Swamp')
     expect(possessive('Rowan')).toBe("Rowan's")
+  })
+})
+
+describe('log lines that name where a thing went or came from', () => {
+  const o = 'obj-7' as ObjectId
+  const src = 'obj-3' as ObjectId
+  const names = (id: ObjectId): string => ({ [o]: 'Hill Giant', [src]: 'Tidebinder' })[id as string] ?? 'a card'
+  const line = (e: Parameters<typeof event>[0]): string => describeEvent(event(e), names, seats)
+
+  it('words a chosen card by its destination', () => {
+    expect(line({ type: 'cards-chosen-from-zone', player: p1, objects: [o] })).toBe('Toby takes Hill Giant')
+    expect(line({ type: 'cards-chosen-from-zone', player: p1, objects: [o], to: 'battlefield' })).toBe(
+      'Toby puts Hill Giant onto the battlefield',
+    )
+    expect(line({ type: 'cards-chosen-from-zone', player: p1, objects: [o], to: 'graveyard' })).toBe(
+      'Toby puts Hill Giant into a graveyard',
+    )
+    expect(line({ type: 'cards-chosen-from-zone', player: p1, objects: [o], to: 'exile' })).toBe('Toby exiles Hill Giant')
+  })
+
+  it("names a countered or criminal ability by its source, the ability being gone", () => {
+    const gone = 'obj-87' as ObjectId
+    expect(line({ type: 'spell-countered', object: gone, controller: p1, by: p1, ability: true, source: src })).toBe(
+      "Tidebinder's ability is countered",
+    )
+    expect(line({ type: 'crime-committed', player: p1, object: gone, source: src })).toBe(
+      "Toby commits a crime with Tidebinder's ability",
+    )
+  })
+
+  it('says a lands-only prohibition', () => {
+    expect(line({ type: 'prohibition-imposed', players: [p1], spells: false, abilities: false, lands: true })).toBe(
+      "Toby can't play lands this turn",
+    )
+  })
+
+  it("passes a draw's holder to the namer", () => {
+    const asked: unknown[] = []
+    describeEvent(event({ type: 'card-drawn', player: p1, object: o }), (id, heldBy) => {
+      asked.push(heldBy)
+      return names(id)
+    }, seats)
+    expect(asked).toEqual([p1])
   })
 })

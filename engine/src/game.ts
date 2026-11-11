@@ -7291,7 +7291,7 @@ export class Game {
         for (const c of begins.counters ?? []) this.addCounter({ kind: "object", object: id }, c.kind, c.amount);
       }
     });
-    if (chosen.length > 0) this.emit({ type: "cards-chosen-from-zone", player, objects: [...chosen] });
+    if (chosen.length > 0) this.emit({ type: "cards-chosen-from-zone", player, objects: [...chosen], to: "battlefield" });
     const hand = this.state.zones.perPlayer[player].hand;
     if (owed > 0 && hand.length > 0) {
       const count = Math.min(owed, hand.length);
@@ -11309,12 +11309,28 @@ export class Game {
 
     // An order takes nothing: it only says where each card goes. A search's
     // second choice, of where its finds go, took them already.
-    if (awaiting.order !== true && awaiting.searchRest === undefined && awaiting.discardToLibrary === undefined) {
+    // Nor does a look that offered nothing (`max` 0): the player only closed it.
+    if (
+      awaiting.order !== true &&
+      awaiting.searchRest === undefined &&
+      awaiting.discardToLibrary === undefined &&
+      !(awaiting.max === 0 && chosen.length === 0)
+    ) {
+      // Where they went, for the log's verb: "takes" is a card into a hand.
+      const to =
+        awaiting.destination === "battlefield"
+          ? ("battlefield" as const)
+          : awaiting.destination === "graveyard"
+            ? ("graveyard" as const)
+            : awaiting.destination === "exile" || awaiting.destination === "exile-playable" || awaiting.destination === "exile-face-down"
+              ? ("exile" as const)
+              : undefined;
       this.emit({
         type: "cards-chosen-from-zone",
         player,
         objects: [...chosen],
         ...(awaiting.destination === "stay" ? { chosenOnly: true as const } : {}),
+        ...(to !== undefined ? { to } : {}),
       });
     }
     // Collect evidence (rule 701.59a): "whenever you collect evidence" sees
@@ -26122,7 +26138,14 @@ export class Game {
     });
     if (!crime) return;
     this.journal({ kind: "crime", player: by, object: stackObject });
-    this.emit({ type: "crime-committed", player: by, object: stackObject });
+    const committing = this.state.objects[stackObject];
+    const abilitySource = committing?.kind === "ability" ? (committing.sourceObjectId ?? undefined) : undefined;
+    this.emit({
+      type: "crime-committed",
+      player: by,
+      object: stackObject,
+      ...(abilitySource !== undefined ? { source: abilitySource } : {}),
+    });
   }
 
   private mintAbilityObject(
@@ -46183,10 +46206,12 @@ controlledBy,
         }
         continue;
       }
-      if (p.act !== "cast" && p.act !== "activate" && p.act !== "become-monarch") continue;
+      if (p.act !== "cast" && p.act !== "activate" && p.act !== "become-monarch" && p.act !== "play-land") continue;
       if (typeof p.who !== "object" || !("players" in p.who)) continue;
       const players = [...p.who.players];
-      if (p.act === "become-monarch") {
+      if (p.act === "play-land") {
+        this.emit({ type: "prohibition-imposed", players, spells: false, abilities: false, lands: true });
+      } else if (p.act === "become-monarch") {
         this.emit({ type: "prohibition-imposed", players, spells: false, abilities: false, monarch: true });
       } else if (p.act === "activate") {
         this.emit({ type: "prohibition-imposed", players, spells: false, abilities: true });
@@ -53928,8 +53953,9 @@ controlledBy,
     // — one of them, where the object stands for several identical ones.
     if (object.kind === "ability") {
       const controller = object.controller;
+      const source = object.sourceObjectId ?? undefined;
       this.removeOneAbilityCopy(id);
-      this.emit({ type: "spell-countered", object: id, controller, by, ability: true });
+      this.emit({ type: "spell-countered", object: id, controller, by, ability: true, ...(source !== undefined ? { source } : {}) });
       return true;
     }
     if (object.isCopy) {
@@ -62403,6 +62429,9 @@ controlledBy,
       this.openStint(full.object, seq);
     }
     if (full.type === "spell-copied" && this.openStintOf(full.copy) === undefined) this.openStint(full.copy, seq);
+    // A copy that is cast (paradigm, Isochron Scepter) never moved to the
+    // stack either: a card that was has its stint from the move.
+    if (full.type === "spell-cast" && this.openStintOf(full.object) === undefined) this.openStint(full.object, seq);
     // Ascend on a permanent applies any time (rule 702.131b): a permanent
     // that arrives or changes hands mid-resolution may be the tenth.
     if (

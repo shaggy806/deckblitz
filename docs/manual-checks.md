@@ -28,6 +28,40 @@ test, `manual-check-presets.test.ts`, builds every board and matches them to the
 thing per test, its own board with only the cards it needs, plain words — no rule numbers or
 engine terms. A second thing to check is a second test.
 
+## Prompts and log lines that say what the engine checks (2026-11-11)
+
+### Mogg Flunkies: the attack button is off while it would attack alone
+- **Do:** In the declare-attackers prompt, send only Mogg Flunkies at Bob. Then send Grizzly Bears too.
+- **Expect:** With the Flunkies alone the prompt adds "Mogg Flunkies can't attack without another attacker" and the Attack button is off. With the Bears as well the line goes and the button works.
+
+### Weight of Conscience: two creatures that share no type can't be confirmed
+- **Do:** Activate Weight of Conscience's ability (the Aura tucked under Hill Giant). Pick Grizzly Bears and Llanowar Elves, then swap the Elves for Runeclaw Bear.
+- **Expect:** With the Bear and the Elf the prompt says "these share no creature type" and Confirm is off. With the two Bears it says "sharing a creature type" and Confirm works: Hill Giant is exiled.
+
+### Hipparion: the block prompt shows what blocking costs
+- **Do:** As Bob, pass priority so Alice declares attackers. Attack Bob with Hill Giant. As Bob, pass, then block it with Hipparion.
+- **Expect:** Bob's block prompt adds "costs {1}" (as a mana symbol) once Hipparion is blocking, and nothing while no block is chosen.
+
+### Eerie Interlude: the target prompt names creatures in the plural
+- **Do:** Cast Eerie Interlude.
+- **Expect:** The prompt reads "choose any number of creatures you control", not "creature you control".
+
+### Jaya Ballard: the discard prompt says "up to 3"
+- **Do:** Activate Jaya Ballard's +1.
+- **Expect:** The prompt reads "Jaya Ballard: Discard up to 3 cards", not "any number of cards".
+
+### Turf Wound: the log says who can't play lands
+- **Do:** Cast Turf Wound on Bob. Open the history log.
+- **Expect:** A line reads "Bob can't play lands this turn".
+
+### Wasteland Strangler: the log says the card went to a graveyard
+- **Do:** Cast Wasteland Strangler. Say yes to its trigger, target Grizzly Bears, and pick Bob's exiled Hill Giant.
+- **Expect:** The log reads "Alice puts Hill Giant into a graveyard", not "Alice takes Hill Giant".
+
+### Stifle: the log names a countered ability by its source
+- **Do:** Activate Rod of Ruin at Bob. With the ability on the stack, cast Stifle on it.
+- **Expect:** The log reads "Alice commits a crime with Rod of Ruin's ability" and, once Stifle resolves, "Rod of Ruin's ability is countered", never "a card".
+
 ## A commander put into your hand from the command zone (2026-11-11)
 
 ### Campfire: your commander may stay in the command zone

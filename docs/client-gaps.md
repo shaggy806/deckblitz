@@ -5,12 +5,6 @@ and the cleanups found along the way. `BACKLOG.md` keeps one line per item under
 title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLETED.md`. The animation follow-ups are in
 `docs/plans/legibility-of-play.md`, "Follow-ups".
 
-- **A resolved copy's and a crime's log lines name an object id** (found 2026-11-04): after a cast copy resolves the log prints its
-  id ("obj-168", seen on paradigm's copy), and `client/src/format.ts:399` prints "commits a crime with obj-88" once an ability has
-  resolved. `format.ts:303` says "takes nothing" on a look the player closes, where nothing was offered to take.
-- **A target group's prompt doesn't pluralise its noun** (found 2026-11-04): "choose 3 creature" (Strength of the Tajuru), "any number
-  of creature you control" (Eerie Interlude). `describeTargetSpec` in `engine/src/target.ts` pluralises only "target"; this needs a
-  pluraliser over every spec label, the structured ones included.
 - **Which seat you see while controlling another player** (open 2026-11-02, the user will decide after
   playing it; the Mindslaver checks in `docs/manual-checks.md` show it). Rule 723.4 only says what the
   controller may see, so this is a UI call.
@@ -43,10 +37,6 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
 - **The library can't sort by release date** (asked 2026-11-07). The user wants release date as a sort option.
   `client/src/library/LibraryPage.tsx`'s `SORTS` has edhrec, name, mana, color and type; the set list
   already carries each set's `releasedAt`.
-- **The history log names a hidden draw once the card is public** (found 2026-11-02). "Silumgar draws Swamp"
-  shows after the Swamp is played, which says what they drew. `publicNameAt` rightly finds nothing public at
-  that moment, then `App.tsx`'s `nameAt` falls back to `game.nameOf`, today's name. Your own draws need that
-  fallback, so it wants to apply only to what this seat could see then.
 - **The history log's layout** (found 2026-11-02). It's a full-screen popup, so it can't be read beside the
   board; each line carries its event number; and the phase banner ("MAIN PHASE") draws over it.
 - **The hand's rules text is tiny at rest** (found 2026-11-02). At 1366×768 a hand card's rules are 9.5px and
@@ -55,8 +45,6 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   board, just when you're deciding whether to respond to what's on it.
 - **The Cycle popup is easy to miss and ignores Escape** (found 2026-11-02). It's a small button under the
   hover card, and Escape leaves it open, though Escape closes Settings.
-- **The pass buttons don't explain themselves** (found 2026-11-02). Auto-pass has a tooltip; "Pass (space)"
-  and "Pass Turn" have none.
 - **A hover card's reminder can name a keyword the card lacks** (found 2026-11-02). Dragonmaster Outcast
   shows a Flying reminder panel, read from "create a 5/5 red Dragon creature token with flying".
 - **Deck builder rough edges** (found 2026-11-02). A long deck title is cut off ("IMPORTED: ATRAXA, PRAETOR");
@@ -64,21 +52,6 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   count says 20874; re-importing makes a second deck of the same name; "1 issue(s)".
 - **The game's top bar and labels stay small at 2560×1440** (found 2026-11-02). Judged by eye from a
   screenshot, on the user's own monitor size; measure before changing.
-- **Two log lines read wrong** (found 2026-11-01). A card that begins on the battlefield from an opening
-  hand logs as "takes Leyline Axe", and `delayed-trigger-created` prints as raw JSON (`format.ts` ~591).
-- **The discard prompt says "any number" under a cap** (found 2026-11-01). `client/src/App.tsx`
-  (~6015) words a discard with `atMost` (Jaya Ballard's +1) as "any number of cards". The engine
-  enforces the cap, so only the wording is wrong.
-- **The combat prompts' cost lines miss the per-creature taxes** (found 2026-11-01). The attack cost
-  line ignores `attackTax.perAttacker` and the block prompt shows no cost, though `combat/tax.ts`
-  works both out and the engine refuses a declaration that can't be paid.
-- **The tap-cost prompt doesn't check a shared creature type** (found 2026-11-01). `App.tsx` (~4740)
-  enables Confirm on the count alone, so a pair that shares no type (Weight of Conscience's
-  `shareCreatureType` cost) is refused only by the engine; `creatureTypes` is on the offer.
-- **The attack and block Confirm doesn't check company restrictions** (found 2026-11-01). An illegal
-  declaration (a lone Mogg Flunkies, Craven Hulk) is refused with a toast rather than Confirm being
-  disabled; `combat/company.ts` exports `attackCompanyViolations` and `blockCompanyViolations` for
-  the client to read.
 - **The X prompt and shown cost ignore a target's tax** (found 2026-11-01). `client/src/App.tsx`
   starts the X prompt at `maxX` and doesn't read `xCost.targetTaxes` or `maxXUnreduced`, so a taxed
   target at too high an X is refused rather than never offered (no wrong cast), and the spell's
@@ -86,10 +59,6 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
 - **A hand card's types show as printed under a static outside the battlefield** (found
   2026-11-01). `view.ts` shows printed types for a card in hand under `typesOutsideBattlefield`
   (Conspiracy, Arcane Adaptation), though the filters read the new types.
-- **A lands-only prohibition writes no log line** (found 2026-11-01). `prohibit`'s `lands: true`
-  (Turf Wound, Pardic Miner) emits no `prohibition-imposed` event, since `client/src/format.ts`'s
-  text for it names only spells and abilities and would read "can't  this turn" (the comment is at
-  `prohibitLandPlays` in `game.ts`). Fix: a `lands` field on the event and the client's text.
 - **A human's target picks aren't narrowed by the new target relations** (found 2026-10-31).
   `viewTargetFacts` (`client/src/App.tsx`, ~line 640) doesn't supply the optional facts the
   target relations built that night read — `shareTypes`, `toughnessOf`, `nameOf`, `attachedTo` —
@@ -101,11 +70,6 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   that the one picked goes onto the battlefield and the other to the hand. Fix: move those cards
   to `search-library.instead` with `pick: "one"` (built 2026-10-31), which asks its own prompt.
   Final Parting waits on the same thing (its split search just says "Choose 2 cards").
-
-- **A processor's move from exile reads as "takes"** (found 2026-10-31). When a processor puts an
-  opponent's exiled card into its owner's graveyard (Wasteland Strangler, `look-and-choose` with
-  `zone: "exile"`), the log says "Alice takes Hill Giant", the wording of a card taken into a
-  hand. Fix: word the `look-and-choose` result by its destination (a graveyard, the battlefield).
 
 - **Playback stalls when your cast triggers your own targeted ability** (found 2026-10-30).
   Casting a spell that triggers one of your own abilities with a target — Glacial Ray with
@@ -171,10 +135,6 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   Dawning Archaic in the hand (Reach, a cost reduction, an attack trigger that casts from the
   graveyard) grows the card, but its rules text is shrunk to fit the frame and can't be read.
   The user isn't sure how to fix it; for discussion.
-- **A countered ability's log line names its object id** (2026-11-02). Seen live with Tishana's Tidebinder: the
-  `spell-countered` event names an ability that has already left the stack, so `describeEvent` (`format.ts`) prints
-  "obj-87 is countered". `Game` calls `rememberDepartingAbility` before it goes, so the name may only need reading there.
-  A live Tranquil Frillback run logged the same kind of line, "Alice commits a crime with obj-171"; not traced.
 - **The game page's own rendering on a slow laptop** (2026-10-13/14). **Mostly fixed; one
   cost left, no Lite setting needed yet.** The user's i5-6300U laptop (2 cores / 4 threads,
   16 GB, Chrome 153, 1366x768) ran a local blitz on 2026-10-13 at ~42 fps with ~120 main-thread

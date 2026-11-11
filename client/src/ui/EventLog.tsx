@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import type { CardDefinition, GameEvent, ObjectId } from 'engine/client'
+import type { CardDefinition, GameEvent, ObjectId, PlayerId } from 'engine/client'
 import type { SeatStatus } from 'protocol'
 import { HIDDEN_CARD, describeEvent, isDetailOnlyEvent } from '../format.ts'
 import { requestCards, useCardData } from '../cards/cardData.ts'
@@ -14,7 +14,7 @@ type CardLookup = (name: string) => CardDefinition | null | undefined
 /** What to call object `id` in the line for event `seq` — the name it was
  * known by then (`publicNameAt`), so a line keeps its card's name after the
  * card goes somewhere hidden. */
-export type NameAt = (id: ObjectId, seq: number) => string
+export type NameAt = (id: ObjectId, seq: number, heldBy?: PlayerId) => string
 
 export interface EventLogProps {
   readonly events: readonly GameEvent[]
@@ -96,8 +96,8 @@ function EventText({
   // A card this seat was never shown is plain words: there's nothing to hover.
   const marked = describeEvent(
     event,
-    (id) => {
-      const name = nameAt(id, event.seq)
+    (id, heldBy) => {
+      const name = nameAt(id, event.seq, heldBy)
       return name === HIDDEN_CARD ? name : `${MARK_START}${name}${MARK_END}`
     },
     seats,

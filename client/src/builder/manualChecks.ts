@@ -11965,4 +11965,55 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       },
     }),
   ),
+  // --- Prompts and log lines that say what the engine checks (2026-11-11, the client sweep) ---
+  preset(
+    "Mogg Flunkies: the attack button is off while it would attack alone",
+    board({ you: { bf: ['Mogg Flunkies', 'Grizzly Bears'] }, step: 'begin-combat' }),
+  ),
+  preset(
+    "Weight of Conscience: two creatures that share no type can't be confirmed",
+    board({
+      you: {
+        bf: [
+          'Grizzly Bears',
+          'Runeclaw Bear',
+          'Llanowar Elves',
+          'Elvish Mystic',
+          { name: 'Weight of Conscience', attach: 'Hill Giant' },
+        ],
+      },
+      opp: { bf: ['Hill Giant'] },
+    }),
+  ),
+  preset(
+    'Hipparion: the block prompt shows what blocking costs',
+    board({
+      you: { bf: ['Hill Giant'] },
+      opp: { human: true, bf: ['Hipparion', 'Plains*2'] },
+      step: 'begin-combat',
+    }),
+  ),
+  preset(
+    'Eerie Interlude: the target prompt names creatures in the plural',
+    board({ you: { bf: ['Plains*3', 'Grizzly Bears', 'Hill Giant'], hand: ['Eerie Interlude'] } }),
+  ),
+  preset(
+    'Jaya Ballard: the discard prompt says "up to 3"',
+    board({ you: { bf: ['Jaya Ballard'], hand: ['Mountain*5'] } }),
+  ),
+  preset(
+    "Turf Wound: the log says who can't play lands",
+    board({ you: { bf: ['Mountain*3'], hand: ['Turf Wound'] } }),
+  ),
+  preset(
+    'Wasteland Strangler: the log says the card went to a graveyard',
+    board({
+      you: { bf: ['Swamp*3'], hand: ['Wasteland Strangler'] },
+      opp: { bf: ['Grizzly Bears'], exile: ['Hill Giant'] },
+    }),
+  ),
+  preset(
+    "Stifle: the log names a countered ability by its source",
+    board({ you: { bf: ['Rod of Ruin', 'Wastes*3', 'Island'], hand: ['Stifle'] } }),
+  ),
 ]

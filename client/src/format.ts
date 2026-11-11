@@ -7,7 +7,10 @@ import { MAX_SPEED, publicNameAt } from 'engine/client'
 import type { CombatWord, GameEvent, ObjectId, PlayerId, Step, TargetRef, VoteChoice } from 'engine/client'
 import type { SeatStatus } from 'protocol'
 
-export type NameOf = (id: ObjectId) => string
+/** A log line's name for an object. `heldBy` is the player in whose hidden
+ * zone the event had it (a draw): a seat that isn't theirs names it only by
+ * what was public then. */
+export type NameOf = (id: ObjectId, heldBy?: PlayerId) => string
 
 /** A colour chosen from a menu ("choose a color" — Persecute, Heraldic
  * Banner), which the engine records as its letter. */
@@ -136,7 +139,8 @@ export function forYou(text: string): string {
 }
 
 function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[]): string {
-  const name = nameOf
+  // One argument only: `objects.map(name)` must not hand the index on as `heldBy`.
+  const name = (id: ObjectId): string => nameOf(id)
   const who = (id: PlayerId): string => playerLabel(id, seats)
   const tgt = (ref: TargetRef): string => (ref.kind === 'player' ? who(ref.player) : name(ref.object))
   // An attack's defender is a player or a planeswalker/battle.
@@ -286,7 +290,7 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
     case 'mana-added':
       return `${who(event.player)} adds ${event.amount}{${event.mana}}`
     case 'card-drawn':
-      return `${who(event.player)} draws ${name(event.object)}`
+      return `${who(event.player)} draws ${nameOf(event.object, event.player)}`
     case 'draw-from-empty-library':
       return `${who(event.player)} draws from an empty library!`
     case 'cards-discarded':
@@ -313,9 +317,14 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
           ? `${who(event.player)} chooses ${event.objects.map(name).join(', ')}`
           : `${who(event.player)} chooses nothing`
       }
-      return event.objects.length > 0
-        ? `${who(event.player)} takes ${event.objects.map(name).join(', ')}`
-        : `${who(event.player)} takes nothing`
+      if (event.objects.length === 0) return `${who(event.player)} takes nothing`
+      return event.to === 'battlefield'
+        ? `${who(event.player)} puts ${event.objects.map(name).join(', ')} onto the battlefield`
+        : event.to === 'graveyard'
+          ? `${who(event.player)} puts ${event.objects.map(name).join(', ')} into a graveyard`
+          : event.to === 'exile'
+            ? `${who(event.player)} exiles ${event.objects.map(name).join(', ')}`
+            : `${who(event.player)} takes ${event.objects.map(name).join(', ')}`
     case 'library-shuffled':
       return `${who(event.player)} shuffles their library`
     case 'scried':
@@ -367,7 +376,8 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
     case 'spell-fizzled':
       return `${name(event.object)} fizzles — ${event.reason}`
     case 'spell-countered':
-      return `${name(event.object)} is countered`
+      // An ability is gone by now: named by its source.
+      return event.source !== undefined ? `${name(event.source)}'s ability is countered` : `${name(event.object)} is countered`
     case 'spell-exiled':
       return `${name(event.object)} is exiled from the stack`
     case 'ward-paid':
@@ -413,7 +423,9 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       return `${who(event.player)}'s cast of ${name(event.object)} is undone — ${event.reason}`
     case 'crime-committed':
       // Targeting an opponent or what they have (rule 700.13).
-      return `${who(event.player)} commits a crime with ${name(event.object)}`
+      return `${who(event.player)} commits a crime with ${
+        event.source !== undefined ? `${name(event.source)}'s ability` : name(event.object)
+      }`
     case 'card-name-chosen':
       return `${who(event.player)} names ${event.name} for ${name(event.object)}`
     case 'replacement-order-chosen':
@@ -454,6 +466,9 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
       if (event.regeneration === true) {
         const objects = event.objects ?? (event.object !== undefined ? [event.object] : [])
         return `${objects.map(name).join(', ')} can't be regenerated this turn`
+      }
+      if (event.lands === true) {
+        return `${event.players.map((p) => who(p)).join(', ')} can't play lands this turn`
       }
       if (event.monarch === true) {
         return `${event.players.map((p) => who(p)).join(', ')} can't become the monarch this turn`
@@ -681,7 +696,11 @@ export const logNameAt = (
   nameOf: (id: ObjectId) => string,
   id: ObjectId,
   seq: number,
-): string => publicNameAt(publicStints, id, seq) ?? logName(id, nameOf(id))
+  /** The card was hidden from this seat then (another player's draw): what
+   * the seat knows it as now would say what was drawn ("Silumgar draws
+   * Swamp", once the Swamp is played). */
+  hiddenThen = false,
+): string => publicNameAt(publicStints, id, seq) ?? (hiddenThen ? HIDDEN_CARD : logName(id, nameOf(id)))
 
 /** `text` — a refusal from the engine or server, which names players by
  * seat id ("bob is not being asked to block") and objects by id — with each

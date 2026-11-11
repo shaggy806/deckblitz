@@ -246,7 +246,6 @@ delete its detail there and move this line to `COMPLETED.md`.
 
 - **X is picked before targets, blind to a target's cost reduction** (a cast with Spellwild Ouphe's reduction can be refused after the player picks X).
 
-- **A target group's prompt doesn't pluralise its noun** ("choose 3 creature", "any number of creature you control").
 
 - **The die rolling animation needs adjusting** — with the loss of gradients, the vertical bounces look like the shape is just growing and shrinking (`client/src/App.css`'s `die-land`).
 
@@ -257,28 +256,19 @@ delete its detail there and move this line to `COMPLETED.md`.
 - **The lobby doesn't show that Ready is the next step** — Start Game is disabled until you press it, and it doesn't look like the thing to press.
 - **Library search only matches exact phrases** — "atraxa praetors" and "flying dragon" find nothing, and the message says to try a shorter search.
 - **The library can't sort by release date** — the user wants it as a sort option beside EDHREC, name, mana, color and type.
-- **The history log names a hidden draw once the card is public** — "Silumgar draws Swamp" after the Swamp is played: `publicNameAt` is right, and its fallback to the current name isn't.
 - **The history log's layout** — a full-screen popup you can't read beside the board, event numbers on every line, and the phase banner draws over it.
 - **The hand's rules text is tiny at rest** — 8.5-9.5px and tilted at 1366×768, readable only on hover.
 - **The stack's card hides a seat's board** — at 1366×768 it covers the fourth player's board while you decide whether to respond.
 - **The Cycle popup is easy to miss and ignores Escape** — a small button under the hover card; Settings closes on Escape and this doesn't.
-- **The pass buttons don't explain themselves** — only Auto-pass has a tooltip; "Pass (space)" and "Pass Turn" are left to guess.
 - **A hover card's reminder can name a keyword the card lacks** — Dragonmaster Outcast shows a Flying reminder, from the token its text makes.
 - **Deck builder rough edges** — long deck titles cut off, the hover preview covers the search box, the search box's count ignores the colour filter, re-importing makes a second deck of the same name, "1 issue(s)".
 - **The game's top bar and labels stay small at 2560×1440** — judged by eye; measure before changing.
-- **A cast copy or a countered ability logs as "a card"** — "a card resolves", "commits a crime with a card", "a card is countered": the raw id is gone, the copy's name (or the ability's source) still isn't there; and a closed look says "takes nothing"; `format.ts`.
-- **An opening-hand permanent logs as "takes"** — a card beginning on the battlefield from an opening hand logs as "takes Leyline Axe" (`format.ts`, the `takes` case).
-- **The discard prompt says "any number" under a cap** — `App.tsx` (~6015) words an `atMost` discard as "any number of cards"; the cap itself is enforced (Jaya Ballard's +1).
-- **The block prompt shows no cost** — the attack line reads `attackTax.perAttacker` now; a block's tax isn't shown, and the engine refuses what can't be paid.
-- **The tap-cost prompt doesn't check a shared creature type** — Confirm enables on count alone; `creatureTypes` is on the offer, and the engine refuses a pair that doesn't share one.
-- **The attack and block Confirm doesn't check company restrictions** — a lone Mogg Flunkies is refused with a toast, and so is one attacker too many under Silent Arbiter or Crawlspace; `attackCompanyViolations`/`blockCompanyViolations` and `combat/limits.ts` are there for the client to read.
+- **A resolved ability's own log lines can still read "a card"** — a countered ability, a crime and a cast copy are named now (2026-11-11); any other line naming an ability object after it has left the stack falls back to "a card". None seen; fix as found (`format.ts`, the event's `source`).
 - **The X prompt and shown cost ignore a target's tax** — `App.tsx` doesn't read `xCost.targetTaxes`/`maxXUnreduced`, so a taxed target at too high an X is refused rather than never offered, and the shown cost omits the tax.
 - **A hand card's types show as printed under a static outside the battlefield** — `view.ts` under `typesOutsideBattlefield` (Conspiracy, Arcane Adaptation); the filters read the new types.
-- **A lands-only prohibition writes no log line** — `format.ts`'s `prohibition-imposed` names only spells and abilities, so Turf Wound's "can't play lands this turn" emits none (found 2026-11-01).
 - **A human's target picks aren't narrowed by the new target relations** — `viewTargetFacts` lacks `shareTypes`, `toughnessOf`, `nameOf` and `attachedTo`, so a broken pair is refused only when sent (found 2026-10-31).
 - **Cultivate's split prompt doesn't say which find goes where** — "Choose up to 2 cards"; `search-library.instead` with `pick: "one"` would ask properly (found 2026-10-31).
-- **A processor's move from exile reads as "takes"** — the log says "Alice takes Hill Giant" when a processor puts an opponent's exiled card into its owner's graveyard (found 2026-10-31).
-- **Playback stalls when your cast triggers your own targeted ability** — the cast showcase never ends and the target prompt never shows (found 2026-10-30 by `run-check`; Briarknit Kami, Ichormoon Gauntlet).
+- **Playback stalls when your cast triggers your own targeted ability** — the cast showcase never ends and the target prompt never shows (found 2026-10-30 by `run-check`; Briarknit Kami, Ichormoon Gauntlet). Seen again 2026-11-11 with Wasteland Strangler's manual check, which can't be played to its end until this is fixed.
 - **What the scenario builder can't say yet** — stolen, transformed or face-down cards (manifested ones), turn-long effects, the stack.
 - **The initiative and the venture marker have no animation** — the 🗝️ chip changes hands and the dungeon marker moves with no cue (`docs/plans/initiative-dungeons.md` §6). Also: the builder's scenario can't hold the initiative or a dungeon position.
 - **A soulbond pairing isn't drawn on the board** — the view carries `pairedWith` (2026-10-26); only the keywords it grants show.
