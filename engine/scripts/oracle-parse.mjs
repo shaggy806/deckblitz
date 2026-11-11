@@ -3720,7 +3720,7 @@ export function parseSentence(sentence, ctx) {
   // …, then draws that many cards" draws back what each put in.
   if (
     (m = re(
-      `(each player shuffles|shuffle) (?:the cards from )?(?:their|your) (hand and graveyard|hand, graveyard, and all permanents (?:they|you) own|hand|graveyard) into (?:their|your) library(, then draws? that many cards)?(?:, then draws? ${N} cards)?`,
+      `(?:then )?(each player shuffles|shuffle) (?:the cards from )?(?:their|your) (hand and graveyard|hand, graveyard, and all permanents (?:they|you) own|hand|graveyard) into (?:their|your) library(, then draws? that many cards)?(?:, then draws? ${N} cards)?`,
     ).exec(s))
   ) {
     const zones = { "hand and graveyard": ["hand", "graveyard"], hand: ["hand"], graveyard: ["graveyard"] }[m[2].toLowerCase()] ??
@@ -4139,6 +4139,17 @@ export function parseSentence(sentence, ctx) {
   // Within Worlds): every card the resolution exiled, still there.
   if (re(`(?:then )?put all cards exiled this way into their owners' hands`).test(s)) {
     return { kind: "move-exiled-this-way", to: "hand" };
+  }
+  // "Put all commanders you own from the command zone and from your graveyard
+  // into your hand" (Campfire): both zones at once.
+  if (re(`put all commanders you own from the command zone and from your graveyard into your hand`).test(s)) {
+    return {
+      kind: "return-from-graveyard",
+      filter: { isCommander: true },
+      destination: "hand",
+      count: "all",
+      from: "command-zone-and-graveyard",
+    };
   }
   // "Put up to X land cards from your hand and/or graveyard onto the
   // battlefield tapped" (Worldsoul's Rage): one choice over both zones.

@@ -53580,6 +53580,8 @@ controlledBy,
       /** Each card under its owner's control ("each player returns …"). */
       readonly underOwners?: boolean;
       readonly handToo?: boolean;
+      /** The commanders they own in the command zone too. */
+      readonly commandToo?: boolean;
       readonly enterAs?: EnterTypes;
       readonly attachTo?: EnterAttachHost;
       readonly upTo?: boolean;
@@ -53593,7 +53595,17 @@ controlledBy,
         ? this.state.turnOrder.flatMap((p) => this.state.zones.perPlayer[p].graveyard)
         : opts.handToo === true
           ? [...this.state.zones.perPlayer[player].graveyard, ...this.state.zones.perPlayer[player].hand]
-          : this.state.zones.perPlayer[player].graveyard;
+          : opts.commandToo === true
+            ? [
+                ...this.state.zones.perPlayer[player].graveyard,
+                // The commanders they own there, as `beginZoneChoice`'s
+                // `"command"` reads them (Campfire).
+                ...this.state.zones.shared.command.filter((id) => {
+                  const object = this.state.objects[id];
+                  return object?.owner === player && object.isCommander === true;
+                }),
+              ]
+            : this.state.zones.perPlayer[player].graveyard;
     // "From among the milled cards": a milled card is found in whatever
     // public zone it went to (rule 701.17c), so one a replacement exiled
     // instead (Rest in Peace) is still among them — as `beginZoneChoice`

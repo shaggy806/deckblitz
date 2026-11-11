@@ -17502,3 +17502,28 @@ describe("a spell cast from the hand, the graveyard or the exiled cards you own"
     });
   });
 });
+
+describe("all commanders you own, from the command zone and the graveyard", () => {
+  it("reads Campfire's second ability", () => {
+    const face = parseFace({
+      name: "Thing",
+      type_line: "Artifact",
+      oracle_text:
+        "{2}, {T}, Exile this artifact: Put all commanders you own from the command zone and from your graveyard into your hand. Then shuffle your graveyard into your library.",
+    }) as unknown as { activated: { cost: unknown; effect: unknown }[] };
+    expect(face.activated[0]?.cost).toEqual({ mana: "{2}", tap: true, do: { kind: "exile", target: "source" } });
+    expect(face.activated[0]?.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        {
+          kind: "return-from-graveyard",
+          filter: { isCommander: true },
+          destination: "hand",
+          count: "all",
+          from: "command-zone-and-graveyard",
+        },
+        { kind: "shuffle-graveyard-into-library", target: "you" },
+      ],
+    });
+  });
+});

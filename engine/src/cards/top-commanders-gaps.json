@@ -2244,7 +2244,8 @@
   "keyword:hexproof-from-own-colors",
   "cost:cost-move-linked-exiled-card",
   "cost:cost-move-linked-exiled-card",
-  "effect:cast-now-from-hand-graveyard-or-owned-exile"
+  "effect:cast-now-from-hand-graveyard-or-owned-exile",
+  "effect:put-all-commanders-into-hand"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

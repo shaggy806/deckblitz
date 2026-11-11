@@ -4588,8 +4588,13 @@ export type EffectSpec =
        * battlefield" (Patriarch's Bidding), "return all artifact and
        * enchantment cards from all graveyards to the battlefield under their
        * owners' control" (Open the Vaults), all at once. With `count: "all"`
-       * only. */
-      readonly from?: "all-graveyards" | "hand-or-graveyard" | "each-graveyard";
+       * only. `"command-zone-and-graveyard"`: the controller's graveyard and
+       * the commanders they own in the command zone together — Campfire's
+       * "put all commanders you own from the command zone and from your
+       * graveyard into your hand" (`filter: { isCommander: true }`, `count:
+       * "all"`), all at once. A commander put into a hand may go to the
+       * command zone instead (rule 903.9b), its owner's choice. */
+      readonly from?: "all-graveyards" | "hand-or-graveyard" | "each-graveyard" | "command-zone-and-graveyard";
       /** …with these types and colours in addition to their own, in place
        * as they enter (rule 614.12) — Grimoire of the Dead's "They're black
        * Zombies in addition to their other colors and types". */
@@ -11595,6 +11600,8 @@ export interface EffectApi {
       /** Each card under its owner's control, not the controller's. */
       readonly underOwners?: boolean;
       readonly handToo?: boolean;
+      /** The commanders the controller owns in the command zone too. */
+      readonly commandToo?: boolean;
       readonly enterAs?: EnterTypes;
       /** See the spec's `attachedTo`; `null` for nothing there. */
       readonly attachTo?: EnterAttachHost;
@@ -17778,6 +17785,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           ...(spec.from === "all-graveyards" || spec.from === "each-graveyard" ? { allGraveyards: true } : {}),
           ...(spec.from === "each-graveyard" ? { underOwners: true } : {}),
           ...(spec.from === "hand-or-graveyard" ? { handToo: true } : {}),
+          ...(spec.from === "command-zone-and-graveyard" ? { commandToo: true } : {}),
           ...(spec.enterAs !== undefined ? { enterAs: spec.enterAs } : {}),
           ...(spec.attachedTo !== undefined ? { attachTo: attachHost(spec.attachedTo, ctx) } : {}),
           ...(spec.upTo === true ? { upTo: true } : {}),
