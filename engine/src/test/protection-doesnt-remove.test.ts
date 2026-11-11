@@ -67,6 +67,19 @@ describe("White Ward", () => {
     expect(zone(game, first)).toBe("graveyard");
     expect(zone(game, second)).toBe("graveyard");
   });
+
+  it("…and a white Equipment falls off in that same check (rule 704.3)", () => {
+    const { game } = table();
+    const bears = spawn(game, "Grizzly Bears");
+    const maul = on(game, "Maul of the Skyclaves", bears);
+    const first = on(game, "White Ward", bears);
+    const second = on(game, "White Ward", bears);
+    check(game);
+    expect(zone(game, first)).toBe("graveyard");
+    expect(zone(game, second)).toBe("graveyard");
+    expect(zone(game, maul)).toBe("battlefield");
+    expect(game.state.objects[maul].attachedTo ?? null).toBeNull();
+  });
 });
 
 describe("Black Ward", () => {

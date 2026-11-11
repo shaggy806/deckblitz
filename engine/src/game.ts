@@ -56667,6 +56667,11 @@ controlledBy,
       // creature dying in this same check leaves with both kinds of counter
       // still on it (a persist creature with a +1/+1 counter doesn't return).
       if (this.annihilateCounters(new Set(sweep.map((m) => m.id)))) changed = true;
+      // An Equipment that can't stay where it is falls off in the same check
+      // as whatever leaves (704.3) — read before the moves, so a protection
+      // whose Aura goes now (two White Wards) still unattaches a white
+      // Equipment (702.16d). One on a permanent that's leaving is seen below.
+      if (sweep.length > 0 && this.unattachIllegalEquipment(new Set(sweep.map((m) => m.id)))) changed = true;
       if (sweep.length > 0) {
         this.withLeaveBatch(() => {
           this.snapshotLeaving(sweep.map((m) => m.id));
@@ -57153,6 +57158,27 @@ controlledBy,
    * completed Sagas. A permanent two of them apply to is moved once, for the
    * first.
    */
+  /** Rule 704.5n as it stands before a check's moves: each Equipment or
+   * Fortification attached to a permanent it can't be attached to — and not
+   * one of `leaving`, whose attachments the check sees once it's gone —
+   * becomes unattached. Whether any did. */
+  private unattachIllegalEquipment(leaving: ReadonlySet<ObjectId>): boolean {
+    let changed = false;
+    for (const id of this.state.zones.shared.battlefield) {
+      const object = this.state.objects[id];
+      const host = object.attachedTo;
+      if (host === null || object.bestowed === true || leaving.has(host) || leaving.has(id) || !this.inGame(object)) continue;
+      const kind = this.attachmentKind(id);
+      if (kind !== "equipment" && kind !== "fortification") continue;
+      if (this.canEquip(id, host)) continue;
+      object.attachedTo = null;
+      invalidateComputedCache();
+      this.emit({ type: "permanent-unattached", object: id, from: host });
+      changed = true;
+    }
+    return changed;
+  }
+
   private stateBasedGraveyardMoves(): {
     readonly moves: readonly { readonly id: ObjectId; readonly event: GameEventInput }[];
     /** The next legend-rule group whose controller hasn't yet chosen which to
