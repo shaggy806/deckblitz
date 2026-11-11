@@ -5,16 +5,10 @@ and the cleanups found along the way. `BACKLOG.md` keeps one line per item under
 title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLETED.md`. The animation follow-ups are in
 `docs/plans/legibility-of-play.md`, "Follow-ups".
 
-- **Which seat you see while controlling another player** (open 2026-11-02, the user will decide after
-  playing it; the Mindslaver checks in `docs/manual-checks.md` show it). Rule 723.4 only says what the
-  controller may see, so this is a UI call.
-  - **Option A, the flip (built):** `GameScreen` in `App.tsx` draws `Table` as `view.perspective`, so the
-    controlled player's seat sits at the bottom, and flips back only for your own decisions that aren't
-    just mana. Everything on the table is the seat you're acting for, but the view moves under you.
-  - **Option B, your own seat with a clear marker (not built):** the table stays put, and a marker says
-    whose decision it is, with their hand shown from across the table. You keep your bearings, but you
-    act on cards and permanents away from where you usually do. It would need those seats' hand and
-    prompts to work from the other side of the board.
+- **Stack entries shift sideways the wrong way** (the user, 2026-11-11). "When I had multiple triggers going on the
+  stack from a land entering, sometimes the stack would have items horizontally shifted the wrong way." Not
+  reproduced. First try: a landfall board with three or more triggers at once (Omnath, Locus of Creation beside
+  two landfall creatures), at 2 and 4 players, watching the stack column as the triggers fly in.
 - **Too many priority stops with a land like Bountiful Landscape** (found 2026-11-02, a UX pass; a design
   call). With one on the battlefield the game stopped at nearly every step of every player's turn, about 40
   stops in one four-player round. "Skip mana stops" doesn't cover a non-mana ability, and a fetch land or a
