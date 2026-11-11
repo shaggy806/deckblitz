@@ -52,6 +52,7 @@ import { POISON_LETHAL, printedCardName, rulesTextName, settledTally } from "../
 import { HARMFUL_COUNTERS } from "../target-polarity.js";
 import { playersAttackableNextTurn } from "../combat/eligibility.js";
 import { canBlock, combatCreatures } from "./combat-math.js";
+import { handQuality as handQualityOf } from "./hand-worth.js";
 import type { CombatCreature } from "./combat-math.js";
 import { COMMANDER_DAMAGE_LETHAL } from "../view.js";
 import type { GameObject, GameState } from "../state.js";
@@ -101,6 +102,7 @@ export const FEATURE_KEYS = [
   "smallTokens",
   "lifeSurplus",
   "trackRecord",
+  "handQuality",
 ] as const;
 
 export type FeatureKey = (typeof FEATURE_KEYS)[number];
@@ -1155,6 +1157,10 @@ function playerFeaturesUncached(
     // worth less, and `bot:diff` showed v2 holding back a dozen attacks.
     lifeSurplus: isMe ? Math.max(0, p.life - LIFE_SURPLUS_ABOVE) : 0,
     trackRecord,
+    // How far our own hand is from a hand of average cards (`hand-worth.ts`):
+    // a tutor with something to find, a land past the ones we want, a spell
+    // still out of reach. Ours only, like `handManaValue`.
+    handQuality: isMe ? handQualityOf(state, registry, player, landCount, cap) : 0,
     // The nearest loss that isn't life: the worst commander's damage, or
     // poison on the same scale (10 counters lose as 21 damage does). Folded
     // into one term, so the fitted weight reads poison too without a refit.

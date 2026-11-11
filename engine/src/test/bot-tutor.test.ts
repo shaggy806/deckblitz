@@ -28,10 +28,10 @@ function boardWithLands(lands: number): Game {
 }
 
 describe("v2 casts a tutor when it has nothing better", () => {
-  // A tutor swaps one card in hand for another, so the evaluation scores it
-  // as passing; like a cantrip, it's cast at its moment (`isCantripDue`).
-  // An instant one (Dina's Guidance) waits, as Opt does, for the end of the
-  // turn before ours.
+  // A tutor swaps one card in hand for another, which the evaluation used to
+  // score as passing, so a rule cast it (`isCantripDue`'s tutor branch). It's
+  // priced now: 0.85 of the best card its filter finds (`bot/hand-worth.ts`),
+  // so finding that card is a gain and the search casts it itself.
   it.each(["Demonic Tutor", "Diabolic Tutor"])("casts %s in its main phase", (tutor) => {
     const game = boardWithLands(2);
     game.debugSpawn("Swamp", A, "battlefield");
@@ -41,6 +41,48 @@ describe("v2 casts a tutor when it has nothing better", () => {
     game.debugSpawn("Craw Wurm", A, "library");
     const action = new EvalBotController(A, registry).act(game.controllerView(A));
     expect(action.type === "cast-spell" ? game.state.objects[action.card]?.cardName : action.type).toBe(tutor);
+  });
+});
+
+describe("the card a tutor finds", () => {
+  /** Alice's Demonic Tutor resolving with `lands` Swamps out and `hand`
+   * beside it: what the bot takes of `library`'s cards. */
+  function found(lands: number, hand: readonly string[], library: readonly string[]): string | undefined {
+    const game = boardWithLands(0);
+    for (let i = 0; i < lands; i += 1) game.debugSpawn("Swamp", A, "battlefield");
+    game.state.zones.perPlayer[A].hand = [];
+    for (const name of hand) game.debugSpawn(name, A, "hand");
+    for (const name of library) game.debugSpawn(name, A, "library");
+    const tutor = game.debugSpawn("Demonic Tutor", A, "hand");
+    game.dispatch({ type: "cast-spell", player: A, card: tutor, targets: [] });
+    for (let i = 0; i < 4 && game.state.awaiting === null; i += 1) {
+      game.dispatch({ type: "pass-priority", player: game.state.priority.holder! });
+    }
+    const awaiting = game.state.awaiting;
+    if (awaiting?.kind !== "choose-from-zone") throw new Error(`no search: ${awaiting?.kind}`);
+    const [pick] = new EvalBotController(A, registry).chooseFromZone(
+      game.controllerView(A),
+      awaiting.eligible,
+      awaiting.min,
+      awaiting.max,
+    );
+    return pick === undefined ? undefined : game.state.objects[pick]?.cardName;
+  }
+
+  // Ranked as the evaluation prices a hand (`handCardQuality`), so the card
+  // a rollout finds is the one the tutor in hand was priced on.
+  it("is the land drop a hand without a land is missing", () => {
+    expect(found(3, [], ["Craw Wurm"])).toBe("Forest");
+  });
+
+  it("is a spell, not a second land, when the hand has its land drop", () => {
+    // v1's hand ranking kept every land the board was short of ahead of any
+    // spell, so a tutor at five lands found a second Forest.
+    expect(found(5, ["Forest"], ["Craw Wurm"])).toBe("Craw Wurm");
+  });
+
+  it("is the spell within reach, not the dearest", () => {
+    expect(found(3, ["Forest"], ["Craw Wurm", "Hill Giant"])).toBe("Hill Giant");
   });
 });
 

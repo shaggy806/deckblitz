@@ -874,7 +874,7 @@ export class EvalBotController extends HeuristicBotController {
   /** The turn on which one rollout didn't fit the clock (`noteCost`), or -1. */
   private tooSlow = -1;
   /** What the last priority search played in place of passing, when the
-   * search's best was to pass (a due cantrip — `isCantripDue`), so a replay
+   * search's best was to pass (a due play — `isSacrificeForCardsDue`, `isSuspendDue`), so a replay
    * of its scores can do the same (`scenario-fit.ts`). Written, never read. */
   lastPassFallback: Action | null = null;
   /** The wipes the last priority search held for after combat
@@ -1490,8 +1490,8 @@ export class EvalBotController extends HeuristicBotController {
         stack: base + 1,
       };
     }
-    // A cantrip or a suspend scores a wash against passing — see
-    // `isCantripDue` and `isSuspendDue`.
+    // A sacrifice for cards or a suspend scores a wash against passing — see
+    // `isSacrificeForCardsDue` and `isSuspendDue`.
     // A held wipe that scored best waits for the second main phase, and
     // nothing else spends its mana now (not even a cantrip). So does a play
     // that taps a vigilance creature that could attack first
@@ -1608,7 +1608,10 @@ export class EvalBotController extends HeuristicBotController {
     /** Candidates that help an opponent's attacker with something lasting:
      * kept only if the defending player dies (`opponentPump`). */
     readonly mustKill: Map<Action, PlayerId>;
-    /** A cantrip due now (`isCantripDue`), played if the search would pass. */
+    /** A play due now that the evaluation scores a wash — a sacrifice for
+     * cards (`isSacrificeForCardsDue`), a suspend (`isSuspendDue`) — played
+     * if the search would pass. Named for the cantrips it used to hold, which
+     * `hand-worth.ts` prices now. */
     readonly cantrip: Action | null;
     /** Wipes held for after combat: chosen, they mean "pass to combat". */
     readonly heldForCombat: Set<Action>;
@@ -1659,7 +1662,7 @@ export class EvalBotController extends HeuristicBotController {
         // So does a creature's (Sakura-Tribe Elder), outside a combat or a
         // spell to answer (`holdsCreatureFetch`): sooner only gives up blocks.
         if (this.holdsCreatureFetch(view.state, legal)) continue;
-        const due = this.isCantripDue(view.state, legal) || this.isSuspendDue(legal);
+        const due = this.isSacrificeForCardsDue(view.state, legal) || this.isSuspendDue(legal);
         const aimed = candidateActions(aimOffer(view.state, this.cards, player, legal), player);
         for (const action of this.withSacrificeChoices(view.state, legal, aimed)) {
           // A draw aimed at a player is a cantrip aimed at us (Compulsive

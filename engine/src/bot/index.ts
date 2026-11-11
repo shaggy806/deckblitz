@@ -15,3 +15,4 @@ export * from "./champions/index.js";
 export * from "./capture.js";
 export * from "./benchmarks.js";
 export * from "./turn-plan.js";
+export * from "./hand-worth.js";

@@ -59,6 +59,7 @@ export const BASELINE_2026_09_17: Champion = {
     smallTokens: 0,
     lifeSurplus: 0,
     trackRecord: 0,
+    handQuality: 0,
     opponent: 1,
     eliminations: 0,
     otherOpponents: 0.25,

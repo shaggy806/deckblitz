@@ -179,6 +179,10 @@ export interface EvalWeights {
    * engine the printed stats undersell, so removal finds the creature that
    * has been drawing or connecting. */
   readonly trackRecord: number;
+  /** How far our hand is above or below a hand of average cards, in cards
+   * (`hand-worth.ts`): each card's quality less 1. Kept at `hand`'s weight,
+   * so a card of quality 1 is worth exactly what `hand` says. */
+  readonly handQuality: number;
   /** How much the strongest opponent's score subtracts from yours. */
   readonly opponent: number;
   /** Added for each opponent eliminated, scaled by the round
@@ -408,6 +412,8 @@ export const DEFAULT_WEIGHTS: EvalWeights = {
   // the creature that has been drawing cards" flips at 2.5; 3 clears it and
   // breaks nothing in the gate.
   trackRecord: 3,
+  // `hand`'s own weight: the feature is in cards. The audit's Q2.
+  handQuality: 2,
   opponent: 1,
   // Per opponent eliminated, at full strength from round 10 and a quarter of
   // it in round 1 (`eliminationShare`). Before it a kill scored nothing, or

@@ -1360,11 +1360,11 @@ const SCENARIOS: readonly BotScenario[] = [
     name: "casts a tutor in its own main phase",
     rule: "A tutor trades itself for the best card in the library: cast it when the mana is there.",
     position(registry) {
-      // The audit's Q2: Demonic Tutor scores -0.10 against passing (a card in
-      // hand is 2 + 0.05 x mana value whatever it is, so one card for another
-      // is a wash), and is cast only because `isCantripDue` counts a tutor as
-      // card flow. This holds the answer while step 5's hand-quality feature
-      // takes the rule's place.
+      // The audit's Q2: Demonic Tutor scored -0.10 against passing (a card in
+      // hand was 2 + 0.05 x mana value whatever it was, so one card for
+      // another was a wash), and was cast only because `isCantripDue` counted
+      // a tutor as card flow. That rule is gone: the tutor is priced at 0.85
+      // of the best card it finds (`hand-worth.ts`), and the search casts it.
       const game = table(registry, [A, B, C, D], A);
       lands(game, "Swamp", A, 2);
       for (const name of ["Craw Wurm", "Sol Ring", "Swords to Plowshares"]) {
@@ -3644,19 +3644,35 @@ const SCENARIOS: readonly BotScenario[] = [
   // --- cantrips --------------------------------------------------------------
   ...(
     [
-      ["casts Opt at the end of the turn before its own", [A, B], true],
-      ["holds Opt earlier in the round", [A, B, C], false],
+      ["casts Opt at the end of the turn before its own", [A, B], 1, [], true],
+      ["casts Opt earlier in the round with nothing to hold its mana for", [A, B, C], 1, [], true],
+      ["holds Opt earlier in the round while its Island holds up Counterspell", [A, B, C], 2, ["Counterspell"], false],
+      ["casts Opt beside Counterspell at the end of the turn before its own", [A, B], 2, ["Counterspell"], true],
     ] as const
-  ).map(([name, players, cast]) =>
+  ).map(([name, players, islands, beside, cast]) =>
     asked({
       name,
-      rule: "An instant cantrip waits for the last window before our untap, then is cast.",
+      rule: "An instant cantrip is worth casting whenever nothing else wants its mana: the card it draws is worth more than it is.",
       position(registry) {
         // A cantrip replaces itself, so it scored a wash and v2 never cast
-        // Opt at all (`isCantripDue`). At three players, Bob's end step is
-        // followed by Carol's turn: the mana stays up a while longer.
+        // Opt at all; `isCantripDue` then cast it at the last window before
+        // our untap, and "holds Opt earlier in the round" held it until then
+        // whatever else was in hand. Since the audit's Q2 a card in hand has
+        // a quality (`hand-worth.ts`): Opt is half a card, the least the
+        // card it draws could be, so the search casts it itself, and holds
+        // it only for a reason the
+        // evaluation has — here, the `answers` reserve two Islands keep for
+        // Counterspell while a player is still to take a turn.
         const game = table(registry, [...players], B);
-        onBoard(game, "Island", A);
+        lands(game, "Island", A, islands);
+        for (const name of beside) game.debugSpawn(name, A, "hand");
+        if (beside.length > 0) {
+          holding(
+            game,
+            players.filter((p) => p !== A),
+            3,
+          );
+        }
         const opt = game.debugSpawn("Opt", A, "hand");
         game.advanceUntil(
           (s) => (s.turn.step === "end" && s.priority.holder === A && s.zones.shared.stack.length === 0) || s.result.over,
@@ -3673,6 +3689,29 @@ const SCENARIOS: readonly BotScenario[] = [
       },
     }),
   ),
+  asked({
+    name: "casts Opt in its own main phase to look for a land",
+    rule: "A cantrip is a card that finds a better one: cast before the land drop it might find.",
+    position(registry) {
+      // The audit's Q2: Opt in our own main phase scored -0.05 against
+      // passing (a card in hand was 2 + 0.05 x mana value whatever it was),
+      // so v2 passed the turn with an Island untapped, no land to play and
+      // Opt in hand, and cast it only at the end of the turn before its next.
+      const game = table(registry, [A, B, C, D], A);
+      lands(game, "Island", A, 2);
+      holding(game, [B, C, D], 3);
+      const opt = game.debugSpawn("Opt", A, "hand");
+      game.debugSpawn("Hill Giant", A, "hand");
+      return {
+        game,
+        player: A,
+        judge: (action) => ({
+          passed: action.type === "cast-spell" && action.card === opt,
+          detail: `two Islands, Opt and a Hill Giant in hand, chose ${describeAction(action)}`,
+        }),
+      };
+    },
+  }),
   asked({
     name: "casts Ponder with nothing better to do",
     rule: "A sorcery cantrip is cast in our own main phase rather than held.",

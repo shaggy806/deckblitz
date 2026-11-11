@@ -93,7 +93,7 @@ const MIN_KEPT = 4;
 const LAND_SHARE = 0.45;
 /** How many lands a Commander deck wants on the battlefield before another
  * one in hand is worth less than a spell. */
-const LANDS_WANTED = 7;
+export const LANDS_WANTED = 7;
 
 const clamp = (n: number, lo: number, hi: number): number => Math.min(hi, Math.max(lo, n));
 
