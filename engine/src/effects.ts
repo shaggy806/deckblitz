@@ -440,8 +440,12 @@ export interface DelayedNextSpell {
    * ability is the trigger object (a `copy-ability` of `"trigger-ability"`
    * copies it). An activated ability only, never a mana ability — one that
    * uses the stack (the rulings: a triggered ability asking for {X} isn't
-   * one, nor is a cost that says X without the {X} symbol). */
-  readonly orNextAbility?: { readonly xInCost: true };
+   * one, nor is a cost that says X without the {X} symbol).
+   *
+   * `{ loyalty: true }` is "…**or activate a loyalty ability** this turn"
+   * (Repeated Reverberation, rule 606.1): the next loyalty ability its
+   * controller activates, of any permanent. */
+  readonly orNextAbility?: { readonly xInCost: true } | { readonly loyalty: true };
 }
 
 /** "This turn, when **target creature you control** attacks and isn't

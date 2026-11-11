@@ -18706,3 +18706,49 @@ describe("a cost's X defined by the ability", () => {
     expect(face.activated[0].__todo).toBeUndefined();
   });
 });
+
+describe("the next loyalty ability copied", () => {
+  it("reads Jaya's Phoenix's delayed copy, once for a player and once for a planeswalker", () => {
+    const face = parseFace({
+      name: "Test Phoenix",
+      type_line: "Creature — Phoenix",
+      power: "3",
+      toughness: "3",
+      oracle_text:
+        "Flying, haste\nWhenever this creature deals combat damage to a player or planeswalker, copy the next loyalty ability you activate this turn when you activate it. You may choose new targets for the copy.",
+    });
+    expect(face.triggered.map((t: { trigger: unknown }) => t.trigger)).toEqual([
+      { on: "deals-damage", who: "self", to: "player", combat: true },
+      { on: "deals-damage", who: "self", to: "planeswalker", combat: true },
+    ]);
+    for (const t of face.triggered) {
+      expect(t.effect).toEqual({
+        kind: "delayed-trigger",
+        at: { whenever: { on: "activates-ability", who: "you", loyalty: true }, once: true },
+        effect: { kind: "copy-ability", target: "trigger-ability", newTargets: true },
+        text: "Copy that ability. You may choose new targets for the copy.",
+      });
+    }
+  });
+
+  it("reads Repeated Reverberation", () => {
+    const face = parseFace({
+      name: "Test Reverberation",
+      type_line: "Instant",
+      oracle_text:
+        "When you next cast an instant spell, cast a sorcery spell, or activate a loyalty ability this turn, copy that spell or ability twice. You may choose new targets for the copies.",
+    });
+    expect(face.effect).toEqual({
+      kind: "delayed-trigger",
+      at: { nextSpell: { typesAnyOf: ["instant", "sorcery"] }, orNextAbility: { loyalty: true } },
+      effect: {
+        kind: "sequence",
+        effects: [
+          { kind: "copy-spell", target: "trigger-spell", newTargets: true, count: 2 },
+          { kind: "copy-ability", target: "trigger-ability", newTargets: true, count: 2 },
+        ],
+      },
+      text: "Copy that spell or ability twice. You may choose new targets for the copies.",
+    });
+  });
+});

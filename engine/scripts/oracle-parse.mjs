@@ -2086,6 +2086,15 @@ export function parseTrigger(clause) {
   if (/^When(?:ever)? ~ deals combat damage to a player$|^Whenever ~ deals combat damage to an opponent$/.test(c)) {
     return self("deals-combat-damage-to-player");
   }
+  // "…to a player or planeswalker" (Psychic Frog, Jaya's Phoenix): an
+  // attacker deals its combat damage to the one it attacks, so one trigger
+  // for each recipient never fires twice for one damage event.
+  if (c === "Whenever ~ deals combat damage to a player or planeswalker") {
+    return [
+      { on: "deals-damage", who: "self", to: "player", combat: true },
+      { on: "deals-damage", who: "self", to: "planeswalker", combat: true },
+    ];
+  }
   if (c === "Whenever ~ deals damage") return [{ on: "deals-damage", who: "self" }];
   if (c === "Whenever ~ is dealt damage") return [{ on: "dealt-damage", who: "self" }];
   // "N or more" dealt at once, on either side (`atLeast`).
@@ -10538,6 +10547,15 @@ export function parseEffect(text, outer) {
       skip = enteredAs.used - 1;
       continue;
     }
+    // The next loyalty ability activated this turn, copied (Jaya's Phoenix,
+    // Repeated Reverberation): a delayed trigger and its "new targets" line.
+    const nextLoyalty = copyNextLoyaltyAt(sentences, i);
+    if (nextLoyalty !== null) {
+      parsed.push(nextLoyalty.effect);
+      hints.push({ sentence, effect: nextLoyalty.effect });
+      skip = nextLoyalty.used - 1;
+      continue;
+    }
     // "Copy …. You may choose new targets for the copy." (rule 707.10c)
     const copied = copyNewTargetsAt(sentences, i, ctx);
     if (copied !== null) {
@@ -13414,6 +13432,53 @@ function counterIntoAt(sentences, i, ctx) {
   const counters = suspended === null ? undefined : NUMBERS[suspended[1].toLowerCase()];
   if (counters !== undefined && /^if it doesn't have suspend, it gains suspend\.$/i.test(sentences[i + 2] ?? "")) {
     return { effect: counter("exile", { withTimeCounters: counters })(ctx.target("spell")), used: 3 };
+  }
+  return null;
+}
+
+/** The next loyalty ability its controller activates this turn, copied (rules
+ * 603.7, 606.1): "Copy the next loyalty ability you activate this turn when
+ * you activate it. You may choose new targets for the copy." (Jaya's Phoenix:
+ * a `whenever` watch, `once`), and "When you next cast an instant spell, cast
+ * a sorcery spell, or activate a loyalty ability this turn, copy that spell
+ * or ability twice. You may choose new targets for the copies." (Repeated
+ * Reverberation: `nextSpell` with `orNextAbility: { loyalty }`). */
+function copyNextLoyaltyAt(sentences, i) {
+  const s = sentences[i];
+  const next = sentences[i + 1] ?? "";
+  if (
+    /^copy the next loyalty ability you activate this turn when you activate it\.$/i.test(s) &&
+    /^you may choose new targets for the copy\.$/i.test(next)
+  ) {
+    return {
+      effect: {
+        kind: "delayed-trigger",
+        at: { whenever: { on: "activates-ability", who: "you", loyalty: true }, once: true },
+        effect: { kind: "copy-ability", target: "trigger-ability", newTargets: true },
+        text: "Copy that ability. You may choose new targets for the copy.",
+      },
+      used: 2,
+    };
+  }
+  if (
+    /^when you next cast an instant spell, cast a sorcery spell, or activate a loyalty ability this turn, copy that spell or ability twice\.$/i.test(s) &&
+    /^you may choose new targets for the copies\.$/i.test(next)
+  ) {
+    return {
+      effect: {
+        kind: "delayed-trigger",
+        at: { nextSpell: { typesAnyOf: ["instant", "sorcery"] }, orNextAbility: { loyalty: true } },
+        effect: {
+          kind: "sequence",
+          effects: [
+            { kind: "copy-spell", target: "trigger-spell", newTargets: true, count: 2 },
+            { kind: "copy-ability", target: "trigger-ability", newTargets: true, count: 2 },
+          ],
+        },
+        text: "Copy that spell or ability twice. You may choose new targets for the copies.",
+      },
+      used: 2,
+    };
   }
   return null;
 }
@@ -17060,8 +17125,11 @@ function parseFaceAsWritten(face, ctx = {}) {
       continue;
     }
 
-    // Triggered abilities: "When/Whenever/At …, effect".
-    if (/^(When|Whenever|At )/.test(line)) {
+    // Triggered abilities: "When/Whenever/At …, effect". Not an instant's or
+    // sorcery's "When you next cast …" line, which is its effect: a delayed
+    // triggered ability made as it resolves (rule 603.7 — Repeated
+    // Reverberation), read with the spell's other lines below.
+    if (/^(When|Whenever|At )/.test(line) && !(isSpell && /^When you next cast /.test(line))) {
       const comma = line.indexOf(", ");
       let clause = comma > 0 ? line.slice(0, comma) : line;
       // "Whenever ~ attacks while saddled" (rule 702.171b): saddled is part

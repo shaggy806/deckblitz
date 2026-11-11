@@ -4772,8 +4772,9 @@ export interface DelayedLoseControlWatch {
 export interface DelayedCastWatch {
   readonly nextSpell: CardFilter;
   /** Or the next ability its controller activates with {X} in its
-   * activation cost — `DelayedNextSpell.orNextAbility`. */
-  readonly orNextAbility?: { readonly xInCost: true };
+   * activation cost, or the next loyalty ability —
+   * `DelayedNextSpell.orNextAbility`. */
+  readonly orNextAbility?: { readonly xInCost: true } | { readonly loyalty: true };
   /** The turn it was made on: it lapses as the next begins. */
   readonly turn: number;
 }

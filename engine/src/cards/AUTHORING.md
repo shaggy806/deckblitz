@@ -1647,7 +1647,12 @@ that spell or ability" is `at: { nextSpell: { xInManaCost: true },
 orNextAbility: { xInCost: true } }` over a `sequence` of `copy-spell` of
 `"trigger-spell"` and `copy-ability` of `"trigger-ability"` (each finds nothing
 when the trigger object is the other kind), set up by its mana ability's
-`add-mana` `also`.
+`add-mana` `also`. `orNextAbility: { loyalty: true }` is "…or activate a
+loyalty ability this turn" (Repeated Reverberation, each copy step with
+`count: 2`). "Copy the **next loyalty ability** you activate this turn when
+you activate it" alone (Jaya's Phoenix) is the `whenever` watch below with
+`once`: `at: { whenever: { on: "activates-ability", who: "you", loyalty: true
+}, once: true }` over a `copy-ability` of `"trigger-ability"`.
 
 **"Whenever …, for the rest of the turn."** `at: { whenever: TriggerSpec,
 until?: "your-next-turn", targets? }` is "until end of turn, whenever …",

@@ -52290,24 +52290,31 @@ controlledBy,
 
   /** A `nextSpell` delayed trigger that also waits for its controller's next
    * activated ability with {X} in its activation cost (`orNextAbility` —
-   * Magus Lucea Kane), fired by `player` activating `abilityId`: the ability
+   * Magus Lucea Kane) or next loyalty ability (Repeated Reverberation, rule
+   * 606.1), fired by `player` activating `abilityId`: the ability
    * on the stack is its trigger object. A mana ability never gets here (it
    * doesn't use the stack), nor does a triggered ability that asks for X. */
   private fireActivationWatchers(player: PlayerId, abilityId: ObjectId): void {
     if (this.state.delayedTriggers.length === 0) return;
     const ability = this.state.objects[abilityId];
     if (ability === undefined || ability.abilityKind !== "activated") return;
-    const firing = this.state.delayedTriggers.filter(
+    const waiting = this.state.delayedTriggers.filter(
       (t) =>
         "nextSpell" in t.at &&
         t.at.orNextAbility !== undefined &&
         t.at.turn === this.state.turn.number &&
         t.controller === player,
     );
-    if (firing.length === 0) return;
-    const cost = (this.stackAbilityOf(ability) as Partial<ActivatedAbility>).cost;
+    if (waiting.length === 0) return;
+    const activated = this.stackAbilityOf(ability) as Partial<ActivatedAbility>;
     // "{X} in its activation cost": the mana symbol, not an X elsewhere.
-    if (cost === undefined || parseManaCost(cost.mana).x === 0) return;
+    const xInCost = activated.cost !== undefined && parseManaCost(activated.cost.mana).x > 0;
+    // "A loyalty ability" (rule 606.1): one with a loyalty cost.
+    const loyalty = activated.loyaltyCost !== undefined;
+    const firing = waiting.filter(
+      (t) => "nextSpell" in t.at && t.at.orNextAbility !== undefined && ("loyalty" in t.at.orNextAbility ? loyalty : xInCost),
+    );
+    if (firing.length === 0) return;
     this.state.delayedTriggers = this.state.delayedTriggers.filter((t) => !firing.includes(t));
     for (const trigger of firing) {
       if (!this.delayedIfHolds(trigger, abilityId)) continue;
