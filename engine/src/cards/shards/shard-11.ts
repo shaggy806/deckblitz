@@ -26,6 +26,7 @@ import _poolAlignedHeart from "../pool/aligned-heart.js";
 import _poolAlloyAnimist from "../pool/alloy-animist.js";
 import _poolAlmsBeast from "../pool/alms-beast.js";
 import _poolAlpineMeadow from "../pool/alpine-meadow.js";
+import _poolAltarOfTheWretched from "../pool/altar-of-the-wretched.js";
 import _poolAmorphousAxe from "../pool/amorphous-axe.js";
 import _poolAncestralTribute from "../pool/ancestral-tribute.js";
 import _poolAncientCarp from "../pool/ancient-carp.js";
@@ -1050,6 +1051,7 @@ const shard: CardShard = {
     _poolAlloyAnimist,
     _poolAlmsBeast,
     _poolAlpineMeadow,
+    _poolAltarOfTheWretched,
     _poolAmorphousAxe,
     _poolAncestralTribute,
     _poolAncientCarp,

@@ -673,6 +673,7 @@ import _poolAltarOfTheBrood from "./pool/altar-of-the-brood.js";
 import _poolAltarOfTheGoyf from "./pool/altar-of-the-goyf.js";
 import _poolAltarOfTheLost from "./pool/altar-of-the-lost.js";
 import _poolAltarOfThePantheon from "./pool/altar-of-the-pantheon.js";
+import _poolAltarOfTheWretched from "./pool/altar-of-the-wretched.js";
 import _poolAltarsLight from "./pool/altars-light.js";
 import _poolAltarsReap from "./pool/altars-reap.js";
 import _poolAlterFate from "./pool/alter-fate.js";
@@ -29318,6 +29319,7 @@ import _poolUrborgJustice from "./pool/urborg-justice.js";
 import _poolUrborgMindsucker from "./pool/urborg-mindsucker.js";
 import _poolUrborgPhantom from "./pool/urborg-phantom.js";
 import _poolUrborgRepossession from "./pool/urborg-repossession.js";
+import _poolUrborgScavengers from "./pool/urborg-scavengers.js";
 import _poolUrborgShambler from "./pool/urborg-shambler.js";
 import _poolUrborgSkeleton from "./pool/urborg-skeleton.js";
 import _poolUrborgStalker from "./pool/urborg-stalker.js";
@@ -31318,6 +31320,7 @@ import _poolWrensRunPackmaster from "./pool/wrens-run-packmaster.js";
 import _poolWrensRunVanquisher from "./pool/wrens-run-vanquisher.js";
 import _poolWretchedAnurid from "./pool/wretched-anurid.js";
 import _poolWretchedBanquet from "./pool/wretched-banquet.js";
+import _poolWretchedBonemass from "./pool/wretched-bonemass.js";
 import _poolWretchedCamel from "./pool/wretched-camel.js";
 import _poolWretchedConfluence from "./pool/wretched-confluence.js";
 import _poolWretchedDoll from "./pool/wretched-doll.js";
@@ -33133,6 +33136,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolAltarOfTheGoyf,
   _poolAltarOfTheLost,
   _poolAltarOfThePantheon,
+  _poolAltarOfTheWretched,
   _poolAltarsLight,
   _poolAltarsReap,
   _poolAlterFate,
@@ -61778,6 +61782,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolUrborgMindsucker,
   _poolUrborgPhantom,
   _poolUrborgRepossession,
+  _poolUrborgScavengers,
   _poolUrborgShambler,
   _poolUrborgSkeleton,
   _poolUrborgStalker,
@@ -63778,6 +63783,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolWrensRunVanquisher,
   _poolWretchedAnurid,
   _poolWretchedBanquet,
+  _poolWretchedBonemass,
   _poolWretchedCamel,
   _poolWretchedConfluence,
   _poolWretchedDoll,
@@ -65606,6 +65612,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/altar-of-the-goyf": _poolAltarOfTheGoyf,
   "pool/altar-of-the-lost": _poolAltarOfTheLost,
   "pool/altar-of-the-pantheon": _poolAltarOfThePantheon,
+  "pool/altar-of-the-wretched": _poolAltarOfTheWretched,
   "pool/altars-light": _poolAltarsLight,
   "pool/altars-reap": _poolAltarsReap,
   "pool/alter-fate": _poolAlterFate,
@@ -94251,6 +94258,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/urborg-mindsucker": _poolUrborgMindsucker,
   "pool/urborg-phantom": _poolUrborgPhantom,
   "pool/urborg-repossession": _poolUrborgRepossession,
+  "pool/urborg-scavengers": _poolUrborgScavengers,
   "pool/urborg-shambler": _poolUrborgShambler,
   "pool/urborg-skeleton": _poolUrborgSkeleton,
   "pool/urborg-stalker": _poolUrborgStalker,
@@ -96251,6 +96259,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/wrens-run-vanquisher": _poolWrensRunVanquisher,
   "pool/wretched-anurid": _poolWretchedAnurid,
   "pool/wretched-banquet": _poolWretchedBanquet,
+  "pool/wretched-bonemass": _poolWretchedBonemass,
   "pool/wretched-camel": _poolWretchedCamel,
   "pool/wretched-confluence": _poolWretchedConfluence,
   "pool/wretched-doll": _poolWretchedDoll,

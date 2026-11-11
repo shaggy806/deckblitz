@@ -897,6 +897,7 @@ import _poolWornPowerstone from "../pool/worn-powerstone.js";
 import _poolWraithViciousVigilante from "../pool/wraith-vicious-vigilante.js";
 import _poolWreckageWickerfolk from "../pool/wreckage-wickerfolk.js";
 import _poolWrennAndRealmbreaker from "../pool/wrenn-and-realmbreaker.js";
+import _poolWretchedBonemass from "../pool/wretched-bonemass.js";
 import _poolXindiSurveyors from "../pool/xindi-surveyors.js";
 import _poolYorvoLordOfGarenbrig from "../pool/yorvo-lord-of-garenbrig.js";
 import _poolYoungRedDragon from "../pool/young-red-dragon.js";
@@ -1827,6 +1828,7 @@ const shard: CardShard = {
     _poolWraithViciousVigilante,
     _poolWreckageWickerfolk,
     _poolWrennAndRealmbreaker,
+    _poolWretchedBonemass,
     _poolXindiSurveyors,
     _poolYorvoLordOfGarenbrig,
     _poolYoungRedDragon,

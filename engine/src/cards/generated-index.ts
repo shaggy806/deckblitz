@@ -1372,6 +1372,7 @@ export const PINNED_ART: Readonly<Partial<Record<string, string>>> = {
   "Withengar Unbound": "https://cards.scryfall.io/art_crop/back/6/8/683af377-c491-4f62-900c-6b83d75c33c9.jpg",
   "World Champion, Celestial Weapon": "https://cards.scryfall.io/art_crop/back/3/1/31e2ad37-73cf-4858-8a3a-fc1165cd21a7.jpg",
   "Wrathful Jailbreaker": "https://cards.scryfall.io/art_crop/back/e/6/e641467b-ac2e-4d29-aed7-5cc227c3b1ce.jpg",
+  "Wretched Bonemass": "https://cards.scryfall.io/art_crop/back/e/2/e2c812bb-19f8-4a22-bda9-f2a6233cf700.jpg",
   "Yiazmat, Ultimate Mark": "https://cards.scryfall.io/art_crop/back/c/3/c3eb2ae5-10de-4c3d-91c8-8734befc80b2.jpg",
   "Ysgard's Call": "https://cards.scryfall.io/art_crop/back/b/2/b2419408-e907-4d62-b158-c97afc388c04.jpg",
   "Zack Fair": "https://scryfall.com/card/fin/45",
