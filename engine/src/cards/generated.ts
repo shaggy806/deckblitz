@@ -8270,6 +8270,7 @@ import _poolEngulfingEruption from "./pool/engulfing-eruption.js";
 import _poolEngulfingFlames from "./pool/engulfing-flames.js";
 import _poolEngulfingSlagwurm from "./pool/engulfing-slagwurm.js";
 import _poolEnhancedAwareness from "./pool/enhanced-awareness.js";
+import _poolEnhancedSurveillance from "./pool/enhanced-surveillance.js";
 import _poolEnigmaDrake from "./pool/enigma-drake.js";
 import _poolEnigmaEidolon from "./pool/enigma-eidolon.js";
 import _poolEnigmaSphinx from "./pool/enigma-sphinx.js";
@@ -24990,6 +24991,7 @@ import _poolSoulExchange from "./pool/soul-exchange.js";
 import _poolSoulFeast from "./pool/soul-feast.js";
 import _poolSoulGuideGryff from "./pool/soul-guide-gryff.js";
 import _poolSoulGuideLantern from "./pool/soul-guide-lantern.js";
+import _poolSoulImmolation from "./pool/soul-immolation.js";
 import _poolSoulKiss from "./pool/soul-kiss.js";
 import _poolSoulLink from "./pool/soul-link.js";
 import _poolSoulManipulation from "./pool/soul-manipulation.js";
@@ -29758,6 +29760,7 @@ import _poolVictorysEnvoy from "./pool/victorys-envoy.js";
 import _poolVictorysHerald from "./pool/victorys-herald.js";
 import _poolVictualSliver from "./pool/victual-sliver.js";
 import _poolViewFromAbove from "./pool/view-from-above.js";
+import _poolViewpointSynchronization from "./pool/viewpoint-synchronization.js";
 import _poolVigeanGraftmage from "./pool/vigean-graftmage.js";
 import _poolVigeanHydropon from "./pool/vigean-hydropon.js";
 import _poolVigeanIntuition from "./pool/vigean-intuition.js";
@@ -40663,6 +40666,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEngulfingFlames,
   _poolEngulfingSlagwurm,
   _poolEnhancedAwareness,
+  _poolEnhancedSurveillance,
   _poolEnigmaDrake,
   _poolEnigmaEidolon,
   _poolEnigmaSphinx,
@@ -57383,6 +57387,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolSoulFeast,
   _poolSoulGuideGryff,
   _poolSoulGuideLantern,
+  _poolSoulImmolation,
   _poolSoulKiss,
   _poolSoulLink,
   _poolSoulManipulation,
@@ -62151,6 +62156,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolVictorysHerald,
   _poolVictualSliver,
   _poolViewFromAbove,
+  _poolViewpointSynchronization,
   _poolVigeanGraftmage,
   _poolVigeanHydropon,
   _poolVigeanIntuition,
@@ -73069,6 +73075,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/engulfing-flames": _poolEngulfingFlames,
   "pool/engulfing-slagwurm": _poolEngulfingSlagwurm,
   "pool/enhanced-awareness": _poolEnhancedAwareness,
+  "pool/enhanced-surveillance": _poolEnhancedSurveillance,
   "pool/enigma-drake": _poolEnigmaDrake,
   "pool/enigma-eidolon": _poolEnigmaEidolon,
   "pool/enigma-sphinx": _poolEnigmaSphinx,
@@ -89789,6 +89796,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/soul-feast": _poolSoulFeast,
   "pool/soul-guide-gryff": _poolSoulGuideGryff,
   "pool/soul-guide-lantern": _poolSoulGuideLantern,
+  "pool/soul-immolation": _poolSoulImmolation,
   "pool/soul-kiss": _poolSoulKiss,
   "pool/soul-link": _poolSoulLink,
   "pool/soul-manipulation": _poolSoulManipulation,
@@ -94557,6 +94565,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/victorys-herald": _poolVictorysHerald,
   "pool/victual-sliver": _poolVictualSliver,
   "pool/view-from-above": _poolViewFromAbove,
+  "pool/viewpoint-synchronization": _poolViewpointSynchronization,
   "pool/vigean-graftmage": _poolVigeanGraftmage,
   "pool/vigean-hydropon": _poolVigeanHydropon,
   "pool/vigean-intuition": _poolVigeanIntuition,

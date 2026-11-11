@@ -248,6 +248,7 @@ import _poolEndlessScream from "../pool/endless-scream.js";
 import _poolEndlessWurm from "../pool/endless-wurm.js";
 import _poolEnergyStorm from "../pool/energy-storm.js";
 import _poolEnergyTap from "../pool/energy-tap.js";
+import _poolEnhancedSurveillance from "../pool/enhanced-surveillance.js";
 import _poolEnlightenedConfidant from "../pool/enlightened-confidant.js";
 import _poolEnlightenedTutor from "../pool/enlightened-tutor.js";
 import _poolEpicConfrontation from "../pool/epic-confrontation.js";
@@ -1322,6 +1323,7 @@ const shard: CardShard = {
     _poolEndlessWurm,
     _poolEnergyStorm,
     _poolEnergyTap,
+    _poolEnhancedSurveillance,
     _poolEnlightenedConfidant,
     _poolEnlightenedTutor,
     _poolEpicConfrontation,

@@ -738,6 +738,7 @@ import _poolSolphimMayhemDominus from "../pool/solphim-mayhem-dominus.js";
 import _poolSomberwaldSage from "../pool/somberwald-sage.js";
 import _poolSongOfInspiration from "../pool/song-of-inspiration.js";
 import _poolSontaranGeneral from "../pool/sontaran-general.js";
+import _poolSoulImmolation from "../pool/soul-immolation.js";
 import _poolSoulOfEternity from "../pool/soul-of-eternity.js";
 import _poolSoulbrightFlamekin from "../pool/soulbright-flamekin.js";
 import _poolSouthWindAvatar from "../pool/south-wind-avatar.js";
@@ -1703,6 +1704,7 @@ const shard: CardShard = {
     _poolSomberwaldSage,
     _poolSongOfInspiration,
     _poolSontaranGeneral,
+    _poolSoulImmolation,
     _poolSoulOfEternity,
     _poolSoulbrightFlamekin,
     _poolSouthWindAvatar,
