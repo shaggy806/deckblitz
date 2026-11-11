@@ -10332,6 +10332,15 @@ export function parseEffect(text, outer) {
       skip = copied.used - 1;
       continue;
     }
+    // "That player chooses draw step, main phase, or combat phase. The player
+    // skips each instance of the chosen step or phase this turn." (Fatespinner)
+    const skipsChosen = skipChosenPhaseAt(sentences, i);
+    if (skipsChosen !== null) {
+      parsed.push(skipsChosen.effect);
+      hints.push({ sentence, effect: skipsChosen.effect });
+      skip = skipsChosen.used - 1;
+      continue;
+    }
     // "If ~ and a creature named … are attacking, and you both own and
     // control them, exile them, then meld them into …. It enters tapped and
     // attacking." (Mishra, Claimed by Gix)
@@ -18046,6 +18055,26 @@ function enterAsAt(sentences, i, ctx) {
   };
   const out = withAs(effect);
   return out === null ? fail() : { effect: out, used: 2 };
+}
+
+/**
+ * "That player chooses draw step, main phase, or combat phase. The player
+ * skips each instance of the chosen step or phase this turn." (Fatespinner —
+ * rules 500.11, 614.10): the active player's choice of one `skip-step` with
+ * `eachThisTurn`, on an "each opponent's upkeep" trigger.
+ */
+function skipChosenPhaseAt(sentences, i) {
+  if (!/^the player skips each instance of the chosen step or phase this turn\.$/i.test(sentences[i + 1] ?? "")) return null;
+  const m = /^that player chooses ((?:(?:upkeep step|draw step|main phase|combat phase)(?:, or |, | or )?){2,4})\.$/i.exec(sentences[i]);
+  if (m === null) return null;
+  const modes = m[1].split(/, or |, | or /).map((phrase) => ({
+    text: phrase[0].toUpperCase() + phrase.slice(1).toLowerCase(),
+    effect: { kind: "skip-step", step: phrase.toLowerCase().split(" ")[0], eachThisTurn: true },
+  }));
+  return {
+    effect: { kind: "as-player", who: "active-player", effect: { kind: "modal", minModes: 1, maxModes: 1, modes } },
+    used: 2,
+  };
 }
 
 /**

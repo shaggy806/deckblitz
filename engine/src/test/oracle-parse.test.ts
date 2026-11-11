@@ -6571,6 +6571,36 @@ describe("meld (rule 701.42)", () => {
   });
 });
 
+describe("each instance of a chosen step or phase skipped this turn (skip-step's eachThisTurn)", () => {
+  it("reads Fatespinner's choice as the active player's modal over three skips", () => {
+    const face = parseFace(
+      {
+        name: "Fatespinner",
+        type_line: "Creature — Human Wizard",
+        oracle_text:
+          "At the beginning of each opponent's upkeep, that player chooses draw step, main phase, or combat phase. The player skips each instance of the chosen step or phase this turn.",
+      },
+      { tokenFor: () => null },
+    );
+    expect(face.complete).toBe(true);
+    expect(face.triggered[0].trigger).toEqual({ on: "step-begins", step: "upkeep", who: "opponent" });
+    expect(face.triggered[0].effect).toEqual({
+      kind: "as-player",
+      who: "active-player",
+      effect: {
+        kind: "modal",
+        minModes: 1,
+        maxModes: 1,
+        modes: [
+          { text: "Draw step", effect: { kind: "skip-step", step: "draw", eachThisTurn: true } },
+          { text: "Main phase", effect: { kind: "skip-step", step: "main", eachThisTurn: true } },
+          { text: "Combat phase", effect: { kind: "skip-step", step: "combat", eachThisTurn: true } },
+        ],
+      },
+    });
+  });
+});
+
 describe("counters of chosen kinds removed (remove-counters, a target's orPlayer)", () => {
   const face = (name: string, type_line: string, oracle_text: string) =>
     parseFace({ name, type_line, oracle_text }, { tokenFor: () => null });

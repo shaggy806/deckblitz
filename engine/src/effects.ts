@@ -7646,9 +7646,18 @@ export type EffectSpec =
        * is "their next combat phase **this turn**" (Moment of Silence).
        */
       readonly kind: "skip-step";
-      readonly step: "untap" | "upkeep" | "draw" | "combat";
+      readonly step: "untap" | "upkeep" | "draw" | "combat" | "main";
       readonly who?: number | PlayerScope;
       readonly thisTurn?: true;
+      /** "The player skips **each instance** of the chosen step or phase
+       * this turn" (Fatespinner): every draw step (or upkeep step), main
+       * phase or combat phase the active player has left this turn, however
+       * many — one added after this resolves too (its ruling) — and none of
+       * a later turn. One under way isn't skipped (614.10). Only the active
+       * player's, as `thisTurn` is. `"main"` — the precombat and postcombat
+       * main phases and any additional one (rule 505.1) — is only this:
+       * there's no "next main phase" skip. Not `"untap"`. */
+      readonly eachThisTurn?: true;
       /** With `"combat"`: "skips **all** combat phases of their next turn"
        * (False Peace), additional ones too. Two of these are still one turn. */
       readonly allOfNextTurn?: true;
@@ -11657,7 +11666,13 @@ export interface EffectApi {
   skipUntapStep(player: PlayerId): void;
   /** See the `"skip-step"` {@link EffectSpec}: one more of `player`'s steps
    * of this kind to skip, or — `thisTurn` — this turn's, if they're active. */
-  skipStep(player: PlayerId, step: "untap" | "upkeep" | "draw" | "combat", thisTurn: boolean, allOfNextTurn?: boolean): void;
+  skipStep(
+    player: PlayerId,
+    step: "untap" | "upkeep" | "draw" | "combat" | "main",
+    thisTurn: boolean,
+    allOfNextTurn?: boolean,
+    eachThisTurn?: boolean,
+  ): void;
   /** See the `"exile-from-library"` {@link EffectSpec}: the top `top` cards
    * of `target`'s library, or all of it but the bottom `allBut`. */
   exileFromLibrary(
@@ -17501,7 +17516,9 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       for (const target of scopedOrTargetedPlayers(spec.who ?? "you", ctx)) {
         if (target.kind !== "player") continue;
         if (spec.step === "untap" && spec.thisTurn !== true) ctx.skipUntapStep(target.player);
-        else ctx.skipStep(target.player, spec.step, spec.thisTurn === true, spec.allOfNextTurn === true);
+        else {
+          ctx.skipStep(target.player, spec.step, spec.thisTurn === true, spec.allOfNextTurn === true, spec.eachThisTurn === true);
+        }
       }
       return;
     }

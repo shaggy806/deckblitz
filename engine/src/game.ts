@@ -9349,6 +9349,7 @@ export class Game {
     delete this.state.turn.addedMain;
     delete this.state.turn.endsAfterAddedCombat;
     delete this.state.turn.skipsThisTurn;
+    delete this.state.turn.skipsEachThisTurn;
     delete this.state.turn.noCombat;
     delete this.state.extraMainPhases;
     delete this.state.turn.combatPhases;
@@ -9770,6 +9771,14 @@ export class Game {
     if (step === "begin-combat" && !this.activeHasLeft() && this.skipsStepNow("combat")) {
       this.emit({ type: "step-skipped", player: this.activePlayer, step: "combat" });
       this.state.turn.step = "end-combat";
+      this.endStep();
+      return;
+    }
+    // A skipped main phase (rules 500.11, 505.1, 614.10 — Fatespinner), the
+    // same way: nothing "at the beginning of" it, no Saga's lore counter, no
+    // priority, and it doesn't count as one of the turn's.
+    if (isMainPhase(step) && !this.activeHasLeft() && this.skipsStepNow("main")) {
+      this.emit({ type: "step-skipped", player: this.activePlayer, step: "main" });
       this.endStep();
       return;
     }
@@ -10680,8 +10689,12 @@ export class Game {
    * it. A skip that lasts first (a static's, or all of this turn's combat
    * phases), which leaves a "next" one waiting for one that isn't skipped
    * (614.10a); then "this turn"'s; then a "next" one. */
-  private skipsStepNow(step: "upkeep" | "draw" | "combat"): boolean {
+  private skipsStepNow(step: "upkeep" | "draw" | "combat" | "main"): boolean {
     const active = this.activePlayer;
+    // Each instance this turn (Fatespinner): it lasts, so nothing is used up.
+    if (step !== "combat" && this.state.turn.skipsEachThisTurn?.includes(step) === true) return true;
+    // A main phase has no other skip.
+    if (step === "main") return false;
     if (step === "combat" ? this.state.turn.noCombat === true : this.staticSkipsStep(active, step)) return true;
     const thisTurn = this.state.turn.skipsThisTurn;
     const at = thisTurn?.indexOf(step) ?? -1;
@@ -37317,9 +37330,21 @@ controlledBy,
         const state = this.state.players[player];
         if (state !== undefined && !state.hasLost) state.untapStepsToSkip = (state.untapStepsToSkip ?? 0) + 1;
       },
-      skipStep: (player, step, thisTurn, allOfNextTurn) => {
+      skipStep: (player, step, thisTurn, allOfNextTurn, eachThisTurn) => {
         const state = this.state.players[player];
         if (state === undefined || state.hasLost || step === "untap") return;
+        if (eachThisTurn === true) {
+          // "Each instance … this turn" (Fatespinner): the active player's
+          // alone, and it lasts the turn rather than being used up.
+          if (player !== this.activePlayer) return;
+          if (step === "combat") this.state.turn.noCombat = true;
+          else if (this.state.turn.skipsEachThisTurn?.includes(step) !== true) {
+            this.state.turn.skipsEachThisTurn = [...(this.state.turn.skipsEachThisTurn ?? []), step];
+          }
+          return;
+        }
+        // A main phase is skipped only that way.
+        if (step === "main") return;
         if (allOfNextTurn === true) {
           state.noCombatNextTurn = true;
           return;

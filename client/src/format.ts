@@ -172,7 +172,7 @@ function eventText(event: GameEvent, nameOf: NameOf, seats: readonly SeatStatus[
     case 'untap-step-skipped':
       return `${who(event.player)} skips their untap step`
     case 'step-skipped':
-      return `${who(event.player)} skips their ${event.step === 'combat' ? 'combat phase' : `${event.step} step`}`
+      return `${who(event.player)} skips their ${event.step === 'combat' || event.step === 'main' ? `${event.step} phase` : `${event.step} step`}`
     case 'removed-from-combat':
       return `${name(event.object)} is removed from combat`
     case 'additional-combat-queued':

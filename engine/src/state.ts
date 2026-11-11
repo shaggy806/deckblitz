@@ -3104,6 +3104,12 @@ export interface TurnState {
    * kinds this turn are skipped, and none of a later turn. `"combat"` is a
    * whole combat phase (Moment of Silence), one for each. */
   skipsThisTurn?: ("upkeep" | "draw" | "combat")[];
+  /** "The player skips **each instance** of the chosen step or phase this
+   * turn" (Fatespinner — the `skip-step` effect's `eachThisTurn`): every one
+   * of the active player's steps or phases of these kinds for the rest of
+   * this turn, ones added later too. `"main"` is both main phases and any
+   * additional one (rule 505.1). Every combat phase is `noCombat`. */
+  skipsEachThisTurn?: ("upkeep" | "draw" | "main")[];
   /** Every combat phase of this turn is skipped — see
    * `PlayerState.noCombatNextTurn`. */
   noCombat?: true;
