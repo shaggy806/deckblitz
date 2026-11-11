@@ -7254,7 +7254,23 @@ describe("face down by an effect (rule 708.2)", () => {
     const wall = face("Wall of Deceit", "Creature — Wall", "{3}: Turn this creature face down.");
     expect(wall.activated[0].effect).toEqual({ kind: "turn-face-down", target: "source" });
     // A listing the engine has no definition for stays to author.
-    expect(face("Test Horror", "Instant", "Turn target creature face down. It's a 2/2 Horror creature.").complete).toBe(false);
+    expect(face("Test Wizard", "Instant", "Turn target creature face down. It's a 3/3 Wizard creature.").complete).toBe(false);
+    // "Any number of target …": each target's turn takes the listing.
+    const harvester = face(
+      "Illithid Harvester",
+      "Creature — Horror",
+      "Ceremorphosis — When this creature enters, turn any number of target tapped nontoken creatures face down. They're 2/2 Horror creatures.",
+    );
+    expect(harvester.complete).toBe(true);
+    expect(harvester.triggered[0].effect).toEqual({
+      kind: "for-each-target",
+      from: 0,
+      simultaneous: true,
+      effect: { kind: "turn-face-down", target: 0, as: "2/2 Horror creature" },
+    });
+    expect(harvester.triggered[0].targets).toEqual([
+      { kind: "any-number", of: { kind: "permanent", filter: { type: "creature", tapped: true, token: false } } },
+    ]);
   });
 
   it("reads entering face down: a dying creature returned, cards from hand put", () => {

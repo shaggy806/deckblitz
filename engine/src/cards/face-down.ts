@@ -43,6 +43,15 @@ export const FACE_DOWN_DEFINITIONS: readonly CardDefinition[] = [
     text: "",
   }),
   defineCard({
+    name: FACE_DOWN_AS_CARDS["2/2 Horror creature"],
+    colors: [],
+    types: ["creature"],
+    subtypes: ["Horror"],
+    power: 2,
+    toughness: 2,
+    text: "",
+  }),
+  defineCard({
     name: FACE_DOWN_AS_CARDS["5/5 artifact creature"],
     colors: [],
     types: ["artifact", "creature"],

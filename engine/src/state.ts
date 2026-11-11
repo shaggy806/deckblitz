@@ -1279,7 +1279,6 @@ export interface GameObject {
    * Cleared on any zone change.
    */
   doors?: { readonly left: boolean; readonly right: boolean };
-  /** A **Class**'s level (rule 716.2b) — a designation, not a copiable
    * value, which the permanent keeps even if it stops being a Class; none
    * is level 1 (716.2d). Set by a level bar (`gain-class-level`), cleared
    * on any zone change. */
@@ -6546,17 +6545,19 @@ export type FaceDownKind = "manifest" | "cloak" | "morph" | "disguise" | "effect
 
 /** The characteristics an effect lists for what it puts or turns face down,
  * in place of the plain 2/2's (rule 708.2): "They're 2/2 Cyberman artifact
- * creatures" (Cybership, Missy, Cyber Conversion), "They're 5/5 artifact
+ * creatures" (Cybership, Missy, Cyber Conversion), "They're 2/2 Horror
+ * creatures" (Illithid Harvester), "They're 5/5 artifact
  * creatures" (Tezzeret, Cruel Machinist), "It's a Forest land" (Yedora,
  * Grave Gardener — a land with Forest's intrinsic "{T}: Add {G}", rule
  * 305.6, and nothing else). Each is an internal definition
  * (`cards/face-down.ts`), named in {@link FACE_DOWN_AS_CARDS}; a new set of
  * listed characteristics is a new member and a new definition. */
-export type FaceDownAs = "2/2 Cyberman artifact creature" | "5/5 artifact creature" | "Forest land";
+export type FaceDownAs = "2/2 Cyberman artifact creature" | "2/2 Horror creature" | "5/5 artifact creature" | "Forest land";
 
 /** The registry names of the {@link FaceDownAs} definitions. */
 export const FACE_DOWN_AS_CARDS: Readonly<Record<FaceDownAs, string>> = {
   "2/2 Cyberman artifact creature": "Face-Down Cyberman (2/2 Artifact Creature)",
+  "2/2 Horror creature": "Face-Down Horror (2/2 Creature)",
   "5/5 artifact creature": "Face-Down Artifact Creature (5/5)",
   "Forest land": "Face-Down Forest Land",
 };

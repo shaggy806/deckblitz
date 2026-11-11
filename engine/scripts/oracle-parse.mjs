@@ -18045,6 +18045,7 @@ function thatPlayerOf(triggers) {
  * `FaceDownAs`. */
 const FACE_DOWN_AS = {
   "2/2 cyberman artifact creature": "2/2 Cyberman artifact creature",
+  "2/2 horror creature": "2/2 Horror creature",
   "5/5 artifact creature": "5/5 artifact creature",
   "forest land": "Forest land",
 };
@@ -18339,7 +18340,9 @@ function faceDownAsAt(sentences, i, ctx) {
     if (e.kind === "turn-face-down") return { ...e, as };
     if (e.kind === "put-onto-battlefield" && e.faceDown === true) return { ...e, faceDown: as };
     if (e.kind === "look-and-choose" && e.enterAs?.faceDown === true) return { ...e, enterAs: { ...e.enterAs, faceDown: as } };
-    if (e.kind === "may") {
+    // "Turn any number of target … creatures face down. They're …" (Illithid
+    // Harvester): each target's turn takes it.
+    if (e.kind === "may" || e.kind === "for-each-target") {
       const inner = withAs(e.effect);
       return inner === null ? null : { ...e, effect: inner };
     }

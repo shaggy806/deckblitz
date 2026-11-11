@@ -2340,7 +2340,8 @@ cost (702.37e). **`turn-face-down`** turns a permanent face down in place
 712.16). **`faceDown`** on `put-onto-battlefield` and on `look-and-choose`'s
 `enterAs` enters a card face down (708.3) — `true` the plain 2/2, or the
 characteristics the effect lists (**`FaceDownAs`**, `GameObject.faceDown.as`:
-"2/2 Cyberman artifact creature", "5/5 artifact creature", "Forest land",
+"2/2 Cyberman artifact creature", "2/2 Horror creature" (2026-11-11,
+`effect:face-down-as-any-characteristics`, Illithid Harvester), "5/5 artifact creature", "Forest land",
 each an internal definition in `cards/face-down.ts`). **`manifest`'s `from`**
 manifests the top card of another player's library under the manifesting
 player (110.2a), and a look-and-choose from another's library puts its cards

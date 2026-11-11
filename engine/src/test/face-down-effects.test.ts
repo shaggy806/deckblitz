@@ -12,10 +12,12 @@ import {
   cast,
   counters,
   destroy,
+  enter,
   graveyard,
   hand,
   lands,
   loyalty,
+  nextTurn,
   pickFromZone,
   pickModes,
   pt,
@@ -28,6 +30,7 @@ import {
   toHand,
   toLibrary,
   types,
+  watchTargets,
   zone,
 } from "./harness.js";
 
@@ -269,6 +272,45 @@ describe("can't be turned face up (Unable to Scream)", () => {
     // A Toy artifact creature with base 0/2, face down still.
     expect(subtypes(game, bears)).toContain("Toy");
     expect(pt(game, bears)).toEqual({ power: 0, toughness: 2 });
+  });
+});
+
+describe("Illithid Harvester // Plant Tadpoles", () => {
+  it("turns any number of tapped nontoken creatures into face-down 2/2 Horror creatures", () => {
+    const { game, a } = table();
+    const giant = spawn(game, "Hill Giant", B, { tapped: true });
+    const wurm = spawn(game, "Craw Wurm", A, { tapped: true });
+    const bears = spawn(game, "Grizzly Bears", B);
+    const seen = watchTargets(a, () => [giant, wurm]);
+    enter(game, "Illithid Harvester");
+    // The untapped creature and the Harvester itself aren't tapped ones.
+    expect(seen.asked).toBe(1);
+    expect(seen.offered.flat()).not.toContain(bears);
+    for (const id of [giant, wurm]) {
+      expect(game.state.objects[id].faceDown).toEqual({ kind: "effect", as: "2/2 Horror creature" });
+      expect(types(game, id)).toEqual(["creature"]);
+      expect(subtypes(game, id)).toEqual(["Horror"]);
+      expect(pt(game, id)).toEqual({ power: 2, toughness: 2 });
+      expect(game.characteristics(id).colors.size).toBe(0);
+      // The same permanent, still tapped (708.2a).
+      expect(game.state.objects[id].tapped).toBe(true);
+      expect(zone(game, id)).toBe("battlefield");
+    }
+    expect(game.viewFor(B).objects[giant]?.cardName).toBe(FACE_DOWN_AS_CARDS["2/2 Horror creature"]);
+    expect(game.state.objects[bears].faceDown).toBeUndefined();
+  });
+
+  it("taps X target creatures as its Adventure, which stay tapped through their next untap", () => {
+    const { game } = table();
+    lands(game, "Island", 4);
+    const bears = [spawn(game, "Grizzly Bears", B), spawn(game, "Grizzly Bears", B)];
+    const harvester = toHand(game, "Illithid Harvester");
+    cast(game, harvester, { face: 1, x: 2, targets: bears.map(ref) });
+    expect(bears.map((id) => game.state.objects[id].tapped)).toEqual([true, true]);
+    // On an adventure (rule 715.3d).
+    expect(zone(game, harvester)).toBe("exile");
+    nextTurn(game);
+    expect(bears.map((id) => game.state.objects[id].tapped)).toEqual([true, true]);
   });
 });
 
