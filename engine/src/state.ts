@@ -1279,6 +1279,14 @@ export interface GameObject {
    * Cleared on any zone change.
    */
   doors?: { readonly left: boolean; readonly right: boolean };
+  /** The timestamp a Room's door got as it was unlocked on the battlefield
+   * (rules 709.5e, f): what that door's static abilities apply by when it's
+   * later than the Room's own (`staticTimestamp`, rule 613.7a — Steaming
+   * Sauna's ruling). None for a door the Room entered with unlocked, whose
+   * abilities have the Room's timestamp. Dropped as the door is locked again
+   * and, with `doors`, on any zone change. */
+  doorUnlockedAt?: { readonly left?: number; readonly right?: number };
+  /** A **Class**'s level (rule 716.2b) — a designation, not a copiable
    * value, which the permanent keeps even if it stops being a Class; none
    * is level 1 (716.2d). Set by a level bar (`gain-class-level`), cleared
    * on any zone change. */

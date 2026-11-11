@@ -158,6 +158,7 @@ import {
   emblemStatics,
   staticAffects,
   grantedStatics,
+  staticTimestamp,
   staticsOfEmblem,
   pairedPartner,
   hasExileIfLeavesAbility,
@@ -10783,7 +10784,8 @@ export class Game {
    * `player`'s maximum hand size (rule 402.2): the game's, as the effects that
    * change it leave it — applied in timestamp order, as every effect on the
    * rules of the game is (rule 613.11), each static ability's timestamp its
-   * permanent's (613.7a). "You have no maximum hand size" (Thought Vessel —
+   * permanent's (613.7a; a Room's door unlocked later, the unlock's —
+   * `staticTimestamp`). "You have no maximum hand size" (Thought Vessel —
    * `noMaxHandSize`, read off the battlefield: a fact about the player, with
    * no object for the layer system to hang it on) makes it `Infinity`; a
    * `maxHandSize` sets it (`set`, less its `minus` count) and/or changes it by
@@ -10866,7 +10868,7 @@ export class Game {
           (ability.noMaxHandSize === "each-player" || (ability.noMaxHandSize === true && source.controller === player)) &&
           this.staticActive(source, ability)
         ) {
-          changes.push({ timestamp: source.timestamp, apply: () => Infinity });
+          changes.push({ timestamp: staticTimestamp(this.registry, source, ability), apply: () => Infinity });
         }
         const rule = ability.maxHandSize;
         if (rule === undefined) continue;
@@ -10878,7 +10880,7 @@ export class Game {
               : player !== source.controller;
         if (!reaches || !this.staticActive(source, ability)) continue;
         changes.push({
-          timestamp: source.timestamp,
+          timestamp: staticTimestamp(this.registry, source, ability),
           apply: (size) => {
             const minus =
               rule.minus === undefined ? 0 : countValue(rule.minus, this.state, this.registry, source.controller);
@@ -47232,6 +47234,10 @@ controlledBy,
     if (object?.zone !== "battlefield" || object.doors === undefined || object.doors[door]) return;
     object.doors = { ...object.doors, [door]: true };
     object.face = doorsFace(object.doors);
+    // The door's static abilities start to apply now: they take this
+    // timestamp, not the Room's earlier one (rule 613.7a, Steaming Sauna's
+    // ruling — `staticTimestamp`).
+    object.doorUnlockedAt = { ...object.doorUnlockedAt, [door]: this.freshTimestamp() };
     invalidateComputedCache();
     this.emit({ type: "door-unlocked", object: id, door, player, fully: object.doors.left && object.doors.right });
   }
@@ -47312,6 +47318,10 @@ controlledBy,
     if (object?.zone !== "battlefield" || object.doors === undefined || !object.doors[door]) return;
     object.doors = { ...object.doors, [door]: false };
     object.face = doorsFace(object.doors);
+    const other = door === "left" ? "right" : "left";
+    const kept = object.doorUnlockedAt?.[other];
+    if (kept === undefined) delete object.doorUnlockedAt;
+    else object.doorUnlockedAt = { [other]: kept };
     invalidateComputedCache();
   }
 
@@ -61039,6 +61049,7 @@ controlledBy,
     // Nor has a Room's unlocked designations (rule 709.5c): set below as it
     // enters the battlefield. Nor a Class level (716.2b).
     delete object.doors;
+    delete object.doorUnlockedAt;
     delete object.classLevel;
     object.exiledWith = undefined;
     // What was encoded on it stays exiled, encoded on nothing (rule 702.99c).

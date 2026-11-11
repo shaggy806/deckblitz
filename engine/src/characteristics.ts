@@ -2988,6 +2988,34 @@ export function grantedStatics(
   return timed.length === 0 ? [] : timed.map((g) => g.ability);
 }
 
+/**
+ * The timestamp the effects of `source`'s own static `ability` apply by (rule
+ * 613.7a): the source's — or, for a static of a Room's door unlocked on the
+ * battlefield (rules 709.5e, f), the time it was unlocked, when the ability
+ * began to be the permanent's (`GameObject.doorUnlockedAt`). So "You have no
+ * maximum hand size" on a door unlocked after a "your maximum hand size is
+ * two" permanent entered applies after it (Steaming Sauna's ruling). With
+ * both doors unlocked the left half's statics come first in the Room's list
+ * (`roomCard`). Anything else of the source's — a granted static, another
+ * card's text box — keeps the source's timestamp here.
+ */
+export function staticTimestamp(registry: CardRegistry, source: GameObject, ability: StaticAbility): number {
+  const at = source.doorUnlockedAt;
+  if (at === undefined || source.doors === undefined || source.textFrom !== undefined) return source.timestamp;
+  const def = registry.get(rulesTextName(source));
+  const index = def.static.indexOf(ability);
+  if (index < 0) return source.timestamp;
+  let door: "left" | "right";
+  if (source.doors.left && source.doors.right) {
+    const left = def.faces?.[1];
+    if (left === undefined) return source.timestamp;
+    door = index < registry.get(left).static.length ? "left" : "right";
+  } else {
+    door = source.doors.left ? "left" : "right";
+  }
+  return Math.max(source.timestamp, at[door] ?? source.timestamp);
+}
+
 /** A static ability an object has by a grant, with the timestamp its effects
  * take: the later of the object's and the grant's (rule 613.7a). */
 interface GrantedStatic {
@@ -5367,7 +5395,9 @@ function scanContributingStaticSources(state: GameState, registry: CardRegistry)
     const lost = hasLostAbilities(state, registry, source);
     for (const ability of contributing) {
       if (lost && !staticOutlivesLoss(state, registry, source, ability)) continue;
-      out.push({ source, ability });
+      // A Room's door unlocked on the battlefield: its statics apply from then.
+      if (source.doorUnlockedAt === undefined) out.push({ source, ability });
+      else out.push({ source, ability, timestamp: staticTimestamp(registry, source, ability) });
     }
     // What a `grant-static` gave it (Earthbind's "Enchanted creature loses
     // flying") or another permanent's static grants it (Inspiring Leader's
