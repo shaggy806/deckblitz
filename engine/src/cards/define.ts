@@ -3499,6 +3499,11 @@ export interface StaticAbility extends TypePatch, ColorPatch {
     readonly colors?: readonly Color[];
     readonly types?: readonly CardType[];
     readonly filter?: CardFilter;
+    /** "Hexproof from **each of its colors**" (Tam, Mindful First-Year): for
+     * each affected permanent, hexproof from each colour that permanent is
+     * now (layer 5's answer, read as layer 6 is folded) — none while it's
+     * colourless (rule 105.2c), all five once it "becomes all colors". */
+    readonly ownColors?: true;
     readonly spellsOnly?: true;
     readonly abilitiesOnly?: true;
     readonly anyController?: true;

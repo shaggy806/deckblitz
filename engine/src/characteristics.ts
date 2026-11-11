@@ -1676,7 +1676,7 @@ function isQualifiedHexproof(h: NonNullable<StaticAbility["hexproofFrom"]>): boo
     h.abilitiesOnly === true ||
     h.anyController === true ||
     h.notHexproof === true ||
-    ((h.colors ?? []).length === 0 && (h.types ?? []).length === 0 && h.filter === undefined)
+    ((h.colors ?? []).length === 0 && (h.types ?? []).length === 0 && h.filter === undefined && h.ownColors !== true)
   );
 }
 
@@ -5920,6 +5920,9 @@ function computeCharacteristicsUncached(
       hexQualified.push(effect.hexproofFrom);
     } else if (effect.hexproofFrom && hexproofFromStays) {
       for (const c of effect.hexproofFrom.colors ?? []) hexColors.add(c);
+      // "Hexproof from each of its colors" (Tam): this permanent's own, as
+      // layer 5 left them.
+      if (effect.hexproofFrom.ownColors === true) for (const c of colors) hexColors.add(c);
       for (const t of effect.hexproofFrom.types ?? []) hexTypes.add(t);
       if (effect.hexproofFrom.filter !== undefined) hexFilters.push(effect.hexproofFrom.filter);
     }

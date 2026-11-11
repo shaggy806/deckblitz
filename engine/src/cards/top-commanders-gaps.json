@@ -2240,7 +2240,8 @@
   "static:surveil-additional-cards",
   "cost:x-cant-be-zero",
   "cost:x-cant-be-zero",
-  "effect:target-spell-cant-be-countered"
+  "effect:target-spell-cant-be-countered",
+  "keyword:hexproof-from-own-colors"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

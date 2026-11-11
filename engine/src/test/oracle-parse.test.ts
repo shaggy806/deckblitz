@@ -17449,3 +17449,23 @@ describe("\"Target spell can't be countered\"", () => {
     expect(shusher.activated[0].effect).toEqual({ kind: "spell-cant-be-countered", target: 0 });
   });
 });
+
+describe("hexproof from each of its colors, and becoming all colors", () => {
+  it("reads Tam, Mindful First-Year whole", () => {
+    const tam = parseFace(
+      {
+        name: "Tam, Mindful First-Year",
+        type_line: "Legendary Creature — Gorgon Wizard",
+        mana_cost: "{1}{G/U}",
+        oracle_text:
+          "Each other creature you control has hexproof from each of its colors.\n{T}: Target creature you control becomes all colors until end of turn.",
+      },
+      { tokenFor: () => null },
+    ) as unknown as { complete: boolean; static: { affects: unknown; hexproofFrom: unknown }[]; activated: { targets: unknown; effect: unknown }[] };
+    expect(tam.complete).toBe(true);
+    expect(tam.static[0].affects).toEqual({ scope: "filter", filter: { type: "creature", controlledBy: "you" }, excludeSelf: true });
+    expect(tam.static[0].hexproofFrom).toEqual({ ownColors: true });
+    expect(tam.activated[0].targets).toEqual(["creature-you-control"]);
+    expect(tam.activated[0].effect).toEqual({ kind: "become", target: 0, setColors: ["W", "U", "B", "R", "G"], duration: "end-of-turn" });
+  });
+});

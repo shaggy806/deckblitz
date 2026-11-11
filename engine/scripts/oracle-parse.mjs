@@ -6519,6 +6519,11 @@ export function parseSentence(sentence, ctx) {
   // Layer 5 (the Laces): "target spell or permanent becomes black", for good.
   // "Target spell or permanent" is read only here: a bounce of one (Venser)
   // needs a step per zone.
+  // "Becomes all colors until end of turn" (Scrapbasket; Tam's target).
+  if ((m = re(`(~|${TARGET}) becomes all colors until end of turn`).exec(s))) {
+    const target = m[1] === "~" ? "source" : slot(m[1]);
+    return target === undefined ? null : { kind: "become", target, setColors: ["W", "U", "B", "R", "G"], duration: "end-of-turn" };
+  }
   if ((m = re(`target spell or permanent becomes (white|blue|black|red|green)(?: \(mana symbols on that permanent remain unchanged\.\))?`).exec(s))) {
     return { kind: "become", target: ctx.target({ kind: "spell-or-permanent" }), setColors: [COLOR_WORDS[m[1].toLowerCase()]], duration: "permanent" };
   }
@@ -18169,6 +18174,14 @@ function perAmountStaticOf(line, text) {
     return {
       affects: { scope: "filter", filter: { type: "creature", controlledBy: "you", multicolored: true }, excludeSelf: true },
       grantPtPerCount: { ofAffected: "colors", pt: pair(m[1], m[2]) },
+      text,
+    };
+  }
+  // Tam, Mindful First-Year: each one's hexproof from the colours it is now.
+  if (line === "Each other creature you control has hexproof from each of its colors.") {
+    return {
+      affects: { scope: "filter", filter: { type: "creature", controlledBy: "you" }, excludeSelf: true },
+      hexproofFrom: { ownColors: true },
       text,
     };
   }

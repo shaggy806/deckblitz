@@ -5665,6 +5665,9 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   `{ types: [...] }`, Thrun's "can't be the target of nongreen spells your
   opponents control or abilities from nongreen sources" `{ filter: {
   notColors: ["G"] } }`. Targeting only — not blocking, damage or enchanting.
+  "Hexproof from **each of its colors**" (Tam, Mindful First-Year's "each
+  other creature you control has …") is `{ ownColors: true }`: each affected
+  permanent's own colours as they are now, none for a colourless one.
   Granting it until end of turn (Skrelv's chosen color) isn't built.
   The printed "can't be the target of …" lines that aren't the keyword take
   qualifiers (rules 601.2c, 602.2b): `spellsOnly` ("… of black or red spells
