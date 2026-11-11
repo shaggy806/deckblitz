@@ -899,6 +899,7 @@ import _poolYoungWeiRecruits from "../pool/young-wei-recruits.js";
 import _poolZaraRenegadeRecruiter from "../pool/zara-renegade-recruiter.js";
 import _poolZhalfirinLancer from "../pool/zhalfirin-lancer.js";
 import _poolZombieMusher from "../pool/zombie-musher.js";
+import _poolZurzothChaosRider from "../pool/zurzoth-chaos-rider.js";
 import _tokens44RedBirdToken from "../tokens/4-4-red-bird-token.js";
 import _tokensBeauToken from "../tokens/beau-token.js";
 import _tokensBirdToken from "../tokens/bird-token.js";
@@ -1823,6 +1824,7 @@ const shard: CardShard = {
     _poolZaraRenegadeRecruiter,
     _poolZhalfirinLancer,
     _poolZombieMusher,
+    _poolZurzothChaosRider,
   ],
   tokens: [
     _tokens44RedBirdToken,

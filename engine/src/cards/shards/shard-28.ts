@@ -659,6 +659,7 @@ import _poolRangersRefueler from "../pool/rangers-refueler.js";
 import _poolRapaciousGuest from "../pool/rapacious-guest.js";
 import _poolRapierWit from "../pool/rapier-wit.js";
 import _poolRappellingScouts from "../pool/rappelling-scouts.js";
+import _poolRaubahnBullOfAlaMhigo from "../pool/raubahn-bull-of-ala-mhigo.js";
 import _poolRavagingRiftwurm from "../pool/ravaging-riftwurm.js";
 import _poolRavenloftAdventurer from "../pool/ravenloft-adventurer.js";
 import _poolRazortideBridge from "../pool/razortide-bridge.js";
@@ -1688,6 +1689,7 @@ const shard: CardShard = {
     _poolRapaciousGuest,
     _poolRapierWit,
     _poolRappellingScouts,
+    _poolRaubahnBullOfAlaMhigo,
     _poolRavagingRiftwurm,
     _poolRavenloftAdventurer,
     _poolRazortideBridge,

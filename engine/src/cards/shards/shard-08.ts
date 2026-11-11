@@ -679,6 +679,7 @@ import _poolPrimalDruid from "../pool/primal-druid.js";
 import _poolPrisonTerm from "../pool/prison-term.js";
 import _poolProfanePrayers from "../pool/profane-prayers.js";
 import _poolProfessionalWrestler from "../pool/professional-wrestler.js";
+import _poolProfessorHojo from "../pool/professor-hojo.js";
 import _poolProfessorsWarning from "../pool/professors-warning.js";
 import _poolProfoundJourney from "../pool/profound-journey.js";
 import _poolPsionicGift from "../pool/psionic-gift.js";
@@ -1730,6 +1731,7 @@ const shard: CardShard = {
     _poolPrisonTerm,
     _poolProfanePrayers,
     _poolProfessionalWrestler,
+    _poolProfessorHojo,
     _poolProfessorsWarning,
     _poolProfoundJourney,
     _poolPsionicGift,

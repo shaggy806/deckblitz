@@ -4803,6 +4803,7 @@ import _poolCloudpiercer from "./pool/cloudpiercer.js";
 import _poolCloudpost from "./pool/cloudpost.js";
 import _poolCloudreachCavalry from "./pool/cloudreach-cavalry.js";
 import _poolCloudreaderSphinx from "./pool/cloudreader-sphinx.js";
+import _poolCloudsLimitBreak from "./pool/clouds-limit-break.js";
 import _poolCloudsculptTechnician from "./pool/cloudsculpt-technician.js";
 import _poolCloudseeder from "./pool/cloudseeder.js";
 import _poolCloudshift from "./pool/cloudshift.js";
@@ -17073,6 +17074,7 @@ import _poolMinotaurTactician from "./pool/minotaur-tactician.js";
 import _poolMinotaurWarrior from "./pool/minotaur-warrior.js";
 import _poolMinscBelovedRanger from "./pool/minsc-beloved-ranger.js";
 import _poolMinscBooTimelessHeroes from "./pool/minsc-boo-timeless-heroes.js";
+import _poolMintharaMercilessSoul from "./pool/minthara-merciless-soul.js";
 import _poolMintstrosity from "./pool/mintstrosity.js";
 import _poolMinwuWhiteMage from "./pool/minwu-white-mage.js";
 import _poolMiracleWorker from "./pool/miracle-worker.js";
@@ -20302,6 +20304,7 @@ import _poolProfanerOfTheDead from "./pool/profaner-of-the-dead.js";
 import _poolProfessionalFaceBreaker from "./pool/professional-face-breaker.js";
 import _poolProfessionalWrestler from "./pool/professional-wrestler.js";
 import _poolProfessorDellianFel from "./pool/professor-dellian-fel.js";
+import _poolProfessorHojo from "./pool/professor-hojo.js";
 import _poolProfessorHulk from "./pool/professor-hulk.js";
 import _poolProfessorOfSymbology from "./pool/professor-of-symbology.js";
 import _poolProfessorOfZoomancy from "./pool/professor-of-zoomancy.js";
@@ -21054,6 +21057,7 @@ import _poolRattlebackApothecary from "./pool/rattleback-apothecary.js";
 import _poolRattleblazeScarecrow from "./pool/rattleblaze-scarecrow.js";
 import _poolRattlechains from "./pool/rattlechains.js";
 import _poolRattleclawMystic from "./pool/rattleclaw-mystic.js";
+import _poolRaubahnBullOfAlaMhigo from "./pool/raubahn-bull-of-ala-mhigo.js";
 import _poolRaucousAudience from "./pool/raucous-audience.js";
 import _poolRaucousCarnival from "./pool/raucous-carnival.js";
 import _poolRaucousEntertainer from "./pool/raucous-entertainer.js";
@@ -28058,6 +28062,7 @@ import _poolTimecrafting from "./pool/timecrafting.js";
 import _poolTimelessDragon from "./pool/timeless-dragon.js";
 import _poolTimelessLotus from "./pool/timeless-lotus.js";
 import _poolTimelessWitness from "./pool/timeless-witness.js";
+import _poolTimelineCuller from "./pool/timeline-culler.js";
 import _poolTimelineInquiry from "./pool/timeline-inquiry.js";
 import _poolTimelyHordemate from "./pool/timely-hordemate.js";
 import _poolTimelyInterference from "./pool/timely-interference.js";
@@ -28579,6 +28584,7 @@ import _poolTrigonOfInfestation from "./pool/trigon-of-infestation.js";
 import _poolTrigonOfMending from "./pool/trigon-of-mending.js";
 import _poolTrigonOfRage from "./pool/trigon-of-rage.js";
 import _poolTrigonOfThought from "./pool/trigon-of-thought.js";
+import _poolTrinisphere from "./pool/trinisphere.js";
 import _poolTrinketMage from "./pool/trinket-mage.js";
 import _poolTripNoose from "./pool/trip-noose.js";
 import _poolTripUp from "./pool/trip-up.js";
@@ -31604,6 +31610,7 @@ import _poolZurgoStormrender from "./pool/zurgo-stormrender.js";
 import _poolZurgoThundersDecree from "./pool/zurgo-thunders-decree.js";
 import _poolZurgosVanguard from "./pool/zurgos-vanguard.js";
 import _poolZuriWarriorOfWakanda from "./pool/zuri-warrior-of-wakanda.js";
+import _poolZurzothChaosRider from "./pool/zurzoth-chaos-rider.js";
 import _poolZygonInfiltrator from "./pool/zygon-infiltrator.js";
 import _tokens00TrampleOozeToken from "./tokens/0-0-trample-ooze-token.js";
 import _tokens01BlueStarfishToken from "./tokens/0-1-blue-starfish-token.js";
@@ -37171,6 +37178,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolCloudpost,
   _poolCloudreachCavalry,
   _poolCloudreaderSphinx,
+  _poolCloudsLimitBreak,
   _poolCloudsculptTechnician,
   _poolCloudseeder,
   _poolCloudshift,
@@ -49441,6 +49449,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMinotaurWarrior,
   _poolMinscBelovedRanger,
   _poolMinscBooTimelessHeroes,
+  _poolMintharaMercilessSoul,
   _poolMintstrosity,
   _poolMinwuWhiteMage,
   _poolMiracleWorker,
@@ -52670,6 +52679,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolProfessionalFaceBreaker,
   _poolProfessionalWrestler,
   _poolProfessorDellianFel,
+  _poolProfessorHojo,
   _poolProfessorHulk,
   _poolProfessorOfSymbology,
   _poolProfessorOfZoomancy,
@@ -53422,6 +53432,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRattleblazeScarecrow,
   _poolRattlechains,
   _poolRattleclawMystic,
+  _poolRaubahnBullOfAlaMhigo,
   _poolRaucousAudience,
   _poolRaucousCarnival,
   _poolRaucousEntertainer,
@@ -60426,6 +60437,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTimelessDragon,
   _poolTimelessLotus,
   _poolTimelessWitness,
+  _poolTimelineCuller,
   _poolTimelineInquiry,
   _poolTimelyHordemate,
   _poolTimelyInterference,
@@ -60947,6 +60959,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolTrigonOfMending,
   _poolTrigonOfRage,
   _poolTrigonOfThought,
+  _poolTrinisphere,
   _poolTrinketMage,
   _poolTripNoose,
   _poolTripUp,
@@ -63972,6 +63985,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolZurgoThundersDecree,
   _poolZurgosVanguard,
   _poolZuriWarriorOfWakanda,
+  _poolZurzothChaosRider,
   _poolZygonInfiltrator,
 ];
 
@@ -69552,6 +69566,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/cloudpost": _poolCloudpost,
   "pool/cloudreach-cavalry": _poolCloudreachCavalry,
   "pool/cloudreader-sphinx": _poolCloudreaderSphinx,
+  "pool/clouds-limit-break": _poolCloudsLimitBreak,
   "pool/cloudsculpt-technician": _poolCloudsculptTechnician,
   "pool/cloudseeder": _poolCloudseeder,
   "pool/cloudshift": _poolCloudshift,
@@ -81822,6 +81837,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/minotaur-warrior": _poolMinotaurWarrior,
   "pool/minsc-beloved-ranger": _poolMinscBelovedRanger,
   "pool/minsc-boo-timeless-heroes": _poolMinscBooTimelessHeroes,
+  "pool/minthara-merciless-soul": _poolMintharaMercilessSoul,
   "pool/mintstrosity": _poolMintstrosity,
   "pool/minwu-white-mage": _poolMinwuWhiteMage,
   "pool/miracle-worker": _poolMiracleWorker,
@@ -85051,6 +85067,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/professional-face-breaker": _poolProfessionalFaceBreaker,
   "pool/professional-wrestler": _poolProfessionalWrestler,
   "pool/professor-dellian-fel": _poolProfessorDellianFel,
+  "pool/professor-hojo": _poolProfessorHojo,
   "pool/professor-hulk": _poolProfessorHulk,
   "pool/professor-of-symbology": _poolProfessorOfSymbology,
   "pool/professor-of-zoomancy": _poolProfessorOfZoomancy,
@@ -85803,6 +85820,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/rattleblaze-scarecrow": _poolRattleblazeScarecrow,
   "pool/rattlechains": _poolRattlechains,
   "pool/rattleclaw-mystic": _poolRattleclawMystic,
+  "pool/raubahn-bull-of-ala-mhigo": _poolRaubahnBullOfAlaMhigo,
   "pool/raucous-audience": _poolRaucousAudience,
   "pool/raucous-carnival": _poolRaucousCarnival,
   "pool/raucous-entertainer": _poolRaucousEntertainer,
@@ -92807,6 +92825,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/timeless-dragon": _poolTimelessDragon,
   "pool/timeless-lotus": _poolTimelessLotus,
   "pool/timeless-witness": _poolTimelessWitness,
+  "pool/timeline-culler": _poolTimelineCuller,
   "pool/timeline-inquiry": _poolTimelineInquiry,
   "pool/timely-hordemate": _poolTimelyHordemate,
   "pool/timely-interference": _poolTimelyInterference,
@@ -93328,6 +93347,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/trigon-of-mending": _poolTrigonOfMending,
   "pool/trigon-of-rage": _poolTrigonOfRage,
   "pool/trigon-of-thought": _poolTrigonOfThought,
+  "pool/trinisphere": _poolTrinisphere,
   "pool/trinket-mage": _poolTrinketMage,
   "pool/trip-noose": _poolTripNoose,
   "pool/trip-up": _poolTripUp,
@@ -96353,6 +96373,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/zurgo-thunders-decree": _poolZurgoThundersDecree,
   "pool/zurgos-vanguard": _poolZurgosVanguard,
   "pool/zuri-warrior-of-wakanda": _poolZuriWarriorOfWakanda,
+  "pool/zurzoth-chaos-rider": _poolZurzothChaosRider,
   "pool/zygon-infiltrator": _poolZygonInfiltrator,
   "tokens/0-0-trample-ooze-token": _tokens00TrampleOozeToken,
   "tokens/0-1-blue-starfish-token": _tokens01BlueStarfishToken,

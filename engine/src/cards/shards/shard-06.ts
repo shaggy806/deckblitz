@@ -886,6 +886,7 @@ import _poolTrashTheTown from "../pool/trash-the-town.js";
 import _poolTraverseTheOutlands from "../pool/traverse-the-outlands.js";
 import _poolTreeMonkey from "../pool/tree-monkey.js";
 import _poolTriceratonCommander from "../pool/triceraton-commander.js";
+import _poolTrinisphere from "../pool/trinisphere.js";
 import _poolTroubleInPairs from "../pool/trouble-in-pairs.js";
 import _poolTroublingTribbles from "../pool/troubling-tribbles.js";
 import _poolTsabosDecree from "../pool/tsabos-decree.js";
@@ -1896,6 +1897,7 @@ const shard: CardShard = {
     _poolTraverseTheOutlands,
     _poolTreeMonkey,
     _poolTriceratonCommander,
+    _poolTrinisphere,
     _poolTroubleInPairs,
     _poolTroublingTribbles,
     _poolTsabosDecree,

@@ -119,6 +119,7 @@ import _poolChillOfTheGrave from "../pool/chill-of-the-grave.js";
 import _poolCitanulCentaurs from "../pool/citanul-centaurs.js";
 import _poolCleverConjurer from "../pool/clever-conjurer.js";
 import _poolClockworkHydra from "../pool/clockwork-hydra.js";
+import _poolCloudsLimitBreak from "../pool/clouds-limit-break.js";
 import _poolCloudsteelKirin from "../pool/cloudsteel-kirin.js";
 import _poolCocoon from "../pool/cocoon.js";
 import _poolCoilingWoodworm from "../pool/coiling-woodworm.js";
@@ -1113,6 +1114,7 @@ const shard: CardShard = {
     _poolCitanulCentaurs,
     _poolCleverConjurer,
     _poolClockworkHydra,
+    _poolCloudsLimitBreak,
     _poolCloudsteelKirin,
     _poolCocoon,
     _poolCoilingWoodworm,
