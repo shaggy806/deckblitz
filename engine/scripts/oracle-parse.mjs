@@ -1384,12 +1384,14 @@ function exileTargetOf(phrase) {
 }
 
 function graveyardTargetOf(phrase) {
-  const m = /^target (?:(.+?) )?card( with mana value X)? from (your|a|an opponent's) graveyard$/i.exec(phrase);
+  // "…with mana value X plus 1" (Sidisi, Regent of the Mire): a sum on X.
+  const m = /^target (?:(.+?) )?card( with mana value X(?: plus (\d+))?)? from (your|a|an opponent's) graveyard$/i.exec(phrase);
   if (!m) return undefined;
   const parsed = m[1] === undefined ? {} : parseTypePhrase(m[1], { cards: true });
   if (parsed === null) return undefined;
-  const filter = m[2] === undefined ? parsed : { ...parsed, manaValue: { op: "eq", n: "x" } };
-  const whose = m[3] === "your" ? "you" : m[3] === "a" ? "any" : "opponent";
+  const n = m[3] === undefined ? "x" : { amount: { sum: ["x", Number(m[3])] } };
+  const filter = m[2] === undefined ? parsed : { ...parsed, manaValue: { op: "eq", n } };
+  const whose = m[4] === "your" ? "you" : m[4] === "a" ? "any" : "opponent";
   return { kind: "card-in-graveyard", whose, ...(Object.keys(filter).length > 0 ? { filter } : {}) };
 }
 
@@ -1594,6 +1596,13 @@ export function parseCost(text) {
       if (filter === null || Object.keys(filter).length === 0) return null;
       cost.sacrifice = { filter: { ...filter, ofChosenType: true } };
       if (m[1] === "another") extra.otherOnly = true;
+    } else if ((m = /^Sacrifice (a|an|another) (.+?)(?: you control)? with mana value X( other than (?:~|this [a-z]+))?$/.exec(part))) {
+      // "Sacrifice a creature you control with mana value X other than ~"
+      // (Sidisi, Regent of the Mire): the filter reads the X announced.
+      const filter = parseTypePhrase(m[2]);
+      if (filter === null) return null;
+      cost.sacrifice = { filter: { ...filter, manaValue: { op: "eq", n: "x" } } };
+      if (m[1] === "another" || m[3] !== undefined) extra.otherOnly = true;
     } else if ((m = /^Sacrifice (a|an|another) (.+)$/.exec(part))) {
       const filter = parseTypePhrase(m[2]);
       if (filter === null) return null;
@@ -5609,7 +5618,9 @@ export function parseSentence(sentence, ctx) {
       },
     };
   }
-  if ((m = /^return (target .+? card from your graveyard) to the battlefield( tapped)?\.$/i.exec(s))) {
+  // "…card with mana value X plus 1 from your graveyard" (Sidisi, Regent of
+  // the Mire): the cost's X, a sum on it.
+  if ((m = /^return (target .+? card(?: with mana value X(?: plus \d+)?)? from your graveyard) to the battlefield( tapped)?\.$/i.exec(s))) {
     // An Aura put onto the battlefield this way isn't attached to anything
     // (BACKLOG), so a card that names one (Rise to Glory) is left to author.
     if (/\bAura\b/.test(m[1])) return null;

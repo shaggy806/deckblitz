@@ -11955,4 +11955,14 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Campfire: your commander may stay in the command zone',
     board({ you: { cmd: ['Krenko, Mob Boss'], bf: ['Campfire', 'Wastes*2'] } }),
   ),
+  // --- A sacrifice with mana value X (2026-11-11, the rank goal) ---
+  preset(
+    'Sidisi, Regent of the Mire: sacrifice a two-drop to return a three-drop',
+    board({
+      you: {
+        bf: ['Sidisi, Regent of the Mire', 'Grizzly Bears', 'Runeclaw Bear', 'Llanowar Elves'],
+        gy: ['Gray Ogre', 'Hill Giant'],
+      },
+    }),
+  ),
 ]

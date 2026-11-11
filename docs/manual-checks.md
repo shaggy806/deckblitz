@@ -34,6 +34,12 @@ engine terms. A second thing to check is a second test.
 - **Do:** Activate Campfire's second ability ({2}, {T}, Exile this artifact). When asked about Krenko, pick 'Command zone'.
 - **Expect:** 'Krenko, Mob Boss would go to your hand — keep it in the command zone instead?' with [Command zone] and [Put into hand]. Krenko stays in the command zone and Campfire is exiled.
 - **Not a bug:** 'Put into hand' puts Krenko into your hand, where casting it costs no commander tax.
+## A sacrifice with mana value X (2026-11-11)
+
+### Sidisi, Regent of the Mire: sacrifice a two-drop to return a three-drop
+- **Do:** Click Sidisi and activate its ability. Click Grizzly Bears to sacrifice it, then pick Gray Ogre in the popup and confirm.
+- **Expect:** The ability is offered once, marked "(X=2)". Grizzly Bears and Runeclaw Bear light up to sacrifice; Llanowar Elves and Sidisi don't. The popup offers only Gray Ogre. It comes back from your graveyard to the battlefield, Hill Giant stays there, and Sidisi is tapped.
+- **Not a bug:** With no creature card in your graveyard costing exactly one more than a creature you could sacrifice, the ability isn't offered at all.
 
 ## A land you may have enter tapped (2026-11-11)
 

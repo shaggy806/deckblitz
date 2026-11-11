@@ -122,9 +122,15 @@ export type DynamicOperand =
  * until X is chosen.
  */
 export function filterReadsX(filter: CardFilter): boolean {
+  // "Mana value X plus 1" (Sidisi, Regent of the Mire) is a sum on X.
+  const amountReadsX = (amount: EffectAmount): boolean =>
+    amount === "x" ||
+    (typeof amount === "object" &&
+      amount !== null &&
+      (("sum" in amount && amount.sum.some(amountReadsX)) || ("product" in amount && amount.product.some(amountReadsX))));
   const readsX = (cmp: NumCompare | undefined): boolean =>
     cmp !== undefined &&
-    (cmp.n === "x" || (isDynamicOperand(cmp.n) && "amount" in cmp.n && cmp.n.amount === "x"));
+    (cmp.n === "x" || (isDynamicOperand(cmp.n) && "amount" in cmp.n && amountReadsX(cmp.n.amount)));
   return (
     readsX(filter.manaValue) ||
     (filter.manaSpent ?? []).some((clause) => readsX(clause.amount)) ||

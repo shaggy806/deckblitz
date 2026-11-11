@@ -3966,7 +3966,14 @@ removeCounter?, addCounter?, payEnergy?, discard?, tapOthers?, untap?, do? }`.
   The effect reads what was sacrificed as `"sacrificed"` — "where X is the
   sacrificed creature's power" is `{ powerOf: "sacrificed" }` (§6,
   "Last-known information"). A spell's `additionalCost.sacrifice` works the
-  same way.
+  same way. **A `{ filter }` that reads X** — "Sacrifice a creature you
+  control with mana value X other than Sidisi" is `{ filter: { type:
+  "creature", manaValue: { op: "eq", n: "x" } } }` with `otherOnly` — makes X
+  announced though the mana cost has none (rules 602.2b, 601.2b): the ability
+  is offered once per X that has a permanent to sacrifice and legal targets,
+  each offer's `sacrifice.choices` the ones matching at its X. A target "with
+  mana value X plus 1" is `manaValue: { op: "eq", n: { amount: { sum: ["x",
+  1] } } }` (Sidisi, Regent of the Mire). An activated ability's cost only.
 - **A sacrifice of several** — `{ filter, count }`: "Sacrifice two artifacts"
   (Sai, Master Thopterist) is `count: 2`; "Sacrifice X Treasures" (Grim
   Hireling) is `count: "x"`, an X announced with the activation though the

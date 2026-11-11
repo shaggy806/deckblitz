@@ -16,6 +16,7 @@ import { costActLosesSource, costActMovesLibrary, costActReadsX } from "./cost-a
 import type { GameState, ZoneType } from "./state.js";
 import type { ObjectId, PlayerId } from "./primitives.js";
 import type { CardFilter } from "./filter.js";
+import { filterReadsX } from "./filter.js";
 import type { TargetSpec } from "./target.js";
 import type { Step } from "./turn.js";
 import type { DieTest } from "./random-results.js";
@@ -127,6 +128,17 @@ export function sacrificeCostReadsX(cost: { readonly sacrifice?: SacrificeCost }
   return "filter" in sacrifice && sacrifice.count === "x";
 }
 
+/** Is this cost one permanent to sacrifice, named on the action, whose
+ * filter reads X — "Sacrifice a creature you control with mana value X"
+ * (Sidisi, Regent of the Mire)? X is announced as the ability is activated
+ * (rules 602.2b, 601.2b) though the mana cost has no `{X}`, and only a
+ * permanent matching at that X pays. */
+export function sacrificeCostFilterReadsX(cost: { readonly sacrifice?: SacrificeCost }): boolean {
+  const sacrifice = cost.sacrifice;
+  if (typeof sacrifice !== "object" || "parts" in sacrifice || "each" in sacrifice) return false;
+  return sacrifice.count === undefined && filterReadsX(sacrifice.filter);
+}
+
 /** Whether a cost's `removeCounter` is chosen as it's paid — from a
  * permanent other than the source, of any kind or several, or a suspended
  * card's — rather than a fixed number of one kind off the source. */
@@ -153,6 +165,7 @@ export function loyaltyDelta(ability: ActivatedAbility, x: number | undefined): 
 export function costAnnouncesX(cost: AbilityCost): boolean {
   return (
     sacrificeCostReadsX(cost) ||
+    sacrificeCostFilterReadsX(cost) ||
     cost.tapOthers?.count === "x" ||
     cost.discard?.count === "x" ||
     cost.discard?.manaValueX === true ||

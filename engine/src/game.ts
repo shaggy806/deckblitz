@@ -26,6 +26,7 @@ import {
   loyaltyDelta,
   sacrificeCostFilters,
   sacrificeCostParts,
+  sacrificeCostFilterReadsX,
   sacrificeCostReadsX,
   sacrificePartsFillable,
   tapOthersAtX,
@@ -3314,7 +3315,7 @@ export class Game {
           sacrifice !== "granter" &&
           sacrificeCostParts(sacrifice, action.xValue ?? 0) === null &&
           (action.sacrifice === undefined ||
-            !this.sacrificeCandidates(action.player, action.source, ability).includes(action.sacrifice))
+            !this.sacrificeCandidates(action.player, action.source, ability, undefined, action.xValue ?? 0).includes(action.sacrifice))
         ) {
           return "the ability requires sacrificing a permanent you control";
         }
@@ -4156,9 +4157,17 @@ export class Game {
           : undefined;
       // "Sacrifice X Treasures": as many as there are to sacrifice once the
       // mana is paid.
+      // "Sacrifice a creature with mana value X": up to the largest there is
+      // to sacrifice (each X's own is checked as it's offered, below).
+      const sacrificeAtX = sacrificeCostFilterReadsX(ability.cost);
       const sacrificeX = sacrificeCostReadsX(ability.cost)
         ? this.costSacrificeCapacity(player, source, ability)
-        : undefined;
+        : sacrificeAtX
+          ? Math.max(
+              0,
+              ...this.sacrificeCandidates(player, source, ability).map((id) => manaValueOfObject(this.registry, this.state.objects[id])),
+            )
+          : undefined;
       // "Tap X untapped artifacts": as many as there are (and each X's own
       // mana is checked as it's offered, below).
       const tapOthersX =
@@ -4279,7 +4288,14 @@ export class Game {
           sacrificeCostParts(ability.cost.sacrifice, 0) === null
             ? {
                 sacrifice: {
-                  choices: this.sacrificedManaChoices(player, source, ability, manaColors),
+                  // "With mana value X": those that pay at this offer's X.
+                  choices: this.sacrificedManaChoices(
+                    player,
+                    source,
+                    ability,
+                    manaColors,
+                    xCost?.minX !== undefined && xCost.minX === xCost.maxX ? xCost.minX : undefined,
+                  ),
                   ...(ability.cost.exilesSacrifice === true ? { exile: true as const } : {}),
                 },
               }
@@ -4361,6 +4377,7 @@ export class Game {
         maxX !== undefined &&
         (taxed ||
           tapsX ||
+          sacrificeAtX ||
           discardAtX !== undefined ||
           exileAtX !== undefined ||
           ability.targets.some(targetSpecReadsX) ||
@@ -4384,6 +4401,8 @@ export class Game {
           ) {
             continue;
           }
+          // "Sacrifice a creature with mana value X": only an X with one.
+          if (sacrificeAtX && this.sacrificeCandidates(player, source, ability, undefined, x).length === 0) continue;
           if (exileAtX !== undefined) {
             const { count, filter } = this.graveyardExileCostAt(player, exileAtX, x);
             if (this.graveyardCostCandidates(player, filter, source).length < count) continue;
@@ -22109,8 +22128,9 @@ export class Game {
     sourceId: ObjectId,
     ability: ActivatedAbility,
     manaColors: readonly ManaType[] | undefined,
+    x?: number,
   ): ObjectId[] {
-    const candidates = this.sacrificeCandidates(player, sourceId, ability);
+    const candidates = this.sacrificeCandidates(player, sourceId, ability, undefined, x);
     const effect = ability.effect;
     if (effect?.kind !== "add-mana" || typeof effect.mana !== "object" || !("sacrificedCouldProduce" in effect.mana)) {
       return candidates;
@@ -22131,9 +22151,14 @@ export class Game {
     },
     /** The ability's granter, for a `"granter"` cost (see `granterNow`). */
     granter?: ObjectId,
+    /** The X announced, for "a creature with mana value X"
+     * (`sacrificeCostFilterReadsX`). With none yet, whatever would pay at
+     * some X: each permanent is judged at its own mana value. */
+    x?: number,
   ): ObjectId[] {
     const sac = ability.cost.sacrifice;
     if (sac === undefined) return [];
+    const readsX = sacrificeCostFilterReadsX(ability.cost);
     // A cost naming a permanent that can't be sacrificed can't be paid (rule
     // 701.21a), and one letting the player choose never offers it.
     if (sac === "self") return this.canBeSacrificed(sourceId) && !this.sacrificeCostProhibited(player, sourceId) ? [sourceId] : [];
@@ -22165,9 +22190,14 @@ export class Game {
       // of the chosen type", Betrothed of Fire's "enchanted creature"
       // (`hostOfSource`), Mold Folk's "another creature or an artifact"
       // (`isSource: false` on one branch).
+      const atX = readsX ? (x ?? manaValueOfObject(this.registry, object)) : undefined;
       return (
         sacrificeCostFilters(sac).some((filter) =>
-          matchesFilter(this.state, this.registry, id, filter, { you: player, source: sourceId }),
+          matchesFilter(this.state, this.registry, id, filter, {
+            you: player,
+            source: sourceId,
+            ...(atX !== undefined ? { x: atX } : {}),
+          }),
         ) && payable
       );
     });
@@ -24052,6 +24082,7 @@ export class Game {
         sourceId,
         ability,
         ability.cost.sacrifice === "granter" ? this.granterNow(this.activatedRefFor(sourceId, abilityIndex)) : undefined,
+        x,
       ).length === 0
     ) {
       return `${player} has nothing to sacrifice for ${def.name}'s ability`;
@@ -24398,7 +24429,7 @@ export class Game {
       const sacrificeParts = sacrificeCostParts(ability.cost.sacrifice, xValue);
       let sacrificeVictim: ObjectId | null = null;
       if (ability.cost.sacrifice !== undefined && sacrificeParts === null) {
-        const candidates = this.sacrificeCandidates(player, sourceId, ability, this.granterNow(grantedAbility));
+        const candidates = this.sacrificeCandidates(player, sourceId, ability, this.granterNow(grantedAbility), xValue);
         if (ability.cost.sacrifice === "self") {
           sacrificeVictim = sourceId;
         } else if (ability.cost.sacrifice === "granter") {

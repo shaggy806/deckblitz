@@ -3014,6 +3014,9 @@ function Table({
         specs: ab.targetSpecs,
         options: ab.targetOptions,
         ...(sacrifice !== undefined ? { sacrifice } : {}),
+        // An offer at one X that also names its sacrifice ("Sacrifice a
+        // creature with mana value X" — Sidisi, Regent of the Mire).
+        ...(ab.xCost !== undefined && ab.xCost.minX === ab.xCost.maxX ? { xValue: ab.xCost.maxX } : {}),
         ...(ab.manaColors !== undefined ? { manaColors: ab.manaColors } : {}),
         // A modal ability is offered once per mode (rule 700.2b).
         ...(ab.modes !== undefined ? { modes: ab.modes } : {}),
@@ -3031,7 +3034,9 @@ function Table({
 
   const clickAbility = useCallback(
     (ab: AbilityAction) => {
-      if (ab.xCost) {
+      // An offer at one X whose cost names a permanent to sacrifice (Sidisi's
+      // "a creature with mana value X") asks which, below, and keeps its X.
+      if (ab.xCost && !(ab.xCost.minX === ab.xCost.maxX && ab.sacrifice !== undefined)) {
         // An offer whose targets fix X (Rydia's "Saga card with mana value
         // X") has nothing to ask.
         if (ab.xCost.minX === ab.xCost.maxX) {

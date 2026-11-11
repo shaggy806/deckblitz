@@ -8340,6 +8340,23 @@ describe("counters put or removed this way", () => {
     expect(out.triggered).toHaveLength(3);
   });
 
+  it("reads Sidisi, Regent of the Mire: a sacrifice with mana value X other than itself, a card with mana value X plus 1", () => {
+    const sidisi = face(
+      "Sidisi, Regent of the Mire",
+      "Legendary Creature — Zombie Snake Warlock",
+      "{T}, Sacrifice a creature you control with mana value X other than Sidisi: Return target creature card with mana value X plus 1 from your graveyard to the battlefield. Activate only as a sorcery.",
+    );
+    expect(sidisi.complete).toBe(true);
+    const ability = sidisi.activated[0];
+    expect(ability.cost).toEqual({ mana: null, tap: true, sacrifice: { filter: { type: "creature", manaValue: { op: "eq", n: "x" } } } });
+    expect(ability.otherOnly).toBe(true);
+    expect(ability.sorcerySpeed).toBe(true);
+    expect(ability.targets).toEqual([
+      { kind: "card-in-graveyard", whose: "you", filter: { type: "creature", manaValue: { op: "eq", n: { amount: { sum: ["x", 1] } } } } },
+    ]);
+    expect(ability.effect).toEqual({ kind: "put-onto-battlefield", target: 0 });
+  });
+
   it("reads Neverwinter Hydra's roll as it enters and the counters it enters with", () => {
     const hydra = face(
       "Neverwinter Hydra",
