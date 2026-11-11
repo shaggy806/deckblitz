@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import type { VisibleObject } from 'engine/client'
 import { CardTile } from './CardTile.tsx'
@@ -10,7 +11,7 @@ import { cardTint } from './symbols.ts'
 import { LoyaltyCounter } from './Symbols.tsx'
 import { manaSymbolUrl } from './mana.ts'
 import { TargetedMark } from './TargetedMark.tsx'
-import { CardFlags } from './CardFlags.tsx'
+import { CardFlags, lightPartner } from './CardFlags.tsx'
 import { CounterChips } from './CounterChips.tsx'
 import type { Goader } from './CardFlags.tsx'
 import { faceDownArtClass, faceDownLabel } from './faceDown.ts'
@@ -107,6 +108,22 @@ export function MiniTile({
   const tint = cardTint(obj)
 
   const { wrapRef, popoverRef, open, handlers } = useHoverPopover(held.length > 0 ? [obj, held] : obj)
+  // A paired creature (soulbond) lights its partner while it's hovered:
+  // which two are paired is otherwise only the "paired" flag on each.
+  const pairedWith = obj.pairedWith
+  useEffect(() => {
+    const el = wrapRef.current
+    if (el === null || pairedWith === undefined) return
+    const on = (): void => lightPartner(pairedWith, true)
+    const off = (): void => lightPartner(pairedWith, false)
+    el.addEventListener('mouseenter', on)
+    el.addEventListener('mouseleave', off)
+    return () => {
+      el.removeEventListener('mouseenter', on)
+      el.removeEventListener('mouseleave', off)
+      off()
+    }
+  }, [wrapRef, pairedWith])
 
   const classes = [
     'mini-tile',

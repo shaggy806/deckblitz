@@ -5574,7 +5574,7 @@ engine terms. A second thing to check is a second test.
 
 ### Silverblade Paladin: soulbond pairs it with a creature you choose
 - **Do:** Cast Silverblade Paladin. When its soulbond trigger resolves, pick Hill Giant on the board.
-- **Expect:** You're asked to choose one of Grizzly Bears or Hill Giant (or none). Paladin and Hill Giant both have double strike; Grizzly Bears doesn't.
+- **Expect:** You're asked to choose one of Grizzly Bears or Hill Giant (or none). Paladin and Hill Giant both have double strike; Grizzly Bears doesn't. Both show a blue "∞" paired flag, and hovering either outlines the other.
 
 ## Buyback with a non-mana cost (2026-10-26, Exodus)
 

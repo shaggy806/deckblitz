@@ -3037,6 +3037,15 @@
 .card-flag.saddled {
   background: #d9a86c;
 }
+.card-flag.paired {
+  background: #9fd3ff;
+  cursor: help;
+}
+/* The partner of the paired creature whose flag is hovered. */
+.board .paired-lit {
+  outline: 2px solid #9fd3ff;
+  outline-offset: 1px;
+}
 .card-flag.solved {
   background: #8fd0b0;
 }

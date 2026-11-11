@@ -37,6 +37,14 @@ const COLOR_WORD: Readonly<Record<string, string>> = {
  * Siege sits on its controller's board, defended by an opponent. So does a
  * permanent's chosen player (`chosenPlayer` — Black Vise's opponent).
  */
+/** Marks (or unmarks) the board tile of `id` as a paired partner being
+ * pointed at: App.css's `.paired-lit`. A class on the tile's own element, so
+ * nothing above has to re-render for a hover. */
+export function lightPartner(id: string | undefined, on: boolean): void {
+  if (id === undefined) return
+  for (const el of document.querySelectorAll(`.board [data-obj-id="${id}"]`)) el.classList.toggle('paired-lit', on)
+}
+
 export function CardFlags({
   obj,
   goaders,
@@ -74,6 +82,7 @@ export function CardFlags({
     protectedBy === null &&
     chosenPlayer === null &&
     obj.secretChoice === undefined &&
+    obj.pairedWith === undefined &&
     level === null
   ) {
     return null
@@ -143,6 +152,14 @@ export function CardFlags({
       {obj.harnessed === true ? (
         <span className="card-flag harnessed" title="Harnessed (rule 701.64): its ∞ ability works now">
           {compact ? 'Hrn' : 'harnessed'}
+        </span>
+      ) : null}
+      {obj.pairedWith !== undefined ? (
+        // Soulbond (rule 702.95): which two are paired matters when two
+        // soulbond creatures are out. Hovering its tile lights the partner
+        // (`MiniTile`).
+        <span className="card-flag paired" title="Paired (soulbond): its partner lights up while you hover this">
+          {compact ? '∞' : 'paired'}
         </span>
       ) : null}
       {obj.saddled ? (
