@@ -3347,6 +3347,12 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Bots
 
+- **The bot audit's fixes, step 5, sub-step 3: engines that aren't draw or creature tokens**
+  (2026-11-10; `1a0be1bed`; `docs/plans/bot-audit-fixes.md`, *As built*): the `valueEngines`
+  feature prices what a permanent keeps paying a round in resource tokens (Smothering Tithe)
+  and life taken from opponents (Zulaport Cutthroat, Purphoros), four of either to a card,
+  and a static cost reduction counts as mana in `nonlandMana`. "Counters a tax engine" moves
+  to the gate, with "removal takes the drain engine" and "removal takes the cost reducer".
 - **The bot audit's fixes, step 5, sub-step 2: a card in hand has a quality** (2026-11-10;
   `726ca9237`; `docs/plans/bot-audit-fixes.md`, *As built*): the `handQuality` feature
   (`bot/hand-worth.ts`) prices card flow under the cards it draws, a tutor at 0.85 of the best

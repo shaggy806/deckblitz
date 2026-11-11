@@ -687,6 +687,19 @@ left of it is `isSacrificeForCardsDue` (Deadly Dispute on a spare creature), bes
 our own hand takes the card of the highest quality, in v1 too, so a rollout finds the card
 the tutor was priced on. `bot-audit-fixes.md` step 5 has the prices and the diff.
 
+### The audit's step 5: engines that aren't draw or creature tokens (2026-11-10)
+
+A permanent that keeps making Treasures or draining the table was a blank permanent: Smothering
+Tithe scored under a Grizzly Bears, for the bot's own cast and as something to counter or
+destroy. `valueEngines` (`valueRate` in `bot/features.ts`) prices what such an engine pays a
+round of the table, in cards, at `drawEngines`' weight: resource tokens at four a card and life
+taken from opponents at four a card, each by `engineRate` (per opponent for a trigger on what
+opponents do, halved under an `unless` they can pay), capped at a card and a half. A static
+that makes our own spells cheaper counts the generic mana it takes off as mana a turn, in
+`nonlandMana` (and so in `earlyMana`), like a rock. `engineScore` adds the value rate, so
+removal's target ranking sees these engines, and a printed drain is taken off `trackRecord` so
+it isn't counted twice.
+
 ## Watching live games for
 
 Moved from BACKLOG (2026-10-04; the last four on 2026-10-09): each of these is open only until

@@ -9,8 +9,8 @@ what each step changes, and how each is checked. Three choices near the end are 
 One step a session, with the `bot-audit-next` skill. When a step lands, tick it here with its date
 and commit, write its *As built* lines under the step, and move `Next`.
 
-- Next: **step 5, sub-step 3** (engines that aren't draw or creature tokens, Q4; sub-steps 1,
-  the scenarios, and 2, hand quality, are built).
+- Next: **step 5, sub-step 4** (interaction scored on the affected opponent at full weight,
+  Q4; sub-steps 1, the scenarios, 2, hand quality, and 3, the other engines, are built).
 - [x] Step 0. Tools (2026-11-10)
 - [x] Step 1. Four misplays (2026-11-10; `d15599f95` Q3, `752a7550e` Q6, `aadc42a5a` and
   `e1b359709` Q7, `f626a7351` Q5)
@@ -601,7 +601,7 @@ correctness or speed, is what changed.
 
 - [x] 1. Asymmetric scenarios (2026-11-10; `1103c8bb4`)
 - [x] 2. Hand quality, and the rules it retires (2026-11-10; `726ca9237`)
-- [ ] 3. Engines that aren't draw or creature tokens
+- [x] 3. Engines that aren't draw or creature tokens (2026-11-10; `1a0be1bed`)
 - [ ] 4. Interaction scored on the affected opponent
 - [ ] 5. The sequencing rules retired; the A/B
 
@@ -702,6 +702,58 @@ Tests: `bot-hand-worth.test.ts` (the prices), `bot-tutor.test.ts` (what a tutor 
 **Left for later.** Reach ignores a cost the card reduces itself (Blasphemous Act reads as
 out of reach). A hand at seven cards still holds a draw-three, since the cleanup discard is
 priced. `followUps` and the sequencing rules are sub-step 5's.
+
+### As built (2026-11-10): sub-step 3, engines that aren't draw or creature tokens
+
+A new feature, `valueEngines` (`valueRate` in `engine/src/bot/features.ts`), in cards a round
+at `drawEngines`' weight of 4, and one more term in `nonlandMana`. Each goes through
+`engineRate`, so a trigger on what opponents do counts once per opponent, one with an
+intervening "if" about once, and a one-shot not at all.
+
+- **Resource tokens** (a token spent by sacrificing itself: Treasure, Clue, Food, Blood), four
+  to a card, as `resourceTokens` already prices one; halved under an `unless` an opponent can
+  pay, as Rhystic Study's draw is. Smothering Tithe at four players: 3 × 0.5 / 4 = 0.375 cards
+  a round, 1.5 points.
+- **Drain**, life taken from opponents at four a card (`trackRecord`'s rate): a loss or damage
+  to each opponent counts every opponent (Zulaport Cutthroat 0.75 at four players, Purphoros
+  the cap), a targeted player's loss one (Blood Artist 0.25). Damage aimed at a target isn't
+  counted, since it may be a creature's; life we gain isn't either. A printed drain is taken
+  off `trackRecordOf`'s tally, so it isn't counted there again.
+- **The cap** is 1.5 cards a round for one permanent (six Treasures or six life).
+- **Cost reduction as mana**: the generic mana a permanent's best static takes off spells its
+  controller casts (`reductionPerTurn`: Goblin Electromancer 1, Urza's Incubator 2, 1 for a
+  counted amount) is added to `nonlandMana`, as for one spell a turn, so a reducer is priced
+  like a rock, `earlyMana` included.
+- `engineScore` adds the value rate, so `aimOffer` ranks these engines among removal's targets.
+
+**Where it differs from the plan.** One feature for tokens and drain together, since both are
+already in cards; the reducer is not an engine rate at all but mana, which is what the plan's
+words say and what `earlyMana` should see.
+
+**Scenarios.** *Counters a tax engine* (level table) moves from training to the gate: it scored
+-1.1 and now counters. Two new gate scenarios, Murder choosing between a Grizzly Bears and the
+engine beside it: *removal takes the drain engine* (Zulaport Cutthroat) and *removal takes the
+cost reducer* (Goblin Electromancer). All three fail on `09bdc8b13`. *Counters a tax engine
+from a player who isn't ahead* is still wrong, as expected: bob's permanent counts at a
+quarter there, which is sub-step 4's. Gate 218 of 218. Tests: `bot-value-engines.test.ts`.
+
+**`bot:diff`** against `origin/main`, six four-player games, 11 of 12,967 decisions:
+
+- A reducer cast first (2): Nogi, Draco-Zealot ahead of an Orb and of a Spit Flame. Right.
+- Removal at a reducer (1): Infernal Grasp on alice's Nogi on turn 11, where the old bot
+  ramped. Right by `earlyMana`'s rule; a judgment call otherwise.
+- A drain engine cast or hit (2): Guttersnipe over Shiny Impetus; Windgrace's Judgment takes
+  Firespitter Whelp. Right.
+- Order within a turn (4): Dragonhawk before Spit Flame, Shadrix Silverquill before Wall of
+  Reverence, Orb of Dragonkind before Drakuseth, and Izzet Signet held until after Vanquish
+  the Horde (read in `bot:replay`: the Signet was cast later the same turn). Judgment calls,
+  from boards with a reducer or a Treasure maker on them.
+- Two attack declarations differ (a different opponent; a Wall of Reverence sent along).
+
+**Left for later.** A Treasure under an `unless` is halved whatever the price, so Tithe's {2}
+reads as paid as often as Rhystic Study's {1}: 1.5 points is low for the card, and it only
+just turns the level-table counter. Tax effects on opponents (Thalia, Sphere of Resistance)
+are still blank. Sub-step 4 is what makes any of this count for a player who isn't ahead.
 
 ## Housekeeping, any time
 
