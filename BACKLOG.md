@@ -615,7 +615,7 @@ live games for" (wraths since `threat`, pumping an opponent's attacker, the `"ac
 big boards and deep stacks under count budgets, deck biases, 1/1 tokens since `smallTokens`,
 Shiko or the other spell, and haste enablers in the crackback).
 
-- **The bot audit's findings** (2026-11-10, `docs/plans/bot-audit-2026-11.md`, proposed; the order of work is `docs/plans/bot-audit-fixes.md`, steps 0 (tools), 1 (four misplays) and 2 (the clock) built and live, step 4 (search that buys nothing) and step 3 (the engine's cost per tick) built, step 5's scenarios, hand quality and the engines that aren't draw or creature tokens in — interaction scored on the player it hits in — step 5, sub-step 5 (the sequencing rules retired, then the A/B) next; one step a session with the `bot-audit-next` skill) — left: sacrifice fodder that spares the payoff, the crackback check in the turn planner, "payoff first" and "landfall first" as ordering hints. It also corrects three items below: the two baselines don't both always run, the several-sacrifice kill is found with tokens, and `followUps` is unreachable by default.
+- **What the bot audit's fixes left** (2026-11-10; every step of `docs/plans/bot-audit-fixes.md` is built, its step 5 A/B level) — each needs a design of its own (the plan's "What this plan does not take on"): opponents that respond inside a rollout and holding instants for a better moment (Q8); hidden information (rollouts read the real library order); a worker thread for bots. Also from step 5: a triggered ability's target chosen as it goes on the stack is scored by standings, edicts aren't wipes, `bot:ab` has no pairing by seed, and the five sequencing rules v2 dropped are still v1's (`controller.ts`), so still play in rollouts.
 
 - **`legalActions` takes a third of a second on a wide board with an X spell in hand** (found 2026-11-10, the audit's step 3): a v1 turn played for real from `engine/data/bot-positions/seed-50-t40-b73.json` takes 110 s for 312 acts, 89% of it under `castSpellVariants` → `maxAffordableX` → `planManaPayment` → `coverGeneric` → `byKeep` → `keepScore` → `supplyLeft` (`isTapped` alone 38%), which looks quadratic in mana sources. A rollout's stand-in doesn't hit it; a live seat on that board, and the server's view of it, would. Profile it first (`node --cpu-prof`, a v1 controller on every seat, `advanceUntil` 400 acts).
 - **Sylvan Library's bots** (probed 2026-11-04): v2, with Lightning Bolt, Craw Wurm and Sol Ring on top, declines "draw two additional
@@ -635,14 +635,6 @@ Shiko or the other spell, and haste enablers in the crackback).
   browser (`docs/plans/local-rooms.md` step 6). Try count-only budgets of a few sizes against the clock:
   strength (`bot:ab`), decision time p50/p99 on the box and the user's low-end laptop, and stalls
   (`npm run load-test -w server`).
-- **The follow-up search's next steps** (`followUps` in `engine/src/bot/eval-bot.ts`; what it does
-  is in `COMPLETED.md`): A/B the capped version (`FOLLOW_UP_SIMULATIONS` = 24), replay the chosen
-  follow-up at the next window instead of searching again, and retire the shortcuts it makes
-  redundant (`reducerFirst`, `hideawayFirst`, untap plans) one at a time against the gate. The v3
-  record (`docs/plans/bot-v3-search.md`) is why it stays within our own turn. Corrected by the
-  bot audit (2026-11-10, Q1): `followUps` is unreachable under the default `plan: "turn"`, so
-  these retirements are tried against the turn planner instead
-  (`docs/plans/bot-audit-fixes.md`, step 5).
 - **The autopsies' open bot items** (`docs/plans/deck-autopsies.md`, "Left"): token payoffs
   beyond engines (sacrifice outlets, leaves-the-battlefield); premium removal fired at weak
   targets past the first two rounds. Probed 2026-11-09: Yawgmoth, Priest of Forgotten Gods, a

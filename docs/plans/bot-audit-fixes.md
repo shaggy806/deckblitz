@@ -1,6 +1,6 @@
 # Fixing what the bot audit found
 
-Status: **in progress** (2026-11-10): steps 0-2 built and live, steps 3 and 4 built, step 5 under way (its scenarios in; hand quality next). The findings, their evidence and
+Status: **built** (2026-11-10): steps 0-2 built and live, steps 3, 4 and 5 built; step 5's A/B at the live budget was level (26.7% [22.6, 31.2] over 400 games). The findings, their evidence and
 their finding numbers (S1-S8, Q1-Q8) are in `bot-audit-2026-11.md`; this file is only the order,
 what each step changes, and how each is checked. Three choices near the end are the user's.
 
@@ -9,9 +9,9 @@ what each step changes, and how each is checked. Three choices near the end are 
 One step a session, with the `bot-audit-next` skill. When a step lands, tick it here with its date
 and commit, write its *As built* lines under the step, and move `Next`.
 
-- Next: **step 5, sub-step 5** (the sequencing rules retired, then the step's one A/B;
-  sub-steps 1, the scenarios, 2, hand quality, 3, the other engines, and 4, interaction on
-  the player it hits, are built).
+- Next: **nothing: every step is built** (2026-11-10). What's left is "What this plan does
+  not take on", below, which needs a design of its own, and a deploy for the convoke fix the
+  step's A/B found (a live room stops on it; the user's call, as every deploy is).
 - [x] Step 0. Tools (2026-11-10)
 - [x] Step 1. Four misplays (2026-11-10; `d15599f95` Q3, `752a7550e` Q6, `aadc42a5a` and
   `e1b359709` Q7, `f626a7351` Q5)
@@ -23,7 +23,8 @@ and commit, write its *As built* lines under the step, and move `Next`.
   `1acc7f27a`)
 - [x] Step 4. Search that buys nothing (2026-11-10; `70c51a5c8` S5, `b741490be` S3,
   `ef5e18906` S4)
-- [ ] Step 5. The evaluation (several sessions; its sub-steps are ticked in the step itself)
+- [x] Step 5. The evaluation (2026-11-10; its sub-steps are ticked in the step itself; the
+  A/B at its end: level, 26.7% [22.6, 31.2] over 400 games at the live budget)
 
 ## Principles
 
@@ -604,7 +605,8 @@ correctness or speed, is what changed.
 - [x] 2. Hand quality, and the rules it retires (2026-11-10; `726ca9237`)
 - [x] 3. Engines that aren't draw or creature tokens (2026-11-10; `1a0be1bed`)
 - [x] 4. Interaction scored on the affected opponent (2026-11-10; `8a141debe`)
-- [ ] 5. The sequencing rules retired; the A/B
+- [x] 5. The sequencing rules retired; the A/B (2026-11-10; `6b51bd9a7`, `ae27b5c70`,
+  `3dfe7c9cd`, and `aa3218a45` the convoke fix the A/B found)
 
 ### As built (2026-11-10): sub-step 1, the scenarios
 
@@ -812,6 +814,83 @@ the bot's own main phase (no counterspell came up):
 Chupacabra) isn't in the cast action, so the creature is scored by standings. Edicts aren't
 wipes here. The A/B at the end of step 5 is the first measure of whether the freer removal
 and wipes win games.
+
+### As built (2026-11-10): sub-step 5, the sequencing rules retired
+
+v2 no longer asks five of the rules around its search; one stays, with the scenario it lacked;
+the follow-up search is deleted. All five rules are still v1's (`controller.ts`), which has no
+planner, and so still play in v2's rollouts.
+
+| Rule | Outcome | `bot:diff`, six four-player games |
+| --- | --- | --- |
+| `reducerFirst` | retired from v2 (`6b51bd9a7`) | 8 of 12,656 decisions |
+| `payoffBeforeWipe` | retired from v2 (`ae27b5c70`) | 0 of 12,656 (with the next) |
+| `holdsTapForCombat` | deleted, with `simulateAfterCombat` (`ae27b5c70`) | 0 |
+| `hideawayFirst` | retired from v2 (`3dfe7c9cd`) | never came up |
+| `holdsForNextSpell` | retired from v2 (`3dfe7c9cd`) | never came up |
+| "only land" | **kept** | off: 97 of 13,256, lands late or unplayed |
+| `followUps`, `scoreFrom`, `FOLLOW_UP_SIMULATIONS` | deleted (`ae27b5c70`) | unreachable |
+
+- **`reducerFirst`, read board by board.** Each of the eight is a turn the old rule cast the
+  reducer before anything else. Three are the land drop going first now (the rule ran ahead of
+  the land rules: Haughty Djinn before Evolving Wilds, Herald's Horn before a Mountain), with
+  the same spells cast after. One is the same two spells the other way round (Leyline Tyrant,
+  then Hazoret's Monument: the Monument's loot on that cast is lost). Three are different
+  turns for the same mana: Lathliss alone rather than the Monument and Leyline Tyrant;
+  Commander's Sphere and Anger rather than Herald's Horn and Anger; Voracious Bibliophile
+  rather than Goblin Electromancer and a second spell, the most doubtful, with one mana left
+  over. None is a spell stranded as Miirym was in the rule's own misplay.
+- **`payoffBeforeWipe` and `holdsTapForCombat`** never fired in those games, so the diff says
+  only that nothing else moved. Their gate scenarios (Colfenor's Urn, Faeburrow Elder) pass by
+  the plan. `lastWipePayoff` and the replay's use of it (`scenario-fit.ts`) went with the first.
+- **The untested rules.** Two scenarios written to make them fire. *Keeps Adaptive Training
+  Post's counters with no spell to copy* passes without `holdsForNextSpell`: spent for nothing
+  the activation ties with passing, which keeps ties. `hideawayFirst`'s own capture (AN5SU
+  t22) is in the gate and passes by the plan. So both went, and the scenarios hold the plays.
+  **"Only land" is load-bearing**: with it off the search weighed the drop against the turn's
+  spells, and in six games spells went before the land about thirty times and a land stayed
+  in hand all turn four times (seed 5 turn 22: Welcoming Vampire cast and equipped, Bojuka Bog
+  never played). That position is the gate scenario *plays its only land before the turn's
+  spell, though it enters tapped*, which fails with the rule off.
+- **`followUps`** and its ceiling are gone (about 150 lines with `scoreFrom`); `plan: "off"`
+  and `bot:benchmarks --no-follow-ups` are the one-move search alone, and
+  `EvalBotOptions.followUps` no longer exists. Q6's crackback check has been in the planner
+  since step 1 (`lineSafe`, `lastUnsafe`).
+
+**Where it differs from the plan.** The three sequencing rules were diffed in two runs, not
+three (the last two together: they change different kinds of decision, and neither fired).
+"Only land" was neither given a scenario first nor deleted: it was tried off, and the diff
+made the scenario. The rules stay in v1 rather than being deleted outright.
+
+Gate 222 of 222. `bot:ab` takes `--budget MS|live` (a wall-clock budget a decision on every
+seat) for the A/B below.
+
+### The step's A/B (2026-11-10)
+
+The bot after step 5 (`3dfe7c9cd`) in one seat against the bot before it (`aef3b3297`) in
+the other three, 400 four-player games at the live budget (1 s a decision, every seat), 8
+workers, not paired by seed (no tooling for it yet):
+
+**26.7% [22.6, 31.2]**, even being 25%. Level: hand quality, the new engine rates,
+interaction scored on the player it hits and the retired rules together did not measurably
+change how often the bot wins. They were built as correctness fixes with a scenario each, and
+by the plan's rule those ship on a level bench; none was shown to add strength. The freer
+removal and wipes sub-step 4 left for this bench did not cost games either.
+
+**23 of the 400 games errored** and count as even shares: "cannot pay the cost of" Devouring
+Light, Lethal Scheme or Scatter the Seeds, all instants with convoke, 22 thrown by the older
+bot's seats and 1 by the new one (three seats to one, so no more than chance says about
+which build). The cause is older than this step and **live since step 2b**: v2's cast
+candidates tapped the first creatures for *generic* mana rather than taking the payment the
+offer proved (`castExtras`, `bot/candidates.ts`), which can't pay a coloured pip only a
+creature can. The engine refused that cast in every simulation, so a search never chose it
+(and so v2 never cast such a spell); but step 2's "no time to score anything: v1's cast,
+unscored" (`unscoredCast`) hands back v2's own candidate for v1's offer, and dispatched it
+threw. In a room that stops the game with an engine error (`Room.stop`). Fixed (`castExtras`
+takes `convokeProofFor`, as v1 does; `bot-convoke.test.ts` fails without it). The bench was
+not rerun for it: the errors fell on both builds and 6% of games can't move a level result.
+`bot:diff` on the fix, six games: 6 of 12,158 decisions, all convoke casts (three the same
+spell with the proved creatures tapped, three a different spell beside Scatter the Seeds).
 
 ## Housekeeping, any time
 

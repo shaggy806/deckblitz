@@ -719,6 +719,28 @@ line with such a step in it, against the same pass. A player as a target isn't a
 interaction (burn at a face is a race), nor is an attack: a softened leader for every move
 lost its bench (`deck-autopsies.md`).
 
+### The audit's step 5: the sequencing rules go to the planner (2026-11-10)
+
+The rules written when nothing looked two moves ahead are no longer asked by v2: a cost
+reducer first (`reducerFirst`), a "dies" payoff before the wipe (`payoffBeforeWipe`), a
+hideaway land's card before the spell that taps it (`hideawayFirst`), a copy of the next
+spell held with none to cast (`holdsForNextSpell`), and a vigilance creature's tap put off
+until after combat (`holdsTapForCombat`, deleted with `simulateAfterCombat`). The turn
+planner's lines, or the search's tie with passing, make each of those plays; the rules are
+still v1's, so a rollout's stand-in still follows them. The follow-up search (`followUps`)
+is deleted: `plan: "off"` is the one-move search alone. **One rule of this kind stays, the
+only land**: a single land in hand is played before any search. Tried off, the search
+weighed the drop against the turn's spells and played it after them or not at all, since a
+land that enters tapped, or past what the hand needs, scores below the card in hand.
+
+The A/B at the end of step 5, the bot after it against the bot before it at the live
+budget: 26.7% [22.6, 31.2] over 400 four-player games, level. The step's changes are
+correctness fixes, each with a scenario; none is shown to add strength.
+
+A cast with convoke takes the payment its offer proved (`castExtras`, `candidates.ts`).
+Before, every creature paid generic, the engine refused the cast wherever a creature had to
+pay a colour, and v2 never cast such a spell: a decision to watch now that it can.
+
 ## Watching live games for
 
 Moved from BACKLOG (2026-10-04; the last four on 2026-10-09): each of these is open only until

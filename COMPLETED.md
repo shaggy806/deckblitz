@@ -3347,6 +3347,19 @@ then `git log --grep`, before starting. This file starts on 2026-10-14; anything
 
 ## Bots
 
+- **The bot audit's fixes, step 5, sub-step 5: the sequencing rules retired, and the step's
+  A/B** (2026-11-10; `6b51bd9a7`, `ae27b5c70`, `3dfe7c9cd`, `aa3218a45`;
+  `docs/plans/bot-audit-fixes.md`, *As built*): v2 no longer asks `reducerFirst`,
+  `payoffBeforeWipe`, `hideawayFirst` or `holdsForNextSpell` (v1 keeps them), and
+  `holdsTapForCombat`, `followUps`, `scoreFrom` and `FOLLOW_UP_SIMULATIONS` are deleted: the
+  turn planner finds those lines (`bot:diff`: 8 of 12,656 decisions for the reducer rule, none
+  clearly wrong; 0 for the others). "Only land" stays, with the scenario that fails without
+  it (a land held all turn behind the turn's spells). The A/B, new bot against the bot before
+  step 5 at the live budget (`bot:ab --budget live`, new): level, 26.7% [22.6, 31.2] over 400
+  games. It found a live crash: v2's convoke casts paid generic with every creature, and
+  played unscored under a clock threw "cannot pay the cost" (a room stops); they take the
+  offer's proved payment now. Gate 222. **Every step of the audit's plan is built.** This
+  also closes the old "follow-up search's next steps" item.
 - **The bot audit's fixes, step 5, sub-step 4: an interaction is scored on the player it hits**
   (2026-11-10; `8a141debe`; `docs/plans/bot-audit-fixes.md`, *As built*): a counterspell,
   removal or a wipe (`bot/interaction.ts`: a target an opponent controls, or a mass effect)
