@@ -25,15 +25,9 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   the navigation, in the same yellow as "Create a game", worded "Have a deck copied? Click here to blitz!".
   When the clipboard is refused, the paste form opens with its Blitz button just below the fold at 768px
   (top at 770, the page scrolls).
-- **Blitz starts an incomplete deck without a word** (found 2026-11-02). A 4-card list started a game with
-  an empty library, and the notice only spoke of the one card left out. The lobby's default is "Any deck"
-  too, so this may want a warning rather than a refusal.
-- **The lobby doesn't show that Ready is the next step** (found 2026-11-02). Start Game is disabled with
-  "Waiting for everyone to ready up…", and Ready is drawn as a plain button. An open seat's "Pick a deck"
-  and the small "Add bot" compete with it, and starting life shows both the 20/30/40 buttons and a field.
-- **Library search only matches exact phrases** (found 2026-11-02). "dragon" finds 519 and "flying" 3902,
-  but "flying dragon" and "dragon flying" find 0, as does "atraxa praetors", and the box advertises name, type
-  or rules text. Matching every word would fit. The deck builder's search wasn't checked.
+- **The lobby's starting life shows two controls** (found 2026-11-02). Starting life shows both the 20/30/40
+  buttons and a field, and the small "Add bot" sits close under an open seat's "Pick a deck". (Ready is drawn as
+  the primary button since 2026-11-11.)
 - **The library can't sort by release date** (asked 2026-11-07). The user wants release date as a sort option.
   `client/src/library/LibraryPage.tsx`'s `SORTS` has edhrec, name, mana, color and type; the set list
   already carries each set's `releasedAt`.
@@ -202,10 +196,6 @@ Soulbond (rule 702.95, batch 185) pairs two creatures; the engine's view gives e
 grants (Silverblade Paladin's double strike on both), not which two are paired, which matters
 when two soulbond creatures are out or a partner is about to leave. A small link marker on both
 cards (hovering one highlights the other, as an Aura's host is) would do.
-
-**Split cards look like double-faced cards in the library**
-
-The user, 2026-10-28: "the display for split cards in the library is odd. Presents them as mdfcs." A split card (rule 709) is one card with two halves side by side, not two faces; the library page (`client/src/library/LibraryPage.tsx`) shows it the way it shows a modal double-faced card.
 
 **X is picked before targets, blind to a target's cost reduction**
 
