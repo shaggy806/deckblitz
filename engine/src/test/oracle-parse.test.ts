@@ -17029,6 +17029,24 @@ describe("a ward cost read as the ability resolves (rules 702.21a, 608.2h)", () 
   });
 });
 
+describe("a floor on a spell's total cost (Trinisphere, rule 601.2f)", () => {
+  it("each spell that would cost less than three mana costs three, while untapped", () => {
+    const sphere = parseFace(
+      {
+        name: "Trinisphere",
+        type_line: "Artifact",
+        mana_cost: "{3}",
+        oracle_text:
+          "As long as this artifact is untapped, each spell that would cost less than three mana to cast costs three mana to cast. (Additional mana in the cost may be paid with any color of mana or colorless mana. For example, a spell that would cost {1}{B} to cast costs {2}{B} to cast instead.)",
+      },
+      { tokenFor: () => null },
+    );
+    expect(sphere.complete).toBe(true);
+    expect(sphere.static[0].costModification).toEqual({ applies: {}, minimumMana: 3 });
+    expect(sphere.static[0].condition).toEqual({ kind: "source", filter: { tapped: false } });
+  });
+});
+
 describe("the players a batch of attackers attacked, and a player's Nth draw of a turn (Zurzoth, Chaos Rider)", () => {
   const face = (oracle_text: string) =>
     parseFace({ name: "Test Rider", type_line: "Legendary Creature — Devil", mana_cost: "{2}{R}", oracle_text }, { tokenFor: () => null });

@@ -3517,6 +3517,15 @@ export interface StaticAbility extends TypePatch, ColorPatch {
      * (Damping Sphere): read for whoever is casting, where `increaseGeneric`
      * reads from this permanent's side. */
     readonly increasePerOtherSpellByCaster?: number;
+    /** "Each spell that would cost less than three mana to cast costs three
+     * mana to cast" (Trinisphere: `{ applies: {}, minimumMana: 3 }`): an
+     * effect that directly affects the total cost, applied once it has been
+     * determined — after every increase and reduction (rule 601.2f), whatever
+     * cost the spell is cast for (an alternative cost, "without paying its
+     * mana cost"), and before delve, convoke and the like pay for it. A total
+     * whose mana comes to fewer than this many gets the difference as generic
+     * mana; a hybrid or Phyrexian symbol is one mana of it. */
+    readonly minimumMana?: number;
     /** Which casts it reaches, besides `applies` — see {@link SpellCastClause}. */
     readonly when?: SpellCastClause;
     /** Coloured pips added to the cost ("Black spells you cast cost {B} more

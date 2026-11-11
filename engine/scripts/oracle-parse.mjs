@@ -18830,6 +18830,12 @@ function parseStatic(line, text) {
     const inner = parseStatic(rest.charAt(0).toUpperCase() + rest.slice(1), text);
     if (inner !== null && inner.condition === undefined) return { ...inner, condition };
   }
+  // "Each spell that would cost less than three mana to cast costs three mana
+  // to cast" (Trinisphere, under "As long as ~ is untapped"): a floor on the
+  // total cost once it's determined (rule 601.2f).
+  if ((m = /^Each spell that would cost less than (two|three|four|five) mana to cast costs \1 mana to cast\.$/.exec(line))) {
+    return { affects: { scope: "self" }, costModification: { applies: {}, minimumMana: NUMBERS[m[1]] }, text };
+  }
   // "Nontoken creatures you control have riot" (Rhythm of the Wild, Uncivil
   // Unrest): asked of each as it enters (rule 614.12).
   if (line === "Nontoken creatures you control have riot.") {

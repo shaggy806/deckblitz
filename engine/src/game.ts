@@ -16195,7 +16195,7 @@ export class Game {
     if (perSacrificed !== undefined && def.additionalCost?.sacrificeCount === "x") {
       reduction += perSacrificed * Math.max(0, Math.floor(xValue));
     }
-    return reduceManaCost(
+    const total = reduceManaCost(
       {
         ...base,
         generic: base.generic + tax + base.x * Math.max(0, xValue) + mods.increaseGeneric + targetTax + permissionTax,
@@ -16210,6 +16210,11 @@ export class Game {
       reduction,
       colored,
     );
+    // "Each spell that would cost less than three mana to cast costs three
+    // mana to cast" (Trinisphere): applied to the total once it's determined
+    // (rule 601.2f), the difference as generic mana.
+    const short = mods.minimumMana - cheapestManaAmount(total);
+    return short > 0 ? { ...total, generic: total.generic + short } : total;
   }
 
   /** What `def`'s own `targetCostIncrease` adds with these targets: once,
@@ -16828,7 +16833,15 @@ export class Game {
     targets: readonly (TargetRef | null | undefined)[] | undefined,
     def: CardDefinition,
     xValue: number,
-  ): { increaseGeneric: number; increaseColored: Record<Color, number>; reduceGeneric: number; colored: ColoredReduction[] } {
+  ): {
+    increaseGeneric: number;
+    increaseColored: Record<Color, number>;
+    reduceGeneric: number;
+    colored: ColoredReduction[];
+    /** The most mana any reaching `minimumMana` asks the total to come to. */
+    minimumMana: number;
+  } {
+    let minimumMana = 0;
     let increaseGeneric = 0;
     const increaseColored: Record<Color, number> = { W: 0, U: 0, B: 0, R: 0, G: 0 };
     let reduceGeneric = 0;
@@ -16837,6 +16850,7 @@ export class Game {
       // "Those spells cost {G} less to cast if you paid life this way" (the
       // Defilers): only with that source's optional life paid (rule 601.2b).
       if (mod.optionalLife !== undefined && this.optionalLifePick?.includes(source.id) !== true) continue;
+      if (mod.minimumMana !== undefined) minimumMana = Math.max(minimumMana, mod.minimumMana);
       let times = mod.perTarget === true ? targetCount : 1;
       if (isTargetKeyed(mod)) {
         if (targets !== undefined) {
@@ -16897,7 +16911,7 @@ export class Game {
       // Rule 702.41a: {1} less for each one its caster controls now, as it's cast.
       if (grant.affinityFor !== undefined) reduceGeneric += this.countBattlefieldMatching(player, grant.affinityFor);
     }
-    return { increaseGeneric, increaseColored, reduceGeneric, colored };
+    return { increaseGeneric, increaseColored, reduceGeneric, colored, minimumMana };
   }
 
   /** The `costModification` statics that reach `cardId` as `player` casts it,

@@ -11937,4 +11937,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: [{ bf: [] }, { bf: [] }, { bf: [] }],
     }),
   ),
+  // --- A floor on a spell's total cost (2026-11-11, the rank goal) ---
+  preset(
+    'Trinisphere: a one-mana spell costs three',
+    board({
+      you: { bf: ['Mountain*3'], hand: ['Lightning Bolt', 'Ornithopter'] },
+      opp: { bf: ['Trinisphere'] },
+    }),
+  ),
 ]

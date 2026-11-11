@@ -322,6 +322,20 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A floor on a spell's total cost — built 2026-11-11
+
+The key `cost:minimum-total-cost` (the rank goal). `costModification`'s
+`minimumMana`: an effect that directly affects the total cost, applied once
+the total is determined (rule 601.2f) — after every increase and reduction,
+on whatever cost the spell is cast for (an alternative cost, "without paying
+its mana cost"), with an announced X counted, and before delve, convoke and
+the like pay for it. `Game.castingCostOf` adds the difference as generic mana
+when the total's mana (`cheapestManaAmount`: a hybrid or Phyrexian symbol is
+one) comes to less. Trinisphere (rank 5360), under the existing "as long as
+this is untapped" condition. A cost with one or two twobrid symbols and
+nothing else would need the floor read per way of paying them; no printed card
+has fewer than three.
+
 ### "Those players" a batch of attackers attacked — built 2026-11-11
 
 The key `effect:attacked-players-scope` (the rank goal). Two `PlayerScope`

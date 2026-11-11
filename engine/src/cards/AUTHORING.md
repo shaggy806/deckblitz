@@ -5681,6 +5681,12 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
     (Derelor, the Leeches): coloured pips added before any reduction (rule
     601.2f), to an alternative cost as well (118.9d). The mirror of
     `reduceColored`.
+  - `minimumMana: 3` — "each spell that would cost less than three mana to
+    cast costs three mana to cast" (Trinisphere: `{ applies: {}, minimumMana:
+    3 }` under `condition: { kind: "source", filter: { tapped: false } }`): a
+    floor on the total cost once it's determined (rule 601.2f), after every
+    increase and reduction and on a free or alternative cost too, the
+    difference added as generic mana; delve and convoke can pay it.
   - `caster: "you" | "opponent"` — "spells you cast" / "spells your
     opponents cast", judged against whoever is actually casting it (not the
     card's controller, so a card cast out of someone else's graveyard is the
