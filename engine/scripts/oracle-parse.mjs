@@ -21381,6 +21381,21 @@ function parseStatic(line, text) {
   if (line === "You may cast spells from the top of your library by sacrificing a nonland permanent in addition to paying their other costs.") {
     return { affects: { scope: "self" }, mayPlay: { from: "library-top", sacrifice: { notTypes: ["land"] } }, text };
   }
+  // "You may cast creature spells from the top of your library." (Eladamri,
+  // Korvecdal); "You may cast noncreature spells from the top of your library.
+  // If you cast a spell this way, you may cast it as though it had flash."
+  // (Elsha of the Infinite): the flash is the permission's own (`flash`).
+  {
+    const top = /^You may cast (.+?) spells from the top of your library\.( If you cast a spell this way, you may cast it as though it had flash\.)?$/.exec(line);
+    const filter = top === null ? null : parseTypePhrase(top[1]);
+    if (top !== null && filter !== null) {
+      return {
+        affects: { scope: "self" },
+        mayPlay: { from: "library-top", filter, ...(top[2] !== undefined ? { flash: true } : {}) },
+        text,
+      };
+    }
+  }
   // "Once each turn, you may cast a creature spell with power 2 or less from
   // the top of your library." (Assemble the Players).
   if ((m = /^Once each turn, you may cast an? (.+?) spell from the top of your library\.$/.exec(line))) {

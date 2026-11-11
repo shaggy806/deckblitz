@@ -8399,6 +8399,18 @@ describe("counters put or removed this way", () => {
     expect(ability.effect).toEqual({ kind: "put-onto-battlefield", target: 0 });
   });
 
+  it("reads Elsha of the Infinite's flash for spells cast from the top of the library", () => {
+    const elsha = face(
+      "Elsha of the Infinite",
+      "Legendary Creature — Djinn Monk",
+      "Prowess (Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn.)\nYou may look at the top card of your library any time.\nYou may cast noncreature spells from the top of your library. If you cast a spell this way, you may cast it as though it had flash.",
+    );
+    expect(elsha.complete).toBe(true);
+    expect(elsha.static.map((s: { mayPlay?: unknown }) => s.mayPlay).filter((p: unknown) => p !== undefined)).toEqual([
+      { from: "library-top", filter: { notTypes: ["creature"] }, flash: true },
+    ]);
+  });
+
   it("reads Canoptek Wraith's basics with the same name as the chosen land", () => {
     const wraith = face(
       "Canoptek Wraith",

@@ -2278,7 +2278,8 @@
   "effect:copy-starting-loyalty",
   "condition:noted-life-total",
   "condition:noted-life-total",
-  "condition:filter-same-name-as-chosen"
+  "condition:filter-same-name-as-chosen",
+  "zone:cast-from-library-top-flash"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

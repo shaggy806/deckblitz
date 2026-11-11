@@ -80,6 +80,7 @@ const TERMS = [
   "yourTurnOnly",
   "gate",
   "sourceDid",
+  "flash",
   "exileAfter",
   "gainsHaste",
   "landsEnterTapped",

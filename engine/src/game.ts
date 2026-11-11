@@ -18763,6 +18763,9 @@ export class Game {
       // flash" (Primal Prayers): cast for that alternative cost, it may
       // begin any time (601.3c).
       !(altCost && this.alternativeCostOf(cardId, def, via, player)?.flash === true) &&
+      // The same of a permission (Elsha of the Infinite's "from the top of
+      // your library"): only a cast under that permission, paid its way.
+      !this.permissionGivesFlash(player, cardId, face ?? 0, via, free, altCost, Math.max(0, Math.floor(xValue)), graveyardGrant) &&
       // "You may cast this spell as though it had flash. If you cast it any
       // time a sorcery couldn't have been cast, … sacrifices it" (Spider
       // Climb) — `flashSacrificeOwed` says which casts owe the sacrifice.
@@ -21150,8 +21153,9 @@ export class Game {
             player,
             cardId,
             face,
-            free ? "free" : altCost && this.playLifeMode(player, cardId, face) !== null ? "life" : "paid",
+            this.permissionCastMode(player, cardId, face, free, altCost),
             chosenX,
+            this.castNeedsPermissionFlash(player, cardId, def, face, kicked),
           )
         : undefined;
     if (underPermission !== undefined) this.spendPlay(underPermission);
@@ -42526,8 +42530,12 @@ controlledBy,
     face: number,
     mode: "paid" | "free" | "life",
     x = 0,
+    flashOnly = false,
   ): PlayOption | undefined {
     const options = this.playOptions(player, cardId, face, x).filter((option) => {
+      // A cast only a permission's "as though it had flash" lets begin is
+      // under one that says so.
+      if (flashOnly && option.terms.flash !== true) return false;
       const cost = this.optionCostMode(option, player, cardId);
       if (mode === "free") return cost === "free-only" || cost === "free-may";
       if (mode === "life") return cost === "life";
@@ -46166,6 +46174,51 @@ controlledBy,
     kicked: boolean | number,
   ): boolean {
     if (via === "effect" || via === "sneak" || via === "plot") return false;
+    if (def.types.includes("instant") || def.keywords.includes("flash")) return false;
+    if (kicked && def.kicker?.flash === true) return false;
+    if (this.withFace(cardId, face ?? 0, () => this.castsAsThoughFlash(player, cardId))) return false;
+    return this.whyNotSorcerySpeed(player, "cast it") !== null;
+  }
+
+  /** How a permission cast is paid, as {@link chosenPlayOption} sorts the
+   * permissions: without paying, for life, or for its cost. */
+  private permissionCastMode(player: PlayerId, cardId: ObjectId, face: number, free: boolean, altCost: boolean): "paid" | "free" | "life" {
+    return free ? "free" : altCost && this.playLifeMode(player, cardId, face) !== null ? "life" : "paid";
+  }
+
+  /** "If you cast a spell this way, you may cast it as though it had flash"
+   * (`PlayTerms.flash` — Elsha of the Infinite; rules 601.3c, 702.8a):
+   * whether a permission this cast could be under, paid the way it's paid,
+   * says so. From a graveyard, the permission the cast names. */
+  private permissionGivesFlash(
+    player: PlayerId,
+    cardId: ObjectId,
+    face: number,
+    via: CastVia | undefined,
+    free: boolean,
+    altCost: boolean,
+    x: number,
+    graveyardGrant: GraveyardGrant | undefined,
+  ): boolean {
+    if (via === "graveyard-permission") {
+      return this.findGraveyardGrant(player, cardId, face, graveyardGrant)?.permission.flash === true;
+    }
+    if (via !== "impulse" && via !== "library-top" && via !== "other-hand") return false;
+    const mode = this.permissionCastMode(player, cardId, face, free, altCost);
+    return this.chosenPlayOption(player, cardId, face, mode, x, true) !== undefined;
+  }
+
+  /** Whether a permission cast beginning now leans on its permission's
+   * `flash`: a sorcery couldn't be cast now, and neither its own timing nor
+   * another "as though it had flash" lets this be — so the permission it's
+   * under is one that says so (rule 601.3: the caster's choice of which). */
+  private castNeedsPermissionFlash(
+    player: PlayerId,
+    cardId: ObjectId,
+    def: CardDefinition,
+    face: number | undefined,
+    kicked: boolean | number,
+  ): boolean {
     if (def.types.includes("instant") || def.keywords.includes("flash")) return false;
     if (kicked && def.kicker?.flash === true) return false;
     if (this.withFace(cardId, face ?? 0, () => this.castsAsThoughFlash(player, cardId))) return false;

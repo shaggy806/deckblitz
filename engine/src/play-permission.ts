@@ -14,7 +14,8 @@
  * - {@link SelfPlay} on a card definition, its own text (rule 113.6f).
  *
  * `Game.playOptions` reads all of them. A permission answers only "from
- * there": timing, targets, payment and prohibitions stay the cast's own.
+ * there": timing (but for `flash`), targets, payment and prohibitions stay the
+ * cast's own.
  */
 
 import type { CardType, StaticCondition } from "./cards/define.js";
@@ -74,6 +75,11 @@ export type PlayFrom = "graveyard" | "exile" | "library-top" | "hand";
  * - `gate`: while a condition holds, read live.
  * - `sourceDid`: only during a turn the holder did this with the source, in the
  *   stint it was in then, whatever has become of it since.
+ * - `flash`: "if you cast a spell this way, you may cast it as though it had
+ *   flash" (Elsha of the Infinite): the one thing a permission says about
+ *   timing. A cast under this permission may begin any time its caster has
+ *   priority (rules 601.3c, 702.8a); the same card under another permission
+ *   that reaches it (Bolas's Citadel's, for life) keeps its own timing.
  *
  * Afterwards:
  * - `exileAfter`: "if it would be put into a graveyard, exile it instead";
@@ -113,6 +119,7 @@ export interface PlayTerms {
   readonly yourTurnOnly?: boolean;
   readonly gate?: StaticCondition;
   readonly sourceDid?: "attacked" | "lore-counter" | "attacked-with-a-token";
+  readonly flash?: true;
 
   readonly exileAfter?: boolean | "instants-and-sorceries";
   readonly gainsHaste?: boolean;
@@ -272,6 +279,7 @@ const PLAY_GRANT_KEYS = [
   "yourTurnOnly",
   "gate",
   "sourceDid",
+  "flash",
   "exileAfter",
   "gainsHaste",
   "landsEnterTapped",
