@@ -24,8 +24,8 @@ to find out which, card by card. **Rule zero governs everything here**
 (`engine/src/cards/AUTHORING.md` §0): never author a card the engine can't
 run *exactly*.
 
-The authoring mechanics are `author-by-set`'s: read its `SKILL.md` steps 2–3
-and `agent-batches.md` (agents, staging, briefs, integrating, verifying,
+The authoring mechanics are shared: read `.claude/authoring/authoring-steps.md` (steps 2–3)
+and `.claude/authoring/agent-batches.md` (agents, staging, briefs, integrating, verifying,
 landing). Only what's below differs.
 
 **Sessions run in series** with `build-family`'s (one session at a time,
@@ -89,7 +89,7 @@ would.
 
 ## 3. Test, record, ship
 
-As `author-by-set` step 3, with these differences:
+As step 3 of `.claude/authoring/authoring-steps.md`, with these differences:
 
 - **Test file**: `engine/src/test/freed-b<N>.test.ts` for the lead's cards;
   each agent's `freed-b<N><LETTER>.test.ts` (`fill-brief.mjs` names them from

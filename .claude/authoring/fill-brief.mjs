@@ -6,7 +6,7 @@
 // `git reset --hard` on the main checkout once, 2026-10-25).
 //
 // Usage (from the repo root):
-//   node .claude/skills/author-by-set/fill-brief.mjs --staging <dir> \
+//   node .claude/authoring/fill-brief.mjs --staging <dir> \
 //     --set-names "Eldritch Moon (EMN, 2016-07-22), the rest of the set" \
 //     --set-code EMN --test-prefix set-emn-batch-1 [--base <commit>]
 //

@@ -1,7 +1,7 @@
 # Authoring a batch with parallel agents
 
 The procedure every authoring skill uses once a batch has more cards than the
-lead should author alone — `author-by-set`, `author-by-set-oldest`, `author-top-cards` and
+lead should author alone — `author-freed`, `author-flagged`, `author-top-cards` and
 `author-top-commanders` alike. The agents author **cards only**; the lead
 builds every engine feature the batch needs (and authors the cards that test
 it). When the batch has a feature to build, the agents start first, on the
@@ -137,7 +137,7 @@ six-way contention — so the lead does this once:
    in `<staging>/notes.md` — the feature just built and its shapes (with a
    pool card to copy), the batch's other mechanics and where the pool already
    has them, what's known blocked (a need key to use), the tokens already
-   made — then `node .claude/skills/author-by-set/fill-brief.mjs --staging
+   made — then `node .claude/authoring/fill-brief.mjs --staging
    <staging> --set-names "…" --set-code <CODE> --test-prefix
    set-<code>-batch-<N>` writes every `group-<x>/brief.md` from
    **`agent-brief.md`** (its placeholders: `GROUP_LETTER`, `SET_NAMES`,
@@ -175,7 +175,7 @@ six batches back to back averaged ~480K tokens a turn over 536 turns — 256M
 input, more than its 15 agents together (153M for 471 cards). So:
 
 - **One batch per session.** Ship it, report, and stop: the next batch is the
-  next session's (`/author-by-set` again), which starts under 100K. Before
+  next session's (the same skill again), which starts under 100K. Before
   stopping, leave the hand-off in `BACKLOG.md`'s line for the skill: the next
   set and its left count, and any feature already researched for it (its
   cards' count, the code sites to mirror). The next session reads that line

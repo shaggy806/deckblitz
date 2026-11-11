@@ -1,6 +1,6 @@
 ---
 name: author-top-cards
-description: Add the next batch of cards to the pool, going down the Commander-legal cards by EDHREC rank (most-played first) — recheck cards whose blockers have been built, pick the next untriaged ones by rank, build the engine feature that unblocks the most when one clearly leads, author every card the engine runs faithfully, record what blocks the rest, test, and ship the batch. Use when the user says to work on cards, author cards, do the next card batch, grow the pool, continue the card backlog, or runs this skill with no other instructions.
+description: Triage and author the next untriaged Commander-legal cards by EDHREC rank (the tail past the top 5000; `cards:needs -- --next`) — author every card the engine runs faithfully as it is, leaving engine features to `build-family` and already-freed cards to `author-freed`, record what blocks the rest, test, and ship the batch. Use when the user says to triage or author the next untriaged cards by rank, or runs this skill with no other instructions; for building what blocked cards need use `build-family`, for cards those features freed `author-freed`.
 ---
 
 # Add the next card batch
@@ -109,7 +109,7 @@ Target 30-50 cards. **Past ~15 authorable cards, use parallel agents**:
 once (the feature and the cards that test it first, one scaffold run, tokens
 made once, drafts moved into staged groups, briefs with `--analogs 2 --width
 300`, the digest) and reading every file they write —
-**`.claude/skills/author-by-set/agent-batches.md`** is the whole procedure,
+**`.claude/authoring/agent-batches.md`** is the whole procedure,
 with `agent-brief.md` beside it (`SET_NAMES` "EDHREC ranks <a>–<b>",
 `SET_CODE` "batch <N>", `TEST_FILE_PREFIX` `top10000-batch-<N>`). Each card,
 whoever writes it:
@@ -173,7 +173,7 @@ A few lines: how many authored (with the rank range), how many blocked and
 the feature blocking the most of them, anything built or fixed. Then offer the
 next batch — don't start it unasked.
 
-**One batch per session** (`.claude/skills/author-by-set/agent-batches.md`, "One batch per session"): after
+**One batch per session** (`.claude/authoring/agent-batches.md`, "One batch per session"): after
 the push and the report, stop. Leave the hand-off in this skill's `BACKLOG.md`
 line — the next batch, and any feature already researched for it — and offer
 the next batch as a new session (`/author-top-cards`), not in this one —

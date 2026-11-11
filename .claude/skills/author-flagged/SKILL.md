@@ -62,7 +62,7 @@ The untriaged and every-need-built cards, together as one batch.
    It then joins the blocked cards for step 2.
 3. **Who authors**: up to ~15 authorable cards, yourself; past that,
    `card-author` agents in groups of 60–75, as
-   `.claude/skills/author-by-set/agent-batches.md` sets out
+   `.claude/authoring/agent-batches.md` sets out
    (`fill-brief.mjs --set-names "cards flagged to build ASAP" --set-code ASAP
    --test-prefix asap-b<N>`).
 

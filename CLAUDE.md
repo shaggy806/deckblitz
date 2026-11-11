@@ -59,17 +59,12 @@ for:
   Oracle EDHREC ranks past it.
   **The work now is building the remaining need keys** (`build-family`, `--by-rank`): the freed
   cards' queue (`cards:needs -- --stale`, authored by the `author-freed` skill, the work from
-  2026-11-04) was emptied 2026-11-05 by a parallel round, B262–B265; it refills as families land. The set walks below are done.
-  **The authoring priority before that was set by set, whole sets, newest set first** (the
-  `author-by-set` skill since 2026-10-14; `npm run cards:sets -w engine -- --sets | --next 60`):
-  every set's Commander-legal first printings, going back first over the sets whose top half was
-  walked before; and the same walk the other way, oldest set first and forward in time (the
-  `author-by-set-oldest` skill since 2026-10-21; `cards:sets -- --oldest`), until the two meet.
-  Several walks can run at once, each in its own cloud session on a range of sets of its own
-  (the `author-walks-parallel` skill since 2026-10-25), or each in its own local session and
-  worktree on this PC (the `author-walks-local` skill since 2026-10-26), sharing its memory
-  through `scripts/machine-slots.mjs`: typechecks and builds take a slot, a verify the whole
-  machine.
+  2026-11-04) was emptied 2026-11-05 by a parallel round, B262–B265; it refills as families land.
+  **The set walks are done** (whole sets, newest first and oldest first, October-November 2026;
+  their skills were retired 2026-11-10, and what the other authoring skills shared with them is in
+  `.claude/authoring/`); `npm run cards:sets -w engine -- --sets` still lists each set's cards
+  left. Several sessions on one PC share its memory through `scripts/machine-slots.mjs`:
+  typechecks and builds take a slot, a verify the whole machine.
   The other order is EDHREC rank across all sets (the `author-top-cards` skill;
   `npm run cards:needs -w engine -- --next 60` lists the next untriaged cards by rank, `-- --rank`
   what blocks the most triaged ones). **Cards the user flags "Build ASAP"** in the library's

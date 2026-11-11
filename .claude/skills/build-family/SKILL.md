@@ -191,8 +191,9 @@ cards>`.
   - `docs/architecture/engine.md`: entries for the files whose shape
     changed.
 - **Verify** once, after the last family: `git fetch origin main && git
-  merge origin/main`, then `npm run verify`. An engine change triggers the
-  bot gate and the server and client suites, so expect a full run's length.
+  merge origin/main`, then `npm run verify -- --full`: a quick run picks the
+  server and client suites by path alone (`server/`, `client/`, `protocol/`),
+  so it would skip them for an engine change, which the server's tests run on.
   After a fix, `--only <step>`.
 - **Land on `main`**: merge `origin/main` again if it moved. If the merge
   brought anything, run `npm run verify -- --landing`. Then `git push origin

@@ -1,6 +1,6 @@
 ---
 name: author-top-commanders
-description: Author the next batch of the top-500 commanders (engine/src/cards/top-commanders.txt, ranked by decks run as commander) — take the next feature in the commander gaps' greedy build order, build it, then author every commander (and any top-5000 card) it unblocks, test, and ship. Use when the user says to work on commanders, author commanders, do the next commander batch, close the commander gap, or runs this skill with no other instructions.
+description: Author the next batch of the top-500 commanders (engine/src/cards/top-commanders.txt, ranked by decks run as commander) — take the next feature in the commander gaps' greedy build order, build it, then author every commander (and any top-5000 card) it unblocks, test, and ship. Nearly done (488 of 500 on 2026-11-10): the rest wait on need keys `build-family` also ranks. Use when the user says to work on commanders, author commanders, do the next commander batch, close the commander gap, or runs this skill with no other instructions.
 ---
 
 # Author the next commander batch
@@ -70,7 +70,7 @@ pool's closest analogs per line), `card:find` for an example to copy.
 A feature that unblocks more than ~15 cards (with the top-5000 ones it
 brings): author the commanders and the cards that test the feature yourself,
 then hand the rest to `card-author` agents —
-**`.claude/skills/author-by-set/agent-batches.md`** is the whole procedure,
+**`.claude/authoring/agent-batches.md`** is the whole procedure,
 with `agent-brief.md` beside it (`SET_NAMES` "cards unblocked by <feature>",
 `SET_CODE` "<feature>", `TEST_FILE_PREFIX` `commanders-<feature>-`).
 
