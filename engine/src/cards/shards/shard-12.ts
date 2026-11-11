@@ -272,6 +272,7 @@ import _poolEmberShot from "../pool/ember-shot.js";
 import _poolEmberethPaladin from "../pool/embereth-paladin.js";
 import _poolEmbodimentOfAgonies from "../pool/embodiment-of-agonies.js";
 import _poolEmergencyPowers from "../pool/emergency-powers.js";
+import _poolEmergentUltimatum from "../pool/emergent-ultimatum.js";
 import _poolEmpressGalina from "../pool/empress-galina.js";
 import _poolEnchantedBeing from "../pool/enchanted-being.js";
 import _poolEncroach from "../pool/encroach.js";
@@ -1284,6 +1285,7 @@ const shard: CardShard = {
     _poolEmberethPaladin,
     _poolEmbodimentOfAgonies,
     _poolEmergencyPowers,
+    _poolEmergentUltimatum,
     _poolEmpressGalina,
     _poolEnchantedBeing,
     _poolEncroach,

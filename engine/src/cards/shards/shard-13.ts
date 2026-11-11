@@ -436,6 +436,7 @@ import _poolKeeperOfTheMind from "../pool/keeper-of-the-mind.js";
 import _poolKezzerdrix from "../pool/kezzerdrix.js";
 import _poolKhanVengefulHeart from "../pool/khan-vengeful-heart.js";
 import _poolKiboUktabiPrince from "../pool/kibo-uktabi-prince.js";
+import _poolKillerService from "../pool/killer-service.js";
 import _poolKindlyAncestor from "../pool/kindly-ancestor.js";
 import _poolKiorasFollower from "../pool/kioras-follower.js";
 import _poolKishlaTrawlers from "../pool/kishla-trawlers.js";
@@ -1423,6 +1424,7 @@ const shard: CardShard = {
     _poolKezzerdrix,
     _poolKhanVengefulHeart,
     _poolKiboUktabiPrince,
+    _poolKillerService,
     _poolKindlyAncestor,
     _poolKiorasFollower,
     _poolKishlaTrawlers,

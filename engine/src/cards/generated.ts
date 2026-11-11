@@ -8139,6 +8139,7 @@ import _poolEmergencyWeld from "./pool/emergency-weld.js";
 import _poolEmergentGrowth from "./pool/emergent-growth.js";
 import _poolEmergentHaunting from "./pool/emergent-haunting.js";
 import _poolEmergentSequence from "./pool/emergent-sequence.js";
+import _poolEmergentUltimatum from "./pool/emergent-ultimatum.js";
 import _poolEmergentWoodwurm from "./pool/emergent-woodwurm.js";
 import _poolEmeriaAngel from "./pool/emeria-angel.js";
 import _poolEmeriaCaptain from "./pool/emeria-captain.js";
@@ -14598,6 +14599,7 @@ import _poolKillSwitch from "./pool/kill-switch.js";
 import _poolKillZoneAcrobat from "./pool/kill-zone-acrobat.js";
 import _poolKillerBees from "./pool/killer-bees.js";
 import _poolKillerInstinct from "./pool/killer-instinct.js";
+import _poolKillerService from "./pool/killer-service.js";
 import _poolKillerWhale from "./pool/killer-whale.js";
 import _poolKiller from "./pool/killer.js";
 import _poolKillersMask from "./pool/killers-mask.js";
@@ -20273,6 +20275,7 @@ import _poolPrimoTheUnbounded from "./pool/primo-the-unbounded.js";
 import _poolPrimocEscapee from "./pool/primoc-escapee.js";
 import _poolPrimordialGnawer from "./pool/primordial-gnawer.js";
 import _poolPrimordialHydra from "./pool/primordial-hydra.js";
+import _poolPrimordialMist from "./pool/primordial-mist.js";
 import _poolPrimordialOoze from "./pool/primordial-ooze.js";
 import _poolPrimordialPachyderm from "./pool/primordial-pachyderm.js";
 import _poolPrimordialPlasm from "./pool/primordial-plasm.js";
@@ -40580,6 +40583,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolEmergentGrowth,
   _poolEmergentHaunting,
   _poolEmergentSequence,
+  _poolEmergentUltimatum,
   _poolEmergentWoodwurm,
   _poolEmeriaAngel,
   _poolEmeriaCaptain,
@@ -47039,6 +47043,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKillZoneAcrobat,
   _poolKillerBees,
   _poolKillerInstinct,
+  _poolKillerService,
   _poolKillerWhale,
   _poolKiller,
   _poolKillersMask,
@@ -52714,6 +52719,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolPrimocEscapee,
   _poolPrimordialGnawer,
   _poolPrimordialHydra,
+  _poolPrimordialMist,
   _poolPrimordialOoze,
   _poolPrimordialPachyderm,
   _poolPrimordialPlasm,
@@ -73034,6 +73040,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/emergent-growth": _poolEmergentGrowth,
   "pool/emergent-haunting": _poolEmergentHaunting,
   "pool/emergent-sequence": _poolEmergentSequence,
+  "pool/emergent-ultimatum": _poolEmergentUltimatum,
   "pool/emergent-woodwurm": _poolEmergentWoodwurm,
   "pool/emeria-angel": _poolEmeriaAngel,
   "pool/emeria-captain": _poolEmeriaCaptain,
@@ -79493,6 +79500,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/kill-zone-acrobat": _poolKillZoneAcrobat,
   "pool/killer-bees": _poolKillerBees,
   "pool/killer-instinct": _poolKillerInstinct,
+  "pool/killer-service": _poolKillerService,
   "pool/killer-whale": _poolKillerWhale,
   "pool/killer": _poolKiller,
   "pool/killers-mask": _poolKillersMask,
@@ -85168,6 +85176,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/primoc-escapee": _poolPrimocEscapee,
   "pool/primordial-gnawer": _poolPrimordialGnawer,
   "pool/primordial-hydra": _poolPrimordialHydra,
+  "pool/primordial-mist": _poolPrimordialMist,
   "pool/primordial-ooze": _poolPrimordialOoze,
   "pool/primordial-pachyderm": _poolPrimordialPachyderm,
   "pool/primordial-plasm": _poolPrimordialPlasm,
