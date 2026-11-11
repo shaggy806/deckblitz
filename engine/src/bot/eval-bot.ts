@@ -1134,15 +1134,9 @@ export class EvalBotController extends HeuristicBotController {
     // A cost reducer before what it reduces (Urza's Incubator, then Miirym)
     // is the turn planner's to find: v1's `reducerFirst` is not asked here
     // (the bot audit's Q1, retired 2026-11-10).
-    // A hideaway land's free card goes before a spell that would tap the
-    // land to pay for it, when the spell still fits afterwards
-    // (`hideawayFirst`): the land was last to be scored, and Mosswort
-    // Bridge's free Hit the Mother Lode was lost to Utvara Hellkite's mana.
-    const hideaway = this.hideawayFirst(view, candidates);
-    if (hideaway !== null) {
-      this.lastDecision = audit("priority", null, "hideaway first");
-      return this.acted(view, hideaway);
-    }
+    // Nor is `hideawayFirst` (Mosswort Bridge's free card before the spell
+    // that would tap the land): the capture it was written for (AN5SU t22)
+    // gates, and passes by the plan.
     const lands = candidates.filter((a) => a.type === "play-land" && a.face === undefined);
     const fetches = candidates.filter(
       (a) =>
@@ -1187,6 +1181,9 @@ export class EvalBotController extends HeuristicBotController {
       this.lastDecision = audit("priority", null, "fetch");
       return fetch;
     }
+    // Load-bearing (the bot audit's Q1, tried off 2026-11-10): searched
+    // against the turn's spells, a land was played after them or not at
+    // all. Scenario: "plays its only land before the turn's spell".
     if (lands.length === 1) {
       this.lastDecision = audit("priority", null, "only land");
       return lands[0];
@@ -1603,9 +1600,10 @@ export class EvalBotController extends HeuristicBotController {
         // An {X} ability affordable only at X = 0, whose effect is all X
         // (`inertAtZeroX`): Necropolis Fiend's -0/-0.
         if (legal.kind === "activate-ability" && this.inertAtZeroX(legal)) continue;
-        // A copy of the next instant or sorcery with none to cast
-        // (`holdsForNextSpell`): Adaptive Training Post's counters wasted.
-        if (this.holdsForNextSpell(legal, view.legalActions())) continue;
+        // A copy of the next instant or sorcery with none to cast (Adaptive
+        // Training Post's counters) is left to the search: spent for nothing
+        // it scores no better than passing, which keeps every tie (v1's
+        // `holdsForNextSpell` is not asked here; its scenario gates).
         // An until-end-of-turn pump where it can't matter (`wastedNow`): the
         // rollout plays our own seat passively, so mana it would have cast
         // spells with looks free to spend, and v2 pumped away its upkeep.

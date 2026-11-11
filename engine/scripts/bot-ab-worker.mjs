@@ -7,14 +7,19 @@ import { parentPort, workerData } from "node:worker_threads";
 import { importBuild } from "./baseline-build.mjs";
 import { tableFor } from "./bot-seating.mjs";
 
-const { working, baseline, bot, players } = workerData;
+const { working, baseline, bot, players, budget } = workerData;
 const W = await importBuild(working);
 const B = await importBuild(baseline);
 const regW = W.createDefaultRegistry();
 const regB = B.createDefaultRegistry();
 
+// --budget: a wall-clock budget per decision, each build's own live figure for `live`.
+const optionsOf = (lib) =>
+  budget == null ? {} : { timeBudgetMs: budget === "live" ? lib.LIVE_BOT_BUDGET_MS : Number(budget) };
 const make = (lib, registry, seat) =>
-  bot === "v1" ? new lib.HeuristicBotController(seat, registry) : new lib.EvalBotController(seat, registry, {});
+  bot === "v1"
+    ? new lib.HeuristicBotController(seat, registry)
+    : new lib.EvalBotController(seat, registry, optionsOf(lib));
 
 parentPort.on("message", (seed) => {
   const { seats, measuredSeat, decks } = tableFor(seed, players);

@@ -4922,8 +4922,11 @@ const SCENARIOS: readonly BotScenario[] = [
     rule: "A copy of the next instant or sorcery is spent only with one to cast: with none, three counters buy nothing.",
     position(registry) {
       // Capture HB5MR t31 (2026-10-05): carol removed the Post's three
-      // counters with no instant or sorcery to follow. No gate scenario made
-      // `holdsForNextSpell` fire (the bot audit's Q1); this one does.
+      // counters with no instant or sorcery to follow. v1's
+      // `holdsForNextSpell` dropped the activation before the search; no gate
+      // scenario made it fire (the bot audit's Q1), and on this one the
+      // search passes without it (spent for nothing, the activation ties
+      // with passing), so v2 no longer asks the rule and this holds the play.
       const game = table(registry, [A, B], A);
       lands(game, "Island", A, 4);
       lands(game, "Forest", B, 4);
@@ -4943,20 +4946,26 @@ const SCENARIOS: readonly BotScenario[] = [
     },
   }),
   asked({
-    name: "plays its only land with more lands than it has a use for",
-    rule: "A land drop costs nothing: the one land in hand is played, however many are out.",
+    name: "plays its only land before the turn's spell, though it enters tapped",
+    rule: "A land drop costs nothing: the one land in hand is played, and first, even one that makes no mana this turn.",
     position(registry) {
       // The "only land" rule plays it before any search. No gate scenario
-      // made it fire (the bot audit's Q1): past the evaluation's land cap a
-      // land on the battlefield is worth less than a card in hand, so a
-      // search that weighed the drop against passing would keep it.
+      // made it fire (the bot audit's Q1), and with it off the search
+      // weighed the drop against passing and kept the land: bob cast
+      // Welcoming Vampire and equipped it with Bojuka Bog in hand all turn
+      // (`bot:diff`, 2026-11-10, seed 5 turn 22, this position), and spells
+      // went before the drop in 30 more decisions of six games. So the rule
+      // stays, and this holds it.
       const game = table(registry, [A, B], A);
-      lands(game, "Forest", A, 3);
-      lands(game, "Forest", B, 3);
-      const land = game.debugSpawn("Forest", A, "hand");
-      game.debugSpawn("Grizzly Bears", A, "hand");
-      game.debugSpawn("Centaur Courser", A, "hand");
-      game.debugSpawn("Rumbling Baloth", A, "hand");
+      lands(game, "Plains", A, 3);
+      lands(game, "Forest", A, 2);
+      lands(game, "Forest", B, 5);
+      game.debugSpawn("Swiftfoot Boots", A, "battlefield");
+      game.debugSpawn("Rhox Faithmender", A, "battlefield");
+      const land = game.debugSpawn("Bojuka Bog", A, "hand");
+      for (const name of ["Zetalpa, Primal Dawn", "Feed the Swarm", "Welcoming Vampire", "Protector of the Wastes"]) {
+        game.debugSpawn(name, A, "hand");
+      }
       return {
         game,
         player: A,

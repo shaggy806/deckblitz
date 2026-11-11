@@ -1,6 +1,6 @@
 // The current engine's bot against the same bot at an older commit: one seat
 // on the working build, the rest on the baseline, seeded and seated as
-// `bot:bench` seats them (`bot-seating.mjs`), count budgets.
+// `bot:bench` seats them (`bot-seating.mjs`), count budgets unless --budget.
 //
 //   npm run bot:ab -w engine -- --base origin/main --bot v2 --games 400
 //
@@ -8,7 +8,9 @@
 // --games N (default 400; rounded up to a multiple of --players),
 // --players 2-4 (default 4), --workers N (default cores - 2),
 // --timeout SECONDS per game (default 1500), --out FILE (an NDJSON of every
-// game; rerun the same command to resume it).
+// game; rerun the same command to resume it), --budget MS|live (v2's
+// wall-clock budget per decision on every seat, `live` the rooms' own: games
+// then depend on the machine's load, so keep --workers at 8 or fewer).
 //
 // A game that errors or times out counts as an even share, like a draw, and
 // is listed with its seed so it can be replayed (`npm run bot:replay`).
@@ -31,8 +33,12 @@ const players = Math.min(4, Math.max(2, Number(flag("players", "4"))));
 const games = Math.ceil(Number(flag("games", "400")) / players) * players;
 const workers = Number(flag("workers", String(Math.max(1, os.cpus().length - 2))));
 const timeoutMs = Number(flag("timeout", "1500")) * 1000;
+const budget = flag("budget", null);
 const baseline = baselineDist(base);
-const out = flag("out", join(ROOT, ".scratch", `ab-${bot}-${baseline.sha}-${players}p.ndjson`));
+const out = flag(
+  "out",
+  join(ROOT, ".scratch", `ab-${bot}-${baseline.sha}-${players}p${budget === null ? "" : `-budget-${budget}`}.ndjson`),
+);
 mkdirSync(dirname(out), { recursive: true });
 const working = workingDist();
 
@@ -45,7 +51,8 @@ for (let seed = 1; seed <= games; seed += 1) if (!done.has(seed)) queue.push(see
 console.log(
   `bot:ab — ${bot}, working build vs ${base} (${baseline.sha}), ${players}p, ${games} games` +
     (done.size > 0 ? `, ${done.size} already in ${out}` : "") +
-    `; ${workers} workers`,
+    `; ${workers} workers` +
+    (budget === null ? "" : `; budget ${budget}${budget === "live" ? "" : " ms"} a decision`),
 );
 
 const even = 1 / players;
@@ -77,7 +84,7 @@ const record = (row) => {
 };
 runPool({
   url: new URL("./bot-ab-worker.mjs", import.meta.url),
-  workerData: { working: working.dist, baseline: baseline.dist, bot, players },
+  workerData: { working: working.dist, baseline: baseline.dist, bot, players, budget },
   jobs: queue,
   workers,
   timeoutMs,
