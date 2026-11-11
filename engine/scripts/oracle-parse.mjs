@@ -7701,6 +7701,19 @@ function chosenAndTheRest(text) {
       effect: { kind: "look-and-choose", player: "that-player", zone: "graveyard", min: count, max: count, destination: "stay", leftover: "exile" },
     };
   }
+  // "Put a card you own with a silver counter on it from exile into your
+  // hand" (Karn, Scion of Urza): untargeted, and not a "may".
+  if ((m = /^Put a card you own with an? ([\w+/-]+) counter on it from exile into your hand\.$/.exec(text))) {
+    return {
+      kind: "look-and-choose",
+      zone: "exile",
+      filter: { ownedBy: "you", counters: { kind: m[1].toLowerCase(), compare: { op: "gte", n: 1 } } },
+      min: 1,
+      max: 1,
+      destination: "hand",
+      leftover: "stay",
+    };
+  }
   // Sculpted Sunburst, a shape of its own.
   if (text === "Choose a creature you control, then each opponent chooses a creature they control with equal or lesser power. If you chose a creature this way, exile each creature not chosen by any player this way.") {
     const kept = { type: "creature", controlledBy: "you" };
@@ -9989,6 +10002,7 @@ export function parseEffect(text, outer) {
       mayOnceEachTurnAt(sentences, i, ctx) ??
       revealUntilAt(sentences, i, ctx) ??
       opponentDividesFindsAt(sentences, i, ctx) ??
+      opponentPicksRestExiledWithCounterAt(sentences, i) ??
       distinctSetAt(sentences, i) ??
       counterIntoAt(sentences, i, ctx) ??
       exiledUntilOrWhileAt(sentences, i) ??
@@ -12290,6 +12304,38 @@ function oneEachLookAt(sentences, i) {
       together: { oneEach: slots, text },
       destination: "hand",
       leftover: "bottom-random",
+    },
+    used: 3,
+  };
+}
+
+/** Revealed cards an opponent picks one of, the rest exiled under a counter —
+ * `look-and-choose`'s `leftoverCounters`: "Reveal the top two cards of your
+ * library. An opponent chooses one of them. Put that card into your hand and
+ * exile the other with a silver counter on it." (Karn, Scion of Urza). */
+function opponentPicksRestExiledWithCounterAt(sentences, i) {
+  const reveal = /^reveal the top (\w+) cards of your library\.$/i.exec(sentences[i]);
+  if (reveal === null) return null;
+  if (!/^an opponent chooses one of them\.$/i.test(sentences[i + 1] ?? "")) return null;
+  const put = /^put that card into your hand and exile the (?:other|rest) with an? ([\w+/-]+) counter on (?:it|each of them)\.$/i.exec(sentences[i + 2] ?? "");
+  if (put === null) return null;
+  const count = numberOf(reveal[1]);
+  if (typeof count !== "number") return null;
+  return {
+    effect: {
+      kind: "choose-opponent",
+      then: {
+        kind: "look-and-choose",
+        zone: "library",
+        count,
+        reveal: true,
+        chooser: "that-player",
+        min: 1,
+        max: 1,
+        destination: "hand",
+        leftover: "exile",
+        leftoverCounters: { kind: put[1].toLowerCase(), amount: 1 },
+      },
     },
     used: 3,
   };

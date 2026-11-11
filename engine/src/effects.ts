@@ -10148,6 +10148,12 @@ export type EffectSpec =
         | "graveyard"
         | "exile"
         | "exile-playable";
+      /** With `leftover: "exile"`: counters each card left over gets there —
+       * Karn, Scion of Urza's "Put that card into your hand and **exile the
+       * other with a silver counter on it**". A card in exile isn't a
+       * permanent, so nothing sees the counter put (as `withCounters` on an
+       * exiled pick). */
+      readonly leftoverCounters?: { readonly kind: string; readonly amount: number };
       /** With `destination: "exile"` or `"exile-face-down"`: the effect's
        * controller may play the chosen cards — a land as their land play, a
        * spell at its normal timing — `"end-of-turn"` this turn only
@@ -12607,6 +12613,7 @@ export interface EffectApi {
       readonly faceDownLooks?: "chooser" | "nobody";
       readonly prompt?: string;
       readonly givesUp?: true;
+      readonly leftoverCounters?: { readonly kind: string; readonly amount: number };
     },
   ): void;
   /** A `choose-from-zone` an `offer-zone-choice` carries: ask it now. */
@@ -20395,6 +20402,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
           ...(spec.faceDownLooks !== undefined ? { faceDownLooks: spec.faceDownLooks } : {}),
           ...(spec.prompt !== undefined ? { prompt: spec.prompt } : {}),
           ...(spec.givesUp === true ? { givesUp: true as const } : {}),
+          ...(spec.leftoverCounters !== undefined ? { leftoverCounters: spec.leftoverCounters } : {}),
         },
       );
       return;

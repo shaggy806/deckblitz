@@ -2215,7 +2215,8 @@
   "target:loyalty-ability",
   "target:loyalty-ability",
   "static:attack-as-though-haste",
-  "static:per-keyword-pump"
+  "static:per-keyword-pump",
+  "effect:look-and-choose-leftover-exile-with-counters"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

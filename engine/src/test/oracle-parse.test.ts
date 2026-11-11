@@ -17084,3 +17084,39 @@ describe("the players a batch of attackers attacked, and a player's Nth draw of 
     });
   });
 });
+
+describe("look-and-choose's leftover exiled with counters", () => {
+  it("reads Karn, Scion of Urza's +1 and −1", () => {
+    const face = parseFace({
+      name: "Thing",
+      type_line: "Legendary Planeswalker — Karn",
+      loyalty: "5",
+      oracle_text:
+        "+1: Reveal the top two cards of your library. An opponent chooses one of them. Put that card into your hand and exile the other with a silver counter on it.\n−1: Put a card you own with a silver counter on it from exile into your hand.",
+    }) as unknown as { activated: { effect: unknown }[] };
+    expect(face.activated[0]?.effect).toEqual({
+      kind: "choose-opponent",
+      then: {
+        kind: "look-and-choose",
+        zone: "library",
+        count: 2,
+        reveal: true,
+        chooser: "that-player",
+        min: 1,
+        max: 1,
+        destination: "hand",
+        leftover: "exile",
+        leftoverCounters: { kind: "silver", amount: 1 },
+      },
+    });
+    expect(face.activated[1]?.effect).toEqual({
+      kind: "look-and-choose",
+      zone: "exile",
+      filter: { ownedBy: "you", counters: { kind: "silver", compare: { op: "gte", n: 1 } } },
+      min: 1,
+      max: 1,
+      destination: "hand",
+      leftover: "stay",
+    });
+  });
+});

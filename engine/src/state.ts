@@ -3565,6 +3565,9 @@ export type AwaitingDecision =
          * the rest"). */
         | "exile"
         | "exile-playable";
+      /** For `leftover: "exile"`: counters each card left over gets there —
+       * the `look-and-choose` effect's `leftoverCounters`. */
+      readonly leftoverCounters?: { readonly kind: string; readonly amount: number };
       /** Where the rest go instead when a condition holds once the chosen
        * cards have moved — the `look-and-choose` effect's `leftoverIf`, asked
        * of `thenSource`. */

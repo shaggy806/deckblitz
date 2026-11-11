@@ -11178,6 +11178,7 @@ export class Game {
       leftover: awaiting.leftover,
       ...(second.enterTapped === true && second.destination === "battlefield" ? { enterTapped: true } : {}),
       ...(awaiting.leftoverIf !== undefined ? { leftoverIf: awaiting.leftoverIf } : {}),
+      ...(awaiting.leftoverCounters !== undefined ? { leftoverCounters: awaiting.leftoverCounters } : {}),
       ...(awaiting.thenSource !== undefined ? { thenSource: awaiting.thenSource } : {}),
       ...(awaiting.thenX !== undefined ? { thenX: awaiting.thenX } : {}),
       ...(awaiting.thenSourceStint !== undefined ? { thenSourceStint: awaiting.thenSourceStint } : {}),
@@ -11576,7 +11577,13 @@ export class Game {
     } else if (leftoverTo === "exile") {
       // "Exile the rest" (Desperate Research): face up, linked to nothing,
       // with the chosen ones' move.
-      for (const id of leftover) this.moveObject(id, "exile");
+      // "…with a silver counter on it" (Karn, Scion of Urza): only where the
+      // rest went by the effect's own `leftover`, not a `leftoverIf`'s.
+      for (const id of leftover) {
+        if (this.moveObject(id, "exile") && leftoverTo === awaiting.leftover) {
+          this.putCountersOnExiled(id, awaiting.leftoverCounters);
+        }
+      }
     } else if (leftoverTo === "exile-playable") {
       // Expressive Iteration's "exile one of them. You may play the exiled
       // card this turn": exiled face up, then given the permission (a
@@ -39984,6 +39991,7 @@ controlledBy,
           more?.faceDownLooks,
           more?.prompt,
           more?.givesUp === true,
+          more?.leftoverCounters,
         );
       },
     };
@@ -40061,6 +40069,8 @@ controlledBy,
     authoredPrompt?: string,
     /** See `look-and-choose`'s `givesUp`. */
     givesUp = false,
+    /** See `look-and-choose`'s `leftoverCounters`. */
+    leftoverCounters?: { readonly kind: string; readonly amount: number },
   ): void {
     // The exile zone (a processor, Oblivion Sower): only what may be
     // chosen is shown — the cards `player` owns when someone else is
@@ -40259,6 +40269,7 @@ controlledBy,
       ...(then?.sourceStint !== undefined ? { thenSourceStint: then.sourceStint } : {}),
       ...(then?.player !== undefined ? { thenPlayer: then.player } : {}),
       ...(leftoverIf !== undefined ? { leftoverIf } : {}),
+      ...(leftoverCounters !== undefined && leftover === "exile" ? { leftoverCounters } : {}),
       ...(secondPick !== undefined ? { secondPick } : {}),
       ...(exileLink !== undefined ? { exileLink } : {}),
       ...(faceDownLooks !== undefined ? { faceDownLooks } : {}),
