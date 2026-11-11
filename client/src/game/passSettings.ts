@@ -48,6 +48,7 @@ const DEFAULTS: PassSettings = {
   passThroughCombat: false,
   orderTriggers: false,
   skipManaOnly: true,
+  skipAbilityOnly: true,
   stops: { mine: [], theirs: [] },
 }
 
@@ -65,6 +66,7 @@ function readStored(): PassSettings {
       // On unless turned off, so a device that saved its settings before
       // this one existed gets it too.
       skipManaOnly: parsed.skipManaOnly !== false,
+      skipAbilityOnly: parsed.skipAbilityOnly !== false,
       stops: { mine: steps(parsed.stops?.mine), theirs: steps(parsed.stops?.theirs) },
     }
   } catch {

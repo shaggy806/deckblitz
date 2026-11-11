@@ -4600,6 +4600,23 @@ export class Game {
     });
   }
 
+  /**
+   * True if all `player` could do right now, beyond passing and tapping for
+   * mana, is activate abilities of permanents on the battlefield: nothing to
+   * cast or play, no ability of a card in hand or a graveyard. A room may
+   * skip such a window outside the player's own main phases (the fetch land
+   * that would otherwise stop every step of every turn); what it skips is
+   * its policy, this only says what the window holds.
+   */
+  isDeadButForAbilities(player: PlayerId): boolean {
+    if (this.state.priority.holder !== player) return false;
+    return this.offersFor(player).every((action) => {
+      if (action.kind === "pass-priority") return true;
+      if (action.kind !== "activate-ability") return false;
+      return this.state.objects[action.source]?.zone === "battlefield";
+    });
+  }
+
   /** What a controller sees when asked to act: the live rooms' view, also
    * used by the bot tools and tests so they decide exactly as a room does. */
   controllerView(player: PlayerId): ControllerView {

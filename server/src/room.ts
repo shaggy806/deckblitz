@@ -231,6 +231,7 @@ const NO_PASS_SETTINGS: PassSettings = {
   passToMain: false,
   passThroughCombat: false,
   skipManaOnly: false,
+  skipAbilityOnly: false,
   stops: { mine: [], theirs: [] },
 };
 
@@ -959,6 +960,7 @@ export class Room {
       passThroughCombat: settings?.passThroughCombat === true,
       orderTriggers,
       skipManaOnly: settings?.skipManaOnly !== false,
+      skipAbilityOnly: settings?.skipAbilityOnly !== false,
       stops: { mine: steps(settings?.stops?.mine), theirs: steps(settings?.stops?.theirs) },
     };
     // The engine asks; a bot standing in for the seat answers with the
@@ -1361,6 +1363,23 @@ export class Room {
     const playingAnother = holder === seat.player && playersControlledBy(s, holder).length > 0;
     const manaOnlyAndSkipping =
       !kept && (seat.pass.skipManaOnly !== false || playingAnother) && this.game.isDeadForMana(holder);
+    // All there is to do is use a permanent's ability (a fetch land), nothing
+    // is on the stack, and it isn't the seat's own main phase, where that
+    // window is the one it plays in: passed too (`PassSettings.skipAbilityOnly`)
+    // — one such land stopped the game at nearly every step of every turn.
+    // A stop on the step keeps the window (`held`, below).
+    const ownMain =
+      s.turnOrder[s.turn.activePlayerIndex] === holder &&
+      (s.turn.step === "precombat-main" || s.turn.step === "postcombat-main");
+    const abilitiesOnlyAndSkipping =
+      !kept &&
+      seat.pass.skipAbilityOnly !== false &&
+      s.zones.shared.stack.length === 0 &&
+      !ownMain &&
+      this.game.isDeadButForAbilities(holder) &&
+      // A window with nothing but mana abilities is `skipManaOnly`'s to pass
+      // or keep (a player holding priority with mana up, to bluff).
+      !this.game.isDeadForMana(holder);
 
     // A one-shot resolve-all: keep passing while the stack drains, and
     // disarm the moment anything real happens (including the stack running
@@ -1396,6 +1415,7 @@ export class Room {
       forcedPass ||
       manaOnlyAndSkipping ||
       resolvingStack ||
+      (!held && abilitiesOnlyAndSkipping) ||
       (!held && this.passesByPreference(seat, s)) ||
       // `interrupted` guards this disjunct **and only this one**, which is the
       // non-obvious part. A window whose only legal action is passing — or,

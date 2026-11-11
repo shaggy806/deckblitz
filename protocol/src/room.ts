@@ -35,6 +35,13 @@ export interface PassSettings {
    * absent (a client older than the setting) is on too. Off is for a player
    * who wants to hold priority with mana up, to bluff an instant. */
   readonly skipManaOnly?: boolean;
+  /** Skip your priority windows where all you could do, beyond tapping for
+   * mana, is activate an ability of a permanent you have out (a fetch land,
+   * a utility land): with nothing on the stack, and not your own main
+   * phases, where such a window is the one you play in. A stop on the step
+   * keeps it. On unless turned off — absent is on too. One such land used to
+   * stop the game at nearly every step of every player's turn. */
+  readonly skipAbilityOnly?: boolean;
   /** Steps whose first priority window you keep whatever passes it
    * otherwise (these settings, Auto-pass, Pass Turn) — on your own turns
    * (`mine`) and on everyone else's (`theirs`). */

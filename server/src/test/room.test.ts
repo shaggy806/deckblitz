@@ -989,4 +989,61 @@ describe("Room: passing preferences and stops", () => {
     second.room.requestPassTurn(second.activeConn);
     expect(at(second.room)).toMatchObject({ holder: second.other, step: "end", active: second.active });
   });
+
+  describe("a permanent's ability as all there is to do (skipAbilityOnly)", () => {
+    /** `table()`, with a Bountiful Landscape beside the other player's Forest:
+     * a non-mana ability to activate in every window they get. */
+    const landscapeTable = () => {
+      const t = table();
+      t.room.game.state.objects[t.room.game.debugSpawn("Bountiful Landscape", t.other)].tapped = false;
+      return t;
+    };
+    const SKIP_MANA = { ...NONE, skipManaOnly: true } as const;
+
+    it("passes the other players' steps and its own upkeep, and stops in its own main phase", () => {
+      const { room, activeConn, other, otherConn } = landscapeTable();
+      room.setPassSettings(otherConn, SKIP_MANA);
+      room.setPassSettings(activeConn, SKIP_MANA);
+      room.requestPassTurn(activeConn);
+      // The active player passes their turn. The other player's Landscape no
+      // longer stops any step of it, nor their own upkeep and draw; their
+      // first main phase is theirs to play.
+      expect(at(room)).toEqual({ holder: other, step: "precombat-main", active: other });
+    });
+
+    it("keeps the window with the setting off, as before", () => {
+      const { room, active, activeConn, other, otherConn } = landscapeTable();
+      room.setPassSettings(otherConn, { ...SKIP_MANA, skipAbilityOnly: false });
+      room.requestPassTurn(activeConn);
+      // The Landscape's ability is something to do: the first window the
+      // other player gets, in the active player's turn, is held for them.
+      expect(at(room)).toMatchObject({ holder: other, active });
+    });
+
+    it("a stop on the step keeps its window", () => {
+      const { room, active, activeConn, other, otherConn } = landscapeTable();
+      room.setPassSettings(otherConn, { ...SKIP_MANA, stops: { mine: [], theirs: ["end"] } });
+      room.requestPassTurn(activeConn);
+      expect(at(room)).toEqual({ holder: other, step: "end", active });
+    });
+
+    it("never passes a window with something on the stack", () => {
+      const { room, activeConn, other, otherConn } = landscapeTable();
+      room.setPassSettings(otherConn, SKIP_MANA);
+      // The active player holds their own windows, to cast into.
+      room.setPassSettings(activeConn, { ...NONE });
+      const bolt = room.game.debugSpawn("Lightning Bolt", room.game.activePlayer, "hand");
+      room.game.state.objects[room.game.debugSpawn("Mountain", room.game.activePlayer)].tapped = false;
+      room.dispatch(activeConn, {
+        type: "cast-spell",
+        player: room.game.activePlayer,
+        card: bolt,
+        targets: [{ kind: "player", player: other }],
+      });
+      room.dispatch(activeConn, { type: "pass-priority", player: room.game.activePlayer });
+      // The other player may answer with the Landscape's ability: asked.
+      expect(room.game.state.priority.holder).toBe(other);
+      expect(room.game.state.zones.shared.stack.length).toBe(1);
+    });
+  });
 });

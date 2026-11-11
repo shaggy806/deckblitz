@@ -9,12 +9,9 @@ title; when one lands, delete it here and move its `BACKLOG.md` line to `COMPLET
   stack from a land entering, sometimes the stack would have items horizontally shifted the wrong way." Not
   reproduced. First try: a landfall board with three or more triggers at once (Omnath, Locus of Creation beside
   two landfall creatures), at 2 and 4 players, watching the stack column as the triggers fly in.
-- **Too many priority stops with a land like Bountiful Landscape** (found 2026-11-02, a UX pass; a design
-  call). With one on the battlefield the game stopped at nearly every step of every player's turn, about 40
-  stops in one four-player round. "Skip mana stops" doesn't cover a non-mana ability, and a fetch land or a
-  utility land is in most Commander decks. That the ability is the cause is inferred from when the stops
-  began, not tested alone. Auto-pass is the way out, but it paused on both opposing spells seen, each needing
-  a "Resolve stack" click.
+- **Auto-pass pauses on each opposing spell** (found 2026-11-02, a UX pass; a design call). Auto-pass paused on
+  both opposing spells seen, each needing a "Resolve stack" click. (The other half of this item, a land's
+  ability stopping every step, is `skipAbilityOnly`, 2026-11-11.)
 - **The hand's rules text is tiny at rest** (found 2026-11-02). At 1366×768 a hand card's rules are 9.5px and
   its type line 8.5px, on a tilted card; hovering makes one readable. The mulligan's fan looks the same.
 - **The stack's card hides a seat's board** (found 2026-11-02). At 1366×768 it sits over the fourth player's

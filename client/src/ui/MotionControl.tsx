@@ -115,6 +115,15 @@ export function MotionControl({
           <label className="motion-row">
             <input
               type="checkbox"
+              checked={pass.skipAbilityOnly !== false}
+              onChange={(e) => setPassSettings({ skipAbilityOnly: e.target.checked })}
+            />
+            Skip ability stops — outside my main phases, pass when a permanent's ability is all I could use (a stop on the
+            step keeps it)
+          </label>
+          <label className="motion-row">
+            <input
+              type="checkbox"
               checked={pass.orderTriggers === true}
               onChange={(e) => setPassSettings({ orderTriggers: e.target.checked })}
             />
