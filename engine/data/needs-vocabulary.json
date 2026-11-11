@@ -15062,6 +15062,11 @@
    "description": "The granted trigger must fire only on damage to the player who cast the spell; deals-damage's to can't name that player, which matters in multiplayer.",
    "example": "Hellish Rebuke"
   },
+  "effect:for-each-target-turn-order-chosen-at-resolution": {
+   "family": "decision:variable-target-count",
+   "description": "Each of any number of targets handled in turn order, the caster choosing the order within a player's group as the spell resolves; the choice ranges over players and permanents together, and each iteration reads only the card it exiled.",
+   "example": "Soulfire Eruption"
+  },
   "target:any-number-group-before-targeting-mode": {
    "family": "decision:variable-target-count",
    "description": "With both modes chosen, the first mode's any-number group of lands comes before the second mode's target creature; a group must be its list's last slot, and swapping the modes would deal the damage before the lands animate.",

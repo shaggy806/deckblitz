@@ -1225,10 +1225,10 @@
   {
    "name": "Soulfire Eruption",
    "needs": [
-    "amount:exiled-card-mana-value"
+    "effect:for-each-target-turn-order-chosen-at-resolution"
    ],
-   "size": "small",
-   "why": "Re-read in B298 (small): per target, damage equal to the mana value of the card just exiled"
+   "size": "major",
+   "why": "Rank-goal run, 2026-11-11 (major): the mana-value read is built (Prototype Portal). The ruling has the targets handled in turn order, the caster ordering each player's group as it resolves after seeing each exile; no decision picks among players and permanents together, and \"that card\" must be the one exiled in this iteration alone."
   },
   {
    "name": "Recommission",

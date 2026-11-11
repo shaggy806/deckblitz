@@ -14000,6 +14000,7 @@ import _poolJayaVeneratedFiremage from "./pool/jaya-venerated-firemage.js";
 import _poolJayasFirenado from "./pool/jayas-firenado.js";
 import _poolJayasGreeting from "./pool/jayas-greeting.js";
 import _poolJayasImmolatingInferno from "./pool/jayas-immolating-inferno.js";
+import _poolJayasPhoenix from "./pool/jayas-phoenix.js";
 import _poolJayemdaeTome from "./pool/jayemdae-tome.js";
 import _poolJazalGoldmane from "./pool/jazal-goldmane.js";
 import _poolJeanLucMonCapitaine from "./pool/jean-luc-mon-capitaine.js";
@@ -20436,6 +20437,7 @@ import _poolProteusMachine from "./pool/proteus-machine.js";
 import _poolProteusStaff from "./pool/proteus-staff.js";
 import _poolProtocolKnight from "./pool/protocol-knight.js";
 import _poolProtomatterPowder from "./pool/protomatter-powder.js";
+import _poolPrototypePortal from "./pool/prototype-portal.js";
 import _poolProudMentor from "./pool/proud-mentor.js";
 import _poolProudPackRhino from "./pool/proud-pack-rhino.js";
 import _poolProudWildbonder from "./pool/proud-wildbonder.js";
@@ -21584,6 +21586,7 @@ import _poolReparations from "./pool/reparations.js";
 import _poolRepayInKind from "./pool/repay-in-kind.js";
 import _poolRepeal from "./pool/repeal.js";
 import _poolRepeatOffender from "./pool/repeat-offender.js";
+import _poolRepeatedReverberation from "./pool/repeated-reverberation.js";
 import _poolRepeatingBarrage from "./pool/repeating-barrage.js";
 import _poolRepelCalamity from "./pool/repel-calamity.js";
 import _poolRepelIntruders from "./pool/repel-intruders.js";
@@ -46463,6 +46466,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolJayasFirenado,
   _poolJayasGreeting,
   _poolJayasImmolatingInferno,
+  _poolJayasPhoenix,
   _poolJayemdaeTome,
   _poolJazalGoldmane,
   _poolJeanLucMonCapitaine,
@@ -52899,6 +52903,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolProteusStaff,
   _poolProtocolKnight,
   _poolProtomatterPowder,
+  _poolPrototypePortal,
   _poolProudMentor,
   _poolProudPackRhino,
   _poolProudWildbonder,
@@ -54047,6 +54052,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolRepayInKind,
   _poolRepeal,
   _poolRepeatOffender,
+  _poolRepeatedReverberation,
   _poolRepeatingBarrage,
   _poolRepelCalamity,
   _poolRepelIntruders,
@@ -78939,6 +78945,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/jayas-firenado": _poolJayasFirenado,
   "pool/jayas-greeting": _poolJayasGreeting,
   "pool/jayas-immolating-inferno": _poolJayasImmolatingInferno,
+  "pool/jayas-phoenix": _poolJayasPhoenix,
   "pool/jayemdae-tome": _poolJayemdaeTome,
   "pool/jazal-goldmane": _poolJazalGoldmane,
   "pool/jean-luc-mon-capitaine": _poolJeanLucMonCapitaine,
@@ -85375,6 +85382,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/proteus-staff": _poolProteusStaff,
   "pool/protocol-knight": _poolProtocolKnight,
   "pool/protomatter-powder": _poolProtomatterPowder,
+  "pool/prototype-portal": _poolPrototypePortal,
   "pool/proud-mentor": _poolProudMentor,
   "pool/proud-pack-rhino": _poolProudPackRhino,
   "pool/proud-wildbonder": _poolProudWildbonder,
@@ -86523,6 +86531,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/repay-in-kind": _poolRepayInKind,
   "pool/repeal": _poolRepeal,
   "pool/repeat-offender": _poolRepeatOffender,
+  "pool/repeated-reverberation": _poolRepeatedReverberation,
   "pool/repeating-barrage": _poolRepeatingBarrage,
   "pool/repel-calamity": _poolRepelCalamity,
   "pool/repel-intruders": _poolRepelIntruders,

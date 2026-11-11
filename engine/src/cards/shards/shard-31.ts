@@ -478,6 +478,7 @@ import _poolIthilienKingfisher from "../pool/ithilien-kingfisher.js";
 import _poolIymrithDesertDoom from "../pool/iymrith-desert-doom.js";
 import _poolIzzetSignet from "../pool/izzet-signet.js";
 import _poolJaceTheLivingGuildpact from "../pool/jace-the-living-guildpact.js";
+import _poolJayasPhoenix from "../pool/jayas-phoenix.js";
 import _poolJerrardOfTheClosedFist from "../pool/jerrard-of-the-closed-fist.js";
 import _poolJeskaiStudent from "../pool/jeskai-student.js";
 import _poolJhessianBalmgiver from "../pool/jhessian-balmgiver.js";
@@ -1549,6 +1550,7 @@ const shard: CardShard = {
     _poolIymrithDesertDoom,
     _poolIzzetSignet,
     _poolJaceTheLivingGuildpact,
+    _poolJayasPhoenix,
     _poolJerrardOfTheClosedFist,
     _poolJeskaiStudent,
     _poolJhessianBalmgiver,
