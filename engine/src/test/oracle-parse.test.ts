@@ -16999,3 +16999,32 @@ describe("an amount once for each listed ability a creature has", () => {
     ]);
   });
 });
+
+describe("a ward cost read as the ability resolves (rules 702.21a, 608.2h)", () => {
+  const face = (name: string, oracle_text: string) =>
+    parseFace({ name, type_line: "Legendary Creature — Elf Cleric", mana_cost: "{2}", oracle_text }, { tokenFor: () => null });
+
+  it("ward {X}, where X is a count of the controller's counters (Minthara, Merciless Soul)", () => {
+    const minthara = face("Minthara, Merciless Soul", "Minthara has ward {X}, where X is the number of experience counters you have.");
+    expect(minthara.complete).toBe(true);
+    expect(minthara.triggered[0].effect).toEqual({
+      kind: "ward",
+      cost: { payGeneric: { playerCounters: "experience" }, text: "{X}, where X is the number of experience counters you have" },
+    });
+    expect(minthara.triggered[0].text).toBe("Minthara has ward {X}, where X is the number of experience counters you have.");
+  });
+
+  it("ward, pay life equal to its power (Raubahn, Bull of Ala Mhigo)", () => {
+    const raubahn = face("Raubahn, Bull of Ala Mhigo", "Ward—Pay life equal to Raubahn's power.");
+    expect(raubahn.complete).toBe(true);
+    expect(raubahn.triggered[0].effect).toEqual({
+      kind: "ward",
+      cost: { payLifeAmount: { powerOf: "source" }, text: "Pay life equal to Raubahn's power" },
+    });
+    expect(raubahn.triggered[0].text).toBe("Ward—Pay life equal to Raubahn's power.");
+  });
+
+  it("leaves an amount it can't read to a person", () => {
+    expect(face("Test", "Ward {X}, where X is the number of times you've been tempted.").complete).toBe(false);
+  });
+});

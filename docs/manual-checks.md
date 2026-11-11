@@ -7904,3 +7904,9 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Jaws, Relentless Predator: the legend rule isn't a destroy
 - **Do:** Cast the Mox Amber in your hand and keep either one. Then cast Shatter on Bob's Sol Ring.
 - **Expect:** Bob stays at 20 when the legend rule puts a Mox Amber into your graveyard (not sacrificed, not destroyed). Shatter destroys Sol Ring and Jaws deals 1 damage to Bob: 19.
+
+## A ward cost read as it resolves (2026-11-11)
+
+### Raubahn, Bull of Ala Mhigo: ward costs life equal to its power
+- **Do:** Cast Shock on Bob's Raubahn (a 3/3 under Glorious Anthem).
+- **Expect:** A popup offers "Pay ward—Pay 3 life" or letting Shock be countered. Paying puts you at 17 and Shock deals 2 damage to Raubahn.

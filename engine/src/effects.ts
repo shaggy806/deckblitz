@@ -1244,6 +1244,39 @@ export interface WardCost {
    * creature they control (rule 701.68a), choosing which as they pay — the
    * `blight` effect. Payable only while they control a creature (701.68b). */
   readonly blight?: number;
+  /** "Ward {X}, where X is the number of experience counters you have"
+   * (Minthara, Merciless Soul): a generic mana part whose size is read as the
+   * ward ability resolves, from its controller's side — not as the permanent
+   * was targeted (its ruling; rule 702.21a's "unless that player pays
+   * [cost]" is an instruction followed on resolution, rule 608.2h). Bound
+   * into `mana` then ({@link bindWardCost}); {0} is still a cost the player
+   * may decline. Needs `text`. */
+  readonly payGeneric?: EffectAmount;
+  /** "Ward—Pay life equal to Raubahn's power" (Raubahn, Bull of Ala Mhigo):
+   * a life part read as the ward ability resolves, the source as it last
+   * existed if it has left (its ruling; rule 608.2h). Bound into `payLife`
+   * then, never below 0. Needs `text`. */
+  readonly payLifeAmount?: EffectAmount;
+  /** With `payGeneric` or `payLifeAmount`: the cost as printed after "Ward",
+   * without the dash or a trailing period — "{X}, where X is the number of
+   * experience counters you have", "Pay life equal to Raubahn's power". The
+   * payment prompt shows the bound numbers instead. */
+  readonly text?: string;
+}
+
+/** A ward cost with its read amounts fixed, as the ward ability resolves
+ * (rule 608.2h): `payGeneric` becomes more generic `mana`, `payLifeAmount`
+ * more `payLife`. A cost with neither is returned as it is. */
+export function bindWardCost(cost: WardCost, value: (amount: EffectAmount) => number): WardCost {
+  if (cost.payGeneric === undefined && cost.payLifeAmount === undefined) return cost;
+  const { payGeneric, payLifeAmount, text: _printed, ...fixed } = cost;
+  const generic = payGeneric === undefined ? undefined : Math.max(0, value(payGeneric));
+  const life = payLifeAmount === undefined ? undefined : Math.max(0, value(payLifeAmount));
+  return {
+    ...fixed,
+    ...(generic !== undefined ? { mana: `{${generic}}${fixed.mana ?? ""}` } : {}),
+    ...(life !== undefined ? { payLife: life + (fixed.payLife ?? 0) } : {}),
+  };
 }
 
 /**
@@ -1297,6 +1330,10 @@ export interface BeholdSpec {
 /** A ward cost as printed after "Ward" — "{2}" or "—{2}, Pay 2 life." — so a
  * card's ability text and the payment prompt read the same. */
 export function wardCostText(cost: WardCost): string {
+  // An amount not read yet: the printed wording.
+  if (cost.text !== undefined && (cost.payGeneric !== undefined || cost.payLifeAmount !== undefined)) {
+    return cost.payGeneric !== undefined && cost.payLifeAmount === undefined ? ` ${cost.text}` : `—${cost.text}.`;
+  }
   const parts: string[] = [];
   if (cost.mana !== undefined) parts.push(cost.mana);
   if (cost.payLife !== undefined) parts.push(`Pay ${cost.payLife} life`);
@@ -20140,7 +20177,7 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       return;
     }
     case "ward":
-      ctx.ward(spec.cost);
+      ctx.ward(bindWardCost(spec.cost, (amount) => amountValue(amount, ctx)));
       return;
     case "scry":
       ctx.scry(amountValue(spec.amount, ctx), false, spec.then);

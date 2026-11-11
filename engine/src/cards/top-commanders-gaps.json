@@ -5,6 +5,7 @@
     "effect:target-different-controllers",
     "cost:first-targeting-ability-cost-reduction",
     "keyword:warp-from-graveyard-and-life-cost",
+    "decision:ward-dynamic-x",
     "trigger:destroyed",
     "effect:delayed-trigger-intervening-if",
     "effect:delayed-next-spell-live-amount",

@@ -322,6 +322,18 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### A ward cost read as it resolves — built 2026-11-11
+
+The key `decision:ward-dynamic-x` (the rank goal). `WardCost.payGeneric` and
+`payLifeAmount`, an `EffectAmount` each with the printed `text`: the ward
+ability's "unless that player pays [cost]" is followed as it resolves (rules
+702.21a, 608.2h), so the amount is read then, from the ward ability's
+controller's side, the source as it last existed if it has left, and fixed
+into the cost's `mana` / `payLife` before the usual pay-or-be-countered
+question. No new decision. Minthara, Merciless Soul (rank 5300: ward {X}, X
+her controller's experience counters; {0} is still asked) and Raubahn, Bull of
+Ala Mhigo (6925: pay life equal to his power).
+
 ### "Is destroyed" — built 2026-11-10
 
 The commander gap's `trigger:destroyed`. A **`destroyed`** trigger (`who`,

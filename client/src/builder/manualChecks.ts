@@ -11921,4 +11921,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Sol Ring'] },
     }),
   ),
+  // --- A ward cost read as it resolves (2026-11-11, the rank goal) ---
+  preset(
+    "Raubahn, Bull of Ala Mhigo: ward costs life equal to its power",
+    board({
+      you: { bf: ['Mountain*2'], hand: ['Shock'] },
+      opp: { bf: ['Raubahn, Bull of Ala Mhigo', 'Glorious Anthem'] },
+    }),
+  ),
 ]

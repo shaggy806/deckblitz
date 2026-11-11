@@ -14081,6 +14081,17 @@ function parseFaceAsWritten(face, ctx = {}) {
     if (line === "Doctor's companion") { out.pairing = { kind: "doctors-companion" }; continue; }
     if ((m = /^Ward ((?:\{[0-9WUBRGC]+\})+)$/.exec(line))) { out.triggered.push(wardAbility({ mana: m[1] })); continue; }
     if ((m = /^Ward—Pay (\d+) life\.$/.exec(line))) { out.triggered.push(wardAbility({ payLife: Number(m[1]) })); continue; }
+    // A ward cost read as the ability resolves (rules 702.21a, 608.2h): "~ has
+    // ward {X}, where X is the number of experience counters you have"
+    // (Minthara, Merciless Soul), "Ward—Pay life equal to ~'s power" (Raubahn).
+    if ((m = /^(?:~ has ward|Ward) \{X\}, where X is (.+)\.$/.exec(line)) && wardAmountOf(m[1]) !== null) {
+      out.triggered.push({ ...wardAbility({ payGeneric: wardAmountOf(m[1]), text: printed(raw).replace(/^.*?ward (?=\{X\})/i, "").replace(/\.$/, "") }), text: printed(raw) });
+      continue;
+    }
+    if ((m = /^Ward—Pay life equal to (.+)\.$/.exec(line)) && wardAmountOf(m[1]) !== null) {
+      out.triggered.push({ ...wardAbility({ payLifeAmount: wardAmountOf(m[1]), text: printed(raw).replace(/^Ward—/, "").replace(/\.$/, "") }), text: printed(raw) });
+      continue;
+    }
 
     // Card-level lines.
     if ((m = /^Enchant (creature|land|artifact|enchantment|permanent|player|creature you control|artifact you control|creature or planeswalker)$/.exec(line))) {
@@ -20563,6 +20574,16 @@ const partnerWithAbility = (name) => ({
   resolve: null,
   text: `When this creature enters, target player may search their library for a card named ${name}, reveal it, put it into their hand, then shuffle.`,
 });
+
+/** The amount a read ward cost names: a kind of player counter its controller
+ * has, or what a divided total reads (a count of permanents, counters on it,
+ * its power). `null` for any other phrase. */
+const wardAmountOf = (phrase) => {
+  const m = /^the number of ([a-z]+) counters you have$/.exec(phrase);
+  if (m) return { playerCounters: m[1] };
+  if (/^this creature's power$/.test(phrase)) return { powerOf: "source" };
+  return dividedTotalOf(phrase);
+};
 
 const wardAbility = (cost) => ({
   trigger: { on: "becomes-target", who: "self", byOpponentOnly: true },
