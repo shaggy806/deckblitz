@@ -1263,10 +1263,14 @@ function quantifiedSlots(phrase, ctx) {
   }
   // "Up to X target …" / "X target …" (rule 601.2c): a group as big as the
   // spell's X — or, on a permanent's enters ability, the X it was cast with.
-  if ((m = /^(up to )?X target (.+)$/.exec(phrase))) {
-    const of = targetOf(`target ${singularTarget(m[2])}`);
+  // "Up to twice X target …" (Erebos's Intervention): two members an X.
+  if ((m = /^(up to )?(twice )?X target (.+)$/.exec(phrase))) {
+    // "… target cards from graveyards" (Kozilek's Command): any graveyard's.
+    const yards = /^(.*?)cards from graveyards$/.exec(m[3]);
+    const of = yards !== null ? graveyardTargetOf(`target ${yards[1]}card from a graveyard`) : targetOf(`target ${singularTarget(m[3])}`);
     if (of === undefined) return undefined;
-    const group = { kind: "any-number", of, ...(m[1] ? {} : { min: "x" }), max: "x" };
+    const x = m[2] ? { product: ["x", 2] } : "x";
+    const group = { kind: "any-number", of, ...(m[1] ? {} : { min: x }), max: x };
     return { slots: [ctx.target(group)], group: true };
   }
   if ((m = /^any number of (other )?target (.+)$/i.exec(phrase))) {
@@ -5080,7 +5084,7 @@ export function parseSentence(sentence, ctx) {
   // 601.2c): a group as big as X, each member acted on — destroyed or exiled
   // together (Word of Binding's, By Force's shapes). So is "any number of
   // target tapped creatures with different controllers" (Cloud's Limit Break).
-  if ((m = /^(destroy|exile|tap|untap) ((?:up to )?X target .+|(?:up to )?(?:two|three|four|five) target .*cards from (?:a single|an opponent's) graveyard|any number of target .+ with different controllers)\.$/i.exec(s))) {
+  if ((m = /^(destroy|exile|tap|untap) ((?:up to )?(?:twice )?X target .+|(?:up to )?(?:two|three|four|five) target .*cards from (?:a single|an opponent's) graveyard|any number of target .+ with different controllers)\.$/i.exec(s))) {
     const got = quantifiedSlots(m[2], ctx);
     if (got === undefined || !got.group) return null;
     const kind = m[1].toLowerCase();

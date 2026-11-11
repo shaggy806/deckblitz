@@ -3675,7 +3675,11 @@ On a spell with `{X}`, `max: "x"` is "up to X target …" (Pest Infestation) and
 `min: "x", max: "x"` is "X target …" (Curse of the Swine): X is announced
 before the targets (rule 601.2b–c), so a choice is judged at the X cast
 (`specsAtX`), and the offer's `targetCount` with `xCost.minXByTargetCount` /
-`maxXByTargetCount` say which X each number of targets allows. Only for a
+`maxXByTargetCount` say which X each number of targets allows. A whole
+multiple of X is `max: { product: ["x", 2] }` — "exile **up to twice X** target
+cards from graveyards" (Erebos's Intervention), judged the same way, a count of
+targets needing an X of half of it, rounded up (`twice-x-target-count.test.ts`).
+Only for a
 spell whose group is its only slot — or an activated ability's: Shigeki,
 Jukai Visionary's channel "{X}{X}{G}{G}, Discard this card: Return X target
 nonlegendary cards from your graveyard to your hand" is offered once per X,

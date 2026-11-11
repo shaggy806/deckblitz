@@ -2,7 +2,7 @@
 // modifications count (Hinata, Dawn-Crowned). Pure: no state, no registry, so
 // the engine, the controllers and the bot can all ask the same questions.
 
-import { anyNumberSlot, groupReadsX, isOptionalSpec } from "./target.js";
+import { anyNumberSlot, groupReadsX, isOptionalSpec, xMultiple } from "./target.js";
 import type { ObjectId } from "./primitives.js";
 import type { TargetRef, TargetSpec } from "./target.js";
 
@@ -343,10 +343,13 @@ export function fitModalXGroup(
   const most = xCost?.maxX ?? 0;
   const least = xCost?.minX ?? 0;
   const head = targets.slice(0, group);
-  const members = targets.slice(group).filter((t): t is TargetRef => t !== null).slice(0, most);
+  // One X allows (or asks for) this many members: "up to twice X" is 2.
+  const upTo = xMultiple(spec.max);
+  const atLeast = xMultiple(spec.min);
+  const members = targets.slice(group).filter((t): t is TargetRef => t !== null).slice(0, most * (upTo ?? 1));
   const k = members.length;
-  const lo = Math.max(least, spec.max === "x" ? k : 0);
-  const hi = spec.min === "x" ? Math.min(most, k) : most;
+  const lo = Math.max(least, upTo !== undefined ? Math.ceil(k / upTo) : 0);
+  const hi = atLeast !== undefined ? Math.min(most, Math.floor(k / atLeast)) : most;
   if (lo > hi) return null;
   return { targets: [...head, ...members], xValue: Math.max(lo, Math.min(hi, x ?? most)) };
 }

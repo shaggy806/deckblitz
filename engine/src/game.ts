@@ -572,6 +572,7 @@ import {
   targetUnits,
   otherThanSlots,
   specsAtX,
+  xMultiple,
   specsCappedByDivision,
   specsWithAmounts,
   describeTargetSpec,
@@ -6108,8 +6109,12 @@ export class Game {
     | "none" {
     const group = anyNumberSlot(specs);
     const spec = specs[group];
-    const upTo = typeof spec === "object" && spec.kind === "any-number" && spec.max === "x";
-    const atLeast = typeof spec === "object" && spec.kind === "any-number" && spec.min === "x";
+    // How many members one X allows or asks for: 1, or 2 for "up to twice X"
+    // (Erebos's Intervention — `xMultiple`).
+    const upToTimes = typeof spec === "object" && spec.kind === "any-number" ? xMultiple(spec.max) : undefined;
+    const atLeastTimes = typeof spec === "object" && spec.kind === "any-number" ? xMultiple(spec.min) : undefined;
+    const upTo = upToTimes !== undefined;
+    const atLeast = atLeastTimes !== undefined;
     const candidates = options[group] ?? [];
     const copies = this.targetCopies(candidates);
     // Each member is another than the ones before it (`concreteTargetSpecs`):
@@ -6120,7 +6125,7 @@ export class Game {
         ? spec.max
         : Number.POSITIVE_INFINITY;
     const most = Math.min(
-      upTo ? Math.min(members, payableX) : members,
+      upTo ? Math.min(members, payableX * (upToTimes ?? 1)) : members,
       groupMax,
       totalByX === undefined ? Number.POSITIVE_INFINITY : Math.max(...totalByX),
     );
@@ -6135,8 +6140,8 @@ export class Game {
     // reads the spell's mana value (Glarb, Calamity's Augur's ruling) — so no
     // count's least X is lower, and a count whose X can't reach it is off
     // the offer. Those left are a run: each bound moves one way with k.
-    const minX = counts.map((k) => Math.max(upTo ? k : 0, leastX, dividedLeastX(k)));
-    const maxX = counts.map((k) => (atLeast ? Math.min(k, payableX) : payableX));
+    const minX = counts.map((k) => Math.max(upTo ? Math.ceil(k / (upToTimes ?? 1)) : 0, leastX, dividedLeastX(k)));
+    const maxX = counts.map((k) => (atLeast ? Math.min(Math.floor(k / (atLeastTimes ?? 1)), payableX) : payableX));
     const open = counts.filter((k) => minX[k] <= maxX[k]);
     if (open.length === 0) return "none";
     const lo = open[0];
@@ -17900,7 +17905,7 @@ export class Game {
       ...this.makeResolutionContext(asObjectId("spell-being-cast"), caster, [], 0),
       sourceTimesKicked: () => kicks,
     };
-    return specsWithAmounts(specs, (amount) => (amount === "x" ? undefined : amountValue(amount, ctx)));
+    return specsWithAmounts(specs, (amount) => (xMultiple(amount) !== undefined ? undefined : amountValue(amount, ctx)));
   }
 
   private declaredTargetSpecs(
@@ -34271,7 +34276,7 @@ export class Game {
     if (!groupReadsAmount(atX)) return atX;
     const ctx = this.makeResolutionContext(sourceId, controller, [], x ?? 0);
     // With no X announced yet, a group tied to it stays unbounded by it.
-    return specsWithAmounts(atX, (amount) => (amount === "x" && x === undefined ? undefined : amountValue(amount, ctx)));
+    return specsWithAmounts(atX, (amount) => (xMultiple(amount) !== undefined && x === undefined ? undefined : amountValue(amount, ctx)));
   }
 
   private abilityTargetSource(trigger: {

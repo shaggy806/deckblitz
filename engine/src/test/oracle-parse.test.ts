@@ -17720,6 +17720,24 @@ describe("revealing a face-down permanent", () => {
   });
 });
 
+describe("up to twice X target cards from graveyards", () => {
+  const spell = (line: string): { targets: unknown; effect: unknown } =>
+    parseFace({ name: "Thing", type_line: "Instant", mana_cost: "{X}{B}", oracle_text: line } as never) as never;
+  const exileEach = { kind: "for-each-target", from: 0, simultaneous: true, effect: { kind: "exile", target: 0 } };
+
+  it("reads Erebos's Intervention's second mode: two members an X", () => {
+    const face = spell("Exile up to twice X target cards from graveyards.");
+    expect(face.targets).toEqual([{ kind: "any-number", of: { kind: "card-in-graveyard", whose: "any" }, max: { product: ["x", 2] } }]);
+    expect(face.effect).toEqual(exileEach);
+  });
+
+  it("reads Kozilek's Command's: up to X of them", () => {
+    const face = spell("Exile up to X target cards from graveyards.");
+    expect(face.targets).toEqual([{ kind: "any-number", of: { kind: "card-in-graveyard", whose: "any" }, max: "x" }]);
+    expect(face.effect).toEqual(exileEach);
+  });
+});
+
 describe("any player may pay life to counter the spell", () => {
   const whenCast = (line: string): unknown => {
     const face = parseFace({

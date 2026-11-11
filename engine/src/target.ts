@@ -451,7 +451,10 @@ export type TargetSpec =
        * (Pest Infestation). X is announced before targets are chosen (rule
        * 601.2b–c), so a choice is judged at the X it was cast with — see
        * {@link specsAtX}. Only on a spell or activated ability whose group
-       * is its only slot (Shigeki, Jukai Visionary's channel).
+       * is its only slot (Shigeki, Jukai Visionary's channel). A whole
+       * multiple of X is `{ product: ["x", 2] }` — "exile **up to twice X**
+       * target cards from graveyards" (Erebos's Intervention), judged the
+       * same way ({@link xMultiple}).
        *
        * On a spell another {@link EffectAmount} is read as it's cast, the
        * kicks already announced (rules 601.2b–c): "choose another target for
@@ -678,7 +681,22 @@ export function groupMaxTotalManaValue(spec: TargetSpec | undefined): number | u
  * to the spell's X (`min` or `max` of `"x"`)? */
 export function groupReadsX(specs: readonly TargetSpec[]): boolean {
   const spec = specs[anyNumberSlot(specs)];
-  return typeof spec === "object" && spec.kind === "any-number" && (spec.max === "x" || spec.min === "x");
+  return (
+    typeof spec === "object" &&
+    spec.kind === "any-number" &&
+    (xMultiple(spec.max) !== undefined || xMultiple(spec.min) !== undefined)
+  );
+}
+
+/** How many times the spell's own X a group's bound is, when it is nothing
+ * else: 1 for `"x"`, 2 for "twice X" (`{ product: ["x", 2] }`, either order,
+ * a whole number of times). `undefined` for a number or any other amount. */
+export function xMultiple(amount: EffectAmount | undefined): number | undefined {
+  if (amount === "x") return 1;
+  if (typeof amount !== "object" || !("product" in amount) || amount.product.length !== 2) return undefined;
+  const [a, b] = amount.product;
+  const times = a === "x" ? b : b === "x" ? a : undefined;
+  return typeof times === "number" && Number.isInteger(times) && times >= 1 ? times : undefined;
 }
 
 /** `specs` with an "any number of target …" group's `"x"` bounds (and a
@@ -693,8 +711,8 @@ export function specsAtX(specs: readonly TargetSpec[], x: number): readonly Targ
     typeof spec === "object" && spec.kind === "any-number"
       ? {
           ...spec,
-          ...(spec.max === "x" ? { max: x } : {}),
-          ...(spec.min === "x" ? { min: x } : {}),
+          ...(xMultiple(spec.max) !== undefined ? { max: x * (xMultiple(spec.max) ?? 1) } : {}),
+          ...(xMultiple(spec.min) !== undefined ? { min: x * (xMultiple(spec.min) ?? 1) } : {}),
           ...(spec.maxTotalManaValue === "x" ? { maxTotalManaValue: x } : {}),
         }
       : spec,
@@ -720,7 +738,9 @@ export function groupReadsCastAmount(specs: readonly TargetSpec[]): boolean {
   return (
     typeof spec === "object" &&
     spec.kind === "any-number" &&
-    [spec.max, spec.min, spec.maxTotalManaValue].some((a) => a !== undefined && typeof a !== "number" && a !== "x")
+    [spec.max, spec.min, spec.maxTotalManaValue].some(
+      (a) => a !== undefined && typeof a !== "number" && xMultiple(a) === undefined,
+    )
   );
 }
 
@@ -1370,8 +1390,11 @@ export function describeTargetSpec(spec: TargetSpec | string): string {
   if (spec.kind === "one-of") return spec.of.map((part) => describeTargetSpec(part)).join(" or ");
   if (spec.kind === "any-number") {
     // Fireball's "any number of targets", not "any number of any target".
+    const times = xMultiple(spec.max) ?? 1;
     const many =
-      spec.max === "x"
+      times > 1
+        ? `up to ${times === 2 ? "twice" : `${times} times`} X`
+        : spec.max === "x"
         ? spec.min === "x"
           ? "X"
           : "up to X"
