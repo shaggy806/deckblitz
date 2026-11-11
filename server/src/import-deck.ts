@@ -25,6 +25,7 @@ import {
   isBackground,
   isCardFront,
   nameForFlavorName,
+  suggestReplacements,
   validateCommanderDeck,
 } from "engine";
 import type {
@@ -41,7 +42,8 @@ import type {
 } from "protocol";
 import { loadCardData } from "./card-data.js";
 import { loadOracleTagIndex } from "./oracle-tags.js";
-import type { ImportSink } from "./import-route.js";
+import { SUGGEST_PREFIX } from "./import-route.js";
+import type { ImportSink, SuggestRequest } from "./import-route.js";
 
 /** Re-exported so this module stays the single import site for everything
  * the decklist audit produces, wire shapes included. */
@@ -846,6 +848,65 @@ export function importDeps(registry: CardRegistry): ImportDeps {
   return { registry, tags: loadOracleTagIndex, cardData: loadCardData };
 }
 
+/** The {@link SuggestRequest} an import job's text carries after its prefix
+ * (`import-route.ts`'s `suggestJobText`); throws on any other shape. */
+function suggestRequestOf(text: string): SuggestRequest {
+  const parsed = JSON.parse(text.slice(SUGGEST_PREFIX.length)) as Partial<SuggestRequest> | null;
+  const names = (value: unknown): value is readonly string[] =>
+    Array.isArray(value) && value.every((v) => typeof v === "string");
+  if (parsed === null || typeof parsed.card !== "string" || !names(parsed.cards) || !names(parsed.commanders)) {
+    throw new Error("a suggestion request names a card, the deck's cards and its commanders");
+  }
+  return { card: parsed.card, cards: parsed.cards, commanders: parsed.commanders };
+}
+
+/** How many stand-ins one request is offered. */
+const SUGGESTIONS_OFFERED = 6;
+
+/**
+ * Stand-ins for one implemented card of a deck being built — the import's
+ * card replacer asked about a single card (the user, 2026-11-02): cards the
+ * pool has that do much the same job, inside the deck's colour identity and
+ * not already in it (singleton), best first. For a commander, only cards
+ * that can be one.
+ */
+export function suggestReplacementsFor(request: SuggestRequest, deps: ImportDeps): ReplacementOption[] {
+  const { registry } = deps;
+  if (!registry.has(request.card)) throw new Error(`${request.card} isn't a card in the pool`);
+  const def = registry.get(request.card);
+  const forCommander = request.commanders.includes(request.card);
+  // The deck's identity is its commanders': with the commander itself being
+  // replaced, any identity will do.
+  let identity: Set<Color> | null = !forCommander && request.commanders.length > 0 ? new Set() : null;
+  for (const name of request.commanders) {
+    if (identity === null) break;
+    if (!registry.has(name)) {
+      identity = null;
+      break;
+    }
+    for (const c of colorIdentityOf(registry.get(name), registry)) identity.add(c);
+  }
+  const tags = deps.tags();
+  const ranked = suggestReplacements(
+    {
+      name: def.name,
+      manaCost: def.manaCost,
+      typeLine: localTypeLine(def),
+      power: def.power === null ? null : String(def.power),
+      toughness: def.toughness === null ? null : String(def.toughness),
+      keywords: def.keywords,
+    },
+    {
+      ...(identity !== null ? { identity } : {}),
+      exclude: [...request.cards, ...request.commanders],
+      forCommander,
+      ...(tags !== null ? { tags } : {}),
+      limit: SUGGESTIONS_OFFERED,
+    },
+  );
+  return ranked.map(({ name, confidence, sharedTags }) => ({ name, confidence, sharedTags }));
+}
+
 /**
  * One `POST /import-deck`, as a job: parses `text`, then writes a
  * `{type:"progress", done: 0}` line, a progress line as `evaluateDecklist`
@@ -855,6 +916,17 @@ export function importDeps(registry: CardRegistry): ImportDeps {
  * wherever the registry is (`import-route.ts` is the HTTP side).
  */
 export async function runImportJob(text: string, deps: ImportDeps, sink: ImportSink): Promise<void> {
+  // A request for one card's stand-ins rides the same job (`suggestJobText`).
+  if (text.startsWith(SUGGEST_PREFIX)) {
+    try {
+      const options = suggestReplacementsFor(suggestRequestOf(text), deps);
+      sink.line({ type: "suggestions", options });
+      sink.end();
+    } catch (err) {
+      sink.reject(err instanceof Error ? err.message : String(err));
+    }
+    return;
+  }
   let streaming = false;
   try {
     const { entries, sideboard, commanders, commanderSource } = parseDecklistText(text, deps.registry);

@@ -23,8 +23,9 @@ import { StableLabel } from '../ui/StableLabel.tsx'
 import type { MenuAnchor, MenuItem } from './CardContextMenu.tsx'
 import { matchesTerms, searchTerms } from '../library/search.ts'
 import { PrintingPicker } from './PrintingPicker.tsx'
+import { ReplacementPicker } from './ReplacementPicker.tsx'
 import type { SavedDeck } from './decks.ts'
-import { MAX_SIDEBOARD } from './decks.ts'
+import { MAX_SIDEBOARD, replaceCard } from './decks.ts'
 
 const TYPE_FILTERS = [
   'creature',
@@ -172,6 +173,8 @@ export function DeckEditor({
   const [menu, setMenu] = useState<MenuAnchor | null>(null)
   /** Which card's printing picker is open, by name. */
   const [picking, setPicking] = useState<string | null>(null)
+  /** The card whose stand-ins are being looked up (`ReplacementPicker`). */
+  const [replacing, setReplacing] = useState<string | null>(null)
 
   const counts = useMemo(() => {
     const m = new Map<string, number>()
@@ -404,6 +407,11 @@ export function DeckEditor({
               title: def.name,
               items: [
                 { label: 'Change printing…', onSelect: () => setPicking(def.name) },
+                // The import's card replacer, asked about this one card: only
+                // for a card the deck has.
+                ...(deck.cards.includes(def.name) || deck.commanders.includes(def.name)
+                  ? [{ label: 'Suggest a replacement…', onSelect: () => setReplacing(def.name) }]
+                  : []),
                 ...extra.map((item, i) => (i === 0 ? { ...item, separated: true } : item)),
               ],
             })
@@ -928,6 +936,19 @@ export function DeckEditor({
             setPicking(null)
           }}
           onClose={() => setPicking(null)}
+        />
+      ) : null}
+      {replacing !== null ? (
+        <ReplacementPicker
+          key={replacing}
+          card={replacing}
+          cards={deck.cards}
+          commanders={deck.commanders}
+          onChoose={(replacement) => {
+            change(replaceCard(deck, replacing, replacement))
+            setReplacing(null)
+          }}
+          onClose={() => setReplacing(null)}
         />
       ) : null}
     </div>

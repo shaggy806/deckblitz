@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { listDecks, playableSideboard, unusedDeckName } from './decks.ts'
+import { listDecks, playableSideboard, replaceCard, unusedDeckName } from './decks.ts'
 
 const DECKS_KEY = 'mtg-engine:decks'
 
@@ -75,6 +75,26 @@ describe('saved-deck migrations', () => {
     const before = storage.writes
     expect(listDecks()).toEqual([{ id: 'a', name: 'New', commanders: [], cards: ['Forest'] }])
     expect(storage.writes).toBe(before)
+  })
+})
+
+describe('replaceCard', () => {
+  it('swaps every copy where it stood, in the deck and the command zone, and drops its printing', () => {
+    const deck = {
+      id: 'd1',
+      name: 'Test',
+      commanders: ['Ghalta, Primal Hunger'],
+      cards: ['Forest', 'Grizzly Bears', 'Forest'],
+      printings: { 'Grizzly Bears': 'abc', Forest: 'def' },
+    }
+    expect(replaceCard(deck, 'Grizzly Bears', 'Runeclaw Bear')).toEqual({
+      id: 'd1',
+      name: 'Test',
+      commanders: ['Ghalta, Primal Hunger'],
+      cards: ['Forest', 'Runeclaw Bear', 'Forest'],
+      printings: { Forest: 'def' },
+    })
+    expect(replaceCard(deck, 'Ghalta, Primal Hunger', 'Gigantosaurus').commanders).toEqual(['Gigantosaurus'])
   })
 })
 

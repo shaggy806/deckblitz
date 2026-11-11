@@ -27,6 +27,24 @@ export interface ImportSink {
 /** Runs one import of `text`, writing its output to `sink`. */
 export type ImportRunner = (text: string, sink: ImportSink) => void;
 
+/** `POST /suggest-replacement`'s body: a card in a deck being built, and the
+ * deck it's in. Answered with one `{type:"suggestions", options}` line. */
+export interface SuggestRequest {
+  readonly card: string;
+  readonly cards: readonly string[];
+  readonly commanders: readonly string[];
+}
+
+/** What marks an import job's text as a {@link SuggestRequest}: no decklist
+ * starts with a NUL. The request travels as the job's text so it reaches the
+ * card pool the way an import does (on this thread, or through the shard
+ * that runs imports), with no channel of its own. */
+export const SUGGEST_PREFIX = "\u0000suggest-replacement\n";
+
+/** A suggestion request's JSON as the text of an import job
+ * (`runImportJob` reads it back and checks its shape). */
+export const suggestJobText = (requestJson: string): string => SUGGEST_PREFIX + requestJson;
+
 /**
  * Handles `/import-deck` (and its CORS preflight), or returns `false` for any
  * other request. Newline-delimited JSON, streamed: one `{type:"progress"}`
@@ -41,7 +59,8 @@ export function handleImportRoute(
   run: ImportRunner,
   clientOrigin: string,
 ): boolean {
-  if (req.url !== "/import-deck") return false;
+  const suggesting = req.url === "/suggest-replacement";
+  if (req.url !== "/import-deck" && !suggesting) return false;
   if (req.method === "OPTIONS") {
     res.writeHead(204, {
       "Access-Control-Allow-Origin": clientOrigin,
@@ -88,7 +107,11 @@ export function handleImportRoute(
     if (over) return;
     let text: unknown;
     try {
-      text = (JSON.parse(Buffer.concat(chunks).toString("utf8")) as { text?: unknown } | null)?.text;
+      const body = Buffer.concat(chunks).toString("utf8");
+      const parsed = JSON.parse(body) as { text?: unknown } | null;
+      // One card's stand-ins: the whole body is the request, carried as the
+      // job's text.
+      text = suggesting ? suggestJobText(JSON.stringify(parsed)) : parsed?.text;
     } catch (err) {
       refuse(400, err instanceof Error ? err.message : String(err));
       return;

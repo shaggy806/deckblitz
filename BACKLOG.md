@@ -264,7 +264,6 @@ delete its detail there and move this line to `COMPLETED.md`.
 - **"Same for all" covers only a trigger's yes-or-no "you may".**
 - **The game page's own rendering on a slow laptop** (2026-10-13/14): a 250-400 ms hitch when a frame's board lands on a ~50-permanent board (`Table` remounting, forced layout in `usePlayback`'s `show`); measurements and next steps in `docs/client-gaps.md`.
 - **A wordy card's rules text is illegible in the hand** (the user, 2026-10-15): the hovered hand card shrinks long text until it can't be read (The Dawning Archaic); no fix in mind yet.
-- **No way to ask the card replacer for one card while building a deck** (the user, 2026-11-02): right-clicking a card in the deck builder should offer a "suggest replacement" button, so players can use the automatic card replacer to modify their deck.
 - **Animation follow-ups** (re-measure bot speeds, static buffs, library put-backs, the exile filter, the crown's flight, merged tokens, folding tokens with counters, dies-trigger pulses, history highlights, real sounds): `docs/plans/legibility-of-play.md`, "Follow-ups".
 
 ## Tooling / docs

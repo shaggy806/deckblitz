@@ -10,6 +10,29 @@ const importDeckUrl = (): string =>
     'http',
   )}/import-deck`
 
+/**
+ * The card replacer asked about one card of a deck being built (`POST
+ * /suggest-replacement`): cards the pool has that do much the same job,
+ * inside the deck's colour identity and not already in it, best first.
+ */
+export async function suggestReplacement(
+  card: string,
+  cards: readonly string[],
+  commanders: readonly string[],
+): Promise<readonly ReplacementOption[]> {
+  const res = await fetch(importDeckUrl().replace(/\/import-deck$/, '/suggest-replacement'), {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ card, cards, commanders }),
+  })
+  const body = (await res.text()).trim()
+  const parsed = JSON.parse(body === '' ? '{}' : body) as { options?: readonly ReplacementOption[]; error?: string }
+  if (!res.ok || parsed.options === undefined) {
+    throw new Error(parsed.error ?? `the server couldn't suggest a replacement (${res.status})`)
+  }
+  return parsed.options
+}
+
 /** How far along the server is, as reported by the import endpoint's
  * `progress` lines. `name` is the card just resolved (null before the first
  * one lands). */

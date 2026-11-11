@@ -7,7 +7,7 @@ import { createServer } from "node:http";
 import type { Server } from "node:http";
 import type { AddressInfo } from "node:net";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
-import { IMPORT_BODY_LIMIT, handleImportRoute } from "../import-route.js";
+import { IMPORT_BODY_LIMIT, SUGGEST_PREFIX, handleImportRoute } from "../import-route.js";
 import type { ImportRunner } from "../import-route.js";
 
 describe("import route", () => {
@@ -50,6 +50,25 @@ describe("import route", () => {
     const lines = (await res.text()).trim().split("\n").map((l) => JSON.parse(l) as { type: string });
     expect(lines.map((l) => l.type)).toEqual(["progress", "result"]);
     expect(ran).toEqual(["1 Sol Ring"]);
+  });
+
+  it("hands /suggest-replacement's body to the same job, marked as a suggestion request", async () => {
+    runner = (text, sink) => {
+      ran.push(text);
+      sink.line({ type: "suggestions", options: [] });
+      sink.end();
+    };
+    const request = { card: "Sol Ring", cards: ["Sol Ring"], commanders: [] };
+    const res = await fetch(`${base}/suggest-replacement`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(request),
+    });
+    expect(res.status).toBe(200);
+    expect(JSON.parse((await res.text()).trim())).toEqual({ type: "suggestions", options: [] });
+    expect(ran).toEqual([SUGGEST_PREFIX + JSON.stringify(request)]);
+    // No decklist can look like one.
+    expect(SUGGEST_PREFIX.startsWith("\u0000")).toBe(true);
   });
 
   it("answers a job's refusal, a body that isn't JSON, and one without text with a 400", async () => {

@@ -166,6 +166,22 @@ export function createDeck(name: string): SavedDeck {
   return deck
 }
 
+/** `deck` with every copy of `from` — in the deck, the sideboard or the
+ * command zone — replaced by `to`, where it stood. `from`'s chosen printing
+ * goes with it. */
+export function replaceCard(deck: SavedDeck, from: string, to: string): SavedDeck {
+  const swap = (names: readonly string[]): readonly string[] => names.map((n) => (n === from ? to : n))
+  const { printings, sideboard, ...rest } = deck
+  const kept = printings === undefined ? undefined : Object.fromEntries(Object.entries(printings).filter(([name]) => name !== from))
+  return {
+    ...rest,
+    cards: swap(deck.cards),
+    commanders: swap(deck.commanders),
+    ...(sideboard !== undefined ? { sideboard: swap(sideboard) } : {}),
+    ...(kept !== undefined && Object.keys(kept).length > 0 ? { printings: kept } : {}),
+  }
+}
+
 /** `name`, or `name (2)`, `name (3)`… — the first that no deck in `taken` has. */
 export function unusedDeckName(name: string, taken: readonly string[]): string {
   if (!taken.includes(name)) return name

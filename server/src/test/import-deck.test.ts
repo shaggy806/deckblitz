@@ -1,6 +1,7 @@
 import { describe, expect, it, vi, afterEach } from "vitest";
 import { colorIdentityOf, createDefaultRegistry, defineCard, withinIdentity } from "engine";
 import { evaluateDecklist, formatCheck, parseDecklistText, runImportJob } from "../import-deck.js";
+import { suggestJobText } from "../import-route.js";
 
 const registry = createDefaultRegistry();
 
@@ -760,6 +761,32 @@ describe("runImportJob", () => {
       },
     };
   }
+
+  it("answers a suggestion request with stand-ins for one card: in the deck's identity, not already in it", async () => {
+    const ask = async (request: unknown) => {
+      const { out, sink } = recorder();
+      await runImportJob(suggestJobText(JSON.stringify(request)), { registry, tags: () => null, cardData: () => null }, sink);
+      return out;
+    };
+    const out = await ask({ card: "Grizzly Bears", cards: ["Grizzly Bears", "Runeclaw Bear", "Forest"], commanders: ["Ghalta, Primal Hunger"] });
+    expect(out.rejected).toBeNull();
+    expect(out.ended).toBe(1);
+    const [line] = out.lines as { type: string; options: { name: string }[] }[];
+    expect(line.type).toBe("suggestions");
+    const names = line.options.map((o) => o.name);
+    expect(names.length).toBeGreaterThan(0);
+    expect(names.length).toBeLessThanOrEqual(6);
+    // Singleton: nothing the deck has, the card itself least of all.
+    expect(names).not.toContain("Grizzly Bears");
+    expect(names).not.toContain("Runeclaw Bear");
+    // Inside the commander's identity: mono-green, or colourless.
+    for (const name of names) {
+      expect([...colorIdentityOf(registry.get(name), registry)].every((c) => c === "G")).toBe(true);
+    }
+    // A card the pool lacks, or a request of the wrong shape, is refused.
+    expect((await ask({ card: "No Such Card", cards: [], commanders: [] })).rejected).toMatch(/isn't a card in the pool/);
+    expect((await ask({ card: "Sol Ring" })).rejected).toMatch(/names a card/);
+  });
 
   it("streams progress from zero, then one result, then ends", async () => {
     const { out, sink } = recorder();

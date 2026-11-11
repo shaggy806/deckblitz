@@ -1102,3 +1102,51 @@
 .db-pager button:disabled {
   cursor: default;
 }
+
+/* "Suggest a replacement…" (ReplacementPicker.tsx): the stand-ins as a list,
+   each a button that swaps it in. */
+.db-replacement-picker {
+  width: min(560px, 92vw);
+}
+.db-replacement-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+.db-replacement-option {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2px 10px;
+  text-align: left;
+  padding: 8px 10px;
+}
+.db-replacement-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.db-replacement-confidence {
+  font-size: var(--text-xs);
+  align-self: center;
+}
+.db-replacement-confidence.high {
+  color: var(--good);
+}
+.db-replacement-confidence.low {
+  color: var(--muted);
+}
+.db-replacement-tags,
+.db-replacement-text {
+  grid-column: 1 / -1;
+  font-size: var(--text-xs);
+}
+.db-replacement-text {
+  white-space: pre-line;
+  color: var(--muted);
+}
