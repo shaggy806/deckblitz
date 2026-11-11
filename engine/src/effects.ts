@@ -9338,6 +9338,21 @@ export type EffectSpec =
        */
       readonly kind: "separate-into-piles";
       readonly objects: PileObjects;
+      /**
+       * "**Each opponent** separates the creatures they control into two
+       * piles. For each opponent, you choose one of their piles. Each
+       * opponent sacrifices the creatures in their chosen pile" (Make an
+       * Example): three instructions, each for all of them. Every player of
+       * this scope separates their own `objects` (a `permanents`, its `whose`
+       * each of them in turn — write `"that-player"`), in turn order from
+       * the active player (rules 608.2e, 101.4), each seeing the piles made
+       * before theirs; then `chooser` chooses one of each player's piles, in that
+       * order; then every chosen pile meets its fate in one instruction (one
+       * simultaneous sacrifice), and every other pile `rest`. A player with
+       * nothing to separate has two empty piles (rule 700.3d) and isn't
+       * asked, nor is a choice between them. `separator` is unused.
+       */
+      readonly each?: PlayerScope;
       /** Who separates: the effect's controller when absent. */
       readonly separator?: PlayerRef | "an-opponent";
       /** Who chooses one of the piles. */
@@ -9364,6 +9379,15 @@ export type EffectSpec =
         readonly chooser?: PlayerId;
         readonly lookers: readonly PlayerId[];
         readonly piles?: readonly (readonly ObjectId[])[];
+        /** With `each`: the players still to separate (the first is being
+         * asked when `asked` is `"separate"`, about `objects`), the piles
+         * made so far, and the pile chosen of each, in the same order. */
+        readonly each?: {
+          readonly toSeparate: readonly PlayerId[];
+          readonly made: readonly { readonly separator: PlayerId; readonly piles: readonly (readonly ObjectId[])[] }[];
+          readonly chosen: readonly number[];
+          readonly asked?: "separate" | "choose";
+        };
       };
     }
   | {
@@ -19870,6 +19894,63 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
       const below = ctx.parkedCount();
       const faceDown = spec.faceDown === true;
       const progress = spec.progress;
+      if (spec.each !== undefined) {
+        // Three instructions, each for every player of the scope: all
+        // separate, then a pile of each is chosen, then the fates at once.
+        const what = spec.objects;
+        if (typeof what !== "object" || !("permanents" in what)) return;
+        const chooser = chooserPlayer(spec.chooser, ctx);
+        if (chooser === undefined) return;
+        const fates = { chosen: pileFateWord(spec.chosen), ...(spec.rest !== undefined ? { rest: pileFateWord(spec.rest) } : {}) };
+        let { toSeparate, made, chosen } = progress?.each ?? { toSeparate: ctx.playersInScope(spec.each), made: [], chosen: [] };
+        let lookers = progress?.lookers ?? [];
+        if (progress?.each?.asked === "separate") {
+          made = [...made, { separator: toSeparate[0], piles: ctx.takePiles() ?? [[], [...progress.objects]] }];
+          toSeparate = toSeparate.slice(1);
+        } else if (progress?.each?.asked === "choose") {
+          const pile = ctx.takeChosenPile();
+          if (pile === undefined) return;
+          chosen = [...chosen, pile];
+        }
+        while (toSeparate.length > 0) {
+          const separator = toSeparate[0];
+          const begun = ctx.beginPiles({ permanents: what.permanents, whose: separator }, separator);
+          lookers = begun.lookers;
+          if (begun.objects.length > 0 && ctx.askSeparatePiles(separator, begun.objects, chooser, false, fates, false)) {
+            ctx.resumeAfterDecisions(
+              { ...spec, progress: { objects: begun.objects, lookers, each: { toSeparate, made, chosen, asked: "separate" } } },
+              below,
+            );
+            return;
+          }
+          // Nothing to separate: two empty piles (rule 700.3d).
+          made = [...made, { separator, piles: [[], [...begun.objects]] }];
+          toSeparate = toSeparate.slice(1);
+        }
+        while (chosen.length < made.length) {
+          const { separator, piles } = made[chosen.length];
+          // Two empty piles: either is the same choice.
+          if (piles.every((pile) => pile.length === 0)) {
+            chosen = [...chosen, 0];
+            continue;
+          }
+          if (!ctx.askChoosePile(chooser, separator, piles, false, lookers, fates)) return;
+          ctx.resumeAfterDecisions(
+            { ...spec, progress: { objects: [], lookers, each: { toSeparate, made, chosen, asked: "choose" } } },
+            below,
+          );
+          return;
+        }
+        // "Each opponent sacrifices the creatures in their chosen pile": one
+        // instruction over every chosen pile, so one simultaneous event.
+        ctx.finishPiles(
+          made.flatMap(({ piles }, i) => piles[chosen[i]] ?? []),
+          made.flatMap(({ piles }, i) => piles.flatMap((pile, k) => (k === chosen[i] ? [] : pile))),
+          spec.chosen,
+          spec.rest,
+        );
+        return;
+      }
       if (progress === undefined) {
         // An opponent to separate is named after the reveal, which is
         // nobody's look to take: a look has its separator named beforehand.

@@ -13748,6 +13748,27 @@ function pilesAt(sentences, i, ctx) {
       used: 2,
     };
   }
+  // "Each opponent separates the creatures they control into two piles. For
+  // each opponent, you choose one of their piles. Each opponent sacrifices
+  // the creatures in their chosen pile." (Make an Example): all separate,
+  // then all are chosen, then one sacrifice — `each`.
+  m = /^each (opponent|player) separates the (creatures|permanents) they control into two piles\.$/i.exec(s(0));
+  if (
+    m !== null &&
+    new RegExp(`^for each ${m[1]}, you choose one of their piles\\.$`, "i").test(s(1)) &&
+    new RegExp(`^each ${m[1]} sacrifices the ${m[2]} in their chosen pile\\.$`, "i").test(s(2))
+  ) {
+    return {
+      effect: {
+        kind: "separate-into-piles",
+        each: m[1].toLowerCase() === "opponent" ? "each-opponent" : "each-player",
+        objects: { permanents: m[2].toLowerCase() === "creatures" ? { type: "creature" } : {}, whose: "that-player" },
+        chooser: "you",
+        chosen: { effect: { kind: "sacrifice-target", target: 0, byItsController: true } },
+      },
+      used: 3,
+    };
+  }
   // "Separate all permanents (creatures) target player controls into two
   // piles." and the chosen pile's fate.
   m = /^separate all (permanents|creatures) target player controls into two piles\.$/i.exec(s(0));

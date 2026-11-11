@@ -2217,7 +2217,8 @@
   "static:attack-as-though-haste",
   "static:per-keyword-pump",
   "effect:look-and-choose-leftover-exile-with-counters",
-  "bug:creature-subtype-needs-creature-type"
+  "bug:creature-subtype-needs-creature-type",
+  "mechanic:piles-each-opponent-simultaneous"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

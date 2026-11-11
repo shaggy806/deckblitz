@@ -17140,3 +17140,21 @@ describe("counters, then a creature type for good", () => {
     });
   });
 });
+
+describe("piles for each opponent", () => {
+  it("reads Make an Example", () => {
+    const face = parseFace({
+      name: "Thing",
+      type_line: "Sorcery",
+      oracle_text:
+        "Each opponent separates the creatures they control into two piles. For each opponent, you choose one of their piles. Each opponent sacrifices the creatures in their chosen pile. (Piles can be empty.)",
+    }) as unknown as { effect: unknown };
+    expect(face.effect).toEqual({
+      kind: "separate-into-piles",
+      each: "each-opponent",
+      objects: { permanents: { type: "creature" }, whose: "that-player" },
+      chooser: "you",
+      chosen: { effect: { kind: "sacrifice-target", target: 0, byItsController: true } },
+    });
+  });
+});
