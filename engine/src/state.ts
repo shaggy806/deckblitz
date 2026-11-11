@@ -1911,6 +1911,11 @@ export interface PtModifier {
    * A rule about it and that player, not an ability: it holds through a loss
    * of abilities, and nobody else is bound. See `Game.canBeSacrificed`. */
   cantBeSacrificedBy?: PlayerId;
+  /** Its loyalty abilities may be activated this many times a turn while this
+   * lasts (the `loyalty-activations` effect — Kaito, Dancing Shadow's "twice
+   * this turn rather than only once", rule 606.3). A rule about it, not an
+   * ability. See `Game.loyaltyActivationsAllowed`. */
+  loyaltyActivations?: 2;
   /** Layer 6 — it "can block an additional creature" (or `"any"` number of
    * creatures) for the duration (the `block-additional` effect —
    * `StaticAbility.blockAdditional` is the static form). */

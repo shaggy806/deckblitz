@@ -18439,3 +18439,40 @@ describe("what you can't do with the creatures you took this turn", () => {
     ]);
   });
 });
+
+describe("loyalty abilities twice this turn", () => {
+  it("reads Kaito, Dancing Shadow's trigger and +1", () => {
+    const face = parseFace({
+      name: "Test Walker",
+      type_line: "Legendary Planeswalker — Test",
+      loyalty: "3",
+      oracle_text:
+        "Whenever one or more creatures you control deal combat damage to a player, you may return one of them to its owner's hand. If you do, you may activate loyalty abilities of Test Walker twice this turn rather than only once.\n+1: Up to one target creature can't attack or block until your next turn.",
+    } as never) as unknown as { triggered: Record<string, unknown>[]; activated: Record<string, unknown>[] };
+    expect(face.triggered[0]).toMatchObject({
+      trigger: { on: "deals-damage-batch", who: "you-control", filter: { type: "creature" }, combat: true },
+      effect: {
+        kind: "sequence",
+        effects: [
+          {
+            kind: "choose-permanents",
+            filter: { inSet: "trigger-batch" },
+            upTo: 1,
+            min: 0,
+            then: { kind: "return-to-hand", target: 0 },
+          },
+          {
+            kind: "conditional",
+            condition: { kind: "this-way", what: "returned-to-hand" },
+            then: { kind: "loyalty-activations", target: "source", times: 2, duration: "end-of-turn" },
+          },
+        ],
+      },
+    });
+    expect(face.activated[0]).toMatchObject({
+      loyaltyCost: 1,
+      targets: [{ kind: "optional", of: "creature" }],
+      effect: { kind: "restrict", target: 0, restrictions: ["cant-attack", "cant-block"], duration: "until-your-next-turn" },
+    });
+  });
+});

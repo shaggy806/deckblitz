@@ -438,6 +438,7 @@ const RULES: { readonly [K in Kind]: Rule<K> } = {
     if (n.target !== undefined) v.touch(n.target, "help", MINOR);
   },
   "block-additional": (n, v) => v.touch(n.target, "help", MINOR),
+  "loyalty-activations": (n, v) => v.touch(n.target, "help", MINOR),
   "attack-despite-defender": (n, v) => {
     if (n.target !== undefined) v.touch(n.target, "help", MINOR);
   },

@@ -26725,6 +26725,8 @@ export class Game {
    * every planeswalker they control, or with `source`'s own for itself alone
    * (Urza, Planeswalker's "the loyalty abilities of Urza"). */
   private loyaltyActivationsAllowed(player: PlayerId, source: GameObject): number {
+    // A resolved "twice this turn" for this permanent (Kaito, Dancing Shadow).
+    if (source.modifiers.some((m) => m.loyaltyActivations === 2)) return 2;
     if (this.hasOwnStatic(source, (ability) => typeof ability.loyaltyActivationsEachTurn === "object")) return 2;
     return this.controlsActiveStatic(player, (ability) => ability.loyaltyActivationsEachTurn === 2) ? 2 : 1;
   }
@@ -37395,6 +37397,7 @@ controlledBy,
       prohibitSacrificeBy: (object, player, duration) => this.prohibitSacrificeBy(object, player, lastingHere(duration)),
       grantBlockAdditional: (target, amount, duration) =>
         this.grantBlockAdditional(target, amount, lastingHere(duration)),
+      allowLoyaltyActivations: (target, times, duration) => this.allowLoyaltyActivations(target, times, lastingHere(duration)),
       mill: (target, amount) => this.millByEffect(target, amount),
       shuffleZonesIntoLibrary: (target, zones, filter) =>
         this.shuffleZonesIntoLibraryByEffect(
@@ -53502,6 +53505,23 @@ controlledBy,
       toughness: 0,
       keywords: [],
       blockAdditional: amount,
+      ...durationFields(duration),
+    });
+    invalidateComputedCache();
+  }
+
+  /** See the `"loyalty-activations"` {@link EffectSpec}: `target`'s loyalty
+   * abilities may be activated `times` a turn (`PtModifier.loyaltyActivations`). */
+  private allowLoyaltyActivations(target: TargetRef, times: 2, duration: Expiry): void {
+    if (target.kind !== "object") return;
+    const object = this.state.objects[target.object];
+    if (object === undefined || object.zone !== "battlefield" || !durationBegins(object, duration)) return;
+    object.modifiers.push({
+      timestamp: this.freshTimestamp(),
+      power: 0,
+      toughness: 0,
+      keywords: [],
+      loyaltyActivations: times,
       ...durationFields(duration),
     });
     invalidateComputedCache();

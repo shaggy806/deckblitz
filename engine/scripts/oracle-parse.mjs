@@ -6869,6 +6869,19 @@ export function parseSentence(sentence, ctx) {
   if (ctx.it === "trigger-object" && ctx.targets.length === 0 && /^(?:that creature|it) can't attack during its controller's next turn\.$/i.test(s)) {
     return { kind: "restrict", target: "trigger-object", restrictions: ["cant-attack"], duration: "during-its-controllers-next-turn" };
   }
+  // "You may activate loyalty abilities of ~ twice this turn rather than only
+  // once" (Kaito, Dancing Shadow, rule 606.3): a resolved effect over this
+  // permanent for the turn — the `loyalty-activations` effect.
+  if (re("you may activate loyalty abilities of ~ twice this turn rather than only once").test(s)) {
+    return { kind: "loyalty-activations", target: "source", times: 2, duration: "end-of-turn" };
+  }
+  // "Target creature can't attack or block until your next turn" (Spara's
+  // Adjudicators' enters trigger, Kaito, Dancing Shadow's +1).
+  if ((m = re(`(up to one ${TARGET}|${TARGET}) can't attack or block until your next turn`).exec(s))) {
+    const held = /^up to one /i.test(m[1]) ? quantifiedSlots(m[1], ctx)?.slots[0] : slot(m[1]);
+    if (held === undefined) return null;
+    return { kind: "restrict", target: held, restrictions: ["cant-attack", "cant-block"], duration: "until-your-next-turn" };
+  }
   // "Until your next turn, target creature can't attack or block and its
   // activated abilities can't be activated" (Edifice of Authority): detain in
   // all but name; and "gets -3/-0 and its activated abilities can't be
@@ -10019,6 +10032,30 @@ export function parseEffect(text, outer) {
         parsed.push(effect);
         hints.push({ sentence, effect });
         if (sameAs) skip = 1;
+        continue;
+      }
+    }
+    // "You may return one of them to its owner's hand. If you do, you may
+    // activate loyalty abilities of ~ twice this turn rather than only once."
+    // (Kaito, Dancing Shadow) on a batched damage trigger: one of the
+    // creatures that dealt it, chosen as this resolves.
+    const mayReturnOneM = ctx.damageBatch === true && /^you may return one of them to its owner's hand\.$/i.test(sentence);
+    const ifOneReturnedM = mayReturnOneM ? /^if you do, (.+)$/i.exec(sentences[i + 1] ?? "") : null;
+    if (ifOneReturnedM !== null) {
+      const then = parseSentence(`${ifOneReturnedM[1][0].toUpperCase()}${ifOneReturnedM[1].slice(1)}`, ctx);
+      if (then !== null && !containsUndefined(then)) {
+        const choose = {
+          kind: "choose-permanents",
+          filter: { inSet: "trigger-batch" },
+          upTo: 1,
+          min: 0,
+          prompt: "You may return one of them to its owner's hand.",
+          then: { kind: "return-to-hand", target: 0 },
+        };
+        const conditional = { kind: "conditional", condition: { kind: "this-way", what: "returned-to-hand" }, then };
+        parsed.push(choose, conditional);
+        hints.push({ sentence, effect: choose }, { sentence: sentences[i + 1], effect: conditional });
+        skip = 1;
         continue;
       }
     }
@@ -17043,6 +17080,8 @@ function parseFaceAsWritten(face, ctx = {}) {
           ...(triggers.every((t) => t.on === "attacks-batch" || t.on === "attack-with" || t.on === "attacks-player")
             ? { attackBatch: true }
             : {}),
+          // "One of them": the sources of a batched damage trigger.
+          ...(triggers.every((t) => t.on === "deals-damage-batch") ? { damageBatch: true } : {}),
         },
         lines,
         i,
@@ -18540,6 +18579,7 @@ function fillEffect(ability, text, ctx, lines, i) {
     ...(ability.cost?.removeCounter?.count === "all" ? { removedIsX: true } : {}),
     ...(ctx.thatPlayer !== undefined ? { thatPlayer: ctx.thatPlayer } : {}),
     ...(ctx.attackBatch === true ? { attackBatch: true } : {}),
+    ...(ctx.damageBatch === true ? { damageBatch: true } : {}),
     ...(theirSlots !== undefined ? { opponentChoosesTargets: theirSlots } : {}),
   });
   if (r.effect !== null && theirSlots !== undefined && theirSlots.length > 0) ability.opponentChoosesTargets = theirSlots;

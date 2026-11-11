@@ -4555,6 +4555,20 @@ export type EffectSpec =
       readonly duration: PermanentDuration;
     }
   | {
+      /** "You may activate loyalty abilities of Kaito **twice this turn**
+       * rather than only once" (Kaito, Dancing Shadow, rule 606.3): the
+       * loyalty abilities of `target` — the permanent it is now (rule 400.7)
+       * — may be activated `times` in a turn while this lasts, by whoever
+       * may activate them. A rule about that permanent, not an ability it
+       * gains, so losing its abilities doesn't end it; two of them are still
+       * twice (the card's ruling: "not additive"). The static forms are
+       * `StaticAbility.loyaltyActivationsEachTurn`. */
+      readonly kind: "loyalty-activations";
+      readonly target: ObjectRef;
+      readonly times: 2;
+      readonly duration: PermanentDuration;
+    }
+  | {
       /** Target player puts the top `amount` cards of their library into
        * their graveyard. `target: "you"` = the effect's controller, with no
        * target slot (Aftermath Analyst's "mill three cards"). */
@@ -11701,6 +11715,8 @@ export interface EffectApi {
   prohibitSacrificeBy(object: ObjectId, player: PlayerId, duration: PermanentDuration): void;
   /** See the `"block-additional"` {@link EffectSpec}. */
   grantBlockAdditional(target: TargetRef, amount: number | "any", duration: PermanentDuration): void;
+  /** See the `"loyalty-activations"` {@link EffectSpec}. */
+  allowLoyaltyActivations(target: TargetRef, times: 2, duration: PermanentDuration): void;
   /** `target` (a player) mills `amount` cards. */
   mill(target: TargetRef, amount: number): void;
   /** See the `"shuffle-graveyard-into-library"` {@link EffectSpec}: how
@@ -17130,6 +17146,11 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
     case "block-additional": {
       const target = objectRefAct(spec.target, ctx);
       if (target !== undefined) ctx.grantBlockAdditional(target, spec.amount, spec.duration);
+      return;
+    }
+    case "loyalty-activations": {
+      const target = objectRefAct(spec.target, ctx);
+      if (target !== undefined) ctx.allowLoyaltyActivations(target, spec.times, spec.duration);
       return;
     }
     case "return-to-hand": {
