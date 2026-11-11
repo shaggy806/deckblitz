@@ -1144,6 +1144,7 @@ import _poolArchaeomancersMap from "./pool/archaeomancers-map.js";
 import _poolArchaeomender from "./pool/archaeomender.js";
 import _poolArchaicsAgony from "./pool/archaics-agony.js";
 import _poolArchangelAvacyn from "./pool/archangel-avacyn.js";
+import _poolArchangelElspeth from "./pool/archangel-elspeth.js";
 import _poolArchangelOfThune from "./pool/archangel-of-thune.js";
 import _poolArchangelOfTithes from "./pool/archangel-of-tithes.js";
 import _poolArchangelOfWrath from "./pool/archangel-of-wrath.js";
@@ -14318,6 +14319,7 @@ import _poolKarmicGuide from "./pool/karmic-guide.js";
 import _poolKarnArgentDefender from "./pool/karn-argent-defender.js";
 import _poolKarnGildedGuardian from "./pool/karn-gilded-guardian.js";
 import _poolKarnLegacyReforged from "./pool/karn-legacy-reforged.js";
+import _poolKarnScionOfUrza from "./pool/karn-scion-of-urza.js";
 import _poolKarnSilverGolem from "./pool/karn-silver-golem.js";
 import _poolKarnTheGreatCreator from "./pool/karn-the-great-creator.js";
 import _poolKarnsBastion from "./pool/karns-bastion.js";
@@ -16190,6 +16192,7 @@ import _poolMajesticMetamorphosis from "./pool/majestic-metamorphosis.js";
 import _poolMajorTeroh from "./pool/major-teroh.js";
 import _poolMakeAStand from "./pool/make-a-stand.js";
 import _poolMakeAWish from "./pool/make-a-wish.js";
+import _poolMakeAnExample from "./pool/make-an-example.js";
 import _poolMakeDisappear from "./pool/make-disappear.js";
 import _poolMakeItSo from "./pool/make-it-so.js";
 import _poolMakeMischief from "./pool/make-mischief.js";
@@ -33519,6 +33522,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolArchaeomender,
   _poolArchaicsAgony,
   _poolArchangelAvacyn,
+  _poolArchangelElspeth,
   _poolArchangelOfThune,
   _poolArchangelOfTithes,
   _poolArchangelOfWrath,
@@ -46693,6 +46697,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolKarnArgentDefender,
   _poolKarnGildedGuardian,
   _poolKarnLegacyReforged,
+  _poolKarnScionOfUrza,
   _poolKarnSilverGolem,
   _poolKarnTheGreatCreator,
   _poolKarnsBastion,
@@ -48565,6 +48570,7 @@ export const POOL_CARDS: readonly CardDefinition[] = [
   _poolMajorTeroh,
   _poolMakeAStand,
   _poolMakeAWish,
+  _poolMakeAnExample,
   _poolMakeDisappear,
   _poolMakeItSo,
   _poolMakeMischief,
@@ -65907,6 +65913,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/archaeomender": _poolArchaeomender,
   "pool/archaics-agony": _poolArchaicsAgony,
   "pool/archangel-avacyn": _poolArchangelAvacyn,
+  "pool/archangel-elspeth": _poolArchangelElspeth,
   "pool/archangel-of-thune": _poolArchangelOfThune,
   "pool/archangel-of-tithes": _poolArchangelOfTithes,
   "pool/archangel-of-wrath": _poolArchangelOfWrath,
@@ -79081,6 +79088,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/karn-argent-defender": _poolKarnArgentDefender,
   "pool/karn-gilded-guardian": _poolKarnGildedGuardian,
   "pool/karn-legacy-reforged": _poolKarnLegacyReforged,
+  "pool/karn-scion-of-urza": _poolKarnScionOfUrza,
   "pool/karn-silver-golem": _poolKarnSilverGolem,
   "pool/karn-the-great-creator": _poolKarnTheGreatCreator,
   "pool/karns-bastion": _poolKarnsBastion,
@@ -80953,6 +80961,7 @@ export const CARD_FILES: Readonly<Record<string, CardDefinition>> = {
   "pool/major-teroh": _poolMajorTeroh,
   "pool/make-a-stand": _poolMakeAStand,
   "pool/make-a-wish": _poolMakeAWish,
+  "pool/make-an-example": _poolMakeAnExample,
   "pool/make-disappear": _poolMakeDisappear,
   "pool/make-it-so": _poolMakeItSo,
   "pool/make-mischief": _poolMakeMischief,

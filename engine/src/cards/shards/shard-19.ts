@@ -41,6 +41,7 @@ import _poolArashinCleric from "../pool/arashin-cleric.js";
 import _poolArboretumElemental from "../pool/arboretum-elemental.js";
 import _poolArcaneMelee from "../pool/arcane-melee.js";
 import _poolArcboundSlasher from "../pool/arcbound-slasher.js";
+import _poolArchangelElspeth from "../pool/archangel-elspeth.js";
 import _poolArchetypeOfAggression from "../pool/archetype-of-aggression.js";
 import _poolArcumsSleigh from "../pool/arcums-sleigh.js";
 import _poolArgothSanctumOfNature from "../pool/argoth-sanctum-of-nature.js";
@@ -1105,6 +1106,7 @@ const shard: CardShard = {
     _poolArboretumElemental,
     _poolArcaneMelee,
     _poolArcboundSlasher,
+    _poolArchangelElspeth,
     _poolArchetypeOfAggression,
     _poolArcumsSleigh,
     _poolArgothSanctumOfNature,

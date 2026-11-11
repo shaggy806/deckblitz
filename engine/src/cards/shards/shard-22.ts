@@ -427,6 +427,7 @@ import _poolK9MarkI from "../pool/k-9-mark-i.js";
 import _poolKaervekTheMerciless from "../pool/kaervek-the-merciless.js";
 import _poolKangDynasty from "../pool/kang-dynasty.js";
 import _poolKarametraGodOfHarvests from "../pool/karametra-god-of-harvests.js";
+import _poolKarnScionOfUrza from "../pool/karn-scion-of-urza.js";
 import _poolKazaRoilChaser from "../pool/kaza-roil-chaser.js";
 import _poolKelethSunmaneFamiliar from "../pool/keleth-sunmane-familiar.js";
 import _poolKessDissidentMage from "../pool/kess-dissident-mage.js";
@@ -1459,6 +1460,7 @@ const shard: CardShard = {
     _poolKaervekTheMerciless,
     _poolKangDynasty,
     _poolKarametraGodOfHarvests,
+    _poolKarnScionOfUrza,
     _poolKazaRoilChaser,
     _poolKelethSunmaneFamiliar,
     _poolKessDissidentMage,
