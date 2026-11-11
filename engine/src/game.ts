@@ -5254,7 +5254,10 @@ export class Game {
             ? 1
             : kicked && def.kicker?.minX !== undefined
               ? def.kicker.minX
-              : 0;
+              : // "X can't be 0" on the spell's own {X} (Mind Grind).
+                def.minX !== undefined && variantCost !== null && parseManaCost(variantCost).x > 0
+                ? def.minX
+                : 0;
       if (leastX === null) continue;
       const xFloor: number = leastX;
       const xFilter =
@@ -18819,6 +18822,11 @@ export class Game {
     }
     // "X can't be greater than …" (Open the Way), as it's announced (rule 601.2b).
     if (def.maxX !== undefined && Math.floor(xValue) > this.costAmount(def.maxX, player, cardId, cardId)) {
+      return `X can't be ${Math.floor(xValue)} for ${def.name}`;
+    }
+    // "X can't be 0" (Mind Grind). Cast with no {X} to pay, X is 0 (rule
+    // 107.3b), so it can't be cast that way.
+    if (def.minX !== undefined && Math.floor(xValue) < def.minX) {
       return `X can't be ${Math.floor(xValue)} for ${def.name}`;
     }
     // An additional sacrifice cost (rule 601.2f) must be payable, and — once

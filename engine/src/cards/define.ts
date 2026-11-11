@@ -4729,6 +4729,13 @@ export interface CardDefinition {
    */
   readonly maxX?: EffectAmount;
   /**
+   * "X can't be 0" on a spell with {X} in its mana cost (Mind Grind): the
+   * least X its caster may announce (rule 601.2b). Cast while paying neither
+   * its mana cost nor an alternative cost with X in it, the only legal X is 0
+   * (rule 107.3b), so it can't be cast that way at all (Mind Grind's ruling).
+   */
+  readonly minX?: number;
+  /**
    * "This spell costs {1} more to cast for each target beyond the first"
    * (Fireball; Strive — Twinflame's {2}{R}): this cost, once per distinct
    * target after the first. A cost increase (rule 601.2f), so it's added to
@@ -5657,6 +5664,7 @@ const PRINTED_ABILITY: {
   opponentChoosesTargets: (def) => def.opponentChoosesTargets.length > 0,
   selfCostReduction: (def) => def.selfCostReduction !== null,
   maxX: (def) => def.maxX !== undefined,
+  minX: (def) => def.minX !== undefined,
   costPerExtraTarget: (def) => def.costPerExtraTarget !== null,
   targetCostReduction: (def) => def.targetCostReduction !== null,
   targetCostIncrease: (def) => def.targetCostIncrease !== null,
@@ -5927,6 +5935,8 @@ interface CardDraft {
   selfCostReduction?: SelfCostReduction | readonly SelfCostReduction[];
   /** See {@link CardDefinition.maxX}. */
   maxX?: EffectAmount;
+  /** See {@link CardDefinition.minX}. */
+  minX?: number;
   costPerExtraTarget?: string;
   /** See {@link CardDefinition.targetCostReduction}. */
   targetCostReduction?: { readonly filter: CardFilter; readonly reduceGeneric: number; readonly reduceColored?: string };
@@ -6341,6 +6351,7 @@ function rareCardFields(draft: CardDraft) {
     ...(draft.alsoSubtypes !== undefined ? { alsoSubtypes: draft.alsoSubtypes } : {}),
     ...(draft.flashIf !== undefined ? { flashIf: draft.flashIf } : {}),
     ...(draft.maxX !== undefined ? { maxX: draft.maxX } : {}),
+    ...(draft.minX !== undefined ? { minX: draft.minX } : {}),
     ...(draft.secretChoiceOnEnter === true ? { secretChoiceOnEnter: true as const } : {}),
     ...(draft.choosePlayerOnTransform !== undefined ? { choosePlayerOnTransform: draft.choosePlayerOnTransform } : {}),
     ...(draft.entersUnderChosenPlayer === true ? { entersUnderChosenPlayer: true as const } : {}),

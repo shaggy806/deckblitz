@@ -13404,6 +13404,23 @@ function revealUntilAt(sentences, i, ctx) {
       used: 2,
     };
   }
+  // Mind Grind: each opponent's own reveal, all of it into their graveyard.
+  const theirs = sentenceRe(
+    `each opponent reveals cards from the top of their library until they reveal ${N} ([\\w-]+) cards?, then puts all cards revealed this way into their graveyard`,
+  ).exec(sentences[i]);
+  if (theirs !== null) {
+    const count = numberOf(theirs[1]);
+    const filter = parseTypePhrase(theirs[2]);
+    if (filter === null || count === null || count === undefined) return null;
+    return {
+      effect: {
+        kind: "for-each-player",
+        who: "each-opponent",
+        effect: { kind: "reveal-until-count", whose: "that-player", filter, count, put: "with-rest", rest: "graveyard" },
+      },
+      used: 1,
+    };
+  }
   const own = /^choose (any target|target creature)\.$/i.exec(sentences[i]);
   let j = own === null ? i : i + 1;
   const reveal = sentenceRe(`${FROM_TOP} ${N} ([\\w-]+) cards?`).exec(sentences[j] ?? "");
@@ -16372,6 +16389,13 @@ function parseFaceAsWritten(face, ctx = {}) {
       if (exiles !== null) {
         text = exiles[1];
         out.exileOnResolve = true;
+      }
+      // "…. X can't be 0." closing a spell with {X} in its mana cost (Mind
+      // Grind): the least X its caster may announce (`minX`).
+      const noZero = /^(.+\.) X can't be 0\.$/.exec(text);
+      if (noZero !== null && /\{X\}/.test(face.mana_cost ?? "")) {
+        text = noZero[1];
+        out.minX = 1;
       }
       // "If a Dragon was beheld, …" / "If this spell's additional cost was
       // paid, …" closing a "you may behold" spell (rules 701.4b, 607.2i):

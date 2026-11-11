@@ -17408,3 +17408,25 @@ describe("piles for each opponent", () => {
     });
   });
 });
+
+describe("\"X can't be 0\" closing a spell with {X} in its cost", () => {
+  it("reads Mind Grind whole", () => {
+    const grind = parseFace(
+      {
+        name: "Mind Grind",
+        type_line: "Sorcery",
+        mana_cost: "{X}{U}{B}",
+        oracle_text:
+          "Each opponent reveals cards from the top of their library until they reveal X land cards, then puts all cards revealed this way into their graveyard. X can't be 0.",
+      },
+      { tokenFor: () => null },
+    ) as unknown as { minX: unknown; complete: boolean; effect: unknown };
+    expect(grind.minX).toBe(1);
+    expect(grind.complete).toBe(true);
+    expect(grind.effect).toEqual({
+      kind: "for-each-player",
+      who: "each-opponent",
+      effect: { kind: "reveal-until-count", whose: "that-player", filter: { type: "land" }, count: "x", put: "with-rest", rest: "graveyard" },
+    });
+  });
+});
