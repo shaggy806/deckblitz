@@ -8,7 +8,9 @@ import { describe, expect, it } from "vitest";
 
 import type { Game } from "../game.js";
 import type { ObjectId, PlayerId } from "../primitives.js";
-import { A, B, activate, hand, lands, life, spawn, table, toGraveyard, zone } from "./harness.js";
+import { EvalBotController } from "../bot/eval-bot.js";
+import { HeuristicBotController } from "../controller.js";
+import { A, B, activate, cast, hand, lands, life, settle, spawn, table, toGraveyard, toHand, zone } from "./harness.js";
 
 function commander(game: Game, name: string, player: PlayerId, where: "command" | "graveyard"): ObjectId {
   const id = game.debugSpawn(name, player, where);
@@ -45,18 +47,63 @@ describe("Campfire", () => {
     expect(zone(game, theirDead)).toBe("graveyard");
   });
 
-  it("a commander in the graveyard may go to the command zone instead, and isn't shuffled in (rule 903.9b)", () => {
+  it("each commander's owner may choose the command zone instead: one there stays put, one in the graveyard goes there, another goes to hand (rule 903.9b)", () => {
     const { game, a } = table({ deck: "Forest" });
-    a.commanderReplacementFn = () => true;
+    lands(game, "Wastes", 2);
+    const fire = spawn(game, "Campfire");
+    const kept = commander(game, "Craw Wurm", A, "command");
+    const taken = commander(game, "Hill Giant", A, "command");
+    const dead = commander(game, "Grizzly Bears", A, "graveyard");
+    const plain = toGraveyard(game, "Hill Giant");
+    const asked: { id: ObjectId; to: string; from: string }[] = [];
+    a.commanderReplacementFn = (view, id, to) => {
+      asked.push({ id, to, from: view.state.objects[id].zone });
+      return id !== taken;
+    };
+    const stint = game.state.objects[kept].zoneChangeCount;
+    activate(game, fire, 1);
+    expect(asked.map((q) => q.id).sort()).toEqual([kept, taken, dead].sort());
+    expect(asked.every((q) => q.to === "hand")).toBe(true);
+    // Kept in the command zone: no zone change at all.
+    expect(zone(game, kept)).toBe("command");
+    expect(game.state.objects[kept].zoneChangeCount).toBe(stint);
+    expect(zone(game, taken)).toBe("hand");
+    expect(zone(game, dead)).toBe("command");
+    expect(zone(game, plain)).toBe("library");
+  });
+
+  it("by default a commander in the command zone goes to the hand, for a scripted seat and for the bots' answer", () => {
+    const { game } = table({ deck: "Forest" });
     lands(game, "Wastes", 2);
     const fire = spawn(game, "Campfire");
     const waiting = commander(game, "Craw Wurm", A, "command");
-    const dead = commander(game, "Grizzly Bears", A, "graveyard");
-    const plain = toGraveyard(game, "Hill Giant");
-    activate(game, fire, 1);
+    game.dispatch({ type: "activate-ability", player: A, source: fire, abilityIndex: 1, targets: [] });
+    game.advanceUntil((s) => s.awaiting?.kind === "commander-replacement");
+    const awaiting = game.state.awaiting;
+    expect(awaiting?.kind === "commander-replacement" && awaiting.fromCommandZone).toBe(true);
+    const view = { player: A, state: game.state, legalActions: () => game.legalActions(A) };
+    for (const bot of [new HeuristicBotController(A, game.registry), new EvalBotController(A, game.registry)]) {
+      expect(bot.act(view)).toMatchObject({ type: "commander-replacement", toCommandZone: false });
+    }
+    settle(game);
     expect(zone(game, waiting)).toBe("hand");
-    expect(zone(game, dead)).toBe("command");
-    expect(zone(game, plain)).toBe("library");
+  });
+
+  it("Command Beacon, Netherborn Altar and Road of Return still put the commander into the hand with a seat's default answer", () => {
+    const { game } = table({ deck: "Forest" });
+    lands(game, "Forest", 2);
+    const first = commander(game, "Craw Wurm", A, "command");
+    const beacon = spawn(game, "Command Beacon");
+    activate(game, beacon, 1);
+    expect(zone(game, first)).toBe("hand");
+    const second = commander(game, "Hill Giant", A, "command");
+    const altar = spawn(game, "Netherborn Altar");
+    activate(game, altar, 0);
+    expect(zone(game, second)).toBe("hand");
+    expect(life(game)).toBe(17);
+    const third = commander(game, "Grizzly Bears", A, "command");
+    cast(game, toHand(game, "Road of Return"), { modes: [1] });
+    expect(zone(game, third)).toBe("hand");
   });
 
   it("with no commander anywhere, it still shuffles the graveyard in", () => {

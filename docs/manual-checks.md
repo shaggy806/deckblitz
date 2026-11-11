@@ -28,6 +28,13 @@ test, `manual-check-presets.test.ts`, builds every board and matches them to the
 thing per test, its own board with only the cards it needs, plain words — no rule numbers or
 engine terms. A second thing to check is a second test.
 
+## A commander put into your hand from the command zone (2026-11-11)
+
+### Campfire: your commander may stay in the command zone
+- **Do:** Activate Campfire's second ability ({2}, {T}, Exile this artifact). When asked about Krenko, pick 'Command zone'.
+- **Expect:** 'Krenko, Mob Boss would go to your hand — keep it in the command zone instead?' with [Command zone] and [Put into hand]. Krenko stays in the command zone and Campfire is exiled.
+- **Not a bug:** 'Put into hand' puts Krenko into your hand, where casting it costs no commander tax.
+
 ## A land you may have enter tapped (2026-11-11)
 
 ### Mariposa Military Base: you may have it enter tapped for two rad counters

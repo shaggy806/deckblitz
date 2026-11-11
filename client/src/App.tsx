@@ -5712,7 +5712,9 @@ function Table({
           {game.nameOf(commanderChoiceAction.commander)}{' '}
           {cmdThere
             ? `is in ${cmdZoneName} — move it to the command zone?`
-            : `would go to ${cmdZoneName} — move it to the command zone instead?`}
+            : commanderChoiceAction.fromCommandZone === true
+              ? `would go to ${cmdZoneName} — keep it in the command zone instead?`
+              : `would go to ${cmdZoneName} — move it to the command zone instead?`}
         </span>
         <button
           type="button"

@@ -721,6 +721,9 @@ export class AutomaticController implements PlayerController {
     // hand costs no commander tax (rule 903.8 taxes only casts from the
     // command zone), so the command zone is strictly worse.
     if (movedTo === "hand") return false;
+    // One being put somewhere from the command zone itself goes: whoever is
+    // moving it asked for that (Command Beacon's cost, Campfire).
+    if (view.state.objects[commander]?.zone === "command") return false;
     // The command zone — but a commander in exile that can still be cast from
     // there (on an adventure, foretold, suspended) is where its owner put it
     // on purpose, and casting it from there costs no tax. An airbended one
@@ -1164,7 +1167,10 @@ export class ScriptedController implements PlayerController {
   chooseFromZoneFn: ZoneChooser = (_view, eligible, min, _max) => eligible.slice(0, min);
   mulliganFn: MulliganChooser = () => false;
   chooseBottomOfLibraryFn: BottomChooser = (hand, count) => discardFromFront(hand, count);
-  commanderReplacementFn: CommanderReplacementChooser = () => true;
+  // The command zone — except for a commander already there, which goes
+  // where the effect moving it out is putting it (Command Beacon, Campfire).
+  commanderReplacementFn: CommanderReplacementChooser = (view, commander) =>
+    view.state.objects[commander]?.zone !== "command";
   payLifeForUntappedFn: (view: ControllerView, source: ObjectId, life: number) => boolean =
     () => false;
   revealMiracleFn: (view: ControllerView, card: ObjectId, cost: string) => boolean = () => true;

@@ -32,6 +32,7 @@ export const commanderReplacement = defineDecision({
       // Where it stays (a graveyard, exile) or goes (a hand, a library) if the
       // offer is declined — the client names it rather than just "move it?".
       intendedZone: awaiting.intendedZone,
+      ...(awaiting.fromCommandZone === true ? { fromCommandZone: true as const } : {}),
     },
   ],
 
@@ -83,9 +84,14 @@ export const commanderReplacement = defineDecision({
 
   // Heavily biased towards the command zone, which is what a real game almost
   // always chooses — but not unanimous, so the graveyard branch stays fuzzed.
-  randomAnswer: (_legal, player, rng): Action => ({
-    type: "commander-replacement",
-    player,
-    toCommandZone: rng.random() < 0.85,
-  }),
+  // One already in the command zone the other way round: whatever is moving
+  // it out was asked for (Command Beacon's cost, Campfire), so it mostly goes.
+  randomAnswer: (legal, player, rng): Action => {
+    const roll = rng.random();
+    return {
+      type: "commander-replacement",
+      player,
+      toCommandZone: legal.fromCommandZone === true ? roll >= 0.85 : roll < 0.85,
+    };
+  },
 });

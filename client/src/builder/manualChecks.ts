@@ -11950,4 +11950,9 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
     'Mariposa Military Base: you may have it enter tapped for two rad counters',
     board({ you: { bf: ['Wastes*3'], hand: ['Mariposa Military Base'] } }),
   ),
+  // --- A commander put into your hand from the command zone (2026-11-11) ---
+  preset(
+    'Campfire: your commander may stay in the command zone',
+    board({ you: { cmd: ['Krenko, Mob Boss'], bf: ['Campfire', 'Wastes*2'] } }),
+  ),
 ]

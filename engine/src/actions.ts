@@ -2098,6 +2098,10 @@ export type LegalAction =
        * or exile it's already in (rule 903.9a) — or goes: the hand or library
        * it hasn't been put into yet (903.9b). */
       readonly intendedZone: "graveyard" | "exile" | "hand" | "library";
+      /** The commander is in the command zone now, and something is putting
+       * it into a hand or library from there (Command Beacon, Campfire):
+       * accepting the offer leaves it where it is (rule 903.9b). */
+      readonly fromCommandZone?: true;
     }
   | {
       /** A shock land just entered tapped — pay `life` to untap it? (rule 614.13) */

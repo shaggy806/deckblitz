@@ -3737,12 +3737,15 @@ export type AwaitingDecision =
        * - `"hand"` / `"library"`: it hasn't moved yet. Rule 903.9b is a
        *   replacement effect, so it waits where it was — on the battlefield,
        *   or for a return to hand, on the stack or in a graveyard or exile —
-       *   until this is answered.
+       *   until this is answered. `fromCommandZone`: it's in the command
+       *   zone itself ("from anywhere" — Command Beacon, Campfire), and
+       *   choosing the command zone leaves it there, no zone change.
        */
       readonly kind: "commander-replacement";
       readonly player: PlayerId;
       readonly commander: ObjectId;
       readonly intendedZone: CommanderReplacementZone;
+      readonly fromCommandZone?: true;
     }
   | {
       /** A "shock land" (rule 614.13) just entered: its controller may pay
@@ -4846,8 +4849,10 @@ export type CommanderReplacementZone = "graveyard" | "exile" | "hand" | "library
  * battlefield (see `GameState.deferredCommanderMove`): the graveyard or exile
  * it was put into (903.9a), or for a return to hand, the zone it's leaving;
  * or the hand a `choose-from-zone` is putting it into a library from
- * (`heldByZoneChoice`). */
-export type CommanderMoveOrigin = "stack" | "graveyard" | "exile" | "hand";
+ * (`heldByZoneChoice`). `"command"`: the command zone itself, where it stays
+ * if its owner chooses it over the hand or library (rule 903.9b's "from
+ * anywhere"). */
+export type CommanderMoveOrigin = "stack" | "graveyard" | "exile" | "hand" | "command";
 /** Where in its owner's library a commander's deferred 903.9b move puts it
  * if its owner declines the command zone: where the move was putting it
  * (Noxious Revival's top, Chaos Warp's shuffle). A plain move to a library

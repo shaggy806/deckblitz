@@ -7453,6 +7453,15 @@ export class Game {
       this.prepareForPriority(this.activePlayer);
       return;
     }
+    if (toCommandZone && deferred.from === "command") {
+      // Already in the command zone, and kept there in place of the hand or
+      // library it was headed for (rule 903.9b): no zone change, so nothing
+      // leaves and nothing enters.
+      this.state.deferredCommanderMove = null;
+      this.emit({ type: "commander-zone-decision", object: commander, toCommandZone, from: intendedZone });
+      this.prepareForPriority(this.activePlayer);
+      return;
+    }
     const destination = toCommandZone ? "command" : intendedZone;
     // The move completes the simultaneous event that deferred it (a wrath,
     // a state-based sweep), so what left in that event sees it go, and it
@@ -7548,6 +7557,7 @@ export class Game {
           player: state.objects[commander].owner,
           commander,
           intendedZone,
+          ...(from === "command" ? { fromCommandZone: true as const } : {}),
         };
         return;
       }
@@ -60041,7 +60051,9 @@ controlledBy,
     // (`finishZoneChoice`).
     const fromElsewhere =
       (to === "hand" || to === "library") &&
-      (object.zone === "stack" || object.zone === "graveyard" || object.zone === "exile");
+      // The command zone too ("from anywhere" — Command Beacon, Campfire):
+      // chosen, it simply stays there (`applyCommanderChoice`).
+      (object.zone === "stack" || object.zone === "graveyard" || object.zone === "exile" || object.zone === "command");
     if (
       object.isCommander &&
       this.completingCommanderMove !== id &&
@@ -60072,6 +60084,7 @@ controlledBy,
             player: object.owner,
             commander: id,
             intendedZone,
+            ...(origin.from === "command" ? { fromCommandZone: true as const } : {}),
           };
         } else {
           state.pendingCommanderMoves.push({ commander: id, intendedZone, ...origin });
