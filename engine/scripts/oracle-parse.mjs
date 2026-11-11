@@ -4014,6 +4014,17 @@ export function parseSentence(sentence, ctx) {
   if (re("put all cards exiled with (?:~|it) into (?:their owners?'s?|its owner's) hands?").test(s)) {
     return { kind: "return-exiled-by-source", linked: "hand" };
   }
+  // "Return all cards exiled with ~ to their owner's hand and you lose that
+  // much life" (Asmodeus the Archfiend): 1 life for each card returned.
+  if (re("return all cards exiled with (?:~|it) to their owner's hand and you lose that much life").test(s)) {
+    return {
+      kind: "sequence",
+      effects: [
+        { kind: "return-exiled-by-source", linked: "hand" },
+        { kind: "lose-life", amount: { thisWay: "returned-to-hand" } },
+      ],
+    };
+  }
   if (re("put (?:all cards|each card) exiled with (?:~|it) into (?:their owners?'s?|its owner's) graveyards?").test(s)) {
     return { kind: "return-exiled-by-source", linked: "graveyard" };
   }
@@ -19526,7 +19537,10 @@ function parseStatic(line, text) {
     (m = /^If you would draw a card, instead (.+)$/.exec(line)) ??
     (m = /^If you would draw a card, (.+?) instead\.( .+)?$/.exec(line))
   ) {
-    const body = m[2] !== undefined ? `${m[1]}.${m[2]}` : m[1];
+    // "…, exile the top card of your library face down instead." (Asmodeus the
+    // Archfiend): the one sentence, its period gone with "instead".
+    const written = m[2] !== undefined ? `${m[1]}.${m[2]}` : m[1];
+    const body = /\.$/.test(written) ? written : `${written}.`;
     const sentence = body.charAt(0).toUpperCase() + body.slice(1);
     const effect = drawInsteadLookOf(sentence) ?? parseEffect(sentence, { targets: [] });
     const parsed = "kind" in effect ? { effect, todo: [] } : effect;

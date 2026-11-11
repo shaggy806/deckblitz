@@ -17962,3 +17962,30 @@ describe("whenever this creature evolves", () => {
     expect(face.triggered[1]?.effect).toEqual({ kind: "create-token-copy", of: "source", count: 1 });
   });
 });
+
+describe("a draw become a face-down exile", () => {
+  it("reads Asmodeus the Archfiend: the replacement under its ability word, and the return that costs life", () => {
+    const face = parseFace({
+      name: "Thing the Archfiend",
+      type_line: "Legendary Creature — Devil God",
+      oracle_text:
+        "Binding Contract — If you would draw a card, exile the top card of your library face down instead.\n{B}{B}{B}: Draw seven cards.\n{B}: Return all cards exiled with Thing to their owner's hand and you lose that much life.",
+      power: "6",
+      toughness: "6",
+    } as never) as unknown as { static: { replacement: unknown }[]; activated: { effect: unknown }[]; todo: string[] };
+    expect(face.todo).toEqual([]);
+    expect(face.static[0]?.replacement).toEqual({
+      event: "would-draw",
+      who: "you",
+      instead: { effect: { kind: "exile-from-library", amount: 1, faceDown: true, linked: true } },
+    });
+    expect(face.activated[0]?.effect).toEqual({ kind: "draw", amount: 7 });
+    expect(face.activated[1]?.effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "return-exiled-by-source", linked: "hand" },
+        { kind: "lose-life", amount: { thisWay: "returned-to-hand" } },
+      ],
+    });
+  });
+});
