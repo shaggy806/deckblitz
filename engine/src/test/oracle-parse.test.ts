@@ -17832,3 +17832,19 @@ describe("a target controlled by a player who was dealt combat damage by N or mo
     expect(face.triggered[0]?.effect).toEqual({ kind: "gain-control", target: 0, untilEndOfTurn: false });
   });
 });
+
+describe("if a creature you control would explore, instead it explores, then it explores again", () => {
+  it("reads Topography Tracker's replacement", () => {
+    const face = parseFace({
+      name: "Thing",
+      type_line: "Creature — Merfolk Scout",
+      oracle_text: "If a creature you control would explore, instead it explores, then it explores again.",
+    }) as unknown as { complete: boolean; static: { replacement: unknown }[] };
+    expect(face.complete).toBe(true);
+    expect(face.static[0]?.replacement).toEqual({
+      event: "would-explore",
+      filter: { type: "creature", controlledBy: "you" },
+      instead: { modify: { times: 2 } },
+    });
+  });
+});

@@ -5651,6 +5651,10 @@ export type EffectSpec =
        * chose to put into their graveyard, and the finished exploration. */
       readonly toGraveyard?: ObjectId;
       readonly done?: ExploreResult;
+      /** Engine-built, never authored: one of the explorations a
+       * `would-explore` replacement made of an instruction, which that
+       * replacement doesn't apply to again (rule 614.5). */
+      readonly replaced?: true;
     }
   | {
       readonly kind: "add-counter";
@@ -10775,6 +10779,9 @@ export interface EffectApi {
    * if it has left — reveals the top card of their library, and a land card
    * goes to their hand. `null` when there's no such player any more. */
   exploreReveal(explorer: ObjectId): Omit<ExploreResult, "explorer"> | null;
+  /** How many times `explorer` explores when it would once: 1, times each
+   * `would-explore` replacement that applies to it (rule 614.5). */
+  exploreTimes(explorer: ObjectId): number;
   /** The explore's "may put it into your graveyard": `card`, if it's still
    * on top of its owner's library. */
   exploreToGraveyard(card: ObjectId): void;
@@ -18353,6 +18360,22 @@ function applyOneEffectSpec(unbound: EffectSpec, ctx: ResolutionContext): void {
               ? { kind: "object" as const, object: ctx.triggerObject }
               : undefined);
       if (read?.kind !== "object") return;
+      // "If a creature you control would explore, instead it explores, then
+      // it explores again": this one instruction becomes that many whole
+      // explorations, none of them replaced again (rule 614.5).
+      if (spec.replaced !== true) {
+        const instead = ctx.exploreTimes(read.object);
+        if (instead > 1) {
+          const once: EffectSpec = {
+            kind: "explore",
+            target: spec.target,
+            ...(spec.object !== undefined ? { object: spec.object } : {}),
+            replaced: true,
+          };
+          applyEffectSpec({ kind: "sequence", effects: Array.from({ length: instead }, () => once) }, ctx);
+          return;
+        }
+      }
       const found = ctx.exploreReveal(read.object);
       if (found === null) return;
       const done: EffectSpec = {

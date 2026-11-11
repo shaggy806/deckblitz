@@ -19864,6 +19864,14 @@ function parseStatic(line, text) {
   if (line === "If you would proliferate, proliferate twice instead.") {
     return { affects: { scope: "self" }, replacement: { event: "would-proliferate", instead: { modify: { times: 2 } } }, text };
   }
+  // Topography Tracker (rules 701.44, 614.5).
+  if (line === "If a creature you control would explore, instead it explores, then it explores again.") {
+    return {
+      affects: { scope: "self" },
+      replacement: { event: "would-explore", filter: { type: "creature", controlledBy: "you" }, instead: { modify: { times: 2 } } },
+      text,
+    };
+  }
   // Leyline of the Guildpact (rule 613.1e); Prismatic Omen (rule 305.7).
   if (line === "Each nonland permanent you control is all colors.") {
     return { affects: { scope: "filter", filter: { notTypes: ["land"], controlledBy: "you" } }, setColors: ["W", "U", "B", "R", "G"], text };

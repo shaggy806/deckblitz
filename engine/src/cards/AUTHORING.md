@@ -5863,6 +5863,10 @@ the mana is paid, so a land can tap for that first, and what paid with itself do
   proliferate, proliferate twice instead" (Tekuthal, Inquiry Dominus): this
   permanent's controller, each time its own question (rule 701.34a); several
   multiply (rule 614.5).
+- `replacement: { event: "would-explore", filter, instead: { modify: { times: 2 } } }` — "If a creature you
+  control would explore, instead it explores, then it explores again" (Topography Tracker; `filter: { type:
+  "creature", controlledBy: "you" }`, the explorer as it last was if it has left): each instruction to explore
+  becomes that many whole explorations (rule 701.44a), and several multiply (rule 614.5). The scaffolder reads it.
 - `replacement: { event: "would-copy-spell", additional }` — "If you would copy
   a spell one or more times, instead copy it that many times plus an additional
   time. You may choose new targets for the additional copy" (Twinning Staff):

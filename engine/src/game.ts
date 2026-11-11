@@ -35808,6 +35808,7 @@ export class Game {
         if (land) this.moveObject(top, "hand");
         return { player, revealed: top, land, revealedName: printedCardName(this.state.objects[top]) };
       },
+      exploreTimes: (explorer) => this.exploreTimes(explorer),
       exploreToGraveyard: (card) => {
         const object = this.state.objects[card];
         if (object !== undefined && this.state.zones.perPlayer[object.owner]?.library[0] === card) {
@@ -47379,6 +47380,29 @@ controlledBy,
         if (ability.replacement?.event === "would-proliferate" && this.staticActive(source, ability)) {
           times = Math.min(times * (ability.replacement.instead.modify.times ?? 1), Game.MAX_EFFECT_INSTANCES);
         }
+      }
+    }
+    return times;
+  }
+
+  /** How many times `explorer` explores when it would once: each
+   * `would-explore` permanent whose filter it matches — from that permanent's
+   * controller's side, as it last existed if it has left (rule 701.44c) —
+   * multiplies it (rule 614.5; Topography Tracker). */
+  private exploreTimes(explorer: ObjectId): number {
+    let times = 1;
+    // A token that has ceased to exist is read from its snapshot.
+    const ceased = this.state.objects[explorer] === undefined ? this.state.ceasedTokens?.[explorer] : undefined;
+    if (this.state.objects[explorer] === undefined && ceased === undefined) return 1;
+    for (const id of this.state.zones.shared.battlefield) {
+      const source = this.state.objects[id];
+      if (hasLostAbilities(this.state, this.registry, source)) continue;
+      for (const ability of this.registry.get(rulesTextName(source)).static) {
+        const replacement = ability.replacement;
+        if (replacement?.event !== "would-explore" || !this.staticActive(source, ability)) continue;
+        const read = { you: source.controller, source: id, ...(ceased !== undefined ? { snapshot: ceased } : { lastKnown: true }) };
+        if (!matchesFilter(this.state, this.registry, explorer, replacement.filter, read)) continue;
+        times = Math.min(times * (replacement.instead.modify.times ?? 1), Game.MAX_EFFECT_INSTANCES);
       }
     }
     return times;

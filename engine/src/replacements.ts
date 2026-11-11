@@ -111,6 +111,7 @@ export type ReplacementSpec =
   | LifeGainReplacement
   | LifeLossReplacement
   | ProliferateReplacement
+  | ExploreReplacement
   | SpellCopyReplacement
   | LoseGameReplacement
   | ScryReplacement
@@ -206,6 +207,23 @@ export interface SpellCopyReplacement {
  */
 export interface ProliferateReplacement {
   readonly event: "would-proliferate";
+  readonly instead: ModifiedEvent;
+}
+
+/**
+ * "If a creature you control would explore, instead it explores, then it
+ * explores again" (Topography Tracker): one instruction for a permanent
+ * matching `filter` (from this permanent's controller's side, as it last
+ * existed if it has left — rule 701.44c) to explore becomes `times` whole
+ * explorations one after another (rule 701.44a), each with its own reveal,
+ * its own choice and its own "whenever a creature explores" (701.44b). The
+ * replacement applies once to each instruction and not to the explorations it
+ * makes (rule 614.5), so several multiply. Applied by the `explore` effect
+ * through `Game.exploreTimes`.
+ */
+export interface ExploreReplacement {
+  readonly event: "would-explore";
+  readonly filter: CardFilter;
   readonly instead: ModifiedEvent;
 }
 
