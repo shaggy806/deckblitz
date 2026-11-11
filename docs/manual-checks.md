@@ -7910,3 +7910,9 @@ These boards start before the first turn (the builder's `openingHands`), with th
 ### Raubahn, Bull of Ala Mhigo: ward costs life equal to its power
 - **Do:** Cast Shock on Bob's Raubahn (a 3/3 under Glorious Anthem).
 - **Expect:** A popup offers "Pay ward—Pay 3 life" or letting Shock be countered. Paying puts you at 17 and Shock deals 2 damage to Raubahn.
+
+## "Those players" a batch of attackers attacked (2026-11-11)
+
+### Zurzoth, Chaos Rider: only the players its Devils attacked draw and discard
+- **Do:** Attack one opponent with Zurzoth, a second with the Devil token and the third with Grizzly Bears.
+- **Expect:** One trigger. You and the two opponents the Devils attacked each draw a card, then each discard one at random (each graveyard gains a card); the opponent the Bears attacked does neither.

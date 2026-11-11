@@ -163,8 +163,12 @@ function playersIn(scope: PlayerScope, ctx: WorthContext): readonly PlayerId[] |
     case "each-friend":
     case "each-foe":
     case "players-dealt-damage-this-way":
-      // Not known until the votes are in.
+    case "attacked-players":
+      // Not known until the votes are in, the damage dealt, the attack made.
       return null;
+    case "you-and-attacked-players":
+      // The controller's share is the part that's ours for sure.
+      return [controller];
     case "player-to-your-left":
     case "player-to-your-right": {
       const players = state.turnOrder.filter((p) => p === controller || !state.players[p].hasLost);

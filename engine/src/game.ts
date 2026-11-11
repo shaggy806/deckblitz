@@ -34468,6 +34468,20 @@ export class Game {
         }
         return this.state.turnOrder.filter((p) => dealt.has(p) && this.state.players[p]?.hasLost === false);
       }
+      if (who === "attacked-players" || who === "you-and-attacked-players") {
+        // The players the trigger's counted attackers were declared
+        // attacking (rule 508.1b), each as the declaration left it.
+        const counted = refs.sets?.batch ?? [];
+        const attacked = new Set<PlayerId>();
+        for (const a of refs.attackers ?? []) {
+          if (a.at === null || this.state.players[a.at as PlayerId] === undefined) continue;
+          if (counted.some((m) => m.object === a.object && m.stint === a.zoneChangeCount)) attacked.add(a.at as PlayerId);
+        }
+        if (who === "you-and-attacked-players") attacked.add(controller);
+        const from = this.state.turnOrder.indexOf(this.activePlayer);
+        const order = [...this.state.turnOrder.slice(from), ...this.state.turnOrder.slice(0, from)];
+        return order.filter((p) => attacked.has(p) && this.state.players[p]?.hasLost === false);
+      }
       if (who === "each-friend" || who === "each-foe") {
         // Every answer this resolution holds: a later `vote` ("each foe
         // chooses …") mustn't hide them, as it would in `votes()`.
@@ -55917,6 +55931,8 @@ controlledBy,
       who === "each-friend" ||
       who === "each-foe" ||
       who === "players-dealt-damage-this-way" ||
+      who === "attacked-players" ||
+      who === "you-and-attacked-players" ||
       who === "chosen-player"
     ) {
       return [];

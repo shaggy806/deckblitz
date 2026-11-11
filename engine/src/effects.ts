@@ -2012,6 +2012,17 @@ export type PlayerScope =
    * the damage was aimed, in turn order. Prevented damage was never dealt
    * (rule 615.1), so nobody for that. */
   | "players-dealt-damage-this-way"
+  /** "Whenever one or more Devils you control attack one or more players,
+   * … **those players** …" (Zurzoth, Chaos Rider): each player one of the
+   * attackers that counted for the trigger (its `batch`) was declared
+   * attacking — the player, not one whose planeswalker or battle was attacked
+   * (rules 506.2, 508.1b; Zurzoth's ruling) — in turn order from the active
+   * player, whatever has become of the attackers since. Nobody outside a
+   * trigger fired by attackers being declared. */
+  | "attacked-players"
+  /** "**You and** those players": the effect's controller with them, in turn
+   * order from the active player. */
+  | "you-and-attacked-players"
   /** "**Each of that player's opponents**" / "each other player", of the
    * `"trigger-controller"`: the opponents of the player who cast the spell
    * (Standstill, Heartwood Storyteller; every other player is an opponent,

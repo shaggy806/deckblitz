@@ -322,6 +322,19 @@ one, so Mindscour Dragon's "target player mills four" could only ever pick
 the damaged opponent. "That player" is now the `"trigger-player"` scope
 (Xyris, Captain N'ghathrod moved to it) and every slot is a real choice.
 
+### "Those players" a batch of attackers attacked — built 2026-11-11
+
+The key `effect:attacked-players-scope` (the rank goal). Two `PlayerScope`
+words, `"attacked-players"` and `"you-and-attacked-players"`: each player one
+of the attackers that counted for an attack trigger (its `batch`) was declared
+attacking (rules 506.2, 508.1b), read off the declaration the trigger keeps
+(`LastKnownRefs.attackers`), so a creature removed from combat since still
+names its player and one attacking a planeswalker names nobody. The trigger
+itself needed nothing: `attacks-batch` with `attackingPlayer` in its filter.
+Zurzoth, Chaos Rider (rank 5337); its draw trigger is `draws` with
+`nthEachTurn: 1` and the drawing player's "not their turn" as the intervening
+if.
+
 ### A ward cost read as it resolves — built 2026-11-11
 
 The key `decision:ward-dynamic-x` (the rank goal). `WardCost.payGeneric` and

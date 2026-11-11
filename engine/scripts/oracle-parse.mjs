@@ -2138,6 +2138,13 @@ export function parseTrigger(clause) {
     const filter = m[1] ? { filter: { type: "creature", power: { op: "gte", n: Number(m[1]) } } } : {};
     return [{ on: "attacks-batch", who: "you", ...filter }];
   }
+  // "Whenever one or more Devils you control attack one or more players"
+  // (Zurzoth, Chaos Rider): once per declaration, by the ones attacking a
+  // player; "those players" is the `"attacked-players"` scope.
+  if ((m = /^Whenever one or more (.+?) you control attack one or more players$/.exec(c))) {
+    const filter = parseTypePhrase(m[1]);
+    if (filter !== null) return [{ on: "attacks-batch", who: "you", filter: { ...filter, attackingPlayer: true } }];
+  }
   // "Whenever one or more Merfolk you control attack a player": once per
   // player, by the attackers that match (Attuma, Atlantean Warlord).
   if ((m = /^Whenever one or more (.+?) you control attack a player$/.exec(c))) {
@@ -2448,6 +2455,13 @@ export function parseTrigger(clause) {
   // Players.
   if ((m = /^Whenever (you|an opponent|a player) draws? a card$/.exec(c))) {
     return [{ on: "draws", who: { you: "you", "an opponent": "opponent", "a player": "any" }[m[1]] }];
+  }
+  // "Whenever an opponent draws their second card each turn" (Faerie
+  // Mastermind), "their first card each turn" (Zurzoth, Chaos Rider): the
+  // timing wrapper's `nthEachTurn`, counted per drawing player.
+  if ((m = /^Whenever (you|an opponent|a player) draws? (?:your|their) (first|second|third) card each turn$/.exec(c))) {
+    const who = { you: "you", "an opponent": "opponent", "a player": "any" }[m[1]];
+    return [{ on: "draws", who, nthEachTurn: { first: 1, second: 2, third: 3 }[m[2]] }];
   }
   // Booby Trap's "when the chosen player draws a card with the chosen name"
   // (`choosePlayerOnEnter` and `chooseCardNameOnEnter`).
@@ -2961,6 +2975,20 @@ export function parseSentence(sentence, ctx) {
   const s = sentence.replace(/\s+/g, " ").trim();
   // "You create two Treasure tokens" (Guild Artisan) says what "Create …" does.
   if (/^you create /i.test(s)) return parseSentence(s.replace(/^you create /i, "Create "), ctx);
+  // "You and those players each draw a card, then discard a card at random"
+  // (Zurzoth, Chaos Rider): the players a batch of attackers was declared
+  // attacking — the `"attacked-players"` scopes.
+  const attackedM =
+    ctx?.attackBatch === true
+      ? /^(you and )?those players each draw a card(?:, then discard a card( at random)?)?\.$/i.exec(s)
+      : null;
+  if (attackedM !== null) {
+    const who = attackedM[1] ? "you-and-attacked-players" : "attacked-players";
+    const draw = { kind: "draw", who, amount: 1 };
+    if (!/discard/.test(s)) return draw;
+    const discard = { kind: "discard", target: who, amount: 1, ...(attackedM[2] ? { random: true } : {}) };
+    return { kind: "sequence", effects: [draw, discard] };
+  }
   const emblem = emblemOf(s);
   if (emblem !== null) return emblem;
   let M;
@@ -15918,6 +15946,10 @@ function parseFaceAsWritten(face, ctx = {}) {
           // self half of "this or another" too).
           if (departedOf(triggers) === "source") base.condition = { kind: "self-counters", compare: { op: "gte", n: 1 } };
           else triggers = triggers.map((t) => ({ ...t, filter: { ...t.filter, counters: { compare: { op: "gte", n: 1 } } } }));
+        } else if (clause.toLowerCase() === "if it's not their turn," && triggers.every((t) => t.on === "draws")) {
+          // "Whenever an opponent draws …, if it's not their turn": the
+          // drawing player's turn (Zurzoth, Chaos Rider).
+          base.condition = { kind: "of-player", player: "that-player", condition: { kind: "not", of: { kind: "your-turn" } } };
         } else base.__todo = [`the intervening-if: "${clause}"`];
         rest = rest.slice(rest.indexOf(", ") + 2);
         rest = rest[0].toUpperCase() + rest.slice(1);

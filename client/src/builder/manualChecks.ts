@@ -11929,4 +11929,12 @@ export const MANUAL_CHECK_PRESETS: readonly ManualCheckPreset[] = [
       opp: { bf: ['Raubahn, Bull of Ala Mhigo', 'Glorious Anthem'] },
     }),
   ),
+  // --- "Those players" a batch of attackers attacked (2026-11-11, the rank goal) ---
+  preset(
+    'Zurzoth, Chaos Rider: only the players its Devils attacked draw and discard',
+    board({
+      you: { bf: ['Zurzoth, Chaos Rider', 'Devil Token', 'Grizzly Bears'] },
+      opp: [{ bf: [] }, { bf: [] }, { bf: [] }],
+    }),
+  ),
 ]

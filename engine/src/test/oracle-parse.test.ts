@@ -17028,3 +17028,41 @@ describe("a ward cost read as the ability resolves (rules 702.21a, 608.2h)", () 
     expect(face("Test", "Ward {X}, where X is the number of times you've been tempted.").complete).toBe(false);
   });
 });
+
+describe("the players a batch of attackers attacked, and a player's Nth draw of a turn (Zurzoth, Chaos Rider)", () => {
+  const face = (oracle_text: string) =>
+    parseFace({ name: "Test Rider", type_line: "Legendary Creature — Devil", mana_cost: "{2}{R}", oracle_text }, { tokenFor: () => null });
+
+  it("one or more Devils attacking one or more players; you and those players", () => {
+    const rider = face(
+      "Whenever one or more Devils you control attack one or more players, you and those players each draw a card, then discard a card at random.",
+    );
+    expect(rider.complete).toBe(true);
+    expect(rider.triggered[0].trigger).toEqual({ on: "attacks-batch", who: "you", filter: { subtype: "Devil", attackingPlayer: true } });
+    expect(rider.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "draw", who: "you-and-attacked-players", amount: 1 },
+        { kind: "discard", target: "you-and-attacked-players", amount: 1, random: true },
+      ],
+    });
+    const plain = face("Whenever one or more Devils you control attack one or more players, those players each draw a card.");
+    expect(plain.triggered[0].effect).toEqual({ kind: "draw", who: "attacked-players", amount: 1 });
+  });
+
+  it("an opponent's first card each turn, if it's not their turn", () => {
+    const rider = face("Whenever an opponent draws their first card each turn, if it's not their turn, you draw a card.");
+    expect(rider.complete).toBe(true);
+    expect(rider.triggered[0].trigger).toEqual({ on: "draws", who: "opponent", nthEachTurn: 1 });
+    expect(rider.triggered[0].condition).toEqual({
+      kind: "of-player",
+      player: "that-player",
+      condition: { kind: "not", of: { kind: "your-turn" } },
+    });
+    expect(face("Whenever an opponent draws their second card each turn, you draw a card.").triggered[0].trigger).toEqual({
+      on: "draws",
+      who: "opponent",
+      nthEachTurn: 2,
+    });
+  });
+});
