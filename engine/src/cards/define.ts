@@ -5151,7 +5151,20 @@ export interface CardDefinition {
    * the exiled card's owner may cast it for its mana cost after that turn
    * has ended, for as long as it stays exiled. `null` for none.
    */
-  readonly warp: { readonly cost: string } | null;
+  readonly warp: {
+    readonly cost: string;
+    /** Life paid alongside the mana — Timeline Culler's "Warp—{B}, Pay 2
+     * life". Part of the warp cost (rule 601.2h), so it's paid as the spell
+     * is cast, stands if the spell is countered, and can't be paid by a
+     * player who can't pay life (rule 119.4). */
+    readonly payLife?: number;
+    /** "You may cast this card from your graveyard using its warp ability"
+     * (Timeline Culler): its owner may also cast it from their graveyard for
+     * the warp cost — a graveyard cast in every way (a spell cast from a
+     * graveyard, stopped by what stops those), and exiled at the next end
+     * step like any warped permanent. */
+    readonly fromGraveyard?: true;
+  } | null;
   /**
    * Blitz (rule 702.152a — Star Athlete): "You may cast this card by paying
    * [cost] rather than its mana cost"; a permanent cast that way has haste
@@ -5930,7 +5943,7 @@ interface CardDraft {
   miracle?: { readonly cost: string };
   foretell?: { readonly cost: string };
   plot?: { readonly cost: string };
-  warp?: { readonly cost: string };
+  warp?: NonNullable<CardDefinition["warp"]>;
   blitz?: { readonly cost: string };
   dash?: { readonly cost: string };
   impending?: { readonly count: number; readonly cost: string };

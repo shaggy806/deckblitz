@@ -14509,6 +14509,21 @@ function parseFaceAsWritten(face, ctx = {}) {
     }
     // Dash [cost] (rule 702.109a): an alternative cost — haste, and back to its owner's hand at the next end step.
     if ((m = /^Dash ((?:\{[^}]+\})+)$/.exec(line))) { out.dash = { cost: m[1] }; continue; }
+    // Warp [cost] (rule 702.185a): an alternative cost from the hand — exiled at the next end step, castable from exile later.
+    // "Warp—{B}, Pay 2 life." (Timeline Culler): life in the cost.
+    if ((m = /^Warp(?: ((?:\{[^}]+\})+)|—((?:\{[^}]+\})+), Pay (\d+) life\.)$/.exec(line))) {
+      out.warp = {
+        cost: m[1] ?? m[2],
+        ...(m[3] !== undefined ? { payLife: Number(m[3]) } : {}),
+        ...(out.warp?.fromGraveyard === true ? { fromGraveyard: true } : {}),
+      };
+      continue;
+    }
+    // "You may cast this card from your graveyard using its warp ability." (Timeline Culler), printed above its warp.
+    if (/^You may cast (?:this card|~) from your graveyard using its warp ability\.$/.test(line)) {
+      out.warp = { ...out.warp, fromGraveyard: true };
+      continue;
+    }
     // Freerunning [mana cost] (rule 702.173a): an alternative cost once an Assassin or commander of yours dealt combat damage to a player this turn.
     if ((m = /^Freerunning ((?:\{[^}]+\})+)$/.exec(line))) { out.freerunning = { cost: m[1] }; continue; }
     // Impending N—[cost] (rule 702.176a): an alternative cost, and the card's own two abilities on the battlefield.

@@ -2541,6 +2541,18 @@ describe("templates for features built since the parser began (2026-10-11)", () 
     );
     expect(dasher.dash).toEqual({ cost: "{2}{R}" });
     expect(dasher.complete).toBe(true);
+    // Warp (rule 702.185a), and Timeline Culler's: life in the cost, and
+    // from the graveyard by the line printed above it.
+    const warper = face(
+      "Warp {1}{U} (You may cast this card from your hand for its warp cost. Exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)",
+    );
+    expect(warper.warp).toEqual({ cost: "{1}{U}" });
+    expect(warper.complete).toBe(true);
+    const culler = face(
+      "Haste\nYou may cast this card from your graveyard using its warp ability.\nWarp—{B}, Pay 2 life. (You may cast this card from your hand or graveyard for its warp cost. If you do, exile this creature at the beginning of the next end step, then you may cast it from exile on a later turn.)",
+    );
+    expect(culler.warp).toEqual({ cost: "{B}", payLife: 2, fromGraveyard: true });
+    expect(culler.complete).toBe(true);
     // The Mirage block's "as though it had flash … sacrifices it at the
     // beginning of the next cleanup step" (Spider Climb).
     const climb = face(

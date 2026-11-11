@@ -232,6 +232,7 @@ function faceSource(face, ctx) {
     webSlinging: parsed.webSlinging,
     emerge: parsed.emerge,
     dash: parsed.dash,
+    warp: parsed.warp,
     impending: parsed.impending,
     freerunning: parsed.freerunning,
     kicker: parsed.kicker,

@@ -3729,6 +3729,14 @@ export class Game {
       );
     }
 
+    // "You may cast this card from your graveyard using its warp ability"
+    // (Timeline Culler): its warp cost, from its owner's graveyard too.
+    for (const card of this.state.zones.perPlayer[player].graveyard) {
+      const def = this.registry.get(this.state.objects[card].cardName);
+      if (def.warp?.fromGraveyard !== true) continue;
+      out.push(...this.castSpellActions(player, card, def.name, def, { via: "warp", costString: def.warp.cost }));
+    }
+
     // "Impulse draw" — a card exiled face-up with permission to play it, for
     // its ordinary cost (Dream Pillager, Tectonic Giant, Theater of Horrors),
     // or one a `playFromExile` static reaches (Grolnok, the Omnivore's croak
@@ -18435,11 +18443,21 @@ export class Game {
       if (overload || free || altCost) return `freerunning is an alternative cost, and can't be combined with another`;
     } else if (via === "warp") {
       // Rule 702.185a — from the hand, for its warp cost: an alternative cost,
-      // so no other one goes with it (118.9a).
-      if (!this.state.zones.perPlayer[player].hand.includes(cardId)) {
-        return `${player} does not have that card in hand`;
+      // so no other one goes with it (118.9a). From its owner's graveyard
+      // too, where the card says so (Timeline Culler).
+      const inGraveyard = this.state.zones.perPlayer[player].graveyard.includes(cardId);
+      if (!this.state.zones.perPlayer[player].hand.includes(cardId) && !(inGraveyard && def.warp?.fromGraveyard === true)) {
+        return inGraveyard
+          ? `${def.name} can't be cast from a graveyard for its warp cost`
+          : `${player} does not have that card in hand`;
       }
       if (this.warpCostOf(cardId, def, player) === null) return `${def.name} does not have warp`;
+      // "Warp—{B}, Pay 2 life": part of the cost, so it gates the cast as the
+      // mana does (rule 119.4).
+      const life = def.warp?.payLife;
+      if (life !== undefined && !this.canPayLife(player, life)) {
+        return `${player} cannot pay ${life} life for ${def.name}'s warp`;
+      }
       if (overload || free || altCost) return `warp is an alternative cost, and can't be combined with another`;
     } else if (
       !this.state.zones.perPlayer[player].hand.includes(cardId) &&
@@ -20598,6 +20616,10 @@ export class Game {
     // alternative cost belongs to it there.
     const escape = via === "escape" ? this.escapeOf(cardId, face, graveyardGrant) : null;
     const flashback = via === "flashback" ? this.flashbackOf(cardId, graveyardGrant) : null;
+    // Its own warp, for the life in its cost and whether this is its
+    // graveyard cast (Timeline Culler).
+    const ownWarp = via === "warp" ? def.warp : null;
+    const warpedFromGraveyard = ownWarp !== null && this.state.zones.perPlayer[player].graveyard.includes(cardId);
     // Prowl, printed or granted (Hunting Velociraptor), for "if its prowl
     // cost was paid".
     // Read now: a grant "from your hand" no longer reaches it on the stack.
@@ -20862,7 +20884,8 @@ export class Game {
       via === "disturb" ||
       via === "graveyard-permission" ||
       via === "mayhem" ||
-      via === "aftermath"
+      via === "aftermath" ||
+      warpedFromGraveyard
     ) {
       this.state.players[player].usedGraveyardThisTurn = true;
     }
@@ -21075,6 +21098,8 @@ export class Game {
     // as the spell is cast. Only its own flashback's: one Past in Flames gave
     // it costs just the mana.
     if (flashback?.payLife !== undefined) this.changeLife(player, -flashback.payLife);
+    // "Warp—{B}, Pay 2 life" (Timeline Culler): the same, of a warp cost.
+    if (ownWarp?.payLife !== undefined) this.changeLife(player, -ownWarp.payLife);
     // A graveyard permission's own extra cost ("by paying 3 life in addition
     // to paying their other costs").
     if (permissionTerms?.payLife !== undefined) {
@@ -52067,6 +52092,11 @@ controlledBy,
   }
 
   private warpCostOf(cardId: ObjectId, def: CardDefinition, player: PlayerId): string | null {
+    // Its own, from its owner's graveyard: "You may cast this card from your
+    // graveyard using its warp ability" (Timeline Culler).
+    if (def.warp?.fromGraveyard === true && this.state.zones.perPlayer[player].graveyard.includes(cardId)) {
+      return def.warp.cost;
+    }
     if (!this.state.zones.perPlayer[player].hand.includes(cardId)) return null;
     if (def.warp !== null) return def.warp.cost;
     return this.handKeywordCost(this.state.objects[cardId], "warp");
