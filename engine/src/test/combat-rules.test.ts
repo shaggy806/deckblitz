@@ -338,7 +338,16 @@ describe("every definition speaks the one vocabulary", () => {
     "attacksIfAttacks",
   ];
   const RESTRICT_REMOVED = ["cantBeBlockedBy", "cantBlockAttacker", "cantAttackYou", "cantBlockYours"];
-  const KINDS = new Set(["cant-attack", "must-attack", "cant-block", "must-block", "cant-be-blocked", "must-be-blocked", "must-be-blocked-if-able"]);
+  const KINDS = new Set([
+    "cant-attack",
+    "must-attack",
+    "cant-block",
+    "must-block",
+    "cant-be-blocked",
+    "must-be-blocked",
+    "must-be-blocked-if-able",
+    "attack-only-nearest",
+  ]);
   const WORDS = new Set([
     "cant-attack",
     "cant-block",
@@ -365,6 +374,8 @@ describe("every definition speaks the one vocabulary", () => {
     "cant-be-blocked": ["by", "byMoreThan", "byFewerThan", "unlessAllBlock"],
     "must-be-blocked": ["by"],
     "must-be-blocked-if-able": ["by", "exactlyOne"],
+    // `from` is the permanent that chose, set as the rule is bound.
+    "attack-only-nearest": ["direction"],
   };
   const PLAYER_DURATIONS = new Set([
     "end-of-turn",
@@ -418,6 +429,17 @@ describe("every definition speaks the one vocabulary", () => {
           // A record that says no more than its kind is the word, the only spelling.
           if (fields.length === 0 && kind !== "must-be-blocked") bad.push(`${card.name}: bare record ${kind}`);
           for (const f of fields) if (!FIELDS[kind].includes(f)) bad.push(`${card.name}: ${kind} field ${f}`);
+          // A direction for every player is read only off a rule over the
+          // game (`nearestOpponentRule`): a `restrict` with a `filter`, never
+          // a static's, a target's or a fixed set's, and always saying which.
+          if (kind === "attack-only-nearest") {
+            if (o.kind !== "restrict" || o.filter === undefined || o.asItResolves === true) {
+              bad.push(`${card.name}: attack-only-nearest outside a restrict over the game`);
+            }
+            if (record.direction !== "left" && record.direction !== "right") {
+              bad.push(`${card.name}: attack-only-nearest direction ${String(record.direction)}`);
+            }
+          }
           // Bound forms exist only once an effect resolved.
           if ("you" in record) bad.push(`${card.name}: authored "you"`);
           const at = record.at;
