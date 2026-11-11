@@ -6705,7 +6705,7 @@ The `prevent-damage` family makes the same record.
   `modify: { half: "down" }` (Ghosts of the Innocent — a replacement, so unpreventable damage is still halved), `ifAtMost: 3` with `prevent` (Callous Giant), `ifAtLeast: 3` with `modify: { set: 2 }` (Forethought Amulet).
   `then` runs with the damage's source as `"trigger-object"` (Swans of Bryn Argoll's "that source's controller") and the one it would have been dealt to as `"trigger-recipient"` (Vigor's "put a +1/+1 counter on that creature for each 1 damage prevented this way": `add-counter { target: "trigger-recipient", amount: "x" }`, `perEvent` for one follow-up per recipient over a simultaneous event).
   With `prevent` and `then`, `"x"` is the damage actually prevented — none when it can't be (Swans' "prevented this way"); `thenCountsUnprevented: true`
-  makes it the damage either way (Jared Carthalion, True Heir's ruling: unpreventable damage is dealt and still puts "that many" counters on — rule 615.12).
+  makes it the damage either way (Jared Carthalion, True Heir's ruling: unpreventable damage is dealt and still puts "that many" counters on — rule 615.12); a `replacement-effect`'s shield reads it too (Gatta and Luzzu: `object: 0`, `perEvent`, for the turn).
   (`fromSelf: true` — only damage this permanent deals: Wolverine's "double all damage Wolverine would deal")
   — damage about to be dealt, changed. With neither `source` nor `to` it is
   **symmetric and global** (Dictate of the Twin Gods' `multiplier: 2` doubles

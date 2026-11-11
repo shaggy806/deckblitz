@@ -924,7 +924,9 @@ function runDamageSteps(
 ): {
   readonly dealt: number;
   readonly shieldUsed: number;
-  readonly shields: readonly { readonly shield: ActiveReplacement; readonly prevented: number }[];
+  /** `thenAmount`: the shield's `then`'s amount, when it isn't `prevented`
+   * (its `countsUnprevented`, of damage that can't be prevented). */
+  readonly shields: readonly { readonly shield: ActiveReplacement; readonly prevented: number; readonly thenAmount?: number }[];
   readonly preventedAll?: {
     readonly step: Extract<DamageStep, { kind: "prevent-all" }>;
     readonly amount: number;
@@ -940,7 +942,7 @@ function runDamageSteps(
 } {
   let total = amount * sources;
   let shieldUsed = 0;
-  const shields: { shield: ActiveReplacement; prevented: number }[] = [];
+  const shields: { shield: ActiveReplacement; prevented: number; thenAmount?: number }[] = [];
   let preventedAll: { step: Extract<DamageStep, { kind: "prevent-all" }>; amount: number; thenAmount?: number } | undefined;
   let shieldCounter: { step: Extract<DamageStep, { kind: "shield-counter" }>; amount: number } | undefined;
   const spends: ActiveReplacement[] = [];
@@ -1019,7 +1021,11 @@ function runDamageSteps(
         // A redirection isn't prevention (614.9): it still applies.
         if (unpreventable && step.shield.redirect === undefined && step.shield.redirectToSource === undefined) {
           // Its additional effect still happens, for none prevented.
-          if (step.shield.then !== undefined) shields.push({ shield: step.shield, prevented: 0 });
+          // "That many" is the damage all the same, where the card says so
+          // (Gatta and Luzzu's ruling).
+          if (step.shield.then !== undefined) {
+            shields.push({ shield: step.shield, prevented: 0, ...(step.shield.then.countsUnprevented === true ? { thenAmount: total } : {}) });
+          }
           break;
         }
         // An "all damage this turn" shield takes the whole hit and stays.
@@ -1181,8 +1187,12 @@ function damageOutcomeKey(outcome: ReturnType<typeof runDamageSteps>): string {
     outcome.dealt,
     outcome.redirected === undefined ? null : [outcome.redirected.step.made.key, outcome.redirected.amount],
     outcome.shields
-      .filter((s) => s.prevented > 0 && (s.shield.redirect !== undefined || s.shield.redirectToSource !== undefined || s.shield.gainLife !== undefined || s.shield.then !== undefined))
-      .map((s) => [s.shield.source, s.prevented]),
+      .filter(
+        (s) =>
+          (s.prevented > 0 || (s.thenAmount ?? 0) > 0) &&
+          (s.shield.redirect !== undefined || s.shield.redirectToSource !== undefined || s.shield.gainLife !== undefined || s.shield.then !== undefined),
+      )
+      .map((s) => [s.shield.source, s.thenAmount ?? s.prevented]),
     outcome.shieldCounter !== undefined && !outcome.shieldCounter.step.spent,
     outcome.preventedAll?.step.then === undefined ? null : [outcome.preventedAll.step.made.key, outcome.preventedAll.thenAmount ?? outcome.preventedAll.amount],
     outcome.replaced === undefined ? null : [outcome.replaced.step.key, outcome.replaced.amount],
@@ -39597,6 +39607,7 @@ controlledBy,
         // what the shield applies right after, however it was written.
         const instead = record.replacement.event === "would-deal-damage" ? record.replacement.instead : undefined;
         const then = instead !== undefined && "prevent" in instead ? instead.then : undefined;
+        const countsUnprevented = instead !== undefined && "prevent" in instead && instead.thenCountsUnprevented === true;
         this.state.activeReplacements.push({
           ...record,
           owner: controller,
@@ -39605,7 +39616,9 @@ controlledBy,
           targetStints: this.stintsOfTargets(targets),
           x,
           madeIn: since,
-          ...(then !== undefined ? { then: { spec: then, by: source, controller, targets: targets.map((t) => t ?? null) } } : {}),
+          ...(then !== undefined
+            ? { then: { spec: then, by: source, controller, targets: targets.map((t) => t ?? null), ...(countsUnprevented ? { countsUnprevented: true as const } : {}) } }
+            : {}),
           ...(object !== undefined ? { zoneChangeCount: object.zoneChangeCount ?? 0 } : {}),
           ...(from !== undefined ? { from: { object: from.id, zoneChangeCount: from.zoneChangeCount ?? 0, you: controller } } : {}),
         });
@@ -55322,7 +55335,7 @@ controlledBy,
       for (const r of redirected) {
         this.dealDamage(source, r.to, r.amount, combat, sourceLastKnown, 1, r.applied);
       }
-      for (const { shield, prevented } of outcome.shields) {
+      for (const { shield, prevented, thenAmount } of outcome.shields) {
         // Reverse Damage: life equal to what its shield prevented.
         // Shadowbane's "from a black source": as the source is now, or as it
         // last existed.
@@ -55342,12 +55355,13 @@ controlledBy,
           const t = shield.then;
           // Part of a simultaneous event: once for all of it, after it.
           const owed = this.damageBatch?.shieldThens;
+          const thatMany = thenAmount ?? prevented;
           if (owed === undefined) {
-            this.applyPreventionFollowUp(t.spec, t.by, t.controller, t.targets, prevented, source);
+            this.applyPreventionFollowUp(t.spec, t.by, t.controller, t.targets, thatMany, source);
           } else {
             const same = owed.get(t);
-            if (same === undefined) owed.set(t, { prevented, source });
-            else same.prevented += prevented;
+            if (same === undefined) owed.set(t, { prevented: thatMany, source });
+            else same.prevented += thatMany;
           }
         }
       }

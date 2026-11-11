@@ -9967,6 +9967,13 @@ export function parseEffect(text, outer) {
       skip = blocks.used - 1;
       continue;
     }
+    const toCounters = preventToCountersAt(sentences, i, ctx);
+    if (toCounters !== null) {
+      parsed.push(toCounters.effect);
+      hints.push({ sentence, effect: toCounters.effect });
+      skip = toCounters.used - 1;
+      continue;
+    }
     const arrival = graveyardArrivalAt(sentences, i, ctx);
     if (arrival !== null) {
       parsed.push(arrival.effect);
@@ -11302,6 +11309,45 @@ function blocksAtEndOfCombatAt(sentences, i, ctx) {
       at: { step: "end-combat", which: "this-turn" },
       effect: { kind: "destroy-all", filter: { type: "creature", blockedThisTurn: { relation, of: target } } },
       text: `Destroy all creatures that ${then[1]} this turn.`,
+    },
+    used: 2,
+  };
+}
+
+/**
+ * "Choose target creature you control. If damage would be dealt to that
+ * creature this turn, prevent that damage and put that many +1/+1 counters on
+ * it." (Gatta and Luzzu): a `replacement-effect` on the target for the turn,
+ * applied once to a simultaneous damage event (rule 614.5, `perEvent`). "Put
+ * that many", unlike "if damage is prevented this way", counts damage that
+ * can't be prevented too (rule 615.12, the card's ruling):
+ * `thenCountsUnprevented`.
+ */
+function preventToCountersAt(sentences, i, ctx) {
+  const choose = /^choose (target [^.]+)\.$/i.exec(sentences[i] ?? "");
+  if (choose === null) return null;
+  const then =
+    /^if damage would be dealt to (?:that (?:creature|permanent)|it) this turn, prevent that damage and put that many (\+1\/\+1|-1\/-1) counters on (?:it|that (?:creature|permanent))\.$/i.exec(
+      sentences[i + 1] ?? "",
+    );
+  if (then === null) return null;
+  const spec = targetOf(choose[1]);
+  if (spec === undefined) return null;
+  const target = ctx.target(spec);
+  return {
+    effect: {
+      kind: "replacement-effect",
+      replacement: {
+        event: "would-deal-damage",
+        instead: {
+          prevent: true,
+          then: { kind: "add-counter", target, counter: then[1], amount: "x" },
+          perEvent: true,
+          thenCountsUnprevented: true,
+        },
+      },
+      duration: "end-of-turn",
+      object: target,
     },
     used: 2,
   };

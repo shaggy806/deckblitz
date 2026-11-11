@@ -6189,6 +6189,29 @@ describe("can't-do effects for a duration (prohibit's regeneration and monarch)"
       ],
     });
   });
+
+  it("reads 'if damage would be dealt to that creature this turn, prevent that damage and put that many +1/+1 counters on it'", () => {
+    const gatta = face(
+      "Gatta and Luzzu",
+      "Legendary Creature — Human Soldier",
+      "Flash\nWhen Gatta and Luzzu enters, choose target creature you control. If damage would be dealt to that creature this turn, prevent that damage and put that many +1/+1 counters on it.",
+    );
+    expect(gatta.triggered[0].targets).toEqual(["creature-you-control"]);
+    expect(gatta.triggered[0].effect).toEqual({
+      kind: "replacement-effect",
+      replacement: {
+        event: "would-deal-damage",
+        instead: {
+          prevent: true,
+          then: { kind: "add-counter", target: 0, counter: "+1/+1", amount: "x" },
+          perEvent: true,
+          thenCountsUnprevented: true,
+        },
+      },
+      duration: "end-of-turn",
+      object: 0,
+    });
+  });
 });
 
 describe("the turn history's graveyard tallies (discarded, to-graveyard)", () => {

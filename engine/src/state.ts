@@ -5244,6 +5244,10 @@ export interface ActiveReplacement {
     readonly by: ObjectId;
     readonly controller: PlayerId;
     readonly targets: readonly (TargetRef | null)[];
+    /** `"x"` is the damage even when it can't be prevented and so isn't
+     * (rule 615.12 — Gatta and Luzzu's ruling): the `replacement-effect`'s
+     * `thenCountsUnprevented`. */
+    readonly countsUnprevented?: true;
   };
   /** The resolution that made it (its `resolutionSince`), which its
    * `damage-prevented` events name — the `damagePreventedThisWay` amount's

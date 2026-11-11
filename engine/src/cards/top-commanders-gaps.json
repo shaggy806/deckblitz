@@ -1216,6 +1216,7 @@
   "replacement:prevent-damage-to-you-add-counter",
   "replacement:prevention-then-per-damage",
   "replacement:temporary-prevent-damage-to-counters",
+  "amount:damage-that-would-be-dealt",
   "replacement:halve-damage",
   "replacement:prevent-all-but-n-damage",
   "replacement:prevent-half-damage",
