@@ -118,34 +118,65 @@ export function throwDice(roll: DiceThrow): void {
     face.className = 'die-face'
     face.textContent = String(roll.reduced ? result : 1 + Math.floor(random() * roll.sides))
     die.appendChild(face)
-    wrap.appendChild(die)
+    // The die rides above its shadow: the wrap follows the spot on the table
+    // under it, the shadow stays there, and `lift` carries the die up off it.
+    const shadow = document.createElement('div')
+    shadow.className = 'die-shadow'
+    const lift = document.createElement('div')
+    lift.className = 'die-lift'
+    lift.appendChild(die)
+    wrap.appendChild(shadow)
+    wrap.appendChild(lift)
     box.appendChild(wrap)
     faces.push({ face, result })
 
     if (roll.reduced) return
     // From the roller's side, a little spread, to the landing spot: three
-    // hops, each lower than the last (scale stands in for height above the
-    // table), tumbling all the way and squashing as it strikes.
+    // hops, each lower than the last, tumbling all the way and squashing as
+    // it strikes. Height is the die lifting off its shadow, which shrinks and
+    // fades under it; it was the die's scale, which on a flat shape read as
+    // the die growing and shrinking where it stood (the user, 2026-11).
     const startX = roll.from.x - landX + (random() - 0.5) * size * 3
     const startY = roll.from.y - landY + (random() - 0.5) * size * 2
     const spin = (random() < 0.5 ? -1 : 1) * (540 + random() * 540)
     const settle = (random() - 0.5) * 30
     const at = (t: number) => ({ x: startX * (1 - t), y: startY * (1 - t) })
-    const p1 = at(0.55)
-    const p2 = at(0.82)
-    const p3 = at(0.95)
-    const hop = (t: number) => `translate(${at(t).x}px, ${at(t).y - size * 0.35}px)`
+    const ground = (t: number) => `translate(${at(t).x}px, ${at(t).y}px)`
+    // The table spot under the die: steady along the throw's line.
     wrap.animate(
       [
-        { offset: 0, transform: `translate(${startX}px, ${startY}px) scale(1.6)`, opacity: 0 },
+        { offset: 0, transform: ground(0), opacity: 0 },
         { offset: 0.08, opacity: 1 },
-        { offset: FIRST_STRIKE, transform: `translate(${p1.x}px, ${p1.y}px) scale(1)`, easing: 'ease-out' },
-        { offset: 0.5, transform: `${hop(0.7)} scale(1.25)`, easing: 'ease-in' },
-        { offset: 0.64, transform: `translate(${p2.x}px, ${p2.y}px) scale(1)`, easing: 'ease-out' },
-        { offset: 0.73, transform: `${hop(0.9)} scale(1.1)`, easing: 'ease-in' },
-        { offset: 0.82, transform: `translate(${p3.x}px, ${p3.y}px) scale(1)`, easing: 'ease-out' },
-        { offset: 1, transform: 'translate(0px, 0px) scale(1)', opacity: 1 },
+        { offset: FIRST_STRIKE, transform: ground(0.55) },
+        { offset: 0.64, transform: ground(0.82) },
+        { offset: 0.82, transform: ground(0.95) },
+        { offset: 1, transform: 'translate(0px, 0px)', opacity: 1 },
       ],
+      { duration: throwMs, fill: 'both' },
+    )
+    // How high it is at each beat, in die sizes: thrown in from above, then
+    // each hop lower than the last.
+    const heights: readonly (readonly [number, number, string])[] = [
+      [0, 1.3, 'ease-in'],
+      [FIRST_STRIKE, 0, 'ease-out'],
+      [0.5, 0.75, 'ease-in'],
+      [0.64, 0, 'ease-out'],
+      [0.73, 0.3, 'ease-in'],
+      [0.82, 0, 'ease-out'],
+      [1, 0, 'linear'],
+    ]
+    lift.animate(
+      heights.map(([offset, h, easing]) => ({ offset, transform: `translateY(${-h * size}px)`, easing })),
+      { duration: throwMs, fill: 'both' },
+    )
+    shadow.animate(
+      heights.map(([offset, h, easing]) => ({
+        offset,
+        // Higher: a smaller, fainter shadow, further below the die.
+        transform: `scale(${1 - Math.min(0.55, h * 0.4)})`,
+        opacity: 0.6 - Math.min(0.4, h * 0.3),
+        easing,
+      })),
       { duration: throwMs, fill: 'both' },
     )
     die.animate(

@@ -5560,7 +5560,24 @@ body.board-dragging {
   height: var(--die-size);
   margin-left: calc(var(--die-size) / -2);
   margin-top: calc(var(--die-size) / -2);
-  filter: drop-shadow(0 calc(var(--die-size) * 0.12) calc(var(--die-size) * 0.12) rgba(0, 0, 0, 0.65));
+}
+/* The die itself, lifted off the table by the throw (ui/diceRoll.ts)… */
+.die-lift {
+  position: absolute;
+  inset: 0;
+}
+/* …and its shadow on the table, which stays put under it: smaller and
+   fainter the higher the die is. */
+.die-shadow {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: -14%;
+  height: 34%;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.75);
+  filter: blur(calc(var(--die-size) * 0.07));
+  opacity: 0.6;
 }
 .die {
   width: 100%;

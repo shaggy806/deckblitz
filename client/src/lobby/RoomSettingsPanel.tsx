@@ -164,17 +164,21 @@ export function RoomSettingsPanel({
  * number goes back to the room's value rather than to the server.
  */
 function LifeControl({ life, onChange }: { readonly life: number; readonly onChange: (life: number) => void }) {
-  const [draft, setDraft] = useState(String(life))
+  // The box is for a total no preset has: beside a lit preset it stays empty
+  // ("other"), so the same number isn't shown twice, as two controls.
+  const shown = (LIFE_PRESETS as readonly number[]).includes(life) ? '' : String(life)
+  const [draft, setDraft] = useState(shown)
   // Follow the room's value when it changes from elsewhere (a preset, or a
   // stand-in host).
-  useEffect(() => setDraft(String(life)), [life])
+  useEffect(() => setDraft(shown), [shown])
 
   const commit = () => {
     const value = Number(draft)
-    if (Number.isInteger(value) && value >= LIFE_MIN && value <= LIFE_MAX) {
+    if (draft.trim() !== '' && Number.isInteger(value) && value >= LIFE_MIN && value <= LIFE_MAX) {
       if (value !== life) onChange(value)
+      else setDraft(shown)
     } else {
-      setDraft(String(life))
+      setDraft(shown)
     }
   }
 
@@ -194,7 +198,8 @@ function LifeControl({ life, onChange }: { readonly life: number; readonly onCha
       <input
         type="number"
         className="rs-life-input mono"
-        aria-label="Starting life"
+        aria-label="Another starting life total"
+        placeholder="other"
         min={LIFE_MIN}
         max={LIFE_MAX}
         step={1}
@@ -203,7 +208,7 @@ function LifeControl({ life, onChange }: { readonly life: number; readonly onCha
         onBlur={commit}
         onKeyDown={(e) => {
           if (e.key === 'Enter') commit()
-          if (e.key === 'Escape') setDraft(String(life))
+          if (e.key === 'Escape') setDraft(shown)
         }}
       />
     </div>
