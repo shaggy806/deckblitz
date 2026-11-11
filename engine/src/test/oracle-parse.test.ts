@@ -6212,6 +6212,27 @@ describe("can't-do effects for a duration (prohibit's regeneration and monarch)"
       object: 0,
     });
   });
+
+  it("reads an odd or even number of counters on the source (Sab-Sunen, Luxa Embodied)", () => {
+    const sab = face(
+      "Sab-Sunen, Luxa Embodied",
+      "Legendary Creature — God",
+      "Reach, trample, indestructible\nSab-Sunen can't attack or block unless it has an even number of counters on it. (Zero is even.)\nAt the beginning of your first main phase, put a +1/+1 counter on Sab-Sunen. Then if it has an odd number of counters on it, draw two cards.",
+    );
+    expect(sab.static[0]).toMatchObject({
+      affects: { scope: "self" },
+      condition: { kind: "self-counters", parity: "odd" },
+      restrictions: ["cant-attack", "cant-block"],
+    });
+    expect(sab.triggered[0].trigger).toEqual({ on: "step-begins", step: "precombat-main", who: "you" });
+    expect(sab.triggered[0].effect).toEqual({
+      kind: "sequence",
+      effects: [
+        { kind: "add-counter", target: "source", counter: "+1/+1", amount: 1 },
+        { kind: "conditional", condition: { kind: "self-counters", parity: "odd" }, then: { kind: "draw", amount: 2 } },
+      ],
+    });
+  });
 });
 
 describe("the turn history's graveyard tallies (discarded, to-graveyard)", () => {

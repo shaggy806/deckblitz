@@ -1467,6 +1467,7 @@ function evalStaticCondition(
         condition.counter === undefined
           ? Object.values(held).reduce((sum, v) => sum + (v ?? 0), 0)
           : (held[condition.counter] ?? 0);
+      if ("parity" in condition) return (n % 2 === 0) === (condition.parity === "even");
       return compareNum(n, condition.compare);
     }
     case "x":

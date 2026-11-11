@@ -10241,6 +10241,21 @@ export function parseEffect(text, outer) {
         continue;
       }
     }
+    // "Put a +1/+1 counter on ~. Then if it has an odd number of counters on
+    // it, draw two cards." (Sab-Sunen, Luxa Embodied): its counters of every
+    // kind, as the instruction comes up. "It" is the source only right after
+    // an instruction that named it.
+    const parityM = /^(?:then )?if (~|it) has an (odd|even) number of counters on it, (.+)$/i.exec(sentence);
+    if (parityM !== null && (parityM[1] === "~" || parsed.at(-1)?.target === "source")) {
+      const said = parityM[3];
+      const then = parseSentence(`${said[0].toUpperCase()}${said.slice(1)}`, ctx);
+      if (then !== null && !containsUndefined(then)) {
+        const effect = { kind: "conditional", condition: { kind: "self-counters", parity: parityM[2].toLowerCase() }, then };
+        parsed.push(effect);
+        hints.push({ sentence, effect });
+        continue;
+      }
+    }
     const comparedM =
       /^(?:then )?if ([^,]+), (.+)$/i.exec(sentence) ??
       /^(.+) if ((?:an opponent|you) [^,]+ than (?:you|an opponent))\.$/i.exec(sentence) ??
@@ -20029,6 +20044,21 @@ function parseStatic(line, text) {
   // Hazoret, Godseeker: "unless you have max speed" (rule 702.179e).
   if (line === "~ can't attack or block unless you have max speed.") {
     return { affects: { scope: "self" }, condition: { kind: "speed", atMost: 3 }, restrictions: ["cant-attack", "cant-block"], text };
+  }
+  // Sab-Sunen, Luxa Embodied: "unless it has an even number of counters on
+  // it" is "while it has an odd number" — every kind together (zero is even).
+  // Slumbering Dragon: "unless it has five or more +1/+1 counters on it".
+  if ((m = /^~ can't attack or block unless it has an (odd|even) number of counters on it\.(?: \(Zero is even\.\))?$/.exec(line))) {
+    const parity = m[1] === "even" ? "odd" : "even";
+    return { affects: { scope: "self" }, condition: { kind: "self-counters", parity }, restrictions: ["cant-attack", "cant-block"], text };
+  }
+  if ((m = /^~ can't attack or block unless it has (\w+) or more (\S+) counters on it\.$/.exec(line)) && numberOf(m[1]) !== null) {
+    return {
+      affects: { scope: "self" },
+      condition: { kind: "not", of: { kind: "self-counters", counter: m[2], compare: { op: "gte", n: numberOf(m[1]) } } },
+      restrictions: ["cant-attack", "cant-block"],
+      text,
+    };
   }
   // A permanent's own keywords and bonus — what "Max speed —" lines grant
   // (Burnout Bashtronaut, Gastal Raider, Walking Sarcophagus).

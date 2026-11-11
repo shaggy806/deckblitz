@@ -6282,7 +6282,11 @@ clause (section 9):
   has left the battlefield (rule 603.10), which is the only way Undying's "if
   it had no +1/+1 counters on it" can be asked at all: a dies-trigger is
   checked after the card is already in a graveyard, and `moveObject` clears
-  counters on every zone change (`GameObject.lastKnown`).
+  counters on every zone change (`GameObject.lastKnown`). `parity: "odd" |
+  "even"` in place of `compare` is "it has an odd / even number of counters
+  on it" (Sab-Sunen, Luxa Embodied — zero is even): with no `counter`, every
+  kind together. "Can't attack or block **unless** it has an even number" is
+  the restriction with `parity: "odd"`.
 - `{ kind: "target-chosen", index }` — a target was chosen for slot `index`,
   whether or not it's still legal: false only for an optional slot left
   empty. The Earth Crystal's "distribute two +1/+1 counters among one or two

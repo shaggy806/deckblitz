@@ -1897,6 +1897,10 @@ export type StaticCondition =
    * (rule 603.10), which is the only way this question can be asked at all:
    * a dies-trigger is checked after the permanent is already in a graveyard,
    * and `moveObject` clears counters on every zone change.
+   *
+   * `parity` in place of `compare`: "it has an **odd** / **even number of
+   * counters** on it" (Sab-Sunen, Luxa Embodied — zero is even), of
+   * `counter`'s kind or, with none, of every kind together.
    */
   /** "Solved —" (rules 702.169, 719.3c): the source has the solved
    * designation — a Case's abilities that work only once it's solved. */
@@ -1907,11 +1911,10 @@ export type StaticCondition =
    * `combat`: "hasn't dealt combat damage yet" (Ruric Thar).
    */
   | { readonly kind: "self-hasnt-dealt-damage"; readonly combat?: true }
-  | {
+  | ({
       readonly kind: "self-counters";
       readonly counter?: string;
-      readonly compare: NumCompare;
-    }
+    } & ({ readonly compare: NumCompare } | { readonly parity: "odd" | "even" }))
   /**
    * "If the Ring has tempted you N or more times this game" (rule 701.54c —
    * Frodo, Adventurous Hobbit) — and how the Ring emblem's own later

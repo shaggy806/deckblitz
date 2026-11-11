@@ -8,6 +8,7 @@
     "cost:minimum-total-cost",
     "effect:attacked-players-scope",
     "decision:ward-dynamic-x",
+    "condition:counter-parity-condition",
     "trigger:destroyed",
     "effect:delayed-trigger-intervening-if",
     "effect:delayed-next-spell-live-amount",
