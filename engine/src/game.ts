@@ -24534,6 +24534,8 @@ export class Game {
       chosen,
     );
     if (chosenX > 0) this.state.objects[abilityId].xValue = chosenX;
+    // A loyalty ability stays one on the stack (rule 606.2).
+    if (ability.loyaltyCost !== undefined) this.state.objects[abilityId].loyaltyAbility = true;
     // A crew ability remembers its crew, for "whenever this Vehicle becomes
     // crewed" as it resolves (rule 702.122e).
     if (ability.crew === true) this.state.objects[abilityId].crewedWith = [...tapped];

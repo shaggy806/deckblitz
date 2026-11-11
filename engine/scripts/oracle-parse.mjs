@@ -12443,8 +12443,14 @@ function counterAbilityAt(sentences, i, ctx) {
     const target = ctx.target({ kind: "one-of", of: [ability, { kind: "spell", filter: spellFilter }] });
     return { effect: { kind: "counter", target }, used: 1 };
   }
+  // "Counter target loyalty ability of a planeswalker" (Verdant Command):
+  // an activated ability with a loyalty cost (rule 606.2).
+  if (/^counter target loyalty ability of a planeswalker\.$/i.test(sentences[i])) {
+    const target = ctx.target({ kind: "ability", loyalty: true, sourceTypes: ["planeswalker"] });
+    return { effect: { kind: "counter", target }, used: 1 };
+  }
   // "… that targets you or a creature you control" (Siren Stormtamer).
-  const aimed = /^counter target spell or ability that targets (you or )?an? (creature|permanent) you control\.$/i.exec(sentences[i]);
+  const aimed =/^counter target spell or ability that targets (you or )?an? (creature|permanent) you control\.$/i.exec(sentences[i]);
   if (aimed !== null) {
     const permanent = aimed[2].toLowerCase() === "creature" ? { type: "creature", controlledBy: "you" } : { controlledBy: "you" };
     const target = ctx.target({

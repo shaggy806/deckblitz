@@ -297,6 +297,11 @@ export type TargetSpec =
        * triggered (rules 714.2b, 603.7, 603.12, 702.21a). Either when
        * absent. */
       readonly abilityKind?: "activated" | "triggered";
+      /** Only a loyalty ability: an activated ability with a loyalty symbol
+       * in its cost (rule 606.2), whatever its source is now — "target
+       * loyalty ability of a planeswalker" (Verdant Command) adds
+       * `sourceTypes: ["planeswalker"]`. */
+      readonly loyalty?: true;
       /** Its source has one of these card types — as it is, or as it last
        * existed on the battlefield if it has left there since the ability
        * went on the stack; a card in another zone (a channel ability's) by

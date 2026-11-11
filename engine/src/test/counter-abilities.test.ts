@@ -15,12 +15,14 @@ import {
   B,
   C,
   cast,
+  counters,
   enter,
   graveyard,
   hand,
   keywords,
   lands,
   life,
+  named,
   pickTargets,
   ref,
   settle,
@@ -319,5 +321,55 @@ describe("Summary Dismissal: all other spells exiled, all abilities countered", 
     expect(life(game, B)).toBe(20);
     expect(zone(game, dismissal)).toBe("graveyard");
     expect(game.state.zones.shared.stack).toHaveLength(0);
+  });
+});
+
+describe("Verdant Command: a loyalty ability of a planeswalker (rule 606.2)", () => {
+  const LOYALTY: TargetSpec = { kind: "ability", loyalty: true, sourceTypes: ["planeswalker"] };
+
+  it("counters a loyalty ability, whose cost stays paid", () => {
+    const { game, b } = table();
+    const jace = spawn(game, "Jace Beleren");
+    const before = counters(game, jace, "loyalty");
+    activate(game, jace, 0, { settle: false });
+    const ability = game.state.zones.shared.stack[0];
+    expect(canTarget(game, ability, LOYALTY, B)).toBe(true);
+    lands(game, "Forest", 2, B);
+    const command = toHand(game, "Verdant Command", B);
+    const aliceHand = hand(game, A).length;
+    b.enqueue({
+      type: "cast-spell",
+      player: B,
+      card: command,
+      modes: [1, 3],
+      targets: [{ kind: "object", object: ability }, ref(B)],
+    });
+    settle(game);
+    expect(game.state.zones.shared.stack).toHaveLength(0);
+    // Countered: nobody drew. The loyalty was a cost (rule 606.4).
+    expect(hand(game, A)).toHaveLength(aliceHand);
+    expect(counters(game, jace, "loyalty")).toBe(before + 2);
+    expect(life(game, B)).toBe(23);
+    expect(zone(game, command)).toBe("graveyard");
+  });
+
+  it("takes no other activated ability, and no triggered one", () => {
+    const { game } = table();
+    const { ability } = pyromancerAtBob(game);
+    expect(canTarget(game, ability, LOYALTY, B)).toBe(false);
+    expect(canTarget(game, ability, { kind: "ability", loyalty: true }, B)).toBe(false);
+    expect(canTarget(game, ability, { kind: "ability", abilityKind: "activated" }, B)).toBe(true);
+  });
+
+  it("makes two tapped Squirrels for the target player and exiles a card from a graveyard", () => {
+    const { game } = table();
+    lands(game, "Forest", 2);
+    const bear = game.debugSpawn("Grizzly Bears", B, "graveyard");
+    const command = toHand(game, "Verdant Command");
+    cast(game, command, { modes: [0, 2], targets: [ref(B), { kind: "object", object: bear }] });
+    expect(zone(game, bear)).toBe("exile");
+    const squirrels = named(game, "Squirrel Token", B);
+    expect(squirrels.reduce((n, id) => n + (game.state.objects[id].stackCount ?? 1), 0)).toBe(2);
+    expect(squirrels.every((id) => game.state.objects[id].tapped)).toBe(true);
   });
 });

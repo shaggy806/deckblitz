@@ -674,6 +674,8 @@ function isLegalTargetUncached(
       const kind = ability.abilityKind === "chapter" ? "triggered" : ability.abilityKind;
       if (kind !== spec.abilityKind) return false;
     }
+    // A loyalty ability is one activated for a loyalty cost (rule 606.2).
+    if (spec.loyalty === true && ability.loyaltyAbility !== true) return false;
     if (spec.sourceTypes !== undefined) {
       const types = abilitySourceTypes(state, registry, ability);
       if (!spec.sourceTypes.some((t) => types.includes(t))) return false;

@@ -13036,6 +13036,12 @@ describe("one target slot over several kinds of object", () => {
     ]);
     expect(face.effect).toEqual({ kind: "counter", target: 0 });
   });
+  it("reads a planeswalker's loyalty ability countered", () => {
+    const face = spell("Counter target loyalty ability of a planeswalker.");
+    expect(face.complete).toBe(true);
+    expect(face.targets).toEqual([{ kind: "ability", loyalty: true, sourceTypes: ["planeswalker"] }]);
+    expect(face.effect).toEqual({ kind: "counter", target: 0 });
+  });
   it("reads a spell or ability that targets you or a creature you control countered", () => {
     const face = spell("Counter target spell or ability that targets you or a creature you control.");
     expect(face.complete).toBe(true);

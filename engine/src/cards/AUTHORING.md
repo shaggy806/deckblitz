@@ -3767,7 +3767,10 @@ stopped covering:
   `sourceTypes: ["enchantment"]`), the source as it is while it's still the
   object it was as the ability went on the stack, else as it last existed on
   the battlefield (rule 113.7a); an enchantment card's channel ability counts
-  (Weaver's ruling). `copy-ability` copies one (§6).
+  (Weaver's ruling). `loyalty: true` is only a loyalty ability, one
+  activated for a loyalty cost (rule 606.2): "target loyalty ability of a
+  planeswalker" (Verdant Command) is `{ kind: "ability", loyalty: true,
+  sourceTypes: ["planeswalker"] }`. `copy-ability` copies one (§6).
 - `{ kind: "stack", spells: "any" | "instant-or-sorcery" | "none", abilities: boolean, singleTarget?: true }` —
   a spell or an ability on the stack in one slot: "target spell or ability"
   (Deflecting Swat, Spellskite), "target instant spell, sorcery spell,

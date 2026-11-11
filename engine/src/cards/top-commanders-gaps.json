@@ -2205,7 +2205,8 @@
   "effect:look-and-choose-destination-choice",
   "trigger:cast-spell-with-cascade",
   "static:attack-direction-restriction",
-  "stat:players-dealt-combat-damage-by-name-this-game"
+  "stat:players-dealt-combat-damage-by-name-this-game",
+  "target:loyalty-ability"
  ],
  "features": {
   "effect:add-mana-combination-of-card-colors": {

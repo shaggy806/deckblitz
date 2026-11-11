@@ -1381,6 +1381,10 @@ export interface GameObject {
   kind: "card" | "ability" | "emblem";
   /** For an ability object: `"activated"` or `"triggered"`. */
   abilityKind: "activated" | "triggered" | "chapter" | null;
+  /** For an activated ability on the stack: it is a loyalty ability — its
+   * cost has a loyalty symbol (rule 606.2). Read by a `{ kind: "ability",
+   * loyalty: true }` target (Verdant Command). */
+  loyaltyAbility?: true;
   /** For an ability object: the permanent whose ability this is. */
   sourceObjectId: ObjectId | null;
   /** For an ability object: index into the source's `activated`/`triggered` list. */
