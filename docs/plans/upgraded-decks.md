@@ -142,14 +142,18 @@ different field.
 ## Open
 
 - **The field isn't even.** Temur Roar (Upgraded) wins about two games in three, and Abzan Armor
-  and Jeskai Striker almost none. Neither is the list:
-  - **Abzan Armor: the bots don't know its walls deal damage.** Nothing under `engine/src/bot/`
-    reads `combatDamageByToughness` (Felothar, Doran, Assault Formation), so v1's and v2's combat
-    math price a 0/7 as a creature that deals nothing; in a replayed loss (seed 2 of the blitz
-    run, `deck-autopsy.mjs`) it attacked with one creature a turn. The precon has the same
-    trouble (12.5% in the first run, as its upgrade).
-  - **Jeskai Striker** wins by chaining cheap spells with its commander out, which v2 doesn't
-    plan for.
+  and Jeskai Striker almost none.
+  - **Abzan Armor and Jeskai Striker aren't diagnosed.** (This record first blamed the bots for
+    not reading "assigns combat damage equal to its toughness" and not planning Shiko's second
+    spell. Both were wrong: `combatDamageOf` is read by `bot/combat-math.ts`, `bot/features.ts`
+    and `controller.ts`, and `b17096d2e` taught v2 Shiko's sequencing.) One Abzan loss replayed
+    (seed 2 of the blitz run, `deck-autopsy.mjs`): Felothar was removed four times (Fleshbag
+    Marauder's sacrifice, Infernal Grasp, Elesh Norn's -2/-2) and recast at 4, 6, 8, 10 and 12
+    mana, and without her the deck's defenders can't attack, so it attacked with one creature a
+    turn. If that holds over more losses it's the list: the "toughness is damage" lords it adds
+    don't let a defender attack, so it wants non-defender bodies with high toughness. Next: ten
+    losses of each, then a list change or a `COMMANDER_BIASES` entry (`deck-bias.ts`, one entry
+    today: Teval), whichever they call for.
   - **Temur Roar** is the deck v2 plays best, a board of big fliers. Cutting it back would be the
     way to even the field from the list side; not done, since the ask was stronger decks.
   `BACKLOG.md`, Bots.

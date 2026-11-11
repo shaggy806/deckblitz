@@ -228,15 +228,15 @@ Shiko or the other spell, and haste enablers in the crackback).
   `bot:scenarios` and `bot:fit-scenarios` read as training scenarios, as does each blunder
   `bot:behaviour` shows. `npm run bot:captures -w engine` lists them with v2's answer today;
   once one is fixed, `-- resolve` moves it to `captures/resolved/`, where it gates.
-- **The bots don't know "assigns combat damage equal to its toughness"** (2026-11-11): nothing
-  under `engine/src/bot/` or `controller.ts` reads `combatDamageByToughness` (Felothar the
-  Steadfast, Doran, Assault Formation, Huatli), so both bots' combat math price a 0/7 wall as
-  dealing nothing and attack with one creature a turn. Abzan Armor wins 4% of blitz-field games
-  with either list (`docs/plans/upgraded-decks.md`, "Open").
-- **The upgraded precons aren't an even field** (2026-11-11): among the fourteen, Temur Roar
-  (Upgraded) wins 65% of its games, Abzan Armor 4% (the item above) and Jeskai Striker 8% (v2
-  doesn't plan a turn of chained cheap spells); nine sit within noise of 25%. Figures:
-  `docs/plans/upgraded-decks.md`.
+- **The upgraded precons aren't an even field, and two aren't diagnosed** (2026-11-11): among
+  the fourteen, Temur Roar (Upgraded) wins 65% of its games, Abzan Armor 4% and Jeskai Striker
+  8%; nine sit within noise of 25%. Why the two lose isn't known yet. The bots do read
+  toughness-as-damage (`combatDamageOf` in `bot/combat-math.ts`, `bot/features.ts`,
+  `controller.ts`) and Shiko's second spell (`b17096d2e`); an earlier note here saying otherwise
+  was wrong. One replayed Abzan loss had Felothar removed four times, with walls that can't
+  attack without her. Next: `deck-autopsy.mjs` over ten losses of each, then a list change or a
+  `COMMANDER_BIASES` entry (`deck-bias.ts`), whichever the losses call for.
+  `docs/plans/upgraded-decks.md`, "Open".
 - **v2 leaves passive enchantments and mana rocks in hand** (2026-11-11, the upgraded decks'
   card-usage report): Guardian Project cast in 0 of 6 games it could have been, Ghostly Prison 0
   of 8, Rooftop Storm 1 of 4, Fellwar Stone 4 of 10, Mind Stone 2 of 6. The lists took creatures
